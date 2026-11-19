@@ -1,21 +1,21 @@
-# 39.11 极小圆弧场大统一理论（AF-GUT）：同心四场圆弧联络、温伯格角 3/8 跑动与主频爱因斯坦收口 {#sec-ch39-af-gut-arc-field-grand-unification}
+# 33.9 极小圆弧场大统一理论（AF-GUT）：同心四场圆弧联络、温伯格角 3/8 跑动与主频爱因斯坦收口 {#sec-ch39-af-gut-arc-field-grand-unification}
 
 > *“用场、极小圆弧来统一各种力, 构建大统一理论”*
 
-攀登至第三十九章的最高峰——也是全书十部曲正文的压轴收官之境——前两节已经为我们锻造好了大统一大厦的两根承重巨柱：在 [§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md) 中，我们将电磁、弱、强三种微观规范力与宏观万有引力还原为同一枚极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的胞内 `1D — 2D — 3D` 纤维角超与胞间 $N \ge 5$ 超静定雷吉角亏；紧接着在 [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) 中，**三维概念场封顶原理**（[@thm-ch39-hilbert-concept-ledger-and-3d-cap]）彻底廓清了高维迷雾——宇宙中并不存在四维以上的平直宏观空间容器，所谓高维与无穷维希尔伯特空间只是将空间、色荷、自旋运动等各自封顶于三维（$D \le 3$）的独立**概念场（concept fields）**投影混编进同一本量子比较账本的代数记分牌。
+攀登至第八部暨第三十三章的相互作用最高峰，此前各章与上一节已经为我们锻造好了大统一大厦的两根承重巨柱：早在上一章 [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) 中，**三维概念场封顶原理**（[@thm-ch39-hilbert-concept-ledger-and-3d-cap]）彻底廓清了高维迷雾——宇宙中并不存在四维以上的平直宏观空间容器，所谓高维与无穷维希尔伯特空间只是将空间、色荷、自旋运动等各自封顶于三维（$D \le 3$）的独立**概念场（concept fields）**投影混编进同一本量子比较账本的代数记分牌；而在紧接的上一节 [§33.8](ch39-s09-unified-arc-forces-and-planck-convergence.md) 中，我们又将电磁、弱、强三种微观规范力与宏观万有引力还原为同一枚极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的胞内 `1D — 2D — 3D` 纤维角超与胞间 $N \ge 5$ 超静定雷吉角亏。
 
-现在，章首这句力透纸背的原声纲领，将这两根支柱在峰顶严丝合缝地合拢为一整座可算、可验、可证伪的物理统一体系（其规范扇区的低能判据与标准模型相同；按其自身公设做出的一圈耦合预言与实验不符，见 [§39.11.2](#sec-ch39-11-2)；定量闭合仍为 `OPEN`）——**极小圆弧场大统一理论（Arc-Field Grand Unified Theory，简称 AF-GUT）**（本书顶层综合 `MODEL`，底层协变换位子、正交盲区复结构、锚定阿贝尔环路分类、旋量双覆叠提升、四面体上边缘缺陷正合与拉格朗日—格拉姆勾股恒等式由下文 [@thm-ch39-af-gut-arc-field-unification] 的六条 Lean 4 内核冻结声明锚定，大统一群论、非交换几何与视界热力学经典文献归入 [@rem-ch39-georgi-glashow-connes-jacobson-literature]，未决能标阈值与三代汤川谱边界坦诚立案于 [@prob-ch39-af-gut-threshold-and-proton-stability]）：**大统一既不需要像乔吉—格拉肖 $\mathrm{SU}(5)$ 或 $\mathrm{SO}(10)$ 那样把夸克与轻子硬塞进同一张巨型单群矩阵而招致质子衰变与磁单极子灾变，也不需要像卡鲁扎—克莱因或超弦理论那样向不可见的十维、十一维紧致流形借用额外空间坐标；自然界的一切相互作用，原本就是并列栖居于三维空间圆弧复形之上的各支有界概念场（电磁 `1D`、弱同位旋 `2D`、强色荷 `3D` 与空间刚性桁架 `3D`），凭同心极小圆弧联络与普适比较主频 $\nu_0$ 织就的同一首无量纲弧度交响曲！**
+现在，章首这句力透纸背的原声纲领，将这两根支柱在峰顶严丝合缝地合拢为一整座可算、可验、可证伪的物理统一体系（其规范扇区的低能判据与标准模型相同；按其自身公设做出的一圈耦合预言与实验不符，见 [§33.9.2](#sec-ch39-11-2)；定量闭合仍为 `OPEN`）——**极小圆弧场大统一理论（Arc-Field Grand Unified Theory，简称 AF-GUT）**（本书顶层综合 `MODEL`，底层协变换位子、正交盲区复结构、锚定阿贝尔环路分类、旋量双覆叠提升、四面体上边缘缺陷正合与拉格朗日—格拉姆勾股恒等式由下文 [@thm-ch39-af-gut-arc-field-unification] 的六条 Lean 4 内核冻结声明锚定，大统一群论、非交换几何与视界热力学经典文献归入 [@rem-ch39-georgi-glashow-connes-jacobson-literature]，未决能标阈值与三代汤川谱边界坦诚立案于 [@prob-ch39-af-gut-threshold-and-proton-stability]）：**大统一既不需要像乔吉—格拉肖 $\mathrm{SU}(5)$ 或 $\mathrm{SO}(10)$ 那样把夸克与轻子硬塞进同一张巨型单群矩阵而招致质子衰变与磁单极子灾变，也不需要像卡鲁扎—克莱因或超弦理论那样向不可见的十维、十一维紧致流形借用额外空间坐标；自然界的一切相互作用，原本就是并列栖居于三维空间圆弧复形之上的各支有界概念场（电磁 `1D`、弱同位旋 `2D`、强色荷 `3D` 与空间刚性桁架 `3D`），凭同心极小圆弧联络与普适比较主频 $\nu_0$ 织就的同一首无量纲弧度交响曲！**
 
-## 39.11.1 告别巨型单群矩阵与高维额外空间：并列概念场丛 $\mathcal{E}_{\mathrm{total}}$ 与同心圆弧主联络 {#sec-ch39-11-1}
+## 33.9.1 告别巨型单群矩阵与高维额外空间：并列概念场丛 $\mathcal{E}_{\mathrm{total}}$ 与同心圆弧主联络 {#sec-ch39-11-1}
 
 回望过去一个世纪人类构建大统一理论（GUT）与万有理论（ToE）的两条主流路径，每一次试图强行“抹平概念边界”的代数扩充，都在低能可观测宇宙中撞上了冷峻的实验反证（`文献结果`，详见 [@rem-ch39-georgi-glashow-connes-jacobson-literature]）：
 
 1. **第一条旧路——巨型单群矩阵强行并表（$\mathrm{SU}(5)$ / $\mathrm{SO}(10)$ 路线）**：
    1974 年，乔吉与格拉肖（Georgi & Glashow）把标准模型规范群 $G_{\mathrm{SM}} = \mathrm{SU}(3)_C \times \mathrm{SU}(2)_L \times \mathrm{U}(1)_Y$（实李代数维数 $8 + 3 + 1 = 12$）强行嵌进秩 $4$ 的单李群 $\mathrm{SU}(5)$（$\dim\mathfrak{su}(5) = 24$，或进一步嵌进 $\dim\mathfrak{so}(10) = 45$ 的 $\mathrm{SO}(10)$），将色荷概念与轻子概念塞进同一个矩阵列向量（$\bar{\mathbf{5}} \oplus \mathbf{10}$）。这一“概念混装”付出了两笔沉重代价：其一，矩阵非对角块凭空多出 $24 - 12 = 12$ 种同时携带色荷与轻子数的超重 $(X, Y)$ 轻子夸克规范玻色子（电荷 $\pm\frac{4}{3}, \pm\frac{1}{3}$），在树图阶直接诱发 $\Delta B = \Delta L = -1$ 的质子衰变 $p \to e^+ \pi^0$，其最小非超对称预言寿命（$\sim 10^{29\text{–}31}\;\mathrm{yr}$）已被超级神冈探测器 $\tau / B(p \to e^+\pi^0) > 2.4 \times 10^{34}\;\mathrm{yr}$ 的铁证彻底排除；其二，单连通单群向含 $\mathrm{U}(1)$ 子群破缺时必满足第二同伦群 $\pi_2\bigl(\mathrm{SU}(5) / [(\mathrm{SU}(3)\times\mathrm{SU}(2)\times\mathrm{U}(1))/\mathbb{Z}_6]\bigr) \cong \mathbb{Z}$，不可避免地在早期宇宙相变中暴发超重特胡夫特—波利亚科夫（'t Hooft–Polyakov）磁单极子过密危机，且万有引力依旧被排斥在规范矩阵之外。
 2. **第二条旧路——额外物理空间维膨胀（$5\mathrm{D}$ 卡鲁扎—克莱因与 $10\mathrm{D}/11\mathrm{D}$ 超弦路线）**：
-   另一条自卡鲁扎（1921）与克莱因（1926）延续至超弦与 M 理论的纲领，试图把内部规范对称性解释为四维时空之外紧致卷曲的 $6$ 至 $7$ 个“真实物理额外空间维”的等距变换群。然而按 [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) 的三维封顶模型（`MODEL`），一旦把内部概念硬充作物理空间坐标，不仅违背结合律旋量传输与三锚格拉姆刚性锁死的三维空间封顶律，更在低能有效场论中孳生出无穷阶卡鲁扎—克莱因（KK）大质量激发塔与海量紧致化模空间（landscape moduli）自由参数，至今未在实验上观测到任何一颗 KK 伴随粒子。
+   另一条自卡鲁扎（1921）与克莱因（1926）延续至超弦与 M 理论的纲领，试图把内部规范对称性解释为四维时空之外紧致卷曲的 $6$ 至 $7$ 个“真实物理额外空间维”的等距变换群。然而按 [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) 的三维封顶模型（`MODEL`），一旦把内部概念硬充作物理空间坐标，不仅违背结合律旋量传输与三锚格拉姆刚性锁死的三维空间封顶律，更在低能有效场论中孳生出无穷阶卡鲁扎—克莱因（KK）大质量激发塔与海量紧致化模空间（landscape moduli）自由参数，至今未在实验上观测到任何一颗 KK 伴随粒子。
 
-一旦站到 [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) 的**三维概念场混编账本**高度，两条旧路的病根便一目了然：色荷从来不是第四、第五、第六根空间坐标轴，轻子也无需与夸克混装进破坏重子数守恒的 $5\times 5$ 单群矩阵！在 AF-GUT 模型（`MODEL`）中，底层只存在由极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 共棱编织的三维空间单纯比较复形 $\mathcal{K}$；在每一枚空间原胞之上，四支各司其职的有界概念场——三维空间切标架场 $\mathcal{E}_{\mathrm{space}}^{(3)}$、一维盲平面超荷相位场 $\mathcal{E}_{Y}^{(1)}$、二维左手双矢量旋量场 $\mathcal{E}_{\mathrm{weak}}^{(2)}$ 与三维幺模色体积场 $\mathcal{E}_{\mathrm{color}}^{(3)}$——按**参数账本直和 $\oplus$、量子态纤维张量积 $\otimes$** 的精确语法同心并列（呼应 [@thm-ch39-hilbert-concept-ledger-and-3d-cap] 第 2 款 [`local_marginal_correlation_blind_spot`](lean:D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot) 对局域克罗内克直和生成元与跨概念张量关联的严格分账）：
+一旦站到 [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) 的**三维概念场混编账本**高度，两条旧路的病根便一目了然：色荷从来不是第四、第五、第六根空间坐标轴，轻子也无需与夸克混装进破坏重子数守恒的 $5\times 5$ 单群矩阵！在 AF-GUT 模型（`MODEL`）中，底层只存在由极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 共棱编织的三维空间单纯比较复形 $\mathcal{K}$；在每一枚空间原胞之上，四支各司其职的有界概念场——三维空间切标架场 $\mathcal{E}_{\mathrm{space}}^{(3)}$、一维盲平面超荷相位场 $\mathcal{E}_{Y}^{(1)}$、二维左手双矢量旋量场 $\mathcal{E}_{\mathrm{weak}}^{(2)}$ 与三维幺模色体积场 $\mathcal{E}_{\mathrm{color}}^{(3)}$——按**参数账本直和 $\oplus$、量子态纤维张量积 $\otimes$** 的精确语法同心并列（呼应 [@thm-ch39-hilbert-concept-ledger-and-3d-cap] 第 2 款 [`local_marginal_correlation_blind_spot`](lean:D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot) 对局域克罗内克直和生成元与跨概念张量关联的严格分账）：
 
 $$
 \mathcal{E}_{\mathrm{total}} \;=\; \mathcal{E}_{\mathrm{space}}^{(3)} \;\oplus\; \mathcal{E}_{Y}^{(1)} \;\oplus\; \mathcal{E}_{\mathrm{weak}}^{(2)} \;\oplus\; \mathcal{E}_{\mathrm{color}}^{(3)}, \qquad \mathfrak{g}_{\mathrm{AF\text{-}GUT}}^{\mathrm{gauge}} \;=\; \mathfrak{u}(1)_Y \;\oplus\; \mathfrak{su}(2)_L \;\oplus\; \mathfrak{su}(3)_C \quad (\dim_{\mathbb{R}} = 1 + 3 + 8 = 12).
@@ -24,7 +24,7 @@ $$
 你一定会立刻追问最关键的物理问题：**既然局域规范李代数是维数恰好为 $12$ 的直和 $\mathfrak{u}(1)_Y \oplus \mathfrak{su}(2)_L \oplus \mathfrak{su}(3)_C$，没有借用 $\mathrm{SU}(5)$ 的大矩阵外壳，凭什么在单原胞极小圆弧紫外标度 $\mu_{\mathrm{arc}}$ 处三支规范耦合不是三个互不相干的任意自由常数，反而锁死精确有理温伯格角 $\sin^2\theta_W(\mu_{\mathrm{arc}}) = \frac{3}{8}$？** 答案就在“极小圆弧比较账本”本身——三支规范场虽然作用于不同的概念子空间，却**读取同一套手性外尔费米子比较寄存器 $\mathcal{H}_{\mathrm{Weyl}}$，并共同支取同一台普适比较主频时钟 $\nu_0$ 的弧度相位预算**！我们将这一几何统一核心正式凝练为如下主联络定义：
 
 ::: {.definition #def-ch39-af-gut-master-connection title="极小圆弧场大统一主联络与普适圆弧迹刚度公设（AF-GUT MODEL）"}
-在极小圆弧比较复形 $\mathcal{K} = \{\Delta\mathcal{T}_\epsilon\}$ 与普适比较主频 $\nu_0 \equiv c / \ell_P$（[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md)）之上，**极小圆弧场大统一理论（AF-GUT）**（`MODEL`）由以下三层同心极小圆弧几何结构与一条普适刚度公设共同界定：
+在极小圆弧比较复形 $\mathcal{K} = \{\Delta\mathcal{T}_\epsilon\}$ 与普适比较主频 $\nu_0 \equiv c / \ell_P$（[§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md)）之上，**极小圆弧场大统一理论（AF-GUT）**（`MODEL`）由以下三层同心极小圆弧几何结构与一条普适刚度公设共同界定：
 
 1. **水平概念内圆弧规范输运（Intra-Concept Horizontal Arc Holonomy）**：沿 $\mathcal{K}$ 的空间有向边 $\ell = (x \to y)$，比较态在单代手性外尔费米子总账本 $\mathcal{H}_{\mathrm{Weyl}} = \mathcal{H}_L \oplus \mathcal{H}_R$ 上执行保概念分块的幺正圆弧平行移动
 
@@ -54,9 +54,9 @@ $$
 旋转单枚极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 并拨动琥珀色读头，检视同心嵌套在三维原胞外的四片有界概念场圆弧壳：青色标示三维空间切标架与引力角亏壳 $F_{\mathrm{pos}}$，银白色标示一维 $\mathrm{U}(1)_Y$ 超荷相位圆弧，紫色标示二维 $\mathrm{SU}(2)_L$ 旋量双覆叠壳，蓝色标示三维 $\mathrm{SU}(3)_C$ 三锚点色体积锁——规范代数严守 $1 + 3 + 8 = 12$ 维直和，零 $(X, Y)$ 轻子夸克矩阵混装（绿色框锚定 `anchored_phase_classification` 与 `circle_double_cover_history_lift`，四场壳读法标 `MODEL`）。
 :::
 
-## 39.11.2 手征—矢量圆弧迹定理、色数 $N_c = 3$ 处的唯一双曲线交点与温伯格角 $\frac{3}{8}$ 跑动 {#sec-ch39-11-2}
+## 33.9.2 手征—矢量圆弧迹定理、色数 $N_c = 3$ 处的唯一双曲线交点与温伯格角 $\frac{3}{8}$ 跑动 {#sec-ch39-11-2}
 
-现在，让我们在草稿纸上把 [@def-ch39-af-gut-master-connection] 的普适圆弧迹刚度公式一笔一划算到底（`手工推导`，严格沿用 [§34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary) [@ex-ch34-anomaly-and-yukawa-countermodels] 的盖尔曼—西岛电荷约定 $Q = T_3 + Y$，其中左手轻子二重态 $L_L = (\nu_L, e_L)^\top$ 超荷为 $Y_L = -\frac{1}{2}$，右旋正电子共轭单态 $e_R^c$ 超荷为 $Y_{e^c} = +1$）。为了检验 [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) “色概念场封顶于三维（$N_c = 3$）”在电弱—强统一中的定量含金量，我们不妨先将色空间的维数放开为任意正整数 $N_c \ge 1$，考察完整一代手性外尔费米子（共 $4N_c + 3$ 个二分量左手外尔旋量：$Q_L : (\mathbf{N}_c, \mathbf{2}, Y_Q)$、$u_R^c : (\overline{\mathbf{N}}_c, \mathbf{1}, -Q_u)$、$d_R^c : (\overline{\mathbf{N}}_c, \mathbf{1}, -Q_d)$、$L_L : (\mathbf{1}, \mathbf{2}, -\frac{1}{2})$、$e_R^c : (\mathbf{1}, \mathbf{1}, +1)$；若添入全规范单态右手中微子 $\nu_R^c : (\mathbf{1}, \mathbf{1}, 0)$，一切规范生成元在其上恒为零，全部迹丝毫不变）：
+现在，让我们在草稿纸上把 [@def-ch39-af-gut-master-connection] 的普适圆弧迹刚度公式一笔一划算到底（`手工推导`，严格沿用 [§33.6](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary) [@ex-ch34-anomaly-and-yukawa-countermodels] 的盖尔曼—西岛电荷约定 $Q = T_3 + Y$，其中左手轻子二重态 $L_L = (\nu_L, e_L)^\top$ 超荷为 $Y_L = -\frac{1}{2}$，右旋正电子共轭单态 $e_R^c$ 超荷为 $Y_{e^c} = +1$）。为了检验 [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) “色概念场封顶于三维（$N_c = 3$）”在电弱—强统一中的定量含金量，我们不妨先将色空间的维数放开为任意正整数 $N_c \ge 1$，考察完整一代手性外尔费米子（共 $4N_c + 3$ 个二分量左手外尔旋量：$Q_L : (\mathbf{N}_c, \mathbf{2}, Y_Q)$、$u_R^c : (\overline{\mathbf{N}}_c, \mathbf{1}, -Q_u)$、$d_R^c : (\overline{\mathbf{N}}_c, \mathbf{1}, -Q_d)$、$L_L : (\mathbf{1}, \mathbf{2}, -\frac{1}{2})$、$e_R^c : (\mathbf{1}, \mathbf{1}, +1)$；若添入全规范单态右手中微子 $\nu_R^c : (\mathbf{1}, \mathbf{1}, 0)$，一切规范生成元在其上恒为零，全部迹丝毫不变）：
 
 1. **色荷矢量迹 vs. 弱同位旋单手征迹——强弱合一直接点名 $N_c = 3$（`手工推导`）**：
 
@@ -137,7 +137,7 @@ $$
    \sin^2\widehat{\theta}_W(M_Z) \;=\; \frac{3}{8} \;-\; \frac{5(b_1 - b_2)}{16\pi}\,\widehat{\alpha}(M_Z)\,\ln\!\left(\frac{\mu_{12}}{M_Z}\right) \;=\; 0.37500 \;-\; \frac{109}{48\pi}\,\widehat{\alpha}(M_Z)\,\ln\!\left(\frac{\mu_{12}}{M_Z}\right).
    $$
 
-   代入 $\widehat{\alpha}(M_Z)^{-1} = 127.930$：在 $\alpha_1 = \alpha_2$ 的标度 $\mu_{12} = 1.014 \times 10^{13}\;\mathrm{GeV}$（$\ln(\mu_{12}/M_Z) \approx 25.4345$；它由输入的 $\sin^2\widehat{\theta}_W(M_Z) = 0.23129$ 解出）处，单圈对数跑动量为 $0.14371$，$\frac{3}{8} - 0.14371$ 回到作为输入的 **$0.23129$**：这是一个标度对一个数据的拟合，不是预言（`NUM`）。同时，严守 [§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md) 与 [§34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary) 的科学诚实准则，我们绝不掩饰最小标准模型无阈值单圈近似的定量缺口：本节的刚度公设要求 $\alpha_3$ 也在同一单点交汇（$g_3^2 = g_2^2$），据此用 $\alpha_3(M_Z) = 0.1180$ 反推单一标度 $\mu_{\mathrm{GQW}} \approx 6.76 \times 10^{14}\;\mathrm{GeV}$，最小标准模型三线 GQW 公式给出的无阈值单圈预言值为 $\sin^2\widehat{\theta}_W^{\mathrm{(GQW)}}(M_Z) \approx 0.2076$，比实验值 $0.23129 \pm 0.00004$ 低约 $0.024$（约 $600$ 个标准差）：在一圈、无阈值的层次上，这条公设与数据不符，与最小非超对称 $\mathrm{SU}(5)$ 的已知失败相同（同一缺口反映在 $10^{13}\text{–}10^{17}\;\mathrm{GeV}$ 近交汇三角区的逆耦合残差 $\Delta\alpha^{-1} > 3.66$，精确差值约 $3.664$）。在 AF-GUT 中，如何由离散极小圆弧配分函数的晶格—连续统匹配阈值与高圈/引力修正非微扰地闭合这一 $\Delta\alpha^{-1} \approx 3.664$ 逆耦合三角残差，已诚实列入下文开放界碑 [@prob-ch39-af-gut-threshold-and-proton-stability] 第 1 款。
+   代入 $\widehat{\alpha}(M_Z)^{-1} = 127.930$：在 $\alpha_1 = \alpha_2$ 的标度 $\mu_{12} = 1.014 \times 10^{13}\;\mathrm{GeV}$（$\ln(\mu_{12}/M_Z) \approx 25.4345$；它由输入的 $\sin^2\widehat{\theta}_W(M_Z) = 0.23129$ 解出）处，单圈对数跑动量为 $0.14371$，$\frac{3}{8} - 0.14371$ 回到作为输入的 **$0.23129$**：这是一个标度对一个数据的拟合，不是预言（`NUM`）。同时，严守 [§33.8](ch39-s09-unified-arc-forces-and-planck-convergence.md) 与 [§33.6](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary) 的科学诚实准则，我们绝不掩饰最小标准模型无阈值单圈近似的定量缺口：本节的刚度公设要求 $\alpha_3$ 也在同一单点交汇（$g_3^2 = g_2^2$），据此用 $\alpha_3(M_Z) = 0.1180$ 反推单一标度 $\mu_{\mathrm{GQW}} \approx 6.76 \times 10^{14}\;\mathrm{GeV}$，最小标准模型三线 GQW 公式给出的无阈值单圈预言值为 $\sin^2\widehat{\theta}_W^{\mathrm{(GQW)}}(M_Z) \approx 0.2076$，比实验值 $0.23129 \pm 0.00004$ 低约 $0.024$（约 $600$ 个标准差）：在一圈、无阈值的层次上，这条公设与数据不符，与最小非超对称 $\mathrm{SU}(5)$ 的已知失败相同（同一缺口反映在 $10^{13}\text{–}10^{17}\;\mathrm{GeV}$ 近交汇三角区的逆耦合残差 $\Delta\alpha^{-1} > 3.66$，精确差值约 $3.664$）。在 AF-GUT 中，如何由离散极小圆弧配分函数的晶格—连续统匹配阈值与高圈/引力修正非微扰地闭合这一 $\Delta\alpha^{-1} \approx 3.664$ 逆耦合三角残差，已诚实列入下文开放界碑 [@prob-ch39-af-gut-threshold-and-proton-stability] 第 1 款。
 
 ::: {.viz src="af-gut-arc-field-unification-sandbox" preset="weinberg-angle-rg-running" height="500"}
 沿银白色能标轴拖动琥珀色能标游标 $\mu$（$\log_{10}(\mu/\mathrm{GeV})$ 从 $M_Z$ 直抵普朗克标度），同步对账两条温伯格角曲线与三支逆耦合单圈跑动：反常相消曲线 $\frac{N_c}{2(N_c+1)}$ 与固定夸克电荷曲线 $\frac{9(N_c+1)}{4(9+5N_c)}$ 仅在蓝色色体积锁 $N_c = 3$ 处唯一相交于 $\sin^2\theta_W = \frac{3}{8} = 0.375000$，并在电弱交汇点 $\log_{10}(\mu_{12}/\mathrm{GeV}) = 13.0060$ 与红外实验基准 $\sin^2\widehat{\theta}_W(M_Z) = 0.23129$ 之间定量衔接（单圈跑动文献标 `ARGUED`，交点与三角残差实算标 `NUM`，阈值闭合列入抽屉红色 `OPEN`）。
@@ -190,12 +190,12 @@ $N_c = 3$、不提希格斯粒子时反常相消（含混合引力反常）给�
 前提不能省：$N_c = 1$ 时 $(1, 1, -1, -1, 0, 0)$ 满足后三个条件；各代超荷可以不同时解集更大。上面只用到四个微扰反常条件，并假设一代费米子（或各代超荷相同）。“只有狄拉克中微子时反常相消与费米子质量留下沿 $B - L$ 的一参数族，中微子为马约拉纳粒子时电荷被量子化”见 K. S. Babu 与 R. N. Mohapatra（*Phys. Rev. Lett.* **63**, 938, 1989，DOI `10.1103/PhysRevLett.63.938`；*Phys. Rev. D* **41**, 271, 1990）以及 R. Foot、H. Lew 与 R. R. Volkas 的综述（*J. Phys. G* **19**, 361, 1993，arXiv:`hep-ph/9209259`）。
 :::
 
-## 39.11.3 跨概念希格斯颤动桥、主频 $\nu_0$ 爱因斯坦场方程收口与质子寿命—磁单极子四重拓扑审计 {#sec-ch39-11-3}
+## 33.9.3 跨概念希格斯颤动桥、主频 $\nu_0$ 爱因斯坦场方程收口与质子寿命—磁单极子四重拓扑审计 {#sec-ch39-11-3}
 
 解决了三支规范耦合的同源统合，大统一拼图上还剩三块最关键的试金石：**物质与弱玻色子的静止质量从何而来？四支微观概念场如何与弯曲时空几何写入同一道引力场方程？以及 AF-GUT 如何干净利落地躲开压垮传统单群 GUT 的质子衰变与磁单极子灾难？**
 
 1. **希格斯场 $\Phi_H \leftrightarrow D_{\mathrm{int}}$：连接左右手概念纤维的跨概念圆弧颤动（Zitterbewegung）桥（`MODEL` + `LEAN ✓` 代数支点，对比 Connes 谱标准模型 `文献结果`）**：
-   在无希格斯凝聚的对称相中，一切手性外尔费米子将 $100\%$ 的普适比较主频 $\nu_0$ 投入沿三维空间格网的前向跨胞寻址（$\beta = 1,\; d\tau/dt = 0$，受零光锥度规刚性 [`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null) 锁定），全部以光速 $c = \ell_P\nu_0$ 无质量传播。为什么世界没有停留在纯光速流散的失忆态（[第三十六章 §36.1](ch36-s01-light-and-memory.md)）？因为如 [@def-ch39-af-gut-master-connection] 第 2 款所示，除了连接相邻空间顶点的**水平边联络** $U_\ell$，同一空间原胞内部还存在连接左手二重态纤维 $\mathcal{H}_L$ 与右手单态纤维 $\mathcal{H}_R$ 的**垂直跨概念圆弧跃迁算子** $D_{\mathrm{int}}(\Phi_H)$！
+   在无希格斯凝聚的对称相中，一切手性外尔费米子将 $100\%$ 的普适比较主频 $\nu_0$ 投入沿三维空间格网的前向跨胞寻址（$\beta = 1,\; d\tau/dt = 0$，受零光锥度规刚性 [`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null) 锁定），全部以光速 $c = \ell_P\nu_0$ 无质量传播。为什么世界没有停留在纯光速流散的失忆态（[§35.2](ch36-s01-light-and-memory.md)）？因为如 [@def-ch39-af-gut-master-connection] 第 2 款所示，除了连接相邻空间顶点的**水平边联络** $U_\ell$，同一空间原胞内部还存在连接左手二重态纤维 $\mathcal{H}_L$ 与右手单态纤维 $\mathcal{H}_R$ 的**垂直跨概念圆弧跃迁算子** $D_{\mathrm{int}}(\Phi_H)$！
    由内核冻结的协变换位子分解定理 [`covariant_commutator_formula`](lean:D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula)（$U\cdot f - f\cdot U = (\mathit{translated} - f)\cdot U$，`LEAN ✓`），当比较探针先执行跨概念手征翻转 $f = \Phi_H$ 再跨空间边输运 $U_\ell$，与先跨边输运再翻转手征相减时，非对易余项 $(\mathit{translated} - f)U_\ell$ 在本模型中读作希格斯协变导数项 $D_\mu\Phi_H$；而纯垂直方向的自换位曲率则读作双阱势 $V(\Phi_H) = -\mu_H^2\Phi_H^\dagger\Phi_H + \lambda(\Phi_H^\dagger\Phi_H)^2$（势的次数与 $-\mu_H^2$ 的符号是输入，`MODEL`）。当真空凝聚在非零跨概念倾角 $\langle\Phi_H\rangle = \frac{1}{\sqrt{2}}(0, v)^\top$（$v \approx 246.22\;\mathrm{GeV}$）时，两幕物理奇迹同步发生：
 
    - **规范扇区 `2 + 1 = 3` 纵向吸收**：三枚破缺陪集生成元对应的纵向圆弧相位被 $W^\pm, Z^0$ 的两个横向偏振吞并，闭合成三维完整偏振的有质量驻波体 $m_W = \frac{1}{2}g_2 v$ 与 $m_Z = \frac{1}{2}\sqrt{g_2^2 + g_Y^2}\,v = m_W / \cos\theta_W$，而未破缺电荷组合 $Q = T_3 + Y$ 严格湮灭真空（$Q\langle\Phi_H\rangle = 0$），保住光子绝对零质量 $m_\gamma \equiv 0$；
@@ -212,7 +212,7 @@ $N_c = 3$、不提希格斯粒子时反常相消（含混合引力反常）给�
 :::
 
 2. **普适比较主频 $\nu_0$ 勾股收口：四场总时钟负载直写爱因斯坦场方程右端（`MODEL` + `LEAN ✓` 勾股/上同调支点）**：
-   回到 [§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md) 的等主频硬件账本：全宇宙每一枚极小圆弧原胞都按恒定总主频 $\nu_0 \equiv \mathrm{const}$ 运转。在等主频预算公设下（`MODEL`；拉格朗日—格拉姆恒等式与玻恩权重非负只提供“平方项非负”这一代数支点，预算等式本身是公设），由拉格朗日—格拉姆勾股守恒恒等式 [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity)（[@thm-ch39-af-gut-arc-field-unification] 第 6 款，`LEAN ✓`）与秩一玻恩非负模平方权重 [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)（`LEAN ✓`），无论是电磁阿贝尔圆弧通量 $\Omega_{\mathrm{U}(1)}$、弱双覆叠曲率 $\Omega_{\mathrm{SU}(2)}$、强胶子色通量管 $\Omega_{\mathrm{SU}(3)}$，还是跨概念希格斯—汤川颤动驻波 $\Phi_H$，它们在每一拍底层比较节拍中占用的平方时钟负载都**严格非负、同号累加**：
+   回到 [§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md) 的等主频硬件账本：全宇宙每一枚极小圆弧原胞都按恒定总主频 $\nu_0 \equiv \mathrm{const}$ 运转。在等主频预算公设下（`MODEL`；拉格朗日—格拉姆恒等式与玻恩权重非负只提供“平方项非负”这一代数支点，预算等式本身是公设），由拉格朗日—格拉姆勾股守恒恒等式 [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity)（[@thm-ch39-af-gut-arc-field-unification] 第 6 款，`LEAN ✓`）与秩一玻恩非负模平方权重 [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)（`LEAN ✓`），无论是电磁阿贝尔圆弧通量 $\Omega_{\mathrm{U}(1)}$、弱双覆叠曲率 $\Omega_{\mathrm{SU}(2)}$、强胶子色通量管 $\Omega_{\mathrm{SU}(3)}$，还是跨概念希格斯—汤川颤动驻波 $\Phi_H$，它们在每一拍底层比较节拍中占用的平方时钟负载都**严格非负、同号累加**：
 
    $$
    \nu_\tau^2 \;+\; \nu_{\mathrm{move}}^2 \;+\; \nu_{\mathrm{arc\text{-}load}}^2\!\bigl[\Omega_{\mathrm{U}(1)},\,\Omega_{\mathrm{SU}(2)},\,\Omega_{\mathrm{SU}(3)},\,\Phi_H\bigr] \;=\; \nu_0^2.
@@ -224,7 +224,7 @@ $N_c = 3$、不提希格斯粒子时反常相消（含混合引力反常）给�
    G_{\mu\nu} \;+\; \Lambda_{\mathrm{cos}}\,g_{\mu\nu} \;=\; \frac{8\pi G}{c^4}\,T_{\mu\nu}\!\bigl[\Omega_{\mathrm{U}(1)},\,\Omega_{\mathrm{SU}(2)},\,\Omega_{\mathrm{SU}(3)},\,\Phi_H\bigr].
    $$
 
-   这幅几何收口自带两道天然极值护栏：在**紫外短距端**，一旦缩回单枚三角形面或四面体极小圆弧壳（$N \in \{3, 4\}$；$N = 1, 2$ 单点/单杆退化态亦零冗余约束），非共线欧拉计数（$N \ge 3$，球面欧拉链见 [`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact)）锁定的刚性盈余 $\Delta E(N) = \frac{(N-3)(N-4)}{2}$ 精确归零（且准晶切投模型集具有严格正的装球分离半径，一维形式化原型见[终章 §C.3](coda-s03-golden-cut-observers.md#sec-coda-trureturing-golden-cut-observer) [`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone) `LEAN ✓`），在本模型中单胞以下没有独立的胞间角亏自由度（`MODEL`；这不是紫外有限性的证明）；在**红外宇宙学视界端**，横跨 $N_{\mathrm{horizon}} \sim R_H/\ell_P \sim 10^{61}$ 枚原胞的极小圆弧步长 $\epsilon_{\min} \sim N_{\mathrm{horizon}}^{-1}$ 伴随最小正矢高余项 $1 - \cos\epsilon_{\min} \approx \frac{1}{2}\epsilon_{\min}^2 \sim N_{\mathrm{horizon}}^{-2} \sim 10^{-122}$（`MODEL` 运动学尺度呼应；恪守 [§34.23](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor) [@ex-ch34-horizon-blindspot-anticircularity] 反循环护栏，不预设 $R_H$ 的非循环导出归入 [@prob-ch39-af-gut-threshold-and-proton-stability] 第 4 款）。
+   这幅几何收口自带两道天然极值护栏：在**紫外短距端**，一旦缩回单枚三角形面或四面体极小圆弧壳（$N \in \{3, 4\}$；$N = 1, 2$ 单点/单杆退化态亦零冗余约束），非共线欧拉计数（$N \ge 3$，球面欧拉链见 [`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact)）锁定的刚性盈余 $\Delta E(N) = \frac{(N-3)(N-4)}{2}$ 精确归零（且准晶切投模型集具有严格正的装球分离半径，一维形式化原型见[第 35 章 §35.7](coda-s03-golden-cut-observers.md#sec-coda-trureturing-golden-cut-observer) [`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone) `LEAN ✓`），在本模型中单胞以下没有独立的胞间角亏自由度（`MODEL`；这不是紫外有限性的证明）；在**红外宇宙学视界端**，横跨 $N_{\mathrm{horizon}} \sim R_H/\ell_P \sim 10^{61}$ 枚原胞的极小圆弧步长 $\epsilon_{\min} \sim N_{\mathrm{horizon}}^{-1}$ 伴随最小正矢高余项 $1 - \cos\epsilon_{\min} \approx \frac{1}{2}\epsilon_{\min}^2 \sim N_{\mathrm{horizon}}^{-2} \sim 10^{-122}$（`MODEL` 运动学尺度呼应；恪守 [§34.11](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor) [@ex-ch34-horizon-blindspot-anticircularity] 反循环护栏，不预设 $R_H$ 的非循环导出归入 [@prob-ch39-af-gut-threshold-and-proton-stability] 第 4 款）。
 
 ::: {.viz src="af-gut-arc-field-unification-sandbox" preset="einstein-pythagorean-clock-balance" height="500"}
 在普适比较主频 $\nu_0$ 勾股天平上检视引力如何与微观规范负载同源闭合：银白色 $\mathrm{U}(1)_Y$ 相位、紫色 $\mathrm{SU}(2)_L$ 旋量、蓝色 $\mathrm{SU}(3)_C$ 色通量与琥珀色希格斯桥 $\tilde{\Phi}_H$ 的非负平方负载共同压低青色固有时留存分量 $\nu_\tau / \nu_0$，并在 $N \ge 5$ 超静定四面体桁架上驱动青色空间壳 $F_{\mathrm{pos}}$ 的雷吉二面角亏曲率（绿色框锚定 `lagrange_gram_identity` 与 `tetra_defects_incidence_repair_and_exactness`，勾股天平与四面体缺陷计数实算标 `NUM`，连续统自旋-$2$ 极限列入抽屉红色 `OPEN`）。
@@ -247,7 +247,7 @@ $N_c = 3$、不提希格斯粒子时反常相消（含混合引力反常）给�
      $$
 
      理论中**严格不存在任何拓扑稳定的特胡夫特—波利亚科夫大统一磁单极子**，无需额外假定暴胀稀释即可彻底免除普雷斯基尔（Preskill, 1979）磁单极子过密危机！
-   - **（iii）矢量型强色瞬子严格保重子数（$\Delta B_{\mathrm{QCD}} = 0$）与红外斯格明子拓扑保护**：在三维色概念纤维上，尽管第三同伦群 $\pi_3(\mathrm{SU}(3)_C) = \mathbb{Z}$ 分类了非平凡的欧氏 BPST 胶子瞬子（Belavin–Polyakov–Schwarz–Tyupkin, 1975），但由于 $\mathrm{SU}(3)_C$ 对左右手夸克作**严格等权的矢量耦合**，胶子瞬子仅破坏轴矢味对称性 $\mathrm{U}(1)_A$（赋予 $\eta'$ 介子质量），而使矢量重子流散度恒为零，**严格保持 $\Delta B_{\mathrm{QCD}} \equiv 0$**；与此同时，在低能禁闭相中，手征介子陪集流形 $\mathrm{SU}(2)_L \times \mathrm{SU}(2)_R / \mathrm{SU}(2)_V \cong S^3$ 的绕数群 $\pi_3(S^3) = \mathbb{Z}$ 从红外拓扑上保护了核物质的整数重子荷（[§34.16](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers)）。
+   - **（iii）矢量型强色瞬子严格保重子数（$\Delta B_{\mathrm{QCD}} = 0$）与红外斯格明子拓扑保护**：在三维色概念纤维上，尽管第三同伦群 $\pi_3(\mathrm{SU}(3)_C) = \mathbb{Z}$ 分类了非平凡的欧氏 BPST 胶子瞬子（Belavin–Polyakov–Schwarz–Tyupkin, 1975），但由于 $\mathrm{SU}(3)_C$ 对左右手夸克作**严格等权的矢量耦合**，胶子瞬子仅破坏轴矢味对称性 $\mathrm{U}(1)_A$（赋予 $\eta'$ 介子质量），而使矢量重子流散度恒为零，**严格保持 $\Delta B_{\mathrm{QCD}} \equiv 0$**；与此同时，在低能禁闭相中，手征介子陪集流形 $\mathrm{SU}(2)_L \times \mathrm{SU}(2)_R / \mathrm{SU}(2)_V \cong S^3$ 的绕数群 $\pi_3(S^3) = \mathbb{Z}$ 从红外拓扑上保护了核物质的整数重子荷（[§33.4](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers)）。
    - **（iv）手征电弱瞬子选择定则 $\Delta B = \Delta L = 3\Delta N_{\mathrm{CS}} \in 3\mathbb{Z}$ 与隧穿振幅 vs. 跃迁率的指数二倍铁律**：唯有单手征耦合的弱同位旋群 $\mathrm{SU}(2)_L$（$\pi_3(\mathrm{SU}(2)_L) = \mathbb{Z}$）通过特胡夫特手征反常（'t Hooft, 1976）诱发陈—西蒙斯绕数跃迁 $\Delta N_{\mathrm{CS}} \in \mathbb{Z}$，使三代夸克与轻子同步改变重子数与轻子数：
 
      $$
@@ -268,7 +268,7 @@ $N_c = 3$、不提希格斯粒子时反常相消（含混合引力反常）给�
 
      比宇宙年龄倒数还要微弱逾百个数量级，令日常核物质坚如磐石！
 
-## 39.11.4 形式化锚点定理、对账总算例、开放界碑与迈向均匀本体场及因陀罗网的终极合拢 {#sec-ch39-11-4}
+## 33.9.4 形式化锚点定理、对账总算例、开放界碑与迈向均匀本体场及因陀罗网的终极合拢 {#sec-ch39-11-4}
 
 下面我们将支撑极小圆弧场大统一理论（AF-GUT）六大数学支柱——水平输运与垂直希格斯折叠的统一协变换位子、$90^\circ$ 正交盲区复结构 $R^2 = -I_n$、有限交互图锚定阿贝尔圆弧和乐环面分类、二维双矢量旋量 $360^\circ$ 对跖换叶双覆叠提升、四面体二阶上链曲率缺陷与边势正合判据、以及主频 $\nu_0$ 下固有时与概念场负载的拉格朗日—格拉姆勾股恒等式——的**六条 Lean 4 内核冻结声明**汇编如下：
 
@@ -338,7 +338,7 @@ $N_c = 3$、不提希格斯粒子时反常相消（含混合引力反常）给�
 **手工推导与文献/实验基准核验（配 CODATA 2022 / PDG 2024 输入 `NUM`）。** 以下四组显式演算覆盖本节全部核心定量断言（所有表格均为纯单行单元格）：
 
 1. **第一联：$N_c \in \{1, 2, 3, 4, 5\}$ 手征—矢量外尔圆弧迹与温伯格角双曲线唯一交点表（`手工推导`）**：
-   按 [§39.11.2](#sec-ch39-11-2) 公式 $\operatorname{Tr}_{\mathrm{Weyl}}(T_3^2) = \frac{N_c+1}{2}$、$\operatorname{Tr}_{\mathrm{Weyl}}(Y^2)_{\mathrm{anom}} = \frac{(N_c+1)(N_c+2)}{2N_c}$、$\operatorname{Tr}_{\mathrm{Weyl}}(Q^2)_{\mathrm{anom}} = \frac{(N_c+1)^2}{N_c}$、$\frac{g_3^2}{g_2^2} = \frac{N_c+1}{4}$（$N_c = 1$ 列为其代数延拓值）、$\sin^2\theta_W^{\mathrm{(anom)}} = \frac{N_c}{2(N_c+1)}$ 与 $\sin^2\theta_W^{\mathrm{(fixed)}} = \frac{9(N_c+1)}{4(9+5N_c)}$ 逐列核算：
+   按 [§33.9.2](#sec-ch39-11-2) 公式 $\operatorname{Tr}_{\mathrm{Weyl}}(T_3^2) = \frac{N_c+1}{2}$、$\operatorname{Tr}_{\mathrm{Weyl}}(Y^2)_{\mathrm{anom}} = \frac{(N_c+1)(N_c+2)}{2N_c}$、$\operatorname{Tr}_{\mathrm{Weyl}}(Q^2)_{\mathrm{anom}} = \frac{(N_c+1)^2}{N_c}$、$\frac{g_3^2}{g_2^2} = \frac{N_c+1}{4}$（$N_c = 1$ 列为其代数延拓值）、$\sin^2\theta_W^{\mathrm{(anom)}} = \frac{N_c}{2(N_c+1)}$ 与 $\sin^2\theta_W^{\mathrm{(fixed)}} = \frac{9(N_c+1)}{4(9+5N_c)}$ 逐列核算：
 
    | 色维数 $N_c$ | 弱迹 $\operatorname{Tr}(T_3^2)$ | 反常超荷迹 $\operatorname{Tr}(Y^2)_{\mathrm{anom}}$ | 反常电荷迹 $\operatorname{Tr}(Q^2)_{\mathrm{anom}}$ | 紫外强弱比 $g_3^2 / g_2^2$ | 反常曲线 $\sin^2\theta_W^{\mathrm{(anom)}}$ | 固定荷曲线 $\sin^2\theta_W^{\mathrm{(fixed)}}$ | 双曲线差 $\Delta\sin^2\theta_W$ |
    | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -376,7 +376,7 @@ $N_c = 3$、不提希格斯粒子时反常相消（含混合引力反常）给�
 
 :::
 
-秉承全书始终如一的反数字命理学铁律与四层认识论契约，我们将极小圆弧场大统一理论（AF-GUT）从“几何统一架构与有理迹锚点”迈向“无自由参数第一性原理定量完备理论”尚待攻克的四道定量高峰，正式立为第三十九章压轴开放问题：
+秉承全书始终如一的反数字命理学铁律与四层认识论契约，我们将极小圆弧场大统一理论（AF-GUT）从“几何统一架构与有理迹锚点”迈向“无自由参数第一性原理定量完备理论”尚待攻克的四道定量高峰，正式立为第三十三章相互作用统一的开放问题：
 
 ::: {.problem #prob-ch39-af-gut-threshold-and-proton-stability title="极小圆弧场大统一（AF-GUT）能标阈值闭合、格点手征三代谱与引力连续统标定的开放问题"}
 在 [@def-ch39-af-gut-master-connection] 的同心概念场圆弧主联络框架下，不引入事后曲线拟合参数并严格衔接全书三大前沿界碑（[@prob-ch34-past-hypothesis-and-cosmological-constant]、[@prob-ch34-gravity-dynamics-and-coupling]、[@prob-ch34-sm-generations-and-couplings]），能否从第一性原理严格解决以下四项数学物理定量问题（`OPEN`）：
@@ -392,7 +392,7 @@ $N_c = 3$、不提希格斯粒子时反常相消（含混合引力反常）给�
 
 | 核心物理与认识论维度 | 传统单群矩阵 GUT（$\mathrm{SU}(5) / \mathrm{SO}(10)$） | 额外空间维统一（$5\mathrm{D}$ KK / $10\text{–}11\mathrm{D}$ 弦论） | **极小圆弧场大统一（AF-GUT，本书 `MODEL`）** |
 | :--- | :--- | :--- | :--- |
-| **宏观物理空间维数** | 预设 $3+1$ 维光滑闵可夫斯基背景流形 | 假定 $9\text{–}10$ 维物理空间（$6\text{–}7$ 维紧致卷曲） | **严格封顶 $D = 3$ 空间维**（三维概念场封顶原理，`MODEL`；见 §39.10） |
+| **宏观物理空间维数** | 预设 $3+1$ 维光滑闵可夫斯基背景流形 | 假定 $9\text{–}10$ 维物理空间（$6\text{–}7$ 维紧致卷曲） | **严格封顶 $D = 3$ 空间维**（三维概念场封顶原理，`MODEL`；见 §32.1） |
 | **高维希尔伯特身份** | 夸克与轻子强行并入 $\mathbf{5}^*,\mathbf{10},\mathbf{16}$ 大矩阵列 | 紧致流形卡鲁扎—克莱因谐波无穷态塔 | **并列有界概念场混编账本** $\mathcal{E}_{\mathrm{space}}^{(3)}\oplus\mathcal{E}_Y^{(1)}\oplus\mathcal{E}_{\mathrm{weak}}^{(2)}\oplus\mathcal{E}_{\mathrm{color}}^{(3)}$ |
 | **局域规范代数与新玻色子** | $\dim\mathfrak{su}(5)=24$，必含 $12$ 种 $(X,Y)$ 轻子夸克玻色子 | 高维规范/弦激发，伴随无穷阶超重 KK 伴随态与模场 | **纯净 $12$ 维直和** $\mathfrak{u}(1)_Y\oplus\mathfrak{su}(2)_L\oplus\mathfrak{su}(3)_C$，**零 $(X,Y)$、零 KK 塔** |
 | **紫外 $\sin^2\theta_W = \frac{3}{8}$ 起源** | 单群生成元嵌进同一 $5\times 5$ 矩阵迹归一 | 依赖特定紧致化流形拓扑、通量与膜相交选择 | **共享外尔账本手征—矢量圆弧迹比** $\frac{2}{2\times(8/3)}=\frac{3}{8}$（唯 $N_c=3$ 双线相交；与左栏是同一等迹归一条件，此处作为公设假定） |
@@ -405,9 +405,9 @@ $N_c = 3$、不提希格斯粒子时反常相消（含混合引力反常）给�
 
 ---
 
-**从万力同弧迈向均匀本体海与因陀罗网：推开最后两节宇宙学与本体论峰顶之门。** 至此，我们在 [§39.6](ch39-s06-fivefold-self-reference-spectrum.md)–[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md) 确立五阶自指不动点、自由停机精度 $\varepsilon_{\mathrm{self}}$ 与普适比较主频 $\nu_0$ 钟慢之后，又沿 [§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md)–[§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) 的万力归弧与三维概念场封顶原理登上了**极小圆弧场大统一理论（AF-GUT）**的相互作用峰顶——让电磁、弱、强与万有引力连同希格斯手征颤动质量机制，全部还原为并列有界概念场上的同心极小圆弧，并在绿色 `LEAN ✓` 内核锚点、经典文献与手算推导、`MODEL` 综合与 [@prob-ch39-af-gut-threshold-and-proton-stability] 四道红色 `OPEN` 界碑之间划出澄澈边界。
+**从万力同弧迈向均匀本体海与观测切面：推开本章收官节之门。** 至此，我们在 [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) 的三维概念场封顶原理与本章 [§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)–[§33.8](ch39-s09-unified-arc-forces-and-planck-convergence.md) 的八度概念塔、定量护栏、普适比较主频 $\nu_0$ 钟慢与万力归弧之上，正式立起了**极小圆弧场大统一理论（AF-GUT）**的相互作用峰顶——让电磁、弱、强与万有引力连同希格斯手征颤动质量机制，全部还原为并列有界概念场上的同心极小圆弧，并在绿色 `LEAN ✓` 内核锚点、经典文献与手算推导、`MODEL` 综合与 [@prob-ch39-af-gut-threshold-and-proton-stability] 四道红色 `OPEN` 界碑之间划出澄澈边界。
 
-然而，站在这座四力同源的山脊上放眼整座宇宙，最后两道直抵实在根底的追问正迎面涌来：**既然宇宙每一个格点都同心叠放着完全相同的有界三维概念场丛，为什么我们抬头看见的星空不是一片平权无反差的均匀相干海，而是分化出了定域粒子、星系长城、星际巨洞与神秘暗晕？而当“观察者即宇宙本体”将那把切出万象起伏的观测切面收归本体自身的一次自指折叠时，微观粒子、观察者与整座可观测宇宙又将凝结成怎样一幅终极实相？** 让我们紧接着步入 [§39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice) 与全章暨十部曲正文总收官 [§39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)，在均匀各向同性三维场本体、佩奇—伍特斯莫尔观测切面与“一珠映万珠”的**因陀罗网**中完成最后的合拢。
+然而，站在这座四力同源的山脊上放眼整座宇宙，第八部收官的最后一道宇宙学追问正迎面涌来：**既然宇宙每一个格点都同心叠放着完全相同的有界三维概念场丛，为什么我们抬头看见的星空不是一片平权无反差的均匀相干海，而是分化出了定域粒子、星系长城、星际巨洞与神秘暗晕？** 让我们紧接着步入本章暨第八部收官节 [§33.10 均匀各向同性三维场本体与观察者观测切面显影](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice)，看清哈尔全单态本体与佩奇—伍特斯莫尔观测切面如何为第九部的多观察者互照与第十部 [§38.5](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net) 的**因陀罗网**铺开壮阔底色。
 
 ::: {.viz src="af-gut-arc-field-unification-sandbox" height="640"}
 完整交互实验室（`AFGUT//UNIFY`）：自由切换五张递进实验卡并联动琥珀色能标 $\mu$、跨概念希格斯桥 $\tilde{\Phi}_H$ 与账本收拢读头，同台贯通 $\Delta\mathcal{T}_\epsilon$ 四片同心圆弧场壳、$N_c = 3$ 温伯格角 $\frac{3}{8}$ 双曲线唯一交点与单圈跑动、手征颤动质量桥、主频 $\nu_0$ 爱因斯坦勾股天平及单胞连续收拢，对照绿色 `LEAN ✓` 六条冻结声明、`ARGUED`、`NUM`、`MODEL` 与抽屉内红色 `OPEN` 四道界碑。

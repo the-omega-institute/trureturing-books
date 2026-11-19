@@ -1,10 +1,10 @@
-# 38.5 观察者逃逸账本、原像纤维与希尔伯特—齐肯多夫熵 {#sec-ch38-observer-escape-ledger}
+# 36.6 观察者逃逸账本、原像纤维与希尔伯特—齐肯多夫熵 {#sec-ch38-observer-escape-ledger}
 
 承接[上一节](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation)关于有限快表查表退化的分析，我们自然面对一个更定量的追问：当一枚位宽受限的观察者记忆指针滑过宇宙本体 QRAM 时，既然它绝无可能将全部底层状态深拷贝进私有缓存（[@thm-ch38-pointer-width-and-no-deep-copy]），那么一张有限容量的认知引理快表 $T$ 究竟“锁住”了多少结构，又让多少区分度顺着正交缝隙“逃逸”到了视线之外？每新增或删减一条引理时，怎样严格判别它是真正细化了世界分辨率的**新知识**，还是仅仅把旧概念换了个说法的**语义闭包冗余**？更进一步，当这枚一维指针沿着空间填充回路逐拍自增（`ptr++`）并受限于无邻 `1` 抗共振编码时，它的信道容量、柱集收缩率与昼夜擦除热账单遵循怎样的定量铁律？
 
 本节在三层认识论契约下，以八条新增冻结的 Lean 4 内核定理（连同[第 13 章](ch13-entanglement-and-chsh.md)已证的二体边缘盲区定理）锁定这套**观察者逃逸账本（Observer Escape Ledger）**的组合与信息几何骨架，并将闭合希尔伯特回路扫描、齐肯多夫黄金信道容量与昼夜热力学对照标定为透明可验的 **`MODEL`（模型诠释）**。
 
-## 38.5.1 原像纤维、有序逃逸对与商核结构新颖度 {#原像纤维有序逃逸对与商核结构新颖度}
+## 36.6.1 原像纤维、有序逃逸对与商核结构新颖度 {#原像纤维有序逃逸对与商核结构新颖度}
 
 设有限底层状态空间为 $\mathcal{S}$，基数记为 $N = \lvert\mathcal{S}\rvert > 1$（非退化条件）。观察者当前常驻于快表中的知识目录记为有限索引集 $\mathrm{Index}$ 上的概念族 $T = \{L_i\}_{i \in \mathrm{Index}}$：每条引理 $L_i$ 通过一组有限判别原语诱导状态空间上的商等价关系（一致谓词 `agrees`）。当观察者联合调用子集 $S \subseteq \mathrm{Index}$ 中的全部引理去审视 $\mathcal{S}$ 时，联合商映射将 $\mathcal{S}$ 划分为两两无交的**原像纤维（preimage fibers）** $\{\mathcal{F}_S(y)\}_{y \in \Sigma_S}$。凡落入同一条纤维 $\mathcal{F}_S(y)$ 内的两个相异底层状态 $s_1 \neq s_2$，在当前账本 $S$ 的全部读出下完全不可区分——它们就构成一对**信息逃逸对（information escape pair）**。
 
@@ -59,7 +59,7 @@
 第 1 款在任意非对角有序对 $p = (s_1, s_2)$ 上按第 $i$ 条引理的一致谓词 $\operatorname{agrees}_i(s_1, s_2)$ 作排中律二分：若 $p \in \operatorname{escapePairs}(\operatorname{without}(i))$ 且满足 $\operatorname{agrees}_i(s_1, s_2)$，结合全目录为 $\operatorname{insert}(i, \operatorname{without}(i))$ 知 $p \in \operatorname{escapePairs}(\mathrm{fullIndexSet})$；若不满足 $\operatorname{agrees}_i(s_1, s_2)$，按过滤定义恰有 $p \in \operatorname{uniqueCapturePairs}(i)$。反之，由单调反序性 $\operatorname{escapePairs}(\mathrm{fullIndexSet}) \subseteq \operatorname{escapePairs}(\operatorname{without}(i))$ 及两分支互斥性，直接给出并集等式与集合差刻画。第 2 款利用非退化假设导出正分母 `escapeDenominator_pos`，将有理分式严格不等式归约为分子严格不等式 $\lvert\operatorname{escapePairs}(\mathrm{fullIndexSet})\rvert < \lvert\operatorname{escapePairs}(\operatorname{without}(i))\rvert$；结合第 1 款的无交基数可加性知其等价于 $\operatorname{uniqueCapturePairs}(i)$ 非空，即存在一对状态在其余全部引理下同核而在第 $i$ 条引理下异核，再由标记商切映射的双射性转化为 `taggedQuotientCut` 插入前后的联合商核真包含关系。完整证明由 Lean 内核检查。
 :::
 
-## 38.5.2 四比特 16 态五引理显式算例：零新颖度无损压缩对照四体异或边缘盲区 {#四比特-16-态五引理显式算例零新颖度无损压缩对照四体异或边缘盲区}
+## 36.6.2 四比特 16 态五引理显式算例：零新颖度无损压缩对照四体异或边缘盲区 {#四比特-16-态五引理显式算例零新颖度无损压缩对照四体异或边缘盲区}
 
 为了让 [@thm-ch38-escape-pairs-and-structural-novelty] 的每一项符号都在指尖清晰跳动，我们构造一个零自由参数的四比特状态场 $\mathcal{S} = \{0, 1\}^4$（$N = 16$，$n = 4\text{ bits}$，有序非对角总对数 $N(N - 1) = 240$，画布无向满图总弦数 $\binom{16}{2} = 120$）。将每个底层状态记为 $s = (b_0, b_1, b_2, b_3) \in \{0, 1\}^4$，并在观察者快表上显式装载如下五条布尔引理：
 
@@ -99,7 +99,7 @@ $$
 **量子局部边缘盲区：贝尔纠缠态对照经典混态。** 切换到二量子比特视图，$\lvert\Phi^+\rangle\langle\Phi^+\rvert$、$\rho_{\mathrm{cl}}$ 与 $\frac{1}{4}I_4$ 共享完全相同的单比特偏迹边缘 $\frac{1}{2}I_2$，使纯局域读出对 $9$ 维正交关联扇区失明（[@thm-local-correlation-sectors]、[@lemma-bell-mixed-marginal]）。
 :::
 
-## 38.5.3 概念细化单调律、闭合希尔伯特回路与齐肯多夫黄金熵账本 {#概念细化单调律闭合希尔伯特回路与齐肯多夫黄金熵账本}
+## 36.6.3 概念细化单调律、闭合希尔伯特回路与齐肯多夫黄金熵账本 {#概念细化单调律闭合希尔伯特回路与齐肯多夫黄金熵账本}
 
 当观察者不是删减引理，而是通过因子映射将粗糙概念表细化为更精细的概念表时，目标预测的条件逻辑不纯度（纤维内配对分歧质量的条件加权和）同样服从零例外的单调下降铁律：
 
@@ -121,7 +121,7 @@ $$
 先在每条粗糙纤维标签 $c \in C$ 上按因子映射关系 $c = \mathrm{factor}(d)$ 将粗糙纤维拆解为细化子纤维族 $\{d \in D \mid \mathrm{factor}(d) = c\}$ 的无交并，证得纤维质量可加性与同目标碰撞平方和按树支展开的恒等式。对每个非零总质量的粗糙桶，利用细化子桶概率权重在凸性（柯西—施瓦茨型商和不等式）下的次可加性，证得细化子桶上的条件同目标碰撞得分之和不小于粗糙桶上的碰撞得分；最后在 `ENNReal` 上利用有限概率归一恒等式将碰撞得分与条件配对分歧不纯度互补相减（并对零质量纤维显式处理 `ENNReal` 零除约定），逐桶求和即得不纯度单调不增。完整证明由 Lean 内核检查。
 :::
 
-现在，将视角从静态商核移向动态扫描轨迹：当观察者指针沿着左栏那条闭合空间填充回路一步一拍执行 `ptr++`，并遵守正交自指统一场的**齐肯多夫无相邻 `1` 抗共振编码规则**（$w_t \cdot w_{t+1} = 0$，见[第 32 章 §32.4](ch32-s04-generative-laws.md#sec-ch32-generative-laws) [@thm-ch32-generative-self-reference-and-zeckendorf]）记录离散历史脉冲时，外部遍历信息论、符号动力学与空间填充几何文献给出了如下经典标尺：
+现在，将视角从静态商核移向动态扫描轨迹：当观察者指针沿着左栏那条闭合空间填充回路一步一拍执行 `ptr++`，并遵守正交自指统一场的**齐肯多夫无相邻 `1` 抗共振编码规则**（$w_t \cdot w_{t+1} = 0$，见[§28.4](ch32-s04-generative-laws.md#sec-ch32-generative-laws) [@thm-ch32-generative-self-reference-and-zeckendorf]）记录离散历史脉冲时，外部遍历信息论、符号动力学与空间填充几何文献给出了如下经典标尺：
 
 ::: {.remark #rem-ch38-smb-zeckendorf-hilbert-literature title="SMB 柱集渐近等分、Parry 黄金移位最大熵测度、Frougny 正规化与希尔伯特曲线局部性界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本节将观察者指针的闭合晶格巡检与历史轨迹柱集收缩构建为定量 `MODEL` 时，援引以下四项外部经典文献（未作为一般遍历论或连续曲线定理包含在本书锁定的 `trureturing@dev` 声明集中）：
@@ -154,13 +154,13 @@ $$
 **齐肯多夫黄金信道容量与有限窗口基准回弹曲线（`MODEL`）。** 无相邻 `1` 抗共振约束将信道容量定在 $\log_2 \varphi \approx 0.69424\text{ bits/symbol}$（Parry 脉冲密度 $p_1 \approx 0.2764$），拖动约束卸载深度 $\Delta k$ 可在理想基准 `MODEL` 直线 $\log_2 \mu = -k h_\mu$ 上对比黄金基准与 Dottie 基准的有限窗回弹倍率 $2^{\Delta k \, h_\mu}$（渐近依据见 [@rem-ch38-smb-zeckendorf-hilbert-literature]，有限字精确上界见 [@thm-ch38-zeckendorf-uniform-avoidance-count]）。
 :::
 
-2. **清醒第 5 阶段兰道尔擦除热 vs 梦境第 4 阶段零热等熵复相干（`dream` 卡）**：同样是给快表“减负”释放 $\Delta k = N_{\mathrm{erase}}$ 比特局部约束，物理硬件上却横亘着两条截然相反的热力学路径（对照[第 8 章](ch08-erasure-and-time-arrows.md#sec-landauer-principle-geometry) [@rem-landauer-thermodynamic-bridge-literature] 与[第 37 章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md) [@thm-ch37-joint-coherent-record-erasure]）：若在**清醒第 5 阶段**先把正交地址记录偏迹丢进环境盲区，再强行将寄存器排热清零，每擦除一比特都必须向热浴支付至少 $\Delta Q \ge k_B T \ln 2 \cdot N_{\mathrm{erase}}$ 的不可逆兰道尔焦耳热；反之，若在尚未向宏观环境不可逆散逸之前的**梦境第 4 阶段**保留对局部记忆记录的相干访问权限，直接施加受控拷贝的伴随幺正算子 $U_{\mathrm{copy}}^\dagger$（[@thm-ch38-copied-address-dereference-and-access-defect] 第 3 款），指针便能以**零热耗散（$\Delta Q = 0$）**执行等熵逆演（uncomputation），在不烧毁一分自由能的前提下赎回被遮蔽的正交分支！
+2. **清醒第 5 阶段兰道尔擦除热 vs 梦境第 4 阶段零热等熵复相干（`dream` 卡）**：同样是给快表“减负”释放 $\Delta k = N_{\mathrm{erase}}$ 比特局部约束，物理硬件上却横亘着两条截然相反的热力学路径（对照[第 8 章](ch08-erasure-and-time-arrows.md#sec-landauer-principle-geometry) [@rem-landauer-thermodynamic-bridge-literature] 与[§36.1](ch37-dreams-quantum-eraser-and-nonlocal-observer.md) [@thm-ch37-joint-coherent-record-erasure]）：若在**清醒第 5 阶段**先把正交地址记录偏迹丢进环境盲区，再强行将寄存器排热清零，每擦除一比特都必须向热浴支付至少 $\Delta Q \ge k_B T \ln 2 \cdot N_{\mathrm{erase}}$ 的不可逆兰道尔焦耳热；反之，若在尚未向宏观环境不可逆散逸之前的**梦境第 4 阶段**保留对局部记忆记录的相干访问权限，直接施加受控拷贝的伴随幺正算子 $U_{\mathrm{copy}}^\dagger$（[@thm-ch38-copied-address-dereference-and-access-defect] 第 3 款），指针便能以**零热耗散（$\Delta Q = 0$）**执行等熵逆演（uncomputation），在不烧毁一分自由能的前提下赎回被遮蔽的正交分支！
 
 ::: {.viz src="observer-escape-ledger" preset="dream" height="500"}
 **清醒兰道尔擦除热对照梦境零热等熵复相干。** 同样释放 $\Delta k = N_{\mathrm{erase}}$ 比特局部约束，清醒第 5 阶段偏迹丢弃记录至少排放 $\Delta Q = k_B T \ln 2 \cdot N_{\mathrm{erase}}$ 擦除热，而梦境第 4 阶段保留局部记录相干访问并施加伴随逆演 $U_{\mathrm{copy}}^\dagger$，实现 $\Delta Q = 0$ 复相干（`MODEL`）。
 :::
 
-## 38.5.4 读出—置换更新交换子与有界整数幂迹的模恢复唯一性 {#sec-ch38-commutator-and-trace-crt}
+## 36.6.4 读出—置换更新交换子与有界整数幂迹的模恢复唯一性 {#sec-ch38-commutator-and-trace-crt}
 
 当观察者指针沿着离散地址步进时，为什么“先读出可观测量再执行地址更新”与“先执行地址更新再读出可观测量”在代数上给出截然不同的寄存器态？同时，当观察者只能通过有限模数 $M$ 的窗口记录整数转移矩阵幂次的迹时，在怎样的幅度前提下单个模像足以无歧义地锁定真实整数幂迹？我们在进入全功能实验室之前，将这两条基础代数铁律逐项钉死。
 
@@ -212,6 +212,6 @@ $$
 **交互实验室（`ORTHO//LEDGER`）：观察者逃逸账本、原像纤维与希尔伯特—齐肯多夫熵。** 自由开关 $L_1 \dots L_5$ 遍历全部 $32$ 种布尔商核，切换 16 态希尔伯特环与二量子比特贝尔边缘盲区，并拖动约束卸载深度 $\Delta k$ 核验 $H_{\mathrm{total}} = I_{\mathrm{ledger}} + H_2^{\mathrm{escape}} = 4.000\text{ bits}$ 守恒律与昼夜擦除热账单。绿色只给本章用 `lean=` 引用的定理；希尔伯特扫描与昼夜热账本读法属本章示意模型（`MODEL`）。
 :::
 
-走到这里，从硬件解引用 `*ptr`（§38.1）、五段式寄存器解剖（§38.2）、递归自映射页表 `p = *p`（§38.3）、七阶查表退化阶梯（[§38.4](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation)）直到原像纤维与齐肯多夫逃逸账本（§38.5），观察者作为“宇宙本体量子计算系统**的**一个记忆指针”的每一枚齿轮都已严丝合缝地咬合到位。然而，在迈入下一章（[第 39 章](ch39-observer-is-ontological-universe.md)）彻底消融“指针”与“存储阵列”之间最后那个“的”字之前，我们必须先转过身来拆解 [§38.4.1](ch38-s04-lookup-degradation.md#一第-0-阶全息自指原型d--0的三项特权与认识论红线) 留下的最后一根静态实无穷脚手架：在一座零背景自举的宇宙中，上述逃逸弦果真能在一张封顶完工的全局神谕表里一次性清零吗？
+走到这里，从硬件解引用 `*ptr`（§36.2）、五段式寄存器解剖（§36.3）、递归自映射页表 `p = *p`（§36.4）、七阶查表退化阶梯（[§36.5](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation)）直到原像纤维与齐肯多夫逃逸账本（§36.6），观察者作为“宇宙本体量子计算系统**的**一个记忆指针”的每一枚齿轮都已严丝合缝地咬合到位。然而，在迈入下一章（[第 38 章](ch39-observer-is-ontological-universe.md)）彻底消融“指针”与“存储阵列”之间最后那个“的”字之前，我们必须先转过身来拆解 [§36.5.1](ch38-s04-lookup-degradation.md#一第-0-阶全息自指原型d--0的三项特权与认识论红线) 留下的最后一根静态实无穷脚手架：在一座零背景自举的宇宙中，上述逃逸弦果真能在一张封顶完工的全局神谕表里一次性清零吗？
 
 ---

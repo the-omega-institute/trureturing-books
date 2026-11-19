@@ -1,10 +1,10 @@
-# 29.2 $\pm 1$ 算术接缝、素数二象性与椭圆曲线环面上的 $S^3$ 投影 {#sec-coda-primes-elliptic-curves}
+# 23.2 $\pm 1$ 算术接缝、素数二象性与椭圆曲线环面上的 $S^3$ 投影 {#sec-coda-primes-elliptic-curves}
 
 当我们凝视希帕索斯在整数网格上留下的那道佩尔余项 $m^2 - 2n^2 = \pm 1$（[@thm-ch29-silver-pell-remainder]）时，一个更深邃的数论追问自然浮现：**这道在 $+1$ 与 $-1$ 之间交替跳荡的算术接缝，难道仅仅是 $\sqrt{2}$ 的孤立巧合吗？它与素数的分布、椭圆曲线的拓扑以及全书反复出现的 $\cos\theta$ 投影究竟有着怎样的关联？**
 
 顺着这道 $\pm 1$ 裂隙向下挖掘，数论、代数几何与量子旋量几何在三座桥梁上轰然汇合。
 
-## 29.2.1 第一座桥：$\pm 1$ 佩尔接缝将奇素数一分为二——“线素数”与“面素数” {#sec-coda-pell-prime-splitting}
+## 23.2.1 第一座桥：$\pm 1$ 佩尔接缝将奇素数一分为二——“线素数”与“面素数” {#sec-coda-pell-prime-splitting}
 
 在自然数的底层网格中，一旦最小偶素数 $2$ 与最小奇素数 $3$ 张成六角密排周期基底 $2 \times 3 = 6$，此后一切大于 $3$ 的素数 $p \ge 5$ 都只能栖居在 $6$ 的倍数的两侧接缝上：
 
@@ -138,7 +138,7 @@ $$
    在本书的几何读法中，这意味着 $-1$ 手性扭结不会在单个素数轴上孤立出现，它必须在成对的位之间正反相消，与第三部第 10 章“两两比较，永远一致，顺序无关”形成算术呼应。
 :::
 
-## 29.2.2 第二座桥：两道二次接缝相交（$2 \times 2 = 4$）——从二次曲线到同余数椭圆曲线环面 {#sec-coda-congruent-elliptic-torus}
+## 23.2.2 第二座桥：两道二次接缝相交（$2 \times 2 = 4$）——从二次曲线到同余数椭圆曲线环面 {#sec-coda-congruent-elliptic-torus}
 
 如果把单条二次圆锥曲线进一步推广到有理直角三角形勾股斜边与面积同时给定的经典同余数情境，两道二次约束的正交交集便引出以下经典代数几何与黎曼面文献结构：
 
@@ -159,14 +159,14 @@ $$
 
   其右端三个根 $0,\; +1,\; -1$ 恰对应原点与 $\pm 1$ 接缝边界。
 - **复环面拓扑与阿贝尔群加法律**：在复数域上，被在四个支点 $\{0, +1, -1, \infty\}$ 处切开并双层缝合的黎曼面 $E_d(\mathbb{C}) \cong \mathbb{C}/(\mathbb{Z}\omega_1 \oplus \mathbb{Z}\omega_2)$，不再是亏格 $g = 0$、$\chi = 2$ 的二维球面 $S^2$，而是跃迁为**亏格 $g = 1$、欧拉示性数 $\chi(T^2) = 2 - 2g = 0$ 的二维环面（Torus）$T^2 = S^1 \times S^1$**；
-- 因为 $\chi(T^2) = 0$，偶维毛球面的拓扑零点阻碍（见 [@rem-hairy-ball-adams-literature]）在环面上消失：不变全纯微分 $\omega = dx/y$ 在整条光滑射影椭圆曲线上处处非零且无极点，赋予椭圆曲线一个全局光滑的阿贝尔群加法律 $P \oplus Q$（参见第 23 章 [@rem-diophantine-z-in-q-literature] 中关于 Poonen 椭圆曲线整除性锁的文献背景）。
+- 因为 $\chi(T^2) = 0$，偶维毛球面的拓扑零点阻碍（见 [@rem-hairy-ball-adams-literature]）在环面上消失：不变全纯微分 $\omega = dx/y$ 在整条光滑射影椭圆曲线上处处非零且无极点，赋予椭圆曲线一个全局光滑的阿贝尔群加法律 $P \oplus Q$（参见下文 [§23.5](ch23-s05-quaternion-diophantine-skeleton.md) [@rem-diophantine-z-in-q-literature] 中关于 Poonen 椭圆曲线整除性锁的文献背景）。
 :::
 
 ::: {.viz src="hairy-ball-normal-escape" preset="torus" height="500"}
 **环面上的箭头处处不为零。** 环面 $\bigl((R + r\cos\theta)\cos\phi,\, (R + r\cos\theta)\sin\phi,\, r\sin\theta\bigr)$（$R > r > 0$）上青色的单位切向量 $\hat{\mathbf{e}}_\phi = (-\sin\phi, \cos\phi, 0)$ 都沿大圈的方向，长度处处为 $1$；琥珀色的点绕大圈走一周，它的箭头一刻也不缩短，环面上没有品红的零点环。$\chi(T^2) = 0$，与球面的 $\chi(S^2) = 2$ 相对（文献结果，未在本书形式化，见 [@rem-ch29-elliptic-torus-literature]）。图中只是拓扑上同一种曲面，不是椭圆曲线本身。
 :::
 
-## 29.2.3 第三座桥：有限域椭圆曲线约化、弗罗贝尼乌斯余弦与 $S^3 \cong \mathrm{SU}(2)$ 投影 {#sec-coda-hasse-sato-tate}
+## 23.2.3 第三座桥：有限域椭圆曲线约化、弗罗贝尼乌斯余弦与 $S^3 \cong \mathrm{SU}(2)$ 投影 {#sec-coda-hasse-sato-tate}
 
 更深一层的算术—几何呼应出现在把标准同余数椭圆曲线 $E : y^2 = x^3 - x$ 约化到第 22 章的每一根奇素数轴 $\mathbb{F}_p$（$p \ge 3$）上的时刻：
 
@@ -191,7 +191,7 @@ $$
    \cos\theta_p := \frac{a_p}{2\sqrt{p}} \in [-1, +1], \qquad \alpha_p, \bar{\alpha}_p = \sqrt{p}\,e^{\pm i\theta_p}.
    $$
 
-   用 [§34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-30-1) 的弦—矢高语言说：归一化的弗罗贝尼乌斯本征值 $\alpha_p/\sqrt p=e^{i\theta_p}$ 是一个旋子，$v_p:=1-\dfrac{a_p}{2\sqrt p}=1-\cos\theta_p$ 是它的矢高；哈塞界 $\lvert a_p\rvert\le2\sqrt p$ 就是 $0\le v_p\le2$，而点数公式 $\#E(\mathbb{F}_{p^n})=p^n+1-\alpha_p^n-\bar\alpha_p^{\,n}$（文献结果）写成 $\#E(\mathbb{F}_{p^n})=(p^{n/2}-1)^2+2p^{n/2}\bigl[1-T_n(1-v_p)\bigr]$，$T_n$ 为第一类切比雪夫多项式。
+   用 [§30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-30-1) 的弦—矢高语言说：归一化的弗罗贝尼乌斯本征值 $\alpha_p/\sqrt p=e^{i\theta_p}$ 是一个旋子，$v_p:=1-\dfrac{a_p}{2\sqrt p}=1-\cos\theta_p$ 是它的矢高；哈塞界 $\lvert a_p\rvert\le2\sqrt p$ 就是 $0\le v_p\le2$，而点数公式 $\#E(\mathbb{F}_{p^n})=p^n+1-\alpha_p^n-\bar\alpha_p^{\,n}$（文献结果）写成 $\#E(\mathbb{F}_{p^n})=(p^{n/2}-1)^2+2p^{n/2}\bigl[1-T_n(1-v_p)\bigr]$，$T_n$ 为第一类切比雪夫多项式。
 
 2. **高斯复乘点数公式与奇素数线/面分野**：在具有 $\mathbb{Z}[i]$ 复乘的勾股同余曲线 $y^2 = x^3 - x$ 上，第一座桥（[@thm-ch29-face-prime-two-squares]、[@lem-ch29-line-prime-descent]）中的两族奇素数在 $\cos\theta_p$ 下截然分开：
    - **在惰性“线素数” $p \equiv 3 \pmod 4$ 上**：由于 $(-x)^3 - (-x) = -(x^3 - x)$ 且 $\left(\frac{-1}{p}\right) = -1$，$+x$ 与 $-x$ 的勒让德符号反号相消，自旋和恒为零：

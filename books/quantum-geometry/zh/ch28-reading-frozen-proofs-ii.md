@@ -1,18 +1,18 @@
-# 第二十八章 走进 Lean 4 公理圣殿（下）：从秩一玻恩归约到未读不动点与 $\psi = \psi(\psi)$ {#走进-lean-4-公理圣殿下从秩一玻恩归约到未读不动点与-ψψψ}
+# 走进 Lean 4 公理圣殿（下）：从秩一玻恩归约到未读不动点与 $\psi = \psi(\psi)$ {#走进-lean-4-公理圣殿下从秩一玻恩归约到未读不动点与-ψψψ}
 
 > *“这就是我们最早研究的 psi=psi(psi)”*
 
-当走完前二十七章的几何与算子长征，回望[第一章](ch01-measurement.md)中“成对测量与向量重叠”的起点，以及第二十四章中观察者自我映射的收缩不动点，读者会蓦然领悟题记里那句贯穿始终的感叹：**“这就是我们最早研究的 psi=psi(psi)”**！
+当走完圣殿上篇及全书几何与算子的长征，回望[第一章](ch01-measurement.md)中“成对测量与向量重叠”的起点，以及[第二十四章](ch24-cosine-fixed-points-and-self-reference.md)中观察者自我映射的收缩不动点，读者会蓦然领悟题记里那句贯穿始终的感叹：**“这就是我们最早研究的 psi=psi(psi)”**！
 
 在量子几何的语言里，观察者对系统施加一次记录测量 $P = \{P_k\}_{k \in \kappa}$，既可以通过单分支条件化将状态更新为 $\rho_k = (\operatorname{recordWeight}(P, \rho, k))^{-1} P_k \rho P_k$，也可以通过非选择性未读演化把状态更新为 $\operatorname{unreadState}(P, \rho) = \sum_{k \in \kappa} P_k \rho P_k$。什么时候一个量子态 $\rho$ 在自我测量的映射下达到**完全自洽的不动点** $\operatorname{unreadState}(P, \rho) = \rho$？答案不是哲学隐喻，而是 `trureturing@dev` 中被 Lean 4 内核一锤定音的双向充要定理：当且仅当所有异分支交叉干涉块 $P_k \rho P_l$（$k \neq l$）恒等于零！
 
-本章作为全书形式化公理圣殿审计的下篇，将逐行解剖连接纯态内积模方、迹配对权重、吕德斯条件态完备性与未读不动点充要判据的四条核心源码，并给出覆盖第四部至第六部代表性冻结声明的**全景源码审计表**。
+本篇作为《[铸器与圣殿](sanctuary.md)》形式化公理圣殿审计的下篇，将逐行解剖连接纯态内积模方、迹配对权重、吕德斯条件态完备性与未读不动点充要判据的四条核心源码，并给出覆盖第四部至第六部代表性冻结声明的**全景源码审计表**。
 
 ::: {.figure src="ch28-overview"}
-**图 28。** 本章地图：左栏，琥珀色的箭头 $\psi$ 在青色的线 $\phi$ 上落下青色的影子 $\lvert\langle\phi\mid\psi\rangle\rvert = 3/5$，以影子为边的青色正方形就是记录权重 $9/25$（[@thm-audit-rank-one-born]）；中栏上半，长为 $1$ 的横条按权重 $w_0 = 9/25$、$w_1 = 16/25$ 分成两段，合起来是未读态（[@lemma-audit-born-pairing-weight]）；中栏下半，每段除以自己的权重，各自撑满一整根，条件态的迹回到 $1$（[@prop-audit-conditional-state]）；右栏，带品红交叉块的 $\rho$ 被挤压改变，交叉块划掉的 $\rho'$ 是不动点（[@cor-audit-unread-fixed-iff]）。数值取自本章末尾的例子。
+**从玻恩权重到未读态不动点。** 本章地图：左栏，琥珀色的箭头 $\psi$ 在青色的线 $\phi$ 上落下青色的影子 $\lvert\langle\phi\mid\psi\rangle\rvert = 3/5$，以影子为边的青色正方形就是记录权重 $9/25$（[@thm-audit-rank-one-born]）；中栏上半，长为 $1$ 的横条按权重 $w_0 = 9/25$、$w_1 = 16/25$ 分成两段，合起来是未读态（[@lemma-audit-born-pairing-weight]）；中栏下半，每段除以自己的权重，各自撑满一整根，条件态的迹回到 $1$（[@prop-audit-conditional-state]）；右栏，带品红交叉块的 $\rho$ 被挤压改变，交叉块划掉的 $\rho'$ 是不动点（[@cor-audit-unread-fixed-iff]）。数值取自本章末尾的例子。
 :::
 
-## 28.1 秩一玻恩模方归约与三合取配对桥的源码解剖 {#sec-audit-rank-one-born-and-pairing}
+## 秩一玻恩模方归约与三合取配对桥的源码解剖 {#sec-audit-rank-one-born-and-pairing}
 
 在[第一章](ch01-measurement.md)与[第二章](ch02-born-rule.md)中，我们曾指出：纯态 $\rho = \lvert\psi\rangle\langle\psi\rvert$ 在秩一投影 $P_k = \lvert\phi\rangle\langle\phi\rvert$ 下的迹配对 $\Tr(\rho P_k)$ 之所以化为内积模方 $\lvert\langle\phi \mid \psi\rangle\rvert^2$，完全源于外积矩阵 `Matrix.vecMulVec` 的乘法结合律与迹收缩恒等式。现在让我们打开 `D5/S3/Observer/BornReduction.lean:27`，审视其精确的 Lean 4 声明与内核证明（图 28 左栏）。
 
@@ -104,7 +104,7 @@ $$
 **三合取桥：一项借上一条定理，一项按定义，一项逐项分两种情形。** 绿色的“① 秩一归约”就是 [@thm-audit-rank-one-born]；② 用 `rfl`；③ 用 `unread_eq_weighted_ensemble`，它对每个 $j$ 按 $w_j$ 是否为零分支——不为零时数乘互相抵消，为零时借虚线圈里的 $\rho \succeq 0$ 推出 $P_j \rho P_j = 0$。三路汇入绿色的 [@lemma-audit-born-pairing-weight]；图中 $\rho_j$ 即 $\operatorname{conditionalState}(P, \rho, j)$。
 :::
 
-## 28.2 吕德斯条件态完备性与未读不动点充要判据 {#sec-audit-conditional-state-and-fixed-point}
+## 吕德斯条件态完备性与未读不动点充要判据 {#sec-audit-conditional-state-and-fixed-point}
 
 现在我们打开 `D5/S3/Observer/Conditioning.lean` 的第 108 行与第 143 行，审计观察者条件化理论中最核心的两条定理（图 28 中下栏与右栏）。
 
@@ -141,7 +141,7 @@ $$
 :::
 
 ::: {.figure src="ch28-conditional-skeleton"}
-**条件态完备性的四步，第三步借用第二十七章的玻恩骨架。** 右列自上而下是证明的四步，每步旁是所用的引理；左边虚线圈里的前提各喂进一步，绿色的 [@lemma-audit-born-skeleton] 喂进第 ③ 步，给出权重非负。链的终点是绿色的 [@prop-audit-conditional-state]；图中 $\rho_k$ 即 $\operatorname{conditionalState}(P, \rho, k)$，$w_k$ 即 $\operatorname{recordWeight}(P, \rho, k)$。
+**条件态完备性的四步，第三步借用[圣殿上篇](ch27-reading-frozen-proofs-i.md)的玻恩骨架。** 右列自上而下是证明的四步，每步旁是所用的引理；左边虚线圈里的前提各喂进一步，绿色的 [@lemma-audit-born-skeleton] 喂进第 ③ 步，给出权重非负。链的终点是绿色的 [@prop-audit-conditional-state]；图中 $\rho_k$ 即 $\operatorname{conditionalState}(P, \rho, k)$，$w_k$ 即 $\operatorname{recordWeight}(P, \rho, k)$。
 :::
 
 最后，我们审计 `Conditioning.lean:108` 的**未读测量不动点充要定理**。这正是作者用来连接量子测量与自指方程 $\psi = \psi(\psi)$ 的严格算子判据（图 28 右栏）：把测量信道 $\mathcal{E}_P(\rho) = \operatorname{unreadState}(P, \rho)$ 视为观察者对自身状态空间的投影自映射，那么 $\rho$ 成为不动点 $\mathcal{E}_P(\rho) = \rho$ 的充要条件，恰好是所有异指标交叉块 $P_k \rho P_l$（$k \neq l$）全部消失。
@@ -177,16 +177,16 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
-## 28.3 第四至六部冻结声明全景审计表 {#sec-parts-iv-to-vi-frozen-audit-table}
+## 第四至六部冻结声明全景审计表 {#sec-parts-iv-to-vi-frozen-audit-table}
 
 与上一章的第一至三部审计表相呼应，下表汇总了本书第四部（纠缠、贝尔边界与傅里叶对偶）、第五部（玻戈留波夫双曲变换、闵可夫斯基光锥刚性、规范完整群、张量网络流割与电路深度反例）以及第六部（对角拓扑逃逸、黎曼 $\zeta$ 欧拉乘积、艾森斯坦范数型与收缩不动点）在 `trureturing@dev`（提交 [{commit}](trureturing:)）中的精确源码坐标、语句摘要哈希前缀（`statement_id`）及形式化边界。
 
 | 所属章节 | 冻结声明 GID | 源码路径与行号 | `statement_id` 前缀 | 精确形式化范围与契约边界 |
 | :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |
-| Ch 2 / Ch 28 | [`D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction`](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction) | [{source}](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction) | [{statement_id}](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction) | 秩一纯态与秩一投影下 $\operatorname{recordWeight}(P,\rho,k)=\norm{\operatorname{star}\phi\bullet_{v}\psi}^2$ |
-| Ch 2 / Ch 28 | [`D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight) | [{source}](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight) | [{statement_id}](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight) | 秩一模方、迹配对与未读态加权条件态展开的三合取桥 |
-| Ch 3 / Ch 28 | [`D5/S3/Observer/Conditioning.conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState) | [{source}](lean:D5/S3/Observer/Conditioning.conditionalState_isState) | [{statement_id}](lean:D5/S3/Observer/Conditioning.conditionalState_isState) | 非零权重 $w_k \neq 0$ 下吕德斯条件态保持正半定与单位迹 |
-| Ch 3 / Ch 28 | [`D5/S3/Observer/Conditioning.unreadState_fixed_iff`](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff) | [{source}](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff) | [{statement_id}](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff) | $\operatorname{unreadState}(P,\rho)=\rho \iff \forall k\neq l,\; P_k\rho P_l = 0$ |
+| Ch 2 / 铸器与圣殿 · 走进 Lean 4 公理圣殿（下） | [`D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction`](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction) | [{source}](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction) | [{statement_id}](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction) | 秩一纯态与秩一投影下 $\operatorname{recordWeight}(P,\rho,k)=\norm{\operatorname{star}\phi\bullet_{v}\psi}^2$ |
+| Ch 2 / 铸器与圣殿 · 走进 Lean 4 公理圣殿（下） | [`D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight) | [{source}](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight) | [{statement_id}](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight) | 秩一模方、迹配对与未读态加权条件态展开的三合取桥 |
+| Ch 3 / 铸器与圣殿 · 走进 Lean 4 公理圣殿（下） | [`D5/S3/Observer/Conditioning.conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState) | [{source}](lean:D5/S3/Observer/Conditioning.conditionalState_isState) | [{statement_id}](lean:D5/S3/Observer/Conditioning.conditionalState_isState) | 非零权重 $w_k \neq 0$ 下吕德斯条件态保持正半定与单位迹 |
+| Ch 3 / 铸器与圣殿 · 走进 Lean 4 公理圣殿（下） | [`D5/S3/Observer/Conditioning.unreadState_fixed_iff`](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff) | [{source}](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff) | [{statement_id}](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff) | $\operatorname{unreadState}(P,\rho)=\rho \iff \forall k\neq l,\; P_k\rho P_l = 0$ |
 | Ch 13 | [`D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal`](lean:D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal) | [{source}](lean:D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal) | [{statement_id}](lean:D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal) | 贝尔纯态偏迹边缘态等于最大混合态 $\frac{1}{2}I_2$ |
 | Ch 13 | [`D5/S3/QuantumBounds/LandauIdentity.landau_identity`](lean:D5/S3/QuantumBounds/LandauIdentity.landau_identity) | [{source}](lean:D5/S3/QuantumBounds/LandauIdentity.landau_identity) | [{statement_id}](lean:D5/S3/QuantumBounds/LandauIdentity.landau_identity) | 对合算子 CHSH 算符平方的朗道恒等式 $S^2 = 4I - [A_0,A_1][B_0,B_1]$ |
 | Ch 13 | [`D5/S3/QuantumBounds/LandauCommutingCollapse.chsh_square_eq_four_of_local_pair_commutes`](lean:D5/S3/QuantumBounds/LandauCommutingCollapse.chsh_square_eq_four_of_local_pair_commutes) | [{source}](lean:D5/S3/QuantumBounds/LandauCommutingCollapse.chsh_square_eq_four_of_local_pair_commutes) | [{statement_id}](lean:D5/S3/QuantumBounds/LandauCommutingCollapse.chsh_square_eq_four_of_local_pair_commutes) | 一侧局域对合观测量可交换时 $S^2 = 4I$；只是算子恒等式，不陈述期望值上界 |
@@ -222,11 +222,11 @@ $$
 | Ch 24 | [`D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package) | [{source}](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package) | [{statement_id}](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package) | 无不动点扭转使一切列表逃逸（无有限性假设），且该前提不可去除 |
 | Ch 24 | [`D5/S3/Geometry/FixedPoint/Brouwer.Brouwer`](lean:D5/S3/Geometry/FixedPoint/Brouwer.Brouwer) | [{source}](lean:D5/S3/Geometry/FixedPoint/Brouwer.Brouwer) | [{statement_id}](lean:D5/S3/Geometry/FixedPoint/Brouwer.Brouwer) | 正整数 $n$ 个坐标的标准单纯形 $\operatorname{stdSimplex}\ \mathbb{R}\ (\operatorname{Fin} n)$ 上，每个连续自映射都有不动点（包括 $n=1$ 的单点情形） |
 | Ch 24 | [`D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar`](lean:D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar) | [{source}](lean:D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar) | [{statement_id}](lean:D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar) | 无理旋转下连续函数的轨道平均趋于 Haar 积分（任意初相） |
-| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul) | $D(a,b)\,D(c,d) = \omega^{bc}\,D(a+c,\ b+d)$（一切 $a,b,c,d \in \mathbb{Z}_M$） |
-| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint`](lean:D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint) | $D(a,b)^{\dagger} = \omega^{ab}\,D(-a,-b)$ |
-| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | $\omega^{da}\,D(a,b)D(c,d) = \omega^{bc}\,D(c,d)D(a,b)$ |
-| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation`](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | $D(a,b)\,D(c,d)\,D(a,b)^{\dagger} = \omega^{bc-ad}\,D(c,d)$ |
-| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | $M = 2$：$D(0,1)D(1,0) = -D(1,0)D(0,1)$ |
+| 铸器与圣殿 · 把矩阵还原为异或 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul) | $D(a,b)\,D(c,d) = \omega^{bc}\,D(a+c,\ b+d)$（一切 $a,b,c,d \in \mathbb{Z}_M$） |
+| 铸器与圣殿 · 把矩阵还原为异或 | [`D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint`](lean:D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint) | $D(a,b)^{\dagger} = \omega^{ab}\,D(-a,-b)$ |
+| 铸器与圣殿 · 把矩阵还原为异或 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | $\omega^{da}\,D(a,b)D(c,d) = \omega^{bc}\,D(c,d)D(a,b)$ |
+| 铸器与圣殿 · 把矩阵还原为异或 | [`D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation`](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | $D(a,b)\,D(c,d)\,D(a,b)^{\dagger} = \omega^{bc-ad}\,D(c,d)$ |
+| 铸器与圣殿 · 把矩阵还原为异或 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | $M = 2$：$D(0,1)D(1,0) = -D(1,0)D(0,1)$ |
 
 让我们通过一个具体数值算例，把本章的四条审计定理串联在同一个单量子比特态上。
 
@@ -255,4 +255,4 @@ $$
 2. **题记 $\psi = \psi(\psi)$ 的哲学综合与形式化纪律边界**：在本书中，符号 $\psi = \psi(\psi)$ 是统摄多条严格不动点定理的**哲学与几何母题**，它在各章分别具象化为具体的绿色冻结定理：在[第三章](ch03-projectors-and-duality.md)与本章中体现为未读挤压算子的幂等性与零相干不动点判据 $\operatorname{unreadState}(P, \rho) = \rho$（[@cor-audit-pinching-idempotent]、[@cor-audit-unread-fixed-iff]）；在第二十一章中体现为观察拓扑对角见证的四合取逃逸结算；在第二十四章中体现为有限集删减更新 $U(S)\subseteq S$ 在 $(S_0).\mathrm{ncard}$ 步内达不动点以及正实数域上黄金不动点 $\varphi = 1 + 1/\varphi$ 的唯一性。遵循本书的验证契约，我们绝不将未形式化的宇宙学或意识哲学外推包装成 `LEAN ✓` 定理——每一分绿色的确定性，都精准停留在 Lean 4 内核所签发的定义、前提与结论之内。
 :::
 
-至此，第七部“构造与验证”的四章旅程已全部完成：我们亲手编写了零依赖的 3 比特克利福德几何代数与泡利辛重写法引擎（[第二十五章](ch25-rewriting-and-xor.md)），构造了单量子比特 ZYZ 欧拉转子编译器（[第二十六章](ch26-single-qubit-rotor-compilation.md)），并走入 `trureturing@dev` 的源码圣殿完成了全书前六部核心定理的抽样审计（[第二十七章](ch27-reading-frozen-proofs-i.md)与本章）。手握这套经内核锁定的几何与代数利器，让我们迈入第八部（[第二十九章](ch29-timeless-causality-and-gram-space.md)），直面无时间因果相容空间、计算复杂性视界与连续流体涡丝的终极贯通。
+至此，《[铸器与圣殿](sanctuary.md)》的四篇可执行与内核审计导读已全部完成：我们亲手编写了零依赖的 3 比特克利福德几何代数与泡利辛重写法引擎（[把矩阵还原为异或：3 比特刀片与 XOR–Pauli 几何代数引擎](ch25-rewriting-and-xor.md)），构造了单量子比特 ZYZ 欧拉转子编译器（[单量子比特旋转器编译：布洛赫几何定理与 ZYZ 欧拉角编译器](ch26-single-qubit-rotor-compilation.md)），并走入 `trureturing@dev` 的源码圣殿完成了核心冻结声明的抽样精读（[走进 Lean 4 公理圣殿（上）：从平行四边形恒等式到有限记录挤压](ch27-reading-frozen-proofs-i.md)与本篇）。接下来，读者可继续翻阅[附录 A](appendix-a.md)–[附录 I](appendix-i.md) 的概念词典、代数速查手册、验证依据边界与专题形式化证章。

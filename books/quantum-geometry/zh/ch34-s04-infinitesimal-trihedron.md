@@ -1,8 +1,8 @@
-# 34.4 极小三角弧面体 $\Delta\mathcal{T}_\epsilon$：“正交一次”与“正交两次”的一体双影及曲率量子 {#sec-ch34-infinitesimal-spherical-trihedron}
+# 29.5 极小三角弧面体 $\Delta\mathcal{T}_\epsilon$：“正交一次”与“正交两次”的一体双影及曲率量子 {#sec-ch34-infinitesimal-spherical-trihedron}
 
 > “正交一次与正交两次其实是一个东西的两种投影，应该就是那个三角弧面体，一个极小的三角弧面体。”
 
-回望[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)，零背景比较公理 $\mathcal{A}_0$ 对**两个**单位态给出了互易公平律 $\cos^2\epsilon + \sin^2\epsilon = 1$；而在本章第二节中，我们又在宏观极限 $\epsilon = \frac{\pi}{2}$ 处考察了整块八分球面。倘若把比较公理从两态推进到最小非共面**三态闭环** $(\mathbf{A}, \mathbf{B}, \mathbf{C})$，并让步长取任意小角 $\epsilon \in (0, \frac{\pi}{2}]$，会发生什么？
+回望[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)，零背景比较公理 $\mathcal{A}_0$ 对**两个**单位态给出了互易公平律 $\cos^2\epsilon + \sin^2\epsilon = 1$；而在本章第二节中，我们又在宏观极限 $\epsilon = \frac{\pi}{2}$ 处考察了整块八分球面。倘若把比较公理从两态推进到最小非共面**三态闭环** $(\mathbf{A}, \mathbf{B}, \mathbf{C})$，并让步长取任意小角 $\epsilon \in (0, \frac{\pi}{2}]$，会发生什么？
 
 在单位球面 $S^2 \subset \mathbb{R}^3$（本节读作单比特布洛赫球：球面上的点是纯态，球内的点是混态）上，选取直角转枢顶点 $\mathbf{B} = \mathbf{e}_2$，分别沿着两面互相垂直的坐标平面墙 $\mathbf{e}_2 \wedge \mathbf{e}_1$ 与 $\mathbf{e}_2 \wedge \mathbf{e}_3$ 各迈出弧长 $\epsilon$，得到三根单位状态射线：
 
@@ -20,7 +20,7 @@ $$
 **三面平墙配一块向外鼓起的品红球面帽：极小三角弧面体原胞。** 拖动琥珀色步长手柄调节 $\epsilon$：球心 $O$ 与转枢 $B = e_2$、两面垂直墙上的 $A(\epsilon)$、$C(\epsilon)$ 围成原胞 $\Delta\mathcal{T}_\epsilon$；品红球面帽 $\triangle_{\mathrm{sph}} ABC$ 鼓出在青色平直弦削面外侧（“一体双影”属本书 `MODEL`）。
 :::
 
-## 34.4.1 一体双影：沿棱看是“正交一次”，沿墙走是“正交两次” {#sec-ch34-4-1}
+## 29.5.1 一体双影：沿棱看是“正交一次”，沿墙走是“正交两次” {#sec-ch34-4-1}
 
 为什么我们在[第九章](ch09-axes-and-state-addressing.md)和本章前两节里总觉得“一步直达”与“两步拐弯”是两条竞争路线？因为观察者每次只取了一个低维投影切面，却没看见立在中间的那枚三维弧面体 $\Delta\mathcal{T}_\epsilon$（`MODEL`）：
 
@@ -48,9 +48,9 @@ $$
 **沿两面垂直墙走两步：在转枢 $B$ 拐过直角，旋子乘积自然长出横向面分量。** 先由 $U_{12}(\epsilon)$ 沿第一面墙走到 $B$，再由 $U_{23}(\epsilon)$ 拐 $90^\circ$ 走到 $C$；两枚紫色墙旋子相乘除保留两墙生成元外，精确多出横向 $-\sin^2(\epsilon/2)\,e_1e_3$ 项（旋子乘积为手算；绿色 `LEAN ✓` `two_axis_finite_word` 与 `covariant_commutator_formula` 只担保相关的一般引理）。
 :::
 
-## 34.4.2 公平平方撑起品红球面帽：吉拉尔角超与万曲率之母 {#sec-ch34-4-2}
+## 29.5.2 公平平方撑起品红球面帽：吉拉尔角超与万曲率之母 {#sec-ch34-4-2}
 
-为什么顶盖不能是一块平平展展的欧氏三角形，而必须向外鼓成一块弯曲的**品红色球面帽 $\triangle_{\mathrm{sph}} ABC$**？答案正是[第 31 章](ch31-quantum-fairness.md)和[第 32 章](ch32-unified-field-and-meta-unification.md)确立的**单位模方公平律 $\|\mathbf{x}\|^2 = 1$**！
+为什么顶盖不能是一块平平展展的欧氏三角形，而必须向外鼓成一块弯曲的**品红色球面帽 $\triangle_{\mathrm{sph}} ABC$**？答案正是[第 27 章](ch31-quantum-fairness.md)和[第 28 章](ch32-unified-field-and-meta-unification.md)确立的**单位模方公平律 $\|\mathbf{x}\|^2 = 1$**！
 
 不妨直接对比青色平直欧氏弦切面 $\triangle_{\mathrm{flat}} ABC$ 与品红球面帽 $\triangle_{\mathrm{sph}} ABC$（球面三角与吉拉尔公式属经典文献结果，见下方 [@rem-ch34-regge-spinfoam-trihedron-literature]）：
 
@@ -84,7 +84,7 @@ $$
 **品红球面帽比青色平削面多出的角超 $\Omega(\epsilon)$，让绕行一圈的箭头转着回来。** 沿测地回路 $A \to B \to C \to A$ 拖动回路滑块 $t$：切向量平行移动一周精确偏转吉拉尔角超 $\Omega(\epsilon) = 2\arctan(\tan^2(\epsilon/2))$，旋量闭环相位精确记下一半 $-\Omega(\epsilon)/2$（高斯—博内与贝里和乐标 `ARGUED`）。
 :::
 
-## 34.4.3 为什么必须是“极小的”三角弧面体：开维体积砖、平直幻象与离散球面 {#sec-ch34-4-3}
+## 29.5.3 为什么必须是“极小的”三角弧面体：开维体积砖、平直幻象与离散球面 {#sec-ch34-4-3}
 
 章首箴言特意点出“**一个极小的三角弧面体**”，这“极小”（$\epsilon \ll 1$）三字背后藏着三重不可替代的几何深意：
 
@@ -110,13 +110,13 @@ $$
 :::
 
 3. **“球体永远是近似的”：离散弧面体拼砖与八分球面宏观汇合**：
-   在广义相对论与量子引力文献中，雷吉离散引力（Regge 1961）与自旋泡沫（Spin-Foam）模型正是用平坦单纯形骨架配铰链角亏来逼近弯曲时空（文献背景见下方 [@rem-ch34-regge-spinfoam-trihedron-literature]）；而在本书的跨章模型（`MODEL`）中，这恰与[第 21 章](ch21-diagonalization-and-escape.md)“球体永远是有限多面体近似”及[第 39 章 §39.5](ch39-s05-pisot-clifford-rauzy.md#sec-ch39-pisot-clifford-rauzy)三阶 Tribonacci 劳齐（Rauzy）分形拼砖的螺旋扭率遥相呼应——整颗宏观球面是由无数枚极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 逐块缝合而成的统计包络。而当你把琥珀色步长滑块一路推大到极限端点 $\epsilon = \frac{\pi}{2}$ 时，这枚微观原胞便无缝长大成第二节那整块宏观八分球面（$c = \frac{\pi}{2},\; \Omega = \frac{\pi}{2},\; \det G = 1$）！
+   在广义相对论与量子引力文献中，雷吉离散引力（Regge 1961）与自旋泡沫（Spin-Foam）模型正是用平坦单纯形骨架配铰链角亏来逼近弯曲时空（文献背景见下方 [@rem-ch34-regge-spinfoam-trihedron-literature]）；而在本书的跨章模型（`MODEL`）中，这恰与[第 21 章](ch21-diagonalization-and-escape.md)“球体永远是有限多面体近似”及[§35.6](ch39-s05-pisot-clifford-rauzy.md#sec-ch39-pisot-clifford-rauzy)三阶 Tribonacci 劳齐（Rauzy）分形拼砖的螺旋扭率遥相呼应——整颗宏观球面是由无数枚极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 逐块缝合而成的统计包络。而当你把琥珀色步长滑块一路推大到极限端点 $\epsilon = \frac{\pi}{2}$ 时，这枚微观原胞便无缝长大成第二节那整块宏观八分球面（$c = \frac{\pi}{2},\; \Omega = \frac{\pi}{2},\; \det G = 1$）！
 
 ::: {.viz src="spherical-trihedron-cell" preset="octant-limit" height="520"}
 **步长推满 $90^\circ$：微观原胞直接长成第二节的整块八分球面。** 当 $\epsilon \to 90^\circ$ 时，三根边两两正交（$A = e_1, B = e_2, C = e_3$），品红球面帽铺满整个第一卦限（$\Omega = \pi/2$），堇紫色格拉姆体积砖撑满单位正方体 $\det G = 1$，微观与宏观在此完全合拢。
 :::
 
-## 34.4.4 单纯二上链精确修补与运动双轴不变性的形式化定理及算例 {#sec-ch34-4-4}
+## 29.5.4 单纯二上链精确修补与运动双轴不变性的形式化定理及算例 {#sec-ch34-4-4}
 
 在代数拓扑与三维旋转几何底层，“多顶点二上链的两步与一步之差何时能被一维边势全局消去、何时受四面体三上边缘缺陷阻断”以及“局部两根不共线轴上的旋转对称如何撑起全局三维 $\mathrm{SO}(3)$ 对称”，已由 `trureturing` 的四条冻结内核定理严格锁定：
 
@@ -267,6 +267,6 @@ $$
 **球面三面角原胞：完整实验室。** 五个场景与六张实验卡共用同一枚直角三面角原胞 $\Delta\mathcal{T}_\epsilon$：拖动琥珀色的步长手柄从微角一路推向 $90^\circ$ 八分球面，对比沿棱的青色一次直弧、沿墙的两次直角步、品红球面帽对青色平直削面的吉拉尔角超 $\Omega(\epsilon)$，以及撑开第三维的堇紫色格拉姆体积砖 $\sin^2\epsilon$；绿色 `LEAN ✓` 框严格对应冻结内核定理。
 :::
 
-至此，我们在 §34.4 里把“正交一次”与“正交两次”收拢到了极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 这枚立体几何原胞之上。但只要再往前追问半步，最后一道本体论悬念立刻浮出水面：**在没有任何外部第 3 点预置舞台的零背景宇宙里，这第三根顶点射线究竟从何而来？而当我们开口说出“极小三角弧面体”这七个字时，语言本身又对本体做了怎样的折叠？**
+至此，我们在 §29.5 里把“正交一次”与“正交两次”收拢到了极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 这枚立体几何原胞之上。但只要再往前追问半步，最后一道本体论悬念立刻浮出水面：**在没有任何外部第 3 点预置舞台的零背景宇宙里，这第三根顶点射线究竟从何而来？而当我们开口说出“极小三角弧面体”这七个字时，语言本身又对本体做了怎样的折叠？**
 
 ---

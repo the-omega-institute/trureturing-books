@@ -1,19 +1,19 @@
-# 第二十七章 走进 Lean 4 公理圣殿（上）：从平行四边形恒等式到有限记录挤压 {#走进-lean-4-公理圣殿上从平行四边形恒等式到有限记录挤压}
+# 走进 Lean 4 公理圣殿（上）：从平行四边形恒等式到有限记录挤压 {#走进-lean-4-公理圣殿上从平行四边形恒等式到有限记录挤压}
 
 > *“构建命题证明通用机器学术理论,定义定理证明”*
 
 在传统数学与理论物理专著里，“证明”往往依赖作者与审稿人的肉眼默契：一句“显然可得”、一处隐去边界条件的指标缩并，或者把“局部连通”悄悄当成“全局常相位”，就可能让整座理论大厦埋下隐蔽的裂缝。而本书自[第一章](ch01-measurement.md)立下的最高契约，正是题记中的这二十个字：**构建命题证明通用机器学术理论，定义、定理、证明**——全书每一条标有绿色 `LEAN ✓` 徽章的 `theorem / lemma / proposition / corollary`，都逐一锚定在 `the-omega-institute/trureturing@dev`（所钉提交 [{commit}](trureturing:)）中被 Lean 4 类型检查内核验证并冻结的真实声明上！
 
 ::: {.figure src="ch27-overview"}
-**图 27。** 本章地图：左栏，墨色箭头 $x$、$y$ 撑开的平行四边形，两条青色对角线 $x + y$ 与 $x - y$ 的平方和等于四条边的平方和（[@thm-audit-parallelogram-law]）；中栏，四个坐标连成一条链，每条青色的弧是一个在相邻两格上同时不为零的测试态；在幺正矩阵 $A$ 保持坐标射线与这些测试射线的前提下，四个对角元里紫色的相位箭头指向同一方向，$A = c \cdot 1$（[@prop-audit-ray-phase-rigidity]）；右栏，挤压去掉 $3 \times 3$ 块矩阵 $\rho$ 品红的非对角块、只留青色的对角块，再挤压一次矩阵不动（[@cor-audit-pinching-idempotent]）。
+**从平行四边形律到有限记录挤压。** 本章地图：左栏，墨色箭头 $x$、$y$ 撑开的平行四边形，两条青色对角线 $x + y$ 与 $x - y$ 的平方和等于四条边的平方和（[@thm-audit-parallelogram-law]）；中栏，四个坐标连成一条链，每条青色的弧是一个在相邻两格上同时不为零的测试态；在幺正矩阵 $A$ 保持坐标射线与这些测试射线的前提下，四个对角元里紫色的相位箭头指向同一方向，$A = c \cdot 1$（[@prop-audit-ray-phase-rigidity]）；右栏，挤压去掉 $3 \times 3$ 块矩阵 $\rho$ 品红的非对角块、只留青色的对角块，再挤压一次矩阵不动（[@cor-audit-pinching-idempotent]）。
 :::
 
-本章与[第二十八章](ch28-reading-frozen-proofs-ii.md)将带领读者直接走进这座 Lean 4 形式化公理圣殿的源码深处（这是一次抽样审计：两章逐行精读 8 条代表性证明，两张审计表共列 76 条声明，远少于全书引用的全部冻结声明，也不覆盖第八部起的各章）：
+本章与[走进 Lean 4 公理圣殿（下）：从秩一玻恩归约到未读不动点与 $\psi = \psi(\psi)$](ch28-reading-frozen-proofs-ii.md)将带领读者直接走进这座 Lean 4 形式化公理圣殿的源码深处（这是一次抽样审计：两篇逐行精读 8 条代表性证明，两张审计表共列 76 条声明，集中抽检第一至六部的基石声明，远少于全书引用的全部冻结声明）：
 
 1. 在本章（上篇）中，我们逐行解剖支撑起第一部至第三部的四块基石证明：**实内积空间的平行四边形范数恒等式**、**正半定迹一矩阵的玻恩概率三公理骨架**、**支撑连通射线测试下的幺正全局相位刚性定理**，以及**有限完备正交记录测量的挤压算符幂等定理**；
 2. 我们将真实源码中的每一条策略（`parallelogram_law_with_norm`、`mul_mul_conjTranspose_same`、`Relation.ReflTransGen` 传递闭包归纳、`Finset.sum_eq_single` 正交块消去）摊开在阳光下，并给出一张覆盖第一至三部核心冻结声明的**源码行号、语句摘要哈希（`statement_id`）与形式化职责边界全景审计表**。
 
-## 27.1 定义、定理与证明：走进 Lean 4 内核审计 {#sec-lean-kernel-audit-architecture}
+## 定义、定理与证明：走进 Lean 4 内核审计 {#sec-lean-kernel-audit-architecture}
 
 在 `trureturing` 仓库的冻结验证体系中，一个数学命题要想成为本书可引用的绿色定理，必须跨越三道机器铁门槛：
 
@@ -57,7 +57,7 @@ $$
 这里，$\vv{a}^2 = a^2$、$\vv{b}^2 = b^2$ 与 $\vv{c}^2 = c^2$ 是带有平方长度（面积）量纲的 **0 阶标量**，而 $\vv{a}\wedge\vv{b}$ 与 $\vv{b}\wedge\vv{a}$ 是 **2 阶有向面积双向量**。由于正交向量内积 $\vv{a}\cdot\vv{b} = 0$，且一正一反的 2 阶有向面积元满足反对称律 $\vv{b}\wedge\vv{a} = -\vv{a}\wedge\vv{b}$，两个相反旋向的双向量面积 $(\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a}) = 0$ 自动相消，遂归约为 0 阶标量勾股定理 $c^2 = a^2 + b^2$！照作者的读法，这正是 Mathlib 中 `norm_add_sq_real` 在正交条件 $2\langle x, y\rangle_{\mathbb{R}} = 0$（或 [@thm-audit-parallelogram-law] 中 $\norm{x+y}^2$ 与 $\norm{x-y}^2$ 两支相反交叉项相消）背后的几何本质（Mathlib 的证明里并无楔积，起作用的只是 0 阶交叉内积项）。至于该二次恒等式在单位整数格点上引发的数论与概念演进，见如下文献说明：
 
 ::: {.remark #rem-ch27-pell-transcendence-literature title="希帕索斯 √2 奇偶矛盾、佩尔最佳连分数渐近与四阶段数系演进（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下述 $\sqrt{2}$ 的 $2$-进赋值奇偶无理性证明、佩尔（Pell）连分数最佳有理渐近序列以及 $\pi$ 与余弦不动点 $\theta^*$ 的超越性（另参 [@rem-lean-kernel-trust-boundary-literature]、[第二十四章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature] 与[第二十九章](ch29-timeless-causality-and-gram-space.md) [@rem-ch29-pell-convergents-literature]）均属经典数论文献与本书概念综合（`MODEL`），未包含在本章逐行审计的冻结定理中。不过佩尔渐近分数的单位余项已不只是文献结果：记 $m_k = Q_k$、$n_k = P_k$（第二十九章 [@def-ch29-pell-silver-slope] 中的伴随佩尔数与佩尔数），下文的 $m_k^2 - 2n_k^2 = (-1)^k$ 与 $m_k + n_k\sqrt{2} = (1 + \sqrt{2})^k$ 可由该章经 Lean 验证的 [@thm-ch29-silver-pell-remainder] 经手工推导得到，[@thm-ch29-silver-best-approximation] 还给出最佳逼近下界；仍属文献的是这些分数与 $\sqrt{2}$ 连分数渐近分数的识别，以及一般的最佳逼近理论。
+**文献结果，未在本书形式化。** 下述 $\sqrt{2}$ 的 $2$-进赋值奇偶无理性证明、佩尔（Pell）连分数最佳有理渐近序列以及 $\pi$ 与余弦不动点 $\theta^*$ 的超越性（另参 [@rem-lean-kernel-trust-boundary-literature]、[第二十四章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature] 与[第二十三章 §23.1](ch29-s01-pythagoras-and-number-systems.md) [@rem-ch29-pell-convergents-literature]）均属经典数论文献与本书概念综合（`MODEL`），未包含在本章逐行审计的冻结定理中。不过佩尔渐近分数的单位余项已不只是文献结果：记 $m_k = Q_k$、$n_k = P_k$（[第二十三章 §23.1](ch29-s01-pythagoras-and-number-systems.md) [@def-ch29-pell-silver-slope] 中的伴随佩尔数与佩尔数），下文的 $m_k^2 - 2n_k^2 = (-1)^k$ 与 $m_k + n_k\sqrt{2} = (1 + \sqrt{2})^k$ 可由该节经 Lean 验证的 [@thm-ch29-silver-pell-remainder] 经手工推导得到，[@thm-ch29-silver-best-approximation] 还给出最佳逼近下界；仍属文献的是这些分数与 $\sqrt{2}$ 连分数渐近分数的识别，以及一般的最佳逼近理论。
 
 一旦在单位离散格点上取最简单的正交等腰边 $a = 1, b = 1$，勾股面积守恒立即给出 $c^2 = 1^2 + 1^2 = 2$，即对角线长度 $c = \sqrt{2}$。若假设存在正整数 $m, n \in \mathbb{Z}_{>0}$（$n \neq 0$）使有理分数 $\frac{m}{n} \in \mathbb{Q}$ 满足 $m^2 = 2n^2$，则两边关于素数 $2$ 的 $2$-进赋值（2-adic valuation）满足：左端 $v_2(m^2) = 2v_2(m)$ 恒为**偶数**，而右端 $v_2(2n^2) = 2v_2(n) + 1$ 恒为**奇数**——奇偶性正面相撞（$2v_2(m) \neq 2v_2(n) + 1$），彻底击碎了静态有理数网格 $\mathbb{Q}$！虽然十进制截断分数（如 $\lfloor 10^k\sqrt{2}\rfloor / 10^k$）也能在实数拓扑下逼近 $\sqrt{2}$，但在连分数理论中，由 $m_k + n_k\sqrt{2} = (1 + \sqrt{2})^k$（$k \ge 1, n_k > 0$）生成的**佩尔渐近分数（canonical best continued-fraction approximants）**
 
@@ -123,7 +123,7 @@ $$
 **玻恩骨架的证明分三路，只有第三路要绕道。** 虚线圈是前提，方框是证明里写到的步骤与所用的引理：①、② 各一步；③ 先由 $\rho \succeq 0$ 得到三明治 $P\rho P^* \succeq 0$，再借 $P^* = P$、$P^2 = P$ 用迹的循环律把它的迹换回 $\Tr(\rho P)$，最后取迹非负。三路汇入绿色的 [@lemma-audit-born-skeleton]。
 :::
 
-## 27.2 支撑链射线相位刚性与有限记录挤压幂等 {#sec-audit-ray-rigidity-and-pinching}
+## 支撑链射线相位刚性与有限记录挤压幂等 {#sec-audit-ray-rigidity-and-pinching}
 
 现在我们转向两道在几何与观察者条件化中最具代表性的结构性定理（图 27 中栏与右栏）。
 
@@ -199,7 +199,7 @@ $$
 **挤压幂等的证明是一条直链。** 虚线圈里的正交与幂等两条前提先让左投影吸收整个和式，$P_k \cdot U(\rho) = P_k \rho P_k$；右乘 $P_k$ 再吸收一次，得到逐点幂等；最后用函数外延性推到每个 $\rho$，到达绿色的 [@cor-audit-pinching-idempotent]。图中 $U(\rho)$ 即 $\operatorname{unreadState}(P, \rho)$。
 :::
 
-## 27.3 逐行源码解剖：从 Mathlib 引理到图归纳与矩阵块消去 {#sec-line-by-line-proof-anatomy-i}
+## 逐行源码解剖：从 Mathlib 引理到图归纳与矩阵块消去 {#sec-line-by-line-proof-anatomy-i}
 
 为了帮助读者养成直接阅读 Lean 4 源码的能力，我们将上面四条定理在 `trureturing@dev` 中的核心证明机制总结为四条通用证明设计模式：
 
@@ -208,18 +208,18 @@ $$
 3. **有限和式的单点筛除模式（`Finset.sum_eq_single k`）**：在 `RayPhaseRigidity.lean`（对角矩阵乘向量）与 `Conditioning.lean`（正交投影块相乘）中，每当需要将有限求和 $\sum_{l} F(k, l)$ 坍缩为对角单点项 $F(k, k)$ 时，一律调用 `Finset.sum_eq_single k`，将证明拆分为两条干净的子目标：其一是异指标消去 `∀ l ≠ k, F(k, l) = 0`，其二是荒谬边界排除 `k ∉ Finset.univ → F(k, k) = 0`；
 4. **稀疏连通图的自反传递闭包归纳模式（`Relation.ReflTransGen`）**：在 [@prop-audit-ray-phase-rigidity] 中，局部两两重叠关系 `∃ x ∈ tests, x i ≠ 0 ∧ x j ≠ 0` 通过 `Relation.ReflTransGen` 提升为全局连通性，证明只需对 `refl`（自反步 `rfl`）与 `tail`（单步延拓 `ih.trans (hstep j k hjk)`）做两行结构归纳，就将局部对角元相等 $A_{jj} = A_{kk}$ 传遍整张连通图！
 
-## 27.4 第一至三部冻结声明全景审计表 {#sec-parts-i-to-iii-frozen-audit-table}
+## 第一至三部冻结声明全景审计表 {#sec-parts-i-to-iii-frozen-audit-table}
 
 下面的审计表列出了本书第一部至第三部所引用的代表性冻结声明在 `trureturing@dev`（提交 [{commit}](trureturing:)）中的精确源码路径、行号、语句摘要哈希前缀（`statement_id`）以及形式化契约边界。表中任何中文/英文散文标题（如“平行四边形定律”“玻恩概率骨架”“挤压幂等”）仅作导读说明，不附加超出冻结签名本身的额外形式化声明。
 
 | 所属章节 | 冻结声明 GID | 源码路径与行号 | `statement_id` 前缀 | 精确形式化范围与契约边界 |
 | :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |
-| Ch 1 / Ch 27 | [`D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law) | [{source}](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law) | [{statement_id}](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law) | 实内积空间 $\norm{x+y}^2+\norm{x-y}^2=2(\norm{x}^2+\norm{y}^2)$ |
-| Ch 1 / Ch 18 / Ch 25 | [`D5/S3/Quantum/FiniteDimensional.qubit_weyl_star`](lean:D5/S3/Quantum/FiniteDimensional.qubit_weyl_star) | [{source}](lean:D5/S3/Quantum/FiniteDimensional.qubit_weyl_star) | [{statement_id}](lean:D5/S3/Quantum/FiniteDimensional.qubit_weyl_star) | `qubitX` 与 `qubitZ` 反对易、自伴、平方为 $1$ |
-| Ch 1 / Ch 25 | [`D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character`](lean:D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character) | [{source}](lean:D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character) | [{statement_id}](lean:D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character) | $\operatorname{IsEmpty}(\mathrm{QubitMatrix} \to_{\mathrm{alg}[\mathbb{C}]} \mathbb{C})$ |
-| Ch 1 / Ch 27 | [`D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests`](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests) | [{source}](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests) | [{statement_id}](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests) | 保持坐标射线与所有测试射线、且测试支撑连通的幺正阵 $A = c\bullet 1$（$\norm{c}=1$） |
-| Ch 2 / Ch 27 | [`D5/S3/Quantum/FiniteDimensional.born_probability_skeleton`](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton) | [{source}](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton) | [{statement_id}](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton) | 正半定迹一态在单位元、加法与自伴幂等投影上的玻恩三性质 |
-| Ch 3 / Ch 27 | [`D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent`](lean:D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent) | [{source}](lean:D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent) | [{statement_id}](lean:D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent) | $(\operatorname{unreadState} P)\circ(\operatorname{unreadState} P) = \operatorname{unreadState} P$ |
+| Ch 1 / 铸器与圣殿 · 走进 Lean 4 公理圣殿（上） | [`D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law) | [{source}](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law) | [{statement_id}](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law) | 实内积空间 $\norm{x+y}^2+\norm{x-y}^2=2(\norm{x}^2+\norm{y}^2)$ |
+| Ch 1 / Ch 18 / 铸器与圣殿 · 把矩阵还原为异或 | [`D5/S3/Quantum/FiniteDimensional.qubit_weyl_star`](lean:D5/S3/Quantum/FiniteDimensional.qubit_weyl_star) | [{source}](lean:D5/S3/Quantum/FiniteDimensional.qubit_weyl_star) | [{statement_id}](lean:D5/S3/Quantum/FiniteDimensional.qubit_weyl_star) | `qubitX` 与 `qubitZ` 反对易、自伴、平方为 $1$ |
+| Ch 1 / 铸器与圣殿 · 把矩阵还原为异或 | [`D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character`](lean:D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character) | [{source}](lean:D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character) | [{statement_id}](lean:D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character) | $\operatorname{IsEmpty}(\mathrm{QubitMatrix} \to_{\mathrm{alg}[\mathbb{C}]} \mathbb{C})$ |
+| Ch 1 / 铸器与圣殿 · 走进 Lean 4 公理圣殿（上） | [`D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests`](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests) | [{source}](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests) | [{statement_id}](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests) | 保持坐标射线与所有测试射线、且测试支撑连通的幺正阵 $A = c\bullet 1$（$\norm{c}=1$） |
+| Ch 2 / 铸器与圣殿 · 走进 Lean 4 公理圣殿（上） | [`D5/S3/Quantum/FiniteDimensional.born_probability_skeleton`](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton) | [{source}](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton) | [{statement_id}](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton) | 正半定迹一态在单位元、加法与自伴幂等投影上的玻恩三性质 |
+| Ch 3 / 铸器与圣殿 · 走进 Lean 4 公理圣殿（上） | [`D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent`](lean:D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent) | [{source}](lean:D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent) | [{statement_id}](lean:D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent) | $(\operatorname{unreadState} P)\circ(\operatorname{unreadState} P) = \operatorname{unreadState} P$ |
 | Ch 3 | [`D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras) | [{source}](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras) | [{statement_id}](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras) | 对复矩阵 `rho : Matrix d d ℂ`、完备实内积空间 `E`（`[NormedAddCommGroup E] [InnerProductSpace ℝ E] [CompleteSpace E]`）中的抽象希尔伯特空间向量 `state : E`（严格区分复矩阵 `rho` 与抽象向量 `state`）、`probability : L → d → ℝ`（`[Fintype d] [Nonempty d] [Fintype L]`）以及闭实子模 `visible : Submodule ℝ E`（`[IsClosed (visible : Set E)]`），在校准假设 `hpurity : (Matrix.trace (rho * rho)).re - (Fintype.card d : ℝ)⁻¹ = ‖state‖ ^ 2` 与 `hcoordinates : ‖visible.starProjection state‖ ^ 2 = ∑ l, ∑ j, (probability l j - (Fintype.card d : ℝ)⁻¹) ^ 2` 下，成立 `(Matrix.trace (rho * rho)).re - (Fintype.card d : ℝ)⁻¹ = (∑ l, ∑ j, (probability l j - (Fintype.card d : ℝ)⁻¹) ^ 2) + residualMass visible state` |
 | Ch 3 | [`D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity) | [{source}](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity) | [{statement_id}](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity) | $N$ 个密度矩阵被 $N$ 结果 POVM 完美区分（$\Tr(E_j\rho_i)=\delta_{ij}$）则 $N \le d$ |
 | Ch 3 | [`D5/S3/QuantumBounds/CollisionEntropyUncertainty.collision_entropy_uncertainty`](lean:D5/S3/QuantumBounds/CollisionEntropyUncertainty.collision_entropy_uncertainty) | [{source}](lean:D5/S3/QuantumBounds/CollisionEntropyUncertainty.collision_entropy_uncertainty) | [{statement_id}](lean:D5/S3/QuantumBounds/CollisionEntropyUncertainty.collision_entropy_uncertainty) | $d+1$ 个 $d$ 结果分布的碰撞和为 $1+P$ 时 $\sum_b H(p_b) \ge (d+1)\ln\frac{d+1}{1+P}$ |
@@ -270,4 +270,4 @@ $$
    - **本书概念与哲学综合**：正文中关于汉字“数”从计数动词算子（`shǔ`）到连续几何名词坐标（`shù`）的诠释，以及 $\mathbb{Q} \to \overline{\mathbb{Q}} \to \pi \to \theta^*$ 的四阶段概念演进图景，属于作者围绕 [@thm-audit-parallelogram-law] 提出的几何哲学综合，不声称为数域包含链或本章冻结 GID 的形式化内容。
 :::
 
-完成了第一至三部的内核证明审计后，现在让我们迈入全书形式化主线的收官篇章——[第二十八章](ch28-reading-frozen-proofs-ii.md)，审计从秩一纯态玻恩模方归约、三合取配对桥、吕德斯条件态完备性，直到“未读态不动点当且仅当非对角干涉块归零”的终极自指闭环 $\psi = \psi(\psi)$！
+完成了第一至三部的内核证明审计后，现在让我们迈入全书形式化主线的收官篇章——[走进 Lean 4 公理圣殿（下）：从秩一玻恩归约到未读不动点与 $\psi = \psi(\psi)$](ch28-reading-frozen-proofs-ii.md)，审计从秩一纯态玻恩模方归约、三合取配对桥、吕德斯条件态完备性，直到“未读态不动点当且仅当非对角干涉块归零”的终极自指闭环 $\psi = \psi(\psi)$！

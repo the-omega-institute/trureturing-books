@@ -1,4 +1,4 @@
-# 33.3 Mutual-Reference Monotonic Locking: How Two Mirrors Turn Two Negatives Positive in a Two-Step Round {#mutual-reference-monotonic-locking-how-two-mirrors-turn-two-negatives-positive-in-a-two-step-round}
+# 34.3 Mutual-Reference Monotonic Locking: How Two Mirrors Turn Two Negatives Positive in a Two-Step Round {#mutual-reference-monotonic-locking-how-two-mirrors-turn-two-negatives-positive-in-a-two-step-round}
 
 If each observer already possesses an individual restoring basin $\psi_i = \psi_i(\psi_i)$, why does the universe not leave every being sealed inside solitary contemplation? Why do spins pair into bonds, stars gather into galaxies, and minds seek out resonant companions?
 

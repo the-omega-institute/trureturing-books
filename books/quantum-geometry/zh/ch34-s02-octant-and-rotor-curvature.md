@@ -1,4 +1,4 @@
-# 34.2 八分球面与旋子曲率：看不见哪块面积，你就站在哪根轴上 {#sec-ch34-octant-rotor-holonomy}
+# 29.2 八分球面与旋子曲率：看不见哪块面积，你就站在哪根轴上 {#sec-ch34-octant-rotor-holonomy}
 
 如果说球面点寻址还只是“静态向量投影”，那么当我们把目光投向图 34 第 II 栏的**八分球面正交回路模型（`MODEL`）**（一步路径与两步路径的旋子乘积、和乐差异与赤道测试态对比完整封装于下文归属算例 [@ex-ch34-spherical-addressing-and-octant-rotors] 第 2 部分，连续几何相位文献背景见 [@rem-ch34-virtual-z-berry-relativity-literature]）时，“一次正交 vs. 两次正交”的反演威力更会上升到**算子读出核与换位子盲区**的层面。
 

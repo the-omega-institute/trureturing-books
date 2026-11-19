@@ -1,4 +1,4 @@
-# 39.5.8 帕里平稳律、逃逸对计数与分形视界熵问题 {#sec-ch39-p2e-entropy}
+# 35.6.8 帕里平稳律、逃逸对计数与分形视界熵问题 {#sec-ch39-p2e-entropy}
 
 在讨论“熵”之前，先区分三个层次：有限状态的马尔可夫定律、整数时间轴上完整路径的可测坐标重建，以及对所有不变概率测度的熵比较。前两者已有对应的 Lean 验证结果；下文在同一双向无符号律上展开最大熵与唯一性的应用推导，另给出拓扑熵公式并讨论诱导回归熵，分形纠缠标度则保留为开放问题。
 
@@ -308,7 +308,7 @@ $$
 
 这里的存在量词选出一组同时承载全部结论的 $e,\mu,\nu$，没有把任意预先指定的三元组作为输入，也没有宣称不变概率测度唯一。混合性与选择器障碍已经有了本条引用的依据；完整移位熵、最大熵比较与唯一性、阿布拉莫夫公式、谱隙、可计算采样算法和物理实现仍超出这条定理的结论。下方的边界碰撞概率、有限逃逸对比例与各类熵，仍须分别按各自定义阅读。
 
-在这一平稳律旁，还有两条各自独立的形式化定量定律共同约束边界碰撞与观测盲区：其一是帕里边界柱集上界定理 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound)，它对给定的 $n \ge 1$ 组正游程对集合 $C$（每段 `1` 游程 $< k$ 且编码长度不超过视界 $R$）证明，左右边界选定前缀的平稳质量分别不超过 $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ 与 $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$（这是精确概率不等式，而非分形维数或熵值公式）；其二是与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md) §38.5 一脉相承的有限竞技场信息逃逸率判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)，它证明在基数 $q \ge 2$ 的非退化有限状态集上，观测目录 $S$ 无法区分的有序相异状态对集合 $E(S)$ 定义出归一化有理逃逸率 $e(S) = |E(S)|/[q(q-1)]$，而某项观测 $i$ 严格降低逃逸率当且仅当其唯一捕获对计数 $|U_i| > 0$（且差值恰为 $|U_i|/[q(q-1)]$）。有限有序逃逸对比例 $e(S)$、量子态冯·诺依曼熵 $S(\sigma_b)$ 与无限移位系统的遍历熵在数学定义上彼此独立，绝不可混为一谈。
+在这一平稳律旁，还有两条各自独立的形式化定量定律共同约束边界碰撞与观测盲区：其一是帕里边界柱集上界定理 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound)，它对给定的 $n \ge 1$ 组正游程对集合 $C$（每段 `1` 游程 $< k$ 且编码长度不超过视界 $R$）证明，左右边界选定前缀的平稳质量分别不超过 $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ 与 $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$（这是精确概率不等式，而非分形维数或熵值公式）；其二是与[第 36 章](ch38-observer-memory-pointer-and-ontological-qram.md) §36.6 一脉相承的有限竞技场信息逃逸率判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)，它证明在基数 $q \ge 2$ 的非退化有限状态集上，观测目录 $S$ 无法区分的有序相异状态对集合 $E(S)$ 定义出归一化有理逃逸率 $e(S) = |E(S)|/[q(q-1)]$，而某项观测 $i$ 严格降低逃逸率当且仅当其唯一捕获对计数 $|U_i| > 0$（且差值恰为 $|U_i|/[q(q-1)]$）。有限有序逃逸对比例 $e(S)$、量子态冯·诺依曼熵 $S(\sigma_b)$ 与无限移位系统的遍历熵在数学定义上彼此独立，绝不可混为一谈。
 
 ::: {.remark #rem-ch39-p2e-abramov-literature title="实际双向帕里律的最大熵应用与独立文献边界"}
 **应用的对象与结论。** 固定任意整数阶数 $K\ge2$（即上文的 $k=K$），令 $p=\operatorname{parryParameter}(K)$、$X_K=\operatorname{RelationPath}(K)$、$T=\operatorname{relationShift}$，即 $(Tr)_t=r_{t+1}$。取 [@thm-ch39-p2e-native-bilateral-parry-law] 同时给出的 $e,\mu,\nu$，下文始终使用其中同一个无符号概率律 $\mu$。对 $X_K$ 上每个满足 $T_*\rho=\rho$ 的 Borel 概率测度 $\rho$，以下应用推导给出
@@ -527,6 +527,28 @@ $m=0$ 时，事件为整个截面，空乘积为 $1$。
 一次时长为 $d$ 的回返对应后缀序列 $0,1,\ldots,d-1,0$。末尾的零同时是下一段回返的起点。把相邻段的公共零位重合起来，整个时长事件就恰好是原路径上的一个后缀柱集。沿每条允许的转移，后缀核贡献一个 $p$ 和终点权重与起点权重之比。所有权重之比相消，因为首末后缀都是零。柱集概率里的初始质量 $\mu(A)$ 再由条件化约去，留下每段一个 $p^d$。完整证明由 Lean 内核检查。
 :::
 
+回返时长的分布还能计算诱导系统的熵。这里的一步是一次回返，可能跨过原系统的多个位置。
+
+::: {.theorem #thm-ch39-p2e-parry-induced-entropy title="帕里零截面诱导映射的柯尔莫哥洛夫–西奈熵" lean="D5/S3/TotalVariation/ParryInducedEntropy.actual_return_entropy"}
+在 [@thm-ch39-p2e-native-parry-first-return] 的假设下，令 $T_A$ 为同一个零截面上的实际首次回归映射，$\mu_A$ 为其归一化条件概率。记 $p=\beta_K^{-1}$。以自然对数计量，有
+
+$$
+h_{\mu_A}(T_A)
+=-\sum_{d=1}^{K}p^d\log(p^d)
+=\frac{-\log p}{\mu(A)}.
+$$
+
+熵以每次回返为单位。
+:::
+
+::: proof
+由 [@thm-ch39-p2e-parry-return-durations]，前 $n$ 次回返的时长联合熵等于 $n$ 倍的单次时长熵。用时长划分得到柯尔莫哥洛夫–西奈熵的下界。
+
+为求上界，在前 $n$ 个回归点各取一个半径为 $m$ 的关系位窗口。一段时长 $d$ 唯一确定字块 $1^{d-1}0$。知道起点之前的 $m$ 个关系位和前 $n+m$ 个时长，就能重构所有这些窗口。前者至多贡献 $m\log 2$ 的熵。除以 $n$ 并取极限，任意固定半径的窗口熵率都至多等于单次时长熵。半径递增的窗口生成整个双向路径的可测结构，因此这个上界也适用于所有有限可测划分的熵率上确界。
+
+最后，展开平稳后缀权重。对每个 $d$，$p^d$ 在归一化和中出现 $d$ 次，因此 $\sum_{d=1}^K d\,p^d=\operatorname{normalizer}(K)=1/\mu(A)$。把 $\log(p^d)=d\log p$ 代回即得第二个等号。完整证明由 Lean 内核检查。
+:::
+
 至于横向内部空间的劳齐分形边界维数 $D_F = \dim_H(\partial\mathcal{R}_K)$ 是否会在量子多体切投态中诱导出反常的分形边界纠缠标度，在严格数学物理中仍是一道悬而未决的开放问题：
 
 ::: {.problem #prob-ch39-p2e-fractal-horizon title="开放问题：皮索切投量子多体系统的劳齐分形视界纠缠标度"}
@@ -540,7 +562,7 @@ $$
 h_N=\sum_{i=0}^{N-2}t_{W_i}\bigl(\lvert i\rangle\langle i+1\rvert+\lvert i+1\rangle\langle i\rvert\bigr).
 $$
 
-这里使用 $W$ 的前 $N-1$ 个字母标记键，端点 $0$ 与 $N-1$ 不相连。该文张量中的数位编码的是这个单粒子格点指标；沿二进制或 Tribonacci 地址数位切分张量指标，并未指定实空间多体二分。这一区别也限制了与 §39.5.7 的直接编码纠缠秩之间的类比：不能据此把合法字的等权叠加认作该跃迁链的 Slater 基态。
+这里使用 $W$ 的前 $N-1$ 个字母标记键，端点 $0$ 与 $N-1$ 不相连。该文张量中的数位编码的是这个单粒子格点指标；沿二进制或 Tribonacci 地址数位切分张量指标，并未指定实空间多体二分。这一区别也限制了与 §35.6.7 的直接编码纠缠秩之间的类比：不能据此把合法字的等权叠加认作该跃迁链的 Slater 基态。
 
 **指定偶数开前缀的谱距离。** 令
 
@@ -576,7 +598,7 @@ $$
 =\det(V^\dagger V)=1.
 $$
 
-因而归一化来自列正交性。Dereziński 的 [*Clifford algebras and fermions*](https://www.fuw.edu.pl/~derezins/clifford.pdf)，§7.1–7.2 式 (7.51)–(7.54)，给出 CAR、有序占据基与归一化 Slater 行列式的文献背景。把这个向量用于上述跃迁链的基态时，仍须指定所占模式、填充及多体哈密顿量，并核对能量最小性。
+因而归一化来自列正交性。Dereziński 的 [*Clifford algebras and fermions*](https://www.fuw.edu.pl/~derezins/clifford.pdf)，§7.1–§7.2 式 (7.51)–(7.54)，给出 CAR、有序占据基与归一化 Slater 行列式的文献背景。把这个向量用于上述跃迁链的基态时，仍须指定所占模式、填充及多体哈密顿量，并核对能量最小性。
 
 指定 $0\le\ell\le N$ 和连续前缀 $I=\{0,\ldots,\ell-1\}$。令 $a,a'\in\{0,1\}^{\ell}$、$b\in\{0,1\}^{N-\ell}$；$ab$ 表示按原始格点顺序先接前缀、再接尾部。定义
 
@@ -739,7 +761,7 @@ $$
 
 这证明了同一实际态的 $K_{ij}=P_{ij}$；交换 $i,j$ 并用 $P^\dagger=P$ 得到 $C$ 的公式。没有预设关联矩阵、高斯性或归一化，也没有用另一密度矩阵替换 $\rho_V$。复相位不能丢掉：例如 $N=2,k=1$、$V=(3/5,4\mathrm{i}/5)^{\mathsf T}$ 时，$K_{01}=-12\mathrm{i}/25$ 而 $C_{01}=12\mathrm{i}/25$。上述有限求和同样覆盖真空（$K=0$）、满填充（$K=I_N$）、相同格点与两种不同格点次序；$N=0$ 时没有可选的 $i,j$。这是原始结果的标准应用，不另立完整端点定理或独立验证徽章。
 
-Dereziński 的 [§§7.1–7.2、式 (7.51)–(7.54)](https://www.fuw.edu.pl/~derezins/clifford.pdf) 给出占据基与 Slater 约定；其定理 8.1，特别是式 (8.103) 的 $\omega_\pi(d\Gamma(h))=\Tr(\pi h)$，给出对应的一体期望公式。Peschel 的式 (7)、(9)–(10) 使用 $C$；其式 (12) 中的转置对复模式不能略去。Peschel 还指出，对非 Slater 态，按同一二点函数重建的自由费米密度矩阵一般不能复现其他期望值，故关联矩阵相合不能确定一般密度矩阵。更一般的粒子数规范不变高斯密度矩阵也有上述谱配方，但须另给高斯性假设；这与从指定行列式振幅出发的推导范围不同。含 $0$ 或 $1$ 时，不能直接套用 Peschel 式 (12) 的矩阵对数。任意非前缀格点子集还涉及 Jordan–Wigner 字符串与费米子系统选择，须另行建立对应；地址数位切口也仍不能充当物理空间切口。
+Dereziński 的 [§7.1–§7.2、式 (7.51)–(7.54)](https://www.fuw.edu.pl/~derezins/clifford.pdf) 给出占据基与 Slater 约定；其定理 8.1，特别是式 (8.103) 的 $\omega_\pi(d\Gamma(h))=\Tr(\pi h)$，给出对应的一体期望公式。Peschel 的式 (7)、(9)–(10) 使用 $C$；其式 (12) 中的转置对复模式不能略去。Peschel 还指出，对非 Slater 态，按同一二点函数重建的自由费米密度矩阵一般不能复现其他期望值，故关联矩阵相合不能确定一般密度矩阵。更一般的粒子数规范不变高斯密度矩阵也有上述谱配方，但须另给高斯性假设；这与从指定行列式振幅出发的推导范围不同。含 $0$ 或 $1$ 时，不能直接套用 Peschel 式 (12) 的矩阵对数。任意非前缀格点子集还涉及 Jordan–Wigner 字符串与费米子系统选择，须另行建立对应；地址数位切口也仍不能充当物理空间切口。
 
 Moustaj–Krebbekx–Morais Smith 的 *Anomalous Polarization in One-dimensional Aperiodic Insulators*（[doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003)，§IV–V、§V.C 与附录 B）讨论含在位项的泵浦族及指定填充，其关联矩阵方法依赖所选 Slater／高斯态与子系统，不能直接移用于任意编码态。$\delta_{\rho,j}$ 只是单粒子能量到零的距离；多体激发隙还需填充、粒子数扇区与间隙约定。上述极限只处理这一单粒子谱前提：物理长度 $R$ 与内部窗坐标的对应、空间切口与劳齐边界的联系及熵标度，仍需另外建立；[@prob-ch39-p2e-fractal-horizon] 的完整问题仍然保留。
 :::
@@ -1567,7 +1589,7 @@ $$
 | **7. 跨切口编码纠缠秩** | 跨切口条件 $\tau(x)+\iota(y)<K$ 下的可达页秩充要矩形 $1 \le r_b \le R_b$ 与最大页熵 $\ln R_b$ [`complete_original_direct_rank_entropy`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy)（[@thm-ch39-p2e-direct-encoder-ranks]）及谱阻塞 [`actual_encoder_spectral_obstruction`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction) | `LEAN ✓`（秩等于 $K$ 仅在 $K \le R_b$ 时条件可达，非普适恒等）+ `NUM`（如 $R_0=6, R_1=5$）+ `文献结果`（黄金链与里德堡实验，[@rem-ch39-p2e-rydberg-anyon-literature]） |
 | **8. 平稳核、逃逸对与熵** | 有向重置链帕里平稳律 [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law)（[@thm-ch39-p2e-parry-escape-laws]）、实际双向律与柱集（[@thm-ch39-p2e-native-bilateral-parry-law]）、边界柱集不等式 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound) 与有限逃逸对判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | `LEAN ✓`（所引概率律与计数）+ 应用推导（同一无符号律的 KS 上界、达到性与唯一性）+ `文献结果`（拓扑熵识别与首次回归阿布拉莫夫公式，[@rem-ch39-p2e-abramov-literature]）+ `OPEN`（分形视界纠缠标度，[@prob-ch39-p2e-fractal-horizon]） |
 
-当我们在下面的综合实验室中把阶数从 $K = 2$ 拨向 $K = 3$ 再继续上推时，整章自指本体论 $\psi \equiv \psi(\psi)$ 的多切面几何结构便清清楚楚地浮现出来：$K = 2$ 时内部收缩空间还只是一条实轴线段；跨入 $K = 3$ 的瞬间，复共轭根在二维正交平面上旋出三支精确自覆盖、平面边界零测的劳齐分形内窗；而在每一个阶数上，已被 Lean 内核锁定的离散计数、多项式根圆盘、细化超度量、可达纠缠秩矩形与帕里平稳核构成了坚硬的绿色骨架，支撑起周围明确标界的经典文献、数值实验与跨学科几何诠释。穿越这座离散自指沙盘之后，本章后六节将沿 [§39.6](ch39-s06-fivefold-self-reference-spectrum.md)–[§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md) 贯通五阶自指不动点谱系、主动停机精度与时间长河谱排序、普适比较主频钟慢以及极小圆弧体万力合流，再在 [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md) 确立三维概念场封顶原理、希尔伯特多概念混编账本与极小圆弧场大统一理论（AF-GUT），并在峰顶推开正文的最后一道门扉，步入[终章](coda.md)《在所有的球之外》。
+当我们在下面的综合实验室中把阶数从 $K = 2$ 拨向 $K = 3$ 再继续上推时，自指扩表语法的多切面几何结构便清清楚楚地浮现出来：$K = 2$ 时内部收缩空间还只是一条实轴线段；跨入 $K = 3$ 的瞬间，复共轭根在二维正交平面上旋出三支精确自覆盖、平面边界零测的劳齐分形内窗；而在每一个阶数上，已被 Lean 内核锁定的离散计数、多项式根圆盘、细化超度量、可达纠缠秩矩形与帕里平稳核构成了坚硬的绿色骨架，支撑起周围明确标界的经典文献、数值实验与跨学科几何诠释。穿越这座离散自指沙盘之后，让我们步入本章收官节 [§35.7 `trureturing` 的“黄金切投”形式原语与灵魂—遗迹吸引子的几何诠释](coda-s03-golden-cut-observers.md)，在闵可夫斯基切投模型集与有界间隙环面回归中完成第三十五章的合拢，随后迈入[第三十六章](ch38-observer-memory-pointer-and-ontological-qram.md)的梦境量子擦除与本体 QRAM 架构。
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" height="640"}
 **交互实验室 `ORTHO//RAUZY`**：齐肯多夫、皮索与劳齐八概念综合沙盘。自由切换上表对应的八个预设场景、调节阶数 $K$、素数基数 $p$、字长视界与三维观察视角，并直接拖拽物理轴与内部平面上的分解点：实时核对禁 $1^K$ 合法字计数、皮索共轭根单位圆盘收缩、模 $p^k$ 余数树首次区分层级、$K = 3$ 劳齐内窗三支仿射覆盖（及 $K = 4$ 内部坐标采样云）、$\theta^*$ 与 $|\alpha|_{K=3}$ 的数值比对、跨切口可达秩矩形 $[1, R_0] \times [1, R_1]$，以及帕里平稳分布与有限逃逸对账本。绿色依据框严格对应 Lean 已验证定理，文献结论、数值计算、诠释模型与开放问题分别按各自标签独立标示。

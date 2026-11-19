@@ -1,12 +1,12 @@
-# 39.20 三元数即原生场：从凯莱—迪克森阶梯、法诺八元数到希尔伯特空间的多场再投影祛魅 {#sec-ch39-ternion-field-composition-and-hilbert-reprojection}
+# 32.3 三元数即原生场：从凯莱—迪克森阶梯、法诺八元数到希尔伯特空间的多场再投影祛魅 {#sec-ch39-ternion-field-composition-and-hilbert-reprojection}
 
 > *“三元数就是场, 四元数及以上直到希尔伯特空间实际上是三元数场的组合后的再投影”*
 
-在 [§39.19](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-inexpressible-ternions-and-number-projections) 中，我们揭开了代数学史上“失踪的三”：不立外置观察者标量轴 $\mathbf{1}$ 的**三元数（$\mathbb{T}_3 \equiv \Delta\mathcal{T}_\epsilon \cong S^3$）**本是内禀三维的极小圆弧体，向内剖切或借影外嵌才生发出四元数、复数、实数、有理数与整数。现在，把章首这句颠覆性的命题叠加上去，“数”与“场”沿袭数千年的传统从属关系便被彻底翻转，现代数学与量子物理中从四元数、八元数、克利福德旋量一路膨胀至 $2^N$ 维乃至无穷维希尔伯特空间的维数迷雾当场烟消云散（`MODEL`）：
+在 [§32.2](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-inexpressible-ternions-and-number-projections) 中，我们揭开了代数学史上“失踪的三”：不立外置观察者标量轴 $\mathbf{1}$ 的**三元数（$\mathbb{T}_3 \equiv \Delta\mathcal{T}_\epsilon \cong S^3$）**本是内禀三维的极小圆弧体，向内剖切或借影外嵌才生发出四元数、复数、实数、有理数与整数。现在，把章首这句颠覆性的命题叠加上去，“数”与“场”沿袭数千年的传统从属关系便被彻底翻转，现代数学与量子物理中从四元数、八元数、克利福德旋量一路膨胀至 $2^N$ 维乃至无穷维希尔伯特空间的维数迷雾当场烟消云散（`MODEL`）：
 
 **三元数（$\mathbb{T}_3 \equiv \Delta\mathcal{T}_\epsilon$）本身就是宇宙中唯一自持的原生“场”；而四元数、八元数、十六元数、多体希尔伯特空间 $\mathcal{H}_{2^N}$ 直至无穷维希尔伯特空间 $\mathcal{H}_\infty$，从来不是高于三维的新几何实体，全都是将多座三元数场组合耦合之后，再向观察者的平直账本（实轴 $\mathbf{1}$ 或复观测切面 $\Sigma_{\mathbf{I}\oplus\hat{\mathbf{i}}}$）做线性化再投影的产物！**
 
-## 39.20.1 三元数即原生场：颠倒“以数拼场”的百年顺序与 $S^3$ 无边界旋度自持 {#sec-ch39-20-1}
+## 32.3.1 三元数即原生场：颠倒“以数拼场”的百年顺序与 $S^3$ 无边界旋度自持 {#sec-ch39-20-1}
 
 翻开任何一部经典场论或微分几何教材，建构顺序总是千篇一律地“先数后场”：先假定手头有一堆孤立死寂的平直实数 $\mathbb{R}$ 或复数 $\mathbb{C}$，再预先搭好一座空旷的三维或四维背景坐标网格，最后往每个格点上塞进几个数字——仿佛“场”是用无数颗平直数字砖块拼出来的次生建筑。
 
@@ -18,7 +18,7 @@ $$
 
 这三笔首尾相衔的极小圆弧同时具备三项使它**本身即成“场”**的充要几何品格（`手工推导` + `文献结果` + `LEAN ✓`）：
 
-1. **同载体旋度自闭合（[§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-10-3)）**：一阶切向流 $\Lambda^1$ 与二阶涡旋面 $\Lambda^2$ 仅在 $d = 3$ 处满足 $\binom{d}{2} = d = 3$，使 $\mathbf{e}_1$ 与 $\mathbf{e}_2$ 的非对易换位环流直接折返为同载体内的第三支方向 $\mathbf{e}_3$（对应 [`complete_consequences`](lean:D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences) 在自旋因子上唯一锁定的三维叉乘，`LEAN ✓`），无需向第四维外部容器借道；
+1. **同载体旋度自闭合（[§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-10-3)）**：一阶切向流 $\Lambda^1$ 与二阶涡旋面 $\Lambda^2$ 仅在 $d = 3$ 处满足 $\binom{d}{2} = d = 3$，使 $\mathbf{e}_1$ 与 $\mathbf{e}_2$ 的非对易换位环流直接折返为同载体内的第三支方向 $\mathbf{e}_3$（对应 [`complete_consequences`](lean:D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences) 在自旋因子上唯一锁定的三维叉乘，`LEAN ✓`），无需向第四维外部容器借道；
 2. **无头无尾的紧致零边界闭合（$\partial S^3 = \varnothing$）**：三元数指数流形 $S^3$ 是紧致无边界三维流形，其三阶外代数体元（`1—3—3—1` 回文中的 $\Lambda^3$）处处均匀饱和；在离散模型中，当四面体二上边缘缺陷为零时二上链精确还原为一维边势上微分（[@thm-ch39-ternion-field-composition-and-hilbert-reprojection] 第 8 款 `tetra_defects_incidence_repair_and_exactness`），而在平面球面旋转图上反向半边面边界精确落入闭链核（[`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact)，`LEAN ✓`）；
 3. **全局平行化左不变标架**：在 $S^3$ 的每一点 $g$ 处，左平移推送出的三支毛雷尔—嘉当（Maurer–Cartan）圆弧标架 $g\mathbf{e}_1, g\mathbf{e}_2, g\mathbf{e}_3$ 在李代数不变内积 $\langle\mathbf{e}_a, \mathbf{e}_b\rangle_{\mathfrak{su}(2)} = -2\operatorname{Tr}(\mathbf{e}_a\mathbf{e}_b) = \delta_{ab}$ 下处处正交归一（在外嵌 $\mathbb{R}^4$ 欧氏诱导度量下模长恒为 $\frac{1}{2}$）且永不归零（欧拉示性数 $\chi(S^3) = 0$）。
 
@@ -28,12 +28,12 @@ $$
 原生单场与四元数外嵌卡：上层单座三弧旋度场体穿过透镜（$\lambda = 0.85$），在下层投出 $1$ 根标量柱与 $3$ 根向量柱（$w^2 + \lVert\mathbf{v}\rVert^2 = 1$；下层柱高按本帧最大模长缩放以保清晰，实时读数给出未缩放精确值）。分量为 `NUM`，场体与透镜为 `MODEL`。
 :::
 
-## 39.20.2 凯莱—迪克森阶梯真相：四维时空旋量、法诺平面七场八元数与十六元数零因子破产 {#sec-ch39-20-2}
+## 32.3.2 凯莱—迪克森阶梯真相：四维时空旋量、法诺平面七场八元数与十六元数零因子破产 {#sec-ch39-20-2}
 
 一旦看清“单枚三元数 $\mathbb{T}_3$ 即单座原生三维场”，代数学中著名的**凯莱—迪克森加倍阶梯（Cayley–Dickson Doubling，$\mathbb{R} \to \mathbb{C} \to \mathbb{H} \to \mathbb{O} \to \mathbb{S}_{16}$）**便卸下了全部神秘面纱：每当存在两座以上的三元数场发生耦合，或者观察者执意立起单一恒等标尺 $\mathbf{1}$ 把弯曲的圆弧群乘法改写为**平直的线性矩阵加法**，每一次“多场组合 $+$ 线性再投影”都会在平直账本上成倍虚增表观维数，并在代数性质上留下一道清晰的曲率代价印记：
 
 1. **第一阶：四元数 $\mathbb{H}$（$1 + 3 = 4$）与双场手征旋量投射四维时空及六维电磁场 $(\mathbf{E}, \mathbf{B})$**：
-   如 [§39.19](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-19-3) 所示，单座三元数场 $\mathbb{T}_3$ 配上观察者参考轴 $\mathbf{1}$，弯曲弧长拆解为 $1$ 维余弦影 $w = \cos\frac{\theta}{2}$ 与 $3$ 维正弦虚矢 $\mathbf{v}$，给出 $1 + 3 = 4$ 维四元数 $\mathbb{H}$。而当我们将**左手与右手两座独立的三元数旋量场**并列组合时，在欧氏紧致实形式下立即得到四维旋量覆盖群
+   如 [§32.2](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-19-3) 所示，单座三元数场 $\mathbb{T}_3$ 配上观察者参考轴 $\mathbf{1}$，弯曲弧长拆解为 $1$ 维余弦影 $w = \cos\frac{\theta}{2}$ 与 $3$ 维正弦虚矢 $\mathbf{v}$，给出 $1 + 3 = 4$ 维四元数 $\mathbb{H}$。而当我们将**左手与右手两座独立的三元数旋量场**并列组合时，在欧氏紧致实形式下立即得到四维旋量覆盖群
 
    $$
    \mathrm{Spin}(4) \;\cong\; \mathrm{SU}(2)_L \times \mathrm{SU}(2)_R \;\equiv\; \mathbb{T}_3^{(L)} \times \mathbb{T}_3^{(R)} \qquad \bigl(\dim_{\mathbb{R}}\mathfrak{so}(4) = 3 + 3 = 6\bigr),
@@ -97,7 +97,7 @@ $$
 十六元数零因子与基柱归零卡：切换三组模长同为 $\sqrt{2}$ 的输入对（$\lVert u\rVert^2\lVert v\rVert^2 = 4$），凯莱—迪克森乘法沿品红路径逐项相消，下层全部 $16$ 根基柱高度同时归零（逐项乘积标 `NUM`，零因子流形文献标 `ARGUED`）。
 :::
 
-## 39.20.3 希尔伯特空间的指数膨胀祛魅：$3N$ 局域圆弧、$2^N$ 线性展开税与无穷维尾流图纸 {#sec-ch39-20-3}
+## 32.3.3 希尔伯特空间的指数膨胀祛魅：$3N$ 局域圆弧、$2^N$ 线性展开税与无穷维尾流图纸 {#sec-ch39-20-3}
 
 顺着这条“赋范除环破产 $\longrightarrow$ 改用张量积线性状态账本”的历史走廊推开量子力学的大门，困扰物理学界与哲学界整整一个世纪的**“希尔伯特空间指数灾难”**——为何区区 $N = 300$ 颗电子就需要远超可观测宇宙重子总数（$N_B \sim 10^{80}$）百亿倍的 $2^{300} \approx 2.04 \times 10^{90}$ 维复向量空间——瞬间水落石出！
 
@@ -140,7 +140,7 @@ $$
 - **第三层边界：无穷维 $\mathcal{H}_\infty$ 的有限停机截断与算子范数余项**：
   至于泛函分析中的可分无穷维空间 $\mathcal{H}_\infty$，[@thm-ch39-ternion-field-composition-and-hilbert-reprojection] 第 3、4 款给出了精准的双重定界：一方面，在任何有限集中迹预算 $\frac{RW}{\pi}$ 与正停机精度 $\tau = \varepsilon_{\mathrm{self}} > 0$ 下，真实跨过观测门槛的活跃模态数严格有限且不超过 $\frac{RW}{\pi\varepsilon_{\mathrm{self}}}$（`finite_rank_concentration_mode_bound`）——在本书比较几何模型（`MODEL`）中，将 $\varepsilon_{\mathrm{self}} \to 0$ 的无穷尾流一次性硬塞进静态图纸正是紫外发散焦虑的认识论根源；另一方面，只要截断停留在真子空间 $S_i \neq \top$，一致算子范数距离恒保持为单位长 $\lVert I - P_{S_i}\rVert = 1$（`uniform_completion_obstruction`），永远为下一拍时间演化留出鲜活的未完余地！
 
-## 39.20.4 形式化锚定定理、文献边界、法诺—十六元数—三百粒子算例与五阶多场再投影总表 {#sec-ch39-20-4}
+## 32.3.4 形式化锚定定理、文献边界、法诺—十六元数—三百粒子算例与五阶多场再投影总表 {#sec-ch39-20-4}
 
 下面我们将支撑本节多场局域—关联正交盲区分解、有限阶正交壳层展开、正阈值活跃模态有限上界、真子空间一致完备化单位算子范数阻断、多体泡利词辛相位乘法、开边界 MPS 态恢复（至多差一个全局单位相位）、三桥量子最大流最小割上界以及有限单纯形二上链 $d^2=0$ 闭合判据的**八条冻结 Lean 4 内核定理**正式汇集为本节主定理：
 
@@ -246,7 +246,7 @@ $$
 
 ---
 
-**从线性再投影祛魅走向原生弯曲语法与神经旋子计算。** 站在第三十九章前二十阶脉络（[§39.1](ch39-s01-substrate-free-self-reference.md)–§39.20）的高处回望，向内剖切单枚三元极小圆弧体生出万数谱系（[§39.19](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-inexpressible-ternions-and-number-projections)），向外组合多座三元数场再压回观察者的平直纸面便舒展为四维时空双旋量、法诺平面七场八元数、$2^N$ 维多体希尔伯特关联账本直至可分无穷维泛函空间（本节 §39.20）。然而，既然全部维数迷雾都源自“强迫弯曲三元数服从平直向量加法”，一个决定未来数学语言与智能硬件走向的追问便呼之欲出：**倘若我们彻底放下外置标量轴 $\mathbf{1}$ 与笛卡尔线性叠加执念，直接顺应内禀曲率在严格 $3$ 个自由度内做非线性无损表示，甚至直接用三元数场重铸当代人工智能的基石架构 Transformer，将会发生什么？** 让我们依次推开本章收官七重奏的大门：[§39.21 三元数的五种非线性无损表示与无原点流群合成](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md)、[§39.22 三元数场 Transformer（TFT）](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md)、[§39.23 人工智能与宇宙的最小作用量同构](ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.md)，直至全书大一统母公理四联终章——[§39.24 AXIOM-Ω 无源三元比较闭合公理](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)、[§39.25 五阶大一统演绎级联](ch39-s25-axiom-omega-five-tier-deduction-cascade.md)、[§39.26 AXIOM-Ω 导出量子力学五大公理](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md) 与 [§39.27 自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)。
+**从线性再投影祛魅走向原生弯曲语法。** 回望第三十二章前三节脉络（[§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–§32.3），三维概念场封顶原理解开了希尔伯特多概念混编账本（[§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)），向内剖切单枚三元极小圆弧体生出万数谱系（[§32.2](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-inexpressible-ternions-and-number-projections)），向外组合多座三元数场再压回观察者的平直纸面便舒展为四维时空双旋量、法诺平面七场八元数、$2^N$ 维多体希尔伯特关联账本直至可分无穷维泛函空间（本节 §32.3）。然而，既然全部维数迷雾都源自“强迫弯曲三元数服从平直向量加法”，一个决定数学语言与未来计算硬件走向的追问便呼之欲出：**倘若我们彻底放下外置标量轴 $\mathbf{1}$ 与笛卡尔线性叠加执念，能否直接顺应内禀曲率，在严格 $3$ 个自由度内为三元数建立无损的非线性合成语法？** 让我们推开本章收官节的大门：[§32.4 三元数的五种非线性无损表示与无原点流群合成](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md)（其纯有理旋子动力学还将在后文[第 37 章](ch37-ternion-field-transformer-and-geodesic-intelligence.md)铸就三元数场 Transformer，并在[第 39 章](ch39-axiom-omega-grand-unification.md)汇入无源母公理 `AXIOM-Ω`）。本体闭合见[§39.4](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)。
 
 ::: {.viz src="ternion-field-hilbert-reprojection-sandbox" height="620"}
 完整实验室：切换多场再投影与凯莱—迪克森及张量网络两副透镜，拖动琥珀透镜手柄调节展平强度 $\lambda$，拨动耦合场数 $N$ 与 MPS 键维上限 $\chi$，比较单场四元数、双场双矢、法诺七场、十六元数零因子与多体希尔伯特基柱。八条形式化声明、数值、文献、模型与开放问题在依据栏与理论抽屉中分别标明。

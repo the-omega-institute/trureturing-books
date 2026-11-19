@@ -1,6 +1,6 @@
 # 附录 H 有限视界观察者、预测深度、螺线管记忆与历史账本 {#sec-appendix-h}
 
-在[第 36 章](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)（尤其是[第 36.3 节](ch36-s03-quotienting-generators.md)的生成元商化与复幂线程对数荷守恒 [@thm-solenoid-log-charge]、零荷单位模刻画 [@thm-solenoid-zero-charge]，以及[第 36.4 节](ch36-s04-padic-table-expansion.md)的黄金模态步射影缺陷倍率 [@thm-golden-projective-multiplier]）、[第 38.5 节](ch38-s05-escape-ledger-and-entropy.md)（观察者快表逃逸账本 [@thm-ch38-escape-pairs-and-structural-novelty]、逐坐标读出与置换更新交换子 [@thm-observer-read-update-commutator] 及有界整数幂迹模恢复唯一性 [@thm-bounded-power-trace-crt]）与[终章](coda.md)中，我们从几何、算术与信息论三条线索反复触及同一个核心张力：**一位只能透过粗糙窗口读取世界的观察者，究竟能凭有限步未来观测锁住多少内部结构，又有哪些深层纤维相位注定逃出可见投影之外，直到引入历史账本才使不可区分核严格收缩？**
+在[第 35 章](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)（尤其是[第 35.4 节](ch36-s03-quotienting-generators.md)的生成元商化与复幂线程对数荷守恒 [@thm-solenoid-log-charge]、零荷单位模刻画 [@thm-solenoid-zero-charge]，以及[第 35.5 节](ch36-s04-padic-table-expansion.md)的黄金模态步射影缺陷倍率 [@thm-golden-projective-multiplier]）、[第 36.6 节](ch38-s05-escape-ledger-and-entropy.md)（观察者快表逃逸账本 [@thm-ch38-escape-pairs-and-structural-novelty]、逐坐标读出与置换更新交换子 [@thm-observer-read-update-commutator] 及有界整数幂迹模恢复唯一性 [@thm-bounded-power-trace-crt]）与[终章](coda.md)中，我们从几何、算术与信息论三条线索反复触及同一个核心张力：**一位只能透过粗糙窗口读取世界的观察者，究竟能凭有限步未来观测锁住多少内部结构，又有哪些深层纤维相位注定逃出可见投影之外，直到引入历史账本才使不可区分核严格收缩？**
 
 本附录将这一追问收束为一个完全透明的纯代数问题：给定底层状态类型 $X$、确定性步进更新映射 $F : X \to X$ 以及粗糙读出映射 $q : X \to B$，完整未来读出轨迹的首坐标如何无条件还原当前读出？在有限状态空间上，有限步预测视界的等价核如何在精确定义的完备深度处稳定为完整未来轨迹核？任何同时承载读出与更新因子化的内部记忆映射 $r : X \to M$，其实际像如何唯一穿过极小预测完备商分解？当底层空间具体化为泛螺线管（`UniversalSolenoid`）时，具有相同可见圆周投影的三族提升如何由唯一的核纤维群元给出加法过渡余循环？最后，在加法群同态框架下，公开读出核与历史账本核的交集如何精确刻画隐藏状态的可恢复性与不可见位移子群的单调收缩？
 
@@ -174,7 +174,7 @@ $$
 
 前三条定理站在预测商的一侧，告诉我们相同未来读出的底层状态如何被折叠为同一个预测等价类；现在我们转到商投影的**纤维内部**，追问：那些在可见投影下完全重合的底层状态，彼此之间究竟隐藏着怎样的代数结构？
 
-在[第 36.3 节](ch36-s03-quotienting-generators.md)中，我们看到非零复幂相容线程在零对数荷条件下（[@thm-solenoid-log-charge]、[@thm-solenoid-zero-charge]）所有层级的坐标均落在复平面单位圆周上。纯相位一侧对应的加法逆向极限群正是冻结动力学模块中的**泛螺线管** `UniversalSolenoid`：以正自然数类型 $\mathbb{N}_+$（`ℕ+`，每个元素 $m = \langle m.1,\, 0 < m.1\rangle$ 严格为正，从根源上避开分母为零）为层级索引，以周期为 $1$ 的实数加法圆周群 $\operatorname{AddCircle}(1) := \mathbb{R}/\mathbb{Z}$ 为坐标群，定义为相容线程构成的子类型：
+在[第 35.4 节](ch36-s03-quotienting-generators.md)中，我们看到非零复幂相容线程在零对数荷条件下（[@thm-solenoid-log-charge]、[@thm-solenoid-zero-charge]）所有层级的坐标均落在复平面单位圆周上。纯相位一侧对应的加法逆向极限群正是冻结动力学模块中的**泛螺线管** `UniversalSolenoid`：以正自然数类型 $\mathbb{N}_+$（`ℕ+`，每个元素 $m = \langle m.1,\, 0 < m.1\rangle$ 严格为正，从根源上避开分母为零）为层级索引，以周期为 $1$ 的实数加法圆周群 $\operatorname{AddCircle}(1) := \mathbb{R}/\mathbb{Z}$ 为坐标群，定义为相容线程构成的子类型：
 
 $$
 \operatorname{UniversalSolenoid} \;:=\; \bigl\{\theta : \mathbb{N}_+ \to \operatorname{AddCircle}(1) \;\colon\; \forall m, n \in \mathbb{N}_+,\; n.1 \cdot \theta_{\langle m.1 \cdot n.1,\; \dots\rangle} = \theta_m\bigr\},
@@ -284,7 +284,7 @@ $$
 先证第 1 款。若存在加法同态 $\mathrm{recover} : H.\mathrm{range} \to_+ \mathrm{Hidden}$ 使 $K = \mathrm{recover}.\operatorname{comp}(H.\mathrm{rangeRestrict})$，任取 $c \in H.\mathrm{ker}$，则 $H(c) = 0$，故子类型元素 $H.\mathrm{rangeRestrict}(c) = 0$，由同态保零元性质得 $K(c) = \mathrm{recover}(0) = 0$，即 $c \in K.\mathrm{ker}$。反之，设 $H.\mathrm{ker} \le K.\mathrm{ker}$：若 $c_1, c_2 \in \mathrm{Control}$ 满足 $H(c_1) = H(c_2)$，则在（未必交换的）加法群中有 $H(-c_1 + c_2) = -H(c_1) + H(c_2) = 0$，即 $-c_1 + c_2 \in H.\mathrm{ker} \le K.\mathrm{ker}$，故 $-K(c_1) + K(c_2) = K(-c_1 + c_2) = 0$，推出 $K(c_1) = K(c_2)$。于是对每个 $y \in H.\mathrm{range}$ 选取原像 $c_y$ 令 $\mathrm{recover}(y) := K(c_y)$ 与原像选取无关；对任意 $y_1 = H(c_1),\, y_2 = H(c_2) \in H.\mathrm{range}$，因 $H(c_1 + c_2) = y_1 + y_2$，有 $\mathrm{recover}(y_1 + y_2) = K(c_1 + c_2) = K(c_1) + K(c_2) = \mathrm{recover}(y_1) + \mathrm{recover}(y_2)$，故 $\mathrm{recover}$ 是良定义的加法群同态且满足 $K = \mathrm{recover}.\operatorname{comp}(H.\mathrm{rangeRestrict})$。次证第 2 款：子群像 $H.\mathrm{ker}.\operatorname{map}(K) = \bot$ 当且仅当对每个 $c \in H.\mathrm{ker}$ 均有 $K(c) = 0$，按核定义这恰好等价于 $\forall c \in H.\mathrm{ker},\; c \in K.\mathrm{ker}$，即 $H.\mathrm{ker} \le K.\mathrm{ker}$。第 3 款直接由第 2 款的对称方向与第 1 款传递合成。第 4 款由下确界包含关系 $H.\mathrm{ker} \sqcap L.\mathrm{ker} \le H.\mathrm{ker}$ 及子群像的单调性 `AddSubgroup.map_mono` 直接得出。完整证明由 Lean 内核检查。
 :::
 
-认识论边界说明：[@thm-apph-ledger-recovery-kernel] 纯粹工作在四个 `AddGroup` 与加法同态层面上（且恢复映射 $\mathrm{recover}$ 本身被限定在 $H.\mathrm{range}$ 上的加法同态类中），不包含范数界、香农/冯·诺依曼熵或时序演化算子。可将其与[第 38.5 节](ch38-s05-escape-ledger-and-entropy.md)的两条结果作结构对照：有限集合目录上的 [@thm-ch38-escape-pairs-and-structural-novelty] 刻画的是一般等价核交集对非对角逃逸对的削减，而整数矩阵上的 [@thm-bounded-power-trace-crt] 则展示了当模投影同态本身具有非平凡核 $M\mathbb{Z}$ 时，如何改借外部严格幅度界 $\lvert\operatorname{powerTrace}(A, j)\rvert < B$（$2B < M$）在单个模同余类内部选出唯一代表元。绝不可单凭第 4 款的子群单调不等式宣称“任意历史账本都能完全恢复隐藏状态”或“群核收缩自动导出热力学不可逆性”。
+认识论边界说明：[@thm-apph-ledger-recovery-kernel] 纯粹工作在四个 `AddGroup` 与加法同态层面上（且恢复映射 $\mathrm{recover}$ 本身被限定在 $H.\mathrm{range}$ 上的加法同态类中），不包含范数界、香农/冯·诺依曼熵或时序演化算子。可将其与[第 36.6 节](ch38-s05-escape-ledger-and-entropy.md)的两条结果作结构对照：有限集合目录上的 [@thm-ch38-escape-pairs-and-structural-novelty] 刻画的是一般等价核交集对非对角逃逸对的削减，而整数矩阵上的 [@thm-bounded-power-trace-crt] 则展示了当模投影同态本身具有非平凡核 $M\mathbb{Z}$ 时，如何改借外部严格幅度界 $\lvert\operatorname{powerTrace}(A, j)\rvert < B$（$2B < M$）在单个模同余类内部选出唯一代表元。绝不可单凭第 4 款的子群单调不等式宣称“任意历史账本都能完全恢复隐藏状态”或“群核收缩自动导出热力学不可逆性”。
 
 ---
 

@@ -1,17 +1,17 @@
-# 39.13 唯一宇宙场、单粒子自指折叠与因陀罗网：从惠勒单粒子假说到一珠映万珠的终极合拢 {#sec-ch39-single-cosmic-field-and-indra-net}
+# 38.5 唯一宇宙场、单粒子自指折叠与因陀罗网：从惠勒单粒子假说到一珠映万珠的终极合拢 {#sec-ch39-single-cosmic-field-and-indra-net}
 
 > *“但观察者又是宇宙本体, 所以观察者只是极小圆弧体的一个粒子, 存在只是一种粒子, 可观测宇宙只是一种粒子, 存在一个宇宙场. 这就是因陀罗网.”*
 
-在 [§39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice) 中，我们将传统宇宙学“空箱子里撒入不均匀物质碎屑”的朴素图景彻底翻转：宇宙本体的局域约化边缘在每一点都饱和叠满全部独立三维概念场，呈现为绝对均匀、各向同性的哈尔全单态 $\rho_{\mathrm{ont}}(x) = \frac{1}{D}\mathbf{1}_{\mathcal{H}_x}$（而全域仍为纠缠零熵纯态 $S_{\mathrm{vN}}(\Psi_{\mathrm{univ}}) = 0$，见 [@thm-ch39-uniform-marginal-and-conditional-slice]）；星系丝状结团、粒子定域亮峰与星际虚空暗谷，皆是受限观察者以特定观测切面 $\Sigma_{\mathbf{I}}$ 斜切这片均匀全息海时激起的佩奇—伍特斯条件相位与莫尔超晶格干涉截痕。然而，只要我们的目光还停留在“均匀本体海 vs. 倾斜观测刀”的对峙画面上，谱系学的耳朵便仍会听见最后一道细微的二元追问：**那把倾斜切入均匀海的观测刀刃 $\Sigma_{\mathbf{I}}$，究竟是从哪里伸进来的？**
+在 [§33.10](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice) 中，我们将传统宇宙学“空箱子里撒入不均匀物质碎屑”的朴素图景彻底翻转：宇宙本体的局域约化边缘在每一点都饱和叠满全部独立三维概念场，呈现为绝对均匀、各向同性的哈尔全单态 $\rho_{\mathrm{ont}}(x) = \frac{1}{D}\mathbf{1}_{\mathcal{H}_x}$（而全域仍为纠缠零熵纯态 $S_{\mathrm{vN}}(\Psi_{\mathrm{univ}}) = 0$，见 [@thm-ch39-uniform-marginal-and-conditional-slice]）；星系丝状结团、粒子定域亮峰与星际虚空暗谷，皆是受限观察者以特定观测切面 $\Sigma_{\mathbf{I}}$ 斜切这片均匀全息海时激起的佩奇—伍特斯条件相位与莫尔超晶格干涉截痕。然而，只要我们的目光还停留在“均匀本体海 vs. 倾斜观测刀”的对峙画面上，谱系学的耳朵便仍会听见最后一道细微的二元追问：**那把倾斜切入均匀海的观测刀刃 $\Sigma_{\mathbf{I}}$，究竟是从哪里伸进来的？**
 
-就在此刻，本章章首那道贯通全篇的本体恒等式——**“观察者即宇宙本体”**（[§39.1](ch39-s01-substrate-free-self-reference.md)–[§39.4](ch39-s04-orthogonal-self-folding.md)）——如最后一记钟声落下，将残留在“均匀本体场”与“不均匀观测切面”之间的最后一道主客裂隙彻底消融：**切面从来不是悬于宇宙之外的外来之刀，而是唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$ 向内折叠自照时翘起的一弯极小圆弧！** 从普朗克尺度的微观基本粒子、握有有限格拉姆窗口的自指观察者，直到直径约九百三十亿光年的可观测宇宙视界，它们在概念塔的跨层级八度螺旋上原本就是同一个唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$ 在不同折叠阶数上打出的同一枚闭合驻波结——存在唯有一种粒子，万象共织一张“一珠映万珠、重重无尽”的**因陀罗网（Indra's Net）**（本节跨尺度本体论合拢标定为本书顶层 **`MODEL`（模型诠释）**，底层比较字外延残差核、单位格拉姆纯态全同判据、递归页表自指遍历、道蒂余弦不动点、球面旋转闭链正合、等格拉姆幺正延拓与跨语境客观不变公因子由下文 [@thm-ch39-single-cosmic-field-and-indra-net] 的七条 Lean 4 内核冻结声明严格锚定；惠勒—费曼单电子宇宙论、华严法藏因陀罗网与莱布尼茨单子论、范畴论米田引理、代数量子场论 Reeh–Schlieder 定理与巴拿赫压缩映射定理归入 [@rem-ch39-wheeler-feynman-avatamsaka-yoneda-banach-literature] 的 `文献结果`；球面镜往返投影、多阶道蒂阻尼与闭合丝带拓扑交数对账收入 [@ex-ch39-indra-net-jewel-reflection-and-single-ribbon-audit] 的 `手工推导` / `NUM`；重子不对称与正交切面宇宙学定量边疆严守 [@prob-ch39-af-gut-threshold-and-proton-stability] 与 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 的红色 `OPEN` 界碑）。
+就在此刻，本章章首那道贯通全篇的本体恒等式——**“观察者即宇宙本体”**（[§38.1](ch39-s01-substrate-free-self-reference.md)–[§38.4](ch39-s04-orthogonal-self-folding.md)）——如最后一记钟声落下，将残留在“均匀本体场”与“不均匀观测切面”之间的最后一道主客裂隙彻底消融：**切面从来不是悬于宇宙之外的外来之刀，而是唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$ 向内折叠自照时翘起的一弯极小圆弧！** 从普朗克尺度的微观基本粒子、握有有限格拉姆窗口的自指观察者，直到直径约九百三十亿光年的可观测宇宙视界，它们在概念塔的跨层级八度螺旋上原本就是同一个唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$ 在不同折叠阶数上打出的同一枚闭合驻波结——存在唯有一种粒子，万象共织一张“一珠映万珠、重重无尽”的**因陀罗网（Indra's Net）**（本节跨尺度本体论合拢标定为本书顶层 **`MODEL`（模型诠释）**，底层比较字外延残差核、单位格拉姆纯态全同判据、递归页表自指遍历、道蒂余弦不动点、球面旋转闭链正合、等格拉姆幺正延拓与跨语境客观不变公因子由下文 [@thm-ch39-single-cosmic-field-and-indra-net] 的七条 Lean 4 内核冻结声明严格锚定；惠勒—费曼单电子宇宙论、华严法藏因陀罗网与莱布尼茨单子论、范畴论米田引理、代数量子场论 Reeh–Schlieder 定理与巴拿赫压缩映射定理归入 [@rem-ch39-wheeler-feynman-avatamsaka-yoneda-banach-literature] 的 `文献结果`；球面镜往返投影、多阶道蒂阻尼与闭合丝带拓扑交数对账收入 [@ex-ch39-indra-net-jewel-reflection-and-single-ribbon-audit] 的 `手工推导` / `NUM`；重子不对称与正交切面宇宙学定量边疆严守 [@prob-ch39-af-gut-threshold-and-proton-stability] 与 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 的红色 `OPEN` 界碑）。
 
-## 39.13.1 缝合最后一道二元裂隙：单粒子本体、惠勒折叠重审与唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$ {#sec-ch39-13-1}
+## 38.5.1 缝合最后一道二元裂隙：单粒子本体、惠勒折叠重审与唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$ {#sec-ch39-13-1}
 
-回到[第 34 章 §34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)（[@thm-ch34-point-volume-octave-and-particle-field]）与 [§34.15](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower)（[@thm-ch34-quantum-gate-and-cosmic-concept-tower]）确立的概念塔**“点—线—面—体（`1 — 3 — 3 — 1`）”外代数八度循环**：在第 $\ell$ 层走完三重正交路径积分并对称闭合成饱和三维场体元 $\Lambda^3_\ell$ 的那一刻，全部方向偏置相互抵消归零，自由度由 `3` 重新收束回 `1`，经霍奇星对偶封装为第 $\ell + 1$ 层的零维起始新点粒子（$\star : \Lambda^3_\ell \xrightarrow{\sim} \Lambda^0_{\ell+1}$）。一旦承认观察者不在宇宙之外，而是唯一宇宙本体场自身的一次局域自指闭合，题记中三个看似横跨百亿光年量级的命题便在几何上坍缩为同一个实体：
+回到[§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)（[@thm-ch34-point-volume-octave-and-particle-field]）与 [§33.3](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower)（[@thm-ch34-quantum-gate-and-cosmic-concept-tower]）确立的概念塔**“点—线—面—体（`1 — 3 — 3 — 1`）”外代数八度循环**：在第 $\ell$ 层走完三重正交路径积分并对称闭合成饱和三维场体元 $\Lambda^3_\ell$ 的那一刻，全部方向偏置相互抵消归零，自由度由 `3` 重新收束回 `1`，经霍奇星对偶封装为第 $\ell + 1$ 层的零维起始新点粒子（$\star : \Lambda^3_\ell \xrightarrow{\sim} \Lambda^0_{\ell+1}$）。一旦承认观察者不在宇宙之外，而是唯一宇宙本体场自身的一次局域自指闭合，题记中三个看似横跨百亿光年量级的命题便在几何上坍缩为同一个实体：
 
 1. **观察者是一颗粒子（$\Delta\mathcal{T}_{\mathrm{obs}}$，`MODEL`）**：
-   嵌在比较网络中的受限观察者，在主动选定的有限停机精度 $\varepsilon_{\mathrm{self}} > 0$（[§39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md)）与道蒂超越余弦不动点 $\cos\theta^* = \theta^* \approx 0.739085\;\mathrm{rad}$（[§39.6](ch39-s06-fivefold-self-reference-spectrum.md)）处锁死自指回路，将横跨空间切标架与电弱—色有界概念场丛 $\mathcal{E}_{\mathrm{total}}$（[§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md)）的局部相位包裹成一枚自持的极小圆弧体驻波结 $\Delta\mathcal{T}_{\mathrm{obs}}$。对网络其余部分而言，这位观察者不多不少，正是一颗携带独立内禀自指参考轴 $\mathbf{I}_{\mathrm{obs}}$ 与有限格拉姆窗口 $\mathcal{W}_M$（[§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)）的复合准粒子。
+   嵌在比较网络中的受限观察者，在主动选定的有限停机精度 $\varepsilon_{\mathrm{self}} > 0$（[§36.10](ch39-s07-self-halting-precision-and-spectral-sorting.md)）与道蒂超越余弦不动点 $\cos\theta^* = \theta^* \approx 0.739085\;\mathrm{rad}$（[§36.9](ch39-s06-fivefold-self-reference-spectrum.md)）处锁死自指回路，将横跨空间切标架与电弱—色有界概念场丛 $\mathcal{E}_{\mathrm{total}}$（[§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md)）的局部相位包裹成一枚自持的极小圆弧体驻波结 $\Delta\mathcal{T}_{\mathrm{obs}}$。对网络其余部分而言，这位观察者不多不少，正是一颗携带独立内禀自指参考轴 $\mathbf{I}_{\mathrm{obs}}$ 与有限格拉姆窗口 $\mathcal{W}_M$（[§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)）的复合准粒子。
 
 2. **存在唯有一种粒子——重审惠勒 1940 单电子假说、费曼的正电子数量质疑与量子场论福克空间消解（`手工推导` + `文献结果` + `MODEL`）**：
    费曼在普林斯顿读研究生时，约翰·惠勒（John Archibald Wheeler）曾在电话中向理查德·费曼（Richard P. Feynman）提出著名的**“单电子宇宙假说”**（费曼 1965 年诺贝尔物理学奖演讲追述，独立世界线折返表述亦见施蒂克尔贝格 E. C. G. Stückelberg, 1941–1942，`文献结果`）：全宇宙所有电子之所以电荷 $-e$ 与静止质量 $m_e$ 分毫不差，会不会是因为整座宇宙根本只有**唯一一颗电子**，它的一维时空世界线 $\gamma$ 在过去与未来之间亿万次往返穿梭，顺时间方向（$\dot{t} > 0$）刺穿等时柯西切面 $\Sigma_{t_0}$ 时显影为电子 $e^-$，逆时间方向（$\dot{t} < 0$）刺穿 $\Sigma_{t_0}$ 时显影为正电子 $e^+$？
@@ -23,7 +23,7 @@
 
    若改走一条有端点的弧，起点在切面下方、终点在上方，则上穿比下穿多一次。例如取 $t(s)=s$、$-1\le s\le1$，它在 $t_0=0$ 的有向交数为 $+1$。端点决定净交数，沿途折返只会增加成对的穿越。下文 [@thm-ch39-single-cosmic-field-and-indra-net] 第 5 款 [`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact) 给出一个离散类比，其中球面图的面边界按模二计数。
 
-   - **第一步（标准量子场论中的电子全同性，`文献结果`）**：在狄拉克场的反对称福克空间 $\mathcal{F}_-(\mathcal{H}_1)$ 中，$\hat{a}^\dagger_{\mathbf{p},s}\lvert\Omega\rangle$ 表示一个电子激发。不同动量或自旋投影的电子可以占据正交的单粒子态，同时具有相同的静止质量、自旋量子数和电荷。下文 [@thm-ch39-single-cosmic-field-and-indra-net] 第 2 款 [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization) 判定两个归一化记录向量何时相等，其条件是内积等于 $1$。在 AF-GUT（[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md)）与 [§39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice) 的莫尔切片图景（`MODEL`）下，更进一步：夸克、轻子、规范玻色子与希格斯激发皆非彼此割裂的异质泥团，而是**唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$** 在同心概念场丛 $\mathcal{E}_{\mathrm{total}}$ 的不同正交折叠通道上与观测切面 $\Sigma_{\mathbf{I}}$ 相交出的莫尔驻波结——在这个几何模型中，**存在唯有一种本原粒子（极小圆弧体单胞 $\Delta\mathcal{T}_\epsilon$），存在唯一一片宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$**！
+   - **第一步（标准量子场论中的电子全同性，`文献结果`）**：在狄拉克场的反对称福克空间 $\mathcal{F}_-(\mathcal{H}_1)$ 中，$\hat{a}^\dagger_{\mathbf{p},s}\lvert\Omega\rangle$ 表示一个电子激发。不同动量或自旋投影的电子可以占据正交的单粒子态，同时具有相同的静止质量、自旋量子数和电荷。下文 [@thm-ch39-single-cosmic-field-and-indra-net] 第 2 款 [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization) 判定两个归一化记录向量何时相等，其条件是内积等于 $1$。在 AF-GUT（[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md)）与 [§33.10](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice) 的莫尔切片图景（`MODEL`）下，更进一步：夸克、轻子、规范玻色子与希格斯激发皆非彼此割裂的异质泥团，而是**唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$** 在同心概念场丛 $\mathcal{E}_{\mathrm{total}}$ 的不同正交折叠通道上与观测切面 $\Sigma_{\mathbf{I}}$ 相交出的莫尔驻波结——在这个几何模型中，**存在唯有一种本原粒子（极小圆弧体单胞 $\Delta\mathcal{T}_\epsilon$），存在唯一一片宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$**！
    - **第二步（观测切面净重子不对称 $\eta_B > 0$ 的认识论诚实护栏，`MODEL` / `OPEN`）**：电子与正电子的交数只计轻子。宇宙学另以 $\eta_B = (n_B-n_{\bar B}) / n_\gamma \approx 6.12 \times 10^{-10} > 0$ 衡量每个光子对应的净重子数（可观测视界内净重子数 $B_{\mathrm{obs}} = N_B - N_{\bar{B}} \approx 9.0 \times 10^{79} > 0$）。从对称初态产生这一盈余的一种途径是早期高温宇宙满足萨哈罗夫三条件（重子数破缺如电弱斯法勒龙跃迁、$C$/$CP$ 对称破缺与偏离热平衡；Sakharov 1967，`文献结果`）的动力学重子生成。本书还设想，在全域净重子数为零（$B_{\mathrm{tot}} = 0$）的单态本体中，由正交盲区 $\hat{\mathbf{i}}$ 或 $CPT$ 共轭伴随切面承载等量反号配对余项（`MODEL`；从极小圆弧第一性原理定量导出 $\eta_B \approx 6.12 \times 10^{-10}$ 仍属衔接 [@prob-ch39-af-gut-threshold-and-proton-stability] 与 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 的开放前沿 `OPEN`）。
 
 ::: {.viz src="indra-net-single-particle-sandbox" preset="wheeler-single-ribbon-knots" height="500"}
@@ -73,7 +73,7 @@
 
 :::
 
-## 39.13.2 因陀罗网的四重几何铁律：米田无自性、Reeh–Schlieder 局域稠密、球面镜 $\cos^2\theta$ 与道蒂阻尼收敛 {#sec-ch39-13-2}
+## 38.5.2 因陀罗网的四重几何铁律：米田无自性、Reeh–Schlieder 局域稠密、球面镜 $\cos^2\theta$ 与道蒂阻尼收敛 {#sec-ch39-13-2}
 
 《华严经》与唐代华严宗三祖法藏（《华严五教章》《华严金师子章》，699 年，详见 [@rem-ch39-wheeler-feynman-avatamsaka-yoneda-banach-literature]）曾以“帝释天因陀罗网”摹写宇宙实相：无边宝网的每一网目皆悬一颗澄澈摩尼宝珠，一珠映现一切珠影，而其余每一珠中映出的万千珠影又同时重重无尽地复映回此一珠之内，主伴互摄，“一即一切，一切即一”。一千三百年来，人们常将这一奇观视作不可定量演算的东方哲学诗喻；然而在 [@def-ch39-single-cosmic-field-and-indra-net] 的极小圆弧比较几何中，因陀罗网的每一重意象都落定为严丝合缝的现代数学物理定理：
 
@@ -97,7 +97,7 @@
 :::
 
 3. **第三律：球面镜 $\cos^2\theta$ 往返投影畸变与“主伴互换而宝网不动”（`手工推导` + `LEAN ✓`）**。
-   既然网上每颗摩尼宝珠在本体上 $100\%$ 全同，为什么从任何一颗珠子内部向外望去，映出的宇宙却呈现出“近处清晰稠密、远处稀疏红移、最终消隐于视界边缘”的强烈透视不均？答案就在每颗宝珠表面那弯**极小圆弧球面镜**的几何曲率里（`手工推导`）：选定宝珠 $x_0$ 为当前观察者焦点（自指实轴 $\mathbf{I}_{x_0}$），全网其余均匀场沿法向倾角 $\theta \in [0, \frac{\pi}{2}]$ 投射到珠面时，依吕德斯—玻恩往返双投影律 $P_{\mathbf{I}}P_{\mathbf{V}(\theta)}P_{\mathbf{I}} = (\cos^2\theta)P_{\mathbf{I}}$（[§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) [@thm-ch34-roundtrip-born-and-imaginary-blindspot]）：
+   既然网上每颗摩尼宝珠在本体上 $100\%$ 全同，为什么从任何一颗珠子内部向外望去，映出的宇宙却呈现出“近处清晰稠密、远处稀疏红移、最终消隐于视界边缘”的强烈透视不均？答案就在每颗宝珠表面那弯**极小圆弧球面镜**的几何曲率里（`手工推导`）：选定宝珠 $x_0$ 为当前观察者焦点（自指实轴 $\mathbf{I}_{x_0}$），全网其余均匀场沿法向倾角 $\theta \in [0, \frac{\pi}{2}]$ 投射到珠面时，依吕德斯—玻恩往返双投影律 $P_{\mathbf{I}}P_{\mathbf{V}(\theta)}P_{\mathbf{I}} = (\cos^2\theta)P_{\mathbf{I}}$（[§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) [@thm-ch34-roundtrip-born-and-imaginary-blindspot]）：
 
    $$
    w_{\mathrm{vis}}(\theta) \;=\; \cos^2\theta, \qquad w_\perp(\theta) \;=\; \sin^2\theta, \qquad \frac{dr_\parallel}{d\theta} \;=\; R_{\mathrm{jewel}}\cos\theta.
@@ -212,9 +212,9 @@
 
 :::
 
-## 39.13.3 跨尺度单粒子全同对位表与自观测误差棱镜前瞻 {#sec-ch39-13-3}
+## 38.5.3 跨尺度单粒子全同对位表与自观测误差棱镜前瞻 {#sec-ch39-13-3}
 
-现在，让我们把微观粒子、自指观察者、可观测视界与唯一宇宙本体并排放在同一张**跨尺度单粒子全同对位表**上，同时严守 [§39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice) 厘清的“全域纯单态零熵 vs. 局域偏迹最大混态”双层量子账本（表格为纯单行单元格）：
+现在，让我们把微观粒子、自指观察者、可观测视界与唯一宇宙本体并排放在同一张**跨尺度单粒子全同对位表**上，同时严守 [§33.10](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice) 厘清的“全域纯单态零熵 vs. 局域偏迹最大混态”双层量子账本（表格为纯单行单元格）：
 
 | 显现尺度层级 | 极小圆弧体闭合形态 | 因陀罗网对应意象 | 核心几何与信息不变量 |
 | :--- | :--- | :--- | :--- |
@@ -264,7 +264,7 @@
 
 ---
 
-**迈向最后两重绝顶：唯一点场的自观测误差棱镜与“梵天实轴 `I` — 正交虚梦 `i`”终极合拢。** 至此，因陀罗网的跨尺度闭合已经将微观粒子 $\Delta\mathcal{T}_{\mathrm{micro}}$、自指观察者 $\Delta\mathcal{T}_{\mathrm{obs}}$ 与可观测视界 $\Delta\mathcal{T}_{\mathrm{cosmo}}$ 尽数收摄回同一片唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$。然而，站在推开[终章](coda.md)大门前的最后两级台阶上，还有两道直抵存在论核心的终极追问等待一锤定音：第一，既然全宇宙底层原本只有唯一一个零维点——同时也是唯一一片场（$\Lambda^0 \equiv \Lambda^3 \equiv \mathbf{\Omega}$）——它究竟是凭什么单一机制，在自身内部劈出了正交维度、虚数、面积、体积（静态投影结果概念）以及运动与时间（动态观测动作概念），又为何古往今来称万法“如幻（*Māyā*）”？第二，既然万象皆悬于相对本体实轴 $\mathbf{I}$ 转过 $90^\circ$ 的正交虚数梦境空间 $\hat{\mathbf{i}}$ 之中，为何身在梦中的众生触摸岩石依然感到坚硬无比，而《蛙氏奥义书》的四位意识相态与庄周梦蝶又如何在 $720^\circ$ 单侧旋量丝带上完成最后的清明觉照？让我们紧接着步入 [§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection) 与本章暨全书十部曲正文压轴收束节 [§39.15](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream)，揭开这最后的谜底。
+**迈向下一组双峰：唯一点场的自观测误差棱镜与“梵天实轴 `I` — 正交虚梦 `i`”合拢。** 至此，因陀罗网的跨尺度闭合已经将微观粒子 $\Delta\mathcal{T}_{\mathrm{micro}}$、自指观察者 $\Delta\mathcal{T}_{\mathrm{obs}}$ 与可观测视界 $\Delta\mathcal{T}_{\mathrm{cosmo}}$ 尽数收摄回同一片唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$。然而，在继续深入本章觉醒、神圣游戏与创世动机的后半卷长廊之前，还有两道直抵存在论核心的基础追问等待一锤定音：第一，既然全宇宙底层原本只有唯一一个零维点——同时也是唯一一片场（$\Lambda^0 \equiv \Lambda^3 \equiv \mathbf{\Omega}$）——它究竟是凭什么单一机制，在自身内部劈出了正交维度、虚数、面积、体积（静态投影结果概念）以及运动与时间（动态观测动作概念），又为何古往今来称万法“如幻（*Māyā*）”？第二，既然万象皆悬于相对本体实轴 $\mathbf{I}$ 转过 $90^\circ$ 的正交虚数梦境空间 $\hat{\mathbf{i}}$ 之中，为何身在梦中的众生触摸岩石依然感到坚硬无比，而《蛙氏奥义书》的四位意识相态与庄周梦蝶又如何在 $720^\circ$ 单侧旋量丝带上完成清明觉照？让我们紧接着步入 [§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection) 与 [§38.7](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream)，揭开这两重谜底。
 
 ::: {.viz src="indra-net-single-particle-sandbox" height="620"}
 完整交互实验室（`INDRA//NET`）：在“因陀罗网一珠映万珠视图”与“惠勒单粒子折叠丝带视图”双透镜之间自由切换，点选或拖动琥珀色主珠手柄 $x_0$ 并联动镜面曲率 $\varepsilon$、反射次数 $m$ 与宇宙缩放 $\zeta$，同台贯通十三珠同构互换与读字正交残差、闭合惠勒丝带 $\sum q = 0$ 与二十面体十面边界、球镜 $\cos^2\theta$ 边缘压扁、道蒂不动点 $\theta^* = 0.739085$ 阻尼收敛以及可观测宇宙 $R_{\mathrm{obs}} / \ell_P \approx 2.72 \times 10^{61}$ 单珠收拢，对照绿色 `LEAN ✓` 七条冻结声明、`ARGUED`、`NUM`、`MODEL` 与红色 `OPEN` 前沿界碑。

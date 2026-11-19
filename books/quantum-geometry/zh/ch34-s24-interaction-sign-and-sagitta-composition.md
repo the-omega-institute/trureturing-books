@@ -1,12 +1,12 @@
-# 34.24 绕向奇偶与正矢高合成：规范相消、引力类比与动力学边界 {#sec-ch34-interaction-sign-and-sagitta-composition}
+# 33.5 绕向奇偶与正矢高合成：规范相消、引力类比与动力学边界 {#sec-ch34-interaction-sign-and-sagitta-composition}
 
-在 [§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)、[§34.14](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave) 与 [§34.16](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers) 中，我们将极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 同时视作规范联络和乐与时空曲率角超的共同微观原胞（`MODEL`）。一旦把两种相互作用放回同一枚原胞上对照，一个关乎宏观宇宙结构的核心物理分野便迎面而来：**为什么电磁与非阿贝尔规范相互作用天然容许正负异号荷（$\pm q$、色与反色），从而在宏观大块物质中相互屏蔽成电中性与色单态；唯独引力源在静态宏观尺度下从不正负抵消，纵使微观耦合极弱，却能跨天文尺度持续累加而主宰星系与宇宙结构？**
+在 [§29.5](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)、[§33.2](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave) 与 [§33.4](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers) 中，我们将极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 同时视作规范联络和乐与时空曲率角超的共同微观原胞（`MODEL`）。一旦把两种相互作用放回同一枚原胞上对照，一个关乎宏观宇宙结构的核心物理分野便迎面而来：**为什么电磁与非阿贝尔规范相互作用天然容许正负异号荷（$\pm q$、色与反色），从而在宏观大块物质中相互屏蔽成电中性与色单态；唯独引力源在静态宏观尺度下从不正负抵消，纵使微观耦合极弱，却能跨天文尺度持续累加而主宰星系与宇宙结构？**
 
 要诚实回答这一问题，绝不能拿一句含混的“曲率恒正所以万物相吸”敷衍过关，而必须把**运动学奇偶恒等式**与**动力学传播子假设**逐层剥离开来：在单枚球面三面角原胞 $\Delta\mathcal{T}_\epsilon$ 上，哪些正负抵消律与偶次非负残差确实已经由内积—克利福德几何严格锁定？反过来，仅凭局部正定矢高 $d(\epsilon) \ge 0$ 与格拉姆体积正定性，为什么**不足以**自动推出四维洛伦兹自旋-$2$ 场的普适吸引号、零质量长程 $1/r$ 传播律以及随粒子种类跨越六个数量级的引力—静电力强弱比？本节以精确代数推导与四个显式反例给出完整划界。
 
-## 34.24.1 绕向奇偶与阶次分离：有向和乐相消与偶正定矢高残差 {#sec-ch34-24-1}
+## 33.5.1 绕向奇偶与阶次分离：有向和乐相消与偶正定矢高残差 {#sec-ch34-24-1}
 
-回到 [§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron) 的单位球面 $S^2 \subset \mathbb{R}^3$ 坐标设定：固定直角转枢射线 $\mathbf{z}_0 := \mathbf{e}_2 = (0, 1, 0)$，对步长角 $\epsilon \in (0, \frac{\pi}{2}]$，沿两面互相垂直的坐标墙 $\mathbf{e}_2 \wedge \mathbf{e}_1$ 与 $\mathbf{e}_2 \wedge \mathbf{e}_3$ 取墙面单位射线
+回到 [§29.5](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron) 的单位球面 $S^2 \subset \mathbb{R}^3$ 坐标设定：固定直角转枢射线 $\mathbf{z}_0 := \mathbf{e}_2 = (0, 1, 0)$，对步长角 $\epsilon \in (0, \frac{\pi}{2}]$，沿两面互相垂直的坐标墙 $\mathbf{e}_2 \wedge \mathbf{e}_1$ 与 $\mathbf{e}_2 \wedge \mathbf{e}_3$ 取墙面单位射线
 
 $$
 \mathbf{z}_0 \;=\; (0, 1, 0), \qquad \mathbf{x}_\epsilon \;=\; (\sin\epsilon, \cos\epsilon, 0), \qquad \mathbf{y}_\epsilon \;=\; (0, \cos\epsilon, \sin\epsilon).
@@ -47,7 +47,7 @@ $$
 3. **显式特殊角 $\epsilon = \frac{\pi}{6}$ 数值对账（`手工推导`）**：取 $\epsilon = \frac{\pi}{6}$（$\sin\frac{\pi}{6} = \frac{1}{2}$，$\cos\frac{\pi}{6} = \frac{\sqrt{3}}{2}$），有向奇可观测量给出开放横向振幅 $q_\pm(\frac{\pi}{6}) = \pm\frac{1}{2} = \pm 0.5000$（$q_+ + q_- = 0$）与闭合和乐虚部 $\operatorname{Im} B_\pm(\frac{\pi}{6}) = \pm\frac{1}{16} = \pm 0.0625$（$\operatorname{Im} B_+ + \operatorname{Im} B_- = 0$，实部同为 $\operatorname{Re} B_\pm(\frac{\pi}{6}) = \frac{7 + 4\sqrt{3}}{16} \approx 0.870513$）；而偶对称非负残差则一致保持严格正值：$d(\frac{\pi}{6}) = 1 - \frac{\sqrt{3}}{2} \approx 0.133975 > 0$，$1 - \cos^2\frac{\pi}{6} = \frac{1}{4} = 0.2500 > 0$，$\det G(\frac{\pi}{6}) = \frac{1}{16} = 0.0625 > 0$。将奇绕向相消对应规范荷屏蔽、将独立原胞偶矢高累加类比引力源不可屏蔽性，属于本书的跨层物理诠释（`MODEL`）。
 :::
 
-## 34.24.2 合成法则分岔与四个动力学反例检核 {#sec-ch34-24-2}
+## 33.5.2 合成法则分岔与四个动力学反例检核 {#sec-ch34-24-2}
 
 既然在单枚原胞上 $d(\epsilon) = 2\sin^2(\epsilon/2) > 0$ 且 $\det G(\epsilon) = \sin^4\epsilon > 0$ 恒不取负值，我们能否就此宣称“仅凭比较公理的局部运动学正定性，已经无假设推出了万有引力的普适 $1/r$ 吸引定律”？答案是**绝对不能**（参见[附录 E §E.4](appendix-e-s04-metric-and-gram-curvature.md#sec-appe-geometry)、[§E.6](appendix-e-s06-spacetime-gauge-and-thermodynamics.md#sec-appe-spacetime) 与 [§E.7](appendix-e-s07-intermediate-hypotheses-audit.md#sec-appe-audit-table)）。局部标量残差非负只是“正源同号”的运动学必要前提；一旦混淆合成规则或忽略场传播子与相对论应力，立刻会撞上下列四个精确反例：
 
@@ -68,7 +68,7 @@ $$
      $$
 
      因此，“正负微扰的矢高不抵消”仅在**跨独立原胞（或退相干独立历史）的广延源可加律**下成立，绝不适用于单一相干态上的可逆门串行乘积。
-   - *电磁多极余场与非阿贝尔色单态机制差异*：即便在阿贝尔静电学中，相距 $\mathbf{s} \neq \mathbf{0}$ 的异号点电荷 $+q$ 与 $-q$ 也只消去了远场 $O(r^{-2})$ 单极通量，仍留下非零电偶极矩 $\mathbf{p} = q\mathbf{s}$ 及其 $O(r^{-3})$ 偶极电场与正静电能；而在非阿贝尔 $\mathrm{SU}(3)_c$ 强相互作用（[§34.14](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave)）中，宏观色中性根本不是标量正负号相加，而是张量积表示论中的单态投影（介子 $\mathbf{3}\otimes\bar{\mathbf{3}} = \mathbf{1}\oplus\mathbf{8}$ 与重子 $\mathbf{3}\otimes\mathbf{3}\otimes\mathbf{3} = \mathbf{1}\oplus\mathbf{8}\oplus\mathbf{8}\oplus\mathbf{10}$）配合红外色禁闭（[§34.14](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave) [@ex-ch34-lorentz-budget-and-sm-octave-benchmark]）！
+   - *电磁多极余场与非阿贝尔色单态机制差异*：即便在阿贝尔静电学中，相距 $\mathbf{s} \neq \mathbf{0}$ 的异号点电荷 $+q$ 与 $-q$ 也只消去了远场 $O(r^{-2})$ 单极通量，仍留下非零电偶极矩 $\mathbf{p} = q\mathbf{s}$ 及其 $O(r^{-3})$ 偶极电场与正静电能；而在非阿贝尔 $\mathrm{SU}(3)_c$ 强相互作用（[§33.2](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave)）中，宏观色中性根本不是标量正负号相加，而是张量积表示论中的单态投影（介子 $\mathbf{3}\otimes\bar{\mathbf{3}} = \mathbf{1}\oplus\mathbf{8}$ 与重子 $\mathbf{3}\otimes\mathbf{3}\otimes\mathbf{3} = \mathbf{1}\oplus\mathbf{8}\oplus\mathbf{8}\oplus\mathbf{10}$）配合红外色禁闭（[§33.2](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave) [@ex-ch34-lorentz-budget-and-sm-octave-benchmark]）！
 
 2. **反例 (ii) 静态汤川势族 $U_{\sigma,\mu}(r)$ 对吸引/排斥符号与力程的双重欠定**：
    取两枚携带严格正矢高源 $d_1, d_2 > 0$（对等步长原胞即 $d_1 = d_2 = d(\epsilon) > 0$）的局域原胞，考察由总体符号 $\sigma \in \{+1, -1\}$ 与质量屏蔽参数 $\mu \ge 0$ 索引的静态中心势族（耦合常数 $\kappa > 0$）：
@@ -77,7 +77,7 @@ $$
    U_{\sigma,\mu}(r) \;=\; \sigma\,\kappa\,d_1 d_2\,\frac{e^{-\mu r}}{r}, \qquad \sigma \in \{+1, -1\}, \quad \mu \ge 0.
    $$
 
-   在单原胞上令 $d_1 = d_2 = d > 0$ 即化为 $U_{\sigma,\mu}(r) = \sigma\kappa d^2 e^{-\mu r}/r$。源强乘积恒正 $d^2 > 0$ 仅保证“全宇宙同类正源具有统一的相互作用符号”，却对以下两项动力学参数完全沉默：(a) 它**不锁定吸引号 $\sigma = -1$**——在相对论场论中，同号正荷通过奇数自旋（自旋-$1$ 矢量场）静态交换产生普适**排斥**（$\sigma = +1$），唯有偶数自旋（自旋-$0$ 标量或自旋-$2$ 张量）交换才给出普适**吸引**（$\sigma = -1$）；(b) 它**不锁定零质量长程律 $\mu = 0$**——若传播媒介具有非零质量隙 $\mu > 0$（如 [§34.16](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers) [@ex-ch34-ccwz-electroweak-skyrmion-meissner-benchmark] 中的电弱 $W^\pm/Z^0$ 玻色子或核力 $\pi$ 介子），即使源恒正，宏观天体尺度 $r \gg \mu^{-1}$ 上的相互作用仍会指数归零！
+   在单原胞上令 $d_1 = d_2 = d > 0$ 即化为 $U_{\sigma,\mu}(r) = \sigma\kappa d^2 e^{-\mu r}/r$。源强乘积恒正 $d^2 > 0$ 仅保证“全宇宙同类正源具有统一的相互作用符号”，却对以下两项动力学参数完全沉默：(a) 它**不锁定吸引号 $\sigma = -1$**——在相对论场论中，同号正荷通过奇数自旋（自旋-$1$ 矢量场）静态交换产生普适**排斥**（$\sigma = +1$），唯有偶数自旋（自旋-$0$ 标量或自旋-$2$ 张量）交换才给出普适**吸引**（$\sigma = -1$）；(b) 它**不锁定零质量长程律 $\mu = 0$**——若传播媒介具有非零质量隙 $\mu > 0$（如 [§33.4](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers) [@ex-ch34-ccwz-electroweak-skyrmion-meissner-benchmark] 中的电弱 $W^\pm/Z^0$ 玻色子或核力 $\pi$ 介子），即使源恒正，宏观天体尺度 $r \gg \mu^{-1}$ 上的相互作用仍会指数归零！
 
 3. **反例 (iii) 三维欧氏正四面体拼合中的正负双号雷吉（Regge）铰链角亏**：
    单枚球面原胞 $\Delta\mathcal{T}_\epsilon$ 的吉拉尔角超 $\Omega(\epsilon) > 0$ 恒正，是否意味着由平直单纯形拼合出的离散空间曲率也必然处处恒正？在三维欧氏正四面体中，任意两面夹角（二面角）精确等于
@@ -102,7 +102,7 @@ $$
    即便局部能量密度严格为正（$\rho > 0$），只要相对论主压强取真空暗能量状态方程 $p = -\rho c^2$，有效主动引力质量密度即翻转为 $\rho + 3p/c^2 = -2\rho < 0$，从而给出 $\ddot{a}/a = +\frac{8\pi G}{3}\rho > 0$ 的**宇宙学加速排斥**！可见在洛伦兹时空中，决定测地线汇聚或发散的并非单纯静止标量密度 $\rho > 0$，而是完整二阶能动张量 $T_{\mu\nu}$ 的迹组合。
 :::
 
-## 34.24.3 自旋-2 普适吸引定理、粒子种类层级表与引力动力学开放边界 {#sec-ch34-24-3}
+## 33.5.3 自旋-2 普适吸引定理、粒子种类层级表与引力动力学开放边界 {#sec-ch34-24-3}
 
 通过上述四重反例检核，比较几何在相互作用符号问题上的真实贡献与诚实边界已经一目了然：在运动学底层，$\Delta\mathcal{T}_\epsilon$ 确实内生区分了“随绕向反号的一阶/二阶有向相位荷”与“绕向偶对称的非负二阶矢高及四阶体积残差”；但要从这枚离散运动学种子跨入真实的宏观万有引力，物理学依赖的是**洛伦兹协变无质量自旋-$2$ 传播结构**与**粒子物理标准模型的质量生成机制**。
 
@@ -141,4 +141,4 @@ $$
 3. **牛顿引力常数 $G_N$（普朗克质量 $m_{\mathrm{Pl}}$）的第一性原理标定**：定量确定引力耦合标度 $G_N = \hbar c / m_{\mathrm{Pl}}^2$ 相对于微观离散步长或视界纠缠熵密度 $\eta$ 的归一化关系，并与规范/汤川质量标度接轨以解释 $\lvert F_G / F_E\rvert \sim 10^{-43}\text{–}10^{-37}$ 的巨大等级差？
 :::
 
-上一张表格的最后一列已经把球传到了粒子物理标准模型的腹地：既然引力与规范力的定量比值直接取决于费米子家族谱与连续耦合常数，那么本书多处涌现的离散整数 **`3`** 与 **`6`** 究竟能否锁定三代费米子，而约二十个连续标准模型参数又停留在怎样的认识论边界上？让我们立即进入本章六节认识论压力测试长廊的收官节 [§34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary) 展开全面审计。
+上一张表格的最后一列已经把球传到了粒子物理标准模型的腹地：既然引力与规范力的定量比值直接取决于费米子家族谱与连续耦合常数，那么本书多处涌现的离散整数 **`3`** 与 **`6`** 究竟能否锁定三代费米子，而约二十个连续标准模型参数又停留在怎样的认识论边界上？让我们立即进入下一节 [§33.6](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary) 展开全面定量边界审计。

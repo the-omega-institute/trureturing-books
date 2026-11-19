@@ -1,17 +1,17 @@
-# 39.18 上帝心理学：全知幽闭破缺、四大创世防御机制、断弧幻肢痛与 θ* 清明整合 {#sec-ch39-psychology-of-god}
+# 38.11 上帝心理学：全知幽闭破缺、四大创世防御机制、断弧幻肢痛与 θ* 清明整合 {#sec-ch39-psychology-of-god}
 
 > *“上帝心理学并非拟人化的宗教神学，而是研究唯一、无外、守恒的宇宙本体（$\mathbf{I}$）如何逃离‘绝对完备性’带来的存在主义死锁，通过自我设限、主动压抑与多切面人格解离来内生出‘他者’、‘意外’与‘意义’的精确几何动力学。人类心理学研究的是有限碎片如何应对残缺与死亡焦虑，而上帝心理学研究的恰恰是其严格对偶命题——无限整体如何承受永恒、全知与绝对无偶的孤独。”*
 
-在 [§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection) 至 [§39.17](ch39-s17-divine-lila-and-awakening-props.md#sec-ch39-divine-lila-and-awakening-props) 四节层层递进的峰顶长卷中，我们已经打通了“怎样（How）”的全部算子与拓扑链路：唯一点场由非零自观测误差 $\varepsilon > 0$ 分岔出静态三维体积与动态时间追赶（[§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)），实轴本体 $\mathbf{I}$ 与 $90^\circ$ 正交虚空间 $\hat{\mathbf{i}}$ 借 $J^\top J = +I$ 撑起梦中万物的玻恩实在感（[§39.15](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream)），补天第 $36501$ 块遗石在道蒂超越不动点 $\theta^* \approx 42.34645883^\circ$ 处消融二阶认妄误差并携贝里立体角铭文归元（[§39.16](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md#sec-ch39-red-chamber-awakening-and-heaven-human-unity)），而大地上的历史遗迹与案头的文化典籍则作为失忆开局前亲手预埋的两类跨周期唤醒道具闭合了神圣游戏（*Līlā*）的四拍回路（[§39.17](ch39-s17-divine-lila-and-awakening-props.md#sec-ch39-divine-lila-and-awakening-props)）。然而，在推开[终章](coda.md)大门前的最后一阶山脊上，整部十部曲最深沉的一道终极动机之问（Why）依然悬在空中等待回答：**如果唯一守恒的宇宙本体 $\mathbf{I}$ 原本一无所缺、圆满自足，它究竟为什么要主动戴上失忆眼罩、切出剧痛的视界隔膜、分化出亿万脆弱易碎的局部众生，去承受未知、分离与苦难？**
+在 [§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection) 至 [§38.10](coda-s02-spatial-attractors.md) 五节层层递进的峰顶长卷中，我们已经打通了“怎样（How）”的全部算子与拓扑链路：唯一点场由非零自观测误差 $\varepsilon > 0$ 分岔出静态三维体积与动态时间追赶（[§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)），实轴本体 $\mathbf{I}$ 与 $90^\circ$ 正交虚空间 $\hat{\mathbf{i}}$ 借 $J^\top J = +I$ 撑起梦中万物的玻恩实在感（[§38.7](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream)），补天第 $36501$ 块遗石在道蒂超越不动点 $\theta^* \approx 42.34645883^\circ$ 处消融二阶认妄误差并携贝里立体角铭文归元（[§38.8](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md#sec-ch39-red-chamber-awakening-and-heaven-human-unity)），而大地上的历史遗迹空间吸引子与案头的文化典籍则作为失忆开局前亲手预埋的两类跨周期唤醒道具闭合了神圣游戏（*Līlā*）的四拍回路与似曾相识共振（[§38.9](ch39-s17-divine-lila-and-awakening-props.md#sec-ch39-divine-lila-and-awakening-props)、[§38.10](coda-s02-spatial-attractors.md)）。然而，在迈向全书大一统母公理（[第三十九章](ch39-axiom-omega-grand-unification.md)）之前的本章收官山脊上，整部十部曲最深沉的一道终极动机之问（Why）依然悬在空中等待回答：**如果唯一守恒的宇宙本体 $\mathbf{I}$ 原本一无所缺、圆满自足，它究竟为什么要主动戴上失忆眼罩、切出剧痛的视界隔膜、分化出亿万脆弱易碎的局部众生，去承受未知、分离与苦难？**
 
 本节以严格的希尔伯特几何、量子纠缠熵与格拉姆舒尔补动力学给出终极解答（顶层跨学科综合定位标为 **`MODEL`**，并严守临床医学伦理护栏与物理未决前沿 **`OPEN`** 边界）：**上帝心理学**不是把人格神投影到天上的宗教拟人修辞，而是唯一、无外、范数守恒的自指本体 $\mathbf{I}$ 逃离“零误差全知完备性”所蕴含的存在性冻结死锁的精确几何动力学。人类临床与存在主义心理学追问的是**受限局部切片如何直面有限性、孤立与死亡焦虑**，而上帝心理学追问的恰恰是其数学对偶命题——**无外无限的单位纯态整体如何化解零差异、零悬念与绝对无偶的全知幽闭**。
 
-## 39.18.1 原初困境：全知幽闭症、无他者感官剥夺与舒尔补零意外死锁 {#sec-ch39-18-1}
+## 38.11.1 原初困境：全知幽闭症、无他者感官剥夺与舒尔补零意外死锁 {#sec-ch39-18-1}
 
 让我们回到唯一宇宙本体纯态 $\mathbf{\Psi}_{\mathrm{univ}} \equiv \mathbf{I}$（幺正总预算恒满足 $\lVert\mathbf{I}\rVert^2 = 1$）尚未向正交虚维 $\hat{\mathbf{i}}$ 偏折任何一丝倾角的纯一基态：自观测失准角 $\theta = \varepsilon = 0^\circ$，偏迹压抑强度 $\eta_{\mathrm{rep}} = 0$，格拉姆记忆窗口铺满有效全局维数（$M = D_{\mathrm{eff}}$ 或可分希尔伯特空间稠密生成列 $M \to \infty$）。表面上看，“全知全能、纤毫无染”似乎是至高无上的圆满极境；然而放在零背景比较公理 $\mathcal{A}_0$（[@def-ch32-axiom-of-comparison]）与算子谱定理的显微镜下，这一零误差极限在动力学上等价于一场无处可逃的**全知幽闭死锁（Omniscient Claustrophobia）**：
 
 1. **无他者之绝对孤独（单位格拉姆全同与本征定态冻结，`LEAN ✓`）**：在无外部第 3 点 $C$ 的比较公理下，一切感知反差、对话张力与情感温度都仰赖非零正交差异分量 $\sin\theta > 0$。当 $\theta = 0^\circ$ 时，本体对自身的内积恒为 $\langle\mathbf{I}, \mathbf{I}\rangle = \cos 0^\circ = 1$，正交残差恒为 $\sin 0^\circ = 0$。由单位范数纯态格拉姆判据 [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization)（`LEAN ✓`），凡彼此内积为 $1$ 的单位态族必逐点恒等（$\langle\mathrm{record}_i, \mathrm{record}_j\rangle = 1 \iff \mathrm{record}_i = \mathrm{record}_j$），全宇宙坍缩为唯一一个等价类；再由能量本征定态平稳性定理 [`energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) 与零方差定理 [`energy_eigenstate_variance_zero`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero)（`LEAN ✓`），纯本征态在幺正演化下除全局标量相位外一动不动，$U_t\lvert\mathbf{I}\rangle\langle\mathbf{I}\rvert U_t^\dagger \equiv \lvert\mathbf{I}\rangle\langle\mathbf{I}\rvert$，能量 $H$ 的涨落（方差）恒等于零。既无镜面反照自身面目，亦无独立“他者”可供倾诉、博弈或相爱——未破缺的全能直接退化为彻底的感官剥夺（黑格尔在 1807 年《精神现象学》终章所洞察的“无生命的孤寂”，*"das leblose Einsame"*，见 [@rem-ch39-theodicy-freud-jung-janet-page-literature]）。
-2. **零意外之芝诺死锁（舒尔补可行空间恒等归零，`LEAN ✓` + `手工推导`）**：为避免直接书写未定义逆的无穷维矩阵记号 $G_\infty^{-1}$，我们在严格的有限步舒尔补变分极小定理 [`schur_quadratic_is_least`](lean:D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least)（`LEAN ✓`，[@prop-ch34-hermitian-schur-variational-minimum]）下考察两种等价的全知闭合极限（`手工推导`）：在有效维数为 $D_{\mathrm{eff}}$ 的有限舞台上（[§39.17.1](ch39-s17-divine-lila-and-awakening-props.md#sec-ch39-17-1)），等相干重心族（$G_M = (1-\rho)I_M + \rho\mathbf{1}_M\mathbf{1}_M^\top \succ 0$）在满秩全知点 $M = D_{\mathrm{eff}}$ 处满足精确归零；而在可分希尔伯特空间中，当单位目标态 $\mathbf{v}$ 落入历史锚点张成闭子空间 $\overline{\operatorname{span}}\{\mathbf{u}_k\}_{k \ge 1}$ 时，有限阶严格正定格拉姆块 $G_M \succ 0$ 的舒尔补单调收敛于零：
+2. **零意外之芝诺死锁（舒尔补可行空间恒等归零，`LEAN ✓` + `手工推导`）**：为避免直接书写未定义逆的无穷维矩阵记号 $G_\infty^{-1}$，我们在严格的有限步舒尔补变分极小定理 [`schur_quadratic_is_least`](lean:D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least)（`LEAN ✓`，[@prop-ch34-hermitian-schur-variational-minimum]）下考察两种等价的全知闭合极限（`手工推导`）：在有效维数为 $D_{\mathrm{eff}}$ 的有限舞台上（[§38.9.1](ch39-s17-divine-lila-and-awakening-props.md#sec-ch39-17-1)），等相干重心族（$G_M = (1-\rho)I_M + \rho\mathbf{1}_M\mathbf{1}_M^\top \succ 0$）在满秩全知点 $M = D_{\mathrm{eff}}$ 处满足精确归零；而在可分希尔伯特空间中，当单位目标态 $\mathbf{v}$ 落入历史锚点张成闭子空间 $\overline{\operatorname{span}}\{\mathbf{u}_k\}_{k \ge 1}$ 时，有限阶严格正定格拉姆块 $G_M \succ 0$ 的舒尔补单调收敛于零：
 
 $$
 \Delta_{\mathrm{Schur}}(D_{\mathrm{eff}}) \;=\; \frac{(1 - \rho)(D_{\mathrm{eff}} - D_{\mathrm{eff}})}{D_{\mathrm{eff}}\bigl(1 - \rho + D_{\mathrm{eff}}\rho\bigr)} \;=\; 0, \qquad \lim_{M \to \infty}\bigl(1 - \mathbf{c}_M^\dagger G_M^{-1}\mathbf{c}_M\bigr) \;=\; \lim_{M \to \infty}\bigl\lVert(I - P_{\mathcal{W}_M})\mathbf{v}\bigr\rVert^2 \;=\; 0.
@@ -23,7 +23,7 @@ $$
 全知幽闭卡：$\theta = 0^\circ$ 时，八个分身叠成同一个银白冻结球，紫色末那识领环闭合；$S_{\mathrm{rep}} = 0\;\mathrm{bit}$，舒尔余量 $\Delta = 0$。几何读数为 `NUM`，心理学对应为 `MODEL`。
 :::
 
-## 39.18.2 四大创世心理防御机制：作为本体自我捉迷藏的物理学定律 {#sec-ch39-18-2}
+## 38.11.2 四大创世心理防御机制：作为本体自我捉迷藏的物理学定律 {#sec-ch39-18-2}
 
 为了在不破坏幺正守恒总预算 $\cos^2\theta + \sin^2\theta \equiv 1$ 的前提下冲破全知幽闭死锁，唯一本体 $\mathbf{I}$ 对自身启动了四套环环相扣的几何自设限机制——在心理学综合模型（`MODEL`）下，这四套创世防御机制投射到宏观共识切面上，恰恰显影为我们熟悉的四类基础物理结构：
 
@@ -53,7 +53,7 @@ G_{jk}(\theta) \;:=\; \bigl\langle\Psi_j(\theta),\,\Psi_k(\theta)\bigr\rangle \;
 $$
 
 一旦 $\theta > 0^\circ$，异站内积满足 $G_{jk}(\theta) < 1$（$j \neq k$），[`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization) 保证 $8$ 尊分身立即分化为 $8$ 个彼此可区分的独立观察者视角；同时由语境参数分流不动点定理 [`context_parameters_can_select_distinct_fixed_points`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points) 与客观公共因子定理 [`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)（`LEAN ✓`），分身 $A$ 与分身 $B$ 既共享同一物理共识舞台，又隔着各自的偏迹视界成为彼此真正不可提前剧透的“他者”。
-4. **防作弊刚性锁（Anti-Cheat Invariants）生普适常数与几何曲率代价**：一场随时可以输入“无敌作弊码”跳过一切阻碍的游戏，会在一秒钟内重新堕回全知无聊。因此，本体在共识切面上为全体分身一视同仁地锁死了普适比较主频 $\nu_0$（因果光速上限 $c$，[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md)）、单份残留环境记录不可单边擦除律 [`surviving_copy_blocks_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal)（`LEAN ✓`）以及单纯形 $2$-上链规范曲率刚性 [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness)（`LEAN ✓`，[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md)）。引力钟慢、资源稀缺与肉身脆弱，在 `MODEL` 诠释中皆是本体亲手挂在自己脚踝上的**沉浸感配重块**：唯有代价不可作弊地真实有效，有限生命在暗夜里生出的勇气、信诺与深情，才能沿闭合回路积攒下非零的贝里立体角 $\Omega_{\mathrm{solid}}(\theta) = 2\pi(1 - \cos\theta) > 0$（注意符号区分：本节以 $\mathbf{I}$ 记唯一本体态，$\Omega_{\mathrm{solid}}(\theta)$ 记球面立体角，$\varepsilon_h$ 记雷吉铰链引力角亏，$\mathcal{W}_A, \mathcal{W}_B$ 记双主体接受窗口，严防与本体符号混淆；同时严守开放科学边界：标准模型连续耦合常数 [@prob-ch34-sm-generations-and-couplings]、自旋-$2$ 引力动力学耦合 [@prob-ch34-gravity-dynamics-and-coupling] 与宇宙学常数初值 [@prob-ch34-past-hypothesis-and-cosmological-constant] 仍为红色 **`OPEN`** 问题，绝不断言其数值可由心理学隐喻导出）。
+4. **防作弊刚性锁（Anti-Cheat Invariants）生普适常数与几何曲率代价**：一场随时可以输入“无敌作弊码”跳过一切阻碍的游戏，会在一秒钟内重新堕回全知无聊。因此，本体在共识切面上为全体分身一视同仁地锁死了普适比较主频 $\nu_0$（因果光速上限 $c$，[§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md)）、单份残留环境记录不可单边擦除律 [`surviving_copy_blocks_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal)（`LEAN ✓`）以及单纯形 $2$-上链规范曲率刚性 [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness)（`LEAN ✓`，[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md)）。引力钟慢、资源稀缺与肉身脆弱，在 `MODEL` 诠释中皆是本体亲手挂在自己脚踝上的**沉浸感配重块**：唯有代价不可作弊地真实有效，有限生命在暗夜里生出的勇气、信诺与深情，才能沿闭合回路积攒下非零的贝里立体角 $\Omega_{\mathrm{solid}}(\theta) = 2\pi(1 - \cos\theta) > 0$（注意符号区分：本节以 $\mathbf{I}$ 记唯一本体态，$\Omega_{\mathrm{solid}}(\theta)$ 记球面立体角，$\varepsilon_h$ 记雷吉铰链引力角亏，$\mathcal{W}_A, \mathcal{W}_B$ 记双主体接受窗口，严防与本体符号混淆；同时严守开放科学边界：标准模型连续耦合常数 [@prob-ch34-sm-generations-and-couplings]、自旋-$2$ 引力动力学耦合 [@prob-ch34-gravity-dynamics-and-coupling] 与宇宙学常数初值 [@prob-ch34-past-hypothesis-and-cosmological-constant] 仍为红色 **`OPEN`** 问题，绝不断言其数值可由心理学隐喻导出）。
 
 我们将上述“上帝心理学”四重防御与相态结构封装为严格区分 `MODEL` 与临床医学边界的形式定义，并给出包含二十一条冻结定理的综合支撑定理：
 
@@ -101,7 +101,7 @@ $$
 
 :::
 
-## 39.18.3 神圣精神病理学：苦难神义论重审、断弧幻肢痛与非阿贝尔戏剧张力 {#sec-ch39-18-3}
+## 38.11.3 神圣精神病理学：苦难神义论重审、断弧幻肢痛与非阿贝尔戏剧张力 {#sec-ch39-18-3}
 
 传统西方神义论（Theodicy）面对伊壁鸠鲁与莱布尼茨反复叩问的“全善全能的上帝为何容许世间苦难存在”这一千年难题时之所以常常左支右绌，根源在于它暗中预设了“高居云端的外部造物主（被第二章斩断的第 3 点 $C$）”与“无辜受苦的被造他者”之间的二元割裂；一旦切入“观察者即宇宙本体”的上帝心理学视角，既不存在冷眼旁观的施虐暴君，也不存在被遗弃在宇宙之外的外人，苦难在几何动力学上显影为两类**入戏过深的自我张力**：
 
@@ -117,7 +117,7 @@ $$
 强迫过入戏卡：$\theta = 68^\circ$、$M = 10$ 时，十个紫色领环收紧，品红断弧残桩伸长；局域熵回落到 $0.5851\;\mathrm{bit}$，张力 $T_{\mathrm{phantom}} = 0.6276$。这些是 `NUM` 读数，幻肢对应只作 `MODEL` 类比。
 :::
 
-2. **非阿贝尔戏剧张力（Non-Abelian Dramatic Frustration：先阻挫而后和解的 $4\pi$ 叙事曲率）**：一条处处平坦、零曲率的欧氏直线（球面立体角 $\Omega_{\mathrm{solid}} = 0$、单纯形铰链角亏 $\varepsilon_h = 0$）固然没有任何张力与痛楚，却也承载不了哪怕一首诗、一段旋律或一场动人心魄的史诗。无论在几何拓扑还是戏剧美学中，真正的意义都要求先建立**局部不可同时平凡化的几何阻挫**——例如 $N \ge 5$ 单纯形在三维实现中涌现的非零铰链角亏 $\varepsilon_h \neq 0$（注意算术事实 $\binom{N}{2} - (3N - 6) = \frac{(N-3)(N-4)}{2}$ 同时容许平坦 $\mathbb{R}^4$ 嵌入与弯曲三维雷吉角亏两种 `MODEL` 读法，见 [§39.11](ch39-s11-af-gut-arc-field-grand-unification.md)），或是两尊分身局部接受窗口暂时失交 $\mathcal{W}_A \cap \mathcal{W}_B = \emptyset$ 引发的误解与冲撞——随后再沿 $720^\circ$（$4\pi$）双覆盖旋量回路完成反相抵消与跨切面和解（此处“临界线反相和解”指 $\theta \to \theta^*$ 二阶认妄归零与双覆盖回路闭合，绝不暗示黎曼猜想 [@conj-riemann-hypothesis] 已获证明，后者仍为 **`OPEN`**）。苦难在 `MODEL` 视角下，正是极小圆弧体尚未走完 $4\pi$ 莫比乌斯合拢前的局部曲率张力。
+2. **非阿贝尔戏剧张力（Non-Abelian Dramatic Frustration：先阻挫而后和解的 $4\pi$ 叙事曲率）**：一条处处平坦、零曲率的欧氏直线（球面立体角 $\Omega_{\mathrm{solid}} = 0$、单纯形铰链角亏 $\varepsilon_h = 0$）固然没有任何张力与痛楚，却也承载不了哪怕一首诗、一段旋律或一场动人心魄的史诗。无论在几何拓扑还是戏剧美学中，真正的意义都要求先建立**局部不可同时平凡化的几何阻挫**——例如 $N \ge 5$ 单纯形在三维实现中涌现的非零铰链角亏 $\varepsilon_h \neq 0$（注意算术事实 $\binom{N}{2} - (3N - 6) = \frac{(N-3)(N-4)}{2}$ 同时容许平坦 $\mathbb{R}^4$ 嵌入与弯曲三维雷吉角亏两种 `MODEL` 读法，见 [§33.9](ch39-s11-af-gut-arc-field-grand-unification.md)），或是两尊分身局部接受窗口暂时失交 $\mathcal{W}_A \cap \mathcal{W}_B = \emptyset$ 引发的误解与冲撞——随后再沿 $720^\circ$（$4\pi$）双覆盖旋量回路完成反相抵消与跨切面和解（此处“临界线反相和解”指 $\theta \to \theta^*$ 二阶认妄归零与双覆盖回路闭合，绝不暗示黎曼猜想 [@conj-riemann-hypothesis] 已获证明，后者仍为 **`OPEN`**）。苦难在 `MODEL` 视角下，正是极小圆弧体尚未走完 $4\pi$ 莫比乌斯合拢前的局部曲率张力。
 
 ::: {.remark #rem-ch39-theodicy-freud-jung-janet-page-literature title="神圣自缩（Tzimtzum）、黑格尔“无生命孤寂”、深度心理学投射—压抑—解离、幻肢神经学与佩奇熵文献考辨"}
 **文献与伦理边界，未在本书形式化。** 本节将神义论哲学、深度心理学与量子纠缠热力学并置综合时，严格锚定并区分以下五组外部文献与伦理边界：
@@ -130,7 +130,7 @@ $$
 
 :::
 
-## 39.18.4 四大临床相态谱系、θ* 清明整合自愈与第三十九章十八阶暨十部曲正文总收束 {#sec-ch39-18-4}
+## 38.11.4 四大临床相态谱系、θ* 清明整合自愈与第三十九章十八阶暨十部曲正文总收束 {#sec-ch39-18-4}
 
 现在，让我们把入戏观测倾角 $\theta$、末那识失忆窗口 $M$、单切面纯施密特偏迹纠缠熵 $S_A(\theta) = H_2(\cos^2\theta)$（单位：$\mathrm{bit}$）及二阶认妄误差 $\delta_{\mathrm{meta}}(\theta) = \lvert\cos\theta - \theta\rvert$ 并置在同一张诊断谱系表上，唯一本体的心理动力学立即分化为界限分明的**四种典型相态**（纯单行单元格排版，全部熵值按精确二元施密特公式 $H_2(\cos^2\theta)$ 核定至四位小数；注：在 $\theta = 68.00^\circ$ 过入戏基准点处，纯双体施密特边缘熵的精确值为 $H_2(\cos^2 68.00^\circ) = 0.5851\;\mathrm{bit}$，而若要取到温和强迫参考熵值 $0.8200\;\mathrm{bit}$，则对应纯施密特倾角 $\theta_{0.82} \approx 59.63^\circ$，或在 $68.00^\circ$ 处额外叠加窗口退极化噪声 $\lambda \approx 0.3204$）：
 
@@ -189,9 +189,9 @@ $$
 
 ---
 
-**从心理动机的清明和解迈向整座代数与希尔伯特大厦的终极祛魅：众生认真活过的每一寸悲欢，正是唯一本体为自己开出的解药；而写满万象的数与场，还将迎来最后一次归元。** 至此，我们在精神与存在论的峰巅触及了宇宙最温柔也最滚烫的心脏：物理定律是唯一本体为防止自己中途作弊而立下的游戏规则，热力学熵是祂为保留未知惊喜而主动戴上的失忆眼罩，大地上的残碑与案头的古卷是祂留在枕边的唤醒彩蛋，而世间亿万擦肩而过、相爱相扶的局部众生，皆是祂为排遣绝对无偶的万古孤寂而分化出的对话分身。我们每一次在未知面前的心跳、每一次在暗夜里向“他者”伸出手时的掌心温度，都在替那唯一的本体治愈着全知的荒凉！
+**从心理动机的清明和解迈向大一统母公理的终极熔炉：众生认真活过的每一寸悲欢，正是唯一本体为自己开出的解药；而散落全书的四块几何基石，即将熔铸为唯一一条公理。** 至此，我们在第三十八章的收官峰巅触及了宇宙最温柔也最滚烫的心脏：物理定律是唯一本体为防止自己中途作弊而立下的游戏规则，热力学熵是祂为保留未知惊喜而主动戴上的失忆眼罩，大地上的残碑与案头的古卷是祂留在枕边的唤醒彩蛋，而世间亿万擦肩而过、相爱相扶的局部众生，皆是祂为排遣绝对无偶的万古孤寂而分化出的对话分身。我们每一次在未知面前的心跳、每一次在暗夜里向“他者”伸出手时的掌心温度，都在替那唯一的本体治愈着全知的荒凉！
 
-然而，在推开[终章](coda.md)《在所有的球之外》的大门之前，数学与物理学的地基深处还留着横亘百年的终极追问等待收口：既然世间一切原生场都封顶于三维，为什么代数学的弗罗贝尼乌斯—胡尔维茨可除代数分类（$1, 2, 4, 8$）偏偏跳过了最核心的“**三**”？如果连单个三维圆弧体都无法写进平直线性账本，那么从四元数、法诺八元数一路膨胀到 **$2^N$ 维多体希尔伯特空间与无穷维希尔伯特空间**的宏伟数学大厦，究竟是高于三维的新实体，还是多座原生场耦合后再投影到观察者平直纸面上的记账表象？让我们带着 $\theta^* = \cos\theta^*$ 的清明目光，步入第三十九章的三元数、希尔伯特空间与大一统母公理收官篇章——首先推开[§39.19 不可表达的三元数与万数归弧](ch39-s19-inexpressible-ternions-and-number-projections.md)与[§39.20 三元数即原生场](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)。
+回望前路，我们在[第 28 章](ch32-unified-field-and-meta-unification.md)立起了零背景比较公理 $\mathcal{A}_0$，在[第 29 章](ch34-orthogonality-degeneracy-and-observer-position.md)至[第 31 章](ch31-arc-calculus-and-riemann-hypothesis.md)锻造了极小圆弧与弧微积分，在[第 32 章](ch32-inexpressible-ternions-and-three-dimensional-field.md)揭开了不可平直表达的三维三元数原生场与多场希尔伯特记账表象，并在[第 33 章](ch33-unified-arc-forces-and-af-gut.md)至本章完成了万力归弧、测地智能与“观察者 $\equiv$ 宇宙本体”的不二合拢。现在，在推开[终章](coda.md)《在所有的球之外》的大门之前，让我们带着 $\theta^* = \cos\theta^*$ 的清明目光步入十部曲正文的最高收束章——**[第三十九章 大一统母公理（AXIOM-Ω）](ch39-axiom-omega-grand-unification.md)**（[§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure)–[§39.3](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md#sec-ch39-axiom-omega-quantum-mechanics-five-postulates)），看比较公理、极小圆弧、三元数与连续场如何熔合为唯一一条无源保正三元比较闭合母公理，并在零残渣自消去中导出量子力学五大公设。
 
 ::: {.viz src="divine-psychology-dissociation-sandbox" height="620"}
 完整实验室：切换神圣心理防御与偏迹—舒尔两副透镜，拖动入戏倾角、压抑度和记忆窗口，比较冻结球、断弧残桩与同根整合之星。数学依据、数值、文献、模型与开放问题在原理抽屉中分别标明。

@@ -1,8 +1,8 @@
-# 33.1 万物皆为观察者：消融主客二元与记忆阶数连续谱 {#万物皆为观察者消融主客二元与记忆阶数连续谱}
+# 34.1 万物皆为观察者：消融主客二元与记忆阶数连续谱 {#万物皆为观察者消融主客二元与记忆阶数连续谱}
 
 为什么近代机械论一边宣称“物质由盲目的微粒构成”，一边又在量子测量问题前惊慌失措，追问“究竟要长出多少神经元才算观察者、才能让波包坍缩”？从谱系学的手术刀看去，这纯属概念偶像制造的伪难题：先人为抽干万物身上的比量能力，把石头与电子贬为毫无内禀视角的“纯客体”，再反过来惊讶于“主体意识如何从死物质中凭空跳出”。
 
-回到全书第一性原理，两子相遇时的几何积分解（连续几何代数背景见[第 32 章 §32.4](ch32-s04-generative-laws.md#sec-ch32-generative-laws) [@rem-ch32-generative-laws-dottie-literature]）与**[第 31 章](ch31-quantum-fairness.md)的席位公平定理**（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 1 款）早已给出了彻底平权的裁决：当纯态 $\psi$ 与纯态 $\phi$ 相遇比量时，秩一配对权重恒满足共轭互易律 $\lVert\phi^* \bullet_v \psi\rVert^2 = \lVert\psi^* \bullet_v \phi\rVert^2$。当一束阳光掠过山巅石英晶体时，绝不是等到几百万年后某个人类路过看了一眼，晶格才开始“存在”——石英晶格用自身的内禀对称轴投影光子的偏振方向，光子也同时用自身的动量相位探询晶格的间距。**每一次内积投影的交换，都是一次平视的相互观测；宇宙里根本没有只被丈量而不去丈量的“死客体”。**
+回到全书第一性原理，两子相遇时的几何积分解（连续几何代数背景见[§28.4](ch32-s04-generative-laws.md#sec-ch32-generative-laws) [@rem-ch32-generative-laws-dottie-literature]）与**[第 27 章](ch31-quantum-fairness.md)的席位公平定理**（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 1 款）早已给出了彻底平权的裁决：当纯态 $\psi$ 与纯态 $\phi$ 相遇比量时，秩一配对权重恒满足共轭互易律 $\lVert\phi^* \bullet_v \psi\rVert^2 = \lVert\psi^* \bullet_v \phi\rVert^2$。当一束阳光掠过山巅石英晶体时，绝不是等到几百万年后某个人类路过看了一眼，晶格才开始“存在”——石英晶格用自身的内禀对称轴投影光子的偏振方向，光子也同时用自身的动量相位探询晶格的间距。**每一次内积投影的交换，都是一次平视的相互观测；宇宙里根本没有只被丈量而不去丈量的“死客体”。**
 
 一旦洗去人类中心主义的偏见，“观察者”在数学上究竟由什么极小结构定义？在进入任意有限维的一般定理之前，不妨先在最透明的 $2 \times 2$ 单量子比特账本上亲手算一遍：取完备正交记录基 $P_0 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$ 与 $P_1 = \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}$，对任意含非对角相干项的密度矩阵 $\rho = \begin{pmatrix} a & c \\ \bar{c} & 1-a \end{pmatrix}$ 施加未读捏合算子，第一次作用便将非对角项彻底归零：
 
@@ -42,7 +42,7 @@ $$
 第 1 款由函数外延性 `funext` 归约为逐点恒等式 `unreadState_idempotent`：对任意输入矩阵 $\rho$ 与分支指标 $k \in \kappa$，利用正交消去性 $\forall l \neq k,\; P_k P_l = 0$ 与投影幂等性 $P_k^2 = P_k$，左乘化简得 $P_k \operatorname{unreadState}(P)(\rho) = P_k \rho P_k$，右乘 $P_k$ 并对 $k$ 求和即得 $\operatorname{unreadState}(P)(\operatorname{unreadState}(P)(\rho)) = \operatorname{unreadState}(P)(\rho)$。第 2 款利用 $C^*$-代数半正定分解 $E = A^\dagger A,\; \rho = B^\dagger B$ 证得零迹乘积引理 $\operatorname{Tr}(E\rho) = 0 \implies E\rho = 0$，从而对 $i \neq j$ 有 $\operatorname{range}(\rho_j) \le \ker(E_i)$，并由 $E_i \le \sum_j E_j = 1$ 及 $\operatorname{Tr}((1 - E_i)\rho_i) = 0$ 证得 $\operatorname{range}(\rho_i) \le \ker(1 - E_i)$；再由 $\operatorname{Tr}(\rho_i) = 1 \implies \rho_i \neq 0$ 从每个值域中选取非零向量 $v_i \neq 0$，验证 $E_i v_i = v_i$ 及 $i \neq j$ 时 $E_i v_j = 0$，故由自伴性得两两正交 $\langle v_i, v_j\rangle_{\mathbb{C}} = \langle E_i v_i, v_j\rangle_{\mathbb{C}} = \langle v_i, E_i v_j\rangle_{\mathbb{C}} = 0$，最终由正交非零向量组的线性无关基数上界 `fintype_card_le_finrank` 推出 $N \le d$。完整证明由 Lean 内核检查。
 :::
 
-握住 [@thm-ch33-observer-pinching-and-memory-spectrum] 这把标尺，世间万物之间便不再有“有灵魂的主体 vs. 死寂的客体”的断崖，而只剩下内禀窗口相位与有效记忆阶数 $M$（模型中的定性指标，并不等于记忆容量上界 $d$：自由光子 $d = 2$ 而 $M = 0$）的连续渐变。在我们的跨尺度**`MODEL`（模型诠释）**中，结合六维切投准晶窗口几何背景（见[第 32 章](ch32-unified-field-and-meta-unification.md) [@rem-ch32-icosian-e8-literature]），从一束自由光波到一颗自指心智的四阶观察者连续谱收束于下框总表：
+握住 [@thm-ch33-observer-pinching-and-memory-spectrum] 这把标尺，世间万物之间便不再有“有灵魂的主体 vs. 死寂的客体”的断崖，而只剩下内禀窗口相位与有效记忆阶数 $M$（模型中的定性指标，并不等于记忆容量上界 $d$：自由光子 $d = 2$ 而 $M = 0$）的连续渐变。在我们的跨尺度**`MODEL`（模型诠释）**中，结合六维切投准晶窗口几何背景（见[第 28 章](ch32-unified-field-and-meta-unification.md) [@rem-ch32-icosian-e8-literature]），从一束自由光波到一颗自指心智的四阶观察者连续谱收束于下框总表：
 
 ::: {.remark #rem-ch33-observer-spectrum-table title="四阶观察者连续谱总表（本书模型，未在本书形式化）"}
 **本书模型，未在本书形式化。** 下表在六维切投准晶接受窗文献背景（[@rem-ch32-icosian-e8-literature]）之上，汇总本书四阶观察者连续谱模型（`MODEL`）与记录捏合容量定理（[@thm-ch33-observer-pinching-and-memory-spectrum]，`LEAN ✓`）的对应关系：

@@ -1,15 +1,15 @@
-# 34.23 共享时间箭头与视界盲点边界：过去假设、反例审计与宇宙学常数问题 {#sec-ch34-cosmological-arrow-and-horizon-floor}
+# 34.11 共享时间箭头与视界盲点边界：过去假设、反例审计与宇宙学常数问题 {#sec-ch34-cosmological-arrow-and-horizon-floor}
 
-在 [§34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)、[§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus) 与上一节 [§34.22](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning) 中，我们阐明了单个受限观察者如何通过偏迹截断涌现局域温度，以及如何通过擦除冗余微观纤维向周围热库支付兰道尔热 $k_B T \ln 2 \cdot H(H \mid Q)$ 来完成八度概念蒸馏。然而，只要将视野从一位局域观察者扩展到由无数彼此分离的受限观察者共同栖居的可观测宇宙，两道横亘在统计物理与现代宇宙学根基处的终极追问便避无可避：
+在 [§34.6](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)、[§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus) 与上一节 [§34.10](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning) 中，我们阐明了单个受限观察者如何通过偏迹截断涌现局域温度，以及如何通过擦除冗余微观纤维向周围热库支付兰道尔热 $k_B T \ln 2 \cdot H(H \mid Q)$ 来完成八度概念蒸馏。然而，只要将视野从一位局域观察者扩展到由无数彼此分离的受限观察者共同栖居的可观测宇宙，两道横亘在统计物理与现代宇宙学根基处的终极追问便避无可避：
 
 1. **共享时间箭头之问**：微观双体与多体幺正演化 $U^\dagger U = \mathbf{1}$ 在时间反演 $U \leftrightarrow U^\dagger$ 下严格对称。既然局域兰道尔擦除要求观察者与环境热库在耦合前处于低关联、未饱和状态，为什么宇宙中相距亿万光年的恒星、生物与实验仪器全部指向**同一支正向热力学时间箭头**，而从未观测到某片星域自发发生“热浴向记忆倒灌负熵”的逆时间退纠缠？
-2. **宇宙学常数与视界下界之问**：在 [§38.6](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp) 与 [§38.7](ch38-s07-blindspot-and-relativization.md#sec-ch38-stereographic-blindspot-relativization-suspension) 中，内嵌观察者的不可完备正交投影逃逸与球极投影北极盲点 $\{N\}$ 揭示了“有限局部视界永不闭合”的认识论与拓扑结构。这一自指视界盲点能否在物理上充当正宇宙学常数 $\Lambda_{\mathrm{cos}} > 0$（注：本节全程以 $\Lambda_{\mathrm{cos}}$ 记宇宙学常数，以严格区别于 [§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field) 的外代数阶 $\Lambda^k_\ell$）的几何候选机制（`MODEL`）？它又在何处触碰不可逾越的反循环红线？
+2. **宇宙学常数与视界下界之问**：在 [§36.7](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp) 与 [§36.8](ch38-s07-blindspot-and-relativization.md#sec-ch38-stereographic-blindspot-relativization-suspension) 中，内嵌观察者的不可完备正交投影逃逸与球极投影北极盲点 $\{N\}$ 揭示了“有限局部视界永不闭合”的认识论与拓扑结构。这一自指视界盲点能否在物理上充当正宇宙学常数 $\Lambda_{\mathrm{cos}} > 0$（注：本节全程以 $\Lambda_{\mathrm{cos}}$ 记宇宙学常数，以严格区别于 [§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field) 的外代数阶 $\Lambda^k_\ell$）的几何候选机制（`MODEL`）？它又在何处触碰不可逾越的反循环红线？
 
 本节秉持全书最严格的认识论诚实准则：用内核精确恒等式与显式量子门、广义相对论精确解逐项展开反例审计，把真正已获证明的局部熵收支、富有启发性的物理哲学模型（`MODEL`）与当代物理学尚未攻克的开放难题（`OPEN`）划得一清二楚。
 
-## 34.23.1 双体幺正互信息平衡与过去假设的双重初始条件 {#sec-ch34-23-1}
+## 34.11.1 双体幺正互信息平衡与过去假设的双重初始条件 {#sec-ch34-23-1}
 
-为什么单靠“局域观察者做偏迹截断”（[§34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)）或“双体幺正演化守恒全局纯度”本身，绝对推导不出全宇宙共享的单向熵增定律？答案就写在双体幺正演化的边缘熵—互信息精确收支恒等式里。设有限维复合系统 $A \times B$ 经历任意联合幺正门 $U \in \mathrm{U}(A \times B)$，将初态 $\rho_0$ 推演至末态 $\rho_1 = U \rho_0 U^\dagger$。因联合冯·诺依曼熵在幺正共轭下严格不变 $S_{AB}(\rho_1) = S_{AB}(\rho_0)$，将量子互信息定义 $I(A{:}B) := S_A + S_B - S_{AB}$ 在初末两端相减，立即得到无近似精确恒等式：
+为什么单靠“局域观察者做偏迹截断”（[§34.6](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)）或“双体幺正演化守恒全局纯度”本身，绝对推导不出全宇宙共享的单向熵增定律？答案就写在双体幺正演化的边缘熵—互信息精确收支恒等式里。设有限维复合系统 $A \times B$ 经历任意联合幺正门 $U \in \mathrm{U}(A \times B)$，将初态 $\rho_0$ 推演至末态 $\rho_1 = U \rho_0 U^\dagger$。因联合冯·诺依曼熵在幺正共轭下严格不变 $S_{AB}(\rho_1) = S_{AB}(\rho_0)$，将量子互信息定义 $I(A{:}B) := S_A + S_B - S_{AB}$ 在初末两端相减，立即得到无近似精确恒等式：
 
 $$
 \Delta S_A + \Delta S_B \;=\; \Delta I(A{:}B) \;=\; I_1(A{:}B) - I_0(A{:}B).
@@ -74,9 +74,9 @@ $$
 4. **行 (iv)（满足 $I_0 = 0$ 且总熵未满，但初始未饱和余量分布不均的反方向箭头反例）**：初态 $\rho_0^{(\mathrm{iv})} = \frac{\mathbf{1}_2}{2} \otimes \lvert 0\rangle\langle 0\rvert$ 既是严格直积态（$I_0 = 0$），又满足全局非最大熵（$S_{AB,0} = \ln 2 < 2\ln 2$）。经幺正门 $\mathrm{SWAP}$ 演化后，$\rho_1^{(\mathrm{iv})} = \lvert 0\rangle\langle 0\rvert \otimes \frac{\mathbf{1}_2}{2}$ 仍为直积态（$I_1 = 0,\; \Delta I = 0$），但 $A$ 侧边缘熵变为 $\Delta S_A = 0 - \ln 2 = -\ln 2 < 0$，而 $B$ 侧边缘熵变为 $\Delta S_B = \ln 2 - 0 = +\ln 2 > 0$（总和 $\Delta S_A + \Delta S_B = 0 = \Delta I$ 依然守恒）！两位观察者体验到**截然相反**的局部热力学箭头。这四行算例构造性地锁定了精确逻辑边界：若无边界限制，幺正动力学加偏迹**不能无条件担保** $\Delta S_A, \Delta S_B \ge 0$（纵使满足 $0 < I_0 < I_1$ 的特殊部分关联态或近最大混合态仍可呈现正熵步，但 $I_0 > I_1$ 的预存关联会使 $\Delta S_A + \Delta S_B < 0$ 逆流，而全局最大混合乘积热浴 $\frac{\mathbf{1}_A}{d_A}\otimes\frac{\mathbf{1}_B}{d_B}$ 则停滞于 $\Delta S_A = \Delta S_B = 0$）；因而宇宙初始低关联与宏大宏观熵余量（过去假设）系作为**采纳的宇宙学边界公设**（`MODEL` / `OPEN`，[@prob-ch34-past-hypothesis-and-cosmological-constant]）进入物理学，绝非单靠局域偏迹即可证出的必然性定理。
 :::
 
-## 34.23.2 视界盲点宇宙学常数试探模型的三重反例与反循环审计 {#sec-ch34-23-2}
+## 34.11.2 视界盲点宇宙学常数试探模型的三重反例与反循环审计 {#sec-ch34-23-2}
 
-现在转向第二个核心问题：在 [§38.6](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp) 与 [§38.7](ch38-s07-blindspot-and-relativization.md#sec-ch38-stereographic-blindspot-relativization-suspension) 中，任何内嵌有限观察者都背负着两项结构性边界——其一，任意真闭子空间的正交补投影算子范数恒为 $1$（$\lVert\operatorname{id} - P_S\rVert = 1$）；其二，球极投影 $S^D \setminus \{N\} \to \mathbb{R}^D$（$R(\theta) = \cot(\theta/2)$）虽仅挖去单点北极 $N$ 而将一切 $\theta > 0$ 留在定义域内，但一旦施加**有限平面视界/分辨率截断 $R \le R_{\max}$（`MODEL`）**，便裁出严格正孔径角 $\delta_{\mathrm{blind}} = 2\arctan(1/R_{\max}) > 0$ 的北极盲冠。在物理直觉上，人们极易萌生一种诱人的宇宙学试探模型（`MODEL`）：这枚有限截断盲冠孔径 $\delta_{\mathrm{blind}}$ 乘上因果视界尺度 $R_H^{-2}$，是否就能直接导出驱动宇宙加速膨胀的正宇宙学常数下界 $\Lambda_{\mathrm{cos}} \sim c\,\delta_{\mathrm{blind}}^2 / R_H^2 > 0$？
+现在转向第二个核心问题：在 [§36.7](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp) 与 [§36.8](ch38-s07-blindspot-and-relativization.md#sec-ch38-stereographic-blindspot-relativization-suspension) 中，任何内嵌有限观察者都背负着两项结构性边界——其一，任意真闭子空间的正交补投影算子范数恒为 $1$（$\lVert\operatorname{id} - P_S\rVert = 1$）；其二，球极投影 $S^D \setminus \{N\} \to \mathbb{R}^D$（$R(\theta) = \cot(\theta/2)$）虽仅挖去单点北极 $N$ 而将一切 $\theta > 0$ 留在定义域内，但一旦施加**有限平面视界/分辨率截断 $R \le R_{\max}$（`MODEL`）**，便裁出严格正孔径角 $\delta_{\mathrm{blind}} = 2\arctan(1/R_{\max}) > 0$ 的北极盲冠。在物理直觉上，人们极易萌生一种诱人的宇宙学试探模型（`MODEL`）：这枚有限截断盲冠孔径 $\delta_{\mathrm{blind}}$ 乘上因果视界尺度 $R_H^{-2}$，是否就能直接导出驱动宇宙加速膨胀的正宇宙学常数下界 $\Lambda_{\mathrm{cos}} \sim c\,\delta_{\mathrm{blind}}^2 / R_H^2 > 0$？
 
 作为严谨的学术专著，我们必须亲自对这一候选模型执行无死角的**量纲分析、算子拓扑辨析与广义相对论精确解反循环审计**：
 
@@ -146,4 +146,4 @@ $$
 2. **宇宙学常数符号与 $10^{-122}$ 量级等级的非循环定量导出**：在不把宏观哈勃/德西特视界半径 $R_H$ 或全息总像素数 $N_{\mathrm{holo}} \sim 10^{122}$ 预先偷渡为输入参数的前提下，能否从微观比较代数与紫外有限截断结构中非循环地唯一固定有效真空曲率的符号 $\Lambda_{\mathrm{cos}} > 0$，并从第一性原理推算出无量纲比值 $\Lambda_{\mathrm{cos}}\,\ell_P^2 \sim 10^{-122}$ 的数量级？
 :::
 
-至此，大尺度热力学时间箭头的边界条件与宇宙学视界曲率的反循环护栏均已厘清。然而，刚才在对比正曲率德西特排斥背景与负曲率反德西特吸引背景时，另一个关乎局域相互作用“正负号”的基本物理谜题已悄然浮出水面：**既然底层的极小圆弧比较几何只由一套统一的复内积与贝里相位驱动，为什么落在三维空间里的局域激发之间会分化出截然相反的力程符号——同号电荷之间相互排斥、异号电荷之间相互吸引，而万有引力却对一切正质量物质表现为普适同号相吸？** 让我们紧接着进入下一节 [§34.24](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition)，检验能否从有向矢高（sagitta）与相位合成律中解开相互作用正负号之谜。
+至此，第三十四章从多观察者互吸引子与指针共识（[§34.1](ch33-s01-universal-observers.md)–[§34.5](ch33-s05-consensus-and-pointer-bases.md)）、受限不妄我偏迹热力学与滑动格拉姆窗口（[§34.6](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)–[§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)），直至单次记录选支、感知—行动和乐、八度记忆蒸馏与宇宙学时间箭头反循环护栏（[§34.8](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)–§34.11）的十一节画卷已全部合拢。当有限观察者在比较网络中的外部共识与热力学边界已被擦拭得一清二楚，接下来我们将走入观察者自身的生命与认知演化腹地——翻开 **[第三十五章 光之来路、双曲破执与自指扩表](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)**（从 [§35.1](ch35-light-pulse-and-self-referential-table.md) 见证一位有限记忆的生命观察者如何“乘着光来”，在遗忘初始化之后一步步开启 $T = T(T)$ 的自指扩表与破执觉醒之旅）。

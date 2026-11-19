@@ -1,8 +1,8 @@
-# 29.1 Pythagoras, "All Is Number," and the Four-Tier Escape of Number {#sec-coda-pythagoras-all-is-number}
+# 23.1 Pythagoras, "All Is Number," and the Four-Tier Escape of Number {#sec-coda-pythagoras-all-is-number}
 
 If we compress this monograph back into the foundational seed of mathematical civilization, we find that the entire architecture was already latent twenty-five centuries ago in the twin mottoes of the Pythagorean school: **the Pythagorean Theorem ($a^2 + b^2 = c^2$)** and **"All Is Number" ($\pi\alpha\nu\tau\alpha\ \dot{\alpha}\rho\iota\theta\mu\acute{o}\varsigma$ / 万物皆数)**. Viewed through Clifford geometric algebra and a formal proof kernel, these two ancient principles unfold as a three-act geometric drama.
 
-## 29.1.1 Act I: The True Face of the Pythagorean Theorem—1D Segments Cannot Add, 2D Areas Conserve {#sec-coda-pythagoras-act1}
+## 23.1.1 Act I: The True Face of the Pythagorean Theorem—1D Segments Cannot Add, 2D Areas Conserve {#sec-coda-pythagoras-act1}
 
 Why can two orthogonal legs $\mathbf{a} \perp \mathbf{b}$ of a right triangle never add linearly as one-dimensional lengths ($a + b \neq c$), yet become strictly additive the moment we **square them** ($a^2 + b^2 = c^2$)?
 
@@ -30,9 +30,9 @@ Normalizing the hypotenuse to unit radius $c = 1$ transforms the Pythagorean the
 
 1. **Quantum Mechanics (Parts I–III)**: The particle-like inner-product projection $\cos\theta$ and the wave-like exterior bivector gate area $\sin\theta$ obey $\cos^2\theta + \sin^2\theta = 1$—Born's probability conservation $P(0) + P(1) = 1$ ([`born_probability_skeleton`](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton)) and the inner-product parallelogram/Pythagorean norm laws ([`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law) and [`complementary_context_probability_pythagoras`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras)) are simply the Pythagorean theorem on the unit circle;
 2. **Special Relativity (Part V, Chapter 17)**: In Minkowski spacetime, the proper-time rate $d\tau/dt$ and the normalized spatial speed $v/c$ obey $(d\tau/dt)^2 + (v/c)^2 = 1$ (the orthogonal rearrangement of $d\tau^2 = dt^2 - dx^2/c^2$, corresponding to hyperbolic Bogoliubov norm conservation [`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation))—a photon experiences zero proper time for the purely geometric reason that its unit Pythagorean hypotenuse is projected entirely onto the spatial axis $v/c = 1$;
-3. **Diophantine Number Theory and Spinor Algebra (Part VI, Chapter 23)**: The unit quaternion sphere $S^3$ norm $s^2 + x^2 + y^2 + z^2 = 1$, the Eisenstein quadratic norm form identity ([`Qform_eq_eisNorm`](lean:D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_eq_eisNorm)), and the golden-integer Pell norm identity ([`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)) express the higher-dimensional Pythagorean theorem across orthogonal and quadratic lattices.
+3. **Diophantine Number Theory and Spinor Algebra (Sections [23.3](ch23-s03-trace-and-norm-lattices.md)–[23.5](ch23-s05-quaternion-diophantine-skeleton.md) of this chapter)**: The unit quaternion sphere $S^3$ norm $s^2 + x^2 + y^2 + z^2 = 1$, the Eisenstein quadratic norm form identity ([`Qform_eq_eisNorm`](lean:D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_eq_eisNorm)), and the golden-integer Pell norm identity ([`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)) express the higher-dimensional Pythagorean theorem across orthogonal and quadratic lattices.
 
-## 29.1.2 Act II: Hippasus's Crack and the Indestructible Pell Remainder $m^2 - 2n^2 = \pm 1$ {#sec-coda-pythagoras-act2}
+## 23.1.2 Act II: Hippasus's Crack and the Indestructible Pell Remainder $m^2 - 2n^2 = \pm 1$ {#sec-coda-pythagoras-act2}
 
 Yet this very Pythagorean theorem shattered the original static rational sphere of the early Pythagoreans.
 
@@ -140,13 +140,13 @@ $$
 whose convergents are $1/1,\ 3/2,\ 7/5,\ 17/12,\ 41/29,\ 99/70,\ \dots$; counting from $1/1$, the $n$-th convergent is exactly $Q_n/P_n$. Lagrange's theorem from the general theory adds that every best approximation of the second kind of an irrational number $\alpha$ (a fraction $p/q$ with $|q\alpha - p| < |q'\alpha - p'|$ for every other fraction $p'/q'$ whose denominator does not exceed $q$) is a convergent. The pinned Lean library proves [@lem-ch29-pell-companion-step], [@thm-ch29-silver-pell-remainder] and [@thm-ch29-silver-best-approximation] from the recurrence alone and does not match $P, Q$ with Mathlib's continued-fraction expansion (the source file states that this identification is unproved). The identification "$Q_n/P_n$ are the continued-fraction convergents of $\sqrt{2}$" and the general theory of best approximation therefore remain literature results; the unit remainder $Q_n^2 - 2P_n^2 = (-1)^n$ and the best-approximation lower bound above do not depend on them.
 :::
 
-The determinant $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$ of [@thm-ch29-silver-pell-remainder] has exactly the shape of the Fibonacci–Cassini identity $F_kF_{k+2} - F_{k+1}^2 = (-1)^{k+1}$ of the [Coda](coda.md), and its unit remainder echoes the golden-integer Pell identity $(2a + b)^2 - 5b^2 = 4\operatorname{norm}(g)$ proved in Chapter 23 ([`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)): any attempt to stitch a $90^\circ$ orthogonal area rotation onto a one-dimensional integer grid leaves an irreducible unit arithmetic seam. What Hippasus uncovered was not the failure of mathematics, but **the first seam of a larger sphere breaking through the static rational sphere**.
+The determinant $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$ of [@thm-ch29-silver-pell-remainder] has exactly the shape of the Fibonacci–Cassini identity $F_kF_{k+2} - F_{k+1}^2 = (-1)^{k+1}$ of [Chapter 35 §35.7](coda-s03-golden-cut-observers.md), and its unit remainder foreshadows the golden-integer Pell identity $(2a + b)^2 - 5b^2 = 4\operatorname{norm}(g)$ proved in [§23.4](ch23-s04-eisenstein-and-golden-pell.md) below ([`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)): any attempt to stitch a $90^\circ$ orthogonal area rotation onto a one-dimensional integer grid leaves an irreducible unit arithmetic seam. What Hippasus uncovered was not the failure of mathematics, but **the first seam of a larger sphere breaking through the static rational sphere**.
 
 ::: {.viz src="pythagoras-number-escape" preset="hippasus" height="500"}
 **Always one cell off.** The convergents $1/1, 3/2, 7/5, 17/12, \dots$ hug the line $m = \sqrt{2}\,n$ ever more closely; the two bands on the right are the cell counts $m^2$ and $2n^2$, and in the magnifier they are always one cell apart.
 :::
 
-## 29.1.3 Act III: Reclaiming "All Is Number"—From the Verb `shǔ` to the Four-Tier Escape {#sec-coda-pythagoras-act3}
+## 23.1.3 Act III: Reclaiming "All Is Number"—From the Verb `shǔ` to the Four-Tier Escape {#sec-coda-pythagoras-act3}
 
 If rational numbers cannot even hold the hypotenuse $\sqrt{2}$ of a unit square, was Pythagoras wrong to proclaim that "All Is Number"?
 

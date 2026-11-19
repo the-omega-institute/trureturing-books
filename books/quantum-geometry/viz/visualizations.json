@@ -1860,14 +1860,14 @@
         {
           "label": "第二十三章 · 二次范数与迹投影",
           "label_en": "Chapter 23 · Quadratic norms and trace projections",
-          "href": "../zh/ch23-diophantine-definability.html#sec-ch23-1",
-          "href_en": "../en/ch23-diophantine-definability.html#sec-ch23-1"
+          "href": "../zh/ch23-s03-trace-and-norm-lattices.html#sec-ch23-1",
+          "href_en": "../en/ch23-s03-trace-and-norm-lattices.html#sec-ch23-1"
         },
         {
           "label": "第二十三章 · 艾森斯坦范数剪切不变性与黄金佩尔恒等式",
           "label_en": "Chapter 23 · Eisenstein shear invariance and the golden Pell identity",
-          "href": "../zh/ch23-diophantine-definability.html#sec-ch23-2",
-          "href_en": "../en/ch23-diophantine-definability.html#sec-ch23-2"
+          "href": "../zh/ch23-s04-eisenstein-and-golden-pell.html#sec-ch23-2",
+          "href_en": "../en/ch23-s04-eisenstein-and-golden-pell.html#sec-ch23-2"
         },
         {
           "label": "Lean 源码 · CrossingNormForm",

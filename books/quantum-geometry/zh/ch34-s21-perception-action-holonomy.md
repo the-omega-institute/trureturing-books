@@ -1,14 +1,14 @@
-# 34.21 感知—行动闭环：格拉姆走廊内的因果干预、受约束控制与锚定和乐 {#sec-ch34-perception-action-holonomy}
+# 34.9 感知—行动闭环：格拉姆走廊内的因果干预、受约束控制与锚定和乐 {#sec-ch34-perception-action-holonomy}
 
-> 倘若观察者只会沿着固定基轴 $\mathbf{I}$ 被动接收往返回声（`Observe / Read`），他至多只是宇宙影院里一台无法转头的胶片相机；唯有当单次记录（[§34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)）反过来驱动观察者在格拉姆可行走廊 $\Omega_M$（[§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)）内沿极小圆弧主动拨动探针或重写外态（`Act / Write`），观测与行动才在锚定相位和乐中咬合成真正活着的**具身自指观察主体**。
+> 倘若观察者只会沿着固定基轴 $\mathbf{I}$ 被动接收往返回声（`Observe / Read`），他至多只是宇宙影院里一台无法转头的胶片相机；唯有当单次记录（[§34.8](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)）反过来驱动观察者在格拉姆可行走廊 $\Omega_M$（[§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)）内沿极小圆弧主动拨动探针或重写外态（`Act / Write`），观测与行动才在锚定相位和乐中咬合成真正活着的**具身自指观察主体**。
 
-在 [§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) 与 [§34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins) 中，我们打通了从双程投影模平方 $\cos^2\theta$ 到单次经典记录定格的完整**读入半环（`Observe / Read`）**。然而，在自包含关系宇宙里，“读”从来不是单向悬空的终点：每一次测量之所以能区分真实物理转向与纯粹数学坐标重命名，恰恰因为观察者手握能够相对于**保持不动的外部目标锚点**主动转动自身基轴 $\mathbf{I}_t$（或对偶地对目标实施受控态制备）的**写出半环（`Act / Write`）**。
+在 [§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) 与 [§34.8](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins) 中，我们打通了从双程投影模平方 $\cos^2\theta$ 到单次经典记录定格的完整**读入半环（`Observe / Read`）**。然而，在自包含关系宇宙里，“读”从来不是单向悬空的终点：每一次测量之所以能区分真实物理转向与纯粹数学坐标重命名，恰恰因为观察者手握能够相对于**保持不动的外部目标锚点**主动转动自身基轴 $\mathbf{I}_t$（或对偶地对目标实施受控态制备）的**写出半环（`Act / Write`）**。
 
 本节的任务，就是把“被动观测”与“主动因果干预”放在同一张算子迹账本与格拉姆窗口几何上严格对偶化：首先立下区分五种读写与换标架操作的形式契约；继而用 $2\times 2$ 单量子比特显式演算证明因果干预与被动共同换标架的操作鸿沟，并给出等富比尼—施图迪控制弧长下的生成模型选言基准；随后揭示格拉姆窗口 $\mathcal{W}_M$ 如何对双轴有限旋转控制施加两类截然不同的拓扑与维数阻塞；最后用锚定生成树相位分类定理锁定完整感知—行动闭环的规范不变和乐坐标。
 
-## 34.21.1 读写对偶契约：被动观测（`Observe / Read`）、主动干预（`Act / Write`）与共同标架变换的操作判据 {#sec-ch34-21-1}
+## 34.9.1 读写对偶契约：被动观测（`Observe / Read`）、主动干预（`Act / Write`）与共同标架变换的操作判据 {#sec-ch34-21-1}
 
-为什么在没有外部绝对参考系 $C$ 的宇宙中，“观察者主动转动测量仪器”与“在纸面上给希尔伯特空间换一组正交基”具有截然不同的物理后果？关键在于**是否保留至少一枚未被同步共轭旋转的外部锚点**。我们将具身观察者在离散控制拍 $t \in \mathbb{N}$ 上的闭环运行状态记为四元组 $(\rho_t, \mathbf{I}_t, \mathcal{W}_M, t)$——其中 $\rho_t$ 为目标系统密度态，$\mathbf{I}_t$（对应投影族 $P(\mathbf{I}_t)$）为观察者当前的探针基轴，$\mathcal{W}_M$ 为保存近期 $M$ 枚因果锚点的滑动格拉姆窗口（[§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)）。下方形式契约将读写对偶与先后次序不可交换性精确锚定：
+为什么在没有外部绝对参考系 $C$ 的宇宙中，“观察者主动转动测量仪器”与“在纸面上给希尔伯特空间换一组正交基”具有截然不同的物理后果？关键在于**是否保留至少一枚未被同步共轭旋转的外部锚点**。我们将具身观察者在离散控制拍 $t \in \mathbb{N}$ 上的闭环运行状态记为四元组 $(\rho_t, \mathbf{I}_t, \mathcal{W}_M, t)$——其中 $\rho_t$ 为目标系统密度态，$\mathbf{I}_t$（对应投影族 $P(\mathbf{I}_t)$）为观察者当前的探针基轴，$\mathcal{W}_M$ 为保存近期 $M$ 枚因果锚点的滑动格拉姆窗口（[§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)）。下方形式契约将读写对偶与先后次序不可交换性精确锚定：
 
 ::: {.remark #rem-ch34-perception-action-contract title="闭环感知—行动状态四元组、迹拉回读写对偶与五类操作判据契约"}
 在相对于保持固定的外部目标态或外部基准检偏器定义因果干预时，本节建立以下闭环操作模型与形式判据（`MODEL` + `LEAN ✓`）：
@@ -38,7 +38,7 @@
 | **`common frame conjugation`（共同标架共轭）** | 无固定外锚（纯坐标重命名） | $(\rho, P) \mapsto \bigl(U\rho U^\dagger,\, U P U^\dagger\bigr)$ | 恒等抵消 $\operatorname{Tr}(U\rho U^\dagger \cdot U P U^\dagger) = \operatorname{Tr}(\rho P)$ | 全部物理可观测量与谱不变量零变化（非干预） |
 :::
 
-## 34.21.2 因果干预对比被动换标架：单比特精确算例与等长测地控制下的生成模型选言 {#sec-ch34-21-2}
+## 34.9.2 因果干预对比被动换标架：单比特精确算例与等长测地控制下的生成模型选言 {#sec-ch34-21-2}
 
 为了把上表五栏边界锤炼成毫无歧义的硬核代数，我们立即在单量子比特空间上执行两组闭式验算：第一组逐号核对绕 $y$ 轴旋转算符 $R_y(\alpha)$ 在状态侧、效应侧与共同标架侧的正负号分岔及读写不可交换性；第二组展示当两条候选控制圆弧具有**完全相等的富比尼—施图迪（Fubini–Study）测地长度**时，观察者如何凭借内部生成参考模型在对称行动间做出确定选言：
 
@@ -67,11 +67,11 @@
      $$
 
      可观测概率纹丝不动！
-   - **最大混合态 $\rho_{\mathrm{mix}} = \frac{1}{2}\mathbf{1}$ 的幺正不变性与耗散重置破盲**：若外部态完全退化为球心最大混合态 $\rho_{\mathrm{mix}} = \frac{1}{2}\mathbf{1}$，则一切幺正转动均留其不动（$U(\alpha)\frac{\mathbf{1}}{2}U(\alpha)^\dagger = \frac{\mathbf{1}}{2}$），一切仪器轴转向亦恒读 $\operatorname{Tr}(\frac{\mathbf{1}}{2} U(\alpha) P U(\alpha)^\dagger) = \frac{1}{2}$；此时唯有非幺正**态制备重置 `Write` 信道** $\mathcal{R}_0(\sigma) := \operatorname{Tr}(\sigma)\lvert 0\rangle\langle 0\rvert$（伴随至少 $k_{\mathrm{B}}T\ln 2$ 的兰道尔环境排热，见 [§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)）能打破球对称盲区，将读数推至 $\operatorname{Tr}(\mathcal{R}_0(\rho_{\mathrm{mix}}) P) = 1 \neq \frac{1}{2}$。
+   - **最大混合态 $\rho_{\mathrm{mix}} = \frac{1}{2}\mathbf{1}$ 的幺正不变性与耗散重置破盲**：若外部态完全退化为球心最大混合态 $\rho_{\mathrm{mix}} = \frac{1}{2}\mathbf{1}$，则一切幺正转动均留其不动（$U(\alpha)\frac{\mathbf{1}}{2}U(\alpha)^\dagger = \frac{\mathbf{1}}{2}$），一切仪器轴转向亦恒读 $\operatorname{Tr}(\frac{\mathbf{1}}{2} U(\alpha) P U(\alpha)^\dagger) = \frac{1}{2}$；此时唯有非幺正**态制备重置 `Write` 信道** $\mathcal{R}_0(\sigma) := \operatorname{Tr}(\sigma)\lvert 0\rangle\langle 0\rvert$（伴随至少 $k_{\mathrm{B}}T\ln 2$ 的兰道尔环境排热，见 [§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)）能打破球对称盲区，将读数推至 $\operatorname{Tr}(\mathcal{R}_0(\rho_{\mathrm{mix}}) P) = 1 \neq \frac{1}{2}$。
    - **`Read` 与 `Write` 复合次序非对易**：记未读 $Z$ 捏合为 $\mathcal{P}_Z(\sigma) = P\sigma P + (\mathbf{1} - P)\sigma(\mathbf{1} - P)$、幺正写出为 $\mathcal{U}_\alpha(\sigma) = U(\alpha)\sigma U(\alpha)^\dagger$。先 `Read` 后 `Write` 时，$\mathcal{P}_Z(\rho) = \frac{1}{2}\mathbf{1}$ 先一步抹去横向相干，导致后续幺正控制空转，$\operatorname{Tr}\bigl(\mathcal{U}_\alpha(\mathcal{P}_Z(\rho)) P\bigr) = \frac{1}{2}$；先 `Write` 后 `Read` 时，$\mathcal{U}_\alpha(\rho)$ 先把 $\sigma_x$ 相干翻入 $\sigma_z$ 轴再定格记录，$\operatorname{Tr}\bigl(\mathcal{P}_Z(\mathcal{U}_\alpha(\rho)) P\bigr) = \frac{1 - \sin\alpha}{2}$（如 $\alpha = -\frac{\pi}{2}$ 时给出 $1 \neq \frac{1}{2}$，与离散信念修正 [`revision_conflict_noncommutation`](lean:D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation) 遥相呼应）。
 
 2. **有限二选一行动与生成参考模型交叉熵差额 $\frac{1}{4}\ln 3$ 的逐步推导（`MODEL` + `手工推导`）**：
-   设外部目标保持在 [§34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins) 标志角 $\theta = 30^\circ$ 对应的固定对角态 $\rho_{\mathrm{ext}} = \operatorname{diag}(\frac{3}{4}, \frac{1}{4}) = \frac{1}{2}(\mathbf{1} + \frac{1}{2}\sigma_z)$（纵向极化度 $r_z = \frac{3}{4} - \frac{1}{4} = \frac{1}{2}$），观察者内部持有对齐北极稳态的生成偏好参考分布 $p_{\mathrm{ref}} = (p_{\mathrm{ref}}(0),\, p_{\mathrm{ref}}(1)) = (\frac{3}{4}, \frac{1}{4})$。观察者当前探针基轴位于赤道正交方向 $\beta_0 = \frac{\pi}{2}$（$\mathbf{I}_0 = \mathbf{e}_x$），现需在 $xz$ 子午面内从两项对称转向控制动作 $u_+ : \beta_0 \mapsto \beta_+ = \frac{\pi}{3}$ 与 $u_- : \beta_0 \mapsto \beta_- = \frac{2\pi}{3}$ 中择一执行（其中 $\beta \in [0, \pi]$ 表示探针投影算符 $P(\beta) = \frac{1}{2}(\mathbf{1} + \sin\beta\,\sigma_x + \cos\beta\,\sigma_z)$ 的布洛赫极角）：
+   设外部目标保持在 [§34.8](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins) 标志角 $\theta = 30^\circ$ 对应的固定对角态 $\rho_{\mathrm{ext}} = \operatorname{diag}(\frac{3}{4}, \frac{1}{4}) = \frac{1}{2}(\mathbf{1} + \frac{1}{2}\sigma_z)$（纵向极化度 $r_z = \frac{3}{4} - \frac{1}{4} = \frac{1}{2}$），观察者内部持有对齐北极稳态的生成偏好参考分布 $p_{\mathrm{ref}} = (p_{\mathrm{ref}}(0),\, p_{\mathrm{ref}}(1)) = (\frac{3}{4}, \frac{1}{4})$。观察者当前探针基轴位于赤道正交方向 $\beta_0 = \frac{\pi}{2}$（$\mathbf{I}_0 = \mathbf{e}_x$），现需在 $xz$ 子午面内从两项对称转向控制动作 $u_+ : \beta_0 \mapsto \beta_+ = \frac{\pi}{3}$ 与 $u_- : \beta_0 \mapsto \beta_- = \frac{2\pi}{3}$ 中择一执行（其中 $\beta \in [0, \pi]$ 表示探针投影算符 $P(\beta) = \frac{1}{2}(\mathbf{1} + \sin\beta\,\sigma_x + \cos\beta\,\sigma_z)$ 的布洛赫极角）：
    - **完全相等的富比尼—施图迪控制弧长**：由于纯态投影间的富比尼—施图迪测地距离等于布洛赫球大圆夹角之半，两项候选动作消耗的几何控制弧长严格相等：
 
      $$
@@ -97,9 +97,9 @@
      更有甚者，由于 $q_{\pi/3} = (\frac{5}{8}, \frac{3}{8})$ 与 $q_{2\pi/3} = (\frac{3}{8}, \frac{5}{8})$ 互为二元置换，两者的香农模糊度熵严格相等 $H(q_{\pi/3}) = H(q_{2\pi/3})$，故相对熵偏差 $D_{\mathrm{KL}}(q_{2\pi/3}\parallel p_{\mathrm{ref}}) - D_{\mathrm{KL}}(q_{\pi/3}\parallel p_{\mathrm{ref}})$ 亦分毫不差等于 $\frac{1}{4}\ln 3$——尽管两支动作在球面上迈出的测地步长同为 $\frac{\pi}{12}$，生成模型依然无歧义地选出朝北偏转的行动 $u_+$（$\beta_+ = \frac{\pi}{3}$）！
 :::
 
-## 34.21.3 双轴有限旋转生成、最小记录时间界与格拉姆走廊双重拓扑阻塞 {#sec-ch34-21-3}
+## 34.9.3 双轴有限旋转生成、最小记录时间界与格拉姆走廊双重拓扑阻塞 {#sec-ch34-21-3}
 
-确定了目标方向之后，具身观察者究竟能否随时随地把自身基轴 $\mathbf{I}_t$ 沿着球面极小圆弧顺畅拨到位？如果脱离记忆约束孤立地看三维旋转群 $\mathrm{SO}(3)$，两根不平行控制轴生成的极小圆弧字足以走遍全球面每一处角落；然而一旦把主动控制放回 [§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus) 的有限滑动格拉姆窗口 $\mathcal{W}_M$ 之内，能量速度下界、球面连通性割裂与三维环境空间秩饱和便会联手筑起受约束控制的几何护栏：
+确定了目标方向之后，具身观察者究竟能否随时随地把自身基轴 $\mathbf{I}_t$ 沿着球面极小圆弧顺畅拨到位？如果脱离记忆约束孤立地看三维旋转群 $\mathrm{SO}(3)$，两根不平行控制轴生成的极小圆弧字足以走遍全球面每一处角落；然而一旦把主动控制放回 [§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus) 的有限滑动格拉姆窗口 $\mathcal{W}_M$ 之内，能量速度下界、球面连通性割裂与三维环境空间秩饱和便会联手筑起受约束控制的几何护栏：
 
 ::: {.example #ex-ch34-gram-corridor-reachability title="双轴有限旋转可达性、正交记录时间下界与格拉姆走廊的两类几何阻塞算例"}
 我们将无约束双轴圆弧合成、有限能量转向时间下界与保留历史重叠约束下的两类不可达阻塞并置核算（`LEAN ✓` + `手工推导`）：
@@ -123,10 +123,10 @@
      $$
 
      碎裂为南北两颗孤立对径点！在严格不违反 $\mathbf{c}_2 = (0, 0)^\top$ 的前提下，不存在任何连续球面圆弧能把 $+\mathbf{e}_z$ 拨向 $-\mathbf{e}_z$——唯有将苛刻等式放宽为不等式相干帽走廊 $\Omega_2$，或通过滑动窗口遗忘一枚旧锚点，南北通道才会重新连通。
-   - **阻塞（b）——环境空间维数饱和导致的零实现阻塞（$M = 3$）**：设窗口内已攒满三枚两两正交的三维锚点 $\mathbf{v}_1 = \mathbf{e}_1,\; \mathbf{v}_2 = \mathbf{e}_2,\; \mathbf{v}_3 = \mathbf{e}_3 \in S^2 \subset \mathbb{R}^3$（$G_3 = I_3$），并索要正交创新重叠 $\mathbf{c}_3 = (0, 0, 0)^\top$。在纯矩阵代数层面，$4\times 4$ 加边矩阵正是正定单位阵 $G_4 = I_4 \succeq 0$，舒尔补裕度依然高达 $\Delta_{\mathrm{Schur}}(3) = 1 - \mathbf{0}^\top I_3^{-1}\mathbf{0} = 1 > 0$（允许在四维环境空间 $\mathbb{R}^4$ 中沿第四轴 $\mathbf{e}_4$ 实现）；然而**在固定三维方向球面 $S^2 \subset \mathbb{R}^3$ 内，与标准正交基 $\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3$ 同时正交的向量唯有零向量 $\mathbf{0}$，绝不存在任何单位方向 $\mathbf{r} \in S^2$**（$\mathcal{F}_{S^2}(I_3, \mathbf{0}) = \emptyset$）！这直接预示了为什么有限维观察者绝不能只攒不放，而必须进入 [§34.22](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning) 的**记忆重整化、粗粒化压缩与概念升维学习**。
+   - **阻塞（b）——环境空间维数饱和导致的零实现阻塞（$M = 3$）**：设窗口内已攒满三枚两两正交的三维锚点 $\mathbf{v}_1 = \mathbf{e}_1,\; \mathbf{v}_2 = \mathbf{e}_2,\; \mathbf{v}_3 = \mathbf{e}_3 \in S^2 \subset \mathbb{R}^3$（$G_3 = I_3$），并索要正交创新重叠 $\mathbf{c}_3 = (0, 0, 0)^\top$。在纯矩阵代数层面，$4\times 4$ 加边矩阵正是正定单位阵 $G_4 = I_4 \succeq 0$，舒尔补裕度依然高达 $\Delta_{\mathrm{Schur}}(3) = 1 - \mathbf{0}^\top I_3^{-1}\mathbf{0} = 1 > 0$（允许在四维环境空间 $\mathbb{R}^4$ 中沿第四轴 $\mathbf{e}_4$ 实现）；然而**在固定三维方向球面 $S^2 \subset \mathbb{R}^3$ 内，与标准正交基 $\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3$ 同时正交的向量唯有零向量 $\mathbf{0}$，绝不存在任何单位方向 $\mathbf{r} \in S^2$**（$\mathcal{F}_{S^2}(I_3, \mathbf{0}) = \emptyset$）！这直接预示了为什么有限维观察者绝不能只攒不放，而必须进入 [§34.10](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning) 的**记忆重整化、粗粒化压缩与概念升维学习**。
 :::
 
-## 34.21.4 锚定感知—行动和乐分类与自由能三元辨析 {#sec-ch34-21-4}
+## 34.9.4 锚定感知—行动和乐分类与自由能三元辨析 {#sec-ch34-21-4}
 
 当观察者在格拉姆可行走廊内反复执行“感知读入—圆弧转向—再感知读入”的多步巡航并最终回到起始内部构型时，整轮感知—行动闭环究竟在记忆图谱上镌刻下了多少个不可被局部重定相抹去的物理不变量？`trureturing` 的 `AgencyHolonomy` 模块给出了精确到单个圆周自由度的拓扑群同构解答，同时也为我们厘清主动推理文献与热力学之间常见的“自由能”概念混同提供了严密准绳：
 
@@ -148,8 +148,8 @@
 3. **三类同名或近名量的严格界限——绝不混同变分自由能、热力学自由能与形式化 `freezeDeposit`**：
    为杜绝跨学科术语滑移，本书对以下三个数学量实行严格分账：
    - **变分自由能（Variational Free Energy）** $F_{\mathrm{var}}(q, o; u) := D_{\mathrm{KL}}\bigl(q(s)\,\big\Vert\,p(s \mid o, u)\bigr) - \ln p(o \mid u)$（`文献结果：Friston 2010` / `MODEL`）：定义在内部信念分布 $q(s)$、离散观测质量（或连续观测相对基准测度的无量纲似然比）$p(o \mid u)$ 与控制动作 $u$ 上的**无量纲信息论泛函**（单位为奈特 $\mathrm{nat}$ 或比特），如 [@ex-ch34-intervention-versus-frame] 中驱动行动选言的交叉熵差额 $\frac{1}{4}\ln 3$，本身不携带焦耳能量量纲；
-   - **物理热力学自由能（Thermodynamic Free Energy）** $F = U - T S_{\mathrm{phys}} = U - \beta^{-1} s$（严格区分无量纲冯·诺依曼熵 $s = -\operatorname{Tr}(\rho\ln\rho)$ 与物理热力学熵 $S_{\mathrm{phys}} = k_B s$，其中逆温 $\beta = (k_B T)^{-1} > 0$，兰道尔擦除排热下界为 $\beta Q \ge -\Delta s$，见 [§34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)–[§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)）：耦合物理热库时具有**真实能量量纲**的功—热收支状态函数，管辖非幺正记忆重置 `Write` 与窗口遗忘的最低物理耗散；
+   - **物理热力学自由能（Thermodynamic Free Energy）** $F = U - T S_{\mathrm{phys}} = U - \beta^{-1} s$（严格区分无量纲冯·诺依曼熵 $s = -\operatorname{Tr}(\rho\ln\rho)$ 与物理热力学熵 $S_{\mathrm{phys}} = k_B s$，其中逆温 $\beta = (k_B T)^{-1} > 0$，兰道尔擦除排热下界为 $\beta Q \ge -\Delta s$，见 [§34.6](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)–[§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)）：耦合物理热库时具有**真实能量量纲**的功—热收支状态函数，管辖非幺正记忆重置 `Write` 与窗口遗忘的最低物理耗散；
    - **形式化退相干冻结沉积 `freezeDeposit`**：`trureturing` 模块 `D5/S3/QuantumChannels/DecoherenceFreeze` 中定义的实代数能量标量 $\operatorname{freezeDeposit}(\beta, \Delta s, \Delta E_{\mathrm{pass}}) := \Delta E_{\mathrm{pass}} - \Delta s / \beta$（其中 $\Delta s$ 无量纲）：对被动能量偏移 $\Delta E_{\mathrm{pass}} > 0$ 与 $\beta > 0$，当逆温 $\beta$ 超过临界逆温 $\beta_c := \Delta s / \Delta E_{\mathrm{pass}}$ 时沉积严格为正（$\operatorname{freezeDeposit} > 0 \iff \beta > \beta_c$），绝非主动推理中的贝叶斯生成模型变分上界 $F_{\mathrm{var}}(q, o; u)$。
 :::
 
-至此，具身观察者的“读”与“写”终于在格拉姆走廊内严丝合缝地扣成闭环：被动观测（`Observe / Read`）将双程玻恩回声固化为单次锚点记录，主动干预（`Act / Write`）凭生成参考模型在可行走廊 $\Omega_M$ 内沿极小圆弧拨动探针，而整张锚定交互图的规范商（`LEAN ✓`）携有 $c = m + 1 - n$ 个闭环坐标与 $a = k - 1$ 个开路坐标，并在几何输运协议与锚定端点比对协议下分别读出为物理贝里相位与记录干预相位（`MODEL`）。然而，正如 [@ex-ch34-gram-corridor-reachability] 的三维秩饱和阻塞所敲响的警钟：随着感知—行动闭环一轮接一轮运转，不断涌入的新鲜记录很快就会塞满有限阶格拉姆窗口 $\mathcal{W}_M$！一位有限记忆观察者怎样才能在不迷失既往因果律的前提下腾空冗余锚点、把散碎经验提炼为低秩预测概念？让我们紧接着步入 [§34.22](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning)，揭开**记忆重整化、粗粒化遗忘与统计学习**的几何篇章。
+至此，具身观察者的“读”与“写”终于在格拉姆走廊内严丝合缝地扣成闭环：被动观测（`Observe / Read`）将双程玻恩回声固化为单次锚点记录，主动干预（`Act / Write`）凭生成参考模型在可行走廊 $\Omega_M$ 内沿极小圆弧拨动探针，而整张锚定交互图的规范商（`LEAN ✓`）携有 $c = m + 1 - n$ 个闭环坐标与 $a = k - 1$ 个开路坐标，并在几何输运协议与锚定端点比对协议下分别读出为物理贝里相位与记录干预相位（`MODEL`）。然而，正如 [@ex-ch34-gram-corridor-reachability] 的三维秩饱和阻塞所敲响的警钟：随着感知—行动闭环一轮接一轮运转，不断涌入的新鲜记录很快就会塞满有限阶格拉姆窗口 $\mathcal{W}_M$！一位有限记忆观察者怎样才能在不迷失既往因果律的前提下腾空冗余锚点、把散碎经验提炼为低秩预测概念？让我们紧接着步入 [§34.10](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning)，揭开**记忆重整化、粗粒化遗忘与统计学习**的几何篇章。

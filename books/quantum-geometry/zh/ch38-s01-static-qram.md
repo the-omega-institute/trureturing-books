@@ -1,4 +1,4 @@
-# 38.1 静态本体 QRAM：时间即指针自增 ptr++，观察即解引用 *ptr
+# 36.2 静态本体 QRAM：时间即指针自增 ptr++，观察即解引用 *ptr {#381-静态本体-qram时间即指针自增-ptr观察即解引用-ptr}
 
 不妨先拆开一块正在播放长篇电影的固态只读存储芯片，亲眼看一看硬件底层究竟发生了什么。银幕上星河旋转、江流奔涌、人物悲欢离合，可倘若你把显微镜对准硅片内部的存储阵列，就会看见一幅令人屏息的静默图景：**没有任何一个存储单元里的电荷块在硅片上跑来跑去！** 倘若每播放一帧画面都要把数以亿计的物理数据块搬运一遍，整块芯片早已被焦耳热烧成灰烬。硬件工程师采用的架构简洁得近乎冷酷：庞大的全息数据阵列静静躺在原地，唯一在动的是一枚极轻、极小的**地址指针寄存器 `ptr`**——时钟每跳一拍，地址自增一步（`ptr++`）；读写头顺着地址总线对目标单元执行一次解引用（`*ptr`），银幕上便显影出当前这一帧鲜活的世界。
 
@@ -6,7 +6,7 @@
 **时间是 `ptr++`，观察是 `*ptr`。** 每一行是同一段内存在第 $t$ 拍的样子：竖着看，每一列的数字六拍里一模一样，数据从未移动；只有琥珀色的读头每拍右移一格（灰色箭头，`ptr++`），并读出它所在的那一格（右侧的 `*ptr`）。示意模型（`MODEL`），格中数字只是一段任意的数据。
 :::
 
-把这座硬件透镜对准六维切投母格 $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$（[第 32 章](ch32-unified-field-and-meta-unification.md)），传统“重物质在空间中运动”的图景便瞬间翻转。在我们的**`MODEL`（模型诠释）**中，宇宙全局态可分解为轻量级的**观察者地址指针寄存器（`ptr`）**与只读全息的**宇宙本体量子随机存取存储器（`Ontological QRAM`，记作 `mem`）**之间的张量耦合：
+把这座硬件透镜对准六维切投母格 $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$（[第 28 章](ch32-unified-field-and-meta-unification.md)），传统“重物质在空间中运动”的图景便瞬间翻转。在我们的**`MODEL`（模型诠释）**中，宇宙全局态可分解为轻量级的**观察者地址指针寄存器（`ptr`）**与只读全息的**宇宙本体量子随机存取存储器（`Ontological QRAM`，记作 `mem`）**之间的张量耦合：
 
 $$
 \mathbf{\Psi}_{\mathrm{cosmos}} \;=\; \sum_{x \in \mathbb{Z}^6} \lvert x\rangle_{\mathrm{ptr}} \otimes \lvert\Phi(x)\rangle_{\mathrm{mem}}.
@@ -1108,7 +1108,7 @@ $$
 对照 [@rem-ch38-qram-page-wootters-literature]，指针与本体存储分离架构立即推演出两条贯通全书的核心**`MODEL`（模型诠释）**结论：
 
 1. **为什么全局阵列是无时间 $P = NP$，而局部指针必须顺着 `ptr++` 逐帧流逝时间？**
-   在全局本体存储端，整座 $\bigl\{\lvert\Phi(x)\rangle_{\mathrm{mem}}\bigr\}_{x \in \mathbb{Z}^6}$ 阵列早已跨越所有格点同时铺展就绪，不存在先后次序，呈现顺序无关的 $P = NP$ 式静态全息（这里借用 $P = NP$ 之名，见 §38.4；[第 29 章](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell] 与[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)）。然而，场内任何一枚物理观察者指针寄存器都受限于有限位宽与有限记忆窗口 $M < \infty$，并面对标准计算模型下未决的有限观察者复杂性防火墙（[@conj-p-neq-np]）。有限位宽的地址总线绝无可能在单周期内把整座宇宙阵列一口吞入缓存，而只能沿着因果历史彼此相容而不退化锁死的地址序列（局部格拉姆椭圆体正定体积背景见[第 29 章](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]），一步一拍地执行指针自增 `ptr++`。**我们毕生感叹的“时间流逝”，在硬件底层不过是有限指针 `ptr++` 扫过静态全息晶格时的扫描帧率。**
+   在全局本体存储端，整座 $\bigl\{\lvert\Phi(x)\rangle_{\mathrm{mem}}\bigr\}_{x \in \mathbb{Z}^6}$ 阵列早已跨越所有格点同时铺展就绪，不存在先后次序，呈现顺序无关的 $P = NP$ 式静态全息（这里借用 $P = NP$ 之名，见 §36.5；[第 25 章](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell] 与[第 26 章](ch30-fields-lines-eth-and-navier-stokes.md)）。然而，场内任何一枚物理观察者指针寄存器都受限于有限位宽与有限记忆窗口 $M < \infty$，并面对标准计算模型下未决的有限观察者复杂性防火墙（[@conj-p-neq-np]）。有限位宽的地址总线绝无可能在单周期内把整座宇宙阵列一口吞入缓存，而只能沿着因果历史彼此相容而不退化锁死的地址序列（局部格拉姆椭圆体正定体积背景见[§25.1.4](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]），一步一拍地执行指针自增 `ptr++`。**我们毕生感叹的“时间流逝”，在硬件底层不过是有限指针 `ptr++` 扫过静态全息晶格时的扫描帧率。**
 
 ::: {.viz src="pointer-ontology-deref" preset="linear64" height="500"}
 **读最后一格，要把 64 格走一遍。** 琥珀色的读头沿总线一拍读一格，读过的格变亮；读到地址 63 用了 64 步，而上方的路由树在第 6 步就已走到叶子。

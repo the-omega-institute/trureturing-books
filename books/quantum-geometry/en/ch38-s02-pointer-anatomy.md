@@ -1,4 +1,4 @@
-# 38.2 Five-Part Hardware Anatomy of the Observer Pointer: From Bodily MMU Sandbox to No-Deep-Copy Borrowing
+# 36.3 Five-Part Hardware Anatomy of the Observer Pointer: From Bodily MMU Sandbox to No-Deep-Copy Borrowing {#382-five-part-hardware-anatomy-of-the-observer-pointer-from-bodily-mmu-sandbox-to-no-deep-copy-borrowing}
 
 Once we recognize that an observer is a lightweight memory pointer rather than a heavy block of stored payload, we can lift the lid of this cosmic processor core and inspect the hardware anatomy of `ptr` register by register. Before laying out the five-stage architectural map, we anchor two parameter-free physical constraints on every quantum pointer register in `trureturing`: **first, finite register dimension strictly caps the number of single-shot distinguishable history address slots; second, the inner-product idempotence lock prohibits any universal deep copy (`memcpy`) of non-orthogonal quantum memory blocks.**
 

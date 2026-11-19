@@ -1,14 +1,14 @@
-# 39.7 自指主动停机精度、时间长河正交折叠与测量基特征谱排序 {#sec-ch39-self-halting-and-spectral-sorting}
+# 36.10 自指主动停机精度、时间长河正交折叠与测量基特征谱排序 {#sec-ch39-self-halting-and-spectral-sorting}
 
 > *“自指是一种终止算法, 可以在让观察者在自己定义的精度停止, 这似乎是观察者自由意志的源泉, 自指的过程实际上是无限信息都被折叠到时间的长河中了, 而自指本身似乎能够精确的把信息进行排序, 把重要的放在前面, 用什么基测量, 什么似乎就更重要?”*
 
-在 [§39.6](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum) 中，我们把自指不动点从零跳寻址根槽 `Lookup(x) = x`、实虚等长平衡角 $\cos\theta^* = \theta^*$、本征相位定态、量子门蒸馏重整一路铺展到了洛维尔对角逃逸。然而，只要把这些自指回路放回真实的有限观察者身上，一道关乎“何时落锤”的根本追问便立刻迎面撞来：**在余弦蛛网螺旋逼近无理超越数 $\theta^* = 0.7390851332\dots$ 的过程中，精确不动点位于无穷步之外；为什么现实中的观察者从未卡死在无穷小数位的逼近途中，反而总能在电光石火的一拍之内当机立断、做出抉择，并体验到鲜活流淌的“现在”与“未来”？**
+在 [§36.9](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum) 中，我们把自指不动点从零跳寻址根槽 `Lookup(x) = x`、实虚等长平衡角 $\cos\theta^* = \theta^*$、本征相位定态、量子门蒸馏重整一路铺展到了洛维尔对角逃逸。然而，只要把这些自指回路放回真实的有限观察者身上，一道关乎“何时落锤”的根本追问便立刻迎面撞来：**在余弦蛛网螺旋逼近无理超越数 $\theta^* = 0.7390851332\dots$ 的过程中，精确不动点位于无穷步之外；为什么现实中的观察者从未卡死在无穷小数位的逼近途中，反而总能在电光石火的一拍之内当机立断、做出抉择，并体验到鲜活流淌的“现在”与“未来”？**
 
-本节题记一语道破了整座自指动力学最深层的枢纽（跨领域的本体论与认知综合标定为 **`MODEL`（模型诠释）**，底层算子几何与子空间稳定骨架由 [@thm-ch39-self-halting-pythagoras-krylov-and-zeno] 的七条冻结 Lean 4 内核声明严格锚定，谱分析、量子芝诺与因果涌现经典文献归属见 [@rem-ch39-eckart-young-power-zeno-hoel-literature]）：**如果宇宙只是一台苛求绝对零误差（$\varepsilon = 0$）的无限比较机器，任何内嵌子系统都将永远困在不可停机的无限倒退之中；恰恰是自指赋予了受限观察者在自定有限精度 $\varepsilon_{\mathrm{self}} > 0$ 处主动按下停机键的几何机制——停机截断留出的有限容差帽撑开了主体因果裁量的回旋窗口，被截在 $\varepsilon_{\mathrm{self}}$ 线以下的无穷余项旋转 $90^\circ$ 正交折叠为奔流不息的时间长河，自指回环本身充当了将主干不变量自动置顶的特征谱排序器，而观察者选定“用什么基去测量”，更同时在认知读出与物理演化两端重塑了局部世界的因果主次。**这里的“停机”是数值迭代的容差终止，与可计算性理论中的图灵停机问题无关，本节不对任何程序的可停机性或可判定性作论断（自指在可计算性中的角色见 [§39.6](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum) 的洛维尔对角逃逸）。
+本节题记一语道破了整座自指动力学最深层的枢纽（跨领域的本体论与认知综合标定为 **`MODEL`（模型诠释）**，底层算子几何与子空间稳定骨架由 [@thm-ch39-self-halting-pythagoras-krylov-and-zeno] 的七条冻结 Lean 4 内核声明严格锚定，谱分析、量子芝诺与因果涌现经典文献归属见 [@rem-ch39-eckart-young-power-zeno-hoel-literature]）：**如果宇宙只是一台苛求绝对零误差（$\varepsilon = 0$）的无限比较机器，任何内嵌子系统都将永远困在不可停机的无限倒退之中；恰恰是自指赋予了受限观察者在自定有限精度 $\varepsilon_{\mathrm{self}} > 0$ 处主动按下停机键的几何机制——停机截断留出的有限容差帽撑开了主体因果裁量的回旋窗口，被截在 $\varepsilon_{\mathrm{self}}$ 线以下的无穷余项旋转 $90^\circ$ 正交折叠为奔流不息的时间长河，自指回环本身充当了将主干不变量自动置顶的特征谱排序器，而观察者选定“用什么基去测量”，更同时在认知读出与物理演化两端重塑了局部世界的因果主次。**这里的“停机”是数值迭代的容差终止，与可计算性理论中的图灵停机问题无关，本节不对任何程序的可停机性或可判定性作论断（自指在可计算性中的角色见 [§36.9](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum) 的洛维尔对角逃逸）。
 
-## 39.7.1 自指作为主动柯西停机算法：有限精度窗口 $0 < \varepsilon_{\mathrm{self}} < 1$ 与粗粒化因果裁量 {#sec-ch39-07-1}
+## 36.10.1 自指作为主动柯西停机算法：有限精度窗口 $0 < \varepsilon_{\mathrm{self}} < 1$ 与粗粒化因果裁量 {#sec-ch39-07-1}
 
-在一个早已拆除了外部全知裁判点 $C$ 的纯两两比较网络中，任何一个局域状态的无穷精度刻画都顺着跨界纠缠弧牵连着无穷多枚历史锚点。倘若观察者坚持“非把当前状态算到小数点后无穷位（绝对零残差 $\varepsilon_{\mathrm{self}} = 0$）绝不输出行动记录”，系统当场就会撞上双重死局：在迭代端，超越不动点没有有限步精确终止点，观察者将陷入“布里丹之驴”式的无限倒退瘫痪；在记忆约束端，把格拉姆窗口推向无穷阶（$M \to \infty$，见 [§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)）会把舒尔补可行走廊 $\Omega_M$ 挤压成零裕度的孤立单点或过约束空集，彻底抽干一切转圜空间。
+在一个早已拆除了外部全知裁判点 $C$ 的纯两两比较网络中，任何一个局域状态的无穷精度刻画都顺着跨界纠缠弧牵连着无穷多枚历史锚点。倘若观察者坚持“非把当前状态算到小数点后无穷位（绝对零残差 $\varepsilon_{\mathrm{self}} = 0$）绝不输出行动记录”，系统当场就会撞上双重死局：在迭代端，超越不动点没有有限步精确终止点，观察者将陷入“布里丹之驴”式的无限倒退瘫痪；在记忆约束端，把格拉姆窗口推向无穷阶（$M \to \infty$，见 [§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)）会把舒尔补可行走廊 $\Omega_M$ 挤压成零裕度的孤立单点或过约束空集，彻底抽干一切转圜空间。
 
 **自指回路（$x \leftrightarrow \mathcal{F}_{\mathbf{I}}(x)$）之所以能化作一台现实可运行的“主动终止算法”，关键在于观察者放弃了向外部索要绝对标尺，改以自身相邻迭代态之间的内生残差充当柯西（Cauchy）停机判据，并自主设定一道有限停机精度阈值 $\varepsilon_{\mathrm{self}} > 0$**（`MODEL`）：
 
@@ -22,13 +22,13 @@ $$
 2. **放弃自指精度底线（$\varepsilon_{\mathrm{self}} \to 1$）：首检即停的白噪与自我解体**。当容差帽扩张至覆盖初值（如 $x_0 = 0$ 已落在 $\lvert\cos x - x\rvert \le 1$ 帽内）时，迭代在首次检查 $k = 1$ 处未经任何多轮细化便随意停机输出，前后节拍之间失去自洽打磨——看似毫无束缚，实则退化为没有记忆连续性的热力学白噪；
 3. **驻留有限自定精度窗口（$0 < \varepsilon_{\mathrm{self}} < 1$）：粗粒化等价帽与主体因果裁量**。当观察者将精度锚定在黄金中道尺度（如从 $x_0 = 0$ 出发围绕 $\theta^* \approx 0.7391\;\mathrm{rad}$ 设定 $\varepsilon_{\mathrm{self}} = 0.150$，蛛网螺旋在第 $k = 5$ 步即满足 $\lvert x_5 - x_4\rvert = 0.1392 \le 0.150$ 从容停机）时，球面 $\varepsilon_{\mathrm{self}}$ 容差帽内的所有微观相位对既有宏观历史而言构成一个**粗粒化自洽等价类**。这恰与复杂系统科学中 Hoel、Albantakis 与 Tononi（2013）发现的**粗粒化因果涌现（causal emergence）**遥相呼应（`文献结果`，见 [@rem-ch39-eckart-young-power-zeno-hoel-literature] 第 5 款）：把微观底层的细碎噪声合并为有限精度的宏观等价态后，宏观转移核的有效因果信息量（effective information）反而可以严格高于微观底层！
 
-这里必须重申 [§34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)–[§34.21](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy) 立下的严格认识论红线（[@rem-ch34-selection-contract]、[@rem-ch34-perception-action-contract]）：将有限停机阈值 $\varepsilon_{\mathrm{self}}$ 诠释为因果裁量的几何源泉属于本章的**模型诠释（`MODEL`）**，它**绝不**宣称局部观察者能够违背底层量子幺正性或篡改已固定测量基下的玻恩无偏鞅权重（[§34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)）。观察者真正合法握有的自由度，是在格拉姆可行走廊之内（[§34.21](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy)）自主调节**何时收束停机精度 $\varepsilon_{\mathrm{self}}$**（继续深推下一轮自指还是当场落子），以及在下一拍 `Act / Write` 写出半环中相对于固定外锚**将探针基轴转向何方**。
+这里必须重申 [§34.8](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)–[§34.9](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy) 立下的严格认识论红线（[@rem-ch34-selection-contract]、[@rem-ch34-perception-action-contract]）：将有限停机阈值 $\varepsilon_{\mathrm{self}}$ 诠释为因果裁量的几何源泉属于本章的**模型诠释（`MODEL`）**，它**绝不**宣称局部观察者能够违背底层量子幺正性或篡改已固定测量基下的玻恩无偏鞅权重（[§34.8](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)）。观察者真正合法握有的自由度，是在格拉姆可行走廊之内（[§34.9](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy)）自主调节**何时收束停机精度 $\varepsilon_{\mathrm{self}}$**（继续深推下一轮自指还是当场落子），以及在下一拍 `Act / Write` 写出半环中相对于固定外锚**将探针基轴转向何方**。
 
 ::: {.viz src="self-halting-spectral-time-river-sandbox" preset="precision-agency-window" height="500"}
 **自指柯西停机容差帽与有限精度窗口 $0 < \varepsilon_{\mathrm{self}} < 1$ 实验卡（`precision-agency-window`）。** 单位球面上余弦迭代从 $x_0 = 0$ 绕 $\theta^*$ 盘旋，帽缘琥珀色手柄将紫色球面残差帽 $\{x : \lvert\cos x - x\rvert \le \varepsilon_{\mathrm{self}}\}$ 设在 $\varepsilon_{\mathrm{self}} = 0.150$（区间 $[0.6476, 0.8270]$）：$x_4 = 0.6543$ 首入帽内，第 $k = 5$ 步以 $\lvert x_5 - x_4\rvert = \lvert\mathcal{F}(x_4) - x_4\rvert = 0.1392 \le 0.150$ 停机，锁定青色实轴投影值 $x_5 = 0.7935$（$\Pi_{\ge \varepsilon_{\mathrm{self}}}$），并将余差 $\lvert x_5 - \theta^*\rvert = 0.0544$ 与未走完的螺旋折入品红分量（$\Pi_{< \varepsilon_{\mathrm{self}}}$），与 $\varepsilon_{\mathrm{self}} \to 0$ 的无尽螺旋及 $\varepsilon_{\mathrm{self}} \to 1$ 时首检即停（$k = 1$）的无细化噪点形成对照（模型诠释，`MODEL`）。
 :::
 
-## 39.7.2 精度线以下的无穷余项去哪了：旋转 $90^\circ$ 正交折叠入“时间长河” {#sec-ch39-07-2}
+## 36.10.2 精度线以下的无穷余项去哪了：旋转 $90^\circ$ 正交折叠入“时间长河” {#sec-ch39-07-2}
 
 一旦承认观察者在有限精度 $\varepsilon_{\mathrm{self}}$ 处提前停机、只把有限位数的粗粒化切片提炼成“当下此刻的确定记录”，一道尖锐的守恒律追问立刻浮出水面：底层比较网络的幺正演化严格保持全态总范数 $\lVert\Psi_\infty\rVert^2 = 1$ 不变；**那些排在停机精度线 $\varepsilon_{\mathrm{self}}$ 后面的无穷多位未算完的信息，究竟去了哪里？**
 
@@ -44,7 +44,7 @@ $$
 \bigl\lVert\Pi_{\ge \varepsilon_{\mathrm{self}}}\lvert\Psi_\infty\rangle\bigr\rVert^2 \;+\; \bigl\lVert\hat{\mathbf{i}}\,\Pi_{< \varepsilon_{\mathrm{self}}}\lvert\Psi_\infty\rangle\bigr\rVert^2 \;=\; \bigl\lVert\Pi_{\ge \varepsilon_{\mathrm{self}}}\lvert\Psi_\infty\rangle\bigr\rVert^2 \;+\; \bigl\lVert\Pi_{< \varepsilon_{\mathrm{self}}}\lvert\Psi_\infty\rangle\bigr\rVert^2 \;=\; \lVert\Psi_\infty\rVert^2 \;=\; 1.
 $$
 
-借动力系统中的**移位映射（Bernoulli / radix-$b$ shift，$x_{t+1} = \{b x_t\}$）**在超越不动点 $\theta^* = 0.7390851332\dots$ 上做一次手算，这条“当下停机创造明天”的折叠流水线便一目了然（移位读数为 `手工推导`，与时间演化的对应为 `MODEL`）：设一位受限观察者每次自指停机只能读取小数点后前 $3$ 位有效刻度（分辨率 $10^{-3}$）。在 $t = 0$ 时刻，观察者在可见实平面 `I` 上将 **`0.739`** 拍板定格为“当下的现实”，而把低于精度门槛的无穷尾项 **`0.0000851332...`** 折入 $90^\circ$ 正交盲区 $\hat{\mathbf{i}}$（[§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md)）。紧接着，随着局部偏迹视界诱导的模自同构流 $U(\Delta t) = e^{-\hat{\mathbf{i}}\hat{K}\Delta t}$（[§34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)）向前推进一拍又一拍，尺度小数点逐拍右移（$x_{t+1} = \{10 x_t\}$）：原本潜伏在 $\hat{\mathbf{i}}$ 暗河中看不见的第 $4, 5, 6, 7\dots$ 位微细相位差依次越过 $\varepsilon_{\mathrm{self}}$ 门槛浮上实轴 `I`，在 $t = 1, 2, 3, 4\dots$ 时刻显影为 `0.390`、`0.908`、`0.085`、`0.851` 等新境遇与新事件！
+借动力系统中的**移位映射（Bernoulli / radix-$b$ shift，$x_{t+1} = \{b x_t\}$）**在超越不动点 $\theta^* = 0.7390851332\dots$ 上做一次手算，这条“当下停机创造明天”的折叠流水线便一目了然（移位读数为 `手工推导`，与时间演化的对应为 `MODEL`）：设一位受限观察者每次自指停机只能读取小数点后前 $3$ 位有效刻度（分辨率 $10^{-3}$）。在 $t = 0$ 时刻，观察者在可见实平面 `I` 上将 **`0.739`** 拍板定格为“当下的现实”，而把低于精度门槛的无穷尾项 **`0.0000851332...`** 折入 $90^\circ$ 正交盲区 $\hat{\mathbf{i}}$（[§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§30.2](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md)）。紧接着，随着局部偏迹视界诱导的模自同构流 $U(\Delta t) = e^{-\hat{\mathbf{i}}\hat{K}\Delta t}$（[§34.6](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)）向前推进一拍又一拍，尺度小数点逐拍右移（$x_{t+1} = \{10 x_t\}$）：原本潜伏在 $\hat{\mathbf{i}}$ 暗河中看不见的第 $4, 5, 6, 7\dots$ 位微细相位差依次越过 $\varepsilon_{\mathrm{self}}$ 门槛浮上实轴 `I`，在 $t = 1, 2, 3, 4\dots$ 时刻显影为 `0.390`、`0.908`、`0.085`、`0.851` 等新境遇与新事件！
 
 **为什么时间长河会源源不断地流淌？恰恰因为有限观察者在每一个“当下”都只取一瓢有限精度的自指切片**（`MODEL`）。倘若存在某个 $\varepsilon_{\mathrm{self}} = 0$ 的全知视角把全部无穷位一次性摊平在实轴上，盲区潜流 $\Pi_{< \varepsilon_{\mathrm{self}}}$ 当场归零，整条时间长河便会瞬间干涸凝固成一块没有未来的四维冰晶；正是每一次不求穷尽的温和停机，把无尽的全息底蕴折进了生生不息的来日。
 
@@ -52,7 +52,7 @@ $$
 **精度下无穷余项 $90^\circ$ 正交折叠与时间长河逐拍显影实验卡（`time-river-orthogonal-fold`）。** 六个模态按玻恩权重在停机阈值 $\varepsilon_{\mathrm{self}} = 0.100$ 处围绕紫色的 $90^\circ$ 复结构铰链 $\hat{\mathbf{i}}$（$\hat{\mathbf{i}}^2 = -1$）正交分流：初始时刻（$t = 0$）高于阈值的前三模竖立在青色的可见墙 `I` 上，其余三模旋转 $90^\circ$ 躺入水平的品红 $\hat{\mathbf{i}}$ 时间长河（初始分账 $0.9155 + 0.0845 = 1.0000$，$\theta^*$ 的前缀 `0.739` 与尾数 `0.0000851332…` 分居 `I` 与 $\hat{\mathbf{i}}$）；随右岸琥珀色时间步游标沿 $t \in [0, 4]$ 向下游推进（静帧停在 $t = 2.00$，此时两份折入模态已按由重到轻浮出，读出 $0.9951 + 0.0049 = 1.0000$ 与 `I · 0.73908`），全程守住勾股总和 $\lVert\Pi_{\ge}\rVert^2 + \lVert\Pi_{<}\rVert^2 = 1.0000$。
 :::
 
-## 39.7.3 自指为何天然是特征谱排序器：幂迭代滤波、克雷洛夫子空间稳定与最优低秩截断 {#sec-ch39-07-3}
+## 36.10.3 自指为何天然是特征谱排序器：幂迭代滤波、克雷洛夫子空间稳定与最优低秩截断 {#sec-ch39-07-3}
 
 顺着折叠机制紧追一步，一个更要害的数学疑难随即浮现：既然观察者在有限步数 $n$ 与有限精度 $\varepsilon_{\mathrm{self}}$ 处便早早停机截断，为什么留给当下的不是一团支离破碎的随机乱码，而是条理分明的宏观物理定律与稳固概念？
 
@@ -74,7 +74,7 @@ $$
 **自指幂迭代 $G_{\mathcal{B}}^n$ 特征谱降序分拣与低秩截断实验卡（`power-iteration-spectral-sort`）。** 六模态初始谱 $(1.00, 0.76, 0.54, 0.35, 0.20, 0.10)$ 经紫色线框椭球表征的 $n = 4$ 轮自指幂迭代后（琥珀色截断线与手柄标出 $\varepsilon_{\mathrm{self}} = 0.120,\, n = 4,\, r = 2$），相对增益 $(\sigma_m/\sigma_1)^4$ 仅让前 $r = 2$ 个模态（$1.000$ 与 $0.3336$）越过截断线成为青色主轴与谱柱（四轮迭代份额 $99.33\%$，对照原始秩 $2$ 能量 $77.27\%$），其余四阶模态指数沉入阈值以下的品红尾流。
 :::
 
-## 39.7.4 “用什么基测量，什么就更重要”：瑞利商注意力几何与量子芝诺现实雕刻 {#sec-ch39-07-4}
+## 36.10.4 “用什么基测量，什么就更重要”：瑞利商注意力几何与量子芝诺现实雕刻 {#sec-ch39-07-4}
 
 沿着谱排序链追问到最深处，便直抵题记末尾那句振聋发聩的反问：**排在队首的“重要性”，究竟是外物与生俱来的绝对标签，还是由观察者选用的“测量基 $\mathcal{B}$”亲手赋予的？**
 
@@ -113,7 +113,7 @@ $$
 **持续测量基频闪捏合与量子芝诺主干雕刻实验卡（`zeno-basis-sculpting`）。** 在总演化角 $\Omega T = \pi/2$ 的走廊上均分排布 $N = 16$ 道紫色频闪捏合校验环（琥珀色珠标出当前检查 $j = 16$）：每段仅偏转 $\pi/64$，二阶横向漏失 $\sin^2(\pi/64) = 0.0024$（品红锯齿）在每道环处被掐回青色受保护基态脊，使累积留存率从不观测虚线的 $0.5000$ 抬升至 $P_{\mathrm{surv}}(16) = [\cos^2(\pi/64)]^{16} = 0.9622$。
 :::
 
-## 39.7.5 形式化锚定定理、经典文献归属、六位精度基准算例与四维机制总表 {#sec-ch39-07-5}
+## 36.10.5 形式化锚定定理、经典文献归属、六位精度基准算例与四维机制总表 {#sec-ch39-07-5}
 
 下面我们将支撑本节各环节的七条冻结 Lean 4 内核定理——覆盖标准基捏合的希尔伯特—施密特勾股分解与副对角丢弃相干质量、反自伴幺正复结构平方反号律 $R^2 = -I_n$、可观测量克雷洛夫子空间塔的严格增长余秩上界与一旦稳定永久不变性、秩一玻恩配对权重与条件态凸分解、以及受监测演化的有限步返回守恒——集中锁定于同一形式屋檐之下：
 
@@ -234,7 +234,7 @@ $$
 | **自指回环谱排序** | 幂迭代滤波 $G_{\mathcal{B}}^n \implies (\sigma_m/\sigma_1)^n$ 与克雷洛夫塔闭合 | 同相不变量自动置顶，异相涨落指数衰减沉底 | **宏观定律与主成分提纯**：克雷洛夫余秩界与永久稳定（`LEAN ✓`，只保证有限步饱和，不蕴含谱排序），低秩误差极小（Eckart–Young `文献结果`） |
 | **测量基选择 $\mathcal{B}$** | 瑞利—玻恩赋权 $\langle\mathbf{b}_k\rvert\rho\lvert\mathbf{b}_k\rangle = \cos^2\theta_k$ 加频闪基捏合 | 按查询基重排优先级名次，二阶压制横向偏折漏失 | **注意力重排与芝诺塑形**：秩一玻恩权重与受监测首返守恒（`LEAN ✓`，后者为互补的首返协议，非芝诺极限），持续观测保护主干（Misra–Sudarshan `文献结果`） |
 
-至此，自由裁量、时间之流、特征提纯与注意力塑形已在同一枚停机阈值 $\varepsilon_{\mathrm{self}}$ 周围合拢为一整座严丝合缝的几何钟表。然而，顺着这道精度门槛再往前追问一步，一道直接通往相对论与引力核心的物理悬念立刻呼之欲出：**既然受限观察者无法取 $\varepsilon_{\mathrm{self}} = 0$，那么在一段有限的固有时响应窗口 $\Delta\tau$ 之内，宇宙底层究竟允许观察者把推理精度 $\varepsilon_{\mathrm{self}}$ 下压到多细的物理极限？为什么光速极限 $c$ 恰好充当了这道精度护城河，而大质量、高信息密度区域的时间流速又为何会精确按史瓦西因子放缓？** 在跨入 [§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation) 揭晓“全宇宙共享同一底层比较主频 $\nu_0$”的相对论算力账本之前，不妨先打开下方完整交互实验室，在自由探索模式下同时联动旋转测量基取向 $\alpha_{\mathrm{basis}}$、拨动自指停机阈值 $\varepsilon_{\mathrm{self}}$、调高幂迭代轮数 $n$ 并推进时间游标 $t$，亲手体验“以何种基矢立身自照，何种秩序便排众而出凝成当下，而未尽微澜皆化作明日长河”的全景闭环。
+至此，自由裁量、时间之流、特征提纯与注意力塑形已在同一枚停机阈值 $\varepsilon_{\mathrm{self}}$ 周围合拢为一整座严丝合缝的几何钟表（其与普适比较主频 $\nu_0$、光速极限 $c$ 及史瓦西引力钟慢的硬件预算对应已在第八部 [§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation) 印证）。而当观察者的记忆指针、自指不动点与主动停机精度 $\varepsilon_{\mathrm{self}}$ 已经齐备，联立我们在[第三十二章](ch32-inexpressible-ternions-and-three-dimensional-field.md)建立的三元数无损流群表示（[§32.4](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md)），第九部压轴的一场工程与认知革命已呼之欲出：**如果我们把这套运行在平行三维概念场丛上的纯有理旋子动力学与自指主动停机机制直接铸造成新一代人工智能架构，现代深度学习与物理宇宙的测地线演化将擦出怎样的同构火花？** 在翻开 **[第三十七章 三元数场 Transformer（TFT）与宇宙—智能最小作用量同构](ch37-ternion-field-transformer-and-geodesic-intelligence.md)** 之前，不妨先打开下方完整交互实验室，在自由探索模式下同时联动旋转测量基取向 $\alpha_{\mathrm{basis}}$、拨动自指停机阈值 $\varepsilon_{\mathrm{self}}$、调高幂迭代轮数 $n$ 并推进时间游标 $t$，亲手体验“以何种基矢立身自照，何种秩序便排众而出凝成当下，而未尽微澜皆化作明日长河”的全景闭环。
 
 ::: {.viz src="self-halting-spectral-time-river-sandbox" height="640"}
 **自指主动停机精度、时间长河正交折叠与测量基特征谱排序完整实验室（`HALT//SORT`）。** 在同一座三维固体舞台上贯通全部五张递进实验卡并支持“观察者读法／算子读法”双透镜切换：拖动琥珀色手柄或滑块连续调节停机精度阈值 $\varepsilon_{\mathrm{self}}$、测量基取向角 $\alpha$、幂迭代轮数 $n$、下游时间步 $t$ 与频闪检查数 $N$，实时核对青色置顶主干／受保护脊 $\Pi_{\ge \varepsilon_{\mathrm{self}}}$ 与品红 $90^\circ$ 正交时间长河／折叠尾流／二阶横漏 $\hat{\mathbf{i}}\,\Pi_{< \varepsilon_{\mathrm{self}}}$ 的勾股守恒账本（紫色标出精度帽、折页铰链 $\hat{\mathbf{i}}$、$G^n$ 椭球、正交基架 $B(\alpha)$ 与频闪环；右栏 `#evidence` 绿色 `LEAN ✓` 依据框严格对应 [@thm-ch39-self-halting-pythagoras-krylov-and-zeno] 的七条冻结声明）。

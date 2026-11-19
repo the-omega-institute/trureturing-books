@@ -1,4 +1,4 @@
-# 39.5.2 Generalized $K$-Bonacci Prohibition and Pisot Conjugate Disk Contraction {#sec-ch39-p2e-kbonacci}
+# 35.6.2 Generalized $K$-Bonacci Prohibition and Pisot Conjugate Disk Contraction {#sec-ch39-p2e-kbonacci}
 
 For each integer order $K \ge 2$, define the $K$-Bonacci characteristic polynomial
 

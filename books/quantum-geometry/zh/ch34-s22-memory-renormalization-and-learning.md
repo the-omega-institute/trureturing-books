@@ -1,10 +1,10 @@
-# 34.22 记忆重整化与预测蒸馏：八度粗粒化、充分统计与兰道尔散热 {#sec-ch34-memory-renormalization-and-learning}
+# 34.10 记忆重整化与预测蒸馏：八度粗粒化、充分统计与兰道尔散热 {#sec-ch34-memory-renormalization-and-learning}
 
-在 [§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field) 中，我们通过杨辉三角 `1—3—3—1` 的外代数维数回文与幂等记录捏合，提出了“三维饱和驻波体在更高概念层级归零为单自由度点”（$\Lambda^3_\ell \equiv \Lambda^0_{\ell+1}$，[@thm-ch34-point-volume-octave-and-particle-field]）的跨尺度八度螺旋；而在 [§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus) 中，我们又看到寄存器容量受限（阶数为 $M$）的内嵌观察者为了避免局部格拉姆窗口 $\mathcal{W}_M$ 陷入过约束芝诺—拉普拉斯死锁，必须不断释放最陈旧的历史锚点并向环境支付兰道尔擦除热。然而，若把这两节直接拼在一起，一道攸关“学习与认知何以可能”的机制缺口便暴露无遗：**单纯按时间先后丢弃最老锚点的滑动截断（FIFO 遗忘）虽然重开了当下可行走廊，却会把隐藏在早期跨步关联中的长程规律一并抹除；反过来，静态的八度代数等同 $\Lambda^3_\ell \equiv \Lambda^0_{\ell+1}$ 若不交代内部微弧自由度往何处去，又会违背有限寄存器容量上限。**
+在 [§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field) 中，我们通过杨辉三角 `1—3—3—1` 的外代数维数回文与幂等记录捏合，提出了“三维饱和驻波体在更高概念层级归零为单自由度点”（$\Lambda^3_\ell \equiv \Lambda^0_{\ell+1}$，[@thm-ch34-point-volume-octave-and-particle-field]）的跨尺度八度螺旋；而在 [§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus) 中，我们又看到寄存器容量受限（阶数为 $M$）的内嵌观察者为了避免局部格拉姆窗口 $\mathcal{W}_M$ 陷入过约束芝诺—拉普拉斯死锁，必须不断释放最陈旧的历史锚点并向环境支付兰道尔擦除热。然而，若把这两节直接拼在一起，一道攸关“学习与认知何以可能”的机制缺口便暴露无遗：**单纯按时间先后丢弃最老锚点的滑动截断（FIFO 遗忘）虽然重开了当下可行走廊，却会把隐藏在早期跨步关联中的长程规律一并抹除；反过来，静态的八度代数等同 $\Lambda^3_\ell \equiv \Lambda^0_{\ell+1}$ 若不交代内部微弧自由度往何处去，又会违背有限寄存器容量上限。**
 
 连接这两端的核心桥梁，正是受限观察者的**记忆重整化与预测蒸馏（Memory Renormalization and Predictive Distillation）**（`MODEL`）：面对即将溢出的有限格拉姆窗口 $\mathcal{W}_M$，观察者既不把过往微观轨迹原封不动地死记硬背，也不盲目斩断最老的时间切片，而是将一组已闭合的低层历史微态折叠提炼为一枚面向未来可观测目标的**预测充分统计量（Predictive Sufficient Statistic）概念锚点** $q_\star(h) \in \Lambda^0_{\ell+1}$ 留驻窗内，同时仅把对未来预测统计冗余的纤维余项 $r_\star(h)$ 通过偏迹排入热浴并支付最小兰道尔热账单。
 
-## 34.22.1 双阶段纤维分解、兰道尔条件散热与可观测量核不变判据 {#sec-ch34-22-1}
+## 34.10.1 双阶段纤维分解、兰道尔条件散热与可观测量核不变判据 {#sec-ch34-22-1}
 
 要把“提炼概念”与“物理遗忘”的账目算清，第一步必须把**纯逻辑重编码**与**不可逆物理擦除**在算子与热力学层面上严格剥离开来。设有限观察者在某段历史窗口内积累的原始微观历史空间为 $H$（先验概率质量函数为 $\mu$），粗粒化概念读出映射为 $q : H \to Q$，待预测的未来目标变量为 $Y : H \to A$。
 
@@ -72,7 +72,7 @@ $$
    \neg\Bigl(\operatorname{retrospectiveLoss}\bigl(\mathrm{comparison}, \operatorname{tableCopy}(\mathrm{comparison})\bigr) = 0 \;\longrightarrow\; \forall R : (Z \to \mathrm{Answer}) \to \mathbb{N},\; \operatorname{PositiveProspectiveGain}\bigl(R, \operatorname{tableCopy}(\mathrm{comparison})\bigr)\Bigr).
    $$
 
-   须严格忠实于该量词结构：定理否定的是“单凭事后零损失即可无条件担保对**一切**前瞻收益泛函 $R$ 均取得正收益 $0 < R(\operatorname{tableCopy})$”（内核证明以恒零收益泛函 $R_0 = (\_ \mapsto 0)$ 给出反例见证），而非断言所有前瞻泛函在整表拷贝上恒为零。其认识论警示在于：把待判比较答案整表偷渡进承诺（[§38.4](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation)）会处处破坏非预见因果纪律，单凭事后查表零损失本身绝不蕴涵合法的前瞻泛化能力。
+   须严格忠实于该量词结构：定理否定的是“单凭事后零损失即可无条件担保对**一切**前瞻收益泛函 $R$ 均取得正收益 $0 < R(\operatorname{tableCopy})$”（内核证明以恒零收益泛函 $R_0 = (\_ \mapsto 0)$ 给出反例见证），而非断言所有前瞻泛函在整表拷贝上恒为零。其认识论警示在于：把待判比较答案整表偷渡进承诺（[§36.5](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation)）会处处破坏非预见因果纪律，单凭事后查表零损失本身绝不蕴涵合法的前瞻泛化能力。
 6. **有限未来期望词的正交残差刻画与双比特非不变核反例（[`future_word_orthogonal_residual`](lean:D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual) + `手工推导`）**：在标量域 $\mathbb{K}$ 上的有限维内积空间 $E$ 中，对可见效应族 $\mathrm{effect} : \operatorname{Fin}(m+1) \to E$ 与状态表示 $X : \mathrm{State} \to E$，两态 $\rho, \sigma$ 的有限未来期望词相等 $\operatorname{futureExpectationWord}(\mathrm{effect}, X, \rho) = \operatorname{futureExpectationWord}(\mathrm{effect}, X, \sigma)$ 当且仅当 $X(\rho) - X(\sigma) \in (\operatorname{span}_{\mathbb{K}}\operatorname{range}(\mathrm{effect}))^\perp$，亦当且仅当二者在可见效应子空间上的正交投影相等。由有限指标 $\operatorname{Fin}(m+1)$ 的 `future_word_orthogonal_residual` 过渡到全时间海森堡轨道 $\{(T^*)^k \mathrm{effect}_j\}_{k \ge 0}$ 依赖 $\dim E < \infty$ 下的有限维张成稳定化（有限步长即可张成整条轨道），其公共正交残差遂给出 $T$-不变不可观测核 $K = \bigcap_{k \ge 0}\ker(C T^k)$（卡尔曼可观测性分解，`手工推导` + `文献结果`）。
    **双比特非 $T$-不变反例检核（`手工推导`）**：在 $E = \mathbb{R}^2$ 上取双比特嵌入态 $(x_1, x_2) \in \{0, 1\}^2$，设单拍即时读出为 $C(x_1, x_2) = x_1$，单步移位动力学为 $T(x_1, x_2) = (x_2, 0)$。在 $k = 0$ 时刻，单步即时盲区为 $N_0 = \ker C = \{(0, x_2)\} = \operatorname{span}\{\mathbf{e}_2\}$；但 $T(0, 1) = (1, 0) \notin N_0$，故 $N_0$ **不是 $T$-不变子空间**，真正的多步不可观测核是 $K = \ker C \cap \ker(C T) = \operatorname{span}\{\mathbf{e}_2\} \cap \operatorname{span}\{\mathbf{e}_1\} = \{(0, 0)\}$！若观察者在 $k = 0$ 误把 $N_0$ 当作冗余纤维擦除（将 $(0, 0)$ 与 $(0, 1)$ 折叠为同一概念），在 $k = 0$ 虽无即时误差，到 $k = 1$ 时刻却立刻出现 $C T(0, 0) = 0 \neq 1 = C T(0, 1)$ 的预测失效。
 :::
@@ -157,7 +157,7 @@ $$
 
 令 $w=8\delta/3$。把质量 $1-w$ 均分给 $(1/2,1/2,0,0,0)$ 的五个循环位移，把质量 $w$ 均分给 $(1/4,1/2,1/4,0,0)$ 的五个位移。两组各自的平均后验均为均匀先验，平均外积在对角、边及非边上的条目依次为 $(1/10,1/20,0)$ 和 $(3/40,1/20,1/80)$。混合后恰得 $P(t)$。所述区间保证 $0\le w\le 1$，结论允许端点处一组质量为零。区间是此构造的适用范围，距离结论不需要输入 $M(t)$ 半正定。
 
-## 34.22.2 三比特历史空间上的四种过去记忆策略与答案整表偷渡对照：为什么耗散不等于学习？ {#sec-ch34-22-2}
+## 34.10.2 三比特历史空间上的四种过去记忆策略与答案整表偷渡对照：为什么耗散不等于学习？ {#sec-ch34-22-2}
 
 为了把“原样死记过去历史”、“滑动窗口 FIFO 截断”、“盲目粗粒化散热”、“充分统计八度蒸馏”以及“非因果答案整表拷贝”五者的热力学代价、容量边界与因果合法性对比得一目了然，我们在一个完全透明的 $8$ 状态三比特历史空间上逐项手算全部信息量与散热账单：
 
@@ -184,9 +184,9 @@ $$
 6. **（a）最小充分统计量的目标依赖性与（b）序贯概念修正的次序依赖性（两条独立结论）**：**（a）固定联合分布下的目标依赖性**：在固定均匀历史分布上将目标从 $Y = X_1 \oplus X_2$ 切换为 $Y' := X_3$，因 $X_1 \oplus X_2$ 与 $X_3$ 统计独立，$q_\star(h) = X_1 \oplus X_2$ 的保留互信息从 $1\;\mathrm{bit}$ 跌至 $I(q_\star(H); Y') = 0\;\mathrm{bit}$，而 $q_{\mathrm{FIFO}}(h) = X_3$ 则从 $0\;\mathrm{bit}$ 升至 $I(q_{\mathrm{FIFO}}(H); Y') = 1\;\mathrm{bit}$（且由 [`extended_quantum_relative_entropy_channel_dpi`](lean:D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi)，一旦 $R_* = (X_1, X_3)$ 已被物理擦除，任何仅作用在 $q_\star$ 上的后处理信道均无法恢复 $X_3$），证明最小充分统计量严格具有**目标依赖性**；**（b）独立的序贯修正次序依赖性**：与之独立地，当序贯概念修正更新逐步改写假设集时，[`revision_conflict_noncommutation`](lean:D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation)（`LEAN ✓`）严格证明冲突的序贯修正互不对易（$\operatorname{revision}_Q(\operatorname{revision}_P(A)) \neq \operatorname{revision}_P(\operatorname{revision}_Q(A))$）。
 :::
 
-## 34.22.3 格拉姆窗口中的三锚质心蒸馏与认知—演化模型边界 {#sec-ch34-22-3}
+## 34.10.3 格拉姆窗口中的三锚质心蒸馏与认知—演化模型边界 {#sec-ch34-22-3}
 
-回到 [§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus) 的内积格拉姆窗口 $\mathcal{W}_M$，八度概念蒸馏究竟如何改变加边格拉姆矩阵的舒尔补可行裕度 $\Delta_{\mathrm{Schur}}(\mathbf{q}) = 1 - \mathbf{c}^\top G^{-1}\mathbf{c}$？这里必须破除一个极易犯下的直觉误区：在 [§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus) 的纯滑动窗口 FIFO 遗忘中，直接删去旧锚点使保留子空间按包含链 $S_{\mathrm{FIFO}} \subset S_{\mathrm{full}}$ 单调缩小，因而舒尔补残差在**每一个**查询方向 $\mathbf{q}$ 上都单调不减；**但将三枚历史锚点合成为一枚八度质心概念锚点 $\mathbf{a}$ 时，虽然同样腾出了两个寄存器槽位，其舒尔补走廊却绝非在所有方向上都比 FIFO 删减更宽**——概念合成的真正几何威力在于**有方向选择性地旋转保留子空间**！下面用全有理分数的显式三维算例逐项核实：
+回到 [§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus) 的内积格拉姆窗口 $\mathcal{W}_M$，八度概念蒸馏究竟如何改变加边格拉姆矩阵的舒尔补可行裕度 $\Delta_{\mathrm{Schur}}(\mathbf{q}) = 1 - \mathbf{c}^\top G^{-1}\mathbf{c}$？这里必须破除一个极易犯下的直觉误区：在 [§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus) 的纯滑动窗口 FIFO 遗忘中，直接删去旧锚点使保留子空间按包含链 $S_{\mathrm{FIFO}} \subset S_{\mathrm{full}}$ 单调缩小，因而舒尔补残差在**每一个**查询方向 $\mathbf{q}$ 上都单调不减；**但将三枚历史锚点合成为一枚八度质心概念锚点 $\mathbf{a}$ 时，虽然同样腾出了两个寄存器槽位，其舒尔补走廊却绝非在所有方向上都比 FIFO 删减更宽**——概念合成的真正几何威力在于**有方向选择性地旋转保留子空间**！下面用全有理分数的显式三维算例逐项核实：
 
 ::: {.example #ex-ch34-gram-synthesis-versus-fifo title="三维正交三锚质心概念合成对照 FIFO 删减的格拉姆—舒尔补方向选择性算例"}
 **手工推导。** 在实内积空间（取 $\mathbb{R}^3$ 或嵌入更高维环境空间 $\mathbb{R}^D,\, D \ge 3$）中，设容量上限为 $M_{\max} = 3$ 的格拉姆窗口 $\mathcal{W}_3$ 当前已被三枚标准正交历史锚点 $\mathbf{e}_1 = (1, 0, 0)^\top$、$\mathbf{e}_2 = (0, 1, 0)^\top$、$\mathbf{e}_3 = (0, 0, 1)^\top$ 填满，此时窗口格拉姆矩阵为 $G_{\mathrm{full}} = I_3$，空余寄存器槽位数为 $0$，且对 $\mathbb{R}^3$ 内任意单位查询向量 $\mathbf{q} = (q_1, q_2, q_3)^\top$（$q_1^2 + q_2^2 + q_3^2 = 1$），全窗口舒尔补裕度恒为 $\Delta_{\mathrm{Schur}}^{\mathrm{full}}(\mathbf{q}) = 1 - \mathbf{q}^\top I_3^{-1}\mathbf{q} = 0$。现对比以下三种腾退槽位的压缩方案：
@@ -246,14 +246,14 @@ $$
    不等号在此彻底反转：$\Delta_{\mathrm{Schur}}^{\mathrm{syn}}(\mathbf{q}^{(2)}) = \frac{26}{27} > \frac{15}{27} > \frac{3}{27}$（在纯零和纤维平面 $q_1 + q_2 + q_3 = 0$ 上，如 $\mathbf{q}_{\mathrm{fib}} = \frac{1}{\sqrt{2}}(0, 1, -1)^\top$，更有 $\Delta_{\mathrm{Schur}}^{\mathrm{syn}}(\mathbf{q}_{\mathrm{fib}}) = 1$ 而 $\Delta_{\mathrm{Schur}}^{\mathrm{FIFO},2}(\mathbf{q}_{\mathrm{fib}}) = 0$）！就单位球面 $S^2$ 上的各向同性平均值而言，同为秩 $1$ 投影的方案 S 与方案 F1 拥有完全相同的平均自由预算 $1 - \frac{1}{3} = \frac{2}{3}$；质心蒸馏的精髓不在于盲目扩大平均面积，而在于**把宝贵的单槽约束精准对准跨周期的集体信号轴 $\mathbf{a}$，同时把与之正交的整张二维零和微观纤维平面 $\mathbf{a}^\perp$ 完全释放为自由转向空间**！
 :::
 
-把 [§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field) 的跨层八度螺旋与本节的充分统计蒸馏合拢，从物理热力学、机器学习的信息瓶颈一直到大脑概念抽象与生物演化谱系记忆，便在同一套“保留预测充分锚点 + 擦除冗余纤维散热”的架构下获得了清晰定位：
+把 [§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field) 的跨层八度螺旋与本节的充分统计蒸馏合拢，从物理热力学、机器学习的信息瓶颈一直到大脑概念抽象与生物演化谱系记忆，便在同一套“保留预测充分锚点 + 擦除冗余纤维散热”的架构下获得了清晰定位：
 
 ::: {.remark #rem-ch34-learning-and-evolution-model title="兰道尔原理实验检验、信息瓶颈理论与认知抽象及达尔文谱系记忆边界（文献结果与 MODEL）"}
 **文献结果，未在本书形式化（配物理与生命诠释 `MODEL`）。** 为严守本书认识论分层，我们将支撑本节物理诠释的四项经典文献与跨尺度模型边界明确区分如下：
 
 1. **不可逆擦除热力学与准静态实验验证（`文献结果`）**：R. Landauer（*IBM J. Res. Dev.* **5**, 183–191, 1961, DOI: `10.1147/rd.53.0183`）首次确立逻辑不可逆多对一合并必伴随最小环境热耗散 $k_B T \ln 2$/bit；C. H. Bennett（*Stud. Hist. Philos. Mod. Phys.* **34**, 501–510, 2003）严格澄清了双射可逆计算（对应本节第一阶段 $h \mapsto (q(h), r(h))$ 零热耗散）与擦除冗余辅助寄存器（对应第二阶段抹去 $r(h)$ 支付条件熵热）之间的逻辑分水岭；A. Bérut 等人（*Nature* **483**, 187–189, 2012, DOI: `10.1038/nature10872`）则在光镊双势阱胶体微粒实验中首次在准静态极限下定量测得擦除 $1\;\mathrm{bit}$ 记忆的热耗散渐近触及 $k_B T \ln 2$ 下界。
 2. **信息瓶颈变分原理（`文献结果`）**：N. Tishby, F. C. Pereira & W. Bialek（*Proc. 37th Annual Allerton Conf. on Communication, Control, and Computing*, 368–377, 1999）提出**信息瓶颈（Information Bottleneck）**泛函 $\mathcal{L}_{\mathrm{IB}}[p(\tilde{x}\mid x)] = I(X; \tilde{X}) - \beta_{\mathrm{IB}}\,I(\tilde{X}; Y)$，在压缩历史表征位宽 $I(X; \tilde{X})$ 与保留关于目标 $Y$ 的预测互信息 $I(\tilde{X}; Y)$ 之间求解最优软/硬划分边界；本节 [@ex-ch34-predictive-distillation-benchmark] 中的策略 (iv) $q_\star(h) = X_1 \oplus X_2$ 正是该变分边界在确定性零损失端点上的精确离散极小充分统计实例。
-3. **认知概念学习与达尔文演化谱系记忆的统一诠释（`MODEL`）**：在本书的模型架构中，无论是神经系统将海量感官微弧轨迹（$\Lambda^3_\ell$）在睡眠突触修剪（对照[第三十七章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)）与代谢散热中蒸馏为可跨语境复用的抽象语言概念符号（$\Lambda^0_{\ell+1}$），还是达尔文生物演化在代际繁衍中通过个体躯体凋亡与基因重组向生物圈热库耗散偶然环境噪声、仅在种系基因组中浓缩关乎生态位存续的预测充分统计锚点（对照[第三十五章](ch35-light-pulse-and-self-referential-table.md)），皆可视作“有限格拉姆窗口八度蒸馏”在不同时间尺度上的同构运行（`MODEL`）。须严正声明：此跨学科对应属于结构性物理哲学模型，绝不声称在本书内核中形式化证明了神经生物学或演化遗传学定理。
+3. **认知概念学习与达尔文演化谱系记忆的统一诠释（`MODEL`）**：在本书的模型架构中，无论是神经系统将海量感官微弧轨迹（$\Lambda^3_\ell$）在睡眠突触修剪（对照[§36.1](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)）与代谢散热中蒸馏为可跨语境复用的抽象语言概念符号（$\Lambda^0_{\ell+1}$），还是达尔文生物演化在代际繁衍中通过个体躯体凋亡与基因重组向生物圈热库耗散偶然环境噪声、仅在种系基因组中浓缩关乎生态位存续的预测充分统计锚点（对照[§35.1](ch35-light-pulse-and-self-referential-table.md)），皆可视作“有限格拉姆窗口八度蒸馏”在不同时间尺度上的同构运行（`MODEL`）。须严正声明：此跨学科对应属于结构性物理哲学模型，绝不声称在本书内核中形式化证明了神经生物学或演化遗传学定理。
 :::
 
-至此，受限观察者如何在单一局部历史链上兼顾“记忆不锁死”与“规律不失忆”的机制已水落石出。然而，当我们抬起头望向浩瀚星空，一个更宏大的宇宙学追问接踵而至：**既然每一位局部观察者的记忆蒸馏都仰赖把冗余纤维熵排入周围更低关联度的环境热库，为什么可观测宇宙中亿万彼此分离的有限观察者会拥有完全一致的热力学正向时间箭头，而不是各自朝相反的时间方向擦除与升温？观察者脚下的自指视界盲点又能否直接解释宇宙加速膨胀的正曲率下界？** 让我们步入下一节 [§34.23](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor)，接受最严苛的反例与反循环审计。
+至此，受限观察者如何在单一局部历史链上兼顾“记忆不锁死”与“规律不失忆”的机制已水落石出。然而，当我们抬起头望向浩瀚星空，一个更宏大的宇宙学追问接踵而至：**既然每一位局部观察者的记忆蒸馏都仰赖把冗余纤维熵排入周围更低关联度的环境热库，为什么可观测宇宙中亿万彼此分离的有限观察者会拥有完全一致的热力学正向时间箭头，而不是各自朝相反的时间方向擦除与升温？观察者脚下的自指视界盲点又能否直接解释宇宙加速膨胀的正曲率下界？** 让我们步入下一节 [§34.11](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor)，接受最严苛的反例与反循环审计。
