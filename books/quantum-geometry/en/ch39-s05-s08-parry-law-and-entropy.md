@@ -1,6 +1,6 @@
 # 35.6.8 Parry Stationary Law, Escape-Pair Counting, and the Fractal Horizon Entropy Problem {#sec-ch39-p2e-entropy}
 
-Before discussing entropy, distinguish three levels: finite-state Markov laws, measurable coordinate reconstruction of complete paths on integer time, and entropy comparison over all invariant probability measures. The first two have corresponding Lean-verified results. Below we derive maximality and uniqueness as an application on the same bilateral unsigned law and give a separate topological entropy formula for the bilateral shift. Fractal entanglement scaling remains an open problem.
+Before discussing entropy, distinguish three levels: finite-state Markov laws, measurable coordinate reconstruction of complete paths on integer time, and entropy comparison over all invariant probability measures. Lean verifies the path law, the metric entropy upper bound and its attainment, and the topological entropy formula. The uniqueness argument for the maximizing law appears below. Fractal entanglement scaling remains an open problem.
 
 On the Markov-chain side, for each integer order $k \ge 2$, let $p = \operatorname{parryParameter}(k) = \beta_k^{-1}$ be the reciprocal Perron parameter. On the signed run-length state space $\operatorname{State}(k) = \mathrm{Bool} \times \operatorname{Fin} k$ recording an absolute sign bit together with the current run length of `1`s, define the right-eigenvector suffix weights $w_j = \operatorname{suffixWeight}(k, p, j) = \sum_{a=0}^{k-j-1} p^{a+1}$, normalizer $Z_k = \sum_{j=0}^{k-1} p^j w_j$, sign involution $\operatorname{flip}(b, j) = (!b, j)$, and reset transition kernel $P_k = \operatorname{kernel}(k, p)$: from $s = (b, j)$, the chain flips sign and resets to $(!b, 0)$ with probability $p / w_j$, advances to $(b, j + 1)$ with probability $p\, w_{j+1} / w_j$ whenever $j + 1 < k$, and assigns probability $0$ to all other transitions. Define the signed stationary distribution
 
@@ -310,6 +310,22 @@ The existential quantifier chooses one triple $e,\mu,\nu$ carrying all conclusio
 
 Alongside this stationary reset law stand two independent formal quantitative bounds governing boundary collisions and observational blind spots: first, the boundary cylinder inequality [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound), which proves for any finite collection $C$ of $n \ge 1$ positive run-length pairs (with each `1`-run $< k$ and encoded length at most $R$) that the left- and right-boundary selected-prefix stationary masses are bounded above by $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ and $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$ respectively (an exact probability inequality, not a Hausdorff-dimension or entropy formula); second, continuing the ledger of [Chapter 36](ch38-observer-memory-pointer-and-ontological-qram.md) §36.6, the finite-arena information-escape criterion [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos), which proves on a nondegenerate finite arena of cardinality $q \ge 2$ that the set $E(S)$ of ordered distinct state pairs indistinguishable under catalog $S$ defines a normalized rational escape rate $e(S) = |E(S)|/[q(q-1)]$, and that observation $i$ strictly lowers escape rate if and only if its unique-capture count satisfies $|U_i| > 0$ (with exact drop $|U_i|/[q(q-1)]$). Rational ordered-pair escape rate $e(S)$, von Neumann page entropy $S(\sigma_b)$, and infinite-shift ergodic entropy are distinct mathematical quantities and are never conflated here.
 
+::: {.theorem #thm-ch39-p2e-parry-ks-entropy title="The Parry Law Attains the Bilateral Shift Entropy Bound" lean="D5/S3/TotalVariation/ParryKSEntropy.bilateral_parry_entropy"}
+Fix $K\ge2$, set $p=\operatorname{parryParameter}(K)$, and let $T$ be the left shift of the admissible bilateral relation paths $X_K$. There exist a bilateral coding $e$ and an invariant probability $\mu$ on $X_K$ with the stationary suffix cylinder formula of [@thm-ch39-p2e-native-bilateral-parry-law] at every integer origin. With that law,
+
+$$
+h_{\mathrm{KS}}(\mu,T)=-\log p,\qquad
+h_{\mathrm{KS}}(\rho,T)\le-\log p
+\quad\text{for every invariant probability }\rho\text{ on }X_K.
+$$
+:::
+
+::: proof
+For any realized suffix word with $n$ transitions, the logarithm of its Parry mass is $n\log p$ plus terms depending only on its first and last suffixes. Those terms are uniformly bounded on the finite alphabet. Gibbs' inequality bounds each competitor's word entropy by the cross entropy against these reference masses. For the Parry law itself, the same endpoint estimate also bounds word entropy from below. The endpoint terms vanish after division by the word length and passage to the limit.
+
+Suffix partitions at successively earlier starting points have the same entropy rate by stationarity. Their forward translates generate all Boolean coordinates, since the suffix after a bit is zero precisely when that bit is false. This gives the full Kolmogorov–Sinai entropy. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.remark #rem-ch39-p2e-abramov-literature title="Maximal-Entropy Application of the Actual Bilateral Parry Law and Separate Literature Boundaries"}
 **The application and its objects.** Fix any integer order $K\ge2$ (the preceding $k=K$), and put $p=\operatorname{parryParameter}(K)$, $X_K=\operatorname{RelationPath}(K)$, and $T=\operatorname{relationShift}$, so $(Tr)_t=r_{t+1}$. Take the joint witness $e,\mu,\nu$ from [@thm-ch39-p2e-native-bilateral-parry-law]; throughout, $\mu$ is that same unsigned probability law. For every Borel probability measure $\rho$ on $X_K$ with $T_*\rho=\rho$, the application below gives
 
@@ -323,7 +339,7 @@ h_{\mathrm{KS}}(\rho,T)=-\log p
 \end{aligned}
 $$
 
-Logarithms are natural, and the unit is nats per original step. Here $h_{\mathrm{KS}}$ is the supremum of entropy rates over all finite measurable partitions, initially regarded as an extended real number; the conclusion also proves that it is finite in this system. Competitors range over all invariant Borel probabilities, with no additional Markov, ergodicity, generation, entropy-limit, or uniqueness assumption. The signed extension $\nu$ helps construct $\mu$, while the entropy comparison takes place on the unsigned space $X_K$. The owning exposition is the [bilateral Parry law discussion](https://github.com/the-omega-institute/trureturing/blob/dev/Blueprint/D5/S3/TotalVariation/ParryBilateralLaw.md). The cited theorem statement supplies coding, laws, and cylinders; its statement itself does not include this entropy conclusion.
+Logarithms are natural, and the unit is nats per original step. Here $h_{\mathrm{KS}}$ is the supremum of entropy rates over all finite measurable partitions, initially regarded as an extended real number; the conclusion also proves that it is finite in this system. Competitors range over all invariant Borel probabilities, with no additional Markov, ergodicity, generation, entropy-limit, or uniqueness assumption. The signed extension $\nu$ helps construct $\mu$, while the entropy comparison takes place on the unsigned space $X_K$. The owning exposition is the [bilateral Parry law discussion](https://github.com/the-omega-institute/trureturing/blob/dev/Blueprint/D5/S3/TotalVariation/ParryBilateralLaw.md). The entropy bound and attainment are formalized in [@thm-ch39-p2e-parry-ks-entropy]. The following derivation also gives the equality criterion.
 
 **From the actual suffix to a two-sided generator.** Set $J_t(r)=J_t^e(r)$, the second coordinate of $e(\mathrm{false},r)$ at integer time $t$. The nearest-zero characterization makes $J_t$ exactly the length of the true run immediately preceding $t$, independently of the sign anchor. On every admissible path,
 
@@ -522,6 +538,21 @@ For $m=0$ the event is the whole path space and $h_0=1$.
 
 ::: proof
 On $A$, the suffix at position zero is zero. Each successive raw bit either resets the suffix to zero or increments it by one. Starting with $v_0=0$, induction identifies the raw window event on $A$ with the single suffix cylinder $(v_0,\ldots,v_m)$. Dividing its mass by $\mu(A)$ removes the initial suffix mass. The ratios $h_{v_{i+1}}/h_{v_i}$ from the allowed transition probabilities telescope to $h_{v_m}$. Thus an unfinished run at the end of a window retains a suffix weight. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch39-p2e-parry-zero-marginals title="The Zero-Section Law under the Original Shift" lean="D5/S3/TotalVariation/ParrySectionMarginals.section_zero_marginals"}
+Use the native bilateral Parry law and its conditional probability $\mu_A$ from [@thm-ch39-p2e-native-parry-first-return]. Write $p=\beta_K^{-1}$. Then
+
+$$
+\mu_A\{r:r_0=0\}=p,\qquad
+\mu_A\{r:r_1=0\}=2p^2.
+$$
+
+The one-step left shift $T$ does not preserve $\mu_A$.
+:::
+
+::: proof
+The windows $0$, $00$, and $10$ all end at suffix zero. By [@thm-ch39-p2e-parry-raw-window], their conditional masses are $p$, $p^2$, and $p^2$. The windows $00$ and $10$ disjointly exhaust the event $r_1=0$, which is the $T$-preimage of $r_0=0$. Since $p>1/2$, the preimage has strictly larger mass. The full proof is checked by the Lean kernel.
 :::
 
 A return orbit records how many steps it takes to read each successive zero. On the zero section, the joint probability of these durations can be computed directly from a suffix cylinder of the original path.
