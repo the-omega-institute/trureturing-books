@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "d5789ff84f77e21c3bb7b862ee3e986c7eecd393",
-  "pinned_at": "2026-11-19T09:33:14Z",
+  "commit": "cba7d31b10fc8d7e1acf3b231085c978531395ae",
+  "pinned_at": "2026-11-19T10:53:19Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -6217,9 +6217,17 @@
       "module": "D5/S3/TotalVariation/ParryKSEntropy",
       "name": "D5.S3.TotalVariation.ParryKSEntropy.bilateral_parry_entropy",
       "kind": "theorem",
-      "statement_id": "sha256:2e49997867bb4121e750af46aa22506e03acd72630a6f625dc76f132dd83f4d5",
+      "statement_id": "sha256:8265812dbd46ad2a4411db127de7e1fcf399712b98cb878dadea8223b1dc7065",
       "line": 379,
       "signature": "theorem bilateral_parry_entropy (k : ℕ) (hk : 2 ≤ k) : ∃ (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (Tμ : MeasurePreserving (@relationShift k) μ μ), (∀ (t : ℤ) (n : ℕ) (w : Fin (n + 1) → Fin k), (μ : Measure (RelationPath k)) {r | (fun i : Fin (n + 1) => ((e (false, r)).val (t + i.val)).2) = w} = ENNReal.ofReal (suffixLaw k (w 0)) * ∏ i : Fin n, ENNReal.ofReal (suffixKernel k (w i.castSucc) (w i.succ))) ∧ ksEntropy Tμ = ((-Real.log (parryParameter k) : ℝ) : EReal) ∧ (∀ (ρ : ProbabilityMeasure (RelationPath k)) (Tρ : MeasurePreserving (@relationShift "
+    },
+    "D5/S3/TotalVariation/ParryKSMaximizer.bilateral_parry_maximizer": {
+      "module": "D5/S3/TotalVariation/ParryKSMaximizer",
+      "name": "D5.S3.TotalVariation.ParryKSMaximizer.bilateral_parry_maximizer",
+      "kind": "theorem",
+      "statement_id": "sha256:833c5de6fce95ec1fc8d23789a46b35392e8a671b12069bcae8290daa4bde85c",
+      "line": 646,
+      "signature": "theorem bilateral_parry_maximizer (hk : 2 ≤ k) (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (hsuffix : ∀ (z : Bool × RelationPath k) (t : ℤ), let j"
     },
     "D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law": {
       "module": "D5/S3/TotalVariation/ParryResetLaw",
