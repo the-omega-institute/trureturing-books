@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "d5789ff84f77e21c3bb7b862ee3e986c7eecd393",
-  "pinned_at": "2026-11-19T09:33:14Z",
+  "commit": "c9af1a07b59328cd3dc7264173d2e47649a12c1e",
+  "pinned_at": "2026-11-19T11:38:50Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1189,11 +1189,19 @@
       "line": 57,
       "signature": "theorem alternating_completion_law [Finite V] (E : V → V → Prop) (k : V → Bool) (n : ℕ) (hn : 0 < n) (hout : Relator.RightUnique E) (hin : Relator.LeftUnique E) (ha : ∀ x, ¬ TransGen E x x) (hk : ∀ x y, E x y → k x ≠ k y) (hr : Nat.card (Side k false) = n) (hb : Nat.card (Side k true) = n) : let S : Set (AlternatingFullCycle k)"
     },
+    "D5/S3/Combinatorics/Graph/LinearForests/AlternatingConnectorLaw.connector_mass": {
+      "module": "D5/S3/Combinatorics/Graph/LinearForests/AlternatingConnectorLaw",
+      "name": "D5.S3.Combinatorics.Graph.LinearForests.AlternatingConnectorLaw.connector_mass",
+      "kind": "theorem",
+      "statement_id": "sha256:f95f74ce1bcbcbfbac459d0e7aaa92848f8d5e139f1c13ccf2c8e76ebf3d473e",
+      "line": 226,
+      "signature": "theorem connector_mass [Finite C] (s d : C → Bool) (x y : C) (hxy : y ≠ x) (μ : PMF (Compatible s d)) (hμ : ∀ σ, μ σ = (Nat.card (Compatible s d) : ℝ≥0∞)⁻¹) : let R"
+    },
     "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory.alternating_completion_classification": {
       "module": "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory",
       "name": "D5.S3.Combinatorics.Graph.LinearForests.CompatibleCycleInventory.alternating_completion_classification",
       "kind": "theorem",
-      "statement_id": "sha256:d165dbf69d6e647380e0be4e7c96c3bd3324097e8655fe50459a0dc8740d909d",
+      "statement_id": "sha256:953a80f96bbc9577c1a9be794b89cc185647645fae275e80ac3d298cfef4daa8",
       "line": 683,
       "signature": "theorem alternating_completion_classification [Finite V] (n : ℕ) (E : V → V → Prop) (k : V → Bool) (hout : Relator.RightUnique E) (hin : Relator.LeftUnique E) (ha : ∀ x, ¬ TransGen E x x) (hk : ∀ x y, E x y → k x ≠ k y) (hr : Nat.card (Side k false) = n) (hb : Nat.card (Side k true) = n) : ∃ (t : Component E ≃ Tail E) (h : Component E ≃ Head E) (Φ : AlternatingCompletion E k ≃ Compatible (fun A => k (h A)) (fun A => !(k (t A)))), (∀ A, Quotient.mk (EqvGen.setoid E) (t A).1 = A) ∧ (∀ A, Quotient.mk (EqvGen.setoid E) (h A).1 = A) ∧ (∀ σ A, σ.1 (t A) = h ((Φ σ).1 A)) ∧ let s"
     },
@@ -1201,7 +1209,7 @@
       "module": "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory",
       "name": "D5.S3.Combinatorics.Graph.LinearForests.CompatibleCycleInventory.compatible_cycle_card",
       "kind": "theorem",
-      "statement_id": "sha256:d165dbf69d6e647380e0be4e7c96c3bd3324097e8655fe50459a0dc8740d909d",
+      "statement_id": "sha256:953a80f96bbc9577c1a9be794b89cc185647645fae275e80ac3d298cfef4daa8",
       "line": 496,
       "signature": "theorem compatible_cycle_card [Finite C] (s d : C → Bool) (hb : inventory s d false true = inventory s d true false) : Nat.card (Compatible s d) = if Nat.card C = 0 then 0 else if 0 < inventory s d false true then inventory s d false true * (Nat.card (Side s false) - 1).factorial * (Nat.card (Side s true) - 1).factorial else if inventory s d false false = 0 ∨ inventory s d true true = 0 then (Nat.card C - 1).factorial else 0"
     },
@@ -6217,9 +6225,17 @@
       "module": "D5/S3/TotalVariation/ParryKSEntropy",
       "name": "D5.S3.TotalVariation.ParryKSEntropy.bilateral_parry_entropy",
       "kind": "theorem",
-      "statement_id": "sha256:2e49997867bb4121e750af46aa22506e03acd72630a6f625dc76f132dd83f4d5",
+      "statement_id": "sha256:8265812dbd46ad2a4411db127de7e1fcf399712b98cb878dadea8223b1dc7065",
       "line": 379,
       "signature": "theorem bilateral_parry_entropy (k : ℕ) (hk : 2 ≤ k) : ∃ (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (Tμ : MeasurePreserving (@relationShift k) μ μ), (∀ (t : ℤ) (n : ℕ) (w : Fin (n + 1) → Fin k), (μ : Measure (RelationPath k)) {r | (fun i : Fin (n + 1) => ((e (false, r)).val (t + i.val)).2) = w} = ENNReal.ofReal (suffixLaw k (w 0)) * ∏ i : Fin n, ENNReal.ofReal (suffixKernel k (w i.castSucc) (w i.succ))) ∧ ksEntropy Tμ = ((-Real.log (parryParameter k) : ℝ) : EReal) ∧ (∀ (ρ : ProbabilityMeasure (RelationPath k)) (Tρ : MeasurePreserving (@relationShift "
+    },
+    "D5/S3/TotalVariation/ParryKSMaximizer.bilateral_parry_maximizer": {
+      "module": "D5/S3/TotalVariation/ParryKSMaximizer",
+      "name": "D5.S3.TotalVariation.ParryKSMaximizer.bilateral_parry_maximizer",
+      "kind": "theorem",
+      "statement_id": "sha256:833c5de6fce95ec1fc8d23789a46b35392e8a671b12069bcae8290daa4bde85c",
+      "line": 646,
+      "signature": "theorem bilateral_parry_maximizer (hk : 2 ≤ k) (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (hsuffix : ∀ (z : Bool × RelationPath k) (t : ℤ), let j"
     },
     "D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law": {
       "module": "D5/S3/TotalVariation/ParryResetLaw",

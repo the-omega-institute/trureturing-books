@@ -376,6 +376,25 @@ On the original labels, choosing the opposite of the source color as the target 
 
 Gessel applies a linear functional to a product of cycle rook polynomials to obtain the cycle-weight enumerator for permutations that exchange two equally sized parts. The linear coefficient of this enumerator gives the same $n!(n-1)!$. For the empty forest, $M=n!(n-1)!$ and the event has probability $1$. The incompatible pair of paths at the start of this subsection has $M=0$ and probability $0$. [Original, Section 8, page 12](https://people.brandeis.edu/~gessel/homepage/papers/rookp.pdf)
 
+::: {.theorem #thm-alternating-connector-mass title="Probability of a prescribed connector between distinct components" lean="D5/S3/Combinatorics/Graph/LinearForests/AlternatingConnectorLaw.connector_mass"}
+Use the uniform law on compatible component cycles from [@thm-alternating-completion-law]. Fix distinct components $A,B$. The event $\sigma(t(A))=h(B)$ has probability zero if $s(B)\ne d(A)$.
+
+If $s(B)=d(A)$, remove label $A$ and set the source color of $B$ to $s(A)$. Leave all other source colors and the remaining destination colors unchanged. Let $R$ be the remaining carrier, $a',b'$ the two source-color counts, $m'$ the number of false-to-true labels, and $p',q'$ the two same-color counts. Define
+$$
+M'=
+\begin{cases}
+m'(a'-1)!(b'-1)!, & m'>0,\\
+(|R|-1)!, & m'=0 \text{ and } (p'=0\text{ or }q'=0),\\
+0, & m'=0 \text{ and }p',q'>0 .
+\end{cases}
+$$
+The conditional probability of the connector is $M'/M$, where $M$ is the original positive completion count.
+:::
+
+::: proof
+The component bijection identifies the event with $\pi(A)=B$. In such a cycle, the predecessor of $A$ is redirected to $B$ after $A$ is removed. Assigning $B$ the old source color of $A$ preserves compatibility at that redirected edge. The inverse inserts $A$ immediately before $B$, using $s(B)=d(A)$ for the inserted edge. The resulting transition inventory is balanced: the auxiliary transitions $s(A)\to d(A)$ and $s(B)\to d(B)$ are replaced by $s(A)\to d(B)$. The inventory count on $R$ is therefore $M'$. Each original compatible component cycle has mass $1/M$.
+:::
+
 ## 16.2.3 Undirected full cycles: two orientations of the same completed graph {#sec-undirected-cycle-orientation-fibers}
 
 On an undirected cycle through five labelled vertices, clockwise and counterclockwise traversal give different successor permutations with exactly the same edges. Forgetting direction must identify those two actual representations, rather than merely divide a count by two. The correspondence below keeps the original labelled vertices; the prescribed edges may even already form a complete cycle.
@@ -491,7 +510,7 @@ The probability law concerns one fixed $F$. For instance, when $F$ is already a 
 
 **Which bridges to a classical oracle lower bound remain?** [@thm-directed-forest-cycle-completion] gives the ordinary directed model's static uniform law, and [@thm-alternating-forest-classification] counts the alternating completions, with the conditional law given by [@thm-alternating-completion-law]. Three distinctions separate them from the glued-trees result in [@rem-qsvt-walks-literature]:
 
-1. **Graph distribution and orientation.** Ben-David et al. (*SIAM Journal on Computing* **53**(6), 2024, [doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975), §6.3.2, Lemmas 6.11–6.13, PDF pages 37–39) use one uniform cycle on each side's leaves for the self-weld, and a uniform alternating cycle between the two sides for the weld. [@thm-alternating-forest-classification] gives the alternating completion counts, and [@thm-alternating-completion-law] gives the fixed-edge event mass and conditional law. For ordinary undirected full cycles, [@thm-undirected-cycle-orientation-fibers] now identifies orientations and representation multiplicities over the same actual completed graph: each fiber is exactly a pair of reversed lifts, with edge-insertion events preserved. [@thm-uniform-undirected-cycle-completion] gives the uniform law on ordinary undirected completions of a fixed graph. The alternating endpoint probability for a given connector requires its own count among compatible component cycles.
+1. **Graph distribution and orientation.** Ben-David et al. (*SIAM Journal on Computing* **53**(6), 2024, [doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975), §6.3.2, Lemmas 6.11–6.13, PDF pages 37–39) use one uniform cycle on each side's leaves for the self-weld, and a uniform alternating cycle between the two sides for the weld. [@thm-alternating-forest-classification] gives the alternating completion counts, and [@thm-alternating-completion-law] gives the fixed-edge event mass and conditional law. For ordinary undirected full cycles, [@thm-undirected-cycle-orientation-fibers] now identifies orientations and representation multiplicities over the same actual completed graph: each fiber is exactly a pair of reversed lifts, with edge-insertion events preserved. [@thm-uniform-undirected-cycle-completion] gives the uniform law on ordinary undirected completions of a fixed graph. [@thm-alternating-connector-mass] gives the conditional probability of a specified alternating connector between distinct components.
 2. **Conditioning information.** Both directed laws condition on the presence of all edges of a fixed $E$. An adaptive algorithm's full query history also involves random names, query choices, answers listing all neighbors, and possibly color information. One must prove, on the same random graph realization, that these history conditions leave precisely the asserted uniform completion set, or establish the appropriate different conditional law. Replacing a history by $E$ does not establish this. The cited Ben-David et al. lemmas permit only queries to names already in the knowledge graph; queries outside it require a separate argument. Whether sparse random names provide additional information is also beyond this theorem.
 3. **Queries, embeddings, and success events.** In [quant-ph/0209131v2, Section IV](https://arxiv.org/abs/quant-ph/0209131v2), Childs et al. first handle guessed new names, colors, and games restricted to known names, then pass to random tree embeddings and bound collision and `EXIT` events to obtain the original Theorem 9. Ben-David et al.'s footnote 14 explicitly notes that queries returning all neighbors give an embedding tree with $O(t)$ vertices, not literally $t$. Their printed component lower bound $2^k-2t$, pair bound $2/(2^k-2t)$, and equation (6.4), $O(t^2/(2^k-t))$, are retained as separately stated in the source; no unproved explicit constant or parameter range is assembled from them here.
 

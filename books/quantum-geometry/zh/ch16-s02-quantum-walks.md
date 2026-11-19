@@ -378,6 +378,25 @@ $$
 
 Gessel 将线性泛函应用于循环车多项式的乘积，得到交换两个等势部分的置换按循环数计的生成函数。该生成函数的一次项系数是上述 $n!(n-1)!$。取空森林时 $M=n!(n-1)!$，事件概率为 $1$。本小节开头的两条互不相容路径给出 $M=0$，事件概率为 $0$。 [原文第 8 节，第 12 页](https://people.brandeis.edu/~gessel/homepage/papers/rookp.pdf)
 
+::: {.theorem #thm-alternating-connector-mass title="不同分量之间指定连接的概率" lean="D5/S3/Combinatorics/Graph/LinearForests/AlternatingConnectorLaw.connector_mass"}
+沿用 [@thm-alternating-completion-law] 的相容分量整圈均匀律。固定不同分量 $A,B$。若 $s(B)\ne d(A)$，则事件 $\sigma(t(A))=h(B)$ 的概率为零。
+
+若 $s(B)=d(A)$，删除标号 $A$，把 $B$ 的源颜色改为 $s(A)$，其余源颜色及保留标号的目标颜色照旧。记剩余标号集为 $R$，两个源颜色的计数为 $a',b'$，从假到真的交叉计数为 $m'$，两个同色计数为 $p',q'$。令
+$$
+M'=
+\begin{cases}
+m'(a'-1)!(b'-1)!, & m'>0,\\
+(|R|-1)!, & m'=0 \text{ 且 }(p'=0\text{ 或 }q'=0),\\
+0, & m'=0 \text{ 且 } p',q'>0 .
+\end{cases}
+$$
+指定连接的条件概率为 $M'/M$，其中 $M$ 是原有的正补全计数。
+:::
+
+::: proof
+分量双射把所问事件送到 $\pi(A)=B$。在该事件中的整圈上，删去 $A$ 后，让 $A$ 的前驱直接连到 $B$。将 $B$ 的源颜色改为 $A$ 原来的源颜色，便保留了这条改接边的相容性。逆操作在 $B$ 前紧邻插回 $A$，借由 $s(B)=d(A)$ 保证所插连接相容。辅助跃迁 $s(A)\to d(A)$ 和 $s(B)\to d(B)$ 由 $s(A)\to d(B)$ 取代，故新库存仍平衡。对 $R$ 应用库存计数得到 $M'$。每个原有相容分量整圈的质量都是 $1/M$。
+:::
+
 ## 16.2.3 无向整圈：两个方向与同一完成图 {#sec-undirected-cycle-orientation-fibers}
 
 五个点排成一个无向整圈，顺时针与逆时针是两个不同的后继置换，却给出完全相同的边。忘掉方向时，必须识别的是这两个实际表示，而不只是把一个计数除以二。下面在原来的标号顶点上完成这个对应；已知边甚至可以已经组成整圈。
@@ -493,7 +512,7 @@ $$
 
 **通向经典黑盒下界仍需哪些桥梁？** [@thm-directed-forest-cycle-completion] 给出普通有向模型的静态均匀律，[@thm-alternating-forest-classification] 给出交替模型的补全计数，[@thm-alternating-completion-law] 给出固定边集的条件律。它们与 [@rem-qsvt-walks-literature] 的黏合树结果之间还有三层区别：
 
-1. **图的分布与方向。** Ben-David 等人（*SIAM Journal on Computing* **53**(6)，2024，[doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975)，§6.3.2，Lemmas 6.11–6.13，PDF 第 37–39 页）在 self-weld 中使用每侧叶子上的一个均匀整圈，在 weld 中使用两侧叶子间的均匀交替整圈。[@thm-alternating-forest-classification] 给出交替补全的分类与基数，[@thm-alternating-completion-law] 给出固定延拓事件的概率和条件律。普通无向整圈的定向与表示重数现由 [@thm-undirected-cycle-orientation-fibers] 在同一实际完成图上给出：每个纤维恰为一对反向提升，并保留加边事件。[@thm-uniform-undirected-cycle-completion] 给出固定图的普通无向补全均匀律。交替模型中，某个连接的条件概率取决于包含该连接的相容分量整圈数。
+1. **图的分布与方向。** Ben-David 等人（*SIAM Journal on Computing* **53**(6)，2024，[doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975)，§6.3.2，Lemmas 6.11–6.13，PDF 第 37–39 页）在 self-weld 中使用每侧叶子上的一个均匀整圈，在 weld 中使用两侧叶子间的均匀交替整圈。[@thm-alternating-forest-classification] 给出交替补全的分类与基数，[@thm-alternating-completion-law] 给出固定延拓事件的概率和条件律。普通无向整圈的定向与表示重数现由 [@thm-undirected-cycle-orientation-fibers] 在同一实际完成图上给出：每个纤维恰为一对反向提升，并保留加边事件。[@thm-uniform-undirected-cycle-completion] 给出固定图的普通无向补全均匀律。[@thm-alternating-connector-mass] 给出交替模型中不同分量之间指定连接的条件概率。
 2. **条件信息。** 普通有向与交替有向的条件律都以固定边集 $E$ 全部出现为条件。自适应算法看到的完整查询历史还涉及随机名字、查询选择、全部邻居的回答及可能的颜色信息。必须在同一个随机图实现上证明这些历史条件恰好留下所声称的均匀补全集，或给出其他准确的条件律；把历史简写成 $E$ 并不能证明这一点。Ben-David 等人的上述引理只允许查询知识图中已有的名字，知识图外查询另有论证；随机稀疏名字是否提供额外信息也不由此定理回答。
 3. **查询、嵌入与成功事件。** Childs 等人 [quant-ph/0209131v2 第 IV 节](https://arxiv.org/abs/quant-ph/0209131v2) 先处理猜中新名字、颜色与已知名字查询的游戏转换，再转向树的随机嵌入，最后分别控制碰撞和 `EXIT` 事件，才得到原文 Theorem 9。Ben-David 等人脚注 14 特别说明：一次回答全部邻居的查询对应嵌入树中的 $O(t)$ 个顶点，并非严格 $t$ 个。其印刷论证中的分量下界 $2^k-2t$、配对界 $2/(2^k-2t)$ 与式 (6.4) 的 $O(t^2/(2^k-t))$ 各按原文保留；这里不将它们拼成未经证明的显式常数或参数范围。
 

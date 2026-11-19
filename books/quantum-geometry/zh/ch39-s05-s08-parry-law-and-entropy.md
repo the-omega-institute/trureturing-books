@@ -1,6 +1,6 @@
 # 35.6.8 帕里平稳律、逃逸对计数与分形视界熵问题 {#sec-ch39-p2e-entropy}
 
-在讨论“熵”之前，先区分三个层次：有限状态的马尔可夫定律、整数时间轴上完整路径的可测坐标重建，以及对所有不变概率测度的熵比较。路径律、度量熵上界及其达到性、拓扑熵公式已有对应的 Lean 核验。下文给出最大熵测度唯一性的推导，也讨论诱导回归熵。分形纠缠标度仍是开放问题。
+在讨论“熵”之前，先区分三个层次：有限状态的马尔可夫定律、整数时间轴上完整路径的可测坐标重建，以及对所有不变概率测度的熵比较。路径律、度量熵上界及其达到性、拓扑熵公式已有对应的 Lean 核验。最大熵测度的唯一性也有 Lean 定理，下文给出推导并讨论诱导回归熵。分形纠缠标度仍是开放问题。
 
 在马尔可夫链侧，对任意阶数 $k \ge 2$，令互反帕里参数为 $p = \operatorname{parryParameter}(k) = \beta_k^{-1}$。在带绝对符号位与当前连续 `1` 游程长度的有向状态空间 $\operatorname{State}(k) = \mathrm{Bool} \times \operatorname{Fin} k$ 上，定义后缀权重 $w_j = \operatorname{suffixWeight}(k, p, j) = \sum_{a=0}^{k-j-1} p^{a+1}$、归一化常数 $Z_k = \sum_{j=0}^{k-1} p^j w_j$、符号翻转对合 $\operatorname{flip}(b, j) = (!b, j)$，以及重置转移核 $P_k = \operatorname{kernel}(k, p)$：从状态 $s = (b, j)$ 出发，以概率 $p / w_j$ 翻转符号并重置游程至 $(!b, 0)$，当 $j + 1 < k$ 时以概率 $p\, w_{j+1} / w_j$ 保持符号并推进游程至 $(b, j + 1)$，其余转移概率为 $0$。对应状态分布定义为
 
@@ -326,6 +326,19 @@ $$
 从越来越早的起点读取后缀，得到的划分因平稳性具有相同的熵率。这些划分沿正向移位生成所有布尔坐标，因为一位为假恰好等价于其后一位置的后缀为零。因此共同熵率就是完整的柯尔莫哥洛夫–西奈熵。完整证明由 Lean 内核检查。
 :::
 
+::: {.theorem #thm-ch39-p2e-parry-ks-maximizer title="双向帕里律是唯一的最大熵测度" lean="D5/S3/TotalVariation/ParryKSMaximizer.bilateral_parry_maximizer"}
+设 $K\ge2$，取满足最近零位后缀性质的编码 $e$，以及在每个整数起点都具有 [@thm-ch39-p2e-native-bilateral-parry-law] 所给平稳后缀柱集的概率 $\mu$。记 $p=\operatorname{parryParameter}(K)$。对合法无符号双向路径上每个被左移 $T$ 保持的概率 $\rho$，
+
+$$
+h_{\mathrm{KS}}(\rho,T)\le -\log p,\qquad
+h_{\mathrm{KS}}(\rho,T)=-\log p\quad\Longleftrightarrow\quad\rho=\mu.
+$$
+:::
+
+::: proof
+熵达到上界时，每段有限历史与下一后缀的联合律都等于该历史的边缘律接一次帕里转移。每个正后缀只有一个可能的前驱，所以平稳性确定初始后缀边缘。该边缘和转移公式确定所有后缀柱集。由于一个关系位为假恰好等价于下一后缀为零，柱集上的相等确定了整个双向关系律。完整证明由 Lean 内核检查。
+:::
+
 ::: {.remark #rem-ch39-p2e-abramov-literature title="实际双向帕里律的最大熵应用与独立文献边界"}
 **应用的对象与结论。** 固定任意整数阶数 $K\ge2$（即上文的 $k=K$），令 $p=\operatorname{parryParameter}(K)$、$X_K=\operatorname{RelationPath}(K)$、$T=\operatorname{relationShift}$，即 $(Tr)_t=r_{t+1}$。取 [@thm-ch39-p2e-native-bilateral-parry-law] 同时给出的 $e,\mu,\nu$，下文始终使用其中同一个无符号概率律 $\mu$。对 $X_K$ 上每个满足 $T_*\rho=\rho$ 的 Borel 概率测度 $\rho$，以下应用推导给出
 
@@ -339,7 +352,7 @@ h_{\mathrm{KS}}(\rho,T)=-\log p
 \end{aligned}
 $$
 
-对数为自然对数，单位为每原始步的纳特。$h_{\mathrm{KS}}$ 是所有有限可测分割的熵率的上确界，先视为扩展实数；上式同时证明它在这里是有限值。竞争范围是全部不变 Borel 概率测度，不另假定马尔可夫性、遍历性、生成性质、熵极限或唯一性。有符号扩张 $\nu$ 参与构造 $\mu$，但熵比较的载体始终是无符号空间 $X_K$。推导的所属源文见[双向帕里律的论述](https://github.com/the-omega-institute/trureturing/blob/dev/Blueprint/D5/S3/TotalVariation/ParryBilateralLaw.md)；[@thm-ch39-p2e-parry-ks-entropy] 形式化了上界和达到性。下文的推导还给出等号判据。
+对数为自然对数，单位为每原始步的纳特。$h_{\mathrm{KS}}$ 是所有有限可测分割的熵率的上确界，先视为扩展实数；上式同时证明它在这里是有限值。竞争范围是全部不变 Borel 概率测度，不另假定马尔可夫性、遍历性、生成性质、熵极限或唯一性。有符号扩张 $\nu$ 参与构造 $\mu$，但熵比较的载体始终是无符号空间 $X_K$。推导的所属源文见[双向帕里律的论述](https://github.com/the-omega-institute/trureturing/blob/dev/Blueprint/D5/S3/TotalVariation/ParryBilateralLaw.md)；[@thm-ch39-p2e-parry-ks-entropy] 形式化了上界和达到性。等号判据见 [@thm-ch39-p2e-parry-ks-maximizer]，下文展开证明。
 
 **从实际后缀到双向生成分割。** 令 $J_t(r)=J_t^e(r)$，即 $e(\mathrm{false},r)$ 在整数时刻 $t$ 的第二坐标。最近零位刻画使 $J_t$ 恰等于 $t$ 之前的连续真位数，且与符号锚点无关。它对每条合法路径满足
 
@@ -1632,7 +1645,7 @@ $$
 | **5. 克利福德线—面分解** | 三次闵可夫斯基实线性坐标嵌入 $E_\parallel^1 \oplus E_\perp^2$ 与内部复平面缩放旋子 $\beta_3^{-1/2}(\cos\vartheta + B_\perp\sin\vartheta)$ | `MODEL`（需显式声明基与度规，观察者线—面词典见 [@rem-ch39-p2e-unification-model]） |
 | **6. 自指收缩尺度对照** | 正实轴余弦端点 $\cos\theta^* = \theta^*$ [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint) 与三阶共轭范数 $|\alpha| = \beta_3^{-1/2}$ [`tribonacci_secondary_root_mul_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate) | `LEAN ✓`（各自端点与恒等式）+ `文献结果`（$\theta^*$ 超越性）+ `NUM`（$\approx 0.234\%$ 数值邻近，严格不等）+ `MODEL`（$\psi=\psi(\psi)$ 母题，[@ex-ch39-p2e-pisot-dottie-numerics]） |
 | **7. 跨切口编码纠缠秩** | 跨切口条件 $\tau(x)+\iota(y)<K$ 下的可达页秩充要矩形 $1 \le r_b \le R_b$ 与最大页熵 $\ln R_b$ [`complete_original_direct_rank_entropy`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy)（[@thm-ch39-p2e-direct-encoder-ranks]）及谱阻塞 [`actual_encoder_spectral_obstruction`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction) | `LEAN ✓`（秩等于 $K$ 仅在 $K \le R_b$ 时条件可达，非普适恒等）+ `NUM`（如 $R_0=6, R_1=5$）+ `文献结果`（黄金链与里德堡实验，[@rem-ch39-p2e-rydberg-anyon-literature]） |
-| **8. 平稳核、逃逸对与熵** | 有向重置链帕里平稳律 [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law)（[@thm-ch39-p2e-parry-escape-laws]）、实际双向律与柱集（[@thm-ch39-p2e-native-bilateral-parry-law]）、边界柱集不等式 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound) 与有限逃逸对判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | `LEAN ✓`（所引概率律与计数）+ [@thm-ch39-p2e-parry-ks-entropy]（同一无符号律的 KS 上界与达到性）+ 应用推导（最大熵测度唯一性）+ `文献结果`（拓扑熵识别与首次回归阿布拉莫夫公式，[@rem-ch39-p2e-abramov-literature]）+ `OPEN`（分形视界纠缠标度，[@prob-ch39-p2e-fractal-horizon]） |
+| **8. 平稳核、逃逸对与熵** | 有向重置链帕里平稳律 [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law)（[@thm-ch39-p2e-parry-escape-laws]）、实际双向律与柱集（[@thm-ch39-p2e-native-bilateral-parry-law]）、边界柱集不等式 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound) 与有限逃逸对判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | `LEAN ✓`（所引概率律与计数）+ [@thm-ch39-p2e-parry-ks-entropy]（同一无符号律的 KS 上界与达到性）+ [@thm-ch39-p2e-parry-ks-maximizer]（最大熵测度唯一性）+ `文献结果`（拓扑熵识别与首次回归阿布拉莫夫公式，[@rem-ch39-p2e-abramov-literature]）+ `OPEN`（分形视界纠缠标度，[@prob-ch39-p2e-fractal-horizon]） |
 
 当我们在下面的综合实验室中把阶数从 $K = 2$ 拨向 $K = 3$ 再继续上推时，自指扩表语法的多切面几何结构便清清楚楚地浮现出来：$K = 2$ 时内部收缩空间还只是一条实轴线段；跨入 $K = 3$ 的瞬间，复共轭根在二维正交平面上旋出三支精确自覆盖、平面边界零测的劳齐分形内窗；而在每一个阶数上，已被 Lean 内核锁定的离散计数、多项式根圆盘、细化超度量、可达纠缠秩矩形与帕里平稳核构成了坚硬的绿色骨架，支撑起周围明确标界的经典文献、数值实验与跨学科几何诠释。穿越这座离散自指沙盘之后，让我们步入本章收官节 [§35.7 `trureturing` 的“黄金切投”形式原语与灵魂—遗迹吸引子的几何诠释](coda-s03-golden-cut-observers.md)，在闵可夫斯基切投模型集与有界间隙环面回归中完成第三十五章的合拢，随后迈入[第三十六章](ch38-observer-memory-pointer-and-ontological-qram.md)的梦境量子擦除与本体 QRAM 架构。
 
