@@ -1,8 +1,8 @@
-# 32.2 宇宙极简比较机：单指令集（OISC）几何原语 {#sec-ch32-oisc-comparison-engine}
+# 28.2 宇宙极简比较机：单指令集（OISC）几何原语 {#sec-ch32-oisc-comparison-engine}
 
 > “也许宇宙并不复杂，只是一个在不停进行比较的计算系统。”
 
-在[第 32.1 节](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)立下零背景比较公理 $\mathcal{A}_0$（[@def-ch32-axiom-of-comparison]）之后，让我们立刻在计算与几何硬件层面上看清它怎样运转。传统物理学之所以显得盘根错节，是因为人们习惯把世界拆成两截：先预设一块静止的外部时空背景，再往里面塞入五花八门的粒子、场与微分方程。然而在计算机体系结构理论中，早有一条著名的极简定理（Mavaddat & Parhami 1988，文献结果，见[第 32.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-6-4) [@rem-ch32-comparison-axiom-literature]）：一台图灵完备的通用计算机根本不需要成百上千条复杂指令，单凭一条诸如 `SUBLEQ`（相减并按非正跳转，即“比较差值并分支转向”）的原子指令，就足以编织出一切可计算结构——这就是**单指令集计算机（One-Instruction Set Computer, OISC）**。
+在[第 28.1 节](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)立下零背景比较公理 $\mathcal{A}_0$（[@def-ch32-axiom-of-comparison]）之后，让我们立刻在计算与几何硬件层面上看清它怎样运转。传统物理学之所以显得盘根错节，是因为人们习惯把世界拆成两截：先预设一块静止的外部时空背景，再往里面塞入五花八门的粒子、场与微分方程。然而在计算机体系结构理论中，早有一条著名的极简定理（Mavaddat & Parhami 1988，文献结果，见[第 28.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-6-4) [@rem-ch32-comparison-axiom-literature]）：一台图灵完备的通用计算机根本不需要成百上千条复杂指令，单凭一条诸如 `SUBLEQ`（相减并按非正跳转，即“比较差值并分支转向”）的原子指令，就足以编织出一切可计算结构——这就是**单指令集计算机（One-Instruction Set Computer, OISC）**。
 
 在本书的第 1 层正定克利福德实现模型（`MODEL`）中，宇宙底层的硬件比硅基处理器更加彻底：它砍掉了外部时钟、全局内存地址总线与置身事外的“第 3 点 $C$”，全宇宙从头到尾只运行唯一一条无背景几何原语——**两两正交比较指令 $\mathrm{CMP}(\mathbf{A}, \mathbf{B})$**。当任意两个单位方向态 $\mathbf{A}$ 与 $\mathbf{B}$ 相遇时，克利福德几何积当场把它们的相互关系无损拆解为 $\mathcal{A}_0$ 条款 II 的一对正交奇偶比较通道：
 
@@ -37,20 +37,20 @@ $$
 **二十八次两两比较显影出三维八角盒。** 八个八槽单位字按均衡 `3-3-2` 槽位分桶逐对揭开半正定格拉姆表 $G = WW^{\mathsf{T}}$，经谱分解自动显影出半轴长平方为 $(3/8, 3/8, 2/8)$ 的三维八角长方盒（因 $3\nmid 8$ 无等分三轴故不可能为正方体），弦距满足 $d_{ij}^2 = 2(1-G_{ij})$（正算子格拉姆分解标 `LEAN ✓`，勋伯格嵌入定理标 `ARGUED`）。
 :::
 
-- **（三）时间流逝与正交开维：半正定比较表秩超限时的正交残差立轴**。只要有限个状态的全部两两比较都能塞进当前 $D$ 维空间（$G \succeq 0$ 且 $\operatorname{rank}(G) \le D$），系统就处于无时间的静态相容平衡（[第 29 章](ch29-timeless-causality-and-gram-space.md)）。若假想重叠表出现 $\det G < 0$，那意味着内积数据本身自相矛盾，除非修正重叠值否则在**任何**欧氏维数中均无法嵌入；真正的**正交维度扩张**则源于**半正定**比较表（$G_{D+1} \succeq 0$）的秩超出旧维数 $D$——对张成旧表子空间 $\mathcal{V}_D$ 的 $D$ 个线性无关旧态（$\det G_D > 0$），当新单位态 $w(\beta)$ 带有跳出 $\mathcal{V}_D$ 的非零正交残差 $r = (I - P_{\mathcal{V}_D})w = \sin\beta\,\mathbf{e}_{D+1} \neq 0$ 时，舒尔补恒等式给出 $\det G_{D+1} = (\det G_D)\,\lVert r\rVert^2 = (\det G_D)\sin^2\beta > 0$（标准正交旧基 $\det G_D = 1$ 下特化为 $\sin^2\beta > 0$），将欧氏嵌入秩严格从 $D$ 推升至 $D + 1$（$S^\perp \neq \{0\}$ 内存在单位正交向量由 `finite_layer_projection_escape` `LEAN ✓` 锁定，将秩增长 $D \to D + 1$ 诠释为时间轴扩张标 `MODEL`，见[第 31 章 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)）。
+- **（三）时间流逝与正交开维：半正定比较表秩超限时的正交残差立轴**。只要有限个状态的全部两两比较都能塞进当前 $D$ 维空间（$G \succeq 0$ 且 $\operatorname{rank}(G) \le D$），系统就处于无时间的静态相容平衡（[第 25 章](ch29-timeless-causality-and-gram-space.md)）。若假想重叠表出现 $\det G < 0$，那意味着内积数据本身自相矛盾，除非修正重叠值否则在**任何**欧氏维数中均无法嵌入；真正的**正交维度扩张**则源于**半正定**比较表（$G_{D+1} \succeq 0$）的秩超出旧维数 $D$——对张成旧表子空间 $\mathcal{V}_D$ 的 $D$ 个线性无关旧态（$\det G_D > 0$），当新单位态 $w(\beta)$ 带有跳出 $\mathcal{V}_D$ 的非零正交残差 $r = (I - P_{\mathcal{V}_D})w = \sin\beta\,\mathbf{e}_{D+1} \neq 0$ 时，舒尔补恒等式给出 $\det G_{D+1} = (\det G_D)\,\lVert r\rVert^2 = (\det G_D)\sin^2\beta > 0$（标准正交旧基 $\det G_D = 1$ 下特化为 $\sin^2\beta > 0$），将欧氏嵌入秩严格从 $D$ 推升至 $D + 1$（$S^\perp \neq \{0\}$ 内存在单位正交向量由 `finite_layer_projection_escape` `LEAN ✓` 锁定，将秩增长 $D \to D + 1$ 诠释为时间轴扩张标 `MODEL`，见[§27.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)）。
 
 ::: {.viz src="comparison-oisc-engine" preset="time-axis" height="520"}
 **旧表平面装不下的残差，垂直立起成新轴。** 拖动琥珀色端点把新态 $w(\beta)$ 抬离旧平面 $\mathcal{V}_2 = \operatorname{span}(e_1, e_2)$：青色是留在表内的投影 $\cos\beta$，品红是与表内方向比较皆为零的正交残差 $\sin\beta\,e_3$，三态格拉姆行列式 $\sin^2\beta > 0$ 把秩从 $2$ 升到 $3$（`finite_layer_projection_escape` 标 `LEAN ✓`，时间开维诠释标 `MODEL`）。
 :::
 
-- **（四）同余分桶碰撞计数、粗粒化熵与局部搜索屏障：有限带宽比较的原像纤维**。有限观察者每次只能比对有限个投影特征位，微观态遂按读出核归入不可区分的原像纤维（[@thm-ch32-comparison-extensionality-and-lagrange] 第 2 款 `partition_inseparable_iff_kernel` 与[第 38 章 §38.4–§38.5](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation)的 `escapePairs_without_eq_union`，`LEAN ✓`）。在含 $M$ 个微观态的单个读出桶内，`EscapePairs` 精确统计 $M(M-1)$ 个有序相异碰撞对；而粗粒化香农/玻尔兹曼熵则依赖显式微观态概率分布（仅在单桶均匀系综下等于 $\log_2 M$ 比特，对应物理热力学熵须在指明系综假设下归入 `MODEL`），缺乏全局导向场时被迫逐桶盲比则构成有限带宽下的指数级局部搜索屏障。
-- **（五）生命演化与科学定律：历史比较结果的快表记忆化（$T \mapsto T(T)$）**。如果在每一拍面对环境变化时都从零做 $O(2^n)$ 次原始逐位硬比，任何有限系统都会瞬间耗尽步数预算。DNA 遗传密码、大脑突触权重与人类数学定理库，在计算本质上都是把亿万次存活下来的高频比较预先编译成前缀路由快表 $T$（[第 35 章](ch35-light-pulse-and-self-referential-table.md)与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md)），把指数级硬扫描压缩为深度 $b$ 的低步数前缀命中，同时本文给出的逐位名字比对与字典扫描构造都在显式有限步数上界内完成（下方 [@thm-ch32-paid-name-comparison-and-dictionary]，`LEAN ✓`）。
+- **（四）同余分桶碰撞计数、粗粒化熵与局部搜索屏障：有限带宽比较的原像纤维**。有限观察者每次只能比对有限个投影特征位，微观态遂按读出核归入不可区分的原像纤维（[@thm-ch32-comparison-extensionality-and-lagrange] 第 2 款 `partition_inseparable_iff_kernel` 与[§36.5–§36.6](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation)的 `escapePairs_without_eq_union`，`LEAN ✓`）。在含 $M$ 个微观态的单个读出桶内，`EscapePairs` 精确统计 $M(M-1)$ 个有序相异碰撞对；而粗粒化香农/玻尔兹曼熵则依赖显式微观态概率分布（仅在单桶均匀系综下等于 $\log_2 M$ 比特，对应物理热力学熵须在指明系综假设下归入 `MODEL`），缺乏全局导向场时被迫逐桶盲比则构成有限带宽下的指数级局部搜索屏障。
+- **（五）生命演化与科学定律：历史比较结果的快表记忆化（$T \mapsto T(T)$）**。如果在每一拍面对环境变化时都从零做 $O(2^n)$ 次原始逐位硬比，任何有限系统都会瞬间耗尽步数预算。DNA 遗传密码、大脑突触权重与人类数学定理库，在计算本质上都是把亿万次存活下来的高频比较预先编译成前缀路由快表 $T$（[§35.1](ch35-light-pulse-and-self-referential-table.md)与[第 36 章](ch38-observer-memory-pointer-and-ontological-qram.md)），把指数级硬扫描压缩为深度 $b$ 的低步数前缀命中，同时本文给出的逐位名字比对与字典扫描构造都在显式有限步数上界内完成（下方 [@thm-ch32-paid-name-comparison-and-dictionary]，`LEAN ✓`）。
 
 ::: {.viz src="comparison-oisc-engine" preset="lookup" height="520"}
 **读前 $b$ 位的前缀快表与自比较蛛网：省下的比较位数留下同桶逃逸对。** 十六个四位态只读前 $b$ 位时，深度为 $b$ 的前缀树只需 $b$ 次比较即可命中叶子，但同桶内留下 $16(2^{4-b}-1)$ 个分不开的逃逸对（按定义直接计数；`escapePairs_without_eq_union` `LEAN ✓` 是相应的逃逸对并集恒等式）；右侧时间轴运行自比较 $x_{n+1} = \cos x_n$，蛛网步步收向唯一正不动点 $\theta^* \approx 0.7391$（`rational_inverse_endpoint` `LEAN ✓`）。
 :::
 
-- **（六）自我意识与观察者涌现：比较算子折回自身的自指不动点**。当一台局部比较子网络不仅比对外界，还把比较指令折回自身——把求同读数当作下一拍的倾角，反复执行 $x_{n+1} = \cos x_n$——求同标尺与被量倾角在实轴余弦投影下迎头相撞，收敛于唯一自指平衡角 $\cos\theta^* = \theta^* \approx 0.739085$（[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)与[第 33 章](ch33-all-beings-observers-and-mutual-attractors.md)）。
+- **（六）自我意识与观察者涌现：比较算子折回自身的自指不动点**。当一台局部比较子网络不仅比对外界，还把比较指令折回自身——把求同读数当作下一拍的倾角，反复执行 $x_{n+1} = \cos x_n$——求同标尺与被量倾角在实轴余弦投影下迎头相撞，收敛于唯一自指平衡角 $\cos\theta^* = \theta^* \approx 0.739085$（[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)与[第 34 章](ch33-all-beings-observers-and-mutual-attractors.md)）。
 
 下表将这六重涌现现象统一收束为宇宙单指令集比较机的总账单：
 
@@ -89,4 +89,4 @@ $$
 第 1 款将 `compareMachine` 的执行拆为扫描比对阶段与回卷复原阶段：在 `compare` 状态逐拍弹出 $a, b$ 首比特压入暂存栈 `savedLeft, savedRight` 并累计匹配标志位（若一侧提前耗尽则置匹配位为 `false` 并转入耗尽清栈分支），随后在 `restore` 阶段将两条暂存栈逐位倒回左、右主栈，总步数精确受限于往返两趟字长之和加常数状态切换开销 $2(\lvert a\rvert + \lvert b\rvert) + 4$。第 2 款在 `dictionaryStream` 上对字典条目数 $\lvert\mathrm{names}\rvert$ 归纳：每读出一个词条，机器调用内嵌逐位比对子例程，由它复原查询字；未命中则追加一元计数符 `true` 后继续，首次命中或字典耗尽时便回卷，将已读历史逐位接回未读后缀之前，复原字典流，累计步数满足线性界 $(2\lvert\mathrm{query}\rvert + 12)\lvert\mathrm{names}\rvert + 4\bigl\lvert\operatorname{dictionaryStream}(\mathrm{names})\bigr\rvert + 3$。完整证明由 Lean 内核检查。
 :::
 
-[@thm-ch32-paid-name-comparison-and-dictionary] 为宇宙单指令集比较机提供了一本可核对的步数账（`MODEL`）：**上述两台机器逐位比较、逐项查找，并在给定步数上界内无损复原输入与字典纸带**。该运行保证针对这两项构造；比较算法的普适线性下界还需另行指定成本模型并证明。带着 $\mathcal{A}_0$ 与这台有偿单指令比较机，我们现在进入[第 32.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)，将数学与物理的六大公理群正式铸造成以内核验证引理为锚点的条件推论链。
+[@thm-ch32-paid-name-comparison-and-dictionary] 为宇宙单指令集比较机提供了一本可核对的步数账（`MODEL`）：**上述两台机器逐位比较、逐项查找，并在给定步数上界内无损复原输入与字典纸带**。该运行保证针对这两项构造；比较算法的普适线性下界还需另行指定成本模型并证明。带着 $\mathcal{A}_0$ 与这台有偿单指令比较机，我们现在进入[第 28.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)，将数学与物理的六大公理群正式铸造成以内核验证引理为锚点的条件推论链。

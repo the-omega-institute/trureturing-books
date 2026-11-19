@@ -1,4 +1,4 @@
-# 39.5.5 克利福德正交分解：一维膨胀轴与二维内禀旋面 {#sec-ch39-p2e-clifford}
+# 35.6.5 克利福德正交分解：一维膨胀轴与二维内禀旋面 {#sec-ch39-p2e-clifford}
 
 对有理系数或整系数的三阶代数编码 $x = a + b\beta_3 + c\beta_3^2$，经典三次闵可夫斯基实线性坐标映射写为
 
@@ -22,4 +22,4 @@ $$
 **克利福德线—面分解卡（`clifford`）**：三维代数坐标舞台将沿青色一维轴 $E_\parallel$ 的倍率 $\beta_3$ 膨胀，与二维内部平面 $E_\perp$ 上绕双向量轴的紫色旋转收缩 $|\alpha| e^{i\arg\alpha}$ 同台呈现；琥珀色圆点标出当前可拖拽的格点分解位置。坐标求值属 `NUM`，克利福德观察者词典属 `MODEL`。
 :::
 
-既然二维内部旋面上的单步收缩模长定格在 $|\alpha|_{K=3} = \beta_3^{-1/2} \approx 0.737353$，一个自然的数值追问随之浮现：它与[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)和[第 33 章](ch33-all-beings-observers-and-mutual-attractors.md)反复出现的余弦自指不动点 $\theta^* = \cos\theta^* \approx 0.739085$ 究竟是什么关系？
+既然二维内部旋面上的单步收缩模长定格在 $|\alpha|_{K=3} = \beta_3^{-1/2} \approx 0.737353$，一个自然的数值追问随之浮现：它与[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)和[第 34 章](ch33-all-beings-observers-and-mutual-attractors.md)反复出现的余弦自指不动点 $\theta^* = \cos\theta^* \approx 0.739085$ 究竟是什么关系？

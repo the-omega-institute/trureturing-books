@@ -1,10 +1,10 @@
-# 29.4 Coherence vs. Decoherence, the Two-Way Handshake, and Boundary-Locked Causality {#sec-ch29-coherence-handshake-causality}
+# 25.2 Coherence vs. Decoherence, the Two-Way Handshake, and Boundary-Locked Causality {#sec-ch29-coherence-handshake-causality}
 
 > “In logic there is no ‘existence’ versus ‘non-existence’—only coherence and decoherence; so that the future interferes with the past is nothing strange at all: that is causality.”
 
 In [the preceding section](ch29-s03-timeless-gram-causality.md#sec-coda-timeless-causality), unit-vector Gram rigidity showed how a timeless correlation web dissolves the mechanical domino picture of past pushing future. Yet everyday intuition still recoils at the phrase "the future interferes with the past," because it mistakes classical Boolean "existence (`1`) versus non-existence (`0`)" for the deepest ontological grammar of reality. Closing this chapter around the authorial proposition above (cataloged verbatim as `A75` in [Appendix A](appendix-a-s03-verbatim-ledger.md#sec-appendix-a-verbatim-ledger)), we unfold four disciplined pillars—orthogonal hiding and pinching decoherence; the two-way Born handshake and common-phase locking; stationary phase, weak values, delayed-choice erasure no-signaling, and Gram endpoint permutation; and anti-phase paradox cancellation versus self-consistent fixed points—while keeping every Lean 4 kernel theorem (`LEAN ✓`), elementary algebraic derivation (`manual derivation`), external physics source (`Literature`), double-precision numerical check (`NUM`), and orthogonal geometric interpretation (`MODEL`) sharply separated.
 
-## 29.4.1 Dissolving the Boolean Illusion of "Existence vs. Non-Existence": Orthogonal Hiding, Two-Path Cancellation, and Pinching Decoherence {#sec-ch29-handshake-boolean-illusion}
+## 25.2.1 Dissolving the Boolean Illusion of "Existence vs. Non-Existence": Orthogonal Hiding, Two-Path Cancellation, and Pinching Decoherence {#sec-ch29-handshake-boolean-illusion}
 
 When a local detector reports `0`, Boolean habit declares that "nothing is there"; when it reports a definite click, it declares that an absolute classical entity has come into being. In fact, a bare zero reading by itself never identifies its underlying cause (an identically zero input also yields zero), and within controlled linear and operator models, phenomena loosely lumped together as "vanishing" or "freezing into a classical fact" correspond to three mathematically distinct operations (the component formulas below are elementary calculations, `manual derivation`; reading them as "no existence versus non-existence, only coherence and decoherence" is this book's interpretation, `MODEL`):
 
@@ -64,7 +64,7 @@ Reading Clauses 1 and 4 of [@thm-ch29-coherence-complement-and-pinching] togethe
 **Zero Readout Is Not "Non-Existence": Orthogonal Hiding, Anti-Phase Routing, and Pinching Card (`boolean-illusion`)**: Left: decomposing unit vector $\mathbf{B}$ along ruler $\mathbf{A}$—at $\theta = \pi/2$ the cyan axial shadow is $0$ while the magenta complement norm squared and oriented area squared remain $1$, with $\|\mathbf{A}+\mathbf{B}\|^2 = 2$. Center: balanced two-port recombiner—at equal magnitudes and $\Delta = \pi$, port `+` reads $0$ while port `-` reads $1$ ($p_+ + p_- = 1$). Right: $2\times 2$ path density $\rho_\gamma$—pinching $\gamma = 0$ deletes magenta off-diagonal coherence, preserves diagonals, and flattens both ports to $1/2$.
 :::
 
-## 29.4.2 Causality as a Two-Way Born Handshake and Common-Phase Fairness {#sec-ch29-handshake-born-reciprocity}
+## 25.2.2 Causality as a Two-Way Born Handshake and Common-Phase Fairness {#sec-ch29-handshake-born-reciprocity}
 
 Why can a one-way complex overlap $\langle\phi|\psi\rangle$ never serve by itself as an objective causal weight? Under **independent** phase rotations $|\psi\rangle \mapsto e^{i\theta_\psi}|\psi\rangle$ and $|\phi\rangle \mapsto e^{i\theta_\phi}|\phi\rangle$ (note that a *common* rephasing $\theta_\psi = \theta_\phi$ already leaves $\langle\phi|\psi\rangle$ unchanged), direct calculation (`manual derivation`) gives
 
@@ -109,7 +109,7 @@ Keep the exact scope of [@thm-ch29-born-handshake-and-phase-fairness] in view: C
 **Counter-Rotating Amplitudes and Locked Two-Way Born Handshake Card (`born-handshake`)**: Bloch angle $\theta \in [0, \pi]$ and reference phase $\chi \in [0, 2\pi]$ are adjustable. At fixed $\theta$, sweeping $\chi$ counter-rotates the cyan forward overlap $a_{\mathrm{fwd}} = \langle\phi|\psi\rangle$ and violet conjugate echo $a_{\mathrm{echo}} = \langle\psi|\phi\rangle$, while their real product $\operatorname{Tr}(P_\phi P_\psi) = \cos^2(\theta/2)$ and both projectors remain invariant; varying $\theta$ changes $P_\phi$ and the handshake weight.
 :::
 
-## 29.4.3 Future–Past Interference: Stationary-Phase Bundles, Weak Values, Delayed-Choice Erasure No-Signaling, and Gram Endpoint Swap {#sec-ch29-handshake-future-past}
+## 25.2.3 Future–Past Interference: Stationary-Phase Bundles, Weak Values, Delayed-Choice Erasure No-Signaling, and Gram Endpoint Swap {#sec-ch29-handshake-future-past}
 
 Once transition weights are understood as Hermitian pairings across initial and final boundaries, "interference between future and past" loses all mystique: apparent local irreversibility arises only because a partial-trace observer loses access to environmental and correlation sectors, whereas inside an undiscarded joint system unimodular phase records admit coherent reversal and future basis choices sort joint outcomes into complementary interference sub-ensembles without altering the unconditional past marginal. We first lock the four formal theorems governing joint coherent reversal, reduced-state access defect, bipartite marginal blind spots, and positive-operator Gram factorization, and then state the companion physics literature and manual no-signaling and permutation identities:
 
@@ -171,13 +171,13 @@ Next, in the TSVF and delayed-choice quantum-eraser scene, rotating the future m
 **Future-Basis Eraser Sorting and Invariant Past Marginal Card (`tsvf-eraser`)**: Varying future marker angle $\beta \in [0, \pi/2]$ and visibility $V \in [0, 1]$ computes $4\times 4$ matrix traces for joint $p(j, \pm)$, heralded conditional $p(j \mid \pm)$, and unconditional total $p(j) = q_j$—future erasure reveals anti-phased conditional fringes without altering past totals; the weak-value inset plots $Z_w = \tan\eta$ and explicitly flags $\eta = \pi/2$ ($p_{\mathrm{post}} = 0$) as undefined.
 :::
 
-Finally, returning to Chapter 29's three-vector Gram elliptope (cf. Clause 4 of [@thm-ch29-reversal-access-and-gram-realizability]; the permutation invariance below is a manual derivation), swapping $\mathbf{A}_{\mathrm{past}} \leftrightarrow \mathbf{C}_{\mathrm{future}}$ via $P_{13} G P_{13}^{\mathsf{T}}$ exchanges $x$ and $y$ on asymmetric inputs (default $x = 0.2, y = 0.6, z = 0.1$) while preserving spectrum, positive semidefiniteness, and squared volume $\det G = 0.614$:
+Finally, returning to Chapter 25's three-vector Gram elliptope (cf. Clause 4 of [@thm-ch29-reversal-access-and-gram-realizability]; the permutation invariance below is a manual derivation), swapping $\mathbf{A}_{\mathrm{past}} \leftrightarrow \mathbf{C}_{\mathrm{future}}$ via $P_{13} G P_{13}^{\mathsf{T}}$ exchanges $x$ and $y$ on asymmetric inputs (default $x = 0.2, y = 0.6, z = 0.1$) while preserving spectrum, positive semidefiniteness, and squared volume $\det G = 0.614$:
 
 ::: {.viz src="coherence-handshake-causality" preset="gram-symmetry" height="500"}
 **Three-Epoch Gram Endpoint Swap and Determinant Invariance Card (`gram-symmetry`)**: Applying $G' = P_{13} G P_{13}^{\mathsf{T}}$ to real unit vectors $\mathbf{A}_{\mathrm{past}}, \mathbf{B}_{\mathrm{now}}, \mathbf{C}_{\mathrm{future}}$ swaps entries $x$ and $y$ when $x \neq y$ ($G' \neq G$, whereas symmetric snap $x = y = 0.5$ gives $G' = G$) while strictly preserving positive semidefiniteness, eigenvalues, and squared volume $\det G' = \det G = (\mathbf{A}\cdot(\mathbf{B}\times\mathbf{C}))^2 \ge 0$.
 :::
 
-## 29.4.4 Why Causal Loops Never Explode: Anti-Phase Paradox Cancellation vs. Self-Consistent Fixed Points {#sec-ch29-handshake-loop-consistency}
+## 25.2.4 Why Causal Loops Never Explode: Anti-Phase Paradox Cancellation vs. Self-Consistent Fixed Points {#sec-ch29-handshake-loop-consistency}
 
 This coherence-and-decoherence account also resolves the classic riddle of closed causal loops: if future and past couple around a loop, why does the "grandfather paradox" (a self-negating cycle $P \leftrightarrow \neg P$) never blow logic apart? The answer lies in keeping three distinct consistency mechanisms cleanly separated (`manual derivation` + `Literature` + `MODEL`):
 

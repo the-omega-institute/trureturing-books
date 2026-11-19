@@ -57,7 +57,7 @@ section: "Reader's guide"
   <p class="kicker">Ten parts</p>
   <h2 class="t">Ten parts form a staircase, <em>each one dimension higher</em></h2>
   <img src="./img/prelude-parts.en.svg" alt="Ten bars, one per part, each spanning its chapters and one step above the last." style="display: block; height: 600px; max-width: 100%; margin: 20px auto 0;">
-  <p class="lead mt-s">Four chapters apiece across Parts I–IX and three in Part X: point → line, line → plane, plane → sphere, entangled spheres, spacetime sphere, beyond the sphere, construction, synthesis, mutual illumination, non-duality.</p>
+  <p class="lead mt-s">Parts I–VII have four chapters each. Parts VIII, IX and X have five, four and two. Forge and Sanctuary is unnumbered.</p>
 </div>
 <Source>Prelude, “Reader's Guide and Formal Verification Contract” (prelude-parts)</Source>
 
@@ -394,7 +394,7 @@ section: "Part V · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Proposition 17.4 · Theorem 19.7</p>
+  <p class="kicker">Proposition 17.4 · Theorem 19.9</p>
   <h2 class="t">The light cone fixes the metric; on the bridge graph <em>max-flow equals min-cut</em></h2>
 <TheoremCard class="compact mt-s" label="Proposition 17.4" title="Null-cone quadratic-form rigidity" gid="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null" cite="prop-null-cone-rigidity">
 
@@ -469,7 +469,7 @@ section: "Part VI · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 21.3 · Theorem 22.4</p>
+  <p class="kicker">Theorem 21.3</p>
   <h2 class="t">A complete diagonal <em>must escape</em>; zeta is <em>a product over primes</em></h2>
 <TheoremCard class="compact mt-s" label="Theorem 21.3" title="Discontinuity of the complete-catalog relative semantic diagonal" gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous" cite="thm-complete-diagonal-not-continuous">
 
@@ -509,59 +509,58 @@ section: "Part VI · warrant"
 <Source>Chapter 21 literature remark · Chapters 22 and 24, conjectures</Source>
 
 ---
-# 29 Part VII
+# 29 Forge and Sanctuary
 layout: section
-chapter: "07"
-section: "Part VII"
+section: "Forge and Sanctuary"
 ---
 
-<p class="kicker">Part VII · Chapters 25–28</p>
+<p class="kicker">Forge and Sanctuary</p>
 <h2 class="t">Construction and verification: <em>XOR algebra, rotor compilation and Lean 4</em></h2>
 <p class="lead">Reduce matrices to XOR bitmasks; compile single-qubit rotations from Bloch geometry; then open the frozen Lean proofs line by line and see exactly what the kernel checks.</p>
 <div class="card mt">
   <ul class="plain">
-    <li>Ch. 25 Three-bit blades and the XOR–Pauli engine · Ch. 26 ZYZ rotor compilation</li>
-    <li>Ch. 27 and 28 Inside the Lean 4 axiom sanctuary (I and II)</li>
+    <li>Reducing Matrices to XOR · Single-Qubit Rotor Compilation</li>
+    <li>Inside the Lean 4 Axiom Sanctuary (I and II)</li>
   </ul>
 </div>
 
 ---
-# 30 Part VII · picture
-section: "Part VII · picture"
+# 30 Forge and Sanctuary · picture
+section: "Forge and Sanctuary · picture"
 ---
 
 <div class="body">
-  <p class="kicker">Chapter 25 · the mask cube</p>
+  <p class="kicker">Reducing Matrices to XOR · The mask cube</p>
   <h2 class="t">The eight blades are <em>the eight corners of a cube</em></h2>
   <img src="./img/ch25-mask-cube.en.svg" alt="The eight corners of a cube labelled with the eight blades and their bitmasks; amber arrows walk along two edges." style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
   <p class="lead mt-s">Each corner carries a blade and its three-bit mask; multiplying by a blade walks one edge along each direction it lights up, and the masks combine by XOR.</p>
 </div>
-<Source>Chapter 25, ch25-mask-cube</Source>
+<Source>Forge and Sanctuary · Reducing Matrices to XOR (ch25-mask-cube)</Source>
 
 ---
-# 31 Part VII · theorems
-section: "Part VII · theorems"
+# 31 Forge and Sanctuary · theorems
+section: "Forge and Sanctuary · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 25.1 · Proposition 26.3</p>
+  <p class="kicker">Theorem Kernel.1 · Proposition Kernel.12</p>
   <h2 class="t">The Pauli pair anticommutes; a Hermitian 2×2 matrix <em>is a Bloch vector</em></h2>
-<TheoremCard class="compact mt-s" label="Theorem 25.1" title="Anticommutation, self-adjointness and unit squares of the qubit Weyl pair" gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" cite="thm-qubit-weyl-star">
+<TheoremCard class="compact mt-s" label="Theorem Kernel.1" title="Anticommutation, self-adjointness and unit squares of the qubit Weyl pair" gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" cite="thm-qubit-weyl-star">
 
 In $M_2(\mathbb{C})$: $ZX = -XZ$, $X^* = X$, $Z^* = Z$, $X^2 = 1$, $Z^2 = 1$.
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="Proposition 26.3" title="Hermitian Bloch reconstruction and the pure-projector unit sphere" gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" cite="prop-hermitian-bloch-geometry">
+<TheoremCard class="compact mt-s" label="Proposition Kernel.12" title="Hermitian Bloch reconstruction and the pure-projector unit sphere" gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" cite="prop-hermitian-bloch-geometry">
 
 Let $M$ be a Hermitian $2\times 2$ complex matrix. Then $M = \operatorname{blochMatrix}(\operatorname{Re}\operatorname{Tr} M, \operatorname{bloch}(M))$; if moreover $\operatorname{Tr} M = 1$ and $M^2 = M$, then $\lVert\operatorname{bloch}(M)\rVert = 1$.
 
 </TheoremCard>
 </div>
-<Source>Chapter 25 (FiniteDimensional) · Chapter 26 (ActualPureQubitGeometry)</Source>
+<Source>Reducing Matrices to XOR (Kernel.1) · Single-Qubit Rotor Compilation (Kernel.12)</Source>
 
 ---
-# 32 Part VII · literature
-section: "Part VII · warrant"
+# 32 Forge and Sanctuary · literature
+section: "Forge and Sanctuary · warrant"
 ---
 
 <div class="body">
@@ -569,94 +568,94 @@ section: "Part VII · warrant"
   <h2 class="t">The kernel vouches for inference, <span class="hl-violet">not for physical modelling</span></h2>
   <div class="g2 mt">
     <div class="card violet">
-      <h4>Literature · Chapter 26</h4>
+      <h4>Literature · Single-Qubit Rotor Compilation</h4>
       <h3>The SU(2) → SO(3) double cover and ZYZ Euler decomposition</h3>
       <p>The book verifies Bloch reconstruction and the trace identities; the universal theorem that every single-qubit unitary has ZYZ Euler angles up to a global phase is cited from the literature.</p>
     </div>
     <div class="card violet">
-      <h4>Literature · Chapter 27</h4>
+      <h4>Literature · Inside the Lean 4 Axiom Sanctuary (I)</h4>
       <h3>Dependent type theory and the de Bruijn criterion</h3>
       <p>A small, auditable kernel checks every inference; whether a Lean definition faithfully captures a physical object is a modelling question, outside what the kernel guarantees.</p>
     </div>
   </div>
 </div>
-<Source>Chapters 26 and 27, literature remarks</Source>
+<Source>Literature remarks in Single-Qubit Rotor Compilation and Inside the Lean 4 Axiom Sanctuary (I)</Source>
 
 ---
-# 33 Part VIII
+# 33 Part VII · Foundations
 layout: section
-chapter: "08"
-section: "Part VIII"
+chapter: "07"
+section: "Part VII · Foundations"
 ---
 
-<p class="kicker">Part VIII · Chapters 29–32</p>
-<h2 class="t">Synthesis: <em>causality, horizons, quantum fairness and meta-unification</em></h2>
+<p class="kicker">Part VII · Foundations · Chapters 25–28</p>
+<h2 class="t">Foundations · <em>causality, horizons, quantum fairness and meta-unification</em></h2>
 <p class="lead">Pell errors flip sign and shrink without vanishing; quadratic advection never closes; fivefold symmetry bars geometric privilege and aligns unification programs.</p>
 <div class="card mt">
   <ul class="plain">
-    <li>Ch. 29 Timeless causality and Gram space · Ch. 30 Fields (P) and lines (NP)</li>
-    <li>Ch. 31 Quantum essence is fairness · Ch. 32 Unified field and meta-unification</li>
+    <li>Ch. 25 Timeless causality and Gram space · Ch. 26 Fields (P) and lines (NP)</li>
+    <li>Ch. 27 Quantum essence is fairness · Ch. 28 Unified field and meta-unification</li>
   </ul>
 </div>
 
 ---
-# 34 Part VIII · picture
-section: "Part VIII · picture"
+# 34 Part VI · Crossing the Horizon · picture
+section: "Part VI · Crossing the Horizon · picture"
 ---
 
 <div class="body">
-  <p class="kicker">Chapter 29 · the Pell seam</p>
+  <p class="kicker">Chapter 23 §23.1 · The Pell seam</p>
   <h2 class="t">Each step the error flips sign and shrinks by <em>s</em>, <em>yet never vanishes</em></h2>
   <img src="./img/ch29-pell-seam.en.svg" alt="Bars are the Pell errors, cyan up and magenta down, shortening by the same step on a logarithmic scale." style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
   <p class="lead mt-s">The bars are the errors <Tex t="P_{k+1}s - P_k" />, cyan pointing up for positive, magenta down for negative; on the logarithmic axis each step shrinks by <Tex t="s = \sqrt2 - 1 \approx 0.414" />.</p>
 </div>
-<Source>Chapter 29, ch29-pell-seam</Source>
+<Source>Chapter 23 §23.1 (ch29-pell-seam)</Source>
 
 ---
-# 35 Part VIII · theorems
-section: "Part VIII · theorems"
+# 35 Parts VI–VII · Crossing the Horizon and Foundations · theorems
+section: "Parts VI–VII · Crossing the Horizon and Foundations · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 29.4 · Theorem 30.26</p>
+  <p class="kicker">Theorem 23.4 · Theorem 26.26</p>
   <h2 class="t">The silver slope has a <em>best-approximation bound</em>; finite-mode advection <em>never closes</em></h2>
-<TheoremCard class="compact mt-s" label="Theorem 29.4" title="Best-approximation lower bound for the silver slope" gid="D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_best_approximation" cite="thm-ch29-silver-best-approximation">
+<TheoremCard class="compact mt-s" label="Theorem 23.4" title="Best-approximation lower bound for the silver slope" gid="D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_best_approximation" cite="thm-ch29-silver-best-approximation">
 
 Let $s = \sqrt2 - 1$, $P_k$ the Pell numbers and $0 < m < P_{k+2}$. Then $s^{k+1} \le \lvert m s - z\rvert$ for every integer $z$.
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="Theorem 30.26" title="Projection closure criterion and finite-mode advection non-closure" gid="D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff" cite="thm-coda-quadratic-advection-no-closure">
+<TheoremCard class="compact mt-s" label="Theorem 26.26" title="Projection closure criterion and finite-mode advection non-closure" gid="D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff" cite="thm-coda-quadratic-advection-no-closure">
 
 For idempotent $P$ and $V(x) = Lx - B(x, x)$, an exact closure $P(V(x)) = f(P(x))$ exists iff three leakage conditions vanish; in five-mode Fourier advection $P\bigl(B(a, b) + B(b, a)\bigr)_{0,0} = i/4 \neq 0$, so no exact closure exists.
 
 </TheoremCard>
 </div>
-<Source>Chapter 29 (SilverSlopeAbelianPellArithmetic) · Chapter 30 (QuadraticObservationClosure)</Source>
+<Source>Chapter 23 §23.1 (SilverSlopeAbelianPellArithmetic) · Chapter 26 §26.4 (QuadraticObservationClosure)</Source>
 
 ---
-# 36 Part VIII · theorems (continued)
-section: "Part VIII · theorems"
+# 36 Part VII · Foundations · theorems (continued)
+section: "Part VII · Foundations · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 31.4 · Theorem 32.11</p>
+  <p class="kicker">Theorem 27.4 · Theorem 28.11</p>
   <h2 class="t">Each round turns <em>2θ</em>; two quarter turns <em>reverse</em></h2>
-<TheoremCard class="compact mt-s" label="Theorem 31.4" title="Uniform amplification turns in a plane (item 2)" gid="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation" cite="thm-ch31-horizon-landauer-ergodic-fairness">
+<TheoremCard class="compact mt-s" label="Theorem 27.4" title="Uniform amplification turns in a plane (item 2)" gid="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation" cite="thm-ch31-horizon-landauer-ergodic-fairness">
 
 Let $J$, $C$ be isometries, $P$ a projection, and let $U = CJ$ have success overlap $p$: $(PU)^\dagger(PU) = p\,I$ with $0 < p < 1$; put $\theta = \arcsin\sqrt p$ and let $W$, $B$ be the success and failure parts. Then for every $n$, $(\operatorname{iterate}(U, P))^n\,U = \sin\bigl((2n + 1)\theta\bigr)\,W + \cos\bigl((2n + 1)\theta\bigr)\,B$.
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="Theorem 32.11" title="A skew-adjoint unitary squares to minus one (item 1)" gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" cite="thm-ch32-generative-self-reference-and-zeckendorf">
+<TheoremCard class="compact mt-s" label="Theorem 28.11" title="A skew-adjoint unitary squares to minus one (item 1)" gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" cite="thm-ch32-generative-self-reference-and-zeckendorf">
 
 Let $R$ be a finite square complex matrix with $R^\dagger = -R$ and $R R^\dagger = I_n$. Then $R^2 = -I_n$.
 
 </TheoremCard>
 </div>
-<Source>Chapter 31 (CoherentUniformAmplification) · Chapter 32 (BalancedUnitaryComplexStructure)</Source>
+<Source>Chapter 27 §27.3 (CoherentUniformAmplification) · Chapter 28 §28.4 (BalancedUnitaryComplexStructure)</Source>
 
 ---
-# 37 Part VIII · literature and open problems
-section: "Part VIII · warrant"
+# 37 Parts VI–VII · Crossing the Horizon and Foundations · literature and open problems
+section: "Parts VI–VII · Crossing the Horizon and Foundations · warrant"
 ---
 
 <div class="body">
@@ -664,149 +663,143 @@ section: "Part VIII · warrant"
   <h2 class="t">Continued fractions are literature; <em class="warn">Navier–Stokes regularity is open</em></h2>
   <div class="g2 mt-s">
     <div class="card violet">
-      <h4>Literature · Chapter 29</h4>
+      <h4>Literature · Chapter 23 §23.1</h4>
       <h3><Tex t="Q_n/P_n" /> and the convergents of <Tex t="\sqrt2" /></h3>
       <p>The book verifies the Pell remainder and the best-approximation bound; that these are exactly the continued-fraction convergents of <Tex t="\sqrt2" /> is the classical picture, cited from the literature.</p>
     </div>
     <div>
-      <TheoremCard class="compact" label="Conjecture 30.25" title="Global regularity of the 3D Navier–Stokes equations" status="open" cite="conj-coda-navier-stokes-regularity">
+      <TheoremCard class="compact" label="Conjecture 26.25" title="Global regularity of the 3D Navier–Stokes equations" status="open" cite="conj-coda-navier-stokes-regularity">
         <p>Whether the unforced three-dimensional incompressible Navier–Stokes equations always have a global smooth solution for smooth initial data (Clay Millennium statements A / B).</p>
       </TheoremCard>
       <p class="lead mt-s">Finite-mode non-closure is a verified theorem; it does not settle this conjecture.</p>
     </div>
   </div>
 </div>
-<Source>Chapter 29 literature remark · Chapter 30 conjecture</Source>
+<Source>Chapter 23 §23.1 literature remark · Chapter 26 §26.4, Conjecture 26.25</Source>
 
 ---
-# 38 Part IX
+# 38 Part IX · Mutual Illumination and Breaking Attachment
 layout: section
 chapter: "09"
-section: "Part IX"
+section: "Part IX · Mutual Illumination and Breaking Attachment"
 ---
 
-<p class="kicker">Part IX · Chapters 33–36</p>
+<p class="kicker">Part IX · Mutual Illumination and Breaking Attachment · Chapters 34–37</p>
 <h2 class="t">Mutual illumination: <em>universal observers, self-referential tables, beyond reincarnation</em></h2>
-<p class="lead">Whatever keeps records and takes part in pairwise measurement can be read as an observer; one and two orthogonal turns giving the same reading locate the observer; the lookup algorithm lives in the table; equal steps in rapidity never reach the pure light at <Tex t="90^\circ" />.</p>
+<p class="lead">Whatever keeps records and takes part in pairwise measurement can be read as an observer; the lookup algorithm lives in the table; equal steps in rapidity never reach the pure light at <Tex t="90^\circ" />.</p>
 <div class="card mt">
   <ul class="plain">
-    <li>Ch. 33 All beings as observers · Ch. 34 Orthogonality-degeneracy blind spots</li>
-    <li>Ch. 35 Arriving on light, table expansion · Ch. 36 Infinite discrete steps</li>
+    <li>Ch. 34 Universal observers · Ch. 35 Light, self-referential tables and carry-free coding</li>
+    <li>Ch. 36 Dream erasure and ontological QRAM · Ch. 37 Ternion-field Transformer and geodesic intelligence</li>
   </ul>
 </div>
 
 ---
-# 39 Part IX · picture
-section: "Part IX · picture"
+# 39 Part IX · Mutual Illumination and Breaking Attachment · picture
+section: "Part IX · Mutual Illumination and Breaking Attachment · picture"
 ---
 
 <div class="body">
-  <p class="kicker">Chapter 36 · two rulers</p>
+  <p class="kicker">Chapter 35 §35.3 · Two rulers</p>
   <h2 class="t">The angle ruler ends at <em>90°</em>; the rapidity ruler <em>runs to infinity</em></h2>
   <img src="./img/ch36-two-rulers.en.svg" alt="The upper angle ruler is cut off by a magenta wall at 90°; the lower rapidity ruler runs to infinity, and its evenly spaced cyan dots map along dashed lines to angles crowding towards 90°." style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
   <p class="lead mt-s">On the rapidity ruler the cyan dots start at <Tex t="\eta_0 \approx 0.817" /> in equal steps <Tex t="\Delta\eta = 1" />; dashed lines send each to its angle <Tex t="\theta_k" /> (<Tex t="\sin\theta_k = \tanh\eta_k" />), each crowding closer to the magenta <Tex t="90^\circ" /> wall, all of them left of it.</p>
 </div>
-<Source>Chapter 36, ch36-two-rulers</Source>
+<Source>Chapter 35 §35.3 (ch36-two-rulers)</Source>
 
 ---
-# 40 Part IX · theorems
-section: "Part IX · theorems"
+# 40 Parts VIII–IX · Arcs and Unification, Mutual Illumination · theorems
+section: "Parts VIII–IX · Arcs and Unification, Mutual Illumination · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 33.1 · Theorem 34.2</p>
+  <p class="kicker">Theorem 34.1 · Theorem 29.2</p>
   <h2 class="t">At most <em>d</em> histories; two axes <em>make every rotation</em></h2>
-<TheoremCard class="compact mt-s" label="Theorem 33.1" title="History capacity of a finite memory (item 2)" gid="D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity" cite="thm-ch33-observer-pinching-and-memory-spectrum">
+<TheoremCard class="compact mt-s" label="Theorem 34.1" title="History capacity of a finite memory (item 2)" gid="D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity" cite="thm-ch33-observer-pinching-and-memory-spectrum">
 
 Let $\rho_1, \ldots, \rho_N$ be $d$-dimensional density matrices and $E_1, \ldots, E_N$ positive semidefinite with $\sum_j E_j = 1$. If $\operatorname{Tr}(E_j \rho_i)$ is $1$ for $i = j$ and $0$ otherwise, then $N \le d$.
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="Theorem 34.2" title="Exact finite words in two rotation axes (item 2)" gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" cite="thm-ch34-perpendicular-axis-and-pullback">
+<TheoremCard class="compact mt-s" label="Theorem 29.2" title="Exact finite words in two rotation axes (item 2)" gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" cite="thm-ch34-perpendicular-axis-and-pullback">
 
 Let $a, b \in \mathbb{R}^3$ be non-collinear: $\langle a, b\rangle^2 < \lVert a\rVert^2 \lVert b\rVert^2$. Then every orthogonal map $R$ of determinant $1$ is a finite product of orientation-preserving rotations each fixing $a$ or fixing $b$.
 
 </TheoremCard>
 </div>
-<Source>Chapter 33 (FiniteMemoryHistoryCapacity) · Chapter 34 (TwoAxisFiniteRotation)</Source>
+<Source>Chapter 34 §34.1 (FiniteMemoryHistoryCapacity) · Chapter 29 §29.1 (TwoAxisFiniteRotation)</Source>
 
 ---
-# 41 Part IX · literature
-section: "Part IX · warrant"
+# 41 Part IX · Mutual Illumination and Breaking Attachment · literature and open problems
+section: "Part IX · Mutual Illumination and Breaking Attachment · warrant"
 ---
 
 <div class="body">
-  <p class="kicker">Literature results · not formalized in this book</p>
+  <p class="kicker">Literature · Model · Open problems</p>
   <h2 class="t">Table bounds and the hyperbolic disk are literature; <em>the observer ontology is interpretation</em></h2>
   <div class="g2 mt">
     <div class="card violet">
-      <h4>Literature · Chapter 35</h4>
+      <h4>Literature · Chapter 35 §35.1</h4>
       <h3>Yao's space–time trade-off and Karp–Lipton</h3>
       <p>A table of <Tex t="S" /> precomputed cells cuts online queries to <Tex t="T" /> probes, subject to trade-off lower bounds (for black-box permutation inversion, <Tex t="S \cdot T \ge \Omega(N)" />); if <Tex t="\mathrm{NP} \subseteq \mathrm{P}/\mathrm{poly}" />, the polynomial hierarchy collapses to its second level.</p>
     </div>
     <div class="card violet">
-      <h4>Literature · Chapter 36</h4>
+      <h4>Literature · Chapter 35 §35.3</h4>
       <h3>The Gudermannian and the Poincaré disk</h3>
       <p><Tex t="\theta = \operatorname{gd}(\eta) = \arcsin(\tanh\eta)" /> links rapidity and angle; in the Poincaré disk the geodesic distance from the centre to radius <Tex t="r = \tan(\theta/2)" /> is <Tex t="\eta" />, which tends to <Tex t="\infty" /> as <Tex t="r \to 1" />.</p>
     </div>
   </div>
-  <p class="lead mt">“All beings are observers”, “observers attract one another” and “quotienting out reincarnation” are the book's interpretive model (MODEL): argued from verified theorems, not derived from them. Part IX has no open problems.</p>
+  <p class="lead mt">Mutual attractors and quotienting out reincarnation belong to the interpretive model (MODEL). Open problems (OPEN) include microscopic single-outcome selection, Rauzy fractal-horizon entanglement scaling, unrelativized P vs. NP, and empirical TFT scaling.</p>
 </div>
-<Source>Chapters 35 and 36, literature remarks</Source>
+<Source>Literature in §§35.1, 35.3 · Open problems in §§34.8, 35.6.8, 36.8, 37.1</Source>
 
 ---
-# 42 Part X
+# 42 Part X · Non-Duality and Return to the Source
 layout: section
 chapter: "10"
-section: "Part X"
+section: "Part X · Non-Duality and Return to the Source"
 ---
 
-<p class="kicker">Part X · Chapters 37–39</p>
-<h2 class="t">Non-duality: <em>dreams, pointers, one ontology</em></h2>
-<p class="lead">Observing decoheres with known data, and deleted coherence pays an entropy tax; the observer is a memory pointer over static memory that cannot be deep-copied; seer and seen are two sheets of one double cover, with no continuous section between them.</p>
-<div class="card mt">
-  <ul class="plain">
-    <li>Ch. 37 Dream quantum erasure · Ch. 38 Ontological QRAM and the memory pointer</li>
-    <li>Ch. 39 The observer is the ontological universe</li>
-  </ul>
-</div>
+<p class="kicker">Part X · Non-Duality and Return to the Source · Chapters 38–39</p>
+<h2 class="t">The observer is the ontological universe · <em>AXIOM-Ω</em></h2>
+<p class="lead">Chapter 38 explores the observer and the observed through substrate-free self-reference and the spinor double cover. Chapter 39 proposes origin-free positive-semidefinite ternary comparison closure and uses it to organize the route to the five postulates of quantum mechanics.</p>
 
 ---
-# 43 Part X · picture
-section: "Part X · picture"
+# 43 Part IX · Mutual Illumination and Breaking Attachment · picture
+section: "Part IX · Mutual Illumination and Breaking Attachment · picture"
 ---
 
 <div class="body">
-  <p class="kicker">Chapter 37 · the entropy tax</p>
+  <p class="kicker">Chapter 36 §36.1.1 · The entropy tax</p>
   <h2 class="t">The coherence cut away and the entropy paid <em>both peak at π/4</em></h2>
   <img src="./img/ch37-entropy-tax.en.svg" alt="The horizontal axis is the rotation angle θ. The magenta curve is the coherence mass removed by pinching, the ink curve the entropy increase; both vanish at the ends and peak together at θ = π/4." style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
   <p class="lead mt-s">The magenta curve is the coherence mass <Tex t="\tfrac12\sin^2 2\theta" /> one pinching step removes, the ink curve the entropy increase; both are <Tex t="0" /> at <Tex t="\theta = 0" /> and <Tex t="\theta = \pi/2" />, and at <Tex t="\theta = \pi/4" /> they reach <Tex t="1/2" /> and <Tex t="\ln 2" />.</p>
 </div>
-<Source>Chapter 37, ch37-entropy-tax</Source>
+<Source>Chapter 36 §36.1.1 (ch37-entropy-tax)</Source>
 
 ---
-# 44 Part X · theorems
-section: "Part X · theorems"
+# 44 Parts IX–X · Mutual Illumination and Non-Duality · theorems
+section: "Parts IX–X · Mutual Illumination and Non-Duality · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 38.22 · Theorem 39.7</p>
+  <p class="kicker">Theorem 36.36 · Theorem 38.7</p>
   <h2 class="t">Non-orthogonal states <em>cannot be deep-copied</em>; the double cover <em>has no section</em></h2>
-<TheoremCard class="compact mt-s" label="Theorem 38.22" title="No universal deep copy: the inner-product criterion (item 2)" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
+<TheoremCard class="compact mt-s" label="Theorem 36.36" title="No universal deep copy: the inner-product criterion (item 2)" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
 
 Let $U$ be a complex linear isometric equivalence of $H \otimes H$. If unit vectors $\psi, \phi$ and one unit blank state satisfy $U(\psi \otimes \mathrm{blank}) = \psi \otimes \psi$ and $U(\phi \otimes \mathrm{blank}) = \phi \otimes \phi$, then $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$, and $\phi = \psi$ or $\langle\phi, \psi\rangle = 0$.
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="Theorem 39.7" title="No continuous global section of the squaring cover (item 1)" gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section" cite="thm-ch39-double-cover-no-section-and-720-lift">
+<TheoremCard class="compact mt-s" label="Theorem 38.7" title="No continuous global section of the squaring cover (item 1)" gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section" cite="thm-ch39-double-cover-no-section-and-720-lift">
 
 There is no continuous map $s$ from the unit circle to itself with $s(z)^2 = z$ for every $z$ on it.
 
 </TheoremCard>
 </div>
-<Source>Chapter 38 (NoCloningInnerProductCriterion) · Chapter 39 (CircleDoubleCoverNoSection)</Source>
+<Source>Chapter 36 §36.3 (NoCloningInnerProductCriterion) · Chapter 38 §38.3 (CircleDoubleCoverNoSection)</Source>
 
 ---
-# 45 Part X · literature
-section: "Part X · warrant"
+# 45 Parts IX–X · Mutual Illumination and Non-Duality · literature
+section: "Parts IX–X · Mutual Illumination and Non-Duality · warrant"
 ---
 
 <div class="body">
@@ -814,19 +807,19 @@ section: "Part X · warrant"
   <h2 class="t">Erasers and spinor bilinears are literature; <em>non-duality is model</em></h2>
   <div class="g2 mt">
     <div class="card violet">
-      <h4>Literature · Chapter 37</h4>
+      <h4>Literature · Chapter 36 §36.1.2</h4>
       <h3>Which-path marking and delayed erasure</h3>
       <p>Distinguishable path records erase fringes; projecting the probe onto a complementary basis restores them only within sorted sub-ensembles. The unconditional total never changes—no signal goes back in time.</p>
     </div>
     <div class="card violet">
-      <h4>Literature · Chapter 39</h4>
+      <h4>Literature · Chapter 38 §38.3</h4>
       <h3>Spinor bilinears and the Fierz identity</h3>
       <p>A spinor is not observed directly; spacetime quantities are its bilinears: <Tex t="\mathbf J = \psi\gamma_0\tilde\psi" />, <Tex t="\mathbf S = \psi\mathbf I_{12}\tilde\psi" />; at <Tex t="\beta = 0" />, <Tex t="\mathbf J^2 = -\mathbf S^2 = \rho^2" />.</p>
     </div>
   </div>
-  <p class="lead mt">Dream erasure, the memory pointer and “observer as universe” are the book's model (MODEL): argued from verified theorems, not derived from them. Uniform <Tex t="\mathrm{P} \neq \mathrm{NP}" /> and Rauzy fractal-horizon scaling remain open (OPEN).</p>
+  <p class="lead mt">Part IX interprets observation through dream erasure and memory pointers. Part X uses the spinor double cover to interpret the observer as the ontological universe. These interpretations belong to the book’s model (MODEL).</p>
 </div>
-<Source>Chapters 37 and 39, literature remarks</Source>
+<Source>Literature remarks in Chapter 36 §36.1.2 and Chapter 38 §38.3</Source>
 
 ---
 # 46 Three tiers of warrant

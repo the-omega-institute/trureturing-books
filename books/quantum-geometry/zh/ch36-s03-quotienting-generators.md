@@ -1,4 +1,4 @@
-# 36.3 理解即出离：在生成元商空间里一次性约掉轮回 {#理解即出离在生成元商空间里一次性约掉轮回}
+# 35.4 理解即出离：在生成元商空间里一次性约掉轮回 {#理解即出离在生成元商空间里一次性约掉轮回}
 
 然而，故事到这里还没有抵达最深处的终点。请再读一遍本章题记那句雷霆万钧的收尾：
 
@@ -59,7 +59,7 @@ $$
 
 这一步同时接通了有限余数递推、无穷位值与周期核 $999999$。在生成元 $1/7$ 面前，无穷轮重复兜圈不再提供新的数字信息。
 
-在 `trureturing` 的形式化武库中，“通过商拓扑分解冗余纤维”、“通过零化子对偶一次性坍缩周期子群求和”（呼应[第 15 章](ch15-grover-qft-and-period-finding.md)的周期提取与[第 22 章](ch22-primes-euler-products-and-zeros.md)的生成元约分）以及“闭子群轨道长程极限由单一生成元不变测度完全决定”（呼应[第 31 章](ch31-quantum-fairness.md)），由以下四条严丝合缝的 Lean 4 定理各自锁定（四条彼此独立，并不合成一条关于理解或轮回的定理）：
+在 `trureturing` 的形式化武库中，“通过商拓扑分解冗余纤维”、“通过零化子对偶一次性坍缩周期子群求和”（呼应[第 15 章](ch15-grover-qft-and-period-finding.md)的周期提取与[第 22 章](ch22-primes-euler-products-and-zeros.md)的生成元约分）以及“闭子群轨道长程极限由单一生成元不变测度完全决定”（呼应[第 27 章](ch31-quantum-fairness.md)），由以下四条严丝合缝的 Lean 4 定理各自锁定（四条彼此独立，并不合成一条关于理解或轮回的定理）：
 
 ::: {.theorem #thm-ch36-quotient-annihilator-and-factorization title="划分拓扑连续商分解、有限零化子对偶求和与紧致环面生成元遍历定理" lean="D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition D5/S3/Fourier/FinitePoisson.sum_annihilator_character D5/S3/Fourier/FinitePoisson.finite_poisson_summation D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"}
 在 `trureturing` 冻结的概念观测拓扑、有限交换群对偶分析与紧致环面渐近模块中，以下四项商分解与生成元约化定理同时成立：

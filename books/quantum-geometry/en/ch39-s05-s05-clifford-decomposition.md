@@ -1,4 +1,4 @@
-# 39.5.5 Clifford Orthogonal Split: One-Dimensional Expanding Axis and Two-Dimensional Internal Rotor Plane {#sec-ch39-p2e-clifford}
+# 35.6.5 Clifford Orthogonal Split: One-Dimensional Expanding Axis and Two-Dimensional Internal Rotor Plane {#sec-ch39-p2e-clifford}
 
 For a cubic algebraic code $x = a + b\beta_3 + c\beta_3^2$ with rational or integer coefficients, the standard real-linear cubic Minkowski coordinate map takes the form
 
@@ -22,4 +22,4 @@ whose three-dimensional determinant (pseudoscalar volume factor) satisfies $\bet
 **Clifford Line–Plane Decomposition Card (`clifford`)**: A three-dimensional algebraic-coordinate stage pairs $\beta_3$-dilation along the cyan physical axis $E_\parallel$ with damped bivector rotation $|\alpha| e^{i\arg\alpha}$ in the violet internal plane $E_\perp$; an amber handle marks the draggable lattice point decomposition. Coordinate evaluation carries status `NUM`, and the Clifford observer dictionary carries status `MODEL`.
 :::
 
-Seeing the single-step internal contraction modulus settle at $|\alpha|_{K=3} = \beta_3^{-1/2} \approx 0.737353$ invites a natural numerical comparison: how does this algebraic contraction scale relate to Dottie's self-referential cosine fixed point $\theta^* = \cos\theta^* \approx 0.739085$ from [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md) and [Chapter 33](ch33-all-beings-observers-and-mutual-attractors.md)?
+Seeing the single-step internal contraction modulus settle at $|\alpha|_{K=3} = \beta_3^{-1/2} \approx 0.737353$ invites a natural numerical comparison: how does this algebraic contraction scale relate to Dottie's self-referential cosine fixed point $\theta^* = \cos\theta^* \approx 0.739085$ from [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md) and [Chapter 34](ch33-all-beings-observers-and-mutual-attractors.md)?

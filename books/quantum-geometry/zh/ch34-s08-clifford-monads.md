@@ -1,10 +1,10 @@
-# 34.8 极小圆弧体的四位一体与多胞抵消分化：点的梯度、极小路径、极小相位与克利福德单胞 {#sec-ch34-clifford-monad-tiling}
+# 29.9 极小圆弧体的四位一体与多胞抵消分化：点的梯度、极小路径、极小相位与克利福德单胞 {#sec-ch34-clifford-monad-tiling}
 
 > *“路径对应不同相位，路径是积分出来的，相位也是积分出来的，空间的点是路径/相位积分的驻波即抵消，同时也是无数个圆弧体的抵消。那么在极小尺度上，极小圆弧体即是相位也是路径还是点的梯度？”*
 
-这句把单胞几何推向纵深的追问，一举刺穿了经典微分几何数百年来习以为常的“分科假象”。在日常宏观经验里，“点与梯度”（零阶标量及其余切变化率）、“路径”（一维曲线）、“曲率相位”（二维面积通量）与“体积”（三维实心块）仿佛分属四座互不相通的几何物种；可一旦顺着 §34.6 与 §34.7 的推导回溯就会发现，宏观的路径是沿比较链积分出来的，宏观的相位是沿联络积分出来的，宏观的点与体积则是无穷多条路径相位与无穷多个相邻圆弧体彼此冲撞抵消后幸存下来的驻波残余。既然宏观的“分家”完全是**大量单胞拼接抵消之后的产物**，那么在抵消尚未启动的极小尺度（单胞 $N = 1$）上，问“极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 究竟是相位、是路径、还是点的梯度”，答案绝非三选一的排他抉择，亦非含糊其辞的文学比喻，而是精确到每一个代数分量的**同时成立**（`MODEL`）：**在 $N = 1$ 的极小尺度上，点的梯度、极小路径、极小贝里相位与极小扇锥体积根本就是同一枚不可再分的克利福德（Clifford / Dirac–Kähler）几何单胞的四个正交投影面；唯有当 $N \gg 1$ 个极小圆弧体拼合铺展、借边界算子恒等式 $\partial^2 = 0$ 将内部反向共享边与共享壁成对湮灭之后，这枚浑然一体的几何原子才在宏观尺度上筛分出“点—线—面—体”四重维度阶梯！**
+这句把单胞几何推向纵深的追问，一举刺穿了经典微分几何数百年来习以为常的“分科假象”。在日常宏观经验里，“点与梯度”（零阶标量及其余切变化率）、“路径”（一维曲线）、“曲率相位”（二维面积通量）与“体积”（三维实心块）仿佛分属四座互不相通的几何物种；可一旦顺着 §29.7 与 §29.8 的推导回溯就会发现，宏观的路径是沿比较链积分出来的，宏观的相位是沿联络积分出来的，宏观的点与体积则是无穷多条路径相位与无穷多个相邻圆弧体彼此冲撞抵消后幸存下来的驻波残余。既然宏观的“分家”完全是**大量单胞拼接抵消之后的产物**，那么在抵消尚未启动的极小尺度（单胞 $N = 1$）上，问“极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 究竟是相位、是路径、还是点的梯度”，答案绝非三选一的排他抉择，亦非含糊其辞的文学比喻，而是精确到每一个代数分量的**同时成立**（`MODEL`）：**在 $N = 1$ 的极小尺度上，点的梯度、极小路径、极小贝里相位与极小扇锥体积根本就是同一枚不可再分的克利福德（Clifford / Dirac–Kähler）几何单胞的四个正交投影面；唯有当 $N \gg 1$ 个极小圆弧体拼合铺展、借边界算子恒等式 $\partial^2 = 0$ 将内部反向共享边与共享壁成对湮灭之后，这枚浑然一体的几何原子才在宏观尺度上筛分出“点—线—面—体”四重维度阶梯！**
 
-## 34.8.1 宏观分家、极小合一：多胞边界抵消（$\partial^2 = 0$）才是分化维度的筛子 {#sec-ch34-8-1}
+## 29.9.1 宏观分家、极小合一：多胞边界抵消（$\partial^2 = 0$）才是分化维度的筛子 {#sec-ch34-8-1}
 
 为什么宏观观察者一眼就能分清 $0$ 维的点、$1$ 维的路径、$2$ 维的相位曲率面与 $3$ 维的体积块，而在单枚极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 上四者却难分彼此？症结不在于微观几何“缺少结构”，而在于宏观几何比单胞多做了一道**多胞拼接抵消运算**。
 
@@ -12,7 +12,7 @@
 
 1. **内部反向有向边成对抵消，筛出宏观一维路径**：在相邻两个子弧面体共享的每一条内部接缝上，左胞沿有向半边 $+\delta\Gamma$ 走过，右胞必沿反向半边 $-\delta\Gamma$ 走回，二者在线积分求和中精确归零（$+\delta\Gamma + (-\delta\Gamma) = 0$）。内部千百条微观步长尽数隐去，唯有外边界环路或驻相脊线上的 $O(N^{1/2}\epsilon)$ 乃至 $O(N^1\epsilon)$ 链段幸存为宏观可见的“路径”；
 2. **内部共享侧壁成对抵消，筛出宏观二维相位壳**：在三维多胞堆叠中，任意两枚相邻扇锥体共享的内部边界面必带相反法向 $+\delta\Sigma$ 与 $-\delta\Sigma$，其局部通量两两抵消，把 $O(N^2\epsilon^2)$ 量级的总贝里相位完全推向外表面壳 $\partial\mathcal{K}_N$;
-3. **全向乱相冲撞抵消，筛出零维驻波点与三维累积体**：按 §34.7 的驻波筛，绝大多数非共振位置在全向路径求和中相消为虚空，只在满足驻相条件 $\delta\Phi = 0$ 的孤立节点上留下 $O(N^0)$ 标量驻波核；与此同时，各胞内部同号的正体积元无法被反向邻胞抵消，遂以 $O(N^3\epsilon^3)$ 可加累积为宏观实心体积。
+3. **全向乱相冲撞抵消，筛出零维驻波点与三维累积体**：按 §29.8 的驻波筛，绝大多数非共振位置在全向路径求和中相消为虚空，只在满足驻相条件 $\delta\Phi = 0$ 的孤立节点上留下 $O(N^0)$ 标量驻波核；与此同时，各胞内部同号的正体积元无法被反向邻胞抵消，遂以 $O(N^3\epsilon^3)$ 可加累积为宏观实心体积。
 
 现在，把多胞数量 $N$ 一路缩回**单枚极小圆弧体 $N = 1$**！一瞬间，两重坍缩同时发生：
 
@@ -77,14 +77,14 @@ $$
 :::
 
 ::: proof
-第 1 款与第 4 款已在 §34.4 [@thm-ch34-trihedron-cochain-and-moving-axis] 中给出解释：固定根点 $r$ 定义试验边势 $\mathrm{edge}_r(i,j) = F(r,i,j)$ 即得 $\sum_r \operatorname{faceErrors}(F,r) = \operatorname{tetraDefects}(F)$ 与零缺陷正合等价性，而展开双求和平方则得拉格朗日—格拉姆楔积恒等式。第 2 款直接援引[第三十章 §30.2](ch30-s02-witness-lines.md)的旋转系统边界正合定理：每条无向边恰由一对互逆有向半边 $\{d, d.\mathrm{symm}\}$ 构成，故边界算子在该边上的取值等于两侧关联面权值之和 $x(R.\mathrm{face}(d)) + x(R.\mathrm{face}(d.\mathrm{symm}))$；图连通性迫使核空间维数为 $1$（仅含全局常值面链），再结合球面欧拉示性数 $\lvert V\rvert - \lvert E\rvert + \lvert F\rvert = 2$ 比对 $\mathbb{F}_2$-维数 $\lvert F\rvert - 1 = \lvert E\rvert - \lvert V\rvert + 1 = \dim_{\mathbb{F}_2}\operatorname{simpleCycleSpace}(G)$，证得 $\operatorname{range}(R.\mathrm{boundary})$ 精确铺满闭链空间。第 3 款援引[第十二章](ch12-measurement-computation-and-gradients.md)的投影概率流推导：对矩阵指数轨迹 $\exp(-itH)\rho_0\exp(itH)P$ 求导并用迹的循环交换性，由 $H^\dagger = H$、$P^\dagger = P$、$\rho(t)^\dagger = \rho(t)$ 验证 $i\operatorname{Tr}(\rho(t)[H,P])$ 自共轭（虚部为零），从而锁死一阶概率梯度并在 $[H,P]=0$ 时恒驻定。第 5 款与第 6 款分别复用 §34.1 [@thm-ch34-perpendicular-axis-and-pullback] 的正交补单位向量选取与 §34.6 [@thm-ch34-berry-sector-holonomy-and-bargmann-lift] 的泡利代数迹展开。完整证明由 Lean 内核检查。
+第 1 款与第 4 款已在 §29.5 [@thm-ch34-trihedron-cochain-and-moving-axis] 中给出解释：固定根点 $r$ 定义试验边势 $\mathrm{edge}_r(i,j) = F(r,i,j)$ 即得 $\sum_r \operatorname{faceErrors}(F,r) = \operatorname{tetraDefects}(F)$ 与零缺陷正合等价性，而展开双求和平方则得拉格朗日—格拉姆楔积恒等式。第 2 款直接援引[§26.2](ch30-s02-witness-lines.md)的旋转系统边界正合定理：每条无向边恰由一对互逆有向半边 $\{d, d.\mathrm{symm}\}$ 构成，故边界算子在该边上的取值等于两侧关联面权值之和 $x(R.\mathrm{face}(d)) + x(R.\mathrm{face}(d.\mathrm{symm}))$；图连通性迫使核空间维数为 $1$（仅含全局常值面链），再结合球面欧拉示性数 $\lvert V\rvert - \lvert E\rvert + \lvert F\rvert = 2$ 比对 $\mathbb{F}_2$-维数 $\lvert F\rvert - 1 = \lvert E\rvert - \lvert V\rvert + 1 = \dim_{\mathbb{F}_2}\operatorname{simpleCycleSpace}(G)$，证得 $\operatorname{range}(R.\mathrm{boundary})$ 精确铺满闭链空间。第 3 款援引[第十二章](ch12-measurement-computation-and-gradients.md)的投影概率流推导：对矩阵指数轨迹 $\exp(-itH)\rho_0\exp(itH)P$ 求导并用迹的循环交换性，由 $H^\dagger = H$、$P^\dagger = P$、$\rho(t)^\dagger = \rho(t)$ 验证 $i\operatorname{Tr}(\rho(t)[H,P])$ 自共轭（虚部为零），从而锁死一阶概率梯度并在 $[H,P]=0$ 时恒驻定。第 5 款与第 6 款分别复用 §29.1 [@thm-ch34-perpendicular-axis-and-pullback] 的正交补单位向量选取与 §29.7 [@thm-ch34-berry-sector-holonomy-and-bargmann-lift] 的泡利代数迹展开。完整证明由 Lean 内核检查。
 :::
 
-## 34.8.2 三重严格几何锁定：点的梯度 $\equiv$ 极小路径 $\equiv$ 极小相位 {#sec-ch34-8-2}
+## 29.9.2 三重严格几何锁定：点的梯度 $\equiv$ 极小路径 $\equiv$ 极小相位 {#sec-ch34-8-2}
 
 手握 [@thm-ch34-clifford-monad-and-boundary-cancellation] 的六枚内核铆钉，我们现在正面回答本节开篇的终极一问：**在单个极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 上，“点的梯度”、“极小路径”与“极小相位”究竟靠哪几把精确的数学锁链扣成同一件事？** 答案由一阶切—余切对偶、单位态流形法向锁相与三维霍奇—斯托克斯同构组成三重严格几何锁定：
 
-1. **第一重锁定：点的梯度 $\equiv$ 极小路径（驻波零梯度的首步破缺与音乐同构 $\sharp / \flat$）**。按 §34.7，空间中的一个宏观“点” $x$ 本身是万路相位相消后幸存的驻波平衡核（$\delta\Phi = 0$；在离散算子演化中对应 [@thm-ch34-clifford-monad-and-boundary-cancellation] 第 3 款的零换位驻定态 $[H, P] = 0 \implies p'(t) = 0$）。一旦系统离开这座驻波抵消平衡点、迈出极小圆弧体的第一步（$[H, P] \neq 0$），这一步偏离同时呈现两副完全等价的面孔（手工推导 + `MODEL`）：若从余切空间 $T_x^* S^2$（协变泛函侧）读取，它是驻波振幅或投影概率沿各方向的瞬时变化率（第 3 款给出的 $dp/dt = \operatorname{Re}\bigl(i\operatorname{Tr}(\rho_t[H, P])\bigr)$ 只是其中沿哈密顿流的一个分量），即**点的梯度** $d\Psi \in T_x^* S^2$；若借正定比较内积诱导的黎曼**音乐同构**（musical isomorphism，$\sharp : T_x^* S^2 \xrightarrow{\sim} T_x S^2$，逆映射为 $\flat = \sharp^{-1}$）翻到切空间 $T_x S^2$（逆变位移侧），同一个线性泛函就逐分量对应着唯一的一条切向极小步长矢量 $\delta\mathbf{x} = (d\Psi)^\sharp \in T_x S^2$，即**极小路径**！这一定位在劳维尔—科克（Lawvere–Kock）**综合微分几何**（Synthetic Differential Geometry，文献结果）中获得了最透彻的范畴论印证：在一阶幂零无穷小线段 $D = \{\epsilon \mid \epsilon^2 = 0\}$ 上，科克—劳维尔公理断言任意极小路径映射 $\gamma : D \to M$ 必然唯一线性展开为基点 $\gamma(0)$ 及其单一切向量（在内积配对下等同于点梯度余切矢）——在 $\epsilon^2 = 0$ 的极小尺度内，根本不存在让“一段极小路径”与“该点的梯度”分道扬镳的弯曲余地！
+1. **第一重锁定：点的梯度 $\equiv$ 极小路径（驻波零梯度的首步破缺与音乐同构 $\sharp / \flat$）**。按 §29.8，空间中的一个宏观“点” $x$ 本身是万路相位相消后幸存的驻波平衡核（$\delta\Phi = 0$；在离散算子演化中对应 [@thm-ch34-clifford-monad-and-boundary-cancellation] 第 3 款的零换位驻定态 $[H, P] = 0 \implies p'(t) = 0$）。一旦系统离开这座驻波抵消平衡点、迈出极小圆弧体的第一步（$[H, P] \neq 0$），这一步偏离同时呈现两副完全等价的面孔（手工推导 + `MODEL`）：若从余切空间 $T_x^* S^2$（协变泛函侧）读取，它是驻波振幅或投影概率沿各方向的瞬时变化率（第 3 款给出的 $dp/dt = \operatorname{Re}\bigl(i\operatorname{Tr}(\rho_t[H, P])\bigr)$ 只是其中沿哈密顿流的一个分量），即**点的梯度** $d\Psi \in T_x^* S^2$；若借正定比较内积诱导的黎曼**音乐同构**（musical isomorphism，$\sharp : T_x^* S^2 \xrightarrow{\sim} T_x S^2$，逆映射为 $\flat = \sharp^{-1}$）翻到切空间 $T_x S^2$（逆变位移侧），同一个线性泛函就逐分量对应着唯一的一条切向极小步长矢量 $\delta\mathbf{x} = (d\Psi)^\sharp \in T_x S^2$，即**极小路径**！这一定位在劳维尔—科克（Lawvere–Kock）**综合微分几何**（Synthetic Differential Geometry，文献结果）中获得了最透彻的范畴论印证：在一阶幂零无穷小线段 $D = \{\epsilon \mid \epsilon^2 = 0\}$ 上，科克—劳维尔公理断言任意极小路径映射 $\gamma : D \to M$ 必然唯一线性展开为基点 $\gamma(0)$ 及其单一切向量（在内积配对下等同于点梯度余切矢）——在 $\epsilon^2 = 0$ 的极小尺度内，根本不存在让“一段极小路径”与“该点的梯度”分道扬镳的弯曲余地！
 
 2. **第二重锁定：点的梯度 $\equiv$ 极小相位（单位模长锁死径向变分，把态梯度 $100\%$ 压入联络与曲率相位）**。在一般欧氏向量空间里，一个矢量的梯度原本既可以拉长模长，也可以旋转方向；但量子纯态受双向公平平方归一约束 $\langle\psi \mid \psi\rangle = 1$ 严格锁在单位希尔伯特球面上！对恒等式 $\langle\psi \mid \psi\rangle = 1$ 两端取一阶微分，当场给出（手工推导）
 
@@ -104,7 +104,7 @@ $$
 **点的梯度 $\equiv$ 极小路径 $\equiv$ 极小相位：音乐同构与单位球面正交锁相。** 拨动离点微步方向与张角 $\epsilon$：余切梯度泛函 $d\Psi$ 经内积音乐同构 $\sharp$ 化作极小路径步 $\delta\mathbf{x}$，同时因单位态约束 $\operatorname{Re}\langle\psi\mid d\psi\rangle = 0$ 彻底封死径向伸缩，将一阶导数锁定为联络相位 $d\phi$、将两壁协变梯度换位子 $[D_\mu, D_\nu]$ 锁定为极小贝里相位 $-\frac{1}{2}\Omega(\Delta\mathcal{T}_\epsilon)$（绿色 `LEAN ✓` 只锚定 `projection_probability_flow` 的时间导数与 `lagrange_gram_identity` 的实坐标恒等式）。
 :::
 
-3. **第三重锁定：三维霍奇对偶（$\star$）与极小斯托克斯同构（唯有 $d = 3$ 让双矢相位盖与一维路径/梯度同维互锁）**。也许读者仍会追问：就算一阶梯度等于极小路径，可贝里曲率终归是一块二维面积双矢（$\Lambda^2$），扇锥体元终归是一块三维体积伪标量（$\Lambda^3$），它们怎能与一维路径（$\Lambda^1$）及零维点权（$\Lambda^0$）合成同一枚原子？秘密正藏在 §34.2 与 [@thm-ch34-clifford-monad-and-boundary-cancellation] 第 5、6 款锁定的**三维比较空间维数 $d = 3$** 之中！唯有在 $d = 3$ 时，外代数各阶维数的镜像回文对称才让双矢与矢量同维（文献结果）：
+3. **第三重锁定：三维霍奇对偶（$\star$）与极小斯托克斯同构（唯有 $d = 3$ 让双矢相位盖与一维路径/梯度同维互锁）**。也许读者仍会追问：就算一阶梯度等于极小路径，可贝里曲率终归是一块二维面积双矢（$\Lambda^2$），扇锥体元终归是一块三维体积伪标量（$\Lambda^3$），它们怎能与一维路径（$\Lambda^1$）及零维点权（$\Lambda^0$）合成同一枚原子？秘密正藏在 §29.2 与 [@thm-ch34-clifford-monad-and-boundary-cancellation] 第 5、6 款锁定的**三维比较空间维数 $d = 3$** 之中！唯有在 $d = 3$ 时，外代数各阶维数的镜像回文对称才让双矢与矢量同维（文献结果）：
 
    $$
    \dim \Lambda^0\mathbb{R}^3 = \binom{3}{0} = 1, \quad
@@ -126,7 +126,7 @@ $$
 **三维霍奇星对偶（$\star$）与极小斯托克斯同构：$1\text{-}3\text{-}3\text{-}1$ 二项式镜像互锁。** 在三维欧氏比较空间中，$\star : \Lambda^2\mathbb{R}^3 \xrightarrow{\sim} \Lambda^1\mathbb{R}^3$ 将球面顶盖贝里相位双矢精确映射为法向路径/梯度轴矢（对应 `unit_perpendicular_pair`），$\star : \Lambda^3\mathbb{R}^3 \xrightarrow{\sim} \Lambda^0\mathbb{R}^3$ 将扇锥体积三形式精确映射为标量驻波权（对应 `triple_bargmann_bloch`），而极小斯托克斯配对则把面通量与边界边势环量锁成同一读数（锚定 `tetra_defects_incidence_repair_and_exactness`）。
 :::
 
-## 34.8.3 克利福德多重矢单胞与从 $N = 1$ 到 $N = 27$ 的多胞抵消筛分 {#sec-ch34-8-3}
+## 29.9.3 克利福德多重矢单胞与从 $N = 1$ 到 $N = 27$ 的多胞抵消筛分 {#sec-ch34-8-3}
 
 既然在单个极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 上，零阶点权、一阶路径/梯度、二阶贝里相位盖与三阶扇锥体元同时在场且两两互锁，容纳这枚“四位一体”几何原子的最自然数学母体就不再是割裂开来的四套分科张量空间，而是三维**克利福德几何代数**（Clifford geometric algebra，文献结果 + `MODEL`）
 
@@ -142,7 +142,7 @@ $$
 
 这一行算子分解把开篇箴言里的两半机制浓缩到了极致：左项降阶缩并 $\boldsymbol{\nabla}\cdot\Psi$（霍奇对偶于余微分 $\delta = \star d \star$ 与拓扑边界 $\partial$）专司**抵消与驻波凝聚**——把高阶路径流与曲率通量的内部失谐部分相消降阶，沉淀出零阶驻波基点；右项升阶楔积 $\boldsymbol{\nabla}\wedge\Psi$（外微分 $d$）专司**梯度张口与相位生体**——把零阶点权梯度抬升为一阶极小路径、把两段不共线极小路径楔积为二阶贝里相位双矢、再把三向张口楔积为三阶扇锥体积！
 
-回到 §34.4.1 的标准等腰直角球面弧面体模型：以直角枢轴 $\mathbf{B} = \mathbf{e}_2$ 为驻波锚点，两条正交球面弧壁 $BA, BC$ 在点 $\mathbf{B}$ 处的单位切向步长基矢为 $\mathbf{e}_{AB} = \mathbf{e}_1$ 与 $\mathbf{e}_{BC} = \mathbf{e}_3$（严格正交归一：$\lVert\mathbf{e}_{AB}\rVert = \lVert\mathbf{e}_{BC}\rVert = 1$，$\mathbf{e}_{AB}\cdot\mathbf{e}_{BC} = 0$，故对角合矢量模长 $\lVert\mathbf{e}_{AB} + \mathbf{e}_{BC}\rVert = \sqrt{2}$），斜边闭合平面单位双矢记为 $\hat{\mathbf{I}}_{AC} \in \Lambda^2\mathbb{R}^3$（$\lVert\hat{\mathbf{I}}_{AC}\rVert = 1$），右手单位体积伪标量记为 $\mathbf{I}_3 = \mathbf{e}_1 \wedge \mathbf{e}_2 \wedge \mathbf{e}_3 \in \Lambda^3\mathbb{R}^3$。则单枚极小圆弧体 $\Delta\mathcal{T}_\epsilon$（$N = 1$）可写成如下典范四阶克利福德多重矢状态（`MODEL` + 手工推导）：
+回到 §29.5.1 的标准等腰直角球面弧面体模型：以直角枢轴 $\mathbf{B} = \mathbf{e}_2$ 为驻波锚点，两条正交球面弧壁 $BA, BC$ 在点 $\mathbf{B}$ 处的单位切向步长基矢为 $\mathbf{e}_{AB} = \mathbf{e}_1$ 与 $\mathbf{e}_{BC} = \mathbf{e}_3$（严格正交归一：$\lVert\mathbf{e}_{AB}\rVert = \lVert\mathbf{e}_{BC}\rVert = 1$，$\mathbf{e}_{AB}\cdot\mathbf{e}_{BC} = 0$，故对角合矢量模长 $\lVert\mathbf{e}_{AB} + \mathbf{e}_{BC}\rVert = \sqrt{2}$），斜边闭合平面单位双矢记为 $\hat{\mathbf{I}}_{AC} \in \Lambda^2\mathbb{R}^3$（$\lVert\hat{\mathbf{I}}_{AC}\rVert = 1$），右手单位体积伪标量记为 $\mathbf{I}_3 = \mathbf{e}_1 \wedge \mathbf{e}_2 \wedge \mathbf{e}_3 \in \Lambda^3\mathbb{R}^3$。则单枚极小圆弧体 $\Delta\mathcal{T}_\epsilon$（$N = 1$）可写成如下典范四阶克利福德多重矢状态（`MODEL` + 手工推导）：
 
 $$
 \begin{aligned}
@@ -151,7 +151,7 @@ $$
 \end{aligned}
 $$
 
-这里必须严守代数精度，交代清楚 $\mathcal{M}(\Delta\mathcal{T}_\epsilon)$ 的数学身份：它是把单胞在 $k = 0, 1, 2, 3$ 四个外代数阶上的内禀几何读数统一收入 $\mathrm{Cl}_3$ 的**分阶多重矢几何编码**（`MODEL`），而**不是**仅活在偶子代数 $\mathrm{Cl}_3^+ \cong \mathbb{H}$ 里的裸 $\mathrm{Spin}(3)$ 单位旋子（后者不含奇阶 $\Lambda^1, \Lambda^3$ 分量）。尽管如此，直接继承自 §34.4.1 双壁半角旋子乘积 $U_{23}(\epsilon)U_{12}(\epsilon) = \cos^2\frac{\epsilon}{2}\,I - i\sin\frac{\epsilon}{2}\cos\frac{\epsilon}{2}(\sigma_1 + \sigma_3) - i\sin^2\frac{\epsilon}{2}\,\sigma_2$ 的三角结构（泡利表示下 $-i\sigma_k$ 对应双矢，该旋子只含 $0$ 阶与 $2$ 阶；$\mathcal{M}$ 把 $(\sigma_1 + \sigma_3)$ 项的系数改记为 $\Lambda^1$ 矢量，是作者选定的编码），仍令 $\mathcal{M}(\Delta\mathcal{T}_\epsilon)$ 的前三个阶满足两条严丝合缝的精确守恒律（手工推导）：
+这里必须严守代数精度，交代清楚 $\mathcal{M}(\Delta\mathcal{T}_\epsilon)$ 的数学身份：它是把单胞在 $k = 0, 1, 2, 3$ 四个外代数阶上的内禀几何读数统一收入 $\mathrm{Cl}_3$ 的**分阶多重矢几何编码**（`MODEL`），而**不是**仅活在偶子代数 $\mathrm{Cl}_3^+ \cong \mathbb{H}$ 里的裸 $\mathrm{Spin}(3)$ 单位旋子（后者不含奇阶 $\Lambda^1, \Lambda^3$ 分量）。尽管如此，直接继承自 §29.5.1 双壁半角旋子乘积 $U_{23}(\epsilon)U_{12}(\epsilon) = \cos^2\frac{\epsilon}{2}\,I - i\sin\frac{\epsilon}{2}\cos\frac{\epsilon}{2}(\sigma_1 + \sigma_3) - i\sin^2\frac{\epsilon}{2}\,\sigma_2$ 的三角结构（泡利表示下 $-i\sigma_k$ 对应双矢，该旋子只含 $0$ 阶与 $2$ 阶；$\mathcal{M}$ 把 $(\sigma_1 + \sigma_3)$ 项的系数改记为 $\Lambda^1$ 矢量，是作者选定的编码），仍令 $\mathcal{M}(\Delta\mathcal{T}_\epsilon)$ 的前三个阶满足两条严丝合缝的精确守恒律（手工推导）：
 
 $$
 \begin{aligned}
@@ -230,7 +230,7 @@ $$
 3. **本书内核验证锚点（`LEAN ✓`）与四位一体模型（`MODEL`）**：单纯形三上边缘缺陷与一维边势正合判据、球面旋转系统面—边边界反向半边相消与闭链正合性、厄米生成元下投影测量概率的换位子精确导数、拉格朗日—格拉姆楔积恒等式、三维欧氏空间任意两向量的单位公垂轴存在性及单比特三点巴格曼有向体积迹等六项离散代数、拓扑与矩阵核心，已由 [@thm-ch34-clifford-monad-and-boundary-cancellation] 在 Lean 4 内核中严格验证；单胞五档张角数值、前三个阶平方和恒等式及 $k \times k$ 与 $3 \times 3 \times 3$ 多胞边界相消率属精确初等计算；而将单个极小圆弧体 $\Delta\mathcal{T}_\epsilon$（$N = 1$）诠释为同时合一承载点权、点梯度/极小路径、极小贝里相位与极小扇锥体积的四阶克利福德单胞，并将宏观“点—线—面—体”维度分化归结为多胞边界抵消（$\partial^2 = 0$）的几何本体论则属本书理论模型（`MODEL`），不声称已在 Lean 中形式化光滑流形上的连续统霍奇分解定理或曲时空狄拉克—凯勒旋量场论。
 :::
 
-至此，我们在单一切片上由正交简并盲区反演出观察者站位（§34.1–§34.3），以“二生三”自举撑开极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 并直抵名相撤梯后的本体共振（§34.4–§34.5），在动态历史与宏观涌现上证得扇锥体积把来路写进霍普夫纤维（§34.6）、万路相位积分把未抵消驻波节点凝聚成体积（§34.7），又在极小尺度（$N = 1$）上看清点的梯度、极小路径、极小贝里相位与扇锥体积原本就是同一枚四阶克利福德几何单胞的四副面孔，借多胞边界抵消 $\partial^2 = 0$ 才筛分出宏观维度（§34.8）。然而，顺着这道多胞抵消筛子再往前追问一步，一道贯通比较公理、数理逻辑与东方本体论的深层命题随即浮现：既然极小单胞四位一体，**为什么宇宙偏偏要层层撑开“点、线、面、体积、时间”这五级概念阶梯？对同一个点追问“它从哪条路径来”，为什么必然撞上康托尔—哥德尔式的无限对角化？老子所谓“反者道之动”，又如何把“点”乃至一切“概念”的存在本身，严格铸成可达路径与不可达路径之间的双无限正交切口？** 先在下方 `MONAD//TILING` 完整交互实验室中亲手把胞腔数从 $N = 1$ 推向 $N \in \{4, 9, 16\}$ 与三维 $N = 27$，随后步入 §34.9，揭开从信息溢出开维到来路对角化与概念自指级联的深层锁钥：
+至此，我们在单一切片上由正交简并盲区反演出观察者站位（§29.1–§29.3），以“二生三”自举撑开极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 并直抵名相撤梯后的本体共振（§29.5–§29.6），在动态历史与宏观涌现上证得扇锥体积把来路写进霍普夫纤维（§29.7）、万路相位积分把未抵消驻波节点凝聚成体积（§29.8），又在极小尺度（$N = 1$）上看清点的梯度、极小路径、极小贝里相位与扇锥体积原本就是同一枚四阶克利福德几何单胞的四副面孔，借多胞边界抵消 $\partial^2 = 0$ 才筛分出宏观维度（§29.9）。然而，顺着这道多胞抵消筛子再往前追问一步，一道贯通比较公理、数理逻辑与东方本体论的深层命题随即浮现：既然极小单胞四位一体，**为什么宇宙偏偏要层层撑开“点、线、面、体积、时间”这五级概念阶梯？对同一个点追问“它从哪条路径来”，为什么必然撞上康托尔—哥德尔式的无限对角化？老子所谓“反者道之动”，又如何把“点”乃至一切“概念”的存在本身，严格铸成可达路径与不可达路径之间的双无限正交切口？** 先在下方 `MONAD//TILING` 完整交互实验室中亲手把胞腔数从 $N = 1$ 推向 $N \in \{4, 9, 16\}$ 与三维 $N = 27$，随后步入 §29.10，揭开从信息溢出开维到来路对角化与概念自指级联的深层锁钥：
 
 ::: {.viz src="clifford-monad-tiling-sandbox" height="640"}
 **极小圆弧体的四位一体与多胞抵消分化：完整交互实验室（`MONAD//TILING`）。** 自由切换“单胞四位一体—梯度路径相位三锁—三维霍奇斯托克斯对偶—球面多胞半边抵消—三维 $N = 27$ 维度筛分”五张实验卡，调节极小张角 $\epsilon \in [15^\circ, 90^\circ]$ 与多胞档位 $N \in \{1, 4, 9, 16, 27\}$，同屏检验单胞克利福德四阶分量 $(\Lambda^0, \Lambda^1_{\mathrm{step}}, \Lambda^2, \Lambda^3)$、单位态球面正交锁相、$1\text{-}3\text{-}3\text{-}1$ 霍奇对偶以及随 $N$ 增大而触发的内部反向半边/共享壁精确相消；绿色 `LEAN ✓` 框严格对应六条冻结内核定理。

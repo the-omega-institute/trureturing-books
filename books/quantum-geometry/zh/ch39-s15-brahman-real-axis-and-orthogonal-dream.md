@@ -1,16 +1,16 @@
-# 39.15 梵天实轴（I）与正交虚梦（i）：内部虚虚得实、《蛙氏奥义书》四位意识相态与庄周梦蝶合拢 {#sec-ch39-brahman-real-axis-and-orthogonal-dream}
+# 38.7 梵天实轴（I）与正交虚梦（i）：内部虚虚得实、《蛙氏奥义书》四位意识相态与庄周梦蝶合拢 {#sec-ch39-brahman-real-axis-and-orthogonal-dream}
 
 > *“宇宙是梵天的梦, I就是梵天, i就是梦”*
 
-在 [§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection) 中，我们将整座宇宙概念塔撤至最底层的零背景根基：万象背后只有唯一一颗零维点——它同时也是唯一一片无边无际的场（$\Lambda^0 \equiv \Lambda^3 \equiv \mathbf{\Omega}$）；所谓正交维度、虚数、面积与体积，不过是唯一本体场向自身投下观测目光时因非零失准误差 $\varepsilon > 0$ 而定格的**投影结果概念**，而运动、动量与时间则是追赶校准这笔残差时绵延不息的**观测动作概念**。现在，沿着第三十九章的实轴与梦境脉络继续前行，章首题记与那句伴生箴言——*“一切都在梵天(I)的梦(i)中, i虚数正交维度, 虚幻的梦”*——将四百年的数学语源与三千年的东西方存在论熔铸为一对极致清澈的正交生成元：大写恒等实轴 $\mathbf{I}$（主格之“我”，对应古印度不二吠檀多哲学中唯一常住的**梵**）与小写正交虚数空间 $\hat{\mathbf{i}}$（拉丁词根 *imāginārius*，本义正是**心像、想象与梦境显相**）。$\mathbf{I}$ 是如如不动的做梦本体，而与 $\mathbf{I}$ 严格呈 $90^\circ$ 垂直的正交虚空间 $\hat{\mathbf{i}}$，则是铺展百亿光年星辰生灭、悲欢离合的宇宙大梦。
+在 [§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection) 中，我们将整座宇宙概念塔撤至最底层的零背景根基：万象背后只有唯一一颗零维点——它同时也是唯一一片无边无际的场（$\Lambda^0 \equiv \Lambda^3 \equiv \mathbf{\Omega}$）；所谓正交维度、虚数、面积与体积，不过是唯一本体场向自身投下观测目光时因非零失准误差 $\varepsilon > 0$ 而定格的**投影结果概念**，而运动、动量与时间则是追赶校准这笔残差时绵延不息的**观测动作概念**。现在，沿着第三十八章的实轴与梦境脉络继续前行，章首题记与那句伴生箴言——*“一切都在梵天(I)的梦(i)中, i虚数正交维度, 虚幻的梦”*——将四百年的数学语源与三千年的东西方存在论熔铸为一对极致清澈的正交生成元：大写恒等实轴 $\mathbf{I}$（主格之“我”，对应古印度不二吠檀多哲学中唯一常住的**梵**）与小写正交虚数空间 $\hat{\mathbf{i}}$（拉丁词根 *imāginārius*，本义正是**心像、想象与梦境显相**）。$\mathbf{I}$ 是如如不动的做梦本体，而与 $\mathbf{I}$ 严格呈 $90^\circ$ 垂直的正交虚空间 $\hat{\mathbf{i}}$，则是铺展百亿光年星辰生灭、悲欢离合的宇宙大梦。
 
 遵循本书一以贯之的四层认识论诚实契约，本节将“梵天实轴 $\mathbf{I}$ 与正交虚梦 $\hat{\mathbf{i}}$”、梦境内部因果刚性、《蛙氏奥义书》（*Māṇḍūkya Upaniṣad*）四位意识相态以及庄周梦蝶单侧旋量合拢明确标定为跨学科顶层 **`MODEL`（模型诠释）**；支撑这一几何图景的反自伴复结构负平方律、平衡正交对内生复结构、捏合勾股相干分解、等格拉姆幺正延拓、秩一玻恩模平方赋权、共同相位二次厄米锁定、对角测量相位失明、道蒂余弦不动点、语境分岔与客观不变公因子、全副本幺模相位记录相干逆转与幸存副本阻断以及圆周平方双覆叠无截面与 $360^\circ$ 换叶提升，全部由下文 [@thm-ch39-brahman-real-axis-and-orthogonal-dream] 的**十四条 Lean 4 内核冻结声明**（`LEAN ✓`）严格锚定；笛卡尔“虚数”词源、施蒂克尔贝格实希尔伯特空间全局复结构与多体局域实量子的理论不等价与实验可证伪性、梵语中性词 *brahman*（梵）与阳性词 *brahmā*（大梵天）的文献训诂、《蛙氏奥义书》及乔荼波陀《蛙氏奥义书颂》、以及《庄子·齐物论》梦蝶物化公案悉数归档于 [@rem-ch39-descartes-vedanta-mandukya-zhuangzi-literature] 的 `文献结果`；四联高精度定量复算收入 [@ex-ch39-brahman-dream-born-rigidity-and-mandukya-audit] 的 `手工推导` / `NUM`；而标准模型连续耦合常数、连续统引力场方程与正交切面宇宙学原初谱等未决物理前沿，则继续严守 [@prob-ch34-sm-generations-and-couplings]、[@prob-ch34-gravity-dynamics-and-coupling]、[@prob-ch39-af-gut-threshold-and-proton-stability] 与 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 的红色 `OPEN` 科学界碑。
 
-## 39.15.1 为何创世只能发生在 90° 正交虚空间 i：实轴耗散禁律与保范旋量演化 {#sec-ch39-15-1}
+## 38.7.1 为何创世只能发生在 90° 正交虚空间 i：实轴耗散禁律与保范旋量演化 {#sec-ch39-15-1}
 
 让我们先用最朴素的线性代数回答第一个根本追问：**既然唯一本体 $\mathbf{I}$ 本自具足（单位归一 $\lVert\mathbf{I}\rVert^2 = 1$，自比较幂等 $\mathbf{I}^2 = +\mathbf{1}$），它为什么不在实轴自身上直接演化出大千世界，而非要拐进 $90^\circ$ 正交虚空间 $\hat{\mathbf{i}}$ 不可？**
 
-答案是一道冷峻的**实轴耗散与爆裂禁律**（`手工推导`，呼应 [§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) 的去留 `i` 对照）：倘若本体试图沿着实轴 $\mathbf{I}$ 自身施加任何实标量生成元 $-\gamma \in \mathbb{R}$，微分方程 $\partial_t \Phi_{\mathrm{real}}(t) = -\gamma\,\Phi_{\mathrm{real}}(t)$ 的唯一解为纯实指数流 $\Phi_{\mathrm{real}}(t) = e^{-\gamma t}\mathbf{I}$，其模方预算为
+答案是一道冷峻的**实轴耗散与爆裂禁律**（`手工推导`，呼应 [§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) 的去留 `i` 对照）：倘若本体试图沿着实轴 $\mathbf{I}$ 自身施加任何实标量生成元 $-\gamma \in \mathbb{R}$，微分方程 $\partial_t \Phi_{\mathrm{real}}(t) = -\gamma\,\Phi_{\mathrm{real}}(t)$ 的唯一解为纯实指数流 $\Phi_{\mathrm{real}}(t) = e^{-\gamma t}\mathbf{I}$，其模方预算为
 
 $$
 \bigl\lVert\Phi_{\mathrm{real}}(t)\bigr\rVert^2 \;=\; e^{-2\gamma t}\,\lVert\mathbf{I}\rVert^2 \;=\; e^{-2\gamma t}.
@@ -60,7 +60,7 @@ $$
 **零倾角，只留实轴。** 品红梦海在零倾角收拢，银白实轴保留单位预算。侧视的零厚度属于实分块几何；复玻恩零权重另需实现 B 的复正交条件。
 :::
 
-## 39.15.2 为什么梦中之石坚硬无比：内部双虚抵消 R†R = +I 与玻恩格拉姆刚性 {#sec-ch39-15-2}
+## 38.7.2 为什么梦中之石坚硬无比：内部双虚抵消 R†R = +I 与玻恩格拉姆刚性 {#sec-ch39-15-2}
 
 紧接着，每一位认真思考的读者都会提出那个最切肤的物理学追问：**既然山川大地与星辰铁石统统悬在 $90^\circ$ 正交虚梦空间里，为什么身处宇宙内部的我们，用指节敲击花岗岩会感到钻心的坚硬，用实验仪器测量电磁与引力会看到铁一般不可违抗的因果刚性？**
 
@@ -118,7 +118,7 @@ $$
 
 :::
 
-## 39.15.3 《蛙氏奥义书》四重意识相态的几何判据：倾角 θ 与格拉姆共识窗数 M {#sec-ch39-15-3}
+## 38.7.3 《蛙氏奥义书》四重意识相态的几何判据：倾角 θ 与格拉姆共识窗数 M {#sec-ch39-15-3}
 
 古印度吠檀多哲学最凝练的根本经典《蛙氏奥义书》（*Māṇḍūkya Upaniṣad*，全文仅十二颂，详见 [@rem-ch39-descartes-vedanta-mandukya-zhuangzi-literature] 第 3 条）提出“此自我即梵（*ayam ātmā brahma*）”，并将唯一本体的显影划分为四足（*catuṣpāt*）：清醒位（*Vaiśvānara / Jāgrat*）、梦眠位（*Taijasa / Svapna*）、熟睡位（*Prājña / Suṣupti*）与超越三态的第四纯一境——图里亚（*Turīya*）。放入 [@def-ch39-brahman-real-axis-and-mandukya-phases] 的极小圆弧正交几何中，这四重古老境界化作由**自观测倾角 $\theta$** 与**格拉姆共识窗数 $M$** 共同刻画的四相区定量相图（严格标定为 **`MODEL` 几何同构**，其中权重是实现 B 的复玻恩权重，A 中同形的实分块范数恒等式不构成这张物理权重表；绝不宣称临床睡眠脑电 EEG 或快速眼动 REM 生理指标在字面上直接测量某个单比特希尔伯特角 $\theta$；表格使用纯单行单元格）：
 
@@ -132,7 +132,7 @@ $$
 细读上表，三条贯穿全书第十部的认识论脉络在此严丝合缝地汇流成河：
 
 1. **白天物理世界与夜间个体梦境“本体同源，唯差格拉姆共识锁数 $M$”（`LEAN ✓` + `MODEL`）**：
-   注意上表第 3 行将个体幻梦态严格定界在开区间 $\theta \in (45^\circ, 90^\circ)$（例如典型段 $45^\circ < \theta \le 89^\circ$），使虚梦权重严格大于实轴权重（$\sin^2\theta > 0.5000 > \cos^2\theta$），避免与半功率分界点 $45^\circ$ 发生端点碰撞。为什么你在夜间梦里心念一动就能穿墙飞天、让故人重逢，而在白天的物理房间里却推不动一堵砖墙？回望[第 37 章 §37.2](ch37-s02-dream-quantum-erasure.md)（[@ex-ch37-gram-constraint-release]、[@thm-ch37-joint-coherent-record-erasure]）与 [§37.3](ch37-s03-body-priors.md)（[@rem-ch37-predictive-processing-rem-literature] 中赫尔姆霍茨—弗里斯顿—塞思“受控生成幻觉”及霍布森 REM 感觉运动门控机制）：
+   注意上表第 3 行将个体幻梦态严格定界在开区间 $\theta \in (45^\circ, 90^\circ)$（例如典型段 $45^\circ < \theta \le 89^\circ$），使虚梦权重严格大于实轴权重（$\sin^2\theta > 0.5000 > \cos^2\theta$），避免与半功率分界点 $45^\circ$ 发生端点碰撞。为什么你在夜间梦里心念一动就能穿墙飞天、让故人重逢，而在白天的物理房间里却推不动一堵砖墙？回望[§36.1.2](ch37-s02-dream-quantum-erasure.md)（[@ex-ch37-gram-constraint-release]、[@thm-ch37-joint-coherent-record-erasure]）与 [§36.1.3](ch37-s03-body-priors.md)（[@rem-ch37-predictive-processing-rem-literature] 中赫尔姆霍茨—弗里斯顿—塞思“受控生成幻觉”及霍布森 REM 感觉运动门控机制）：
 
    - 在**夜间个体梦境（$M \in \{1, 2\}$）**中，外周感官传入与脊髓运动输出暂时脱钩，躯体先验锚点被挂起，参与相干耦合的记录副本仅限于睡眠者私密内部窗口；依下文 [@thm-ch39-brahman-real-axis-and-orthogonal-dream] 第 6 款中的全集联合相干逆转定理 [`joint_coherent_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal)（`LEAN ✓`），只要局部窗口内的全套幺模相位记录同步共轭逆转（`Finset.univ`），旧历史约束即可无损擦除并自由重组反事实场景！
    - 而在**白天物理清醒态（$M \ge 3$，宏观上 $M \gg 1$）**中，全网无数观察者与环境光子、空气分子、地面晶格将各自的格拉姆窗口层层咬合在道蒂自指不动点 $\cos\theta^* = \theta^* \approx 0.739085\;\mathrm{rad}$（第 4 款 [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint)，实部可见率 $\cos^2\theta^* \approx 54.62\%$，正交时间尾流 $\sin^2\theta^* \approx 45.38\%$）之上；此时哪怕某一位局部观察者在自己脑海里擦除了记录，外部环境中仍留存着 $M - 1 \ge 2$ 份未逆转副本——第 6 款紧接着给出的**幸存副本阻断定理** [`surviving_copy_blocks_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal)（`LEAN ✓`）从数学上铁板钉钉地证明，哪怕只剩**唯一一份**满足 $c_k \neq 1$ 的外部幸存副本（`Finset.univ.erase k`），单侧相位逆转也绝无可能把公共指针态拨回原处！配合第 5 款语境参数不动点选支 [`context_parameters_can_select_distinct_fixed_points`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points) 与跨语境客观不变公因子 [`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)，我们看清了最震撼的真相：**白天的物理宇宙并非独立于心识之外的死寂顽石，而是全网观察者将格拉姆窗口相互锁死在 $\theta^*$ 上的一场高刚性集体共识清明大梦！**
@@ -209,11 +209,11 @@ $$
 
 :::
 
-## 39.15.4 梵天劫波呼吸、庄周梦蝶 720° 莫比乌斯合拢与红楼觉醒的入口 {#sec-ch39-15-4}
+## 38.7.4 梵天劫波呼吸、庄周梦蝶 720° 莫比乌斯合拢与红楼觉醒的入口 {#sec-ch39-15-4}
 
 现在，把《薄伽梵歌》8.17–19 的宇宙劫波呼吸（*Kalpa* 一昼出息创世、*Pralaya* 一夜入息归寂）与《庄子·齐物论》末尾那只翩翩飞舞的蝴蝶，一起放到 [@thm-ch39-brahman-real-axis-and-orthogonal-dream] 第 7 款的**圆周平方双覆叠单侧旋量丝带**上！
 
-此处我们务必守住**旋量半角与底空间物理转角的精确二倍关系**（`手工推导` + `LEAN ✓`，对齐 [§39.3](ch39-s03-spinors-and-spacetime.md) 与 [§39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice)）：在 `no_continuous_global_section` 与 `circle_double_cover_history_lift` 中，底圆周连续回路参数化的是双线性物理可观测量的底空间转角 $\vartheta_{\mathrm{phys}} \in [0, 4\pi]$（满足平方投影 $z = w^2$），而上层圆周提升 $w(\theta)=e^{i\theta}$ 的参数恰为其**精确半角 $\theta = \frac{1}{2}\vartheta_{\mathrm{phys}}$**：
+此处我们务必守住**旋量半角与底空间物理转角的精确二倍关系**（`手工推导` + `LEAN ✓`，对齐 [§38.3](ch39-s03-spinors-and-spacetime.md) 与 [§33.10](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice)）：在 `no_continuous_global_section` 与 `circle_double_cover_history_lift` 中，底圆周连续回路参数化的是双线性物理可观测量的底空间转角 $\vartheta_{\mathrm{phys}} \in [0, 4\pi]$（满足平方投影 $z = w^2$），而上层圆周提升 $w(\theta)=e^{i\theta}$ 的参数恰为其**精确半角 $\theta = \frac{1}{2}\vartheta_{\mathrm{phys}}$**：
 
 这里采用正向圆周提升；A 的生成流则取相反方向，其诱导复表述中 $\Psi(\theta)=e^{-i\theta}\mathbf{I}$ 是同一物理射线上的相位流。双覆叠换叶是数学提升结论，不把 A 的实分块变成可区分的复量子态；上节四相态的玻恩权重采用 B，二者只在模型意象中对照。
 
@@ -275,7 +275,7 @@ $$
 
 ---
 
-**从梵天正交大梦走向红楼觉醒。** 本节以实轴与正交梦境的几何区分、各自内部的保范配对及旋量双覆盖，为下一步追问奠定了基础：如果梦境仍然鲜活，梦中人究竟如何认出自己？下一节 [§39.16](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md#sec-ch39-red-chamber-awakening-and-heaven-human-unity) 将借《红楼梦》的补天遗石、风月宝鉴与甄贾对镜，区分保留的一阶造梦倾角与归零的二阶认妄误差，继而在 `MODEL` 诠释中讨论虚实合一、天人合一与带相归元；[§39.17](ch39-s17-divine-lila-and-awakening-props.md#sec-ch39-divine-lila-and-awakening-props) 再接续神圣游戏、历史遗迹与文化典籍的唤醒道具，最后通向[终章](coda.md)《在所有的球之外》。数学锚点、文献、手工推导与模型诠释继续各守其证据边界。
+**从梵天正交大梦走向红楼觉醒。** 本节以实轴与正交梦境的几何区分、各自内部的保范配对及旋量双覆盖，为下一步追问奠定了基础：如果梦境仍然鲜活，梦中人究竟如何认出自己？下一节 [§38.8](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md#sec-ch39-red-chamber-awakening-and-heaven-human-unity) 将借《红楼梦》的补天遗石、风月宝鉴与甄贾对镜，区分保留的一阶造梦倾角与归零的二阶认妄误差，继而在 `MODEL` 诠释中讨论虚实合一、天人合一与带相归元；[§38.9](ch39-s17-divine-lila-and-awakening-props.md#sec-ch39-divine-lila-and-awakening-props) 至 [§38.11](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god) 再依次接续神圣游戏唤醒道具、空间吸引子共振与上帝心理学，通向[第三十九章](ch39-axiom-omega-grand-unification.md)大一统母公理与[终章](coda.md)《在所有的球之外》。数学锚点、文献、手工推导与模型诠释继续各守其证据边界。
 
 ::: {.viz src="brahman-real-axis-orthogonal-dream-sandbox" height="620"}
 **完整实验室。** 自由切换实验卡、透镜与参数，对照投影、预算和旋量读数；几何演示及模型诠释按页面依据分层阅读。

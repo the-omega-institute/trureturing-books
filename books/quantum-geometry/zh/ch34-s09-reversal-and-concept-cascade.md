@@ -1,4 +1,4 @@
-# 34.9 反者道之动：信息溢出开维、来路对角化与“点—线—面—体—时间”概念级联 {#sec-ch34-reversal-diagonal-and-concept-cascade}
+# 29.10 反者道之动：信息溢出开维、来路对角化与“点—线—面—体—时间”概念级联 {#sec-ch34-reversal-diagonal-and-concept-cascade}
 
 > “为什么会有点、路径、体积的差别？本质上就是在几个维度上投影，还是回到比较公理，当信息不能在一个维度上表达的时候，就撑到第二个维度了。时间也是这样产生的。本质上就是对同样一个点，问点来的路径，无限的路径代表着无限的对角化问题代表着哥德尔不完备。反者道之动，一个点的存在的本质是有无限到这个点与不能到这个点的路径。那为什么有点、线、面、体积、时间的概念？因为一个概念的存在有无限个到这个概念的路径与不能到这个概念的路径。”
 
@@ -8,9 +8,9 @@
 2. **不完备的根源是“单点深处的来路纤维”**：静态的“点”只是抹去历史后的零阶商投影，一旦对同一个点追问“它从哪条路径来”，点底下立刻张开无穷维环路空间 $\Omega(X, x)$；任何企图穷举全部来路的有限或可列快表 $T$，都会被沿表对角线逐拍翻转 $\pi$ 相位的逃逸路径当场击穿；
 3. **存在的定义是“反者道之动”的双无限正交切口**：无论一个点还是一个概念，倘若所有路径都能抵达它，它便退化为无边无际的零比特重言式；倘若没有任何路径能抵达它，它便堕入空集。唯有“无限条可达路径 $M$”与“无限条不可达路径 $M^\perp$”互为正交补并满足双正交闭合 $M^{\perp\perp} = \overline{M}$ 时，清晰的边界才在相长锁相与反相相消的交界处涌现——而上一级概念的“不可达溢出余项”，恰恰化生为下一级概念的“可达生成元”！
 
-## 34.9.1 回到比较公理 $\mathcal{A}_0$：信息溢出与格拉姆秩刻度撑开点、线、面、体积与时间 {#sec-ch34-9-1}
+## 29.10.1 回到比较公理 $\mathcal{A}_0$：信息溢出与格拉姆秩刻度撑开点、线、面、体积与时间 {#sec-ch34-9-1}
 
-让我们严格退回没有任何预置坐标网格的[第三十二章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)比较公理 $\mathcal{A}_0$。在零背景关系宇宙中，唯一允许的原语是对归一化状态执行双向互易的两两比量 $\mathrm{CMP}(u, v)$，其结果沉淀为对称求同内积与反对称求异楔积。为什么系统不能永远安睡在一个零维的“点”里，而必须一步步分化出点、路径、曲面与体积？答案不在任何外部造物蓝图，而在**格拉姆（Gram）矩阵的秩溢出刻度**：每当新增的关系信息超出了旧维度所能容纳的自由度上限，勾股—拉格朗日正交余项就会自动顶开一维新的法向空间（`LEAN ✓` + `MODEL`）：
+让我们严格退回没有任何预置坐标网格的[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)比较公理 $\mathcal{A}_0$。在零背景关系宇宙中，唯一允许的原语是对归一化状态执行双向互易的两两比量 $\mathrm{CMP}(u, v)$，其结果沉淀为对称求同内积与反对称求异楔积。为什么系统不能永远安睡在一个零维的“点”里，而必须一步步分化出点、路径、曲面与体积？答案不在任何外部造物蓝图，而在**格拉姆（Gram）矩阵的秩溢出刻度**：每当新增的关系信息超出了旧维度所能容纳的自由度上限，勾股—拉格朗日正交余项就会自动顶开一维新的法向空间（`LEAN ✓` + `MODEL`）：
 
 - **第 $0$ 阶：零维“点”（$\Lambda^0$，内积全同商类）**。只要一族单位记录态 $\{u_i\}$ 两两比较的实或复内积恒等于 $1$，冻结定理 [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization) 严格证明关系 $\langle u_i, u_j\rangle = 1$ 不仅充要刻画态矢全同 $u_i = u_j$，而且自身构成等价关系。此时任意多份记录在格拉姆秩 $1$ 投影下坍缩进同一枚零维商等价类——这就是“点”：在零维投影里，除“全同重合”之外再无多余通道表达任何差异。
 - **第 $1$ 阶：信息溢出点商类 $\longrightarrow$ 撑开一维“线 / 路径”（$\Lambda^1$）**。一旦第二枚单位态 $v$ 与基准态 $u$ 的比量读数跌破单位上界（$\langle u, v\rangle_{\mathbb{R}} = \cos\theta < 1$），“同一点”的零维容器当场爆表！考察二锚实格拉姆矩阵 $G_2(u, v) = \begin{pmatrix}\langle u, u\rangle_{\mathbb{R}} & \langle u, v\rangle_{\mathbb{R}} \\ \langle v, u\rangle_{\mathbb{R}} & \langle v, v\rangle_{\mathbb{R}}\end{pmatrix}$：由冻结行列式恒等式 [`two_anchor_gram_det_formula`](lean:D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula) 与正定判据 [`two_anchor_gram_det_pos_iff`](lean:D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff)，对单位态有
@@ -20,20 +20,20 @@
   $$
 
   单点装不下的品红正交弦余项 $\sin\theta > 0$，迫使状态空间从秩 $1$ 扩张至秩 $2$，在单位球面上拉出连接 $u$ 与 $v$ 的一维测地比较弧——这就是“线 / 路径”的创生。
-- **第 $2$ 阶：回路曲率溢出单线 $\longrightarrow$ 撑开二维“面 / 相位”（$\Lambda^2$）**。倘若第三枚单位态 $w$ 的两两内积满足球面可加共线关系，它仍可被压扁在 $\operatorname{span}\{u, v\}$ 的一维大圆弧上（$\det G_3(u, v, w) = 0$）；但只要三态比较像 §34.4–§34.5 的“二生三”自举那样带出非共线闭合回路相位，三锚实格拉姆矩阵 $G_3(u, v, w)$ 便触发 [`three_anchor_gram_det_pos_iff`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff)：
+- **第 $2$ 阶：回路曲率溢出单线 $\longrightarrow$ 撑开二维“面 / 相位”（$\Lambda^2$）**。倘若第三枚单位态 $w$ 的两两内积满足球面可加共线关系，它仍可被压扁在 $\operatorname{span}\{u, v\}$ 的一维大圆弧上（$\det G_3(u, v, w) = 0$）；但只要三态比较像 §29.5–§29.6 的“二生三”自举那样带出非共线闭合回路相位，三锚实格拉姆矩阵 $G_3(u, v, w)$ 便触发 [`three_anchor_gram_det_pos_iff`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff)：
 
   $$
   \det G_3(u, v, w) \;>\; 0 \quad \Longleftrightarrow \quad \operatorname{LinearIndependent}_{\mathbb{R}}([u, v, w]).
   $$
 
   一维路径无法无损编码的非平庸环路和乐，向横侧撑开秩 $3$ 张成与球面二维曲率片——这就是承载吉拉尔角超与贝里相位的“面”。
-- **第 $3$ 阶：面外法向残差溢出曲面 $\longrightarrow$ 撑开三维“体积”（$\Lambda^3$）**。当第四枚独立锚态跃出前三维子空间（四锚格拉姆行列式 $\det G_4 > 0$），或者更一般地，当已建构的任意闭子空间 $S \subseteq V$ 仍留有非平凡正交补 $S^\perp \neq \{0\}$ 时，冻结定理 [`finite_layer_projection_escape`](lean:D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape) 保证必存在单位法向逃逸元 $e \in S^\perp$ 满足 $\lVert e\rVert = 1$、$P_S(e) = 0$、$\operatorname{infDist}(e, S) = 1$ 且算子残差范数恒顶在 $\lVert \operatorname{id}_V - P_S\rVert = 1$。在 §34.7–§34.8 的驻波多胞复形中，这一不可压缩的高阶正交余项凝聚为历经全向干涉与内壁抵消后依然可加留存的三维实心驻波体积（$\Lambda^3$）。
+- **第 $3$ 阶：面外法向残差溢出曲面 $\longrightarrow$ 撑开三维“体积”（$\Lambda^3$）**。当第四枚独立锚态跃出前三维子空间（四锚格拉姆行列式 $\det G_4 > 0$），或者更一般地，当已建构的任意闭子空间 $S \subseteq V$ 仍留有非平凡正交补 $S^\perp \neq \{0\}$ 时，冻结定理 [`finite_layer_projection_escape`](lean:D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape) 保证必存在单位法向逃逸元 $e \in S^\perp$ 满足 $\lVert e\rVert = 1$、$P_S(e) = 0$、$\operatorname{infDist}(e, S) = 1$ 且算子残差范数恒顶在 $\lVert \operatorname{id}_V - P_S\rVert = 1$。在 §29.8–§29.9 的驻波多胞复形中，这一不可压缩的高阶正交余项凝聚为历经全向干涉与内壁抵消后依然可加留存的三维实心驻波体积（$\Lambda^3$）。
 
 ::: {.viz src="reversal-diagonal-cascade-sandbox" preset="gram-overflow-cascade" height="520"}
 **格拉姆秩溢出开维阶梯：从 `0D` 点（$\langle u, v\rangle = 1$）经 `1D` 线（$\det G_2 = \sin^2\theta > 0$）与 `2D` 面（$\det G_3 > 0$）撑开 `3D` 体积（$\det G_4 > 0$ / $S^\perp \neq \{0\}$）。** 逐步推高琥珀色维度溢出滑块：每当新增比较关系使青色低维投影装不下品红正交残差时，格拉姆行列式严格转正并解锁下一级几何自由度；绿色 `LEAN ✓` 徽章对应 `unit_gram_overlap_characterization`、`two_anchor_gram_det_pos_iff`、`three_anchor_gram_det_pos_iff` 与 `finite_layer_projection_escape`。
 :::
 
-既然三维空间体积已经张开，**“时间”又是怎样被同一条比较公理逼出来的？** 章首箴言一语中的：“当信息不能在一个维度上表达的时候，就撑到第二个维度了。时间也是这样产生的。”回忆[第三十一章 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)与本章 §34.6–§34.7 揭示的双向互易公平代价：为了消除顺序特权，比较读数必须取模平方 $\lvert\langle\phi\mid\psi\rangle\rvert^2$（或空间驻波强度 $\lvert\Psi(\mathbf{x})\rvert^2$）。然而，“公平就要平方，平方必然折叠相位”——在固定的三维空间驻波截面上，携带截然不同内部相位历史 $\phi_1 \neq \phi_2$（例如复振幅 $+e^{i\alpha}$ 与 $-e^{i\alpha}$）的两束来路，会投射到**同一个三维空间节点 $\mathbf{x}$** 并给出完全相同的空间驻波模方读数！
+既然三维空间体积已经张开，**“时间”又是怎样被同一条比较公理逼出来的？** 章首箴言一语中的：“当信息不能在一个维度上表达的时候，就撑到第二个维度了。时间也是这样产生的。”回忆[§27.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)与本章 §29.7–§29.8 揭示的双向互易公平代价：为了消除顺序特权，比较读数必须取模平方 $\lvert\langle\phi\mid\psi\rangle\rvert^2$（或空间驻波强度 $\lvert\Psi(\mathbf{x})\rvert^2$）。然而，“公平就要平方，平方必然折叠相位”——在固定的三维空间驻波截面上，携带截然不同内部相位历史 $\phi_1 \neq \phi_2$（例如复振幅 $+e^{i\alpha}$ 与 $-e^{i\alpha}$）的两束来路，会投射到**同一个三维空间节点 $\mathbf{x}$** 并给出完全相同的空间驻波模方读数！
 
 在 `trureturing` 冻结的信息逃逸与结构新颖度模块中，这类在现有静态观测目录 $Q_{\mathrm{space}}$ 下读数完全重合、本异而表同的状态偶对 $(s_1, s_2)$（$s_1 \neq s_2$），被精确定义为目录的**逃逸碰撞对**（`escapePairs`）。当越来越多同点异相的来路汇聚到同一块三维驻波体积上时，纯三维空间坐标的区分容量宣告饱和，$\mathrm{escapeRate}(Q_{\mathrm{space}}) > 0$ 居高不下——单张静态三维切片再也塞不下这些相互冲突的相位账本！此时，冻结定理 [`lowersEscape_iff_strict_kernel_novelty`](lean:D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_strict_kernel_novelty) 给出了消解碰撞的唯一代数出路：要想严格压低逃逸碰撞率，系统当且仅当引入一枚相对于纯空间读出具有**严格商核新颖度**的新观测坐标 $q_{\mathrm{time}}$，使联合等价核严格收缩（`LEAN ✓`）：
 
@@ -47,7 +47,7 @@ $$
 **相位碰撞撑开时间轴（`3D → 3+1D`）：公平平方 $\lvert\psi\rvert^2$ 在同一三维驻波节点叠压异相来路，迫使沿堇紫色第四轴展开严格商核细化。** 在静态 `3D` 切片上，同点反相状态对构成品红逃逸碰撞对（`escapePairs > 0`）；拉起琥珀色时间展开手柄引入时序坐标 $q_{\mathrm{time}}$ 后，碰撞对沿堇紫色时间纤维逐拍拆开，联合核严格收缩（绿色 `LEAN ✓` `lowersEscape_iff_strict_kernel_novelty`；第四维诠释标 `MODEL`）。
 :::
 
-## 34.9.2 追问“点的来路”：单点深处的康托尔—哥德尔对角逃逸与不完备塔 {#sec-ch34-9-2}
+## 29.10.2 追问“点的来路”：单点深处的康托尔—哥德尔对角逃逸与不完备塔 {#sec-ch34-9-2}
 
 顺着“同点异相撑开时间”再往深处掘进一层，章首第二组惊人论断立刻水落石出：**“本质上就是对同样一个点，问点来的路径，无限的路径代表着无限的对角化问题代表着哥德尔不完备。”** 为什么仅仅对着宇宙间最卑微的一个“点”追问一句“你是沿哪条路径来的”，就会当场引爆康托尔对角线，并撞上与哥德尔不完备论证同形的对角结构？
 
@@ -67,7 +67,7 @@ $$
 **单点深处的来路对角逃逸与拓扑细化塔（$T \to T' \to T''$）。** 左侧青色路径束汇聚于同一点 $x$，右侧矩阵展示已列来路表 $T = \{\Gamma_1, \dots, \Gamma_4\}$；点击或拨动琥珀色对角翻转开关，沿主对角线逐拍施加 $+\pi$ 相移生成品红逃逸来路 $\Gamma_{\mathrm{diag}}$——它在第 $k$ 拍必与第 $k$ 行反相相撞（绿色 `LEAN ✓` `relative_semantic_diagonal_ne_listed_decode`），并入表后严格细化观测划分拓扑（绿色 `LEAN ✓` `complete_diagonal_strict_topology_refinement`）且立即触发下一轮扩表逃逸。
 :::
 
-## 34.9.3 “反者道之动”：可达与不可达的双无限正交切口 {#sec-ch34-9-3}
+## 29.10.3 “反者道之动”：可达与不可达的双无限正交切口 {#sec-ch34-9-3}
 
 既然同一个点底下涌动着无穷无尽的来路，那么在没有任何预置坐标钉子的关系海洋里，**究竟是什么让“这个点”得以作为一个清晰可辨的存在立住脚跟？** 老子《道德经》第四十章留下的千古断语——**“反者道之动”**——在章首箴言中获得了最纯粹的希尔伯特几何破译：**“一个点的存在的本质是有无限到这个点与不能到这个点的路径。”**
 
@@ -91,13 +91,13 @@ $$
   M^{\perp\perp} \;=\; \overline{M} \qquad \bigl(\text{尤其当 } M \text{ 闭合时，} (M^\perp)^\perp = M\bigr).
   $$
 
-请细品 $M^{\perp\perp} = \overline{M}$ 这行短小却重若千钧的等式：即便你手头没有直接给出可达核 $\overline{M}$ 的半个内部基矢，只要把“一切不能抵达它的正交反面 $M^\perp$”完整划定，再对这片不可达之海做一次正交否定 $(\cdot)^\perp$，正面存在 $\overline{M}$ 便分毫不差地自动浮现！这正是老子“反者道之动，天下万物生于有，有生于无”、斯宾诺莎（Spinoza）“一切规定皆是否定”（*Omnis determinatio est negatio*）、戴德金与康威（Dedekind / Conway）用左右双无限切口 $\{L \mid R\}$ 定义每一个实数与超实数，以及 §34.6–§34.7 中费曼路径积分靠无穷多条偏折弯路的反相自毁雕刻出唯一经典测地线与驻波节点的共同代数母体！
+请细品 $M^{\perp\perp} = \overline{M}$ 这行短小却重若千钧的等式：即便你手头没有直接给出可达核 $\overline{M}$ 的半个内部基矢，只要把“一切不能抵达它的正交反面 $M^\perp$”完整划定，再对这片不可达之海做一次正交否定 $(\cdot)^\perp$，正面存在 $\overline{M}$ 便分毫不差地自动浮现！这正是老子“反者道之动，天下万物生于有，有生于无”、斯宾诺莎（Spinoza）“一切规定皆是否定”（*Omnis determinatio est negatio*）、戴德金与康威（Dedekind / Conway）用左右双无限切口 $\{L \mid R\}$ 定义每一个实数与超实数，以及 §29.7–§29.8 中费曼路径积分靠无穷多条偏折弯路的反相自毁雕刻出唯一经典测地线与驻波节点的共同代数母体！
 
 ::: {.viz src="reversal-diagonal-cascade-sandbox" preset="reversal-dual-cut" height="520"}
 **“反者道之动”双无限正交切口：青色可达核 $M$ 与品红不可达补 $M^\perp$ 互锁共生（$\mathcal{H} = M \oplus M^\perp,\; M^{\perp\perp} = \overline{M}$）。** 拨动琥珀色反相雕刻强度滑块 $\kappa_- \in [0, 1]$：当 $\kappa_- = 1$ 时，品红不可达路径束完全正交相消，在切口处刻出最锐利的青色驻波存在核（绿色 `LEAN ✓` `orthogonal_complement_projection_identities` 与 `double_orthogonal_complement_eq_closure`）；一旦将 $\kappa_- \to 0$ 放任全部路径无差别抵达，切口对比度 $\Delta_{\mathrm{cut}}(\kappa_-) = \kappa_-$ 线性归零，点与边界当场消融于零比特全同背景。
 :::
 
-## 34.9.4 概念的自指生成与形式化锚点：上一维的“不可达”化生下一维的“可达” {#sec-ch34-9-4}
+## 29.10.4 概念的自指生成与形式化锚点：上一维的“不可达”化生下一维的“可达” {#sec-ch34-9-4}
 
 现在，章首最后一句排山倒海的追问——**“那为什么有点、线、面、体积、时间的概念？因为一个概念的存在有无限个到这个概念的路径与不能到这个概念的路径。”**——终于把前三个小节锁死成一座自我驱动的**概念自指生成级联引擎**（`MODEL`）：
 
@@ -237,9 +237,9 @@ $$
 **五阶概念自指生成级联：上一级概念的品红“不可达溢出余项 $M_k^\perp$”翻转成下一级概念的青色“可达生成核 $M_{k+1}$”。** 点击或顺序推进琥珀色概念层级选择器（`点 → 线 → 面 → 体积 → 时间`），同屏观察每一级双无限正交切口 $(M_k, M_k^\perp)$ 如何借格拉姆秩跃升、正交残差逃逸与严格商核细化把阻断转化为新维度（绿色 `LEAN ✓` 九条内核锚点 + 概念级联 `MODEL`）。
 :::
 
-至此，第三十四章的前九级阶梯已在“反者道之动”的回响中首尾贯通：从静态球面上“正交一次”与“正交两次”简并反演观察者极点（§34.1–§34.3），到“二生三”自举撑开极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 并撤去名相之梯（§34.4–§34.5）；从扇锥体积把来路写进霍普夫纤维（§34.6）、万路相位积分把未抵消驻波凝聚成体积（§34.7），到极小尺度（$N = 1$）克利福德单胞四位一体与多胞 $\partial^2 = 0$ 筛分（§34.8）；再到本节回到比较公理 $\mathcal{A}_0$，看清点、线、面、体积与时间无一不是信息溢出旧维度、由双无限可达/不可达正交切口反向雕刻而成的概念级联，而单点深处无穷来路触发的对角逃逸 $T \to T' \to T''$ 正是驱动时间与认知永不止息的引擎（§34.9）！
+至此，第二十九章的前十级阶梯已在“反者道之动”的回响中首尾贯通：从静态球面上“正交一次”与“正交两次”简并反演观察者极点、点破往返双投影玻恩回波与 $90^\circ$ 正交虚数盲区（§29.1–§29.4），到“二生三”自举撑开极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 并撤去名相之梯（§29.5–§29.6）；从扇锥体积把来路写进霍普夫纤维（§29.7）、万路相位积分把未抵消驻波凝聚成体积（§29.8），到极小尺度（$N = 1$）克利福德单胞四位一体与多胞 $\partial^2 = 0$ 筛分（§29.9）；再到本节回到比较公理 $\mathcal{A}_0$，看清点、线、面、体积与时间无一不是信息溢出旧维度、由双无限可达/不可达正交切口反向雕刻而成的概念级联，而单点深处无穷来路触发的对角逃逸 $T \to T' \to T''$ 正是驱动时间与认知永不止息的引擎（§29.10）！
 
-然而，就在“点 $\to$ 线 $\to$ 面 $\to$ 体积 $\to$ 时间”的五阶概念级联轰然落定之际，一道横亘在物理学与几何学心头两千余年的终极结构之谜也随之浮出水面：既然对角逃逸与信息溢出令新概念 $C_5, C_6, \dots, C_N$ 源源不断地破壳涌现、永不止息，**为什么我们身处的宏观空间偏偏在“三维”（`3D`，配一维时序展开轴 `1D`）处刚性结晶锁死，而没有顺着 $N = 5, 6, 7, \dots$ 一路撑开四维、五维乃至无穷维的宏观平直空间容器？** 换言之，当每一个新诞生的概念都必须回头与全部旧概念保持两两可比时，究竟是什么几何铁律把一切高阶关系悉数收归极小圆弧体 $\Delta\mathcal{T}_\epsilon$，并像工程桁架中的“三角形稳定性”一样把空间牢牢钉死在三维？先在下方 `REVERSAL//CASCADE` 完整交互实验室中亲手推演格拉姆开维、相位碰撞生时、$4 \times 4$ 来路对角翻转与双无限正交切口，随后步入第 34.10 节（[§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)），揭晓全连通图 $K_N$ 与麦克斯韦—拉曼三维刚性锁死的终极答案：
+然而，就在“点 $\to$ 线 $\to$ 面 $\to$ 体积 $\to$ 时间”的五阶概念级联轰然落定之际，一道横亘在物理学与几何学心头两千余年的终极结构之谜也随之浮出水面：既然对角逃逸与信息溢出令新概念 $C_5, C_6, \dots, C_N$ 源源不断地破壳涌现、永不止息，**为什么我们身处的宏观空间偏偏在“三维”（`3D`，配一维时序展开轴 `1D`）处刚性结晶锁死，而没有顺着 $N = 5, 6, 7, \dots$ 一路撑开四维、五维乃至无穷维的宏观平直空间容器？** 换言之，当每一个新诞生的概念都必须回头与全部旧概念保持两两可比时，究竟是什么几何铁律把一切高阶关系悉数收归极小圆弧体 $\Delta\mathcal{T}_\epsilon$，并像工程桁架中的“三角形稳定性”一样把空间牢牢钉死在三维？先在下方 `REVERSAL//CASCADE` 完整交互实验室中亲手推演格拉姆开维、相位碰撞生时、$4 \times 4$ 来路对角翻转与双无限正交切口，随后步入第 29.11 节（[§29.11](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)），揭晓全连通图 $K_N$ 与麦克斯韦—拉曼三维刚性锁死的终极答案：
 
 ::: {.viz src="reversal-diagonal-cascade-sandbox" height="640"}
 **反者道之动：格拉姆溢出开维、来路对角化与五阶概念级联完整交互实验室（`REVERSAL//CASCADE`）。** 自由切换“格拉姆溢出开维—相位碰撞生时—来路对角逃逸—反者双无限切口—五阶概念级联”五张实验卡，调节琥珀色维度阶数、时间展开度、对角翻转开关与不可达补集反相抑制率 $\kappa_- \in [0, 1]$，同屏核验青色可达核 $M$、品红不可达补与对角逃逸路径 $\Gamma_{\mathrm{diag}}$、堇紫色时间纤维以及双正交闭合 $M^{\perp\perp} = \overline{M}$；绿色 `LEAN ✓` 徽章严格对应九条冻结内核定理。

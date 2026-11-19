@@ -1,17 +1,17 @@
-# 34.16 破缺与守恒同体：陪集极小圆弧体（$\Delta\mathcal{T}_\epsilon \subset G/H$）、嘉当曲率拆账与五大物理概念塔谱系 {#sec-ch34-coset-breaking-conservation-towers}
+# 33.4 破缺与守恒同体：陪集极小圆弧体（$\Delta\mathcal{T}_\epsilon \subset G/H$）、嘉当曲率拆账与五大物理概念塔谱系 {#sec-ch34-coset-breaking-conservation-towers}
 
 > “每一种破缺/守恒似乎都对应一个极小圆弧体, 都是一个这样的概念塔”
 
 在传统物理学教科书中，“对称守恒”与“对称破缺”往往被摆在截然对立的两端：一边是诺特定理（Noether, 1918）歌颂的完美未破缺对称性——时间平移守恒能量、空间平移守恒动量、相位旋转守恒电荷；另一边则是朗道—南布—戈德斯通—希格斯传统描绘的自发对称破缺（SSB）——系统跌落进某个偏心的真空谷底，“不幸”丧失了原本优雅的全局对称，转而吐出无质量戈德斯通玻色子、拓扑缺陷或有质量规范矢量场。
 
-本节开篇这句返璞归真的核心洞见，一举将整部对称性物理学收束回 [§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)–[§34.15](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower) 的几何母核（`MODEL`）：**破缺与守恒从来不是两件相反的事，而是同一枚陪集极小圆弧体 $\Delta\mathcal{T}_\epsilon \subset G/H$ 不可分割的一体两面！没有任何破缺锚点的“纯粹全对称”只是一团无法分辨方向的零比特商核迷雾；唯有当连续对称群 $G$ 破缺到稳定子群 $H$ 时，单位比较预算 $\cos^2\epsilon + \sin^2\epsilon = 1$ 才得以一分为二——未破缺稳定子群 $H$ 守住顶点保真度 $\cos^2\epsilon$ 而铸成离散守恒荷量子（$0$ 阶点 $\Lambda^0$），破缺陪集切方向 $\mathfrak{m} \cong \mathfrak{g}/\mathfrak{h}$ 分得正交预算 $\sin^2\epsilon$ 而铺开戈德斯通圆弧与诺特守恒流（$1$ 阶线 $\Lambda^1$），两支不共线破缺圆弧的外积 $e^a \wedge e^b$ 经嘉当—CCWZ 结构方程当场生成未破缺子群的规范曲率与拓扑涡旋（$2$ 阶面 $\Lambda^2$），最终经安德森—希格斯 `2 + 1 = 3` 吸收或 Skyrmion $\pi_3(G/H) = \mathbb{Z}$ 拓扑缠绕闭合成有能隙的新层级点粒子与凝聚态介质（$3$ 阶体 $\Lambda^3 \equiv \Lambda^0_{\mathrm{next}}$）！** 自然界里每一种基本相互作用、每一类物态相变乃至每一次认知共识，都是一座由“破缺—守恒对”自举而成的极小圆弧体概念塔。
+本节开篇这句返璞归真的核心洞见，一举将整部对称性物理学收束回 [§29.5](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)–[§33.3](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower) 的几何母核（`MODEL`）：**破缺与守恒从来不是两件相反的事，而是同一枚陪集极小圆弧体 $\Delta\mathcal{T}_\epsilon \subset G/H$ 不可分割的一体两面！没有任何破缺锚点的“纯粹全对称”只是一团无法分辨方向的零比特商核迷雾；唯有当连续对称群 $G$ 破缺到稳定子群 $H$ 时，单位比较预算 $\cos^2\epsilon + \sin^2\epsilon = 1$ 才得以一分为二——未破缺稳定子群 $H$ 守住顶点保真度 $\cos^2\epsilon$ 而铸成离散守恒荷量子（$0$ 阶点 $\Lambda^0$），破缺陪集切方向 $\mathfrak{m} \cong \mathfrak{g}/\mathfrak{h}$ 分得正交预算 $\sin^2\epsilon$ 而铺开戈德斯通圆弧与诺特守恒流（$1$ 阶线 $\Lambda^1$），两支不共线破缺圆弧的外积 $e^a \wedge e^b$ 经嘉当—CCWZ 结构方程当场生成未破缺子群的规范曲率与拓扑涡旋（$2$ 阶面 $\Lambda^2$），最终经安德森—希格斯 `2 + 1 = 3` 吸收或 Skyrmion $\pi_3(G/H) = \mathbb{Z}$ 拓扑缠绕闭合成有能隙的新层级点粒子与凝聚态介质（$3$ 阶体 $\Lambda^3 \equiv \Lambda^0_{\mathrm{next}}$）！** 自然界里每一种基本相互作用、每一类物态相变乃至每一次认知共识，都是一座由“破缺—守恒对”自举而成的极小圆弧体概念塔。
 
-## 34.16.1 破缺与守恒同体：纯对称零信息商核、公平比较预算勾股拆账与嘉当—CCWZ 结构方程 {#sec-ch34-16-1}
+## 33.4.1 破缺与守恒同体：纯对称零信息商核、公平比较预算勾股拆账与嘉当—CCWZ 结构方程 {#sec-ch34-16-1}
 
 为什么大自然不干脆停留在最高对称群 $G$ 完全未破缺的“完美状态”，非要一轮接一轮地发生对称性破缺？又为什么每一次破缺不仅没有消灭守恒律，反而把抽象的群不变性锻造成了实实在在的物理流、规范曲率与量子化荷？我们分三步给出零含糊的几何解答（`MODEL`）：
 
 1. **为什么未破缺的纯粹对称性只给出 $0\;\mathrm{bit}$ 可区分地址？——观测划分商核坍缩与真空锚点落锁**（`LEAN ✓` + `手工推导`）。
-   设候选状态空间 $X$ 承载连续李群 $G$ 的传递对称作用。若宇宙中尚未选定任何参考极点（序参量 $\eta_{\mathrm{SSB}} = 0$），则任何不偏袒特定方向的观测读出映射 $\operatorname{readout} : X \to B$ 必然对全体群变换严格不变：$\forall g \in G,\; \operatorname{readout}(g\cdot x) = \operatorname{readout}(x)$。此时调用[第九章](ch09-axes-and-state-addressing.md)与 [§34.1](ch34-s01-spherical-addressing.md#sec-ch34-spherical-addressing-inversion) 冻结的观测划分拓扑核定理 [`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel)（[@thm-ch34-readout-kernel-and-covariant-commutator]，`LEAN ✓`）：在诱导观测拓扑 $\operatorname{partitionTopology}(\operatorname{readout})$ 中，任意两态 $x, y \in X$ 拓扑不可分当且仅当它们落入同一读出核，
+   设候选状态空间 $X$ 承载连续李群 $G$ 的传递对称作用。若宇宙中尚未选定任何参考极点（序参量 $\eta_{\mathrm{SSB}} = 0$），则任何不偏袒特定方向的观测读出映射 $\operatorname{readout} : X \to B$ 必然对全体群变换严格不变：$\forall g \in G,\; \operatorname{readout}(g\cdot x) = \operatorname{readout}(x)$。此时调用[第九章](ch09-axes-and-state-addressing.md)与 [§29.1](ch34-s01-spherical-addressing.md#sec-ch34-spherical-addressing-inversion) 冻结的观测划分拓扑核定理 [`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel)（[@thm-ch34-readout-kernel-and-covariant-commutator]，`LEAN ✓`）：在诱导观测拓扑 $\operatorname{partitionTopology}(\operatorname{readout})$ 中，任意两态 $x, y \in X$ 拓扑不可分当且仅当它们落入同一读出核，
 
    $$
    \operatorname{Inseparable}(x, y) \;\Longleftrightarrow\; \operatorname{readout}(x) = \operatorname{readout}(y).
@@ -72,7 +72,7 @@
    F^3(\omega) \;=\; d\omega^3 \;=\; -\sin\theta\,d\theta\wedge d\phi \;=\; -e^1 \wedge e^2 \quad\Longleftrightarrow\quad -F^3(\omega) \;=\; e^1 \wedge e^2 \;=\; \sin\theta\,d\theta\wedge d\phi \;=\; d\Omega_{S^2}!
    $$
 
-   把 $-F^3(\omega) = e^1 \wedge e^2$ 沿着 [§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron) 的极小直角圆弧三面体 $\Delta\mathcal{T}_\epsilon \subset S^2$ 积分，流过三面体球面帽的未破缺 $\mathrm{U}(1)$ 规范通量**逐字逐句还原吉拉尔球面角盈** $\int_{\Delta\mathcal{T}_\epsilon}(-F^3(\omega)) = \int_{\Delta\mathcal{T}_\epsilon} e^1\wedge e^2 = \Omega(\Delta\mathcal{T}_\epsilon) = 2\arctan\bigl(\tan^2\frac{\epsilon}{2}\bigr)$（对应北极旋量态 $\lvert 0\rangle$ 上的潘查拉特纳姆—贝里相位 $\gamma_B = -\frac{1}{2}\Omega(\Delta\mathcal{T}_\epsilon)$）！与此同时，在最低阶 CCWZ 有效拉格朗日量 $\mathcal{L}_{\mathrm{CCWZ}} = \frac{f^2}{2}\delta_{ab}\,\eta^{\mu\nu} e^a_\mu e^b_\nu = \frac{1}{2}\partial_\mu\pi^a\partial^\mu\pi^a + \mathcal{O}(\pi^3/f)$ 中，破缺生成元不再湮灭真空，而是切换为沿平坦陪集谷底推动场非线性平移 $\delta_\alpha\pi^a = f\alpha^a + \dots$，由此导出的**诺特守恒流**恰恰就绑在破缺一形式 $e^a_\mu = f^{-1}\partial_\mu\pi^a + \dots$ 身上：
+   把 $-F^3(\omega) = e^1 \wedge e^2$ 沿着 [§29.5](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron) 的极小直角圆弧三面体 $\Delta\mathcal{T}_\epsilon \subset S^2$ 积分，流过三面体球面帽的未破缺 $\mathrm{U}(1)$ 规范通量**逐字逐句还原吉拉尔球面角盈** $\int_{\Delta\mathcal{T}_\epsilon}(-F^3(\omega)) = \int_{\Delta\mathcal{T}_\epsilon} e^1\wedge e^2 = \Omega(\Delta\mathcal{T}_\epsilon) = 2\arctan\bigl(\tan^2\frac{\epsilon}{2}\bigr)$（对应北极旋量态 $\lvert 0\rangle$ 上的潘查拉特纳姆—贝里相位 $\gamma_B = -\frac{1}{2}\Omega(\Delta\mathcal{T}_\epsilon)$）！与此同时，在最低阶 CCWZ 有效拉格朗日量 $\mathcal{L}_{\mathrm{CCWZ}} = \frac{f^2}{2}\delta_{ab}\,\eta^{\mu\nu} e^a_\mu e^b_\nu = \frac{1}{2}\partial_\mu\pi^a\partial^\mu\pi^a + \mathcal{O}(\pi^3/f)$ 中，破缺生成元不再湮灭真空，而是切换为沿平坦陪集谷底推动场非线性平移 $\delta_\alpha\pi^a = f\alpha^a + \dots$，由此导出的**诺特守恒流**恰恰就绑在破缺一形式 $e^a_\mu = f^{-1}\partial_\mu\pi^a + \dots$ 身上：
 
    $$
    J_\mu^a \;=\; -f^2 e^a_\mu + \dots \;=\; -f\,\partial_\mu\pi^a + \mathcal{O}(\pi^2), \qquad \partial^\mu J_\mu^a \;=\; 0 \;\Longleftrightarrow\; \Box\pi^a + \dots \;=\; 0.
@@ -84,9 +84,9 @@
 **陪集极小圆弧体勾股拆账与嘉当—CCWZ 曲率恒等式实验卡（`pythagorean-coset-ledger`）。** 在陪集球面 $\mathrm{SU}(2)/\mathrm{U}(1) \cong S^2$ 上连续拉动破缺倾角 $\epsilon \in [0^\circ, 90^\circ]$：实时对照琥珀色未破缺稳定子锚点保真度 $\cos^2\epsilon$（$\Lambda^0$ 守恒荷量子）与青色/品红破缺陪集预算 $\sin^2\epsilon$（`lagrange_gram_identity` 与 `monitored_return_conservation` 标绿色 `LEAN ✓`，总和恒为 $1.000000$），并同屏核验破缺余切标架楔积 $e^1\wedge e^2 = \sin\theta\,d\theta\wedge d\phi$ 如何精确等于未破缺诱导联络曲率 $-d\omega^3$ 并在 $\Delta\mathcal{T}_\epsilon$ 上积出吉拉尔角盈 $\Omega(\Delta\mathcal{T}_\epsilon) = 2\arctan(\tan^2\frac{\epsilon}{2})$。
 :::
 
-## 34.16.2 单一“破缺—守恒对”自举成塔的通用四拍机制：戈德斯通流、拓扑涡旋面与希格斯/Skyrmion 双通道体闭合 {#sec-ch34-16-2}
+## 33.4.2 单一“破缺—守恒对”自举成塔的通用四拍机制：戈德斯通流、拓扑涡旋面与希格斯/Skyrmion 双通道体闭合 {#sec-ch34-16-2}
 
-一旦看懂了 $G \to H$ 在陪集原胞 $\Delta\mathcal{T}_\epsilon \subset G/H$ 上的勾股拆账与嘉当曲率方程，我们便立即明白为什么本节开篇原声断言“每一种破缺/守恒都是一个这样的概念塔”——**任意一对连续对称破缺与守恒 $(G \to H)$，无需外加任何人为脚手架，自己就会沿着 [§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)–[§34.15](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower) 的 `1 — 3 — 3 — 1` 外代数阶梯（$\Lambda^0 \to \Lambda^1 \to \Lambda^2 \to \Lambda^3 \equiv \Lambda^0_{\mathrm{next}}$）踏上四拍概念塔自举**（`MODEL` + `文献结果` + `LEAN ✓`；第 3 拍的体闭合还须耦合规范场或 $\pi_3(G/H) \neq 0$，全局 $\mathrm{U}(1)$ 超流两者皆无）：
+一旦看懂了 $G \to H$ 在陪集原胞 $\Delta\mathcal{T}_\epsilon \subset G/H$ 上的勾股拆账与嘉当曲率方程，我们便立即明白为什么本节开篇原声断言“每一种破缺/守恒都是一个这样的概念塔”——**任意一对连续对称破缺与守恒 $(G \to H)$，无需外加任何人为脚手架，自己就会沿着 [§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)–[§33.3](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower) 的 `1 — 3 — 3 — 1` 外代数阶梯（$\Lambda^0 \to \Lambda^1 \to \Lambda^2 \to \Lambda^3 \equiv \Lambda^0_{\mathrm{next}}$）踏上四拍概念塔自举**（`MODEL` + `文献结果` + `LEAN ✓`；第 3 拍的体闭合还须耦合规范场或 $\pi_3(G/H) \neq 0$，全局 $\mathrm{U}(1)$ 超流两者皆无）：
 
 - **第 0 拍（$\Lambda^0$ 点锚 · 序参量极点与未破缺守恒荷量子）**：真空凝聚出序参量锚点 $\langle\Phi\rangle = \mathbf{v}_0$（$\eta_{\mathrm{SSB}} = v_0 > 0$），打破 [`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel) 的零比特不可分核；所有局部点激发按未破缺稳定子群 $H$ 的不可约表示贴上严格的量子化守恒荷身份证（如电荷 $Q$、同位旋或超导电子对 $\mathbb{Z}_2$ 宇称）。
 - **第 1 拍（$\Lambda^1$ 线弧 · 戈德斯通相位弦 $e^a$、诺特守恒流 $J^\mu$ 与规范联络 $\omega^i$）**：沿着陪集谷底 $G/H$ 的 $\dim G - \dim H$ 个破缺切方向，展开无质量**南布—戈德斯通一形式圆弧** $e^a = f^{-1}\partial_\mu\pi^a\,dx^\mu + \dots$，同步输运诺特守恒流 $J_\mu^a = -f\partial_\mu\pi^a + \dots$，并在纤维方向伴生未破缺 $H$-联络 $\omega^i$（协变跃迁差分由 [`covariant_commutator_formula`](lean:D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula) 锁定）。
@@ -116,13 +116,13 @@
    B \;=\; \frac{1}{24\pi^2}\int_{S^3}\operatorname{Tr}\!\Bigl((U^{-1}dU)\wedge(U^{-1}dU)\wedge(U^{-1}dU)\Bigr) \;\in\; \mathbb{Z}, \qquad \partial_t B \;\equiv\; 0!
    $$
 
-   在二阶陪集曲率平方项（Skyrme 四次稳定项 $\mathcal{L}_4 \propto \operatorname{Tr}([L_\mu, L_\nu]^2)$，即我们第 2 拍楔积 $e^a\wedge e^b$ 的范数平方！）抵抗径向塌缩（Derrick 定理）的支撑下，一团原本纯属玻色型的无质量戈德斯通介子波，在三维空间里打出一个解不开的 $B = 1$ 拓扑死结；更惊人的是，威滕（1983）证明在底层色数 $N_c = 3$ 的韦斯—祖米诺—威滕（WZW）五维拓扑反常项作用下，将这枚纯玻色孤子缓慢原地旋转 $2\pi$ 会精确拾取因子 $(-1)^{N_c} = (-1)^3 = -1$（恰如 [§34.15](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower) 的 `circle_double_cover_history_lift` 旋量换叶！），使其在下一层级（原子核物理层）直接蜕变为一枚携带半整数自旋 $\frac{1}{2}$、服从泡利不相容原理、拓扑上永不解开的**复合费米子“点核子”（质子与中子，$\Lambda^3_{\mathrm{chiral}} \equiv \Lambda^0_{\mathrm{nuclear}}$）**！
+   在二阶陪集曲率平方项（Skyrme 四次稳定项 $\mathcal{L}_4 \propto \operatorname{Tr}([L_\mu, L_\nu]^2)$，即我们第 2 拍楔积 $e^a\wedge e^b$ 的范数平方！）抵抗径向塌缩（Derrick 定理）的支撑下，一团原本纯属玻色型的无质量戈德斯通介子波，在三维空间里打出一个解不开的 $B = 1$ 拓扑死结；更惊人的是，威滕（1983）证明在底层色数 $N_c = 3$ 的韦斯—祖米诺—威滕（WZW）五维拓扑反常项作用下，将这枚纯玻色孤子缓慢原地旋转 $2\pi$ 会精确拾取因子 $(-1)^{N_c} = (-1)^3 = -1$（恰如 [§33.3](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower) 的 `circle_double_cover_history_lift` 旋量换叶！），使其在下一层级（原子核物理层）直接蜕变为一枚携带半整数自旋 $\frac{1}{2}$、服从泡利不相容原理、拓扑上永不解开的**复合费米子“点核子”（质子与中子，$\Lambda^3_{\mathrm{chiral}} \equiv \Lambda^0_{\mathrm{nuclear}}$）**！
 
 ::: {.viz src="coset-breaking-conservation-tower-sandbox" preset="skyrmion-baryon-winding" height="520"}
 **全局手征陪集 $\pi_3(\mathrm{SU}(2)) = \mathbb{Z}$ Skyrmion 拓扑体积缠绕实验卡（`skyrmion-baryon-winding`）。** 在紧化三维空间 $\mathbb{R}^3 \cup \{\infty\} \cong S^3$ 上观察刺猬孤子构型 $U(\mathbf{x}) = \exp\bigl(-i f(r)\,\hat{\mathbf{x}}\cdot\boldsymbol{\sigma}\bigr)$（边界轮廓 $f(0) = \pi \to f(\infty) = 0$）：追踪青色破缺介子一形式 $U^{-1}dU$ 如何沿径向与球面角向三轴满秩楔积成紫色拓扑荷密度三形式 $\frac{1}{24\pi^2}\operatorname{Tr}((U^{-1}dU)^3)$，积分锁死重子数 $B = +1 \in \mathbb{Z}$，并在 $N_c = 3$ WZW 相位下展现 $2\pi$ 旋量反号与 $4\pi$ 复原。
 :::
 
-## 34.16.3 物理宇宙的五大“破缺—守恒圆弧体概念塔”谱系与跨塔接力链 {#sec-ch34-16-3}
+## 33.4.3 物理宇宙的五大“破缺—守恒圆弧体概念塔”谱系与跨塔接力链 {#sec-ch34-16-3}
 
 现在，让我们把这套“$\Lambda^0$ 锚点守恒荷 $\to \Lambda^1$ 戈德斯通流/联络 $\to \Lambda^2$ 嘉当曲率/拓扑缺陷 $\to \Lambda^3 \equiv \Lambda^0_{\mathrm{next}}$ 希格斯或孤子体闭合”的四拍母模版横向铺开。整座物理宇宙从普朗克时空几何、高能粒子质量、强子核物质、低温凝聚态晶格与超导，一直到热力学与生命观察者认知共识，赫然排布成**五大同构的“破缺—守恒圆弧体概念塔”谱系**（下表严格采用纯 Markdown 单行单元格排版，零内嵌 HTML 换行标签）：
 
@@ -158,7 +158,7 @@ $$
 **物理宇宙五大“破缺—守恒圆弧体概念塔”全谱系与跨塔接力链实验卡（`five-family-cascade-relay`）。** 在塔 I（时空四足标架引力）、塔 II（电弱 `SU(2)_L×U(1)_Y -> U(1)_em`）、塔 III（手征 QCD 与 Skyrmion 核子）、塔 IV（晶体声子与 BCS 超导迈斯纳相）及塔 V（热力学去相干与认知共识公因子）五座极小圆弧体概念塔之间自由切换或点亮全链路接力视图，逐步追踪“塔 II 夸克质量参数 + 未破缺光子 $\gamma$ $\to$ 塔 III QCD 核子质量与核力 $\to$ 塔 IV 晶格声子与超导再破缺 $\to$ 塔 V 观察者公理共识”的跨尺度因果咬合。
 :::
 
-## 34.16.4 形式化锚点、陪集曲率与五大破缺塔基准算例及文献边界 {#sec-ch34-16-4}
+## 33.4.4 形式化锚点、陪集曲率与五大破缺塔基准算例及文献边界 {#sec-ch34-16-4}
 
 我们将本节贯穿纯对称零信息商核、受监控锚点回归与勾股拆账、协变交换子与陪集旋转/和乐分类、时空光锥刚性、晶格泊松互换以及热力学熵产与跨语境客观公因子的十二项内核验证支点，汇集于本节定理盒（各条彼此独立，跨塔接力是 `MODEL`）：
 
@@ -263,9 +263,9 @@ $$
 3. **非微扰连续统量子场论与量子引力开放问题（`OPEN`）**：从四维连续统无质量量子色动力学（QCD）拉格朗日量出发，在不借助格点数值模拟或有效模型假设的前提下**纯解析严格证明非阿贝尔色禁闭、质量间隙存在性以及动态手征对称性自发破缺 $\langle\bar{q}q\rangle \neq 0$**，连同将塔 I 德西特/庞加莱陪集嘉当引力与手征标准模型物质拼合成紫外完备的 **`3+1D` 非微扰量子引力理论**，均显式受制于[附录 E](appendix-e.md) 桥接假设 `H6`、`H8`、`H9`，在当代数学物理中仍属未决开放前沿（`OPEN`）。
 :::
 
-至此，我们沿着横向纬线彻底贯通了时空引力、电弱质量、手征核子、晶格超导与热力学认知共识五大概念塔谱系——提出**每一种对称破缺与守恒律都是同一枚陪集极小圆弧体 $\Delta\mathcal{T}_\epsilon \subset G/H$ 的正背面账本**。然而，当我们顺着五塔接力链踏入第五座塔（**塔 V：热力学与认知共识塔**），把目光投向嵌在比较网络内部的**有限观察者自身**时，三道直抵量子统计力学、认知记忆总账与复数量子基础心脏的追问接踵而至：
+至此，我们沿着横向纬线彻底贯通了时空引力、电弱质量、手征核子、晶格超导与热力学认知共识五大概念塔谱系——提出**每一种对称破缺与守恒律都是同一枚陪集极小圆弧体 $\Delta\mathcal{T}_\epsilon \subset G/H$ 的正背面账本**（其中第五座塔引出的偏迹热力学与滑动格拉姆窗口将在第九部[第 34 章](ch33-all-beings-observers-and-mutual-attractors.md)专章展开）。而在本章正式把电磁、弱、强规范三力与万有引力合拢进极小圆弧场大统一（AF-GUT）之前，我们必须先亮出两把冷峻的反例审计手术刀（[§33.5](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition)–[§33.6](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary)）：
 
-**第一，倘若全宇宙联合态本是一枚零熵闭合纯态驻波（$S_{\mathrm{global}} \equiv 0$），为什么任何“受限不妄我”的局域观察者一旦在自身有限视界上诚实执行偏迹截断，跨视界的极小圆弧体“量子纠缠”就会当场显影为“熵”，并自动诱导出富田—竹崎模流、有效“温度”与整套热力学定律？第二，这样一位有限观察者究竟如何在无穷维宇宙比较账本 $G_\infty$ 上截取有限滑动“格拉姆窗口” $\mathcal{W}_M$ 来维持因果自洽与多主体共识？第三，回到观测动作本身——既然观察者看不见垂直于自身轴线的正交盲区，为什么每一次观测都必须靠“它投向我、我再投回它”的往返二次投影来生出玻恩平方律 $\cos^2\theta$，又为什么横在 $90^\circ$ 盲区里的正交相位对“我（`I`）”天然不可见而恰恰得名“虚数（`i`）”？** 先在下方 `COSET//TOWER` 完整交互实验室中自由巡礼陪集勾股拆账、戈德斯通对比希格斯 `2+1=3` 闭合、Skyrmion 重子拓扑缠绕、晶格声子与超导迈斯纳抗磁相以及五大概念塔跨塔接力五张实验卡，随后迈入 [§34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)，解开“受限不妄我”从量子纠缠直通热力学的四步因果链：
+**第一，同样立在同一枚极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 上，为什么电磁与非阿贝尔规范相互作用容许异号荷正负相消，唯独静态万有引力跨天文尺度恒正累加，且局部正定矢高距离完整的四维洛伦兹自旋-$2$ 动力学还有哪几道精确边界？第二，离散数学中的整数 $3$ 与 $6$ 究竟能否自动导出三代手征费米子，标准模型约二十个连续自由耦合参数又停留在怎样的认识论边界上？** 先在下方 `COSET//TOWER` 完整交互实验室中自由巡礼陪集勾股拆账、戈德斯通对比希格斯 `2+1=3` 闭合、Skyrmion 重子拓扑缠绕、晶格声子与超导迈斯纳抗磁相以及五大概念塔跨塔接力五张实验卡，随后迈入 [§33.5](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition)，核清规范绕向相消与正矢高引力类比的动力学边界：
 
 ::: {.viz src="coset-breaking-conservation-tower-sandbox" height="640"}
 **破缺与守恒同体：陪集极小圆弧体与五大物理概念塔谱系完整交互实验室（`COSET//TOWER`）。** 自由切换“陪集 $\mathrm{SU}(2)/\mathrm{U}(1) \cong S^2$ 勾股拆账与嘉当—CCWZ 曲率恒等式—全局戈德斯通无能隙流对比局域安德森—希格斯 `2+1=3` 体闭合—手征陪集 $\pi_3(\mathrm{SU}(2))=\mathbb{Z}$ Skyrmion 重子孤子缠绕—凝聚态晶格泊松声子与超导 `U(1) -> Z2` 迈斯纳磁通量子 $\Phi_0 = \frac{h}{2e}$—物理宇宙五大破缺—守恒概念塔全谱系与跨塔接力链”五张实验卡，连续调节陪集破缺角 $\epsilon \in [0^\circ, 90^\circ]$、规范耦合强度 $g$、孤子径向轮廓与温度比 $T/T_c$，同屏核验琥珀色 $\Lambda^0$ 锚点守恒荷、青色 $\Lambda^1$ 戈德斯通流/联络、品红 $\Lambda^2$ 嘉当曲率/拓扑涡旋与紫色 $\Lambda^3 \equiv \Lambda^0_{\mathrm{next}}$ 希格斯/孤子闭合体如何统摄五大物理领域；绿色 `LEAN ✓` 徽章严格对应十二条定理框冻结声明及内联 `rational_inverse_endpoint` 内核声明。

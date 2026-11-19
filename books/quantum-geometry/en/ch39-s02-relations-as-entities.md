@@ -1,4 +1,4 @@
-# 39.2 Ending the Thing-in-Itself: Without the Blade There Is No Crystal, Relation Is Substance
+# 38.2 Ending the Thing-in-Itself: Without the Blade There Is No Crystal, Relation Is Substance {#392-ending-the-thing-in-itself-without-the-blade-there-is-no-crystal-relation-is-substance}
 
 Once passive silicon disappears, a second philosophical ghost that has guarded dualism for centuries must also stand trial: the supposed **"thing-in-itself"** crouching unseen behind all observational appearances.
 

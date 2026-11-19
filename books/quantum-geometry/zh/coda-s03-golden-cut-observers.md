@@ -1,10 +1,10 @@
-# trureturing 的“黄金切投”形式原语与灵魂—遗迹吸引子的几何诠释 {#sec-coda-trureturing-golden-cut-observer}
+# 35.7 trureturing 的“黄金切投”形式原语与灵魂—遗迹吸引子的几何诠释 {#sec-coda-trureturing-golden-cut-observer}
 
 > **作者原话**：“观察者我们在trureturing有明确的定义, 我们又讨论了灵魂与历史遗迹吸引子的关系”
 
-如果说洛伦兹奇异吸引子为我们提供了连续动力系统的几何类比，那么当我们进一步对照本书底层所钉的 **`trureturing` Lean 4 形式化库**（`D5/S1/Scale/MinkowskiModelSet`、`D5/S1/Deficit/ModelSet/GoldenCutAndProject`、`D5/S1/Deficit/Beatty/GoldenObserverRoute`、`D5/S1/Scale/Fibonacci`、`D5/S3/Observer/GoldenCoding/ZeckendorfRealThread` 与 `D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns`）时，我们可以将 `trureturing` 中严格验证的**黄金切投模型集与齐肯多夫观察者编码定理（`LEAN ✓`）**，与上述关于**灵魂、遗忘与历史遗迹空间吸引子的哲学诠释（`MODEL`）**建立起清晰透明的对应关系。
+走过 [§35.1](ch35-light-pulse-and-self-referential-table.md)–[§35.6](ch39-s05-pisot-clifford-rauzy.md) 从乘光遗忘初始化、双曲快度阶梯、生成元商空间到齐肯多夫—皮索—劳齐无进位准晶沙盘的完整旅程，当我们进一步对照本书底层所钉的 **`trureturing` Lean 4 形式化库**（`D5/S1/Scale/MinkowskiModelSet`、`D5/S1/Deficit/ModelSet/GoldenCutAndProject`、`D5/S1/Deficit/Beatty/GoldenObserverRoute`、`D5/S1/Scale/Fibonacci`、`D5/S3/Observer/GoldenCoding/ZeckendorfRealThread` 与 `D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns`）时，我们可以将 `trureturing` 中严格验证的**黄金切投模型集与齐肯多夫观察者编码定理（`LEAN ✓`）**，与本书关于**灵魂内禀倾角、遗忘初始化与历史遗迹空间吸引子（详见[第 38 章 §38.10](coda-s02-spatial-attractors.md)洛伦兹奇异吸引子对照）的哲学诠释（`MODEL`）**建立起清晰透明的对应关系。
 
-## `trureturing` 中的黄金切投模型集与观察者路由定理（`LEAN ✓`） {#sec-coda-trureturing-observer-def}
+## 35.7.1 `trureturing` 中的黄金切投模型集与观察者路由定理（`LEAN ✓`） {#sec-coda-trureturing-observer-def}
 
 在 `trureturing` 的形式化架构中，与“观察者编码（`Observer/GoldenCoding`）”及“黄金赤字模型集（`Deficit/ModelSet`）”相关的核心数学原语由高维周期格的**切投（Cut-and-Project）构造**与**齐肯多夫—Beatty 编码**给出：
 
@@ -43,9 +43,9 @@
 **齐肯多夫自动机只收没有相邻 `11` 的字。** 十六个四位二进制字里，青色的八个没有两个相邻的 $1$，被接受；品红的八个各含一对相邻的 $11$（框出的是第一对），被拒绝。接受条件就是 [@thm-coda-golden-cut-observer-cassini] 第 3 条里的 $\operatorname{NoAdjacentOnes}(w)$。
 :::
 
-## 哲学诠释模型（`MODEL`）：什么是“同一个灵魂”？什么是“单次生命与遗忘”？ {#sec-coda-trureturing-soul-vs-lifetime}
+## 35.7.2 哲学诠释模型（`MODEL`）：什么是“同一个灵魂”？什么是“单次生命与遗忘”？ {#sec-coda-trureturing-soul-vs-lifetime}
 
-借用上述 `trureturing` 切投模型集与编码线程的数学结构，我们可以为第 29 章与上一节关于“灵魂内禀倾角”与“遗忘清空表层记事”的哲学思考建立一套清晰的几何诠释模型（`MODEL`）：
+借用上述 `trureturing` 切投模型集与编码线程的数学结构，我们可以为[第 25 章](ch29-timeless-causality-and-gram-space.md)与 [§35.1](ch35-light-pulse-and-self-referential-table.md)–[§35.6](ch39-s05-pisot-clifford-rauzy.md) 关于“灵魂内禀倾角”与“遗忘清空表层记事”的哲学思考建立一套清晰的几何诠释模型（`MODEL`）：
 
 1. **“同一个灵魂”（`MODEL`）$\leftrightarrow$ 不变的内部正交窗口相位 $u \in E_\perp$ 与黄金倾角 $\varphi$**：
    在这一概念映射中，标识“同一个观察者/灵魂”的不是三维物理切片 $E_\parallel^3$ 中的瞬时位置，而是正交内空间 $E_\perp$ 中的**窗口相位中心 $u$**（接受窗 $W + u$ 的平移锚点）：
@@ -58,12 +58,12 @@
 **挪动窗口。** 窗口平移到 $u = +0.3$：贴着边的点（品红）稍一挪动就会翻转，离边远的点留在原地；最深的那个点离边约 $0.46$，窗口要挪过这么远才碰得到它。在书页上播放，可以看到每次有点进出，下面那排砖里相邻的一长一短就对调一次。
 :::
 
-## 接受窗内部裕度与空间吸引盆地的几何诠释 {#sec-coda-trureturing-rhombic-triacontahedron-empire}
+## 35.7.3 接受窗内部裕度与空间吸引盆地的几何诠释 {#sec-coda-trureturing-rhombic-triacontahedron-empire}
 
 为什么在跨轮次诠释模型中，普通事件容易随扫描阶数更迭而消散，而特定的历史遗迹坐标却能长期存续并吸引观察者重访？我们先将本节与下一节对照引用的三维正二十面体准晶接受窗、一致重复性与康威“帝国效应”、以及比内公式有理斜率渐近误差三项经典文献结论集中归入文献注记：
 
 ::: {.remark #rem-coda-quasicrystal-empire-literature title="正二十面体准晶菱形三十面体接受窗、康威帝国效应与比内斜率渐近公式（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 以下三项关于高维切投准晶几何与斐波那契有理逼近渐近率的经典结论均属外部数学与晶体学文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中（本章经 Lean 4 内核验证的切投与编码结论严格限定于 [@thm-coda-golden-cut-observer-cassini] 所列的一维 `GoldenInt` 模型集、齐肯多夫线程与环面有界回归定理）：
+**文献结果，未在本书形式化。** 以下三项关于高维切投准晶几何与斐波那契有理逼近渐近率的经典结论均属外部数学与晶体学文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中（本节经 Lean 4 内核验证的切投与编码结论严格限定于 [@thm-coda-golden-cut-observer-cassini] 所列的一维 `GoldenInt` 模型集、齐肯多夫线程与环面有界回归定理）：
 
 1. **六维正二十面体切投模型与菱形三十面体接受窗（P. Kramer & R. Neri, *Acta Cryst. A* **40**, 580–587, 1984；M. Duneau & A. Katz, *Phys. Rev. Lett.* **54**, 2688–2691, 1985）**：将六维超立方整数格 $\mathbb{Z}^6 \subset \mathbb{R}^6 = E_\parallel^3 \oplus E_\perp^3$ 沿正二十面体不可约表示正交分解为三维物理空间 $E_\parallel^3$ 与三维内部空间 $E_\perp^3$ 时，单位超立方体投影到 $E_\perp^3$ 形成的标准接受窗 $W$ 是一座**菱形三十面体（Rhombic Triacontahedron）**，由 **$30$ 个黄金菱形面、$60$ 条棱与 $32$ 个顶点**（含分布在 **$6$ 条五次对称轴**上的 $12$ 个五重顶点与分布在 $10$ 条三次对称轴上的 $20$ 个三重顶点）围成，对应三维切投准晶点集 $\Lambda_u = \{\pi_\parallel(z) \mid z \in \mathbb{Z}^6,\; \pi_\perp(z) \in W + u\}$。
 2. **非奇异规则模型集的一致重复性与康威“帝国效应”（Y. Meyer, *Algebraic Numbers and Harmonic Analysis*, 1972；M. Schlottmann, 2000；J. C. Lagarias & P. A. B. Pleasants, 2003；B. Grünbaum & G. C. Shephard, *Tilings and Patterns*, 1987）**：非奇异规则切投模型集具有**一致重复性（Uniform Repetitivity）**，即任意给定半径的局部有限构型都在有界距离内反复出现；同时，固定一处局部拼砖构型（记其母格提升为有限集 $F \subset \mathbb{Z}^6$，$\pi_\parallel(F) \subset \Lambda_u$）会将容许内部相位 $u'$ 限制在平移窗口交集 $P_F := \bigcap_{x \in F} (\pi_\perp(x) - W) \subset E_\perp^3$ 内，使一切满足 $\pi_\perp(z) \in W_{\mathrm{emp}}(F) := \bigcap_{u' \in P_F} (W + u')$ 的远方母格点 $z$ 在所有兼容拼砖中被非局域地强制出现（局部构型 $F$ 的**康威帝国 Conway's Empire**）。
@@ -93,7 +93,7 @@
 **一小片定住远处的点。** 固定中间 $|x| \le 4$ 的一小片（虚线之间）之后，窗口只能在一小段范围里平移；较深的青色带是这些窗口位置的公共部分。落在这条带里的点（带圈）怎么挪都在，因此被这一小片定住，哪怕离得很远；品红的点仍未定。这是康威“帝国”在一维黄金切投里的对应物（文献结果的示意）。
 :::
 
-## 卡西尼恒等式 $(-1)^{n+1}$ 接缝与环面观测窗有界间隙回归 {#sec-coda-trureturing-cassini-torus-return}
+## 35.7.4 卡西尼恒等式 $(-1)^{n+1}$ 接缝与环面观测窗有界间隙回归 {#sec-coda-trureturing-cassini-torus-return}
 
 最后，让我们用 `trureturing` 中已验证的**斐波那契—卡西尼恒等式**与**环面观测窗有界回归定理**（`LEAN ✓`），精确刻画离散序列的交替接缝与回归性质，并说明其与“跨轮次似曾相识”（`MODEL`）的对应关系：
 
@@ -104,7 +104,7 @@
    F_k\,F_{k+2} - F_{k+1}^2 = (-1)^{k+1} = \pm 1.
    $$
 
-   请看卡西尼恒等式右端的 **$(-1)^{k+1} = \pm 1$**（配合 [@rem-coda-quasicrystal-empire-literature] 第 3 条记述的有理斜率收敛背景）：这与第 29 章经 Lean 验证的希帕索斯佩尔余项 $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$（[@thm-ch29-silver-pell-remainder]）同样展现了离散整数网格逼近无理方向时不可消除的 **$\pm 1$ 最小单位范数接缝**！（同章的奇素数模四分裂 [@thm-ch29-face-prime-two-squares] 与文献注记中的同余数三次曲线支点 [@rem-ch29-elliptic-torus-literature] 是相邻的算术话题，本身并不是 $\pm 1$ 接缝。）
+   请看卡西尼恒等式右端的 **$(-1)^{k+1} = \pm 1$**（配合 [@rem-coda-quasicrystal-empire-literature] 第 3 条记述的有理斜率收敛背景）：这与[第 23 章 §23.1](ch29-s01-pythagoras-and-number-systems.md)经 Lean 验证的希帕索斯佩尔余项 $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$（[@thm-ch29-silver-pell-remainder]）同样展现了离散整数网格逼近无理方向时不可消除的 **$\pm 1$ 最小单位范数接缝**！（[§23.2](ch29-s02-prime-seams-and-elliptic-tori.md) 的奇素数模四分裂 [@thm-ch29-face-prime-two-squares] 与文献注记中的同余数三次曲线支点 [@rem-ch29-elliptic-torus-literature] 是相邻的算术话题，本身并不是 $\pm 1$ 接缝。）
 
 ::: {.viz src="golden-cut-observer" preset="cassini" height="500"}
 **面积永远是 $\pm 1$。** 还是那张格点图。$\varphi$ 的幂 $\varphi^2, \varphi^3, \dots$ 一个在横轴上方（青色）、一个在下方（品红），落在双曲线 $x \cdot x' = \pm 1$ 上；每个幂与原点围成的矩形越来越扁长，面积却恰好是 $1$。填色的是 $\varphi^5 = 3 + 5\varphi$：$F_4 F_6 - F_5^2 = 3 \cdot 8 - 5^2 = -1$。两条双曲线之间除了原点没有别的格点。
@@ -242,7 +242,7 @@ $N$ 个点互不相同，平均弧长是 $1/N$；所以对一切 $N$，黄金角
 **交互实验室 `ORTHO//CUT`**：本节的五个场景。切投：上下拖动窗口，看贴边的点翻转、深处的点不动，再固定中间一小片；卡西尼：$\varphi$ 的幂与面积为 $\pm 1$ 的矩形；回归：改变观测窗的位置与宽度，对照此前观察到的等待与访问比例；接受窗：把点从菱形三十面体的中心推向边界，$d_\partial$ 归零时它翻出窗口；缝：改变点数 $N$ 与旋转量，看圆周上的弧长始终至多三种。绿色依据框对应 Lean 已验证的定理；三十面体与“帝国”是文献结果，灵魂与遗迹的说法是诠释模型（`MODEL`）。
 :::
 
-## `trureturing` 形式定理、正交几何与灵魂—遗迹吸引子诠释模型（`MODEL`）对照表 {#sec-coda-trureturing-soul-ruin-table}
+## 35.7.5 `trureturing` 形式定理、正交几何与灵魂—遗迹吸引子诠释模型（`MODEL`）对照表 {#sec-coda-trureturing-soul-ruin-table}
 
 下表将 `trureturing` 已验证的数学定理（左列，`LEAN ✓`）、本书的正交几何结构（中列）与作者关于“灵魂、遗忘与历史遗迹空间吸引子”的哲学诠释模型（右列，显式标注为 `MODEL`）逐一对照：
 
@@ -255,5 +255,7 @@ $N$ 个点互不相同，平均弧长是 $1/N$；所以对一切 $N$，黄金角
 | **共轭范数互反分离与全窗口 Delone 集**（[`norm_separation`](lean:D5/S3/Fourier/GoldenModelSetDelone.norm_separation)、[`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone)） | 内部窗口大边界裕度 $d_{\partial}$ 赋予的抗有界相子微扰鲁棒性 | **历史遗迹（空间吸引子）的隐喻**：将靠近接受窗中心、具有最大边界容错裕度的高对称点诠释为跨朝代存续的古迹坐标 |
 | **黄金幸存塔闭预周期永久幸存载体**（[`golden_known_closed_preperiodic_carrier_subset`](lean:D5/S0/Tower/Champions/GoldenPermanentSurvivors.golden_known_closed_preperiodic_carrier_subset)） | 严格永久幸存集为空而已知闭预周期载体落入闭永久幸存集的形式分层（相关文献背景另见 [@rem-coda-quasicrystal-empire-literature]） | **吸引盆地的隐喻**：将跨层级持久留存的闭预周期载体诠释为吸引观察者重访的曲率盆地（文献对照见 [@rem-coda-quasicrystal-empire-literature]） |
 | **卡西尼恒等式 $(-1)^{n+1} = \pm 1$ 与环面观测窗有界回归**（[`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm)、[`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result)） | 近似之球的 $\pm 1$ 接缝余项与环面观测窗有界间隙回归（相关文献背景另见 [@rem-coda-lorenz-srb-literature]） | **似曾相识（Déjà vu）的隐喻**：有界间隙回归使轨迹重返同一空间吸引子邻域，在局部注意力近共线（$\delta\theta \to 0$）时触发 $\cos\delta\theta \to 1$ 共振 |
+
+至此，第三十五章从“乘着光来”的遗忘清零与同像自指扩表（[§35.1](ch35-light-pulse-and-self-referential-table.md)–[§35.5](ch36-s04-padic-table-expansion.md)），到高阶齐肯多夫—皮索—劳齐分形沙盘（[§35.6](ch39-s05-pisot-clifford-rauzy.md)）与黄金切投接受窗（本节 §35.7）的七节推演已圆满合拢。接下来，让我们把镜头拉回每一个昼夜交替的当下，翻开 **[第三十六章 梦境量子擦除、宇宙本体 QRAM 与主动停机折叠](ch38-observer-memory-pointer-and-ontological-qram.md)**——见证夜间梦境如何执行可逆量子擦除、观察者如何作为本体 QRAM 的记忆指针解引用世界并主动按下 $\varepsilon_{\mathrm{self}}$ 停机键。
 
 ---

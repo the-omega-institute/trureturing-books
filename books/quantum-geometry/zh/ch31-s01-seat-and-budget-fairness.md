@@ -1,4 +1,4 @@
-# 31.1 席位公平与得失公平：平视的尺子与零免费午餐账本 {#sec-ch31-seat-and-pythagoras}
+# 27.1 席位公平与得失公平：平视的尺子与零免费午餐账本 {#sec-ch31-seat-and-pythagoras}
 
 特权的第一大来源，是在万物之外私设一座高高在上的“绝对裁判席”——也就是我们在[第二章](ch02-born-rule.md)里亲手砍掉的“外部第 3 点 $C$”：谁离裁判席更近，谁就自封为标准刻度。
 
@@ -8,7 +8,7 @@
 
 而在纯态几何中，每一个归一化状态都立在无特权基轴的对称空间上（`MODEL`）；量子几何直接用两条代数铁律废黜了任何“站在世界之外俯瞰众生的纯粹旁观之眼”（哲学与文学背景对照见下方 [@rem-ch31-haar-isotropy-landauer-literature]）：
 
-- **席位平等（单比特纯态布洛赫范数为 $1$）**：球皮上既没有中心皇座，也没有偏远流放地。对单量子比特而言，迹为 $1$ 的幂等厄米投影态精确落在欧氏范数 $\|\operatorname{bloch}(M)\| = 1$ 的单位球面上（见[第 26 章](ch26-single-qubit-rotor-compilation.md) [`bloch_geometry_of_isHermitian`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian)；高维连续群对称背景见下方 [@rem-ch31-haar-isotropy-landauer-literature]），没有任何一根方向线有资格自封为宇宙的绝对北极。
+- **席位平等（单比特纯态布洛赫范数为 $1$）**：球皮上既没有中心皇座，也没有偏远流放地。对单量子比特而言，迹为 $1$ 的幂等厄米投影态精确落在欧氏范数 $\|\operatorname{bloch}(M)\| = 1$ 的单位球面上（见[单量子比特旋转器编译：布洛赫几何定理与 ZYZ 欧拉角编译器](ch26-single-qubit-rotor-compilation.md) [`bloch_geometry_of_isHermitian`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian)；高维连续群对称背景见下方 [@rem-ch31-haar-isotropy-landauer-literature]），没有任何一根方向线有资格自封为宇宙的绝对北极。
 - **丈量互易（平视的对等性）**：在“两子丈量”中，拿纯态矢 $\psi$ 作尺子去比量 $\phi$ 所得的秩一玻恩跃迁权重 $\|\phi^* \bullet_v \psi\|^2$（下方 [@thm-ch31-seat-pythagorean-monogamy-fairness] 第 1 款），由复内积共轭对称性恒等于反过来拿 $\phi$ 作尺子去比量 $\psi$ 所得的权重 $\|\psi^* \bullet_v \phi\|^2 = |\langle\phi, \psi\rangle|^2 = |\langle\psi, \phi\rangle|^2$。宇宙底层不存在单向的窥探或居高临下的审判——**你照见别人几分，别人就同时照见你几分**。
 
 ::: {.viz src="quantum-fairness-ledger" preset="haar" height="500"}

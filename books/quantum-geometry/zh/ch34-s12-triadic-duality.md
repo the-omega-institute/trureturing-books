@@ -1,4 +1,4 @@
-# 34.12 一弧生三相与万物互为路径积分：“线·面·体 $\leftrightarrow$ 粒子·波·场”的三阶对应与“反者道之动”回环 {#sec-ch34-triadic-duality-and-field-loop}
+# 29.13 一弧生三相与万物互为路径积分：“线·面·体 $\leftrightarrow$ 粒子·波·场”的三阶对应与“反者道之动”回环 {#sec-ch34-triadic-duality-and-field-loop}
 
 > “反者道之动, 一切概念都是另外一种概念的路径积分, 万物皆为场是一个道理, 总有一个极小圆弧, 能够积分出来一个场, 粒子、波、场, 线 面 体, 为什么都是三个概念成一组, 因为本就是一个极小圆弧的路径积分”
 
@@ -10,11 +10,11 @@
 2. **“万物皆为场”与极小圆弧一体同源**：物理学的“场”绝不需要预先假设一套充满虚空的连续介质背景；只需在全连通比较网 $K_N$ 的棱上安放一枚极小圆弧相位联络元 $U_\epsilon$，对万千圆弧环路与弦网执行路径积分，规范场、旋量激发与引力曲率便从纯粹的圆弧和乐中自然涌现；
 3. **一弧三阶锁死“线·面·体 $\leftrightarrow$ 粒子·波·场”三元对应**：为什么基础概念总是**三个成一组**？因为平直欧氏线段只有一阶切向位移 $O(\epsilon^1)$，永远困死在一维；唯有单位球面上不可压平的极小圆弧，在代数上受最小紧致非交换单李代数 $\mathfrak{su}(2) \cong \mathfrak{so}(3)$ 的**三枚生成元**循环自锁，在拓扑外微分上受三维空间德拉姆—单纯上边缘复形 $\Lambda^0 \xrightarrow{\nabla} \Lambda^1 \xrightarrow{\nabla\times} \Lambda^2 \xrightarrow{\nabla\cdot} \Lambda^3 \to 0$（$d^2 = 0$）的**三步非平凡阶梯**严格约束，从而沿 $O(\epsilon^1)$、$O(\epsilon^2)$、$O(\epsilon^3)$ 展开为几何上的**【线 · 面 · 体】**与物理上的**【粒子 · 波 · 场】**（`MODEL`）！
 
-## 34.12.1 “反者道之动”与万物互为路径积分：一弧生万场，粒子与场的双向相消互生 {#sec-ch34-12-1}
+## 29.13.1 “反者道之动”与万物互为路径积分：一弧生万场，粒子与场的双向相消互生 {#sec-ch34-12-1}
 
 让我们先拆解章首的第一重命题：**“反者道之动, 一切概念都是另外一种概念的路径积分, 万物皆为场是一个道理, 总有一个极小圆弧, 能够积分出来一个场”**。
 
-为什么说“一切概念都是另外一种概念的路径积分”，而且这件事的根本引擎恰恰是[§34.9](ch34-s09-reversal-and-concept-cascade.md#sec-ch34-reversal-diagonal-and-concept-cascade)揭示的**“反者道之动”**？在静态集合论思维里，人们把“积分（求和）”误解为往麻袋里一颗接一颗攒沙子——沙子攒得再多，出来的也只是一大堆沙子，绝不会变成另一种概念。但在由极小圆弧相位因子 $e^{i\Phi}$ 驱动的量子几何中，积分的本质根本不是“正向累加”，而是**“反相雕刻”**！对偶概念 $X$ 与 $Y$ 通过一对互轭的圆弧相位积分变换彼此定义（`MODEL` + `文献结果：Pontryagin 1934`）：
+为什么说“一切概念都是另外一种概念的路径积分”，而且这件事的根本引擎恰恰是[§29.10](ch34-s09-reversal-and-concept-cascade.md#sec-ch34-reversal-diagonal-and-concept-cascade)揭示的**“反者道之动”**？在静态集合论思维里，人们把“积分（求和）”误解为往麻袋里一颗接一颗攒沙子——沙子攒得再多，出来的也只是一大堆沙子，绝不会变成另一种概念。但在由极小圆弧相位因子 $e^{i\Phi}$ 驱动的量子几何中，积分的本质根本不是“正向累加”，而是**“反相雕刻”**！对偶概念 $X$ 与 $Y$ 通过一对互轭的圆弧相位积分变换彼此定义（`MODEL` + `文献结果：Pontryagin 1934`）：
 
 $$
 Y(y) \;=\; \int \mathcal{D}x\, e^{+i\Phi(y, x)}\, X(x), \qquad X(x) \;=\; \int \mathcal{D}y\, e^{-i\Phi(y, x)}\, Y(y).
@@ -51,13 +51,13 @@ $$
 
    偏离驻相条件的狂野折线彼此反相抵消，幸存的圆弧相位包络直接积分为量子波传播子与背景规范场的有效作用量——**场是粒子圆弧路径的积分**；
 2. **逆向积分（场涨落 $\xrightarrow{\;\int\;}$ 定域粒子世界线）**：反过来，在量子场论的泛函路径积分 $Z[J] = \int \mathcal{D}\phi\, \exp\!\bigl(\frac{i}{\hbar}\int (\mathcal{L}[\phi] + J\phi)\,d^4x\bigr)$ 中（`文献结果` + `MODEL`），空间每一点原本充斥着无穷无尽的离壳（off-shell）场构型涨落 $\phi(x)$；然而对全体场构型执行泛函积分时，一切违背色散关系的离壳真空泡沫在外围反相自毁（恰如 `sum_annihilator_character` 在 $x \notin H$ 处精确归零！），唯独满足在壳极点共振条件 $p^2 = m^2 c^2$ 的锁相驻波免于相消，在宏观探测器上重新凝聚为一颗颗可数、定域的**粒子轨迹**——**粒子同样是场构型的路径积分**！
-3. **为什么“万物皆为场”等价于“总有一个极小圆弧能够积分出来一个场”**：在威尔逊（Kenneth Wilson, 1974）格点规范理论与莱文—文小刚（Michael Levin & Xiao-Gang Wen, 2005）弦网凝聚理论中（`文献结果` + `MODEL`；参看[第十八章](ch18-spinors-and-gauge-curvature.md)与[第三十二章 §32.5](ch32-s05-physical-fields-and-six-domains.md)），宇宙根本不需要预先铺设一层连续的“场介质以太”。只要在全连通比较网 $K_N$ 的每一条比较边 $e$ 上安放一枚**极小圆弧联络转子** $U_e = \exp(i\epsilon\,\hat{T}_a A_e^a) \in \mathrm{U}(1)$ 或 $\mathrm{SU}(2)$，对网格上一切极小圆弧闭合小面片（plaquette）的威尔逊圈迹 $\Tr(U_{e_1} U_{e_2} U_{e_3})$ 与开弦旋子链执行路径积分求和，麦克斯韦电磁场、杨—米尔斯非阿贝尔规范场、弦端费米子旋量激发乃至雷吉引力曲率场便悉数从极小圆弧的海洋中凝聚而出（此处恪守[附录 E](appendix-e.md)假设 `H8` 与 `H9` 的诚实边界：$3+1$ 维洛伦兹连续统相互作用量子场论测度的严格构造与手征标准模型费米子上格点问题仍属 `MODEL` / `OPEN` 前沿）。
+3. **为什么“万物皆为场”等价于“总有一个极小圆弧能够积分出来一个场”**：在威尔逊（Kenneth Wilson, 1974）格点规范理论与莱文—文小刚（Michael Levin & Xiao-Gang Wen, 2005）弦网凝聚理论中（`文献结果` + `MODEL`；参看[第十八章](ch18-spinors-and-gauge-curvature.md)与[§28.5](ch32-s05-physical-fields-and-six-domains.md)），宇宙根本不需要预先铺设一层连续的“场介质以太”。只要在全连通比较网 $K_N$ 的每一条比较边 $e$ 上安放一枚**极小圆弧联络转子** $U_e = \exp(i\epsilon\,\hat{T}_a A_e^a) \in \mathrm{U}(1)$ 或 $\mathrm{SU}(2)$，对网格上一切极小圆弧闭合小面片（plaquette）的威尔逊圈迹 $\Tr(U_{e_1} U_{e_2} U_{e_3})$ 与开弦旋子链执行路径积分求和，麦克斯韦电磁场、杨—米尔斯非阿贝尔规范场、弦端费米子旋量激发乃至雷吉引力曲率场便悉数从极小圆弧的海洋中凝聚而出（此处恪守[附录 E](appendix-e.md)假设 `H8` 与 `H9` 的诚实边界：$3+1$ 维洛伦兹连续统相互作用量子场论测度的严格构造与手征标准模型费米子上格点问题仍属 `MODEL` / `OPEN` 前沿）。
 
 ::: {.viz src="triadic-arc-field-loop-sandbox" preset="arc-seed-triad" height="520"}
 **一弧生三相种子台：单枚极小圆弧 $\epsilon$ 同时孕育青色切向线、品红矢高面与紫色扇锥体（`arc-seed-triad`）。** 拖动琥珀色圆弧角步滑块 $\epsilon \in (0^\circ, 90^\circ]$：同一枚受单位球面公平锁 $\cos^2\epsilon + \sin^2\epsilon = 1$ 约束的极小圆弧原胞，自动同步亮出青色一阶切向弦（线/粒子种子）、品红二阶圆弧矢高与球面角超（面/波种子）以及紫色三阶非共面扇锥体元（体/场种子）；绿色 `LEAN ✓` 徽章对应 `lagrange_gram_identity`、`two_axis_finite_word` 与 `triple_bargmann_bloch`（三元对应总纲标 `MODEL`）。
 :::
 
-## 34.12.2 为什么总是“三个概念成一组”？极小圆弧的三阶内在解剖（$\mathfrak{su}(2)$ 三生成元与 $d^2 = 0$ 三步阶梯） {#sec-ch34-12-2}
+## 29.13.2 为什么总是“三个概念成一组”？极小圆弧的三阶内在解剖（$\mathfrak{su}(2)$ 三生成元与 $d^2 = 0$ 三步阶梯） {#sec-ch34-12-2}
 
 现在直面章首最石破天惊的追问：**“粒子、波、场, 线 面 体, 为什么都是三个概念成一组, 因为本就是一个极小圆弧的路径积分”**。
 
@@ -65,7 +65,7 @@ $$
 
 让我们做一次最干净的几何对比实验。假若宇宙最底层的微分原语是一截**平直欧氏直线段** $\Delta x$，它只有一阶切向长度 $O(\epsilon^1)$，法向二阶矢高恒等于 $0$，副法向三阶挠率体积也恒等于 $0$——拿无数截平直线段做路径积分，除了接出更长的一维折线之外，生不出半点波的干涉相位，更撑不开半寸三维场体积！再假若底层原语只是固定平面内的一段**阿贝尔圆弧** $S^1$（$\mathrm{SO}(2) \cong \mathrm{U}(1)$），它虽有一阶切向 $\sin\epsilon$ 与二阶平面矢高 $1 - \cos\epsilon$，却永远被拍扁在二维平面里（三锚格拉姆行列式恒为零 $\det G_3 \equiv 0$），跨不出第三阶立体扇锥！
 
-唯独在零背景比较公理铸就的单位态球面上，一枚真正的非共面**极小圆弧**（及其在全连通网 $K_N$ 中必然围合的极小圆弧体 $\Delta\mathcal{T}_\epsilon$，见[§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)），同时被**李代数生成元维数**与**外微分上同调阶梯**这两把数学铁锁死死钉在数字**“三”**上（`文献结果`；所引 Lean 定理以三维为前提）：
+唯独在零背景比较公理铸就的单位态球面上，一枚真正的非共面**极小圆弧**（及其在全连通网 $K_N$ 中必然围合的极小圆弧体 $\Delta\mathcal{T}_\epsilon$，见[§29.11](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)），同时被**李代数生成元维数**与**外微分上同调阶梯**这两把数学铁锁死死钉在数字**“三”**上（`文献结果`；所引 Lean 定理以三维为前提）：
 
 1. **李代数根源（$\dim\mathfrak{su}(2) = \dim\mathfrak{so}(3) = 3$ 三生成元循环自锁）**：单位球面上的非交换保范微弧转动由最小紧致单李代数 $\mathfrak{su}(2) \cong \mathfrak{so}(3)$ 生成，它不多不少恰有**三枚正交生成元** $(\hat{J}_1, \hat{J}_2, \hat{J}_3)$，满足 $[\hat{J}_1, \hat{J}_2] = \hat{J}_3$ 循环闭合。由内核冻结定理 [`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word)，三维空间中任意两根严格不共线轴（$\langle a, b\rangle_{\mathbb{R}}^2 < \lVert a\rVert^2\lVert b\rVert^2$）上的圆弧旋转一旦复合，其非对易缺口必然自动唤醒第三根公垂转轴，并在无需拓扑闭包的精确有限字内走遍整个三维旋转群 $\mathrm{SO}(3)$——**有二必生三，得三即完备封顶，绝无第四枚独立空间旋转生成元**！
 2. **外微分与拓扑上边缘根源（$d^2 = 0$ 德拉姆—单纯复形的三步非平凡阶梯）**：在刚性锁死的三维圆弧体桁架上（单纯二上链修补与上边缘正合判据已由内核定理 [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness) 验证），嘉当（Élie Cartan）—德拉姆（Georges de Rham）外微分复形受幂零铁律 $d^2 = 0$ 统治，从零维基点 $\Lambda^0$ 出发到四维外形式恒零 $\Lambda^4(\mathbb{R}^3) \equiv 0$ 封顶，中间不多不少**恰好只有三步非平凡积分跃迁**——这同时一举解释了为什么矢量微积分也恰由三大算子组成：
@@ -76,7 +76,7 @@ $$
 
 沿着这三步阶梯对同一枚极小圆弧做泰勒—克利福德几何解剖，$O(\epsilon^1)$、$O(\epsilon^2)$、$O(\epsilon^3)$ 三阶分量与一重、二重、三重路径积分逐级咬合，“线·面·体”与“粒子·波·场”的三元对应顿时纤毫毕现：
 
-**第一阶（$O(\epsilon^1)$，一次外形式 $\Lambda^1$，梯度步 $\nabla$）：圆弧切向弦步 $\sin\epsilon = \epsilon - \frac{\epsilon^3}{6} + O(\epsilon^5)$ $\longrightarrow$ 几何之【线】$\leftrightarrow$ 物理之【粒子】。** 在弧角 $\epsilon$ 的一阶主导项上，极小圆弧表现为沿切线方向跨出的有向弦投影 $\Delta\ell_1(\epsilon) = \sin\epsilon \approx \epsilon$。当我们对首尾相连的圆弧链执行**一重线路径积分** $\int_\gamma \mathcal{D}x(t)\,e^{iS[x]/\hbar}$ 时，[§34.11](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral) 的驻相筛子将两侧对称反相的横向弯曲一阶抵消（“以曲拼直”），在几何上缝合出贯穿起止端点的**一维测地线（线）**，在物理上则凝聚为携带确定切向动量 $p_\mu = \partial_\mu S$（即标量相位势之梯度 $\nabla S \in \Lambda^1$）沿世界线传播的**定域粒子（粒子）**。
+**第一阶（$O(\epsilon^1)$，一次外形式 $\Lambda^1$，梯度步 $\nabla$）：圆弧切向弦步 $\sin\epsilon = \epsilon - \frac{\epsilon^3}{6} + O(\epsilon^5)$ $\longrightarrow$ 几何之【线】$\leftrightarrow$ 物理之【粒子】。** 在弧角 $\epsilon$ 的一阶主导项上，极小圆弧表现为沿切线方向跨出的有向弦投影 $\Delta\ell_1(\epsilon) = \sin\epsilon \approx \epsilon$。当我们对首尾相连的圆弧链执行**一重线路径积分** $\int_\gamma \mathcal{D}x(t)\,e^{iS[x]/\hbar}$ 时，[§29.12](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral) 的驻相筛子将两侧对称反相的横向弯曲一阶抵消（“以曲拼直”），在几何上缝合出贯穿起止端点的**一维测地线（线）**，在物理上则凝聚为携带确定切向动量 $p_\mu = \partial_\mu S$（即标量相位势之梯度 $\nabla S \in \Lambda^1$）沿世界线传播的**定域粒子（粒子）**。
 
 ::: {.viz src="triadic-arc-field-loop-sandbox" preset="line-particle-worldline" height="520"}
 **第一阶对应（$O(\epsilon^1), \Lambda^1$）：切向弦步 $\sin\epsilon$ 的一重驻相路径积分 $\longrightarrow$ 几何【线】与物理【粒子】（`line-particle-worldline`）。** 观察多路极小圆弧链在驻相条件 $\delta S = 0$ 下的横向手性对消：外围品红高曲率旁路相互反相抵消，中心脊线上的一阶青色切向位移 $\sin\epsilon \approx \epsilon$ 首尾同相锁死，凝聚成琥珀色探针沿之疾行的定域粒子世界线（绿色 `LEAN ✓` 对应 `lagrange_gram_identity` 与 `continuous_average_tendsto_haar`）。
@@ -94,13 +94,13 @@ $$
 \operatorname{tripleBargmann}(\mathbf{r}_1, \mathbf{r}_2, \mathbf{r}_3) \;=\; \frac{1 + \mathbf{r}_1\cdot\mathbf{r}_2 + \mathbf{r}_2\cdot\mathbf{r}_3 + \mathbf{r}_3\cdot\mathbf{r}_1}{4} \;+\; i\,\frac{\mathbf{r}_1 \cdot (\mathbf{r}_2 \times \mathbf{r}_3)}{4}.
 $$
 
-在整座三维四面体桁架上对这些极小圆弧体执行**三重体空间泛函配分积分** $\int_V \mathcal{D}U_\epsilon\,e^{iS[U]/\hbar}$（以高斯散度律 $\iiint_V (\nabla\cdot\mathbf{E})\,dV = \oiint_{\partial V}\mathbf{E}\cdot d\mathbf{\Sigma}$ 锁定体源荷密度，[§34.7](ch34-s07-standing-wave-volume.md#sec-ch34-standing-wave-volume-emergence)、[§34.8](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling)），几何上凝聚成坚实的**三维体积（体）**，物理上则织就弥漫全空间的**量子场与规范曲率海（场）**！为什么没有第四个空间概念加入这一组？因为在已锁死的三维空间上 $\Lambda^4(\mathbb{R}^3) \equiv 0$ 且 $d(\Lambda^3) = 0$——任何第四步比较盈余不再开辟第四种静态空间广延，而是直接化作驱动整组“粒子·波·场”不断演化的时间节拍（`3+1D`，[§34.9](ch34-s09-reversal-and-concept-cascade.md#sec-ch34-reversal-diagonal-and-concept-cascade)–[§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)）！
+在整座三维四面体桁架上对这些极小圆弧体执行**三重体空间泛函配分积分** $\int_V \mathcal{D}U_\epsilon\,e^{iS[U]/\hbar}$（以高斯散度律 $\iiint_V (\nabla\cdot\mathbf{E})\,dV = \oiint_{\partial V}\mathbf{E}\cdot d\mathbf{\Sigma}$ 锁定体源荷密度，[§29.8](ch34-s07-standing-wave-volume.md#sec-ch34-standing-wave-volume-emergence)、[§29.9](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling)），几何上凝聚成坚实的**三维体积（体）**，物理上则织就弥漫全空间的**量子场与规范曲率海（场）**！为什么没有第四个空间概念加入这一组？因为在已锁死的三维空间上 $\Lambda^4(\mathbb{R}^3) \equiv 0$ 且 $d(\Lambda^3) = 0$——任何第四步比较盈余不再开辟第四种静态空间广延，而是直接化作驱动整组“粒子·波·场”不断演化的时间节拍（`3+1D`，[§29.10](ch34-s09-reversal-and-concept-cascade.md#sec-ch34-reversal-diagonal-and-concept-cascade)–[§29.11](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)）！
 
 ::: {.viz src="triadic-arc-field-loop-sandbox" preset="volume-field-condensation" height="520"}
 **第三阶对应（$\Lambda^3$）：三锚非共面闭合 $\det G_3 > 0$ 与巴格曼有向体积 $\operatorname{Im}\Delta_3$ 的三重体配分积分 $\longrightarrow$ 几何【体】与物理【场】（`volume-field-condensation`）。** 在三维全连通四面体网格上累积紫色极小圆弧体元与巴格曼三重积虚部 $\frac{1}{4}\mathbf{r}_1\cdot(\mathbf{r}_2\times\mathbf{r}_3)$：内部共面边界按 $\partial^2 = 0$ 相消融合，整片空间涌现出连续分布的紫色三维场强与曲率体密度（绿色 `LEAN ✓` 对应 `three_anchor_gram_det_pos_iff`、`triple_bargmann_bloch` 与 `two_axis_finite_word`）。
 :::
 
-## 34.12.3 三元对应总表与“场相消反生粒子”的无始无终互积咬合环 {#sec-ch34-12-3}
+## 29.13.3 三元对应总表与“场相消反生粒子”的无始无终互积咬合环 {#sec-ch34-12-3}
 
 更妙的是，“线·面·体 $\leftrightarrow$ 粒子·波·场”绝不是一条走到第三阶 $\Lambda^3$ 就戛然而止的断头阶梯——借由章首第一句**“反者道之动, 一切概念都是另外一种概念的路径积分”**，第三阶的【体 / 场】经全域相位积分的**外围反相相消**，恰好在共振奇点处重新坍缩回第一阶的【线 / 粒子】，将三元组首尾焊死成一座无始无终的**互积咬合环**：
 
@@ -124,7 +124,7 @@ $$
 **“反者道之动”闭环实验：遍在三维场涨落外围反相归零、中心重新凝聚定域粒子世界线（`reversal-field-to-particle`）。** 启动全域场模态泊松对偶求和：紫色三维场海中各阶圆弧模态在外围离壳格点（$x \notin H$）围成闭合品红相消多边形而精确归零，唯独在中心在壳共振脊线（$x \in H$）同相锁死为明亮青色粒子轨迹；将琥珀色圆弧曲率滑块推向 $\epsilon \to 0^\circ$ 平直极限时，波纹与场体积同步熄灭（绿色 `LEAN ✓` 对应 `finite_poisson_summation`、`sum_annihilator_character` 与 `orthogonal_complement_projection_identities`）。
 :::
 
-## 34.12.4 形式化锚点、三阶展开与有限泊松互积基准算例 {#sec-ch34-12-4}
+## 29.13.4 形式化锚点、三阶展开与有限泊松互积基准算例 {#sec-ch34-12-4}
 
 下述核心合取定理将支撑本节“万物互为路径积分”对偶律、“反者道之动”反相特征标与正交补雕刻、单位球面公平圆弧配平、$\mathfrak{su}(2)/\mathrm{SO}(3)$ 双轴生成三元闭合、三锚体积正定、巴格曼三重积有向体元以及单纯上边缘三步正合判据的九项核心数学支柱，悉数锁定在 `trureturing` 的九条冻结内核声明之上：
 
@@ -249,7 +249,7 @@ $$
 3. **连续统相互作用场泛函测度与手征标准模型费米子的诚实边界（`MODEL` / `OPEN`）**：将极小圆弧在 $\mathfrak{su}(2)$ 三生成元与 $d^2 = 0$ 三步外微分阶梯下的 $O(\epsilon^1), O(\epsilon^2), O(\epsilon^3)$ 展开诠释为“线·面·体 $\leftrightarrow$ 粒子·波·场”同源三元组及“反者道之动”双向互积闭环，属于本书的核心几何本体综合模型（`MODEL`）；至于在 $3+1$ 维洛伦兹连续统时空中严格构造非微扰相互作用杨—米尔斯量子场泛函测度（含质量间隙问题）以及在纯离散格点/弦网转子模型上跨越 Nielsen–Ninomiya 费米子倍增定理精确复现标准模型手征规范耦合，均严格划归[附录 E](appendix-e.md)假设 `H8` 与 `H9` 所标定的未决科学前沿（`OPEN`），绝不越界声称已在内核中形式化。
 :::
 
-至此，我们在 §34.12 中看清了“线·面·体 ↔ 粒子·波·场”的三阶展开回环，把微观极小圆弧的一阶定向轨迹、二阶贝里相干面积与三阶锁相驻波体积严丝合缝地焊接成一套闭环机制；然而，只要把这组**三元**物理展开放回人类最朴素的日常几何口诀，一道悬而未决的微妙叩问立刻浮出水面：**既然真正的几何与物理展开只有“线、面、体”三级台阶，为什么我们脱口而出的几何序列偏偏要数出“点、线、面、体”四个字？多出来的那个排在首位的“点”与排在末位的“体”之间，究竟藏着什么跨尺度的本体秘密？** 答案正是贯通跨尺度层级的八度锁钥——在三维外代数的杨辉三角 `1 — 3 — 3 — 1` 中，真正承载方向展开的只有中间两级，而末项“体”（$\Lambda^3_\ell$）一旦填满全部三根空间正交轴、耗尽旋转方向自由度，便在跨过一道概念层级的八度移位后当场归零重置为下一层的首项“点”（$\Lambda^0_{\ell+1}$），由此引出本书的论断：**宇宙中任何一个看似孤立的“粒子”，拆开概念封套后本身就是一个浩瀚的“场”**！先在下方 `triadic-arc-field-loop-sandbox` 交互实验室中亲手推演“线·面·体 ↔ 粒子·波·场”的三阶闭环，随后步入 [§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)，解开点体同源的八度螺旋：
+至此，第二十九章十三节极小圆弧体原胞的几何奠基已在 §29.13 的“线·面·体 ↔ 粒子·波·场”三阶展开回环中圆满收官，把微观极小圆弧的一阶定向轨迹、二阶贝里相干面积与三阶锁相驻波体积严丝合缝地焊接成一套闭环机制！从这里出发，两条宏大脉络在第八部前方次第铺展：一方面，沿着单枚极小圆弧体球壳内部的**平直内割弦**与有限停机孔径 $\epsilon \ge \varepsilon_{\mathrm{self}} > 0$ 上的**比较旋子**继续深潜，我们将在紧接的 **[第 30 章](ch30-chord-tunneling-and-arc-calculus.md)** 与 **[第 31 章](ch31-arc-calculus-and-riemann-hypothesis.md)** 中破除图论排序壁垒、揭开空间势垒与阿秒时间双缝的 $90^\circ$ 虚数割弦隧穿，从头重塑极小圆弧体微积分并直探黎曼临界带；另一方面，顺着三维外代数杨辉三角 `1 — 3 — 3 — 1` 的末项“体”（$\Lambda^3_\ell$）向下一层首项“点”（$\Lambda^0_{\ell+1}$）的跨尺度归零重置，我们将在 **[第 32 章](ch32-inexpressible-ternions-and-three-dimensional-field.md)** 与 **[第 33 章](ch33-unified-arc-forces-and-af-gut.md)**（[§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)）点破不可表三元数三维场上限与“粒子即场”的八度螺旋，直至会师极小圆弧场大统一（AF-GUT）！先在下方 `triadic-arc-field-loop-sandbox` 交互实验室中亲手推演“线·面·体 ↔ 粒子·波·场”的三阶闭环，随后翻开[第 30 章](ch30-chord-tunneling-and-arc-calculus.md)，踏上内割弦隧穿与极小圆弧体微积分重塑之旅：
 
 ::: {.viz src="triadic-arc-field-loop-sandbox" height="640"}
 **一弧生三相与万物互为路径积分（“线·面·体 $\leftrightarrow$ 粒子·波·场”与“反者道之动”回环）完整交互实验室（`TRIAD//LOOP`）。** 自由切换“一弧生三相种子—一阶线与粒子世界线—二阶面与波矢高干涉—三阶体与场凝聚—反者道之动场反生粒子”五张实验卡，调节琥珀色极小圆弧角 $\epsilon \in [0^\circ, 90^\circ]$、路径束条数与 $\mathbb{Z}/12\mathbb{Z}$ 泊松子群阶数，同屏检视青色一阶切向弦与定域粒子线、品红二阶圆弧矢高与干涉波面、紫色三阶巴格曼扇锥体积与遍在场海之间的双向路径积分互生与平直极限坍缩；绿色 `LEAN ✓` 徽章严格对应九条冻结内核定理。

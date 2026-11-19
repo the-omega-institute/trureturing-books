@@ -1,4 +1,4 @@
-# 37.4 超越五感针孔：黄金超平面切片与多位置非定域涌现
+# 36.1.4 超越五感针孔：黄金超平面切片与多位置非定域涌现 {#374-超越五感针孔黄金超平面切片与多位置非定域涌现}
 
 既然连“躯体”都只是一枚可装卸的局域先验，那么最后一个束缚我们想象力的枷锁也随之应声碎裂：**观察者真的“住在眉心后面那几立方厘米的颅腔坐标 $\mathbf{x}_0$ 里”吗？**
 
@@ -6,7 +6,7 @@
 
 一旦在深梦、深度入定或纯粹几何洞察中撤去这张五感黑卡纸（$\mathbf{P}_{\mathrm{body}} \to 0$），观察者会呈献出怎样的真实空间分布？正如题记所揭示的那样：**“我们会发现观察者实际上在各个位置出现，而并非单纯只是五感的直接感知……”**——你既在山巅俯瞰整座山谷，同时又是谷底吹过松林的那阵风；你既站在童年的窗前向外张望，同时又站在街道对面的路灯下回望窗内的自己！
 
-这种“同一观察者在空间各个位置同步涌现”的非定域图景，在数学上难道只是文学修辞吗？数学至少能为它提供一幅图像（`MODEL`）。回想[第 32 章](ch32-unified-field-and-meta-unification.md)与[第 34 章](ch34-orthogonality-degeneracy-and-observer-position.md)引入的**切投模型集（Cut-and-Project）观察者几何**：一位观察者的内禀状态并非物理直线 $E_\parallel = \mathbb{R}$ 上的一个孤立点，而是内空间 $E_\perp = \mathbb{R}$ 上的一扇有限宽度的**黄金接受窗 `goldenWindow`**！当高维黄金整数母格 $\mathbb{Z}[\varphi] \hookrightarrow \mathbb{R} \times \mathbb{R}$ 被这扇内禀窗口水平切割时，凡是共轭内坐标落入窗口的格点，其物理投影都会在实轴 $E_\parallel$ 上**同时点亮**。
+这种“同一观察者在空间各个位置同步涌现”的非定域图景，在数学上难道只是文学修辞吗？数学至少能为它提供一幅图像（`MODEL`）。回想[第 28 章](ch32-unified-field-and-meta-unification.md)与[第 29 章](ch34-orthogonality-degeneracy-and-observer-position.md)引入的**切投模型集（Cut-and-Project）观察者几何**：一位观察者的内禀状态并非物理直线 $E_\parallel = \mathbb{R}$ 上的一个孤立点，而是内空间 $E_\perp = \mathbb{R}$ 上的一扇有限宽度的**黄金接受窗 `goldenWindow`**！当高维黄金整数母格 $\mathbb{Z}[\varphi] \hookrightarrow \mathbb{R} \times \mathbb{R}$ 被这扇内禀窗口水平切割时，凡是共轭内坐标落入窗口的格点，其物理投影都会在实轴 $E_\parallel$ 上**同时点亮**。
 
 在 `trureturing` 的黄金模型集与傅里叶 Delone 模块中，以下两条严格的内核定理不仅证明一切自然数齐肯多夫黄金展开坐标天然落在黄金切投集之内，更进一步为双无限黄金切投载体构造了显式的 **Mathlib `DeloneSet ℝ` 双半径证书**——严格保证激活节点既不会坍缩挤成一团（一致填充半径 $1/2$，节点最小间距 $\ge 1$），也绝不会在广袤空间留下大于 $3$ 的荒芜死角（一致覆盖半径 $3$）：
 
@@ -62,7 +62,7 @@ $$
 我们将清醒五感锁死、浅梦局部擦除与无身深梦本觉三重模态在 **`MODEL`（模型诠释）** 下的完整对照收束于下框总表：
 
 ::: {.remark #rem-ch37-dream-eraser-synthesis-table title="清醒五感锁死、浅梦量子擦除与无身深梦非定域涌现总表（文献结果与本书模型的对照）"}
-**综合对照表：文献结果未在本书形式化，诠释为 `MODEL`，形式化定理标 `LEAN ✓`。** 下表汇总格拉姆椭圆体（[第 29 章](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]）、切投准晶非周期性（M. Baake & U. Grimm, *Aperiodic Order, Vol. 1*, Cambridge Univ. Press, 2013）、量子擦除与预测编码文献背景（本章文献注记）同本书 `MODEL` 及形式化退相干逆转与黄金 Delone 定理（`LEAN ✓`）的对应关系：
+**综合对照表：文献结果未在本书形式化，诠释为 `MODEL`，形式化定理标 `LEAN ✓`。** 下表汇总格拉姆椭圆体（[§25.1.4](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]）、切投准晶非周期性（M. Baake & U. Grimm, *Aperiodic Order, Vol. 1*, Cambridge Univ. Press, 2013）、量子擦除与预测编码文献背景（本章文献注记）同本书 `MODEL` 及形式化退相干逆转与黄金 Delone 定理（`LEAN ✓`）的对应关系：
 
 | 意识与观测模态（`MODEL`） | 已知数据锚点与躯体先验配置 | 格拉姆相容体积与非对角相干命运 | 空间寻址与观察者定位形态 | 现象学视野与本体论判词 |
 | :--- | :--- | :--- | :--- | :--- |

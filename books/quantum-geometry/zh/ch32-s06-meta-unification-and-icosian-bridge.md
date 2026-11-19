@@ -1,8 +1,8 @@
-# 32.6 诊断一切统一理论的三维坐标、黄金晶格桥与八大纲领元统一 {#sec-ch32-meta-coordinates-and-icosians}
+# 28.6 诊断一切统一理论的三维坐标、黄金晶格桥与八大纲领元统一 {#sec-ch32-meta-coordinates-and-icosians}
 
-现在，让我们在[第 32.1 节](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)至[第 32.5 节](ch32-s05-physical-fields-and-six-domains.md#sec-ch32-physical-fields)的基础上迈出全章收官的一步：**既然零背景比较公理 $\mathcal{A}_0$ 与《正交自指统一场论》立住了脚跟，为什么近百年来物理学、数学与计算机科学中各自为战的八大统一纲领，全都可以无冲突地收编进同一座几何水晶？**
+现在，让我们在[第 28.1 节](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)至[第 28.5 节](ch32-s05-physical-fields-and-six-domains.md#sec-ch32-physical-fields)的基础上迈出全章收官的一步：**既然零背景比较公理 $\mathcal{A}_0$ 与《正交自指统一场论》立住了脚跟，为什么近百年来物理学、数学与计算机科学中各自为战的八大统一纲领，全都可以无冲突地收编进同一座几何水晶？**
 
-## 32.6.1 三维诊断相空间与四元数黄金晶格桥 {#sec-ch32-meta-bridge}
+## 28.6.1 三维诊断相空间与四元数黄金晶格桥 {#sec-ch32-meta-bridge}
 
 把整片理论版图投射到一张三维几何相图上来看，人类历史上任何一个基础理论纲领的建构，本质上都在**三个彼此正交的认识论坐标轴**上做取舍（`MODEL`）：
 
@@ -11,7 +11,7 @@
 3. **第三轴：观察者嵌入轴 $\lambda$（球外全知上帝点 $C$ $\longleftrightarrow$ 场内有限记忆切片）**——是假想一双站在无穷远边界之外俯瞰全局的全知眼睛，还是把有限记忆、经历遗忘初始化的观察者内生嵌入晶格内部？只要残留外部点 $C$，就会困在渐近外部盒子或任意规则冗余之中。
 
 ::: {.viz src="meta-unification-compass" preset="cube" height="500"}
-**三根轴，八家纲领各落一侧。** 立方体的三根轴取自上面的定义：θ 从青色的“线”一端到品红的“面积”一端，η 从“光滑”到“多面体”，λ 从“球外 C”到“场内”。八个点是 §32.6.2 的八家统一纲领，每一家按 §32.6.2 总表的原话落在每根轴的三段之一（正文没点明或两端都有的，落在中段）；这是本书的比较诊断坐标（`MODEL`），不是测量，也不是对任何学科的评判。
+**三根轴，八家纲领各落一侧。** 立方体的三根轴取自上面的定义：θ 从青色的“线”一端到品红的“面积”一端，η 从“光滑”到“多面体”，λ 从“球外 C”到“场内”。八个点是 §28.6.2 的八家统一纲领，每一家按 §28.6.2 总表的原话落在每根轴的三段之一（正文没点明或两端都有的，落在中段）；这是本书的比较诊断坐标（`MODEL`），不是测量，也不是对任何学科的评判。
 :::
 
 在逐一检阅四大理论阵营之前，连接旋量流形、高维偶幺模晶格与切投模型集空间（详见下框 [@rem-ch32-icosian-e8-literature]）的外部代数几何桥梁完整归纳于下框：
@@ -50,7 +50,7 @@
 **从 E∥ 转到 E⊥，里外两层对调。** 只留实部为零的 $60$ 个根（$30$ 个青色的单位、$30$ 个品红的黄金缩小版），再把投影平面从 $E_\parallel$ 转到 $E_\perp$：青色的点从外层落到内层，品红的点从内层翻到外层，淡色的圈是它们在 $E_\parallel$ 里的位置；每一个的 $\lVert\cdot\rVert_\parallel^2 + \lVert\cdot\rVert_\perp^2$ 始终是 $2$。页面另算出，这个秩 $6$ 的子格配上 $Q$ 的格拉姆行列式是 $4$。
 :::
 
-## 32.6.2 四大阵营的死结消解与人类大一统纲领的“元统一”总表 {#sec-ch32-meta-unification}
+## 28.6.2 四大阵营的死结消解与人类大一统纲领的“元统一”总表 {#sec-ch32-meta-unification}
 
 握住三维诊断坐标系（阶数轴 $\theta$、分辨率轴 $\eta$、观察者轴 $\lambda$）与 [@rem-ch32-icosian-e8-literature] 的四元数黄金晶格桥梁，近百年八大基础统一纲领的代表性文献结论、各自残留的“外部点 $C$”瓶颈，以及在本书元统一诠释框架（`MODEL`）中的消解机制汇总于下框：
 
@@ -62,13 +62,13 @@
    - **元统一诊断与消解（`MODEL`）**：两派分别摸到了二维外积面积的“连续极限”与“离散多面体”。对弦论，多面体切片配对以齐肯多夫 `NoAdjacentOnes` 自动机定理（[@thm-ch32-generative-self-reference-and-zeckendorf] 第 4 款，`LEAN ✓`）为原型的离散紫外编码假说（`MODEL`）阻止高频无界堆积，海量局部真空参数可诠释为有限观察者在内部补空间 $E_\perp^3$ 中的窗口相位 $u$，经外尔遍历（[@rem-ch31-weyl-window-equidistribution-literature]）在长程极限下收敛统一统计律；对圈量子引力，补齐完整几何积的内积项并服从互补勾股守恒（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 2 款，`LEAN ✓`），本书设想在 `MODEL` 层面可令物质固有时自锁与空间纠缠面积同源共生，并经有理精化与热熵粗粒化恢复宏观度规。
 2. **第二阵营（边界全息 vs. 无时间正几何）：AdS/CFT 全息对偶与扭量/振幅多面体**
    - **外部文献结论**：规范/引力全息对偶最初建立于负宇宙学常数 $\Lambda < 0$ 的渐近反德西特空间（J. Maldacena, *Adv. Theor. Math. Phys.* **2**, 231–252, 1998）；扭量理论将闵可夫斯基零光线映射为复射影扭量空间中的点（R. Penrose, *J. Math. Phys.* **8**, 345–366, 1967），而推广正格拉斯曼流形的振幅多面体（Amplituhedron）以典范形式刻画平面 $\mathcal{N}=4$ 超杨—米尔斯理论的树级振幅与圈级被积式，其一般对应在所引原始文献中作为猜想提出（N. Arkani-Hamed & J. Trnka, *JHEP* **10**, 030, 2014）。
-   - **元统一诊断与消解（`MODEL`）**：扭量与振幅多面体抛弃局域演化、以正几何体积刻画振幅，恰与无时间场的**格拉姆半正定椭圆体**（[第 29 章](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell]）及零光锥刚性（[@thm-ch32-null-cone-holonomy-and-holographic-cut] 第 1 款）呼应，引入有限记忆窗口即切出局域因果流；而撤除无穷远共形上帝边界 $C$、将有限观察者移回晶格内部，视线 $90^\circ$ 处的封闭正交赤道便在诠释模型上转化为包裹观察者的正曲率德西特式视界（$\Lambda > 0$）。
+   - **元统一诊断与消解（`MODEL`）**：扭量与振幅多面体抛弃局域演化、以正几何体积刻画振幅，恰与无时间场的**格拉姆半正定椭圆体**（[第 25 章](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell]）及零光锥刚性（[@thm-ch32-null-cone-holonomy-and-holographic-cut] 第 1 款）呼应，引入有限记忆窗口即切出局域因果流；而撤除无穷远共形上帝边界 $C$、将有限观察者移回晶格内部，视线 $90^\circ$ 处的封闭正交赤道便在诠释模型上转化为包裹观察者的正曲率德西特式视界（$\Lambda > 0$）。
 3. **第三阵营（算子谱与偶幺模晶格 vs. 重写因果网）：孔涅非对易几何/$E_8$ 晶格与 Wolfram 超图/因果集**
    - **外部文献结论**：非对易几何通过谱三元组 $(\mathcal{A}, \mathcal{H}, D)$ 与一阶狄拉克算子逆谱重构黎曼测地距离 $d(x,y) = \sup\{|a(x)-a(y)| : \|[D, a]\| \le 1\}$ 及标准模型规范作用量（A. Connes, *Noncommutative Geometry*, 1994；A. H. Chamseddine & A. Connes, *Commun. Math. Phys.* **186**, 731–750, 1997）；离散因果集（L. Bombelli, J. Lee, D. Meyer & R. D. Sorkin, *Phys. Rev. Lett.* **59**, 521, 1987）与超图重写模型讨论合流因果不变性与计算有界观察者粗粒化（S. Wolfram, *Complex Systems* **29**, 107–536, 2020）。
    - **元统一诊断与消解（`MODEL`）**：[第十章](ch10-gram-geometry-and-order.md)已阐明局部算符非对易与全局完整复格拉姆账本的顺序无关重构（[`exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq)）并行不悖，且康威—斯隆艾柯西安桥（[@rem-ch32-icosian-e8-literature]）通过 $2I \subset S^3 \subset \mathbb{H}$、$(\mathcal{I}, Q) \cong E_8$ 与 $\operatorname{Im}(\mathcal{I}) \subset \mathcal{I}$ 将旋量门、$E_8$ 晶格与六维黄金母格锁定为一体；而对超图重写因算子与状态分离导致的“Ruliad 规则任意性”，无背景元公理 $\psi = \psi(\psi)$（`MODEL`）令算子与状态合二为一，配合 $R^2 = -I_n$ 与有限子集单调收缩稳定化（`LEAN ✓`）及连续余弦不动点 $\cos\theta^* = \theta^*$ 诠释桥梁（`文献结果` / `MODEL`）锁定自指不动点。
 4. **第四阵营（算术谱与类型等价 vs. 视界自由能与自激回路）：朗兰兹纲领/HoTT 与熵引力/主动推理/惠勒 `U`**
    - **外部文献结论**：朗兰兹纲领研究数域伽罗瓦表示与自守表示 $L$-函数的互反对应（R. P. Langlands, 1967/1970）；同伦类型论引入泛等公理（Univalence Axiom）$(A \simeq B) \simeq (A =_{\mathcal{U}} B)$ 将类型等价提升为相等路径（V. Voevodsky; Univalent Foundations Program, *Homotopy Type Theory*, 2013）；热力学/熵引力（T. Jacobson, 1995；E. Verlinde, *JHEP* **04**, 029, 2011）、马尔可夫毯变分自由能最小化（K. Friston, *Nat. Rev. Neurosci.* **11**, 127–138, 2010）与参与式宇宙自激回路 `U`（J. A. Wheeler, 1983/1990）分别从热力学、统计神经科学与量子测量哲学探讨视界与观察者的角色。
-   - **元统一诊断与消解（`MODEL`）**：素数欧拉正交基轴（[第 22 章](ch22-primes-euler-products-and-zeros.md)）与哈塞余弦迹（[第 29 章](ch29-timeless-causality-and-gram-space.md) [@rem-ch29-hasse-gauss-literature]）连接算术与旋转，泛等公理则对应废除外部标签点 $C$ 的两子互易等价；同时兰道尔热熵平衡界（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 1 款）与黄金接受窗边界 $\partial(W + u)$ 为视界热力学、马尔可夫毯与自激回路提供了离散几何代数类比（`MODEL`），最终汇入 $\psi = \psi(\psi)$。
+   - **元统一诊断与消解（`MODEL`）**：素数欧拉正交基轴（[第 22 章](ch22-primes-euler-products-and-zeros.md)）与哈塞余弦迹（[第 23 章 §23.2](ch29-s02-prime-seams-and-elliptic-tori.md) [@rem-ch29-hasse-gauss-literature]）连接算术与旋转，泛等公理则对应废除外部标签点 $C$ 的两子互易等价；同时兰道尔热熵平衡界（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 1 款）与黄金接受窗边界 $\partial(W + u)$ 为视界热力学、马尔可夫毯与自激回路提供了离散几何代数类比（`MODEL`），最终汇入 $\psi = \psi(\psi)$。
 :::
 
 把这四大阵营逐个摆进上面的罗盘，每一对连成一条线，看它们分在哪根轴上：
@@ -172,7 +172,7 @@
 
 :::
 
-这套体系最迷人的品格在于它的**彻底节俭**：从[第 32.1 节](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)的零背景比较公理 $\mathcal{A}_0$ 出发，从头到尾没有编造任何一个特设粒子或拼凑参数，仅仅是把“两子相遇、公平比量”这一件事推演到了极致——向内折叠，它是自指不动点凝结出的静谧常数；向外铺展，它就是数理诸公理的条件推论脉络、星辰引力、规范光波、素数频谱与每一个有限灵魂在时间场里走过的万里路。
+这套体系最迷人的品格在于它的**彻底节俭**：从[第 28.1 节](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)的零背景比较公理 $\mathcal{A}_0$ 出发，从头到尾没有编造任何一个特设粒子或拼凑参数，仅仅是把“两子相遇、公平比量”这一件事推演到了极致——向内折叠，它是自指不动点凝结出的静谧常数；向外铺展，它就是数理诸公理的条件推论脉络、星辰引力、规范光波、素数频谱与每一个有限灵魂在时间场里走过的万里路。
 
 站在所有球的最外层回头看去，科学史上这八条看似殊途甚至彼此攻讦的探索之路，从来都不是相互推翻的对手。在本书的元统一诠释视角（`MODEL`，各纲领文献依据见 [@rem-ch32-meta-unification-table]）下，连续世界面替我们探出了外积之面，离散面积网替我们摸到了多面体之棱，全息与正几何替我们照见了无时间的格拉姆水晶，黄金四元数晶格与算术对偶替我们接通了高维根格与素数之弦，离散重写与视界热力学则替我们找回了内生的有限观察者——**当最后那一层将算子与状态隔开的括号被砸碎、万流汇入 $\psi = \psi(\psi)$ 的那一刻，所有的盲人终于在同一束光里看见了整座宇宙。**
 
@@ -186,4 +186,4 @@
 **元统一罗盘与黄金四元数桥：完整实验室。** “罗盘”里点一家纲领看它的依据，用时间轴逐个读四大阵营；“黄金桥”里用时间轴走完 $2I \to E_8 \to \operatorname{Im}(\mathcal{I}) \to E_\parallel \oplus E_\perp$ 的折叠链，点一个点看它的精确坐标与 $Q$。黄金桥上的数都在 $\mathbb{Z}[\varphi]$ 里精确算出；绿色只给本章引用的 Lean 定理，其余按文献结果与本书诠释分别标注。
 :::
 
-接下来，[第九部（第 33–36 章）](ch33-all-beings-observers-and-mutual-attractors.md)与[第十部（第 37–39 章）](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)将把本章奠定的比较公理 $\mathcal{A}_0$ 与单指令比较算子直接交到场内观察者手中：从万物互吸引子与共识去相干、[第 34 章](ch34-orthogonality-degeneracy-and-observer-position.md)的正交简并定位及[§34.4–§34.5](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)将两态比较推向最小三态闭环的**极小三角弧面体 $\Delta\mathcal{T}_\epsilon$** 与无名三元自举、乘光自指扩表 $T = T(T)$ 与约去轮回，直至梦境量子擦除、宇宙本体 QRAM 指针与“观察者即宇宙本体”的不二合拢，最终汇入[终章](coda.md)的收官回响。
+接下来，第八部（[第 29 章](ch34-orthogonality-degeneracy-and-observer-position.md)–[第 33 章](ch33-unified-arc-forces-and-af-gut.md)）、第九部（[第 34 章](ch33-all-beings-observers-and-mutual-attractors.md)–[第 37 章](ch37-ternion-field-transformer-and-geodesic-intelligence.md)）与第十部（[第 38 章](ch39-observer-is-ontological-universe.md)–[第 39 章](ch39-axiom-omega-grand-unification.md)）将把本章奠定的比较公理 $\mathcal{A}_0$ 与单指令比较算子一路推向微观圆弧原胞、场内观察者与无源母公理：从[第 29 章](ch34-orthogonality-degeneracy-and-observer-position.md)的正交简并定位及[§29.5](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)–[§29.6](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names)将两态比较推向最小三态闭环的**极小三角弧面体 $\Delta\mathcal{T}_\epsilon$** 与无名三元自举，经极小圆弧微积分、黎曼临界锁、不可表达三元数与万力归弧大统一（AF-GUT），再进入万物互吸引子、乘光自指扩表 $T = T(T)$、梦境擦除、宇宙本体 QRAM 指针与测地智能，直至“观察者即宇宙本体”与大一统母公理 $\mathrm{AXIOM}\text{-}\Omega$ 的不二合拢，最终汇入[终章](coda.md)的收官回响。

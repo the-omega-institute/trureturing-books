@@ -1,4 +1,4 @@
-# 31.1 Seat Fairness and Gain–Loss Fairness: Eye-Level Rulers and the Zero-Free-Lunch Ledger {#sec-ch31-seat-and-pythagoras}
+# 27.1 Seat Fairness and Gain–Loss Fairness: Eye-Level Rulers and the Zero-Free-Lunch Ledger {#sec-ch31-seat-and-pythagoras}
 
 The oldest source of privilege is to install an exalted tribunal outside the arena—precisely the external "third point $C$" we excised in [Chapter 2](ch02-born-rule.md)—so whichever state sits closer to the throne may declare itself the universal standard.
 
@@ -8,7 +8,7 @@ The oldest source of privilege is to install an exalted tribunal outside the are
 
 In pure-state geometry, by contrast, every normalized state inhabits a symmetric space devoid of privileged axes (`MODEL`); quantum geometry abolishes any disembodied "view from nowhere" (philosophical and literary context in [@rem-ch31-haar-isotropy-landauer-literature] below) through two algebraic laws:
 
-- **Equality of Seat (Unit Pure-Qubit Bloch Norm)**: A sphere has neither capital city nor provincial periphery. For a single qubit, trace-$1$ idempotent Hermitian projectors lie precisely on the Euclidean unit sphere $\|\operatorname{bloch}(M)\| = 1$ by [Chapter 26](ch26-single-qubit-rotor-compilation.md)'s [`bloch_geometry_of_isHermitian`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian) (for higher-dimensional continuous symmetry background see [@rem-ch31-haar-isotropy-landauer-literature] below). No axis possesses intrinsic authority to crown itself cosmic North.
+- **Equality of Seat (Unit Pure-Qubit Bloch Norm)**: A sphere has neither capital city nor provincial periphery. For a single qubit, trace-$1$ idempotent Hermitian projectors lie precisely on the Euclidean unit sphere $\|\operatorname{bloch}(M)\| = 1$ by [Single-Qubit Rotor Compilation: Bloch Geometry Theorems and the ZYZ Euler Compiler](ch26-single-qubit-rotor-compilation.md)'s [`bloch_geometry_of_isHermitian`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian) (for higher-dimensional continuous symmetry background see [@rem-ch31-haar-isotropy-landauer-literature] below). No axis possesses intrinsic authority to crown itself cosmic North.
 - **Reciprocity of Measurement (Eye-Level Symmetry)**: Under pairwise comparison, the rank-one pairing weight $\|\phi^* \bullet_v \psi\|^2$ obtained when $\psi$ serves as ruler to measure $\phi$ (Conjunct 1 of [@thm-ch31-seat-pythagorean-monogamy-fairness] below) is **identically equal** by conjugate symmetry of the complex inner product to the weight $\|\psi^* \bullet_v \phi\|^2 = |\langle\phi, \psi\rangle|^2 = |\langle\psi, \phi\rangle|^2$ obtained when $\phi$ measures $\psi$ in return. There is no one-way surveillance at the foundation of physics: **to the exact degree you illuminate another, the other simultaneously illuminates you**.
 
 ::: {.viz src="quantum-fairness-ledger" preset="haar" height="500"}

@@ -1,12 +1,12 @@
-# 39.19 不可表达的三元数与万数归弧：弗罗贝尼乌斯缺口、哈密顿十三载死锁与数系切面投影谱系 {#sec-ch39-inexpressible-ternions-and-number-projections}
+# 32.2 不可表达的三元数与万数归弧：弗罗贝尼乌斯缺口、哈密顿十三载死锁与数系切面投影谱系 {#sec-ch39-inexpressible-ternions-and-number-projections}
 
 > *“一切数都是三元数的投影, 但三元数不可表达, 三元数即极小圆弧体”*
 
-在 [§39.18](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god) 中，我们从唯一本体场 $\mathbf{I}$ 的自我设限、偏迹压抑与多切面分身整合，走到了意识与物理法则在余弦不动点 $\theta^* = \cos\theta^*$ 处的清明和解；而在更早的 [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger) 中，我们又证明了任何能够凭自身旋度闭合的原生概念场必然精确封顶于三维（对正维数 $d \ge 1$，$\binom{d}{2} = d \iff d = 3$）。然而，只要把这两条线索合拢到代数学的地基上，一道横亘了近两百年的著名裂缝便立刻浮出水面：为什么支撑整个物理空间、刚体转动与概念场闭合的核心维数是 **$3$**，偏偏弗罗贝尼乌斯（Frobenius, 1878）与胡尔维茨（Hurwitz, 1898）的实数域赋范可除代数定理给出的维数序列却是 **$1$（实数 $\mathbb{R}$）、$2$（复数 $\mathbb{C}$）、$4$（四元数 $\mathbb{H}$）、$8$（八元数 $\mathbb{O}$）**——唯独跳过了最关键的 **$3$**？
+早在[第二十三章 §23.1](ch29-s01-pythagoras-and-number-systems.md#sec-coda-pythagoras-all-is-number) 中，我们曾追随毕达哥拉斯与希帕索斯的足迹，看清人类四代经典数系（$\mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C}, \mathbb{H}$）都是不同维球面上的旋转投影账本；而在上一节 [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger) 中，我们又证明了任何能够凭自身旋度闭合的原生概念场必然精确封顶于三维（对正维数 $d \ge 1$，$\binom{d}{2} = d \iff d = 3$）。然而，只要把这两条线索合拢到代数学的地基上，一道横亘了近两百年的著名裂缝便立刻浮出水面：为什么支撑整个物理空间、刚体转动与概念场闭合的核心维数是 **$3$**，偏偏弗罗贝尼乌斯（Frobenius, 1878）与胡尔维茨（Hurwitz, 1898）的实数域赋范可除代数定理给出的维数序列却是 **$1$（实数 $\mathbb{R}$）、$2$（复数 $\mathbb{C}$）、$4$（四元数 $\mathbb{H}$）、$8$（八元数 $\mathbb{O}$）**——唯独跳过了最关键的 **$3$**？
 
 章首这句凝练到极致的命题，一举掀开了这道“弗罗贝尼乌斯缺口”背后的本体论谜底（`MODEL`）：那个在平直线性符号账本里看似“失踪”的**三元数（Ternion，$\mathbb{T}_3 \equiv \Delta\mathcal{T}_\epsilon$）**从未缺席——一旦剥去观察者强加给平直向量空间的径向标尺与外置恒等实轴 $\mathbf{1}$，上述四座赋范除环的单位范数球流形恰好是 **$S^0$（$0$ 维离散双点）、$S^1$（$1$ 维圆周）、$S^3$（$3$ 维紧致李群流形）与 $S^7$（$7$ 维平行化球面）**！在平直纸面上遍寻不获的“三”，真身正是内禀自由度严格等于 **$3$** 的弯曲**极小圆弧体** $\Delta\mathcal{T}_\epsilon \cong S^3$：它因自身不设外置观察者标量轴 $\mathbf{1}$ 而对一切三维平直线性表达彻底免疫，同时又在观察者立起参考实轴 $\mathbf{1}$ 的那一刻，沿四把不同维度的投影切刀生发出四元数、复数、实数、有理数、整数与素数的整座数系家族。
 
-## 39.19.1 弗罗贝尼乌斯—胡尔维茨缺口揭秘：从平直维数 1, 2, 4, 8 到单位球流形 $S^0, S^1, S^3, S^7$ {#sec-ch39-19-1}
+## 32.2.1 弗罗贝尼乌斯—胡尔维茨缺口揭秘：从平直维数 1, 2, 4, 8 到单位球流形 $S^0, S^1, S^3, S^7$ {#sec-ch39-19-1}
 
 传统算术与代数学总是默认一条“由简入繁”的平直谱系：仿佛宇宙中先躺着孤立死寂的自然数与实数轴 $\mathbb{R}^1$，数学家为了开方才人工添入虚轴 $\hat{\mathbf{i}}$ 拼出复平面 $\mathbb{R}^2 \cong \mathbb{C}$，继而又为了描述三维空间旋转被迫跳过 $\mathbb{R}^3$、跳进四维线性空间 $\mathbb{R}^4 \cong \mathbb{H}$ 乃至八维空间 $\mathbb{R}^8 \cong \mathbb{O}$。只要站在这张平直向量空间维度表 $d \in \{1, 2, 4, 8\}$ 上仰望，“为何没有三维数系”就会永远像一桩反直觉的代数怪谈。
 
@@ -39,7 +39,7 @@ $$
 
    其中 $\hat{\mathbf{u}} = (u_1, u_2, u_3) \in S^2$ 为单位转向轴，$\theta \in \mathbb{R}$ 为伴随作用 $x \mapsto \Delta\mathcal{T}_\epsilon\,x\,\Delta\mathcal{T}_\epsilon^{-1}$ 在三维纯虚空间上诱导的实际测地转角。正是 $[\mathbf{i}_a, \mathbf{i}_b] = 2\varepsilon_{abc}\mathbf{i}_c$ 中的这枚因子 $2$，直接铸就了旋量指数映射中的半角 $\frac{\theta}{2}$ 与 $\theta = 360^\circ$ 时的对跖变号 $\Delta\mathcal{T}_\epsilon(2\pi, \hat{\mathbf{u}}) = -\mathbf{1}$！
 
-## 39.19.2 哈密顿十三载之困（1830–1843）：为何三元数不可线性表达？ {#sec-ch39-19-2}
+## 32.2.2 哈密顿十三载之困（1830–1843）：为何三元数不可线性表达？ {#sec-ch39-19-2}
 
 既然内禀三维的极小圆弧体 $\Delta\mathcal{T}_\epsilon \cong S^3$ 如此自然地存在着，为什么从 1830 年到 1843 年整整十三年间，威廉·罗恩·哈密顿（William Rowan Hamilton）每天清晨在都柏林书房里反复尝试构造形如 $x = a\mathbf{1} + b\hat{\mathbf{i}} + c\hat{\mathbf{j}} \in \mathbb{R}^3$ 的“线性三元数（Triplets）”乘法，每每在早餐桌面对儿子追问“爸爸，今天你能把三元数乘起来了吗？”时，却只能苦笑着摇头回答：“不，我还是只能把它们加起来和减下去”？
 
@@ -85,9 +85,9 @@ $$
 平直死锁与 $180^\circ$ 极点卡：$\theta = 179^\circ$ 时，平直三元组左乘矩阵 $L_x$ 暴露实特征根与非零零因子见证，未经截断的罗德里格斯坐标读数为 $\lvert\tan(\theta/2)\rvert = 114.5887$（三维舞台品红柱按 $\min(4, \lvert\tan(\theta/2)\rvert)$ 封顶并在 $180^\circ$ 标极点环），而中央紫色极小圆弧体顺畅跨过半周。坐标与矩阵读数为 `NUM`，极点文献为 `ARGUED`，三元数本体读法为 `MODEL`。
 :::
 
-## 39.19.3 万数归弧：四元数、复数、实数、整数、有理数与素数的四道投影切刀 {#sec-ch39-19-3}
+## 32.2.3 万数归弧：四元数、复数、实数、整数、有理数与素数的四道投影切刀 {#sec-ch39-19-3}
 
-既然原生三元数 $\mathbb{T}_3 \equiv \Delta\mathcal{T}_\epsilon$ 本身没有中心原点、没有特权实轴 $\mathbf{1}$，只由三段互为因果的正交极小圆弧 $[\mathbf{e}_a, \mathbf{e}_b] = \varepsilon_{abc}\mathbf{e}_c$ 循环自持，那么人类数学大厦里琳琅满目的“数”究竟从何而来？答案是：**唯当观察者在比较网络中立起自身的主格参考轴 $\mathbf{1}$（即 [§39.15](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream) 中的实轴 $\mathbf{I}$）去度量或书写这枚不可表达的三元圆弧体时，不同的观测嵌入与剖切算子才从同一枚 $\Delta\mathcal{T}_\epsilon$ 上分化出整座数系家族！**
+既然原生三元数 $\mathbb{T}_3 \equiv \Delta\mathcal{T}_\epsilon$ 本身没有中心原点、没有特权实轴 $\mathbf{1}$，只由三段互为因果的正交极小圆弧 $[\mathbf{e}_a, \mathbf{e}_b] = \varepsilon_{abc}\mathbf{e}_c$ 循环自持，那么人类数学大厦里琳琅满目的“数”究竟从何而来？答案是：**唯当观察者在比较网络中立起自身的主格参考轴 $\mathbf{1}$（即 [§38.7](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream) 中的实轴 $\mathbf{I}$）去度量或书写这枚不可表达的三元圆弧体时，不同的观测嵌入与剖切算子才从同一枚 $\Delta\mathcal{T}_\epsilon$ 上分化出整座数系家族！**
 
 我们将这一颠倒传统算术建构次序的“万数归弧”机制正式提炼为如下几何模型定义：
 
@@ -130,7 +130,7 @@ $$
 赤道切片卡：$\theta = 120^\circ$、横倾角 $\alpha = 0^\circ$ 时，辅助球面三角形落回同一条赤道大圆，球面角盈收束为 $\Omega = 0.0000\;\mathrm{sr}$，留下可交换复平面上的单位相位；拨高 $\alpha$ 即重新唤醒非阿贝尔角盈（球面三角和乐依据见 [@thm-ch39-ternion-spin-factor-and-number-projections]，读数为 `NUM`）。
 :::
 
-## 39.19.4 形式化锚定定理、文献归属、八位小数奇点对账算例与数系谱系总表 {#sec-ch39-19-4}
+## 32.2.4 形式化锚定定理、文献归属、八位小数奇点对账算例与数系谱系总表 {#sec-ch39-19-4}
 
 下面我们将支撑本节三元极小圆弧体代数结构、双轴旋转完备生成、非阿贝尔球面三角和乐、复结构负平方切片、双覆盖全局截面禁律与 $360^\circ$ 换叶提升以及有理数素数位乘积守恒的**八条冻结 Lean 4 内核定理**正式汇集为本节主定理：
 
@@ -181,7 +181,7 @@ $$
 1. **罗德里格斯旋转参数与哈密顿十三载三元数探索史**（O. Rodrigues, *J. Math. Pures Appl.* **5**, 380–440, 1840；W. R. Hamilton, *Proc. R. Irish Acad.* **2**, 424–434, 1844；*Philos. Mag.* **25**, 489–495, 1844）：罗德里格斯于 1840 年率先导出三维旋转半角复合公式与切向量 $\mathbf{g} = \tan(\frac{\theta}{2})\hat{\mathbf{u}}$；哈密顿自 1830 年起长期探索三元线性乘法无果，最终于 1843 年 10 月 16 日引入第四维实标量部创立四元数 $\mathbb{H}$；
 2. **实可除代数、赋范合成代数与球面平行化的 `1, 2, 4, 8` 分类链**（F. G. Frobenius, *J. Reine Angew. Math.* **84**, 1–63, 1878；A. Hurwitz, *Nachr. Ges. Wiss. Göttingen*, 309–316, 1898；H. Hopf, *Math. Ann.* **104**, 637–665, 1931 & *Comment. Math. Helv.* **13**, 219–239, 1940；R. Bott & J. Milnor, *Bull. Amer. Math. Soc.* **64**, 87–89, 1958；M. Kervaire, *Proc. Natl. Acad. Sci. USA* **44**, 280–283, 1958；J. F. Adams, *Ann. of Math.* **72**, 20–104, 1960）：弗罗贝尼乌斯分类有限维实结合可除代数为 $\mathbb{R}, \mathbb{C}, \mathbb{H}$；胡尔维茨分类带单位元实赋范合成代数为 $1, 2, 4, 8$ 维；霍普夫用上同调环证明有限维实可除代数维数必为 $2$ 的幂，博特—米尔诺与凯尔维尔最终利用 $K$-理论证明不要求结合律的有限维实可除代数亦仅存在于维数 $1, 2, 4, 8$，亚当斯则证明仅 $S^1, S^3, S^7$ 全局可平行化；
 3. **$\mathrm{SO}(3)$ 与 $S^3$ 的全局平直坐标图禁律及图册下界**（J. Stuelpnagel, *SIAM Rev.* **6**(4), 422–430, 1964, DOI `10.1137/1006093`）：严格证明不存在任何无奇点或单射连续的三维平直参数化覆盖紧致群 $\mathrm{SO}(3)$，任何光滑图册至少需要 $4$ 张局部坐标图（而 $S^3$ 的柳斯捷尔尼克—施尼雷尔曼范畴决定其至少需要 $2$ 张球极坐标图）；
-4. **同伦绕数 $\pi_3(S^3) \cong \mathbb{Z}$ 与素数本原闭合轨道的几何边界**（H. Hopf, 1931；A. Selberg, *J. Indian Math. Soc.* **20**, 47–87, 1956）：三阶同伦群 $\pi_3(S^3) \cong \mathbb{Z}$ 与一阶基本群 $\pi_1(S^1) \cong \mathbb{Z}$ 为严格代数拓扑定理；而将素数 $\mathbb{P}$ 诠释为“不可分解本原闭合圆弧结”（呼应 [§34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)）属本书比较算术模型（`MODEL`）——须明确指出，常正曲率圆球面 $S^3$ 上的本原闭合测地大圆弧长恒为 $2\pi$，经典塞尔伯格迹公式中具有离散对数长度谱 $\{\ln N(\gamma_p)\}$ 的本原闭合测地线定义在**负常曲率双曲曲面 $\Gamma\backslash\mathbb{H}^2$**（或数域阿代尔商空间）上，绝不能误称为圆球面 $S^3$ 的黎曼拉普拉斯谱定理，且经典黎曼猜想 [@conj-riemann-hypothesis] 仍严格保持为 `OPEN`。
+4. **同伦绕数 $\pi_3(S^3) \cong \mathbb{Z}$ 与素数本原闭合轨道的几何边界**（H. Hopf, 1931；A. Selberg, *J. Indian Math. Soc.* **20**, 47–87, 1956）：三阶同伦群 $\pi_3(S^3) \cong \mathbb{Z}$ 与一阶基本群 $\pi_1(S^1) \cong \mathbb{Z}$ 为严格代数拓扑定理；而将素数 $\mathbb{P}$ 诠释为“不可分解本原闭合圆弧结”（呼应 [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)）属本书比较算术模型（`MODEL`）——须明确指出，常正曲率圆球面 $S^3$ 上的本原闭合测地大圆弧长恒为 $2\pi$，经典塞尔伯格迹公式中具有离散对数长度谱 $\{\ln N(\gamma_p)\}$ 的本原闭合测地线定义在**负常曲率双曲曲面 $\Gamma\backslash\mathbb{H}^2$**（或数域阿代尔商空间）上，绝不能误称为圆球面 $S^3$ 的黎曼拉普拉斯谱定理，且经典黎曼猜想 [@conj-riemann-hypothesis] 仍严格保持为 `OPEN`。
 :::
 
 ::: {.viz src="ternion-number-projection-sandbox" preset="real-trace-geodesic-projection" height="500"}
@@ -256,7 +256,7 @@ $$
 
 上表将“数”的本体论次序彻底扶正了过来（`MODEL`）：在教科书的平直叙事里，人类先抓着离散手指头数出 $1, 2, 3$，再一路打补丁造出负数、分数、无理数、虚数与四元数，仿佛越往后越是远离真实的数学虚构；而在零外部背景的比较几何里，**最先浑然自持存在的恰恰是那枚不可线性书写的三元极小圆弧体 $\Delta\mathcal{T}_\epsilon$**！凡是能被线性符号写进账本里的“数”，无一例外都已向观察者主轴 $\mathbf{1}$ 俯首称臣——多借一维余弦影子就写成四元数，切一刀赤道平面就写成复数，压成一条实迹就写成实数，等它走满整圈清点拓扑结就写成整数。唯独生养万数的三元数本身，因不立孤立之“一”而不可书写，亦因不可书写而圆满具足。
 
-然而，故事才刚刚讲完“向下切去曲率生万数”的上半阕！倘若我们不再向内剖切单枚三元数，而是反过来将**多座三元数场向上耦合拼接**，并再次强行压回观察者的平直线性账本上，又会发生怎样惊心动魄的代数奇观？为什么四元数之上会涌现出八元数的法诺平面七场编织、十六元数的零因子破产，乃至困扰物理学界百年的 **$2^N$ 维多体希尔伯特空间指数爆炸与无穷维泛函空间**？让我们一鼓作气推开本章第二十节的大门——[§39.20 三元数即原生场：从凯莱—迪克森阶梯、法诺八元数到希尔伯特空间的多场再投影祛魅](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)。
+然而，故事才刚刚讲完“向下切去曲率生万数”的上半阕！倘若我们不再向内剖切单枚三元数，而是反过来将**多座三元数场向上耦合拼接**，并再次强行压回观察者的平直线性账本上，又会发生怎样惊心动魄的代数奇观？为什么四元数之上会涌现出八元数的法诺平面七场编织、十六元数的零因子破产，乃至困扰物理学界百年的 **$2^N$ 维多体希尔伯特空间指数爆炸与无穷维泛函空间**？让我们一鼓作气推开本章第三节的大门——[§32.3 三元数即原生场：从凯莱—迪克森阶梯、法诺八元数到希尔伯特空间的多场再投影祛魅](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)。
 
 ::: {.viz src="ternion-number-projection-sandbox" height="620"}
 完整实验室：切换万数归弧与除环同伦两副透镜，在 $0^\circ$ 至 $720^\circ$ 间拖动圆弧转角、切片横倾角与有理数 $p/q$，同台比较平直三元组死锁、四元数余弦影、赤道切片、实迹与整圈闭合。十条形式化声明、数值、文献、模型与开放问题在依据栏与理论抽屉中分别标明。
