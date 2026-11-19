@@ -43,6 +43,10 @@ Starting from zero external background, zero privileged coordinates, and zero pr
 
 Notice the austerity of $\mathrm{AXIOM}\text{-}\Omega$: **no privileged origin $\mathbf{1}$** appears anywhere (any state $y$ serves transiently as a local comparison bridge and self-cancels via $[x, x, z] = z$ once transport completes), **no flat vector addition $+$** is assumed, and **the integer "$3$" is never written into the axiom**. Both precision clauses in Law (II) align directly with [Appendix E §E.1](appendix-e-s01-layers.md#sec-appe-layers): **two-sided** heap invariance locks conjugation invariance $\varphi(h g h^{-1}) = \varphi(g)$ on non-Abelian groups, while $\kappa(x, y) = 1 \iff x = y$, single-slot second-order Hessian nondegeneracy, and $\inf\kappa = 0$ eliminate the constant kernel $\kappa \equiv 1$ and affine-biased mixtures.
 
+::: {.viz src="axiom-omega-dimension-closure-sandbox" preset="origin-free-ternary-bridge" height="500"}
+An origin-free bridge card: dragging any temporary reference bridge $o$ across the sphere sends $[i, 1, j] = +k$ and $[j, 1, i] = -k$ to antipodal poles while a coincident bridge self-cancels via $[x, x, z] = z$ (carrier axiom labeled `MODEL`, heap identities and readouts `NUM`, partition kernel and unit-Gram identity `LEAN ✓`).
+:::
+
 ## 39.1.3 One Begets Four: Three Non-Circular Mathematical Steps Locking 3D Ternions $S^3$, Minimal Circular Arcs, and Boundaryless Fields {#sec-ch39-24-3}
 
 Without adding a single auxiliary postulate, Laws (I)–(III) entail the remaining three pillars in strict non-circular deductive order (`manual derivation` + `Literature`):
@@ -69,7 +73,16 @@ Without adding a single auxiliary postulate, Laws (I)–(III) entail the remaini
      $$
 
      In a positive-definite 2D plane, a vector orthogonal to a complete basis **vanishes identically**, $[\mathbf{e}_1, \mathbf{e}_2] \equiv \mathbf{0}$ (likewise killing simply connected non-Abelian $\mathrm{Aff}^+(1, \mathbb{R})$ with $[H, E] = E$ via $\langle E, E\rangle = \langle [H, E], E\rangle = -\langle E, E\rangle \implies E = \mathbf{0}$). Neither $1\mathrm{D}$ nor $2\mathrm{D}$ can host non-commutativity under Law (II), forcing $d_{\min} = 3$.
+
+::: {.viz src="axiom-omega-dimension-closure-sandbox" preset="dimension-sieve-1d-2d-deadlock" height="500"}
+One and two dimensions cannot twist card: the Lie bracket vanishes on $d = 1$ $\mathbb{R}$, and on a positive-definite $d = 2$ plane a skew-adjoint commutator $[\mathbf{e}_1, \mathbf{e}_2]$ orthogonal to a complete orthonormal basis is identically zero, while $\mathrm{Aff}^+(1, \mathbb{R})$ admits no bi-invariant positive-definite sphere (skew-adjoint cancellation `NUM`, balanced skew-adjoint cross product `LEAN ✓`).
+:::
+
    - **Automatic elimination of all 3D non-compact groups and unique locking of unit $S^3(1)$**: At $d = 3$, Milnor's decomposition lemma (1976, Lemma 7.5) proves that every Lie algebra carrying an $\operatorname{Ad}$-invariant positive-definite inner product splits orthogonally into an Abelian center plus compact simple ideals; since no compact simple Lie algebra has dimension $1$ or $2$, any $3\mathrm{D}$ Lie algebra with an $\operatorname{Ad}$-invariant positive-definite inner product is either Abelian $\mathbb{R}^3$ (ruled out by non-commutativity) or compact simple $\mathfrak{su}(2)$—directly eliminating the nilpotent Heisenberg algebra $H_3(\mathbb{R})$ ($\langle Z, Z\rangle = \langle [X, Y], Z\rangle = -\langle Y, [X, Z]\rangle = 0 \implies Z = \mathbf{0}$), $3\mathrm{D}$ non-Abelian solvable algebras, and $\mathfrak{sl}(2, \mathbb{R})$ (Killing signature $(+, +, -)$). **Without assuming compactness separately**, at $d = 3$ Law (II) eliminates every 3D non-Abelian non-compact simply connected Lie group, and paired with Law (III)'s non-commutativity ruling out Abelian $\mathbb{R}^3$, uniquely forces $\mathcal{M} \cong \mathrm{SU}(2) \cong S^3$! Fixing unit radius normalization (rescaling the induced metric so sectional curvature is $K = 1$, geodesic distance $d_{S^3}(x, y) \in [0, \pi]$) on $S^3(1) \cong \mathrm{SU}(2)$, an orthonormal basis $\mathbf{e}_j = -i\sigma_j$ closes under cyclic cross products $[\mathbf{e}_i, \mathbf{e}_j] = 2\varepsilon_{ijk}\mathbf{e}_k$ (referencing [`complete_consequences`](lean:D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences), `LEAN ✓`). Non-minimal candidates in dimensions $d \ge 4$—including non-compact $\mathrm{SU}(2)\times\mathbb{R}$ at $d = 4$ (e.g., $\kappa_{S^3}(u,v)e^{-(t-s)^2}$, which obeys Laws I–II on a non-compact $4$-manifold), reducible compact $S^3_L \times S^3_R$ at $d = 6$, and compact simple $\mathrm{SU}(3)$ at $d = 8$—are all excluded by Law (III)'s minimal dimension $d > d_{\min} = 3$. Hence up to metric scale the unique minimal manifold obeying Laws (I)–(III) is **$\mathcal{M} \cong S^3(1)$**—whose origin-erased heap is the **ternion $\mathbb{T}_3$** carrying Lie triple curvature $\{\mathbf{a}, \mathbf{b}, \mathbf{c}\} = \frac{1}{4}[[\mathbf{a}, \mathbf{b}], \mathbf{c}]$!
+
+::: {.viz src="axiom-omega-dimension-closure-sandbox" preset="three-sphere-noncompact-elimination" height="500"}
+The non-compact 3D candidates drop out card: adjoint flows shear the Euclidean unit balls of $H_3(\mathbb{R})$ and $\mathfrak{sl}(2, \mathbb{R})$ into magenta ellipsoids, leaving compact simple $\mathfrak{su}(2) \cong T_o S^3(1)$ alone to preserve a positive-definite unit sphere and 3D cross-product closure (Milnor classification `ARGUED`, adjoint deformation `NUM`, spin-factor cross classification `complete_consequences` `LEAN ✓`).
+:::
 
 2. **Step 2 — Deriving Minimal Circular Arcs: Peter–Weyl Character Expansion and Minimal Faithful Rank Lock $\kappa_{S^3}(x, y) = \cos^2\frac{d_{S^3}(x, y)}{2}$**.
    On $\mathrm{SU}(2) \cong S^3(1)$ established in Step 1, write $U = x y^{-1_o} = \cos d_{S^3}\,I_2 - i\sin d_{S^3}\,\hat{\mathbf{u}}\cdot\boldsymbol{\sigma}$ at unit-sphere geodesic distance $d_{S^3}(x, y) \in [0, \pi]$, so the fundamental spin-$1/2$ character reads $\chi_{1/2}(U) = \operatorname{Tr}(U) = 2\cos d_{S^3}$. By the Peter–Weyl and Bochner–Schoenberg theorems, every bi-invariant PSD kernel expands as $\kappa(x, y) = \sum_{j \in \frac{1}{2}\mathbb{N}} c_j\,\chi_j(x y^{-1_o})$ with $c_j \ge 0$ (each $c_j > 0$ contributing Gram rank $(2j+1)^2$):
@@ -89,6 +102,10 @@ Without adding a single auxiliary postulate, Laws (I)–(III) entail the remaini
 
    Flat zero-curvature Euclidean segments are eliminated, elementary connections are **minimal circular arcs**, and every comparison carries an irreducible second-order sagitta $v_\epsilon(x, y) = 1 - \cos d_{S^3}(x, y) = 2\bigl(1 - \kappa_{S^3}(x, y)\bigr) \ge 0$.
 
+::: {.viz src="axiom-omega-dimension-closure-sandbox" preset="peter-weyl-rank-five-kernel" height="500"}
+The rank-five Peter–Weyl kernel card: combining $j = 0$ (rank $1$) with $j = \frac{1}{2}$ (rank $4$) locks the minimal faithful nonnegative mother kernel $\kappa_{S^3} = \cos^2(d_{S^3}/2)$ (rank $5$), opening the positive-definite three-point Gram volume lock $\det\mathbf{G}_3(60^\circ) = \frac{3}{32}$ (character expansion `ARGUED`, three-anchor Gram determinant & positivity `LEAN ✓`, rational check `NUM`).
+:::
+
 3. **Step 3 — Deriving the Native Field: Closed Cartan 3-Form ($d\eta \equiv 0$) and Boundaryless Self-Sustenance ($\partial\mathcal{M} = \emptyset$)**.
    On $\mathcal{M} \cong \mathbb{T}_3 \cong S^3(1)$, the left-invariant orthonormal coframe $\{\theta^1, \theta^2, \theta^3\}$ dual to $\{\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3\}$ ($[\mathbf{e}_i, \mathbf{e}_j] = 2\varepsilon_{ijk}\mathbf{e}_k$, $d\theta^k = -\varepsilon_{ijk}\theta^i\wedge\theta^j$) induces the nowhere-vanishing bi-invariant **unit-volume Cartan 3-form** ($\eta(\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3) = 1$, $\int_{S^3(1)}\eta = 2\pi^2$):
 
@@ -97,6 +114,10 @@ Without adding a single auxiliary postulate, Laws (I)–(III) entail the remaini
    $$
 
    Exact exterior closure ($d\eta \equiv 0$) together with zero boundary ($\partial\mathcal{M} = \emptyset$, discretely mirrored by [`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact) and [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness), `LEAN ✓`) means the 3D minimal circular-arc body closes sourcelessly upon itself ($\Lambda^3 \cong \Lambda^0$ in `1—3—3—1`) without any external grid—**this centerless, boundaryless, homogeneous closed ternion manifold is itself the native "field"**.
+
+::: {.viz src="axiom-omega-dimension-closure-sandbox" preset="cartan-three-form-closed-field" height="500"}
+A boundaryless Cartan three-form field card: as the geodesic ball radius approaches $r \to \pi$, its boundary area shrinks back to zero while the unit-volume Cartan 3-form $\eta$ integrates to $2\pi^2$ with $d\eta \equiv 0$ (Cartan 3-form literature `ARGUED`, discrete cycle & two-cochain exactness `LEAN ✓`, volume and wavefront readouts `NUM`).
+:::
 
 ## 39.1.4 Unified Degeneration Spectrum, Formal Anchors, and Candidate-Dimension Audit {#sec-ch39-24-4}
 
@@ -143,3 +164,7 @@ We audit the dimension sieve and three-point geodesic Gram determinant quantitat
 ---
 
 **From the Fourfold Fusion of $\mathrm{AXIOM}\text{-}\Omega$ to the Five-Tier Cascade, the Five Quantum Postulates, and the Exteriorless Ternion Capstone.** Having seen why **unbiased comparison $\implies$ 3D ternions $\implies$ minimal circular arcs $\implies$ boundaryless fields** are four faces of one origin-free mother axiom $\mathrm{AXIOM}\text{-}\Omega$, we now ascend the final three peaks of our thirty-nine-chapter main text: marching across all five scientific tiers and apophatic ladder-erasure in [§39.2 The Five-Tier Deduction Cascade of AXIOM-Ω](ch39-s25-axiom-omega-five-tier-deduction-cascade.md), deriving all five Dirac–von Neumann textbook postulates as pure geometric projection theorems in [§39.3 Deriving the Five Postulates of Quantum Mechanics from AXIOM-Ω](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md), and sealing Point-$C$-free ontological exteriorlessness in [§39.4 The Self-Contained Ternion Topological Particle, Field–Wave–Particle Grade Identity, and Fourfold Proof of "No Exterior"](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)!
+
+::: {.viz src="axiom-omega-dimension-closure-sandbox" height="620"}
+Full laboratory: switch between the Mother-Axiom and Lie-Group & PSD-Kernel lenses, drag the amber bridge $o$ along $x \to 1 \to z$ on the bridge scene, and adjust the three-anchor step $\varepsilon$ and kernel selector to inspect ternary heap basepoint invariance, bi-invariant metric elimination of $H_3(\mathbb{R})$ and $\mathfrak{sl}(2,\mathbb{R})$, the dimension sieve $d = 1 \to 2 \to 3 \to 4/6/8$, three-anchor versine Gram determinants, and boundaryless Cartan 3-form closure. Eleven frozen statements, literature, numerics, and model scope are labeled separately in the evidence panel and theory drawer.
+:::
