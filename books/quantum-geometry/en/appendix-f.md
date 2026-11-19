@@ -326,7 +326,7 @@ The lower bound $\delta_p$ depends on the fixed ball. A uniform positive bound r
 
 ## F.7 Sections and Reflections of Singleton-Label Balls {#sec-appendix-f-7}
 
-Keep the notation of F.6. Assume $V\ne\{0\}$, three-dimensional whole-ball charts for the original exclusions, and BC. Write $\mathring A_{\mathrm{rel}}$ and $\partial_{\mathrm{rel}}A$ for the relative interior and frontier of $A$ in its affine span.
+Keep the finite-dimensional real normed space, closed pointed generating cone, strictly positive normalization functional, and notation of F.6. Assume $V\ne\{0\}$, three-dimensional whole-ball charts for the original exclusions, and BC. Write $\mathring A_{\mathrm{rel}}$ and $\partial_{\mathrm{rel}}A$ for the relative interior and frontier of $A$ in its affine span.
 
 ::: {.theorem #thm-appf-singleton-center-sections title="The Exact Section of a Singleton-Label Center Map" lean="D5/S3/Quantum/Foundation/BinaryCenterSections.original_center_sections"}
 The normalized base $K$ has affine dimension at least six, and there is a singleton-label pure state. For each such state $p$, there is a three-dimensional whole-ball chart $b$ of $D_p$ and an injective affine map $g$ of rank three. For every unit vector $x$, $g(x)=c_{b(x)}$. Write $\overline B$ for the closed unit ball and $S$ for its sphere. Then
@@ -341,7 +341,7 @@ Also $\partial_{\mathrm{rel}}g(\overline B)=g(S)\subseteq\partial_{\mathrm{rel}}
 :::
 
 ::: proof
-The affine center map from F.6 sends the open ball into the relative interior of $K$ and the sphere into its relative frontier. Convexity along lines in the image gives the whole section. Transversality provides two three-dimensional direction spaces with zero intersection. The full proof is checked by the Lean kernel.
+If an interior chart point mapped to the relative frontier of $K$, a supporting face there would contain the entire closed-ball image. The face would then contain all the exclusion centers from the source sphere and, since each center is relatively interior to its own ball, all of those balls. Maximality would make these balls equal, contradicting injectivity of the center map. The sphere image lies on the relative frontier of $K$. Each ray from the image center stops at this frontier, giving the whole section. A shared nonzero direction would put points of the section on both sides of an image sphere point inside its own exclusion ball. This would contradict extremality of that point in the section. The full proof is checked by the Lean kernel.
 :::
 
 ::: {.theorem #thm-appf-reflected-pure-sphere title="The Reflected Pure Sphere and Two Section Alternatives" lean="D5/S3/Quantum/Foundation/BinaryCenterReflection.original_reflected_alternatives"}
@@ -355,7 +355,7 @@ $$
 :::
 
 ::: proof
-For each sphere point $b(x)$, symmetry of exclusion gives $p\in D_{b(x)}$. Reflecting $p$ through the center $c_{b(x)}$ inside this ball gives $k(x)$, so the full reflected sphere is pure. The location of its center determines whether the ball is an original exclusion or a section through the relative interior of $K$. The equality criterion identifies the reflection with the antipodal pairing in $D_p$. The full proof is checked by the Lean kernel.
+For each sphere point $b(x)$, symmetry of exclusion gives $p\in D_{b(x)}$. Reflecting $p$ through the center $c_{b(x)}$ inside this ball gives $k(x)$, so the full reflected sphere is pure. The location of its center determines whether the ball is an original exclusion or a section through the relative interior of $K$. If the reflected ball equals $D_p$, then $b(x)$ and $k(x)$ both lie in $D_p$, with $k(x)\in D_{b(x)}$. An original effect distinguishing them attains its maximum and minimum at them on $D_p$, so they are antipodal. Conversely, the displayed formula gives $k(x)=b(-x)$ throughout the sphere. Taking convex hulls gives all of $D_p$. The full proof is checked by the Lean kernel.
 :::
 
 ## F.8 Finite Compatibility for Repeated Labels {#sec-appendix-f-8}
