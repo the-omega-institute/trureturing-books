@@ -364,7 +364,7 @@ For each component $A$, its tail $t(A)$ and head $h(A)$ lie in $A$. The bijectio
 On the original labels, choosing the opposite of the source color as the target color gives an inventory of $n$ crossing labels in each direction and $n!(n-1)!$ full cycles. Equivalently, fix a red label as the starting point and order all blue labels and the remaining red labels in their respective slots. The extension event consists of exactly the permutations in the completion set, so uniformity gives the ratio of the two cardinalities. On a positive event, normalization assigns equal mass to every completion, and the component bijection transfers that mass to its unique corresponding cycle.
 :::
 
-Gessel's cycle rook polynomial counts permutations that exchange two equally sized parts by their number of cycles. Its linear coefficient gives the same $n!(n-1)!$. For the empty forest, $M=n!(n-1)!$ and the event has probability $1$. The incompatible pair of paths at the start of this subsection has $M=0$ and probability $0$. [Original, Section 8, page 12](https://people.brandeis.edu/~gessel/homepage/papers/rookp.pdf)
+Gessel applies a linear functional to a product of cycle rook polynomials to obtain the cycle-weight enumerator for permutations that exchange two equally sized parts. The linear coefficient of this enumerator gives the same $n!(n-1)!$. For the empty forest, $M=n!(n-1)!$ and the event has probability $1$. The incompatible pair of paths at the start of this subsection has $M=0$ and probability $0$. [Original, Section 8, page 12](https://people.brandeis.edu/~gessel/homepage/papers/rookp.pdf)
 
 ## 16.2.3 Undirected full cycles: two orientations of the same completed graph {#sec-undirected-cycle-orientation-fibers}
 
