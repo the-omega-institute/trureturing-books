@@ -150,6 +150,7 @@
 | **第 38 章** | [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] | `D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective` | 非负实数全尺度齐肯多夫编码线程严格单射定理 |
 | **第 39 章**：大一统母公理（AXIOM-Ω） | [@thm-ch39-axiom-omega-ternary-closure-anchors] | `D5/S3/QuantumBounds/GramRealizability.gram_realizability` | 完备复内积空间上正算子格拉姆伴随平方因式分解充要定理 $0 \le Q \iff \exists O,\; Q = O^\dagger O$ |
 | **第 39 章** | [@thm-ch39-axiom-omega-ternary-closure-anchors] | `D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum` | 平衡半范分量构成的幺正和算子迫使交叉乘积严格反自伴 $(AB^\dagger)^\dagger = -AB^\dagger$ |
+| **第 39 章** | [@thm-ch39-axiom-omega-rank-five-unit-quaternion-embedding] | `D5/S3/Quantum/AURICOmega/TernaryComparisonRankFive.exists_unitQuaternion_embedding` | 非交换、链连通、触零且特征秩为五的三元比较结构单射嵌入单位四元数，读数为 $\frac{1 + \langle u(x), u(y)\rangle}{2}$ |
 | **第 39 章** | [@thm-ch39-self-contained-ternion-and-no-exterior-anchors] | `D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization` | 标量域 `[RCLike 𝕜]` 上单位范数态族的重叠为 $1$ 当且仅当两态严格全同：锚定内禀去嵌入自重合律 $\kappa(x,x)\equiv 1$ |
 | **铸器与圣殿**：将矩阵化为异或 | [@thm-qubit-weyl-star] | `D5/S3/Quantum/FiniteDimensional.qubit_weyl_star` | 单量子比特外尔算子 $X, Z$ 的反对易、自伴与对合代数律 |
 | **铸器与圣殿** | [@lemma-qubit-no-character] | `D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character` | $2\times 2$ 量子比特矩阵代数不存在保全局矩阵乘法的复代数特征标 |
