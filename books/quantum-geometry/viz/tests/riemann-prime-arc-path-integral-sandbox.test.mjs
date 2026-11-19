@@ -165,7 +165,7 @@ check('source: the page loads only the shared runtime and its own files', same([
 check('source: .okmark only inside .lean boxes (none on this page)', !/okmark/.test(sources['index.html'] + sources['main.js']));
 check('suite: no fixed waits', !new RegExp('wait' + 'ForTimeout').test(suite));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
-check('registry: live §34.28 entry with four bilingual cards and the seven theorems', !!entry && entry.status === 'live' && entry.chapter === 34 && entry.section === '34.28'
+check('registry: live §31.1 entry with four bilingual cards and the seven theorems', !!entry && entry.status === 'live' && entry.chapter === 31 && entry.section === '31.1'
   && entry.code === 'ZETA//SPIRAL' && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map((x) => x.gid).sort(), [...GIDS].sort()) && entry.tags.length === entry.tags_en.length
   && entry.theory.length === 1 && entry.theory[0].href === THEORY[0].slice(3) && entry.theory[0].href_en === THEORY[1].slice(3));
@@ -344,7 +344,7 @@ async function checkLinks(p, tag) {
       && JSON.stringify([...o[0].querySelectorAll('a')].map((a) => a.getAttribute('href')).sort()) === JSON.stringify([...rh].sort());
   }, RH));
   check(`${tag}: one ARGUED, one MODEL and one NUM box`, await p.evaluate(() => ['argued', 'model', 'num'].every((c) => document.querySelectorAll(`#evidence .lean.${c}`).length === 1)));
-  check(`${tag}: bilingual theory link to §34.28`, same(await p.$$eval('#drawer a[href^="../../"]', (els) => els.map((e) => e.getAttribute('href')).sort()), [...THEORY].sort()));
+  check(`${tag}: bilingual theory link to §31.1`, same(await p.$$eval('#drawer a[href^="../../"]', (els) => els.map((e) => e.getAttribute('href')).sort()), [...THEORY].sort()));
 }
 
 /* ---------- runtime contract ---------- */

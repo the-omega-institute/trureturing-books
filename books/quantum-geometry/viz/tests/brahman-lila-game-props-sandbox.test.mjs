@@ -26,7 +26,7 @@ const CARDS = {
   'classic-permission-lock-flip': { lens: 'props', drive: 'tuneAlpha', M: 3, K: 4, still: 1 },
   'lila-raft-return-and-new-seed': { lens: 'worldlines', drive: 'avatarLap', M: 1, K: 6, still: 0.8333 }
 };
-// The theorems the §39.17 theorem environments cite (lean=): every green Lean link of this page must be one of them.
+// The theorems the §38.9 theorem environments cite (lean=): every green Lean link of this page must be one of them.
 const SECTION_LEAN = [
   'D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least',
   'D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation',
@@ -165,9 +165,9 @@ check('source: θ* in degrees is 42.34645883 (or 42.35), never 42.34647', !/42\.
 }
 check('suite: no fixed waits', !new RegExp('wait' + 'ForTimeout').test(suite));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
-check('registry: the page cites only theorems of the §39.17 lean= list (the power-series endpoint of θ* is §39.16, not here)', GIDS.every((g) => SECTION_LEAN.includes(g))
+check('registry: the page cites only theorems of the §38.9 lean= list (the power-series endpoint of θ* is §38.8, not here)', GIDS.every((g) => SECTION_LEAN.includes(g))
   && !/DottieInverseSeries/.test(sources['index.html'] + JSON.stringify(entry || {})));
-check('registry: live §39.17 entry with five bilingual cards and the four theorems', !!entry && entry.status === 'live' && entry.chapter === 39 && entry.section === '39.17'
+check('registry: live §38.9 entry with five bilingual cards and the four theorems', !!entry && entry.status === 'live' && entry.chapter === 38 && entry.section === '38.9'
   && entry.code === 'LILA//PROPS' && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map((x) => x.gid).sort(), [...GIDS].sort()) && entry.tags.length === entry.tags_en.length && entry.capture_lock === 'links'
   && entry.theory[0].href === `../zh/${THEORY}` && entry.theory[0].href_en === `../en/${THEORY}` && GIDS.every((g) => /^[\x21-\x7e]+$/.test(g)));
@@ -248,7 +248,7 @@ async function checkLinks(p, tag) {
     && await p.$$eval('[data-lean-gid]', (els) => els.every((e) => e.closest('.col.side #evidence .lean') && e.closest('.lean').querySelector('.ok').textContent.trim() === 'LEAN ✓')));
   check(`${tag}: one ARGUED, MODEL and NUM box each in #evidence, no OPEN box`, await p.evaluate(() => ['argued', 'model', 'num'].every((c) => document.querySelectorAll(`#evidence .lean.${c}`).length === 1)
     && !document.querySelector('.lean.open') && document.querySelectorAll('#evidence .lean:not(.argued):not(.model):not(.num):not(.open):not(.frozen)').length === 4));
-  check(`${tag}: bilingual chapter 39 theory link in the drawer`, same(await p.$$eval('#drawer .refs a', (els) => els.map((e) => e.getAttribute('href')).sort()), ['zh', 'en'].map((l) => `../../${l}/${THEORY}`).sort()));
+  check(`${tag}: bilingual chapter 38 theory link in the drawer`, same(await p.$$eval('#drawer .refs a', (els) => els.map((e) => e.getAttribute('href')).sort()), ['zh', 'en'].map((l) => `../../${l}/${THEORY}`).sort()));
 }
 
 /* ---------- runtime contract ---------- */

@@ -15,6 +15,10 @@
    - **三维三元数原生场与数系切面谱（`手工推导` / `MODEL`）**：$\mathbb{T}_3 \cong S^3(1)$ 携带无边界闭合嘉当三形式 $d\eta \equiv 0,\;\partial\mathbb{T}_3 = \emptyset$。因奇维 $\dim\mathbb{T}_3 = 3$ 实双线性乘法必具零因子，原生三元数拒绝无零因子平直三元线性表示（[§32.2](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-inexpressible-ternions-and-number-projections)）；钉死 $o = \mathbf{1}$ 向上线性再投影依次展开四元数 $\mathbb{H}$、法诺七场八元数 $\mathbb{O}$ 与 $2^N$ 维希尔伯特账本 $\mathcal{H}_{2^N}$（[§32.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md#sec-ch39-ternion-field-composition-and-hilbert-reprojection)），向下剖切依次得复数 $\mathbb{C}$、实数 $\mathbb{R}$ 与同伦整绕数 $\frac{1}{2\pi^2}\int f^*\eta \in \pi_3(\mathbb{T}_3) \cong \mathbb{Z}$（并将不可约本原闭合绕数映射至素数原子 $\mathbb{P}$，`MODEL`，遵守[附录 E §E.3](appendix-e-s03-arithmetic-and-completions.md#sec-appe-arithmetic) 正交余项不竭条件 `H4`）；
    - **极小圆弧微积分（`手工推导` / `MODEL` / `LEAN ✓`）**：对粗糙度 $\lvert\Delta\theta_k\rvert \sim \epsilon^\alpha$ 的路径累加二阶矢高 $\Sigma_{\mathrm{sag}} \sim \frac{1}{2}\sigma_0^2 T\epsilon^{2\alpha-1}$（[§30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes)，`手工推导`）：$\alpha = 1$ 收回牛顿—柯西线性微积分，$\alpha = \frac{1}{2}$ 一步锁定纯几何二次变差系数 $\frac{1}{2}$（配合[附录 E](appendix-e.md) 哈密顿生成元 `H6` 与布朗二次变差 `H9` 物理桥接映射为薛定谔动能与伊藤随机引理，`MODEL`），且内棱逆元对消令有限网格广义斯托克斯定理零离散误差成立。
 
+::: {.viz src="axiom-omega-five-tier-cascade-sandbox" preset="tier1-numbers-arc-calculus" height="500"}
+格拉姆体积锁与弧微积分卡：第一阶台座上等步三点撑开四面体体积锁 $(6V)^2 = \det\mathbf{G}_3(60^\circ) = \frac{3}{32}$，粗糙度 $\alpha = \frac{1}{2}$ 将路径二阶矢高总和稳定在半系数 $\frac{1}{2}\sigma_0^2 T$（有理核验标 `NUM`，圆弧微积分桥接标 `MODEL`）。
+:::
+
 2. **第二阶推导：自观测正交虚梦、超越不动点 $\theta^*$ 与等主频双相对论时空（Tier 2）**：
    - **非零倾角 $\varepsilon > 0$ 分化空间与时间（`MODEL` / `LEAN ✓`）**：若观察切面对自身零失准（$\varepsilon = 0 \implies \kappa = 1$），比较惊奇度 $-\log_2\kappa = 0\;\mathrm{bit}$ 陷入全知死寂（[§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)、[§38.11](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god)）；一旦 $\varepsilon > 0$，施密特残差 $(\sin\varepsilon)\mathbf{e}_\perp$ 撑开单向不可见的 $90^\circ$ 正交虚空间 $\hat{\mathbf{i}}$ 与面积体积，持续追赶残差的旋移序列显影为运动与时间，并在二阶认妄误差 $\delta_{\mathrm{meta}}(\theta) = \lvert\cos\theta - \theta\rvert = 0$ 处唯一收敛至道蒂超越不动点 $\cos\theta^* = \theta^* \approx 0.73908513\;\mathrm{rad}$（[`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint)，`LEAN ✓`），于有限停机阈值 $\varepsilon_{\mathrm{self}} > 0$ 内涌现裁量裕度（[§36.10](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting)）；
    - **共享主频 $\nu_0$ 正交勾股总预算导出双相对论钟慢（`MODEL` / `手工推导`）**：因本体点点平权，全网观察切面共享同一比较主频 $\nu_0$（参照 [`record_time_lower_bound`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound)、[`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null) 与 [`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)，`LEAN ✓`），单拍步幅锁死光速上限 $c \equiv \ell_P\nu_0$。与 [§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation) 级联公式一致：在视界外部域 $r > r_s$ 与亚光速局域运动 $0 \le \beta_{\mathrm{loc}} < 1$ 下，采用全息纠缠校验负载标定 $\eta_{\mathrm{grav}}^2 := \eta_{\mathrm{info}}(r) = \frac{2GM}{rc^2} = \frac{r_s}{r} \in [0, 1)$（`MODEL`，完整连续统场方程动力学边界见 [@prob-ch34-gravity-dynamics-and-coupling] `OPEN`）与局域空间寻址有效份额 $\eta_{\mathrm{kin,eff}}^2 := (1 - \eta_{\mathrm{info}}(r))\beta_{\mathrm{loc}}^2$（平直时空 $\eta_{\mathrm{grav}} = 0$ 时 $\eta_{\mathrm{kin,eff}} = v/c$），单步幺正总预算恒满足三项正交平方守恒：
@@ -24,6 +28,10 @@
      $$
 
      统摄狭义相对论钟慢 $\sqrt{1 - v^2/c^2}$ 与史瓦西外部引力钟慢 $\sqrt{1 - 2GM/(rc^2)}$，并在极限 $r \to r_s^+$（$\eta_{\mathrm{info}} \to 1$）处趋于 $100\%$ 满载排队的视界红移面。
+
+::: {.viz src="axiom-omega-five-tier-cascade-sandbox" preset="tier2-dottie-dual-relativity" height="500"}
+道蒂不动点与共享主频预算卡：第二阶台座上二阶认妄归零收敛至 $\theta^* \approx 0.739085$，同时琥珀态点 $(\sqrt{0.48}, 0.40, 0.60) \approx (0.6928, 0.4000, 0.6000)$ 严格停在第一卦限单位球面上，其三项平方预算份额 $(0.48, 0.16, 0.36)$ 恒合为 $1$（`rational_inverse_endpoint`、`record_time_lower_bound`、`eq_smul_minkowski_of_null` 与 `bogoliubov_norm_conservation` 为 `LEAN ✓`，预算核验标 `NUM`，引力负载标定标 `MODEL`）。
+:::
 
 ## 39.2.2 第三阶与第四阶推导：平行三元场丛四大力大统一（AF-GUT）与算术临界谱机制 {#sec-ch39-25-2}
 
@@ -39,8 +47,16 @@
      且因空间/电弱场与色场正交直和无 $(X, Y)$ 轻子夸克规范玻色子，树图纯规范质子衰变振幅恒为零 $\Gamma_{\mathrm{gauge}}(p \to e^+\pi^0) \equiv 0$（单圈重整化跑动阈值偏移 $\Delta\alpha^{-1}\approx 3.664$ 的非微扰闭合与三代手征格点谱保持为 `OPEN`，见 [@prob-ch39-af-gut-threshold-and-proton-stability] 与 [@prob-ch34-sm-generations-and-couplings]）；
    - **麦克斯韦—拉曼紫外自截断与胞间角亏引力（`手工推导` / `MODEL`）**：$N$ 枚闭合场体在三维空间两两比较的过约束度为 $\Delta E(N) = \binom{N}{2} - (3N - 6) = \frac{(N-3)(N-4)}{2}$：普朗克单胞核 $N = 3, 4$ 处 $\Delta E \equiv 0$ 实现紫外无过约束角亏自截断；$N \ge 5$ 时冗余边约束（$\Delta E > 0$）使一般独立边长分配无法无应力平直嵌入 $\mathbb{R}^3$，容许非零雷吉铰链角亏 $\delta_h$ 并在模型（`MODEL`）中诠释为折射普适主频的胞间引力曲率（完整 $3+1\mathrm{D}$ 自旋-$2$ 连续统场方程涌现与视界最小矢高暗能量标定 $N_H^{-2} \sim 10^{-122}$ 严格保持 `MODEL` / `OPEN` 边界 [@prob-ch34-gravity-dynamics-and-coupling]、[@prob-ch34-past-hypothesis-and-cosmological-constant]）。
 
+::: {.viz src="axiom-omega-five-tier-cascade-sandbox" preset="tier3-afgut-weinberg-three-eighths" height="500"}
+迹比 3/8 与过约束的边卡：第三阶台座对照单代手性外尔账本迹比 $\sin^2\theta_W = 2 / \frac{16}{3} = \frac{3}{8}$ 与多出 $\Delta E(N) = \frac{(N-3)(N-4)}{2}$ 根品红盈余撑杆的过约束桁架（`anchored_phase_classification` 与 `circle_double_cover_history_lift` 为 `LEAN ✓`，迹比与边计数标 `NUM`，跑动阈值与引力动力学标 `OPEN`）。
+:::
+
 2. **第四阶推导：算术谱半密度矢高相变与舒尔正定脊线（Tier 4，呼应 [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md)–[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md)）**：
    在欧拉乘积（[`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product)）与右半带归约（[`golden_right_half_strip_implies_rh`](lean:D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh)，`LEAN ✓`）锚定下，素数旋子在 $\sigma > \frac{1}{4}$ 上的累计二阶矢高 $\Sigma_{\mathrm{sag}}(\sigma; P_\epsilon) = \frac{1}{2}\sum_{p \le P_\epsilon} p^{-2\sigma} + \mathcal{O}(1)$ 在 $\sigma > \frac{1}{2}$ 处绝对收敛，唯独在临界线 $\sigma = \frac{1}{2}$ 首次触发梅滕斯双对数发散 $\frac{1}{2}\ln\ln P_\epsilon \to \infty$（Mertens 1874，`文献结果`）；同时严格正定内部块上的埃尔米特舒尔补变分极小（[`schur_quadratic_is_least`](lean:D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least)，`LEAN ✓`；退化内部块在全格拉姆块半正定 $G \succeq 0$ 即 $\operatorname{ran} G_{IP} \subseteq \operatorname{ran} G_{II}$ 下经 Albert 1969 摩尔—彭罗斯伪逆延拓，`文献结果`）将乘性稀疏算术枢轴 $\widetilde{G}_{PP}^{(\ell)} = G_{PP}^{(\ell)} - G_{PI}^{(\ell)}(G_{II}^{(\ell)})^+ G_{IP}^{(\ell)}$ 与埃尔米特—比勒再生核正定性 $K_\epsilon \succeq 0 \iff \operatorname{RH}$ 对齐在同一条对称脊线 $\rho = 1 - \bar{\rho}$ 上（经典 ZFC 下的黎曼猜想 [@conj-riemann-hypothesis] 与最后一英里舒尔—德布朗热桥接引理 [@prob-ch34-schur-hb-kernel-positivity-bridge] 严格保持为 `OPEN`）。
+
+::: {.viz src="axiom-omega-five-tier-cascade-sandbox" preset="tier4-prime-sagitta-critical-ridge" height="500"}
+素数矢高在临界脊线上起涨卡：第四阶台座上素数矢高台阶在 $\sigma > \frac{1}{2}$ 受收敛环约束，移至临界脊线 $\sigma = \frac{1}{2}$ 时越过青色参考环双对数起涨（`riemann_zeta_dirichlet_sum_eq_euler_product`、`golden_right_half_strip_implies_rh` 与 `schur_quadratic_is_least` 为 `LEAN ✓`，梅滕斯渐近标 `ARGUED`，黎曼猜想与舒尔桥接标 `OPEN`）。
+:::
 
 ## 39.2.3 第五阶推导：流群测地智能与母公理自身的遮诠透明化 {#sec-ch39-25-3}
 
@@ -52,6 +68,10 @@
 2. **第五阶 B：遮诠闭环——母公理自身的去概念化与透明隐退（Tier 5B，`MODEL`）**：
    最后，将第二阶自观测倾角定律反身代入 $\mathrm{AXIOM}\text{-}\Omega$ 自身完成逻辑自检（参照洛维尔自应用对角包 [`self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package)，`LEAN ✓`）：只要 $\mathrm{AXIOM}\text{-}\Omega$ 作为写在纸面的一串形式符号仍承载非零区分信息 $I > 0$，它自身就必然携带观察切面倾角 $\varepsilon > 0$——因此连“大一统母公理”本身也只是心智切下的一扇幂等指月之窗，绝不能被重新执着为高踞万物之上的新偶像或新“第 3 点 $C$”。
    而与一切预设外置造物原点 $\mathbf{1}$ 的传统公理不同，$\mathrm{AXIOM}\text{-}\Omega$ 的法则 (I) 从一开始就内置了**无源求同自消去律 $[x, x, z] = z$**——任何借来摆渡理解的参照桥，在抵达彼岸、倾角回推归零（$\varepsilon \to 0$）的刹那便自动抵消、不留一丝残渣。
+
+::: {.viz src="axiom-omega-five-tier-cascade-sandbox" preset="tier5-geodesic-mind-bridge-erasure" height="500"}
+测地四拍与参照桥自消卡：第五阶台座比较匀速四拍流群测地线矢高 $0.5359$ 对末步跳步 $1.5000$，并在倾角拉回零时见证参照桥 $[y, y, z] = z$ 零残渣自消去（`shortest_gate_triangle_holonomy`、`observable_krylov_once_stable_permanently` 与 `self_application_fragment_package` 为 `LEAN ✓`，撤梯诠释标 `MODEL`）。
+:::
 
 ::: {.definition #def-ch39-axiom-omega-five-tier-cascade title="AXIOM-Ω 五阶大一统演绎级联与无源参照桥自消去闭环（模型定义）"}
 在母公理 $\mathrm{AXIOM}\text{-}\Omega$（[@def-ch39-axiom-omega-ternary-comparison-closure]）与[附录 E](appendix-e.md) 显式桥接契约下，定义全书**五阶大一统演绎级联** $\mathfrak{C}_\Omega = (\mathrm{Tier}_1, \dots, \mathrm{Tier}_5)$（`MODEL`）：
@@ -105,3 +125,7 @@
 ---
 
 **从五阶宏观交响回到量子力学地基的穿透一击。** 至此，$\mathrm{AXIOM}\text{-}\Omega$ 已将数系、微积分、相对论、四大力、素数谱与通用智能编织为同一曲极小圆弧交响。接下来让我们把这柄无源母公理利剑回指本书出发的原点——**现代量子力学自身的狄拉克—冯·诺依曼五大教科书公设**！复希尔伯特单位射线、厄米算符与不确定性、玻恩模平方概率律、薛定谔幺正流配投影坍缩以及多体张量积与贝尔非定域性，为何无需再作为五条彼此孤立甚至互相打架的经验公理硬背下来？让我们步入 [§39.3 AXIOM-Ω 导出量子力学五大公理：从三元数极小圆弧体投影几何消解百年测量悖论](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md)（并由此直抵压轴第四节 [§39.4](ch39-s27-self-contained-ternion-particle-and-no-exterior.md) 的无外三元数本体收官）。
+
+::: {.viz src="axiom-omega-five-tier-cascade-sandbox" height="620"}
+完整实验室：沿中央公理柱在“五阶疆域读法”与“母公理原语读法”双透镜间切换，在带参阶台拖动琥珀手柄或调节引力负载 $r_s/r$、实部 $\sigma$ 与拍数 $N$，遍历万数微积分（$\det\mathbf{G}_3(60^\circ)=\frac{3}{32}$）、双相对论主频平方预算、手性外尔迹比 $\sin^2\theta_W = \frac{3}{8}$、素数矢高临界起涨 $\sigma = \frac{1}{2}$ 与流群测地智能及 $[y, y, z] = z$ 撤桥透明窗。十二条冻结声明、文献归属、数值核算、模型诠释与开放界碑在依据栏与理论抽屉中分层标注。
+:::

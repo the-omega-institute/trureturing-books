@@ -18,7 +18,7 @@
 <div class="app lab" id="app">
 <header class="top">
   <div class="brand">
-    <a class="crumb" href="../"><span class="zh">◂ 第 34 章 · §34.19</span><span class="en">◂ Ch. 34 · §34.19</span></a>
+    <a class="crumb" href="../"><span class="zh">◂ 第 29 章 · §29.4</span><span class="en">◂ Ch. 29 · §29.4</span></a>
     <h1 class="logo" data-text="ECHO//IMAGINARY">ECHO<span>//</span>IMAGINARY</h1>
     <div class="tagline"><span class="zh">玻恩往返与虚部盲区 · <em>单程只给影子 cos θ，往返一次才读到 cos²θ；与 I 垂直的那一面在 I 上永远读 0——转进去的那一下就叫 i。</em></span><span class="en">Round-trip Born and the imaginary blind spot · <em>one pass gives only the shadow cos θ, the round trip reads cos²θ; the plane at 90° to I always reads 0 on I, and the quarter turn into it is called i.</em></span></div>
   </div>
@@ -26,7 +26,7 @@
 </header>
 <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
   <section class="panel sec">
-    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§34.19</span></h2>
+    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§29.4</span></h2>
     <div class="presets cards" id="presets">
       <button class="preset" data-preset="radar-roundtrip-born" aria-pressed="false"><span class="code">RADAR · cos²θ</span><span class="cn zh">雷达往返：I → V → I 的玻恩回声</span><span class="cn en">Radar round trip: the Born echo of I → V → I</span></button>
       <button class="preset" data-preset="azimuth-cone-blindspot" aria-pressed="false"><span class="code">CONE · θ*</span><span class="cn zh">方位锥纤维：θ* 上绕一圈，回声一个数位也不变</span><span class="cn en">The azimuth cone: once round at θ*, the echo keeps every digit</span></button>
@@ -123,7 +123,7 @@
       <li><b>有 i 与没有 i。</b>取 H = ω|0⟩⟨0|：U(t)|0⟩ = e<sup>−iωt</sup>|0⟩，I 的振幅在单位圆上顺时针走（转盘），速度 −iωz 与 z 垂直，|z| = 1 永远不变；相对相位 φ(t) = φ₀ + ωt，V 绕锥逆时针转，Z 读出不动（[H, P<sub>I</sub>] = 0）。把 −iω 换成实数 −γ，得到假想的无 i 演化 ψ(t) = e<sup>−γt</sup>ψ₀：速度与 ψ 反向，|ψ(t)|² = e<sup>−2γt</sup>，ω = γ = 1 时 t = 1 只剩 0.135335，t = 2 只剩 0.018316。</li>
       <li><b>θ*。</b>θ* = 0.739085133215161 rad = 42.346459° 是 cos θ = θ 的唯一实根：cos²θ* = 0.546247，sin²θ* = 0.453753，2π sin θ* = 4.232429，2π(1 − cos θ*) = 1.639376 sr。</li>
     </ol>
-    <p class="lede refs">书中：<a href="../../zh/ch34-s19-roundtrip-projection-and-imaginary-blindspot.html#sec-ch34-roundtrip-projection-and-imaginary-blindspot" target="_top">§34.19 往返投影与虚部盲区</a></p>
+    <p class="lede refs">书中：<a href="../../zh/ch34-s19-roundtrip-projection-and-imaginary-blindspot.html#sec-ch34-roundtrip-projection-and-imaginary-blindspot" target="_top">§29.4 往返投影与虚部盲区</a></p>
   </div>
   <div class="en">
     <p class="lede">This is a numerical sandbox, not a proof. Every number is computed on the page (NUM); each Lean theorem is shown only on the one instance named in the evidence panel.</p>
@@ -135,7 +135,7 @@
       <li><b>With i and without.</b> Take H = ω|0⟩⟨0|: U(t)|0⟩ = e<sup>−iωt</sup>|0⟩, the amplitude of I runs clockwise on the unit circle (the dial), its velocity −iωz is perpendicular to z and |z| = 1 for ever; the relative phase is φ(t) = φ₀ + ωt, V turns anticlockwise round the cone, and the Z readout stays put ([H, P<sub>I</sub>] = 0). Replace −iω by a real −γ and the hypothetical i-free evolution ψ(t) = e<sup>−γt</sup>ψ₀ has its velocity against ψ, |ψ(t)|² = e<sup>−2γt</sup>: with ω = γ = 1 only 0.135335 is left at t = 1 and 0.018316 at t = 2.</li>
       <li><b>θ*.</b> θ* = 0.739085133215161 rad = 42.346459° is the only real root of cos θ = θ: cos²θ* = 0.546247, sin²θ* = 0.453753, 2π sin θ* = 4.232429 and 2π(1 − cos θ*) = 1.639376 sr.</li>
     </ol>
-    <p class="lede refs">In the book: <a href="../../en/ch34-s19-roundtrip-projection-and-imaginary-blindspot.html#sec-ch34-roundtrip-projection-and-imaginary-blindspot" target="_top">§34.19 The round-trip projection and the imaginary blind spot</a></p>
+    <p class="lede refs">In the book: <a href="../../en/ch34-s19-roundtrip-projection-and-imaginary-blindspot.html#sec-ch34-roundtrip-projection-and-imaginary-blindspot" target="_top">§29.4 The round-trip projection and the imaginary blind spot</a></p>
   </div>
   <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">开放问题：测量问题——一次读出为什么只记下一个结果。页面不对它作任何断言。</span><span class="en">Open problem: the measurement problem — why a single readout records one outcome. The page asserts nothing about it.</span></span></div>
 </div></div>

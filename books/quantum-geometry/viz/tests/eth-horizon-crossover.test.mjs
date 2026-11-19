@@ -348,10 +348,10 @@ const shown = {};
 for (const lang of ['zh', 'en']) { await page.click(`[data-lang-set="${lang}"]`); await settle(page); shown[lang] = await D(() => document.body.innerText + ' ' + [...document.querySelectorAll('[aria-label],[data-aria-en],[title]')].map((e) => [e.getAttribute('aria-label'), e.getAttribute('data-aria-en'), e.getAttribute('title')].join(' ')).join(' ') + ' ' + document.getElementById('drawer').textContent); }
 check('red line (中文): nothing on the page, in its sources or in its registry entry says ETH is falsified', !RED_ZH.test(sources) && !RED_ZH.test(shown.zh) && !RED_ZH.test(shown.en) && RED_ZH.test('预印本证伪了 ETH') && RED_ZH.test('ETH 已被推翻'), (sources.match(RED_ZH) || shown.zh.match(RED_ZH) || [''])[0]);
 check('red line (English): nothing on the page, in its sources or in its registry entry says ETH is false', !RED_EN.test(sources) && !RED_EN.test(shown.zh) && !RED_EN.test(shown.en) && RED_EN.test('the preprints refute the ETH') && RED_EN.test('The Exponential Time Hypothesis Is False'), (sources.match(RED_EN) || shown.en.match(RED_EN) || [''])[0]);
-check('ETH is marked OPEN in both languages; the candidate curve is the schematic upper bound reported in chapter 30 (MODEL); the PPSZ table is ARGUED for the uniquely satisfiable case', await D(() => {
+check('ETH is marked OPEN in both languages; the candidate curve is the schematic upper bound reported in chapter 26 (MODEL); the PPSZ table is ARGUED for the uniquely satisfiable case', await D(() => {
   const open = document.querySelector('#evidence .lean.open'), model = document.querySelector('.lean.model[data-scenes="rates"]'), argued = document.querySelector('.lean.argued[data-scenes="rates"]');
   return !!open && /指数时间假设/.test(open.querySelector('.zh').textContent) && /ETH/.test(open.querySelector('.zh').textContent) && /exponential time hypothesis/.test(open.querySelector('.en').textContent) && /开放问题/.test(open.textContent) && /Open problems/.test(open.textContent)
-    && !!model && /第 30 章所转述的亚指数候选上界示意曲线/.test(model.textContent) && /candidate subexponential upper bound reported in chapter 30/.test(model.textContent)
+    && !!model && /第 26 章所转述的亚指数候选上界示意曲线/.test(model.textContent) && /candidate subexponential upper bound reported in chapter 26/.test(model.textContent)
     && !!argued && /文献结果，未在本书形式化/.test(argued.textContent) && /唯一可满足/.test(argued.textContent) && /uniquely satisfiable/.test(argued.textContent) && /0\.3863、0\.5548、0\.6502、0\.7118/.test(argued.textContent);
 }));
 await page.click('[data-lang-set="zh"]'); await settle(page);

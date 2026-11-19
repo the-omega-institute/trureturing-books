@@ -138,7 +138,7 @@ check('source: all five cards in public order', same([...sources['index.html'].m
 check('source: wheel false leaves host scrolling enabled', /wheel:\s*false/.test(sources['main.js']));
 check('source: exact eight frozen GIDs', same([...sources['index.html'].matchAll(/data-lean-gid="([^"]+)"/g)].map(m => m[1]).sort(), [...GIDS].sort()));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find(v => v.id === ID);
-check('registry: live 34.10 entry, all five bilingual cards and exact eight GIDs', entry.status === 'live' && entry.chapter === 34 && entry.section === '34.10'
+check('registry: live 29.11 entry, all five bilingual cards and exact eight GIDs', entry.status === 'live' && entry.chapter === 29 && entry.section === '29.11'
   && same(entry.presets, Object.keys(CARDS)) && entry.presets.every(c => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map(x => x.gid).sort(), [...GIDS].sort()));
 

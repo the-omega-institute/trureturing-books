@@ -176,7 +176,7 @@ check('source: the four cards in order', JSON.stringify([...sources['index.html'
 check('source: only the shared runtime and the page script', JSON.stringify([...sources['index.html'].matchAll(/<script src="([^"]+)"/g)].map((m) => m[1])) === '["../assets/shell.js","../assets/kit.js","main.js"]');
 check('source: no green Lean box', !/class="lean"|class="lean frozen"|data-lean-gid/.test(sources['index.html']));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID) || {};
-check('registry: live entry, no Lean list, theory link to §34.19', entry.status === 'live' && Array.isArray(entry.lean) && entry.lean.length === 0 && entry.code === 'SCATTER//TIME'
+check('registry: live entry, no Lean list, theory link to §29.4', entry.status === 'live' && Array.isArray(entry.lean) && entry.lean.length === 0 && entry.code === 'SCATTER//TIME'
   && entry.path === `${ID}/` && entry.thumbnail === `${ID}/thumb.jpg` && (entry.theory || []).some((t) => /ch34-s19-roundtrip-projection-and-imaginary-blindspot\.html#sec-ch34-19-5$/.test(t.href)));
 
 /* ---------- opening and the cards ---------- */

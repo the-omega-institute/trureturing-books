@@ -245,7 +245,7 @@ async function checkContract(p, tag, desktop = false) {
   if (desktop) check(`${tag}: three actual grid columns and visible separated panels`, dom.columns === 3 && dom.separated && dom.panels);
   check(`${tag}: twelve exact frozen theorem links and honest evidence categories`, same(dom.gids, GIDS) && dom.lean
     && same(dom.kinds, [1, 1, 1]) && dom.opens === 4 && dom.outside === 0);
-  check(`${tag}: exact relative bilingual §34.14 chapter links`, same(dom.links.sort(), [...THEORY].sort()));
+  check(`${tag}: exact relative bilingual §33.2 chapter links`, same(dom.links.sort(), [...THEORY].sort()));
 }
 
 const sources = Object.fromEntries(['index.html', 'main.js', 'style.css'].map(file => [file, fs.readFileSync(path.join(DIR, file), 'utf8')]));
@@ -258,7 +258,7 @@ check('source: shared lab grid and wheel:false', !/\.app\.lab[^{}]*\{[^}]*grid-t
   && /wheel:\s*false/.test(sources['main.js']));
 check('source: exact five public presets in order', same([...sources['index.html'].matchAll(/data-preset="([^"]+)"/g)].map(m => m[1]), Object.keys(CARDS)));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find(v => v.id === ID);
-check('registry: live §34.14 with five bilingual presets and twelve exact GIDs', entry.status === 'live' && entry.section === '34.14'
+check('registry: live §33.2 with five bilingual presets and twelve exact GIDs', entry.status === 'live' && entry.section === '33.2'
   && same(entry.presets, Object.keys(CARDS)) && entry.presets.every(c => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map(x => x.gid), GIDS));
 

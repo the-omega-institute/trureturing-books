@@ -155,10 +155,10 @@ check('source: solid stage explicitly leaves wheel scrolling to its host', /whee
 check('source: exact nine frozen theorem links', same([...sources['index.html'].matchAll(/data-lean-gid="([^"]+)"/g)].map(m => m[1]).sort(), [...GIDS].sort()));
 const registry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations;
 const entry = registry.find(v => v.id === ID), position = registry.indexOf(entry), berry = registry.findIndex(v => v.id === 'berry-sector-path-sandbox');
-check('registry: live chapter 34.9 entry, code separated from bilingual titles', entry.status === 'live' && entry.chapter === 34 && entry.section === '34.9'
+check('registry: live chapter 29.10 entry, code separated from bilingual titles', entry.status === 'live' && entry.chapter === 29 && entry.section === '29.10'
   && entry.code === 'REVERSAL//CASCADE' && !entry.title.includes('//') && !entry.title_en.includes('//')
   && same(entry.presets, Object.keys(CARDS)) && entry.presets.every(c => entry.preset_titles[c].zh && entry.preset_titles[c].en));
-check('registry: chapter 34 card precedes the chapter 38 horizon', position < registry.findIndex(v => v.id === 'uncompleted-horizon-sandbox')
+check('registry: chapter 29 card precedes the chapter 36 horizon', position < registry.findIndex(v => v.id === 'uncompleted-horizon-sandbox')
   && berry >= 0 && position > berry && position === registry.findIndex(v => v.id === 'clifford-monad-tiling-sandbox') + 1);
 check('registry: exact nine frozen theorem registrations', same(entry.lean.map(x => x.gid).sort(), [...GIDS].sort()));
 

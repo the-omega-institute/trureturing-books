@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>HALT//SORT 自指停机精度、时间长河正交折叠与测量基谱排序</title>
-<meta name="description" content="第三十九章 §39.7 的五张实验卡。余弦迭代 xₖ = cos xₖ₋₁（x₀ = 0）在自定精度 ε 处停机：ε = 0.150 时第 5 步 |x₅ − x₄| = 0.1392 ≤ ε；六模态按玻恩权重在 ε = 0.100 处分成立在 I 墙上的三模与折进 î 河的三模，0.9155 + 0.0845 = 1；幂迭代 (σₘ/σ₁)⁴ 只让前两模过 ε = 0.120，迭代份额 99.33%，原始秩 2 能量 77.27%；测量基转到 α = 65° 时瑞利权重 0.6273、0.2525、0.1202，和为 1；N = 16 次频闪检查后存活 [cos²(π/64)]¹⁶ = 0.9622，不看则 0.5000。Five experiment cards for §39.7 of Chapter 39. The cosine iteration xₖ = cos xₖ₋₁ (x₀ = 0) halts at a precision of its own: for ε = 0.150 at step 5, |x₅ − x₄| = 0.1392 ≤ ε; six modes split by Born weight at ε = 0.100 into three standing on the wall I and three folded into the river î, 0.9155 + 0.0845 = 1; power iteration (σₘ/σ₁)⁴ lets only the top two modes clear ε = 0.120, iterated share 99.33%, raw rank-2 energy 77.27%; a measurement basis turned to α = 65° gives Rayleigh weights 0.6273, 0.2525, 0.1202 summing to 1; after N = 16 strobe checks the survival is [cos²(π/64)]¹⁶ = 0.9622, against 0.5000 unwatched.">
+<meta name="description" content="第三十六章 §36.10 的五张实验卡。余弦迭代 xₖ = cos xₖ₋₁（x₀ = 0）在自定精度 ε 处停机：ε = 0.150 时第 5 步 |x₅ − x₄| = 0.1392 ≤ ε；六模态按玻恩权重在 ε = 0.100 处分成立在 I 墙上的三模与折进 î 河的三模，0.9155 + 0.0845 = 1；幂迭代 (σₘ/σ₁)⁴ 只让前两模过 ε = 0.120，迭代份额 99.33%，原始秩 2 能量 77.27%；测量基转到 α = 65° 时瑞利权重 0.6273、0.2525、0.1202，和为 1；N = 16 次频闪检查后存活 [cos²(π/64)]¹⁶ = 0.9622，不看则 0.5000。Five experiment cards for §36.10 of Chapter 36. The cosine iteration xₖ = cos xₖ₋₁ (x₀ = 0) halts at a precision of its own: for ε = 0.150 at step 5, |x₅ − x₄| = 0.1392 ≤ ε; six modes split by Born weight at ε = 0.100 into three standing on the wall I and three folded into the river î, 0.9155 + 0.0845 = 1; power iteration (σₘ/σ₁)⁴ lets only the top two modes clear ε = 0.120, iterated share 99.33%, raw rank-2 energy 77.27%; a measurement basis turned to α = 65° gives Rayleigh weights 0.6273, 0.2525, 0.1202 summing to 1; after N = 16 strobe checks the survival is [cos²(π/64)]¹⁶ = 0.9622, against 0.5000 unwatched.">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
 <div class="app lab" id="app">
   <header class="top">
     <div class="brand">
-      <a class="crumb" href="../"><span class="zh">◂ 可视化索引 · 第 39 章 · §39.7</span><span class="en">◂ Visualizations · Ch. 39 · §39.7</span></a>
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引 · 第 36 章 · §36.10</span><span class="en">◂ Visualizations · Ch. 36 · §36.10</span></a>
       <h1 class="logo" data-text="HALT//SORT">HALT<b>//</b>SORT</h1>
       <div class="tagline"><span class="zh">自指停机精度与谱排序沙盘 · <em>自己定的精度让迭代停下；精度以下的信息没有丢，折进时间之河，按轻重依次浮出。</em></span><span class="en">Self-halting precision and spectral sorting · <em>a self-chosen precision stops the iteration; what lies below it is not lost but folded into the river of time, surfacing heaviest first.</em></span></div>
     </div>
@@ -31,7 +31,7 @@
 
   <aside class="col deck" id="rail" aria-label="透镜与实验卡" data-aria-en="Lens and experiment cards">
     <section class="panel sec">
-      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§39.7</span></h2>
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§36.10</span></h2>
       <button class="lens-toggle" id="lensBtn" type="button" aria-pressed="false" aria-label="切换读法：观察者读法或算子读法" data-aria-en="Switch the reading: observer reading or operator reading"><span class="seg off"><span class="zh">观察者读法</span><span class="en">Observer reading</span></span><span class="seg on"><span class="zh">算子读法</span><span class="en">Operator reading</span></span></button>
       <div class="presets cards" id="presets">
         <button class="preset" data-preset="precision-agency-window" data-still="0.8239087409443188" aria-pressed="false"><span class="code">PRECISION · ε</span><span class="cn zh">ε = 0.150：第 5 步停机</span><span class="cn en">ε = 0.150: halting at step 5</span></button>
@@ -121,7 +121,7 @@
         <li><b>换基即换序。</b>ψ = (1, 2, 5)/√30。B(α) 是从位置基（α = 0°）到 DCT-II 频率基（α = 90°）的最短转动，w<sub>B</sub>(k) = ⟨b<sub>k</sub>|ρ|b<sub>k</sub>⟩ = cos²θ<sub>k</sub>，三者之和恒为 1。位置基里排序是 0.8333、0.1333、0.0333，频率基里倒过来是 0.7111、0.2667、0.0222；α = 65° 时是 0.6273、0.2525、0.1202，ε = 0.150 时前两个过线。</li>
         <li><b>频闪雕基。</b>不看时态在 ΩT = π/2 内从 |0⟩ 转到赤道，留在 |0⟩ 的概率 cos²(π/4) = 0.5000。均匀检查 N 次，每次只转 π/(4N)，留下的概率每次乘 cos²(π/(4N))；N = 16 时 [cos²(π/64)]¹⁶ = 0.9622，每次的横向漏失 sin²(π/64) = 0.0024，是步长的平方阶。</li>
       </ol>
-      <p class="lede refs">书中：<a href="../../zh/ch39-s07-self-halting-precision-and-spectral-sorting.html#sec-ch39-self-halting-and-spectral-sorting" target="_top">§39.7 自指主动停机精度、时间长河正交折叠与测量基特征谱排序</a></p>
+      <p class="lede refs">书中：<a href="../../zh/ch39-s07-self-halting-precision-and-spectral-sorting.html#sec-ch39-self-halting-and-spectral-sorting" target="_top">§36.10 自指主动停机精度、时间长河正交折叠与测量基特征谱排序</a></p>
     </div>
     <div class="en">
       <p class="lede">This is a numerical illustration, not a proof. Every number on the page is computed on the spot (NUM); each of the seven Lean theorems is shown only on the instance written below, and the reading of free will and of the river of time by the author is an interpretation, not a theorem.</p>
@@ -132,7 +132,7 @@
         <li><b>A new basis, a new order.</b> ψ = (1, 2, 5)/√30. B(α) is the shortest turn from the position basis (α = 0°) to the DCT-II frequency basis (α = 90°); w<sub>B</sub>(k) = ⟨b<sub>k</sub>|ρ|b<sub>k</sub>⟩ = cos²θ<sub>k</sub>, and the three always add up to 1. In the position basis the order is 0.8333, 0.1333, 0.0333; in the frequency basis it is reversed, 0.7111, 0.2667, 0.0222; at α = 65° it is 0.6273, 0.2525, 0.1202, and at ε = 0.150 the first two clear the line.</li>
         <li><b>Strobe sculpting.</b> Unwatched, the state turns from |0⟩ to the equator within ΩT = π/2 and stays in |0⟩ with probability cos²(π/4) = 0.5000. With N evenly spaced checks it turns only π/(4N) between them, and each check multiplies the staying probability by cos²(π/(4N)); for N = 16, [cos²(π/64)]¹⁶ = 0.9622, and the sideways leak at each check, sin²(π/64) = 0.0024, is of the order of the square of the step.</li>
       </ol>
-      <p class="lede refs">In the book: <a href="../../en/ch39-s07-self-halting-precision-and-spectral-sorting.html#sec-ch39-self-halting-and-spectral-sorting" target="_top">§39.7 Self-Referential Halting Precision, Orthogonal Time-River Folding, and Measurement-Basis Spectral Sorting</a></p>
+      <p class="lede refs">In the book: <a href="../../en/ch39-s07-self-halting-precision-and-spectral-sorting.html#sec-ch39-self-halting-and-spectral-sorting" target="_top">§36.10 Self-Referential Halting Precision, Orthogonal Time-River Folding, and Measurement-Basis Spectral Sorting</a></p>
     </div>
   </div>
 </div>

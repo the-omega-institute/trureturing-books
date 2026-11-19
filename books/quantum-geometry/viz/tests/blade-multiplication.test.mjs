@@ -4,7 +4,7 @@
 // It first runs the quality gates every stage-first page must pass, then reads the page through the read-only probe
 // window.BX_DEBUG and checks every claim against an independent computation written here: 2 × 2 complex matrices
 // (e₁ ↦ X, e₂ ↦ Y, e₃ ↦ Z, and the words Xᵃ Zᵇ), the product identified by searching all ± blades (no XOR, no
-// inversion formula), inversions counted pair by pair in the joined index string, and B(a) of chapter 25 squared.
+// inversion formula), inversions counted pair by pair in the joined index string, and B(a) from “Rewriting and XOR” squared.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -167,7 +167,7 @@ check('in the vector scene clicking a cell jumps to that term (4e₂ · 3e₁ is
 const chapterGids = [...new Set([...chapter.matchAll(/lean="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/)))].filter((g) => lock.declarations[g] && lock.declarations[g].kind === 'theorem');
 const url = (gid) => `https://github.com/${lock.repo}/blob/${lock.commit}/${gid.slice(0, gid.lastIndexOf('.'))}.lean#L${lock.declarations[gid].line}`;
 const map = await D(() => [...document.querySelectorAll('#declmap .lean a[data-lean-gid]')].map((a) => [a.dataset.leanGid, a.href]));
-check(`the declaration map lists exactly the ${chapterGids.length} theorems chapter 25 cites with lean=`, map.length === chapterGids.length && eq(map.map(([g]) => g).sort(), [...chapterGids].sort()), JSON.stringify(map.map(([g]) => g)));
+check(`the declaration map lists exactly the ${chapterGids.length} theorems “Rewriting and XOR” cites with lean=`, map.length === chapterGids.length && eq(map.map(([g]) => g).sort(), [...chapterGids].sort()), JSON.stringify(map.map(([g]) => g)));
 check('every entry of the map links to the pinned commit, file and line of the lock file', map.every(([g, h]) => h === url(g)));
 const links = await D(() => [...document.querySelectorAll('a[data-lean-gid]')].map((a) => a.dataset.leanGid));
 check('every green link on the page is one of the chapter’s theorems', links.every((g) => chapterGids.includes(g)));

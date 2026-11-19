@@ -18,7 +18,7 @@
 <div class="app lab" id="app">
 <header class="top">
   <div class="brand">
-    <a class="crumb" href="../"><span class="zh">◂ 第 34 章 · §34.28</span><span class="en">◂ Ch. 34 · §34.28</span></a>
+    <a class="crumb" href="../"><span class="zh">◂ 第 31 章 · §31.1</span><span class="en">◂ Ch. 31 · §31.1</span></a>
     <h1 class="logo" data-text="ZETA//SPIRAL">ZETA<span>//</span>SPIRAL</h1>
     <div class="tagline"><span class="zh">黎曼路径积分与素数极小圆弧体 · <em>每个整数是一支长 n<sup>−σ</sup>、转过 t ln n 的箭头；在临界线的零点上，延拓把整条螺旋收回原点 O。</em></span><span class="en">The Riemann path integral and prime minimal arcs · <em>every integer is an arrow of length n<sup>−σ</sup> turned by t ln n; at a zero on the critical line the continuation brings the whole spiral back to O.</em></span></div>
   </div>
@@ -26,7 +26,7 @@
 </header>
 <aside class="col deck" id="rail" aria-label="实验控制" data-aria-en="Experiment controls">
   <section class="panel sec">
-    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§34.28</span></h2>
+    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§31.1</span></h2>
     <div class="presets cards" id="presets">
       <button class="preset" data-preset="euler-dirichlet-phasor-spiral" aria-pressed="false"><span class="code">EULER · PATHS</span><span class="cn zh">欧拉局域绕行展开为复合路径相量螺旋，与莫比乌斯外积对偶</span><span class="cn en">Euler local windings unfold into the composite-path phasor spiral and its Möbius exterior dual</span></button>
       <button class="preset" data-preset="critical-zero-cancellation" aria-pressed="false"><span class="code">σ = ½ · ZERO</span><span class="cn zh">临界线零点：路径螺旋收回原点 O，正逆双壳等幅锁死</span><span class="cn en">Critical-line zero: the path spiral returns to O and the two shells lock</span></button>
@@ -104,7 +104,7 @@
       <li><b>余维数。</b>ξ(s) = ½ s(s − 1)π<sup>−s/2</sup>Γ(s/2)ζ(s) 满足 ξ(1 − s) = ξ(s) 与 ξ(1 − s̄) = conj ξ(s)，所以 ξ(½ + it) 是实数：沿临界线，零点是实函数的变号点。离开临界线要实部、虚部同时为零。这解释了零点为什么“容易”落在线上，但不证明它们都在线上：四次式 F 有同样的对称，零点却全在线外。</li>
       <li><b>素数阶梯。</b>显式公式 ψ₀(x) = x − Σ<sub>ρ</sub> x<sup>ρ</sup>/ρ − ln 2π − ½ ln(1 − x<sup>−2</sup>)：每对零点 ½ ± iγₖ 贡献一支驻波 −2Re(x<sup>ρ</sup>/ρ)，振幅 2√x/|ρ|。紫色曲面最后面一行只有主项，每向前一行多叠一对零点；最新的一行是琥珀色，紧贴在它前面的是青色的精确阶梯；前方地面上品红的残差 Σ<sub>k≤K</sub>(−2Re(x<sup>ρₖ</sup>/ρₖ)) 逼近青色锯齿 ψ₀(x) − 主项。条带小图量每个整数 n 处在 [n − ½, n + ½] 上的升高：精确值是 Λ(n)，素数幂处为 ln p，6、10、12 处为 0。</li>
     </ol>
-    <p class="lede refs">书中：<a href="../../zh/ch34-s28-riemann-path-integral-and-prime-arcs.html#sec-ch34-riemann-path-integral-and-prime-arcs" target="_top">§34.28 黎曼路径积分与素数极小圆弧体：欧拉绕行算子、半密度平方律与临界线相消</a></p>
+    <p class="lede refs">书中：<a href="../../zh/ch34-s28-riemann-path-integral-and-prime-arcs.html#sec-ch34-riemann-path-integral-and-prime-arcs" target="_top">§31.1 黎曼路径积分与素数极小圆弧体：欧拉绕行算子、半密度平方律与临界线相消</a></p>
   </div>
   <div class="en">
     <p class="lede">This is a numerical sandbox, not a proof. Every number is computed on the page (NUM); each Lean theorem is shown only on the one instance named in the evidence panel.</p>
@@ -115,7 +115,7 @@
       <li><b>Codimension.</b> ξ(s) = ½ s(s − 1)π<sup>−s/2</sup>Γ(s/2)ζ(s) satisfies ξ(1 − s) = ξ(s) and ξ(1 − s̄) = conj ξ(s), so ξ(½ + it) is real: along the critical line a zero is a sign change of a real function. Off the line the real and imaginary parts must vanish together. This explains why zeros fall on the line “easily”; it does not prove that all of them do: the quartic F has the same symmetries and all its zeros off the line.</li>
       <li><b>The prime staircase.</b> The explicit formula ψ₀(x) = x − Σ<sub>ρ</sub> x<sup>ρ</sup>/ρ − ln 2π − ½ ln(1 − x<sup>−2</sup>): each pair of zeros ½ ± iγₖ contributes a standing wave −2Re(x<sup>ρ</sup>/ρ) of amplitude 2√x/|ρ|. The back row of the violet sheet is the main term alone, and each row towards the front adds one more pair of zeros; the newest row is amber with the exact cyan staircase just in front of it, and on the floor in front the magenta residual Σ<sub>k≤K</sub>(−2Re(x<sup>ρₖ</sup>/ρₖ)) approaches the cyan sawtooth ψ₀(x) − main term. The strip measures the rise across [n − ½, n + ½] at each integer n: exactly Λ(n), that is ln p at prime powers and 0 at 6, 10 and 12.</li>
     </ol>
-    <p class="lede refs">In the book: <a href="../../en/ch34-s28-riemann-path-integral-and-prime-arcs.html#sec-ch34-riemann-path-integral-and-prime-arcs" target="_top">§34.28 The Riemann Path Integral and Prime Minimal Arc-Trihedra: Euler Winding Operators, Half-Density Square Law, and Critical-Line Cancellation</a></p>
+    <p class="lede refs">In the book: <a href="../../en/ch34-s28-riemann-path-integral-and-prime-arcs.html#sec-ch34-riemann-path-integral-and-prime-arcs" target="_top">§31.1 The Riemann Path Integral and Prime Minimal Arc-Trihedra: Euler Winding Operators, Half-Density Square Law, and Critical-Line Cancellation</a></p>
   </div>
 </div></div>
 <script src="main.js"></script>

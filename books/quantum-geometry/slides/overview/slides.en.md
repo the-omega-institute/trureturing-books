@@ -509,98 +509,8 @@ section: "Part VI · warrant"
 <Source>Chapter 21 literature remark · Chapters 22 and 24, conjectures</Source>
 
 ---
-# 29 Forge and Sanctuary
-layout: section
-section: "Forge and Sanctuary"
----
-
-<p class="kicker">Forge and Sanctuary</p>
-<h2 class="t">Construction and verification: <em>XOR algebra, rotor compilation and Lean 4</em></h2>
-<p class="lead">Reduce matrices to XOR bitmasks; compile single-qubit rotations from Bloch geometry; then open the frozen Lean proofs line by line and see exactly what the kernel checks.</p>
-<div class="card mt">
-  <ul class="plain">
-    <li>Reducing Matrices to XOR · Single-Qubit Rotor Compilation</li>
-    <li>Inside the Lean 4 Axiom Sanctuary (I and II)</li>
-  </ul>
-</div>
-
----
-# 30 Forge and Sanctuary · picture
-section: "Forge and Sanctuary · picture"
----
-
-<div class="body">
-  <p class="kicker">Reducing Matrices to XOR · The mask cube</p>
-  <h2 class="t">The eight blades are <em>the eight corners of a cube</em></h2>
-  <img src="./img/ch25-mask-cube.en.svg" alt="The eight corners of a cube labelled with the eight blades and their bitmasks; amber arrows walk along two edges." style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
-  <p class="lead mt-s">Each corner carries a blade and its three-bit mask; multiplying by a blade walks one edge along each direction it lights up, and the masks combine by XOR.</p>
-</div>
-<Source>Forge and Sanctuary · Reducing Matrices to XOR (ch25-mask-cube)</Source>
-
----
-# 31 Forge and Sanctuary · theorems
-section: "Forge and Sanctuary · theorems"
----
-
-<div class="body">
-  <p class="kicker">Theorem Kernel.1 · Proposition Kernel.12</p>
-  <h2 class="t">The Pauli pair anticommutes; a Hermitian 2×2 matrix <em>is a Bloch vector</em></h2>
-<TheoremCard class="compact mt-s" label="Theorem Kernel.1" title="Anticommutation, self-adjointness and unit squares of the qubit Weyl pair" gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" cite="thm-qubit-weyl-star">
-
-In $M_2(\mathbb{C})$: $ZX = -XZ$, $X^* = X$, $Z^* = Z$, $X^2 = 1$, $Z^2 = 1$.
-
-</TheoremCard>
-<TheoremCard class="compact mt-s" label="Proposition Kernel.12" title="Hermitian Bloch reconstruction and the pure-projector unit sphere" gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" cite="prop-hermitian-bloch-geometry">
-
-Let $M$ be a Hermitian $2\times 2$ complex matrix. Then $M = \operatorname{blochMatrix}(\operatorname{Re}\operatorname{Tr} M, \operatorname{bloch}(M))$; if moreover $\operatorname{Tr} M = 1$ and $M^2 = M$, then $\lVert\operatorname{bloch}(M)\rVert = 1$.
-
-</TheoremCard>
-</div>
-<Source>Reducing Matrices to XOR (Kernel.1) · Single-Qubit Rotor Compilation (Kernel.12)</Source>
-
----
-# 32 Forge and Sanctuary · literature
-section: "Forge and Sanctuary · warrant"
----
-
-<div class="body">
-  <p class="kicker">Literature results · not formalized in this book</p>
-  <h2 class="t">The kernel vouches for inference, <span class="hl-violet">not for physical modelling</span></h2>
-  <div class="g2 mt">
-    <div class="card violet">
-      <h4>Literature · Single-Qubit Rotor Compilation</h4>
-      <h3>The SU(2) → SO(3) double cover and ZYZ Euler decomposition</h3>
-      <p>The book verifies Bloch reconstruction and the trace identities; the universal theorem that every single-qubit unitary has ZYZ Euler angles up to a global phase is cited from the literature.</p>
-    </div>
-    <div class="card violet">
-      <h4>Literature · Inside the Lean 4 Axiom Sanctuary (I)</h4>
-      <h3>Dependent type theory and the de Bruijn criterion</h3>
-      <p>A small, auditable kernel checks every inference; whether a Lean definition faithfully captures a physical object is a modelling question, outside what the kernel guarantees.</p>
-    </div>
-  </div>
-</div>
-<Source>Literature remarks in Single-Qubit Rotor Compilation and Inside the Lean 4 Axiom Sanctuary (I)</Source>
-
----
-# 33 Part VII · Foundations
-layout: section
-chapter: "07"
-section: "Part VII · Foundations"
----
-
-<p class="kicker">Part VII · Foundations · Chapters 25–28</p>
-<h2 class="t">Foundations · <em>causality, horizons, quantum fairness and meta-unification</em></h2>
-<p class="lead">Pell errors flip sign and shrink without vanishing; quadratic advection never closes; fivefold symmetry bars geometric privilege and aligns unification programs.</p>
-<div class="card mt">
-  <ul class="plain">
-    <li>Ch. 25 Timeless causality and Gram space · Ch. 26 Fields (P) and lines (NP)</li>
-    <li>Ch. 27 Quantum essence is fairness · Ch. 28 Unified field and meta-unification</li>
-  </ul>
-</div>
-
----
-# 34 Part VI · Crossing the Horizon · picture
-section: "Part VI · Crossing the Horizon · picture"
+# 29 Part VI · Crossing the Horizon · picture (continued)
+section: "Part VI · picture"
 ---
 
 <div class="body">
@@ -612,8 +522,25 @@ section: "Part VI · Crossing the Horizon · picture"
 <Source>Chapter 23 §23.1 (ch29-pell-seam)</Source>
 
 ---
-# 35 Parts VI–VII · Crossing the Horizon and Foundations · theorems
-section: "Parts VI–VII · Crossing the Horizon and Foundations · theorems"
+# 30 Part VII · Foundations
+layout: section
+chapter: "07"
+section: "Part VII · Foundations"
+---
+
+<p class="kicker">Part VII · Foundations · Chapters 25–28</p>
+<h2 class="t">Foundations · <em>causality, horizons, quantum fairness and <Tex t="A_0" /></em></h2>
+<p class="lead">The compatible Gram elliptope dissolves sequential time; quadratic advection never closes; fivefold symmetry bars geometric privilege, anchored by the Axiom of Comparison <Tex t="\mathcal{A}_0" /> and the meta-unification compass.</p>
+<div class="card mt">
+  <ul class="plain">
+    <li>Ch. 25 Timeless causality and Gram space · Ch. 26 Fields (P) and lines (NP)</li>
+    <li>Ch. 27 Quantum essence is fairness · Ch. 28 Unified field and meta-unification</li>
+  </ul>
+</div>
+
+---
+# 31 Parts VI–VII · Crossing the Horizon and Foundations · theorems
+section: "Parts VI–VII · theorems"
 ---
 
 <div class="body">
@@ -633,7 +560,7 @@ For idempotent $P$ and $V(x) = Lx - B(x, x)$, an exact closure $P(V(x)) = f(P(x)
 <Source>Chapter 23 §23.1 (SilverSlopeAbelianPellArithmetic) · Chapter 26 §26.4 (QuadraticObservationClosure)</Source>
 
 ---
-# 36 Part VII · Foundations · theorems (continued)
+# 32 Part VII · Foundations · theorems (continued)
 section: "Part VII · Foundations · theorems"
 ---
 
@@ -654,8 +581,8 @@ Let $R$ be a finite square complex matrix with $R^\dagger = -R$ and $R R^\dagger
 <Source>Chapter 27 §27.3 (CoherentUniformAmplification) · Chapter 28 §28.4 (BalancedUnitaryComplexStructure)</Source>
 
 ---
-# 37 Parts VI–VII · Crossing the Horizon and Foundations · literature and open problems
-section: "Parts VI–VII · Crossing the Horizon and Foundations · warrant"
+# 33 Parts VI–VII · Crossing the Horizon and Foundations · literature and open problems
+section: "Parts VI–VII · warrant"
 ---
 
 <div class="body">
@@ -678,15 +605,53 @@ section: "Parts VI–VII · Crossing the Horizon and Foundations · warrant"
 <Source>Chapter 23 §23.1 literature remark · Chapter 26 §26.4, Conjecture 26.25</Source>
 
 ---
-# 38 Part IX · Mutual Illumination and Breaking Attachment
+# 34 Part VIII · Arcs and Unification
+layout: section
+chapter: "08"
+section: "Part VIII · Arcs and Unification"
+---
+
+<p class="kicker">Part VIII · Arcs and Unification · Chapters 29–33</p>
+<h2 class="t">Arcs and Unification: <em>minimal arcs, ternions and AF-GUT</em></h2>
+<p class="lead">Single and double orthogonality invert observer position; interior-chord tunneling and arc calculus reframe calculus and the Riemann strip; three-dimensional curl closure locks native ternion fields and models four-force unification in AF-GUT (MODEL) under clock <Tex t="\nu_0" />.</p>
+<div class="card mt">
+  <ul class="plain">
+    <li>Ch. 29 Orthogonality and minimal arcs · Ch. 30 Chord tunneling and arc calculus · Ch. 31 Arc calculus and the Riemann strip</li>
+    <li>Ch. 32 Inexpressible ternions and 3D field cap · Ch. 33 Unified-arc forces and AF-GUT</li>
+  </ul>
+</div>
+
+---
+# 35 Parts VIII–IX · Arcs and Mutual Illumination · theorems
+section: "Parts VIII–IX · theorems"
+---
+
+<div class="body">
+  <p class="kicker">Theorem 29.2 · Theorem 34.1</p>
+  <h2 class="t">Two axes generate <em>all rotations</em> · at most <em>d</em> histories</h2>
+<TheoremCard class="compact mt-s" label="Theorem 29.2" title="Exact finite words in two rotation axes (item 2)" gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" cite="thm-ch34-perpendicular-axis-and-pullback">
+
+For non-collinear $a, b \in \mathbb{R}^3$, every $R \in \mathrm{SO}(3)$ is a finite product of rotations, each fixing $a$ or $b$.
+
+</TheoremCard>
+<TheoremCard class="compact mt-s" label="Theorem 34.1" title="History capacity of a finite memory (item 2)" gid="D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity" cite="thm-ch33-observer-pinching-and-memory-spectrum">
+
+Let $\rho_1, \ldots, \rho_N$ be density matrices in dimension $d$ and $E_j \succeq 0$ with $\sum_j E_j = 1$. If $\operatorname{Tr}(E_j \rho_i) = \delta_{ij}$, then $N \le d$.
+
+</TheoremCard>
+</div>
+<Source>Chapter 29 §29.1 (TwoAxisFiniteRotation) · Chapter 34 §34.1 (FiniteMemoryHistoryCapacity)</Source>
+
+---
+# 36 Part IX · Mutual Illumination and Breaking Attachment
 layout: section
 chapter: "09"
 section: "Part IX · Mutual Illumination and Breaking Attachment"
 ---
 
 <p class="kicker">Part IX · Mutual Illumination and Breaking Attachment · Chapters 34–37</p>
-<h2 class="t">Mutual illumination: <em>universal observers, self-referential tables, beyond reincarnation</em></h2>
-<p class="lead">Whatever keeps records and takes part in pairwise measurement can be read as an observer; the lookup algorithm lives in the table; equal steps in rapidity never reach the pure light at <Tex t="90^\circ" />.</p>
+<h2 class="t">Mutual illumination · <em>observers, tables and geodesics</em></h2>
+<p class="lead">Whatever keeps records and takes part in pairwise measurement can be read as an observer; the lookup algorithm lives in the table; equal steps in rapidity never reach <Tex t="90^\circ" />, while rational rotor heaps trace least-action geodesics.</p>
 <div class="card mt">
   <ul class="plain">
     <li>Ch. 34 Universal observers · Ch. 35 Light, self-referential tables and carry-free coding</li>
@@ -695,8 +660,8 @@ section: "Part IX · Mutual Illumination and Breaking Attachment"
 </div>
 
 ---
-# 39 Part IX · Mutual Illumination and Breaking Attachment · picture
-section: "Part IX · Mutual Illumination and Breaking Attachment · picture"
+# 37 Part IX · Mutual Illumination · picture (I)
+section: "Part IX · picture"
 ---
 
 <div class="body">
@@ -708,29 +673,21 @@ section: "Part IX · Mutual Illumination and Breaking Attachment · picture"
 <Source>Chapter 35 §35.3 (ch36-two-rulers)</Source>
 
 ---
-# 40 Parts VIII–IX · Arcs and Unification, Mutual Illumination · theorems
-section: "Parts VIII–IX · Arcs and Unification, Mutual Illumination · theorems"
+# 38 Part IX · Mutual Illumination · picture (II)
+section: "Part IX · picture"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 34.1 · Theorem 29.2</p>
-  <h2 class="t">At most <em>d</em> histories; two axes <em>make every rotation</em></h2>
-<TheoremCard class="compact mt-s" label="Theorem 34.1" title="History capacity of a finite memory (item 2)" gid="D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity" cite="thm-ch33-observer-pinching-and-memory-spectrum">
-
-Let $\rho_1, \ldots, \rho_N$ be $d$-dimensional density matrices and $E_1, \ldots, E_N$ positive semidefinite with $\sum_j E_j = 1$. If $\operatorname{Tr}(E_j \rho_i)$ is $1$ for $i = j$ and $0$ otherwise, then $N \le d$.
-
-</TheoremCard>
-<TheoremCard class="compact mt-s" label="Theorem 29.2" title="Exact finite words in two rotation axes (item 2)" gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" cite="thm-ch34-perpendicular-axis-and-pullback">
-
-Let $a, b \in \mathbb{R}^3$ be non-collinear: $\langle a, b\rangle^2 < \lVert a\rVert^2 \lVert b\rVert^2$. Then every orthogonal map $R$ of determinant $1$ is a finite product of orientation-preserving rotations each fixing $a$ or fixing $b$.
-
-</TheoremCard>
+  <p class="kicker">Chapter 36 §36.1.1 · The entropy tax</p>
+  <h2 class="t">The coherence cut away and the entropy paid <em>both peak at π/4</em></h2>
+  <img src="./img/ch37-entropy-tax.en.svg" alt="The horizontal axis is the rotation angle θ. The magenta curve is the coherence mass removed by pinching, the ink curve the entropy increase; both vanish at the ends and peak together at θ = π/4." style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
+  <p class="lead mt-s">The magenta curve is the coherence mass <Tex t="\tfrac12\sin^2 2\theta" /> one pinching step removes, the ink curve the entropy increase; both are <Tex t="0" /> at <Tex t="\theta = 0" /> and <Tex t="\theta = \pi/2" />, and at <Tex t="\theta = \pi/4" /> they reach <Tex t="1/2" /> and <Tex t="\ln 2" />.</p>
 </div>
-<Source>Chapter 34 §34.1 (FiniteMemoryHistoryCapacity) · Chapter 29 §29.1 (TwoAxisFiniteRotation)</Source>
+<Source>Chapter 36 §36.1.1 (ch37-entropy-tax)</Source>
 
 ---
-# 41 Part IX · Mutual Illumination and Breaking Attachment · literature and open problems
-section: "Part IX · Mutual Illumination and Breaking Attachment · warrant"
+# 39 Part IX · Mutual Illumination · literature and open problems
+section: "Part IX · warrant"
 ---
 
 <div class="body">
@@ -753,7 +710,7 @@ section: "Part IX · Mutual Illumination and Breaking Attachment · warrant"
 <Source>Literature in §§35.1, 35.3 · Open problems in §§34.8, 35.6.8, 36.8, 37.1</Source>
 
 ---
-# 42 Part X · Non-Duality and Return to the Source
+# 40 Part X · Non-Duality and Return to the Source
 layout: section
 chapter: "10"
 section: "Part X · Non-Duality and Return to the Source"
@@ -761,24 +718,17 @@ section: "Part X · Non-Duality and Return to the Source"
 
 <p class="kicker">Part X · Non-Duality and Return to the Source · Chapters 38–39</p>
 <h2 class="t">The observer is the ontological universe · <em>AXIOM-Ω</em></h2>
-<p class="lead">Chapter 38 explores the observer and the observed through substrate-free self-reference and the spinor double cover. Chapter 39 proposes origin-free positive-semidefinite ternary comparison closure and uses it to organize the route to the five postulates of quantum mechanics.</p>
-
----
-# 43 Part IX · Mutual Illumination and Breaking Attachment · picture
-section: "Part IX · Mutual Illumination and Breaking Attachment · picture"
----
-
-<div class="body">
-  <p class="kicker">Chapter 36 §36.1.1 · The entropy tax</p>
-  <h2 class="t">The coherence cut away and the entropy paid <em>both peak at π/4</em></h2>
-  <img src="./img/ch37-entropy-tax.en.svg" alt="The horizontal axis is the rotation angle θ. The magenta curve is the coherence mass removed by pinching, the ink curve the entropy increase; both vanish at the ends and peak together at θ = π/4." style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
-  <p class="lead mt-s">The magenta curve is the coherence mass <Tex t="\tfrac12\sin^2 2\theta" /> one pinching step removes, the ink curve the entropy increase; both are <Tex t="0" /> at <Tex t="\theta = 0" /> and <Tex t="\theta = \pi/2" />, and at <Tex t="\theta = \pi/4" /> they reach <Tex t="1/2" /> and <Tex t="\ln 2" />.</p>
+<p class="lead">The observer and cosmos meet through substrate-free self-reference, Indra's Net, Māyā dreams and the spinor double cover.</p>
+<div class="card mt">
+  <ul class="plain">
+    <li>Ch. 38 The observer is the ontological universe</li>
+    <li>Ch. 39 Origin-free PSD ternary comparison closure, five QM postulates under T1–T4 (MODEL) and the self-contained ternion with no exterior</li>
+  </ul>
 </div>
-<Source>Chapter 36 §36.1.1 (ch37-entropy-tax)</Source>
 
 ---
-# 44 Parts IX–X · Mutual Illumination and Non-Duality · theorems
-section: "Parts IX–X · Mutual Illumination and Non-Duality · theorems"
+# 41 Parts IX–X · Mutual Illumination and Non-Duality · theorems
+section: "Parts IX–X · theorems"
 ---
 
 <div class="body">
@@ -798,8 +748,8 @@ There is no continuous map $s$ from the unit circle to itself with $s(z)^2 = z$ 
 <Source>Chapter 36 §36.3 (NoCloningInnerProductCriterion) · Chapter 38 §38.3 (CircleDoubleCoverNoSection)</Source>
 
 ---
-# 45 Parts IX–X · Mutual Illumination and Non-Duality · literature
-section: "Parts IX–X · Mutual Illumination and Non-Duality · warrant"
+# 42 Parts IX–X · Mutual Illumination and Non-Duality · literature
+section: "Parts IX–X · warrant"
 ---
 
 <div class="body">
@@ -817,12 +767,85 @@ section: "Parts IX–X · Mutual Illumination and Non-Duality · warrant"
       <p>A spinor is not observed directly; spacetime quantities are its bilinears: <Tex t="\mathbf J = \psi\gamma_0\tilde\psi" />, <Tex t="\mathbf S = \psi\mathbf I_{12}\tilde\psi" />; at <Tex t="\beta = 0" />, <Tex t="\mathbf J^2 = -\mathbf S^2 = \rho^2" />.</p>
     </div>
   </div>
-  <p class="lead mt">Part IX interprets observation through dream erasure and memory pointers. Part X uses the spinor double cover to interpret the observer as the ontological universe. These interpretations belong to the book’s model (MODEL).</p>
+  <p class="lead mt">Part IX interprets observation through dream erasure and memory pointers. Part X uses the spinor double cover and origin-free ternary heaps to interpret observer-cosmos non-duality and the mother axiom (MODEL).</p>
 </div>
 <Source>Literature remarks in Chapter 36 §36.1.2 and Chapter 38 §38.3</Source>
 
 ---
-# 46 Three tiers of warrant
+# 43 Forge and Sanctuary
+layout: section
+section: "Forge and Sanctuary"
+---
+
+<p class="kicker">Forge and Sanctuary · Companion Part</p>
+<h2 class="t">Construction and verification: <em>XOR algebra, rotor compilation and Lean 4</em></h2>
+<p class="lead">Placed after the thirty-nine chapters and Coda: reduce matrices to XOR bitmasks, compile single-qubit rotations from Bloch geometry, then open the frozen Lean proofs line by line and see what the kernel checks.</p>
+<div class="card mt">
+  <ul class="plain">
+    <li>Reducing Matrices to XOR · Single-Qubit Rotor Compilation</li>
+    <li>Inside the Lean 4 Axiom Sanctuary (I and II)</li>
+  </ul>
+</div>
+
+---
+# 44 Forge and Sanctuary · picture
+section: "Forge and Sanctuary · picture"
+---
+
+<div class="body">
+  <p class="kicker">Reducing Matrices to XOR · The mask cube</p>
+  <h2 class="t">The eight blades are <em>the eight corners of a cube</em></h2>
+  <img src="./img/ch25-mask-cube.en.svg" alt="The eight corners of a cube labelled with the eight blades and their bitmasks; amber arrows walk along two edges." style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
+  <p class="lead mt-s">Each corner carries a blade and its three-bit mask; multiplying by a blade walks one edge along each direction it lights up, and the masks combine by XOR.</p>
+</div>
+<Source>Forge and Sanctuary · Reducing Matrices to XOR (ch25-mask-cube)</Source>
+
+---
+# 45 Forge and Sanctuary · theorems
+section: "Forge and Sanctuary · theorems"
+---
+
+<div class="body">
+  <p class="kicker">Theorem Kernel.1 · Proposition Kernel.12</p>
+  <h2 class="t">The Pauli pair anticommutes; a Hermitian 2×2 matrix <em>is a Bloch vector</em></h2>
+<TheoremCard class="compact mt-s" label="Theorem Kernel.1" title="Anticommutation, self-adjointness and unit squares of the qubit Weyl pair" gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" cite="thm-qubit-weyl-star">
+
+In $M_2(\mathbb{C})$: $ZX = -XZ$, $X^* = X$, $Z^* = Z$, $X^2 = 1$, $Z^2 = 1$.
+
+</TheoremCard>
+<TheoremCard class="compact mt-s" label="Proposition Kernel.12" title="Hermitian Bloch reconstruction and the pure-projector unit sphere" gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" cite="prop-hermitian-bloch-geometry">
+
+Let $M$ be a Hermitian $2\times 2$ complex matrix. Then $M = \operatorname{blochMatrix}(\operatorname{Re}\operatorname{Tr} M, \operatorname{bloch}(M))$; if moreover $\operatorname{Tr} M = 1$ and $M^2 = M$, then $\lVert\operatorname{bloch}(M)\rVert = 1$.
+
+</TheoremCard>
+</div>
+<Source>Reducing Matrices to XOR (Kernel.1) · Single-Qubit Rotor Compilation (Kernel.12)</Source>
+
+---
+# 46 Forge and Sanctuary · literature
+section: "Forge and Sanctuary · warrant"
+---
+
+<div class="body">
+  <p class="kicker">Literature results · not formalized in this book</p>
+  <h2 class="t">The kernel vouches for inference, <span class="hl-violet">not for physical modelling</span></h2>
+  <div class="g2 mt">
+    <div class="card violet">
+      <h4>Literature · Single-Qubit Rotor Compilation</h4>
+      <h3>The SU(2) → SO(3) double cover and ZYZ Euler decomposition</h3>
+      <p>The book verifies Bloch reconstruction and the trace identities; the universal theorem that every single-qubit unitary has ZYZ Euler angles up to a global phase is cited from the literature.</p>
+    </div>
+    <div class="card violet">
+      <h4>Literature · Inside the Lean 4 Axiom Sanctuary (I)</h4>
+      <h3>Dependent type theory and the de Bruijn criterion</h3>
+      <p>A small, auditable kernel checks every inference; whether a Lean definition faithfully captures a physical object is a modelling question, outside what the kernel guarantees.</p>
+    </div>
+  </div>
+</div>
+<Source>Literature remarks in Single-Qubit Rotor Compilation and Inside the Lean 4 Axiom Sanctuary (I)</Source>
+
+---
+# 47 Three tiers of warrant
 section: "Three tiers"
 ---
 
@@ -839,7 +862,7 @@ section: "Three tiers"
 <Source>Prelude, “Verification and Honest Attribution” · Appendix C</Source>
 
 ---
-# 47 Closing
+# 48 Closing
 layout: cover
 ---
 

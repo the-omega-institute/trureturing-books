@@ -280,8 +280,8 @@
       'A full 360°: the cyan J is back where it started, and so is the magenta S; but the violet flag is on the other side of the band, opposite to the dashed starting flag — ψ = −ψ₀. J and S see the rotation, not the sign of ψ.');
     else if (Math.abs(tm - 2) < 1e-6) note = L('转满 720°：小旗回到出发时的那一面，旗尖走过的路（光带的边）首尾相接——ψ = +ψ₀。',
       'A full 720°: the flag is back on the side it started from and the path of its tip, the edge of the band, closes up — ψ = +ψ₀.');
-    else if (S.mu > 0.005) note = L(`模型：二元隔墙 μ = ${fix(S.mu, 2)}。光带沿中线剪成两件：小旗走第一圈的那一半收成中间的指针球，走第二圈的那一半撑成外面的内存壳，中间隔着缝。μ 只是画面的过渡，本章没有给它数学定义；推回 0，两件就是第三十九章那条单侧光带。`,
-      `Model: dualist wall μ = ${fix(S.mu, 2)}. The band is cut along its centre line into two pieces: the half the flag runs along in its first round shrinks into the pointer ball in the middle, the half of its second round spreads into the memory shell round it, with a gap between. μ only moves the picture; the chapter gives it no mathematical definition. Push it back to 0 and the two pieces are the one-sided band of Chapter 39.`);
+    else if (S.mu > 0.005) note = L(`模型：二元隔墙 μ = ${fix(S.mu, 2)}。光带沿中线剪成两件：小旗走第一圈的那一半收成中间的指针球，走第二圈的那一半撑成外面的内存壳，中间隔着缝。μ 只是画面的过渡，本章没有给它数学定义；推回 0，两件就是第三十八章那条单侧光带。`,
+      `Model: dualist wall μ = ${fix(S.mu, 2)}. The band is cut along its centre line into two pieces: the half the flag runs along in its first round shrinks into the pointer ball in the middle, the half of its second round spreads into the memory shell round it, with a gap between. μ only moves the picture; the chapter gives it no mathematical definition. Push it back to 0 and the two pieces are the one-sided band of Chapter 38.`);
     else if (t < 1e-6) note = L('还没转：小旗顺着转轴 n 竖着。J 的长度是 ρ，品红正方形的面积也是 ρ。', 'Not turned yet: the flag stands along the axis n. J has length ρ, and the magenta square has area ρ too.');
     else {
       // t is the turn parameter in the chosen plane; J's angle from J₀ is the principal value X.Jback in [0°, 180°]
@@ -343,8 +343,8 @@
       'ψ₀ is a slanted spinor (ρ = 1). Sandwiching the dashed e₃, it weaves the cyan current vector J; sandwiching the dashed e₁e₂ square, it weaves the magenta spin plane S, which lies exactly at right angles to J. The short dashed violet arc is the way ψ carries e₃ to J.'],
     fierz: ['随便一个 ψ（ρ = 1.3），在 e₃e₁ 面里一直转：J 的长度是 1.3，品红正方形的面积也是 1.3，三个平方 J²、−S²、ρ² 一直都是 1.69。',
       'Any ψ at all (ρ = 1.3), turning on and on in the e₃e₁ plane: J has length 1.3, the magenta square has area 1.3, and the three squares J², −S² and ρ² stay at 1.69 the whole time.'],
-    turn360: ['第三十九章的例子：ψ = cos(ϑ/2) − sin(ϑ/2) e₂e₃，转满 360°。青色的 J 绕一圈回到 e₃，品红的 S 也回到原样；紫色小旗却沿光带滑到了另一面，与虚线的出发小旗方向相反：ψ = −ψ₀。旗尖走过的紫色轨迹从光带的上边走到下边，首尾没有接上。',
-      'The example of Chapter 39: ψ = cos(ϑ/2) − sin(ϑ/2) e₂e₃, turned a full 360°. The cyan J goes once round back to e₃ and the magenta S is as it was; but the violet flag has slid to the other side of the band and points opposite to the dashed starting flag: ψ = −ψ₀. The violet trail of the tip of the flag runs from the upper edge of the band to the lower one, and its ends do not meet.'],
+    turn360: ['第三十八章的例子：ψ = cos(ϑ/2) − sin(ϑ/2) e₂e₃，转满 360°。青色的 J 绕一圈回到 e₃，品红的 S 也回到原样；紫色小旗却沿光带滑到了另一面，与虚线的出发小旗方向相反：ψ = −ψ₀。旗尖走过的紫色轨迹从光带的上边走到下边，首尾没有接上。',
+      'The example of Chapter 38: ψ = cos(ϑ/2) − sin(ϑ/2) e₂e₃, turned a full 360°. The cyan J goes once round back to e₃ and the magenta S is as it was; but the violet flag has slid to the other side of the band and points opposite to the dashed starting flag: ψ = −ψ₀. The violet trail of the tip of the flag runs from the upper edge of the band to the lower one, and its ends do not meet.'],
     seam: ['从出发点起每 30° 插一面小旗，每一面都接着上一面连续地插。绕回出发点时，最后一面与虚线的第一面方向正好相反：沿着这一圈连续地选“平方根”，回到起点就对不上。',
       'From the start, plant a flag every 30°, each one continuing the one before. Back at the start, the last flag points exactly opposite to the dashed first one: choosing a “square root” continuously round the loop does not match up when you return.'],
     turn720: ['再转一圈，一共 720°：小旗回到出发时的那一面，与虚线的出发小旗重合，ψ = +ψ₀。旗尖走过的路就是光带的边——这条边绕了两圈才首尾相接。青色的 J 在这期间走了两圈。',

@@ -1,4 +1,4 @@
-/* ORTHO//FAIRNESS: five ledgers of chapter 31 on one Bloch sphere. Each scene draws the sphere and, beside it, a bar
+/* ORTHO//FAIRNESS: five ledgers of chapter 27 on one Bloch sphere. Each scene draws the sphere and, beside it, a bar
    whose total does not move (in the seat: two Born bars that stay equal, and a cap count beside the fixed Haar mark).
      seat     points from a fixed seed, uniform on the sphere. Under the Haar measure a cap of half-angle α around any axis
               has measure exactly (1 − cos α)/2; the finite count of the sample only scatters around it (60°, 600 points:

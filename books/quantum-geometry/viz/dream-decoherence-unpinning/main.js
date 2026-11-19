@@ -1,4 +1,4 @@
-/* ORTHO//DREAM · 梦境擦除 (chapter 37).
+/* ORTHO//DREAM · 梦境擦除 (chapter 36, §36.1).
    One object on every scene: a density matrix drawn as a grid (the area of the square in cell (i, j) is |ρᵢⱼ|, the
    needle inside points to its phase, the dashed frame is its size at the start of the scene) and, beside it, the
    brightness it leaves on a far screen, env(u)·Σᵢⱼ Re(ρᵢⱼ e^{iK(dᵢ − dⱼ)u}): the dashed cyan curve is the diagonal

@@ -174,7 +174,7 @@ The full proof is checked by the Lean kernel.
 
 ## Comprehensive Audit Table of Frozen Declarations Across Parts IV–VI {#sec-parts-iv-to-vi-frozen-audit-table}
 
-Completing the audit table begun in [Inside the Lean 4 Axiom Sanctuary (Part I): From the Parallelogram Law to Finite Record Pinching](ch27-reading-frozen-proofs-i.md), the table below records the exact source files, line numbers, `statement_id` prefixes, and formal contracts for the declarations audited in this chapter together with representative frozen declarations across Parts IV, V, and VI at commit [{commit}](trureturing:).
+Completing the audit table begun in [Inside the Lean 4 Axiom Sanctuary (Part I): From the Parallelogram Law to Finite Record Pinching](ch27-reading-frozen-proofs-i.md), the table below records the exact source files, line numbers, `statement_id` prefixes, and formal contracts for the declarations audited in this section together with representative frozen declarations across Parts IV, V, and VI at commit [{commit}](trureturing:).
 
 | Chapter | Frozen GID | Source File & Line | `statement_id` Prefix | Exact Formal Scope & Contract |
 | :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |

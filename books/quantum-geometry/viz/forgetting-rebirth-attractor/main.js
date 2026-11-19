@@ -1,5 +1,5 @@
 /* ORTHO//SAMSARA · 轮回与视界阶梯 · Samsara and the horizon staircase
-   The stage is the open unit disk, its rim the horizon θ = 90° of Chapter 36. Three scenes on the same disk:
+   The stage is the open unit disk, its rim the horizon θ = 90° of Chapter 35. Three scenes on the same disk:
      stair    the rapidity staircase η_k = η₀ + kΔη, η₀ = gd⁻¹(θ*), along the ray to the right; Beltrami–Klein radius
               r = tanh η (chords), Poincaré radius ρ = tanh(η/2) (orthogonal arcs), morphed by the radial isometry
               ρ = r/(1 + √(1 − r²)); a magnifier on the side keeps the gap to the rim visible

@@ -204,7 +204,7 @@ $$
 为了帮助读者养成直接阅读 Lean 4 源码的能力，我们将上面四条定理在 `trureturing@dev` 中的核心证明机制总结为四条通用证明设计模式：
 
 1. **有限维矩阵与向量的情形穷举模式（`ext i j; fin_cases i <;> fin_cases j`）**：在 `FiniteDimensional.lean`、`QubitBloch.lean` 与 `ActualPureQubitGeometry.lean` 中，具体固定维数（如 `Fin 2` 或 `Fin 3`）的代数恒等式常先通过外延性 `ext` 化归到矩阵元，再由 `fin_cases` 展开有限求和 `Fin.sum_univ_two` / `Fin.sum_univ_three`，最后交由交换环规范化决策过程 `ring` 完成零误差代数相消；
-2. **正半定性的三明治共轭传递模式（`hRho.mul_mul_conjTranspose_same P`）**：在证明玻恩概率非负性（[@lemma-audit-born-skeleton]）与条件态正半定性（下一章 [@prop-audit-conditional-state]）时，从不直接对非自伴乘积 $\rho P$ 作谱分解，而是利用幂等自伴性 $P = P^* P$ 与迹的循环律 `Matrix.trace_mul_cycle` 将 $\Tr(\rho P)$ 改写为对称压缩矩阵 $\Tr(P \rho P^*)$，从而直接援引正半定锥在共轭压缩 $X \mapsto P X P^*$ 下的封闭性；
+2. **正半定性的三明治共轭传递模式（`hRho.mul_mul_conjTranspose_same P`）**：在证明玻恩概率非负性（[@lemma-audit-born-skeleton]）与条件态正半定性（[下篇](ch28-reading-frozen-proofs-ii.md) [@prop-audit-conditional-state]）时，从不直接对非自伴乘积 $\rho P$ 作谱分解，而是利用幂等自伴性 $P = P^* P$ 与迹的循环律 `Matrix.trace_mul_cycle` 将 $\Tr(\rho P)$ 改写为对称压缩矩阵 $\Tr(P \rho P^*)$，从而直接援引正半定锥在共轭压缩 $X \mapsto P X P^*$ 下的封闭性；
 3. **有限和式的单点筛除模式（`Finset.sum_eq_single k`）**：在 `RayPhaseRigidity.lean`（对角矩阵乘向量）与 `Conditioning.lean`（正交投影块相乘）中，每当需要将有限求和 $\sum_{l} F(k, l)$ 坍缩为对角单点项 $F(k, k)$ 时，一律调用 `Finset.sum_eq_single k`，将证明拆分为两条干净的子目标：其一是异指标消去 `∀ l ≠ k, F(k, l) = 0`，其二是荒谬边界排除 `k ∉ Finset.univ → F(k, k) = 0`；
 4. **稀疏连通图的自反传递闭包归纳模式（`Relation.ReflTransGen`）**：在 [@prop-audit-ray-phase-rigidity] 中，局部两两重叠关系 `∃ x ∈ tests, x i ≠ 0 ∧ x j ≠ 0` 通过 `Relation.ReflTransGen` 提升为全局连通性，证明只需对 `refl`（自反步 `rfl`）与 `tail`（单步延拓 `ih.trans (hstep j k hjk)`）做两行结构归纳，就将局部对角元相等 $A_{jj} = A_{kk}$ 传遍整张连通图！
 

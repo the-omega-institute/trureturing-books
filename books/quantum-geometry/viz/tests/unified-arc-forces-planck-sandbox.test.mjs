@@ -70,9 +70,9 @@ check('bilingual: every zh text block has its en twin in the page source', zhSpa
   check('bilingual: every card has a note and a figure note in both languages, the English ones without Chinese', notes.length === 10
     && notes.every((m) => m[2].length > 20 && m[3].length > 20 && /[一-鿿]/.test(m[2]) && !/[一-鿿]/.test(m[3])), `${notes.length}`);
 }
-check('registry: live entry with chapter 39 §39.9, five presets in order and the six GIDs', REGISTRY && REGISTRY.status === 'live' && REGISTRY.chapter === 39 && REGISTRY.section === '39.9'
+check('registry: live entry with chapter 33 §33.8, five presets in order and the six GIDs', REGISTRY && REGISTRY.status === 'live' && REGISTRY.chapter === 33 && REGISTRY.section === '33.8'
   && same(REGISTRY.presets, IDS) && same(REGISTRY.lean.map((l) => l.gid), GIDS) && REGISTRY.code === 'FORCE//UNIFY');
-check('registry: theory link to §39.9 in both languages', REGISTRY.theory[0].href === `../zh/${THEORY}` && REGISTRY.theory[0].href_en === `../en/${THEORY}`);
+check('registry: theory link to §33.8 in both languages', REGISTRY.theory[0].href === `../zh/${THEORY}` && REGISTRY.theory[0].href_en === `../en/${THEORY}`);
 
 /* ---------- independent mathematics ---------- */
 const dot = (a, b) => a.reduce((s, x, i) => s + x * b[i], 0);
@@ -272,7 +272,7 @@ const ev = await page.evaluate(() => {
 check('evidence: LEAN ✓ exactly on the six cited GIDs, in order', same(ev.green, GIDS), JSON.stringify(ev.green));
 check('evidence: one ARGUED, one MODEL, one NUM box', ev.argued === 1 && ev.model === 1 && ev.num === 1);
 check('evidence: three OPEN boxes, in #evidence only, linking the three open problems in both languages', ev.openElsewhere === 0 && same(ev.open, OPEN.map(([f, a]) => [`../../zh/${f}.html#${a}`, `../../en/${f}.html#${a}`])), JSON.stringify(ev.open));
-check('evidence: drawer links §39.9 in both languages and says it is not a proof', same(ev.drawerRefs, ['en', 'zh'].map((l) => `../../${l}/${THEORY}`)) && ev.notProof && ev.okmarks === 0);
+check('evidence: drawer links §33.8 in both languages and says it is not a proof', same(ev.drawerRefs, ['en', 'zh'].map((l) => `../../${l}/${THEORY}`)) && ev.notProof && ev.okmarks === 0);
 
 for (const lang of ['zh', 'en']) {
   await page.click(`[data-lang-set="${lang}"]`); await settle(page);
