@@ -322,3 +322,70 @@ The center varies continuously with the pure state on the sphere. The pure state
 The lower bound $\delta_p$ depends on the fixed ball. A uniform positive bound requires control of $\inf_p\delta_p$. Both results use exclusions defined by the original effects and the original normalized base.
 
 [Source manuscript XI §138.2 and §138.5](https://github.com/the-omega-institute/trureturing-source-theories/blob/2a39da5107abbfa3a72cc883486dbc15a15994a1/docs/develop/theory/QUANTUM_ORIGIN_EXCLUSION_SEGMENT_RIGIDITY_AND_PURE_LOCUS_TOPOLOGY_XI.md#L1289)
+
+
+## F.7 Sections and Reflections of Singleton-Label Balls {#sec-appendix-f-7}
+
+Keep the notation of F.6. Assume $V\ne\{0\}$, three-dimensional whole-ball charts for the original exclusions, and BC. Write $\mathring A_{\mathrm{rel}}$ and $\partial_{\mathrm{rel}}A$ for the relative interior and frontier of $A$ in its affine span.
+
+::: {.theorem #thm-appf-singleton-center-sections title="The Exact Section of a Singleton-Label Center Map" lean="D5/S3/Quantum/Foundation/BinaryCenterSections.original_center_sections"}
+The normalized base $K$ has affine dimension at least six, and there is a singleton-label pure state. For each such state $p$, there is a three-dimensional whole-ball chart $b$ of $D_p$ and an injective affine map $g$ of rank three. For every unit vector $x$, $g(x)=c_{b(x)}$. Write $\overline B$ for the closed unit ball and $S$ for its sphere. Then
+
+$$
+g(\mathring B)\subseteq\mathring K_{\mathrm{rel}},
+\qquad
+g(\overline B)=K\cap\operatorname{aff}(g(\overline B)).
+$$
+
+Also $\partial_{\mathrm{rel}}g(\overline B)=g(S)\subseteq\partial_{\mathrm{rel}}K$. For each $x\in S$, the linear range of $g$ intersects the direction space of the original exclusion $D_{b(x)}$ only at zero.
+:::
+
+::: proof
+The affine center map from F.6 sends the open ball into the relative interior of $K$ and the sphere into its relative frontier. Convexity along lines in the image gives the whole section. Transversality provides two three-dimensional direction spaces with zero intersection. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-appf-reflected-pure-sphere title="The Reflected Pure Sphere and Two Section Alternatives" lean="D5/S3/Quantum/Foundation/BinaryCenterReflection.original_reflected_alternatives"}
+For each singleton-label pure state $p$, there is a three-dimensional whole-ball chart $b$ and affine maps $g$ and $k$ such that $g(x)=c_{b(x)}$ on $S$ and $k(x)=2g(x)-p$ for every $x$. The map $k$ is injective and has rank three. The set $A=k(\overline B)$ lies in $K$, is centrally symmetric about $k(0)$, and has relative frontier $k(S)$ consisting entirely of pure states.
+
+When $k(0)$ lies on the relative frontier of $K$, the set $A$ equals an original exclusion ball $D_r$. When $k(0)$ lies in the relative interior of $K$, the set $A$ equals $K\cap\operatorname{aff}(A)$ and is not an extreme subset of $K$. The equality $A=D_p$ holds exactly when, for each $x\in S$,
+
+$$
+g(x)=\frac{p+2c_p-b(x)}{2}.
+$$
+:::
+
+::: proof
+For each sphere point $b(x)$, symmetry of exclusion gives $p\in D_{b(x)}$. Reflecting $p$ through the center $c_{b(x)}$ inside this ball gives $k(x)$, so the full reflected sphere is pure. The location of its center determines whether the ball is an original exclusion or a section through the relative interior of $K$. The equality criterion identifies the reflection with the antipodal pairing in $D_p$. The full proof is checked by the Lean kernel.
+:::
+
+## F.8 Finite Compatibility for Repeated Labels {#sec-appendix-f-8}
+
+Keep the cone and normalization assumptions of F.6, and assume each original exclusion has a positive-dimensional whole-ball chart. Let $p\ne s$ be pure states with $D_p=D_s$. Choose a pure $q\in D_p$ and write $F=D_p$ and $H=D_q$. The pure states of $F$ are exactly those labelled by $H$, and the pure states of $H$ are exactly those labelled by $F$. The two balls are disjoint. A single original effect $e$ has the entire balls $F$ and $H$ as its zero and one faces in $K$. It satisfies $0\le e\le u$ on the original cone and differs from both the zero and unit effects. Hence center replacement on the pure states of this block agrees with
+
+$$
+J(x)=c_q+e(x)(c_p-c_q).
+$$
+
+::: {.theorem #thm-appf-repeated-finite-compatibility title="Finite Affine Compatibility Within a Repeated Block" lean="D5/S3/Quantum/Foundation/BinaryCenterGeometry.repeated_block_finite_compatibility"}
+Under these repeated-label assumptions, take two finite families of pure states $a_i,b_j$ in $F\cup H$ with real coefficients satisfying $\sum_i w_i=\sum_j v_j=1$. If $\sum_i w_i a_i=\sum_j v_j b_j$, then $\sum_i w_i c_{a_i}=\sum_j v_j c_{b_j}$. This allows negative coefficients and includes finite convex combinations.
+:::
+
+::: proof
+Because $J$ is affine and the weights on each side sum to one, each replaced sum equals $J$ of the original weighted sum. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-appf-repeated-one-outside title="No Crossing With One Outside and Three Inside Endpoints" lean="D5/S3/Quantum/Foundation/BinaryCenterGeometry.repeated_block_one_outside"}
+Assume BC in addition to the repeated-label hypotheses. Let $r$ be pure and outside $F\cup H$, and let $a,b,d$ be pure states in the block. For $0<t,v<1$,
+
+$$
+tr+(1-t)a\ne vb+(1-v)d.
+$$
+:::
+
+::: proof
+A crossing as in the second theorem would force $c_r=J(r)$ by BC and cancellation of the positive weight $t$. Because $0<e(r)<1$, the point $J(r)$ is a strict convex mixture of the two centers. An original exclusion containing that point would contain both centers by the face property. Each center is in the relative interior of its own ball, so the face must contain both whole balls. Maximality then forces the two disjoint balls to coincide. This contradicts $c_r\in D_r$. The full proof is checked by the Lean kernel.
+:::
+
+These results take the existence of a repeated-label pair as a hypothesis. Crossings with two outside endpoints, a uniform positive diameter bound over all exclusion balls, and the implication from three-dimensional exclusions and BC to global mixture compatibility remain open.
+
+[Source manuscript XI §138.3, §138.4 and §138.6](https://github.com/the-omega-institute/trureturing-source-theories/blob/2a39da5107abbfa3a72cc883486dbc15a15994a1/docs/develop/theory/QUANTUM_ORIGIN_EXCLUSION_SEGMENT_RIGIDITY_AND_PURE_LOCUS_TOPOLOGY_XI.md#L1289)

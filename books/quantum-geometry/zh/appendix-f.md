@@ -323,3 +323,70 @@ $$
 $\delta_p$ 依赖预先固定的球。全域正下界需要控制 $\inf_p\delta_p$。这些结论使用原始效应定义的排除球和原始归一化态底。
 
 [原文 XI §138.2 与 §138.5](https://github.com/the-omega-institute/trureturing-source-theories/blob/2a39da5107abbfa3a72cc883486dbc15a15994a1/docs/develop/theory/QUANTUM_ORIGIN_EXCLUSION_SEGMENT_RIGIDITY_AND_PURE_LOCUS_TOPOLOGY_XI.md#L1289)
+
+
+## F.7 单标签排除球的截面与反射 {#sec-appendix-f-7}
+
+沿用 F.6 的记号。设 $V\ne\{0\}$，原排除球均有三维整球坐标，且满足二元相容性 BC。用 $\mathring A_{\mathrm{rel}}$ 和 $\partial_{\mathrm{rel}}A$ 表示集合 $A$ 在自身仿射包中的相对内部和相对边界。
+
+::: {.theorem #thm-appf-singleton-center-sections title="单标签球心图的精确截面" lean="D5/S3/Quantum/Foundation/BinaryCenterSections.original_center_sections"}
+归一化基底 $K$ 的仿射维数至少为六，并且存在单标签纯态。对每个这样的纯态 $p$，存在 $D_p$ 的三维整球坐标图 $b$ 及单射仿射映射 $g$，其线性部分秩为三。对每个单位向量 $x$，$g(x)=c_{b(x)}$。记闭单位球为 $\overline B$，单位球面为 $S$，则
+
+$$
+g(\mathring B)\subseteq\mathring K_{\mathrm{rel}},
+\qquad
+g(\overline B)=K\cap\operatorname{aff}(g(\overline B)).
+$$
+
+另有 $\partial_{\mathrm{rel}}g(\overline B)=g(S)\subseteq\partial_{\mathrm{rel}}K$。对每个 $x\in S$，$g$ 的线性像与原排除球 $D_{b(x)}$ 的方向空间只交于零。
+:::
+
+::: proof
+F.6 的仿射球心图把开球送入 $K$ 的相对内部，把球面送入相对边界。沿像空间的每条直线用凸性确定截面的端点，得到闭球像等于完整截面。横截条件给出只交于零的两个三维方向空间。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-appf-reflected-pure-sphere title="反射后的纯球缘与两种截面" lean="D5/S3/Quantum/Foundation/BinaryCenterReflection.original_reflected_alternatives"}
+对每个单标签纯态 $p$，有三维整球坐标图 $b$ 和仿射映射 $g$、$k$，满足 $g(x)=c_{b(x)}$ 对一切 $x\in S$ 成立，且 $k(x)=2g(x)-p$ 对一切 $x$ 成立。$k$ 单射且秩为三。集合 $A=k(\overline B)$ 包含在 $K$ 中，关于 $k(0)$ 中心对称，且 $\partial_{\mathrm{rel}}A=k(S)$ 全由纯态组成。
+
+若 $k(0)$ 在 $K$ 的相对边界，$A$ 等于某个原排除球 $D_r$。若 $k(0)$ 在 $K$ 的相对内部，则 $A=K\cap\operatorname{aff}(A)$，且 $A$ 不是 $K$ 的极端子集。等式 $A=D_p$ 成立当且仅当对每个 $x\in S$ 都有
+
+$$
+g(x)=\frac{p+2c_p-b(x)}{2}.
+$$
+:::
+
+::: proof
+对每个球缘点 $b(x)$，排除关系的对称性给出 $p\in D_{b(x)}$，在这个球内以 $c_{b(x)}$ 为中心反射 $p$ 就得到 $k(x)$。因此整个反射球缘都是纯态。反射球心的位置决定整球是原排除球还是穿过 $K$ 相对内部的截面。回到 $D_p$ 的公式把这个反射与 $D_p$ 自身的对径配对对应起来。完整证明由 Lean 内核检查。
+:::
+
+## F.8 重复标签的有限相容性 {#sec-appendix-f-8}
+
+沿用 F.6 的锥与归一化条件，并假设每个原排除球都有正维整球坐标。设 $p\ne s$ 是满足 $D_p=D_s$ 的纯态，取纯态 $q\in D_p$，记 $F=D_p$、$H=D_q$。原排除关系的两条纤维互为配对。$F$ 的纯态恰是标签为 $H$ 的纯态，$H$ 的纯态恰是标签为 $F$ 的纯态，两球不交。存在同一个原效应 $e$，其在 $K$ 上的零面与一面分别是整个 $F$ 与 $H$。球心替换在块内纯态上因此由下式给出，其中 $e$ 在原锥上满足 $0\le e\le u$ 且不是零效应或单位效应。
+
+$$
+J(x)=c_q+e(x)(c_p-c_q).
+$$
+
+::: {.theorem #thm-appf-repeated-finite-compatibility title="重复块内的有限仿射相容性" lean="D5/S3/Quantum/Foundation/BinaryCenterGeometry.repeated_block_finite_compatibility"}
+在上述重复标签条件下，设两族有限纯态 $a_i,b_j$ 均取自 $F\cup H$，实系数分别满足 $\sum_i w_i=\sum_j v_j=1$。若 $\sum_i w_i a_i=\sum_j v_j b_j$，则 $\sum_i w_i c_{a_i}=\sum_j v_j c_{b_j}$。允许负系数，也包括有限凸组合。
+:::
+
+::: proof
+由 $J$ 的仿射性及两边各自的系数和为一，替换后的每一边等于对原加权和应用 $J$。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-appf-repeated-one-outside title="排除一个块外端点与三个块内端点的交叉" lean="D5/S3/Quantum/Foundation/BinaryCenterGeometry.repeated_block_one_outside"}
+在上述重复标签条件外再假设 BC。设 $r$ 为 $F\cup H$ 外的纯态，$a,b,d$ 为块内纯态。对任意 $0<t,v<1$，
+
+$$
+tr+(1-t)a\ne vb+(1-v)d.
+$$
+:::
+
+::: proof
+若第二个等式成立，BC 与严格正的 $t$ 会迫使 $c_r=J(r)$。由于 $0<e(r)<1$，$J(r)$ 是两个球心的严格凸组合。若该组合点属于某个原排除球，则该球的面性质将两个球心都纳入该球。每个球心都在对应球的相对内部，因而对应的整球也必须包含在该排除球内。整球极大性随即迫使两个不交的球相同。这与 $c_r\in D_r$ 矛盾。 完整证明由 Lean 内核检查。
+:::
+
+以上结论以重复标签对的存在为输入。两个块外端点的交叉、对所有排除球统一成立的正直径下界，以及三维排除球公理与 BC 能否推出全局混合相容性，仍是开放边界。
+
+[原稿 XI §138.3、§138.4、§138.6](https://github.com/the-omega-institute/trureturing-source-theories/blob/2a39da5107abbfa3a72cc883486dbc15a15994a1/docs/develop/theory/QUANTUM_ORIGIN_EXCLUSION_SEGMENT_RIGIDITY_AND_PURE_LOCUS_TOPOLOGY_XI.md#L1289)
