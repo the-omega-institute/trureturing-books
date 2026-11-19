@@ -1,6 +1,6 @@
-# 34.3 从单平面、相对论同时面到六维黄金切片：普适观察者定位律 {#sec-ch34-universal-observer-localization}
+# 29.3 从单平面、相对论同时面到六维黄金切片：普适观察者定位律 {#sec-ch34-universal-observer-localization}
 
-一旦看破了“读数简并即法向站位”这道几何机关，我们便能跳出三维球面，把目光投向更广阔的时空度规与高维切投母格：在四维相对论时空中，观察者凭什么断定两件空间正交事件“发生在同一时刻”？在切投模型集几何（文献背景见[第三十二章 §32.6](ch32-s06-meta-unification-and-icosian-bridge.md#sec-ch32-meta-coordinates-and-icosians) [@rem-ch32-icosian-e8-literature]）中，物理观察者又凭什么锚定自身三维世界切片在六维超立方母格中的倾角？
+一旦看破了“读数简并即法向站位”这道几何机关，我们便能跳出三维球面，把目光投向更广阔的时空度规与高维切投母格：在四维相对论时空中，观察者凭什么断定两件空间正交事件“发生在同一时刻”？在切投模型集几何（文献背景见[§28.6](ch32-s06-meta-unification-and-icosian-bridge.md#sec-ch32-meta-coordinates-and-icosians) [@rem-ch32-icosian-e8-literature]）中，物理观察者又凭什么锚定自身三维世界切片在六维超立方母格中的倾角？
 
 答案依然是同一把钥匙！在不定度规空间 $\mathrm{Space}(d) = \mathbb{R} \times \mathbb{R}^d$ 中，一旦零光锥结构给定，下方的形式化命题证明：任何在零光锥上归零的二次型不仅在纯空间截面上只依赖各向同性范数平方 $\lVert w\rVert^2$（从而对空间截面内的正交转向完全简并），而且时间基矢 $(1, 0)$ 与任意空间位移 $(0, w)$ 之间的极化交叉项严格归零！与此同时，在代数整数切投模型中，典范自然数黄金展开集经物理嵌入后严格落入由共轭内部窗口筛选出的切投点集之内。
 
@@ -24,7 +24,7 @@
 第 1 款对任意空间向量 $w$ 构造一对反向类光向量 $(\lVert w\rVert, w)$ 与 $(-\lVert w\rVert, w)$，验证 $\operatorname{minkowski}_d(\pm\lVert w\rVert, w) = \lVert w\rVert^2 - \lVert w\rVert^2 = 0$ 后代入假设得 $S(\pm\lVert w\rVert, w) = 0$；按二次型极化展开式 $S(t, w) = t^2 S(1, 0) + S(0, w) + t\,\operatorname{polar}_S((1, 0), (0, w))$ 将两式相加消去一次项即得 $S(0, w) = -S(1, 0)\lVert w\rVert^2$，两式相减并在 $w \neq 0$ 时消去非零因子 $\lVert w\rVert$（$w = 0$ 时直接由 `polar_zero_right`）证得极化交叉项为零。第 2 款任取 $y \in \operatorname{embedding} '' \operatorname{goldenModelSet}$，写 $y = \operatorname{embedding}(\operatorname{betaGolden}(v))$（$v \in \mathbb{N}$），取格点见证 $\operatorname{minkowskiEmbedding}(\operatorname{betaGolden}(v)) \in \operatorname{goldenLattice}$，其物理第一坐标恰为 $y$，而内部共轭第二坐标 $\operatorname{betaContraction}(v)$ 由窗口有界定理 `betaContraction_mem_window` 严格落入闭区间 $\operatorname{goldenWindow} = [-\varphi^{-2}, \varphi^{-1}]$。完整证明由 Lean 内核检查。
 :::
 
-请注意 [@prop-ch34-null-cone-and-golden-cut-orientation] 的两处形式化边界细节：第一，在 `null_cone_spatial_rigidity` 中，空间纯位移 $(0, w)$ 无论指向 $\mathbf{e}_x$ 还是横转 $90^\circ$ 指向等长的 $\mathbf{e}_y$，二次型取值都恒等于 $-S(1, 0)\lVert w\rVert^2$，且与给定第一坐标基矢 $(1, 0)$ 的极化交叉项恒为零（注意该代数恒等式对满足光锥归零条件的任意实二次型 $S$——包括全零退化二次型 $S = 0$——均成立，本身不含非退化假设 $S(1, 0) \neq 0$，也不直接断言物理四维速度轴的逆向唯一重构；附加非退化闵氏度规与未来指向归一化后的相对论同时面反演见下方 [@rem-ch34-virtual-z-berry-relativity-literature] 第 4 款）。第二，在 `golden_model_set_subset_cut_and_project` 中，我们严格保持单向子集包含 `⊆` 的陈述忠实性（因为无约束格 `goldenLattice` 中带负整数系数的元素虽可落入闭窗口，却不属于自然数展开值域 `goldenModelSet`）；其向六维准晶观察者框架的跨维模型延伸（`MODEL`）见下方 [@rem-ch34-localization-master-table]（并参[第三十二章 §32.6](ch32-s06-meta-unification-and-icosian-bridge.md#sec-ch32-meta-coordinates-and-icosians) [@rem-ch32-icosian-e8-literature]）。
+请注意 [@prop-ch34-null-cone-and-golden-cut-orientation] 的两处形式化边界细节：第一，在 `null_cone_spatial_rigidity` 中，空间纯位移 $(0, w)$ 无论指向 $\mathbf{e}_x$ 还是横转 $90^\circ$ 指向等长的 $\mathbf{e}_y$，二次型取值都恒等于 $-S(1, 0)\lVert w\rVert^2$，且与给定第一坐标基矢 $(1, 0)$ 的极化交叉项恒为零（注意该代数恒等式对满足光锥归零条件的任意实二次型 $S$——包括全零退化二次型 $S = 0$——均成立，本身不含非退化假设 $S(1, 0) \neq 0$，也不直接断言物理四维速度轴的逆向唯一重构；附加非退化闵氏度规与未来指向归一化后的相对论同时面反演见下方 [@rem-ch34-virtual-z-berry-relativity-literature] 第 4 款）。第二，在 `golden_model_set_subset_cut_and_project` 中，我们严格保持单向子集包含 `⊆` 的陈述忠实性（因为无约束格 `goldenLattice` 中带负整数系数的元素虽可落入闭窗口，却不属于自然数展开值域 `goldenModelSet`）；其向六维准晶观察者框架的跨维模型延伸（`MODEL`）见下方 [@rem-ch34-localization-master-table]（并参[§28.6](ch32-s06-meta-unification-and-icosian-bridge.md#sec-ch32-meta-coordinates-and-icosians) [@rem-ch32-icosian-e8-literature]）。
 
 这一“盲区反演站位”原理在超导微波量子硬件、自旋几何相位、阿贝尔规范纤维与相对论力学中的四大经典物理印证汇集于下框：
 

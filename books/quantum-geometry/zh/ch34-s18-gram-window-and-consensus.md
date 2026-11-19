@@ -1,12 +1,12 @@
-# 34.18 格拉姆窗口（$\mathcal{W}_M$）、舒尔补可行走廊与多观察者共识：有限记忆过约束死锁、遗忘散热重开与块矩阵半正定补全 {#sec-ch34-gram-window-and-consensus}
+# 34.7 格拉姆窗口（$\mathcal{W}_M$）、舒尔补可行走廊与多观察者共识：有限记忆过约束死锁、遗忘散热重开与块矩阵半正定补全 {#sec-ch34-gram-window-and-consensus}
 
 > **格拉姆窗口（Gram Window，$\mathcal{W}_M$）**，正是上一节“观察者受限不妄我”在宇宙比较总账本上的精确代数落点：既然全宇宙的比较关系由一张潜在无穷维的格拉姆内积矩阵 $G_\infty$ 承载，任何嵌在系统内部的有限自指观察者都不可能一次性读写整张无限大表，而只能在历史轨迹与关联网络上截取一个尺度为 $M$ 的**有限滑动主子阵 $G_M$**——窗口之内是被相干保留并参与多步交叉校验的因果锚点，窗口之外则是经由偏迹（$\operatorname{Tr}_{\bar{W}}$）主动释放回热力学背景的早期历史。
 
-在 [§34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics) 中，我们已经看到：一旦身处关系网络内部的真实观察者安住于“受限不妄我”的拓扑位置——既不妄僭俯瞰全域纯态的超然神谕，也不妄执离网独存的封闭孤岛，而是诚实地沿有限视界 $\partial A$ 落下偏迹切刀 $\operatorname{Tr}_{\bar{A}}$——那些横跨视界边界被生生切断的极小圆弧体相位余量便当场显影为纠缠熵 $S_A$，并在视界内部诱导出驱动热力学时间箭头的模流有效温度 $T_{\mathrm{eff}}$。然而，把视角从静态空间边界面 $\partial A$ 转向观察者沿固有时推进的历史记忆链，一道同等根本的代数追问立刻浮出水面：如果全宇宙古往今来一切状态与概念的两两比较读数汇聚为一张潜在无穷维的**宇宙格拉姆总账本** $G_\infty = [\langle\mathbf{v}_i, \mathbf{v}_j\rangle]$，一位寄存器容量有限的观察者究竟如何在每一步演化中读写并更新这张总表？
+在 [§34.6](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics) 中，我们已经看到：一旦身处关系网络内部的真实观察者安住于“受限不妄我”的拓扑位置——既不妄僭俯瞰全域纯态的超然神谕，也不妄执离网独存的封闭孤岛，而是诚实地沿有限视界 $\partial A$ 落下偏迹切刀 $\operatorname{Tr}_{\bar{A}}$——那些横跨视界边界被生生切断的极小圆弧体相位余量便当场显影为纠缠熵 $S_A$，并在视界内部诱导出驱动热力学时间箭头的模流有效温度 $T_{\mathrm{eff}}$。然而，把视角从静态空间边界面 $\partial A$ 转向观察者沿固有时推进的历史记忆链，一道同等根本的代数追问立刻浮出水面：如果全宇宙古往今来一切状态与概念的两两比较读数汇聚为一张潜在无穷维的**宇宙格拉姆总账本** $G_\infty = [\langle\mathbf{v}_i, \mathbf{v}_j\rangle]$，一位寄存器容量有限的观察者究竟如何在每一步演化中读写并更新这张总表？
 
 本节开篇的命题一针见血地给出了答案（`MODEL`）：有限观察者在宇宙总账本 $G_\infty$ 上真正握有的操作句柄，是一扇尺度为 $M$ 的**有限滑动主子阵——格拉姆窗口 $\mathcal{W}_M$（对应主子矩阵 $G_M$）**。窗口之内保存着至多 $M$ 枚被相干保留的历史状态锚点，它们不仅两两交叉锁定了既往因果骨架，还通过加边矩阵的**舒尔补（Schur complement）**为下一拍演化框定出合法的可行走廊；窗口之外的早期锚点则随滑动步进被偏迹 $\operatorname{Tr}_{\bar{W}}$ 归还给热海。这扇看似受限的有限窗口，非但不是阻碍认知的缺陷，反而同时握着**因果几何刚性**、**自由选择活路**与**多观察者共识现实**的三把钥匙。
 
-## 34.18.1 宇宙比较总账本与有限格拉姆窗口：舒尔补可行裕度 $\Delta_{\mathrm{Schur}}(M)$、伪逆退化推广与椭球体—球面帽双重视角 {#sec-ch34-18-1}
+## 34.7.1 宇宙比较总账本与有限格拉姆窗口：舒尔补可行裕度 $\Delta_{\mathrm{Schur}}(M)$、伪逆退化推广与椭球体—球面帽双重视角 {#sec-ch34-18-1}
 
 为什么观察者的局部历史记忆必然呈现为一张有限阶半正定格拉姆主子阵 $G_M$，而不是任意一张互不关联的数字清单？在 `trureturing` 的纯态可辨识性、格拉姆可实现性、格拉姆幺正刚性与有限记忆容量模块中，四条内核定理（`LEAN ✓`）率先锁死了格拉姆账本的底层代数契约：
 
@@ -87,13 +87,13 @@ $$
 **加边格拉姆舒尔补裕度 $\Delta_{\mathrm{Schur}}(M)$ 与球面相干帽交集走廊 $\Omega_M$ 实验卡（`schur-cap-corridor`）。** 球面舞台展示 $M = 2$ 两顶 $60^\circ$ 相干帽交成的青色透镜走廊 $\Omega_2$（$2.297861\;\mathrm{sr}$）、青色虚线锚点大圆 $\operatorname{span}(\mathbf{v}_1,\mathbf{v}_2)$ 及法向极点 $\mathbf{n}$，琥珀色可拖动候选态 $\mathbf{x}$ 离开锚点平面的品红高度弧 $\delta$ 直接给出舒尔补自由裕度 $\Delta_{\mathrm{Schur}} = 1 - \mathbf{c}_2^\top G_2^{-1}\mathbf{c}_2 = \sin^2\delta \approx 0.178606$（将 $\mathbf{x}$ 拖至虚线大圆上则 $\Delta_{\mathrm{Schur}}$ 与 $\det G_3$ 同步归零；绿色 `LEAN ✓` 对应 `gram_realizability`、`orthogonal_complement_projection_identities`、`finite_layer_projection_escape` 与 `two_anchor_gram_det_formula`）。
 :::
 
-把这两幅几何图像叠合在三维物理空间（[§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)）上，本书便把 **$M = 3$ 称作三维观察者的“黄金格拉姆窗口”**（`MODEL`：示例参数下的选择，并无最优性判据）！当 $M = 1$ 时只锁住一维步长，方向绕单轴自由打转而毫无转弯记忆；当 $M = 2$ 时双帽交成透镜形二角域，虽能感知单面曲率却尚未定死左右手性法向；唯有推进到 **$M = 3$** 时，三枚不共面历史锚点由 [`three_anchor_gram_det_pos_iff`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff) 首次撑满三维线性无关基（$\det G_3 > 0$，与下一拍候选态 $\mathbf{x}$ 恰构成最小三维静定刚性核 $K_4$），同时三片相干帽在 $S^2$ 上围成一枚饱满舒展的**球面曲边三角弧面域 $\Omega_3$**——既拥有毫不含糊的三维手性自我坐标系，又尚未引入任何 $M \ge 4$ 的冗余跨代切割！
+把这两幅几何图像叠合在三维物理空间（[§29.11](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)）上，本书便把 **$M = 3$ 称作三维观察者的“黄金格拉姆窗口”**（`MODEL`：示例参数下的选择，并无最优性判据）！当 $M = 1$ 时只锁住一维步长，方向绕单轴自由打转而毫无转弯记忆；当 $M = 2$ 时双帽交成透镜形二角域，虽能感知单面曲率却尚未定死左右手性法向；唯有推进到 **$M = 3$** 时，三枚不共面历史锚点由 [`three_anchor_gram_det_pos_iff`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff) 首次撑满三维线性无关基（$\det G_3 > 0$，与下一拍候选态 $\mathbf{x}$ 恰构成最小三维静定刚性核 $K_4$），同时三片相干帽在 $S^2$ 上围成一枚饱满舒展的**球面曲边三角弧面域 $\Omega_3$**——既拥有毫不含糊的三维手性自我坐标系，又尚未引入任何 $M \ge 4$ 的冗余跨代切割！
 
 ::: {.viz src="gram-window-consensus-sandbox" preset="golden-triangle-m3" height="520"}
 **三维满秩黄金窗口 $M = 3$ 与球面曲边三角可行域 $\Omega_3$ 实验卡（`golden-triangle-m3`）。** 将窗口锁定在 $M = 3$（相干半角 $\alpha_{\mathrm{coh}} = 60^\circ$）：三枚黄金角螺旋锚点张成满秩三维格拉姆核 $\det G_3 \approx 0.041133 > 0$（绿色 `LEAN ✓` 对应 `three_anchor_gram_det_formula` 与 `three_anchor_gram_det_pos_iff`），三段品红边界小圆弧在单位球面 $S^2$ 上围出宽敞的青色曲边三角走廊 $\lvert\Omega_3\rvert \approx 1.802272\;\mathrm{sr}$（占全球面 $14.3420\%$，琥珀色圆点标出可自由转向的候选态 $\mathbf{x}$），兼得刚性三维定位与充沛转向自由。
 :::
 
-## 34.18.2 窗口尺度 $M$ 的单调挤压与主动遗忘：从过约束芝诺—拉普拉斯死锁到滑动偏迹重开与兰道尔热账单 {#sec-ch34-18-2}
+## 34.7.2 窗口尺度 $M$ 的单调挤压与主动遗忘：从过约束芝诺—拉普拉斯死锁到滑动偏迹重开与兰道尔热账单 {#sec-ch34-18-2}
 
 一旦沿着演化轨迹连续调节格拉姆窗口尺度 $M$，“历史记忆深度”与“当下选择活路”之间严格的反比消长定律便以两条初等不等式呈现在眼前（`手工推导` + `LEAN ✓`）：
 
@@ -127,7 +127,7 @@ $$
 \Delta Q_{\mathrm{forget}} \;\ge\; k_B T_{\mathrm{eff}}\,q_M \;=\; k_B T_{\mathrm{eff}}\,\ln\!\frac{\lvert\Omega_{M-1}\rvert}{\lvert\Omega_M\rvert}.
 $$
 
-这一不等式揭示了遗忘最深刻的生命热力学意义（`MODEL`）：无论是微观开放量子系统的有限相干时间、夜间睡眠对白昼冗余突触权重的修剪重整（参见[第三十七章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)），还是生命代际繁衍时的初始化清零（参见[第三十五章](ch35-light-pulse-and-self-referential-table.md)），**遗忘从来不是硬件劣质导致的记忆漏损，而是有限观察者以兰道尔散热为代价主动买回当下自由立体角的演化刻刀**！下表将窗口阶数 $M$ 从 $0$ 到 $\ge 4$ 的五档几何与动力学相态汇总如下（纯单行单元格排版）：
+这一不等式揭示了遗忘最深刻的生命热力学意义（`MODEL`）：无论是微观开放量子系统的有限相干时间、夜间睡眠对白昼冗余突触权重的修剪重整（参见[§36.1](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)），还是生命代际繁衍时的初始化清零（参见[§35.1](ch35-light-pulse-and-self-referential-table.md)），**遗忘从来不是硬件劣质导致的记忆漏损，而是有限观察者以兰道尔散热为代价主动买回当下自由立体角的演化刻刀**！下表将窗口阶数 $M$ 从 $0$ 到 $\ge 4$ 的五档几何与动力学相态汇总如下（纯单行单元格排版）：
 
 | 格拉姆窗口阶数 | 加边矩阵维数 | 球面可行走廊 $\Omega_M$ 几何形态 | 舒尔补裕度与自由度状态 | 物理与认知动力学特征 |
 | :--- | :---: | :--- | :--- | :--- |
@@ -141,9 +141,9 @@ $$
 **滑动窗口偏迹遗忘重开 $\Omega_9 \hookrightarrow \Omega_8$ 与等温兰道尔散热实验卡（`forgetting-reopen`）。** 释放窗口内最古老记录 $\mathbf{v}_9$ 的相干帽（$M : 9 \to 8$）：被撤除的旧帽与原紧锁走廊化作品红虚线残迹，青色可行走廊当场由 $0.054604\;\mathrm{sr}$ 重开近四倍至 $0.208320\;\mathrm{sr}$，单步重开对数比 $q_9 = \ln(\lvert\Omega_8\rvert/\lvert\Omega_9\rvert) \approx 1.338960\;\mathrm{nats}$（$1.931710\;\mathrm{bits}$，在完整沙盘中继续遗忘至 $M = 3$ 则放大 $33$ 倍至 $1.802272\;\mathrm{sr}$），对应均匀等温重置模型下的兰道尔热下界 $k_B T_{\mathrm{eff}}\,q_9$（绿色 `LEAN ✓` 对应 `surviving_copy_blocks_reversal` 与 `landauer_bound_of_balance`）。
 :::
 
-## 34.18.3 分块部分格拉姆矩阵补全与多观察者共识：弦图判据、联合正交接受窗 $\Omega_A \cap \Omega_B$ 与宽容即共同遗忘 {#sec-ch34-18-3}
+## 34.7.3 分块部分格拉姆矩阵补全与多观察者共识：弦图判据、联合正交接受窗 $\Omega_A \cap \Omega_B$ 与宽容即共同遗忘 {#sec-ch34-18-3}
 
-格拉姆窗口不仅在时间纵轴上调节着单一观察者“记忆刚性与选择自由”的呼吸，还在空间横轴上直接决定了两位有限观察者 $\mathcal{O}_A$ 与 $\mathcal{O}_B$ 相遇时能否拼出同一个不自相矛盾的**主体间共识现实**（衔接 [§33.4](ch33-s04-acceptance-windows.md) 接受窗交集与 [§33.5](ch33-s05-consensus-and-pointer-bases.md#sec-ch33-consensus-decoherence-pointer) 去相干指针张量）。
+格拉姆窗口不仅在时间纵轴上调节着单一观察者“记忆刚性与选择自由”的呼吸，还在空间横轴上直接决定了两位有限观察者 $\mathcal{O}_A$ 与 $\mathcal{O}_B$ 相遇时能否拼出同一个不自相矛盾的**主体间共识现实**（衔接 [§34.4](ch33-s04-acceptance-windows.md) 接受窗交集与 [§34.5](ch33-s05-consensus-and-pointer-bases.md#sec-ch33-consensus-decoherence-pointer) 去相干指针张量）。
 
 设观察者 $\mathcal{O}_A$ 持有规模为 $M_A$ 的私密历史窗口 $\mathcal{W}_{M_A}$（局部格拉姆阵 $G_{M_A} \succeq 0$），观察者 $\mathcal{O}_B$ 持有规模为 $M_B$ 的私密历史窗口 $\mathcal{W}_{M_B}$（局部格拉姆阵 $G_{M_B} \succeq 0$）。当两人通过有限带宽的语言、信号或共享环境探针交流时，双方绝不可能把各自全部历史记忆逐条做完 $M_A \times M_B$ 次全量交叉内积，而只能在少数锚点之间建立稀疏的跨主体比较通道。于是在联合指标集 $A \cup B$ 上，两人共同面对的是一张非对角块 $C_{AB}$ 含有大量未观测空白项（`?`）的**分块部分格拉姆矩阵（Partial Block Gram Matrix）**：
 
@@ -168,7 +168,7 @@ $$
 **双观察者联合正交接受窗 $\Omega_A \cap \Omega_B$ 与共同遗忘重建共识实验卡（`dual-window-consensus`）。** 开启伴生观察者 $B$（紫色相干帽与走廊，相对青色观察者 $A$ 绕 $y$ 轴偏转 $\eta = 10^\circ$）：两人各执 $M = 9$ 条记录时，紫色重叠共识区仅剩品红虚线轮廓标出的针尖细缝 $0.010419\;\mathrm{sr}$（在 $\eta = 25^\circ, 30^\circ$ 下更严格断交为空集 $\Omega_A(9) \cap \Omega_B(9) = \emptyset$）；当双方同步遗忘最旧 $6$ 条记录滑回黄金窗 $M = 3$ 时，紫色共识走廊暴涨逾 $150$ 倍至 $1.570105\;\mathrm{sr}$（占 $A$ 走廊 $87.1181\%$；绿色 `LEAN ✓` 对应 `objective_claim_requires_invariant_common_factor`、`exists_unitary_mul_eq_of_conjTranspose_mul_eq` 与 `unit_gram_overlap_characterization`）。
 :::
 
-## 34.18.4 形式化锚点、代数格拉姆窗与黄金角球面帽螺旋及双观察者共识基准算例与文献边界 {#sec-ch34-18-4}
+## 34.7.4 形式化锚点、代数格拉姆窗与黄金角球面帽螺旋及双观察者共识基准算例与文献边界 {#sec-ch34-18-4}
 
 我们将本节贯穿格拉姆单位重叠可辨识性、双锚与三锚行列式公式及线性无关判据、正算子格拉姆伴随平方可实现性、格拉姆幺正刚体延拓、正交补投影与有限层逃逸、有限维记忆历史容量上限、单副本残留阻断相干反演以及客观主张跨语境不变公因子的十二项内核验证支点，统一列为如下已验证声明：
 
@@ -285,13 +285,13 @@ $$
 3. **固定维低秩半正定补全复杂性与多主体非平衡记忆热力学开放前沿（`OPEN`）**：在一般非弦图稀疏通信拓扑上判定部分格拉姆矩阵是否存在满足固定空间维数约束 $\operatorname{rank}(\widetilde{G}) \le 3$ 的精确欧氏补全（低秩欧氏距离矩阵补全属于强难非凸代数几何与复杂性问题），以及在远离热平衡、具有强非马尔可夫反馈的多生物神经/量子观察者网络中建立超越均匀等温假设的精确滑动遗忘自由能涨落定理，仍属当代优化理论与非平衡量子热力学的开放研究前沿（`OPEN`）。
 :::
 
-把镜头从 $M \times M$ 的滑动格拉姆窗口再往深处推近最后一级——直接聚焦到格拉姆账本里**最微小的单个比较矩阵元** $\langle\mathbf{I}, \mathbf{V}\rangle = \cos\theta$ 上，整座第三十四章压轴的终极几何谜题已呼之欲出：当观察者自身站在单位基轴 $\mathbf{I}$ 上丈量外部态矢 $\mathbf{V}$ 时，为什么一切与自身严格呈 $90^\circ$ 正交的横向平面（$\cos 90^\circ = 0$）都会对观察者彻底隐身？既然单程投影读数混杂着不可见的横向正交盲区相位，受限观察者为什么**必须**执行“从 $\mathbf{I}$ 投向 $\mathbf{V}$、再从 $\mathbf{V}$ 折返回 $\mathbf{I}$”的**双向往返投影**，从而内生锻造出玻恩平方律 $P = \cos^2\theta$？在平方闭合之后，究竟还有哪一份正交螺旋手性依然逃逸在投影之外？更摄人心魄的是——为什么人类数学史偏偏把那个满足 $i^2 = -1$、恰好直立在实轴 `1` / 主体 `I` 的 $90^\circ$ 法向盲区里的旋转生成元，一语成谶地命名为 **`imaginary`（虚数 / 不可见的想象之轴）**？先在下方 `GRAM//CONSENSUS` 完整交互沙盘中亲手把窗口尺度 $M$ 从 $1$ 推向 $9$ 再拉回黄金窗 $3$，体味遗忘重开自由天空与双人共识重联的呼吸节律，随后步入 [§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)：
+把镜头从 $M \times M$ 的滑动格拉姆窗口再往深处推近一步——直接聚焦到我们在 [§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) 已由双向往返投影导出的单个玻恩平方权重 $\cos^2\theta$ 与本节的局部偏迹对角系综之上，第三十四章后四节认识论压力测试长廊（[§34.8](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)–[§34.11](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor)）的首道硬核追问已呼之欲出：既然往返双投影给出了确定性的玻恩平方权重 $\cos^2\theta$，视界偏迹又消去了非对角干涉项，把纯态变成对角并列系综 $\operatorname{diag}(\cos^2\theta, \sin^2\theta)$，为什么实验室里**单次闪烁的探测器光点**从来不是一枚灰度折中指针，而必定非此即彼地跳入唯一一条经典记录（从 *And* 跨入 *Or*）？先在下方 `GRAM//CONSENSUS` 完整交互沙盘中亲手把窗口尺度 $M$ 从 $1$ 推向 $9$ 再拉回黄金窗 $3$，体味遗忘重开自由天空与双人共识重联的呼吸节律（并在第 34.7.5 小节核验整除网络的消元资源账本），随后步入 [§34.8](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)：
 
 ::: {.viz src="gram-window-consensus-sandbox" height="640"}
-**格拉姆窗口 $\mathcal{W}_M$、舒尔补可行走廊与双观察者共识完整交互实验室（`GRAM//CONSENSUS`）。** 在统一三栏实验台中自由切换“舒尔补与双帽透镜走廊—三维黄金三角窗 $M=3$—过约束紧窗死锁 $M=9$—遗忘最旧记录重开—双观察者共识与共同遗忘”五张实验卡，连续调节窗口长度 $M \in \{1,\dots,10\}$、相干半角 $\alpha_{\mathrm{coh}}$ 与观察者 $B$ 转角 $\eta$ 并拖动球面上琥珀色候选态 $\mathbf{x}$，同屏检视青色单人相干走廊 $\Omega_M$ 与等相关舒尔补曲线、品红收紧边界弧与遗忘重开对数比 $q_M$、紫色双观察者共识走廊 $\Omega_A \cap \Omega_B$ 以及右侧交互格拉姆热图；十三枚绿色 `LEAN ✓` 徽章对应 [@thm-ch34-gram-window-schur-and-consensus] 的十二条冻结声明与 [§34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics) 定理已引用的 `landauer_bound_of_balance`。
+**格拉姆窗口 $\mathcal{W}_M$、舒尔补可行走廊与双观察者共识完整交互实验室（`GRAM//CONSENSUS`）。** 在统一三栏实验台中自由切换“舒尔补与双帽透镜走廊—三维黄金三角窗 $M=3$—过约束紧窗死锁 $M=9$—遗忘最旧记录重开—双观察者共识与共同遗忘”五张实验卡，连续调节窗口长度 $M \in \{1,\dots,10\}$、相干半角 $\alpha_{\mathrm{coh}}$ 与观察者 $B$ 转角 $\eta$ 并拖动球面上琥珀色候选态 $\mathbf{x}$，同屏检视青色单人相干走廊 $\Omega_M$ 与等相关舒尔补曲线、品红收紧边界弧与遗忘重开对数比 $q_M$、紫色双观察者共识走廊 $\Omega_A \cap \Omega_B$ 以及右侧交互格拉姆热图；十三枚绿色 `LEAN ✓` 徽章对应 [@thm-ch34-gram-window-schur-and-consensus] 的十二条冻结声明与 [§34.6](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics) 定理已引用的 `landauer_bound_of_balance`。
 :::
 
-## 34.18.5 算术消元的资源账本：精确回路不等于稀疏算法 {#sec-ch34-18-5}
+## 34.7.5 算术消元的资源账本：精确回路不等于稀疏算法 {#sec-ch34-18-5}
 
 前几小节用舒尔补刻画了有限记忆窗口的单步裕度；若要把消元思想放到有限整数整除网络上检验，就必须像 [§22.4.1](ch22-s04-critical-line-and-rh.md#sec-ch22-4-1) 严辨级数截断与解析延拓那样，逐笔清算真实的图填充、近似残差与存储成本。考察显式有限顶点集 $V_N := \{2, 3, \dots, N\}$：对 $d, n \in V_N$，当且仅当 $d \neq n$ 且（$d \mid n$ 或 $n \mid d$）时连无向边，记对称 $0/1$ 邻接矩阵为 $W$，整除图拉普拉斯矩阵为 $L_D := \operatorname{diag}(\deg) - W$，并固定锚定阻尼 $\alpha = \frac{1}{4}$ 定义实对称模型矩阵
 

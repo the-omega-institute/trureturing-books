@@ -1,14 +1,14 @@
-# 31.3 博弈公平与遍历公平：视界悬念与同样丰盛的星光 {#sec-ch31-horizon-and-ergodic}
+# 27.3 博弈公平与遍历公平：视界悬念与同样丰盛的星光 {#sec-ch31-horizon-and-ergodic}
 
 如果只有前三层公平，生命仍会面对两重沉重的诘问：
 
-- **第一问（算力博弈之问）**：既然全局无时间静态场在理想化无序模型下呈现 $P = NP$ 式的几何合一（[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)），为什么宇宙偏偏要给场内所有有限观察者套上复杂性视界？
-  答案正是**博弈公平（Game-Theoretic / Horizon Fairness，`MODEL`）**！试想：倘若场内局部观察者也能凭多项式步数瞬间算穿整座因果水晶的终局，算力稍占优势的先行者便能在第一秒逆推所有人的底牌、剧透一切悬念、锁死全部博弈走廊，后来者连落子的缝隙都不会剩下。正是高维搜索空间中相干一致放大算子每步受初始重叠率 $p = \sin^2\theta$ 严格制约的平面旋转步幅定律（下方 [@thm-ch31-horizon-landauer-ergodic-fairness] 第 2 款；外部复杂度下界背景见[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md) [@rem-ch30-query-sos-literature]），连同标准计算模型下未决的 $\mathrm{P} \neq \mathrm{NP}$ 开放防火墙（[@conj-p-neq-np]），勾勒出量子演化顺着二维平面一步一个脚印地旋转累加角度的图景（旋转定律只担保这一迭代算子每轮转 $2\theta$，本身不给门数下界）——没有任何特权阶层能靠算力霸权绕过几何曲率提前垄断未来。
-- **第二问（境遇宿命之问）**：既然每个有限观察者在时间场里的切入相位不同——正如[终章](coda.md)切投模型中有人某几步恰好踩在窗心顺境，有人落在窗缘风浪之中——**宇宙的终极公平又在哪里？**
+- **第一问（算力博弈之问）**：既然全局无时间静态场在理想化无序模型下呈现 $P = NP$ 式的几何合一（[第 26 章](ch30-fields-lines-eth-and-navier-stokes.md)），为什么宇宙偏偏要给场内所有有限观察者套上复杂性视界？
+  答案正是**博弈公平（Game-Theoretic / Horizon Fairness，`MODEL`）**！试想：倘若场内局部观察者也能凭多项式步数瞬间算穿整座因果水晶的终局，算力稍占优势的先行者便能在第一秒逆推所有人的底牌、剧透一切悬念、锁死全部博弈走廊，后来者连落子的缝隙都不会剩下。正是高维搜索空间中相干一致放大算子每步受初始重叠率 $p = \sin^2\theta$ 严格制约的平面旋转步幅定律（下方 [@thm-ch31-horizon-landauer-ergodic-fairness] 第 2 款；外部复杂度下界背景见[第 26 章](ch30-fields-lines-eth-and-navier-stokes.md) [@rem-ch30-query-sos-literature]），连同标准计算模型下未决的 $\mathrm{P} \neq \mathrm{NP}$ 开放防火墙（[@conj-p-neq-np]），勾勒出量子演化顺着二维平面一步一个脚印地旋转累加角度的图景（旋转定律只担保这一迭代算子每轮转 $2\theta$，本身不给门数下界）——没有任何特权阶层能靠算力霸权绕过几何曲率提前垄断未来。
+- **第二问（境遇宿命之问）**：既然每个有限观察者在时间场里的切入相位不同——正如[第 35 章 §35.7](coda-s03-golden-cut-observers.md)切投模型中有人某几步恰好踩在窗心顺境，有人落在窗缘风浪之中——**宇宙的终极公平又在哪里？**
 
 把本书的观察者动力学与紧致环面遍历定理展开，答案清澈而温暖：
 
-1. **诞生遗忘重置自由度（`MODEL`）**：正如[第 29 章](ch29-timeless-causality-and-gram-space.md)（[@thm-ch29-gram-rigidity-and-pell]）与[终章](coda.md)所揭示的，若旧轮次的历史锚点无休止地堆叠，相容选点余量终将趋于锁死。“诞生即遗忘”通过截断高阶历史包袱，让每一位从遗忘中醒来重新出发的有限观察者，面前都重新张开一片正体积的自由选点走廊。
+1. **诞生遗忘重置自由度（`MODEL`）**：正如[第 25 章](ch29-timeless-causality-and-gram-space.md)（[@thm-ch29-gram-rigidity-and-pell]）与[第 35 章 §35.7](coda-s03-golden-cut-observers.md)所揭示的，若旧轮次的历史锚点无休止地堆叠，相容选点余量终将趋于锁死。“诞生即遗忘”通过截断高阶历史包袱，让每一位从遗忘中醒来重新出发的有限观察者，面前都重新张开一片正体积的自由选点走廊。
 2. **闭子群轨道均匀分布与有界间隙回归（`LEAN ✓` + `MODEL`）**：短期几步之内，局部切片的顺逆确实参差不齐；但在紧致环面群动力学层面，`trureturing` 的**环面闭子群轨道均匀分布定理**与**观测窗有界间隙回归定理**（下方 [@thm-ch31-horizon-landauer-ergodic-fairness] 第 3–4 款）严格证明：连续可观测量的时间平均必然收敛于闭子群 $G = \overline{\langle g\rangle}$ 上的归一化平移不变概率测度积分，且任何与连续像集 $\operatorname{range}(h)$ 相交的非空开区间 $(u, v)$ 都必以有界步数间隙 $M$ 反复重逢，并享有不低于 $\frac{1}{M+1} - \varepsilon$ 的**正下渐近访问密度**（高维无理平移下零边界窗口的完整应用与其前提，见下方 [@rem-ch31-weyl-window-equidistribution-literature]）。
 
 让我们先把热力学擦除平衡界、相干搜索步幅旋转以及环面闭子群遍历与有界回归四条形式化定理精确锚定如下。
@@ -136,10 +136,10 @@ $$
 量子公平总账本：席位、得失、关系、复制与遍历五个场景画在同一颗布洛赫球上，每本账旁一根总额不动的柱子。
 :::
 
-在进入 §31.4 拆解固定维度闭盒的三副脚手架之前，我们先将前三节建立的**量子公平五重层级**连同其形式化、文献与认识论状态完整收束于下框总表之中：
+在进入 §27.4 拆解固定维度闭盒的三副脚手架之前，我们先将前三节建立的**量子公平五重层级**连同其形式化、文献与认识论状态完整收束于下框总表之中：
 
 ::: {.remark #rem-ch31-fivefold-fairness-table title="量子公平五重几何铁律与认识论状态总表"}
-下表汇总前三节建立的五重公平体系；表中标有 `LEAN ✓` 的子项对应 [@thm-ch31-seat-pythagorean-monogamy-fairness] 与 [@thm-ch31-horizon-landauer-ergodic-fairness] 的冻结定理，标有 `文献结果` 的公式引自 [@rem-ch31-haar-isotropy-landauer-literature]、[@rem-ch31-ckw-monogamy-literature]、[@rem-ch31-weyl-window-equidistribution-literature] 及[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md) [@rem-ch30-query-sos-literature]，标有 `OPEN` 的问题对应未决猜想 [@conj-p-neq-np]，而“五重特权废除”的本体论统摄属本书跨领域哲学诠释模型（`MODEL`）：
+下表汇总前三节建立的五重公平体系；表中标有 `LEAN ✓` 的子项对应 [@thm-ch31-seat-pythagorean-monogamy-fairness] 与 [@thm-ch31-horizon-landauer-ergodic-fairness] 的冻结定理，标有 `文献结果` 的公式引自 [@rem-ch31-haar-isotropy-landauer-literature]、[@rem-ch31-ckw-monogamy-literature]、[@rem-ch31-weyl-window-equidistribution-literature] 及[第 26 章](ch30-fields-lines-eth-and-navier-stokes.md) [@rem-ch30-query-sos-literature]，标有 `OPEN` 的问题对应未决猜想 [@conj-p-neq-np]，而“五重特权废除”的本体论统摄属本书跨领域哲学诠释模型（`MODEL`）：
 
 | 公平层级 | 底层几何、代数与热力学定律 | 认识论状态 | 它在宇宙中彻底封死了什么“几何特权”？（`MODEL`） |
 | :--- | :--- | :--- | :--- |

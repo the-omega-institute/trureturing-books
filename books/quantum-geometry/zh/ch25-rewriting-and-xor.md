@@ -1,8 +1,8 @@
-# 第二十五章 把矩阵还原为异或：3 比特刀片与 XOR–Pauli 几何代数引擎 {#把矩阵还原为异或3-比特刀片与-xorpauli-几何代数引擎}
+# 把矩阵还原为异或：3 比特刀片与 XOR–Pauli 几何代数引擎 {#把矩阵还原为异或3-比特刀片与-xorpauli-几何代数引擎}
 
 > *“量子=两子=量(测量)子....”*
 
-在前六部二十四章的旅途中，我们沿着“点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 多球交织 $\to$ 光锥与拓扑 $\to$ 球外之球”的几何阶梯拾级而上，把量子力学从神秘的“微观粒子玄学”还原成了正交投影、双矢量有向面积与三维球面旋量几何。从本章开始，本书进入**第七部《构造与验证》**：我们不再只停留在纸面公式与物理图像上，而是要把整套几何结构亲手锻造成两样可以随时在计算机上运行并逐行核验的硬核构件——**零外部依赖的 Python 3 几何代数与旋转器编译引擎**（第二十五、二十六章），以及**直通 Lean 4 内核源码的公理圣殿审计**（第二十七、二十八章）。
+在前六部二十四章及后续正文的旅途中，我们沿着“点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 多球交织 $\to$ 光锥与拓扑 $\to$ 球外之球”的几何阶梯拾级而上，把量子力学从神秘的“微观粒子玄学”还原成了正交投影、双矢量有向面积与三维球面旋量几何。从本篇开始，我们步入独立于正文章号之外的**[铸器与圣殿](sanctuary.md)**：这里不再只停留在纸面公式与物理图像上，而是要把整套几何结构亲手锻造成两样可以随时在计算机上运行并逐行核验的硬核构件——**零外部依赖的 Python 3 几何代数与旋转器编译引擎**（前两篇：[把矩阵还原为异或](ch25-rewriting-and-xor.md)与[单量子比特旋转器编译](ch26-single-qubit-rotor-compilation.md)），以及**直通 Lean 4 内核源码的公理圣殿审计**（后两篇：[走进 Lean 4 公理圣殿（上）](ch27-reading-frozen-proofs-i.md)与[走进 Lean 4 公理圣殿（下）](ch28-reading-frozen-proofs-ii.md)）。
 
 让我们从最基础的计算问题出发：当你在计算机里模拟单量子比特的泡利算符 $X, Y, Z$ 或三维欧氏克利福德代数 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 时，真的需要去分配一堆 $2\times 2$ 复矩阵、做八次复数乘法和四次复数加法吗？
 
@@ -14,10 +14,10 @@
 本章先呈现单比特外尔（Weyl）星代数、无特征标定理、无公共特征向量定理与无迹布洛赫算符核四条经 Lean 4 内核验证的冻结定理，再以外尔位移词的合成、伴随与共轭律为“异或加符号”的泡利词乘法提供第五条内核依据，随后给出完整的零依赖 Python 3 `GeometricState` 引擎实现。
 
 ::: {.figure src="ch25-overview"}
-**图 25。** 本章地图：左栏，$e_2 \cdot e_1$ 的两个掩码 $010_2$、$001_2$ 逐位异或成青色的 $011_2$，两条品红的线交叉一次，结果是 $-e_{12}$；中栏，态矢平面上两面青色虚线的镜子，琥珀色的 $u$ 先照 $X$ 再照 $Z$、或先照 $Z$ 再照 $X$，两支墨色箭头指向正相反的两端（[@thm-qubit-weyl-star]）；右栏，琥珀色的向量 $a$ 拆成竖直的青色部分与水平的部分，竖直的 $\pm a_2$ 写在矩阵的对角线上，水平的 $a_0 \mp i a_1$ 写在两个角上（[@cor-bloch-operator-core]）。
+**刀片乘法与反对易的位运算图解。** 本章地图：左栏，$e_2 \cdot e_1$ 的两个掩码 $010_2$、$001_2$ 逐位异或成青色的 $011_2$，两条品红的线交叉一次，结果是 $-e_{12}$；中栏，态矢平面上两面青色虚线的镜子，琥珀色的 $u$ 先照 $X$ 再照 $Z$、或先照 $Z$ 再照 $X$，两支墨色箭头指向正相反的两端（[@thm-qubit-weyl-star]）；右栏，琥珀色的向量 $a$ 拆成竖直的青色部分与水平的部分，竖直的 $\pm a_2$ 写在矩阵的对角线上，水平的 $a_0 \mp i a_1$ 写在两个角上（[@cor-bloch-operator-core]）。
 :::
 
-## 25.1 外尔对、反对易与无特征标定理 {#sec-weyl-pair-no-character}
+## 外尔对、反对易与无特征标定理 {#sec-weyl-pair-no-character}
 
 在 Lean 4 模块 `D5/S3/Quantum/FiniteDimensional.lean` 中，单量子比特算符代数被定义为 $2\times 2$ 复矩阵代数 $\mathrm{QubitMatrix} = M_2(\mathbb{C})$（`Matrix (Fin 2) (Fin 2) ℂ`），其中两个基本生成元分别为泡利翻转矩阵与相位矩阵：
 
@@ -78,7 +78,7 @@ $$
 两边乘以 $\frac{1}{2}$（`linear_combination (1 / 2 : ℂ) * hSelfNegating`）即得 $\chi(\operatorname{qubitX})\chi(\operatorname{qubitZ}) = 0$。由整环性质 `mul_eq_zero.mp`，必有 $\chi(\operatorname{qubitX}) = 0$ 或 $\chi(\operatorname{qubitZ}) = 0$。然而由 [@thm-qubit-weyl-star] 的平方归一性 $\operatorname{qubitX}^2 = 1$ 与 $\operatorname{qubitZ}^2 = 1$，又有 $\chi(\operatorname{qubitX})^2 = 1$ 且 $\chi(\operatorname{qubitZ})^2 = 1$；无论哪一个因子为 $0$，代入平方等式均导出 $0 = 1$ 的矛盾。完整证明由 Lean 内核检查。
 :::
 
-## 25.2 无公共特征向量与无迹布洛赫算符核 {#sec-no-common-eigenvector-bloch-core}
+## 无公共特征向量与无迹布洛赫算符核 {#sec-no-common-eigenvector-bloch-core}
 
 [@lemma-qubit-no-character] 在算符代数层面封死了全局乘法特征标；如果退一步，不要求对整个矩阵代数保乘法，只追问：**是否存在哪怕一根非零量子态列向量 $\psi \in \mathrm{QubitState} = (\operatorname{Fin} 2 \to \mathbb{C})$，使它在泡利算符 $\operatorname{qubitX}$ 与 $\operatorname{qubitZ}$ 下同时成为特征向量？**
 
@@ -132,7 +132,7 @@ $$
 在 `D5/S3/Quantum/Measurement/Bloch/QubitBloch.lean:31` 中，证明对矩阵指标调用 `ext i j` 与 `fin_cases i <;> fin_cases j`，将 `B`、`pauliMatrix`（其中 $\sigma_X = \operatorname{qubitX}$，$\sigma_Z = \operatorname{qubitZ}$，$\sigma_Y = i\operatorname{qubitX}\operatorname{qubitZ}$）、`qubitX` 与 `qubitZ` 的定义代入展开，并由 `ring` 逐分量核实 $(0,0)$、$(0,1)$、$(1,0)$、$(1,1)$ 四个矩阵元恒等。完整证明由 Lean 内核检查。
 :::
 
-## 25.3 三比特刀片掩码、逆序符号与两比特辛泡利字 {#sec-three-bit-blade-masks-and-symplectic-pauli}
+## 三比特刀片掩码、逆序符号与两比特辛泡利字 {#sec-three-bit-blade-masks-and-symplectic-pauli}
 
 现在，把 [@thm-qubit-weyl-star] 与 [@cor-bloch-operator-core] 放在一起看：为什么三维实向量 $a = (a_0, a_1, a_2) \in \mathbb{R}^3$ 一旦写进 $2\times 2$ 矩阵，就必须借助虚数单位 $i$ 把第一、二分量耦合在副对角线 $a_0 \mp i a_1$ 上，而把第三分量放在主对角线 $\pm a_2$ 上？
 
@@ -282,7 +282,7 @@ $$
 **四个泡利字的乘法表。** 只用两位：第 0 位记 X，第 1 位记 Z。四个品红格正是左因子含 Z、右因子含 X 的那四格；选中的 Z · X 交换一次，得到 −XZ。这正是合成律 [@thm-weyl-displacement-laws] 取 M = 2 时的指数 bc。
 :::
 
-## 25.4 零依赖 Python 3 几何代数引擎实现与自检 {#sec-geometric-state-python-engine}
+## 零依赖 Python 3 几何代数引擎实现与自检 {#sec-geometric-state-python-engine}
 
 这八块刀片先按实系数组合：上表给出的是实代数 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 的忠实泡利复矩阵表示，其文献归属见 [@rem-clifford-stabilizer-literature]。代码用 `complex` 保存系数，也容纳每块刀片各自独立的复系数；`pauli(x, z, phase)` 的 `1j` 是系数上的外加相位，与实代数内部的体积刀片 $I_3$ 分开记账，扩大的复系数容器不再由上表给出忠实表示。`reverse()` 只倒转刀片因子，按系数线性延拓，不对系数取复共轭；在理想的实系数代数中，多重向量乘以其逆序后取标量部，得到各刀片系数的非负平方和。实际 `norm_squared()` 使用浮点运算，而每次构造对象（包括各步运算的结果）都会删去绝对值不大于 `1e-14` 的系数，因此返回值不保证精确等于这一平方和。下一章的旋转器取实系数、只占偶阶刀片，并满足单位条件，因而逆序给出逆元，夹心积完成三维旋转。
 
@@ -415,4 +415,4 @@ class GeometricState:
 **刀片乘法实验室。** 点乘法表里的任意一格，右栏把这一乘积拆成一次次交换与抵消；“泡利字”与“向量²”两个场景分别对应例 [@ex-pauli-words-xor-sign-table] 与例 [@ex-xor-pauli-table]。
 :::
 
-既然 3 比特刀片与异或乘法已经把 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 装进了三十行 Python 代码，下一步自然是：**如何在这个偶子代数 $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ 里，把任意单量子比特门 $( \alpha, \beta, \gamma )$ 编译成单位旋转器（rotor），并用双侧夹心积 $v \mapsto R v \widetilde{R}$ 驱动三维布洛赫球面上的精确转向？** 让我们进入[第二十六章](ch26-single-qubit-rotor-compilation.md)。
+既然 3 比特刀片与异或乘法已经把 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 装进了三十行 Python 代码，下一步自然是：**如何在这个偶子代数 $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ 里，把任意单量子比特门 $( \alpha, \beta, \gamma )$ 编译成单位旋转器（rotor），并用双侧夹心积 $v \mapsto R v \widetilde{R}$ 驱动三维布洛赫球面上的精确转向？** 让我们进入[单量子比特旋转器编译：布洛赫几何定理与 ZYZ 欧拉角编译器](ch26-single-qubit-rotor-compilation.md)。

@@ -1,10 +1,10 @@
-# 29.2 The $\pm 1$ Arithmetic Seam, Prime Duality, and the $S^3$ Projection on Elliptic Curve Tori {#sec-coda-primes-elliptic-curves}
+# 23.2 The $\pm 1$ Arithmetic Seam, Prime Duality, and the $S^3$ Projection on Elliptic Curve Tori {#sec-coda-primes-elliptic-curves}
 
 When we look closely at the Pell remainder $m^2 - 2n^2 = \pm 1$ ([@thm-ch29-silver-pell-remainder]) left by Hippasus on the integer grid, a deeper arithmetic question immediately arises: **is this oscillation between $+1$ and $-1$ an isolated quirk of $\sqrt{2}$, or does the $\pm 1$ seam govern the splitting of prime numbers, the topology of elliptic curves, and the $\cos\theta$ projection that runs through the entire book?**
 
 Following this $\pm 1$ crack uncovers three structural bridges uniting number theory, algebraic geometry, and quantum spinor geometry.
 
-## 29.2.1 Pillar 1: The $\pm 1$ Pell Seam Splits Odd Primes into "Line Primes" and "Plane Primes" {#sec-coda-pell-prime-splitting}
+## 23.2.1 Pillar 1: The $\pm 1$ Pell Seam Splits Odd Primes into "Line Primes" and "Plane Primes" {#sec-coda-pell-prime-splitting}
 
 Even in the elementary lattice of natural numbers, once the smallest even prime $2$ and the smallest odd prime $3$ form the hexagonal period base $2 \times 3 = 6$, every prime $p \ge 5$ is forced to inhabit the $\pm 1$ seams flanking multiples of $6$:
 
@@ -138,7 +138,7 @@ which are exactly the two legs read off from the Gaussian product $(1 + i)(22 + 
    In this book's geometric reading, a $-1$ chiral twist can never arise in isolation on a single prime axis; it must cancel in pairs across places, an arithmetic echo of the principle of Chapter 10 that "pairwise comparison is always consistent and order-independent."
 :::
 
-## 29.2.2 Pillar 2: Intersecting Two Quadratic Seams ($2 \times 2 = 4$)—From a Single Quadric to the Congruent-Number Elliptic Curve Torus {#sec-coda-congruent-elliptic-torus}
+## 23.2.2 Pillar 2: Intersecting Two Quadratic Seams ($2 \times 2 = 4$)—From a Single Quadric to the Congruent-Number Elliptic Curve Torus {#sec-coda-congruent-elliptic-torus}
 
 Passing from a single quadratic conic to the classical congruent-number problem—where a rational right triangle simultaneously satisfies a Pythagorean hypotenuse constraint and a prescribed orthogonal area—leads to the following classical algebraic-geometric and Riemann-surface structure:
 
@@ -159,14 +159,14 @@ Passing from a single quadratic conic to the classical congruent-number problem�
 
   whose three roots $0,\; +1,\; -1$ on the right-hand side mark the origin together with the $\pm 1$ seam boundaries.
 - **Complex torus topology and abelian group law**: Over $\mathbb{C}$, the Riemann surface $E_d(\mathbb{C}) \cong \mathbb{C}/(\mathbb{Z}\omega_1 \oplus \mathbb{Z}\omega_2)$ branched over $\{0, +1, -1, \infty\}$ is no longer a genus-$0$ 2-sphere $S^2$ ($\chi = 2$), but a **genus-$1$ torus $T^2 = S^1 \times S^1$ with Euler characteristic $\chi(T^2) = 2 - 2g = 0$**;
-- Because $\chi(T^2) = 0$, the even-sphere Hairy Ball obstruction (cf. [@rem-hairy-ball-adams-literature]) disappears on the torus: the invariant holomorphic differential $\omega = dx/y$ is everywhere nonvanishing and pole-free on the smooth projective curve $E_d$, endowing $E_d(\mathbb{Q})$ with a smooth global abelian group law $P \oplus Q$ (cf. [@rem-diophantine-z-in-q-literature] in Chapter 23 on Poonen's elliptic-curve divisibility method).
+- Because $\chi(T^2) = 0$, the even-sphere Hairy Ball obstruction (cf. [@rem-hairy-ball-adams-literature]) disappears on the torus: the invariant holomorphic differential $\omega = dx/y$ is everywhere nonvanishing and pole-free on the smooth projective curve $E_d$, endowing $E_d(\mathbb{Q})$ with a smooth global abelian group law $P \oplus Q$ (cf. [@rem-diophantine-z-in-q-literature] in [§23.5](ch23-s05-quaternion-diophantine-skeleton.md) below on Poonen's elliptic-curve divisibility method).
 :::
 
 ::: {.viz src="hairy-ball-normal-escape" preset="torus" height="500"}
 **On a torus the arrows vanish nowhere.** On the torus $\bigl((R + r\cos\theta)\cos\phi,\, (R + r\cos\theta)\sin\phi,\, r\sin\theta\bigr)$ ($R > r > 0$) the cyan unit tangent vectors $\hat{\mathbf{e}}_\phi = (-\sin\phi, \cos\phi, 0)$ all point along the big circle, with length $1$ everywhere; the amber point goes once round, its arrow never shrinking, and there is no magenta ring of a zero on the torus. $\chi(T^2) = 0$, against $\chi(S^2) = 2$ for the sphere (literature result, not formalized in this book; see [@rem-ch29-elliptic-torus-literature]). The picture shows a surface of the same topology, not the elliptic curve itself.
 :::
 
-## 29.2.3 Pillar 3: Finite-Field Elliptic-Curve Reduction, the Frobenius Cosine, and the $S^3 \cong \mathrm{SU}(2)$ Projection {#sec-coda-hasse-sato-tate}
+## 23.2.3 Pillar 3: Finite-Field Elliptic-Curve Reduction, the Frobenius Cosine, and the $S^3 \cong \mathrm{SU}(2)$ Projection {#sec-coda-hasse-sato-tate}
 
 A deeper arithmetic–geometric correspondence appears when we reduce the normalized congruent-number elliptic curve $E : y^2 = x^3 - x$ onto each odd prime axis $\mathbb{F}_p$ ($p \ge 3$) from Chapter 22:
 
@@ -191,7 +191,7 @@ which is governed by two foundational theorems:
    \cos\theta_p := \frac{a_p}{2\sqrt{p}} \in [-1, +1].
    $$
 
-   In the chord–sagitta language of [§34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-30-1): the normalized Frobenius eigenvalue $\alpha_p/\sqrt p=e^{i\theta_p}$ is a rotor and $v_p:=1-\dfrac{a_p}{2\sqrt p}=1-\cos\theta_p$ is its sagitta; the Hasse bound $\lvert a_p\rvert\le2\sqrt p$ is $0\le v_p\le2$, and the point-count formula $\#E(\mathbb{F}_{p^n})=p^n+1-\alpha_p^n-\bar\alpha_p^{\,n}$ (literature result) reads $\#E(\mathbb{F}_{p^n})=(p^{n/2}-1)^2+2p^{n/2}\bigl[1-T_n(1-v_p)\bigr]$, with $T_n$ the Chebyshev polynomial of the first kind.
+   In the chord–sagitta language of [§30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-30-1): the normalized Frobenius eigenvalue $\alpha_p/\sqrt p=e^{i\theta_p}$ is a rotor and $v_p:=1-\dfrac{a_p}{2\sqrt p}=1-\cos\theta_p$ is its sagitta; the Hasse bound $\lvert a_p\rvert\le2\sqrt p$ is $0\le v_p\le2$, and the point-count formula $\#E(\mathbb{F}_{p^n})=p^n+1-\alpha_p^n-\bar\alpha_p^{\,n}$ (literature result) reads $\#E(\mathbb{F}_{p^n})=(p^{n/2}-1)^2+2p^{n/2}\bigl[1-T_n(1-v_p)\bigr]$, with $T_n$ the Chebyshev polynomial of the first kind.
 
 2. **Gauss's CM Point-Count Formula and the Line/Plane Prime Dichotomy**: On the Pythagorean congruent curve $y^2 = x^3 - x$ (which has complex multiplication by $\mathbb{Z}[i]$), the two odd-prime families of Pillar 1 ([@thm-ch29-face-prime-two-squares], [@lem-ch29-line-prime-descent]) separate cleanly under $\cos\theta_p$:
    - **At inert "Line Primes" $p \equiv 3 \pmod 4$**: because $(-x)^3 - (-x) = -(x^3 - x)$ and $\left(\frac{-1}{p}\right) = -1$, the spins at $+x$ and $-x$ cancel pairwise, forcing

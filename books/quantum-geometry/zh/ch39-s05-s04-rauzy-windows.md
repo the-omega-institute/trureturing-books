@@ -1,4 +1,4 @@
-# 39.5.4 $K=3$ 劳齐分形内窗：精确前缀自覆盖与零测边界 {#sec-ch39-p2e-rauzy}
+# 35.6.4 $K=3$ 劳齐分形内窗：精确前缀自覆盖与零测边界 {#sec-ch39-p2e-rauzy}
 
 固定三阶 Tribonacci 特征多项式 $P_3(X) = X^3 - X^2 - X - 1$，记其实佩龙主根为 $\beta_3 = \operatorname{tribonacciConstant}$，并取上半平面（$\operatorname{Im}\alpha > 0$）的非佩龙复根 $\alpha$。共轭迹与范数恒等式 [`tribonacci_secondary_root_add_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_add_conjugate) 与 [`tribonacci_secondary_root_mul_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate) 精确锁定了
 

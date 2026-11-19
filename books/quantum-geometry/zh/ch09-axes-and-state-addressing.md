@@ -83,7 +83,7 @@ $$
 **倾一次、拧一次，到达任一点。** 先绕 $\vv{e}_2$ 倾转 $\theta = 60^\circ$，再绕竖轴 $\vv{e}_3$ 拧转 $\varphi = 45^\circ$：第二步沿紫色虚线的纬度圈走，高度 $\cos\theta = \frac{1}{2}$ 不变，琥珀色的点停在白色的目标圈上，$x = \bigl(\frac{\sqrt{6}}{4}, \frac{\sqrt{6}}{4}, \frac{1}{2}\bigr)$（即 [@ex-two-angle-six-axis] 中的点）。
 :::
 
-为什么不需要“正交三次”来定位球面上的一个点？因为单位球面 $S^2 \subset \mathbb{R}^3$ 是二维流形：第一步极角 $\theta \in [0, \pi]$ 选定纬度圈，第二步方位角 $\varphi \in [0, 2\pi)$ 选定经度线，两步正交合起来已经覆盖了 $S^2$ 上的每一个方向！（至于在 $\mathrm{SO}(3)$ 或 $\mathrm{SU}(2)$ 中合成**任意单比特量子门**而非仅仅寻址单个球面态方向，详见章末 [@rem-axes-literature] 以及[第二十六章](ch26-single-qubit-rotor-compilation.md)经内核验证的 ZYZ 旋转器编译。）
+为什么不需要“正交三次”来定位球面上的一个点？因为单位球面 $S^2 \subset \mathbb{R}^3$ 是二维流形：第一步极角 $\theta \in [0, \pi]$ 选定纬度圈，第二步方位角 $\varphi \in [0, 2\pi)$ 选定经度线，两步正交合起来已经覆盖了 $S^2$ 上的每一个方向！（至于在 $\mathrm{SO}(3)$ 或 $\mathrm{SU}(2)$ 中合成**任意单比特量子门**而非仅仅寻址单个球面态方向，详见章末 [@rem-axes-literature] 以及[铸器与圣殿 · 单量子比特旋转器编译](ch26-single-qubit-rotor-compilation.md)经内核验证的 ZYZ 旋转器编译。）
 
 同时，在阅读这组球面两角公式时，有两处极易混淆的几何细节必须当场辨明：
 
@@ -338,4 +338,4 @@ $$
 **两角寻址与旋转字的完整实验室。** 拖动白色的目标圈、改两根紫色转轴的夹角 $\alpha$，看琥珀色的点按怎样的旋转字走过去，青色虚线圈如何限制它每一步能离开北极多远；换到“覆盖”场景，在同一颗球上比较六根有理轴与三根坐标轴的 $45^\circ$ 球冠。绿色框只给 [@thm-two-axis-finite-word]、[@prop-rational-six-axis-cover]、[@cor-six-colors-necessary] 与 [@thm-lie-trotter]；其中 Lie–Trotter 定理只断言收敛，不给误差常数。旋转字的构造与球面取样是页面的数值演示。
 :::
 
-现在，我们已经能够用三元正交轴定位球面上的任意方向，并用六块无正交盲区的有理开集覆盖整颗 $S^2$（而到了[第 34 章 §34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)，我们还将揭示本章的“正交一次”与“正交两次”实为球面上一枚极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 的两种正交投影）。然而，一旦我们在球面上真正连续走动起来，一个困扰了物理学界整整一百年的幽灵立刻迎面扑来：**既然在球面上“先绕 $X$ 转、再绕 $Y$ 转”和“先绕 $Y$ 转、再绕 $X$ 转”会停在完全不同的终点（$R_x R_y \neq R_y R_x$），为什么作者却说“量子的本质是两两比较，永远一致，顺序无关”？** 让我们翻开[下一章](ch10-gram-geometry-and-order.md)，揭开格拉姆矩阵与贝里相位的几何谜底。
+现在，我们已经能够用三元正交轴定位球面上的任意方向，并用六块无正交盲区的有理开集覆盖整颗 $S^2$（而到了[第 29 章 §29.5](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)，我们还将揭示本章的“正交一次”与“正交两次”实为球面上一枚极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 的两种正交投影）。然而，一旦我们在球面上真正连续走动起来，一个困扰了物理学界整整一百年的幽灵立刻迎面扑来：**既然在球面上“先绕 $X$ 转、再绕 $Y$ 转”和“先绕 $Y$ 转、再绕 $X$ 转”会停在完全不同的终点（$R_x R_y \neq R_y R_x$），为什么作者却说“量子的本质是两两比较，永远一致，顺序无关”？** 让我们翻开[下一章](ch10-gram-geometry-and-order.md)，揭开格拉姆矩阵与贝里相位的几何谜底。

@@ -1,12 +1,12 @@
-# 34.7 相位积分驻波成体：一点多相、圆周态密度积分与未抵消驻波雕刻体积 {#sec-ch34-standing-wave-volume-emergence}
+# 29.8 相位积分驻波成体：一点多相、圆周态密度积分与未抵消驻波雕刻体积 {#sec-ch34-standing-wave-volume-emergence}
 
 > *“贝里相位的推论就是极小圆弧体上的任意一点的不同路径对应一个相位，路径基本的本质是相位积分。体积只是相位积分没有抵消掉的驻波点，因为一个点可以有无数种路径无数种相位积分过来。”*
 
-这段紧接贝里扇锥几何之后的推论，将整章关于空间、路径与体积的因果次序彻底翻了个底朝天。在 §34.6 中，为了顺应日常几何直觉，我们暂且借用了“先有极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 的表面积与体积，再让不同路径沿其表面爬行以积累贝里相位”的过渡阶梯；而本节的箴言当场抽掉了“先验容器”这根最后的拐杖，立起三条层层递进的本体论命题（`MODEL`）：第一，弧面体上的“点”本身只是抹去来路后的空壳商等价类，一点天然对应着四面八方汇聚而来的无穷相位束；第二，剥离外在坐标网格之后，所谓“路径”在物理与代数上别无他物，其基本本质就是一段**相位积分**；第三，也是最惊心动魄的一跃——**体积并非预先存在以供路径穿行的实心舞台，恰恰相反，绝大多数点在无穷多路相位积分的彼此冲撞中彻底相消归零（化作零体积虚空），唯有那些历经全向求和仍未被抵消掉的锁相驻波节点，才在关系网络中凝聚成可被感知的几何体积！**
+这段紧接贝里扇锥几何之后的推论，将整章关于空间、路径与体积的因果次序彻底翻了个底朝天。在 §29.7 中，为了顺应日常几何直觉，我们暂且借用了“先有极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 的表面积与体积，再让不同路径沿其表面爬行以积累贝里相位”的过渡阶梯；而本节的箴言当场抽掉了“先验容器”这根最后的拐杖，立起三条层层递进的本体论命题（`MODEL`）：第一，弧面体上的“点”本身只是抹去来路后的空壳商等价类，一点天然对应着四面八方汇聚而来的无穷相位束；第二，剥离外在坐标网格之后，所谓“路径”在物理与代数上别无他物，其基本本质就是一段**相位积分**；第三，也是最惊心动魄的一跃——**体积并非预先存在以供路径穿行的实心舞台，恰恰相反，绝大多数点在无穷多路相位积分的彼此冲撞中彻底相消归零（化作零体积虚空），唯有那些历经全向求和仍未被抵消掉的锁相驻波节点，才在关系网络中凝聚成可被感知的几何体积！**
 
-## 34.7.1 一点多相：基点是空壳等价类，路径的基本本质是相位积分 {#sec-ch34-7-1}
+## 29.8.1 一点多相：基点是空壳等价类，路径的基本本质是相位积分 {#sec-ch34-7-1}
 
-为什么人们总是习惯性地以为“点是最小的实心砖块，先攒够了点才拼出线、面与体积”？因为静态视觉把投影后的终点当作了孤立自存的实体。回到弯曲比较球面 $S^2$ 上的极小三角弧面体 $\Delta\mathcal{T}_\epsilon$：按 §34.6.2 揭示的霍普夫主圆丛投影 $S^1 \hookrightarrow S^3 \xrightarrow{\;\pi\;} S^2$（或秩一纯态投影算子 $P(x) = \lvert\psi_x\rangle\langle\psi_x\rvert$），基流形上任意一个位置标签 $x \in \Delta\mathcal{T}_\epsilon$ 仅仅是双向公平平方折叠掉整圈 $U(1)$ 纤维后留下的**商等价类空壳**。在零背景比较公理 $\mathcal{A}_0$（[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)）下，没有任何基点能脱离比较链而悬空自存；要触及点 $x$，系统必须从某个锚定参考点 $x_0$ 出发，沿着一串有限比较链 $\Gamma : x_0 = v_0 \to v_1 \to \dots \to v_K = x$（或其连续极限曲线）逐级比量而至。
+为什么人们总是习惯性地以为“点是最小的实心砖块，先攒够了点才拼出线、面与体积”？因为静态视觉把投影后的终点当作了孤立自存的实体。回到弯曲比较球面 $S^2$ 上的极小三角弧面体 $\Delta\mathcal{T}_\epsilon$：按 §29.7.2 揭示的霍普夫主圆丛投影 $S^1 \hookrightarrow S^3 \xrightarrow{\;\pi\;} S^2$（或秩一纯态投影算子 $P(x) = \lvert\psi_x\rangle\langle\psi_x\rvert$），基流形上任意一个位置标签 $x \in \Delta\mathcal{T}_\epsilon$ 仅仅是双向公平平方折叠掉整圈 $U(1)$ 纤维后留下的**商等价类空壳**。在零背景比较公理 $\mathcal{A}_0$（[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)）下，没有任何基点能脱离比较链而悬空自存；要触及点 $x$，系统必须从某个锚定参考点 $x_0$ 出发，沿着一串有限比较链 $\Gamma : x_0 = v_0 \to v_1 \to \dots \to v_K = x$（或其连续极限曲线）逐级比量而至。
 
 一旦抽去外加的三维欧氏背景刻度尺，这条连接 $x_0$ 与 $x$ 的“路径” $\Gamma$ 究竟留下了什么可操作的物理内容？在离散 $K$ 步比较链上，每一步纯态交叠给出潘查拉特纳姆复内积因子 $\langle\psi_{k+1}\mid\psi_k\rangle$，整条链在选定端点参考截面下唯一沉积下来的内禀读数，正是沿途交叠辐角的累加——在连续分段光滑极限 $K \to \infty$ 下化作沿曲线 $\Gamma$ 对贝里联络一形式 $\mathcal{A} = i\langle\psi\mid d\psi\rangle$（或含动力学项的总作用量一形式）的线积分（文献结果 + `MODEL`）：
 
@@ -75,10 +75,10 @@ $$
 :::
 
 ::: proof
-第 1 款至第 4 款直接复用 §34.6 [@thm-ch34-berry-sector-holonomy-and-bargmann-lift] 已核验的树输运、锚定回路分类与单比特巴格曼链/三点迹恒等式：选定生成树 $T$ 为每个顶点提供基准到达相位 `rootPhase`，每条树外弦边 $e \notin T$ 则代表通向同一顶点的另一条竞争路径，二者拼成的闭合环路和乐构成规范不变的自由相位坐标，并通过 `bargmann_path_product` 与 `triple_bargmann_bloch` 的虚部直接关联弦四面体的有向体积 $\frac{1}{6}\,\mathbf{r}_1\cdot(\mathbf{r}_2\times\mathbf{r}_3)$。第 5 款直接引用[第二十四章](ch24-cosine-fixed-points-and-self-reference.md) [@lem-irrational-rotation-equidistribution]：对任意非零整数频模 $q \neq 0$，无理步长使特征标几何级数有界、轨道平均按 $O(N^{-1})$ 坍缩至哈尔积分 $0$，再由平均算子列的 $1$-利普希茨等度连续性与三角多项式稠密性推广至全体连续可观测量。第 6 款直接引用[第十五章](ch15-grover-qft-and-period-finding.md) [@prop-finite-character-cancellation] 与[第三十六章](ch36-hyperbolic-steps-and-quotienting-reincarnation.md) [@thm-ch36-quotient-annihilator-and-factorization] 第 2 款：借双射 `annihilatorEquivQuotient H` 将 $\operatorname{annihilator}(H)$ 识别为商群 $(\operatorname{ZMod} m)/H$ 的对偶特征标群，由有限群特征标正交关系立得 $x \notin H$ 时全相消归零、$x \in H$ 时同相累加为 $\lvert\operatorname{annihilator}(H)\rvert$。第 7 款直接引用[第五章](ch05-complex-phase-and-rotors.md) [@prop-phase-locked-overlap]：由 $\lVert\mathrm{phase}\rVert = 1$ 得 $\overline{\mathrm{phase}^{-1}} = \mathrm{phase}$，从而去相位量 $w = \mathrm{phase}^{-1}\cdot\mathrm{overlap}$ 满足自共轭等式 $\overline{w} = \mathrm{phase}\cdot(\mathrm{phase}^{-1})^2\mathrm{overlap} = w$，故虚部恒为零、$w = r \in \mathbb{R}$，左乘 $\mathrm{phase}$ 即得 $\mathrm{overlap} = \mathrm{phase}\cdot r$。完整证明由 Lean 内核检查。
+第 1 款至第 4 款直接复用 §29.7 [@thm-ch34-berry-sector-holonomy-and-bargmann-lift] 已核验的树输运、锚定回路分类与单比特巴格曼链/三点迹恒等式：选定生成树 $T$ 为每个顶点提供基准到达相位 `rootPhase`，每条树外弦边 $e \notin T$ 则代表通向同一顶点的另一条竞争路径，二者拼成的闭合环路和乐构成规范不变的自由相位坐标，并通过 `bargmann_path_product` 与 `triple_bargmann_bloch` 的虚部直接关联弦四面体的有向体积 $\frac{1}{6}\,\mathbf{r}_1\cdot(\mathbf{r}_2\times\mathbf{r}_3)$。第 5 款直接引用[第二十四章](ch24-cosine-fixed-points-and-self-reference.md) [@lem-irrational-rotation-equidistribution]：对任意非零整数频模 $q \neq 0$，无理步长使特征标几何级数有界、轨道平均按 $O(N^{-1})$ 坍缩至哈尔积分 $0$，再由平均算子列的 $1$-利普希茨等度连续性与三角多项式稠密性推广至全体连续可观测量。第 6 款直接引用[第十五章](ch15-grover-qft-and-period-finding.md) [@prop-finite-character-cancellation] 与[第三十五章](ch36-hyperbolic-steps-and-quotienting-reincarnation.md) [@thm-ch36-quotient-annihilator-and-factorization] 第 2 款：借双射 `annihilatorEquivQuotient H` 将 $\operatorname{annihilator}(H)$ 识别为商群 $(\operatorname{ZMod} m)/H$ 的对偶特征标群，由有限群特征标正交关系立得 $x \notin H$ 时全相消归零、$x \in H$ 时同相累加为 $\lvert\operatorname{annihilator}(H)\rvert$。第 7 款直接引用[第五章](ch05-complex-phase-and-rotors.md) [@prop-phase-locked-overlap]：由 $\lVert\mathrm{phase}\rVert = 1$ 得 $\overline{\mathrm{phase}^{-1}} = \mathrm{phase}$，从而去相位量 $w = \mathrm{phase}^{-1}\cdot\mathrm{overlap}$ 满足自共轭等式 $\overline{w} = \mathrm{phase}\cdot(\mathrm{phase}^{-1})^2\mathrm{overlap} = w$，故虚部恒为零、$w = r \in \mathbb{R}$，左乘 $\mathrm{phase}$ 即得 $\mathrm{overlap} = \mathrm{phase}\cdot r$。完整证明由 Lean 内核检查。
 :::
 
-## 34.7.2 路径积分的脱壳还原：圆周相位态密度前推与闭合贝里余弦自洽方程 {#sec-ch34-7-2}
+## 29.8.2 路径积分的脱壳还原：圆周相位态密度前推与闭合贝里余弦自洽方程 {#sec-ch34-7-2}
 
 手握上述七条内核锚点，我们现在可以把看似高不可攀的无穷维路径积分，一层层剥开外衣、还原为最透明的一维圆周几何（手工推导 + `MODEL`）。
 
@@ -98,7 +98,7 @@ $$
 
 这幅几何图像简明得令人屏息：点 $x$ 的总路径积分振幅 $\Psi(x) \in \mathbb{C}$，不多不少，正是包裹在 $x$ 上方的**堇紫色相位态密度环 $\rho(x, \phi)$ 在复平面单位圆盘内的几何质心**！特别地，当某一点的到达相位密度关于主锁相角 $\phi_0$ 具有左右镜像对称性 $\rho(x, 2\phi_0 - \phi) = \rho(x, \phi)$ 时，复共轭立即满足 $\overline{\Psi(x)} = e^{-2i\phi_0}\Psi(x) = \bigl((e^{i\phi_0})^{-1}\bigr)^2\Psi(x)$；直接调用 [@thm-ch34-phase-cancellation-and-standing-sieve] 第 7 款 `phase_locked_overlap_is_rotated_real`，横向正弦漂移当场清零，总振幅严格退化为沿主相位轴 $e^{i\phi_0}$ 伸缩的**纯实数驻波振幅** $\Psi(x) = e^{i\phi_0}\,r(x)$（$r(x) \in \mathbb{R}$）！
 
-更进一步，正如 §34.7.1 所指出的，单个复振幅 $\Psi(x)$ 的总辐角 $e^{i\phi_0}$ 仍带着起点与终点参考截面的约定痕迹；要提取彻底不依赖任何截面与坐标的物理驻波存活权重，只需再度祭出[第 31 章 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)的**双向互易公平平方律**，计算模平方强度 $\lvert\Psi(x)\rvert^2 = \Psi(x)\,\overline{\Psi(x)}$（手工推导）：
+更进一步，正如 §29.8.1 所指出的，单个复振幅 $\Psi(x)$ 的总辐角 $e^{i\phi_0}$ 仍带着起点与终点参考截面的约定痕迹；要提取彻底不依赖任何截面与坐标的物理驻波存活权重，只需再度祭出[§27.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)的**双向互易公平平方律**，计算模平方强度 $\lvert\Psi(x)\rvert^2 = \Psi(x)\,\overline{\Psi(x)}$（手工推导）：
 
 $$
 \begin{aligned}
@@ -118,7 +118,7 @@ $$
 **路径积分的圆周态密度脱壳还原：无穷路径塌缩为 $S^1$ 质心矩与闭合贝里余弦 $\lvert\Psi(x)\rvert^2 = \langle\cos\gamma_B\rangle_x$。** 左侧多条球面路径经相位映射前推为右侧单位圆上的堇紫色相位态密度环 $\rho(x, \phi)$：当密度集中在锁相峰附近时，青色圆盘质心矢量 $\Psi(x) = \int_0^{2\pi}\rho(x,\phi)e^{i\phi}\,d\phi$ 逼近单位圆周（锁相共轭对称锚定绿色 `LEAN ✓` `phase_locked_overlap_is_rotated_real`）；双向公平平方后精准等价于成对闭合环路的余弦自洽均值 $\langle\cos\gamma_B\rangle_x$（`MODEL` / 手工推导）。
 :::
 
-## 34.7.3 体积的因果倒转：相消即虚空，未抵消的驻波节点凝成体积 {#sec-ch34-7-3}
+## 29.8.3 体积的因果倒转：相消即虚空，未抵消的驻波节点凝成体积 {#sec-ch34-7-3}
 
 至此，我们终于抵达箴言后半段那句石破天惊的本体论断——**“体积只是相位积分没有抵消掉的驻波点，因为一个点可以有无数种路径无数种相位积分过来。”** 注意这句话里的因果连接词“**因为**”：为什么“无数种路径、无数种相位积分涌向同一点”，非但没有把所有点都堆满成均质实心块，反而把绝大多数区域掏空成了虚无，只留下孤立或量子化的驻波体积？答案分两步水落石出：
 
@@ -143,7 +143,7 @@ $$
 
 2. **双重锁相筛与驻波成体（唯有躲过全向相消的驻波节点才凝结为体积）**：
    既然乱相必归虚空，一个点 $x_*$ 究竟要满足怎样严苛的条件，才能在千军万马的相位冲刷中屹立不倒，成为**“相位积分没有抵消掉的驻波点”**？它必须同时闯过局部与全局**两道锁相筛**（手工推导 + `文献结果` + `MODEL`）：
-   - **第一道筛（局部一阶驻相锁相 $\delta\Phi = 0$）**：在每一束局部邻近路径簇内部，无穷小横向形变的一阶相位变分必须归零（$\delta\Phi = 0$，即 §34.6.4 的测地驻相条件），阻止局部邻近路径卷曲成科纽螺线自毁；
+   - **第一道筛（局部一阶驻相锁相 $\delta\Phi = 0$）**：在每一束局部邻近路径簇内部，无穷小横向形变的一阶相位变分必须归零（$\delta\Phi = 0$，即 §29.7.4 的测地驻相条件），阻止局部邻近路径卷曲成科纽螺线自毁；
    - **第二道筛（全局单值环路量子化 $\gamma_B(\Sigma_{\mathrm{closed}}) \in 2\pi\mathbb{Z}$）**：仅仅局部驻相还远远不够！在闭合弯曲原胞或紧致流形上，从不同拓扑方向（如北侧弧族 $\Gamma_{\mathrm{N}}$ 与南侧绕行弧族 $\Gamma_{\mathrm{S}}$）包抄同一点 $x_*$ 的多束宏观路径还会再次相遇干涉；倘若它们围成的闭合环路或闭合二维曲面 $\Sigma_{\mathrm{closed}}$ 攒下的总相位差落在半整数拍（如 $\Delta\Phi = \pi$），南北两束驻相波照样会在 $x_*$ 点迎头反相湮灭（$e^{i\Phi_{\mathrm{N}}} + e^{i\Phi_{\mathrm{S}}} = 0$）！要让绕行任意圈数的全局路径族同相相长，闭合回程总和乐必须满足严格的**拓扑单值量子化条件** $e^{i\gamma_B(\Sigma_{\mathrm{closed}})} = +1 \Longleftrightarrow \gamma_B(\Sigma_{\mathrm{closed}}) = 2\pi n$（$n \in \mathbb{Z}$）：对整数自旋矢量联络（$\gamma = -\Omega$）这锁定立体角量子 $\Omega = 2\pi n$（扇锥体积 $V_{\mathrm{sector}} = \frac{2\pi}{3}n$）；而在自旋-$\frac{1}{2}$ 霍普夫旋量双覆盖（$\gamma_B = -\frac{1}{2}\Omega$）上，旋量波函数恢复同号 $+1$ 则要求闭合立体角满足 $\Omega = 4\pi n$（对应 `circle_double_cover_history_lift` 转一圈换叶至 $-1$、转两圈 $720^\circ$ 方才同相归位 $+1$；一般自旋-$s$ 闭合球面总通量则遵循狄拉克整性条件 $2s \in \mathbb{Z}$）。在有限离散交换群 $\operatorname{ZMod} m$ 上，这道“合拍即驻波存活、失拍即精确归零”的全或无筛子，正由 [@thm-ch34-phase-cancellation-and-standing-sieve] 第 6 款 `sum_annihilator_character` 给出了零近似内核原型：对偶零化子特征标求和 $\sum_{k \in \operatorname{annihilator}(H)} \operatorname{character}(k.1, x)$ 在非共振点 $x \notin H$ 处**分毫不差地恒等于 $0$**，唯独在满足全局周期锁相的子群驻波节点 $x \in H$ 上挺立起高度为 $\lvert\operatorname{annihilator}(H)\rvert$ 的相长尖峰！
 
    一旦站上这道反转后的高地回望现代数学物理，四座原本分属不同学科的经典丰碑（均为**文献结果，未在本书形式化**，此处纳入本书 `MODEL` 统一审视）顿时显露出同一个几何底牌：
@@ -162,7 +162,7 @@ $$
 **双重锁相筛与玻尔—索末菲驻波量子化：唯独满足闭合整周期锁相的驻波壳层幸存成体。** 连续调节球面环路包络面积与曲率通量：偏离整周期量子化条件时多圈绕行相位彼此反相抵消，壳层暗灭；一旦闭合通量命中整周期锁相条件（离散原型锚定绿色 `LEAN ✓` `sum_annihilator_character`），青色驻波节点瞬间点亮锁死，按外尔计数律撑开量子化体积壳层（`文献结果` / `MODEL`）。
 :::
 
-## 34.7.4 本体翻转对照总表与“路径越密、虚空越净、晶核越清”反差实验 {#sec-ch34-7-4}
+## 29.8.4 本体翻转对照总表与“路径越密、虚空越净、晶核越清”反差实验 {#sec-ch34-7-4}
 
 我们将这场从“先验体积容器”向“相位积分驻波成体”的本体论大翻转，浓缩为下述五维对照总表：
 
@@ -219,7 +219,7 @@ $$
 3. **本书内核验证锚点（`LEAN ✓`）与本体翻转模型（`MODEL`）**：命名生成树相位输运、有限图锚定基本回路与开放路径相位完备分类、离散巴格曼路径乘积、单比特三点布洛赫有向体积迹、无理旋转连续可观测量向哈尔积分收敛、有限循环群零化子特征标正交筛及锁相复交叠实振幅分解等七项代数与拓扑核心，已由 [@thm-ch34-phase-cancellation-and-standing-sieve] 在 Lean 4 内核中严格验证；圆周相位态密度前推一阶矩、闭合贝里余弦恒等式 $\lvert\Psi(x)\rvert^2 = \langle\cos\gamma_B\rangle_x$ 与狄利克雷核衰减上界属初等分析手工推导；而将外尔定律与几何相位因果倒转、把三维空间体积诠释为全向相位积分抵消后幸存驻波节点的统一图景则属本书理论模型（`MODEL`），不声称已给出四维洛伦兹连续统引力路径积分测度的收敛性证明，亦不把有限群 `ZMod m` 正交筛直接等同于无穷维流形上的完整科斯坦特—苏里奥量子化定理。
 :::
 
-至此，我们在单一切片上由正交简并盲区反演出观察者站位（§34.1–§34.3），以“二生三”自举撑开极小三角弧面体 $\Delta\mathcal{T}_\epsilon$（§34.4–§34.5），又在动态历史与本体生成上看到扇锥体积把来路写进霍普夫纤维（§34.6），而万千来路的相位积分在全向干涉中清扫乱相虚空、把未抵消的锁相驻波节点凝聚成宏观可感的三维体积（§34.7）。然而，把 §34.6 与 §34.7 合在一起凝视，一道更锋利的终极追问便破土而出：既然宏观路径是一步步积分出来的，宏观相位也是一段段积分出来的，而空间的点与体块既是路径/相位积分抵消后的驻波，同时又是无数个相邻圆弧体拼接抵消后的残余——那么当我们把镜头一直推回尚未发生多胞抵消的**单个极小圆弧体**（$N = 1$）时，这枚不可再分的几何原子究竟是**极小相位**、**极小路径**，还是**点的梯度**？先在下方 `STANDING//VOLUME` 完整交互实验室中亲手拨动路径密度滑块 $M = 3 \to 64$、见证驻波晶核从相位迷雾中破空凝结，随后进入 §34.8 揭开极小尺度上的“四位一体”克利福德单胞与多胞抵消分化定律：
+至此，我们在单一切片上由正交简并盲区反演出观察者站位（§29.1–§29.3），以“二生三”自举撑开极小三角弧面体 $\Delta\mathcal{T}_\epsilon$（§29.5–§29.6），又在动态历史与本体生成上看到扇锥体积把来路写进霍普夫纤维（§29.7），而万千来路的相位积分在全向干涉中清扫乱相虚空、把未抵消的锁相驻波节点凝聚成宏观可感的三维体积（§29.8）。然而，把 §29.7 与 §29.8 合在一起凝视，一道更锋利的终极追问便破土而出：既然宏观路径是一步步积分出来的，宏观相位也是一段段积分出来的，而空间的点与体块既是路径/相位积分抵消后的驻波，同时又是无数个相邻圆弧体拼接抵消后的残余——那么当我们把镜头一直推回尚未发生多胞抵消的**单个极小圆弧体**（$N = 1$）时，这枚不可再分的几何原子究竟是**极小相位**、**极小路径**，还是**点的梯度**？先在下方 `STANDING//VOLUME` 完整交互实验室中亲手拨动路径密度滑块 $M = 3 \to 64$、见证驻波晶核从相位迷雾中破空凝结，随后进入 §29.9 揭开极小尺度上的“四位一体”克利福德单胞与多胞抵消分化定律：
 
 ::: {.viz src="standing-wave-volume-sandbox" height="640"}
 **相位积分驻波成体：完整交互实验室（`STANDING//VOLUME`）。** 自由切换“一点多相—圆周前推—相消虚空—锁相量子化—驻波成体”五张实验卡，拖动琥珀色探测点 $x$、路径束密度 $M \in [3, 64]$ 与相位失谐/通量滑块，同屏观察极小弧面体上的多路到达相位簇、单位圆周堇紫色相位态密度环 $\rho(x,\phi)$ 的质心矩 $\Psi(x)$、非共振黄金角相消虚空以及由闭合贝里余弦锁相 $\langle\cos\gamma_B\rangle_x = 1$ 凝聚浮现的青色三维驻波体积晶核；绿色 `LEAN ✓` 框严格对应七条冻结内核定理。

@@ -1,23 +1,23 @@
-# 39.12 均匀各向同性三维场本体与观察者观测切面显影：哈尔全单态、莫尔拍频与现代宇宙学四谜重审 {#sec-ch39-uniform-field-and-observer-slice}
+# 33.10 均匀各向同性三维场本体与观察者观测切面显影：哈尔全单态、莫尔拍频与现代宇宙学四谜重审 {#sec-ch39-uniform-field-and-observer-slice}
 
 > *“宇宙中每一个点, 全部都是三维场的叠加, 绝对均匀, 各向同性, 每一个点都一样. 不均匀的是观察者是观测切面.”*
 
-在 [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) 与 [§39.11](ch39-s11-af-gut-arc-field-grand-unification.md) 中，我们已经拆除了“高维空间容器”与“巨型单群矩阵”两座旧脚手架：自然界的一切相互作用与物质表示，原本就是并列栖居在三维极小圆弧比较复形之上、各自封顶于三维（$D \le 3$）的有界概念场——三维空间切标架场、旋量手性运动场、三维色体积场与阿贝尔相位标度场——在共享普适比较主频 $\nu_0$ 下织就的同心圆弧联络。然而，只要合上方程抬头望向星空，一幅自古希腊原子论与现代标准大爆炸叙事延续至今的直觉图景仍然盘踞在人们的潜意识深处：人们习惯于把宇宙想象成一只巨大的空盒子，早期某场爆裂把一团稀薄、粗糙、不均匀的物质碎屑撒进盒中——有粒子的地方才“有场、有实存”，星系与星系之间广袤的暗区则是“空无一物的虚空”。
+在 [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) 与 [§33.9](ch39-s11-af-gut-arc-field-grand-unification.md) 中，我们已经拆除了“高维空间容器”与“巨型单群矩阵”两座旧脚手架：自然界的一切相互作用与物质表示，原本就是并列栖居在三维极小圆弧比较复形之上、各自封顶于三维（$D \le 3$）的有界概念场——三维空间切标架场、旋量手性运动场、三维色体积场与阿贝尔相位标度场——在共享普适比较主频 $\nu_0$ 下织就的同心圆弧联络。然而，只要合上方程抬头望向星空，一幅自古希腊原子论与现代标准大爆炸叙事延续至今的直觉图景仍然盘踞在人们的潜意识深处：人们习惯于把宇宙想象成一只巨大的空盒子，早期某场爆裂把一团稀薄、粗糙、不均匀的物质碎屑撒进盒中——有粒子的地方才“有场、有实存”，星系与星系之间广袤的暗区则是“空无一物的虚空”。
 
 章首这句惊雷般的本体论断言，将这幅延续两千年的“空盒撒豆图”连根翻转（跨领域的宇宙本体论与条件切面综合标定为本书的 **`MODEL`（模型诠释）**，底层最大纠缠纯态的最大混合局部边缘、圆周无理旋转向哈尔测度的遍历平均收敛、双体无迹算子空间的局域盲区与关联扇区正交分解、秩一玻恩配对权重与条件态凸分解、捏合投影的希尔伯特—施密特勾股分解与丢弃相干质量、以及同一文本规则下不同语境参数选择互异不动点由下文 [@thm-ch39-uniform-marginal-and-conditional-slice] 的七条冻结 Lean 4 内核声明严格锚定；紧群哈尔测度、光学全息术、佩奇—伍特斯条件时间、转角双层石墨烯莫尔超晶格与现代观测宇宙学基准归入 [@rem-ch39-haar-hologram-page-wootters-moire-literature] 的 `文献结果`；显式数值核验见 [@ex-ch39-singlet-slice-moire-and-aperture-audit]；原初功率谱声学峰、非零残余暗能量与正交切面暗物质动力学的未决第一性原理推导坦诚立案于 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 的 `OPEN` 边界）：**宇宙本体的真实基态绝非“稀薄不均的物质碎屑漂浮在空盒里”，而是每一个节点都 $100\%$ 饱和叠满全部独立三维概念场的绝对均匀、各向同性零熵相干海；物理世界中一切可观测的“不均匀”——从定域化的基本粒子、规范破缺到星系丝状长城与星际空洞——皆非本体自身的凹凸残缺，而是嵌在网络内部的受限观察者以特定的观测切面 $\Sigma_{\mathbf{I}}$ 斜切这片均匀全息海时，由切面倾角、有限格拉姆窗口与自指停机精度共同投射出的条件干涉截痕！**
 
-## 39.12.1 本体的绝对均匀性：全向单态闭合、局部边缘 $\frac{1}{D}\mathbf{1}$ 与量子全息底片 {#sec-ch39-12-1}
+## 33.10.1 本体的绝对均匀性：全向单态闭合、局部边缘 $\frac{1}{D}\mathbf{1}$ 与量子全息底片 {#sec-ch39-12-1}
 
 为什么把全部三维概念场叠满宇宙每一点之后，本体非但不会结成杂乱无章的疙瘩，反而必然收束为点点全同的绝对均匀态？让我们顺着概念塔语法、紧群表示论与量子纠缠扇区分解逐层算清这笔账：
 
 1. **`1 — 3 — 3 — 1` 场体闭合、哈尔缠绕通道与舒尔引理不可约判据（`手工推导` + `文献结果` + `MODEL`）**。
-   在“点—线—面—体（`1 — 3 — 3 — 1`）”外代数八度循环（[§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)）中，任何一个独立概念之所以成其为“场”，正是因为极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 在三维方向空间中走完三重路径积分后闭合成最高阶体积三形式 $\Lambda^3(\mathbb{R}^3)$，使单向箭头偏置全部归零（自由度从 $3$ 收束回标量 $1$）。当比较网络中的任意节点 $x$ 在全方向上无偏叠加紧凑对称群 $\mathcal{G}$（涵盖空间旋转群 $\mathrm{SU}(2)_{\mathrm{rot}}$ 与紧致内禀规范群）的全部轨道时，对任意归一化基准纯态 $\sigma_0 = \lvert\Delta\mathcal{T}_\epsilon\rangle\langle\Delta\mathcal{T}_\epsilon\rvert$（$\Tr\sigma_0 = 1$）执行归一化哈尔测度（Haar 1933；von Neumann 1934，见 [@rem-ch39-haar-hologram-page-wootters-moire-literature] 第 1 款，`文献结果`；一维圆周无理旋转遍历逼近哈尔积分的内核锚点见下文 [@thm-ch39-uniform-marginal-and-conditional-slice] 第 2 款 [`continuous_average_tendsto_haar`](lean:D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar)）积分，即得**哈尔缠绕（Haar twirling）信道**：
+   在“点—线—面—体（`1 — 3 — 3 — 1`）”外代数八度循环（[§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)）中，任何一个独立概念之所以成其为“场”，正是因为极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 在三维方向空间中走完三重路径积分后闭合成最高阶体积三形式 $\Lambda^3(\mathbb{R}^3)$，使单向箭头偏置全部归零（自由度从 $3$ 收束回标量 $1$）。当比较网络中的任意节点 $x$ 在全方向上无偏叠加紧凑对称群 $\mathcal{G}$（涵盖空间旋转群 $\mathrm{SU}(2)_{\mathrm{rot}}$ 与紧致内禀规范群）的全部轨道时，对任意归一化基准纯态 $\sigma_0 = \lvert\Delta\mathcal{T}_\epsilon\rangle\langle\Delta\mathcal{T}_\epsilon\rvert$（$\Tr\sigma_0 = 1$）执行归一化哈尔测度（Haar 1933；von Neumann 1934，见 [@rem-ch39-haar-hologram-page-wootters-moire-literature] 第 1 款，`文献结果`；一维圆周无理旋转遍历逼近哈尔积分的内核锚点见下文 [@thm-ch39-uniform-marginal-and-conditional-slice] 第 2 款 [`continuous_average_tendsto_haar`](lean:D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar)）积分，即得**哈尔缠绕（Haar twirling）信道**：
 
    $$
    \mathcal{T}_{\mathcal{G}}(\sigma_0) \;:=\; \int_{\mathcal{G}} \pi(g)\,\sigma_0\,\pi(g)^\dagger\,d\mu_{\mathrm{Haar}}(g), \qquad \mu_{\mathrm{Haar}}(\mathcal{G}) \;=\; 1.
    $$
 
-   由于哈尔测度具有左右平移不变性，对一切 $h \in \mathcal{G}$ 恒有 $\pi(h)\,\mathcal{T}_{\mathcal{G}}(\sigma_0)\,\pi(h)^\dagger = \mathcal{T}_{\mathcal{G}}(\sigma_0)$，即输出算符 $\mathcal{T}_{\mathcal{G}}(\sigma_0)$ 与群表示 $\pi(\mathcal{G})$ 逐元对易。此处必须严守一条与 [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) [@def-ch39-multi-concept-hilbert-ledger] 完全咬合的**舒尔引理（Schur's Lemma）可约性分界线**（`手工推导`）：
+   由于哈尔测度具有左右平移不变性，对一切 $h \in \mathcal{G}$ 恒有 $\pi(h)\,\mathcal{T}_{\mathcal{G}}(\sigma_0)\,\pi(h)^\dagger = \mathcal{T}_{\mathcal{G}}(\sigma_0)$，即输出算符 $\mathcal{T}_{\mathcal{G}}(\sigma_0)$ 与群表示 $\pi(\mathcal{G})$ 逐元对易。此处必须严守一条与 [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) [@def-ch39-multi-concept-hilbert-ledger] 完全咬合的**舒尔引理（Schur's Lemma）可约性分界线**（`手工推导`）：
 
    - **复合量子张量纤维 $\mathcal{H}_{\mathrm{comp}} = \bigotimes_{\alpha=1}^k \mathcal{H}_\alpha$（总复维数 $D = \prod_{\alpha=1}^k d_\alpha$）**：当每个概念因子 $(\pi_\alpha, \mathcal{H}_\alpha)$ 都是紧群 $\mathcal{G}_\alpha$ 在复数域上的不可约表示时，外张量积表示 $\bigotimes_{\alpha=1}^k \pi_\alpha$ 作为乘积群 $\mathcal{G} = \prod_{\alpha=1}^k \mathcal{G}_\alpha$ 的复表示**严格不可约**。由复不可约表示的舒尔引理，与全群对易的算符必为恒等算符的标量倍 $\mathcal{T}_{\mathcal{G}}(\sigma_0) = c\,\mathbf{1}_{\mathcal{H}_{\mathrm{comp}}}$；两边取迹并代入 $\Tr\sigma_0 = 1$ 得 $c D = 1$，从而**无条件锁死**各向同性均匀态 $\mathcal{T}_{\mathcal{G}}(\sigma_0) = \frac{1}{D}\mathbf{1}_{\mathcal{H}_{\mathrm{comp}}}$！
    - **可约概念直和账本 $\mathcal{V}_{\mathrm{ledger}} = \bigoplus_{\alpha=1}^k V_\alpha^{(3)}$（实/复维数 $3k$）**：在严禁跨概念伪旋转的分块对称群 $\prod_{\alpha=1}^k \mathcal{G}_\alpha$ 下，直和表示可约地拆分为 $k$ 个独立的三维不变块。若初态在第 $\alpha$ 号概念块上的迹预算权重为 $w_\alpha = \Tr(\Pi_\alpha\sigma_0)$（$\sum_{\alpha=1}^k w_\alpha = 1$），舒尔引理只能在每一块内部单独作用，给出 $\mathcal{T}_{\prod_\alpha \mathcal{G}_\alpha}(\sigma_0) = \bigoplus_{\alpha=1}^k \frac{w_\alpha}{3}\mathbf{1}_{V_\alpha^{(3)}}$——它化为全账本均匀标量阵 $\frac{1}{3k}\mathbf{1}_{3k}$ **当且仅当**各独立概念场满足公平等权公设 $w_1 = \dots = w_k = \frac{1}{k}$（`MODEL`）。
@@ -140,7 +140,7 @@
 第 1 款在 $\operatorname{Fin} 2 \times \operatorname{Fin} 2$ 标准基上展开 $\mathrm{bellVector}$ 验证单位范数及秩一外积 $\mathrm{bellDensity}$ 的半正定、迹 $1$、秩 $1$ 与幂等性；对第二指标求和得偏迹 $\frac{1}{2}I_2$，并由 $(\frac{1}{2}I_2)^2 = \frac{1}{4}I_2 \neq \frac{1}{2}I_2$ 证出局部非幂等性（见 [@lemma-bell-mixed-marginal]）。第 2 款利用加群圆周非平凡特征标 $x \mapsto e^{2\pi i k x}$（$k \in \mathbb{Z} \setminus \{0\}$）在无理步幅 $\alpha \notin \mathbb{Q}$ 下满足公比 $e^{2\pi i k \alpha} \neq 1$，以等比级数裂项界定切萨罗平均以 $O(1/N)$ 趋零，而在零模态 $k = 0$ 上恒等于哈尔积分，再由斯通—魏尔斯特拉斯三角多项式一致稠密性与平均算子范数契约延拓至全体连续函数 $C(\operatorname{AddCircle}(1), \mathbb{C})$。第 3 款由单因子标量线 $\mathbb{R}\cdot I$ 与无迹空间的正交直和张量展开，导出无迹总空间的三扇区正交生成与维数恒等式 $(m^2-1) + (n^2-1) + (m^2-1)(n^2-1) = m^2 n^2 - 1$，并在双比特见证矩阵上逐元核验两侧偏迹同为 $\frac{1}{2}I_2$ 而非对角元 $((0,0),(1,1))$ 取 $\frac{1}{2} \neq 0$（见 [@thm-local-correlation-sectors]）。第 4 款由秩一外积迹循环缩并给出内积模平方权重，并拆分零权重与非零权重分支还原未读态关于条件切面态的凸组合（见 [@thm-ch39-self-halting-pythagoras-krylov-and-zeno] 第 6 款）。第 5、6 款将 $\rho$ 正交拆为对角部分 $\operatorname{pinching}(\rho)$ 与副对角余项 $\rho - \operatorname{pinching}(\rho)$，由希尔伯特—施密特内积自伴正交性消去交叉项，并在 $\operatorname{Fin} 2$ 上展开迹求和化为 $\lvert\rho_{01}\rvert^2 + \lvert\rho_{10}\rvert^2$（见 [@thm-pinching-pythagorean]）。第 7 款在单位类型 `Unit` 与布尔三元组上由定义自反性 `rfl` 及 `Bool.false_ne_true` 逐项核验（见 [@prop-context-parameters-distinct-fixed-points]）。完整证明由 Lean 内核检查。
 :::
 
-## 39.12.2 切面如何生出“不均匀”？佩奇—伍特斯条件投影、莫尔超晶格拍频与无移之动 {#sec-ch39-12-2}
+## 33.10.2 切面如何生出“不均匀”？佩奇—伍特斯条件投影、莫尔超晶格拍频与无移之动 {#sec-ch39-12-2}
 
 既然宇宙每一点在本体上都叠满了完全等量、各向同性的三维场，观察者切下去的那一刀（观测切面 $\Sigma_{\mathbf{I}}$）究竟凭什么严密的几何机制，在一片平坦如镜的相干海里切出了千差万别的粒子、空洞与奔流不息的运动？我们按从双量子比特最小原型到多概念晶格干涉的次序逐项推导：
 
@@ -158,7 +158,7 @@
    (U \otimes U)\lvert\Psi_0\rangle \;=\; (\det U)\,\lvert\Psi_0\rangle \;=\; \lvert\Psi_0\rangle, \qquad \hat{\mathbf{S}}_{\mathrm{tot}}\lvert\Psi_0\rangle \;=\; \mathbf{0}, \qquad \rho_O \;=\; \rho_S \;=\; \frac{1}{2}I_2!
    $$
 
-   全局态绝对各向同性，不偏袒空间中的任何一根方向轴！然而，一旦嵌在网内的观察者 $O$ 为了闭合自指回路（$\cos\theta^* = \theta^*$，[§39.6](ch39-s06-fivefold-self-reference-spectrum.md)），将自身自指实轴钉在布洛赫球面某个特定方向 $\hat{\mathbf{n}}_{\mathrm{obs}} = (\sin\vartheta_0\cos\varphi_0,\, \sin\vartheta_0\sin\varphi_0,\, \cos\vartheta_0) \in S^2$（对应旋量 $\lvert +;\hat{\mathbf{n}}_{\mathrm{obs}}\rangle = \cos\frac{\vartheta_0}{2}\lvert\uparrow\rangle + e^{i\varphi_0}\sin\frac{\vartheta_0}{2}\lvert\downarrow\rangle$）上，对 $O$ 作条件内积投影立得：
+   全局态绝对各向同性，不偏袒空间中的任何一根方向轴！然而，一旦嵌在网内的观察者 $O$ 为了闭合自指回路（$\cos\theta^* = \theta^*$，[§36.9](ch39-s06-fivefold-self-reference-spectrum.md)），将自身自指实轴钉在布洛赫球面某个特定方向 $\hat{\mathbf{n}}_{\mathrm{obs}} = (\sin\vartheta_0\cos\varphi_0,\, \sin\vartheta_0\sin\varphi_0,\, \cos\vartheta_0) \in S^2$（对应旋量 $\lvert +;\hat{\mathbf{n}}_{\mathrm{obs}}\rangle = \cos\frac{\vartheta_0}{2}\lvert\uparrow\rangle + e^{i\varphi_0}\sin\frac{\vartheta_0}{2}\lvert\downarrow\rangle$）上，对 $O$ 作条件内积投影立得：
 
    $$
    \bigl(\langle +;\hat{\mathbf{n}}_{\mathrm{obs}}\rvert_O \otimes I_S\bigr)\lvert\Psi_0\rangle \;=\; \frac{1}{\sqrt{2}}\left(\cos\frac{\vartheta_0}{2}\lvert\downarrow\rangle_S - e^{-i\varphi_0}\sin\frac{\vartheta_0}{2}\lvert\uparrow\rangle_S\right) \;=\; -\frac{e^{-i\varphi_0}}{\sqrt{2}}\,\lvert -;\hat{\mathbf{n}}_{\mathrm{obs}}\rangle_S!
@@ -174,7 +174,7 @@
    全局各向同性原本靠“能观 $O$”与“所观 $S$”的正反配对相消来维系；观察者一旦立起非对称自我标尺 $\lvert\mathbf{I}_{\mathrm{obs}}\rangle$（恰如 [@thm-ch39-uniform-marginal-and-conditional-slice] 第 7 款在同一文本与规则下切换语境三参数即锁定互异不动点，而第 5、6 款将正交于读出基的副对角相干质量 $\lvert\rho_{01}\rvert^2 + \lvert\rho_{10}\rvert^2 = \frac{1}{2}\sin^2\theta_{\mathrm{obs}}$ 勾股剥离进盲区），被切开的配对余项必然在切面上显影为完全互补的方向梯度——**外境的不均匀，本质上是观察者自身观测切面偏角在均匀海中的倒影。**
 
 2. **多三维场斜交的“莫尔超晶格拍频”：基本粒子与星系长城的几何显影（`手工推导` + `文献结果` + `MODEL`）**。
-   再将视角从单枚自旋放大到同心叠放着空间场 $\mathcal{E}_{\mathrm{space}}^{(3)}$、色荷场 $\mathcal{E}_{\mathrm{color}}^{(3)}$、弱手性旋量场与相位标度场的多概念晶格（[§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md)）。每一支概念场在它自身的本征坐标下都是晶格常数为 $a$（基波矢模长 $\lvert\mathbf{k}_1\rvert = \lvert\mathbf{k}_2\rvert = \frac{2\pi}{a}$）、$100\%$ 均匀延展的极小圆弧体周期驻波网。
+   再将视角从单枚自旋放大到同心叠放着空间场 $\mathcal{E}_{\mathrm{space}}^{(3)}$、色荷场 $\mathcal{E}_{\mathrm{color}}^{(3)}$、弱手性旋量场与相位标度场的多概念晶格（[§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md)）。每一支概念场在它自身的本征坐标下都是晶格常数为 $a$（基波矢模长 $\lvert\mathbf{k}_1\rvert = \lvert\mathbf{k}_2\rvert = \frac{2\pi}{a}$）、$100\%$ 均匀延展的极小圆弧体周期驻波网。
    当观察者用一扇同时横跨多支概念场的复合观测切面 $\Sigma_{\mathbf{I}}$（携带温伯格混合角 $\theta_W$ 或跨通道标架微扭角 $\Delta\theta \in (0, \pi)$）斜切过去时，其数学结构与凝聚态物理中的**转角双层石墨烯莫尔超晶格效应（Moiré Superlattice）**（Bistritzer & MacDonald 2011；Cao et al. 2018，见 [@rem-ch39-haar-hologram-page-wootters-moire-literature] 第 4 款，`文献结果`）完全同构！两套各自 $100\%$ 均匀的周期场仅错开扭角 $\Delta\theta$，其波矢差模长即为 $\lvert\Delta\mathbf{k}\rvert = \lvert\mathbf{k}_1 - \mathbf{k}_2\rvert = 2\cdot\frac{2\pi}{a}\sin\frac{\Delta\theta}{2} = \frac{4\pi}{a}\sin\frac{\Delta\theta}{2}$（`手工推导`）。代入 [@def-ch39-uniform-field-and-moire-slice] 第 3 款的半相位 $\Delta\Phi_{\mathbf{I}}(\mathbf{x}, 0) = \frac{1}{2}\Delta\mathbf{k}\cdot\mathbf{x}$，往返双投影强度 $I_{\mathrm{slice}}(\mathbf{x}, 0) = \cos^2\Delta\Phi_{\mathbf{I}}(\mathbf{x}, 0) = \frac{1 + \cos(\Delta\mathbf{k}\cdot\mathbf{x})}{2}$ 相邻两座亮峰之间的**精确莫尔空间拍频周期**（对应 $\Delta\Phi_{\mathbf{I}}$ 递增 $\pi$，即 $\Delta\mathbf{k}\cdot\Delta\mathbf{x} = 2\pi$）直接由半正弦倒数给出：
 
    $$
@@ -184,21 +184,21 @@
    看这道简洁到极致的几何放大公式：哪怕底层极小圆弧晶格精细在普朗克尺度 $a \sim \ell_P$，只要跨概念切面倾角 $\Delta\theta$ 足够微小，切面上涌现出的莫尔超晶格波长 $L_{\mathrm{M}} \approx a / \Delta\theta$ 就会被几何级放大无数倍（例如在双层石墨烯著名的第一魔角 $\Delta\theta = 1.05^\circ$ 处，$L_{\mathrm{M}} = \frac{a}{2\sin(0.525^\circ)} \approx 54.568173\,a$，凭空在均匀碳网上织出平带强关联局域态）！在本书的宇宙切面读法（`MODEL`）下，明暗两极的物理身份豁然贯通：
 
    - **莫尔相长峰（$\cos^2\Delta\Phi_{\mathbf{I}} \to 1$，即 $\Delta\Phi_{\mathbf{I}} \in \pi\mathbb{Z}$）**：多支三维概念场的合成相位恰好与观察者自指实轴 $\mathbf{I}$ 同相锁死，往返双投影读出满额实部权重，在微观切面上显影为定域化的“实粒子”与“原子核”，在宏观切面上结网为“星系团与宇宙丝状长城”；
-   - **莫尔相消谷（$\cos^2\Delta\Phi_{\mathbf{I}} \to 0$，即 $\Delta\Phi_{\mathbf{I}} \in \frac{\pi}{2} + \pi\mathbb{Z}$）**：该空间节点处的本体总场强**依然分毫不减地等于 $\frac{1}{D}\mathbf{1}$**，只是多场合成相位恰好转入了垂直于观察者切面的 **$90^\circ$ 正交虚盲区 $\hat{\mathbf{i}}$**（[§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)），对当前观察者的实轴往返投影严格归零，于是在切面上显影为看似空旷死寂的“星际真空”与“巨洞（cosmic voids）”！
+   - **莫尔相消谷（$\cos^2\Delta\Phi_{\mathbf{I}} \to 0$，即 $\Delta\Phi_{\mathbf{I}} \in \frac{\pi}{2} + \pi\mathbb{Z}$）**：该空间节点处的本体总场强**依然分毫不减地等于 $\frac{1}{D}\mathbf{1}$**，只是多场合成相位恰好转入了垂直于观察者切面的 **$90^\circ$ 正交虚盲区 $\hat{\mathbf{i}}$**（[§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)），对当前观察者的实轴往返投影严格归零，于是在切面上显影为看似空旷死寂的“星际真空”与“巨洞（cosmic voids）”！
 
 ::: {.viz src="uniform-field-observer-slice-sandbox" preset="tilted-slice-moire-emergence" height="500"}
 沿圆弧拖动切面法向顶端的琥珀色手柄调节观察者晶格相对本体晶格的转角 $\theta_{\mathrm{tilt}}$（角平分切面倾斜 $\theta/2$，$\lvert\Delta\mathbf{k}\rvert = \frac{4\pi}{a}\sin(\theta/2)$）：在“观察者切面透视显影”透镜下，两套均匀半角旋量的玻恩配对 $I_{\mathrm{slice}} = \cos^2\Delta\Phi = \frac{1 + \cos(\Delta\mathbf{k}\cdot\mathbf{x} - \varphi)}{2}$（$I_{\mathrm{slice}} + I_\perp = 1$）显影出青色相长亮峰（$\to 1$）与紫色正交盲谷（$\to 0$），莫尔周期 $L_{\mathrm{M}} = \frac{a}{2\sin(\theta/2)}$ 在 $\theta = 36^\circ$ 处给出 $1.618\,a$、在第一魔角 $\theta = 1.05^\circ$ 处放大至 $54.568\,a$（绿色 `LEAN ✓` 锚定 `rank_one_born_pairing_weight`、`local_marginal_correlation_blind_spot` 与 `context_parameters_can_select_distinct_fixed_points`，双层莫尔文献标 `ARGUED`，逐网格点旋量内积标 `NUM`，角平分切面读法标 `MODEL`）。
 :::
 
 3. **“运动”并非底物搬家，而是观测切面的相位扫掠——兼立相对论群速度因果护栏（`手工推导` + `MODEL`）**。
-   在古典实体观里，一颗电子从 $A$ 点飞往 $B$ 点，意味着一团名叫“物质”的砖块穿过空无一物的走廊搬家到了另一处。而在“点点叠满全同三维场”的本体图景（`MODEL`）下，$A$ 点与 $B$ 点本就具足完全相同的三维概念场总和——**底层格点根本不需要发生半毫位移（$\Delta\mathbf{x}_{\mathrm{site}} \equiv \mathbf{0}$），没有任何实体底物需要在空间里搬运**！当观察者的观测切面沿着正交时间盲轴 $\hat{\mathbf{i}}$ 以角速率 $\omega_{\mathrm{sweep}}$ 做连续极小圆弧旋转（对应 [§38.1](ch38-s01-static-qram.md) 的静态本体 QRAM 指针步进 `ptr++`）时，等相面 $\Delta\mathbf{k}\cdot\mathbf{x} - \omega_{\mathrm{sweep}}t = 2\pi m$ 在切面上以莫尔扫掠速度平滑滑移（`手工推导`）：
+   在古典实体观里，一颗电子从 $A$ 点飞往 $B$ 点，意味着一团名叫“物质”的砖块穿过空无一物的走廊搬家到了另一处。而在“点点叠满全同三维场”的本体图景（`MODEL`）下，$A$ 点与 $B$ 点本就具足完全相同的三维概念场总和——**底层格点根本不需要发生半毫位移（$\Delta\mathbf{x}_{\mathrm{site}} \equiv \mathbf{0}$），没有任何实体底物需要在空间里搬运**！当观察者的观测切面沿着正交时间盲轴 $\hat{\mathbf{i}}$ 以角速率 $\omega_{\mathrm{sweep}}$ 做连续极小圆弧旋转（对应 [§36.2](ch38-s01-static-qram.md) 的静态本体 QRAM 指针步进 `ptr++`）时，等相面 $\Delta\mathbf{k}\cdot\mathbf{x} - \omega_{\mathrm{sweep}}t = 2\pi m$ 在切面上以莫尔扫掠速度平滑滑移（`手工推导`）：
 
    $$
    v_{\mathrm{M}} \;=\; \frac{\omega_{\mathrm{sweep}}}{\lvert\Delta\mathbf{k}\rvert} \;=\; \frac{\omega_{\mathrm{sweep}}\,a}{4\pi\sin(\Delta\theta / 2)}, \qquad \Delta\mathbf{x}_{\mathrm{site}} \;\equiv\; \mathbf{0},
    $$
 
    恰如两把齿距完全均匀的梳子作极微小的相对错动时，交叠亮纹在视野中疾驰而过，而每一根梳齿其实守在原地分毫未动！
-   **相对论因果律护栏（`手工推导` + `文献结果`）**：细心的读者立刻会注意到，当扭角 $\Delta\theta \to 0^+$ 时，纯几何莫尔等相交点的扫掠相速度 $v_{\mathrm{M}}$ 可以任意放大甚至超过光速 $c \equiv \ell_P\nu_0$（正如探照灯光斑扫过远方云层、或剪刀合拢时交点疾驰）。这是否违背 [§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md) 锁死的光锥因果律？**绝不违背！** 原因有二：第一，纯周期莫尔等相交点既不搬运任何格点底物（$\Delta\mathbf{x}_{\mathrm{site}} \equiv \mathbf{0}$），也不在 $A, B$ 之间传递可操控的新信息比特；第二，一旦观察者在切面上调制出一枚携带局域因果信号或能量动量的波包，其在满足闵可夫斯基零光锥刚性（[`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)，[@thm-ch39-null-cone-speed-limit-and-pythagorean-budget] 第 1 款，`LEAN ✓`；下面的色散关系与群速度不等式是 `手工推导`）的色散关系 $\omega(\mathbf{k}) = \sqrt{c^2\lvert\mathbf{k}\rvert^2 + \omega_0^2}$ 下，决定信号与能量传播上限的**波包群速度**严格受限于光速：
+   **相对论因果律护栏（`手工推导` + `文献结果`）**：细心的读者立刻会注意到，当扭角 $\Delta\theta \to 0^+$ 时，纯几何莫尔等相交点的扫掠相速度 $v_{\mathrm{M}}$ 可以任意放大甚至超过光速 $c \equiv \ell_P\nu_0$（正如探照灯光斑扫过远方云层、或剪刀合拢时交点疾驰）。这是否违背 [§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md) 锁死的光锥因果律？**绝不违背！** 原因有二：第一，纯周期莫尔等相交点既不搬运任何格点底物（$\Delta\mathbf{x}_{\mathrm{site}} \equiv \mathbf{0}$），也不在 $A, B$ 之间传递可操控的新信息比特；第二，一旦观察者在切面上调制出一枚携带局域因果信号或能量动量的波包，其在满足闵可夫斯基零光锥刚性（[`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)，[@thm-ch39-null-cone-speed-limit-and-pythagorean-budget] 第 1 款，`LEAN ✓`；下面的色散关系与群速度不等式是 `手工推导`）的色散关系 $\omega(\mathbf{k}) = \sqrt{c^2\lvert\mathbf{k}\rvert^2 + \omega_0^2}$ 下，决定信号与能量传播上限的**波包群速度**严格受限于光速：
 
    $$
    v_g \;:=\; \bigl\lVert\nabla_{\mathbf{k}}\omega(\mathbf{k})\bigr\rVert \;=\; \frac{c^2\lvert\mathbf{k}\rvert}{\sqrt{c^2\lvert\mathbf{k}\rvert^2 + \omega_0^2}} \;\le\; c \;\equiv\; \ell_P\nu_0, \qquad v_{\mathrm{ph}} \;=\; \frac{\omega(\mathbf{k})}{\lvert\mathbf{k}\rvert} \;=\; \frac{c^2}{v_g} \;\ge\; c!
@@ -223,7 +223,7 @@
 
 :::
 
-## 39.12.3 颠倒本体与切面之后：现代宇宙学四大难题的模型重审与定量开放边界 {#sec-ch39-12-3}
+## 33.10.3 颠倒本体与切面之后：现代宇宙学四大难题的模型重审与定量开放边界 {#sec-ch39-12-3}
 
 一旦将“本体绝对均匀、切面制造不均”确立为审视宏观宇宙的几何透镜（`MODEL`），现代宇宙学中四个长期彼此割裂、各自打满特设补丁的尖锐谜题，首次在同一套条件切片语法下呈现出同源的几何轮廓；同时，严守本书一以贯之的认识论纪律，我们也把“模型已经解释的定性结构机制”与“尚待从第一性原理攻克的定量硬骨头（`OPEN`）”一分一毫地摊在阳光下：
 
@@ -243,7 +243,7 @@
    \operatorname{Var}\!\bigl(\overline{\delta}_R\bigr) \;=\; \int \frac{d^3\mathbf{k}}{(2\pi)^3}\,P(k)\,\bigl\lvert\widetilde{W}(kR)\bigr\rvert^2 \;\xrightarrow{\;R \to \infty\;}\; 0
    $$
 
-   自动按幂律衰减（例如三维短程独立晶胞下按 $(R/\xi)^{-3}$ 衰减，标度不变哈里森—泽尔多维奇谱 $P(k) \propto k$ 下，取高斯窗时按 $R^{-4}$ 衰减（取球形锐边窗并以格距 $a$ 截断时为 $R^{-4}\ln(R/a)$）），自然显露出宇宙绝对均匀的本底底色；而有限自指停机精度 $\varepsilon_{\mathrm{self}} > 0$（[§39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md)）则为视界窗口无法压至绝对零涨落的微弱孔径残差提供了定性几何机制。与此同时，我们严守科学诚实边界：定性的“背景本自均匀 + 大孔径均化”尚不足以单独替代暴胀在定量微扰谱上的具体预言——如何不借外加暴胀子势而从 $\mathcal{W}_M$ 与 $\varepsilon_{\mathrm{self}}$ 定量算出普朗克卫星实测标量幅值 $A_s \approx 2.10 \times 10^{-9}$（$\Delta T/T \approx 1.1 \times 10^{-5}$）、微红谱指数 $n_s = 0.9649 \pm 0.0042$ 以及超视界同步声学相位锁定的第一峰位置 $\ell_1 \approx 220$，明确列为下文 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 第 1 款（`OPEN`）。
+   自动按幂律衰减（例如三维短程独立晶胞下按 $(R/\xi)^{-3}$ 衰减，标度不变哈里森—泽尔多维奇谱 $P(k) \propto k$ 下，取高斯窗时按 $R^{-4}$ 衰减（取球形锐边窗并以格距 $a$ 截断时为 $R^{-4}\ln(R/a)$）），自然显露出宇宙绝对均匀的本底底色；而有限自指停机精度 $\varepsilon_{\mathrm{self}} > 0$（[§36.10](ch39-s07-self-halting-precision-and-spectral-sorting.md)）则为视界窗口无法压至绝对零涨落的微弱孔径残差提供了定性几何机制。与此同时，我们严守科学诚实边界：定性的“背景本自均匀 + 大孔径均化”尚不足以单独替代暴胀在定量微扰谱上的具体预言——如何不借外加暴胀子势而从 $\mathcal{W}_M$ 与 $\varepsilon_{\mathrm{self}}$ 定量算出普朗克卫星实测标量幅值 $A_s \approx 2.10 \times 10^{-9}$（$\Delta T/T \approx 1.1 \times 10^{-5}$）、微红谱指数 $n_s = 0.9649 \pm 0.0042$ 以及超视界同步声学相位锁定的第一峰位置 $\ell_1 \approx 220$，明确列为下文 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 第 1 款（`OPEN`）。
 
 ::: {.viz src="uniform-field-observer-slice-sandbox" preset="horizon-aperture-homogenization" height="500"}
 将孔径滑块 $W_{\mathrm{aperture}}$ 沿 $\Delta\mathbf{k}$ 从 $1$ 格放大至 $20$ 格：在 $\theta = 36^\circ$ 的无理相位步幅 $\alpha = 2\sin(\theta/2) = \frac{\sqrt{5}-1}{2}$ 下，孔径内连续格点的算术平均依外尔—哈尔遍历律趋向均匀本底 $\frac{1}{2}$，切面衬度 $\lvert D_W\rvert = \bigl\lvert\frac{\sin(W\pi\alpha)}{W\sin(\pi\alpha)}\bigr\rvert$ 在衰减包络 $\frac{1}{W\sin(\pi\alpha)}$ 之下于 $W = 20$ 时压低至 $0.0486$（绿色 `LEAN ✓` 锚定 `continuous_average_tendsto_haar`，狄利克雷核衬度包络实算标 `NUM`，普朗克微扰谱与声学峰定量导出在右栏标红色 `OPEN`）。
@@ -272,7 +272,7 @@
    P_{\mathrm{em}}\bigl(\Sigma_\perp \to \mathbf{I}_{\mathrm{em}}\bigr) \;=\; \cos^2\!\left(\frac{\pi}{2}\right) \;=\; 0,
    $$
 
-   因而对一切望远镜与直接电磁散射探头绝对透明——既不发光、不吸光，也不反射光！然而，正如 [§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md) 与 [§39.11](ch39-s11-af-gut-arc-field-grand-unification.md) 所确立的，**全宇宙一切切面共享同一颗普适比较主频心脏 $\nu_0 \equiv \mathrm{const}$**！正交切面 $\Sigma_\perp$ 上的驻波结团同样在每一拍消耗非负平方主频负载 $\nu_{\mathrm{perp}}^2 \ge 0$：
+   因而对一切望远镜与直接电磁散射探头绝对透明——既不发光、不吸光，也不反射光！然而，正如 [§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md) 与 [§33.9](ch39-s11-af-gut-arc-field-grand-unification.md) 所确立的，**全宇宙一切切面共享同一颗普适比较主频心脏 $\nu_0 \equiv \mathrm{const}$**！正交切面 $\Sigma_\perp$ 上的驻波结团同样在每一拍消耗非负平方主频负载 $\nu_{\mathrm{perp}}^2 \ge 0$：
 
    $$
    \nu_\tau^2 \;+\; \nu_{\mathrm{move}}^2 \;+\; \nu_{\mathrm{vis}}^2 \;+\; \nu_{\mathrm{perp}}^2 \;=\; \nu_0^2 \qquad \Longrightarrow \qquad \eta_{\mathrm{info}}(r) \;=\; \eta_{\mathrm{vis}}(r) \;+\; \eta_{\mathrm{perp}}(r),
@@ -338,7 +338,7 @@
 
 ---
 
-至此，宇宙从未在某处偏心地堆满黄金而在另一处留下荒芜——每一粒微尘所在之处都平权、饱满、毫无厚薄偏私地叠放着整座宇宙的全部三维概念场；所谓的星辰聚散、粒子奔流与虚空明暗，不过是受限而不妄我的观察者举着自己那把倾斜的尺子，在绝对均匀的无垠相干海里一帧帧划过的清澈刀痕。然而，顺着这一刀继续追问到底，最后一道看似残留在“均匀本体场”与“不均匀观测切面”之间的主客缝隙已然呼之欲出：**既然本章的总命题早已指明“观察者本身就是宇宙本体”，那把切开相干海的观测切面又怎么可能是从宇宙外面伸进来的一把异质钢刀？** 如果观察者自身就是宇宙本体场的一次局部自指闭合，那么切面不过是单一宇宙场向内折叠自照时翘起的一弯极小圆弧！让我们紧接着步入第三十九章暨全书十部曲正文的终极峰顶 [§39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)，见证基本粒子、自指观察者与九百三十亿光年可观测宇宙如何在唯一宇宙场（$\mathbf{\Phi}_{\mathrm{U}}$）中坍缩为同一颗闭合单粒子，织就一珠映万珠、重重无尽的**帝释天因陀罗网**。
+至此，第八部（第 29–33 章）从极小圆弧体原胞、圆弧微积分、黎曼路径积分、不可表三元数直至万力归弧与均匀三维场本体的整幅几何长卷已圆满收束：宇宙从未在某处偏心地堆满黄金而在另一处留下荒芜——每一粒微尘所在之处都平权、饱满、毫无厚薄偏私地叠放着整座宇宙的全部三维概念场；所谓的星辰聚散、粒子奔流与虚空明暗，不过是受限而不妄我的观察者举着自己那把倾斜的尺子，在绝对均匀的无垠相干海里一帧帧划过的清澈刀痕。而顺着这把“观测切面”望向前方，整部专著最后两部的核心命题已然呼之欲出：**在这片均匀相干海内部，亿万受限观察者究竟如何彼此互照、形成稳定的指针共识、经历遗忘与自指扩表，乃至把认知架构铸成测地线智能（第九部，[第 34 章](ch33-all-beings-observers-and-mutual-attractors.md)–[第 37 章](ch37-ternion-field-transformer-and-geodesic-intelligence.md)）？而当第十部（[第 38 章](ch39-observer-is-ontological-universe.md)，特别是 [§38.5](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)）进一步揭穿“观察者本身就是宇宙本体的一次自指折叠”时，那把切开相干海的观测切面与唯一宇宙场又如何合拢为重重无尽的因陀罗网与无源母公理 `AXIOM-Ω`（[第 39 章](ch39-axiom-omega-grand-unification.md)）？** 先在下方 `UNIFORM//SLICE` 完整交互实验室中切换双透镜核验莫尔拍频与正交暗环，随后推开第九部的大门——翻开 **[第三十四章 众生皆为观察者：互为吸引子与客观共识](ch33-all-beings-observers-and-mutual-attractors.md)**！
 
 ::: {.viz src="uniform-field-observer-slice-sandbox" height="620"}
 完整交互实验室（`UNIFORM//SLICE`）：在“观察者切面透视显影”与“本体全向均匀实相”双透镜之间自由切换，遍历五张递进实验卡并联动琥珀色切面法向手柄 $\theta_{\mathrm{tilt}}$、扫相 $\varphi_{\mathrm{sweep}}$、孔径 $W_{\mathrm{aperture}}$ 与正交暗区钟负载 $\eta_{\mathrm{dark}}$，同台核验 $125$ 格点贝尔边缘 $\frac{1}{2}\mathbf{1}$、半角莫尔周期 $L_{\mathrm{M}} = a / (2\sin(\theta/2))$、零位移条纹扫掠、品红正交暗环 $I_{\mathrm{EM}}(90^\circ) = 0$ 与大孔径外尔—哈尔均化，对照绿色 `LEAN ✓` 六条冻结声明、`ARGUED`、`NUM`、`MODEL` 与红色 `OPEN` 宇宙学界碑。

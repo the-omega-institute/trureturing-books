@@ -1,8 +1,8 @@
-# 29.1 毕达哥拉斯、万物皆数与四级“球外之球”突围 {#sec-coda-pythagoras-all-is-number}
+# 23.1 毕达哥拉斯、万物皆数与四级“球外之球”突围 {#sec-coda-pythagoras-all-is-number}
 
 如果把整本书压缩回人类数学文明最初的那粒种子，我们会发现它早已埋藏在两千五百年前毕达哥拉斯学派的两句箴言之中：**“勾股定理（$a^2 + b^2 = c^2$）”**与**“万物皆数（All is Number）”**。透过克利福德几何代数与形式化内核的透镜，这两句古老箴言展现出了跨越三幕的壮丽几何真容。
 
-## 29.1.1 第一幕：勾股定理的几何真容——一维线段不可加，二维面积才守恒 {#sec-coda-pythagoras-act1}
+## 23.1.1 第一幕：勾股定理的几何真容——一维线段不可加，二维面积才守恒 {#sec-coda-pythagoras-act1}
 
 为什么直角三角形的两条正交直角边 $\mathbf{a} \perp \mathbf{b}$，不能靠一维长度直接相加得到斜边（$a + b \neq c$），偏偏要**先平方、再相加**（$a^2 + b^2 = c^2$）？
 
@@ -30,9 +30,9 @@ $$
 
 1. **量子力学（第一部至第三部）**：测量投影的粒子内积项 $\cos\theta$ 与驱动旋转的波外积项 $\sin\theta$ 满足勾股恒等式 $\cos^2\theta + \sin^2\theta = 1$——玻恩规则概率守恒 $P(0) + P(1) = 1$（[`born_probability_skeleton`](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton)）与内积空间平行四边形/勾股范数律（[`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law) 及互补测量概率勾股定理 [`complementary_context_probability_pythagoras`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras)）不过是单位圆上的勾股定理；
 2. **狭义相对论（第五部第 17 章）**：闵可夫斯基时空中固有时流逝率 $d\tau/dt$ 与空间运动速率 $v/c$ 满足 $(d\tau/dt)^2 + (v/c)^2 = 1$（即 $d\tau^2 = dt^2 - dx^2/c^2$ 的正交重排，对应双曲旋量范数守恒 [`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)）——所谓“光子以光速飞行时不经历固有时流逝”，只是勾股斜边 $1$ 全部投影到了空间轴 $v/c = 1$ 上，使得时间轴投影归零；
-3. **丢番图数论与旋量代数（第六部第 23 章）**：四元数单位球面 $S^3$ 的范数守恒 $s^2 + x^2 + y^2 + z^2 = 1$、艾森斯坦二次范数型恒等式（[`Qform_eq_eisNorm`](lean:D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_eq_eisNorm)）与黄金整数佩尔范数恒等式（[`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)），则是高维正交与二次格空间中的勾股定理。
+3. **丢番图数论与旋量代数（本章 [§23.3](ch23-s03-trace-and-norm-lattices.md)–[§23.5](ch23-s05-quaternion-diophantine-skeleton.md)）**：四元数单位球面 $S^3$ 的范数守恒 $s^2 + x^2 + y^2 + z^2 = 1$、艾森斯坦二次范数型恒等式（[`Qform_eq_eisNorm`](lean:D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_eq_eisNorm)）与黄金整数佩尔范数恒等式（[`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)），则是高维正交与二次格空间中的勾股定理。
 
-## 29.1.2 第二幕：希帕索斯之裂与永不磨灭的佩尔余项 $m^2 - 2n^2 = \pm 1$ {#sec-coda-pythagoras-act2}
+## 23.1.2 第二幕：希帕索斯之裂与永不磨灭的佩尔余项 $m^2 - 2n^2 = \pm 1$ {#sec-coda-pythagoras-act2}
 
 然而，正是这条看似天衣无缝的勾股定理，亲手砸碎了毕达哥拉斯学派最初的静态有理数球面。
 
@@ -140,13 +140,13 @@ $$
 其渐近分数依次是 $1/1,\ 3/2,\ 7/5,\ 17/12,\ 41/29,\ 99/70,\ \dots$，即从 $1/1$ 数起的第 $n$ 个渐近分数恰为 $Q_n/P_n$。一般理论中的拉格朗日定理还指出，任一无理数 $\alpha$ 的第二类最佳逼近（对每个分母不超过 $q$ 的其他分数 $p'/q'$ 都有 $|q\alpha - p| < |q'\alpha - p'|$ 的分数 $p/q$）都是渐近分数。所钉的 Lean 库只从递推出发证明了 [@lem-ch29-pell-companion-step]、[@thm-ch29-silver-pell-remainder] 与 [@thm-ch29-silver-best-approximation]，没有把 $P, Q$ 与 Mathlib 的连分数展开对应起来（源文件写明这一对应尚未证明）。因此，“$Q_n/P_n$ 就是 $\sqrt{2}$ 的连分数渐近分数”这一识别与一般的最佳逼近理论仍是文献结果；上面的单位余项 $Q_n^2 - 2P_n^2 = (-1)^n$ 与最佳逼近下界并不依赖于它。
 :::
 
-[@thm-ch29-silver-pell-remainder] 的行列式 $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$ 与[终章](coda.md)的斐波那契—卡西尼恒等式 $F_kF_{k+2} - F_{k+1}^2 = (-1)^{k+1}$ 形状完全相同，它的单位余项也与我们在第 23 章证明的黄金整数佩尔型恒等式 $(2a + b)^2 - 5b^2 = 4\operatorname{norm}(g)$（[`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)）遥相呼应：用一维离散整数网格去缝合二维正交旋转时，网格接缝处永远残留着单位算术裂隙。希帕索斯发现的不是数学的崩塌，而是**第 1 层有理数球面被 $90^\circ$ 正交面积运算撑破时露出的第一道“球外之球”接缝**。
+[@thm-ch29-silver-pell-remainder] 的行列式 $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$ 与[第 35 章 §35.7](coda-s03-golden-cut-observers.md)的斐波那契—卡西尼恒等式 $F_kF_{k+2} - F_{k+1}^2 = (-1)^{k+1}$ 形状完全相同，它的单位余项也与下文 [§23.4](ch23-s04-eisenstein-and-golden-pell.md) 将要证明的黄金整数佩尔型恒等式 $(2a + b)^2 - 5b^2 = 4\operatorname{norm}(g)$（[`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)）遥相呼应：用一维离散整数网格去缝合二维正交旋转时，网格接缝处永远残留着单位算术裂隙。希帕索斯发现的不是数学的崩塌，而是**第 1 层有理数球面被 $90^\circ$ 正交面积运算撑破时露出的第一道“球外之球”接缝**。
 
 ::: {.viz src="pythagoras-number-escape" preset="hippasus" height="500"}
 **永远差一格。** 渐近分数 $1/1, 3/2, 7/5, 17/12, \dots$ 沿直线 $m = \sqrt{2}\,n$ 越贴越近；右侧两条色带是 $m^2$ 与 $2n^2$ 的格子数，放大镜里它们永远差着一格。
 :::
 
-## 29.1.3 第三幕：为“万物皆数”正名——从动词“数（shǔ）”到四级数系突围 {#sec-coda-pythagoras-act3}
+## 23.1.3 第三幕：为“万物皆数”正名——从动词“数（shǔ）”到四级数系突围 {#sec-coda-pythagoras-act3}
 
 既然有理数连最简单的正交斜边 $\sqrt{2}$ 都装不下，毕达哥拉斯的“万物皆数”错了吗？
 

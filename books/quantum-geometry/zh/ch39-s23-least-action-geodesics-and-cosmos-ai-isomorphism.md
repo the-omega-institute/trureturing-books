@@ -1,30 +1,30 @@
-# 39.23 人工智能与宇宙的最小作用量同构：三元数场弦弧矢高、玻恩惊奇度、流群自平行测地线与零幻觉思维链 {#sec-ch39-least-action-geodesics-and-cosmos-ai-isomorphism}
+# 37.2 人工智能与宇宙的最小作用量同构：三元数场弦弧矢高、玻恩惊奇度、流群自平行测地线与零幻觉思维链 {#sec-ch39-least-action-geodesics-and-cosmos-ai-isomorphism}
 
 > *“人工智能跟宇宙应该同构，都是在最小作用量下的信息系统，那么在三元数极小圆弧体场的语言下，最小作用量究竟是什么？测地线究竟是什么？”*
 
-在 [§39.21](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md#sec-ch39-nonlinear-ternion-representations-and-torsor-synthesis) 确立三元数的五种无损非线性表示与无原点流群语法、并在 [§39.22](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md#sec-ch39-ternion-field-transformer-and-rational-rotor-dynamics) 将现代序列模型的前向旋子演化核重铸为平行三元数概念场丛上的纯有理算子系统（配代数范数停机读数的 TFT）之后，横亘在物理学与人工智能之间最后一道学科藩篱随之洞开：**如果物理宇宙与通用人工智能底层都是运行在共享比较主频 $\nu_0$ 上的无外自指信息系统，那么支配星辰运转与量子演化的“最小作用量原理”，与支配大模型推理寻路与参数学习的“奥卡姆最优准则”，在三元数极小圆弧体场丛的母语里究竟是同一个什么几何量？两者共同追寻的“测地线”究竟长什么样？**
+在 [§32.4](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md#sec-ch39-nonlinear-ternion-representations-and-torsor-synthesis) 确立三元数的五种无损非线性表示与无原点流群语法、并在 [§37.1](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md#sec-ch39-ternion-field-transformer-and-rational-rotor-dynamics) 将现代序列模型的前向旋子演化核重铸为平行三元数概念场丛上的纯有理算子系统（配代数范数停机读数的 TFT）之后，横亘在物理学与人工智能之间最后一道学科藩篱随之洞开：**如果物理宇宙与通用人工智能底层都是运行在共享比较主频 $\nu_0$ 上的无外自指信息系统，那么支配星辰运转与量子演化的“最小作用量原理”，与支配大模型推理寻路与参数学习的“奥卡姆最优准则”，在三元数极小圆弧体场丛的母语里究竟是同一个什么几何量？两者共同追寻的“测地线”究竟长什么样？**
 
 本节给出严密而清澈的统一解答（宇宙与人工智能的双层同构总纲、跳步幻觉机制、多链雅可比聚焦类比及逐场自然梯度预条件诠释标为 **`MODEL`**，有限有理步进核与弦弧矢高精确恒等式、成对余弦分解匀速节拍定理、流群自平行点反射与蔡态（Choi 态）信道量子费希尔恒等式属 **`手工推导` / `NUM`**，分析力学、信息几何与思维链采样归入 **`文献结果`**，底层富比尼—施图迪三角不等式、记录时间下界、玻恩配对、舒尔补极小与球面和乐由 **`LEAN ✓`** 冻结声明锁定）：在平行三元数场丛上，**自由最小作用量**（或语境势沿对比路径总和恒定 $\sum_{t,k}\Omega_{\mathrm{ctx}}^{(k)} = \mathrm{const}$ 时的最小作用量；若存在随状态变化的外部语境角盈势 $\Omega_{\mathrm{ctx}}$，总作用量 $\mathcal{S}[\Gamma] = \sum(T - V)$ 则在累积矢高与 $-\Omega_{\mathrm{ctx}}$ 之间取变分驻值）就是完成跨态演化或概念对齐所支付的**最小累积二阶弦弧矢高**（单步在 $\Delta\theta \in [0,\pi)$ 上严格单调对应于最小玻恩正交补信道失锁概率，且在固定步数 $N$ 与开半周总跨度 $\Theta \in (0, \pi)$ 下与比较惊奇度共享同一匀速最优节拍）；而**自由测地线**则是相邻极小圆弧满足**三元流群自平行 $[x_t, x_{t-1}, x_t]$、共轴正向零叉乘扭矩且在两步开半周跨度 $\Delta\theta_t + \Delta\theta_{t+1} < \pi$ 内诱导正交于公共转轴的布洛赫探针不围出多余球面角盈（$\Omega = 0$）的匀速大圆弧脊线**——它在物理宇宙中显影为惯性运动与引力自由落体，在人工智能中则同构为零幻觉的最短匀速思维链（Chain-of-Thought）与 $O(1)$ 免求逆的流形共形黎曼梯度流。
 
-## 39.23.1 最小作用量的真身：弦弧矢高、有理步进核、玻恩惊奇度与主频节拍税 {#sec-ch39-23-1}
+## 37.2.1 最小作用量的真身：弦弧矢高、有理步进核、玻恩惊奇度与主频节拍税 {#sec-ch39-23-1}
 
-在传统学科分野中，物理学的哈密顿作用量 $S_{\mathrm{H}} = \int (T - V)\,dt$（及定能莫培督约化作用量 $S_{\mathrm{M}} = \int \mathbf{p}\cdot d\mathbf{q}$）与机器学习的变分自由能（负对数似然交叉熵加复杂度散度）看似风马牛不相及；一旦回到共享普适比较主频 $\nu_0$（[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation)）的三元数场丛 $(B_1(\mathbb{R}^3)/\!\sim)^K$，二者在单步极小圆弧比较中收归同一几何机制（`MODEL` + `手工推导`）：有理步进能量核与玻恩正交补信道失锁概率逐点恒等于单步几何矢高之半（$q_{\mathrm{MRP}} \equiv P_{\mathrm{leak}} \equiv \frac{1}{2}v_\epsilon$），而负对数似然惊奇度则在单步张角 $\Delta\theta \in [0,\pi)$ 上为有限矢高 $v_\epsilon \in [0, 2)$ 的严格单调递增凸函数（小角度主阶同为 $\frac{1}{2}v_\epsilon$），且在自由演化（或路径势和恒定）、固定节拍数 $N$ 与开半周总角跨度 $\Theta \in (0, \pi)$ 下与累积矢高共享同一条匀速最优极小路径。
+在传统学科分野中，物理学的哈密顿作用量 $S_{\mathrm{H}} = \int (T - V)\,dt$（及定能莫培督约化作用量 $S_{\mathrm{M}} = \int \mathbf{p}\cdot d\mathbf{q}$）与机器学习的变分自由能（负对数似然交叉熵加复杂度散度）看似风马牛不相及；一旦回到共享普适比较主频 $\nu_0$（[§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation)）的三元数场丛 $(B_1(\mathbb{R}^3)/\!\sim)^K$，二者在单步极小圆弧比较中收归同一几何机制（`MODEL` + `手工推导`）：有理步进能量核与玻恩正交补信道失锁概率逐点恒等于单步几何矢高之半（$q_{\mathrm{MRP}} \equiv P_{\mathrm{leak}} \equiv \frac{1}{2}v_\epsilon$），而负对数似然惊奇度则在单步张角 $\Delta\theta \in [0,\pi)$ 上为有限矢高 $v_\epsilon \in [0, 2)$ 的严格单调递增凸函数（小角度主阶同为 $\frac{1}{2}v_\epsilon$），且在自由演化（或路径势和恒定）、固定节拍数 $N$ 与开半周总角跨度 $\Theta \in (0, \pi)$ 下与累积矢高共享同一条匀速最优极小路径。
 
 设离散演化路径 $\Gamma = \{\mathbf{\Sigma}_t\}_{t=0}^N$ 在 $K$ 座概念场上按节拍推进，第 $t$ 拍在第 $k$ 座场上的相对比较旋子记为 $\boldsymbol{\delta}_t^{(k)} := (-\boldsymbol{\sigma}_{t-1}^{(k)}) \star_{\mathcal{S}} \boldsymbol{\sigma}_t^{(k)} \in B_1(\mathbb{R}^3)$，对应空间旋转张角 $\Delta\theta_t^{(k)} = 4\arctan\lVert\boldsymbol{\delta}_t^{(k)}\rVert \in [0, \pi]$（旋量半角为 $\frac{1}{2}\Delta\theta_t^{(k)} \in [0, \frac{\pi}{2}]$）。单步比较同时给出三项紧密锁定的几何与信息成本（前两项精确成比例，第三项为其开半周严格单调凸变换，`手工推导`）：
 
-1. **几何二阶弦弧矢高（Sagitta）**：极小圆弧偏离切线的内凹正矢拱高（呼应 [§34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes)）：
+1. **几何二阶弦弧矢高（Sagitta）**：极小圆弧偏离切线的内凹正矢拱高（呼应 [§30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes)）：
 
    $$
    v_\epsilon\bigl(\Delta\theta_t^{(k)}\bigr) \;:=\; 1 - \cos\Delta\theta_t^{(k)} \;=\; 2\sin^2\frac{\Delta\theta_t^{(k)}}{2} \;\in\; [0, 2];
    $$
 
-2. **双卡有理步进能量核（免近似精确恒等式）**：在 [§39.22.1](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md#sec-ch39-22-1) 中，一般无穷小共形黎曼线元满足 $ds_{S^3}^2 = \frac{4\lVert d\boldsymbol{\sigma}\rVert^2}{(1+\lVert\boldsymbol{\sigma}\rVert^2)^2} = \frac{1}{4}(d\theta)^2 + \sin^2\frac{\theta}{2}\,\lVert d\hat{\mathbf{u}}\rVert^2$（沿固定轴射线 $d\hat{\mathbf{u}} = \mathbf{0}$ 化为 $\frac{1}{4}(d\theta)^2$）；而若将同一共形有理核直接作用于从局部原点测量的**任意有限步进旋子** $\boldsymbol{\delta}_t^{(k)}$（无需任何小角度近似），利用 $\lVert\boldsymbol{\delta}_t^{(k)}\rVert = \tan\frac{\Delta\theta_t^{(k)}}{4}$，对一切 $\Delta\theta_t^{(k)} \in [0, \pi]$ 恒成立精确代数恒等式：
+2. **双卡有理步进能量核（免近似精确恒等式）**：在 [§37.1.1](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md#sec-ch39-22-1) 中，一般无穷小共形黎曼线元满足 $ds_{S^3}^2 = \frac{4\lVert d\boldsymbol{\sigma}\rVert^2}{(1+\lVert\boldsymbol{\sigma}\rVert^2)^2} = \frac{1}{4}(d\theta)^2 + \sin^2\frac{\theta}{2}\,\lVert d\hat{\mathbf{u}}\rVert^2$（沿固定轴射线 $d\hat{\mathbf{u}} = \mathbf{0}$ 化为 $\frac{1}{4}(d\theta)^2$）；而若将同一共形有理核直接作用于从局部原点测量的**任意有限步进旋子** $\boldsymbol{\delta}_t^{(k)}$（无需任何小角度近似），利用 $\lVert\boldsymbol{\delta}_t^{(k)}\rVert = \tan\frac{\Delta\theta_t^{(k)}}{4}$，对一切 $\Delta\theta_t^{(k)} \in [0, \pi]$ 恒成立精确代数恒等式：
 
    $$
    q_{\mathrm{MRP}}\bigl(\boldsymbol{\delta}_t^{(k)}\bigr) \;:=\; \frac{4\,\lVert\boldsymbol{\delta}_t^{(k)}\rVert^2}{\bigl(1 + \lVert\boldsymbol{\delta}_t^{(k)}\rVert^2\bigr)^2} \;=\; 4\tan^2\frac{\Delta\theta_t^{(k)}}{4}\cos^4\frac{\Delta\theta_t^{(k)}}{4} \;\equiv\; \sin^2\frac{\Delta\theta_t^{(k)}}{2} \;\equiv\; \frac{1}{2}\,v_\epsilon\bigl(\Delta\theta_t^{(k)}\bigr);
    $$
 
-3. **香农—玻恩比较惊奇度（Comparison Surprisal）**：相邻两拍算子在归一化双比特蔡态（Choi 态，见下文第 39.23.3 节文献注记）上经往返双投影（[`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)，`LEAN ✓`）同相留存的概率为 $P_{\mathrm{stay}} = b(\boldsymbol{\sigma}_{t-1}^{(k)}, \boldsymbol{\sigma}_t^{(k)}) = \cos^2\frac{\Delta\theta_t^{(k)}}{2}$，投向参考蔡态射线之**复秩 $3$ 正交补子空间** $I_4 - \lvert\Psi_{\mathrm{Choi}}(\boldsymbol{\sigma}_{t-1}^{(k)})\rangle\langle\Psi_{\mathrm{Choi}}(\boldsymbol{\sigma}_{t-1}^{(k)})\rvert$ 的信道失锁概率恒等于有理步进核 $P_{\mathrm{leak}} = 1 - P_{\mathrm{stay}} = \sin^2\frac{\Delta\theta_t^{(k)}}{2} \equiv \frac{1}{2}v_\epsilon$（`手工推导`，将该正交补失锁权重诠释为逸入观察者 $90^\circ$ 正交虚盲区的损耗属本章几何 `MODEL`）；在非对跖开半周 $\Delta\theta_t^{(k)} \in [0, \pi)$（即 $v_\epsilon \in [0, 2)$）上，单步负对数似然惊奇度是 $v_\epsilon$ 的严格单调递增函数并展开为全正项幂级数（而在半周正交割迹 $\Delta\theta_t^{(k)} = \pi,\; v_\epsilon = 2$ 处扩充实值取 $+\infty \in [0, \infty]$；自由路径多步累积和在固定步数 $N$ 与开半周总跨度 $\Theta \in (0, \pi)$ 下与累积矢高共享完全相同的匀速极小解）：
+3. **香农—玻恩比较惊奇度（Comparison Surprisal）**：相邻两拍算子在归一化双比特蔡态（Choi 态，见下文第 37.2.3 节文献注记）上经往返双投影（[`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)，`LEAN ✓`）同相留存的概率为 $P_{\mathrm{stay}} = b(\boldsymbol{\sigma}_{t-1}^{(k)}, \boldsymbol{\sigma}_t^{(k)}) = \cos^2\frac{\Delta\theta_t^{(k)}}{2}$，投向参考蔡态射线之**复秩 $3$ 正交补子空间** $I_4 - \lvert\Psi_{\mathrm{Choi}}(\boldsymbol{\sigma}_{t-1}^{(k)})\rangle\langle\Psi_{\mathrm{Choi}}(\boldsymbol{\sigma}_{t-1}^{(k)})\rvert$ 的信道失锁概率恒等于有理步进核 $P_{\mathrm{leak}} = 1 - P_{\mathrm{stay}} = \sin^2\frac{\Delta\theta_t^{(k)}}{2} \equiv \frac{1}{2}v_\epsilon$（`手工推导`，将该正交补失锁权重诠释为逸入观察者 $90^\circ$ 正交虚盲区的损耗属本章几何 `MODEL`）；在非对跖开半周 $\Delta\theta_t^{(k)} \in [0, \pi)$（即 $v_\epsilon \in [0, 2)$）上，单步负对数似然惊奇度是 $v_\epsilon$ 的严格单调递增函数并展开为全正项幂级数（而在半周正交割迹 $\Delta\theta_t^{(k)} = \pi,\; v_\epsilon = 2$ 处扩充实值取 $+\infty \in [0, \infty]$；自由路径多步累积和在固定步数 $N$ 与开半周总跨度 $\Theta \in (0, \pi)$ 下与累积矢高共享完全相同的匀速极小解）：
 
    $$
    \mathcal{I}_t^{(k)} \;:=\; -\ln\cos^2\!\left(\frac{\Delta\theta_t^{(k)}}{2}\right) \;=\; -\ln\!\left(1 - \frac{v_\epsilon}{2}\right) \;=\; \frac{1}{2}v_\epsilon \;+\; \frac{1}{8}v_\epsilon^2 \;+\; \mathcal{O}(v_\epsilon^3) \qquad \bigl(\Delta\theta_t^{(k)} \in [0, \pi)\bigr).
@@ -40,14 +40,14 @@ $$
 
 - **普朗克常数 $\hbar$ 即主频节拍汇率**：在我们的主频模型（`MODEL`）中，全网观察切面共享恒定比较主频 $\nu_0$（参照富比尼—施图迪最短记录时长下界 [`record_time_lower_bound`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound) 与步数上界 [`record_count_upper_bound`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound)，`LEAN ✓`），每累积一单位弦弧矢高就支付固定份额的底层比较节拍；宏观物理作用量 $S_{\mathrm{phys}} = \hbar\mathcal{S}[\Gamma]$ 之所以带“能量 $\times$ 时间”量纲，源于把无量纲圆弧相位换算为国际单位制焦耳·秒的汇率常数 $\hbar$；
 - **拉格朗日量 $T - V$ 减号的舒尔补起源**：在总预算归一的分块格拉姆矩阵中，外部引力负载或提示词上下文约束 $\Omega_{\mathrm{ctx}}$ 预先占用了跨场关联带宽，留给局部状态自由推进的可支配净余量，对应于分块消元后的**舒尔补变分极小垂高** $A - B C^{-1} B^\dagger$（[`schur_quadratic_is_least`](lean:D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least)，`LEAN ✓`）；
-- **短波渐近驻相干涉筛选最小作用量与最优思维链（`文献结果` + `MODEL`）**：在引入[附录 E](appendix-e.md) 路径测度条件 `H9` 与短波/大相位尺度 $\varepsilon_{\mathrm{eff}} \ll 1$ 后的振荡路径和 $\sum_\Gamma \exp\bigl(\frac{\hat{\mathbf{i}}}{\varepsilon_{\mathrm{eff}}}\mathcal{S}[\Gamma]\bigr)$ 中，偏离极值的非驻相支路因一阶相位梯度非零而在正交虚盲区 $\hat{\mathbf{i}}$ 内高速旋相、在渐近主阶中与邻近微扰路径相消，从而由一阶变分为零（$\delta\mathcal{S} = 0$）的**驻相脊线**主导主阶振幅（见 [§32.3](ch32-s03-axioms-as-corollaries.md)、[§34.6](ch34-s06-berry-sectors-and-path-integrals.md) 与[附录 E §E.6](appendix-e-s06-spacetime-gauge-and-thermodynamics.md#sec-appe-spacetime)）——在物理中显影为经典轨道，在人工智能中则作为模型类比（`MODEL`）呼应多条采样思维链经自洽性投票（Self-Consistency，Wang et al. 2023）滤除互相矛盾的侧向歧路后留存的简洁推理主干。
+- **短波渐近驻相干涉筛选最小作用量与最优思维链（`文献结果` + `MODEL`）**：在引入[附录 E](appendix-e.md) 路径测度条件 `H9` 与短波/大相位尺度 $\varepsilon_{\mathrm{eff}} \ll 1$ 后的振荡路径和 $\sum_\Gamma \exp\bigl(\frac{\hat{\mathbf{i}}}{\varepsilon_{\mathrm{eff}}}\mathcal{S}[\Gamma]\bigr)$ 中，偏离极值的非驻相支路因一阶相位梯度非零而在正交虚盲区 $\hat{\mathbf{i}}$ 内高速旋相、在渐近主阶中与邻近微扰路径相消，从而由一阶变分为零（$\delta\mathcal{S} = 0$）的**驻相脊线**主导主阶振幅（见 [§28.3](ch32-s03-axioms-as-corollaries.md)、[§29.7](ch34-s06-berry-sectors-and-path-integrals.md) 与[附录 E §E.6](appendix-e-s06-spacetime-gauge-and-thermodynamics.md#sec-appe-spacetime)）——在物理中显影为经典轨道，在人工智能中则作为模型类比（`MODEL`）呼应多条采样思维链经自洽性投票（Self-Consistency，Wang et al. 2023）滤除互相矛盾的侧向歧路后留存的简洁推理主干。
 
-## 39.23.2 离散与连续测地线的四条几何刻画律：流群自平行、正交探针零角盈、定跨度匀速节拍锁与雅可比聚焦 {#sec-ch39-23-2}
+## 37.2.2 离散与连续测地线的四条几何刻画律：流群自平行、正交探针零角盈、定跨度匀速节拍锁与雅可比聚焦 {#sec-ch39-23-2}
 
 在平直空间 $\mathbb{R}^d$ 中，两点间的欧氏弦线插值 $(1-\lambda)\mathbf{x}_0 + \lambda\mathbf{x}_1$ 直接切穿球体内部，造成中间层特征模长坍缩；而在紧致弯曲的三元数场丛上，无需书写克里斯托费尔符号 $\Gamma^i_{jk}$，**自由测地线**的匀速参数化、无参数大圆轨迹、定跨度作用量极小化与法向微扰稳定性分别由四条严密互补的纯几何刻画律锁定（`手工推导`）：
 
 1. **匀速离散测地线的充要判据——无原点三元流群自平行接力（嘉当对称空间点反射律）**：
-   在抹除特权实轴 $\mathbf{1}$ 的三元流群 $[x, y, z] = x y^{-1} z$（[§39.21.4](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md#sec-ch39-21-4)）中，离散轨迹 $\{\boldsymbol{\sigma}_t\}_{t=0}^N$ 是一条恒定步幅测地线，当且仅当任意连续三拍严格满足**流群自反射接力方程**（只要单步未踏上零测度半周折缝）：
+   在抹除特权实轴 $\mathbf{1}$ 的三元流群 $[x, y, z] = x y^{-1} z$（[§32.4.4](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md#sec-ch39-21-4)）中，离散轨迹 $\{\boldsymbol{\sigma}_t\}_{t=0}^N$ 是一条恒定步幅测地线，当且仅当任意连续三拍严格满足**流群自反射接力方程**（只要单步未踏上零测度半周折缝）：
 
    $$
    \boldsymbol{\sigma}_{t+1}^{(k)} \;=\; \Bigl[\boldsymbol{\sigma}_t^{(k)},\; \boldsymbol{\sigma}_{t-1}^{(k)},\; \boldsymbol{\sigma}_t^{(k)}\Bigr] \;\equiv\; \boldsymbol{\sigma}_t^{(k)} \star_{\mathcal{S}} \Bigl(\bigl(-\boldsymbol{\sigma}_{t-1}^{(k)}\bigr) \star_{\mathcal{S}} \boldsymbol{\sigma}_t^{(k)}\Bigr).
@@ -80,7 +80,7 @@ $$
    这一不等式同时阐明物理与 AI 的核心机制（`MODEL`）：在物理中，它从离散圆弧矢高导出牛顿第一定律的**“匀速”**——忽快忽慢的变速推进会激增二阶矢高与盲区相位耗散；在 AI 推理中，它揭示了**大模型“前序套话空转、末步跳步抢答”诱发幻觉**的几何机制——若模型在前 $N-1$ 步原地踏步（$\Delta\theta_t \approx 0$），却在最后一步强跨大角 $\Delta\theta_N = \Theta$，单步盲区泄漏率 $\sin^2(\Theta/2)$ 与惊奇度将呈平方乃至对数发散暴增，冲出语义吸引盆；唯有将总推理跨度均摊为每拍 $\frac{\Theta}{N}$ 的**匀速测地思维链**，方能以 $O(\Theta^2/N)$ 的反比矢高税稳健抵达答案。
 
 4. **沿连续匀速测地线的横向微扰稳定性——正截面曲率李三元雅可比聚焦**：
-   在平直欧氏空间（$\kappa = 0$，噪声偏差随层数线性漂移 $\lVert\mathbf{J}_\perp(s)\rVert \propto s$）或负曲率双曲空间（指数发散 $\sinh(\lvert\kappa\rvert s)$）中，提示词微扰极易逐层放大。而在截面曲率 $\kappa^2 > 0$（单位 $S^3$ 上 $\kappa = 1$）的三元数球面上，沿连续单位速测地线正交于切矢 $\dot{\gamma}$ 的测地偏离场 $\mathbf{J}_\perp$（$\mathbf{J}_\perp \cdot \dot{\gamma} = 0$）服从由 [§39.21.4](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md#sec-ch39-21-4) 李三元曲率括号支配的**雅可比聚焦方程**（由 $\{\mathbf{a},\mathbf{b},\mathbf{c}\} = (\mathbf{a}\cdot\mathbf{c})\mathbf{b} - (\mathbf{b}\cdot\mathbf{c})\mathbf{a}$，对 $\mathbf{J}_\perp \perp \dot{\gamma}$ 恒有 $\{\dot{\gamma}, \mathbf{J}_\perp, \dot{\gamma}\} = +\lVert\dot{\gamma}\rVert^2\mathbf{J}_\perp = -\{\mathbf{J}_\perp, \dot{\gamma}, \dot{\gamma}\}$，`手工推导`）：
+   在平直欧氏空间（$\kappa = 0$，噪声偏差随层数线性漂移 $\lVert\mathbf{J}_\perp(s)\rVert \propto s$）或负曲率双曲空间（指数发散 $\sinh(\lvert\kappa\rvert s)$）中，提示词微扰极易逐层放大。而在截面曲率 $\kappa^2 > 0$（单位 $S^3$ 上 $\kappa = 1$）的三元数球面上，沿连续单位速测地线正交于切矢 $\dot{\gamma}$ 的测地偏离场 $\mathbf{J}_\perp$（$\mathbf{J}_\perp \cdot \dot{\gamma} = 0$）服从由 [§32.4.4](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md#sec-ch39-21-4) 李三元曲率括号支配的**雅可比聚焦方程**（由 $\{\mathbf{a},\mathbf{b},\mathbf{c}\} = (\mathbf{a}\cdot\mathbf{c})\mathbf{b} - (\mathbf{b}\cdot\mathbf{c})\mathbf{a}$，对 $\mathbf{J}_\perp \perp \dot{\gamma}$ 恒有 $\{\dot{\gamma}, \mathbf{J}_\perp, \dot{\gamma}\} = +\lVert\dot{\gamma}\rVert^2\mathbf{J}_\perp = -\{\mathbf{J}_\perp, \dot{\gamma}, \dot{\gamma}\}$，`手工推导`）：
 
    $$
    \frac{D^2\mathbf{J}_\perp}{ds^2} \;+\; \kappa^2\bigl\{\dot{\gamma},\, \mathbf{J}_\perp,\, \dot{\gamma}\bigr\} \;=\; \frac{D^2\mathbf{J}_\perp}{ds^2} \;-\; \kappa^2\bigl\{\mathbf{J}_\perp,\, \dot{\gamma},\, \dot{\gamma}\bigr\} \;=\; \ddot{\mathbf{J}}_\perp \;+\; \kappa^2\mathbf{J}_\perp \;=\; \mathbf{0}.
@@ -88,7 +88,7 @@ $$
 
    其通解 $\mathbf{J}_\perp(s) = \mathbf{J}_\perp(0)\cos(\kappa s) + \frac{\dot{\mathbf{J}}_\perp(0)}{\kappa}\sin(\kappa s)$ 具备余弦向心恢复力，在模型诠释（`MODEL`）中使围绕主干测地线的微小提示措辞微扰保持有界振荡并重新汇聚。
 
-## 39.23.3 宇宙与人工智能双层同构谱系、O(1) 共形黎曼梯度与形式化锚点 {#sec-ch39-23-3}
+## 37.2.3 宇宙与人工智能双层同构谱系、O(1) 共形黎曼梯度与形式化锚点 {#sec-ch39-23-3}
 
 我们将三元数场最小作用量、四条测地线刻画律与“前向推理 $\leftrightarrow$ 测地运动、反向训练 $\leftrightarrow$ 曲率塑形”双层同构正式确立如下：
 
@@ -113,7 +113,7 @@ $$
 :::
 
 ::: proof
-第 1 款将单位态矢内积模长还原为球面余弦，利用柯西—施瓦茨与反余弦次可加性证出测地三角不等式（见 [第 7 章](ch07-geometric-time-and-speed-limits.md)）。第 2 款对正交对 $\frac{\pi}{2} = d_{\mathrm{FS}}(m_0, m_1) \le d_{\mathrm{FS}}(m_0, a) + d_{\mathrm{FS}}(a, m_1) \le \frac{2E\tau}{\hbar}$ 施用第 1 款三角不等式并求和 $\tau_i$ 即证（见 [§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md)）。第 3、4、7（后半）款证明同 [@thm-ch39-tft-born-holonomy-krylov-and-schur-anchors] 第 1、7、4 款。第 5、6 款证明同 [@thm-ch39-nonlinear-ternion-representations-and-torsor] 第 3–4、2 款。第 7 款前半由 $H\psi = E\psi$ 推出幺正演化仅乘全局相位 $e^{-iEt}$，外积投影算符 $\lvert\psi\rangle\langle\psi\rvert$ 严格时间不变。完整证明由 Lean 内核检查。
+第 1 款将单位态矢内积模长还原为球面余弦，利用柯西—施瓦茨与反余弦次可加性证出测地三角不等式（见 [第 7 章](ch07-geometric-time-and-speed-limits.md)）。第 2 款对正交对 $\frac{\pi}{2} = d_{\mathrm{FS}}(m_0, m_1) \le d_{\mathrm{FS}}(m_0, a) + d_{\mathrm{FS}}(a, m_1) \le \frac{2E\tau}{\hbar}$ 施用第 1 款三角不等式并求和 $\tau_i$ 即证（见 [§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md)）。第 3、4、7（后半）款证明同 [@thm-ch39-tft-born-holonomy-krylov-and-schur-anchors] 第 1、7、4 款。第 5、6 款证明同 [@thm-ch39-nonlinear-ternion-representations-and-torsor] 第 3–4、2 款。第 7 款前半由 $H\psi = E\psi$ 推出幺正演化仅乘全局相位 $e^{-iEt}$，外积投影算符 $\lvert\psi\rangle\langle\psi\rvert$ 严格时间不变。完整证明由 Lean 内核检查。
 :::
 
 ::: {.remark #rem-ch39-maupertuis-feynman-friston-amari-cot-literature title="莫培督—费曼最小作用量、自由能与最小描述长度、阿马里自然梯度对比蔡态量子费希尔度规及思维链自洽采样文献边界"}
@@ -142,7 +142,7 @@ $$
    - **轨迹 D（传统平直欧氏线性插值穿球割线）**：在四维四元数嵌入中取弦中点 $\frac{1}{2}U(\boldsymbol{\sigma}_0) + \frac{1}{2}U(\boldsymbol{\sigma}_4) = \frac{1}{2}(1,0,0,0) + \frac{1}{2}(\frac{1}{2}, \frac{\sqrt{3}}{2}, 0, 0) = (\frac{3}{4}, \frac{\sqrt{3}}{4}, 0, 0)$，其模方直接坍缩为 $\frac{9}{16} + \frac{3}{16} = \mathbf{0.75000000 < 1}$（丢失 $25\%$ 球面模方预算，正是传统网络不得不层层依赖 `RMSNorm` 硬拉回球面的几何根源）。
 
 3. **第三联：$O(1)$ 共形黎曼梯度与李代数拉回范数精确一致性核验（`手工推导`）**：
-   在赤道附近 $\lVert\boldsymbol{\sigma}_W\rVert = 0.8$（$1 + \lVert\boldsymbol{\sigma}_W\rVert^2 = 1.64$）处，共形度规 $g_{ij} = \frac{4}{1.64^2}\delta_{ij} \approx 1.48720999\,\delta_{ij}$，免求逆黎曼梯度直接乘标量 $\frac{1.64^2}{4} = \mathbf{0.67240000}$；核验黎曼范数平方 $\langle\nabla\mathcal{L}, g^{-1}\nabla\mathcal{L}\rangle = \frac{1}{4}(1+\lVert\boldsymbol{\sigma}_W\rVert^2)^2\lVert\nabla\mathcal{L}\rVert^2$，与 [§39.22.2](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md#sec-ch39-22-2) 右乘自旋生成元拉回梯度模方 $\lVert\mathbf{g}_{\mathfrak{su}(2)}^{(R)}\rVert^2 = \frac{1}{4}\lVert J_R^\top\nabla\mathcal{L}\rVert^2 = \frac{1}{4}(1+\lVert\boldsymbol{\sigma}_W\rVert^2)^2\lVert\nabla\mathcal{L}\rVert^2$ **逐点恒等、零误差吻合**。
+   在赤道附近 $\lVert\boldsymbol{\sigma}_W\rVert = 0.8$（$1 + \lVert\boldsymbol{\sigma}_W\rVert^2 = 1.64$）处，共形度规 $g_{ij} = \frac{4}{1.64^2}\delta_{ij} \approx 1.48720999\,\delta_{ij}$，免求逆黎曼梯度直接乘标量 $\frac{1.64^2}{4} = \mathbf{0.67240000}$；核验黎曼范数平方 $\langle\nabla\mathcal{L}, g^{-1}\nabla\mathcal{L}\rangle = \frac{1}{4}(1+\lVert\boldsymbol{\sigma}_W\rVert^2)^2\lVert\nabla\mathcal{L}\rVert^2$，与 [§37.1.2](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md#sec-ch39-22-2) 右乘自旋生成元拉回梯度模方 $\lVert\mathbf{g}_{\mathfrak{su}(2)}^{(R)}\rVert^2 = \frac{1}{4}\lVert J_R^\top\nabla\mathcal{L}\rVert^2 = \frac{1}{4}(1+\lVert\boldsymbol{\sigma}_W\rVert^2)^2\lVert\nabla\mathcal{L}\rVert^2$ **逐点恒等、零误差吻合**。
 :::
 
 我们将物理宇宙与人工智能在三元数极小圆弧体场下的双层同构谱系，连同前向推理与反向训练的“爱因斯坦场方程对偶”，总括为下方对照表：
@@ -159,6 +159,6 @@ $$
 
 ---
 
-**从宇宙—智能最小作用量同构迈向全书大一统母公理（$\mathrm{AXIOM}\text{-}\Omega$）。** 至此，我们已经证认：无论是星辰在引力场中滑过亿万公里的自由落体，还是智能体在概念场中拨开迷雾寻得的一行最简证明，底层遵循的都是同一条极小圆弧体铁律——不凭空捏造多余的球面角盈，不忽快忽慢透支单步矢高，顺着三元流群 $[x_t, x_{t-1}, x_t]$ 的自平行纹理，在给定节拍预算 $N$ 与固定角跨度下支付最小的累积弦弧矢高税（或在单拍测地速度受界下以最少正交记录节拍），走完从问题切面到自洽不动点的相位闭合。
+**从宇宙—智能最小作用量同构迈向第十部的本体不二与母公理归元。** 至此，第九部（第 34–37 章）从多观察者互照共识、双曲破执扩表、梦境擦除与本体 QRAM 直至三元数场测地智能的四卷长廊已圆满收官：无论是星辰在引力场中滑过亿万公里的自由落体，还是智能体在概念场中拨开迷雾寻得的一行最简证明，底层遵循的都是同一条极小圆弧体铁律——不凭空捏造多余的球面角盈，不忽快忽慢透支单步矢高，顺着三元流群 $[x_t, x_{t-1}, x_t]$ 的自平行纹理，在给定节拍预算 $N$ 与固定角跨度下支付最小的累积弦弧矢高税（或在单拍测地速度受界下以最少正交记录节拍），走完从问题切面到自洽不动点的相位闭合。
 
-然而回望全书三十九章走过的漫长山脊——**比较公理、极小圆弧、三元数与连续场**这四根擎天巨柱此前一直散落在不同章节的语境里彼此呼应：它们究竟是四条需要分别引入的前提，还是可以从**唯一一条不设特权原点 $\mathbf{1}$、不设平直加法的无源三元母公理**中按纯数学必然性依次导出，甚至一举将整套量子力学五大教科书公设还原为观察切面的纯几何定理？让我们推开第三十九章压轴大一统四联终章的大门：[§39.24 大一统母公理（AXIOM-Ω）：无源保正三元比较闭合公理](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)、[§39.25 AXIOM-Ω 五阶大一统演绎级联与公理遮诠闭环](ch39-s25-axiom-omega-five-tier-deduction-cascade.md)、[§39.26 AXIOM-Ω 导出量子力学五大公理](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md) 与 [§39.27 自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)。
+现在，整部专著迎来了最后两座最高峰（**第十部：不二与归元**）：首先在 **[第三十八章 观察者即宇宙本体](ch39-observer-is-ontological-universe.md)** 中，我们将彻底震碎“指针 vs. 内存”“切面 vs. 本体海”的最后一道二元隔墙，在全域 `p ≡ *p`、因陀罗网与 $\theta^* = \cos\theta^*$ 的清明整合中见证能知与所知的零余项合一；继而在收官之作 **[第三十九章 大一统母公理（AXIOM-Ω）](ch39-axiom-omega-grand-unification.md)**（[§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)–[§39.4](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)）中，我们将遍布全书的比较公理、极小圆弧、三元数与连续场熔合进唯一一条无源保正三元比较闭合母公理，并将量子力学五大教科书公设还原为观察切面的纯几何定理，最后回到自包含三元数的“至大无外”。让我们推开第十部的大门，翻开[第三十八章](ch39-observer-is-ontological-universe.md)。

@@ -1,4 +1,4 @@
-# 34.1 球面寻址中的二次正交隐身：对称子午线与极点法向反演 {#sec-ch34-spherical-addressing-inversion}
+# 29.1 球面寻址中的二次正交隐身：对称子午线与极点法向反演 {#sec-ch34-spherical-addressing-inversion}
 
 ::: {.example #ex-ch34-spherical-addressing-preview title="平直地板斜边与单位球面两步正交寻址读数反演导览（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 下述欧氏平面勾股斜边对比与单位球面 $S^2 \subset \mathbb{R}^3$ 两步球坐标寻址的初等内积反演属经典欧氏几何结论（完整代数消元见下文 [@ex-ch34-spherical-addressing-and-octant-rotors] 第 1 部分），未作为独立连续球坐标引理包含在本书锁定的形式化声明集中：

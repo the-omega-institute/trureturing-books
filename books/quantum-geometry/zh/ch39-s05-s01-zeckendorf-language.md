@@ -1,6 +1,6 @@
-# 39.5.1 齐肯多夫禁邻语言：从 $K=2$ 防进位编码起步 {#sec-ch39-p2e-zeckendorf}
+# 35.6.1 齐肯多夫禁邻语言：从 $K=2$ 防进位编码起步 {#sec-ch39-p2e-zeckendorf}
 
-一切始于最底层的局部防进位规则。在阶数 $K = 2$ 时，二元齐肯多夫自动机处理的字载体为 `List (Fin 2)`：本章 §39.2 已锁定的冻结定理 [`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes)（[@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 第 3 款）证明，该自动机接受一个二元数字列表，当且仅当其中不出现相邻的两个 `1`（`NoAdjacentOnes`）。将局部禁戒窗口从 $2$ 推广到任意阶数 $K \ge 2$，`trureturing` 在函数载体 `Fin Q → Bool` 上定义长度为 $Q$ 且不含连续 $K$ 个 `true` 的合法字类型 `DBonacciName K Q`（从 `List (Fin 2)` 到定长布尔函数需经显式载体转换）。
+一切始于最底层的局部防进位规则。在阶数 $K = 2$ 时，二元齐肯多夫自动机处理的字载体为 `List (Fin 2)`：本章 §38.2 已锁定的冻结定理 [`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes)（[@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 第 3 款）证明，该自动机接受一个二元数字列表，当且仅当其中不出现相邻的两个 `1`（`NoAdjacentOnes`）。将局部禁戒窗口从 $2$ 推广到任意阶数 $K \ge 2$，`trureturing` 在函数载体 `Fin Q → Bool` 上定义长度为 $Q$ 且不含连续 $K$ 个 `true` 的合法字类型 `DBonacciName K Q`（从 `List (Fin 2)` 到定长布尔函数需经显式载体转换）。
 
 计数定理 [`dbonacci_name_card`](lean:D5/S0/Tower/DBonacci/Names.dbonacci_name_card) 给出任意阶数 $d \ge 2$ 与字长 $Q \in \mathbb{N}$ 的精确基数归一化：
 

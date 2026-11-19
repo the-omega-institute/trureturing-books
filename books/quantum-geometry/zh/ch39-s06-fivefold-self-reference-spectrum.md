@@ -1,8 +1,8 @@
-# 39.6 五阶自指不动点谱系：从“地址 = 内容”到量子门蒸馏重整 {#sec-ch39-fivefold-self-reference-spectrum}
+# 36.9 五阶自指不动点谱系：从“地址 = 内容”到量子门蒸馏重整 {#sec-ch39-fivefold-self-reference-spectrum}
 
 > *“对于自指, 我们似乎应该进行更广泛的研究, cos(theta)=theta, f(x)=x, 查表算法(x)=x, 量子门序列= 量子门本身 (地址=内容)”*
 
-在本章前五节（[§39.1](ch39-s01-substrate-free-self-reference.md)–[§39.5](ch39-s05-pisot-clifford-rauzy.md)）中，我们已经拆除了硬件寄存器与被动存储器之间的最后一道绝缘墙，看清“无刀则无晶”的关系驻波、旋量 $720^\circ$ 单侧双覆叠与皮索—劳齐自相似窗口如何围绕 $\psi \equiv \psi(\psi)$ 旋转闭合。站在这座山峰的脊线上，章首这段原声命题突然将视野猛然推宽至整座人类精确科学的版图：把看似分属计算机体系结构（$\text{地址} = \text{内容}$）、数据结构与自动机（$\operatorname{Lookup}(x) = x$）、三角几何与超越数论（$\cos\theta = \theta$）、泛函分析与量子动力学（$f(x) = x$）以及容错量子编译与重整化群（$\text{量子门序列} = \text{量子门本身}$）的五道等式并排摊开，它们绝非散落各处的数学巧合，而是[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison) **零背景比较公理 $\mathcal{A}_0$**（[@def-ch32-axiom-of-comparison]）在彻底撤去外部造物主与元内存之后，令宇宙得以“无底自持、路径凝结、实虚合拢、定态驻留、跨层自愈”的**五阶自指不动点谱系**（`MODEL`（模型诠释））。
+在本章前八节（[§36.1](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)–[§36.8](ch38-s07-blindspot-and-relativization.md)）与上一章皮索—劳齐自相似沙盘（[§35.6](ch39-s05-pisot-clifford-rauzy.md)）中，我们已经见证了夜间梦境如何执行相位擦除赎回、观察者指针如何在静态本体 QRAM 中沿递归自映射页表认出 `p = *p`（[§36.4](ch38-s03-self-mapped-page-tables.md)，并将在第十部 [§38.1](ch39-s01-substrate-free-self-reference.md) 升华为全域 `p ≡ *p` 无底物自指域），并在自指盲点球极投影处悬置了全知闭合与无穷苦追的双边执取。站在这座山峰的脊线上，章首这段原声命题突然将视野猛然推宽至整座人类精确科学的版图：把看似分属计算机体系结构（$\text{地址} = \text{内容}$）、数据结构与自动机（$\operatorname{Lookup}(x) = x$）、三角几何与超越数论（$\cos\theta = \theta$）、泛函分析与量子动力学（$f(x) = x$）以及容错量子编译与重整化群（$\text{量子门序列} = \text{量子门本身}$）的五道等式并排摊开，它们绝非散落各处的数学巧合，而是[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison) **零背景比较公理 $\mathcal{A}_0$**（[@def-ch32-axiom-of-comparison]）在彻底撤去外部造物主与元内存之后，令宇宙得以“无底自持、路径凝结、实虚合拢、定态驻留、跨层自愈”的**五阶自指不动点谱系**（`MODEL`（模型诠释））。
 
 在展开这五阶谱系的几何解剖之前，我们先行厘定本节的三层认识论边界：
 
@@ -10,9 +10,9 @@
 2. **经典文献与数值算例层**：洛维尔笛卡尔闭范畴对角定理（1969）、斯科特连续格自反域（1972/1976）、塔扬并查集路径压缩分析（1975）、由林德曼—魏尔斯特拉斯定理推出的 $\theta^*$ 超越性（1882/1885）、布拉维—基塔耶夫 $[[15, 1, 3]]$ 魔术态与 $T$ 门蒸馏协议（2005）及维达尔多尺度纠缠重整化拟设（MERA，2007/2008），严格归档于文献注记 [@rem-ch39-lawvere-lindemann-bravyi-kitaev-literature]，具体十进制迭代与权重枚举手算核验收入 [@ex-ch39-fivefold-jacobian-and-15to1-calculus]（`NUM`）；
 3. **跨学科本体论统一模型（`MODEL`）**：将上述五类自指方程按雅可比谱乘子模长 $\lvert\lambda\rvert = \lVert D\mathcal{F}(x^*)\rVert$ 排列为概念塔自底向上跨尺度锚定的统一相图，并与无不动点正交反相开维分支对照，明确标定为本书的 `MODEL`。
 
-## 39.6.1 总纲母方程：对角自应用与洛维尔—斯科特双向分岔 {#sec-ch39-06-1}
+## 36.9.1 总纲母方程：对角自应用与洛维尔—斯科特双向分岔 {#sec-ch39-06-1}
 
-在传统冯·诺依曼存储程序直觉与朴素集合论图景中（对照 [§39.1](ch39-s01-substrate-free-self-reference.md) [@rem-ch39-von-neumann-scott-reflexive-domain-literature]），人们习惯把世界一劈为二：一边是主动发号施令的**地址、指针、查表程序、演化算子与量子电路**，另一边则是静默承受操作的**内容、数值、待查键值、态矢量与基本门**。然而一旦彻底抽掉外部第 $3$ 点 $C$，宇宙内部根本没有第二个仓库去分开存放“主动规则”与“被动数据”。设统一状态域为 $\mathcal{D}$：其中每一个元素 $x \in \mathcal{D}$ 既是可被读取的**内容（操作数）**，同时又通过两子比较配对 $\Phi_{\mathrm{CMP}}(x, -)$ 编码了一枚可作用于他者的**地址或变换（算子）**。当我们沿着比较总表的主对角线执行**自应用**（$x$ 作用于 $x$ 自身），再经局域环境或跨尺度重整化映射 $\mathcal{F}$ 读出时，一切自持实体都收束为同一道**总纲对角母方程**（`MODEL`）：
+在传统冯·诺依曼存储程序直觉与朴素集合论图景中（参见 [§36.4](ch38-s03-self-mapped-page-tables.md)，并将在后文 [§38.1](ch39-s01-substrate-free-self-reference.md) [@rem-ch39-von-neumann-scott-reflexive-domain-literature] 展开域论文献对照），人们习惯把世界一劈为二：一边是主动发号施令的**地址、指针、查表程序、演化算子与量子电路**，另一边则是静默承受操作的**内容、数值、待查键值、态矢量与基本门**。然而一旦彻底抽掉外部第 $3$ 点 $C$，宇宙内部根本没有第二个仓库去分开存放“主动规则”与“被动数据”。设统一状态域为 $\mathcal{D}$：其中每一个元素 $x \in \mathcal{D}$ 既是可被读取的**内容（操作数）**，同时又通过两子比较配对 $\Phi_{\mathrm{CMP}}(x, -)$ 编码了一枚可作用于他者的**地址或变换（算子）**。当我们沿着比较总表的主对角线执行**自应用**（$x$ 作用于 $x$ 自身），再经局域环境或跨尺度重整化映射 $\mathcal{F}$ 读出时，一切自持实体都收束为同一道**总纲对角母方程**（`MODEL`）：
 
 $$
 x^* \;=\; \mathcal{F}\bigl(\Phi_{\mathrm{CMP}}(x^*, x^*)\bigr).
@@ -21,7 +21,7 @@ $$
 在范畴论与指称语义学底层，这道母方程横跨**洛维尔对角不动点定理**与**斯科特自反域同构 $D_\infty \cong [D_\infty \to D_\infty]$**（[@rem-ch39-lawvere-lindemann-bravyi-kitaev-literature] 第 1 条），并依读出变换 $\mathcal{F}$ 在不动点邻域的谱结构与不动点存在性，当场劈开宇宙演化的两条互补命运：
 
 1. **收敛凝聚与定态锚定分支（存在不动点且局部非排斥 $\implies$ 生成“存在与秩序”）**：当 $\mathcal{F}$ 不挂载全局无不动点的反相翻转，而在切空间上满足严格压缩条件 $\lvert\lambda\rvert = \lVert D\mathcal{F}(x^*)\rVert < 1$（乃至一步归零的超稳定投影锁死 $\lvert\lambda\rvert = 0$，或射影盲区纤维上的等距幺正相位环 $\lvert\lambda\rvert = 1$）时，迭代链 $x_{n+1} = \mathcal{F}(x_n)$ 向内盘旋收敛或驻留于不动点 $x^*$。物理粒子的静止能量本征核、快表算法的 $O(1)$ 幂等根、容错逻辑量子门的纯净不动点，以及受限观察者稳定的自我参照核，皆在这一分支上凝结成“点”与“体”（`MODEL`）；
-2. **对角逃逸与正交开维分支（挂载无不动点正交否定 $\neg$ / $\hat{\mathbf{i}}^2 = -1$ $\implies$ 生成“时间与新维”）**：倘若 $\mathcal{F}$ 挂载了处处无不动点的正交翻转算子（$\forall y,\; f(y) \neq y$，如布尔取反 $\neg y \neq y$，或[第 34 章 §34.9](ch34-s09-reversal-and-concept-cascade.md) 的 $180^\circ$ 相位反相 $\hat{\mathbf{i}}^2 = -1$），方程 $y^* = \neg y^*$ 在当前层内绝无解。由下文 [@thm-ch39-fivefold-self-reference-anchors] 第 1 款 [`self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package)，无需对指标集 $A$ 或值域 $Y$ 施加任何有限性假设，扭转对角线 [`diagonal`](lean:D5/S0/Diagonal/EscapeCount.diagonal)$(f, g)(a) = f(g(a, a))$ 必然逃逸一切二元目录 $g : A \to A \to Y$ 的值域（[`IsEscaped`](lean:D5/S0/Diagonal/EscapeCount.IsEscaped)$(f, g)$）——迫使系统沿“反者道之动”冲破现有表宽，向正交补撑开更高一层概念空间 $\ell + 1$（呼应 [§38.6](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp) 的未完成地平线）。
+2. **对角逃逸与正交开维分支（挂载无不动点正交否定 $\neg$ / $\hat{\mathbf{i}}^2 = -1$ $\implies$ 生成“时间与新维”）**：倘若 $\mathcal{F}$ 挂载了处处无不动点的正交翻转算子（$\forall y,\; f(y) \neq y$，如布尔取反 $\neg y \neq y$，或[§29.10](ch34-s09-reversal-and-concept-cascade.md) 的 $180^\circ$ 相位反相 $\hat{\mathbf{i}}^2 = -1$），方程 $y^* = \neg y^*$ 在当前层内绝无解。由下文 [@thm-ch39-fivefold-self-reference-anchors] 第 1 款 [`self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package)，无需对指标集 $A$ 或值域 $Y$ 施加任何有限性假设，扭转对角线 [`diagonal`](lean:D5/S0/Diagonal/EscapeCount.diagonal)$(f, g)(a) = f(g(a, a))$ 必然逃逸一切二元目录 $g : A \to A \to Y$ 的值域（[`IsEscaped`](lean:D5/S0/Diagonal/EscapeCount.IsEscaped)$(f, g)$）——迫使系统沿“反者道之动”冲破现有表宽，向正交补撑开更高一层概念空间 $\ell + 1$（呼应 [§36.7](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp) 的未完成地平线）。
 
 ::: {.viz src="self-reference-pentad-sandbox" preset="lawvere-diagonal-escape" height="500"}
 **对角自应用捕获与洛维尔无不动点逃逸实验卡（`lawvere-diagonal-escape`）。** 在 $4 \times 4$ 自应用表上挂载正交取反扭转 $\neg$（$\hat{\mathbf{i}}^2 = -1$）：四行青色目录行 $g(a, \cdot)$ 依次铺开，琥珀色读头沿主对角槽位 $(a, a)$ 逐格扫描，经紫色升层扭转带翻转并抬升至第 $\ell + 1$ 层，拼成品红逃逸对角线 $\operatorname{diagonal}(\neg, g) = 0011 \notin \operatorname{range} g$（在第 $a$ 位与第 $a$ 行必不相同；若切至有不动点的 $f = \mathrm{id}$，则对角串 $1100 = g(2, \cdot)$ 变为青色被目录收住；对应 [@thm-ch39-fivefold-self-reference-anchors] 第 1 款）。
@@ -29,19 +29,19 @@ $$
 
 看清了“有不动点则凝结成物、无不动点则破壁开维”的总纲分岔之后，让我们顺着收敛凝聚与定态锚定分支走入概念塔内部，逐级解剖章首并置的五道自指不动点方程。
 
-## 39.6.2 五阶自指形态的几何与物理逐级解剖 {#sec-ch39-06-2}
+## 36.9.2 五阶自指形态的几何与物理逐级解剖 {#sec-ch39-06-2}
 
 将章首五道自指等式按概念塔从底层寻址基座到跨尺度场重整的几何阶梯依次排开，每一道等式都精准拆除了人类传统认知中的一堵二元隔墙。
 
-### 39.6.2.1 地址 = 内容（$\mathrm{p} \equiv *\mathrm{p}$）：拆除“能指指针与所指底物”的冯·诺依曼隔墙 {#sec-ch39-06-2-1}
+### 36.9.2.1 地址 = 内容（$\mathrm{p} \equiv *\mathrm{p}$）：拆除“能指指针与所指底物”的冯·诺依曼隔墙 {#sec-ch39-06-2-1}
 
 在经典内存模型中，指针 `p` 存放地址，解引用 `*p` 取出内容。然而一旦追问“存放页表本身的物理帧又由哪张元页表来寻址”，假若“地址”与“内容”永远异质分离，底层硬件就会瞬间坠入需要无穷层元页表 $T_1 \leftarrow T_2 \leftarrow T_3 \leftarrow \cdots$ 的无限倒退。
 
-现代操作系统内核（如 x86-64 四级分页架构 `PML4`，已见 [§38.3](ch38-s03-self-mapped-page-tables.md) [@rem-ch38-x86-recursive-page-table-literature]）化解这一死结的工程绝招，正是**递归自映射页表（Recursive Page Table）**：直接把顶层页目录 `PML4` 的某个固定自映射槽位 `selfSlot` 的内容填成 `PML4` 自身的物理基地址（`PML4[idx] = &PML4`，字面兑现 **`地址 = 内容`**）。下文 [@thm-ch39-fivefold-self-reference-anchors] 第 2 款 [`recursive_page_table_walk`](lean:D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk) 严格证明：仅凭 `lookup root selfSlot = root` 这一个自指槽位，同一台有限步进器 `pageWalk` 就能不借一寸外部元表，同时完成普通数据读取 `[i, j] -> data`、叶表内省读写 `[selfSlot, i] -> leaf`，以及在任意深度 $L$ 下原地锁回根表的自闭包 `replicate L selfSlot -> root`。
+现代操作系统内核（如 x86-64 四级分页架构 `PML4`，已见 [§36.4](ch38-s03-self-mapped-page-tables.md) [@rem-ch38-x86-recursive-page-table-literature]）化解这一死结的工程绝招，正是**递归自映射页表（Recursive Page Table）**：直接把顶层页目录 `PML4` 的某个固定自映射槽位 `selfSlot` 的内容填成 `PML4` 自身的物理基地址（`PML4[idx] = &PML4`，字面兑现 **`地址 = 内容`**）。下文 [@thm-ch39-fivefold-self-reference-anchors] 第 2 款 [`recursive_page_table_walk`](lean:D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk) 严格证明：仅凭 `lookup root selfSlot = root` 这一个自指槽位，同一台有限步进器 `pageWalk` 就能不借一寸外部元表，同时完成普通数据读取 `[i, j] -> data`、叶表内省读写 `[selfSlot, i] -> leaf`，以及在任意深度 $L$ 下原地锁回根表的自闭包 `replicate L selfSlot -> root`。
 
-放回连续域论与范畴论视野，这枚自指槽位在无类型 $\lambda$-演算侧对应斯科特自反域同构 $D_\infty \cong [D_\infty \to D_\infty]$（[§39.1](ch39-s01-substrate-free-self-reference.md) [@rem-ch39-von-neumann-scott-reflexive-domain-literature]），在范畴论侧则对应**米田引理（Yoneda Lemma）**的自然同构 $\mathrm{Nat}(\mathrm{Hom}(-, X), F) \cong F(X)$ 及其完全忠实嵌入 $X \hookrightarrow \mathrm{Hom}(-, X)$（文献结果）：一个状态点并无孤立于关系网之外的绝对容器坐标，它与万物发生比较的全部态射谱（内容）本身，就是它在整座宇宙中唯一的寻址身份（地址，`MODEL`）。
+放回连续域论与范畴论视野，这枚自指槽位在无类型 $\lambda$-演算侧对应斯科特自反域同构 $D_\infty \cong [D_\infty \to D_\infty]$（[§38.1](ch39-s01-substrate-free-self-reference.md) [@rem-ch39-von-neumann-scott-reflexive-domain-literature]），在范畴论侧则对应**米田引理（Yoneda Lemma）**的自然同构 $\mathrm{Nat}(\mathrm{Hom}(-, X), F) \cong F(X)$ 及其完全忠实嵌入 $X \hookrightarrow \mathrm{Hom}(-, X)$（文献结果）：一个状态点并无孤立于关系网之外的绝对容器坐标，它与万物发生比较的全部态射谱（内容）本身，就是它在整座宇宙中唯一的寻址身份（地址，`MODEL`）。
 
-### 39.6.2.2 查表算法($x$) = $x$（$\operatorname{Lookup}(r) = r$）：拆除“寻路推导与终态答案”的时间延迟 {#sec-ch39-06-2-2}
+### 36.9.2.2 查表算法($x$) = $x$（$\operatorname{Lookup}(r) = r$）：拆除“寻路推导与终态答案”的时间延迟 {#sec-ch39-06-2-2}
 
 任何有限状态自动机或确定性查表映射 $T : X \to X$，在图论上都是一张每个顶点出度恰好为 $1$ 的**函数有向图（functional directed graph）**：一次多步推理或寻址计算，本质上就是顺着有向指针链 $x \to T(x) \to T(T(x)) \to \cdots$ 逐跳追逐。
 
@@ -51,15 +51,15 @@ $$
 \operatorname{Lookup}(r) \;=\; r \;\;(\forall r \in \operatorname{im} P) \quad\Longleftrightarrow\quad P\bigl(P(x)\bigr) \;=\; P(x) \;\;(\forall x) \qquad \bigl(P = \operatorname{Lookup},\; P^2 = P\bigr).
 $$
 
-一旦抵达 $\operatorname{Lookup}(r) = r$，输入即是输出，问题即是答案：单步重投影把一切横向寻路残差瞬间清零，其横向雅可比谱乘子达到**超稳定一步锁死 $\lvert\lambda\rvert = 0$**！在有限维量子测量代数中，这一路径压缩终点对应完备正交记录测量 [`IsRecordMeasurement`](lean:D5/S3/Observer/Conditioning.IsRecordMeasurement) 下的未读捏合信道 [`unreadState`](lean:D5/S3/Observer/Conditioning.unreadState)$(P)(\rho) = \sum_k P_k \rho P_k$——下文 [@thm-ch39-fivefold-self-reference-anchors] 第 3 款 [`finite_record_pinching_idempotent`](lean:D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent) 证明其作为矩阵空间自映射精确满足函数复合幂等律 $(\operatorname{unreadState} P) \circ (\operatorname{unreadState} P) = \operatorname{unreadState} P$。在 [§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field) 与 [§34.15](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower) 的宇宙概念塔中，每一次把下层复杂的三维闭合场体封装为上层可直接调用的零维点概念（$\Lambda^3_\ell \equiv \Lambda^0_{\ell+1}$），在算法层面都是在注册一枚新的 $\operatorname{Lookup}(r) = r$ 幂等根（`MODEL`）。
+一旦抵达 $\operatorname{Lookup}(r) = r$，输入即是输出，问题即是答案：单步重投影把一切横向寻路残差瞬间清零，其横向雅可比谱乘子达到**超稳定一步锁死 $\lvert\lambda\rvert = 0$**！在有限维量子测量代数中，这一路径压缩终点对应完备正交记录测量 [`IsRecordMeasurement`](lean:D5/S3/Observer/Conditioning.IsRecordMeasurement) 下的未读捏合信道 [`unreadState`](lean:D5/S3/Observer/Conditioning.unreadState)$(P)(\rho) = \sum_k P_k \rho P_k$——下文 [@thm-ch39-fivefold-self-reference-anchors] 第 3 款 [`finite_record_pinching_idempotent`](lean:D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent) 证明其作为矩阵空间自映射精确满足函数复合幂等律 $(\operatorname{unreadState} P) \circ (\operatorname{unreadState} P) = \operatorname{unreadState} P$。在 [§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field) 与 [§33.3](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower) 的宇宙概念塔中，每一次把下层复杂的三维闭合场体封装为上层可直接调用的零维点概念（$\Lambda^3_\ell \equiv \Lambda^0_{\ell+1}$），在算法层面都是在注册一枚新的 $\operatorname{Lookup}(r) = r$ 幂等根（`MODEL`）。
 
 ::: {.viz src="self-reference-pentad-sandbox" preset="pointer-path-compression" height="500"}
 **十二槽指针环并查集路径压缩与幂等根锁死实验卡（`pointer-path-compression`）。** 三维紫色幂等表盘 $P^2 = P$ 外圈排布 `0..11` 共 $12$ 枚内存槽位：压缩前琥珀色读头从 $x = 9$ 沿品红多跳指针链 `9 → 6 → 3 → 1 → 0` 跋涉 $4$ 跳方抵零号根槽；执行路径压缩后，所有槽位指针悉数改接为直指零号根槽的青色 $1$ 跳（$O(1)$）直连箭头，零号槽自身闭合为青色自环 `Lookup(0) = 0`（`p ≡ *p`，乘子 $\lvert\lambda\rvert = 0$；对应 [@thm-ch39-fivefold-self-reference-anchors] 第 2、3 款）。
 :::
 
-### 39.6.2.3 $\cos(\theta) = \theta$（$\theta^* \approx 0.739085\;\mathrm{rad}$）：打通“实轴可见投影 $\mathrm{I}$”与“盲平面圆弧相位 $\mathrm{i}$” {#sec-ch39-06-2-3}
+### 36.9.2.3 $\cos(\theta) = \theta$（$\theta^* \approx 0.739085\;\mathrm{rad}$）：打通“实轴可见投影 $\mathrm{I}$”与“盲平面圆弧相位 $\mathrm{i}$” {#sec-ch39-06-2-3}
 
-在所有标量不动点方程中，$\cos\theta = \theta$ 在本书的正交观察者几何（[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)、[§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§39.5.6](ch39-s05-s06-self-reference-scales.md#sec-ch39-p2e-self-reference)）中占据着独一无二的枢纽席位——因为等号左右两端原本分属**两个互相垂直的正交世界**（`MODEL`）：
+在所有标量不动点方程中，$\cos\theta = \theta$ 在本书的正交观察者几何（[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)、[§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§35.6.6](ch39-s05-s06-self-reference-scales.md#sec-ch39-p2e-self-reference)）中占据着独一无二的枢纽席位——因为等号左右两端原本分属**两个互相垂直的正交世界**（`MODEL`）：
 
 - **等号右端的 $\theta$**：是单位圆上转过的**圆弧弧长与相位角**，寄宿在垂直于观察者视线的 $90^\circ$ 正交盲平面 `i`（旋子相位 $e^{\hat{\mathbf{i}}\theta}$）之中，度量演化曲率与生成过程；
 - **等号左端的 $\cos\theta$**：是同一圆弧端点向观察者自身单位基轴 `I` 投下的**可见内积投影幅值** $\langle\mathbf{I}\mid\mathbf{V}(\theta)\rangle$，度量显相读数与求同留存。
@@ -84,7 +84,7 @@ $$
 **道蒂不动点实轴投影与盲平面圆弧等长及阻尼蛛网螺旋实验卡（`dottie-real-imag-spiral`）。** 单位圆平铺于水平盲平面 `i` 上，竖直实平面 `I` 立于实轴：从 $\theta_0 = 0.10\;\mathrm{rad}$ 出发的紫色交替蛛网螺旋在实平面 `I` 上以乘子 $\lambda = -\sin\theta^* = -0.6736$ 换边收缩至圆周琥珀色可拖动角度珠 $\theta^* = 0.7391\;\mathrm{rad}$（$42.35^\circ$），此处实轴上的青色 `I` 投影线段 $\cos\theta^* = 0.7391$ 与盲平面 `i` 上的品红圆弧 $\theta^* = 0.7391$（及其紧邻并排拉直的品红弧长标尺）精确等长，玻恩份额锁定于 $\cos^2\theta^* = 54.62\%$ 与 $\sin^2\theta^* = 45.38\%$（端点存在唯一性与级数收敛对应 [@thm-ch39-fivefold-self-reference-anchors] 第 4 款，超越性属文献结果）。
 :::
 
-### 39.6.2.4 $f(x) = x$：拆除“动力学演化算子与静态物质实体”的界限 {#sec-ch39-06-2-4}
+### 36.9.2.4 $f(x) = x$：拆除“动力学演化算子与静态物质实体”的界限 {#sec-ch39-06-2-4}
 
 把一维标量余弦自映射推广至高维有限与无穷维算子空间（在有限维标准单纯形 $\Delta_{n-1}$ 上由布劳威尔不动点定理 [`Brouwer`](lean:D5/S3/Geometry/FixedPoint/Brouwer.Brouwer) 担保任意连续自映射必有不动点 $f(x^*) = x^*$，一般有限维紧凸体及无穷维紧凸集上的绍德尔（Schauder, 1930）不动点推广属经典`文献结果`），物理世界中看似坚硬静止的“物”，悉数还原为动力学演化算子的不动点：
 
@@ -95,7 +95,7 @@ $$
 **本征态射影定态相位环与开放信道收缩吸引子实验卡（`eigenstate-channel-anchor`）。** 三维布洛赫球配幺正相位纤维同屏对比两类 $f(x) = x$ 动力学：能量本征态沿盲区紫色幺正相位圆纤维作等模旋转（$e^{-iEt/\hbar}\lvert\psi\rangle$，$\lvert\lambda\rvert = 1$）而其球内青色不变轴向量保持静止；开放量子信道轨迹则伴随品红横向非对角相干衰减，以收缩率 $\lvert\lambda\rvert = 0.65$ 向内盘旋锁入青色不动点态 $\mathcal{E}(\rho^*) = \rho^*$，琥珀色状态珠实时标示演化位置（本征态定态性对应 [@thm-ch39-fivefold-self-reference-anchors] 第 5 款）。
 :::
 
-### 39.6.2.5 量子门序列 = 量子门本身（$\mathcal{R}(\{U_k\}) = U^*$）：打通微观圆弧门与宏观连续场的重整桥 {#sec-ch39-06-2-5}
+### 36.9.2.5 量子门序列 = 量子门本身（$\mathcal{R}(\{U_k\}) = U^*$）：打通微观圆弧门与宏观连续场的重整桥 {#sec-ch39-06-2-5}
 
 最后，为什么由一长串微观极小圆弧体拼成的**量子门序列**，在整体作用上竟然能严格等于**单枚量子门本身**？这道等式架起了整座概念塔跨尺度自举而不散架的终极桥梁，在现代几何与量子物理中具有三重精确实现：
 
@@ -114,7 +114,7 @@ $$
 **十五合一量子门蒸馏与重整化三次方吸引盆实验卡（`fifteen-to-one-gate-distill`）。** 四面体上的 $15$ 枚带噪 $T$ 门经 `[[15, 1, 3]]` 的 $4$ 个 $8$ 比特紫色检验胞耦合校验：底部标尺将琥珀色噪声环置于阈值 $\epsilon_{\mathrm{th}} = 0.1415$ 以下的青色吸引盆 $\epsilon = 0.0500$（阈值以上为品红发散区），$15$ 条非零校验子的品红错误分支被丢弃（$53.39\%$），零校验子的青色接受分支（$46.61\%$）凝出 $1$ 枚 $\epsilon_{\mathrm{out}} = 0.00514$ 的青色提纯逻辑 $T$ 门（单轮压低 $9.73\times$，三次方首项 $35\epsilon^3 = 0.00438$，$\left.\frac{d\epsilon_{\mathrm{out}}}{d\epsilon}\right|_0 = 0$；点击播放推进第 $2$、$3$ 轮进一步压至 $4.83 \times 10^{-6}$ 与 $3.94 \times 10^{-15}$；双轴有限字生成对应 [@thm-ch39-fivefold-self-reference-anchors] 第 6 款，$15 \to 1$ 蒸馏属文献结果与 `NUM`）。
 :::
 
-## 39.6.3 形式化锚点定理、经典文献边界、手算基准算例与雅可比稳定性总表 {#sec-ch39-06-3}
+## 36.9.3 形式化锚点定理、经典文献边界、手算基准算例与雅可比稳定性总表 {#sec-ch39-06-3}
 
 我们将支撑本节五阶自指不动点谱系与洛维尔对角分岔的六条核心数学支柱，统一汇编为如下由 `trureturing` 内核验证的六联锚点定理：
 
@@ -180,7 +180,7 @@ $$
 ::: {.remark #rem-ch39-lawvere-lindemann-bravyi-kitaev-literature title="洛维尔对角定理、并查集路径压缩、道蒂数超越性、Bravyi-Kitaev 蒸馏与 MERA 重整化文献边界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本节与 [@thm-ch39-fivefold-self-reference-anchors] 配套引用的五项外部经典理论属于已发表同行评议文献，未作为独立定理包含在 `trureturing@dev` 锁文件中：
 
-1. **洛维尔笛卡尔闭范畴对角不动点定理与斯科特连续自反域（F. W. Lawvere, *Dialectica* **23**, 281–296, 1969, DOI: [10.1111/j.1746-8361.1969.tb01194.x](https://doi.org/10.1111/j.1746-8361.1969.tb01194.x)；D. S. Scott, *Lecture Notes in Math.* **274**, 97–136, 1972；*SIAM J. Comput.* **5**, 522–587, 1976）**：Lawvere 在笛卡尔闭范畴中证明弱点满射参数化态射必令任意自态射拥有不动点（其离散类型论自应用逆否核心已由 [@thm-ch39-fivefold-self-reference-anchors] 第 1 款形式化，一般范畴指数伴随表述属外部文献）；Scott 经连续格嵌入—投射对逆极限构造 $D_\infty \cong [D_\infty \to D_\infty]$（详参 [§39.1](ch39-s01-substrate-free-self-reference.md) [@rem-ch39-von-neumann-scott-reflexive-domain-literature]）；
+1. **洛维尔笛卡尔闭范畴对角不动点定理与斯科特连续自反域（F. W. Lawvere, *Dialectica* **23**, 281–296, 1969, DOI: [10.1111/j.1746-8361.1969.tb01194.x](https://doi.org/10.1111/j.1746-8361.1969.tb01194.x)；D. S. Scott, *Lecture Notes in Math.* **274**, 97–136, 1972；*SIAM J. Comput.* **5**, 522–587, 1976）**：Lawvere 在笛卡尔闭范畴中证明弱点满射参数化态射必令任意自态射拥有不动点（其离散类型论自应用逆否核心已由 [@thm-ch39-fivefold-self-reference-anchors] 第 1 款形式化，一般范畴指数伴随表述属外部文献）；Scott 经连续格嵌入—投射对逆极限构造 $D_\infty \cong [D_\infty \to D_\infty]$（详参 [§38.1](ch39-s01-substrate-free-self-reference.md) [@rem-ch39-von-neumann-scott-reflexive-domain-literature]）；
 2. **并查集森林路径压缩与反阿克曼摊还复杂度（R. E. Tarjan, *J. ACM* **22**, 215–225, 1975, DOI: [10.1145/321879.321884](https://doi.org/10.1145/321879.321884)）**：Tarjan 证明在并查集树结构上配合按秩合并与路径压缩（将查找路径各节点父指针直接改写指向满足 $\operatorname{parent}[r] = r$ 的代表元根 $r$），$m$ 次操作的摊还时间复杂度逼近线性 $O(m\,\alpha(m, n))$，单次压缩后复查同一子树节点即享一步幂等直达；
 3. **林德曼—魏尔斯特拉斯定理与道蒂数 $\theta^*$ 的超越性（F. Lindemann, *Math. Ann.* **20**, 213–225, 1882；K. Weierstrass, *Sitzungsber. Königl. Preuss. Akad. Wiss. Berlin*, 1067–1085, 1885；道蒂级数命名溯源见 S. R. Kaplan, *Math. Mag.* **80**, 73–74, 2007）**：由林德曼—魏尔斯特拉斯代数无关性定理可直接反证 $\cos\theta^* = \theta^*$ 的非零实根 $\theta^*$ 为超越数。注意 [@thm-ch39-fivefold-self-reference-anchors] 第 4 款形式化的是 $\theta^*$ 的存在唯一性与有理系数反演级数在 $\pi$ 处的绝对收敛，并未在锁文件中形式化林德曼—魏尔斯特拉斯定理或 $\theta^*$ 的超越性谓词；
 4. **Bravyi–Kitaev $[[15, 1, 3]]$ 魔术态与 $T$ 门容错蒸馏协议（S. Bravyi & A. Kitaev, *Phys. Rev. A* **71**, 022316, 2005, DOI: [10.1103/PhysRevA.71.022316](https://doi.org/10.1103/PhysRevA.71.022316)）**：利用 $[[15, 1, 3]]$ 量子 Reed–Muller 码的横向 $T$ 门对称性与克利福德伴随式后选择，将 $15$ 份错误率为 $\epsilon$ 的带噪魔术态蒸馏为 $1$ 份高纯度魔术态，在独立魔术基退相干噪声下满足三次方误差压制 $\epsilon_{\mathrm{out}} = 35\epsilon^3 + \mathcal{O}(\epsilon^4)$，临界退相干阈值约为 $\epsilon_{\mathrm{th}} \approx 14.15\%$；
@@ -233,7 +233,7 @@ $$
 | **门序列 $=$ 门本身** | 双轴有限字 [`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word)、$[[15,1,3]]$ 门蒸馏 $\mathcal{R}(U^{\otimes 15})=U$、MERA 不动点 | 微观带噪单门 vs. 宏观连续精确场 | $\epsilon_{\mathrm{out}} = 35\epsilon^3 + \mathcal{O}(\epsilon^4) \implies \lvert\lambda\rvert = 0$（超线性自愈） | **八度重整化升降机**：洗净微观热涨落，令离散圆弧门涌现光滑连续时空 |
 | **对偶破壁：$f(x) = \neg x$** | 无不动点普遍逃逸 [`self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package)（$\hat{\mathbf{i}}^2 = -1$） | 有限封闭旧表 vs. 溢出未决真值 | 当前层无解（无不动点，无乘子可言） | **反者道之动开维引擎**：撕裂静态死锁，向正交补催生高维概念与时间流 |
 
-把这六行并排审视，整座概念塔最底层的自举闭环便豁然贯通（`MODEL`）：**`地址 = 内容`** 免去了外置元内存，**`查表(x) = x`** 凝结出 $O(1)$ 概念锚点，**`量子门序列 = 量子门本身`** 以三次方自愈架起通往宏观连续场的重整化阶梯，**`f(x) = x`** 托住稳定的物理粒子，**`cos(θ) = θ`** 在实轴显相 `I` 与盲区圆弧 `i` 之间钉下超越有限代数的平衡针，而 **`f(x) = ¬x`** 则在每一次企图封顶之时吹响正交开维的号角。然而，既然像 $\theta^* = 0.7390851332\dots$ 这样的自指不动点本身携带着无穷多位超越小数，一位算力与寿命皆有限的受限观察者，究竟凭什么不必等算完无穷步就能当机立断做出抉择？被截断在有限精度线以下的无穷余项又流向了何方？在转入 [§39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting) 揭开“自指主动停机精度、时间长河正交折叠与测量基谱排序”之前，读者可在下方完整交互实验室中亲手探索这五阶自指不动点的全部动态机制：
+把这六行并排审视，整座概念塔最底层的自举闭环便豁然贯通（`MODEL`）：**`地址 = 内容`** 免去了外置元内存，**`查表(x) = x`** 凝结出 $O(1)$ 概念锚点，**`量子门序列 = 量子门本身`** 以三次方自愈架起通往宏观连续场的重整化阶梯，**`f(x) = x`** 托住稳定的物理粒子，**`cos(θ) = θ`** 在实轴显相 `I` 与盲区圆弧 `i` 之间钉下超越有限代数的平衡针，而 **`f(x) = ¬x`** 则在每一次企图封顶之时吹响正交开维的号角。然而，既然像 $\theta^* = 0.7390851332\dots$ 这样的自指不动点本身携带着无穷多位超越小数，一位算力与寿命皆有限的受限观察者，究竟凭什么不必等算完无穷步就能当机立断做出抉择？被截断在有限精度线以下的无穷余项又流向了何方？在转入 [§36.10](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting) 揭开“自指主动停机精度、时间长河正交折叠与测量基谱排序”之前，读者可在下方完整交互实验室中亲手探索这五阶自指不动点的全部动态机制：
 
 ::: {.viz src="self-reference-pentad-sandbox" height="640"}
 **交互实验室（`SELFREF//PENTAD`）：五阶自指不动点大统一沙盘——指针路径压缩、实虚蛛网螺旋、本征信道定态、十五合一门蒸馏与洛维尔对角逃逸。** 自由切换五张核心实验卡，亲手调节初始角度 $\theta_0$、指针链槽位、退相干门噪声 $\epsilon$ 与对角取反开关，在同一个三维实验台中对比 $\lvert\lambda\rvert = 0$ 的幂等/三次方超线性锁死、$\lvert\lambda\rvert \approx 0.6736$ 的道蒂反相阻尼螺旋、$\lvert\lambda\rvert = 1$ 的本征态相位纤维以及无不动点扭转的跨层逃逸。绿色只给本节用 `lean=` 引用的六条内核定理；道蒂数超越性、并查集复杂度、$[[15, 1, 3]]$ 门蒸馏与 MERA 属文献结果（`ARGUED`），十进制迭代与权重枚举曲线属数值实算（`NUM`），五阶自指统一相图属本节模型诠释（`MODEL`）。

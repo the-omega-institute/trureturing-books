@@ -1,4 +1,4 @@
-# 39.5.4 The $K=3$ Rauzy Fractal Internal Window: Exact Prefix Self-Coverage and Null Boundary {#sec-ch39-p2e-rauzy}
+# 35.6.4 The $K=3$ Rauzy Fractal Internal Window: Exact Prefix Self-Coverage and Null Boundary {#sec-ch39-p2e-rauzy}
 
 Fix the order-three Tribonacci characteristic polynomial $P_3(X) = X^3 - X^2 - X - 1$, write $\beta_3 = \operatorname{tribonacciConstant}$ for its real Perron root, and select the upper-half-plane non-Perron complex root $\alpha$ ($\operatorname{Im}\alpha > 0$). The conjugate trace and norm identities [`tribonacci_secondary_root_add_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_add_conjugate) and [`tribonacci_secondary_root_mul_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate) establish the exact relations
 

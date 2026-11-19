@@ -29,7 +29,7 @@ $\rho \succeq 0,\ \operatorname{Tr}\rho = 1 \implies \operatorname{bornProbabili
 $\operatorname{Tr}M = 1,\ M^2 = M \implies x^2 + y^2 + z^2 = 1$ ($M$ a $2\times 2$ Hermitian matrix)
 
 **Epistemic Status:**
-`LEAN ✓` (Ch 1–3, 26)
+`LEAN ✓` (Ch 1–3, Forge and Sanctuary · Single-Qubit Rotor Compilation)
 
 **Observable & Projector $P$**<br/>(可观测量与投影算符)
 
@@ -43,7 +43,7 @@ $\operatorname{Tr}M = 1,\ M^2 = M \implies x^2 + y^2 + z^2 = 1$ ($M$ a $2\times 
 $\mathcal{P}(\mathcal{P}(\rho)) = \mathcal{P}(\rho),\quad P_\psi^2 = P_\psi$
 
 **Epistemic Status:**
-`LEAN ✓` (Ch 1, 3, 27)
+`LEAN ✓` (Ch 1, 3, Forge and Sanctuary · Inside the Lean 4 Axiom Sanctuary (Part I))
 
 **Born Probability Rule $P = |\langle\phi|\psi\rangle|^2$**<br/>(玻恩概率法则)
 
@@ -57,7 +57,7 @@ $\mathcal{P}(\mathcal{P}(\rho)) = \mathcal{P}(\rho),\quad P_\psi^2 = P_\psi$
 $\rho = \lvert\psi\rangle\langle\psi\rvert,\ P_k = \lvert\phi\rangle\langle\phi\rvert \implies \operatorname{recordWeight}_k = \operatorname{Tr}(\rho P_k) = \lvert\langle\phi\mid\psi\rangle\rvert^2$
 
 **Epistemic Status:**
-`LEAN ✓` (Ch 2, 28)
+`LEAN ✓` (Ch 2, Forge and Sanctuary · Inside the Lean 4 Axiom Sanctuary (Part II))
 
 **Orthogonal Decomposition**<br/>(正交态分解与完备性)
 
@@ -71,7 +71,7 @@ $\rho = \lvert\psi\rangle\langle\psi\rvert,\ P_k = \lvert\phi\rangle\langle\phi\
 $\|u + v\|^2 + \|u - v\|^2 = 2(\|u\|^2 + \|v\|^2)$
 
 **Epistemic Status:**
-`LEAN ✓` (parallelogram identity only) (Ch 1, 27, Coda)
+`LEAN ✓` (parallelogram identity only) (Ch 1, Forge and Sanctuary · Inside the Lean 4 Axiom Sanctuary (Part I), Coda)
 
 **Global Phase $e^{i\alpha}|\psi\rangle$**<br/>(全局相位与射线等价)
 
@@ -85,7 +85,7 @@ $\|u + v\|^2 + \|u - v\|^2 = 2(\|u\|^2 + \|v\|^2)$
 $A$ unitary, preserving coordinate rays and a connected ray family $\implies A = c\,I,\ |c| = 1$
 
 **Epistemic Status:**
-`LEAN ✓` (Ch 1, 27)
+`LEAN ✓` (Ch 1, Forge and Sanctuary · Inside the Lean 4 Axiom Sanctuary (Part I))
 
 **Density Matrix $\rho$ & Mixed State**<br/>(密度矩阵与混合态)
 
@@ -99,7 +99,7 @@ $A$ unitary, preserving coordinate rays and a connected ray family $\implies A =
 $\|\mathbf{r}\| \le \operatorname{Tr}(\rho),\quad \operatorname{Tr}(\rho(\mathbf{r})) = 1$
 
 **Epistemic Status:**
-`LEAN ✓` (Ch 3, 26)
+`LEAN ✓` (Ch 3, Forge and Sanctuary · Single-Qubit Rotor Compilation)
 
 **Decoherence & Quantum Channel $\Phi(\rho)$**<br/>(退相干与量子信道)
 
@@ -155,7 +155,7 @@ $\begin{aligned}&\mathbf{u}\wedge\mathbf{v}=-\mathbf{v}\wedge\mathbf{u},\\&A=A^\
 $\hat{\mathbf{I}}^2 = -1,\quad ZX = -XZ$
 
 **Epistemic Status:**
-`LEAN ✓` (Ch 5, 25)
+`LEAN ✓` (Ch 5, Forge and Sanctuary · Reducing Matrices to XOR)
 
 **Single-Qubit Unitary Gate $U \in \mathrm{SU}(2)$**<br/>(单比特幺正门)
 
@@ -169,7 +169,7 @@ $\hat{\mathbf{I}}^2 = -1,\quad ZX = -XZ$
 $U(0) = 1,\ U(s+t) = U(s)U(t),\ U^*U = 1,\ U$ differentiable at $0 \implies U(t) = \exp(-itH/\hbar)$ with $H$ self-adjoint ($v \mapsto R v \widetilde{R}$ is not part of this declaration)
 
 **Epistemic Status:**
-`LEAN ✓` (Ch 7, 27)
+`LEAN ✓` (Ch 7, Forge and Sanctuary · Single-Qubit Rotor Compilation)
 
 **Two-Qubit Entanglement & Concurrence**<br/>(双比特纠缠与并发度)
 
@@ -267,7 +267,7 @@ $\begin{aligned}\mathcal S_{\text{classical}}&\le2,\\\mathcal S_{\text{quantum}}
 $P_1 P_2 = P_2 P_1 \iff x_1 z_2 \oplus z_1 x_2 = 0$
 
 **Epistemic Status:**
-`LEAN ✓` (Ch 14, 26)
+`LEAN ✓` (Ch 14, Forge and Sanctuary · Reducing Matrices to XOR)
 
 **Grover / QFT / QSVT / Szegedy Walk**<br/>(量子搜索、傅里叶与奇异值变换)
 
@@ -421,7 +421,7 @@ $\exists N \le |S_0|,\; \forall n \ge N,\; S_n = S_N$
 $ZX = -XZ,\quad e_a e_b = (-1)^{\operatorname{inv}(a,b)} e_{a \oplus b}$
 
 **Epistemic Status:**
-`LEAN ✓` (Weyl star algebra and Bloch expansion) / `Literature`, reference computation (XOR blade engine, Ch 25, App B)
+`LEAN ✓` (Weyl star algebra and Bloch expansion) / `Literature`, reference computation (XOR blade engine, Forge and Sanctuary · Reducing Matrices to XOR, App B)
 
 **ZYZ Euler Decomposition & Rotor Cascade**<br/>(ZYZ 欧拉分解与旋量级联)
 
@@ -435,7 +435,7 @@ $ZX = -XZ,\quad e_a e_b = (-1)^{\operatorname{inv}(a,b)} e_{a \oplus b}$
 $R_z(\alpha)R_y(0)R_z(\gamma) = R_z(\alpha + \gamma)$
 
 **Epistemic Status:**
-`LEAN ✓` (two-axis finite rotation words) / `Literature`, reference computation (ZYZ identities and compilation, Ch 9, 16, 27, App B)
+`LEAN ✓` (two-axis finite rotation words) / `Literature`, reference computation (ZYZ identities and compilation, Ch 9, 16, Forge and Sanctuary · Single-Qubit Rotor Compilation, App B)
 
 **Lüders State Update & Finite-Record Obstruction**<br/>(吕德斯态更新与有限记录阻碍)
 
@@ -449,7 +449,7 @@ $R_z(\alpha)R_y(0)R_z(\gamma) = R_z(\alpha + \gamma)$
 $\sum_i p_i \rho_i = \Phi(\rho),\quad p_i\ne0\implies\operatorname{Tr}(\rho_i) = 1$
 
 **Epistemic Status:**
-`LEAN ✓` (Ch 3, 28)
+`LEAN ✓` (Ch 3, Forge and Sanctuary · Inside the Lean 4 Axiom Sanctuary (Part II))
 
 **Pythagorean "All Is Number" & 4-Tier Escape**<br/>(毕达哥拉斯“万物皆数”与四级数系突围)
 
@@ -463,7 +463,7 @@ $\sum_i p_i \rho_i = \Phi(\rho),\quad p_i\ne0\implies\operatorname{Tr}(\rho_i) =
 $\mathbf{c}^2 = \mathbf{a}^2 + \mathbf{b}^2,\quad m^2 - 2n^2 = \pm 1,\quad \cos\theta^* = \theta^*$ (representative equations of the tiers, not conclusions of the listed declarations)
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` (Ch 29, Coda)
+`LEAN ✓` / `Literature` (Ch 23, Coda)
 
 **Prime Splitting mod 4, Congruent Elliptic Curve & Sato–Tate**<br/>(素数模 4 分裂、同余数椭圆曲线与佐藤—泰特分布)
 
@@ -477,7 +477,7 @@ $\mathbf{c}^2 = \mathbf{a}^2 + \mathbf{b}^2,\quad m^2 - 2n^2 = \pm 1,\quad \cos\
 $\cos\theta_p = \frac{a_p}{2\sqrt{p}} \in [-1, +1],\quad d\mu_{\mathrm{ST},\text{non-CM}} = \frac{2}{\pi}\sin^2\theta\,d\theta$
 
 **Epistemic Status:**
-`Literature` (Ch 29; the two listed declarations vouch only for their algebraic statements and do not concern prime splitting or Sato–Tate)
+`Literature` (Ch 23; the two listed declarations vouch only for their algebraic statements and do not concern prime splitting or Sato–Tate)
 
 **Wheeler–DeWitt Timeless State, Page–Wootters Slicing & Geometric Causality**<br/>(惠勒—德维特无时间态、佩奇—伍特斯切片与几何因果律)
 
@@ -491,7 +491,7 @@ $\cos\theta_p = \frac{a_p}{2\sqrt{p}} \in [-1, +1],\quad d\mu_{\mathrm{ST},\text
 $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) \ge 0,\quad H\mathbf{\Psi} = 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `MODEL` (Ch 29)
+`LEAN ✓` / `Literature` / `MODEL` (Ch 25)
 
 **Finite Observer, Gram Elliptope (Causally Compatible Space) & PSD Matrix Completion**<br/>(有限观察者、格拉姆椭圆体与时间场选点)
 
@@ -505,7 +505,7 @@ $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) \ge 0,\quad H\mathbf{\Psi} = 0$
 $c_{AC} = \cos\theta_1\cos\theta_2 + \cos\phi\,\sin\theta_1\sin\theta_2,\quad \det G \ge 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `MODEL` (Ch 29)
+`LEAN ✓` / `Literature` / `MODEL` (Ch 25)
 
 **Global Static Time Field $P = NP$ vs. Finite Observer $P \neq NP$**<br/>(全局静态时间场 $P = NP$ vs. 有限观察者 $P \neq NP$)
 
@@ -519,7 +519,7 @@ $c_{AC} = \cos\theta_1\cos\theta_2 + \cos\phi\,\sin\theta_1\sin\theta_2,\quad \d
 $\cos\theta_0 = 2^{-n/2},\quad L = \Theta(2^{n/2}),\quad G_M \succeq 0\;(M = o(n))$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 15, 20, 30)
+`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 15, 20, 26)
 
 **"$P$ Is a Field, $NP$ Is a Line": Witness Thread, Guiding Field & Hairy-Ball Curl**<br/>(“$P$ 是场，$NP$ 是线”：见证丝、导向场与毛球旋度)
 
@@ -533,7 +533,7 @@ $\cos\theta_0 = 2^{-n/2},\quad L = \Theta(2^{n/2}),\quad G_M \succeq 0\;(M = o(n
 $A_K^T = -A_K,\quad [\operatorname{Pf}(A_K)]^2 = \det A_K,\quad Z = |\operatorname{Pf}(A_K)|$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 20, 21, 30)
+`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 20, 21, 26)
 
 **Navier–Stokes Equations, Lamb Bivector Curl & $P$ vs. $NP$ Field Analogy**<br/>(纳维—斯托克斯方程、兰姆双向量旋度与 $P$ vs. $NP$ 场化类比)
 
@@ -547,7 +547,7 @@ $A_K^T = -A_K,\quad [\operatorname{Pf}(A_K)]^2 = \det A_K,\quad Z = |\operatorna
 $(\mathbf{u}\cdot\nabla)\mathbf{u} = \frac{1}{2}\nabla(\|\mathbf{u}\|^2) + \mathbf{u}\cdot(\nabla\wedge\mathbf{u}),\quad \Gamma \approx A\|\boldsymbol{\omega}\|$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 30)
+`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 26)
 
 **Exponential Time Hypothesis (ETH), Tensor-Network Rank Collapse & Cosmic Horizon Galactic Algorithm**<br/>(指数时间假设 ETH、张量网络秩约分与宇宙视界银河算法)
 
@@ -561,7 +561,7 @@ $(\mathbf{u}\cdot\nabla)\mathbf{u} = \frac{1}{2}\nabla(\|\mathbf{u}\|^2) + \math
 $s_k = \inf\{\delta\ge0 \mid k\text{-SAT}\in 2^{\delta n}(n+m)^{O(1)}\},\quad r_{\mathrm{new}}(n) \sim \frac{\log_2\log_2 n}{\sqrt{\log_2 n}}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 19, 21, 30)
+`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 19, 21, 26)
 
 **Orthogonal Triad of Entanglement, $P=NP$ & Entropy**（量子纠缠、$P=NP$ 与熵的正交三位一体）
 
@@ -575,7 +575,7 @@ $s_k = \inf\{\delta\ge0 \mid k\text{-SAT}\in 2^{\delta n}(n+m)^{O(1)}\},\quad r_
 $\|\mathbf{r}_A\|^2 + \tau(A:\bar{A}) = \cos^2\theta + \sin^2\theta = 1,\quad S_L(\rho_A) = \sin^2\theta,\quad \chi_{\mathrm{bond}} \ge 2^{S_{\mathrm{cut}}}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 8, 13, 24, [Ch 30](ch30-s05-entanglement-and-entropy.md#sec-ch30-entanglement-entropy-complexity-triad))
+`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 8, 13, 24, [Ch 26](ch30-s05-entanglement-and-entropy.md#sec-ch30-entanglement-entropy-complexity-triad))
 
 **Spatial Attractors, `trureturing` Cut-and-Project Observer, Cassini $(-1)^{k+1}$ Seam & Déjà Vu**<br/>(空间吸引子、`trureturing` 黄金切投观察者、卡西尼接缝与似曾相识)
 
@@ -589,7 +589,7 @@ $\|\mathbf{r}_A\|^2 + \tau(A:\bar{A}) = \cos^2\theta + \sin^2\theta = 1,\quad S_
 $F_n F_{n+2} - F_{n+1}^2 = (-1)^{n+1},\quad \delta\theta\to 0 \implies \cos\delta\theta \to 1$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `MODEL` (Ch 24, 29, Coda)
+`LEAN ✓` / `Literature` / `MODEL` (Ch 24, 25, 35)
 
 **Quantum Fairness, Entanglement Monogamy & Ergodic Statistical Holism**<br/>(量子公平性、纠缠单配性与遍历统计全息)
 
@@ -603,7 +603,7 @@ $F_n F_{n+2} - F_{n+1}^2 = (-1)^{n+1},\quad \delta\theta\to 0 \implies \cos\delt
 $\tau_{A|B} + \tau_{A|C} \le \tau_{A|BC},\quad f\in C(G,\mathbb{C}):\quad\lim_{N\to\infty}\frac{1}{N}\sum_{n=0}^{N-1} f(g^{n+1}) = \int_G f\,d\mu$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `MODEL` (Ch 31)
+`LEAN ✓` / `Literature` / `MODEL` (Ch 27)
 
 **Pairwise Fair Squaring, Diagonal Phase Folding, Uncertainty & Time as Orthogonal Dimension Expansion**（两两公平平方、对角相位折叠、测不准与正交维度扩张时间）
 
@@ -617,7 +617,7 @@ $\tau_{A|B} + \tau_{A|C} \le \tau_{A|BC},\quad f\in C(G,\mathbb{C}):\quad\lim_{N
 $\lVert\operatorname{id}_H - P_{S_i}\rVert = 1,\quad (\Delta A)^2(\Delta B)^2 = C^2 + \lVert K\rVert^2 + G,\quad N_S = \prod_{p \in S} p + 1 \equiv 1 \pmod p$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` ([Ch 31 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion))
+`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` ([Ch 27 §27.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion))
 
 **Orthogonal Self-Referential Unified Field, Icosian–$E_8$ Golden Bridge & Eight-Program Meta-Unification**<br/>(正交自指统一场、艾柯西安 $E_8$ 黄金桥与八大纲领元统一)
 
@@ -631,7 +631,7 @@ $\lVert\operatorname{id}_H - P_{S_i}\rVert = 1,\quad (\Delta A)^2(\Delta B)^2 = 
 $R^2 = -I,\quad (\mathcal{I}, Q)\cong E_8\;\bigl(Q(q)=\operatorname{tr}_{\mathbb{Q}(\sqrt{5})/\mathbb{Q}}\bigl(\tfrac{2\varphi}{\sqrt{5}}\operatorname{Nrd}(q)\bigr)=2(a+b)\bigr),\quad \psi = \psi(\psi)$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `MODEL` (Ch 32)
+`LEAN ✓` / `Literature` / `MODEL` (Ch 28)
 
 **Universal Observers, Self-Sustaining Basins & Mutual-Attractor Double Helices**<br/>(万物皆为观察者、自维持势阱与互吸引子双螺旋)
 
@@ -645,7 +645,7 @@ $R^2 = -I,\quad (\mathcal{I}, Q)\cong E_8\;\bigl(Q(q)=\operatorname{tr}_{\mathbb
 $\mathcal{P}(\mathcal{P}(\rho)) = \mathcal{P}(\rho),\quad N \le d,\quad \theta_{n+1}^{(A)} = \cos\theta_n^{(B)} \to \theta^*$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `MODEL` (Ch 33)
+`LEAN ✓` / `Literature` / `MODEL` (Ch 34)
 
 **Orthogonality-Degeneracy Blind Spots & Observer Position Inversion**<br/>(正交简并盲区与观察者位置反演)
 
@@ -659,7 +659,7 @@ $\mathcal{P}(\mathcal{P}(\rho)) = \mathcal{P}(\rho),\quad N \le d,\quad \theta_{
 $d_{S^2}(N, P_1) = d_{S^2}(N, P_2) = \frac{\pi}{2},\quad \operatorname{Tr}(U^\dagger A U \rho) = \operatorname{Tr}(A U \rho U^\dagger)$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `MODEL` (Ch 34)
+`LEAN ✓` / `Literature` / `MODEL` (Ch 29)
 
 **Arriving on a Pulse of Light, Initialization by Forgetting & Homoiconic Table Expansion $T = T(T)$**<br/>(乘光而来、遗忘初始化与同像自指扩表)
 
@@ -687,7 +687,7 @@ $\det G_2 = 1 - c^2,\quad N \le d,\quad T = T(T)$
 $\eta(\theta) = \ln(\sec\theta + \tan\theta),\quad \left|\frac{z-i}{z+i}\right| = 1 \iff \operatorname{Im} z = 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `MODEL` (Ch 36)
+`LEAN ✓` / `Literature` / `MODEL` (Ch 35)
 
 **p-adic Zero-Carry Lookup Trees, Prime Observer Expansion & Blocking Reincarnation**（p 进零进位前缀查表树、素数观察者扩表与阻断轮回）
 
@@ -701,7 +701,7 @@ $\eta(\theta) = \ln(\sec\theta + \tan\theta),\quad \left|\frac{z-i}{z+i}\right| 
 $K(p) = \lceil n / \log_2 p\rceil,\quad d(x,z) \le \max\bigl(d(x,y), d(y,z)\bigr),\quad \lvert x\rvert_\infty \cdot \prod_p \lvert x\rvert_p = 1$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `MODEL` ([Ch 36 §36.4](ch36-s04-padic-table-expansion.md#sec-ch36-padic-prime-table-expansion))
+`LEAN ✓` / `Literature` / `MODEL` ([Ch 35 §35.5](ch36-s04-padic-table-expansion.md#sec-ch36-padic-prime-table-expansion))
 
 **Dream Quantum Erasure, Known-Data Decoherence & Nonlocal Observer**<br/>(梦境量子擦除、已知数据退相干与非定域观察者)
 
@@ -715,7 +715,7 @@ $K(p) = \lceil n / \log_2 p\rceil,\quad d(x,z) \le \max\bigl(d(x,y), d(y,z)\bigr
 $S(\mathcal{P}(\rho)) - S(\rho) = D(\rho\parallel\mathcal{P}(\rho)),\quad \det G_3(c,c,u) = (1-u)(1+u-2c^2)$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `MODEL` (Ch 37)
+`LEAN ✓` / `Literature` / `MODEL` (Ch 36)
 
 **Choosing the Future, Dream Pre-Decoherence & Null-Timestamp Déjà Vu Cache Hit**（选择未来、梦境前置逻辑超前去相干与既视感无时间戳快表命中）
 
@@ -729,7 +729,7 @@ $S(\mathcal{P}(\rho)) - S(\rho) = D(\rho\parallel\mathcal{P}(\rho)),\quad \det G
 $\Pi_P \circ \Pi_P = \Pi_P,\quad \Delta H_{\mathrm{bits}}\bigl(\Pi_P(\sigma) \leftarrow \sigma\bigr) = 0,\quad E(C) < E(C \setminus \{i\}) \iff U_i > 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 37 §37.5](ch37-s05-future-selection-and-deja-vu.md#sec-ch37-dream-pre-decoherence-deja-vu))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 36 §36.1.5](ch37-s05-future-selection-and-deja-vu.md#sec-ch37-dream-pre-decoherence-deja-vu))
 
 **Ontological QRAM, Observer Memory Pointer & Recursive Self-Mapped Page Tables**<br/>(宇宙本体 QRAM、观察者记忆指针与递归自映射页表)
 
@@ -743,7 +743,7 @@ $\Pi_P \circ \Pi_P = \Pi_P,\quad \Delta H_{\mathrm{bits}}\bigl(\Pi_P(\sigma) \le
 $\operatorname{diagonal}(f, g)(a) = f(g(a, a)),\quad P[s^*] = p_{\mathrm{phys}}(P)$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `MODEL` (Ch 38)
+`LEAN ✓` / `Literature` / `MODEL` (Ch 36)
 
 **7-Stage Degradation Ladder of a Hypothetical P = NP Lookup Oracle & Spacetime–Gravity Trade-Off**（P=NP 查表算法七阶退化阶梯与时空引力权衡）
 
@@ -757,7 +757,7 @@ $\operatorname{diagonal}(f, g)(a) = f(g(a, a)),\quad P[s^*] = p_{\mathrm{phys}}(
 $\operatorname{spectrumBottom} \le K(r) + c,\quad \forall k \in \operatorname{wdigits}\!\bigl(\sum_{i\in P} F_i + F_j\bigr),\; m - 2 \le k,\quad r_{\mathrm{pipe}}(\sigma) = \max(1-\sigma, \sigma/2) \ge \frac{1}{3}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `MODEL` / `OPEN` ([Ch 38 §38.4](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation))
+`LEAN ✓` / `Literature` / `MODEL` / `OPEN` ([Ch 36 §36.5](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation))
 
 **Observer Escape Ledger, Preimage Fibers & Hilbert–Zeckendorf Entropy**（观察者逃逸账本、原像纤维与希尔伯特—齐肯多夫熵）
 
@@ -771,7 +771,7 @@ $\operatorname{spectrumBottom} \le K(r) + c,\quad \forall k \in \operatorname{wd
 $H_{\mathrm{total}} = I_{\mathrm{ledger}}(S) + H_2^{\mathrm{escape}}(\mathcal{S}\mid S) = \log_2 N,\quad C_\varphi = \log_2\varphi$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `NUM` / `MODEL` ([Ch 38 §38.5](ch38-s05-escape-ledger-and-entropy.md#sec-ch38-observer-escape-ledger))
+`LEAN ✓` / `Literature` / `NUM` / `MODEL` ([Ch 36 §36.6](ch38-s05-escape-ledger-and-entropy.md#sec-ch38-observer-escape-ledger))
 
 **Observer Is the Ontological Universe: Reflexive Domains, Relational Holography & Spinor Self-Folding**<br/>(观察者即宇宙本体：无底物自指域、关系全息与旋量自折叠)
 
@@ -785,7 +785,7 @@ $H_{\mathrm{total}} = I_{\mathrm{ledger}}(S) + H_2^{\mathrm{escape}}(\mathcal{S}
 $X \simeq \coprod_{y:\mathrm{Val}} \mathrm{ConceptFiber}(c,y),\quad J_{U,V}^2 = -I,\quad \mathcal{O} \equiv \mathcal{U}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `MODEL` (Ch 39)
+`LEAN ✓` / `Literature` / `MODEL` (Ch 38)
 
 **Zeckendorf–Pisot–Rauzy Eight-Concept Sandtable**（齐肯多夫—皮索—劳齐八概念综合沙盘）
 
@@ -799,7 +799,7 @@ $X \simeq \coprod_{y:\mathrm{Val}} \mathrm{ConceptFiber}(c,y),\quad J_{U,V}^2 = 
 $\beta_K = 2 - \beta_K^{-K},\quad \mathcal{R}_3(\alpha) = f_0(\mathcal{R}_3)\cup f_{10}(\mathcal{R}_3)\cup f_{110}(\mathcal{R}_3),\quad 1 \le r_b \le R_b,\quad S(\sigma_b) \le \ln R_b$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `NUM` / `OPEN` / `MODEL` ([Ch 39 §39.5](ch39-s05-pisot-clifford-rauzy.md#sec-ch39-pisot-clifford-rauzy))
+`LEAN ✓` / `Literature` / `NUM` / `OPEN` / `MODEL` ([Ch 35 §35.6](ch39-s05-pisot-clifford-rauzy.md#sec-ch39-pisot-clifford-rauzy))
 
 **Six Foundational Quantum Puzzles, Removing External Point $C$ & the Five-Interpretation Geometric Duel**（量子力学六大未解难题、撤除外部第 3 点 $C$ 与正交开维诠释对决）
 
@@ -827,7 +827,7 @@ $r^2 + \tau_{L:E} = 1,\quad \operatorname{Re}\operatorname{Tr}(\rho\cdot\mathrm{
 $w(\psi\leftrightarrow\phi) = \langle\phi\mid\psi\rangle\langle\psi\mid\phi\rangle = \lvert\langle\phi\mid\psi\rangle\rvert^2,\quad p(j) = p(j,+) + p(j,-) = q_j,\quad \det(P_{13} G P_{13}^{\mathsf{T}}) = \det G \ge 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 29](ch29-s04-coherence-and-handshake.md#sec-ch29-coherence-handshake-causality))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 25](ch29-s04-coherence-and-handshake.md#sec-ch29-coherence-handshake-causality))
 
 **Multi-Observer Consensus Tensor, Emergent Pointer Basis & No Observer-Independent Facts**（多观察者共识张量、去相干指针基涌现与无绝对客观事实）
 
@@ -841,12 +841,12 @@ $w(\psi\leftrightarrow\phi) = \langle\phi\mid\psi\rangle\langle\psi\mid\phi\rang
 $\mathbf{M}_{\mathrm{cons}} = \sum_{j=1}^N w_j\,\mathbf{n}_j\mathbf{n}_j^{\mathsf{T}},\quad I(S:\mathcal{O}_m) = h(\Pi_{\mathrm{all}}) + h(\Pi_F) - h(\Pi_{F^c}),\quad F_{\mathrm{LF}} = \sqrt{5} + 3 + \sqrt{2+\sqrt{2}} > 6$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 33](ch33-s05-consensus-and-pointer-bases.md#sec-ch33-consensus-decoherence-pointer))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34](ch33-s05-consensus-and-pointer-bases.md#sec-ch33-consensus-decoherence-pointer))
 
 **Cosmic OISC Comparison Primitive & Zero-Background Axiom of Comparison $\mathcal{A}_0$**（宇宙单指令集比较机原语与零背景比较公理）
 
 **Geometric Intuition Term (本书几何直觉语言):**
-**Lossless bitwise binary name comparison step bound $2(\lvert a\rvert+\lvert b\rvert)+4$ and streamed dictionary scan step bound $(2\lvert\mathrm{query}\rvert+12)\lvert\mathrm{names}\rvert+4\lvert\operatorname{dictionaryStream}(\mathrm{names})\rvert+3$, finite comparison-word extensionality and orthogonal residual kernel $X(\rho)-X(\sigma)\in V_{\mathrm{vis}}^\perp$, readout partition-topology inseparability kernel, the finite-dimensional Lagrange–Gram parity square-folding identity, and skew-adjoint unitary squaring $R^2=-I_n$ (`LEAN ✓`); paired with Clifford parity splitting $\mathrm{CMP}(\mathbf{A},\mathbf{B})=\mathbf{A}\cdot\mathbf{B}+\mathbf{A}\wedge\mathbf{B}$, the `3-3-2` partition of $8$ unit binary words at rank $3$ into an $8$-corner rectangular box (not an equilateral cube since $3\nmid 8$), and rearranging unit fairness budgets into the Minkowski interval $c^2 d\tau^2=c^2 dt^2-dx^2$ (`manual derivation` / `NUM`), alongside Mavaddat & Parhami (1988) `SUBLEQ` OISC Turing completeness, the categorical Yoneda Lemma and fully faithful Yoneda embedding $y(X)=\mathrm{Hom}_{\mathcal{C}}(-,X)$, Ostrowski's (1918) valuation completions, Schoenberg's (1935) PSD metric embedding, Jordan–von Neumann (1935), Gleason (1957), Hardy (2001) / Chiribella–D'Ariano–Perinotti (2011) local-tomography tensor composition, Pauli (1940) spin–statistics, Robertson–Schrödinger uncertainty, and Yang–Mills (1954) gauge curvature (`Literature`), grounding in Chapter 32 §32.1–§32.3 and Appendix E the zero-background Axiom of Comparison $\mathcal{A}_0$, the cosmic OISC comparison engine, and—together with explicit bridge hypotheses H1–H9—the layered reconstruction across mathematical and physical axiom systems (`MODEL`; standard $\mathrm{P}\neq\mathrm{NP}$ marked `OPEN`)**
+**Lossless bitwise binary name comparison step bound $2(\lvert a\rvert+\lvert b\rvert)+4$ and streamed dictionary scan step bound $(2\lvert\mathrm{query}\rvert+12)\lvert\mathrm{names}\rvert+4\lvert\operatorname{dictionaryStream}(\mathrm{names})\rvert+3$, finite comparison-word extensionality and orthogonal residual kernel $X(\rho)-X(\sigma)\in V_{\mathrm{vis}}^\perp$, readout partition-topology inseparability kernel, the finite-dimensional Lagrange–Gram parity square-folding identity, and skew-adjoint unitary squaring $R^2=-I_n$ (`LEAN ✓`); paired with Clifford parity splitting $\mathrm{CMP}(\mathbf{A},\mathbf{B})=\mathbf{A}\cdot\mathbf{B}+\mathbf{A}\wedge\mathbf{B}$, the `3-3-2` partition of $8$ unit binary words at rank $3$ into an $8$-corner rectangular box (not an equilateral cube since $3\nmid 8$), and rearranging unit fairness budgets into the Minkowski interval $c^2 d\tau^2=c^2 dt^2-dx^2$ (`manual derivation` / `NUM`), alongside Mavaddat & Parhami (1988) `SUBLEQ` OISC Turing completeness, the categorical Yoneda Lemma and fully faithful Yoneda embedding $y(X)=\mathrm{Hom}_{\mathcal{C}}(-,X)$, Ostrowski's (1918) valuation completions, Schoenberg's (1935) PSD metric embedding, Jordan–von Neumann (1935), Gleason (1957), Hardy (2001) / Chiribella–D'Ariano–Perinotti (2011) local-tomography tensor composition, Pauli (1940) spin–statistics, Robertson–Schrödinger uncertainty, and Yang–Mills (1954) gauge curvature (`Literature`), grounding in Chapter 28 §28.1–§28.3 and Appendix E the zero-background Axiom of Comparison $\mathcal{A}_0$, the cosmic OISC comparison engine, and—together with explicit bridge hypotheses H1–H9—the layered reconstruction across mathematical and physical axiom systems (`MODEL`; standard $\mathrm{P}\neq\mathrm{NP}$ marked `OPEN`)**
 
 **Lean-Facing Object / Locked GID:**
 [`name_compare_run`](lean:D5/S0/Computability/BinaryNameComparison.name_compare_run), [`dictionary_lookup_run`](lean:D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run), [`future_word_orthogonal_residual`](lean:D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual), [`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel), [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity), [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary)
@@ -855,12 +855,12 @@ $\mathbf{M}_{\mathrm{cons}} = \sum_{j=1}^N w_j\,\mathbf{n}_j\mathbf{n}_j^{\maths
 $\mathrm{CMP}(\mathbf{A},\mathbf{B}) = \mathbf{A}\cdot\mathbf{B} + \mathbf{A}\wedge\mathbf{B},\quad \mathrm{CMP}(\mathbf{A},\mathbf{B})\,\mathrm{CMP}(\mathbf{B},\mathbf{A}) = \cos^2\theta + \sin^2\theta = 1,\quad T_{\mathrm{cmp}}(a,b) \le 2(\lvert a\rvert+\lvert b\rvert)+4$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([Ch 32 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [§32.2](ch32-s02-oisc-comparison-engine.md#sec-ch32-oisc-comparison-engine), [§32.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([Ch 28 §28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [§28.2](ch32-s02-oisc-comparison-engine.md#sec-ch32-oisc-comparison-engine), [§28.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries), [App E](appendix-e.md))
 
 **Infinitesimal Spherical Trihedron Cell $\Delta\mathcal{T}_\epsilon$, Dual Shadows of Once/Twice Orthogonal & Curvature Quantum**（极小三角弧面体原胞、一次/两次正交一体双影与球面角超曲率量子）
 
 **Geometric Intuition Term (本书几何直觉语言):**
-**Simplicial two-cochain tetrahedral coboundary repair and exactness criterion, propagation of moving two-axis circle invariance across $\mathrm{SO}(3)$, the Lagrange–Gram two-vector area-deficit identity, and Hilbert-space closed-subspace unit orthogonal residual escape (`LEAN ✓`); paired with projecting the right-angled spherical trihedron cell $\Delta\mathcal{T}_\epsilon$ down its ridge $OB$ into the "orthogonal once" direct arc $\cos c_\epsilon=\cos^2\epsilon$ ($c_\epsilon=\sqrt{2}\epsilon(1-\epsilon^2/12+O(\epsilon^4))$) versus decomposing along two perpendicular walls into the "orthogonal twice" rotor product $U_{23}(\epsilon)U_{12}(\epsilon)$ with transverse term $-\sin^2(\epsilon/2)\,\mathbf{e}_1\mathbf{e}_3$, unit-normalized pairwise comparison bootstrap $\mathbf{P}(\epsilon)=(\mathbf{A}\cdot\mathbf{B})\mathbf{A}+\star(\mathbf{B}\wedge\mathbf{A})=\mathbf{C}(\epsilon)$, the 3D Gram volume brick $\det G=\sin^4\epsilon>0$, and closed-form benchmarks at $\epsilon=15^\circ,45^\circ,90^\circ$ (`manual derivation` / `NUM`), alongside Girard's (1629) spherical excess $\Omega(\epsilon)=2\arctan(\tan^2\frac{\epsilon}{2})\approx\frac{1}{2}\epsilon^2$ ($=2\arctan(\sec\epsilon)-\frac{\pi}{2}$ for $\epsilon<\frac{\pi}{2}$), Gauss–Bonnet tangent rotation $+\Omega(\epsilon)$, Pancharatnam–Berry geodesic-loop spinor holonomy $\exp(-\frac{1}{2}\Omega(\epsilon)\hat{\mathbf{I}}_{\mathbf{A}})$, Regge (1961) coordinate-free simplicial gravity with spin-foam models, and Peirce's irreducible triadicity, cyclic $C_3\subset\mathrm{SO}(3)$ symmetry vs. Cartan's $\mathrm{Spin}(8)$ spinor triality, and the Laozi–Kant–Wittgenstein ladder tradition (`Literature`), grounding in Chapter 34 §34.4–§34.5 the dual-shadow unification of single and double orthogonality, the minimal curvature quantum $\Omega_{\min}\approx\frac{1}{2}\epsilon_{\min}^2$, and the ascent from the "two-begets-three" bootstrap to the dissolution of names and isomorphic resonance with "that feeling" (`MODEL`)**
+**Simplicial two-cochain tetrahedral coboundary repair and exactness criterion, propagation of moving two-axis circle invariance across $\mathrm{SO}(3)$, the Lagrange–Gram two-vector area-deficit identity, and Hilbert-space closed-subspace unit orthogonal residual escape (`LEAN ✓`); paired with projecting the right-angled spherical trihedron cell $\Delta\mathcal{T}_\epsilon$ down its ridge $OB$ into the "orthogonal once" direct arc $\cos c_\epsilon=\cos^2\epsilon$ ($c_\epsilon=\sqrt{2}\epsilon(1-\epsilon^2/12+O(\epsilon^4))$) versus decomposing along two perpendicular walls into the "orthogonal twice" rotor product $U_{23}(\epsilon)U_{12}(\epsilon)$ with transverse term $-\sin^2(\epsilon/2)\,\mathbf{e}_1\mathbf{e}_3$, unit-normalized pairwise comparison bootstrap $\mathbf{P}(\epsilon)=(\mathbf{A}\cdot\mathbf{B})\mathbf{A}+\star(\mathbf{B}\wedge\mathbf{A})=\mathbf{C}(\epsilon)$, the 3D Gram volume brick $\det G=\sin^4\epsilon>0$, and closed-form benchmarks at $\epsilon=15^\circ,45^\circ,90^\circ$ (`manual derivation` / `NUM`), alongside Girard's (1629) spherical excess $\Omega(\epsilon)=2\arctan(\tan^2\frac{\epsilon}{2})\approx\frac{1}{2}\epsilon^2$ ($=2\arctan(\sec\epsilon)-\frac{\pi}{2}$ for $\epsilon<\frac{\pi}{2}$), Gauss–Bonnet tangent rotation $+\Omega(\epsilon)$, Pancharatnam–Berry geodesic-loop spinor holonomy $\exp(-\frac{1}{2}\Omega(\epsilon)\hat{\mathbf{I}}_{\mathbf{A}})$, Regge (1961) coordinate-free simplicial gravity with spin-foam models, and Peirce's irreducible triadicity, cyclic $C_3\subset\mathrm{SO}(3)$ symmetry vs. Cartan's $\mathrm{Spin}(8)$ spinor triality, and the Laozi–Kant–Wittgenstein ladder tradition (`Literature`), grounding in Chapter 29 §29.5–§29.6 the dual-shadow unification of single and double orthogonality, the minimal curvature quantum $\Omega_{\min}\approx\frac{1}{2}\epsilon_{\min}^2$, and the ascent from the "two-begets-three" bootstrap to the dissolution of names and isomorphic resonance with "that feeling" (`MODEL`)**
 
 **Lean-Facing Object / Locked GID:**
 [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness), [`moving_axis_invariance`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.moving_axis_invariance), [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity), [`finite_layer_projection_escape`](lean:D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape)
@@ -869,12 +869,12 @@ $\mathrm{CMP}(\mathbf{A},\mathbf{B}) = \mathbf{A}\cdot\mathbf{B} + \mathbf{A}\we
 $\cos c_\epsilon = \cos^2\epsilon,\quad \Omega(\epsilon) = 2\arctan\!\bigl(\tan^2\frac{\epsilon}{2}\bigr)\;\bigl(= 2\arctan(\sec\epsilon) - \frac{\pi}{2},\;\epsilon < \tfrac{\pi}{2}\bigr),\quad \det G(\Delta\mathcal{T}_\epsilon) = \sin^4\epsilon$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34 §34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron), [§34.5](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 29 §29.5](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron), [§29.6](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names))
 
 **Rolling $P = NP$ Completion Horizon, Zero-Background Table-Building Paradox & Complete-Catalog Diagonal Refinement**（滚动 $P = NP$ 完成化地平线、零背景建表扩维悖论与完备目录对角拓扑加细）
 
 **Geometric Intuition Term (本书几何直觉语言):**
-**Finiteness-free universal escape for fixed-point-free self-application, nonempty topological separation deficit of the relative semantic diagonal over any surjective decoder catalog, strict observation-topology refinement upon adjoining that diagonal, zero retrospective loss alongside universal non-anticipation failure for full-table copying on finite domains, and unit orthogonal-complement projection escape from proper closed subspaces (`LEAN ✓`); paired with materializing $k$ equal-footing lookup entries under an $\mathcal{A}_0$-compatible Layer-1 positive unit realization ($S(x,x)=+\mathbf{1}$ with a chosen oriented normal branch) to open minimal spherical trihedra $\det G = \sin^4\epsilon > 0$ and net new cross-dimensional comparison obligations $\Delta\Pi_t - k = k(M_t - 1) + \binom{k}{2} > 0$ (`manual derivation` / `MODEL`), alongside Gödel's (1931) First Incompleteness Theorem and 1956 letter to von Neumann on bounded proof search, Turing's (1939) ordinal logic progressions, and Lawvere's (1969) categorical diagonal fixed-point theorem (`Literature`; uniform Turing-machine $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ marked `OPEN`), grounding in Chapter 38 §38.6 the rolling completion horizon—retrospectively $O(1)$ behind the pointer yet prospectively ever-open ahead—and the cosmological guardrail against Zeno freeze and omniscient zero-entropy death (`MODEL`)**
+**Finiteness-free universal escape for fixed-point-free self-application, nonempty topological separation deficit of the relative semantic diagonal over any surjective decoder catalog, strict observation-topology refinement upon adjoining that diagonal, zero retrospective loss alongside universal non-anticipation failure for full-table copying on finite domains, and unit orthogonal-complement projection escape from proper closed subspaces (`LEAN ✓`); paired with materializing $k$ equal-footing lookup entries under an $\mathcal{A}_0$-compatible Layer-1 positive unit realization ($S(x,x)=+\mathbf{1}$ with a chosen oriented normal branch) to open minimal spherical trihedra $\det G = \sin^4\epsilon > 0$ and net new cross-dimensional comparison obligations $\Delta\Pi_t - k = k(M_t - 1) + \binom{k}{2} > 0$ (`manual derivation` / `MODEL`), alongside Gödel's (1931) First Incompleteness Theorem and 1956 letter to von Neumann on bounded proof search, Turing's (1939) ordinal logic progressions, and Lawvere's (1969) categorical diagonal fixed-point theorem (`Literature`; uniform Turing-machine $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ marked `OPEN`), grounding in Chapter 36 §36.7 the rolling completion horizon—retrospectively $O(1)$ behind the pointer yet prospectively ever-open ahead—and the cosmological guardrail against Zeno freeze and omniscient zero-entropy death (`MODEL`)**
 
 **Lean-Facing Object / Locked GID:**
 [`self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package), [`complete_diagonal_separationDeficit_nonempty`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty), [`complete_diagonal_strict_topology_refinement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement), [`lookup_copy_zero_loss_and_nonanticipating_failure`](lean:D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure), [`finite_layer_projection_escape`](lean:D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape)
@@ -883,7 +883,7 @@ $\cos c_\epsilon = \cos^2\epsilon,\quad \Omega(\epsilon) = 2\arctan\!\bigl(\tan^
 $\Delta\Pi_t = k M_t + \binom{k}{2},\quad \bigl(\operatorname{separationDeficit}(\mathrm{latent}, g_{\mathrm{diag}})\bigr).\mathrm{Nonempty},\quad \operatorname{retrospectiveLoss}=0 \;\land\; \forall z,\,\neg\operatorname{NonAnticipating}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `OPEN` / `MODEL` ([Ch 38 §38.6](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp))
+`LEAN ✓` / `Literature` / `OPEN` / `MODEL` ([Ch 36 §36.7](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp))
 
 **North-Pole Blind-Spot Stereographic Projection, Relativization/Natural/Algebrization Barriers & Tetralemma Suspension**（北极自指盲点球极投影、相对化/自然证明/代数化三大复杂性屏障与四句离相悬置）
 
@@ -897,7 +897,7 @@ $\Delta\Pi_t = k M_t + \binom{k}{2},\quad \bigl(\operatorname{separationDeficit}
 $\lVert\operatorname{cayleyRatio}(s)\rVert = 1 \iff \operatorname{Re}(s) = \tfrac{1}{2},\quad R(\theta) = \cot\tfrac{\theta}{2},\quad \mu(\theta) = \frac{1}{1-\cos\theta},\quad \Delta_{\mathrm{unprovable}}(\delta_{\mathrm{blind}}) = \sin^2\!\frac{\delta_{\mathrm{blind}}}{2} > 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 38 §38.7](ch38-s07-blindspot-and-relativization.md#sec-ch38-stereographic-blindspot-relativization-suspension))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 36 §36.8](ch38-s07-blindspot-and-relativization.md#sec-ch38-stereographic-blindspot-relativization-suspension))
 
 **Berry Spherical-Sector Volume, Same-Point Hopf Fiber Lift, Wilson Path–Phase Duality & Feynman Cornu Stationary-Phase Selection**（贝里球扇锥体积、同点异相霍普夫纤维抬升、威尔逊路径—相位对偶与费曼科纽驻相选路）
 
@@ -911,7 +911,7 @@ $\lVert\operatorname{cayleyRatio}(s)\rVert = 1 \iff \operatorname{Re}(s) = \tfra
 $V_{\mathrm{sector}}(\Sigma_2) = \tfrac{1}{3}A_{\mathrm{cap}}(\Sigma_2) = \tfrac{1}{3}\Omega(\Sigma_2),\quad \gamma_B = -\tfrac{1}{2}A_{\mathrm{cap}} = -\tfrac{3}{2}V_{\mathrm{sector}},\quad \bigl((E \to \operatorname{Circle}) / N\bigr) \simeq_{\mathrm{t}*} \bigl(\operatorname{Fin}(m + k - n) \to \operatorname{Circle}\bigr)$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34 §34.6](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 29 §29.7](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral))
 
 **Phase-Integral Standing-Wave Volume Emergence, Multi-Phase Arrival Bundle, Circle Phase-Density Pushforward, Closed-Loop Berry Cosine & Inverted Weyl Volume Law**（相位积分驻波成体、一点多相到达丛、圆周相位态密度前推、闭合贝里余弦与外尔体积倒读）
 
@@ -925,7 +925,7 @@ $V_{\mathrm{sector}}(\Sigma_2) = \tfrac{1}{3}A_{\mathrm{cap}}(\Sigma_2) = \tfrac
 $\Psi(x) = \int_0^{2\pi}\rho(x,\phi)\,e^{i\phi}\,d\phi,\quad \lvert\Psi(x)\rvert^2 = \langle\cos\gamma_B\rangle_x,\quad \mathrm{Vol}_\Omega \equiv (2\pi)^d \cdot N_{\mathrm{standing}}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34 §34.7](ch34-s07-standing-wave-volume.md#sec-ch34-standing-wave-volume-emergence))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 29 §29.8](ch34-s07-standing-wave-volume.md#sec-ch34-standing-wave-volume-emergence))
 
 **Four-in-One Clifford Monad of the Minimal Arc-Body, Gradient–Path–Phase Threefold Geometric Lock & Multi-Cell Boundary Cancellation Grade Sieve**（极小圆弧体的四位一体克利福德单胞、梯度—路径—相位三重几何锁与多胞边界抵消维度筛）
 
@@ -939,7 +939,7 @@ $\Psi(x) = \int_0^{2\pi}\rho(x,\phi)\,e^{i\phi}\,d\phi,\quad \lvert\Psi(x)\rvert
 $\mathcal{M}(\Delta\mathcal{T}_\epsilon) = \cos^2\!\frac{\epsilon}{2} + \frac{1}{2}\sin\epsilon(\mathbf{e}_{AB}+\mathbf{e}_{BC}) + \sin^2\!\frac{\epsilon}{2}\,\hat{\mathbf{I}}_{AC} + \frac{1}{3}\Omega(\epsilon)\,\mathbf{I}_3 \in \mathrm{Cl}_3,\quad (\Lambda^0)^2 + \lVert\Lambda^1_{\mathrm{step}}\rVert^2 + (\Lambda^2)^2 = 1,\quad \partial^2 = 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34 §34.8](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 29 §29.9](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling))
 
 **Reversal as Movement: Gram Dimensional Overflow, Arrival-Path Diagonalization & the Bi-Infinite Path Concept Cut**（反者道之动：格拉姆溢出开维、来路对角化与双无限路径概念切口）
 
@@ -953,7 +953,7 @@ $\mathcal{M}(\Delta\mathcal{T}_\epsilon) = \cos^2\!\frac{\epsilon}{2} + \frac{1}
 $\det G_k > 0 \;\Rightarrow\; D \to D+1,\quad \phi_{\mathrm{diag}}^{(k)} = (\phi_k^{(k)}+\pi)\bmod 2\pi \neq \phi_k^{(k)},\quad \mathcal{H} = M \oplus M^\perp,\quad M^{\perp\perp} = \overline{M},\quad \Delta_{\mathrm{cut}}(\kappa_-) = \kappa_-$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34 §34.9](ch34-s09-reversal-and-concept-cascade.md#sec-ch34-reversal-diagonal-and-concept-cascade), [Ch 32 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 29 §29.10](ch34-s09-reversal-and-concept-cascade.md#sec-ch34-reversal-diagonal-and-concept-cascade), [Ch 28 §28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison))
 
 **Complete-Graph $K_N$ Comparability, Triangle-Like Stability of the Minimal Arc-Body & the 3D Rigidity Lock**（新旧概念全连通 $K_N$、极小圆弧体“三角形稳定性”与三维空间刚性锁死）
 
@@ -967,7 +967,7 @@ $\det G_k > 0 \;\Rightarrow\; D \to D+1,\quad \phi_{\mathrm{diag}}^{(k)} = (\phi
 $B^\dagger B = A^\dagger A \;\Rightarrow\; \exists U \in \mathrm{U}(m,\mathbb{C}),\; B = UA,\quad \Delta E(N) = \binom{N}{2} - (3N - 6) = \frac{(N-3)(N-4)}{2},\quad \delta_e = 2\pi - \sum_{k\ni e}\theta_k$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34 §34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability), [Ch 32 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 29 §29.11](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability), [Ch 28 §28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison))
 
 **Minimal Quantum Circular-Arc Differential, Path-Integral Stitching of Macrophysics & the Righted Calculus Duality**（量子极小圆弧微分元、路径积分缝合宏观物理与扶正的微积分对偶）
 
@@ -981,7 +981,7 @@ $B^\dagger B = A^\dagger A \;\Rightarrow\; \exists U \in \mathrm{U}(m,\mathbb{C}
 $1 - \cos\epsilon = \tfrac{\epsilon^2}{2} + O(\epsilon^4),\quad \lim_{N\to\infty} N\bigl(1 - \cos\tfrac{1}{\sqrt{N}}\bigr) = \tfrac{1}{2} > 0,\quad \operatorname{bargmann}(\Psi) = \Bigl(\prod_{j=0}^{n-1}\Psi_j^\dagger\Psi_{j+1}\Bigr)(\Psi_n^\dagger\Psi_0),\quad \Delta S_{\mathrm{vN}} = \sum_{k=0}^{N-1} D\bigl(\tilde{\rho}_k \,\Vert\, \Pi_{\mathrm{diag}}(\tilde{\rho}_k)\bigr) \ge 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 34 §34.11](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral), [Ch 32 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 29 §29.12](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral), [Ch 28 §28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [App E](appendix-e.md))
 
 **One Arc Begets Three Phases, Triadic Line–Surface–Volume / Particle–Wave–Field Isomorphism & Mutual Path-Integral Reversal Loop**（一弧生三相（线·面·体 $\leftrightarrow$ 粒子·波·场）与万物互为路径积分回环）
 
@@ -995,7 +995,7 @@ $1 - \cos\epsilon = \tfrac{\epsilon^2}{2} + O(\epsilon^4),\quad \lim_{N\to\infty
 $\sum_{h\in H} f(h) = \frac{\lvert H\rvert}{m}\sum_{k\in H^\perp}(\operatorname{ZMod.dft}\,f)(k),\quad \sum_{k\in H^\perp}\chi_k(x) = \lvert H^\perp\rvert\,\mathbf{1}_{x\in H},\quad \Lambda^0 \xrightarrow{\nabla} \Lambda^1 \xrightarrow{\nabla\times} \Lambda^2 \xrightarrow{\nabla\cdot} \Lambda^3 \to 0,\quad \operatorname{Im}\operatorname{tripleBargmann}(r_1,r_2,r_3) = \tfrac{1}{4}\,r_1\cdot(r_2\times_3 r_3)$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 34 §34.12](ch34-s12-triadic-duality.md#sec-ch34-triadic-duality-and-field-loop), [Ch 32 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 29 §29.13](ch34-s12-triadic-duality.md#sec-ch34-triadic-duality-and-field-loop), [Ch 28 §28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [App E](appendix-e.md))
 
 **Point–Volume Octave Helix, 1—3—3—1 Hodge Reset, Cross-Level Renormalization & Particle-as-Field Duality**（点体同源八度螺旋（1—3—3—1 霍奇归零）、跨层重整化捏合与粒子即场对偶）
 
@@ -1009,7 +1009,7 @@ $\sum_{h\in H} f(h) = \frac{\lvert H\rvert}{m}\sum_{k\in H^\perp}(\operatorname{
 $\dim\Lambda^k(\mathbb{R}^3) = (1,3,3,1),\quad (-\nabla^2 + m^2)G = \delta^{(3)},\quad \sum_{h\in H} f(h) = \tfrac{\lvert H\rvert}{m}\sum_{k\in H^\perp}(\operatorname{ZMod.dft}\,f)(k),\quad r_{\mathrm{pack}} = \tfrac{1}{2} > 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 34 §34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field), [Ch 10](ch10-gram-geometry-and-order.md), [Ch 15](ch15-grover-qft-and-period-finding.md), [Ch 31 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion), [Ch 32 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 33 §33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field), [Ch 10](ch10-gram-geometry-and-order.md), [Ch 15](ch15-grover-qft-and-period-finding.md), [Ch 27 §27.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion), [Ch 28 §28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [App E](appendix-e.md))
 
 **Spatial Path-Integral Time, Lorentz Minus Sign $\mathbf{I}_3^2 = -1$, Standard Model `1—2—3` Gauge Ceiling & Point–Line–Surface–Volume Octave**（空间路径积分生时与洛伦兹负号（$\mathbf{I}_3^2 = -1$）、标准模型 `1—2—3` 规范群封顶与“点·线·面·体”跨层八度）
 
@@ -1023,7 +1023,7 @@ $\dim\Lambda^k(\mathbb{R}^3) = (1,3,3,1),\quad (-\nabla^2 + m^2)G = \delta^{(3)}
 $\mathbf{I}_3^2 = (\mathbf{e}_1\mathbf{e}_2\mathbf{e}_3)^2 = -1,\quad \det\bigl(c\,dt\,I_2 + B(d\mathbf{x})\bigr) = c^2 dt^2 - d\mathbf{x}^2,\quad \mathrm{U}(1)_Y \times \mathrm{SU}(2)_L \times \mathrm{SU}(3)_C,\quad \Lambda^3_{\mathrm{color}} \cong \Lambda^0_{\mathrm{hadron}}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 34 §34.14](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave), [Ch 14](ch14-cloning-codes-and-braids.md), [Ch 17](ch17-lorentz-geometry.md), [Ch 18](ch18-spinors-and-gauge-curvature.md), [Ch 25](ch25-rewriting-and-xor.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 33 §33.2](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave), [Ch 14](ch14-cloning-codes-and-braids.md), [Ch 17](ch17-lorentz-geometry.md), [Ch 18](ch18-spinors-and-gauge-curvature.md), [Forge and Sanctuary · Reducing Matrices to XOR](ch25-rewriting-and-xor.md), [App E](appendix-e.md))
 
 **Quantum Gates as Minimal Circular-Arc Trihedra, Orthogonal Gate-Commutator Excess & Bottom-Up Six-Tier Cosmic Concept Tower (`L0`–`L5`)**（量子门即极小圆弧体、正交门换位角盈与自底向上六层宇宙概念塔（`L0`–`L5`））
 
@@ -1037,7 +1037,7 @@ $\mathbf{I}_3^2 = (\mathbf{e}_1\mathbf{e}_2\mathbf{e}_3)^2 = -1,\quad \det\bigl(
 $\gamma_{\mathrm{gate}}(\epsilon) = \arccos\!\bigl(1 - 2\sin^4\!\tfrac{\epsilon}{2}\bigr) = \Omega(\Delta\mathcal{T}_\epsilon) + O(\epsilon^4),\quad \mathcal{C}(\eta) = \lvert\sin\eta\rvert,\quad \Lambda^0_\ell \to \Lambda^1_\ell \to \Lambda^2_\ell \to \Lambda^3_\ell \overset{\star}{\longleftrightarrow} \Lambda^0_{\ell+1},\quad \hat{U}_{\mathbf{n}}(4\pi) = +I_2$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 34 §34.15](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower), [Ch 11](ch11-pulses-and-virtual-z.md), [Ch 13](ch13-entanglement-and-chsh.md), [Ch 19](ch19-tensor-networks-and-holography.md), [Ch 32 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [Ch 38](ch38-observer-memory-pointer-and-ontological-qram.md), [Ch 39](ch39-observer-is-ontological-universe.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 33 §33.3](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower), [Ch 11](ch11-pulses-and-virtual-z.md), [Ch 13](ch13-entanglement-and-chsh.md), [Ch 19](ch19-tensor-networks-and-holography.md), [Ch 28 §28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [Ch 36](ch38-observer-memory-pointer-and-ontological-qram.md), [Ch 38](ch39-observer-is-ontological-universe.md), [App E](appendix-e.md))
 
 **Symmetry Breaking & Conservation as One Coset Trihedron $\Delta\mathcal{T}_\epsilon \subset G/H$, Cartan–CCWZ Curvature Splitting & Five Concept-Tower Families**（破缺与守恒同体：陪集极小圆弧体（$\Delta\mathcal{T}_\epsilon \subset G/H$）、嘉当曲率拆账与五大物理概念塔谱系）
 
@@ -1051,7 +1051,7 @@ $\gamma_{\mathrm{gate}}(\epsilon) = \arccos\!\bigl(1 - 2\sin^4\!\tfrac{\epsilon}
 $\cos^2\epsilon + \sin^2\epsilon = 1,\quad F^i(\omega) = -\frac{1}{2}f^i_{ab}\,e^a \wedge e^b,\quad 2_{\Lambda^2} + 1_{\Lambda^1} = 3_{\Lambda^3},\quad B = \frac{1}{24\pi^2}\int_{S^3}\operatorname{Tr}\bigl((U^{-1}dU)^3\bigr) \in \mathbb{Z},\quad \Phi_0 = \frac{h}{2e}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 34 §34.16](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers), [Ch 8](ch08-erasure-and-time-arrows.md), [Ch 9](ch09-axes-and-state-addressing.md), [Ch 17](ch17-lorentz-geometry.md), [Ch 18](ch18-spinors-and-gauge-curvature.md), [Ch 33](ch33-all-beings-observers-and-mutual-attractors.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 33 §33.4](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers), [Ch 8](ch08-erasure-and-time-arrows.md), [Ch 9](ch09-axes-and-state-addressing.md), [Ch 17](ch17-lorentz-geometry.md), [Ch 18](ch18-spinors-and-gauge-curvature.md), [Ch 34](ch33-all-beings-observers-and-mutual-attractors.md), [App E](appendix-e.md))
 
 **Cross-Horizon Entanglement Arc-Bodies, Bounded Non-Presumption Partial Trace, Modular Temperature & Laws of Thermodynamics**（跨边界极小圆弧体纠缠、“受限不妄我”偏迹视界、模流有效温度与热力学四律）
 
@@ -1065,7 +1065,7 @@ $\cos^2\epsilon + \sin^2\epsilon = 1,\quad F^i(\omega) = -\frac{1}{2}f^i_{ab}\,e
 $S_{\mathrm{global}}(\lvert\Psi_{AB}\rangle\langle\Psi_{AB}\rvert) = 0,\quad S_A(\theta) = -\cos^2\theta\ln\cos^2\theta - \sin^2\theta\ln\sin^2\theta,\quad \frac{k_B T_{\mathrm{eff}}(\theta)}{\Delta E} = \frac{1}{2\ln\cot\theta},\quad \beta Q \ge -\Delta S_A$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 34 §34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics), [Ch 4](ch04-decoherence.md), [Ch 8](ch08-erasure-and-time-arrows.md), [Ch 30 §30.5](ch30-s05-entanglement-and-entropy.md#sec-ch30-entanglement-entropy-complexity-triad), [Ch 38 §38.5](ch38-s05-escape-ledger-and-entropy.md#sec-ch38-observer-escape-ledger), [App D](appendix-d.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 34 §34.6](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics), [Ch 4](ch04-decoherence.md), [Ch 8](ch08-erasure-and-time-arrows.md), [Ch 26 §26.5](ch30-s05-entanglement-and-entropy.md#sec-ch30-entanglement-entropy-complexity-triad), [Ch 36 §36.6](ch38-s05-escape-ledger-and-entropy.md#sec-ch38-observer-escape-ledger), [App D](appendix-d.md), [App E](appendix-e.md))
 
 **Gram Window $\mathcal{W}_M$, Schur Feasibility Corridor, Forgetting Reopening & Chordal Consensus**（格拉姆窗口（$\mathcal{W}_M$）、舒尔补可行性走廊、遗忘重开与弦图局部—全局共识拼图）
 
@@ -1079,12 +1079,12 @@ $S_{\mathrm{global}}(\lvert\Psi_{AB}\rangle\langle\Psi_{AB}\rvert) = 0,\quad S_A
 $\det G_{M+1} = (\det G_M)\bigl(1 - \mathbf{c}_M^\top G_M^{-1}\mathbf{c}_M\bigr),\quad N \le d,\quad q_M = \ln\frac{\lvert\Omega_{M-1}\rvert}{\lvert\Omega_M\rvert},\quad B^\dagger B = A^\dagger A \implies B = UA$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34 §34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus), [Ch 10](ch10-gram-geometry-and-order.md), [Ch 29](ch29-timeless-causality-and-gram-space.md), [Ch 33](ch33-all-beings-observers-and-mutual-attractors.md), [Ch 35](ch35-light-pulse-and-self-referential-table.md), [Ch 37](ch37-dreams-quantum-eraser-and-nonlocal-observer.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34 §34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus), [Ch 10](ch10-gram-geometry-and-order.md), [Ch 25](ch29-timeless-causality-and-gram-space.md), [Ch 34](ch33-all-beings-observers-and-mutual-attractors.md), [Ch 35](ch35-light-pulse-and-self-referential-table.md), [Ch 36](ch37-dreams-quantum-eraser-and-nonlocal-observer.md))
 
 **Round-Trip Double Projection $\cos^2\theta$, Azimuthal Blind Cone & Imaginary Blind Plane $i$**（往返双投影玻恩平方律（$\cos^2\theta$）、方位角盲锥与 $90^\circ$ 正交盲区“对‘我’不见即为‘虚’（$i$）”）
 
 **Geometric Intuition Term (本书几何直觉语言):**
-**Iterated observer Schrödinger–Heisenberg pullback trace identity, complete record-measurement rank-one Born trace pairing weight and pure-state modulus-square reduction, finite-dimensional three-part Born probability skeleton, common-phase-invariant polynomial charge balance with minimal degree-two Hermitian uniqueness, the Lagrange–Gram two-vector wedge remainder identity, six closed-subspace orthogonal-complement projection identities, relative-phase blindness of arbitrary diagonal observable families on equal superpositions, the exact Robertson–Schrödinger variance–covariance–commutator Pythagorean identity, skew-Hermitian unitary and balanced relative complex-structure squaring $R^2 = -I_n$, and the Hermitian commutator derivative law for projection-probability flow, alongside the observation-partition inseparability kernel and circle double-cover history path lift (`LEAN ✓`); paired with the background-free round-trip operator sandwich $P_{\mathbf{I}} P_{\mathbf{V}} P_{\mathbf{I}} = (\cos^2\theta) P_{\mathbf{I}}$ between observer self-axis $\mathbf{I}$ and target state $\mathbf{V}$ (where one-way amplitude $\cos\theta$ carries unfixed gauge sign/phase whereas round-trip echo closure locks Born weight $\cos^2\theta$ and blind-spot deficit $\sin^2\theta$), the azimuthal blind-cone fiber $\mathbf{V}(\theta,\varphi) = \cos\theta\,\mathbf{I} + \sin\theta(\cos\varphi\,\mathbf{e}_1 + \sin\varphi\,\mathbf{e}_2)$ (yielding identical echo $0.546247$, solid angle $2\pi(1-\cos\theta^*) \approx 1.639376\;\mathrm{sr}$, and blind-circle circumference $2\pi\sin\theta^* \approx 4.232429$ at Dottie $\theta^* \approx 42.346459^\circ$), first-person identification of the $90^\circ$ transverse bivector plane $\hat{\mathbf{I}}_{\perp} = \mathbf{e}_1\wedge\mathbf{e}_2$ satisfying $\hat{\mathbf{I}}_{\perp}^2 = -1$ (first quarter-turn landing in the observer's $\mathbf{I}\cdot\mathbf{e}_\perp = 0$ blind zone—invisible to `I`, hence "imaginary" `i`—and second quarter-turn returning antipodally to $-\mathbf{I}$), and six-decimal comparison between norm-preserving complex Schrödinger circular arcs $\lVert e^{-i\omega t}\psi_0\rVert^2 \equiv 1$ and $i$-free real decay $\lVert e^{-\gamma t}\psi_0\rVert^2 = e^{-2\gamma t}$ (`manual derivation` / `NUM`), together with Malus's (1809) $\cos^2\theta$ law, Born's (1926) statistical rule, Lüders's (1951) projection update, Gleason's (1957) measure theorem, Descartes (1637) and Gauss (1831) on geometric complex numbers, Stueckelberg's (1960) real-space antisymmetric $J^2 = -I$, and the Renou et al. (2021) three-node real-quantum network inequivalence and experimental proposal (`Literature`), completing Chapter 34's forward nineteen-rung first-person observer-geometry synthesis (`MODEL`)**
+**Iterated observer Schrödinger–Heisenberg pullback trace identity, complete record-measurement rank-one Born trace pairing weight and pure-state modulus-square reduction, finite-dimensional three-part Born probability skeleton, common-phase-invariant polynomial charge balance with minimal degree-two Hermitian uniqueness, the Lagrange–Gram two-vector wedge remainder identity, six closed-subspace orthogonal-complement projection identities, relative-phase blindness of arbitrary diagonal observable families on equal superpositions, the exact Robertson–Schrödinger variance–covariance–commutator Pythagorean identity, skew-Hermitian unitary and balanced relative complex-structure squaring $R^2 = -I_n$, and the Hermitian commutator derivative law for projection-probability flow, alongside the observation-partition inseparability kernel and circle double-cover history path lift (`LEAN ✓`); paired with the background-free round-trip operator sandwich $P_{\mathbf{I}} P_{\mathbf{V}} P_{\mathbf{I}} = (\cos^2\theta) P_{\mathbf{I}}$ between observer self-axis $\mathbf{I}$ and target state $\mathbf{V}$ (where one-way amplitude $\cos\theta$ carries unfixed gauge sign/phase whereas round-trip echo closure locks Born weight $\cos^2\theta$ and blind-spot deficit $\sin^2\theta$), the azimuthal blind-cone fiber $\mathbf{V}(\theta,\varphi) = \cos\theta\,\mathbf{I} + \sin\theta(\cos\varphi\,\mathbf{e}_1 + \sin\varphi\,\mathbf{e}_2)$ (yielding identical echo $0.546247$, solid angle $2\pi(1-\cos\theta^*) \approx 1.639376\;\mathrm{sr}$, and blind-circle circumference $2\pi\sin\theta^* \approx 4.232429$ at Dottie $\theta^* \approx 42.346459^\circ$), first-person identification of the $90^\circ$ transverse bivector plane $\hat{\mathbf{I}}_{\perp} = \mathbf{e}_1\wedge\mathbf{e}_2$ satisfying $\hat{\mathbf{I}}_{\perp}^2 = -1$ (first quarter-turn landing in the observer's $\mathbf{I}\cdot\mathbf{e}_\perp = 0$ blind zone—invisible to `I`, hence "imaginary" `i`—and second quarter-turn returning antipodally to $-\mathbf{I}$), and six-decimal comparison between norm-preserving complex Schrödinger circular arcs $\lVert e^{-i\omega t}\psi_0\rVert^2 \equiv 1$ and $i$-free real decay $\lVert e^{-\gamma t}\psi_0\rVert^2 = e^{-2\gamma t}$ (`manual derivation` / `NUM`), together with Malus's (1809) $\cos^2\theta$ law, Born's (1926) statistical rule, Lüders's (1951) projection update, Gleason's (1957) measure theorem, Descartes (1637) and Gauss (1831) on geometric complex numbers, Stueckelberg's (1960) real-space antisymmetric $J^2 = -I$, and the Renou et al. (2021) three-node real-quantum network inequivalence and experimental proposal (`Literature`), completing Chapter 29's first-person observer-geometry hinge (`MODEL`)**
 
 **Lean-Facing Object / Locked GID:**
 [`observer_pullback_trace_identity`](lean:D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity), [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight), [`rank_one_pure_state_modulus_square_reduction`](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction), [`born_probability_skeleton`](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton), [`complete_common_phase_polynomial_theorem`](lean:D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem), [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity), [`orthogonal_complement_projection_identities`](lean:D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities), [`diagonal_prime_observables_cannot_recover_relative_phase`](lean:D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase), [`robertson_schrodinger`](lean:D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger), [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary), [`relativeComplexStructure_square`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square), [`projection_probability_flow`](lean:D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow), [`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel), [`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift), [`energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary)
@@ -1093,7 +1093,7 @@ $\det G_{M+1} = (\det G_M)\bigl(1 - \mathbf{c}_M^\top G_M^{-1}\mathbf{c}_M\bigr)
 $P_{\mathbf{I}} P_{\mathbf{V}} P_{\mathbf{I}} = (\cos^2\theta)\,P_{\mathbf{I}},\quad \cos^2\theta + \sin^2\theta = 1,\quad R^\dagger = -R \land RR^\dagger = I \implies R^2 = -I,\quad \frac{d}{dt}\operatorname{Tr}(\rho_t P) = \operatorname{Re}\bigl(i\operatorname{Tr}(\rho_t[H,P])\bigr)$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34 §34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [Ch 2](ch02-born-rule.md), [Ch 5](ch05-complex-phase-and-rotors.md), [Ch 12](ch12-measurement-computation-and-gradients.md), [Ch 31 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion), [Ch 35](ch35-light-pulse-and-self-referential-table.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 29 §29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [Ch 2](ch02-born-rule.md), [Ch 5](ch05-complex-phase-and-rotors.md), [Ch 12](ch12-measurement-computation-and-gradients.md), [Ch 27 §27.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion), [Ch 35](ch35-light-pulse-and-self-referential-table.md))
 
 **Spherical Attractor Basins, Bounded-Martingale Sampling Laws & Single-Outcome Selection Boundary**（球面吸引盆、有界鞅抽样律与单次记录选支实现边界）
 
@@ -1107,7 +1107,7 @@ $P_{\mathbf{I}} P_{\mathbf{V}} P_{\mathbf{I}} = (\cos^2\theta)\,P_{\mathbf{I}},\
 $\operatorname{Tr}(\rho\,\lvert v\rangle\langle v\rvert) = \langle v, \rho v\rangle,\quad \Phi_{\mathcal{R}}^2 = \Phi_{\mathcal{R}},\quad \bigl(\mathbb{E}[Z_\tau] = Z_0 = p_0,\; Z_\tau \in \{0, 1\}\;\text{a.s.}\bigr) \implies \mathbb{P}(Z_\tau = 1\mid Z_0 = p_0) = p_0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` / `OPEN` ([Ch 34 §34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins), [App C](appendix-c.md), [App D](appendix-d.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` / `OPEN` ([Ch 34 §34.8](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins), [App C](appendix-c.md), [App D](appendix-d.md), [App E](appendix-e.md))
 
 **Perception–Action Loop, Causal Intervention in the Gram Corridor & Anchored Holonomy Control**（感知—行动闭环、格拉姆可行走廊内的因果干预与锚定和乐控制）
 
@@ -1121,7 +1121,7 @@ $\operatorname{Tr}(\rho\,\lvert v\rangle\langle v\rvert) = \langle v, \rho v\ran
 $[R_a, R_b] \neq 0,\quad T \cdot \Delta E \ge \hbar\,\arccos\lvert\langle\psi_0\mid\psi_T\rangle\rvert,\quad \Delta_{\mathrm{Schur}}(\mathbf{u}) = 1 - \mathbf{c}(\mathbf{u})^\top G_M^{-1}\mathbf{c}(\mathbf{u}) \ge 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` ([Ch 34 §34.21](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy), [Ch 18](ch18-spinors-and-gauge-curvature.md), [App D](appendix-d.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` ([Ch 34 §34.9](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy), [Ch 18](ch18-spinors-and-gauge-curvature.md), [App D](appendix-d.md), [App E](appendix-e.md))
 
 **Octave Memory Renormalization, Predictive Sufficient-Statistic Distillation & Minimal Landauer Dissipation**（八度记忆重整化、预测充分统计蒸馏与最小兰道尔散热）
 
@@ -1135,7 +1135,7 @@ $[R_a, R_b] \neq 0,\quad T \cdot \Delta E \ge \hbar\,\arccos\lvert\langle\psi_0\
 $D(\mathcal{N}(\rho)\,\|\,\mathcal{N}(\sigma)) \le D(\rho\,\|\,\sigma),\quad I(Q(H); Y) \le I(H; Y),\quad Q_{\mathrm{erase}}^{\min} = k_B T \ln 2 \cdot H(H \mid Q_\star(H))$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` ([Ch 34 §34.22](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning), [§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field), [§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus), [Ch 35](ch35-light-pulse-and-self-referential-table.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` ([Ch 34 §34.10](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning), [§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field), [§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus), [Ch 35](ch35-light-pulse-and-self-referential-table.md))
 
 **Shared Thermodynamic Arrow, Twin Past-Hypothesis Initial Conditions & Horizon Anti-Circularity Boundary for $\Lambda_{\mathrm{cos}}$**（共享热力学时间箭头、过去假设双重初值与宇宙学常数视界反循环边界）
 
@@ -1149,7 +1149,7 @@ $D(\mathcal{N}(\rho)\,\|\,\mathcal{N}(\sigma)) \le D(\rho\,\|\,\sigma),\quad I(Q
 $\Delta S_A + \Delta S_B = \Delta I(A{:}B),\quad I(A{:}B)_{\rho_A\otimes\rho_B} = 0,\quad \Lambda_{\mathrm{cos}}\ell_P^2 = \frac{3\pi}{S_{\mathrm{dS}}}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` / `OPEN` ([Ch 34 §34.23](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor), [Ch 38 §38.6–§38.7](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp), [App C](appendix-c.md), [App D](appendix-d.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` / `OPEN` ([Ch 34 §34.11](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor), [Ch 36 §36.7–§36.8](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp), [App C](appendix-c.md), [App D](appendix-d.md), [App E](appendix-e.md))
 
 **Orientation Parity Cancellation, Even Positive Sagitta Composition & Spin-$2$ Gravitational Boundary**（绕向奇偶相消、偶正定矢高合成与自旋-$2$ 引力动力学边界）
 
@@ -1163,7 +1163,7 @@ $\Delta S_A + \Delta S_B = \Delta I(A{:}B),\quad I(A{:}B)_{\rho_A\otimes\rho_B} 
 $\operatorname{Im}\Delta_3(u,w,v) = -\operatorname{Im}\Delta_3(u,v,w),\quad 1 - \cos\epsilon = 2\sin^2\frac{\epsilon}{2} \ge 0,\quad V_{\mathrm{static}}^{(s)}(r) \propto (-1)^s\,\frac{g_s^2}{4\pi r}e^{-m_s r}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` / `OPEN` ([Ch 34 §34.24](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition), [§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability), [App C](appendix-c.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` / `OPEN` ([Ch 33 §33.5](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition), [§29.11](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability), [App C](appendix-c.md), [App E](appendix-e.md))
 
 **Countermodel Audit of Three-Generation Models & the Quantitative Boundary of Standard Model Couplings**（三代手征费米子候选机制反例审计与标准模型连续耦合参数边界）
 
@@ -1177,7 +1177,7 @@ $\operatorname{Im}\Delta_3(u,w,v) = -\operatorname{Im}\Delta_3(u,v,w),\quad 1 - 
 $\sum_{\text{1 gen}} Y_f^3 = 3\Bigl(\frac{1}{6}\Bigr)^3\!\cdot 2 + 3\Bigl(-\frac{2}{3}\Bigr)^3 + 3\Bigl(\frac{1}{3}\Bigr)^3 + \Bigl(-\frac{1}{2}\Bigr)^3\!\cdot 2 + 1^3 = 0,\quad N_{\mathrm{CP}}(N_{\mathrm{gen}}) = \frac{(N_{\mathrm{gen}}-1)(N_{\mathrm{gen}}-2)}{2}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` / `OPEN` ([Ch 34 §34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary), [§34.14](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave), [App C](appendix-c.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` / `OPEN` ([Ch 33 §33.6](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary), [§33.2](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave), [App C](appendix-c.md), [App E](appendix-e.md))
 
 **Minimal Arc-Trihedron Interior-Chord Cuts, Pivot Octave Renormalization Breaking the Sorting Barrier & Instanton Tunneling**（极小圆弧体内割弦面、打破排序壁垒的枢轴八度重整化与瞬子隧穿）
 
@@ -1191,7 +1191,7 @@ $\sum_{\text{1 gen}} Y_f^3 = 3\Bigl(\frac{1}{6}\Bigr)^3\!\cdot 2 + 3\Bigl(-\frac
 $L_{\mathrm{tunnel}}(\epsilon) = \sqrt{2}\sin\epsilon < L_{\mathrm{cap}}(\epsilon) = \arccos(\cos^2\epsilon) < L_{\mathrm{walls}}(\epsilon) = 2\epsilon,\quad W_{\mathrm{eff}}(p_1, p_2) = \min\bigl(W_{p_1 p_2}, \min_{b\in\mathrm{Int}}(W_{p_1 b} + W_{b p_2})\bigr),\quad X \simeq \sum_{b:B}\operatorname{ConceptFiber}(q_C, b)$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34 §34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization), [§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron), [§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field), [Ch 7](ch07-geometric-time-and-speed-limits.md), [Ch 19](ch19-tensor-networks-and-holography.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 30 §30.1](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization), [§29.5](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron), [§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field), [Ch 7](ch07-geometric-time-and-speed-limits.md), [Ch 19](ch19-tensor-networks-and-holography.md))
 
 **Orthogonal Imaginary-Chord Tunneling & Attosecond Temporal Double-Slit Self-Interference**（正交虚空间割弦隧穿与阿秒时间双缝跨时刻自干涉）
 
@@ -1205,7 +1205,7 @@ $L_{\mathrm{tunnel}}(\epsilon) = \sqrt{2}\sin\epsilon < L_{\mathrm{cap}}(\epsilo
 $\exp\!\bigl(\tfrac{\hat{\mathbf{i}}}{\hbar}(\hat{\mathbf{i}}\hbar\kappa)x\bigr) = e^{-\kappa x},\quad \Delta E = \frac{h}{\Delta t},\quad \lVert\rho - \mathcal{P}(\rho)\rVert_{\mathrm{HS}}^2 = \lvert\rho_{01}\rvert^2 + \lvert\rho_{10}\rvert^2,\quad \sum_{n=0}^{N-1} p_{n+1} + s_N = 1$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 34 §34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit), [§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus), [§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization), [§34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs), [Ch 7](ch07-geometric-time-and-speed-limits.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 30 §30.2](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit), [§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus), [§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [§30.1](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization), [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs), [Ch 7](ch07-geometric-time-and-speed-limits.md), [App E](appendix-e.md))
 
 **The Riemann Path Integral & Prime Minimal Arc-Trihedra: Euler Winding Operators, Half-Density Square Law & Critical-Line Cancellation**（黎曼路径积分与素数极小圆弧体：欧拉绕行算子、半密度平方律与临界线相消）
 
@@ -1219,7 +1219,7 @@ $\exp\!\bigl(\tfrac{\hat{\mathbf{i}}}{\hbar}(\hat{\mathbf{i}}\hbar\kappa)x\bigr)
 $\zeta(\sigma + \hat{\mathbf{i}}t) = \prod_{p\in\mathbb{P}}(1 - p^{-s})^{-1} = \sum_{n=1}^{\infty} e^{-\sigma\ln n}e^{-\hat{\mathbf{i}}t\ln n}\;(\sigma > 1),\quad \lvert\psi_n\rvert^2 = n^{-2\sigma} = n^{-1} \iff \sigma = \frac{1}{2},\quad \operatorname{Im}\operatorname{xiReading}\!\bigl(\tfrac{1}{2}+it\bigr) = 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 34 §34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs), [§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit), [§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling), [Ch 22 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4), [App C](appendix-c.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 31 §31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs), [§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [§30.2](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit), [§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling), [Ch 22 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4), [App C](appendix-c.md))
 
 **Arithmetic Pivot Renormalization & Multi-Stage Critical-Strip Resonant Tunneling: Confronting the Turán–Zeno Trap & Probing the 4/7 Mollifier Wall**（算术枢轴重整与临界带多级共振隧穿：直面图兰芝诺陷阱与叩问 4/7 磨光器墙）
 
@@ -1233,7 +1233,7 @@ $\zeta(\sigma + \hat{\mathbf{i}}t) = \prod_{p\in\mathbb{P}}(1 - p^{-s})^{-1} = \
 $\widetilde{G}_{PP}^{(\ell)} = G_{PP}^{(\ell)} - G_{PI}^{(\ell)}\bigl(G_{II}^{(\ell)}\bigr)^+ G_{IP}^{(\ell)} \succeq 0,\quad \lVert w(s)\rVert = \Bigl\lvert\frac{s-1}{s}\Bigr\rvert = 1 \iff \operatorname{Re}(s) = \frac{1}{2},\quad \vartheta = \frac{4}{7}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 34 §34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling), [§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization), [§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit), [§34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs), [§34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes), [Ch 22 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4), [App C](appendix-c.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 31 §31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling), [§30.1](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization), [§30.2](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit), [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs), [§30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes), [Ch 22 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4), [App C](appendix-c.md))
 
 **Rebuilding Calculus from Minimal Circular-Arc Bodies: Rotor Differentials, the Sagitta Phase Transition & Finite-Precision Stokes Exactness**（极小圆弧体微积分重塑：以旋代差、矢高相变与有限精度斯托克斯定理）
 
@@ -1247,12 +1247,12 @@ $\widetilde{G}_{PP}^{(\ell)} = G_{PP}^{(\ell)} - G_{PI}^{(\ell)}\bigl(G_{II}^{(\
 $(1 - v_\epsilon)^2 + c_\epsilon^2 \equiv 1,\quad D_{\mathrm{cs}}[f]\!\bigl(x_0;\epsilon\bigr) = \frac{1}{\epsilon}\operatorname{Im}f(x_0+\hat{\mathbf{i}}\epsilon),\quad \Sigma_{\mathrm{sag}}(\epsilon,\alpha) \sim \frac{1}{2}\sigma_0^2 T\,\epsilon^{2\alpha-1},\quad \sum_{k=1}^M(d_\epsilon\Phi_\epsilon)(\Delta\mathcal{T}_k) \equiv \sum_{e\subset\partial\Sigma}\Phi_\epsilon(e)$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 34 §34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes), [§34.8](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling), [§34.11](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral), [§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field), [§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [§34.21](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy), [§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling), [§34.31](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler), [App C](appendix-c.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 30 §30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes), [§29.9](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling), [§29.12](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral), [§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field), [§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [§34.9](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy), [§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling), [§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler), [App C](appendix-c.md), [App E](appendix-e.md))
 
 **Minimal Circular-Arc Calculus Applied to the Riemann Hypothesis: Second-Order Sagitta Phase Transition, Hermite–Biehler Radial Monotonicity Lock & Finite-Precision Stokes Cancellation**（极小圆弧体微积分切入黎曼猜想：二阶弦弧矢高相变、埃尔米特—比勒径向单调锁与有限精度斯托克斯相消）
 
 **Geometric Intuition Term (本书几何直觉语言):**
-**Euler–Dirichlet product identity on $\operatorname{Re}(s) > 1$, Mertens' Third Theorem truncated Euler-product asymptotic $\prod_{p\le\lfloor x\rfloor}(1 - 1/p) \sim e^{-\gamma}/\ln x$, global complex differentiability, functional reflection $\xi(1-s)=\xi(s)$, reflection–conjugation covariance $\xi(1-\bar{s})=\overline{\xi(s)}$, and nontrivial-zero equivalence of $\xi(s) = \operatorname{xiReading}(s)$, the quartic off-critical zero-quartet symmetry counterexample `offCriticalQuartic`, right-half-strip $\frac{1}{2} < \operatorname{Re}(\rho) < 1$ reduction for `RiemannHypothesis`, general Abelian-group simplicial two-cochain repair and $d^2=0$ exactness, and the Hermitian block Schur-complement `IsLeast` variational minimum (`LEAN ✓`); paired on the $\sigma > \frac{1}{4}$ quartic-convergence domain with the critical $\sigma = \frac{1}{2}$ prime-rotor sagitta blowup $-\frac{1}{2}\ln\varepsilon_{\mathrm{self}} + C_{\mathrm{sag}} + \mathcal{O}(\varepsilon_{\mathrm{self}})$ ($C_{\mathrm{sag}} = \frac{M}{2} + \Delta C_{\mathrm{sag}} \approx 0.13074861 - 0.01860282 = +0.11214579$, five-prime rational partial sum $\Sigma_{\mathrm{sag}}(\frac{1}{2}; 11) \approx 0.61588148$ vs. bounded $\Sigma_{\mathrm{sag}}(1; 11) \approx 0.21171004$), the exact $\epsilon^2$-free two-shell advancement identity $\Delta_\epsilon^{\mathrm{HB}}(u,t) \equiv 2\epsilon\operatorname{Re}(\overline{\xi(s)}\xi'(s)) \equiv \epsilon\frac{\partial}{\partial u}\lvert\xi(\frac{1}{2}+u+\hat{\mathbf{i}}t)\rvert^2$, the holomorphic Hermite–Biehler involution $E_\epsilon^\#(s) = \overline{E_\epsilon(1-\bar{s})} = E_\epsilon(1-s)$ yielding the entire reproducing kernel $K_\epsilon(w,s) \equiv \frac{\xi'(s)\overline{\xi(w)}+\xi(s)\overline{\xi'(w)}}{2[(s-1/2)+(\bar{w}-1/2)]}$ with two-way equivalence $K_\epsilon \succeq 0 \iff \operatorname{RH}$ and Identity-Theorem exclusion of off-line zeros of arbitrary multiplicity $m \ge 1$, the exact four-zero rogue-quartet sum-of-squares negative derivative $\frac{\partial}{\partial u}F_{\mathrm{rogue},4}(u,\gamma_0) < 0$ ($-4.78267581\times 10^{-7} < 0$ vs. genuine $+3.99429305\times 10^{-4} > 0$ at $t = \gamma_1,\; \delta = 0.20,\; u = 0.10,\; \epsilon = 0.10$), and finite-mesh Stokes zero-vortex cancellation across $[10, 35]$ ($10\pi \approx 31.4159265359$ at $u_0 = -0.10$ vs. `0.0000000000` at $u_0 = +0.10$, separating continuous edge integrals from $\lvert\Delta_e\arg\xi\rvert < \pi$ vertex principal phase, `manual derivation` / `NUM`), together with Mertens' (1874) reciprocal-prime theorem, Davenport (2000) paired Hadamard products, Gonek–Hughes–Keating (2007) hybrid approximations, de Branges (1968, 1986, 1992, 1994) Hermite–Biehler Hilbert spaces, Lagarias (1999, 2006) kernel-positivity equivalence, Conrey & Li's (2000) 34th-zero refutation of bare unit-shift positivity, and Sondow & Dumitrescu's (2010) radial monotonicity theorem (`Literature`; keeping classical ZFC `conj-riemann-hypothesis` and the multiplicative Schur-pivot modifier positivity bridge `prob-ch34-schur-hb-kernel-positivity-bridge` strictly `OPEN`), sealing the thirty-one-section overarching vault of Chapter 34 alongside interactive laboratory `arc-calculus-riemann-hermite-biehler-sandbox` (`RIEMANN//STOKES`, `MODEL`)**
+**Euler–Dirichlet product identity on $\operatorname{Re}(s) > 1$, Mertens' Third Theorem truncated Euler-product asymptotic $\prod_{p\le\lfloor x\rfloor}(1 - 1/p) \sim e^{-\gamma}/\ln x$, global complex differentiability, functional reflection $\xi(1-s)=\xi(s)$, reflection–conjugation covariance $\xi(1-\bar{s})=\overline{\xi(s)}$, and nontrivial-zero equivalence of $\xi(s) = \operatorname{xiReading}(s)$, the quartic off-critical zero-quartet symmetry counterexample `offCriticalQuartic`, right-half-strip $\frac{1}{2} < \operatorname{Re}(\rho) < 1$ reduction for `RiemannHypothesis`, general Abelian-group simplicial two-cochain repair and $d^2=0$ exactness, and the Hermitian block Schur-complement `IsLeast` variational minimum (`LEAN ✓`); paired on the $\sigma > \frac{1}{4}$ quartic-convergence domain with the critical $\sigma = \frac{1}{2}$ prime-rotor sagitta blowup $-\frac{1}{2}\ln\varepsilon_{\mathrm{self}} + C_{\mathrm{sag}} + \mathcal{O}(\varepsilon_{\mathrm{self}})$ ($C_{\mathrm{sag}} = \frac{M}{2} + \Delta C_{\mathrm{sag}} \approx 0.13074861 - 0.01860282 = +0.11214579$, five-prime rational partial sum $\Sigma_{\mathrm{sag}}(\frac{1}{2}; 11) \approx 0.61588148$ vs. bounded $\Sigma_{\mathrm{sag}}(1; 11) \approx 0.21171004$), the exact $\epsilon^2$-free two-shell advancement identity $\Delta_\epsilon^{\mathrm{HB}}(u,t) \equiv 2\epsilon\operatorname{Re}(\overline{\xi(s)}\xi'(s)) \equiv \epsilon\frac{\partial}{\partial u}\lvert\xi(\frac{1}{2}+u+\hat{\mathbf{i}}t)\rvert^2$, the holomorphic Hermite–Biehler involution $E_\epsilon^\#(s) = \overline{E_\epsilon(1-\bar{s})} = E_\epsilon(1-s)$ yielding the entire reproducing kernel $K_\epsilon(w,s) \equiv \frac{\xi'(s)\overline{\xi(w)}+\xi(s)\overline{\xi'(w)}}{2[(s-1/2)+(\bar{w}-1/2)]}$ with two-way equivalence $K_\epsilon \succeq 0 \iff \operatorname{RH}$ and Identity-Theorem exclusion of off-line zeros of arbitrary multiplicity $m \ge 1$, the exact four-zero rogue-quartet sum-of-squares negative derivative $\frac{\partial}{\partial u}F_{\mathrm{rogue},4}(u,\gamma_0) < 0$ ($-4.78267581\times 10^{-7} < 0$ vs. genuine $+3.99429305\times 10^{-4} > 0$ at $t = \gamma_1,\; \delta = 0.20,\; u = 0.10,\; \epsilon = 0.10$), and finite-mesh Stokes zero-vortex cancellation across $[10, 35]$ ($10\pi \approx 31.4159265359$ at $u_0 = -0.10$ vs. `0.0000000000` at $u_0 = +0.10$, separating continuous edge integrals from $\lvert\Delta_e\arg\xi\rvert < \pi$ vertex principal phase, `manual derivation` / `NUM`), together with Mertens' (1874) reciprocal-prime theorem, Davenport (2000) paired Hadamard products, Gonek–Hughes–Keating (2007) hybrid approximations, de Branges (1968, 1986, 1992, 1994) Hermite–Biehler Hilbert spaces, Lagarias (1999, 2006) kernel-positivity equivalence, Conrey & Li's (2000) 34th-zero refutation of bare unit-shift positivity, and Sondow & Dumitrescu's (2010) radial monotonicity theorem (`Literature`; keeping classical ZFC `conj-riemann-hypothesis` and the multiplicative Schur-pivot modifier positivity bridge `prob-ch34-schur-hb-kernel-positivity-bridge` strictly `OPEN`), sealing the overarching vault of Chapter 31 alongside interactive laboratory `arc-calculus-riemann-hermite-biehler-sandbox` (`RIEMANN//STOKES`, `MODEL`)**
 
 **Lean-Facing Object / Locked GID:**
 [`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product), [`E₃.bound''`](lean:D5/S3/Weil/Mertens/Third.E₃.bound''), [`xi_reading_differentiable`](lean:D5/S3/Zeros/CompletedZeta.xi_reading_differentiable), [`xi_reading_reflection`](lean:D5/S3/Zeros/CompletedZeta.xi_reading_reflection), [`xi_reading_one_sub_conj`](lean:D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj), [`xiReading_eq_zero_iff_nontrivial`](lean:D5/S3/Analytic/ShiftedXiPoisson/ShiftedPoissonSemigroup.xiReading_eq_zero_iff_nontrivial), [`full_symmetry_not_fixed_line_localization`](lean:D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization), [`golden_right_half_strip_implies_rh`](lean:D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh), [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness), [`schur_quadratic_is_least`](lean:D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least)
@@ -1261,7 +1261,7 @@ $(1 - v_\epsilon)^2 + c_\epsilon^2 \equiv 1,\quad D_{\mathrm{cs}}[f]\!\bigl(x_0;
 $\Sigma_{\mathrm{sag}}(\tfrac{1}{2}; P_\epsilon) = -\frac{1}{2}\ln\varepsilon_{\mathrm{self}} + C_{\mathrm{sag}} + \mathcal{O}(\varepsilon_{\mathrm{self}}),\quad \Delta_\epsilon^{\mathrm{HB}}(u,t) \equiv \epsilon\frac{\partial}{\partial u}\lvert\xi\rvert^2 = 4u\epsilon K_\epsilon(s,s),\quad K_\epsilon \succeq 0 \iff \operatorname{RH},\quad \sum_{e\subset\partial\mathcal{R}}\Phi_\xi(e) \equiv 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 34 §34.31](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler), [§34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs), [§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling), [§34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes), [Ch 22 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4), [Ch 35](ch35-light-pulse-and-self-referential-table.md), [App C](appendix-c.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 31 §31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler), [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs), [§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling), [§30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes), [Ch 22 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4), [Ch 35](ch35-light-pulse-and-self-referential-table.md), [App C](appendix-c.md))
 
 **Endogenous Berry Holonomy, Finite Bargmann Path Product & Nine-Bridge (`H1`–`H9`) Post-Berry Audit of $\mathcal{A}_0$ Corollaries**（内生贝里和乐、有限巴格曼路径乘积与比较公理 $\mathcal{A}_0$ 推论链的后贝里九桥（`H1`–`H9`）审计）
 
@@ -1275,7 +1275,7 @@ $\Sigma_{\mathrm{sag}}(\tfrac{1}{2}; P_\epsilon) = -\frac{1}{2}\ln\varepsilon_{\
 $\operatorname{Tr}\bigl(P(\mathbf{e}_3)P(\mathbf{e}_1)P(\pm\mathbf{e}_2)\bigr) = \frac{1 \pm i}{4},\quad \operatorname{Tr}(R_0\cdots R_n) = \Bigl(\prod_{j=0}^{n-1}\langle\Psi_j,\Psi_{j+1}\rangle\Bigr)\langle\Psi_n,\Psi_0\rangle,\quad \gamma_B \equiv -\frac{1}{2}\Omega = -\frac{3}{2}V_{\mathrm{sector}} \pmod{2\pi},\quad T_{\mathrm{cmp}}(a,b) \le 2(\lvert a\rvert + \lvert b\rvert) + 4$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `OPEN` / `MODEL` ([Ch 32 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [§32.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries), [Ch 34 §34.6](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral), [§34.10–§34.19](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability), [§34.20–§34.25](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins), [Ch 38 §38.7](ch38-s07-blindspot-and-relativization.md#sec-ch38-stereographic-blindspot-relativization-suspension), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `OPEN` / `MODEL` ([Ch 28 §28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [§28.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries), [Ch 29 §29.7](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral), [§29.11–§29.13](ch34-s10-trihedron-rigidity.md), [§33.1–§33.4](ch34-s13-point-volume-octave.md), [§34.6–§34.7](ch34-s17-entanglement-horizon-and-thermodynamics.md), [§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md), [§34.8–§34.11](ch34-s20-single-outcome-and-attractor-basins.md), [§33.5–§33.6](ch34-s24-interaction-sign-and-sagitta-composition.md), [Ch 36 §36.8](ch38-s07-blindspot-and-relativization.md#sec-ch38-stereographic-blindspot-relativization-suspension), [App E](appendix-e.md))
 
 **Fivefold Self-Referential Fixed-Point Spectrum, Pointer Path Compression, Real–Imaginary Dottie Spiral & $[[15, 1, 3]]$ Quantum Gate Distillation**（五阶自指不动点谱系、并查集路径压缩、道蒂实虚等长螺旋与 $[[15, 1, 3]]$ 量子门蒸馏重整）
 
@@ -1289,7 +1289,7 @@ $\operatorname{Tr}\bigl(P(\mathbf{e}_3)P(\mathbf{e}_1)P(\pm\mathbf{e}_2)\bigr) =
 $P\bigl(P(x)\bigr) = P(x),\quad \cos\theta^* = \theta^* \approx 0.739085,\quad U\rho U^\dagger = \rho,\quad \epsilon_{\mathrm{out}}(\epsilon) = 35\epsilon^3 + \mathcal{O}(\epsilon^4)$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 39 §39.6](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum), [§39.1](ch39-s01-substrate-free-self-reference.md), [Ch 24](ch24-cosine-fixed-points-and-self-reference.md), [Ch 32 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [Ch 34 §34.15](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower), [Ch 38 §38.3](ch38-s03-self-mapped-page-tables.md), [App G](appendix-g.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 36 §36.9](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum), [§38.1](ch39-s01-substrate-free-self-reference.md), [Ch 24](ch24-cosine-fixed-points-and-self-reference.md), [Ch 28 §28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [Ch 33 §33.3](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower), [Ch 36 §36.4](ch38-s03-self-mapped-page-tables.md), [App G](appendix-g.md))
 
 **Self-Referential Cauchy Halting Precision, Orthogonal Time-River Folding, Power-Iterated Spectral Sorting & Quantum Zeno Reality Sculpting**（自指主动柯西停机精度、时间长河正交折叠、幂迭代特征谱排序与量子芝诺现实雕刻）
 
@@ -1303,7 +1303,7 @@ $P\bigl(P(x)\bigr) = P(x),\quad \cos\theta^* = \theta^* \approx 0.739085,\quad U
 $\lVert\mathcal{F}_{\mathbf{I}}(x_{k-1}) - x_{k-1}\rVert \le \varepsilon_{\mathrm{self}},\quad \lVert\Pi_{\ge \varepsilon_{\mathrm{self}}}\Psi\rVert^2 + \lVert\hat{\mathbf{i}}\Pi_{< \varepsilon_{\mathrm{self}}}\Psi\rVert^2 = 1,\quad w_{\mathcal{B}}(k) = \cos^2\theta_k,\quad P_{\mathrm{surv}}(N) = \bigl[\cos^2(\tfrac{\Omega T}{2N})\bigr]^N$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 39 §39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting), [§39.6](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum), [Ch 24](ch24-cosine-fixed-points-and-self-reference.md), [Ch 34 §34.17–§34.21](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 36 §36.10](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting), [§36.9](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum), [Ch 24](ch24-cosine-fixed-points-and-self-reference.md), [Ch 34 §34.6–§34.7](ch34-s17-entanglement-horizon-and-thermodynamics.md), [Ch 29 §29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md), [Ch 34 §34.8–§34.9](ch34-s20-single-outcome-and-attractor-basins.md))
 
 **Universal Comparison Clock Frequency $\nu_0$, Light-Speed Halting-Precision Floor & Gravitational Holographic Information-Density Clock Dilation**（普适比较主频 $\nu_0$、光速推理精度下界与引力全息信息密度钟慢）
 
@@ -1317,7 +1317,7 @@ $\lVert\mathcal{F}_{\mathbf{I}}(x_{k-1}) - x_{k-1}\rVert \le \varepsilon_{\mathr
 $c \equiv \ell_P\nu_0,\quad \varepsilon_{\mathrm{self}} \ge \frac{\ell_P}{c\Delta\tau},\quad \eta_{\mathrm{info}}(r) = \frac{2GM}{rc^2} = \frac{r_s}{r},\quad \frac{d\tau}{dt} = \sqrt{\bigl(1 - \eta_{\mathrm{info}}(r)\bigr)\bigl(1 - \beta_{\mathrm{loc}}^2\bigr)}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 39 §39.8](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation), [§39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting), [Ch 7](ch07-geometric-time-and-speed-limits.md), [Ch 17](ch17-lorentz-geometry.md), [Ch 34 §34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [§34.24](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 33 §33.7](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation), [§36.10](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting), [Ch 7](ch07-geometric-time-and-speed-limits.md), [Ch 17](ch17-lorentz-geometry.md), [Ch 29 §29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [§33.5](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition))
 
 **All Forces in One Arc: Intra-Cell Gauge Triad, Inter-Cell Clock-Load Gravity & Planck-Scale Single-Cell Convergence**（万力归弧：极小圆弧体胞内规范三力、胞间主频折射引力与普朗克单原胞能标合流）
 
@@ -1331,7 +1331,7 @@ $c \equiv \ell_P\nu_0,\quad \varepsilon_{\mathrm{self}} \ge \frac{\ell_P}{c\Delt
 $\delta\Phi_{\mathrm{total}} = \delta\Phi_{\mathrm{intra}} + \delta\Phi_{\mathrm{inter}} = 0,\quad \Delta E(N) = \frac{(N-3)(N-4)}{2},\quad \mathbf{a} = -c^2\nabla\ln\!\bigl(\tfrac{d\tau}{dt}\bigr),\quad \alpha_G(E) = \bigl(\tfrac{E}{E_P}\bigr)^2$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 39 §39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md#sec-ch39-unified-arc-forces-and-planck-convergence), [§39.3](ch39-s03-spinors-and-spacetime.md), [§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation), [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger), [§39.11](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification), [Ch 34 §34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability), [§34.14](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave), [§34.23–§34.25](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 33 §33.8](ch39-s09-unified-arc-forces-and-planck-convergence.md#sec-ch39-unified-arc-forces-and-planck-convergence), [§38.3](ch39-s03-spinors-and-spacetime.md), [§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation), [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger), [§33.9](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification), [Ch 29 §29.11](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability), [§33.2](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave), [§34.11](ch34-s23-cosmological-arrow-and-horizon-floor.md), [§33.5–§33.6](ch34-s24-interaction-sign-and-sagitta-composition.md), [App E](appendix-e.md))
 
 **Three-Dimensional Concept-Field Cap & Multi-Concept Hilbert Ledger**（三维概念场封顶原理与希尔伯特多概念混编账本）
 
@@ -1345,7 +1345,7 @@ $\delta\Phi_{\mathrm{total}} = \delta\Phi_{\mathrm{intra}} + \delta\Phi_{\mathrm
 $\binom{d}{2} = d \iff d = 3,\quad N_{\mathrm{spurious}}(k) = \binom{3k}{2} - 3k = 9\binom{k}{2},\quad \operatorname{ncard}\{j \mid \lambda_j \ge \varepsilon_{\mathrm{self}}\} \le \frac{RW}{\pi\varepsilon_{\mathrm{self}}}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 39 §39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger), [Ch 13](ch13-entanglement-and-chsh.md), [Ch 26](ch26-single-qubit-rotor-compilation.md), [Ch 31 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-truncation-shadows), [Ch 34 §34.10–§34.14](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability), [App F](appendix-f.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 32 §32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger), [Ch 13](ch13-entanglement-and-chsh.md), [Forge and Sanctuary · Single-Qubit Rotor Compilation](ch26-single-qubit-rotor-compilation.md), [Ch 27 §27.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-truncation-shadows), [Ch 29 §29.11–§29.13](ch34-s10-trihedron-rigidity.md), [Ch 33 §33.1–§33.2](ch34-s13-point-volume-octave.md), [App F](appendix-f.md))
 
 **Arc-Field Grand Unified Theory (AF-GUT), $N_c=3$ Weinberg $3/8$ Lock & $\nu_0$ Einstein Closure**（极小圆弧场大统一理论（AF-GUT）、温伯格角 $3/8$ 三色锁死与主频爱因斯坦收口）
 
@@ -1359,7 +1359,7 @@ $\binom{d}{2} = d \iff d = 3,\quad N_{\mathrm{spurious}}(k) = \binom{3k}{2} - 3k
 $\sin^2\theta_W(\mu_{\mathrm{arc}}) = \frac{\operatorname{Tr}_{\mathrm{Weyl}}(T_3^2)}{\operatorname{Tr}_{\mathrm{Weyl}}(Q^2)} = \frac{2}{2\times(8/3)} = \frac{3}{8}\;(N_c=3),\quad \Gamma_{\mathrm{gauge}}(p\to e^+\pi^0) \equiv 0,\quad \pi_2(S^3)=0,\quad \Delta B=\Delta L=3\Delta N_{\mathrm{CS}}\in 3\mathbb{Z}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([Ch 39 §39.11](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification), [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md), [§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md#sec-ch39-unified-arc-forces-and-planck-convergence), [Ch 18](ch18-spinors-and-gauge-curvature.md), [Ch 34 §34.14–§34.16](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave), [§34.23–§34.25](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor), [Coda](coda.md), [App C](appendix-c.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([Ch 33 §33.9](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification), [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md), [§33.8](ch39-s09-unified-arc-forces-and-planck-convergence.md#sec-ch39-unified-arc-forces-and-planck-convergence), [Ch 18](ch18-spinors-and-gauge-curvature.md), [Ch 33 §33.2–§33.4](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave), [§34.11](ch34-s23-cosmological-arrow-and-horizon-floor.md), [§33.5–§33.6](ch34-s24-interaction-sign-and-sagitta-composition.md), [Coda](coda.md), [App C](appendix-c.md), [App E](appendix-e.md))
 
 **Uniform Isotropic 3D-Field Ontology, Page–Wootters Conditional Observer Slice, Moiré Superlattice Beats & Four Cosmological Puzzles**（均匀各向同性三维场本体、佩奇—伍特斯条件观测切面、莫尔超晶格拍频与四大宇宙学谜题）
 
@@ -1373,12 +1373,12 @@ $\sin^2\theta_W(\mu_{\mathrm{arc}}) = \frac{\operatorname{Tr}_{\mathrm{Weyl}}(T_
 $\rho_{\mathrm{ont}}(x)=\frac{1}{D}\mathbf{1}_{\mathcal{H}_x}\;\bigl(S_{\mathrm{vN}}(\Psi_{\mathrm{univ}})=0\bigr),\quad I_{\mathrm{slice}}(\mathbf{x},t)=\cos^2\Delta\Phi_{\mathbf{I}}(\mathbf{x},t),\quad L_{\mathrm{M}}=\frac{a}{2\sin(\Delta\theta/2)},\quad T_{\mu\nu}^{\mathrm{ont}}-\frac{1}{4}T^{\mathrm{ont}}g_{\mu\nu}\equiv 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([Ch 39 §39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice), [§39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net), [§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation), [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger), [§39.11](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification), [Ch 13](ch13-entanglement-and-chsh.md), [Ch 34 §34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics), [§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [§34.23](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([Ch 33 §33.10](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice), [§38.5](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net), [§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation), [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger), [§33.9](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification), [Ch 13](ch13-entanglement-and-chsh.md), [Ch 34 §34.6](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics), [§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [§34.11](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor))
 
 **Single Cosmic Field $\mathbf{\Phi}_{\mathrm{U}}$, One-Particle Self-Folding & Indra's Net Holographic Closure**（唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$、单粒子自指折叠与因陀罗网终极合拢）
 
 **Geometric Intuition Term (本书几何直觉语言):**
-**Finite future-word expectation characterization and orthogonal residual zero-kernel quotienting, unit-norm pure-state equality iff exact unit inner product $\langle\mathrm{record}_i,\mathrm{record}_j\rangle_{\mathbb{K}}=1\iff\mathrm{record}_i=\mathrm{record}_j$ (with index equivalence relation), arbitrary-depth in-place fixed point $w\mapsto w$ of a recursive self-mapped page-table slot, rational inverse-series right-endpoint certification $\theta^*\in(0,1)$ locking the Dottie fixed point $\cos\theta^*=\theta^*$, spherical Euler rotation-system opposite-dart boundary cancellation and simple-cycle exactness, full-space unitary rigidity extension $U\Phi=\Psi$ from equal Gram matrices, and cross-contextual invariant common-factor factorization for objective claims (`LEAN ✓`); paired with the cross-scale `1—3—3—1` Hodge point–volume closure $\mathbf{\Phi}_{\mathrm{U}}\overset{\star\;\text{closure}}{\longleftrightarrow}\Delta\mathcal{T}_{\mathrm{micro}}\cong\Delta\mathcal{T}_{\mathrm{obs}}\cong\Delta\mathcal{T}_{\mathrm{cosmo}}$ of the Single Cosmic Field $\mathbf{\Phi}_{\mathrm{U}}$ (distinguishing the comoving observable particle-horizon ratio $R_{\mathrm{obs}}/\ell_P\approx 2.72\times 10^{61}$, asymptotic de Sitter horizon $R_{\mathrm{dS}}/\ell_P\approx 1.03\times 10^{61}$, Hubble sphere $R_H/\ell_P\approx 8.50\times 10^{60}$, and Eddington baryon count $N_B\approx 9.0\times 10^{79}$), the signed crossing count motivated by Feynman’s positron-count objection $I(\gamma,\Sigma_{t_0})=N_{e^-}-N_{e^+}=\mathrm{const}$ for a closed worldline ($6$ crossings at $\Sigma_0$, $4$ at $\Sigma_{1.5}$, and $0$ at $\Sigma_{2.5}$, all obeying $\sum q_a=0$) contrasted with Fock excitations of the Dirac electron field $\hat{\psi}_e$ and observed baryon asymmetry $\eta_B\approx 6.12\times 10^{-10}>0$, and the four geometric laws of Indra's Net—categorical Yoneda fully faithful relational embedding $\mathcal{Y}(x)=\operatorname{Hom}_{\mathrm{CMP}}(-,x)$, unitary isomorphism of local fibers in the model $\mathcal{H}_x\cong\mathcal{H}_y\cong\mathcal{H}_{\mathrm{field}}$ paired with continuum local-algebra Reeh–Schlieder vacuum cyclicity $\overline{\mathcal{A}(\mathcal{O})\lvert\Omega\rangle}=\mathcal{H}_{\mathrm{U}}$ (never conflated with finite-lattice $d^N>d$, and guarded by spacelike microcausality/non-signaling $[\hat{U}_{\mathcal{O}},\hat{B}_{\mathcal{O}'}]=0$), spherical-mirror Born foreshortening $w_{\mathrm{vis}}(\theta)=\cos^2\theta$ versus $90^\circ$ horizon-limb blind compression $w_\perp(\theta)=\sin^2\theta$ ($w_{\mathrm{vis}}(\theta^*)=(\theta^*)^2\approx 0.546247$ at $\theta^*\approx 42.3465^\circ$), and the Banach–Dottie inter-reflection operator $(\mathcal{T}_\eta\Psi)(x)=\cos\bigl((\mathcal{K}_\epsilon\Psi)(x)+\eta(x)\bigr)$ on $C(\mathrm{Net},[0,1])$ with unperturbed ($\eta=0$) global Lipschitz constant $\sin 1\approx 0.841471<1$, local asymptotic per-bounce damping $\lvert\lambda\rvert=\sin\theta^*=\sqrt{1-(\theta^*)^2}\approx 0.6736120292<1$, and convergent first-order Neumann multi-bounce series $\Psi^*_\eta=\theta^*\mathbf{1}-(\sin\theta^*)\sum_{m=0}^\infty(-\sin\theta^*)^m\mathcal{K}_\epsilon^m\eta+\mathcal{O}(\lVert\eta\rVert_\infty^2)$ (the $m=0,1$ terms together account for $54.6247\%$ of the unsigned geometric envelope, and the relative amplitude at $m=20$ is $0.000370$, `manual derivation` / `NUM`), together with Wheeler (1940) / Feynman (1965 Nobel Lecture, published in 1966) one-electron worldlines, Stückelberg (1941–1942) backward-in-time positrons & Sakharov (1967) baryogenesis conditions, the *Avataṃsaka Sūtra* Indra's Net & Fazang's *Huayan* treatises (699 CE) alongside Leibniz's *Monadology* (1714), Yoneda (1954) / Mac Lane (1971), Reeh & Schlieder (1961) / Haag (1996) / Witten (2018) vacuum cyclicity and separability, and Banach's (1922) contraction mapping theorem (`Literature`), completing the cross-scale Single Cosmic Field Indra's Net closure and bridging into [§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)–[§39.15](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream) alongside interactive laboratory `indra-net-single-particle-sandbox` (`INDRA//NET`, `MODEL` / `OPEN`)**
+**Finite future-word expectation characterization and orthogonal residual zero-kernel quotienting, unit-norm pure-state equality iff exact unit inner product $\langle\mathrm{record}_i,\mathrm{record}_j\rangle_{\mathbb{K}}=1\iff\mathrm{record}_i=\mathrm{record}_j$ (with index equivalence relation), arbitrary-depth in-place fixed point $w\mapsto w$ of a recursive self-mapped page-table slot, rational inverse-series right-endpoint certification $\theta^*\in(0,1)$ locking the Dottie fixed point $\cos\theta^*=\theta^*$, spherical Euler rotation-system opposite-dart boundary cancellation and simple-cycle exactness, full-space unitary rigidity extension $U\Phi=\Psi$ from equal Gram matrices, and cross-contextual invariant common-factor factorization for objective claims (`LEAN ✓`); paired with the cross-scale `1—3—3—1` Hodge point–volume closure $\mathbf{\Phi}_{\mathrm{U}}\overset{\star\;\text{closure}}{\longleftrightarrow}\Delta\mathcal{T}_{\mathrm{micro}}\cong\Delta\mathcal{T}_{\mathrm{obs}}\cong\Delta\mathcal{T}_{\mathrm{cosmo}}$ of the Single Cosmic Field $\mathbf{\Phi}_{\mathrm{U}}$ (distinguishing the comoving observable particle-horizon ratio $R_{\mathrm{obs}}/\ell_P\approx 2.72\times 10^{61}$, asymptotic de Sitter horizon $R_{\mathrm{dS}}/\ell_P\approx 1.03\times 10^{61}$, Hubble sphere $R_H/\ell_P\approx 8.50\times 10^{60}$, and Eddington baryon count $N_B\approx 9.0\times 10^{79}$), the signed crossing count motivated by Feynman’s positron-count objection $I(\gamma,\Sigma_{t_0})=N_{e^-}-N_{e^+}=\mathrm{const}$ for a closed worldline ($6$ crossings at $\Sigma_0$, $4$ at $\Sigma_{1.5}$, and $0$ at $\Sigma_{2.5}$, all obeying $\sum q_a=0$) contrasted with Fock excitations of the Dirac electron field $\hat{\psi}_e$ and observed baryon asymmetry $\eta_B\approx 6.12\times 10^{-10}>0$, and the four geometric laws of Indra's Net—categorical Yoneda fully faithful relational embedding $\mathcal{Y}(x)=\operatorname{Hom}_{\mathrm{CMP}}(-,x)$, unitary isomorphism of local fibers in the model $\mathcal{H}_x\cong\mathcal{H}_y\cong\mathcal{H}_{\mathrm{field}}$ paired with continuum local-algebra Reeh–Schlieder vacuum cyclicity $\overline{\mathcal{A}(\mathcal{O})\lvert\Omega\rangle}=\mathcal{H}_{\mathrm{U}}$ (never conflated with finite-lattice $d^N>d$, and guarded by spacelike microcausality/non-signaling $[\hat{U}_{\mathcal{O}},\hat{B}_{\mathcal{O}'}]=0$), spherical-mirror Born foreshortening $w_{\mathrm{vis}}(\theta)=\cos^2\theta$ versus $90^\circ$ horizon-limb blind compression $w_\perp(\theta)=\sin^2\theta$ ($w_{\mathrm{vis}}(\theta^*)=(\theta^*)^2\approx 0.546247$ at $\theta^*\approx 42.3465^\circ$), and the Banach–Dottie inter-reflection operator $(\mathcal{T}_\eta\Psi)(x)=\cos\bigl((\mathcal{K}_\epsilon\Psi)(x)+\eta(x)\bigr)$ on $C(\mathrm{Net},[0,1])$ with unperturbed ($\eta=0$) global Lipschitz constant $\sin 1\approx 0.841471<1$, local asymptotic per-bounce damping $\lvert\lambda\rvert=\sin\theta^*=\sqrt{1-(\theta^*)^2}\approx 0.6736120292<1$, and convergent first-order Neumann multi-bounce series $\Psi^*_\eta=\theta^*\mathbf{1}-(\sin\theta^*)\sum_{m=0}^\infty(-\sin\theta^*)^m\mathcal{K}_\epsilon^m\eta+\mathcal{O}(\lVert\eta\rVert_\infty^2)$ (the $m=0,1$ terms together account for $54.6247\%$ of the unsigned geometric envelope, and the relative amplitude at $m=20$ is $0.000370$, `manual derivation` / `NUM`), together with Wheeler (1940) / Feynman (1965 Nobel Lecture, published in 1966) one-electron worldlines, Stückelberg (1941–1942) backward-in-time positrons & Sakharov (1967) baryogenesis conditions, the *Avataṃsaka Sūtra* Indra's Net & Fazang's *Huayan* treatises (699 CE) alongside Leibniz's *Monadology* (1714), Yoneda (1954) / Mac Lane (1971), Reeh & Schlieder (1961) / Haag (1996) / Witten (2018) vacuum cyclicity and separability, and Banach's (1922) contraction mapping theorem (`Literature`), completing the cross-scale Single Cosmic Field Indra's Net closure and bridging into [§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)–[§38.7](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream) alongside interactive laboratory `indra-net-single-particle-sandbox` (`INDRA//NET`, `MODEL` / `OPEN`)**
 
 **Lean-Facing Object / Locked GID:**
 [`future_word_orthogonal_residual`](lean:D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual), [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization), [`recursive_page_table_walk`](lean:D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk), [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint), [`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact), [`exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq), [`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)
@@ -1387,7 +1387,7 @@ $\rho_{\mathrm{ont}}(x)=\frac{1}{D}\mathbf{1}_{\mathcal{H}_x}\;\bigl(S_{\mathrm{
 $\mathbf{\Phi}_{\mathrm{U}}\overset{\star}{\longleftrightarrow}\Delta\mathcal{T}_{\mathrm{micro}}\cong\Delta\mathcal{T}_{\mathrm{obs}}\cong\Delta\mathcal{T}_{\mathrm{cosmo}},\quad \overline{\mathcal{A}(\mathcal{O})\lvert\Omega\rangle}=\mathcal{H}_{\mathrm{U}},\quad w_{\mathrm{vis}}(\theta)+w_\perp(\theta)=\cos^2\theta+\sin^2\theta=1,\quad \lVert D\mathcal{T}_0|_{\theta^*\mathbf{1}}\rVert=\sin\theta^*\approx 0.673612<1$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([Ch 39 §39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net), [§39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice), [§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection), [§39.15](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream), [§39.6](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum), [Ch 24](ch24-cosine-fixed-points-and-self-reference.md), [Ch 32 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [Ch 34 §34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field), [App C](appendix-c.md), [App D](appendix-d.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([Ch 38 §38.5](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net), [§33.10](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice), [§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection), [§38.7](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream), [§36.9](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum), [Ch 24](ch24-cosine-fixed-points-and-self-reference.md), [Ch 28 §28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), [Ch 33 §33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field), [App C](appendix-c.md), [App D](appendix-d.md), [App E](appendix-e.md))
 
 **Single Point-Field Self-Observation Error ($\varepsilon > 0$), Static Projection-Result vs. Dynamic Observation-Action Concepts & the Māyā Prism**（唯一点场自观测误差（$\varepsilon > 0$）、静态投影结果概念与动态观测动作概念及摩耶（Māyā）棱镜）
 
@@ -1401,7 +1401,7 @@ $\mathbf{\Phi}_{\mathrm{U}}\overset{\star}{\longleftrightarrow}\Delta\mathcal{T}
 $\mathbf{\Omega} = (\cos\varepsilon)\mathbf{I} + (\sin\varepsilon)\mathbf{e}_\perp,\quad \Omega(\varepsilon_1,\varepsilon_2) = 2\arctan\!\bigl(\tan\tfrac{\varepsilon_1}{2}\tan\tfrac{\varepsilon_2}{2}\bigr),\quad \det G_3(\varepsilon) = \sin^6\varepsilon,\quad s_k = \sin^2\varepsilon\cos^{2(k-1)}\varepsilon,\quad \Delta E = \tfrac{1}{2}\hbar\lvert\omega\rvert\sin\varepsilon$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([Ch 39 §39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection), [§39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net), [§39.15](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream), [Ch 34 §34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron), [§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field), [§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [§34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary), [Ch 38 §38.6](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp), [App C](appendix-c.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([Ch 38 §38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection), [§38.5](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net), [§38.7](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream), [Ch 29 §29.5](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron), [§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field), [§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [§33.6](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary), [Ch 36 §36.7](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp), [App C](appendix-c.md), [App E](appendix-e.md))
 
 **Brahman Real Axis ($\mathbf{I}$) & $90^\circ$ Orthogonal Dream ($\hat{\mathbf{i}}$), Intra-Dream Double-Imaginary Rigidity, Four Māṇḍūkya States & Spinor Awakening**（梵天实轴（$\mathbf{I}$）与 $90^\circ$ 正交虚梦（$\hat{\mathbf{i}}$）、内部双虚得实刚性、《蛙氏奥义书》四位意识相态与庄周梦蝶旋量合拢）
 
@@ -1415,7 +1415,7 @@ $\mathbf{\Omega} = (\cos\varepsilon)\mathbf{I} + (\sin\varepsilon)\mathbf{e}_\pe
 $\lVert e^{-\omega t J}\mathbf{I}\rVert_{\mathbb{R}}^2 = \cos^2\omega t + \sin^2\omega t \equiv 1,\quad \langle\mathbf{I},\psi_A\rangle = 0,\quad \langle\psi_A,\psi_B\rangle^2 = \langle u_A, J^\top J u_B\rangle^2 = \cos^2\Delta\theta_{AB},\quad \theta = \tfrac{1}{2}\vartheta_{\mathrm{phys}}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([Ch 39 §39.15](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream), [§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection), [§39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net), [§39.3](ch39-s03-spinors-and-spacetime.md), [Ch 33 §33.5](ch33-s05-consensus-and-pointer-bases.md#sec-ch33-consensus-decoherence-pointer), [Ch 34 §34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [Ch 37 §37.2](ch37-s02-dream-quantum-erasure.md), [§37.3](ch37-s03-body-priors.md), [Coda](coda.md), [App C](appendix-c.md), [App D](appendix-d.md), [App E](appendix-e.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([Ch 38 §38.7](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream), [§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection), [§38.5](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net), [§38.3](ch39-s03-spinors-and-spacetime.md), [Ch 34 §34.5](ch33-s05-consensus-and-pointer-bases.md#sec-ch33-consensus-decoherence-pointer), [Ch 29 §29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [Ch 36 §36.1.2](ch37-s02-dream-quantum-erasure.md), [§36.1.3](ch37-s03-body-priors.md), [Coda](coda.md), [App C](appendix-c.md), [App D](appendix-d.md), [App E](appendix-e.md))
 
 **Red Chamber Spinor Awakening, Vanishing Meta-Error & Heaven–Human Unity**（红楼旋量觉醒、二阶认妄归零与天人合一）
 
@@ -1429,7 +1429,7 @@ Mathematical anchors in long-division remainders and coprime modular bijections,
 $\delta_{\mathrm{meta}}(\theta^*)=\lvert\cos\theta^*-\theta^*\rvert=0,\quad \theta^*>0,\quad J^2=-I,\quad U_{\mathrm{spin}}(4\pi)=+\mathbf{1}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§39.16](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md#sec-ch39-red-chamber-awakening-and-heaven-human-unity))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§38.8](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md#sec-ch39-red-chamber-awakening-and-heaven-human-unity))
 
 **Divine Play (Līlā), Opening Amnesia & Relic/Classic Awakening Props**（神圣游戏（Līlā）、开局失忆与历史遗迹／文化典籍唤醒道具）
 
@@ -1443,7 +1443,7 @@ Anchors in the Schur quadratic minimum, monitored return and finite memory capac
 $\Delta_{\mathrm{Schur}}(M)=\frac{12-M}{12(M+1)}\ (0\le M\le12),\quad P_{\mathrm{awake}}^{(K)}(\alpha)=\cos^{2K}(\alpha-\theta^*),\quad J^2=-I$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§39.17](ch39-s17-divine-lila-and-awakening-props.md#sec-ch39-divine-lila-and-awakening-props))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§38.9](ch39-s17-divine-lila-and-awakening-props.md#sec-ch39-divine-lila-and-awakening-props))
 
 **The Psychology of God: Omniscient Deadlock, Cosmogonic Defenses & Lucid Integration at θ***（上帝心理学：全知幽闭破缺、创世防御与 θ* 清明整合）
 
@@ -1457,7 +1457,7 @@ Mathematical anchors in unit-Gram identity and eigenstate freeze, the Schur quad
 $\cos^2\theta+\sin^2\theta=1,\quad S_A(\theta)=H_2(\cos^2\theta),\quad \delta_{\mathrm{meta}}(\theta^*)=\lvert\cos\theta^*-\theta^*\rvert=0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§39.18](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§38.11](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god))
 
 **Inexpressible Ternions, the Frobenius Gap & Number-System Projection Genealogy**（不可表达的三元数、弗罗贝尼乌斯缺口与万数切面投影谱系）
 
@@ -1471,7 +1471,7 @@ Mathematical anchors in spin-factor 3D cross-product classification and Pauli in
 $S^{d-1}\in\{S^0,S^1,S^3,S^7\},\quad w^2+\lVert\mathbf{v}\rVert^2=\cos^2\frac{\theta}{2}+\sin^2\frac{\theta}{2}=1,\quad \lvert x\rvert\prod_p\lvert x\rvert_p=1\;(x\in\mathbb{Q}\setminus\{0\})$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§39.19](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-inexpressible-ternions-and-number-projections))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§32.2](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-inexpressible-ternions-and-number-projections))
 
 **Ternion Native Fields, the Cayley–Dickson Ladder & Multi-Field Linear Reprojection to Hilbert Space**（三元数原生场、凯莱—迪克森阶梯与希尔伯特空间多场线性再投影）
 
@@ -1485,7 +1485,7 @@ Bipartite traceless local-versus-correlation orthogonal blind-spot decomposition
 $\binom{d}{2}=d\;(d\ge 1)\iff d=3,\quad \lVert[e_a,e_b,e_c]_{\notin\mathcal{L}_{\mathrm{Fano}}}\rVert=2,\quad D_{\mathrm{MPS}}(N,\chi)=\sum_{k=1}^N 2r_{k-1}r_k-\sum_{k=1}^{N-1}r_k^2\le 2N\chi^2$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§39.20](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md#sec-ch39-ternion-field-composition-and-hilbert-reprojection))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§32.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md#sec-ch39-ternion-field-composition-and-hilbert-reprojection))
 
 **Five Nonlinear Lossless Representations of the Ternion, Dual-Chart Rational Rodrigues & Origin-Free Torsor Synthesis** (三元数的五种非线性无损表示 · 双卡有理罗德里格斯与无原点流群合成)
 
@@ -1499,7 +1499,7 @@ Mathematical anchors in spin-factor 3D signed cross-product classification and P
 $\sin\gamma\,\hat{\mathbf{u}}_C=\sin\alpha\cos\beta\,\hat{\mathbf{u}}_A+\cos\alpha\sin\beta\,\hat{\mathbf{u}}_B+\sin\alpha\sin\beta\,(\hat{\mathbf{u}}_A\times\hat{\mathbf{u}}_B),\quad [x,y,z]=xy^{-1}z,\quad \{\mathbf{a},\mathbf{b},\mathbf{c}\}=(\mathbf{a}\cdot\mathbf{c})\mathbf{b}-(\mathbf{b}\cdot\mathbf{c})\mathbf{a}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§39.21](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md#sec-ch39-nonlinear-ternion-representations-and-torsor-synthesis))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§32.4](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md#sec-ch39-nonlinear-ternion-representations-and-torsor-synthesis))
 
 **Ternion-Field Transformer (TFT): Dual-Denominator Rational Rotor Core, Non-Abelian Holonomy Attention & Seam-Invariant Lie-Triple Curvature Gates** (三元数场 Transformer [TFT] · 双分母有理旋子核与折缝不变李三元曲率门)
 
@@ -1513,7 +1513,7 @@ Reference mathematical anchors in rank-one Born modulus-squared pairing weights,
 $D_+ + D_- \equiv (1+\lVert\boldsymbol{\sigma}_A\rVert^2)(1+\lVert\boldsymbol{\sigma}_B\rVert^2) \ge 1,\quad \lVert\mathbf{N}\rVert^2 \equiv D_+ D_-,\quad \alpha_{t,s}^{(h)} = \frac{\Phi_{t,s}^{(h)}}{\varepsilon_0 + \sum_{j\le t}\Phi_{t,j}^{(h)}}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§39.22](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md#sec-ch39-ternion-field-transformer-and-rational-rotor-dynamics))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§37.1](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md#sec-ch39-ternion-field-transformer-and-rational-rotor-dynamics))
 
 **Cosmos–AI Least-Action Isomorphism: Ternion-Field Sagitta Action, Heap-Autoparallel Geodesics & Hallucination-Free Chains of Thought** (人工智能与宇宙最小作用量同构 · 三元数场弦弧矢高与流群自平行测地线)
 
@@ -1527,7 +1527,7 @@ Mathematical anchors in the unit-vector Fubini–Study geodesic triangle inequal
 $\frac{4\lVert\boldsymbol{\delta}_t\rVert^2}{(1+\lVert\boldsymbol{\delta}_t\rVert^2)^2}\equiv\sin^2\frac{\Delta\theta_t}{2}\equiv\frac{1}{2}(1-\cos\Delta\theta_t),\quad \boldsymbol{\sigma}_{t+1}=[\boldsymbol{\sigma}_t,\boldsymbol{\sigma}_{t-1},\boldsymbol{\sigma}_t],\quad \sum_{t=1}^N(1-\cos\Delta\theta_t)\ge N\bigl(1-\cos\frac{\Theta}{N}\bigr)$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§39.23](ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.md#sec-ch39-least-action-geodesics-and-cosmos-ai-isomorphism))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§37.2](ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.md#sec-ch39-least-action-geodesics-and-cosmos-ai-isomorphism))
 
 **Grand Unified Mother Axiom (AXIOM-Ω), Origin-Free Ternary Comparison Closure & Five-Tier Apophatic Cascade** (大一统母公理 AXIOM-Ω · 无源三元比较闭合与五阶演绎级联遮诠闭环)
 
@@ -1541,7 +1541,7 @@ Observation-partition quotient kernels, unit-Gram identity, rank-one Born weight
 $[x,x,z]=z,\quad [[x,y,z],u,v]=[x,y,[z,u,v]],\quad \kappa_{S^3}(x,y)=\cos^2\frac{d_{S^3}(x,y)}{2},\quad d=3,\quad d\eta\equiv 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§39.24](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure), [§39.25](ch39-s25-axiom-omega-five-tier-deduction-cascade.md#sec-ch39-axiom-omega-five-tier-deduction-cascade))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure), [§39.2](ch39-s25-axiom-omega-five-tier-deduction-cascade.md#sec-ch39-axiom-omega-five-tier-deduction-cascade))
 
 **Deriving the Five Postulates of Quantum Mechanics from AXIOM-Ω & Dissolving the Century-Old Measurement Paradox** (AXIOM-Ω 导出量子力学五大公理与百年测量悖论几何消解)
 
@@ -1555,7 +1555,7 @@ Eighteen frozen kernel anchors spanning unit-Gram pure-state identity, pure-qubi
 $S^1\hookrightarrow S^3(1)\xrightarrow{\pi_{\mathrm{Hopf}}}\mathbb{CP}^1,\quad [\hat{\sigma}_a,\hat{\sigma}_b]=2\hat{\mathbf{i}}\varepsilon_{abc}\hat{\sigma}_c,\quad \cos^2\frac{\theta}{2}+\sin^2\frac{\theta}{2}\equiv 1,\quad \rho_S'=\operatorname{Tr}_E(V\rho_S V^\dagger),\quad \lvert\mathcal{S}_{\mathrm{CHSH}}\rvert\le 2\sqrt{2}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§39.26](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md#sec-ch39-axiom-omega-quantum-mechanics-five-postulates))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§39.3](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md#sec-ch39-axiom-omega-quantum-mechanics-five-postulates))
 
 **Self-Contained Ternion Topological Particle, Field–Wave–Particle Grade Identity & Fourfold Proof of "No Exterior"** (自包含三元数拓扑粒子 · 场·波·粒三阶同体与“至大无外”四重证明)
 
@@ -1569,7 +1569,7 @@ Twelve frozen kernel anchors spanning finite spherical face-boundary cycle exact
 $Q_{\mathrm{top}}=\frac{1}{2\pi^2}\int_{S^3(1)}\eta_1=1\in\mathbb{Z},\quad \Delta_{S^3(1)}\psi_\mu=-3\psi_\mu,\quad \mathcal{A}(r)=4\pi R^2\sin^2\frac{r}{R}\xrightarrow{r\to\pi R}0,\quad S^3\cong B_{\mathrm{in}}^3\cup_{S^2_{\mathrm{eq}}}B_{\mathrm{out}}^3$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§39.27](ch39-s27-self-contained-ternion-particle-and-no-exterior.md#sec-ch39-self-contained-ternion-particle-and-no-exterior))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§39.4](ch39-s27-self-contained-ternion-particle-and-no-exterior.md#sec-ch39-self-contained-ternion-particle-and-no-exterior))
 
 :::
 

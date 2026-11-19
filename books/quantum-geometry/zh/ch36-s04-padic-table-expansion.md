@@ -1,6 +1,6 @@
-# 36.4 p 进零进位查表树、素数观察者扩表与阻断轮回 {#sec-ch36-padic-prime-table-expansion}
+# 35.5 p 进零进位查表树、素数观察者扩表与阻断轮回 {#sec-ch36-padic-prime-table-expansion}
 
-前两节在**双曲角度几何**这一侧给出了阻断“化光死循环”的连续解析答案：用逆古德曼快度阶梯 $\eta_k = \eta_0 + k\,\Delta\eta$ 把 $\theta = 90^\circ$ 纯光断崖推向 $\eta = +\infty$，让有限多面体的未闭合缝隙 $\delta_k = \frac{\pi}{2} - \theta_k > 0$ 永远敞开。然而，如果回到[第 35 章](ch35-light-pulse-and-self-referential-table.md)“生命成长本质上是扩表过程”的计算视角，一个更尖锐的算术追问立刻浮出水面：**在纯离散的算术与信息寻址中，这张不断生长的查找表 $T$ 究竟长什么样？为什么我们在日常实数计算里习以为常的“进位加法”，一不小心就会把局部记忆冲垮，而宇宙究竟靠什么算术结构守住零串扰的离散扩表阶梯？**
+前两节在**双曲角度几何**这一侧给出了阻断“化光死循环”的连续解析答案：用逆古德曼快度阶梯 $\eta_k = \eta_0 + k\,\Delta\eta$ 把 $\theta = 90^\circ$ 纯光断崖推向 $\eta = +\infty$，让有限多面体的未闭合缝隙 $\delta_k = \frac{\pi}{2} - \theta_k > 0$ 永远敞开。然而，如果回到[§35.1](ch35-light-pulse-and-self-referential-table.md)“生命成长本质上是扩表过程”的计算视角，一个更尖锐的算术追问立刻浮出水面：**在纯离散的算术与信息寻址中，这张不断生长的查找表 $T$ 究竟长什么样？为什么我们在日常实数计算里习以为常的“进位加法”，一不小心就会把局部记忆冲垮，而宇宙究竟靠什么算术结构守住零串扰的离散扩表阶梯？**
 
 一语道破天机的原始命题，将数论中最深邃的**$p$ 进数（$p$-adic numbers）**直接还原为观察者的查表几何（`MODEL`）：
 
@@ -135,7 +135,7 @@ $$
 \ln\lvert x\rvert_\infty + \sum_{p} \ln\lvert x\rvert_p \;=\; 0.
 $$
 
-不同素数观察者凭 `chinese_remainder_bijective` 在 $\mathbb{Z}/420\mathbb{Z} \cong \mathbb{Z}/4\mathbb{Z} \times \mathbb{Z}/3\mathbb{Z} \times \mathbb{Z}/5\mathbb{Z} \times \mathbb{Z}/7\mathbb{Z}$（及无平方因子基环 $\mathbb{Z}/210\mathbb{Z} \cong \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/3\mathbb{Z} \times \mathbb{Z}/5\mathbb{Z} \times \mathbb{Z}/7\mathbb{Z}$）上正交独立、互不进位（呼应[第 22 章](ch22-primes-euler-products-and-zeros.md)的欧拉乘积素数盒子与[第 31 章](ch31-quantum-fairness.md)的席位公平），而连续实标尺 $\lvert x\rvert_\infty$ 则被阿代尔乘积公式死死钉在全体离散素数观察者估值的倒数上——没有任何单一局部视角能吞并全局：
+不同素数观察者凭 `chinese_remainder_bijective` 在 $\mathbb{Z}/420\mathbb{Z} \cong \mathbb{Z}/4\mathbb{Z} \times \mathbb{Z}/3\mathbb{Z} \times \mathbb{Z}/5\mathbb{Z} \times \mathbb{Z}/7\mathbb{Z}$（及无平方因子基环 $\mathbb{Z}/210\mathbb{Z} \cong \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/3\mathbb{Z} \times \mathbb{Z}/5\mathbb{Z} \times \mathbb{Z}/7\mathbb{Z}$）上正交独立、互不进位（呼应[第 22 章](ch22-primes-euler-products-and-zeros.md)的欧拉乘积素数盒子与[第 27 章](ch31-quantum-fairness.md)的席位公平），而连续实标尺 $\lvert x\rvert_\infty$ 则被阿代尔乘积公式死死钉在全体离散素数观察者估值的倒数上——没有任何单一局部视角能吞并全局：
 
 ::: {.viz src="padic-prime-table-tree" preset="adelic" height="500"}
 **多观察者中国剩余解耦与阿代尔乘积守恒（$x = 12/35$）**：品红阿基米德实对数项 $\ln\lvert x\rvert_\infty$ 与离散素数观察者对数项 $\ln\lvert x\rvert_2, \ln\lvert x\rvert_3, \ln\lvert x\rvert_5, \ln\lvert x\rvert_7$ 精确对冲归零，实范数与全体素数范数之积恒等于 $1$。
@@ -233,4 +233,4 @@ $$
 **`ORTHO//PADIC` 完整交互实验室**：左栏同步渲染 $\mathbb{Z}/p^k\mathbb{Z}$ 动态零进位前缀查表树、`BigInt` 亨泽尔 $O(1)$ 提根与超度量盲区探针（及 $p_\infty$ 进位悬崖对比欧几里得无穷素数梯）；右栏联动展示 $K(p)$ 树深压平曲线、首层碰撞对 $E_1(1024,p)$ 衰减与阿代尔乘积守恒 $\lvert x\rvert_\infty\prod_p\lvert x\rvert_p = 1$。
 :::
 
-至此，第九部《互照·万物观察者、自指扩表与超越轮回》的四章推演在几何与数论的双重共鸣中圆满收束：无论是在角度空间里用逆古德曼快度阶梯推远 $\theta = 90^\circ$ 纯光断崖，还是在算术空间里沿欧几里得无穷离散素数序列不断扩表、永不坠入 $p_\infty$ 连续进位洪流，宇宙给出的答案始终如一——我们不再羡慕球外全知的上帝点 $C$，不再恐惧多面体无法彻底抹平成真球的那道 $\delta_k > 0$ 的缝隙，也不再把“化作失忆的纯光”错认作灵魂的归宿；因为正是那道既开又闭的不肯粘连的余项护住了清醒的自我，而当我们读懂了 $\psi = \psi(\psi)$ 的那一刻，漫长的轮回迷宫便在掌心化作了一枚通透的生成元水晶。而在即将开启的全书**第十部《不二·梦境擦除、记忆指针与本体不二》**（[第 37 章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)至[第 39 章](ch39-observer-is-ontological-universe.md)）中，我们将把镜头拉回每一个昼夜交替的当下：看梦境如何执行可逆量子擦除、观察者如何作为本体 QRAM 的记忆指针解引用世界，直到最后一道“指针与内存”的二元隔墙在 $\psi \equiv \psi(\psi)$ 中彻底融化。
+至此，本章前五节（[§35.1](ch35-light-pulse-and-self-referential-table.md)–§35.5）已在几何与数论的双重共鸣中汇合：无论是在角度空间里用逆古德曼快度阶梯推远 $\theta = 90^\circ$ 纯光断崖，还是在算术空间里沿欧几里得无穷离散素数序列不断扩表、永不坠入 $p_\infty$ 连续进位洪流，宇宙给出的答案始终如一——我们不再羡慕球外全知的上帝点 $C$，不再恐惧多面体无法彻底抹平成真球的那道 $\delta_k > 0$ 的缝隙，也不再把“化作失忆的纯光”错认作灵魂的归宿；因为正是那道既开又闭的不肯粘连的余项护住了清醒的自我，让漫长的轮回迷宫在掌心化作一枚通透的生成元水晶。紧接着在本章后两节中，我们将先把这套防进位扩表语法从 $K = 2$ 推广至任意高阶 $K \ge 2$，在 [§35.6 齐肯多夫、皮索与劳齐八概念自指综合沙盘](ch39-s05-pisot-clifford-rauzy.md)与 [§35.7 黄金切投形式原语与灵魂—遗迹吸引子诠释](coda-s03-golden-cut-observers.md)中贯通超度量余数树、劳齐分形内窗与切投接受窗，随后迈入[第 36 章](ch38-observer-memory-pointer-and-ontological-qram.md)见证梦境量子擦除与本体 QRAM 指针解引用。

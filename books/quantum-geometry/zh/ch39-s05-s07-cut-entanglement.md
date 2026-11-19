@@ -1,4 +1,4 @@
-# 39.5.7 跨切口 $1^K$ 禁戒与直接编码器的可达施密特秩 {#sec-ch39-p2e-entanglement}
+# 35.6.7 跨切口 $1^K$ 禁戒与直接编码器的可达施密特秩 {#sec-ch39-p2e-entanglement}
 
 设想把长度为 $m_X + m_Y$（$m_X, m_Y \ge 1$）的二元物理寄存器沿切口拆成左半 $X$（长 $m_X$）与右半 $Y$（长 $m_Y$）。即便左字 $x \in \{0, 1\}^{m_X}$ 与右字 $y \in \{0, 1\}^{m_Y}$ 各自内部都不含 $1^K$，拼接字 $xy$ 跨越切口时仍可能拼出连续 $K$ 个 `1`：记 $\tau(x)$ 为 $x$ 末尾连续 `1` 的个数，$\iota(y)$ 为 $y$ 开头连续 `1` 的个数，则跨切口拼接合法的充要条件恰为
 
@@ -30,7 +30,7 @@ $$
 :::
 
 ::: proof
-必要性由编码器谱阻塞定理 [`actual_encoder_spectral_obstruction`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction) 给出：对任意满足 `directContract` 的给定编码器，在 $\sigma_b$ 的非零本征子空间上分解等距算子 $W$，跨切口禁戒 $\tau(x) + \iota(y) < K$ 迫使凡满足 $\tau(x) \ge s$ 的左端加权行张成的子空间 $V_s$ 在右端只能支撑于基数为 $n_s$ 的合法邻域内；由于 $M_1$ 个正交逻辑态在右端互不重叠，必有 $M_1 \dim V_s \le n_s$，从而 $r_1 \le a_s + \dim V_s \le a_s + \lfloor n_s / M_1 \rfloor$ 对一切 $0 \le s < K$ 成立，第 $0$ 页同理得 $r_0 \le \min(c_{m_X, 0}, \lfloor c_{m_Y, 0}/M_0 \rfloor) = R_0$。充分性与同时极值构造则通过在各游程分层内显式配对正交右端字块并以均匀本征值 $1/d_b$（极值处取 $1/R_b$）组装 $\sigma_b$ 与 $J$ 完成；由支撑秩为 $r_b$ 的密度态最大冯·诺依曼熵不超过 $\ln r_b \le \ln R_b$ 即得紧熵界（这组跨切口秩界与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md)指针历史容量界 [@thm-ch38-pointer-width-and-no-deep-copy] 刻画的是不同物理约束）。完整证明由 Lean 内核检查。
+必要性由编码器谱阻塞定理 [`actual_encoder_spectral_obstruction`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction) 给出：对任意满足 `directContract` 的给定编码器，在 $\sigma_b$ 的非零本征子空间上分解等距算子 $W$，跨切口禁戒 $\tau(x) + \iota(y) < K$ 迫使凡满足 $\tau(x) \ge s$ 的左端加权行张成的子空间 $V_s$ 在右端只能支撑于基数为 $n_s$ 的合法邻域内；由于 $M_1$ 个正交逻辑态在右端互不重叠，必有 $M_1 \dim V_s \le n_s$，从而 $r_1 \le a_s + \dim V_s \le a_s + \lfloor n_s / M_1 \rfloor$ 对一切 $0 \le s < K$ 成立，第 $0$ 页同理得 $r_0 \le \min(c_{m_X, 0}, \lfloor c_{m_Y, 0}/M_0 \rfloor) = R_0$。充分性与同时极值构造则通过在各游程分层内显式配对正交右端字块并以均匀本征值 $1/d_b$（极值处取 $1/R_b$）组装 $\sigma_b$ 与 $J$ 完成；由支撑秩为 $r_b$ 的密度态最大冯·诺依曼熵不超过 $\ln r_b \le \ln R_b$ 即得紧熵界（这组跨切口秩界与[第 36 章](ch38-observer-memory-pointer-and-ontological-qram.md)指针历史容量界 [@thm-ch38-pointer-width-and-no-deep-copy] 刻画的是不同物理约束）。完整证明由 Lean 内核检查。
 :::
 
 [@thm-ch39-p2e-direct-encoder-ranks] 揭示了一条极易被口号掩盖的关键事实：**直接编码器的施密特秩并不普遍恒等于 $K$！** 只有当参数满足 $1 \le K \le R_b$ 时，秩等于 $K$ 才是可达矩形 $[1, R_0] \times [1, R_1]$ 中的**一个条件性可选值**。以独立枚举的具体参数 $N = 2,\; K = 3,\; m_X = 4,\; m_Y = 5$ 为例（`NUM`）：$\{0, 1, 2\}$ 中非素数页 $\{0, 1\}$ 维数 $M_0 = 2$，素数页 $\{2\}$ 维数 $M_1 = 1$；直接清点禁 `111` 字可得 $c_4 = (7, 6)$、$c_5 = (13, 11)$，且第 $1$ 页各阈值计数值为 $(a_0, a_1, a_2) = (0, 3, 5)$ 与 $(n_0, n_1, n_2) = (11, 7, 0)$，代入公式给出

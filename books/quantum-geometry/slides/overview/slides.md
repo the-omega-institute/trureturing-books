@@ -57,7 +57,7 @@ section: "十部导读"
   <p class="kicker">Ten parts</p>
   <h2 class="t">十部是一架阶梯，<em>一部比一部高一维</em></h2>
   <img src="./img/prelude-parts.zh.svg" alt="十条横条，每条是一部，横跨它所含的章，一部比一部高一级。" style="display: block; height: 600px; max-width: 100%; margin: 20px auto 0;">
-  <p class="lead mt-s">前九部各四章、第十部三章：点 → 线、线 → 面、面 → 球、多球共振、时空之球、球外之球、铸器与验证、贯通、互照、不二。</p>
+  <p class="lead mt-s">第一至七部各四章，第八部五章，第九部四章，第十部两章。铸器与圣殿独立成篇，不占章号。</p>
 </div>
 <Source>序曲“全书导读与形式化验证契约”（prelude-parts）</Source>
 
@@ -97,7 +97,7 @@ section: "第一部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 2.4 · Theorem 3.3</p>
+  <p class="kicker">定理2.4 · 定理3.3</p>
   <h2 class="t">玻恩权重是<em>内积的模方</em>，未读不动点是<em>块对角</em></h2>
 <TheoremCard class="compact mt-s" label="定理2.4" title="外积矩阵的记录权重模平方归约" gid="D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction" cite="thm-born-modulus-square">
 
@@ -172,7 +172,7 @@ section: "第二部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 5.3 · Theorem 6.1</p>
+  <p class="kicker">定理5.3 · 定理6.1</p>
   <h2 class="t"><em>i</em> 是平面转了四分之一圈；内积与面积<em>平方守恒</em></h2>
 <TheoremCard class="compact mt-s" label="定理5.3" title="平衡正交对生成的相对复结构平方恒等式" gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square" cite="thm-relative-complex-structure-square">
 
@@ -246,7 +246,7 @@ section: "第三部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 9.2 · Theorem 10.7</p>
+  <p class="kicker">定理9.2 · 定理10.7</p>
   <h2 class="t">两根轴走遍所有旋转；格拉姆矩阵<em>决定一切相对几何</em></h2>
 <TheoremCard class="compact mt-s" label="定理9.2" title="两不共线轴生成特殊正交群的有限旋转字" gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" cite="thm-two-axis-finite-word">
 
@@ -320,7 +320,7 @@ section: "第四部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 13.11 · Corollary 13.9</p>
+  <p class="kicker">定理13.11 · 推论13.9</p>
   <h2 class="t">经典折线封顶于 <em>2</em>，固定的 CHSH 算子封顶于 <em>2√2</em></h2>
 <TheoremCard class="compact mt-s" label="定理13.11" title="有限确定性局域纤维模型的 CHSH 绝对值上界恰为 2" gid="D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_bound_is_exact" cite="thm-classical-chsh-bound-exact">
 
@@ -394,7 +394,7 @@ section: "第五部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Proposition 17.4 · Theorem 19.7</p>
+  <p class="kicker">命题17.4 · 定理19.9</p>
   <h2 class="t">光锥决定度规；离散桥图上<em>最大流等于最小割</em></h2>
 <TheoremCard class="compact mt-s" label="命题17.4" title="零锥决定二次型" gid="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null" cite="prop-null-cone-rigidity">
 
@@ -469,7 +469,7 @@ section: "第六部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 21.3 · Theorem 22.4</p>
+  <p class="kicker">定理21.3</p>
   <h2 class="t">完备的对角线<em>必然逃逸</em>；ζ 是<em>素数的乘积</em></h2>
 <TheoremCard class="compact mt-s" label="定理21.3" title="完备解码目录诱导的相对语义对角线必不连续" gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous" cite="thm-complete-diagonal-not-continuous">
 
@@ -509,59 +509,58 @@ section: "第六部 · 依据"
 <Source>第二十一章 文献注记 · 第二十二章、第二十四章 猜想</Source>
 
 ---
-# 29 第七部
+# 29 铸器与圣殿
 layout: section
-chapter: "07"
-section: "第七部"
+section: "铸器与圣殿"
 ---
 
-<p class="kicker">第七部 · 第 25–28 章</p>
+<p class="kicker">铸器与圣殿</p>
 <h2 class="t">铸器 · 构造与验证：<em>异或代数、旋子编译与 Lean 4</em></h2>
 <p class="lead">把矩阵还原为异或位掩码；用布洛赫几何编译单比特旋转；再逐行打开冻结的 Lean 证明，看内核究竟检查了什么。</p>
 <div class="card mt">
   <ul class="plain">
-    <li>第 25 章 3 比特刀片与 XOR–Pauli 引擎 · 第 26 章 ZYZ 旋转器编译</li>
-    <li>第 27、28 章 走进 Lean 4 公理圣殿（上、下）</li>
+    <li>把矩阵还原为异或 · 单量子比特旋转器编译</li>
+    <li>走进 Lean 4 公理圣殿（上、下）</li>
   </ul>
 </div>
 
 ---
-# 30 第七部 · 图景
-section: "第七部 · 图景"
+# 30 铸器与圣殿 · 图景
+section: "铸器与圣殿 · 图景"
 ---
 
 <div class="body">
-  <p class="kicker">Chapter 25 · the mask cube</p>
+  <p class="kicker">把矩阵还原为异或 · 位掩码立方体</p>
   <h2 class="t">八块刀片是<em>立方体的八个角</em></h2>
   <img src="./img/ch25-mask-cube.zh.svg" alt="立方体的八个角标着八块刀片与它们的位掩码，琥珀色箭头沿两条边走。" style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
   <p class="lead mt-s">每个角标着刀片与它的三位掩码；乘一块刀片，就是沿它亮着的方向各走一条边，掩码按位异或。</p>
 </div>
-<Source>第二十五章 ch25-mask-cube</Source>
+<Source>铸器与圣殿 · 把矩阵还原为异或（ch25-mask-cube）</Source>
 
 ---
-# 31 第七部 · 定理
-section: "第七部 · 定理"
+# 31 铸器与圣殿 · 定理
+section: "铸器与圣殿 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 25.1 · Proposition 26.3</p>
+  <p class="kicker">定理Kernel.1 · 命题Kernel.12</p>
   <h2 class="t">泡利对反对易；厄米 2×2 矩阵<em>就是布洛赫向量</em></h2>
-<TheoremCard class="compact mt-s" label="定理25.1" title="单比特泡利外尔对的反对易、自伴与对合恒等式" gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" cite="thm-qubit-weyl-star">
+<TheoremCard class="compact mt-s" label="定理Kernel.1" title="单比特泡利外尔对的反对易、自伴与对合恒等式" gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" cite="thm-qubit-weyl-star">
 
 在 $M_2(\mathbb{C})$ 中：$ZX = -XZ$，$X^* = X$，$Z^* = Z$，$X^2 = 1$，$Z^2 = 1$。
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="命题26.3" title="厄米 2×2 矩阵的布洛赫重构与纯态单位球面" gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" cite="prop-hermitian-bloch-geometry">
+<TheoremCard class="compact mt-s" label="命题Kernel.12" title="厄米 2×2 矩阵的布洛赫重构与纯态单位球面" gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" cite="prop-hermitian-bloch-geometry">
 
 设 $M$ 是厄米 $2\times 2$ 复矩阵。则 $M = \operatorname{blochMatrix}(\operatorname{Re}\operatorname{Tr} M, \operatorname{bloch}(M))$；若再有 $\operatorname{Tr} M = 1$ 且 $M^2 = M$，则 $\lVert\operatorname{bloch}(M)\rVert = 1$。
 
 </TheoremCard>
 </div>
-<Source>第二十五章（FiniteDimensional）· 第二十六章（ActualPureQubitGeometry）</Source>
+<Source>把矩阵还原为异或（Kernel.1）· 单量子比特旋转器编译（Kernel.12）</Source>
 
 ---
-# 32 第七部 · 文献结果
-section: "第七部 · 依据"
+# 32 铸器与圣殿 · 文献结果
+section: "铸器与圣殿 · 依据"
 ---
 
 <div class="body">
@@ -569,94 +568,94 @@ section: "第七部 · 依据"
   <h2 class="t">内核担保推理，<span class="hl-violet">不担保物理建模</span></h2>
   <div class="g2 mt">
     <div class="card violet">
-      <h4>文献结果 · 第二十六章</h4>
+      <h4>文献结果 · 单量子比特旋转器编译</h4>
       <h3>SU(2) → SO(3) 双覆盖与 ZYZ 欧拉分解</h3>
       <p>本书验证了布洛赫重构与迹恒等式；任意单比特幺正略去整体相位后都能写成 ZYZ 欧拉角的普遍分解定理，照文献引用。</p>
     </div>
     <div class="card violet">
-      <h4>文献结果 · 第二十七章</h4>
+      <h4>文献结果 · 走进 Lean 4 公理圣殿（上）</h4>
       <h3>依值类型论内核与德布鲁因准则</h3>
       <p>小而可审计的内核检查每一步推理；Lean 定义是否忠实刻画物理对象，是建模问题，不在内核担保之内。</p>
     </div>
   </div>
 </div>
-<Source>第二十六章、第二十七章 文献注记</Source>
+<Source>单量子比特旋转器编译 · 走进 Lean 4 公理圣殿（上），文献注记</Source>
 
 ---
-# 33 第八部
+# 33 第七部 · 立极
 layout: section
-chapter: "08"
-section: "第八部"
+chapter: "07"
+section: "第七部 · 立极"
 ---
 
-<p class="kicker">第八部 · 第 29–32 章</p>
-<h2 class="t">贯通：<em>无时间因果、视界、量子公平与元统一</em></h2>
+<p class="kicker">第七部 · 立极（第 25–28 章）</p>
+<h2 class="t">立极 · <em>无时间因果、视界、量子公平与元统一</em></h2>
 <p class="lead">整数网格逼近 <Tex t="\sqrt2" /> 的误差变号缩小却不归零；二次平流无精确闭合；五重几何对称杜绝特权，并在自指罗盘下收束统一纲领。</p>
 <div class="card mt">
   <ul class="plain">
-    <li>第 29 章 无时间因果与格拉姆相容空间 · 第 30 章 场（P）与线（NP）</li>
-    <li>第 31 章 量子的本质是公平 · 第 32 章 正交自指统一场论与元统一罗盘</li>
+    <li>第 25 章 无时间因果与格拉姆相容空间 · 第 26 章 场（P）与线（NP）</li>
+    <li>第 27 章 量子的本质是公平 · 第 28 章 正交自指统一场论与元统一罗盘</li>
   </ul>
 </div>
 
 ---
-# 34 第八部 · 图景
-section: "第八部 · 图景"
+# 34 第六部 · 越界 · 图景
+section: "第六部 · 越界 · 图景"
 ---
 
 <div class="body">
-  <p class="kicker">Chapter 29 · the Pell seam</p>
+  <p class="kicker">第 23 章 §23.1 · 佩尔接缝</p>
   <h2 class="t">误差每步变号、缩成 <em>s</em> 倍，<em>却从不归零</em></h2>
   <img src="./img/ch29-pell-seam.zh.svg" alt="竖线是佩尔误差，青色朝上、品红朝下，按对数刻度每步缩短相同一格。" style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
   <p class="lead mt-s">竖线是误差 <Tex t="P_{k+1}s - P_k" />，青色朝上为正、品红朝下为负；纵轴取对数刻度，每步缩成 <Tex t="s = \sqrt2 - 1 \approx 0.414" /> 倍。</p>
 </div>
-<Source>第二十九章 ch29-pell-seam</Source>
+<Source>第 23 章 §23.1（ch29-pell-seam）</Source>
 
 ---
-# 35 第八部 · 定理
-section: "第八部 · 定理"
+# 35 第六部与第七部 · 越界与立极 · 定理
+section: "第六部与第七部 · 越界与立极 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 29.4 · Theorem 30.26</p>
+  <p class="kicker">定理23.4 · 定理26.26</p>
   <h2 class="t">银斜率有<em>最佳逼近下界</em>；有限模态平流<em>无精确闭合</em></h2>
-<TheoremCard class="compact mt-s" label="定理29.4" title="银斜率的最佳逼近下界" gid="D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_best_approximation" cite="thm-ch29-silver-best-approximation">
+<TheoremCard class="compact mt-s" label="定理23.4" title="银斜率的最佳逼近下界" gid="D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_best_approximation" cite="thm-ch29-silver-best-approximation">
 
 设 $s = \sqrt2 - 1$，$P_k$ 为佩尔数，$0 < m < P_{k+2}$。则对每个整数 $z$，$s^{k+1} \le \lvert m s - z\rvert$。
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="定理30.26" title="二次矢量场投影闭合判据与有限模态平流闭合不可能性" gid="D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff" cite="thm-coda-quadratic-advection-no-closure">
+<TheoremCard class="compact mt-s" label="定理26.26" title="二次矢量场投影闭合判据与有限模态平流闭合不可能性" gid="D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff" cite="thm-coda-quadratic-advection-no-closure">
 
 对幂等投影 $P$ 与 $V(x) = Lx - B(x, x)$，存在精确闭合 $P(V(x)) = f(P(x))$ 当且仅当三项泄漏条件都为零；在五模态傅里叶平流中，跨尺度混合项 $P\bigl(B(a, b) + B(b, a)\bigr)_{0,0} = i/4 \neq 0$，所以没有精确闭合。
 
 </TheoremCard>
 </div>
-<Source>第二十九章（SilverSlopeAbelianPellArithmetic）· 第三十章（QuadraticObservationClosure）</Source>
+<Source>第 23 章 §23.1（SilverSlopeAbelianPellArithmetic）· 第 26 章 §26.4（QuadraticObservationClosure）</Source>
 
 ---
-# 36 第八部 · 定理（续）
-section: "第八部 · 定理"
+# 36 第七部 · 立极 · 定理（续）
+section: "第七部 · 立极 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 31.4 · Theorem 32.11</p>
+  <p class="kicker">定理27.4 · 定理28.11</p>
   <h2 class="t">放大每轮只转 <em>2θ</em>；连转两次四分之一圈<em>恰好反向</em></h2>
-<TheoremCard class="compact mt-s" label="定理31.4" title="相干一致放大的平面步进旋转（第 2 款）" gid="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation" cite="thm-ch31-horizon-landauer-ergodic-fairness">
+<TheoremCard class="compact mt-s" label="定理27.4" title="相干一致放大的平面步进旋转（第 2 款）" gid="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation" cite="thm-ch31-horizon-landauer-ergodic-fairness">
 
 设 $J$、$C$ 等距，$P$ 是投影，$U = CJ$ 的成功重叠率为 $p$：$(PU)^\dagger(PU) = p\,I$，$0 < p < 1$；记 $\theta = \arcsin\sqrt p$，$W$、$B$ 为成功与失败分量。则对每个 $n$，$(\operatorname{iterate}(U, P))^n\,U = \sin\bigl((2n + 1)\theta\bigr)\,W + \cos\bigl((2n + 1)\theta\bigr)\,B$。
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="定理32.11" title="反自伴幺正复结构的二次旋转反号（第 1 款）" gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" cite="thm-ch32-generative-self-reference-and-zeckendorf">
+<TheoremCard class="compact mt-s" label="定理28.11" title="反自伴幺正复结构的二次旋转反号（第 1 款）" gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" cite="thm-ch32-generative-self-reference-and-zeckendorf">
 
 设 $R$ 是有限维复方阵，满足 $R^\dagger = -R$ 且 $R R^\dagger = I_n$。则 $R^2 = -I_n$。
 
 </TheoremCard>
 </div>
-<Source>第三十一章（CoherentUniformAmplification）· 第三十二章（BalancedUnitaryComplexStructure）</Source>
+<Source>第 27 章 §27.3（CoherentUniformAmplification）· 第 28 章 §28.4（BalancedUnitaryComplexStructure）</Source>
 
 ---
-# 37 第八部 · 文献结果与开放问题
-section: "第八部 · 依据"
+# 37 第六部与第七部 · 越界与立极 · 文献结果与开放问题
+section: "第六部与第七部 · 越界与立极 · 依据"
 ---
 
 <div class="body">
@@ -664,149 +663,143 @@ section: "第八部 · 依据"
   <h2 class="t">连分数是文献，<em class="warn">纳维—斯托克斯光滑性仍然开放</em></h2>
   <div class="g2 mt-s">
     <div class="card violet">
-      <h4>文献结果 · 第二十九章</h4>
+      <h4>文献结果 · 第 23 章 §23.1</h4>
       <h3><Tex t="Q_n/P_n" /> 与 <Tex t="\sqrt2" /> 的连分数渐近分数</h3>
       <p>本书验证了佩尔余项与最佳逼近下界；它们正是 <Tex t="\sqrt2" /> 连分数的渐近分数，这一经典刻画照文献引用。</p>
     </div>
     <div>
-      <TheoremCard class="compact" label="猜想30.25" title="三维纳维—斯托克斯方程的全局光滑性" status="open" cite="conj-coda-navier-stokes-regularity">
+      <TheoremCard class="compact" label="猜想26.25" title="三维纳维—斯托克斯方程的全局光滑性" status="open" cite="conj-coda-navier-stokes-regularity">
         <p>无外力三维不可压缩纳维—斯托克斯方程，对光滑初值是否总有全局光滑解（克雷千禧年陈述 A / B）。</p>
       </TheoremCard>
       <p class="lead mt-s">有限模态无精确闭合是已验证的定理；它不回答这条猜想。</p>
     </div>
   </div>
 </div>
-<Source>第二十九章 文献注记 · 第三十章 猜想</Source>
+<Source>第 23 章 §23.1 文献注记 · 第 26 章 §26.4 猜想 26.25</Source>
 
 ---
-# 38 第九部
+# 38 第九部 · 互照与破执
 layout: section
 chapter: "09"
-section: "第九部"
+section: "第九部 · 互照与破执"
 ---
 
-<p class="kicker">第九部 · 第 33–36 章</p>
+<p class="kicker">第九部 · 互照与破执（第 34–37 章）</p>
 <h2 class="t">互照 · 万物观察者、<em>自指扩表与超越轮回</em></h2>
-<p class="lead">能留下记录、参与两子比量的存在都可读作观察者；一次与两次正交读数相同，反演出观察者的位置；查表的算法也在表里；按内禀快度等步走，永远走不到 <Tex t="90^\circ" /> 的纯光。</p>
+<p class="lead">能留下记录、参与两子比量的存在都可读作观察者；查表的算法也在表里；按内禀快度等步走，永远走不到 <Tex t="90^\circ" /> 的纯光。</p>
 <div class="card mt">
   <ul class="plain">
-    <li>第 33 章 万物皆为观察者 · 第 34 章 正交简并盲区</li>
-    <li>第 35 章 乘光而来与自指扩表 · 第 36 章 无穷离散步与约去轮回</li>
+    <li>第 34 章 万物观察者 · 第 35 章 乘光、自指扩表与无进位编码</li>
+    <li>第 36 章 梦境擦除与本体 QRAM · 第 37 章 三元数场 Transformer 与测地智能</li>
   </ul>
 </div>
 
 ---
-# 39 第九部 · 图景
-section: "第九部 · 图景"
+# 39 第九部 · 互照与破执 · 图景
+section: "第九部 · 互照与破执 · 图景"
 ---
 
 <div class="body">
-  <p class="kicker">Chapter 36 · two rulers</p>
+  <p class="kicker">第 35 章 §35.3 · 两把尺</p>
   <h2 class="t">角度尺在 <em>90°</em> 到头，快度尺<em>通向无穷</em></h2>
   <img src="./img/ch36-two-rulers.zh.svg" alt="上面的角度尺在 90° 处被品红的墙截断；下面的快度尺通向无穷，等距的青色点经虚线落到角度尺上，越来越挤向 90°。" style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
   <p class="lead mt-s">快度尺上，青色的点从 <Tex t="\eta_0 \approx 0.817" /> 起等步 <Tex t="\Delta\eta = 1" /> 排开；虚线把每一点送到角度尺上的 <Tex t="\theta_k" />（<Tex t="\sin\theta_k = \tanh\eta_k" />），一个比一个更挤向品红的 <Tex t="90^\circ" /> 墙，却都在墙的左边。</p>
 </div>
-<Source>第三十六章 ch36-two-rulers</Source>
+<Source>第 35 章 §35.3（ch36-two-rulers）</Source>
 
 ---
-# 40 第九部 · 定理
-section: "第九部 · 定理"
+# 40 第八部 · 造微与归弧 / 第九部 · 互照与破执 · 定理
+section: "第八部 · 造微与归弧 / 第九部 · 互照与破执 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 33.1 · Theorem 34.2</p>
+  <p class="kicker">定理34.1 · 定理29.2</p>
   <h2 class="t">能完美区分的历史<em>不超过维数</em>；两根轴的转动<em>拼出一切转动</em></h2>
-<TheoremCard class="compact mt-s" label="定理33.1" title="有限维记忆的可区分历史容量（第 2 款）" gid="D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity" cite="thm-ch33-observer-pinching-and-memory-spectrum">
+<TheoremCard class="compact mt-s" label="定理34.1" title="有限维记忆的可区分历史容量（第 2 款）" gid="D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity" cite="thm-ch33-observer-pinching-and-memory-spectrum">
 
 设 $\rho_1, \ldots, \rho_N$ 是 $d$ 维密度矩阵，$E_1, \ldots, E_N$ 半正定且 $\sum_j E_j = 1$。若 $\operatorname{Tr}(E_j \rho_i)$ 在 $i = j$ 时为 $1$、否则为 $0$，则 $N \le d$。
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="定理34.2" title="双轴旋转的精确有限字生成（第 2 款）" gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" cite="thm-ch34-perpendicular-axis-and-pullback">
+<TheoremCard class="compact mt-s" label="定理29.2" title="双轴旋转的精确有限字生成（第 2 款）" gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" cite="thm-ch34-perpendicular-axis-and-pullback">
 
 设 $a, b \in \mathbb{R}^3$ 不共线：$\langle a, b\rangle^2 < \lVert a\rVert^2 \lVert b\rVert^2$。则每个行列式为 $1$ 的正交变换 $R$，都等于有限个保定向、固定 $a$ 或固定 $b$ 的旋转之积。
 
 </TheoremCard>
 </div>
-<Source>第三十三章（FiniteMemoryHistoryCapacity）· 第三十四章（TwoAxisFiniteRotation）</Source>
+<Source>第 34 章 §34.1（FiniteMemoryHistoryCapacity）· 第 29 章 §29.1（TwoAxisFiniteRotation）</Source>
 
 ---
-# 41 第九部 · 文献结果
-section: "第九部 · 依据"
+# 41 第九部 · 互照与破执 · 文献结果与开放问题
+section: "第九部 · 互照与破执 · 依据"
 ---
 
 <div class="body">
-  <p class="kicker">Literature results · not formalized in this book</p>
+  <p class="kicker">文献结果 · 模型 · 开放问题</p>
   <h2 class="t">查表界与双曲圆盘是文献，<em>观察者本体是诠释</em></h2>
   <div class="g2 mt">
     <div class="card violet">
-      <h4>文献结果 · 第三十五章</h4>
+      <h4>文献结果 · 第 35 章 §35.1</h4>
       <h3>姚期智查表时空权衡与卡普—利普顿定理</h3>
       <p>预存 <Tex t="S" /> 个单元的表把在线查询压到 <Tex t="T" /> 步，受时空权衡下界制约（如黑盒置换求逆 <Tex t="S \cdot T \ge \Omega(N)" />）；若 <Tex t="\mathrm{NP} \subseteq \mathrm{P}/\mathrm{poly}" />，多项式谱系坍缩到第二层。</p>
     </div>
     <div class="card violet">
-      <h4>文献结果 · 第三十六章</h4>
+      <h4>文献结果 · 第 35 章 §35.3</h4>
       <h3>古德曼函数与庞加莱圆盘</h3>
       <p><Tex t="\theta = \operatorname{gd}(\eta) = \arcsin(\tanh\eta)" /> 沟通快度与角度；庞加莱圆盘上半径 <Tex t="r = \tan(\theta/2)" /> 处到圆心的测地距离是 <Tex t="\eta" />，<Tex t="r \to 1" /> 时 <Tex t="\eta \to \infty" />。</p>
     </div>
   </div>
-  <p class="lead mt">“万物皆为观察者”“观察者互为吸引子”与“约去轮回”是本书的诠释模型（MODEL），借已验证的定理立论，不由它们推出；第九部没有开放问题。</p>
+  <p class="lead mt">观察者互为吸引子与约去轮回属于诠释模型（MODEL）。第九部的开放问题（OPEN）包括单一结果的微观实现、劳齐分形视界纠缠标度、标准机器上的 P 与 NP 关系，以及 TFT 的实证标度。</p>
 </div>
-<Source>第三十五章、第三十六章 文献注记</Source>
+<Source>§35.1、§35.3 文献注记 · §34.8、§35.6.8、§36.8、§37.1 开放问题</Source>
 
 ---
-# 42 第十部
+# 42 第十部 · 不二与归元
 layout: section
 chapter: "10"
-section: "第十部"
+section: "第十部 · 不二与归元"
 ---
 
-<p class="kicker">第十部 · 第 37–39 章</p>
-<h2 class="t">不二 · 梦境擦除、<em>记忆指针与本体不二</em></h2>
-<p class="lead">观察是用已知数据退相干，剪掉的相干要付熵税；观察者是在静止内存上滑动的记忆指针，不能深拷贝；能观与所观是同一条双覆叠的两叶，没有连续的截面把它们切开。</p>
-<div class="card mt">
-  <ul class="plain">
-    <li>第 37 章 梦境量子擦除与非定域观察者 · 第 38 章 宇宙本体 QRAM 与记忆指针</li>
-    <li>第 39 章 观察者即宇宙本体</li>
-  </ul>
-</div>
+<p class="kicker">第十部 · 不二与归元（第 38–39 章）</p>
+<h2 class="t">观察者即宇宙本体 · <em>大一统母公理</em></h2>
+<p class="lead">第 38 章以无底座自指和旋量双覆叠讨论能观与所观。第 39 章提出无原点的半正定三元比较闭包，并以它组织通向量子力学五条公设的推演。</p>
 
 ---
-# 43 第十部 · 图景
-section: "第十部 · 图景"
+# 43 第九部 · 互照与破执 · 图景
+section: "第九部 · 互照与破执 · 图景"
 ---
 
 <div class="body">
-  <p class="kicker">Chapter 37 · the entropy tax</p>
+  <p class="kicker">第 36 章 §36.1.1 · 熵税</p>
   <h2 class="t">剪掉的相干与付出的熵税，<em>同在 π/4 到顶</em></h2>
   <img src="./img/ch37-entropy-tax.zh.svg" alt="横轴是旋转角 θ。品红的曲线是捏合剪掉的相干质量，墨色的曲线是熵增，两者在两端为零、在 θ = π/4 处同时到顶。" style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
   <p class="lead mt-s">品红的曲线是一步捏合剪掉的相干质量 <Tex t="\tfrac12\sin^2 2\theta" />，墨色的曲线是熵增；两者在 <Tex t="\theta = 0" /> 与 <Tex t="\theta = \pi/2" /> 处为 <Tex t="0" />，在 <Tex t="\theta = \pi/4" /> 处分别取 <Tex t="1/2" /> 与 <Tex t="\ln 2" />。</p>
 </div>
-<Source>第三十七章 ch37-entropy-tax</Source>
+<Source>第 36 章 §36.1.1（ch37-entropy-tax）</Source>
 
 ---
-# 44 第十部 · 定理
-section: "第十部 · 定理"
+# 44 第九部 · 互照与破执 / 第十部 · 不二与归元 · 定理
+section: "第九部 · 互照与破执 / 第十部 · 不二与归元 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 38.22 · Theorem 39.7</p>
+  <p class="kicker">定理36.36 · 定理38.7</p>
   <h2 class="t">非正交的态<em>不能深拷贝</em>；平方双覆叠<em>没有连续截面</em></h2>
-<TheoremCard class="compact mt-s" label="定理38.22" title="禁通用深拷贝的内积判据（第 2 款）" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
+<TheoremCard class="compact mt-s" label="定理36.36" title="禁通用深拷贝的内积判据（第 2 款）" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
 
 设 $U$ 是 $H \otimes H$ 上的复线性等距同构。若单位向量 $\psi, \phi$ 与同一个单位空白态满足 $U(\psi \otimes \mathrm{blank}) = \psi \otimes \psi$、$U(\phi \otimes \mathrm{blank}) = \phi \otimes \phi$，则 $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$，且 $\phi = \psi$ 或 $\langle\phi, \psi\rangle = 0$。
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="定理39.7" title="平方双覆叠无连续全局截面（第 1 款）" gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section" cite="thm-ch39-double-cover-no-section-and-720-lift">
+<TheoremCard class="compact mt-s" label="定理38.7" title="平方双覆叠无连续全局截面（第 1 款）" gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section" cite="thm-ch39-double-cover-no-section-and-720-lift">
 
 不存在连续映射 $s$ 把单位圆周映到单位圆周，使得对其上每个 $z$ 都有 $s(z)^2 = z$。
 
 </TheoremCard>
 </div>
-<Source>第三十八章（NoCloningInnerProductCriterion）· 第三十九章（CircleDoubleCoverNoSection）</Source>
+<Source>第 36 章 §36.3（NoCloningInnerProductCriterion）· 第 38 章 §38.3（CircleDoubleCoverNoSection）</Source>
 
 ---
-# 45 第十部 · 文献结果
-section: "第十部 · 依据"
+# 45 第九部 · 互照与破执 / 第十部 · 不二与归元 · 文献结果
+section: "第九部 · 互照与破执 / 第十部 · 不二与归元 · 依据"
 ---
 
 <div class="body">
@@ -814,19 +807,19 @@ section: "第十部 · 依据"
   <h2 class="t">量子擦除与旋量双线性是文献，<em>本体不二是诠释</em></h2>
   <div class="g2 mt">
     <div class="card violet">
-      <h4>文献结果 · 第三十七章</h4>
+      <h4>文献结果 · 第 36 章 §36.1.2</h4>
       <h3>路径标记与延迟选择量子擦除</h3>
       <p>路径被可区分地记录时条纹消失；把探针投到互补基、按读数分类，条件子系综里条纹回来。无条件的总和始终不变，不能逆时传信。</p>
     </div>
     <div class="card violet">
-      <h4>文献结果 · 第三十九章</h4>
+      <h4>文献结果 · 第 38 章 §38.3</h4>
       <h3>旋量双线性与菲尔兹恒等式</h3>
       <p>旋量不能直接观测，时空量由它夹持生成：<Tex t="\mathbf J = \psi\gamma_0\tilde\psi" />，<Tex t="\mathbf S = \psi\mathbf I_{12}\tilde\psi" />；在 <Tex t="\beta = 0" /> 时 <Tex t="\mathbf J^2 = -\mathbf S^2 = \rho^2" />。</p>
     </div>
   </div>
-  <p class="lead mt">梦境擦除、记忆指针与“观察者即宇宙本体”是本书的诠释模型（MODEL），借已验证的定理立论，不由它们推出；第十部将标准图灵机 <Tex t="\mathrm{P} \neq \mathrm{NP}" /> 与劳齐分形视界纠缠标度显式标为开放问题（OPEN）。</p>
+  <p class="lead mt">第九部用梦境擦除与记忆指针讨论观察，第十部用旋量双覆叠阐释观察者即宇宙本体。这些诠释属于本书的模型（MODEL）。</p>
 </div>
-<Source>第三十七章、第三十九章 文献注记</Source>
+<Source>第 36 章 §36.1.2 · 第 38 章 §38.3，文献注记</Source>
 
 ---
 # 46 三层依据

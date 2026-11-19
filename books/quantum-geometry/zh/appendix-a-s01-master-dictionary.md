@@ -29,7 +29,7 @@ $\rho \succeq 0,\ \operatorname{Tr}\rho = 1 \implies \operatorname{bornProbabili
 $\operatorname{Tr}M = 1,\ M^2 = M \implies x^2 + y^2 + z^2 = 1$（$M$ 为 $2\times 2$ 厄米矩阵）
 
 **认识论状态 (Status)：**
-`LEAN ✓`（第 1–3、26 章）
+`LEAN ✓`（第 1–3 章、铸器与圣殿 · 单量子比特旋转器编译）
 
 **可观测量与投影算符 $P$**<br/>(Observable & Projector)
 
@@ -43,7 +43,7 @@ $\operatorname{Tr}M = 1,\ M^2 = M \implies x^2 + y^2 + z^2 = 1$（$M$ 为 $2\tim
 $\mathcal{P}(\mathcal{P}(\rho)) = \mathcal{P}(\rho),\quad P_\psi^2 = P_\psi$
 
 **认识论状态 (Status)：**
-`LEAN ✓`（第 1、3、27 章）
+`LEAN ✓`（第 1、3 章、铸器与圣殿 · 走进 Lean 4 公理圣殿（上））
 
 **玻恩概率法则 $P = |\langle\phi|\psi\rangle|^2$**<br/>(Born Probability Rule)
 
@@ -57,7 +57,7 @@ $\mathcal{P}(\mathcal{P}(\rho)) = \mathcal{P}(\rho),\quad P_\psi^2 = P_\psi$
 $\rho = \lvert\psi\rangle\langle\psi\rvert,\ P_k = \lvert\phi\rangle\langle\phi\rvert \implies \operatorname{recordWeight}_k = \operatorname{Tr}(\rho P_k) = \lvert\langle\phi\mid\psi\rangle\rvert^2$
 
 **认识论状态 (Status)：**
-`LEAN ✓`（第 2、28 章）
+`LEAN ✓`（第 2 章、铸器与圣殿 · 走进 Lean 4 公理圣殿（下））
 
 **正交态分解与完备性**<br/>(Orthogonal Decomposition)
 
@@ -71,7 +71,7 @@ $\rho = \lvert\psi\rangle\langle\psi\rvert,\ P_k = \lvert\phi\rangle\langle\phi\
 $\|u + v\|^2 + \|u - v\|^2 = 2(\|u\|^2 + \|v\|^2)$
 
 **认识论状态 (Status)：**
-`LEAN ✓`（仅平行四边形恒等式）（第 1、27 章、终章）
+`LEAN ✓`（仅平行四边形恒等式）（第 1 章、铸器与圣殿 · 走进 Lean 4 公理圣殿（上）、终章）
 
 **全局相位 $e^{i\alpha}|\psi\rangle$**<br/>(Global Phase / Ray Equivalence)
 
@@ -85,7 +85,7 @@ $\|u + v\|^2 + \|u - v\|^2 = 2(\|u\|^2 + \|v\|^2)$
 $A$ 酉且保坐标射线与连通射线族 $\implies A = c\,I,\ |c| = 1$
 
 **认识论状态 (Status)：**
-`LEAN ✓`（第 1、27 章）
+`LEAN ✓`（第 1 章、铸器与圣殿 · 走进 Lean 4 公理圣殿（上））
 
 **密度矩阵 $\rho$ 与混合态**<br/>(Density Matrix & Mixed State)
 
@@ -99,7 +99,7 @@ $A$ 酉且保坐标射线与连通射线族 $\implies A = c\,I,\ |c| = 1$
 $\|\mathbf{r}\| \le \operatorname{Tr}(\rho),\quad \operatorname{Tr}(\rho(\mathbf{r})) = 1$
 
 **认识论状态 (Status)：**
-`LEAN ✓`（第 3、26 章）
+`LEAN ✓`（第 3 章、铸器与圣殿 · 单量子比特旋转器编译）
 
 **退相干与量子信道 $\Phi(\rho)$**<br/>(Decoherence & Quantum Channel)
 
@@ -155,7 +155,7 @@ $\begin{aligned}&\mathbf{u}\wedge\mathbf{v}=-\mathbf{v}\wedge\mathbf{u},\\&A=A^\
 $\hat{\mathbf{I}}^2 = -1,\quad ZX = -XZ$
 
 **认识论状态 (Status)：**
-`LEAN ✓`（第 5、25 章）
+`LEAN ✓`（第 5 章、铸器与圣殿 · 把矩阵还原为异或）
 
 **单比特幺正门 $U \in \mathrm{SU}(2)$**<br/>(Single-Qubit Unitary Gate)
 
@@ -169,7 +169,7 @@ $\hat{\mathbf{I}}^2 = -1,\quad ZX = -XZ$
 $U(0) = 1,\ U(s+t) = U(s)U(t),\ U^*U = 1,\ U$ 在 $0$ 可导 $\implies U(t) = \exp(-itH/\hbar)$，$H$ 自伴（$v \mapsto R v \widetilde{R}$ 不在该声明内）
 
 **认识论状态 (Status)：**
-`LEAN ✓`（第 7、27 章）
+`LEAN ✓`（第 7 章、铸器与圣殿 · 单量子比特旋转器编译）
 
 **双比特纠缠与并发度（Concurrence）**<br/>(Two-Qubit Entanglement)
 
@@ -267,7 +267,7 @@ $\begin{aligned}\mathcal S_{\text{classical}}&\le2,\\\mathcal S_{\text{quantum}}
 $P_1 P_2 = P_2 P_1 \iff x_1 z_2 \oplus z_1 x_2 = 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓`（第 14、26 章）
+`LEAN ✓`（第 14 章、铸器与圣殿 · 把矩阵还原为异或）
 
 **Grover 搜索 / QFT / QSVT / 量子漫步**<br/>(Grover / QFT / QSVT / Szegedy Walk)
 
@@ -421,7 +421,7 @@ $\exists N \le |S_0|,\; \forall n \ge N,\; S_n = S_N$
 $ZX = -XZ,\quad e_a e_b = (-1)^{\operatorname{inv}(a,b)} e_{a \oplus b}$
 
 **认识论状态 (Status)：**
-`LEAN ✓`（Weyl 星代数与 Bloch 展开）/ `文献结果`、数值实现（XOR 基片引擎，第 25 章、附录 B）
+`LEAN ✓`（Weyl 星代数与 Bloch 展开）/ `文献结果`、数值实现（XOR 基片引擎，铸器与圣殿 · 把矩阵还原为异或、附录 B）
 
 **ZYZ 欧拉角分解与旋量级联**<br/>(ZYZ Euler Decomposition)
 
@@ -435,7 +435,7 @@ $ZX = -XZ,\quad e_a e_b = (-1)^{\operatorname{inv}(a,b)} e_{a \oplus b}$
 $R_z(\alpha)R_y(0)R_z(\gamma) = R_z(\alpha + \gamma)$
 
 **认识论状态 (Status)：**
-`LEAN ✓`（双轴有限旋转字）/ `文献结果`、数值实现（ZYZ 恒等式与编译，第 9、16、27 章、附录 B）
+`LEAN ✓`（双轴有限旋转字）/ `文献结果`、数值实现（ZYZ 恒等式与编译，第 9、16 章、铸器与圣殿 · 单量子比特旋转器编译、附录 B）
 
 **吕德斯（Lüders）状态更新与有限记录阻碍**<br/>(Lüders Rule & Finite-Record Obstruction)
 
@@ -449,7 +449,7 @@ $R_z(\alpha)R_y(0)R_z(\gamma) = R_z(\alpha + \gamma)$
 $\sum_i p_i \rho_i = \Phi(\rho),\quad p_i\ne0\implies\operatorname{Tr}(\rho_i) = 1$
 
 **认识论状态 (Status)：**
-`LEAN ✓`（第 3、28 章）
+`LEAN ✓`（第 3 章、铸器与圣殿 · 走进 Lean 4 公理圣殿（下））
 
 **毕达哥拉斯“万物皆数”与四级数系扩张**<br/>("All Is Number" & 4-Tier Number Hierarchy)
 
@@ -463,7 +463,7 @@ $\sum_i p_i \rho_i = \Phi(\rho),\quad p_i\ne0\implies\operatorname{Tr}(\rho_i) =
 $\mathbf{c}^2 = \mathbf{a}^2 + \mathbf{b}^2,\quad m^2 - 2n^2 = \pm 1,\quad \cos\theta^* = \theta^*$（三式为各级数系的代表方程，不是所列声明的结论）
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果`（第 29 章、终章）
+`LEAN ✓` / `文献结果`（第 23 章、终章）
 
 **奇素数模 4 分裂、同余数椭圆曲线与佐藤—泰特分布**<br/>(Prime Splitting, Congruent Elliptic Curve & Sato–Tate)
 
@@ -477,7 +477,7 @@ $\mathbf{c}^2 = \mathbf{a}^2 + \mathbf{b}^2,\quad m^2 - 2n^2 = \pm 1,\quad \cos\
 $\cos\theta_p = \frac{a_p}{2\sqrt{p}} \in [-1, +1],\quad d\mu_{\mathrm{ST},\text{non-CM}} = \frac{2}{\pi}\sin^2\theta\,d\theta$
 
 **认识论状态 (Status)：**
-`文献结果`（第 29 章；所列两条声明只担保各自的代数陈述，不涉及素数分裂或佐藤—泰特）
+`文献结果`（第 23 章；所列两条声明只担保各自的代数陈述，不涉及素数分裂或佐藤—泰特）
 
 **惠勒—德维特无时间态、佩奇—伍特斯切片与几何因果律**<br/>(Wheeler–DeWitt, Page–Wootters & Geometric Causality)
 
@@ -491,7 +491,7 @@ $\cos\theta_p = \frac{a_p}{2\sqrt{p}} \in [-1, +1],\quad d\mu_{\mathrm{ST},\text
 $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) \ge 0,\quad H\mathbf{\Psi} = 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `MODEL`（第 29 章）
+`LEAN ✓` / `文献结果` / `MODEL`（第 25 章）
 
 **有限观察者、格拉姆椭圆体（因果相容空间）与半正定矩阵补全**<br/>(Finite Observer, Gram Elliptope & PSD Matrix Completion)
 
@@ -505,7 +505,7 @@ $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) \ge 0,\quad H\mathbf{\Psi} = 0$
 $c_{AC} = \cos\theta_1\cos\theta_2 + \cos\phi\,\sin\theta_1\sin\theta_2,\quad \det G \ge 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `MODEL`（第 29 章）
+`LEAN ✓` / `文献结果` / `MODEL`（第 25 章）
 
 **全局静态时间场 $P = NP$ vs. 场内有限观察者 $P \neq NP$**<br/>(Global Static Time Field $P = NP$ vs. Finite Observer $P \neq NP$)
 
@@ -519,7 +519,7 @@ $c_{AC} = \cos\theta_1\cos\theta_2 + \cos\phi\,\sin\theta_1\sin\theta_2,\quad \d
 $\cos\theta_0 = 2^{-n/2},\quad L = \Theta(2^{n/2}),\quad G_M \succeq 0\;(M = o(n))$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 15、20、30 章）
+`LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 15、20、26 章）
 
 **“$P$ 是场，$NP$ 是线”：见证丝、导向场与毛球旋度**<br/>("$P$ Is a Field, $NP$ Is a Line": Witness Thread, Guiding Field & Hairy-Ball Curl)
 
@@ -533,7 +533,7 @@ $\cos\theta_0 = 2^{-n/2},\quad L = \Theta(2^{n/2}),\quad G_M \succeq 0\;(M = o(n
 $A_K^T = -A_K,\quad [\operatorname{Pf}(A_K)]^2 = \det A_K,\quad Z = |\operatorname{Pf}(A_K)|$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 20、21、30 章）
+`LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 20、21、26 章）
 
 **纳维—斯托克斯方程、兰姆双向量旋度与 $P$ vs. $NP$ 场化类比**<br/>(Navier–Stokes, Lamb Bivector Curl & $P$ vs. $NP$ Field Analogy)
 
@@ -547,7 +547,7 @@ $A_K^T = -A_K,\quad [\operatorname{Pf}(A_K)]^2 = \det A_K,\quad Z = |\operatorna
 $(\mathbf{u}\cdot\nabla)\mathbf{u} = \frac{1}{2}\nabla(\|\mathbf{u}\|^2) + \mathbf{u}\cdot(\nabla\wedge\mathbf{u}),\quad \Gamma \approx A\|\boldsymbol{\omega}\|$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 30 章）
+`LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 26 章）
 
 **指数时间假设（ETH）、张量网络秩约分与宇宙视界银河算法**<br/>(ETH, Tensor-Network Rank Collapse & Cosmic Horizon Galactic Algorithm)
 
@@ -561,7 +561,7 @@ $(\mathbf{u}\cdot\nabla)\mathbf{u} = \frac{1}{2}\nabla(\|\mathbf{u}\|^2) + \math
 $s_k = \inf\{\delta\ge0 \mid k\text{-SAT}\in 2^{\delta n}(n+m)^{O(1)}\},\quad r_{\mathrm{new}}(n) \sim \frac{\log_2\log_2 n}{\sqrt{\log_2 n}}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 19、21、30 章）
+`LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 19、21、26 章）
 
 **量子纠缠、$P=NP$ 与熵的正交三位一体**（Orthogonal Triad of Entanglement, $P=NP$ & Entropy）
 
@@ -575,7 +575,7 @@ $s_k = \inf\{\delta\ge0 \mid k\text{-SAT}\in 2^{\delta n}(n+m)^{O(1)}\},\quad r_
 $\|\mathbf{r}_A\|^2 + \tau(A:\bar{A}) = \cos^2\theta + \sin^2\theta = 1,\quad S_L(\rho_A) = \sin^2\theta,\quad \chi_{\mathrm{bond}} \ge 2^{S_{\mathrm{cut}}}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 8、13、24 章、[第 30 章](ch30-s05-entanglement-and-entropy.md#sec-ch30-entanglement-entropy-complexity-triad)）
+`LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 8、13、24 章、[§26.5](ch30-s05-entanglement-and-entropy.md#sec-ch30-entanglement-entropy-complexity-triad)）
 
 **空间吸引子、`trureturing` 黄金切投观察者、卡西尼 $(-1)^{k+1}$ 接缝与似曾相识**<br/>(Spatial Attractors, `trureturing` Cut-and-Project Observer, Cassini Seam & Déjà Vu)
 
@@ -589,7 +589,7 @@ $\|\mathbf{r}_A\|^2 + \tau(A:\bar{A}) = \cos^2\theta + \sin^2\theta = 1,\quad S_
 $F_n F_{n+2} - F_{n+1}^2 = (-1)^{n+1},\quad \delta\theta\to 0 \implies \cos\delta\theta \to 1$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `MODEL`（第 24、29 章、终章）
+`LEAN ✓` / `文献结果` / `MODEL`（第 24、25、35 章）
 
 **量子公平性、纠缠单配性与遍历统计全息**<br/>(Quantum Fairness, Entanglement Monogamy & Ergodic Statistical Holism)
 
@@ -603,7 +603,7 @@ $F_n F_{n+2} - F_{n+1}^2 = (-1)^{n+1},\quad \delta\theta\to 0 \implies \cos\delt
 $\tau_{A|B} + \tau_{A|C} \le \tau_{A|BC},\quad f\in C(G,\mathbb{C}):\quad\lim_{N\to\infty}\frac{1}{N}\sum_{n=0}^{N-1} f(g^{n+1}) = \int_G f\,d\mu$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `MODEL`（第 31 章）
+`LEAN ✓` / `文献结果` / `MODEL`（第 27 章）
 
 **两两公平平方、对角相位折叠、测不准与正交维度扩张时间**（Pairwise Fair Squaring, Diagonal Phase Folding, Uncertainty & Time as Orthogonal Dimension Expansion）
 
@@ -617,7 +617,7 @@ $\tau_{A|B} + \tau_{A|C} \le \tau_{A|BC},\quad f\in C(G,\mathbb{C}):\quad\lim_{N
 $\lVert\operatorname{id}_H - P_{S_i}\rVert = 1,\quad (\Delta A)^2(\Delta B)^2 = C^2 + \lVert K\rVert^2 + G,\quad N_S = \prod_{p \in S} p + 1 \equiv 1 \pmod p$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `MODEL`（[第 31 章 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)）
+`LEAN ✓` / `文献结果` / `手工推导` / `MODEL`（[§27.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)）
 
 **正交自指统一场、艾柯西安 $E_8$ 黄金桥与八大纲领元统一**<br/>(Orthogonal Self-Referential Unified Field, Icosian–$E_8$ Bridge & Meta-Unification)
 
@@ -631,7 +631,7 @@ $\lVert\operatorname{id}_H - P_{S_i}\rVert = 1,\quad (\Delta A)^2(\Delta B)^2 = 
 $R^2 = -I,\quad (\mathcal{I}, Q)\cong E_8\;\bigl(Q(q)=\operatorname{tr}_{\mathbb{Q}(\sqrt{5})/\mathbb{Q}}\bigl(\tfrac{2\varphi}{\sqrt{5}}\operatorname{Nrd}(q)\bigr)=2(a+b)\bigr),\quad \psi = \psi(\psi)$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `MODEL`（第 32 章）
+`LEAN ✓` / `文献结果` / `MODEL`（第 28 章）
 
 **万物皆为观察者、自维持势阱与互吸引子双螺旋**<br/>(Universal Observers, Self-Sustaining Basins & Mutual Attractors)
 
@@ -645,7 +645,7 @@ $R^2 = -I,\quad (\mathcal{I}, Q)\cong E_8\;\bigl(Q(q)=\operatorname{tr}_{\mathbb
 $\mathcal{P}(\mathcal{P}(\rho)) = \mathcal{P}(\rho),\quad N \le d,\quad \theta_{n+1}^{(A)} = \cos\theta_n^{(B)} \to \theta^*$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `MODEL`（第 33 章）
+`LEAN ✓` / `文献结果` / `MODEL`（第 34 章）
 
 **正交简并盲区与观察者位置反演**<br/>(Orthogonality-Degeneracy Blind Spots & Observer Position Inversion)
 
@@ -659,7 +659,7 @@ $\mathcal{P}(\mathcal{P}(\rho)) = \mathcal{P}(\rho),\quad N \le d,\quad \theta_{
 $d_{S^2}(N, P_1) = d_{S^2}(N, P_2) = \frac{\pi}{2},\quad \operatorname{Tr}(U^\dagger A U \rho) = \operatorname{Tr}(A U \rho U^\dagger)$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `MODEL`（第 34 章）
+`LEAN ✓` / `文献结果` / `MODEL`（第 29 章）
 
 **乘光而来、遗忘初始化与同像自指扩表 $T = T(T)$**<br/>(Arriving on a Pulse of Light, Initialization by Forgetting & Homoiconic Table Expansion)
 
@@ -687,7 +687,7 @@ $\det G_2 = 1 - c^2,\quad N \le d,\quad T = T(T)$
 $\eta(\theta) = \ln(\sec\theta + \tan\theta),\quad \left|\frac{z-i}{z+i}\right| = 1 \iff \operatorname{Im} z = 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `MODEL`（第 36 章）
+`LEAN ✓` / `文献结果` / `MODEL`（第 35 章）
 
 **p 进零进位前缀查表树、素数观察者扩表与阻断轮回**（p-adic Zero-Carry Lookup Trees, Prime Observer Expansion & Blocking Reincarnation）
 
@@ -701,7 +701,7 @@ $\eta(\theta) = \ln(\sec\theta + \tan\theta),\quad \left|\frac{z-i}{z+i}\right| 
 $K(p) = \lceil n / \log_2 p\rceil,\quad d(x,z) \le \max\bigl(d(x,y), d(y,z)\bigr),\quad \lvert x\rvert_\infty \cdot \prod_p \lvert x\rvert_p = 1$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `MODEL`（[第 36 章 §36.4](ch36-s04-padic-table-expansion.md#sec-ch36-padic-prime-table-expansion)）
+`LEAN ✓` / `文献结果` / `MODEL`（[§35.5](ch36-s04-padic-table-expansion.md#sec-ch36-padic-prime-table-expansion)）
 
 **梦境量子擦除、已知数据退相干与非定域观察者**<br/>(Dream Quantum Erasure, Known-Data Decoherence & Nonlocal Observer)
 
@@ -715,7 +715,7 @@ $K(p) = \lceil n / \log_2 p\rceil,\quad d(x,z) \le \max\bigl(d(x,y), d(y,z)\bigr
 $S(\mathcal{P}(\rho)) - S(\rho) = D(\rho\parallel\mathcal{P}(\rho)),\quad \det G_3(c,c,u) = (1-u)(1+u-2c^2)$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `MODEL`（第 37 章）
+`LEAN ✓` / `文献结果` / `MODEL`（第 36 章）
 
 **选择未来、梦境前置逻辑超前去相干与既视感无时间戳快表命中**（Choosing the Future, Dream Pre-Decoherence & Null-Timestamp Déjà Vu Cache Hit）
 
@@ -729,7 +729,7 @@ $S(\mathcal{P}(\rho)) - S(\rho) = D(\rho\parallel\mathcal{P}(\rho)),\quad \det G
 $\Pi_P \circ \Pi_P = \Pi_P,\quad \Delta H_{\mathrm{bits}}\bigl(\Pi_P(\sigma) \leftarrow \sigma\bigr) = 0,\quad E(C) < E(C \setminus \{i\}) \iff U_i > 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 37 章 §37.5](ch37-s05-future-selection-and-deja-vu.md#sec-ch37-dream-pre-decoherence-deja-vu)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§36.1.5](ch37-s05-future-selection-and-deja-vu.md#sec-ch37-dream-pre-decoherence-deja-vu)）
 
 **宇宙本体 QRAM、观察者记忆指针与递归自映射页表**<br/>(Ontological QRAM, Observer Memory Pointer & Recursive Self-Mapped Page Tables)
 
@@ -743,7 +743,7 @@ $\Pi_P \circ \Pi_P = \Pi_P,\quad \Delta H_{\mathrm{bits}}\bigl(\Pi_P(\sigma) \le
 $\operatorname{diagonal}(f, g)(a) = f(g(a, a)),\quad P[s^*] = p_{\mathrm{phys}}(P)$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `MODEL`（第 38 章）
+`LEAN ✓` / `文献结果` / `MODEL`（第 36 章）
 
 **P=NP 查表算法七阶退化阶梯与时空引力权衡**（7-Stage Degradation Ladder of a Hypothetical P = NP Lookup Oracle & Spacetime–Gravity Trade-Off）
 
@@ -757,7 +757,7 @@ $\operatorname{diagonal}(f, g)(a) = f(g(a, a)),\quad P[s^*] = p_{\mathrm{phys}}(
 $\operatorname{spectrumBottom} \le K(r) + c,\quad \forall k \in \operatorname{wdigits}\!\bigl(\sum_{i\in P} F_i + F_j\bigr),\; m - 2 \le k,\quad r_{\mathrm{pipe}}(\sigma) = \max(1-\sigma, \sigma/2) \ge \frac{1}{3}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `MODEL` / `OPEN`（[第 38 章 §38.4](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation)）
+`LEAN ✓` / `文献结果` / `MODEL` / `OPEN`（[§36.5](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation)）
 
 **观察者逃逸账本、原像纤维与希尔伯特—齐肯多夫熵**（Observer Escape Ledger, Preimage Fibers & Hilbert–Zeckendorf Entropy）
 
@@ -771,7 +771,7 @@ $\operatorname{spectrumBottom} \le K(r) + c,\quad \forall k \in \operatorname{wd
 $H_{\mathrm{total}} = I_{\mathrm{ledger}}(S) + H_2^{\mathrm{escape}}(\mathcal{S}\mid S) = \log_2 N,\quad C_\varphi = \log_2\varphi$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `NUM` / `MODEL`（[第 38 章 §38.5](ch38-s05-escape-ledger-and-entropy.md#sec-ch38-observer-escape-ledger)）
+`LEAN ✓` / `文献结果` / `NUM` / `MODEL`（[§36.6](ch38-s05-escape-ledger-and-entropy.md#sec-ch38-observer-escape-ledger)）
 
 **观察者即宇宙本体：无底物自指域、关系全息与旋量自折叠**<br/>(Observer Is the Ontological Universe: Reflexive Domains, Relational Holography & Spinor Self-Folding)
 
@@ -785,7 +785,7 @@ $H_{\mathrm{total}} = I_{\mathrm{ledger}}(S) + H_2^{\mathrm{escape}}(\mathcal{S}
 $X \simeq \coprod_{y:\mathrm{Val}} \mathrm{ConceptFiber}(c,y),\quad J_{U,V}^2 = -I,\quad \mathcal{O} \equiv \mathcal{U}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `MODEL`（第 39 章）
+`LEAN ✓` / `文献结果` / `MODEL`（第 38 章）
 
 **齐肯多夫—皮索—劳齐八概念综合沙盘**（Zeckendorf–Pisot–Rauzy Eight-Concept Sandtable）
 
@@ -799,7 +799,7 @@ $X \simeq \coprod_{y:\mathrm{Val}} \mathrm{ConceptFiber}(c,y),\quad J_{U,V}^2 = 
 $\beta_K = 2 - \beta_K^{-K},\quad \mathcal{R}_3(\alpha) = f_0(\mathcal{R}_3)\cup f_{10}(\mathcal{R}_3)\cup f_{110}(\mathcal{R}_3),\quad 1 \le r_b \le R_b,\quad S(\sigma_b) \le \ln R_b$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `NUM` / `OPEN` / `MODEL`（[第 39 章 §39.5](ch39-s05-pisot-clifford-rauzy.md#sec-ch39-pisot-clifford-rauzy)）
+`LEAN ✓` / `文献结果` / `NUM` / `OPEN` / `MODEL`（[§35.6](ch39-s05-pisot-clifford-rauzy.md#sec-ch39-pisot-clifford-rauzy)）
 
 **量子力学六大未解难题、撤除外部第 3 点 $C$ 与正交开维诠释对决**（Six Foundational Quantum Puzzles, Removing External Point $C$ & the Five-Interpretation Geometric Duel）
 
@@ -827,7 +827,7 @@ $r^2 + \tau_{L:E} = 1,\quad \operatorname{Re}\operatorname{Tr}(\rho\cdot\mathrm{
 $w(\psi\leftrightarrow\phi) = \langle\phi\mid\psi\rangle\langle\psi\mid\phi\rangle = \lvert\langle\phi\mid\psi\rangle\rvert^2,\quad p(j) = p(j,+) + p(j,-) = q_j,\quad \det(P_{13} G P_{13}^{\mathsf{T}}) = \det G \ge 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 29 章](ch29-s04-coherence-and-handshake.md#sec-ch29-coherence-handshake-causality)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§25.2](ch29-s04-coherence-and-handshake.md#sec-ch29-coherence-handshake-causality)）
 
 **多观察者共识张量、去相干指针基涌现与无绝对客观事实**（Multi-Observer Consensus Tensor, Emergent Pointer Basis & No Observer-Independent Facts）
 
@@ -841,12 +841,12 @@ $w(\psi\leftrightarrow\phi) = \langle\phi\mid\psi\rangle\langle\psi\mid\phi\rang
 $\mathbf{M}_{\mathrm{cons}} = \sum_{j=1}^N w_j\,\mathbf{n}_j\mathbf{n}_j^{\mathsf{T}},\quad I(S:\mathcal{O}_m) = h(\Pi_{\mathrm{all}}) + h(\Pi_F) - h(\Pi_{F^c}),\quad F_{\mathrm{LF}} = \sqrt{5} + 3 + \sqrt{2+\sqrt{2}} > 6$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 33 章](ch33-s05-consensus-and-pointer-bases.md#sec-ch33-consensus-decoherence-pointer)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§34.5](ch33-s05-consensus-and-pointer-bases.md#sec-ch33-consensus-decoherence-pointer)）
 
 **宇宙单指令集比较机原语与零背景比较公理 $\mathcal{A}_0$**（Cosmic OISC Comparison Primitive & Zero-Background Axiom of Comparison）
 
 **本书几何直觉语言 (Geometric Intuition Term)：**
-**二元名字逐位比较机无损复原步数上界 $2(\lvert a\rvert+\lvert b\rvert)+4$ 与流式字典查表机步数上界 $(2\lvert\mathrm{query}\rvert+12)\lvert\mathrm{names}\rvert+4\lvert\operatorname{dictionaryStream}(\mathrm{names})\rvert+3$、有限比较效应字外延性与正交残差核充要判据 $X(\rho)-X(\sigma)\in V_{\mathrm{vis}}^\perp$、读出划分拓扑不可分核、有限维拉格朗日—格拉姆奇偶平方折叠恒等式及反自伴幺正复结构平方负一锁定 $R^2=-I_n$（`LEAN ✓`）；配对克利福德几何积奇偶拆分 $\mathrm{CMP}(\mathbf{A},\mathbf{B})=\mathbf{A}\cdot\mathbf{B}+\mathbf{A}\wedge\mathbf{B}$、$8$ 个单位字在秩 $3$ 子空间按 `3-3-2` 分桶张成三维直角八角盒（因 $3\nmid 8$ 而非正方体）及公平圆重排闵氏光锥 $c^2 d\tau^2=c^2 dt^2-dx^2$（`手工推导` / `NUM`），以及 Mavaddat & Parhami（1988）`SUBLEQ` 单指令集图灵完备性、范畴论米田引理与忠实满米田嵌入 $y(X)=\mathrm{Hom}_{\mathcal{C}}(-,X)$、Ostrowski（1918）有理完备化分类、Schoenberg（1935）半正定度规嵌入、Jordan–von Neumann（1935）、Gleason（1957）、Hardy（2001）/ Chiribella–D'Ariano–Perinotti（2011）局域层析张量构成、Pauli（1940）自旋—统计、Robertson–Schrödinger 测不准与 Yang–Mills（1954）规范曲率（`文献结果`），在第 32 章 §32.1–§32.3 与附录 E 建立零背景比较公理 $\mathcal{A}_0$、宇宙极简比较机与（配合显式桥接假设 H1–H9）统摄数理公理谱系的分层模型（`MODEL`；标准 $\mathrm{P}\neq\mathrm{NP}$ 标 `OPEN`）**
+**二元名字逐位比较机无损复原步数上界 $2(\lvert a\rvert+\lvert b\rvert)+4$ 与流式字典查表机步数上界 $(2\lvert\mathrm{query}\rvert+12)\lvert\mathrm{names}\rvert+4\lvert\operatorname{dictionaryStream}(\mathrm{names})\rvert+3$、有限比较效应字外延性与正交残差核充要判据 $X(\rho)-X(\sigma)\in V_{\mathrm{vis}}^\perp$、读出划分拓扑不可分核、有限维拉格朗日—格拉姆奇偶平方折叠恒等式及反自伴幺正复结构平方负一锁定 $R^2=-I_n$（`LEAN ✓`）；配对克利福德几何积奇偶拆分 $\mathrm{CMP}(\mathbf{A},\mathbf{B})=\mathbf{A}\cdot\mathbf{B}+\mathbf{A}\wedge\mathbf{B}$、$8$ 个单位字在秩 $3$ 子空间按 `3-3-2` 分桶张成三维直角八角盒（因 $3\nmid 8$ 而非正方体）及公平圆重排闵氏光锥 $c^2 d\tau^2=c^2 dt^2-dx^2$（`手工推导` / `NUM`），以及 Mavaddat & Parhami（1988）`SUBLEQ` 单指令集图灵完备性、范畴论米田引理与忠实满米田嵌入 $y(X)=\mathrm{Hom}_{\mathcal{C}}(-,X)$、Ostrowski（1918）有理完备化分类、Schoenberg（1935）半正定度规嵌入、Jordan–von Neumann（1935）、Gleason（1957）、Hardy（2001）/ Chiribella–D'Ariano–Perinotti（2011）局域层析张量构成、Pauli（1940）自旋—统计、Robertson–Schrödinger 测不准与 Yang–Mills（1954）规范曲率（`文献结果`），在第 28 章 §28.1–§28.3 与附录 E 建立零背景比较公理 $\mathcal{A}_0$、宇宙极简比较机与（配合显式桥接假设 H1–H9）统摄数理公理谱系的分层模型（`MODEL`；标准 $\mathrm{P}\neq\mathrm{NP}$ 标 `OPEN`）**
 
 **Lean 4 形式对象 / 锁定声明 GID：**
 [`name_compare_run`](lean:D5/S0/Computability/BinaryNameComparison.name_compare_run), [`dictionary_lookup_run`](lean:D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run), [`future_word_orthogonal_residual`](lean:D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual), [`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel), [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity), [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary)
@@ -855,7 +855,7 @@ $\mathbf{M}_{\mathrm{cons}} = \sum_{j=1}^N w_j\,\mathbf{n}_j\mathbf{n}_j^{\maths
 $\mathrm{CMP}(\mathbf{A},\mathbf{B}) = \mathbf{A}\cdot\mathbf{B} + \mathbf{A}\wedge\mathbf{B},\quad \mathrm{CMP}(\mathbf{A},\mathbf{B})\,\mathrm{CMP}(\mathbf{B},\mathbf{A}) = \cos^2\theta + \sin^2\theta = 1,\quad T_{\mathrm{cmp}}(a,b) \le 2(\lvert a\rvert+\lvert b\rvert)+4$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN`（[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[§32.2](ch32-s02-oisc-comparison-engine.md#sec-ch32-oisc-comparison-engine)、[§32.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN`（[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[§28.2](ch32-s02-oisc-comparison-engine.md#sec-ch32-oisc-comparison-engine)、[§28.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)、[附录 E](appendix-e.md)）
 
 **极小三角弧面体原胞 $\Delta\mathcal{T}_\epsilon$、一次/两次正交一体双影与球面角超曲率量子**（Infinitesimal Spherical Trihedron Cell, Dual Shadows of Once/Twice Orthogonal & Curvature Quantum）
 
@@ -869,7 +869,7 @@ $\mathrm{CMP}(\mathbf{A},\mathbf{B}) = \mathbf{A}\cdot\mathbf{B} + \mathbf{A}\we
 $\cos c_\epsilon = \cos^2\epsilon,\quad \Omega(\epsilon) = 2\arctan\!\bigl(\tan^2\frac{\epsilon}{2}\bigr)\;\bigl(= 2\arctan(\sec\epsilon) - \frac{\pi}{2},\;\epsilon < \tfrac{\pi}{2}\bigr),\quad \det G(\Delta\mathcal{T}_\epsilon) = \sin^4\epsilon$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 34 章 §34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)、[§34.5](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§29.5](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)、[§29.6](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names)）
 
 **滚动 $P = NP$ 完成化地平线、零背景建表扩维悖论与完备目录对角拓扑加细**（Rolling $P = NP$ Completion Horizon, Zero-Background Table-Building Paradox & Complete-Catalog Diagonal Refinement）
 
@@ -883,7 +883,7 @@ $\cos c_\epsilon = \cos^2\epsilon,\quad \Omega(\epsilon) = 2\arctan\!\bigl(\tan^
 $\Delta\Pi_t = k M_t + \binom{k}{2},\quad \bigl(\operatorname{separationDeficit}(\mathrm{latent}, g_{\mathrm{diag}})\bigr).\mathrm{Nonempty},\quad \operatorname{retrospectiveLoss}=0 \;\land\; \forall z,\,\neg\operatorname{NonAnticipating}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（[第 38 章 §38.6](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp)）
+`LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（[§36.7](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp)）
 
 **北极自指盲点球极投影、相对化/自然证明/代数化三大复杂性屏障与四句离相悬置**（North-Pole Blind-Spot Stereographic Projection, Relativization/Natural/Algebrization Barriers & Tetralemma Suspension）
 
@@ -897,7 +897,7 @@ $\Delta\Pi_t = k M_t + \binom{k}{2},\quad \bigl(\operatorname{separationDeficit}
 $\lVert\operatorname{cayleyRatio}(s)\rVert = 1 \iff \operatorname{Re}(s) = \tfrac{1}{2},\quad R(\theta) = \cot\tfrac{\theta}{2},\quad \mu(\theta) = \frac{1}{1-\cos\theta},\quad \Delta_{\mathrm{unprovable}}(\delta_{\mathrm{blind}}) = \sin^2\!\frac{\delta_{\mathrm{blind}}}{2} > 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 38 章 §38.7](ch38-s07-blindspot-and-relativization.md#sec-ch38-stereographic-blindspot-relativization-suspension)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§36.8](ch38-s07-blindspot-and-relativization.md#sec-ch38-stereographic-blindspot-relativization-suspension)）
 
 **贝里球扇锥体积、同点异相霍普夫纤维抬升、威尔逊路径—相位对偶与费曼科纽驻相选路**（Berry Spherical-Sector Volume, Same-Point Hopf Fiber Lift, Wilson Path–Phase Duality & Feynman Cornu Stationary-Phase Selection）
 
@@ -911,7 +911,7 @@ $\lVert\operatorname{cayleyRatio}(s)\rVert = 1 \iff \operatorname{Re}(s) = \tfra
 $V_{\mathrm{sector}}(\Sigma_2) = \tfrac{1}{3}A_{\mathrm{cap}}(\Sigma_2) = \tfrac{1}{3}\Omega(\Sigma_2),\quad \gamma_B = -\tfrac{1}{2}A_{\mathrm{cap}} = -\tfrac{3}{2}V_{\mathrm{sector}},\quad \bigl((E \to \operatorname{Circle}) / N\bigr) \simeq_{\mathrm{t}*} \bigl(\operatorname{Fin}(m + k - n) \to \operatorname{Circle}\bigr)$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 34 章 §34.6](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§29.7](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral)）
 
 **相位积分驻波成体、一点多相到达丛、圆周相位态密度前推、闭合贝里余弦与外尔体积倒读**（Phase-Integral Standing-Wave Volume Emergence, Multi-Phase Arrival Bundle, Circle Phase-Density Pushforward, Closed-Loop Berry Cosine & Inverted Weyl Volume Law）
 
@@ -925,7 +925,7 @@ $V_{\mathrm{sector}}(\Sigma_2) = \tfrac{1}{3}A_{\mathrm{cap}}(\Sigma_2) = \tfrac
 $\Psi(x) = \int_0^{2\pi}\rho(x,\phi)\,e^{i\phi}\,d\phi,\quad \lvert\Psi(x)\rvert^2 = \langle\cos\gamma_B\rangle_x,\quad \mathrm{Vol}_\Omega \equiv (2\pi)^d \cdot N_{\mathrm{standing}}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 34 章 §34.7](ch34-s07-standing-wave-volume.md#sec-ch34-standing-wave-volume-emergence)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§29.8](ch34-s07-standing-wave-volume.md#sec-ch34-standing-wave-volume-emergence)）
 
 **极小圆弧体的四位一体克利福德单胞、梯度—路径—相位三重几何锁与多胞边界抵消维度筛**（Four-in-One Clifford Monad of the Minimal Arc-Body, Gradient–Path–Phase Threefold Geometric Lock & Multi-Cell Boundary Cancellation Grade Sieve）
 
@@ -939,7 +939,7 @@ $\Psi(x) = \int_0^{2\pi}\rho(x,\phi)\,e^{i\phi}\,d\phi,\quad \lvert\Psi(x)\rvert
 $\mathcal{M}(\Delta\mathcal{T}_\epsilon) = \cos^2\!\frac{\epsilon}{2} + \frac{1}{2}\sin\epsilon(\mathbf{e}_{AB}+\mathbf{e}_{BC}) + \sin^2\!\frac{\epsilon}{2}\,\hat{\mathbf{I}}_{AC} + \frac{1}{3}\Omega(\epsilon)\,\mathbf{I}_3 \in \mathrm{Cl}_3,\quad (\Lambda^0)^2 + \lVert\Lambda^1_{\mathrm{step}}\rVert^2 + (\Lambda^2)^2 = 1,\quad \partial^2 = 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 34 章 §34.8](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§29.9](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling)）
 
 **反者道之动：格拉姆溢出开维、来路对角化与双无限路径概念切口**（Reversal as Movement: Gram Dimensional Overflow, Arrival-Path Diagonalization & the Bi-Infinite Path Concept Cut）
 
@@ -953,7 +953,7 @@ $\mathcal{M}(\Delta\mathcal{T}_\epsilon) = \cos^2\!\frac{\epsilon}{2} + \frac{1}
 $\det G_k > 0 \;\Rightarrow\; D \to D+1,\quad \phi_{\mathrm{diag}}^{(k)} = (\phi_k^{(k)}+\pi)\bmod 2\pi \neq \phi_k^{(k)},\quad \mathcal{H} = M \oplus M^\perp,\quad M^{\perp\perp} = \overline{M},\quad \Delta_{\mathrm{cut}}(\kappa_-) = \kappa_-$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 34 章 §34.9](ch34-s09-reversal-and-concept-cascade.md#sec-ch34-reversal-diagonal-and-concept-cascade)、[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§29.10](ch34-s09-reversal-and-concept-cascade.md#sec-ch34-reversal-diagonal-and-concept-cascade)、[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)）
 
 **新旧概念全连通 $K_N$、极小圆弧体“三角形稳定性”与三维空间刚性锁死**（Complete-Graph $K_N$ Comparability, Triangle-Like Stability of the Minimal Arc-Body & the 3D Rigidity Lock）
 
@@ -967,7 +967,7 @@ $\det G_k > 0 \;\Rightarrow\; D \to D+1,\quad \phi_{\mathrm{diag}}^{(k)} = (\phi
 $B^\dagger B = A^\dagger A \;\Rightarrow\; \exists U \in \mathrm{U}(m,\mathbb{C}),\; B = UA,\quad \Delta E(N) = \binom{N}{2} - (3N - 6) = \frac{(N-3)(N-4)}{2},\quad \delta_e = 2\pi - \sum_{k\ni e}\theta_k$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 34 章 §34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)、[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§29.11](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)、[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)）
 
 **量子极小圆弧微分元、路径积分缝合宏观物理与扶正的微积分对偶**（Minimal Quantum Circular-Arc Differential, Path-Integral Stitching of Macrophysics & the Righted Calculus Duality）
 
@@ -981,7 +981,7 @@ $B^\dagger B = A^\dagger A \;\Rightarrow\; \exists U \in \mathrm{U}(m,\mathbb{C}
 $1 - \cos\epsilon = \tfrac{\epsilon^2}{2} + O(\epsilon^4),\quad \lim_{N\to\infty} N\bigl(1 - \cos\tfrac{1}{\sqrt{N}}\bigr) = \tfrac{1}{2} > 0,\quad \operatorname{bargmann}(\Psi) = \Bigl(\prod_{j=0}^{n-1}\Psi_j^\dagger\Psi_{j+1}\Bigr)(\Psi_n^\dagger\Psi_0),\quad \Delta S_{\mathrm{vN}} = \sum_{k=0}^{N-1} D\bigl(\tilde{\rho}_k \,\Vert\, \Pi_{\mathrm{diag}}(\tilde{\rho}_k)\bigr) \ge 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 34 章 §34.11](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral)、[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§29.12](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral)、[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[附录 E](appendix-e.md)）
 
 **一弧生三相（线·面·体 $\leftrightarrow$ 粒子·波·场）与万物互为路径积分回环**（One Arc Begets Three Phases, Triadic Line–Surface–Volume / Particle–Wave–Field Isomorphism & Mutual Path-Integral Reversal Loop）
 
@@ -995,7 +995,7 @@ $1 - \cos\epsilon = \tfrac{\epsilon^2}{2} + O(\epsilon^4),\quad \lim_{N\to\infty
 $\sum_{h\in H} f(h) = \frac{\lvert H\rvert}{m}\sum_{k\in H^\perp}(\operatorname{ZMod.dft}\,f)(k),\quad \sum_{k\in H^\perp}\chi_k(x) = \lvert H^\perp\rvert\,\mathbf{1}_{x\in H},\quad \Lambda^0 \xrightarrow{\nabla} \Lambda^1 \xrightarrow{\nabla\times} \Lambda^2 \xrightarrow{\nabla\cdot} \Lambda^3 \to 0,\quad \operatorname{Im}\operatorname{tripleBargmann}(r_1,r_2,r_3) = \tfrac{1}{4}\,r_1\cdot(r_2\times_3 r_3)$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 34 章 §34.12](ch34-s12-triadic-duality.md#sec-ch34-triadic-duality-and-field-loop)、[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§29.13](ch34-s12-triadic-duality.md#sec-ch34-triadic-duality-and-field-loop)、[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[附录 E](appendix-e.md)）
 
 **点体同源八度螺旋（1—3—3—1 霍奇归零）、跨层重整化捏合与粒子即场对偶**（Point–Volume Octave Helix, 1—3—3—1 Hodge Reset, Cross-Level Renormalization & Particle-as-Field Duality）
 
@@ -1009,7 +1009,7 @@ $\sum_{h\in H} f(h) = \frac{\lvert H\rvert}{m}\sum_{k\in H^\perp}(\operatorname{
 $\dim\Lambda^k(\mathbb{R}^3) = (1,3,3,1),\quad (-\nabla^2 + m^2)G = \delta^{(3)},\quad \sum_{h\in H} f(h) = \tfrac{\lvert H\rvert}{m}\sum_{k\in H^\perp}(\operatorname{ZMod.dft}\,f)(k),\quad r_{\mathrm{pack}} = \tfrac{1}{2} > 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 34 章 §34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[第 10 章](ch10-gram-geometry-and-order.md)、[第 15 章](ch15-grover-qft-and-period-finding.md)、[第 31 章 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)、[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[第 10 章](ch10-gram-geometry-and-order.md)、[第 15 章](ch15-grover-qft-and-period-finding.md)、[§27.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)、[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[附录 E](appendix-e.md)）
 
 **空间路径积分生时与洛伦兹负号（$\mathbf{I}_3^2 = -1$）、标准模型 `1—2—3` 规范群封顶与“点·线·面·体”跨层八度**（Spatial Path-Integral Time, Lorentz Minus Sign $\mathbf{I}_3^2 = -1$, Standard Model `1—2—3` Gauge Ceiling & Point–Line–Surface–Volume Octave）
 
@@ -1023,7 +1023,7 @@ $\dim\Lambda^k(\mathbb{R}^3) = (1,3,3,1),\quad (-\nabla^2 + m^2)G = \delta^{(3)}
 $\mathbf{I}_3^2 = (\mathbf{e}_1\mathbf{e}_2\mathbf{e}_3)^2 = -1,\quad \det\bigl(c\,dt\,I_2 + B(d\mathbf{x})\bigr) = c^2 dt^2 - d\mathbf{x}^2,\quad \mathrm{U}(1)_Y \times \mathrm{SU}(2)_L \times \mathrm{SU}(3)_C,\quad \Lambda^3_{\mathrm{color}} \cong \Lambda^0_{\mathrm{hadron}}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 34 章 §34.14](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave)、[第 14 章](ch14-cloning-codes-and-braids.md)、[第 17 章](ch17-lorentz-geometry.md)、[第 18 章](ch18-spinors-and-gauge-curvature.md)、[第 25 章](ch25-rewriting-and-xor.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§33.2](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave)、[第 14 章](ch14-cloning-codes-and-braids.md)、[第 17 章](ch17-lorentz-geometry.md)、[第 18 章](ch18-spinors-and-gauge-curvature.md)、[把矩阵还原为异或：3 比特刀片与 XOR–Pauli 几何代数引擎](ch25-rewriting-and-xor.md)、[附录 E](appendix-e.md)）
 
 **量子门即极小圆弧体、正交门换位角盈与自底向上六层宇宙概念塔（`L0`–`L5`）**（Quantum Gates as Minimal Circular-Arc Trihedra, Orthogonal Gate-Commutator Excess & Bottom-Up Six-Tier Cosmic Concept Tower `L0`–`L5`）
 
@@ -1037,7 +1037,7 @@ $\mathbf{I}_3^2 = (\mathbf{e}_1\mathbf{e}_2\mathbf{e}_3)^2 = -1,\quad \det\bigl(
 $\gamma_{\mathrm{gate}}(\epsilon) = \arccos\!\bigl(1 - 2\sin^4\!\tfrac{\epsilon}{2}\bigr) = \Omega(\Delta\mathcal{T}_\epsilon) + O(\epsilon^4),\quad \mathcal{C}(\eta) = \lvert\sin\eta\rvert,\quad \Lambda^0_\ell \to \Lambda^1_\ell \to \Lambda^2_\ell \to \Lambda^3_\ell \overset{\star}{\longleftrightarrow} \Lambda^0_{\ell+1},\quad \hat{U}_{\mathbf{n}}(4\pi) = +I_2$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 34 章 §34.15](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower)、[第 11 章](ch11-pulses-and-virtual-z.md)、[第 13 章](ch13-entanglement-and-chsh.md)、[第 19 章](ch19-tensor-networks-and-holography.md)、[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md)、[第 39 章](ch39-observer-is-ontological-universe.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§33.3](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower)、[第 11 章](ch11-pulses-and-virtual-z.md)、[第 13 章](ch13-entanglement-and-chsh.md)、[第 19 章](ch19-tensor-networks-and-holography.md)、[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[第 36 章](ch38-observer-memory-pointer-and-ontological-qram.md)、[第 38 章](ch39-observer-is-ontological-universe.md)、[附录 E](appendix-e.md)）
 
 **破缺与守恒同体：陪集极小圆弧体（$\Delta\mathcal{T}_\epsilon \subset G/H$）、嘉当曲率拆账与五大物理概念塔谱系**（Symmetry Breaking & Conservation as One Coset Trihedron $\Delta\mathcal{T}_\epsilon \subset G/H$, Cartan–CCWZ Curvature Splitting & Five Concept-Tower Families）
 
@@ -1051,7 +1051,7 @@ $\gamma_{\mathrm{gate}}(\epsilon) = \arccos\!\bigl(1 - 2\sin^4\!\tfrac{\epsilon}
 $\cos^2\epsilon + \sin^2\epsilon = 1,\quad F^i(\omega) = -\frac{1}{2}f^i_{ab}\,e^a \wedge e^b,\quad 2_{\Lambda^2} + 1_{\Lambda^1} = 3_{\Lambda^3},\quad B = \frac{1}{24\pi^2}\int_{S^3}\operatorname{Tr}\bigl((U^{-1}dU)^3\bigr) \in \mathbb{Z},\quad \Phi_0 = \frac{h}{2e}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 34 章 §34.16](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers)、[第 8 章](ch08-erasure-and-time-arrows.md)、[第 9 章](ch09-axes-and-state-addressing.md)、[第 17 章](ch17-lorentz-geometry.md)、[第 18 章](ch18-spinors-and-gauge-curvature.md)、[第 33 章](ch33-all-beings-observers-and-mutual-attractors.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§33.4](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers)、[第 8 章](ch08-erasure-and-time-arrows.md)、[第 9 章](ch09-axes-and-state-addressing.md)、[第 17 章](ch17-lorentz-geometry.md)、[第 18 章](ch18-spinors-and-gauge-curvature.md)、[第 34 章](ch33-all-beings-observers-and-mutual-attractors.md)、[附录 E](appendix-e.md)）
 
 **跨边界极小圆弧体纠缠、“受限不妄我”偏迹视界、模流有效温度与热力学四律**（Cross-Horizon Entanglement Arc-Bodies, Bounded Non-Presumption Partial Trace, Modular Temperature & Laws of Thermodynamics）
 
@@ -1065,7 +1065,7 @@ $\cos^2\epsilon + \sin^2\epsilon = 1,\quad F^i(\omega) = -\frac{1}{2}f^i_{ab}\,e
 $S_{\mathrm{global}}(\lvert\Psi_{AB}\rangle\langle\Psi_{AB}\rvert) = 0,\quad S_A(\theta) = -\cos^2\theta\ln\cos^2\theta - \sin^2\theta\ln\sin^2\theta,\quad \frac{k_B T_{\mathrm{eff}}(\theta)}{\Delta E} = \frac{1}{2\ln\cot\theta},\quad \beta Q \ge -\Delta S_A$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 34 章 §34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)、[第 4 章](ch04-decoherence.md)、[第 8 章](ch08-erasure-and-time-arrows.md)、[第 30 章 §30.5](ch30-s05-entanglement-and-entropy.md#sec-ch30-entanglement-entropy-complexity-triad)、[第 38 章 §38.5](ch38-s05-escape-ledger-and-entropy.md#sec-ch38-observer-escape-ledger)、[附录 D](appendix-d.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§34.6](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)、[第 4 章](ch04-decoherence.md)、[第 8 章](ch08-erasure-and-time-arrows.md)、[§26.5](ch30-s05-entanglement-and-entropy.md#sec-ch30-entanglement-entropy-complexity-triad)、[§36.6](ch38-s05-escape-ledger-and-entropy.md#sec-ch38-observer-escape-ledger)、[附录 D](appendix-d.md)、[附录 E](appendix-e.md)）
 
 **格拉姆窗口（$\mathcal{W}_M$）、舒尔补可行性走廊、遗忘重开与弦图局部—全局共识拼图**（Gram Window $\mathcal{W}_M$, Schur Feasibility Corridor, Forgetting Reopening & Chordal Consensus）
 
@@ -1079,12 +1079,12 @@ $S_{\mathrm{global}}(\lvert\Psi_{AB}\rangle\langle\Psi_{AB}\rvert) = 0,\quad S_A
 $\det G_{M+1} = (\det G_M)\bigl(1 - \mathbf{c}_M^\top G_M^{-1}\mathbf{c}_M\bigr),\quad N \le d,\quad q_M = \ln\frac{\lvert\Omega_{M-1}\rvert}{\lvert\Omega_M\rvert},\quad B^\dagger B = A^\dagger A \implies B = UA$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 34 章 §34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)、[第 10 章](ch10-gram-geometry-and-order.md)、[第 29 章](ch29-timeless-causality-and-gram-space.md)、[第 33 章](ch33-all-beings-observers-and-mutual-attractors.md)、[第 35 章](ch35-light-pulse-and-self-referential-table.md)、[第 37 章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)、[第 10 章](ch10-gram-geometry-and-order.md)、[第 25 章](ch29-timeless-causality-and-gram-space.md)、[第 34 章](ch33-all-beings-observers-and-mutual-attractors.md)、[§35.1](ch35-light-pulse-and-self-referential-table.md)、[§36.1](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)）
 
 **往返双投影玻恩平方律（$\cos^2\theta$）、方位角盲锥与 $90^\circ$ 正交盲区“对‘我’不见即为‘虚’（$i$）”**（Round-Trip Double Projection $\cos^2\theta$, Azimuthal Blind Cone & Imaginary Blind Plane $i$）
 
 **本书几何直觉语言 (Geometric Intuition Term)：**
-**观察者薛定谔—海森堡迭代拉回迹恒等式、完备记录测量秩一玻恩迹配对权重与纯态模平方约化、有限维玻恩概率三元骨架、共同相位不变多项式电荷平衡与最低二次厄米唯一表出、拉格朗日—格拉姆二元楔积余项恒等式、闭子空间正交补投影六恒等式、任意对角可观测量族对等权叠加态相对相位盲区定理、罗伯逊—薛定谔方差—协方差—换位子精确勾股恒等式、反厄米幺正矩阵与平衡相对复结构平方负一刚性（$R^2 = -I_n$）以及厄米演化投影概率换位子时间导数流定理，连同观测划分拓扑不可分商核与圆周双覆叠历史路径提升定理（`LEAN ✓`）；配对无外部第 3 点 $C$ 下观察者自身轴 $\mathbf{I}$ 与被测态 $\mathbf{V}$ 的往返双投影算子链 $P_{\mathbf{I}} P_{\mathbf{V}} P_{\mathbf{I}} = (\cos^2\theta) P_{\mathbf{I}}$（单程投影 $\cos\theta$ 携带未定规范相位且不能作概率，往返闭合回波锁定玻恩平方权重 $\cos^2\theta$ 与正交盲区赤字 $\sin^2\theta$）、同极角 $\theta$ 盲锥纤维 $\mathbf{V}(\theta,\varphi) = \cos\theta\,\mathbf{I} + \sin\theta(\cos\varphi\,\mathbf{e}_1 + \sin\varphi\,\mathbf{e}_2)$（在 Dottie 角 $\theta^* \approx 42.346459^\circ$ 处回波恒为 $0.546247$、盲锥立体角 $2\pi(1-\cos\theta^*) \approx 1.639376\;\mathrm{sr}$、盲圆周长 $2\pi\sin\theta^* \approx 4.232429$）、第一人称沿 $\mathbf{I}$ 视线正交切平面双向量 $\hat{\mathbf{I}}_{\perp} = \mathbf{e}_1\wedge\mathbf{e}_2$ 两次 $90^\circ$ 转向还原 $\hat{\mathbf{I}}_{\perp}^2 = -1$（第一次 $90^\circ$ 落入 $\mathbf{I}\cdot\mathbf{e}_\perp = 0$ 盲区“对 `I` 不见故名虚 `i`”，第二次 $90^\circ$ 重返 $-\mathbf{I}$ 可见负向）及薛定谔复圆弧保范演化 $\lVert e^{-i\omega t}\psi_0\rVert^2 \equiv 1$ 对比无 $i$ 实衰减 $\lVert e^{-\gamma t}\psi_0\rVert^2 = e^{-2\gamma t}$ 的六位小数基准表（`手工推导` / `NUM`），连同 Malus（1809）$\cos^2\theta$ 定律、Born（1926）概率诠释、Lüders（1951）投影更新、Gleason（1957）测度定理、Descartes（1637）与 Gauss（1831）虚数几何化、Stueckelberg（1960）实希尔伯特空间反对称复结构 $J^2 = -I$ 及 Renou 等人（2021）三节点实量子网络理论不等价与可证伪实验方案（`文献结果`），完成第三十四章前十九阶观察者第一人称几何闭环（`MODEL`）**
+**观察者薛定谔—海森堡迭代拉回迹恒等式、完备记录测量秩一玻恩迹配对权重与纯态模平方约化、有限维玻恩概率三元骨架、共同相位不变多项式电荷平衡与最低二次厄米唯一表出、拉格朗日—格拉姆二元楔积余项恒等式、闭子空间正交补投影六恒等式、任意对角可观测量族对等权叠加态相对相位盲区定理、罗伯逊—薛定谔方差—协方差—换位子精确勾股恒等式、反厄米幺正矩阵与平衡相对复结构平方负一刚性（$R^2 = -I_n$）以及厄米演化投影概率换位子时间导数流定理，连同观测划分拓扑不可分商核与圆周双覆叠历史路径提升定理（`LEAN ✓`）；配对无外部第 3 点 $C$ 下观察者自身轴 $\mathbf{I}$ 与被测态 $\mathbf{V}$ 的往返双投影算子链 $P_{\mathbf{I}} P_{\mathbf{V}} P_{\mathbf{I}} = (\cos^2\theta) P_{\mathbf{I}}$（单程投影 $\cos\theta$ 携带未定规范相位且不能作概率，往返闭合回波锁定玻恩平方权重 $\cos^2\theta$ 与正交盲区赤字 $\sin^2\theta$）、同极角 $\theta$ 盲锥纤维 $\mathbf{V}(\theta,\varphi) = \cos\theta\,\mathbf{I} + \sin\theta(\cos\varphi\,\mathbf{e}_1 + \sin\varphi\,\mathbf{e}_2)$（在 Dottie 角 $\theta^* \approx 42.346459^\circ$ 处回波恒为 $0.546247$、盲锥立体角 $2\pi(1-\cos\theta^*) \approx 1.639376\;\mathrm{sr}$、盲圆周长 $2\pi\sin\theta^* \approx 4.232429$）、第一人称沿 $\mathbf{I}$ 视线正交切平面双向量 $\hat{\mathbf{I}}_{\perp} = \mathbf{e}_1\wedge\mathbf{e}_2$ 两次 $90^\circ$ 转向还原 $\hat{\mathbf{I}}_{\perp}^2 = -1$（第一次 $90^\circ$ 落入 $\mathbf{I}\cdot\mathbf{e}_\perp = 0$ 盲区“对 `I` 不见故名虚 `i`”，第二次 $90^\circ$ 重返 $-\mathbf{I}$ 可见负向）及薛定谔复圆弧保范演化 $\lVert e^{-i\omega t}\psi_0\rVert^2 \equiv 1$ 对比无 $i$ 实衰减 $\lVert e^{-\gamma t}\psi_0\rVert^2 = e^{-2\gamma t}$ 的六位小数基准表（`手工推导` / `NUM`），连同 Malus（1809）$\cos^2\theta$ 定律、Born（1926）概率诠释、Lüders（1951）投影更新、Gleason（1957）测度定理、Descartes（1637）与 Gauss（1831）虚数几何化、Stueckelberg（1960）实希尔伯特空间反对称复结构 $J^2 = -I$ 及 Renou 等人（2021）三节点实量子网络理论不等价与可证伪实验方案（`文献结果`），完成第二十九章观察者第一人称几何枢纽（`MODEL`）**
 
 **Lean 4 形式对象 / 锁定声明 GID：**
 [`observer_pullback_trace_identity`](lean:D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity), [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight), [`rank_one_pure_state_modulus_square_reduction`](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction), [`born_probability_skeleton`](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton), [`complete_common_phase_polynomial_theorem`](lean:D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem), [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity), [`orthogonal_complement_projection_identities`](lean:D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities), [`diagonal_prime_observables_cannot_recover_relative_phase`](lean:D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase), [`robertson_schrodinger`](lean:D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger), [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary), [`relativeComplexStructure_square`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square), [`projection_probability_flow`](lean:D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow), [`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel), [`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift), [`energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary)
@@ -1093,7 +1093,7 @@ $\det G_{M+1} = (\det G_M)\bigl(1 - \mathbf{c}_M^\top G_M^{-1}\mathbf{c}_M\bigr)
 $P_{\mathbf{I}} P_{\mathbf{V}} P_{\mathbf{I}} = (\cos^2\theta)\,P_{\mathbf{I}},\quad \cos^2\theta + \sin^2\theta = 1,\quad R^\dagger = -R \land RR^\dagger = I \implies R^2 = -I,\quad \frac{d}{dt}\operatorname{Tr}(\rho_t P) = \operatorname{Re}\bigl(i\operatorname{Tr}(\rho_t[H,P])\bigr)$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 34 章 §34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[第 2 章](ch02-born-rule.md)、[第 5 章](ch05-complex-phase-and-rotors.md)、[第 12 章](ch12-measurement-computation-and-gradients.md)、[第 31 章 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)、[第 35 章](ch35-light-pulse-and-self-referential-table.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[第 2 章](ch02-born-rule.md)、[第 5 章](ch05-complex-phase-and-rotors.md)、[第 12 章](ch12-measurement-computation-and-gradients.md)、[§27.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)、[§35.1](ch35-light-pulse-and-self-referential-table.md)）
 
 **球面吸引盆、有界鞅抽样律与单次记录选支实现边界**（Spherical Attractor Basins, Bounded-Martingale Sampling Laws & Single-Outcome Selection Boundary）
 
@@ -1107,7 +1107,7 @@ $P_{\mathbf{I}} P_{\mathbf{V}} P_{\mathbf{I}} = (\cos^2\theta)\,P_{\mathbf{I}},\
 $\operatorname{Tr}(\rho\,\lvert v\rangle\langle v\rvert) = \langle v, \rho v\rangle,\quad \Phi_{\mathcal{R}}^2 = \Phi_{\mathcal{R}},\quad \bigl(\mathbb{E}[Z_\tau] = Z_0 = p_0,\; Z_\tau \in \{0, 1\}\;\text{a.s.}\bigr) \implies \mathbb{P}(Z_\tau = 1\mid Z_0 = p_0) = p_0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `MODEL` / `OPEN`（[第 34 章 §34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)、[附录 C](appendix-c.md)、[附录 D](appendix-d.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `MODEL` / `OPEN`（[§34.8](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)、[附录 C](appendix-c.md)、[附录 D](appendix-d.md)、[附录 E](appendix-e.md)）
 
 **感知—行动闭环、格拉姆可行走廊内的因果干预与锚定和乐控制**（Perception–Action Loop, Causal Intervention in the Gram Corridor & Anchored Holonomy Control）
 
@@ -1121,7 +1121,7 @@ $\operatorname{Tr}(\rho\,\lvert v\rangle\langle v\rvert) = \langle v, \rho v\ran
 $[R_a, R_b] \neq 0,\quad T \cdot \Delta E \ge \hbar\,\arccos\lvert\langle\psi_0\mid\psi_T\rangle\rvert,\quad \Delta_{\mathrm{Schur}}(\mathbf{u}) = 1 - \mathbf{c}(\mathbf{u})^\top G_M^{-1}\mathbf{c}(\mathbf{u}) \ge 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `MODEL`（[第 34 章 §34.21](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy)、[第 18 章](ch18-spinors-and-gauge-curvature.md)、[附录 D](appendix-d.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `MODEL`（[§34.9](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy)、[第 18 章](ch18-spinors-and-gauge-curvature.md)、[附录 D](appendix-d.md)、[附录 E](appendix-e.md)）
 
 **八度记忆重整化、预测充分统计蒸馏与最小兰道尔散热**（Octave Memory Renormalization, Predictive Sufficient-Statistic Distillation & Minimal Landauer Dissipation）
 
@@ -1135,7 +1135,7 @@ $[R_a, R_b] \neq 0,\quad T \cdot \Delta E \ge \hbar\,\arccos\lvert\langle\psi_0\
 $D(\mathcal{N}(\rho)\,\|\,\mathcal{N}(\sigma)) \le D(\rho\,\|\,\sigma),\quad I(Q(H); Y) \le I(H; Y),\quad Q_{\mathrm{erase}}^{\min} = k_B T \ln 2 \cdot H(H \mid Q_\star(H))$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `MODEL`（[第 34 章 §34.22](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning)、[§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)、[第 35 章](ch35-light-pulse-and-self-referential-table.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `MODEL`（[§34.10](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning)、[§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)、[§35.1](ch35-light-pulse-and-self-referential-table.md)）
 
 **共享热力学时间箭头、过去假设双重初值与宇宙学常数视界反循环边界**（Shared Thermodynamic Arrow, Twin Past-Hypothesis Initial Conditions & Horizon Anti-Circularity Boundary for $\Lambda_{\mathrm{cos}}$）
 
@@ -1149,7 +1149,7 @@ $D(\mathcal{N}(\rho)\,\|\,\mathcal{N}(\sigma)) \le D(\rho\,\|\,\sigma),\quad I(Q
 $\Delta S_A + \Delta S_B = \Delta I(A{:}B),\quad I(A{:}B)_{\rho_A\otimes\rho_B} = 0,\quad \Lambda_{\mathrm{cos}}\ell_P^2 = \frac{3\pi}{S_{\mathrm{dS}}}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `MODEL` / `OPEN`（[第 34 章 §34.23](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor)、[第 38 章 §38.6–§38.7](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp)、[附录 C](appendix-c.md)、[附录 D](appendix-d.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `MODEL` / `OPEN`（[§34.11](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor)、[§36.7–§36.8](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp)、[附录 C](appendix-c.md)、[附录 D](appendix-d.md)、[附录 E](appendix-e.md)）
 
 **绕向奇偶相消、偶正定矢高合成与自旋-$2$ 引力动力学边界**（Orientation Parity Cancellation, Even Positive Sagitta Composition & Spin-$2$ Gravitational Boundary）
 
@@ -1163,7 +1163,7 @@ $\Delta S_A + \Delta S_B = \Delta I(A{:}B),\quad I(A{:}B)_{\rho_A\otimes\rho_B} 
 $\operatorname{Im}\Delta_3(u,w,v) = -\operatorname{Im}\Delta_3(u,v,w),\quad 1 - \cos\epsilon = 2\sin^2\frac{\epsilon}{2} \ge 0,\quad V_{\mathrm{static}}^{(s)}(r) \propto (-1)^s\,\frac{g_s^2}{4\pi r}e^{-m_s r}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `MODEL` / `OPEN`（[第 34 章 §34.24](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition)、[§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)、[附录 C](appendix-c.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `MODEL` / `OPEN`（[§33.5](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition)、[§29.11](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)、[附录 C](appendix-c.md)、[附录 E](appendix-e.md)）
 
 **三代手征费米子候选机制反例审计与标准模型连续耦合参数边界**（Countermodel Audit of Three-Generation Models & the Quantitative Boundary of Standard Model Couplings）
 
@@ -1177,7 +1177,7 @@ $\operatorname{Im}\Delta_3(u,w,v) = -\operatorname{Im}\Delta_3(u,v,w),\quad 1 - 
 $\sum_{\text{1 gen}} Y_f^3 = 3\Bigl(\frac{1}{6}\Bigr)^3\!\cdot 2 + 3\Bigl(-\frac{2}{3}\Bigr)^3 + 3\Bigl(\frac{1}{3}\Bigr)^3 + \Bigl(-\frac{1}{2}\Bigr)^3\!\cdot 2 + 1^3 = 0,\quad N_{\mathrm{CP}}(N_{\mathrm{gen}}) = \frac{(N_{\mathrm{gen}}-1)(N_{\mathrm{gen}}-2)}{2}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `MODEL` / `OPEN`（[第 34 章 §34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary)、[§34.14](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave)、[附录 C](appendix-c.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `MODEL` / `OPEN`（[§33.6](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary)、[§33.2](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave)、[附录 C](appendix-c.md)、[附录 E](appendix-e.md)）
 
 **极小圆弧体内割弦面、打破排序壁垒的枢轴八度重整化与瞬子隧穿**（Minimal Arc-Trihedron Interior-Chord Cuts, Pivot Octave Renormalization Breaking the Sorting Barrier & Instanton Tunneling）
 
@@ -1191,7 +1191,7 @@ $\sum_{\text{1 gen}} Y_f^3 = 3\Bigl(\frac{1}{6}\Bigr)^3\!\cdot 2 + 3\Bigl(-\frac
 $L_{\mathrm{tunnel}}(\epsilon) = \sqrt{2}\sin\epsilon < L_{\mathrm{cap}}(\epsilon) = \arccos(\cos^2\epsilon) < L_{\mathrm{walls}}(\epsilon) = 2\epsilon,\quad W_{\mathrm{eff}}(p_1, p_2) = \min\bigl(W_{p_1 p_2}, \min_{b\in\mathrm{Int}}(W_{p_1 b} + W_{b p_2})\bigr),\quad X \simeq \sum_{b:B}\operatorname{ConceptFiber}(q_C, b)$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 34 章 §34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization)、[§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)、[§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[第 7 章](ch07-geometric-time-and-speed-limits.md)、[第 19 章](ch19-tensor-networks-and-holography.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§30.1](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization)、[§29.5](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)、[§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[第 7 章](ch07-geometric-time-and-speed-limits.md)、[第 19 章](ch19-tensor-networks-and-holography.md)）
 
 **正交虚空间割弦隧穿与阿秒时间双缝跨时刻自干涉**（Orthogonal Imaginary-Chord Tunneling & Attosecond Temporal Double-Slit Self-Interference）
 
@@ -1205,7 +1205,7 @@ $L_{\mathrm{tunnel}}(\epsilon) = \sqrt{2}\sin\epsilon < L_{\mathrm{cap}}(\epsilo
 $\exp\!\bigl(\tfrac{\hat{\mathbf{i}}}{\hbar}(\hat{\mathbf{i}}\hbar\kappa)x\bigr) = e^{-\kappa x},\quad \Delta E = \frac{h}{\Delta t},\quad \lVert\rho - \mathcal{P}(\rho)\rVert_{\mathrm{HS}}^2 = \lvert\rho_{01}\rvert^2 + \lvert\rho_{10}\rvert^2,\quad \sum_{n=0}^{N-1} p_{n+1} + s_N = 1$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 34 章 §34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit)、[§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)、[§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization)、[§34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)、[第 7 章](ch07-geometric-time-and-speed-limits.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§30.2](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit)、[§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)、[§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§30.1](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization)、[§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)、[第 7 章](ch07-geometric-time-and-speed-limits.md)、[附录 E](appendix-e.md)）
 
 **黎曼路径积分与素数极小圆弧体：欧拉绕行算子、半密度平方律与临界线相消**（The Riemann Path Integral & Prime Minimal Arc-Trihedra: Euler Winding Operators, Half-Density Square Law & Critical-Line Cancellation）
 
@@ -1219,7 +1219,7 @@ $\exp\!\bigl(\tfrac{\hat{\mathbf{i}}}{\hbar}(\hat{\mathbf{i}}\hbar\kappa)x\bigr)
 $\zeta(\sigma + \hat{\mathbf{i}}t) = \prod_{p\in\mathbb{P}}(1 - p^{-s})^{-1} = \sum_{n=1}^{\infty} e^{-\sigma\ln n}e^{-\hat{\mathbf{i}}t\ln n}\;(\sigma > 1),\quad \lvert\psi_n\rvert^2 = n^{-2\sigma} = n^{-1} \iff \sigma = \frac{1}{2},\quad \operatorname{Im}\operatorname{xiReading}\!\bigl(\tfrac{1}{2}+it\bigr) = 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 34 章 §34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)、[§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit)、[§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)、[第 22 章 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4)、[附录 C](appendix-c.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)、[§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§30.2](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit)、[§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)、[第 22 章 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4)、[附录 C](appendix-c.md)）
 
 **算术枢轴重整与临界带多级共振隧穿：直面图兰芝诺陷阱与叩问 4/7 磨光器墙**（Arithmetic Pivot Renormalization & Multi-Stage Critical-Strip Resonant Tunneling: Confronting the Turán–Zeno Trap & Probing the 4/7 Mollifier Wall）
 
@@ -1233,7 +1233,7 @@ $\zeta(\sigma + \hat{\mathbf{i}}t) = \prod_{p\in\mathbb{P}}(1 - p^{-s})^{-1} = \
 $\widetilde{G}_{PP}^{(\ell)} = G_{PP}^{(\ell)} - G_{PI}^{(\ell)}\bigl(G_{II}^{(\ell)}\bigr)^+ G_{IP}^{(\ell)} \succeq 0,\quad \lVert w(s)\rVert = \Bigl\lvert\frac{s-1}{s}\Bigr\rvert = 1 \iff \operatorname{Re}(s) = \frac{1}{2},\quad \vartheta = \frac{4}{7}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 34 章 §34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)、[§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization)、[§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit)、[§34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)、[§34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes)、[第 22 章 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4)、[附录 C](appendix-c.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)、[§30.1](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization)、[§30.2](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit)、[§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)、[§30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes)、[第 22 章 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4)、[附录 C](appendix-c.md)）
 
 **极小圆弧体微积分重塑：以旋代差、矢高相变与有限精度斯托克斯定理**（Rebuilding Calculus from Minimal Circular-Arc Bodies: Rotor Differentials, the Sagitta Phase Transition & Finite-Precision Stokes Exactness）
 
@@ -1247,12 +1247,12 @@ $\widetilde{G}_{PP}^{(\ell)} = G_{PP}^{(\ell)} - G_{PI}^{(\ell)}\bigl(G_{II}^{(\
 $(1 - v_\epsilon)^2 + c_\epsilon^2 \equiv 1,\quad D_{\mathrm{cs}}[f]\!\bigl(x_0;\epsilon\bigr) = \frac{1}{\epsilon}\operatorname{Im}f(x_0+\hat{\mathbf{i}}\epsilon),\quad \Sigma_{\mathrm{sag}}(\epsilon,\alpha) \sim \frac{1}{2}\sigma_0^2 T\,\epsilon^{2\alpha-1},\quad \sum_{k=1}^M(d_\epsilon\Phi_\epsilon)(\Delta\mathcal{T}_k) \equiv \sum_{e\subset\partial\Sigma}\Phi_\epsilon(e)$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 34 章 §34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes)、[§34.8](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling)、[§34.11](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral)、[§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§34.21](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy)、[§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)、[§34.31](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler)、[附录 C](appendix-c.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes)、[§29.9](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling)、[§29.12](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral)、[§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§34.9](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy)、[§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)、[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler)、[附录 C](appendix-c.md)、[附录 E](appendix-e.md)）
 
 **极小圆弧体微积分切入黎曼猜想：二阶弦弧矢高相变、埃尔米特—比勒径向单调锁与有限精度斯托克斯相消**（Minimal Circular-Arc Calculus Applied to the Riemann Hypothesis: Second-Order Sagitta Phase Transition, Hermite–Biehler Radial Monotonicity Lock & Finite-Precision Stokes Cancellation）
 
 **本书几何直觉语言 (Geometric Intuition Term)：**
-**右半平面 $\operatorname{Re}(s) > 1$ 欧拉—狄利克雷恒等式、梅滕斯第三定理截断欧拉乘积渐近式 $\prod_{p\le\lfloor x\rfloor}(1 - 1/p) \sim e^{-\gamma}/\ln x$、完备读数 $\xi(s) = \operatorname{xiReading}(s)$ 全平面复可微性、整函数反射对称 $\xi(1-s)=\xi(s)$、反射—复共轭协变 $\xi(1-\bar{s})=\overline{\xi(s)}$ 与临界带非平凡零点等价律、完全对称四次整函数离线四元组非局域化反例 `offCriticalQuartic`、右半临界带 $\frac{1}{2} < \operatorname{Re}(\rho) < 1$ 无零点对黎曼猜想的充分归约、任意交换群单纯形二上链修复与 $d^2=0$ 正合充要判据以及严格正定内部块下埃尔米特分块舒尔补二次型变分极小定理（`LEAN ✓`）；配对 $\sigma > \frac{1}{4}$ 四阶余项收敛域下素数比较旋子累计矢高在临界脊线 $\sigma = \frac{1}{2}$ 首次发散 $-\frac{1}{2}\ln\varepsilon_{\mathrm{self}} + C_{\mathrm{sag}} + \mathcal{O}(\varepsilon_{\mathrm{self}})$（精确常数 $C_{\mathrm{sag}} = \frac{M}{2} + \Delta C_{\mathrm{sag}} \approx 0.13074861 - 0.01860282 = +0.11214579$ 及前五素数有理部分和 $\Sigma_{\mathrm{sag}}(\frac{1}{2}; 11) \approx 0.61588148$ 对比欧拉区 $\Sigma_{\mathrm{sag}}(1; 11) \approx 0.21171004$）、任意有限孔径 $\epsilon$ 下零 $\epsilon^2$ 截断误差的正逆推进双壳恒等式 $\Delta_\epsilon^{\mathrm{HB}}(u,t) \equiv 2\epsilon\operatorname{Re}(\overline{\xi(s)}\xi'(s)) \equiv \epsilon\frac{\partial}{\partial u}\lvert\xi(\frac{1}{2}+u+\hat{\mathbf{i}}t)\rvert^2$、全纯埃尔米特—比勒对合 $E_\epsilon^\#(s) = \overline{E_\epsilon(1-\bar{s})} = E_\epsilon(1-s)$ 诱导的去奇点整函数再生核 $K_\epsilon(w,s) \equiv \frac{\xi'(s)\overline{\xi(w)}+\xi(s)\overline{\xi'(w)}}{2[(s-1/2)+(\bar{w}-1/2)]}$ 及其与 RH 的双向等价和任意重数 $m \ge 1$ 离轴零点唯一性定理排除、完整四重伪零点模方导数平方和分解 $\frac{\partial}{\partial u}F_{\mathrm{rogue},4}(u,\gamma_0) < 0$（$t = \gamma_1,\; \delta = 0.20,\; u = 0.10,\; \epsilon = 0.10$ 处 $-4.78267581\times 10^{-7} < 0$ 对比真零点对 $+3.99429305\times 10^{-4} > 0$）以及跨前五颗零点频带 $[10, 35]$ 的有限网格斯托克斯绕数对消（$u_0 = -0.10$ 捕获 $10\pi \approx 31.4159265359$ 对比 $u_0 = +0.10$ 零误差锁定 `0.0000000000`，区分连续棱积分上链与 $\lvert\Delta_e\arg\xi\rvert < \pi$ 顶点主值采样，`手工推导` / `NUM`），连同 Mertens（1874）素数倒数和第二定理、Davenport（2000）成对阿达马乘积、Gonek–Hughes–Keating（2007）混合逼近、de Branges（1968, 1986, 1992, 1994）整函数希尔伯特空间与移位纲领、Lagarias（1999, 2006）核半正定等价定理、Conrey & Li（2000）第 $34$ 颗零点 $\rho_{34}$ 对裸单位平移正定充分条件的反驳以及 Sondow & Dumitrescu（2010）径向严格单调等价定理（`文献结果`；经典 ZFC 下的黎曼猜想 `conj-riemann-hypothesis` 与乘性舒尔枢轴整函数修饰子核正定桥接引理 `prob-ch34-schur-hb-kernel-positivity-bridge` 严格保持为 `OPEN`），统一收束整座第三十四章三十一节全景穹顶与交互实验室 `arc-calculus-riemann-hermite-biehler-sandbox`（`RIEMANN//STOKES`，`MODEL`）**
+**右半平面 $\operatorname{Re}(s) > 1$ 欧拉—狄利克雷恒等式、梅滕斯第三定理截断欧拉乘积渐近式 $\prod_{p\le\lfloor x\rfloor}(1 - 1/p) \sim e^{-\gamma}/\ln x$、完备读数 $\xi(s) = \operatorname{xiReading}(s)$ 全平面复可微性、整函数反射对称 $\xi(1-s)=\xi(s)$、反射—复共轭协变 $\xi(1-\bar{s})=\overline{\xi(s)}$ 与临界带非平凡零点等价律、完全对称四次整函数离线四元组非局域化反例 `offCriticalQuartic`、右半临界带 $\frac{1}{2} < \operatorname{Re}(\rho) < 1$ 无零点对黎曼猜想的充分归约、任意交换群单纯形二上链修复与 $d^2=0$ 正合充要判据以及严格正定内部块下埃尔米特分块舒尔补二次型变分极小定理（`LEAN ✓`）；配对 $\sigma > \frac{1}{4}$ 四阶余项收敛域下素数比较旋子累计矢高在临界脊线 $\sigma = \frac{1}{2}$ 首次发散 $-\frac{1}{2}\ln\varepsilon_{\mathrm{self}} + C_{\mathrm{sag}} + \mathcal{O}(\varepsilon_{\mathrm{self}})$（精确常数 $C_{\mathrm{sag}} = \frac{M}{2} + \Delta C_{\mathrm{sag}} \approx 0.13074861 - 0.01860282 = +0.11214579$ 及前五素数有理部分和 $\Sigma_{\mathrm{sag}}(\frac{1}{2}; 11) \approx 0.61588148$ 对比欧拉区 $\Sigma_{\mathrm{sag}}(1; 11) \approx 0.21171004$）、任意有限孔径 $\epsilon$ 下零 $\epsilon^2$ 截断误差的正逆推进双壳恒等式 $\Delta_\epsilon^{\mathrm{HB}}(u,t) \equiv 2\epsilon\operatorname{Re}(\overline{\xi(s)}\xi'(s)) \equiv \epsilon\frac{\partial}{\partial u}\lvert\xi(\frac{1}{2}+u+\hat{\mathbf{i}}t)\rvert^2$、全纯埃尔米特—比勒对合 $E_\epsilon^\#(s) = \overline{E_\epsilon(1-\bar{s})} = E_\epsilon(1-s)$ 诱导的去奇点整函数再生核 $K_\epsilon(w,s) \equiv \frac{\xi'(s)\overline{\xi(w)}+\xi(s)\overline{\xi'(w)}}{2[(s-1/2)+(\bar{w}-1/2)]}$ 及其与 RH 的双向等价和任意重数 $m \ge 1$ 离轴零点唯一性定理排除、完整四重伪零点模方导数平方和分解 $\frac{\partial}{\partial u}F_{\mathrm{rogue},4}(u,\gamma_0) < 0$（$t = \gamma_1,\; \delta = 0.20,\; u = 0.10,\; \epsilon = 0.10$ 处 $-4.78267581\times 10^{-7} < 0$ 对比真零点对 $+3.99429305\times 10^{-4} > 0$）以及跨前五颗零点频带 $[10, 35]$ 的有限网格斯托克斯绕数对消（$u_0 = -0.10$ 捕获 $10\pi \approx 31.4159265359$ 对比 $u_0 = +0.10$ 零误差锁定 `0.0000000000`，区分连续棱积分上链与 $\lvert\Delta_e\arg\xi\rvert < \pi$ 顶点主值采样，`手工推导` / `NUM`），连同 Mertens（1874）素数倒数和第二定理、Davenport（2000）成对阿达马乘积、Gonek–Hughes–Keating（2007）混合逼近、de Branges（1968, 1986, 1992, 1994）整函数希尔伯特空间与移位纲领、Lagarias（1999, 2006）核半正定等价定理、Conrey & Li（2000）第 $34$ 颗零点 $\rho_{34}$ 对裸单位平移正定充分条件的反驳以及 Sondow & Dumitrescu（2010）径向严格单调等价定理（`文献结果`；经典 ZFC 下的黎曼猜想 `conj-riemann-hypothesis` 与乘性舒尔枢轴整函数修饰子核正定桥接引理 `prob-ch34-schur-hb-kernel-positivity-bridge` 严格保持为 `OPEN`），统一收束整座第三十一章全景穹顶与交互实验室 `arc-calculus-riemann-hermite-biehler-sandbox`（`RIEMANN//STOKES`，`MODEL`）**
 
 **Lean 4 形式对象 / 锁定声明 GID：**
 [`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product), [`E₃.bound''`](lean:D5/S3/Weil/Mertens/Third.E₃.bound''), [`xi_reading_differentiable`](lean:D5/S3/Zeros/CompletedZeta.xi_reading_differentiable), [`xi_reading_reflection`](lean:D5/S3/Zeros/CompletedZeta.xi_reading_reflection), [`xi_reading_one_sub_conj`](lean:D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj), [`xiReading_eq_zero_iff_nontrivial`](lean:D5/S3/Analytic/ShiftedXiPoisson/ShiftedPoissonSemigroup.xiReading_eq_zero_iff_nontrivial), [`full_symmetry_not_fixed_line_localization`](lean:D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization), [`golden_right_half_strip_implies_rh`](lean:D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh), [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness), [`schur_quadratic_is_least`](lean:D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least)
@@ -1261,7 +1261,7 @@ $(1 - v_\epsilon)^2 + c_\epsilon^2 \equiv 1,\quad D_{\mathrm{cs}}[f]\!\bigl(x_0;
 $\Sigma_{\mathrm{sag}}(\tfrac{1}{2}; P_\epsilon) = -\frac{1}{2}\ln\varepsilon_{\mathrm{self}} + C_{\mathrm{sag}} + \mathcal{O}(\varepsilon_{\mathrm{self}}),\quad \Delta_\epsilon^{\mathrm{HB}}(u,t) \equiv \epsilon\frac{\partial}{\partial u}\lvert\xi\rvert^2 = 4u\epsilon K_\epsilon(s,s),\quad K_\epsilon \succeq 0 \iff \operatorname{RH},\quad \sum_{e\subset\partial\mathcal{R}}\Phi_\xi(e) \equiv 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 34 章 §34.31](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler)、[§34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)、[§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)、[§34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes)、[第 22 章 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4)、[第 35 章](ch35-light-pulse-and-self-referential-table.md)、[附录 C](appendix-c.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler)、[§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)、[§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)、[§30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes)、[第 22 章 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4)、[§35.1](ch35-light-pulse-and-self-referential-table.md)、[附录 C](appendix-c.md)）
 
 **内生贝里和乐、有限巴格曼路径乘积与比较公理 $\mathcal{A}_0$ 推论链的后贝里九桥（`H1`–`H9`）审计**（Endogenous Berry Holonomy, Finite Bargmann Path Product & Nine-Bridge (`H1`–`H9`) Post-Berry Audit of $\mathcal{A}_0$ Corollaries）
 
@@ -1275,7 +1275,7 @@ $\Sigma_{\mathrm{sag}}(\tfrac{1}{2}; P_\epsilon) = -\frac{1}{2}\ln\varepsilon_{\
 $\operatorname{Tr}\bigl(P(\mathbf{e}_3)P(\mathbf{e}_1)P(\pm\mathbf{e}_2)\bigr) = \frac{1 \pm i}{4},\quad \operatorname{Tr}(R_0\cdots R_n) = \Bigl(\prod_{j=0}^{n-1}\langle\Psi_j,\Psi_{j+1}\rangle\Bigr)\langle\Psi_n,\Psi_0\rangle,\quad \gamma_B \equiv -\frac{1}{2}\Omega = -\frac{3}{2}V_{\mathrm{sector}} \pmod{2\pi},\quad T_{\mathrm{cmp}}(a,b) \le 2(\lvert a\rvert + \lvert b\rvert) + 4$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `OPEN` / `MODEL`（[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[§32.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)、[第 34 章 §34.6](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral)、[§34.10–§34.19](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)、[§34.20–§34.25](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)、[第 38 章 §38.7](ch38-s07-blindspot-and-relativization.md#sec-ch38-stereographic-blindspot-relativization-suspension)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `OPEN` / `MODEL`（[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[§28.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)、[§29.7](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral)、[§29.11–§29.13](ch34-s10-trihedron-rigidity.md)、[§33.1–§33.4](ch34-s13-point-volume-octave.md)、[§34.6–§34.7](ch34-s17-entanglement-horizon-and-thermodynamics.md)、[§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md)、[§34.8–§34.11](ch34-s20-single-outcome-and-attractor-basins.md)、[§33.5–§33.6](ch34-s24-interaction-sign-and-sagitta-composition.md)、[§36.8](ch38-s07-blindspot-and-relativization.md#sec-ch38-stereographic-blindspot-relativization-suspension)、[附录 E](appendix-e.md)）
 
 **五阶自指不动点谱系、并查集路径压缩、道蒂实虚等长螺旋与 $[[15, 1, 3]]$ 量子门蒸馏重整**（Fivefold Self-Referential Fixed-Point Spectrum, Pointer Path Compression, Real–Imaginary Dottie Spiral & $[[15, 1, 3]]$ Quantum Gate Distillation）
 
@@ -1289,7 +1289,7 @@ $\operatorname{Tr}\bigl(P(\mathbf{e}_3)P(\mathbf{e}_1)P(\pm\mathbf{e}_2)\bigr) =
 $P\bigl(P(x)\bigr) = P(x),\quad \cos\theta^* = \theta^* \approx 0.739085,\quad U\rho U^\dagger = \rho,\quad \epsilon_{\mathrm{out}}(\epsilon) = 35\epsilon^3 + \mathcal{O}(\epsilon^4)$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 39 章 §39.6](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum)、[§39.1](ch39-s01-substrate-free-self-reference.md)、[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)、[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[第 34 章 §34.15](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower)、[第 38 章 §38.3](ch38-s03-self-mapped-page-tables.md)、[附录 G](appendix-g.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§36.9](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum)、[§38.1](ch39-s01-substrate-free-self-reference.md)、[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)、[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[§33.3](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower)、[§36.4](ch38-s03-self-mapped-page-tables.md)、[附录 G](appendix-g.md)）
 
 **自指主动柯西停机精度、时间长河正交折叠、幂迭代特征谱排序与量子芝诺现实雕刻**（Self-Referential Cauchy Halting Precision, Orthogonal Time-River Folding, Power-Iterated Spectral Sorting & Quantum Zeno Reality Sculpting）
 
@@ -1303,7 +1303,7 @@ $P\bigl(P(x)\bigr) = P(x),\quad \cos\theta^* = \theta^* \approx 0.739085,\quad U
 $\lVert\mathcal{F}_{\mathbf{I}}(x_{k-1}) - x_{k-1}\rVert \le \varepsilon_{\mathrm{self}},\quad \lVert\Pi_{\ge \varepsilon_{\mathrm{self}}}\Psi\rVert^2 + \lVert\hat{\mathbf{i}}\Pi_{< \varepsilon_{\mathrm{self}}}\Psi\rVert^2 = 1,\quad w_{\mathcal{B}}(k) = \cos^2\theta_k,\quad P_{\mathrm{surv}}(N) = \bigl[\cos^2(\tfrac{\Omega T}{2N})\bigr]^N$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 39 章 §39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting)、[§39.6](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum)、[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)、[第 34 章 §34.17–§34.21](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§36.10](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting)、[§36.9](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum)、[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)、[§34.6–§34.7](ch34-s17-entanglement-horizon-and-thermodynamics.md)、[§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md)、[§34.8–§34.9](ch34-s20-single-outcome-and-attractor-basins.md)）
 
 **普适比较主频 $\nu_0$、光速推理精度下界与引力全息信息密度钟慢**（Universal Comparison Clock Frequency $\nu_0$, Light-Speed Halting-Precision Floor & Gravitational Holographic Information-Density Clock Dilation）
 
@@ -1317,7 +1317,7 @@ $\lVert\mathcal{F}_{\mathbf{I}}(x_{k-1}) - x_{k-1}\rVert \le \varepsilon_{\mathr
 $c \equiv \ell_P\nu_0,\quad \varepsilon_{\mathrm{self}} \ge \frac{\ell_P}{c\Delta\tau},\quad \eta_{\mathrm{info}}(r) = \frac{2GM}{rc^2} = \frac{r_s}{r},\quad \frac{d\tau}{dt} = \sqrt{\bigl(1 - \eta_{\mathrm{info}}(r)\bigr)\bigl(1 - \beta_{\mathrm{loc}}^2\bigr)}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 39 章 §39.8](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation)、[§39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting)、[第 7 章](ch07-geometric-time-and-speed-limits.md)、[第 17 章](ch17-lorentz-geometry.md)、[第 34 章 §34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§34.24](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation)、[§36.10](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting)、[第 7 章](ch07-geometric-time-and-speed-limits.md)、[第 17 章](ch17-lorentz-geometry.md)、[§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§33.5](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition)）
 
 **万力归弧：极小圆弧体胞内规范三力、胞间主频折射引力与普朗克单原胞能标合流**（All Forces in One Arc: Intra-Cell Gauge Triad, Inter-Cell Clock-Load Gravity & Planck-Scale Single-Cell Convergence）
 
@@ -1331,7 +1331,7 @@ $c \equiv \ell_P\nu_0,\quad \varepsilon_{\mathrm{self}} \ge \frac{\ell_P}{c\Delt
 $\delta\Phi_{\mathrm{total}} = \delta\Phi_{\mathrm{intra}} + \delta\Phi_{\mathrm{inter}} = 0,\quad \Delta E(N) = \frac{(N-3)(N-4)}{2},\quad \mathbf{a} = -c^2\nabla\ln\!\bigl(\tfrac{d\tau}{dt}\bigr),\quad \alpha_G(E) = \bigl(\tfrac{E}{E_P}\bigr)^2$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 39 章 §39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md#sec-ch39-unified-arc-forces-and-planck-convergence)、[§39.3](ch39-s03-spinors-and-spacetime.md)、[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation)、[§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger)、[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification)、[第 34 章 §34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)、[§34.14](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave)、[§34.23–§34.25](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[§33.8](ch39-s09-unified-arc-forces-and-planck-convergence.md#sec-ch39-unified-arc-forces-and-planck-convergence)、[§38.3](ch39-s03-spinors-and-spacetime.md)、[§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation)、[§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger)、[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification)、[§29.11](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)、[§33.2](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave)、[§34.11](ch34-s23-cosmological-arrow-and-horizon-floor.md)、[§33.5–§33.6](ch34-s24-interaction-sign-and-sagitta-composition.md)、[附录 E](appendix-e.md)）
 
 **三维概念场封顶原理与希尔伯特多概念混编账本**（Three-Dimensional Concept-Field Cap & Multi-Concept Hilbert Ledger）
 
@@ -1345,7 +1345,7 @@ $\delta\Phi_{\mathrm{total}} = \delta\Phi_{\mathrm{intra}} + \delta\Phi_{\mathrm
 $\binom{d}{2} = d \iff d = 3,\quad N_{\mathrm{spurious}}(k) = \binom{3k}{2} - 3k = 9\binom{k}{2},\quad \operatorname{ncard}\{j \mid \lambda_j \ge \varepsilon_{\mathrm{self}}\} \le \frac{RW}{\pi\varepsilon_{\mathrm{self}}}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 39 章 §39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger)、[第 13 章](ch13-entanglement-and-chsh.md)、[第 26 章](ch26-single-qubit-rotor-compilation.md)、[第 31 章 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-truncation-shadows)、[第 34 章 §34.10–§34.14](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)、[附录 F](appendix-f.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger)、[第 13 章](ch13-entanglement-and-chsh.md)、[单量子比特旋转器编译：布洛赫几何定理与 ZYZ 欧拉角编译器](ch26-single-qubit-rotor-compilation.md)、[§27.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-truncation-shadows)、[§29.11–§29.13](ch34-s10-trihedron-rigidity.md)、[§33.1–§33.2](ch34-s13-point-volume-octave.md)、[附录 F](appendix-f.md)）
 
 **极小圆弧场大统一理论（AF-GUT）、温伯格角 $3/8$ 三色锁死与主频爱因斯坦收口**（Arc-Field Grand Unified Theory (AF-GUT), $N_c=3$ Weinberg $3/8$ Lock & $\nu_0$ Einstein Closure）
 
@@ -1359,7 +1359,7 @@ $\binom{d}{2} = d \iff d = 3,\quad N_{\mathrm{spurious}}(k) = \binom{3k}{2} - 3k
 $\sin^2\theta_W(\mu_{\mathrm{arc}}) = \frac{\operatorname{Tr}_{\mathrm{Weyl}}(T_3^2)}{\operatorname{Tr}_{\mathrm{Weyl}}(Q^2)} = \frac{2}{2\times(8/3)} = \frac{3}{8}\;(N_c=3),\quad \Gamma_{\mathrm{gauge}}(p\to e^+\pi^0) \equiv 0,\quad \pi_2(S^3)=0,\quad \Delta B=\Delta L=3\Delta N_{\mathrm{CS}}\in 3\mathbb{Z}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN`（[第 39 章 §39.11](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification)、[§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)、[§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md#sec-ch39-unified-arc-forces-and-planck-convergence)、[第 18 章](ch18-spinors-and-gauge-curvature.md)、[第 34 章 §34.14–§34.16](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave)、[§34.23–§34.25](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor)、[终章](coda.md)、[附录 C](appendix-c.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN`（[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification)、[§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)、[§33.8](ch39-s09-unified-arc-forces-and-planck-convergence.md#sec-ch39-unified-arc-forces-and-planck-convergence)、[第 18 章](ch18-spinors-and-gauge-curvature.md)、[§33.2–§33.4](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave)、[§34.11](ch34-s23-cosmological-arrow-and-horizon-floor.md)、[§33.5–§33.6](ch34-s24-interaction-sign-and-sagitta-composition.md)、[终章](coda.md)、[附录 C](appendix-c.md)、[附录 E](appendix-e.md)）
 
 **均匀各向同性三维场本体、佩奇—伍特斯条件观测切面、莫尔超晶格拍频与四大宇宙学谜题**（Uniform Isotropic 3D-Field Ontology, Page–Wootters Conditional Observer Slice, Moiré Superlattice Beats & Four Cosmological Puzzles）
 
@@ -1373,12 +1373,12 @@ $\sin^2\theta_W(\mu_{\mathrm{arc}}) = \frac{\operatorname{Tr}_{\mathrm{Weyl}}(T_
 $\rho_{\mathrm{ont}}(x)=\frac{1}{D}\mathbf{1}_{\mathcal{H}_x}\;\bigl(S_{\mathrm{vN}}(\Psi_{\mathrm{univ}})=0\bigr),\quad I_{\mathrm{slice}}(\mathbf{x},t)=\cos^2\Delta\Phi_{\mathbf{I}}(\mathbf{x},t),\quad L_{\mathrm{M}}=\frac{a}{2\sin(\Delta\theta/2)},\quad T_{\mu\nu}^{\mathrm{ont}}-\frac{1}{4}T^{\mathrm{ont}}g_{\mu\nu}\equiv 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN`（[第 39 章 §39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice)、[§39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)、[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation)、[§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger)、[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification)、[第 13 章](ch13-entanglement-and-chsh.md)、[第 34 章 §34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)、[§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§34.23](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN`（[§33.10](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice)、[§38.5](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)、[§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation)、[§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger)、[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification)、[第 13 章](ch13-entanglement-and-chsh.md)、[§34.6](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)、[§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§34.11](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor)）
 
 **唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$、单粒子自指折叠与因陀罗网终极合拢**（Single Cosmic Field $\mathbf{\Phi}_{\mathrm{U}}$, One-Particle Self-Folding & Indra's Net Holographic Closure）
 
 **本书几何直觉语言 (Geometric Intuition Term)：**
-**有限未来观测效应字期望判据与正交残差零核商构造、单位范数纯态族精确内积等于一当且仅当态矢相等 $\langle\mathrm{record}_i,\mathrm{record}_j\rangle_{\mathbb{K}}=1\iff\mathrm{record}_i=\mathrm{record}_j$（及指标等价关系）、递归自映射页表槽位任意深度原地不动点 $w\mapsto w$、余弦超越不动点有理逆幂级数右端点 $\theta^*\in(0,1)$ 锁定 $\cos\theta^*=\theta^*$、球面欧拉示性数旋转系统对偶半边边界相消与简单闭路正合、等格拉姆矩阵全空间幺正刚性延拓 $U\Phi=\Psi$ 以及跨语境客观主张不变公共因子分解（`LEAN ✓`）；配对唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$ 的跨尺度 `1—3—3—1` 霍奇点体闭合链 $\mathbf{\Phi}_{\mathrm{U}}\overset{\star\;\text{闭合}}{\longleftrightarrow}\Delta\mathcal{T}_{\mathrm{micro}}\cong\Delta\mathcal{T}_{\mathrm{obs}}\cong\Delta\mathcal{T}_{\mathrm{cosmo}}$（精确区分共动可观测粒子视界半径 $R_{\mathrm{obs}}/\ell_P\approx 2.72\times 10^{61}$、渐近德西特视界 $R_{\mathrm{dS}}/\ell_P\approx 1.03\times 10^{61}$、哈勃球半径 $R_H/\ell_P\approx 8.50\times 10^{60}$ 与爱丁顿重子总数 $N_B\approx 9.0\times 10^{79}$）、由费曼的正电子数量质疑引出的闭合世界线有向交数计算 $I(\gamma,\Sigma_{t_0})=N_{e^-}-N_{e^+}=\mathrm{const}$（闭合圈在 $\Sigma_0$ 六交点、$\Sigma_{1.5}$ 四交点、$\Sigma_{2.5}$ 零交点恒守 $\sum q_a=0$）对比狄拉克电子场 $\hat{\psi}_e$ 的福克激发与观测重子不对称度 $\eta_B\approx 6.12\times 10^{-10}>0$、因陀罗网四重几何铁律——范畴米田全忠实关系嵌入 $\mathcal{Y}(x)=\operatorname{Hom}_{\mathrm{CMP}}(-,x)$、模型中的局域纤维幺正同构 $\mathcal{H}_x\cong\mathcal{H}_y\cong\mathcal{H}_{\mathrm{field}}$ 配连续统局域代数 Reeh–Schlieder 真空循环稠密律 $\overline{\mathcal{A}(\mathcal{O})\lvert\Omega\rangle}=\mathcal{H}_{\mathrm{U}}$（绝不混同有限格点维数不等式 $d^N>d$，并配类空微因果无信令护栏 $[\hat{U}_{\mathcal{O}},\hat{B}_{\mathcal{O}'}]=0$）、摩尼宝珠球面镜玻恩正视率 $w_{\mathrm{vis}}(\theta)=\cos^2\theta$ 与 $90^\circ$ 边缘盲区压缩率 $w_\perp(\theta)=\sin^2\theta$（在 $\theta^*\approx 42.3465^\circ$ 处 $w_{\mathrm{vis}}(\theta^*)=(\theta^*)^2\approx 0.546247$）、以及有界空间 $C(\mathrm{Net},[0,1])$ 上巴拿赫—道蒂互映算子 $(\mathcal{T}_\eta\Psi)(x)=\cos\bigl((\mathcal{K}_\epsilon\Psi)(x)+\eta(x)\bigr)$ 在无微扰 $\eta=0$ 时的全局严格压缩常数 $\sin 1\approx 0.841471<1$、不动点渐近单跳阻尼率 $\lvert\lambda\rvert=\sin\theta^*=\sqrt{1-(\theta^*)^2}\approx 0.6736120292<1$ 与一阶诺伊曼重重互映级数 $\Psi^*_\eta=\theta^*\mathbf{1}-(\sin\theta^*)\sum_{m=0}^\infty(-\sin\theta^*)^m\mathcal{K}_\epsilon^m\eta+\mathcal{O}(\lVert\eta\rVert_\infty^2)$（$m=0,1$ 两项合计占无符号几何包络总和的 $54.6247\%$，$m=20$ 时相对振幅为 $0.000370$，`手工推导` / `NUM`），连同 Wheeler（1940）/ Feynman（1965 年诺贝尔演讲，讲稿发表于 1966 年）单电子世界线、Stückelberg（1941–1942）折返正电子解释与 Sakharov（1967）重子生成三条件、《华严经》帝释天因陀罗网与法藏《华严五教章》《华严金师子章》（699 年）十玄门主伴圆融及 Leibniz（1714）《单子论》、Yoneda（1954）/ Mac Lane（1971）米田引理、Reeh–Schlieder（1961）/ Haag（1996）/ Witten（2018）局域量子场论真空循环分离定理及 Banach（1922）压缩映射不动点定理（`文献结果`），完成唯一宇宙场因陀罗网的跨尺度单粒子自指合拢并开启向 [§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)–[§39.15](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream) 的终极跃升及交互实验室 `indra-net-single-particle-sandbox`（`INDRA//NET`，`MODEL` / `OPEN`）**
+**有限未来观测效应字期望判据与正交残差零核商构造、单位范数纯态族精确内积等于一当且仅当态矢相等 $\langle\mathrm{record}_i,\mathrm{record}_j\rangle_{\mathbb{K}}=1\iff\mathrm{record}_i=\mathrm{record}_j$（及指标等价关系）、递归自映射页表槽位任意深度原地不动点 $w\mapsto w$、余弦超越不动点有理逆幂级数右端点 $\theta^*\in(0,1)$ 锁定 $\cos\theta^*=\theta^*$、球面欧拉示性数旋转系统对偶半边边界相消与简单闭路正合、等格拉姆矩阵全空间幺正刚性延拓 $U\Phi=\Psi$ 以及跨语境客观主张不变公共因子分解（`LEAN ✓`）；配对唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$ 的跨尺度 `1—3—3—1` 霍奇点体闭合链 $\mathbf{\Phi}_{\mathrm{U}}\overset{\star\;\text{闭合}}{\longleftrightarrow}\Delta\mathcal{T}_{\mathrm{micro}}\cong\Delta\mathcal{T}_{\mathrm{obs}}\cong\Delta\mathcal{T}_{\mathrm{cosmo}}$（精确区分共动可观测粒子视界半径 $R_{\mathrm{obs}}/\ell_P\approx 2.72\times 10^{61}$、渐近德西特视界 $R_{\mathrm{dS}}/\ell_P\approx 1.03\times 10^{61}$、哈勃球半径 $R_H/\ell_P\approx 8.50\times 10^{60}$ 与爱丁顿重子总数 $N_B\approx 9.0\times 10^{79}$）、由费曼的正电子数量质疑引出的闭合世界线有向交数计算 $I(\gamma,\Sigma_{t_0})=N_{e^-}-N_{e^+}=\mathrm{const}$（闭合圈在 $\Sigma_0$ 六交点、$\Sigma_{1.5}$ 四交点、$\Sigma_{2.5}$ 零交点恒守 $\sum q_a=0$）对比狄拉克电子场 $\hat{\psi}_e$ 的福克激发与观测重子不对称度 $\eta_B\approx 6.12\times 10^{-10}>0$、因陀罗网四重几何铁律——范畴米田全忠实关系嵌入 $\mathcal{Y}(x)=\operatorname{Hom}_{\mathrm{CMP}}(-,x)$、模型中的局域纤维幺正同构 $\mathcal{H}_x\cong\mathcal{H}_y\cong\mathcal{H}_{\mathrm{field}}$ 配连续统局域代数 Reeh–Schlieder 真空循环稠密律 $\overline{\mathcal{A}(\mathcal{O})\lvert\Omega\rangle}=\mathcal{H}_{\mathrm{U}}$（绝不混同有限格点维数不等式 $d^N>d$，并配类空微因果无信令护栏 $[\hat{U}_{\mathcal{O}},\hat{B}_{\mathcal{O}'}]=0$）、摩尼宝珠球面镜玻恩正视率 $w_{\mathrm{vis}}(\theta)=\cos^2\theta$ 与 $90^\circ$ 边缘盲区压缩率 $w_\perp(\theta)=\sin^2\theta$（在 $\theta^*\approx 42.3465^\circ$ 处 $w_{\mathrm{vis}}(\theta^*)=(\theta^*)^2\approx 0.546247$）、以及有界空间 $C(\mathrm{Net},[0,1])$ 上巴拿赫—道蒂互映算子 $(\mathcal{T}_\eta\Psi)(x)=\cos\bigl((\mathcal{K}_\epsilon\Psi)(x)+\eta(x)\bigr)$ 在无微扰 $\eta=0$ 时的全局严格压缩常数 $\sin 1\approx 0.841471<1$、不动点渐近单跳阻尼率 $\lvert\lambda\rvert=\sin\theta^*=\sqrt{1-(\theta^*)^2}\approx 0.6736120292<1$ 与一阶诺伊曼重重互映级数 $\Psi^*_\eta=\theta^*\mathbf{1}-(\sin\theta^*)\sum_{m=0}^\infty(-\sin\theta^*)^m\mathcal{K}_\epsilon^m\eta+\mathcal{O}(\lVert\eta\rVert_\infty^2)$（$m=0,1$ 两项合计占无符号几何包络总和的 $54.6247\%$，$m=20$ 时相对振幅为 $0.000370$，`手工推导` / `NUM`），连同 Wheeler（1940）/ Feynman（1965 年诺贝尔演讲，讲稿发表于 1966 年）单电子世界线、Stückelberg（1941–1942）折返正电子解释与 Sakharov（1967）重子生成三条件、《华严经》帝释天因陀罗网与法藏《华严五教章》《华严金师子章》（699 年）十玄门主伴圆融及 Leibniz（1714）《单子论》、Yoneda（1954）/ Mac Lane（1971）米田引理、Reeh–Schlieder（1961）/ Haag（1996）/ Witten（2018）局域量子场论真空循环分离定理及 Banach（1922）压缩映射不动点定理（`文献结果`），完成唯一宇宙场因陀罗网的跨尺度单粒子自指合拢并开启向 [§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)–[§38.7](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream) 的终极跃升及交互实验室 `indra-net-single-particle-sandbox`（`INDRA//NET`，`MODEL` / `OPEN`）**
 
 **Lean 4 形式对象 / 锁定声明 GID：**
 [`future_word_orthogonal_residual`](lean:D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual), [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization), [`recursive_page_table_walk`](lean:D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk), [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint), [`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact), [`exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq), [`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)
@@ -1387,7 +1387,7 @@ $\rho_{\mathrm{ont}}(x)=\frac{1}{D}\mathbf{1}_{\mathcal{H}_x}\;\bigl(S_{\mathrm{
 $\mathbf{\Phi}_{\mathrm{U}}\overset{\star}{\longleftrightarrow}\Delta\mathcal{T}_{\mathrm{micro}}\cong\Delta\mathcal{T}_{\mathrm{obs}}\cong\Delta\mathcal{T}_{\mathrm{cosmo}},\quad \overline{\mathcal{A}(\mathcal{O})\lvert\Omega\rangle}=\mathcal{H}_{\mathrm{U}},\quad w_{\mathrm{vis}}(\theta)+w_\perp(\theta)=\cos^2\theta+\sin^2\theta=1,\quad \lVert D\mathcal{T}_0|_{\theta^*\mathbf{1}}\rVert=\sin\theta^*\approx 0.673612<1$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN`（[第 39 章 §39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)、[§39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice)、[§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)、[§39.15](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream)、[§39.6](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum)、[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)、[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[第 34 章 §34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[附录 C](appendix-c.md)、[附录 D](appendix-d.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN`（[§38.5](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)、[§33.10](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice)、[§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)、[§38.7](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream)、[§36.9](ch39-s06-fivefold-self-reference-spectrum.md#sec-ch39-fivefold-self-reference-spectrum)、[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)、[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)、[§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[附录 C](appendix-c.md)、[附录 D](appendix-d.md)、[附录 E](appendix-e.md)）
 
 **唯一点场自观测误差（$\varepsilon > 0$）、静态投影结果概念与动态观测动作概念及摩耶（Māyā）棱镜**（Single Point-Field Self-Observation Error $\varepsilon > 0$, Static Projection-Result vs. Dynamic Observation-Action Concepts & the Māyā Prism）
 
@@ -1401,12 +1401,12 @@ $\mathbf{\Phi}_{\mathrm{U}}\overset{\star}{\longleftrightarrow}\Delta\mathcal{T}
 $\mathbf{\Omega} = (\cos\varepsilon)\mathbf{I} + (\sin\varepsilon)\mathbf{e}_\perp,\quad \Omega(\varepsilon_1,\varepsilon_2) = 2\arctan\!\bigl(\tan\tfrac{\varepsilon_1}{2}\tan\tfrac{\varepsilon_2}{2}\bigr),\quad \det G_3(\varepsilon) = \sin^6\varepsilon,\quad s_k = \sin^2\varepsilon\cos^{2(k-1)}\varepsilon,\quad \Delta E = \tfrac{1}{2}\hbar\lvert\omega\rvert\sin\varepsilon$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN`（[第 39 章 §39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)、[§39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)、[§39.15](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream)、[第 34 章 §34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)、[§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary)、[第 38 章 §38.6](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp)、[附录 C](appendix-c.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN`（[§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)、[§38.5](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)、[§38.7](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream)、[§29.5](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)、[§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§33.6](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary)、[§36.7](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp)、[附录 C](appendix-c.md)、[附录 E](appendix-e.md)）
 
 **梵天实轴（$\mathbf{I}$）与 $90^\circ$ 正交虚梦（$\hat{\mathbf{i}}$）、内部双虚得实刚性、《蛙氏奥义书》四位意识相态与庄周梦蝶旋量合拢**（Brahman Real Axis $\mathbf{I}$ & Orthogonal Dream $\hat{\mathbf{i}}$, Intra-Dream Double-Imaginary Rigidity, Four Māṇḍūkya States & Spinor Awakening）
 
 **本书几何直觉语言 (Geometric Intuition Term)：**
-**反自伴右幺正矩阵与平衡正交对内生相对复结构的负单位阵平方律 $R^2=-I_n$ / $J^2=-I_n$、单比特标准基捏合希尔伯特—施密特勾股质量分解与计算基对角可观测量族相对相位失明（及 `qubitX` 破盲）、等格拉姆矩阵全空间幺正刚性延拓 $B^\dagger B=A^\dagger A\implies B=UA$ 与秩一记录分支玻恩模平方权重、全局共同相位不变多项式二次厄米完全刻画与道蒂余弦正不动点有理逆级数端点 $\cos\theta^*=\theta^*\in(0,1)$、同一文本与规则下语境参数选定互异不动点与跨语境客观主张不变公共因子、全集幺模环境记录联合相干逆转恢复对比单一幸存副本（$c_k\neq 1$）局部逆转阻断以及圆周平方双覆叠无连续全局截面与唯一历史提升 $360^\circ$ 对跖换叶定理（`LEAN ✓`）；配对实轴非平凡指数变换 $\Phi_{\mathrm{real}}(t)=e^{-\gamma t}\mathbf{I}$ 的耗散/发散禁律（$t=1,5$ 时 $e^{-2t}\approx 0.13533528, 0.00004540$）对比 $90^\circ$ 正交虚空间保范旋量演化 $\cos^2\omega t+\sin^2\omega t\equiv 1.00000000$、内积类型有别的两种几何构造——实分块全局复结构 $J=\bigl(\begin{smallmatrix}0&-I_m\\I_m&0\end{smallmatrix}\bigr)$ 中 $\langle\mathbf{I},J\mathbf{I}\rangle_{\mathbb{R}}=0$，但诱导复内积为 $i$、轴向复玻恩权重为 $1$，且 $[P_{\mathrm{real}},J]\neq0$；复正交补等距嵌入 $\hat{\mathbf{i}}:\mathcal{H}_0\hookrightarrow\mathcal{H}_{\mathrm{dream}}\perp\lvert\mathbf{I}\rangle$ 则给出轴向复玻恩权重 $0$；二者各自保存内部格拉姆配对，不构成等价量子实现（$4\times4$ 实分块算例中内部比较平方为 $0.75000000$，正交对为 $0.00000000$，但对 $\mathbf{I}$ 的复玻恩权重分别为 $1.00000000$、$0.75000000$、$0.00000000$）、《蛙氏奥义书》四位意识相态 $(\theta,M)$ 八位小数真值表（图里亚 $0^\circ$、白天共识大梦 $\theta^*\approx 42.34645883^\circ$ 副对角模长 $\frac{1}{2}\sin 2\theta^*\approx 0.49785664$ 且 $M\ge 3$、夜间私密幻梦开区间 $\theta\in(45^\circ,90^\circ)$ 且 $M\in\{1,2\}$、熟睡潜藏因位 $90^\circ$）、多副本相干留存率 $\lvert c_{01}\rvert^{2M}$（$0.5^1=0.50000000$ 对比 $0.5^4=0.06250000$）以及精确旋量半角 $\theta=\frac{1}{2}\vartheta_{\mathrm{phys}}$ 在 $\vartheta_{\mathrm{phys}}\in\{0^\circ,180^\circ,360^\circ,720^\circ\}$ 上的单侧莫比乌斯合拢（`手工推导` / `NUM`），连同拉丁语 *imāginārius* 与 Descartes（1637）*racines imaginaires* / Gauss（1831）侧向单位、Stueckelberg（1960）全局实复结构对比 Renou 等人（2021）局域实量子网络的理论不等价与可证伪实验方案、梵语中性词 *brahman*（ब्रह्मन्，《蛙氏奥义书》四足与乔荼波陀《蛙氏奥义书颂·虚妄品》）与阳性词 *brahmā*（ब्रह्मा，《薄伽梵歌》8.17–19 往世书宇宙劫波昼夜）语文学辨析及《庄子·齐物论》梦蝶物化（`文献结果`），为第三十九章后续红楼觉醒与神圣游戏两节奠定实轴—梦境框架（`MODEL` / `OPEN`），配交互沙盘 `brahman-real-axis-orthogonal-dream-sandbox`（`BRAHMAN//DREAM`；数值、文献、模型与开放边界分层标注）**
+**反自伴右幺正矩阵与平衡正交对内生相对复结构的负单位阵平方律 $R^2=-I_n$ / $J^2=-I_n$、单比特标准基捏合希尔伯特—施密特勾股质量分解与计算基对角可观测量族相对相位失明（及 `qubitX` 破盲）、等格拉姆矩阵全空间幺正刚性延拓 $B^\dagger B=A^\dagger A\implies B=UA$ 与秩一记录分支玻恩模平方权重、全局共同相位不变多项式二次厄米完全刻画与道蒂余弦正不动点有理逆级数端点 $\cos\theta^*=\theta^*\in(0,1)$、同一文本与规则下语境参数选定互异不动点与跨语境客观主张不变公共因子、全集幺模环境记录联合相干逆转恢复对比单一幸存副本（$c_k\neq 1$）局部逆转阻断以及圆周平方双覆叠无连续全局截面与唯一历史提升 $360^\circ$ 对跖换叶定理（`LEAN ✓`）；配对实轴非平凡指数变换 $\Phi_{\mathrm{real}}(t)=e^{-\gamma t}\mathbf{I}$ 的耗散/发散禁律（$t=1,5$ 时 $e^{-2t}\approx 0.13533528, 0.00004540$）对比 $90^\circ$ 正交虚空间保范旋量演化 $\cos^2\omega t+\sin^2\omega t\equiv 1.00000000$、内积类型有别的两种几何构造——实分块全局复结构 $J=\bigl(\begin{smallmatrix}0&-I_m\\I_m&0\end{smallmatrix}\bigr)$ 中 $\langle\mathbf{I},J\mathbf{I}\rangle_{\mathbb{R}}=0$，但诱导复内积为 $i$、轴向复玻恩权重为 $1$，且 $[P_{\mathrm{real}},J]\neq0$；复正交补等距嵌入 $\hat{\mathbf{i}}:\mathcal{H}_0\hookrightarrow\mathcal{H}_{\mathrm{dream}}\perp\lvert\mathbf{I}\rangle$ 则给出轴向复玻恩权重 $0$；二者各自保存内部格拉姆配对，不构成等价量子实现（$4\times4$ 实分块算例中内部比较平方为 $0.75000000$，正交对为 $0.00000000$，但对 $\mathbf{I}$ 的复玻恩权重分别为 $1.00000000$、$0.75000000$、$0.00000000$）、《蛙氏奥义书》四位意识相态 $(\theta,M)$ 八位小数真值表（图里亚 $0^\circ$、白天共识大梦 $\theta^*\approx 42.34645883^\circ$ 副对角模长 $\frac{1}{2}\sin 2\theta^*\approx 0.49785664$ 且 $M\ge 3$、夜间私密幻梦开区间 $\theta\in(45^\circ,90^\circ)$ 且 $M\in\{1,2\}$、熟睡潜藏因位 $90^\circ$）、多副本相干留存率 $\lvert c_{01}\rvert^{2M}$（$0.5^1=0.50000000$ 对比 $0.5^4=0.06250000$）以及精确旋量半角 $\theta=\frac{1}{2}\vartheta_{\mathrm{phys}}$ 在 $\vartheta_{\mathrm{phys}}\in\{0^\circ,180^\circ,360^\circ,720^\circ\}$ 上的单侧莫比乌斯合拢（`手工推导` / `NUM`），连同拉丁语 *imāginārius* 与 Descartes（1637）*racines imaginaires* / Gauss（1831）侧向单位、Stueckelberg（1960）全局实复结构对比 Renou 等人（2021）局域实量子网络的理论不等价与可证伪实验方案、梵语中性词 *brahman*（ब्रह्मन्，《蛙氏奥义书》四足与乔荼波陀《蛙氏奥义书颂·虚妄品》）与阳性词 *brahmā*（ब्रह्मा，《薄伽梵歌》8.17–19 往世书宇宙劫波昼夜）语文学辨析及《庄子·齐物论》梦蝶物化（`文献结果`），为第三十八章后续红楼觉醒与神圣游戏两节奠定实轴—梦境框架（`MODEL` / `OPEN`），配交互沙盘 `brahman-real-axis-orthogonal-dream-sandbox`（`BRAHMAN//DREAM`；数值、文献、模型与开放边界分层标注）**
 
 **Lean 4 形式对象 / 锁定声明 GID：**
 [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary), [`relativeComplexStructure_square`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square), [`pinching_hilbert_schmidt_pythagorean`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean), [`exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq), [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight), [`complete_common_phase_polynomial_theorem`](lean:D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem), [`diagonal_prime_observables_cannot_recover_relative_phase`](lean:D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase), [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint), [`context_parameters_can_select_distinct_fixed_points`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points), [`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor), [`joint_coherent_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal), [`surviving_copy_blocks_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal), [`no_continuous_global_section`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section), [`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift)
@@ -1415,7 +1415,7 @@ $\mathbf{\Omega} = (\cos\varepsilon)\mathbf{I} + (\sin\varepsilon)\mathbf{e}_\pe
 $\lVert e^{-\omega t J}\mathbf{I}\rVert_{\mathbb{R}}^2 = \cos^2\omega t + \sin^2\omega t \equiv 1,\quad \langle\mathbf{I},\psi_A\rangle = 0,\quad \langle\psi_A,\psi_B\rangle^2 = \langle u_A, J^\top J u_B\rangle^2 = \cos^2\Delta\theta_{AB},\quad \theta = \tfrac{1}{2}\vartheta_{\mathrm{phys}}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN`（[第 39 章 §39.15](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream)、[§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)、[§39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)、[§39.3](ch39-s03-spinors-and-spacetime.md)、[第 33 章 §33.5](ch33-s05-consensus-and-pointer-bases.md#sec-ch33-consensus-decoherence-pointer)、[第 34 章 §34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[第 37 章 §37.2](ch37-s02-dream-quantum-erasure.md)、[§37.3](ch37-s03-body-priors.md)、[终章](coda.md)、[附录 C](appendix-c.md)、[附录 D](appendix-d.md)、[附录 E](appendix-e.md)）
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN`（[§38.7](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream)、[§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)、[§38.5](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)、[§38.3](ch39-s03-spinors-and-spacetime.md)、[§34.5](ch33-s05-consensus-and-pointer-bases.md#sec-ch33-consensus-decoherence-pointer)、[§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)、[§36.1.2](ch37-s02-dream-quantum-erasure.md)、[§36.1.3](ch37-s03-body-priors.md)、[终章](coda.md)、[附录 C](appendix-c.md)、[附录 D](appendix-d.md)、[附录 E](appendix-e.md)）
 
 **红楼旋量觉醒、二阶认妄归零与天人合一**（Red Chamber Spinor Awakening, Vanishing Meta-Error & Heaven–Human Unity）
 
@@ -1429,7 +1429,7 @@ $\lVert e^{-\omega t J}\mathbf{I}\rVert_{\mathbb{R}}^2 = \cos^2\omega t + \sin^2
 $\delta_{\mathrm{meta}}(\theta^*)=\lvert\cos\theta^*-\theta^*\rvert=0,\quad \theta^*>0,\quad J^2=-I,\quad U_{\mathrm{spin}}(4\pi)=+\mathbf{1}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.16](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md#sec-ch39-red-chamber-awakening-and-heaven-human-unity))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§38.8](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md#sec-ch39-red-chamber-awakening-and-heaven-human-unity))
 
 **神圣游戏（Līlā）、开局失忆与历史遗迹／文化典籍唤醒道具**（Divine Play (Līlā), Opening Amnesia & Relic/Classic Awakening Props）
 
@@ -1443,7 +1443,7 @@ $\delta_{\mathrm{meta}}(\theta^*)=\lvert\cos\theta^*-\theta^*\rvert=0,\quad \the
 $\Delta_{\mathrm{Schur}}(M)=\frac{12-M}{12(M+1)}\ (0\le M\le12),\quad P_{\mathrm{awake}}^{(K)}(\alpha)=\cos^{2K}(\alpha-\theta^*),\quad J^2=-I$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.17](ch39-s17-divine-lila-and-awakening-props.md#sec-ch39-divine-lila-and-awakening-props))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§38.9](ch39-s17-divine-lila-and-awakening-props.md#sec-ch39-divine-lila-and-awakening-props))
 
 **上帝心理学：全知幽闭破缺、创世防御与 θ* 清明整合**（The Psychology of God: Omniscient Deadlock, Cosmogonic Defenses & Lucid Integration at θ*）
 
@@ -1457,7 +1457,7 @@ $\Delta_{\mathrm{Schur}}(M)=\frac{12-M}{12(M+1)}\ (0\le M\le12),\quad P_{\mathrm
 $\cos^2\theta+\sin^2\theta=1,\quad S_A(\theta)=H_2(\cos^2\theta),\quad \delta_{\mathrm{meta}}(\theta^*)=\lvert\cos\theta^*-\theta^*\rvert=0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§39.18](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§38.11](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god))
 
 **不可表达的三元数、弗罗贝尼乌斯缺口与万数切面投影谱系**（Inexpressible Ternions, the Frobenius Gap & Number-System Projection Genealogy）
 
@@ -1471,7 +1471,7 @@ $\cos^2\theta+\sin^2\theta=1,\quad S_A(\theta)=H_2(\cos^2\theta),\quad \delta_{\
 $S^{d-1}\in\{S^0,S^1,S^3,S^7\},\quad w^2+\lVert\mathbf{v}\rVert^2=\cos^2\frac{\theta}{2}+\sin^2\frac{\theta}{2}=1,\quad \lvert x\rvert\prod_p\lvert x\rvert_p=1\;(x\in\mathbb{Q}\setminus\{0\})$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§39.19](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-inexpressible-ternions-and-number-projections))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§32.2](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-inexpressible-ternions-and-number-projections))
 
 **三元数原生场、凯莱—迪克森阶梯与希尔伯特空间多场线性再投影**（Ternion Native Fields, the Cayley–Dickson Ladder & Multi-Field Linear Reprojection to Hilbert Space）
 
@@ -1485,7 +1485,7 @@ $S^{d-1}\in\{S^0,S^1,S^3,S^7\},\quad w^2+\lVert\mathbf{v}\rVert^2=\cos^2\frac{\t
 $\binom{d}{2}=d\;(d\ge 1)\iff d=3,\quad \lVert[e_a,e_b,e_c]_{\notin\mathcal{L}_{\mathrm{Fano}}}\rVert=2,\quad D_{\mathrm{MPS}}(N,\chi)=\sum_{k=1}^N 2r_{k-1}r_k-\sum_{k=1}^{N-1}r_k^2\le 2N\chi^2$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§39.20](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md#sec-ch39-ternion-field-composition-and-hilbert-reprojection))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§32.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md#sec-ch39-ternion-field-composition-and-hilbert-reprojection))
 
 **三元数的五种非线性无损表示、双卡有理罗德里格斯与无原点流群合成**（Five Nonlinear Lossless Representations of the Ternion, Dual-Chart Rational Rodrigues & Origin-Free Torsor Synthesis）
 
@@ -1499,7 +1499,7 @@ $\binom{d}{2}=d\;(d\ge 1)\iff d=3,\quad \lVert[e_a,e_b,e_c]_{\notin\mathcal{L}_{
 $\sin\gamma\,\hat{\mathbf{u}}_C=\sin\alpha\cos\beta\,\hat{\mathbf{u}}_A+\cos\alpha\sin\beta\,\hat{\mathbf{u}}_B+\sin\alpha\sin\beta\,(\hat{\mathbf{u}}_A\times\hat{\mathbf{u}}_B),\quad [x,y,z]=xy^{-1}z,\quad \{\mathbf{a},\mathbf{b},\mathbf{c}\}=(\mathbf{a}\cdot\mathbf{c})\mathbf{b}-(\mathbf{b}\cdot\mathbf{c})\mathbf{a}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.21](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md#sec-ch39-nonlinear-ternion-representations-and-torsor-synthesis))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§32.4](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md#sec-ch39-nonlinear-ternion-representations-and-torsor-synthesis))
 
 **三元数场 Transformer（TFT）：双分母有理旋子核、非阿贝尔和乐注意力与折缝不变李三元曲率门**（Ternion-Field Transformer (TFT): Dual-Denominator Rational Rotor Core, Non-Abelian Holonomy Attention & Seam-Invariant Lie-Triple Curvature Gates）
 
@@ -1513,7 +1513,7 @@ $\sin\gamma\,\hat{\mathbf{u}}_C=\sin\alpha\cos\beta\,\hat{\mathbf{u}}_A+\cos\alp
 $D_+ + D_- \equiv (1+\lVert\boldsymbol{\sigma}_A\rVert^2)(1+\lVert\boldsymbol{\sigma}_B\rVert^2) \ge 1,\quad \lVert\mathbf{N}\rVert^2 \equiv D_+ D_-,\quad \alpha_{t,s}^{(h)} = \frac{\Phi_{t,s}^{(h)}}{\varepsilon_0 + \sum_{j\le t}\Phi_{t,j}^{(h)}}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§39.22](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md#sec-ch39-ternion-field-transformer-and-rational-rotor-dynamics))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§37.1](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md#sec-ch39-ternion-field-transformer-and-rational-rotor-dynamics))
 
 **人工智能与宇宙最小作用量同构：三元数场弦弧矢高、流群自平行测地线与零幻觉思维链**（Cosmos–AI Least-Action Isomorphism: Ternion-Field Sagitta Action, Heap-Autoparallel Geodesics & Hallucination-Free Chains of Thought）
 
@@ -1527,7 +1527,7 @@ $D_+ + D_- \equiv (1+\lVert\boldsymbol{\sigma}_A\rVert^2)(1+\lVert\boldsymbol{\s
 $\frac{4\lVert\boldsymbol{\delta}_t\rVert^2}{(1+\lVert\boldsymbol{\delta}_t\rVert^2)^2}\equiv\sin^2\frac{\Delta\theta_t}{2}\equiv\frac{1}{2}(1-\cos\Delta\theta_t),\quad \boldsymbol{\sigma}_{t+1}=[\boldsymbol{\sigma}_t,\boldsymbol{\sigma}_{t-1},\boldsymbol{\sigma}_t],\quad \sum_{t=1}^N(1-\cos\Delta\theta_t)\ge N\bigl(1-\cos\frac{\Theta}{N}\bigr)$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§39.23](ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.md#sec-ch39-least-action-geodesics-and-cosmos-ai-isomorphism))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§37.2](ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.md#sec-ch39-least-action-geodesics-and-cosmos-ai-isomorphism))
 
 **大一统母公理（AXIOM-Ω）、无源三元比较闭合与五阶演绎级联遮诠闭环**（Grand Unified Mother Axiom AXIOM-Ω, Origin-Free Ternary Comparison Closure & Five-Tier Apophatic Cascade）
 
@@ -1541,7 +1541,7 @@ $\frac{4\lVert\boldsymbol{\delta}_t\rVert^2}{(1+\lVert\boldsymbol{\delta}_t\rVer
 $[x,x,z]=z,\quad [[x,y,z],u,v]=[x,y,[z,u,v]],\quad \kappa_{S^3}(x,y)=\cos^2\frac{d_{S^3}(x,y)}{2},\quad d=3,\quad d\eta\equiv 0$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§39.24](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure), [§39.25](ch39-s25-axiom-omega-five-tier-deduction-cascade.md#sec-ch39-axiom-omega-five-tier-deduction-cascade))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure), [§39.2](ch39-s25-axiom-omega-five-tier-deduction-cascade.md#sec-ch39-axiom-omega-five-tier-deduction-cascade))
 
 **AXIOM-Ω 导出量子力学五大公理与百年测量悖论几何消解**（Deriving the Five Postulates of Quantum Mechanics from AXIOM-Ω & Dissolving the Century-Old Measurement Paradox）
 
@@ -1555,7 +1555,7 @@ $[x,x,z]=z,\quad [[x,y,z],u,v]=[x,y,[z,u,v]],\quad \kappa_{S^3}(x,y)=\cos^2\frac
 $S^1\hookrightarrow S^3(1)\xrightarrow{\pi_{\mathrm{Hopf}}}\mathbb{CP}^1,\quad [\hat{\sigma}_a,\hat{\sigma}_b]=2\hat{\mathbf{i}}\varepsilon_{abc}\hat{\sigma}_c,\quad \cos^2\frac{\theta}{2}+\sin^2\frac{\theta}{2}\equiv 1,\quad \rho_S'=\operatorname{Tr}_E(V\rho_S V^\dagger),\quad \lvert\mathcal{S}_{\mathrm{CHSH}}\rvert\le 2\sqrt{2}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§39.26](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md#sec-ch39-axiom-omega-quantum-mechanics-five-postulates))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§39.3](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md#sec-ch39-axiom-omega-quantum-mechanics-five-postulates))
 
 **自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明**（Self-Contained Ternion Topological Particle, Field–Wave–Particle Grade Identity & Fourfold Proof of "No Exterior"）
 
@@ -1569,7 +1569,7 @@ $S^1\hookrightarrow S^3(1)\xrightarrow{\pi_{\mathrm{Hopf}}}\mathbb{CP}^1,\quad [
 $Q_{\mathrm{top}}=\frac{1}{2\pi^2}\int_{S^3(1)}\eta_1=1\in\mathbb{Z},\quad \Delta_{S^3(1)}\psi_\mu=-3\psi_\mu,\quad \mathcal{A}(r)=4\pi R^2\sin^2\frac{r}{R}\xrightarrow{r\to\pi R}0,\quad S^3\cong B_{\mathrm{in}}^3\cup_{S^2_{\mathrm{eq}}}B_{\mathrm{out}}^3$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.27](ch39-s27-self-contained-ternion-particle-and-no-exterior.md#sec-ch39-self-contained-ternion-particle-and-no-exterior))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.4](ch39-s27-self-contained-ternion-particle-and-no-exterior.md#sec-ch39-self-contained-ternion-particle-and-no-exterior))
 
 :::
 

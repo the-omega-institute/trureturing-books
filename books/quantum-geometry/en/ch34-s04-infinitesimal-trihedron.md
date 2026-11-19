@@ -1,8 +1,8 @@
-# 34.4 The Infinitesimal Spherical Trihedron $\Delta\mathcal{T}_\epsilon$: Dual Projections of Once- and Twice-Orthogonal and the Curvature Quantum {#sec-ch34-infinitesimal-spherical-trihedron}
+# 29.5 The Infinitesimal Spherical Trihedron $\Delta\mathcal{T}_\epsilon$: Dual Projections of Once- and Twice-Orthogonal and the Curvature Quantum {#sec-ch34-infinitesimal-spherical-trihedron}
 
 > "Orthogonal once and orthogonal twice are actually two projections of the same object—namely that spherical trihedron, an infinitesimal spherical trihedron."
 
-In [Chapter 32 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), the zero-background Axiom of Comparison $\mathcal{A}_0$ locked **two-state** reciprocal fairness into $\cos^2\epsilon + \sin^2\epsilon = 1$; earlier in this chapter, we examined the macroscopic octant at $\epsilon = \frac{\pi}{2}$. What happens when we advance $\mathcal{A}_0$ from two states to the minimal non-coplanar **three-state loop** $(\mathbf{A}, \mathbf{B}, \mathbf{C})$ at an arbitrary small step $\epsilon \in (0, \frac{\pi}{2}]$?
+In [§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison), the zero-background Axiom of Comparison $\mathcal{A}_0$ locked **two-state** reciprocal fairness into $\cos^2\epsilon + \sin^2\epsilon = 1$; earlier in this chapter, we examined the macroscopic octant at $\epsilon = \frac{\pi}{2}$. What happens when we advance $\mathcal{A}_0$ from two states to the minimal non-coplanar **three-state loop** $(\mathbf{A}, \mathbf{B}, \mathbf{C})$ at an arbitrary small step $\epsilon \in (0, \frac{\pi}{2}]$?
 
 On the unit sphere $S^2 \subset \mathbb{R}^3$ (read in this section as the single-qubit Bloch sphere: points on the sphere are pure states, points inside are mixed states), place the right-angle pivot at $\mathbf{B} = \mathbf{e}_2$ and step out by arc length $\epsilon$ along the two mutually perpendicular coordinate walls $\mathbf{e}_2 \wedge \mathbf{e}_1$ and $\mathbf{e}_2 \wedge \mathbf{e}_3$:
 
@@ -20,7 +20,7 @@ $$
 **Three flat sector walls and an outward-bulging magenta spherical cap: the trihedron cell.** Drag the amber step handle to vary $\epsilon$: the origin $O$, the pivot $B = e_2$, and $A(\epsilon)$, $C(\epsilon)$ on two perpendicular walls bound $\Delta\mathcal{T}_\epsilon$, whose magenta spherical cap $\triangle_{\mathrm{sph}} ABC$ bulges outside the cyan flat chordal cut (dual-shadow reading is this book's `MODEL`).
 :::
 
-## 34.4.1 One Solid, Two Shadows: Down the Ridge Is "Orthogonal Once," Along the Walls Is "Orthogonal Twice" {#sec-ch34-4-1}
+## 29.5.1 One Solid, Two Shadows: Down the Ridge Is "Orthogonal Once," Along the Walls Is "Orthogonal Twice" {#sec-ch34-4-1}
 
 Why did "one direct step" and "two right-angle steps" look like rival routes in [Chapter 9](ch09-axes-and-state-addressing.md) and the opening sections of this chapter? Because each route views the same 3D solid $\Delta\mathcal{T}_\epsilon$ through a single lower-dimensional projection (`MODEL`):
 
@@ -48,9 +48,9 @@ Why did "one direct step" and "two right-angle steps" look like rival routes in 
 **Walking two steps along perpendicular walls: a right-angle turn at $B$ generates the transverse bivector.** Stepping along the first wall by $U_{12}(\epsilon)$ and turning $90^\circ$ into the second wall by $U_{23}(\epsilon)$ multiplies two violet wall rotors to produce the extra $-\sin^2(\epsilon/2)\,e_1e_3$ component (the rotor product is a hand computation; green `LEAN ✓` `two_axis_finite_word` and `covariant_commutator_formula` guarantee only the related general lemmas).
 :::
 
-## 34.4.2 Fair Squaring Bulges the Magenta Spherical Cap: Girard Excess and the Seed of Curvature {#sec-ch34-4-2}
+## 29.5.2 Fair Squaring Bulges the Magenta Spherical Cap: Girard Excess and the Seed of Curvature {#sec-ch34-4-2}
 
-Why must the cap bulge outward as a curved **magenta spherical triangle $\triangle_{\mathrm{sph}} ABC$** instead of lying flat? Because unit-norm fairness $\|\mathbf{x}\|^2 = 1$ ([Chapters 31](ch31-quantum-fairness.md) and [32](ch32-unified-field-and-meta-unification.md)) forbids cutting corners through the interior of the ball!
+Why must the cap bulge outward as a curved **magenta spherical triangle $\triangle_{\mathrm{sph}} ABC$** instead of lying flat? Because unit-norm fairness $\|\mathbf{x}\|^2 = 1$ ([Chapters 27](ch31-quantum-fairness.md) and [28](ch32-unified-field-and-meta-unification.md)) forbids cutting corners through the interior of the ball!
 
 Compare the cyan flat Euclidean chord triangle $\triangle_{\mathrm{flat}} ABC$ against the magenta spherical cap $\triangle_{\mathrm{sph}} ABC$ (spherical trigonometry and Girard's formula belong to classical geometry; see [@rem-ch34-regge-spinfoam-trihedron-literature] below):
 
@@ -84,7 +84,7 @@ This 2-cochain face defect wedged between two-step and one-step comparison is th
 **The angle $\Omega(\epsilon)$ added by the magenta cap turns an arrow carried round the loop.** Sweep the loop slider $t$ around $A \to B \to C \to A$: a parallel-transported tangent vector comes back turned by Girard's excess $\Omega(\epsilon) = 2\arctan(\tan^2(\epsilon/2))$, while the closed-loop spinor rotor records half that angle, $-\Omega(\epsilon)/2$ (`ARGUED`).
 :::
 
-## 34.4.3 Why the Trihedron Must Be Infinitesimal: Dimension-Opening Volume Brick, Flat Illusion, and the Discrete Sphere {#sec-ch34-4-3}
+## 29.5.3 Why the Trihedron Must Be Infinitesimal: Dimension-Opening Volume Brick, Flat Illusion, and the Discrete Sphere {#sec-ch34-4-3}
 
 Calling $\Delta\mathcal{T}_\epsilon$ an **infinitesimal** spherical trihedron ($\epsilon \ll 1$) captures three decisive physical mechanisms:
 
@@ -110,13 +110,13 @@ Calling $\Delta\mathcal{T}_\epsilon$ an **infinitesimal** spherical trihedron ($
 :::
 
 3. **"The Sphere Is Always an Approximation": Discrete Trihedral Tiling and the Octant Limit**:
-   In gravitational physics, Regge calculus (1961) and spin-foam quantum gravity assemble curved spacetime from flat simplices carrying hinge defects ([@rem-ch34-regge-spinfoam-trihedron-literature]); within our book's `MODEL`, this joins [Chapter 21](ch21-diagonalization-and-escape.md)'s polyhedral approximation of spheres and [Chapter 39 §39.5](ch39-s05-pisot-clifford-rauzy.md#sec-ch39-pisot-clifford-rauzy)'s $K = 3$ Tribonacci Rauzy fractal torsion—every smooth sphere is a macroscopic envelope stitched from elementary trihedra $\Delta\mathcal{T}_\epsilon$. Pushing the amber slider all the way up to $\epsilon = \frac{\pi}{2}$ expands the microscopic cell seamlessly into the full octant of §34.2 ($c = \frac{\pi}{2},\; \Omega = \frac{\pi}{2},\; \det G = 1$)!
+   In gravitational physics, Regge calculus (1961) and spin-foam quantum gravity assemble curved spacetime from flat simplices carrying hinge defects ([@rem-ch34-regge-spinfoam-trihedron-literature]); within our book's `MODEL`, this joins [Chapter 21](ch21-diagonalization-and-escape.md)'s polyhedral approximation of spheres and [§35.6](ch39-s05-pisot-clifford-rauzy.md#sec-ch39-pisot-clifford-rauzy)'s $K = 3$ Tribonacci Rauzy fractal torsion—every smooth sphere is a macroscopic envelope stitched from elementary trihedra $\Delta\mathcal{T}_\epsilon$. Pushing the amber slider all the way up to $\epsilon = \frac{\pi}{2}$ expands the microscopic cell seamlessly into the full octant of §29.2 ($c = \frac{\pi}{2},\; \Omega = \frac{\pi}{2},\; \det G = 1$)!
 
 ::: {.viz src="spherical-trihedron-cell" preset="octant-limit" height="520"}
 **Growing the step to $90^\circ$: the elementary cell becomes the whole octant.** At $\epsilon = 90^\circ$, $A = e_1$, $B = e_2$, and $C = e_3$ stand pairwise orthogonal, the magenta cap covers the full first octant ($\Omega = \pi/2$), and the violet Gram brick fills the unit cube ($\det G = 1$).
 :::
 
-## 34.4.4 Formal Theorem on Simplicial Two-Cochain Repair and Moving-Axis Propagation, with Worked Benchmark {#sec-ch34-4-4}
+## 29.5.4 Formal Theorem on Simplicial Two-Cochain Repair and Moving-Axis Propagation, with Worked Benchmark {#sec-ch34-4-4}
 
 Four frozen theorems in `trureturing` formalize when a multi-vertex triangle $2$-cochain splits globally into one-step versus two-step edge potentials and how local two-axis invariance propagates across all of $\mathrm{SO}(3)$:
 
@@ -267,6 +267,6 @@ Open the full spherical-trihedron laboratory below to sweep the amber step handl
 **The spherical trihedron cell: the full lab.** Five scenes and six experiment cards share one right-angled trihedron $\Delta\mathcal{T}_\epsilon$: drag the amber step handle from small angles up to the $90^\circ$ octant, comparing the cyan direct arc down the ridge, the two-step walk along the walls, Girard's excess $\Omega(\epsilon)$ of the magenta cap over the cyan flat cut, and the violet 3D Gram volume brick $\sin^2\epsilon$, with green `LEAN ✓` boxes marking the frozen kernel theorems.
 :::
 
-Section 34.4 unified "orthogonal once" and "orthogonal twice" as dual shadows of the elementary trihedral cell $\Delta\mathcal{T}_\epsilon$. Press just half a step further, however, and a final ontological question demands an answer: **in a zero-background universe with no pre-installed third point, where does that third vertex ray come from in the first place—and what folding has our own language already imposed the moment we utter the phrase "infinitesimal spherical trihedron"?**
+Section 29.5 unified "orthogonal once" and "orthogonal twice" as dual shadows of the elementary trihedral cell $\Delta\mathcal{T}_\epsilon$. Press just half a step further, however, and a final ontological question demands an answer: **in a zero-background universe with no pre-installed third point, where does that third vertex ray come from in the first place—and what folding has our own language already imposed the moment we utter the phrase "infinitesimal spherical trihedron"?**
 
 ---

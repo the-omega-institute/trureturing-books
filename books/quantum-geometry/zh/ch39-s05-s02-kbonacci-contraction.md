@@ -1,4 +1,4 @@
-# 39.5.2 $K$-Bonacci 广义禁戒与皮索共轭圆盘收缩 {#sec-ch39-p2e-kbonacci}
+# 35.6.2 $K$-Bonacci 广义禁戒与皮索共轭圆盘收缩 {#sec-ch39-p2e-kbonacci}
 
 对任意整数阶 $K \ge 2$，令 $K$-Bonacci 特征多项式为
 

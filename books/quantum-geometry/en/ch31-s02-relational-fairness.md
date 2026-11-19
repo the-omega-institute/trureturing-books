@@ -1,4 +1,4 @@
-# 31.2 Relational Fairness: No-Cloning and Entanglement Monogamy {#sec-ch31-monogamy}
+# 27.2 Relational Fairness: No-Cloning and Entanglement Monogamy {#sec-ch31-monogamy}
 
 In the classical data economy, a monopolist can copy a bitstring a million times at negligible cost and pledge "hundred-percent exclusive" correlation to arbitrarily many partners simultaneously. Inside the tensor-product geometry of multi-qubit systems, **Relational Fairness (`MODEL`)** enforces an ethic at once tender and uncompromising: **profound entanglement cannot be wholesaled, and a living superposition cannot be pirated.**
 
