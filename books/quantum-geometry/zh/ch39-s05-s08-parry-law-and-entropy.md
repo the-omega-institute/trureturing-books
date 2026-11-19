@@ -478,6 +478,20 @@ $J_0$ 记录位置 $0$ 前面连续真的位数，因此 $J_0=0$ 恰好表示 $r
 对第 $i$ 层，只选从 $A$ 出发且走了 $i$ 步仍未回返的路径。把这些路径左移 $i$ 步，恰好得到 $J_0=i$ 的全部路径。向后平移 $i$ 步找回该层在 $A$ 中的起点，最近零位条件排除了中间回返。于是对每个可测事件，可以按 $J_0$ 的值把它的质量拆开。把各层的条件概率乘回 $\mu(A)$ 并相加，就恢复了原事件的质量。完整证明由 Lean 内核检查。
 :::
 
+::: {.theorem #thm-ch39-p2e-parry-raw-window title="帕里零截面上的原始比特窗口" lean="D5/S3/TotalVariation/ParryFirstReturn.zero_section_raw_window"}
+采用 [@thm-ch39-p2e-native-parry-first-return] 的编码与测度，记 $p=\beta_K^{-1}$、$h_j=\sum_{\ell=1}^{K-j}p^\ell$。设 $v_0,\ldots,v_m\in\{0,\ldots,K-1\}$ 从 $v_0=0$ 出发，在每一步满足 $v_{i+1}\in\{0,v_i+1\}$。令 $w_i=\mathbf{1}_{v_{i+1}\ne 0}$，其中 $0\le i<m$，而 $0$ 和 $1$ 分别表示假和真的关系位。则
+
+$$
+\mu_A\{r:(r_0,\ldots,r_{m-1})=w\}=p^m h_{v_m}.
+$$
+
+当 $m=0$ 时，事件为整个路径空间，且 $h_0=1$。
+:::
+
+::: proof
+在 $A$ 上，位置零的后缀长度为零。之后每个原始比特使后缀重置为零或加一。从 $v_0=0$ 归纳，$A$ 上的原始窗口事件恰好是单个后缀柱集 $(v_0,\ldots,v_m)$。柱集质量除以 $\mu(A)$ 后消去初始后缀质量，合法转移概率中的比值 $h_{v_{i+1}}/h_{v_i}$ 望远镜相消，留下 $h_{v_m}$。因此窗口末端的未完成游程保留了一个后缀权重。完整证明由 Lean 内核检查。
+:::
+
 一段回返轨道可以按「读到下一个零用了几步」来记录。在零截面上，连续回返的联合概率可以直接从原路径的后缀柱集算出。
 
 ::: {.theorem #thm-ch39-p2e-parry-return-durations title="双向帕里源的回返时长联合分布" lean="D5/S3/TotalVariation/ParryFirstReturn.return_time_cylinder_probability"}

@@ -478,6 +478,20 @@ The variable $J_0$ counts the consecutive true bits immediately before position 
 At level $i$, take the paths in $A$ that have taken $i$ steps without yet returning. Shifting them by $i$ gives exactly the paths with $J_0=i$. Shifting back by $i$ recovers the starting point in $A$, and the preceding-zero condition excludes an intervening return. Thus the mass of every measurable event splits by its value of $J_0$. Multiplying the conditional level contributions by $\mu(A)$ and adding them recovers the original event mass. The full proof is checked by the Lean kernel.
 :::
 
+::: {.theorem #thm-ch39-p2e-parry-raw-window title="Raw Bit Windows on the Parry Zero Section" lean="D5/S3/TotalVariation/ParryFirstReturn.zero_section_raw_window"}
+With the coding and measure of [@thm-ch39-p2e-native-parry-first-return], write $p=\beta_K^{-1}$ and $h_j=\sum_{\ell=1}^{K-j}p^\ell$. Let $v_0,\ldots,v_m\in\{0,\ldots,K-1\}$ start at $v_0=0$ and satisfy $v_{i+1}\in\{0,v_i+1\}$ at every step. Set $w_i=\mathbf{1}_{v_{i+1}\ne 0}$ for $0\le i<m$, with $0$ and $1$ denoting the false and true relation bits. Then
+
+$$
+\mu_A\{r:(r_0,\ldots,r_{m-1})=w\}=p^m h_{v_m}.
+$$
+
+For $m=0$ the event is the whole path space and $h_0=1$.
+:::
+
+::: proof
+On $A$, the suffix at position zero is zero. Each successive raw bit either resets the suffix to zero or increments it by one. Starting with $v_0=0$, induction identifies the raw window event on $A$ with the single suffix cylinder $(v_0,\ldots,v_m)$. Dividing its mass by $\mu(A)$ removes the initial suffix mass. The ratios $h_{v_{i+1}}/h_{v_i}$ from the allowed transition probabilities telescope to $h_{v_m}$. Thus an unfinished run at the end of a window retains a suffix weight. The full proof is checked by the Lean kernel.
+:::
+
 A return orbit records how many steps it takes to read each successive zero. On the zero section, the joint probability of these durations can be computed directly from a suffix cylinder of the original path.
 
 ::: {.theorem #thm-ch39-p2e-parry-return-durations title="Joint Distribution of Return Durations in the Bilateral Parry Source" lean="D5/S3/TotalVariation/ParryFirstReturn.return_time_cylinder_probability"}
