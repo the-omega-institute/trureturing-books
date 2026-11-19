@@ -478,6 +478,22 @@ The variable $J_0$ counts the consecutive true bits immediately before position 
 At level $i$, take the paths in $A$ that have taken $i$ steps without yet returning. Shifting them by $i$ gives exactly the paths with $J_0=i$. Shifting back by $i$ recovers the starting point in $A$, and the preceding-zero condition excludes an intervening return. Thus the mass of every measurable event splits by its value of $J_0$. Multiplying the conditional level contributions by $\mu(A)$ and adding them recovers the original event mass. The full proof is checked by the Lean kernel.
 :::
 
+Consider any probability distribution on the same duration alphabet. Dividing its entropy per return by the mean number of original steps puts the entropy in units of nats per step.
+
+::: {.remark #rem-ch39-p2e-parry-duration-entropy-rate title="The Parry Distribution Uniquely Maximizes Entropy per Original Step"}
+Let $K\ge2$, $p=\beta_K^{-1}$, and $q_d=p^d$ for $1\le d\le K$. For any probability vector $a=(a_1,\ldots,a_K)$, write $H(a)=-\sum_d a_d\log a_d$ and $\ell(a)=\sum_d d\,a_d$. With natural logarithms and zero contributions at zero probabilities,
+
+$$
+D(a\Vert q)=-H(a)-\ell(a)\log p,
+\qquad
+\frac{H(a)}{\ell(a)}\le-\log p.
+$$
+
+Equality holds exactly when $a=q$.
+
+Expand each $a_d\log(a_d/q_d)$ using $\log q_d=d\log p$. At zero probability the contributions vanish directly. The mean duration $\ell(a)$ is at least one. Apply the [finite Gibbs inequality](lean:D5/S3/Divergence/GrandmotherTheorem.kl_divergence_nonneg) and divide by this mean to get the upper bound. The [Gibbs equality criterion](lean:D5/S3/Divergence/GibbsEquality.kl_divergence_eq_zero_iff) gives uniqueness.
+:::
+
 A return orbit records how many steps it takes to read each successive zero. On the zero section, the joint probability of these durations can be computed directly from a suffix cylinder of the original path.
 
 ::: {.theorem #thm-ch39-p2e-parry-return-durations title="Joint Distribution of Return Durations in the Bilateral Parry Source" lean="D5/S3/TotalVariation/ParryFirstReturn.return_time_cylinder_probability"}

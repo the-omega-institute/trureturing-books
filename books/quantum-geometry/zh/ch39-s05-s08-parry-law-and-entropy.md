@@ -478,6 +478,22 @@ $J_0$ 记录位置 $0$ 前面连续真的位数，因此 $J_0=0$ 恰好表示 $r
 对第 $i$ 层，只选从 $A$ 出发且走了 $i$ 步仍未回返的路径。把这些路径左移 $i$ 步，恰好得到 $J_0=i$ 的全部路径。向后平移 $i$ 步找回该层在 $A$ 中的起点，最近零位条件排除了中间回返。于是对每个可测事件，可以按 $J_0$ 的值把它的质量拆开。把各层的条件概率乘回 $\mu(A)$ 并相加，就恢复了原事件的质量。完整证明由 Lean 内核检查。
 :::
 
+现在考虑同一时长字母表上的任意概率分布。一次回返携带的熵须除以平均经过的原始位数，才能与每步熵比较。
+
+::: {.remark #rem-ch39-p2e-parry-duration-entropy-rate title="帕里分布唯一最大化每原始步熵"}
+设 $K\ge2$，$p=\beta_K^{-1}$，$q_d=p^d$，其中 $1\le d\le K$。令 $a=(a_1,\ldots,a_K)$ 为任意概率向量，$H(a)=-\sum_d a_d\log a_d$，$\ell(a)=\sum_d d\,a_d$。以自然对数计量，并取概率为零的项为零，则
+
+$$
+D(a\Vert q)=-H(a)-\ell(a)\log p,
+\qquad
+\frac{H(a)}{\ell(a)}\le-\log p.
+$$
+
+当且仅当 $a=q$ 时取等号。
+
+逐项展开 $a_d\log(a_d/q_d)$，并代入 $\log q_d=d\log p$。概率为零时，各项直接为零。由于时长至少为一，$\ell(a)\ge1$。由[有限 Gibbs 不等式](lean:D5/S3/Divergence/GrandmotherTheorem.kl_divergence_nonneg)，相对熵非负，除以平均时长便得上界。[Gibbs 等号判据](lean:D5/S3/Divergence/GibbsEquality.kl_divergence_eq_zero_iff)给出最优分布的唯一性。
+:::
+
 一段回返轨道可以按「读到下一个零用了几步」来记录。在零截面上，连续回返的联合概率可以直接从原路径的后缀柱集算出。
 
 ::: {.theorem #thm-ch39-p2e-parry-return-durations title="双向帕里源的回返时长联合分布" lean="D5/S3/TotalVariation/ParryFirstReturn.return_time_cylinder_probability"}
