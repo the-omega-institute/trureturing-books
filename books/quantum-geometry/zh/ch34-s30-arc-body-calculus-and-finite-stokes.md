@@ -168,13 +168,13 @@ $$
 
 其中 $P_x$ 是到切空间 $T_x S^3$ 的正交投影，$v(x, y) = 1 - \cos d(x, y) = \frac{1}{2}\lVert y - x\rVert^2$：每一步恰为切向转动与径向矢高之和。
 
-**任意划分上的矢高和（`手工推导`；二次变差取 H. Föllmer, *Séminaire de Probabilités XV*, 1981 的定义）。** 对 $[0, T]$ 上的连续路径与划分 $\pi$，记 $d_k = d(x_k, x_{k+1})$、$v_k = v(x_k, x_{k+1})$，则 $\sum_k v_k \le \frac{1}{2}\max_k d_k\sum_k d_k$，所以可求长路径的矢高和随网格加细趋于 $0$；若路径沿一列划分具有二次变差 $[x]$，则对连续函数 $f$ 有 $\sum_k v_k f(x_k) \to \frac{1}{2}\int_0^T f(x_t)\,d[x]_t$；对 $S^3$ 上的布朗运动（生成元 $\frac{1}{2}\Delta$）与任意网格趋于零的确定划分列，依概率有
+**任意划分上的矢高和（确定性部分是 H. Föllmer 逐路径二次变差（*Séminaire de Probabilités XV*, 1981）的改写，`文献结果` + `手工推导`）。** 对 $[0, T]$ 上的连续路径与划分 $\pi$，记 $d_k = d(x_k, x_{k+1})$、$v_k = v(x_k, x_{k+1})$，则 $\sum_k v_k \le \frac{1}{2}\max_k d_k\sum_k d_k$，所以可求长路径的矢高和随网格加细趋于 $0$；若路径沿一列划分具有二次变差 $[x]$，则对连续函数 $f$ 有 $\sum_k v_k f(x_k) \to \frac{1}{2}\int_0^T f(x_t)\,d[x]_t$；对 $S^3$ 上的布朗运动（生成元 $\frac{1}{2}\Delta$）与任意网格趋于零的确定划分列，依概率有
 
 $$
 \sum_k v_k \;\to\; \frac{3}{2}\,T, \qquad \sum_k v_k\,x_k \;\to\; \frac{3}{2}\int_0^T x_t\,dt,
 $$
 
-后者正是伊藤漂移项。这把 [@thm-ch34-accumulated-sagitta-phases] 的等步长情形推广到任意划分与一般路径；上文圆周上的常数 $\frac{1}{2}\sigma_0^2 T$ 是一维情形 $d[x]_t = \sigma_0^2\,dt$ 的读法。
+后者正是伊藤漂移项；涨落为：对二进划分，$2^{n/2}\bigl(\sum_k v_k - \frac{3}{2}T\bigr)$ 依分布收敛到 $N\bigl(0, \frac{3}{2}T^2\bigr)$（J. Jacod & P. Protter, *Discretization of Processes*, Springer, 2012，`文献结果`）。这把 [@thm-ch34-accumulated-sagitta-phases] 的等步长情形推广到任意划分与一般路径；上文圆周上的常数 $\frac{1}{2}\sigma_0^2 T$ 是一维情形 $d[x]_t = \sigma_0^2\,dt$ 的读法。
 :::
 
 把 [§22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4) 的凯莱比 $w=(s-1)/s$ 用本节的话重说一遍：它是一个旋子。对临界线上的点 $\rho=\tfrac12+i\gamma$（$\gamma>0$），$u_\rho:=1-\tfrac1\rho$ 落在单位圆上，割弦 $\Delta_\rho=u_\rho-1=-\tfrac1\rho$ 的长度是 $1/\lvert\rho\rvert$，矢高是 $v_\rho=\operatorname{Re}\tfrac1\rho=\tfrac{2}{1+4\gamma^2}$，两者满足 §30.3.1 的弦—矢高恒等式 $\lvert\Delta_\rho\rvert^2=2v_\rho$（手工推导）。对 $\zeta$ 的全体非平凡零点（按重数，不论是否在临界线上）把 $1-u_\rho^{\,n}$ 加起来，得到的数在解析数论里有名字：Li 系数（文献结果，见下文 [@rem-ch34-li-criterion-sagitta-literature]）。零点在临界线上时，这一项的实部 $1-\operatorname{Re}u_\rho^{\,n}$ 正是旋子 $u_\rho$ 的 $n$ 次幂的矢高；零点是否都在临界线上，是开放的 [@conj-riemann-hypothesis]。所钉仓库冻结的是按导数定义的 Li 系数，与它有关的事实如下。
@@ -518,14 +518,14 @@ $$
    \mathcal{P}_{\mathrm{shell}}\prod_{k=1}^{M} \widetilde{W}_k^{(r)} \equiv \hat{W}_{\partial\Sigma}^{(r)}!
    $$
 
-::: {.remark #rem-ch34-shelling-stokes-and-triangle-holonomy title="剥壳序有限斯托克斯恒等式的精确陈述、极小圆弧三角形的自旋和乐与有理顶点（手工推导与文献结果）"}
+::: {.remark #rem-ch34-shelling-stokes-and-triangle-holonomy title="剥壳序有限斯托克斯恒等式（经典套索分解的有限形式）、极小圆弧三角形的自旋和乐与有理顶点（手工推导与文献结果）"}
 **剥壳序下的有限斯托克斯恒等式。** 设 $K$ 是底空间为闭圆盘的有限平面复形，每个闭面都是由一条棱圈围成的闭圆盘，边界一律逆时针定向。剥壳是面的排列 $f_1, \dots, f_N$，使每个 $D_{j-1} := f_1 \cup \dots \cup f_{j-1}$ 都是闭圆盘，且 $f_j \cap D_{j-1}$ 是一条至少含一条棱、不等于 $\partial f_j$ 的棱路径 $\alpha_j$；记 $a_j$ 为 $\alpha_j$ 沿 $\partial D_{j-1}$ 逆时针方向的起点。对任意 $\mathrm{SU}(2)$ 值上链 $U$（$U_{pq} = U_{qp}^{-1}$，路径和乐按 $\operatorname{hol}(\gamma * \gamma') = \operatorname{hol}(\gamma')\operatorname{hol}(\gamma)$ 复合）与 $\partial K$ 上任一顶点 $p$，在 $1$-骨架中存在从 $p$ 到 $a_j$ 的棱路径 $\tau_j$，使
 
 $$
 \operatorname{hol}(\partial K) \;=\; L_1 L_2 \cdots L_N, \qquad L_j := \operatorname{hol}(\tau_j)^{-1}\,F_j\,\operatorname{hol}(\tau_j), \qquad F_j := \operatorname{hol}(\partial f_j)\ \text{（在 } a_j \text{ 处）}.
 $$
 
-每个面恰贡献一个因子，按剥壳次序从左到右排列；恒等式对每个上链精确成立，不涉及极限（参见 I. Ya. Aref'eva, *Theor. Math. Phys.* **43**, 353–356, 1980；R. L. Karp, F. Mansouri & J. S. Rno, *J. Math. Phys.* **40**, 6033–6043, 1999，`文献结果`）。证明按剥壳序归纳，每一步用切割引理：沿棱路径 $\delta$ 把闭路 $\alpha * \beta$ 切开时，$\operatorname{hol}(\alpha * \beta) = \operatorname{hol}(\bar{\delta} * \beta)\,\operatorname{hol}(\alpha * \delta)$，基点在切口端点。上文“共轭尾巴逐对归零”即这一归纳中每一步的消去，基点与次序须按上述规则选取（`手工推导`）。
+每个面恰贡献一个因子，按剥壳次序从左到右排列；恒等式对每个上链精确成立，不涉及极限。这是经典套索分解的精确有限形式（I. Ya. Aref'eva, *Theor. Math. Phys.* **43**, 353–356, 1980；N. E. Bralić, *Phys. Rev. D* **22**, 3090–3103, 1980；T. Lévy, *Mem. Amer. Math. Soc.* **166**, no. 790, 2003 与 *Astérisque* **329**, 2010；乘积积分写法见 R. L. Karp, F. Mansouri & J. S. Rno, *J. Math. Phys.* **40**, 6033–6043, 1999，`文献结果`）。圆盘的每个三角剖分都可剥壳（G. Danaraj & V. Klee, *Ann. Discrete Math.* **2**, 33–52, 1978，`文献结果`），所以恒等式适用于任何三角剖分的圆盘；对一般多边形复形则须先有剥壳序。证明按剥壳序归纳，每一步用切割引理：沿棱路径 $\delta$ 把闭路 $\alpha * \beta$ 切开时，$\operatorname{hol}(\alpha * \beta) = \operatorname{hol}(\bar{\delta} * \beta)\,\operatorname{hol}(\alpha * \delta)$，基点在切口端点。上文“共轭尾巴逐对归零”即这一归纳中每一步的消去，基点与次序须按上述规则选取（`手工推导`）。
 
 **极小圆弧三角形的自旋和乐（`手工推导`）。** 对两两非对跖的 $x, y, z \in S^3(1)$，记半位移 $h_{yx} := (y\bar{x})^{1/2}$（取实部为正的平方根），$a := h_{xz}h_{zy}h_{yx}$。则
 
@@ -533,7 +533,7 @@ $$
 \operatorname{Re} a \;=\; \frac{\kappa_{xy} + \kappa_{yz} + \kappa_{zx} - 1}{2\sqrt{\kappa_{xy}\,\kappa_{yz}\,\kappa_{zx}}} \;=\; \cos\frac{E}{2},
 $$
 
-其中第二个等号在 $x, y, z$ 线性无关时成立，$E$ 是它们所在大二维球面上测地三角形的球面角盈（面积），并有 $\tan\frac{E}{2} = \lVert x \wedge y \wedge z\rVert / (1 + c_{xy} + c_{yz} + c_{zx})$。对小三角形 $y = \exp(Y)x$、$z = \exp(Z)x$（$\lvert Y\rvert, \lvert Z\rvert \le r$），$a = \exp\bigl(\frac{1}{8}[Y, Z] + \mathcal{O}(r^4)\bigr)$：李括号项是角盈的领头阶。$S^2$ 上三点情形即巴格曼不变量与 Van Oosterom–Strackee 公式（1983，`文献结果`）。
+其中第二个等号在 $x, y, z$ 线性无关时成立，$E$ 是它们所在大二维球面上测地三角形的球面角盈（面积），并有 $\tan\frac{E}{2} = \lVert x \wedge y \wedge z\rVert / (1 + c_{xy} + c_{yz} + c_{zx})$。对小三角形 $y = \exp(Y)x$、$z = \exp(Z)x$（$\lvert Y\rvert, \lvert Z\rvert \le r$），$a = \exp\bigl(\frac{1}{8}[Y, Z] + \mathcal{O}(r^4)\bigr)$：李括号项是角盈的领头阶。这一公式是巴格曼—潘查拉特南三点不变量的 $\mathrm{SU}(2)$ 形式（J. Samuel & R. Bhandari, *Phys. Rev. Lett.* **60**, 2339–2342, 1988；N. Mukunda & R. Simon, *Ann. Physics* **228**, 205–268, 1993，`文献结果`）。
 
 **有理顶点（`手工推导`；凯莱参数化见 A. Cayley, *J. Reine Angew. Math.* **32**, 119–123, 1846 与 O. Rodrigues 1840，`文献结果`）。** 凯莱坐标 $\operatorname{Cay}(r) = (1 + r)(1 - r)^{-1}$（$r \in \operatorname{Im}\mathbb{H}$）把 $\mathbb{Q}^3$ 双射到 $S^3(\mathbb{Q}) \setminus \{-1\}$。顶点全在 $S^3(\mathbb{Q})$ 时，流群运算、$\kappa$、矢高、上文递推及其切比雪夫系数都是有理数；沿每段极小圆弧的列维-奇维塔平移（右平凡化下）是 $\operatorname{Ad}(1 + x_q\bar{x}_p) \in \mathrm{SO}(3, \mathbb{Q})$，闭合极小圆弧多边形的和乐亦然；三角形的 $\cos E$ 为有理数，而半位移与 $E$ 本身一般是无理的（$x = 1$、$y = i$、$z = j$ 时 $E = \frac{\pi}{2}$）。
 :::
