@@ -14,7 +14,7 @@
 
 1. **贝克莱“已死量的幽灵”与连续统无穷小悖论**：为了求取瞬时变化率，差商分母先假设 $\Delta x \neq 0$ 做除法，算完却又令 $\Delta x = 0$ 抹去余项——早在 1734 年，贝克莱主教（G. Berkeley）就在《分析学家》（*The Analyst*）中一针见血地讥刺这种既非零又为零的无穷小是“已死量的幽灵”（ghosts of departed quantities）。十九世纪柯西—魏尔斯特拉斯的 $\varepsilon\text{-}\delta$ 滤子极限虽然在实分析公理上缝合了逻辑裂缝，却迫使每一次基本求导都背上无穷序列拓扑极限的沉重包袱，直接违背场内有限观察者受自指停机孔径 $\epsilon \ge \varepsilon_{\mathrm{self}} > 0$ 约束的物理现实。
 2. **局部笛卡尔坐标卡的垂直切线伪奇点（对比真实内禀尖点）**：在光滑单位圆 $x^2 + y^2 = 1$ 的赤道顶点 $(1, 0)$ 处，几何圆弧本身处处光滑、内禀曲率恒为 $\kappa \equiv 1$，只因切线恰好转至与横坐标轴正交的 $\theta = \frac{\pi}{2}$，局部显函数斜率 $dy/dx = \tan\theta$ 就凭空爆破为 $\pm\infty$！这里必须严守微分几何边界：圆周在 $\theta = \frac{\pi}{2}$ 处的爆破纯属局部投影坐标卡 $(x \mapsto y(x))$ 撞上观察者 $90^\circ$ 正交盲区所生的人为假奇点（改按弧长参数化即可消除），而半立方抛物线 $y^2 = x^3$ 在原点处的不可微则是弧长切向角发生真实跳变的内禀尖点（cusp）。经典斜率记号把“坐标卡正交盲区”与“流形真实奇点”混为一谈。
-3. **抹杀二阶弦弧矢高，导致几何曲率与随机二次变差集体失忆**：在 [§29.9](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling) 中我们曾讨论过劳维尔（Lawvere 1967）与科克（Kock 1981）综合微分几何（SDG）的一阶幂零无穷小环 $D_1 = \{d \mid d^2 = 0\}$，以及温格特（Wengert 1964）前向自动微分所用的二元数环 $\mathbb{R}[\varepsilon]/(\varepsilon^2)$。幂零公理 $d^2 = 0$ 虽然优雅地免除了极限，却靠代数截断把二阶弯曲矢高强行判了死刑——它既装不下球面三面角的吉拉尔曲率角盈 $\Omega \sim \frac{1}{2}\epsilon^2$，也无法原生承载布朗运动与费曼路径积分中 $(dW_t)^2 = dt \neq 0$ 的非零二次变差！
+3. **抹杀二阶弦弧矢高，导致几何曲率与随机二次变差集体失忆**：在 [§29.9](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling) 中我们曾讨论过劳维尔（Lawvere 1967）与科克（Kock 1981）综合微分几何（SDG）的一阶幂零无穷小环 $D_1 = \{d \mid d^2 = 0\}$，以及温格特（Wengert 1964）前向自动微分所用的二元数环 $\mathbb{R}[\varepsilon]/(\varepsilon^2)$。幂零公理 $d^2 = 0$ 虽然优雅地免除了极限，却靠代数截断把二阶弯曲矢高强行判了死刑——它既装不下球面三面角的吉拉尔曲率角盈 $\Omega = \mathcal{O}(\epsilon^2)$（两直角边为 $\epsilon$ 的极小直角三面角上 $\Omega = 2\arctan\bigl(\tan^2\frac{\epsilon}{2}\bigr) = \frac{1}{2}\epsilon^2 + \frac{1}{12}\epsilon^4 + \cdots$；一般三角形的二阶系数取决于其形状），也无法原生承载布朗运动与费曼路径积分中 $(dW_t)^2 = dt \neq 0$ 的非零二次变差！
 4. **有限精度机器上的灾难性相减抵消（Subtractive Cancellation）**：当步长 $\epsilon$ 缩向机器精度极限时，$f(x_0 + \epsilon)$ 与 $f(x_0)$ 共享几乎完全相同的有效数字；一记实轴硬减法把高位有效比特悉数对撞归零，再除以极小分母 $\epsilon$，瞬间把舍入噪声放大 $\epsilon^{-1}$ 倍，令数值导数彻底崩溃。
 
 一旦把微积分的原子从“平直切线差”换回本书一以贯之的**极小圆弧体比较旋子**，上述四重病灶便在同一座圆几何框架下迎刃而解。设有限观察者在步长孔径 $\epsilon \ge \varepsilon_{\mathrm{self}} > 0$ 上比较相邻两态，局部单位双向量平面生成元 $\hat{\mathbf{B}}(s)$ 满足平方负一律 $\hat{\mathbf{B}}(s)^2 = -\mathbf{1}$（在矩阵表示中即由斜伴随幺正算符或平衡正交投影对内生给出的相对复结构，参见下文 [@thm-ch34-arc-rotor-calculus-and-finite-stokes] 第 1 款），局部内禀曲率（角速率）为 $\kappa(s)$。单步演化不再是加法切线推移 $1 + \kappa\epsilon$，而是保模长的**比较旋子微分算子**：
@@ -37,7 +37,7 @@ $$
   (1 - v_\epsilon)^2 + c_\epsilon^2 = \cos^2(\kappa\epsilon) + \sin^2(\kappa\epsilon) \equiv 1, \qquad \lvert\Delta_\epsilon\hat{\mathcal{U}}\rvert^2 = v_\epsilon^2 + c_\epsilon^2 \equiv 2v_\epsilon = 4\sin^2\!\left(\frac{\kappa\epsilon}{2}\right).
   $$
 
-  由此，[§29.9](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling) 的一阶幂零环 $D_1 = \{d \mid d^2 = 0\}$ 恰恰获得了最透彻的几何定位：**$D_1$ 并非终极微观本体，而是圆弧体微分代数模去品红色二阶矢高理想 $(v_\epsilon)$ 之后留下的一阶切向商影**；保留 $v_\epsilon = 2\sin^2(\kappa\epsilon/2) > 0$，才保住了曲率与涨落的全部真身！同时注意一条至关重要的数值铁律：在 IEEE-754 双精度浮点运算中，直接计算 `1.0 - cos(theta)` 会在 $\lvert\theta\rvert \le 10^{-8}$ 时因高位对撞而彻底归零；而改用代数恒等的**半角正矢公式 `2.0 * sin^2(theta / 2.0)`**（航海学中的半正矢 haversine 律），则从根源上消除了相减抵消，在全量程内精确守恒圆弧矢高！
+  由此，[§29.9](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling) 的一阶幂零环 $D_1 = \{d \mid d^2 = 0\}$ 恰恰获得了最透彻的几何定位：**$D_1$ 并非终极微观本体，而是圆弧体微分代数模去品红色二阶矢高理想 $(v_\epsilon)$ 之后留下的一阶切向商影**（这里的“圆弧体微分代数”与“矢高理想”是 `MODEL` 读法，相应的环与理想本节未作定义）；保留 $v_\epsilon = 2\sin^2(\kappa\epsilon/2) > 0$，才保住了曲率与涨落的全部真身！同时注意一条至关重要的数值铁律：在 IEEE-754 双精度浮点运算中，直接计算 `1.0 - cos(theta)` 会在 $\lvert\theta\rvert \le 10^{-8}$ 时因高位对撞而彻底归零；而改用代数恒等的**半角正矢公式 `2.0 * sin^2(theta / 2.0)`**（航海学中的半正矢 haversine 律），则从根源上消除了相减抵消，在全量程内精确守恒圆弧矢高！
 * **消解 $\theta = \frac{\pi}{2}$ 垂直斜率伪奇点**：曲线局部状态直接由有界角—曲率对 $\bigl(\cos\theta(s), \sin\theta(s); \kappa(s)\bigr)$ 承载；当圆弧平稳滑过 $\theta = \frac{\pi}{2}$ 时，只是读出权重从可见余弦轴平滑移交给正交正弦轴 $(\cos\frac{\pi}{2}, \sin\frac{\pi}{2}) = (0, 1)$，内禀导数对 $(\theta'(s), \kappa(s))$ 全程有界光滑，再无 $\tan 90^\circ = \infty$ 的坐标卡爆炸。
 * **代数协变差分免除 $0/0$ 幽灵**：对于任意代数算子 $f$ 在单步幺正旋子 $U = \hat{\mathcal{D}}_\epsilon$ 下的协变演化 $U f = f_{\mathrm{tr}} U$，换位子直接因式分解为 $(f_{\mathrm{tr}} - f)U = U f - f U$（下文 [@thm-ch34-arc-rotor-calculus-and-finite-stokes] 第 2 款 `covariant_commutator_formula`），无需先除以零再令增量消失。
 
@@ -88,7 +88,7 @@ $$
 在传统微积分中，积分被定义为平直矩形条带的加法黎曼和 $\sum_{k=1}^N f(s_k)\Delta s$。一旦把这套加法更新搬到单位球面 $S^2$、旋转群 $\mathrm{SO}(3)$ 或量子幺正群 $\mathrm{U}(n)$ 上，每走一步显式欧拉切线步 $\psi_{k+1} = (I - \hat{\mathbf{i}}H\epsilon)\psi_k$，状态模方就会膨胀 $\lVert\psi_{k+1}\rVert^2 = (1 + \epsilon^2\lVert H\psi_k\rVert^2/\lVert\psi_k\rVert^2)\lVert\psi_k\rVert^2 > \lVert\psi_k\rVert^2$，必须靠人为归一化拉回球面。相反，[@def-ch34-arc-body-calculus-primitives] 第 2 款的沃尔泰拉（Volterra 1887）**路径有序旋子乘积积分** $\mathcal{I}_\epsilon[\Gamma] = \hat{\mathcal{D}}_\epsilon(s_N)\cdots\hat{\mathcal{D}}_\epsilon(s_1)$ 在结构上具备两重不可替代的几何精度：
 
 * **任意有限步长 $\epsilon > 0$ 下零模长漂移精确保流形**：由于每一枚单步因子 $\hat{\mathcal{D}}_\epsilon(s_k) = \exp(\hat{\mathbf{B}}(s_k)\kappa(s_k)\epsilon)$ 本身就是紧李群内的精确圆弧元，无论孔径 $\epsilon$ 多粗、连乘步数 $N$ 多大，乘积 $\mathcal{I}_\epsilon[\Gamma]$ 都以**零脱离流形误差（模长漂移恒等于 $0$）**严格落在目标李群或单位球面上！
-* **精确区分流形保持与时间离散收敛阶**：流形保模长绝不等于时间相位截断误差自动无穷高阶——对光滑时变生成元 $A(s) = \hat{\mathbf{B}}(s)\kappa(s)$，取左端点矩形采样 $A(s_{k-1})\epsilon$ 给出**一阶李—欧拉乘积积分**（全局相位误差 $\mathcal{O}(\epsilon)$）；改取每段极小圆弧的**对称圆弧中点采样** $A\!\bigl(\frac{s_{k-1}+s_k}{2}\bigr)\epsilon$（或对称特罗特分裂 $e^{\frac{\epsilon}{2}A_1}e^{\epsilon A_2}e^{\frac{\epsilon}{2}A_1}$），奇次误差项对称相消，立即升级为**二阶精度 $\mathcal{O}(\epsilon^2)$**；而若要在有限大步长下推进至四阶及更高阶，则必须按马格努斯展开（Magnus 1954，文献结果）在指数生成元内显式补入非对易李括号面积项 $\frac{1}{2}\int_{s_{k-1}}^{s_k}\!\int_{s_{k-1}}^{\tau_1} [A(\tau_1), A(\tau_2)]\,d\tau_2\,d\tau_1$——这一李括号面积修正在几何上恰恰就是单步时变旋转轴摆动张开的极小圆弧体球面角盈！这类保流形的有序乘积格式即几何数值积分中的李群积分子与马格努斯方法（A. Iserles, H. Z. Munthe-Kaas, S. P. Nørsett & A. Zanna, *Acta Numerica* **9**, 215–365, 2000，文献结果）。当生成元拆分为两个非对易分量 $A + B$ 时，其细网格连续统收敛性则由下文 [@thm-ch34-arc-rotor-calculus-and-finite-stokes] 第 3 款的李—特罗特乘积定理 [`trotter_product`](lean:D5/S3/Quantum/Analysis/TrotterProduct.trotter_product) 与非渐近指数尾界 [`exp_tail_le`](lean:D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le) 严格锁定。
+* **精确区分流形保持与时间离散收敛阶**：流形保模长绝不等于时间相位截断误差自动无穷高阶——对光滑时变生成元 $A(s) = \hat{\mathbf{B}}(s)\kappa(s)$，取左端点矩形采样 $A(s_{k-1})\epsilon$ 给出**一阶李—欧拉乘积积分**（全局相位误差 $\mathcal{O}(\epsilon)$）；改取每段极小圆弧的**对称圆弧中点采样** $A\!\bigl(\frac{s_{k-1}+s_k}{2}\bigr)\epsilon$（或对称特罗特分裂 $e^{\frac{\epsilon}{2}A_1}e^{\epsilon A_2}e^{\frac{\epsilon}{2}A_1}$），奇次误差项对称相消，立即升级为**二阶精度 $\mathcal{O}(\epsilon^2)$**；而若要在有限大步长下推进至四阶及更高阶，则必须按马格努斯展开（Magnus 1954，文献结果）在指数生成元内显式补入非对易李括号面积项 $\frac{1}{2}\int_{s_{k-1}}^{s_k}\!\int_{s_{k-1}}^{\tau_1} [A(\tau_1), A(\tau_2)]\,d\tau_2\,d\tau_1$——这一李括号面积修正在领头阶上对应单步时变旋转轴摆动张开的极小圆弧体球面角盈（仅限领头阶；三角形上的精确关系见下文 [@rem-ch34-shelling-stokes-and-triangle-holonomy]）！这类保流形的有序乘积格式即几何数值积分中的李群积分子与马格努斯方法（A. Iserles, H. Z. Munthe-Kaas, S. P. Nørsett & A. Zanna, *Acta Numerica* **9**, 215–365, 2000，文献结果）。当生成元拆分为两个非对易分量 $A + B$ 时，其细网格连续统收敛性则由下文 [@thm-ch34-arc-rotor-calculus-and-finite-stokes] 第 3 款的李—特罗特乘积定理 [`trotter_product`](lean:D5/S3/Quantum/Analysis/TrotterProduct.trotter_product) 与非渐近指数尾界 [`exp_tail_le`](lean:D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le) 严格锁定。
 
 然而，圆弧体乘积积分最石破天惊的威力，在于它揭开了**牛顿平滑微积分与伊藤随机微积分/费曼路径积分同出一源的几何相变机制**！在传统数学课程里，牛顿—莱布尼茨积分 $df = f'(x)dx$ 与伊藤引理（Itô 1944）多出来的二阶项 $df = f'(X_t)dX_t + \frac{1}{2}\sigma_0^2 f''(X_t)dt$ 仿佛活在两个平行的宇宙。现在让我们在时间跨度 $[0, T]$ 上均匀切分 $N = T/\epsilon$ 步，设路径在尺度 $\epsilon$ 下具有**赫尔德（Hölder）局部粗糙度指数 $\alpha \in (0, 1]$**，即每一步的典型角增量幅度标度为 $\lvert\Delta\theta_k\rvert = \sigma_0 \epsilon^\alpha$（$\sigma_0 > 0$）。在单步旋子 $\hat{\mathcal{D}}_k = \cos\Delta\theta_k\,\mathbf{1} + \hat{\mathbf{B}}\sin\Delta\theta_k$ 中，切向正弦弦给出标准一阶和 $\sum_k \sin\Delta\theta_k$，而品红色轴向正矢矢高则在整条轨迹上累加为**总矢高预算**（手工推导）：
 
@@ -112,10 +112,10 @@ $$
    **伊藤引理中神秘的 $\frac{1}{2}\sigma_0^2 f''(X_t)\,dt$ 项，根本不是随机分析凭空捏造的怪异补丁——对圆周上的角布朗运动、观测量取 $\cos$、$\sin$ 时，它字面上就是经典“以直代曲”强行削掉、却在 $\alpha = \frac{1}{2}$ 临界标度下拒绝消失的极小圆弧体总矢高 $\Sigma_{\mathrm{sag}}$（期望意义下）！** 更妙的是，圆弧几何还一举廓清了随机微积分与量子力学著名的**左端点（伊藤）vs. 圆弧中点（斯特拉托诺维奇—费曼）**之争：
 
    * 若在每步起点 $t_{k-1}$ 沿**平直切线**硬踏一步（左端点非预见采样，适应滤子鞅性质最优），切线脱离弯曲流形的法向掉高正好漏掉了单步矢高 $v_k \approx \frac{1}{2}(\Delta X_k)^2$，因此必须在公式末尾手动把漏掉的曲率矢高补回来——这就是**伊藤积分**与伊藤二阶修正项；
-   * 若改为沿着连接两态的**对称极小圆弧中点** $\frac{X_{t_{k-1}} + X_{t_k}}{2}$ 求值，单步旋子已将左半弧爬升与右半弧回落的二阶矢高对称吃进圆弧内部，微分链式法则遂恢复牛顿形式 $df(X_t) = f'(X_t) \circ dX_t$——这就是弯曲流形上天然坐标协变的**斯特拉托诺维奇（Stratonovich 1966）积分**，也正是带磁矢势 $\mathbf{A}(\mathbf{x})$ 的费曼路径积分必须采用**中点作用量离散化** $\mathbf{A}\!\bigl(\frac{\mathbf{x}_k + \mathbf{x}_{k-1}}{2}\bigr)\cdot(\mathbf{x}_k - \mathbf{x}_{k-1})$ 才能保持电磁 $U(1)$ 规范不变性的几何根源！（注：如 [§29.12](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral) [@rem-ch34-feynman-ito-trotter-regge-literature] 所述，欧氏虚时间扩散具备严格可数可加的维纳正测度——费曼—卡茨公式 Kac 1949——而实时洛伦兹费曼振幅则依靠振荡菲涅耳相位抵消，因全变差无界而不存在复测度 Cameron 1960；但两者的离散短时核均严格共享同一临界指数 $\alpha = \frac{1}{2}$ 与中点矢高代数。）
+   * 若改为沿着连接两态的**对称极小圆弧中点** $\frac{X_{t_{k-1}} + X_{t_k}}{2}$ 求值，单步旋子已将左半弧爬升与右半弧回落的二阶矢高对称吃进圆弧内部，微分链式法则遂恢复牛顿形式 $df(X_t) = f'(X_t) \circ dX_t$——这就是弯曲流形上天然坐标协变的**斯特拉托诺维奇（Stratonovich 1966）积分**（光滑逼近路径上的普通积分收敛到斯特拉托诺维奇积分：E. Wong & M. Zakai, *Ann. Math. Statist.* **36**, 1560–1564, 1965，`文献结果`），也正是带磁矢势 $\mathbf{A}(\mathbf{x})$ 的费曼路径积分必须采用**中点作用量离散化** $\mathbf{A}\!\bigl(\frac{\mathbf{x}_k + \mathbf{x}_{k-1}}{2}\bigr)\cdot(\mathbf{x}_k - \mathbf{x}_{k-1})$ 才能保持电磁 $U(1)$ 规范不变性的几何根源！（注：如 [§29.12](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral) [@rem-ch34-feynman-ito-trotter-regge-literature] 所述，欧氏虚时间扩散具备严格可数可加的维纳正测度——费曼—卡茨公式 Kac 1949——而实时洛伦兹费曼振幅则依靠振荡菲涅耳相位抵消，因全变差无界而不存在复测度 Cameron 1960；但两者的离散短时核均严格共享同一临界指数 $\alpha = \frac{1}{2}$ 与中点矢高代数。）
 
 4. **相区 IV：$\alpha < \frac{1}{2}$ 超粗糙发散相（Lyons 高阶粗糙路径面积签名 vs. 有限孔径截断）**：
-   一旦粗糙度越过布朗临界线进入 $\alpha < \frac{1}{2}$（例如 $H = \frac{1}{3}$ 的湍流级联或反持续分数布朗运动），$2\alpha - 1 < 0$，二阶累计矢高在 $\epsilon \to 0^+$ 下发散 $\Sigma_{\mathrm{sag}}(\epsilon, \alpha) \propto \epsilon^{2\alpha - 1} \to +\infty$；当 $\alpha \le \frac{1}{4}$ 时连四阶余项 $\epsilon^{4\alpha - 1}$ 也一并发散！特里·莱昂斯（T. Lyons 1998，文献结果）创立的**粗糙路径理论（Rough Paths Theory）**证明：要在连续极限 $\epsilon \to 0^+$ 下唯一积分 $\alpha$-赫尔德路径，单靠一阶点增量与二阶对称矢高已不够，必须显式提供直至阶数 $p = \lfloor 1/\alpha\rfloor$ 的张量代数迭代积分签名（特别是 $\frac{1}{3} < \alpha \le \frac{1}{2}$ 所需的二阶反对称列维面积双向量 $\mathbb{X}_{s,t}^{(2)} = \int_s^t (X_u - X_s)\otimes dX_u$，即极小圆弧体张开的有向球面面积元！）；而在场内物理实现中，非零的观察者最小比较孔径 $\epsilon \ge \varepsilon_{\mathrm{self}} > 0$ 则为超粗糙紫外发散提供了天然的有限步截断底板。
+   一旦粗糙度越过布朗临界线进入 $\alpha < \frac{1}{2}$（例如 $H = \frac{1}{3}$ 的湍流级联或反持续分数布朗运动），$2\alpha - 1 < 0$，二阶累计矢高在 $\epsilon \to 0^+$ 下发散 $\Sigma_{\mathrm{sag}}(\epsilon, \alpha) \propto \epsilon^{2\alpha - 1} \to +\infty$；当 $\alpha < \frac{1}{4}$ 时连四阶余项 $\epsilon^{4\alpha - 1}$ 也一并发散（$\alpha = \frac{1}{4}$ 时四阶项恰为常数 $-\frac{1}{24}\sigma_0^4 T$）！特里·莱昂斯（T. Lyons 1998，文献结果）创立的**粗糙路径理论（Rough Paths Theory）**证明：要在连续极限 $\epsilon \to 0^+$ 下唯一积分 $\alpha$-赫尔德路径，单靠一阶点增量与二阶对称矢高已不够，必须显式提供直至阶数 $p = \lfloor 1/\alpha\rfloor$ 的张量代数迭代积分签名（特别是 $\frac{1}{3} < \alpha \le \frac{1}{2}$ 所需的二阶迭代积分 $\mathbb{X}_{s,t}^{(2)} = \int_s^t (X_u - X_s)\otimes dX_u$，其反对称部分即列维面积双向量，可读作极小圆弧体张开的有向面积元！）；而在场内物理实现中，非零的观察者最小比较孔径 $\epsilon \ge \varepsilon_{\mathrm{self}} > 0$ 则为超粗糙紫外发散提供了天然的有限步截断底板。
 
 ::: {.viz src="arc-body-calculus-sandbox" preset="roughness-ito-phase-transition" height="500"}
 **路径序旋子管与矢高相变：$\alpha = \frac{1}{2}$ 时矢高总和锁到 $0.5$ 实验卡（`roughness-ito-phase-transition`）。** 在单位球面上追踪 $N = 1/\epsilon$ 步、单步转角 $\sigma_0\epsilon^\alpha$ 的紫色路径序旋子管（每一步模长严格保持为 $1$，琥珀色手柄调节粗糙度指数 $\alpha$）：当 $\alpha$ 从光滑相 $\alpha = 1$ 降至临界布朗/费曼指数 $\alpha = \frac{1}{2}$ 时，品红色累计矢高柱 $\Sigma_{\mathrm{sag}}$ 从 $0.0005$ 稳稳锁死到非零宏观常数 $0.5$（即伊藤二阶修正项 $\frac{1}{2}\sigma_0^2 T$），并同步压低品红色伊藤期望纬圈 $\mathbb{E}[z] = (1 - v_\epsilon)^N$（绿色 `LEAN ✓` 锚定 `exp_tail_le` 与 `trotter_product`）。
@@ -150,6 +150,32 @@ $$
 :::
 
 取 $\epsilon=T/N$、$\sigma=\sigma_0$，$\Sigma_N$ 就是上文的 $\Sigma_{\mathrm{sag}}(\epsilon,\alpha)$：相区 I、II 对应第 1 款，相区 III 对应第 2 款，相区 IV 对应第 3 款。定理没有覆盖 $\alpha\le0$：$\alpha=0$、$\sigma=2\pi$ 时每一步都转满一圈，$\Sigma_N\equiv0$，所以第 3 款中的 $\alpha>0$ 不能去掉（手工推导）。定理也不涉及步长不等或符号随机的路径；上文关于伊藤修正项与粗糙路径理论的陈述，仍按各自的标注读作文献结果。
+
+::: {.remark #rem-ch34-heap-recurrence-and-sagitta-sums title="流群递推、单步精确分解与任意划分上的矢高和（手工推导与文献结果）"}
+**流群递推。** 对 $S^3(1)$ 上的点列，下列三者等价：$x_{n+1} = [x_n, x_{n-1}, x_n]$；$x_n = g^n x_0$（$g = x_1\bar{x}_0$）；线性形式 $x_{n+1} = 2c\,x_n - x_{n-1}$（$c = \langle x_0, x_1\rangle$）。此时 $x_n = U_{n-1}(c)\,x_1 - U_{n-2}(c)\,x_0$（$U_k$ 为第二类切比雪夫多项式），即等速大圆测地线在整数时刻的采样，并且 $x_{n+1} - 2x_n + x_{n-1} = -2v\,x_n$（$v = 1 - c$）：离散加速度沿法向，大小为矢高的两倍。这些在实质上是经典结论（O. Loos, *Symmetric Spaces I*, Benjamin, 1969；J. C. Mason & D. C. Handscomb, *Chebyshev Polynomials*, 2003，`文献结果`）。对 $C^4$ 曲线 $x(t)$，递推残差满足
+
+$$
+x(t + h) - \bigl[x(t), x(t - h), x(t)\bigr] \;=\; h^2\,\nabla_t\dot{x}(t) - \frac{h^3}{2}\,\frac{d}{dt}\lvert\dot{x}\rvert^2(t)\,x(t) + \mathcal{O}(h^4),
+$$
+
+其中 $\nabla_t\dot{x} = \ddot{x} + \lvert\dot{x}\rvert^2 x$ 是协变加速度；残差对一切小 $h$ 恒为零当且仅当 $x$ 是等速测地线（`手工推导`）。
+
+**单步精确分解（`手工推导`）。** 对 $x, y \in S^3(1)$，
+
+$$
+y - x \;=\; \operatorname{Im}(y\bar{x})\,x \;-\; v(x, y)\,x, \qquad \operatorname{Im}(y\bar{x})\,x = P_x(y - x), \qquad \lvert\operatorname{Im}(y\bar{x})\rvert = \sin d(x, y),
+$$
+
+其中 $P_x$ 是到切空间 $T_x S^3$ 的正交投影，$v(x, y) = 1 - \cos d(x, y) = \frac{1}{2}\lVert y - x\rVert^2$：每一步恰为切向转动与径向矢高之和。
+
+**任意划分上的矢高和（`手工推导`；二次变差取 H. Föllmer, *Séminaire de Probabilités XV*, 1981 的定义）。** 对 $[0, T]$ 上的连续路径与划分 $\pi$，记 $d_k = d(x_k, x_{k+1})$、$v_k = v(x_k, x_{k+1})$，则 $\sum_k v_k \le \frac{1}{2}\max_k d_k\sum_k d_k$，所以可求长路径的矢高和随网格加细趋于 $0$；若路径沿一列划分具有二次变差 $[x]$，则对连续函数 $f$ 有 $\sum_k v_k f(x_k) \to \frac{1}{2}\int_0^T f(x_t)\,d[x]_t$；对 $S^3$ 上的布朗运动（生成元 $\frac{1}{2}\Delta$）与任意网格趋于零的确定划分列，依概率有
+
+$$
+\sum_k v_k \;\to\; \frac{3}{2}\,T, \qquad \sum_k v_k\,x_k \;\to\; \frac{3}{2}\int_0^T x_t\,dt,
+$$
+
+后者正是伊藤漂移项。这把 [@thm-ch34-accumulated-sagitta-phases] 的等步长情形推广到任意划分与一般路径；上文圆周上的常数 $\frac{1}{2}\sigma_0^2 T$ 是一维情形 $d[x]_t = \sigma_0^2\,dt$ 的读法。
+:::
 
 把 [§22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4) 的凯莱比 $w=(s-1)/s$ 用本节的话重说一遍：它是一个旋子。对临界线上的点 $\rho=\tfrac12+i\gamma$（$\gamma>0$），$u_\rho:=1-\tfrac1\rho$ 落在单位圆上，割弦 $\Delta_\rho=u_\rho-1=-\tfrac1\rho$ 的长度是 $1/\lvert\rho\rvert$，矢高是 $v_\rho=\operatorname{Re}\tfrac1\rho=\tfrac{2}{1+4\gamma^2}$，两者满足 §30.3.1 的弦—矢高恒等式 $\lvert\Delta_\rho\rvert^2=2v_\rho$（手工推导）。对 $\zeta$ 的全体非平凡零点（按重数，不论是否在临界线上）把 $1-u_\rho^{\,n}$ 加起来，得到的数在解析数论里有名字：Li 系数（文献结果，见下文 [@rem-ch34-li-criterion-sagitta-literature]）。零点在临界线上时，这一项的实部 $1-\operatorname{Re}u_\rho^{\,n}$ 正是旋子 $u_\rho$ 的 $n$ 次幂的矢高；零点是否都在临界线上，是开放的 [@conj-riemann-hypothesis]。所钉仓库冻结的是按导数定义的 Li 系数，与它有关的事实如下。
 
@@ -455,7 +481,7 @@ $$
 (d_\epsilon^2 \omega)(\Delta^3) = \omega(\partial^2\Delta^3) \equiv 0 \quad \Longleftrightarrow \quad \partial^2\Delta^3 = \emptyset.
 $$
 
-更令人拍案叫绝的是，把这套无坐标圆弧体拼接直接作用在由大圆测地弧（边测地曲率 $\kappa_g \equiv 0$）围成的任意紧致定向三角剖分曲面 $\Sigma$（设含 $F = M$ 枚常正曲率球面三角形 $\Delta\mathcal{T}_k$、$E = E_{\mathrm{int}} + E_\partial$ 条大圆弧棱与 $V = V_{\mathrm{int}} + V_\partial$ 个顶点，每个闭合边界圈上顶点数与边界棱数相等故 $V_\partial = E_\partial$）上，经典微分几何里动辄耗费数页克里斯托费尔联络计算的**高斯—博内定理**，在有限圆弧体网格上化作了**零极限、三行初等组合恒等式**（手工推导，以单个球面三角形的吉拉尔公式为输入，对比雷吉 Regge 1961 离散曲率演算）：
+更令人拍案叫绝的是，把这套无坐标圆弧体拼接直接作用在由大圆测地弧（边测地曲率 $\kappa_g \equiv 0$）围成的任意紧致定向三角剖分曲面 $\Sigma$（设含 $F = M$ 枚常正曲率球面三角形 $\Delta\mathcal{T}_k$、$E = E_{\mathrm{int}} + E_\partial$ 条大圆弧棱与 $V = V_{\mathrm{int}} + V_\partial$ 个顶点，每个闭合边界圈上顶点数与边界棱数相等故 $V_\partial = E_\partial$）上，经典微分几何里动辄耗费数页克里斯托费尔联络计算的**高斯—博内定理**，在有限圆弧体网格上化作了**零极限、三行初等组合恒等式**（手工推导，以单个球面三角形的吉拉尔公式（A. Girard 1629，`文献结果`）为输入，对比雷吉 Regge 1961 离散曲率演算）：
 
 * **第一行（三角形三边关联双计数）**：$F$ 枚球面三角形共有 $3F$ 条半边，每条内棱覆盖 $2$ 次、每条外边界棱覆盖 $1$ 次，故 $3F = 2E_{\mathrm{int}} + E_\partial$；
 * **第二行（吉拉尔球面角盈按顶点重排）**：将单胞吉拉尔角盈 $\Omega(\Delta\mathcal{T}_k) = (\alpha_{k,1} + \alpha_{k,2} + \alpha_{k,3}) - \pi$ 对全部 $F$ 枚面求和，内部顶点 $v \in V_{\mathrm{int}}$ 周围内角和恒为整圆 $2\pi$，边界顶点 $v \in V_\partial$ 处内角和等于 $\pi - \theta_{\mathrm{ext}}(v)$（$\theta_{\mathrm{ext}}(v)$ 为外折角），故
@@ -491,6 +517,26 @@ $$
    $$
    \mathcal{P}_{\mathrm{shell}}\prod_{k=1}^{M} \widetilde{W}_k^{(r)} \equiv \hat{W}_{\partial\Sigma}^{(r)}!
    $$
+
+::: {.remark #rem-ch34-shelling-stokes-and-triangle-holonomy title="剥壳序有限斯托克斯恒等式的精确陈述、极小圆弧三角形的自旋和乐与有理顶点（手工推导与文献结果）"}
+**剥壳序下的有限斯托克斯恒等式。** 设 $K$ 是底空间为闭圆盘的有限平面复形，每个闭面都是由一条棱圈围成的闭圆盘，边界一律逆时针定向。剥壳是面的排列 $f_1, \dots, f_N$，使每个 $D_{j-1} := f_1 \cup \dots \cup f_{j-1}$ 都是闭圆盘，且 $f_j \cap D_{j-1}$ 是一条至少含一条棱、不等于 $\partial f_j$ 的棱路径 $\alpha_j$；记 $a_j$ 为 $\alpha_j$ 沿 $\partial D_{j-1}$ 逆时针方向的起点。对任意 $\mathrm{SU}(2)$ 值上链 $U$（$U_{pq} = U_{qp}^{-1}$，路径和乐按 $\operatorname{hol}(\gamma * \gamma') = \operatorname{hol}(\gamma')\operatorname{hol}(\gamma)$ 复合）与 $\partial K$ 上任一顶点 $p$，在 $1$-骨架中存在从 $p$ 到 $a_j$ 的棱路径 $\tau_j$，使
+
+$$
+\operatorname{hol}(\partial K) \;=\; L_1 L_2 \cdots L_N, \qquad L_j := \operatorname{hol}(\tau_j)^{-1}\,F_j\,\operatorname{hol}(\tau_j), \qquad F_j := \operatorname{hol}(\partial f_j)\ \text{（在 } a_j \text{ 处）}.
+$$
+
+每个面恰贡献一个因子，按剥壳次序从左到右排列；恒等式对每个上链精确成立，不涉及极限（参见 I. Ya. Aref'eva, *Theor. Math. Phys.* **43**, 353–356, 1980；R. L. Karp, F. Mansouri & J. S. Rno, *J. Math. Phys.* **40**, 6033–6043, 1999，`文献结果`）。证明按剥壳序归纳，每一步用切割引理：沿棱路径 $\delta$ 把闭路 $\alpha * \beta$ 切开时，$\operatorname{hol}(\alpha * \beta) = \operatorname{hol}(\bar{\delta} * \beta)\,\operatorname{hol}(\alpha * \delta)$，基点在切口端点。上文“共轭尾巴逐对归零”即这一归纳中每一步的消去，基点与次序须按上述规则选取（`手工推导`）。
+
+**极小圆弧三角形的自旋和乐（`手工推导`）。** 对两两非对跖的 $x, y, z \in S^3(1)$，记半位移 $h_{yx} := (y\bar{x})^{1/2}$（取实部为正的平方根），$a := h_{xz}h_{zy}h_{yx}$。则
+
+$$
+\operatorname{Re} a \;=\; \frac{\kappa_{xy} + \kappa_{yz} + \kappa_{zx} - 1}{2\sqrt{\kappa_{xy}\,\kappa_{yz}\,\kappa_{zx}}} \;=\; \cos\frac{E}{2},
+$$
+
+其中第二个等号在 $x, y, z$ 线性无关时成立，$E$ 是它们所在大二维球面上测地三角形的球面角盈（面积），并有 $\tan\frac{E}{2} = \lVert x \wedge y \wedge z\rVert / (1 + c_{xy} + c_{yz} + c_{zx})$。对小三角形 $y = \exp(Y)x$、$z = \exp(Z)x$（$\lvert Y\rvert, \lvert Z\rvert \le r$），$a = \exp\bigl(\frac{1}{8}[Y, Z] + \mathcal{O}(r^4)\bigr)$：李括号项是角盈的领头阶。$S^2$ 上三点情形即巴格曼不变量与 Van Oosterom–Strackee 公式（1983，`文献结果`）。
+
+**有理顶点（`手工推导`；凯莱参数化见 A. Cayley, *J. Reine Angew. Math.* **32**, 119–123, 1846 与 O. Rodrigues 1840，`文献结果`）。** 凯莱坐标 $\operatorname{Cay}(r) = (1 + r)(1 - r)^{-1}$（$r \in \operatorname{Im}\mathbb{H}$）把 $\mathbb{Q}^3$ 双射到 $S^3(\mathbb{Q}) \setminus \{-1\}$。顶点全在 $S^3(\mathbb{Q})$ 时，流群运算、$\kappa$、矢高、上文递推及其切比雪夫系数都是有理数；沿每段极小圆弧的列维-奇维塔平移（右平凡化下）是 $\operatorname{Ad}(1 + x_q\bar{x}_p) \in \mathrm{SO}(3, \mathbb{Q})$，闭合极小圆弧多边形的和乐亦然；三角形的 $\cos E$ 为有理数，而半位移与 $E$ 本身一般是无理的（$x = 1$、$y = i$、$z = j$ 时 $E = \frac{\pi}{2}$）。
+:::
 
 ### 30.3.3.3 Lean 4 形式化工程的诚实两层分野 {#3-lean-4-形式化工程的诚实两层分野}
 
