@@ -33,6 +33,24 @@
 道蒂不动点与共享主频预算卡：第二阶台座上二阶认妄归零收敛至 $\theta^* \approx 0.739085$，同时琥珀态点 $(\sqrt{0.48}, 0.40, 0.60) \approx (0.6928, 0.4000, 0.6000)$ 严格停在第一卦限单位球面上，其三项平方预算份额 $(0.48, 0.16, 0.36)$ 恒合为 $1$（`rational_inverse_endpoint`、`record_time_lower_bound`、`eq_smul_minkowski_of_null` 与 `bogoliubov_norm_conservation` 为 `LEAN ✓`，预算核验标 `NUM`，引力负载标定标 `MODEL`）。
 :::
 
+::: {.remark #rem-ch39-axiom-omega-tier2-velocity-and-de-sitter title="第二阶的精确对应：布洛赫球内部是双曲空间，二分检验构成 de Sitter 时空"}
+**态空间的速度几何（`手工推导`）。** 布洛赫球内部 $\{\rho_r : \lvert r\rvert < 1\}$ 在滤波作用 $\rho \mapsto g\rho g^\dagger / \operatorname{Tr}(g\rho g^\dagger)$（$g \in \mathrm{SL}(2, \mathbb{C})$）下是贝尔特拉米—克莱因模型中的双曲三维空间，距离为
+
+$$
+\cosh d(\rho_r, \rho_{r'}) \;=\; \frac{1 - \langle r, r'\rangle}{\sqrt{(1 - \lvert r\rvert^2)(1 - \lvert r'\rvert^2)}} .
+$$
+
+把球心带到 $\rho_r$ 的正定滤波对应参数为 $r$ 的纯洛伦兹推进，两次滤波复合为参数按爱因斯坦速度加法合成的推进再接一个转动（J.-L. Chen & A. A. Ungar, *Found. Phys.* **32**, 531–565, 2002，`文献结果`），且 $\cosh d(\rho_0, \rho_r) = \gamma(r) = (1 - \lvert r\rvert^2)^{-1/2}$。若 $\rho_r$ 是双比特纯态 $\psi$ 的边缘态，则 $\gamma(r)^{-1}$ 等于 $\psi$ 的共生度 $C(\psi) = 2\lvert\det\psi\rvert$，即 $\lvert r\rvert^2 + C^2 = 1$；对检验轴 $r_p$，记 $P := \lvert\langle r, r_p\rangle\rvert$、$V := \lvert r - \langle r, r_p\rangle r_p\rvert$，则 $P^2 + V^2 + C^2 = 1$（M. Jakob & J. A. Bergou, *Opt. Commun.* **283**, 827–830, 2010）。上文三项预算 $(d\tau/dt)^2 + \eta_{\mathrm{kin,eff}}^2 + \eta_{\mathrm{grav}}^2 = 1$ 在态空间里的精确对应物就是这条恒等式；把 $\lvert r\rvert$ 称作速度，是对一条态空间定理的读法。
+
+**二分检验构成 de Sitter 时空（`手工推导` + `MODEL`）。** $S^3(1)$ 上以 $n$ 为心、测地半径 $a \in (0, \pi)$ 的开球冠与满足 $\lvert v\rvert^2 - t^2 = 1$ 的点 $\xi = (t, v) = (-\cot a,\; n/\sin a)$ 一一对应，记 $\xi$ 对应的球冠为 $C_\xi$；这些点构成 de Sitter 空间 $dS_4$，度规为
+
+$$
+g \;=\; \frac{-da^2 + g_{S^3}}{\sin^2 a} \;=\; -ds^2 + \cosh^2 s\; g_{S^3} \qquad (\sinh s = -\cot a),
+$$
+
+标度因子为 $\cosh s$，截面曲率为 $1$，里奇张量为 $3g$，即以 $S^3$ 的半径为单位 $\Lambda = 3$；球冠的包含关系恰为因果序：$C_\xi \subseteq C_\eta$ 当且仅当 $\eta$ 位于 $\xi$ 的因果未来。物理事件就是这些二分检验，这一点是 `MODEL` 假设；$\Lambda$ 的数值大小需要把 $S^3$ 的半径换算成物理长度，本结构不提供这个长度；度规的动力学及其与物质的耦合保持 `OPEN`。
+:::
+
 ## 39.2.2 第三阶与第四阶推导：平行三元场丛四大力大统一（AF-GUT）与算术临界谱机制 {#sec-ch39-25-2}
 
 既然母公理法则 (III) 已将单座概念场的极小非对易流形锁定为三维 $\mathbb{T}_3 \cong S^3(1)$（例如六维紧半单代数 $\mathfrak{so}(4) \cong \mathfrak{su}(2)_L \oplus \mathfrak{su}(2)_R$ 亦自然劈裂为两座独立 $\mathbb{T}_3$ 因子），本模型（`MODEL`，呼应 [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md)）不假定单块高维大统一单群，而是以平行并置的三维三元数概念场丛 $(\mathbb{T}_3)^K$ 承载新增量子数：
@@ -44,11 +62,19 @@
      \sin^2\theta_W(\mu_{\mathrm{arc}}) \;=\; \frac{\operatorname{Tr}_{\mathrm{Weyl}}(T_3^2)}{\operatorname{Tr}_{\mathrm{Weyl}}(Q^2)} \;=\; \frac{\frac{1}{2}(1 + 3)}{2\!\left(1 + 3 \times \frac{5}{9}\right)} \;=\; \frac{2}{\frac{16}{3}} \;=\; \frac{3}{8} \;=\; 0.375,
      $$
 
-     这一迹比以标准模型单代费米子的 $T_3$ 与 $Q$ 赋值为输入，与 H. Georgi, H. R. Quinn & S. Weinberg（*Phys. Rev. Lett.* **33**, 451–454, 1974）的计算相同（`文献结果`），$\frac{3}{8}$ 的数值由这组费米子赋值决定，属于母公理之外的输入；且因空间/电弱场与色场正交直和无 $(X, Y)$ 轻子夸克规范玻色子，树图纯规范质子衰变振幅恒为零 $\Gamma_{\mathrm{gauge}}(p \to e^+\pi^0) \equiv 0$（单圈重整化跑动阈值偏移 $\Delta\alpha^{-1}\approx 3.664$ 的非微扰闭合与三代手征格点谱保持为 `OPEN`，见 [@prob-ch39-af-gut-threshold-and-proton-stability] 与 [@prob-ch34-sm-generations-and-couplings]）；
+     这一迹比以标准模型单代费米子的 $T_3$ 与 $Q$ 赋值为输入，与 H. Georgi, H. R. Quinn & S. Weinberg（*Phys. Rev. Lett.* **33**, 451–454, 1974）的计算相同（`文献结果`），$\frac{3}{8}$ 的数值由这组费米子赋值决定，属于母公理之外的输入，其结构来源（三个结构的 Pati–Salam 嵌入，`MODEL`）见 [@rem-ch39-axiom-omega-tier3-pati-salam]；且因空间/电弱场与色场正交直和无 $(X, Y)$ 轻子夸克规范玻色子，树图纯规范质子衰变振幅恒为零 $\Gamma_{\mathrm{gauge}}(p \to e^+\pi^0) \equiv 0$（单圈重整化跑动阈值偏移 $\Delta\alpha^{-1}\approx 3.664$ 的非微扰闭合与三代手征格点谱保持为 `OPEN`，见 [@prob-ch39-af-gut-threshold-and-proton-stability] 与 [@prob-ch34-sm-generations-and-couplings]）；
    - **麦克斯韦—拉曼紫外自截断与胞间角亏引力（`手工推导` / `MODEL`）**：$N$ 枚闭合场体在三维空间两两比较的过约束度为 $\Delta E(N) = \binom{N}{2} - (3N - 6) = \frac{(N-3)(N-4)}{2}$：普朗克单胞核 $N = 3, 4$ 处 $\Delta E \equiv 0$ 实现紫外无过约束角亏自截断；$N \ge 5$ 时冗余边约束（$\Delta E > 0$）使一般独立边长分配无法无应力平直嵌入 $\mathbb{R}^3$，容许非零雷吉铰链角亏 $\delta_h$ 并在模型（`MODEL`）中诠释为折射普适主频的胞间引力曲率（完整 $3+1\mathrm{D}$ 自旋-$2$ 连续统场方程涌现与视界最小矢高暗能量标定 $N_H^{-2} \sim 10^{-122}$ 严格保持 `MODEL` / `OPEN` 边界 [@prob-ch34-gravity-dynamics-and-coupling]、[@prob-ch34-past-hypothesis-and-cosmological-constant]）。
 
 ::: {.viz src="axiom-omega-five-tier-cascade-sandbox" preset="tier3-afgut-weinberg-three-eighths" height="500"}
 迹比 3/8 与过约束的边卡：第三阶台座对照单代手性外尔账本迹比 $\sin^2\theta_W = 2 / \frac{16}{3} = \frac{3}{8}$ 与多出 $\Delta E(N) = \frac{(N-3)(N-4)}{2}$ 根品红盈余撑杆的过约束桁架（`anchored_phase_classification` 与 `circle_double_cover_history_lift` 为 `LEAN ✓`，迹比与边计数标 `NUM`，跑动阈值与引力动力学标 `OPEN`）。
+:::
+
+::: {.remark #rem-ch39-axiom-omega-tier3-pati-salam title="第三阶的结构来源：宇称、电弱质量关系与三个结构的 Pati–Salam 嵌入"}
+**单个结构（`手工推导`）。** 迁移反转 $\iota$（模型中 $z \mapsto \bar{z}$）保持 $\kappa$ 并交换左、右迁移，$\iota\mathcal{L}\iota = \mathcal{R}$：宇称就是迁移反转。与时钟相容的自同构构成 $\mathrm{U}(2)$。在比较结构场丛的假设下（`MODEL`），时钟场把结构群约化到 $\mathrm{U}(2)$，原点的稳定子是由 $Q = T_3 + Y$ 生成的圆周；纤维形式对 $\mathrm{Aut}(\mathcal{M})$ 不变的协变导数二次密度在差一个因子的意义下只有一种，即 $v^2 h(D\sigma, D\sigma)$（$h$ 为 $\kappa$ 的海森形式），由它得到 $m_W = m_Z\cos\theta_W$。这一关系来自法则 (II) 的双侧不变：只对 $\mathrm{U}(2)$ 不变的纤维形式会留下自由的比值 $\alpha/\beta$，即 $\rho$ 参数（保管对称性见 M. Veltman, *Nucl. Phys. B* **123**, 89–99, 1977，`文献结果`）。
+
+**一对闭合结构（`手工推导`）。** 一对结构的核空间 $V_2 = \mathbb{C}^2 \otimes \mathbb{C}^2$ 中，反对称单位向量 $\omega$ 张成唯一在联合迁移下不变的射线，其正交补为 $\mathrm{Sym}^2 V \cong \mathbb{C}^3$；$\omega$ 在 $\mathrm{SU}(V_2) \cong \mathrm{SU}(4)$ 中的稳定子是 $\mathrm{SU}(3)$，在 $\mathrm{Sym}^2 V$ 上取定义表示。
+
+**三个结构（`MODEL`）。** 假设规范群为 $\mathrm{SU}(V_2) \times \mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$（后两个因子是第三个结构的左、右迁移），物质多重态为 $(4, 2, 1)$ 与 $(4, 1, 2)$，破缺构型为 $\Xi = \omega \otimes v$（$v$ 为第三个结构上的一点）。则 $\Xi$ 的稳定子的李代数为 $\mathfrak{su}(3) \oplus \mathfrak{su}(2)_L \oplus \mathfrak{u}(1)_Y$，其中 $Y = T_{3R} + \frac{1}{2}(B - L)$，忠实作用的整体形式为 $(\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1))/\mathbb{Z}_6$。$Y$ 在左手多重态上取 $-\frac{1}{2}$（轻子）与 $\frac{1}{6}$（夸克），在右手多重态上取 $0, -1$（轻子）与 $\frac{2}{3}, -\frac{1}{3}$（夸克），正是含右手中微子的一代费米子的超荷，轻子沿 $\omega$、夸克沿 $\mathrm{Sym}^2 V$。以单一迹形式归一并令三个因子耦合相等，得 $\sin^2\theta_W = \operatorname{Tr}T_{3L}^2 / \operatorname{Tr}Q^2 = \frac{3}{8}$；若超荷就是单个结构的时钟生成元 $T_{3R}$，同一归一给出 $\frac{1}{2}$。按标准模型一圈跑动（不计阈值），$\sin^2\theta_W$ 约在 $1.0 \times 10^{13}\;\mathrm{GeV}$ 达到 $\frac{3}{8}$、约在 $5.4 \times 10^{20}\;\mathrm{GeV}$ 达到 $\frac{1}{2}$；在前一能标上强耦合与另两个耦合在一圈下并不汇合。以上就是 Pati–Salam 嵌入（J. C. Pati & A. Salam, *Phys. Rev. D* **10**, 275–289, 1974）与 Georgi–Quinn–Weinberg（1974）的取值，`文献结果`；新增的只是把各要素对应到比较结构的对象上。规范群的这条假设由母公理之外给出；代的数目、能标与耦合常数保持 `OPEN`（[@prob-ch39-af-gut-threshold-and-proton-stability]、[@prob-ch34-sm-generations-and-couplings]）。
 :::
 
 2. **第四阶推导：算术谱半密度矢高相变与舒尔正定脊线（Tier 4，呼应 [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md)–[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md)）**：

@@ -93,6 +93,14 @@
 共享单态越过经典界 2 卡：两座三元数场共享零总自旋单态圆弧，单场边缘缩至球心 $\frac{1}{2}I_2$，而四组 $45^\circ$ 切角将圆弧余弦关联叠至齐雷尔松上界 $2\sqrt{2} > 2$（`bell_pure_state_has_maximally_mixed_marginal`、`classical_chsh_abs_le_two`、`chsh_square_eq_four_of_local_pair_commutes` 与 `bell_chsh_state_expectation_is_greatest` 为 `LEAN ✓`，再生核乘积与局域层析标 `ARGUED`）。
 :::
 
+::: {.remark #rem-ch39-axiom-omega-composites-round-trip title="复合系统中的往返律：纠缠被迫出现，仪器来自辅助系统，单次结果不由结构给出"}
+**往返律延续到复合系统时纠缠被迫出现（`手工推导`）。** 设振幅在乘积构型上相乘，并要求复合系统的态集合含全体乘积单位向量、且对任意两态 $x, w$ 都有一个态 $s_x(w)$ 对一切乘积检验态 $y$ 满足 §39.1 的干涉律 $c(y, s_x w) + c(y, w) = 2c(w, x)\,c(y, x)$（`MODEL` 公设）。则 $s_x(w) = 2c(x, w)\,x - w$，全部单位向量都是态，纯态构成 $\mathbb{CP}^{2^N - 1}$，这些反射生成 $\mathrm{O}(V_N)$，其中与复合时钟对易者构成 $\mathrm{U}(2^N)$：每个幺正变换都是往返反射的乘积。例：$N = 2$、$x = \lvert 00\rangle$、$w = \lvert{+}{+}\rangle$ 时 $s_x(w) = \frac{1}{2}(\lvert 00\rangle - \lvert 01\rangle - \lvert 10\rangle - \lvert 11\rangle)$，共生度为 $1$，即最大纠缠；逐分量反射给出乘积态 $\lvert{-}{-}\rangle$，而 $\kappa_2(w, \lvert{-}{-}\rangle) = \frac{1}{2} \ne \frac{1}{4} = c_2(w, x)^2$，违反往返律。
+
+**效应、仪器与完全正性来自辅助系统（`手工推导`）。** 把系统与处于态 $\alpha_0$ 的辅助系统联合，施加幺正 $U$，再对辅助系统做完备检验 $(a)$，令 $K_a\psi := (U(\psi \otimes \alpha_0))_a$（相对态）。则 $\sum_a K_a^\dagger K_a = \mathbf{1}$，结果 $a$ 的玻恩权重为 $\langle\psi, K_a^\dagger K_a\psi\rangle$，给定 $a$ 后的条件态为 $K_a\psi / \lVert K_a\psi\rVert$，$\rho \mapsto \sum_{a \in e} K_a\rho K_a^\dagger$ 完全正；反过来每个克劳斯族都可如此实现，于是所得效应恰为全体 $0 \le E \le \mathbf{1}$。玻恩权重的唯一性需要辅助系统：只对单个系统要求“依赖于射线对、完备检验上和为一、自身射线取一”时，$f(x) = 3x^2 - 2x^3$ 满足 $f(x) + f(1 - x) = 1$，同样合格；再要求权重在添加辅助系统后不变，才唯一锁定玻恩权重。
+
+**单次结果（`手工推导` + `OPEN`）。** 不存在在对称性下协变的选支规则：取 $q$ 使 $\beta(q, p) = \frac{1}{2}$，绕 $r_q$ 转 $\pi$ 的旋转固定 $q$ 而交换 $p$ 与 $p^\perp$，任何协变规则都无从选出其一。给定结果时条件态是确定的；出现哪个结果，结构本身不提供，这与上文 [@prob-ch34-single-outcome-realization] 的 `OPEN` 定位一致。
+:::
+
 ## 39.3.3 形式化锚定主定理、文献与附录 E 边界、五大公理定量核验与迈向无外三元数本体终章 {#sec-ch39-26-3}
 
 我们将 $\mathrm{AXIOM}\text{-}\Omega$ 导出量子力学五大公理的投影映射定义、十八项 Lean 4 内核定理、经典文献边界与定量核验正式确立如下：
