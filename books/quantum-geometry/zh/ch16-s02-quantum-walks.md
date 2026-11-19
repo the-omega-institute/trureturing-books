@@ -537,10 +537,35 @@ $\Omega$ 上存在均匀概率质量函数 $\mu$。它对包含 $F$ 的事件赋
 
 若分布中的图在每个标号顶点的度数都与参考图 $H$ 相同，则该图族的候选图都满足已记录的度数上界。这时记录事件恰为 $F\le G$，在正概率时两者给出同一条件分布。该模型固定标号、确定性协议和完整无序回答。随机命名、查询命名集合之外的顶点，以及附带端口或颜色信息的回答，各需相应的观察模型。
 
+::: {.theorem #thm-fixed-neighbor-order-likelihood title="每个顶点固定一种邻居次序时的记录似然" lean="D5/S3/Combinatorics/Graph/Queries/FixedNeighborOrder.fixed_neighbor_order_likelihood"}
+固定有限标号顶点集及度数函数 $d$。每个顶点 $v$ 的 $d(v)$ 个邻居各自取一个均匀次序，各顶点的选择相互独立。每次查询同一顶点都返回先前为该顶点选定的完整有序列表。固定一个确定性自适应协议，以及它在度数轮廓为 $d$ 的参考图与某组次序上实际产生的有序记录 $\tau$。记 $F_\tau$ 为记录返回的边构成的图，$Q_\tau$ 为其中不同的被查询标号所成集合。
+
+对于具有相同度数轮廓的候选图 $G$，对其端口次序取样时，该记录的似然为
+$$
+\Pr(\tau\mid G)=\mathbf{1}_{\{F_\tau\le G\}}\left(\prod_{v\in Q_\tau}d(v)!\right)^{-1}.
+$$
+:::
+
+::: proof
+如果缺少任一条报告边，则该图不能产生所给记录。若所有报告边均存在，逐点度数确定每个已查询点报告的邻居恰为完整邻居集。每个不同的已查询标号因而指定了一个完整邻居排列。具备这些排列的次序表会使协议重现该记录。未查询顶点的次序可以任取，重复查询则读取该标号上已经固定的排列。将相容次序表的数量除以全部次序表的数量，即得上述似然。完整证明由 Lean 内核检查。
+:::
+
+在记录概率为正时，同一个因子乘到每张包含 $F_\tau$ 的候选图上，因此图的后验律为先验在该边延拓事件下的条件律。若每次查询都独立重新排列邻居，那是另一种实验，乘积按查询次数而非不同标号计。
+
+::: {.theorem #thm-uniform-remaining-name-hit title="给定部分命名后猜中可用名字的概率" lean="D5/S3/Combinatorics/Probability/PartialNameAssignment.uniform_remaining_name_hit"}
+从有限顶点集到有限名字集的所有单射中均匀选取一个。固定顶点子集 $K$ 上的单射命名，并取一个与所有已固定名字不相交的可用名字集 $A$。假设至少有一个单射符合固定命名，并将其余顶点的名字全部取自 $A$。在这些条件下，所有相容单射等概率。在同一个条件分布下，对每个 $a\in A$，它被分配给某个剩余顶点的概率等于剩余顶点数除以 $|A|$。
+:::
+
+::: proof
+相容单射的先验质量相同，因此条件化后仍等概率。将相容单射限制到剩余顶点，便与取值于 $A$ 的单射建立双射。其逆操作补入固定命名，而固定名字都在 $A$ 之外，所以不破坏单射性。在任意一个剩余顶点上，交换 $A$ 中两个名字会交换在该点取这两个值的单射集合。因此该顶点取指定名字的概率是 $1/|A|$。单射中该名字至多出现一次，将各顶点互斥的命中概率相加即得公式。完整证明由 Lean 内核检查。
+:::
+
+例如，两个尚未命名的顶点和五个可用名字，使任意指定可用名字的命中概率为 $2/5$。在自适应图查询后应用该公式，还需从实际回答确定对命名施加的约束。Childs 等人在 [quant-ph/0209131v2 第 IV 节](https://arxiv.org/abs/quant-ph/0209131v2) 利用稀疏名字空间控制猜中已知名字之外的名字的概率。
+
 **通向经典黑盒下界仍需哪些桥梁？** [@thm-directed-forest-cycle-completion] 给出普通有向模型的静态均匀律，[@thm-alternating-forest-classification] 给出交替模型的补全计数，[@thm-alternating-completion-law] 给出固定边集的条件律。它们与 [@rem-qsvt-walks-literature] 的黏合树结果之间还有三层区别：
 
 1. **图的分布与方向。** Ben-David 等人（*SIAM Journal on Computing* **53**(6)，2024，[doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975)，§6.3.2，Lemmas 6.11–6.13，PDF 第 37–39 页）在 self-weld 中使用每侧叶子上的一个均匀整圈，在 weld 中使用两侧叶子间的均匀交替整圈。[@thm-alternating-forest-classification] 给出交替补全的分类与基数，[@thm-alternating-completion-law] 给出固定延拓事件的概率和条件律。普通无向整圈的定向与表示重数现由 [@thm-undirected-cycle-orientation-fibers] 在同一实际完成图上给出：每个纤维恰为一对反向提升，并保留加边事件。[@thm-uniform-undirected-cycle-completion] 进一步给出固定 $F$ 下普通无向补全的均匀律。[@thm-alternating-connector-mass] 给出交替模型中不同分量之间指定连接的条件概率。[@thm-alternating-undirected-completion-law] 给出无向交替整圈的总数和固定边条件律。
-2. **条件信息。** 固定边集的概率律以 $E$ 中的边全部出现为条件。标号固定且回答给出完整的无序邻居集合时，[@thm-complete-neighborhood-history] 把记录事件刻画为边包含与度数上界。当候选图逐点度数相同时，记录事件等同于固定边集出现。随机命名、查询知识图之外的名字以及额外的端口或颜色信息仍需各自的条件律。
+2. **条件信息。** 固定边集的概率律以 $E$ 中的边全部出现为条件。标号固定且回答给出完整的无序邻居集合时，[@thm-complete-neighborhood-history] 把记录事件刻画为边包含与度数上界。当候选图逐点度数相同时，记录事件等同于固定边集出现。随机命名、查询知识图之外的名字以及额外的端口或颜色信息仍需各自的条件律。每个顶点使用固定次序时，有序记录的似然见 [@thm-fixed-neighbor-order-likelihood]。给定固定部分命名后的命中概率见 [@thm-uniform-remaining-name-hit]。将它应用于实际的命名查询记录，需要确定记录给出的条件事件。
 3. **查询、嵌入与成功事件。** Childs 等人 [quant-ph/0209131v2 第 IV 节](https://arxiv.org/abs/quant-ph/0209131v2) 先处理猜中新名字、颜色与已知名字查询的游戏转换，再转向树的随机嵌入，最后分别控制碰撞和 `EXIT` 事件，才得到原文 Theorem 9。Ben-David 等人脚注 14 特别说明：一次回答全部邻居的查询对应嵌入树中的 $O(t)$ 个顶点，并非严格 $t$ 个。其印刷论证中的分量下界 $2^k-2t$、配对界 $2/(2^k-2t)$ 与式 (6.4) 的 $O(t^2/(2^k-t))$ 各按原文保留；这里不将它们拼成未经证明的显式常数或参数范围。
 
 因此，普通收缩律提供静态计数与条件概率环节，交替结果给出实际载体上的分类、计数和固定边集的条件律，[@thm-undirected-cycle-orientation-fibers] 则以书面证明给出普通无向整圈的同图定向纤维、反向取商与加边对应。普通无向补全律见 [@thm-uniform-undirected-cycle-completion]。随机命名、端口与颜色信息、查询复杂度与完整经典 `EXIT` 下界仍依赖各自的模型与证明。[请求 #11](https://github.com/the-omega-institute/trureturing-requests/issues/11) 的更广范围仍未完成。下一节转到量子一侧，考察已经明确给定的加权路径及其端点概率。
