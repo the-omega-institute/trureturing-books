@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "1f1ee5b9d1ddc9c896dd9bec2eb7d2fcc92b7eb0",
-  "pinned_at": "2026-11-19T08:29:17Z",
+  "commit": "7a395ff75363c649223fbf16673c5e01ca8ad392",
+  "pinned_at": "2026-11-19T09:20:49Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1204,6 +1204,14 @@
       "statement_id": "sha256:fdfe078d2aec36a0e7fd271d7842bbc4261d6d59a44852c946c52accbff9e94d",
       "line": 595,
       "signature": "theorem directed_forest_completion [Finite V] (E : V → V → Prop) (hout : Relator.RightUnique E) (hin : Relator.LeftUnique E) (ha : ∀ x, ¬ TransGen E x x) (hc : 2 ≤ Nat.card (Component E)) : ∃ (q : Component E ≃ Tail E) (h : Component E ≃ Head E) (Φ : CycleCompletion E ≃ FullCycle (Component E)), (∀ A, Quotient.mk (EqvGen.setoid E) (q A).1 = A) ∧ (∀ A, Quotient.mk (EqvGen.setoid E) (h A).1 = A) ∧ (∀ σ A, σ.1 (q A) = h ((Φ σ).1 A)) ∧ Nonempty (CycleCompletion E) ∧ Nat.card (CycleCompletion E) = (Nat.card (Component E) - 1).factorial ∧ UniformCompletionLaw E q h Φ"
+    },
+    "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletionCounts.edge_and_completion_mass": {
+      "module": "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletionCounts",
+      "name": "D5.S3.Combinatorics.Graph.LinearForests.DirectedForestCompletionCounts.edge_and_completion_mass",
+      "kind": "theorem",
+      "statement_id": "sha256:47660cc96dbf97b1e0e528549d2830c4bf0ae880bee43cb126a213c8abd3c91d",
+      "line": 31,
+      "signature": "theorem edge_and_completion_mass [Finite V] (E : V → V → Prop) (hout : Relator.RightUnique E) (hin : Relator.LeftUnique E) (hacyclic : ∀ x, ¬ TransGen E x x) (hV : 2 ≤ Nat.card V) (hc : 2 ≤ Nat.card (Component E)) : Nat.card {xy : V × V // E xy.1 xy.2} = Nat.card V - Nat.card (Component E) ∧ ∀ (μ : PMF (FullCycle V)), (∀ σ, μ σ = (Nat.card (FullCycle V) : ℝ≥0∞)⁻¹) → μ.toOuterMeasure {σ | ∀ x y, E x y → σ.1 x = y} = ((Nat.card (Component E) - 1).factorial : ℝ≥0∞) / ((Nat.card V - 1).factorial : ℝ≥0∞) ∧ 0 < μ.toOuterMeasure {σ | ∀ x y, E x y → σ.1 x = y}"
     },
     "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestPathOrder.component_path_order": {
       "module": "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestPathOrder",
