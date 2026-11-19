@@ -25,6 +25,14 @@
 盲区相位转一圈，布洛赫点不动卡：拨动全局盲区相位 $\chi$，紫色旋量环面上的琥珀珠沿品红圆纤维整圈滑动，而投向下方的青色布洛赫纯态点保持不动（霍普夫纤维丛标 `ARGUED`，`unit_gram_overlap_characterization`、`blochPure_norm`、`blochPure_surjective` 与 `complete_common_phase_polynomial_theorem` 为 `LEAN ✓`，读数标 `NUM`）。
 :::
 
+::: {.remark #rem-ch39-axiom-omega-readings-classification title="三维球面的读法分类：哪种读法给出二元、可复合的系统"}
+**读法与假设（`MODEL`）。** 一种读法指定构型中不可观测的部分，即右迁移中的一个闭子群 $K$（在左迁移下正规），并在类 $M/K$ 上给出权重 $w([x], [y]) = F\bigl(s_K(x, y)\bigr)$，$s_K(x, y) := \sup_{k \in K} c(kx, y)$，$F$ 连续且 $F(1) = 1$。以下各条都是假设：权重取 $F \circ s_K$ 的形式；可复合性，即两个独立系统的类相关 $s_K$ 与权重都相乘；二元性，即每个类恰有一个正交类（法则 (II) 唯一触零点条款在态层面的形式）；归一性，即极大正交族上权重之和为一，只用于确定指数。
+
+**分类（`手工推导`）。** 可复合的读法必有 $F(s) = s^p$。在右迁移的全部闭子群中（$\{\pm 1\}$、循环群、二元二面体群等有限群、时钟、时钟的正规化子与全体右迁移），可复合且二元的读法恰好对应 $K$ 是一个时钟；加上归一性得 $p = 2$，权重即玻恩权重 $\beta$。同一个 $\mathbb{R}^4$ 按 $\mathbb{R}$、$\mathbb{C}$、$\mathbb{H}$ 来读（$K = \{\pm 1\}$、时钟、全体右迁移）分别给出 $4$、$2$、$1$ 个完全可区分的态，二元性恰在除代数维数为 $2$ 时成立。每条假设都需要：只要求权重相乘还不够，$K = \{1\}$、$w = \kappa$ 时，在 $(\mathbb{R} \oplus V)^{\otimes 2}$ 上取 $F_{12}(c) = \max(c, 0)$ 可使权重精确相乘，类相关却不相乘。复合系统只带一个时钟这一点也是假设（`MODEL`）。
+
+**文献（`文献结果`）。** 实、复、四元数量子理论的三重分类见 F. J. Dyson, *J. Math. Phys.* **3**, 1199–1215, 1962 与 J. C. Baez, *Found. Phys.* **42**, 819–855, 2012；由可乘性与归一性得出指数 $2$ 的论证接近 S. Aaronson, arXiv:quant-ph/0401062, 2004。
+:::
+
 2. **公理二（可观测量公设）：切空间反自伴生成元 $90^\circ$ 翻转导出厄米算符与罗伯逊—薛定谔不确定性**：
    教科书第二公设规定：一切物理可观测量由自伴（厄米）线性算符 $\hat{A} = \hat{A}^\dagger$ 表示，算符本征值为实数测量刻度。在 $\mathrm{AXIOM}\text{-}\Omega$ 中，厄米算符与测不准关系直接由三元数切空间曲率导出（`手工推导` + `LEAN ✓`）：
    - **保正迁移锁定反自伴切生成元**：法则 (II) 要求沿任意切方向 $\mathbf{X} \in T_o\mathbb{T}_3 \cong \mathfrak{su}(2)$ 推进无穷小圆弧 $\exp(\epsilon\mathbf{X})$ 时保持复内积保真度不变，对 $\epsilon = 0$ 求导立得 $\mathbf{X}^\dagger + \mathbf{X} = 0 \implies \mathbf{X}^\dagger = -\mathbf{X}$（与平衡幺正和交叉积反自伴律 [`crossProduct_is_skewAdjoint_of_balanced_sum`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum) 同源，`LEAN ✓`）；
@@ -151,6 +159,20 @@ $$
 $$
 
 玻恩概率是 $(2\kappa_{S^3} - 1)^2$ 沿盲区纤维的最大值，也是其纤维平均的两倍。由 [@rem-ch39-axiom-omega-round-trip-closing-law] 的往返律，$(2\kappa(w, x) - 1)^2 = \kappa\bigl(w, [x, w, x]\bigr)$，所以玻恩概率又等于沿盲区纤维取最大的往返读数 $\max_\chi \kappa\bigl(\phi, [e^{\hat{\mathbf{i}}\chi}\psi, \phi, e^{\hat{\mathbf{i}}\chi}\psi]\bigr)$；§39.3.2 所说“往返双投影”在母核上的精确含义即此。玻恩权重因而是母核在时钟（盲区相位）作用下的领头不变量，这一恒等式是 `手工推导`；把它读作概率是一项约定，把纯态读作时钟轨道（盲区纤维）是单个系统层面的一项选择，二者都标为 `MODEL`。
+:::
+
+::: {.remark #rem-ch39-axiom-omega-physical-examples title="物理例子"}
+下列例子分三种身份：**精确实例**（某条定理的直接实例，恒等式为 `手工推导`，实验数据为 `文献结果`）、**公设下的实例**（依赖所列 `MODEL` 假设）与**类比**（`MODEL`，不作推论）。共同的恒等式是：绕单位轴 $n$ 转角 $\alpha$ 的自旋旋转 $U = e^{-\hat{\mathbf{i}}\alpha\,n\cdot\boldsymbol{\sigma}/2}$ 对每个旋量 $\psi$ 都有 $\operatorname{Re}\langle\psi\mid U\mid\psi\rangle = \cos\frac{\alpha}{2}$，所以 $\kappa(\psi, U\psi) = \cos^2\frac{\alpha}{4}$ 与态无关。
+
+1. **中子 $4\pi$ 干涉（精确实例）。** 单晶中子干涉仪一臂中的磁场使自旋转过 $\alpha$，前向出射强度在理想对比度下正比于 $\kappa(\psi, U\psi) = \frac{1}{2}\bigl(1 + \cos\frac{\alpha}{2}\bigr)$，与入射态无关，所以非极化束给出同一条纹。周期为 $4\pi$：$\alpha = 2\pi$ 时 $\kappa(\psi, -\psi) = 0$，而玻恩权重 $\beta(\psi, -\psi) = 1$；实验读出的是 $S^3$ 上区分 $\psi$ 与 $-\psi$ 的 $\kappa$，$S^2$ 上的 $\beta$ 把二者等同。早期最精确的周期测量值为 $716 \pm 4^\circ$（H. Rauch, A. Wilfing, W. Bauspiess & U. Bonse, *Z. Phys. B* **29**, 281–284, 1978；早期实验见 S. A. Werner, R. Colella, A. W. Overhauser & C. F. Eagen, *Phys. Rev. Lett.* **35**, 1053–1055, 1975）。
+2. **频闪拉莫尔进动（精确实例）。** $z$ 向静磁场中的自旋 $\frac{1}{2}$ 每隔 $\tau$ 采样，$\psi_n = U^n\psi_0$，$U = e^{-\hat{\mathbf{i}}\omega\tau\sigma_z/2}$，满足流群递推 $\psi_{n+1} = [\psi_n, \psi_{n-1}, \psi_n] = 2c\,\psi_n - \psi_{n-1}$，$c = \cos\frac{\omega\tau}{2}$（凯莱—哈密顿恒等式 $U^2 = (\operatorname{tr}U)\,U - \mathbf{1}$）。对任一检验旋量 $y$，$\kappa$ 读数 $r_n = \kappa(y, \psi_n)$ 满足 $r_{n+1} = 2c\,r_n - r_{n-1} + 1 - c$，系数与 $y$ 无关，步角是半角 $\frac{\omega\tau}{2}$；玻恩权重 $b_n = \beta(y, \psi_n)$ 的递推步角是整角 $\omega\tau$，常数项 $(1 - \cos\omega\tau)(1 + r_y^z r_{\psi_0}^z)$ 依赖于 $y$。数值：质子 $\gamma_p/2\pi = 42.577478461\;\mathrm{MHz/T}$（P. J. Mohr, D. B. Newell, B. N. Taylor & E. Tiesinga, *Rev. Mod. Phys.* **97**, 025002, 2025），$1\;\mathrm{T}$、$\tau = 1\;\mathrm{ns}$ 时 $c = 0.99106732$。
+3. **双量子点交换门 $\sqrt{\mathrm{SWAP}}$（复合系统公设下的实例，`MODEL`）。** 在 [@rem-ch39-axiom-omega-composites-round-trip] 的复合系统公设下，一对结构的无源生成元为 $\alpha\mathbf{1} + JX$（$X$ 为交换），$Jt = \frac{\pi}{4}$ 时演化为 $e^{-\hat{\mathbf{i}}\pi/4}\sqrt{X}$，把 $\lvert{\uparrow\downarrow}\rangle$ 变为共生度为 $1$ 的最大纠缠态。J. R. Petta 等（*Science* **309**, 2180–2184, 2005）在双量子点中实现了 $180\;\mathrm{ps}$ 的 $\sqrt{\mathrm{SWAP}}$。
+4. **$P^2 + V^2 + C^2 = 1$（恒等式为精确实例）。** 即 [@rem-ch39-axiom-omega-tier2-velocity-and-de-sitter] 中的互补恒等式。X.-F. Qian, A. N. Vamivakas & J. H. Eberly（*Optica* **5**, 942–947, 2018）用经典激光束（路径与偏振两个自由度）测得 $13$ 个态的 $V^2 + D^2 + C^2$ 在 $0.986$ 到 $1.000$ 之间（$D$ 为路径可区分度，此处等于 $P$）。
+5. **部分偏振片即洛伦兹推进（经典偏振光学中的精确实例；以下为计算值）。** 二向衰减器的衰减度 $D = (T_{\max} - T_{\min})/(T_{\max} + T_{\min})$ 就是推进速度。两片 $T_{\max} = 1$、$T_{\min} = 0.25$（$D = 0.6$）、轴成 $45^\circ$（庞加莱球上正交）的二向衰减器，非偏振入射时出射偏振度为 $\sqrt{1 - (1 - D^2)^2} = 0.76837$，残余维格纳转角为 $12.680^\circ$（极分解见 S.-Y. Lu & R. A. Chipman, *J. Opt. Soc. Am. A* **13**, 1106, 1996；相关提议见 D. Han, Y. S. Kim & M. E. Noz, *Phys. Rev. E* **56**, 6065–6076, 1997）。我们没有找到专门测量这一转角的实验。
+6. **各向同性转动扩散 $3 : 8$（各向同性噪声模型下的未经检验预言，`MODEL`）。** 若自旋 $\frac{1}{2}$ 受各向同性的小步随机转动（$\langle\theta_i\theta_j\rangle = 2Dt\,\delta_{ij}$），旋量在 $S^3$ 上做布朗运动：相位参照干涉的对比度按 $e^{-3Dt/4}$ 衰减，极化按 $e^{-2Dt}$ 衰减，速率比为 $3 : 8$。我们没有找到比较这两者的实验，这是一个预言。
+7. **实数与复数量子理论的网络实验（复合规则的检验，`MODEL`）。** M.-O. Renou 等（*Nature* **600**, 625–629, 2021）提出的纠缠交换网络检验，以及 M.-C. Chen 等（*Phys. Rev. Lett.* **128**, 040403, 2022）与 Z.-D. Li 等（*Phys. Rev. Lett.* **128**, 040402, 2022）的实验，检验的是复合规则（实张量积），不检验单个系统的读法。[@rem-ch39-axiom-omega-readings-classification] 中的实四能级读法 $K = \{\pm 1\}$、$w = c^2$ 经实张量积复合即实量子理论，在信源独立的假设下被这些实验排除；实验与“复合系统只带一个时钟”相容，但不把它与全部替代方案对比检验。
+8. **电弱数值（场丛与三个结构的假设下，`MODEL`）。** 树图关系 $m_W = m_Z\cos\theta_W$（$\rho = 1$）见 [@rem-ch39-axiom-omega-tier3-pati-salam]。粒子数据组 2026 版（F. Takahashi 等, *Int. J. Mod. Phys. A* **41**, 2630011, 2026）给出 $m_Z = 91.1879(20)\;\mathrm{GeV}$、$m_W = 80.3625(77)\;\mathrm{GeV}$（不含 CDF 的组合）；在壳方案中这一关系按定义成立，$\overline{\mathrm{MS}}$ 方案中 $\hat\rho = 1.01016(9)$ 的偏离来自圈图修正，在树图陈述的范围之外。
+9. **宇宙学常数（类比，`MODEL`）。** $\Lambda\ell^2 = 3$ 是一个纯数，不给出物理尺度。Planck 2018（N. Aghanim 等, *Astron. Astrophys.* **641**, A6, 2020）给出 $\Lambda = (1.089 \pm 0.021) \times 10^{-52}\;\mathrm{m}^{-2}$；把 $S^3$ 的半径等同于相应的 de Sitter 半径是额外的假设。
 :::
 
 下面我们在单一具体算例中对五大公设的关键几何不变量做一行一式精确对账：
