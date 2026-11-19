@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "7a395ff75363c649223fbf16673c5e01ca8ad392",
-  "pinned_at": "2026-11-19T09:20:49Z",
+  "commit": "d5789ff84f77e21c3bb7b862ee3e986c7eecd393",
+  "pinned_at": "2026-11-19T09:33:14Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1181,11 +1181,19 @@
       "line": 747,
       "signature": "theorem fixed_size_cut_variance (m : ℕ) (hn : 4 ≤ Fintype.card A) (hm : 2 ≤ m) (hmn : m ≤ Fintype.card A - 2) (w : Edge A → ℝ) : let n"
     },
+    "D5/S3/Combinatorics/Graph/LinearForests/AlternatingCompletionLaw.alternating_completion_law": {
+      "module": "D5/S3/Combinatorics/Graph/LinearForests/AlternatingCompletionLaw",
+      "name": "D5.S3.Combinatorics.Graph.LinearForests.AlternatingCompletionLaw.alternating_completion_law",
+      "kind": "theorem",
+      "statement_id": "sha256:78a0eedff63e728b7599ad06b778460a6f85589d892618885c6a7529e5cfe9e8",
+      "line": 57,
+      "signature": "theorem alternating_completion_law [Finite V] (E : V → V → Prop) (k : V → Bool) (n : ℕ) (hn : 0 < n) (hout : Relator.RightUnique E) (hin : Relator.LeftUnique E) (ha : ∀ x, ¬ TransGen E x x) (hk : ∀ x y, E x y → k x ≠ k y) (hr : Nat.card (Side k false) = n) (hb : Nat.card (Side k true) = n) : let S : Set (AlternatingFullCycle k)"
+    },
     "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory.alternating_completion_classification": {
       "module": "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory",
       "name": "D5.S3.Combinatorics.Graph.LinearForests.CompatibleCycleInventory.alternating_completion_classification",
       "kind": "theorem",
-      "statement_id": "sha256:e84402ddd297869a2fec33844071df00e8c88bbbda29e774b87cb9c51e335c7a",
+      "statement_id": "sha256:d165dbf69d6e647380e0be4e7c96c3bd3324097e8655fe50459a0dc8740d909d",
       "line": 683,
       "signature": "theorem alternating_completion_classification [Finite V] (n : ℕ) (E : V → V → Prop) (k : V → Bool) (hout : Relator.RightUnique E) (hin : Relator.LeftUnique E) (ha : ∀ x, ¬ TransGen E x x) (hk : ∀ x y, E x y → k x ≠ k y) (hr : Nat.card (Side k false) = n) (hb : Nat.card (Side k true) = n) : ∃ (t : Component E ≃ Tail E) (h : Component E ≃ Head E) (Φ : AlternatingCompletion E k ≃ Compatible (fun A => k (h A)) (fun A => !(k (t A)))), (∀ A, Quotient.mk (EqvGen.setoid E) (t A).1 = A) ∧ (∀ A, Quotient.mk (EqvGen.setoid E) (h A).1 = A) ∧ (∀ σ A, σ.1 (t A) = h ((Φ σ).1 A)) ∧ let s"
     },
@@ -1193,7 +1201,7 @@
       "module": "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory",
       "name": "D5.S3.Combinatorics.Graph.LinearForests.CompatibleCycleInventory.compatible_cycle_card",
       "kind": "theorem",
-      "statement_id": "sha256:e84402ddd297869a2fec33844071df00e8c88bbbda29e774b87cb9c51e335c7a",
+      "statement_id": "sha256:d165dbf69d6e647380e0be4e7c96c3bd3324097e8655fe50459a0dc8740d909d",
       "line": 496,
       "signature": "theorem compatible_cycle_card [Finite C] (s d : C → Bool) (hb : inventory s d false true = inventory s d true false) : Nat.card (Compatible s d) = if Nat.card C = 0 then 0 else if 0 < inventory s d false true then inventory s d false true * (Nat.card (Side s false) - 1).factorial * (Nat.card (Side s true) - 1).factorial else if inventory s d false false = 0 ∨ inventory s d true true = 0 then (Nat.card C - 1).factorial else 0"
     },
@@ -1201,7 +1209,7 @@
       "module": "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion",
       "name": "D5.S3.Combinatorics.Graph.LinearForests.DirectedForestCompletion.directed_forest_completion",
       "kind": "theorem",
-      "statement_id": "sha256:fdfe078d2aec36a0e7fd271d7842bbc4261d6d59a44852c946c52accbff9e94d",
+      "statement_id": "sha256:adb1029d8581e341617a55f8ec299743f265ce29b80557c9fa89e00c193f98cd",
       "line": 595,
       "signature": "theorem directed_forest_completion [Finite V] (E : V → V → Prop) (hout : Relator.RightUnique E) (hin : Relator.LeftUnique E) (ha : ∀ x, ¬ TransGen E x x) (hc : 2 ≤ Nat.card (Component E)) : ∃ (q : Component E ≃ Tail E) (h : Component E ≃ Head E) (Φ : CycleCompletion E ≃ FullCycle (Component E)), (∀ A, Quotient.mk (EqvGen.setoid E) (q A).1 = A) ∧ (∀ A, Quotient.mk (EqvGen.setoid E) (h A).1 = A) ∧ (∀ σ A, σ.1 (q A) = h ((Φ σ).1 A)) ∧ Nonempty (CycleCompletion E) ∧ Nat.card (CycleCompletion E) = (Nat.card (Component E) - 1).factorial ∧ UniformCompletionLaw E q h Φ"
     },
