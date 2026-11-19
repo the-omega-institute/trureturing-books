@@ -1557,6 +1557,20 @@ $S^1\hookrightarrow S^3(1)\xrightarrow{\pi_{\mathrm{Hopf}}}\mathbb{CP}^1,\quad [
 **认识论状态 (Status)：**
 `LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§39.26](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md#sec-ch39-axiom-omega-quantum-mechanics-five-postulates))
 
+**自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明**（Self-Contained Ternion Topological Particle, Field–Wave–Particle Grade Identity & Fourfold Proof of "No Exterior"）
+
+**本书几何直觉语言 (Geometric Intuition Term)：**
+有限球面旋转系统面边界闭链正合、全有限单纯形二上链正合、自旋因子三维带符号叉乘分类（至多差定向 $\varepsilon\in\{+1,-1\}$）、圆周平方双覆盖无连续全局截面与给定初始上层点 $w_0$ 唯一路径提升及整圈闭回路对跖换叶、单比特布洛赫纯态单位球满射、实内积空间平行四边形范数律、复内积空间单位态射影富比尼—施图迪角三角不等式、标量域 `[RCLike 𝕜]` 单位范数格拉姆全同判据、观测划分拓扑不可分核与结构化跨语境客观主张不变公因子的十二条冻结锚点（`LEAN ✓`）；配对紧致无边界三元数 $\mathbb{T}_3 \cong S^3(R)$（$\partial\mathbb{T}_3 = \emptyset,\;\operatorname{Vol} = 2\pi^2 R^3$）的闭流形三阶同伦整绕数 $Q_{\mathrm{top}} = \frac{1}{2\pi^2 R^3}\int_{S^3(R)}\operatorname{vol}_{S^3(R)} = \frac{1}{2\pi^2}\int_{S^3(1)}\eta_1 = 1 \in \pi_3(\mathbb{T}_3) \cong \mathbb{Z}$（禁止全局分数绕数）、无散平行化切丛（$\chi(S^3)=0,\;T\mathbb{T}_3 \cong \mathbb{T}_3 \times \mathbb{R}^3,\;d\eta_1\equiv 0$，“场”）—霍普夫纤维相移、圆周双覆盖提升与 $k=1$ 第一非平凡空间拉普拉斯本征模（$\Delta_{S^3(R)}\psi_\mu = -\frac{3}{R^2}\psi_\mu$，“波”）—全局整绕数及跨层八度重整 $\Lambda^3_\ell \equiv \Lambda^0_{\ell+1}$（“粒子”）的三阶读数同体、锚定原点向量和 $A\oplus_C B = A+B-C$ 原点漂移（$C_1\implies\lVert\cdot\rVert^2\approx 1.17157288,\;C_2\implies 4.00000000$）与平直无源反射 $2B-A$ 脱壳（$\lVert 2B-A\rVert^2=3.00000000$）及固定 $C=\mathbf{1}$ 致 $\dim\mathrm{SO}(4)=6\to\dim\mathrm{SO}(3)=3$ 稳定子折半对比弯曲流群二点保球面延伸 $[B,A,B]\in\mathbb{T}_3$ 与 $[A,C,C]\equiv A$ 消除外置第 3 点 $C$，以及内禀去嵌入（$\kappa(x,x)\equiv 1$）、测地波前面积 $\mathcal{A}(r)=4\pi R^2\sin^2(r/R)$ 越过赤道峰值 $4\pi R^2$（$V=\pi^2 R^3$ 半幅体积）后在 $r=\pi R$ 对跖内点 $\bar{A}$ 归零重聚、亏格 $0$ 赤道希高德双球粘合 $S^3 \cong B_{\mathrm{in}}^3 \cup_{S^2_{\mathrm{eq}}} B_{\mathrm{out}}^3$ 与内部探针商核 `partitionTopology r_int` 配极大/极小比较闭合公设的四重“没有之外”论证（并与[终章](coda.md)有限截断/有限门字/分片多面体逼近余项及无不动点条件对角逃逸构成本体—认识论双层互补，`手工推导` / `NUM` / `文献结果` / `MODEL`）。
+
+**Lean 4 形式对象 / 锁定声明 GID：**
+[`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact), [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness), [`complete_consequences`](lean:D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences), [`no_continuous_global_section`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section), [`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift), [`blochPure_norm`](lean:D5/S3/Quantum/Matrix/NumericalRange.blochPure_norm), [`blochPure_surjective`](lean:D5/S3/Quantum/Matrix/NumericalRange.blochPure_surjective), [`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law), [`fs_angle_triangle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle), [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization), [`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel), [`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)
+
+**一行核心不变量 / 恒等式 (One-Line Invariant)：**
+$Q_{\mathrm{top}}=\frac{1}{2\pi^2}\int_{S^3(1)}\eta_1=1\in\mathbb{Z},\quad \Delta_{S^3(1)}\psi_\mu=-3\psi_\mu,\quad \mathcal{A}(r)=4\pi R^2\sin^2\frac{r}{R}\xrightarrow{r\to\pi R}0,\quad S^3\cong B_{\mathrm{in}}^3\cup_{S^2_{\mathrm{eq}}}B_{\mathrm{out}}^3$
+
+**认识论状态 (Status)：**
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.27](ch39-s27-self-contained-ternion-particle-and-no-exterior.md#sec-ch39-self-contained-ternion-particle-and-no-exterior))
+
 :::
 
 ---

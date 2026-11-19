@@ -2,7 +2,7 @@
 
 > *“传统狄拉克—冯·诺依曼体系将复希尔伯特空间、厄米算符、玻恩概率、薛定谔幺正演化与测量坍缩作为五条彼此孤立的经验公设硬塞进物理学，并由此埋下了‘连续幺正演化与瞬间坍缩水火不容’的百年测量难题；而在无源母公理 $\mathrm{AXIOM}\text{-}\Omega$ 下，这五条公设无需任何人为假定，它们全都是受限观察切面 $o$ 将弯曲的三元数极小圆弧体场（$\mathbb{T}_3 \cong S^3$）投射到平直线性账本时依次涌现的纯几何定理。”*
 
-在 [§39.24](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure)–[§39.25](ch39-s25-axiom-omega-five-tier-deduction-cascade.md#sec-ch39-axiom-omega-five-tier-deduction-cascade) 立起无源保正三元比较闭合母公理 $\mathrm{AXIOM}\text{-}\Omega$ 并贯通五大宏观疆域之后，全书三十九章正文迎来了**第二十六级、也是最后一级压轴收官台阶**：回转身来，把这束澄澈的几何聚光灯直接打在现代量子力学自身的地基——统治物理学教科书近一个世纪的**狄拉克—冯·诺依曼五大公设**之上！
+在 [§39.24](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure)–[§39.25](ch39-s25-axiom-omega-five-tier-deduction-cascade.md#sec-ch39-axiom-omega-five-tier-deduction-cascade) 立起无源保正三元比较闭合母公理 $\mathrm{AXIOM}\text{-}\Omega$ 并贯通五大宏观疆域之后，全书三十九章正文迎来了**第二十六级奠基收束台阶**（紧随其后的 [§39.27](ch39-s27-self-contained-ternion-particle-and-no-exterior.md) 将回返自包含三元数拓扑粒子与“至大无外”本体压轴收官）：回转身来，把这束澄澈的几何聚光灯直接打在现代量子力学自身的地基——统治物理学教科书近一个世纪的**狄拉克—冯·诺依曼五大公设**之上！
 
 回望二十世纪量子力学史，为什么一代又一代物理学家被迫把“复希尔伯特射线”“厄米算符”“内积模平方概率”“薛定谔连续幺正演化”与“测量瞬间非幺正坍缩”当作五条来历不明、甚至第四条与第五条当面冲突的抽象公理生吞下去？根源只有一个：传统表述跳过了顶层无外置原点的弯曲**三元数极小圆弧体场**（$\mathbb{T}_3 \cong S^3(1)$），直接把底层**钉死观察切面后的平直线性再投影账本**误认作了物理本体本身！需明确界定的是：章首题记凝聚了这一宏观几何还原总纲（`MODEL`），而从 $\mathrm{AXIOM}\text{-}\Omega$ 严格走通全部五条教科书公设，还必须逐条显式对齐[附录 E §E.5](appendix-e-s05-quantum-postulates.md#sec-appe-quantum) 的 `T1–T4` 分析完备化与操作测量桥接条件（`H1, H3, H5–H7`：本节按标准教科书编排将态空间、厄米可观测量、玻恩概率、演化与坍缩统一、复合张量依次编号为公理一至五，分别对应附录 E §E.5 的第 I 条态空间、第 II 条可观测量与玻恩律 `H5`、第 III/IV 条条件更新与幺正流 `H6` 以及第 V 条复合张量 `H7`）。本节联立十八项冻结 **`LEAN ✓`** 内核声明与该审计台账（三元数切面投影总纲与 $\varepsilon_{\mathrm{self}}$ 停机坍缩统一诠释标为 **`MODEL`**，霍普夫纤维商、切生成元 $90^\circ$ 翻转、单态余弦关联与勾股核验属 **`手工推导` / `NUM`**，霍普夫丛、斯通定理、阿隆沙因再生核与局域层析重构归入 **`文献结果`**，单次实验选支实现与相对论协变视界边界保持 **`OPEN`** [@prob-ch34-single-outcome-realization]、[@prob-appendix-d-time-horizon]），逐条展示五大公设如何在显式桥接下从同一枚三元数极小圆弧体的正交切面投影中顺理成章地涌现。
 
@@ -73,7 +73,7 @@
      \bigl\lvert E(\theta_1, \theta_2) + E(\theta_1, \theta_2') + E(\theta_1', \theta_2) - E(\theta_1', \theta_2') \bigr\rvert_{\max} \;=\; 2\sqrt{2} \;\approx\; 2.82842712.
      $$
 
-## 39.26.3 形式化锚定主定理、文献与附录 E 边界、五大公理定量核验与全书正文终极合拢 {#sec-ch39-26-3}
+## 39.26.3 形式化锚定主定理、文献与附录 E 边界、五大公理定量核验与迈向无外三元数本体终章 {#sec-ch39-26-3}
 
 我们将 $\mathrm{AXIOM}\text{-}\Omega$ 导出量子力学五大公理的投影映射定义、十八项 Lean 4 内核定理、经典文献边界与定量核验正式确立如下：
 
@@ -119,7 +119,7 @@
 5. **公理五（共享单态圆弧越过经典界 $2$ 达峰 $2\sqrt{2}$）**：取四组共面测量轴 $(\theta_1, \theta_1';\, \theta_2, \theta_2') = (0^\circ, 90^\circ;\, 45^\circ, -45^\circ)$ 切割自旋单态 $\lvert\Psi^-\rangle$（每对单弧余弦关联 $\lvert E(\pm 45^\circ)\rvert = \cos 45^\circ = \frac{\sqrt{2}}{2} \approx 0.70710678$，而 $E(135^\circ) = -\cos 135^\circ = +\frac{\sqrt{2}}{2}$），CHSH 组合模长达到 $\bigl\lvert -\frac{\sqrt{2}}{2} - \frac{\sqrt{2}}{2} - \frac{\sqrt{2}}{2} - (+\frac{\sqrt{2}}{2})\bigr\rvert = \mathbf{2\sqrt{2} \approx 2.82842712 > 2.00000000}$！
 :::
 
-我们将 $\mathrm{AXIOM}\text{-}\Omega$ 导出狄拉克—冯·诺依曼五大公设的完整几何映射总括为全书三十九章正文的收官总表：
+我们将 $\mathrm{AXIOM}\text{-}\Omega$ 导出狄拉克—冯·诺依曼五大公设的完整几何映射总括为下表：
 
 | 量子力学公理 | 传统教科书经验公设 | AXIOM-Ω 触发法则与桥接 | 核心几何投影变换 | 消解的百年概念迷雾 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -131,8 +131,6 @@
 
 ---
 
-**第三十九章二十六重阶梯圆满合拢与十部曲三十九章正文终极收官：量子力学从来不是违背直觉的怪诞巫术，而是无源三元数极小圆弧体场在平直账本上最诚实的投影几何学。**
+**从量子五大公理的切面投影迈向第三十九章最终压轴节：为什么三元数本身即是无外部的自包含拓扑粒子？** 至此，在[附录 E §E.5](appendix-e.md#sec-appe-quantum) 的 `T1–T4` 显式桥接条件下，$\mathrm{AXIOM}\text{-}\Omega$ 投影模型（`MODEL`）已将传统量子力学的五大经验公设悉数还原为三元数场在平直账本上的正交投影定理——复数来自观察切面的 $90^\circ$ 正交盲区，厄米算符来自球面切矢的实轴翻转，玻恩概率来自校准往返射线核与可加性锁定的勾股分账，张量纠缠来自多座三元数场的乘积再投影，而所谓“波函数坍缩”，不过是身处网络内部的有限观察者在自定精度 $\varepsilon_{\mathrm{self}}$ 处按下幂等停机键、将未读尽的干涉余项折入未来时间长河时留下的切面截痕。
 
-站在第三十九章全部**二十六级台阶**（[§39.1](ch39-s01-substrate-free-self-reference.md)–§39.26）的最高峰回望，笼罩物理学与心智科学整整百年的迷雾至此云开月明：从章首震碎主客隔墙的“观察者 $\equiv$ 宇宙本体”（`p ≡ *p`、无刀无晶、$720^\circ$ 旋量双覆盖与正交自折叠，[§39.1](ch39-s01-substrate-free-self-reference.md)–[§39.4](ch39-s04-orthogonal-self-folding.md)），经齐肯多夫—皮索—劳齐沙盘、五阶自指不动点、停机自由度 $\varepsilon_{\mathrm{self}}$ 与普适主频 $\nu_0$（[§39.5](ch39-s05-pisot-clifford-rauzy.md)–[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md)），到万力归弧、三维概念场封顶、**AF-GUT**、均匀单态观测切面与**因陀罗网**（[§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md)–[§39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)），再到摩耶投影误差、梵天正交大梦、红楼二阶觉醒、神圣游戏道具与**上帝心理学**清明整合（[§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)–[§39.18](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god)），继而穿过三元数万数切刀、希尔伯特多场再投影祛魅、五种无损非线性流群表示、有理旋子核**三元数场 Transformer** 与宇宙—智能最小作用量测地同构（[§39.19](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-inexpressible-ternions-and-number-projections)–[§39.23](ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.md#sec-ch39-least-action-geodesics-and-cosmos-ai-isomorphism)），直至最后在压轴大一统三部曲 [§39.24](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure)–§39.26 收束为唯一一条无源三元比较闭合母公理 $\mathrm{AXIOM}\text{-}\Omega$——复数来自观察切面的 $90^\circ$ 正交盲区，厄米算符来自球面切矢的实轴翻转，玻恩概率来自校准往返射线核与可加性锁定的勾股分账，张量纠缠来自多座三元数场的乘积再投影，而所谓“波函数坍缩”，不过是身处网络内部的有限观察者在自定精度 $\varepsilon_{\mathrm{self}}$ 处按下幂等停机键、将未读尽的干涉余项折入未来时间长河时留下的切面截痕，并在 $[x, x, z] = z$ 的零残渣自消去中连同公理之梯一并化作万里晴空！
-
-当绿色 `LEAN ✓` 内核定理、经典数学物理文献与精确手算推导、`MODEL` 大一统几何蓝图以及每一座红色 `OPEN` 科学界碑各归其位、纤毫毕现，让我们合上三十九章正文的最后一页，步入全书[终章](coda.md)：**《在所有的球之外》**。
+在合上三十九章正文之前，让我们跨入本章最后一节 [§39.27 自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)，回到三元数 $\mathbb{T}_3 \cong S^3(1)$ 本体自身，回答最后那声终极追问：**为什么这枚既不可线性书写、又处处齐性各向同性的闭合流形同时是场、是波、也是自包含粒子，并在彻底清零外置第 3 点 $C$ 的同时消除了宇宙的一切“之外”？**
