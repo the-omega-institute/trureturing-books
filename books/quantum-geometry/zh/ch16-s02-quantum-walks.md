@@ -496,12 +496,27 @@ $$
 影图含 $F+uv$，无二循环使每条边恰选一次方向；入、出度约束由置换保证。强制定向公式说明限制与扩张互逆，且扩张唯一。两者保留影图；把 $\sigma$ 换为逆置换正好反转所有选择，所以它们与 $\iota$ 交换。整个论证容许加边后已经封成整圈。以上为书面证明，由作者与评审负责。
 :::
 
-简单整圈的两个置换表示有经典先例：Greenhill、Janson、Kim 与 Wormald，*Permutation pseudographs and contiguity*，[doi:10.1017/S0963548301005065](https://doi.org/10.1017/S0963548301005065)，原文第 3 页给出二正则伪图的置换重数。本节使用至少三个顶点的普通简单整圈；两顶点时逆置换相同，断开的多个圈也不是一个整圈置换的影图。该出处说明经典重数的谱系，不单独承担本节全部增强的对应与加边结论。这里没有推出无向概率分布、交替计数、随机名字或端口规律，也没有推出自适应查询与 `EXIT` 下界。
+简单整圈的两个置换表示有经典先例：Greenhill、Janson、Kim 与 Wormald，*Permutation pseudographs and contiguity*，[doi:10.1017/S0963548301005065](https://doi.org/10.1017/S0963548301005065)，原文第 3 页给出二正则伪图的置换重数。本节使用至少三个顶点的普通简单整圈；两顶点时逆置换相同，断开的多个圈也不是一个整圈置换的影图。该出处说明经典重数的谱系，不单独承担本节全部增强的对应与加边结论。
+
+::: {.theorem #thm-uniform-undirected-cycle-completion title="均匀定向提升的无向补全律" lean="D5/S3/Combinatorics/Graph/LinearForests/UndirectedCycleCompletionLaw.uniform_undirected_completion" proof="pf-uniform-undirected-cycle-completion"}
+设 $V$ 为有限标号顶点集，$|V|\ge3$，$F$ 为 $V$ 上的简单图，且 $\mathcal H(F)$ 非空。记 $\pi\colon\mathcal L(F)\to\mathcal H(F)$ 为忘去方向的影图映射。存在 $\mathcal L(F)$ 上的概率质量 $\mu$ 和 $\mathcal H(F)$ 上的概率质量 $\nu$，使得对每个提升 $l$ 和完成图 $C$，
+
+$$
+\mu(l)=\frac{1}{|\mathcal L(F)|},\qquad
+\nu(C)=\frac{1}{|\mathcal H(F)|},\qquad \pi_*\mu=\nu.
+$$
+:::
+
+::: {.proof #pf-uniform-undirected-cycle-completion}
+每个完成图都有两个定向提升。沿候选后继置换逐顶点比较方向时，一条边上选定的方向会确定下一条边的方向，因为回到上一个顶点会形成二循环。于是同一个影图上的两个提升只能相同或互为反向。对固定的完成图求推前质量，就是把这两个提升各自的均匀质量相加，结果为 $2/|\mathcal L(F)|=1/|\mathcal H(F)|$。完整证明由 Lean 内核检查。
+:::
+
+该结论适用于固定的普通无向简单图。交替颜色约束、随机名字和端口及自适应历史需要各自的概率模型。
 
 **通向经典黑盒下界仍需哪些桥梁？** [@thm-directed-forest-cycle-completion] 给出普通有向模型的静态均匀律，[@thm-alternating-forest-classification] 给出交替模型的补全计数，[@thm-alternating-completion-law] 给出固定边集的条件律。它们与 [@rem-qsvt-walks-literature] 的黏合树结果之间还有三层区别：
 
-1. **图的分布与方向。** Ben-David 等人（*SIAM Journal on Computing* **53**(6)，2024，[doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975)，§6.3.2，Lemmas 6.11–6.13，PDF 第 37–39 页）在 self-weld 中使用每侧叶子上的一个均匀整圈，在 weld 中使用两侧叶子间的均匀交替整圈。[@thm-alternating-forest-classification] 给出交替补全的分类与基数，[@thm-alternating-completion-law] 给出固定延拓事件的概率和条件律。普通无向整圈的定向与表示重数现由 [@thm-undirected-cycle-orientation-fibers] 在同一实际完成图上给出：每个纤维恰为一对反向提升，并保留加边事件。无向模型仍需要对应的概率律。[@thm-alternating-connector-mass] 给出交替模型中不同分量之间指定连接的条件概率。
+1. **图的分布与方向。** Ben-David 等人（*SIAM Journal on Computing* **53**(6)，2024，[doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975)，§6.3.2，Lemmas 6.11–6.13，PDF 第 37–39 页）在 self-weld 中使用每侧叶子上的一个均匀整圈，在 weld 中使用两侧叶子间的均匀交替整圈。[@thm-alternating-forest-classification] 给出交替补全的分类与基数，[@thm-alternating-completion-law] 给出固定延拓事件的概率和条件律。普通无向整圈的定向与表示重数现由 [@thm-undirected-cycle-orientation-fibers] 在同一实际完成图上给出：每个纤维恰为一对反向提升，并保留加边事件。[@thm-uniform-undirected-cycle-completion] 进一步给出固定 $F$ 下普通无向补全的均匀律。[@thm-alternating-connector-mass] 给出交替模型中不同分量之间指定连接的条件概率。
 2. **条件信息。** 普通有向与交替有向的条件律都以固定边集 $E$ 全部出现为条件。自适应算法看到的完整查询历史还涉及随机名字、查询选择、全部邻居的回答及可能的颜色信息。必须在同一个随机图实现上证明这些历史条件恰好留下所声称的均匀补全集，或给出其他准确的条件律；把历史简写成 $E$ 并不能证明这一点。Ben-David 等人的上述引理只允许查询知识图中已有的名字，知识图外查询另有论证；随机稀疏名字是否提供额外信息也不由此定理回答。
 3. **查询、嵌入与成功事件。** Childs 等人 [quant-ph/0209131v2 第 IV 节](https://arxiv.org/abs/quant-ph/0209131v2) 先处理猜中新名字、颜色与已知名字查询的游戏转换，再转向树的随机嵌入，最后分别控制碰撞和 `EXIT` 事件，才得到原文 Theorem 9。Ben-David 等人脚注 14 特别说明：一次回答全部邻居的查询对应嵌入树中的 $O(t)$ 个顶点，并非严格 $t$ 个。其印刷论证中的分量下界 $2^k-2t$、配对界 $2/(2^k-2t)$ 与式 (6.4) 的 $O(t^2/(2^k-t))$ 各按原文保留；这里不将它们拼成未经证明的显式常数或参数范围。
 
-因此，普通收缩律提供静态计数与条件概率环节，交替结果给出实际载体上的分类、计数和固定边集的条件律，[@thm-undirected-cycle-orientation-fibers] 则以书面证明给出普通无向整圈的同图定向纤维、反向取商与加边对应。无向概率律及交替条件律的无向扩展、名字与端口及历史条件化、查询复杂度与完整经典 `EXIT` 下界仍依赖各自的模型与证明。[请求 #11](https://github.com/the-omega-institute/trureturing-requests/issues/11) 的更广范围仍未完成。下一节转到量子一侧，考察已经明确给定的加权路径及其端点概率。
+因此，普通收缩律提供静态计数与条件概率环节，交替结果给出实际载体上的分类、计数和固定边集的条件律，[@thm-undirected-cycle-orientation-fibers] 则以书面证明给出普通无向整圈的同图定向纤维、反向取商与加边对应。普通无向补全律见 [@thm-uniform-undirected-cycle-completion]。交替条件律的无向扩展、名字与端口及历史条件化、查询复杂度与完整经典 `EXIT` 下界仍依赖各自的模型与证明。[请求 #11](https://github.com/the-omega-institute/trureturing-requests/issues/11) 的更广范围仍未完成。下一节转到量子一侧，考察已经明确给定的加权路径及其端点概率。
