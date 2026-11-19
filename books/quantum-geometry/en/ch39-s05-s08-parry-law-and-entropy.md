@@ -960,6 +960,17 @@ The [uniformity criterion for binary endpoint laws](lean:D5/S3/Combinatorics/Pro
 
 For example, take retained pairs $(0,4)$ and $(1,3)$ and a discarded pair $(2,5)$. Both rows of $A$ are $(1)$. If either one of the retained orbitals is balanced and the discarded orbital is balanced, the entropy is $\log 2$. The other retained orbital may have any positive endpoint probabilities.
 
+**Purity of the unequal-weight marginal (written derivation).** Use the matrix $A$ and endpoint probabilities after fixing deterministic endpoints as above. Let $\rho_I$ be the retained marginal. Draw $x,x'$ independently from $\mu$ and set $z=x+x'$ over $\mathbb F_2$. The bits $z_i$ are independent and each equals $1$ with probability $2p_i(1-p_i)$. Averaging over these bits gives the purity.
+
+$$
+\operatorname{Tr}(\rho_I^2)
+=\mathbb E_z\!\left[\prod_{j:\,(A^\mathsf{T}z)_j=1}(1-2q_j)^2\right].
+$$
+
+On the supported occupation basis, $(MM^\dagger)_{xx'}$ is $\sqrt{\mu(x)\mu(x')}$ times $\mathbb E_{y\sim\nu}[(-1)^{z^\mathsf{T}Ay}]$. Independence factors the expectation over $y_j$. Each coordinate with $(A^\mathsf{T}z)_j=1$ contributes $1-2q_j$, and every other coordinate contributes $1$. The trace of the square of a Hermitian matrix is the sum of the squared moduli of its entries. Summing over $x,x'$ gives the formula. Conjugating by the diagonal unitary of retained phases and inserting zero rows and columns for the other occupations preserve the trace. The empty product equals $1$, so the purity is $1$ when $A$ is zero.
+
+When one retained pair alternates with one discarded pair, $A=(1)$. Adding the terms for $z=0$ and $z=1$ gives purity $1-8p(1-p)q(1-q)$. For instance, $p=q=1/4$ gives $23/32$, while $p=q=1/2$ gives $1/2$.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
