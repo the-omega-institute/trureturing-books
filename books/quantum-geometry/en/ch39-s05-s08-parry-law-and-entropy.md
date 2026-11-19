@@ -916,6 +916,44 @@ The same binary-rank calculation appears for bipartitions of graph states. Here 
 
 Replace each discarded orbital by the coordinate vector at its earlier endpoint. The retained compression stays the same. The discarded side now has one occupation string, so the ordinary marginal is pure and the entropy difference is $r\log 2$. For example, concatenate $m$ four-site blocks ordered $I,J,I,J$. Endpoints from distinct blocks do not alternate, so $A$ is the $m$-dimensional identity. This gives two $2m$-particle Slater states with equal retained compression at the same cut and ordinary marginal entropies $m\log 2$ and zero.
 
+**The entropy bound for unequal endpoint weights and when it is attained (written proof).** Keep the cut and disjoint pairs above, and allow arbitrary complex amplitudes on the two endpoints of each normalized orbital. An orbital with zero amplitude at one endpoint must occupy the other. Fix all such endpoints and delete the corresponding rows and columns of the alternation matrix. Write $A$ for the resulting matrix and $a,b$ for the remaining pair counts on each side. Let $p_i,q_j$ be the probabilities of selecting the later endpoint, given by the squared moduli of the corresponding amplitudes. Put $r=\operatorname{rank}_{\mathbb F_2}A$. The ordinary marginal has rank $2^r$ and entropy at most $r\log 2$. Equality holds exactly when the rows with $p_i=1/2$ span the row space of $A$ and the columns with $q_j=1/2$ span its column space, both over $\mathbb F_2$.
+
+Each determinant with nonzero amplitude still has a single term, the product of the selected amplitudes times the inversion sign. An inversion involving a fixed endpoint depends on choices on at most one side. The mixed coefficients for the remaining cross-cut inversions still follow from the four endpoint choices above. Absorb the complex phases of the endpoint amplitudes and the signs that depend on one side into the basis vectors. Let $\mu,\nu$ be the product Bernoulli laws of the endpoint strings $x\in\mathbb F_2^a$ and $y\in\mathbb F_2^b$, with parameters $p_i,q_j$, respectively. On the corresponding occupation strings the amplitude matrix is
+
+$$
+M_{xy}=\sqrt{\mu(x)}\,(-1)^{x^\mathsf T A y}\sqrt{\nu(y)} .
+$$
+
+The fixed occupations are included when embedding these basis vectors in the original space. Distinct endpoint strings give distinct occupation strings, and all other strings have zero amplitude.
+
+Set $U=\operatorname{im} A^\mathsf T$ and $V=\operatorname{im} A$. Group endpoint strings by $u=A^\mathsf T x$ and $v=Ay$ on the two sides. The probabilities of the groups are
+
+$$
+P(u)=\sum_{A^\mathsf T x=u}\mu(x),\qquad
+Q(v)=\sum_{Ay=v}\nu(y).
+$$
+
+Every group has positive mass. For each $u,v$, set $H_{uv}=(-1)^{x^\mathsf T A y}$ using any representatives of the groups. Adding a vector in $\ker A^\mathsf T$ to $x$, or a vector in $\ker A$ to $y$, leaves the exponent the same. The normalized vector for $u$ has components $\sqrt{\mu(x)/P(u)}$ within its group and zero elsewhere. The groups have disjoint supports, so these vectors are orthonormal. The vectors for $v$ are defined in the same way, with components $\sqrt{\nu(y)/Q(v)}$ on their groups. Let $E_I,E_J$ have these normalized vectors as columns. Then
+
+$$
+M=E_I K E_J^\dagger,\qquad K_{uv}=\sqrt{P(u)}\,H_{uv}\sqrt{Q(v)} .
+$$
+
+The nonzero spectrum of the original marginal is therefore the nonzero spectrum of $KK^\dagger$. Put $d=2^r$, the number of indices on each side. If $u\ne u'$, choose a coordinate $j$ in which $u+u'$ is nonzero. Pairing $v$ with $v+Ae_j$ reverses the sign of each term in $\sum_{v\in V}H_{uv}H_{u'v}$, so the sum is zero. When $u=u'$ the sum is $d$. Thus $HH^\dagger=dI$. The positive masses give invertible diagonal factors on either side of $H$ in $K$, so the rank is $d$.
+
+The $d$ positive eigenvalues $\lambda_1,\ldots,\lambda_d$ sum to $1$. Strict concavity of $-t\log t$ gives the entropy bound $\log d$, with equality exactly when each $\lambda_\ell=1/d$. At equality, $KK^\dagger=I/d$, and invertibility of the square matrix $K$ gives $K^\dagger K=I/d$ as well. The two diagonals are $P(u)$ and $Q(v)$, respectively, since $|H_{uv}|=1$ and each group of masses sums to $1$. Both distributions must therefore be uniform. Conversely, when both sets of masses are $1/d$, we have $K=H/d$ and $KK^\dagger=I/d$.
+
+Write $a_i\in U$ for row $i$ of $A$. The variable $u=\sum_i x_i a_i$ has law $P$. For any linear functional $\ell:U\to\mathbb F_2$, independence of the endpoint choices gives
+
+$$
+\mathbb E_P[(-1)^{\ell(u)}]
+=\prod_{i:\,\ell(a_i)=1}(1-2p_i).
+$$
+
+The $d$ sign functions form an orthogonal basis of the functions on $U$. For orthogonality, sum a nontrivial sign function by pairing each point with its translate by a vector at which the functional is $1$. Thus $P$ is uniform exactly when every nonzero $\ell$ has zero expectation. The product vanishes precisely when some row with $\ell(a_i)=1$ has $p_i=1/2$. If the balanced rows span $U$, every nonzero $\ell$ takes value $1$ on some such row. If they span a proper subspace, extend a basis of that subspace to a basis of $U$ to obtain a nonzero functional vanishing on every balanced row. Applying the same argument to $Q$ and the columns of $A$ gives the condition on the other side. When $r=0$, each group index has a single possible value, the marginal is pure, and both spanning conditions hold automatically. This includes the case where either side has no remaining orbitals.
+
+For example, take retained pairs $(0,4)$ and $(1,3)$ and a discarded pair $(2,5)$. Both rows of $A$ are $(1)$. If either one of the retained orbitals is balanced and the discarded orbital is balanced, the entropy is $\log 2$. The other retained orbital may have any positive endpoint probabilities.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
