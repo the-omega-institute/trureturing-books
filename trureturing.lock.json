@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "165f0153d250d4d7886b71a8041f8f0c67f0bc08",
-  "pinned_at": "2026-11-19T12:52:00Z",
+  "commit": "954f8e0d0dc6d42e5d41ae0cbfbe59b792b9cdf1",
+  "pinned_at": "2026-11-19T18:49:39Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1185,7 +1185,7 @@
       "module": "D5/S3/Combinatorics/Graph/LinearForests/AlternatingCompletionLaw",
       "name": "D5.S3.Combinatorics.Graph.LinearForests.AlternatingCompletionLaw.alternating_completion_law",
       "kind": "theorem",
-      "statement_id": "sha256:78a0eedff63e728b7599ad06b778460a6f85589d892618885c6a7529e5cfe9e8",
+      "statement_id": "sha256:b2266f422726a5dbd6de0c56d1ccd46d0cb5d385eb28110c81f441bb0a364410",
       "line": 57,
       "signature": "theorem alternating_completion_law [Finite V] (E : V → V → Prop) (k : V → Bool) (n : ℕ) (hn : 0 < n) (hout : Relator.RightUnique E) (hin : Relator.LeftUnique E) (ha : ∀ x, ¬ TransGen E x x) (hk : ∀ x y, E x y → k x ≠ k y) (hr : Nat.card (Side k false) = n) (hb : Nat.card (Side k true) = n) : let S : Set (AlternatingFullCycle k)"
     },
@@ -1193,7 +1193,7 @@
       "module": "D5/S3/Combinatorics/Graph/LinearForests/AlternatingConnectorLaw",
       "name": "D5.S3.Combinatorics.Graph.LinearForests.AlternatingConnectorLaw.connector_mass",
       "kind": "theorem",
-      "statement_id": "sha256:f95f74ce1bcbcbfbac459d0e7aaa92848f8d5e139f1c13ccf2c8e76ebf3d473e",
+      "statement_id": "sha256:9b21a33ae6aa44099baf079e45ebd86c16a6593f7ab3eb285d806886c667c8fa",
       "line": 226,
       "signature": "theorem connector_mass [Finite C] (s d : C → Bool) (x y : C) (hxy : y ≠ x) (μ : PMF (Compatible s d)) (hμ : ∀ σ, μ σ = (Nat.card (Compatible s d) : ℝ≥0∞)⁻¹) : let R"
     },
@@ -1201,7 +1201,7 @@
       "module": "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory",
       "name": "D5.S3.Combinatorics.Graph.LinearForests.CompatibleCycleInventory.alternating_completion_classification",
       "kind": "theorem",
-      "statement_id": "sha256:953a80f96bbc9577c1a9be794b89cc185647645fae275e80ac3d298cfef4daa8",
+      "statement_id": "sha256:ee6714476c1dcb5df7ad843f628eda6dbb04862adfaa529a14521b2449a70131",
       "line": 683,
       "signature": "theorem alternating_completion_classification [Finite V] (n : ℕ) (E : V → V → Prop) (k : V → Bool) (hout : Relator.RightUnique E) (hin : Relator.LeftUnique E) (ha : ∀ x, ¬ TransGen E x x) (hk : ∀ x y, E x y → k x ≠ k y) (hr : Nat.card (Side k false) = n) (hb : Nat.card (Side k true) = n) : ∃ (t : Component E ≃ Tail E) (h : Component E ≃ Head E) (Φ : AlternatingCompletion E k ≃ Compatible (fun A => k (h A)) (fun A => !(k (t A)))), (∀ A, Quotient.mk (EqvGen.setoid E) (t A).1 = A) ∧ (∀ A, Quotient.mk (EqvGen.setoid E) (h A).1 = A) ∧ (∀ σ A, σ.1 (t A) = h ((Φ σ).1 A)) ∧ let s"
     },
@@ -1209,7 +1209,7 @@
       "module": "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory",
       "name": "D5.S3.Combinatorics.Graph.LinearForests.CompatibleCycleInventory.compatible_cycle_card",
       "kind": "theorem",
-      "statement_id": "sha256:953a80f96bbc9577c1a9be794b89cc185647645fae275e80ac3d298cfef4daa8",
+      "statement_id": "sha256:ee6714476c1dcb5df7ad843f628eda6dbb04862adfaa529a14521b2449a70131",
       "line": 496,
       "signature": "theorem compatible_cycle_card [Finite C] (s d : C → Bool) (hb : inventory s d false true = inventory s d true false) : Nat.card (Compatible s d) = if Nat.card C = 0 then 0 else if 0 < inventory s d false true then inventory s d false true * (Nat.card (Side s false) - 1).factorial * (Nat.card (Side s true) - 1).factorial else if inventory s d false false = 0 ∨ inventory s d true true = 0 then (Nat.card C - 1).factorial else 0"
     },
@@ -1241,7 +1241,7 @@
       "module": "D5/S3/Combinatorics/Graph/LinearForests/UndirectedCycleCompletionLaw",
       "name": "D5.S3.Combinatorics.Graph.LinearForests.UndirectedCycleCompletionLaw.uniform_undirected_completion",
       "kind": "theorem",
-      "statement_id": "sha256:4ffbf8026bb18962f97ec22c5c4dc518f07e1a4405860e2005be34d617c4eab1",
+      "statement_id": "sha256:c99383fba68edb8e330247ae7c911652cdc50f2e54db5980886020286424c9a6",
       "line": 328,
       "signature": "theorem uniform_undirected_completion (hn : 3 ≤ Fintype.card V) (F : SimpleGraph V) (hF : Nonempty (CompletedGraph F)) : ∃ (μ : PMF (Lift F)) (ν : PMF (CompletedGraph F)), (∀ l, μ l = (Nat.card (Lift F) : ℝ≥0∞)⁻¹) ∧ (∀ C, ν C = (Nat.card (CompletedGraph F) : ℝ≥0∞)⁻¹) ∧ μ.map (forget hn) = ν"
     },
@@ -3332,6 +3332,174 @@
       "statement_id": "sha256:2529f90abca87c8361b0361257bad8c163fe9735b03e772db780e4d9976ec917",
       "line": 265,
       "signature": "theorem exists_posSemidef_completion_rank_le {V : Type u} [Finite V] (d : ℕ) (G : SimpleGraph V) (hG : G.IsChordal) (A : Matrix V V ℝ) (hA : ∀ C : Set V, G.IsClique C → (A.submatrix (Subtype.val : C → V) (Subtype.val : C → V)).PosSemidef ∧ (A.submatrix (Subtype.val : C → V) (Subtype.val : C → V)).rank ≤ d) : ∃ B : Matrix V V ℝ, B.PosSemidef ∧ B.rank ≤ d ∧ ∀ i j, i = j ∨ G.Adj i j → B i j = A i j"
+    },
+    "D5/S3/Quantum/AURICOmega/GramRankFeatureMap.gramRankLE_iff_hasFeatureRank": {
+      "module": "D5/S3/Quantum/AURICOmega/GramRankFeatureMap",
+      "name": "D5.S3.Quantum.AURICOmega.GramRankFeatureMap.gramRankLE_iff_hasFeatureRank",
+      "kind": "theorem",
+      "statement_id": "sha256:95368293e4677c224ac39b5d46e3e57b3329a71aea7ec1a92eea42897c6c6e96",
+      "line": 105,
+      "signature": "theorem gramRankLE_iff_hasFeatureRank {M : Type*} (C : TernaryComparison M) (r : ℕ) : C.GramRankLE r ↔ C.HasFeatureRank r"
+    },
+    "D5/S3/Quantum/AURICOmega/QuaternionComparisonModel.quaternionModel": {
+      "module": "D5/S3/Quantum/AURICOmega/QuaternionComparisonModel",
+      "name": "D5.S3.Quantum.AURICOmega.QuaternionComparisonModel.quaternionModel",
+      "kind": "def",
+      "statement_id": "sha256:938031f76a4313255cfb718d7e9e86f4e6f0b2c2e3aa2db1d754c73ff83a9a29",
+      "line": 72,
+      "signature": "def quaternionModel : TernaryComparison (unitary ℍ[ℝ]) where tri x y z"
+    },
+    "D5/S3/Quantum/AURICOmega/QuaternionComparisonModel.quaternionModel_chainConnected": {
+      "module": "D5/S3/Quantum/AURICOmega/QuaternionComparisonModel",
+      "name": "D5.S3.Quantum.AURICOmega.QuaternionComparisonModel.quaternionModel_chainConnected",
+      "kind": "theorem",
+      "statement_id": "sha256:938031f76a4313255cfb718d7e9e86f4e6f0b2c2e3aa2db1d754c73ff83a9a29",
+      "line": 140,
+      "signature": "theorem quaternionModel_chainConnected : quaternionModel.ChainConnected"
+    },
+    "D5/S3/Quantum/AURICOmega/QuaternionComparisonModel.quaternionModel_hasFeatureRank_five": {
+      "module": "D5/S3/Quantum/AURICOmega/QuaternionComparisonModel",
+      "name": "D5.S3.Quantum.AURICOmega.QuaternionComparisonModel.quaternionModel_hasFeatureRank_five",
+      "kind": "theorem",
+      "statement_id": "sha256:938031f76a4313255cfb718d7e9e86f4e6f0b2c2e3aa2db1d754c73ff83a9a29",
+      "line": 158,
+      "signature": "theorem quaternionModel_hasFeatureRank_five : quaternionModel.HasFeatureRank 5"
+    },
+    "D5/S3/Quantum/AURICOmega/QuaternionComparisonModel.quaternionModel_noncommutative": {
+      "module": "D5/S3/Quantum/AURICOmega/QuaternionComparisonModel",
+      "name": "D5.S3.Quantum.AURICOmega.QuaternionComparisonModel.quaternionModel_noncommutative",
+      "kind": "theorem",
+      "statement_id": "sha256:938031f76a4313255cfb718d7e9e86f4e6f0b2c2e3aa2db1d754c73ff83a9a29",
+      "line": 112,
+      "signature": "theorem quaternionModel_noncommutative : quaternionModel.Noncommutative"
+    },
+    "D5/S3/Quantum/AURICOmega/QuaternionComparisonModel.quaternionModel_touchesZero": {
+      "module": "D5/S3/Quantum/AURICOmega/QuaternionComparisonModel",
+      "name": "D5.S3.Quantum.AURICOmega.QuaternionComparisonModel.quaternionModel_touchesZero",
+      "kind": "theorem",
+      "statement_id": "sha256:938031f76a4313255cfb718d7e9e86f4e6f0b2c2e3aa2db1d754c73ff83a9a29",
+      "line": 121,
+      "signature": "theorem quaternionModel_touchesZero : quaternionModel.TouchesZero"
+    },
+    "D5/S3/Quantum/AURICOmega/QuaternionProductRank.prod_quaternionModel_not_hasFeatureRank_five": {
+      "module": "D5/S3/Quantum/AURICOmega/QuaternionProductRank",
+      "name": "D5.S3.Quantum.AURICOmega.QuaternionProductRank.prod_quaternionModel_not_hasFeatureRank_five",
+      "kind": "theorem",
+      "statement_id": "sha256:00c7027b1032e613a08515b5be51bbc02c6beb8e11b079f5238f34f5cc078654",
+      "line": 61,
+      "signature": "theorem prod_quaternionModel_not_hasFeatureRank_five : (prod quaternionModel quaternionModel).Noncommutative ∧ (prod quaternionModel quaternionModel).ChainConnected ∧ (prod quaternionModel quaternionModel).TouchesZero ∧ ¬ (prod quaternionModel quaternionModel).HasFeatureRank 5"
+    },
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison": {
+      "module": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup",
+      "name": "D5.S3.Quantum.AURICOmega.TernaryComparisonGroup.TernaryComparison",
+      "kind": "inductive",
+      "statement_id": "sha256:8c89b022ac23c35682750e445b7c7e900af569f7d2874404e31d486d091e6d0a",
+      "line": 26,
+      "signature": "structure TernaryComparison (M : Type*) where /-- The ternary transfer. -/ tri : M → M → M → M /-- The symmetric reading. -/ kappa : M → M → ℝ tri_self_left : ∀ x z : M, tri x x z = z tri_self_right : ∀ x z : M, tri x z z = x tri_assoc : ∀ x y z u v : M, tri (tri x y z) u v = tri x y (tri z u v) kappa_symm : ∀ x y : M, kappa x y = kappa y x kappa_eq_one_iff : ∀ x y : M, kappa x y = 1 ↔ x = y kappa_nonneg : ∀ x y : M, 0 ≤ kappa x y kappa_tri_right : ∀ x y u v : M, kappa (tri x u v) (tri y u v) = kappa x y kappa_tri_left : ∀ u v x y : M, kappa (tri u v x) (tri u v y) = kappa x y kappa_gram_nonne"
+    },
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.ChainConnected": {
+      "module": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup",
+      "name": "D5.S3.Quantum.AURICOmega.TernaryComparisonGroup.TernaryComparison.ChainConnected",
+      "kind": "def",
+      "statement_id": "sha256:8c89b022ac23c35682750e445b7c7e900af569f7d2874404e31d486d091e6d0a",
+      "line": 56,
+      "signature": "def ChainConnected : Prop"
+    },
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.GramRankLE": {
+      "module": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup",
+      "name": "D5.S3.Quantum.AURICOmega.TernaryComparisonGroup.TernaryComparison.GramRankLE",
+      "kind": "def",
+      "statement_id": "sha256:8c89b022ac23c35682750e445b7c7e900af569f7d2874404e31d486d091e6d0a",
+      "line": 61,
+      "signature": "def GramRankLE (r : ℕ) : Prop"
+    },
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.HasFeatureRank": {
+      "module": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup",
+      "name": "D5.S3.Quantum.AURICOmega.TernaryComparisonGroup.TernaryComparison.HasFeatureRank",
+      "kind": "def",
+      "statement_id": "sha256:8c89b022ac23c35682750e445b7c7e900af569f7d2874404e31d486d091e6d0a",
+      "line": 66,
+      "signature": "def HasFeatureRank (r : ℕ) : Prop"
+    },
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.Noncommutative": {
+      "module": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup",
+      "name": "D5.S3.Quantum.AURICOmega.TernaryComparisonGroup.TernaryComparison.Noncommutative",
+      "kind": "def",
+      "statement_id": "sha256:8c89b022ac23c35682750e445b7c7e900af569f7d2874404e31d486d091e6d0a",
+      "line": 47,
+      "signature": "def Noncommutative : Prop"
+    },
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.TouchesZero": {
+      "module": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup",
+      "name": "D5.S3.Quantum.AURICOmega.TernaryComparisonGroup.TernaryComparison.TouchesZero",
+      "kind": "def",
+      "statement_id": "sha256:8c89b022ac23c35682750e445b7c7e900af569f7d2874404e31d486d091e6d0a",
+      "line": 51,
+      "signature": "def TouchesZero : Prop"
+    },
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.baseChange_bijective": {
+      "module": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup",
+      "name": "D5.S3.Quantum.AURICOmega.TernaryComparisonGroup.TernaryComparison.baseChange_bijective",
+      "kind": "theorem",
+      "statement_id": "sha256:8c89b022ac23c35682750e445b7c7e900af569f7d2874404e31d486d091e6d0a",
+      "line": 89,
+      "signature": "theorem baseChange_bijective (o o' : M) : Function.Bijective (fun x : M => C.tri x o o')"
+    },
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.noncommutative_iff": {
+      "module": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup",
+      "name": "D5.S3.Quantum.AURICOmega.TernaryComparisonGroup.TernaryComparison.noncommutative_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:8c89b022ac23c35682750e445b7c7e900af569f7d2874404e31d486d091e6d0a",
+      "line": 100,
+      "signature": "theorem noncommutative_iff (o : M) : C.Noncommutative ↔ ∃ x y : M, C.tri x o y ≠ C.tri y o x"
+    },
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul": {
+      "module": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup",
+      "name": "D5.S3.Quantum.AURICOmega.TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul",
+      "kind": "theorem",
+      "statement_id": "sha256:8c89b022ac23c35682750e445b7c7e900af569f7d2874404e31d486d091e6d0a",
+      "line": 83,
+      "signature": "theorem tri_eq_mul_inv_mul (o x y z : M) : C.tri x y z = (letI"
+    },
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonProduct.prod_hasFeatureRank": {
+      "module": "D5/S3/Quantum/AURICOmega/TernaryComparisonProduct",
+      "name": "D5.S3.Quantum.AURICOmega.TernaryComparisonProduct.prod_hasFeatureRank",
+      "kind": "theorem",
+      "statement_id": "sha256:8769c878230a5f8b153f9c58211c6afce862a4775a19d4f753d22b64d0b5a19c",
+      "line": 104,
+      "signature": "theorem prod_hasFeatureRank {r s : ℕ} (hC : C.HasFeatureRank r) (hD : D.HasFeatureRank s) : (prod C D).HasFeatureRank (r * s)"
+    },
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonRankFive.exists_unitQuaternion_embedding": {
+      "module": "D5/S3/Quantum/AURICOmega/TernaryComparisonRankFive",
+      "name": "D5.S3.Quantum.AURICOmega.TernaryComparisonRankFive.exists_unitQuaternion_embedding",
+      "kind": "theorem",
+      "statement_id": "sha256:bd49273143c4d4d2a771d327784cc6812d703fda49b6c91deeeea449ce72b43b",
+      "line": 588,
+      "signature": "theorem exists_unitQuaternion_embedding {M : Type*} (C : TernaryComparison M) (hnc : C.Noncommutative) (hconn : C.ChainConnected) (hzero : C.TouchesZero) (hr : C.HasFeatureRank 5) : ∃ u : M → unitary ℍ[ℝ], Function.Injective u ∧ (∀ x y z : M, u (C.tri x y z) = u x * (u y)⁻¹ * u z) ∧ (∀ x y : M, C.kappa x y = (1 + ⟪(u x : ℍ[ℝ]), (u y : ℍ[ℝ])⟫_ℝ) / 2)"
+    },
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonRankFive.five_le_of_hasFeatureRank": {
+      "module": "D5/S3/Quantum/AURICOmega/TernaryComparisonRankFive",
+      "name": "D5.S3.Quantum.AURICOmega.TernaryComparisonRankFive.five_le_of_hasFeatureRank",
+      "kind": "theorem",
+      "statement_id": "sha256:bd49273143c4d4d2a771d327784cc6812d703fda49b6c91deeeea449ce72b43b",
+      "line": 576,
+      "signature": "theorem five_le_of_hasFeatureRank {M : Type*} (C : TernaryComparison M) (hnc : C.Noncommutative) (hconn : C.ChainConnected) (r : ℕ) (hr : C.HasFeatureRank r) : 5 ≤ r"
+    },
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.kappa_reflectionSeq_add": {
+      "module": "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection",
+      "name": "D5.S3.Quantum.AURICOmega.TernaryComparisonReflection.kappa_reflectionSeq_add",
+      "kind": "theorem",
+      "statement_id": "sha256:1669ee1acff69d57fc1780c0cc54663b47bbe309fe7a5e939affa8f24ba17e75",
+      "line": 53,
+      "signature": "theorem kappa_reflectionSeq_add (C : TernaryComparison M) (a b : M) (m n : ℕ) : C.kappa (reflectionSeq C a b m) (reflectionSeq C a b (m + n)) = C.kappa a (reflectionSeq C a b n)"
+    },
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.reflectionSeq_eq_pow": {
+      "module": "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection",
+      "name": "D5.S3.Quantum.AURICOmega.TernaryComparisonReflection.reflectionSeq_eq_pow",
+      "kind": "theorem",
+      "statement_id": "sha256:1669ee1acff69d57fc1780c0cc54663b47bbe309fe7a5e939affa8f24ba17e75",
+      "line": 36,
+      "signature": "theorem reflectionSeq_eq_pow (C : TernaryComparison M) (a b : M) (n : ℕ) : reflectionSeq C a b n = (letI"
     },
     "D5/S3/Quantum/Algebra/CommonCoefficientPlane.common_plane": {
       "module": "D5/S3/Quantum/Algebra/CommonCoefficientPlane",
@@ -6201,7 +6369,7 @@
       "module": "D5/S3/TotalVariation/ParryFirstReturn",
       "name": "D5.S3.TotalVariation.ParryFirstReturn.actual_first_return_system",
       "kind": "theorem",
-      "statement_id": "sha256:af30a37b6e683cda80a3552069b037dfcba09ddfa4d77cbf42c6922b43ca95ce",
+      "statement_id": "sha256:4aa03adb69af267aa1c03522bce0952f77cd7f6810bc9f1991b9334a27e12e90",
       "line": 418,
       "signature": "theorem actual_first_return_system (hk : 2 ≤ k) (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (hsuffix : ∀ (z : Bool × RelationPath k) (t : ℤ), let j"
     },
@@ -6209,16 +6377,16 @@
       "module": "D5/S3/TotalVariation/ParryFirstReturn",
       "name": "D5.S3.TotalVariation.ParryFirstReturn.return_time_cylinder_probability",
       "kind": "theorem",
-      "statement_id": "sha256:af30a37b6e683cda80a3552069b037dfcba09ddfa4d77cbf42c6922b43ca95ce",
-      "line": 835,
+      "statement_id": "sha256:4aa03adb69af267aa1c03522bce0952f77cd7f6810bc9f1991b9334a27e12e90",
+      "line": 836,
       "signature": "theorem return_time_cylinder_probability (hk : 2 ≤ k) (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (hsuffix : ∀ (z : Bool × RelationPath k) (t : ℤ), let j"
     },
     "D5/S3/TotalVariation/ParryFirstReturn.zero_section_raw_window": {
       "module": "D5/S3/TotalVariation/ParryFirstReturn",
       "name": "D5.S3.TotalVariation.ParryFirstReturn.zero_section_raw_window",
       "kind": "theorem",
-      "statement_id": "sha256:af30a37b6e683cda80a3552069b037dfcba09ddfa4d77cbf42c6922b43ca95ce",
-      "line": 938,
+      "statement_id": "sha256:4aa03adb69af267aa1c03522bce0952f77cd7f6810bc9f1991b9334a27e12e90",
+      "line": 939,
       "signature": "theorem zero_section_raw_window (hk : 2 ≤ k) (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (hsuffix : ∀ (z : Bool × RelationPath k) (t : ℤ), let j"
     },
     "D5/S3/TotalVariation/ParryInducedEntropy.actual_return_entropy": {
