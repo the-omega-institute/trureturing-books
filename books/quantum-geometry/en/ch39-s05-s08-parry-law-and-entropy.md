@@ -524,6 +524,21 @@ For $m=0$ the event is the whole path space and $h_0=1$.
 On $A$, the suffix at position zero is zero. Each successive raw bit either resets the suffix to zero or increments it by one. Starting with $v_0=0$, induction identifies the raw window event on $A$ with the single suffix cylinder $(v_0,\ldots,v_m)$. Dividing its mass by $\mu(A)$ removes the initial suffix mass. The ratios $h_{v_{i+1}}/h_{v_i}$ from the allowed transition probabilities telescope to $h_{v_m}$. Thus an unfinished run at the end of a window retains a suffix weight. The full proof is checked by the Lean kernel.
 :::
 
+::: {.theorem #thm-ch39-p2e-parry-zero-marginals title="The Zero-Section Law under the Original Shift" lean="D5/S3/TotalVariation/ParrySectionMarginals.section_zero_marginals"}
+Use the native bilateral Parry law and its conditional probability $\mu_A$ from [@thm-ch39-p2e-native-parry-first-return]. Write $p=\beta_K^{-1}$. Then
+
+$$
+\mu_A\{r:r_0=0\}=p,\qquad
+\mu_A\{r:r_1=0\}=2p^2.
+$$
+
+The one-step left shift $T$ does not preserve $\mu_A$.
+:::
+
+::: proof
+The windows $0$, $00$, and $10$ all end at suffix zero. By [@thm-ch39-p2e-parry-raw-window], their conditional masses are $p$, $p^2$, and $p^2$. The windows $00$ and $10$ disjointly exhaust the event $r_1=0$, which is the $T$-preimage of $r_0=0$. Since $p>1/2$, the preimage has strictly larger mass. The full proof is checked by the Lean kernel.
+:::
+
 A return orbit records how many steps it takes to read each successive zero. On the zero section, the joint probability of these durations can be computed directly from a suffix cylinder of the original path.
 
 ::: {.theorem #thm-ch39-p2e-parry-return-durations title="Joint Distribution of Return Durations in the Bilateral Parry Source" lean="D5/S3/TotalVariation/ParryFirstReturn.return_time_cylinder_probability"}
