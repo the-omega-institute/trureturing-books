@@ -56,7 +56,7 @@
 ## 5. 数学排版与零模型标识铁律
 
 - **数学宏规范**：行内公式用 `$...$`，独立公式块用单独成行且前后留空的 `$$...$$`，多行推导用 `\begin{aligned} ... \end{aligned}`。禁用反斜杠圆括号与反斜杠方括号数学定界符；禁用 `physics` 宏包中未在 `tools/tbook/mathrender.py` 注册的左矢、右矢与内积简写命令，一律写为标准命令 `\lvert\psi\rangle`、`\langle\phi\rvert`、`\langle\phi\mid\psi\rangle`（或 `tools/tbook/mathrender.py` 已注册的 `\ketbra`、`\dyad`、`\Tr`、`\vv`、`\norm`）。
-- **零模型标识（正式出版物与提交记录）**：除工程工作流文档 `docs/project/WORKFLOW.md` 与本文件第 7 节按项目治理要求如实记录多智能体协同分工外，所有正式出版物文件（`books/**` 正文、代码注释、图注、可视化与视频源码、`site.toml`、根级 `README.md`）以及 Git 提交说明与 PR 描述中，严禁出现任何语言模型、智能体或自动生成工具的名称与标识。
+- **零模型标识（正式出版物）**：除工程工作流文档 `docs/project/WORKFLOW.md` 与本文件第 7 节按项目治理要求如实记录多智能体协同分工外，所有正式出版物文件（`books/**` 正文、代码注释、图注、可视化与视频源码、`site.toml`、根级 `README.md`）中，严禁出现任何语言模型、智能体或自动生成工具的名称与标识。Git 提交记录（提交说明与作者字段）与 PR 描述不受此限。
 
 ## 6. 全面对齐示例专著（`books/example-monograph/`）规范
 
