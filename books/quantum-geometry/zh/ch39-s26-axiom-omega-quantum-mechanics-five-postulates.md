@@ -33,6 +33,16 @@
 **文献（`文献结果`）。** 实、复、四元数量子理论的三重分类见 F. J. Dyson, *J. Math. Phys.* **3**, 1199–1215, 1962 与 J. C. Baez, *Found. Phys.* **42**, 819–855, 2012；由可乘性与归一性得出指数 $2$ 的论证接近 S. Aaronson, arXiv:quant-ph/0401062, 2004。
 :::
 
+::: {.remark #rem-ch39-axiom-omega-one-clock-for-composites title="复合系统只有一个时钟：输入、结论与被排除的情形"}
+**输入（全部为 `MODEL`）。** 各因子都按时钟读出（[@rem-ch39-axiom-omega-readings-classification]），并假设：(1) 乘积构型 $\Phi(x_1, \dots, x_N)$ 关于各因子实多线性，把单位向量映为单位向量，并对各因子时钟构成的环面等变；(2) 复合空间由乘积构型张成；(3) 复合系统的不可观测群恰是各因子时钟生成的群，复合系统隐藏的正是各部分隐藏的；(4) 权重取值于 $[0, 1]$，对称，$w(u, u) = 1$，且恰在类相关 $s_K$ 为零时为零；(5) 构型包含全体乘积，并对往返反射 $s_x(w) = 2\langle x, w\rangle x - w$ 封闭，这一条不可缺少；(6) 对每个极大两两正交族，任一类对它的权重之和为一。
+
+**结论（`手工推导`）。** 实张量积 $V_1 \otimes_{\mathbb{R}} \cdots \otimes_{\mathbb{R}} V_N$ 分解为 $2^{N-1}$ 个特征标互异的分量，每个分量都是一个复张量积。若出现两个分量，就有两个大小不同的极大正交族（两个比特、各因子的左迁移也等变时，大小分别为 $8$ 与 $4$）；对称且归一的权重在两族上双重计数，得 $\sum_{a \in A}\sum_{b \in B} w(a, b) = \lvert A\rvert = \lvert B\rvert$，矛盾，所以这样的权重不存在。于是只剩一个分量：一个时钟、复张量积（左迁移也等变时）、权重 $\lvert\langle u, v\rangle\rvert^2$，乘积上的权重相乘；各因子时钟在这个分量上取哪一个定向，仍是输入。
+
+**被排除的情形与定位。** 被排除的是带两个超选择扇区的复量子力学：在两分量复合空间上，超选择权重 $\operatorname{Tr}(\rho_u\Pi_x)$ 是归一的，但不对称（一个方向取 $1$，反方向取 $\frac{1}{2}$）。所以这一结果在数学上是把“无超选择且纯态跃迁概率对称”改用“哪些量不可观测”来表述；在这一类复合系统上，这些输入与局域层析选出同一个复合系统（局域层析见 L. Hardy, arXiv:quant-ph/0101012, 2001；J. Barrett, *Phys. Rev. A* **75**, 032304, 2007；Ll. Masanes & M. P. Müller, *New J. Phys.* **13**, 063001, 2011，`文献结果`）。
+
+**只有乘积构型时（`手工推导`）。** 两个系统时，只用乘积构型分辨不了两个分量：只含乘积的两分量模型满足除 (5) 以外的全部输入（$2 \otimes n$ 中不存在不可扩展乘积基，D. P. DiVincenzo, T. Mor, P. W. Shor, J. A. Smolin & B. M. Terhal, *Commun. Math. Phys.* **238**, 379–410, 2003）。三个系统时，只用乘积构型连归一性都不满足：C. H. Bennett, D. P. DiVincenzo, T. Mor, P. W. Shor, J. A. Smolin & B. M. Terhal（*Phys. Rev. Lett.* **82**, 5385–5388, 1999）的不可扩展乘积基 $\{\lvert 0, 1, {+}\rangle, \lvert 1, {+}, 0\rangle, \lvert {+}, 0, 1\rangle, \lvert {-}, {-}, {-}\rangle\}$ 是极大正交族，$\lvert 000\rangle$ 对它的权重之和为 $\frac{1}{8}$。
+:::
+
 2. **公理二（可观测量公设）：切空间反自伴生成元 $90^\circ$ 翻转导出厄米算符与罗伯逊—薛定谔不确定性**：
    教科书第二公设规定：一切物理可观测量由自伴（厄米）线性算符 $\hat{A} = \hat{A}^\dagger$ 表示，算符本征值为实数测量刻度。在 $\mathrm{AXIOM}\text{-}\Omega$ 中，厄米算符与测不准关系直接由三元数切空间曲率导出（`手工推导` + `LEAN ✓`）：
    - **保正迁移锁定反自伴切生成元**：法则 (II) 要求沿任意切方向 $\mathbf{X} \in T_o\mathbb{T}_3 \cong \mathfrak{su}(2)$ 推进无穷小圆弧 $\exp(\epsilon\mathbf{X})$ 时保持复内积保真度不变，对 $\epsilon = 0$ 求导立得 $\mathbf{X}^\dagger + \mathbf{X} = 0 \implies \mathbf{X}^\dagger = -\mathbf{X}$（与平衡幺正和交叉积反自伴律 [`crossProduct_is_skewAdjoint_of_balanced_sum`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum) 同源，`LEAN ✓`）；

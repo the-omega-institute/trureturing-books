@@ -535,6 +535,14 @@ $$
 
 the second equality holding when $x, y, z$ are linearly independent, with $E$ the spherical excess (area) of the geodesic triangle in the great 2-sphere through them, and $\tan\frac{E}{2} = \lVert x \wedge y \wedge z\rVert / (1 + c_{xy} + c_{yz} + c_{zx})$. For small triangles $y = \exp(Y)x$, $z = \exp(Z)x$ ($\lvert Y\rvert, \lvert Z\rvert \le r$), $a = \exp\bigl(\frac{1}{8}[Y, Z] + \mathcal{O}(r^4)\bigr)$: the Lie-bracket term is the leading order of the excess. The formula is the $\mathrm{SU}(2)$ form of the Bargmann–Pancharatnam three-point invariant (J. Samuel & R. Bhandari, *Phys. Rev. Lett.* **60**, 2339–2342, 1988; N. Mukunda & R. Simon, *Ann. Physics* **228**, 205–268, 1993, `Literature`).
 
+**Holonomy of a disk in a great 2-sphere (`Literature` + `manual derivation`).** Let $\Sigma = S^3 \cap \nu^\perp$ be a great 2-sphere and $R \subset \Sigma$ a closed disk whose boundary is a piecewise $C^1$ Jordan curve $\gamma$, traversed with $R$ on its left and based at $x_0$, with $A$ the area of $R$. Then the spinor holonomy of minimal-arc transport is
+
+$$
+U_\gamma \;=\; \exp\Bigl(\frac{A}{2}\,\nu\bar{x}_0\Bigr) \;=\; \cos\frac{A}{2} + \sin\frac{A}{2}\,\nu\bar{x}_0,
+$$
+
+with the opposite sign in the exponent for the opposite orientation; in particular $\operatorname{Re}U_\gamma = \cos\frac{A}{2}$, with no convexity hypothesis. This is the Gauss–Bonnet holonomy lifted to spinors, i.e. the half-solid-angle law (`Literature`). Mechanism: $n(x) = \nu\bar{x}$ is imaginary and its covariant derivative $Dn = \langle\nu, dx\rangle$ vanishes along $\Sigma$, so $n$ is parallel on $\Sigma$ (`manual derivation`); the curvature therefore takes values along $n$, the holonomy is abelian, and Green's theorem gives half the area. The triangle formula $\operatorname{Re}a = \cos\frac{E}{2}$ above is a special case.
+
 **Rational vertices (`manual derivation`; Cayley parametrization: A. Cayley, *J. Reine Angew. Math.* **32**, 119–123, 1846, and O. Rodrigues 1840, `Literature`).** The Cayley chart $\operatorname{Cay}(r) = (1 + r)(1 - r)^{-1}$ ($r \in \operatorname{Im}\mathbb{H}$) maps $\mathbb{Q}^3$ bijectively onto $S^3(\mathbb{Q}) \setminus \{-1\}$. When all vertices lie in $S^3(\mathbb{Q})$, the heap operations, $\kappa$, the sagittas, the recurrence above and its Chebyshev coefficients are rational; Levi-Civita transport along every minimal arc (in the right trivialization) is $\operatorname{Ad}(1 + x_q\bar{x}_p) \in \mathrm{SO}(3, \mathbb{Q})$, and so is the holonomy of every closed polygon of minimal arcs; $\cos E$ of every triangle is rational, while the half-displacements and $E$ itself are in general irrational ($E = \frac{\pi}{2}$ for $x = 1$, $y = i$, $z = j$).
 :::
 

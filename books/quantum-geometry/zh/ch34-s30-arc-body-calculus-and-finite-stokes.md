@@ -535,6 +535,14 @@ $$
 
 其中第二个等号在 $x, y, z$ 线性无关时成立，$E$ 是它们所在大二维球面上测地三角形的球面角盈（面积），并有 $\tan\frac{E}{2} = \lVert x \wedge y \wedge z\rVert / (1 + c_{xy} + c_{yz} + c_{zx})$。对小三角形 $y = \exp(Y)x$、$z = \exp(Z)x$（$\lvert Y\rvert, \lvert Z\rvert \le r$），$a = \exp\bigl(\frac{1}{8}[Y, Z] + \mathcal{O}(r^4)\bigr)$：李括号项是角盈的领头阶。这一公式是巴格曼—潘查拉特南三点不变量的 $\mathrm{SU}(2)$ 形式（J. Samuel & R. Bhandari, *Phys. Rev. Lett.* **60**, 2339–2342, 1988；N. Mukunda & R. Simon, *Ann. Physics* **228**, 205–268, 1993，`文献结果`）。
 
+**大二维球面上圆盘的和乐（`文献结果` + `手工推导`）。** 设 $\Sigma = S^3 \cap \nu^\perp$ 是一个大二维球面，$R \subset \Sigma$ 是边界为分段 $C^1$ 若尔当曲线 $\gamma$ 的闭圆盘，$\gamma$ 以 $R$ 在左侧的方向绕行、以 $x_0$ 为基点，$A$ 为 $R$ 的面积。则极小圆弧平移的旋量和乐为
+
+$$
+U_\gamma \;=\; \exp\Bigl(\frac{A}{2}\,\nu\bar{x}_0\Bigr) \;=\; \cos\frac{A}{2} + \sin\frac{A}{2}\,\nu\bar{x}_0,
+$$
+
+反向绕行时指数取负号；特别地 $\operatorname{Re}U_\gamma = \cos\frac{A}{2}$，不需要凸性假设。这是高斯—博内和乐提升到旋量的形式，即半立体角律（`文献结果`）。机制：$n(x) = \nu\bar{x}$ 是纯虚的，其协变导数 $Dn = \langle\nu, dx\rangle$ 沿 $\Sigma$ 为零，即 $n$ 在 $\Sigma$ 上平行（`手工推导`），所以曲率取值于 $n$ 的方向，和乐是阿贝尔的，由格林定理得出面积的一半。上面的三角形公式 $\operatorname{Re}a = \cos\frac{E}{2}$ 是它的特例。
+
 **有理顶点（`手工推导`；凯莱参数化见 A. Cayley, *J. Reine Angew. Math.* **32**, 119–123, 1846 与 O. Rodrigues 1840，`文献结果`）。** 凯莱坐标 $\operatorname{Cay}(r) = (1 + r)(1 - r)^{-1}$（$r \in \operatorname{Im}\mathbb{H}$）把 $\mathbb{Q}^3$ 双射到 $S^3(\mathbb{Q}) \setminus \{-1\}$。顶点全在 $S^3(\mathbb{Q})$ 时，流群运算、$\kappa$、矢高、上文递推及其切比雪夫系数都是有理数；沿每段极小圆弧的列维-奇维塔平移（右平凡化下）是 $\operatorname{Ad}(1 + x_q\bar{x}_p) \in \mathrm{SO}(3, \mathbb{Q})$，闭合极小圆弧多边形的和乐亦然；三角形的 $\cos E$ 为有理数，而半位移与 $E$ 本身一般是无理的（$x = 1$、$y = i$、$z = j$ 时 $E = \frac{\pi}{2}$）。
 :::
 
