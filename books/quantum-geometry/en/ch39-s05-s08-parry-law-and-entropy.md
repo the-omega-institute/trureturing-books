@@ -458,17 +458,17 @@ Both sides must use the same logarithm base. The left side is entropy per return
 :::
 
 ::: {.theorem #thm-ch39-p2e-parry-topological-entropy title="Topological Entropy of the Bilateral Parry Shift" lean="D5/S3/TotalVariation/ParryTopologicalEntropy.bilateral_entropy"}
-Let $K\ge2$ and equip $\mathrm{Bool}^{\mathbb Z}$ with the product uniformity. Let $X_K$ consist of paths whose every length-$K$ window contains a zero. Write $T$ for the one-step left shift and $\beta_K$ for the order-$K$ d-bonacci Perron root. Then
+Let $K\ge2$ and equip $\mathrm{Bool}^{\mathbb Z}$ with the product uniformity. Let $X_K$ consist of paths whose every length-$K$ window contains a zero. Write $T$ for the one-step left shift and $\beta_K$ for the order-$K$ d-bonacci Perron root. Use Mathlib's cover entropy on $X_K$. Then
 
 $$
-h_{\mathrm{top}}(T|_{X_K})=\log\beta_K.
+h_{\mathrm{top}}(T,X_K)=\log\beta_K.
 $$
 :::
 
 ::: proof
 Appending zeros extends each admissible finite word to a one-sided path. Let $a_n$ count the words of length $n$. The word counts and the powers $\beta_K^n$ obey the same $K$-term recurrence. The initial values give $\beta_K^n\le a_n\le 2^K\beta_K^n$. The limit of $n^{-1}\log a_n$ gives the one-sided topological entropy $\log\beta_K$.
 
-Reading the entire forward tail from any integer origin maps the bilateral space onto the same one-sided subshift and intertwines the shifts. Moving the origin to the left includes any prescribed finite set of coordinates. Thus every entourage of the bilateral product uniformity can be controlled by one forward-tail reading, and the two cover entropies agree. The full proof is checked by the Lean kernel.
+Reading the entire forward tail from any nonpositive integer origin maps the bilateral space onto the same one-sided subshift and intertwines the shifts. Moving the origin to the left includes any prescribed finite set of coordinates. Thus every entourage of the bilateral product uniformity can be controlled by one forward-tail reading, and the two cover entropies agree. The full proof is checked by the Lean kernel.
 :::
 
 Dividing by $\log 2$ gives $\log_2\beta_K$ bits per step. Numerical evaluation gives approximately $0.69424$, $0.87915$, and $0.94678$ bits per step at $K=2,3,4$. As $\beta_K\nearrow2$, the value increases to one bit per step.

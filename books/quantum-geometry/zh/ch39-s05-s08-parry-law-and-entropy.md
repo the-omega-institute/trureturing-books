@@ -458,17 +458,17 @@ $$
 :::
 
 ::: {.theorem #thm-ch39-p2e-parry-topological-entropy title="双向帕里移位的拓扑熵" lean="D5/S3/TotalVariation/ParryTopologicalEntropy.bilateral_entropy"}
-设 $K\ge2$。在布尔路径空间 $\mathrm{Bool}^{\mathbb Z}$ 上取乘积一致结构，令 $X_K$ 为每个长度为 $K$ 的窗口都含零的路径集。记 $T$ 为向左移一位，$\beta_K$ 为 $K$ 阶 d-bonacci Perron 根。则
+设 $K\ge2$。在布尔路径空间 $\mathrm{Bool}^{\mathbb Z}$ 上取乘积一致结构，令 $X_K$ 为每个长度为 $K$ 的窗口都含零的路径集。记 $T$ 为向左移一位，$\beta_K$ 为 $K$ 阶 d-bonacci Perron 根。取 Mathlib 在 $X_K$ 上的覆盖熵，则
 
 $$
-h_{\mathrm{top}}(T|_{X_K})=\log\beta_K.
+h_{\mathrm{top}}(T,X_K)=\log\beta_K.
 $$
 :::
 
 ::: proof
 每个合法的有限字都可以在右端补零，延拓为单边路径。记 $n$ 位字数为 $a_n$。字数和 $\beta_K^n$ 满足同一 $K$ 项递推，初值给出 $\beta_K^n\le a_n\le 2^K\beta_K^n$。取对数、除以 $n$ 并取极限，得到单边移位的拓扑熵 $\log\beta_K$。
 
-对任意整数起点，从该处读取整个向右尾部，便把双边路径空间满射到同一个单边子移位，且读取与移位可交换。起点向左移动时，读数包含任给的有限坐标集。双边乘积一致结构的每个邻域关系都能在某次尾部读取中检验，因此双边覆盖熵等于单边覆盖熵。完整证明由 Lean 内核检查。
+对任意非正整数起点，从该处读取整个向右尾部，便把双边路径空间满射到同一个单边子移位，且读取与移位可交换。起点向左移动时，读数包含任给的有限坐标集。双边乘积一致结构的每个邻域关系都能在某次尾部读取中检验，因此双边覆盖熵等于单边覆盖熵。完整证明由 Lean 内核检查。
 :::
 
 以比特计量时除以 $\log 2$，得到 $\log_2\beta_K$ 比特每步。$K=2,3,4$ 时的数值依次约为 $0.69424$、$0.87915$、$0.94678$ 比特每步。随 $\beta_K\nearrow2$，该值单调趋向每步一比特。
