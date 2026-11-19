@@ -1,4 +1,4 @@
-/* TERNION//NUMBERS · 三元数投影生万数沙盘 · All numbers from one arc (Chapter 39, §39.19)
+/* TERNION//NUMBERS · 三元数投影生万数沙盘 · All numbers from one arc (Chapter 32, §32.2)
    World (kit.solid): z up. In the centre the violet three-lobed sculpture of the minimal circular-arc body
    Δ𝒯ε(θ, û) = cos(θ/2) 1 + sin(θ/2) û·(i, j, k) ∈ S³, with û = i cos α + j sin α; the silver arc draws θ from 0° to
    720° and the amber handle sits on it at the current θ. Four projection stations surround it:

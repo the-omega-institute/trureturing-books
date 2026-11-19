@@ -1,4 +1,4 @@
-/* ORTHO//RAUZY: Chapter 39's Pisot–Clifford–Rauzy sandtable, in four scenes that share one rail.
+/* ORTHO//RAUZY: Chapter 35 (§35.6)'s Pisot–Clifford–Rauzy sandtable, in four scenes that share one rail.
    sand     3D. Every word ε of length q with no K ones in a row gives e(X) = Σ εⱼXʲ; the point with internal
             position e(α) and height e(β)·β^−q stands over the internal plane, its shadow on the floor. Rail: q.
    plane    2D. rauzy: the internal points e(α), coloured by the prefix 0 / 10 / 110 (the maps f₀, f₁₀, f₁₁₀; rail: q);

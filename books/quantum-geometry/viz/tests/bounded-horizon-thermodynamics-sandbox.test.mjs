@@ -24,7 +24,7 @@ const CARDS = {
   'modular-unruh-heat': { thetaRad: 30 * DEG, NA: 6, still: 2, plays: true },
   'dottie-living-steady': { thetaRad: THETA_STAR, NA: 6, still: Math.PI, plays: true }
 };
-// The twelve declarations of the §34.17 master theorem and the three the text cites inline: every one is a LEAN ✓ box.
+// The twelve declarations of the §34.6 master theorem and the three the text cites inline: every one is a LEAN ✓ box.
 const GIDS = [
   'D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState',
   'D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalLeft_productState',
@@ -44,7 +44,7 @@ const GIDS = [
 ];
 const FROZEN_GIDS = [];
 const THEORY = ['zh', 'en'].map((lang) => `../../${lang}/ch34-s17-entanglement-horizon-and-thermodynamics.html#sec-ch34-entanglement-horizon-and-thermodynamics`);
-// The 6-decimal Schmidt table and pair-cut Page curves of the §34.17 benchmark sheet (80-digit arithmetic, rounded).
+// The 6-decimal Schmidt table and pair-cut Page curves of the §34.6 benchmark sheet (80-digit arithmetic, rounded).
 const BENCH = {
   0: { cos2: 1, sin2: 0, bias: 1, purity: 1, nats: 0, bits: 0, beta: Infinity, T: 0, D: 0.693147, Dbits: 1 },
   15: { cos2: 0.933013, sin2: 0.066987, bias: 0.866025, purity: 0.875, nats: 0.245775, bits: 0.354579, beta: 2.633916, T: 0.379663, D: 0.447372, Dbits: 0.645421 },
@@ -225,7 +225,7 @@ check('source: all five public presets remain in order', same([...sources['index
   check('source: cited-figure notes carry no sub- or superscripts', fig.length > 200 && !/<su[bp]>/.test(fig));
 }
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID) || {};
-check('registry: live §34.17 entry with five bilingual cards and the fifteen LEAN ✓ GIDs', entry.status === 'live' && entry.chapter === 34 && entry.section === '34.17'
+check('registry: live §34.6 entry with five bilingual cards and the fifteen LEAN ✓ GIDs', entry.status === 'live' && entry.chapter === 34 && entry.section === '34.6'
   && same(entry.presets, Object.keys(CARDS)) && (entry.presets || []).every((c) => entry.preset_titles?.[c]?.zh && entry.preset_titles?.[c]?.en)
   && same((entry.lean || []).map((x) => x.gid).sort(), [...GIDS].sort()), JSON.stringify({ status: entry.status, section: entry.section, lean: (entry.lean || []).length }));
 

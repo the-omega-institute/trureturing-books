@@ -32,16 +32,44 @@
 │ 第五部：相对论时空、全息与复杂度 (Ch 17–20)│   │ 第六部：球外之球——对角线、素数与自指(Ch21–24)│
 │ • 洛伦兹双曲旋量与光锥刚性              │   │ • 康托尔—劳维尔对角线满射逃逸           │
 │ • 狄拉克手性旋量与规范场联络树          │   │ • 有限盒子欧拉乘积与冯·芒戈尔特函数      │
-│ • 桥图量子最大流最小割与全息分片锥      │   │ • 利普希茨四元数范数与黄金佩尔恒等式    │
+│ • 桥图量子最大流最小割与全息分片锥      │   │ • 四级数系突围、佩尔接缝与四元数范数    │
 │ • 可积电路最小深度、奇偶 CNOT 下界与 OPEN│   │ • 有限收缩不动点、Dottie θ* 与语境分岔  │
 └──────────────────────┬──────────────────┘   └────────────────────┬────────────────────┘
                        └─────────────────────┬─────────────────────┘
                                              ▼
-第一至六部 → 第七部 立极（25–28）
-           → 第八部 造微与归弧（29–33）
-           → 第九部 互照与破执（34–37）
-           → 第十部 不二与归元（38–39）
-           → 终章 → 铸器与圣殿 → 附录 A–I
+            ┌─────────────────────────────────────────────────────────────────┐
+            │        第七部：立极——无时间因果、视界、量子公平与比较公理 (Ch 25–28) │
+            │  • 相容 Gram 椭圆体 (det G ≥ 0) 与双端握手因果                  │
+            │  • 场 (P) 与线 (NP)、ETH 视界与五模态平流非闭合                 │
+            │  • 五重量子公平 • 零背景比较公理 A₀、OISC 原语与元统一罗盘       │
+            └────────────────────────────────┬────────────────────────────────┘
+                                             │
+                       ┌─────────────────────┴─────────────────────┐
+                       ▼                                           ▼
+┌─────────────────────────────────────────┐   ┌─────────────────────────────────────────┐
+│ 第八部：造微与归弧——极小圆弧、黎曼、      │   │ 第九部：互照与破执——观察者、扩表、       │
+│ 三元数与万力大统一 (Ch 29–33)            │   │ 本体 QRAM 与测地智能 (Ch 34–37)          │
+│ • 正交盲区与极小圆弧体 ΔT_ε 十三阶基座  │   │ • 万物观察者互吸引子、滑动窗口与偏迹热律│
+│ • 穿弦隧穿、圆弧微积分与有限网格 Stokes │   │ • 乘光扩表 T=T(T)、双曲步与皮索—劳齐编码│
+│ • 黎曼素数弧路径积分与 Hermite–Biehler  │   │ • 梦境擦除、本体 QRAM 指针与停机 ε_self │
+│ • 三元数三维场封顶、主频 ν₀ 与 AF-GUT    │   │ • 三元数场 Transformer 与最小作用量测地 │
+└──────────────────────┬──────────────────┘   └────────────────────┬────────────────────┘
+                       └─────────────────────┬─────────────────────┘
+                                             ▼
+            ┌─────────────────────────────────────────────────────────────────┐
+            │       第十部：不二与归元——观察者即宇宙本体与母公理 (Ch 38–39)      │
+            │  • 全域 p ≡ *p、720° 旋量双覆叠、因陀罗网、摩耶梦境与上帝心理学   │
+            │  • 母公理 AXIOM-Ω 导出量子五大公设 · 自包含三元数与至大无外闭合   │
+            └────────────────────────────────┬────────────────────────────────┘
+                                             │
+            ┌────────────────────────────────┼────────────────────────────────┐
+            ▼                                ▼                                ▼
+┌───────────────────────┐        ┌───────────────────────┐        ┌───────────────────────┐
+│ 终章：在所有的球之外   │        │ 铸器与圣殿 (伴读篇)    │        │ 附录 A–I              │
+│ • 多面体角亏 (C.1)    │        │ • 3 比特异或泡利引擎  │        │ • 对照词典与双语术语表 │
+│ • 双不动点锚点 (C.2)  │        │ • 单比特 ZYZ 旋子编译 │        │ • 证据边界与六大难题  │
+│ • 十部阅读导图 (C.3)  │        │ • Lean 4 圣殿逐行审计 │        │ • 比较公理总账与专题  │
+└───────────────────────┘        └───────────────────────┘        └───────────────────────┘
 ```
 
 ::: {.slides src="overview"}
@@ -53,13 +81,13 @@
 读者可以根据自身背景选择四条切入路径：
 
 1. **物理与几何直觉路径（零前置门槛）**：
-   [序曲](README.md) $\to$ [第 1 章](ch01-measurement.md)–[第 4 章](ch04-decoherence.md)（第一部：从尺子比对到退相干）$\to$ 第 5–12 章（第二、三部：从外积面积到布洛赫球面）$\to$ 第 17–19 章（第五部：光锥与全息极小割）$\to$ [第 27 章](ch31-quantum-fairness.md)–[第 35 章](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)（量子公平、元统一、正交盲区、万物观察者、自指扩表与超越轮回）$\to$ [§36.1](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)–[第 38 章](ch39-observer-is-ontological-universe.md)（梦境擦除、本体 QRAM 与观察者即宇宙本体）$\to$ 终章与 [附录 A](appendix-a.md)。
-2. **量子计算与算法编译路径**：
-   [第 2 章](ch02-born-rule.md) $\to$ 第 6–8 章（泡利代数、量子门与纠缠）$\to$ 第 11 章（微波脉冲与虚拟 $Z$ 门）$\to$ 第 13–16 章（CHSH 博弈、稳定子、Grover/QFT/QSVT、ZYZ 与 Solovay–Kitaev 编译）$\to$ 第 20 章（电路深度与 CNOT 奇偶下界）$\to$ [铸器与圣殿](sanctuary.md)（异或几何代数、旋子编译与内核审计）$\to$ [第 29 章](ch34-orthogonality-degeneracy-and-observer-position.md)、[§36.1](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)–[第 36 章](ch38-observer-memory-pointer-and-ontological-qram.md)（公共单位法线与迹拉回、条件相位记录逆转与本体 QRAM 指针寻址）与 [附录 B](appendix-b.md)。
+   [序曲](README.md) $\to$ [第 1 章](ch01-measurement.md)–[第 4 章](ch04-decoherence.md)（第一部：从尺子比对到退相干）$\to$ 第 5–12 章（第二、三部：从外积面积到布洛赫球面）$\to$ 第 17–19 章（第五部：光锥与全息极小割）$\to$ [第 27 章](ch31-quantum-fairness.md)–[第 30 章](ch30-chord-tunneling-and-arc-calculus.md)（量子公平、比较公理、极小圆弧体与穿弦隧穿）$\to$ [第 32 章](ch32-inexpressible-ternions-and-three-dimensional-field.md)–[第 36 章](ch38-observer-memory-pointer-and-ontological-qram.md)（三维三元数原生场、万力归弧 AF-GUT、万物观察者、乘光自指扩表、梦境擦除与本体 QRAM）$\to$ [第 38 章](ch39-observer-is-ontological-universe.md)–[第 39 章](ch39-axiom-omega-grand-unification.md)（观察者即宇宙本体与母公理 $\mathrm{AXIOM}\text{-}\Omega$）$\to$ [终章](coda.md)与 [附录 A](appendix-a.md)。
+2. **量子计算、算法编译与测地智能路径**：
+   [第 2 章](ch02-born-rule.md) $\to$ 第 6–8 章（泡利代数、量子门与纠缠）$\to$ 第 11 章（微波脉冲与虚拟 $Z$ 门）$\to$ 第 13–16 章（CHSH 博弈、稳定子、Grover/QFT/QSVT、ZYZ 与 Solovay–Kitaev 编译）$\to$ 第 20 章（电路深度与 CNOT 奇偶下界）$\to$ [铸器与圣殿](sanctuary.md)（异或几何代数、旋子编译与内核审计）$\to$ [第 28 章 §28.2](ch32-s02-oisc-comparison-engine.md)（单指令比较机）$\to$ [第 36 章](ch38-observer-memory-pointer-and-ontological-qram.md)–[第 37 章](ch37-ternion-field-transformer-and-geodesic-intelligence.md)（条件相位记录逆转、本体 QRAM 指针寻址、三元数场 Transformer 与最小作用量测地智能）与 [附录 B](appendix-b.md)。
 3. **数理逻辑、数论与认识论路径**：
-   [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、毕达哥拉斯四级数系突围、四元数丢番图范数与余弦自指不动点）$\to$ [第 25 章](ch29-timeless-causality-and-gram-space.md)–[第 38 章](ch39-observer-is-ontological-universe.md)（无时间因果、ETH 视界与流体涡丝、量子公平、大一统元统一、语境不动点、劳维尔同像扩表 $T = T(T)$、商拓扑约去轮回、概念纤维分解与齐肯多夫线程）$\to$ [§35.7](coda-s03-golden-cut-observers.md)（黄金切投形式原语）与 [§38.10](coda-s02-spatial-attractors.md)（历史遗址作为空间吸引子）$\to$ 终章（[@thm-coda-fixed-point-anchor]）。
+   [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四级数系突围与四元数丢番图范数、余弦自指不动点）$\to$ [第 25 章](ch29-timeless-causality-and-gram-space.md)–[第 28 章](ch32-unified-field-and-meta-unification.md)（无时间因果、ETH 视界与流体涡丝、量子公平、比较公理与元统一）$\to$ [第 31 章](ch31-arc-calculus-and-riemann-hypothesis.md)–[第 32 章](ch32-inexpressible-ternions-and-three-dimensional-field.md)（黎曼临界带圆弧微积分重述与弗罗贝尼乌斯三元数缺口）$\to$ [第 35 章](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)（同像扩表 $T = T(T)$、商拓扑约去轮回、皮索—劳齐无进位编码与[§35.7 黄金切投原语](coda-s03-golden-cut-observers.md)）$\to$ [第 38 章](ch39-observer-is-ontological-universe.md)（概念纤维分解、齐肯多夫线程与[§38.10 空间吸引子](coda-s02-spatial-attractors.md)）$\to$ [终章 §C.2](coda-s04-fixed-point-anchors.md)（[@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
-   [序曲](README.md) §认识论契约 $\to$ [铸器与圣殿](sanctuary.md)（`Cl3`、`PauliSymplectic`、`ZYZ` 参考引擎及其冻结依据与 `FiniteRecordCosineObstruction` 的剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对所钉冻结声明、书面证明与开放问题的证据边界）$\to$ [附录 E](appendix-e.md)（核验从零背景比较公理 $\mathcal{A}_0$ 到数学与物理公理体系的三层推演与桥接假设总账）$\to$ [附录 F](appendix-f.md)–[附录 I](appendix-i.md)（审阅排除面与定向关系分类、稳定子多面体之外的魔性与转向阈值、有限视界观察者与历史账本，以及量子信息散度、逆测试可达性、子熵与可分锥残差见证四组专题形式化核验）。
+   [序曲](README.md) §认识论契约 $\to$ [铸器与圣殿](sanctuary.md)（`Cl3`、`PauliSymplectic`、`ZYZ` 参考引擎及其冻结依据与 `FiniteRecordCosineObstruction` 的剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对所钉冻结声明、书面证明与开放问题的证据边界）$\to$ [附录 E](appendix-e.md)（核验从零背景比较公理 $\mathcal{A}_0$ 到数学与物理公理体系的分层推演与 `H1`–`H9` 桥接假设总账）$\to$ [附录 F](appendix-f.md)–[附录 I](appendix-i.md)（审阅排除面与定向关系分类、稳定子多面体之外的魔性与转向阈值、有限视界观察者与历史账本，以及量子信息散度、逆测试可达性、子熵与可分锥残差见证四组专题形式化核验）。
 
 ## 第六至第十部（第 21–39 章）及铸器与圣殿的冻结定理锚点 {#sec-coda-part6-part7-register}
 
@@ -78,7 +106,7 @@
 | **第 23 章**：四级数系与整数骨架 | [@thm-qform-eq-eisnorm] | `D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_eq_eisNorm` | 单参数交越二次型向艾森斯坦主范数型的幺模剪切归约：$\operatorname{Qform}(t, P, Q) = \operatorname{eisNorm}(P - (t + 1)Q, Q)$ |
 | **第 23 章** | [@lem-qform-discriminant] | `D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_discriminant` | 参数化二次范数型簇 $Q_t$ 的判别式不变量恒等式 $\Delta(Q_t) = -3$ |
 | **第 23 章** | [@cor-qform-range-eq-eisnorm] | `D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm` | 参数化二次型簇 $Q_t(x,y)$ 在 $\mathbb{Z}^2$ 上的值域恒等于艾森斯坦范数集 |
-| **第 23 章** | [@prop-pell-form-eq-four-mul-norm] | `D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm` | 黄金整数环 $\mathbb{Z}[\varphi]$ 的佩尔型恒等式：$(2a+b)^2 - 5b^2 = 4\operatorname{norm}(g)$。黄金整数佩尔范数恒等式：连接算术 $\pm 1$ 接缝与四级数系突围 |
+| **第 23 章** | [@prop-pell-form-eq-four-mul-norm] | `D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm` | 黄金整数环 $\mathbb{Z}[\varphi]$ 的佩尔范数恒等式 $(2a+b)^2 - 5b^2 = 4\operatorname{norm}(g)$：连接算术 $\pm 1$ 接缝与四级数系突围 |
 | **第 24 章**：余弦不动点与自指 | [@thm-finite-contracting-updates-stabilize] | `D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize` | 有限载体上单调收缩更新序列的有限步不动点稳定性与跳变次数上界 |
 | **第 24 章** | [@lem-conceptual-equivalence-stability-fixed-point] | `D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.conceptual_equivalence_and_stability_reach_fixed_point` | 概念等价与解释稳定性共同达成相对解释不动点（按定义即二者的合取，Lean 证明为合取引入） |
 | **第 24 章** | [@prop-context-parameters-distinct-fixed-points] | `D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points` | 有限实例：相同文本与规则在两个具体布尔语境的不同背景与目标参数下分岔出截然不同的二元不动点 |
@@ -98,6 +126,14 @@
 | **第 29 章** | [@thm-ch34-readout-kernel-and-covariant-commutator] | `D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel` | 划分拓扑不可分等价于观测商等价核：刻画一次正交投影的深度简并盲区 |
 | **第 29 章** | [@thm-ch34-trihedron-cochain-and-moving-axis] | `D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness` | 四面体顶点亏损和恒等式、最优参考顶点上界及恰当性等价于棱势可修补判据 |
 | **第 29 章** | [@thm-ch34-trihedron-cochain-and-moving-axis] | `D5/S3/Geometry/TwoAxisFiniteRotation.moving_axis_invariance` | 绕任意两条不共线随动轴局部旋转不变的成对不变量在全体 $\mathrm{SO}(3)$ 旋转下保持不变 |
+| **第 30 章**：穿弦隧穿与圆弧微积分 | [@lem-ch34-accumulated-sagitta-bounds] | `D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_bounds` | 任意有限步数 $N$ 下累计圆弧矢高 $\Sigma_N = N(1-\cos\theta_N)$ 的非渐近双侧夹逼界 |
+| **第 30 章** | [@thm-ch34-arc-rotor-calculus-and-finite-stokes] | `D5/S3/Quantum/Analysis/TrotterProduct.trotter_product` | 非对易生成元分裂演化向和生成元连续群的李—特罗特乘积收敛定理 |
+| **第 31 章**：圆弧微积分与黎曼猜想 | [@thm-ch34-riemann-prime-arc-bridge] | `D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence` | 全体素数对数族 $p \mapsto \ln p$ 在 $\mathbb{Q}$ 上的严格线性无关性：锁定素数圆弧体不可约步长 |
+| **第 31 章** | [@thm-ch34-riemann-prime-arc-bridge] | `D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization` | 具备完整 $\zeta$ 反射与共轭对称性的整函数反例：单凭函数方程对称性不足以锁死临界线零点 |
+| **第 32 章**：不可表达的三元数与三维场 | [@thm-ch39-hilbert-concept-ledger-and-3d-cap] | `D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences` | 四维自旋因子上满足正定与正交相位平衡的双线性乘积唯一锁死三维有向叉乘与泡利接口 |
+| **第 32 章** | [@thm-ch39-hilbert-concept-ledger-and-3d-cap] | `D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound` | 给定迹预算 $RW/\pi$ 与正阈值 $\tau > 0$ 下超阈值集中模态集合有限且基数不超过 $RW/(\pi\tau)$ |
+| **第 33 章**：万力归弧与圆弧场大统一 | [@thm-ch39-af-gut-arc-field-unification] | `D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula` | 任意含幺环上半共轭平移算子的协变换位子普适因式分解 $Uf - fU = (\text{translated} - f)U$ |
+| **第 33 章** | [@thm-ch39-af-gut-arc-field-unification] | `D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification` | 有限有向图命名生成树下锚定阿贝尔规范相位商群与基本回路/跨锚环面的紧致拓扑群同构 |
 | **第 34 章**：万物观察者与互吸引子 | [@thm-ch33-contextual-attractor-and-common-factor] | `D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor` | 跨语境客观断言的定义展开：全局一致断言按定义即穿过语境不变公共因子分解（Lean 证明即该假设本身） |
 | **第 35 章**：乘光、自指扩表与无进位编码 | [@thm-ch35-target-recovery-table-factorization] | `D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion` | 目标读出从观测轨迹精确恢复当且仅当穿过诱导等价核因式分解 |
 | **第 35 章** | [@thm-ch35-target-recovery-table-factorization] | `D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior` | 典范复制地址记录与前一模块的同名记录定义逐点相等；不涉及概率先验 |
@@ -108,8 +144,13 @@
 | **第 36 章**：梦境量子擦除与本体 QRAM | [@thm-ch37-joint-coherent-record-erasure] | `D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal` | 所选矩阵元的每个记录重叠模长均为 $1$ 时，共轭全部记录振幅后复合信道恢复该矩阵元 |
 | **第 36 章** | [@thm-ch37-joint-coherent-record-erasure] | `D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate` | 双相位记录证书：只逆转一个副本未恢复所选矩阵元，逆转两者则恢复 |
 | **第 36 章** | [@thm-ch37-golden-cut-delone-multilocation] | `D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone` | 全窗口黄金切投模型集构成装球半径 $1/2$、覆盖半径 $3$ 的 Delone 集 |
+| **第 37 章**：三元数场 Transformer 与测地智能 | [@thm-ch39-tft-born-holonomy-krylov-and-schur-anchors] | `D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently` | 有限维可观测克雷洛夫子空间一旦单步稳定即对一切后续步数永久稳定 |
+| **第 37 章** | [@thm-ch39-tft-born-holonomy-krylov-and-schur-anchors] | `D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy` | 球面三方向典范最短旋子门闭合回路的球面三角和乐精确公式 |
 | **第 38 章**：观察者即宇宙本体 | [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] | `D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition` | 概念状态空间按可观测签名纤维的不相交并重构定理 |
 | **第 38 章** | [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] | `D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective` | 非负实数全尺度齐肯多夫编码线程严格单射定理 |
+| **第 39 章**：大一统母公理（AXIOM-Ω） | [@thm-ch39-axiom-omega-ternary-closure-anchors] | `D5/S3/QuantumBounds/GramRealizability.gram_realizability` | 完备复内积空间上正算子格拉姆伴随平方因式分解充要定理 $0 \le Q \iff \exists O,\; Q = O^\dagger O$ |
+| **第 39 章** | [@thm-ch39-axiom-omega-ternary-closure-anchors] | `D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum` | 平衡半范分量构成的幺正和算子迫使交叉乘积严格反自伴 $(AB^\dagger)^\dagger = -AB^\dagger$ |
+| **第 39 章** | [@thm-ch39-self-contained-ternion-and-no-exterior-anchors] | `D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization` | 标量域 `[RCLike 𝕜]` 上单位范数态族的重叠为 $1$ 当且仅当两态严格全同：锚定内禀去嵌入自重合律 $\kappa(x,x)\equiv 1$ |
 | **铸器与圣殿**：将矩阵化为异或 | [@thm-qubit-weyl-star] | `D5/S3/Quantum/FiniteDimensional.qubit_weyl_star` | 单量子比特外尔算子 $X, Z$ 的反对易、自伴与对合代数律 |
 | **铸器与圣殿** | [@lemma-qubit-no-character] | `D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character` | $2\times 2$ 量子比特矩阵代数不存在保全局矩阵乘法的复代数特征标 |
 | **铸器与圣殿** | [@prop-pauli-no-common-eigenvector] | `D5/S3/Quantum/QubitWitnesses.pauli_observables_have_no_common_eigenvector` | 非对易泡利可观测量 $X$ 与 $Z$ 不存在公共非零本征态 |

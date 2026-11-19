@@ -28,7 +28,7 @@ Read the [contribution guidelines](CONTRIBUTING.md) before opening an issue or p
 
 The Zenodo concept DOI provides a stable identifier across versions; version-specific DOIs are listed in the Zenodo records. Set the publication DOI in [`books/quantum-geometry/book.toml`](books/quantum-geometry/book.toml) as `[book].doi`. When omitted, the build checks the root `.zenodo.json`, `CITATION.cff`, then explicit Zenodo DOI links in README. The DOI appears in the site catalog, PDF/EPUB copyright pages, and EPUB metadata.
 
-本书将直观的物理机制推演、概念谱系批判与机器形式化证明熔于一炉，沿着**“点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 多球共振 $\to$ 时空之球 $\to$ 球外之球与机械法典 $\to$ 无时间因果、复杂性视界、量子公平与元统一 $\to$ 万物观察者、正交简并、自指扩表与超越轮回 $\to$ 梦境擦除、本体 QRAM 与观察者即宇宙本体”**的十部正交阶梯推进：
+本书将直观的物理机制推演、概念谱系批判与机器形式化证明熔于一炉，沿着**“点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 多球共振 $\to$ 时空之球 $\to$ 球外之球 $\to$ 无时间因果、复杂性视界、量子公平与比较公理立极 $\to$ 极小圆弧、黎曼临界带、三元数原生场与万力归弧 $\to$ 万物观察者、自指扩表、本体 QRAM 与测地智能 $\to$ 观察者即宇宙本体与大一统母公理（AXIOM-Ω）”**的十部三十九章正交阶梯推进，并配以独立成篇的《铸器与圣殿》机械验证引擎篇：
 
 | 部次 / Part | 主题 / Theme | 章节范围 / Chapters |
 | :--- | :--- | :--- |
@@ -38,12 +38,14 @@ The Zenodo concept DOI provides a stable identifier across versions; version-spe
 | **第三部 / Part III** | 合拢·从面到球：三元正交、全局相容与注意力计算 | 第 9–12 章 |
 | **第四部 / Part IV** | 交织·多球共振：量子纠缠、容错编码与算法大一统 | 第 13–16 章 |
 | **第五部 / Part V** | 显影·时空之球：相对论度规、规范力场与全息引力 | 第 17–20 章 |
-| **第六部 / Part VI** | 越界·球外之球：哥德尔逃逸、算术频谱与 $\psi = \psi(\psi)$ | 第 21–24 章 |
-| **第七部 / Part VII** | 铸器·构造与验证：异或代数、旋子编译与 Lean 4 公理圣殿 | 第 25–28 章 |
-| **第八部 / Part VIII** | 贯通·无时间因果、复杂性视界、量子公平与元统一 | 第 29–32 章 |
-| **第九部 / Part IX** | 互照·万物观察者、自指扩表与超越轮回 | 第 33–36 章 |
-| **第十部 / Part X** | 不二·梦境擦除、记忆指针与本体不二 | 第 37–39 章 |
-| **终章与附录 / Coda & Appendices** | 球外的人、历史遗迹吸引子与高维黄金切投观察者；概念对照词典、克利福德速查表、锁定声明总索引，以及量子六大基础难题与五大学派几何对决 | `coda.md`、`appendix-a.md`–`appendix-i.md` |
+| **第六部 / Part VI** | 越界·球外之球：哥德尔逃逸、算术频谱与 $\psi = \psi(\psi)$ | 第 21–24 章（对角线逃逸、素数欧拉乘积、四级数系突围与四元数丢番图范数、余弦自指不动点 $\cos\theta^* = \theta^*$） |
+| **第七部 / Part VII** | 立极·因果相容、复杂性视界、量子公平与比较公理 | 第 25–28 章（无时间格拉姆因果、ETH 与纳维—斯托克斯视界、五重量子公平、零背景比较公理 $\mathcal{A}_0$ 与元统一罗盘） |
+| **第八部 / Part VIII** | 造微与归弧·极小圆弧、黎曼临界带、三元数与万力大统一 | 第 29–33 章（正交盲区与极小圆弧体、穿弦隧穿与圆弧微积分、黎曼临界带弧几何重述、不可表达的三元数与三维场封顶、四大力同源归弧与 AF-GUT（`MODEL`）） |
+| **第九部 / Part IX** | 互照与破执·万物观察者、自指扩表、本体 QRAM 与测地智能 | 第 34–37 章（多观察者互吸引子与偏迹热力学、乘光扩表 $T = T(T)$ 与皮索—劳齐编码、梦境量子擦除与本体 QRAM 指针、三元数场 Transformer 与测地智能） |
+| **第十部 / Part X** | 不二与归元·观察者即宇宙本体与大一统母公理 | 第 38–39 章（全域 `p ≡ *p` 无底物自指、因陀罗网、摩耶正交大梦与上帝心理学；无源保正三元比较闭合母公理 $\mathrm{AXIOM}\text{-}\Omega$ 在附录 E `T1–T4` 桥接假设下（`MODEL`）导出量子力学五大公设，收束于自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明） |
+| **终章 / Coda** | 在所有的球之外：多面体余项、双不动点锚点与十部阅读导图 | `coda.md`（`C.1`–`C.3`） |
+| **铸器与圣殿 / Forge & Sanctuary** | 异或几何代数引擎、单比特旋子编译与 Lean 4 公理圣殿逐行审计（独立伴读篇，不占正文连号） | `sanctuary.md`（`ch25`–`ch28`，定理前缀 `Kernel`） |
+| **附录 / Appendices** | 概念对照词典与双语术语表、克利福德速查表、锁定声明总索引、量子六大难题几何对决、比较公理推演总账及四篇专题形式化验证附录 | `appendix-a.md`–`appendix-i.md` |
 
 本书库的文风规范、中英受控术语表与三层认识论诚实契约详见 [PROJECT.md](PROJECT.md)。
 

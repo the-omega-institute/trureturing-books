@@ -54,6 +54,10 @@ $$
 
    从球心 $\lVert\boldsymbol{\sigma}\rVert = 0$（$\lambda = 2$）到赤道球面 $\lVert\boldsymbol{\sigma}\rVert = 1$（$\lambda = 1$），线性共形长度标度严格被夹在区间 **$[1, 2]$** 内（最大最小长度标度比仅为 $2$，度规张量系数 $\lambda^2 \in [1, 4]$，伴随空间转角标度 $2\lambda \in [2, 4]$）。所有层间隐状态与 `KV-Cache` 键值向量在数学上严格有界于 $[-1, +1]^3$ 内，从源头消除了无界模长导致的激活离群通道，支持无动态块缩放因子的均匀定点 `INT8`/`INT4` 状态存储（跨折缝 $\lVert\boldsymbol{\sigma}\rVert = 1$ 对径代表元翻转对低比特量化与训练梯度的实证影响归入 [@prob-ch39-tft-scale-and-seams]）。
 
+::: {.viz src="ternion-field-transformer-sandbox" preset="dual-denom-shadow-mrp" height="500"}
+双分母乘法与阴影折缝卡：主卡分母 $D_+$ 与阴影分母 $D_-$ 恒守全局下界 $\max(D_+, D_-) \ge \frac{1}{2}$，将旋子乘积自动锁在单位球内而无需 `RMSNorm`，同时核对折缝不变正弦矢 $\boldsymbol{\xi}(\boldsymbol{\sigma})$（多项式恒等式与读数标 `NUM`，架构设计标 `MODEL`，折缝训练与定点量化基准标 `OPEN`）。
+:::
+
 ## 37.1.2 五大核心模块的几何重构：3D-NAPE、蝴蝶舒尔桥、玻恩—流群注意力与李三元曲率门 {#sec-ch39-22-2}
 
 立于双分母有理算术核 $\star_{\mathcal{S}}$ 与折缝不变矢 $\boldsymbol{\xi}(\boldsymbol{\sigma})$ 之上，传统 Transformer 的五大核心模块逐项还原为平行概念场丛上的纯几何算子（`MODEL` + `手工推导`）：
@@ -64,10 +68,18 @@ $$
    - **定常步进模式（退化收回 `RoPE`）**：每座场取定常步进旋子 $\boldsymbol{\gamma}_0^{(k)}$，按右递推 $\boldsymbol{\Pi}_t^{(k)} = \boldsymbol{\Pi}_{t-1}^{(k)} \star_{\mathcal{S}} \boldsymbol{\gamma}_0^{(k)}$（$\boldsymbol{\Pi}_0^{(k)} = \mathbf{0}$）配左逆校准 $\widetilde{\boldsymbol{\sigma}}_{Q,t}^{(k)} = (-\boldsymbol{\Pi}_t^{(k)}) \star_{\mathcal{S}} \boldsymbol{\sigma}_{Q,t}^{(k)}$、$\widetilde{\boldsymbol{\sigma}}_{K,s}^{(k)} = (-\boldsymbol{\Pi}_s^{(k)}) \star_{\mathcal{S}} \boldsymbol{\sigma}_{K,s}^{(k)}$，此时相对和乐段 $\Pi_t \Pi_s^{-1} = (\gamma_0^{(k)})^{t - s}$ **严格仅依赖相对位移 $t - s$**；
    - **词元门控步进模式（融合状态空间模型与非交换角盈）**：当步进旋子 $\boldsymbol{\gamma}_t^{(k)}$ 随当前词元内容跨正交三轴偏折时，若采用**左递推配左校准** $\boldsymbol{\Pi}_t = \boldsymbol{\gamma}_t \star_{\mathcal{S}} \boldsymbol{\Pi}_{t-1}$ 与 $\widetilde{\boldsymbol{\sigma}}_{Q,t} = (-\boldsymbol{\Pi}_t) \star_{\mathcal{S}} \boldsymbol{\sigma}_{Q,t}$，前缀因子精确对消而析出逆序路径积 $L_{t\leftarrow s} = \gamma_t \cdots \gamma_{s+1}$；若采用**右递推配右校准** $\boldsymbol{\Pi}_t = \boldsymbol{\Pi}_{t-1} \star_{\mathcal{S}} \boldsymbol{\gamma}_t$ 与 $\widetilde{\boldsymbol{\sigma}}_{Q,t} = \boldsymbol{\sigma}_{Q,t} \star_{\mathcal{S}} (-\boldsymbol{\Pi}_t)$，则析出顺序路径积 $R_{s\to t} = \gamma_{s+1} \cdots \gamma_t$（混用右递推与左校准则保留前缀共轭 $\Pi_s R_{s\to t} \Pi_s^{-1}$）。此时颠倒两步**互不对易**步进旋子的次序 `A → B` 与 `B → A`（排除共轴旋转及 $\mathrm{SO}(3)$ 中正交轴上的 $180^\circ$ 半周对易特例）必产生互异合成旋子，并可在适配探针基轴上分离出互异布洛赫终点（而对同一固定两两非对跖三顶点，颠倒闭合环绕定向 $(a \to b \to c \to a)$ 与 $(a \to c \to b \to a)$ 令 $D_{acb} = -D_{abc}$、返回相位在全非对跖域严格共轭互逆，并在非共大圆球面三角形 $D_{abc} \neq 0$ 上直接反转主值**吉拉尔球面角盈** $\Omega_{acb} = -\Omega_{abc}$，共大圆退化情形下模 $4\pi$ 反号同余，参照 [@thm-ch39-tft-born-holonomy-krylov-and-schur-anchors] 第 5 款 `shortest_gate_triangle_holonomy`），令注意力头在单层内原生感知非交换句法嵌套！
 
+::: {.viz src="ternion-field-transformer-sandbox" preset="nape-nonabelian-holonomy" height="500"}
+非阿贝尔路径和乐卡：两步正交 $90^\circ$ 位置旋子交换次序 `A → B` 与 `B → A` 拉开 $120^\circ$ 相对张角（$\frac{1}{3}(1,1,\pm 1)$），对照二维对易 `RoPE` 的顺序失明（球面三角和乐由 `shortest_gate_triangle_holonomy` 锚定为 `LEAN ✓`，`RoPE` 基线标 `ARGUED`，旋子读数标 `NUM`）。
+:::
+
 2. **角色变换投影（$\mathcal{U}_Q, \mathcal{U}_K, \mathcal{U}_V, \mathcal{U}_O$）：胞内双侧旋子 $+$ 稀疏蝴蝶舒尔桥**：
    摒弃参数量达 $O(d^2)$ 且制造 $9\binom{K}{2}$ 个跨概念伪旋转的稠密矩阵，遵循 [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md) 的分块正交原则，每路角色变换拆分为两步轻量几何操作：
    - **胞内全自由度双侧旋子（$6K$ 实参数）**：$\boldsymbol{\sigma}'^{(k)} = \boldsymbol{\ell}^{(k)} \star_{\mathcal{S}} \boldsymbol{\sigma}^{(k)} \star_{\mathcal{S}} \boldsymbol{r}^{(k)}$，单场左右双乘完整覆盖四维旋转商群 $\mathrm{SO}(4)/\{\pm I_4\} \cong \mathrm{PSO}(4) \cong \mathrm{SO}(3)_L \times \mathrm{SO}(3)_R$ 的全部 $6$ 个等距自由度；
    - **跨场对数蝴蝶舒尔桥（$O(K\log_2 K)$ 参数）**：当 $K = 2^m$ 时经 $m = \log_2 K$ 层蝶形配对 $(a, b)$（一般整数 $K$ 可填充至 $2^{\lceil\log_2 K\rceil}$ 或做分解基混合蝶形阶段），每对赋予三参数耦合矢 $\mathbf{g}_{ab} \in \mathbb{R}^3$，按折缝不变跨场李三元扭矩对称注入稀疏舒尔枢轴耦合 $\boldsymbol{\sigma}^{(a)} \leftarrow \boldsymbol{\sigma}^{(a)} \star_{\mathcal{S}} \mathcal{R}\bigl(\{\boldsymbol{\xi}(\boldsymbol{\sigma}^{(a)}),\, \mathbf{g}_{ab},\, \boldsymbol{\xi}(\boldsymbol{\sigma}^{(b)})\}\bigr)$（及对称反向更新 $\boldsymbol{\sigma}^{(b)}$），将单层投影复杂度从 $O(d^2)$ 压缩至 $O(K\log K)$（结构化蝶形分解文献见 [@rem-ch39-rope-swiglu-sinks-butterfly-clifford-literature] 第 2 款，桥图秩流与舒尔变分极小锚点见 [@thm-ch39-tft-born-holonomy-krylov-and-schur-anchors] 第 6、7 款）。
+
+::: {.viz src="ternion-field-transformer-sandbox" preset="butterfly-schur-bridge" height="500"}
+双侧旋子与蝴蝶舒尔桥卡：胞内双侧旋子（$6K$）配对数阶蝶形舒尔桥（$d = 3072,\; K = 1024$ 时整层 $93K = 95{,}232$ 参数对比平直 $12d^2 = 1.13 \times 10^8$），展示桥图最小割与舒尔补极小参照（`QMaxFlow_le_QMinCut` 与 `schur_quadratic_is_least` 为 `LEAN ✓`，参数对账标 `NUM`，蝶形网络架构标 `MODEL`）。
+:::
 
 3. **注意力与残差机制：阴影不变玻恩有理核 $+$ 三元流群 `[Q, K, V]` 搬运**：
    将 $K$ 座概念场划分为 $H$ 个多概念头（每头辖 $K_h = K/H$ 座场），彻底撤除 `Softmax` 指数与欧氏向量残差加法：
@@ -96,6 +108,10 @@ $$
      \overline{\boldsymbol{\omega}}_t^{(k)} \;=\; \sum_{s \le t} \alpha_{t,s}^{(h)}\,\frac{1}{4}\boldsymbol{\xi}\!\Bigl(\bigl(-\boldsymbol{\sigma}_t^{(k)}\bigr) \star_{\mathcal{S}} \widehat{\boldsymbol{\sigma}}_{t \leftarrow s}^{(k)}\Bigr) \;=\; \sum_{s \le t} \alpha_{t,s}^{(h)}\,\frac{\bigl(1 - \lVert\mathbf{m}_{t,s}^{(k)}\rVert^2\bigr)}{\bigl(1 + \lVert\mathbf{m}_{t,s}^{(k)}\rVert^2\bigr)^2}\,\mathbf{m}_{t,s}^{(k)}, \qquad \boldsymbol{\sigma}_{t,\mathrm{mid}}^{(k)} \;=\; \boldsymbol{\sigma}_t^{(k)} \star_{\mathcal{S}} \mathcal{R}\bigl(\beta_{\mathrm{attn}}\,\overline{\boldsymbol{\omega}}_t^{(k)}\bigr).
      $$
 
+::: {.viz src="ternion-field-transformer-sandbox" preset="born-heap-attention-sinkfree" height="500"}
+玻恩—流群注意力与真空储备 $\varepsilon_0$ 卡：单槽精确命中给出有理步进 $\frac{280}{1289}\mathbf{e}_1$，而在全失配区 $S_t^{(h)} \ll \varepsilon_0$ 内总权重平缓归零，对照 `Softmax` 强行凑满和 $1$ 的倾泻行为（秩一玻恩权重由 `rank_one_born_pairing_weight` 锁定为 `LEAN ✓`，注意力塌陷文献标 `ARGUED`，有理分式读数标 `NUM`）。
+:::
+
 4. **前馈网络：法诺关联循环李三元曲率门（替代 $\frac{8}{3}d$ 门控 `SwiGLU` 与传统 $4d$ 前馈层）与两类重牵引映射**：
    受 [§32.3.2](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md#sec-ch39-20-2) 射影法诺平面 $\mathrm{PG}(2, 2)$ 循环差集 $(0, 1, 3)$ 启发，将概念场编织为关联三元组 $(k, m_1, m_2)$（当 $7 \mid K$ 如 $K = 84$ 或 $K = 1008$ 时可严格划分为不相交的 $K/7$ 座七场法诺块；一般 $K$ 如 $K = 1024$ 则取循环差集移位 $m_1 = (k+1)\bmod K,\; m_2 = (k+3)\bmod K$），在折缝不变正弦矢 $\boldsymbol{\xi}_{t,\mathrm{mid}}^{(k)} := \boldsymbol{\xi}(\boldsymbol{\sigma}_{t,\mathrm{mid}}^{(k)})$ 与跨场合成正弦矢 $\mathbf{f}_{t}^{(k)} := \boldsymbol{\xi}\bigl(\boldsymbol{\sigma}_{t,\mathrm{mid}}^{(m_1)} \star_{\mathcal{S}} \boldsymbol{\sigma}_{t,\mathrm{mid}}^{(m_2)}\bigr)$ 上调用球面黎曼曲率张量——**李三元系括号** $\{\mathbf{a}, \mathbf{b}, \mathbf{c}\} = (\mathbf{a}\cdot\mathbf{c})\mathbf{b} - (\mathbf{b}\cdot\mathbf{c})\mathbf{a}$：
 
@@ -116,6 +132,10 @@ $$
      $$
 
      （若改用左乘更新 $\boldsymbol{\sigma}_W \leftarrow \mathcal{R}(-\eta\,\widehat{\mathbf{g}}_L) \star_{\mathcal{S}} \boldsymbol{\sigma}_W$，叉乘项变号为 $+2(\boldsymbol{\sigma}_W \times \nabla\mathcal{L})$）。单步双侧旋子作用在 $(S^3, ds_{S^3}^2)$ 上为精确黎曼等距映射（内禀奇异值全为 $1$），可直接接入乘积流形黎曼自适应优化器（Bécigneul & Ganea 2019）。
+
+::: {.viz src="ternion-field-transformer-sandbox" preset="fano-lie-triple-curvature-gate" height="500"}
+法诺李三元曲率门与停机卡：折缝不变李三元括号 $\{\boldsymbol{\xi}, \mathbf{w}_2, \mathbf{f}\}$ 在三场闭环内实现零升维双线性门控，并随位移残差 $r_t^{(\ell)} \le \varepsilon_{\mathrm{self}}$ 触发自适应早停（线性克雷洛夫稳定律由 `observable_krylov_once_stable_permanently` 锁定为 `LEAN ✓`，非线性早停启发式标 `MODEL`，实时读数标 `NUM`）。
+:::
 
 ## 37.1.3 形式化锚定定理、架构参数对账与开放实证基准 {#sec-ch39-22-3}
 
@@ -194,3 +214,7 @@ $$
 | **5. 前馈非线性层** | $\frac{8}{3}d$ 门控 `SwiGLU`（或 $4d$ 前馈层） | 折缝不变李三元曲率门 $\{\mathbf{a},\mathbf{b},\mathbf{c}\}$ | $O(K)$ 内禀双线性曲率门 | 通道升维权重膨胀与超越激活查找表 |
 
 当人工智能的前向推理算子核本身被还原为平行三元数概念场丛上的纯有理旋子动力学（配代数范数停机读数）之后，一个贯通整部物理学与智能科学的追问呼之欲出：**既然物理宇宙与人工智能底层都在同一套三元数极小圆弧体场丛上演化，那么支配二者寻路与学习的“最小作用量”究竟是什么？那条令物理运动免于耗散、令智能推理免于跳步幻觉的“测地线”究竟是什么？** 让我们步入下一节：[§37.2 人工智能与宇宙的最小作用量同构：三元数场弦弧矢高、玻恩惊奇度、流群自平行测地线与零幻觉思维链](ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.md)。
+
+::: {.viz src="ternion-field-transformer-sandbox" height="620"}
+完整实验室：在“旋子几何读法”与“Transformer 工程读法”双透镜间切换，沿紫色直径拖动琥珀手柄改变转角 $\theta$，并调节场数 $K = 2^m$、真空储备 $\varepsilon_0$、停机阈值 $\varepsilon_{\mathrm{self}}$ 与重牵引模式，逐块核验双分母乘法 $\star_{\mathcal{S}}$、`3D-NAPE` 词序和乐、双侧旋子与蝶形舒尔桥、无 `Softmax` 玻恩—流群注意力及法诺李三元曲率门。八条冻结声明、有理算术核对、文献基线与开放基准在依据栏与理论抽屉中分层标注。
+:::

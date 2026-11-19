@@ -108,7 +108,7 @@ function lnPrime(p) { let k = 0n; while (2n ** (k + 1n) <= BigInt(p)) k += 1n; c
 const T_STAR_DIGITS = '155417750480610.1069058343590740729822355566944212180135286730636614';
 const tStar60 = (() => { const [w, f] = T_STAR_DIGITS.split('.'); return BigInt(w) * D60 + BigInt(f.slice(0, 60).padEnd(60, '0')); })();
 function phase60(p) { const v = (tStar60 * lnPrime(p)) / D60, m = v % (2n * PI60); return Number(m / 10n ** 44n) / 1e16; }
-/* the stored complex values p^{−it*} (§34.29 data, 20 digits), another representation than the page's angles */
+/* the stored complex values p^{−it*} (§31.2 data, 20 digits), another representation than the page's angles */
 const PIT = { 2: [0.10487362546649948467, -0.99448555679884682312], 3: [-0.54681926368927598249, -0.83725067504201993389], 5: [-0.99578104626429840977, -0.091761145921240489187],
   7: [-0.97713981460737489524, 0.21259770156110582775], 11: [-0.79831979787334037961, 0.60223375887064730466], 13: [-0.79742081636014192584, 0.60342360049597397820],
   17: [-0.78908670133821990570, 0.61428183903739734415], 19: [-0.78475923110449675689, 0.61980073345897151321] };
@@ -237,7 +237,7 @@ check('source: the four public presets stay in order', same([...sources['index.h
 check('source: no green tick outside the evidence boxes in the script', !/okmark/.test(sources['main.js']));
 check('source: no possessive ’s in the page text', !/’s\b/.test(sources['index.html'] + sources['main.js']));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
-check('registry: live §34.29 entry with four bilingual cards and the nine theorems', !!entry && entry.status === 'live' && entry.chapter === 34 && entry.section === '34.29'
+check('registry: live §31.2 entry with four bilingual cards and the nine theorems', !!entry && entry.status === 'live' && entry.chapter === 31 && entry.section === '31.2'
   && entry.code === 'ARITH//PIVOT' && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map((x) => x.gid).sort(), [...GIDS].sort()) && entry.theory.some((t) => t.href === THEORY[0].replace('../../', '../') && t.href_en === THEORY[1].replace('../../', '../')));
 

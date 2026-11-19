@@ -278,7 +278,7 @@ check('source: no grid-template-columns override', !/grid-template-columns\s*:/i
 check('source: all five cards in public order', same([...sources['index.html'].matchAll(/data-preset="([^"]+)"/g)].map(m => m[1]), Object.keys(CARDS)));
 check('source: wheel false leaves host scrolling enabled', /wheel:\s*false/.test(sources['main.js']));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find(v => v.id === ID);
-check('registry: live 34.12 entry, five bilingual cards and exact nine GIDs', entry.status === 'live' && entry.chapter === 34 && entry.section === '34.12'
+check('registry: live 29.13 entry, five bilingual cards and exact nine GIDs', entry.status === 'live' && entry.chapter === 29 && entry.section === '29.13'
   && same(entry.presets, Object.keys(CARDS)) && entry.presets.every(c => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map(x => x.gid).sort(), [...GIDS].sort()));
 

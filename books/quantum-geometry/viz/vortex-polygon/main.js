@@ -1,4 +1,4 @@
-/* ORTHO//POLYGON: 2m point vortices of alternating sign on a circle, with the precession term of chapter 30.
+/* ORTHO//POLYGON: 2m point vortices of alternating sign on a circle, with the precession term of chapter 26, §26.4.
    The field is F_{b,Ω} of def-ch30-alternating-vortex-polygon with b = 2, Ω = ½, so the resting radius is R = 1.
    One rail (the time t) and four situations:
      rest      the regular polygon at R: nothing moves

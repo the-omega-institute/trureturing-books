@@ -186,7 +186,7 @@ check('source: shared three-column grid (no grid-template-columns) and kit.solid
 check('source: the five cards in order', same([...sources['index.html'].matchAll(/data-preset="([^"]+)"/g)].map((m) => m[1]), Object.keys(CARDS)));
 check('source: only the shared scripts', same([...sources['index.html'].matchAll(/<script src="([^"]+)"/g)].map((m) => m[1]), ['../assets/shell.js', '../assets/kit.js', 'main.js']));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID) || {};
-check('registry: live §34.18 entry with the five cards and the thirteen GIDs of its green boxes', entry.status === 'live' && entry.chapter === 34 && entry.section === '34.18'
+check('registry: live §34.7 entry with the five cards and the thirteen GIDs of its green boxes', entry.status === 'live' && entry.chapter === 34 && entry.section === '34.7'
   && same(entry.presets, Object.keys(CARDS)) && (entry.presets || []).every((c) => entry.preset_titles && entry.preset_titles[c] && entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same((entry.lean || []).map((x) => x.gid).sort(), [...GIDS].sort()), JSON.stringify({ status: entry.status, chapter: entry.chapter, section: entry.section, lean: (entry.lean || []).length }));
 

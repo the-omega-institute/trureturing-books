@@ -4,7 +4,7 @@
 // characteristic polynomial (Newton's identities) and leading principal minors for the Gram matrix, a direct count of
 // the zeros inside the Stokes box, a separate sieve with 1 − cos for the sagittas, and 30-digit constants for C_sag and
 // the limits P → ∞. Run directly with node; VIZ_PHASE1=1 skips the repeated card/still matrix, VIZ_SLOW_FRAMES=1000
-// spaces the frames. The chapter §34.31 may not exist yet on this branch: its embed checks run only when it does.
+// spaces the frames. The chapter §31.3 may not exist yet on this branch: its embed checks run only when it does.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -278,11 +278,11 @@ check('source (colour contract): the script never paints amber, red or green; am
   && [...sources['style.css'].matchAll(/([^{}]+)\{[^}]*--amber[^}]*\}/g)].every((m) => /\.handle|lens-toggle/.test(m[1])) && !/--(?:warn|ok)\b/.test(sources['style.css']));
 check('source: the holomorphic involution E#(s) = E(1 − s), never E(1 − s̄)', /E_ε\(1 − s\) = ξ\(s\) − \(ε\/2\)ξ′\(s\)/.test(sources['main.js'] + sources['index.html']) && !/E<sub>ε<\/sub>\(1 − s̄\) =/.test(sources['index.html']));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
-check('registry: live §34.31 entry, five bilingual cards, links capture, the nine theorems', !!entry && entry.status === 'live' && entry.chapter === 34 && entry.section === '34.31' && entry.capture_lock === 'links'
+check('registry: live §31.3 entry, five bilingual cards, links capture, the nine theorems', !!entry && entry.status === 'live' && entry.chapter === 31 && entry.section === '31.3' && entry.capture_lock === 'links'
   && entry.code === 'RIEMANN//STOKES' && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map((x) => x.gid).sort(), [...GIDS].sort()) && entry.theory.every((t) => fs.existsSync(path.join(BOOK_DIR, t.href.replace('../', '').split('#')[0].replace(/\.html$/, '.md')))));
 const deps = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'tests', 'dependencies.json'), 'utf8')).suites[`${ID}.test.mjs`];
-check('dependencies: the standard solid list with @citations, @registry-entry, @lean-links and the §34.31 chapter files', Array.isArray(deps) && ['@citations', '@registry-entry', '@lean-links', 'theme/viz/solid-core.js', 'theme/viz/vendor/three.module.min.js']
+check('dependencies: the standard solid list with @citations, @registry-entry, @lean-links and the §31.3 chapter files', Array.isArray(deps) && ['@citations', '@registry-entry', '@lean-links', 'theme/viz/solid-core.js', 'theme/viz/vendor/three.module.min.js']
   .every((d) => deps.includes(d)) && CHAPTER_FILES.every((f) => deps.includes(path.relative(path.resolve(BOOK_DIR, '..', '..'), f).split(path.sep).join('/'))));
 
 /* ---------- runtime: contract, links, cards ---------- */
@@ -313,7 +313,7 @@ async function checkLinks(p, tag) {
     && /prob-ch34-schur-hb-kernel-positivity-bridge/.test(els[1].textContent) && /prob-ch34-arithmetic-pivot-area-law/.test(els[2].textContent))
     && same(await p.$$eval('#evidence .lean.open a', (els) => els.map((e) => e.getAttribute('href')).sort()), [...RH_LINKS, ...AREA_LINKS].sort()));
   const theory = await p.$$eval('#drawer a[href^="../../"]', (els) => els.map((e) => e.getAttribute('href')));
-  check(`${tag}: the drawer links existing chapters in both languages${HAS_CHAPTER ? ', §34.31 among them' : ''}`, theory.length >= 2 && theory.every((h) => fs.existsSync(path.join(BOOK_DIR, h.replace('../../', '').split('#')[0].replace(/\.html$/, '.md'))))
+  check(`${tag}: the drawer links existing chapters in both languages${HAS_CHAPTER ? ', §31.3 among them' : ''}`, theory.length >= 2 && theory.every((h) => fs.existsSync(path.join(BOOK_DIR, h.replace('../../', '').split('#')[0].replace(/\.html$/, '.md'))))
     && theory.filter((h) => h.startsWith('../../zh/')).length === theory.filter((h) => h.startsWith('../../en/')).length && (!HAS_CHAPTER || theory.some((h) => h.includes(CHAPTER))), JSON.stringify(theory));
 }
 
@@ -568,11 +568,11 @@ if (!PHASE1) for (const lang of ['zh', 'en']) for (const card of Object.keys(CAR
   await p.context().close();
 }
 
-/* ---------- the chapter: §34.31 cites the five cards and the full lab, the same in both languages ---------- */
+/* ---------- the chapter: §31.3 cites the five cards and the full lab, the same in both languages ---------- */
 if (HAS_CHAPTER) {
   const blocks = CHAPTER_FILES.map((f) => [...fs.readFileSync(f, 'utf8').matchAll(/^::: \{\.viz src="([^"]+)"(?: preset="([^"]+)")?[^}]*\}/gm)].filter((m) => m[1] === ID).map((m) => m[2] || ''));
-  check('chapter §34.31: five cited cards plus one full lab, in the same order in zh and en', same(blocks[0], blocks[1]) && same(blocks[0].filter(Boolean).sort(), Object.keys(CARDS).sort()) && blocks[0].filter((x) => !x).length === 1, JSON.stringify(blocks));
-} else check('chapter §34.31: not on this branch yet; its embed checks wait for it', !CHAPTER_FILES.some((f) => fs.existsSync(f)));
+  check('chapter §31.3: five cited cards plus one full lab, in the same order in zh and en', same(blocks[0], blocks[1]) && same(blocks[0].filter(Boolean).sort(), Object.keys(CARDS).sort()) && blocks[0].filter((x) => !x).length === 1, JSON.stringify(blocks));
+} else check('chapter §31.3: not on this branch yet; its embed checks wait for it', !CHAPTER_FILES.some((f) => fs.existsSync(f)));
 
 check('palette: every observed document stayed undefined', paletteDocuments.length > 0 && paletteDocuments.every((r) => r.absent), JSON.stringify(paletteDocuments.filter((r) => !r.absent)));
 check('palette: zero attempted writes', paletteMutations.length === 0, JSON.stringify(paletteMutations));

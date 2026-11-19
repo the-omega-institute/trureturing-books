@@ -162,7 +162,7 @@ check('source: θ* in degrees is 42.34645883 (or 42.35), never 42.34647', !/42\.
 }
 check('suite: no fixed waits', !new RegExp('wait' + 'ForTimeout').test(suite));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
-check('registry: live §39.16 entry with five bilingual cards and the seven theorems', !!entry && entry.status === 'live' && entry.chapter === 39 && entry.section === '39.16'
+check('registry: live §38.8 entry with five bilingual cards and the seven theorems', !!entry && entry.status === 'live' && entry.chapter === 38 && entry.section === '38.8'
   && entry.code === 'HONG//AWAKEN' && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map((x) => x.gid).sort(), [...GIDS].sort()) && entry.tags.length === entry.tags_en.length && entry.capture_lock === 'links'
   && entry.theory[0].href === `../zh/${THEORY}` && entry.theory[0].href_en === `../en/${THEORY}` && GIDS.every((g) => /^[\x21-\x7e]+$/.test(g)));
@@ -258,7 +258,7 @@ async function checkLinks(p, tag) {
     && await p.$$eval('[data-lean-gid]', (els) => els.every((e) => e.closest('.col.side #evidence .lean') && e.closest('.lean').querySelector('.ok').textContent.trim() === 'LEAN ✓')));
   check(`${tag}: one ARGUED, MODEL and NUM box each, no OPEN box`, await p.evaluate(() => ['argued', 'model', 'num'].every((c) => document.querySelectorAll(`#evidence .lean.${c}`).length === 1)
     && !document.querySelector('.lean.open') && document.querySelectorAll('#evidence .lean:not(.argued):not(.model):not(.num):not(.open):not(.frozen)').length === 7));
-  check(`${tag}: bilingual chapter 39 theory link in the drawer`, same(await p.$$eval('#drawer .refs a', (els) => els.map((e) => e.getAttribute('href')).sort()), ['zh', 'en'].map((l) => `../../${l}/${THEORY}`).sort()));
+  check(`${tag}: bilingual chapter 38 theory link in the drawer`, same(await p.$$eval('#drawer .refs a', (els) => els.map((e) => e.getAttribute('href')).sort()), ['zh', 'en'].map((l) => `../../${l}/${THEORY}`).sort()));
 }
 
 /* ---------- runtime contract ---------- */

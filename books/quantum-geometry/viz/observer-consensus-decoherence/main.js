@@ -1,4 +1,4 @@
-/* ORTHO//CONSENSUS · 观察者共识与去相干 · observer consensus and decoherence (chapter 33, scheme 32).
+/* ORTHO//CONSENSUS · 观察者共识与去相干 · observer consensus and decoherence (chapter 34, §34.5, scheme 32).
    Four scenes share one rail s ∈ [0, 1]; each scene says what the rail means and never equates two of them:
      · tensor (axis-channel): observers carry unoriented unit axes nⱼ with weights wⱼ, M = Σ wⱼnⱼnⱼᵀ. One encounter is
        the Pauli channel K(n, α) = cos α·I + (1 − cos α)·nnᵀ on the Bloch vector. Three constructions stay apart: the

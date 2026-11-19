@@ -174,7 +174,7 @@ check('source: green and red stay off the stage (no ok or warn colour in the pag
 }
 check('suite: no fixed waits', !new RegExp('wait' + 'ForTimeout').test(suite));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
-check('registry: live §39.15 entry with five bilingual cards and the ten theorems', !!entry && entry.status === 'live' && entry.chapter === 39 && entry.section === '39.15'
+check('registry: live §38.7 entry with five bilingual cards and the ten theorems', !!entry && entry.status === 'live' && entry.chapter === 38 && entry.section === '38.7'
   && entry.code === 'BRAHMAN//DREAM' && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map((x) => x.gid).sort(), [...GIDS].sort()) && entry.tags.length === entry.tags_en.length && entry.capture_lock === 'links'
   && entry.theory[0].href === `../zh/${THEORY}` && entry.theory[0].href_en === `../en/${THEORY}`);

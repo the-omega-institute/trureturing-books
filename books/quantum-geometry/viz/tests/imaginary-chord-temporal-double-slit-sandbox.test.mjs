@@ -195,7 +195,7 @@ check('source: the page loads only the shared runtime and its own files', same([
 check('source: .okmark only inside .lean boxes (none on this page)', !/okmark/.test(sources['index.html'] + sources['main.js']));
 check('suite: no fixed waits', !new RegExp('wait' + 'ForTimeout').test(suite));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
-check('registry: live §34.27 entry with five bilingual cards and the six theorems', !!entry && entry.status === 'live' && entry.chapter === 34 && entry.section === '34.27'
+check('registry: live §30.2 entry with five bilingual cards and the six theorems', !!entry && entry.status === 'live' && entry.chapter === 30 && entry.section === '30.2'
   && entry.code === 'IMAG//TUNNEL' && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map((x) => x.gid).sort(), [...GIDS].sort()) && entry.tags.length === entry.tags_en.length);
 
@@ -318,7 +318,7 @@ async function checkLinks(p, tag) {
   check(`${tag}: exactly the six green Lean links, in #evidence`, same(await p.$$eval('[data-lean-gid]', (els) => els.map((e) => e.dataset.leanGid).sort()), [...GIDS].sort())
     && await p.$$eval('[data-lean-gid]', (els) => els.every((e) => e.closest('.col.side #evidence .lean') && e.closest('.lean').querySelector('.ok').textContent.trim() === 'LEAN ✓')));
   check(`${tag}: one ARGUED, one MODEL and one NUM box`, await p.evaluate(() => ['argued', 'model', 'num'].every((c) => document.querySelectorAll(`#evidence .lean.${c}`).length === 1)));
-  check(`${tag}: bilingual theory link to §34.27`, same(await p.$$eval('#drawer a[href^="../../"]', (els) => els.map((e) => e.getAttribute('href')).sort()), [...THEORY].sort()));
+  check(`${tag}: bilingual theory link to §30.2`, same(await p.$$eval('#drawer a[href^="../../"]', (els) => els.map((e) => e.getAttribute('href')).sort()), [...THEORY].sort()));
 }
 
 /* ---------- runtime contract ---------- */

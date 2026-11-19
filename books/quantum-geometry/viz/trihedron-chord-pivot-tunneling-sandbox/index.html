@@ -18,7 +18,7 @@
 <div class="app lab" id="app">
 <header class="top">
   <div class="brand">
-    <a class="crumb" href="../"><span class="zh">◂ 第 34 章 · §34.26</span><span class="en">◂ Ch. 34 · §34.26</span></a>
+    <a class="crumb" href="../"><span class="zh">◂ 第 30 章 · §30.1</span><span class="en">◂ Ch. 30 · §30.1</span></a>
     <h1 class="logo" data-text="CHORD//TUNNEL">CHORD<span>//</span>TUNNEL</h1>
     <div class="tagline"><span class="zh">极小圆弧体内割面隧穿与多尺度枢轴全息锥 · <em>不爬两面墙、不必排好序：穿过体内的那根弦最短，枢轴一层层沉到它的中点那么深。</em></span><span class="en">Interior-chord tunneling and the multi-scale pivot cone · <em>skip the two walls and the sorting: the chord through the bulk is shortest, and the pivots sink level by level as deep as its midpoint.</em></span></div>
   </div>
@@ -26,7 +26,7 @@
 </header>
 <aside class="col deck" id="rail" aria-label="实验控制" data-aria-en="Experiment controls">
   <section class="panel sec">
-    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§34.26</span></h2>
+    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§30.1</span></h2>
     <div class="presets cards" id="presets">
       <button class="preset" data-preset="walls-dijkstra-tax" aria-pressed="false"><span class="code">WALLS · 2ε</span><span class="cn zh">正交双侧壁爬坡与全局排序比较税</span><span class="cn en">Orthogonal twin-wall climb and global sorting tax</span></button>
       <button class="preset" data-preset="cap-wavefront-relax" aria-pressed="false"><span class="code">CAP · Ω</span><span class="cn zh">外凸球面顶盖铺波与免排序局部松弛</span><span class="cn en">Convex spherical-cap wavefront and unsorted local relaxation</span></button>
@@ -99,7 +99,7 @@
       <li><b>枢轴锥。</b>顶盖按谢尔宾斯基方式对分 D 次，得 N = 2^D 个叶（边界点 Λ⁰）。每 k 个相邻的点凝成一颗枢轴，放在它所辖区域的面积加权中心方向、半径 cos(θ/2)，θ 是该区域的角直径：这正是端点相隔 θ 的弦的中点深度。逐层得 ⌈n/k⌉ 个枢轴，直到一颗；它所辖的是整个顶盖，θ = arccos(cos²ε)，于是 r = r<sub>mid</sub>，与 M 同深。白线是叶图上从 A 端的叶出发的 Dijkstra 落定顺序。比较次数指标 n log₂ n、m + n log₂ n 与 m log<sup>2/3</sup> n 只是主项，不含常数（m 为叶图的边数）。</li>
       <li><b>共振中继与芝诺探针。</b>沿弦取矩形势垒，E = 16、V₀ = 32（ħ = 2m = 1），k₀ = κ = 4，阿格蒙作用量 S<sub>E</sub> = κL。厚势垒（长 L = √2 sin ε）的透射由转移矩阵算出，约为 e<sup>−2κL</sup> 量级；把它拆成两段 L/2、中间放一个阱（中继枢轴），阱宽在一个法布里—珀罗周期 (0, π/k₀] 里调到共振，对称双势垒在共振处透射为 1。芝诺探针取 n = N 次投影排序 P<sub>I</sub> ρ P<sub>I</sub>，相干转移被压成 1 − cos²ⁿ(π/2n) ≈ π²/4n。</li>
     </ol>
-    <p class="lede refs">书中：<a href="../../zh/ch34-s26-chord-tunneling-and-pivot-renormalization.html#sec-ch34-chord-tunneling-and-pivot-renormalization" target="_top">§34.26 极小圆弧体内割弦面、打破排序壁垒的枢轴八度重整化与瞬子隧穿</a></p>
+    <p class="lede refs">书中：<a href="../../zh/ch34-s26-chord-tunneling-and-pivot-renormalization.html#sec-ch34-chord-tunneling-and-pivot-renormalization" target="_top">§30.1 极小圆弧体内割弦面、打破排序壁垒的枢轴八度重整化与瞬子隧穿</a></p>
   </div>
   <div class="en">
     <p class="lede">This is a numerical sandbox, not a proof. Every number is computed on the page (NUM); each Lean theorem is shown only on the one instance named in the evidence panel.</p>
@@ -111,7 +111,7 @@
       <li><b>Pivot cone.</b> The cap is bisected D times in the Sierpiński way into N = 2^D leaves (boundary points Λ⁰). Every k neighbouring points condense into a pivot, placed in the area-weighted mean direction of the region it gathers at radius cos(θ/2), θ the angular diameter of that region: the depth of the midpoint of a chord whose ends are θ apart. Level after level there are ⌈n/k⌉ pivots, down to one; it gathers the whole cap, θ = arccos(cos²ε), so r = r<sub>mid</sub>, as deep as M. The white thread is the Dijkstra settle order on the leaf graph from the leaf at A. The comparison indices n log₂ n, m + n log₂ n and m log<sup>2/3</sup> n are leading terms without constants (m is the number of edges of the leaf graph).</li>
       <li><b>Resonant relay and Zeno probe.</b> Along the chord take a rectangular barrier, E = 16, V₀ = 32 (ħ = 2m = 1), k₀ = κ = 4, Agmon action S<sub>E</sub> = κL. The transmission of the thick barrier (length L = √2 sin ε) comes from transfer matrices and is of order e<sup>−2κL</sup>; split it into two halves L/2 with a well (the relay pivot) between them, the well width tuned to resonance within one Fabry–Pérot period (0, π/k₀], and the symmetric double barrier transmits 1 at resonance. The Zeno probe takes n = N projective sorts P<sub>I</sub> ρ P<sub>I</sub>, which press the coherent transfer down to 1 − cos²ⁿ(π/2n) ≈ π²/4n.</li>
     </ol>
-    <p class="lede refs">In the book: <a href="../../en/ch34-s26-chord-tunneling-and-pivot-renormalization.html#sec-ch34-chord-tunneling-and-pivot-renormalization" target="_top">§34.26 Minimal Arc-Trihedron Interior-Chord Cuts, Pivot Octave Renormalization Breaking the Sorting Barrier, and Instanton Tunneling</a></p>
+    <p class="lede refs">In the book: <a href="../../en/ch34-s26-chord-tunneling-and-pivot-renormalization.html#sec-ch34-chord-tunneling-and-pivot-renormalization" target="_top">§30.1 Minimal Arc-Trihedron Interior-Chord Cuts, Pivot Octave Renormalization Breaking the Sorting Barrier, and Instanton Tunneling</a></p>
   </div>
 </div></div>
 <script src="main.js"></script>

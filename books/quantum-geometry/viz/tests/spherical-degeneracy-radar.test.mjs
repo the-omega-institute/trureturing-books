@@ -3,7 +3,7 @@
 //   node books/quantum-geometry/viz/tests/spherical-degeneracy-radar.test.mjs   (or node tools/node/viz-test.mjs quantum-geometry)
 // The page multiplies multivectors of Cl(3,0) blade by blade and lets rotors act by s ↦ R s R̃. The suite rebuilds every
 // claim another way: rotors as 2 × 2 complex SU(2) matrices (e₁, e₂, e₃ ↦ σx, σy, σz; R̃ ↦ R†), vectors read back as
-// ½ Tr(M σₖ); the closed forms of Chapter 34 for v₁, v₂, s₁, s₂ and Δ(O); 3 × 3 rotation matrices for the turned frame;
+// ½ Tr(M σₖ); the closed forms of Chapter 29 for v₁, v₂, s₁, s₂ and Δ(O); 3 × 3 rotation matrices for the turned frame;
 // and a brute-force search over a grid of observers for the ones that read every pair equally. It reads the page
 // through window.DEGEN_DEBUG. The stage is a lit solid (kit.solid) in a glass sphere: solidChecks runs on the opening
 // card, and the flat overlay that carries the rotor scene's dial is checked as an overlay.

@@ -57,7 +57,7 @@
     </section>
     <section class="panel sec" id="vecCtl" hidden>
       <h2><span class="zh">这个向量</span><span class="en">The vector</span><span class="aside">a = (3, 4, 12)</span></h2>
-      <p class="note"><span class="zh">第二十五章例题里的 v = 3e₁ + 4e₂ + 12e₃。时间轴把 v · v 的九项逐一加进来；点表里的一格跳到那一项。</span><span class="en">The v = 3e₁ + 4e₂ + 12e₃ of the worked example in Chapter 25. The rail adds the nine terms of v · v one at a time; click a cell of the table to jump to that term.</span></p>
+      <p class="note"><span class="zh">铸器与圣殿例题里的 v = 3e₁ + 4e₂ + 12e₃。时间轴把 v · v 的九项逐一加进来；点表里的一格跳到那一项。</span><span class="en">The v = 3e₁ + 4e₂ + 12e₃ of the worked example in Forge and Sanctuary. The rail adds the nine terms of v · v one at a time; click a cell of the table to jump to that term.</span></p>
     </section>
   </aside>
 
@@ -131,7 +131,7 @@
     <div class="zh">
       <p class="lede">三维欧氏克利福德代数 Cl(3,0) 有 8 块基刀片，每块记成一个 3 位掩码 m：第 0、1、2 位分别表示 e₁、e₂、e₃ 是否出席（e₁₂ 是 e₁e₂ 的简写，I₃ = e₁e₂e₃）。舞台左边是它们的乘法表，右边把选中的一格拆开：左因子与右因子拼成一串，逐个交换排成 e₁ e₂ e₃ 的顺序，每交换一次变一次号；排好后相邻的同号一对按 eᵢ² = +1 抵掉。剩下的方向正是两个掩码的异或。本页是数值演示，不是证明。</p>
       <ol>
-        <li><b>依据的章节。</b><a href="../../zh/ch25-rewriting-and-xor.html#sec-three-bit-blade-masks-and-symplectic-pauli" target="_top">第二十五章 · 三比特刀片掩码、逆序符号与两比特辛泡利字</a>，例题 <a href="../../zh/ch25-rewriting-and-xor.html#ex-pauli-words-xor-sign-table" target="_top">M = 2 的四个泡利词乘法表</a> 与 <a href="../../zh/ch25-rewriting-and-xor.html#ex-xor-pauli-table" target="_top">3 比特刀片异或乘法、伪标量平方与布洛赫算符平方核验</a>。</li>
+        <li><b>依据的章节。</b><a href="../../zh/ch25-rewriting-and-xor.html#sec-three-bit-blade-masks-and-symplectic-pauli" target="_top">铸器与圣殿 · 三比特刀片掩码、逆序符号与两比特辛泡利字</a>，例题 <a href="../../zh/ch25-rewriting-and-xor.html#ex-pauli-words-xor-sign-table" target="_top">M = 2 的四个泡利词乘法表</a> 与 <a href="../../zh/ch25-rewriting-and-xor.html#ex-xor-pauli-table" target="_top">3 比特刀片异或乘法、伪标量平方与布洛赫算符平方核验</a>。</li>
         <li><b>交换次数。</b>左掩码里每个为 1 的第 i 位，都要越过右掩码里下标比它小的每个 1 位：inv = Σᵢ [左的第 i 位]·popcount(右 & (2ⁱ − 1))，符号为 (−1)^inv。舞台上每一次交换画成两条交叉的品红线，数交叉就是数 inv。</li>
         <li><b>泡利字。</b>泡利字场景只用两位：第 0 位记 X，第 1 位记 Z，掩码 3 是 XZ = −iY。注意这里第 1 位是 Z，不是 8 块刀片场景里 e₂ ↦ Y 的那一位；两种编码共用同一条位运算规则。此时 inv = z左·x右，正是合成律的指数 bc（LEAN ✓，下方声明地图）。</li>
         <li><b>向量自乘。</b>v = 3e₁ + 4e₂ + 12e₃ 的九项里，对角三项的掩码异或为 0，给出 9 + 16 + 144 = 169；交叉项 eᵢeⱼ 与 eⱼeᵢ 一正一负，成对抵消。与布洛赫算符 B(3, 4, 12) 的矩阵平方 169·I 一致。</li>
@@ -141,14 +141,14 @@
     <div class="en">
       <p class="lede">The three-dimensional Euclidean Clifford algebra Cl(3,0) has 8 basis blades, each written as a 3-bit mask m: bits 0, 1, 2 say whether e₁, e₂, e₃ are present (e₁₂ is short for e₁e₂, and I₃ = e₁e₂e₃). The left of the stage is their multiplication table; the right takes the chosen cell apart: the left and right factors are joined into one string and swapped one pair at a time into the order e₁ e₂ e₃, each swap flipping the sign; once sorted, each adjacent equal pair cancels by eᵢ² = +1. The directions left over are exactly the XOR of the two masks. The page is a numerical illustration, not a proof.</p>
       <ol>
-        <li><b>The chapter behind it.</b> <a href="../../en/ch25-rewriting-and-xor.html#sec-three-bit-blade-masks-and-symplectic-pauli" target="_top">Chapter 25 · Three-bit blade masks, inversion parity, and two-bit symplectic Pauli words</a>, with the worked examples <a href="../../en/ch25-rewriting-and-xor.html#ex-pauli-words-xor-sign-table" target="_top">the multiplication table of the four Pauli words for M = 2</a> and <a href="../../en/ch25-rewriting-and-xor.html#ex-xor-pauli-table" target="_top">three-bit XOR products, the pseudoscalar square and the Bloch vector square</a>.</li>
+        <li><b>The chapter behind it.</b> <a href="../../en/ch25-rewriting-and-xor.html#sec-three-bit-blade-masks-and-symplectic-pauli" target="_top">Forge and Sanctuary · Three-bit blade masks, inversion parity, and two-bit symplectic Pauli words</a>, with the worked examples <a href="../../en/ch25-rewriting-and-xor.html#ex-pauli-words-xor-sign-table" target="_top">the multiplication table of the four Pauli words for M = 2</a> and <a href="../../en/ch25-rewriting-and-xor.html#ex-xor-pauli-table" target="_top">three-bit XOR products, the pseudoscalar square and the Bloch vector square</a>.</li>
         <li><b>The number of swaps.</b> Each set bit i of the left mask must move past every set bit of the right mask with a smaller index: inv = Σᵢ [bit i of left]·popcount(right & (2ⁱ − 1)), and the sign is (−1)^inv. On the stage every swap is drawn as two crossing magenta lines, so counting crossings is counting inv.</li>
         <li><b>Pauli words.</b> The Pauli scene uses two bits only: bit 0 is X, bit 1 is Z, and mask 3 is XZ = −iY. Bit 1 here is Z, not the e₂ ↦ Y of the eight-blade scene; the two encodings share the same bit rule. Then inv = z_left·x_right, which is the exponent bc of the composition law (LEAN ✓, declaration map below).</li>
         <li><b>A vector squared.</b> Of the nine terms of v = 3e₁ + 4e₂ + 12e₃ squared, the three diagonal ones XOR to the mask 0 and give 9 + 16 + 144 = 169; the cross terms eᵢeⱼ and eⱼeᵢ come with opposite signs and cancel in pairs. This agrees with the matrix square 169·I of the Bloch operator B(3, 4, 12).</li>
         <li><b>Not on the page.</b> Cl(3,0) ≅ M₂(ℂ), the symplectic representation of the Pauli group and the Gottesman–Knill theorem are literature results, not formalized in this book (ARGUED).</li>
       </ol>
     </div>
-    <h3 class="evh"><span class="zh">声明地图 · 第二十五章引用的冻结定理</span><span class="en">Declaration map · the frozen theorems Chapter 25 cites</span></h3>
+    <h3 class="evh"><span class="zh">声明地图 · “把矩阵还原为异或”一节引用的冻结定理</span><span class="en">Declaration map · the frozen theorems cited in “Reducing Matrices to XOR”</span></h3>
     <p class="note"><span class="zh">逐条与正文的定理环境一致；“舞台上”标出页面用到的那几条，其余是本章另引、舞台不画的。链接由构建固定到所钉提交。</span><span class="en">Each entry matches the theorem environment of the chapter; “on the stage” marks the ones the page uses, the others are cited by the chapter but not drawn. The links are pinned to the pinned commit by the build.</span></p>
     <div class="declmap" id="declmap">
       <div class="lean" data-decl="stage"><span class="ok">LEAN ✓</span><span><span class="zh">［舞台上 · 泡利字］Z·X = −(X·Z)，star X = X，star Z = Z，X² = 1，Z² = 1。</span><span class="en">[on the stage · Pauli] Z·X = −(X·Z), star X = X, star Z = Z, X² = 1, Z² = 1. </span><a class="leanref" data-lean-gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" href="#" target="_blank" rel="noopener"><code>qubit_weyl_star</code></a></span></div>

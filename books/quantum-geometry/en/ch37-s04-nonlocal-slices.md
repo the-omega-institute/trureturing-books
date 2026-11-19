@@ -79,6 +79,6 @@ Stepping down the three rows of [@rem-ch37-dream-eraser-synthesis-table], the th
 **The dream-erasure lab.** Three scenes on one density-matrix grid and one screen: Anchors (the decoherence interpolation ρ(λ)), Records (writing and jointly reversing multi-copy phase records) and Waking (the readout projection and the forgotten weight). Green is reserved for the theorems this chapter cites with `lean=`; the screen, the places and the readings “dream” and “waking” are a model chosen for the picture.
 :::
 
-Before carrying this picture of address-mask switching on a single static lattice into the hardware architecture of the next chapter, the record-pinching and sleep-gating algebra assembled across §36.1.1–§36.1.4 unlocks one more haunting riddle of everyday conscious experience right on the spot: why does a waking observer occasionally step into an unfamiliar crossroads and feel an unmistakable jolt of déjà vu—"I have seen this exact scene before in a dream"?
+Before carrying this picture of address-mask switching on a single static lattice into the hardware architecture of [§36.2](ch38-s01-static-qram.md) in this chapter, the record-pinching and sleep-gating algebra assembled across §36.1.1–§36.1.4 unlocks one more haunting riddle of everyday conscious experience right on the spot: why does a waking observer occasionally step into an unfamiliar crossroads and feel an unmistakable jolt of déjà vu—"I have seen this exact scene before in a dream"?
 
 ---

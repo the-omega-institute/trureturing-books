@@ -171,7 +171,7 @@ check('source: green and red stay off the stage (no ok or warn colour in the pag
 }
 check('suite: no fixed waits', !new RegExp('wait' + 'ForTimeout').test(suite));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
-check('registry: live §39.14 entry with five bilingual cards and the nine theorems', !!entry && entry.status === 'live' && entry.chapter === 39 && entry.section === '39.14'
+check('registry: live §38.6 entry with five bilingual cards and the nine theorems', !!entry && entry.status === 'live' && entry.chapter === 38 && entry.section === '38.6'
   && entry.code === 'MAYA//ERROR' && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map((x) => x.gid).sort(), [...GIDS].sort()) && entry.tags.length === entry.tags_en.length && entry.capture_lock === 'links'
   && entry.theory[0].href === `../zh/${THEORY}` && entry.theory[0].href_en === `../en/${THEORY}`);
@@ -280,7 +280,7 @@ async function checkLinks(p, tag) {
   check(`${tag}: one ARGUED, MODEL, NUM and OPEN box each`, await p.evaluate(() => ['argued', 'model', 'num', 'open'].every((c) => document.querySelectorAll(`#evidence .lean.${c}`).length === 1)
     && document.querySelectorAll('#evidence .lean:not(.argued):not(.model):not(.num):not(.open):not(.frozen)').length === 9));
   check(`${tag}: bilingual chapter link in the drawer`, same(await p.$$eval('#drawer .refs a', (els) => els.map((e) => e.getAttribute('href')).sort()), ['zh', 'en'].map((l) => `../../${l}/${THEORY}`).sort()));
-  check(`${tag}: the OPEN box links the two Chapter 34 problems in both languages`, same(await p.$$eval('#evidence .lean.open a', (els) => els.map((e) => e.getAttribute('href')).sort()),
+  check(`${tag}: the OPEN box links the two Chapter 33 problems in both languages`, same(await p.$$eval('#evidence .lean.open a', (els) => els.map((e) => e.getAttribute('href')).sort()),
     ['zh', 'en'].flatMap((l) => OPEN_LINKS.map((x) => `../../${l}/${x}`)).sort()));
 }
 /** Amber, red and green that the page writes outside its whitelist, as computed colours. */
