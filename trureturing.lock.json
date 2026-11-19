@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "d36a3792a95b50d48dbe1b08b15f1f249461d860",
-  "pinned_at": "2026-11-19T03:59:29Z",
+  "commit": "9afcd0aa7c81e8e5dc7efee1d97db59489ff0c49",
+  "pinned_at": "2026-11-19T08:15:21Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -6204,6 +6204,14 @@
       "statement_id": "sha256:f1def1d45a7ded5fabde68f7c2080b1b30564fff83957726a06255dc4ca220a4",
       "line": 51,
       "signature": "theorem parry_stationary_law (k : ℕ) (hk : 2 ≤ k) : let p"
+    },
+    "D5/S3/TotalVariation/ParrySectionMarginals.section_zero_marginals": {
+      "module": "D5/S3/TotalVariation/ParrySectionMarginals",
+      "name": "D5.S3.TotalVariation.ParrySectionMarginals.section_zero_marginals",
+      "kind": "theorem",
+      "statement_id": "sha256:dd2363564832703dc3c1b44909cb1bc7b9c126456ed154fe6ff2335305a26ff2",
+      "line": 22,
+      "signature": "theorem section_zero_marginals {k : ℕ} (hk : 2 ≤ k) (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (hsuffix : ∀ (z : Bool × RelationPath k) (t : ℤ), let j"
     },
     "D5/S3/TotalVariation/ParryTopologicalEntropy.bilateral_entropy": {
       "module": "D5/S3/TotalVariation/ParryTopologicalEntropy",
