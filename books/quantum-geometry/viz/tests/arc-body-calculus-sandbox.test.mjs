@@ -220,7 +220,7 @@ check('source (Rule 2): no amber readout rule, no red or green token, class or p
   && !/--(?:warn|ok)\b|\bc-(?:wn|ok)\b|\.sw\.(?:wn|ok)\b/.test(sources['style.css'] + sources['main.js']) && !/\b(?:c-wn|c-ok)\b|class="sw (?:wn|ok)"/.test(sources['index.html'])
   && !/\b(?:P|palette)\.(?:warn|ok|red|green)\b|\[['"](?:wn|ok)['"]/.test(sources['main.js']));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
-check('registry: live §34.30 entry with five bilingual cards and the eight theorems', !!entry && entry.status === 'live' && entry.chapter === 34 && entry.section === '34.30'
+check('registry: live §30.3 entry with five bilingual cards and the eight theorems', !!entry && entry.status === 'live' && entry.chapter === 30 && entry.section === '30.3'
   && entry.code === 'ARC//CALCULUS' && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map((x) => x.gid).sort(), [...GIDS].sort()) && entry.theory.some((t) => t.href === `../zh/${THEORY}` && t.href_en === `../en/${THEORY}`));
 const chapterCitations = ['zh', 'en'].map((lang) => {
@@ -262,7 +262,7 @@ async function checkLinks(p, tag) {
     && await p.$$eval('[data-lean-gid]', (els) => els.every((e) => e.closest('.col.side #evidence .lean') && e.closest('.lean').querySelector('.ok')?.textContent.trim() === 'LEAN ✓')));
   check(`${tag}: eight green boxes, one ARGUED, one MODEL, one NUM and three red OPEN boxes`, await p.$$eval('#evidence > .lean', (els) => els.filter((e) => e.className === 'lean').length) === 8
     && same(await p.$$eval('#evidence .lean:not([class="lean"])', (els) => els.map((e) => e.className).sort()), ['lean argued', 'lean model', 'lean num', 'lean open', 'lean open', 'lean open']));
-  check(`${tag}: the OPEN boxes name the §34.30 rough non-abelian surface problem, the §34.24 gravity problem and the §34.29 area law`, await p.$$eval('#evidence .lean.open', (els) => els.length === 3
+  check(`${tag}: the OPEN boxes name the §30.3 rough non-abelian surface problem, the §33.5 gravity problem and the §31.2 area law`, await p.$$eval('#evidence .lean.open', (els) => els.length === 3
     && /prob-ch34-rough-nonabelian-surface-calculus/.test(els[0].textContent) && /prob-ch34-gravity-dynamics-and-coupling/.test(els[1].textContent) && /prob-ch34-arithmetic-pivot-area-law/.test(els[2].textContent))
     && same(await p.$$eval('#evidence .lean.open a', (els) => els.map((e) => e.getAttribute('href')).sort()), [...OPEN_LINKS].sort()));
   check(`${tag}: exact bilingual theory link in the drawer`, same(await p.$$eval('#drawer .refs a', (els) => els.map((e) => e.getAttribute('href')).sort()), [...THEORY_LINKS].sort()));

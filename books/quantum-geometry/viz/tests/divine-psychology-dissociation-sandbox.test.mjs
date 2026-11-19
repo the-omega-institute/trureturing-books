@@ -183,7 +183,7 @@ check('source: no possessive ’s and no ⋆ (glyph traps)', !/’s\b/.test(sour
 }
 check('suite: no fixed waits', !new RegExp('wait' + 'ForTimeout').test(suite));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
-check('registry: live §39.18 entry with five bilingual cards and the eight theorems', !!entry && entry.status === 'live' && entry.chapter === 39 && entry.section === '39.18'
+check('registry: live §38.11 entry with five bilingual cards and the eight theorems', !!entry && entry.status === 'live' && entry.chapter === 38 && entry.section === '38.11'
   && entry.code === 'GOD//PSYCHE' && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map((x) => x.gid).sort(), [...GIDS].sort()) && entry.tags.length === entry.tags_en.length && entry.thumbnail === `${ID}/thumb.jpg`
   && entry.theory[0].href === `../zh/${THEORY}` && entry.theory[0].href_en === `../en/${THEORY}`);
@@ -329,7 +329,7 @@ async function checkLinks(p, tag) {
     && await p.$$eval('[data-lean-gid]', (els) => els.every((e) => e.closest('.col.side #evidence .lean') && e.closest('.lean').querySelector('.ok').textContent.trim() === 'LEAN ✓')));
   check(`${tag}: one ARGUED, MODEL, NUM and OPEN box each`, await p.evaluate(() => ['argued', 'model', 'num', 'open'].every((c) => document.querySelectorAll(`#evidence .lean.${c}`).length === 1)
     && document.querySelectorAll('#evidence .lean:not(.argued):not(.model):not(.num):not(.open):not(.frozen)').length === 8));
-  check(`${tag}: bilingual Chapter 39 theory link in the drawer`, same(await p.$$eval('#drawer .refs a', (els) => els.map((e) => e.getAttribute('href')).sort()), ['zh', 'en'].map((l) => `../../${l}/${THEORY}`).sort()));
+  check(`${tag}: bilingual Chapter 38 theory link in the drawer`, same(await p.$$eval('#drawer .refs a', (els) => els.map((e) => e.getAttribute('href')).sort()), ['zh', 'en'].map((l) => `../../${l}/${THEORY}`).sort()));
   check(`${tag}: the OPEN box links the five open problems in both languages`, same(await p.$$eval('#evidence .lean.open a', (els) => els.map((e) => e.getAttribute('href')).sort()),
     ['zh', 'en'].flatMap((l) => OPEN_LINKS.map((x) => `../../${l}/${x}`)).sort()));
   check(`${tag}: the MODEL box draws the clinical boundary in both languages`, await p.evaluate(() => {

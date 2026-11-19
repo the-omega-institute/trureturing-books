@@ -575,7 +575,7 @@ $s_k = \inf\{\delta\ge0 \mid k\text{-SAT}\in 2^{\delta n}(n+m)^{O(1)}\},\quad r_
 $\|\mathbf{r}_A\|^2 + \tau(A:\bar{A}) = \cos^2\theta + \sin^2\theta = 1,\quad S_L(\rho_A) = \sin^2\theta,\quad \chi_{\mathrm{bond}} \ge 2^{S_{\mathrm{cut}}}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 8, 13, 24, [Ch 26](ch30-s05-entanglement-and-entropy.md#sec-ch30-entanglement-entropy-complexity-triad))
+`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 8, 13, 24, [Ch 26 §26.5](ch30-s05-entanglement-and-entropy.md#sec-ch30-entanglement-entropy-complexity-triad))
 
 **Spatial Attractors, `trureturing` Cut-and-Project Observer, Cassini $(-1)^{k+1}$ Seam & Déjà Vu**<br/>(空间吸引子、`trureturing` 黄金切投观察者、卡西尼接缝与似曾相识)
 
@@ -827,7 +827,7 @@ $r^2 + \tau_{L:E} = 1,\quad \operatorname{Re}\operatorname{Tr}(\rho\cdot\mathrm{
 $w(\psi\leftrightarrow\phi) = \langle\phi\mid\psi\rangle\langle\psi\mid\phi\rangle = \lvert\langle\phi\mid\psi\rangle\rvert^2,\quad p(j) = p(j,+) + p(j,-) = q_j,\quad \det(P_{13} G P_{13}^{\mathsf{T}}) = \det G \ge 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 25](ch29-s04-coherence-and-handshake.md#sec-ch29-coherence-handshake-causality))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 25 §25.2](ch29-s04-coherence-and-handshake.md#sec-ch29-coherence-handshake-causality))
 
 **Multi-Observer Consensus Tensor, Emergent Pointer Basis & No Observer-Independent Facts**（多观察者共识张量、去相干指针基涌现与无绝对客观事实）
 
@@ -841,7 +841,7 @@ $w(\psi\leftrightarrow\phi) = \langle\phi\mid\psi\rangle\langle\psi\mid\phi\rang
 $\mathbf{M}_{\mathrm{cons}} = \sum_{j=1}^N w_j\,\mathbf{n}_j\mathbf{n}_j^{\mathsf{T}},\quad I(S:\mathcal{O}_m) = h(\Pi_{\mathrm{all}}) + h(\Pi_F) - h(\Pi_{F^c}),\quad F_{\mathrm{LF}} = \sqrt{5} + 3 + \sqrt{2+\sqrt{2}} > 6$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34](ch33-s05-consensus-and-pointer-bases.md#sec-ch33-consensus-decoherence-pointer))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34 §34.5](ch33-s05-consensus-and-pointer-bases.md#sec-ch33-consensus-decoherence-pointer))
 
 **Cosmic OISC Comparison Primitive & Zero-Background Axiom of Comparison $\mathcal{A}_0$**（宇宙单指令集比较机原语与零背景比较公理）
 
@@ -1079,7 +1079,7 @@ $S_{\mathrm{global}}(\lvert\Psi_{AB}\rangle\langle\Psi_{AB}\rvert) = 0,\quad S_A
 $\det G_{M+1} = (\det G_M)\bigl(1 - \mathbf{c}_M^\top G_M^{-1}\mathbf{c}_M\bigr),\quad N \le d,\quad q_M = \ln\frac{\lvert\Omega_{M-1}\rvert}{\lvert\Omega_M\rvert},\quad B^\dagger B = A^\dagger A \implies B = UA$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34 §34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus), [Ch 10](ch10-gram-geometry-and-order.md), [Ch 25](ch29-timeless-causality-and-gram-space.md), [Ch 34](ch33-all-beings-observers-and-mutual-attractors.md), [Ch 35](ch35-light-pulse-and-self-referential-table.md), [Ch 36](ch37-dreams-quantum-eraser-and-nonlocal-observer.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 34 §34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus), [Ch 10](ch10-gram-geometry-and-order.md), [Ch 25](ch29-timeless-causality-and-gram-space.md), [Ch 34](ch33-all-beings-observers-and-mutual-attractors.md), [Ch 35 §35.1](ch35-light-pulse-and-self-referential-table.md), [Ch 36 §36.1](ch37-dreams-quantum-eraser-and-nonlocal-observer.md))
 
 **Round-Trip Double Projection $\cos^2\theta$, Azimuthal Blind Cone & Imaginary Blind Plane $i$**（往返双投影玻恩平方律（$\cos^2\theta$）、方位角盲锥与 $90^\circ$ 正交盲区“对‘我’不见即为‘虚’（$i$）”）
 
@@ -1093,7 +1093,7 @@ $\det G_{M+1} = (\det G_M)\bigl(1 - \mathbf{c}_M^\top G_M^{-1}\mathbf{c}_M\bigr)
 $P_{\mathbf{I}} P_{\mathbf{V}} P_{\mathbf{I}} = (\cos^2\theta)\,P_{\mathbf{I}},\quad \cos^2\theta + \sin^2\theta = 1,\quad R^\dagger = -R \land RR^\dagger = I \implies R^2 = -I,\quad \frac{d}{dt}\operatorname{Tr}(\rho_t P) = \operatorname{Re}\bigl(i\operatorname{Tr}(\rho_t[H,P])\bigr)$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 29 §29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [Ch 2](ch02-born-rule.md), [Ch 5](ch05-complex-phase-and-rotors.md), [Ch 12](ch12-measurement-computation-and-gradients.md), [Ch 27 §27.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion), [Ch 35](ch35-light-pulse-and-self-referential-table.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 29 §29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [Ch 2](ch02-born-rule.md), [Ch 5](ch05-complex-phase-and-rotors.md), [Ch 12](ch12-measurement-computation-and-gradients.md), [Ch 27 §27.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion), [Ch 35 §35.1](ch35-light-pulse-and-self-referential-table.md))
 
 **Spherical Attractor Basins, Bounded-Martingale Sampling Laws & Single-Outcome Selection Boundary**（球面吸引盆、有界鞅抽样律与单次记录选支实现边界）
 
@@ -1135,7 +1135,7 @@ $[R_a, R_b] \neq 0,\quad T \cdot \Delta E \ge \hbar\,\arccos\lvert\langle\psi_0\
 $D(\mathcal{N}(\rho)\,\|\,\mathcal{N}(\sigma)) \le D(\rho\,\|\,\sigma),\quad I(Q(H); Y) \le I(H; Y),\quad Q_{\mathrm{erase}}^{\min} = k_B T \ln 2 \cdot H(H \mid Q_\star(H))$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` ([Ch 34 §34.10](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning), [§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field), [§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus), [Ch 35](ch35-light-pulse-and-self-referential-table.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `MODEL` ([Ch 34 §34.10](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning), [§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field), [§34.7](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus), [Ch 35 §35.1](ch35-light-pulse-and-self-referential-table.md))
 
 **Shared Thermodynamic Arrow, Twin Past-Hypothesis Initial Conditions & Horizon Anti-Circularity Boundary for $\Lambda_{\mathrm{cos}}$**（共享热力学时间箭头、过去假设双重初值与宇宙学常数视界反循环边界）
 
@@ -1261,7 +1261,7 @@ $(1 - v_\epsilon)^2 + c_\epsilon^2 \equiv 1,\quad D_{\mathrm{cs}}[f]\!\bigl(x_0;
 $\Sigma_{\mathrm{sag}}(\tfrac{1}{2}; P_\epsilon) = -\frac{1}{2}\ln\varepsilon_{\mathrm{self}} + C_{\mathrm{sag}} + \mathcal{O}(\varepsilon_{\mathrm{self}}),\quad \Delta_\epsilon^{\mathrm{HB}}(u,t) \equiv \epsilon\frac{\partial}{\partial u}\lvert\xi\rvert^2 = 4u\epsilon K_\epsilon(s,s),\quad K_\epsilon \succeq 0 \iff \operatorname{RH},\quad \sum_{e\subset\partial\mathcal{R}}\Phi_\xi(e) \equiv 0$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 31 §31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler), [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs), [§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling), [§30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes), [Ch 22 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4), [Ch 35](ch35-light-pulse-and-self-referential-table.md), [App C](appendix-c.md))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 31 §31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler), [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs), [§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling), [§30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes), [Ch 22 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4), [Ch 35 §35.1](ch35-light-pulse-and-self-referential-table.md), [App C](appendix-c.md))
 
 **Endogenous Berry Holonomy, Finite Bargmann Path Product & Nine-Bridge (`H1`–`H9`) Post-Berry Audit of $\mathcal{A}_0$ Corollaries**（内生贝里和乐、有限巴格曼路径乘积与比较公理 $\mathcal{A}_0$ 推论链的后贝里九桥（`H1`–`H9`）审计）
 

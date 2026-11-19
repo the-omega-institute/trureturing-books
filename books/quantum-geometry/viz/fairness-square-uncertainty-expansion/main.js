@@ -1,5 +1,5 @@
 /* Quantum Geometry · ORTHO//EXPAND (fairness-square-uncertainty-expansion)
-   Stage-first lab for the Chapter 31 thread "fairness → squaring → phase loss → uncertainty → orthogonal expansion".
+   Stage-first lab for the Chapter 27, §27.4 thread "fairness → squaring → phase loss → uncertainty → orthogonal expansion".
    Six scenes share one canvas and one rail: the open helix and its closed planar shadow (3D); the truncation horizon
    (2D); two vectors, their squares and the rotors AB, BA (2D); relative phase on the Bloch sphere (3D); the
    Robertson–Schrödinger split on the tangent plane (3D); a finite Krylov box against axes standing outside it (2D).

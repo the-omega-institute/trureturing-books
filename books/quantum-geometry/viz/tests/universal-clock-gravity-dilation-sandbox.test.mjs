@@ -111,13 +111,13 @@ const { page, check } = T;
 {
   const html = fs.readFileSync(path.join(DIR, 'index.html'), 'utf8'), css = fs.readFileSync(path.join(DIR, 'style.css'), 'utf8'), js = fs.readFileSync(path.join(DIR, 'main.js'), 'utf8');
   const reg = JSON.parse(fs.readFileSync(REGISTRY, 'utf8')).visualizations.find((v) => v.id === ID) || {};
-  check('registry: live, chapter 39 §39.8, code CLOCK//DILATION', reg.status === 'live' && reg.chapter === 39 && reg.section === '39.8' && reg.code === 'CLOCK//DILATION');
+  check('registry: live, chapter 33 §33.7, code CLOCK//DILATION', reg.status === 'live' && reg.chapter === 33 && reg.section === '33.7' && reg.code === 'CLOCK//DILATION');
   check('registry: the five cards in order', same(reg.presets, Object.keys(CARDS)));
   check('registry: exactly the five cited theorems', same((reg.lean || []).map((l) => l.gid), GIDS));
-  check('registry: theory points at §39.8 in both languages', reg.theory && reg.theory[0].href === `../zh/${SECTION}` && reg.theory[0].href_en === `../en/${SECTION}`);
+  check('registry: theory points at §33.7 in both languages', reg.theory && reg.theory[0].href === `../zh/${SECTION}` && reg.theory[0].href_en === `../en/${SECTION}`);
   check('page: every card carries data-still in the source', Object.keys(CARDS).every((c) => new RegExp(`data-preset="${c}" data-still="end"`).test(html)));
   check('page: as many Chinese as English fragments', (html.match(/class="[^"]*\bzh\b/g) || []).length === (html.match(/class="[^"]*\ben\b/g) || []).length);
-  check('page: the drawer links §39.8 in both languages', html.includes(`../../zh/${SECTION}`) && html.includes(`../../en/${SECTION}`));
+  check('page: the drawer links §33.7 in both languages', html.includes(`../../zh/${SECTION}`) && html.includes(`../../en/${SECTION}`));
   check('no colour literals and no palette switch in the page sources', ![html, css, js].some((src) => /#[0-9a-fA-F]{3,8}\b|rgba?\(\s*\d|hsla?\(\s*\d/.test(src.replace(/&#\d+;/g, '')))
     && ![html, css, js].some((src) => /data-tr-palette|trPalette|prefers-color-scheme/.test(src)));
   check('style.css does not override the grid columns of the lab', !/grid-template-columns/.test(css) && !/\.app\.lab\s*\{/.test(css));

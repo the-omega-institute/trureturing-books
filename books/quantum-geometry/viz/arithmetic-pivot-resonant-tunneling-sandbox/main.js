@@ -25,7 +25,7 @@
   const MONT = 4 / PI - 1;                                         // Montgomery's constant 4/π − 1
   const GAMMAS = [14.134725141734694, 21.022039638771555, 25.010857580145689, 30.424876125859513, 32.935061587739189];
   const G1 = GAMMAS[0];
-  /* the certified zero of ζ₁₉ (100-digit interval Rouché certificate, §34.29 data): σ*, t* and the phases t* ln p mod 2π */
+  /* the certified zero of ζ₁₉ (100-digit interval Rouché certificate, §31.2 data): σ*, t* and the phases t* ln p mod 2π */
   const SIG_STAR = 1.0069878448871248, T_STAR_TEXT = '155417750480610.1069058344', ABS_CENTRE_100 = 2.7466363906723524e-86;
   const PHASE = { 2: 1.465729501889243672, 3: 2.149356805609750689, 5: 3.0497022441563913, 7: 3.355825322865542171, 11: 3.787888894395207131,
     13: 3.789380166089625556, 17: 3.803068180656076113, 19: 3.81008141071505576, 23: 4.170915365700577421, 29: 2.166187896859437383,

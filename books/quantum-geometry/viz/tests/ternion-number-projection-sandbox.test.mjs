@@ -21,7 +21,7 @@ const ID = 'ternion-number-projection-sandbox';
 const DIR = path.join(ROOT, 'books', BOOK, 'viz', ID);
 const THEORY =
   'ch39-s19-inexpressible-ternions-and-number-projections.html#sec-ch39-inexpressible-ternions-and-number-projections';
-const SECTION = '39.19';
+const SECTION = '32.2';
 const CARDS = {
   'flat-3d-zero-divisor-gimbal-deadlock': { thetaDeg: 179, tilt: 45, rat: 0, cam: 'deadlock', play: true },
   'hamilton-quaternion-w-shadow-tax': { thetaDeg: '2star', tilt: 35, rat: 1, cam: 'panorama', play: true },
@@ -189,7 +189,7 @@ check(
 );
 check(
   'registration matches the standalone section, all five cards and all ten GIDs',
-  entry.chapter === 39 &&
+  entry.chapter === 32 &&
     entry.section === SECTION &&
     entry.code === 'TERNION//NUMBERS' &&
     same(entry.presets, Object.keys(CARDS)) &&
@@ -545,7 +545,7 @@ check(
       !!q('main.center > #stage > .scan') && !!q('main.center > #stage > .vig') && !!q('#stage > #hudTl #hudBig') &&
       !!q('main.center > .strip #plot') && !q('#stage .strip') &&
       !!q('aside.col.side > #readouts') && q('aside.col.side > #evidence').firstElementChild.id === 'infoBtn' &&
-      ['§39.19', '5', 'NUM', 'trureturing'].every((x) => asides.includes(x)) &&
+      ['§32.2', '5', 'NUM', 'trureturing'].every((x) => asides.includes(x)) &&
       [...document.querySelectorAll('.tagline > span')].every((el) => el.querySelector('em') && el.firstChild.nodeType === 3) &&
       !!q('link[href*="fonts.googleapis.com/css2?family=Chakra+Petch"]') &&
       [...document.querySelectorAll('#evidence .lean')].every((el) => el.children.length === 2 && [...el.children].every((c) => c.tagName === 'SPAN')) &&

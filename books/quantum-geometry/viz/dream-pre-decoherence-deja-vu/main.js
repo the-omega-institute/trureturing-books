@@ -1,4 +1,4 @@
-/* ORTHO//DEJAVU · 梦的预编译与似曾相识 (chapter 37 supplement).
+/* ORTHO//DEJAVU · 梦的预编译与似曾相识 (chapter 36, §36.1.5).
    One projection sandtable, three scenes on one canvas:
      basis    the Bloch disc of the real qubit |ψ⟩ = (cos θ, sin θ), r = (sin 2θ, 0, cos 2θ), and a ruler, the axis
               n = (sin β, 0, cos β). Two programs share it:

@@ -1,5 +1,5 @@
 /* CLOCK//DILATION · 普适比较主频、光速推理精度下界与引力信息密度钟慢
-   Universal comparison clock, light-speed precision floor and gravitational information-density dilation (§39.8).
+   Universal comparison clock, light-speed precision floor and gravitational information-density dilation (§33.7).
    Two scenes on one lit stage (kit.solid, x right, z up):
      clocks  observers A (deep space: η = 0, β = 0) and B (load η = η_info = r_s/r, speed β) each turn a violet master
              flywheel at the same master frequency ν₀ = 1: one turn per beat of the rail, through the same angle on

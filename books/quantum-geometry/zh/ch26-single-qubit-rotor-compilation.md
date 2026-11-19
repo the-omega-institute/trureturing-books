@@ -182,7 +182,7 @@ $$
 
 ## ZYZ 旋转器编译器 Python 3 实现与数值核验 {#sec-zyz-rotor-compiler-python}
 
-这里沿用前章引擎的实系数范围：编译得到实偶旋转器，单位条件使 `reverse()` 可作逆元，`norm_squared()` 也在这一范围内核验归一化。
+这里沿用[上一篇](ch25-rewriting-and-xor.md)引擎的实系数范围：编译得到实偶旋转器，单位条件使 `reverse()` 可作逆元，`norm_squared()` 也在这一范围内核验归一化。
 
 下面是紧接在 `GeometricState` 之后的完整 Python 3 `RotorCompiler` 实现与自检函数（取自 `part7_engine.py` 的后半部分）：
 

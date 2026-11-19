@@ -1,6 +1,6 @@
 /* BLADE//XOR · 刀片乘法: the multiplication table of basis blades, and one product taken apart.
      cl3     the 8 basis blades of Cl(3,0) as 3-bit masks m (bit 0, 1, 2 = e₁, e₂, e₃). Product mask = left XOR right;
-             sign = (−1)^inv with inv(l, r) = Σᵢ [bit i of l]·popcount(r & (2ⁱ − 1)) (chapter 25, `_blade_sign`).
+             sign = (−1)^inv with inv(l, r) = Σᵢ [bit i of l]·popcount(r & (2ⁱ − 1)) (Forge and Sanctuary · Reducing Matrices to XOR, `_blade_sign`).
              The right side of the stage joins the factors into one string, moves each right factor left past the
              larger left factors (one swap = one sign flip, drawn as two crossing lines), then cancels each adjacent
              equal pair by eᵢ² = +1.

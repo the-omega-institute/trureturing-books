@@ -18,7 +18,7 @@
 <div class="app lab" id="app">
 <header class="top">
   <div class="brand">
-    <a class="crumb" href="../"><span class="zh">◂ 第 34 章 · §34.17</span><span class="en">◂ Ch. 34 · §34.17</span></a>
+    <a class="crumb" href="../"><span class="zh">◂ 第 34 章 · §34.6</span><span class="en">◂ Ch. 34 · §34.6</span></a>
     <h1 class="logo" data-text="HORIZON//THERMO">HORIZON<span>//</span>THERMO</h1>
     <div class="tagline"><span class="zh">有界视界热力学 · <em>熵不在态里，在视界切断了几条弧：全看见时是 0，只看见一半时最大。</em></span><span class="en">Bounded-horizon thermodynamics · <em>the entropy is not in the state but in how many arcs the horizon cuts: zero when you see everything, largest when you see half.</em></span></div>
   </div>
@@ -26,7 +26,7 @@
 </header>
 <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
   <section class="panel sec">
-    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§34.17</span></h2>
+    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§34.6</span></h2>
     <div class="presets cards" id="presets">
       <button class="preset" data-preset="omniscient-zero" aria-pressed="false"><span class="code">ORACLE · N<sub>A</sub> = 12</span><span class="cn zh">全视界：六条弧完整，全局纯态 S = 0</span><span class="cn en">Full horizon: six arcs unbroken, global S = 0</span></button>
       <button class="preset" data-preset="isolated-zeno" aria-pressed="false"><span class="code">ZENO · θ = 0°</span><span class="cn zh">积态 |00⟩：零切断、S<sub>A</sub> = 0、T<sub>eff</sub> = 0 的冻石</span><span class="cn en">Product state |00⟩: nothing severed, S<sub>A</sub> = 0, T<sub>eff</sub> = 0</span></button>
@@ -109,7 +109,7 @@
       <li><b>朗道尔热。</b>把一个比特从最大混合复位到 |0⟩，热浴在温度 T 时至少放热 k<sub>B</sub>T ln 2；页面示意地取 T = T<sub>eff</sub>，给出 (k<sub>B</sub>T<sub>eff</sub>/ΔE) ln 2 个 ΔE，θ = 30° 时是 0.630930 ΔE。依据栏的 Lean 恒等式在理想复位 I = 0、D = 0 上演示：βQ = −ΔS<sub>sys</sub> = S<sub>A</sub>。</li>
       <li><b>余弦不动点。</b>θ* = cos θ* = 0.73908513 rad = 42.346459° 落在 0° 与 45° 之间：cos²θ* = 0.546247、sin²θ* = 0.453753，序偏 cos 2θ* = 9.25%，S<sub>A</sub> = 0.993820 比特，k<sub>B</sub>T<sub>eff</sub>/ΔE = 5.390324。42.35° 只是四舍五入的近似（差 0.003541°）。把它读成冻石与热寂之间的“活的稳态”是本书的诠释，页面不断言 θ* 在物理上被选中。</li>
     </ol>
-    <p class="lede refs">书中：<a href="../../zh/ch34-s17-entanglement-horizon-and-thermodynamics.html#sec-ch34-entanglement-horizon-and-thermodynamics" target="_top">§34.17 受限不妄我、跨视界纠缠与热力学涌现</a></p>
+    <p class="lede refs">书中：<a href="../../zh/ch34-s17-entanglement-horizon-and-thermodynamics.html#sec-ch34-entanglement-horizon-and-thermodynamics" target="_top">§34.6 受限不妄我、跨视界纠缠与热力学涌现</a></p>
   </div>
   <div class="en">
     <p class="lede">This is a numerical sandbox, not a proof. Every number is computed on the page (NUM); each Lean theorem is shown only on the one instance named in the evidence panel.</p>
@@ -121,7 +121,7 @@
       <li><b>Landauer heat.</b> Resetting one maximally mixed bit to |0⟩ with a bath at temperature T releases at least k<sub>B</sub>T ln 2 of heat; the page schematically takes T = T<sub>eff</sub>, which gives (k<sub>B</sub>T<sub>eff</sub>/ΔE) ln 2 in units of ΔE, 0.630930 ΔE at θ = 30°. The Lean identity of the evidence panel is shown on the ideal reset I = 0, D = 0: βQ = −ΔS<sub>sys</sub> = S<sub>A</sub>.</li>
       <li><b>The cosine fixed point.</b> θ* = cos θ* = 0.73908513 rad = 42.346459° lies between 0° and 45°: cos²θ* = 0.546247, sin²θ* = 0.453753, order bias cos 2θ* = 9.25%, S<sub>A</sub> = 0.993820 bits and k<sub>B</sub>T<sub>eff</sub>/ΔE = 5.390324. 42.35° is only a rounded value (off by 0.003541°). Reading it as a living steady state between the frozen stone and heat death is the interpretation of this book; the page does not claim that θ* is physically selected.</li>
     </ol>
-    <p class="lede refs">In the book: <a href="../../en/ch34-s17-entanglement-horizon-and-thermodynamics.html#sec-ch34-entanglement-horizon-and-thermodynamics" target="_top">§34.17 Bounded non-delusional selfhood, cross-horizon entanglement and emergent thermodynamics</a></p>
+    <p class="lede refs">In the book: <a href="../../en/ch34-s17-entanglement-horizon-and-thermodynamics.html#sec-ch34-entanglement-horizon-and-thermodynamics" target="_top">§34.6 Bounded non-delusional selfhood, cross-horizon entanglement and emergent thermodynamics</a></p>
   </div>
   <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">开放问题：黑洞信息问题——在完整的量子引力里，霍金辐射的熵是否沿 Page 曲线回落、由何种微观机制实现，仍未解决。页面的十二比特配对模型不对它作任何断言。</span><span class="en">Open problem: the black-hole information problem — whether, in a complete theory of quantum gravity, the entropy of Hawking radiation follows a Page curve back down, and by what microscopic mechanism, is unsettled. The twelve-qubit pair model of this page asserts nothing about it.</span></span></div>
 </div></div>

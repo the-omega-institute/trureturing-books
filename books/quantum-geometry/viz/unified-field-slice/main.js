@@ -1,4 +1,4 @@
-/* ORTHO//UNIFIED: three pictures from the first half of Chapter 32, on one rail.
+/* ORTHO//UNIFIED: three pictures from the first half of Chapter 28, on one rail.
    Clock: the rapidity η carries (1, 0) to (cosh η, sinh η); the worldline crosses t = 1 at height tanh η, and moved
           across to the unit circle that height lands at θ = gd(η): sin θ = tanh η (the speed), cos θ = sech η = 1/γ
           (the proper-time rate). The arc length θ equals the shadow cos θ only at the cosine fixed point θ*.

@@ -4,7 +4,7 @@
 // stageFirstChecks first. Then every count the page shows is redone here another way: N, log₂N and N − 1 by building
 // the heap-numbered binary tree recursively (node h has children 2h and 2h + 1, leaves 64 … 127), the switches an
 // address sets by descending that heap from the root by its bits, the scan by walking a list cell by cell, and the
-// page walk from Chapter 38's own definitions (P[0] = b₀, P[i] = addr(Tᵢ), Tᵢ[j] = addr(Dᵢ,ⱼ); b₀ = 0x1000,
+// page walk from Chapter 36's own definitions (P[0] = b₀, P[i] = addr(Tᵢ), Tᵢ[j] = addr(Dᵢ,ⱼ); b₀ = 0x1000,
 // addr(T₁) = 0x2000, addr(D₁,₂) = 0x9000 and the three rows of the chapter's table). Read through window.POINTER_DEBUG.
 // The same state is also built as a lit solid (kit.solid, a schematic die): its cells and switches are checked against an
 // H-tree built here by recursive halving, its pillars, beads, paths and dereference beam against the counts above, and
@@ -38,7 +38,7 @@ const toLP = (h) => { let l = 0; while ((1 << (l + 1)) <= h) l++; return [l, h -
 const keyOf = (lp) => `${lp[0]}:${lp[1]}`;
 /** A linear scan: walk the list until the cell holding `a`, counting steps. */
 const scanCount = (a) => { const cells = Array.from({ length: NCELLS }, (_, i) => i); let steps = 0; for (const c of cells) { steps++; if (c === a) return steps; } return -1; };
-/** Chapter 38's page memory, built from its definitions, and Walk_L. */
+/** Chapter 36's page memory, built from its definitions, and Walk_L. */
 const CH = { b0: 0x1000, T1: 0x2000, D12: 0x9000 };
 const walkCh = (mem, idx) => { let b = CH.b0; const vals = []; for (const i of idx) { b = mem[b][i]; vals.push(b); } return vals; };
 

@@ -166,7 +166,7 @@ $$
 
 ## Python 3 ZYZ Rotor Compiler Implementation and Numerical Verification {#sec-zyz-rotor-compiler-python}
 
-We keep the real coefficients of the preceding chapter's engine: compilation produces real even rotors, whose unit condition makes `reverse()` their inverse; `norm_squared()` checks normalization within this same domain.
+We keep the real coefficients of the [preceding companion section](ch25-rewriting-and-xor.md)'s engine: compilation produces real even rotors, whose unit condition makes `reverse()` their inverse; `norm_squared()` checks normalization within this same domain.
 
 Below is the complete runnable Python 3 `RotorCompiler` and `self_test()` implementation (building directly on `GeometricState` from [Reducing Matrices to XOR: Three-Bit Blades and the XOR–Pauli Geometric Algebra Engine](ch25-rewriting-and-xor.md)):
 

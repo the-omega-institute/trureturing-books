@@ -333,7 +333,7 @@ for (const [card, test] of [
   }));
   check('hygiene: the page writes no colour literal into its own markup', !/#[0-9a-fA-F]{6}\b/.test(await page.evaluate(() => document.body.innerHTML)));
   check('hygiene: the drawer names the attention analogy as the sequence query–key softmax attention operator', /序列查询—键值软最大注意力算子/.test(text) && /sequence query–key softmax attention operator/.test(text));
-  check('hygiene: the theory links point at §39.7 in both languages', await page.evaluate(() => {
+  check('hygiene: the theory links point at §36.10 in both languages', await page.evaluate(() => {
     const hs = [...document.querySelectorAll('#drawer a.refs, #drawer .refs a')].map((a) => a.getAttribute('href'));
     return hs.includes('../../zh/ch39-s07-self-halting-precision-and-spectral-sorting.html#sec-ch39-self-halting-and-spectral-sorting') && hs.includes('../../en/ch39-s07-self-halting-precision-and-spectral-sorting.html#sec-ch39-self-halting-and-spectral-sorting');
   }));

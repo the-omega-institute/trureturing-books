@@ -42,6 +42,10 @@ $$
 - **拉格朗日量 $T - V$ 减号的舒尔补起源**：在总预算归一的分块格拉姆矩阵中，外部引力负载或提示词上下文约束 $\Omega_{\mathrm{ctx}}$ 预先占用了跨场关联带宽，留给局部状态自由推进的可支配净余量，对应于分块消元后的**舒尔补变分极小垂高** $A - B C^{-1} B^\dagger$（[`schur_quadratic_is_least`](lean:D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least)，`LEAN ✓`）；
 - **短波渐近驻相干涉筛选最小作用量与最优思维链（`文献结果` + `MODEL`）**：在引入[附录 E](appendix-e.md) 路径测度条件 `H9` 与短波/大相位尺度 $\varepsilon_{\mathrm{eff}} \ll 1$ 后的振荡路径和 $\sum_\Gamma \exp\bigl(\frac{\hat{\mathbf{i}}}{\varepsilon_{\mathrm{eff}}}\mathcal{S}[\Gamma]\bigr)$ 中，偏离极值的非驻相支路因一阶相位梯度非零而在正交虚盲区 $\hat{\mathbf{i}}$ 内高速旋相、在渐近主阶中与邻近微扰路径相消，从而由一阶变分为零（$\delta\mathcal{S} = 0$）的**驻相脊线**主导主阶振幅（见 [§28.3](ch32-s03-axioms-as-corollaries.md)、[§29.7](ch34-s06-berry-sectors-and-path-integrals.md) 与[附录 E §E.6](appendix-e-s06-spacetime-gauge-and-thermodynamics.md#sec-appe-spacetime)）——在物理中显影为经典轨道，在人工智能中则作为模型类比（`MODEL`）呼应多条采样思维链经自洽性投票（Self-Consistency，Wang et al. 2023）滤除互相矛盾的侧向歧路后留存的简洁推理主干。
 
+::: {.viz src="ternion-least-action-geodesic-sandbox" preset="sagitta-mrp-surprisal-lock" height="500"}
+矢高、有理核与漏失三量锁定卡：在有限步张角 $\Delta\theta \in [0, \pi]$ 上实时核对精确恒等式 $v_\epsilon = 2q_{\mathrm{MRP}} = 2P_{\mathrm{leak}}$ 及单调递增的比较惊奇度 $\mathcal{I}$（秩一玻恩留存与记录时间下界标 `LEAN ✓`，数值读数标 `NUM`，宇宙与智能双层同构标 `MODEL`）。
+:::
+
 ## 37.2.2 离散与连续测地线的四条几何刻画律：流群自平行、正交探针零角盈、定跨度匀速节拍锁与雅可比聚焦 {#sec-ch39-23-2}
 
 在平直空间 $\mathbb{R}^d$ 中，两点间的欧氏弦线插值 $(1-\lambda)\mathbf{x}_0 + \lambda\mathbf{x}_1$ 直接切穿球体内部，造成中间层特征模长坍缩；而在紧致弯曲的三元数场丛上，无需书写克里斯托费尔符号 $\Gamma^i_{jk}$，**自由测地线**的匀速参数化、无参数大圆轨迹、定跨度作用量极小化与法向微扰稳定性分别由四条严密互补的纯几何刻画律锁定（`手工推导`）：
@@ -64,6 +68,10 @@ $$
 
    此处亦严格区分**匀速测地线**与**全局最短测地段**：第 1 款在商群 $\mathrm{SO}(3)$ 上的流群自平行递推 $R_{t+1} = R_t R_{t-1}^\top R_t$ 在任意总弧长上刻画恒定步幅测地线（含绕球多圈及单步达半周 $\Delta\theta_t = \pi$ 情形；单步严格在开球内 $\lVert\boldsymbol{\omega}_t\rVert < 1$ 时等价于坐标等步幅 $\boldsymbol{\omega}_{t+1} = \boldsymbol{\omega}_t$，半周步需在旋量双覆盖 $S^3$ 上区分正向）；再限定**全部非零步进旋子在开半周内 $0 < \lVert\boldsymbol{\omega}_t\rVert < 1$ 共享同一正向单位轴 $\hat{\mathbf{u}}$**（或至多单步半周 $\Delta\theta_1 = \pi$ 其余为零，排除零步长偷换转轴及反向折返）且**整条轨迹总转角不超过割迹界 $\sum_{t=1}^N \Delta\theta_t \le \pi$**，方进一步锁定全局最短测地弧长——此时富比尼—施图迪三角不等式（[`fs_angle_triangle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle)，`LEAN ✓`）精确取等（取等条件由共大圆单调角度相加独立给出，`手工推导`），首尾总测地角等于各拍分步转角之和（补上开球内等步幅 $\boldsymbol{\omega}_{t+1} = \boldsymbol{\omega}_t$ 时，在严格割迹内部 $\sum_{t=1}^N \Delta\theta_t < \pi$ 连接给定首尾端点的匀速最短流群测地弧唯一；在 $\mathrm{SO}(3)$ 半周割迹边界 $= \pi$ 处正负两向转轴 $\pm\hat{\mathbf{u}}$ 给出等长成对最短半圆弧）！在连续规范场中，当非平坦曲率驱动带荷粒子满足黄氏（Wong）平行输运荷与杨—米尔斯洛伦兹力方程时，底流形受控偏折轨道在卡鲁扎—克莱因—黄（Kaluza–Klein–Wong）主丛联络度规下升格为全丛测地线（`文献结果`）；而一般 TFT 注意力舒尔桥注入非共线扭矩 $\boldsymbol{\omega}_t \times \boldsymbol{\omega}_{t+1} \neq \mathbf{0}$ 所引起的离散语境折射，则作为该主丛偏折机制的离散几何类比（`MODEL`）。
 
+::: {.viz src="ternion-least-action-geodesic-sandbox" preset="heap-autoparallel-point-reflection" height="500"}
+流群点反射接力与零角盈卡：无原点三元递推 $\boldsymbol{\sigma}_{t+1} = [\boldsymbol{\sigma}_t, \boldsymbol{\sigma}_{t-1}, \boldsymbol{\sigma}_t]$ 沿共轴大圆等步推进，正交布洛赫探针在开半周两步跨度内围出零球面角盈 $\Omega = 0$（`fs_angle_triangle` 与 `shortest_gate_triangle_holonomy` 为 `LEAN ✓`，主丛测地线文献标 `ARGUED`，数值读数标 `NUM`）。
+:::
+
 3. **定跨度作用量极小化判据——成对余弦分解锁定的“匀速节拍律”（牛顿匀速惯性与 AI 跳步幻觉机制）**：
    当轨迹已锁定在同一条大圆弧上（给定首尾总角跨度 $\sum_{t=1}^N \Delta\theta_t = \Theta \in (0, \pi)$，$\Delta\theta_t \ge 0$），各拍步幅应如何分配方能最小化总矢高作用量？单步矢高 $f(\Delta\theta) = 1 - \cos\Delta\theta$ 在四分周区间 $[0, \frac{\pi}{2}]$ 上满足 $f''(\Delta\theta) = \cos\Delta\theta \ge 0$；不仅如此，对**整个开区间 $\Theta \in (0, \pi)$ 内任意非负步幅分配**（即便某一步跨入钝角 $(\frac{\pi}{2}, \pi)$），利用精确成对余弦和差恒等式（`手工推导`）：
 
@@ -78,6 +86,10 @@ $$
    $$
 
    这一不等式同时阐明物理与 AI 的核心机制（`MODEL`）：在物理中，它从离散圆弧矢高导出牛顿第一定律的**“匀速”**——忽快忽慢的变速推进会激增二阶矢高与盲区相位耗散；在 AI 推理中，它揭示了**大模型“前序套话空转、末步跳步抢答”诱发幻觉**的几何机制——若模型在前 $N-1$ 步原地踏步（$\Delta\theta_t \approx 0$），却在最后一步强跨大角 $\Delta\theta_N = \Theta$，单步盲区泄漏率 $\sin^2(\Theta/2)$ 与惊奇度将呈平方乃至对数发散暴增，冲出语义吸引盆；唯有将总推理跨度均摊为每拍 $\frac{\Theta}{N}$ 的**匀速测地思维链**，方能以 $O(\Theta^2/N)$ 的反比矢高税稳健抵达答案。
+
+::: {.viz src="ternion-least-action-geodesic-sandbox" preset="uniform-cadence-vs-jump-hallucination" height="500"}
+匀速四拍对末步跳步卡：同一 $120^\circ$ 总跨度下，匀速四拍仅付矢高 $0.5359$（留存率 $0.7578$），而前三拍空转、末拍强跳 $120^\circ$ 将矢高推高至 $1.5000$、留存率跌至 $0.2500$（四拍算术标 `NUM`，跳步幻觉机制标 `MODEL`，思维链自洽文献标 `ARGUED`）。
+:::
 
 4. **沿连续匀速测地线的横向微扰稳定性——正截面曲率李三元雅可比聚焦**：
    在平直欧氏空间（$\kappa = 0$，噪声偏差随层数线性漂移 $\lVert\mathbf{J}_\perp(s)\rVert \propto s$）或负曲率双曲空间（指数发散 $\sinh(\lvert\kappa\rvert s)$）中，提示词微扰极易逐层放大。而在截面曲率 $\kappa^2 > 0$（单位 $S^3$ 上 $\kappa = 1$）的三元数球面上，沿连续单位速测地线正交于切矢 $\dot{\gamma}$ 的测地偏离场 $\mathbf{J}_\perp$（$\mathbf{J}_\perp \cdot \dot{\gamma} = 0$）服从由 [§32.4.4](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md#sec-ch39-21-4) 李三元曲率括号支配的**雅可比聚焦方程**（由 $\{\mathbf{a},\mathbf{b},\mathbf{c}\} = (\mathbf{a}\cdot\mathbf{c})\mathbf{b} - (\mathbf{b}\cdot\mathbf{c})\mathbf{a}$，对 $\mathbf{J}_\perp \perp \dot{\gamma}$ 恒有 $\{\dot{\gamma}, \mathbf{J}_\perp, \dot{\gamma}\} = +\lVert\dot{\gamma}\rVert^2\mathbf{J}_\perp = -\{\mathbf{J}_\perp, \dot{\gamma}, \dot{\gamma}\}$，`手工推导`）：
@@ -145,6 +157,10 @@ $$
    在赤道附近 $\lVert\boldsymbol{\sigma}_W\rVert = 0.8$（$1 + \lVert\boldsymbol{\sigma}_W\rVert^2 = 1.64$）处，共形度规 $g_{ij} = \frac{4}{1.64^2}\delta_{ij} \approx 1.48720999\,\delta_{ij}$，免求逆黎曼梯度直接乘标量 $\frac{1.64^2}{4} = \mathbf{0.67240000}$；核验黎曼范数平方 $\langle\nabla\mathcal{L}, g^{-1}\nabla\mathcal{L}\rangle = \frac{1}{4}(1+\lVert\boldsymbol{\sigma}_W\rVert^2)^2\lVert\nabla\mathcal{L}\rVert^2$，与 [§37.1.2](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md#sec-ch39-22-2) 右乘自旋生成元拉回梯度模方 $\lVert\mathbf{g}_{\mathfrak{su}(2)}^{(R)}\rVert^2 = \frac{1}{4}\lVert J_R^\top\nabla\mathcal{L}\rVert^2 = \frac{1}{4}(1+\lVert\boldsymbol{\sigma}_W\rVert^2)^2\lVert\nabla\mathcal{L}\rVert^2$ **逐点恒等、零误差吻合**。
 :::
 
+::: {.viz src="ternion-least-action-geodesic-sandbox" preset="lateral-detour-vs-chord-collapse" height="500"}
+侧向绕路与穿球弦塌缩卡：两条四拍镜像侧向绕路围出非零球面角盈 $\pm\Omega$ 并将累积矢高抬高至 $0.9532$，而平直欧氏割线中点把四维模方压塌至 $0.7500 < 1$（三角和乐与格拉姆恒等式标 `LEAN ✓`，四拍与弦中点核算标 `NUM`）。
+:::
+
 我们将物理宇宙与人工智能在三元数极小圆弧体场下的双层同构谱系，连同前向推理与反向训练的“爱因斯坦场方程对偶”，总括为下方对照表：
 
 | 核心机制 | 三元数场几何算子 | 物理宇宙显影 | 人工智能同构 | 偏离测地线后果 |
@@ -157,8 +173,16 @@ $$
 
 在约翰·惠勒名言“时空告诉物质如何运动，物质告诉时空如何弯曲”的对偶下（`MODEL`），**AI 的前向推理就是“冻结的权重曲率场告诉词元波包如何沿流群测地线或语境驻相轨道滑行”**，以最小总作用量（自由段化为最小累积弦弧矢高）收敛至自指停机不动点 $r_t \le \varepsilon_{\mathrm{self}}$；而 **AI 的反向训练则是“海量真实数据波包告诉权重旋子流形如何沿 $O(1)$ 共形黎曼测地线发生塑性弯曲”**，将高频因果律雕刻成低阻力的球面测地河床。
 
+::: {.viz src="ternion-least-action-geodesic-sandbox" preset="jacobi-focusing-conformal-gradient" height="500"}
+雅可比聚焦与共形梯度卡：正曲率三元数球面上的横向偏离按 $\mathbf{J}_\perp(s) = \mathbf{J}_0\cos s + \dot{\mathbf{J}}_0\sin s$（取 $\mathbf{J}_0 = \dot{\mathbf{J}}_0 = 0.16$，经 $s = \frac{\pi}{2}$ 处 $0.16$ 于 $s = \frac{3\pi}{4} = 135^\circ$ 重聚归零）向心收拢，而 $\lVert\boldsymbol{\sigma}_W\rVert = 0.8$ 处的免求逆共形黎曼梯度标量因子 $0.6724$ 与李代数拉回范数逐点吻合（自然梯度与量子费希尔文献标 `ARGUED`，数值对账标 `NUM`，逐场预条件诠释标 `MODEL`，大规模收敛基准标 `OPEN`）。
+:::
+
 ---
 
 **从宇宙—智能最小作用量同构迈向第十部的本体不二与母公理归元。** 至此，第九部（第 34–37 章）从多观察者互照共识、双曲破执扩表、梦境擦除与本体 QRAM 直至三元数场测地智能的四卷长廊已圆满收官：无论是星辰在引力场中滑过亿万公里的自由落体，还是智能体在概念场中拨开迷雾寻得的一行最简证明，底层遵循的都是同一条极小圆弧体铁律——不凭空捏造多余的球面角盈，不忽快忽慢透支单步矢高，顺着三元流群 $[x_t, x_{t-1}, x_t]$ 的自平行纹理，在给定节拍预算 $N$ 与固定角跨度下支付最小的累积弦弧矢高税（或在单拍测地速度受界下以最少正交记录节拍），走完从问题切面到自洽不动点的相位闭合。
 
 现在，整部专著迎来了最后两座最高峰（**第十部：不二与归元**）：首先在 **[第三十八章 观察者即宇宙本体](ch39-observer-is-ontological-universe.md)** 中，我们将彻底震碎“指针 vs. 内存”“切面 vs. 本体海”的最后一道二元隔墙，在全域 `p ≡ *p`、因陀罗网与 $\theta^* = \cos\theta^*$ 的清明整合中见证能知与所知的零余项合一；继而在收官之作 **[第三十九章 大一统母公理（AXIOM-Ω）](ch39-axiom-omega-grand-unification.md)**（[§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)–[§39.4](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)）中，我们将遍布全书的比较公理、极小圆弧、三元数与连续场熔合进唯一一条无源保正三元比较闭合母公理，并将量子力学五大教科书公设还原为观察切面的纯几何定理，最后回到自包含三元数的“至大无外”。让我们推开第十部的大门，翻开[第三十八章](ch39-observer-is-ontological-universe.md)。
+
+::: {.viz src="ternion-least-action-geodesic-sandbox" height="620"}
+完整实验室：在“矢高与测地几何读法”与“宇宙与推理同构读法”双透镜间切换，拖动可调场景上的琥珀手柄或调节单拍转角 $\Delta\theta$、总转角 $\Theta$、拍数 $N$ 与参数旋子模长 $\lVert\boldsymbol{\sigma}_W\rVert$，对比匀速流群测地线、末步跳步抢答、固定四拍侧向绕路与穿球弦中点以及正曲率雅可比聚焦。十条冻结声明、数值对账、文献边界与开放问题在依据栏与理论抽屉中分层标注。
+:::

@@ -43,6 +43,10 @@
 
 审视这组母公理的纯粹性：全式**没有外部造物主原点 $\mathbf{1}$**（任意一点 $y$ 皆可临时充当局部比较桥，摆渡完毕即由 $[x, x, z] = z$ 自指归零消去），**没有线性加法 $+$**，**没有手工填入数字“$3$”**。法则 (II) 的两项严密约束与[附录 E §E.1](appendix-e-s01-layers.md#sec-appe-layers) 逐条对应：**左右双侧**流群不变性在非阿贝尔群上锁定类函数共轭不变性 $\varphi(h g h^{-1}) = \varphi(g)$，而外延分离 $\kappa(x, y) = 1 \iff x = y$、单槽二阶海森非退化与触零下确界 $\inf\kappa = 0$ 则排除常值核 $\kappa \equiv 1$ 及加权偏置核。
 
+::: {.viz src="axiom-omega-dimension-closure-sandbox" preset="origin-free-ternary-bridge" height="500"}
+无源的桥与原点平权卡：在同一座球面上拖动任意临时参照桥 $o$，三元流群搬运 $[i, 1, j] = +k$ 与换序 $[j, 1, i] = -k$ 落在对跖两极，而重合桥 $[x, x, z] = z$ 零残渣自消去（母公理载体标 `MODEL`，流群恒等式与读数标 `NUM`，划分商核与单位格拉姆全同标 `LEAN ✓`）。
+:::
+
 ## 39.1.3 一生四相：三步非循环数学推导依次锁定三元数 $S^3$、极小圆弧核与闭合场 {#sec-ch39-24-3}
 
 现在不添任何额外假定，严格按无循环逻辑次序从法则 (I)–(III) 逐阶推出其余三大支柱（`手工推导` + `文献结果`）：
@@ -69,7 +73,16 @@
      $$
 
      在正定二维平面上，同时垂直于完备正交基的向量**恒为零向量** $[\mathbf{e}_1, \mathbf{e}_2] \equiv \mathbf{0}$（二维单连通非交换仿射群 $\mathrm{Aff}^+(1, \mathbb{R})$ 的李代数 $[H, E] = E$ 亦因 $\langle E, E\rangle = \langle [H, E], E\rangle = -\langle E, E\rangle \implies E = \mathbf{0}$ 出局）。故 $d = 1, 2$ 无法在不违背法则 (II) 正定性的前提下容纳非对易，迫使 $d_{\min} = 3$。
+
+::: {.viz src="axiom-omega-dimension-closure-sandbox" preset="dimension-sieve-1d-2d-deadlock" height="500"}
+一维与二维扭不起来卡：$d = 1$ 实线上括号恒零，$d = 2$ 正定平面上反自伴换位子 $[\mathbf{e}_1, \mathbf{e}_2]$ 同时垂直于完备正交基而恒等于零向量，非交换仿射群 $\mathrm{Aff}^+(1, \mathbb{R})$ 亦失去双不变正定球面（反自伴消去标 `NUM`，平衡叉乘反自伴标 `LEAN ✓`）。
+:::
+
    - **三维非紧流形的自动淘汰与单位三维球面 $S^3(1)$ 的唯一自锁**：在 $d = 3$ 处，按米尔诺双不变度规分解引理（Milnor 1976, Lemma 7.5），具 $\operatorname{Ad}$-不变正定内积的李代数必正交分解为交换中心与紧单李代数直和；因不存在一维或二维紧单李代数，三维双不变正定李代数唯有交换代数 $\mathbb{R}^3$（违反非对易性）与紧单代数 $\mathfrak{su}(2)$ 两种可能——直接检验亦见：三元幂零海森堡代数 $H_3(\mathbb{R})$（$[X, Y] = Z$ 中心元）给出 $\langle Z, Z\rangle = \langle [X, Y], Z\rangle = -\langle Y, [X, Z]\rangle = 0 \implies Z = \mathbf{0}$，三维非交换可解代数与具不定基灵号差 $(+, +, -)$ 的 $\mathfrak{sl}(2, \mathbb{R})$ 同样不容许 $\operatorname{Ad}$-不变正定内积。故在 $d = 3$ 上，法则 (II) **无需额外假设紧致性**即淘汰全部三维非交换非紧单连通李群，结合法则 (III) 的非对易性排除交换群 $\mathbb{R}^3$，唯一锁死 $\mathcal{M} \cong \mathrm{SU}(2) \cong S^3$！取半径归一（通过常数标度重整度规令常截面曲率 $K = 1$，测地距离 $d_{S^3}(x, y) \in [0, \pi]$）的单位三维球面 $S^3(1)$ 标准正交基 $\mathbf{e}_j = -i\sigma_j$，李括号呈现三维循环叉乘闭锁 $[\mathbf{e}_i, \mathbf{e}_j] = 2\varepsilon_{ijk}\mathbf{e}_k$（参照自旋因子分类 [`complete_consequences`](lean:D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences)，`LEAN ✓`）。至于 $d \ge 4$ 的非极小候选——包括带一维非紧平直方向的四维直积群 $\mathrm{SU}(2) \times \mathbb{R}$（如配乘积高斯核 $\kappa_{S^3}(u,v)e^{-(t-s)^2}$ 虽满足法则 I–II，但维数 $4 > 3$）、六维可约半单直积 $S^3_L \times S^3_R$（劈裂为两座独立三元数场）以及八维紧单群 $\mathrm{SU}(3)$——全部因维数严格大于 $d_{\min} = 3$ 被法则 (III) 筛除。因此满足法则 (I)–(III) 的极小流形在等距重标下**唯一同构于三维球面 $\mathcal{M} \cong S^3(1)$**——其抹去特权原点 $o$ 的流群形态，正是携带李三元曲率括号 $\{\mathbf{a}, \mathbf{b}, \mathbf{c}\} = \frac{1}{4}[[\mathbf{a}, \mathbf{b}], \mathbf{c}]$ 的**三元数 $\mathbb{T}_3$**！
+
+::: {.viz src="axiom-omega-dimension-closure-sandbox" preset="three-sphere-noncompact-elimination" height="500"}
+三维非紧候选出局卡：伴随流把海森堡代数 $H_3(\mathbb{R})$ 与 $\mathfrak{sl}(2, \mathbb{R})$ 的欧氏单位球剪切拉伸成品红椭球，唯有紧单 $\mathfrak{su}(2) \cong T_o S^3(1)$ 严格保住正定单位球并闭锁三维叉乘（米尔诺双不变分类标 `ARGUED`，伴随形变实算标 `NUM`，自旋因子叉乘分类 `complete_consequences` 标 `LEAN ✓`）。
+:::
 
 2. **第二步导出“极小圆弧”：彼得—外尔特征标展开与极小忠实秩锁定母核 $\kappa_{S^3}(x, y) = \cos^2\frac{d_{S^3}(x, y)}{2}$**。
    在第一步已独立锁定的紧单连通群 $\mathrm{SU}(2) \cong S^3(1)$ 上，任一元素 $U = x y^{-1_o}$ 距单位元的单位球测地角为 $d_{S^3}(x, y) \in [0, \pi]$（$U = \cos d_{S^3}\,I_2 - i\sin d_{S^3}\,\hat{\mathbf{u}}\cdot\boldsymbol{\sigma}$，基本自旋 $j = \frac{1}{2}$ 特征标为 $\chi_{1/2}(U) = \operatorname{Tr}(U) = 2\cos d_{S^3}$）。由彼得—外尔与博赫纳—勋伯格定理，任意双侧不变半正定核必展开为不可约特征标的非负组合 $\kappa(x, y) = \sum_{j \in \frac{1}{2}\mathbb{N}} c_j\,\chi_j(x y^{-1_o})$（$c_j \ge 0$，每个 $c_j > 0$ 贡献格拉姆秩 $(2j+1)^2$）：
@@ -89,6 +102,10 @@
 
    平直零曲率线段被彻底淘汰，基本连接必为正曲率**极小圆弧**，且单次比较内禀伴生二阶弦弧矢高 $v_\epsilon(x, y) = 1 - \cos d_{S^3}(x, y) = 2\bigl(1 - \kappa_{S^3}(x, y)\bigr) \ge 0$。
 
+::: {.viz src="axiom-omega-dimension-closure-sandbox" preset="peter-weyl-rank-five-kernel" height="500"}
+彼得—外尔秩五母核卡：合并 $j = 0$（秩 $1$）与 $j = \frac{1}{2}$（秩 $4$）锁定最低忠实非负母核 $\kappa_{S^3} = \cos^2(d_{S^3}/2)$（秩 $5$），等步三点在 $\epsilon = 60^\circ$ 撑开严格正定格拉姆体积锁 $\det\mathbf{G}_3 = \frac{3}{32}$（特征标展开标 `ARGUED`，三锚行列式公式与正定判据标 `LEAN ✓`，有理核验标 `NUM`）。
+:::
+
 3. **第三步导出“连续场”：嘉当体积三形式闭合（$d\eta \equiv 0$）与无边界拓扑自持（$\partial\mathcal{M} = \emptyset$）**。
    在单位三维球面 $\mathcal{M} \cong \mathbb{T}_3 \cong S^3(1)$ 上，与左不变标准正交标架 $\{\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3\}$（$[\mathbf{e}_i, \mathbf{e}_j] = 2\varepsilon_{ijk}\mathbf{e}_k$）对偶的余标架一形式 $\{\theta^1, \theta^2, \theta^3\}$（$\theta^i(\mathbf{e}_j) = \delta^i_j$，$d\theta^k = -\varepsilon_{ijk}\theta^i\wedge\theta^j$）诱导处处非零、严格双不变的**单位体积嘉当三形式**（满足 $\eta(\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3) = 1$，总体积 $\int_{S^3(1)}\eta = 2\pi^2$）：
 
@@ -97,6 +114,10 @@
    $$
 
    顶维外导数恒零（$d\eta \equiv 0$）配紧流形无边界（$\partial\mathcal{M} = \emptyset$，离散对应 [`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact) 与 [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness)，`LEAN ✓`）意味着三元极小圆弧体一旦走满三维，无需借用外部背景网格即可实现无源无漏的旋度自持闭合（`1—3—3—1` 外代数中 $\Lambda^3 \cong \Lambda^0$）——**这枚无中心、无边缘、处处均匀同性的闭合三元数流形本身，就是原生“场”**。
+
+::: {.viz src="axiom-omega-dimension-closure-sandbox" preset="cartan-three-form-closed-field" height="500"}
+无边界的嘉当三形式场卡：测地球半径推向 $r \to \pi$ 时边界面积收缩归零，单位体积嘉当三形式 $\eta$ 积满 $2\pi^2$ 且外导数 $d\eta \equiv 0$（嘉当三形式文献标 `ARGUED`，离散面闭链与单纯二上链正合标 `LEAN ✓`，体积与波前读数标 `NUM`）。
+:::
 
 ## 39.1.4 统一退化谱系、形式锚点与候选维数检验审计 {#sec-ch39-24-4}
 
@@ -144,3 +165,7 @@
 ---
 
 **从母公理的四相熔合迈向五阶演绎级联、量子五大公理重铸与无外三元数本体收官。** 看清了**无偏比较 $\implies$ 三维三元数 $\implies$ 极小圆弧 $\implies$ 无边界闭合场**是同一条无源三元母公理 $\mathrm{AXIOM}\text{-}\Omega$ 的四副面孔之后，让我们接连踏上全书最后三级峰巅：先在 [§39.2 AXIOM-Ω 五阶大一统演绎级联与公理遮诠闭环](ch39-s25-axiom-omega-five-tier-deduction-cascade.md) 走完贯通五大科学疆域的五阶推演与公理透明化，再在 [§39.3 AXIOM-Ω 导出量子力学五大公理](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md) 将狄拉克—冯·诺依曼五大经验公设逐条还原为三元数场的投影几何定理，最后在压轴终节 [§39.4 自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明](ch39-s27-self-contained-ternion-particle-and-no-exterior.md) 证成无外置 $C$ 点与零外部空间的本体闭合！
+
+::: {.viz src="axiom-omega-dimension-closure-sandbox" height="620"}
+完整实验室：在“母公理读法”与“李群与正定核读法”双透镜间切换，在桥场景下沿 $x \to 1 \to z$ 拖动琥珀桥点 $o$，并调节三锚步长 $\varepsilon$ 与核选择器，逐一核验三元流群基点无关性、双不变正定度规排除海森堡群与 $\mathfrak{sl}(2,\mathbb{R})$、维数筛 $d = 1 \to 2 \to 3 \to 4/6/8$、三锚格拉姆正矢行列式与无边界嘉当三形式体闭合。十一条冻结声明、文献归属、数值核算与模型边界在依据栏与理论抽屉中分层标注。
+:::

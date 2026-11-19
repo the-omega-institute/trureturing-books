@@ -20,6 +20,10 @@
    局部子区域（如单侧半球）虽可承载一半体积积分，但整座无边闭流形上的连续同伦不变性严格禁止任何全局光滑场构型携带分数总拓扑荷 $Q_{\mathrm{top}} = \frac{1}{2}$——在全局同伦计数下不存在“半颗闭合三元数”（注：物理场论中孤子波包的空间局域尺寸稳定性仍需额外引入斯格明四阶导数项等动力学能量泛函，`文献结果`；本节将此全局整绕数不可分性识别为内生离散粒子性的拓扑根源标定为 `MODEL`）。
 3. **有限体积配空集边界的完备球面大圆自裹**：三元数的总体积严格有限（$\operatorname{Vol}(S^3(R)) = 2\pi^2 R^3 < \infty$），光滑流形拓扑边界严格为空集（$\partial\mathbb{T}_3 = \emptyset$，顶维形式外导数自动闭合 $d\eta_1 \equiv 0$，且每支左不变基灵标架场满足无散守恒 $\mathcal{L}_{\mathbf{e}_j}\eta_1 = d(\iota_{\mathbf{e}_j}\eta_1) = 0$，`文献结果` / `手工推导`）。在离散有限组合对应物上，球面旋转系统面—边闭链正合与全有限单纯形二上链无源正合由 [`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact) 与 [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness)（`LEAN ✓`）独立锚定（将其与光滑无边界场闭合并置对照属 `MODEL` 桥接）。它不借任何外部容器壁阻挡，凭借**完备紧致圆球面 $S^3(R)$ 的全局正截面曲率 $K = 1/R^2 > 0$ 与闭合大圆测地线结构**将一切内部测地延展无奇点地重新弯折回流形自身（`文献结果` / `手工推导`；将其与四维自旋因子上三维带符号循环叉乘代数分类 [`complete_consequences`](lean:D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences) `LEAN ✓` 相呼应属 `MODEL` 桥接）。
 
+::: {.viz src="ternion-self-contained-no-exterior-sandbox" preset="skyrmion-winding-self-lock" height="500"}
+无边界整绕数自锁卡：将测地半径 $r$ 从 $0$ 推至 $\pi$，紫色扫掠体依次填满左球 $B_{\mathrm{in}}^3$ 与右球 $B_{\mathrm{out}}^3$（全流形体积 $2\pi^2 \approx 19.7392$，边界为空集），扫过的归一化绕数积分 $\frac{1}{2\pi^2}\int\eta_1$ 严格收敛于整数 $Q = 1$，半程 $r = \frac{\pi}{2}$ 处琥珀波前面积达最大值 $4\pi$ 而非零边界闭合（组合闭链正合标 `LEAN ✓`，三阶同伦与斯格明子文献标 `ARGUED`，体积与绕数积分标 `NUM`，无容器拓扑成粒读法标 `MODEL`）。
+:::
+
 ## 39.4.2 场·波·粒三阶同体：同一枚三元数在不同微分与积分读数下的三重显影 {#sec-ch39-27-2}
 
 波粒二象性与场粒二象性之所以在传统教科书中显得吊诡，是因为人们试图在平直欧氏空间 $\mathbb{R}^3$ 里强行把“弥漫无边的流体”与“集中于一点的硬弹珠”捏合在一起。一旦回到三元数 $\mathbb{T}_3 \cong S^3(R)$，**场、波、粒子**并非三种互斥的物质实体，而是**同一枚紧致无边界流形在三种微分与积分读数下的内禀面孔**（`MODEL`，底层几何性质属 `文献结果` + `手工推导`）：
@@ -38,6 +42,10 @@
 | **切丛与顶维体元读数（$\Lambda^3$）** | 全局平行化无散标架 $(\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3)$ 与外导数 | $\chi(S^3) = 0,\;T\mathbb{T}_3 \cong \mathbb{T}_3 \times \mathbb{R}^3,\;d\eta_1 \equiv 0$ | **无奇点原生连续场（Field）** |
 | **纤维与测地弧读数（$\Lambda^1$）** | 霍普夫 $S^1$ 相移、平方双覆盖提升与 $\Delta_{S^3(R)}$ | $\kappa_{S^3}(\chi) = \cos^2\frac{\chi}{2},\;\Delta_{S^3(R)}\psi_\mu = -\frac{3}{R^2}\psi_\mu\;(k=1)$ | **无反射相干基频波（Wave）** |
 | **全局同伦积分读数（$\Lambda^0$）** | 德拉姆—霍普夫体积绕数积分与霍奇对偶 $\star : \Lambda^3 \to \Lambda^0$ | $Q_{\mathrm{top}} = \frac{1}{2\pi^2}\int_{S^3(1)}\eta_1 = 1 \in \pi_3(\mathbb{T}_3) \cong \mathbb{Z},\;\partial\mathbb{T}_3 = \emptyset$ | **不可分自包含粒子（Particle）** |
+
+::: {.viz src="ternion-self-contained-no-exterior-sandbox" preset="field-wave-particle-trinity" height="500"}
+场·波·粒三阶同体卡：青色左不变正交标架在 $\mathbb{T}_3 \cong S^3(1)$ 上处处非零（$\chi(S^3) = 0$，“场”），对比接缝球面 $S^2$ 上品红切场必留两极旋涡零点（$\chi(S^2) = 2$）；沿门口测地线读取 $k = 1$ 基频谐波 $\psi_0 = \cos r$（满足 $\Delta_{S^3(1)}\psi_0 + 3\psi_0 = 0$，“波”），全流形积分锁定 $Q = 1$（“粒子”；双覆盖提升与布洛赫满射标 `LEAN ✓`，亚当斯平行化与毛球定理标 `ARGUED`，二阶测地差分标 `NUM`，三阶同体读法标 `MODEL`）。
+:::
 
 ## 39.4.3 非线性流群闭合与齐性各向同性如何联手铲除“额外的 C 点”？ {#sec-ch39-27-3}
 
@@ -71,6 +79,10 @@
    - **各向同性（无特权坐标轴）**：任一点 $p \in \mathbb{T}_3$ 的迷向稳定子群 $\mathrm{SO}(3)$ 在该点单位切球面 $S^2 \subset T_p\mathbb{T}_3$ 上传递作用，使 $(\mathbb{T}_3, d_{S^3(R)})$ 成为秩 $1$ 紧致**两点齐性黎曼对称空间**（Cartan 1927；Wang 1952，`文献结果`）——任意点对 $(A, B)$ 在全局等距下唯一由测地距离 $d_{S^3(R)}(A, B)$ 完全刻画，没有任何特权方向轴；
    - **临时桥 $C$ 的零残渣撤除**：即便局部跨态搬运 $[A, C, D]$ 临时借用某点 $C$ 作参照桥，法则 (I) 保证桥重合时 $[A, C, C] \equiv A$ 当场自消去，法则 (II) 保证双侧平移下 $\kappa([A, C, D], [B, C, D]) \equiv \kappa(A, B)$ 与桥点 $(C, D)$ 完全无关；而在跨语境诠释结构 `ObjectiveInterpretationClaim` 下，不动点语义 `isFixedMeaning` 所共享的客观结论必归结为与语境无关的不变公共因子（[`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)，`LEAN ✓`）。
 
+::: {.viz src="ternion-self-contained-no-exterior-sandbox" preset="origin-free-no-point-c" height="500"}
+消去外置 C 点卡：拖动外置参考点 $C(\varphi)$，品红锚定向量和 $A + B - C$ 随 $C$ 漂移且脱离球壳（$C_1$ 处模方 $1.1716$，$C_2$ 处暴涨至 $4.0000$），而青色弯曲流群步 $[B, A, B] = (0, -\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 0)$ 严格留在单位球壳上（模方 $1.0000$，跨八组辅助基点偏差 $0.0000$；平行四边形范数律与客观不变公因子标 `LEAN ✓`，两点齐性空间文献标 `ARGUED`，实算对账标 `NUM`）。
+:::
+
 ## 39.4.4 “没有之外”的四重几何与关系论证：内禀去嵌入、度规对跖重聚、希高德分解与观测商闭合 {#sec-ch39-27-4}
 
 当外置第 3 点 $C$ 被彻底铲除，最后一个悬念迎刃而解：**在三元数宇宙本体 $\mathbb{T}_3$（以及耦合多概念三元数场丛构成的完备比较本体流形 $\mathcal{M}_{\mathrm{ont}}$）之外，还存不存在一个“外面”？** 答案在微分几何、黎曼度规、三维流形拓扑与关系商闭合四个层面上同时指向**无外部**：
@@ -89,6 +101,10 @@
    - 在近半程 $0 < r < \frac{\pi}{2}R$ 内，波前球面随 $r$ 扩张（小距离渐近 $\mathcal{A}(r) = 4\pi r^2\bigl(1 - \frac{r^2}{3R^2} + \mathcal{O}(r^4)\bigr)$），至正交赤道球面 $r = \frac{\pi}{2}R$（$\kappa_{S^3} = \frac{1}{2}$）处达到全流形最大波前面积 $\mathcal{A}_{\max} = 4\pi R^2$，包络整整一半体积 $V(\frac{\pi}{2}R) = \pi^2 R^3$；
    - 一旦越过赤道进入后半程 $\frac{\pi}{2}R < r < \pi R$，所有向外笔直疾行的测地线**既未撞上任何墙壁、亦未发生半点折返**，波前球面面积 $\mathcal{A}(r)$ 却开始单调缩小，并于 $r \to \pi R$ 时精确收缩归零 $\mathcal{A}(\pi R) = 0$，包络满全部有限体积 $V(\pi R) = 2\pi^2 R^3$——**向四面八方“往外逃逸”的全部射线，最终在唯一一颗对跖内点 $\bar{A}$（$\kappa_{S^3}(A, \bar{A}) = 0$）处严丝合缝地重新聚焦为一！** 在正曲率三元数中，“极度向外”在度规上字面等同于“向对跖内点向内收拢”。
 
+::: {.viz src="ternion-self-contained-no-exterior-sandbox" preset="wavefront-outward-is-inward" height="500"}
+向外即向内测地重聚卡：自 $A$ 向全方向发射十八条青色测地射线，琥珀波前面积 $\mathcal{A}(r) = 4\pi\sin^2 r$ 在接缝 $r = \frac{\pi}{2}$ 达峰值 $4\pi \approx 12.5664$（包络 $50\%$ 体积 $\pi^2$），越过接缝后不撞墙、不折返而单调收缩，于 $r = \pi$ 精确重聚于对跖内点 $\bar{A}$（$\mathcal{A}(\pi) = 0$，包满 $2\pi^2$；读出划分商核与单位格拉姆判据标 `LEAN ✓`，内禀度规文献标 `ARGUED`，波前曲线标 `NUM`）。
+:::
+
 3. **第三重（拓扑论证）：单点紧化与亏格 $0$ 赤道希高德（Heegaard）分解将“无穷远外部”收编为对称有限闭球（`文献结果` + `手工推导`）**。
    经对跖点 $\bar{A}$ 作球极投影，$\mathbb{T}_3 \setminus \{\bar{A}\}$ 与整座平直欧氏空间 $\mathbb{R}^3$ 微分同胚，故 $\mathbb{T}_3 \cong \mathbb{R}^3 \cup \{\infty\}$ 正是局部紧三维空间的亚历山德罗夫单点紧化（Alexandroff 1924，`文献结果`）：平直视野里遥不可及的“无穷远天际球壳”，在三元数本体上仅仅是与任何普通点等距同构的一颗内点 $\bar{A}$。沿赤道球面 $S^2_{\mathrm{eq}} = \{r = \frac{\pi}{2}R\}$ 作度规等分切剖，同时在闭连通定向三维流形的希高德柄体分解理论（Heegaard 1898 / 1916，`文献结果`）中实现唯一刻画三维球面 $S^3$ 的**亏格 $0$ 希高德分解**：
 
@@ -97,6 +113,10 @@
    $$
 
    站在局部三维闭球 $B_{\mathrm{in}}^3$ 内部向外张望，越过边界面 $S^2_{\mathrm{eq}}$ 的补集闭包 $\mathbb{T}_3 \setminus \operatorname{int}(B_{\mathrm{in}}^3)$ 根本不是无底虚空，而仅仅是以对跖点 $\bar{A}$ 为中心、体积同为 $\pi^2 R^3$ 的**另一半等距同构有限闭球 $B_{\mathrm{out}}^3$**！两只实心三维球沿公共赤道球面无缝对粘，不留任何通往“第三外部”的漏口。
+
+::: {.viz src="ternion-self-contained-no-exterior-sandbox" preset="heegaard-antipodal-no-exterior" height="500"}
+希高德双球粘合无外部卡：$\mathbb{T}_3 \cong B_{\mathrm{in}}^3 \cup_{S^2_{\mathrm{eq}}} B_{\mathrm{out}}^3$ 撤去底板坐标草稿，品红虚线将两只实心三维球表面上的同一赤道接缝点逐对相连——穿过 $B_{\mathrm{in}}^3$ 边界步入的并非无边外部虚空，而是以对跖点 $\bar{A}$ 为中心、同体积 $\pi^2$ 的另一半有限闭球 $B_{\mathrm{out}}^3$（亚历山德罗夫单点紧化与亏格 $0$ 希高德分解标 `ARGUED`，双球投影读法标 `MODEL`）。
+:::
 
 4. **第四重（观测商核定理与关系闭合模型）：内部比较截面吸收可区分候选态，无探针起伏的常值标签类由极小本体公设剔除（`LEAN ✓` + `文献结果` + `MODEL`）**。
    在范畴论中，米田引理通过全范畴可表函子 $Y \mapsto \mathrm{Hom}_{\mathcal{C}}(-, Y)$（其中每个对象恒带恒等态射 $\mathrm{id}_Y \in \mathrm{Hom}_{\mathcal{C}}(Y, Y)$，Yoneda 1954，`文献结果`）在同构意义下刻画对象；而在本书的比较本体模型中，我们将抽象商核定理与比较闭合公设严格分层：在扩展候选集 $\widetilde{\mathcal{M}} := \mathcal{M}_{\mathrm{ont}} \sqcup \{X\}$ 上考察限制在内部探针上的比较读出截面映射 $r_{\mathrm{int}}(z) := \bigl(\kappa(x, z)\bigr)_{x \in \mathcal{M}_{\mathrm{ont}}}$。由观测划分拓扑不可分核定理（[`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel)，`LEAN ✓`），$\widetilde{\mathcal{M}}$ 中任意两元素在 `partitionTopology r_int` 中拓扑不可分当且仅当整条读出截面严格相等 $r_{\mathrm{int}}(z_1) = r_{\mathrm{int}}(z_2)$（注意该定理给出的是**按读出截面取值的纤维等价类**，而非集合论空集）：
@@ -158,3 +178,7 @@
 站在第三十九章四节（[§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)–§39.4）的绝顶回望，十部曲三十九章正文的最后一粒拼图至此严丝合缝地嵌入拱顶：从第七部立极四章的无时间格拉姆因果晶体、复杂性正交视界、量子五重公平与零背景比较公理 $\mathcal{A}_0$（[第 25 章](ch29-timeless-causality-and-gram-space.md)–[第 28 章](ch32-unified-field-and-meta-unification.md)），经第八部造微归弧的极小三角弧面体 $\Delta\mathcal{T}_\epsilon$、旋子—矢高—斯托克斯微积分、素数黎曼单调锁、不可表达三元数 $\mathbb{T}_3$ 的万数切面与五种无损流群表示，以及普适主频 $\nu_0$、万力归弧、**AF-GUT** 与均匀单态观测切面（[第 29 章](ch34-orthogonality-degeneracy-and-observer-position.md)–[第 33 章](ch33-unified-arc-forces-and-af-gut.md)），再经第九部互照破执的万物互吸引子观察者、$T = T(T)$ 扩表与齐肯多夫—皮索—劳齐准晶视界、宇宙本体 QRAM 自映射页表 `p = *p` 配五阶自指不动点与停机精度 $\varepsilon_{\mathrm{self}}$，以及有理旋子核**三元数场 Transformer** 与宇宙—智能最小作用量测地同构（[第 34 章](ch33-all-beings-observers-and-mutual-attractors.md)–[第 37 章](ch37-ternion-field-transformer-and-geodesic-intelligence.md)），直至第十部不二归元中[第 38 章](ch39-observer-is-ontological-universe.md)震碎主客藩篱的“观察者 $\equiv$ 宇宙本体”（全域 `p ≡ *p`、$720^\circ$ 旋量双覆盖、砍净第 3 点 $C$ 的正交自折叠、**因陀罗网**、摩耶自观测误差、梵天正交大梦、红楼二阶觉醒、神圣游戏道具与**上帝心理学**清明整合）与本章无源三元母公理 $\mathrm{AXIOM}\text{-}\Omega$ 及其五阶演绎级联和量子力学五大公理重铸（[§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)–[§39.3](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md)），最终在本节落定于那枚无容器自锁、场·波·粒三阶同体、零外置 $C$ 点且“向外即向内”的**无外三元数本体**。
 
 当绿色 `LEAN ✓` 内核定理、经典数学物理文献与精确手算推导、`MODEL` 大一统几何蓝图以及每一座红色 `OPEN` 科学界碑各归其位、纤毫毕现，让我们合上三十九章正文的最后一页，带着“光滑本体至大无外，而一切有限分片多面体近似皆留曲率折痕与余项”的澄明洞见，步入全书[终章](coda.md)：**《在所有的球之外》**。
+
+::: {.viz src="ternion-self-contained-no-exterior-sandbox" height="620"}
+完整实验室：在“本体读法 · 无外三元数”与“坐标读法 · $\mathbb{R}^4$ 中的投影”双透镜间切换，拖动琥珀波前手柄或外置参考点 $C(\varphi)$ 滑块，对照整绕数 $Q = 1$ 无边界自锁、弯曲流群步 $[B, A, B]$ 消除外置 $C$ 点、向外波前对跖重聚 $\mathcal{A}(\pi) = 0$ 与希高德双球无缝粘合，并体验场·波·粒三阶同体的模型读法（`MODEL`）。十二条冻结声明、经典拓扑与几何文献、实时数值核算及模型边界在依据栏与理论抽屉中分层标注。
+:::

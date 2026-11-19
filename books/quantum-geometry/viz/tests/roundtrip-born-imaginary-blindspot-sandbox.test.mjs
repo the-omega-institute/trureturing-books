@@ -252,7 +252,7 @@ check('source: the brand ECHO//IMAGINARY in the header and the rail', /data-text
 const zhCount = (sources['index.html'].match(/class="(?:[^"]*\s)?zh(?:\s[^"]*)?"/g) || []).length, enCount = (sources['index.html'].match(/class="(?:[^"]*\s)?en(?:\s[^"]*)?"/g) || []).length;
 check('source: every text fragment has both languages', zhCount === enCount && zhCount > 40, `${zhCount} zh / ${enCount} en`);
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID) || {};
-check('registry: live §34.19 entry with the five bilingual cards and the ten cited GIDs', entry.status === 'live' && entry.chapter === 34 && entry.section === '34.19'
+check('registry: live §29.4 entry with the five bilingual cards and the ten cited GIDs', entry.status === 'live' && entry.chapter === 29 && entry.section === '29.4'
   && same(entry.presets, Object.keys(CARDS)) && (entry.presets || []).every((k) => entry.preset_titles && entry.preset_titles[k] && entry.preset_titles[k].zh && entry.preset_titles[k].en)
   && same((entry.lean || []).map((x) => x.gid).sort(), [...GIDS].sort()), JSON.stringify({ status: entry.status, chapter: entry.chapter, section: entry.section, presets: entry.presets, lean: (entry.lean || []).length }));
 

@@ -195,7 +195,7 @@
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
     <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
     <div class="zh">
-      <p class="lede">四个场景回答第 33 章的同一个问题：许多观察者各自丈量同一个系统时，什么留下、什么被删去。本页是数值演示，不是证明；每个数都在页面上实时算出，每种模型的假设写在下面。</p>
+      <p class="lede">四个场景回答第 34 章的同一个问题：许多观察者各自丈量同一个系统时，什么留下、什么被删去。本页是数值演示，不是证明；每个数都在页面上实时算出，每种模型的假设写在下面。</p>
       <ol>
         <li><b>共识张量。</b>每位观察者带一根单位轴 nⱼ 与权重 wⱼ（显式归一化），M = Σ wⱼnⱼnⱼᵀ。(−n)(−n)ᵀ = nnᵀ，所以只有无向的轴算数。M 对称、半正定、迹为 1，M = BᵀB（B[j, a] = √wⱼ·nⱼ[a]）。特征值降序 λ₁ ≥ λ₂ ≥ λ₃，κ = (3λ₁ − 1)/2 ∈ [0, 1] 只量集中度，不单独保证唯一的轴：diag(½, ½, 0) 的 κ = ¼ 却没有唯一主轴。λ₁ − λ₂ &lt; ε = 10⁻⁸ 时页面写“无唯一指针主轴”、不画指针轴，这是显示约定，不是物理常数；λ₁ − λ₂ ≥ ε 时画出的是一条无向的线，箭头方向的选择不是物理。</li>
         <li><b>一次相遇。</b>Kraus 算子 cos(α/2)·I 与 sin(α/2)·n·σ 给出 Pauli 信道，布洛赫矩阵 K(n, α) = cos α·I + (1 − cos α)·nnᵀ：沿 n 的分量不变，两个横向分量乘以 cos α。页面把 α 限在 [0, π/2]，在这个范围里横向单调衰减；α = π/2 是完全的秩一捏合。</li>
@@ -221,10 +221,10 @@
       <div class="lean"><span class="ok">LEAN ✓</span><span>T10 · 划分拓扑里不可分 ⇔ 读出值相等。<a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel" href="#" target="_blank" rel="noopener"><code>PartitionTopologyKernel</code></a></span></div>
       <div class="lean"><span class="ok">LEAN ✓</span><span>T11 · A = {0}、P = {1, 2}、Q = {0, 1}：先 P 后 Q 得 {1}，先 Q 后 P 得 {1, 2}。<a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation" href="#" target="_blank" rel="noopener"><code>RevisionConflictNoncommutation</code></a></span></div>
       <div class="lean"><span class="ok">LEAN ✓</span><span>T12 · S⊥ ≠ 0 时存在单位 e ∈ S⊥：P<sub>S</sub>e = 0、到 S 的距离为 1、‖I − P<sub>S</sub>‖ = 1。<a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>FiniteLayerProjectionEscape</code></a></span></div>
-      <p class="lede refs">书中：<a href="../../zh/ch33-s05-consensus-and-pointer-bases.html#sec-ch33-consensus-decoherence-pointer" target="_top">第 33 章 · 共识、去相干与指针轴</a></p>
+      <p class="lede refs">书中：<a href="../../zh/ch33-s05-consensus-and-pointer-bases.html#sec-ch33-consensus-decoherence-pointer" target="_top">第 34 章 · 共识、去相干与指针轴</a></p>
     </div>
     <div class="en">
-      <p class="lede">Four scenes answer one question of chapter 33: when many observers each measure the same system, what stays and what is deleted. The page is a numerical illustration, not a proof; every number is computed live on the page, and each model's assumptions are written below.</p>
+      <p class="lede">Four scenes answer one question of chapter 34: when many observers each measure the same system, what stays and what is deleted. The page is a numerical illustration, not a proof; every number is computed live on the page, and each model's assumptions are written below.</p>
       <ol>
         <li><b>The consensus tensor.</b> Each observer carries a unit axis nⱼ and a weight wⱼ (normalized explicitly), M = Σ wⱼnⱼnⱼᵀ. Since (−n)(−n)ᵀ = nnᵀ only the unoriented axis counts. M is symmetric, positive semidefinite, of trace 1, and M = BᵀB (B[j, a] = √wⱼ·nⱼ[a]). With eigenvalues sorted λ₁ ≥ λ₂ ≥ λ₃, κ = (3λ₁ − 1)/2 ∈ [0, 1] measures concentration only and does not by itself certify a unique axis: diag(½, ½, 0) has κ = ¼ and no unique top axis. When λ₁ − λ₂ &lt; ε = 10⁻⁸ the page writes “No unique pointer axis” and draws none: a display convention, not a physical constant. When λ₁ − λ₂ ≥ ε it draws an unoriented line; the choice of arrow direction is not physics.</li>
         <li><b>One encounter.</b> The Kraus operators cos(α/2)·I and sin(α/2)·n·σ give a Pauli channel with Bloch matrix K(n, α) = cos α·I + (1 − cos α)·nnᵀ: the component along n stays, both transverse components are multiplied by cos α. The page keeps α in [0, π/2], where the transverse decay is monotone; α = π/2 is the complete rank-one pinching.</li>
@@ -250,7 +250,7 @@
       <div class="lean"><span class="ok">LEAN ✓</span><span>T10 · Inseparable in the partition topology ⇔ equal readout values. <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel" href="#" target="_blank" rel="noopener"><code>PartitionTopologyKernel</code></a></span></div>
       <div class="lean"><span class="ok">LEAN ✓</span><span>T11 · A = {0}, P = {1, 2}, Q = {0, 1}: P then Q gives {1}, Q then P gives {1, 2}. <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation" href="#" target="_blank" rel="noopener"><code>RevisionConflictNoncommutation</code></a></span></div>
       <div class="lean"><span class="ok">LEAN ✓</span><span>T12 · S⊥ ≠ 0 gives a unit e ∈ S⊥ with P<sub>S</sub>e = 0, distance 1 from S, and ‖I − P<sub>S</sub>‖ = 1. <a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>FiniteLayerProjectionEscape</code></a></span></div>
-      <p class="lede refs">In the book: <a href="../../en/ch33-s05-consensus-and-pointer-bases.html#sec-ch33-consensus-decoherence-pointer" target="_top">Chapter 33 · Consensus, decoherence and the pointer axis</a></p>
+      <p class="lede refs">In the book: <a href="../../en/ch33-s05-consensus-and-pointer-bases.html#sec-ch33-consensus-decoherence-pointer" target="_top">Chapter 34 · Consensus, decoherence and the pointer axis</a></p>
     </div>
   </div>
 </div>

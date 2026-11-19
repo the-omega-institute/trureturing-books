@@ -1,4 +1,4 @@
-/* ORTHO//MUTUAL · 互为吸引子 · two observers measuring each other (chapter 33).
+/* ORTHO//MUTUAL · 互为吸引子 · two observers measuring each other (chapter 34).
    Two scenes on one rail:
      · mirror: the plane of the two readings (x for A, y for B); both update at once, (x, y) ↦ (cos y, cos x).
        Beat by beat the pair may cross θ*; sampled every two beats each coordinate takes one step of

@@ -1,4 +1,4 @@
-/* GOD//PSYCHE · 上帝心理学动力学沙盘 · The psychology of God (Chapter 39, §39.18)
+/* GOD//PSYCHE · 上帝心理学动力学沙盘 · The psychology of God (Chapter 38, §38.11)
    World (kit.solid): z up. The surface z = 0 is the translucent violet repression membrane Σ_rep (radius 1.24, more
    opaque as η grows). Above it, the conscious side: eight alters a_k (k = 0 … 7, φ_k = πk/4) at
      R_alt(θ) = 0.96 sin θ,  z_alt(θ) = 0.16 + 0.42 cos θ,
