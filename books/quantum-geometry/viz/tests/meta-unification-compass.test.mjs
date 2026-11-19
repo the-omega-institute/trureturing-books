@@ -9,7 +9,7 @@
 //   E∥ ⊕ E⊥  the weighted coordinates from the Galois conjugate √5 ↦ −√5.
 //   shells   the places of each shell from the independent group; edges as the pairs at the least distance, faces from
 //            Euler's V − E + F = 2, and the page's faces checked for planarity, convexity and edge length.
-//   compass  the bands of §32.4 restated here as the specification of the coding.
+//   compass  the bands of §28.6 restated here as the specification of the coding.
 import { session, stageFirstChecks, solidChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'meta-unification-compass';
@@ -280,13 +280,13 @@ const hitXY = await page.evaluate((i) => window.COMPASS_DEBUG.screen(i), s.bridg
 check('clicking a dot on the bridge selects the root drawn there', Math.hypot(hitXY[0] - xy[0], hitXY[1] - xy[1]) < 1, `${s.roots[s.bridge.sel].text}`);
 
 /* ---------- compass ---------- */
-// the coding of §32.4: L = first end, H = second end, M = middle third
+// the coding of §28.6: L = first end, H = second end, M = middle third
 const SPEC = { strings: 'HLM', lqg: 'HHM', ads: 'MML', twistor: 'MML', ncg: 'LML', wolfram: 'MHM', langlands: 'MML', entropic: 'MLH' };
 const CAMP = { strings: 1, lqg: 1, ads: 2, twistor: 2, ncg: 3, wolfram: 3, langlands: 4, entropic: 4 };
 const bandOf = (v) => (v < 1 / 3 ? 'L' : v > 2 / 3 ? 'H' : 'M');
 s = await pick('cube');
 const progs = s.compass.programmes;
-check('CUBE: eight programmes, each in the bands the §32.4 table names, in four camps of two', progs.length === 8 && progs.every((p) => p.c.map(bandOf).join('') === SPEC[p.id] && p.camp === CAMP[p.id]), JSON.stringify(progs.map((p) => p.id + p.c.map(bandOf).join(''))));
+check('CUBE: eight programmes, each in the bands the §28.6 table names, in four camps of two', progs.length === 8 && progs.every((p) => p.c.map(bandOf).join('') === SPEC[p.id] && p.camp === CAMP[p.id]), JSON.stringify(progs.map((p) => p.id + p.c.map(bandOf).join(''))));
 const key3 = (p) => p.c.map((x) => x.toFixed(3)).join();
 check('CUBE: no two dots on the same place', new Set(progs.map(key3)).size === 8);
 check('CUBE: the book is hidden and no camp is lit', !s.compass.book && s.compass.camp === 0);

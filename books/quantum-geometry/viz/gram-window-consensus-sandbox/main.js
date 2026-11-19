@@ -1,4 +1,4 @@
-/* GRAM//CONSENSUS · 格拉姆窗口与共识 · Gram-window consensus (§34.18)
+/* GRAM//CONSENSUS · 格拉姆窗口与共识 · Gram-window consensus (§34.7)
    The stage is the unit sphere S² of directions, drawn as a lit solid. An observer keeps a window of its M most recent
    records v₁ (the newest) … v_M (the oldest still kept), the golden-angle spiral v_j at colatitude 12° + 6°(j − 1) and
    azimuth (j − 1)·π(3 − √5). Each record lets the next direction x lie only in its coherence cap x·v_j ≥ cos α_coh; the

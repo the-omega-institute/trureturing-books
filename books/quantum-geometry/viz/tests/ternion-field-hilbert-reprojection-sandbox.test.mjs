@@ -53,7 +53,7 @@ T.browser.newContext = async (options) => {
 await stageFirstChecks(T, BOOK, ID, { solid: true });
 
 const registry = JSON.parse(read('../visualizations.json')).visualizations.find((r) => r.id === ID);
-check('standalone bilingual registry and theory links', registry.chapter === 39 && registry.section === '39.20'
+check('standalone bilingual registry and theory links', registry.chapter === 32 && registry.section === '32.3'
   && registry.code === 'TERNION//HILBERT' && registry.status === 'live'
   && registry.theory[0].href === '../zh/' + THEORY && registry.theory[0].href_en === '../en/' + THEORY
   && equal(registry.presets, presets.map(([id]) => id))
@@ -98,7 +98,7 @@ check('three-column lab shell, status pills, panel badges, tagline, fonts and ev
     && !q('aside#evidence') && !!q('aside.col.side > section.panel.sec#evidence')
     && q('#evidence').firstElementChild.id === 'infoBtn' && !!q('aside.col.side > #readouts')
     && getComputedStyle(q('#stage')).containerType === 'inline-size'
-    && ['§39.20', '5', 'NUM', 'trureturing'].every((x) => asides.includes(x))
+    && ['§32.3', '5', 'NUM', 'trureturing'].every((x) => asides.includes(x))
     && [...document.querySelectorAll('.tagline > span')].every((el) => el.querySelector('em') && el.firstChild.nodeType === 3)
     && !!q('link[href*="fonts.googleapis.com/css2?family=Chakra+Petch"]')
     && document.querySelectorAll('#readouts dl.ro > div').length === 7 && document.querySelectorAll('#readouts dl.ro > div.key').length === 1

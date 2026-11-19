@@ -191,7 +191,7 @@ check('source: the page never claims a finite fibre is the whole space', !/H<sub
 }
 check('suite: no fixed waits', !new RegExp('wait' + 'ForTimeout').test(suite));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
-check('registry: live §39.13 entry with five bilingual cards and the seven theorems', !!entry && entry.status === 'live' && entry.chapter === 39 && entry.section === '39.13'
+check('registry: live §38.5 entry with five bilingual cards and the seven theorems', !!entry && entry.status === 'live' && entry.chapter === 38 && entry.section === '38.5'
   && entry.code === 'INDRA//NET' && entry.capture_lock === 'links' && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map((x) => x.gid).sort(), [...GIDS].sort()) && entry.tags.length === entry.tags_en.length
   && entry.theory[0].href === `../zh/${THEORY_SEC}` && entry.theory[0].href_en === `../en/${THEORY_SEC}`);
@@ -317,8 +317,8 @@ async function checkLinks(p, tag) {
     && await p.$$eval('[data-lean-gid]', (els) => els.every((e) => e.closest('.col.side #evidence .lean') && e.closest('.lean').querySelector('.ok').textContent.trim() === 'LEAN ✓')));
   check(`${tag}: one ARGUED, MODEL, NUM and OPEN box each`, await p.evaluate(() => ['argued', 'model', 'num', 'open'].every((c) => document.querySelectorAll(`#evidence .lean.${c}`).length === 1)
     && document.querySelectorAll('#evidence .lean:not(.argued):not(.model):not(.num):not(.open):not(.frozen)').length === 7));
-  check(`${tag}: bilingual §39.13 theory link in the drawer, on the section fragment`, same(await p.$$eval('#drawer .refs a', (els) => els.map((e) => e.getAttribute('href')).sort()), ['zh', 'en'].map((l) => `../../${l}/${THEORY_SEC}`).sort()));
-  check(`${tag}: the OPEN box links the §39.12 and §39.11 problems in both languages`, same(await p.$$eval('#evidence .lean.open a', (els) => els.map((e) => e.getAttribute('href')).sort()),
+  check(`${tag}: bilingual §38.5 theory link in the drawer, on the section fragment`, same(await p.$$eval('#drawer .refs a', (els) => els.map((e) => e.getAttribute('href')).sort()), ['zh', 'en'].map((l) => `../../${l}/${THEORY_SEC}`).sort()));
+  check(`${tag}: the OPEN box links the §33.10 and §33.9 problems in both languages`, same(await p.$$eval('#evidence .lean.open a', (els) => els.map((e) => e.getAttribute('href')).sort()),
     ['zh', 'en'].flatMap((l) => OPEN_LINKS.map((x) => `../../${l}/${x}`)).sort()));
   check(`${tag}: the ARGUED box names Reeh–Schlieder and the MODEL box keeps H_x apart from H_tot`, await p.evaluate(() => /Reeh–Schlieder/.test(document.querySelector('#evidence .lean.argued').textContent)
     && /H<sub>tot<\/sub>/.test(document.querySelector('#evidence .lean.model').innerHTML)));

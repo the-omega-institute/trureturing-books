@@ -89,7 +89,7 @@ for (const [name, source] of Object.entries(sources)) check(`${name}: every colo
 check('no open-problem or green stage colors', !/P\.(warn|ok)|--warn|--tr-warn|--ok/.test(sources['main.js']));
 check('exactly six frozen GIDs', [...sources['index.html'].matchAll(/data-lean-gid="([^"]+)"/g)].map(m => m[1]).sort().join() === [...GIDS].sort().join());
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find(v => v.id === ID);
-check('registry: bilingual live §34.6 with exact card order', entry.status === 'live' && entry.chapter === 34 && entry.section === '34.6' && entry.presets.join() === CARDS.join() && CARDS.every(id => entry.preset_titles[id].zh && entry.preset_titles[id].en));
+check('registry: bilingual live §29.7 with exact card order', entry.status === 'live' && entry.chapter === 29 && entry.section === '29.7' && entry.presets.join() === CARDS.join() && CARDS.every(id => entry.preset_titles[id].zh && entry.preset_titles[id].en));
 check('registry: exact frozen dependencies and four bilingual evidence layers', entry.lean.map(r => r.gid).sort().join() === [...GIDS].sort().join() && ['LEAN ✓', 'ARGUED', 'NUM', 'MODEL'].every(kind => entry.theory.some(t => t.label.startsWith(kind) && t.label_en.startsWith(kind))));
 await T.goto(BOOK, ID, '?lang=en'); await settle(page);
 check('shared runtime scripts only', await page.evaluate(() => [...document.scripts].map(s => s.getAttribute('src')).join() === '../assets/shell.js,../assets/kit.js,main.js'));

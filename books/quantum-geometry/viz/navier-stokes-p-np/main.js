@@ -1,4 +1,4 @@
-/* ORTHO//VORTEX: the fluid side of chapter 30, in three scenes.
+/* ORTHO//VORTEX: the fluid side of chapter 26, §26.4, in three scenes.
    lamb     a plane flow between the stagnation flow and rigid rotation: (u·∇)u = ∇(|u|²/2) + ω × u at a probe
    tube     a vortex tube: no stretching in 2D; under steady strain ω = Γ/A grows until the Burgers core 4πν/α;
             with the schematic closure α = κω the cross-section reaches zero in finite time when κΓ > 4πν

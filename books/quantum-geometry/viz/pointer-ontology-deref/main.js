@@ -4,7 +4,7 @@
             switch (ℓ, p) at level ℓ = 0 … 5 with prefix p = a >> (6 − ℓ); one level is set per tick and turns by bit
             ℓ + 1 of a (0 left, 1 right). A superposed address lights several paths: they share the switches of a
             common prefix and part for good at the first differing bit.
-     table  Chapter 38's two-level example with N = 4: page directory P at b₀ = 0x1000 with P[0] = b₀ (slot 0 holds
+     table  Chapter 36 (§36.4)'s two-level example with N = 4: page directory P at b₀ = 0x1000 with P[0] = b₀ (slot 0 holds
             the directory's own address), P[i] = addr(Tᵢ) = 0x1000·(i + 1), Tᵢ[j] = addr(Dᵢ,ⱼ) = 0x1000·(4i + j + 3),
             so T₁ = 0x2000 and D₁,₂ = 0x9000 as in the chapter. Walk(b, [i₁ … i_L]) reads Mem[b][i₁] per hop.
    Colours: cyan = the routing path that has been set and the hops already walked; ink = cells the scan has read and

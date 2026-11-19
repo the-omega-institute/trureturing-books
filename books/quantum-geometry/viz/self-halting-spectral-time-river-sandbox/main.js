@@ -1,5 +1,5 @@
 /* HALT//SORT · 自指停机精度、时间长河正交折叠与测量基谱排序
-   Self-halting precision, the time-river fold and measurement-basis spectral sorting (Chapter 39, §39.7).
+   Self-halting precision, the time-river fold and measurement-basis spectral sorting (Chapter 36, §36.10).
    One 3D stage (kit.solid; x right, y away from the default viewer, z up), five scenes, one card each:
      halt   x₀ = 0, xₖ = cos xₖ₋₁. The observer stops at the first k with |xₖ − xₖ₋₁| = |cos xₖ₋₁ − xₖ₋₁| ≤ ε, i.e. once
             xₖ₋₁ lies in the residual cap {x : |cos x − x| ≤ ε} around θ*. An angle x is the point (cos x, 0, sin x) of the

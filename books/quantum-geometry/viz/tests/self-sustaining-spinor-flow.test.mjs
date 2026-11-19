@@ -108,7 +108,7 @@ for (const t of [0.4, 1.7, 3.1, 5.0, 8.8, 12.0]) {
 check('FIERZ: along the rail ψ(t) = R(t)ψ₀ and J² = −S² = ρ² = 1.69', worst < 1e-10, `max error ${worst}`);
 check('FIERZ: the key readout prints three equal squares 1.690', (await page.textContent('#roKey')).replace(/\s/g, '') === '1.690·1.690·1.690');
 
-// the example of Chapter 39, turned in e₂e₃ from ψ₀ = 1
+// the example of Chapter 38, turned in e₂e₃ from ψ₀ = 1
 s = await pick('turn360');
 check('TURN 360°: ρ = 1, plane e₂e₃, ψ₀ = 1, rail capped at 360°, and the card plays', close(s.rho, 1) && s.plane === 'e23' && vclose(s.psi0, [1, 0, 0, 0, 0, 0, 0, 0]) && close(s.max, TAU) && await until(page, () => window.CLOSURE_DEBUG.state.t > 0));
 await page.evaluate((t) => window.CLOSURE_DEBUG.nudge(t), TAU - 0.05);

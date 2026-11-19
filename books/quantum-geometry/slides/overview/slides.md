@@ -509,98 +509,8 @@ section: "第六部 · 依据"
 <Source>第二十一章 文献注记 · 第二十二章、第二十四章 猜想</Source>
 
 ---
-# 29 铸器与圣殿
-layout: section
-section: "铸器与圣殿"
----
-
-<p class="kicker">铸器与圣殿</p>
-<h2 class="t">铸器 · 构造与验证：<em>异或代数、旋子编译与 Lean 4</em></h2>
-<p class="lead">把矩阵还原为异或位掩码；用布洛赫几何编译单比特旋转；再逐行打开冻结的 Lean 证明，看内核究竟检查了什么。</p>
-<div class="card mt">
-  <ul class="plain">
-    <li>把矩阵还原为异或 · 单量子比特旋转器编译</li>
-    <li>走进 Lean 4 公理圣殿（上、下）</li>
-  </ul>
-</div>
-
----
-# 30 铸器与圣殿 · 图景
-section: "铸器与圣殿 · 图景"
----
-
-<div class="body">
-  <p class="kicker">把矩阵还原为异或 · 位掩码立方体</p>
-  <h2 class="t">八块刀片是<em>立方体的八个角</em></h2>
-  <img src="./img/ch25-mask-cube.zh.svg" alt="立方体的八个角标着八块刀片与它们的位掩码，琥珀色箭头沿两条边走。" style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
-  <p class="lead mt-s">每个角标着刀片与它的三位掩码；乘一块刀片，就是沿它亮着的方向各走一条边，掩码按位异或。</p>
-</div>
-<Source>铸器与圣殿 · 把矩阵还原为异或（ch25-mask-cube）</Source>
-
----
-# 31 铸器与圣殿 · 定理
-section: "铸器与圣殿 · 定理"
----
-
-<div class="body">
-  <p class="kicker">定理Kernel.1 · 命题Kernel.12</p>
-  <h2 class="t">泡利对反对易；厄米 2×2 矩阵<em>就是布洛赫向量</em></h2>
-<TheoremCard class="compact mt-s" label="定理Kernel.1" title="单比特泡利外尔对的反对易、自伴与对合恒等式" gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" cite="thm-qubit-weyl-star">
-
-在 $M_2(\mathbb{C})$ 中：$ZX = -XZ$，$X^* = X$，$Z^* = Z$，$X^2 = 1$，$Z^2 = 1$。
-
-</TheoremCard>
-<TheoremCard class="compact mt-s" label="命题Kernel.12" title="厄米 2×2 矩阵的布洛赫重构与纯态单位球面" gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" cite="prop-hermitian-bloch-geometry">
-
-设 $M$ 是厄米 $2\times 2$ 复矩阵。则 $M = \operatorname{blochMatrix}(\operatorname{Re}\operatorname{Tr} M, \operatorname{bloch}(M))$；若再有 $\operatorname{Tr} M = 1$ 且 $M^2 = M$，则 $\lVert\operatorname{bloch}(M)\rVert = 1$。
-
-</TheoremCard>
-</div>
-<Source>把矩阵还原为异或（Kernel.1）· 单量子比特旋转器编译（Kernel.12）</Source>
-
----
-# 32 铸器与圣殿 · 文献结果
-section: "铸器与圣殿 · 依据"
----
-
-<div class="body">
-  <p class="kicker">Literature results · not formalized in this book</p>
-  <h2 class="t">内核担保推理，<span class="hl-violet">不担保物理建模</span></h2>
-  <div class="g2 mt">
-    <div class="card violet">
-      <h4>文献结果 · 单量子比特旋转器编译</h4>
-      <h3>SU(2) → SO(3) 双覆盖与 ZYZ 欧拉分解</h3>
-      <p>本书验证了布洛赫重构与迹恒等式；任意单比特幺正略去整体相位后都能写成 ZYZ 欧拉角的普遍分解定理，照文献引用。</p>
-    </div>
-    <div class="card violet">
-      <h4>文献结果 · 走进 Lean 4 公理圣殿（上）</h4>
-      <h3>依值类型论内核与德布鲁因准则</h3>
-      <p>小而可审计的内核检查每一步推理；Lean 定义是否忠实刻画物理对象，是建模问题，不在内核担保之内。</p>
-    </div>
-  </div>
-</div>
-<Source>单量子比特旋转器编译 · 走进 Lean 4 公理圣殿（上），文献注记</Source>
-
----
-# 33 第七部 · 立极
-layout: section
-chapter: "07"
-section: "第七部 · 立极"
----
-
-<p class="kicker">第七部 · 立极（第 25–28 章）</p>
-<h2 class="t">立极 · <em>无时间因果、视界、量子公平与元统一</em></h2>
-<p class="lead">整数网格逼近 <Tex t="\sqrt2" /> 的误差变号缩小却不归零；二次平流无精确闭合；五重几何对称杜绝特权，并在自指罗盘下收束统一纲领。</p>
-<div class="card mt">
-  <ul class="plain">
-    <li>第 25 章 无时间因果与格拉姆相容空间 · 第 26 章 场（P）与线（NP）</li>
-    <li>第 27 章 量子的本质是公平 · 第 28 章 正交自指统一场论与元统一罗盘</li>
-  </ul>
-</div>
-
----
-# 34 第六部 · 越界 · 图景
-section: "第六部 · 越界 · 图景"
+# 29 第六部 · 越界 · 图景（续）
+section: "第六部 · 图景"
 ---
 
 <div class="body">
@@ -612,8 +522,25 @@ section: "第六部 · 越界 · 图景"
 <Source>第 23 章 §23.1（ch29-pell-seam）</Source>
 
 ---
-# 35 第六部与第七部 · 越界与立极 · 定理
-section: "第六部与第七部 · 越界与立极 · 定理"
+# 30 第七部 · 立极
+layout: section
+chapter: "07"
+section: "第七部 · 立极"
+---
+
+<p class="kicker">第七部 · 立极（第 25–28 章）</p>
+<h2 class="t">立极 · <em>无时间因果、视界、量子公平与比较公理</em></h2>
+<p class="lead">相容格拉姆椭圆体消解前后时间执念；二次平流无精确闭合；五重几何对称杜绝特权，并以零背景比较公理 <Tex t="\mathcal{A}_0" /> 与元统一罗盘收束基础纲领。</p>
+<div class="card mt">
+  <ul class="plain">
+    <li>第 25 章 无时间因果与格拉姆相容空间 · 第 26 章 场（P）与线（NP）</li>
+    <li>第 27 章 量子的本质是公平 · 第 28 章 正交自指统一场论与元统一罗盘</li>
+  </ul>
+</div>
+
+---
+# 31 第六部与第七部 · 越界与立极 · 定理
+section: "第六部与第七部 · 定理"
 ---
 
 <div class="body">
@@ -633,7 +560,7 @@ section: "第六部与第七部 · 越界与立极 · 定理"
 <Source>第 23 章 §23.1（SilverSlopeAbelianPellArithmetic）· 第 26 章 §26.4（QuadraticObservationClosure）</Source>
 
 ---
-# 36 第七部 · 立极 · 定理（续）
+# 32 第七部 · 立极 · 定理（续）
 section: "第七部 · 立极 · 定理"
 ---
 
@@ -654,8 +581,8 @@ section: "第七部 · 立极 · 定理"
 <Source>第 27 章 §27.3（CoherentUniformAmplification）· 第 28 章 §28.4（BalancedUnitaryComplexStructure）</Source>
 
 ---
-# 37 第六部与第七部 · 越界与立极 · 文献结果与开放问题
-section: "第六部与第七部 · 越界与立极 · 依据"
+# 33 第六部与第七部 · 越界与立极 · 文献结果与开放问题
+section: "第六部与第七部 · 依据"
 ---
 
 <div class="body">
@@ -678,15 +605,53 @@ section: "第六部与第七部 · 越界与立极 · 依据"
 <Source>第 23 章 §23.1 文献注记 · 第 26 章 §26.4 猜想 26.25</Source>
 
 ---
-# 38 第九部 · 互照与破执
+# 34 第八部 · 造微与归弧
+layout: section
+chapter: "08"
+section: "第八部 · 造微与归弧"
+---
+
+<p class="kicker">第八部 · 造微与归弧（第 29–33 章）</p>
+<h2 class="t">造微 · 极小圆弧、<em>三元数与万力大统一</em></h2>
+<p class="lead">一次正交与两次正交反演观察者极点；内割弦隧穿与圆弧微积分重述微积分与黎曼临界带；三维旋度自闭合锁死原生三元数场，在主频 <Tex t="\nu_0" /> 的 AF-GUT 框架下（MODEL）统合四大力。</p>
+<div class="card mt">
+  <ul class="plain">
+    <li>第 29 章 正交盲区与极小圆弧体 · 第 30 章 穿弦隧穿与圆弧微积分 · 第 31 章 圆弧微积分与黎曼猜想</li>
+    <li>第 32 章 不可表达的三元数与三维场封顶 · 第 33 章 万力归弧与圆弧场大统一（AF-GUT）</li>
+  </ul>
+</div>
+
+---
+# 35 第八部与第九部 · 造微与互照 · 定理
+section: "第八部与第九部 · 定理"
+---
+
+<div class="body">
+  <p class="kicker">定理29.2 · 定理34.1</p>
+  <h2 class="t">两根轴的转动<em>拼出一切转动</em>；能完美区分的历史<em>不超过维数</em></h2>
+<TheoremCard class="compact mt-s" label="定理29.2" title="双轴旋转的精确有限字生成（第 2 款）" gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" cite="thm-ch34-perpendicular-axis-and-pullback">
+
+设 $a, b \in \mathbb{R}^3$ 不共线：$\langle a, b\rangle^2 < \lVert a\rVert^2 \lVert b\rVert^2$。则每个行列式为 $1$ 的正交变换 $R$，都等于有限个保定向、固定 $a$ 或固定 $b$ 的旋转之积。
+
+</TheoremCard>
+<TheoremCard class="compact mt-s" label="定理34.1" title="有限维记忆的可区分历史容量（第 2 款）" gid="D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity" cite="thm-ch33-observer-pinching-and-memory-spectrum">
+
+设 $\rho_1, \ldots, \rho_N$ 是 $d$ 维密度矩阵，$E_1, \ldots, E_N$ 半正定且 $\sum_j E_j = 1$。若 $\operatorname{Tr}(E_j \rho_i)$ 在 $i = j$ 时为 $1$、否则为 $0$，则 $N \le d$。
+
+</TheoremCard>
+</div>
+<Source>第 29 章 §29.1（TwoAxisFiniteRotation）· 第 34 章 §34.1（FiniteMemoryHistoryCapacity）</Source>
+
+---
+# 36 第九部 · 互照与破执
 layout: section
 chapter: "09"
 section: "第九部 · 互照与破执"
 ---
 
 <p class="kicker">第九部 · 互照与破执（第 34–37 章）</p>
-<h2 class="t">互照 · 万物观察者、<em>自指扩表与超越轮回</em></h2>
-<p class="lead">能留下记录、参与两子比量的存在都可读作观察者；查表的算法也在表里；按内禀快度等步走，永远走不到 <Tex t="90^\circ" /> 的纯光。</p>
+<h2 class="t">互照 · 万物观察者、<em>自指扩表与测地智能</em></h2>
+<p class="lead">能留下记录、参与两子比量的存在都可读作观察者；查表的算法也在表里；按内禀快度等步走永远不到 <Tex t="90^\circ" /> 纯光，有理旋子流群在球丛上走出测地智能。</p>
 <div class="card mt">
   <ul class="plain">
     <li>第 34 章 万物观察者 · 第 35 章 乘光、自指扩表与无进位编码</li>
@@ -695,8 +660,8 @@ section: "第九部 · 互照与破执"
 </div>
 
 ---
-# 39 第九部 · 互照与破执 · 图景
-section: "第九部 · 互照与破执 · 图景"
+# 37 第九部 · 互照与破执 · 图景（一）
+section: "第九部 · 图景"
 ---
 
 <div class="body">
@@ -708,29 +673,21 @@ section: "第九部 · 互照与破执 · 图景"
 <Source>第 35 章 §35.3（ch36-two-rulers）</Source>
 
 ---
-# 40 第八部 · 造微与归弧 / 第九部 · 互照与破执 · 定理
-section: "第八部 · 造微与归弧 / 第九部 · 互照与破执 · 定理"
+# 38 第九部 · 互照与破执 · 图景（二）
+section: "第九部 · 图景"
 ---
 
 <div class="body">
-  <p class="kicker">定理34.1 · 定理29.2</p>
-  <h2 class="t">能完美区分的历史<em>不超过维数</em>；两根轴的转动<em>拼出一切转动</em></h2>
-<TheoremCard class="compact mt-s" label="定理34.1" title="有限维记忆的可区分历史容量（第 2 款）" gid="D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity" cite="thm-ch33-observer-pinching-and-memory-spectrum">
-
-设 $\rho_1, \ldots, \rho_N$ 是 $d$ 维密度矩阵，$E_1, \ldots, E_N$ 半正定且 $\sum_j E_j = 1$。若 $\operatorname{Tr}(E_j \rho_i)$ 在 $i = j$ 时为 $1$、否则为 $0$，则 $N \le d$。
-
-</TheoremCard>
-<TheoremCard class="compact mt-s" label="定理29.2" title="双轴旋转的精确有限字生成（第 2 款）" gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" cite="thm-ch34-perpendicular-axis-and-pullback">
-
-设 $a, b \in \mathbb{R}^3$ 不共线：$\langle a, b\rangle^2 < \lVert a\rVert^2 \lVert b\rVert^2$。则每个行列式为 $1$ 的正交变换 $R$，都等于有限个保定向、固定 $a$ 或固定 $b$ 的旋转之积。
-
-</TheoremCard>
+  <p class="kicker">第 36 章 §36.1.1 · 熵税</p>
+  <h2 class="t">剪掉的相干与付出的熵税，<em>同在 π/4 到顶</em></h2>
+  <img src="./img/ch37-entropy-tax.zh.svg" alt="横轴是旋转角 θ。品红的曲线是捏合剪掉的相干质量，墨色的曲线是熵增，两者在两端为零、在 θ = π/4 处同时到顶。" style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
+  <p class="lead mt-s">品红的曲线是一步捏合剪掉的相干质量 <Tex t="\tfrac12\sin^2 2\theta" />，墨色的曲线是熵增；两者在 <Tex t="\theta = 0" /> 与 <Tex t="\theta = \pi/2" /> 处为 <Tex t="0" />，在 <Tex t="\theta = \pi/4" /> 处分别取 <Tex t="1/2" /> 与 <Tex t="\ln 2" />。</p>
 </div>
-<Source>第 34 章 §34.1（FiniteMemoryHistoryCapacity）· 第 29 章 §29.1（TwoAxisFiniteRotation）</Source>
+<Source>第 36 章 §36.1.1（ch37-entropy-tax）</Source>
 
 ---
-# 41 第九部 · 互照与破执 · 文献结果与开放问题
-section: "第九部 · 互照与破执 · 依据"
+# 39 第九部 · 互照与破执 · 文献结果与开放问题
+section: "第九部 · 依据"
 ---
 
 <div class="body">
@@ -753,7 +710,7 @@ section: "第九部 · 互照与破执 · 依据"
 <Source>§35.1、§35.3 文献注记 · §34.8、§35.6.8、§36.8、§37.1 开放问题</Source>
 
 ---
-# 42 第十部 · 不二与归元
+# 40 第十部 · 不二与归元
 layout: section
 chapter: "10"
 section: "第十部 · 不二与归元"
@@ -761,24 +718,17 @@ section: "第十部 · 不二与归元"
 
 <p class="kicker">第十部 · 不二与归元（第 38–39 章）</p>
 <h2 class="t">观察者即宇宙本体 · <em>大一统母公理</em></h2>
-<p class="lead">第 38 章以无底座自指和旋量双覆叠讨论能观与所观。第 39 章提出无原点的半正定三元比较闭包，并以它组织通向量子力学五条公设的推演。</p>
-
----
-# 43 第九部 · 互照与破执 · 图景
-section: "第九部 · 互照与破执 · 图景"
----
-
-<div class="body">
-  <p class="kicker">第 36 章 §36.1.1 · 熵税</p>
-  <h2 class="t">剪掉的相干与付出的熵税，<em>同在 π/4 到顶</em></h2>
-  <img src="./img/ch37-entropy-tax.zh.svg" alt="横轴是旋转角 θ。品红的曲线是捏合剪掉的相干质量，墨色的曲线是熵增，两者在两端为零、在 θ = π/4 处同时到顶。" style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
-  <p class="lead mt-s">品红的曲线是一步捏合剪掉的相干质量 <Tex t="\tfrac12\sin^2 2\theta" />，墨色的曲线是熵增；两者在 <Tex t="\theta = 0" /> 与 <Tex t="\theta = \pi/2" /> 处为 <Tex t="0" />，在 <Tex t="\theta = \pi/4" /> 处分别取 <Tex t="1/2" /> 与 <Tex t="\ln 2" />。</p>
+<p class="lead">第 38 章以全域无底座自指、因陀罗网、摩耶正交梦境与旋量双覆叠合拢能观与所观；第 39 章提出无源保正三元比较闭合母公理 <Tex t="\mathrm{AXIOM}\text{-}\Omega" />，在附录 E T1–T4 桥接假设下（MODEL）导出量子力学五大公设，并收束于自包含三元数拓扑粒子与“至大无外”四重闭合。</p>
+<div class="card mt">
+  <ul class="plain">
+    <li>第 38 章 观察者即宇宙本体：无底物自指域、因陀罗网、正交梦境与清明觉醒</li>
+    <li>第 39 章 大一统母公理（AXIOM-Ω）：无源三元比较闭合、量子五大公设与自包含无外三元数</li>
+  </ul>
 </div>
-<Source>第 36 章 §36.1.1（ch37-entropy-tax）</Source>
 
 ---
-# 44 第九部 · 互照与破执 / 第十部 · 不二与归元 · 定理
-section: "第九部 · 互照与破执 / 第十部 · 不二与归元 · 定理"
+# 41 第九部与第十部 · 互照与不二 · 定理
+section: "第九部与第十部 · 定理"
 ---
 
 <div class="body">
@@ -798,8 +748,8 @@ section: "第九部 · 互照与破执 / 第十部 · 不二与归元 · 定理"
 <Source>第 36 章 §36.3（NoCloningInnerProductCriterion）· 第 38 章 §38.3（CircleDoubleCoverNoSection）</Source>
 
 ---
-# 45 第九部 · 互照与破执 / 第十部 · 不二与归元 · 文献结果
-section: "第九部 · 互照与破执 / 第十部 · 不二与归元 · 依据"
+# 42 第九部与第十部 · 互照与不二 · 文献结果
+section: "第九部与第十部 · 依据"
 ---
 
 <div class="body">
@@ -817,12 +767,85 @@ section: "第九部 · 互照与破执 / 第十部 · 不二与归元 · 依据"
       <p>旋量不能直接观测，时空量由它夹持生成：<Tex t="\mathbf J = \psi\gamma_0\tilde\psi" />，<Tex t="\mathbf S = \psi\mathbf I_{12}\tilde\psi" />；在 <Tex t="\beta = 0" /> 时 <Tex t="\mathbf J^2 = -\mathbf S^2 = \rho^2" />。</p>
     </div>
   </div>
-  <p class="lead mt">第九部用梦境擦除与记忆指针讨论观察，第十部用旋量双覆叠阐释观察者即宇宙本体。这些诠释属于本书的模型（MODEL）。</p>
+  <p class="lead mt">第九部用梦境擦除与记忆指针讨论观察，第十部用旋量双覆叠与无源三元流群阐释观察者即宇宙本体与母公理。这些综合诠释属于本书的模型（MODEL）。</p>
 </div>
 <Source>第 36 章 §36.1.2 · 第 38 章 §38.3，文献注记</Source>
 
 ---
-# 46 三层依据
+# 43 铸器与圣殿
+layout: section
+section: "铸器与圣殿"
+---
+
+<p class="kicker">铸器与圣殿 · 独立伴读篇</p>
+<h2 class="t">铸器 · 构造与验证：<em>异或代数、旋子编译与 Lean 4</em></h2>
+<p class="lead">置于十部三十九章与终章之后：把矩阵还原为异或位掩码，用布洛赫几何编译单比特旋转，再逐行打开冻结的 Lean 证明，看内核究竟检查了什么。</p>
+<div class="card mt">
+  <ul class="plain">
+    <li>把矩阵还原为异或 · 单量子比特旋转器编译</li>
+    <li>走进 Lean 4 公理圣殿（上、下）</li>
+  </ul>
+</div>
+
+---
+# 44 铸器与圣殿 · 图景
+section: "铸器与圣殿 · 图景"
+---
+
+<div class="body">
+  <p class="kicker">把矩阵还原为异或 · 位掩码立方体</p>
+  <h2 class="t">八块刀片是<em>立方体的八个角</em></h2>
+  <img src="./img/ch25-mask-cube.zh.svg" alt="立方体的八个角标着八块刀片与它们的位掩码，琥珀色箭头沿两条边走。" style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
+  <p class="lead mt-s">每个角标着刀片与它的三位掩码；乘一块刀片，就是沿它亮着的方向各走一条边，掩码按位异或。</p>
+</div>
+<Source>铸器与圣殿 · 把矩阵还原为异或（ch25-mask-cube）</Source>
+
+---
+# 45 铸器与圣殿 · 定理
+section: "铸器与圣殿 · 定理"
+---
+
+<div class="body">
+  <p class="kicker">定理Kernel.1 · 命题Kernel.12</p>
+  <h2 class="t">泡利对反对易；厄米 2×2 矩阵<em>就是布洛赫向量</em></h2>
+<TheoremCard class="compact mt-s" label="定理Kernel.1" title="单比特泡利外尔对的反对易、自伴与对合恒等式" gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" cite="thm-qubit-weyl-star">
+
+在 $M_2(\mathbb{C})$ 中：$ZX = -XZ$，$X^* = X$，$Z^* = Z$，$X^2 = 1$，$Z^2 = 1$。
+
+</TheoremCard>
+<TheoremCard class="compact mt-s" label="命题Kernel.12" title="厄米 2×2 矩阵的布洛赫重构与纯态单位球面" gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" cite="prop-hermitian-bloch-geometry">
+
+设 $M$ 是厄米 $2\times 2$ 复矩阵。则 $M = \operatorname{blochMatrix}(\operatorname{Re}\operatorname{Tr} M, \operatorname{bloch}(M))$; 若再有 $\operatorname{Tr} M = 1$ 且 $M^2 = M$，则 $\lVert\operatorname{bloch}(M)\rVert = 1$。
+
+</TheoremCard>
+</div>
+<Source>把矩阵还原为异或（Kernel.1）· 单量子比特旋转器编译（Kernel.12）</Source>
+
+---
+# 46 铸器与圣殿 · 文献结果
+section: "铸器与圣殿 · 依据"
+---
+
+<div class="body">
+  <p class="kicker">Literature results · not formalized in this book</p>
+  <h2 class="t">内核担保推理，<span class="hl-violet">不担保物理建模</span></h2>
+  <div class="g2 mt">
+    <div class="card violet">
+      <h4>文献结果 · 单量子比特旋转器编译</h4>
+      <h3>SU(2) → SO(3) 双覆盖与 ZYZ 欧拉分解</h3>
+      <p>本书验证了布洛赫重构与迹恒等式；任意单比特幺正略去整体相位后都能写成 ZYZ 欧拉角的普遍分解定理，照文献引用。</p>
+    </div>
+    <div class="card violet">
+      <h4>文献结果 · 走进 Lean 4 公理圣殿（上）</h4>
+      <h3>依值类型论内核与德布鲁因准则</h3>
+      <p>小而可审计的内核检查每一步推理；Lean 定义是否忠实刻画物理对象，是建模问题，不在内核担保之内。</p>
+    </div>
+  </div>
+</div>
+<Source>单量子比特旋转器编译 · 走进 Lean 4 公理圣殿（上），文献注记</Source>
+
+---
+# 47 三层依据
 section: "三层依据"
 ---
 
@@ -839,7 +862,7 @@ section: "三层依据"
 <Source>序曲“形式化验证与诚实标注契约” · 附录 C</Source>
 
 ---
-# 47 结尾
+# 48 结尾
 layout: cover
 ---
 

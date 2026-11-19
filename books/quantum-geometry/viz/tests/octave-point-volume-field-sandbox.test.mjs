@@ -237,7 +237,7 @@ for (const [file, source] of Object.entries(sources)) {
 check('source: shared grid columns and wheel:false', !/grid-template-columns\s*:/i.test(sources['style.css']) && /wheel:\s*false/.test(sources['main.js']));
 check('source: all five public cards in order', same([...sources['index.html'].matchAll(/data-preset="([^"]+)"/g)].map(m => m[1]), Object.keys(CARDS)));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find(v => v.id === ID);
-check('registry: live §34.13, five bilingual cards and ten exact GIDs', entry.status === 'live' && entry.chapter === 34 && entry.section === '34.13'
+check('registry: live §33.1, five bilingual cards and ten exact GIDs', entry.status === 'live' && entry.chapter === 33 && entry.section === '33.1'
   && same(entry.presets, Object.keys(CARDS)) && entry.presets.every(c => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map(x => x.gid).sort(), [...GIDS].sort()));
 

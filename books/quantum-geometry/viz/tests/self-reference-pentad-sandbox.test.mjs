@@ -150,10 +150,10 @@ check('source: the five cards in order, each with data-still', same([...sources[
 check('source: the three columns — #rail deck with the lens, center stage + strip, #evidence with one #infoBtn', /<aside class="col deck" id="rail"/.test(sources['index.html'])
   && /class="lens-toggle"/.test(sources['index.html']) && /<aside class="col side" id="evidence"/.test(sources['index.html']) && (sources['index.html'].match(/id="infoBtn"/g) || []).length === 1);
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID) || {};
-check('registry: a live §39.6 entry with the five cards, bilingual titles and the six GIDs', entry.status === 'live' && entry.chapter === 39 && entry.section === '39.6' && entry.code === 'SELFREF//PENTAD'
+check('registry: a live §36.9 entry with the five cards, bilingual titles and the six GIDs', entry.status === 'live' && entry.chapter === 36 && entry.section === '36.9' && entry.code === 'SELFREF//PENTAD'
   && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c] && entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same((entry.lean || []).map((x) => x.gid).sort(), [...GIDS].sort()));
-check('registry: the theory link names the §39.6 chapter and anchor', entry.theory && entry.theory[0].href === '../zh/ch39-s06-fivefold-self-reference-spectrum.html#sec-ch39-fivefold-self-reference-spectrum'
+check('registry: the theory link names the §36.9 chapter and anchor', entry.theory && entry.theory[0].href === '../zh/ch39-s06-fivefold-self-reference-spectrum.html#sec-ch39-fivefold-self-reference-spectrum'
   && entry.theory[0].href_en === '../en/ch39-s06-fivefold-self-reference-spectrum.html#sec-ch39-fivefold-self-reference-spectrum');
 
 /* ---------- 3. the page as served ---------- */
@@ -163,7 +163,7 @@ check('runtime: only the shared scripts and styles', same(await page.$$eval('scr
   && same(await page.$$eval('link[rel="stylesheet"]', (els) => els.map((e) => e.getAttribute('href')).filter((h) => !h.startsWith('https:'))), ['../assets/theme.css', 'style.css']));
 check('evidence: exactly the six GIDs, each in a LEAN ✓ box of #evidence', same(await page.$$eval('[data-lean-gid]', (els) => els.map((e) => e.dataset.leanGid).sort()), [...GIDS].sort())
   && await page.$$eval('[data-lean-gid]', (els) => els.every((e) => e.closest('#evidence .lean') && !e.closest('.lean').className.match(/num|model|argued|open|frozen/) && e.closest('.lean').querySelector('.ok').textContent.trim() === 'LEAN ✓')));
-check('drawer: the bilingual §39.6 links', same(await page.$$eval('#drawer a[href^="../../"]', (els) => els.map((e) => e.getAttribute('href')).sort()), [...THEORY].sort()));
+check('drawer: the bilingual §36.9 links', same(await page.$$eval('#drawer a[href^="../../"]', (els) => els.map((e) => e.getAttribute('href')).sort()), [...THEORY].sort()));
 // Keep the deck identity, theory entry point and numerical colours aligned with the shared shell.
 {
   const shell = await page.evaluate(() => {

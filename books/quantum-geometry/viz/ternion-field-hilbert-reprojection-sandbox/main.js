@@ -1,4 +1,4 @@
-/* TERNION//HILBERT · 三元数场组合与再投影阶梯沙盘 · Many-field reprojection (Chapter 39, §39.20)
+/* TERNION//HILBERT · 三元数场组合与再投影阶梯沙盘 · Many-field reprojection (Chapter 32, §32.3)
    World (kit.solid): z up. Above (z ≈ 0.7) the violet ternion field bodies: spherical octants bounded by three quadrant
    arcs, one per field. In the middle the cyan lens (an ellipse at z = 0.19 − 0.44λ) with the amber handle on its rim;
    dragging it sets the flattening λ. Below (z = −1) the floor of basis slots and the cyan pillars, whose heights are the

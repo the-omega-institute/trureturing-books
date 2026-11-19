@@ -152,7 +152,7 @@ check('source: no possessive ’s in the visible text (it splits under capitals)
 }
 check('suite: no fixed waits', !new RegExp('wait' + 'ForTimeout').test(suite));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
-check('registry: live §39.12 entry with five bilingual cards and the six theorems', !!entry && entry.status === 'live' && entry.chapter === 39 && entry.section === '39.12'
+check('registry: live §33.10 entry with five bilingual cards and the six theorems', !!entry && entry.status === 'live' && entry.chapter === 33 && entry.section === '33.10'
   && entry.code === 'UNIFORM//SLICE' && entry.capture_lock === 'links' && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map((x) => x.gid).sort(), [...GIDS].sort()) && entry.tags.length === entry.tags_en.length
   && entry.theory[0].href === `../zh/${THEORY_SEC}` && entry.theory[0].href_en === `../en/${THEORY_SEC}`);
@@ -242,8 +242,8 @@ async function checkLinks(p, tag) {
     && await p.$$eval('[data-lean-gid]', (els) => els.every((e) => e.closest('.col.side #evidence .lean') && e.closest('.lean').querySelector('.ok').textContent.trim() === 'LEAN ✓')));
   check(`${tag}: one ARGUED, MODEL, NUM and OPEN box each`, await p.evaluate(() => ['argued', 'model', 'num', 'open'].every((c) => document.querySelectorAll(`#evidence .lean.${c}`).length === 1)
     && document.querySelectorAll('#evidence .lean:not(.argued):not(.model):not(.num):not(.open):not(.frozen)').length === 6));
-  check(`${tag}: bilingual §39.12 theory link in the drawer, on the section fragment`, same(await p.$$eval('#drawer .refs a', (els) => els.map((e) => e.getAttribute('href')).sort()), ['zh', 'en'].map((l) => `../../${l}/${THEORY_SEC}`).sort()));
-  check(`${tag}: the OPEN box links the §39.12, §34.23 and §39.11 problems in both languages`, same(await p.$$eval('#evidence .lean.open a', (els) => els.map((e) => e.getAttribute('href')).sort()),
+  check(`${tag}: bilingual §33.10 theory link in the drawer, on the section fragment`, same(await p.$$eval('#drawer .refs a', (els) => els.map((e) => e.getAttribute('href')).sort()), ['zh', 'en'].map((l) => `../../${l}/${THEORY_SEC}`).sort()));
+  check(`${tag}: the OPEN box links the §33.10, §34.11 and §33.9 problems in both languages`, same(await p.$$eval('#evidence .lean.open a', (els) => els.map((e) => e.getAttribute('href')).sort()),
     ['zh', 'en'].flatMap((l) => OPEN_LINKS.map((x) => `../../${l}/${x}`)).sort()));
 }
 

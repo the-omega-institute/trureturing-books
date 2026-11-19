@@ -138,7 +138,7 @@ check('source: shared three-column grid and wheel:false', !/grid-template-column
 check('source: all five public presets remain in order', same([...sources['index.html'].matchAll(/data-preset="([^"]+)"/g)].map(m => m[1]), Object.keys(CARDS)));
 check('source: no proton-mass attribution of the naive quark-mass remainder', !/protonChiralMassFraction|PROTON_FRACTION|非希格斯|not Higgs|Higgs-given|希格斯给的/.test(sources['index.html'] + sources['main.js']));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find(v => v.id === ID);
-check('registry: live §34.16 entry with five bilingual cards and twelve GIDs', entry.status === 'live' && entry.chapter === 34 && entry.section === '34.16'
+check('registry: live §33.4 entry with five bilingual cards and twelve GIDs', entry.status === 'live' && entry.chapter === 33 && entry.section === '33.4'
   && same(entry.presets, Object.keys(CARDS)) && entry.presets.every(c => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map(x => x.gid).sort(), [...GIDS].sort()));
 

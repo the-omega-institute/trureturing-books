@@ -195,7 +195,7 @@ check('source: every .zh fragment has its .en twin', (sources['index.html'].matc
 }
 check('source: the suite waits for state, never for a fixed time', !new RegExp(['wait', 'For', 'Timeout'].join('')).test(fs.readFileSync(fileURLToPath(import.meta.url), 'utf8')));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
-check('registry: live §39.10 entry with five bilingual cards and the six theorems', !!entry && entry.status === 'live' && entry.chapter === 39 && entry.section === '39.10'
+check('registry: live §32.1 entry with five bilingual cards and the six theorems', !!entry && entry.status === 'live' && entry.chapter === 32 && entry.section === '32.1'
   && entry.code === 'HILBERT//LEDGER' && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map((x) => x.gid), GIDS) && entry.theory.some((t) => t.href === `../zh/${THEORY}` && t.href_en === `../en/${THEORY}`));
 const deps = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'tests', 'dependencies.json'), 'utf8')).suites[`${ID}.test.mjs`];
@@ -228,7 +228,7 @@ async function checkLinks(p, tag) {
   check(`${tag}: exact Lean evidence links in six green boxes`, same(await p.$$eval('[data-lean-gid]', (els) => els.map((e) => e.dataset.leanGid)), GIDS)
     && await p.$$eval('[data-lean-gid]', (els) => els.every((e) => e.closest('.col.side #evidence .lean') && e.closest('.lean').className === 'lean' && e.closest('.lean').querySelector('.ok')?.textContent.trim() === 'LEAN ✓')));
   check(`${tag}: one ARGUED, one MODEL and one NUM box after the green ones`, same(await p.$$eval('#evidence .lean:not([class="lean"])', (els) => els.map((e) => e.className)), ['lean argued', 'lean model', 'lean num']));
-  check(`${tag}: bilingual §39.10 theory link in the drawer`, same(await p.$$eval('#drawer .refs a', (els) => els.map((e) => e.getAttribute('href')).sort()), ['zh', 'en'].map((l) => `../../${l}/${THEORY}`).sort()));
+  check(`${tag}: bilingual §32.1 theory link in the drawer`, same(await p.$$eval('#drawer .refs a', (els) => els.map((e) => e.getAttribute('href')).sort()), ['zh', 'en'].map((l) => `../../${l}/${THEORY}`).sort()));
 }
 
 await T.goto(BOOK, ID, '?lang=en');

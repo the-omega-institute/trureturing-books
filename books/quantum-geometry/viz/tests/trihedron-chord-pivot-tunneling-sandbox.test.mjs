@@ -225,7 +225,7 @@ check('source: shared three-column grid, wheel:false, a looping clock', !/grid-t
 check('source: the five public presets stay in order', same([...sources['index.html'].matchAll(/data-preset="([^"]+)"/g)].map((x) => x[1]), Object.keys(CARDS)));
 check('source: no green tick outside the evidence boxes in the script', !/okmark/.test(sources['main.js']));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
-check('registry: live §34.26 entry with five bilingual cards and the five theorems', !!entry && entry.status === 'live' && entry.chapter === 34 && entry.section === '34.26'
+check('registry: live §30.1 entry with five bilingual cards and the five theorems', !!entry && entry.status === 'live' && entry.chapter === 30 && entry.section === '30.1'
   && entry.code === 'CHORD//TUNNEL' && same(entry.presets, Object.keys(CARDS)) && entry.presets.every((c) => entry.preset_titles[c].zh && entry.preset_titles[c].en)
   && same(entry.lean.map((x) => x.gid).sort(), [...GIDS].sort()) && entry.theory.some((t) => t.href === THEORY[0].replace('../../', '../') && t.href_en === THEORY[1].replace('../../', '../')));
 

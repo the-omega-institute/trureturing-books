@@ -18,7 +18,7 @@
 <div class="app lab" id="app">
 <header class="top">
   <div class="brand">
-    <a class="crumb" href="../"><span class="zh">◂ 第 39 章 · §39.6</span><span class="en">◂ Ch. 39 · §39.6</span></a>
+    <a class="crumb" href="../"><span class="zh">◂ 第 36 章 · §36.9</span><span class="en">◂ Ch. 36 · §36.9</span></a>
     <h1 class="logo" data-text="SELFREF//PENTAD">SELFREF<span>//</span>PENTAD</h1>
     <div class="tagline"><span class="zh">五阶自指不动点谱系 · <em>把自己代回自己：一跳到根，余弦转回自己，本征态只转相位，十五个噪声门蒸出一个，翻转的对角线逃出每一行。</em></span><span class="en">The fivefold self-referential fixed-point spectrum · <em>feed a thing back into itself: one hop to the root, the cosine turns back into itself, an eigenstate only turns its phase, fifteen noisy gates distil one, and the twisted diagonal escapes every row.</em></span></div>
   </div>
@@ -34,7 +34,7 @@
     <p class="note lens-note"><span class="zh">同一组参数，两套标签：左边按查表、余弦、薛定谔演化、门蒸馏与对角线读；右边把五件事都写成 x* = F(x*) 与乘子 λ。</span><span class="en">One set of parameters, two sets of labels: on the left read lookup, cosine, Schrödinger evolution, gate distillation and the diagonal; on the right write all five as x* = F(x*) with a multiplier λ.</span></p>
   </section>
   <section class="panel sec">
-    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§39.6</span></h2>
+    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§36.9</span></h2>
     <div class="presets cards" id="presets">
       <button class="preset" data-preset="pointer-path-compression" data-still="end" aria-pressed="false"><span class="code">F₁ · LOOKUP</span><span class="cn zh">查表自指：路径压缩到根，Lookup(0) = 0</span><span class="cn en">Lookup: path compression to the root, Lookup(0) = 0</span></button>
       <button class="preset" data-preset="dottie-real-imag-spiral" data-still="end" aria-pressed="false"><span class="code">F₂ · COS θ = θ</span><span class="cn zh">余弦自指：I 投影 cos θ* 等于 i 弧长 θ*</span><span class="cn en">Cosine: the I-projection cos θ* equals the i-arc θ*</span></button>
@@ -106,7 +106,7 @@
       <li><b>F₅ 对角线。</b>4 × 4 表 g(a, b) 的每一行是一条目录。读头沿对角线 (a, a) 走，把 g(a, a) 翻转后升到上一层 ℓ + 1：diagonal(¬, g) = 0011 在第 a 个位置与第 a 行不同，所以不是任何一行。¬ 没有不动点（¬b ≠ b），这正是逃逸的原因；换成有不动点的 f = id，对角线 1100 恰好就是第 2 行，被目录收住。</li>
       <li><b>透镜。</b>“不动点”读法不改任何参数，只把标签换成 x* = F(x*)：F₁ 是 find ∘ find = find（|λ| = 0），F₂ 是 cos（λ = −0.6736），F₃ 是 U 的相位（|λ| = 1）与信道（|λ| = 0.65），F₄ 是 ε ↦ ε<sub>out</sub>（λ = 0，立方），F₅ 是 ¬，没有不动点。</li>
     </ol>
-    <p class="lede refs">书中：<a href="../../zh/ch39-s06-fivefold-self-reference-spectrum.html#sec-ch39-fivefold-self-reference-spectrum" target="_top">§39.6 五阶自指不动点谱系</a></p>
+    <p class="lede refs">书中：<a href="../../zh/ch39-s06-fivefold-self-reference-spectrum.html#sec-ch39-fivefold-self-reference-spectrum" target="_top">§36.9 五阶自指不动点谱系</a></p>
   </div>
   <div class="en">
     <p class="lede">This is a numerical sandbox, not a proof. Every number is computed on the page (NUM); each Lean theorem is shown only on the one instance named in the evidence panel. The five cards are five instances of one equation x* = F(x*), ordered by the multiplier λ = F′(x*) from “there in one step” to “no fixed point at all”.</p>
@@ -118,7 +118,7 @@
       <li><b>F₅ Diagonal.</b> Each row of the 4 × 4 table g(a, b) is one entry of a listing. The read head walks the diagonal (a, a), negates g(a, a) and lifts it to the level ℓ + 1 above: diagonal(¬, g) = 0011 differs from row a in place a, so it is no row at all. ¬ has no fixed point (¬b ≠ b), and that is why it escapes; with f = id, which has fixed points, the diagonal 1100 is exactly row 2 and the listing catches it.</li>
       <li><b>Lens.</b> The fixed-point reading changes no parameter, only the labels, to x* = F(x*): F₁ is find ∘ find = find (|λ| = 0), F₂ is cos (λ = −0.6736), F₃ is the phase of U (|λ| = 1) and the channel (|λ| = 0.65), F₄ is ε ↦ ε<sub>out</sub> (λ = 0, cubic), and F₅ is ¬, with no fixed point.</li>
     </ol>
-    <p class="lede refs">In the book: <a href="../../en/ch39-s06-fivefold-self-reference-spectrum.html#sec-ch39-fivefold-self-reference-spectrum" target="_top">§39.6 The fivefold self-referential fixed-point spectrum</a></p>
+    <p class="lede refs">In the book: <a href="../../en/ch39-s06-fivefold-self-reference-spectrum.html#sec-ch39-fivefold-self-reference-spectrum" target="_top">§36.9 The fivefold self-referential fixed-point spectrum</a></p>
   </div>
 </div></div>
 <script src="main.js"></script>

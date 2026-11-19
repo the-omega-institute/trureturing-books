@@ -1,5 +1,5 @@
 /* Quantum Geometry · ORTHO//TRIAD (entanglement-entropy-complexity)
-   3D stage-first laboratory for Chapter 30: "量子纠缠、P=NP、熵" (Quantum Entanglement, P=NP, and Entropy).
+   3D stage-first laboratory for Chapter 26, §26.5: "量子纠缠、P=NP、熵" (Quantum Entanglement, P=NP, and Entropy).
    Couples a 16-qubit A|Ā tensor network, cross-cut bivector entanglement bridges, a magenta/violet partial-trace
    horizon blade, exact two-body Pythagorean conservation ‖r_A‖² + τ = cos²θ + sin²θ = 1, and Area-vs-Volume cut
    effective bond dimension χ_eff = 2^{S_cut} (distinct from the exact Schmidt rank χ_exact = rank(ρ_A) = 2^{k_cut}

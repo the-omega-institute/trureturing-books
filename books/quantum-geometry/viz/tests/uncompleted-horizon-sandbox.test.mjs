@@ -37,7 +37,7 @@ check('exactly the five chapter theorem citations', [...html.matchAll(/data-lean
 check('OPEN occurs only in the theory drawer', await page.$$eval('.lean.open', es=>es.length===1&&es.every(e=>!!e.closest('#drawer'))));
 check('shared runtime only', await page.evaluate(()=>[...document.scripts].map(s=>s.getAttribute('src')).join()==='../assets/shell.js,../assets/kit.js,main.js'));
 const registry=JSON.parse(fs.readFileSync(path.join(DIR,'..','visualizations.json'),'utf8')).visualizations.find(v=>v.id===ID);
-check('registry: live, bilingual, chapter 38.6 and all five cards',registry.status==='live'&&registry.title_en&&registry.chapter===38&&registry.section==='38.6'&&registry.presets.join()===CARDS.join());
+check('registry: live, bilingual, chapter 36.7 and all five cards',registry.status==='live'&&registry.title_en&&registry.chapter===36&&registry.section==='36.7'&&registry.presets.join()===CARDS.join());
 await T.goto(BOOK,ID,'?lang=en'); await settle(page);
 check('default full laboratory opens on bootstrap without playing',(await state()).scene==='bootstrap-ledger'&&!(await state()).playing);
 for(const card of ['bootstrap-ledger','lawvere-godel']) {
