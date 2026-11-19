@@ -127,6 +127,24 @@ Group 1 follows from norm expansion, outer-product Bloch parameterization, and b
 2. **Born uniqueness, Lüders conditioning, reproducing-kernel tensor products, and Tsirelson's bound**: Projective frame uniqueness appears in A. M. Gleason (*J. Math. Mech.* **6**, 885–893, 1957) and POVM effect uniqueness down to $d = 2$ in P. Busch (*Phys. Rev. Lett.* **91**, 120403, 2003, DOI `10.1103/PhysRevLett.91.120403`); selective projection updates and isometric dilations appear in G. Lüders (*Ann. Phys.* **443**, 322–328, 1950/1951) and W. F. Stinespring (*Proc. Amer. Math. Soc.* **6**, 211–216, 1955); tensor-product Hilbert spaces from product reproducing kernels appear in N. Aronszajn (*Trans. Amer. Math. Soc.* **68**, 337–404, 1950), alongside local-tomography reconstructions by L. Hardy (2001) and G. Chiribella, G. M. D'Ariano & P. Perinotti (*Phys. Rev. A* **84**, 012311, 2011); Bell–CHSH and quantum correlation bounds appear in J. S. Bell (1964), J. F. Clauser, M. A. Horne, A. Shimony & R. A. Holt (*Phys. Rev. Lett.* **23**, 880–884, 1969), and B. S. Cirel'son [Tsirelson] (*Lett. Math. Phys.* **4**, 93–100, 1980, DOI `10.1007/BF00417500`). Every `T1–T4` operational bridge and countermodel boundary in [Appendix E §E.5](appendix-e-s05-quantum-postulates.md#sec-appe-quantum) remains in full force.
 :::
 
+::: {.remark #rem-ch39-axiom-omega-kappa-versus-born title="The Exact Relation Between the Master Kernel $\kappa_{S^3}$ and the Born Kernel"}
+**Two kernels, two angles (`manual derivation`).** The kernel selected by the axiom and the Born kernel are two different objects, each written in half-angle form:
+
+$$
+\kappa_{S^3}(\psi, \phi) \;=\; \frac{1 + \operatorname{Re}\langle\phi\mid\psi\rangle}{2} \;=\; \cos^2\frac{d_{S^3}(\psi, \phi)}{2}, \qquad \bigl\lvert\langle\phi\mid\psi\rangle\bigr\rvert^2 \;=\; \cos^2 d_{\mathbb{CP}^1}\bigl([\psi], [\phi]\bigr) \;=\; \cos^2\frac{\vartheta_{\mathrm{Bloch}}}{2}.
+$$
+
+The first angle is the geodesic distance $d_{S^3} \in [0, \pi]$ on $S^3(1)$; the second is the Bloch angle $\vartheta_{\mathrm{Bloch}}$, which is twice the minimal distance $d_{\mathbb{CP}^1} = \min_\chi d_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) \in [0, \frac{\pi}{2}]$ between the two blind-zone fibers. The two half-angle formulas refer to different angles. $\kappa_{S^3}$ is invariant under both left and right transports (Law II); the Born kernel is invariant only under left transports and under those right transports that map blind-zone fibers to blind-zone fibers, so it fails the two-sided invariance clause of Law (II) and cannot serve as the $\kappa$ of the axiom.
+
+**The exact relation.** Writing $\langle\phi\mid\psi\rangle = r e^{\hat{\mathbf{i}}\alpha}$, one has along the blind-zone fiber $2\kappa_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) - 1 = r\cos(\chi + \alpha)$, hence
+
+$$
+\bigl\lvert\langle\phi\mid\psi\rangle\bigr\rvert^2 \;=\; \max_{\chi}\bigl(2\kappa_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) - 1\bigr)^2 \;=\; 2\cdot\frac{1}{2\pi}\int_0^{2\pi}\bigl(2\kappa_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) - 1\bigr)^2\,d\chi .
+$$
+
+The Born probability is the maximum of $(2\kappa_{S^3} - 1)^2$ over the blind-zone fiber, and also twice its fiber average. By the round-trip law of [@rem-ch39-axiom-omega-round-trip-closing-law], $(2\kappa(w, x) - 1)^2 = \kappa\bigl(w, [x, w, x]\bigr)$, so the Born probability also equals the round-trip reading maximized over the blind-zone fiber, $\max_\chi \kappa\bigl(\phi, [e^{\hat{\mathbf{i}}\chi}\psi, \phi, e^{\hat{\mathbf{i}}\chi}\psi]\bigr)$; this is the precise meaning, at the level of the master kernel, of the "round-trip double projection" of §39.3.2.
+:::
+
 We verify all five postulates quantitatively on explicit single- and two-ternion configurations below:
 
 ::: {.example #ex-ch39-five-qm-postulates-quantitative-audit title="Joint Five-Postulate Quantitative Audit: Hopf Phase Invariance, Pauli Commutator Uncertainty Saturation, 60° Born Pythagoras, Halting-Pinch Pythagoras, and 45° Tsirelson Peak"}

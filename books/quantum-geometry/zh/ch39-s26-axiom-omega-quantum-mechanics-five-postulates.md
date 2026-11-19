@@ -127,6 +127,24 @@
 2. **玻恩规则唯一性、吕德斯更新、再生核张量积与非定域极值**：闭子空间投影测度唯一性见 A. M. Gleason（*J. Math. Mech.* **6**, 885–893, 1957），包含 $d = 2$ 的正算子值效应测度唯一性见 P. Busch（*Phys. Rev. Lett.* **91**, 120403, 2003，DOI `10.1103/PhysRevLett.91.120403`）；选言投影更新与开放系统等距扩张见 G. Lüders（*Ann. Phys.* **443**, 322–328, 1950/1951）与 W. F. Stinespring（*Proc. Amer. Math. Soc.* **6**, 211–216, 1955）；乘积正定核诱导张量积希尔伯特空间见 N. Aronszajn（*Trans. Amer. Math. Soc.* **68**, 337–404, 1950），操作局域层析重构见 L. Hardy（2001）与 G. Chiribella, G. M. D'Ariano & P. Perinotti（*Phys. Rev. A* **84**, 012311, 2011）；经典与量子关联界见 J. S. Bell（1964）、J. F. Clauser, M. A. Horne, A. Shimony & R. A. Holt（*Phys. Rev. Lett.* **23**, 880–884, 1969）及 B. S. Cirel'son［Tsirelson］（*Lett. Math. Phys.* **4**, 93–100, 1980，DOI `10.1007/BF00417500`）。本节严格遵守[附录 E §E.5](appendix-e-s05-quantum-postulates.md#sec-appe-quantum) 的全部 `T1–T4` 操作桥接条件与反例边界。
 :::
 
+::: {.remark #rem-ch39-axiom-omega-kappa-versus-born title="母核 $\kappa_{S^3}$ 与玻恩核的精确关系"}
+**两个核，两个角（`手工推导`）。** 母公理选出的核与玻恩核是两个对象，分别写成半角形式：
+
+$$
+\kappa_{S^3}(\psi, \phi) \;=\; \frac{1 + \operatorname{Re}\langle\phi\mid\psi\rangle}{2} \;=\; \cos^2\frac{d_{S^3}(\psi, \phi)}{2}, \qquad \bigl\lvert\langle\phi\mid\psi\rangle\bigr\rvert^2 \;=\; \cos^2 d_{\mathbb{CP}^1}\bigl([\psi], [\phi]\bigr) \;=\; \cos^2\frac{\vartheta_{\mathrm{Bloch}}}{2}.
+$$
+
+前者的角是 $S^3(1)$ 上的测地距离 $d_{S^3} \in [0, \pi]$；后者的角是布洛赫夹角 $\vartheta_{\mathrm{Bloch}}$，它等于两条盲区纤维之间最小距离 $d_{\mathbb{CP}^1} = \min_\chi d_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) \in [0, \frac{\pi}{2}]$ 的两倍。两个半角公式用的是两个不同的角。$\kappa_{S^3}$ 在左、右两种迁移下都不变（法则 II）；玻恩核只在左迁移与把盲区纤维映到盲区纤维的那部分右迁移下不变，所以它不满足法则 (II) 的双侧不变条款，充当不了母公理中的 $\kappa$。
+
+**精确关系。** 记 $\langle\phi\mid\psi\rangle = r e^{\hat{\mathbf{i}}\alpha}$，则沿盲区纤维 $2\kappa_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) - 1 = r\cos(\chi + \alpha)$，从而
+
+$$
+\bigl\lvert\langle\phi\mid\psi\rangle\bigr\rvert^2 \;=\; \max_{\chi}\bigl(2\kappa_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) - 1\bigr)^2 \;=\; 2\cdot\frac{1}{2\pi}\int_0^{2\pi}\bigl(2\kappa_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) - 1\bigr)^2\,d\chi .
+$$
+
+玻恩概率是 $(2\kappa_{S^3} - 1)^2$ 沿盲区纤维的最大值，也是其纤维平均的两倍。由 [@rem-ch39-axiom-omega-round-trip-closing-law] 的往返律，$(2\kappa(w, x) - 1)^2 = \kappa\bigl(w, [x, w, x]\bigr)$，所以玻恩概率又等于沿盲区纤维取最大的往返读数 $\max_\chi \kappa\bigl(\phi, [e^{\hat{\mathbf{i}}\chi}\psi, \phi, e^{\hat{\mathbf{i}}\chi}\psi]\bigr)$；§39.3.2 所说“往返双投影”在母核上的精确含义即此。
+:::
+
 下面我们在单一具体算例中对五大公设的关键几何不变量做一行一式精确对账：
 
 ::: {.example #ex-ch39-five-qm-postulates-quantitative-audit title="五大公理联合定量核验：霍普夫相位盲区不变、泡利换位子不确定性饱和、60° 玻恩勾股分账、停机捏合希尔伯特—施密特勾股与 45° 齐雷尔松达峰"}

@@ -4,7 +4,7 @@
 
 穿过[第 28 章](ch32-unified-field-and-meta-unification.md)至[第 38 章](ch39-observer-is-ontological-universe.md)的几何、物理与心智长廊，读者心中最自然的一声追问已然浮现：**遍布全书三十九章的四块基石——“比较公理”（[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)）、“极小圆弧”（[§29.5](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)）、“三元数”（[§32.2](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-inexpressible-ternions-and-number-projections)）与“连续场”（[§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger)、[§32.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md#sec-ch39-ternion-field-composition-and-hilbert-reprojection)）——并非四条彼此独立、靠外力拼装的假设，而是同一个零背景几何母体在四个切面上的必然显影！**
 
-现代数学与物理学之所以在近两百年里把这四者拆散在四类互不往来的教科书中，根源在于传统主流教材习惯从第一步起便引入两根外置脚手架：**特权外部原点 $\mathbf{1}$** 与**平直笛卡尔线性加法**。本节正式立起全书的**无源保正三元比较闭合公理（$\mathrm{AXIOM}\text{-}\Omega$）**（母公理跨界统摄、连通单连通有限维拓扑流形载体、$C^2$ 双侧保真核正则性与极小维数/极小秩选支公设标为 **`MODEL`**，并严格衔接[附录 E](appendix-e.md) 的 `H1` 外延核商化、`H2` 格拉姆半正定刚性与 `H3` 柯西完备化；三元流群三公理群重构、二维反自伴换位子归零、三维非交换非紧李代数淘汰与三点格拉姆正矢恒等式属 **`手工推导` / `NUM`**；普吕弗—贝尔—瑟坦流群、蒙哥马利—齐平定理、嘉当—米尔诺双不变度规分类与彼得—外尔正定类函数分解归入 **`文献结果`**；底层划分商核、格拉姆可实现性、三锚正定判据、自旋因子叉乘分类与单纯上边缘闭合由 **`LEAN ✓`** 冻结声明严格锚定）：在上述单连通流形载体与法则 (I)–(III) 内禀约束下，一旦撤去特权原点与平直加法，无需预设空间维数“$3$”、无需预设圆周率或外部时空网格，**三元数、极小圆弧与无边界连续场**便按非循环纯数学定理次第涌现。
+现代数学与物理学之所以在近两百年里把这四者拆散在四类互不往来的教科书中，根源在于传统主流教材习惯从第一步起便引入两根外置脚手架：**特权外部原点 $\mathbf{1}$** 与**平直笛卡尔线性加法**。本节正式立起全书的**无源保正三元比较闭合公理（$\mathrm{AXIOM}\text{-}\Omega$）**（母公理跨界统摄、连通单连通有限维拓扑流形载体、$C^2$ 双侧保真核正则性与极小维数/极小秩选支公设标为 **`MODEL`**，并严格衔接[附录 E](appendix-e.md) 的 `H1` 外延核商化、`H2` 格拉姆半正定刚性与 `H3` 柯西完备化；三元流群三公理群重构、二维反自伴换位子归零、三维非交换非紧李代数淘汰与三点格拉姆正矢恒等式属 **`手工推导` / `NUM`**；普吕弗—贝尔—瑟坦流群、蒙哥马利—齐平定理、嘉当—米尔诺双不变度规分类与彼得—外尔正定类函数分解归入 **`文献结果`**；底层划分商核、格拉姆可实现性、三锚正定判据、自旋因子叉乘分类与单纯上边缘闭合由 **`LEAN ✓`** 冻结声明严格锚定）：在上述单连通流形载体与法则 (I)–(III) 内禀约束下，一旦撤去特权原点与平直加法，无需预设空间维数“$3$”、无需预设圆周率或外部时空网格，**三元数、极小圆弧与无边界连续场**便按非循环纯数学定理次第涌现。需要说明的是，§39.1–§39.3 定理盒所引的 `LEAN ✓` 冻结声明都是在一般情形下成立的真命题，其中没有一条形式化从法则 (I)–(III) 推出 $S^3$、$\kappa_{S^3}$ 与玻恩核的推导链本身，这条推导链目前的地位是 `手工推导` 加 `文献结果`。
 
 ## 39.1.1 碎片溯源：为何同一颗无源核心散落在四门现代学科里？ {#sec-ch39-24-1}
 
@@ -100,7 +100,7 @@
    \det\mathbf{G}_3(\epsilon) \;=\; \bigl(1 - f(2\epsilon)\bigr)\bigl(1 + f(2\epsilon) - 2f(\epsilon)^2\bigr) \;=\; \sin^2\epsilon \cdot \frac{1}{2}\bigl(1 - \cos\epsilon\bigr)^2 \;=\; \frac{1}{2}\sin^2\epsilon\,v_\epsilon^2 \;>\; 0.
    $$
 
-   平直零曲率线段被彻底淘汰，基本连接必为正曲率**极小圆弧**，且单次比较内禀伴生二阶弦弧矢高 $v_\epsilon(x, y) = 1 - \cos d_{S^3}(x, y) = 2\bigl(1 - \kappa_{S^3}(x, y)\bigr) \ge 0$。
+   上式的 $\det\mathbf{G}_3 > 0$ 只表明三点的特征向量线性无关，单凭它区分不了弯曲与平直：平直实线上的高斯核 $e^{-(t-s)^2}$ 对任意三个不同点同样给出 $\det\mathbf{G}_3 > 0$。平直零曲率线段的淘汰与基本连接为正曲率**极小圆弧**，来自第一步已锁定的单位球面 $S^3(1)$（截面曲率 $K = 1$）；在这条圆弧上，单次比较内禀伴生二阶弦弧矢高 $v_\epsilon(x, y) = 1 - \cos d_{S^3}(x, y) = 2\bigl(1 - \kappa_{S^3}(x, y)\bigr) \ge 0$。
 
 ::: {.viz src="axiom-omega-dimension-closure-sandbox" preset="peter-weyl-rank-five-kernel" height="500"}
 彼得—外尔秩五母核卡：合并 $j = 0$（秩 $1$）与 $j = \frac{1}{2}$（秩 $4$）锁定最低忠实非负母核 $\kappa_{S^3} = \cos^2(d_{S^3}/2)$（秩 $5$），等步三点在 $\epsilon = 60^\circ$ 撑开严格正定格拉姆体积锁 $\det\mathbf{G}_3 = \frac{3}{32}$（特征标展开标 `ARGUED`，三锚行列式公式与正定判据标 `LEAN ✓`，有理核验标 `NUM`）。
@@ -113,7 +113,7 @@
    \eta \;:=\; \theta^1 \wedge \theta^2 \wedge \theta^3 \;=\; \frac{1}{6}\varepsilon_{ijk}\,\theta^i \wedge \theta^j \wedge \theta^k \;=\; \frac{1}{12}\bigl\langle \boldsymbol{\theta} \wedge [\boldsymbol{\theta} \wedge \boldsymbol{\theta}] \bigr\rangle, \qquad d\eta \;\equiv\; 0, \qquad \partial\mathcal{M} \;\equiv\; \emptyset.
    $$
 
-   顶维外导数恒零（$d\eta \equiv 0$）配紧流形无边界（$\partial\mathcal{M} = \emptyset$，离散对应 [`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact) 与 [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness)，`LEAN ✓`）意味着三元极小圆弧体一旦走满三维，无需借用外部背景网格即可实现无源无漏的旋度自持闭合（`1—3—3—1` 外代数中 $\Lambda^3 \cong \Lambda^0$）——**这枚无中心、无边缘、处处均匀同性的闭合三元数流形本身，就是原生“场”**。
+   顶维外导数恒零（$d\eta \equiv 0$）配紧流形无边界（$\partial\mathcal{M} = \emptyset$，离散对应 [`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact) 与 [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness)，`LEAN ✓`）意味着三元极小圆弧体一旦走满三维，无需借用外部背景网格即可实现无源无漏的旋度自持闭合（`1—3—3—1` 外代数中 $\Lambda^3 \cong \Lambda^0$）——**这枚无中心、无边缘、处处均匀同性的闭合三元数流形本身，就是原生“场”**。需要补充的是，顶维形式外导数恒零与紧流形无边界对任何闭三维流形都成立，单凭这两条挑不出 $S^3$；这一步有实质内容的部分在于：三元迁移 $[-, -, -]$ 等价于一对挠率互为相反数的平坦度量联络 $\nabla^L, \nabla^R$（左、右迁移的微分即两者的平行移动），两者的平均 $\frac{1}{2}(\nabla^L + \nabla^R)$ 是截面曲率 $1$ 的列维-奇维塔联络（É. Cartan & J. A. Schouten, *Proc. Akad. Wetensch. Amsterdam* **29**, 803–815, 1926，`文献结果`）；挠率给出的双不变三形式 $\langle X, [Y, Z]\rangle$（在 $S^3(1)$ 上等于 $2\eta$）则是球面上三元运算的障碍：若球面 $S^n$ 承载满足法则 (I) 的连续三元运算，它便是紧连通李群，交换时为环面，只能是 $S^1$，非交换时这枚三形式代表德拉姆上同调 $H^3$ 的非零类，迫使 $n = 3$，因而除 $S^1$、$S^3$ 外没有别的球面承载这样的运算（`手工推导`）。
 
 ::: {.viz src="axiom-omega-dimension-closure-sandbox" preset="cartan-three-form-closed-field" height="500"}
 无边界的嘉当三形式场卡：测地球半径推向 $r \to \pi$ 时边界面积收缩归零，单位体积嘉当三形式 $\eta$ 积满 $2\pi^2$ 且外导数 $d\eta \equiv 0$（嘉当三形式文献标 `ARGUED`，离散面闭链与单纯二上链正合标 `LEAN ✓`，体积与波前读数标 `NUM`）。
@@ -146,6 +146,18 @@
 1. **三元流群极小三公理系与希尔伯特第五问题光滑化**：无单位元三元流群由 H. Prüfer（1924）与 R. Baer（1929）创立，本节法则 (I) 采用的无反序外结合三等式极小公理系由 J. Certaine（*Bull. Amer. Math. Soc.* **49**, 869–877, 1943）证明与群结构在选定任意基点后一一等价；局部欧氏拓扑群无需光滑性预设即唯一具有实解析李群结构的定理由 D. Montgomery & L. Zippin（*Topological Transformation Groups*, Interscience, 1955）证出；
 2. **双不变正定度规李群分类与正定球面核**：紧致半单李群与嘉当三形式 $\eta$ 的几何分类见 É. Cartan（*Ann. Mat. Pura Appl.* **4**, 209–256, 1927，DOI `10.1007/BF02409989`）与 J. Milnor（*Adv. Math.* **21**, 293–329, 1976，Lemma 7.5 证明具 $\operatorname{Ad}$-不变正定内积的李代数必正交分解为交换中心与紧单李代数直和，直接排除 $H_3(\mathbb{R})$ 与 $\mathfrak{sl}(2, \mathbb{R})$）；紧群正定类函数的不可约特征标展开见 F. Peter & H. Weyl（*Math. Ann.* **97**, 737–755, 1927）与 I. J. Schoenberg（*Duke Math. J.* **9**, 96–108, 1942）；
 3. **与[附录 E](appendix-e.md) 三层比较签名的严密衔接**：$\mathrm{AXIOM}\text{-}\Omega$ 显式声明连通单连通有限维流形载体（配 `H1` 外延商化与 `H3` 柯西完备化），并在法则 (II) 中纳入 $\kappa(x, y) = 1 \iff x = y$、单槽二阶海森严格负定非退化、触零下确界 $\inf\kappa = 0$（由第一步 $S^3(1)$ 紧致性保证最小值必被取到，再由第二步极小忠实秩 $1 + 4 = 5$ 的彼得—外尔母核 $\kappa_{S^3} = \cos^2\frac{d_{S^3}}{2}$ 将该唯一零点精确锁定在对跖点 $d_{S^3} = \pi$）与任意阶 $\mathbf{G}_n \succeq 0$（`H2`），从而在无原点流形上内建了附录 E 的 **Layer 1 正定几何刚性**（合法越过 [@ex-appe-layer0-countermodels] 的四个第 0 层有限反例），而跨节点多场耦合、连续统路径积分测度与超限基数边界仍严格遵守附录 E 的 `T1–T4` 与 `H4–H9` 台账。
+:::
+
+::: {.remark #rem-ch39-axiom-omega-round-trip-closing-law title="法则 (III) 的单结构形式：往返律与达朗贝尔函数方程"}
+**往返律（`手工推导`）。** 记反射 $s_x(w) := [x, w, x]$。在 $S^3(1)$ 上 $s_x(w) = 2\langle x, w\rangle x - w$，故 $\langle w, s_x(w)\rangle = 2\langle x, w\rangle^2 - 1$，母核 $\kappa_{S^3}$ 因而满足
+
+$$
+\kappa\bigl(w,\, [x, w, x]\bigr) \;=\; \bigl(2\kappa(w, x) - 1\bigr)^2 \qquad (\forall\, w, x \in \mathcal{M}).
+$$
+
+法则 (III) 的“极小维数、极小秩”是在一整类结构中取极小；上式是单个结构自身的性质，可以代替它充当闭合律。在法则 (I) 与法则 (II) 的对称、外延分离 $\kappa(x, y) = 1 \iff x = y$、双侧迁移不变及 $C^2$ 正则条款之上，再要求每点 $x$ 恰有一个触零点 $x^\perp$（$\kappa(x, x^\perp) = 0$），则满足往返律的结构在同构意义下恰有两个：单位圆 $S^1$ 与单位三维球面 $S^3$，二者都取 $[x, y, z] = x y^{-1} z$ 与 $\kappa(x, y) = \lVert (x + y)/2\rVert^2$；其中迁移非交换者唯有 $S^3$，维数、紧致性与 $\kappa$ 的格拉姆半正定（秩 $\dim\mathcal{M} + 2$，在 $S^3$ 上即 $1 + 4 = 5$）都由此推出。加上 §39.1.2 的单连通载体条件，$S^1$ 出局，解唯有 $S^3(1)$ 与 $\kappa_{S^3}$。证明要点：取定基点 $o$ 并令 $\varphi(g) := \kappa(o, g)$，往返律化为倍角式 $\varphi(g^2) = \bigl(2\varphi(g) - 1\bigr)^2$；沿任一单参数子群解得 $\varphi(\exp tX) = \cos^2\bigl(\lVert X\rVert t/\sqrt{2}\bigr)$，于是所有单参数子群走过同一长度后闭合，交换子代数至多一维，李代数只能是 $\mathbb{R}$ 或 $\mathfrak{su}(2)$。
+
+**达朗贝尔函数方程（`文献结果`）。** 令 $\psi := 2\varphi - 1$。两变量等式 $\psi(ab) + \psi(ab^{-1}) = 2\psi(a)\psi(b)$ 是群上的达朗贝尔函数方程；T. M. K. Davison（*Aequationes Math.* **76**, 33–53, 2008；*Publ. Math. Debrecen* **75**, 41–66, 2009）证明其非零连续解为 $\frac{1}{2}\operatorname{tr}\circ\rho$（$\rho : G \to \mathrm{SL}(2, \mathbb{C})$ 为连续同态），且承载忠实解的紧群嵌入 $\mathrm{SU}(2)$。因此以两变量形式为公理时，上述分类由文献直接给出；往返律是它的对角情形 $a = b$。单变量的往返律本身排除不了 $\mathrm{SO}(3)$：在 $\mathrm{SO}(3)$ 上取 $\psi = \cos\alpha$（$\alpha$ 为转角），它忠实、光滑且满足倍角式，但对绕两根正交轴各转 $\pi/2$ 的 $a, b$ 有 $\psi(ab) + \psi(ab^{-1}) = -1 \ne 0 = 2\psi(a)\psi(b)$，相应的 $\kappa = \cos^2(\alpha/2)$ 在全部转角为 $\pi$ 的旋转上取零，触零点不唯一。所以唯一触零点这一条款不可省去。
 :::
 
 ::: {.example #ex-ch39-axiom-omega-dimension-sieve-and-gram-audit title="候选维数筛（d = 1 → 2 → 3 → 4/6/8）与三锚格拉姆正矢行列式精确有理数核验"}

@@ -44,7 +44,7 @@
      \sin^2\theta_W(\mu_{\mathrm{arc}}) \;=\; \frac{\operatorname{Tr}_{\mathrm{Weyl}}(T_3^2)}{\operatorname{Tr}_{\mathrm{Weyl}}(Q^2)} \;=\; \frac{\frac{1}{2}(1 + 3)}{2\!\left(1 + 3 \times \frac{5}{9}\right)} \;=\; \frac{2}{\frac{16}{3}} \;=\; \frac{3}{8} \;=\; 0.375,
      $$
 
-     且因空间/电弱场与色场正交直和无 $(X, Y)$ 轻子夸克规范玻色子，树图纯规范质子衰变振幅恒为零 $\Gamma_{\mathrm{gauge}}(p \to e^+\pi^0) \equiv 0$（单圈重整化跑动阈值偏移 $\Delta\alpha^{-1}\approx 3.664$ 的非微扰闭合与三代手征格点谱保持为 `OPEN`，见 [@prob-ch39-af-gut-threshold-and-proton-stability] 与 [@prob-ch34-sm-generations-and-couplings]）；
+     这一迹比以标准模型单代费米子的 $T_3$ 与 $Q$ 赋值为输入，与 H. Georgi, H. R. Quinn & S. Weinberg（*Phys. Rev. Lett.* **33**, 451–454, 1974）的计算相同（`文献结果`），$\frac{3}{8}$ 的数值由这组费米子赋值决定，属于母公理之外的输入；且因空间/电弱场与色场正交直和无 $(X, Y)$ 轻子夸克规范玻色子，树图纯规范质子衰变振幅恒为零 $\Gamma_{\mathrm{gauge}}(p \to e^+\pi^0) \equiv 0$（单圈重整化跑动阈值偏移 $\Delta\alpha^{-1}\approx 3.664$ 的非微扰闭合与三代手征格点谱保持为 `OPEN`，见 [@prob-ch39-af-gut-threshold-and-proton-stability] 与 [@prob-ch34-sm-generations-and-couplings]）；
    - **麦克斯韦—拉曼紫外自截断与胞间角亏引力（`手工推导` / `MODEL`）**：$N$ 枚闭合场体在三维空间两两比较的过约束度为 $\Delta E(N) = \binom{N}{2} - (3N - 6) = \frac{(N-3)(N-4)}{2}$：普朗克单胞核 $N = 3, 4$ 处 $\Delta E \equiv 0$ 实现紫外无过约束角亏自截断；$N \ge 5$ 时冗余边约束（$\Delta E > 0$）使一般独立边长分配无法无应力平直嵌入 $\mathbb{R}^3$，容许非零雷吉铰链角亏 $\delta_h$ 并在模型（`MODEL`）中诠释为折射普适主频的胞间引力曲率（完整 $3+1\mathrm{D}$ 自旋-$2$ 连续统场方程涌现与视界最小矢高暗能量标定 $N_H^{-2} \sim 10^{-122}$ 严格保持 `MODEL` / `OPEN` 边界 [@prob-ch34-gravity-dynamics-and-coupling]、[@prob-ch34-past-hypothesis-and-cosmological-constant]）。
 
 ::: {.viz src="axiom-omega-five-tier-cascade-sandbox" preset="tier3-afgut-weinberg-three-eighths" height="500"}
