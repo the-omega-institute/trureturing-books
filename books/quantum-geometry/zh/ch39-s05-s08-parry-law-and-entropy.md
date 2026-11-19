@@ -524,6 +524,21 @@ $$
 在 $A$ 上，位置零的后缀长度为零。之后每个原始比特使后缀重置为零或加一。从 $v_0=0$ 归纳，$A$ 上的原始窗口事件恰好是单个后缀柱集 $(v_0,\ldots,v_m)$。柱集质量除以 $\mu(A)$ 后消去初始后缀质量，合法转移概率中的比值 $h_{v_{i+1}}/h_{v_i}$ 望远镜相消，留下 $h_{v_m}$。因此窗口末端的未完成游程保留了一个后缀权重。完整证明由 Lean 内核检查。
 :::
 
+::: {.theorem #thm-ch39-p2e-parry-zero-marginals title="原始移位下的零截面条件律" lean="D5/S3/TotalVariation/ParrySectionMarginals.section_zero_marginals"}
+采用 [@thm-ch39-p2e-native-parry-first-return] 的双向帕里律与条件概率 $\mu_A$，记 $p=\beta_K^{-1}$。则
+
+$$
+\mu_A\{r:r_0=0\}=p,\qquad
+\mu_A\{r:r_1=0\}=2p^2.
+$$
+
+单步左移 $T$ 不保持 $\mu_A$。
+:::
+
+::: proof
+窗口 $0$、$00$ 与 $10$ 都以零后缀结束。由 [@thm-ch39-p2e-parry-raw-window]，其条件质量依次为 $p$、$p^2$ 与 $p^2$。窗口 $00$ 与 $10$ 不交，且穷尽 $r_1=0$ 的事件，该事件是 $r_0=0$ 在 $T$ 下的原像。因为 $p>1/2$，原像质量严格更大。完整证明由 Lean 内核检查。
+:::
+
 一段回返轨道可以按「读到下一个零用了几步」来记录。在零截面上，连续回返的联合概率可以直接从原路径的后缀柱集算出。
 
 ::: {.theorem #thm-ch39-p2e-parry-return-durations title="双向帕里源的回返时长联合分布" lean="D5/S3/TotalVariation/ParryFirstReturn.return_time_cylinder_probability"}
