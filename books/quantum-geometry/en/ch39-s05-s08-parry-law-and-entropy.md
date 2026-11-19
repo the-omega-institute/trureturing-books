@@ -1,6 +1,6 @@
 # 35.6.8 Parry Stationary Law, Escape-Pair Counting, and the Fractal Horizon Entropy Problem {#sec-ch39-p2e-entropy}
 
-Before discussing entropy, distinguish three levels: finite-state Markov laws, measurable coordinate reconstruction of complete paths on integer time, and entropy comparison over all invariant probability measures. Lean verifies the path law, the metric entropy upper bound and its attainment, and the topological entropy formula. The uniqueness argument for the maximizing law appears below. Fractal entanglement scaling remains an open problem.
+Before discussing entropy, distinguish three levels: finite-state Markov laws, measurable coordinate reconstruction of complete paths on integer time, and entropy comparison over all invariant probability measures. Lean verifies the path law, the metric entropy upper bound and its attainment, and the topological entropy formula. The maximizing law is unique, as the theorem and its derivation below show. Fractal entanglement scaling remains an open problem.
 
 On the Markov-chain side, for each integer order $k \ge 2$, let $p = \operatorname{parryParameter}(k) = \beta_k^{-1}$ be the reciprocal Perron parameter. On the signed run-length state space $\operatorname{State}(k) = \mathrm{Bool} \times \operatorname{Fin} k$ recording an absolute sign bit together with the current run length of `1`s, define the right-eigenvector suffix weights $w_j = \operatorname{suffixWeight}(k, p, j) = \sum_{a=0}^{k-j-1} p^{a+1}$, normalizer $Z_k = \sum_{j=0}^{k-1} p^j w_j$, sign involution $\operatorname{flip}(b, j) = (!b, j)$, and reset transition kernel $P_k = \operatorname{kernel}(k, p)$: from $s = (b, j)$, the chain flips sign and resets to $(!b, 0)$ with probability $p / w_j$, advances to $(b, j + 1)$ with probability $p\, w_{j+1} / w_j$ whenever $j + 1 < k$, and assigns probability $0$ to all other transitions. Define the signed stationary distribution
 
@@ -326,6 +326,19 @@ For any realized suffix word with $n$ transitions, the logarithm of its Parry ma
 Suffix partitions at successively earlier starting points have the same entropy rate by stationarity. Their forward translates generate all Boolean coordinates, since the suffix after a bit is zero precisely when that bit is false. This gives the full Kolmogorov–Sinai entropy. The full proof is checked by the Lean kernel.
 :::
 
+::: {.theorem #thm-ch39-p2e-parry-ks-maximizer title="The Bilateral Parry Law Is the Unique Entropy Maximizer" lean="D5/S3/TotalVariation/ParryKSMaximizer.bilateral_parry_maximizer"}
+Let $K\ge2$ and take a coding $e$ with the nearest-zero suffix property and a probability $\mu$ with the stationary suffix cylinders of [@thm-ch39-p2e-native-bilateral-parry-law] at every integer origin. Set $p=\operatorname{parryParameter}(K)$. For every probability $\rho$ preserved by the left shift $T$ on the admissible unsigned paths,
+
+$$
+h_{\mathrm{KS}}(\rho,T)\le -\log p,\qquad
+h_{\mathrm{KS}}(\rho,T)=-\log p\quad\Longleftrightarrow\quad\rho=\mu.
+$$
+:::
+
+::: proof
+At equality the joint law of each finite history and its next suffix agrees with the history marginal followed by the Parry kernel. Stationarity determines the initial suffix marginal because each positive suffix has a unique possible predecessor. These marginal and transition formulas determine all suffix cylinders. A relation bit is false exactly when the next suffix is zero, so equality on those cylinders identifies the entire bilateral relation law. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.remark #rem-ch39-p2e-abramov-literature title="Maximal-Entropy Application of the Actual Bilateral Parry Law and Separate Literature Boundaries"}
 **The application and its objects.** Fix any integer order $K\ge2$ (the preceding $k=K$), and put $p=\operatorname{parryParameter}(K)$, $X_K=\operatorname{RelationPath}(K)$, and $T=\operatorname{relationShift}$, so $(Tr)_t=r_{t+1}$. Take the joint witness $e,\mu,\nu$ from [@thm-ch39-p2e-native-bilateral-parry-law]; throughout, $\mu$ is that same unsigned probability law. For every Borel probability measure $\rho$ on $X_K$ with $T_*\rho=\rho$, the application below gives
 
@@ -339,7 +352,7 @@ h_{\mathrm{KS}}(\rho,T)=-\log p
 \end{aligned}
 $$
 
-Logarithms are natural, and the unit is nats per original step. Here $h_{\mathrm{KS}}$ is the supremum of entropy rates over all finite measurable partitions, initially regarded as an extended real number; the conclusion also proves that it is finite in this system. Competitors range over all invariant Borel probabilities, with no additional Markov, ergodicity, generation, entropy-limit, or uniqueness assumption. The signed extension $\nu$ helps construct $\mu$, while the entropy comparison takes place on the unsigned space $X_K$. The owning exposition is the [bilateral Parry law discussion](https://github.com/the-omega-institute/trureturing/blob/dev/Blueprint/D5/S3/TotalVariation/ParryBilateralLaw.md). The entropy bound and attainment are formalized in [@thm-ch39-p2e-parry-ks-entropy]. The following derivation also gives the equality criterion.
+Logarithms are natural, and the unit is nats per original step. Here $h_{\mathrm{KS}}$ is the supremum of entropy rates over all finite measurable partitions, initially regarded as an extended real number; the conclusion also proves that it is finite in this system. Competitors range over all invariant Borel probabilities, with no additional Markov, ergodicity, generation, entropy-limit, or uniqueness assumption. The signed extension $\nu$ helps construct $\mu$, while the entropy comparison takes place on the unsigned space $X_K$. The owning exposition is the [bilateral Parry law discussion](https://github.com/the-omega-institute/trureturing/blob/dev/Blueprint/D5/S3/TotalVariation/ParryBilateralLaw.md). The entropy bound and attainment are formalized in [@thm-ch39-p2e-parry-ks-entropy]. The equality criterion is formalized in [@thm-ch39-p2e-parry-ks-maximizer] and derived below.
 
 **From the actual suffix to a two-sided generator.** Set $J_t(r)=J_t^e(r)$, the second coordinate of $e(\mathrm{false},r)$ at integer time $t$. The nearest-zero characterization makes $J_t$ exactly the length of the true run immediately preceding $t$, independently of the sign anchor. On every admissible path,
 
