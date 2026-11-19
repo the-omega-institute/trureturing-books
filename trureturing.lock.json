@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "a26ad7916711abc4965d15145929a65e5fcb7233",
-  "pinned_at": "2026-11-19T02:37:27Z",
+  "commit": "88d1c84adf115b42250ca026a58f43a132e4af3b",
+  "pinned_at": "2026-11-19T03:37:06Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4465,8 +4465,8 @@
       "module": "D5/S3/Quantum/Information/QubitEntropyContraction",
       "name": "D5.S3.Quantum.Information.QubitEntropyContraction.qubit_holevo_contraction",
       "kind": "theorem",
-      "statement_id": "sha256:230119a062962dc5618bd5332a534c6cf2f254223051688f173742b7221892aa",
-      "line": 144,
+      "statement_id": "sha256:1f6405e945ef9027420292a8b030206e3e6ccbe4f425c4340894fd84faa5fd32",
+      "line": 147,
       "signature": "theorem qubit_holevo_contraction {x z t : ℝ} (hdisk : x ^ 2 + z ^ 2 ≤ 1) (ht : t ∈ Icc (0 : ℝ) 1) : let hscaled : x ^ 2 + (t * z) ^ 2 ≤ 1"
     },
     "D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy": {
@@ -6196,6 +6196,14 @@
       "statement_id": "sha256:f1def1d45a7ded5fabde68f7c2080b1b30564fff83957726a06255dc4ca220a4",
       "line": 51,
       "signature": "theorem parry_stationary_law (k : ℕ) (hk : 2 ≤ k) : let p"
+    },
+    "D5/S3/TotalVariation/ParryTopologicalEntropy.bilateral_entropy": {
+      "module": "D5/S3/TotalVariation/ParryTopologicalEntropy",
+      "name": "D5.S3.TotalVariation.ParryTopologicalEntropy.bilateral_entropy",
+      "kind": "theorem",
+      "statement_id": "sha256:05e39a8ea12179134b1b51665e07c490b9a44e3980d21b30305b146aafc3d871",
+      "line": 226,
+      "signature": "theorem bilateral_entropy (k : ℕ) (hk : 2 ≤ k) : coverEntropy (FullShift.shift (1 : ℤ)) {x | allowedPath k x = true} = (Real.log (dbonacciPerronRoot k) : EReal)"
     },
     "D5/S3/TotalVariation/Pinsker.pinsker_inequality": {
       "module": "D5/S3/TotalVariation/Pinsker",
