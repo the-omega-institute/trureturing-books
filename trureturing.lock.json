@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "21417d1d3ec9ee39711efa80bda1c8649b50170b",
-  "pinned_at": "2026-11-18T23:56:01Z",
+  "commit": "a26ad7916711abc4965d15145929a65e5fcb7233",
+  "pinned_at": "2026-11-19T02:37:27Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -6169,7 +6169,7 @@
       "module": "D5/S3/TotalVariation/ParryFirstReturn",
       "name": "D5.S3.TotalVariation.ParryFirstReturn.actual_first_return_system",
       "kind": "theorem",
-      "statement_id": "sha256:132af6fdc0bd6c6c91088f4e0d0823f870f0fca5cf1f3825aee17b0171fd3f2a",
+      "statement_id": "sha256:8c404d2b1992252e1ddba322ad33d6b565a449e781ab45be3d96e89b3e8ce673",
       "line": 418,
       "signature": "theorem actual_first_return_system (hk : 2 ≤ k) (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (hsuffix : ∀ (z : Bool × RelationPath k) (t : ℤ), let j"
     },
@@ -6177,9 +6177,17 @@
       "module": "D5/S3/TotalVariation/ParryFirstReturn",
       "name": "D5.S3.TotalVariation.ParryFirstReturn.return_time_cylinder_probability",
       "kind": "theorem",
-      "statement_id": "sha256:132af6fdc0bd6c6c91088f4e0d0823f870f0fca5cf1f3825aee17b0171fd3f2a",
+      "statement_id": "sha256:8c404d2b1992252e1ddba322ad33d6b565a449e781ab45be3d96e89b3e8ce673",
       "line": 832,
       "signature": "theorem return_time_cylinder_probability (hk : 2 ≤ k) (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (hsuffix : ∀ (z : Bool × RelationPath k) (t : ℤ), let j"
+    },
+    "D5/S3/TotalVariation/ParryInducedEntropy.actual_return_entropy": {
+      "module": "D5/S3/TotalVariation/ParryInducedEntropy",
+      "name": "D5.S3.TotalVariation.ParryInducedEntropy.actual_return_entropy",
+      "kind": "theorem",
+      "statement_id": "sha256:a71908d15fb9ca24bd0b1317e2660e2c31d9082a2103a6e0216d636536f3db86",
+      "line": 482,
+      "signature": "theorem actual_return_entropy (hk : 2 ≤ k) (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (hsuffix : ∀ (z : Bool × RelationPath k) (t : ℤ), let j"
     },
     "D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law": {
       "module": "D5/S3/TotalVariation/ParryResetLaw",
