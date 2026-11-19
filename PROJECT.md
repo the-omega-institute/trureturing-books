@@ -6,7 +6,7 @@
 
 本书库中的专著同时承担双重使命：
 
-1. **证据明确的严格学术专著**：全书正式的 `theorem`、`lemma`、`proposition` 与 `corollary` 默认对应 `the-omega-institute/trureturing` 主干（`dev` 分支）所钉提交中已被 Lean 4 内核验证并冻结的声明；假设、定义域、类型与结论必须与 Lean 源码一致。无匹配冻结声明而源文已有证明时，按根级守则与第 4 节显式声明书面证明，由作者与评审负责，不计入 Lean 验证。
+1. **证据明确的严格学术专著**：全书正式的 `theorem`、`lemma`、`proposition` 与 `corollary` 默认对应 `the-omega-institute/trureturing` 主干（`dev` 分支）在当次校验或构建解析出的提交中已被 Lean 4 内核验证并冻结的声明；假设、定义域、类型与结论必须与 Lean 源码一致。无匹配冻结声明而源文已有证明时，按根级守则与第 4 节显式声明书面证明，由作者与评审负责，不计入 Lean 验证。
 2. **自包含、直觉通透的现代物理与计算教材**：面向物理学家、计算机科学家、数学研究者、工程师以及具备基本线性代数素养的求知读者。任何抽象代数对象（投影算子、迹配对、克利福德双矢量、信道压缩、部分迹）在引入之前，都必须先给出可触摸的几何图像与手算推演（如 $2\times 2$ 矩阵显式展开、球面截线与角度换算），绝不把结论藏在黑箱符号背后。
 
 ## 2. 文风与教学方法论
@@ -47,7 +47,7 @@
 全书对每一条数学与物理断言实行严格的三层分级，严禁越级包装：
 
 1. **第一层：Lean 内核验证定理（绿色 `LEAN ✓`）**  
-   使用 `theorem`、`lemma`、`proposition`、`corollary` 环境的条目默认通过 `lean="<GID>"` 指向 `trureturing@dev` 所钉提交中已冻结且 `kind = "theorem"` 的声明；显式书面证明适用第二层。`definition` 环境建议指向对应的冻结定义或结构。正文中不为未经 Lean 验证的论断手写“已验证”或勾选符号。
+   使用 `theorem`、`lemma`、`proposition`、`corollary` 环境的条目默认通过 `lean="<GID>"` 指向 `trureturing@dev` 在当次校验或构建解析出的提交中已冻结且 `kind = "theorem"` 的声明；显式书面证明适用第二层。`definition` 环境建议指向对应的冻结定义或结构。正文中不为未经 Lean 验证的论断手写“已验证”或勾选符号。
 2. **第二层：文献结果与书面证明（紫色，不计入 Lean 验证）**
    数学或物理学界已有严格纸面证明、但尚无匹配冻结声明的结论，可在 `remark` 或 `example` 中明确标注：`文献结果，未在本书形式化` / `Literature result, not formalized in this book`。需要定理类环境时，必须先检索冻结库，使用 `status="written-proof" proof="<proof-id>"` 且不带 `lean`，每版关联完整证明，并提供支持同一陈述的 DOI 或源论文仓库、原文定位与已登记的 `trureturing-requests` issue；遵守根级守则及 `docs/FORMALIZATION-REQUESTS.md`。紫色书面证明由作者与评审负责，不能声称内核验证。
 3. **第三层：开放问题与猜想（红色 `OPEN`）**  

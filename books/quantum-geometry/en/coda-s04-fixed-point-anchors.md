@@ -28,7 +28,7 @@ Because $S(n+1) = U(S(n)) \subseteq S(n)$ for every $n \in \mathbb{N}$, the sequ
 ::: {.remark #rem-coda-epistemic-discipline title="Formal Boundaries and Epistemic Discipline in the Coda (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** To keep the epistemic status of every mathematical statement transparent and auditable, we classify the propositions synthesized in this Coda into four strict tiers:
 
-1. **Kernel-verified frozen theorems in `trureturing.lock.json` (green `LEAN ✓` badge)**:
+1. **Kernel-verified frozen theorems at the resolved commit (green `LEAN ✓` badge)**:
    - Finite-step stabilization of contracting subset updates [`finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize) ([@thm-coda-fixed-point-anchor]);
    - Birkhoff's pointwise ergodic theorem [`birkhoff_pointwise_ergodic`](lean:D5/S3/Analytic/Probability/BirkhoffPointwise.birkhoff_pointwise_ergodic) ([@thm-coda-birkhoff-ergodic]);
    - The three-gap theorem for circle rotations [`three_gap_card_le_three`](lean:D5/S1/Phase/ThreeGap/Main.three_gap_card_le_three) and [`three_gap_lengths_eq`](lean:D5/S1/Phase/ThreeGap/Main.three_gap_lengths_eq) ([@thm-coda-three-gap]);

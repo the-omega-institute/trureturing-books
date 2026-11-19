@@ -37,7 +37,7 @@ The precise statements, hypotheses and literature discussions remain in their ch
 
 ## C.5 Pinned Commit and Verification Procedure {#sec-appendix-c-integrity-checklist}
 
-`site.toml` specifies the formalization repository and branch; `trureturing.lock.json` records the exact commit and resolved declarations. `./tbook pin` updates the lock and checks branch membership; `./tbook check --book quantum-geometry` checks references, evidence attributes and bilingual structure. Compilation generates the verification ledger; verification status comes from actual command results.
+`site.toml` specifies the formalization repository and its branch. The lockfile `trureturing.lock.json` records the `dev` branch. At runtime, the tools resolve the commit and the cited frozen declarations. `./tbook check --book quantum-geometry` checks references, evidence attributes and bilingual structure. Compilation generates the verification ledger. Verification status comes from actual command results.
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="Limits of Verification Sources"}
 Source links locate declarations, the book's explanations aid understanding, and the Lean kernel checks formal proofs. Written proofs and open problems carry different evidential responsibilities; an index, diagram or count cannot change a result's verification status.

@@ -37,7 +37,7 @@
 
 ## C.5 所钉提交与核验方法 {#sec-appendix-c-integrity-checklist}
 
-`site.toml` 指定形式化仓库与分支，`trureturing.lock.json` 记录确切提交及已解析声明。`./tbook pin` 更新锁文件并核对提交归属；`./tbook check --book quantum-geometry` 核对引用、证据属性与双语结构。验证账本由构建生成，核验状态以实际命令结果为准。
+`site.toml` 指定形式化仓库与分支，`trureturing.lock.json` 记录 `dev` 分支。运行时解析完整提交和所引用的冻结声明；`./tbook check --book quantum-geometry` 核对引用、证据属性与双语结构。验证账本由构建生成，核验状态以实际命令结果为准。
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="验证依据的边界"}
 源码链接定位声明，书中解释帮助理解，Lean 内核检查其形式证明。书面证明与开放问题各自承担不同的证据责任；索引登记、图示或计数不能改变结论的验证等级。

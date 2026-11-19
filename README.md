@@ -3,9 +3,13 @@
 **显式区分 Lean 验证、书面证明与开放问题的双语专著与教材书库。**
 *Bilingual monographs and self-contained textbooks that distinguish Lean verification, written proofs, and open problems.*
 
-本书库中的每一部专著均明确声明定理的证据：Lean 验证结果按全局标识符（GID）绑定至 [trureturing](https://github.com/the-omega-institute/trureturing)（`dev` 分支，精确提交锁定于 [trureturing.lock.json](trureturing.lock.json)）中已经 Lean 4 内核验证并冻结的声明；无匹配冻结声明的源文已证结果按书面证明规则关联完整论证、来源与形式化请求，由作者与评审负责。同一份中英双语源码同步导出为在线 HTML（构建期 KaTeX 排版与源码永久链接）、PDF（深色屏幕版、白底印刷版与 A4 单栏研究预印本）及兼容 Apple Books 的 EPUB 3。
+本书库中的每一部专著均明确声明定理的证据：Lean 验证结果按全局标识符（GID）绑定至 [trureturing](https://github.com/the-omega-institute/trureturing) 的 `dev` 分支中已经 Lean 4 内核验证并冻结的声明；无匹配冻结声明的源文已证结果按书面证明规则关联完整论证、来源与形式化请求，由作者与评审负责。同一份中英双语源码同步导出为在线 HTML（构建期 KaTeX 排版与源码永久链接）、PDF（深色屏幕版、白底印刷版与 A4 单栏研究预印本）及兼容 Apple Books 的 EPUB 3。
 
-Each theorem declares its evidence. Lean-verified results cite declarations verified by the Lean 4 kernel and frozen on the `dev` branch of [trureturing](https://github.com/the-omega-institute/trureturing), pinned in [trureturing.lock.json](trureturing.lock.json). Proved source results without a matching frozen declaration carry an explicit written-proof status, a complete argument, provenance, and a formalization request; authors and reviewers are responsible for those proofs. The aligned Chinese and English editions publish online HTML, screen and print PDFs, single-column research preprint PDFs, and MathML-enabled EPUB 3.
+Each theorem declares its evidence. Lean-verified results cite declarations verified by the Lean 4 kernel and frozen on the `dev` branch of [trureturing](https://github.com/the-omega-institute/trureturing). Proved source results without a matching frozen declaration carry an explicit written-proof status, a complete argument, provenance, and a formalization request; authors and reviewers are responsible for those proofs. The aligned Chinese and English editions publish online HTML, screen and print PDFs, single-column research preprint PDFs, and MathML-enabled EPUB 3.
+
+锁文件直接记录 `dev`。检查和构建解析当次使用的完整提交 SHA，成品的源码链接与站点清单保留该提交。[trureturing.lock.json](trureturing.lock.json)
+
+The lockfile records `dev`. Checks and builds resolve it to a full commit SHA, which the published source links and site manifest record. [trureturing.lock.json](trureturing.lock.json)
 
 提交 Issue、PR 和创建工作分支前，请阅读 [贡献与协作规范](CONTRIBUTING.md)。
 
