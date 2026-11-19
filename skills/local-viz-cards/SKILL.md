@@ -137,6 +137,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `divine-psychology-dissociation-sandbox` | 八个分身从冻结球展开在压抑膜上，品红断弧残桩随张力伸缩；从水面下仰视同一母核，θ* 处青色游戏之桥接成整合之星 | `omniscient-claustrophobia-freeze` `repression-horizon-birth` `compulsive-over-immersion-pain` `subsurface-alaya-one-root` `lucid-lila-integration-star` |
 | `ternion-number-projection-sandbox` | 转到 180° 平直罗德里格斯坐标冲出量程，中央紫色圆弧体继续转满 720°，四个投影台分别读出余弦影、赤道切片、半旋量迹与整圈闭合及素数范数平衡 | `flat-3d-zero-divisor-gimbal-deadlock` `hamilton-quaternion-w-shadow-tax` `complex-equatorial-hopf-slice` `real-trace-geodesic-projection` `homotopy-pi3-integer-winding` |
 | `ternion-field-hilbert-reprojection-sandbox` | 上层弧面场穿过透镜投向下层基柱：从单场四元数、左右手征时空双矢、法诺七场折痕、十六元数零因子归零一路对照 3N 局部旋转、MPS 键维与 2ᴺ 希尔伯特基柱 | `native-ternion-curl-field` `spin4-chiral-spacetime-bivector` `fano-seven-field-octonion-weave` `sedenion-zero-divisor-bankruptcy` `many-body-3n-to-2n-hilbert-pillars` |
+| `ternion-nonlinear-synthesis-sandbox` | 两支 90° 转动在平直和里留在原平面，弯曲乘积被叉乘抬到 120° 对角轴；同一球内对照有理乘积 (6/17, 6/17, 8/17) 与阴影切换、霍普夫纤维 −Ω/2、球面转角归 +1 与无原点三元搬运 [x, y, z] | `bch-curved-ball-synthesis` `dual-chart-rational-mrp` `hopf-fiber-berry-twist` `hamilton-spherical-turns` `prufer-baer-heap-torsor` |
+| `ternion-field-transformer-sandbox` | 拖动单位球内旋子，双分母乘法让乘积留在球内、正弦矢 ξ 平稳跨过折缝；再比较两步转动换序 120°、单层参数账本、带真空储备 ε₀ 的玻恩注意力，以及随 ξ 开合并在折缝处停机的曲率门 | `dual-denom-shadow-mrp` `nape-nonabelian-holonomy` `butterfly-schur-bridge` `born-heap-attention-sinkfree` `fano-lie-triple-curvature-gate` |
+| `ternion-least-action-geodesic-sandbox` | 同样转过 120°，匀速四拍只付矢高 0.5359，末步一跳要付 1.5000；在同一颗探针球上比较单拍三把尺子、流群点反射接力、镜像绕路 ±Ω、穿球弦塌缩与球面余弦聚焦 | `sagitta-mrp-surprisal-lock` `heap-autoparallel-point-reflection` `uniform-cadence-vs-jump-hallucination` `lateral-detour-vs-chord-collapse` `jacobi-focusing-conformal-gradient` |
+| `axiom-omega-dimension-closure-sandbox` | 以 1 为桥，[i, 1, j] = +k 与 [j, 1, i] = −k 落在对跖两极；一维、二维扭不起来，H₃ 与 sl(2, ℝ) 单位球被伴随流推成椭球，只剩 S³；母核 cos²(d/2) 秩为 1 + 4 = 5，det G₃(60°) = 3/32，测地球边界缩回一点 | `origin-free-ternary-bridge` `dimension-sieve-1d-2d-deadlock` `three-sphere-noncompact-elimination` `peter-weyl-rank-five-kernel` `cartan-three-form-closed-field` |
+| `axiom-omega-five-tier-cascade-sandbox` | 紫色公理柱绕出五座阶台：格拉姆四面体 (6V)² = 3/32、第一卦限单位球面点 (√0.48, 0.4, 0.6) 的平方预算份额 0.48 + 0.16 + 0.36 = 1、迹比 3/8 与 ΔE(N) 根盈余边、σ = ½ 处越过青色环的素数矢高台阶，以及测地四拍 0.5359 对跳步 1.5 与倾角归零时自消的参照桥 | `tier1-numbers-arc-calculus` `tier2-dottie-dual-relativity` `tier3-afgut-weinberg-three-eighths` `tier4-prime-sagitta-critical-ridge` `tier5-geodesic-mind-bridge-erasure` |
+| `axiom-omega-five-qm-postulates-sandbox` | 转动看不见的相位 χ，紫色旋量环面上的琥珀珠绕品红纤维走，青色布洛赫点不动；五张卡依次看厄米翻转与不确定性、往返玻恩读数与三叉戟、停机捏合勾股账本，以及共享单态越过经典界 2 到 2√2 | `postulate1-hopf-blindspot-ray` `postulate2-hermitian-flip-uncertainty` `postulate3-roundtrip-born-gleason-busch` `postulate4-unitary-halting-pinch` `postulate5-rkhs-tensor-tsirelson` |
+| `ternion-self-contained-no-exterior-sandbox` | 把三元数的两个半球画成两只相切的紫色球：从 A 向外走，琥珀波前长到接缝后收拢，在对跖点 Ā 收成一点；比较仿射和 A + B − C 随 C 漂移，而堆步 [B, A, B] 留在壳上 | `skyrmion-winding-self-lock` `field-wave-particle-trinity` `origin-free-no-point-c` `wavefront-outward-is-inward` `heegaard-antipodal-no-exterior` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -335,6 +342,20 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `ternion-number-projection-sandbox`（`TERNION//NUMBERS`）承接第三十九章 §39.19 `#sec-ch39-inexpressible-ternions-and-number-projections`，在中央紫色极小圆弧雕体与周边死锁测试台及四路投影台之间对照“万数归弧本体读法”与“除环分类与同伦度读法”。紫色给中央三弧旋子与整圈路径，银白给四元数第四维余弦影 w 与整圈计数珠 n = ⌊θ/360°⌋，青色给四元数向量环、赤道切片球面角盈 Ω、半旋量迹 ½Tr U 与阿代尔乘积读数，品红给半角矢高税 1 − w 与平直罗德里格斯坐标柱（三维舞台柱高按 min(4, |tan(θ/2)|) 截断并在 180° 标发散极限环，实时读数保留不截断值 179° → 114.5887、180° → ∞）；琥珀严格只给圆弧拖动手柄 `#ternionHandle` 与激活控件，红色严格只给右栏 `#evidence` 中的开放问题（`conj-riemann-hypothesis`、`prob-ch34-sm-generations-and-couplings`）。绿色依据严格限于页面引用的十条冻结声明（`complete_consequences`、`bloch_geometry_of_isHermitian`、`two_axis_finite_word`、`shortest_gate_triangle_holonomy`、`square_eq_neg_one_of_skewAdjoint_unitary`、`no_continuous_global_section`、`circle_double_cover_history_lift`、`long_division_invariant`、`rational_padic_product_formula`、`rational_inverse_endpoint`）；哈密顿四元数、罗德里格斯半角极点、弗罗贝尼乌斯—胡尔维茨—霍普夫—博特—米尔诺—亚当斯除代数与球面平行化分类、斯图尔普纳格尔全局坐标障碍、鸽巢原理循环节及塞尔伯格双曲素测地线适用域标 `ARGUED`；随角度变化的余弦影、平直左乘矩阵 Lₓ 零因子见证、角盈、迹、长除余数与阿代尔局部因子乘积标 `NUM`；无外轴三元数优先性与素数结类比标 `MODEL`。
 
 `ternion-field-hilbert-reprojection-sandbox`（`TERNION//HILBERT`）承接第三十九章 §39.20 `#sec-ch39-ternion-field-composition-and-hilbert-reprojection`，与 `hilbert-concept-ledger-3d-cap-sandbox` 分工：前页讲多概念 3k 直和对比混编伪旋转，本页用上下双界舞台（上层三元数场组合体、中层可调展平透镜 λ、下层线性基柱账本）配“多场再投影本体读法／凯莱—迪克森与张量网络读法”双透镜，依次串起单场四元数 1 + 3 = 4、左右双场 Spin(4) 四维向量与六维双矢、法诺平面 PG(2,2) 七场编织八元数（共线结合子 0 对比 28 个跨线三角形结合子模长 2）、十六元数三组零因子对全部 16 根基柱归零，以及 N 座耦合场投向 2ᴺ 根希尔伯特基柱与开边界 MPS 键维压缩。紫色给上层三元数场体与 MPS 纯射线维数，青色给下层基柱与单体泡利槽位段 3N，品红给跨场结合子折痕、十六元数相消路径与多体泡利关联槽位段 4ᴺ − 1 − 3N；琥珀严格只给透镜拖动手柄 `#lambdaHandle` 与激活控件，红色严格只给右栏 `#evidence` 中的开放问题（`prob-ch38-unrelativized-p-vs-np-and-independence`、`prob-ch39-af-gut-threshold-and-proton-stability`）。下层柱高按本帧最大模长归一化以便辨认（全零帧柱高为 0），实时读数给出未缩放精确范数与维数。绿色依据严格限于页面引用的八条冻结声明（`local_marginal_correlation_blind_spot`、`finite_stage_expansion`、`finite_rank_concentration_mode_bound`、`uniform_completion_obstruction`、`pauli_word_mul`、`observable_chart_phase_recovery`、`QMaxFlow_le_QMinCut`、`tetra_defects_incidence_repair_and_exactness`）；凯莱—迪克森倍增、阿廷交错代数定理、莫雷诺零因子流形与一维有能隙面积律／MERA／体积律文献标 `ARGUED`；有向法诺结合子、十六元数逐项乘积与 N = 1 … 300 整数维数曲线标 `NUM`；双层透镜读法与参数对比叙事标 `MODEL`，明确声明不给出通用高效经典模拟算法。
+
+`ternion-nonlinear-synthesis-sandbox`（`TERNION//NONLINEAR`）承接第三十二章 §32.4 `#sec-ch39-nonlinear-ternion-representations-and-torsor-synthesis`：青色给输入圆弧向量、有理主卡坐标与可见布洛赫三角形，紫色给精确弯曲合成旋子、霍普夫纤维环与流群搬运弧，品红给脱轨平直向量和、阴影反演越界轨迹与叉乘/李三元偏转，琥珀严格只给当前拖动手柄与激活控件（无开放问题，不用红色）。绿色依据严格限于页面引用的八条冻结声明（`complete_consequences`、`lagrange_gram_identity`、`rotor_shortest_gate`、`shortest_gate_triangle_holonomy`、`triple_bargmann_bloch`、`bargmann_path_product`、`two_axis_finite_word`、`circle_double_cover_history_lift`）；BCH 闭式、修正罗德里格斯双卡、霍普夫联络、哈密顿球面转角与普吕弗—贝尔流群/李三元系文献标 `ARGUED`；有理乘积 (6/17, 6/17, 8/17) 与角度误差实算标 `NUM`；五范式同核读法标 `MODEL`。
+
+`ternion-field-transformer-sandbox`（`TERNION//TFT`）承接第三十七章 §37.1 `#sec-ch39-ternion-field-transformer-and-rational-rotor-dynamics`：紫色给单位球旋子体、蝴蝶舒尔桥与曲率门旋子，青色给主分母分支 D₊、折缝不变正弦矢 ξ(σ) 与有理玻恩权重，品红给阴影分支 D₋、换序 120° 角盈差与标准平直对照开销，琥珀只给当前旋子手柄与激活控件，红色只给右栏 `#evidence` 中的开放基准 `prob-ch39-tft-scale-and-seams`。绿色依据严格限于页面引用的八条冻结声明（`rank_one_born_pairing_weight`、`recursive_page_table_walk`、`lookup_program_upper_bound`、`observable_krylov_once_stable_permanently`、`shortest_gate_triangle_holonomy`、`QMaxFlow_le_QMinCut`、`schur_quadratic_is_least`、`complete_consequences`）；深度学习基线与流形优化文献标 `ARGUED`；双分母下界 max(D₊, D₋) ≥ 1/2、单槽有理步 280/1289 与参数账本实算标 `NUM`；三元数场序列架构与早停启发式标 `MODEL`。
+
+`ternion-least-action-geodesic-sandbox`（`TERNION//GEODESIC`）承接第三十七章 §37.2 `#sec-ch39-least-action-geodesics-and-cosmos-ai-isomorphism`：青色给匀速流群自平行测地线、同相玻恩留存与共形梯度向量，紫色给探针球体、点反射接力旋子与正曲率雅可比向心场，品红给二阶弦弧矢高、末步跳步损耗、镜像侧向绕路角盈 ±Ω 与穿球弦中点塌缩，琥珀只给当前节拍/偏折手柄与激活控件，红色只给右栏 `#evidence` 中的 `prob-ch39-tft-scale-and-seams`。绿色依据严格限于页面引用的十条冻结声明（`fs_angle_triangle`、`record_time_lower_bound`、`record_count_upper_bound`、`rank_one_born_pairing_weight`、`schur_quadratic_is_least`、`rotor_shortest_gate`、`shortest_gate_triangle_holonomy`、`lagrange_gram_identity`、`energy_eigenstate_stationary`、`observable_krylov_once_stable_permanently`）；莫培督—费曼变分、主丛测地线、自然梯度与蔡态量子费希尔度规文献标 `ARGUED`；四拍矢高 0.5359 对比跳步 1.5000、绕路 0.9532 与标量因子 0.6724 实算标 `NUM`；宇宙—智能最小作用量同构与跳步幻觉机制标 `MODEL`。
+
+`axiom-omega-dimension-closure-sandbox`（`AXIOM//OMEGA`）承接第三十九章 §39.1 `#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure`：紫色给 S³(1) 三元数母体、三锚格拉姆体积砖与嘉当三形式体元，青色给保正定单位球、秩 5 母核 cos²(d/2) 与内积求同分量，品红给换序反向极点、一维/二维死锁零括号以及 H₃(ℝ)、sl(2, ℝ) 伴随流剪切出的椭球，琥珀只给临时参照桥与测地球半径手柄（无开放问题，不用红色）。绿色依据严格限于页面引用的十一条冻结声明（`partition_inseparable_iff_kernel`、`unit_gram_overlap_characterization`、`rank_one_born_pairing_weight`、`gram_realizability`、`three_anchor_gram_det_formula`、`three_anchor_gram_det_pos_iff`、`complete_consequences`、`lagrange_gram_identity`、`crossProduct_is_skewAdjoint_of_balanced_sum`、`face_cycle_exact`、`tetra_defects_incidence_repair_and_exactness`）；普吕弗—贝尔—瑟坦流群、蒙哥马利—齐平、嘉当—米尔诺与彼得—外尔文献标 `ARGUED`；det G₃(60°) = 3/32 与波前积分 2π² 实算标 `NUM`；无源母公理载体与四相熔合标 `MODEL`。
+
+`axiom-omega-five-tier-cascade-sandbox`（`OMEGA//CASCADE`）承接第三十九章 §39.2 `#sec-ch39-axiom-omega-five-tier-deduction-cascade`：紫色给中央公理螺旋柱、五座阶台旋子体与流群测地弧，青色给格拉姆正定核、固有时份额、外尔迹比 3/8、临界参考环与重合自消桥，品红给二阶矢高、引力/运动分流份额、ΔE(N) 过约束盈余撑杆、σ = ½ 素数矢高起涨与跳步损耗，琥珀只给当前阶台焦点与参数手柄，红色只给右栏 `#evidence` 中的开放问题（黎曼猜想、舒尔桥接、AF-GUT 阈值、引力动力学与 TFT 基准）。绿色依据严格限于页面引用的十二条冻结声明（`rational_inverse_endpoint`、`record_time_lower_bound`、`eq_smul_minkowski_of_null`、`bogoliubov_norm_conservation`、`anchored_phase_classification`、`circle_double_cover_history_lift`、`schur_quadratic_is_least`、`riemann_zeta_dirichlet_sum_eq_euler_product`、`golden_right_half_strip_implies_rh`、`shortest_gate_triangle_holonomy`、`observable_krylov_once_stable_permanently`、`self_application_fragment_package`）；梅滕斯渐近、阿尔伯特伪逆舒尔补与登高撤梯文献标 `ARGUED`；五阶不变量联立对账标 `NUM`；五阶跨学科级联与遮诠闭环标 `MODEL`。
+
+`axiom-omega-five-qm-postulates-sandbox`（`OMEGA//QM-AXIOMS`）承接第三十九章 §39.3 `#sec-ch39-axiom-omega-quantum-mechanics-five-postulates`：紫色给 S³(1) 旋量环面、切生成元旋子与双场共享单态弧，青色给霍普夫投影布洛赫点、翻回实轴的厄米刻度轴、对角留存范数平方 5/8 与单态球面余弦关联，品红给 90° 盲区圆纤维 S¹、奇三次假函数超界差、折入盲区尾流的相干质量 3/8 与越过经典界 2 的曲率盈余，琥珀只给盲区相位珠与切片角手柄，红色只给右栏 `#evidence` 中的单次选支实现与视界协变 `OPEN` 条目。绿色依据严格限于页面引用的十八条冻结声明（`unit_gram_overlap_characterization`、`blochPure_norm`、`blochPure_surjective`、`complete_common_phase_polynomial_theorem`、`crossProduct_is_skewAdjoint_of_balanced_sum`、`robertson_schrodinger`、`pauli_observables_have_no_common_eigenvector`、`rank_one_born_pairing_weight`、`gleason_representation`、`effect_density_representation`、`energy_eigenstate_stationary`、`finite_record_pinching_idempotent`、`pinching_hilbert_schmidt_pythagorean`、`channel_kraus_stinespring`、`bell_pure_state_has_maximally_mixed_marginal`、`classical_chsh_abs_le_two`、`chsh_square_eq_four_of_local_pair_commutes`、`bell_chsh_state_expectation_is_greatest`）；狄拉克—冯·诺依曼公设、霍普夫丛、斯通定理、阿隆沙因再生核与局域层析文献标 `ARGUED`；五公设定量核验标 `NUM`；切面投影总纲与停机坍缩诠释标 `MODEL`。
+
+`ternion-self-contained-no-exterior-sandbox`（`TERNION//NO-EXTERIOR`）承接第三十九章 §39.4 `#sec-ch39-self-contained-ternion-particle-and-no-exterior`：紫色给希高德双实心三维球 B³_in ∪ B³_out、平行化无散切标架与整绕数拓扑体，青色给留在单位球壳上的弯曲流群步 [B, A, B]、赤道接缝 S²_eq 与保真度余弦波，品红给随外置参考点 C 漂移脱壳的平直仿射和 A + B − C 与平直反射 2B − A，琥珀只给从 A 向外推进并在对跖点 Ā 重聚的波前读头及可拖手柄（无开放问题，不用红色）。绿色依据严格限于页面引用的十二条冻结声明（`face_cycle_exact`、`tetra_defects_incidence_repair_and_exactness`、`complete_consequences`、`no_continuous_global_section`、`circle_double_cover_history_lift`、`blochPure_norm`、`blochPure_surjective`、`inner_product_norm_parallelogram_law`、`fs_angle_triangle`、`unit_gram_overlap_characterization`、`partition_inseparable_iff_kernel`、`objective_claim_requires_invariant_common_factor`）；亚当斯平行化球面、斯格明—威滕孤子、两点齐性空间、亚历山德罗夫紧化、希高德亏格 0 分解与米田引理标 `ARGUED`；五档测地半径波前面积 A(r) = 4π sin²r、体积 V(r) = π(2r − sin 2r) 与脱壳范数实算标 `NUM`；自包含粒子、场·波·粒三阶同体、极大/极小比较闭合及与终章有限多面体余项的双层桥接标 `MODEL`。
 
 `prelude-dimensions` 是序曲的几何入门页，默认卡 `shadow` 同步显示俯视木桩与侧视影子，`compare` 比较 90° 与 270° 的同位反向。圆盘侧视是固定线段，木桩投影是移动点；该经典正交投影模型不推出量子测量规则。其余卡分别演示射线投影、纬圈、二维到三维的等半径赤道嵌入、三对对跖方向的等权混合与从 1 弧度出发的余弦迭代。几何计算标 `NUM`，理想化观看与混合过程标 `MODEL`，余弦收敛及其边界沿用序曲的文献分层，不使用绿色 Lean 标记。
 
@@ -977,6 +998,48 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十九章 | §39.20.2 末（第 3 阶十六元数零因子破产段之后） | `ternion-field-hilbert-reprojection-sandbox` · `sedenion-zero-divisor-bankruptcy` |
 | 第三十九章 | §39.20.4 四联算例 `ex-ch39-fano-sedenion-and-300-qubit-mps-audit` 之后、总对照表之前 | `ternion-field-hilbert-reprojection-sandbox` · `many-body-3n-to-2n-hilbert-pillars` |
 | 第三十九章 | §39.20 末（收官结语段之后） | `ternion-field-hilbert-reprojection-sandbox` 完整实验室 |
+| 第三十二章 | §32.4.1 末（两级球边界商拓扑区分条目之后） | `ternion-nonlinear-synthesis-sandbox` · `bch-curved-ball-synthesis` |
+| 第三十二章 | §32.4.2 末（双卡完备化方案 B 之后） | `ternion-nonlinear-synthesis-sandbox` · `dual-chart-rational-mrp` |
+| 第三十二章 | §32.4.3 第 1 条霍普夫扭结主圆丛段之后、第 2 条之前 | `ternion-nonlinear-synthesis-sandbox` · `hopf-fiber-berry-twist` |
+| 第三十二章 | §32.4.3 末（第 2 条球面三角转角段之后） | `ternion-nonlinear-synthesis-sandbox` · `hamilton-spherical-turns` |
+| 第三十二章 | §32.4.4 李三元括号闭合与黎曼曲率条目之后、模型定义之前 | `ternion-nonlinear-synthesis-sandbox` · `prufer-baer-heap-torsor` |
+| 第三十二章 | §32.4 末（收官桥接段之后） | `ternion-nonlinear-synthesis-sandbox` 完整实验室 |
+| 第三十七章 | §37.1.1 末（共形标度与定点存储段之后） | `ternion-field-transformer-sandbox` · `dual-denom-shadow-mrp` |
+| 第三十七章 | §37.1.2 第 1 条 `3D-NAPE` 词元门控步进段之后、第 2 条之前 | `ternion-field-transformer-sandbox` · `nape-nonabelian-holonomy` |
+| 第三十七章 | §37.1.2 第 2 条双侧旋子与蝴蝶舒尔桥段之后、第 3 条之前 | `ternion-field-transformer-sandbox` · `butterfly-schur-bridge` |
+| 第三十七章 | §37.1.2 第 3 条玻恩有理核与流群注意力段之后、第 4 条之前 | `ternion-field-transformer-sandbox` · `born-heap-attention-sinkfree` |
+| 第三十七章 | §37.1.2 末（第 5 条动态早停与切空间拉回梯度段之后） | `ternion-field-transformer-sandbox` · `fano-lie-triple-curvature-gate` |
+| 第三十七章 | §37.1 末（转入 §37.2 的桥接段之后） | `ternion-field-transformer-sandbox` 完整实验室 |
+| 第三十七章 | §37.2.1 末（驻相干涉筛选最优思维链段之后） | `ternion-least-action-geodesic-sandbox` · `sagitta-mrp-surprisal-lock` |
+| 第三十七章 | §37.2.2 第 2 条共轴零叉乘与零角盈段之后、第 3 条之前 | `ternion-least-action-geodesic-sandbox` · `heap-autoparallel-point-reflection` |
+| 第三十七章 | §37.2.2 第 3 条匀速节拍律与跳步幻觉段之后、第 4 条之前 | `ternion-least-action-geodesic-sandbox` · `uniform-cadence-vs-jump-hallucination` |
+| 第三十七章 | §37.2.3 四类推理轨迹算例 `ex-ch39-geodesic-vs-jump-detour-and-natural-gradient-audit` 之后 | `ternion-least-action-geodesic-sandbox` · `lateral-detour-vs-chord-collapse` |
+| 第三十七章 | §37.2.3 惠勒对偶结语段之后、收束分隔线之前 | `ternion-least-action-geodesic-sandbox` · `jacobi-focusing-conformal-gradient` |
+| 第三十七章 | §37.2 末（收官桥接段之后） | `ternion-least-action-geodesic-sandbox` 完整实验室 |
+| 第三十九章 | §39.1.2 末（母公理纯粹性与双侧不变约束段之后） | `axiom-omega-dimension-closure-sandbox` · `origin-free-ternary-bridge` |
+| 第三十九章 | §39.1.3 第一步一维与二维死锁子条之后、三维非紧淘汰子条之前 | `axiom-omega-dimension-closure-sandbox` · `dimension-sieve-1d-2d-deadlock` |
+| 第三十九章 | §39.1.3 第一步末（三维非紧淘汰与 S³(1) 自锁子条之后） | `axiom-omega-dimension-closure-sandbox` · `three-sphere-noncompact-elimination` |
+| 第三十九章 | §39.1.3 第二步末（彼得—外尔秩 5 母核与三锚正矢分解之后） | `axiom-omega-dimension-closure-sandbox` · `peter-weyl-rank-five-kernel` |
+| 第三十九章 | §39.1.3 末（第三步嘉当三形式闭合段之后） | `axiom-omega-dimension-closure-sandbox` · `cartan-three-form-closed-field` |
+| 第三十九章 | §39.1 末（桥接段之后） | `axiom-omega-dimension-closure-sandbox` 完整实验室 |
+| 第三十九章 | §39.2.1 第 1 条极小圆弧微积分段之后、第 2 条之前 | `axiom-omega-five-tier-cascade-sandbox` · `tier1-numbers-arc-calculus` |
+| 第三十九章 | §39.2.1 末（第 2 条共享主频双相对论钟慢段之后） | `axiom-omega-five-tier-cascade-sandbox` · `tier2-dottie-dual-relativity` |
+| 第三十九章 | §39.2.2 第 1 条麦克斯韦—拉曼紫外自截断段之后、第 2 条之前 | `axiom-omega-five-tier-cascade-sandbox` · `tier3-afgut-weinberg-three-eighths` |
+| 第三十九章 | §39.2.2 末（第 2 条算术谱矢高相变与舒尔正定脊线段之后） | `axiom-omega-five-tier-cascade-sandbox` · `tier4-prime-sagitta-critical-ridge` |
+| 第三十九章 | §39.2.3 第 2 条遮诠闭环段之后、模型定义之前 | `axiom-omega-five-tier-cascade-sandbox` · `tier5-geodesic-mind-bridge-erasure` |
+| 第三十九章 | §39.2 末（桥接段之后） | `axiom-omega-five-tier-cascade-sandbox` 完整实验室 |
+| 第三十九章 | §39.3.1 第 1 条霍普夫纤维化与复射影线段之后、第 2 条之前 | `axiom-omega-five-qm-postulates-sandbox` · `postulate1-hopf-blindspot-ray` |
+| 第三十九章 | §39.3.1 末（第 2 条反自伴切生成元翻转与不确定性段之后） | `axiom-omega-five-qm-postulates-sandbox` · `postulate2-hermitian-flip-uncertainty` |
+| 第三十九章 | §39.3.2 第 1 条玻恩—格里森—布施平方律段之后、第 2 条之前 | `axiom-omega-five-qm-postulates-sandbox` · `postulate3-roundtrip-born-gleason-busch` |
+| 第三十九章 | §39.3.2 第 2 条停机吕德斯捏合与偏迹段之后、第 3 条之前 | `axiom-omega-five-qm-postulates-sandbox` · `postulate4-unitary-halting-pinch` |
+| 第三十九章 | §39.3.2 末（第 3 条乘积再生核与齐雷尔松界段之后） | `axiom-omega-five-qm-postulates-sandbox` · `postulate5-rkhs-tensor-tsirelson` |
+| 第三十九章 | §39.3 末（收官桥接段之后） | `axiom-omega-five-qm-postulates-sandbox` 完整实验室 |
+| 第三十九章 | §39.4.1 末（第 3 条有限体积与无边界自裹段之后） | `ternion-self-contained-no-exterior-sandbox` · `skyrmion-winding-self-lock` |
+| 第三十九章 | §39.4.2 末（场·波·粒三阶对照表之后） | `ternion-self-contained-no-exterior-sandbox` · `field-wave-particle-trinity` |
+| 第三十九章 | §39.4.3 末（第 3 条两点齐性与临时桥自消段之后） | `ternion-self-contained-no-exterior-sandbox` · `origin-free-no-point-c` |
+| 第三十九章 | §39.4.4 第 2 条波前对跖重聚段之后、第 3 条之前 | `ternion-self-contained-no-exterior-sandbox` · `wavefront-outward-is-inward` |
+| 第三十九章 | §39.4.4 第 3 条希高德双球粘合段之后、第 4 条之前 | `ternion-self-contained-no-exterior-sandbox` · `heegaard-antipodal-no-exterior` |
+| 第三十九章 | §39.4 末（全书收官结语段之后） | `ternion-self-contained-no-exterior-sandbox` 完整实验室 |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget` |
 | 终章 | 空间吸引子 · 二 “回到洛伦兹”一段中“吸引子的体积为零”一句之后 | `spatial-attractor-deja-vu` · `shrink` |

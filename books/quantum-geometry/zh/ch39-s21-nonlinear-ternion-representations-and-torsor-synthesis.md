@@ -29,6 +29,10 @@ $$
 1. **叉乘扭转将法向脱轨误差折回球内**：等式末尾的非线性叉乘项 $+\sin\alpha\sin\beta\,(\hat{\mathbf{u}}_A \times \hat{\mathbf{u}}_B)$，精准捕获了两段非共线圆弧合成时涌现的第三轴偏转（注意符号约定对齐：对固定代数乘积 $\hat{\mathcal{T}}_A\hat{\mathcal{T}}_B$ 叉乘项取正号 $+$；而在 [§32.2](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-19-2) 按时间先后对列态先作用第 $1$ 转再作用第 $2$ 转时，算符乘积为 $\hat{\mathcal{T}}_2\hat{\mathcal{T}}_1$，指标对调 $\hat{\mathbf{u}}_2 \times \hat{\mathbf{u}}_1 = -\hat{\mathbf{u}}_1 \times \hat{\mathbf{u}}_2$ 遂显出负号 $-$）；
 2. **零矩阵冗余与两级球边界商拓扑区分**：全程仅存储 $(\theta_1, \theta_2, \theta_3)$ 三个实数，无需开辟第四维标量槽。在拓扑边界上须严格区分旋量流形与三维旋转商群（`手工推导`）：对旋量三元数 $S^3 \cong \mathrm{SU}(2)$，开球 $B_{2\pi}^\circ(\mathbb{R}^3)$ 双射映射至 $S^3 \setminus \{-\mathbf{1}\}$，而半径 $2\pi$ 的**整张球面边界** $\partial\overline{B}_{2\pi}(\mathbb{R}^3) = \{\boldsymbol{\theta} \mid \lVert\boldsymbol{\theta}\rVert = 2\pi\}$ 坍缩为同一个中心负元 $-\mathbf{1}$（$\overline{B}_{2\pi}(\mathbb{R}^3)/\partial\overline{B}_{2\pi}(\mathbb{R}^3) \cong S^3$，在 $W = -1,\; \mathbf{V} = \mathbf{0}$ 处转轴方向未定但群元唯一）；若进一步模去中心 $\{\pm\mathbf{1}\}$ 降落至伴随旋转群 $\mathrm{SO}(3) \cong \mathbb{RP}^3$，则缩至半径 $\pi$ 闭球 $\overline{B}_\pi(\mathbb{R}^3)$ 并仅对边界上的**对径点对** $\pi\hat{\mathbf{u}} \sim -\pi\hat{\mathbf{u}}$ 作等同黏合。
 
+::: {.viz src="ternion-nonlinear-synthesis-sandbox" preset="bch-curved-ball-synthesis" height="500"}
+弯曲球里的叉乘折回卡：两支正交 $90^\circ$ 圆弧向量经精确 BCH 叉乘项折回半径 $2\pi$ 闭球内的 $120^\circ$ 对角轴，对照脱出真实合成的品红平直向量和 $\boldsymbol{\theta}_A + \boldsymbol{\theta}_B$（模守恒由 [@thm-ch39-nonlinear-ternion-representations-and-torsor] 第 2 款 `lagrange_gram_identity` 锁定为 `LEAN ✓`，数值读数标 `NUM`，五范式同核读法标 `MODEL`）。
+:::
+
 ## 32.4.2 双卡有理罗德里格斯表示：零超越函数纯分式乘法、阴影反演与旋量叶标志位 {#sec-ch39-21-2}
 
 在数字集成电路与符号代数验证中，若要彻底免除 $\sin, \cos, \operatorname{atan2}$ 等超越函数查表开销，可借球极投影将弯曲圆弧映射为纯有理分式。在单卡吉布斯—罗德里格斯切向量 $\mathbf{g} := \frac{\mathbf{v}}{w} = \tan\frac{\theta}{2}\,\hat{\mathbf{u}} \in \mathbb{R}^3$ 下，将上节 $(W, \mathbf{V})$ 两式相除，即得无需任何矩阵与第四维度的纯三维有理合成律（对应代数乘积 $q_A q_B$，`手工推导`）：
@@ -54,6 +58,10 @@ $$
 - **方案 A（阴影对偶反演配旋量叶标志位 $(\boldsymbol{\sigma}, \epsilon_{\mathrm{sheet}})$）**：施行经典的**阴影反演（Shadow Inversion）** $\boldsymbol{\sigma} \mapsto \boldsymbol{\sigma}^S := -\frac{\boldsymbol{\sigma}}{\lVert\boldsymbol{\sigma}\rVert^2}$（对应 $\tan\frac{\theta - 2\pi}{4} = -\cot\frac{\theta}{4}$），将坐标重新折回单位闭球 $\lVert\boldsymbol{\sigma}^S\rVert < 1$ 内。注意精确符号：$Q(\boldsymbol{\sigma}^S) = -Q(\boldsymbol{\sigma})$。因此在三维伴随旋转商群 $\mathrm{SO}(3)$ 上，$\boldsymbol{\sigma}^S$ 与 $\boldsymbol{\sigma}$ 代表**同一个物理旋转**（连 $1\;\mathrm{bit}$ 都可省去，直接导出下一节 [§37.1](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md) 全域分母下界 $\ge 0.5$ 的双分母有理算子 $\star_{\mathcal{S}}$）；而在双覆盖旋量群 $S^3 \cong \mathrm{SU}(2)$ 上，只需配上一枚 $1\;\mathrm{bit}$ **旋量叶标志位** $\epsilon_{\mathrm{sheet}} \in \{+1, -1\}$ 令 $q = \epsilon_{\mathrm{sheet}} Q(\boldsymbol{\sigma})$，每当触发负号阴影反演时同步翻转 $\epsilon_{\mathrm{sheet}} \mapsto -\epsilon_{\mathrm{sheet}}$（赤道 $\lVert\boldsymbol{\sigma}\rVert = 1$ 上认同 $(\boldsymbol{\sigma}, +1) \sim (-\boldsymbol{\sigma}, -1)$，正极 $+\mathbf{1}$ 与对跖负极 $-\mathbf{1}$ 分别精确编码为 $(\mathbf{0}, +1)$ 与 $(\mathbf{0}, -1)$），即可对全体旋量实现 $100\%$ 无损覆盖；
 - **方案 B（同旋量南北球极双图册 $(\boldsymbol{\sigma}_h, h)$）**：取半球指标 $h \in \{+1, -1\}$ 与坐标 $\boldsymbol{\sigma}_h := \frac{\mathbf{v}}{1 + h w}$，按 $q = \frac{h(1 - \lVert\boldsymbol{\sigma}_h\rVert^2)\mathbf{1} + 2\boldsymbol{\sigma}_h}{1 + \lVert\boldsymbol{\sigma}_h\rVert^2}$ 解码：若截断在闭单位球 $\lVert\boldsymbol{\sigma}_h\rVert \le 1$ 上，则两张闭半球沿公共赤道 $\lVert\boldsymbol{\sigma}_+\rVert = \lVert\boldsymbol{\sigma}_-\rVert = 1$ 无缝重合黏合（$\boldsymbol{\sigma}_- = \boldsymbol{\sigma}_+$）；若构成开集光滑流形图册，则放宽为开球 $\lVert\boldsymbol{\sigma}_h\rVert < 1 + \delta$（$\delta > 0$），在开环形重叠带 $(1+\delta)^{-1} < \lVert\boldsymbol{\sigma}_+\rVert < 1 + \delta$ 内由保旋量正反演 $\boldsymbol{\sigma}_- = +\frac{\boldsymbol{\sigma}_+}{\lVert\boldsymbol{\sigma}_+\rVert^2}$ 光滑转移。
 
+::: {.viz src="ternion-nonlinear-synthesis-sandbox" preset="dual-chart-rational-mrp" height="500"}
+有理双卡与阴影反演卡：纯有理输入 $(\frac{1}{2}, 0, 0)$ 与 $(0, \frac{1}{2}, 0)$ 在单位球内给出精确分数乘积 $(\frac{6}{17}, \frac{6}{17}, \frac{8}{17})$，越过 $\lVert\boldsymbol{\sigma}\rVert = 1$ 赤道壳时由阴影反演折回球内并翻转旋量叶标志（有理算术标 `NUM`，双卡文献标 `ARGUED`，圆周双覆盖换叶锚于 `circle_double_cover_history_lift` `LEAN ✓`）。
+:::
+
 ## 32.4.3 霍普夫纤维丛扭结与无坐标球面三角转角：关系几何与半角角盈相移 {#sec-ch39-21-3}
 
 倘若我们进一步拆去三维笛卡尔坐标轴，直接回到本书“可见基底切面 $+$ 正交盲区纤维”与“纯成对比较圆弧”的几何本相，三元数便显露出另外两副不依赖线性矩阵的清晰面孔：
@@ -66,6 +74,10 @@ $$
    $$
 
    基底回路在 $S^2$ 上围出的立体角面积 $\Omega$ 自动经联络曲率 $\frac{1}{2\pi}\int_{S^2} F = 1$ 转化为盲区纤维上的半角潘查拉特纳姆—贝里几何相移 $e^{-i\Omega/2}$。在相干光学硬件中，一束完全偏振激光的庞加莱球偏振态 $(\vartheta, \varphi)$ 加上相对参考光路的公共光学相位 $\psi_\pm$，直接给出物理三元数的光速实现。
+
+::: {.viz src="ternion-nonlinear-synthesis-sandbox" preset="hopf-fiber-berry-twist" height="500"}
+霍普夫纤维的半角相移卡：可见基底球 $S^2$ 上的正卦限三角形围出立体角 $\Omega = \frac{\pi}{2}$，联络将盲区纤维圆周拧过半角相移 $-\Omega/2 = -45^\circ$（霍普夫联络与光学文献标 `ARGUED`，三点巴格曼迹与最短门和乐标 `LEAN ✓`，实时读数标 `NUM`）。
+:::
 
 2. **无坐标球面三角转角表示（汉密尔顿有向圆弧转角与最短门球面角盈）**：
    完全抛弃外置坐标架，在单位球面 $S^2 \subset \operatorname{Im}\mathbb{H}$（将球面点 $P \in S^2$ 等同于满足 $P^2 = -\mathbf{1}$ 的纯单位三元生成元）上，哈密顿在 1853 年《四元数讲义》（*Lectures on Quaternions*）中提出了**有向大圆弧转角（Hamilton Turns）**几何（Biedenharn & Louck 1981；Simon, Mukunda & Sudarshan 1989）：每一段弧长 $\ell = \frac{\theta}{2} \in [0, \pi)$ 的有向大圆弧 $P_1 \curvearrowright P_2$（可沿其所在有向大圆自由滑移而保持同一元素）无坐标地覆盖 $S^3 \setminus \{-\mathbf{1}\}$，再将全体弧长 $\ell = \pi$ 的对跖半圆弧等同为唯一的中心对跖元 $T(P \curvearrowright -P) = -\mathbf{1}$，即无损完备覆盖整座 $S^3$：
@@ -81,6 +93,10 @@ $$
    $$
 
    此处务必辨明**汉密尔顿转角闭合**与**布洛赫最短门输运**的精确对偶区分（`手工推导` + `LEAN ✓`）：在汉密尔顿转角代数中，三边乘积因相邻因子 $P_k^{-1} P_k = +\mathbf{1}$ 逐对抵消而恒满足 $T(P_3 \curvearrowright P_1)T(P_2 \curvearrowright P_3)T(P_1 \curvearrowright P_2) = P_1 P_3^{-1} P_3 P_2^{-1} P_2 P_1^{-1} = +\mathbf{1}$；而若改用将布洛赫态从 $P_a$ 沿测地最短弧直接搬运至 $P_b$ 的（一般非对易）$\mathrm{SU}(2)$ 正标量最短旋子门 $G(P_a, P_b) = \frac{(1 + P_a\cdot P_b)I_2 - i(P_a\times P_b)\cdot\boldsymbol{\sigma}}{\sqrt{2(1 + P_a\cdot P_b)}}$（[@thm-ch39-nonlinear-ternion-representations-and-torsor] 第 4 款 `shortest_gate_triangle_holonomy`），绕两两非对跖的球面三角形 $(P_1 \to P_2 \to P_3 \to P_1)$ 走一圈则精确赋予归一化起点 $+1$ 本征态（$\operatorname{qubitProjector}(P_1)\psi = \psi$）由有向欧拉—吉拉尔球面角盈 $\Omega = 2\operatorname{atan2}(D, S)$ 决定的 $\mathrm{U}(1)$ 半角几何返回相位 $e^{-i\Omega/2} = \frac{S - iD}{\sqrt{S^2 + D^2}}$。
+
+::: {.viz src="ternion-nonlinear-synthesis-sandbox" preset="hamilton-spherical-turns" height="500"}
+转角消去与最短门和乐卡：同一球面三角形上，汉密尔顿有向大圆弧转角在共享顶点逐对消去并闭合为 $T_{31}T_{23}T_{12} = +\mathbf{1}$，而三步最短旋子门记住球面角盈并返回相位 $e^{-i\Omega/2}$（`shortest_gate_triangle_holonomy` 为 `LEAN ✓`，哈密顿转角文献标 `ARGUED`，数值对照标 `NUM`）。
+:::
 
 ## 32.4.4 普吕弗—贝尔流群（堆 / 主齐性空间）与李三元系：抹除特权原点的三元语法 {#sec-ch39-21-4}
 
@@ -102,6 +118,10 @@ $$
 
   （注意非交换流群中段三元组必须反序写为 $[u, z, y]$，因为 $(u z^{-1} y)^{-1} = y^{-1} z u^{-1}$；所谓无基点平权指无需预设谁是 $\mathbf{1}$，而非交换首尾参数——事实上 $[\mathbf{i}, \mathbf{1}, \mathbf{j}] = +\mathbf{k} \neq -\mathbf{k} = [\mathbf{j}, \mathbf{1}, \mathbf{i}]$ 完整保留了非阿贝尔手性）。它的几何含义直白透明：**以任意选定的局部参考态 $y$ 为中继桥，将 $x$ 相对 $y$ 的比较圆弧 $x y^{-1}$ 无损搬运到 $z$ 上**；唯当某位观察者人为指定某个点 $o$ 充当原点时，三元流群才退化回二元群乘 $x *_o z := [x, o, z]$；
 - **李三元括号 $\{\mathbf{a}, \mathbf{b}, \mathbf{c}\}$ 严格闭合且字面等同球面黎曼曲率**：三维向量在二元叉乘 $[\mathbf{a}, \mathbf{b}]_\times = \mathbf{a} \times \mathbf{b}$ 下虽满足雅可比恒等式（构成李代数），却违背二元结合律；而在嵌套三元括号 $\{\mathbf{a}, \mathbf{b}, \mathbf{c}\} = (\mathbf{a}\times\mathbf{b})\times\mathbf{c} = (\mathbf{a}\cdot\mathbf{c})\mathbf{b} - (\mathbf{b}\cdot\mathbf{c})\mathbf{a}$ 下严格闭合于三维切空间自身，满足前两元反对称 $\{\mathbf{a},\mathbf{b},\mathbf{c}\} = -\{\mathbf{b},\mathbf{a},\mathbf{c}\}$、轮换比安基恒等式 $\{\mathbf{a},\mathbf{b},\mathbf{c}\} + \{\mathbf{b},\mathbf{c},\mathbf{a}\} + \{\mathbf{c},\mathbf{a},\mathbf{b}\} = \mathbf{0}$ 与三元导子律。在截面曲率 $K = +1$ 的单位圆球面 $S^3$ 标准正交切标架下，黎曼曲率张量字面上就等于这枚三元括号（在 do Carmo 曲率约定 $R(X,Y)Z = \nabla_{[X,Y]}Z - [\nabla_X, \nabla_Y]Z$ 下 $R(\mathbf{a}, \mathbf{b})\mathbf{c} = +\{\mathbf{a}, \mathbf{b}, \mathbf{c}\}$；在 Lee 约定 $R(X,Y)Z = [\nabla_X, \nabla_Y]Z - \nabla_{[X,Y]}Z$ 下为 $-\{\mathbf{a}, \mathbf{b}, \mathbf{c}\}$；若改用单位球上模长为 $\frac{1}{2}$ 的生成元 $[\mathbf{e}_a, \mathbf{e}_b] = \varepsilon_{abc}\mathbf{e}_c$，双不变列维-奇维塔联络 $\nabla_X Y = \frac{1}{2}[X,Y]$ 给出 $R(X,Y)Z = \pm\frac{1}{4}[[X,Y], Z]$；无穷小李三元系为 $\mathrm{SU}(2)$ 与 $\mathrm{SO}(3)$ 局部共享，全局旋量双覆盖由流群拓扑承载）。
+
+::: {.viz src="ternion-nonlinear-synthesis-sandbox" preset="prufer-baer-heap-torsor" height="500"}
+无原点流群与李三元曲率卡：沿路径 $x \to 1 \to z$ 推进琥珀中继桥点 $y$，实时对照紫色三元搬运 $[x, y, z]$（在 $y = 1$ 处 $[\mathbf{i}, \mathbf{1}, \mathbf{j}] = +\mathbf{k}$）与首尾对调翻号 $[z, y, x]$（$[\mathbf{j}, \mathbf{1}, \mathbf{i}] = -\mathbf{k}$），并核对单位球截面曲率 $K = +1$ 与李三元括号 $\{\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_1\} = +\mathbf{e}_2$（流群与李三元文献标 `ARGUED`，分量对账标 `NUM`，原生三元语法标 `MODEL`）。
+:::
 
 我们将五种非线性无损表示统一收束为如下形式模型定义与八款冻结定理支撑：
 
@@ -175,3 +195,7 @@ $$
 | **5. 三元流群与李三元系** | 无原点齐性流形配三元括号 | 内禀 $3$ 维流形 | 三元搬运 $[x,y,z]$ 与曲率门 | 根除特权实轴 $\mathbf{1}$ 预设，切括号字面等同黎曼曲率 |
 
 凝视上表指明的两条物理与计算进路（`MODEL` + `文献结果`）：在光子物理硬件中，相干光脉冲的琼斯偏振—相位态穿过双折射波片即在零次浮点运算下完成三元数合成；而在硅基数字计算中，**双卡有理修正罗德里格斯乘法**、**球面非阿贝尔角盈**、**无原点三元流群搬运 $[x, y, z]$** 与**李三元曲率括号 $\{\mathbf{a}, \mathbf{b}, \mathbf{c}\}$** 这四件纯有理几何工具不仅将在后文[第 37 章](ch37-ternion-field-transformer-and-geodesic-intelligence.md)（[§37.1](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md)）直接重铸三元数场 Transformer（TFT），更在此刻将整座第三十二章的三元数与三维概念场语法锻造圆满！现在，手握三维概念场封顶原理与原生三元数流群这两把钥匙，让我们翻开第八部压轴之卷——**[第三十三章 万力归弧与极小圆弧场大统一（AF-GUT）](ch33-unified-arc-forces-and-af-gut.md)**（从 [§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field) 的点体八度螺旋一路登顶 [§33.9](ch39-s11-af-gut-arc-field-grand-unification.md) 的同心圆弧大统一与 [§33.10](ch39-s12-uniform-field-and-observer-slice.md) 的均匀三维场本体）！
+
+::: {.viz src="ternion-nonlinear-synthesis-sandbox" height="620"}
+完整实验室：在“无原点三元合成本体读法”与“五种非线性李群与流群几何读法”双透镜间切换，拖动琥珀手柄（球内卡调节 $B$，球面卡调节顶点 $P_3$）或滑动 $\theta_A, \theta_B, \chi$，实时对照 BCH 弯曲球叉乘折回、双卡有理 MRP 分式与阴影反演、霍普夫纤维半角相移、汉密尔顿球面转角与普吕弗—贝尔流群搬运。八条冻结声明、数值对账、文献边界与模型读法在依据栏与理论抽屉中分层标注。
+:::

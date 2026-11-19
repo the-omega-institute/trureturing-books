@@ -21,6 +21,10 @@
 
      所谓“复希尔伯特空间中的单位射线”，正是三元数极小圆弧体向观察者复切面做线性化展开时留下的射影商壳；所谓“全局不可测相位 $e^{\hat{\mathbf{i}}\chi}$”，字面上就是观察切面自身的 $90^\circ$ 正交视觉盲区纤维 $S^1$！当 $N$ 座三元数概念场耦合展开时（[§32.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)），可观测纯态流形即自然延拓为 $\mathbb{CP}^{2^N - 1}$。
 
+::: {.viz src="axiom-omega-five-qm-postulates-sandbox" preset="postulate1-hopf-blindspot-ray" height="500"}
+盲区相位转一圈，布洛赫点不动卡：拨动全局盲区相位 $\chi$，紫色旋量环面上的琥珀珠沿品红圆纤维整圈滑动，而投向下方的青色布洛赫纯态点保持不动（霍普夫纤维丛标 `ARGUED`，`unit_gram_overlap_characterization`、`blochPure_norm`、`blochPure_surjective` 与 `complete_common_phase_polynomial_theorem` 为 `LEAN ✓`，读数标 `NUM`）。
+:::
+
 2. **公理二（可观测量公设）：切空间反自伴生成元 $90^\circ$ 翻转导出厄米算符与罗伯逊—薛定谔不确定性**：
    教科书第二公设规定：一切物理可观测量由自伴（厄米）线性算符 $\hat{A} = \hat{A}^\dagger$ 表示，算符本征值为实数测量刻度。在 $\mathrm{AXIOM}\text{-}\Omega$ 中，厄米算符与测不准关系直接由三元数切空间曲率导出（`手工推导` + `LEAN ✓`）：
    - **保正迁移锁定反自伴切生成元**：法则 (II) 要求沿任意切方向 $\mathbf{X} \in T_o\mathbb{T}_3 \cong \mathfrak{su}(2)$ 推进无穷小圆弧 $\exp(\epsilon\mathbf{X})$ 时保持复内积保真度不变，对 $\epsilon = 0$ 求导立得 $\mathbf{X}^\dagger + \mathbf{X} = 0 \implies \mathbf{X}^\dagger = -\mathbf{X}$（与平衡幺正和交叉积反自伴律 [`crossProduct_is_skewAdjoint_of_balanced_sum`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum) 同源，`LEAN ✓`）；
@@ -38,6 +42,10 @@
 
      算符层面上，无共同本征矢与态依赖不确定性下界直接由上述非零李括号成立（无界共轭位置与动量算子的定义域条件遵循[附录 E](appendix-e.md)）；而在几何模型直觉（`MODEL` + `手工推导`）中，沿正卦限非退化有向球面回路 $(+\hat{\mathbf{z}} \to +\hat{\mathbf{x}} \to +\hat{\mathbf{y}} \to +\hat{\mathbf{z}})$ 等路径推进时，两根正交圆弧切生成元围出严格正的吉拉尔球面角盈（如该正卦限回路 $\Omega = \frac{\pi}{2} > 0$），形象对应单张平直观测切面无法同时零误差对角化两根互相垂直的弯曲自旋轴！
 
+::: {.viz src="axiom-omega-five-qm-postulates-sandbox" preset="postulate2-hermitian-flip-uncertainty" height="500"}
+盲区生成元翻成厄米轴与不确定性卡：反自伴切生成元 $\mathbf{X}$ 乘上 $\hat{\mathbf{i}}$ 转过 $90^\circ$ 化作实刻度厄米轴 $\hat{A}_0 = \hat{\mathbf{i}}\mathbf{X}$，在北极态 $\lvert 0\rangle$ 上横向标准差乘积 $\Delta\sigma_x \cdot \Delta\sigma_y = 1$ 精确贴住换位子下界（`crossProduct_is_skewAdjoint_of_balanced_sum`、`robertson_schrodinger` 与 `pauli_observables_have_no_common_eigenvector` 为 `LEAN ✓`，球面角盈直觉标 `MODEL`）。
+:::
+
 ## 39.3.2 公理三至公理五：往返玻恩—格里森—布施平方律、停机偏迹消解坍缩悖论与再生核张量纠缠 {#sec-ch39-26-2}
 
 接下来审视量子力学最富争议的后三条公设——概率、坍缩与非定域纠缠：
@@ -53,6 +61,10 @@
    - 在任意有限指标类型 $d$（$d \ge 1$，含单比特 $d = 2$）上，对全体正算子效应 $0 \le E \le I$ 施加非负、有界和有限可加（$E + F \le I \implies p(E + F) = p(E) + p(F)$，`T2`）与单位归一条件，**有限维布施定理**（[`effect_density_representation`](lean:D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_density_representation)，`LEAN ✓`）证明任意效应概率分配唯一表为密度矩阵迹公式 $p(E) = \operatorname{Tr}(\hat{\rho} E)$；
    - 当复希尔伯特空间维数 $N \ge 3$（例如双场耦合四维复空间 $N = 2^2 = 4 \ge 3$，切勿与单场实流形维数 $\dim_{\mathbb{R}}\mathbb{T}_3 = 3$ 混同）时，在非负性（$0 \le p(\hat{\Pi})$）、单位归一（$p(I) = 1$）与两两正交星投影可加性（`T2`）下，**有限复投影格里森定理**（[`gleason_representation`](lean:D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation)，`LEAN ✓`）同样唯一锁死 $p(\hat{\Pi}) = \operatorname{Re}\operatorname{Tr}(\hat{\rho}\hat{\Pi})$！
 
+::: {.viz src="axiom-omega-five-qm-postulates-sandbox" preset="postulate3-roundtrip-born-gleason-busch" height="500"}
+往返读数、三叉戟与三次假设卡：$60^\circ$ 纯态沿对径 $Z$ 基给出往返玻恩概率 $\frac{3}{4} + \frac{1}{4} = 1$，而在经线三叉戟效应测量上迹公式总和恒为 $1$，直接排除冲到 $\frac{5}{4}$ 的奇三次反例（`rank_one_born_pairing_weight`、`gleason_representation` 与 `effect_density_representation` 为 `LEAN ✓`，三叉戟算例标 `NUM`）。
+:::
+
 2. **公理四（演化与坍缩统一律）：停机前流群测地流与停机刻幂等捏合加盲区偏迹消解测量悖论**：
    教科书最尖锐的裂痕横亘在连续可逆的薛定谔幺正演化与瞬间不可逆的投影坍缩之间。在 $\mathrm{AXIOM}\text{-}\Omega$ 的内部观察者模型（`MODEL`）下，观察者与仪器并非游离于量子律之外的外部经典裁判，而是网络中同构的另一座三元数概念场 $\mathbb{T}_3^{(\mathrm{obs})}$——“幺正演化”与“测量坍缩”只是同一条流群轨迹在**停机前**与**停机刻**的内外双重视角：
    - **停机前传播子流群测地线驱动薛定谔流**：当局部测地残差尚未落入停机精度时，在选定定常自伴哈密顿生成元 $\hat{H} = \hbar\nu_0\hat{\Omega}_{\mathrm{arc}}$（`T4` 动力学输入；无穷维空间配合 `H6` / `T2` 双侧满射可逆性、时间参数强连续性与斯通定理，`文献结果`）后，**幺正传播子旋子群** $U_t = \exp(-\frac{\hat{\mathbf{i}}}{\hbar}t\hat{H})$ 在算子群上沿法则 (I) 的流群自平行单参数测地线匀速推进 $U_{t+1} = [U_t, U_{t-1}, U_t]$（[§37.2](ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.md)，`手工推导`），并在稠密定义域 $\lvert\psi\rangle \in \mathcal{D}(\hat{H})$ 上驱动一般态矢服从**薛定谔方程** $\hat{\mathbf{i}}\hbar\,\partial_t\lvert\psi\rangle = \hat{H}\lvert\psi\rangle$（其布洛赫纯态射线对等权赤道叠加态走出 $\mathbb{CP}^1$ 大圆测地线，对一般叠加态走出定纬度拉莫尔进动圆，对能量本征态则退化为定常不动射线，由 [`energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) 锁定，`LEAN ✓`）；
@@ -64,6 +76,10 @@
 
      全域无坍缩保幺正，局域因停机偏迹见吕德斯条件更新（注：从系综捏合混态 $\sum_k \hat{\Pi}_k\hat{\rho}\hat{\Pi}_k$ 到单次实验具体分支 $k$ 的选支实现机制，严格对齐 [§34.8](ch34-s20-single-outcome-and-attractor-basins.md) 与开放问题 [@prob-ch34-single-outcome-realization] `OPEN`，洛伦兹协变坍缩与视界幺正性见 [@prob-appendix-d-time-horizon] `OPEN`）。
 
+::: {.viz src="axiom-omega-five-qm-postulates-sandbox" preset="postulate4-unitary-halting-pinch" height="500"}
+全局保范，局部停机捏合卡：联合等距扩张保持总纯度 $1$，而局部停机捏合将对角留存范数平方 $\frac{5}{8}$ 与折入盲区尾流的副对角相干质量 $\frac{3}{8}$ 勾股对齐为 $1$（`energy_eigenstate_stationary`、`channel_kraus_stinespring`、`finite_record_pinching_idempotent` 与 `pinching_hilbert_schmidt_pythagorean` 为 `LEAN ✓`，停机诠释标 `MODEL`，单次选支实现标 `OPEN`）。
+:::
+
 3. **公理五（复合系统张量积公设）：半双线性振幅乘积再生核与复局域层析生成张量空间，共享极小圆弧单态直抵齐雷尔松界 $2\sqrt{2}$**：
    教科书第五公设规定：可区分复合系统 $A + B$ 的态空间是复张量积 $\mathcal{H}_A \otimes_{\mathbb{C}} \mathcal{H}_B$ 而非直和（不可区分全同玻色/费米置换统计另循[附录 E §E.5](appendix-e-s05-quantum-postulates.md#sec-appe-quantum) 第 5 条的 `T3` 对称化桥梁）。在 $\mathrm{AXIOM}\text{-}\Omega$ 下，这正是多座三元数场并置再投影（[§32.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)）的代数推论：
    - **乘积再生核与复局域层析完备性**：在 `T3` 选定相容复结构后，两座三元数场的复振幅内积核乘积 $K_{\mathrm{amp}}\bigl((\psi_A, \psi_B), (\phi_A, \phi_B)\bigr) = \langle\phi_A\mid\psi_A\rangle\langle\phi_B\mid\psi_B\rangle$ 由阿隆沙因再生核希尔伯特空间乘积定理（Aronszajn 1950，`文献结果`）等距生成复张量积 $\mathcal{H}_A \otimes_{\mathbb{C}} \mathcal{H}_B$；下沉至盲区相位不变的可观测层，联合射线保真度相乘 $\kappa_{\mathrm{ray}}^{(AB)}\bigl(([\psi_A], [\psi_B]), ([\phi_A], [\phi_B])\bigr) = \lvert\langle\phi_A\mid\psi_A\rangle\rvert^2 \lvert\langle\phi_B\mid\psi_B\rangle\rvert^2 = \operatorname{Tr}\bigl((\hat{\rho}_A\otimes\hat{\rho}_B)(\hat{\sigma}_A\otimes\hat{\sigma}_B)\bigr)$ 的厄米算符张成实维数恰好满足平方乘法恒等式 $d_A^2 \cdot d_B^2 = (d_A d_B)^2$（对比实双比特 $3 \times 3 = 9 < 10$ 的局域层析破缺，见[附录 E](appendix-e.md) [@ex-appe-qubit-cubic-and-tomography]），配合 `H7`（`T2`）复局域层析极小性唯一锁死平直展开账本为 $\mathcal{H}_A \otimes_{\mathbb{C}} \mathcal{H}_B$！
@@ -72,6 +88,10 @@
      $$
      \bigl\lvert E(\theta_1, \theta_2) + E(\theta_1, \theta_2') + E(\theta_1', \theta_2) - E(\theta_1', \theta_2') \bigr\rvert_{\max} \;=\; 2\sqrt{2} \;\approx\; 2.82842712.
      $$
+
+::: {.viz src="axiom-omega-five-qm-postulates-sandbox" preset="postulate5-rkhs-tensor-tsirelson" height="500"}
+共享单态越过经典界 2 卡：两座三元数场共享零总自旋单态圆弧，单场边缘缩至球心 $\frac{1}{2}I_2$，而四组 $45^\circ$ 切角将圆弧余弦关联叠至齐雷尔松上界 $2\sqrt{2} > 2$（`bell_pure_state_has_maximally_mixed_marginal`、`classical_chsh_abs_le_two`、`chsh_square_eq_four_of_local_pair_commutes` 与 `bell_chsh_state_expectation_is_greatest` 为 `LEAN ✓`，再生核乘积与局域层析标 `ARGUED`）。
+:::
 
 ## 39.3.3 形式化锚定主定理、文献与附录 E 边界、五大公理定量核验与迈向无外三元数本体终章 {#sec-ch39-26-3}
 
@@ -134,3 +154,7 @@
 **从量子五大公理的切面投影迈向第三十九章最终压轴节：为什么三元数本身即是无外部的自包含拓扑粒子？** 至此，在[附录 E §E.5](appendix-e-s05-quantum-postulates.md#sec-appe-quantum) 的 `T1–T4` 显式桥接条件下，$\mathrm{AXIOM}\text{-}\Omega$ 投影模型（`MODEL`）已将传统量子力学的五大经验公设悉数还原为三元数场在平直账本上的正交投影定理——复数来自观察切面的 $90^\circ$ 正交盲区，厄米算符来自球面切矢的实轴翻转，玻恩概率来自校准往返射线核与可加性锁定的勾股分账，张量纠缠来自多座三元数场的乘积再投影，而所谓“波函数坍缩”，不过是身处网络内部的有限观察者在自定精度 $\varepsilon_{\mathrm{self}}$ 处按下幂等停机键、将未读尽的干涉余项折入未来时间长河时留下的切面截痕。
 
 在合上三十九章正文之前，让我们跨入本章最后一节 [§39.4 自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)，回到三元数 $\mathbb{T}_3 \cong S^3(1)$ 本体自身，回答最后那声终极追问：**为什么这枚既不可线性书写、又处处齐性各向同性的闭合流形同时是场、是波、也是自包含粒子，并在彻底清零外置第 3 点 $C$ 的同时消除了宇宙的一切“之外”？**
+
+::: {.viz src="axiom-omega-five-qm-postulates-sandbox" height="620"}
+完整实验室：在紫色旋量环面上拖动琥珀旋量珠改变盲区相位 $\chi$ 与子午线射线角 $\theta$，并调节各公设滑块（翻转角 $\vartheta$、停机捏合强度 $\lambda$ 与 Alice 两轴夹角 $\gamma$），在同一枚旋量体与布洛赫球及账本台上依次检验霍普夫盲区纤维商映射、反自伴切矢实轴翻转与罗伯逊不确定性、格里森—布施二次迹刚性、全局等距扩张配局域幂等捏合以及双场单态齐雷尔松上界 $2\sqrt{2}$。十八条冻结声明、文献与 `T1–T4` 桥接边界、数值核算及开放问题在依据栏与理论抽屉中分层标注。
+:::

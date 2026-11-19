@@ -7790,6 +7790,723 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "ternion-nonlinear-synthesis-sandbox",
+      "code": "TERNION//NONLINEAR",
+      "title": "TERNION//NONLINEAR · 三元数的五种非线性无损表示与无原点流群合成沙盘",
+      "title_en": "TERNION//NONLINEAR · Five Nonlinear Lossless Ternion Representations & Origin-Free Torsor Synthesis Sandbox",
+      "summary": "两段 90° 转动的平直和留在平面里，弯曲合成却被叉乘抬出平面、转到 120°。再在同一颗球上看有理双卡的 (6/17, 6/17, 8/17) 与阴影反演、霍普夫纤维的 −Ω/2、球面转角之积回到 +1，以及不需要原点的三元搬运 [x, y, z]。",
+      "summary_en": "The flat sum of two 90° turns stays in their plane, while the curved product is lifted out of it by the cross product and turns 120°. On the same ball, see the rational product (6/17, 6/17, 8/17) and the shadow switch, the Hopf fibre turning by −Ω/2, spherical turns multiplying back to +1, and the origin-free ternary transport [x, y, z].",
+      "path": "ternion-nonlinear-synthesis-sandbox/",
+      "thumbnail": "ternion-nonlinear-synthesis-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-19",
+      "chapter": 32,
+      "section": "32.4",
+      "presets": [
+        "bch-curved-ball-synthesis",
+        "dual-chart-rational-mrp",
+        "hopf-fiber-berry-twist",
+        "hamilton-spherical-turns",
+        "prufer-baer-heap-torsor"
+      ],
+      "preset_titles": {
+        "bch-curved-ball-synthesis": {
+          "zh": "弯曲球里的叉乘折回",
+          "en": "The cross product bends the sum"
+        },
+        "dual-chart-rational-mrp": {
+          "zh": "有理双卡与阴影反演",
+          "en": "Rational charts and the shadow"
+        },
+        "hopf-fiber-berry-twist": {
+          "zh": "霍普夫纤维的半角相移",
+          "en": "The Hopf fibre turns by −Ω/2"
+        },
+        "hamilton-spherical-turns": {
+          "zh": "转角消去与最短门和乐",
+          "en": "Turns cancel, gates remember"
+        },
+        "prufer-baer-heap-torsor": {
+          "zh": "无原点流群与李三元曲率",
+          "en": "Origin-free heap, Lie triple curvature"
+        }
+      },
+      "tags": [
+        "三元数",
+        "BCH 合成",
+        "修正罗德里格斯参数",
+        "霍普夫纤维",
+        "流群"
+      ],
+      "tags_en": [
+        "Ternion",
+        "BCH product",
+        "Modified Rodrigues parameters",
+        "Hopf fibration",
+        "Heap"
+      ],
+      "theory": [
+        {
+          "label": "§32.4 · 三元数的五种非线性无损表示与无原点流群合成",
+          "label_en": "§32.4 · Five nonlinear lossless ternion representations and origin-free torsor synthesis",
+          "href": "../zh/ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.html#sec-ch39-nonlinear-ternion-representations-and-torsor-synthesis",
+          "href_en": "../en/ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.html#sec-ch39-nonlinear-ternion-representations-and-torsor-synthesis"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.rotor_shortest_gate"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product"
+        },
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "ternion-field-transformer-sandbox",
+      "code": "TERNION//TFT",
+      "title": "TERNION//TFT · 三元数场 Transformer 沙盘：双分母旋子、非阿贝尔和乐与无 Softmax 注意力",
+      "title_en": "TERNION//TFT · Ternion-Field Transformer Sandbox: Dual-Denominator Rotors, Non-Abelian Holonomy and Softmax-Free Attention",
+      "summary": "拖动单位球里的旋子，看双分母乘法让乘积留在球内、正弦矢 ξ 平稳跨过折缝。再比较两步转动换序的 120°、单层参数账本、带真空储备的玻恩注意力，以及随 ξ 开合并在折缝处停机的曲率门。",
+      "summary_en": "Drag a rotor inside the unit ball and watch the dual-denominator product keep the result inside while the sine vector ξ crosses the seam smoothly. Then compare the 120° swap of two turns, the per-layer parameter ledger, Born attention with a vacuum reserve, and a curvature gate that opens with ξ and halts at the seam.",
+      "path": "ternion-field-transformer-sandbox/",
+      "thumbnail": "ternion-field-transformer-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-19",
+      "chapter": 37,
+      "section": "37.1",
+      "presets": [
+        "dual-denom-shadow-mrp",
+        "nape-nonabelian-holonomy",
+        "butterfly-schur-bridge",
+        "born-heap-attention-sinkfree",
+        "fano-lie-triple-curvature-gate"
+      ],
+      "preset_titles": {
+        "dual-denom-shadow-mrp": {
+          "zh": "双分母乘法与阴影折缝",
+          "en": "Dual denominators and the seam"
+        },
+        "nape-nonabelian-holonomy": {
+          "zh": "非阿贝尔路径和乐：换序差 120°",
+          "en": "Non-Abelian holonomy: a 120° swap"
+        },
+        "butterfly-schur-bridge": {
+          "zh": "双侧旋子与蝴蝶舒尔桥",
+          "en": "Bilateral rotors and butterfly bridges"
+        },
+        "born-heap-attention-sinkfree": {
+          "zh": "玻恩—流群注意力与真空储备",
+          "en": "Born–Heap attention and the reserve ε₀"
+        },
+        "fano-lie-triple-curvature-gate": {
+          "zh": "法诺李三元曲率门与停机",
+          "en": "The Fano Lie-triple gate and halting"
+        }
+      },
+      "tags": [
+        "三元数",
+        "Transformer",
+        "非阿贝尔和乐",
+        "玻恩注意力",
+        "李三元系"
+      ],
+      "tags_en": [
+        "Ternions",
+        "Transformer",
+        "Non-Abelian holonomy",
+        "Born attention",
+        "Lie triple systems"
+      ],
+      "theory": [
+        {
+          "label": "§37.1 · 三元数场 Transformer（TFT）",
+          "label_en": "§37.1 · The ternion-field Transformer (TFT)",
+          "href": "../zh/ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.html#sec-ch39-ternion-field-transformer-and-rational-rotor-dynamics",
+          "href_en": "../en/ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.html#sec-ch39-ternion-field-transformer-and-rational-rotor-dynamics"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy"
+        },
+        {
+          "gid": "D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences"
+        },
+        {
+          "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"
+        },
+        {
+          "gid": "D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk"
+        },
+        {
+          "gid": "D5/S0/Computability/DescriptionComplexity/LookupProgramUpperBound.lookup_program_upper_bound"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "ternion-least-action-geodesic-sandbox",
+      "code": "TERNION//GEODESIC",
+      "title": "TERNION//GEODESIC · 三元数场的最小作用量：弦弧矢高、流群测地线与雅可比聚焦沙盘",
+      "title_en": "TERNION//GEODESIC · Least Action as Sagitta, Heap Geodesics and Jacobi Focusing on the Ternion Field",
+      "summary": "同样转过 120°，匀速四拍只付 0.5359 的矢高，末步一跳要付 1.5000。在同一颗探针球上比较单拍的三把尺子、流群点反射接力、镜像绕路的 ±Ω、平直弦的塌缩与球面上的余弦聚焦。",
+      "summary_en": "Over the same 120°, four even beats pay a sagitta of 0.5359 and one last-beat jump pays 1.5000. One probe sphere compares the three rulers of a beat, the heap point-reflection relay, the ±Ω of mirror detours, the sinking flat chord and cosine focusing on the sphere.",
+      "path": "ternion-least-action-geodesic-sandbox/",
+      "thumbnail": "ternion-least-action-geodesic-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-19",
+      "chapter": 37,
+      "section": "37.2",
+      "presets": [
+        "sagitta-mrp-surprisal-lock",
+        "heap-autoparallel-point-reflection",
+        "uniform-cadence-vs-jump-hallucination",
+        "lateral-detour-vs-chord-collapse",
+        "jacobi-focusing-conformal-gradient"
+      ],
+      "preset_titles": {
+        "sagitta-mrp-surprisal-lock": {
+          "zh": "矢高、有理核与漏失三量锁定",
+          "en": "Sagitta, rational kernel and leak locked"
+        },
+        "heap-autoparallel-point-reflection": {
+          "zh": "流群点反射接力与零角盈",
+          "en": "Heap point reflection, zero excess"
+        },
+        "uniform-cadence-vs-jump-hallucination": {
+          "zh": "匀速四拍对末步跳步",
+          "en": "Even beats against a last-beat jump"
+        },
+        "lateral-detour-vs-chord-collapse": {
+          "zh": "侧向绕路与穿球弦塌缩",
+          "en": "Sideways detours and a sinking chord"
+        },
+        "jacobi-focusing-conformal-gradient": {
+          "zh": "雅可比聚焦与共形梯度",
+          "en": "Jacobi focusing and the conformal gradient"
+        }
+      },
+      "tags": [
+        "三元数",
+        "最小作用量",
+        "弦弧矢高",
+        "流群测地线",
+        "雅可比聚焦"
+      ],
+      "tags_en": [
+        "Ternion",
+        "Least action",
+        "Sagitta",
+        "Heap geodesic",
+        "Jacobi focusing"
+      ],
+      "theory": [
+        {
+          "label": "§37.2 · 最小作用量同构：弦弧矢高与流群测地线",
+          "label_en": "§37.2 · The least-action isomorphism: sagitta and heap geodesics",
+          "href": "../zh/ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.html#sec-ch39-least-action-geodesics-and-cosmos-ai-isomorphism",
+          "href_en": "../en/ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.html#sec-ch39-least-action-geodesics-and-cosmos-ai-isomorphism"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.rotor_shortest_gate"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "axiom-omega-dimension-closure-sandbox",
+      "code": "AXIOM//OMEGA",
+      "title": "AXIOM//OMEGA · 无源三元比较闭合：维数筛、彼得—外尔母核与无边界三形式场沙盘",
+      "title_en": "AXIOM//OMEGA · Origin-Free Ternary Comparison Closure: Dimension Sieve, Peter–Weyl Mother Kernel & Boundaryless Three-Form Field Sandbox",
+      "summary": "以 1 为桥，[i, 1, j] = +k 与 [j, 1, i] = −k 落在对径两极；一维、二维扭不起来，H₃ 与 sl(2, ℝ) 的单位球被 Ad 流推成椭球，只剩 S³。母核 cos²(d/2) 的秩是 1 + 4 = 5，det G₃(60°) = 3/32；测地球的边界缩回一点，η 体积 2π²。",
+      "summary_en": "With 1 as the bridge, [i, 1, j] = +k and [j, 1, i] = −k land on opposite poles; one and two dimensions cannot twist, the Ad flows push the unit balls of H₃ and sl(2, ℝ) into ellipsoids, and only S³ remains. The mother kernel cos²(d/2) has rank 1 + 4 = 5 and det G₃(60°) = 3/32; the boundary of the geodesic ball shrinks to a point, η-volume 2π².",
+      "path": "axiom-omega-dimension-closure-sandbox/",
+      "thumbnail": "axiom-omega-dimension-closure-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-19",
+      "chapter": 39,
+      "section": "39.1",
+      "presets": [
+        "origin-free-ternary-bridge",
+        "dimension-sieve-1d-2d-deadlock",
+        "three-sphere-noncompact-elimination",
+        "peter-weyl-rank-five-kernel",
+        "cartan-three-form-closed-field"
+      ],
+      "preset_titles": {
+        "origin-free-ternary-bridge": {
+          "zh": "无源的桥与原点平权",
+          "en": "An origin-free bridge"
+        },
+        "dimension-sieve-1d-2d-deadlock": {
+          "zh": "一维与二维扭不起来",
+          "en": "One and two dimensions cannot twist"
+        },
+        "three-sphere-noncompact-elimination": {
+          "zh": "三维非紧候选出局",
+          "en": "The non-compact 3D candidates drop out"
+        },
+        "peter-weyl-rank-five-kernel": {
+          "zh": "彼得—外尔秩五母核",
+          "en": "The rank-five Peter–Weyl kernel"
+        },
+        "cartan-three-form-closed-field": {
+          "zh": "无边界的嘉当三形式场",
+          "en": "A boundaryless Cartan three-form field"
+        }
+      },
+      "tags": [
+        "三元流群",
+        "维数筛",
+        "李代数",
+        "正定核",
+        "嘉当三形式"
+      ],
+      "tags_en": [
+        "Heap",
+        "Dimension sieve",
+        "Lie algebra",
+        "Positive kernel",
+        "Cartan three-form"
+      ],
+      "theory": [
+        {
+          "label": "§39.1 · 大一统母公理（AXIOM-Ω）",
+          "label_en": "§39.1 · The grand unified mother axiom (AXIOM-Ω)",
+          "href": "../zh/ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.html#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure",
+          "href_en": "../en/ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.html#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        },
+        {
+          "gid": "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/GramRealizability.gram_realizability"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "axiom-omega-five-tier-cascade-sandbox",
+      "code": "OMEGA//CASCADE",
+      "title": "OMEGA//CASCADE · AXIOM-Ω 五阶大一统演绎级联沙盘",
+      "title_en": "OMEGA//CASCADE · The AXIOM-Ω Five-Tier Deduction Cascade Sandbox",
+      "summary": "一根紫色的公理柱绕出五个阶台，每一阶有一样东西推不动：格拉姆四面体的 (6V)² = 3/32、留在单位球面上的预算点 (√0.48, 0.40, 0.60)（平方份额 0.48 + 0.16 + 0.36 = 1）、迹比 3/8 与多出的 ΔE(N) 根边、σ = ½ 时越过青色环的素数矢高台阶，以及测地四拍 0.5359 对跳步 1.5 和倾角归零时自消的参照桥。",
+      "summary_en": "One violet axiom column winds out five platforms, and on each one thing will not move: the Gram tetrahedron with (6V)² = 3/32, the budget point (√0.48, 0.40, 0.60) ≈ (0.6928, 0.4000, 0.6000) that stays on the unit sphere, its squared shares 0.48 + 0.16 + 0.36 summing to 1, the trace ratio 3/8 with the ΔE(N) extra edges, the staircase of prime sagittas that passes the cyan ring at σ = ½, and four geodesic beats at 0.5359 against a jump at 1.5, with the reference bridge erasing itself as the tilt returns to zero.",
+      "path": "axiom-omega-five-tier-cascade-sandbox/",
+      "thumbnail": "axiom-omega-five-tier-cascade-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-19",
+      "chapter": 39,
+      "section": "39.2",
+      "presets": [
+        "tier1-numbers-arc-calculus",
+        "tier2-dottie-dual-relativity",
+        "tier3-afgut-weinberg-three-eighths",
+        "tier4-prime-sagitta-critical-ridge",
+        "tier5-geodesic-mind-bridge-erasure"
+      ],
+      "preset_titles": {
+        "tier1-numbers-arc-calculus": {
+          "zh": "格拉姆体积锁与弧微积分",
+          "en": "The Gram volume lock and arc calculus"
+        },
+        "tier2-dottie-dual-relativity": {
+          "zh": "道蒂不动点与共享主频预算",
+          "en": "The Dottie point and the shared-clock budget"
+        },
+        "tier3-afgut-weinberg-three-eighths": {
+          "zh": "迹比 3/8 与过约束的边",
+          "en": "The trace ratio 3/8 and the extra struts"
+        },
+        "tier4-prime-sagitta-critical-ridge": {
+          "zh": "素数矢高在临界脊线上起涨",
+          "en": "Prime sagitta takes off on the critical ridge"
+        },
+        "tier5-geodesic-mind-bridge-erasure": {
+          "zh": "测地四拍与参照桥自消",
+          "en": "Four geodesic beats; the bridge erases itself"
+        }
+      },
+      "tags": [
+        "AXIOM-Ω",
+        "五阶级联",
+        "格拉姆正定",
+        "双相对论预算",
+        "温伯格角 3/8",
+        "素数矢高",
+        "测地线"
+      ],
+      "tags_en": [
+        "AXIOM-Ω",
+        "Five-tier cascade",
+        "Gram positivity",
+        "Dual-relativity budget",
+        "Weinberg angle 3/8",
+        "Prime sagitta",
+        "Geodesic"
+      ],
+      "theory": [
+        {
+          "label": "§39.2 · AXIOM-Ω 五阶大一统演绎级联与公理遮诠闭环",
+          "label_en": "§39.2 · The AXIOM-Ω five-tier deduction cascade and its apophatic closure",
+          "href": "../zh/ch39-s25-axiom-omega-five-tier-deduction-cascade.html#sec-ch39-axiom-omega-five-tier-deduction-cascade",
+          "href_en": "../en/ch39-s25-axiom-omega-five-tier-deduction-cascade.html#sec-ch39-axiom-omega-five-tier-deduction-cascade"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product"
+        },
+        {
+          "gid": "D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"
+        },
+        {
+          "gid": "D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "axiom-omega-five-qm-postulates-sandbox",
+      "code": "OMEGA//QM-AXIOMS",
+      "title": "OMEGA//QM-AXIOMS · AXIOM-Ω 导出量子力学五大公设：一枚旋量体沙盘",
+      "title_en": "OMEGA//QM-AXIOMS · AXIOM-Ω and the Five Postulates of Quantum Mechanics: One Spinor Body Sandbox",
+      "summary": "转动看不见的相位 χ，紫色旋量环面上的琥珀珠绕品红纤维走，青色布洛赫点不动。五张卡依次看厄米翻转与不确定性、往返玻恩读数与三叉戟、停机捏合的勾股账本，以及单态越过经典界 2 到 2√2。",
+      "summary_en": "Turn the hidden phase χ: the amber bead runs round the magenta fibre of the violet spinor torus while the cyan Bloch point stays. Five cards then show the Hermitian turn and the uncertainty bound, round-trip Born readings and the trine, the Pythagorean ledger of the halting pinch, and a singlet passing the classical bound 2 up to 2√2.",
+      "path": "axiom-omega-five-qm-postulates-sandbox/",
+      "thumbnail": "axiom-omega-five-qm-postulates-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-19",
+      "chapter": 39,
+      "section": "39.3",
+      "presets": [
+        "postulate1-hopf-blindspot-ray",
+        "postulate2-hermitian-flip-uncertainty",
+        "postulate3-roundtrip-born-gleason-busch",
+        "postulate4-unitary-halting-pinch",
+        "postulate5-rkhs-tensor-tsirelson"
+      ],
+      "preset_titles": {
+        "postulate1-hopf-blindspot-ray": {
+          "zh": "盲区相位转一圈，布洛赫点不动",
+          "en": "The hidden phase turns, the Bloch point stays"
+        },
+        "postulate2-hermitian-flip-uncertainty": {
+          "zh": "盲区生成元翻成厄米轴与不确定性",
+          "en": "The blind generator turns into a Hermitian axis"
+        },
+        "postulate3-roundtrip-born-gleason-busch": {
+          "zh": "往返读数、三叉戟与三次假设",
+          "en": "Round trip, trine and the cubic guess"
+        },
+        "postulate4-unitary-halting-pinch": {
+          "zh": "全局保范，局部停机捏合",
+          "en": "Global isometry, local halting pinch"
+        },
+        "postulate5-rkhs-tensor-tsirelson": {
+          "zh": "共享单态越过经典界 2",
+          "en": "A shared singlet passes the classical bound 2"
+        }
+      },
+      "tags": [
+        "霍普夫纤维",
+        "厄米算符",
+        "玻恩定则",
+        "捏合",
+        "齐雷尔松界"
+      ],
+      "tags_en": [
+        "Hopf fibre",
+        "Hermitian operator",
+        "Born rule",
+        "Pinching",
+        "Tsirelson bound"
+      ],
+      "theory": [
+        {
+          "label": "§39.3 · AXIOM-Ω 导出量子力学五大公理",
+          "label_en": "§39.3 · Deriving the five postulates of quantum mechanics from AXIOM-Ω",
+          "href": "../zh/ch39-s26-axiom-omega-quantum-mechanics-five-postulates.html#sec-ch39-axiom-omega-quantum-mechanics-five-postulates",
+          "href_en": "../en/ch39-s26-axiom-omega-quantum-mechanics-five-postulates.html#sec-ch39-axiom-omega-quantum-mechanics-five-postulates"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/NumericalRange.blochPure_norm"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/NumericalRange.blochPure_surjective"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger"
+        },
+        {
+          "gid": "D5/S3/Quantum/QubitWitnesses.pauli_observables_have_no_common_eigenvector"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation"
+        },
+        {
+          "gid": "D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_density_representation"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/FiniteSectorPhysicalConstruction.channel_kraus_stinespring"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_abs_le_two"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LandauCommutingCollapse.chsh_square_eq_four_of_local_pair_commutes"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "ternion-self-contained-no-exterior-sandbox",
+      "code": "TERNION//NO-EXTERIOR",
+      "title": "TERNION//NO-EXTERIOR · 自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”沙盘",
+      "title_en": "TERNION//NO-EXTERIOR · Self-Contained Ternion Particle, Field–Wave–Particle Readings & the No-Exterior Sandbox",
+      "summary": "把三元数的两个半球画成两只相切的紫色球：从 A 向外走，琥珀波前长到接缝后收拢，在对跖点 Ā 收成一点。比较仿射和 A + B − C 随 C 漂移，堆步 [B, A, B] 留在壳上。",
+      "summary_en": "The two hemispheres of the ternion as two touching violet balls: walking out from A, the amber wavefront grows to the seam, then closes up at the antipode Ā. Compare the affine sum A + B − C, which drifts with C, with the heap step [B, A, B], which stays on the shell.",
+      "path": "ternion-self-contained-no-exterior-sandbox/",
+      "thumbnail": "ternion-self-contained-no-exterior-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-19",
+      "chapter": 39,
+      "section": "39.4",
+      "presets": [
+        "skyrmion-winding-self-lock",
+        "field-wave-particle-trinity",
+        "origin-free-no-point-c",
+        "wavefront-outward-is-inward",
+        "heegaard-antipodal-no-exterior"
+      ],
+      "preset_titles": {
+        "skyrmion-winding-self-lock": {
+          "zh": "无边界自锁：整绕数 Q = 1",
+          "en": "No boundary: one whole winding, Q = 1"
+        },
+        "field-wave-particle-trinity": {
+          "zh": "场·波·粒：同一体的三种读数",
+          "en": "Field, wave, particle: three readings of one body"
+        },
+        "origin-free-no-point-c": {
+          "zh": "去掉 C 点：仿射和漂移，堆步不动",
+          "en": "Drop the point C: the affine sum drifts, the heap step stays"
+        },
+        "wavefront-outward-is-inward": {
+          "zh": "向外即向内：波前在对跖点重聚",
+          "en": "Outward is inward: the wavefront refocuses at the antipode"
+        },
+        "heegaard-antipodal-no-exterior": {
+          "zh": "双球粘合：越过接缝仍在体内",
+          "en": "Two balls glued: past the seam you are still inside"
+        }
+      },
+      "tags": [
+        "三元数",
+        "三维球面",
+        "希高德分解",
+        "测地波前",
+        "无外置原点"
+      ],
+      "tags_en": [
+        "Ternion",
+        "Three-sphere",
+        "Heegaard splitting",
+        "Geodesic wavefront",
+        "No external origin"
+      ],
+      "theory": [
+        {
+          "label": "§39.4 · 自包含三元数拓扑粒子与“至大无外”",
+          "label_en": "§39.4 · The self-contained ternion particle and nothing outside",
+          "href": "../zh/ch39-s27-self-contained-ternion-particle-and-no-exterior.html#sec-ch39-self-contained-ternion-particle-and-no-exterior",
+          "href_en": "../en/ch39-s27-self-contained-ternion-particle-and-no-exterior.html#sec-ch39-self-contained-ternion-particle-and-no-exterior"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/NumericalRange.blochPure_norm"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/NumericalRange.blochPure_surjective"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle"
+        },
+        {
+          "gid": "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
