@@ -218,6 +218,7 @@
   - [39.24 The Grand Unified Mother Axiom (AXIOM-Ω): How Origin-Free PSD Ternary Comparison Closure Melts the Axiom of Comparison, Minimal Circular Arcs, Ternions, and Continuous Fields into One](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)
   - [39.25 The Five-Tier Deduction Cascade of AXIOM-Ω and Apophatic Self-Transparency: Uniting Number Systems & Calculus, Dual Relativity, Four-Force Unification, Arithmetic Critical Spectra, and Geodesic Intelligence from One Origin-Free Axiom](ch39-s25-axiom-omega-five-tier-deduction-cascade.md)
   - [39.26 Deriving the Five Postulates of Quantum Mechanics from AXIOM-Ω: Dissolving the Century-Old Measurement Paradox as Ternion-Field Projection Geometry](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md)
+  - [39.27 The Self-Contained Ternion Topological Particle, Field–Wave–Particle Grade Identity, and Fourfold Proof of "No Exterior": Why Nonlinearity and Isotropy Eliminate Extrinsic Point C and Every "Outside"](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)
 
 # Coda and Appendices
 

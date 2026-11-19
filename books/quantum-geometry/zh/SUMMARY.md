@@ -218,6 +218,7 @@
   - [39.24 大一统母公理（AXIOM-Ω）：无源保正三元比较闭合公理如何一举熔合比较公理、极小圆弧、三元数与连续场](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)
   - [39.25 AXIOM-Ω 五阶大一统演绎级联与公理遮诠闭环：从无源三元母公理严格贯通万数微积分、双相对论时空、四大力大统一、算术临界谱与测地智能](ch39-s25-axiom-omega-five-tier-deduction-cascade.md)
   - [39.26 AXIOM-Ω 导出量子力学五大公理：从三元数极小圆弧体投影几何消解百年测量悖论](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md)
+  - [39.27 自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明：为什么非线性与各向同性彻底消除了外置 C 点与宇宙“之外”](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)
 
 # 终章与附录
 
