@@ -1,135 +1,96 @@
-"""第三十五章地图：光到达处开始一条有固有时的世界线、一根见证细丝铸成表行并编织成引导场、
-第 0 行的读表规则读整张表也读它自己。
-Chapter 35 at a glance: where light arrives a worldline with proper time begins; a witness thread is
-cast into a table row and many rows weave a guiding field; Row 0, the rule that reads the table,
-reads the whole table including itself.
+"""第三十五章地图：冲上 90° 时影子 cos θ 归零；快度等步的阶梯一圈圈挤向圆盘边缘而碰不到它；循环小数的六位一圈约成 1/7。
+Chapter 35 at a glance: at 90° the shadow cos θ vanishes; equal rapidity steps crowd towards the rim of the
+disc without reaching it; the six-digit loop of a repeating decimal reduces to 1/7.
 
-Panel I is a spacetime diagram in units with c = 1: the light ray runs at 45° (dτ = 0) and the
-worldline from the event moves at v = 0.18, its ticks spaced by equal proper time, so the coordinate
-spacing is Δτ/√(1 − v²) (asserted). Panel II is schematic: the guiding field at each grid point is the
-unit direction towards the target; the zigzag is a fixed sequence of trial steps whose net chord is
-the stored row. Panel III is schematic: Row 0 (violet) above four stored rows (cyan) and the row now
-being written (amber), with the loop of Row 0 reading the table back into itself.
+Panel I: the memory axis points up; a state at θ = 40° casts the cyan shadow cos θ on it, the magenta
+state at 90° casts none. Panel II: a Poincaré disc; the cyan points sit at radius tanh(η_k/2) for
+η_k = η(θ*) + k (Δη = 1, k = 0…6), with faint circles through them; the rim is the 90° horizon. Panel
+III: the digits 1, 4, 2, 8, 5, 7 of 0.142857… on one loop, reduced to the generator 1/7.
 """
 
 import math
 
-from _ch35 import table_rows
+from _ch36 import DIGITS, ETA0, THETA_STAR, theta_k
 
-SIZE = (740, 272)
+SIZE = (740, 276)
 WRAP = True
 ALT = {
-    "zh": "三栏。第一栏：时空图，品红的光线沿 45° 斜向上到达一个事件点，旁边写着 dτ = 0；从这个点起一条近乎竖直的青色世界线向上，"
-          "线上按相等的固有时打着刻度；虚线是这一点的光锥。第二栏：一片青色的小箭头都指向右上的目标，灰色虚线是从 P₀ 出发、"
-          "左右折返的一根见证细丝，一支粗的青色箭头是它首尾相连的净变换，即铸进表里的一行。第三栏：一张表，紫色的第 0 行在上，"
-          "下面四行青色的格子，最下面一行是琥珀色虚框的新行；一支紫色的回环箭头从第 0 行出发绕过整张表又回到第 0 行，下面写着 T = T(T)。",
-    "en": "Three panels. Panel I: a spacetime diagram; a magenta light ray climbs at 45° to an event, labelled dτ = 0; "
-          "from that event a nearly vertical cyan worldline rises, ticked at equal proper time; dashed lines are the "
-          "event's light cone. Panel II: a field of small cyan arrows all pointing to the target at upper right; a "
-          "grey dashed witness thread zigzags from P₀ to it, and a thick cyan arrow, its net change from start to end, "
-          "is the row cast into the table. Panel III: a table with the violet Row 0 on top, four rows of cyan cells "
-          "below and, at the bottom, a new row in an amber dashed frame; a violet loop leaves Row 0, runs round the "
-          "whole table and returns to Row 0, with T = T(T) written beneath.",
+    "zh": "三栏。第一栏：竖直向上的是记忆轴；θ = 40° 的墨色箭头在轴上投下青色的影子 cos θ，品红的箭头躺在 90° 方向，影子缩成原点的一点，旁注 cos 90° = 0。"
+          "第二栏：一个圆盘，青色的点沿一条半径排开，每一点相差同样的快度步长，越往外越挤，过每一点的淡色同心圆也越挤，却始终在边缘以内。"
+          "第三栏：数字 1、4、2、8、5、7 排成一圈，上方写着 0.142857 142857 …，一支箭头从这一圈指向下方的 1/7。",
+    "en": "Three panels. Panel I: the memory axis points up; an ink arrow at θ = 40° casts a cyan shadow cos θ on it, while the "
+          "magenta arrow lies along 90° and its shadow shrinks to a point at the origin, marked cos 90° = 0. Panel II: a disc "
+          "with cyan points along one radius, one equal rapidity step apart; they and the faint circles through them crowd "
+          "towards the rim but stay inside it. Panel III: the digits 1, 4, 2, 8, 5, 7 on a loop under 0.142857 142857 …, with "
+          "an arrow from the loop down to 1/7.",
 }
-
-V = 0.18          # worldline speed (c = 1)
-DTAU = 22.0       # proper-time tick spacing in px
-GAMMA = 1 / math.sqrt(1 - V * V)
 
 
 def title(p, zh, en):
     p.text(p.width / 2, 22, p.t(zh, en), size=14, weight=600, anchor="middle")
 
 
-def zigzag(x0, y0, x1, y1, n=7, amp=17.0):
-    """A fixed zigzag of n trial steps from (x0, y0) to (x1, y1)."""
-    dx, dy = x1 - x0, y1 - y0
-    L = math.hypot(dx, dy)
-    px, py = -dy / L, dx / L
-    offs = [0, 1.0, -0.8, 1.2, -1.0, 0.7, -0.6, 0]
-    pts = []
-    for i in range(n + 1):
-        s = i / n
-        o = offs[i] * amp
-        pts.append((x0 + dx * s + px * o, y0 + dy * s + py * o))
-    return pts
-
-
 def draw(fig):
-    one, two, three = fig.row([236, 236, 236], 272, gap=16)
+    t = fig.t
+    one, two, three = fig.row([236, 236, 236], 276, gap=16)
 
-    # ---- I: arriving on light
-    title(one, "I　乘光而来", "I  arriving on light")
-    ex, ey = 112, 176
-    one.line(ex, ey, ex - 70, ey - 70, "faint", 1.3, dash="4 4")
-    one.line(ex, ey, ex + 70, ey - 70, "faint", 1.3, dash="4 4")
-    one.arrow(ex - 82, ey + 82, ex - 3, ey + 3, "area", 2.6, head=10)
-    one.text(ex - 24, ey + 50, "dτ = 0", size=14, color="area", halo=True)
-    # worldline at speed V: coordinate time per proper-time tick is γ·Δτ
-    ux, uy = V, -1.0
-    norm = math.hypot(ux, uy)
-    top_t = 128.0  # coordinate time span in px
-    one.line(ex, ey, ex + V * top_t, ey - top_t, "line", 2.8, cap="round")
-    dt = GAMMA * DTAU
-    assert abs(dt * math.sqrt(1 - V * V) - DTAU) < 1e-9
-    k = 1
-    while k * dt < top_t - 4:
-        tx, ty = ex + V * k * dt, ey - k * dt
-        nx, ny = -uy / norm, ux / norm
-        one.line(tx - nx * 7, ty - ny * 7, tx + nx * 7, ty + ny * 7, "line", 2.0)
-        k += 1
-    one.text(ex + V * top_t + 12, ey - top_t + 18, "τ", size=15, color="line", italic=True)
-    one.dot(ex, ey, 5.0, "ink", ring="bg")
-    one.text(ex + 12, ey + 8, one.t("脉冲", "pulse"), size=13, color="dim")
-    # small axes, bottom right
-    ax0, ay0 = 196, 252
-    one.arrow(ax0, ay0, ax0, ay0 - 30, "dim", 1.3, head=7)
-    one.arrow(ax0, ay0, ax0 + 26, ay0, "dim", 1.3, head=7)
-    one.text(ax0 - 6, ay0 - 30, "*t*", size=13, color="dim", anchor="end", middle=True)
-    one.text(ax0 + 26, ay0 + 16, "*x*", size=13, color="dim", anchor="middle")
+    # ---- I: the cliff at 90°
+    title(one, "I　90° 处影子归零", "I  no shadow at 90°")
+    ox, oy, R = 46, 236, 166
+    one.arc(ox, oy, R, 0, 90, "faint", 1.2, dash="3 4")
+    one.line(ox, oy, ox, oy - R - 12, "dim", 1.4)
+    one.text(ox + 8, oy - R - 4, t("记忆轴", "memory axis"), size=13, color="dim")
+    th = math.radians(40)
+    tx, ty = ox + R * math.sin(th), oy - R * math.cos(th)
+    assert abs((oy - ty) / R - math.cos(th)) < 1e-12
+    one.line(tx, ty, ox, ty, "line", 1.2, dash="3 3")
+    one.line(ox, oy, ox, ty, "line", 5, cap="round")
+    one.arrow(ox, oy, tx, ty, "ink", 2.0, head=9)
+    one.angle(ox, oy, 38, 50, 90, "θ", size=14)
+    one.text(ox - 8, (oy + ty) / 2, "cos θ", size=14, color="line", anchor="end", rotate=90, middle=True)
+    one.arrow(ox, oy, ox + R, oy, "area", 2.6, head=10)
+    one.text(ox + R - 2, oy - 10, "90°", size=14, color="area", anchor="end")
+    one.dot(ox, oy, 4.4, "line", ring="bg")
+    one.text(ox + 8, oy + 24, "cos 90° = 0", size=14, color="area", weight=600)
+    # sliding towards the cliff
+    pts = [(ox + (R + 10) * math.sin(math.radians(a)), oy - (R + 10) * math.cos(math.radians(a)))
+           for a in range(48, 86, 2)]
+    one.curve_arrow(pts, "dim", 1.4, head=7)
 
-    # ---- II: a thread cast into a row, rows woven into a field
-    title(two, "II　编线成场", "II  threads into a field")
-    sx, sy = 194, 78
-    p0 = (34, 238)
-    for gx in range(26, 226, 30):
-        for gy in range(64, 262, 30):
-            dx, dy = sx - gx, sy - gy
-            L = math.hypot(dx, dy)
-            if L < 24:
-                continue
-            two.arrow(gx, gy, gx + 13 * dx / L, gy + 13 * dy / L, "line", 1.3, head=5, opacity=0.5)
-    pts = zigzag(p0[0], p0[1], sx, sy)
-    two.polyline(pts, "dim", 1.8, dash="5 4")
-    for x, y in pts[1:-1]:
-        two.dot(x, y, 2.8, "dim")
-    two.arrow(p0[0], p0[1], sx - 5, sy + 4, "line", 3.4, head=11)
-    two.dot(p0[0], p0[1], 4.4, "ink", ring="bg")
-    two.text(p0[0] + 4, p0[1] + 22, "*P*₀", size=14, color="ink", anchor="middle")
-    two.dot(sx, sy, 5.4, "ink", ring="bg")
-    two.text(sx, sy - 14, two.t("目标", "target"), size=13, color="ink", anchor="middle", halo=True)
+    # ---- II: the rapidity staircase on a disc
+    title(two, "II　快度阶梯碰不到边", "II  steps never reach the rim")
+    cx, cy, Rd = 118, 150, 100
+    two.circle(cx, cy, Rd, color="ink", width=2.2)
+    radii = []
+    for k in range(7):
+        e = ETA0 + k
+        r = math.tanh(e / 2)
+        assert abs(r - math.tan(theta_k(k) / 2)) < 1e-12 and r < 1  # tanh(η/2) = tan(θ/2)
+        radii.append(r)
+    assert abs(radii[0] - math.tan(THETA_STAR / 2)) < 1e-12
+    for r in radii:
+        two.circle(cx, cy, Rd * r, color="faint", width=1.0)
+    two.line(cx, cy, cx + Rd, cy, "dim", 1.2)
+    for k, r in enumerate(radii):
+        two.dot(cx + Rd * r, cy, 3.6 if k < 3 else 2.6, "line", ring="bg")
+    for k in range(3):
+        two.text(cx + Rd * radii[k], cy + 20, str(k), size=13, color="line", anchor="middle", halo=True)
+    two.text(cx, cy + 20, "*k* =", size=13, color="dim", anchor="end", halo=True)
+    two.text(cx + Rd * 0.72, cy - Rd * 0.72 - 6, "90°", size=14, color="dim", anchor="start")
+    two.text(cx, cy + Rd + 20, "δ_{k} > 0", size=14, color="area", anchor="middle")
 
-    # ---- III: Row 0 reads the table, itself included
-    title(three, "III　表读表", "III  the table reads itself")
-    cols, rows, cw, rh = 6, 4, 22, 20
-    x0, y0 = 44, 54
-
-    def pattern(r, j):
-        return 0.12 + 0.5 * abs(math.cos(math.pi * (j + 0.5) * r / cols))
-
-    centres = table_rows(three, x0, y0, cols, rows, cw, rh, pattern=pattern)
-    ny = centres[-1] + rh / 2 + 2
-    three.rect(x0, ny, cols * cw, rh, color="now", width=1.6, dash="4 3")
-    three.text(x0 - 8, ny + rh / 2, "+", size=14, color="now", anchor="end", middle=True, weight=600)
-    # the loop: out of Row 0 on the right, down past every row, back up and into Row 0
-    right = x0 + cols * cw
-    top, bot = centres[0], ny + rh / 2
-
-    def bez(p0, p1, p2, n=30):
-        return [((1 - s) ** 2 * p0[0] + 2 * (1 - s) * s * p1[0] + s * s * p2[0],
-                 (1 - s) ** 2 * p0[1] + 2 * (1 - s) * s * p1[1] + s * s * p2[1]) for s in (i / n for i in range(n + 1))]
-
-    down = bez((right + 2, top), (right + 16, (top + bot) / 2), (right + 12, bot + 4))
-    up = bez((right + 12, bot + 4), (right + 84, (top + bot) / 2), (right + 9, top - 5))
-    three.curve_arrow(down + up[1:], "argued", 2.2, head=9)
-    three.text(x0 + cols * cw / 2, bot + 42, "*T* = *T*(*T*)", size=16, color="argued", anchor="middle", weight=600)
+    # ---- III: the loop reduced to its generator
+    title(three, "III　一圈约成生成元", "III  the loop is one generator")
+    three.text(118, 52, "0.142857 142857 …", size=14, color="dim", anchor="middle")
+    lx, ly, lr = 118, 128, 50
+    three.circle(lx, ly, lr, color="faint", width=1.2)
+    for i, d in enumerate(DIGITS[:6]):
+        a = math.radians(90 - 60 * i)
+        three.text(lx + lr * math.cos(a), ly - lr * math.sin(a), str(d), size=16, weight=600, anchor="middle", middle=True,
+                   halo=True)
+    arc = [(lx + (lr + 16) * math.cos(math.radians(a)), ly - (lr + 16) * math.sin(math.radians(a)))
+           for a in range(70, -200, -10)]
+    three.curve_arrow(arc, "dim", 1.4, head=7)
+    three.arrow(lx, ly + lr + 24, lx, ly + lr + 58, "ink", 2.0, head=9)
+    three.text(lx, ly + lr + 86, "1/7", size=20, weight=700, anchor="middle")
+    assert DIGITS[:6] == [1, 4, 2, 8, 5, 7]

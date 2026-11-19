@@ -22,8 +22,8 @@
 12. **量子即极小圆弧微分元与宏观物理即路径积分粗粒包络（[§29.12](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral)，`MODEL` + `LEAN ✓`）**：扶正颠倒的微积分本末，主张量子力学本身就是极小圆弧微分核（$\delta$），而经典轨道、驻波体积、时空曲率与热力学熵增则是路径积分（$\int$）的四重宏观涌现切面（[@thm-ch34-quantum-arc-differential-and-macro-integral]）；
 13. **一弧生三相：“线·面·体 ↔ 粒子·波·场”与万物互为路径积分回环（[§29.13](ch34-s12-triadic-duality.md#sec-ch34-triadic-duality-and-field-loop)，`MODEL` + `LEAN ✓`）**：建立极小圆弧 $O(\epsilon^1), O(\epsilon^2), O(\epsilon^3)$ 三阶展开与粒子、波、场的严格同源对应，以及场反生粒子的双向互积闭环（[@thm-ch34-triadic-duality-and-field-loop]）。
 
-::: {.figure src="ch34-overview"}
-**图 29。** 本章地图：第 I 栏，极角 $\theta = 60^\circ$ 的品红纬圈上，实心点 $\mathbf{v}_1$ 与三个空心圈 $\mathbf{v}_2(\phi)$ 沿青色虚线落到紫色极轴上的同一点 $\cos\theta$，站在极点的琥珀色观察者 $\mathbf{O}$ 读不出方位角；第 II 栏，品红的赤道圆盘 $\mathbf{e}_1 \wedge \mathbf{e}_2$ 里转过 $90^\circ$ 的那块面积，恰是站在其法轴上的琥珀色观察者看不见的面（这两栏是 [@ex-ch34-spherical-addressing-and-octant-rotors] 的手算）；第 III 栏，方格点阵上琥珀色的黄金切片 $E_\parallel$ 与青色的接受窗，窗里的点沿品红的内部方向 $E_\perp$ 落到切片上（[@prop-ch34-null-cone-and-golden-cut-orientation] 的切投格局；把切片读成观察者的站位是模型诠释，`MODEL`）。
+::: {.figure src="ch29-overview"}
+**图 29。极点方位角投影简并、赤道 $90^\circ$ 法向盲面与黄金切投定位切片。** 第 I 栏，极角 $\theta = 60^\circ$ 的品红纬圈上，实心点 $\mathbf{v}_1$ 与三个空心圈 $\mathbf{v}_2(\phi)$ 沿青色虚线落到紫色极轴上的同一点 $\cos\theta$，站在极点的琥珀色观察者 $\mathbf{O}$ 读不出方位角；第 II 栏，品红的赤道圆盘 $\mathbf{e}_1 \wedge \mathbf{e}_2$ 里转过 $90^\circ$ 的那块面积，恰是站在其法轴上的琥珀色观察者看不见的面（这两栏是 [@ex-ch34-spherical-addressing-and-octant-rotors] 的手算）；第 III 栏，方格点阵上琥珀色的黄金切片 $E_\parallel$ 与青色的接受窗，窗里的点沿品红的内部方向 $E_\perp$ 落到切片上（[@prop-ch34-null-cone-and-golden-cut-orientation] 的切投格局；把切片读成观察者的站位是模型诠释，`MODEL`）。
 :::
 
 ---

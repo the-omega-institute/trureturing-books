@@ -4,8 +4,8 @@
 
 在[第 25 章](ch29-timeless-causality-and-gram-space.md)中，我们看到全局时间场是一座无时间的几何晶体（对照第 25 章无时间文献注记 [@rem-ch29-wheeler-dewitt-page-wootters-literature]），而场内的有限观察者只能在格拉姆椭圆体（$\det G \ge 0$）中一步步选点前行。现在，让我们将这一“球外静态场 vs. 球内有限观察者”的双重视角推向当代数学与理论物理最壮阔的交汇处——把计算复杂性理论中的 **$\mathrm{P}$ vs. $\mathrm{NP}$ 问题**、**指数时间假设（ETH）及其 2026 年 10 月亚指数前沿文献（[@rem-ch30-eth-subexponential-literature]）**，以及流体力学中的 **无外力三维纳维—斯托克斯（Navier–Stokes）全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与受迫情形文献进展（[@rem-ch30-navier-stokes-forced-literature]）** 放进同一张克利福德正交场论画布中。
 
-::: {.figure src="ch30-overview"}
-**图 26。** 本章地图：第 I 栏，琥珀色的 $P_0$ 是有限观察者的态，墨色箭头是 $n = 2, 4, 8$ 时隐藏的目标，一支比一支更贴近 $90^\circ$ 视界，投到 $P_0$ 上的青色影子越来越短；第 II 栏，五边形 $C_5$ 的顶点按颜色 $c = (0, 1, 0, 1, 2)$ 摆在三条横线上，每条边的箭头都朝上，最长的线是青色的 $2 \to 3 \to 4$，恰好三个顶点，与颜色数相同（[@thm-ch30-gallai-roy]）；第 III 栏，示意的涡管被拉长、变细，青色回路的环量 $\Gamma = \omega A$ 不变，品红的涡度随之变大；无外力的光滑三维流会不会这样把截面缩到零，是红色标出的开放问题（[@conj-coda-navier-stokes-regularity]）。
+::: {.figure src="ch26-overview"}
+**图 26。正交视界投影衰减、着色场与有向见证线对偶及三维涡管拉伸。** 第 I 栏，琥珀色的 $P_0$ 是有限观察者的态，墨色箭头是 $n = 2, 4, 8$ 时隐藏的目标，一支比一支更贴近 $90^\circ$ 视界，投到 $P_0$ 上的青色影子越来越短；第 II 栏，五边形 $C_5$ 的顶点按颜色 $c = (0, 1, 0, 1, 2)$ 摆在三条横线上，每条边的箭头都朝上，最长的线是青色的 $2 \to 3 \to 4$，恰好三个顶点，与颜色数相同（[@thm-ch30-gallai-roy]）；第 III 栏，示意的涡管被拉长、变细，青色回路的环量 $\Gamma = \omega A$ 不变，品红的涡度随之变大；无外力的光滑三维流会不会这样把截面缩到零，是红色标出的开放问题（[@conj-coda-navier-stokes-regularity]）。
 :::
 
 - [26.1 全局静态时间场 $P = NP$ vs. 场内有限观察者 $P \neq NP$——正交视界与生命旅程的防火墙](ch30-s01-global-field.md)

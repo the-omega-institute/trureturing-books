@@ -13,7 +13,7 @@
    $$
    并通过双侧夹心积 $v \mapsto R v \widetilde{R}$ 一步算出三维方向向量 $v \in \mathbb{R}^3$ 的精确转向？
 
-::: {.figure src="ch26-overview"}
+::: {.figure src="sanctuary-zyz-overview"}
 **布洛赫球上的旋转与 ZYZ 分解。** 本章地图：左栏，绿色的布洛赫球，琥珀色的纯态箭头伸到球面 $\lvert r\rvert = 1$，墨色的点在球内，迹为 $1$ 的正半定矩阵都落在这里（[@prop-hermitian-bloch-geometry]、[@cor-psd-bloch-ball-bound]）；中栏，夹心积绕紫色的 $z$ 轴转 $90^\circ$，青色的影子留在轴上，品红的扇形被虚线分成两个半角；右栏，$e_1$ 按旋子乘积的作用顺序先绕 $z$ 转 $\gamma$、再绕 $y$ 转 $\beta$、最后绕 $z$ 转 $\alpha$，参数组写作 $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$，琥珀色的三段路停在 $R e_1 \widetilde{R}$（旋子编译是数值演示，没有冻结定理）。
 :::
 
@@ -140,7 +140,7 @@ B_y = e_3 e_1 = -e_1 e_3 \;\;(-\text{掩码 }5 = 101_2), \qquad
 B_z = e_1 e_2 \;\;(\text{掩码 }3 = 011_2).
 $$
 
-请注意 $B_y = e_3 e_1 = -e_1 e_3$ 的符号：按照右手螺旋定则，从 $+z$ 轴（$e_3$）转向 $+x$ 轴（$e_1$）的有向面积元是 $e_3 \wedge e_1 = e_3 e_1 = -e_1 e_3$。由于每块单位双矢量都满足 $B_u^2 = -1$ 且 $\widetilde{B}_u = -B_u$（$u \in \{x, y, z\}$），绕 $u$ 轴右手旋转角度 $\theta$ 的**基本旋转器（elementary rotor）**由半角欧拉公式给出（图 26 中栏）：
+请注意 $B_y = e_3 e_1 = -e_1 e_3$ 的符号：按照右手螺旋定则，从 $+z$ 轴（$e_3$）转向 $+x$ 轴（$e_1$）的有向面积元是 $e_3 \wedge e_1 = e_3 e_1 = -e_1 e_3$。由于每块单位双矢量都满足 $B_u^2 = -1$ 且 $\widetilde{B}_u = -B_u$（$u \in \{x, y, z\}$），绕 $u$ 轴右手旋转角度 $\theta$ 的**基本旋转器（elementary rotor）**由半角欧拉公式给出（本章总览图中栏）：
 
 $$
 R_u(\theta) = \exp\Bigl(-\frac{\theta}{2} B_u\Bigr) = \cos\frac{\theta}{2} - \sin\frac{\theta}{2}\,B_u \in \mathcal{Cl}^+_{3,0}(\mathbb{R}).

@@ -13,7 +13,7 @@ In this chapter we complete the single-qubit computational bridge by joining two
    $$
    and rotate any vector $v \in \mathbb{R}^3$ via the two-sided sandwich product $v \mapsto R v \widetilde{R}$?
 
-::: {.figure src="ch26-overview"}
+::: {.figure src="sanctuary-zyz-overview"}
 **Bloch rotations and ZYZ decomposition.** The chapter at a glance. Panel I: the green Bloch ball; the amber pure-state arrow reaches the shell $\lvert r\rvert = 1$, and the dark point lies inside, where every trace-one positive semidefinite matrix lands ([@prop-hermitian-bloch-geometry], [@cor-psd-bloch-ball-bound]). Panel II: the sandwich turns by $90^\circ$ about the violet $z$ axis; the cyan shadow stays on the axis, and the magenta fan is split by a dashed line into two half-angles. Panel III: in the order used by the rotor product, $e_1$ turns about $z$ by $\gamma$, then about $y$ by $\beta$, and finally about $z$ by $\alpha$, with parameter tuple $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$; the amber path of three legs ends at $R e_1 \widetilde{R}$ (rotor compilation is a numerical illustration with no frozen theorem).
 :::
 
@@ -138,7 +138,7 @@ B_y = e_3 e_1 = -e_1 e_3 \;\;(-\text{mask }5 = 101_2), \qquad
 B_z = e_1 e_2 \;\;(\text{mask }3 = 011_2).
 $$
 
-Because $B_u^2 = -1$ and $\widetilde{B}_u = -B_u$ for each axis $u \in \{x, y, z\}$, the **elementary rotor** for a right-handed rotation by angle $\theta$ about axis $u$ is given by the half-angle formula (Panel II of Figure 26):
+Because $B_u^2 = -1$ and $\widetilde{B}_u = -B_u$ for each axis $u \in \{x, y, z\}$, the **elementary rotor** for a right-handed rotation by angle $\theta$ about axis $u$ is given by the half-angle formula (Panel II of the chapter overview figure):
 
 $$
 R_u(\theta) = \exp\Bigl(-\frac{\theta}{2} B_u\Bigr) = \cos\frac{\theta}{2} - \sin\frac{\theta}{2}\,B_u \in \mathcal{Cl}^+_{3,0}(\mathbb{R}),

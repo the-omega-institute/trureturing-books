@@ -1,87 +1,100 @@
-"""第三十八章地图：指针扫过静止的阵列、众指针共指一页而不许复印、零号槽指回页目录自己。
-Chapter 38 at a glance: a pointer sweeps a still array; many pointers share one page and none may
-copy it; slot 0 of the page directory points back to the directory itself.
+"""第三十八章地图：每一格都指回自己，没有另外的指针；刀切到哪里，晶格点才亮到哪里；底圈转一整圈，平方根只走到 −1。
+Chapter 38 at a glance: every cell points back at itself and no separate pointer is left; lattice
+points light up only where the knife passes; once round the base circle, the square root only gets to −1.
 
-Panel I: a 7 × 5 memory array that never moves; the pointer register reads the amber cell now (*ptr)
-along a cyan beam, and a dashed arrow steps it to the next cell (ptr++). Panel II: three pointers hold
-shared borrows of one page; a copy of the page is struck out (no deep copy). Panel III: the page
-directory P of the worked example (N = 4): slot 0 holds P's own address 0x1000 and loops back into P,
-slots 1–3 lead to the leaf tables T₁–T₃. All schematic (MODEL), except the addresses, which _ch38 checks.
+Panel I: a dim pointer register and the dashed wall between it and memory are struck out; below, eight
+cells p, each with a cyan arrow that leaves it and comes back (p ≡ *p in every cell, the chapter's MODEL
+reading of ψ ≡ ψ(ψ)). Panel II: the golden cut of Z² from _ch39 with only the lit points drawn; under
+it the chain they project to, short steps marked 1 and long 0, a word with no adjacent 11 (asserted in
+_ch39). Panel III: the square double cover w ↦ w² = z of the circle (§38.3, LEAN ✓ through
+circle_double_cover_history_lift): the cyan base path fullTurn(t) = exp(2πit) goes once round, and its
+unique lift from w = 1, the violet exp(πit), stops at −1; square ∘ lift = fullTurn is asserted.
 """
 
-from _ch38 import ADDR_P, MEM, N_SLOTS, bezier, cell, hexa, page_directory, title
+import math
 
-SIZE = (740, 272)
+from _ch39 import chain, cell, golden_cut, title
+
+SIZE = (740, 280)
 WRAP = True
 ALT = {
-    "zh": "三栏。第一栏：一块七列五行的静止内存阵列，其中一格是琥珀色的当前格；下方的指针寄存器 ptr 发出一束青色的光落在这一格上，"
-          "写着 *ptr；一支虚线箭头指向右边的下一格，写着 ptr++。第二栏：上方一张页面 &State，三支青色箭头从下面的 ptr_A、ptr_B、ptr_C "
-          "同时指向它；旁边一张虚线画的复印页被划掉，写着 memcpy。第三栏：四格的页目录 P，零号槽里写着 0x1000，一支青色箭头从零号槽出发绕回 P 自己，"
-          "旁边写着 p = *p；第 1、2、3 格各有一支箭头指向右边的叶页表 T₁、T₂、T₃。",
-    "en": "Three panels. Panel I: a still memory array of seven columns and five rows, one cell amber, the current cell; "
-          "below it the pointer register ptr sends a cyan beam onto that cell, marked *ptr, and a dashed arrow points to "
-          "the next cell on the right, marked ptr++. Panel II: one page &State at the top, with three cyan arrows from "
-          "ptr_A, ptr_B and ptr_C below all pointing at it; beside it a dashed copy of the page is struck out, marked "
-          "memcpy. Panel III: a four-slot page directory P whose slot 0 holds 0x1000; a cyan arrow leaves slot 0 and "
-          "loops back into P itself, marked p = *p; slots 1, 2 and 3 each send an arrow to the leaf tables T₁, T₂, T₃ "
-          "on the right.",
+    "zh": "三栏。第一栏：上方一个灰色的指针寄存器 ptr 与它和内存之间的虚线隔墙被一个叉划掉；下方两行共八格，每格写着 p，"
+          "每格都有一支青色的小箭头离开它又回到它自己，下方写着 p ≡ *p。"
+          "第二栏：一条琥珀色的斜线是刀，它周围一条淡青色的带子里有一串青色的格点，带子外面什么也没有；"
+          "下方是这些点投到刀上排成的一列长短段，短段记 1、长段记 0，字里没有相邻的 11。"
+          "第三栏：上下两个虚线圆，上面是 w，下面是 z = w²；下圆上一支青色箭头从 1 出发绕满一整圈，"
+          "上圆上一支紫色箭头从 +1 出发只走了半圈，停在 −1；下方一个绿色的 LEAN ✓ 标记。",
+    "en": "Three panels. Panel I: above, a grey pointer register ptr and the dashed wall between it and memory are struck out; "
+          "below, two rows of four cells p, each with a small cyan arrow that leaves it and comes back to it, and the line "
+          "p ≡ *p. Panel II: an amber slanted line is the blade; inside a pale cyan strip around it lies a run of cyan "
+          "lattice points, and outside the strip there is nothing; below, the points projected onto the blade form a row "
+          "of long and short steps, short marked 1 and long 0, with no adjacent 11. Panel III: "
+          "two dashed circles, w above and z = w² below; on the lower circle a cyan arrow starts at 1 and goes once "
+          "all the way round, while on the upper circle a violet arrow starts at +1 and goes only half way, stopping at −1; "
+          "below, a green LEAN ✓ tag.",
 }
-
-COLS, ROWS = 7, 5
-NOW = (3, 0)       # (column, row) of the cell being read
 
 
 def draw(fig):
-    one, two, three = fig.row([236, 236, 236], 272, gap=16)
+    one, two, three = fig.row([236, 236, 236], 280, gap=16)
 
-    # ---- I: the array stays, the pointer moves
-    title(one, "I　时间是 ptr++，观察是 *ptr", "I  time is ptr++, seeing is *ptr")
-    cw, ch = 26, 22
-    x0, y0 = (one.width - COLS * cw) / 2, 66
-    for r in range(ROWS):
-        for c in range(COLS):
-            cell(one, x0 + c * cw + 1, y0 + r * ch + 1, cw - 2, ch - 2, now=(c, r) == NOW)
-    nx, ny = x0 + NOW[0] * cw + cw / 2, y0 + NOW[1] * ch + ch / 2
-    rx, ry, rw, rh = one.width / 2 - 34, 208, 68, 28
-    one.rect(rx, ry, rw, rh, color="ink", fill="panel", width=1.6, rx=4)
-    one.text(rx + rw / 2, ry + rh / 2, "ptr", size=15, color="ink", anchor="middle", middle=True, mono=True, weight=600)
-    one.line(rx + rw / 2, ry, nx, ny + ch / 2 - 1, "line", 2.6, cap="round")
-    one.text(nx + 10, ry - 12, "*ptr", size=14, color="now", mono=True, weight=600, halo=True)
-    one.arrow(nx + 4, ny - ch / 2 - 6, nx + cw - 2, ny - ch / 2 - 6, "dim", 1.6, head=7, dash="3 3")
-    one.text(nx + cw / 2, ny - ch / 2 - 12, "ptr++", size=13, color="dim", anchor="middle", mono=True, halo=True)
-    one.text(one.width / 2, 262, one.t("阵列从不移动", "the array never moves"), size=13, color="dim", anchor="middle")
+    # ---- I: p ≡ *p everywhere, no separate pointer
+    title(one, "I　全域 p ≡ *p", "I  p ≡ *p everywhere")
+    one.rect(56, 54, 50, 28, color="dim", fill="panel", rx=4, width=1.4)
+    one.text(81, 68, "ptr", size=14, color="dim", anchor="middle", middle=True, mono=True)
+    one.line(124, 48, 124, 90, "dim", 1.6, dash="5 4")
+    one.arrow(108, 68, 148, 68, "dim", 1.4, head=7)
+    one.rect(152, 54, 36, 28, color="dim", rx=4, width=1.4)
+    one.cross(124, 68, 22, "dim", 2.4)
+    w, g = 38, 14
+    x0 = (one.width - (4 * w + 3 * g)) / 2
+    for r, y in enumerate((130, 196)):
+        for k in range(4):
+            cell(one, x0 + k * (w + g), y, w, 34)
+    one.text(one.width / 2, 260, "*ψ* ≡ *ψ*(*ψ*)", size=15, anchor="middle")
 
-    # ---- II: shared borrows of one page, no deep copy
-    title(two, "II　共指一页，不许复印", "II  one page, no copies")
-    px, py, pw, ph = 52, 50, 92, 62
-    two.rect(px, py, pw, ph, color="ink", fill="panel", width=1.6, rx=4)
-    two.text(px + pw / 2, py + ph / 2, "&State", size=15, color="ink", anchor="middle", middle=True, mono=True, weight=600)
-    # the struck-out copy
-    qx = px + pw + 30
-    two.rect(qx, py + 8, 50, ph - 16, color="dim", width=1.3, rx=4, dash="4 3")
-    two.cross(qx + 25, py + ph / 2, 14, "dim", 2.0)
-    two.text(qx + 25, py + ph + 10, "memcpy", size=13, color="dim", anchor="middle", mono=True)
-    names = ["ptr_{A}", "ptr_{B}", "ptr_{C}"]
-    bx = [42, 98, 154]
-    for x, name in zip(bx, names):
-        two.text(x, 222, name, size=14, color="ink", anchor="middle", mono=True)
-        two.arrow(x, 204, px + pw / 2 + (x - 98) * 0.45, py + ph + 4, "line", 2.2, head=9)
-    two.text(two.width / 2, 262, two.t("共享借用 &State", "shared borrow &State"), size=13, color="dim", anchor="middle")
+    # ---- II: no blade, no crystal
+    title(two, "II　无刀则无晶", "II  no blade, no crystal")
+    step = 23
+    bs, as_ = range(0, 9), range(0, 6)
+    P, pts = golden_cut(two, 22, 184, step, bs, as_)
+    pos, word = chain(pts)
+    y = 236
+    xa, xb = 22, 22 + step * 8
+    scale = (xb - xa) / (pos[-1] - pos[0]) if pos[-1] > pos[0] else 1
+    xs = [xa + (p - pos[0]) * scale for p in pos]
+    two.line(xs[0], y, xs[-1], y, "now", 1.8)
+    for x in xs:
+        two.dot(x, y, 3.6, "line", ring="bg")
+    for x, x2, c in zip(xs, xs[1:], word):
+        two.text((x + x2) / 2, y + 22, c, size=13, color="area" if c == "1" else "dim", anchor="middle", mono=True)
+    assert "11" not in word
 
-    # ---- III: slot 0 points home
-    title(three, "III　零号槽指回自己", "III  slot 0 points home")
-    sx, sy, sw, sh = 66, 66, 76, 30
-    centres = page_directory(three, sx, sy, sw, sh)
-    three.text(sx + sw - 8, centres[0][1], hexa(MEM[ADDR_P][0]), size=13, color="line", anchor="end", middle=True,
-               mono=True, weight=600)
-    # loop from slot 0 out the left side and back into P's top
-    loop = bezier((sx - 2, centres[0][1]), (sx - 54, centres[0][1] + 4), (sx - 34, sy - 46), (sx + 12, sy - 2))
-    three.curve_arrow(loop, "line", 2.4, head=9)
-    three.text(sx + sw / 2, 240, "p = *p", size=17, color="line", anchor="middle", mono=True, weight=700)
-    # leaf tables
-    tx = sx + sw + 44
-    for i in range(1, N_SLOTS):
-        cy = centres[i][1]
-        three.arrow(sx + sw + 2, cy, tx - 3, cy, "dim", 1.5, head=7)
-        three.rect(tx, cy - 11, 34, 22, color="edge", fill="panel", width=1.1, rx=2)
-        three.text(tx + 17, cy, f"*T*_{{{i}}}", size=13, color="dim", anchor="middle", middle=True)
+    # ---- III: the 360° lift of the square double cover
+    title(three, "III　转一圈只到 −1", "III  one turn lands on −1")
+    cx, R = three.width / 2, 40
+    up, lo = 92, 206                        # centres of the cover circle (w) and the base circle (z)
+    turn = lambda t: (math.cos(2 * math.pi * t), math.sin(2 * math.pi * t))      # fullTurn(t) = exp(2πit)
+    lift = lambda t: (math.cos(math.pi * t), math.sin(math.pi * t))              # the unique lift from w = 1
+    for k in range(101):                    # square ∘ lifted = fullTurn, lifted(0) = 1, lifted(1) = −1
+        t = k / 100
+        wx, wy = lift(t)
+        zx, zy = turn(t)
+        assert abs(wx * wx - wy * wy - zx) < 1e-12 and abs(2 * wx * wy - zy) < 1e-12
+    assert lift(0) == (1.0, 0.0) and abs(lift(1)[0] + 1) < 1e-12 and abs(lift(1)[1]) < 1e-12
+    on = lambda c, p, r=R: (cx + r * p[0], c - r * p[1])
+    for c in (up, lo):
+        three.circle(cx, c, R, color="dim", width=1.2, dash="4 4")
+    three.curve_arrow([on(up, lift(k / 60)) for k in range(61)], "violet", 2.4, head=8)
+    three.curve_arrow([on(lo, turn(k / 60)) for k in range(57)], "line", 2.4, head=8)
+    three.dot(*on(up, lift(0)), 4.2, "violet", ring="bg")
+    three.dot(*on(up, lift(1)), 4.2, "violet", ring="bg")
+    three.dot(*on(lo, turn(0)), 4.2, "line", ring="bg")
+    three.text(cx + R + 8, up + 5, "+1", size=14, color="violet")
+    three.text(cx - R - 8, up + 5, "−1", size=14, color="violet", anchor="end")
+    three.text(cx + R + 8, lo + 5, "1", size=14, color="line")
+    three.text(cx - R - 26, up - 30, "*w*", size=15, anchor="middle")
+    three.text(cx - R - 26, lo - 30, "*z*", size=15, anchor="middle")
+    three.arrow(cx, up + R + 8, cx, lo - R - 8, "dim", 1.4, head=7)
+    three.text(cx + 8, (up + lo) / 2 + 5, "*z* = *w*²", size=14, color="dim")
+    three.chip(three.width / 2, 266, "LEAN ✓", "lean", size=13, anchor="middle")

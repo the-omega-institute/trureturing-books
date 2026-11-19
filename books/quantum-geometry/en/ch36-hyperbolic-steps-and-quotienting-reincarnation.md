@@ -20,8 +20,8 @@ $$
 
 Within our geometric observer model (`MODEL`), the instant a bounded observer slides continuously across $\theta = 90^\circ$ into unanchored pure light, three structural consequences fall in rapid succession:
 
-::: {.figure src="ch36-overview"}
-**Figure 35.** The chapter at a glance. Panel I: on the vertical memory axis, the ink arrow at $\theta = 40^\circ$ casts the cyan shadow $\cos\theta$, while the magenta arrow that has reached $90^\circ$ casts a shadow shrunk to a point, $\cos 90^\circ = 0$. Panel II: starting from $\theta^*$ with equal rapidity steps $\Delta\eta = 1$, the cyan points sit at Poincaré-disk radius $\tanh(\eta_k/2)$; the faint circles through them crowd towards the rim but stay inside it, leaving the gap $\delta_k > 0$ (`MODEL`, see [@ex-ch36-inverse-gudermannian-discrete-staircase]). Panel III: the six digits of $0.\overline{142857}$ go round and round until the shift relation reduces them at once to the generator $1/7$ (see [@ex-ch36-repeating-decimal-quotient]).
+::: {.figure src="ch35-overview"}
+**Figure 35. Vanishing projection at $90^\circ$, equal-rapidity steps inside the Poincaré disk, and quotienting a repeating decimal loop.** Panel I: on the vertical memory axis, the ink arrow at $\theta = 40^\circ$ casts the cyan shadow $\cos\theta$, while the magenta arrow that has reached $90^\circ$ casts a shadow shrunk to a point, $\cos 90^\circ = 0$. Panel II: starting from $\theta^*$ with equal rapidity steps $\Delta\eta = 1$, the cyan points sit at Poincaré-disk radius $\tanh(\eta_k/2)$; the faint circles through them crowd towards the rim but stay inside it, leaving the gap $\delta_k > 0$ (`MODEL`, see [@ex-ch36-inverse-gudermannian-discrete-staircase]). Panel III: the six digits of $0.\overline{142857}$ go round and round until the shift relation reduces them at once to the generator $1/7$ (see [@ex-ch36-repeating-decimal-quotient]).
 :::
 
 ---

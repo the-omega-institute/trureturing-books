@@ -8,13 +8,13 @@ In the operator geometry of quantum measurement, a projective record measurement
 
 In this concluding chapter of *[Forge and Sanctuary](sanctuary.md)*, we audit four frozen declarations from `D5/S3/Observer/` line by line — **the rank-one pure-state Born modulus-squared reduction**, **the three-conjunct Born pairing and ensemble bridge**, **validity of Lüders conditional states**, and **the unread fixed-point equivalence** — and conclude with a **comprehensive audit table of frozen declarations across Parts IV–VI**.
 
-::: {.figure src="ch28-overview"}
+::: {.figure src="sanctuary-lean-ii-overview"}
 **From Born weights to unread-state fixed points.** The chapter at a glance. Left panel: the amber arrow $\psi$ casts a cyan shadow $\lvert\langle\phi\mid\psi\rangle\rvert = 3/5$ on the cyan line $\phi$, and the cyan square on that shadow is the record weight $9/25$ ([@thm-audit-rank-one-born]). Middle panel, upper half: a bar of length $1$ split by the weights $w_0 = 9/25$ and $w_1 = 16/25$, which together make the unread state ([@lemma-audit-born-pairing-weight]); lower half: each piece divided by its own weight fills a whole bar, so each conditional state has trace $1$ again ([@prop-audit-conditional-state]). Right panel: $\rho$ with magenta cross blocks is changed by the pinching, while $\rho'$ with its cross blocks struck out is a fixed point ([@cor-audit-unread-fixed-iff]). The numbers come from the worked example at the end of the chapter.
 :::
 
 ## Source Anatomy of the Rank-One Born Reduction and Three-Conjunct Pairing Bridge {#sec-audit-rank-one-born-and-pairing}
 
-In [Chapter 1](ch01-measurement.md) and [Chapter 2](ch02-born-rule.md), we saw that when both the state $\rho = \lvert\psi\rangle\langle\psi\rvert$ and the projector $P_k = \lvert\phi\rangle\langle\phi\rvert$ have rank one, the trace pairing $\Tr(\rho P_k)$ collapses to the squared modulus of the inner product $\lvert\langle\phi \mid \psi\rangle\rvert^2$. Let us open `D5/S3/Observer/BornReduction.lean:27` and inspect the exact Lean 4 proof (Panel I of Figure 28).
+In [Chapter 1](ch01-measurement.md) and [Chapter 2](ch02-born-rule.md), we saw that when both the state $\rho = \lvert\psi\rangle\langle\psi\rvert$ and the projector $P_k = \lvert\phi\rangle\langle\phi\rvert$ have rank one, the trace pairing $\Tr(\rho P_k)$ collapses to the squared modulus of the inner product $\lvert\langle\phi \mid \psi\rangle\rvert^2$. Let us open `D5/S3/Observer/BornReduction.lean:27` and inspect the exact Lean 4 proof (Panel I of the chapter overview figure).
 
 For a finite index type $n$ (`[Fintype n]`) and vectors $\phi, \psi : n \to \mathbb{C}$, the rank-one outer product is `Matrix.vecMulVec psi (star psi)` with $(i, j)$ entry $\psi_i \overline{\psi_j}$, the Hermitian inner product is the dot product `star phi ⬝ᵥ psi` $= \sum_{i \in n} \overline{\phi_i}\psi_i$, and the outcome weight is
 
@@ -69,7 +69,7 @@ The full proof is checked by the Lean kernel.
 **The rank-one reduction is a chain of six rewrites.** Read from the top; beside each arrow is the lemma the proof uses for that step. The trace is first split into the two outer products $\lvert\psi\rangle\langle\psi\rvert$ and $\lvert\phi\rangle\langle\phi\rvert$; multiplying them contracts out one inner product, taking the trace contracts out another, the two are complex conjugates of each other, and their product is the cyan $\lvert z\rvert^2$ with $z = \langle\phi\mid\psi\rangle$. The chain ends in the green [@thm-audit-rank-one-born].
 :::
 
-Next, `D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean:36` links this single-branch modulus-squared identity to the trace pairing and the full weighted ensemble decomposition of `unreadState P rho` (upper-middle panel of Figure 28).
+Next, `D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean:36` links this single-branch modulus-squared identity to the trace pairing and the full weighted ensemble decomposition of `unreadState P rho` (upper-middle panel of the chapter overview figure).
 
 ::: {.lemma #lemma-audit-born-pairing-weight title="Three-Conjunct Bridge for Rank-One Born Pairing and Unread Ensemble Decomposition (Kernel Audit)" lean="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"}
 Let $n$ be a finite index type with decidable equality (`[Fintype n] [DecidableEq n]`), let $\kappa$ be a finite outcome type (`[Fintype kappa]`), let $P : \kappa \to M_n(\mathbb{C})$ satisfy `hP : IsRecordMeasurement P`, and let $\rho \in M_n(\mathbb{C})$ satisfy `hState : rho.PosSemidef ∧ Matrix.trace rho = 1`. Given $k \in \kappa$ and vectors $\phi, \psi : n \to \mathbb{C}$ satisfying
@@ -106,7 +106,7 @@ Lines 57–91 of `RankOneBornPairingWeight.lean` also include three anonymous `e
 
 ## Lüders Conditional State Validity and the Unread Fixed-Point Equivalence {#sec-audit-conditional-state-and-fixed-point}
 
-We now turn to lines 108 and 143 of `D5/S3/Observer/Conditioning.lean` (lower-middle and right panels of Figure 28). Given an outcome $k \in \kappa$, the **Lüders conditional state** is defined at `Conditioning.lean:137` as
+We now turn to lines 108 and 143 of `D5/S3/Observer/Conditioning.lean` (lower-middle and right panels of the chapter overview figure). Given an outcome $k \in \kappa$, the **Lüders conditional state** is defined at `Conditioning.lean:137` as
 
 $$
 \operatorname{conditionalState}(P, \rho, k) = \bigl(\operatorname{recordWeight}(P, \rho, k)\bigr)^{-1} \bullet (P_k \rho P_k).

@@ -20,8 +20,8 @@ $$
 
 在我们的观察者几何诠释模型（`MODEL`）中，一旦有限观察者不设防地连续滑过 $\theta = 90^\circ$ 的纯光边界，三桩冷酷的几何后果便会像多米诺骨牌一样瞬间砸落：
 
-::: {.figure src="ch36-overview"}
-**图 35。** 本章地图：第 I 栏，竖直的记忆轴上，$\theta = 40^\circ$ 的墨色箭头投下青色的影子 $\cos\theta$，冲到 $90^\circ$ 的品红箭头影子缩成一点，$\cos 90^\circ = 0$；第 II 栏，从 $\theta^*$ 出发、快度等步 $\Delta\eta = 1$ 的青色点按庞加莱圆盘半径 $\tanh(\eta_k/2)$ 排开，过每一点的淡色圆越往外越挤，却始终在边缘以内，缝 $\delta_k > 0$（`MODEL`，见 [@ex-ch36-inverse-gudermannian-discrete-staircase]）；第 III 栏，循环小数 $0.\overline{142857}$ 的六位数字一圈接一圈，读懂移位关系后一次约成生成元 $1/7$（见 [@ex-ch36-repeating-decimal-quotient]）。
+::: {.figure src="ch35-overview"}
+**图 35。纯光边界投影归零、庞加莱圆盘等快度阶梯与循环小数商空间约分。** 第 I 栏，竖直的记忆轴上，$\theta = 40^\circ$ 的墨色箭头投下青色的影子 $\cos\theta$，冲到 $90^\circ$ 的品红箭头影子缩成一点，$\cos 90^\circ = 0$；第 II 栏，从 $\theta^*$ 出发、快度等步 $\Delta\eta = 1$ 的青色点按庞加莱圆盘半径 $\tanh(\eta_k/2)$ 排开，过每一点的淡色圆越往外越挤，却始终在边缘以内，缝 $\delta_k > 0$（`MODEL`，见 [@ex-ch36-inverse-gudermannian-discrete-staircase]）；第 III 栏，循环小数 $0.\overline{142857}$ 的六位数字一圈接一圈，读懂移位关系后一次约成生成元 $1/7$（见 [@ex-ch36-repeating-decimal-quotient]）。
 :::
 
 ---

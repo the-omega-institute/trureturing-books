@@ -11,6 +11,10 @@
 3. **普适比较主频引力钟慢与万力归弧普朗克对账（[§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md)–[§33.8](ch39-s09-unified-arc-forces-and-planck-convergence.md)）**：以全宇宙恒定比较主频 $\nu_0$ 统一光锥精度下界与引力信息负载钟慢，将电磁盲面相位、弱力 $720^\circ$ 手征双覆叠、强力三棱色通量禁闭（配晶格反射正性与韦格纳对偶）与胞间雷吉角亏引力在普朗克能标 $E_P$ 合流对账；
 4. **极小圆弧场大统一（AF-GUT）与均匀三维场观测切面宇宙学（[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md)–[§33.10](ch39-s12-uniform-field-and-observer-slice.md)）**：在共享手性外尔账本上由色数 $N_c = 3$ 锁死裸温伯格角 $\sin^2\theta_W(\mu_{\mathrm{arc}}) = \frac{3}{8}$ 且免除规范质子衰变与大统一磁单极子，最后揭示宇宙本体处于全局零熵纯单态而局部边缘处处均匀各向同性，一切星系织网与宇宙学四谜皆显影于观察者条件切面 $\Sigma_{\mathbf{I}}$ 的多场莫尔拍频之中，由此自然将镜头引向第九部的场内观察者本身。
 
+::: {.figure src="ch33-overview"}
+**图 33。霍奇点体八度重整、普适比较主频正交预算与同心四场圆弧联络。** 第 I 栏，`1—3—3—1` 外代数阶梯将第 $\ell$ 层饱和体元 $\Lambda^3_\ell$ 跨尺度重整为第 $\ell + 1$ 层单点锚定 $\Lambda^0_{\ell+1}$（`MODEL`，[§33.1](ch34-s13-point-volume-octave.md)）；第 II 栏，四分之一圆弧上的直角三角形示意等主频预算公设（`MODEL`），将普适比较主频 $\nu_0$ 正交拆分为固有时份额 $\nu_\tau$ 与圆弧负载 $\nu_{\mathrm{load}}$（$\nu_\tau^2 + \nu_{\mathrm{load}}^2 = \nu_0^2$；代数平方非负支点由绿色 `LEAN ✓` 拉格朗日—格拉姆恒等式锚定，[§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md)、[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md)）；第 III 栏，同心四场圆弧丛依次排列位置／引力、$\mathrm{U}(1)_Y$、$\mathrm{SU}(2)_L$ 与 $\mathrm{SU}(3)_C$，锁出裸值 $\sin^2\theta_W = 3/8$（`MODEL`）并标明重整化群阈值的开放前沿（红色 `OPEN`，[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md) [@prob-ch39-af-gut-threshold-and-proton-stability]）。
+:::
+
 ---
 
 - [33.1 点体同源的八度螺旋与粒子即场：从 `1—3—3—1` 霍奇归零到跨层级重整化](ch34-s13-point-volume-octave.md)

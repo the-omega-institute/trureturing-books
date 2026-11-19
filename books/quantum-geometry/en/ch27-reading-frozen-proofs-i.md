@@ -4,7 +4,7 @@
 
 In conventional mathematical physics monographs, a "proof" relies on an unwritten pact between author and reader: a phrase such as *"it is easy to see"*, an implicit assumption that an index set is nonempty, or a quiet slide from coordinate-line invariance to a single global phase can hide subtle gaps. From [Chapter 1](ch01-measurement.md) onward, this book has operated under a stricter contract captured by our opening epigraph — **define, state, prove**: every formal `theorem`, `lemma`, `proposition`, and `corollary` carrying the green `LEAN ✓` badge is anchored to a declaration in `the-omega-institute/trureturing@dev` (pinned at commit [{commit}](trureturing:)) that has been type-checked by the Lean 4 kernel and frozen without a single `sorry`.
 
-::: {.figure src="ch27-overview"}
+::: {.figure src="sanctuary-lean-i-overview"}
 **From the parallelogram law to finite-record pinching.** The chapter at a glance. Panel I: the ink arrows $x$ and $y$ span a parallelogram, and the squares of its two cyan diagonals $x + y$ and $x - y$ add up to the squares of its four sides ([@thm-audit-parallelogram-law]). Panel II: four coordinates form a chain; each cyan arc is a test vector that is non-zero on two neighbouring coordinates, and, for a unitary $A$ preserving the coordinate rays and all these test rays, the violet phase arrows in all four diagonal entries point the same way, $A = c \cdot 1$ ([@prop-audit-ray-phase-rigidity]). Panel III: pinching strips the magenta off-diagonal blocks from the $3 \times 3$ block matrix $\rho$ and keeps the cyan diagonal ones; pinching again leaves the matrix in place ([@cor-audit-pinching-idempotent]).
 :::
 
@@ -21,7 +21,7 @@ In the `trureturing` verification pipeline, every green theorem in this book pas
 2. **State**: The theorem header specifies all typeclass instances and explicit hypotheses; the source module produces a module-level SHA-256 `statement_id`, recorded in `Golden/Frozen/state/<module>.lean.json`, which may be shared by several declarations in that module;
 3. **Prove**: The proof term is checked by the Lean 4 kernel with zero `sorry` placeholders and only standard foundational axioms (`propext`, `Classical.choice`, `Quot.sound`, verified in source files via `#print axioms`).
 
-We begin by auditing two cornerstone declarations from Part I: the parallelogram norm identity and the finite-dimensional Born probability skeleton (Panel I of Figure 27).
+We begin by auditing two cornerstone declarations from Part I: the parallelogram norm identity and the finite-dimensional Born probability skeleton (Panel I of the chapter overview figure).
 
 ::: {.theorem #thm-audit-parallelogram-law title="Parallelogram Norm Identity in Real Inner-Product Spaces (Kernel Audit)" lean="D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law"}
 Let $E$ be a normed additive commutative group equipped with a real inner product (`[NormedAddCommGroup E] [InnerProductSpace ℝ E]`). For any two vectors $x, y \in E$,
@@ -125,7 +125,7 @@ The full proof is checked by the Lean kernel.
 
 ## Support-Chain Ray Phase Rigidity and Finite Record Pinching Idempotence {#sec-audit-ray-rigidity-and-pinching}
 
-We now audit two structural theorems from Part I that showcase graph induction and block-diagonal projection algebra in Lean 4 (Panels II and III of Figure 27).
+We now audit two structural theorems from Part I that showcase graph induction and block-diagonal projection algebra in Lean 4 (Panels II and III of the chapter overview figure).
 
 In `D5/S3/Quantum/Foundation/RayPhaseRigidity.lean:97`, a matrix $A \in M_\iota(\mathbb{C})$ preserves the ray of a vector $x : \iota \to \mathbb{C}$ when
 

@@ -37,7 +37,7 @@
 :::
 
 ::: {.remark #rem-ch36-hyperbolic-staircase-figure title="双曲视界圆盘、无穷离散快度阶梯与生成元商空间图解（图解导览，含 `MODEL` 与文献背景）"}
-**图解导览，含 `MODEL` 与文献背景。** 本章的无穷离散快度阶梯模型（`MODEL`）结合庞加莱圆盘与古德曼函数文献背景（[@ex-ch36-inverse-gudermannian-discrete-staircase] 与 [@rem-ch36-poincare-disk-gudermannian-literature]）及分式临界圆定理（[@thm-ch36-taylor-tail-and-cayley-boundary]，`LEAN ✓`）：角度尺与快度尺的对照见本节开头的两把尺子图，圆盘上一圈圈逼近边缘的阶梯见图 36 第 II 栏，分式变换下贴着单位圆的像圆、快度阶梯与放大镜里不闭合的缝见下文的实验卡；生成元商空间诠释及其定理锚点（[@thm-ch36-quotient-annihilator-and-factorization]）见图 36 第 III 栏与本章最后一节的折叠实验卡；双曲正切与双曲正割随离散步的变化列在 [@ex-ch36-inverse-gudermannian-discrete-staircase] 的步进账本中。
+**图解导览，含 `MODEL` 与文献背景。** 本章的无穷离散快度阶梯模型（`MODEL`）结合庞加莱圆盘与古德曼函数文献背景（[@ex-ch36-inverse-gudermannian-discrete-staircase] 与 [@rem-ch36-poincare-disk-gudermannian-literature]）及分式临界圆定理（[@thm-ch36-taylor-tail-and-cayley-boundary]，`LEAN ✓`）：角度尺与快度尺的对照见本节开头的两把尺子图，圆盘上一圈圈逼近边缘的阶梯见图 35 第 II 栏，分式变换下贴着单位圆的像圆、快度阶梯与放大镜里不闭合的缝见下文的实验卡；生成元商空间诠释及其定理锚点（[@thm-ch36-quotient-annihilator-and-factorization]）见图 35 第 III 栏与本章最后一节的折叠实验卡；双曲正切与双曲正割随离散步的变化列在 [@ex-ch36-inverse-gudermannian-discrete-staircase] 的步进账本中。
 :::
 
 对照 [@rem-ch36-hyperbolic-staircase-figure] 所指的图与实验卡，[@thm-ch36-taylor-tail-and-cayley-boundary] 为我们揭示了两条关键定量机制：一方面，任何有限阶多项式截断（阶数 $n \in \mathbb{N}$）与精确指数映射 $\exp(z)$ 之间的逼近误差受显式阶乘尾界 $\frac{r^n}{n!}e^r$ 严格控制；另一方面，由证明中的精确亏量恒等式 $\lVert\operatorname{cayleyRatio}(s)\rVert^2 - 1 = \frac{1 - 2\operatorname{Re}(s)}{\operatorname{normSq}(s)}$（$s \neq 0$）可见，分式共形变换 $\operatorname{cayleyRatio}(s) = (s - 1)/s$ 将无界右开半平面 $\operatorname{Re}(s) > \frac{1}{2}$ 整体收拢进开单位圆盘 $\lVert w\rVert < 1$ 内部，而把临界直线 $\operatorname{Re}(s) = \frac{1}{2}$ 映入单位圆周渐近边界 $\lVert w\rVert = 1$；有限参数的像缺少 $w = 1$，这一点只在无穷远处逼近（在数论语境下亦与[第 22 章](ch22-primes-euler-products-and-zeros.md)相呼应）。
@@ -91,7 +91,7 @@
 上述双曲—圆函数桥与单位圆盘共形几何在数学史与视觉艺术中的经典文献脉络整理于下框：
 
 ::: {.remark #rem-ch36-poincare-disk-gudermannian-literature title="兰伯特—古德曼双曲圆函数桥、庞加莱共形圆盘度规与埃舍尔圆极限镶嵌（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** [@ex-ch36-inverse-gudermannian-discrete-staircase] 以及图 36 第 II 栏、快度阶梯实验卡所呈现的圆盘渐近几何，对应十九至二十世纪几何学与版画艺术中的三项经典成果，未作为独立定理包含在本书锁定的 `trureturing@dev` 声明集中：
+**文献结果，未在本书形式化。** [@ex-ch36-inverse-gudermannian-discrete-staircase] 以及图 35 第 II 栏、快度阶梯实验卡所呈现的圆盘渐近几何，对应十九至二十世纪几何学与版画艺术中的三项经典成果，未作为独立定理包含在本书锁定的 `trureturing@dev` 声明集中：
 
 1. **兰伯特超越角与古德曼函数（J. H. Lambert, *Hist. Acad. Roy. Sci. Belles-Lettres Berlin*, 1768；C. Gudermann, *J. Reine Angew. Math.* **6**, 1830）**：兰伯特与古德曼建立了无需借助复虚数即可直接沟通双曲函数与圆三角函数的实解析映射 $\theta = \operatorname{gd}(\eta) := 2\arctan(e^\eta) - \frac{\pi}{2} = \arcsin(\tanh\eta)$（$\eta \in \mathbb{R},\; \theta \in (-\frac{\pi}{2}, \frac{\pi}{2})$），满足 $\sinh\eta = \tan\theta$、$\cosh\eta = \sec\theta$、$\tanh(\eta/2) = \tan(\theta/2)$，其逆映射即为墨卡托航海投影与双曲快度共用的积分 $\operatorname{gd}^{-1}(\theta) = \int_0^\theta \sec\alpha\,d\alpha$；
 2. **庞加莱共形单位圆盘度规与无穷远视界（H. Poincaré, *Acta Math.* **1**, 1–62, 1882）**：在开单位圆盘 $\mathbb{D} = \{z \in \mathbb{C} : \lvert z\rvert < 1\}$ 上赋予常负高斯曲率 $K = -1$ 的共形黎曼度规
