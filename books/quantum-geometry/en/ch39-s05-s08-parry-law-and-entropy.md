@@ -1151,6 +1151,15 @@ This is the elementary binary case of Ardiyansyah, Kosta, and Kubjas's criterion
 
 Conversely, a negative bias can be made positive by complementing that input bit and adding its column to the affine offset. Strict positivity of the moments excludes a fair bit on any nonzero column. After these replacements the offset evaluates to $+1$ under every character, so it is zero. The remaining positive bias factors therefore give nonnegative rates $-\tfrac12\log q_u$. The eight-point case appears explicitly in §5.1 of the same article. [Ardiyansyah, Kosta, and Kubjas](https://doi.org/10.1007/s00285-021-01656-5)
 
+**What changes when a sign moment vanishes (written derivation).** Let $C$ be a finite binary vector space. A probability law on $C$ is an affine independent-bit law exactly when there are a subspace $H\le C$ and an offset $s\in C$ with the following properties.
+
+1. Every character that is nontrivial on $H$ has zero moment.
+2. For a character $\bar\chi$ of $C/H$, let $\chi$ be its pullback to $C$. The adjusted moments $\chi(s)m_\chi$ are all strictly positive and satisfy the product inequalities on $C/H$.
+
+For necessity, take $H$ to be the span of the columns of the fair bits. Each such bit makes the moment of any character that reads it vanish. The characters trivial on $H$ read only nonzero bias factors. Complement the bits with negative bias and absorb their columns into $s$. The surviving moments, after multiplying by $\chi(s)$, are then the positive moments of the quotient law.
+
+Conversely, the product inequalities realize the adjusted quotient moments by independent bits with positive biases. Lift their columns from $C/H$ to $C$ and add independent fair bits along a basis of $H$, then translate by $s$. The fair bits make the moments outside the annihilator of $H$ vanish. They leave the other moments unchanged before translation. The resulting law has the specified moments at every character, so Fourier inversion identifies it with the original law.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
