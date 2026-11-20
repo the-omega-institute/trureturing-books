@@ -274,6 +274,9 @@ algebra (Hypotheses~U and~A, Section~\ref{sec:closedreg}).
 a fusion space (Section~\ref{sec:attention}).
 \item[{[Sb]}] Separate colour, weak and hypercharge bundles, a scalar bridge and a common normalisation
 (Section~\ref{sec:triality}).
+\item[{[KK]}] A fixed connection metric on the total space with one gravitational normalisation; [Sn]: a
+single fermion trace in the Dirac heat coefficient; [Om]: one-loop matching with a specified spectrum; [Cc]: a
+comparison action with a clock (Section~\ref{sec:couplings}).
 \item[{[Ps]}] The intermediate Pati--Salam spectrum with step matching; [Ea]: an effective action for
 comparison fields; [Ck]: the saturated clock budget; [Gl]: the static information load; [Eq]: local
 continuum entanglement equilibrium (Section~\ref{sec:unification}).
@@ -412,12 +415,12 @@ system, many systems, sub-structures of every dimension, and the geometry of sta
 clocks; finite memory (Gram windows, the arrow of forgetting, erasure and consensus); and single outcomes as
 bounded martingales with finite-tick certification, preceded by computation by local measurements
 and error-correcting sub-structures.  Part~III (Section~\ref{sec:bounds}) gives the bounds: speed limits with their
-sharp constants, the Tsirelson bound from a positive Gram completion, and a rapidity--entanglement budget.  Part~IV (Sections~\ref{sec:eventspace}--\ref{sec:unification}) contains the space of events,
+sharp constants, the Tsirelson bound from a positive Gram completion, and a rapidity--entanglement budget.  Part~IV (Sections~\ref{sec:eventspace}--\ref{sec:couplings}) contains the space of events,
 fields of structures, the variable radius, the round four-sphere target from a pair, topological
 particles with the Skyrme term, and the
-three-structure model, the triality source of the count three, and unification scales with a tick budget and a conditional route from cap
-entanglement to linearised gravity; sections on the origin of three generations and of the coupling ratios
-are to follow.  Part~V (Sections~\ref{sec:examples}--\ref{sec:lean}) collects the
+three-structure model, the triality source of the count three, unification scales with a tick budget and a conditional route from cap
+entanglement to linearised gravity, and the coupling ratios from the total space; a section on the origin of
+three generations is to follow.  Part~V (Sections~\ref{sec:examples}--\ref{sec:lean}) collects the
 physical examples, the status of every statement, what could fail, the open problems and the
 numerical checks.  Statements that are not proved keep their status as hypothesis, conjecture or
 programme.
@@ -5246,10 +5249,14 @@ invariant under the transports, or under the clock-reduced group; $Y=T_{3R}$ & f
 one coefficient on both transport factors (reversal-symmetric); $Y=T_{3R}$ & $1$ & $\tfrac12$\\
 one trace on $S_L\oplus S_R$ (G(v)); $Y=T_{3R}+\tfrac12(B-L)$ & $\sqrt{3/5}$ & $\tfrac38$\\
 one coefficient times the Killing form of $\su(4)\oplus\su(2)\oplus\su(2)$; same $Y$ & $\sqrt{3/7}$ & $\tfrac3{10}$\\
+connection metric on round $S^7_{R_7}\times S^3_{R_3}$ (Hypothesis~KK), $R_7/R_3=1,\sqrt2,\sqrt3,2$ & $\sqrt{\tfrac{3}{3+R_7^2/R_3^2}}$ & $\tfrac37,\tfrac38,\tfrac13,\tfrac3{10}$\\
 \bottomrule
 \end{tabular}
 \end{center}
-The last row uses that the Killing norm of $\su(N)$ is $2N$ times the fundamental trace, so $g_4^2=g_L^2/2$.
+The fourth row uses that the Killing norm of $\su(N)$ is $2N$ times the fundamental trace, so $g_4^2=g_L^2/2$.  The
+rows record choices: Section~\ref{sec:couplings} derives the second row from a round $S^3$ fibre, the third
+from a single fermion trace in the Dirac heat coefficient, and the fifth from a fibre metric, each under its
+own hypothesis, and shows that none of them is selected by the comparison structure (Remark~\ref{rem:crstatus}).
 With the inputs of Remark~\ref{rem:scales}, a boundary value $S$ at scale $\mu$ requires threshold shifts
 $\Delta_i$ of $\alpha_i^{-1}$ with $\Delta_Y-r\Delta_2=r\,\alpha_2^{-1}-\alpha_Y^{-1}$, $r=(1-S)/S$; at the meeting $\alpha_2=\alpha_3$ this is
 $17.64$ for $S=\tfrac38$ and $-13.71$ for $S=\tfrac12$.  The model supplies no such shifts.
@@ -7199,6 +7206,899 @@ does not supply; the cap geometry and the invariant de~Sitter background it does
 \end{remark}
 
 %=====================================================================================
+\section{Coupling ratios from the total space: Kaluza--Klein reduction and the heat-kernel normalisation}\label{sec:couplings}
+
+Can the comparison geometry fix the coefficients of the gauge kinetic
+terms left free in Remark~\ref{rem:couplings}? The main result is that a
+round three-sphere fixes the two transport couplings to be equal, while
+one coefficient of the twisted Dirac heat kernel fixes all three
+Pati--Salam coupling ratios from the fermion representation. The first
+mechanism requires a higher-dimensional metric action. The second
+requires a spectral action and the matter content of Hypothesis~G.
+Their matching conditions have distinct consequences: Standard Model
+running misses simultaneous three-coupling unification, while the
+Pati--Salam spectra considered here admit two-scale one-loop
+fits with equal upper couplings. The inferred round radii
+rule out identifying either fitted upper scale with the
+corresponding compactification mass.
+
+\subsection{Reduction of a connection metric}
+
+\smallskip\noindent\textbf{Hypothesis KK.}  Take the associated bundle in Hypothesis~F(i), or an associated bundle
+with one of the compact fibres below. Its base is four-dimensional
+Lorentzian spacetime. Its fibre has a fixed Riemannian metric $h_K$ and
+the structure group acts by isometries. Give the total space the connection
+metric whose horizontal metric is the pullback of the base metric $g_X$
+and whose vertical metric is $h_K$. At tree level use the
+$D=4+\dim K$ Einstein--Hilbert action with cosmological term
+\[
+ \frac{M_D^{D-2}}{2}\int(\mathcal R_D-2\Lambda_D)\,d\mathrm{vol}_D.
+\]
+Use units $\hbar=c=1$, $M_{\mathrm P}=G_N^{-1/2}$, and
+$\bar M_{\mathrm P}=(8\pi G_N)^{-1/2}$. The reduction varies the
+connection and base metric in this ansatz with the fibre metric held
+fixed. When identifying a matching energy with a geometric scale, the
+comparison below tests $R^{-1}$ and the first scalar Kaluza--Klein mass.
+
+
+We use Hermitian generators $t_a$ with
+$\operatorname{tr}_{\rm fund}(t_at_b)=\delta_{ab}/2$ on each
+$\SU(n)$. The connection includes the gauge coupling, and
+the Lorentzian Lagrangian has component kinetic term
+$-F^a_{\mu\nu}F^{a\mu\nu}/(4g_a^2)$ in a diagonal basis.
+The physical $Y$ obeys $Q=T_{3L}+Y$, and $g_Y=g'$.
+
+\begin{theorem}[Gauge kinetic form of the connection metric]\label{cr:eh}
+Let $K_a$ be the fundamental Killing fields of the chosen generators
+and $V_K=\mathrm{vol}(K)$. Under Hypothesis~KK,
+\[
+ \bar M_{\mathrm P}^2=M_D^{D-2}V_K,\qquad
+ I_{ab}=\frac{1}{V_K}\int_K h_K(K_a,K_b)\,d\mathrm{vol}_K.
+\]
+The reduced gravity term has coefficient $\bar M_{\mathrm P}^2/2$,
+the effective cosmological constant is
+$\Lambda_D-\tfrac12 V_K^{-1}\int_K\mathcal R_K\,d\mathrm{vol}_K$,
+and the reduced gauge term is
+\begin{equation}\label{cr:kinetic}
+ -\frac{\bar M_{\mathrm P}^2}{8} I_{ab}F^a_{\mu\nu}F^{b\mu\nu}.
+\end{equation}
+Thus $g_a^{-2}=\bar M_{\mathrm P}^2 I_{aa}/2$ in an orthogonal basis.
+For an unbroken generator $Y=\sum_a c_a t_a$ with orthogonal
+components, $g_Y^{-2}=\sum_a c_a^2g_a^{-2}$.
+\end{theorem}
+\begin{proof}
+The fibres are totally geodesic. In the Koszul formula on two vertical
+fields and one horizontal lift, the horizontal derivative of their
+inner product cancels the two bracket terms because horizontal
+transport acts by isometries. For horizontal lifts $U,V$, the vertical
+bracket is $-F(U,V)^aK_a$ in the connection convention used here. In the
+notation of O'Neill's submersion equations
+\cite{cr:oneill,ONeill}, the tensor $A_UV=[U,V]^{\rm vert}/2$ contributes
+$-3\lvert A_UV\rvert^2$ to horizontal sectional curvature and
+$+\lvert A_U Z\rvert^2$ to mixed sectional curvature for vertical $Z$.
+The two actions of $A_U$ are negative metric adjoints. Thus the
+horizontal contraction contributes $-3\sum_{\mu,\nu}\lvert
+A_\mu e_\nu\rvert^2$ and the mixed contraction contributes twice that
+sum with a positive sign and coefficient one. For Lorentz signature
+these are signed contractions, weighted by the corresponding
+orthonormal frame signs. Vertical curvature is the intrinsic fibre
+curvature. Hence pointwise
+\[
+ \mathcal R_D=\mathcal R_X+\mathcal R_K
+       -\tfrac14 h_K(K_a,K_b)F^a_{\mu\nu}F^{b\mu\nu}.
+\]
+The horizontal lifts together with a fibre frame form a block
+triangular change of frame of determinant one relative to the
+product coordinates. Integrating the volume density gives
+\eqref{cr:kinetic} and the gravitational coefficient.
+For an unbroken connection $B\,Y$, its curvature is
+$dB\sum_a c_at_a$, so substitution gives the final formula.
+\end{proof}
+
+The averaged form $I$ is invariant under all fibre isometries that
+normalize the chosen subgroup. Invariance under the connected
+product alone allows independent coefficients on its distinct
+simple ideals. Indeed invariance makes an off-diagonal pairing
+vanish on their commutators, and each simple ideal equals its
+commutator. In the round three-sphere case inversion supplies
+the additional exchange symmetry in Remark~\ref{rem:angle}.
+This construction supplies the gauge kinetic term of
+Hypothesis~F$_{\mathrm g}$(a) under KK. The configuration term of
+Theorem~\ref{thm:gauge}(iv) still requires a section and its own action.
+
+\begin{proposition}[The round three-sphere, its product, and the clock]\label{cr:s3}
+For $K=S^3_R$, the connected effective isometry group is
+$(\SU(2)_L\times\SU(2)_R)/\{\pm(1,1)\}$ and
+\[
+ I_{L_aL_b}=I_{R_aR_b}=\tfrac{R^2}{4}\delta_{ab},\qquad
+ I_{L_aR_b}=0,\qquad
+ g_L=g_R=\frac{\sqrt8}{\bar M_{\mathrm P}R}.
+\]
+Restricting the right connection to the clock with
+$Y=T_{3R}$ gives $g'=g_R$ and $\sin^2\theta_W=1/2$.
+On $\prod_{j=1}^3 S^3_{R_j}$ each pair has this formula with
+$R=R_j$ and the same four-dimensional $\bar M_{\mathrm P}$.
+A diagonal embedding through $k$ factor copies of common radius $R$
+has $g_{\rm diag}=g_L/\sqrt k$. Neither $\mathfrak{su}(3)$ nor
+$\mathfrak{su}(4)$ embeds into the product isometry algebra.
+
+The metric quotient $S^3_R/\mathrm{U}(1)_{T_{3R}}$ is round
+$S^2_{R/2}$. Using this two-sphere as the whole fibre gives
+$g_{\rm rot}=\sqrt{12}/(\bar M_{\mathrm P}R)$ for the rotation
+algebra with spin generators of weight $\pm1/2$ on a lifted doublet.
+The right clock acts trivially on the quotient, so the corresponding
+quadratic form is zero. Retaining the Hopf circle of length $2\pi R$
+instead gives the original $g'$ for $T_{3R}$. For a separate round
+circle of radius $r_c$ and generator of period $2\pi$, the unit-charge
+coupling is $g_c=\sqrt2/(\bar M_{\mathrm P}r_c)$.
+\end{proposition}
+\begin{proof}
+Represent points by unit quaternions, with metric $R^2$ times the unit
+metric as in the round model of Paper~I \cite[Thm.~5.18, Cor.~5.19]{PaperI}.
+The action $q\mapsto aqb^{-1}$ is orthogonal with kernel
+$(-1,-1)$ and the image has the dimension of $\SO(4)$.
+The fundamental fields are $e_aq/2$ and $-qe_a/2$ for an orthonormal
+imaginary quaternion basis $e_a$. Their respective Gram matrices are
+$R^2\mathbf 1/4$. The mixed term averages a multiple of
+$\langle e_a,q e_b q^{-1}\rangle$ and vanishes since the average is
+rotation invariant as a vector. Independent factors have orthogonal
+tangent fields and product volume measure. The connected isometry
+algebra of a product of round three-spheres is the sum of the rotation
+algebras of the factors. In fact at each point, for unit $v$,
+the Jacobi map $w\mapsto R(w,v)v$ has rank twice the number of
+nonzero factor components of $v$, by constant sectional curvature in
+each factor. Rank two picks out the three unit tangent spheres of
+individual factors. An isometry in the identity component preserves
+each of these distributions, so its $j$th component depends only on
+the $j$th variable. A homomorphism from a simple Lie algebra
+$\mathfrak{su}(n)$ for $n=3,4$ to any $\mathfrak{su}(2)$ factor
+must be zero, since a nonzero one is injective. Diagonal substitution
+in \eqref{cr:kinetic} adds the indicated norms.
+
+For the clock quotient in Proposition~\ref{prop:skhopf}, the map
+$q\mapsto(R/2)q e_3q^{-1}$ is onto and identifies exactly the right
+clock orbits. Its derivative on $qu$, $u\perp e_3$, has norm
+$(R/2)\lvert[u,e_3]\rvert=R\lvert u\rvert$, and it kills the clock
+direction. A unit rotation generator about axis $n$ has field
+$n\times x$ on $S^2_r$. The rotation-invariant mean of $xx^{\mathsf T}$
+is $(r^2/3)\mathbf 1$, so the mean squared length is $2r^2/3$.
+On the three-sphere, the generator $T_{3R}$ has period $4\pi$
+and squared length $R^2/4$. The period-$2\pi$ generator is twice
+$T_{3R}$ and has length $R$. On an independent circle the squared
+length of a period-$2\pi$ generator is likewise $r_c^2$.
+\end{proof}
+
+\begin{proposition}[The seven-sphere and the Pati--Salam generator]\label{cr:s7}
+Use the round $S^7_{R_7}$ in $\mathbb C^4=V_2$ of
+Proposition~\ref{prop:pairsu3}, together with $S^3_{R_3}$.
+Restrict the connection on the seven-sphere to the defining
+$\SU(4)\subset\SO(8)$ and retain both transports
+on the three-sphere. Then
+\[
+ g_4=\frac{4}{\bar M_{\mathrm P} R_7},\qquad
+ g_L=g_R=\frac{\sqrt8}{\bar M_{\mathrm P} R_3},\qquad
+ q_4:=\frac{g_L^2}{g_4^2}=\frac{R_7^2}{2R_3^2}.
+\]
+For the embedding of Theorem~\ref{thm:sm},
+\begin{equation}\label{cr:angle}
+ Y=T_{3R}+\sqrt{2/3}\,T_{15},\qquad
+ g_Y^{-2}=g_R^{-2}+\tfrac23 g_4^{-2},\qquad
+ \sin^2\theta_W=\frac{1}{2+(2/3)q_4}.
+\end{equation}
+In particular,
+\[
+\begin{array}{c|c|c|c}
+ R_7/R_3 & q_4 & g_Y/g_L & \sin^2\theta_W\\ \hline
+ 1 & 1/2 & \sqrt{3/4} & 3/7\\
+ \sqrt2 & 1 & \sqrt{3/5} & 3/8\\
+ 2 & 2 & \sqrt{3/7} & 3/10
+\end{array}
+\]
+The last line reproduces the ratios of the Killing-form row of
+Remark~\ref{rem:couplings}. The bare clock has angle $1/2$ for all
+three radius choices. Restricting further to colour inherits
+$g_3=g_4$ at tree-level matching.
+\end{proposition}
+\begin{proof}
+For a real sphere $S_R^{m-1}\subset\mathbb R^m$ and skew matrices
+$A,B$, the mean length pairing of $Ax,Bx$ is
+$R^2\operatorname{tr}_{\mathbb R}(A^{\mathsf T}B)/m$, since the
+rotation-invariant second moment is $R^2\mathbf 1/m$.
+For the complex realization, the real trace is twice the real part
+of the complex trace, so $I_{ab}=R_7^2\delta_{ab}/8$ on
+$i\mathfrak{t}$ for Hermitian defining generators $\mathfrak{t}$.
+Theorem~\ref{cr:eh} gives the couplings. In the basis
+$(\omega^\perp,\omega)$,
+$T_{15}=\operatorname{diag}(1,1,1,-3)/(2\sqrt6)$ has square trace
+$1/2$, and multiplication by $\sqrt{2/3}$ gives $(B-L)/2$.
+The simple factors and the colour generators are orthogonal to
+the remaining generator components. The angle follows from
+$g_Y^2/(g_L^2+g_Y^2)$. For traceless matrices the Killing form of
+$\mathfrak{su}(n)$ is $2n$ times the defining trace form, using the
+positive signs on both forms here. This follows by expanding
+$\operatorname{ad}X=L_X-R_X$ on all complex matrices and using
+$\operatorname{Tr}_{\mathrm{Mat}_n(\mathbb C)}(L_XR_Z)
+=\operatorname{tr}X\operatorname{tr}Z$ for the trace of that linear map acting on the space of matrices.
+The identity summand contributes zero. Thus its squared-norm ratio
+between the normalized $\SU(4)$ and $\SU(2)$
+generators is $2$, giving the last line.
+\end{proof}
+
+\begin{remark}[Isometry group and the choice of subgroup]\label{cr:group}
+Round $S^7$ has the full $\SO(8)$ as connected isometry
+group, with $28$ generators. The $\SU(4)$ choice uses the
+complex structure of the pair in Proposition~\ref{prop:pairsu3}.
+The $S^7$ metric alone supplies gauge coefficients for the full
+algebra, including the additional $28-15=13$ generators. Restricting
+the metric ansatz to an associated $\SU(4)$ bundle selects the
+desired connection. A physical compactification must account for
+the additional modes and explain the global lift to the matter
+representation. For example $(-\mathbf 1_4,-1,-1)$ acts
+antipodally on the $S^7$ in the displayed product, although it lies
+in the kernel on the matter content of Theorem~\ref{thm:sm}(iii).
+The sphere metric and the group acting faithfully on matter supply
+different global data.
+\end{remark}
+
+\begin{proposition}[The pure gravity radius and fermion obstructions]\label{cr:obstructions}
+For a round sphere of dimension $d\ge2$, or a product of round
+positive-dimensional spheres with at least one factor of dimension
+at least two, pure Einstein--Hilbert gravity with $\Lambda_D$ has
+no flat product vacuum. At any stationary product metric the common
+volume mode is unstable. For $S^7_{R_7}\times S^3_{R_3}$ the
+stationarity condition on the ratio is $R_7^2=3R_3^2$ and gives
+$\sin^2\theta_W=1/3$ for \eqref{cr:angle}.
+On these compact spin fibres a minimally coupled untwisted internal
+spin Dirac operator has zero kernel.
+\end{proposition}
+\begin{proof}
+In the product Einstein equations all factors have common Einstein
+constant $2\Lambda_D/(D-2)$. A sphere $S^{d_i}_{R_i}$ has Einstein
+constant $(d_i-1)/R_i^2$, which is positive for a factor with
+$d_i\ge2$. A flat base is therefore excluded, and comparing $S^7$
+and $S^3$ gives $6/R_7^2=2/R_3^2$. For a common rescaling
+$h_K\mapsto e^{2u}h_K$, let $d=\dim K$ and let $\mathcal R_K>0$
+be the original scalar curvature. The fibre volume scales by $e^{du}$
+and the curvature by $e^{-2u}$. Rescaling the base metric by
+$g_X=e^{-du}g_{\mathrm E}$ gives a constant coefficient of
+$\mathcal R_{\mathrm E}$. For varying $u$, the warped product
+curvature adds $-2d\Delta_X u-d(d+1)|du|_X^2$ to
+$\mathcal R_X+e^{-2u}\mathcal R_K$. The conformal change
+uses $\mathcal R_X=e^{du}(\mathcal R_{\mathrm E}
+ +3d\Delta_{\mathrm E}u-\tfrac32d^2|du|_{\mathrm E}^2)$ and
+$\Delta_X u=e^{du}(\Delta_{\mathrm E}u-d|du|_{\mathrm E}^2)$.
+The resulting derivative terms are a total divergence and
+$-\tfrac12 d(d+2)|du|_{\mathrm E}^2$ inside the Lagrangian
+with overall factor $\bar M_{\mathrm P}^2/2$. The potential is
+\[
+ V(u)=\tfrac12\bar M_{\mathrm P}^2 e^{-du}
+       (2\Lambda_D-e^{-2u}\mathcal R_K).
+\]
+At stationarity at $u=0$ one has $2d\Lambda_D=(d+2)\mathcal R_K$
+and $V''(0)=-\bar M_{\mathrm P}^2(d+2)\mathcal R_K<0$.
+The kinetic term has positive energy, so this gives an unstable mode.
+For a
+closed spin fibre, the Lichnerowicz formula gives
+$\lVert D_K\psi\rVert^2=\lVert\nabla\psi\rVert^2+
+\int_K\mathcal R_K|\psi|^2/4$ \cite[Ch.~II, \S8]{cr:lawson}. Positive scalar
+curvature forces any zero mode to vanish.
+\end{proof}
+
+\begin{remark}[Classical compactification constraints]\label{cr:witten}
+Witten's chirality obstruction for smooth purely metric
+Kaluza--Klein fermion constructions is explained in
+\cite[pp.~412--428]{cr:wittenkk}. The positive-scalar-curvature
+argument above is a stronger zero-mode statement for these
+particular untwisted fibres. Fluxes, gauge twists or other changes
+to the compactification require their own index calculation.
+The radion potential and tower discuss the stabilization and
+scale constraints of the standard Kaluza--Klein framework
+\cite{cr:duff,cr:cremmerscherk}. The fixed-metric action is a
+restriction of the functional. Consistency of a truncation would
+also require the higher-dimensional equations for discarded
+metric modes to hold in the retained gauge backgrounds.
+\end{remark}
+
+\subsection{Heat kernel of the fermion representation}
+
+\smallskip\noindent\textbf{Hypothesis Sn (Spectral normalization).}  Use a closed Riemannian spin four-manifold for the local Euclidean
+coefficient and a Hermitian bundle $E_\rho$ from the fermion
+representation $\rho$. Take the leading parity-even gauge kinetic
+term at a matching scale $M$ from a single contribution
+$f(0)a_4(D_\rho^2)$, with $f(0)>0$ and no independent gauge kinetic
+terms at that scale. Here $D_\rho$ is the spin Dirac operator twisted
+by $E_\rho$. A single trace gives every Weyl multiplet the same weight.
+The physical interpretation continues the gauge term to Lorentzian
+signature. The geometric scale in the trace cutoff and its
+identification with $M$ are additional inputs.
+
+
+\begin{theorem}[Trace normalization]\label{cr:heat}
+In dimension four let $\mathcal F_{\mu\nu}=i\rho(F_{\mu\nu})$
+be the anti-Hermitian twist curvature. The $F^2$ part of $a_4$ is
+\begin{equation}\label{cr:a4}
+ a_4(D_\rho^2)\big|_{F^2}
+   =\frac{2}{3(4\pi)^2}\int
+            \operatorname{tr}_{E_\rho}
+               \big(\rho(F_{\mu\nu})\rho(F^{\mu\nu})\big)\,d\mathrm{vol}.
+\end{equation}
+In the conventions of Theorem~\ref{cr:eh}, Hypothesis~Sn
+therefore gives the inverse coupling matrix
+\[
+ (g^{-2})_{ab}
+   =\kappa_{\rm tr}\operatorname{tr}_{E_\rho}(\rho(t_a)\rho(t_b)),
+ \qquad \kappa_{\rm tr}=\frac{8f(0)}{3(4\pi)^2}.
+\]
+\end{theorem}
+\begin{proof}
+Use $\{\gamma^\mu,\gamma^\nu\}=-2g^{\mu\nu}$, and write
+$D_\rho^2=-(\nabla^2+E)$, with the covariant Laplacian including
+the Christoffel correction. In the universal integrated coefficient
+of a Laplace-type operator, the only terms quadratic in $F$ are
+$(4\pi)^{-2}\operatorname{tr}(\tfrac12 E^2+
+\tfrac1{12}\Omega_{\mu\nu}\Omega^{\mu\nu})$
+\cite[Eq.~(4.28)]{cr:vassilevich}. The twist parts are
+$E_F=-\gamma^\mu\gamma^\nu\mathcal F_{\mu\nu}/2$ and
+$\Omega_F=\mathbf 1_{\rm spin}\otimes\mathcal F$. In an orthonormal
+frame the Clifford relations and cyclic trace give
+\[
+ \operatorname{tr}_{\rm spin}
+   (\gamma^\mu\gamma^\nu\gamma^\lambda\gamma^\sigma)
+ =4(\delta^{\mu\nu}\delta^{\lambda\sigma}
+ -\delta^{\mu\lambda}\delta^{\nu\sigma}
+ +\delta^{\mu\sigma}\delta^{\nu\lambda}).
+\]
+Indeed commuting the first factor past the next three and taking
+the trace reduces the formula to
+$\operatorname{tr}_{\rm spin}(\gamma^\mu\gamma^\nu)=-4\delta^{\mu\nu}$.
+Antisymmetry gives
+$\operatorname{tr}_{\rm spin}E_F^2=-2\mathcal F_{\mu\nu}\mathcal
+F^{\mu\nu}$ and $\operatorname{tr}_{\rm spin}\Omega_F^2=4\mathcal
+F_{\mu\nu}\mathcal F^{\mu\nu}$. Their weighted sum is
+$-\tfrac23\mathcal F_{\mu\nu}\mathcal F^{\mu\nu}$. Replacing
+$\mathcal F$ by $i\rho(F)$ and matching the Euclidean coefficient
+$1/(4g^2)$ proves the result.
+\end{proof}
+
+This is the usual mechanism of the spectral action
+\cite{n7:CC,cr:ccm}. The Dirac spinor in the heat calculation supplies
+the spin trace. Its twist is the internal list of Weyl representations,
+counted once each. Passing from the physical right-handed multiplet
+to its left-handed charge conjugate preserves quadratic traces, since
+$( -t^{\mathsf T})^2=(t^2)^{\mathsf T}$. Adding a common copy of the
+whole list rescales all coefficients equally. The calculation concerns
+a bosonic spectral action with one overall coefficient. A fermion
+determinant added to an action with independent bare gauge terms
+would leave those independent coefficients available.
+
+\begin{proposition}[The trace for Hypothesis~G]\label{cr:gtrace}
+Assume clauses G(i)--(iv). Per generation, on $S_L\oplus S_R$,
+\[
+ \operatorname{tr}T_{3L}^2=\operatorname{tr}T_{3R}^2
+ =\operatorname{tr}T_{15}^2=\operatorname{tr}(t_c^2)=2,
+ \qquad
+ \operatorname{tr}Y^2=\tfrac{10}{3},\quad
+ \operatorname{tr}(T_{3L}Y)=0,\quad
+ \operatorname{tr}Q^2=\tfrac{16}{3}.
+\]
+Here $t_c$ is any normalized colour generator. Under
+Hypothesis~Sn this gives
+$g_4=g_L=g_R$, or $g_3=g_L=\sqrt{5/3}\,g_Y$ after identifying the
+unbroken generators at tree level. Thus the angle is $3/8$.
+Three identical generations multiply all traces by three, and a
+neutral singlet contributes zero to the Standard Model traces.
+\end{proposition}
+\begin{proof}
+The $(4,2,1)$ and $(4,1,2)$ each contribute twice the
+fundamental $\SU(4)$ trace and contribute four doublets
+to their own weak factor. On the Standard Model multiplets of
+Theorem~\ref{thm:sm}(iv), the hypercharge trace in either chirality
+convention is
+\[
+ \begin{array}{c|rrrrrr}
+ & Q_L & u_R & d_R & L_L & e_R & \nu_R\\ \hline
+ \dim &6&3&3&2&1&1\\
+ Y &1/6&2/3&-1/3&-1/2&-1&0\\
+ \dim\,Y^2 &1/6&4/3&1/3&1/2&1&0
+ \end{array}
+\]
+where the row of charges is for physical chiralities. Its squares
+also equal $2+(2/3)2$ by orthogonality in \eqref{cr:angle}.
+Hypercharge is constant on each left doublet and $T_{3L}$ is
+traceless there, so the mixed trace vanishes. Add the two traces
+for $Q^2$ and use \eqref{cr:a4}.
+\end{proof}
+
+\begin{proposition}[The single trace is an input]\label{cr:weights}
+On a full complex matrix algebra a linear functional invariant
+under all unitary conjugations is proportional to the trace.
+Gauge invariance alone allows positive multiplet weights
+$w_Q,w_u,w_d,w_\ell,w_e$ in the Standard Model. They give
+\[
+ \frac{g_3^2}{g_L^2}
+ =\frac{3w_Q+w_\ell}{2w_Q+w_u+w_d}.
+\]
+The right side ranges over $(0,\infty)$. With a trace over a
+single scalar doublet of hypercharge $1/2$, one would instead
+obtain the electroweak angle $1/2$ and a vanishing colour form.
+\end{proposition}
+\begin{proof}
+Phase conjugation makes the functional on off-diagonal matrix
+units zero, while permutation conjugation equates the diagonal
+values. For gauge invariance, the operator of multiplet weights
+commutes with the gauge matrices and the weighted trace of
+generator pairs is invariant. The indicated ratio follows from
+indices $1/2$ per fundamental with the spectator multiplicities.
+For any target $r>0$, choose $w_Q=1$ and
+$w_\ell>\max(0,2r-3)$, and take
+$w_u=w_d=((3+w_\ell)/r-2)/2$. The single doublet has
+$\operatorname{tr}T_3^2=\operatorname{tr}Y^2=1/2$.
+\end{proof}
+
+\begin{remark}[Colour and hypercharge inputs]\label{cr:colourinput}
+Proposition~\ref{ub:traces} gives the colour multiplicity test
+and the two distinct angle functions for variable colour number.
+Their agreement at three colours uses the measured charges as
+inputs. The strong--weak equality condition singles out the same
+number within the single-trace model. Proposition~\ref{ub:anomalies}
+describes the three anomaly lines, the three anomaly planes with a
+charged singlet, and the $B-L$ freedom with Dirac Yukawa terms.
+The physical $Y$ used here is selected by the G(iv) condensate.
+A singlet Majorana mass allowed by all the relevant symmetries
+imposes hypercharge neutrality. The anomaly calculation still
+leaves the number of identical generations free.
+\end{remark}
+
+\subsection{One-loop matching to the measured couplings}
+
+\smallskip\noindent\textbf{Hypothesis Om (One-loop matching).}  Use mass-independent one-loop running with three identical Weyl
+generations, sharp tree-level matching and zero finite thresholds.
+Below an intermediate threshold use the Standard Model with one
+complex Higgs doublet. For a Pati--Salam stage use G(i)--(iv), with
+all components of the complex $(4,1,2)$ scalar and the real
+bidoublet of Proposition~\ref{prop:parity}(ii) active throughout
+the stage. Below this stage retain one Standard Model doublet
+and, optionally, gauge-singlet neutrinos. The splitting of scalar
+and fermion masses that realizes this threshold prescription is
+part of the matching model.
+
+
+\begin{proposition}[One-stage Standard Model test]\label{cr:onestage}
+Take the central inputs of Remark~\ref{rem:scales},
+$M_Z=91.1879\,\mathrm{GeV}$, $\hat s_Z^2=0.23122$,
+$\hat\alpha^{-1}(M_Z)=127.95$, $\alpha_s(M_Z)=0.1180$ and
+$M_{\mathrm P}=1.22\times10^{19}\,\mathrm{GeV}$. If all running
+between $M_Z$ and $M$ is with Standard Model content, the unique
+electroweak crossing scales and the radii inferred from their weak
+coupling using a round three-sphere are as follows. The masses and
+inverse radii in the table are in $\mathrm{GeV}$.
+\[
+ \begin{array}{c|r|r|r}
+ \sin^2\theta_W(M)&M&\alpha_2^{-1}(M)& R_3^{-1}\text{ from }g_2(M)\\\hline
+ 1/2 &5.35\times10^{20}&51.37&4.26\times10^{17}\\
+ 3/8 &1.03\times10^{13}&42.41&4.68\times10^{17}\\
+ 3/10&3.87\times10^{7} &36.12&5.08\times10^{17}\\
+ 3/7 &3.18\times10^{16}&46.46&4.47\times10^{17}\\
+ 1/3 &1.21\times10^{10}&39.01&4.88\times10^{17}
+ \end{array}
+\]
+These crossing scales fail the geometric identification $M=R_3^{-1}$.
+They also fail identification with the first scalar Kaluza--Klein
+mass on the three-sphere or on any of the corresponding
+round products above with the stated common or
+relative radii. For $3/8$, $3/10$, $3/7$, and $1/3$ the
+corresponding colour matching condition fails at the electroweak
+crossing. The $1/2$ row concerns the weak and clock factors alone
+and lies above $M_{\mathrm P}$.
+\end{proposition}
+\begin{proof}
+Write $\alpha_i=g_i^2/(4\pi)$, $\alpha_Y=g'^2/(4\pi)$ and use
+$A_i=\alpha_i^{-1}$. The standard one-loop gauge coefficient is
+\[
+ b_i=-\tfrac{11}{3}C_2(G_i)
+   +\tfrac23\sum_{\rm Weyl}T_i
+   +\tfrac13\sum_{\rm complex\ scalar}T_i
+   +\tfrac16\sum_{\rm real\ scalar}T_i ,
+\]
+where the Abelian index is the sum of charge squares and
+$C_2=0$ for the Abelian adjoint \cite{ub:mv83,GQW}.
+The traces of Proposition~\ref{cr:gtrace} give the per-generation
+indices $(10/3,2,2)$ for $(Y,2,3)$, the complex Higgs has
+indices $(1/2,1/2,0)$, and $C_2$ is $(0,2,3)$
+in the defining-generator convention. Thus
+$(b_Y,b_2,b_3)=(41/6,-19/6,-7)$. Integrating
+$d g_i/d\log\mu=b_i g_i^3/(16\pi^2)$ gives
+$A_i(\mu)=A_i(M_Z)-b_i x$, $x=\log(\mu/M_Z)/(2\pi)$.
+The photon matching identity gives
+$A_Y(M_Z)=(1-\hat s_Z^2)\hat\alpha^{-1}$,
+$A_2(M_Z)=\hat s_Z^2\hat\alpha^{-1}$ and
+$\sin^2\theta_W=A_2/(A_Y+A_2)$.
+
+For a candidate angle $S$, set $r=(1-S)/S$. The equation
+$A_Y(M)=r A_2(M)$ gives
+\begin{equation}\label{cr:crossing}
+ x_S=\frac{A_Y(M_Z)-rA_2(M_Z)}{b_Y-r b_2}.
+\end{equation}
+The denominator is positive for $0<S<1$. All displayed solutions
+have $x_S>0$ and positive inverse couplings. The gauge term gives
+$R_3^{-1}=\bar M_{\mathrm P}\sqrt{4\pi/A_2(M)}/\sqrt8$.
+For a round $S^d_R$ the first scalar mass is $\sqrt d/R$
+\cite[Ch.~III, sphere spectrum]{cr:chavel}. In fact the restricted
+homogeneous harmonic polynomials of degree $l$ have eigenvalue
+$l(l+d-1)/R^2$ by the polar-coordinate Laplacian. These
+restrictions span a dense subspace since Euclidean polynomials
+decompose into harmonic terms times powers of the squared norm
+and separate the sphere's points. On products the first mass
+is the minimum of the first masses of the factors, as the
+Laplacian adds on a tensor product of eigenfunctions. In the
+four Pati--Salam geometries the ratio of this minimum to
+$R_3^{-1}$ lies between $\sqrt7/2$ and $\sqrt3$, while the
+corresponding $M/R_3^{-1}$ is at most $0.072$.
+At the $1/2$ crossing $M/R_3^{-1}>10^3$ for one round
+three-sphere or the equal-radius threefold product.
+
+For the Pati--Salam embeddings, the colour condition at a
+one-stage crossing is $A_3=q_4 A_2$. At the $3/8$, $3/10$,
+$3/7$, and $1/3$ crossings respectively,
+$A_3-q_4A_2$ is approximately $-5.58,-49.32,22.55,-29.20$.
+Each is nonzero, and \eqref{cr:crossing} is unique. The weak
+and colour couplings with $q_4=1$ cross at
+$9.71\times10^{16}\,\mathrm{GeV}$, where $S\simeq0.43638$.
+At $M_{\mathrm P}$ one finds $S\simeq0.47133$.
+Using $\alpha_s=0.1177$ instead gives
+$A_3\simeq36.85$ at the $3/8$ crossing and shifts the weak--colour
+crossing to $9.37\times10^{16}\,\mathrm{GeV}$.
+\end{proof}
+
+\begin{proposition}[Threshold residuals and a two-input prediction]\label{cr:thresholds}
+In the one-stage model, finite shifts $\Delta_i$ of $A_i(M)$
+that implement a prescribed matching with $A_Y=rA_2$ and
+$A_3=q_4A_2$ obey
+\[
+ \Delta_Y-r\Delta_2=rA_2-A_Y,\qquad
+ \Delta_3-q_4\Delta_2=q_4A_2-A_3 .
+\]
+At the weak--colour crossing with $q_4=1$, the first residual
+is $17.64$ for $S=3/8$ and $-13.71$ for $S=1/2$.
+With $S=3/8$ and $q_4=1$, fitting only the measured
+$\alpha_s$ and $\hat\alpha$ instead gives
+$M=6.79\times10^{14}\,\mathrm{GeV}$ and a low-energy angle
+$0.20756$. The angle differs from the measured central value
+by $0.02366$.
+\end{proposition}
+\begin{proof}
+Substitute $A_i+\Delta_i$ into the matching equations. For the
+two-input fit, use the sum $A_Y(M_Z)+A_2(M_Z)=127.95$.
+Writing $x=\log(M/M_Z)/(2\pi)$ gives
+\[
+ x=\frac{127.95-(1+r)A_3(M_Z)}
+          {b_Y+b_2-(1+r)b_3},\qquad
+ \hat s_{\rm pred}^2=\frac{A_3(M_Z)+(b_2-b_3)x}{127.95}.
+\]
+Here $r=5/3$. The residual quoted as approximately $3.664$
+with the older inputs $M_Z=91.1876$\,GeV, $\hat s_Z^2=0.23129$, $\hat\alpha^{-1}=127.930$
+(and $\alpha_s=0.1180$) is a different
+inverse-coupling comparison. Indeed, let $A_1=(3/5)A_Y$ and
+$b_1=(3/5)b_Y$ in that data set. At
+$x=(A_1(M_Z)-A_3(M_Z))/(b_1-b_3)$, the residual $A_2-A_3$
+is $3.66403$. At the $A_1=A_2$ crossing it is $5.59689$.
+For three affine inverse couplings the max-minus-min spread is
+piecewise affine with breakpoints only at pairwise intersections.
+Inspection of the three crossing values $5.59689,3.66403,10.60976$,
+and growth towards either end, gives the minimum spread $3.66403$
+for those inputs. Thus the residual's meaning depends on the
+scale and the normalization specified for it.
+\end{proof}
+
+\begin{proposition}[Direct Pati--Salam breaking below the matching scale]\label{cr:twostage}
+Within Hypothesis~Om, let $M_I$ be the breaking
+scale of Theorem~\ref{thm:sm} and let $M_U$ be the scale at which
+$A_R=A_L$ and $A_4=q_4 A_L$. With the real bidoublet the unique
+formal solutions are
+\[
+ \begin{array}{c|r|r|l}
+ q_4 & M_I\;(\mathrm{GeV})& M_U\;(\mathrm{GeV})&\text{test}\\\hline
+ 1/2 & 8.98\times10^{13}&3.16\times10^{8} &M_U<M_I\\
+ 1 &4.21\times10^{13}&2.65\times10^{15}&
+             A_L(M_U)=45.21\\
+ 3/2 &1.29\times10^{13}&1.46\times10^{26}&M_U>M_{\mathrm P}\\
+ 2 &1.63\times10^{12}&1.22\times10^{45}&M_U>M_{\mathrm P}
+ \end{array}
+\]
+The $q_4=1$ fit has a common coupling about $0.527$.
+If this matching is also required to arise from the round
+metric of Proposition~\ref{cr:s7}, its coupling implies
+$R_3^{-1}=4.54\times10^{17}\,\mathrm{GeV}$, about $171$ times
+$M_U$. The first scalar mass is $\sqrt3/R_3$ for this radius ratio.
+If the bidoublet is complexified, $q_4=1$ instead gives
+$M_I=4.22\times10^{13}\,\mathrm{GeV}$ and
+$M_U=2.41\times10^{15}\,\mathrm{GeV}$.
+\end{proposition}
+\begin{proof}
+For $(4,L,R)$, in each generation the Weyl indices are $(2,2,2)$.
+The real bidoublet contributes $(0,1,1)$ as a real index,
+and the complex breaking multiplet contributes $(1,0,2)$ as a
+complex index. With adjoint Casimirs $(4,2,2)$ the beta
+coefficients are $\beta^{\rm PS}=(-31/3,-19/6,-5/2)$.
+A complex bidoublet adds $1/6$ to each weak coefficient.
+At $M_I$, the tree-level matching equations are
+$A_4=A_3$, $A_L=A_2$, and $A_R=A_Y-(2/3)A_3$ by
+\eqref{cr:angle}. With $x=\log(M_I/M_Z)/(2\pi)$,
+$y=\log(M_U/M_I)/(2\pi)$, set
+\[
+ C=\begin{pmatrix} A_3\\ A_2\\ A_Y-(2/3)A_3\end{pmatrix}_{M_Z},
+ \quad
+ B=\begin{pmatrix}-b_3\\-b_2\\-b_Y+(2/3)b_3\end{pmatrix},
+ \quad
+ H=\begin{pmatrix}1&-q_4&0\\0&-1&1\end{pmatrix}.
+\]
+Then the upper boundary is $H(C+Bx-\beta^{\rm PS}y)=0$.
+For the real bidoublet the determinant of
+$(HB,-H\beta^{\rm PS})$ is $(1322-399q_4)/9$,
+which is nonzero for the four choices in the table.
+For the complex bidoublet it is $(1322-377q_4)/9$,
+also nonzero at $q_4=1$. Substitution gives the table
+and, at the admissible real fit, the inverse couplings
+are positive throughout both stages since their one-loop
+paths are affine on each interval with positive endpoints.
+
+For downward evolution, start from $(q_4 A_U,A_U,A_U)$,
+add $\beta^{\rm PS} y$ at $M_I$, use the three matching
+equations there, then add $(b_Y,b_2,b_3)x$ at $M_Z$.
+This returns $(A_Y,A_2,A_3)=(98.365401,29.584599,8.474576\ldots)$,
+or $\hat s_Z^2=0.23122$ with the input electromagnetic and strong
+couplings. Both scales and $A_U$ are fitted to the three measured
+couplings. Using $\alpha_s=0.1177$ gives the real-bidoublet fit
+$(M_I,M_U)=(4.18\times10^{13},2.59\times10^{15})\,\mathrm{GeV}$.
+The radius comparison uses the fitted common weak coupling in
+the formula of Proposition~\ref{cr:s3}.
+\end{proof}
+
+\begin{proposition}[The adjoint-breaking spectrum of Paper~II]\label{cr:paperspectrum}
+Apply the step spectrum of Hypothesis~Ps in
+Section~\ref{sec:unification} with upper matching
+$A_R=A_L=A_U$, $A_4=q_4A_U$. For the real bidoublet the
+equal-coupling fit of Theorem~\ref{ub:fit} has
+\[
+ (M_R,M_{\rm PS},A_U)\simeq
+ (1.293\times10^{10}\,\mathrm{GeV},
+  9.707\times10^{16}\,\mathrm{GeV},47.0233).
+\]
+The implied round $S^3$ inverse radius is
+$4.45\times10^{17}\,\mathrm{GeV}$, about $4.58$ times $M_{\rm PS}$.
+For the complex bidoublet the fit has
+$M_R\simeq2.580\times10^{10}\,\mathrm{GeV}$,
+$M_{\rm PS}\simeq5.165\times10^{16}\,\mathrm{GeV}$,
+and $R_3^{-1}/M_{\rm PS}\simeq8.68$. Neither fit places the
+upper matching at the first scalar Kaluza--Klein mass.
+In the real case $q_4=1/2,3/2,2$ give no ordered fit.
+If the real model is allowed to fit a continuous $q_4$ as an
+extra parameter, the geometric condition $M_{\rm PS}=R_3^{-1}$
+can be met at $q_4\simeq1.01933$ with $M_R\simeq2.46\times10^9$
+and $M_{\rm PS}\simeq4.41\times10^{17}$, in $\mathrm{GeV}$.
+Fitting to the first scalar mass instead gives $q_4\simeq1.02616$,
+$M_R\simeq1.35\times10^9\,\mathrm{GeV}$, and
+$M_{\rm PS}\simeq7.62\times10^{17}\,\mathrm{GeV}$.
+\end{proposition}
+\begin{proof}
+In the notation of Proposition~\ref{ub:matching} and
+Theorem~\ref{ub:fit}, the shifted upper boundary changes the
+downward equation to
+\[
+ A^0=A_U((3+2q_4)/5,1,q_4)^{\mathsf T}+Bx+Cy .
+\]
+Indeed the projected hypercharge at the upper threshold reads
+$(3/5)A_R+(2/5)A_4$, and the weak and colour entries are
+$A_L$ and $A_4$. For the real bidoublet the difference between
+weak and colour slopes is $23/6$ on both intervals.
+Let $L=x+y$ and $D_{ij}=A_i^0-A_j^0$. Solving gives
+\[
+ A_U=\frac{23 A_L^0+19D_{L3}}{42-19q_4},
+ \quad L=\tfrac6{19}(A_U-A_L^0),
+ \quad x=\frac{D_{1L}-\tfrac25(q_4-1)A_U-\tfrac{46}{15}L}
+                  {21/5}, \qquad y=L-x.
+\]
+For $q_4=1/2$ this gives $y\simeq-6.575$, and for $q_4=3/2,2$
+it gives $x\simeq-8.458,-74.265$, respectively. The first
+case reverses the thresholds and the last two put $M_R<M_Z$.
+For $q_4=1$, insert the two fits of Theorem~\ref{ub:fit}
+into $R_3^{-1}=\bar M_{\mathrm P}\sqrt{4\pi/A_U}/\sqrt8$.
+The first scalar mass is $\sqrt3/R_3$ at that radius ratio.
+The displayed downward equation recovers the three low-energy
+couplings of Proposition~\ref{cr:twostage} with the same inputs.
+
+For the continuous-radius fits, take the brackets
+$[1.0193,1.0194]$ for the inverse radius and $[1.026,1.027]$
+for the first scalar mass. In both, $A_U$ and $L$ strictly
+increase and $x$ decreases by the displayed formulas.
+At the endpoints $x,y>0$, so monotonicity gives this throughout.
+Also $2q_4<7/3$ on both brackets, making the first scalar
+mass $\sqrt3/R_3$. The increasing $M_Z e^{2\pi L}$ crosses
+the respective decreasing scale inside each bracket, as the
+endpoint differences have opposite signs. Substitution gives
+the stated roots. Each determines the fitted ratio
+$R_7/R_3=\sqrt{2q_4}$. The metric stabilization and fermion
+constraints of Proposition~\ref{cr:obstructions} still apply.
+\end{proof}
+
+\subsection{Relation to comparison dynamics}
+
+\smallskip\noindent\textbf{Hypothesis Cc (Comparison action and clock).}  One can pose a four-dimensional model with a comparison complex
+as regulator, link holonomies for
+$\mathfrak u(1)_Y\oplus\mathfrak{su}(2)_L\oplus\mathfrak{su}(3)_C$,
+the shared Weyl representation of Proposition~\ref{cr:gtrace},
+and a scalar field mapping left modules to right modules by
+Yukawa intertwiners. A sum over fields and comparison geometries
+would weight the gauge plaquettes, the scalar and fermion terms,
+and the Regge hinge action. An independent clock hypothesis
+identifies a physical step length $\ell_{\mathrm P}$ and
+frequency $\nu_0$ by $c=\ell_{\mathrm P}\nu_0$. It posits a square
+budget $\nu_\tau^2+\nu_{\rm move}^2+\nu_{\rm load}^2=\nu_0^2$
+with nonnegative rates. A comparison of the terms in this budget
+with stress energy requires an action and a continuum calibration.
+
+
+\begin{proposition}[What a plaquette trace determines]\label{cr:plaquette}
+If a unitary plaquette holonomy has logarithm $iH$, with $H$
+Hermitian, then
+\[
+ \operatorname{Re}\operatorname{tr}(1-e^{iH})
+ =\tfrac12\operatorname{tr}(H^2)+\mathcal E,\qquad
+ |\mathcal E|\le \tfrac1{24}\operatorname{tr}(H^4).
+\]
+For a smooth connection on a small square of side $a$ this gives
+$a^4\operatorname{tr}(F_{\mu\nu}^2)/2+O(a^5)$ in that
+plaquette's plane. A single Wilson weight and shared representation
+therefore give the same relative tree-level form as
+Theorem~\ref{cr:heat}, provided the plaquette counting and geometry
+treat the plane directions uniformly. For involutions $A,B,C$,
+the raw edge word $(AB)(BC)(CA)$ instead equals the identity.
+\end{proposition}
+\begin{proof}
+Diagonalize $H$ and apply Taylor's theorem through degree three
+to $1-\cos h$ for each eigenvalue $h$. For a smooth connection the
+small-plaquette expansion of Paper~I gives
+$H=a^2 F_{\mu\nu}+O(a^3)$ \cite[Prop.~9.8]{PaperI}. Squaring it gives a trace
+$a^4\operatorname{tr}(F_{\mu\nu}^2)+O(a^5)$, and the Taylor
+remainder is $O(a^8)$. The raw word reduces to $AB^2C^2A=A^2$.
+\end{proof}
+
+\begin{remark}[Scope of formalized comparison identities]\label{cr:formal}
+The ring identity $Uf-fU=(\widetilde f-f)U$ under
+$Uf=\widetilde f U$ applies to a link and a transported scalar.
+A skew-adjoint right-unitary matrix squares to $-1$.
+Anchored Abelian link data have a finite-graph quotient
+classification, and the squaring cover of the circle has unique
+path lifting with a once-around lift ending at the opposite
+point. On a full simplex an additive two-cochain is an edge
+coboundary exactly when its tetrahedron defects vanish.
+The Lagrange--Gram identity expresses the two-vector Gram
+determinant as half the sum of squared $2$-by-$2$ minors over
+ordered index pairs.
+These are algebraic, topological or finite-dimensional identities
+with formal counterparts. Fibrewise Berry holonomy and
+spacetime connection curvature concern different base spaces.
+A fixed Berry connection, an edge identity, or the existence
+of an invariant finite probability supplies no action coefficient
+for a dynamical spacetime connection. A choice of a Hamiltonian,
+a path measure or a limiting procedure enters any derivation
+of dynamics from products of comparisons.
+\end{remark}
+
+\begin{remark}[Scalar and clock dynamics]\label{cr:boundary}
+The tree-level gauge masses follow from the scalar kinetic term
+by Theorem~\ref{thm:gauge}(iv) and Example~\ref{ex:ew}.
+The Yukawa mass and the difference between chiral coupling and
+positive--negative energy beating are discussed in
+Remark~\ref{ub:arclimits}. The clock-rate relation at zero
+additional load is Theorem~\ref{ub:clock}. Its exterior
+Schwarzschild comparison is Proposition~\ref{ub:lapse}.
+These relations neither convert a chiral coupling into a clock
+rate nor determine a gauge kinetic coefficient.
+\end{remark}
+
+\begin{proposition}[Vacuum topology depends on the breaking]\label{cr:topology}
+For the electroweak doublet orbit of Theorem~\ref{thm:gauge},
+the vacuum manifold is $S^3$ and its $\pi_2$ vanishes. The
+Hopf clock quotient is $S^2$, with $\pi_2=\mathbb Z$. For the
+Pati--Salam breaking in Theorem~\ref{thm:sm}(ii)--(iii),
+the vacuum coset has $\pi_2=\mathbb Z$.
+\end{proposition}
+\begin{proof}
+$\mathrm U(2)$ is transitive on the unit doublets and the
+stabilizer is $\mathrm U(1)_Q$. For the Pati--Salam coset take
+the simply connected cover $\widetilde G=\SU(4)\times
+\SU(2)\times\SU(2)$. The stabilizer there is
+$\widetilde H\simeq\mathrm U(3)\times\SU(2)$, containing
+the common central subgroup by which both groups in the coset
+are divided. The coset is unchanged by taking this cover.
+Induction with $\SU(n-1)\to\SU(n)\to
+S^{2n-1}$ gives $\pi_2(\widetilde G)=0$ and simple connectivity,
+starting with $\SU(2)\cong S^3$. The homotopy sequence
+of the stabilizer fibration gives
+$\pi_2(\widetilde G/\widetilde H)\cong\pi_1(\widetilde H)$.
+The determinant fibration with simply connected
+$\SU(3)$ shows the latter is $\mathbb Z$.
+\end{proof}
+
+\begin{remark}[Baryon number and topological sectors]\label{cr:baryon}
+The direct-sum Standard Model gauge algebra omits the
+$\SU(5)$ leptoquark gauge generators \cite{cr:gg}.
+The extended gauge stage and the higher-dimensional
+baryon-number violating operators require separate analysis
+as in Proposition~\ref{ub:decay}. The three-generation weak
+instanton selection rule and the distinction between its
+amplitude, modulus squared and dimensionful rate are given in
+Remark~\ref{ub:topology}. The monopole test for the single
+Pati--Salam breaking in Proposition~\ref{cr:topology}
+complements the adjoint-breaking result in that remark.
+\end{remark}
+
+\begin{conjecture}[A comparison regulator for the trace]\label{cr:conjecture}
+There is a local comparison-complex Dirac regulator with the
+prescribed chiral matter and continuum gauge transport, whose
+bosonic gauge action has a scaling limit with one common trace
+coefficient after matching. The continuum coefficient
+\eqref{cr:a4} and the small-plaquette limit of
+Proposition~\ref{cr:plaquette} give the same candidate quadratic
+form. A positive regulator construction would have to control
+fermion doubling, the convergence of the local spectral
+coefficient, and the possible appearance of independent
+finite terms for the gauge factors.
+\end{conjecture}
+
+\begin{remark}[Continuum and matching programme]\label{cr:programme}
+A comparison-based derivation must produce the extended or
+direct-sum gauge action, its chiral spectrum and the number of
+generations, the scalar potential and Yukawa matrices, and the
+physical matching scale and finite shifts from a specified
+regulator. Charged Kaluza--Klein modes and stabilization
+sources enter that calculation if KK is used. A four-dimensional
+comparison action with internal fibres instead needs a
+continuum renormalization analysis. Its gravitational term
+could start from the Euclidean Regge expression
+$\sum_h A_h\delta_h/(8\pi G_N)$ in four dimensions, with hinge
+area $A_h$ and signed deficit $\delta_h=2\pi-\sum_{s\ni h}\theta_{s,h}$
+\cite{ub:regge}. A Lorentzian regulator must also specify the hinge holonomies for
+its allowed signatures. The additive cochain obstruction in
+Remark~\ref{cr:formal} and the clock budget in
+Hypothesis~Cc and the conditional result of
+Theorem~\ref{ub:einstein} leave open the emergence of a
+Lorentzian spin-two field, its coupling to a conserved stress
+tensor, and the cosmological constant. Induced gravity and
+local horizon thermodynamics supply independent continuum
+mechanisms with their own assumptions \cite{cr:sakharov,n1-jacobson}.
+\end{remark}
+
+\begin{remark}[relation to Sections~\ref{sec:unification} and \ref{sec:triality}]\label{rem:crreconcile}
+All three sections use the inputs of Remark~\ref{rem:scales} ($M_Z=91.1879$\,GeV, $\hat s_Z^2=0.23122$, $\hat\alpha^{-1}=127.95$,
+$\alpha_s=0.1180$, alternatively $0.1177$) and one-loop running with step matching.  With Standard Model content
+the $\tfrac38$ crossing is $1.03\times10^{13}$\,GeV and the weak--colour crossing $9.71\times10^{16}$\,GeV ($9.37\times10^{16}$ for $0.1177$),
+the logarithms $a\simeq4.05$, $5.51$ of Remark~\ref{tr:running}.  Proposition~\ref{cr:paperspectrum} reuses the fit of
+Theorem~\ref{ub:fit} under Hypothesis~Ps, with the same numbers.  Proposition~\ref{cr:twostage} uses a different
+spectrum (direct breaking, Hypothesis~Om) and therefore different scales ($4.21\times10^{13}$ and $2.65\times10^{15}$\,GeV); both are
+fits.  On topology: the electroweak orbit $S^3$ has $\pi_2=0$, while both Pati--Salam vacuum cosets, the adjoint
+$\C P^3$ of Remark~\ref{ub:topology} and the direct coset of Proposition~\ref{cr:topology}, have $\pi_2=\Z$; the electroweak
+statement does not extend to the Pati--Salam transition.
+\end{remark}
+
+\begin{remark}[status of the coupling problem]\label{rem:crstatus}
+The open problem on $g'/g$ stays open.  Two natural mechanisms are now analysed, each with its exact obstruction.
+(i) \emph{Connection metric} (Hypothesis~KK): a round $S^3$ gives $g_L=g_R$ (Theorem~\ref{cr:eh}, Proposition~\ref{cr:s3});
+it does not give hypercharge from the Hopf quotient, because the whole right clock group fixes every quotient
+point and its Killing field vanishes; transport invariance or a shared clock does not fix relative
+coefficients (independent positive factors on the ideals are invariant; Proposition~\ref{cr:weights}); on $S^7\times S^3$
+equal radii give $\tfrac37$, the value $\tfrac38$ needs $R_7=\sqrt2R_3$, and the pure Einstein stationary ratio is $R_7=\sqrt3R_3$
+(angle $\tfrac13$, with an unstable volume mode); purely metric fermions are not chiral \cite{cr:wittenkk}.
+(ii) \emph{Heat kernel} (Hypothesis~Sn): one fermion trace gives the common normalisation and $\tfrac38$ under
+G(i)--(iv) (Theorem~\ref{cr:heat}, Proposition~\ref{cr:gtrace}), as in the spectral action \cite{n7:CC,cr:ccm}; the
+single trace is itself an input (the weighted-trace family reaches every positive ratio).  One-stage
+equal-coupling matching misses the colour inverse coupling by $5.58$ and fixes neither an absolute scale nor
+all three couplings; the Pati--Salam fits are fits, and the fixed radius ratios do not place the matching at
+a Kaluza--Klein scale.
+\end{remark}
+
+%=====================================================================================
 \paperpart{Part V.  Status, tests and open problems}
 
 %=====================================================================================
@@ -7230,7 +8130,8 @@ restart converse, affine unread maps from no-signalling, and the Born threshold 
 for the invariant auxiliary law ([R], Theorems~\ref{thm:sorigidity}, \ref{thm:sosphere}, \ref{thm:sosimplex}), and the inverse-tick
 bound ([Tr]); the rapidity--entanglement budget for three qubits, the speed limits with their
 sharp constants ([Cd]) and the Tsirelson bound from the composite inputs (Section~\ref{sec:bounds}); measurement-based
-universality and exact recovery for round-trip-closed codes ([Ac], [Sub]); the triality count of three
+universality and exact recovery for round-trip-closed codes ([Ac], [Sub]); the gauge kinetic form of a connection metric and the
+heat-coefficient trace normalisation (under KK and Sn, Section~\ref{sec:couplings}); the triality count of three
 eight-dimensional modules and the obstruction to a colour--weak subalgebra of $\mathfrak{so}(8)$ (Section~\ref{sec:triality}); the two-scale one-loop fit
 under [Ps], the clock proper time under [Ck], the cap first law, and linearised Einstein equations under
 [Eq] (Section~\ref{sec:unification}); for finite memories, Gram extension and weak nesting ([Gw]), the reset bound (Gibbs bath, joint
@@ -7239,7 +8140,7 @@ group, its breaking and the hypercharges (C0--C3, [Span], G(i)--(iv)); $\sin^2\t
 the round-$S^4$ couplings $\kappa_V=\sqrt{1-\xi}$, $\kappa_{2V}=1-2\xi$ (F, F$_{\mathrm g}$(a), F$_{\mathrm H}$); the obstruction for the ungauged back-reacting centre field and the zero-stress flat vacuum (E, F, GR; F$_{\mathrm g}$).
 \emph{Inputs not derived}: [Bil], [Bil$_\cL$], [Span], [Loc], [O], [N], Postulates C1(b), C2, C3, [Sub], the reading
 inputs [L], [W], [Comp], [T], and [B] or, equivalently, [Cl] with [NT], the hypotheses $w\ge0$, $w=f(\beta_N)$ and (a)--(c) of
-Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), [R], [Tr], [Cd], [Bs], [Gw], [Ac], [Lq], [Sb], [Ps], [Ea], [Ck], [Gl], [Eq], [Ue], [Ca], Hypotheses Ap, U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm H}$ (with F$_{\mathrm{Hf}}$), F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
+Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), [R], [Tr], [Cd], [Bs], [Gw], [Ac], [Lq], [Sb], [KK], [Sn], [Om], [Cc], [Ps], [Ea], [Ck], [Gl], [Eq], [Ue], [Ca], Hypotheses Ap, U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm H}$ (with F$_{\mathrm{Hf}}$), F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
 [Bil$_\cL$], [Loc], [O] and [N] for the composite.
 \emph{Open}: a unit of length; $G_Nv^2$; Hypothesis~GR with sources and its consistency with
 Hypothesis~E; the ratio $g'/g$; the number of structures; three generations; scales, masses and
@@ -7743,6 +8644,7 @@ Finite memory & [M]: extension, gluing and recovery criteria; [S]: the reset bou
 Single outcomes & [M]: martingale equivalence, threshold and simplex laws, inverse-tick bound under [Tr]; the Born statistics are those of standard quantum mechanics, so no example distinguishes; an objective-collapse completion would be [X] through recoherence tests (Example~\ref{ex:sorecoherence}), none is fixed here\\
 Closed register and internal clocks & [M]: finite identities and bounds; Conjecture~\ref{conj:cueth} is a mathematical statement that computation at larger $n$ could refute; [S]: the conditional dynamics is that of standard quantum mechanics with a Page--Wootters reading; the physical readings [U], [A] are not tested here\\
 Topological particles under F$_{\mathrm S}$ & [M]: bounds and topology; [X]: a particle identification (Hypothesis~P) would be testable once $v$, $e_{\mathrm S}$ and the quantisation character are fixed; none is fixed here\\
+Coupling ratios from the total space: Kaluza--Klein curvature identity and Killing integrals, heat-coefficient trace normalisation, sphere radii, one-stage and two-stage running tests, vacuum topology & theorem under KK, Sn, Om (Thms.~\ref{cr:eh}, \ref{cr:heat}; Props.~\ref{cr:s3}, \ref{cr:s7}, \ref{cr:onestage}, \ref{cr:twostage}, \ref{cr:topology}); Hopf-quotient source, transport-invariance and equal-radius readings refuted; $g'/g$ open; regulator: conjecture (Conj.~\ref{cr:conjecture})\\
 Three structures: triality count & theorem: three real irreducible eight-dimensional modules of the octonionic related-triples group (Thm.~\ref{tr:main}); separate bidoublet and colour four-space identifications; simultaneous identification with G refuted (Prop.~\ref{tr:obstruction}); G remains an input; [Sb] hypothesis\\
 Three structures, generations, scales, masses, $g'/g$ & open; not derived\\
 \bottomrule
@@ -7805,7 +8707,9 @@ operations) is stronger than needed.
 \begin{problem}
 Is there a principle, formulated in $(M,\hp{\cdot}{\cdot}{\cdot},\kappa)$, that fixes the ratio $g'/g$ of
 Theorem~\ref{thm:gauge} (the missing step is stated after Proposition~\ref{prop:symmetric}), or the
-permutation-symmetric generator for $N\ge4$?
+permutation-symmetric generator for $N\ge4$?  Section~\ref{sec:couplings} analyses the two natural
+mechanisms, a connection metric on the total space and a single fermion trace in a heat coefficient, and
+states the obstruction to each (Remark~\ref{rem:crstatus}); the problem is unchanged.
 \end{problem}
 \begin{problem}
 Derive Hypothesis~GR in the presence of sources, or another dynamics for the metric of $\cD$, from the
@@ -7933,7 +8837,9 @@ Proposition~\ref{prop:cpcoin}; own checks of the frame identity, the example sta
 rotating-frame cancellation, the kernel bound and, by optimisation over product states, the maximality
 of the symmetric coin) and \texttt{check\_triality.py} (Section~\ref{sec:triality}: seven groups;
 own construction of the octonions by Cayley--Dickson doubling, the infinitesimal triality, the slot
-weights, the colour centralisers, the $\mathrm{Spin}(10)$ branching and the two logarithms).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
+weights, the colour centralisers, the $\mathrm{Spin}(10)$ branching and the two logarithms) and \texttt{check\_couplings.py} (Section~\ref{sec:couplings}: six groups; own Monte Carlo Killing
+integrals, the Clifford computation of the heat coefficient, the traces, the radius table, the stationary
+ratio and its unstable mode, and all running numbers recomputed).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
 \ref{thm:product}; Propositions~\ref{prop:relative}, \ref{prop:solder}, \ref{prop:pairsu3}, \ref{prop:angle38},
 \ref{prop:universal}, \ref{prop:cosmo}, \ref{prop:solderunique}, \ref{prop:centre}, \ref{prop:superselection} (with its
 classification of weights and free split), \ref{prop:rtclosed}, \ref{prop:symsector}, \ref{prop:subops},
@@ -8711,6 +9617,26 @@ contributions.
 \bibitem{tr:TodorovDV} I.~Todorov and M.~Dubois-Violette, Deducing the symmetry of the standard model from the automorphism and structure groups of the exceptional Jordan algebra, Int.\ J.\ Mod.\ Phys.\ A \textbf{33}, 1850118 (2018).
 
 \bibitem{tr:BoyleFarnsworth} L.~Boyle and S.~Farnsworth, The standard model, the Pati--Salam model, and `Jordan geometry', New J.\ Phys.\ \textbf{22}, 073023 (2020).
+
+\bibitem{cr:oneill} B.~O'Neill, The fundamental equations of a submersion, Michigan Math.\ J.\ \textbf{13}, 459--469 (1966).
+
+\bibitem{cr:wittenkk} E.~Witten, Search for a realistic Kaluza--Klein theory, Nucl.\ Phys.\ B \textbf{186}, 412--428 (1981).
+
+\bibitem{cr:duff} M.~J.~Duff, B.~E.~W.~Nilsson and C.~N.~Pope, Kaluza--Klein supergravity, Phys.\ Rep.\ \textbf{130}, 1--142 (1986).
+
+\bibitem{cr:cremmerscherk} E.~Cremmer and J.~Scherk, Spontaneous compactification of extra space dimensions, Nucl.\ Phys.\ B \textbf{118}, 61--66 (1977).
+
+\bibitem{cr:lawson} H.~B.~Lawson, Jr.\ and M.-L.~Michelsohn, \emph{Spin Geometry}, Princeton University Press (1989), Ch.~II, \S8.
+
+\bibitem{cr:chavel} I.~Chavel, \emph{Eigenvalues in Riemannian Geometry}, Academic Press (1984), Ch.~III.
+
+\bibitem{cr:vassilevich} D.~V.~Vassilevich, Heat kernel expansion: user's manual, Phys.\ Rep.\ \textbf{388}, 279--360 (2003), arXiv:hep-th/0306138.
+
+\bibitem{cr:ccm} A.~H.~Chamseddine, A.~Connes and M.~Marcolli, Gravity and the standard model with neutrino mixing, Adv.\ Theor.\ Math.\ Phys.\ \textbf{11}, 991--1089 (2007), arXiv:hep-th/0610241.
+
+\bibitem{cr:gg} H.~Georgi and S.~L.~Glashow, Unity of all elementary-particle forces, Phys.\ Rev.\ Lett.\ \textbf{32}, 438--441 (1974).
+
+\bibitem{cr:sakharov} A.~D.~Sakharov, Vacuum quantum fluctuations in curved space and the theory of gravitation, Dokl.\ Akad.\ Nauk SSSR \textbf{177}, 70--71 (1967), English transl.\ Sov.\ Phys.\ Dokl.\ \textbf{12}, 1040--1041 (1968).
 
 \bibitem{CLT74} J.~M.~Cornwall, D.~N.~Levin, and G.~Tiktopoulos, Derivation of gauge invariance from high-energy unitarity bounds on the S matrix, Phys.\ Rev.\ D \textbf{10}, 1145 (1974); Erratum \textbf{11}, 972 (1975).
 

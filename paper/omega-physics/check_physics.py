@@ -3009,4 +3009,124 @@ okT &= abs(lg[0] - 4.0506) < 1e-3 and abs(lg[2] - 5.5070) < 1e-3
 print(f"     own octonion code: norm and Moufang identities, unique infinitesimal triality (rank 56), slot weights 8_v, 8_- (A), 8_+ (C), G2 dim 14, su(3) and su(4)_J colour centralisers 2-dim abelian, 16_+ -> (4,2,1)+(4bar,1,2), logs 4.05, 5.51: {okT}")
 results.append(okT)
 
+# =====================================================================================
+# 55. (Round 32) coupling ratios: KK Killing integrals, heat-kernel trace, traces, running tests
+spc = importlib.util.spec_from_file_location("check_couplings", os.path.join(here, "check_couplings.py"))
+mc_ = importlib.util.module_from_spec(spc); buf = io.StringIO()
+try:
+    with contextlib.redirect_stdout(buf):
+        spc.loader.exec_module(mc_)
+        for fn in ("check_geometry", "check_heat_and_matter", "check_standard_model", "check_direct_pati_salam",
+                   "check_paper_spectrum", "check_comparison_identities"): getattr(mc_, fn)()
+    okc_ = True
+except Exception as ex:
+    okc_ = False; print("     check_couplings error:", repr(ex))
+print(f"     check_couplings.py: all six groups passed: {okc_}")
+results.append(okc_)
+rs5 = np.random.default_rng(55)
+# Killing integrals on S^3_R (unit quaternions, metric R^2): left fields e_a q/2, right fields -q e_a/2
+Rr = 1.7; qs = rs5.normal(size=(200000, 4)); qs /= np.linalg.norm(qs, axis=1)[:, None]
+def qmulv(a, b):
+    a0, a1, a2, a3 = a.T; b0, b1, b2, b3 = b.T
+    return np.stack([a0*b0 - a1*b1 - a2*b2 - a3*b3, a0*b1 + a1*b0 + a2*b3 - a3*b2, a0*b2 - a1*b3 + a2*b0 + a3*b1, a0*b3 + a1*b2 - a2*b1 + a3*b0], 1)
+ea = [np.tile(v, (len(qs), 1)) for v in np.eye(4)[1:]]
+Lf = [qmulv(e, qs)/2 for e in ea]; Rf = [-qmulv(qs, e)/2 for e in ea]
+ILL = np.array([[np.mean(np.sum(a*b, 1))*Rr**2 for b in Lf] for a in Lf]); ILR = np.array([[np.mean(np.sum(a*b, 1))*Rr**2 for b in Rf] for a in Lf])
+okk = np.allclose(ILL, Rr**2/4*np.eye(3), atol=1e-12) and np.allclose(ILR, 0, atol=5e-3*Rr**2)
+# S^2 quotient: mean |n x x|^2 = 2 r^2/3 ; S^7 pairing R^2 tr(A^T B)/8
+xs2 = rs5.normal(size=(200000, 3)); xs2 /= np.linalg.norm(xs2, axis=1)[:, None]
+okk &= abs(np.mean(np.sum(np.cross([0, 0, 1.], xs2)**2, 1)) - 2/3) < 5e-3
+x8 = rs5.normal(size=(200000, 8)); x8 /= np.linalg.norm(x8, axis=1)[:, None]
+Asym = rs5.normal(size=(8, 8)); Asym -= Asym.T
+okk &= abs(np.mean(np.sum((x8 @ Asym.T)**2, 1)) - np.trace(Asym.T @ Asym)/8) < 0.02*np.trace(Asym.T @ Asym)/8
+# coupling formulas and angles
+for ratio, angle in ((1, 3/7), (np.sqrt(2), 3/8), (np.sqrt(3), 1/3), (2, 3/10)):
+    q4 = ratio**2/2; okk &= abs(1/(2 + 2/3*q4) - angle) < 1e-14
+okk &= abs(np.sqrt(8)**2/4 - 2) < 1e-14
+# heat coefficient: Euclidean gammas with {g,g} = -2 delta; tr(1/2 E^2 + 1/12 Omega^2) per F = -2/3 F.F
+s1, s2_, s3 = Xp, Yp, Zp
+gam = [np.kron(s1, sv)*1j for sv in (s1, s2_, s3)] + [np.kron(s2_, np.eye(2))*1j]
+okk &= all(np.allclose(gam[m] @ gam[n] + gam[n] @ gam[m], -2*(m == n)*np.eye(4)) for m in range(4) for n in range(4))
+Ff = rs5.normal(size=(4, 4)); Ff -= Ff.T        # abelian twist curvature (scalar per component), F_{mu nu}
+EF = -sum(gam[m] @ gam[n]*Ff[m, n] for m in range(4) for n in range(4))/2
+FF = np.sum(Ff*Ff)
+okk &= abs(np.trace(EF @ EF).real - (-2*FF)) < 1e-10 and abs(0.5*np.trace(EF @ EF).real + (1/12)*4*FF - (-2/3)*FF) < 1e-10
+# per-generation traces
+dims = np.array([6, 3, 3, 2, 1, 1]); Yv = np.array([1/6, 2/3, -1/3, -1/2, -1, 0])
+okk &= abs(np.sum(dims*Yv**2) - 10/3) < 1e-14 and abs(2*(3*(4/9) + 3*(1/9) + 1) + 0 - 16/3) < 1e-14
+# weighted trace ratio covers (0, inf)
+for rt in (0.01, 1.0, 37.0):
+    wl = max(0, 2*rt - 3) + 1; wu = wd = ((3 + wl)/rt - 2)/2
+    okk &= wu > 0 and abs((3 + wl)/(2 + wu + wd) - rt) < 1e-12
+# Einstein stationary ratio and unstable volume mode
+okk &= abs(6/(3*1.0) - 2/1.0) < 1e-15
+d_ = 7; RK = 1.3; Lam = (d_ + 2)*RK/(2*d_); V = lambda u: np.exp(-d_*u)*(2*Lam - np.exp(-2*u)*RK)/2
+h_ = 1e-4; okk &= abs((V(h_) - V(-h_))/(2*h_)) < 1e-6 and (V(h_) - 2*V(0) + V(-h_))/h_**2 < 0
+okk &= abs((V(h_) - 2*V(0) + V(-h_))/h_**2 + (d_ + 2)*RK) < 1e-4
+# plaquette bound
+hh = rs5.uniform(-2, 2, 1000); okk &= np.all(np.abs(1 - np.cos(hh) - hh**2/2) <= hh**4/24 + 1e-15)
+print(f"     KK Killing integrals (S^3, S^2 quotient, S^7), radius/angle table, heat-coefficient -2/3, traces 10/3 and 16/3, weighted-trace family, Einstein ratio and unstable mode, plaquette bound: {bool(okk)}")
+results.append(bool(okk))
+_cr_log = []
+def _crp(*a): _cr_log.append(" ".join(str(x) for x in a))
+def _cr_block():
+    MZ=91.1879; s2=.23122; ai=127.95; MP=1.22e19; Mb=MP/np.sqrt(8*np.pi)
+    def A0(a_s=.1180): return np.array([(1-s2)*ai, s2*ai, 1/a_s])   # (Y,2,3) SM normalisation
+    b=np.array([41/6,-19/6,-7])
+    out={}
+    for S in (1/2,3/8,3/10,3/7,1/3):
+        r=(1-S)/S; A=A0(); x=(A[0]-r*A[1])/(b[0]-r*b[1]); M=MZ*np.exp(2*np.pi*x); Ax=A-b*x
+        Rinv=Mb*np.sqrt(4*np.pi/Ax[1])/np.sqrt(8)
+        q4={1/2:None,3/8:1,3/10:2,3/7:.5,1/3:1.5}[S]
+        out[S]=(M,Ax[1],Rinv, None if q4 is None else Ax[2]-q4*Ax[1])
+    for k,v in out.items(): _crp(k, '%.3g %.2f %.3g'%v[:3], v[3])
+    # weak-colour crossing
+    A=A0(); x=(A[1]-A[2])/(b[1]-b[2]); Ax=A-b*x; _crp('w-c crossing %.3g'%(MZ*np.exp(2*np.pi*x)), 'S', Ax[1]/(Ax[0]+Ax[1]))
+    x=np.log(MP/MZ)/(2*np.pi); Ax=A-b*x; _crp('S at MP', Ax[1]/(Ax[0]+Ax[1]))
+    A=A0(.1177); S=3/8; r=5/3; x=(A[0]-r*A[1])/(b[0]-r*b[1]); _crp('A3 at 3/8 (0.1177)', (A-b*x)[2]); x=(A[1]-A[2])/(b[1]-b[2]); _crp('wc 0.1177 %.3g'%(MZ*np.exp(2*np.pi*x)))
+    # residuals at weak-colour crossing
+    A=A0(); x=(A[1]-A[2])/(b[1]-b[2]); Ax=A-b*x
+    for S in (3/8,1/2): r=(1-S)/S; _crp('residual',S, r*Ax[1]-Ax[0])
+    # two-input fit
+    A=A0(); r=5/3; x=(ai-(1+r)*A[2])/(b[0]+b[1]-(1+r)*b[2]); _crp('2-input M %.3g'%(MZ*np.exp(2*np.pi*x)), 'spred', (A[2]+(b[1]-b[2])*x)/ai, s2-(A[2]+(b[1]-b[2])*x)/ai)
+    # direct PS two stage
+    bPS=np.array([-31/3,-19/6,-5/2])
+    def two(q4,cplx=False,a_s=.1180):
+        bp=bPS+np.array([0,1/6,1/6]) if cplx else bPS
+        A=A0(a_s); C=np.array([A[2],A[1],A[0]-2/3*A[2]]); B=np.array([-b[2],-b[1],-b[0]+2/3*b[2]])
+        H=np.array([[1,-q4,0],[0,-1,1.]])
+        M=np.column_stack([H@B,-H@bp]); x,y=np.linalg.solve(M,-H@C)
+        AU=(C+B*x-bp*y)[1]
+        return MZ*np.exp(2*np.pi*x), MZ*np.exp(2*np.pi*(x+y)), AU, np.linalg.det(M)
+    for q4 in (.5,1,1.5,2): MI,MU,AU,det=two(q4); _crp('q4',q4,'%.3g %.3g'%(MI,MU),AU,det, (1322-399*q4)/9)
+    MI,MU,AU,_=two(1); g=np.sqrt(4*np.pi/AU); Rinv=Mb*np.sqrt(4*np.pi/AU)/np.sqrt(8); _crp('g',g,'Rinv %.3g'%Rinv, Rinv/MU)
+    _crp('complex %.3g %.3g'%two(1,True)[:2], 'det',two(1,True)[3],(1322-377)/9, ' 0.1177: %.3g %.3g'%two(1,False,.1177)[:2])
+    # Paper spectrum radii
+    for AU,MPS in ((47.0233,9.7068e16),(46.3205,5.1653e16)):
+        Rinv=Mb*np.sqrt(4*np.pi/AU)/np.sqrt(8); _crp('Ps Rinv %.3g ratio %.3f'%(Rinv,Rinv/MPS))
+    # Paper spectrum with q4
+    def ps(q4,cplx=False):
+        A=A0(); A1=np.array([.6*A[0],A[1],A[2]])
+        B=np.array([41/10,-19/6,-7]); C=np.array([-1/10,-19/6,-7]) if not cplx else np.array([0,-3,-7])
+        M=np.column_stack([np.array([(3+2*q4)/5,1,q4]),B,C]); AU,x,y=np.linalg.solve(M,A1)
+        return AU,x,y,MZ*np.exp(2*np.pi*x),MZ*np.exp(2*np.pi*(x+y))
+    for q4 in (.5,1.5,2): _crp('ps q4',q4,ps(q4)[1:3])
+    from scipy.optimize import brentq
+    f1=lambda q: ps(q)[4]-Mb*np.sqrt(4*np.pi/ps(q)[0])/np.sqrt(8)
+    q=brentq(f1,1.0193,1.0194); _crp('q4 Rinv',q,'%.3g %.3g'%ps(q)[3:])
+    f2=lambda q: ps(q)[4]-np.sqrt(3)*Mb*np.sqrt(4*np.pi/ps(q)[0])/np.sqrt(8)
+    q=brentq(f2,1.026,1.027); _crp('q4 KK',q,'%.3g %.3g'%ps(q)[3:])
+    # downward from q4=1 direct fit returns inputs
+    _crp('older-input residuals check skipped')
+_cr_block()
+txt = "\n".join(_cr_log)
+need = ["0.375 1.03e+13 42.41 4.68e+17 -5.58", "0.5 5.35e+20 51.37 4.26e+17", "0.3 3.87e+07 36.12 5.08e+17 -49.31", "0.42857142857142855 3.18e+16 46.46 4.47e+17 22.54",
+        "w-c crossing 9.71e+16 S 0.43637", "S at MP 0.47132", "wc 0.1177 9.37e+16", "residual 0.375 17.63", "residual 0.5 -13.71", "2-input M 6.79e+14 spred 0.20755",
+        "q4 1 4.21e+13 2.65e+15 45.20", "g 0.5272", "Rinv 4.54e+17 171.3", "complex 4.22e+13 2.41e+15", "0.1177: 4.18e+13 2.59e+15", "Ps Rinv 4.45e+17 ratio 4.582", "ratio 8.676",
+        "q4 Rinv 1.01933", "2.46e+09 4.41e+17", "q4 KK 1.02615", "1.35e+09 7.62e+17"]
+okr5 = all(nd in txt for nd in need)
+print(f"     running tests recomputed (crossings, residuals -5.58, 17.64, -13.71, two-input fit 0.20756, direct two-stage fits, Ps radii, continuous q4 fits): {okr5}")
+if not okr5: print([nd for nd in need if nd not in txt])
+results.append(okr5)
+
 print(f"\nALL CHECKS PASSED: {all(results)}  ({sum(results)}/{len(results)})")
