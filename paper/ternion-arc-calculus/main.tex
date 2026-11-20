@@ -76,7 +76,9 @@ where the reflected comparison is affine in two readouts, and on the higher proj
 Bargmann invariant.  Allowing an indefinite second-order germ instead of a bounded faithful comparison gives, in dimension three, the
 central quotients of $\widetilde{\mathrm{SL}}(2,\R)$ with Chebyshev comparisons (anti-de Sitter space), and on the positive Hermitian
 matrices the arc calculus becomes hyperbolic: the Thomas--Wigner rotation of a triangle is a rational function of its vertices and
-rotates through minus its area.  Before any manifold, the chord--sagitta identity and an
+rotates through minus its area.  A space of finite comparison rank $r$ cannot encode the full family of its
+comparison-preserving maps, which needs rank $r^2$; and the logarithm of an exponentially scaled Gram elimination tends to the
+shortest-path value under a sign condition, which cannot be dropped.  Before any manifold, the chord--sagitta identity and an
 elliptic/parabolic/hyperbolic trichotomy already hold for fair elements of a star algebra, and sparse comparisons on a chordal graph
 with triangle defects at most $\varepsilon$ come from a potential up to $(|V|-2)\varepsilon$, the obstruction on other graphs being a
 lattice gauge connection.  The key step concerns the duplication equation $f(x^2)=2f(x)^2-1$: on the line it has continuous non-cosine
@@ -132,11 +134,15 @@ and on the higher projective spaces the reflected comparison carries a real thre
 determine.  Section~\ref{sec:m3} drops boundedness, separation and unique zeros in favour of a nondegenerate second-order germ: in
 dimension three the solutions are central quotients of $\widetilde{\mathrm{SL}}(2,\R)$ (anti-de Sitter space, with its null cone as the
 local level $\kappa=1$), $\mathrm{SL}(2,\C)$ carries a complex comparison, and on the positive Hermitian matrices the arc calculus of
-Part~\ref{part:arc} transfers with the signs of curvature reversed (Remark~\ref{m3:transfer}).  Part~\ref{part:arc} (Sections~\ref{sec:recur}--\ref{sec:rational}) develops a
-calculus in which the difference $y-x$ of linear calculus is replaced by the transport $\hp y x\cdot$.  Part~\ref{part:final}
+Part~\ref{part:arc} transfers with the signs of curvature reversed (Remark~\ref{m3:transfer}).  Section~\ref{sec:d4} asks when a
+comparison space can encode its own maps: exactly when the span rank of the specified family fits the target budget, with a spectral
+error otherwise; the sphere list is a classification, not an encoding tower, and a clock follows from finite rank only under an added
+symmetry or differential-rank hypothesis.  Part~\ref{part:arc} (Sections~\ref{sec:recur}--\ref{sec:rational}) develops a
+calculus in which the difference $y-x$ of linear calculus is replaced by the transport $\hp y x\cdot$; Section~\ref{sec:m5} compares
+chord, cap arc and two-arc route of a right cell and shows that the logarithm of an eliminated Gram comparison tends to the min--plus
+(shortest-path) value exactly when the signed coefficients of the shortest paths do not cancel.  Part~\ref{part:final}
 (Sections~\ref{sec:known}--\ref{sec:open}) places the results in the literature, records what is formalised, and lists the open problems.
-% ROADMAP, temporary (delete each line when its part lands): self-reference (d4) joins Part "Beyond the axiom" as Section 5C;
-% phase synthesis and the rational atlas (m4) and the arc body and tropical limit (m5) join the arc calculus; Part "Arithmetic
+% ROADMAP, temporary (delete each line when its part lands): phase synthesis and the rational atlas (m4) join the arc calculus; Part "Arithmetic
 % and holonomy" (m6) goes after it; the final part keeps known work, formalisation and open problems.
 In the arc calculus the guiding observation is that linear calculus discards two second-order quantities
 that are exact and computable in the heap: the radial sagitta of each step, and the failure of the
@@ -4467,7 +4473,949 @@ from other dynamics with the same kinematic comparison and
 loop holonomy.
 \end{remark}
 
-% ---- insertion point: further section of Part "Beyond the axiom" (module d4), numbered 5C
+\section{Self-reference at finite comparison rank}\label{sec:d4}
+
+Can a comparison space represent all of its comparison-preserving maps using
+its own comparison? On a round configuration sphere of correlation rank \(r\),
+the maps require rank \(r^2\) when one compares their actions on a full
+orthonormal frame. We prove the rank obstruction and a finite spectral bound
+on the error of any smaller representation. Evaluation of predicates gives
+a separate diagonal obstruction, including when the comparison has infinite
+rank. These statements specify what information an internal representation
+loses. A positive stopping error or an unobservable clock requires further
+conditions on how the representation is used.  Definition~\ref{d4:def} fixes the setting; Remark~\ref{d4:topology} separates
+topological obstructions, Corollary~\ref{d4:fixed-catalogue} and Examples~\ref{d4:cosine}, \ref{d4:monitor} treat fixed points and
+iteration, Theorem~\ref{d4:record} gives the record bound \eqref{d4:record-bound}, Remarks~\ref{d4:quotients} and \ref{d4:cloning} compare
+quotient readouts and quantum no-cloning, and Remark~\ref{d4:refuted} collects the claims refuted here.
+
+\subsection*{Comparison of states and comparison of maps}
+
+\begin{definition}[Comparison space]\label{d4:def}
+Let \(X\ne\varnothing\), and let \(c:X\times X\to\mathbb R\) be a real
+symmetric positive semidefinite kernel of finite rank \(r\ge1\), the largest
+rank of its finite Gram matrices. We use the centred comparison
+\(c=2\kappa-1\) when \(\kappa\) is the comparison of
+Theorem~\ref{thm:round}. Its feature space \(V\) is the real vector space of
+finite formal combinations of labels \(x\in X\), with bilinear form specified
+by \(c\), modulo vectors of norm zero. Write \(v_x\) for the class of \(x\).
+Positivity applied to a quadratic in one coefficient shows that every
+null vector is orthogonal to all vectors. Thus the quotient is Euclidean,
+\(\langle v_x,v_y\rangle=c(x,y)\), and \(\dim V=r\): independent feature
+vectors have a nonsingular Gram matrix, and a spanning selection has size
+\(r\). The comparison pseudometric is \(d_c(x,y)=\|v_x-v_y\|\). A
+comparison-preserving map satisfies \(c(fx,fy)=c(x,y)\) for all \(x,y\).
+We identify states at pseudodistance zero and maps with the same action on
+the identified states. An exact comparison encoding preserves the
+specified kernel on every pair.
+\end{definition}
+
+\begin{theorem}[Rank of comparison-preserving maps]\label{d4:rank}
+Each comparison-preserving self-map \(f\) acts on \(V\) by a unique orthogonal
+operator \(A_f\). For any family \(\mathcal G\ne\varnothing\) of such maps,
+equip it with the kernel
+\begin{equation}\label{d4:mapkernel}
+ C(f,g)=\frac1r\operatorname{tr}(A_f^{\mathsf T}A_g)
+       =\frac1r\sum_{i=1}^r\langle A_f e_i,A_g e_i\rangle,
+\end{equation}
+where \((e_i)\) is any orthonormal basis of \(V\). Its rank is
+\(k=\dim\operatorname{span}\{A_f:f\in\mathcal G\}\le r^2\). The minimum
+Euclidean dimension of an exact comparison encoding is \(k\). The minimum
+Euclidean dimension for the distance
+\(d_C(f,g)=\|A_f-A_g\|_{\mathrm F}/\sqrt r\) alone is
+\(\dim\operatorname{span}\{A_f-A_{f_0}:f\in\mathcal G\}\) for any
+\(f_0\in\mathcal G\).
+
+For the full sphere of identified states \(v(X)=S(V)\), the
+comparison-preserving family is \(O(V)\), and
+both minima are \(r^2\). Thus a sphere of correlation rank \(r\ge2\) cannot
+encode all of its comparison-preserving self-maps isometrically in its own
+state space, even if the encoding is required to preserve only distances.
+\end{theorem}
+
+\begin{proof}
+For any coefficients \(a_i\), the squared norms of
+\(\sum_i a_i v_{x_i}\) and \(\sum_i a_i v_{f(x_i)}\) agree by expanding
+against \(c\). This gives a well-defined linear isometry on the span and,
+in finite dimension, an orthogonal operator. The spanning property gives
+uniqueness. The map \(f\mapsto A_f/\sqrt r\) realizes \eqref{d4:mapkernel}
+as an inner-product kernel. Rank is the dimension of its span, so using
+that span achieves the minimum and any smaller Gram realization fails.
+For distances, subtract the image of \(f_0\) and recover all inner products
+of differences by
+\[
+ 2\langle z_f-z_{f_0},z_g-z_{f_0}\rangle
+ =d_C(f,f_0)^2+d_C(g,f_0)^2-d_C(f,g)^2 .
+\]
+Consequently the rank of the difference Gram kernel gives the distance
+minimum. On the full sphere every orthogonal operator restricts to a
+comparison-preserving map. For each matrix position \(i,j\), choose a
+permutation matrix sending \(e_j\) to \(e_i\) and subtract from it the
+matrix with the sign of column \(j\) reversed. The difference is twice the
+\(ij\)-matrix unit. These differences belong to the difference span for
+any base map and span the entire matrix space.
+\end{proof}
+
+\begin{example}[Dependence on the family and its kernel]\label{d4:small}
+On \(S^0=\{-1,1\}\) the two orthogonal maps are encoded exactly by their
+values at \(1\). On the circle, the rotation subgroup \(SO(2)\) also
+encodes exactly by evaluation at \(e_1\), since
+\(C(R_\alpha,R_\beta)=\cos(\beta-\alpha)\), by the angle-addition formulas.
+For the rank-\(r\) kernel \(c(i,j)=\delta_{ij}\) on \(r\) points, the
+comparison maps are permutations. At \(r=2\), the identity and the swap
+are orthogonal for \(C\), so they are encoded by the two original states.
+In contrast, evaluations at a single point of a round sphere of rank
+\(r\ge2\) identify the identity and any reflection in a hyperplane through
+that point. The frame comparison uses every direction.
+\end{example}
+
+\begin{proposition}[Spectral error at a rank budget, cf.\ \cite{d4-ey}]\label{d4:spectral}
+Let \(G\) be the \(m\times m\) Gram matrix of a finite family of comparison
+maps for \(C\), and let \(\lambda_1\ge\cdots\ge\lambda_m\ge0\) be its
+eigenvalues. For \(0\le s\le m\),
+\begin{equation}\label{d4:gram-tail}
+ \min_{H\succeq0,\ \operatorname{rank}H\le s}\|G-H\|_{\mathrm F}^2
+ =\sum_{i>s}\lambda_i^2,\qquad
+ \max_{i,j}|G_{ij}-H_{ij}|\ \ge\ \frac{\sqrt{\sum_{i>s}\lambda_i^2}}{m}.
+\end{equation}
+The same minimum applies to ordinary feature Gram matrices, including
+orthonormal singleton indicators on any finite set of distinct states.
+On \(S^{r-1}\) with \(r=2,4,8\) there are \(m=r^2\) orthogonal maps with
+\(G=I_m\), so a rank-\(s\) comparison incurs entrywise error at least
+\(\sqrt{r^2-s}/r^2\) for \(s<r^2\). The bound applies to arbitrary
+encoders, including nonlinear ones.
+\end{proposition}
+
+\begin{proof}
+Let \(P\) be orthogonal projection onto the range of \(H\).
+Projection onto its orthogonal complement gives
+\(\|G-H\|_{\mathrm F}^2\ge\|(I-P)G\|_{\mathrm F}^2
+=\sum_i\lambda_i^2(1-\|Pu_i\|^2)\) in an orthonormal eigenbasis
+\((u_i)\). The coefficients \(\|Pu_i\|^2\) lie in \([0,1]\) and sum to
+\(\operatorname{rank}H\le s\). Their weighted sum with nonincreasing
+weights \(\lambda_i^2\) is at most \(\sum_{i\le s}\lambda_i^2\), by moving
+weight to the earliest available indices. Spectral truncation gives
+equality. The entrywise bound follows by summing \(m^2\) squared entries.
+For \(r=2^a\), take all \(a\)-fold tensor products of
+\[
+ I_2,\qquad
+ \begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+ \begin{pmatrix}1&0\\0&-1\end{pmatrix},\qquad
+ \begin{pmatrix}0&-1\\1&0\end{pmatrix}.
+\]
+They are orthogonal operators. The four factors have pairwise
+Hilbert--Schmidt products zero and squared norm \(2\). Multiplicativity
+of trace on tensor products gives \(4^a=r^2\) maps with \(G=I_m\).
+\end{proof}
+
+\begin{remark}[Where the round classification stops]\label{d4:tower}
+Theorem~\ref{thm:round} applies to connected positive-dimensional
+locally Euclidean configuration spaces without boundary, with a continuous
+faithful comparison, continuous comparison-preserving left and right
+translations for a unital binary transport, the round-trip law, and at
+most one zero partner at the unit. Corollary~\ref{cor:round} gives the
+ternary formulation using the Mal'cev identities. Proposition~\ref{prop:dim}
+radially extends the two-sided translations to a bilinear unital
+norm-composition product. Hurwitz's theorem gives real dimensions
+\(1,2,4,8\). The first is \(S^0\) and is outside the connected
+positive-dimensional setting \cite{Hurwitz1898}, \cite[\S2.3]{Baez02}.
+Consequently \(S^1,S^3,S^7\) are the increasing list under these hypotheses; this list is a classification, not an encoding tower.
+The map rank \(4\) of \(S^1\) can fit in \(S^3\), and the normalized
+orthogonal matrices of size \(2\) indeed lie on that sphere. The map
+rank \(16\) of \(S^3\) already exceeds the largest permitted state rank,
+\(8\), and \(S^7\) itself has map rank \(64\). Thus the list of spheres
+does not describe successive exact encodings of the full map space.
+If the family is restricted to right multiplications in a norm-composition
+algebra, \(a\mapsto R_a\) with \(R_a(x)=xa\) is linear and satisfies
+\(\operatorname{tr}(R_a^{\mathsf T}R_b)/r=\langle a,b\rangle\), by
+polarizing \(\|xa\|=\|x\|\|a\|\) for each basis vector \(x\). That family
+is encoded on the original sphere. Obtaining another round level would
+require changing a classification hypothesis. In the associative setting,
+the classification in Theorem~\ref{thm:main} gives the circle and three-sphere under
+the heap and comparison axioms.
+\end{remark}
+
+
+\begin{remark}[Topological and metric obstructions]\label{d4:topology}
+The obstruction to a nowhere-zero continuous tangent field on an even
+sphere \(S^n\), \(n\ge2\), is independent of the rank of a comparison.
+Such a field \(v\), normalized to unit length, would make
+\(\cos(t)x+\sin(t)v(x)\) a homotopy on \(S^n\) from the identity to
+the antipodal map as \(t\) varies from \(0\) to \(\pi\). Their degrees
+are \(1\) and \((-1)^{n+1}\), which differ \cite[Sec.~2.2]{Hatcher}.
+On a triangulated convex polyhedron with \(V_0,E_0,F_0\) vertices,
+edges and faces, summing the vertex angle defects yields
+\(2\pi V_0-\pi F_0=4\pi\), since \(3F_0=2E_0\) and
+\(V_0-E_0+F_0=2\). The angle defect is an intrinsic curvature
+sum on that surface. The obstruction in Theorem~\ref{d4:rank} also
+holds on the odd round spheres and concerns the dimension of a
+matrix span.
+\end{remark}
+
+\subsection*{Evaluation, predicates and refinement}
+
+\begin{theorem}[Relative diagonal and quantitative escape]\label{d4:diagonal}
+Let \(A\ne\varnothing\) be a set of addresses, \(q:A\to B\) a readout
+onto its image \(B\), and \(E:A\times B\to Y\) an evaluation with
+\(Y\ne\varnothing\). For any twist \(u:Y\to Y\) put
+\(g(a)=u(E(a,q(a)))\). If \(g=E(a_0,\cdot)\circ q\), then
+\(E(a_0,q(a_0))\) is fixed by \(u\). If \(Y\) carries a metric \(d\) and
+\(\delta=\inf_{y\in Y}d(u(y),y)\), then
+\[
+  \sup_{a\in A}d\bigl(g(a),E(b,q(a))\bigr)
+      \ \ge\ d(u(E(b,q(b))),E(b,q(b)))\ \ge\ \delta
+      \qquad(b\in A).
+\]
+If \(u\) is fixed-point-free and \(a\mapsto E(a,\cdot)\) is onto \(Y^B\),
+then \(g\) splits at least one fibre of \(q\). It is discontinuous into
+discrete \(Y\) from the partition topology of \(q\), and the joint
+readout \((q,g)\) induces a strictly finer partition topology. Every
+readout that recovers both \(q\) and \(g\) factors onto \((q,g)\) on its
+image.
+\end{theorem}
+
+\begin{proof}
+Evaluate at \(a_0\) for the fixed-point assertion, and at \(b\) for the
+metric inequality. A function constant on \(q\)-fibres factors uniquely
+through \(B=q(A)\), by assigning the common value to that fibre.
+Surjectivity of the catalogue would put this factor among its entries,
+contradicting fixed-point-freeness. In the partition topology, the open
+sets are the unions of \(q\)-fibres. The preimage of a singleton of \(Y\)
+which splits a fibre is therefore new. Projections recover \(q,g\) from
+the joint readout, and pairing any other two recovery maps gives the
+claimed factor.
+\end{proof}
+
+\begin{example}[Boolean predicates and restricted tables]\label{d4:tables}
+For \(q=\mathrm{id}_A\), \(Y=\{0,1\}\), and \(u(y)=1-y\), there is no
+evaluation onto all predicates, in the category of sets with ordinary
+evaluation. With \(B=Y=\{0,1\}\), four entries \((0,0),(0,1),(1,0),(1,1)\)
+and readouts \((0,0,0,1)\), the diagonal is \((1,1,0,0)\).
+It splits the first fibre, from two atoms of the partition to three.
+On any \(n\) distinct states, the \(n\) singleton predicates are
+orthonormal for the counting \(L^2\) inner product
+\(\sum_{i=1}^{n}p(i)p'(i)\). Exact comparison encoding of even these
+predicates requires rank \(n\). The unrestricted collection on a finite
+\(n\)-state set contains \(2^n\) elements, and its counting Gram rank is
+exactly \(n\). A continuous Boolean predicate on a connected sphere is
+constant, so using only continuous predicates changes the catalogue.
+
+A restricted table can be exact with few generators. For
+\(x,w\in\{0,1\}^n\), the parity \(w\cdot x\bmod 2\) follows from its \(n\)
+values on the standard basis and addition modulo \(2\). Planar rotations
+similarly satisfy \(\prod_i R_{\theta_i}^{x_i}=R_{\sum_i x_i\theta_i}\)
+by the angle-addition law. A flat table with a separate entry for every
+input uses \(2^n\) rows. Storing the generator responses and one evaluation
+rule uses \(n+1\) rows in that scheme, with separate costs for encoding
+the parameters and evaluating the rule.
+\end{example}
+
+\begin{remark}[Scope of the diagonal argument]\label{d4:logic}
+Lawvere's weak point-surjectivity theorem applies in a Cartesian closed
+category with a weakly point-surjective map to the exponential. Its
+set-theoretic inference is Theorem~\ref{d4:diagonal} with \(q=\mathrm{id}\)
+\cite{d4-lawvere,d4-yanofsky}. Finite-rank comparison spaces with
+kernel-preserving maps need no exponential here. The rank proof takes
+place in the category of comparison spaces and kernel-preserving maps
+with a specified kernel on the map family. In a fixed-point-free twist,
+metric separation can be zero: the map
+\(u(t)=t+e^{-t}\) on \(\mathbb R\) moves every point but has
+\(\inf_t|u(t)-t|=0\). On a compact metric \(Y\), a continuous fixed-point-free
+twist has strictly positive minimum displacement by compactness.
+
+G\"odel's first incompleteness theorem concerns provability in effectively
+axiomatized theories representing arithmetic, with consistency conditions
+depending on the formulation (in the original undecidability argument,
+\(\omega\)-consistency). Tarski's undefinability theorem concerns truth
+in the standard natural numbers and definability in the arithmetical
+language. The relevant diagonal in both cases uses syntax and coding
+\cite[Theorem~VI]{d4-godel}\cite{d4-tarski}.
+Here comparison rank supplies the finite quantitative obstruction
+\eqref{d4:gram-tail}, while the relative diagonal gives a witness to
+failure of factorization. Strict refinement is a statement about fibres
+and can occur among finite spaces of the same topological dimension.
+\end{remark}
+
+
+\subsection*{Fixed points and finite comparison budgets}
+
+\begin{theorem}[Contraction and the discarded part, cf.\ \cite{d4-banach}]\label{d4:fixed}
+Let \((Z,d)\) be a nonempty complete metric space and \(F:Z\to Z\)
+be \(q\)-Lipschitz with \(0\le q<1\). There is a unique fixed point \(z_*\).
+For \(\eta(z)=d(z,Fz)\) and \(z_n=F^nz_0\),
+\begin{align}
+ (1-q)d(z,z_*)&\le \eta(z)\le(1+q)d(z,z_*),\label{d4:defect}\\
+ \eta(z_n)&\le q^n\eta(z_0),&
+ d(z_n,z_*)&\le\frac{q^n\eta(z_0)}{1-q}.\label{d4:iteration}
+\end{align}
+If \(Z\) is a closed subset of a closed subspace \(W\) of a real Hilbert
+space \(H\), \(d\) is induced by its norm, \(P\) is orthogonal projection
+onto \(W\), and \(F=PU\) for an update \(U:Z\to H\),
+then the full defect satisfies
+\begin{equation}\label{d4:full}
+ \|Uz-z\|^2=\eta(z)^2+\|(I-P)Uz\|^2.
+\end{equation}
+In this setting a lower bound \(\|(I-P)Uz\|\ge b>0\) throughout \(Z\)
+implies full defect at least \(b\), including at \(z_*\), where the full
+defect equals the discarded norm. A positive lower bound on the full
+defect at \(z_*\) is equivalent to a positive lower bound on that
+discarded norm at \(z_*\).
+\end{theorem}
+
+\begin{proof}
+Successive steps have lengths at most \(q^n\eta(z_0)\). Summing the
+geometric tail shows that the iterates are Cauchy and bounds their
+distance to the limit as in \eqref{d4:iteration}, with \(q^0=1\).
+Continuity makes the limit fixed. The distance between two fixed points
+is at most \(q\) times itself, giving uniqueness. Both directions in
+\eqref{d4:defect} follow by the triangle inequality and
+\(d(Fz,z_*)\le qd(z,z_*)\). In the Hilbert-space setting,
+\(Uz-z=P Uz-z+(I-P)Uz\) is an orthogonal sum, which yields
+\eqref{d4:full}.
+\end{proof}
+
+
+\begin{corollary}[A fixed compressed catalogue with positive error]\label{d4:fixed-catalogue}
+Let \(G\) be the Gram matrix of a finite family as in
+Proposition~\ref{d4:spectral}. Let \(\mathcal S\) be a nonempty
+closed set of positive semidefinite \(m\times m\) matrices of rank
+at most \(s\), with the Frobenius metric. If a proposed table update
+\(F:\mathcal S\to\mathcal S\) is a strict contraction, there is a
+unique updated table \(H_*=F(H_*)\) and its comparison error satisfies
+\[
+ \|G-H_*\|_{\mathrm F}\ \ge\ \Bigl(\sum_{i>s}\lambda_i^2\Bigr)^{1/2},
+ \qquad
+ \max_{i,j}|G_{ij}-(H_*)_{ij}|
+     \ \ge\ \frac{\bigl(\sum_{i>s}\lambda_i^2\bigr)^{1/2}}{m}.
+\]
+Both lower bounds are positive when \(\operatorname{rank}G>s\).
+The Frobenius bound is attained for the full rank-\(s\) budget by
+the constant update to the spectral truncation.
+\end{corollary}
+\begin{proof}
+Closedness gives completeness in the finite-dimensional matrix
+space. Theorem~\ref{d4:fixed} gives the fixed point and convergence.
+Apply \eqref{d4:gram-tail} to that fixed point. The full budget is closed because positivity and the vanishing of all
+\((s+1)\)-minors are closed conditions. It contains the truncation,
+and the constant update has Lipschitz constant zero.
+\end{proof}
+
+\begin{example}[Stopping scales]\label{d4:stopping}
+For the unit interval and \(F(z)=qz\), starting at \(1\) gives
+\(z_n=q^n\) and \(\eta(z_n)=(1-q)q^n\). The constant map \(F=0\)
+reaches the exact fixed point in one tick. These are states of the
+rank-one kernel \(c(x,y)=xy\). In the Hilbert-space setting of
+Theorem~\ref{d4:fixed}, embed the interval on the first axis of
+\(\mathbb R^2\) and take \(U(z,0)=(qz,b)\). Its fixed point under
+compression has full defect exactly \(|b|\), which can be prescribed
+independently of rank, including \(b=0\). For any positive tolerance
+the geometric estimate gives finite stopping, whereas the tolerance
+itself can be chosen arbitrarily. A continuous hemisphere self-map with image in its
+interior can also have several fixed points. For example, on \(z\ge0\) send \((x,y,z)\) to
+\((\sin a(x),0,\cos a(x))\), with \(a(x)=\frac{\pi}{3}\tanh(2x)\).
+Then an input on its meridian with first coordinate \(x\) is fixed
+exactly when \(x=\sin(\frac{\pi}{3}\tanh(2x))\) and its third coordinate
+is positive. The right side is odd with derivative \(2\pi/3>1\) at
+zero and is less than \(1\) at \(1\). The intermediate value theorem
+gives a positive fixed coordinate and its negative in addition to zero.
+A closed hemisphere is homeomorphic to a closed ball by projection
+onto its equatorial disk. Brouwer's theorem \cite{d4-brouwer} gives existence for a continuous
+hemisphere self-map, with uniqueness supplied under the additional
+hypothesis of contraction. The antipodal map on the whole sphere has
+no fixed point.
+
+For finite states, a strict contraction stabilizes exactly: with at
+least two states, use \eqref{d4:iteration} and the minimum nonzero
+distance. A different finite update consists of nested subsets
+\(S_{n+1}\subseteq S_n\) of a finite set. Every proper change drops the
+cardinality by at least one, so there are at most \(|S_0|\) strict changes
+and eventual constancy. A state-dependent update with a fixed rule
+stays constant after its first equality. For a sequence with no fixed
+update rule, equality at a single tick does not force future equality,
+as in \(0,0,1,1,\ldots\). A constant \(0\) update and a constant \(1\)
+update give different fixed meanings in two contexts without any
+multiplicity within either context.
+\end{example}
+
+\begin{example}[Cosine and reciprocal updates]\label{d4:cosine}
+Cosine maps \([0,1]\) into itself and has Lipschitz constant \(\sin 1\).
+Its fixed point \(\theta_*\) lies in \((0,1)\) by the signs of
+\(x-\cos x\) at the endpoints. Strict decrease gives alternation and
+prevents finite landing from any other starting point in the interval.
+Put \(e_n=\theta_n-\theta_*\), \(\lambda=\sin\theta_*\). Taylor's formula
+and \(\cos\theta_*=\theta_*\) give
+\[
+ \theta_*^2+\lambda^2=1,\qquad
+ e_{n+1}=-\lambda e_n-\tfrac12\theta_* e_n^2+O(e_n^3).
+\]
+Newton's update \(x\mapsto x-(x-\cos x)/(1+\sin x)\) instead gives
+\(e_{n+1}=\theta_*e_n^2/(2(1+\lambda))+O(e_n^3)\): expand numerator as
+\((1+\lambda)e_n+\theta_*e_n^2/2+O(e_n^3)\) and denominator as
+\(1+\lambda+\theta_*e_n+O(e_n^2)\). The scalar mean value theorem gives
+\[
+ |x-\theta_*|\le |x-\cos x|\le(1+\sin 1)|x-\theta_*|
+ \qquad(0\le x\le1).
+\]
+Lindemann's theorem implies transcendence of \(\theta_*\): if it were
+algebraic, \(e^{i\theta_*}\) would be transcendental and would solve
+\(t^2-2\theta_*t+1=0\), which would make it algebraic
+\cite{d4-lindemann}. Continued-fraction convergents \(a/b\) to
+\(\theta_*\) have \(|a/b-\theta_*|<b^{-2}\) for arbitrarily large
+denominators \cite[Ch.~X]{d4-hw}. Hence the defect is positive at every
+rational reading and below \((1+\sin 1)b^{-2}\) along those readings.
+From \(0\), the first step difference at most \(0.150\) occurs at step
+\(5\). The differences through step \(5\) round to
+\(1.000000,0.459698,0.317251,0.203263,0.139191\), and the final iterate
+and fixed point round to \(0.793480\) and \(0.739085\).
+
+The equation \(x=1+1/x\) for \(x>0\) reduces to \(x^2-x-1=0\), whose
+only positive root is \(\varphi=(1+\sqrt5)/2\). The conjugate update
+under inversion is \(y\mapsto1/(1+y)\), with fixed point
+\(\varphi^{-1}\). The former contracts on \([3/2,2]\) by the derivative
+bound \(4/9\) and maps that interval into itself. Thus the exact
+positive value depends on the chosen update.
+\end{example}
+
+\begin{remark}[Exact analytic and finite readouts]\label{d4:readouts}
+The equality \(\arcsin\theta_*=\pi/2-\theta_*\) gives
+\(2(\theta_*+\arcsin\theta_*)=\pi\). More precisely, let \(B\) be the
+formal compositional inverse over \(\mathbb Q\) of
+\[
+ A(x)=2x+2\sum_{k\ge0}\frac{\binom{2k}{k}}{4^k(2k+1)}\,x^{2k+1}.
+\]
+The series for \(B\) converges absolutely at \(\pi\) and sums to
+\(\theta_*\). To see convergence, for \(|w|<7/4\) solve
+\(z+\sin z=w\) as the fixed point of \((w+z-\sin z)/2\) on
+\(|z|\le1\). On that disk the sine and cosine series give
+\(|z-\sin z|<1/5\), \(|1-\cos z|<3/5\): the sums starting with
+\(1/3!\) and \(1/2!\) are bounded by the geometric sums of ratios
+\(1/20\) and \(1/12\), respectively. The update maps into the disk
+and has derivative bounded by \(3/10\), giving a contraction by
+integration along a line segment. The unique solution is holomorphic
+in \(w\) by the local inverse function theorem since \(|1+\cos z|>0\).
+The solution is real for real \(w\) by conjugation. Near the origin
+\(A(\sin z)=2(z+\sin z)\), so the Taylor series at zero of
+\(Y\mapsto\sin z(Y/2)\) is the unique formal inverse of \(A\).
+Its convergence disk includes \(|Y|<7/2\).
+At \(Y=\pi\) the real solution is positive, by the signs of
+\(z+\sin z-\pi/2\) at \(0\) and \(1\). The candidate
+\(\pi/2-\theta_*\) also solves this equation, by
+\(\sin(\pi/2-\theta_*)=\theta_*\). Both are in \([0,\pi/2]\), where
+\(z+\sin z\) is strictly increasing, so they coincide.
+The same equation occurs in radial
+Newtonian fall started at rest, since
+\(r/r_0=(1+\cos\eta)/2\), \(t/t_{\rm ff}=(\eta+\sin\eta)/\pi\)
+for \(0\le\eta\le\pi\). Differentiating on \(0<\eta<\pi\) gives
+\(\dot r^2=(r_0\pi/(2t_{\rm ff}))^2(1-\cos\eta)/(1+\cos\eta)\),
+so the energy equation \(\dot r^2=2GM(1/r-1/r_0)\) holds for
+\(t_{\rm ff}=(\pi/2)\sqrt{r_0^3/(2GM)}\). At half the fall time the
+radius ratio is \((1+\lambda)/2\).
+
+For \(a\) in a complete unital normed algebra with \(\|1\|=1\), the exponential truncation bound at
+order \(n\) is \(e^R R^n/n!\) for \(\|a\|\le R\) (with \(R^0=1\)).
+Indeed the terms of the tail are bounded by
+\(R^{n+j}/(n!\,j!)\). For cosine on \(0<x\le1\), the alternating
+series tail after \(n\ge1\) terms has magnitude at most
+\(x^{2n}/(2n)!\) and is strictly positive in magnitude, since the first
+two omitted magnitudes are strictly decreasing. Exact algebraic
+representations and finite Taylor readouts have different costs.
+\end{remark}
+
+\begin{hypothesis}[One stored representative per tick]\label{d4:tickhyp}
+The decoder uses a fixed target-independent catalogue on the unit
+\(S^2\). During \(N_{\mathrm{ticks}}\ge1\) comparison ticks the
+catalogue acquires at most one usable representative per tick, with
+no other representatives available. The error is the worst deficit in
+directional correlation over all targets on the sphere.
+\end{hypothesis}
+
+\begin{proposition}[A tick bound for a finite catalogue]\label{d4:caps}
+For \(M\ge1\) unit vectors \(u_j\) on \(S^2\), the directional deficit is
+\[
+ \varepsilon_{\rm cat}
+   =\max_{v\in S^2}\bigl(1-\max_{1\le j\le M}\langle v,u_j\rangle\bigr).
+\]
+Then \(\varepsilon_{\rm cat}\ge2/M\), and under
+Hypothesis~\ref{d4:tickhyp} this is at least \(2/N_{\mathrm{ticks}}\).
+The angular covering radius is
+\(\arccos(1-\varepsilon_{\rm cat})\). For budget \(M\ge2\) there is also a
+catalogue of at most \(M\) vectors with deficit at most \(8/M\).
+The deficit in the comparison \((1+c)/2\) is half the correlation deficit.
+\end{proposition}
+
+\begin{proof}
+The maximum exists because the sphere is compact. The closed caps
+\(\langle v,u_j\rangle\ge1-\varepsilon_{\rm cat}\) cover the sphere.
+Their area is \(2\pi\varepsilon_{\rm cat}\), by integrating the surface
+element \(d\phi\,dz\) in azimuth and height from \(1-\varepsilon_{\rm cat}\)
+to \(1\). Summed area is at least \(4\pi\), giving the bound. The angular
+formula follows by monotonicity of \(\arccos\). For the upper bound choose
+\(a=2\arccos(1-2/M)\). If \(a>\pi\), one point gives deficit
+\(2\le8/M\). Otherwise a greedy maximal family of points with pairwise
+angular distances greater than \(a\) has at most \(M\) points, because
+the interiors of its caps of radius \(a/2\) are disjoint and each has
+area \(4\pi/M\). Maximality gives a covering by caps of radius \(a\),
+hence deficit at most \(1-\cos a=8/M-8/M^2\).
+\end{proof}
+
+\begin{remark}[What the tick counts]\label{d4:resources}
+A fixed alphabet of \(g\ge2\) gates yields at most
+\((g^{L+1}-1)/(g-1)\) distinct outputs from a fixed start by words of
+length at most \(L\), by summing the \(g^j\) choices at each length.
+The cap bound for this word catalogue is therefore
+\(2(g-1)/(g^{L+1}-1)\). With \(g=2\) and \(L=3\) this lower bound is
+\(2/15\). By contrast a protocol of \(N\) binary answers can select
+from \(2^N\) indices and, if arbitrary binary queries are available,
+can read the bits of the index of the nearest catalogue point. The
+catalogue upper bound then permits deficit at most \(8\cdot2^{-N}\).
+Thus a tick count without a constraint on the decoder's range gives no
+universal inverse-tick lower bound, even in fixed dimension. Serial
+comparisons, gate count, parallel depth, storage, and physical time
+require distinct resource models. For instance \(N+1\) gates along
+an open path with \(\kappa_0\) oriented rises and with all other
+edges falling have optimal parallel depth
+\(\lceil(N+1)/(\kappa_0+1)\rceil\) over rise positions if
+\(1\le\kappa_0\) and \(2\kappa_0\le N\).
+Cutting at the rises gives the lower bound by the largest block.
+Write \(N+1\) as \(\kappa_0+1\) block lengths differing by at most one.
+If there is a block of length one, put such a block first if it is the
+only one. More generally, the hypothesis gives at most one singleton
+in this balanced choice. Number each block in decreasing order down
+to layer zero. The first layer number of each later block is positive,
+so every rise is respected. With \((N,\kappa_0)=(8,2)\) and \((11,2)\)
+the depths are \(3\) and \(4\), respectively. A physical relation
+between such a depth and time, or a bulk volume, requires its own
+dynamics and calibration \cite{d4-nielsen,d4-brown}.
+\end{remark}
+
+
+\begin{theorem}[Finite shifted records]\label{d4:record}
+Let a unit pointer \(a=(a_0,\ldots,a_N)\) vanish off \([0,N]\) on the
+integer lattice, and let two branches couple to translates whose shifts
+differ by the nonzero integer \(\ell\). After discarding the pointer,
+\(\Lambda\) is a two-branch dephasing channel whose off-diagonal
+coherence multiplier has modulus \(|\gamma|\), where
+\(\gamma=\sum_j a_{j+\ell}\overline a_j\). For trace distance
+\(D(\rho,\sigma)=\frac12\|\rho-\sigma\|_1\),
+\begin{equation}\label{d4:record-bound}
+ \inf_{\mathcal R}\sup_\rho D(\mathcal R\Lambda\rho,\rho)
+   =\frac{1-|\gamma|}{2}
+   \ \ge\ \frac12\left(1-\cos\frac{\pi}{m+2}\right)>0,
+ \qquad m=\left\lfloor\frac{N}{|\ell|}\right\rfloor ,
+\end{equation}
+where \(\mathcal R\) ranges over quantum recovery channels and
+\(\rho\) over all states on the two branches. The bound is attained by
+a sine-profile pointer. In particular at \(|\ell|=1\) the best error
+for \(N+1\) allowed positions is asymptotic to \(\pi^2/(4(N+2)^2)\).
+\end{theorem}
+
+\begin{proof}
+The isometry \(|i\rangle\mapsto |i\rangle\otimes |a^{(i)}\rangle\)
+multiplies the \(ij\)-entry under partial trace by
+\(\langle a^{(j)},a^{(i)}\rangle\). The modulus for the two distinct
+branches is \(|\gamma|\). A diagonal unitary corrects its phase,
+including the case \(\gamma=0\) with any phase. Thereafter the difference
+from \(\rho\) has trace norm \(2(1-|\gamma|)|\rho_{01}|\). Positivity
+and unit trace imply \(|\rho_{01}|\le\sqrt{\rho_{00}\rho_{11}}\le1/2\).
+For the opposite inequality, use the orthogonal states
+\((|0\rangle\pm |1\rangle)/\sqrt2\). Their output distance after the
+record is \(|\gamma|\). A channel contracts trace distance, since
+\(D(\rho,\sigma)=\max_{0\le E\le I}\operatorname{tr}(E(\rho-\sigma))\)
+by the positive and negative spectral parts, and the adjoint of a
+channel takes effects to effects. The triangle inequality implies
+that at least one of the two recovery errors is \((1-|\gamma|)/2\)
+or greater.
+
+Group the support by residue modulo \(|\ell|\). For a chain of
+length \(h\le m+1\), the modulus of its contribution is at most
+\(\sum_{j=1}^{h-1}|a_j||a_{j+1}|\), using local indices. The symmetric
+matrix of this quadratic form has \(1/2\) on the two adjacent
+diagonals. Its \(h\) eigenvectors have entries
+\(\sin(\pi kj/(h+1))\), \(1\le j\le h\), for \(k=1,\ldots,h\).
+The addition formula and the zero boundary entries give eigenvalues
+\(\cos(\pi k/(h+1))\), distinct and hence a full basis. The largest
+is at most \(\cos(\pi/(m+2))\). Summing over chains gives the stated
+bound. A normalized top eigenvector on a longest chain realizes
+equality, also for \(m=0\) when the overlap vanishes. The asymptotic
+follows from the second-order Taylor expansion of cosine. With
+identical branch labels the record leaves all coherences intact,
+and diagonal inputs are unchanged even for distinct labels.
+\end{proof}
+
+\subsection*{Compression, observation and phase}
+
+\begin{proposition}[Readout under iteration]\label{d4:krylov}
+Let \(V\) be finite-dimensional with a real or complex inner product,
+\(T:V\to V\) linear and \(C:V\to Y\) a linear readout to a
+finite-dimensional inner-product space. Observations
+\((Cx,CTx,\ldots,CT^m x)\) have kernel \(K_m^\perp\), where
+\[
+ K_m=\sum_{j=0}^m (T^*)^j\operatorname{ran} C^*.
+\]
+There are at most \(\dim V-\operatorname{rank}C\) strict inclusions
+in this sequence. The first equality makes \(K_m\) invariant under
+\(T^*\), so all later spaces equal it.
+
+For a positive self-adjoint update \(G\) with orthonormal eigenvectors
+\(u_j\) and \(1=\sigma_1\ge\cdots\ge\sigma_d\ge0\), iteration
+\(G^n x\) multiplies its \(j\)-th amplitude by \(\sigma_j^n\).
+For \(n\ge1\), the best rank-\(s\) approximation to \(G^n\) in
+squared Hilbert--Schmidt norm has error \(\sum_{j>s}\sigma_j^{2n}\).
+\end{proposition}
+
+\begin{proof}
+The orthogonal complement formula follows from
+\(\langle C T^j x,y\rangle=\langle x,(T^*)^j C^*y\rangle\).
+The initial dimension is \(\operatorname{rank}C\), and each strict
+inclusion adds at least one dimension. The recursion
+\(K_{m+1}=K_m+T^*K_m\) proves the stabilization claim. The spectral
+amplitudes follow by applying \(G\) to its eigenvectors, and the
+truncation proof of Proposition~\ref{d4:spectral} applies over either
+field and to arbitrary candidate operators, using their range
+projections. A component absent at initialization stays absent. In particular
+\(\langle v,Gv\rangle\) for a unit \(v\) is the weighted average
+\(\sum_j\sigma_j|\langle u_j,v\rangle|^2\); its maximum is the
+largest eigenvalue, attained on its eigenspace. For a density
+matrix \(\rho\) and rank-one basis projections \(P_j\), the
+unnormalized conditional output is
+\(P_j\rho P_j=\operatorname{tr}(P_j\rho)P_j\), by multiplication
+in that basis. Hence the unread output sums these terms with Born
+weights. Both the chosen subspaces and the update determine what
+can be retained.
+\end{proof}
+
+\begin{example}[Pinching, spectral sorting and monitored evolution]\label{d4:monitor}
+Standard-basis pinching \(P(A)=\operatorname{diag}(A_{jj})\) is
+the Hilbert--Schmidt orthogonal projection onto the diagonal
+matrices. Entrywise summation gives
+\(\|A\|_{\mathrm F}^2=\|P(A)\|_{\mathrm F}^2+
+\sum_{i\ne j}|A_{ij}|^2\). Thus the states
+\((1,\pm1)/\sqrt2\) give the same diagonal law although their density
+matrices differ in the sign of the two off-diagonal entries. Also, a
+skew-adjoint unitary \(J\) has \(J^2=-I\), by \(J^*J=I\).
+An orthogonal splitting \(v=Pv+(I-P)v\) preserves the sum of the
+squared norms even when \(J\) is applied to the second component.
+For it to be an orthogonal splitting in the same space after rotation
+one must also have \(J(I-P)v\perp Pv\), for instance by
+\(J(\ker P)\subseteq\ker P\).
+
+For \(\sigma=(1,0.76,0.54,0.35,0.20,0.10)\), at \(n=4\) just the
+first two amplitudes \(\sigma_j^4\) exceed \(0.120\). Their fractions
+of \(\sum_j\sigma_j^k\) for \(k=2,8,10\) round to
+\(0.772689,0.993334,0.997997\), respectively. The last case uses
+initial amplitudes proportional to \(\sigma_j\), since after four
+updates they are proportional to \(\sigma_j^5\).
+
+For unitary \(U\) and a rank-one orthogonal projection \(P_v\) onto
+a unit \(v\), let \(h_0=v\), \(h_{j+1}=(I-P_v)Uh_j\).
+Then \(p_{j+1}=\|P_vUh_j\|^2=\|h_j\|^2-\|h_{j+1}\|^2\) is the
+first-return probability at that step under repeated monitoring,
+and \(\sum_{j=0}^{n-1}p_{j+1}+\|h_n\|^2=1\), by orthogonal
+decomposition and telescoping. For successive equal planar
+rotations of total angle \(\pi/4\), conditioning at each step on
+survival in the initial line gives
+\[
+ P_{\rm surv}(n)=\cos^{2n}\!\left(\frac{\pi}{4n}\right)
+       =1-\frac{\pi^2}{16n}+O(n^{-2}).
+\]
+The power follows by multiplying conditional probabilities. The
+asymptotic follows from \(2n\log\cos(\pi/(4n))=
+-\pi^2/(16n)+O(n^{-3})\) and exponentiation.
+At \(n=16\) it is \(0.962166\) to six places.
+This is an inverse-tick law for the specified monitored evolution
+\cite{d4-zeno}.
+\end{example}
+
+\begin{hypothesis}[Closed readout with continuous phase symmetry]\label{d4:clockhyp}
+In the \(S^3\) model identify configurations with unit quaternions.
+Let \(Q:S^3\to Y\) be a continuous nonconstant readout into a Hausdorff
+space. Its subgroup \(K\) of comparison and transport automorphisms
+fixing \(Q\) pointwise is normalised by all left transports.
+Assume that \(K\) has positive Lie dimension.
+\end{hypothesis}
+
+\begin{corollary}[An internal clock orbit in each fibre]\label{d4:clock}
+Under Hypothesis~\ref{d4:clockhyp}, some unit imaginary quaternion
+\(u\) gives a right clock \(T=\{\rho_\chi\}\) with
+\[
+ \rho_\chi x=x(\cos\chi+u\sin\chi),\qquad
+ Jx=xu,\qquad J^2=-I .
+\]
+Each \(Q\)-fibre contains the full embedded circle
+\(\{\rho_\chi x:\chi\in\mathbb R/2\pi\mathbb Z\}\) through each of
+its points \(x\). If in addition two classes have zero class-correlation
+\(s_K(x,y)=\sup_{k\in K}c(kx,y)\), then \(K=T\).
+Thus positive Lie dimension of the common indistinguishability group,
+with left covariance and a nonconstant readout, suffices for Paper~II's
+input \([\mathrm{Cl}]\). The extra orthogonality input \([\mathrm{NT}]\)
+selects the circle itself.
+\end{corollary}
+
+\begin{proof}
+The automorphisms of the quaternionic heap preserving comparison are
+generated by commuting left and right multiplications by unit
+quaternions. Indeed, after a left translation an automorphism fixes \(1\)
+and is an orthogonal group automorphism of the unit quaternions.
+On imaginary vectors it preserves the cross product, since
+\(uv=-\langle u,v\rangle+u\times v\). Its restriction is a rotation,
+and every such rotation is quaternionic conjugation. The left
+and right groups meet in \(\{\pm I\}\).
+
+The group \(K\) is closed by continuity of the action and Hausdorffness.
+For any \(k=L_aR_b\in K\), commutators with the left group lie in
+\(K\cap\mathcal L\). If \(a\) is noncentral, some commutator is
+noncentral: otherwise continuity from the identity would give
+all commutators equal to the identity. A closed normal subgroup of
+the unit quaternions containing a noncentral element is the whole
+group. In fact a discrete normal subgroup is central by connectedness,
+and the only nonzero Lie ideal in the imaginary quaternions is
+the whole space, since brackets with all vectors are twice the
+cross product. If \(K\) contained the left group, transitivity would
+force \(Q\) constant. Hence \(K\) lies in the right group. This is
+the normalizer argument of \cite[Lemma~22]{Companion}, in
+the pointwise readout setting.
+
+Positive dimension supplies a nonzero imaginary generator in the
+Lie algebra of \(K\). Normalizing it to \(u\) gives \(T\subseteq K\).
+The displayed action satisfies \(J^2=-I\) by associativity and
+\(u^2=-1\), and its orbit map is injective on the circle by cancellation
+of \(x\), with compact image. In particular all phase-insensitive
+readouts on a chosen complex structure, such as Hermitian expectation
+values \(Q_E(x)=\langle x,Ex\rangle\), are constant on these orbits
+by cancellation of the common scalar phase. A reference that defines
+a real amplitude \(c(x_0,x)\) distinguishes phases, as witnessed by
+\(x=x_0\) and its quarter turn.
+
+For the last assertion, a Lie subalgebra of the imaginary quaternions
+containing \(u\) has dimension \(1\) or \(3\): brackets of independent
+vectors span the missing direction. Dimension \(3\) gives the whole
+right group, for which \(s_K\equiv1\). In dimension \(1\), the group
+normalises its identity component \(T\). Conjugation by a normalizer
+element sends \(u\) to \(u\) or \(-u\). The commuting unit quaternions
+are \(T\), and the anticommuting ones form the other coset \(vT\) for
+any unit imaginary \(v\perp u\). If this other coset is present,
+the real span of \(K\) is \(\mathbb H\), and \(-1\in K\) makes
+\(s_K(x,y)>0\) for all unit \(x,y\): a zero supremum would give
+\(\langle xk,y\rangle=0\) for all \(k\in K\). The zero pair therefore
+leaves exactly \(T\). This recovers the clock conclusion of
+\cite[Prop.~25]{Companion}, for such readouts.  The companion paper takes $[\mathrm{Cl}]$ as an input; Corollaries~\ref{d4:clock}
+and \ref{d4:differential} derive it under their hypotheses, and Example~\ref{d4:blind} shows that finite rank alone does not, so
+outside these hypotheses the present section supplies motivation for $[\mathrm{Cl}]$, not a derivation.
+\end{proof}
+
+
+\begin{corollary}[A clock from left covariance and differential rank]\label{d4:differential}
+Suppose a smooth nonconstant readout \(Q:S^3\to Y\) into a smooth
+manifold has a left-translation-invariant equality relation and
+\(\max_x\operatorname{rank}(dQ_x)\le2\). Then a right clock is
+invisible throughout \(S^3\).
+\end{corollary}
+\begin{proof}
+Write \(H=Q^{-1}(Q(1))\). Left invariance of equality gives \(H\)
+closed under inversion and multiplication. For example,
+\(Q(h)=Q(1)\) implies \(Q(1)=Q(h^{-1})\), and
+\(Q(k)=Q(1)\) implies \(Q(hk)=Q(h)\). The same invariance gives
+\(Q(y)=Q(x)\) exactly when \(x^{-1}y\in H\), so right multiplication
+by \(H\) fixes \(Q\). At a point of maximal differential rank
+the rank is locally constant, by the persistence of a nonzero
+maximal minor (or constancy at rank zero). The constant-rank theorem
+gives a positive-dimensional local level set. As this fibre is a
+coset of the closed Lie subgroup \(H\), \(H\) has positive Lie
+dimension. Its imaginary Lie algebra supplies a right clock as in
+Corollary~\ref{d4:clock}. Differential rank in this argument is the
+rank of the derivative of the readout.
+\end{proof}
+
+\begin{example}[Fibre dimension and observer rank]\label{d4:blind}
+A linear readout \(C:V\to Y\) of rank \(s<d=\dim V\) on \(S(V)\)
+has fibres over its image of the form
+\[
+ x_0+\{w\in\ker C:\|w\|^2=1-\|x_0\|^2\},
+ \qquad x_0\perp\ker C,\quad Cx_0=y.
+\]
+This follows by decomposing each preimage into its orthogonal
+components. For \(\|x_0\|<1\) the fibre is a sphere of dimension
+\(d-s-1\), including two points at \(s=d-1\). It is a point when
+\(\|x_0\|=1\). Full rank can give an injective readout, as with the
+identity on \(S^3\), whose state correlation has rank \(4\).
+For a nonzero real-linear readout on the full sphere, no clock acts
+trivially on all outputs: its half turn is \(-I\), which changes the
+sign of every nonzero readout. Positive-dimensional generic fibres
+can therefore coexist with an absence of a common invisible clock.
+
+Even a readout satisfying the left normalization condition can have
+only a finite common blind group. For example
+\(Q(x)=xx^{\mathsf T}\) on the real \(S^3\) has kernel on configurations
+\(\langle Q(x),Q(y)\rangle_{\mathrm F}=c(x,y)^2\) of rank \(10\)
+because \(xx^{\mathsf T}\) spans the real symmetric \(4\)-by-\(4\)
+matrices. Its fibres are exactly \(\{x,-x\}\), since equality of the
+rank-one projections gives the same line. A continuous symmetry
+fixing these lines has a constant sign on the connected sphere,
+so the common blind group is \(\{\pm I\}\) and is left-normalised.
+Paper~II excludes this reading using binarity or
+\([\mathrm{Cl}]\) with \([\mathrm{NT}]\). The finite-rank obstruction
+concerns an entire family of maps, and cannot select a clock on its own.
+\end{example}
+
+
+\begin{remark}[Quotient and refinement models]\label{d4:quotients}
+For a group action generated by \(g\), a target invariant under \(g\)
+and \(g^{-1}\) descends to the orbit quotient, by the same fibre
+argument as Theorem~\ref{d4:diagonal}. For a continuous target with
+Hausdorff codomain it is also constant on orbit closures. For the
+action \(j\mapsto j+6\) on integer addresses, the digits of
+\(0.\overline{142857}=1/7\) depend only on the class of the address.
+Long division gives \(10r_j=7d_j+r_{j+1}\) for successive remainders
+\(r_j\) and digits \(d_j\). Starting from \(r_0=1\), the remainders
+cycle back to \(1\) after six steps, with no earlier return.
+For a finite cyclic group \(\mathbb Z/m\) and a subgroup generated by
+\(d\mid m\), the sum of characters trivial on the subgroup is
+\(\sum_{j=0}^{d-1}e^{2\pi i jx/d}\), equal to \(d\) on the subgroup
+and zero otherwise by the geometric series. In a torus, write \(G\) for the closure of all integer powers of a
+fixed generator. The average of a character along nonnegative powers
+tends to one if the character is trivial on \(G\), and zero otherwise
+by the bound on the geometric sum. The Haar integrals are the same:
+translation by an element where the character is unequal to one
+forces its integral to vanish. Trigonometric polynomials separate
+points on \(G\) and are closed under conjugation, so Stone--Weierstrass
+uniform approximation gives convergence to Haar average for continuous
+complex-valued targets.
+
+An alternative refinement uses precision \(k\mapsto x\bmod p^k\)
+on integer addresses for a prime \(p\). For \(x\ne y\), the first
+distinguishing level is \(1+\nu_p(x-y)\), where \(\nu_p\) is the
+exponent of \(p\) in a nonzero integer, because equality at level
+\(k\) is divisibility by \(p^k\). The distance \(p^{-\nu_p(x-y)}\)
+(with zero on the diagonal) is ultrametric, because divisibility of
+two differences implies divisibility of their sum by the lower
+common power. Finitely many coprime moduli retain exactly the
+information of their product: the tuple map is injective on
+residues modulo the product by divisibility, and domain and
+codomain have equal finite size. Such refinements alter fibres
+without imposing roundness.
+
+A different way to exhaust a boundary is to put
+\(s_n=s_0+n\Delta\) for \(s_0\ge0\), \(\Delta>0\),
+\(\sin\theta_n=\tanh s_n\), and \(0\le\theta_n<\pi/2\).
+Then \(\cos\theta_n=\operatorname{sech}s_n>0\) at every finite
+step, and
+\[
+ 1-\sin\theta_n=\frac{2}{e^{2s_n}+1},\qquad
+ \theta_n\longrightarrow\frac{\pi}{2}.
+\]
+Both follow from the definitions of the hyperbolic functions.
+For a complex parameter \(z\ne0\),
+\(\left|(z-1)/z\right|^2-1=(1-2\operatorname{Re}z)/|z|^2\)
+by expansion. Thus the right half-plane
+\(\operatorname{Re}z>1/2\) maps to the disk and the boundary
+line to the circle with the point \(1\) deleted. Indeed
+the inverse is \(z=1/(1-w)\) for \(w\ne1\).
+These examples give exponential or arithmetic precision laws
+under their respective readouts.
+\end{remark}
+
+\begin{remark}[Quantum copying and programming]\label{d4:cloning}
+An isometric copier \(\psi\otimes b\mapsto\psi\otimes\psi\) with
+a fixed unit blank \(b\) would preserve the modulus of the overlap,
+so for any two inputs \(a=|\langle\psi,\phi\rangle|\) would obey
+\(a=a^2\). Even if an auxiliary output is allowed, its overlap has modulus at most
+one, so the output overlap remains at most \(a^2\). Distinct
+nonorthogonal rays give \(0<a<1\), for example
+\(|0\rangle\) and \((|0\rangle+|1\rangle)/\sqrt2\). The obstruction
+is the linear quantum copying condition \cite{d4-wootters,d4-dieks}.
+Exact deterministic programming is a closer operational analogue.
+In a processor implemented by an isometry, a pure program \(p_U\)
+for a unitary \(U\) gives output \(Ux\otimes a_U\): purity gives
+factorization and linearity on a basis and its pairwise sums makes
+the discarded state \(a_U\) independent of \(x\). Preservation of
+inner products for programs \(p_U,p_V\) then gives
+\[
+ \langle p_U,p_V\rangle I=\langle a_U,a_V\rangle U^*V .
+\]
+If \(U^*V\) is non-scalar, the program overlap vanishes. A finite
+quantum program space with pure programs therefore cannot program a continuum of
+distinct unitary channels exactly \cite[pp.~321--322]{d4-program}.
+Our comparison model instead allows arbitrary encoders and fixes
+the normalized Hilbert--Schmidt Gram kernel. It gives a finite
+rank obstruction and explicit entrywise error even with no physical
+processor or copying rule.
+\end{remark}
+
+\begin{remark}[claims refuted in this section]\label{d4:refuted}
+(i) \emph{A blanket finite-rank no-encoding theorem} is false: $S^0$ and $\mathrm{SO}(2)$ on its circle encode their maps exactly
+(Example~\ref{d4:small}).  The correct criterion is Theorem~\ref{d4:rank}: the span rank $k$ of the specified family against the target
+budget.  (ii) \emph{A forced hierarchy $S^1\to S^3\to S^7$} of successive encodings does not exist: the maps of $S^3$ need rank $16>8$
+(Remark~\ref{d4:tower}).  (iii) \emph{Uniqueness of the fixed point of a continuous compression} fails: the cap map of
+Example~\ref{d4:stopping} has three fixed points; Brouwer gives existence on a compact convex model, contraction gives uniqueness.
+(iv) \emph{A universal positive residual or inverse-tick floor} fails: the constant map lands exactly in one tick, $F(z)=qz$ decays
+geometrically, and binary queries reach deficit $8\cdot2^{-N}$ (Example~\ref{d4:stopping}, Remark~\ref{d4:resources}); positive bounds
+hold for target-independent catalogues (Proposition~\ref{d4:caps}) and shifted records with distinct labels (Theorem~\ref{d4:record}).
+(v) \emph{Finite rank forces a clock} fails: the identity on $S^3$ is injective and the antipodal reading $xx^{\mathsf T}$ has rank $10$ and
+two-point fibres (Example~\ref{d4:blind}); the implication holds under a positive-dimensional common symmetry
+(Corollary~\ref{d4:clock}) or the differential-rank bridge (Corollary~\ref{d4:differential}).  (vi) \emph{Strict refinement forces growth
+of dimension} fails (Example~\ref{d4:tables}, Remark~\ref{d4:logic}), and (vii) \emph{iteration reveals a highest mode} fails for an initial
+vector orthogonal to the top eigenspace (Proposition~\ref{d4:krylov}).
+\end{remark}
+
+\begin{conjecture}[Coverage along one gate sequence]\label{d4:conjecture}
+On the Bloch sphere let the allowed steps be the Hadamard and
+\(\pi/8\) gates and their inverses, acting on rays, and start at
+\([|0\rangle]\). There exists an infinite sequence of these steps
+such that the \(N\) visited rays, counted through the first \(N\)
+steps, have directional correlation deficit \(O(N^{-1})\).
+The order is necessary by Proposition~\ref{d4:caps} and
+achievable for unrestricted catalogues by the same proposition.
+Density of this gate group permits one trajectory to visit
+arbitrarily fine nets by concatenating finite words, with the
+travel cost between targets left uncontrolled \cite{d4-dawson}.
+For density, conjugating the \(z\)-axis rotation of angle \(\pi/4\)
+by the Hadamard gate gives the \(x\)-axis rotation of the same angle.
+Their product has half-angle cosine \(\cos^2(\pi/8)\) by multiplication
+of the two unit quaternions. Twice this cosine is \(1+\sqrt2/2\), of
+quadratic field norm \(1/2\); it is therefore not an algebraic
+integer. A rational multiple of \(\pi\) would give an algebraic
+integer by adding two roots of unity. The product generates a
+dense circle about an axis with nonzero \(x\) and \(z\) components.
+Conjugation by the \(z\)-rotation gives a second circle about a
+nonparallel axis. The two infinitesimal rotations and their bracket
+span \(\mathfrak{so}(3)\), so the closed generated group is \(SO(3)\).
+For a quantitative comparison, the Solovay--Kitaev bound gives
+a word of length \(O(j^a)\) to move a current ray within angular
+distance \(O(2^{-j/2})\) of any prescribed ray, for a fixed \(a\)
+\cite{d4-dawson}. At stage \(j\), visit the points of an
+\(O(2^{-j/2})\) angular net of at most \(2^j\) points using these
+words. Proposition~\ref{d4:caps} supplies the nets through
+\(1-\cos t\asymp t^2\) near zero. The stage has length
+\(O(2^j j^a)\), and upon completion its deficit is \(O(2^{-j})\).
+By tick \(N\) between completion of stages \(j\) and \(j+1\), the
+deficit is \(O(2^{-j})\) and \(N=O(2^j j^a)\). One may pad each
+stage with backtracking pairs to ensure \(N\ge2^j\) there.
+This gives \(O((\log N)^a/N)\) along one trajectory.
+\end{conjecture}
+
+\begin{remark}[Physical questions for a comparison model]\label{d4:programme}
+A physical comparison clock with rate \(\nu_0\), maximal hop length
+\(\ell_0\) and one hop per tick gives a causal speed upper bound
+\(\ell_0\nu_0\) by summing lengths. If round-trip signals share that
+bound, a return by time \(\Delta\tau\) requires
+\(2R\le\ell_0\nu_0\Delta\tau\). To obtain an inverse-time precision
+floor one must also derive a bound on usable representatives such
+as Hypothesis~\ref{d4:tickhyp}, and justify the directional loss as
+the physical error. A lattice step bound alone leaves the limiting
+shape of its causal cone open. To relate discarded components to
+time evolution requires a covariant evolution and a reproducible
+rule for when previously unread information becomes accessible.
+For example the radix map \(x\mapsto\{10x\}\) exposes successive
+digits of \(\theta_*\) when the exact number is retained, whereas
+inputs with the same three-digit record can have different next
+digits. An orthogonal decomposition of the state accounts for
+discarded norm but does not identify an evolution of that remainder.
+An interpretation in terms of causal choice would require a
+dynamical model consistent with the transition probabilities used
+in Paper~II. Likewise an operational identification between circuit
+depth, elapsed time and geometric volume requires a rate and a
+mapping from the circuit model to physical observables.
+\end{remark}
+
 \setcounter{section}{5}
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\theHsection}{\arabic{section}}
@@ -5281,6 +6229,791 @@ of the classical type ``holonomy is bounded by curvature times area'', here with
 discrete Corollary~\ref{cor:excess}, and Corollary~\ref{cor:convex} shows that the constant cannot be improved.  Together with Theorem~\ref{thm:stokes} and Proposition~\ref{prop:plaquette}, the face
 products converge to the surface-ordered exponential of the continuum non-abelian Stokes theorem \cite{Arefeva,KMR}.
 
+% Section 9A: lettered so that Sections 10 onwards (cited by Paper II) keep their numbers.
+\setcounter{section}{0}
+\renewcommand{\thesection}{9\Alph{section}}
+\renewcommand{\theHsection}{arcA.\arabic{section}}
+\section{Arc bodies and the tropical limit of Gram elimination}
+\label{sec:m5}
+
+Two orthogonal minimal arcs determine three different costs between their
+outer endpoints. The straight chord is shorter than the spherical arc, which
+is shorter than the two arcs through the pivot. Which of these savings has an
+analogue in Gram elimination? Orthogonal projection gives the exact
+comparison after eliminating a pivot. For exponentially scaled comparisons,
+the logarithmic cost of this residual is the shortest path through the
+eliminated vertices precisely when the signed coefficients of the shortest
+paths have nonzero sum. A common sign ensures that all tied paths contribute.
+This gives a quantitative version of the relation between Gram elimination and
+the min--plus pivot rule.  Definition~\ref{m5:body} and Example~\ref{m5:scales} set up the cell (excess \eqref{m5:excess}),
+Proposition~\ref{m5:gram-interval} gives the admissible three-point Gram data, Proposition~\ref{m5:walksum} treats positive walk sums,
+Remark~\ref{m5:scales-compatibility} the scale, Example~\ref{m5:six} the block update, Remark~\ref{m5:dictionary} the three path inputs,
+Proposition~\ref{m5:gb} and Example~\ref{m5:hemisphere} the additive boundary data, and Remarks~\ref{m5:algorithm}, \ref{m5:sagitta},
+\ref{m5:hypotheses} and \ref{m5:literature} the algorithmic, H\"older, physical and bibliographic context.
+
+\subsection{The right spherical arc body}
+
+\begin{definition}\label{m5:body}
+In a three-dimensional real subspace of the round model of Paper I, take an
+orthonormal frame \(B,U,V\) and set
+\[
+ A=\cos\varepsilon\,B+\sin\varepsilon\,U,\qquad
+ C=\cos\varepsilon\,B+\sin\varepsilon\,V,\qquad
+ 0\leq\varepsilon\leq\pi/2.
+\]
+The arc body is the cone of nonnegative combinations of \(A,B,C\) intersected
+with the closed unit ball. Its cap is the intersection of the cone with the
+unit sphere. The two walls through the radius \(OB\), where \(O=0\), are the
+radial sectors over the minimal arcs \(AB\) and \(BC\). The third radial
+sector lies in \(OAC\). The triangle \(ABC\) is the flat section through the
+three spherical vertices.
+\end{definition}
+
+\begin{theorem}[Three lengths and the right cap]\label{m5:ladder}
+Write \(a=d(A,C)\) and \(\ell=\lVert A-C\rVert\). For
+\(0<\varepsilon\leq\pi/2\),
+\begin{equation}\label{m5:three}
+ \ell=\sqrt{2}\sin\varepsilon
+ < a=\arccos(\cos^2\varepsilon)
+ < d(A,B)+d(B,C)=2\varepsilon .
+\end{equation}
+These are the shortest lengths in the arc body, on its spherical cap, and on
+the union of the two \emph{spherical wall edges}, respectively. Both
+inequalities are equalities exactly at \(\varepsilon=0\) in the closed
+parameter range. On the closed chord the deepest point is the midpoint, at
+radial depth
+\begin{equation}\label{m5:depth}
+ 1-\sqrt{\frac{1+\cos^2\varepsilon}{2}}
+ =1-\sqrt{\kappa(A,C)}
+ =\frac{\varepsilon^2}{4}+O(\varepsilon^4).
+\end{equation}
+The cap has area and spherical excess
+\begin{equation}\label{m5:excess}
+ E=2\arctan\!\bigl(\tan^2(\varepsilon/2)\bigr)
+   =\frac{\varepsilon^2}{2}+O(\varepsilon^4).
+\end{equation}
+The three-vector Gram determinant is \(\sin^4\varepsilon\). The tetrahedron
+\(OABC\) has volume \(\sin^2\varepsilon/6\), and the arc body has volume \(E/3\).
+\end{theorem}
+\begin{proof}
+The three inner products are \(c(A,B)=c(B,C)=\cos\varepsilon\) and
+\(c(A,C)=\cos^2\varepsilon\). Thus Definition~\ref{def:arc} gives the
+spherical lengths. The shorter great-circle arc \(AC\) is obtained by
+normalizing the straight segment, so it lies on the cap. The segment itself
+lies in the arc body by convexity, and the Euclidean triangle inequality
+gives its minimality. For positive \(\varepsilon\), the two spherical wall
+edges meet only at \(B\), so any path confined to them from \(A\) to \(C\)
+must traverse at least their two lengths. The wall planes have orthogonal
+normals \(U,V\). The two tangents at \(B\) are also orthogonal.
+If paths may use the full radial sectors, their shortest length is
+\(2\sin\varepsilon\). Indeed, a path crossing the common radius at
+\(rB\) has length at least
+\(2\sqrt{(r-\cos\varepsilon)^2+\sin^2\varepsilon}\).
+The minimum occurs at \(r=\cos\varepsilon\in[0,1]\) and the corresponding
+two straight segments lie in the respective sectors by convexity.
+
+The chord satisfies \(\ell=2\sin(a/2)\). For \(a>0\),
+\(\sin(a/2)<a/2\) by integrating \(\cos t<1\) on \(0<t\leq a/2\).
+Also \(\cos(2\varepsilon)=\cos^2\varepsilon-\sin^2\varepsilon
+<\cos^2\varepsilon\), and \(\arccos\) is decreasing on its principal branch,
+with \(2\varepsilon\in[0,\pi]\). At zero all three lengths vanish.
+For \(t\in[0,1]\) the chord point \((1-t)A+tC\) has squared norm
+\(1-2t(1-t)\sin^2\varepsilon\). Its unique minimum for positive
+\(\varepsilon\) occurs at \(t=1/2\). The chord is inside the unit ball
+except at its endpoints. It lies in the third radial face of the body.
+When \(\varepsilon=0\) the chord consists of the single point \(B\).
+The midpoint depth uses the minimal-arc sagitta from
+Definition~\ref{def:arc}, with \(v(A,C)=\ell^2/2\) for the paper's
+doubled-arc convention.
+
+The coordinate determinant of the three columns \(A,B,C\) in the given
+frame has modulus \(\sin^2\varepsilon\), giving the Gram determinant and
+tetrahedron volume. The solid-angle formula used in
+Theorem~\ref{thm:triangle} gives
+\(\tan(E/2)=\sin^2\varepsilon/(1+\cos\varepsilon)^2
+=\tan^2(\varepsilon/2)\). Its denominator is positive and that theorem fixes
+the branch. At zero the cap degenerates and has area zero. Radial
+integration of the area element with factor \(r^2\), \(0\leq r\leq1\),
+gives the volume \(E/3\). Expanding \(\sin\varepsilon\) and the square root
+in the depth, and \(\tan(\varepsilon/2)\) and \(\arctan\) in the excess,
+gives the stated remainders.
+\end{proof}
+
+\begin{example}[Scales of the three costs]\label{m5:scales}
+The relation \(a=2\arcsin(\sin\varepsilon/\sqrt2)\), with both branches
+in \([0,\pi/2]\) for \(a\) and \([0,\pi/4]\) for \(a/2\), yields
+\(a-\ell=(\sqrt2/12)\varepsilon^3+O(\varepsilon^5)\) by the cubic
+term of \(\arcsin\). Thus the chord saves only cubic order over the
+spherical arc, whereas \(2\varepsilon-a=(2-\sqrt2)\varepsilon+
+O(\varepsilon^3)\). In radians and to six decimal places the comparisons
+and depths from \eqref{m5:three} and \eqref{m5:depth} are
+\[
+\begin{array}{c|rrrrr}
+\varepsilon & 2\varepsilon & a & \ell & 1-\sqrt{\kappa(A,C)}
+ & 1-\ell/(2\varepsilon)\\ \hline
+15^\circ &0.523599&0.368100&0.366025&0.016889&0.300943\\
+30^\circ &1.047198&0.722734&0.707107&0.064586&0.324763\\
+45^\circ &1.570796&1.047198&1.000000&0.133975&0.363380\\
+60^\circ &2.094395&1.318116&1.224745&0.209431&0.415227\\
+90^\circ &3.141593&1.570796&1.414214&0.292893&0.549842
+\end{array}
+\]
+At \(60^\circ\), \(\tan^2(\varepsilon/2)=1/3\), so the excess is
+\(2\arctan(1/3)\), or approximately \(36.87^\circ\). At \(90^\circ\) the
+cap is an octant of area \(\pi/2\). The Gram determinant in
+Theorem~\ref{thm:triangle} supplies the volume factor for this specific
+triangle and its spin holonomy angle is \(E\).
+\end{example}
+
+\begin{proposition}[The three-point Gram interval]\label{m5:gram-interval}
+For real unit vectors \(A,B,C\) set \(x=c(A,B)\), \(y=c(B,C)\),
+\(z=c(A,C)\). The possible \(z\) given \(x,y\in[-1,1]\), in dimension
+at least three, form the interval
+\[
+ xy-\sqrt{(1-x^2)(1-y^2)}\ \le z\le\
+ xy+\sqrt{(1-x^2)(1-y^2)}.
+\]
+The determinant of the three-point Gram matrix is
+\((1-x^2)(1-y^2)-(z-xy)^2\). For a positive interval radius, its endpoints
+are exactly the rank-two cases, while its interior has rank three.
+A vanishing radius forces \(z=xy\), with rank one if both \(1-x^2\) and
+\(1-y^2\) vanish and rank two otherwise. With \(\theta_1=\arccos x\),
+\(\theta_2=\arccos y\), the endpoints are \(\cos(\theta_1+\theta_2)\)
+and \(\cos(\theta_1-\theta_2)\).
+\end{proposition}
+\begin{proof}
+Subtract the \(B\)-components \(xB,yB\) from \(A,C\). The resulting
+vectors have squared norms \(1-x^2,1-y^2\) and inner product \(z-xy\).
+The determinant of their two-vector Gram matrix is the determinant of
+the original by the same row and column subtractions. Cauchy--Schwarz
+bounds this inner product. In the two-dimensional orthogonal complement
+of \(B\), all angles between the residuals are available when both
+lengths are positive, with collinearity precisely at either endpoint.
+When one length is zero the other residual determines the extra rank.
+The endpoint formulas follow from the cosine addition rules and
+\(\sin\theta_i\geq0\). For the arc body the residuals are orthogonal,
+so \(z=xy\); in particular the orthogonal frame \(A,B,V\) has Gram
+determinant \(\sin^2\varepsilon\), while \(A,B,C\) has determinant
+\(\sin^4\varepsilon\).
+\end{proof}
+
+\begin{remark}[Real and projective angles]\label{m5:angles}
+For unit vectors in a complex inner-product space, the projective angle
+\(\arccos|\langle X,Y\rangle|\) satisfies the triangle inequality.
+Independently phase-align the outer vectors with the middle one.
+The adjacent real spherical angles are then the two projective angles.
+The angle between the phases chosen for the outer vectors is at least
+their projective angle, since the real part of their overlap is bounded
+above by its modulus. The real sphere triangle inequality yields the
+claim. The right cell here has nonnegative pairwise inner products,
+so these angles agree on its three edges. The strict bound uses the
+orthogonal tangent directions. The angular triangle inequality alone
+supplies a weak upper bound. The Gram construction uses the real
+inner-product setting of Propositions~\ref{m1:gram} and
+\ref{m1:distance}, which already give the reconstruction and distance
+criteria.
+\end{remark}
+
+\subsection{Elimination of comparisons and the logarithmic limit}
+
+\begin{proposition}[Residual Gram matrices]\label{m5:projection}
+Let \(K\) be the positive-definite Gram matrix of unit or nonunit vectors
+\(X_i\), in a real or complex inner-product space. For a set \(I\) of
+eliminated indices let \(J\) be its complement. Write \(K[I]\) for the
+principal block, with empty determinant \(1\), and let \(P_I\) be the
+orthogonal projection onto the span of the \(X_b\), \(b\in I\).
+The Schur complement on \(J\) is
+\begin{equation}\label{m5:gramschur}
+ S=K[J]-K_{JI}K[I]^{-1}K_{IJ}
+   =\bigl(\langle(1-P_I)X_i,(1-P_I)X_j\rangle\bigr)_{i,j\in J}.
+\end{equation}
+It is positive definite, and the same matrix results from successive
+one-vertex eliminations in any order of \(I\). One eliminated \(b\)
+gives \(S_{ij}=K_{ij}-K_{ib}K_{bj}/K_{bb}\). The residuals give
+unit-vector comparisons \(S_{ij}/\sqrt{S_{ii}S_{jj}}\).
+\end{proposition}
+\begin{proof}
+Use the convention antilinear in the first slot. For \(i\in J\) the
+coefficients of \(P_I X_i\) in the eliminated family solve the normal
+equations \(K[I]\alpha_i=K_{Ii}\). Substitution into the inner product
+gives \eqref{m5:gramschur}. A linear combination of remaining
+residuals vanishes only if the corresponding combination of \(X_i\)
+lies in the span of the eliminated family, so independence proves
+strict positivity. After projecting away a subspace \(L\), projecting
+away the residual of \(X_b\) removes a direction orthogonal to \(L\).
+Their orthogonal direct sum is \(L+\operatorname{span}(X_b)\).
+Induction gives the claimed order independence. Dividing by residual
+norms realizes the stated comparisons.
+\end{proof}
+
+For the limit use a separate parameter \(h>0\). For a finite vertex set
+and distinct \(i,j\) set \(K_{ij}(h)=a_{ij}e^{-w_{ij}/h}\) on present edges,
+with fixed nonzero real or complex \(a_{ij}\) and fixed strictly positive
+costs \(w_{ij}\). Use \(K_{ij}=0\) and \(w_{ij}=+\infty\) on absent edges,
+and \(K_{ii}=1\). In the Gram setting take
+\(w_{ji}=w_{ij}\), \(a_{ji}=\overline{a_{ij}}\). The symbol \(K\)
+denotes these inner-product comparisons. For a simple directed path
+\(p:i\to j\) with all interior vertices in \(I\), let \(w(p)\) be its
+sum of costs, \(a(p)\) the product of its amplitudes in path order,
+\(I(p)\) its interior vertex set, and \(r(p)=|I(p)|\). A direct edge has
+\(r(p)=0\). Work with distinct surviving \(i,j\); the graph-distance
+diagonal is zero by the empty path convention.
+
+\begin{theorem}[Schur dequantisation and ties]\label{m5:tropical}
+Let \(\delta>0\) be a lower bound for the finite off-diagonal costs.
+Then \(K[I]\) is invertible for all sufficiently small \(h\), and \(K\)
+is positive definite in the Hermitian case. Write
+\(D^I_{ij}=\min_p w(p)\), with empty minimum \(+\infty\).
+If there is no path, \(S_{ij}=0\) identically. Otherwise put
+\[
+ C_{ij}=\sum_{w(p)=D^I_{ij}}(-1)^{r(p)}a(p),\qquad
+ \gamma=\min\{2\delta,\ \min_{w(p)>D^I_{ij}}(w(p)-D^I_{ij})\}.
+\]
+If \(C_{ij}\ne0\), then the ordinary Schur residual satisfies
+\begin{equation}\label{m5:rate}
+ -h\log|S_{ij}|=D^I_{ij}-h\log|C_{ij}|+O(h e^{-\gamma/h}).
+\end{equation}
+The same formula holds for the normalized Gram residual. For \(C_{ij}=0\)
+the limiting cost is the least exponent with nonzero total coefficient
+in the finite numerator
+\begin{equation}\label{m5:sum}
+ \det K[I]\,S_{ij}
+ =\sum_p (-1)^{r(p)}a(p)e^{-w(p)/h}\det K[I\setminus I(p)].
+\end{equation}
+Here the principal determinants are expanded as finite exponential sums.
+That cost is strictly larger than \(D^I_{ij}\), possibly \(+\infty\)
+if all coefficients vanish. With a first nonzero coefficient \(c\)
+at exponent \(\lambda\), \eqref{m5:rate} holds with \(D^I_{ij},C_{ij}\)
+replaced by \(\lambda,c\) and with the minimum of \(2\delta\) and
+the gap to the next nonzero exponent. Thus noncancellation of the
+shortest paths is necessary and sufficient for the unrestricted
+shortest-path value at this entry. These assertions apply simultaneously
+to all pivot sets of a fixed finite matrix.
+\end{theorem}
+\begin{proof}
+The maximum absolute row sum of \(K-\mathbf 1\) is \(O(e^{-\delta/h})\),
+where \(\mathbf 1\) is the identity matrix. This yields invertibility
+for small \(h\), including for all principal blocks. In the Hermitian
+case the inequality \(2|v_i||v_j|\le |v_i|^2+|v_j|^2\) bounds the
+absolute off-diagonal quadratic form by the maximum row sum times
+\(\lVert v\rVert^2\), giving positivity. Each principal determinant
+is \(1+O(e^{-2\delta/h})\) since every nonidentity permutation moves
+at least two indices. The estimate includes the empty block.
+Successive elimination also yields the block formula in the directed
+case. For fixed surviving coordinates \(u_J\), the equations
+\((Ku)_I=0\) have the unique solution
+\(u_I=-K[I]^{-1}K_{IJ}u_J\). Solving these equations by successive
+substitutions, whose pivots are nonzero ratios of successive principal
+determinants, gives the same surviving outputs \((Ku)_J=S u_J\).
+
+Order the rows of the bordered minor as \(i,I\) and columns as \(j,I\),
+using the same order of \(I\). Block row elimination gives its
+determinant as \(\det K[I]\,S_{ij}\). In its permutation expansion,
+identify the first row and column position as one symbol. The cycle
+through this symbol is a path from \(i\) to \(j\) through distinct
+interior vertices. Its sign is \((-1)^{r(p)}\), since the cycle has
+\(r(p)+1\) positions. The terms using an absent edge vanish. The
+permutations of the unused interior positions contribute their
+principal determinant with their own signs, because disjoint cycle
+signs multiply. This gives \eqref{m5:sum}.
+
+The only terms at the minimum path exponent come from shortest paths
+and the identity term of the remaining determinants. Every other
+term has an extra cost of at least \(\gamma\). If \(C_{ij}\ne0\),
+divide by the principal determinant to obtain
+\(S_{ij}=e^{-D^I_{ij}/h}(C_{ij}+O(e^{-\gamma/h}))\).
+For small \(h\) the factor in parentheses stays away from zero,
+so taking log modulus gives \eqref{m5:rate}. After exact cancellation,
+the same argument starts with the first nonzero coefficient. If
+the numerator is empty or every grouped coefficient is zero, set
+\(-h\log|0|=+\infty\). For a Gram entry \(S_{ii}=1+O(e^{-2\delta/h})\),
+as follows from boundedness of \(K[I]^{-1}\) and the off-diagonal
+blocks in \eqref{m5:gramschur}. Normalization adds \(O(h e^{-2\delta/h})\)
+to the logarithmic cost. There are finitely many pivot sets and entries,
+so common sufficiently small \(h\) and uniform bounds over the
+finite family are available.
+\end{proof}
+
+\begin{corollary}[A sign condition for every elimination]\label{m5:sign}
+If \(a_{ij}=-b_{ij}\), \(b_{ij}>0\) on present edges, then
+\[
+ C_{ij}=-\sum_{w(p)=D^I_{ij}}\prod_{(u,v)\in p} b_{uv}.
+\]
+Consequently the logarithmic limit is the min--plus Schur complement for
+every \(I\), even with ties. For \(b_{ij}=1\) the order-\(h\) correction in
+\eqref{m5:rate} is \(-h\log N_{ij}\), where \(N_{ij}\) counts shortest
+simple paths through \(I\). The same conclusions for magnitudes hold
+after conjugating \(K\) by any diagonal unitary. For real symmetric
+amplitudes a diagonal signing that makes every edge negative exists
+exactly when the product of edge signs on each simple cycle of length
+\(q\) is \((-1)^q\).
+\end{corollary}
+\begin{proof}
+A path of \(r+1\) edges has sign \((-1)^{r+1}\) from its edges
+and \((-1)^r\) from elimination. Their product is \(-1\).
+Diagonal conjugation telescopes the signs or phases of a path to its
+two endpoints, and commutes with the Schur operation by block
+multiplication. For real amplitudes, vertex signs cancel in cycle
+products, proving necessity. Choose a spanning tree in each connected
+component and recursively choose vertex signs so that the tree edges
+become negative. A nontree edge together with its tree path forms a
+simple cycle. Its required product forces that edge to be negative as
+well. This is the flat gain criterion of the sparse comparison
+construction in Theorem~\ref{m1:chordal}, applied to the signs of
+\(-a_{ij}\) on the support, with the cycle condition exposed here for
+general graphs.
+\end{proof}
+
+\begin{proposition}[Positive walk sums, including zero costs]\label{m5:walksum}
+Let \(K=\mathbf 1-A(h)\) with \(A_{ii}=0\) and \(A_{ij}=b_{ij}e^{-w_{ij}/h}\)
+on edges, where \(b_{ij}>0\) and \(w_{ij}\geq0\). Set \(A=0\) on
+absent edges. Assume \(\max_i\sum_j b_{ij}e^{-w_{ij}/h_0}\leq r<1\)
+for some \(h_0>0\). Symmetric \(A\) gives a positive-definite Gram
+matrix for all \(0<h\le h_0\), and directed \(A\) defines an invertible
+matrix on each principal index set in the same range. For distinct
+survivors, \(-S_{ij}\) is the sum of the products of the \(A\)-entries
+over all walks from \(i\) to \(j\) confined internally to \(I\).
+For reachable pairs, choose one shortest simple path with amplitude
+product \(B>0\) and write \(D=D^I_{ij}\). Then
+\begin{equation}\label{m5:walk-rate}
+ D-h\log\!\left(e^{D/h_0}\frac{r}{1-r}\right)
+ \ \leq -h\log(-S_{ij})\ \leq D-h\log B.
+\end{equation}
+The leading positive coefficient after factoring out \(e^{-D/h}\)
+is the sum of amplitude products over all shortest walks, which can
+include zero-cost cycles. If a larger walk cost occurs, the remainder
+in that coefficient is \(O(e^{-\eta/h})\) for the gap \(\eta>0\) to
+the next larger cost. The correction also vanishes identically if
+no larger cost occurs.
+\end{proposition}
+\begin{proof}
+The row sum bound holds throughout the stated range. Hence
+\((\mathbf 1-A[I])^{-1}=\sum_{k\ge0}A[I]^k\) by geometric norm
+convergence. The off-diagonal Schur formula reads
+\(-S_{ij}=A_{ij}+A_{iI}(\mathbf 1-A[I])^{-1}A_{Ij}\), giving the
+walk expansion. Positivity in the symmetric case follows from the
+quadratic form bound used in Theorem~\ref{m5:tropical}.
+Cycles can be removed from walks without increasing costs, so the
+walk infimum is the minimum over simple paths. The single minimizing
+path bounds the sum from below by \(Be^{-D/h}\).
+At \(h_0\) the sum over walks from \(i\) to \(j\) is bounded by the
+sum of row sums \(r^k\) over lengths \(k\ge1\).
+For \(h\le h_0\) each walk contributes at most its weight at \(h_0\)
+times \(e^{-D(1/h-1/h_0)}\), proving the upper bound on the sum and
+then \eqref{m5:walk-rate}. Unreachable entries have empty walk sum.
+The possible costs have finite intersection with each bounded interval:
+each positive edge has cost at least the least positive edge cost when
+such an edge exists, and zero edges add nothing. Thus a next larger
+cost, when present, has a positive gap. For the remainder, apply the
+same upper bound on the walk sum restricted to costs at least
+\(D+\eta\), then multiply by \(e^{D/h}\). Absolute convergence at \(h_0\)
+bounds the sum of shortest-walk amplitudes after the same rescaling.
+\end{proof}
+
+\begin{example}[Positive Gram entries can cancel]\label{m5:counter}
+Let \(t=e^{-1/h}\) and take the three unit-diagonal Gram comparisons
+\(K_{ib}=K_{bj}=t\), \(K_{ij}=t^2\), with real symmetric entries.
+The matrix is positive definite for \(0<t<1\): projecting out \(b\)
+gives the residual \((1-t^2)\mathbf 1\) on \(\{i,j\}\), and completing
+the square in the \(b\)-coordinate gives strict positivity of the full
+form. Eliminating \(b\) gives \(S_{ij}=0\), although the direct edge
+and the path through \(b\) both have cost \(2\). For a finite jump in
+the limit, add another pivot \(c\) with \(K_{ic}=t\), \(K_{cj}=t^2\),
+\(K_{bc}=0\). The enlarged matrix is positive definite for small \(h\)
+by the row-sum test. Eliminating \(b,c\) gives \(S_{ij}=-t^3\) because
+their principal block is the identity. The graph minimum is still \(2\)
+and the residual exponent is \(3\). The three-point example also shows
+why a universal positive-entry scalar logarithm cannot represent
+Schur elimination.
+\end{example}
+
+\begin{remark}[Comparison scales]\label{m5:scales-compatibility}
+Paper I's \(\kappa=(1+c)/2=\cos^2(d/2)\) is different from the
+matrix entries being scaled in Theorem~\ref{m5:tropical}. In particular,
+three unit states cannot have all their off-diagonal Paper I
+\(\kappa\)-values tend to zero. If they did, all three \(c\)-values
+would tend to \(-1\) and the squared norm of the sum of the states
+would tend to \(3-6=-3\). Our Hermitian matrices encode costs through
+\(|K_{ij}|\) and tend to the identity. When realized by unit vectors,
+their real spherical angles tend to \(\pi/2\). The realization has
+rank equal to the number of vertices and lives in a sufficiently
+large sphere. The fixed geometric cell and the parameterized
+comparison kernels address different stages of the construction.
+\end{remark}
+
+\begin{theorem}[Min--plus elimination]\label{m5:pivot}
+For any vertex set with directed weights in \([0,+\infty]\), eliminate \(b\)
+by assigning surviving pairs the weights
+\begin{equation}\label{m5:recurrence}
+ w'_{ij}=\min(w_{ij},w_{ib}+w_{bj}).
+\end{equation}
+The infimum of walk costs between surviving vertices is unchanged.
+Each original walk compresses to one of no larger cost and each reduced
+walk expands to one of equal cost. For a finite set \(I\) of eliminated
+vertices, repeated updates on distinct pairs produce the entries
+\(D^I_{ij}\), with diagonal set to zero. If \(D^I\) is already the
+current matrix, the same update adds \(b\) to the set of allowed interior
+vertices. Equivalently, for a finite interior block,
+\begin{equation}\label{m5:closure}
+ D^I_{ij}=\min\Bigl(w_{ij},\
+  \min_{u,v\in I}\bigl(w_{iu}+(w[I]^*)_{uv}+w_{vj}\bigr)\Bigr),
+\end{equation}
+where the star is the infimum of internal walk lengths, including
+length zero for a trivial walk. Equality of a direct and an indirect
+cost permits either expansion, and the scalar rule keeps just their
+common cost.
+\end{theorem}
+\begin{proof}
+A maximal run at \(b\) has surviving endpoints immediately before and
+after it. Omit the nonnegative loops at \(b\) and replace the resulting
+two edges by the shortcut in \eqref{m5:recurrence}. Each other edge can
+only decrease in weight. Conversely, for each reduced edge choose a
+branch attaining the minimum and expand it. This works also for infinite
+costs, where both branches may be infinite. Taking infima gives equality
+even without finiteness or attainment of a shortest walk.
+For finite \(I\), simple minimizing paths suffice by deletion of
+nonnegative cycles. Such a path internally visiting the new pivot \(b\)
+uses it once and splits there into two paths with interiors in \(I\).
+Conversely any concatenation of admissible paths through \(b\) is an
+admissible walk. Removing its cycles gives a simple path of no larger
+cost. These two inequalities give the update and independence of order
+of elimination. Finally split a walk that enters \(I\) at its first
+and last interior vertices, giving \eqref{m5:closure}.
+\end{proof}
+
+\begin{example}[Four local rounds and a pivot cost]\label{m5:six}
+On \((p_1,b_1,b_2,b_3,b_4,p_2)\) take the following directed edges:
+\[
+\begin{array}{c|l}
+p_1 & b_1:2,\ b_2:5,\ p_2:11\\
+b_1 & b_2:1,\ b_4:6\\
+b_2 & b_3:2,\ p_2:6\\
+b_3 & b_2:1,\ b_4:1,\ p_2:4\\
+b_4 & p_2:1
+\end{array}
+\]
+Other edges have infinite cost. Start with zero at \(p_1\) and infinity
+elsewhere. Each synchronous relaxation takes the minimum of the old
+cost and all incoming one-edge extensions of the old costs. By induction
+this yields the minimum over walks of at most the current number of
+edges, because each nontrivial walk has a last edge. Substitution
+gives the successive costs at \((b_1,b_2,b_3,b_4)\)
+\[
+(2,5,\infty,\infty),\qquad (2,3,7,8),\qquad
+(2,3,5,8),\qquad (2,3,5,6).
+\]
+A shortest simple path to an internal vertex uses at most four edges
+here, since \(p_2\) has no outgoing edge. The internal two-cycle has
+cost \(3\). Taking the final edge to \(p_2\) gives
+\(\min(11,2+\infty,3+6,5+4,6+1)=7\), attained by the five-edge
+path through \(b_1,b_2,b_3,b_4\) in that order. This is also the
+entry formed by eliminating the four internal vertices.
+Using only the original entries \(w_{p_1b}+w_{bp_2}\) gives \(11\).
+Even after a single round of preliminary relaxation, the resulting
+one-interior-index formula gives \(11\), so a bounded preliminary
+window needs a closure or a separate guarantee of coverage.
+\end{example}
+
+\begin{proposition}[Chordal elimination and fill]\label{m5:fill}
+On a finite undirected support graph the structural pivot rule joins every
+pair of surviving neighbours before deleting the pivot. An ordering
+has no structural fill exactly when every pivot is simplicial in its
+remaining induced subgraph. Such an ordering exists exactly for chordal
+graphs. The same rule gives the exact finite-weight off-diagonal support
+of \eqref{m5:recurrence} for symmetric weights, and the nonzero
+off-diagonal support of ordinary elimination on the Hermitian
+positive-definite matrices with real nonpositive off-diagonal entries.
+\end{proposition}
+\begin{proof}
+A pivot with two nonadjacent neighbours creates an edge. A pivot whose
+neighbours form a clique creates none. Under the min--plus rule a
+shortcut is finite exactly when both edges of the two-step path are
+finite. Under the Schur rule the two-step product divided by the positive
+pivot is nonnegative, so it cannot cancel a negative entry and is
+positive exactly when both edges exist. Each reduced matrix retains
+these sign and definiteness properties by Proposition~\ref{m5:projection}.
+An induced cycle of length at least four forbids a no-fill ordering
+because its earliest vertex has two still-present nonadjacent
+neighbours. A nonempty finite chordal graph has a simplicial vertex
+by the chordal argument in Theorem~\ref{m1:chordal}. Induced subgraphs
+remain chordal, giving an ordering by induction, including the empty
+case. Thus signed matrices and min--plus pivots use the same
+combinatorial elimination as the sparse comparison theorem.
+\end{proof}
+
+\begin{remark}[Three kinds of path input]\label{m5:dictionary}
+The wall route gives a prescribed two-edge cost \(2\varepsilon\).
+Making the cap edge available at cost \(a\) gives
+\(\min(a,2\varepsilon)=a\) after eliminating \(B\).
+Making the Euclidean chord available at cost \(\ell\) changes the
+input and yields \(\min(\ell,2\varepsilon)=\ell\).
+If all spherical distances on a finite set are already supplied as
+edge costs, a pivot leaves every surviving weight unchanged by the
+triangle inequality.
+Projection gives residual comparisons, the logarithmic rates give
+edge costs, and Theorem~\ref{m5:pivot} gives the exact meaning of
+an effective edge. In this dictionary a chord models the availability
+of a cheaper route. In particular, eliminating \(B\) in the original
+right-cell Gram matrix gives \(S_{AC}=\cos^2\varepsilon-
+\cos\varepsilon\cos\varepsilon=0\). This is an exact geometric instance
+of the same cancellation as in Example~\ref{m5:counter} whenever
+\(0<\varepsilon<\pi/2\).
+\end{remark}
+
+\begin{remark}[Algorithmic context]\label{m5:algorithm}
+The shortest-path recurrence of Floyd and the Boolean analogue of
+Warshall are instances of semiring closure \cite{m5:Floyd,m5:Warshall,m5:Mohri}.
+For nonnegative directed real weights Duan, Mao, Mao, Shu and Yin
+give a deterministic \(O(m\log^{2/3}n)\) single-source algorithm in
+the comparison--addition model \cite[Thm.~1.1]{m5:Duan}.
+Their bounded search selects a subset of roots whose disjoint
+trees meet a size threshold \cite[Lem.~3.2]{m5:Duan}.
+The disjointness is crucial. In a rooted path on \(n\) vertices,
+\(n-k+1\) vertices have inclusive subtree size at least \(k\).
+This can exceed \(n/k\), as for \(n=4,k=2\).
+For comparison, Dijkstra's algorithm extracts vertices in distance order.
+The Fibonacci-heap bound is \(O(m+n\log n)\), and the working-set
+result concerns the distance-ordering problem
+\cite{m5:Dijkstra,m5:FT,m5:Haeupler}.
+On a directed star rooted at the source, the distances of the leaves
+are their independent edge weights. A comparison procedure asked for
+their sorted order must distinguish \((n-1)!\) leaf orders and has
+worst-case depth at least \(\log_2((n-1)!)=\Theta(n\log n)\).
+The order of growth follows by bounding the sum of the logarithms above
+by \(n\log_2 n\) and below by the last \(\lfloor(n-1)/2\rfloor\)
+summands. Dense elimination via \eqref{m5:recurrence} scans quadratically
+many pairs per pivot. The distance-preservation theorem supplies the
+identity used for a shortcut, while the running time depends on the
+search and scheduling argument of the algorithm.
+\end{remark}
+
+\subsection{Finite Stokes, curvature and boundary data}
+
+\begin{proposition}[Additive boundary elimination]\label{m5:stokes}
+Let a finite oriented surface chain \(\Sigma\) be the sum of its
+oriented triangular faces. Each inner edge occurs in two opposite
+orientations. For an additive cochain \(\Phi\) with values in an abelian
+group and \(\Phi(-e)=-\Phi(e)\), put \(d\Phi(f)=\Phi(\partial f)\). Then
+\begin{equation}\label{m5:abel}
+ \sum_f d\Phi(f)=\Phi(\partial\Sigma).
+\end{equation}
+The simplicial coboundary has \(d^2=0\) over the same coefficients,
+in particular on a tetrahedron. If the edge data are exact integrals
+of a smooth form the identity has no quadrature error. For approximate
+edge data used consistently on both sides of an inner edge, the
+difference from the exact total is the sum of signed errors along
+the boundary.
+\end{proposition}
+\begin{proof}
+Expand the oriented sum of boundaries. The inner edge pairs sum to
+zero and the remaining chain is \(\partial\Sigma\), proving
+\eqref{m5:abel}. In \(\partial^2\) of an ordered simplex, a
+codimension-two face formed by omitting vertices \(i<j\) occurs with
+signs \((-1)^{i+j-1}\) and \((-1)^{i+j}\). Thus the boundary of the
+boundary is the zero chain. Apply \eqref{m5:abel} to the difference
+cochain to obtain the quadrature assertion. This applies at every
+finite mesh size. In dimension three the ranks \(1,3,3,1\) are those
+of the exterior powers of a three-dimensional vector space, counted
+by increasing tuples of basis indices. A simplicial tetrahedron
+itself has \(4,6,4,1\) cells in degrees \(0,1,2,3\).
+\end{proof}
+
+\begin{proposition}[Spherical excess and vertex defects]\label{m5:gb}
+Let a compact triangulated surface, possibly with boundary, be assembled
+from unit spherical triangles along matched geodesic edges. Let \(s_v\)
+be the sum of face angles at \(v\). Its face excesses \(E_f\) satisfy
+\begin{equation}\label{m5:gauss-bonnet}
+ \sum_f E_f+\sum_{v\ {\rm interior}}(2\pi-s_v)
+               +\sum_{v\ {\rm boundary}}(\pi-s_v)
+ =2\pi\chi(\Sigma).
+\end{equation}
+For a geodesic triangulation of a smooth spherical region, interior
+defects vanish, and boundary defects are the signed exterior angles.
+\end{proposition}
+\begin{proof}
+By the spherical excess formula used in Theorem~\ref{thm:triangle},
+\(\sum_f E_f=\sum_v s_v-\pi F\), with \(F\) faces. The left side
+is therefore \(\pi(2V_{\rm int}+V_{\partial}-F)\). Each boundary
+component is a polygon, so \(V_{\partial}=E_{\partial}\), where the
+latter counts boundary edges. Also \(3F=2E_{\rm int}+E_{\partial}\).
+Substituting these into the displayed expression gives
+\(2\pi(V-E+F)\), with \(E\) here denoting the number of edges.
+At an interior vertex of a smooth region the triangles fill a complete
+tangent circle, and at a boundary vertex their angular sum is the
+interior angle of the region. This gives the stated interpretations.
+\end{proof}
+
+\begin{example}[Four spherical octants]\label{m5:hemisphere}
+On the upper unit hemisphere consider the one-form
+\(\omega=(x\,dy-y\,dx)/(1+z)\). With polar angle \(\theta\) from the
+north pole and longitude \(\phi\), this becomes
+\((1-\cos\theta)\,d\phi\) off the pole, so \(d\omega=\sin\theta\,
+d\theta\wedge d\phi\). The Cartesian expression extends smoothly over
+the pole. On each meridian the line integral is zero, and each quarter
+of the positively oriented equator has integral \(\pi/2\).
+The four octants have excess \(\pi/2\) each and total excess \(2\pi\).
+Thus with four faces the exact boundary integral and total area coincide.
+In \eqref{m5:gauss-bonnet}, the triangulated disk has five vertices,
+eight edges and four faces. Its boundary angles are all \(\pi\), and
+the north pole has angle sum \(2\pi\).
+\end{example}
+
+\begin{remark}[Boundary holonomy and path substitution]\label{m5:holonomy}
+In the group-valued setting, the cancellation \(\hol(\bar e)\hol(e)=1\)
+is ordered. Theorem~\ref{thm:stokes} gives the product of face holonomies
+with compatible transports to the base point, under its disk and
+shelling hypotheses. For example, take faces \(012,023\) in that
+shelling order and give the tree edges \(01,02,03\) identity transport.
+Give \(1\to2\) and \(2\to3\) noncommuting transports \(P,Q\).
+The face holonomies at \(0\) from the fixed tree gauge are \(P,Q\).
+Their product in that order is \(PQ\), while the boundary has holonomy
+\(QP\) in the paper's convention. Compatible tails or a compatible
+ordering are needed: in Theorem~\ref{thm:stokes} the tails \(\tau_j\) are part of the conclusion, and an arbitrary fixed tree in
+shelling order does not supply them.
+
+In the min--plus setting the route through a removed vertex persists
+as one candidate in a minimum. Replacing \((i,b,j)\) by a new edge
+with transport \(U_{jb}U_{bi}\) preserves the transport of that route
+by associativity. If an edge \(i\to j\) already exists, the relative
+comparison is the triangle loop \(U_{ij}U_{jb}U_{bi}\), based at \(i\).
+It is the identity exactly when the two transports agree. A nonflat
+example is the right cell of Theorem~\ref{m5:ladder} with the
+half-displacement transports of Theorem~\ref{thm:triangle}, since its
+spin angle is \(E>0\). A scalar shortest-path update therefore needs
+additional transport data or a flatness hypothesis to preserve both
+route transports. The additive analogue is Proposition~\ref{m5:stokes}.
+For group-valued graph data, the flatness and reconstruction hypotheses
+are those of Theorem~\ref{m1:chordal} and the subsequent sparse
+comparison results.
+\end{remark}
+
+\subsection{Scope of the comparison}
+
+\begin{remark}[Product integrals and finite sagitta]\label{m5:sagitta}
+For a unit imaginary direction \(J\) in a quaternionic slice, the
+finite rotation is \(\cos\theta+J\sin\theta\).
+The sine component and the normal deficit \(v=1-\cos\theta\) obey
+\(\sin^2\theta=v(2-v)\) and
+\(\lVert\cos\theta+J\sin\theta-1\rVert^2=2v\).
+These follow by squaring the two orthogonal real components, and agree
+with Definition~\ref{def:arc}. For an equal-angle family
+\(\theta_N=\sigma(T/N)^\alpha\) with \(T>0,\ \alpha>0,\ N\geq1\),
+Taylor's theorem gives
+\[
+ \frac{N\theta_N^2}{2}-\frac{N\theta_N^4}{24}
+ \ \leq\ N(1-\cos\theta_N)\ \leq\ \frac{N\theta_N^2}{2}.
+\]
+Indeed the fourth-order remainder after the cubic Taylor polynomial
+for cosine has absolute value at most \(\theta_N^4/24\), and the
+upper bound for \(1-\cos\theta_N\) also follows from
+\(2\sin^2(\theta_N/2)\leq\theta_N^2/2\).
+For \(\sigma\ne0\) the ratio to
+\(\sigma^2T^{2\alpha}N^{1-2\alpha}/2\) tends to one. Hence there are
+three limiting behaviours, zero for \(\alpha>1/2\), \(\sigma^2T/2\)
+at \(\alpha=1/2\), and infinity for \(0<\alpha<1/2\). For \(\sigma=0\)
+the sum is zero. An \(\alpha\)-Hölder upper bound alone allows zero
+increments, so it gives no critical nonzero limit or subcritical
+divergence. The general path statement, including its separate
+quadratic-variation input, is Theorem~\ref{thm:sagitta}.
+The ordered smooth product integral and its convergence are given in
+Theorem~\ref{thm:ftc}. For a real-valued analytic function on the
+real line with a local holomorphic extension,
+\(\operatorname{Im}f(x+ih)/h=f'(x)-h^2 f'''(x)/6+O(h^4)\) follows
+because Taylor coefficients are real and only odd powers contribute
+\cite{m5:ST}. This is an approximation of the derivative at positive
+\(h\). Exact finite incidence cancellation is a different assertion.
+For example, \(f(x)=e^x/(\cos^3x+\sin^3x)\) at \(x_0=\pi/4\)
+has \(f'(x_0)=f(x_0)=\sqrt2e^{\pi/4}\). In the displacement
+\(u=x-x_0\) the denominator is
+\(\cos u(2-\cos 2u)/\sqrt2\), by the sum and product of
+\(\sin x,\cos x\). Its expansion after multiplication by \(\sqrt2\)
+is \(1+3u^2/2-13u^4/8+O(u^6)\). Inverting the series and
+multiplying by \(e^u\) gives
+\[
+\frac{f(x_0+u)}{f(x_0)}=
+1+u-u^2-\frac43u^3+\frac{19}{6}u^4+O(u^5).
+\]
+Thus the relative complex-step error is \(4h^2/3+O(h^4)\)
+as a signed error in exact arithmetic.
+\end{remark}
+
+\begin{remark}[Readout and physical hypotheses]\label{m5:hypotheses}
+A readout map \(q:X\to B\) gives a disjoint union
+\(X\simeq\bigsqcup_{b\in B}q^{-1}(b)\) by \(x\mapsto(q(x),x)\), with
+inverse forgetting \(b\). In the pullback of the discrete topology
+on \(B\), distinct fibres are separated by the open inverse image of
+a singleton, while points in a fibre belong to exactly the same opens.
+This description allows exact internal elimination when the
+boundary comparisons are supplied by
+Proposition~\ref{m5:projection} or Theorem~\ref{m5:pivot}.
+A physical positive minimum comparison scale would be an additional
+resolution hypothesis. Interpreting a Gram interval as a set of
+physically selectable states needs a dynamical reachability hypothesis.
+Static Gram constraints describe admissibility by a realization.
+The Schur-residual lemma of the companion paper \cite[Lemma~224]{Companion} applies to comparison spaces with
+specified dimension. The residual construction here gives its
+positive-definite counterpart with a parameterized Gram family.
+
+For comparison with a semiclassical model, suppose a chosen family
+of paths is assigned positive weights \(e^{-S_p/h}\), with real actions
+\(S_p\). For a finite nonempty family,
+\(s-h\log N\leq-h\log\sum_p e^{-S_p/h}\leq s\)
+where \(s=\min_p S_p\) and \(N\) is the family size. Factor
+\(e^{-s/h}\) to see that the remaining sum lies in \([1,N]\).
+For an Agmon action the length density is
+\(\sqrt{2m(V-E)_+}\) relative to Euclidean length
+\cite{m5:Agmon}. A constant positive density on a convex region
+gives a minimizing straight segment by the Euclidean length bound.
+A general density changes the variational problem and can admit
+several minimizing routes. Assigning graph cost by this density
+and relating graph limits to physical tunnelling both require
+a physical and geometric model.
+\end{remark}
+
+\begin{remark}[Multiscale programme]\label{m5:programme}
+A geometric model for sparse pivot selection would specify clusters, their
+boundary states and the costs inherited by each retained edge. A
+quantitative theorem would bound the size of the pivot set and the
+work needed to compute the effective entries, and control the
+logarithmic error uniformly as the graph grows. Through successive
+levels the number of nearly minimal paths can grow, so the finite
+matrix estimate alone has no size-uniform conclusion.
+Hierarchical distance indices on growing occupancy grids give a
+concrete example of boundary closure in the min--plus setting
+\cite[\S V, Theorem~1]{m5:HTrip}. A link to
+geodesic tunnelling would additionally require convergence of the
+shortest graph costs to the action infimum and a treatment of
+interference and possible degeneracy of minimizers. The analogies
+with suppressing intermediate observations, resonant transmission
+through internal states, and tensor-network coarse graining suggest
+choices of physical models. Each would require a specified dynamics
+and an observable whose reduced value obeys the proposed comparison
+law. A transport-sensitive version would need to propagate the
+triangle holonomies in Remark~\ref{m5:holonomy}.
+\end{remark}
+
+\begin{remark}[Relation to earlier elimination formulas]\label{m5:literature}
+The scalar addition limit is the min convention of Maslov
+dequantisation \cite[\S2]{m5:Litvinov}. Path sums for inverses
+express the impact of graph paths and cycles on ordinary matrix
+computations \cite[Thm.~3.2]{m5:Giscard}. The bordered-minor
+calculation \eqref{m5:sum} supplies the signed coefficients for
+eliminated Gram comparisons. Sorting those coefficients by cost
+gives the rate and the cancellation obstruction. Sparse numerical
+elimination uses the structural fill rule of
+Proposition~\ref{m5:fill} \cite{m5:Rose}. The partial Gram completion
+result cited with Proposition~\ref{m1:distance} uses the same
+simplicial ordering to construct unspecified comparisons. Here
+the comparisons are specified and the residual matrices are
+obtained by projection. The finite Stokes relation concerns
+boundary transport or additive cochains, with the compatibility
+conditions above.
+\end{remark}
+
+\setcounter{section}{9}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\theHsection}{\arabic{section}}
+
 \section{Rational calculus}\label{sec:rational}
 
 \begin{proposition}[Cayley chart; classical \cite{Cayley,Rodrigues,Shuster,SJ}]\label{prop:cayley}
@@ -5368,9 +7101,21 @@ Thm.~\ref{m1:chordal}, Prop.~\ref{m1:sharp} & Simplicial vertices: Dirac \cite{m
 Thm.~\ref{m1:gauge}, Prop.~\ref{m1:clique} & Classical in substance (edge-path group \cite{m1:Spanier}, spanning-tree coordinates \cite{Levy10}); the filling estimate elementary\\
 Props.~\ref{m1:gram}, \ref{m1:distance}, \ref{m1:near-gram} & Classical ingredients \cite{m1:Schoenberg,m1:JordanVonNeumann,m1:Grone}; Prop.~\ref{m1:near-gram} elementary\\
 Thm.~\ref{m2:classification} & Classical in substance \cite{Loos,Helgason,Wang52,Cartan26,Besse78}; new: axiomatisation by the round-trip law with continuous $\kappa$ (Rem.~\ref{m2:placement})\\
+Thm.~\ref{d4:rank}, Prop.~\ref{d4:spectral} & Diagonal arguments \cite{d4-lawvere,d4-yanofsky}; low-rank approximation \cite{d4-ey}; no-cloning and programming \cite{d4-wootters,d4-dieks,d4-program}; the span-rank criterion for comparison maps not found in the searched scope\\
+Thm.~\ref{m5:tropical}, Cor.~\ref{m5:sign} & Maslov dequantisation \cite{m5:Litvinov}; path sums \cite{m5:Giscard}; elimination and fill \cite{m5:Rose}; signed tie coefficient and rate derived here\\
 Thm.~\ref{m3:classification} & Lie-theoretic ingredients classical \cite{Helgason}; the classification by Chebyshev comparisons and the counterexamples of Ex.~\ref{m3:obstructions} not found in the searched scope\\
 Thm.~\ref{m3:triangle} & Wigner angle as rapidity-space area: \cite{m3Aravind,m3RhodesSemon,m3Ungar88,m3Ungar97}; rational vertex form, no priority claimed\\
 Thm.~\ref{m2:bargmann}, Thm.~\ref{m2:two-readout} & Identity: expansion with the Bargmann invariant \cite{m2:Bargmann}, Jordan form $U_{2P-1}$ \cite{m2:FK}; the equivalence with $(\Omega2\mathrm d)$ not found in the searched scope\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.47\textwidth}p{0.47\textwidth}@{}}
+\toprule
+Statement & Status\\
+\midrule
 Thm.~\ref{thm:main}, classification by $(\Omega1)$--$(\Omega3)$ & New as a theorem; ingredients classical \cite{Certaine,Gleason52,MZ,Milnor,Knapp}; see Rem.~\ref{rem:dalembert}\\
 Thm.~\ref{thm:noreg}, Cor.~\ref{cor:interference} & Group-level statement not found in the searched scope; Lemmas~\ref{lem:noline}, \ref{lem:circle} not claimed new (possible precursors \cite{Kuczma64,Sharkovskii73}, texts not obtained); Lemma~\ref{lem:elliptic} standard; Cor.~\ref{cor:interference} follows from \cite{Davison08} once compactness is known\\
 Thm.~\ref{thm:parsimony} & Proof uses \cite{PW,Folland}\\
@@ -5534,7 +7279,7 @@ black box; a formal statement of Theorem~\ref{thm:main} can avoid it by assuming
 
 All identities and limits of Part~\ref{part:arc} that are not textbook facts, and the identities of Part~\ref{part:axiom} used there, were
 checked numerically on random or explicit inputs by the accompanying script \texttt{check\_arc\_calculus.py} (numpy and the
-standard library; 177 checks, eight of them for Part~\ref{part:alg}, six for Section~\ref{sec:m2} and fourteen for Section~\ref{sec:m3}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present twelve: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file, and one for Section~\ref{sec:m3}); everything runs
+standard library; 192 checks, eight of them for Part~\ref{part:alg}, six for Section~\ref{sec:m2}, fourteen for Section~\ref{sec:m3}, eight for Section~\ref{sec:d4} and seven for Section~\ref{sec:m5}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present fourteen: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file, and one each for Sections~\ref{sec:m3}, \ref{sec:d4} and \ref{sec:m5}); everything runs
 from the directory of this paper.  These include the recurrence and its Chebyshev form, the residual expansion of
 Theorem~\ref{thm:consist}, the inequality of Theorem~\ref{thm:action}, the split and the Brownian limits of
 Theorem~\ref{thm:sagitta} (simulated, $\tfrac32T$ to two decimals), the transport formula of
@@ -5744,6 +7489,26 @@ and \texttt{anchored\_phase\_classification} (circle-valued).
 No declaration was found for Theorem~\ref{m3:classification}, the level set of Proposition~\ref{m3:ads}, the spin cover as a Lorentz
 representation, the hyperbolic transport, Theorem~\ref{m3:triangle}, Proposition~\ref{m3:brownian} or Proposition~\ref{m3:areaBound}.
 
+For Sections~\ref{sec:d4} and \ref{sec:m5} the following declarations were located (no \texttt{sorry} in their files).
+{\small\raggedright
+\begin{itemize}[leftmargin=1.5em]
+\item Theorem~\ref{d4:diagonal}: \texttt{D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean},
+\texttt{relative\_semantic\_diagonal\_ne\_listed\_decode}, \texttt{relative\_semantic\_diagonal\_target\_inadequate\_of\_surjective};
+\texttt{D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean}, \texttt{complete\_diagonal\_not\_continuous},
+\texttt{complete\_diagonal\_strict\_topology\_refinement}.
+\item Example~\ref{d4:stopping}: \texttt{D5/S1/FixedPoints/FiniteContractingStability.lean}, \texttt{finite\_contracting\_updates\_stabilize};
+\texttt{D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.lean}, \texttt{context\_parameters\_can\_select\_distinct\_fixed\_points};
+Brouwer's theorem on the standard simplex: \texttt{D5/S3/Geometry/FixedPoint/Brouwer.lean}, \texttt{Brouwer}.
+\item Theorem~\ref{d4:record}: \texttt{D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.lean}, \texttt{finite\_record\_cosine\_obstruction},
+\texttt{coefficient\_gamma\_le\_cosine} (the two-branch minimax equality is proved only here).
+\item Remark~\ref{d4:readouts}: \texttt{ExactTaylorObservationRemainder.lean}, \texttt{exp\_tail\_le}.
+\item Theorem~\ref{m5:pivot} (one pivot): \texttt{D5/S3/Combinatorics/Graph/Walks/TropicalSchurElimination.lean}, \texttt{pivot\_walks\_and\_distance}.
+\item Remark~\ref{m5:angles}: \texttt{FubiniStudyRecordTime.lean}, \texttt{fs\_angle\_triangle}; Proposition~\ref{m5:fill}: the chordal declarations listed for
+Part~\ref{part:alg}.
+\end{itemize}}
+No declaration was found for Theorem~\ref{d4:rank}, Proposition~\ref{d4:spectral}, Corollaries~\ref{d4:clock}, \ref{d4:differential},
+Theorem~\ref{m5:ladder} or Theorem~\ref{m5:tropical}.
+
 \section{What remains open}\label{sec:open}
 
 \begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2.6em]
@@ -5792,6 +7557,9 @@ map on a topological manifold.  Route: a smooth structure making $s$ smooth, con
 substitutes for the affine exponential and the compact Lie group steps.
 \item \emph{Indefinite comparisons.}  (a) Conjecture~\ref{m3:leastArea}: the hyperbolic counterpart of Q4.  (b) The programme of
 Remark~\ref{m3:programme}: the indefinite classification outside dimension three, and in dimension three without global analyticity.
+\item \emph{Self-reference and elimination.}  (a) Conjecture~\ref{d4:conjecture}: an $O(N^{-1})$ deficit along one Hadamard/$\pi/8$
+trajectory (proved: $O((\log N)^a/N)$).  (b) The physical questions of Remark~\ref{d4:programme} and the multiscale programme of
+Remark~\ref{m5:programme}: size-uniform control of the logarithmic error under repeated elimination, and a transport-sensitive version.
 \end{enumerate}
 
 \section*{Use of AI tools}
@@ -5991,6 +7759,37 @@ The authors used AI tools, namely Claude Fable 5.2 and Claude Opus 5.5 (via Clau
 \bibitem{m3Aravind} P.~K.~Aravind, The Wigner angle as an anholonomy in rapidity space, \emph{Amer. J. Phys.} \textbf{65} (1997), 634--636.
 \bibitem{m3Ungar88} A.~A.~Ungar, Thomas rotation and the parametrization of the Lorentz transformation group, \emph{Found. Phys. Lett.} \textbf{1} (1988), 57--89.
 \bibitem{m3Ungar97} A.~A.~Ungar, Thomas precession: its underlying gyrogroup axioms and their use in hyperbolic geometry and relativistic physics, \emph{Found. Phys.} \textbf{27} (1997), 881--951.
+% Sections 5C and 9A references (checked 2026-11-20 via Crossref and arXiv; Mohri 2002 is not indexed by Crossref; Tarski 1983,
+% Hardy--Wright 2008 and Agmon 1982 are standard books).
+\bibitem{d4-lawvere} F.~W.~Lawvere, Diagonal arguments and cartesian closed categories, in \emph{Category Theory, Homology Theory and Their Applications II}, Lecture Notes in Math. \textbf{92}, Springer, 1969, 134--145. Reprinted in \emph{Repr. Theory Appl. Categ.} \textbf{15} (2006), 1--13.
+\bibitem{d4-yanofsky} N.~S.~Yanofsky, A universal approach to self-referential paradoxes, incompleteness and fixed points, \emph{Bull. Symbolic Logic} \textbf{9} (2003), 362--386.
+\bibitem{d4-godel} K.~G\"odel, \"Uber formal unentscheidbare S\"atze der Principia Mathematica und verwandter Systeme~I, \emph{Monatsh. Math. Phys.} \textbf{38} (1931), 173--198.
+\bibitem{d4-tarski} A.~Tarski, The concept of truth in formalized languages, in \emph{Logic, Semantics, Metamathematics}, 2nd ed., Hackett, 1983, 152--278.
+\bibitem{d4-banach} S.~Banach, Sur les op\'erations dans les ensembles abstraits et leur application aux \`equations int\'egrales, \emph{Fund. Math.} \textbf{3} (1922), 133--181.
+\bibitem{d4-brouwer} L.~E.~J.~Brouwer, \"Uber Abbildung von Mannigfaltigkeiten, \emph{Math. Ann.} \textbf{71} (1912), 97--115.
+\bibitem{d4-ey} C.~Eckart and G.~Young, The approximation of one matrix by another of lower rank, \emph{Psychometrika} \textbf{1} (1936), 211--218.
+\bibitem{d4-lindemann} F.~Lindemann, \"Uber die Zahl $\pi$, \emph{Math. Ann.} \textbf{20} (1882), 213--225.
+\bibitem{d4-hw} G.~H.~Hardy and E.~M.~Wright, \emph{An Introduction to the Theory of Numbers}, 6th ed., Oxford Univ. Press, 2008.
+\bibitem{d4-nielsen} M.~A.~Nielsen, A geometric approach to quantum circuit lower bounds, \emph{Quantum Inf. Comput.} \textbf{6} (2006), 213--262.
+\bibitem{d4-brown} A.~R.~Brown, D.~A.~Roberts, L.~Susskind, B.~Swingle and Y.~Zhao, Complexity, action, and black holes, \emph{Phys. Rev. D} \textbf{93} (2016), 086006.
+\bibitem{d4-zeno} B.~Misra and E.~C.~G.~Sudarshan, The Zeno's paradox in quantum theory, \emph{J. Math. Phys.} \textbf{18} (1977), 756--763.
+\bibitem{d4-wootters} W.~K.~Wootters and W.~H.~Zurek, A single quantum cannot be cloned, \emph{Nature} \textbf{299} (1982), 802--803.
+\bibitem{d4-dieks} D.~Dieks, Communication by EPR devices, \emph{Phys. Lett. A} \textbf{92} (1982), 271--272.
+\bibitem{d4-program} M.~A.~Nielsen and I.~L.~Chuang, Programmable quantum gate arrays, \emph{Phys. Rev. Lett.} \textbf{79} (1997), 321--324.
+\bibitem{d4-dawson} C.~M.~Dawson and M.~A.~Nielsen, The Solovay--Kitaev algorithm, \emph{Quantum Inf. Comput.} \textbf{6} (2006), 81--95.
+\bibitem{m5:Litvinov} G.~L.~Litvinov, The Maslov dequantization, idempotent and tropical mathematics: a brief introduction, \emph{J. Math. Sci.} \textbf{140} (2007), 426--444; arXiv:math/0507014.
+\bibitem{m5:Giscard} P.-L.~Giscard, S.~J.~Thwaite and D.~Jaksch, Evaluating matrix functions by resummations on graphs: the method of path-sums, \emph{SIAM J. Matrix Anal. Appl.} \textbf{34} (2013), 445--469; arXiv:1112.1588.
+\bibitem{m5:Floyd} R.~W.~Floyd, Algorithm 97: shortest path, \emph{Comm. ACM} \textbf{5} (1962), 345.
+\bibitem{m5:Warshall} S.~Warshall, A theorem on Boolean matrices, \emph{J. ACM} \textbf{9} (1962), 11--12.
+\bibitem{m5:Mohri} M.~Mohri, Semiring frameworks and algorithms for shortest-distance problems, \emph{J. Autom. Lang. Comb.} \textbf{7} (2002), 321--350.
+\bibitem{m5:Dijkstra} E.~W.~Dijkstra, A note on two problems in connexion with graphs, \emph{Numer. Math.} \textbf{1} (1959), 269--271.
+\bibitem{m5:FT} M.~L.~Fredman and R.~E.~Tarjan, Fibonacci heaps and their uses in improved network optimization algorithms, \emph{J. ACM} \textbf{34} (1987), 596--615.
+\bibitem{m5:Haeupler} B.~Haeupler, R.~Hlad\'ik, V.~Rozho\v{n}, R.~E.~Tarjan and J.~T\v{e}tek, Universal optimality of Dijkstra via beyond-worst-case heaps, \emph{Proc. 65th IEEE Symp. Found. Comput. Sci.} (2024), 2099--2130; arXiv:2311.11793v4.
+\bibitem{m5:Duan} R.~Duan, J.~Mao, X.~Mao, X.~Shu and L.~Yin, Breaking the sorting barrier for directed single-source shortest paths, \emph{Proc. 57th ACM Symp. Theory Comput.} (2025), 36--44; arXiv:2504.17033v2.
+\bibitem{m5:Rose} D.~J.~Rose, R.~E.~Tarjan and G.~S.~Lueker, Algorithmic aspects of vertex elimination on graphs, \emph{SIAM J. Comput.} \textbf{5} (1976), 266--283.
+\bibitem{m5:ST} W.~Squire and G.~Trapp, Using complex variables to estimate derivatives of real functions, \emph{SIAM Rev.} \textbf{40} (1998), 110--112.
+\bibitem{m5:Agmon} S.~Agmon, \emph{Lectures on Exponential Decay of Solutions of Second-Order Elliptic Equations: Bounds on Eigenfunctions of \(N\)-Body Schr\"odinger Operators}, Mathematical Notes 29, Princeton University Press, 1982.
+\bibitem{m5:HTrip} E.~A.~\"Ozaslan and T.~\"Ozaslan, H-TRIP: exact many-to-many distance index for multi-robot exploration, arXiv:2611.08139v1 (2026).
 \end{thebibliography}
 
 \end{document}

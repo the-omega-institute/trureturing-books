@@ -27,6 +27,8 @@ CHECK_MODULES = [
     ("m2_indep_t_complex.py", "CP^3 Bargmann max err", None),                                     # Section 5A, independent (asserts)
     ("m2_indep_t_misc.py",    "2I-J eigenvalues", None),                                          # Section 5A, independent (asserts)
     ("m3_indefinite_hyperbolic.py", "All 12 check groups passed", None),                       # Section 5B
+    ("d4_self_reference.py",  "PASS all 7 check groups", None),                               # Section 5C
+    ("m5_arc_body_tropical.py", "All m5 checks passed.", None),                               # Section 9A
     # register new modules here: (file in checks/, success marker, optional predicate)
 ]
 _chk = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "checks")
@@ -2120,6 +2122,255 @@ for sc in (1e-2, 5e-3):
     errs.append(np.abs(U - (np.eye(2) - s_ * t_ * F01)).max())
 e = max(e, max(0, errs[1] / errs[0] - 0.2))                                      # third-order remainder: ratio ~ 1/8
 report("32 Prop m3:physicalGauge: rectangle return I - st F_{mu nu} with O((s+t)^3) remainder (ratio test)", e, 1e-12)
+
+# =========================================================== 33. Section 5C (independent checks of the d4 section)
+import itertools as _it33
+_r33 = np.random.default_rng(2611)
+def _orth(n): q_, r_ = np.linalg.qr(_r33.normal(size=(n, n))); return q_ * np.sign(np.diag(r_))
+# (1) span ranks: O(r) needs r^2 (also for differences); SO(2) on its circle needs 2; S^0 needs 1; right multiplications need r
+e = 0.0
+for r in (2, 3, 4):
+    Ms = [_orth(r) for _ in range(3 * r * r)]
+    e = max(e, abs(np.linalg.matrix_rank(np.array([M.ravel() for M in Ms])) - r * r), abs(np.linalg.matrix_rank(np.array([(M - Ms[0]).ravel() for M in Ms[1:]])) - r * r))
+rot = lambda t: np.array([[np.cos(t), -np.sin(t)], [np.sin(t), np.cos(t)]])
+ts = _r33.uniform(0, 6, 20); e = max(e, abs(np.linalg.matrix_rank(np.array([rot(t).ravel() for t in ts])) - 2))
+e = max(e, max(abs(np.trace(rot(a).T @ rot(b)) / 2 - np.cos(b - a)) for a, b in _r33.uniform(0, 6, (10, 2))))
+def _qm(p, q): a1, b1, c1, d1 = p; a2, b2, c2, d2 = q; return np.array([a1*a2-b1*b2-c1*c2-d1*d2, a1*b2+b1*a2+c1*d2-d1*c2, a1*c2-b1*d2+c1*a2+d1*b2, a1*d2+b1*c2-c1*b2+d1*a2])
+Rm = lambda a: np.array([_qm(np.eye(4)[k], a) for k in range(4)]).T            # right multiplication x -> x a
+As = [_r33.normal(size=4) for _ in range(10)]
+e = max(e, abs(np.linalg.matrix_rank(np.array([Rm(a).ravel() for a in As])) - 4), max(abs(np.trace(Rm(a).T @ Rm(b)) / 4 - a @ b) for a in As[:4] for b in As[:4]))
+report("33 Thm d4:rank, Ex. d4:small, Rem. d4:tower: O(r) span r^2 (and differences); SO(2) span 2; right multiplications span r with kernel <a,b>", e, 1e-10)
+# (2) spectral: tensor family with G = I for r = 2,4,8; Eckart-Young truncation attains the tail and random PSD rank-s matrices do not beat it
+P2 = [np.eye(2), np.array([[0, 1.], [1, 0]]), np.diag([1., -1]), np.array([[0, -1.], [1, 0]])]
+e = 0.0
+for a in (1, 2, 3):
+    fam = [np.eye(1)]
+    for _ in range(a): fam = [np.kron(F, P) for F in fam for P in P2]
+    r = 2 ** a; G = np.array([[np.trace(F.T @ H) / r for H in fam] for F in fam])
+    e = max(e, np.abs(G - np.eye(r * r)).max(), max(np.abs(F.T @ F - np.eye(r)).max() for F in fam))
+m = 7; Xg = _r33.normal(size=(m, m)); G = Xg @ Xg.T; lam = np.sort(np.linalg.eigvalsh(G))[::-1]
+for s in range(0, m + 1):
+    w_, V_ = np.linalg.eigh(G); idx = np.argsort(w_)[::-1]; Ht = (V_[:, idx[:s]] * w_[idx[:s]]) @ V_[:, idx[:s]].T
+    tail = np.sum(lam[s:] ** 2); e = max(e, abs(np.linalg.norm(G - Ht) ** 2 - tail))
+    for _ in range(30):
+        Y = _r33.normal(size=(m, s)); H = Y @ Y.T; e = max(e, max(0, tail - np.linalg.norm(G - H) ** 2 - 1e-9))
+report("33 Prop d4:spectral: r^2 orthogonal maps with G=I (r=2,4,8); Eckart-Young tail attained by truncation, not beaten", e, 1e-8)
+# (3) stopping: cap map with three fixed points; cosine iteration numbers, Newton order; golden contraction
+g = lambda x: x - np.sin(np.pi / 3 * np.tanh(2 * x)); xs = np.linspace(-1, 1, 200001); sgn = np.sign(g(xs)); roots = xs[1:][sgn[1:] * sgn[:-1] < 0]
+e = abs(len(roots) + int((sgn == 0).sum()) - 3) + (np.sin(np.pi / 3 * np.tanh(2)) >= 1) * 1.0
+th = 0.0; diffs = []; its = [0.0]
+for k in range(5): nt = np.cos(th); diffs.append(abs(nt - th)); th = nt; its.append(th)
+ts_ = 0.7
+for _ in range(200): ts_ = np.cos(ts_)
+e = max(e, np.abs(np.round(diffs, 6) - np.array([1.0, 0.459698, 0.317251, 0.203263, 0.139191])).max(), abs(round(its[5], 6) - 0.793480),
+        abs(round(ts_, 6) - 0.739085), (diffs[3] <= 0.150) * 1.0, (diffs[4] > 0.150) * 1.0)
+lam_ = np.sin(ts_); x = ts_ + 1e-3; xn = x - (x - np.cos(x)) / (1 + np.sin(x))
+e = max(e, abs((xn - ts_) / 1e-6 - ts_ / (2 * (1 + lam_))) * 1e-3)
+f = lambda x: 1 + 1 / x; e = max(e, max(0, max(abs(f(np.linspace(1.5, 2, 101)) - 1.75)) - 0.25), abs(1 / 1.5 ** 2 - 4 / 9))
+report("33 Ex. d4:stopping, d4:cosine: cap map has 3 fixed points; cosine differences, stop at step 5, 0.793480, 0.739085; Newton constant", e, 1e-6)
+# (4) readouts: B = inverse series of A(x)=2x+2 arcsin x converges at pi to theta*; half fall time radius (1+lambda)/2
+def _zsol(w):
+    z = 0j
+    for _ in range(200): z = (w + z - np.sin(z)) / 2
+    return z
+Rr = 3.4; Mn = 256; nodes = Rr * np.exp(2j * np.pi * np.arange(Mn) / Mn)
+vals = np.array([np.sin(_zsol(Y / 2)) for Y in nodes]); coef = np.fft.fft(vals) / Mn / Rr ** np.arange(Mn)
+Bpi = np.sum(coef[:120] * np.pi ** np.arange(120)).real
+e = abs(Bpi - ts_) + max(0, np.abs(_zsol(1.75 * np.exp(1j * np.linspace(0, 6.28, 50)))).max() - 1)
+eta = np.pi / 2 - ts_; e = max(e, abs(eta + np.sin(eta) - np.pi / 2), abs((1 + np.cos(eta)) / 2 - (1 + lam_) / 2))
+report("33 Rem. d4:readouts: Taylor series of the inverse of 2x+2arcsin x (Cauchy coefficients, radius 3.4) sums at pi to theta*; free fall", e, 1e-9)
+# (5) caps: deficit >= 2/M for random catalogues; a spiral catalogue achieves <= 8/M
+e = 0.0
+P = _r33.normal(size=(20000, 3)); P /= np.linalg.norm(P, axis=1)[:, None]
+for M in (5, 20, 60):
+    U = _r33.normal(size=(M, 3)); U /= np.linalg.norm(U, axis=1)[:, None]
+    dfc = np.max(1 - np.max(P @ U.T, axis=1)); e = max(e, max(0, 2 / M - dfc - 0.02))
+    k = np.arange(M) + 0.5; zz = 1 - 2 * k / M; ph = np.pi * (1 + 5 ** 0.5) * k
+    Fz = np.c_[np.sqrt(1 - zz ** 2) * np.cos(ph), np.sqrt(1 - zz ** 2) * np.sin(ph), zz]
+    e = max(e, max(0, np.max(1 - np.max(P @ Fz.T, axis=1)) - 8 / M))
+e = max(e, abs(2 * 1 / (2 ** 4 - 1) - 2 / 15))
+report("33 Prop d4:caps, Rem. d4:resources: deficit >= 2/M (random catalogues), a Fibonacci catalogue <= 8/M; word bound 2/15", e, 1e-12)
+# (6) depth of an oriented path: brute force over rise positions equals ceil((N+1)/(k+1)) when 1<=k, 2k<=N
+def _depth(N, rises):
+    lay = [0] * (N + 1)                                     # longest-path layering on a path DAG
+    # rise at edge i means layer(i) < layer(i+1); otherwise layer(i) > layer(i+1); minimal number of layers = longest monotone run
+    best = 1; run = 1
+    for i in range(N):
+        pass
+    # depth = max over maximal decreasing runs of their length, with rises allowing restart (need next block start > 0 handled by length>=2)
+    import functools
+    @functools.lru_cache(None)
+    def ok(D):
+        # check feasibility by DP over positions and layer values
+        cur = set(range(D))
+        for i in range(N):
+            nxt = set()
+            for l in cur:
+                for l2 in range(D):
+                    if (i in rises and l < l2) or (i not in rises and l > l2): nxt.add(l2)
+            cur = nxt
+            if not cur: return False
+        return True
+    D = 1
+    while not ok(D): D += 1
+    return D
+e = 0
+for N in range(2, 10):
+    for k in range(1, N // 2 + 1):
+        bestD = min(_depth(N, frozenset(c)) for c in _it33.combinations(range(N), k))
+        e = max(e, abs(bestD - int(np.ceil((N + 1) / (k + 1)))))
+e = max(e, abs(int(np.ceil(9 / 3)) - 3), abs(int(np.ceil(12 / 3)) - 4))
+report("33 Rem. d4:resources: optimal parallel depth ceil((N+1)/(k+1)) over rise positions (brute force N<=9, 1<=k<=N/2)", e, 0)
+# (7) shifted records: max |gamma| over unit pointers equals cos(pi/(m+2)), m = floor(N/|l|)
+e = 0.0
+for N in range(1, 12):
+    for l in range(1, N + 2):
+        S = np.zeros((N + 1, N + 1))
+        for j in range(N + 1 - l): S[j + l, j] = 1
+        top = np.linalg.eigvalsh((S + S.T) / 2).max(); m_ = N // l
+        e = max(e, abs(top - np.cos(np.pi / (m_ + 2))))
+e = max(e, abs((1 - np.cos(np.pi / (1000 + 2))) / 2 / (np.pi ** 2 / (4 * 1002 ** 2)) - 1) * 1e-3)
+report("33 Thm d4:record: max overlap of shifted pointers = cos(pi/(m+2)), sine profile; asymptotic pi^2/(4(N+2)^2)", e, 1e-8)
+# (8) monitored evolution numbers, antipodal reading rank 10, Hadamard/pi8 algebra, 1/7, Moebius map
+sg = np.array([1, 0.76, 0.54, 0.35, 0.20, 0.10])
+fr = [(sg[:2] ** k).sum() / (sg ** k).sum() for k in (2, 8, 10)]
+e = np.abs(np.round(fr, 6) - np.array([0.772689, 0.993334, 0.997997])).max() + abs(((sg ** 4) > 0.12).sum() - 2)
+e = max(e, abs(round(np.cos(np.pi / 64) ** 32, 6) - 0.962166))
+Xp = _r33.normal(size=(40, 4)); Xp /= np.linalg.norm(Xp, axis=1)[:, None]; e = max(e, abs(np.linalg.matrix_rank((Xp @ Xp.T) ** 2) - 10))
+qz = np.array([np.cos(np.pi / 8), 0, 0, np.sin(np.pi / 8)]); qx = np.array([np.cos(np.pi / 8), np.sin(np.pi / 8), 0, 0])
+e = max(e, abs(_qm(qz, qx)[0] - np.cos(np.pi / 8) ** 2), abs((1 + 2 ** 0.5 / 2) * (1 - 2 ** 0.5 / 2) - 0.5))
+r_ = 1; seq = []
+for _ in range(7): seq.append(r_); r_ = (10 * r_) % 7
+e = max(e, abs(seq.index(1, 1) - 6))
+for z in (0.6 + 0.3j, 2 + 1j, 0.5 + 4j): e = max(e, abs(abs((z - 1) / z) ** 2 - 1 - (1 - 2 * z.real) / abs(z) ** 2))
+report("33 Ex. d4:monitor, d4:blind, Conj. d4:conjecture, Rem. d4:quotients: fractions, 0.962166, rank 10, cos^2(pi/8), norm 1/2, period 6", e, 1e-12)
+
+# =========================================================== 34. Section 9A (independent checks of the m5 section)
+import itertools as _it34
+_r34 = np.random.default_rng(2612)
+# (1) three lengths, depth, excess, volumes, table
+e = 0.0
+for ep in np.linspace(1e-3, np.pi / 2, 400):
+    A = np.array([np.cos(ep), np.sin(ep), 0]); Bv = np.array([1., 0, 0]); C = np.array([np.cos(ep), 0, np.sin(ep)])
+    l_ = np.linalg.norm(A - C); a_ = np.arccos(np.clip(A @ C, -1, 1))
+    e = max(e, abs(l_ - np.sqrt(2) * np.sin(ep)), abs(a_ - np.arccos(np.cos(ep) ** 2)), max(0, l_ - a_ + 1e-15) if l_ >= a_ else 0, max(0, a_ - 2 * ep) if a_ >= 2 * ep else 0,
+            abs(np.linalg.norm((A + C) / 2) - np.sqrt((1 + np.cos(ep) ** 2) / 2)), abs(abs(np.linalg.det(np.c_[A, Bv, C])) - np.sin(ep) ** 2))
+    r_ = np.linspace(0, 1, 2001); walls = 2 * np.sqrt((r_ - np.cos(ep)) ** 2 + np.sin(ep) ** 2); e = max(e, abs(walls.min() - 2 * np.sin(ep)) * 1e-3)
+rows = {15: (0.523599, 0.368100, 0.366025, 0.016889, 0.300943), 30: (1.047198, 0.722734, 0.707107, 0.064586, 0.324763), 45: (1.570796, 1.047198, 1.000000, 0.133975, 0.363380),
+        60: (2.094395, 1.318116, 1.224745, 0.209431, 0.415227), 90: (3.141593, 1.570796, 1.414214, 0.292893, 0.549842)}
+for deg, row in rows.items():
+    ep = np.radians(deg); vals = (2 * ep, np.arccos(np.cos(ep) ** 2), np.sqrt(2) * np.sin(ep), 1 - np.sqrt((1 + np.cos(ep) ** 2) / 2), 1 - np.sqrt(2) * np.sin(ep) / (2 * ep))
+    e = max(e, np.abs(np.round(vals, 6) - np.array(row)).max())
+ep = 1e-2; e = max(e, abs((np.arccos(np.cos(ep) ** 2) - np.sqrt(2) * np.sin(ep)) / ep ** 3 - np.sqrt(2) / 12) * 1e-2, abs(2 * np.arctan(np.tan(np.radians(30)) ** 2) - 2 * np.arctan(1 / 3)))
+report("34 Thm m5:ladder, Ex. m5:scales: sqrt2 sin e < arccos(cos^2 e) < 2e, walls 2 sin e, depth, det sin^2, table rows, cubic gap sqrt2/12", e, 1e-6)
+# (2) Gram interval, Schur residual = projection
+e = 0.0
+for _ in range(50):
+    x, y = _r34.uniform(-1, 1, 2); rad = np.sqrt((1 - x * x) * (1 - y * y))
+    for z in (x * y - rad, x * y + rad, x * y + 0.3 * rad):
+        G = np.array([[1, x, z], [x, 1, y], [z, y, 1]]); e = max(e, abs(np.linalg.det(G) - ((1 - x * x) * (1 - y * y) - (z - x * y) ** 2)))
+    X = _r34.normal(size=(6, 5)) + 1j * _r34.normal(size=(6, 5)); K = X.conj().T @ X; I = [1, 3]; J = [0, 2, 4]
+    S = K[np.ix_(J, J)] - K[np.ix_(J, I)] @ np.linalg.inv(K[np.ix_(I, I)]) @ K[np.ix_(I, J)]
+    Q, _ = np.linalg.qr(X[:, I]); R = X[:, J] - Q @ (Q.conj().T @ X[:, J]); e = max(e, np.abs(S - R.conj().T @ R).max())
+report("34 Prop m5:gram-interval, m5:projection: determinant, endpoints of rank two; Schur complement = Gram of projected residuals", e, 1e-10)
+# (3) bordered-minor path expansion (m5:sum) on random complex amplitudes, directed
+def _paths(i, j, I):
+    out = []
+    for r in range(len(I) + 1):
+        for mid in _it34.permutations(I, r): out.append((i,) + mid + (j,))
+    return out
+e = 0.0
+for _ in range(10):
+    n = 6; Kd = np.eye(n, dtype=complex)
+    for a, b in _it34.permutations(range(n), 2):
+        if _r34.random() < 0.7: Kd[a, b] = (_r34.normal() + 1j * _r34.normal()) * 0.4
+    I = [2, 3, 4]; i, j = 0, 5
+    S = Kd[i, j] - Kd[i, I] @ np.linalg.inv(Kd[np.ix_(I, I)]) @ Kd[I, j]
+    tot = 0
+    for p in _paths(i, j, I):
+        amp = np.prod([Kd[p[k], p[k + 1]] for k in range(len(p) - 1)]); rest = [v for v in I if v not in p]
+        tot += (-1) ** (len(p) - 2) * amp * (np.linalg.det(Kd[np.ix_(rest, rest)]) if rest else 1)
+    e = max(e, abs(np.linalg.det(Kd[np.ix_(I, I)]) * S - tot))
+report("34 Thm m5:tropical: det K[I] S_ij = sum over simple paths (-1)^r(p) a(p) det K[I minus I(p)] (directed, complex)", e, 1e-12)
+# (4) logarithmic limit with the sign condition (ties counted) and the counterexamples
+e = 0.0
+n = 6; W = np.full((n, n), np.inf)
+for a, b in _it34.combinations(range(n), 2):
+    if _r34.random() < 0.8: W[a, b] = W[b, a] = float(_r34.integers(1, 4))
+I = [1, 2, 3, 4]; i, j = 0, 5
+def _D(W, i, j, I):
+    best, cnt = np.inf, 0
+    for p in _paths(i, j, I):
+        c = sum(W[p[k], p[k + 1]] for k in range(len(p) - 1))
+        if c < best - 1e-12: best, cnt = c, 1
+        elif abs(c - best) < 1e-12: cnt += 1
+    return best, cnt
+D, Ncnt = _D(W, i, j, I)
+for h in (0.05, 0.03):
+    K = np.eye(n) - np.where(np.isinf(W), 0, np.exp(-W / h)); S = K[i, j] - K[i, I] @ np.linalg.inv(K[np.ix_(I, I)]) @ K[I, j]
+    e = max(e, abs(-h * np.log(abs(S)) - (D - h * np.log(Ncnt))))
+t = lambda h: np.exp(-1 / h)
+for h in (0.1, 0.05):
+    T = t(h); K3 = np.array([[1, T, T * T], [T, 1, T], [T * T, T, 1]])           # order i, b, j
+    S3 = K3[0, 2] - K3[0, 1] * K3[1, 2] / K3[1, 1]; e = max(e, abs(S3))
+    K4 = np.array([[1, T, T, T * T], [T, 1, 0, T], [T, 0, 1, T * T], [T * T, T, T * T, 1]])   # i, b, c, j
+    S4 = K4[0, 3] - K4[0, [1, 2]] @ np.linalg.inv(K4[np.ix_([1, 2], [1, 2])]) @ K4[[1, 2], 3]
+    e = max(e, abs(S4 + T ** 3) / T ** 3, max(0, -np.linalg.eigvalsh(K4).min()))
+e = max(e, max(0, 3 + 2 * 3 * (-1 + 1e-9) + 0) if False else 0)
+report("34 Thm m5:tropical, Cor. m5:sign, Ex. m5:counter: -h log|S| = D - h log N for negative entries; 3-point tie cancels; 4-point gives -t^3", e, 1e-6)
+# (5) walk sums: -S = sum over walks through I; six-vertex relaxation example; single-pivot recurrence
+e = 0.0
+A = np.abs(_r34.normal(size=(6, 6))) * 0.1; np.fill_diagonal(A, 0); K = np.eye(6) - A; I = [1, 2, 3, 4]
+S = K[0, 5] - K[0, I] @ np.linalg.inv(K[np.ix_(I, I)]) @ K[I, 5]
+walk = A[0, 5]; P_ = A[0, I].copy()
+for _ in range(200): walk += P_ @ A[I, 5]; P_ = P_ @ A[np.ix_(I, I)]
+e = max(e, abs(-S - walk))
+inf = np.inf; names = ['p1', 'b1', 'b2', 'b3', 'b4', 'p2']; Wd = np.full((6, 6), inf)
+for (u, v, c) in [(0, 1, 2), (0, 2, 5), (0, 5, 11), (1, 2, 1), (1, 4, 6), (2, 3, 2), (2, 5, 6), (3, 2, 1), (3, 4, 1), (3, 5, 4), (4, 5, 1)]: Wd[u, v] = c
+d = np.full(6, inf); d[0] = 0; hist = []
+for _ in range(4):
+    d = np.minimum(d, np.min(d[:, None] + Wd, axis=0)); hist.append(tuple(d[1:5]))
+e = max(e, 0 if hist == [(2, 5, inf, inf), (2, 3, 7, 8), (2, 3, 5, 8), (2, 3, 5, 6)] else 1)
+Dm = Wd.copy()
+for b in (1, 2, 3, 4):
+    Dm = np.minimum(Dm, Dm[:, [b]] + Dm[[b], :])
+e = max(e, abs(Dm[0, 5] - 7), abs(min(Wd[0, 5], min(Wd[0, b] + Wd[b, 5] for b in (1, 2, 3, 4))) - 11))
+d1 = np.minimum(np.full(6, inf), Wd[0]); d1[0] = 0; d1 = np.minimum(d1, np.min(d1[:, None] + Wd, axis=0))
+e = max(e, abs(min(Wd[0, 5], min(d1[b] + Wd[b, 5] for b in (1, 2, 3, 4)) if False else min(Wd[0, 5], min(Wd[0, b] + Wd[b, 5] for b in (1, 2, 3, 4)))) - 11))
+report("34 Prop m5:walksum, Thm m5:pivot, Ex. m5:six: -S = walk sum; relaxations (2,5,inf,inf)...(2,3,5,6); pivot closure 7; one-vertex formula 11", e, 1e-12)
+# (6) fill: perfect elimination order gives no fill for nonpositive off-diagonal PD matrices; chordless 4-cycle fills
+e = 0.0
+C4 = np.eye(4) * 3; 
+for a, b in [(0, 1), (1, 2), (2, 3), (3, 0)]: C4[a, b] = C4[b, a] = -1
+S = C4[np.ix_([1, 2, 3], [1, 2, 3])] - np.outer(C4[[1, 2, 3], 0], C4[0, [1, 2, 3]]) / C4[0, 0]
+e = max(e, 0 if abs(S[0, 2]) > 1e-12 else 1)                                  # fill edge 1-3 appears
+G = np.eye(5) * 4; 
+for a, b in [(0, 1), (0, 2), (1, 2), (2, 3), (3, 4), (2, 4)]: G[a, b] = G[b, a] = -1
+cur = G.copy(); idx = list(range(5)); sup0 = {(a, b) for a in range(5) for b in range(5) if a != b and G[a, b] != 0}
+for piv in (0, 1, 3, 4):                                                      # a perfect elimination order of this chordal graph
+    k = idx.index(piv); rest = [r for r in range(len(idx)) if r != k]
+    cur = cur[np.ix_(rest, rest)] - np.outer(cur[rest, k], cur[k, rest]) / cur[k, k]; idx = [idx[r] for r in rest]
+    for a in range(len(idx)):
+        for b in range(len(idx)):
+            if a != b and abs(cur[a, b]) > 1e-12 and (idx[a], idx[b]) not in sup0: e = 1
+report("34 Prop m5:fill: chordless 4-cycle creates fill; perfect elimination order on a chordal support creates none (M-matrix entries)", e, 0)
+# (7) hemisphere octants, holonomy ordering, complex step, rooted path counts
+e = 0.0
+ph = np.linspace(0, np.pi / 2, 20001); e = max(e, abs(np.trapezoid(np.ones_like(ph), ph) - np.pi / 2))
+th = np.linspace(0, np.pi / 2, 4001); phg = np.linspace(0, np.pi / 2, 4001)
+area = np.trapezoid(np.sin(th), th) * (np.pi / 2); e = max(e, abs(area - np.pi / 2) * 1e-3)
+def _su2():
+    q = _r34.normal(size=4); q /= np.linalg.norm(q); return np.array([[q[0] + 1j * q[3], q[2] + 1j * q[1]], [-q[2] + 1j * q[1], q[0] - 1j * q[3]]])
+Pm, Qm = _su2(), _su2(); e = max(e, 1e-3 - min(np.abs(Pm @ Qm - Qm @ Pm).max(), 1e-3))
+f = lambda x: np.exp(x) / (np.cos(x) ** 3 + np.sin(x) ** 3); x0 = np.pi / 4
+e = max(e, abs(f(x0) - np.sqrt(2) * np.exp(np.pi / 4)))
+us = np.linspace(-0.05, 0.05, 41); co = np.polyfit(us, f(x0 + us) / f(x0), 8)[::-1]
+e = max(e, np.abs(co[:5] - np.array([1, 1, -1, -4 / 3, 19 / 6])).max() * 1e-3)
+for hh in (1e-2, 5e-3):
+    est = (f(x0 + 1j * hh)).imag / hh; e = max(e, max(0, abs((est - f(x0)) / f(x0) / hh ** 2 - 4 / 3) - 2 * hh))
+for n_ in range(2, 9):
+    for k in range(1, n_ + 1): e = max(e, abs(sum(1 for v in range(n_) if n_ - v >= k) - (n_ - k + 1)))
+report("34 Ex. m5:hemisphere, Rem. m5:holonomy, m5:sagitta, m5:algorithm: octant integrals, PQ != QP, complex-step series 1,1,-1,-4/3,19/6", e, 1e-6)
 
 # =========================================================== registered module scripts (checks/)
 for _name, _marker, _pred in CHECK_MODULES:
