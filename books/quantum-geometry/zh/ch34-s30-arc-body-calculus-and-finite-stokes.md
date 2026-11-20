@@ -541,7 +541,9 @@ $$
 U_\gamma \;=\; \exp\Bigl(\frac{A}{2}\,\nu\bar{x}_0\Bigr) \;=\; \cos\frac{A}{2} + \sin\frac{A}{2}\,\nu\bar{x}_0,
 $$
 
-反向绕行时指数取负号；特别地 $\operatorname{Re}U_\gamma = \cos\frac{A}{2}$，不需要凸性假设。这是高斯—博内和乐提升到旋量的形式，即半立体角律（`文献结果`）。机制：$n(x) = \nu\bar{x}$ 是纯虚的，其协变导数 $Dn = \langle\nu, dx\rangle$ 沿 $\Sigma$ 为零，即 $n$ 在 $\Sigma$ 上平行（`手工推导`），所以曲率取值于 $n$ 的方向，和乐是阿贝尔的，由格林定理得出面积的一半。上面的三角形公式 $\operatorname{Re}a = \cos\frac{E}{2}$ 是它的特例。
+反向绕行时指数取负号；特别地 $\operatorname{Re}U_\gamma = \cos\frac{A}{2}$，不需要凸性假设。这是高斯—博内和乐提升到旋量的形式，即半立体角律（`文献结果`）。机制：$n(x) = \nu\bar{x}$ 是纯虚的，其协变导数 $Dn = \langle\nu, dx\rangle$ 沿 $\Sigma$ 为零，即 $n$ 在 $\Sigma$ 上平行（`手工推导`），所以曲率取值于 $n$ 的方向，和乐是阿贝尔的，由格林定理得出面积的一半。上面的三角形公式 $\operatorname{Re}a = \cos\frac{E}{2}$ 是它的特例。记自旋角 $\Theta(U) := 2\arccos\operatorname{Re}U \in [0, 2\pi]$：面积 $A \le 2\pi$ 时 $\Theta(U_\gamma) = A$；而 $\operatorname{Ad}(U_\gamma)$ 作为三维旋转的转角只在 $A \le \pi$ 时等于 $A$。
+
+**等号情形（`手工推导`；非阿贝尔斯托克斯公式与 Plateau 问题的结果为 `文献结果`）。** 对参数化曲面 $F\colon [0, 1]^2 \to S^3$，边界的旋量和乐是一条路径的终点，该路径的速度是沿梳状路径平移回基点的曲率的积分（梳状公式，即梳状次序下的连续非阿贝尔斯托克斯定理；参见上引 Aref'eva 1980 与 Karp–Mansouri–Rno 1999），所以自旋角不超过曲面面积。若 $F$ 属于 $C^3$、在稠密集上秩为 $2$，且自旋角等于面积，则 $F$ 的像落在一个大二维球面内。秩条件不可去掉：沿三条方向张成切空间的极小圆弧往返的三脚架回路有 $U_\gamma = 1$ 与面积为零的填充，却不落在任何大二维球面内。对光滑若尔当曲线，剩下的问题（自旋角等于填充面积的下确界是否迫使曲线落在大二维球面内）归结为面积极小圆盘的正则性：如果 Morrey 关于黎曼流形中 Plateau 问题的解（C. B. Morrey, Jr., *Ann. of Math.* **49**, 807–851, 1948）及其内部无分支点、边界正则的结果给出在稠密集上秩为 $2$ 的 $C^3$ 极小填充，上面的等号情形即适用；这些结果是依 B. White 的综述（arXiv:1308.3325）引用的，原文尚未核对，所以这一推论是有条件的。
 
 **有理顶点（`手工推导`；凯莱参数化见 A. Cayley, *J. Reine Angew. Math.* **32**, 119–123, 1846 与 O. Rodrigues 1840，`文献结果`）。** 凯莱坐标 $\operatorname{Cay}(r) = (1 + r)(1 - r)^{-1}$（$r \in \operatorname{Im}\mathbb{H}$）把 $\mathbb{Q}^3$ 双射到 $S^3(\mathbb{Q}) \setminus \{-1\}$。顶点全在 $S^3(\mathbb{Q})$ 时，流群运算、$\kappa$、矢高、上文递推及其切比雪夫系数都是有理数；沿每段极小圆弧的列维-奇维塔平移（右平凡化下）是 $\operatorname{Ad}(1 + x_q\bar{x}_p) \in \mathrm{SO}(3, \mathbb{Q})$，闭合极小圆弧多边形的和乐亦然；三角形的 $\cos E$ 为有理数，而半位移与 $E$ 本身一般是无理的（$x = 1$、$y = i$、$z = j$ 时 $E = \frac{\pi}{2}$）。
 :::
