@@ -33,6 +33,14 @@ const CARDS = {
 };
 const DEFAULT = 'origin-free-ternary-bridge';
 const GIDS = [
+  'D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul',
+  'D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.baseChange_bijective',
+  'D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.noncommutative_iff',
+  'D5/S3/Quantum/AURICOmega/TernaryComparisonRankFive.five_le_of_hasFeatureRank',
+  'D5/S3/Quantum/AURICOmega/QuaternionComparisonModel.quaternionModel_hasFeatureRank_five',
+  'D5/S3/Quantum/Algebra/InvariantMetric/LowDimensionInvariantMetric.isLieAbelian_of_finrank_le_two',
+  'D5/S3/Quantum/Algebra/InvariantMetric/LowDimensionInvariantMetric.exists_basis_bracket_eq_smul_cross',
+  'D5/S3/FiniteGroups/GroupAlgebra/CharacterKernelRank.finrank_span_sum_character_kernel',
   'D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel',
   'D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization',
   'D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight',
@@ -289,13 +297,15 @@ for (const [file, src] of Object.entries(sources)) {
 }
 check('reserved identifiers are absent from the suite and registry entry', [suite, entryText].every((src) => !identifiers.test(src) && !shortAcronym.test(src) && !cjkTerms.test(src)));
 check(
-  'registration: §39.1, live, five cards, eleven GIDs in order, theory links',
+  'registration: §39.1, live, five cards, the cited GIDs in order, theory links',
   !!entry && entry.chapter === 39 && entry.section === SECTION && entry.code === 'AXIOM//OMEGA' && entry.status === 'live' && entry.added === '2026-11-19' &&
     same(entry.presets, Object.keys(CARDS)) && same(entry.lean.map((x) => x.gid), GIDS) &&
     entry.theory[0].href === '../zh/' + THEORY && entry.theory[0].href_en === '../en/' + THEORY
 );
 const lock = readLock();
 check('every cited GID is a frozen theorem of the lock', GIDS.every((g) => lock.declarations[g] && lock.declarations[g].kind === 'theorem'));
+const chapterText = ['zh', 'en'].map((l) => fs.readFileSync(path.join(ROOT, 'books', BOOK, l, THEORY.split('#')[0].replace(/\.html$/, '.md')), 'utf8'));
+check('every green GID is cited by a theorem environment of §39.1 (zh, en)', GIDS.every((g) => chapterText.every((t) => new RegExp('lean="[^"]*' + g.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[,"]').test(t))));
 check('the evidence panel has argued, model and numerical boxes', ['lean argued', 'lean model', 'lean num'].every((c) => sources['index.html'].includes(`class="${c}"`)));
 check('the probe exposes state, calc and presets', /window\.AXIOM_OMEGA_DEBUG = Object\.freeze\(\{[\s\S]*get state\(\)[\s\S]*calc,[\s\S]*presets:/.test(sources['main.js']));
 
@@ -409,6 +419,66 @@ function verifyInstances(m, label) {
     near(I.gramPos.det, vol2, 1e-12) && (vol2 > 1e-10 ? rank === 3 && I.gramPos.pivot > 0 : vol2 < 1e-14 ? rank < 3 : true));
   // the brackets of −iσⱼ: [e₁, e₂] = 2e₃ and cyclic
   check(label + ' su(2) brackets are twice the cross product', I.spin.residual < 1e-12 && near(I.spin.brackets[0][1][2], 2, 1e-12) && near(I.spin.brackets[1][2][0], 2, 1e-12) && near(I.spin.brackets[2][0][1], 2, 1e-12));
+  // the base-point group, with the matrix product of SU(2) written here: the page's residuals are at rounding level,
+  // and here the same identities hold at the same bridge (i, j at o = 1 land on ±k; the pair (j, k) at o = i differ by 2)
+  {
+    const o = m.bridge,
+      star = (a, b) => heapM(a, o, b),
+      inv = (a) => heapM(o, a, o),
+      pts = [Q1, neg(Q1), QI, QJ, QK, anchor(0), anchor(e), anchor(2 * e)];
+    let tri = 0,
+      change = 0,
+      order = 0;
+    for (const x of pts) for (const y of pts) for (const z of pts) tri = Math.max(tri, dist4(heapM(x, y, z), star(star(x, inv(y)), z)));
+    for (const o2 of [Q1, QK]) for (const x of pts) change = Math.max(change, dist4(heapM(heapM(x, o, o2), o2, o), x));
+    for (const x of [QI, QJ, QK]) for (const y of [QI, QJ, QK]) order = Math.max(order, dist4(heapM(x, o, y), heapM(y, o, x)));
+    check(label + ' base-point group: [x, y, z] = x ⋆ y⁻¹ ⋆ z, base change inverted, two orders differ',
+      I.basePoint.triGap < 1e-12 && tri < 1e-12 && I.basePoint.changeGap < 1e-12 && change < 1e-12 && order > 0.5 && near(I.basePoint.orderGap, order, 1e-12));
+  }
+  // the reading table of 1, −1, i, j, k: determinant 1/8 by elimination here, rank 5
+  {
+    const five = [Q1, neg(Q1), QI, QJ, QK],
+      K5 = five.map((p) => five.map((q) => (1 + dot(p, q)) / 2));
+    check(label + ' rank five: det of the reading table of 1, −1, i, j, k is 1/8, features realize it',
+      near(detGE(K5), 1 / 8, 1e-12) && near(I.rankFive.det, 1 / 8, 1e-12) && I.rankFive.rank === 5 && I.rankFive.realize < 1e-12);
+  }
+  // aff(1): every invariant form is a multiple of H* ⊗ H* (solved by hand: Φ(H, E) = Φ(E, H) = Φ(E, E) = 0)
+  {
+    const affBr = (x, y) => (x === 0 && y === 1 ? [0, 1] : x === 1 && y === 0 ? [0, -1] : [0, 0]);
+    const residual = (F) => {
+      let r = 0;
+      for (let x = 0; x < 2; x++)
+        for (let y = 0; y < 2; y++)
+          for (let z = 0; z < 2; z++) {
+            const bxy = affBr(x, y),
+              bxz = affBr(x, z);
+            r = Math.max(r, Math.abs(bxy[0] * F[0][z] + bxy[1] * F[1][z] + bxz[0] * F[y][0] + bxz[1] * F[y][1]));
+          }
+      return r;
+    };
+    const A = I.lowDim.aff;
+    check(label + ' aff(1): the invariant forms are one-dimensional and all kill E on the left; su(2) has c = 2',
+      A.dim === 1 && A.eRowZero && A.forms.every((F) => residual(F) < 1e-12 && Math.abs(F[0][1]) < 1e-12 && Math.abs(F[1][0]) < 1e-12 && Math.abs(F[1][1]) < 1e-12 && Math.abs(F[0][0]) > 1e-6) &&
+        residual([[1, 0], [0, 0]]) === 0 && residual([[0, 0], [0, 1]]) > 0 && I.lowDim.su2Residual < 1e-12 && near(I.lowDim.c, 2, 1e-12));
+  }
+  // kernel ranks: Gram–Schmidt on the explicit features of 24 points generated here
+  {
+    let s = 7;
+    const r = () => ((s = (s * 16807) % 2147483647) / 2147483647) * 2 - 1;
+    const pts = Array.from({ length: 24 }, () => { const q = [r(), r(), r(), r()]; const n = Math.hypot(...q); return q.map((x) => x / n); });
+    const rankGS = (vs) => {
+      const basis = [];
+      for (const v of vs) {
+        let w = v.slice();
+        for (const b of basis) { const c = dot(w, b); w = w.map((x, i) => x - c * b[i]); }
+        const n = Math.hypot(...w);
+        if (n > 1e-8) basis.push(w.map((x) => x / n));
+      }
+      return basis.length;
+    };
+    const want = Object.fromEntries(Object.keys(FEATURES).map((k) => [k, rankGS(pts.map(FEATURES[k]))]));
+    check(label + ' kernel ranks 5 = 1 + 2², 4 = 2², 10 = 1 + 3²', same(want, { mother: 5, half: 4, integer: 10 }) && same(I.characterRank, want), JSON.stringify(I.characterRank));
+  }
   const u5 = FEATURES.mother(anchor(0)),
     v5 = FEATURES.mother(anchor(e));
   const lhs = dot(u5, u5) * dot(v5, v5) - dot(u5, v5) ** 2;

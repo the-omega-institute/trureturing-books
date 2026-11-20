@@ -75,6 +75,15 @@
   }
   const MERTENS = 0.2614972128476428; // the Meissel–Mertens constant (a literature value)
   const C_SAG = MERTENS / 2 + DELTA_C;
+  /** The error of Mertens.E₂p.bound' (cited by the text; shown under NUM): Σ_{p ≤ x} 1/p − ln ln x − M at x = 97, 10⁴ and 10⁶. */
+  const MERTENS_ERRORS = [97, 1e4, 1e6].map((x) => {
+    let s = 0;
+    for (const p of PRIMES) {
+      if (p > x) break;
+      s += 1 / p;
+    }
+    return { x, error: s - Math.log(Math.log(x)) - MERTENS };
+  });
 
   /* ---------- exact rationals for the Weyl ledger ---------- */
   const gcd = (a, b) => {
@@ -427,6 +436,7 @@
       lift: { theta: theta / DEG, z: [cs(theta / 2), sn(theta / 2)], base: [cs(theta), sn(theta)], fullTurn: [cs(PI), sn(PI)] },
       schur: { K, y, min: form(y), xSx, worst },
       euler: { P: t4.P, product: euler, gap: PI ** 2 / 6 - euler },
+      mertens: MERTENS_ERRORS,
       holonomy: { line: tri(ps[0], ps[Math.floor(t5.beats / 2)], ps[t5.beats]), bridge: tri(ps[0], t5.bridge.anchor, ps[t5.beats]) },
       krylov: { dims },
       lawvere: { diag, escapes, fixed: f0(g0) === g0 }

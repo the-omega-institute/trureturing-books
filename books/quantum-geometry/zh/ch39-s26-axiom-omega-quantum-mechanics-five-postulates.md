@@ -22,7 +22,7 @@
      所谓“复希尔伯特空间中的单位射线”，正是三元数极小圆弧体向观察者复切面做线性化展开时留下的射影商壳；所谓“全局不可测相位 $e^{\hat{\mathbf{i}}\chi}$”，字面上就是观察切面自身的 $90^\circ$ 正交视觉盲区纤维 $S^1$！当 $N$ 座三元数概念场耦合展开时（[§32.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)），可观测纯态流形即自然延拓为 $\mathbb{CP}^{2^N - 1}$。
 
 ::: {.viz src="axiom-omega-five-qm-postulates-sandbox" preset="postulate1-hopf-blindspot-ray" height="500"}
-盲区相位转一圈，布洛赫点不动卡：拨动全局盲区相位 $\chi$，紫色旋量环面上的琥珀珠沿品红圆纤维整圈滑动，而投向下方的青色布洛赫纯态点保持不动（霍普夫纤维丛标 `ARGUED`，`unit_gram_overlap_characterization`、`blochPure_norm`、`blochPure_surjective` 与 `complete_common_phase_polynomial_theorem` 为 `LEAN ✓`，读数标 `NUM`）。
+盲区相位转一圈，布洛赫点不动卡：拨动全局盲区相位 $\chi$，紫色旋量环面上的琥珀珠沿品红圆纤维整圈滑动，而投向下方的青色布洛赫纯态点保持不动（霍普夫纤维丛标 `ARGUED`；`unit_gram_overlap_characterization`、`blochPure_norm`、`blochPure_surjective`、`complete_common_phase_polynomial_theorem` 与单位四元数上的射线核 `rayKernel_eq_hopf`、`rayKernel_mul_phase_left`、`rayKernel_mul_phase_right`、`rayKernel_eq_one_iff`、`rayKernel_eq_bornProbability_spinor` 为 `LEAN ✓`；读数标 `NUM`）。
 :::
 
 ::: {.remark #rem-ch39-axiom-omega-readings-classification title="三维球面的读法分类：二元性选出时钟，权重形式、可复合性与归一性定出指数"}
@@ -245,5 +245,5 @@ $$
 接下来，让我们跨入本章第四节 [§39.4 自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)（并由此直通第五节 [§39.5](ch39-s28-dyad-relation-future-and-second-order-field.md) 的两阶关系场动力学收官），回到三元数 $\mathbb{T}_3 \cong S^3(1)$ 本体自身，回答那声深层追问：**为什么这枚既不可线性书写、又处处齐性各向同性的闭合流形同时是场、是波、也是自包含粒子，并在彻底清零外置第 3 点 $C$ 的同时消除了宇宙的一切“之外”？**
 
 ::: {.viz src="axiom-omega-five-qm-postulates-sandbox" height="620"}
-完整实验室：在紫色旋量环面上拖动琥珀旋量珠改变盲区相位 $\chi$ 与子午线射线角 $\theta$，并调节各公设滑块（翻转角 $\vartheta$、停机捏合强度 $\lambda$ 与 Alice 两轴夹角 $\gamma$），在同一枚旋量体与布洛赫球及账本台上依次检验霍普夫盲区纤维商映射、反自伴切矢实轴翻转与罗伯逊不确定性、格里森—布施二次迹刚性、全局等距扩张配局域幂等捏合以及双场单态齐雷尔松上界 $2\sqrt{2}$。十八条冻结声明、文献与 `T1–T4` 桥接边界、数值核算及开放问题在依据栏与理论抽屉中分层标注。
+完整实验室：在紫色旋量环面上拖动琥珀旋量珠改变盲区相位 $\chi$ 与子午线射线角 $\theta$，并调节各公设滑块（翻转角 $\vartheta$、停机捏合强度 $\lambda$ 与 Alice 两轴夹角 $\gamma$），在同一枚旋量体与布洛赫球及账本台上依次检验霍普夫盲区纤维商映射、反自伴切矢实轴翻转与罗伯逊不确定性、格里森—布施二次迹刚性、全局等距扩张配局域幂等捏合以及双场单态齐雷尔松上界 $2\sqrt{2}$。冻结声明、文献与 `T1–T4` 桥接边界、数值核算及开放问题在依据栏与理论抽屉中分层标注。
 :::

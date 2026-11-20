@@ -128,6 +128,24 @@ const isPrime = (n) => {
   for (let d = 2; d * d <= n; d++) if (n % d === 0) return false;
   return true;
 };
+/** Σ_{p ≤ x} 1/p − ln ln x − M at x = 97, 10⁴, 10⁶, with primes by trial division against the smaller primes. */
+const MERTENS_WANT = (() => {
+  const M = 0.2614972128476428,
+    small = [],
+    out = [];
+  let sum = 0;
+  const xs = [97, 1e4, 1e6];
+  for (let n = 2, k = 0; n <= 1e6; n++) {
+    let prime = true;
+    for (const p of small) {
+      if (p * p > n) break;
+      if (n % p === 0) { prime = false; break; }
+    }
+    if (prime) { sum += 1 / n; if (n <= 1000) small.push(n); }
+    if (n === xs[k]) { out.push(sum - Math.log(Math.log(n)) - M); k++; }
+  }
+  return out;
+})();
 const PRIMES97 = Array.from({ length: 98 }, (_, i) => i).filter(isPrime);
 /** 1 − cos x by its Taylor series (x ≤ 1), independent of the page's 2 sin²(x/2). */
 function versSeries(x) {
@@ -414,6 +432,9 @@ function verifyTier5(t5, label) {
       t5.bridge.exactResidue === 0 && same(t5.bridge.exact, z) && (t5.tilt === 0 ? t5.bridge.residue === 0 : t5.bridge.residue > 0));
 }
 function verifyInstances(m, I, label) {
+  check(label + ' instance: the Mertens error Σ_{p ≤ x} 1/p − ln ln x − M at x = 97, 10⁴, 10⁶ (trial-division primes here)',
+    same(I.mertens.map((e) => e.x), [97, 1e4, 1e6]) && I.mertens.every((e, i) => near(e.error, MERTENS_WANT[i], 1e-12)) &&
+      MERTENS_WANT.every((v, i) => v > 0 && (i === 0 || v < MERTENS_WANT[i - 1] / 10)));
   check(label + ' instance: θ* and its residual', near(I.fixedPoint.thetaStar, TS, 1e-12) && I.fixedPoint.residual < 1e-12);
   check(label + ' instance: record time with both Fubini–Study angles π/4 and the bound πħ/(4E) = 1 = τ',
     near(I.recordTime.angle0, Math.PI / 4, 1e-12) && near(I.recordTime.angle1, Math.PI / 4, 1e-12) && near(I.recordTime.bound, 1, 1e-12) && I.recordTime.tau === 1 && I.recordTime.holds);
@@ -504,8 +525,8 @@ check('three-column lab shell, panel badges, evidence boxes and drawer', await p
     !!q('aside.col.side > #readouts') && q('aside.col.side > #evidence').firstElementChild.id === 'infoBtn' && document.querySelectorAll('#infoBtn').length === 1 &&
     ['§39.2', '5', 'NUM', 'trureturing'].every((x) => asides.includes(x)) &&
     [...document.querySelectorAll('#evidence .lean')].every((el) => el.children.length === 2 && [...el.children].every((c) => c.tagName === 'SPAN')) &&
-    ['.lean.argued', '.lean.model', '.lean.num', '.lean.open'].every((s) => document.querySelectorAll('#evidence ' + s).length === 1) &&
-    document.querySelectorAll('#evidence .lean:not(.argued):not(.model):not(.num):not(.open)').length === 12 &&
+    ['.lean.argued', '.lean.model', '.lean.num', '.lean.open'].every((s) => document.querySelectorAll('#evidence ' + s).length === 1) && !document.querySelector('#evidence .lean.frozen') &&
+    document.querySelectorAll('#evidence .lean:not(.frozen):not(.argued):not(.model):not(.num):not(.open)').length === 12 &&
     /不是证明/.test(q('#drawer').textContent) && /not a proof/.test(q('#drawer').textContent) &&
     [...document.querySelectorAll('#drawer .sheet > div.zh, #drawer .sheet > div.en')].every((el) => el.querySelector('p.lede') && el.querySelectorAll('ol li b').length === 7 && el.querySelector('p.lede.refs a'));
 }));
@@ -523,15 +544,16 @@ for (const lang of ['zh', 'en']) {
   const links = await page.locator('#drawer .refs a, #evidence .lean.open a').evaluateAll((els) => els.filter((el) => getComputedStyle(el.parentElement).display !== 'none').map((el) => el.getAttribute('href')));
   check(lang + ' theory and open-problem links', [THEORY, ...OPEN].every((x) => links.includes('../../' + lang + '/' + x)));
   check(lang + ' the twelve green boxes cite exactly the twelve theorems, in order',
-    same(await page.locator('#evidence .lean:not(.argued):not(.model):not(.num):not(.open) a[data-lean-gid]').evaluateAll((els) => els.map((el) => el.dataset.leanGid)), GIDS) &&
+    same(await page.locator('#evidence .lean:not(.frozen):not(.argued):not(.model):not(.num):not(.open) a[data-lean-gid]').evaluateAll((els) => els.map((el) => el.dataset.leanGid)), GIDS) &&
       same(await page.locator('#evidence a[data-lean-gid]').evaluateAll((els) => els.map((el) => el.dataset.leanGid)), GIDS));
   const badge = async (sel) => (await page.locator('#evidence ' + sel + ' .' + lang).allTextContents()).join(' ').replace(/\s+/g, '');
   const num = await badge('.lean.num'),
     model = await badge('.lean.model'),
     argued = await badge('.lean.argued');
-  check(lang + ' NUM says it is not a proof; MODEL owns the tower, the calibration and the fading bridge; ARGUED owns Mertens and 3/8',
+  check(lang + ' NUM says it is not a proof and carries the Mertens errors with the frozen name; MODEL owns the tower, the calibration and the fading bridge; ARGUED owns 3/8 and Albert, not Mertens',
     (lang === 'zh' ? /不是证明/ : /notaproof/).test(num) && model.includes('η') && model.includes('0.36') && model.includes('ε/ε₀') &&
-      argued.includes('1874') && argued.includes('3/8') && argued.includes('1969'));
+      !argued.includes('1874') && !/Mertens|梅滕斯/.test(argued) && argued.includes('3/8') && argued.includes('1969') &&
+      num.includes("Mertens.E₂p.bound'") && num.includes('E₂p(97)=0.0208') && num.includes('E₂p(10⁴)=0.0012') && num.includes('E₂p(10⁶)=0.00004'));
   for (const id of IDS) {
     await pick(id);
     const m = await verifyCard(page, id);

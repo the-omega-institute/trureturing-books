@@ -350,7 +350,41 @@
     const records = [EX_A, EX_B, HEAP, scale(EX_A, -1)];
     const gram = records.map((a) => records.map((b) => dot(a, b)));
     const classes = records.map((_, i) => records.findIndex((_, j) => Math.abs(gram[i][j] - 1) < 1e-12));
-    return { faceCycle, tetra, brackets, lift, surjective, fsTriangle, gram, gramClasses: new Set(classes).size };
+    // reflectionSeq_eq_pow, kappa_reflectionSeq_add: the heap steps are A (A⁻¹B)ⁿ, and κ(xₘ, xₘ₊ₙ) = κ(A, xₙ)
+    const kq = (a, b) => (1 + dot(a, b)) / 2;
+    const ab = qmul(qinv(EX_A), EX_B);
+    let powGap = 0,
+      pw = [1, 0, 0, 0];
+    xs.forEach((x, n) => {
+      powGap = Math.max(powGap, norm(sub(x, qmul(EX_A, pw))));
+      pw = qmul(pw, ab);
+    });
+    let shiftGap = 0;
+    for (let mm = 0; mm < xs.length; mm++) for (let n = 0; mm + n < xs.length; n++) shiftGap = Math.max(shiftGap, Math.abs(kq(xs[mm], xs[mm + n]) - kq(EX_A, xs[n])));
+    const reflection = { steps: xs.length - 1, powGap, shiftGap };
+    // kappa_mul_mul, exists_mul_mul_eq_of_kappa_eq: (A, B) is carried to (B, [B, A, B]) and to (B, A) by z ↦ p z q,
+    // with c from the proof (w = |v|² − v′v, or a pure quaternion orthogonal to v when v′ = −v)
+    const carry = (x, y, x2, y2) => {
+      const a = qmul(qinv(x), y),
+        a2 = qmul(qinv(x2), y2),
+        v = [0, a[1], a[2], a[3]],
+        v2 = [0, a2[1], a2[2], a2[3]];
+      let w;
+      if (norm(add(v2, v)) > 1e-9) w = sub([dot(v, v), 0, 0, 0], qmul(v2, v));
+      else {
+        const e = Math.abs(v[1]) < 0.9 * norm(v) ? [0, 1, 0, 0] : [0, 0, 1, 0];
+        w = sub(e, scale(v, dot(e, v) / dot(v, v)));
+      }
+      const c = scale(w, 1 / norm(w)),
+        pp = qmul(qmul(x2, c), qinv(x)),
+        qq = qinv(c);
+      return { kappa: [kq(x, y), kq(x2, y2)], p: pp, q: qq, gapX: norm(sub(qmul(qmul(pp, x), qq), x2)), gapY: norm(sub(qmul(qmul(pp, y), qq), y2)) };
+    };
+    const twoPoint = { carries: [carry(EX_A, EX_B, EX_B, HEAP), carry(EX_A, EX_B, EX_B, EX_A)] };
+    let invariance = 0;
+    for (const pp of BASES) for (const qq of BASES) invariance = Math.max(invariance, Math.abs(kq(qmul(qmul(pp, EX_A), qq), qmul(qmul(pp, EX_B), qq)) - kq(EX_A, EX_B)));
+    twoPoint.invariance = invariance;
+    return { faceCycle, tetra, brackets, lift, surjective, fsTriangle, gram, gramClasses: new Set(classes).size, reflection, twoPoint };
   })();
   /** A point of S³ as a spinor of ℂ²: (x₀ + ix₁, x₂ + ix₃), entries [re, im]. */
   function spinor(q) {
