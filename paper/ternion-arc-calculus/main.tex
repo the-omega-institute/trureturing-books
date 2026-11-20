@@ -80,7 +80,10 @@ rotates through minus its area.  A space of finite comparison rank $r$ cannot en
 comparison-preserving maps, which needs rank $r^2$; and the logarithm of an exponentially scaled Gram elimination tends to the
 shortest-path value under a sign condition, which cannot be dropped.  Inserting a clock phase at each step of the geodesic recurrence
 realises exactly the polynomials of the comparison bounded by one on $[-1,1]$ with the permitted degree and parity, and a two-chart
-rational atlas makes the whole arc calculus bounded and exactly rational on $S^3$.  Before any manifold, the chord--sagitta identity and an
+rational atlas makes the whole arc calculus bounded and exactly rational on $S^3$.  For ordered products of rotations the deterministic
+convergence criterion is the angular sum, not the sagitta sum (both directions fail), and holonomy words in the binary icosahedral
+group recognise exactly nonuniform $\mathrm{NC}^1$, while commutative words cannot compute two-input AND under a two-output promise.
+Before any manifold, the chord--sagitta identity and an
 elliptic/parabolic/hyperbolic trichotomy already hold for fair elements of a star algebra, and sparse comparisons on a chordal graph
 with triangle defects at most $\varepsilon$ come from a potential up to $(|V|-2)\varepsilon$, the obstruction on other graphs being a
 lattice gauge connection.  The key step concerns the duplication equation $f(x^2)=2f(x)^2-1$: on the line it has continuous non-cosine
@@ -145,10 +148,11 @@ chord, cap arc and two-arc route of a right cell and shows that the logarithm of
 (shortest-path) value exactly when the signed coefficients of the shortest paths do not cancel.  Section~\ref{sec:m4} inserts a clock
 phase at each step of the recurrence: the attainable comparisons are exactly the bounded polynomials of the permitted degree and parity;
 Section~\ref{sec:m4atlas} replaces the Cayley chart by a bounded two-chart rational atlas on all of $S^3$ with uniform error bounds.
-Part~\ref{part:final}
+Part~\ref{part:arith} (Section~\ref{sec:m6}) treats the arithmetic of $S^3$: prime-norm gates and their covering exponents (from the
+cited spectral gap), products of rotations (the angular sum decides deterministic convergence, the sagitta sum only the random
+dispersion), a prime-indexed example with its scope, finite Hermite--Biehler kernels, fixed points, and word holonomy (Barrington's
+theorem in the icosahedral group against the commutative obstruction).  Part~\ref{part:final}
 (Sections~\ref{sec:known}--\ref{sec:open}) places the results in the literature, records what is formalised, and lists the open problems.
-% ROADMAP, temporary (delete each line when its part lands): Part "Arithmetic
-% and holonomy" (m6) goes after the arc calculus; the final part keeps known work, formalisation and open problems.
 In the arc calculus the guiding observation is that linear calculus discards two second-order quantities
 that are exact and computable in the heap: the radial sagitta of each step, and the failure of the
 square roots of displacements to telescope.  The first is the quadratic-variation (It\^o) term, the
@@ -7480,7 +7484,1265 @@ The rational quotient operations define candidate components for a field-valued 
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\theHsection}{\arabic{section}}
 
-% ---- insertion point: Part "Arithmetic and holonomy" (module m6)
+\paperpart{part:arith}{Arithmetic and holonomy}
+
+% Section 10B: lettered so that Sections 11 onwards (cited by Paper II) keep their numbers.
+\setcounter{section}{1}
+\renewcommand{\thesection}{10\Alph{section}}
+\renewcommand{\theHsection}{arith.\arabic{section}}
+\section{Arithmetic, infinite products, and word holonomy on the three-sphere}
+\label{sec:m6}
+
+Let \(M=S^3\) be the group of unit quaternions, with round distance \(d\)
+and \(v(q)=1-\re q\). How do the discrete arithmetic and the order of
+rotations constrain the arcs they generate? We give covering and arc
+approximation bounds for prime-norm gates, an exact convergence criterion
+for products of independent rotations, and a separation between
+icosahedral and commutative word programs. The product criterion
+distinguishes quadratic sagitta accumulation from the drift of the
+ordered product. This distinction gives two different prime-indexed
+thresholds, even for products in a single axis circle.  The spectral-gap and covering inputs are cited results
+\cite{m6:LPS,m6:PS,m6:Sardari}; what the rational arc calculus of Sections~\ref{sec:rational} and \ref{sec:m4atlas} adds is exact
+rational evaluation of comparisons, transports and holonomies at the approximating words, with uniform error bounds.  Several finite
+statements below overlap Sections~\ref{sec:d4}, \ref{sec:m4} and \ref{sec:m4atlas}; the overlaps are marked where they occur.  Guide:
+Remarks~\ref{m6:icosians}, \ref{m6:definability} and Example~\ref{m6:norm-example} treat orders and norm forms; Proposition~\ref{m6:arcs}
+and Remark~\ref{m6:finite-gates} pass from nets to arcs; Remark~\ref{m6:sagitta-link} relates the product criteria to the sagitta sums
+of paths and Remark~\ref{m6:prime-scope} delimits the prime example; Propositions~\ref{m6:kernel-local}, \ref{m6:phase} and
+Corollary~\ref{m6:moment} complete the kernel material and Corollary~\ref{m6:readouts} the fixed-point material;
+Definition~\ref{m6:word-model}, Corollary~\ref{m6:rational-word}, Example~\ref{m6:torus-refutation} and Example~\ref{m6:position} complete
+the word programs.
+
+\subsection{Orders, norm shells, and approximation}
+
+\begin{proposition}[Hurwitz order and rational points]\label{m6:hurwitz}
+Write \(N(x)=x\bar x\) and \(\operatorname{Trd}(x)=x+\bar x\).
+The Hurwitz order is
+\[
+ \mathcal H=\Z^4\cup(\Z+\tfrac12)^4
+ =\Z\,1+\Z\,i+\Z\,j+\Z\,h,\qquad h=(1+i+j+k)/2.
+\]
+It is stable under conjugation and has integral trace and norm.
+Its norm-one group has \(24\) elements and lies in \(M(\Q)\).
+If \(a\in\mathcal H\) and \(N(a)=p\) for a prime \(p\), then
+\(a/\sqrt p\in M\setminus M(\Q)\), but \(\Ad(a)\in\SO(3,\Q)\).
+Products of \(n\) gates all of the same prime norm \(p\) have
+rational lifts for even \(n\) and irrational lifts for odd \(n\).
+\end{proposition}
+\begin{proof}
+Use \(k=2h-1-i-j\). In addition to \(i^2=j^2=-1\) and \(ij=-ji=k\),
+the relations
+\[
+ h^2=h-1,\quad ih=h-1-j,\quad hi=i+j-h,\quad
+ jh=i+j-h,\quad hj=h-1-i
+\]
+hold by multiplication. Conjugation sends \(h\) to \(1-h\).
+The squared norm of a half-integral vector is integral since
+\(\sum_{\ell=0}^3 (n_\ell+1/2)^2=1+\sum_\ell n_\ell(n_\ell+1)\).
+Trace is twice the scalar coordinate. At norm one the integral
+solutions are the eight signed basis vectors and the half-integral
+solutions are the sixteen independent choices of signs on \(1/2\).
+For \(N(a)=p\), conjugation acts on \(\im\HH\) by \(x\mapsto ax\bar a/p\).
+Multiplicativity of \(N\) gives a nonzero rational numerator and
+denominator \(p^{n/2}\) for a product, proving the parity assertion.
+\end{proof}
+
+\begin{remark}[Icosians]\label{m6:icosians}
+Let \(\varphi=(1+\sqrt5)/2\) and \(F=\Q(\sqrt5)\). The binary
+icosahedral group \(2I\subset M(F)\) is the inverse image of the
+orientation-preserving symmetry group \(A_5\) of the icosahedron.
+In suitable coordinates its \(120\) elements are the \(24\) Hurwitz
+units and the \(96\) even permutations of
+\((0,\pm1,\pm\varphi^{-1},\pm\varphi)/2\) with independent signs.
+The coordinate description, the following lattice identification,
+and the associated six-dimensional cut-and-project construction
+are classical \cite[Ch.~8, \S8.2]{m6:CS}
+\cite{m6:MoodyPatera}. In particular the icosian order
+\(\mathcal I=\Z[2I]\) is free of rank \(4\) over \(\Z[\varphi]\).
+Writing \(N(x)=a+b\varphi\) and \(x'\) for field conjugation, the
+form
+\[
+ Q(x)=2(a+b)=\frac{2}{\sqrt5}\bigl(\varphi N(x)+
+                         \varphi^{-1}N(x')\bigr)
+\]
+identifies its underlying rank-eight lattice with \(E_8\). The
+norm-two vectors are \(2I\) and \(\varphi^{-1}2I\).
+The identity for \(Q\) follows from \(\varphi'=1-\varphi\) and
+\(\varphi-\varphi'=\sqrt5\). On the pure-imaginary submodule, the
+diagonal embedding \(x\mapsto(x,x')\) gives a rank-six lattice.
+Indeed the kernel of the scalar-coordinate map has \(F\)-dimension
+three, and its diagonal real extension is the product of the two
+imaginary three-spaces. The intersection \(2I\cap M(\Q)\) consists
+of the Hurwitz units, since each remaining group element has an
+irrational coordinate. An icosian with scalar part \(\varphi/2\)
+has adjoint trace \(4(\varphi/2)^2-1=\varphi\), by the usual
+rotation trace \(1+2\cos\theta\). Theorem~\ref{thm:rational}
+applies over \(\Q\) to the rational subset. Its algebraic formulas
+also operate over \(F\) on icosian data. Prime-norm gates have
+rational adjoints by Proposition~\ref{m6:hurwitz}.
+\end{remark}
+
+\begin{proposition}[Quadratic norms and traces]\label{m6:norm-forms}
+For \(\omega^2+\omega+1=0\) and \(\omega\ne1\), put
+\(E(x,y)=N(x-y\omega)=x^2+xy+y^2\). The shear
+\((P,Q)\mapsto(P-(t+1)Q,Q)\), \(t\in\Z\), pulls \(E\) back to
+\[
+ P^2-(2t+1)PQ+(t^2+t+1)Q^2
+\]
+with discriminant \(-3\) and the same integral values.
+For \(g=a+b\varphi\) one has \(\operatorname{Tr}(g)=2a+b\) and
+\((2a+b)^2-5b^2=4N(g)\). In particular, with
+\(L_n=\varphi^n+(\varphi')^n\) and \(F_n=(\varphi^n-(\varphi')^n)/\sqrt5\),
+\(L_n^2-5F_n^2=4(-1)^n\). For \(A_n+B_n\sqrt2=(1+\sqrt2)^n\)
+one has \(A_n^2-2B_n^2=(-1)^n\).
+\end{proposition}
+\begin{proof}
+Expand the products with the conjugates. The shear has inverse
+\((x,y)\mapsto(x+(t+1)y,y)\), and
+\((2t+1)^2-4(t^2+t+1)=-3\). The golden identity uses
+\(N(g)=a^2+ab-b^2\) and the two power identities use
+\(N(\varphi)=N(1+\sqrt2)=-1\).
+\end{proof}
+
+\begin{example}[Small sections of the norm forms]\label{m6:norm-example}
+The shear sends \((t,P,Q)=(2,8,3)\) to \((-1,3)\), on the
+Eisenstein shell of norm \(7\). Norms \(1,3,7\) have respectively
+\(6,6,12\) Eisenstein points, and the trace sets for norms \(1,3\)
+are respectively \(\{-2,-1,1,2\}\) and \(\{-3,0,3\}\).
+For verification, solve \((2x+y)^2=4E-3y^2\) for integer
+\(|y|\le\sqrt{4E/3}\), retaining square roots of the same parity as \(y\).
+The integer-coordinate Hamilton shells of norms \(1,2,3,4\)
+contain \(8,24,32,24\) points. For the first three shells choose
+the coordinates of absolute value \(1\) and their signs. At \(4\)
+include the eight signed coordinate vectors of length \(2\) and
+the sixteen sign patterns on four ones.
+\end{example}
+
+\begin{remark}[Local norm tests and definability]\label{m6:definability}
+In the rational quaternion algebra \((a,b)_\Q\), with \(i^2=a\),
+\(j^2=b\) and \(ij=-ji=k\), expansion gives
+\(\operatorname{Trd}(x)=2x_0\) and
+\(\operatorname{Nrd}(x)=x_0^2-a x_1^2-b x_2^2+ab x_3^2\).
+Let \(S_{a,b}\) be the set of traces of norm-one elements and let
+\(\Delta_{a,b}\) be the finite primes at which the algebra is a
+division algebra. For positive \(a,b\in\Q\), the real algebra splits
+and Poonen's formula uses a fixed finite set of integer shifts \(J\)
+with
+\[
+ S_{a,b}+S_{a,b}+J
+ =\bigcap_{p\in\Delta_{a,b}}\Z_{(p)}
+\]
+\cite[proof of the main theorem]{m6:Poonen}. The intersection of
+\(\Z_{(p)}\) over all primes is \(\Z\), by lowest terms of a rational
+fraction. Poonen gives a \(\forall^2\exists^7\) definition of \(\Z\)
+in \(\Q\), following Robinson's first-order definition
+\cite{m6:Robinson,m6:Poonen}. Koenigsmann gives a universal
+definition, equivalently an existential polynomial definition of
+the complement \cite[Theorem~1]{m6:Koenigsmann}. Daans gives a
+universal definition with ten quantifiers \cite{m6:Daans}.
+An existential definition of \(\Z\) itself would reduce Hilbert's
+tenth problem over \(\Z\) to the rational version. To see the
+reduction, conjoin the defining polynomial for each variable
+with the original equation and combine them as a sum of squares
+over \(\Q\). The Hamilton norm sphere in
+Proposition~\ref{m6:hurwitz} supplies the compact real example of
+the trace construction.
+\end{remark}
+
+\begin{remark}[Two-square sections and Frobenius angles]\label{m6:arithmetic-anchors}
+The integer section of the Hamilton norm with two zero coordinates
+satisfies the classical two-squares criterion. A positive integer
+is represented exactly when each prime \(3\bmod 4\) occurs to even
+exponent. At such a prime, if \(x^2+y^2=0\bmod p\) and \(y\ne0\bmod p\),
+then \((x/y)^2=-1\bmod p\), impossible by Fermat's little theorem.
+Conversely use the two-squares theorem for primes \(1\bmod4\),
+\(2=1^2+1^2\), squares for the remaining even exponents, and
+multiplicativity of the Gaussian norm \cite[Ch.~XX]{d4-hw}.
+A different prime-indexed family comes from a fixed elliptic curve
+over \(\Q\) at primes \(p\) of good reduction. Hasse's bound gives
+\(|a_p|\le2\sqrt p\) for \(a_p=p+1-\#E(\mathbb F_p)\)
+\cite[Ch.~V, Theorem~1.1]{m6:Silverman}. Thus there is a unique
+\(\theta_p\in[0,\pi]\) with \(2\cos\theta_p=a_p/\sqrt p\),
+and it specifies the \(\SU(2)\) conjugacy class with the two
+normalized Frobenius eigenvalues. This follows by solving
+\(X^2-(a_p/\sqrt p)X+1=0\). The class by itself specifies no axis.
+The base-change or distribution theorems for these angles play
+no role in the products below.
+\end{remark}
+
+Put \(G=M/\{\pm1\}\), with distance
+\(d_G([q],[w])=\min\{d(q,w),d(q,-w)\}\) and normalized Haar measure.
+For fixed prime \(p\equiv1\bmod4\), take
+\[
+ S_p=\{[a/\sqrt p]\mid a\in\Z^4,\ N(a)=p,\ 
+                   a_0>0\text{ odd},\ a_1,a_2,a_3\text{ even}\}.
+\]
+Write \(W_n\) for the reduced words of length \(n\), evaluated in \(G\).
+
+\begin{theorem}[Prime-norm covering]\label{m6:cover}
+Let \(n\ge1\). The alphabet has \(p+1\) letters and is free on
+\((p+1)/2\) inverse pairs. The Lubotzky--Phillips--Sarnak bound is
+\[
+ \left\|T\bigm|_{L^2_0(G)}\right\|\le \frac{2\sqrt p}{p+1},
+ \qquad T f(x)=\frac{1}{p+1}\sum_{s\in S_p}f(s^{-1}x).
+\]
+Consequently, writing \(N_n=(p+1)p^{n-1}=|W_n|\), one has
+\[
+ \begin{aligned}
+ \sup_{g\in G}d_G(g,W_n)&\ll_p(n+1)^{1/3}N_n^{-1/6},\\
+ \mu\{g:d_G(g,W_n)>r\}&\ll_p (n+1)^2/(N_n r^3)
+ \quad (0<r\le1).
+ \end{aligned}
+\]
+All finite sets of \(N\) points in \(G\) have covering radius
+\(\gg N^{-1/3}\). The almost-everywhere exponent of \(W_n\) is
+optimal in the sense that for every \(0<\eta<1/3\), Haar-almost every
+\(g\) eventually has distances between \(N_n^{-1/3-\eta}\) and
+\(N_n^{-1/3+\eta}\). For even \(n\) the worst-case radius is
+\(\gg_p N_n^{-1/4}\), also for even words of length at most \(n\).
+Both lifts of each even word give a rational net in \(M\) with the
+same covering radius.
+\end{theorem}
+\begin{proof}
+Jacobi's four-square formula gives \(8(p+1)\) integral
+representatives of norm \(p\) \cite[Ch.~XX]{d4-hw}. Exactly one coordinate
+is odd by reduction modulo four. Symmetry of the coordinates and
+the sign of the odd coordinate give \(|S_p|=p+1\).
+For freeness work modulo \(p\). With \(u^2=-1\) in \(\mathbb F_p\),
+send \(i\) to \(\operatorname{diag}(u,-u)\) and \(j\) to
+\(\left(\begin{smallmatrix}0&1\\-1&0\end{smallmatrix}\right)\).
+These and their product, together with the identity, form a basis
+of the matrix algebra. Quaternion conjugation becomes the matrix
+adjugate, so the norm-\(p\) generators have rank one modulo \(p\).
+If two generators have the same image line, then \(\bar a b=0\bmod p\).
+The quotient \(\bar a b/p\) has integer coordinates, norm one,
+odd scalar and even imaginary coordinates, so equals \(\pm1\).
+Hence \(b=\pm a\), and the positive scalar selects \(b=a\).
+Thus adjacent rank-one factors have zero product precisely when
+they are inverse letters, using \(\ker a=\operatorname{im}\bar a\).
+A product of rank-one factors is nonzero if all adjacent products
+are nonzero, by factoring each rank-one matrix as a column times
+a row. A nonempty even reduced word representing the identity in
+\(G\) would have numerator \(\pm p^{n/2}\), zero modulo \(p\).
+A nonempty odd word representing the identity would have
+irrational scalar numerator. This proves freeness.
+
+For the classical input use the rotations and the Ramanujan bound of
+Lubotzky, Phillips and Sarnak
+\cite{m6:LPS,m6:PS}, identifying \(G\) with the real rotation
+group. The rotation action on \(S^2\) contains each irreducible
+representation of \(G\) once, by the decomposition into spherical
+harmonics. The regular action on \(G\) has the same irreducibles
+with multiplicities. Thus the spectral bound passes to \(L^2_0(G)\).
+The six gates for \(p=5\) are the classes of
+\((1\pm2i)/\sqrt5,(1\pm2j)/\sqrt5,(1\pm2k)/\sqrt5\).
+
+Put \(A=(p+1)T\), and let \(B_n\) be convolution by the sum of the
+reduced words. Then \(B_0=I,\ B_1=A,\ B_2=A^2-(p+1)I\), and
+\(B_{n+1}=AB_n-pB_{n-1}\) for \(n\ge2\). Indeed a cancelled first
+letter has \(p\) choices for each surviving nonempty reduced word,
+and \(p+1\) choices for the empty word. On the zero-mean space the
+spectral theorem and this recurrence give
+\[
+ B_n=p^{n/2}U_n(A/(2\sqrt p))-p^{(n-2)/2}U_{n-2}(A/(2\sqrt p))
+ \quad(n\ge2),
+\]
+where \(U_j\) is the Chebyshev polynomial of the second kind.
+The finite exponential sum for
+\(U_j(\cos t)=\sin((j+1)t)/\sin t\) gives \(|U_j|\le j+1\),
+including its endpoint limits. Hence the normalized word operator
+\(D_n=B_n/N_n\) has zero-mean norm \(\lambda_n\ll_p(n+1)N_n^{-1/2}\).
+
+Let \(b(r)\) be the Haar measure of an open radius-\(r\) ball. In
+dimension three \(b(r)\asymp r^3\) for \(0<r\le1\), by integrating
+the round volume density \(\sin^2 t\) in polar coordinates and
+using the isometric local lift to \(M\). Put \(F=1_{B(1,r)}\).
+Then \(D_nF\) vanishes outside the word balls and has mean \(b(r)\).
+Its squared \(L^2\) deviation from \(b(r)\) is at most
+\(\lambda_n^2 b(r)(1-b(r))\), giving the measure bound.
+For a point \(g\) with \(d_G(g,W_n)\ge 2r\), the inner product
+\(\langle D_nF,1_{B(g,r)}\rangle\) is zero. Subtraction of the two
+means gives \(b(r)^2\le\lambda_n b(r)(1-b(r))\). Taking
+\(b(r)>\lambda_n\), and adjusting the constant for finitely many
+small \(n\), proves the uniform upper bound. The same ball measure
+and a union bound give the uniform volume lower bound. The two
+exceptional measures at radii \(N_n^{-1/3\pm\eta}\) are summable
+by exponential growth of \(N_n\), so Borel--Cantelli gives the
+almost-everywhere assertion.
+
+If \(n=2m\), each lift of an even word of length \(\le n\) has integer
+numerator over \(p^m\). Distinct from the identity class, it has
+\(|\re q|\le1-p^{-m}\). Its distance to the identity is therefore
+at least \(\arccos(1-p^{-m})\ge\sqrt{2p^{-m}}\).
+A point halfway out from the identity to this radius has distance
+at least half this radius from the entire set, by the triangle
+inequality, whether or not the set includes the identity. This is
+the claimed lower bound since \(N_n\asymp_p p^{2m}\).
+With both lifts present, distance to a word in \(G\) equals distance
+to its closer lift in \(M\).
+\end{proof}
+
+\begin{conjecture}[Uniform even-word exponent]\label{m6:cover-conjecture}
+For the even length budget and both lifts in
+Theorem~\ref{m6:cover}, a uniform bound of order
+\(N_n^{-1/4+\eta}\) for every \(\eta>0\) would match the arithmetic
+hole exponent. The hole identifies the scale to test. Attainment
+requires quantitative approximation of every real target by the
+restricted denominator shells. Strong-approximation methods for
+quadratic forms address this type of exceptional-cap problem
+\cite{m6:Sardari,m6:PS}.
+\end{conjecture}
+
+\begin{proposition}[From nets to arcs]\label{m6:arcs}
+Let \(x,y\in M\) with \(d(x,y)\le\pi-\delta\), where \(0<\delta<\pi\).
+Choose \(x',y'\) in a rational \(\varepsilon\)-net at distance at most
+\(\varepsilon\) from \(x,y\), with \(0<\varepsilon<\delta/4\).
+The two minimal arcs have parametrizations with uniform distance
+at most \(\pi\varepsilon/\sin(\delta/4)\). The same estimate applies
+edge by edge to any finite sampled path with that margin, including
+a subdivision of an antipodal arc. At the approximating vertices,
+the comparisons and adjoint holonomy are exactly rational as in
+Theorem~\ref{thm:rational}.
+\end{proposition}
+\begin{proof}
+Parametrize by the normalized chord \(((1-t)x+ty)/|(1-t)x+ty|\).
+Its image is the minimal arc, including the constant arc. The chord
+norm is at least \(\cos(d(x,y)/2)\), by its squared norm at
+\(t=1/2\). For the approximants the endpoint angle is at most
+\(\pi-\delta/2\) by the triangle inequality, so both denominators
+are at least \(\sin(\delta/4)\). The two unnormalized chords differ
+by at most \(\varepsilon\). For \(|a|,|b|\ge c>0\) the normalized
+vectors differ by at most \(2|a-b|/c\), by adding and subtracting
+\(b/|a|\). Round distance is at most \(\pi/2\) times the chordal
+distance, since \(2\sin(d/2)\ge2d/\pi\). A chosen antipodal arc
+admits a subdivision into shorter arcs. Products of rational
+vertex displacements and Theorem~\ref{thm:rational} give the last claim.
+\end{proof}
+
+\begin{remark}[Continuous axes and finite orbits]\label{m6:finite-gates}
+Two full continuous circles about noncollinear axes generate
+\(\SO(3)\) by finite words, with exact reachability. Choose a
+rotation about one axis taking the other outside their original
+span. The subgroup then contains three independent axis circles
+by conjugation. The derivative of their product at zero angles
+is an isomorphism, so the subgroup is open and connectedness gives
+all of \(\SO(3)\). This argument applies to full axis circles.
+For a finite gate alphabet of size \(b\), the number of words of
+length \(\le L\) is \(\sum_{j=0}^L b^j\), and evaluation can identify
+different words. For a fixed initial Bloch vector the orbit is a
+finite subset \(V_L\subset S^2\), with positive and nonincreasing
+covering radius as \(L\) increases. A unit normal \(u\) has support
+gap \(1-\max_{z\in V_L}u\cdot z=1-\cos d(u,V_L)\). Thus the
+worst support gap is the sagitta of the worst angular gap.
+An orbit hull with the centre in its interior has a spherical
+cellulation by radial projection of its flat faces, since each
+ray has exactly one boundary point. A rotation about the initial
+vector can move gates by a positive distance while fixing that
+vector, so fixed-state error does not bound full gate error.
+For instance \(H\) and \(T\) on the Bloch north pole act as
+\((x,y,z)\mapsto(z,-y,x)\) and rotation about \(z\) by \(\pi/4\).
+At budgets \(0,1,2\) the hulls have dimension \(0,1,2\),
+respectively. The states at budget \(2\) are the north pole,
+the positive \(x\)-axis and its \(\pi/4\) image.
+Solovay--Kitaev supplies a polylogarithmic word-length bound for
+finite inverse-closed dense gate alphabets \cite{d4-dawson}, and number-theoretic synthesis gives optimal ancilla-free Clifford$+T$
+approximations of $z$-rotations \cite{m6:RS}.
+Conjecture~\ref{d4:conjecture} poses a single-trajectory coverage
+question for fixed-state orbits.
+Theorem~\ref{m6:cover} supplies a logarithmic length bound for its
+particular alphabet. Theorem~\ref{thm:rational} adds exact rational
+arc observables after approximation, without prescribing a search
+algorithm for the closest arithmetic word.
+\end{remark}
+
+\subsection{Sagittas and ordered infinite products}
+
+\begin{theorem}[Deterministic products]\label{m6:det-product}
+Let \(q_k\in M\), \(P_n=q_1\cdots q_n\), and
+\(\theta_k=d(1,q_k)\in[0,\pi]\). Then
+\[
+ |q_k-1|^2=2v(q_k),\qquad
+ \frac{2}{\pi^2}\theta_k^2\le v(q_k)\le \frac12\theta_k^2.
+\]
+If \(\sum_k\sqrt{v(q_k)}<\infty\) then \(P_n\) converges.
+Convergence implies \(\theta_k\to0\). Summability of \(v(q_k)\)
+is neither sufficient nor necessary. For any prescribed
+\(\theta_k\to0\), convergence for every choice of axes holds
+exactly when \(\sum_k\theta_k<\infty\).
+\end{theorem}
+\begin{proof}
+The chord identity is Proposition~\ref{m1:algebra}. Apply
+\(2x/\pi\le\sin x\le x\) for \(0\le x\le\pi/2\) to
+\(v(q)=2\sin^2(\theta/2)\). Bi-invariance gives
+\(d(P_m,P_n)\le\sum_{m<k\le n}\theta_k\) and
+\(d(P_{n-1},P_n)=\theta_n\). Completeness gives the sufficient
+condition. For a fixed unit imaginary quaternion \(u\), the
+product of \(\exp(u\theta_k)\) is the exponential of the sum.
+If its positive partial angle sums are unbounded and the increments
+tend to zero, take first crossings of \(2\pi j\) and \(2\pi j+\pi\).
+The two subsequences tend to \(1\) and \(-1\), since the overshoot
+is bounded by the crossing increment. This proves the necessity
+for the all-axes assertion and gives the counterexample
+\(\theta_k=1/k\) to sufficiency of summable sagittas.
+For failure of necessity take consecutive inverse pairs of angle
+\(k^{-1/2}\) for \(k\ge1\). Their even products are \(1\) and
+odd products tend to \(1\), while the sagittas dominate a positive
+multiple of the harmonic series. The angles in these arguments
+are step distances. The partition sagittas in
+Theorem~\ref{thm:sagitta} and the equal-angle families in
+Remark~\ref{m5:sagitta} concern path refinement.
+\end{proof}
+
+\begin{theorem}[Three-series criterion for independent rotations]\label{m6:three}
+Let \(X_k\) be independent \(M\)-valued random variables and fix
+\(0<c<\pi/2\). Set \(Z_k=X_k\) when \(d(1,X_k)\le c\), and
+\(Z_k=1\) otherwise. Define
+\[
+ m_k=\mathbb E Z_k,\quad r_k=|m_k|,\quad b_k=m_k/r_k,\qquad
+ s_k=\mathbb E v(Z_k).
+\]
+Then \(X_1\cdots X_n\) converges almost surely exactly when all of
+the following hold:
+\[
+\begin{split}
+ &\sum_k\mathbb P(d(1,X_k)>c)<\infty,\\
+ &\sum_k(1-r_k)
+   =\sum_k\bigl(s_k-r_k\,v(b_k)\bigr)<\infty,\\
+ &b_1\cdots b_n\ \text{converges in }M .
+\end{split}
+\]
+The second condition is equivalent to
+\(\sum_k\mathbb E|Z_k-m_k|^2<\infty\).
+The drift condition uses the deterministic ordered product. In a
+common circle the drift condition is convergence of the scalar sum
+of the truncated mean directions' signed angles, provided the
+first two conditions hold.
+\end{theorem}
+\begin{proof}
+Almost sure convergence forces \(X_k\to1\) almost surely.
+Independence and the second Borel--Cantelli lemma give the first
+condition. By the first Borel--Cantelli lemma, under that condition
+only finitely many increments change under truncation, and after
+the last change the two partial products differ by a fixed left
+factor. Thus it suffices to examine the \(Z_k\). Since
+\(\re m_k\ge\cos c>0\), all \(r_k\) lie in \([\cos c,1]\).
+Expanding the variance gives \(1-r_k^2\), and
+\(s_k=1-\re m_k=1-r_k+r_k v(b_k)\).
+
+If the truncated products converge, the tail product from step
+\(m+1\) converges almost surely for every \(m\).
+The tail limits tend to \(1\) as \(m\to\infty\).
+Dominated convergence and independence give
+\[
+ \lim_{m\to\infty}\lim_{n\to\infty}\prod_{m<k\le n}r_k=1 .
+\]
+If \(\sum(1-r_k)\) diverged, each inner limit would be zero by
+\(r_k\le\exp(-(1-r_k))\). This proves necessity of the second
+condition.
+
+Suppose now that the second condition holds. Let \(B_n=b_1\cdots b_n\),
+\(R_n=\prod_{k\le n}r_k\), and \(P_n=Z_1\cdots Z_n\).
+The \(R_n\) have a positive limit since \(-\log r\le(1-r)/\cos c\)
+on \([\cos c,1]\). Relative to the filtration of the \(Z_k\),
+\(Y_n=P_nB_n^{-1}/R_n\) is an \(\R^4\)-valued martingale:
+\[
+ \mathbb E(P_nB_n^{-1}\mid Z_1,\ldots,Z_{n-1})
+ =P_{n-1}m_n b_n^{-1}B_{n-1}^{-1}
+ =r_n P_{n-1}B_{n-1}^{-1}.
+\]
+Its norms are \(1/R_n\), uniformly bounded. Coordinatewise
+\(L^2\) martingale convergence gives almost sure convergence
+\cite{m6:Williams}. Therefore \(P_nB_n^{-1}\) converges to a unit
+quaternion, and \(P_n\) converges exactly when \(B_n\) does.
+
+For a common circle, each \(b_k\) has a signed angle in \([-c,c]\).
+If the exponentiated drift sums converge, the drift increments
+tend to \(1\). The angle sums then lie eventually in one translate
+by \(2\pi\Z\) of a small interval about the limiting argument:
+distinct translates are separated by a fixed gap, and the
+signed increments tend to zero. Within that interval convergence
+of the exponentials implies convergence of the angles. The
+converse follows by continuity.
+\end{proof}
+
+\begin{corollary}[Centred and biased rotations]\label{m6:centered}
+If the \(X_k\) have symmetric signs about deterministic axes, with
+angles in \([0,c]\), then \(b_k=1\) and the criterion is
+\(\sum_k\mathbb E v(X_k)<\infty\). More generally the same test
+holds for independent truncated laws with \(\mathbb E\im Z_k=0\)
+when the first series converges. The drift test cannot be
+discarded even for deterministic increments with finite total
+sagitta. For centred angles \(\theta_k\) deterministic, the
+norm of the mean product is \(\prod_{k\le n}\cos\theta_k\), while
+every sample product has norm \(1\).
+\end{corollary}
+\begin{proof}
+The means are positive scalars and \(r_k=1-s_k\).
+For the drift counterexample take \(X_k=\exp(u/k)\)
+from Theorem~\ref{m6:det-product}. The mean-product assertion
+uses independence, and the sample-product assertion uses
+multiplicativity of the quaternion norm. This provides a
+compact-group version, in the present coordinates, of the
+large-jump, dispersion and drift distinction in
+three-series theorems. For Lie-group criteria using local
+coordinates and centred increments see \cite{m6:Liao}.
+\end{proof}
+
+\begin{remark}[relation to the sagitta sums of paths]\label{m6:sagitta-link}
+In Theorem~\ref{thm:sagitta} and Proposition~\ref{prop:clt} the steps are the increments of one path along refining partitions, the
+product of the steps telescopes to the endpoint, and the sagitta sum converges to half the quadratic variation ($\tfrac32T$ for
+Brownian motion on $S^3$, and the same value on $\mathcal P$ by Proposition~\ref{m3:brownian}).  Here the factors are independent and
+are multiplied without telescoping; a finite sagitta sum is then exactly the dispersion condition of Theorem~\ref{m6:three}, and the
+deterministic criterion is the angular sum of Theorem~\ref{m6:det-product}.  The claim that the sagitta sum alone decides convergence
+is refuted in both directions by Theorem~\ref{m6:det-product}: fixed-axis angles $1/k$ have summable sagittas and diverge, and
+consecutive inverse pairs of angle $k^{-1/2}$ converge with divergent sagitta sum.
+\end{remark}
+
+\begin{theorem}[Prime-indexed steps]\label{m6:prime-products}
+Let \(p\) run through the primes in increasing order,
+\(\sigma>0\), and \(\theta_p=p^{-\sigma}\). Set
+\(v_p=1-\cos\theta_p\). Then the total sagitta is finite exactly
+for \(\sigma>1/2\), and at \(\sigma=1/2\)
+\[
+ \sum_{p\le x}v_p=\tfrac12\log\log x+C+o(1),\qquad
+ C=\tfrac12 M_{\rm P}+
+      \sum_p\bigl(1-\cos(p^{-1/2})-\tfrac1{2p}\bigr),
+\]
+where \(M_{\rm P}\) is the prime reciprocal Mertens constant.
+For arbitrary deterministic unit axes, the product converges for
+every choice of axes exactly for \(\sigma>1\). For a fixed axis
+and alternating signs it converges at every \(\sigma>0\).
+For any deterministic axes and mutually independent fair signs,
+it converges almost surely for \(\sigma>1/2\) and diverges almost
+surely for \(0<\sigma\le1/2\). All
+the convergence thresholds for the absolute-length, total-sagitta
+and fair-sign tests remain valid when the positive sagittas are
+asymptotic to a positive constant times \(p^{-2\sigma}\).
+\end{theorem}
+\begin{proof}
+For \(0<t\le1\), the alternating cosine series gives
+\[
+ 1-\cos t=t^2/2-t^4/24+O(t^6).
+\]
+The first correction to the quadratic term has absolute value
+asymptotic to \(p^{-4\sigma}/24\), so it is summable precisely
+when \(\sigma>1/4\). For positive \(a\), \(\sum_p p^{-a}\) is finite
+for \(a>1\) by comparison with the integer sum and infinite for
+\(a\le1\) by comparison with the prime reciprocal sum.
+For completeness, Mertens' product theorem
+\cite{m6:Mertens} gives
+\(\prod_{p\le x}(1-1/p)\sim e^{-\gamma}/\log x\).
+Taking logarithms gives the reciprocal asymptotic after subtracting
+\(\sum_p\sum_{j\ge2}1/(jp^j)<\infty\), which converges by the bound
+\(2/p^2\). Adding the absolutely convergent sagitta correction
+gives the displayed constant. For the cutoff \(x=e^{1/\varepsilon}\)
+the leading term is \(-\frac12\log\varepsilon\).
+The deterministic and symmetric cases now follow from
+Theorem~\ref{m6:det-product} and Corollary~\ref{m6:centered}.
+The angles in the alternating case decrease to zero, so the
+scalar alternating series converges. The convergence event of an
+independent product is a tail event, since changing a finite prefix
+only changes a fixed left factor. Kolmogorov's zero--one law turns
+failure of almost sure convergence into almost sure divergence.
+Sagitta comparability and
+the quadratic bounds transfer the other tests to the stated
+asymptotic class.
+\end{proof}
+
+\begin{remark}[Scope of the prime model]\label{m6:prime-scope}
+The threshold describes ordered products of unit quaternions,
+with deterministic drift or independent signs as specified.
+Divergence of the sagitta sum can drive the norm of a mean
+product to zero. Each sample product remains on \(M\).
+The example has no implication for the zeros of the Riemann zeta function: it implies no claim about the location or multiplicity
+of any zero of \(\zeta\). The unit factors are different from the
+local Euler factors \((1-p^{-s})^{-1}\), and no property of \(\zeta\) is used.
+\end{remark}
+
+\subsection{Reflection, kernel positivity, and phase summation}
+
+\begin{proposition}[Reflected derivative and polynomial kernel]
+\label{m6:hb}
+Let \(F\) be entire in the centred variable \(z\), with
+\(F(z)=\overline{F(-\bar z)}\). For \(h>0\) define
+\(E=F+(h/2)F'\) and \(E^\#(z)=\overline{E(-\bar z)}\).
+Then \(E^\#=F-(h/2)F'\) and
+\[
+ |E(z)|^2-|E^\#(z)|^2
+   =2h\,\re(F'(z)\overline{F(z)})
+   =h\,\partial_x|F(x+iy)|^2.
+\]
+For \(F\) a nonconstant polynomial with distinct root locations
+\(\rho_i\) of multiplicity \(\mu_i\), let \(\tau\) permute the
+locations by \(\rho_{\tau(i)}=-\bar\rho_i\).
+Put \(e=\#\{i:\tau(i)=i\}\), and let \(k\) be the number of
+two-cycles. For \(\re z,\re w>0\), the normalized difference
+kernel is
+\[
+ K(z,w)=\frac{E(z)\overline{E(w)}-E^\#(z)\overline{E^\#(w)}}
+                    {2h(z+\bar w)}
+       =\frac12\sum_i\mu_i
+          \frac{F(z)}{z-\rho_i}\,
+          \overline{\frac{F(w)}{w-\rho_{\tau(i)}}}.
+\]
+On any \(n\ge e+2k\) distinct right-half-plane points avoiding
+the roots, its Gram matrix has inertia \((e+k,k,n-e-2k)\)
+in the order positive, negative, zero. In particular this
+kernel is positive semidefinite precisely when all roots lie
+on the imaginary axis. In the all-axis case,
+\(|E|>|E^\#|\) in the open right half-plane and the modulus of \(F\)
+is strictly increasing along every horizontal ray there.
+\end{proposition}
+\begin{proof}
+Differentiate the symmetry in the holomorphic variable and expand
+the two squared moduli. The kernel numerator is
+\(h(F'(z)\overline{F(w)}+F(z)\overline{F'(w)})\).
+In the logarithmic derivative sum, reindex the conjugated term
+using \(\tau\). The identity
+\[
+ \frac1{z-\rho_i}+\frac1{\bar w+\rho_i}
+    =\frac{z+\bar w}{(z-\rho_i)(\bar w+\rho_i)}
+\]
+gives the kernel, which extends at roots by polynomial division.
+Its middle Hermitian form pairs coordinates \(i,\tau(i)\)
+with coefficient \(\mu_i=\mu_{\tau(i)}>0\).
+It has blocks \((\mu_i)\) or
+\(\left(\begin{smallmatrix}0&\mu_i\\\mu_i&0\end{smallmatrix}\right)\),
+with the asserted signs. The evaluation columns
+\(F(z)/(z-\rho_i)\) are independent at \(e+2k\) or more of the
+stated points: after dividing by \(F(z)\) and multiplying by the
+product over the distinct roots, a vanishing combination is a
+polynomial of degree at most \(e+2k-1\) with too many zeros.
+Evaluating at each \(\rho_i\) gives zero coefficients. Full column
+rank transfers inertia by congruence. If the roots are on the
+axis, \(\re(F'/F)(x+iy)=\sum_i\mu_i x/|x+iy-\rho_i|^2>0\)
+for \(x>0\), which proves both strict statements. This is the
+finite polynomial version of the Hermite--Biehler comparison
+\cite{m6:deBranges}.
+\end{proof}
+
+\begin{proposition}[Local tests of an entire kernel]\label{m6:kernel-local}
+For entire \(F(z)=\overline{F(-\bar z)}\), the normalized
+derivative kernel in Proposition~\ref{m6:hb} has the form
+\(k(z,\bar w)\) with \(k\) entire in its two variables.
+If its Gram matrices are positive semidefinite for every finite
+point set in one open disk, they are positive semidefinite
+for every finite point set in the plane.
+\end{proposition}
+\begin{proof}
+Reflection gives
+\[
+ k(z,\zeta)=
+ \frac{F'(z)F(-\zeta)-F(z)F'(-\zeta)}{2(z+\zeta)} .
+\]
+The numerator vanishes at \(\zeta=-z\). Integrating its
+\(\zeta\)-derivative along the segment from \(-z\) to \(\zeta\)
+divides by \(z+\zeta\) and gives the entire extension.
+At the disk centre \(p\), expand
+\(k(z,\zeta)=\sum_{j,l\ge0} a_{jl}(z-p)^j(\zeta-\bar p)^l\).
+On a circle of radius \(r>0\) inside the disk, positivity implies
+the double integral of
+\(\overline{g(t)}k(p+re^{it},\bar p+re^{-is})g(s)\)
+against the two normalized angular measures is nonnegative
+for each trigonometric polynomial \(g\). This follows by
+Riemann sums of nonnegative finite quadratic forms.
+Taking \(g(t)=\sum_{j=0}^m c_j r^{-j}e^{ijt}\) extracts
+\(\sum_{j,l=0}^m \bar c_j a_{jl}c_l\) by character orthogonality.
+Thus every square coefficient truncation is positive
+semidefinite. Evaluate those truncations on a finite point set
+anywhere in the plane. Their matrices are positive by
+congruence and converge entrywise to the Gram matrix by
+absolute convergence of the entire double series.
+\end{proof}
+
+\begin{corollary}[Finite moment matrices]\label{m6:moment}
+For the roots in Proposition~\ref{m6:hb} avoiding \(\pm1/2\),
+let \(u_i=(\rho_i-1/2)/(\rho_i+1/2)\).
+The Toeplitz matrix with entries \(\sum_i\mu_i u_i^{a-b}\)
+has the same nonzero inertia \((e+k,k)\) at size
+\(n\ge e+2k\). The Hankel matrix with entries
+\(\sum_i\mu_i(i\rho_i)^{a+b}\), where \(i=\sqrt{-1}\) in
+\(i\rho_i\), has the same inertia at those sizes.
+\end{corollary}
+\begin{proof}
+The two feature vectors for location \(\rho_j\) have entries
+\(u_j^a\) and \((i\rho_j)^a\) for \(0\le a<n\).
+The identities \(\overline{u_{\tau(j)}}=u_j^{-1}\) and
+\(\overline{i\rho_{\tau(j)}}=i\rho_j\) give the two pullbacks
+of the preceding Hermitian form. The two sets of feature
+coordinates have distinct nodes, so Vandermonde determinants
+give full column rank. Congruence gives the claim.
+\end{proof}
+
+\begin{example}[Symmetry and off-axis roots]\label{m6:quartet}
+For \(a,b>0\), \(F(z)=((z-ib)^2-a^2)((z+ib)^2-a^2)\) has both
+conjugation and reflection symmetry and four distinct off-axis
+roots. Its kernel has two negative eigenvalues on any four
+distinct right-half-plane nonroot points. Also \(x\mapsto
+|F(x+ib)|^2\) has strictly negative derivative for \(x<a\)
+sufficiently close to \(a\). Indeed a simple zero writes
+\(F(z)=(z-a-ib)G(z)\) with \(G(a+ib)\ne0\), giving derivative
+\(2(x-a)|G(a+ib)|^2+O((x-a)^2)\).
+\end{example}
+
+\begin{proposition}[Phase on a finite grid]\label{m6:phase}
+For a nonzero holomorphic function on a neighbourhood of a
+rectangle, partition the rectangle into cells and suppose the
+function has no zeros on their edges. The oriented edge phase
+\(\im\int_e F'/F\,dz\) sums around each cell to \(2\pi\) times
+its interior zero count with multiplicity. Interior edge phases
+cancel in the sum over the cells. If each oriented edge variation
+has absolute value \(<\pi\), principal arguments of endpoint
+ratios give the same value. At equality the choice of principal
+branch can lose orientation.
+\end{proposition}
+\begin{proof}
+Subtract from \(F'/F\) the sum of the functions
+\(\mu_j/(z-\rho_j)\) at its interior zeros. The remainder is
+holomorphic on the cell and its boundary, hence integrates to
+zero by Cauchy's theorem, while each subtracted term has
+integral \(2\pi i\mu_j\). Reversing an edge changes the integral
+sign. Exponentiating the integral gives \(F(\mathrm{end})/
+F(\mathrm{start})\) by the scalar linear differential equation
+along the edge, so the principal argument recovers the unique
+phase in \((-\pi,\pi)\). Both phases \(\pm\pi\) exponentiate to
+\(-1\). This is the scalar counterpart of the interior-edge
+cancellation in Section~\ref{sec:stokes} and Proposition~\ref{m5:stokes}.
+\end{proof}
+
+\begin{remark}[Schur complements and kernel tests]\label{m6:kernel-programme}
+For entire reflected functions \(F,M_0\), the derivative kernel
+of \(M_0F\) satisfies
+\[
+ K_{M_0 F}(z,w)=M_0(z)\overline{M_0(w)}K_F(z,w)
+                  +F(z)\overline{F(w)}K_{M_0}(z,w).
+\]
+This is the product rule. For a Hermitian block matrix with
+interior block \(C\succ0\), completing the square gives
+\[
+ (x,y)^*
+ \begin{pmatrix}A&B\\B^*&C\end{pmatrix}
+ \binom{x}{y}
+ =x^*(A-BC^{-1}B^*)x+
+        (y+C^{-1}B^*x)^*C(y+C^{-1}B^*x).
+\]
+A positive interior block alone provides no positivity of
+the reduced block; \(A=0,B=C=1\) gives reduced block \(-1\).
+Moreover, at a simple off-axis zero of \(F\), a holomorphic
+modifier nonvanishing there preserves the derivative sign
+obstruction on the nearby horizontal segment. This follows by
+the same factorization as in Example~\ref{m6:quartet}. The example
+\(F(z)=z^2\) has a positive semidefinite kernel and a multiple
+boundary zero, so positivity alone establishes no simplicity.
+A finite-to-infinite kernel programme would have to prove
+positive semidefiniteness of every finite test matrix for a
+specified sequence and justify its locally uniform limit. Limits
+preserve positivity on each fixed finite set by passing to the
+limit in its quadratic forms. A collection of isolated tests
+supplies no such assertion. The polynomial kernel computation,
+finite phase formula and prime model require no infinite
+zero-product representation.
+\end{remark}
+
+\subsection{Scalar feedback and fixed points on spheres}
+
+\begin{theorem}[Cosine feedback]\label{m6:cosine}
+The equation \(\cos x=x\) has one real solution
+\(\alpha=0.73908513321516\ldots\) in \((0,1)\).
+From any real \(x_0\), cosine iteration \(x_{j+1}=\cos x_j\)
+enters \([0,1]\) at \(j=2\). Thereafter the error contracts by
+at most \(\sin1<1\), and for an orbit avoiding \(\alpha\)
+its signed error ratio tends to \(-\sin\alpha\).
+The coupled update \((x,y)\mapsto(\cos y,\cos x)\) has the
+same convergence and unique fixed pair \((\alpha,\alpha)\).
+Writing \(F(x)=x-\cos x\), the following bounds and limit hold:
+\[
+ \begin{gathered}
+ |x-\alpha|\le |F(x)|\le (1+\sin1)|x-\alpha|\quad(0\le x\le1),\\
+ \lim_{x\to\alpha}\frac{x-F(x)/F'(x)-\alpha}{(x-\alpha)^2}
+       =\frac{\alpha}{2(1+\sin\alpha)} .
+ \end{gathered}
+\]
+The solution is transcendental, and \(\alpha/\pi\) is irrational.
+\end{theorem}
+\begin{proof}
+Cosine maps \(\R\) into \([-1,1]\), then into \([\cos1,1]\).
+On \([0,1]\) the mean value theorem gives Lipschitz constant
+\(\sin1\). The intermediate value theorem gives a root in
+\((0,1)\), and the contraction gives uniqueness and convergence.
+In the coupled update the same estimate holds in the maximum
+norm. Strict decrease on \([0,1]\) rules out finite landing
+from a different point in that interval. From \(-\alpha\)
+the iteration lands in one step. The error ratio follows by
+differentiability at \(\alpha\), and the residual estimate follows
+from \(1\le F'(x)\le1+\sin1\). Taylor expansion of \(F\) at
+\(\alpha\) gives the Newton limit using
+\(F''(\alpha)=\alpha\). For a certificate of the displayed
+decimal, at the two rational endpoints
+\(0.739085133215155\) and \(0.739085133215165\), the Taylor
+bounds for cosine through terms of degrees \(16\) and \(18\)
+give opposite signs of \(F\).
+
+If \(\alpha\) were algebraic, the nonzero algebraic argument
+\(i\alpha\) would give a transcendental \(u=e^{i\alpha}\) by
+the Hermite--Lindemann theorem \cite{m6:Baker}. But \(u\) solves
+\(u^2-2\alpha u+1=0\). Thus \(\alpha\) is transcendental.
+If \(\alpha/\pi\) were rational then \(e^{i\alpha}\) would be
+a root of unity, making \(\alpha=(u+u^{-1})/2\) algebraic.  This sharpens Example~\ref{d4:cosine}, which has the same fixed point
+\(\alpha=\theta_*\).
+\end{proof}
+
+\begin{corollary}[Finite algebraic readouts]\label{m6:readouts}
+Put \(T_N(x)=\sum_{j=0}^{N-1}(-1)^j x^{2j}/(2j)!\).
+For \(0<x\le1\), the sign of \(\cos x-T_N(x)\) is \((-1)^N\),
+and its magnitude is strictly between \(0\) and \(x^{2N}/(2N)!\).
+The equation \(T_N(x)=x\) has a unique solution \(a_N\in[0,1]\).
+The \(a_N\) are algebraic, they lie on alternating sides of
+\(\alpha\), and \(|a_N-\alpha|\le 1/(2N)!\).
+If \(q_j\in[0,1]\) are continued-fraction convergents to \(\alpha\)
+with denominator \(d_j\), then
+\(0<|F(q_j)|<(1+\sin1)/d_j^2\).
+\end{corollary}
+\begin{proof}
+The first claim is the alternating-series bound. For \(N\ge2\),
+\(0<T_N(1)<1\) and \(T_N'(x)<0\) for \(0<x\le1\) by the
+alternating sine terms, so \(x-T_N(x)\) has one root.
+At \(N=1\) it is \(1\). The sign of \(T_N(\alpha)-\alpha\)
+determines the side. The residual bound at \(a_N\) and monotonicity
+of \(F\) give the factorial estimate. The usual convergent bound
+\(|q_j-\alpha|<1/d_j^2\) \cite[Ch.~X]{d4-hw} and
+Theorem~\ref{m6:cosine} give the last estimate.
+\end{proof}
+
+\begin{proposition}[Inverse series at the cosine fixed point]\label{m6:inverse}
+Let \(U\) be the inverse series at zero of \(2x+2\arcsin x\),
+where
+\[
+ \arcsin x=\sum_{j\ge0}\frac{\binom{2j}{j}}{4^j(2j+1)}x^{2j+1},
+ \qquad
+ U(t)=t/4-t^3/768-t^5/61440+O(t^7).
+\]
+The series \(U\) has rational coefficients, converges absolutely
+at \(t=\pi\), and \(U(\pi)=\alpha\). In eccentric-anomaly form
+\(\alpha=\sin E\) where \(E+\sin E=\pi/2\).
+\end{proposition}
+\begin{proof}
+The binomial series for \(1/\sqrt{1-x^2}\) and termwise integration
+on compact subdisks of \(|x|<1\) give the displayed arcsine series.
+Formal coefficient comparison against \(2x+2\arcsin x\) gives
+the three coefficients. The linear term of the forward series
+is \(4\), so comparison determines every inverse coefficient
+rationally.
+
+For \(|z|=1\), \(|\sin z-z|\le\sinh1-1<1/5\). The last
+inequality follows since the series starting at \(1/3!=1/6\)
+has successive ratios at most \(1/20\).
+For \(|w|<9/5\), Rouch\'e's theorem applied to \(2z\) on
+that circle shows that \(z+\sin z=w\) has a unique root in the
+unit disk counted with multiplicity. It is simple and varies
+holomorphically in \(w\) by the inverse function theorem.
+Thus \(U(t)=\sin z(t/2)\) by inversion near zero, and extends
+holomorphically to \(|t|<18/5\). Since
+\(\alpha+\arcsin\alpha=\pi/2\), with \(0<\arcsin\alpha<1\)
+(the latter is \(\pi/2-\alpha\), or follows from
+\(\alpha<\sin1\)), the unique disk root at \(w=\pi/2\)
+is \(E=\arcsin\alpha\). This gives the value and absolute
+convergence; it is a second proof of Remark~\ref{d4:readouts}, with the larger radius \(18/5\). The same endpoint result has a Lean
+declaration.
+\end{proof}
+
+\begin{remark}[Algebraic feedback and angle averages]\label{m6:golden}
+The positive fixed points of \(x\mapsto1+1/x\) and
+\(x\mapsto1/(1+x)\) are respectively \(\varphi\) and
+\(\varphi^{-1}\), by \(x^2-x-1=0\) and \(x^2+x-1=0\).
+From \(1\) the first update gives \(F_{n+2}/F_{n+1}\) after \(n\)
+steps, by the Fibonacci recurrence. For any positive initial
+value it enters \([1,\infty)\) after one step, and its error
+contracts by the factor \(1/(\varphi x)\le1/\varphi\) there.
+For a nondegenerate fractional map \(x\mapsto(ax+b)/(cx+d)\),
+the finite fixed-point equation is \(cx^2+(d-a)x-b=0\) at
+points away from the pole. On the real projective line, fixed
+points are real eigendirections of the representing matrix.
+There are zero or two for negative or positive discriminant,
+one in the repeated eigenvalue nonscalar case, and every direction
+is fixed in the scalar case. This is the eigenspace classification
+of a real two-by-two matrix.
+
+Since \(\alpha/\pi\) is irrational, the angular orbit
+\(\exp(in\alpha)\) has Haar averages for continuous functions:
+the geometric series gives the result for each character and
+uniform approximation by trigonometric polynomials gives it
+for continuous functions. This is an angular orbit with fixed
+step, whereas cosine feedback has a scalar attracting limit.
+For any finite set \(A\) and update \(U_0(S)\subseteq S\) on its
+subsets, iteration stabilizes after at most \(|A|\) strict drops,
+since each strict drop lowers cardinality and equality propagates.
+\end{remark}
+
+\begin{conjecture}[Algebraic independence of the feedback angle]\label{m6:dottie-conj}
+The numbers \(\alpha\) and \(\pi\) are algebraically independent.
+A conditional argument applies Schanuel's conjecture to
+\(i\alpha,i\pi\), which are rationally independent by
+Theorem~\ref{m6:cosine}. The two exponentials are algebraic over
+\(\Q(\alpha,\pi)\) by \(u^2-2\alpha u+1=0\) and \(e^{i\pi}=-1\),
+so the conditional lower bound on transcendence degree is two.
+\end{conjecture}
+
+\begin{proposition}[Diagonal landing and sphere fixed points]\label{m6:fixed}
+Let \(e:A\times A\to B\) and \(J:B\to B\).
+If a row \(e(a,\cdot)\) equals \(x\mapsto J(e(x,x))\), then
+\(e(a,a)\) is a fixed point of \(J\). In particular a fixed-point-free
+\(J\) forces this diagonal function to differ from every row.
+For a continuous \(f:S^{2m}\to S^{2m}\), some \(x\) satisfies
+\(f(x)\in\{x,-x\}\). On \(M=S^3\) this can fail, even for an
+isometry. On any closed Euclidean ball a continuous self-map has
+a fixed point.
+\end{proposition}
+\begin{proof}
+Evaluate the row identity at \(a\); this is Theorem~\ref{d4:diagonal} with \(q=\mathrm{id}\).
+For the even sphere, if \(f(x)\ne-x\) everywhere then the
+normalized straight-line deformation from \(f\) to the identity
+gives degree \(1\). If \(f(x)\ne x\) everywhere, the corresponding
+deformation to the antipodal map gives degree
+\((-1)^{2m+1}=-1\). These are incompatible
+\cite[\S2.2]{Hatcher}; \(S^0\) is immediate. On \(M\) use
+\(f(q)=iq\), for which \(iq=\pm q\) would give \(i=\pm1\).
+The simplex form of Brouwer's theorem gives the assertion for
+the ball: translate the simplex barycentre to zero and use
+the continuous positive radial boundary distance of the simplex
+to rescale each ray. This map and its inverse are continuous,
+also at zero by the upper and lower radius bounds
+\cite[\S2.2]{Hatcher}.
+\end{proof}
+
+
+\begin{proposition}[Fixed points of a projective measurement]
+\label{m6:unread}
+Let \(P_i\) be finitely many pairwise orthogonal projections
+with sum \(I\). For a density matrix \(\rho\), the unread map
+\(\rho\mapsto\sum_i P_i\rho P_i\) fixes \(\rho\) exactly when
+\(P_i\rho P_j=0\) for \(i\ne j\). If \(p_i=\operatorname{tr}(P_i\rho)>0\),
+the normalized block \(P_i\rho P_i/p_i\) is a density matrix.
+For \(\rho=|\psi\rangle\langle\psi|\) and
+\(P_i=|\phi_i\rangle\langle\phi_i|\) with unit vectors, \(p_i\)
+is the squared modulus of the overlap.
+\end{proposition}
+\begin{proof}
+Insert \(I=\sum_iP_i\) on both sides of \(\rho\) and multiply
+by \(P_i\) on the left and \(P_j\) on the right to isolate each
+block. The block \(P_i\rho P_i\) is positive semidefinite by
+evaluation on \(P_i x\), and has trace \(p_i\) by cyclicity.
+Trace zero for a positive block forces that block to vanish.
+The overlap formula is the trace of the product of two
+rank-one projections. For the weights in the rotor model
+below, use the same formula with real unit lifts; squaring the
+overlap removes dependence on the lift signs.
+\end{proof}
+
+\subsection{Holonomy as a group program}
+
+\begin{definition}[Word programs]\label{m6:word-model}
+For an input \(x\in\{0,1\}^n\), a length-\(\ell\) group word
+program has instructions \((j_t,g_{t,0},g_{t,1})\), where
+\(1\le j_t\le n\) and \(g_{t,b}\in G_0\) for a fixed group \(G_0\).
+Its state starts at \(1\) and its output is
+\(P(x)=\prod_{t=1}^{\ell}g_{t,x_{j_t}}\) in instruction order.
+A two-output program has the promise \(P(x)\in\{1,h\}\)
+for a fixed \(h\ne1\), and accepts \(h\). An acceptance-set
+program accepts membership in a specified set \(A\subset G_0\).
+A loop version labels each instruction by a choice of two
+based loops and multiplies their holonomies. Use a fixed
+base frame and the product convention above. A change of
+frame conjugates all rotations and the specified acceptance
+element or set. Circuit depth refers to the Boolean circuit
+model, with unbounded fan-in AND, OR and fixed-modulus gates
+for \(\mathrm{ACC}^0\), and bounded fan-in for \(\mathrm{NC}^1\).
+Programs of polynomial length are nonuniform.
+\end{definition}
+
+\begin{theorem}[Icosahedral holonomy]\label{m6:barrington}
+Every language in nonuniform \(\mathrm{NC}^1\) has a two-output
+program of polynomial length over \(2I\subset M\), and hence over \(M^K\)
+for any fixed \(K\ge1\). The state can be represented by \(120\)
+group states, or by \(60\) projective states. The latter program
+can be implemented as products of based spherical holonomy loops.
+The finite-group construction is Barrington's theorem
+\cite{m6:Barrington} in the icosahedral realization.
+\end{theorem}
+\begin{proof}
+Barrington's width-five construction uses permutations in
+\(A_5\) and has identity output on zero and a chosen 5-cycle
+on one. For specificity, choose permutations with the convention
+of composing right first. The 5-cycles \(a=(1\,2\,3\,4\,5)\),
+\(b=(1\,3\,5\,4\,2)\) have commutator
+\(c=aba^{-1}b^{-1}=(1\,4\,3\,5\,2)\).
+A 5-cycle may belong to either of two \(A_5\) conjugacy classes.
+Using conjugation by a permutation of the five points in \(S_5\)
+preserves the instruction alphabet \(A_5\) and reaches every
+5-cycle. For an AND of subprograms, relabel one output to \(a\)
+and the other to \(b\), then use their commutator. It equals
+\(c\) exactly when both outputs are nontrivial. Invert the
+program and prepend \(c\) for NOT. A literal has a single
+instruction. A bounded fan-in depth \(d\) formula over AND
+and NOT thus has length \(O(4^d)\) by solving the recurrence
+\(L_d\le4L_{d-1}+1\). Unfolding a depth-\(O(\log n)\) circuit
+and converting OR to AND and NOT keeps logarithmic depth.
+The program has polynomial length.
+
+Lift each instruction to \(2I\), and repeat the whole word twice.
+On a zero input the original lift is \(\pm1\), and on a one
+input it is one of the two lifts of \(c\), so the squared lift
+is the fixed nonidentity square. The action of \(A_5\) on
+five points accounts for Barrington's width five, while storing
+the evaluated group element uses \(60\) or \(120\) states.
+For the loop realization, any desired axis in \(T_1M\) is
+normal to a great two-sphere through \(1\). A right spherical
+triangle with \(1\) the pole and an equatorial arc of length
+\(\beta\in(0,\pi)\) has area \(\beta\) by spherical excess.
+By Theorem~\ref{thm:triangle} its parallel transport has
+angle \(\beta\) about that normal, with orientation set by
+boundary order. The identity uses a constant loop and angle
+\(\pi\) uses two loops of angle \(\pi/2\).
+Thus each projective instruction can be realized by a based loop.
+The spin coordinate and adjoint coordinate here are those in
+Theorem~\ref{thm:rational}. The group programs also have a
+Boolean \(\mathrm{NC}^1\) upper bound, by balancing the product
+tree of constant-size multiplication tables.
+\end{proof}
+
+\begin{corollary}[Rational letters and a separated readout]\label{m6:rational-word}
+There are rational-letter versions of the icosahedral
+programs with an acceptance ball and uniformly separated
+output regions.
+For length \(\ell\), choose replacements within
+\(d(1,h)/(4\ell)\) of each instruction letter.
+A choice using rounded Cayley coordinates requires
+\(O(\log(2+\ell))\) bits per coordinate.
+\end{corollary}
+\begin{proof}
+By bi-invariance, the entire product moves by at most the sum
+of the changes in letters, hence at most \(d(1,h)/4\).
+The disjoint balls of that radius around \(1,h\) are separated
+by at least \(d(1,h)/2\). Use radius \(d(1,h)/2\) for acceptance
+around \(h\). Proposition~\ref{prop:cayley} gives two bounded
+coordinate charts and a uniform Lipschitz bound for the Cayley
+map there. Rounding coordinates on a grid of mesh proportional
+to \(1/\ell\) in a chart uses \(O(\log(2+\ell))\) bits.
+One can use the same formula on a slightly larger ball after
+rounding, where the derivative has norm at most \(2\).
+\end{proof}
+
+\begin{theorem}[Commutative word programs]\label{m6:abelian}
+A two-output program over any abelian group, including
+\((S^1)^K\), cannot compute two-input AND, irrespective of
+word length. With arbitrary fixed acceptance subsets of a
+fixed finite abelian group, polynomial-length word programs
+are in nonuniform \(\mathrm{ACC}^0\). The \(\mathrm{ACC}^0\)
+upper bound also holds for fixed finite solvable groups.
+A group-product architecture using only commuting increments
+and a readout of the product is order-invariant under
+permutations of the increments. These statements have
+different readout hypotheses.
+\end{theorem}
+\begin{proof}
+In additive notation an abelian word is \(b+\sum_j x_jw_j\)
+after grouping the contributions of each input position.
+For two inputs, output zero on \(00,01,10\) gives
+\(b=w_1=w_2=0\), precluding \(h\) on \(11\).
+For a finite abelian group, decompose it into fixed cyclic
+factors. Each output coordinate is a modular sum of selected
+constants, computable by fixed-modulus gates of constant
+depth and polynomial size. For a finite solvable group \(G_0\),
+induct on derived length, using \(N=[G_0,G_0]\) and the abelian
+quotient \(H_0=G_0/N\). For each prefix compute its quotient
+product \(u_t\) by the abelian procedure. With a fixed section
+\(s\) of the quotient and \(s(1)=1\), set
+\[
+ n_t=s(u_{t-1})g_{t,x_{j_t}}s(u_t)^{-1}\in N .
+\]
+Each \(n_t\) is a fixed finite lookup on two quotient states
+and the selected letter. The product equals
+\((\prod_t n_t)s(u_\ell)\), by cancellation of adjacent
+sections. The induction computes products from finite-alphabet
+input letters of \(N\); substituting these lookups adds constant
+depth, since the group is fixed. Fixed accepting subsets can
+then be tested at constant cost. Commutative invariance follows
+from regrouping. Barrington and Th\'erien characterize
+\(\mathrm{ACC}^0\) by nonuniform polynomial-length programs
+over fixed finite monoids all of whose subgroups are solvable
+\cite{m6:BT}. Krohn--Rhodes decomposition is a structural
+cascade theorem for finite semigroups \cite{m6:KR}.
+For programs over finite groups see also Barrington, Straubing and Th\'erien \cite{m6:BST}.
+Neither result requires or supplies a strict separation of
+\(\mathrm{ACC}^0\) from \(\mathrm{NC}^1\) here.
+\end{proof}
+
+\begin{example}[A torus with an unrestricted acceptance set]\label{m6:torus-refutation}
+Fix an irrational \(\gamma\). For a binary string of length \(n\),
+put \(m(x)=2^n+\sum_{j=1}^n x_j2^{j-1}\). Output
+\(\exp(2\pi i\gamma m(x))\) using a constant instruction
+and \(n\) bit instructions in \(S^1\).
+The letter choices may depend on position and input length.
+Distinct binary strings have distinct \(m(x)\) and distinct
+outputs. For any language, take the fixed acceptance set
+of outputs corresponding to its members. Thus unrestricted
+exact acceptance subsets of a torus allow every language
+in this model. The lower bound of Theorem~\ref{m6:abelian}
+uses the two-output promise, and its finite alphabet upper
+bounds use finite \emph{groups}.
+\end{example}
+
+\begin{proposition}[Rational operations on the rotation quotient]
+\label{m6:architecture-ops}
+Represent \(\SO(3)\) by the closed unit ball of Cayley coordinates,
+identifying antipodal boundary points. For \(a,b\) in the ball,
+write \(\Cay(a)\Cay(b)=q_0+q_v\) and let
+\(D=(1+|a|^2)(1+|b|^2)\). Then the output in the selected chart is
+\(\pm N/\max(D_+,D_-)\) with the sign of that chart, where
+\[
+ D_\pm=D(1\pm q_0)/2,\qquad N=Dq_v/2,\qquad
+ D_++D_-=D,\quad D_+D_-=|N|^2.
+\]
+Thus the selected denominator is at least \(1/2\), the output
+has norm at most \(1\), and rational coordinates remain rational.
+The rotation's axial sine vector \(\xi(q)=2q_0q_v\) and squared
+overlap \(b(q,w)=\langle q,w\rangle^2\) are invariant under
+changing either sign of the lifts. The sine vector vanishes
+on the chart boundary. For \(q=\Cay(a)\),
+\[
+ \xi(q)=4(1-|a|^2)a/(1+|a|^2)^2,\qquad |\xi(q)|\le1.
+\]
+The rational update \(U(z)=z/(1+|z|^2)\) has derivative \(I\)
+at zero and image the closed ball of radius \(1/2\).
+The algebraic update \(z/(1+\sqrt{1+|z|^2})\) has derivative
+\(I/2\) at zero and is a bijection onto the open unit ball.
+\end{proposition}
+\begin{proof}
+This is the unsigned quotient of Theorem~\ref{m4:atlas}; the sine vector and the updates are those of
+Propositions~\ref{m4:sine} and \ref{m4:updates}. The two coordinates of the product are \(q_v/(1+q_0)\)
+and \(-q_v/(1-q_0)\). Multiplying by \(D/2\) gives polynomial
+numerators and denominators by Proposition~\ref{prop:cayley}.
+The unit norm gives the stated product of denominators and
+hence the coordinate and denominator bounds. At equality
+the two outputs are opposite boundary representatives of
+one rotation. The sign-invariant formulas follow immediately
+from their quadratic expressions and the Cayley formula.
+For the rational update, \(2r\le1+r^2\) with equality only
+at \(r=1\), and the radial map on \(0\le r\le1\) covers
+\([0,1/2]\). For the algebraic update the inverse on
+\(|w|<1\) is \(2w/(1-|w|^2)\); the derivatives follow by
+evaluating the denominator at zero.
+\end{proof}
+
+\begin{hypothesis}[A rotor layer]\label{m6:architecture}
+The structural model takes token states \(X_t\in\SO(3)^K\),
+a fixed grouping into heads of equal size, prescribed
+input-conditioned step rotations \(\gamma_t\), and a strictly
+positive reservoir \(\epsilon_0\). A prefix state
+\(P_t=P_{t-1}\gamma_t\), \(P_0=1\), supplies the ordered
+relative rotation \(P_s^{-1}P_t\). Constant increments give
+\(\gamma^{t-s}\). Each query, key and value map consists of
+coordinatewise left and right multiplication and a prescribed
+schedule of paired updates. For example, on a pair \((a,b)\)
+one may update simultaneously by right multiplication with
+the Cayley rotations of \(U(g_{ab}\times\xi(X_b))\) and
+\(U(g_{ab}\times\xi(X_a))\), respectively. Butterfly schedules
+pair indices differing in one binary digit at each stage.
+
+In a head \(h\), use scores \(s^{(h)}_{ts}\) given by the
+positive integer power of the head average of \(b(Q_t,K_s)\).
+Let \(w^{(h)}_{ts}=s^{(h)}_{ts}/(\epsilon_0+\sum_{j\le t}s^{(h)}_{tj})\).
+In a component of that head use the transported value
+\(Y_{ts}=Q_tK_s^{-1}V_s\) and update \(X_t\) by right
+multiplying by the Cayley rotation of
+\(\beta\sum_{s\le t} w^{(h)}_{ts}\xi(X_t^{-1}Y_{ts})/4\)
+after applying \(U\). In particular an exactly matching query
+and key give \(Y_{ts}=V_s\), and the sum of the weights is
+\(S/(\epsilon_0+S)\) where \(S=\sum_{s\le t}s^{(h)}_{ts}\).
+It tends to zero with \(S\).
+A feed-forward update can use the tangent vector
+\[
+ w_1\times a+(a\cdot f)w_2-(w_2\cdot f)a,\quad
+ a=\xi(X_t^{(k)}),\qquad f=\xi(X_t^{(k+1)}X_t^{(k+3)}),
+\]
+with cyclic component indices and trainable \(w_1,w_2\).
+The same update \(U\) followed by a Cayley rotation takes this
+vector back to the rotation group. These operations are
+well-defined on the quotient, by Proposition~\ref{m6:architecture-ops},
+and give smooth maps on matrices representing the rotations.
+They preserve rational chart data with rational parameters.
+Optionally the iteration can terminate when a prescribed
+displacement threshold is met.
+\end{hypothesis}
+
+\begin{example}[Order of positional increments]\label{m6:position}
+Take the two quarter-turn lifts \(A=(1+i)/\sqrt2\) and
+\(B=(1+j)/\sqrt2\). The closed-ball coordinates of \(AB\) and
+\(BA\) are respectively \((1,1,1)/3\) and \((1,1,-1)/3\),
+by multiplication and the inverse Cayley formula.
+These are distinct points in the open chart, hence distinct
+projective rotations; the chart coordinate of \(A\) is \((\sqrt2-1)i\), so this is the last case of Example~\ref{m4:seams}. An abelian positional product gives
+equal outputs on these two orders. The relative rotation in
+this example records the order of the two prescribed increments,
+a property independent of score computation and training.
+For a one-slot attention example in Hypothesis~\ref{m6:architecture},
+take state, query and key at the identity, value with coordinate
+\(i/2\), \(\epsilon_0=1/20\) and \(\beta=1\).
+The weight is \(20/21\), the transported value is unchanged,
+and the pre-update tangent vector is \((8/35)i\).
+Thus the new coordinate is \((280/1289)i\).
+\end{example}
+
+\begin{remark}[Realization and training questions]\label{m6:architecture-programme}
+Theorem~\ref{m6:barrington} applies to a rotor layer equipped
+with an externally prescribed repeated-read schedule of
+input bits, a fixed alphabet and the separated readout.
+A simulation by a causal layer with its own tied weights
+requires an explicit construction of that schedule, the
+selector, and the readout under fixed resource bounds. The
+commutative comparison in Theorem~\ref{m6:abelian} refers to
+word products. Extending it to networks that also have
+nonlinear scores, input-dependent nonlocal maps or threshold
+readout requires a separate circuit model and bounds on those
+operations. The architecture programme also requires precision
+and stability bounds through chart switches and empirical
+comparisons at matched compute and memory. A threshold on a
+single displacement can certify later accuracy if a contraction
+or another quantitative stability hypothesis is established.
+For a single nonlinear recurrence, equality of consecutive
+iterates does give a fixed point, while small displacement by
+itself supplies no convergence estimate. For example a constant
+rotation by a small positive angle can stay below the threshold
+at every step and continue to move indefinitely.
+\end{remark}
+
+\begin{remark}[Related finite algorithms]\label{m6:algorithms}
+Two reflection operators preserve the span of the two reflected
+lines, and their product rotates this plane by twice the angle
+between the lines. This follows by writing the reflection
+matrices in an oriented orthonormal basis of the plane. This
+plane is the one used in Grover amplitude amplification
+\cite{m6:Grover}. On the Fourier side the exact cancellation
+\(\sum_{t=0}^{m-1} e^{2\pi ijt/m}=m\,1_{m\mid j}\)
+follows from the geometric sum. Phase kickback uses a group
+character of the controlled operation as the eigenvalue on
+the control. In Shor's order-finding circuit the cyclic
+orbit \(1,a,\dots,a^{r-1}\) with \(\gcd(a,N)=1\) gives the
+shift on \(\Z/r\Z\), whose eigenphases are \(s/r\).
+The basis vector at \(1\) has equal squared overlap \(1/r\)
+with each character, so discarding the orbit register produces
+the equal mixture of the conditional phase-estimation
+distributions. Continued-fraction reconstruction and order
+verification are separate arithmetic steps
+\cite{m6:Shor}. These are finite coherent circuit mechanisms;
+the word metric of Theorem~\ref{m6:cover} instead controls
+approximation of arbitrary geometric gates before application
+of the rational arc observables.
+\end{remark}
+
+\setcounter{section}{10}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\theHsection}{\arabic{section}}
+
 \paperpart{part:final}{Context, formalisation and open problems}
 
 \section{Relation to known work}\label{sec:known}
@@ -7496,6 +8758,9 @@ Thm.~\ref{m1:chordal}, Prop.~\ref{m1:sharp} & Simplicial vertices: Dirac \cite{m
 Thm.~\ref{m1:gauge}, Prop.~\ref{m1:clique} & Classical in substance (edge-path group \cite{m1:Spanier}, spanning-tree coordinates \cite{Levy10}); the filling estimate elementary\\
 Props.~\ref{m1:gram}, \ref{m1:distance}, \ref{m1:near-gram} & Classical ingredients \cite{m1:Schoenberg,m1:JordanVonNeumann,m1:Grone}; Prop.~\ref{m1:near-gram} elementary\\
 Thm.~\ref{m2:classification} & Classical in substance \cite{Loos,Helgason,Wang52,Cartan26,Besse78}; new: axiomatisation by the round-trip law with continuous $\kappa$ (Rem.~\ref{m2:placement})\\
+Thm.~\ref{m6:cover} & Spectral gap \cite{m6:LPS,m6:PS}; strong approximation \cite{m6:Sardari}; synthesis \cite{m6:RS}; the covering consequences elementary given these\\
+Thms.~\ref{m6:det-product}, \ref{m6:three} & Compare Liao's three-series theorem on Lie groups \cite{m6:Liao}; the compact-group form with quaternion martingale not found in the searched scope\\
+Thms.~\ref{m6:barrington}, \ref{m6:abelian} & Barrington \cite{m6:Barrington}; Barrington--Th\'erien \cite{m6:BT}; \cite{m6:BST}; the loop realisation by holonomy elementary\\
 Thm.~\ref{m4:real}, Prop.~\ref{m4:pair}, Thm.~\ref{m4:lift} & Quantum signal processing: existence of phases \cite{m4:LC,m4:GSLW,m4:Haah}; new: the heap formulation and the frame covariance\\
 Thm.~\ref{m4:atlas}, Prop.~\ref{m4:conditioning} & Stereographic and shadow-switching charts classical \cite{SJ}; the signed two-denominator product with error bound not found in the searched scope\\
 Thm.~\ref{d4:rank}, Prop.~\ref{d4:spectral} & Diagonal arguments \cite{d4-lawvere,d4-yanofsky}; low-rank approximation \cite{d4-ey}; no-cloning and programming \cite{d4-wootters,d4-dieks,d4-program}; the span-rank criterion for comparison maps not found in the searched scope\\
@@ -7676,7 +8941,7 @@ black box; a formal statement of Theorem~\ref{thm:main} can avoid it by assuming
 
 All identities and limits of Part~\ref{part:arc} that are not textbook facts, and the identities of Part~\ref{part:axiom} used there, were
 checked numerically on random or explicit inputs by the accompanying script \texttt{check\_arc\_calculus.py} (numpy and the
-standard library; 204 checks, eight of them for Part~\ref{part:alg}, six for Section~\ref{sec:m2}, fourteen for Section~\ref{sec:m3}, eight for Section~\ref{sec:d4}, seven for Section~\ref{sec:m5} and twelve for Sections~\ref{sec:m4}, \ref{sec:m4atlas}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present fifteen: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file, one each for Sections~\ref{sec:m3}, \ref{sec:d4} and \ref{sec:m5}, and one for Sections~\ref{sec:m4}, \ref{sec:m4atlas}); everything runs
+standard library; 211 checks, eight of them for Part~\ref{part:alg}, six for Section~\ref{sec:m2}, fourteen for Section~\ref{sec:m3}, eight for Section~\ref{sec:d4}, seven for Section~\ref{sec:m5}, twelve for Sections~\ref{sec:m4}, \ref{sec:m4atlas} and seven for Section~\ref{sec:m6}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present sixteen: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file, one each for Sections~\ref{sec:m3}, \ref{sec:d4}, \ref{sec:m5} and \ref{sec:m6}, and one for Sections~\ref{sec:m4}, \ref{sec:m4atlas}); everything runs
 from the directory of this paper.  These include the recurrence and its Chebyshev form, the residual expansion of
 Theorem~\ref{thm:consist}, the inequality of Theorem~\ref{thm:action}, the split and the Brownian limits of
 Theorem~\ref{thm:sagitta} (simulated, $\tfrac32T$ to two decimals), the transport formula of
@@ -7932,6 +9197,25 @@ formalise the phase-synthesis core.
 No declaration was found for the bounded two-denominator atlas (Theorem~\ref{m4:atlas}), Proposition~\ref{m4:conditioning},
 Corollary~\ref{m4:arithmetic} or the window average in Theorem~\ref{m4:defect}.
 
+For Section~\ref{sec:m6} the following declarations were located (no \texttt{sorry} in their files).
+{\small\raggedright
+\begin{itemize}[leftmargin=1.5em]
+\item Theorem~\ref{m6:prime-products}, Mertens' product: \texttt{D5/S3/Weil/Mertens/Third.lean}, \texttt{E\textsubscript{3}.bound''}.
+\item Proposition~\ref{m6:inverse}: \texttt{D5/S3/Analytic/PowerSeries/DottieInverseSeries.lean}, \texttt{rational\_inverse\_endpoint}.
+\item Proposition~\ref{m6:unread}: \texttt{D5/S3/Observer/Conditioning.lean}, \texttt{unreadState\_fixed\_iff}, \texttt{conditionalState\_isState}.
+\item Remark~\ref{m6:arithmetic-anchors}: \texttt{D5/S3/PrimeForms/SumTwoSquares.lean}, \texttt{prime\_eq\_sq\_add\_sq\_of\_mod\_four\_eq\_one};
+\texttt{SumTwoSquaresClassification.lean}, \texttt{eq\_sq\_add\_sq\_iff\_even\_factorization}.
+\item Proposition~\ref{m6:norm-forms}: \texttt{D5/S3/PrimeForms/Crossing/CrossingNormForm.lean}, \texttt{Qform\_eq\_eisNorm};
+\texttt{D5/S3/Arith/GoldenPell.lean}, \texttt{pell\_form\_eq\_four\_mul\_norm}.
+\item Remark~\ref{m6:golden}: \texttt{D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean}, \texttt{golden\_fixed\_point\_unique};
+\texttt{D5/S1/Phase/ContinuousAverage.lean}, \texttt{continuous\_average\_tendsto\_haar}.
+\item Proposition~\ref{m6:fixed}: \texttt{D5/S0/Diagonal/EscapeCount.lean}, \texttt{diagonal\_landing\_fixed}; Brouwer (simplex) as listed above.
+\item Remark~\ref{m6:algorithms}: \texttt{CoherentUniformAmplification.lean}, \texttt{uniform\_operator\_rotation};
+\texttt{D5/S3/Quantum/Algebra/WeylDisplacementConjugation.lean}, \texttt{displacement\_conjugation}.
+\end{itemize}}
+No declaration was found for Theorem~\ref{m6:cover}, Theorems~\ref{m6:det-product}, \ref{m6:three}, \ref{m6:prime-products},
+Proposition~\ref{m6:hb}, Theorem~\ref{m6:barrington} or Theorem~\ref{m6:abelian}.
+
 \section{What remains open}\label{sec:open}
 
 \begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2.6em]
@@ -7986,6 +9270,9 @@ Remark~\ref{m5:programme}: size-uniform control of the logarithmic error under r
 \item \emph{Phase synthesis.}  Conjecture~\ref{m4:gap-limit}: $n^3\delta_n\to4\sqrt2\,\pi^2$ for the central-defect path (numerical evidence
 $58.11,57.06,56.47$ at $n=64,128,256$); and the applications listed in Remark~\ref{m4:programme}, which need forward estimates or
 empirical evidence.
+\item \emph{Arithmetic and holonomy.}  (a) Conjecture~\ref{m6:cover-conjecture}: the uniform covering exponent $N_n^{-1/4+\eta}$ for
+even words.  (b) Conjecture~\ref{m6:dottie-conj}: algebraic independence of $\alpha$ and $\pi$ (implied by Schanuel's conjecture).
+(c) The kernel programme of Remark~\ref{m6:kernel-programme} and the architecture programme of Remark~\ref{m6:architecture-programme}.
 \end{enumerate}
 
 \section*{Use of AI tools}
@@ -8226,6 +9513,29 @@ The authors used AI tools, namely Claude Fable 5.2 and Claude Opus 5.5 (via Clau
 \bibitem{m4:BHMT} G.~Brassard, P.~H{\o}yer, M.~Mosca, and A.~Tapp, Quantum amplitude amplification and estimation, \emph{Contemp. Math.} \textbf{305} (2002), 53--74, \href{https://arxiv.org/abs/quant-ph/0005055}{arXiv:quant-ph/0005055}.
 \bibitem{m4:Tsaban} B.~Tsaban, Permutation graphs, fast forward permutations, and sampling the cycle structure of a permutation, \emph{J. Algorithms} \textbf{47} (2003), 104--121, \href{https://doi.org/10.1016/S0196-6774(03)00017-8}{doi:10.1016/S0196-6774(03)00017-8}.
 \bibitem{m4:BEST} P.~Creed and M.~Cryan, The number of Euler tours of random directed graphs, \emph{Electron. J. Combin.} \textbf{20} (2013), no.~3, P13, \href{https://doi.org/10.37236/2377}{doi:10.37236/2377}.
+% Section 10B references (checked 2026-11-20 via Crossref, titles included; Conway--Sloane, Silverman, Williams, de Branges and Baker are standard books).
+\bibitem{m6:LPS} A.~Lubotzky, R.~Phillips and P.~Sarnak, Hecke operators and distributing points on the sphere. I, \emph{Comm. Pure Appl. Math.} \textbf{39} (1986), S149--S186.
+\bibitem{m6:PS} O.~Parzanchevski and P.~Sarnak, Super-golden-gates for \(\mathrm{PU}(2)\), \emph{Adv. Math.} \textbf{327} (2018), 869--901, arXiv:1704.02106.
+\bibitem{m6:Sardari} N.~T.~Sardari, Optimal strong approximation for quadratic forms, \emph{Duke Math. J.} \textbf{168} (2019), 1887--1927.
+\bibitem{m6:CS} J.~H.~Conway and N.~J.~A.~Sloane, \emph{Sphere Packings, Lattices and Groups}, 3rd ed., Springer, 1999, Ch.~8, \S8.2.
+\bibitem{m6:MoodyPatera} R.~V.~Moody and J.~Patera, Quasicrystals and icosians, \emph{J. Phys. A} \textbf{26} (1993), 2829--2853.
+\bibitem{m6:Robinson} J.~Robinson, Definability and decision problems in arithmetic, \emph{J. Symbolic Logic} \textbf{14} (1949), 98--114.
+\bibitem{m6:Poonen} B.~Poonen, Characterizing integers among rational numbers with a universal-existential formula, \emph{Amer. J. Math.} \textbf{131} (2009), 675--682.
+\bibitem{m6:Koenigsmann} J.~Koenigsmann, Defining \(\mathbb Z\) in \(\mathbb Q\), \emph{Ann. of Math. (2)} \textbf{183} (2016), 73--93, arXiv:1011.3424.
+\bibitem{m6:Daans} N.~Daans, Universally defining \(\mathbb Z\) in \(\mathbb Q\) with \(10\) quantifiers, \emph{J. Lond. Math. Soc. (2)} \textbf{109} (2024), e12864, arXiv:2301.02107.
+\bibitem{m6:Silverman} J.~H.~Silverman, \emph{The Arithmetic of Elliptic Curves}, 2nd ed., Springer, 2009, Ch.~V.
+\bibitem{m6:Liao} M.~Liao, A three-series theorem on Lie groups, \emph{Ann. Inst. Henri Poincar\'e Probab. Stat.} \textbf{52} (2016), 726--734.
+\bibitem{m6:Williams} D.~Williams, \emph{Probability with Martingales}, Cambridge Univ. Press, 1991, Ch.~12.
+\bibitem{m6:Mertens} F.~Mertens, Ein Beitrag zur analytischen Zahlentheorie, \emph{J. Reine Angew. Math.} \textbf{78} (1874), 46--62.
+\bibitem{m6:deBranges} L.~de Branges, \emph{Hilbert Spaces of Entire Functions}, Prentice-Hall, 1968.
+\bibitem{m6:Baker} A.~Baker, \emph{Transcendental Number Theory}, Cambridge Univ. Press, 1975, Ch.~1.
+\bibitem{m6:Barrington} D.~A.~Mix Barrington, Bounded-width polynomial-size branching programs recognize exactly those languages in \(\mathrm{NC}^1\), \emph{J. Comput. System Sci.} \textbf{38} (1989), 150--164.
+\bibitem{m6:BT} D.~A.~Mix Barrington and D.~Th\'erien, Finite monoids and the fine structure of \(\mathrm{NC}^1\), \emph{J. ACM} \textbf{35} (1988), 941--952.
+\bibitem{m6:KR} K.~Krohn and J.~Rhodes, Algebraic theory of machines. I. Prime decomposition theorem for finite semigroups and machines, \emph{Trans. Amer. Math. Soc.} \textbf{116} (1965), 450--464.
+\bibitem{m6:Grover} L.~K.~Grover, A fast quantum mechanical algorithm for database search, \emph{Proc. 28th ACM STOC} (1996), 212--219.
+\bibitem{m6:Shor} P.~W.~Shor, Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer, \emph{SIAM J. Comput.} \textbf{26} (1997), 1484--1509.
+\bibitem{m6:RS} N.~J.~Ross and P.~Selinger, Optimal ancilla-free Clifford$+T$ approximation of $z$-rotations, \emph{Quantum Inf. Comput.} \textbf{16} (2016), 901--953.
+\bibitem{m6:BST} D.~A.~Mix Barrington, H.~Straubing and D.~Th\'erien, Non-uniform automata over groups, \emph{Inform. and Comput.} \textbf{89} (1990), 109--132.
 \end{thebibliography}
 
 \end{document}

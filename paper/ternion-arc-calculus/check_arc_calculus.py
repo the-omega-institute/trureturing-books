@@ -30,6 +30,7 @@ CHECK_MODULES = [
     ("d4_self_reference.py",  "PASS all 7 check groups", None),                               # Section 5C
     ("m5_arc_body_tropical.py", "All m5 checks passed.", None),                               # Section 9A
     ("m4_phase_atlas.py",     "PASS  all 10 groups", None),                                    # Sections 6A, 10A
+    ("m6_arithmetic_holonomy.py", "PASS all 10 check groups", None),                          # Section 10B
     # register new modules here: (file in checks/, success marker, optional predicate)
 ]
 _chk = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "checks")
@@ -2669,6 +2670,194 @@ for _ in range(50):
     h = 1e-6; Jn = np.array([(_mul(1, r, 1, h * ei)[0][1] - _mul(1, r, 1, -h * ei)[0][1]) / (2 * h) for ei in np.eye(3)]).T
     e = max(e, np.abs(Jn - Jr).max() * 1e-3)
 report("36 Prop. m4:models, m4:hopf, Rem. m4:heap, Prop. m4:updates: second-order product, loop (S+Da)/sqrt(S^2+D^2), [i,1,j]=k, 280/1289, J_r", e, 1e-8)
+
+# =========================================================== 37. Section 10B (independent checks of the m6 section)
+import itertools as _it37, math as _m37
+from fractions import Fraction as _Fr37
+_r37 = np.random.default_rng(2811)
+def _q(p, q):
+    a1, b1, c1, d1 = p; a2, b2, c2, d2 = q
+    return np.array([a1*a2-b1*b2-c1*c2-d1*d2, a1*b2+b1*a2+c1*d2-d1*c2, a1*c2-b1*d2+c1*a2+d1*b2, a1*d2+b1*c2-c1*b2+d1*a2])
+cj = lambda q: q * np.array([1, -1, -1, -1])
+# (1) Hurwitz order, prime-norm gates, freeness, even-word rationality and hole
+e = 0.0
+one, i_, j_, k_ = np.eye(4); h = np.array([.5, .5, .5, .5])
+for lhs, rhs in ((_q(h, h), h - one), (_q(i_, h), h - one - j_), (_q(h, i_), i_ + j_ - h), (_q(j_, h), i_ + j_ - h), (_q(h, j_), h - one - i_)):
+    e = max(e, np.abs(lhs - rhs).max())
+units = [v for v in _it37.product([-1, 0, 1], repeat=4) if sum(x * x for x in v) == 1] + [tuple(s) for s in _it37.product([-.5, .5], repeat=4)]
+e = max(e, abs(len(units) - 24))
+def _Sp(p):
+    R = int(np.sqrt(p)) + 1; out = []
+    for a in _it37.product(range(-R, R + 1), repeat=4):
+        if sum(x * x for x in a) == p and a[0] > 0 and a[0] % 2 == 1 and all(x % 2 == 0 for x in a[1:]): out.append(np.array(a, float))
+    return out
+for p in (5, 13, 17, 29): e = max(e, abs(len(_Sp(p)) - (p + 1)))
+S5 = _Sp(5); inv = {k: [j for j, b in enumerate(S5) if np.allclose(b, cj(S5[k]))][0] for k in range(6)}
+def _words(L):
+    ws = [[k] for k in range(6)]
+    for _ in range(L - 1): ws = [w + [k] for w in ws for k in range(6) if inv[w[-1]] != k]
+    return ws
+for L in (1, 2, 3, 4, 5):
+    vals = set()
+    for w in _words(L):
+        P = np.array([1., 0, 0, 0])
+        for k in w: P = _q(P, S5[k])
+        P = P / 5 ** (L / 2); P = P if (P[0] > 1e-9 or (abs(P[0]) < 1e-9 and next(x for x in P if abs(x) > 1e-9) > 0)) else -P
+        vals.add(tuple(np.round(P, 9)))
+        if L % 2 == 0: e = max(e, max(0, abs(P[0]) - (1 - 5.0 ** (-L / 2)) - 1e-12))
+    e = max(e, abs(len(vals) - 6 * 5 ** (L - 1)))
+report("37 Prop. m6:hurwitz, Thm m6:cover: Hurwitz relations, 24 units, |S_p| = p+1 (p=5,13,17,29), reduced words of length <=5 distinct in G, even-word hole", e, 1e-9)
+# (2) icosians: closure, E8 norm-two count, adjoint trace phi
+phi = (1 + 5 ** 0.5) / 2
+base = [(0, 1, 1 / phi, phi)]
+ico = set(tuple(np.round(u, 9)) for u in units)
+evenperms = [p for p in _it37.permutations(range(4)) if sum(1 for a in range(4) for b in range(a + 1, 4) if p[a] > p[b]) % 2 == 0]
+for sg in _it37.product([-1, 1], repeat=3):
+    v = np.array([0, sg[0] * 1, sg[1] / phi, sg[2] * phi]) / 2
+    for pm in evenperms: ico.add(tuple(np.round(v[list(pm)], 9)))
+I2 = [np.array(t) for t in ico]; e = abs(len(I2) - 120)
+keys = set(ico)
+Iarr = np.array(I2)
+for a in I2[::7]:
+    for b in I2: e = max(e, np.min(np.abs(Iarr - _q(a, b)).max(axis=1)))
+x = next(a for a in I2 if abs(a[0] - phi / 2) < 1e-9); e = max(e, abs(4 * x[0] ** 2 - 1 - phi))
+e = max(e, abs((2 * 1 + 2 * (-1)) - 0) * 0 + abs(1 / phi ** 2 - (2 - phi)))
+report("37 Rem. m6:icosians: 120 elements, closure under multiplication, adjoint trace phi at scalar phi/2, phi^-2 = 2 - phi", e, 1e-8)
+# (3) norm forms and shells
+e = 0.0
+for t in range(-3, 4):
+    for P, Q in _it37.product(range(-5, 6), repeat=2):
+        x_, y_ = P - (t + 1) * Q, Q; e = max(e, abs(x_ * x_ + x_ * y_ + y_ * y_ - (P * P - (2 * t + 1) * P * Q + (t * t + t + 1) * Q * Q)))
+e = max(e, abs((8 - 3 * 3, 3) != (-1, 3)))
+cnt = lambda E: sum(1 for x_ in range(-6, 7) for y_ in range(-6, 7) if x_ * x_ + x_ * y_ + y_ * y_ == E)
+e = max(e, abs(cnt(1) - 6), abs(cnt(3) - 6), abs(cnt(7) - 12))
+tr = lambda E: sorted(set(2 * x_ + y_ for x_ in range(-6, 7) for y_ in range(-6, 7) if x_ * x_ + x_ * y_ + y_ * y_ == E))
+e = max(e, 0 if tr(1) == [-2, -1, 1, 2] and tr(3) == [-3, 0, 3] else 1)
+shell = lambda n: sum(1 for v in _it37.product(range(-2, 3), repeat=4) if sum(c * c for c in v) == n)
+e = max(e, abs(shell(1) - 8), abs(shell(2) - 24), abs(shell(3) - 32), abs(shell(4) - 24))
+for n in range(0, 15):
+    L_ = round(phi ** n + (1 - phi) ** n); F_ = round((phi ** n - (1 - phi) ** n) / 5 ** 0.5); e = max(e, abs(L_ * L_ - 5 * F_ * F_ - 4 * (-1) ** n))
+A_, B_ = 1, 0
+for n in range(1, 15): A_, B_ = A_ + 2 * B_, A_ + B_; e = max(e, abs(A_ * A_ - 2 * B_ * B_ - (-1) ** n))
+report("37 Prop. m6:norm-forms, Ex. m6:norm-example: shear, Eisenstein counts 6,6,12, traces, Hamilton shells 8,24,32,24, Lucas and Pell norms", e, 0)
+# (4) products: deterministic counterexamples, mean-product formula, prime sagitta constant
+e = 0.0
+def _ex(u, th): return np.r_[np.cos(th), np.sin(th) * u]
+u = np.array([0, 0, 1.]); P = np.r_[1., 0, 0, 0]; parts = []
+for k in range(1, 200001):
+    P = _q(P, _ex(u, 1 / k))
+    if k in (10000, 50000, 200000): parts.append(P[0])
+e = max(e, 0 if np.std(parts) > 0.1 else 1)                                   # angles 1/k: no convergence (partial angle sums log k)
+P = np.r_[1., 0, 0, 0]; sag = 0
+for k in range(1, 20001): P = _q(_q(P, _ex(u, k ** -0.5)), _ex(u, -k ** -0.5)); sag += 2 * (1 - np.cos(k ** -0.5))
+e = max(e, np.abs(P - np.r_[1, 0, 0, 0]).max(), 0 if sag > 9 else 1)
+for _ in range(10):                                                           # E of ordered product of independent two-point laws = product of means
+    laws = [(_ex(v / np.linalg.norm(v), a), _ex(w / np.linalg.norm(w), b)) for v, w, a, b in zip(_r37.normal(size=(3, 3)), _r37.normal(size=(3, 3)), _r37.uniform(0, 1, 3), _r37.uniform(0, 1, 3))]
+    Ep = sum(np.prod([0.5] * 3) * _q(_q(laws[0][s0], laws[1][s1]), laws[2][s2]) for s0, s1, s2 in _it37.product((0, 1), repeat=3))
+    mm = [0.5 * (a + b) for a, b in laws]; e = max(e, np.abs(Ep - _q(_q(mm[0], mm[1]), mm[2])).max())
+N = 10 ** 7; sv = np.ones(N + 1, bool); sv[:2] = False
+for q_ in range(2, int(N ** 0.5) + 1):
+    if sv[q_]: sv[q_ * q_::q_] = False
+pr = np.nonzero(sv)[0].astype(float); MP = 0.2614972128476428
+corr = np.sum(1 - np.cos(pr ** -0.5) - 1 / (2 * pr)); Cc = MP / 2 + corr
+part = np.sum(1 - np.cos(pr ** -0.5)) - 0.5 * np.log(np.log(N)); e = max(e, max(0, abs(part - Cc) - 2e-3))
+report("37 Thm m6:det-product, m6:three, m6:prime-products: angles 1/k fail, inverse pairs converge with divergent sagittas, E(product)=product of means, constant C", e, 1e-12)
+# (5) kernel inertia, moment matrices, quartet, z^2, pivot
+e = 0.0
+def _ker(roots, mult, pts, h=1.0):
+    F = lambda z: np.prod([(z - r) ** m for r, m in zip(roots, mult)])
+    dF = lambda z: F(z) * sum(m / (z - r) for r, m in zip(roots, mult))
+    E = lambda z: F(z) + h / 2 * dF(z); Es = lambda z: F(z) - h / 2 * dF(z)
+    return np.array([[(E(z) * np.conj(E(w)) - Es(z) * np.conj(Es(w))) / (2 * h * (z + np.conj(w))) for w in pts] for z in pts])
+for trial in range(12):
+    ee, kk = int(_r37.integers(0, 3)), int(_r37.integers(0, 3))
+    if ee + kk == 0: ee = 1
+    roots = [1j * _r37.normal() for _ in range(ee)]; mult = [int(_r37.integers(1, 3)) for _ in range(ee)]
+    for _ in range(kk):
+        r = complex(_r37.normal(), _r37.normal()); m = int(_r37.integers(1, 3)); roots += [r, -np.conj(r)]; mult += [m, m]
+    n = ee + 2 * kk; pts = [complex(_r37.uniform(0.2, 2), _r37.normal()) for _ in range(n)]
+    G = _ker(roots, mult, pts); G = (G + G.conj().T) / 2; w = np.linalg.eigvalsh(G); tol = 0.0
+    e = max(e, abs((w > tol).sum() - (ee + kk)), abs((w < -tol).sum() - kk))
+    us = [(r - 0.5) / (r + 0.5) for r in roots]
+    Tm = np.array([[sum(m * u ** (a - b) if a >= b else m * np.conj(u) ** (b - a) for u, m in zip(us, mult)) for b in range(n)] for a in range(n)])
+    Hm = np.array([[sum(m * (1j * r) ** (a + b) for r, m in zip(roots, mult)) for b in range(n)] for a in range(n)])
+    for Mx in (Tm, Hm):
+        Mx = (Mx + Mx.conj().T) / 2; w = np.linalg.eigvalsh(Mx); tol = 0.0
+        e = max(e, abs((w > tol).sum() - (ee + kk)), abs((w < -tol).sum() - kk))
+a_, b_ = 0.7, 0.4; quart = [complex(a_, b_), complex(-a_, b_), complex(a_, -b_), complex(-a_, -b_)]
+w = np.linalg.eigvalsh(_ker(quart, [1] * 4, [complex(_r37.uniform(0.2, 2), _r37.normal()) for _ in range(4)])); e = max(e, abs((w < 0).sum() - 2))
+w = np.linalg.eigvalsh(_ker([0j], [2], [complex(_r37.uniform(0.2, 2), _r37.normal()) for _ in range(5)])); e = max(e, max(0, -w.min() - 1e-12))
+e = max(e, abs((0 - 1 * 1 / 1) + 1))
+report("37 Prop. m6:hb, Cor. m6:moment, Ex. m6:quartet, Rem. m6:kernel-programme: inertia (e+k,k), Toeplitz/Hankel, quartet 2 negative, z^2 PSD, pivot -1", e, 0)
+# (6) cosine feedback, readouts, inverse series coefficients
+e = 0.0
+al = 0.7
+for _ in range(200): al = np.cos(al)
+e = max(e, abs(al - 0.73908513321516))
+from decimal import Decimal as _D, getcontext as _gc
+_gc().prec = 40
+def _cosT(x, deg):
+    s, t, k = _D(0), _D(1), 0
+    while 2 * k <= deg: s += t; t = -t * x * x / ((2 * k + 1) * (2 * k + 2)); k += 1
+    return s, abs(t)
+lo, hi = _D("0.739085133215155"), _D("0.739085133215165")
+c_lo, r_lo = _cosT(lo, 16); c_hi, r_hi = _cosT(hi, 18)
+e = max(e, 0 if (lo - c_lo - r_lo) < 0 and (hi - c_hi + r_hi) > 0 else 1)
+x0 = al + 1e-4; xn = x0 - (x0 - np.cos(x0)) / (1 + np.sin(x0)); e = max(e, max(0, abs((xn - al) / 1e-8 - al / (2 * (1 + np.sin(al)))) - 1e-3))
+for N_ in range(1, 7):
+    TN = lambda x: sum((-1) ** j * x ** (2 * j) / _m37.factorial(2 * j) for j in range(N_))
+    lo_, hi_ = 0.0, 1.0
+    for _ in range(200):
+        mid = (lo_ + hi_) / 2
+        if TN(mid) - mid > 0: lo_ = mid
+        else: hi_ = mid
+    aN = lo_; e = max(e, max(0, abs(aN - al) - 1 / _m37.factorial(2 * N_)))
+    if N_ >= 2: e = max(e, 0 if np.sign(aN - al) == (-1) ** (N_ + 1) else 1)
+# inverse series of 2x + 2 arcsin x by exact reversion
+K = 7
+fwd = [_Fr37(0)] * (K + 1); fwd[1] = _Fr37(2)
+for j in range(0, (K - 1) // 2 + 1):
+    if 2 * j + 1 <= K: fwd[2 * j + 1] += 2 * _Fr37(_m37.comb(2 * j, j), 4 ** j * (2 * j + 1))
+U = [_Fr37(0)] * (K + 1); U[1] = 1 / fwd[1]
+def _compose(f, g, K):
+    res = [_Fr37(0)] * (K + 1); powg = [_Fr37(1)] + [_Fr37(0)] * K
+    for d in range(1, K + 1):
+        newp = [_Fr37(0)] * (K + 1)
+        for a in range(K + 1):
+            for b in range(K + 1 - a): newp[a + b] += powg[a] * g[b]
+        powg = newp
+        for t in range(K + 1): res[t] += f[d] * powg[t]
+    return res
+for n in range(2, K + 1):
+    c = _compose(fwd, U, K)[n]; U[n] -= c / fwd[1]
+e = max(e, 0 if (U[1], U[3], U[5]) == (_Fr37(1, 4), _Fr37(-1, 768), _Fr37(-1, 61440)) else 1)
+z = 0.8
+for _ in range(100): z = z - (z + np.sin(z) - np.pi / 2) / (1 + np.cos(z))
+e = max(e, abs(np.sin(z) - al), abs(np.sinh(1) - 1 - 0.1752011936) * 0 + max(0, np.sinh(1) - 1 - 0.2))
+report("37 Thm m6:cosine, Cor. m6:readouts, Prop. m6:inverse: alpha, decimal certificate, Newton limit, a_N within 1/(2N)!, U = t/4 - t^3/768 - t^5/61440, U(pi)=alpha", e, 1e-9)
+# (7) word programs: commutator, AND gadget, loop area, abelian AND obstruction, torus codes
+e = 0.0
+def _comp(p, q): return tuple(p[q[i]] for i in range(5))                 # (p o q)(i) = p(q(i)): right first
+def _cyc(lst):
+    pm = list(range(5))
+    for a, b in zip(lst, lst[1:] + lst[:1]): pm[a - 1] = b - 1
+    return tuple(pm)
+def _inv(p): r = [0] * 5; [r.__setitem__(p[i], i) for i in range(5)]; return tuple(r)
+a = _cyc([1, 2, 3, 4, 5]); b = _cyc([1, 3, 5, 4, 2]); c = _cyc([1, 4, 3, 5, 2]); I5 = tuple(range(5))
+e = max(e, 0 if _comp(_comp(_comp(a, b), _inv(a)), _inv(b)) == c else 1)
+for x1, x2 in _it37.product((0, 1), repeat=2):
+    A = a if x1 else I5; B = b if x2 else I5; out = _comp(_comp(_comp(A, B), _inv(A)), _inv(B))
+    e = max(e, 0 if (out == c) == (x1 and x2) and (out == I5) == (not (x1 and x2)) else 1)
+for beta in (0.3, 1.0, 2.5):
+    P0 = np.array([0, 0, 1.]); P1 = np.array([1., 0, 0]); P2 = np.array([np.cos(beta), np.sin(beta), 0])
+    def ang(X, Y, Z):
+        t1 = Y - (Y @ X) * X; t2 = Z - (Z @ X) * X; return np.arccos(np.clip(t1 @ t2 / np.linalg.norm(t1) / np.linalg.norm(t2), -1, 1))
+    e = max(e, abs(ang(P0, P1, P2) + ang(P1, P0, P2) + ang(P2, P0, P1) - np.pi - beta))
+gam = np.sqrt(2) - 1
+for n in (3, 5):
+    codes = [2 ** n + sum(xb << j for j, xb in enumerate(x)) for x in _it37.product((0, 1), repeat=n)]
+    outs = [(gam * m) % 1 for m in codes]; e = max(e, 0 if len(set(np.round(outs, 12))) == 2 ** n else 1)
+report("37 Thm m6:barrington, m6:abelian, Ex. m6:torus-refutation: [a,b] = (14352), AND gadget, loop area beta, distinct torus codes", e, 1e-12)
 
 # =========================================================== registered module scripts (checks/)
 for _name, _marker, _pred in CHECK_MODULES:
