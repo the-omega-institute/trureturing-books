@@ -124,7 +124,9 @@
 
 **效应、仪器与完全正性来自辅助系统（`手工推导`）。** 把系统与处于态 $\alpha_0$ 的辅助系统联合，施加幺正 $U$，再对辅助系统做完备检验 $(a)$，令 $K_a\psi := (U(\psi \otimes \alpha_0))_a$（相对态）。则 $\sum_a K_a^\dagger K_a = \mathbf{1}$，结果 $a$ 的玻恩权重为 $\langle\psi, K_a^\dagger K_a\psi\rangle$，给定 $a$ 后的条件态为 $K_a\psi / \lVert K_a\psi\rVert$，$\rho \mapsto \sum_{a \in e} K_a\rho K_a^\dagger$ 完全正；反过来每个克劳斯族都可如此实现，于是所得效应恰为全体 $0 \le E \le \mathbf{1}$。玻恩权重的唯一性（`文献结果`）：在 $\beta$ 的非负函数之中，借助格里森型定理（A. M. Gleason, *J. Math. Mech.* **6**, 885–893, 1957）并要求权重在添加辅助系统后不变，玻恩权重唯一；只对单个系统要求“依赖于射线对、完备检验上和为一、自身射线取一”时，$f(x) = 3x^2 - 2x^3$ 满足 $f(x) + f(1 - x) = 1$，同样合格，所以辅助系统不可少。
 
-**单次结果（`手工推导` + `OPEN`）。** 障碍出现在等权重处：取 $q$ 使 $\beta(q, p) = \frac{1}{2}$，绕 $r_q$ 转 $\pi$ 的旋转固定 $q$ 而交换 $p$ 与 $p^\perp$，所以在等权重的检验上不存在协变的选支规则。给定结果时条件态是确定的；出现哪个结果，结构本身不提供，这与上文 [@prob-ch34-single-outcome-realization] 的 `OPEN` 定位一致。
+**单次结果与二元选择（`手工推导` + `OPEN`）。** 取制备射线 $q$ 为 $(\lvert 0\rangle+\lvert 1\rangle)/\sqrt{2}$，以 $\lvert 0\rangle,\lvert 1\rangle$ 为检验。按本节的射线核与玻恩权重等式，两个结果的权重各为 $1/2$。泡利 $X$ 固定制备射线，并交换检验的两条射线。若规则的输入是制备射线与无序的检验射线集合，此变换固定整个输入。确定性协变规则选出的射线必须在交换下固定，但两个候选都被交换。这正是 [`no_equivariant_selector_of_common_fixed_symmetry`](lean:D5/S3/ConceptDynamics/Attribution/FixedSymmetrySelectorObstruction.no_equivariant_selector_of_common_fixed_symmetry) 的固定态障碍。
+
+如果规则只读取有标签的权重 $(w,1-w)$，并要求交换标签时所选标签也随之交换，那么在任何对交换封闭的检验域上，确定性规则存在当且仅当该域排除 $w=1/2$。等权输入在交换下固定，两个标签都不固定。不等权时，选唯一权重较大的标签即可，这个选择随标签一起交换。按权重抽样所得的概率分布也与交换相容，各结果的概率就是其玻恩权重。由几何与动力学解释某一次实际试验为何出现该结果，仍是 [@prob-ch34-single-outcome-realization] 的开放问题。
 :::
 
 ## 39.3.3 形式化锚定主定理、文献与附录 E 边界、五大公理定量核验与迈向无外三元数本体 {#sec-ch39-26-3}
