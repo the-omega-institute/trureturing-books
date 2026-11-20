@@ -1098,6 +1098,20 @@ Choose one bit and fix the rest. The two laws agree after deleting that bit beca
 
 For the three fair outputs above, the parity sign is always $1$ under $\mu$ and has mean zero under $\nu$, giving total variation $1/2$. Add an independent biased bit $B$ to the third output, with $\Pr(B=1)=t<1/2$. Every pair is still uniform conditional on $B$, and the binary sum of all three outputs is now $B$. Total variation drops to $(1-2t)/2$. If two outputs are copies of the same biased bit $B$, the joint law instead has parity sign always $1$, while the product of the marginals has sign mean $(1-2t)^2$. In that case the total variation is $2t(1-t)$.
 
+**Computing total variation for the whole family by cosets (written derivation).** Split the outputs into two groups. Let $J$ contain every output that uses at least one fair input bit, and let $L$ contain the rest. The linear image of the fair inputs on $J$ is a subspace $H\le\mathbb F_2^J$. Replace the output on $J$ by its coset in $C=\mathbb F_2^J/H$ and keep the output vector on $L$.
+
+Fix the biased inputs. They determine the output on $L$. The output on $J$ is uniform on an affine coset because the linear map onto $H$ has equally sized fibers. Averaging over the biased inputs preserves equality of the masses within each coset. If $P(c,v)$ is the joint mass at the reduced output $(c,v)$, each of its original points receives $P(c,v)/|H|$.
+
+Under the product of the marginals, each output in $J$ is a fair bit. The vector on $J$ is therefore uniform and independent of the vector on $L$. With $m_i$ denoting the marginal law of output $i$, the reduced product law is
+
+$$
+Q(c,v)=\frac{1}{|C|}\prod_{i\in L}m_i(v_i).
+$$
+
+Each original point over $(c,v)$ receives $Q(c,v)/|H|$ under the product law. The sum of the absolute mass differences over these $|H|$ points is exactly $|P(c,v)-Q(c,v)|$. Summing over all reduced outputs and dividing by two recovers the original total variation. When $L$ is empty, the coset alone suffices.
+
+For example, use $Y_1,Y_2,Y_1+Y_2+B$ and $B$ as four outputs. The coset of the first three is determined by their binary sum $B$. The reduced joint law has output $(B,B)$, while the reduced product law replaces the first coordinate by an independent fair bit. For each value of the second coordinate, the two conditional laws of the first have total variation $1/2$. Hence the four-output total variation is $1/2$.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
