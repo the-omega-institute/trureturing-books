@@ -259,6 +259,38 @@ $$
 第 2 款：取哈尔测度 $\mu$ 与 $L^2(\mu)$ 上的左正则表示 $(\pi(g)f)(x) = f(g^{-1}x)$，它保持范数且强连续。取单位元的邻域 $V$，使 $v w^{-1}$（$v, w \in V$）都落在 $U$ 的内部，再取连续实函数 $\varphi$，$\varphi(1) = 1$，在 $V$ 外为零，于是 $\int \varphi^2\,d\mu > 0$。以 $\varphi(x^{-1}y)$ 为核的积分算子由第 1 款是从 $L^2(\mu)$ 到 $C(G)$ 的紧算子，再并入 $L^2(\mu)$ 得紧算子 $T$，它与每个 $\pi(g)$ 交换。连续函数 $T\varphi$ 在 $1$ 处取值 $\int \varphi^2\,d\mu \neq 0$，而对 $U$ 的内部之外的 $g$，它在 $g$ 处取值 $0$，所以 $\pi(g)$ 移动 $T\varphi$。$S = T T^\dagger$ 是紧自伴算子，也与每个 $\pi(g)$ 交换。由谱定理，$S$ 的特征空间张成稠密子空间，所以保持 $S$ 的每个非零特征值特征空间逐点不动的连续算子，保持 $S$ 的值域的闭包逐点不动，而这个闭包包含 $T$ 的值域。于是对 $U$ 的内部之外的每个 $c$，有一个非零特征值的特征空间——它有限维且在平移下不变——含有被 $\pi(c)$ 移动的向量，由强连续性，该向量也被 $c$ 某个邻域里的每个元素移动。$U$ 的内部的补集是紧集，有限个这样的特征空间就够；它们的和 $W$ 有限维且在平移下不变，$\pi$ 在 $W$ 的一组正交归一基下的矩阵就是所求的连续酉表示 $\rho$：若 $\rho(g) = I_n$，则 $\pi(g)$ 保持 $W$ 逐点不动，$g$ 不在上述任一邻域中，故 $g \in U$。第 2 款是彼得—外尔定理的分离形式，不是完整的彼得—外尔定理：矩阵系数的稠密性、$L^2(\mu)$ 按不可约表示的分解与正定类函数的特征标展开都不在本定理之内。完整证明由 Lean 内核检查。
 :::
 
+[@rem-ch39-axiom-omega-round-trip-closing-law] 中往返律的证明要点——倍角式沿单参数子群解出余弦、所有单参数子群走过同一长度后闭合、交换子代数至多一维、李代数的维数——在线性群的设定下由下面这条定理内核检查。它只服务于往返律这条闭合律，秩路线不需要它。
+
+::: {.theorem #thm-ch39-axiom-omega-duplication-infinitesimal-classification title="倍角律的无穷小分类" lean="D5/S3/Quantum/Algebra/Comparison/RoundTripClassification.comparison_classification"}
+设 $A$ 为有限维（因而完备的）实赋范代数，以换位子 $[X, Y] := XY - YX$ 为李括号；$L \subseteq A$ 为对换位子封闭的实线性子空间，取 $A$ 的范数；$G$ 为 $A$ 的可逆元群的子群；$\exp X := \sum_{n \ge 0} X^n/n!$。设 $\varphi : G \to \mathbb{R}$，$h$ 为 $L$ 上的对称实双线性型，并假设：
+
+1. 对一切 $X \in L$，$\exp X \in G$；对一切 $g \in G$ 与 $X \in L$，$g X g^{-1} \in L$；
+2. 对一切 $g \in G$，$0 \le \varphi(g) \le 1$，且 $\varphi(g) = 1 \iff g = 1$；
+3. 倍角律：对一切 $g \in G$，$\varphi(g^2) = \bigl(2\varphi(g) - 1\bigr)^2$；
+4. 共轭不变：对一切 $g, k \in G$，$\varphi(k g k^{-1}) = \varphi(g)$；
+5. 二阶展开：当 $L$ 中的 $X \to 0$ 时，$\varphi(\exp X) = 1 - \frac{1}{2}h(X, X) + o\bigl(\lVert X\rVert^2\bigr)$。
+
+则：
+
+1. 对一切 $X \in L$，$h(X, X) \ge 0$，且由 $h(X, X) = 0$ 可推出 $X = 0$；
+2. 对一切 $t \in \mathbb{R}$ 与 $X \in L$，$\varphi(\exp tX) = \cos^2\bigl(t\sqrt{h(X, X)/2}\bigr)$；
+3. 对一切 $t \in \mathbb{R}$ 与 $X \in L$，$\exp tX = 1$ 当且仅当存在整数 $n$ 使 $t\sqrt{h(X, X)/2} = n\pi$；
+4. 若 $X, Y \in L$ 且 $[X, Y] = 0$，则 $X = 0$，或存在实数 $c$ 使 $Y = cX$；
+5. 对一切 $C, X, Y \in L$，$h([C, X], Y) + h(X, [C, Y]) = 0$；
+6. $\dim_{\mathbb{R}} L \in \{0, 1, 3\}$；
+7. 若 $\dim_{\mathbb{R}} L = 3$，则存在 $L$ 的基 $b_0, b_1, b_2$ 与实数 $\mu > 0$，使对一切 $i, j$ 有 $h(b_i, b_j) = \delta_{ij}$，且 $[b_0, b_1] = \mu\,b_2$，$[b_1, b_2] = \mu\,b_0$，$[b_2, b_0] = \mu\,b_1$。
+:::
+
+::: proof
+先把问题限制在一条射线上。固定 $X \in L$，令 $f(s) := 2\varphi(\exp sX) - 1$。由 $\exp(2sX) = (\exp sX)^2$ 与倍角律得 $f(2s) = 2f(s)^2 - 1$；由 $0 \le \varphi \le 1$ 得 $\lvert f\rvert \le 1$；由二阶展开得 $f(s) = 1 - h(X, X)\,s^2 + o(s^2)$。系数 $h(X, X)$ 不能为负，否则 $s$ 很小时 $\varphi(\exp sX) > 1$。有界且带这个二阶芽的倍角方程解只有余弦，$f(s) = \cos\bigl(s\sqrt{2h(X, X)}\bigr)$，再用 $\cos 2\theta = 2\cos^2\theta - 1$ 改写即得第 2 款。若 $h(X, X) = 0$，则 $\varphi(\exp tX) = 1$ 对一切 $t$ 成立，忠实性给出 $\exp tX = 1$，在 $t = 0$ 处求导得 $X = 0$；这是第 1 款。第 3 款：由忠实性，$\exp tX = 1$ 即 $\cos^2 = 1$，即正弦为零。
+
+第 5 款：$\exp\bigl(e^{tC}Xe^{-tC}\bigr) = e^{tC}(\exp X)e^{-tC}$，共轭不变性说明 $\varphi \circ \exp$ 在这个共轭作用下不变，于是它的二阶系数 $h$ 也不变；对 $t$ 在 $0$ 处求导即得 $\operatorname{ad}$ 不变性。
+
+第 4 款：设 $X \neq 0$、$[X, Y] = 0$，令 $S$ 为 $X$、$Y$ 张成的子空间。$S$ 中的元素两两交换，$\exp$ 在 $S$ 上是加法到乘法的同态，其核 $K = \{u \in S : \exp u = 1\}$ 是加法子群。取 $h$ 为 $S$ 上的内积、$r := \sqrt{2}\,\pi$：由第 2 款，长度为 $r$ 的向量都在 $K$ 中，长度为 $r/2$ 的向量处 $\varphi = 0 \neq 1$，都不在 $K$ 中。若 $\dim S \ge 2$，长度为 $r/2$ 的向量可以写成两个长度为 $r$ 的向量之和（等腰三角形），它将落在 $K$ 中，矛盾；所以 $\dim S = 1$，$Y$ 是 $X$ 的倍数。
+
+第 6、7 款：$h$ 是 $L$ 上 $\operatorname{ad}$ 不变的内积，且每个非零元的中心化子只是它自己张成的直线。取单位向量 $a$，$\operatorname{ad}_a$ 关于 $h$ 反对称；当 $\dim L > 1$ 时它非零，由此得正交单位向量 $u, v$ 与 $\mu > 0$，使 $[a, u] = \mu v$、$[a, v] = -\mu u$、$[u, v] = \mu a$，且 $a$、$u$、$v$ 张成的子空间之外不再有维数（否则与中心化子为直线矛盾）。所以 $\dim L$ 只能是 $0$、$1$ 或 $3$，三维时 $a, u, v$ 就是所求的基。完整证明由 Lean 内核检查。
+:::
+
 ::: {.theorem #thm-ch39-axiom-omega-ternary-closure-anchors title="观测划分商核、单位格拉姆全同、秩一玻恩权重、正算子格拉姆实现、三锚行列式与正定判据、自旋因子三维叉乘唯一分类、拉格朗日—格拉姆恒等式、平衡叉乘反自伴及球面闭链与单纯二上链正合定理" lean="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel,D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization,D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight,D5/S3/QuantumBounds/GramRealizability.gram_realizability,D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula,D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff,D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences,D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity,D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum,D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact,D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"}
 在所钉 `trureturing` 冻结声明集中，以下十一项共同支撑 $\mathrm{AXIOM}\text{-}\Omega$ 外延商化、格拉姆保正度规、三维叉乘唯一闭锁与无边界闭合场的数学定理同时成立：
 
@@ -300,7 +332,7 @@ $$
 \kappa\bigl(w,\, [x, w, x]\bigr) \;=\; \bigl(2\kappa(w, x) - 1\bigr)^2 \qquad (\forall\, w, x \in \mathcal{M}).
 $$
 
-法则 (III) 的极小特征秩（流形表述中的“极小维数、极小秩”）是在一整类结构中取极小；上式是单个结构自身的性质，可以代替它充当闭合律。在流形表述的载体上，于法则 (I) 与法则 (II) 的对称、外延分离 $\kappa(x, y) = 1 \iff x = y$ 及双侧迁移不变条款之上（$\kappa$ 只需连续；$C^2$ 正则性不属于定义，它可以推出：$\kappa$ 的实解析性由群结构自动得到），再要求每点 $x$ 恰有一个触零点 $x^\perp$（$\kappa(x, x^\perp) = 0$），则满足往返律的结构在同构意义下恰有两个：单位圆 $S^1$ 与单位三维球面 $S^3$，二者都取 $[x, y, z] = x y^{-1} z$ 与 $\kappa(x, y) = \lVert (x + y)/2\rVert^2$；其中迁移非交换者唯有 $S^3$，维数、紧致性与 $\kappa$ 的格拉姆半正定（秩 $\dim\mathcal{M} + 2$，在 $S^3$ 上即 $1 + 4 = 5$）都由此推出。加上法则 (III) 的非交换条款（或流形表述的单连通载体条件），$S^1$ 出局，解唯有 $S^3(1)$ 与 $\kappa_{S^3}$。反过来，满足母公理的结构都满足往返律与下文的干涉律：秩五嵌入（[@thm-ch39-axiom-omega-rank-five-unit-quaternion-embedding] 第 5 款，`LEAN ✓`）把它搬进单位四元数，那里 $x w^{-1} x = 2\langle x, w\rangle x - w$（`手工推导`）。证明要点：取定基点 $o$ 并令 $\varphi(g) := \kappa(o, g)$，往返律化为倍角式 $\varphi(g^2) = \bigl(2\varphi(g) - 1\bigr)^2$；沿任一单参数子群解得 $\varphi(\exp tX) = \cos^2\bigl(\lVert X\rVert t/\sqrt{2}\bigr)$，于是所有单参数子群走过同一长度后闭合，交换子代数至多一维，李代数只能是 $\mathbb{R}$ 或 $\mathfrak{su}(2)$。在实直线上，倍角式 $f(2t) = 2f(t)^2 - 1$ 有非余弦的连续解，余弦刻画要靠群结构；一维倍角式对余弦的刻画可能早有先例（M. Kuczma, *Ann. Polon. Math.* **16**, 53–57, 1964；A. N. Sharkovskii, *Aequationes Math.* **9**, 121–128, 1973），这一部分不作为新结果。
+法则 (III) 的极小特征秩（流形表述中的“极小维数、极小秩”）是在一整类结构中取极小；上式是单个结构自身的性质，可以代替它充当闭合律。在流形表述的载体上，于法则 (I) 与法则 (II) 的对称、外延分离 $\kappa(x, y) = 1 \iff x = y$ 及双侧迁移不变条款之上（$\kappa$ 只需连续；$C^2$ 正则性不属于定义，它可以推出：$\kappa$ 的实解析性由群结构自动得到），再要求每点 $x$ 恰有一个触零点 $x^\perp$（$\kappa(x, x^\perp) = 0$），则满足往返律的结构在同构意义下恰有两个：单位圆 $S^1$ 与单位三维球面 $S^3$，二者都取 $[x, y, z] = x y^{-1} z$ 与 $\kappa(x, y) = \lVert (x + y)/2\rVert^2$；其中迁移非交换者唯有 $S^3$，维数、紧致性与 $\kappa$ 的格拉姆半正定（秩 $\dim\mathcal{M} + 2$，在 $S^3$ 上即 $1 + 4 = 5$）都由此推出。加上法则 (III) 的非交换条款（或流形表述的单连通载体条件），$S^1$ 出局，解唯有 $S^3(1)$ 与 $\kappa_{S^3}$。反过来，满足母公理的结构都满足往返律与下文的干涉律：秩五嵌入（[@thm-ch39-axiom-omega-rank-five-unit-quaternion-embedding] 第 5 款，`LEAN ✓`）把它搬进单位四元数，那里 $x w^{-1} x = 2\langle x, w\rangle x - w$（`手工推导`）。证明要点：取定基点 $o$ 并令 $\varphi(g) := \kappa(o, g)$，往返律化为倍角式 $\varphi(g^2) = \bigl(2\varphi(g) - 1\bigr)^2$；沿任一单参数子群解得 $\varphi(\exp tX) = \cos^2\bigl(\lVert X\rVert t/\sqrt{2}\bigr)$，于是所有单参数子群走过同一长度后闭合，交换子代数至多一维，李代数只能是 $\mathbb{R}$ 或 $\mathfrak{su}(2)$。这几步的无穷小部分，在 $G$ 是有限维实赋范代数中可逆元的子群、$\varphi$ 在单位元处有以对称双线性型 $h$ 为系数的二阶展开这一设定下，由 [@thm-ch39-axiom-omega-duplication-infinitesimal-classification] 内核检查（`LEAN ✓`）：沿单参数子群的余弦形式、相同的闭合长度与交换子代数至多一维是它的第 2–4 款，李代数的维数只能是 $0$、$1$ 或 $3$、三维时括号在 $h$ 的某组正交归一基下是叉积的正倍数是第 6、7 款；从流形载体过渡到这一设定（群实现为线性群、$\varphi$ 的二阶展开）、由往返律得到倍角式与共轭不变，以及把三维情形认作 $\mathfrak{su}(2)$，仍是 `手工推导`。在实直线上，倍角式 $f(2t) = 2f(t)^2 - 1$ 有非余弦的连续解，余弦刻画要靠群结构；一维倍角式对余弦的刻画可能早有先例（M. Kuczma, *Ann. Polon. Math.* **16**, 53–57, 1964；A. N. Sharkovskii, *Aequationes Math.* **9**, 121–128, 1973），这一部分不作为新结果。
 
 **达朗贝尔函数方程（`文献结果`）。** 令 $\psi := 2\varphi - 1$。两变量等式 $\psi(ab) + \psi(ab^{-1}) = 2\psi(a)\psi(b)$ 是群上的达朗贝尔函数方程；T. M. K. Davison（*Aequationes Math.* **76**, 33–53, 2008；*Publ. Math. Debrecen* **75**, 41–66, 2009）证明其非零连续解为 $\frac{1}{2}\operatorname{tr}\circ\rho$（$\rho : G \to \mathrm{SL}(2, \mathbb{C})$ 为连续同态），且承载忠实解的紧群嵌入 $\mathrm{SU}(2)$。以两变量形式（即下文的干涉律）为公理时，只需法则 (I) 与法则 (II) 的对称、外延分离与双侧迁移不变条款，唯一触零点与 $C^2$ 条款都不需要，解恰为 $S^1$ 与 $S^3$（`手工推导`，也可由上述文献得出）；往返律是它的对角情形 $a = b$。单变量的往返律本身排除不了 $\mathrm{SO}(3)$：在 $\mathrm{SO}(3)$ 上取 $\psi = \cos\alpha$（$\alpha$ 为转角），它忠实、光滑且满足倍角式，但对绕两根正交轴各转 $\pi/2$ 的 $a, b$ 有 $\psi(ab) + \psi(ab^{-1}) = -1 \ne 0 = 2\psi(a)\psi(b)$，相应的 $\kappa = \cos^2(\alpha/2)$ 在全部转角为 $\pi$ 的旋转上取零，触零点不唯一。所以唯一触零点这一条款不可省去。
 
