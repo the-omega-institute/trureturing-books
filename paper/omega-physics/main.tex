@@ -269,6 +269,7 @@ composite reading built on one clock's complex structure, and a right transport 
 statistics unchanged is unobservable (Section~\ref{sec:closedreg}).
 \item[{[U], [A]}] The physical specification of a closed-universe state, and of an observer's accessible
 algebra (Hypotheses~U and~A, Section~\ref{sec:closedreg}).
+\item[{[Hw]}] A calibrated resonant fixed-axis drive with an ideal frame register (Remark~\ref{rem:exframe}).
 \item[{[Ac]}] Access to a graph resource with local tests and feedforward; [Lq]: local indistinguishability for
 a fusion space (Section~\ref{sec:attention}).
 \item[{[Ps]}] The intermediate Pati--Salam spectrum with step matching; [Ea]: an effective action for
@@ -3078,6 +3079,19 @@ Take $u$ as the first coordinate and sum the identical second moments to obtain 
 \end{proof}
 
 For $d=2^{20}$ and $\epsilon=1/10$ the bound is $100/2^{20}$. For $\lambda_j=2^{-j-1}$ with $j\ge0$ the sum is one by the geometric series and $\tau=1/8$ selects precisely three terms, out of the bound of eight. The harmonic sequence has finite superlevel sets at every positive threshold and infinite sum. Uniform real amplitudes in dimension $2^N$ model a restricted ensemble. The full complex register has real unit sphere of ambient dimension $2^{N+1}$ and a phase quotient. A statement about the distribution of circuit gradients needs assumptions on the circuit ensemble and observable. Random-design and cost-locality conditions in published barren-plateau results supply such assumptions. For a simple obstruction to a general implication, $B=I$ has identically zero gradient for all ensembles, while $R_y(\theta)$ on one qubit tensored with arbitrarily many idle qubits gives the same derivative $-\sin\theta$ at every register size. \cite{n5-barren,n5-localcost}
+
+\begin{proposition}[symmetric coin on a cycle]\label{prop:cpcoin}
+For the Hadamard coin followed by the periodic shift (coin $0$ to the left, $1$ to the right) on a cycle of length $p\ge1$, starting at one
+site, the coin $(1,i)/\sqrt2$ maximises, at every step count, the geometric entanglement (one minus the largest squared overlap with a
+product of single-mode vectors) of the single-excitation state across all $2p$ modes.
+\end{proposition}
+\begin{proof}
+The map $(z_0,z_1)\mapsto(-z_1,z_0)$ with site reflection commutes with the shift and anticommutes with the Hadamard coin, so the mirror
+amplitudes from the two basis coins form a scaled orthogonal real matrix, and every unit coin has the same pair probability sum, with
+equal pair probabilities for $(1,i)/\sqrt2$.  With all other modes fixed, the overlap is the largest singular value of
+$\bigl(\begin{smallmatrix}A&B\lambda_2\\ B\lambda_1&0\end{smallmatrix}\bigr)$, which at fixed Frobenius norm decreases when $\lvert\lambda_1\lambda_2\rvert$ increases, i.e.\ at equal probabilities; balance each
+mirror pair in turn and remove phases by local diagonal unitaries.  (A library result, Section~\ref{sec:lean}.)
+\end{proof}
 
 \subsection{Braid actions and protected sectors}
 
@@ -6526,6 +6540,33 @@ data: neutron interferometry and NMR interferometry with a coupled spin \cite{ex
 (b) as in Example~\ref{ex:neutron}.
 \end{example}
 
+\smallskip\noindent\textbf{Hypothesis Hw (resonant drive with a frame register).}  A two-level system is driven
+resonantly in the rotating-wave approximation, with a fixed azimuth $\varphi$ during each pulse, so that
+$H=\tfrac\hbar2\Omega(t)(\cos\varphi\,X+\sin\varphi\,Y)$ in the rotating frame and the pulse is $R_\varphi(\theta)=e^{-i\theta(\cos\varphi X+\sin\varphi Y)/2}$, $\theta=\int\Omega\,dt$; the
+control also keeps an ideal frame register whose updates take no analog pulse time (virtual $Z$ gates,
+as implemented by McKay et al.\ \cite{m4:McKay}).
+
+\begin{remark}[frame updates realise the clock twist]\label{rem:exframe}
+Under Hypothesis~Hw the following are identities.  (i) With $R_z(\lambda)=e^{-i\lambda Z/2}$, conjugating $X,Y$ by $R_z(\lambda)$ gives
+$R_\varphi(\theta)R_z(\lambda)=R_z(\lambda)R_{\varphi-\lambda}(\theta)$: a phase $\lambda$ is applied by advancing the frame register and shifting every later azimuth
+by $-\lambda$; the final diagonal factor commutes with $Z$-basis effects, so readout probabilities are unchanged.  On $\lvert+\rangle$ with
+$\lambda=\theta=\pi/2$: $R_0(\theta)R_z(\lambda)\lvert+\rangle=e^{-i\pi/4}\lvert0\rangle$, $R_{-\pi/2}(\theta)\lvert+\rangle=\lvert0\rangle$ and $R_{\pi/2}(\theta)\lvert+\rangle=\lvert1\rangle$ (the sign of the phase matters).
+(ii) In the frame $V(t)=e^{i\omega_0tZ/2}$, $H_{\mathrm{rot}}=VH_{\mathrm{lab}}V^*+i\hbar\dot VV^*$ cancels the background $\hbar\omega_0Z/2$; a $5$\,GHz carrier has period $0.2$\,ns,
+and an envelope $\Omega=2\pi\times10$\,MHz for $25$\,ns has area $\pi/2$ over $125$ carrier periods and excitation probability $\tfrac12$ from $\lvert0\rangle$
+(compare Example~\ref{ex:bdclocks}).  If $Hv=Ev$, $e^{-itH/\hbar}v=e^{-itE/\hbar}v$ and $vv^*$ is stationary; for a channel $\mathcal E$ and its trace dual,
+$\tr(B\,\mathcal E^k(\rho))=\tr(\mathcal E^{*k}(B)\rho)$, of which the frame update is the unitary-conjugation case.  (iii) For square $A$ put
+$K_t(A)=\int_0^1e^{itrA}A\,dr$, so $K_0(A)=A$ and $K_t(A)=(e^{itA}-\mathbf1)/(it)$; for real symmetric $A,B,C$ of Frobenius norm at most $L$,
+$\lvert\re\tr(K_t(A)K_t(B)K_t(C))-\tr(ABC)\rvert\le\tfrac54L^5t^2$ ($\tfrac1{80}$ at $L=1$, $t=\tfrac1{10}$): the derivatives of $K_t$ have Frobenius norms at most $L,L^2/2,L^3/3$,
+the first derivative of the real trace vanishes at $t=0$, and Taylor's remainder bounds the second by $\tfrac52L^5$ (a library result,
+Section~\ref{sec:lean}).  In this way the free phases between signal pulses in the companion's real comparison synthesis
+\cite[Thm.~6A.1]{PaperI} (there $D(\phi)=R_z(-2\phi)$) are frame updates, the right clock twist of the Larmor samples is a
+virtual $Z$, and the $\pi/2$ pulses of Example~\ref{ex:ramsey} are $R_\varphi(\pi/2)$; exact amplification with source queries is
+\cite[Prop.~6A.8]{PaperI}.  Hypothesis~Hw is an implementation input: on the configurations of this paper the clock
+acts as a scalar only in the complex structure it defines (Proposition~\ref{prop:clock}), and the identification of
+a laboratory frame register with that clock is the phase bridge [Ph] (Remark~\ref{rem:clreal}).
+\end{remark}
+
+
 \begin{example}[Grover search as a reflection recurrence; (a) for the identities, (b) under C3 for the realisation]\label{ex:grover}
 \emph{System.}  Grover's algorithm \cite{ex-Grover97} on $N$ items, realised in NMR with $N=4$ \cite{ex-CGK98} and
 with trapped ions with $N=8$ \cite{ex-Figgatt17}.
@@ -7008,7 +7049,9 @@ Section~\ref{sec:unification}: quantum max-flow $\le$ min-cut, its attainment an
 bridge results, castling deficit, native saturation, native scalar Gram and rectangular bounds, the
 width-at-most-three refutation and scalar obstruction, rectangular block unitaries of exact width,
 open-boundary matrix-product-state recovery, the Landauer statements, Fubini--Study record bounds,
-Minkowski null-cone rigidity and Lagrange's Gram identity.  These are library results,
+Minkowski null-cone rigidity and Lagrange's Gram identity.  For Remark~\ref{rem:exframe} and
+Proposition~\ref{prop:cpcoin}: the ordered three-pulse real trace bound and the symmetric-coin maximal walk
+entanglement.  These are library results,
 not checks of this paper's statements.\par}
 
 {\sloppy Every identity stated above was checked numerically on random inputs by the accompanying
@@ -7047,7 +7090,10 @@ spectrum, the Fourier bound, the Zeno and Kac values, cloning, braid and window 
 \texttt{check\_unification.py} (Section~\ref{sec:unification}: six groups), with own checks of the one-edge gate,
 gflow neighbourhoods, five-qubit and Steane syndromes, the dephasing counterexample, the shift and shot
 numbers, the slope table from the field content, the three fits, the inconsistency of $C=B$, the lifetime
-and seesaw benchmarks, the clock and heat numbers and the ball volume and area expansions).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
+and seesaw benchmarks, the clock and heat numbers and the ball volume and area expansions) and \texttt{check\_frames.py} (Remark~\ref{rem:exframe},
+Proposition~\ref{prop:cpcoin}; own checks of the frame identity, the example states, the pulse numbers, the
+rotating-frame cancellation, the kernel bound and, by optimisation over product states, the maximality
+of the symmetric coin).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
 \ref{thm:product}; Propositions~\ref{prop:relative}, \ref{prop:solder}, \ref{prop:pairsu3}, \ref{prop:angle38},
 \ref{prop:universal}, \ref{prop:cosmo}, \ref{prop:solderunique}, \ref{prop:centre}, \ref{prop:superselection} (with its
 classification of weights and free split), \ref{prop:rtclosed}, \ref{prop:symsector}, \ref{prop:subops},
@@ -7809,6 +7855,8 @@ contributions.
 \bibitem{ub:faulkner} T. Faulkner, M. Guica, T. Hartman, R.~C. Myers and M. Van Raamsdonk, Gravitation from entanglement in holographic CFTs, JHEP \textbf{03}, 051 (2014), arXiv:1312.7856.
 
 \bibitem{ub:jac16} T. Jacobson, Entanglement equilibrium and the Einstein equation, Phys.\ Rev.\ Lett.\ \textbf{116}, 201101 (2016), arXiv:1505.04753.
+
+\bibitem{m4:McKay} D.~C.~McKay, C.~J.~Wood, S.~Sheldon, J.~M.~Chow, and J.~M.~Gambetta, Efficient $Z$ gates for quantum computing, Phys.\ Rev.\ A \textbf{96}, 022330 (2017).
 
 \bibitem{CLT74} J.~M.~Cornwall, D.~N.~Levin, and G.~Tiktopoulos, Derivation of gauge invariance from high-energy unitarity bounds on the S matrix, Phys.\ Rev.\ D \textbf{10}, 1145 (1974); Erratum \textbf{11}, 972 (1975).
 

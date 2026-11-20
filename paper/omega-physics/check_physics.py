@@ -2823,4 +2823,59 @@ okb3 &= all((N_ - 3)*(N_ - 4)//2 == N_*(N_ - 1)//2 - 3*N_ + 6 for N_ in range(3,
 print(f"     unification: slope table from content, fits (0.1180, 0.1177, complex bidoublet), C = B inconsistent, lifetimes and seesaw, instanton action, clock and heat numbers, ball volume and area expansions: {bool(okb3)}")
 results.append(bool(okb3))
 
+# =====================================================================================
+# 53. (Round 30) frame updates, pulses, ordered pulse kernels, symmetric coin walk
+spf = importlib.util.spec_from_file_location("check_frames", os.path.join(here, "check_frames.py"))
+mf = importlib.util.module_from_spec(spf); buf = io.StringIO()
+try:
+    with contextlib.redirect_stdout(buf):
+        spf.loader.exec_module(mf); mf.check_pulses(); mf.check_applications()
+    okf = True
+except Exception as ex:
+    okf = False; print("     check_frames error:", repr(ex))
+print(f"     check_frames.py: pulse and walk groups passed: {okf}")
+results.append(okf)
+Rz = lambda l: _expm(-1j*l*Zp/2); Rphi = lambda ph, th: _expm(-1j*th*(np.cos(ph)*Xp + np.sin(ph)*Yp)/2)
+okp = True
+for _ in range(20):
+    ph, th, la = rng.uniform(-3, 3, 3); okp &= np.allclose(Rphi(ph, th) @ Rz(la), Rz(la) @ Rphi(ph - la, th))
+plus_ = np.array([1, 1])/np.sqrt(2)
+okp &= np.allclose(Rphi(0, np.pi/2) @ Rz(np.pi/2) @ plus_, np.exp(-1j*np.pi/4)*np.array([1, 0]))
+okp &= np.allclose(Rphi(-np.pi/2, np.pi/2) @ plus_, [1, 0]) and np.allclose(Rphi(np.pi/2, np.pi/2) @ plus_, [0, 1])
+okp &= abs(25e-9*5e9 - 125) < 1e-9 and abs(2*np.pi*1e7*25e-9 - np.pi/2) < 1e-12 and abs(abs(Rphi(0, np.pi/2)[1, 0])**2 - .5) < 1e-12
+w0 = 2.3; Hl = w0*Zp/2 + 0.4*Xp; tt0 = 0.7; hh0 = 1e-6
+Vf = lambda t: _expm(1j*w0*t*Zp/2); Vd = (Vf(tt0 + hh0) - Vf(tt0 - hh0))/(2*hh0)
+Hr = Vf(tt0) @ Hl @ Vf(tt0).conj().T + 1j*Vd @ Vf(tt0).conj().T
+okp &= np.allclose(Hr, Vf(tt0) @ (0.4*Xp) @ Vf(tt0).conj().T, atol=1e-8)
+def Kt(A, t):
+    ev_, U_ = np.linalg.eigh(A)
+    return A if t == 0 else (U_*((np.exp(1j*t*ev_) - 1)/(1j*t))) @ U_.T
+for _ in range(50):
+    Ms = [rng.normal(size=(3, 3)) for _ in range(3)]; Ms = [(m + m.T)/np.linalg.norm(m + m.T) for m in Ms]
+    for t in (0.05, 0.1, 0.5, -0.3):
+        okp &= abs(np.trace(Kt(Ms[0], t) @ Kt(Ms[1], t) @ Kt(Ms[2], t)).real - np.trace(Ms[0] @ Ms[1] @ Ms[2])) <= 1.25*t*t + 1e-12
+from scipy.optimize import minimize as _minimize
+def ge(c):
+    a_ = np.abs(c)
+    best = 0
+    for _ in range(12):
+        t0 = rng.uniform(0, np.pi/2, a_.size)
+        f_ = lambda t: -abs(sum(a_[k]*np.sin(t[k])*np.prod(np.cos(np.delete(t, k))) for k in range(a_.size)))
+        r_ = _minimize(f_, t0, method='L-BFGS-B', bounds=[(0, np.pi/2)]*a_.size)
+        best = max(best, -r_.fun)
+    return 1 - best**2
+def walk_(p, n, coin):
+    st_ = np.zeros((2, p), complex); st_[:, 0] = coin
+    for _ in range(n):
+        l_, r_ = (st_[0] + st_[1])/np.sqrt(2), (st_[0] - st_[1])/np.sqrt(2); st_ = np.array([np.roll(l_, -1), np.roll(r_, 1)])
+    return st_.ravel()
+sym_ = np.array([1, 1j])/np.sqrt(2)
+for p_, n_ in ((2, 3), (3, 2), (3, 4)):
+    gs = ge(walk_(p_, n_, sym_))
+    for _ in range(3):
+        cn = rng.normal(size=2) + 1j*rng.normal(size=2); cn /= np.linalg.norm(cn)
+        okp &= gs >= ge(walk_(p_, n_, cn)) - 1e-6
+print(f"     frame identity R_phi R_z = R_z R_(phi - lambda), example states, pulse numbers, rotating-frame cancellation, kernel bound 5/4 t^2, symmetric coin maximises geometric entanglement (optimised): {bool(okp)}")
+results.append(bool(okp))
+
 print(f"\nALL CHECKS PASSED: {all(results)}  ({sum(results)}/{len(results)})")
