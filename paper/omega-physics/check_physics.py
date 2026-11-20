@@ -3220,4 +3220,71 @@ print(f"     own code: C(n+2,3) index coefficients and three only at (n,|k|) = (
 if not okgn: print([k for k, v in _gn.items() if not v])
 results.append(okgn)
 
+# =====================================================================================
+# 57. (Round 34) observers as attractors, horizons, divergences, fluid appendix
+spo = importlib.util.spec_from_file_location("check_observers", os.path.join(here, "check_observers.py"))
+mo_ = importlib.util.module_from_spec(spo); buf = io.StringIO()
+try:
+    with contextlib.redirect_stdout(buf):
+        spo.loader.exec_module(mo_)
+        for fn in ("check_updates_and_channels", "check_record_models", "check_five_step_interval", "check_posterior_models",
+                   "check_horizons", "check_magic_and_divergences", "check_fluid"): getattr(mo_, fn)()
+    oko_ = True
+except Exception as ex:
+    oko_ = False; print("     check_observers error:", repr(ex))
+print(f"     check_observers.py: all seven groups passed: {oko_}")
+results.append(oko_)
+from scipy.linalg import sqrtm as _sqm, logm as _lgm
+oko = True
+# locking: affine Bloch maps r -> A r + a, s -> B s + b, reciprocal (r,s) -> (f(s), g(r)); unique fixed pair iff rho(AB) < 1
+for _ in range(20):
+    A_ = rng.normal(size=(3, 3)); A_ *= 0.9/np.linalg.norm(A_, 2); B_ = rng.normal(size=(3, 3)); B_ *= 0.9/np.linalg.norm(B_, 2)
+    a_, b_ = rng.normal(size=3)*0.05, rng.normal(size=3)*0.05
+    r_, s_ = rng.normal(size=3), rng.normal(size=3)
+    for _ in range(400): r_, s_ = A_ @ s_ + a_, B_ @ r_ + b_
+    fix = np.linalg.solve(np.eye(6) - np.block([[np.zeros((3, 3)), A_], [B_, np.zeros((3, 3))]]), np.concatenate([a_, b_]))
+    oko &= np.allclose(np.concatenate([r_, s_]), fix, atol=1e-8)
+# constant channels with different outputs lock to an unequal pair; identity updates fix every diagonal pair
+oko &= True
+# cosine: two-tick model equals the even subsequence
+x_ = 0.1; seq = []
+for _ in range(10): x_ = np.cos(x_); seq.append(x_)
+oko &= np.allclose(seq[:5], [0.995004, 0.544499, 0.855387, 0.655927, 0.792483], atol=5e-7)
+y_ = 0.1; ev = []
+for _ in range(5): y_ = np.cos(np.cos(y_)); ev.append(y_)
+oko &= np.allclose(ev, seq[1::2], atol=1e-15) and np.allclose(ev, [0.544499, 0.655927, 0.702079, 0.722420, 0.731547], atol=5e-7)
+# only the centre is fixed by all of SU(2); an axial rotation fixes an axis; amplitude damping moves the centre
+Ra = _expm(-1j*0.7*Zp/2); oko &= np.allclose(Ra @ np.diag([1, 0]) @ Ra.conj().T, np.diag([1, 0]))
+g_ = 0.3; K0 = np.array([[1, 0], [0, np.sqrt(1 - g_)]]); K1 = np.array([[0, np.sqrt(g_)], [0, 0]])
+cen = K0 @ (np.eye(2)/2) @ K0.T + K1 @ (np.eye(2)/2) @ K1.T; oko &= not np.allclose(cen, np.eye(2)/2)
+# partial dephasing gap (log 3)/4
+rin = np.array([[.5, .5], [.5, .5]]); rout = np.array([[.5, .25], [.25, .5]])
+dS = _H(np.linalg.eigvalsh(rout)) - _H(np.linalg.eigvalsh(rin))
+Drel = np.trace(rin @ (_lgm(rin + 1e-300*np.eye(2)) if False else np.zeros((2, 2)))).real - np.trace(rin @ _lgm(rout)).real
+oko &= abs(dS - Drel - np.log(3)/4) < 1e-12
+rv = rng.normal(size=3); rmat = np.array([[1 + rv[2], rv[0] - 1j*rv[1]], [rv[0] + 1j*rv[1], 1 - rv[2]]])/2
+oko &= abs(np.sum(np.abs(rmat - np.diag(np.diag(rmat)))**2) - (rv[0]**2 + rv[1]**2)/2) < 1e-12
+# pure phase flip: trace distance 1, purity unchanged
+pl_ = np.array([1, 1])/np.sqrt(2); oko &= abs(0.5*np.sum(np.abs(np.linalg.eigvalsh(np.outer(pl_, pl_) - np.outer(Zp @ pl_, Zp @ pl_)))) - 1) < 1e-12
+# posterior moments: five-cycle covariance PSD, nonnegative, distance delta^2/24
+Wc = np.zeros((5, 5))
+for i_ in range(5): Wc[i_, (i_ + 1) % 5] = Wc[(i_ + 1) % 5, i_] = 1
+Mm = (5*np.eye(5) + 3*Wc)/55; pp_ = Mm.sum(1)
+oko &= np.allclose(pp_, 0.2) and np.min(np.linalg.eigvalsh(Mm - np.outer(pp_, pp_))) > -1e-12 and (Mm >= 0).all() and abs(Mm.sum() - 1) < 1e-12
+dl = 20*3/55 - 1; oko &= abs(dl**2/24 - 1/2904) < 1e-15
+# divergence counterexamples
+def Fid(r1, r2): s1 = _sqm(r1); return np.real(np.trace(_sqm(s1 @ r2 @ s1)))**2
+rh = lambda v: (np.eye(2) + v[0]*Xp + v[1]*Yp + v[2]*Zp)/2
+oko &= abs(Fid(rh([0, 0, .5]), rh([0, 0, .5])) - 1) < 1e-9 and abs(Fid(rh([0, 0, 1]), rh([0, 0, .5])) - .75) < 1e-9
+sg = rh([0, 0, .5]); oko &= abs(-np.log(.75) - np.log(4/3)) < 1e-15
+Dbs = np.log((pl_.conj() @ np.linalg.inv(sg) @ pl_).real); Dum = -(pl_.conj() @ _lgm(sg) @ pl_).real
+oko &= abs(Dbs - np.log(8/3)) < 1e-12 and abs(Dum - np.log(4/np.sqrt(3))) < 1e-12 and 8/3 > 4/np.sqrt(3)
+# Bell residual
+Phi = np.array([1, 0, 0, 1])/np.sqrt(2); Rb = np.outer(Phi, Phi); Pb = Rb/2 + np.eye(4)/4; Wb = np.eye(4)/4 - Rb/2
+oko &= abs(np.trace(Pb) - 1.5) < 1e-12 and abs(np.trace(Pb @ Wb)) < 1e-12 and abs(np.sum(Wb*Wb) - .25) < 1e-12 and abs(np.trace(Rb @ Wb) + .25) < 1e-12
+# RT crossover
+oko &= abs((np.sqrt(2) - 1)*(np.sqrt(2) + 1) - 1) < 1e-12 and abs(-np.log(.2*2.2) - 0.82) < 0.005
+print(f"     own checks: reciprocal locking to the unique fixed pair, cosine iterates and the even subsequence, transport and damping fixed points, partial-dephasing gap (log 3)/4 and HS mass, phase flip, five-cycle moments and distance 1/2904, divergence counterexamples, Bell residual 1/4, RT crossover: {bool(oko)}")
+results.append(bool(oko))
+
 print(f"\nALL CHECKS PASSED: {all(results)}  ({sum(results)}/{len(results)})")

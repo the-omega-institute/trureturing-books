@@ -105,7 +105,8 @@ local windows of several observers glue iff a positive semidefinite completion e
 patterns iff every clique is positive), which still gives neither a joint state nor joint outcomes.
 In the velocity space of states, the squared reciprocal Lorentz factors of a qubit's pairs, defined by
 their concurrences, sum to at most that of its marginal, $\sum_B\gamma_{AB}^{-2}\le\gamma(r_A)^{-2}$, with deficit the residual three-tangle.
-Observers can compute by choosing local test axes (left transports) on a conditioned graph resource, and
+Two observers coupled by reciprocal qubit channels lock to a unique pair exactly when the composed Bloch
+map has spectral radius below one, which gives no consensus of estimates in general.  Observers can compute by choosing local test axes (left transports) on a conditioned graph resource, and
 round-trip-closed sub-structures correct errors exactly under the compressed Knill--Laflamme conditions.
 With an assumed intermediate Pati--Salam spectrum the equal couplings are fitted at
 $9.7\times10^{16}$\,GeV with a right-handed scale $1.3\times10^{10}$\,GeV (a fit, not a prediction), and linearised Einstein
@@ -274,6 +275,8 @@ algebra (Hypotheses~U and~A, Section~\ref{sec:closedreg}).
 a fusion space (Section~\ref{sec:attention}).
 \item[{[Sb]}] Separate colour, weak and hypercharge bundles, a scalar bridge and a common normalisation
 (Section~\ref{sec:triality}).
+\item[{[Ou]}] Synchronous reciprocal observer updates by specified channels; [Pl]: a predictive learning task fixed
+in advance; [Lp]: a common low-entropy past (Sections~\ref{sec:observers}, \ref{sec:horizons}).
 \item[{[Ix]}] An internal spin space with a twist of charge three linked to one family; [Zw]: the reading of the
 invisible $Z$ width as a generation count (Section~\ref{sec:generations}).
 \item[{[KK]}] A fixed connection metric on the total space with one gravitational normalisation; [Sn]: a
@@ -416,8 +419,10 @@ system, many systems, sub-structures of every dimension, and the geometry of sta
 (Sections~\ref{sec:closedreg}--\ref{sec:outcomes}) concerns observers inside the structure: a closed universe with internal
 clocks; finite memory (Gram windows, the arrow of forgetting, erasure and consensus); and single outcomes as
 bounded martingales with finite-tick certification, preceded by computation by local measurements
-and error-correcting sub-structures.  Part~III (Section~\ref{sec:bounds}) gives the bounds: speed limits with their
-sharp constants, the Tsirelson bound from a positive Gram completion, and a rapidity--entanglement budget.  Part~IV (Sections~\ref{sec:eventspace}--\ref{sec:couplings}) contains the space of events,
+and error-correcting sub-structures, observers as attractors and finite-access horizons.  Part~III (Sections~\ref{sec:bounds}--\ref{sec:divergences}) gives the bounds: speed limits with their
+sharp constants, the Tsirelson bound from a positive Gram completion, a rapidity--entanglement budget,
+and divergences, barycentres and magic measures.  An appendix collects further worked material (the Lamb
+vector and closure under restricted observation).  Part~IV (Sections~\ref{sec:eventspace}--\ref{sec:couplings}) contains the space of events,
 fields of structures, the variable radius, the round four-sphere target from a pair, topological
 particles with the Skyrme term, and the
 three-structure model, unification scales with a tick budget and a conditional route from cap
@@ -843,6 +848,7 @@ Uncertainty relation & equality (Thm.~\ref{thm:unc}) & none\\
 One clock; tensor product & Thm.~\ref{thm:oneclock}; or Thm.~\ref{thm:product}, Cor.~\ref{cor:ampmult}; Prop.~\ref{prop:avg} & clock-read factors with [Bil$_\cL$], [Span], [Loc], [O], [C2], [N], C1(b); or C0, C1, [Span], and C2 for $N\ge3$\\
 All unit vectors are states; all unitaries are operations & Thm.~\ref{thm:comp} & C0--C2, [Span]; C3 for operations\\
 Measurement update & conditional state $K_a\psi/\lVert K_a\psi\rVert$ (Prop.~\ref{prop:relative}, Thm.~\ref{thm:instruments}) & C0--C3, Convention T\\
+Observers, horizons, divergences & Reciprocal locking iff spectral radius $<1$ (Thm.~\ref{ob:locking}); the maximally mixed state is the unique state fixed by all left transports (Prop.~\ref{ob:noise}); pinching entropy and trace processing (Prop.~\ref{ob:pinching}); window determinacy and finite prediction (Props.~\ref{ob:effectwindow}, \ref{ob:predictive}); fidelity and relative-entropy data processing, stabiliser geometry (Props.~\ref{ob:fidelity}, \ref{ob:stabiliser}) & [Ou]; C0--C3; A, E for horizons\\
 Computation & Measurement-based universality with gflow corrections (Thms.~\ref{cp:determinism}, \ref{cp:universal}); exact recovery iff compressed products are scalar (Thm.~\ref{cp:kl}); five qubits minimal (Cor.~\ref{cp:mincode}); exact parameter shift (Thm.~\ref{cp:shift}) & C0--C3, [T], [Sub]; [Ac]; anyons: [Lq]\\
 Three generations & An input: the index construction gives three families only with charge three (Cor.~\ref{gn:conditional}); the other mechanisms examined fail (Rem.~\ref{rem:gnnogo}) & G; [Ix]\\
 Three structures & Triality: exactly three real irreducible eight-dimensional modules of the octonionic related-triples group (Thm.~\ref{tr:main}); no $\mathfrak{su}(3)\oplus\mathfrak{su}(2)$ in $\mathfrak{spin}(8)$ (Prop.~\ref{tr:obstruction}); one-loop matching with Standard Model content fails ($a\simeq4.05$ vs $5.51$) & G; [Sb]\\
@@ -1905,7 +1911,8 @@ of events.
 \paperpart{Part II.  Observers inside}
 \noindent This part treats what an observer inside the structure can know and record.  It contains a
 closed universe with internal clocks, finite memory with erasure and consensus, computation by local
-tests (attention) with error-correcting sub-structures, and single outcomes.
+tests (attention) with error-correcting sub-structures, observers as attractors (locking, noise channels,
+records), horizons and finite-access observers, and single outcomes.
 
 %=====================================================================================
 \section{The closed universe: a global singlet and internal clocks}\label{sec:closedreg}
@@ -2611,7 +2618,8 @@ gives a supporting affine bound, hence the minimiser.
 \end{proof}
 
 \begin{remark}[a unique barycentre does not single out a pointer basis]\label{rem:fmaxisbary}
-For commuting inputs with eigenvalues $a_{ji}$, $s_i=\sum_jw_j\sqrt{a_{ji}}$, the barycentre has eigenvalues $s_i^2$ (normalised on the trace-one
+Positive definiteness in Theorem~\ref{thm:fmbary} is needed: orthogonal rank-one inputs admit a continuum of
+minimisers on the cone and on the trace-one slice (Example~\ref{ob:singularbarycentre}).  For commuting inputs with eigenvalues $a_{ji}$, $s_i=\sum_jw_j\sqrt{a_{ji}}$, the barycentre has eigenvalues $s_i^2$ (normalised on the trace-one
 slice); a simple spectrum fixes the common eigenbasis.  But with all inputs $\mathbf1/d$ the unique barycentre is $\mathbf1/d$
 and every basis is an eigenbasis: uniqueness of the barycentre does not select a basis, and objective
 records need a recording channel (Theorem~\ref{thm:fmpointer}).  Scalar inputs $1,9$ with equal weights give
@@ -3156,6 +3164,1476 @@ qubit with idle spectators keeps the derivative $-\sin\theta$.  (vii) The three-
 does not trivialise knots: the trefoil and the unknot have $9$ and $3$ colourings.  (viii) Rack colourings are not
 Markov invariant without idempotence: the shift rack gives $3\to0$.
 \end{remark}
+
+%=====================================================================================
+\section{Observers as attractors: mutual locking, noise channels and records}\label{sec:observers}
+
+
+
+When do two observers' models converge to a stable pair, and which
+distinctions survive noisy comparison or restriction of access?
+Reciprocal qubit channels lock from every initial pair exactly when
+the spectral radius of their composed Bloch matrix is below one.
+An ordered product controls retention under successive dephasings.
+At a horizon, accessible tests define equivalence classes of global states.
+These mechanisms supplement the Born reading of Theorem~\ref{thm:born}
+and the restriction and Gram-window constructions of
+Proposition~\ref{prop:curestrict} and Theorem~\ref{thm:fmschur}.
+The transport is the noncommutative case of Paper I,
+\cite[Thm.~3.1]{PaperI}.
+
+\smallskip\noindent\emph{Relation to earlier sections.}  This section and the next two use, and do not repeat,
+the Gram windows, erasure criterion, redundancy and barycentre of Section~\ref{sec:finitemem}, the restriction,
+modular flow and thermal calibration of Section~\ref{sec:closedreg}, the codes of Section~\ref{sec:attention} and
+the speed limits and heat bounds of Section~\ref{sec:bounds}; where they reuse a number (the cosine fixed point,
+the Landauer bound) they cite it.
+
+Write $\boldsymbol{\sigma}=(X,Y,Z)$ for the three Pauli matrices and
+$\rho(r)=(I+r\cdot\boldsymbol{\sigma})/2$ for $r$ in the closed Bloch
+ball $B$. Multiplying the Pauli matrices gives
+$(u\cdot\boldsymbol{\sigma})(v\cdot\boldsymbol{\sigma})
+=(u\cdot v)I+i(u\times v)\cdot\boldsymbol{\sigma}$.
+Thus for $n\in S^2$ the test $P_n=\rho(n)$ reads
+$p_n(r)=\tr(P_n\rho(r))=(1+n\cdot r)/2$, which on pure inputs is $\beta$.
+The eigenvalues of $\rho(r)-\rho(s)$ are $\pm\|r-s\|/2$, so the trace
+distance is $T(\rho(r),\rho(s))=\tfrac12\|\rho(r)-\rho(s)\|_1=\|r-s\|/2$.
+A trace-preserving completely positive map is called a channel.
+
+\subsection{Reciprocal updates and stability}\label{ob:dynamics}
+
+\begin{remark}[Observer update hypothesis]\label{ob:observermodel}
+A model of another observer lives in a prescribed state space.
+At each tick both observers use their previous estimates, with updates
+$F\colon Y\to X$ and $G\colon X\to Y$. For physical quantum updates
+we take $F,G$ to be channels. Memory-free stimuli, finite records,
+retained predictive registers and adaptive choices of intervention
+give distinct instances once we specify the register, readout and update.
+Interpreting a material system as an observer presupposes such a model.
+\end{remark}
+
+\begin{theorem}[Reciprocal channel locking]\label{ob:locking}
+On nonempty complete metric spaces let $F,G$ have Lipschitz bounds
+$a,b\ge0$ with $q=ab<1$. The synchronous update
+$H(x,y)=(F(y),G(x))$ has a unique fixed pair $(x_*,y_*)$.
+In the maximum product metric the error at tick $2k$ is at most $q^k$
+times the initial error. At tick $2k+1$ the bound acquires a factor
+$\max(a,b)$. If $a,b>0$, the metric $\max(d_X/\sqrt a,d_Y/\sqrt b)$
+gives a one-tick bound $\sqrt q$.
+
+For qubit channels write $F(r)=Ar+u$, $G(s)=Bs+v$.
+A fixed pair always exists. All initial pairs converge to the same
+pair exactly when $\operatorname{spr}(AB)<1$, where $\operatorname{spr}$
+is spectral radius. In that case $x_*=(I-AB)^{-1}(Av+u)$ and $y_*=G(x_*)$.
+The optimal uniform ratio at tick $2k$ between two trajectories in
+the maximum trace metric is $\max(\|(AB)^k\|_{\rm op},\|(BA)^k\|_{\rm op})$.
+For two centred dephasings with transverse factors of modulus below
+one, the threshold holds precisely for nonparallel axes. For complete
+pinchings at axes $n,m$, the even-tick ratio is $|n\cdot m|^{2k-1}$ for $k\ge1$.
+\end{theorem}
+\begin{proof}
+The even update is $(FG,GF)$ and has Lipschitz bound $q$. Its iterates
+have consecutive distances bounded by a geometric sequence, so they
+are Cauchy. Continuity gives a fixed point whose uniqueness follows
+because two fixed points would have distance at most $q$ times their
+distance. The even update commutes with $H$, so $H$ preserves its
+unique fixed point. Apply the even and odd Lipschitz bounds to that
+point. Dividing each outgoing bound by its square root gives the
+weighted bound. At $q=0$ the even update is constant, with $q^0=1$.
+
+Affinity follows from linearity on density matrices. The Ces\`aro
+averages of an orbit of $FG$ stay in $B$ and have a convergent
+subsequence. Under $FG$ the $N$th average changes by the difference of
+the $N$th and zeroth iterates divided by $N$. The subsequential limit
+is therefore fixed, and applying $G$ gives a fixed pair.
+The spectra of $AB$ and $BA$ agree since elimination in either order
+in $\bigl(\begin{smallmatrix}I&zA\\B&I\end{smallmatrix}\bigr)$ gives
+$\det(I-zAB)=\det(I-zBA)$. Jordan form gives convergence of the
+powers to zero when all eigenvalues have modulus below one. Conversely,
+differences of initial states in the ball span every real direction
+and evolve by these powers. Their convergence to zero implies convergence
+of the powers on a basis and hence on complex eigenvectors, forcing
+each eigenvalue modulus below one. Solving the affine equation yields
+$x_*$. All singular-vector directions are available as differences
+in the ball, which gives the sharp norm formula.
+
+For dephasing about $n$, the Bloch matrix is $N+c(I-N)$ with
+$N=nn^{\mathsf T}$ and $|c|<1$ (Proposition~\ref{ob:noise}).
+Equality of input and output norm holds exactly on its axis.
+Equality for the two-step product forces a common nonzero axial
+vector. Compactness of the unit sphere gives strict contraction in
+norm for nonparallel axes, and parallel axes share a fixed line.
+Writing the second axial projection as $M=mm^{\mathsf T}$ gives
+$NM=(n\cdot m)nm^{\mathsf T}$ and
+$(NM)^k=(n\cdot m)^{2k-1}nm^{\mathsf T}$, including orthogonal axes.
+\end{proof}
+
+\begin{example}[Boundary and comparison of clocks]\label{ob:cosine}
+Identity updates have every diagonal pair fixed and exchange unequal
+starting coordinates indefinitely. Constant channels with different
+output states lock to an unequal pair. For the scalar model
+$f(t)=\cos t$, $g=f\circ f$, the fixed pair is $(\theta_*,\theta_*)$,
+where $\theta_*=0.73908513\ldots$ satisfies $\cos\theta_*=\theta_*$.
+On $[0,1]\setminus\{\theta_*\}$ single ticks alternate sides and
+two-tick rounds approach monotonically from their starting side.
+Their local signed factors are $-\sqrt{1-\theta_*^2}$ and $1-\theta_*^2$.
+From $0.1$ the first five ticks give
+$0.995004,0.544499,0.855387,0.655927,0.792483$ to six places.
+The first five even-tick rounds give
+$0.544499,0.655927,0.702079,0.722420,0.731547$.
+\end{example}
+\begin{proof}
+The channel examples follow by substitution. The intermediate value
+theorem gives $\theta_*\in(0,1)$. The image of $g$ is $[\cos1,1]$,
+since $\cos(\R)=[-1,1]$ and the outer cosine is even and decreases on
+$[0,1]$. Its derivative is $\sin(\cos t)\sin t$, bounded in
+absolute value by $\sin1<1$. The metric argument in
+Theorem~\ref{ob:locking} gives uniqueness and convergence from any real
+initial value. Even and odd subsequences of $f$ share the limit by
+$g^k=f^{2k}$ and continuity. On $[0,1]$, $f$ is strictly decreasing,
+injective and maps into the same interval. Any nonfixed orbit there
+has nonzero errors and changes their sign. Its two-tick map is
+increasing and strictly contracts the error, giving the monotone
+subsequences. Both $f$ and $g$ take $-\theta_*$ to $\theta_*$, so a
+real start can also hit in finite time. Difference quotients at
+$\theta_*$ give the two factors by the chain rule and yield the
+error-ratio limits on nonhitting orbits. Substitution gives the
+displayed values. A round counts two evaluations of $f$.
+\end{proof}
+
+\begin{proposition}[Descending information sets and revision]\label{ob:finiterevision}
+If $U(S)\subseteq S$ for every subset of a finite set, then
+$S_{k+1}=U(S_k)$ stabilizes by time $|S_0|$. The rule
+$R_P(S)=S\cap P$ for nonempty intersection and $R_P(S)=P$ otherwise
+can depend on order. For $S=\{0\},P=\{1,2\},Q=\{0,1\}$ the two orders
+give $\{1\}$ and $P$. A contextual update can select different fixed
+outputs even with the same input and evaluation rule. For example,
+the constant update to the context bit $b$ has unique fixed output $b$.
+Agreement under a prescribed readout $h$ holds for all choices of
+contextual fixed outputs exactly when $h$ is constant on their union.
+\end{proposition}
+\begin{proof}
+Before the first equality each step removes at least one element.
+Determinism preserves an equality once reached. The orders follow
+from $S\cap P=\varnothing$, $S\cap Q=S$ and $P\cap Q=\{1\}$.
+The constant update reaches $b$ in one step. Agreement means equality
+of $h$ on each pair of admissible fixed outputs, so it is constancy.
+\end{proof}
+
+\subsection{Channels and retained comparisons}\label{ob:channels}
+
+\begin{proposition}[Bloch action and sharp trace rates]\label{ob:noise}
+For unit $n$ put $r_\parallel=(n\cdot r)n$ and $r_\perp=r-r_\parallel$.
+The following channels have the stated actions and trace Lipschitz coefficients:
+\[
+\begin{array}{l|c|c}
+ & r\mapsto r' & \operatorname{Lip}_T\\ \hline
+\text{depolarization }(-1/3\le\lambda\le1)&\lambda r&|\lambda|\\
+\text{dephasing about }n\ (-1\le c\le1)&r_\parallel+c r_\perp&1\\
+\text{amplitude damping }(0\le\gamma\le1)
+ & \sqrt{1-\gamma}\,r_\perp+((1-\gamma)n\cdot r+\gamma)n
+ &\sqrt{1-\gamma}
+\end{array}
+\]
+Bit-flip noise of probability $p$ is the $X$-axis row with $c=1-2p$.
+At $\lambda<1$ the first map attracts every state to $I/2$.
+The second fixes the axis, and multiplies the transverse component
+after $k$ ticks by $c^k$. At $c=1$ it is the identity and at $c=-1$
+it reverses the transverse components. For $\gamma>0$ the third
+attracts every state to $P_n$, with longitudinal distance to the pole
+multiplied by $(1-\gamma)^k$. Dephasing commutes with phase rotations
+about its selected axis. The clock's scalar action on representatives
+descends to the identity on density states. The unique state fixed by
+every left transport is $I/2$.
+\end{proposition}
+\begin{proof}
+Depolarization uses Pauli conjugations with identity weight
+$(1+3\lambda)/4$ and weight $(1-\lambda)/4$ for each other Pauli.
+These are also the eigenvalues of the image of the normalized
+maximally entangled projector under the extended map, since the
+four Pauli translates of its vector form an orthonormal basis.
+Outside the stated range positivity of this image fails.
+Dephasing is
+$((1+c)\rho+(1-c)(n\cdot\boldsymbol{\sigma})\rho(n\cdot\boldsymbol{\sigma}))/2$.
+Conjugation fixes $r_\parallel$ and reverses $r_\perp$ by the Pauli identity.
+In the eigenbasis of $n\cdot\boldsymbol{\sigma}$, damping uses
+$K_0=\operatorname{diag}(1,\sqrt{1-\gamma})$ and
+$K_1=\sqrt\gamma|0\rangle\langle1|$. The sum $\sum_i K_i^*K_i=I$.
+The excited population is multiplied by $1-\gamma$ and the
+off-diagonal by $\sqrt{1-\gamma}$, giving the stated action.
+Differences cancel the translation. The largest singular values of the
+linear parts are the coefficients, attained by antipodal states along
+maximizing directions. Iteration gives the limits. Axial covariance
+follows from the scalar transverse action. Left transports induce
+all rotations by Theorem~\ref{thm:wigner}, so every $r\ne0$ moves
+under some transport.
+\end{proof}
+
+\begin{example}[Noise readouts]\label{ob:noisereadouts}
+With $n=e_z$ and $c=\lambda=\gamma=1/2$, the trace distances for
+$(P_z,P_x)$ and $(P_x,P_{-x})$ respectively are
+$(1/\sqrt2,1)$ before the channels,
+$(\sqrt5/4,1/2)$ after dephasing,
+$(\sqrt3/4,1/\sqrt2)$ after amplitude damping, and
+$(1/(2\sqrt2),1/2)$ after depolarization.
+An equal mixture of antipodal states along any axis gives $I/2$,
+with each single-arm probability $1/2$, so these probabilities leave
+the preparation axis undetermined. A single nontrivial axial
+rotation fixes every axial state, and amplitude damping moves $I/2$
+when $\gamma>0$.
+\end{example}
+\begin{proof}
+Subtract the images in Proposition~\ref{ob:noise} and divide their
+Euclidean distance by two. The antipodal Bloch vectors sum to zero.
+The last claims follow by applying the channel formulas.
+\end{proof}
+
+\begin{proposition}[Positivity at a fixed pure pole]\label{ob:pole}
+For $0\le a\le1$ the affine map
+$(x,y,z)\mapsto(\ell x,\ell y,az+1-a)$ preserves $B$ exactly when
+$\ell^2\le a$. Its trace-preserving extension is then completely
+positive. For $a=e^{-t/T_1}$ and $\ell=e^{-t/T_2}$ at positive time
+with positive finite decay times, the condition is $T_2\le2T_1$.
+Amplitude damping followed by independent exponential dephasing gives
+$T_2^{-1}=(2T_1)^{-1}+T_\varphi^{-1}$, with $T_\varphi=\infty$ at equality.
+For damping with $a=1-\gamma>0$ and $u'=au+1-a$, the squared
+transverse metric ratio for axial profile $\varphi$ is
+$a\varphi(u')/\varphi(u)$. The SLD and RLD profiles $1$ and
+$(1-u^2)^{-1}$ give $a$ and $(1+u)/(1+u')\le1$, respectively,
+on $-1<u<1$. The latter tends to one as $u\uparrow1$.
+\end{proposition}
+\begin{proof}
+At fixed $z\in[-1,1]$ the largest squared output norm is
+$\ell^2(1-z^2)+(az+1-a)^2$. Its deficit from one is
+$(1-z)[a(2-a+az)-\ell^2(1+z)]$. As $z\uparrow1$ the bracket tends
+to $2(a-\ell^2)$, proving necessity. If $\ell^2\le a$, the bracket
+is at least $a(1-a)(1-z)$. For $a>0$, follow damping by dephasing
+of factor $\ell/\sqrt a\in[-1,1]$. At $a=0$ the condition forces a reset.
+Comparing exponential exponents gives the decay-time condition and
+multiplying the independent factors adds the rates. For the metric
+ratio use the squared transverse factor $a$ and cancel via
+$1-u'=a(1-u)$. The RLD bound and limit follow from $u'\ge u$ and
+$u'\to1$.
+\end{proof}
+
+\begin{proposition}[Pinching, entropy and trace processing]\label{ob:pinching}
+For a finite orthogonal resolution $\{P_j\}$ of $I$ let
+$\Pi(\rho)=\sum_jP_j\rho P_j$. This is a channel and a
+Hilbert--Schmidt orthogonal projection onto the block diagonal matrices.
+In Hilbert--Schmidt norm,
+\[
+ \|A\|_{\rm HS}^2=\|\Pi A\|_{\rm HS}^2+\|A-\Pi A\|_{\rm HS}^2,\qquad
+ S(\Pi\rho)-S(\rho)=D(\rho\|\Pi\rho).
+\]
+Here $S$ and $D$ are von Neumann entropy and Umegaki relative entropy
+in nats. For $\rho_{k+1}=\Pi(U\rho_kU^*)$ with unitary $U$, the sum
+of $D(U\rho_kU^*\|\rho_{k+1})$ equals the net entropy increase.
+Every channel, including one changing dimension, satisfies
+$0\le T(\Phi\rho,\Phi\sigma)\le T(\rho,\sigma)\le1$.
+\end{proposition}
+\begin{proof}
+$\sum_jP_j^*P_j=I$ and $P_iP_j=\delta_{ij}P_j$ give the channel
+and idempotence. Distinct blocks are orthogonal under trace pairing.
+If $v\in\ker(\Pi\rho)$, then $\sum_j\|\sqrt\rho P_jv\|^2=0$,
+so $\sqrt\rho v=0$. Thus the support condition for $D$ holds.
+The logarithm of $\Pi\rho$ on its support is block diagonal, so
+its trace pairing with $\rho$ equals that with $\Pi\rho$.
+Substitution proves the identity and unitary invariance telescopes
+the sum. For traceless Hermitian $H$ one has
+$\sup_{0\le E\le I}\tr(EH)=\tr H_+=\|H\|_1/2$ by writing
+$H=H_+-H_-$ and taking the support projection of $H_+$ for equality.
+The adjoint of a channel sends effects to effects by positivity
+and unitality. Each difference of effect probabilities is at most one.
+\end{proof}
+
+\begin{example}[Partial dephasing entropy]\label{ob:partialentropy}
+For a pure $+X$ input and $Z$-dephasing at $c=1/2$ the output
+eigenvalues are $3/4,1/4$. The entropy increase exceeds the relative
+entropy to the output by $\tfrac14\log3$, since the input is in
+the $3/4$ eigenspace. With $c=0$ the discarded squared
+Hilbert--Schmidt mass is $(r_x^2+r_y^2)/2$, by the two off-diagonal entries.
+\end{example}
+
+\begin{proposition}[Averaged and ordered axes]\label{ob:axes}
+For weights $w_j\ge0$ summing to one and unit axes $n_j$, put
+$M=\sum_j w_jn_jn_j^{\mathsf T}$ and $K_j(c)=cI+(1-c)n_jn_j^{\mathsf T}$.
+The average channel at $0\le c<1$ has retention matrix $cI+(1-c)M$.
+If $M$ has eigenvalues $\mu_1\ge\mu_2\ge\mu_3$, then
+$(3\mu_1-1)/2\in[0,1]$ and the most retained line is unique
+exactly when $\mu_1>\mu_2$. Its retention reaches one precisely
+when the positively weighted axes are collinear. Equal weights on
+$\pm e_x,\pm e_y,\pm e_z$ give $M=I/3$ and retention $(1+2c)/3$.
+For $t\ge0$, independent averaging at $c=\cos\alpha$ gives
+$\lim_{\alpha\to0}[(1+2\cos\alpha)/3]^{\lfloor t/\alpha^2\rfloor}=e^{-t/3}$.
+The ordered products obey
+\[
+ [K_n(c),K_m(d)]=(1-c)(1-d)(n\cdot m)(nm^{\mathsf T}-mn^{\mathsf T}).
+\]
+For $c,d<1$ this vanishes exactly for parallel or orthogonal axes.
+If $r_0=r$, $r_j=K_j(c_j)r_{j-1}$, $0\le c_j\le1$ and
+$Q_j=I-n_jn_j^{\mathsf T}$, then
+\[
+ \sum_{j=1}^{L}(1-c_j)\|Q_jr\|^2
+ \le\frac{L(L+1)}2\bigl(\|r\|^2-\|r_L\|^2\bigr).
+\]
+\end{proposition}
+\begin{proof}
+$M$ is positive with trace one and is unchanged by axis sign
+reversals. Its Rayleigh quotient gives the top eigenline criterion
+and equality at one requires $|n_j\cdot r|=1$ for all positive
+weights and some unit $r$. Taylor expansion gives
+$\log((1+2\cos\alpha)/3)=-\alpha^2/3+O(\alpha^4)$. Multiplying by
+$\lfloor t/\alpha^2\rfloor$ and exponentiating gives the limit.
+Multiplication of rank-one matrices gives the commutator.
+Equality $nm^{\mathsf T}=mn^{\mathsf T}$ forces parallel axes by
+applying both sides to $n$.
+
+The step loss is $d_i=(1-c_i^2)\|Q_ir_{i-1}\|^2=
+\|r_{i-1}\|^2-\|r_i\|^2$ and $\|r_{i-1}-r_i\|^2\le d_i$.
+Write $Q_jr$ as the sum of $Q_jr_{j-1}$ and the $j-1$ projected
+previous increments. Cauchy--Schwarz and $1-c_j\le1-c_j^2$ bound its
+weighted squared norm by $j\sum_{i\le j}d_i$. Summing proves the result.
+A lower bound $\eta\|r\|^2$ on the left for every input to a length
+$L$ window gives squared contraction at most $1-2\eta/[L(L+1)]$
+for that window.
+\end{proof}
+
+\begin{example}[Order and directions]\label{ob:axisexamples}
+For $(n,m)=(e_x,(3,4,0)/5)$ and $(c,d)=(1/2,1/3)$ the
+$(1,2)$ entries of the ordered products are $8/25$ and $4/25$.
+For equal weights on $X$ and $Z$, $M$ has eigenvalues $(1/2,1/2,0)$.
+Starting at $I/2$, obtaining the positive result at both selective
+measurements produces the pure positive state of the last test,
+with joint probability $1/4$ in either order. The unread pinchings
+commute. For weights $(0.25,0.15,0.60)$ on $X,Y,Z$, the top
+eigenvalue is $0.60$, $(3\mu_1-1)/2=0.40$, and the gap is $0.35$.
+\end{example}
+\begin{proof}
+Multiply the matrices of Proposition~\ref{ob:axes}. The first
+selective probability is $1/2$ from the centre and the second is
+$1/2$ by the Born kernel for orthogonal axes.
+\end{proof}
+
+\subsection{Recorded dephasing and environment reuse}\label{ob:environments}
+
+\begin{proposition}[Repeated records and reset error]\label{ob:records}
+Let $V|i\rangle=|i\rangle E_i$ be an isometry with unit environment
+vectors $E_i$. Tracing its environment gives the Schur multiplier
+$\Phi(\rho)_{ij}=G_{ij}\rho_{ij}$ with $G_{ij}=\langle E_j,E_i\rangle$.
+With fresh records, $\Phi^N$ has multiplier $G_{ij}^N$.
+Choose one unit vector $R_i$ for each ray of the records and write
+$E_i=u_iR_i$ with $|u_i|=1$, equal $R_i$ within a ray.
+Let $\Pi$ pinch by ray, $U=\operatorname{diag}(u_i)$ and
+$q=\max_{[E_i]\ne[E_j]}|G_{ij}|$, with $q=0$ for an empty maximum.
+Then $q<1$ and for $N\ge1$,
+\[
+ \|\Phi^N(\rho)-U^N\Pi(\rho)U^{*N}\|_{\rm HS}
+ \le q^N\|\rho-\Pi(\rho)\|_{\rm HS}.
+\]
+For a single fixed joint unitary $W$, let $\tau_{k+1}=W\tau_kW^*$,
+$\rho_k=\tr_E\tau_k$, and let $R_\sigma$ denote the reset channel
+$\rho\mapsto\tr_E W(\rho\otimes\sigma)W^*$ for a fixed state $\sigma$.
+Writing $\delta_k=T(\tau_k,\rho_k\otimes\sigma)$ gives
+\[
+ T(\rho_N,R_\sigma^N\rho_0)\le\sum_{k<N}\delta_k.
+\]
+For $\sigma=p$ a pure projector, if $\tr(\tau_k(I\otimes p))=1-\epsilon_k$,
+then $\delta_k\le\sqrt{\epsilon_k}+\epsilon_k/2$.
+In particular a pure environment marginal forces a product with that
+marginal. When $R_\sigma=\Phi$ above, the accumulated
+Hilbert--Schmidt discrepancy from the fresh-record limit at tick $N$
+is at most $2\sum_{k<N}\delta_k+q^N\|\rho_0-\Pi\rho_0\|_{\rm HS}$.
+\end{proposition}
+\begin{proof}
+Tracing each matrix unit after $V$ gives $G_{ij}$.
+Products of multipliers give the powers. Within a ray the multiplier
+has phase $u_i\bar u_j$ and modulus one. Outside that block
+Cauchy--Schwarz gives strict inequality. Squaring and summing the
+off-block entries proves the norm bound. For the actual and reset
+trajectories, channel contraction gives
+$T(\rho_{k+1},R_\sigma\rho_k)\le\delta_k$, and telescoping by the
+triangle inequality gives the cumulative bound.
+For the pure reset bound set $P=I\otimes p$, $A=\sqrt{\tau_k}$
+and $C=PA$. Then $\|A-C\|_{\rm HS}^2=\epsilon_k$ and
+$\|C\|_{\rm HS}\le\|A\|_{\rm HS}=1$. The trace-norm
+Cauchy--Schwarz inequality applied to
+$AA^*-CC^*=(A-C)A^*+C(A-C)^*$ gives a bound $2\sqrt{\epsilon_k}$.
+Write $P\tau_kP=B\otimes p$. The positive matrix $\rho_k-B$
+has trace $\epsilon_k$ by tracing the other environment blocks.
+The triangle inequality gives the claimed half trace norm.
+The final assertion follows from $\|\cdot\|_{\rm HS}\le\|\cdot\|_1$.
+\end{proof}
+
+\begin{proposition}[Environment purity and coherence loss]\label{ob:purityloss}
+In the fresh pure record model let $p_i=\rho_{ii}$,
+$\sigma_E=\sum_i p_i|E_i\rangle\langle E_i|$, and
+$L=\tr(\rho^2)-\tr(\Phi(\rho)^2)$. Then
+\[
+ 0\le L=\sum_{ij}|\rho_{ij}|^2(1-|G_{ij}|^2)
+ \le 1-\tr(\sigma_E^2)=\sum_{ij}p_ip_j(1-|G_{ij}|^2).
+\]
+For pure $\rho$ equality holds in the upper bound. If $\sigma_E$ is
+pure, the records for occupied indices have the same ray, and the
+system update on its support is diagonal unitary conjugation.
+\end{proposition}
+\begin{proof}
+The formula for $\Phi$ gives the purity difference and multiplying
+the environment projectors gives the last equality. Positive
+two-by-two principal minors give $|\rho_{ij}|^2\le p_ip_j$,
+with equality for a pure input. If the last sum vanishes, every
+pair with $p_ip_j>0$ has overlap of modulus one. A zero $p_i$
+forces all $\rho_{ij}=0$, and on the occupied indices the common
+record ray leaves only phases.
+\end{proof}
+
+\begin{example}[Phase and retained records]\label{ob:recordsexamples}
+Take $E_0=v$, $E_1=-v$ for a unit vector $v$ and input $|+\rangle$.
+The input and output are orthogonal while both losses in
+Proposition~\ref{ob:purityloss} vanish. A retained environment can later
+decohere a system even if one intermediate environment state was pure.
+For the controlled flip on a binary environment, starting in
+$|+\rangle|0\rangle$, the first system output is $I/2$ and the
+second returns to $|+\rangle$. Fresh resets leave $I/2$ at the
+second tick. For a three-level environment, take the controlled
+permutations $(01)$ and $(012)$, with initial environment $|0\rangle$.
+Both send $0$ to $1$ at the first tick. At tick two the branches
+send $1$ to $0$ and $2$ respectively. The intermediate joint state is
+$|+\rangle|1\rangle$, and the two final marginals have purity $1/2$.
+These claims follow by applying the permutations to the two branch
+vectors. With orthogonal fresh record vectors and diagonal maximally
+mixed input, $L=0$ even when the environment loses purity.
+\end{example}
+
+\begin{remark}[Powers of a single unitary]\label{ob:dilation}
+Sz.-Nagy's power dilation theorem gives, for any Hilbert-space
+contraction $T_0$, an isometry $J$ and a unitary $W$ with
+$J^*W^kJ=T_0^k$ for every $k\ge0$
+\cite{obr:sznagy}. If $T_0^kx\to0$ for some nonzero $x$,
+a finite-dimensional total dilation is impossible.
+Indeed a finite-dimensional unitary has a subsequence of positive
+unbounded powers converging to the identity. To see this, select a
+convergent subsequence of powers with indices spaced increasingly
+far apart and take successive quotients. Compression on $x$ would
+then tend to $x$. For a one-step dilation of $c=4/5$ one can use
+$W=cI+(3i/5)X$ on $\C^2$. Its powers have entry
+$(W^k)_{00}=\cos(k\arccos c)$, with value $7/25$ at $k=2$ instead of
+$c^2=16/25$ and about $0.99934$ at $k=39$, where $c^{39}$ is about
+$0.00017$. For an explicit all-time scalar model on an enlarged
+space, apply the same two-dimensional rotation successively to
+a system slot and a fresh zero-amplitude slot. At tick $k$
+the system coefficient is $c^k$ and the total probability outside
+it is $1-c^{2k}$ by unitarity.
+\end{remark}
+
+\begin{proposition}[Exact prefixes with a fixed environment]\label{ob:prefix}
+Suppose powers of one unitary $W$ on $\C^2\otimes\C^d$ with initial
+environment $\sigma$ preserve both basis projectors and multiply
+the matrix unit $|0\rangle\langle1|$ by $\lambda^k$
+for $0\le k\le N$, $|\lambda|<1$. Then $N<d^2$.
+For any real $-1<\lambda<1$, $d=3$ suffices for $N=4$.
+If $d=3$ and $\sigma=I/3$ then $N=8$ is impossible for
+$0<|\lambda|<1$ real. At $\lambda=0$, $N=d^2-1$ is attainable
+with $\sigma=I/d$.
+\end{proposition}
+\begin{proof}
+Pure basis outputs imply that on $S=\operatorname{supp}\sigma$,
+$W^k(|j\rangle e)=|j\rangle T_{j,k}e$ for $0\le k\le N$.
+Indeed, spectrally expand $\sigma$ and project to the other system
+coordinate. The sum of positive weighted squared norms vanishes.
+On the span of $T_{j,k}S$ for $k<N$, the single map induced by
+$W$ sends $T_{j,k}e$ to $T_{j,k+1}e$. This is an isometry because
+it is the restriction of $W$ between vectors with the same system
+coordinate. Extend it to a unitary on the environment by completing
+orthonormal bases. Call the resulting unitaries $A,B$. For $N=0$
+the bound already holds. Otherwise $\lambda^k=\tr(A^k\sigma B^{-k})$
+on the prefix. Spectral expansion makes the right side a sum of
+powers of at most $d^2$ distinct unit-circle nodes.
+If there are $K$ such nodes and $N\ge K$, the monic polynomial
+vanishing on them annihilates their power sum at step zero,
+so the same polynomial must vanish at $\lambda$, a contradiction.
+
+For four steps set
+\[
+ D_0=\sqrt{\lambda^2+2\lambda+5},\quad
+ x_\pm=(\lambda-1\pm D_0)/4,\quad
+ p=(1+\lambda)/(5-3\lambda),\quad h=2\lambda/D_0 .
+\]
+One has $-1<x_-<x_+<1$, $0<p<1$ and $|h|<1$.
+The first bounds follow because the nodes are roots of
+$x^2-(\lambda-1)x/2-(\lambda+1)/4$,
+which is negative at zero and positive at both endpoints.
+The others follow from the displayed formulas and
+$D_0^2-4\lambda^2=(1+\lambda)(5-3\lambda)>0$.
+Put $\theta_\pm=\arccos x_\pm$, $\alpha=(\theta_++\theta_-)/2$,
+$\beta_0=(\theta_--\theta_+)/2$,
+$A=1\oplus e^{i\alpha Z}$ and
+$B=1\oplus e^{i\beta_0(hZ+\sqrt{1-h^2}X)}$ with
+$\sigma=\operatorname{diag}(p,(1-p)/2,(1-p)/2)$.
+The controlled unitary has multiplier $p+(1-p)g_k$ with
+$g_k=w\cos(k\theta_+)+(1-w)\cos(k\theta_-)$ and $w=(1+h)/2$.
+The formula follows by expanding both exponentials, since their
+generators square to $I$ and their product has trace $2h$.
+The moments $M_j=wx_+^j+(1-w)x_-^j$ satisfy $M_0=1$,
+$M_1=(3\lambda-1)/4$, and the node-polynomial recurrence.
+Using $1,x,2x^2-1,4x^3-3x,8x^4-8x^2+1$ for the first five cosine
+polynomials gives $g_0=1$ and
+$4g_k=3\lambda^k-2\sum_{j=1}^{k-1}\lambda^j-1$ for $1\le k\le4$.
+Substitution gives $p+(1-p)g_k=\lambda^k$ in this range and one at zero.
+
+For the saturated maximally mixed problem let $r=\lambda>0$,
+$m=d^2$. Negative real $\lambda$ is reduced to this case by
+changing the sign of $A$. The spectral expansion now gives a probability
+measure $\mu$ on the unit circle on at most $m$ nodes, with each
+unmerged weight at most $1/d$, from $|\langle a_i,b_j\rangle|^2/d$
+for orthonormal eigenbases. Its moments through order $m-1$ are $r^k$.
+The Gram matrix of $1,z,\ldots,z^{m-1}$ is $(r^{|i-j|})$,
+which is positive definite: take variables with covariance this
+matrix by the recursion $Y_0=\xi_0$,
+$Y_j=rY_{j-1}+\sqrt{1-r^2}\xi_j$ for independent variance-one
+variables. The triangular transformation is invertible.
+So all $m$ nodes occur and are distinct, and each has mass at most $1/d$.
+The monic node polynomial is
+\[
+ P(z)=z^m-rz^{m-1}+\eta(1-rz),\qquad|\eta|=1.
+\]
+Indeed the functionals $\int z^{-k}P(z)d\mu$ for $1\le k<m$
+vanish on the node polynomial and separately on
+$z^m-rz^{m-1}$ and $1-rz$. Their rank is $m-1$, by the
+positive Gram submatrix on $z,\ldots,z^{m-1}$. These two
+polynomials span the common kernel. The leading coefficient and the
+unit-modulus constant term give the stated form.
+
+For general $d\ge2$, a necessary condition for saturation is
+\[
+ 1-r\ge (1-2/d)\left(1-\cos\frac{\pi}{2(d^2-1)}\right).
+\]
+In fact the nodes solve $z^{m-1}(z-r)/(1-rz)=-\eta$.
+For $z=e^{it}$ and $|t|\le\theta=\pi/[2(m-1)]$, the left-hand
+argument has the strictly increasing lift
+$(m-1)t+2\arctan((1+r)\tan(t/2)/(1-r))$.
+Its change on this arc is strictly below $3\pi$, so at most two
+nodes lie there. The mass outside the arc is at least $1-2/d$.
+Integrating $1-\operatorname{Re}z$ gives the stated bound. For
+$d=3$ and $r=999/1000$, the right-hand side is at least $1/384$
+by $\sin(\pi/32)\ge 1/16$, which already contradicts saturation.
+
+In dimension $d=3$, the unweighted first three power sums of
+the nine roots, by the first three Newton identities, are $r^k$.
+Write the roots as a grid $a_i b_j$, using the eigenvalues of
+$A$ and $B^{-1}$. Put $x=\sum_i a_i$, $y=\sum_j b_j$,
+$\alpha_0=\prod_i a_i$, $\beta_1=\prod_j b_j$,
+$u=x^2/(\alpha_0\bar x)$, $v=y^2/(\beta_1\bar y)$,
+$s=|x|^2=|u|^2$ and $t=|y|^2=|v|^2$. These are defined since
+$xy=r>0$. The second power sums of the two triples are
+$x^2-2\alpha_0\bar x$ and $y^2-2\beta_1\bar y$.
+Their product is $r^2$, so $u+v=2$. The third power sums are
+$x^3-3\alpha_0|x|^2+3\alpha_0$ and its $y$ counterpart.
+Their product is $r^3$, so
+$(us-3s+3)(vt-3t+3)=uvst$. Expanding with $u+v=2$ yields
+$us+vt+st+3-3(s+t)=0$.
+If $\operatorname{Im}u\ne0$, the imaginary part forces $s=t$,
+so $\operatorname{Re}u=1$ and $|uv|=s>1$.
+If $u,v$ are real, putting $q_0=uv$ turns the equation into
+$q_0^2=1$ because $u^3+v^3=8-6q_0$, $s+t=4-2q_0$.
+Both contradict $|uv|=r<1$.
+At $\lambda=0$ use eigenvalues $\omega^i$ and $\omega^{dj}$
+for $A$ and $B^{-1}$, with $\omega=e^{2\pi i/d^2}$ and indices
+$0\le i,j<d$. Relate their eigenbases by the discrete Fourier
+matrix, whose squared entries are $1/d$ by the geometric sum.
+All $d^2$ nodes then have equal weight, producing zero moments
+at exactly the required positive prefix orders.
+\end{proof}
+
+\begin{proposition}[A five-step interval in dimension three]
+\label{ob:fivestepprefix}
+For some \(\epsilon>0\), every real \(|\lambda|<\epsilon\) admits
+the exact time-homogeneous dephasing prefix of
+Proposition~\ref{ob:prefix} through step five, with an environment of
+dimension three.
+\end{proposition}
+\begin{proof}
+Use the controlled unitary with real orthogonal blocks \(A,B\)
+specified by the integer matrices
+\[
+ U=5A=\begin{pmatrix}-3&-4&0\\4&-3&0\\0&0&5\end{pmatrix},
+ \qquad
+ V=13B=\begin{pmatrix}13&0&0\\0&-12&-5\\0&5&-12\end{pmatrix}.
+\]
+Their columns are orthogonal with squared lengths \(25\) and \(169\),
+respectively. For \(0\le k\le5\) write \(C_k=(V^{\mathsf T})^k U^k\)
+and let \(M\) have rows
+\[
+ (C_{k,11},C_{k,22},C_{k,33},C_{k,12}+C_{k,21},
+   C_{k,13}+C_{k,31},C_{k,23}+C_{k,32}).
+\]
+Then \(Mx(\lambda)=(1,65\lambda,\ldots,(65\lambda)^5)^{\mathsf T}\)
+is exactly the trace equation
+\(\tr(B^{-k}A^k\sigma_\lambda)=\lambda^k\), with
+\(x(\lambda)\) the diagonal and upper-triangular entries of
+\(\sigma_\lambda\) in the displayed row order. Reduction modulo
+\(17\) and Gaussian elimination give pivots \((1,7,6,1,1,2)\)
+with one row swap, so \(\det M\equiv1\pmod {17}\).
+At \(\lambda=0\) one solution, in the same order, is
+\[
+ \frac1{40744175472000}
+ \begin{pmatrix}
+ 10965864067184\\23135350229691\\6642961175125\\
+ -1761032689988\\614008149300\\-4261233628850
+ \end{pmatrix},
+\]
+verified by multiplication by the defined rows of \(M\).
+The three diagonal margins of its symmetric matrix, above the sum of
+the absolute off-diagonal entries in each row, have numerators
+\(8590823227896,17113083910853,1767719396975\).
+They imply positive definiteness by bounding each mixed
+quadratic term with \(2|z_iz_j|\le|z_i|^2+|z_j|^2\).
+Since \(M^{-1}\) is fixed, the unique solution is polynomial in
+\(\lambda\), and the strict margins persist on an open interval.
+The trace equation at \(k=0\) normalizes the state throughout that
+interval. The other five equations give the controlled coherence
+multipliers, and the two diagonal projectors are preserved.
+\end{proof}
+
+\begin{conjecture}[Five steps throughout the real admissible interval]
+\label{ob:prefixconjecture}
+Every real \(-1<\lambda<1\) admits the exact five-step prefix in
+dimension three. Proposition~\ref{ob:fivestepprefix} gives a common
+pair of unitary blocks on an open interval about zero, and
+Proposition~\ref{ob:prefix} gives four steps on the full interval.
+\end{conjecture}
+
+\begin{proposition}[Finite histories with small branch leakage]\label{ob:leakage}
+For $J_j e=|j\rangle e$, set $P_j^{\rm env}=J_jJ_j^*$,
+$Q_j^{\rm env}=I-P_j^{\rm env}$ and $S=\sqrt{\sigma}$.
+If $\|Q_j^{\rm env}W^kJ_jS\|_{\rm HS}\le\epsilon$ for both
+$j$ and $0\le k\le N$, there exist environment unitaries $A_j$ with
+\[
+ \|W^kJ_jS-J_j A_j^kS\|_{\rm HS}\le4k\epsilon,\qquad 0\le k\le N .
+\]
+\end{proposition}
+\begin{proof}
+Fix a branch, suppress its index and let $K=J^*WJ$, $R=QWJ$.
+Take a unitary polar extension $K=AH$, $H=\sqrt{K^*K}$.
+Because $K^*K+R^*R=I$ and $(I-H)^2\le I-H^2$ for
+$0\le H\le I$, one has $\|(K-A)X\|_{\rm HS}\le\|RX\|_{\rm HS}$
+for every matrix $X$. Write $x_k=J^*W^kJS$ and $y_k=QW^kJS$.
+Then $Rx_k=y_{k+1}-QWy_k$ and
+$x_{k+1}=Kx_k+J^*Wy_k$, so
+$\|x_{k+1}-Ax_k\|_{\rm HS}\le3\epsilon$.
+A telescoping comparison with $A^kx_0$ gives $3k\epsilon$.
+Adding $\|y_k\|_{\rm HS}\le\epsilon$ gives the bound for $k\ge1$,
+and $k=0$ is equality.
+\end{proof}
+
+\subsection{Agreement, interventions and predictive compression}\label{ob:agreement}
+
+\begin{proposition}[Phase-invariant readouts]\label{ob:phaseinvariance}
+A polynomial in complex amplitudes $z_i,\bar z_i$ is invariant under a
+common phase precisely when each nonzero monomial has the same number
+of $z$ and $\bar z$ factors. Such polynomials are generated by
+$z_i\bar z_j$ and the constants. In degree two a real-valued homogeneous
+invariant polynomial is uniquely $z^*Az$ with $A=A^*$.
+It is nonnegative precisely when $A$ is positive semidefinite, in
+which case its sesquilinear form is realized by the Gram pairing of
+$\sqrt A\,z$. If a closed span of readout vectors is proper in a
+Hilbert space, its orthogonal complement contains a unit vector at
+distance one from the span, and the complementary projection has norm one.
+\end{proposition}
+\begin{proof}
+The transformation between formal $z,\bar z$ and real and imaginary
+coordinates is complex-linear and invertible, so equality on all
+inputs implies polynomial equality. Each monomial acquires a phase
+whose charge is the difference of the two degrees, and invariance
+forces charge zero by comparison of coefficients. Each balanced
+monomial is a product of pairs. In degree two real values imply equality
+with the conjugate polynomial, giving $A=A^*$ and uniqueness.
+The quadratic-form criterion and spectral square root give the Gram
+representation. For the last assertion normalize a nonzero orthogonal
+vector and use Pythagoras, which gives both the distance and the norm
+upper bound. Equality is attained on that vector.
+\end{proof}
+
+\begin{remark}[Cap overlap and a three-channel tensor bridge]\label{ob:bridge}
+Common accepted directions form the intersection of the corresponding
+caps as in Corollary~\ref{cor:fmcaps}. For equal cap radii
+$0<\alpha<\pi/2$, separation beyond $2\alpha$ precludes overlap,
+equality gives a common midpoint, and separation below $2\alpha$
+gives a common open neighborhood of a midpoint. This follows by
+the spherical triangle inequality and geodesic midpoint construction.
+
+In the discrete tensor bridge let $M_j$ be $a$ by $b$, $N_j$ be
+$d$ by $c$, and take $j=1,2,3$. The maximum rank of
+$\sum_j M_j\otimes N_j$ is at most $\min(3ac,ad,bc)$.
+In the positive range $a\le b$, $c\le d$,
+$a^2+b^2\le3ab$ and $c^2+d^2\le3cd$, the
+formally proved three-bridge rank theorem gives equality with $\min(ad,bc)$
+\cite{obr:leanbridge}. The upper bound follows from the input and
+output dimensions and the factorization of each summand through
+$\C^{ac}$ via $(I_a\otimes N_j)(M_j\otimes I_c)$.
+The cone inequalities imply $b<3a$ and $d<3c$, so the exterior
+dimensions are both below $3ac$. For example $a=c=1$, $b=d=2$
+admits rank two by summing the two matching basis outer products.
+\end{remark}
+
+\begin{remark}[Geometric interpretation hypothesis]\label{ob:observergeometry}
+A cut-and-project model assigns each observer a translated acceptance
+window in internal space. It uses window overlap to parameterize common
+couplings. A common-law model would need a map from this overlap to
+the feedback channels, a proof that their spectral threshold is
+crossed at the claimed geometry, and a calibration against independent
+observations. The same requirements apply to proposed links to
+chemical bonding, gravitational clustering and cognitive recognition.
+A sharp rank in a discrete tensor network and a change of
+minimal-surface branch in a continuum model provide two independent
+comparison problems.
+\end{remark}
+
+\begin{remark}[Static minimal-surface comparison]\label{ob:rt}
+In the leading static Ryu--Takayanagi prescription for two intervals
+of unit length separated by $d>0$ in the vacuum on a line, the
+two candidate sums in units of $c_{\rm CFT}/3$ differ by
+$\log(d(d+2))$. The vacuum interval entropy contributes
+$\log(\ell/\epsilon)$ for interval length $\ell$ and cutoff
+$\epsilon$ \cite{n1-rt,obr:headrick}. The disconnected pairing uses
+$(1,1)$, the cross-interval pairing uses $(d,d+2)$, and the cutoff
+cancels in their difference. Thus the leading mutual information
+in those units is $\max(0,-\log(d(d+2)))$, with crossover at
+$d=\sqrt2-1$ and value about $0.82$ at $d=0.2$.
+The leading calculation leaves the subleading correlation terms free.
+\end{remark}
+
+\begin{remark}[Consensus and accessible operations]\label{ob:consensus}
+The rank capacity bound of Proposition~\ref{prop:fmcapacity},
+pinching of Proposition~\ref{ob:pinching} and the coherent
+recovery criterion of Theorem~\ref{thm:fmeraser} govern finite records.
+In the two-branch pure model of Proposition~\ref{prop:fmredundancy},
+with overlaps $c_j$ and probabilities $p,1-p$, write
+$H_2(x)=-x\log_2x-(1-x)\log_2(1-x)$ with the continuous endpoint
+values, and $h(q)=H_2((1-\sqrt{1-4p(1-p)(1-|q|^2)})/2)$.
+A fragment $J$ has mutual information with the system equal to
+$h(\prod_jc_j)+h(\prod_{j\in J}c_j)-h(\prod_{j\notin J}c_j)$.
+The spectral calculation uses the $2$ by $2$ Gram matrix of the two
+weighted branch vectors. Its determinant is $p(1-p)(1-|q|^2)$.
+The spectrum of the system plus fragment equals that of the
+complement away from zero because the global state is pure.
+With $16$ fragments, $p=1/2$ and uniform $c_j=0.3$, the
+deviation from the system entropy is below $5.27\cdot10^{-4}$
+bits for fragment sizes $3$ to $13$. Indeed
+$1-H_2((1-x)/2)=\int_0^x\operatorname{atanh}(u)\,du/\log2
+\le x^2/[2(1-x^2)\log2]$ and each of the two products has modulus
+at most $0.3^3$. The empty and full fragments give zero and twice the
+system entropy. An unread orthogonal record can block phase recovery
+by a restricted observer even when a joint inverse is available.
+Two partitions with all cells available as predicates distinguish
+two points unless they agree on both partitions: each partition
+gives a readout kernel, and the joint kernel is their intersection.
+\end{remark}
+
+\begin{remark}[Pointer selection and observer-independent values]\label{ob:objectivity}
+Environment-induced superselection and quantum Darwinism motivate the
+choice of accessible records \cite{n2-zurek81,n2-zurek09}.
+A largest eigenline in Proposition~\ref{ob:axes} describes retained
+comparisons of an averaged channel. A redundant record in
+Remark~\ref{ob:consensus} provides a separate operational criterion.
+In extended Wigner-friend scenarios the Local Friendliness theorem
+constrains joint statistics under absoluteness of observed events,
+locality and freedom of settings \cite{n3:Bong}. Its application
+requires the specified intervention and access structure.
+Constructing a general model of observer-independent claims from
+common readouts requires a physical model of access, its possible
+changes under coherent interventions, and an explicit class of
+claims whose agreement is invariant. The finite common-factor
+criterion in Proposition~\ref{ob:finiterevision} specifies the last
+condition for a prescribed class.
+\end{remark}
+
+\begin{example}[A three-setting Local Friendliness statistic]\label{ob:lfexample}
+Use the \(XZ\) plane of real Pauli directions, and let
+\(a_1=e_z,\ a_2=e_x,\ a_3=(e_x+e_z)/\sqrt2\).
+Take the three \(b_j\) to be minus the normalized vectors
+\(a_1+2a_2,\ 2a_1-2a_2+a_3,\ a_2+a_3\), respectively.
+On \((|00\rangle+|11\rangle)/\sqrt2\) the local means vanish and
+\(E_{ij}=a_i\cdot b_j\), since the \(XX,ZZ\) correlations are one
+and the two mixed correlations vanish. The correlation part
+\[
+ -E_{11}-2E_{12}-2E_{21}+2E_{22}-E_{23}-E_{32}-E_{33}
+\]
+of the inequality in \cite{n3:Bong} is the sum of those three norms,
+\(\sqrt5+3+\sqrt{2+\sqrt2}\). White noise multiplies it by
+the visibility \(v\) and preserves the zero local means, so it exceeds
+six when \(v>6/(\sqrt5+3+\sqrt{2+\sqrt2})\), about \(0.847\).
+The two first settings can be aligned to chosen logical record
+directions by simultaneously rotating states and operators on each side.
+\end{example}
+
+\begin{example}[Intervention at a fixed reference]\label{ob:readwrite}
+Let $U(\alpha)=e^{-i\alpha Y/2}$, $\rho=P_{e_x}$ and $P=P_{e_z}$.
+Then $\tr(PU\rho U^*)=(1-\sin\alpha)/2$ by the rotation of
+$e_x$ towards $-e_z$. Actively rotating $P$ instead gives
+$\tr(UPU^*\rho)=(1+\sin\alpha)/2$.
+Cyclicity yields $\tr(PU\rho U^*)=\tr(U^*PU\rho)$, and rotating both
+leaves the probability $1/2$. If the $Z$ pinching is applied first,
+subsequent $U$ keeps $I/2$, whereas applying $U$ first preserves
+the changed $Z$ population after pinching. At $\alpha=\pi/2$ these
+probabilities are $1/2$ and zero. A reset to $P_{e_z}$ also changes
+the $1/2$ baseline to one. These calculations instantiate the
+Schr\"odinger and Heisenberg read/write relation in
+Proposition~\ref{prop:fminstrument}.
+\end{example}
+
+\begin{example}[Rank gain and control at equal length]\label{ob:rankcontrol}
+Let $a,b>0$ with $a+b=1$, $M_0=\operatorname{diag}(a,b,0)$ and
+$n=(\cos\theta,0,\sin\theta)$. For
+$M_\eta=(1-\eta)M_0+\eta nn^{\mathsf T}$,
+expansion in the $y$ coordinate gives
+$\det M_\eta=(1-\eta)^2ab\eta\sin^2\theta$. Thus for $0<\eta<1$
+and $\sin\theta\ne0$ the represented tensor has rank three,
+and the new axis has residual $|\sin\theta|$ above the old plane.
+Under the old generator $I-M_0$ this orthogonal direction instead
+decays by $e^{-t}$, the fastest rate of its three eigendirections.
+
+For $\rho=\operatorname{diag}(3/4,1/4)$, move a readout axis from
+polar angle $\pi/2$ to $\pi/3$ or $2\pi/3$ along a meridian.
+The two Fubini--Study distances are $\pi/12$, since the pure-ray
+angle is half the Bloch angle. Their binary probabilities are
+$(5/8,3/8)$ and $(3/8,5/8)$ by the Born readout.
+Their cross entropies against $(3/4,1/4)$ are respectively
+$\log4-(5/8)\log3$ and $\log4-(3/8)\log3$.
+The difference is $\tfrac14\log3$ and holds also for the relative
+entropies because the two prediction entropies agree.
+\end{example}
+
+\begin{remark}[Control and learning programme]\label{ob:controlprogramme}
+Proposition~\ref{prop:fmspeed} gives unrestricted reachability and a
+time bound, whereas Theorem~\ref{thm:fmschur} constrains a trajectory
+inside a retained Gram window. A disconnected admissible set blocks
+continuous paths between different components. A saturated window may
+have a single feasible extension. In either case unconstrained
+generation by two axes supplies no path within the window.
+Proposition~\ref{prop:fmgraphphase} classifies graph phases in a
+specified anchor gauge. Theorem~\ref{thm:fmberry} supplies the
+geometric phase under its transport protocol. An active model must
+specify the update, target law, admissible effects and interventions.
+Its variational prediction score, physical reset free energy and
+geometric slack are distinct quantities, as in
+Remark~\ref{rem:fmenergies}. Comparing controls at equal arc length
+requires a target and a scoring rule in addition to the rotation.
+\end{remark}
+
+\begin{proposition}[Posterior distillation and sharp total variation]\label{ob:gini}
+On a finite probability space with target alphabet size $n\ge2$,
+let fine readout $D$ have masses $m_d$ and posteriors $P_d$,
+and let $Q_{f(d)}$ be the posterior under the coarsening $f(D)$.
+Ignoring zero-mass fibers, define the Gini impurity of a readout as
+one minus its average squared posterior norm. Its increase is
+$\Delta=\sum_d m_d\|P_d-Q_{f(d)}\|^2$, which vanishes exactly for
+equal fine and coarse posteriors on every positive-mass fiber.
+Then
+\[
+ \left(\sum_d m_d\,\operatorname{TV}(P_d,Q_{f(d)})\right)^2
+ \le \frac{\lfloor n^2/4\rfloor}{n}\Delta .
+\]
+The constant is attained. For uniformly random $m$-element
+subsets $J$ of the alphabet, $1\le m<n$, binary recoding by
+membership in $J$ has expected impurity increase
+$2m(n-m)\Delta/[n(n-1)]$, and that existence guarantee is sharp.
+\end{proposition}
+\begin{proof}
+The coarse posterior is the conditional expectation of the fine
+posterior. Expanding squares and conditioning shows that the
+cross term around it vanishes, giving $\Delta$. If a posterior
+difference $z$ has $j$ positive coordinates, its total variation
+is $z$ paired with the indicator of those coordinates. Subtracting
+$j/n$ from every indicator entry preserves this pairing, and the
+indicator now has squared norm $j(n-j)/n$. Apply Cauchy--Schwarz
+to the pairing and then across the weights. For equality split the
+alphabet into blocks of sizes $\lfloor n/2\rfloor$ and
+$\lceil n/2\rceil$, choose each block with probability $1/2$ and
+sample uniformly within it. Reporting the block and then forgetting
+it gives variation $1/2$ in both fibers and
+$\Delta=n/[4\lfloor n/2\rfloor\lceil n/2\rceil]$.
+
+Impurity is the probability that two independent draws from a
+random conditional posterior differ. Each distinct pair is
+separated by a uniformly sampled $J$ with probability
+$2\binom{n-2}{m-1}/\binom{n}{m}$. Apply this to each readout
+and subtract. For a uniform target with full fine readout and
+constant coarse readout the increase is the same for every $J$,
+so the mean guarantee is sharp.
+\end{proof}
+
+\begin{proposition}[Variance of a binary recoding]\label{ob:cutvariance}
+With the notation of Proposition~\ref{ob:gini}, draw two targets
+independently from the same randomly selected posterior. Let $Q$ be
+their joint law and set $w_{ab}=2(Q_{\rm coarse}(a,b)-Q_{\rm fine}(a,b))$
+for $a<b$. Then $\Delta$ is the total edge weight, and the binary
+increase $\Delta_J$ is the cut weight for $J$.
+For $n\ge4$ and $2\le m\le n-2$, decompose
+$w_{ab}=\bar w+u_a+u_b+z_{ab}$, where $\bar w$ is the edge mean,
+$u_a=\sum_{b\ne a}(w_{ab}-\bar w)/(n-2)$ and
+$\sum_{b\ne a}z_{ab}=0$. For uniform $m$-sets,
+\[
+ \operatorname{Var}(\Delta_J)=
+ \frac{m(n-m)(n-2m)^2}{n(n-1)(n-2)}\sum_{a<b}(u_a+u_b)^2
+ +\frac{4m(m-1)(n-m)(n-m-1)}{n(n-1)(n-2)(n-3)}
+   \sum_{a<b}z_{ab}^2 .
+\]
+In a balanced cut the variance therefore vanishes exactly when the
+residual is zero. For an unbalanced cut it vanishes exactly when
+all edge weights are equal.
+\end{proposition}
+\begin{proof}
+The two draws are exchangeable, so grouping ordered pairs gives the
+edge weights and their cut sum. The decomposition has $\sum_a u_a=0$.
+The constant part contributes a constant cut weight, and the degree part
+contributes $(n-2m)\sum_{a\in J}u_a$. The variance of the latter sum is
+$m(n-m)\sum_a u_a^2/[n(n-1)]$ by counting singleton and pair
+inclusions. Also $\sum_{a<b}(u_a+u_b)^2=(n-2)\sum_a u_a^2$.
+For the two variable parts the cross term vanishes. Conditional on
+any vertex belonging to $J$, all edges incident to it have a common
+cut probability and all other edges have another common probability.
+Both groups have residual sum zero. For the residual variance, the
+joint cut probabilities of identical, incident and disjoint edges
+are respectively $2m(n-m)/[n(n-1)]$, half that number, and
+$4m(m-1)(n-m)(n-m-1)/[n(n-1)(n-2)(n-3)]$. This follows by choosing
+which endpoints are inside in each case. If $S=\sum z_{ab}^2$,
+the sum of products over unordered incident edge pairs is $-S$ by
+squaring each zero incident sum. The sum over disjoint edge pairs is
+$S/2$ by squaring the zero total sum. Combining the three counts
+gives the formula. The positive coefficients in the stated ranges
+give the vanishing criteria.
+\end{proof}
+
+\begin{proposition}[Posterior second moments]\label{ob:posteriormoments}
+A finite posterior ensemble with prior $p$ has moment
+$M=\sum_j w_j v_jv_j^{\mathsf T}$, where $v_j$ are probability
+vectors and $p=M\mathbf1$. Conversely any such decomposition is
+realized by the law $\Pr(j,i)=w_jv_j(i)$. The covariance
+$M-pp^{\mathsf T}$ is positive semidefinite.
+A nonnegative matrix of total sum one admitting a complex Gram
+decomposition into vectors supported on at most two coordinates
+is realizable by such posteriors. Positivity of the covariance and
+entrywise nonnegativity alone are insufficient. With $W$ the adjacency
+matrix of the five-cycle and uniform $p$, the matrix $M=(5I+3W)/55$
+obeys these two tests, has complex factor width three, and is unrealizable.
+
+For $M(t)=(1/5-2t)I+tW$, $1/20\le t\le11/160$, put
+$\delta=20t-1$. The unique nearest realizable matrix at the same
+prior has diagonal, edge and nonedge entries
+$(1/10-\delta/15,1/20,\delta/30)$. The squared Frobenius
+distance is $\delta^2/24$, in particular $1/2904$ at $t=3/55$.
+\end{proposition}
+\begin{proof}
+The covariance is the average of $(v_j-p)(v_j-p)^{\mathsf T}$.
+For the two-sparse assertion, group factors supported on each
+pair $\{i,j\}$. Let $A,B$ be their diagonal contributions and
+$c\ge0$ their net off-diagonal entry. Cauchy--Schwarz gives
+$c^2\le AB$. If $A>0$, replace by $(\sqrt A,c/\sqrt A)$ on the pair,
+and if $A=0$ the off-diagonal is zero. Fill the remaining nonnegative
+diagonal with singleton vectors. A nonnegative factor of coordinate
+sum $s>0$ becomes a posterior on dividing by $s$, with weight
+$s^2$. Summing all entries gives total weight one.
+
+For the cycle, $H=W+2I-4J/5$ with all-ones $J$ satisfies
+$H^2=55(M-pp^{\mathsf T})$ by $W^2=I+J-W$ and $WJ=2J$.
+A nonnegative posterior can use only a clique since all nonedge
+entries vanish. Each such vector has squared norm at least twice
+the sum of edge products. But the trace and twice that sum for $M$
+are $25/55$ and $30/55$. For a complex two-sparse factor the same
+bound uses real parts and $|a-b|^2\ge0$, so its factor width exceeds two.
+The cyclic translates of $(1,2,1,0,0)$ and $(2,2,0,-1,0)$ yield sums
+of outer products with diagonal, edge and nonedge entries
+$(6,4,1)$ and $(9,4,-4)$. Weight these sums by $12/1100$ and
+$3/1100$ and add $I/1100$ to obtain $M$, giving width three.
+
+The edge polynomial $\sum_{i\bmod5}x_ix_{i+1}$ has maximum $1/4$
+on the probability simplex. If a maximizer contains nonadjacent positive
+coordinates, redistribute their combined mass to whichever gives the
+larger linear contribution, obtaining another maximizer of
+smaller support. A smallest-support maximizer therefore lies on
+a clique, with at most two coordinates. This proves the bound.
+Consequently all realizable $X$ satisfy $\langle N,X\rangle_{\rm HS}
+\ge-1/5$ for $N=4J/5-2W$. For the stated candidate $P$,
+$\langle N,P\rangle_{\rm HS}=-1/5$, $\|N\|_{\rm HS}^2=24$, and
+$P-M(t)=\delta N/24$ by entry comparison. Expanding
+$\|X-M(t)\|_{\rm HS}^2$ gives $\|X-P\|_{\rm HS}^2+\delta^2/24+
+(\delta/12)(\langle N,X\rangle_{\rm HS}+1/5)$, so equality forces
+$X=P$. For feasibility, mix the uniform cyclic orbit ensembles
+of $(1/2,1/2,0,0,0)$ and $(1/4,1/2,1/4,0,0)$ with weight
+$8\delta/3$ on the second. Their priors are uniform and their
+moments have entries $(1/10,1/20,0)$ and $(3/40,1/20,1/80)$.
+The stated range makes the mixture a probability ensemble.
+\end{proof}
+
+\begin{example}[Prediction, reset and retained geometry]\label{ob:memoryexample}
+Let $H=(X_1,X_2,X_3)$ be three independent fair bits and
+$Y=X_1\oplus X_2$. In the order of memories
+$H$, $X_3$, $X_2\oplus X_3$, and $Y$, the information retained about
+$Y$ in bits is $(1,0,0,1)$ and the erased conditional entropies are
+$(0,2,2,2)$. The conditional Gini impurities are $(0,1/2,1/2,0)$.
+The first choice exceeds a one-bit register and the last is implemented
+by the reversible relabelling $H\leftrightarrow (Y,X_1,X_3)$ followed
+by reset of the last two coordinates. The heat bound of
+Proposition~\ref{prop:fmheat} applies when its reservoir and reset
+conditions hold. Switching the target to $X_3$ reverses the
+relative merits of $X_3$ and $Y$. A fixed answer table can also
+return $Y$ with zero retrospective error. Whether lookup is
+permitted depends on whether the table belongs to the admissible
+inputs before evaluation.
+
+In a three-anchor orthonormal window replace the anchors by their
+normalized sum, or keep the latest one or two. For unit queries
+$(2,2,1)/3$ and $(1,2,-2)/3$ the respective Schur slack triples
+for the sum, two-anchor and one-anchor memories are
+$(2,12,24)/27$ and $(26,3,15)/27$. The two single-anchor slacks
+both average $2/3$ over the sphere.
+\end{example}
+\begin{proof}
+For the two uninformative parities or bits, their joint law with
+$Y$ is uniform on four pairs by elementary counting. With any
+of the one-bit memories each fiber has four equally likely
+histories, and for $H$ the fibers are singletons. These facts give
+the entropies and Gini values. The inverse relabelling uses
+$X_2=Y\oplus X_1$. For the geometric example the three slacks
+are $1-(q_1+q_2+q_3)^2/3$, $q_1^2$ and $1-q_3^2$ by
+Theorem~\ref{thm:fmschur}. Substitution gives the triples.
+Rotational invariance makes the mean squared projection
+onto any unit axis $1/3$.
+\end{proof}
+
+\begin{remark}[Predictive learning hypothesis]\label{ob:learninghypothesis}
+A learning protocol privileges a future task when selecting which
+statistic of past records to preserve. Extending the finite examples
+to developmental or evolutionary memory requires an admissible
+nonanticipating training law and estimates on future predictive loss
+under changes of target and environment. For physical erasure it also
+requires a reservoir and a reset protocol. A precomputed lookup table may
+match a statistic on all past data while giving no bound on such loss.
+\end{remark}
+
+%=====================================================================================
+\section{Horizons and finite-access observers}\label{sec:horizons}
+
+\subsection{Accessible comparisons and predictive horizons}\label{ob:horizons}
+
+Proposition~\ref{prop:static} specifies the events that a binary observer
+can exchange signals with under Hypothesis E. Proposition~\ref{prop:curestrict}
+specifies the statistics accessible on a tensor factor under Hypothesis A.
+The following criterion applies once the effects actually available to the
+observer are specified. It also applies to the finite Gram windows of
+Section~\ref{sec:finitemem} when the recorded comparisons are probabilities for
+known effects.
+
+\begin{proposition}[Which statistics a window determines]\label{ob:effectwindow}
+Let \(\mathcal E\) be a family of effects on a finite-dimensional complex
+Hilbert space \(V\), and set \(W=\operatorname{span}_{\mathbb R}
+(\{\mathbf1\}\cup\mathcal E)\) in the real Hilbert space of Hermitian operators
+with inner product \(\operatorname{Tr}(HG)\). States \(\rho,\sigma\) agree on
+every effect in \(\mathcal E\) exactly when \(\rho-\sigma\in W^\perp\).
+The expectation of a Hermitian \(H\) is determined on all states by these
+statistics exactly when \(H\in W\). In particular the state is determined
+exactly when \(W\) is the whole Hermitian space.
+
+For a qubit, all rank-one tests \(P_a=(\mathbf1+a\cdot\boldsymbol\sigma)/2\)
+with \(a\) in any nonempty open cap of the Bloch sphere determine the qubit.
+A single prescribed test leaves all components orthogonal to its Bloch
+axis undetermined. For the full matrix algebra on a factor \(A\), the
+undetectable differences on \(A\otimes B\) are precisely those in
+\(\ker\operatorname{Tr}_B\). If the available expectations are those
+of the two marginal algebras taken separately, the undetectable
+differences are exactly the real span of \(H_A\otimes H_B\) with
+both factors Hermitian and traceless. For dimensions \(a,b\)
+this has dimension \((a^2-1)(b^2-1)\), with fraction
+\((a^2-1)(b^2-1)/(a^2b^2-1)\) of the traceless dimension when \(ab>1\).
+\end{proposition}
+\begin{proof}
+Equality of statistics and of the unit expectation is orthogonality to
+the spanning set. If \(H\in W\), a linear expression in these statistics
+gives its expectation. Otherwise the orthogonal component
+\(L=H-P_WH\) is nonzero and traceless. For
+\(0<\varepsilon<1/(\dim V\,\lVert L\rVert_{\rm op})\),
+\(\mathbf1/\dim V\pm\varepsilon L\) are states with identical accessible
+statistics and expectation difference \(2\varepsilon\operatorname{Tr}(L^2)>0\).
+For the qubit, \(2\operatorname{Tr}(\rho P_a)-1=r\cdot a\), where \(r\) is
+the Bloch vector of \(\rho\). The intersection of a proper linear plane
+with the unit sphere has empty interior, so the directions of an open
+cap span \(\mathbb R^3\). For a single test the equation is one scalar
+projection. The defining trace-pairing identity for partial trace gives
+the assertion for one algebra. Choose an orthonormal Hermitian basis on
+each factor consisting of the normalized identity and traceless
+elements. In the tensor product basis the first marginal fixes the
+coefficients with identity on \(B\), and the second fixes those with
+identity on \(A\). The \(a^2-1\) and \(b^2-1\) traceless basis
+elements on each side give the dimension of the remaining sector.
+\end{proof}
+
+\begin{remark}[From cap order to accessible effects]\label{ob:capbridge}
+An operational identification of the static patch with a matrix
+restriction requires an assignment of effects or algebras to cap events,
+compatibility of that assignment with inclusion, and a causal model
+specifying operations across the boundary. Under the full-factor
+assignment in Hypothesis A, available expectations reconstruct the
+marginal. For a known restricted family, Proposition~\ref{ob:effectwindow}
+specifies the exact kernel. The Gram-window and phase-recovery
+criteria of Theorems~\ref{thm:fmschur} and~\ref{thm:fmeraser}
+determine what additional records and coherent operations would
+remove particular ambiguities.
+% Module n2 gives parallel expanded statements at n2:schur and n2:eraser.
+\end{remark}
+
+\begin{example}[Equal marginals, different correlations]\label{ob:blindbell}
+Put \(\Phi_\pm=(|00\rangle\pm|11\rangle)/\sqrt2\). These orthogonal
+states and their equal mixture have both marginals \(\mathbf1/2\).
+The expectation of \(X\otimes X\) is \(1,-1,0\), respectively, since
+\(X\otimes X\) swaps \(|00\rangle,|11\rangle\). With
+\(\Psi_\alpha=\cos\alpha\,|00\rangle+\sin\alpha\,|11\rangle\) and
+\(0\le\alpha\le\pi/4\), the off-diagonal terms vanish under either
+partial trace. The marginal has Bloch length \(\cos 2\alpha\),
+purity \((1+\cos^2 2\alpha)/2\) and entropy \(h(\sin^2\alpha)\), where
+\(h(p)=-p\log p-(1-p)\log(1-p)\) and \(0\log0=0\).
+The pure-state concurrence \(C=2\sqrt{\det\rho_A}=\sin 2\alpha\) therefore
+satisfies \(|r_A|^2+C^2=1\) and \(C^2=2(1-\operatorname{Tr}\rho_A^2)\),
+the pure case of Theorem~\ref{thm:bdbudget} and Lemma~\ref{lem:bdroof}.
+The equal mixture of \(\Phi_\pm\) is the separable mixture of
+\(|00\rangle\) and \(|11\rangle\). Its tangle, given by the convex
+roof of the nonnegative pure-state tangle, is zero, while its
+normalized marginal linear entropy is one.
+\end{example}
+
+\begin{proposition}[Finite prediction and minimal memory]\label{ob:predictive}
+For a deterministic update \(T\colon Y\to Y\) and readout \(q\colon Y\to B\)
+let \(w_m(y)=(q(T^j y))_{0\le j\le m}\) and
+\(w_\infty(y)=(q(T^j y))_{j\ge0}\). Write \(R_m=\ker w_m\) and
+\(R_\infty=\ker w_\infty\), with \(\ker\) denoting equality of outputs.
+Then \(q\) is the first coordinate of \(w_\infty\),
+\(R_\infty\subseteq R_m\), and
+\[
+ R_{m+1}=R_0\cap(T\times T)^{-1}R_m .
+\]
+For nonempty finite \(Y\), set \(D=\max D(y,y')\), where for each
+distinguishable pair \(D(y,y')\) is any selected distinguishing
+time, and use zero for an indistinguishable pair. Then \(R_D=R_\infty\).
+The least such depth is at most \(|Y|-|q(Y)|\). The empty state set
+has depth zero.
+
+For arbitrary \(Y\), the quotient \(\pi\colon Y\to Y/R_\infty\)
+carries a well-defined update and readout. If a memory \(r\colon Y\to M\)
+supports readout \(q=\bar q\circ r\) and update \(rT=\bar T r\) with
+\(\bar q\colon M\to B\) and \(\bar T\colon M\to M\), then \(\pi\) factors
+uniquely through \(r(Y)\). The factor is surjective and is injective
+exactly when \(\ker r=R_\infty\).
+\end{proposition}
+\begin{proof}
+Taking \(j=0\) gives the current readout. Splitting \(w_{m+1}\) into its
+head and the word \(w_m(Ty)\) gives the recurrence. Any unequal full
+trajectories differ at their selected time, which is at most \(D\).
+Thus \(R_D\subseteq R_\infty\). If \(R_{m+1}=R_m\), the recurrence
+makes all later relations identical, and their intersection is
+\(R_\infty\). Each strict refinement of a partition of a finite
+set increases its block count by at least one, so at most
+\(|Y|-|q(Y)|\) strict refinements can precede stabilization.
+On the quotient, equal full words have equal heads and equal shifted
+words. Thus \(q\) and \(T\) descend. Induction gives
+\(q(T^j y)=\bar q(\bar T^j r(y))\) for each \(j\).
+Equal memory values therefore have equal full itineraries, and
+\(r(y)\mapsto[y]\) is well-defined. Its values are forced on all of
+\(r(Y)\), every quotient class has a representative \(y\), and
+injectivity is equivalent to the reverse inclusion of kernels.
+\end{proof}
+
+\begin{example}[Finite and infinite delay]\label{ob:delays}
+The update \(0\mapsto1\mapsto2\mapsto2\) with readout \(q=(0,0,1)\)
+gives one-step words \((0,0),(0,1),(1,1)\). The least complete depth
+is one. Splitting \(0\) into two states with the same readout and
+successor gives four distinct internal labels and three predictive
+classes. Retaining the full internal label therefore gives a valid
+memory whose map to the predictive classes is many-to-one.
+Keeping only the current bit conflates the first two predictive
+classes and cannot support a closed update. On \(\mathbb N\), let
+\(T(n)=\max(n-1,0)\) and \(q=1_{\{0\}}\). The first \(1\) occurs at
+time \(n\). The pair \(m+1,m+2\) has the same \(w_m\) for every \(m\).
+This precludes a common finite complete depth on this infinite set.
+\end{example}
+
+\begin{proposition}[Hidden differences and supplementary records]\label{ob:ledger}
+For group homomorphisms \(H\colon G\to P\), \(K\colon G\to J\) and
+\(L\colon G\to E\), there is a homomorphism \(K_0\colon H(G)\to J\)
+with \(K=K_0H\) exactly when \(\ker H\subseteq\ker K\), or equivalently
+\(K(\ker H)=\{1\}\). The factor is then unique. With supplementary
+record \(L\), the subgroup of hidden displacements is
+\(K(\ker H\cap\ker L)\subseteq K(\ker H)\), and exact recovery
+requires this subgroup to be trivial.
+
+In an abelian group in additive notation, three families
+\(s_\alpha,s_\beta,s_\gamma\) with common projection under \(H\)
+have unique differences \(k_{ij}=s_j-s_i\in\ker H\) satisfying
+\(s_j=s_i+k_{ij}\) and \(k_{\alpha\gamma}=k_{\alpha\beta}+k_{\beta\gamma}\).
+\end{proposition}
+\begin{proof}
+If \(H(g)=H(g')\), then \(g^{-1}g'\in\ker H\). Thus the kernel inclusion
+makes \(K_0(H(g))=K(g)\) well-defined, and products of representatives
+prove the homomorphism law. Conversely, a factor sends elements in
+\(\ker H\) to the identity. The assertion with records follows by
+applying the same argument to the product homomorphism \((H,L)\).
+In additive notation, subtracting \(s_i\) gives the unique difference,
+whose projection vanishes since the projections agree. The difference
+identity follows by cancellation of the middle lift.
+\end{proof}
+
+\begin{example}[A predictive quotient of the universal solenoid]\label{ob:solenoid}
+Let \(\mathcal S\) be the group of threads
+\(z=(z_m)_{m\ge1}\) in \(\mathbb R/\mathbb Z\) such that \(nz_{mn}=z_m\),
+with coordinatewise addition. Write \(u(t)_m=[t/m]\). This defines
+an additive map \(\mathbb R\to\mathcal S\) since \(n(t/mn)=t/m\).
+The visible homomorphism is \(H(z)=z_1\). Set \(Tz=-z\) and
+\(q(z)=1\) precisely when the representative of \(H(z)\) in \([0,1)\)
+belongs to \([0,1/2)\). The trajectory alternates \(q(z),q(-z)\).
+For \(z=u(t)\) at \(t=0,1/2,1/4,3/4\), respectively, the first
+two readouts are \((1,1),(0,0),(1,0),(0,1)\), since inversion
+sends \(t\) to \([-t]\). Thus the complete quotient has four states,
+update interchanging the two bits, and least complete depth one.
+
+Put \(k=u(1)\), \(l=u(2)\). The lifts \(z,z+k,z+k+l\)
+have the same entire itinerary and hidden differences \(k,l,k+l=u(3)\).
+Their visible coordinates agree since \(H(k)=H(l)=0\).
+The record \(L(z)=z_2\) removes \(k\) from the invisible kernel,
+as \(k_2=1/2\). It cannot remove all displacements because \(l_2=0\)
+and \(l_3=2/3\ne0\). In fact for any finite set of recorded levels
+\(J\subset\mathbb N_{>0}\), a common positive multiple \(m\) of the
+levels gives \(u(m)\) zero at every recorded level and at level
+one, yet nonzero at level \(m+1\). On \(\mathbb Z^2\) the same kernel
+criterion reduces to \(H(x,y)=x,\ K(x,y)=y\). Recording \(y\bmod2\)
+reduces the image of the invisible kernel from \(\mathbb Z\) to
+\(2\mathbb Z\), whereas recording \(y\) reduces it to \(\{0\}\).
+\end{example}
+
+\subsection{Entropy, thermal calibration, and curvature}\label{ob:horizonentropy}
+
+\begin{proposition}[Entropic and exact cut dimensions]\label{ob:cutdimension}
+For a pure bipartite state let \(r=\operatorname{rank}\rho_A\).
+The smallest number of simple tensors in a representation of the
+state is \(r\), and \(e^{S(\rho_A)}\le r\), with equality exactly
+for the uniform nonzero spectrum. In a product of pure pairs
+\(\Psi_\alpha\) with \(0<\alpha\le\pi/4\), \(k\) cut pairs contribute
+entropy \(kh(\sin^2\alpha)\) and exact rank \(2^k\).
+\end{proposition}
+\begin{proof}
+The Schmidt sum of Proposition~\ref{prop:curestrict} uses \(r\) terms.
+Each simple tensor contributes at most one to the rank of the
+coefficient matrix, so fewer terms are impossible. For the positive
+weights \(p_j\), concavity of \(\log\) gives
+\(\sum_jp_j\log(1/p_j)\le\log\sum_jp_j(1/p_j)=\log r\), with equality
+when \(1/p_j\) is constant on the support. The reduction of a product
+is the product of reductions. Its spectrum is the product of the
+component spectra, giving additivity of entropy and multiplicativity
+of rank. An intact pair contributes one nonzero eigenvalue.
+\end{proof}
+
+\begin{example}[Cut sizes and entropy]\label{ob:cutexamples}
+For \(\alpha=\pi/6\) each cut pair has entropy
+\(2-\tfrac34\log_2 3\) in bits. Two and eight cut pairs give exact
+ranks \(4\) and \(256\), with entropy dimensions \(4^2/3^{3/2}\) and
+\(4^8/3^6\), respectively. At \(\alpha=\pi/4\) eight cut pairs give
+eight bits and both dimensions are \(256\). A state with weights
+\(1-\varepsilon,\varepsilon/(r-1),\dots,\varepsilon/(r-1)\) has
+entropy \(h(\varepsilon)+\varepsilon\log(r-1)\). Choosing
+\(\varepsilon=1/r\) makes this entropy bounded as \(r\to\infty\),
+while the exact cut rank still equals \(r\).
+For the nested twelve-site cut of Example~\ref{ex:cupage},
+the entropy peaks at six times the one-pair entropy. Changing the
+pairing can change \(k\) while holding the site geometry fixed. A
+fixed-cut rank lower bound concerns representations through that cut,
+as in Theorem~\ref{ub:cut}.
+\end{example}
+
+\begin{remark}[Area laws and decoding complexity]\label{ob:horizonliterature}
+Hastings proves an entanglement area law for one-dimensional local
+Hamiltonians with a unique gapped ground state, with fixed local
+dimension and a gap bounded below. Polynomial-time approximation
+by matrix product states for the normalized nearest-neighbor,
+fixed-gap, unique-ground-state regime uses the Hamiltonian structure
+and is an algorithmic theorem of Landau, Vazirani and Vidick
+\cite{obr:hastingsarea,obr:lvv}. The Haar average on an \(m\times n\)
+bipartition, \(m\le n\), is
+\(\sum_{j=n+1}^{mn}j^{-1}-(m-1)/(2n)\) in nats. For \(m=n\) the
+integral comparison of the harmonic sum with \(\int_n^{n^2}dx/x\)
+gives \(\log n-\tfrac12+O(1/n)\)
+\cite{n1-page,obr:sen}.
+Coffman, Kundu and Wootters prove the squared-concurrence inequality
+\(C_{A:B}^2+C_{A:C}^2\le C_{A:BC}^2\) for a pure three-qubit state
+\cite{n4:CKW}. Harlow and Hayden give a complexity obstruction in
+specified radiation decoding models under computational assumptions
+\cite{obr:hh}. Extending these decoding bounds to a comparison
+dynamics requires a specified circuit family, accessible operations,
+and an approximation and complexity model. Postselection in
+Aaronson's \(\mathrm{PostBQP}=\mathrm{PP}\) and entangled proof systems
+in Ji et al.'s \(\mathrm{MIP}^*=\mathrm{RE}\) have their own operational
+definitions and resources \cite{obr:aaronson,obr:mip}.
+\end{remark}
+
+\begin{proposition}[Local entropy balances under joint evolution]\label{ob:arrow}
+Write \(I(A:B)=S(\rho_A)+S(\rho_B)-S(\rho_{AB})\).
+A joint unitary preserves \(S(\rho_{AB})\), so
+\(\Delta S_A+\Delta S_B=\Delta I\). For a product input the sum is
+nonnegative, with equality exactly for a product output. If a
+marginal initially equals \(\mathbf1/d\), its entropy cannot increase.
+If both marginals are initially maximally mixed and the input is a
+product, every joint unitary fixes the joint state.
+\end{proposition}
+\begin{proof}
+The entropy identity follows by subtracting the definitions and using
+unitary invariance of eigenvalues. A kernel projection \(P\) of
+either marginal, tensored with the opposite identity, satisfies
+\(\operatorname{Tr}(\rho_{AB} P)=0\), so
+\(\|P\sqrt{\rho_{AB}}\|_{\rm HS}^2=0\). Thus the joint state's
+support lies in the product of the marginal supports. There
+\(\log(\rho_A\otimes\rho_B)=\log\rho_A\otimes I+I\otimes\log\rho_B\)
+by spectral decomposition. Taking traces gives
+\(I(A:B)=D(\rho_{AB}\Vert\rho_A\otimes\rho_B)\), whose nonnegativity
+and equality criterion follow from Proposition~\ref{prop:cubalances}
+on this product support. A product input has \(I=0\).
+For the local maximum apply the entropy bound of
+Proposition~\ref{ob:cutdimension} to the marginal spectrum, with \(r\le d\).
+The maximally mixed product is proportional to the joint identity.
+\end{proof}
+
+\begin{example}[Four entropy directions]\label{ob:arrowexamples}
+Let \(U=(\mathbf1-iX\otimes X)/\sqrt2\), which is unitary because
+\((X\otimes X)^2=\mathbf1\).
+It sends \(|00\rangle\) to \((|00\rangle-i|11\rangle)/\sqrt2\)
+and \((|00\rangle+i|11\rangle)/\sqrt2\) to \(|00\rangle\).
+The marginal changes are respectively \((\log2,\log2)\) and
+\((-\log2,-\log2)\), by the Bell marginals in Example~\ref{ob:blindbell}.
+The joint maximally mixed product gives \((0,0)\).
+A swap on \((\mathbf1/2)\otimes|0\rangle\langle0|\) gives
+\((-\log2,\log2)\), with zero mutual information at both endpoints.
+Even for initially pure product states, the identity evolution gives
+zero changes indefinitely.
+\end{example}
+
+\begin{remark}[Hypothesis of a common low-entropy past]\label{ob:past}
+For the regions used as thermodynamic subsystems, assume an initial
+state with small mutual information across relevant cuts and with
+marginal entropies well below their respective maxima. A shared
+persistent entropy arrow would additionally require a dynamics and
+a state or ensemble for which accessible records continue to lose
+correlations to degrees of freedom outside the accessible regions.
+The finite identities make the initial conditions and required dynamical
+input explicit. They provide a finite comparison model for the role
+of the Past Hypothesis \cite{obr:albert,obr:penrose}.
+\end{remark}
+
+\begin{example}[Two uses of the cosine fixed point]\label{ob:dottiethermal}
+Let \(x_*\) solve \(x_*=\cos x_*\) in \([0,1]\). In the notation of
+Example~\ref{ob:blindbell}, the choices \(2\alpha=x_*\) and
+\(\alpha=x_*\) give, respectively, Bloch lengths \(0.739085\) and
+\(0.092494\), and entropies \(0.558691\) and \(0.993820\) bits, rounded.
+They sample the same curve at distinct Schmidt amplitudes. In the first
+case the squared Bloch length is \(x_*^2\simeq0.546247\) and
+\(C^2\simeq0.453753\). In the second case \(p=\cos^2x_*=x_*^2\).
+The endpoints \(\alpha=0,\pi/4\) give entropies zero and one bit.
+
+Let \(H=\operatorname{diag}(0,\Delta E)\), \(\Delta E>0\).
+For \(0<\alpha<\pi/4\) the Gibbs population ratio of
+Corollary~\ref{cor:cugibbs} gives
+\(\beta_\alpha\Delta E=\log(p/(1-p))=2\log\cot\alpha\).
+Its reciprocal gives \(k_BT_\alpha/\Delta E\), tending to
+zero as \(\alpha\downarrow0\) and to \(+\infty\) as
+\(\alpha\uparrow\pi/4\). At \(\alpha=x_*\) this ratio is
+\(5.390324\) to six decimal places. At the six-pair peak of the nested cut the entropy in bits is
+\(6h(\sin^2x_*)/\log2\simeq5.962920\). Replacing \(x_*\) by \(42.35^\circ\)
+would give \(k_BT_\alpha/\Delta E\simeq5.397548\).
+
+Assume a separate product Gibbs reservoir at inverse temperature
+\(\beta_{x_*}\) in the reset setting of Proposition~\ref{prop:culandauer}.
+The lower bounds on \(Q/\Delta E\) for entropy reductions of one bit
+and \(h(\sin^2x_*)\) nats are \(3.736288\) and \(3.713198\),
+obtained by division by \(\beta_{x_*}\Delta E\).
+Their difference is
+\[
+ \frac{D(\rho_A\Vert\mathbf1/2)}{\beta_{x_*}\Delta E}
+   =\frac{\log2-h(\sin^2x_*)}{\beta_{x_*}\Delta E}
+   \simeq 0.023090,
+\]
+and measures the difference between the two entropy terms.
+For a calibrated, fixed Hamiltonian \(H\) and Gibbs state
+\(\omega=e^{-\beta H}/\operatorname{Tr}e^{-\beta H}\),
+the full excess free energy of a state \(\rho\) is
+\(D(\rho\Vert\omega)/\beta\). Expanding \(\log\omega\) gives this
+identity. The Dottie marginal \(\rho=\rho_A=\omega\) therefore
+has zero excess free energy for its matched Hamiltonian.
+\end{example}
+
+\begin{remark}[Temperature, resetting, and observer dynamics]\label{ob:thermalprogramme}
+The modular action of Theorem~\ref{thm:cumodular} runs at physical
+time \(t=-\hbar\beta s\) when matched to the evolution of
+Corollary~\ref{cor:cugibbs}. A common \(\beta\) and a contact commuting
+with the sum of the calibrated Hamiltonians preserve the product
+Gibbs state because it is a function of that sum. For independent
+modular calibrations a swap of qubits with equal gaps and distinct
+populations transfers energy, as in Remark~\ref{rem:cuarrow}.
+Perfect pure-state resetting using a closed joint unitary and
+an independent finite full-rank Gibbs reservoir is obstructed
+by input rank, as proved in Proposition~\ref{prop:culandauer}.
+A discrete modular model for the static patch would have to
+supply an accessible algebra, a state, and a dynamics identifying
+modular and geometric time with a physical length scale.
+Jacobson's use of a local Clausius relation and focusing assumes
+the geometric entropy law and local equilibrium
+\cite{n1-jacobson}. A microscopic observer theory selecting
+\(x_*\) would have to derive a specific cosine update, identify
+the dynamical variable with a Schmidt amplitude or its doubled
+angle, and account for the mechanism maintaining that regime.
+Both the entropy of black-hole radiation and thermalization of
+closed registers require a specified dynamics in addition to the
+restriction map.
+\end{remark}
+
+\begin{example}[A blind region gives no universal curvature floor]\label{ob:curvature}
+For a proper closed subspace of a Hilbert space with projection \(P\),
+\(\lVert1-P\rVert=1\): orthogonal decomposition gives the upper bound,
+and a unit vector in the orthogonal complement gives equality.
+For the first \(n\) coordinate projections \(P_n\) on \(\ell^2\),
+\(\|(1-P_n)v\|^2=\sum_{j>n}|v_j|^2\to0\) for each \(v\).
+Likewise stereographic radius \(R=\cot(\theta/2)\) from the
+north pole gives a blind cap of angular radius
+\(\delta=2\arctan(1/R_{\max})\) at finite \(R_{\max}>0\).
+Its fraction of the unit two-sphere area is
+\((1-\cos\delta)/2=\sin^2(\delta/2)\) by integration of
+\(2\pi\sin\theta\). Both the angle and the area fraction tend to
+zero as \(R_{\max}\to\infty\). Likewise
+\(\lvert(s-1)/s\rvert=1\) for \(s\ne0\) exactly when
+\(\operatorname{Re}s=1/2\), by squaring. The inverse \(s=1/(1-w)\)
+maps the unit circle with \(w=1\) omitted onto that line.
+The change of coordinate has no prescribed physical length.
+
+In flat spacetime, two events on an inertial worldline separated by
+proper time \(T\) determine a causal diamond whose midpoint section
+is a ball of radius \(cT/2\), the intersection of the two light cones.
+An eternally accelerated observer \(ct=(c^2/a)\sinh(a\tau/c)\),
+\(x=(c^2/a)\cosh(a\tau/c)\), has null coordinates
+\(ct-x=-(c^2/a)e^{-a\tau/c}\) and
+\(ct+x=(c^2/a)e^{a\tau/c}\). Their ranges give the past and future
+horizons \(x=\pm ct\) and the two-way Rindler wedge \(x>|ct|\).
+The spatial distance from the observer to the wedge boundary
+on the \(t=0\) slice is \(c^2/a\). Both examples have \(\Lambda=0\). Constant-curvature
+anti-de Sitter spacetime has \(\Lambda=-3/L^2\) in four dimensions.
+For example, the timelike geodesic at the centre of global AdS
+has finite-duration diamonds bounded inside a chart
+\(ds^2=L^2\cos^{-2}\chi(-dt^2+d\chi^2+\sin^2\chi\,d\Omega_2^2)\)
+whenever the coordinate time separation is below \(\pi\).
+This follows because radial null rays satisfy \(|dt|=|d\chi|\).
+For de Sitter, Propositions~\ref{prop:static} and~\ref{prop:invmetric}
+give \(R_H^2=3/\Lambda\) when the de Sitter
+radius is \(R_H\). Substituting this relation in
+\(\Lambda=b\delta^2/R_H^2\) cancels \(\Lambda\) for \(\Lambda>0\),
+leaving \(b\delta^2=3\). An assumed ultraviolet relation
+\(\delta\asymp\ell_P/R_H\) likewise makes a curvature
+\(\delta^2/\ell_P^2\) of order \(R_H^{-2}\) by substitution.
+A comparison derivation of a physical \(\Lambda\) needs
+independent dynamics and an independently calibrated length. Assigning the length of the resulting horizon
+as input fixes the scale by assumption
+\cite{GibbonsHawking,obr:weinberg}.
+\end{example}
 
 %=====================================================================================
 \section{Single outcomes: bounded martingales and finite-tick halting}\label{sec:outcomes}
@@ -3831,6 +5309,739 @@ variation of a projection probability is at most the projective length.
 \end{remark}
 
 
+
+%=====================================================================================
+\section{Divergences, barycentres, Clifford transports and magic}\label{sec:divergences}
+
+The divergences below quantify how far apart two states are for the noise channels and records of
+Section~\ref{sec:observers}; they complement the bounds of Section~\ref{sec:bounds}.
+
+\subsection{Fidelity, relative entropy, and comparison barycentres}\label{ob:divergences}
+
+\begin{proposition}[Fidelity and data processing]\label{ob:fidelity}
+For finite-dimensional density matrices \(\rho,\sigma\), write
+\[
+ f(\rho,\sigma)=\tr(\rho^{1/2}\sigma\rho^{1/2})^{1/2}
+ =\|\rho^{1/2}\sigma^{1/2}\|_1,\qquad F=f^2,\qquad
+ d_{\rm B}=\sqrt{2-2f}.
+\]
+The trace here is the trace of the positive square root. For qubits
+\(\rho(r),\rho(s)\), with Bloch radii \(u=|r|\), \(v=|s|\),
+\[
+ F(\rho(r),\rho(s))=
+ \frac{1+r\cdot s+\sqrt{(1-u^2)(1-v^2)}}2 .
+\]
+Thus for \(uv>0\) the directional comparison is \(r\cdot s=uv(2p-1)\),
+where \(p=(1+\widehat r\cdot\widehat s)/2\) is the comparison of the two
+pure states. The fidelity of pure states equals this comparison. For
+positive matrices \(A,B\) of arbitrary trace the Bures--Wasserstein
+formula is \(d_{\rm BW}^2(A,B)=\tr A+\tr B-2f(A,B)\), and it gives
+\(d_{\rm B}\) on density matrices. For every finite-dimensional channel
+\(\Phi\), \(f(\Phi\rho,\Phi\sigma)\ge f(\rho,\sigma)\), and therefore
+\(F\) increases and \(d_{\rm B}\) decreases weakly. The same direction of
+monotonicity holds for the pure-state comparison whenever the outputs
+are pure.
+\end{proposition}
+\begin{proof}
+The square root has eigenvalues equal to the singular values of
+\(\rho^{1/2}\sigma^{1/2}\). Purifications can be written as vectorized
+matrices \(X,Y\) with \(XX^*=\rho\), \(YY^*=\sigma\), and
+\(\langle X,Y\rangle=\tr X^*Y\). For an ancilla of at least the system
+dimension, a singular-value decomposition writes these matrices as
+\(\rho^{1/2}U_0,\sigma^{1/2}V_0\), with \(U_0,V_0\) coisometries, by
+extending the partial isometries on their supports. The product
+\(V_0U_0^*\) has operator norm at most one. The trace against a
+contraction is bounded in absolute value by the sum of singular
+values, by taking a singular-value decomposition and bounding its
+diagonal pairings by one. The polar unitary attains the bound by
+choosing the coisometries to have common initial subspace. This proves
+the purification formula including singular states (Uhlmann's theorem
+\cite{obr:uhlmannfidelity,obr:jozsa}). Intrinsically \(d_{\rm B}\) is the
+minimum Euclidean distance between unit purifications after choosing
+their phases. Fixed-system purifications form unitary orbits, so
+minimizing over those orbits gives the triangle inequality by aligning
+the middle purification. Zero distance means equal purifications
+and hence equal states.
+
+If \(\Phi(Z)=\sum_j K_jZK_j^*\), its isometry
+\(V=\sum_j K_j\otimes|j\rangle\) satisfies \(V^*V=I\).
+Applying \(V\) to both maximizing purifications leaves their inner
+product unchanged and produces purifications of the outputs. The
+output maximum is therefore at least the input value. The same
+purification argument, with squared norms \(\tr A,\tr B\), gives the
+arbitrary-trace formula.
+
+For a positive \(2\times2\) matrix \(M\),
+\((\tr\sqrt M)^2=\tr M+2\sqrt{\det M}\), by summing its two
+square-root eigenvalues before squaring. Here the trace is
+\((1+r\cdot s)/2\) by Pauli orthogonality and the determinant is
+\((1-u^2)(1-v^2)/16\) by multiplicativity and the Bloch eigenvalues.
+When a radius vanishes the dot product is zero and needs no direction.
+The proof works at \(u,v=1\) as well, giving the comparison of
+Example~\ref{ex:qubit}.
+\end{proof}
+
+\begin{proposition}[A uniform Bures bound for depolarizing locking]\label{ob:bureslocking}
+Let \(0\le\lambda\le1\) and
+\(\mathcal D_\lambda(\rho)=\lambda\rho+(1-\lambda)I/d\).
+Then \(d_{\rm B}(\mathcal D_\lambda\rho,\mathcal D_\lambda\sigma)
+\le\sqrt\lambda\,d_{\rm B}(\rho,\sigma)\).
+\end{proposition}
+\begin{proof}
+Before removing a two-valued flag use the block states
+\(\lambda\rho\oplus(1-\lambda)I/d\) and
+\(\lambda\sigma\oplus(1-\lambda)I/d\). By the block square-root
+formula their root fidelity is \(\lambda f(\rho,\sigma)+1-\lambda\).
+Removing the flag increases it by Proposition~\ref{ob:fidelity}.
+Substitution in \(d_{\rm B}^2=2-2f\) gives the bound, including both
+endpoints.
+\end{proof}
+
+\begin{proposition}[Qubit relative entropies]\label{ob:relative}
+Use natural logarithms. The Umegaki relative entropy is
+\(D(\rho\Vert\sigma)=\tr\rho(\log\rho-\log\sigma)\) when
+\(\operatorname{supp}\rho\subseteq\operatorname{supp}\sigma\), and
+\(+\infty\) otherwise. For \(v<1\), put
+\[
+ H(u)=-\sum_{\pm}\frac{1\pm u}{2}\log\frac{1\pm u}{2},\qquad
+ a(v)=\tfrac12\log\frac{1-v^2}{4},\qquad
+ b(v)=\tfrac12\log\frac{1+v}{1-v}.
+\]
+Then \(D(\rho(r)\Vert\rho(s))=-H(u)-a(v)-b(v)r\cdot\widehat s\),
+with zero last term at \(v=0\), and \(0\log0=0\). For \(v=1\) it is
+zero if the states coincide and infinite otherwise.
+
+For faithful \(\sigma\) the Belavkin--Staszewski relative entropy is
+\(\widehat D(\rho\Vert\sigma)=\tr\sigma L\log L\), where
+\(L=\sigma^{-1/2}\rho\sigma^{-1/2}\). For qubits its two eigenvalues have
+sum \(\tau=2(1-r\cdot s)/(1-v^2)\) and product
+\(\delta=(1-u^2)/(1-v^2)\). With \(\lambda_+>\lambda_-\),
+\[
+ \widehat D(\rho\Vert\sigma)=
+ \frac{(1-\lambda_-)\lambda_+\log\lambda_+
+          +(\lambda_+-1)\lambda_-\log\lambda_-}
+      {\lambda_+-\lambda_-}.
+\]
+Equal eigenvalues give \(\widehat D=0\). For a rank-one reference use the
+same support convention as for \(D\). When \(\rho,\sigma\) commute the
+two relative entropies coincide. For a pure input \(\rho(r)\) and
+faithful \(\sigma\), the second entropy is \(\log\tau\). The Umegaki
+entropy obeys \(D(\Phi\rho\Vert\Phi\sigma)\le D(\rho\Vert\sigma)\) for
+finite-dimensional channels by Lindblad's data-processing theorem
+\cite[Theorem~1]{n2-lindblad}.
+\end{proposition}
+\begin{proof}
+The eigenprojectors of \(\rho(s)\) at \(v>0\) are
+\((I\pm\widehat s\cdot\boldsymbol{\sigma})/2\), giving
+\(\log\rho(s)=aI+b\widehat s\cdot\boldsymbol{\sigma}\).
+Taking the trace against \(\rho(r)\) proves the first formula.
+For \(L\) cyclicity and \(\sigma^{-1}=2(I-s\cdot
+\boldsymbol{\sigma})/(1-v^2)\) give \(\tau\), and the determinant ratio
+gives \(\delta\). Its spectral weights \(q_\pm=\tr\sigma P_\pm\)
+satisfy \(\sum q_\pm=1\) and \(\sum q_\pm\lambda_\pm=\tr\rho=1\).
+Solving these two equations gives the stated expression, with the
+zero-eigenvalue term defined by continuity. If \(L\) is scalar, its
+trace against \(\sigma\) forces \(L=I\). If \(\rho\) is pure, the only
+positive eigenvalue is \(\tau\), with \(q_+\tau=1\).
+In a common eigenbasis both expressions evaluate
+\(\sum_i \rho_i\log(\rho_i/\sigma_i)\) on the support.
+In general \(\tr\sigma L\log L\) also equals
+\(\tr\rho\log(\rho^{1/2}\sigma^{-1}\rho^{1/2})\) on the support
+of \(\rho\). Indeed for \(C=\rho^{1/2}\sigma^{-1/2}\) the identity
+\(C^*\log(CC^*)C=(C^*C)\log(C^*C)\) follows on the nonzero
+singular values of \(C\). These formulas specify the two divergences
+in the conventions of Umegaki and Belavkin--Staszewski
+\cite{obr:umegaki,obr:bs}.
+\end{proof}
+
+\begin{example}[Comparison alone does not determine a mixed-state divergence]
+\label{ob:divergencecounter}
+Co-directed Bloch vectors have directional comparison \(1\).
+Taking both states \(\rho(e_3/2)\) gives \(F=1\) and \(D=0\). With
+the same reference and pure input \(\rho(e_3)\), the commuting
+formulas give \(F=3/4\) and \(D=\log(4/3)\). Even the ordering of
+\(\widehat D\) and \(D\) can be strict at a fixed nontrivial angle:
+\(\rho=\rho(e_1)\), \(\sigma=\rho(e_3/2)\) give
+\(\widehat D=\log(8/3)\) and \(D=\log(4/\sqrt3)\), with
+\(8/3>4/\sqrt3\).
+\end{example}
+
+\begin{proposition}[Cone and state barycentres]\label{ob:barycentres}
+For a nonempty finite family \(A_j>0\) and \(w_j>0\) with
+\(\sum_j w_j=1\), the unique cone barycentre \(W\) minimizes
+\(\sum_j w_j d_{\rm BW}^2(X,A_j)\) over \(X\ge0\). It is positive definite
+and satisfies
+\[
+ T_jWT_j=A_j,\qquad T_j>0,\qquad \sum_jw_jT_j=I,\qquad
+ W=\sum_jw_j(W^{1/2}A_jW^{1/2})^{1/2}.
+\]
+The existence and uniqueness result is due to Bhatia, Jain and Lim
+\cite[Theorem~8 and Eq.~(57)]{n2-bjl}, as used in
+Theorem~\ref{thm:fmbary}. The transport certificate is also developed
+in the finite-memory expansion. For density inputs, the unique state
+barycentre is \(W/\tr W\). The state barycentre's transport balance is
+\(\sum_jw_j T_j=\sqrt{\tr W}\,I\) with the \(T_j\) evaluated at the
+state barycentre.
+\end{proposition}
+\begin{proof}
+The positive transport \(T_j=W^{-1/2}(W^{1/2}A_jW^{1/2})^{1/2}W^{-1/2}\)
+is the unique positive solution of \(T_jWT_j=A_j\). Multiplying the
+balance identity on both sides by \(W^{1/2}\) gives the displayed
+fixed-point equation. For a density \(Y\) and \(X=tY\),
+the objective is \(t+1-2\sqrt t\,m(Y)\) with
+\(m(Y)=\sum_j w_j f(Y,A_j)>0\), by square-root scaling.
+Its unique radial minimizer is \(t=m(Y)^2>0\), with value
+\(1-m(Y)^2\). Hence maximizing \(m(Y)\) is equivalent to minimizing
+the cone objective in that direction, and on the trace-one section
+the objective is \(2-2m(Y)\). Cone uniqueness gives state uniqueness.
+Multiplying the cone \(T_j\)'s by \(\sqrt{\tr W}\) gives the transports
+at \(W/\tr W\).
+\end{proof}
+
+\begin{example}[Rank-deficient inputs can have nonunique barycentres]
+\label{ob:singularbarycentre}
+For equally weighted orthogonal qubit projectors \(P_0,P_1\) the
+cone objective is
+\((\sqrt{X_{00}}-1/2)^2+(\sqrt{X_{11}}-1/2)^2+1/2\).
+Every matrix with diagonal \((1/4,1/4)\) and off-diagonal modulus at
+most \(1/4\) is positive semidefinite and minimizes it. On the trace-one
+slice, Cauchy--Schwarz gives \(\sqrt{Y_{00}}+\sqrt{Y_{11}}\le\sqrt2\)
+with equality at \(Y_{00}=Y_{11}=1/2\). The off-diagonal entry is thus
+again free within positivity. A unique state barycentre can also have
+a degenerate spectrum, as for identical inputs \(I/2\) in
+Remark~\ref{rem:fmaxisbary}.
+\end{example}
+
+\begin{lemma}[Reverse tests for faithful matrix references]\label{ob:reversematrix}
+A finite reverse test consists of probability weights \(p_i,q_i\)
+and prepared density matrices \(\tau_i\) satisfying
+\(\rho=\sum_i p_i\tau_i,\ \sigma=\sum_i q_i\tau_i\).
+For \(\sigma>0\) the minimum of \(\sum_i p_i\log(p_i/q_i)\), with the
+usual support conventions, is \(\widehat D(\rho\Vert\sigma)\).
+For \(\rho=\operatorname{diag}(1/3,2/3)\),
+\(\sigma=\operatorname{diag}(2/3,1/3)\) the cost is \((\log2)/3\).
+\end{lemma}
+\begin{proof}
+In a finite-cost test discard \(q_i=p_i=0\) and set
+\(E_i=q_i\sigma^{-1/2}\tau_i\sigma^{-1/2}\), \(x_i=p_i/q_i\).
+Then \(\sum_i E_i=I\), \(L=\sum_i x_i E_i\), and
+\(\tr\sigma E_i=q_i\). For \(g(x)=x\log x\), one has
+\(g(L)\preceq\sum_i g(x_i)E_i\). To see this use the isometry
+\(V\xi=(E_i^{1/2}\xi)_i\) and the diagonal block matrix
+\(B=\operatorname{diag}(x_i I)\), so \(L=V^*BV\). For \(z>0\),
+\(V^*(B+zI)^{-1}V\succeq(L+zI)^{-1}\) by the block inverse on
+\(\operatorname{im}V\) and its orthogonal complement. Apply this
+inequality to the scalar integrand
+\[
+ x\log x=\int_0^\infty\left(\frac{x}{1+z}-1+
+                  \frac{z}{x+z}\right)\,dz .
+\]
+This identity follows by integrating the difference of reciprocals
+for \(x>0\), and its integrand vanishes for \(x=0\).
+Finite spectral decompositions justify the operator integral on each
+matrix. Taking the trace against \(\sigma\) gives the cost bound.
+For attainability choose the spectral projectors of \(L\) for the
+\(E_i\), and set \(q_i=\tr\sigma E_i\),
+\(\tau_i=\sigma^{1/2}E_i\sigma^{1/2}/q_i\) and \(p_i=x_i q_i\).
+The two preparation identities hold, and the inequality is equality
+because the \(E_i\)'s are orthogonal projections. In the diagonal
+example choose the two basis projectors, giving
+\(-(\log2)/3+2(\log2)/3\).
+\end{proof}
+
+\begin{remark}[General convex reverse-test attainment]\label{ob:reversegeneral}
+For positive normal functionals \(\rho,\sigma\) on a von Neumann algebra,
+minimize the integrated closed perspective of a finite convex function
+\(g:(0,\infty)\to\mathbb R\) over positive mass-preserving preparations
+from classical \(L^1\) that take nonnegative \(p,q\) to \(\rho,\sigma\).
+The perspective is \(qg(p/q)\) in the positive quadrant with the
+lower semicontinuous extension at the boundary. It can be defined
+without a quotient at zero by subtracting an affine supporting line at
+\(1\) before extending the nonnegative remainder. For a fixed universe
+of classical spaces the extended minimum is attained by a regular
+finite scalar measure on \([0,1]\), with densities \(t\) and \(1-t\) and
+a bounded positive mass-preserving preparation into the normal
+functionals. The minimum avoids \(-\infty\), can be \(+\infty\), and is
+zero for the zero pair. This is the general convex reverse-test
+attainment result recorded in the formal development \cite{obr:leanreverse}, with normality
+of \(\rho+\sigma\) as input. The operator-convex matrix calculation in
+Lemma~\ref{ob:reversematrix} gives an explicit spectral optimizer
+in its domain. Reverse tests and maximal quantum \(f\)-divergences
+were introduced by Matsumoto \cite{obr:matsumoto}.
+\end{remark}
+
+\begin{remark}[Subentropy and prediction]\label{ob:subentropy}
+For a density matrix \(A\) define the subentropy by
+\[
+ Q(A)=\int_0^\infty
+ \left[\frac{z}{1+z}-\det(I+A/z)^{-1}\right]\,dz .
+\]
+For a finite ensemble \((p_x,\rho_x)\), let
+\(\omega=\sum_x p_x |x\rangle\langle x|\otimes\rho_x\),
+\(\bar\rho=\sum_xp_x\rho_x\), and let
+\(p_{\rm guess}=\max_{\{M_x\}}\sum_xp_x\tr(M_x\rho_x)\) over POVMs.
+The formally established bound \cite{obr:leansubentropy} is
+\[
+ Q(\omega)-Q(\bar\rho)\le1-p_{\rm guess}\le-\log p_{\rm guess},
+ \qquad 0<p_{\rm guess}\le1 .
+\]
+The maximum exists on the compact finite-dimensional POVM set and is
+positive by always guessing the most likely label. The last inequality
+is the scalar logarithm tangent bound. Subentropy as an accessible
+information bound was introduced by Jozsa, Robb and Wootters
+\cite{obr:jrw}.
+\end{remark}
+
+\begin{example}[Orthogonal and identical records]\label{ob:subentropyexample}
+For equiprobable pure binary preparations \(Q(\omega)=\log2-1/2\)
+in both cases. With orthogonal outputs,
+\(Q(\bar\rho)=\log2-1/2\) and \(p_{\rm guess}=1\), using the basis
+measurement. With identical outputs \(Q(\bar\rho)=0\) and
+\(p_{\rm guess}=1/2\), because the sum of the two POVM effects is
+\(I\). The entropy \(S(\omega)-S(\bar\rho)\) in the identical case is
+\(\log2\). For the calculation, extra zero eigenvalues leave the
+determinant unchanged. A pure-state determinant makes the integrand
+zero. With the spectrum \((1/2,1/2)\) the integrand is
+\(1/(z+1/2)-1/(z+1)-1/[4(z+1/2)^2]\), whose integral gives the value.
+\end{example}
+
+\begin{remark}[Supported recovery and its completion]\label{ob:completionrecovery}
+The instrument construction of Proposition~\ref{prop:fminstrument}
+extends Kraus operators with
+\(\sum_jK_j^*K_j=P=P^*=P^2\) to a channel by adding
+\(\tr[(I-P)X]|v\rangle\langle v|\) for a unit output vector \(v\).
+Indeed, for an orthonormal basis $(e_i)$ of the orthogonal
+complement of the range of $P$, add the Kraus operators
+$|v\rangle\langle e_i|$. Their adjoint-square sum is $I-P$
+and their action is exactly the indicated reset term.
+This works on all complex input matrices. In a qubit example
+\(K_1=P=|0\rangle\langle0|\), \(v=|0\rangle\), the result is the
+constant-state channel \(X\mapsto(\tr X)P\), since its two coefficients
+sum to \(\tr X\). Hence sector completion can discard all phase
+information. To compare genuinely approximate recovery with separability
+obstructions one would have to specify the recoverable algebra, a loss,
+and a primal optimization with a matching dual.
+\end{remark}
+
+\begin{proposition}[Residual witness for a separable cone]\label{ob:separableresidual}
+In finite dimensions let \(\mathcal C\) be the cone of sums of
+positive product operators, \(P\) the Hilbert--Schmidt nearest point
+to a Hermitian \(R\), \(r=R-P\), \(W=P-R\). With the real trace pairing,
+\[
+ \langle P,r\rangle=0,\qquad
+ \langle S,r\rangle\le0\quad(S\in\mathcal C),\qquad
+ \langle R,W\rangle=-\|r\|_{\rm HS}^2.
+\]
+The witness \(W\) is block positive, meaning its expectation on every
+product vector is nonnegative. Its expectation on \(R\) is strictly
+negative for \(R\notin\mathcal C\).
+\end{proposition}
+\begin{proof}
+The trace-one section is the convex hull of the compact set of
+product pure-state projections by spectral decomposition of each
+positive factor. It is compact by the finite-dimensional convex-hull
+theorem. A convergent sequence of cone points has convergent traces,
+which gives closure by this compactness if the limit trace is
+positive and by the positive eigenvalue bound
+\(\|S\|_{\rm HS}\le\tr S\) if the trace tends to zero.
+Minimizing the squared distance on the closed convex cone gives
+existence by coercivity and uniqueness by strict convexity.
+Differentiation on segments from \(P\) to \(S\) yields
+\(\langle r,S-P\rangle\le0\). Taking \(S=0,2P\) forces
+orthogonality, leaving the polar inequality and then the asserted
+pairing with \(R=P+r\). Apply the inequality to product rank-one
+operators to obtain block positivity. Strictness follows from
+uniqueness and \(r\ne0\). This is the finite-dimensional cone
+projection argument of Moreau \cite{obr:moreau}.
+\end{proof}
+
+\begin{example}[Bell-state residual]\label{ob:bellresidual}
+For \(R=|\Phi^+\rangle\langle\Phi^+|\), where
+\(\Phi^+=(|00\rangle+|11\rangle)/\sqrt2\), take
+\(P=R/2+I/4\), \(W=I/4-R/2\).
+The Bell Pauli expansion gives \(4P\) as the sum of six product
+projections, the two same-sign pairs along each of \(X,Z\) and
+the two opposite-sign pairs along \(Y\). Thus \(\tr P=3/2\).
+The product overlap with \(\Phi^+\) is at most half the squared norm
+by Cauchy--Schwarz, giving block positivity of \(W\).
+Also \(\tr PW=0\), since \(R^2=R\) and \(\tr I=4\). These two
+conditions imply nearest-point optimality by the segment inequality
+in Proposition~\ref{ob:separableresidual}, or by expanding
+\(\|R-S\|_{\rm HS}^2=\|R-P\|_{\rm HS}^2+\|P-S\|_{\rm HS}^2
++2\langle W,S-P\rangle\).
+Here \(W^2=I/16\), so the squared distance is \(1/4\) and
+\(\tr RW=-1/4\).
+\end{example}
+
+\subsection{Clifford transports, Majorana codes, and steering}
+\label{ob:magic}
+
+\begin{proposition}[Stabiliser geometry of a clocked qubit]\label{ob:stabiliser}
+Relative to the Pauli frame \(X,Y,Z\), the pure stabiliser states are the
+six axis projectors \((I\pm X)/2,(I\pm Y)/2,(I\pm Z)/2\).
+They form one orbit under the 24 proper signed permutations of the
+Bloch axes. This is the projective one-qubit Clifford group, lifted
+to a finite subgroup of the left transports in
+Proposition~\ref{prop:clock}. Its mixed free states are the octahedron
+\(\mathcal S=\{\rho(r): |r_x|+|r_y|+|r_z|\le1\}\).
+The trace distance \(M_1(\rho)=\min_{\omega\in\mathcal S}T(\rho,\omega)\)
+is zero exactly on \(\mathcal S\). On the qubit it equals half the
+Euclidean distance from \(r\) to this octahedron. It cannot increase
+under a qubit channel preserving \(\mathcal S\). The analogous
+\(\min_{\omega\in\mathcal S}d_{\rm B}(\rho,\omega)\) has the same
+faithfulness and data-processing property. The nonstabiliser equatorial
+state with Bloch vector \((1,1,0)/\sqrt2\) has
+\(M_1=(1-1/\sqrt2)/2\). Its preparation from \(|0\rangle\) is the
+Hadamard followed by the gate \(\operatorname{diag}(1,e^{i\pi/4})\).
+\end{proposition}
+\begin{proof}
+A nontrivial one-qubit stabiliser is generated by a signed \(X,Y\), or
+\(Z\). Normalizing the Pauli group permutes these axes with signs,
+and unitary conjugation preserves the orientation by the identity
+\(XY=iZ\). Conversely each of the \(3!\,2^2=24\) proper signed
+permutations is a rotation, which has two quaternionic lifts in
+\(\mathrm{SU}(2)\). The inverse image is a group of order \(48\)
+and acts transitively on the six axis rays. The octahedron identity
+follows by writing \(r\) as a combination of signed coordinate
+vertices with total weight \(\|r\|_1\), and filling the residual
+weight with a balanced antipodal pair. Pauli orthogonality gives
+\(T(\rho(r),\rho(s))=|r-s|/2\). Compactness of \(\mathcal S\) and
+contractivity of the respective metrics give the zero sets and
+monotonicity by evaluating the output distance at the image of an
+input minimizer. In the equatorial example the inequality \(s_x+s_y
+\le1\) bounds \(|r-s|\) below by \(1-1/\sqrt2\). The point
+\((1/2,1/2,0)\) attains the bound. The gate preparation follows by
+applying the two matrices to \((1,0)^{\mathsf T}\).
+\end{proof}
+
+\begin{remark}[Magic as a resource]\label{ob:magicresources}
+The choice of Pauli frame specifies the free states. Bravyi and Kitaev's
+distillation construction supplements Clifford operations with noisy
+nonstabiliser ancillas \cite{obr:bk}. Veitch et al.\ develop the
+stabiliser resource theory and the odd-prime phase-space mana
+\(\log\|W(\rho)\|_1\) \cite{obr:veitch}. Tensor factorization of an
+appropriately normalized phase-point frame makes mana additive on
+tensor products, since the \(\ell^1\) norm multiplies. A nonnegative
+column-stochastic transition on Wigner coordinates contracts this
+norm by the triangle inequality. Gross's odd-dimensional discrete
+Hudson theorem characterizes pure states of nonnegative Wigner
+function as stabiliser states in its odd-dimensional phase-space
+construction \cite[Theorem~2]{obr:gross}. The qubit distance below
+uses a specified phase-point frame and a distance to the entire free
+polytope, including its signed coordinates.
+\end{remark}
+
+\begin{proposition}[A Majorana distance bound]\label{ob:majorana}
+Let \(C\subseteq\mathbb F_2^n\) be self-orthogonal for the coordinate
+dot product, contain the all-ones word, and have \(2\dim C<n\).
+For \(n\le14\) the minimum weight of \(C^\perp\setminus C\) is \(2\).
+The distance is \(4\) for the length \(16\) code of all affine
+binary functions on \(\mathbb F_2^4\).
+\end{proposition}
+\begin{proof}
+The product of Majorana generators indexed by an even-weight word
+commutes with the product indexed by a second even word precisely
+when their intersection is even. Indeed swapping words has sign
+\((-1)^{|x||y|-|\operatorname{supp}x\cap\operatorname{supp}y|}\).
+The word of all ones represents total parity, so the centralizing
+words \(C^\perp\) have even weight. Phases can be fixed on commuting
+generators to obtain stabilisers. The inequivalent centralizers
+are the cosets modulo \(C\), giving the stated logical weight
+convention for Majorana codes \cite{obr:hastings}. Dimension
+nondegeneracy ensures \(C^\perp\setminus C\) is nonempty.
+
+Assume there is no weight-two word outside \(C\) in \(C^\perp\).
+If two coordinate functionals on \(C\) are equal, the word on that
+pair is in \(C^\perp\) and hence in \(C\). An equivalence class of
+equal functionals has size at most two, since two such words
+overlapping in a single coordinate violate self-orthogonality.
+Remove each size-two class. The code splits as the direct sum of
+its pair words and the code on the unpaired coordinates. In fact a
+word has equal entries on each pair and can be cleared by adding that
+pair word. If the remaining code has dimension \(k+1\) and length
+\(m\), then \(m-2(k+1)=n-2\dim C>0\). The surviving coordinates are
+distinct on it, and it contains its all-ones word. In a generating
+matrix starting with that word the columns are \((1,x)\) with
+distinct \(x\in S\subseteq\mathbb F_2^k\), \(|S|=m\).
+Self-orthogonality of the rows means that every monomial of degree
+at most two has even sum on \(S\).
+
+Since \(2(k+1)<m\le14\), \(k\le5\). For \(k<3\), \(m\le2^k\)
+is already impossible. For \(k\ge3\) let \(a_J\) be the coefficients
+of the indicator of \(S\) in its binary multilinear expansion
+\(\sum_J a_J x^J\), obtained by interpolation on the cube.
+Summing \(x^L\) times the expansion gives
+\(0=\sum_{J\supseteq[k]\setminus L} a_J\) for \(|L|\le2\),
+since a Boolean monomial sums to zero unless it contains every
+coordinate. In increasing \(|L|\) this gives \(a_J=0\) at
+all degrees \(\ge k-2\). For \(k=3\) the weight is \(0\) or \(8\),
+and for \(k=4\) an affine function has weight \(0,8\), or \(16\).
+neither case allows \(2(k+1)<m\le14\).
+
+For \(k=5\) the indicator is quadratic. Its polarization
+\(B(x,h)=q(x+h)+q(x)+q(h)+q(0)\) is alternating bilinear.
+An alternating bilinear form has even rank \(2s\), by successively
+splitting off a pair with pairing one and its orthogonal complement.
+Writing \(A=\sum_x(-1)^{q(x)}\) and sorting the terms in \(A^2\)
+by \(h\) gives
+\(A^2=32\sum_{h\in\ker B}(-1)^{q(h)+q(0)}\).
+The exponent is linear on the kernel, so \(A=0\) or
+\(|A|=2^{5-s}\), where \(s\in\{0,1,2\}\). The weight
+\((32-A)/2\) belongs to \(\{0,8,12,16,20,24,32\}\), which
+excludes \(12<m\le14\).
+
+For the length \(16\) example the five coordinate and constant
+generators are independent, and every product of two is a monomial
+of degree at most two summed on a four-cube, hence has even sum.
+The columns are distinct, so there is no weight-two centralizer
+and parity excludes odd weights. The four corners of a coordinate
+two-plane sum to zero as columns of a parity-check matrix,
+so their indicator is a weight-four centralizer. Affine functions
+have weights \(0,8,16\), so this word is outside the code.
+At length four \(C=\operatorname{span}\{1111\}\) gives the
+simple weight-two witness \(1100\). If \(2\dim C=n\), then
+\(\operatorname{span}\{1100,0011\}\) at length four illustrates
+that \(C^\perp=C\) and there is no logical word.
+\end{proof}
+
+\begin{definition}[Fixed qubit Wigner coordinates]\label{ob:wigner}
+Order phase points as \((0,0),(0,1),(1,0),(1,1)\). For
+\(a=(a_1,a_2)\) put
+\(s_a=((-1)^{a_2},(-1)^{a_1+a_2},(-1)^{a_1})\) and
+\(A_a=(I+s_a\cdot\boldsymbol{\sigma})/2\).
+Use \(W_1(\rho)_a=\tr(\rho A_a)/2\) and
+\(W_2(R)_{ab}=\tr(R(A_a\otimes A_b))/4\).
+For each \(j=1,2\) let \(C_j\) be the \(\ell^1\) distance in
+these coordinates to the convex hull of the images of pure
+\(j\)-qubit stabilisers. The latter are the one-dimensional joint
+\(+1\) eigenspaces of commuting signed Pauli subgroups of order \(2^j\).
+\end{definition}
+
+\begin{lemma}[One- and two-qubit free vertices]\label{ob:wignervertices}
+For a Bloch vector \(r\), \(W_1(\rho(r))_a=(1+s_a\cdot r)/4\).
+The one-qubit vertices are the six permutations of
+\((1/2,1/2,0,0)\). Their convex hull consists of vectors summing to
+one with all coordinates in \([0,1/2]\). There are \(36\) product
+and \(24\) entangled two-qubit vertices. Product vertices put
+weight \(1/4\) on a two-by-two rectangle. Each entangled Wigner
+matrix has uniform marginals and is either \(P/4\) or
+\((J-2P)/8\), where \(P\) is a permutation matrix and \(J\)
+the all-ones \(4\times4\) matrix.
+\end{lemma}
+\begin{proof}
+The first formula is Pauli trace orthogonality. The six permutations
+are the images of the six signed axes. An extreme point of the
+bounded-coordinate probability polytope cannot have two interior
+coordinates (perturb them in opposite directions), and the sum
+constraint precludes exactly one, so the vertices are precisely as
+stated. For two qubits a stabiliser projector is the group average,
+the projection onto common invariants and trace one by Pauli
+orthogonality. If a generator is local, its eigenprojector fixes
+one factor and the other commuting generator fixes a Pauli ray on
+the other factor. Otherwise all three nonidentity elements pair
+distinct Paulis on each side: repetition on one side would force
+anticommutation or produce a local element. The projector is
+\((I+\sum_{ij}O_{ij}\sigma_i\otimes\sigma_j)/4\), where \(O\)
+is a signed permutation of determinant minus one. The determinant
+condition follows from multiplying two commuting products, whose
+sign is minus the product of the two ordered Pauli orientations.
+Conversely this condition gives a subgroup of order four for each
+such \(O\), yielding \(24\) projectors. Its Wigner entries are
+\((1+s_a^{\mathsf T}O s_b)/16\). The vectors \(s_a\) have all sign
+products positive and mutual dot products \(-1\) off the diagonal.
+The signed permutation takes this tetrahedron either onto itself or
+its negative. The displayed entry formula then has one \(1/4\)
+per row and column, or one \(-1/8\) and three \(1/8\) per row
+and column, respectively. Products of the one-qubit Wigner vectors
+follow from multiplicativity of the tensor trace.
+\end{proof}
+
+\begin{proposition}[Equatorial tensor rule]\label{ob:wignertensor}
+For all qubit states \(\rho,\sigma\) the quantity
+\[
+ \Delta=(1+C_1(\rho))(1+C_1(\sigma))-1-C_2(\rho\otimes\sigma)
+\]
+is nonnegative. It is zero when both Bloch \(z\) components
+vanish, including mixed states. For the equatorial state
+\(r=(3/5,4/5,0)\), \(C_1=1/5\) and \(C_2(\rho(r)^{\otimes2})=11/25\).
+\end{proposition}
+\begin{proof}
+Let \(w,v\) be the two one-qubit Wigner vectors and \(p,q\)
+their nearest free vectors. These exist by compactness. Then
+\(p\otimes q\) is free and
+\[
+ w\otimes v-p\otimes q=(w-p)\otimes q+p\otimes(v-q)
+                     +(w-p)\otimes(v-q).
+\]
+The norm of a tensor multiplies and \(p,q\) are nonnegative
+probability vectors. This gives the upper bound on \(C_2\).
+For an equatorial vector the four coordinates are
+\((1\pm x\pm y)/4\), with independent signs. At most one is
+negative, because \(\min(|x+y|,|x-y|)\le1\).
+If a coordinate \(-a<0\) occurs, the opposite one is \(1/2+a\)
+and the other two are in \([0,1/2]\). Clipping the two offending
+coordinates gives a free vector at distance \(2a\), and any free
+vector must pay at least \(2a\) on these coordinates. Otherwise
+the vector is free. Thus \(1+C_1=\|w\|_1\) in either case.
+
+Use the dual sign vectors \(\eta,\xi\) equal to \(+1\) except
+at each negative coordinate, where they are \(-1\). For a free
+two-qubit vertex the pairing against \(\eta\otimes\xi\) is at
+most one. This holds by nonnegativity for a product vertex.
+For an entangled vertex with uniform marginals the pairing is
+\(1\) if no signs are flipped, \(1/2\) if one is flipped, and
+\(4W_{ab}\le1\) if both are flipped at \(a,b\).
+Hence the \(\ell^1\) distance is at least
+\(\|w\|_1\|v\|_1-1\) by evaluation of this dual vector on the
+difference. The two bounds coincide. The example has Wigner vector
+\((3/5,-1/10,1/5,3/10)\), giving the two asserted values.
+\end{proof}
+
+\begin{example}[Nonfactorizing tensor deficit]\label{ob:wignerdeficit}
+For \(r_A=(3,4,0)/5,\ r_B=(5,12,0)/13,\ s=(1,4,8)/9\), all
+three states are pure by their squared Bloch radii. The equatorial
+formula gives \(C_1(\rho(r_A))=1/5\), \(C_1(\rho(r_B))=2/13\).
+The coordinates of \(\rho(s)\) are \((11,6,-1,2)/18\).
+Their first coordinate exceeds \(1/2\) by \(1/9\), so conservation
+of their sum gives \(C_1\ge2/9\), attained by \((9,7,0,2)/18\).
+The two joint distances, with \(\rho(s)\) as second input, are
+\(7/18\) and \(79/234\). Consequently the respective ratios
+\(\Delta/C_1\) are \(7/18\) and \(17/36\). They refute both equality
+in the global tensor rule and an ansatz
+\(\Delta(\rho,\sigma)=C_1(\rho)g(\sigma)\) for all magic equatorial
+first inputs and all positive-octant second inputs.
+
+Here are exact certificates for the joint distances. Let \(D\)
+have rows \((1,1,-1,1)\), \((-1,-1,1,-1)\), and two copies of
+\((1,-1,-1,-1)\). Its pairing against any rectangle vertex is
+at most \(1/2\). The sum of each two rows has at most \(2\) in
+its two largest coordinates combined. Against \(P/4\) the pairing
+is at most \(1/2\), since the last two rows cannot both select a
+positive entry in distinct columns. Against \((J-2P)/8\) it is
+at most \(-1/2+4/4=1/2\), since the total sum of \(D\) is
+\(-4\) and a permutation selects four signs. The entrywise
+pairing of \(D\) with a joint input, minus \(1/2\), gives the
+dual lower bound.
+
+For the upper bound take the mixture of the five free vertices
+with Pauli labels
+\((+X,+Y)\), \((+Y,+Y)\), \((+X,+Z)\), \((+Y,+Z)\) and the common \(+1\)
+eigenstate of \(X\otimes Y,\ Y\otimes Z\). The latter's third
+group element is \(-Z\otimes X\). The four product vertices
+are the indicator rectangles from their one-qubit supports, scaled
+by \(1/4\). The fifth Wigner matrix is
+\[
+ \frac18\begin{pmatrix}
+ 1&1&-1&1\\ -1&1&1&1\\ 1&-1&1&1\\ 1&1&1&-1
+ \end{pmatrix},
+\]
+as follows from Lemma~\ref{ob:wignervertices}.
+Use weights \((3,8,15,17,2)/45\) and \((4,24,27,58,4)/117\),
+respectively. Subtracting each mixture from its input outer product,
+the entrywise absolute sums are \(70/180\) and \(79/234\),
+which match \(D\)'s pairings minus \(1/2\). Equivalently the signs
+of the differences agree with \(D\) wherever nonzero, and each
+of the five free vertices has pairing \(1/2\).
+\end{example}
+
+\begin{example}[Negative third Clifford moment]\label{ob:thirdmoment}
+For \(d\) an odd prime, a stochastic Lagrangian \(L\) in
+\(\mathbb F_d^3\oplus\mathbb F_d^3\) has dimension three,
+contains \((\mathbf1,\mathbf1)\), and has
+\(x\cdot x-y\cdot y=0\) for every \((x,y)\in L\).
+The convention is \(r(L)=\sum_{(x,y)\in L}|x\rangle\langle y|\).
+For \(n\) qudits regroup \(r(L)^{\otimes n}\) into three copies,
+and set \(\kappa=\langle\psi^{\otimes3},r(L)^{\otimes n}
+\psi^{\otimes3}\rangle\) in that order. The universal pointwise
+clause \(0\le\kappa\le1\) in Zhu, Mao and Yi's Conjecture~2
+is false \cite[Eq.~(43) and Conjecture~2]{obr:zmy}.
+
+Take \(d=11,n=1\), \(O\) with diagonal \(7\) and off-diagonal
+\(8\), and \(L=\{(Oy,y):y\in\mathbb F_{11}^3\}\).
+Modulo \(11\) the row sums are \(23\equiv1\), and the diagonal
+and off-diagonal entries of \(O^{\mathsf T}O\) are \(177\equiv1\)
+and \(176\equiv0\). The graph condition gives dimension
+three and the other two defining conditions. Put
+\[
+ v=(-2,0,-2i,1-2i,-1-i,1+2i,-1-2i,-2,-2i,2-i,1-i),
+ \qquad \psi=v/\sqrt{40}.
+\]
+The squared norms sum to \(40\). For each \(a=0,\ldots,10\)
+sum \(\prod_{k=1}^3 v_{y_k}\overline{v_{(Oy)_k}}\) over
+\((y_2,y_3)\) with \(y_1=a\), taking each index modulo 11.
+The real row sums are
+\((58,0,-236,153,-644,-10,-47,0,-208,301,-563)\).
+Their sum is \(-1196\). The imaginary part of the total is zero
+by exchanging \(y\) and \(Oy\), since \(O^2=I\).
+Thus \(\kappa=-1196/40^3=-299/16000\), a real negative
+counterexample. For graph subspaces of orthogonal maps, \(r(L)\) is a
+permutation unitary, giving the corrected bound \(|\kappa|\le1\) on
+that class by Cauchy--Schwarz.
+\end{example}
+
+\begin{remark}[Steering centre and the three-setting threshold]
+\label{ob:steering}
+For two qubits define marginal Bloch vectors \(a,b\) and
+\(T_{ij}=\tr(\rho\,\sigma_i\otimes\sigma_j)\).
+Bob's steering ellipsoid centre is
+\(c_B=(b-T^{\mathsf T}a)/(1-|a|^2)\) for \(|a|<1\), and is
+\(b\) for \(|a|=1\) \cite{obr:jevtic}. In fact an Alice effect
+proportional to \(I+v\cdot\boldsymbol{\sigma}\), \(|v|\le1\),
+gives Bob Bloch vector \((b+T^{\mathsf T}v)/(1+a\cdot v)\).
+For \(a=ue_3\), \(u<1\), change coordinates to
+\(w_\perp=\sqrt{1-u^2}\,v_\perp/(1+uv_3)\),
+\(w_3=(v_3+u)/(1+uv_3)\).
+This map carries the ball to itself since
+\(1-|w|^2=(1-u^2)(1-|v|^2)/(1+uv_3)^2\), and its inverse replaces
+\(u\) by \(-u\). The Bob Bloch vector is affine in \(w\), because
+\(v_\perp/(1+uv_3)=w_\perp/\sqrt{1-u^2}\),
+\(v_3/(1+uv_3)=(w_3-u)/(1-u^2)\), and
+\(1/(1+uv_3)=(1-u w_3)/(1-u^2)\). Its centre is its value at
+\(w=0\). A pure Alice marginal forces a product state, giving the
+degenerate ellipsoid \(\{b\}\) at \(u=1\).
+
+Optimizing the three-setting
+linear steering test with arbitrary unit Alice vectors \(\alpha_i\)
+and orthonormal Bob vectors \(\beta_i\) gives
+\[
+ F_3=\max_{\alpha,\beta}\frac{|\sum_{i=1}^3
+          \alpha_i^{\mathsf T}T\beta_i|}{\sqrt3}=\|T\|_{\rm HS}.
+\]
+For fixed \(\beta_i\), choose \(\alpha_i\) parallel to \(T\beta_i\)
+when nonzero and apply Cauchy--Schwarz to the three lengths
+for the upper bound. For equality choose a first \(\beta_i\) whose
+Rayleigh quotient for \(T^{\mathsf T}T\) is \(\tr(T^{\mathsf T}T)/3\),
+by continuity between extreme eigenvectors. On its remaining plane
+the average of two orthogonal diagonal entries is this same value.
+Rotating the final two axes continuously interchanges their entries,
+so an orthonormal basis balancing both exists. The local-hidden-state
+bound \(F_3\le1\) in this test follows since each hidden Bloch vector
+contributes at most \(\sum_i|\beta_i\cdot b_{\lambda}|/\sqrt3
+\le |b_\lambda|\), even allowing arbitrary Alice signs
+\cite{obr:cjwr}.
+
+The formally established centre bound \cite{obr:leansteering} is
+\(F_3\le\max\{\sqrt{3(1-t)},1\}\), \(t=|c_B|\). For every
+\(0\le t<2/3\) an explicit state at that centre radius has \(F_3>1\).
+Put \(d=2-2t-t^2\) and \(s=t(1-t)/d\). Here \(d>0\) and \(0\le s<1\)
+since \(d-t(1-t)=2-3t>0\). Take the party swap of
+\[
+ \tfrac12|\xi\rangle\langle\xi|+\tfrac12 t(1-s)|01\rangle\langle01|,
+ \qquad
+ \xi=\sqrt{1+s}|00\rangle+\sqrt{(1-t)(1-s)}|11\rangle.
+\]
+The coefficients are nonnegative and the trace is one.
+The marginal \(z\) components after the swap are \(s\) and
+\(t+(1-t)s\). The correlations are diagonal
+\((p,-p,1-t+ts)\), where \(p^2=(1+s)(1-t)(1-s)\).
+Substitution gives \(c_B=te_3\) and
+\(d(F_3^2-1)=(2-3t)^2>0\).
+The sharp radius refers to existence of a violation of this test.
+For example \(F_3=\sqrt3\) on \(\Phi^+\) from
+\(T=\operatorname{diag}(1,-1,1)\), and \(F_3=0\) on \(I/4\),
+both at \(t=0\). The product \(|00\rangle\) has \(t=1\) and
+\(F_3=1\). The bound excludes a violation also at \(t=2/3\).
+\end{remark}
 
 %=====================================================================================
 \paperpart{Part IV.  Fields, particles and gravity}
@@ -8970,7 +11181,8 @@ restart converse, affine unread maps from no-signalling, and the Born threshold 
 for the invariant auxiliary law ([R], Theorems~\ref{thm:sorigidity}, \ref{thm:sosphere}, \ref{thm:sosimplex}), and the inverse-tick
 bound ([Tr]); the rapidity--entanglement budget for three qubits, the speed limits with their
 sharp constants ([Cd]) and the Tsirelson bound from the composite inputs (Section~\ref{sec:bounds}); measurement-based
-universality and exact recovery for round-trip-closed codes ([Ac], [Sub]); the gauge kinetic form of a connection metric and the
+universality and exact recovery for round-trip-closed codes ([Ac], [Sub]); reciprocal locking, noise channels,
+records, finite-access windows and divergences (Sections~\ref{sec:observers}--\ref{sec:divergences}; [Ou]); the gauge kinetic form of a connection metric and the
 heat-coefficient trace normalisation (under KK and Sn, Section~\ref{sec:couplings}); the triality count of three
 eight-dimensional modules and the obstruction to a colour--weak subalgebra of $\mathfrak{so}(8)$ (Section~\ref{sec:triality}); the two-scale one-loop fit
 under [Ps], the clock proper time under [Ck], the cap first law, and linearised Einstein equations under
@@ -8980,12 +11192,13 @@ group, its breaking and the hypercharges (C0--C3, [Span], G(i)--(iv)); $\sin^2\t
 the round-$S^4$ couplings $\kappa_V=\sqrt{1-\xi}$, $\kappa_{2V}=1-2\xi$ (F, F$_{\mathrm g}$(a), F$_{\mathrm H}$); the obstruction for the ungauged back-reacting centre field and the zero-stress flat vacuum (E, F, GR; F$_{\mathrm g}$).
 \emph{Inputs not derived}: [Bil], [Bil$_\cL$], [Span], [Loc], [O], [N], Postulates C1(b), C2, C3, [Sub], the reading
 inputs [L], [W], [Comp], [T], and [B] or, equivalently, [Cl] with [NT], the hypotheses $w\ge0$, $w=f(\beta_N)$ and (a)--(c) of
-Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), [R], [Tr], [Cd], [Bs], [Gw], [Ac], [Lq], [Sb], [Ix], [Zw], [KK], [Sn], [Om], [Cc], [Ps], [Ea], [Ck], [Gl], [Eq], [Ue], [Ca], Hypotheses Ap, U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm H}$ (with F$_{\mathrm{Hf}}$), F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
+Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), [R], [Tr], [Cd], [Bs], [Gw], [Ou], [Pl], [Lp], [Ac], [Lq], [Sb], [Ix], [Zw], [KK], [Sn], [Om], [Cc], [Ps], [Ea], [Ck], [Gl], [Eq], [Ue], [Ca], Hypotheses Ap, U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm H}$ (with F$_{\mathrm{Hf}}$), F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
 [Bil$_\cL$], [Loc], [O] and [N] for the composite.
 \emph{Open}: a unit of length; $G_Nv^2$; Hypothesis~GR with sources and its consistency with
 Hypothesis~E; the ratio $g'/g$; the number of structures; three generations; scales, masses and
 Yukawa couplings; which single-outcome dynamics, if any, is realised (Hypothesis~Ap, Conjecture~\ref{conj:somixing}); small-phase control
-in a cap corridor (Conjecture~\ref{conj:fmcontrol}); a uniform entropy gap for growing bridges (Conjecture~\ref{ub:uniform});
+in a cap corridor (Conjecture~\ref{conj:fmcontrol}); a uniform entropy gap for growing bridges (Conjecture~\ref{ub:uniform}); the five-step prefix
+(Conjecture~\ref{ob:prefixconjecture});
 the continuum hypotheses of Theorem~\ref{ub:einstein}; a derivation of [Loc], [O], C2, [Cl] (other than from [Ph]) or [B]; local equilibration in the
 singlet sector (Conjecture~\ref{conj:cueth}); a principle selecting the radial potential; a microscopic origin of the round $S^4$ target
 (Conjecture~\ref{conj:hbmicro}).
@@ -9428,6 +11641,7 @@ Effects, POVMs, instruments, complete positivity, conditional states & theorem f
 Origin-free generators: clock, exchange; closed pair unique up to time unit & theorem; permutation-symmetric generator fixed up to time unit iff $N\in\{2,3\}$\\
 Connected closed clock-invariant round-trip-closed sets are spheres of complex subspaces; all dimensions $1\le d\le2^N$; exchange sector $\mathrm{Sym}^N(\C^2)$ & theorem (Prop.~\ref{prop:rtclosed}; Cor.~\ref{cor:substructure} under C0--C2, [Span]; Prop.~\ref{prop:symsector} under C0, C1, [Span], C3); as systems: [Sub]\\
 Skyrme term: area square, degree bound $6\pi^2v/e_{\mathrm S}$, scaling, Hopf charge and its bound, $\pi_1$ of configuration spaces, screening, radial unwinding & theorem under [F], [F$_{\mathrm S}$] (Thm.~\ref{thm:skbound}, Props.~\ref{prop:skhopf}, \ref{prop:skconfig}, \ref{prop:skscreen}, \ref{prop:skradial}, Thm.~\ref{thm:vk}); existence of minimisers and spin from rotations: cited; metastability: conjecture; particle readings: [P]\\
+Observers as attractors, horizons, divergences: locking, noise channels, pinching, records, posterior moments, predictive quotients, cut dimension, arrow identities, fidelity, relative entropies, barycentres on the trace-one slice, separability residual, stabiliser and Wigner geometry, steering; fluid closure (appendix) & theorem under [Ou], C0--C3, A, E (Thm.~\ref{ob:locking}; Props.~\ref{ob:noise}, \ref{ob:pinching}, \ref{ob:records}, \ref{ob:posteriormoments}, \ref{ob:effectwindow}, \ref{ob:predictive}, \ref{ob:arrow}, \ref{ob:fidelity}, \ref{ob:stabiliser}); cited classical results as stated; prefix conjecture (Conj.~\ref{ob:prefixconjecture}); observer geometry, objectivity, control, learning and the cap bridge: programme\\
 Computation: singlet slice, axis and corrections, gflow determinism, square-cluster universality, no-cloning and optimal $5/6$, compressed Knill--Laflamme theorem, stabiliser codes, minimal length five, parameter shift, gradient flow, braids and colourings, Jordan--Wigner & theorem under C0--C3, [T], [Sub] (Thms.~\ref{cp:determinism}, \ref{cp:universal}, \ref{cp:kl}, \ref{cp:shift}); access [Ac]; universality, flow theorems, Knill--Laflamme: cited and reproved where stated; anyonic protection [Lq]: hypothesis and programme\\
 Unification and gravity: matching and slopes, the two-scale fit and its cone condition, trace and anomaly constraints, proton and seesaw benchmarks, monopole topology, clock proper time, Schwarzschild lapse, cut bound, bridge rank (library), cap first law, conditional Einstein equation & theorem under G, [Ps] (fit), [Ck], [Gl], [Eq]; one-loop only; entropy-gap growth: conjecture (Conj.~\ref{ub:uniform}); continuum gravity: programme\\
 Bounds: rapidity--entanglement budget (three qubits; $n$ qubits via Osborne--Verstraete), probability flow, speed limits with their constants, Margolus--Levitin, sagitta, Tsirelson bound and PR exclusion, Landau identity, first return, cloning, recovery, amplification & theorem (Thm.~\ref{thm:bdbudget}, Lemma~\ref{lem:bdroof}, Props.~\ref{prop:bdflow}, \ref{prop:bdmt}, \ref{prop:bdml}, Thms.~\ref{thm:bdchsh}, \ref{thm:bdkac}); $n$-qubit monogamy, Mandelstam--Tamm, Margolus--Levitin, Tsirelson, optimal cloning: cited and reproved where stated; time bounds under [Cd], [Bs]; physical clock identification: programme\\
@@ -9475,6 +11689,7 @@ Electroweak sector under F, F$_{\mathrm g}$(a), F$_{\mathrm r}$: custodial Stand
 Electroweak sector under F, F$_{\mathrm g}$(a), F$_{\mathrm H}$: round $S^4$ target & [X]: $\kappa_{2V}=2\kappa_V^2-1$ with $\kappa_V\le1$ common to $W$ and $Z$, and Goldstone growth $s/f^2$; a significant deviation after radiative and matching corrections refutes F$_{\mathrm H}$; present bound from the quoted $\kappa_V$: $\xi\le0.039$, $f\ge1.24$\,TeV (one-sided 95\%, separate Gaussians, no covariance); $m_h$ is [D]\\
 Pati--Salam group, global form, hypercharges, anomaly cancellation & [M] under G(i)--(iv); agree with the Standard Model; no breaking scale or heavy vectors supplied\\
 $\sin^2\theta_W=\tfrac38$ (G(v)) or $\tfrac12$ as boundary values & [X]: with Standard Model running and no thresholds the colour condition fails; the required shifts are Remark~\ref{rem:couplings}; $\hat s_Z^2$ is [D]\\
+Observers and horizons & [M]: locking, channel, record and window statements; no consensus of estimates in general (constant channels with different outputs); no physical temperature or cosmological constant from a finite accessible region (Rem.~\ref{ob:curvature})\\
 Computation & [M]: universality, recovery, bounds; [S]: standard quantum information; nothing distinguishing\\
 Three generations & [D]: the number of generations is an input; [M]: index and refutations; the invisible $Z$ width ($2.9840\pm0.0082$) counts light $Z$-coupled neutrinos only\\
 Three structures from triality & [M]: the count and the obstruction; the generation count is not obtained (one generation passes the anomaly tests)\\
@@ -9628,7 +11843,11 @@ anticommutation; uniform amplitude amplification; torus equidistribution and win
 and connected-ray phase rigidity.  For Section~\ref{sec:generations}: the Perron root of the $d$-bonacci
 polynomials and the Tribonacci constant, the three-gap theorem, the six-set orthogonality-free cover of the
 sphere and its rational attainment, the signed Lucas--Fibonacci solutions of the golden Pell equations,
-the Eisenstein form of the crossing norm, and the icosahedral axis orbits.  For Section~\ref{sec:attention}: no-cloning, the cloning machine, Kraus
+the Eisenstein form of the crossing norm, and the icosahedral axis orbits.  For Sections~\ref{sec:observers}--\ref{sec:divergences} and Appendix~\ref{app:fluid}: the cosine fixed point,
+unitary power dilation, quantum max-flow, fixed-size cut variance, Landauer statements, channel data
+processing, the separable-cone witness, the fourteen-mode Majorana distance, the steering-ellipsoid
+threshold, the qubit Wigner deficit refutation and the Clifford third-moment negativity, quadratic
+observation closure, advection closure, gradient dissipation and the alternating vortex polygons.  For Section~\ref{sec:attention}: no-cloning, the cloning machine, Kraus
 left-inverse necessity and scalar-product reversibility, orthogonal syndrome decoding, Pauli word
 multiplication, Jordan--Wigner anticommutation, braid colouring transport and quandle Markov invariance,
 the weighted Artin representation, quantum Fourier transform circuit action, phase-estimation tails and
@@ -9687,7 +11906,10 @@ weights, the colour centralisers, the $\mathrm{Spin}(10)$ branching and the two 
 integrals, the Clifford computation of the heat coefficient, the traces, the radius table, the stationary
 ratio and its unstable mode, and all running numbers recomputed) and \texttt{check\_generations.py} (Section~\ref{sec:generations}: six groups; own
 construction of the binary icosahedral group from the $600$-cell, its characters and McKay graph, the index
-coefficients, the family anomalies and the empirical and arithmetic counts).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
+coefficients, the family anomalies and the empirical and arithmetic counts) and \texttt{check\_observers.py} (Sections~\ref{sec:observers}--\ref{sec:divergences} and
+Appendix~\ref{app:fluid}: seven groups; own checks of locking, the cosine subsequences, the fixed points of
+transports and damping, the partial-dephasing gap, the phase flip, the five-cycle moments, the divergence
+counterexamples, the Bell residual and the Ryu--Takayanagi crossover).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
 \ref{thm:product}; Propositions~\ref{prop:relative}, \ref{prop:solder}, \ref{prop:pairsu3}, \ref{prop:angle38},
 \ref{prop:universal}, \ref{prop:cosmo}, \ref{prop:solderunique}, \ref{prop:centre}, \ref{prop:superselection} (with its
 classification of weights and free split), \ref{prop:rtclosed}, \ref{prop:symsector}, \ref{prop:subops},
@@ -9981,6 +12203,374 @@ orthogonal and no product vector of $(\C^2)^{\otimes3}$ is orthogonal to all of 
 
 
 %=====================================================================================
+%=====================================================================================
+\section{Further worked material: the Lamb vector and closure under restricted observation}\label{app:fluid}
+\label{ob:fluid}
+
+The restriction in Section~\ref{sec:cuhorizon} identifies global states with
+the same current readout. An autonomous evolution also requires the derivative
+of that readout to agree on each fibre. The Lamb decomposition illustrates
+how pressure removes a gradient while quadratic interactions can still
+couple visible and hidden modes.
+
+\begin{proposition}[Lamb decomposition]
+\label{ob:lamb}
+For a smooth velocity $u$ on an open subset of $\mathbb R^3$, put
+$\omega=\nabla\times u$. With the Euclidean left contraction on bivectors,
+\[
+ (u\cdot\nabla)u
+ =\nabla(|u|^2/2)+u\mathbin{\lrcorner}(\nabla\wedge u)
+ =\nabla(|u|^2/2)+\omega\times u.
+\]
+For a smooth solution of
+$\partial_t u+(u\cdot\nabla)u=-\nabla p+\nu\Delta u+f$, $\nabla\cdot u=0$,
+the modified pressure is $p+|u|^2/2$ and
+\[
+ \partial_t\omega+(u\cdot\nabla)\omega
+ =(\omega\cdot\nabla)u+\nu\Delta\omega+\nabla\times f .
+\]
+Stretching vanishes for planar flows $u=(u_1(x,y,t),u_2(x,y,t),0)$.
+On a simply connected domain, an incompressible irrotational velocity
+has a harmonic potential. A nonzero vorticity can give a gradient Lamb vector.
+\end{proposition}
+\begin{proof}
+The $i$th component of the contraction is
+$\sum_j u_j(\partial_j u_i-\partial_i u_j)$, which is also the
+$i$th component of $(\nabla\times u)\times u$. The subtracted term
+is $\partial_i(|u|^2/2)$. Taking the curl and expanding the Leibniz rule gives
+$\nabla\times(\omega\times u)
+=\omega\,\nabla\cdot u-u\,\nabla\cdot\omega
+ +(u\cdot\nabla)\omega-(\omega\cdot\nabla)u$.
+Both divergence terms vanish. In the planar case $\omega$ is vertical and
+$\partial_3u=0$. When $\omega=0$, path integration gives $u=\nabla\phi$
+and zero divergence gives $\Delta\phi=0$.
+For $u=(-y,x,0)$ one has $\omega=(0,0,2)$ and
+$\omega\times u=(-2x,-2y,0)=\nabla(-x^2-y^2)$.
+The vector identity is classical \cite{obr:Lamb}.
+\end{proof}
+
+\begin{example}[Strain, rotation and vorticity flux]
+\label{ob:vortexflux}
+For $u=((1-s)x-sy,sx-(1-s)y,0)$,
+$\omega=2s e_3$ and $(u\cdot\nabla)u=(1-2s)(x,y,0)$.
+The square of the planar matrix is $((1-s)^2-s^2)I$.
+At $s=0.8$ the vorticity is $1.6 e_3$.
+If a planar tube cross-section has area $A$, unit normal $n$ and
+circulation $\Gamma$ in the boundary orientation, Stokes' theorem gives
+$\Gamma=\int\omega\cdot n\,dA$ and $\sup|\omega|\ge|\Gamma|/A$.
+An area tending to zero forces unbounded vorticity when $|\Gamma|$
+is bounded away from zero.
+\end{example}
+
+\begin{example}[Stretching and the Burgers vortex]
+\label{ob:stretch}
+An axisymmetric strain transports a planar disk with area
+$A(t)=A(0)e^{-\alpha t}$. Its velocity is
+\[
+ u=(-\alpha x/2,-\alpha y/2,\alpha z),\qquad \alpha>0.
+\]
+Indeed, the two transverse coordinates scale as $e^{-\alpha t/2}$.
+The stretching term for axial vorticity is $\alpha\omega$. Adding an
+azimuthal swirl to this strain, a steady axial vorticity profile $W(r)$
+satisfies
+$-\alpha r W'/2=\alpha W+\nu(W''+W'/r)$.
+The swirl is tangent to level sets of $W$, and the radial Laplacian
+is $r^{-1}(rW')'$. For $\nu>0$ direct differentiation gives the solution
+\[
+ W(r)=\frac{\alpha\Gamma}{4\pi\nu}\exp(-\alpha r^2/(4\nu)).
+\]
+Its radial integral $\int_0^\infty W(r)\,2\pi r\,dr$ is $\Gamma$.
+An effective area is $\Gamma/W(0)=4\pi\nu/\alpha$ for $\Gamma\ne0$
+\cite{obr:Burgers}. A separate scalar feedback model posits
+$A'=4\pi\nu-\alpha A$, $\alpha=\kappa\Gamma/A$. It gives
+$A(t)=A(0)-(\kappa\Gamma-4\pi\nu)t$ up to the first zero of $A$.
+For $A(0)=\Gamma=1$, $\kappa\Gamma=0.50$ and $\nu=0.012$,
+one has $4\pi\nu\simeq0.151$, $A(2.4)\simeq0.162$,
+$\Gamma/A(2.4)\simeq6.18$ and a first zero at
+$1/(0.50-0.048\pi)\simeq2.86$.
+\end{example}
+
+\begin{theorem}[Autonomous closure of a quadratic vector field]
+\label{ob:quadraticclosure}
+Let $P$ be a linear projection on a real vector space $E$, let $L$
+be linear and $B$ bilinear, and put $V(x)=Lx-B(x,x)$. There is a map $G$
+such that $PV=G\circ P$ precisely when for all $a\in\operatorname{ran}P$
+and $b\in\ker P$,
+\[
+ PLb=0,\qquad PB(b,b)=0,\qquad P(B(a,b)+B(b,a))=0 .
+\]
+In this case $G(a)=PV(a)$ on $\operatorname{ran}P$.
+\end{theorem}
+\begin{proof}
+With $x=a+b$ the difference $PV(x)-PV(a)$ is
+$PLb-PB(b,b)-P(B(a,b)+B(b,a))$. If it vanishes on every fibre, taking $a=0$
+and comparing $b$ and $-b$ separates the linear and quadratic conditions.
+The difference with general $a$ then yields the third condition.
+Conversely the three conditions annihilate the full difference.
+\end{proof}
+
+\begin{proposition}[A Fourier obstruction]
+\label{ob:fluidfive}
+Use the Fourier convention $e^{ik\cdot x}$ on the $2\pi$-periodic torus.
+On the five retained modes
+$K=\{(0,1),\pm(1,0),\pm(-1,1)\}$, let $P$ keep $|k|^2\le1$,
+$L_k=-\nu |k|^2$, and define $B$ by the convolution
+$i\sum_{h+j=k}(a_h\cdot j)b_j$ followed by Leray projection onto $k^\perp$.
+At the readout $a(x,y)=e_2\cos x$, the hidden mode
+$b(x,y)=(e_1+e_2)\cos(y-x)$ changes the transverse $(0,1)$ coefficient
+of $PV$ by $-i/4$, independently of $\nu$. Thus neither $PV$ nor that
+coefficient factors through $P$. Adding the conjugate output mode
+$(0,-1)$ gives the same obstruction in a real divergence-free Galerkin
+system.
+\end{proposition}
+\begin{proof}
+At $k=(0,1)$ the two cross pairs are $(1,0),(-1,1)$ in either order.
+They contribute $i(e_1+e_2)/4$ and $ie_2/4$ before Leray projection.
+Leray deletes the $e_2$ component and leaves $ie_1/4$. Neither
+$B(b,b)$ nor $Lb$ has a coefficient at $k$, and $V$ subtracts advection.
+The input coefficients are real, equal on opposite modes and orthogonal
+to their wavevectors. Conjugation interchanges $k$ and $-k$ in the
+convolution, and each Leray projection has range $k^\perp$.
+\end{proof}
+
+\begin{remark}[Leray projection and a fixed frequency window]
+\label{ob:leraywindow}
+For a forced incompressible solution on a torus or on $\mathbb R^3$,
+let $P$ retain Fourier modes with $|k|\le K_0$. Suppose on a compact
+time interval that $u\in C(H^s)\cap C^1(H^{s-2})$, $s>5/2$,
+$f\in C(H^{s-2})$ and the pressure gradient is in $H^{s-2}$ and is
+annihilated by the Leray projection $\mathbb P$. Sobolev multiplication
+puts the advection in $H^{s-2}$. The constant Fourier multipliers
+$P,\mathbb P,\Delta$ commute, and boundedness and time independence give
+$\partial_tPu=P\partial_tu$. With $a=Pu$, $b=(I-P)u$, $L=\nu\Delta$,
+$F=\mathbb P f$ and $B(v,w)=\mathbb P((v\cdot\nabla)w)$,
+\[
+ \partial_ta=La-PB(a,a)+PF-P(B(a,b)+B(b,a))-PB(b,b).
+\]
+On the torus the cutoff has finite rank. On $\mathbb R^3$ it retains a
+continuum of frequencies. For a separate illustration of the hidden square,
+the angular average of $w=A\cos(m\theta)$, $m$ a nonzero integer, is zero
+and that of $w^2$ is $A^2/2$, by $2\cos^2(m\theta)=1+\cos(2m\theta)$.
+\end{remark}
+
+\begin{example}[Dissipation and lack of closure]
+\label{ob:dissipativecounter}
+For $\nu\ge0$, set
+$\dot x=-\nu x-y^2$, $\dot y=-\nu y+xy$ and read out $x$.
+The initial states $(0,0)$ and $(0,1)$ have the same readout and
+respective derivatives $0,-1$. Nevertheless
+$\tfrac{d}{dt}(x^2+y^2)=-2\nu(x^2+y^2)$, so the squared norm is its
+initial value times $e^{-2\nu t}$. The polynomial field is locally
+Lipschitz, and the bound permits continuation at each finite positive
+time. Failure of instantaneous closure can coexist with global bounded
+evolution.
+
+An independent scaling calculation uses
+$\ell_r\asymp\tau^{1/2}$, $\ell_z\asymp\tau^{1/2-h}$ and
+$U\asymp\tau^{-1/2-h}$ for $0<h<1/100$ and $\tau\downarrow0$.
+A core of volume of order $\ell_r^2\ell_z$ has a kinetic energy scale
+$U^2\ell_r^2\ell_z\asymp\tau^{1/2-3h}\to0$ even as $U\to\infty$.
+Both lengths tend to zero and their ratio is of order $\tau^h$.
+\end{example}
+
+\begin{remark}[Conditional regularity of a periodic mild path]
+\label{ob:fluidmild}
+Start with a continuous $H^2$ mild path on $[0,T]$, $T>0$, of zero-mean
+real divergence-free Fourier data in two space dimensions, with viscosity
+$\nu>0$. Assume its coefficientwise projected Duhamel equation
+has integrable time integrands and its initial data are square summable
+with weights $(1+|k|^2)^m$ for every integer $m\ge0$. The formalized
+mild-path regularity result \cite{obr:MildPath} gives continuity in every $H^m$ and the strong
+Fourier evolution in grade $m$ using its linear and bilinear operators
+from grade $m+2$. At the endpoints differentiation is within the interval.
+The classical two-dimensional initial-value theorem gives global smooth
+solutions for smooth divergence-free periodic data at positive viscosity
+\cite{obr:Ladyzhenskaya}.
+\end{remark}
+
+\begin{remark}[Scope of the fluid analogy]
+\label{ob:fluidprogramme}
+For smooth unforced periodic velocities the kinetic energy balance is
+$\frac{d}{dt}\int |u|^2/2=-\nu\int|\nabla u|^2$.
+Multiplying the equation by $u$ and integrating eliminates pressure and
+advection by incompressibility, and integration by parts gives the viscous
+term. Arnold's ideal fluid description uses the right-invariant $L^2$
+kinetic metric on volume-preserving diffeomorphisms, and the helicity
+interpretation concerns linking of vortex lines under inviscid hypotheses
+\cite{obr:Arnold,obr:Moffatt}.
+The inertial-range scaling model assumes $\varepsilon\asymp U^3/L$
+and dependence of the energy spectrum on only $\varepsilon$ and $k$.
+Matching the units of $E(k)$, length cubed per squared time, gives
+$E(k)\propto\varepsilon^{2/3}k^{-5/3}$. Setting the dissipative length by $(\varepsilon\eta)^{1/3}\eta/\nu\asymp1$ gives $\eta\asymp(\nu^3/\varepsilon)^{1/4}$ and a cubic grid count is
+$(L/\eta)^3\asymp(UL/\nu)^{9/4}$ \cite{obr:Kolmogorov}.
+Tao constructs an averaged three-dimensional advection operator retaining
+the energy cancellation for which a smooth divergence-free initial datum
+has finite-time blowup in the strong solution class \cite{obr:Tao}.
+
+A programme relating such dynamics to comparison transport needs a specified
+map from velocity fields and their readout algebra, estimates for the three
+terms in Theorem~\ref{ob:quadraticclosure}, and a controlled cutoff limit.
+A computational analogy with local verification and global search would
+require a reduction preserving instances, witnesses and cost. A
+thermodynamic interpretation of viscosity would require a physical memory,
+reset protocol and bath to which the balance of
+Proposition~\ref{prop:cubalances} applies. A molecular or compressible
+correction would require a constitutive model and scale limit. To obtain
+a singular solution from a core scaling, one must construct an actual
+solution, control exterior and cross-scale corrections, and bound the
+full-field residual and forcing in the relevant norms.
+\end{remark}
+
+\begin{definition}[Point vortices with precession]
+\label{ob:vortexdef}
+Let $J(x,y)=(-y,x)$, $z_j\in\mathbb R^2$, $s_j=(-1)^j$ and $0\le j<N$.
+On distinct positions define the field
+\[
+ F_{b,\Omega}(z)_j=s_j\Omega Jz_j+
+             \frac{b}{2}\sum_{k\ne j}s_k\frac{J(z_j-z_k)}{|z_j-z_k|^2}.
+\]
+The sum is the planar point-vortex interaction with circulations
+$\Gamma_k=\pi b s_k$. The first term models signed precession in a
+trap \cite{obr:BarryKevrekidis}. Put $\theta_j=2\pi j/N$ and
+$p_j=(\cos\theta_j,\sin\theta_j)$. Let $J_N=DF_{2,1/2}(p)$, a real $2N$ by $2N$ matrix.
+\end{definition}
+
+\begin{proposition}[Centred polygon equilibrium]
+\label{ob:vortexequilibrium}
+For $b,\Omega>0$ a regular polygon of radius $R>0$ and $N\ge2$ in the
+configuration of Definition~\ref{ob:vortexdef} is stationary exactly
+when $N$ is even and $R=\sqrt{b/(4\Omega)}$. At that radius the Jacobian
+in coordinates rotated back through the common orientation is $2\Omega J_N$.
+\end{proposition}
+\begin{proof}
+For any equiradial configuration one has
+$z_j\cdot (z_j-z_k)=|z_j-z_k|^2/2$. Projecting onto $Jz_j$
+therefore gives $s_j\Omega R^2+(b/4)(\sum_k s_k-s_j)$.
+If $N$ is odd, this is $\Omega R^2$ for $j=0$. If $N$ is even, the sum
+of signs vanishes and stationarity requires $\Omega R^2=b/4$.
+Reflection in the radial line through any vertex pairs the other
+vertices of the even polygon with identical signs. Each reflected pair
+has opposite radial velocities, since $J$ anticommutes with reflection,
+and an antipodal vertex contributes only tangentially. This proves
+sufficiency. Rotation commutes with $J$ and preserves distances.
+For $b=4\Omega R^2$ the identity
+$F_{b,\Omega}(Rw)=2\Omega R F_{2,1/2}(w)$ holds on distinct positions,
+where the fields are differentiable. Differentiating gives $2\Omega J_N$.
+\end{proof}
+
+\begin{theorem}[Spectrum and neutral drift]
+\label{ob:vortexspectrum}
+For $N=2m$, $m\ge1$, the characteristic polynomial of $J_{2m}$ is
+\[
+ X^2\Bigl(X^2+\frac{m^2}{2}\Bigr)
+ \prod_{r=1}^{m-1}
+ \Bigl(X^2-\frac{(m-r)^2(r^2-2)}4\Bigr)^2.
+\]
+All its nonzero eigenvalues are semisimple. For $m\ge3$ the physical
+Jacobian has positive eigenvalues $\Omega(m-r)\sqrt{r^2-2}$,
+$r=2,\ldots,m-1$, and their negatives, each of multiplicity two.
+Each of the positive and negative real spectral subspaces has dimension
+$2(m-2)$. For $m=1,2$ the spectrum lies on the imaginary axis.
+
+The eigenvalue zero has precisely one Jordan block of size two.
+The vectors $c_0=(Jp_j)_j$ and $c_1=(s_jp_j/(1-m^2/2))_j$ satisfy
+$J_{2m}c_0=0$ and $J_{2m}c_1=c_0$, so the normalized
+linearized trajectories include the unbounded line $c_1+t c_0$.
+\end{theorem}
+\begin{proof}
+Use the radial and tangential basis at each vertex. Put
+$S=\operatorname{diag}(s_j)$, $W_{jk}=1/|p_j-p_k|^2$ for $j\ne k$,
+$W_{jj}=0$, and let $w_q$ be the Fourier eigenvalues of the circulant $W$.
+With $\varphi=2\pi(k-j)/N$, the derivative of
+$h(d)=d/|d|^2$ at $d=p_j-p_k$ is
+$|d|^{-2}(I-2dd^{\mathsf T}/|d|^2)$. In the basis at $j$ this
+reflection followed by rotation through $\varphi$ is
+$\operatorname{diag}(1,-1)$, as is seen from
+$\frac{d}{|d|}=(\sin(\varphi/2),-\cos(\varphi/2))$ for $0<\varphi<2\pi$.
+Thus the $j,k$ derivative block for $j\ne k$ is
+$-s_k W_{jk}\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$.
+The $j,j$ contributions of the interaction sum have diagonal entries
+odd in $\varphi$ and cancel in reflected pairs. Both off-diagonal entries
+are $\sum_{k\ne j}s_k W_{jk}\cos\varphi=s_j(w_m+1/2)$,
+using $\cos\varphi=1-|d|^2/2$ and $\sum s_k=0$.
+Adding the signed precession gives the block matrix
+\[
+ \begin{pmatrix}
+  0&(w_m I-W)S\\ ((w_m+1)I-W)S&0
+ \end{pmatrix}.
+\]
+
+For $\zeta=e^{2\pi i/N}$ and $0\le q<N$ one has
+\[
+ w_0-w_q
+ =\frac12\sum_{l=1}^{N-1}\left|\sum_{a=0}^{q-1}\zeta^{la}\right|^2
+ =\frac{q(N-q)}2 .
+\]
+The first equality uses $|1-\zeta^l|^2=2(1-\cos(2\pi l/N))$
+and the symmetry of $W$. In the second, including $l=0$ gives $Nq$
+by orthogonality and removing it subtracts $q^2$.
+Summing over $q$ and using $\sum_q w_q=\operatorname{Tr}W=0$ gives
+$w_0=(N^2-1)/12$. Consequently
+$\ell_q=w_m-w_q=-(m-q)^2/2$. Multiplication by $S$ shifts Fourier
+frequency by $m$ modulo $2m$. The invariant block spanned by the radial
+frequency $q$ and tangential frequency $q+m$ has off-diagonal
+entries $\ell_q$ and $1+\ell_{q+m}$. With $r=\min(q,2m-q)$ their
+product is $(m-r)^2(r^2-2)/4$. The Fourier decomposition has one block
+each at $r=0,m$ and two at every $1\le r<m$. This proves the formula.
+Every block of nonzero product has distinct eigenvalues over
+$\mathbb C$, which gives semisimplicity. The $r=m$ block has
+$\ell_m=0$ and $1+\ell_0=1-m^2/2\ne0$. In real coordinates, the
+constant tangential vector and the alternating radial vector normalized
+by $1-m^2/2$ give precisely $c_0$ and $c_1$.
+
+For distinctness of the positive roots, take integers $2\le k<l<m$
+and put $s=k+l$ and
+\[
+ Q(t)=s t^2-2(k^2+kl+l^2-2)t+s(k^2+l^2-2).
+\]
+The difference between the squared factors $(m-k)^2(k^2-2)$ and
+$(m-l)^2(l^2-2)$ is $(k-l)Q(m)$. At $t=l$ one has
+$Q(l)=-(l-k)(k^2-2)<0$. At $t=s-1$, putting $u=k-2$ and
+$v=l-k-1$, expansion gives $Q(s-1)=-(2u^2+2uv+4u+v+1)<0$.
+Convexity gives $Q(m)<0$ for $l<m<s$. If $m=s+h$ with $h\ge0$,
+then $Q(m)=2s+(2kl+4)h+sh^2>0$. Thus the distinct positive roots
+are exactly the ones listed, and real and complex nullities agree
+for a real eigenvalue of a real matrix. Finally
+$(c_1+t c_0)'=c_0=J_{2m}(c_1+t c_0)$ with $c_0\ne0$.
+\end{proof}
+
+\begin{example}[Dipole, square, hexagon and octagon]
+\label{ob:vortexnumbers}
+In normalized units the dipole has nonzero eigenvalues $\pm i/\sqrt{2}$
+and the square has $\pm i\sqrt{2}$ and $\pm i/2$, with the latter pair
+doubled. The hexagon has $\pm1/\sqrt{2}$, $\pm i$ and $\pm3i/\sqrt{2}$,
+with the first two pairs doubled. For the octagon the pairs are
+$\pm 2\sqrt{2}\,i$, $\pm 3i/2$, $\pm\sqrt{2}$ and $\pm\sqrt{7}/2$,
+with the last three pairs doubled. In each case the zero root has
+algebraic multiplicity two and geometric multiplicity one.
+For the octagon the ranks of $J_8,J_8^2,J_8^3$ are $15,14,14$.
+All these numbers follow by substitution in Theorem~\ref{ob:vortexspectrum}.
+For $(b,\Omega)=(1,1)$ the radius is $1/2$ and the positive octagon
+eigenvalues are $2\sqrt{2},\sqrt{7}$. For $(b,\Omega)=(1.35,0.25)$ the
+radius is $\sqrt{1.35}$ and the eigenvalues are $\sqrt{2}/2,\sqrt{7}/4$.
+A unit hexagon eigenvector on the positive branch has linear growth
+factor $e^{10/\sqrt{2}}\simeq1177.405$ at $t=10$. The normalized
+square Jordan solution with initial perturbation $10^{-3}c_1$
+has tangential coefficient $10^{-3}t$, equal to $0.01$ and $0.1$
+at $t=10$ and $100$.
+
+As a numerical check of the nonlinear equation, integrate the displacement
+$v$ through $v'=F_{2,1/2}(p+v)-F_{2,1/2}(p)$ using fourth-order
+Runge--Kutta with steps $0.1$ and $0.05$. A unit hexagon vector from the
+positive eigenspace, scaled by $10^{-9}$, grows by approximately $1177.4$
+at $t=10$ in both runs. For the square initial displacement $10^{-3}c_1$,
+the mean turn, computed as the mean signed angle from each original
+position, is approximately $0.0100001$ at $t=10$ and $0.100001$
+at $t=100$ in both runs. These estimates illustrate the local growth and
+drift in the exact point-vortex model.
+\end{example}
+
+
 \section*{Use of AI tools}
 The authors used AI tools, namely Claude Fable 5.2 and Claude Opus 5.5 (via Claude Code) and Codex (gpt-6.2-sol), for literature
 search, computation and double-checking.  All proofs can be checked by hand, and the computations can be
@@ -10519,6 +13109,82 @@ contributions.
 \bibitem{gn:chsw} P. Candelas, G.~T. Horowitz, A. Strominger and E. Witten, Vacuum configurations for superstrings, Nucl.\ Phys.\ B \textbf{258} (1985), 46--74.
 
 \bibitem{gn:cim} D. Cremades, L.~E. Ib\'a\~nez and F. Marchesano, Computing Yukawa couplings from magnetized extra dimensions, J.\ High Energy Phys. \textbf{2004} (05), 079, arXiv:hep-th/0404229.
+
+\bibitem{obr:sznagy} B.~Sz.-Nagy, Sur les contractions de l'espace de Hilbert, Acta Sci. Math. (Szeged) \textbf{15}, 87--92 (1953).
+
+\bibitem{obr:headrick} M.~Headrick, Entanglement R\'enyi entropies in holographic theories, Phys.\ Rev.\ D \textbf{82}, 126010 (2010), Sec.~III, arXiv:1006.0047.
+
+\bibitem{obr:leanbridge} \emph{trureturing}, \href{https://github.com/the-omega-institute/trureturing/blob/9d18ab6b4d228a968377db110b46198742421a3d/D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.lean}{D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.lean}, theorem \texttt{result}.
+
+\bibitem{obr:hastingsarea} M.~B.~Hastings, An area law for one-dimensional quantum systems, J.\ Stat.\ Mech.\ (2007), P08024, arXiv:0705.2024.
+
+\bibitem{obr:lvv} Z.~Landau, U.~Vazirani, and T.~Vidick, A polynomial time algorithm for the ground state of one-dimensional gapped local Hamiltonians, Nature Phys.\ \textbf{11}, 566--569 (2015), arXiv:1307.5143.
+
+\bibitem{obr:sen} S.~Sen, Average entropy of a quantum subsystem, Phys.\ Rev.\ Lett.\ \textbf{77}, 1--3 (1996), arXiv:hep-th/9601132.
+
+\bibitem{obr:hh} D.~Harlow and P.~Hayden, Quantum computation vs.\ firewalls, JHEP \textbf{06}, 085 (2013), arXiv:1301.4504.
+
+\bibitem{obr:aaronson} S.~Aaronson, Quantum computing, postselection, and probabilistic polynomial-time, Proc.\ R.\ Soc.\ A \textbf{461}, 3473--3482 (2005), arXiv:quant-ph/0412187.
+
+\bibitem{obr:mip} Z.~Ji, A.~Natarajan, T.~Vidick, J.~Wright, and H.~Yuen, MIP*=RE, arXiv:2001.04383 (2020).
+
+\bibitem{obr:albert} D.~Z.~Albert, \emph{Time and Chance} (Harvard University Press, 2000).
+
+\bibitem{obr:penrose} R.~Penrose, Singularities and time-asymmetry, in S.~W.~Hawking and W.~Israel, eds., \emph{General Relativity: An Einstein Centenary Survey} (Cambridge University Press, 1979), pp.~581--638.
+
+\bibitem{obr:weinberg} S.~Weinberg, The cosmological constant problem, Rev.\ Mod.\ Phys.\ \textbf{61}, 1--23 (1989).
+
+\bibitem{obr:uhlmannfidelity} A.~Uhlmann, The transition probability in the state space of a $^*$-algebra, Rep.\ Math.\ Phys.\ \textbf{9}, 273--279 (1976).
+
+\bibitem{obr:jozsa} R.~Jozsa, Fidelity for mixed quantum states, J.\ Mod.\ Opt.\ \textbf{41}, 2315--2323 (1994).
+
+\bibitem{obr:umegaki} H.~Umegaki, Conditional expectation in an operator algebra, IV (entropy and information), Kodai Math.\ Sem.\ Rep.\ \textbf{14}, 59--85 (1962).
+
+\bibitem{obr:bs} V.~P.~Belavkin and P.~Staszewski, $C^*$-algebraic generalization of relative entropy and entropy, Ann.\ Inst.\ Henri Poincar\'e A \textbf{37}, 51--58 (1982).
+
+\bibitem{obr:matsumoto} K.~Matsumoto, A new quantum version of $f$-divergence, in \emph{Reality and Measurement in Algebraic Quantum Theory}, Springer Proc.\ Math.\ Stat.\ \textbf{261}, 229--273 (2018), arXiv:1311.4722.
+
+\bibitem{obr:jrw} R.~Jozsa, D.~Robb, and W.~K.~Wootters, Lower bound for accessible information in quantum mechanics, Phys.\ Rev.\ A \textbf{49}, 668--677 (1994).
+
+\bibitem{obr:moreau} J.-J.~Moreau, D\'ecomposition orthogonale d'un espace hilbertien selon deux c\^ones mutuellement polaires, C.\ R.\ Acad.\ Sci.\ Paris \textbf{255}, 238--240 (1962).
+
+\bibitem{obr:bk} S.~Bravyi and A.~Kitaev, Universal quantum computation with ideal Clifford gates and noisy ancillas, Phys.\ Rev.\ A \textbf{71}, 022316 (2005), arXiv:quant-ph/0403025.
+
+\bibitem{obr:veitch} V.~Veitch, S.~A.~H.~Mousavian, D.~Gottesman, and J.~Emerson, The resource theory of stabilizer quantum computation, New J.\ Phys.\ \textbf{16}, 013009 (2014), arXiv:1307.7171.
+
+\bibitem{obr:gross} D.~Gross, Hudson's theorem for finite-dimensional quantum systems, J.\ Math.\ Phys.\ \textbf{47}, 122107 (2006), arXiv:quant-ph/0602001.
+
+\bibitem{obr:hastings} M.~B.~Hastings, Small Majorana fermion codes, arXiv:1703.00612 (2017).
+
+\bibitem{obr:zmy} H.~Zhu, C.~Mao, and C.~Yi, Third moments of qudit Clifford orbits and 3-designs based on magic orbits, arXiv:2410.13575v1 (2024).
+
+\bibitem{obr:jevtic} S.~Jevtic, M.~Pusey, D.~Jennings, and T.~Rudolph, Quantum steering ellipsoids, Phys.\ Rev.\ Lett.\ \textbf{113}, 020402 (2014), arXiv:1303.4724.
+
+\bibitem{obr:cjwr} E.~G.~Cavalcanti, S.~J.~Jones, H.~M.~Wiseman, and M.~D.~Reid, Experimental criteria for steering and the Einstein--Podolsky--Rosen paradox, Phys.\ Rev.\ A \textbf{80}, 032112 (2009), arXiv:0907.1109.
+
+\bibitem{obr:Lamb} H. Lamb, \emph{Hydrodynamics}, 6th ed. (Cambridge University Press, 1932).
+
+\bibitem{obr:Burgers} J. M. Burgers, A mathematical model illustrating the theory of turbulence, Adv. Appl. Mech. \textbf{1}, 171--199 (1948).
+
+\bibitem{obr:Ladyzhenskaya} O. A. Ladyzhenskaya, \emph{The Mathematical Theory of Viscous Incompressible Flow}, 2nd ed. (Gordon and Breach, 1969).
+
+\bibitem{obr:Arnold} V. I. Arnold, Sur la g\'eom\'etrie diff\'erentielle des groupes de Lie de dimension infinie et ses applications \`a l'hydrodynamique des fluides parfaits, Ann. Inst. Fourier \textbf{16}(1), 319--361 (1966).
+
+\bibitem{obr:Moffatt} H. K. Moffatt, The degree of knottedness of tangled vortex lines, J. Fluid Mech. \textbf{35}, 117--129 (1969).
+
+\bibitem{obr:Kolmogorov} A. N. Kolmogorov, The local structure of turbulence in incompressible viscous fluid for very large Reynolds numbers, Proc. R. Soc. Lond. A \textbf{434}, 9--13 (1991), English translation of Dokl. Akad. Nauk SSSR \textbf{30}, 301--305 (1941).
+
+\bibitem{obr:Tao} T. Tao, Finite time blowup for an averaged three-dimensional Navier--Stokes equation, J. Amer. Math. Soc. \textbf{29}, 601--674 (2016), Theorem 1.5.
+
+\bibitem{obr:BarryKevrekidis} A. M. Barry and P. G. Kevrekidis, Few-particle vortex cluster equilibria in Bose--Einstein condensates: existence and stability, J. Phys. A: Math. Theor. \textbf{46}, 445001 (2013), arXiv:1306.1545.
+
+\bibitem{obr:MildPath} \emph{trureturing}, D5/S3/FluidDynamics/Fourier/MildPathRegularity.lean, theorem \texttt{all\_grade\_regularity\_of\_mild\_path}, \href{https://github.com/the-omega-institute/trureturing/blob/9d18ab6b4d228a968377db110b46198742421a3d/D5/S3/FluidDynamics/Fourier/MildPathRegularity.lean#L28}{source at revision 9d18ab6b}.
+
+\bibitem{obr:leanreverse} \emph{trureturing}, \href{https://github.com/the-omega-institute/trureturing/blob/9d18ab6b4d228a968377db110b46198742421a3d/D5/S3/Quantum/Divergence/GeneralConvexReverseTestAttainment.lean}{GeneralConvexReverseTestAttainment.lean}, \texttt{original\_reverse\_test\_extended\_attainment}.
+
+\bibitem{obr:leansubentropy} \emph{trureturing}, \href{https://github.com/the-omega-institute/trureturing/blob/9d18ab6b4d228a968377db110b46198742421a3d/D5/S3/Quantum/Subentropy/POVMGram.lean}{POVMGram.lean}, \texttt{cq\_conditional\_subentropy\_guessing}.
+
+\bibitem{obr:leansteering} \emph{trureturing}, \href{https://github.com/the-omega-institute/trureturing/blob/9d18ab6b4d228a968377db110b46198742421a3d/D5/S3/Quantum/Contextuality/SteeringEllipsoidFThreeThreshold.lean}{SteeringEllipsoidFThreeThreshold.lean}, \texttt{result}.
 
 \bibitem{CLT74} J.~M.~Cornwall, D.~N.~Levin, and G.~Tiktopoulos, Derivation of gauge invariance from high-energy unitarity bounds on the S matrix, Phys.\ Rev.\ D \textbf{10}, 1145 (1974); Erratum \textbf{11}, 972 (1975).
 
