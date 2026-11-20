@@ -1205,6 +1205,10 @@ For example, suppose $J$ consists of two labels whose columns project to the sam
 
 In general, give each label $i$ two signed vertices $i^+$ and $i^-$. A simplex face uses at most one sign of each label and leaves a family of unselected columns spanning $H$. Every nonempty subface satisfies the same conditions. The section is homeomorphic to the realization of this simplicial complex. Its barycentric coordinates are $\lambda_{i^+}=\max(x_i,0)$ and $\lambda_{i^-}=\max(-x_i,0)$, and they sum to $1$. The inverse is $x_i=\lambda_{i^+}-\lambda_{i^-}$. At most one weight at a label is nonzero, so this difference involves no cancellation. Both maps are continuous and preserve the nonzero coordinates and their signs. If the fair-subgroup columns already form a basis, every one must stay fair and the section is empty.
 
+**Face counts and Euler characteristic of the local directions (written derivation).** Suppose the fair subgroup contains $n$ labelled columns of rank $h$. Let $a_k$ count the $k$-element label sets whose complements still span $H$. Each such set allows $2^k$ independent sign assignments, so there are $2^k a_k$ faces of dimension $k-1$ for $k\ge 1$. The complement of the empty set is the full label set, so $a_0=1$. The empty face contributes $-1$, giving the reduced Euler characteristic $\widetilde\chi=-\sum_{k=0}^n(-2)^k a_k$.
+
+Write $E$ for the label set, $r(B)$ for the rank of the columns at $B\subseteq E$, and $M$ for the column matroid. Its Tutte polynomial is the rank-subset sum $T_M(x,y)=\sum_{B\subseteq E}(x-1)^{h-r(B)}(y-1)^{|B|-r(B)}$. At $x=1$, only spanning sets $B$ contribute. Their complementary supports have size $n-|B|$, and $(-2)^{n-|B|}=(-2)^{n-h}(-1/2)^{|B|-h}$. Thus $\widetilde\chi=-(-2)^{n-h}T_M(1,1/2)$. For a basis the section is empty and the formula gives $-1$. For two copies of a nonzero generator the section has four points and the formula gives $3$.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
