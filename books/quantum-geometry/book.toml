@@ -1,11 +1,11 @@
 # 《量子计算的几何直觉》书籍元数据
 [book]
-version = "0.1.0-beta.2"
+version = "0.1.0"
 authors = ["Auric"]
 license = "CC-BY-4.0"
 editions = ["zh", "en"]
 code = "ORTHO//QUANTUM"
-date = "2026-11-16"
+date = "2026-11-20"
 # Zenodo 概念 DOI，供本书各版本共同使用。
 doi = "10.5281/zenodo.24156135"
 
