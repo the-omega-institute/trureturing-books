@@ -45,7 +45,7 @@ $$
    \mathbf{r}_1 = (0, 0, 1), \qquad \mathbf{r}_2 = \left(\tfrac{\sqrt{3}}{2},\, 0,\, -\tfrac{1}{2}\right), \qquad \mathbf{r}_3 = \left(-\tfrac{\sqrt{3}}{2},\, 0,\, -\tfrac{1}{2}\right), \qquad \sum_{k=1}^3 \mathbf{r}_k = \mathbf{0} \;\Longrightarrow\; \sum_{k=1}^3 E_k = I_2,
    $$
 
-   effect additivity and homogeneity would demand $\sum_{k=1}^3 \frac{2}{3}f(P_{\mathbf{r}_k}) = f(I_2) = 1$; substituting $r_{1,z}^3 = 1$ and $r_{2,z}^3 = r_{3,z}^3 = -\frac{1}{8}$ instead yields
+   finite additivity on effects alone (it already forces rational homogeneity: $P_{\mathbf{r}} = 3\cdot\tfrac{1}{3}P_{\mathbf{r}}$ gives $p(\tfrac{2}{3}P_{\mathbf{r}}) = \tfrac{2}{3}f(P_{\mathbf{r}})$, with no homogeneity or continuity assumed; `manual derivation`) would demand $\sum_{k=1}^3 \frac{2}{3}f(P_{\mathbf{r}_k}) = f(I_2) = 1$; substituting $r_{1,z}^3 = 1$ and $r_{2,z}^3 = r_{3,z}^3 = -\frac{1}{8}$ instead yields
 
    $$
    \sum_{k=1}^3 \frac{2}{3}\,f(P_{\mathbf{r}_k}) \;=\; \frac{2}{3}\left[1 + \frac{1}{2}\left(1 - \frac{1}{8}\right) + \frac{1}{2}\left(1 - \frac{1}{8}\right)\right] \;=\; \frac{2}{3}\left(1 + \frac{7}{16} + \frac{7}{16}\right) \;=\; \frac{5}{4} \;\neq\; 1!

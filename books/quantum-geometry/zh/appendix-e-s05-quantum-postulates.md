@@ -45,7 +45,7 @@ $$
    \mathbf{r}_1 = (0, 0, 1), \qquad \mathbf{r}_2 = \left(\tfrac{\sqrt{3}}{2},\, 0,\, -\tfrac{1}{2}\right), \qquad \mathbf{r}_3 = \left(-\tfrac{\sqrt{3}}{2},\, 0,\, -\tfrac{1}{2}\right), \qquad \sum_{k=1}^3 \mathbf{r}_k = \mathbf{0} \;\Longrightarrow\; \sum_{k=1}^3 E_k = I_2.
    $$
 
-   若 $f$ 可延拓为效应上可加且齐次的概率泛函，三项读数之和必须等于 $f(I_2) = 1$；然而直接代入 $r_{1,z}^3 = 1$ 与 $r_{2,z}^3 = r_{3,z}^3 = -\frac{1}{8}$ 却算出
+   若 $f$ 可延拓为效应上有限可加的概率泛函 $p$，可加性本身已给出有理齐次：由 $P_{\mathbf{r}} = 3\cdot\tfrac{1}{3}P_{\mathbf{r}}$ 得 $p(\tfrac{2}{3}P_{\mathbf{r}}) = \tfrac{2}{3}f(P_{\mathbf{r}})$，无须另设齐次或连续（`手工推导`），于是三项读数之和必须等于 $f(I_2) = 1$；然而直接代入 $r_{1,z}^3 = 1$ 与 $r_{2,z}^3 = r_{3,z}^3 = -\frac{1}{8}$ 却算出
 
    $$
    \sum_{k=1}^3 \frac{2}{3}\,f(P_{\mathbf{r}_k}) \;=\; \frac{2}{3}\left[1 + \frac{1}{2}\left(1 - \frac{1}{8}\right) + \frac{1}{2}\left(1 - \frac{1}{8}\right)\right] \;=\; \frac{2}{3}\left(1 + \frac{7}{16} + \frac{7}{16}\right) \;=\; \frac{5}{4} \;\neq\; 1!
