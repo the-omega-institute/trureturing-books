@@ -1229,6 +1229,10 @@ If $R(B)=B$, the only new face is $B$ and its entire boundary is in the precedin
 
 Every facet has $d=n-h$ vertices. If $d\ge 2$, collapsing the boundary of a $(d-1)$-simplex gives $S^{d-1}$, with the boundary class as its basepoint. If $d=1$, the simplex point together with the added basepoint gives $S^0$. The attachment description identifies precisely these factor basepoints with the common quotient point. Hence $X/C$ is homeomorphic, with its basepoint, to the finite wedge of one $S^{n-h-1}$ for each facet with $R(B)=B$. The empty wedge is a point.
 
+**Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
+
+When $d=1$, the wedge is a discrete space with $m+1$ points and reduced degree-zero generators $[p_B]-[p_0]$, where $p_B$ is the point contributed by $B$ and $p_0$ is the common basepoint. When $m=0$ the wedge is a point and every reduced group vanishes. The reduced Euler characteristic is $(-1)^{d-1}m$, so the earlier Tutte evaluation gives $m=2^d T_M(1,1/2)$.
+
 For the Tribonacci word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
