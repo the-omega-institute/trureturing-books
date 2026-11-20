@@ -133,6 +133,8 @@ For a finite test, the relevant condition is whether some admissible weight occu
 
 With weights $(2/5,2/5,1/5)$, the $1/5$ label can be selected covariantly if every label is admissible. If the rule must select a label of maximal weight, a rule exists exactly when every profile has a unique maximum. Here the two maximizers have equal weights and exchanging them fixes the full weight profile.
 
+Continuity adds a further condition. With at least three labels, the strictly positive, normalized profiles having a weight that occurs exactly once form a path-connected set. The proof first joins two positive profiles along segments that avoid finitely many subspaces, then normalizes the path by dividing each profile by its total weight. Each forbidden subspace imposes at least two independent coordinate equalities. A continuous rule taking values in the discrete label set must choose a single label throughout this connected domain. Some permutation moves that label, so the rule cannot also be equivariant. For two labels, removing the equal-weight point permits the continuous larger-weight rule.
+
 ## 39.3.3 Formal Anchor Theorem, Literature & Appendix E Scope, Quantitative Audit, and Bridge to the Exteriorless Ternion Ontology {#sec-ch39-26-3}
 
 We formalize the five-postulate projection map, assemble the twenty-three frozen Lean 4 anchors of its two theorem boxes, record classical attributions, and verify all five invariants quantitatively below:
