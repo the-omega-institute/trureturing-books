@@ -1209,6 +1209,10 @@ In general, give each label $i$ two signed vertices $i^+$ and $i^-$. A simplex f
 
 Write $E$ for the label set, $r(B)$ for the rank of the columns at $B\subseteq E$, and $M$ for the column matroid. Its Tutte polynomial is the rank-subset sum $T_M(x,y)=\sum_{B\subseteq E}(x-1)^{h-r(B)}(y-1)^{|B|-r(B)}$. At $x=1$, only spanning sets $B$ contribute. Their complementary supports have size $n-|B|$, and $(-2)^{n-|B|}=(-2)^{n-h}(-1/2)^{|B|-h}$. Thus $\widetilde\chi=-(-2)^{n-h}T_M(1,1/2)$. For a basis the section is empty and the formula gives $-1$. For two copies of a nonzero generator the section has four points and the formula gives $3$.
 
+**Facet dimension and shelling order (written derivation).** The label sets whose complements still span $H$ are the independent sets of the dual column matroid. Splitting each label into two parallel signed elements allows an independent set to use at most one of them. The nonempty faces of the direction complex are therefore precisely the nonempty independent sets of the resulting matroid. Each facet is a basis with $n-h$ vertices. When $n=h$, there are no nonempty faces.
+
+Fix any linear order on the signed labels. Compare two facets by placing first the one containing the least label of their symmetric difference. This gives a shelling order. If $A$ precedes $B$, let $x\in A\setminus B$ be that least label. The independent set $(A\cap B)\cup\{x\}$ extends to a basis $C$ inside $B\cup\{x\}$. Since $B$ and $C$ have the same size, $C$ replaces exactly one vertex of $B$ with $x$. The removed vertex lies outside $A\cap B$ and follows $x$ in the label order. Thus $C$ precedes $B$, and $C\cap B$ is a codimension-one face containing $A\cap B$. This gives the required intersection condition for a shelling.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
