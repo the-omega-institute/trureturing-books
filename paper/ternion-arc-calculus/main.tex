@@ -85,18 +85,14 @@ convergence criterion is the angular sum, not the sagitta sum (both directions f
 group recognise exactly nonuniform $\mathrm{NC}^1$, while commutative words cannot compute two-input AND under a two-output promise.
 The diagonal operation is an involutory quandle whose closed-braid colouring spaces on $S^3$ are $S^3\times(\{1\}\sqcup S^2)$ for the
 trefoil and $S^3\times(\{1\}\sqcup S^2\sqcup S^2)$ for the figure-eight, and no nonconstant function of the comparison is a crossing
-cocycle there.  Before any manifold, the chord--sagitta identity and an
+cocycle there.  On $S^3$, generic configurations of $N\ge5$ points are recovered locally from $3N-6$ and globally from $3N-5$ scalar
+comparisons, and the Maxwell count does not ensure global rigidity.  Before any manifold, the chord--sagitta identity and an
 elliptic/parabolic/hyperbolic trichotomy already hold for fair elements of a star algebra, and sparse comparisons on a chordal graph
 with triangle defects at most $\varepsilon$ come from a potential up to $(|V|-2)\varepsilon$, the obstruction on other graphs being a
 lattice gauge connection.  The key step concerns the duplication equation $f(x^2)=2f(x)^2-1$: on the line it has continuous non-cosine
 solutions, none of them faithful, and on a connected Lie group every faithful continuous solution that is an even class
-function is the cosine of an angle ($\re$ on $S^1$ and $\SU(2)$, the cosine of the rotation angle on $\SO(3)$).  Under a $C^2$ hypothesis, two further closing laws, minimal
-dimension and completeness of comparison, select the same Lie algebra $\su(2)$; without any regularity hypothesis the
-round-trip law can be replaced by an operational one: along a uniform transport, the comparison of any test point with the next point is an
-affine function of its comparisons with the two previous points.  We describe the
-geometry of the heap $S^3$: two flat connections with opposite torsion, their mean the Levi-Civita
-connection, reflections as geodesic symmetries, and the torsion $3$-form as the obstruction to heaps on
-other spheres.
+function is the cosine of an angle ($\re$ on $S^1$ and $\SU(2)$, the cosine of the rotation angle on $\SO(3)$).  The round-trip law can be replaced by an operational one: along a uniform transport, the comparison of any test point with the next point is an
+affine function of its comparisons with the two previous points.  We also describe the geometry of the heap $S^3$.
 
 On this basis we develop a calculus of minimal arcs in which differences are replaced by transports.
 The recurrence $x_{n+1}=\hp{x_n}{x_{n-1}}{x_n}$ generates sampled geodesics exactly, in Chebyshev form
@@ -111,7 +107,7 @@ of their span, has real part $(\sum\kappa-1)/(2\sqrt{\prod\kappa})=\cos(E/2)$, $
 and the exact finite form of the lasso decomposition bounds the rotation angle of the Levi-Civita holonomy of a closed
 polygon of minimal arcs by the total area of the geodesic triangles of any simplicial triangulated filling with
 non-antipodal neighbours.  For rational vertices all transports and holonomies are
-rational rotations.  A final section indicates which of these results are classical.
+rational rotations.
 \end{abstract}
 
 \maketitle
@@ -149,7 +145,9 @@ colourings, the trefoil and figure-eight colouring spaces of $S^3$ are computed,
 trivial on $S^3$, and Pauli syndromes are read as heap commutators.  Part~\ref{part:arc} (Sections~\ref{sec:recur}--\ref{sec:rational}) develops a
 calculus in which the difference $y-x$ of linear calculus is replaced by the transport $\hp y x\cdot$; Section~\ref{sec:m5} compares
 chord, cap arc and two-arc route of a right cell and shows that the logarithm of an eliminated Gram comparison tends to the min--plus
-(shortest-path) value exactly when the signed coefficients of the shortest paths do not cancel.  Section~\ref{sec:m4} inserts a clock
+(shortest-path) value exactly when the signed coefficients of the shortest paths do not cancel; Section~\ref{sec:m8} passes to arbitrary
+triangles (arc-body invariants, curvature from rotors, the sharp numbers $3N-6$ and $3N-5$ of scalar comparisons for local and global
+recovery on $S^3$, chord and barrier identities, polyhedral defects).  Section~\ref{sec:m4} inserts a clock
 phase at each step of the recurrence: the attainable comparisons are exactly the bounded polynomials of the permitted degree and parity;
 Section~\ref{sec:m4atlas} replaces the Cayley chart by a bounded two-chart rational atlas on all of $S^3$ with uniform error bounds.
 Part~\ref{part:arith} (Section~\ref{sec:m6}) treats the arithmetic of $S^3$: prime-norm gates and their covering exponents (from the
@@ -8183,6 +8181,1266 @@ boundary transport or additive cochains, with the compatibility
 conditions above.
 \end{remark}
 
+\section{Arc bodies of triangles, rotor curvature, rigidity of complete comparison graphs, and chord tunnelling}\label{sec:m8}
+
+Three minimal arcs between independent points of the round $S^3$ bound a
+triangle in a great $2$-sphere. Its radial sector is a three-dimensional
+solid. Its volume is one third of the Levi--Civita rotation angle
+lifted by spin holonomy. We compute its metric invariants, recover sectional curvature
+from the spin rotor, and determine the fewest scalar comparisons needed
+for generic local and global reconstruction on $S^3$. The comparison
+count distinguishes continuous deformations from discrete reflections.
+The same chord--arc calculation gives a radial deficit for finite families
+of prime-indexed rotations and a geometric error for finite polyhedra.  Section~\ref{sec:m5} treated the right cell and its
+three lengths; here the cell is an arbitrary triangle.  Statements already in Sections~\ref{sec:m5}, \ref{sec:m6} and \ref{sec:d4} are
+cross-referenced, not repeated.  Guide: Definition~\ref{m8:body} and Remark~\ref{m8:volume-note} fix the body and its volume;
+Theorem~\ref{m8:rotor} and Proposition~\ref{m8:octant} treat curvature from rotors; Remark~\ref{m8:prior-rigidity} places the counts;
+Propositions~\ref{m8:chord}, \ref{m8:barrier}, Example~\ref{m8:pivot-example} and Example~\ref{m8:histories} treat chords, the barrier
+and readouts; Propositions~\ref{m8:complex-step}, Example~\ref{m8:phase-bundle} the increments; Definition~\ref{m8:prime-arcs},
+Examples~\ref{m8:toy}, \ref{m8:staircase} and Proposition~\ref{m8:toeplitz} the finite arithmetic models.
+
+\subsection{The sector of a minimal-arc triangle}
+
+\begin{definition}\label{m8:body}
+Use the unit-radius metric and Paper I's scalar comparison
+$c(x,y)=\langle x,y\rangle$, with
+$d(x,y)=\arccos c(x,y)$ and $\kappa=(1+c)/2$. For independent
+$x,y,z\in S^3$, let $W=\operatorname{span}_{\mathbb R}(x,y,z)$,
+$G=(\langle x_i,x_j\rangle)_{i,j=1}^3$ for $(x_1,x_2,x_3)=(x,y,z)$,
+and $\Delta=\det G$. Let $C=\{\sum_i t_i x_i:t_i\ge0\}$. Define the
+spherical triangle $T=C\cap S^3$, its arc body $B=C\cap\{\|w\|\le1\}$
+in $W$, and its flat tetrahedron $B_0=\operatorname{conv}(0,x,y,z)$.
+Write $a,b,c_0$ for the three arc side lengths, $L=a+b+c_0$,
+and $E=\operatorname{area}(T)$. Areas and volumes are Euclidean in $W$
+or induced on its unit sphere as specified.
+\end{definition}
+
+\begin{theorem}[Invariants and extremizers]\label{m8:invariants}
+Put $D=1+\langle x,y\rangle+\langle y,z\rangle+\langle z,x\rangle$.
+Then
+\[
+ E=2\operatorname{atan2}(\sqrt{\Delta},D),\qquad
+ |B|=\frac E3,\qquad |\partial B|=E+\frac L2,\qquad
+ |B_0|=\frac{\sqrt{\Delta}}6 .
+\]
+Here $\operatorname{atan2}(v,u)$ for $v>0$ is the angle in $(0,\pi)$
+of $u+iv$. Each radial face has area half its arc length, and the flat
+chord face has area
+$\tfrac12\sqrt{\|y-x\|^2\|z-x\|^2-\langle y-x,z-x\rangle^2}$.
+One has $|B_0|<|B|$ and $|B_0|\le1/6$, with equality in the latter
+exactly for an orthonormal triple. The chord face has area at most
+$3\sqrt3/4$, with equality precisely for an equilateral triangle
+centered at the origin in its plane in the closure of the family.
+At every fixed $0<L<2\pi$ the spherical area and sector volume are
+uniquely maximized, up to isometry, by the equilateral triangle.
+The supremum of $E$ over all independent triples is $2\pi$ and is
+unattained.
+\end{theorem}
+\begin{proof}
+The functional sending each generator to $1$ is positive on $C\setminus
+\{0\}$. The triangle therefore lies in an open hemisphere of $W\cap S^3$,
+and the faces of the cone cut out the unique minimal arcs. Paper I's
+Theorem~\ref{thm:triangle}, or the solid-angle formula
+\cite{VOS,Eriksson}, gives the stated branch of $E$.
+Integrating $r^2\,dr$ over $[0,1]$ on the cone gives the volume.
+Integrating $r\,dr$ along a radial face gives its area. The linear map
+from the coordinate simplex to $B_0$ has absolute determinant
+$\sqrt\Delta$. The parallelogram area formula gives the flat face.
+For directions $u$ in the interior of $T$, the point on the flat face
+has norm less than $1$ by strict convexity of the unit ball. The missing
+radial interval has positive volume. Gram--Schmidt bounds $\sqrt\Delta$
+by the product of the generator norms, with equality exactly when the
+generators are mutually orthogonal.
+
+For the chord-face bound, let $u_1,u_2,u_3$ be its three Euclidean
+side lengths and $A$ its area. Squaring the parallelogram formula gives
+$16A^2=(\sum u_i^2)^2-2\sum u_i^4\le(\sum u_i^2)^2/3$.
+Also $\sum u_i^2=9-\|x+y+z\|^2\le9$. Equality requires equal sides
+and centroid zero. Such a triple is obtained as a limit by raising an
+equatorial equilateral triple a common small latitude and normalizing.
+
+Let $s=L/2$. The perimeter is below $2\pi$ because
+$d(x,y)+d(y,z)<2\pi-d(z,x)$ is the strict triangle inequality via
+$-y$ between $x$ and $z$, using independence. The half-area identity yields L'Huilier's formula
+\[
+ \tan^2(E/4)=\tan(s/2)
+   \tan((s-a)/2)\tan((s-b)/2)\tan((s-c_0)/2).
+\]
+Indeed, write $\xi=s-a$, $\eta=s-b$, $\zeta_0=s-c_0$ and
+$M=4\cos(a/2)\cos(b/2)\cos(c_0/2)$. The half-area formula gives
+$\tan^2(E/4)=(M-D)/(M+D)$. Products of cosines give
+$M=\cos s+\cos\xi+\cos\eta+\cos\zeta_0$. Since $a=\eta+\zeta_0$,
+$b=\xi+\zeta_0$, $c_0=\xi+\eta$ and $s=\xi+\eta+\zeta_0$,
+$M+D$ is the real part of $\prod_{v=\xi,\eta,\zeta_0}(1+e^{iv})$
+and $M-D$ is the negative real part of $\prod_{v=\xi,\eta,\zeta_0}
+(1-e^{iv})$. Factoring $2e^{iv/2}$ from each term gives the displayed
+formula. The last three arguments are positive and sum to $s/2<\pi/2$.
+For any two of them, $u,v$,
+\[
+ \tan u\tan v=\frac{\cos(u-v)-\cos(u+v)}
+                    {\cos(u-v)+\cos(u+v)}.
+\]
+At fixed $u+v<\pi/2$ the expression strictly increases on replacing
+unequal arguments by their average. On the closed simplex of triples
+of arguments the product is continuous and vanishes on the boundary,
+so its maximum has three equal arguments. The equilateral Gram matrix
+is positive definite for $0<L/3<2\pi/3$, since its eigenvalues are
+$1-\cos(L/3)$ twice and $1+2\cos(L/3)$ once. Thus the maximum is
+attained. Its area tends to $2\pi$ as $L$ tends to $2\pi$ by the
+$\operatorname{atan2}$ formula. The open hemisphere condition excludes
+attainment.
+\end{proof}
+
+\begin{example}[Right isosceles sector]\label{m8:right}
+Take an oriented orthonormal coordinate system in $W$ and set
+\[
+ B'=(0,1,0),\quad A=(\sin\epsilon,\cos\epsilon,0),\quad
+ C'=(0,\cos\epsilon,\sin\epsilon),\qquad 0<\epsilon\le\pi/2 .
+\]
+The two sides meeting at $B'$ have length $\epsilon$ and enclose a right
+angle. Put $\ell=d(A,C')$ and let $\alpha$ be either other spherical
+angle. Then
+\begin{align*}
+ \cos\ell&=\cos^2\epsilon,\qquad \det G=\sin^4\epsilon,\qquad
+ \alpha=\operatorname{atan2}(1,\cos\epsilon),\\
+ E&=2\arctan(\tan^2(\epsilon/2))
+   =\epsilon^2/2+\epsilon^4/12+O(\epsilon^6).
+\end{align*}
+The corresponding flat angle at $B'$ has cosine $\sin^2(\epsilon/2)$.
+The flat volume is $\sin^2\epsilon/6$ and the sector volume is $E/3$.
+The sector is an octant at $\epsilon=\pi/2$ and has volume $\pi/6$.
+\end{example}
+\begin{proof}
+Take dot products and the determinant of the three columns. For the
+angle at $A$, the tangent projections of $B'$ and $C'$ onto $A^\perp$
+have dot product $\cos\epsilon\sin^2\epsilon$ and unsigned two-vector
+area $\sin^2\epsilon$. Interchanging $A$ and $C'$ gives the other
+angle. In the area formula $D=(1+\cos\epsilon)^2$.
+Expanding $\tan^2(\epsilon/2)=\epsilon^2/4+\epsilon^4/24+O(\epsilon^6)$
+gives the series. At the flat vertex the dot product of the two
+edge differences is $(1-\cos\epsilon)^2$ and the product of their
+norms is $2(1-\cos\epsilon)$. At the octant endpoint the three
+inequalities defining $C$ are coordinate signs and $E=\pi/2$.
+\end{proof}
+
+\begin{remark}[which volume the Gram determinant measures]\label{m8:volume-note}
+The square root $\sqrt\Delta$ of the Gram determinant is the volume of the parallelepiped spanned by $x,y,z$, not the volume of the
+arc body.  At the octant $\sqrt\Delta=1$, the flat tetrahedron has volume $1/6$ and the spherical sector (the arc body) has volume
+$\pi/6$ (Theorem~\ref{m8:invariants}, Example~\ref{m8:right}).  The statement that the Gram volume of the right cell is the sector
+volume is therefore false; the sector volume is $E/3$.
+\end{remark}
+
+\begin{proposition}[Observer localization and orthogonal completion]\label{m8:observers}
+For $p(\phi)=\cos\theta\,e_3+\sin\theta(\cos\phi\,e_1+\sin\phi\,e_2)$
+with $0<\theta<\pi$, a probe $o\in S^2$ reads $p(0)$ and $p(\pi/2)$
+equally exactly when $o_1=o_2$. Its readout is constant on the entire
+latitude exactly when $o=\pm e_3$. More generally, a linear isometry
+$R$ obeys $\langle o,Rp\rangle=\langle R^{-1}o,p\rangle$, and equality
+with $\langle o,p\rangle$ on a spanning set forces $Ro=o$.
+For two independent unit vectors $a,b$ in $\mathbb R^3$ the unit common
+normals are $\pm(a\times b)/\|a\times b\|$. For any finite-dimensional
+subspace $U$, the residual of adjoining $v$ is $v-P_Uv$. It raises
+the span dimension exactly when that residual is nonzero.
+\end{proposition}
+\begin{proof}
+The readout is $\cos\theta\,o_3+\sin\theta(o_1\cos\phi+o_2\sin\phi)$.
+Evaluate at $0,\pi,\pi/2,3\pi/2$ and use $\sin\theta>0$. The pullback
+is the adjoint identity and the conclusion follows from spanning.
+The cross product spans the orthogonal complement of the pair. In
+the last claim the augmented span is $U+\mathbb R(v-P_Uv)$, an
+orthogonal sum. In $W$ a cyclic permutation of an orthonormal triple
+fixes the sum axis and rotates its orthogonal plane by $2\pi/3$ in the
+appropriate orientation. For a general triple the permutation
+preserves its Gram matrix exactly when all three off-diagonal entries
+are equal. These facts specify the symmetry available to an
+orthogonal-completion or cyclic construction.
+\end{proof}
+
+\begin{proposition}[Subentropy of the equal mixture]\label{m8:subentropy}
+For the three pure Bloch states of Example~\ref{m8:right}, the equal
+mixture has eigenvalues $\lambda_\pm=(1\pm r)/2$ with
+$r^2=(3+4\cos\epsilon+2\cos^2\epsilon)/9$. In the usual qubit
+subentropy convention \cite{m8:subentropy-ref},
+\[
+ Q=-\frac{\lambda_+^2\log\lambda_+-\lambda_-^2\log\lambda_-}
+           {\lambda_+-\lambda_-}
+   =\frac{\epsilon^2}{9}+O(\epsilon^4|\log\epsilon|).
+\]
+Thus $Q/(E/2)\to4/9$. The coherent loop has a pure final state and
+$Q=0$. The real Gram matrix of the Bloch triple has rank three,
+whereas the complex Gram of the three spinors has rank at most two.
+\end{proposition}
+\begin{proof}
+The mean Bloch vector is $(A+B'+C')/3$. Squaring its norm gives
+the displayed expression and the Pauli matrix along that vector has
+eigenvalues $\pm r$. Expansion gives $\lambda_-=\epsilon^2/9+
+O(\epsilon^4)$, and $-\lambda_+^2\log\lambda_+=\lambda_-+
+O(\lambda_-^2)$, while the smaller term is
+$O(\lambda_-^2|\log\lambda_-|)$. Division by $1-2\lambda_-$ leaves
+the stated error. The angle expansion gives the ratio. A change of
+phase preserves the rank-one projector with eigenvalues $1,0$.
+The two rank statements follow from the dimensions and independence.
+\end{proof}
+
+\subsection{Curvature from the rotor}
+
+\begin{theorem}[Small triangles and transport]\label{m8:rotor}
+Use the right trivialization of Paper I and let
+$y=\exp(tu)x$, $z=\exp(tv)x$ for imaginary quaternions $u,v$.
+Write $H_t=h_{xz}h_{zy}h_{yx}$ for the spin holonomy and
+$\Omega_t$ for the unsigned area. For independent $u,v$ and sufficiently
+small $t>0$,
+\[
+ \log H_t=\frac{t^2}{4}u\times v+O(t^4),\qquad
+ \Omega_t=\frac{t^2}{2}\|u\times v\|+O(t^4).
+\]
+Hence $2\|\log H_t\|/\Omega_t=1$ on these triangles.
+With curvature sign $R(u,v)w=\langle v,w\rangle u-\langle u,w\rangle v$,
+\[
+ \lim_{t\to0}\frac{\operatorname{Ad}(H_t)w-w}{t^2/2}
+ =-R(u,v)w .
+\]
+On an oriented great $2$-sphere the spin logarithm is the transported
+unit normal times the signed area divided by two, for triangles of
+area below $2\pi$. For the Bloch projectors in that $3$-space,
+$\arg\operatorname{Tr}(P_1P_2P_3)=\Omega/2$ with signed $\Omega$;
+the parallel-transport phase on the positive eigenline is
+$-\Omega/2$ modulo $2\pi$.
+\end{theorem}
+\begin{proof}
+In Theorem~\ref{thm:triangle} the dot-product denominator tends to
+$4$ with error $O(t^2)$ and the imaginary cross product numerator is
+$t^2 u\times v+O(t^4)$, by the sine expansion. Near the identity,
+the logarithm has imaginary part $\operatorname{Im}H_t+
+O(\|\operatorname{Im}H_t\|^3)$. The exact area is twice its norm by
+that theorem, with sign given by the ordered normal. The adjoint
+action expands to first order as $w+[\log H_t,w]$. Here
+$[a,w]=2a\times w$ and
+$(u\times v)\times w=\langle u,w\rangle v-\langle v,w\rangle u$.
+This also gives the zero first coefficient for dependent $u,v$.
+The signed Bargmann trace is the trace formula accompanying
+Theorem~\ref{thm:triangle}. To implement positive real successive
+overlaps, multiply each next spinor by the conjugate of the phase of
+the preceding overlap, accumulating the inverse of the cyclic phase
+\cite{SB88,MS93,m8:berry}. Reversing the loop inverts the rotor and
+conjugates the cyclic trace.
+
+For comparison with Lemma~\ref{lem:comb}, parametrize a small patch by
+$F_t(s,r)=\exp(t(su+rv))x$ on the unit square. Uniform Taylor expansion
+gives $\lambda_s=tu+O(t^2)$, $\lambda_r=tv+O(t^2)$ and comb transport
+$1+O(t)$, since each path has bounded parameter length and the
+connection coefficients are $O(t)$. The comb integrand is therefore
+$t^2(u\times v)/2+O(t^3)$. Integrating the comb equation gives the
+logarithm $t^2(u\times v)/2+O(t^3)$ for the square. The factor between
+this and the triangular coefficient is the leading ratio of the
+parameter areas. On a great sphere the normal is ambient constant
+and is parallel along the sphere, so the conjugated normals in the
+comb formula coincide. The finite product of face rotors then adds
+oriented areas in a single circle subgroup, by Theorem~\ref{thm:stokes}.
+For arbitrary faces the same theorem uses transported factors in
+lasso order.
+\end{proof}
+
+\begin{proposition}[open and closed coefficients]\label{m8:octant}
+Use orthonormal $x=1,y=i,z=j$ in $S^3$. The product of half-displacements
+is $(1+k)/\sqrt2$. Its adjoint fixes $k$ and sends $i$ to $j$. A probe
+parallel to $k$ reads every tangent vector and its rotated value
+equally, and the spanning-set converse of Proposition~\ref{m8:observers}
+gives precisely that axis. The corresponding positive Bloch eigenline
+has phase $-\pi/4$.
+In the Euclidean Clifford algebra with $e_i^2=1$, the product
+$(q+s e_2e_3)(q+s e_1e_2)$ for $q=\cos(\epsilon/2)$,
+$s=\sin(\epsilon/2)$ has $e_1e_3$ coefficient $-s^2$.
+For the right isosceles cell the open coefficient and the negative
+closed phase angle are
+\[
+ -s^2=-\epsilon^2/4+\epsilon^4/48+O(\epsilon^6),\qquad
+ -E/2=-\epsilon^2/4-\epsilon^4/24+O(\epsilon^6).
+\]
+They agree at quadratic order and differ at quartic order; at the octant $\epsilon=\pi/2$ they are $-1/2$ and $-\pi/4$.  These are
+distinct scalar observables of open and closed operations, so the open cross coefficient does not give the closed half-excess at
+finite step size.
+\end{proposition}
+\begin{proof}
+In Theorem~\ref{thm:triangle} the scalar numerator is $1$, the cross
+product is $k$, and each edge has $\kappa=1/2$. Quaternion conjugation
+gives the indicated rotation. In the Clifford product
+$e_2e_3e_1e_2=-e_1e_3$ by anticommutation. Expand the sine and use
+Example~\ref{m8:right}. The closed rotor's corresponding normalized
+axis coefficient has magnitude $\sin(E/2)$, which agrees with $E/2$
+through order four.
+\end{proof}
+
+
+\begin{example}[Latitude overlaps and a hemispherical mesh]\label{m8:latitude}
+For $0\le q\le1$, define the spinor
+$\psi(z)=(\sqrt{1-q},\sqrt q\,z)$ with $z$ on the unit circle.
+Then $\psi(z)^*\psi(w)=1-q+q\bar z w$. On a regular longitude
+polygon of $N$ steps the cyclic overlap product is
+$(1-q+q e^{2\pi i/N})^N$. At $N=4$, $q=1/2$, it is $-1/4$.
+For fixed $q$ it tends to $e^{2\pi i q}$. At colatitude
+$\theta$, $q=(1-\cos\theta)/2$ and the limiting cyclic phase is
+half the cap area, with the parallel phase of opposite sign.
+
+For the four-octant northern hemisphere mesh, let
+$g(x,y,z)=0.3x+0.7y-0.5z$ on $S^2$. The smooth form on the
+closed northern hemisphere
+\[
+ \mathcal A=\frac{x\,dy-y\,dx}{1+z}+dg
+           =(1-\cos\theta)\,d\phi+dg
+\]
+has exterior derivative spherical area. With positively oriented
+quadrants, each boundary integral is $\pi/2$, and the sum is
+$2\pi$. The four planar chord faces have total area $2\sqrt3$.
+\end{example}
+\begin{proof}
+The overlap calculation is the complex dot product. Taylor
+expansion gives $N\log(1-q+qe^{2\pi i/N})=2\pi i q+O(1/N)$
+on the branch near $1$ for large $N$. At $N=4$ the expression
+is $((1+i)/2)^4$. The cap's area is $2\pi(1-\cos\theta)$
+by integration. The squared arc increments for the polygon
+sum to $O(1/N)$ since each arc is bounded in length by the
+corresponding latitude segment.
+
+In the displayed form $x=\sin\theta\cos\phi$ and
+$y=\sin\theta\sin\phi$, so the numerator is $\sin^2\theta\,d\phi$.
+The denominator is positive throughout the hemisphere and
+differentiation gives the area form. Meridian integrals of the
+first term vanish and each equatorial arc contributes $\pi/2$.
+The endpoint differences of $g$ telescope. Each chord face is
+equilateral with side $\sqrt2$. The mesh thus realizes
+Proposition~\ref{m5:gb} with exact spherical faces and quantifies
+the loss of area on replacing them by flat faces.
+\end{proof}
+
+\begin{lemma}[Additive repair and cancellation]\label{m8:repair}
+For a nonempty finite set $V$ of size $n$ and a function
+$f:V^3\to A$ to an abelian group, set
+\[
+ \delta f(r,i,j,k)=f(i,j,k)-f(r,j,k)+f(r,i,k)-f(r,i,j).
+\]
+Count ordered tuples, including repetitions. If $D$ counts nonzero
+$\delta f$, some edge function $g:V^2\to A$ differs from $f$ on at
+most $D/n$ faces under $\delta g(i,j,k)=g(j,k)-g(i,k)+g(i,j)$.
+For every $g$ with $M$ such disagreements one has $D\le4nM$.
+On a finite oriented triangulation an antisymmetric edge cochain sums
+over the oriented boundary when summed over all face boundaries.
+\end{lemma}
+\begin{proof}
+For a fixed $r$ set $g(i,j)=f(r,i,j)$, so the error is
+$\delta f(r,i,j,k)$. Average over $r$. On expanding,
+$\delta\delta g=0$, and a defect requires one of the four faces to
+disagree. Each of the four positions contributes $nM$ ordered
+quadruples. In the oriented triangulation internal edges occur twice
+with opposite orientations. The resulting additive law is the
+abelian specialization of Theorem~\ref{thm:stokes}; on a great sphere
+the rotor identification above supplies the area cochain.
+\end{proof}
+
+\begin{proposition}[Path products and phase selection]\label{m8:phaseselection}
+For vectors $v_0,\dots,v_j$ in a complex Hilbert space and
+$P_k=v_kv_k^*$,
+$\operatorname{Tr}(P_0\cdots P_j)=\prod_{k=0}^j\langle v_k,v_{k+1}\rangle$
+with $v_{j+1}=v_0$. On a connected finite graph with $n$ vertices and
+$m$ edges, circle-valued edge gains modulo vertex gauges fixed on
+$k\ge1$ anchors have $m-n+1$ fundamental cycle and $k-1$ additional
+root-to-anchor phase coordinates, as in Corollary~\ref{m1:anchored}.
+For a subgroup $J\le\mathbb Z/q\mathbb Z$, the normalized average
+of $e^{2\pi i jk/q}$ over $j\in J$ is the indicator of its annihilator.
+With $\widehat f(k)=\sum_j f(j)e^{-2\pi i jk/q}$, inversion divides
+the dual sum by $q$. Also
+$M^{-1}\sum_{j=0}^{M-1}e^{ij\phi}$ has modulus at most
+$2/(M|1-e^{i\phi}|)$ for $e^{i\phi}\ne1$, and is $1$ at resonance.
+\end{proposition}
+\begin{proof}
+Successive multiplication of rank-one factors leaves the open outer
+product $v_0v_j^*$ times the open overlap product. Its trace closes the
+cycle. The graph statement uses the rooted tree gauge from
+Corollary~\ref{m1:anchored} with $n-1$ tree edges. For the annihilator
+formula, translate the sum by an element on which a nontrivial
+character differs from $1$, so the sum equals
+itself times a factor different from $1$. For inversion substitute
+the definition and apply that identity to the full group. The
+finite phase estimate follows by summing a geometric series.
+The trace product, gauge coordinates and phase average thus require
+three different operations on paths.
+\end{proof}
+
+\subsection{Sharp comparison counts}
+
+\begin{proposition}[Complete Gram rigidity]\label{m8:gram}
+Two labelled configurations in $S^3$ with the same complete scalar
+comparisons differ by one element of $\mathrm O(4)$. When their
+span has dimension at most three the transport can be taken in
+$\mathrm{SO}(4)$. At full rank the determinant of any ordered basis
+quadruple distinguishes the two orientation classes. The analogous
+result for complex vector Gram matrices uses unitary transport.
+\end{proposition}
+\begin{proof}
+Given equal Gram matrices for the columns of $X$ and $Y$,
+$\|Xb\|^2=\|Yb\|^2$ for every coefficient vector $b$. Thus $Xb\mapsto
+Yb$ is well-defined, linear, and preserves all inner products.
+Extend orthonormal bases on the spans to bases of the ambients.
+If their orthogonal complements are nonzero, reflecting the
+extension on one complementary direction changes its determinant.
+At full rank the extension is unique and takes every ordered basis
+quadruple to its counterpart. The same argument uses Hermitian
+inner products in the complex case. This is the uniqueness part of
+Proposition~\ref{m1:gram}. Quaternion-valued transport in
+Proposition~\ref{m1:chordal} supplies more edge information than the
+scalar entries here.
+\end{proof}
+
+\begin{theorem}[Minimum number of scalar comparisons]\label{m8:counts}
+A comparison graph specifies a fixed subset of the entries
+$\langle x_i,x_j\rangle$, $i<j$. Local recovery means isolated
+recovery modulo $\mathrm O(4)$ within a neighborhood of the given
+Gram matrix. Global recovery means uniqueness among all rank-at-most-four
+unit Gram matrices. Use generic configurations, in the sense of an
+open dense set of full measure in the maximal-rank configurations.
+For $N\le4$ the minimum for either type of recovery is
+$\binom N2$. For $N\ge5$, the local minimum is $3N-6$ and the
+global minimum is $3N-5$. The generic excess of $K_N$ over the
+local minimum is $(N-3)(N-4)/2$ for $N\ge4$.
+\end{theorem}
+\begin{proof}
+For $N\le4$ the positive-definite unit Gram matrices form an open
+set in the space of off-diagonal entries. Any missing entry can
+vary there. For $N\ge4$, the rank-four unit Gram stratum has
+dimension $d_4=3N-6$. To see this, choose an invertible four-vertex
+principal block $A$. Its six free entries determine a triangular
+realization of the four anchors by Cholesky factorization. Each
+other vertex then has three independent coordinates on $S^3$.
+These charts are smooth with smooth inverses, since comparisons
+to the four anchors determine each other vertex. The same charts
+with $r$ anchors in $\mathbb R^r$ give dimension
+$d_r=(r-1)N-r(r-1)/2$ on the rank-$r$ stratum. In particular
+$d_r\le2N-3$ for $r\le3$.
+
+Every coordinate projection onto a fixed edge set has maximal
+differential rank on an open dense set of the rank-four stratum.
+Indeed the Gram map from spanning configurations is a submersion
+by the above local sections and the free $\mathrm O(4)$ action.
+Minors of the differential of the edge map on $(S^3)^N$ are
+real analytic in analytic charts. A rank drop from the global
+maximum has empty interior and measure zero by analytic
+continuation on the connected $(S^3)^N$. One can equivalently use
+the analytic matrix obtained by differentiating in the ambient
+coordinates and projecting onto the tangent spaces. The constant-rank
+theorem now excludes local recovery with fewer than $d_4$ measurements.
+
+A triangle of independent anchors, with three edges to each further
+vertex, attains $3+3(N-3)=3N-6$. The anchor projection of each other
+point is fixed by its three inner products. The norm then determines
+its two possible positions on a line orthogonal to the anchors.
+Generically both positions are distinct, and each choice is
+isolated. For $N\ge5$, reflecting a single further vertex independently
+changes its inner product with another further vertex because their
+normal components are nonzero. This gives different completions
+of a chordal graph. The count for $K_N$ follows by subtraction.
+
+For the global lower bound, suppose an edge set of size $d_4$ has
+full rank somewhere. Otherwise it fails local recovery on the
+maximal-rank locus. Remove an edge and write $\pi$ for the
+projection to the $d_4-1$ remaining coordinates. Its differential
+is surjective wherever the original one has full rank. Sard's
+theorem \cite{m8:sard} excludes a null set of values for the
+rank-four charts. The images of the lower rank strata also have
+measure zero, since $d_r\le2N-3<d_4-1$ for $N\ge5$. Together
+the excluded values form a closed set. The ambient rank-at-most-four
+Gram space is compact, and the union of the lower strata and the
+critical set in the top stratum is closed in it. On the full-rank
+locus of the original projection, the inverse image of this
+exceptional set is null and has empty interior by submersion.
+At any other value the fiber is a compact smooth one-manifold,
+all of whose points have rank four. Its component through the
+given configuration is a circle. On this circle the deleted
+coordinate has nonzero derivative at the given point, by full
+rank of the original projection. Values just to either side of
+the point bracket its value. The arc joining those nearby points
+around the other side of the circle contains a second preimage of
+that value by continuity. The two Gram matrices differ and agree
+on all specified edges.
+
+For the upper bound, take two anchor vertices, their connecting
+edge, both anchor edges to every remaining vertex, and a cycle
+through those $N-2\ge3$ remaining vertices. This uses
+$1+2(N-2)+(N-2)=3N-5$ edges. Each anchor-plane projection and
+each residual norm is fixed. Generically all residual norms are
+positive. Normalize the residuals in the common orthogonal
+two-plane and write their circular coordinates as $z_j$ with
+$z_{m+1}=z_1$, $m=N-2$. The cycle readings fix the real part of
+$z_{j+1}/z_j$, hence fix each relative phase up to conjugation.
+The actual product of all relative phases is $1$. Conjugating a
+nonempty proper subset $S$ preserves closure only when
+$\prod_{j\in S}(z_{j+1}/z_j)^2=1$. This is a nontrivial equation
+on the angular torus because some vertex lies on the boundary
+of $S$ and has exponent $\pm2$. The finitely many such equations
+and the endpoint phases $z_{j+1}/z_j=\pm1$ form a closed null set in the angular torus. The only remaining sign choices
+are the actual phases and their simultaneous conjugates, related
+by one reflection of the two-plane. Fixing the first residual up
+to rotation gives all the others. This reconstruction covers every
+possible Gram completion on $S^3$ for those readings.
+\end{proof}
+
+\begin{remark}[Rigidity theory and chordal data]\label{m8:prior-rigidity}
+The generic counts are the spherical scalar versions of the
+Maxwell degree-of-freedom count and the redundant-rigidity
+obstruction to global uniqueness \cite{m8:hendrickson,m8:coning}.
+The proof above gives a direct optimal graph and recovery procedure
+on the sphere. The obstruction concerns global uniqueness of
+low-rank Gram completion. Positive-semidefinite existence for
+chordal graphs \cite{m1:Grone} and gain reconstruction via
+Proposition~\ref{m1:chordal} have distinct hypotheses.
+For $N\ge6$ the optimal cycle construction contains an induced
+cycle of length at least four. The ambient dimension is a rank
+input. For example five orthonormal vectors in $\mathbb R^5$
+give a complete comparison matrix of rank five.
+
+Three statements are refuted by Theorem~\ref{m8:counts} and this remark.  (i) The Maxwell count \cite{m8:maxwell} does not ensure
+generic global rigidity: the graph of a triangle of anchors with three edges to each further vertex has $3N-6$ comparisons, is
+chordal (each further vertex is simplicial, so it has a perfect elimination ordering without fill in the sense of
+Proposition~\ref{m5:fill}), and reflecting one further vertex across the span of the three anchors preserves every measured comparison
+while changing an unmeasured one.  (ii) Complete comparisons do not select the dimension of the sphere without a rank input (the
+rank-five example).  (iii) The total all-to-all count does not determine a Regge angle defect (Example~\ref{m8:flex}).  For gains
+instead of scalar comparisons, the chordal reconstruction of Theorem~\ref{m1:chordal} uses quaternion-valued edge data, which carries
+more information than the scalar entries here.
+\end{remark}
+
+\begin{example}[Four-link flex and a Regge deficit]\label{m8:flex}
+On $S^3$ take $x_1=e_1$, $x_3=e_2$, $x_2=(e_1+e_2)/2+e_3/\sqrt2$
+and $x_4=(e_1+e_2)/2+(\cos t\,e_3+\sin t\,e_4)/\sqrt2$.
+The four cycle edges have length $\pi/3$ and the missing
+comparison $c(x_2,x_4)=(1+\cos t)/2$ varies. A regular Euclidean
+tetrahedron has internal dihedral angle $\arccos(1/3)$.
+On the boundary complex of a regular Euclidean $4$-simplex,
+three regular tetrahedra meet at each edge and the Regge deficit
+there is $2\pi-3\arccos(1/3)>0$. The same complete graph $K_5$
+can be realized without this tetrahedral gluing.
+\end{example}
+\begin{proof}
+The norm and comparison checks are dot products. For the
+dihedral angle realize the tetrahedron as the four alternate
+vertices of a cube, for instance the sign triples with positive
+coordinate product. Unit outward normals to distinct facets
+have dot product $-1/3$, so the supplementary internal angle is
+$\arccos(1/3)<\pi/2$. To obtain a boundary tetrahedron containing
+a given edge of the $4$-simplex, omit one of the other three
+vertices. The deficit is by definition the angle missing from
+$2\pi$ in the normal plane about the edge \cite{m8:regge}.
+\end{proof}
+
+\subsection{Chords, elimination, and two-arm amplitudes}
+
+\begin{proposition}[Arc and chord]\label{m8:chord}
+For two points on the unit sphere at angular distance $d\in[0,\pi]$,
+the chord length and maximum radial depth are
+\[
+ C(d)=2\sin(d/2),\qquad S(d)=1-\cos(d/2).
+\]
+For $d>0$, $C(d)<d$. The radial segment formula holds also for
+antipodes, where the minimal arc is nonunique. As $d\to0$,
+\[
+ d-C(d)=d^3/24+O(d^5),\qquad S(d)=d^2/8+O(d^4).
+\]
+The chord vector is perpendicular to the mean of the endpoints.
+For Example~\ref{m8:right}, the lengths of the chord, single arc
+and two-arc route satisfy
+\[
+ \sqrt2\sin\epsilon <\arccos(\cos^2\epsilon)<2\epsilon.
+\]
+The midpoint depth is $1-\sqrt{(1+\cos^2\epsilon)/2}$.
+At $\epsilon=\pi/3$ the chord is $\sqrt6/2$ and the depth is
+$1-\sqrt{10}/4$.
+\end{proposition}
+\begin{proof}
+The squared norms of the difference and the mean are
+$2-2\cos d$ and $(1+\cos d)/2$. Along the chord its squared radius
+is $1-2t(1-t)(1-\cos d)$, minimized at $t=1/2$. The difference is
+orthogonal to the mean because the squared endpoint norms agree.
+The strict bound and expansions follow from sine and cosine.
+For the right cell $\cos^2\epsilon-\cos2\epsilon=\sin^2\epsilon>0$
+and both arc angles being compared lie in $[0,\pi]$.
+These formulas extend the sagitta comparison in
+Remark~\ref{m5:sagitta}; the three-length inequality for the right cell is Theorem~\ref{m5:ladder}.
+\end{proof}
+
+\begin{proposition}[Two kinds of elimination]\label{m8:pivots}
+Let $I$ be interior vertices and $P$ the retained vertices of a
+finite directed weighted graph with no negative cycle. In the
+min-plus semiring the exact effective matrix is
+$W_{PP}\oplus W_{PI}W_{II}^{*}W_{IP}$, where $W_{II}^{*}$ includes
+the zero-length identity walk. Replacing maximal interior runs of
+a path by these edges preserves all $P$-to-$P$ shortest distances.
+For a Hermitian block matrix
+$G=\left(\begin{smallmatrix}A&B\\B^*&C\end{smallmatrix}\right)$
+one has
+\[
+ G\succeq0\quad\Longleftrightarrow\quad
+ A\succeq0,\quad \operatorname{ran}B\subseteq\operatorname{ran}A,
+ \quad S=C-B^*A^+B\succeq0 ,
+\]
+where $A^+$ is the Moore--Penrose inverse. Under the first two
+conditions the minimum of the quadratic form over the eliminated
+coordinate $u$ at fixed retained coordinate $v$ is $v^*Sv$.
+\end{proposition}
+\begin{proof}
+Compress each interior run using a minimizing route and expand each
+effective edge by a realizing route. The absence of negative cycles
+permits erasing repeated vertices to attain any finite distance.
+The graph operation is Theorem~\ref{m5:pivot}; here it is
+paired with the quadratic elimination of Proposition~\ref{m5:projection}.
+For the matrix result a positive $G$ has $A\succeq0$ and forces
+$B^*u=0$ on $\ker A$ by letting a real multiple of $u$ vary in
+the quadratic form, with a phase change if needed. For Hermitian
+$A$ this is the range condition. Under those conditions the
+quadratic form is
+$(u+A^+Bv)^*A(u+A^+Bv)+v^*Sv$ since $AA^+B=B$.
+The square can be set to zero. This also proves the converse.
+\end{proof}
+
+\begin{example}[A finite Schur pivot]\label{m8:pivot-example}
+In the preceding notation let
+\[
+ A=C=\begin{pmatrix}1&1/2\\1/2&1\end{pmatrix},\qquad
+ B=\begin{pmatrix}1/3&1/6\\2/3&1/3\end{pmatrix}.
+\]
+Then $S=\left(\begin{smallmatrix}5/9&5/18\\5/18&8/9\end{smallmatrix}\right)$,
+$\det A=3/4$, $\det S=5/12$, and $\det G=5/16$. Appending
+a copy of the fourth Gram vector gives kernel spanned by
+$(0,0,0,1,-1)$ and rank four. With inner product vector
+$b=(1/4,1/2,3/4,2/3)^\top$ the squared projection residual for
+a unit target is $35/108$.
+\end{example}
+\begin{proof}
+Multiplying gives $A^{-1}B=\left(\begin{smallmatrix}0&0\\2/3&1/3
+\end{smallmatrix}\right)$ and the stated $S$. The triangular
+congruence implicit in Proposition~\ref{m8:pivots} has unit
+determinant, giving the determinant product and positivity.
+In the two-stage projection the first residual norm squared is
+$3/4$ and the reduced inner product vector is $(5/12,1/2)^\top$.
+Multiplication by $S^{-1}$ gives squared removed norm $23/54$.
+Subtracting yields $35/108$ and, since this is positive, a unit
+target with these comparisons exists in one additional dimension.
+The repeated column gives the stated kernel and leaves a nonsingular
+principal block.
+\end{proof}
+
+\begin{hypothesis}[Dynamical inputs]\label{m8:dynamics}
+For a one-dimensional stationary barrier choose the Schr\"odinger
+equation with constant mass $m>0$ and a rectangular potential of
+height $V_0>0$ and width $b>0$, zero outside it. For a temporal
+two-path experiment assume coherent preparation of the same detected
+mode with two spectral amplitudes and delays $t_1,t_2$.
+A model identifying either system with an arc body would also
+need a Hamiltonian or an effective metric, the map from states
+and trajectories to the ball, and a rule connecting depth or angle
+to a measured probability.
+\end{hypothesis}
+
+\begin{proposition}[Barrier and two-delay formulas]\label{m8:barrier}
+For $0<E_0<V_0$, set $k=\sqrt{2mE_0}/\hbar$ and
+$\chi=\sqrt{2m(V_0-E_0)}/\hbar$. The transmission probability of
+Hypothesis~\ref{m8:dynamics} is
+\[
+ T=\left(1+\frac{V_0^2}{4E_0(V_0-E_0)}\sinh^2(\chi b)\right)^{-1}.
+\]
+For fixed $E_0,V_0$ and $\chi b\to\infty$, the ratio of $T$ to
+$e^{-2\chi b}$ tends to $16E_0(V_0-E_0)/V_0^2$, which is $4$ at $E_0=V_0/2$: the exponential gives the rate and the transfer matrix
+the prefactor, so the bare exponential with unit prefactor is not asymptotically equivalent to $T$. As $E_0\uparrow V_0$
+at fixed $b$, $T\to(1+mV_0b^2/(2\hbar^2))^{-1}$.
+For delay amplitudes $A_j(E_0)$ the intensity is
+\[
+ |A_1|^2+|A_2|^2+
+ 2\operatorname{Re}\!\left(A_1\overline A_2
+                e^{iE_0(t_2-t_1)/\hbar}\right).
+\]
+If magnitudes and relative phase are constant and $t_1\ne t_2$,
+the energy fringe period is $2\pi\hbar/|t_2-t_1|$.
+An exact dark fringe with nonzero amplitudes requires equal
+magnitudes and an odd multiple of $\pi$ for the total relative
+phase. Pinching in the path basis removes the cross term.
+\end{proposition}
+\begin{proof}
+In the barrier the equation is $\psi''=\chi^2\psi$, so its
+transfer matrix on $(\psi,\psi')$ has diagonal $\cosh(\chi b)$
+and off-diagonal entries $\sinh(\chi b)/\chi$ and
+$\chi\sinh(\chi b)$. Write the exterior solutions
+$e^{ikx}+r e^{-ikx}$ on the left and $t e^{ik(x-b)}$ on the
+right. The inverse transfer sends $(t,ikt)$ at $b$ to
+$t(\cosh(\chi b)-ik\sinh(\chi b)/\chi,
+ik\cosh(\chi b)-\chi\sinh(\chi b))$ at $0$.
+Half the sum of its first component and its second divided by
+$ik$ is the incoming amplitude $1$. Taking the absolute square gives
+$|t|^{-2}=\cosh^2(\chi b)+(\chi/k-k/\chi)^2\sinh^2(\chi b)/4$.
+The exterior wave numbers coincide, so $T=|t|^2$.
+The limits follow from the exponential and small-argument forms
+of $\sinh$. The delay formula is the squared modulus of
+$\sum_j A_j e^{-iE_0t_j/\hbar}$. After pinching the two-by-two
+path density matrix, the off-diagonal entries vanish, leaving
+the two squared magnitudes. This algebra also applies to spatial
+fringes with momentum times displacement in place of energy
+times delay. Temporal fringe experiments include
+\cite{m8:lindner,m8:tirode}.  The physical interpretation of these formulas belongs to the companion paper; only the identities are
+used here.
+\end{proof}
+
+
+\begin{example}[Recorded histories and a conditioned readout]\label{m8:histories}
+Let a normalized two-path state have amplitudes
+$\sqrt a$, $e^{i\theta}\sqrt{1-a}$ for $0\le a\le1$ and attach
+unit record vectors $e_1',e_2'$ with $g=\langle e_2',e_1'\rangle$.
+The reduced two-by-two density matrix has upper-right entry
+$\sqrt{a(1-a)}e^{-i\theta}g$, determinant $a(1-a)(1-|g|^2)$,
+and squared Bloch radius $(2a-1)^2+4a(1-a)|g|^2$.
+If $a$ is strictly between $0$ and $1$, its spectrum is pure
+exactly when $|g|=1$. The qubit subentropy then vanishes.
+Complete path distinguishability $g=0$ gives a diagonal
+matrix. For a separate conditioned example, take
+$D_0=\operatorname{diag}(1,2)$, $u=(1,1)/\sqrt2$,
+$v=(4,-3)/5$. Then
+\[
+ u^*D_0u=3/2,\qquad |v^*u|^2=1/50,\qquad
+ \frac{v^*D_0u}{v^*u}=-2 .
+\]
+\end{example}
+\begin{proof}
+Tracing out the records replaces each off-diagonal outer
+product by the inner product of its records. The diagonal entries
+are $a,1-a$. Expand the determinant and use $r^2=1-4\det\rho$,
+which follows from $\lambda_\pm=(1\pm r)/2$. These controls apply
+to attenuated branch amplitudes of the form $C_j e^{(i\phi_j-K_j)/\hbar}$
+after dividing their squared magnitudes by their total flux.
+The final three identities are the indicated dot products.
+In particular the negative conditional ratio occurs beside a
+positive postselection probability.
+\end{proof}
+
+
+\begin{hypothesis}[Angular resolution]\label{m8:resolution}
+In the right isosceles family of Example~\ref{m8:right}, impose a
+minimum resolved leg angle $0<\epsilon_{\min}\le\pi/2$.
+Then the minimum resolved area is $E(\epsilon_{\min})$,
+asymptotic to $\epsilon_{\min}^2/2$ for small resolution.
+For general triangles a minimum side length alone can coexist
+with arbitrarily small positive area.
+\end{hypothesis}
+\begin{proof}
+The formula $2\arctan(\tan^2(\epsilon/2))$ strictly increases
+on $(0,\pi/2]$. For the general statement fix $a\in(0,\pi/2)$
+and consider
+\[
+ (1,0,0),\qquad (\cos a,\sin a,0),\qquad
+ (\cos2a,\sin2a\cos t,\sin2a\sin t).
+\]
+Their pairwise distances tend to $a,a,2a$ as $t\to0$ and their
+determinant tends to zero. The half-area denominator tends to
+$1+2\cos a+\cos2a=2\cos a(1+\cos a)>0$, so the areas are positive
+for small positive $t$ and converge to zero.
+\end{proof}
+
+\begin{proposition}[Single-step rotation and complex increments]\label{m8:complex-step}
+For a unit imaginary quaternion $J$,
+$\exp(tJ)-1=\sin(t)J-(1-\cos t)$ and
+$\|\exp(tJ)-1\|^2=2(1-\cos t)$. Its first Taylor jet is $tJ$
+in the formal quotient by $t^2$. If $U f=f_{\rm tr}U$ in an
+associative algebra, then $[U,f]=(f_{\rm tr}-f)U$.
+For a function $f$ holomorphic in a neighborhood of a real point
+$x$ and real on the real segment through $x$,
+\begin{align*}
+ \frac{\operatorname{Im}f(x+ih)}{h}
+     &=f'(x)-\frac{h^2}{6}f'''(x)+O(h^4),\\
+ \frac{2(f(x)-\operatorname{Re}f(x+ih))}{h^2}
+     &=f''(x)+O(h^2).
+\end{align*}
+With a second commuting imaginary unit $j$ and $j^2=-1$,
+the $ij$ coefficient in the convergent Taylor series for
+$f(x+h(i+j))$, divided by $h^2$, gives $f''(x)+O(h^2)$.
+\end{proposition}
+\begin{proof}
+Separate even and odd powers of $J$ in the exponential. Squaring
+the two orthogonal coefficients gives $2(1-\cos t)$. The
+commutator formula follows by expanding it. In the complex formulas
+the Taylor coefficients at $x$ are real. The even and odd powers of
+$i$ give the indicated terms. For the two-unit algebra freely
+generated by the commuting $i,j$ subject to their square relations,
+$(i+j)^2=-2+2ij$ and no odd power has an $ij$ component.
+The first possible error in this component comes from degree four.
+The Taylor series converges absolutely for sufficiently small $h$,
+using the submultiplicative coefficient $\ell^1$ norm on the
+four-dimensional algebra. For example, at a positive real $x$,
+the nonholomorphic extension $z\mapsto |z|$ gives zero from the
+imaginary quotient although its real derivative is $1$.
+The first complex-step numerator has no subtraction of two
+real-valued function evaluations. Its floating-point accuracy
+depends on how the complex evaluation is implemented.
+\end{proof}
+
+\begin{proposition}[Finite rotation increments and pinching]\label{m8:increments}
+For real steps $\theta_{nk}$ with
+$\max_k|\theta_{nk}|\to0$, set $Q_n=\sum_k\theta_{nk}^2$.
+Along indices with $Q_n>0$, one has
+\[
+ \frac{\sum_k(1-\cos\theta_{nk})}{Q_n}\longrightarrow\frac12 .
+\]
+Thus $n$ equal steps $1/n$ give total $1/(2n)+O(n^{-3})$,
+and $n$ equal steps $1/\sqrt n$ give
+$1/2-1/(24n)+O(n^{-2})$. More generally, equal steps of size
+$n^{-\alpha}$, $\alpha>0$, give a leading total
+$n^{1-2\alpha}/2$. For equal steps $\sigma(T/n)^\alpha$ with
+$T>0$ and $\sigma\ne0$, the coefficient is
+$\sigma^2T^{2\alpha}/2$. At $\alpha=1/2$ the limit is
+$\sigma^2T/2$, including $\sigma=0$. At $\alpha=0$ the example
+$\sigma=2\pi$ has zero depth at every step. The rotor products for fixed-axis
+steps tending to zero can still have nontrivial limits. For
+instance, the product of $n$ copies of $\exp(u/n)$ is exactly
+$\exp(u)$ for fixed imaginary $u$.
+If $v_j=e^{i\phi_j}/\sqrt M$ for $M$ orthogonal modes, pinching
+the pure state $vv^*$ gives entropy $\log M$ and removes
+squared Hilbert--Schmidt mass $1-1/M$.
+\end{proposition}
+\begin{proof}
+For real $t$, $0\le t^2/2-(1-\cos t)\le t^4/24$.
+The left inequality follows from $|\sin(t/2)|\le|t|/2$,
+and the right from Taylor's theorem. Thus the error is bounded
+by $\sum_k\theta_{nk}^4/24\le Q_n\max_k|\theta_{nk}|^2/24$.
+The next coefficient is obtained from the cosine series. The
+fixed-axis factors commute. In the pinching computation the
+$M$ diagonal entries are $1/M$ and the $M(M-1)$ deleted entries
+have modulus $1/M$. The initial rank-one state has entropy zero.
+Smooth subdivisions of a fixed closed latitude at colatitude
+$\theta$ give another control. Their squared lengths vanish
+in sum, while the limiting Berry phase is
+$-\pi(1-\cos\theta)$ by Theorem~\ref{thm:disk} and integration
+of the area form on the cap. For equal longitude subdivisions,
+this limit also follows directly from
+Example~\ref{m8:latitude}, which specifies the branch of the phase.
+\end{proof}
+
+\begin{example}[A finite phase bundle and its Clifford grading]\label{m8:phase-bundle}
+In the $41$ modes $-20\le j\le20$ set
+$\phi_j=\pi j^2/16+\beta j$. At $\beta=0$ the first signed
+moment $\sum_j j e^{i\phi_j}$ vanishes. The continuous phase extension
+has stationary coordinate $-8\beta/\pi$, giving $2,4,8$ for
+$\beta=-\pi/4,-\pi/2,-\pi$. Pinching the equimodular state deletes
+$1640$ entries and squared mass $40/41$. For comparison, in the
+real Euclidean Clifford algebra on three generators the ordered
+product $\prod_{j=1}^3(\cos t+\sin t\,e_j)$ has grade-$k$ components
+with $\binom3k$ coordinates of value $\cos^{3-k}t\,\sin^kt$ in the
+ordered basis, for $k=0,1,2,3$.
+\end{example}
+\begin{proof}
+The moment cancels in pairs and the stationary coordinate follows
+by differentiating the polynomial phase. The pinching calculation
+is Proposition~\ref{m8:increments} with $M=41$. Distributivity
+gives one Clifford term for each subset of the generators, in
+increasing order. The grade counts thus come from a choice of
+coordinates. Oriented simplicial boundary cancellation instead
+comes from the opposite signs of the two orders of deleting
+each pair of vertices.
+\end{proof}
+
+\subsection{Prime-indexed arcs and finite arithmetic models}
+
+The statements of this subsection concern the constructed finite products, amplitudes and polynomials only.  Nothing is claimed about
+the zeros of the Riemann zeta function; the library facts used about $\zeta$ are the Euler product for $\operatorname{Re}s>1$ and the
+cited theorem of Platt and Trudgian on ordinary cutoffs.  The depth series and its constant at $\sigma=1/2$ are those of
+Theorem~\ref{m6:prime-products} and are not repeated as new results.
+
+\begin{definition}\label{m8:prime-arcs}
+Use the free commutative monoid of finite multiplicity vectors
+$(m_p)$ indexed by primes, with action $\sum_p m_p\log p$. For
+$s=\sigma+it$ with $\sigma>0$ assign a single traversal amplitude
+$a_p=p^{-s}$. Take the argument $-t\log p$ in the phase circle.
+For a separate geometric scalar use the arc of central angle
+$2p^{-\sigma}$ on a unit circle, with midpoint depth
+$v_p(\sigma)=1-\cos(p^{-\sigma})$.
+\end{definition}
+
+\begin{proposition}[Prime truncation, half density and depth]\label{m8:prime}
+The action maps the prime monoid bijectively to the set
+$\{\log n:n\ge1\}$ and prime logarithms are rationally independent.
+For a finite prime set $P$, with $S_P$ the positive integers
+supported on $P$,
+\[
+ \prod_{p\in P}(1-p^{-s})^{-1}=\sum_{n\in S_P}n^{-s},\qquad
+ \prod_{p\in P}(1-p^{-s})=\sum_{\substack{n\in S_P\\n\ {\rm squarefree}}}
+                         \mu(n)n^{-s}.
+\]
+Here $\mu(n)=(-1)^{\#\{p:p\mid n\}}$ on squarefree integers and
+vanishes otherwise. The second product counts each ordered-basis
+exterior monomial once, with sign by degree, if the prime
+generators are ordered and repeated generators are set to zero.
+In $\sigma>1$ the first product converges to the Dirichlet
+series for $\zeta$ and if $P=\{p:p\le X\}$, the exact omitted
+series is $\sum_{n\notin S_P}n^{-s}$. The products over $p\in P$
+are zero-free for $\sigma>0$, as are their reciprocals.
+
+For $p>1$ the two-arm amplitude
+$Z=p^{-\sigma}e^{i\alpha}+p^{-(1-\sigma)}e^{i\beta}$ satisfies
+\[
+ |Z|^2=(p^{-\sigma}-p^{-(1-\sigma)})^2+
+       2p^{-1}(1+\cos(\alpha-\beta)).
+\]
+Its zero condition is $\sigma=1/2$ and $\alpha-\beta=\pi\bmod2\pi$.
+Also $|a_p|^2=1/p$ exactly at that exponent, where $1/p$ is the
+natural density of multiples of $p$. As in Theorem~\ref{m6:prime-products}, the depth series
+$\sum_p v_p(\sigma)$ is finite exactly for $\sigma>1/2$, and
+$\sum_p|v_p(\sigma)-p^{-2\sigma}/2|$ is finite exactly for
+$\sigma>1/4$. At $\sigma=1/2$,
+\[
+ \sum_{p\le X}v_p(1/2)
+  =\frac12\log\log X+\frac{M_{\rm p}}2+
+      \sum_p\left(1-\cos(p^{-1/2})-\frac1{2p}\right)+o(1),
+\]
+where $M_{\rm p}=\lim_{X\to\infty}(\sum_{p\le X}1/p-\log\log X)$.
+\end{proposition}
+\begin{proof}
+Unique factorization proves action injectivity and surjectivity.
+Clear denominators and exponentiate a rational relation to get
+equality of two integer products, forcing every coefficient to
+vanish. Expand the finite product of geometric series. The
+inverse expansion has at most one choice per prime, which gives
+the sign and the exterior interpretation. Absolute domination
+by $\sum_n n^{-\sigma}$ permits the increasing-prime-set limit
+and the tail identity \cite[\S25.2]{m8:dlmf}. Each local factor is
+nonzero because $|p^{-s}|<1$. The two-arm calculation follows by
+squaring, and $\lfloor X/p\rfloor/\lfloor X\rfloor\to1/p$.
+The expansions of $1-\cos u$ and its quadratic remainder have
+nonzero leading terms $u^2/2$ and $-u^4/24$ at $0$. Comparison to
+$\sum_p p^{-a}$ proves the exponents. At $a=1$ divergence follows
+since a finite $\sum_p1/p$ would bound the finite Euler products
+at $1$, whereas those products dominate arbitrary finite harmonic
+partial sums. For $a<1$ each term dominates $1/p$. The constant
+formula follows from Mertens' prime reciprocal theorem
+\cite{m6:Mertens} and the convergent remainder.
+The square-root normalization here is a pointwise equality.
+A sequence of amplitudes on all integers or all primes with
+these squared moduli at $\sigma=1/2$ has infinite squared norm.
+\end{proof}
+
+\begin{proposition}[Finite truncation and Cayley amplification]\label{m8:finite}
+Define the ordinary cutoff $D_M(s)=\sum_{n\le M}n^{-s}$.
+The prime cutoff at $M=2$ equals $D_2(s)+2^{-2s}/(1-2^{-s})$; ordinary integer truncation and finite-prime truncation therefore differ
+already at cutoff $2$, and only the latter is zero-free in the open right half-plane (Proposition~\ref{m8:prime}). Platt and Trudgian's
+Theorem~1.1 gives the indices for which $D_M$ has no zeros in
+$\operatorname{Re}s>1$ \cite{m8:platt}. They are $1$ through $18$
+together with $20$, $21$, and $28$. For an arbitrary test coordinate
+$\rho=1/2+\delta+i\gamma$ with $\gamma>0$, define
+$w=\rho/(\rho-1)$. Its modulus is one exactly when $\delta=0$.
+For $\delta>0$ its successive squarings have moduli
+\[
+ |w|^{2^\ell}
+   =\left(1+\frac{2\delta}{(1/2-\delta)^2+\gamma^2}\right)^{2^{\ell-1}}.
+\]
+At fixed $\gamma$ and threshold $A>1$ the first nonnegative
+integer level at which the modulus is at least $A$ is
+\[
+ \max\bigl(0,\lceil\log_2(\log A/\log |w|)\rceil\bigr).
+\]
+This is $\log_2(1/\delta)+O_{\gamma,A}(1)$ as $\delta\downarrow0$.
+\end{proposition}
+\begin{proof}
+Subtract the first two terms of the geometric series for the
+prime $2$. The exact classification of ordinary cutoffs is the
+cited theorem for their $\sum_{n=1}^M n^{-s}$. The squared
+Cayley modulus is the ratio of
+$(1/2+\delta)^2+\gamma^2$ to $(1/2-\delta)^2+\gamma^2$.
+Solving $2^\ell\log |w|\ge\log A$ gives the level.
+The expansion $\log |w|=\delta/(\gamma^2+1/4)+O_\gamma(\delta^2)$
+gives its asymptotic. Reflection across the line
+$\operatorname{Re}\rho=1/2$ inverts this test modulus.
+\end{proof}
+
+\begin{example}[Reflection, phase winding and autocorrelation]\label{m8:toy}
+With real $\delta,\gamma\ne0$, the polynomial
+\[
+ F(z)=((z-\delta)^2+\gamma^2)((z+\delta)^2+\gamma^2)
+\]
+is real under conjugation and even, with zeros
+$\pm\delta\pm i\gamma$. It is real on the imaginary axis.  Reflection symmetry therefore does not force zeros onto the axis; this is
+the quartic of Example~\ref{m6:quartet}.
+If $E_\eta=F+\eta F'/2$ and $E_\eta^\#(z)=
+\overline{E_\eta(-\bar z)}$ for real $\eta$, then
+$|E_\eta|^2-|E_\eta^\#|^2=\eta\,\partial_{\operatorname{Re}z}|F|^2$.
+On edges avoiding zeros the phase increment
+$\operatorname{Im}\int F'/F\,dz$ is additive and reverses sign
+with orientation. On each positively oriented polygonal cell
+it sums to $2\pi$ times the number of interior roots with
+multiplicity. Replacing each edge increment by its principal
+endpoint argument is exact whenever the increment has magnitude
+less than $\pi$.
+For a finitely supported complex function $f$ on an additive
+group, its autocorrelation $C(h)=\sum_g f(g+h)\overline{f(g)}$
+gives positive semidefinite Gram matrices with entries
+$C(h_j-h_i)$.
+\end{example}
+\begin{proof}
+The factors and reflection give the roots and symmetries.
+Since $E_\eta^\#=F-\eta F'/2$, expanding the squared moduli
+gives $2\eta\operatorname{Re}(F'\bar F)$. The logarithmic
+derivative is the sum of $1/(z-\rho)$ over the four roots, whose
+contour integrals are $2\pi i$ times the winding numbers.
+Along an edge the exponential of the phase increment is the
+phase of the endpoint quotient, proving the principal branch
+criterion. Interior edge contributions cancel by
+Lemma~\ref{m8:repair}. For the autocorrelation take the columns
+$f(g+h_i)$ and compute their Hermitian Gram matrix by changing
+the summation variable. Translates of compactly supported
+square-integrable functions give the integral version in
+logarithmic coordinates. Thus the corresponding
+multiplicative construction has positive semidefinite finite
+windows and positive semidefinite Schur pivots by
+Proposition~\ref{m8:pivots}.
+\end{proof}
+
+
+\begin{proposition}[Toeplitz tests for finite rotor families]\label{m8:toeplitz}
+Let $u_1,\ldots,u_m$ be a nonempty multiset of nonzero complex
+numbers invariant under $u\mapsto1/\bar u$. Set
+$p_j=\sum_i u_i^j$ for all integer $j$ and
+$T_N=(p_{j-k})_{0\le j,k<N}$. If $N$ is at least the number of
+distinct $u_i$, then $T_N\succeq0$ exactly when $|u_i|=1$
+for every $i$. In that case it is positive semidefinite at all
+sizes. On the unit circle, for $j\ge1$,
+\[
+ (1-\operatorname{Re}u^{j+1})-2(1-\operatorname{Re}u^j)
+       +(1-\operatorname{Re}u^{j-1})
+     =|1-u|^2\operatorname{Re}(u^j).
+\]
+Thus weighting circular moments by squared chord lengths gives
+another positive semidefinite moment matrix.
+\end{proposition}
+\begin{proof}
+For unit nodes the matrix is the sum of outer products of
+$(1,u_i,\ldots,u_i^{N-1})$. More generally, index the involution
+by a permutation $\tau$ with $u_{\tau(i)}=1/\bar u_i$.
+For the polynomial $B(z)=\sum_{k<N}b_k z^k$ the quadratic form
+is $\sum_i\overline{B(\bar u_i)}B(\overline{u_{\tau(i)}})$.
+The involution makes the matrix Hermitian. If $|u_i|\ne1$,
+interpolate $B$ to take $1$ and $-1$ at the two distinct conjugate
+nodes in its orbit and $0$ at the other conjugate nodes.
+A polynomial of degree below $N$ exists because the nodes are
+distinct. Every term from this orbit is $-1$ and the rest
+vanish, giving strict negativity. For the difference formula,
+factor $2-u-u^{-1}=|1-u|^2$. The weighted matrix is once
+again a sum of outer products with nonnegative weights.
+\end{proof}
+
+\begin{example}[Finite prime phases and a logarithmic staircase]\label{m8:staircase}
+For a finite prime set $P$, write $Z_P(s)=\prod_{p\in P}(1-p^{-s})^{-1}$.
+For $\sigma>0$ and $t\in\mathbb R$,
+\[
+ |Z_P(\sigma)^3Z_P(\sigma+it)^4Z_P(\sigma+2it)|\ge1.
+\]
+Also set $\Lambda(n)=\log p$ if $n=p^k$, $k\ge1$, and $0$
+otherwise. For $X\ge1$ the sum
+$\Psi(X)=\sum_{n\le X}\Lambda(n)$ equals
+$\log\operatorname{lcm}(1,\ldots,\lfloor X\rfloor)$.
+Its left-right midpoint at an integer $n>1$ is
+$\Psi(n)-\Lambda(n)/2$. A finite harmonic model on $X>0$
+uses arbitrary real frequencies $\gamma_j$ through terms
+\[
+ 2\operatorname{Re}\frac{X^{1/2+i\gamma_j}}{1/2+i\gamma_j}
+   =2\sqrt X\,
+      \frac{\tfrac12\cos(\gamma_j\log X)+
+                  \gamma_j\sin(\gamma_j\log X)}
+           {\tfrac14+\gamma_j^2}.
+\]
+A finite sum of such terms is smooth in $X$; in particular it is continuous at $X=2$, where $\Psi$ jumps by $\log2$, so no finite
+harmonic sum reproduces the jumps of the staircase.
+\end{example}
+\begin{proof}
+Expand each logarithm of modulus by
+$-\log|1-w|=\sum_{k\ge1}\operatorname{Re}(w^k)/k$ for $|w|<1$.
+At $\phi=kt\log p$ the combined multiplier is
+$3+4\cos\phi+\cos2\phi=2(1+\cos\phi)^2$.
+The exponent of $p$ in the least common multiple is exactly
+the number of positive powers of $p$ at most $X$. This proves
+the staircase identity and the midpoint statement follows
+from the jump size. The harmonic formula follows by
+multiplying by the conjugate denominator. At $n\ge1$ the
+relative argument of the consecutive Dirichlet phasors
+$(n+1)^{-s}$ and $n^{-s}$ is $-t\log(1+1/n)$ modulo $2\pi$,
+where the real representative is $-t/n+O_t(n^{-2})$.
+\end{proof}
+
+\begin{remark}[Programmes requiring a limiting argument]\label{m8:programmes}
+For arithmetic pivots one can choose finite windows of translates
+in logarithmic coordinates, split them into interior and retained
+indices, and apply Proposition~\ref{m8:pivots}. A multiscale limit
+requires a specified normalization and a nontrivial limit of the
+resulting quadratic forms. A sparse version also requires bounds
+on the sizes of retained sets and on the norm of the blocks coupling
+different prime subtrees. For moment constraints at exponents
+$\pm1/2$, the test functions and scalar product must be fixed before
+such bounds are formulated. Positivity of the autocorrelation
+Gram supplies the finite input. Lower bounds for a fixed
+Nyman--Beurling approximation space \cite{m8:burnol} and the
+mollifier length in Conrey's theorem \cite{m8:conrey} concern
+particular analytic estimates. A new approximation scheme needs
+its own error bound.
+
+For physical applications one needs a dynamical derivation of the
+action in Hypothesis~\ref{m8:dynamics}, a time-slicing limit in a
+specified topology, and a measurement model for phase coherence.
+A local quadratic depth sum is determined by Proposition~
+\ref{m8:increments}. A path with an assigned phase still needs a
+measure or a convergent oscillatory prescription before phases can
+be integrated. A standing-wave envelope needs a density and
+normalization before it can represent geometric volume. The
+correspondence between vertex, path, face, and sector observables
+gives finite geometric constructions. An identification with
+particles, waves, fields, or emergent space requires additional
+equations and a limit. A minimum area from finite resolution requires the
+additional shape input in Hypothesis~\ref{m8:resolution}.
+Rough surface holonomy requires a definition of enhanced
+surface data and a convergence, composition, and covariance
+theorem beyond the smooth comb formula.
+\end{remark}
+
+\subsection{Polyhedral remainders}
+
+\begin{theorem}[Angle defects and approximation]\label{m8:poly}
+Let $P\subset\mathbb R^3$ be a full-dimensional convex polyhedron
+inscribed in the unit sphere with the origin in its interior.
+Write $\delta_v=2\pi-\sum_{f\ni v}\angle_f(v)$ for the angle
+defect at a vertex. Then $\sum_v\delta_v=4\pi$. If every unit
+direction is within angular distance $h<\pi/2$ of a vertex,
+\[
+ 0<d_{\rm H}(P,\overline{B^3})\le1-\cos h,\qquad
+ 0<|\overline{B^3}|-|P|\le\frac{4\pi}{3}(1-\cos^3h).
+\]
+For a sequence with $h\to0$, the measures
+$\sum_v\delta_v\,\delta^{\rm Dirac}_v$ converge weakly on $S^2$
+to spherical area. The exact sphere equation is $\|x\|^2=1$.
+\end{theorem}
+\begin{proof}
+Triangulate flat faces without new vertices. Each new triangle has
+angle sum $\pi$. If the counts are $V,E_f,F$, then
+$\sum_v\delta_v=2\pi V-\pi F=2\pi(V-E_f+F)=4\pi$ using
+$3F=2E_f$ and Euler's formula.
+
+For a unit direction $u$, the support value
+$\max_{x\in P}u\cdot x$ is at least $\cos h$. The intersection
+of the support half-spaces therefore contains the ball of
+radius $\cos h$. This proves the two upper bounds by radial
+comparison. For strictness choose a direction distinct from
+all vertices. Its support is strictly below $1$, leaving an
+open spherical cap of the unit ball outside $P$.
+
+The outward unit normals of supporting planes at $v$ form its
+spherical normal polygon. The angle of this polygon at a face
+normal is the supplement of that face's internal angle at $v$.
+Indeed the two bounding great circles lie in planes perpendicular
+to the two incident edge directions, and their inward half-spaces
+at that normal are specified by the support inequalities against
+those edge directions. The spherical excess formula for the
+polygon gives area $\delta_v$. The normal polygons partition
+$S^2$ up to their boundaries by the maximization of $u\cdot x$.
+Every $u$ in the polygon of $v$ satisfies
+$d(u,v)\le h$ by the support bound. For a continuous test function
+$\varphi$ the error between the discrete integral and the area
+integral is at most $4\pi\,\omega_\varphi(h)$, where
+$\omega_\varphi$ is the modulus of continuity. This proves the
+weak limit. The same local angle-sum argument as in
+Proposition~\ref{m5:gb} accounts for the conserved total, while
+the support estimate controls the geometric approximation
+\cite{m8:cheeger}.
+\end{proof}
+
+\begin{example}[Icosahedral refinements]\label{m8:icosa}
+At each vertex of a regular icosahedron the defect is $\pi/3$.
+There are $12$ vertices, $30$ edges and $20$ faces. Subdivide each face into $\nu^2$ congruent
+triangles by its ordinary triangular lattice, radially project
+the lattice vertices to $S^2$, and use the prescribed triangles
+with planar edges and faces. The triangulated sphere has
+$F=20\nu^2$, $E_f=30\nu^2$, and $V=10\nu^2+2$.
+The defects sum to $4\pi$ for every $\nu$. For $\nu=1,2,4$
+the maximum defects are $60^\circ$, about $17.724^\circ$ and
+about $4.812^\circ$, respectively.
+\end{example}
+\begin{proof}
+The original faces are equilateral and five meet at every vertex,
+giving the stated defect. Counting face incidence and applying
+Euler's formula gives the refined counts. For the topology, the
+sphere is covered by the radial projection of the original
+faces. Each projected small triangle spans the same positive cone
+before and after normalizing its vertices, and the radial
+projection of its planar face maps bijectively to its corresponding
+spherical patch. This gives an embedded triangulated sphere.
+The angle-sum calculation of Theorem~\ref{m8:poly} applies
+regardless of convexity. For the numerical evaluation,
+use the vertices obtained by normalizing the cyclic coordinate
+permutations of $(0,\pm1,\pm\varphi)$ with
+$\varphi=(1+\sqrt5)/2$. An original face is a triple whose three
+edges have the least positive vertex distance. For lattice
+weights $(a,b,c)$ with $a+b+c=\nu$, normalize $a x+b y+c z$.
+For every lattice face compute the angle at $p$ as
+$\operatorname{atan2}(\|(q-p)\times(r-p)\|,
+\langle q-p,r-p\rangle)$. Summing over incident triangles gives
+the reported approximations. This finite calculation uses the same
+formula at all vertices, including those on original edges.
+\end{proof}
+
+\begin{conjecture}[Dyadic refinement of the icosahedron]\label{m8:conjecture}
+For the prescribed icosahedral meshes of Example~\ref{m8:icosa},
+let $D_j$ be the maximum vertex defect at $\nu=2^j$.
+The rescaled quantity $4^jD_j$ converges to a finite positive
+limit. The first five dyadic meshes ($j=0,\dots,4$) give rescaled maxima of approximately
+$1.047198$, $1.237365$, $1.343633$, $1.468071$ and $1.503815$ radians.
+A proof needs to control the second-order expansion also at
+original edges and vertices.
+\end{conjecture}
+
+\begin{proposition}[Topological restrictions and finite remainders]\label{m8:topology}
+For $n\ge1$, a continuous tangent field on $S^{2n}$ has a zero.
+A continuous self-map of $S^{2n}$ has a fixed point or an antipodal
+point (Proposition~\ref{m6:fixed}; Remark~\ref{d4:topology}). On $S^{2n-1}$ simultaneous quarter-turns in the coordinate
+pairs give a nowhere zero tangent field. The parallelizable
+spheres are $S^0,S^1,S^3,S^7$ \cite{m8:bott,m8:kervaire}.
+On $S^3$ an explicit frame is $ix,jx,kx$.
+The Hopf projection $x\mapsto xi\bar x$ to $S^2$ has no continuous
+section.
+A finite gate alphabet with bounded word length has positive
+covering radius in $S^3$. For $N\ge1$ the cosine truncation
+$\sum_{k=0}^{N-1}(-1)^k t^{2k}/(2k)!$ has absolute error at most
+$|t|^{2N}/(2N)!$ and cannot equal the cosine on an interval.
+\end{proposition}
+\begin{proof}
+A normalized nowhere-zero tangent field $v$ would give the
+homotopy $\cos t\,x+\sin t\,v(x)$, $0\le t\le\pi$, from the
+identity to the antipodal map. The degrees are $1$ and $-1$
+on $S^{2n}$, using the determinant of $-I$ on the ambient
+$\mathbb R^{2n+1}$, so homotopy invariance of degree excludes it
+\cite[Section 2.2]{Hatcher}. If a self-map avoids both cases,
+its tangential projection at $x$ is a nowhere-zero field.
+Conversely, any normalized nowhere-zero field takes values
+perpendicular to its argument. The odd-dimensional example
+uses a skew-symmetric orthogonal map of the ambient space.
+Normed multiplication gives the frames on the unit spheres
+in the four real normed division algebras, using the imaginary
+basis and right multiplication by the unit element at the
+point. The exclusion of other dimensions is the cited
+parallelizability theorem. In the quaternion case the maps
+preserve orthonormality and the three displayed vectors are
+perpendicular to $x$. A section of the Hopf projection would
+supply a unit tangent field $xj\bar x$ at the projected point,
+contrary to the $S^2$ result.
+
+A bounded sequence length over a finite alphabet gives a finite
+set of products. Choose a point outside that set and take its
+positive minimum distance to the products. The Taylor
+polynomial through degree $2N-1$ is the displayed truncation
+because the odd coefficients vanish. The bound follows from
+the Taylor remainder. Equality of the two functions on an
+interval would give $\cos t=0$ there by differentiating $2N$
+times, which is impossible.
+The finite prime truncation remainder has the exact series in
+Proposition~\ref{m8:prime}. These three remainders depend on the
+respective restriction on representation.
+\end{proof}
+
 \setcounter{section}{9}
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\theHsection}{\arabic{section}}
@@ -9709,6 +10967,8 @@ Props.~\ref{m1:gram}, \ref{m1:distance}, \ref{m1:near-gram} & Classical ingredie
 Thm.~\ref{m2:classification} & Classical in substance \cite{Loos,Helgason,Wang52,Cartan26,Besse78}; new: axiomatisation by the round-trip law with continuous $\kappa$ (Rem.~\ref{m2:placement})\\
 Thm.~\ref{m7:core}, Prop.~\ref{m7:braids} & Cores and knot quandles \cite{m7:Joyce,m7:Matveev}; racks \cite{m7:FennRourke}; Markov \cite{m7:Markov}, \cite[Thm.~2.3]{m7:Birman}\\
 Prop.~\ref{m7:cocycle} & Quandle cocycles \cite{m7:CJKLS}; the triviality of comparison-valued weights on $S^3$ not found in the searched scope\\
+Thm.~\ref{m8:counts} & Maxwell count \cite{m8:maxwell}; redundant rigidity and coning \cite{m8:hendrickson,m8:coning}; the sharp spherical scalar counts not found in the searched scope\\
+Thm.~\ref{m8:poly} & Descartes defect sum classical; piecewise-flat curvature \cite{m8:cheeger}; the normal-polygon convergence proof elementary\\
 Thm.~\ref{m6:cover} & Spectral gap \cite{m6:LPS,m6:PS}; strong approximation \cite{m6:Sardari}; synthesis \cite{m6:RS}; the covering consequences elementary given these\\
 \bottomrule
 \end{tabular}
@@ -9902,7 +11162,7 @@ black box; a formal statement of Theorem~\ref{thm:main} can avoid it by assuming
 
 All identities and limits of Part~\ref{part:arc} that are not textbook facts, and the identities of Part~\ref{part:axiom} used there, were
 checked numerically on random or explicit inputs by the accompanying script \texttt{check\_arc\_calculus.py} (numpy and the
-standard library; 217 checks, eight of them for Part~\ref{part:alg}, six for Section~\ref{sec:m2}, fourteen for Section~\ref{sec:m3}, eight for Section~\ref{sec:d4}, six for Section~\ref{sec:m7}, seven for Section~\ref{sec:m5}, twelve for Sections~\ref{sec:m4}, \ref{sec:m4atlas} and seven for Section~\ref{sec:m6}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present seventeen: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file, one each for Sections~\ref{sec:m3}, \ref{sec:d4}, \ref{sec:m7}, \ref{sec:m5} and \ref{sec:m6}, and one for Sections~\ref{sec:m4}, \ref{sec:m4atlas}); everything runs
+standard library; 223 checks, eight of them for Part~\ref{part:alg}, six for Section~\ref{sec:m2}, fourteen for Section~\ref{sec:m3}, eight for Section~\ref{sec:d4}, six for Section~\ref{sec:m7}, seven for Section~\ref{sec:m5}, six for Section~\ref{sec:m8}, twelve for Sections~\ref{sec:m4}, \ref{sec:m4atlas} and seven for Section~\ref{sec:m6}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present eighteen: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file, one each for Sections~\ref{sec:m3}, \ref{sec:d4}, \ref{sec:m7}, \ref{sec:m5}, \ref{sec:m8} and \ref{sec:m6}, and one for Sections~\ref{sec:m4}, \ref{sec:m4atlas}); everything runs
 from the directory of this paper.  These include the recurrence and its Chebyshev form, the residual expansion of
 Theorem~\ref{thm:consist}, the inequality of Theorem~\ref{thm:action}, the split and the Brownian limits of
 Theorem~\ref{thm:sagitta} (simulated, $\tfrac32T$ to two decimals), the transport formula of
@@ -10193,6 +11453,24 @@ Proposition~\ref{m7:cloning-machine}: \texttt{D5/S3/Quantum/CloningMachine.lean}
 No declaration was found for Theorem~\ref{m7:knot-roots}, Proposition~\ref{m7:cocycle}, Theorem~\ref{m7:zyz} or
 Proposition~\ref{m7:clone-bound}.
 
+For Section~\ref{sec:m8} the following declarations were located (no \texttt{sorry} in their files); none certifies the counts of
+Theorem~\ref{m8:counts} or the limit in Theorem~\ref{m8:poly}.
+{\small\raggedright
+\begin{itemize}[leftmargin=1.5em]
+\item Proposition~\ref{m8:gram}: \texttt{GramUnitaryExtension.lean}, \texttt{exists\_unitary\_mul\_eq\_of\_conjTranspose\_mul\_eq};
+\texttt{D5/S3/QuantumBounds/GramRealizability.lean}, \texttt{gram\_realizability}.
+\item Lemma~\ref{m8:repair}: \texttt{D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.lean},
+\texttt{tetra\_defects\_incidence\_repair\_and\_exactness}.
+\item Proposition~\ref{m8:phaseselection}: \texttt{D5/S3/Fourier/FinitePoisson.lean}, \texttt{sum\_annihilator\_character},
+\texttt{finite\_poisson\_summation}; \texttt{anchored\_phase\_classification}.
+\item Proposition~\ref{m8:subentropy}: \texttt{D5/S3/Quantum/Subentropy/QubitBoundary.lean}, \texttt{qubit\_subentropy\_near\_pure}.
+\item Proposition~\ref{m8:pivots}: \texttt{TropicalSchurElimination.lean}, \texttt{pivot\_walks\_and\_distance};
+\texttt{D5/S3/Quantum/Matrix/SchurMinimum.lean}, \texttt{schur\_quadratic\_is\_least}.
+\item Proposition~\ref{m8:finite}, Cayley modulus: \texttt{D5/S3/Midline/CayleyCriticalLine.lean}, \texttt{cayley\_ratio\_norm\_one\_iff\_critical\_line}.
+\item Example~\ref{m8:latitude}: \texttt{BargmannImaginaryMaximizers.lean}, \texttt{Latitude.latitude\_dot}; Proposition~\ref{m8:topology}:
+\texttt{CircleDoubleCoverNoSection.lean}, \texttt{no\_continuous\_global\_section}.
+\end{itemize}}
+
 \section{What remains open}\label{sec:open}
 
 \begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2.6em]
@@ -10253,6 +11531,9 @@ even words.  (b) Conjecture~\ref{m6:dottie-conj}: algebraic independence of $\al
 \item \emph{Quandles and braids.}  Comparison-valued link invariants beyond the record of the generated subquandle in
 Proposition~\ref{m7:comparison} (a nonconstant comparison weight is excluded on $S^3$ by Proposition~\ref{m7:cocycle} but not on restricted
 targets); and the anyon realisation programme of Remark~\ref{m7:anyons-programme}.
+\item \emph{Polyhedral defects and rigidity.}  Conjecture~\ref{m8:conjecture}: convergence of $4^jD_j$ for the dyadic icosahedral
+refinement (values $1.047198$, $1.237365$, $1.343633$, $1.468071$, $1.503815$ at $j=0,\dots,4$); and the programmes of
+Remark~\ref{m8:programmes}.
 \end{enumerate}
 
 \section*{Use of AI tools}
@@ -10540,6 +11821,24 @@ The authors used AI tools, namely Claude Fable 5.2 and Claude Opus 5.5 (via Clau
 \bibitem{m7:AaronsonGottesman} S.~Aaronson and D.~Gottesman, Improved simulation of stabilizer circuits, \emph{Phys. Rev. A} \textbf{70} (2004), 052328.
 \bibitem{m7:BravyiKitaev} S.~B. Bravyi and A.~Yu. Kitaev, Fermionic quantum computation, \emph{Ann. Phys.} \textbf{298} (2002), 210--226.
 \bibitem{m7:VerstraeteCirac} F.~Verstraete and J.~I. Cirac, Mapping local Hamiltonians of fermions to local Hamiltonians of spins, \emph{J. Stat. Mech.} (2005), P09012.
+% Section 9B references (checked 2026-11-20 via Crossref, titles included; DLMF, Hatcher are standard; Maxwell 1864 added as the
+% original source of the degree-of-freedom count).
+\bibitem{m8:sard} A.~Sard, The measure of the critical values of differentiable maps, \emph{Bull. Amer. Math. Soc.} \textbf{48} (1942), 883--890.
+\bibitem{m8:hendrickson} B.~Hendrickson, Conditions for unique graph realizations, \emph{SIAM J. Comput.} \textbf{21} (1992), 65--84.
+\bibitem{m8:coning} R.~Connelly and W.~Whiteley, Global rigidity: the effect of coning, \emph{Discrete Comput. Geom.} \textbf{43} (2010), 717--735.
+\bibitem{m8:berry} M.~V.~Berry, Quantal phase factors accompanying adiabatic changes, \emph{Proc. Roy. Soc. London Ser. A} \textbf{392} (1984), 45--57.
+\bibitem{m8:subentropy-ref} R.~Jozsa, D.~Robb, and W.~K.~Wootters, Lower bound for accessible information in quantum mechanics, \emph{Phys. Rev. A} \textbf{49} (1994), 668--677.
+\bibitem{m8:regge} T.~Regge, General relativity without coordinates, \emph{Nuovo Cimento} \textbf{19} (1961), 558--571.
+\bibitem{m8:lindner} F.~Lindner et al., Attosecond double-slit experiment, \emph{Phys. Rev. Lett.} \textbf{95} (2005), 040401.
+\bibitem{m8:tirode} R.~Tirole et al., Double-slit time diffraction at optical frequencies, \emph{Nature Phys.} \textbf{19} (2023), 999--1002.
+\bibitem{m8:dlmf} F.~W.~J.~Olver et al., eds., \emph{NIST Digital Library of Mathematical Functions}, NIST, Chapter~25, \S25.2.
+\bibitem{m8:platt} D.~J.~Platt and T.~S.~Trudgian, Zeroes of partial sums of the zeta function, \emph{LMS J. Comput. Math.} \textbf{19} (2016), 37--41, arXiv:1507.01340.
+\bibitem{m8:burnol} J.-F.~Burnol, A lower bound in an approximation problem involving the zeros of the Riemann zeta function, \emph{Adv. Math.} \textbf{170} (2002), 56--70.
+\bibitem{m8:conrey} J.~B.~Conrey, More than two fifths of the zeros of the Riemann zeta function are on the critical line, \emph{J. Reine Angew. Math.} \textbf{399} (1989), 1--26.
+\bibitem{m8:cheeger} J.~Cheeger, W.~M\"uller, and R.~Schrader, On the curvature of piecewise flat spaces, \emph{Comm. Math. Phys.} \textbf{92} (1984), 405--454.
+\bibitem{m8:bott} R.~Bott and J.~Milnor, On the parallelizability of the spheres, \emph{Bull. Amer. Math. Soc.} \textbf{64} (1958), 87--89.
+\bibitem{m8:kervaire} M.~A.~Kervaire, Non-parallelizability of the $n$-sphere for $n>7$, \emph{Proc. Natl. Acad. Sci. USA} \textbf{44} (1958), 280--283.
+\bibitem{m8:maxwell} J.~C.~Maxwell, On the calculation of the equilibrium and stiffness of frames, \emph{Philos. Mag.} (4) \textbf{27} (1864), 294--299.
 \end{thebibliography}
 
 \end{document}

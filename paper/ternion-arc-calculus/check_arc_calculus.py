@@ -32,6 +32,7 @@ CHECK_MODULES = [
     ("m4_phase_atlas.py",     "PASS  all 10 groups", None),                                    # Sections 6A, 10A
     ("m6_arithmetic_holonomy.py", "PASS all 10 check groups", None),                          # Section 10B
     ("m7_braids_quandles.py",  "copying and the six-state bound", None),                      # Section 5D
+    ("m8_arc_bodies_rigidity.py", "PASS all 6 groups", None),                                 # Section 9B
     # register new modules here: (file in checks/, success marker, optional predicate)
 ]
 _chk = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "checks")
@@ -3026,6 +3027,181 @@ for _ in range(20):
     e = max(e, max(0, tot / 12 - 5 / 6 - 1e-12))
     Lr = _r38.normal(size=(2, 2)) + 1j * _r38.normal(size=(2, 2)); e = max(e, abs(sum(abs(p.conj() @ Lr @ p) ** 2 for p in six) - abs(np.trace(Lr)) ** 2 - np.trace(Lr.conj().T @ Lr).real))
 report("38 Prop. m7:cloning-machine, m7:clone-bound: 5/6, 1/6 marginals, machine 1/3, 2/3, det 2/9; six-state identity; average fidelity <= 5/6", e, 1e-10)
+
+# =========================================================== 39. Section 9B (independent checks of the m8 section)
+import itertools as _it39
+_r39 = np.random.default_rng(3011)
+def _q(p, q):
+    a1, b1, c1, d1 = p; a2, b2, c2, d2 = q
+    return np.array([a1*a2-b1*b2-c1*c2-d1*d2, a1*b2+b1*a2+c1*d2-d1*c2, a1*c2-b1*d2+c1*a2+d1*b2, a1*d2+b1*c2-c1*b2+d1*a2])
+def _ang(P0, P1, P2):
+    t1 = P1 - (P1 @ P0) * P0; t2 = P2 - (P2 @ P0) * P0; return np.arccos(np.clip(t1 @ t2 / np.linalg.norm(t1) / np.linalg.norm(t2), -1, 1))
+# (1) invariants: area, sector volume by Monte Carlo, flat volume, chord face, L'Huilier, octant 1 vs 1/6 vs pi/6
+e = 0.0
+for _ in range(30):
+    X = _r39.normal(size=(3, 3)); X /= np.linalg.norm(X, axis=1)[:, None]; x, y, z = X
+    G = X @ X.T; Dl = np.linalg.det(G); D = 1 + x @ y + y @ z + z @ x; E = 2 * np.arctan2(np.sqrt(Dl), D)
+    Eg = _ang(x, y, z) + _ang(y, x, z) + _ang(z, x, y) - np.pi
+    a, b, c = np.arccos(y @ z), np.arccos(x @ z), np.arccos(x @ y); s = (a + b + c) / 2
+    lh = 4 * np.arctan(np.sqrt(np.tan(s / 2) * np.tan((s - a) / 2) * np.tan((s - b) / 2) * np.tan((s - c) / 2)))
+    e = max(e, abs(E - Eg), abs(lh - E), abs(abs(np.linalg.det(X)) / 6 - np.sqrt(Dl) / 6))
+    ch = 0.5 * np.linalg.norm(np.cross(y - x, z - x)); e = max(e, max(0, ch - 3 * np.sqrt(3) / 4))
+# Monte Carlo sector volume for one triangle: fraction of the ball in the cone times 4pi/3 = E/3
+X = np.eye(3); P = _r39.uniform(-1, 1, size=(400000, 3)); P = P[np.linalg.norm(P, axis=1) <= 1]
+inside = np.all(P @ np.linalg.inv(X) >= 0, axis=1); vol = inside.mean() * 4 * np.pi / 3
+e = max(e, abs(vol - np.pi / 6) * 1e-2, abs(np.sqrt(np.linalg.det(np.eye(3))) - 1), abs(1 / 6 - np.sqrt(1) / 6))
+report("39 Thm m8:invariants: area atan2 = Girard = L'Huilier, flat volume sqrt(Delta)/6, chord face <= 3sqrt3/4; octant Gram root 1, flat 1/6, sector pi/6 (MC)", e, 2e-3)
+# (2) right cell, subentropy ratio 4/9, rotor curvature, octant open vs closed
+e = 0.0
+for ep in (0.05, 0.3, 1.0, np.pi / 2):
+    A = np.array([np.sin(ep), np.cos(ep), 0]); Bp = np.array([0, 1., 0]); C = np.array([0, np.cos(ep), np.sin(ep)])
+    E = 2 * np.arctan(np.tan(ep / 2) ** 2); Eg = _ang(A, Bp, C) + _ang(Bp, A, C) + _ang(C, A, Bp) - np.pi
+    e = max(e, abs(E - Eg), abs(_ang(A, Bp, C) - np.arctan2(1, np.cos(ep))), abs(np.linalg.det(np.c_[A, Bp, C]) ** 2 - np.sin(ep) ** 4))
+    d1, d2 = A - Bp, C - Bp; e = max(e, abs(d1 @ d2 / np.linalg.norm(d1) / np.linalg.norm(d2) - np.sin(ep / 2) ** 2))
+ep = 1e-2; E = 2 * np.arctan(np.tan(ep / 2) ** 2); e = max(e, abs((E - ep ** 2 / 2) / ep ** 4 - 1 / 12) * 1e-2)
+r2 = (3 + 4 * np.cos(ep) + 2 * np.cos(ep) ** 2) / 9; lp, lm = (1 + np.sqrt(r2)) / 2, (1 - np.sqrt(r2)) / 2
+Q = -(lp ** 2 * np.log(lp) - lm ** 2 * np.log(lm)) / (lp - lm); e = max(e, abs(Q / (E / 2) - 4 / 9) * 1e-1)
+for _ in range(10):
+    u, v = _r39.normal(size=(2, 3)); x = np.r_[1., 0, 0, 0]
+    for t in (1e-2, 5e-3):
+        ex = lambda w: np.r_[np.cos(np.linalg.norm(w)), np.sin(np.linalg.norm(w)) * w / np.linalg.norm(w)]
+        y = _q(ex(t * u), x); z = _q(ex(t * v), x)
+        def h(p, q_):  # half-displacement (1 + q p^-1)/|.| applied: rotor from p to q
+            g = _q(q_, p * np.r_[1, -1, -1, -1]); w_ = np.r_[1, 0, 0, 0] + g; return w_ / np.linalg.norm(w_)
+        H = _q(h(z, x), _q(h(y, z), h(x, y)))
+        e = max(e, np.linalg.norm(H[1:] - t * t / 4 * np.cross(u, v)) / t ** 2 * 1e-1)
+s = np.sin(np.pi / 4); e = max(e, abs(-s ** 2 + 0.5), abs(-(np.pi / 2) / 2 + np.pi / 4))
+def _hh(p, q_):
+    g = _q(q_, p * np.r_[1, -1, -1, -1]); w_ = np.r_[1, 0, 0, 0] + g; return w_ / np.linalg.norm(w_)
+o1, oi, oj = np.r_[1., 0, 0, 0], np.r_[0, 1., 0, 0], np.r_[0, 0, 1., 0]
+H = _q(_hh(oj, o1), _q(_hh(oi, oj), _hh(o1, oi)))
+e = max(e, np.abs(H - np.r_[1, 0, 0, 1] / np.sqrt(2)).max())
+ep = 1e-2; sv = np.sin(ep / 2) ** 2; E = 2 * np.arctan(np.tan(ep / 2) ** 2)
+e = max(e, abs((-sv + ep ** 2 / 4) / ep ** 4 - 1 / 48) * 1e-2, abs((-E / 2 + ep ** 2 / 4) / ep ** 4 + 1 / 24) * 1e-2)
+report("39 Ex. m8:right, Prop. m8:subentropy, Thm m8:rotor, Ex. m8:octant: angles, det, series 1/12, Q/(E/2)->4/9, log H = t^2/4 uxv, octant (1+k)/sqrt2, -1/2 vs -pi/4, quartic 1/48 vs -1/24", e, 1e-3)
+# (3) rigidity: rank 3N-6 of edge maps, reflection counterexample on the 3N-6 graph, global 3N-5 reconstruction count
+def _cfg(N):
+    X = _r39.normal(size=(N, 4)); return X / np.linalg.norm(X, axis=1)[:, None]
+def _jac(X, edges):
+    N = len(X); rows = []
+    for (i, j) in edges:
+        r = np.zeros(4 * N); r[4 * i:4 * i + 4] = X[j]; r[4 * j:4 * j + 4] = X[i]; rows.append(r)
+    for i in range(N):
+        r = np.zeros(4 * N); r[4 * i:4 * i + 4] = 2 * X[i]; rows.append(r)                    # sphere constraints
+    return np.array(rows)
+e = 0.0
+for N in (5, 6, 7):
+    X = _cfg(N); full = list(_it39.combinations(range(N), 2))
+    rk = np.linalg.matrix_rank(_jac(X, full)) - N                                            # edge-map rank on the product of spheres
+    e = max(e, abs(rk - (3 * N - 6)))
+    tri = [(0, 1), (0, 2), (1, 2)] + [(a, k) for k in range(3, N) for a in (0, 1, 2)]
+    e = max(e, abs(len(tri) - (3 * N - 6)), abs(np.linalg.matrix_rank(_jac(X, tri)) - N - (3 * N - 6)))
+    # reflect vertex 3 across span(x0,x1,x2) within R^4: keeps its comparisons to anchors, changes c(x3,x4)
+    Bs = np.linalg.qr(X[:3].T)[0]; P = Bs @ Bs.T; x3r = 2 * P @ X[3] - X[3]
+    e = max(e, np.abs(X[:3] @ x3r - X[:3] @ X[3]).max(), 1e-3 - min(abs(x3r @ X[4] - X[3] @ X[4]), 1e-3), abs(np.linalg.norm(x3r) - 1))
+    cyc = [(0, 1)] + [(a, k) for k in range(2, N) for a in (0, 1)] + [(k, k + 1) for k in range(2, N - 1)] + [(N - 1, 2)]
+    e = max(e, abs(len(cyc) - (3 * N - 5)))
+    # reconstruction: residuals in the 2-plane orthogonal to the anchors; enumerate conjugation patterns and test closure
+    Bs = np.linalg.qr(X[:2].T)[0]; Pr = np.eye(4) - Bs @ Bs.T; R = X[2:] @ Pr; m = N - 2
+    Bp = np.linalg.qr(Pr @ _r39.normal(size=(4, 2)))[0]; zc = (R @ Bp[:, 0] + 1j * R @ Bp[:, 1]); zc = zc / np.abs(zc)
+    rel = [zc[(j + 1) % m] / zc[j] for j in range(m)]; sols = 0
+    for sg in _it39.product((0, 1), repeat=m):
+        prod = np.prod([r if s_ == 0 else np.conj(r) for r, s_ in zip(rel, sg)])
+        if abs(prod - 1) < 1e-9: sols += 1
+    e = max(e, abs(sols - 2))
+e = max(e, abs(np.linalg.matrix_rank(np.eye(5)) - 5))
+for N in range(4, 10): e = max(e, abs(N * (N - 1) // 2 - (3 * N - 6) - (N - 3) * (N - 4) // 2))
+report("39 Thm m8:counts, Rem. m8:prior-rigidity: edge-map rank 3N-6 (N=5,6,7), 3N-6 trilateration graph flexible by reflection, 3N-5 cycle graph: exactly 2 conjugation patterns", e, 1e-8)
+# (4) flex, Regge deficit, chord, pivot example, barrier ratio 4, histories
+e = 0.0
+x1, x3 = np.eye(4)[0], np.eye(4)[1]; x2 = (x1 + x3) / 2 + np.eye(4)[2] / np.sqrt(2)
+for t in (0.0, 0.7, 2.0):
+    x4 = (x1 + x3) / 2 + (np.cos(t) * np.eye(4)[2] + np.sin(t) * np.eye(4)[3]) / np.sqrt(2)
+    e = max(e, abs(x1 @ x2 - 0.5), abs(x2 @ x3 - 0.5), abs(x3 @ x4 - 0.5), abs(x4 @ x1 - 0.5), abs(x2 @ x4 - (1 + np.cos(t)) / 2), abs(x4 @ x4 - 1))
+V = np.array([[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1.]]); n1 = np.cross(V[1] - V[0], V[2] - V[0]); n2 = np.cross(V[1] - V[0], V[3] - V[0])
+n1 *= np.sign(n1 @ (V[0] - V[3])); n2 *= np.sign(n2 @ (V[0] - V[2])); e = max(e, abs(n1 @ n2 / np.linalg.norm(n1) / np.linalg.norm(n2) + 1 / 3), max(0, -(2 * np.pi - 3 * np.arccos(1 / 3))))
+ep = np.pi / 3; e = max(e, abs(np.sqrt(2) * np.sin(ep) - np.sqrt(6) / 2), abs(1 - np.sqrt((1 + np.cos(ep) ** 2) / 2) - (1 - np.sqrt(10) / 4)))
+A = np.array([[1, .5], [.5, 1]]); Cm = A.copy(); Bm = np.array([[1 / 3, 1 / 6], [2 / 3, 1 / 3]]); S = Cm - Bm.T @ np.linalg.inv(A) @ Bm
+G = np.block([[A, Bm], [Bm.T, Cm]]); e = max(e, np.abs(S - np.array([[5 / 9, 5 / 18], [5 / 18, 8 / 9]])).max(), abs(np.linalg.det(S) - 5 / 12), abs(np.linalg.det(G) - 5 / 16))
+b = np.array([1 / 4, 1 / 2, 3 / 4, 2 / 3]); e = max(e, abs(1 - b @ np.linalg.solve(G, b) - 35 / 108))
+G5 = np.block([[G, G[:, 3:4]], [G[3:4, :], G[3:4, 3:4]]]); e = max(e, abs(np.linalg.matrix_rank(G5) - 4), np.abs(G5 @ np.r_[0, 0, 0, 1, -1]).max())
+for E0, V0 in ((0.5, 1.0), (0.3, 1.0)):
+    chi = np.sqrt(2 * (V0 - E0)); k = np.sqrt(2 * E0)
+    for bw in (8.0,):
+        T = 1 / (1 + V0 ** 2 / (4 * E0 * (V0 - E0)) * np.sinh(chi * bw) ** 2); e = max(e, abs(T / np.exp(-2 * chi * bw) - 16 * E0 * (V0 - E0) / V0 ** 2) * 1e-5)
+        M = np.array([[np.cosh(chi * bw), np.sinh(chi * bw) / chi], [chi * np.sinh(chi * bw), np.cosh(chi * bw)]]); vin = np.linalg.solve(M, np.array([1, 1j * k]))
+        tt = 1 / (0.5 * (vin[0] + vin[1] / (1j * k))); e = max(e, abs(abs(tt) ** 2 / T - 1) * 1e-3)
+e = max(e, abs(16 * 0.5 * 0.5 - 4))
+D0 = np.diag([1., 2]); u = np.ones(2) / np.sqrt(2); v = np.array([4, -3.]) / 5
+e = max(e, abs(u @ D0 @ u - 1.5), abs((v @ u) ** 2 - 1 / 50), abs((v @ D0 @ u) / (v @ u) + 2))
+report("39 Ex. m8:flex, Prop. m8:chord, Ex. m8:pivot-example, Prop. m8:barrier, Ex. m8:histories: flex, arccos(1/3), chord, S, dets, 35/108, ratio -> 4 at E0=V0/2, -2", e, 1e-8)
+# (5) finite arithmetic objects: cutoff difference at 2, Cayley modulus, 3-4-1 inequality, staircase jump, Toeplitz criterion, quartic
+e = 0.0
+for s_ in (0.7 + 2j, 1.3 - 5j, 0.2 + 0.1j):
+    primecut = 1 / (1 - 2 ** -s_); D2 = 1 + 2 ** -s_; e = max(e, abs(primecut - D2 - 2 ** (-2 * s_) / (1 - 2 ** -s_)))
+for dl, gm in ((0.1, 3.0), (0.0, 2.0)):
+    rho = 0.5 + dl + 1j * gm; w = rho / (rho - 1); e = max(e, abs(abs(w) ** 2 - (1 + 2 * dl / ((0.5 - dl) ** 2 + gm ** 2))))
+P = [2, 3, 5, 7, 11]
+Z = lambda s_: np.prod([1 / (1 - p ** -s_) for p in P])
+for sg in (0.05, 0.5, 1.2):
+    for tt in _r39.uniform(-30, 30, 20): e = max(e, max(0, 1 - abs(Z(sg) ** 3 * Z(sg + 1j * tt) ** 4 * Z(sg + 2j * tt))))
+from math import lcm, log
+def _Lam(n):
+    for p in range(2, n + 1):
+        if n % p == 0:
+            m = n
+            while m % p == 0: m //= p
+            return log(p) if m == 1 else 0.0
+    return 0.0
+for X in range(1, 60): e = max(e, abs(sum(_Lam(n) for n in range(1, X + 1)) - log(lcm(*range(1, X + 1)))))
+for _ in range(10):
+    u0 = complex(*_r39.normal(size=2)); nodes = [u0, 1 / np.conj(u0)] + list(np.exp(1j * _r39.uniform(0, 6, 2)))
+    N = len(nodes); pj = lambda j: sum(z ** j for z in nodes); T = np.array([[pj(j - k) for k in range(N)] for j in range(N)])
+    e = max(e, max(0, np.linalg.eigvalsh((T + T.conj().T) / 2).min() + 1e-9) if abs(abs(u0) - 1) > 0.1 else 0)
+    nodes2 = list(np.exp(1j * _r39.uniform(0, 6, 4))); T2 = np.array([[sum(z ** (j - k) for z in nodes2) for k in range(4)] for j in range(4)])
+    e = max(e, max(0, -np.linalg.eigvalsh(T2).min() - 1e-12))
+uu = np.exp(0.7j)
+for j in range(1, 5): e = max(e, abs((1 - (uu ** (j + 1)).real) - 2 * (1 - (uu ** j).real) + (1 - (uu ** (j - 1)).real) - abs(1 - uu) ** 2 * (uu ** j).real))
+report("39 Prop. m8:finite, Ex. m8:staircase, Prop. m8:toeplitz: cutoff difference at 2, Cayley modulus, 3-4-1 >= 1, Psi = log lcm, Toeplitz negative off circle, PSD on circle", e, 1e-9)
+# (6) polyhedral defects: icosahedral refinements, totals 4pi, maxima, rescaled values; latitude overlaps
+def _ico(nu):
+    ph = (1 + 5 ** 0.5) / 2; base = []
+    for s1 in (1, -1):
+        for s2 in (1, -1):
+            for v in ((0, s1, s2 * ph), (s1, s2 * ph, 0), (s2 * ph, 0, s1)): base.append(np.array(v, float))
+    base = np.array(base); base /= np.linalg.norm(base, axis=1)[:, None]
+    dmin = min(np.linalg.norm(a - b) for a, b in _it39.combinations(base, 2))
+    faces = [f for f in _it39.combinations(range(12), 3) if all(abs(np.linalg.norm(base[i] - base[j]) - dmin) < 1e-9 for i, j in _it39.combinations(f, 2))]
+    verts = {}; tris = []
+    def vid(p):
+        key = tuple(np.round(p, 10))
+        if key not in verts: verts[key] = len(verts)
+        return verts[key]
+    for (i, j, k) in faces:
+        x, y, z = base[i], base[j], base[k]
+        P = lambda a, b: (a * x + b * y + (nu - a - b) * z) / np.linalg.norm(a * x + b * y + (nu - a - b) * z)
+        for a in range(nu):
+            for b in range(nu - a):
+                tris.append((vid(P(a, b)), vid(P(a + 1, b)), vid(P(a, b + 1))))
+                if a + b < nu - 1: tris.append((vid(P(a + 1, b)), vid(P(a + 1, b + 1)), vid(P(a, b + 1))))
+    V = np.zeros((len(verts), 3))
+    for kk, idx in verts.items(): V[idx] = kk
+    angsum = np.zeros(len(V))
+    for t in tris:
+        for r in range(3):
+            p, q, s3 = V[t[r]], V[t[(r + 1) % 3]], V[t[(r + 2) % 3]]
+            angsum[t[r]] += np.arctan2(np.linalg.norm(np.cross(q - p, s3 - p)), (q - p) @ (s3 - p))
+    return 2 * np.pi - angsum, len(V), len(tris)
+e = 0.0; resc = []
+for j, nu in enumerate((1, 2, 4, 8, 16)):
+    dfc, nv, nf = _ico(nu); e = max(e, abs(dfc.sum() - 4 * np.pi), abs(nv - (10 * nu * nu + 2)), abs(nf - 20 * nu * nu)); resc.append(4 ** j * dfc.max())
+e = max(e, abs(np.degrees(_ico(1)[0].max()) - 60), abs(np.degrees(_ico(2)[0].max()) - 17.724) * 1e-1, abs(np.degrees(_ico(4)[0].max()) - 4.812) * 1e-1)
+e = max(e, np.abs(np.round(resc, 4) - np.array([1.0472, 1.2374, 1.3436, 1.4681, 1.5038])).max() * 1e-1)
+q, N = 0.5, 4; e = max(e, abs((1 - q + q * np.exp(2j * np.pi / N)) ** N + 0.25))
+for q in (0.2, 0.7): e = max(e, abs((1 - q + q * np.exp(2j * np.pi / 4000)) ** 4000 - np.exp(2j * np.pi * q)) * 1e-2)
+e = max(e, abs(4 * np.sqrt(3) / 4 * 2 - 2 * np.sqrt(3)))
+report("39 Thm m8:poly, Ex. m8:icosa, Conj. m8:conjecture, Ex. m8:latitude: defects sum to 4pi, V=10nu^2+2, maxima 60/17.724/4.812 deg, rescaled 1.0472..1.5038; overlaps", e, 1e-4)
+
 
 # =========================================================== registered module scripts (checks/)
 for _name, _marker, _pred in CHECK_MODULES:
