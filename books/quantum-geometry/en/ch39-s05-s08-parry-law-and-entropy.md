@@ -1070,6 +1070,29 @@ $$
 
 The two solutions of $Cw=e$ are $(1,0,0)$ and $(0,1,1)$. Add their probabilities and multiply by $b_1=1/4$ to obtain the actual drop of $25/512$. Columns $2,3$ give the largest original bound, $9/256$. Whenever the free bit $w_1=1$, both basis bits are zero and each contributes a relative excess of $2/3$. The first-order bound keeps the two linear terms and gives $(9/256)(1+2(7/32)(2/3))=93/2048$. Columns $1,2$ give an original bound of $21/1024$. Exactly one basis bit is zero at either solution, so the first-order bound reaches $25/512$.
 
+**The quadratic correction and the degree required for equality (written derivation).** Let $\mathcal A$ index the basis-bit factors and the other biased retained factors. Write the relative excess in each factor as $g_a(Y)=\gamma_a\,\mathbf 1_{E_a}(Y)$ with $\gamma_a\ge 0$. For an integer $d\ge0$, define
+
+$$
+B_J^{(d)}=
+B_J\sum_{\substack{S\subseteq\mathcal A\\|S|\le d}}
+\left(\prod_{a\in S}\gamma_a\right)
+\Pr\!\left[\bigcap_{a\in S}E_a\right].
+$$
+
+The empty set contributes $1$ to the sum. Expanding $\prod_{a\in\mathcal A}(1+g_a(Y))$ and taking its expectation gives $\Delta$ after multiplication by $B_J$. All terms are nonnegative, so $B_J^{(d)}$ increases weakly with $d$ and stays below or equal to $\Delta$. Every free-bit assignment has positive probability. If an assignment raises at least $d+1$ factors above their minima, any $d+1$ of them give a strictly positive omitted term. Conversely, if every assignment raises at most $d$ factors, every omitted term vanishes. The smallest degree that recovers $\Delta$ is therefore the maximum number of factors that exceed their minima at the same feasible solution.
+
+The quadratic correction uses joint probabilities. Write $E_a=\{\sum_{j\in H_a}Y_j=d_a\}$, let $\epsilon_a=(-1)^{d_a}$, and put $M(H)=\prod_{j\in H}(1-2t_j)$. In the product of the two indicator functions, the signs from shared bits square to $1$. Taking expectations gives
+
+$$
+\begin{aligned}
+4\Pr(E_a\cap E_b)
+={}&1+\epsilon_a M(H_a)+\epsilon_b M(H_b)\\
+ &+\epsilon_a\epsilon_b M(H_a\mathbin{\triangle}H_b).
+\end{aligned}
+$$
+
+The symbol $\triangle$ denotes symmetric difference. A free bit shared by the two supports drops out of the last term. In the example above with columns $2,3$, both events are $\{w_1=1\}$. The quadratic term $(9/256)(2/3)^2(7/32)=7/2048$ fills the gap between the first-order bound and the actual decrease.
+
 For example, suppose both retained pairs alternate with the sole discarded pair and its endpoint probability satisfies $0<q<1$. Both restricted rows are $(1)$. When the first retained orbital is already balanced, balancing the second leaves purity unchanged. When all three later-endpoint probabilities start at $1/4$, balancing just the second retained orbital lowers purity from $83/128$ to $5/8$.
 
 Choose any subset of the initially biased retained orbitals, including the empty set, and balance the selected orbitals one at a time. The number of strict purity decreases equals the dimension gain of the span of the restricted rows. Let $S_0$ be the span of the initially balanced orbitals' restricted rows, and let $S_1$ be the span after adjoining all the selected rows. Each step adjoins a single row. If the row lies in the current span, both dimension and purity stay the same. If it lies outside, the dimension increases by one and purity strictly decreases. Thus every ordering gives $\dim S_1-\dim S_0$ strict decreases. Purity is nonincreasing at every step, so the final purity is strictly below its initial value exactly when $\dim S_1>\dim S_0$.
