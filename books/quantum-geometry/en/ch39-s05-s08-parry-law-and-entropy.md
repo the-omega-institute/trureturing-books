@@ -1004,10 +1004,14 @@ $$
 
 The first product ranges over the other biased orbitals. Each $b_k$ is at most $1$, so the product in the purity difference is at least this product whenever $Cw=e$, where $e$ takes value $1$ in row $i$ and zero in every other balanced row. Strict decrease guarantees that $e$ belongs to the column space of $C$. Fix the difference bits outside $J$ and subtract their contribution from $e$. The residual is still in the column space, so the basis columns uniquely determine the required bits in $J$. At each $j\in J$, the probability of a $1$ is $2q_j(1-q_j)\le 1/2$, which also lower bounds the probability of either prescribed bit. Multiply these bounds using independence and average over the bits outside $J$. This gives the claimed purity bound. When one retained pair alternates with one discarded pair, $C=(1)$ and the constraint asks for the sole discarded bit to be $1$, so equality holds.
 
+The [purity-drop lower bound](lean:D5/S3/Quantum/Fermionic/WeightedSlaterPurityDropBound.orderedMarginal_purity_drop_lower_bound) formalizes this inequality for the ordinary marginal.
+
 **When the bound is attained (written derivation).** Under strict decrease, write $a_k$ for retained row $k$ restricted to $L$, and let $S$ be the span of the other balanced restricted rows. Write $e_j$ for the row with a $1$ in coordinate $j$ and zeros elsewhere. For a given column basis $J$, the bound is attained exactly when both conditions hold.
 
 - For every retained orbital with $k\ne i$, $0<p_k<1$ and $p_k\ne 1/2$, the row $a_k$ belongs to the affine coset $a_i+S$.
 - For every basis column $j\in J$ with $q_j\ne 1/2$, the coordinate row $e_j$ belongs to $a_i+S$.
+
+The [per-basis equality criterion](lean:D5/S3/Quantum/Fermionic/OrderedSlaterPurityDropEquality.orderedMarginal_purity_drop_eq_iff) formalizes the equivalence between attainment and these two conditions.
 
 Every assignment of the bits in $L\setminus J$ has positive probability and extends uniquely to a solution of $Cw=e$ on $L$. At each solution, every basis-bit probability and every other biased retained factor is at least the positive lower bound used in the proof. Equality in the sum requires equality in every factor at every solution. A retained orbital with $0<p_k<1$ and $p_k\ne 1/2$ has $0<b_k<1$, so its factor reaches the lower bound exactly when $a_k\cdot w=1$. For a basis column with $q_j\ne 1/2$, bit $1$ is strictly less probable than bit zero, so the required bit must be $e_j\cdot w=1$. A deterministic retained endpoint has $b_k=1$. A balanced discarded orbital gives probability $1/2$ to each difference bit.
 
