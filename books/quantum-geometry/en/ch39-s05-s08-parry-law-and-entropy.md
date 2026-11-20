@@ -995,7 +995,7 @@ $$
 
 Every term is nonnegative. The support of $w$ consists of all binary strings that vanish off $L$. The decrease is strictly positive precisely when one of these strings has dot product $1$ with row $i$ and dot product zero with every other balanced row. Such a string cannot exist if the restricted row is in their span. Otherwise append the restricted row to a basis of that span and extend to a basis of $\mathbb F_2^L$. The functional taking value $1$ on the appended row and zero on the other basis vectors gives the required string under the dot product.
 
-**How large is the purity decrease?** If the decrease is strict, form a matrix $C$ from row $i$ and the other balanced rows, all restricted to $L$. Choose any index set $J$ whose columns form a basis of the column space of $C$. The purity before balancing minus the purity afterward is at least
+**A lower bound on the purity decrease (written derivation).** If the decrease is strict, form a matrix $C$ from row $i$ and the other balanced rows, all restricted to $L$. Choose any index set $J$ whose columns form a basis of the column space of $C$. The purity before balancing minus the purity afterward is at least
 
 $$
 b_i\left(\prod_{\substack{k\ne i\\p_k\ne 1/2}} b_k\right)
