@@ -674,6 +674,16 @@ Draw a full naming $f$ uniformly from these completions and read the reply $a=f\
 Among the original completions, giving a specified reply is equivalent to agreeing with the expanded naming on $L$. By [@thm-uniform-naming-update], the conditional law on that event is the uniform completion law using the remaining available names. Multiplying the probability of each reply by the corresponding conditional completion probability recovers the joint probability of every pair of reply and full naming. The full proof is checked by the Lean kernel.
 :::
 
+::: {.theorem #thm-adaptive-naming-completion title="Joint completion after an adaptive strategy stops" lean="D5/S3/Combinatorics/Probability/AdaptiveNamingCompletion.adaptive_name_completion"}
+Start with a completable injective partial naming on finite vertex and name sets. The available names lie outside the assigned names, and each unnamed vertex must receive one of the available names. A deterministic strategy stops after finitely many queries on each branch and selects its next action from the previous replies. The ordered vertex request at a query may depend on the current partial naming.
+
+In the first experiment, draw each reply from the current reply distribution, enlarge the naming domain to include the requested vertices, retain the old names, and assign each requested vertex its reported name. Remove all names used by the expanded naming from the available set. Draw a uniform completion when the strategy stops. In the second experiment, draw a uniform completion at the start, read all replies from that same naming, and update the partial naming by the same rule at every query. The experiments give the same joint distribution of the ordered query record, the partial naming at the stop, and the full injection.
+:::
+
+::: proof
+Induct on the branching strategy. A stop has no further replies and retains the partial naming with its completion. At a query, [@thm-joint-ordered-reply-completion] moves completion before that query while preserving the joint distribution of reply and completion. Once the reply is fixed, the inductive equality applies to the selected continuation. Prepend the query and reply to its record and sum over the possible replies. The full proof is checked by the Lean kernel.
+:::
+
 For example, two unnamed vertices and five available names give a hit probability of $2/5$ for any specified available name. To use the law after an adaptive graph query, one must identify the naming constraints imposed by the actual replies. Childs et al. use a sparse name space to bound guesses outside the known names in [quant-ph/0209131v2, Section IV](https://arxiv.org/abs/quant-ph/0209131v2).
 
 Fix a graph and a deterministic strategy whose query is a name. On a hit, the oracle returns the complete unordered set of neighbor names. On a miss, it returns a separate marker. In the actual record, let $S$ contain the initially supplied names, the names of successful queries, and the returned neighbor names. Let $B$ contain the names that received a miss. The fresh names form $A=N\setminus(S\cup B)$.
