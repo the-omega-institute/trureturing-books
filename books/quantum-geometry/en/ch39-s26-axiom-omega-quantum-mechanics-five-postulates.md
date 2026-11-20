@@ -129,6 +129,10 @@ A shared singlet passes the classical bound 2 card: two ternion fields sharing a
 Suppose the rule reads only the labeled weights $(w,1-w)$ and has to swap its selected label whenever the input labels are swapped. On any domain closed under that swap, a deterministic rule exists exactly when the domain excludes $w=1/2$. The tied input is fixed and neither output label is fixed. With unequal weights, the unique larger weight identifies a label, and that label moves with the swap. Sampling with the Born weights as probabilities also respects the swap at the level of the outcome distribution. Explaining which outcome occurs in an individual trial from the geometry and dynamics remains open in [@prob-ch34-single-outcome-realization].
 :::
 
+For a finite test, the relevant condition is whether some admissible weight occurs exactly once. On a domain of profiles closed under label permutations, an admissible deterministic rule that commutes with these permutations exists exactly when each profile has such a label, as long as admissibility itself also commutes with relabeling. If another label has the chosen label's weight, their transposition fixes the profile and moves the choice, violating covariance. Conversely, choose the largest weight among the admissible labels whose weights occur exactly once. Its label is unique and is carried along by every permutation.
+
+With weights $(2/5,2/5,1/5)$, the $1/5$ label can be selected covariantly if every label is admissible. If the rule must select a label of maximal weight, a rule exists exactly when every profile has a unique maximum. Here the two maximizers have equal weights and exchanging them fixes the full weight profile.
+
 ## 39.3.3 Formal Anchor Theorem, Literature & Appendix E Scope, Quantitative Audit, and Bridge to the Exteriorless Ternion Ontology {#sec-ch39-26-3}
 
 We formalize the five-postulate projection map, assemble the twenty-three frozen Lean 4 anchors of its two theorem boxes, record classical attributions, and verify all five invariants quantitatively below:
