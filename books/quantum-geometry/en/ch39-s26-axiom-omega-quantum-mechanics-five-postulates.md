@@ -140,6 +140,12 @@ The general integer-multiple bound for a digit alphabet of size $b$ follows from
 
 :::
 
+**Minimum seed support without nesting (manual derivation).** Fix a denominator $m\ge1$. Use one finite seed law and events $E_k$ of mass $k/m$ for all $0\le k\le m$. Require a single weight-preserving involution $\sigma$ such that $s\in E_k$ if and only if $\sigma(s)\notin E_{m-k}$. For odd $m$, the minimum support is the least $n$ with $m+1\le 2^n$. For even $m$, it is $2r$, where $r$ is the least integer with $m+1\le 3^r$. The two budget equivalences are formalized in [`odd_support_budget_iff`](lean:D5/S3/ConceptDynamics/Attribution/CovariantGridSupport.odd_support_budget_iff), [`even_support_budget_iff`](lean:D5/S3/ConceptDynamics/Attribution/CovariantGridSupport.even_support_budget_iff).
+
+For odd $m$, $n$ seeds give at most $2^n$ distinct event masses. For even $m$, the midpoint event $E_{m/2}$ contains exactly one member of every exchanged pair. The involution has no fixed point, and each pair has equal weights. Every event uses zero, one, or two members of each pair, so $r$ pairs give at most $3^r$ distinct masses.
+
+Scale the seed weights by $m$ to construct laws attaining the bounds. For odd $m$, use binary place weights with the final weight reduced to make the total $m$. Each weight can be used zero or one time. For even $m$, use ternary place weights with the final weight reduced to make the total $m/2$. Give each weight to both seeds in a pair, so that it can be used zero, one, or two times. In either construction, if the current weights represent $0$ through $T$, adding a weight $d\le T+1$ gives consecutive intervals $[jd,jd+T]$ that cover the new range. This choice of weights is the complete-partition step in Bachet's weighing problem. Choose an event of the required mass at each level below the midpoint. Obtain the events above it by applying the involution and taking complements. Use the identity involution for odd $m$. For even $m$, swap each pair and choose one seed from each pair at the midpoint.
+
 ## 39.3.3 Formal Anchor Theorem, Literature & Appendix E Scope, Quantitative Audit, and Bridge to the Exteriorless Ternion Ontology {#sec-ch39-26-3}
 
 We formalize the five-postulate projection map, assemble the twenty-three frozen Lean 4 anchors of its two theorem boxes, record classical attributions, and verify all five invariants quantitatively below:
