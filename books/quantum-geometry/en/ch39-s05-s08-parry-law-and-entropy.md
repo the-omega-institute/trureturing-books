@@ -1133,6 +1133,27 @@ $$
 
 The coset law thus determines the product of the bias factors for each nonzero column. With the offset fixed, those products in turn determine all sign moments, which determine the law. A zero column has no effect on the output. Repeated nonzero columns enter only through their product. For example, factors $(3/4,1/3)$ on one column and $(1/2,1/2)$ on the same column both give $1/4$. Every bias can be recovered individually exactly when the projected columns are nonzero and pairwise distinct.
 
+**An error bound for bias recovery (written derivation).** Let $P,Q$ be two coset laws with the same projected columns and affine offset, and suppose that all absolute sign moments of both laws are at least $\varepsilon>0$. Write $q_a(P),q_a(Q)$ for their bias products on a nonzero column $a$. Then
+
+$$
+\left|\log q_a(P)-\log q_a(Q)\right|
+  \le \frac{2}{\varepsilon}\operatorname{TV}(P,Q).
+$$
+
+Translate both laws by the same amount to remove the offset. This preserves total variation and makes every sign moment positive. For each $\lambda$, write the difference of the two log moments as $w_\lambda$ times the difference of the moments. The mean value theorem gives $0\le w_\lambda\le 1/\varepsilon$. If the moments agree, set $w_\lambda=0$. Substitution into the recovery formula gives
+
+$$
+\begin{aligned}
+\log q_a(P)-\log q_a(Q)&=\sum_{x\in C}K_a(x)(P(x)-Q(x)),\\
+K_a(x)&=-\frac{2}{|C|}\sum_{\lambda\in C^*}
+    \chi_\lambda(a)\,w_\lambda\,\chi_\lambda(x).
+\end{aligned}
+$$
+
+For $x\ne y$, exactly half of the characters distinguish $x$ from $y$. Each such sign difference has absolute value $2$, so $|K_a(x)-K_a(y)|\le 2/\varepsilon$. Subtract the midpoint of the maximum and minimum of $K_a$. The displayed sum stays the same because $\sum_x(P(x)-Q(x))=0$, and the shifted function has absolute value at most $1/\varepsilon$. The claimed estimate follows.
+
+A one-bit quotient already approaches the constant $2$. Fix $0<\varepsilon<1$ and take bias factors $\varepsilon$ and $\varepsilon+h$ with $0<h<1-\varepsilon$. The total variation is $h/2$, and the log difference is $\log(1+h/\varepsilon)$. Its ratio to $\operatorname{TV}(P,Q)/\varepsilon$ tends to $2$ as $h\downarrow0$.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$

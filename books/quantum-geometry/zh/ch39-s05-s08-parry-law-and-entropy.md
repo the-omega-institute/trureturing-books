@@ -1133,6 +1133,27 @@ $$
 
 因此，光凭陪集分布就能恢复每类非零列的偏置因子乘积。给定相同偏移，这些乘积反过来确定所有符号矩，而全体符号矩确定分布。零列不影响输出。重复的非零列只通过乘积出现，例如同一列上的因子 $(3/4,1/3)$ 和 $(1/2,1/2)$ 都给出 $1/4$。每个偏置都能单独恢复，当且仅当投影列全都非零且两两不同。
 
+**偏置恢复的误差界（书面推导）。** 设 $P,Q$ 是相同投影列、相同仿射偏移下的两个陪集律，且两者所有符号矩的绝对值都至少为 $\varepsilon>0$。记它们在非零列 $a$ 上的偏置因子乘积为 $q_a(P),q_a(Q)$。则
+
+$$
+\left|\log q_a(P)-\log q_a(Q)\right|
+  \le \frac{2}{\varepsilon}\operatorname{TV}(P,Q).
+$$
+
+把两个分布都平移同一个量以去掉偏移。这保留总变差，并使所有符号矩为正。对每个 $\lambda$，存在 $w_\lambda\in[0,1/\varepsilon]$，使两符号矩的对数差等于 $w_\lambda$ 乘以这两个矩的差。这由对数函数的中值定理给出，两个矩相等时可取 $w_\lambda=0$。代入恢复公式，得到
+
+$$
+\begin{aligned}
+\log q_a(P)-\log q_a(Q)&=\sum_{x\in C}K_a(x)(P(x)-Q(x)),\\
+K_a(x)&=-\frac{2}{|C|}\sum_{\lambda\in C^*}
+    \chi_\lambda(a)\,w_\lambda\,\chi_\lambda(x).
+\end{aligned}
+$$
+
+若 $x\ne y$，恰有一半的 $\lambda$ 使 $\chi_\lambda(x)\ne\chi_\lambda(y)$，且每项的符号差绝对值为 $2$。因此 $|K_a(x)-K_a(y)|\le 2/\varepsilon$。从 $K_a$ 中减去其最大值和最小值的中点，不改变上式右端，因为 $\sum_x(P(x)-Q(x))=0$。平移后的函数绝对值至多为 $1/\varepsilon$，于是得到所述误差界。
+
+常数 $2$ 已可在一位陪集上逼近。固定 $0<\varepsilon<1$，取两个偏置因子 $\varepsilon$ 和 $\varepsilon+h$，其中 $0<h<1-\varepsilon$。此时总变差为 $h/2$，而两对数之差为 $\log(1+h/\varepsilon)$。它与 $\operatorname{TV}(P,Q)/\varepsilon$ 的比值在 $h\downarrow0$ 时趋于 $2$。
+
 在这个实际词上，普通字母计数的平衡性与按位置奇偶加权的和是不同的量。沿用 $A=0$、$B=1$、$C=2$ 的字母编码，取整数权重
 
 $$
