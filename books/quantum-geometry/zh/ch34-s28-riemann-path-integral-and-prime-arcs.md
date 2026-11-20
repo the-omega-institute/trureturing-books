@@ -207,6 +207,22 @@ $$
 连接这座四阶概念塔底座（0 阶素数原胞 $\Lambda^0$）与塔顶（3 阶零点谱驻波 $\Lambda^3 \equiv \Lambda^0_{\mathrm{spec}}$）的数学桥梁，正是解析数论中最壮丽的**显式对偶公式（Explicit Formula）**——它从正反傅里叶—梅林互换两端证明了“素数幂阶梯”与“黎曼零点谱”互为对偶谱变换：
 
 - **内核已验证的无条件积分显式公式（[@thm-ch34-riemann-prime-arc-bridge] 第 6 款，`LEAN ✓`）**：无需预先假定黎曼猜想，在对数作用量坐标 $y = \ln x > 0$（即尺度 $x = e^y > 1$）的每一个严格正实点 `0 < y` 上，按解析重数遍历全体实际非平凡零点的加权拉普拉斯谱和 $\operatorname{actualH}(y) = \sum_{k \in \mathbb{N}} \frac{e^{y\rho_k}}{\rho_k(1 - \rho_k)}$ 都无条件精确等于算术端的梅尔滕斯—切比雪夫余项 $U(e^y) - \ln(2\pi) + \operatorname{trivialT}(y)$！
+
+- **模 $1$ 的余项与 RH 下的窗口上界。** 模 $1$ 的狄利克雷特征恒等于 $1$。对 $x\ge 1$，两种求和都取 $I_x=\{1,\ldots,\lfloor x\rfloor\}$，在 $x$ 为整数时包含右端点。逐项展开，利用 $\psi(x)=\sum_{n\in I_x}\Lambda(n)$，便有
+
+  $$
+  \sum_{n\in I_x}\Lambda(n)\left(\frac{x}{n}-1\right)
+  =x\sum_{n\in I_x}\frac{\Lambda(n)}{n}-\psi(x).
+  $$
+
+  两边都加上 $-x\ln x+(1+\gamma_{\mathrm{EM}})x$，即得 $G_z(x)=U(x)$（`手工推导`）。其中 $G_z$ 是模 $1$ 的余项，$U$ 见 [@def-divisor-ratio-mertens-error]。[外部定义 `Formalism.Gz`](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/StatementOC.lean#L9-L13) · [`U_eq_complete_ramps`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtLaplace.U_eq_complete_ramps)
+
+  假设黎曼猜想。令 $G(y)=e^{-y/2}U(e^y)$，$M=2+\gamma_{\mathrm{EM}}-\ln(4\pi)$。由 `actual_G_control` 的第一项，对任意 $\varepsilon>0$，所有充分大的实数 $y$ 都满足 $\lvert G(y)\rvert<M+\varepsilon$。[Lean 声明](lean:D5/S3/Weil/Mertens/IntegratedExplicit/RHSharpActualEnvelope.actual_G_control)
+
+  取 $\varepsilon=1$，代入 $y=\ln x$，便得到 $\lvert U(x)\rvert<(M+1)\sqrt{x}$。给定 $\theta>1/2$，选 $Y_0>1$ 使这个界对所有 $x\ge Y_0$ 成立，且 $Y_0^{\theta-1/2}\ge M+1$。于是对每个 $Y\ge Y_0$，每个 $x\in[Y,Y^{3/2}]$ 都满足 $U(x)\le\lvert U(x)\rvert<x^\theta$（`手工推导`）。
+
+  外部的 Landau 判据沿相反方向使用窗口估计。取 $0<\theta<1$ 和 $\delta>0$。若存在常数 $C$，使得对每个起点阈值 $R$ 都能找到 $Y\ge R$，在整个 $[Y,Y^{1+\delta}]$ 上特征族的加权和处处不超过 $Cx^\theta$，则族中各 $L$ 函数在 $\operatorname{Re}(s)>\theta$ 无零点。该路线选用 $1+\delta=3/2$。上面的推导从 RH 出发，给出的是模 $1$ 项的上界。[窗口判据](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ZeroFreeOfRpowWindow.lean#L11-L14) · [窗口指数的选取](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean#L8-L11)
+
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 
   $$

@@ -207,6 +207,22 @@ Placing the Riemann $\zeta$ path-integral system inside the `1—3—3—1` (Poi
 Bridging the base of this four-grade tower (Grade-0 prime cells $\Lambda^0$) and its crown (Grade-3 spectral standing waves $\Lambda^3 \equiv \Lambda^0_{\mathrm{spec}}$) stands the crown jewel of analytic number theory—the **Explicit Formula**, proving that the prime-power staircase and the Riemann zero spectrum are exact Fourier–Mellin duals of each other:
 
 - **Kernel-verified unconditional integrated explicit formula (Clause 6 of [@thm-ch34-riemann-prime-arc-bridge], `LEAN ✓`)**: Without assuming the Riemann Hypothesis, at every strictly positive logarithmic action point `0 < y` ($y = \ln x > 0$, i.e., scale $x = e^y > 1$), the weighted Laplace sum $\operatorname{actualH}(y) = \sum_{k \in \mathbb{N}} \frac{e^{y\rho_k}}{\rho_k(1 - \rho_k)}$ over all actual nontrivial zeros counted with multiplicity equals the arithmetic Mertens–Chebyshev discrepancy $U(e^y) - \ln(2\pi) + \operatorname{trivialT}(y)$ unconditionally!
+
+- **The remainder modulo $1$ and a window bound under RH.** The Dirichlet character modulo $1$ is identically $1$. For $x\ge 1$ both sums run over $I_x=\{1,\ldots,\lfloor x\rfloor\}$, including the right endpoint when $x$ is an integer. Expanding each summand and using $\psi(x)=\sum_{n\in I_x}\Lambda(n)$ gives
+
+  $$
+  \sum_{n\in I_x}\Lambda(n)\left(\frac{x}{n}-1\right)
+  =x\sum_{n\in I_x}\frac{\Lambda(n)}{n}-\psi(x).
+  $$
+
+  Adding $-x\ln x+(1+\gamma_{\mathrm{EM}})x$ to both sides gives $G_z(x)=U(x)$ (`manual derivation`), where $G_z$ is the modulus-one remainder and $U$ is the function of [@def-divisor-ratio-mertens-error]. [External definition `Formalism.Gz`](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/StatementOC.lean#L9-L13) · [`U_eq_complete_ramps`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtLaplace.U_eq_complete_ramps)
+
+  Assume the Riemann hypothesis. Set $G(y)=e^{-y/2}U(e^y)$ and $M=2+\gamma_{\mathrm{EM}}-\ln(4\pi)$. The first conclusion of `actual_G_control` says that for each $\varepsilon>0$, all sufficiently large real $y$ satisfy $\lvert G(y)\rvert<M+\varepsilon$. [Lean declaration](lean:D5/S3/Weil/Mertens/IntegratedExplicit/RHSharpActualEnvelope.actual_G_control)
+
+  Taking $\varepsilon=1$ and substituting $y=\ln x$ gives $\lvert U(x)\rvert<(M+1)\sqrt{x}$. Fix $\theta>1/2$ and choose $Y_0>1$ large enough that this bound holds for every $x\ge Y_0$ and $Y_0^{\theta-1/2}\ge M+1$. Then for every $Y\ge Y_0$ and every $x\in[Y,Y^{3/2}]$ we have $U(x)\le\lvert U(x)\rvert<x^\theta$ (`manual derivation`).
+
+  The external Landau criterion uses a window estimate in the opposite direction. Fix $0<\theta<1$ and $\delta>0$. Suppose there is a constant $C$ such that for every threshold $R$ one can find $Y\ge R$ with the family's weighted character sum bounded above by $Cx^\theta$ throughout $[Y,Y^{1+\delta}]$. Then each $L$-function in the family is zero-free in $\operatorname{Re}(s)>\theta$. The application takes $1+\delta=3/2$. The calculation above starts from RH and supplies the bound for the modulus-one term. [Window criterion](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ZeroFreeOfRpowWindow.lean#L11-L14) · [Choice of window exponent](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean#L8-L11)
+
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 
   $$
