@@ -274,6 +274,8 @@ algebra (Hypotheses~U and~A, Section~\ref{sec:closedreg}).
 a fusion space (Section~\ref{sec:attention}).
 \item[{[Sb]}] Separate colour, weak and hypercharge bundles, a scalar bridge and a common normalisation
 (Section~\ref{sec:triality}).
+\item[{[Ix]}] An internal spin space with a twist of charge three linked to one family; [Zw]: the reading of the
+invisible $Z$ width as a generation count (Section~\ref{sec:generations}).
 \item[{[KK]}] A fixed connection metric on the total space with one gravitational normalisation; [Sn]: a
 single fermion trace in the Dirac heat coefficient; [Om]: one-loop matching with a specified spectrum; [Cc]: a
 comparison action with a clock (Section~\ref{sec:couplings}).
@@ -418,9 +420,9 @@ and error-correcting sub-structures.  Part~III (Section~\ref{sec:bounds}) gives 
 sharp constants, the Tsirelson bound from a positive Gram completion, and a rapidity--entanglement budget.  Part~IV (Sections~\ref{sec:eventspace}--\ref{sec:couplings}) contains the space of events,
 fields of structures, the variable radius, the round four-sphere target from a pair, topological
 particles with the Skyrme term, and the
-three-structure model, the triality source of the count three, unification scales with a tick budget and a conditional route from cap
-entanglement to linearised gravity, and the coupling ratios from the total space; a section on the origin of
-three generations is to follow.  Part~V (Sections~\ref{sec:examples}--\ref{sec:lean}) collects the
+three-structure model, unification scales with a tick budget and a conditional route from cap
+entanglement to linearised gravity, and three examinations of open inputs: the triality source of the
+count three, tests of mechanisms for three generations, and the coupling ratios from the total space.  Part~V (Sections~\ref{sec:examples}--\ref{sec:lean}) collects the
 physical examples, the status of every statement, what could fail, the open problems and the
 numerical checks.  Statements that are not proved keep their status as hypothesis, conjecture or
 programme.
@@ -842,6 +844,7 @@ One clock; tensor product & Thm.~\ref{thm:oneclock}; or Thm.~\ref{thm:product}, 
 All unit vectors are states; all unitaries are operations & Thm.~\ref{thm:comp} & C0--C2, [Span]; C3 for operations\\
 Measurement update & conditional state $K_a\psi/\lVert K_a\psi\rVert$ (Prop.~\ref{prop:relative}, Thm.~\ref{thm:instruments}) & C0--C3, Convention T\\
 Computation & Measurement-based universality with gflow corrections (Thms.~\ref{cp:determinism}, \ref{cp:universal}); exact recovery iff compressed products are scalar (Thm.~\ref{cp:kl}); five qubits minimal (Cor.~\ref{cp:mincode}); exact parameter shift (Thm.~\ref{cp:shift}) & C0--C3, [T], [Sub]; [Ac]; anyons: [Lq]\\
+Three generations & An input: the index construction gives three families only with charge three (Cor.~\ref{gn:conditional}); the other mechanisms examined fail (Rem.~\ref{rem:gnnogo}) & G; [Ix]\\
 Three structures & Triality: exactly three real irreducible eight-dimensional modules of the octonionic related-triples group (Thm.~\ref{tr:main}); no $\mathfrak{su}(3)\oplus\mathfrak{su}(2)$ in $\mathfrak{spin}(8)$ (Prop.~\ref{tr:obstruction}); one-loop matching with Standard Model content fails ($a\simeq4.05$ vs $5.51$) & G; [Sb]\\
 Unification, clocks, gravity & Two-scale one-loop fit $M_R=1.29\times10^{10}$, $M_{\mathrm{PS}}=9.71\times10^{16}$\,GeV (Thm.~\ref{ub:fit}); proper time of a saturated clock (Thm.~\ref{ub:clock}); cut bound and saturation criterion (Thm.~\ref{ub:cut}); finite cap first law (Thm.~\ref{ub:caplaw}); conditional linearised Einstein equation (Thm.~\ref{ub:einstein}) & G, [Ps]; [Ck], [Gl]; [Eq]\\
 Bounds & Rapidity--entanglement budget $\sum_B\gamma_{AB}^{-2}\le\gamma(r_A)^{-2}$, deficit $4\lvert ae\rvert^2$, equality on $W$ (Thm.~\ref{thm:bdbudget}); $\tau_\perp\ge\pi\hbar/(2\Delta E)$, sharp; $\pi\hbar/(4\Delta E)$ for a Bloch right angle and two branches (Prop.~\ref{prop:bdmt}); $\lvert S\rvert\le2\sqrt2$ from a positive Gram completion, PR box excluded (Thm.~\ref{thm:bdchsh}) & C0--C2, [Span]; [Cd]; [Bs]; $n$-qubit budget: cited\\
@@ -5285,7 +5288,8 @@ boundary value is a prediction of the low-energy value $0.231$.
 Under Hypothesis~G(i)--(iv), the stabiliser of $\Xi$, its global form and the hypercharge table are
 theorems; $\sin^2\theta_W=\tfrac38$ follows from clause (v), which one-loop running does not realise.  Not obtained: why there are
 three structures (a pair and one more) and not another number (Section~\ref{sec:triality} gives the
-algebraic source of the count three and refutes the simultaneous identification); three generations; the breaking
+algebraic source of the count three and refutes the simultaneous identification); three generations (Section~\ref{sec:generations} tests the candidate
+mechanisms; the number remains an input); the breaking
 scale; masses and Yukawa couplings; unification of the strong coupling (with an assumed intermediate
 spectrum it is a two-scale fit, Remark~\ref{rem:ubscales}); any dynamics.
 Theorem~\ref{thm:sm} and Proposition~\ref{prop:angle38} reproduce the Pati--Salam embedding with
@@ -5338,833 +5342,6 @@ Proposition~\ref{prop:symmetric}, by which a permutation-symmetric origin-free d
 its time unit exactly for $N\in\{2,3\}$.  Neither selects $3$ over $2$; a principle that does is missing.
 \end{remark}
 
-
-%=====================================================================================
-\section{Why three structures: $\mathrm{Spin}(8)$ triality and the octonionic solution}\label{sec:triality}
-
-Can the three comparison structures in Hypothesis~G be the three
-eight-dimensional representations of octonionic triality? A quaternionic
-subalgebra gives a real bidoublet of the required type, and an octonionic
-clock singles out a complex four-space with the same colour stabiliser as
-the closed pair. The two identifications cannot be made into a common gauge
-action inside \(\mathrm{Spin}(8)\). In fact, colour and weak isospin
-cannot even commute there as nontrivial connected groups. The count of
-three applies to the triality orbit of modules. The tensor-product
-assignment in Hypothesis~G and the chiral hypercharges require additional
-structure. The standard \(\mathrm{Spin}(10)\) embedding makes the
-additional representation content explicit.
-
-\begin{theorem}[Scope of the triality identification]\label{tr:main}
-Take the standard positive-definite octonion product and its group of
-orthogonal related triples with determinant one in each slot. The vector
-and the two half-spin representations exhaust its eight-dimensional
-irreducible real representations. Their isomorphism classes form one orbit
-under the outer automorphism group \(S_3\). For a quaternionic subalgebra and a right multiplication clock generated
-by a unit imaginary quaternion in it, the vector module realises separately the
-bidoublet of Proposition~\ref{prop:parity}(ii) and the complex
-four-space model of Proposition~\ref{prop:pairsu3}. No Lie algebra
-injection
-\[
- \mathfrak{su}(3)\oplus\mathfrak{su}(2)\longrightarrow\mathfrak{spin}(8)
-\]
-exists. In particular, neither the Pati--Salam nor the Standard Model gauge
-action of Theorem~\ref{thm:sm} is obtained as a gauge subgroup acting on
-these three modules.
-\end{theorem}
-The algebra and weights below establish the count and the two
-identifications. Proposition~\ref{tr:obstruction} proves the obstruction.
-
-\subsection{The multiplication tensor}\label{tr:algebra}
-
-Paper~I gives roundness without the third heap identity
-\cite[Thm.~5.18, Cor.~5.19]{PaperI}, with the dimension count from Hurwitz's theorem \cite[Prop.~5.13]{PaperI} and
-rigidity on $S^3$ \cite[Thm.~5.15]{PaperI}; the list $S^1,S^3,S^7$ is a classification, not a forced tower of
-encodings \cite[Rem.~5C.5]{PaperI}. Its Propositions~5.16
-and~5.17 distinguish the
-family of ternary operations on \(S^7\) from the operation
-\(T(a,b,x)=(a\bar b)x\) selected by \((\mathrm C_o)\).
-We use the positive-definite product of the selected model at the unit.
-The construction applies to an individual base product after choosing a
-base point and an octonion isomorphism. Metric roundness gives the rotation
-group \(\SO(8)\) of the sphere. The related-triples group
-preserves multiplication with separate actions on its three slots.
-An automorphism of the product uses the same action in all slots.
-Theorem~\ref{thm:main} concerns the associative setting.
-
-\begin{lemma}[Quaternionic coordinates and Moufang identities]\label{tr:oct}
-Write \(\mathbb O=\mathbb H\oplus\mathbb H\ell\) and use coordinates
-\[
- (a,b)(c,d)=(ac-\bar d b,\,da+b\bar c),\qquad
- \overline{(a,b)}=(\bar a,-b),\qquad |(a,b)|^2=|a|^2+|b|^2 .
-\]
-Conjugation reverses products and the norm is multiplicative. The
-associator \([x,y,z]=(xy)z-x(yz)\) is alternating. The following
-Moufang identities hold:
-\begin{align*}
- (xy)(zx)&=(x(yz))x,\\
- x(y(xz))&=((xy)x)z,\\
- ((zx)y)x&=z(x(yx)).
-\end{align*}
-The unit sphere is a Moufang loop. Any two elements generate an
-associative subalgebra.
-\end{lemma}
-\begin{proof}
-Conjugation follows by taking the conjugate of each quaternionic
-coordinate. In the norm of the product the two cross terms cancel
-because \(\operatorname{Re}(ac\bar b d)=\operatorname{Re}(da c\bar b)\)
-in \(\mathbb H\). The four remaining squared terms give
-\((|a|^2+|b|^2)(|c|^2+|d|^2)\).
-For \(x=(a,b)\), its square is \(2\operatorname{Re}(a)x-|x|^2 1\).
-Writing \(L_x y=xy\), expansion of \(x(x(c,d))\) gives
-\[
- (a^2c-|b|^2c-2\operatorname{Re}(a)\bar d b,\,
- da^2-|b|^2d+2\operatorname{Re}(a)b\bar c).
-\]
-This is \(x^2(c,d)\). Conjugation gives right alternativity, and
-polarising both gives alternation. The three identities and the
-two-generator assertion follow from the Moufang identities and
-Artin's theorem for alternative algebras \cite[Chapter~III, \S1]{tr:Schafer}.
-The inverse laws follow from
-\(L_{\bar x}L_x=|x|^2 I\) and its right-handed version, since
-\(\bar x\in\operatorname{span}_{\mathbb R}(1,x)\).
-\end{proof}
-
-\begin{example}[The Fano table and the associator]\label{tr:fano}
-The imaginary basis
-\[
- (f_1,\ldots,f_7)=(i,j,\ell,k,j\ell,-k\ell,i\ell)
-\]
-has oriented lines
-\((124),(235),(346),(457),(561),(672),(713)\), where an oriented
-triple means \(f_a f_b=f_c\) and its cyclic rotations. This follows
-by substituting the basis in Lemma~\ref{tr:oct}, with reversed order
-giving the opposite sign. The \(7\) lines among the
-\(\binom{7}{3}=35\) unordered triples give quaternionic subalgebras
-and zero associators. For each of the other \(28\), the third basis
-unit is perpendicular to the quaternionic algebra spanned by the
-first two and their product. In coordinates relative to that
-subalgebra, \([i,j,\ell]=2k\ell\), so each has associator norm \(2\).
-The choice of a perpendicular unit gives the same Cayley--Dickson
-formula by the octonion basic-triple construction \cite[\S4.1]{Baez}.
-For the displayed basis,
-\([f_1,f_2,f_3]=-2f_6\),
-\([f_1,f_2,f_5]=2f_7\), and
-\([f_1,f_2,f_6]=2f_3\).
-The seven subalgebras are attached to this basis. For example,
-\(i\) and \(\cos\theta\,j+\sin\theta\,\ell\) generate distinct
-quaternionic subalgebras for \(0\leq\theta<\pi\), as their intersections
-with \(\operatorname{span}_{\mathbb R}(j,\ell)\) are distinct lines.
-A further Cayley--Dickson double gives a concrete limit to this
-construction. With the same doubling formula over \(\mathbb O\),
-\((f_1,f_2)(f_3,f_6)=0\) and the reverse product is zero.
-The two coordinates are \((f_7-f_7,f_5-f_5)\), and the reverse
-calculation gives \((-f_7+f_7,f_5-f_5)\).
-The same formula gives two further pairs with zero products in both
-orders, \((f_1,f_3),(f_2,-f_6)\) and \((f_1,f_4),(f_3,f_5)\).
-Each factor in these pairs has squared norm \(2\).
-\end{example}
-
-\begin{proposition}[Related triples and outer automorphisms]\label{tr:triples}
-The group
-\[
- \{(A,B,C)\in\SO(\mathbb O)^3:
-                    A(xy)=B(x)C(y)\text{ for all }x,y\in\mathbb O\}
-\]
-is \(\mathrm{Spin}(8)\), with the vector representation in slot \(B\)
-and the two real half-spin representations in \(A,C\).
-The three maps to \(\SO(8)\) are double covers with distinct
-kernels. In para-octonion coordinates an action of \(S_3\) permutes
-the three representations, giving all outer automorphism classes.
-The diagonal subgroup is \(G_2=\operatorname{Aut}(\mathbb O)\).
-\end{proposition}
-\begin{proof}
-On \(\mathbb O\oplus\mathbb O\), put
-\[
- c(x)=\begin{pmatrix}0&L_x\\-L_{\bar x}&0\end{pmatrix}.
-\]
-The inverse identity gives \(c(x)^2=-|x|^2I\).
-Polarisation gives the Clifford relations. The inverse identity
-and norm multiplication give \(L_x^*=L_{\bar x}\), including
-\(x=0\), and hence \(c(x)^*=-c(x)\).
-For a product \(g\) of an even number of unit Clifford vectors,
-conjugation by \(g\) sends \(c(x)\) to \(c(Bx)\) for its standard
-vector action \(B\). Writing the diagonal blocks of \(g\) as \(A,C\),
-the upper off-diagonal equality is \(A L_x=L_{Bx}C\).
-The blocks are in \(\SO(8)\) by connectedness.
-
-To exhaust the triples, lift \(B\) by the spin double cover
-and divide by the lift. If \(B=I\), then \(x=1\) gives \(A=C\),
-and \(y=1\) gives \(A(x)=xa\), where \(a=A(1)\).
-Thus \([x,y,a]=0\) for all \(x,y\). If \(a=(b,d)\) then
-\([i,j,a]=(0,2dk)\), so \(d=0\). For \(h=i,j\),
-\([h,\ell,a]=(0,h\bar b-\bar b h)\) then forces \(b\) to be real.
-Since \(a\) is a unit, the two possibilities are precisely the
-images of \(1\) and \(-1\). The latter acts by \(-I\) in the
-two Clifford blocks, which also proves injectivity.
-This is the normed triality construction with a specified
-vector slot \cite[\S2.4]{Baez}.
-
-Put \(Kx=\bar x\) and use
-\((P,Q,R)=(KBK,KCK,A)\) on the three variables of
-\(\tau(x,y,z)=\langle\bar x\bar y,z\rangle\).
-The related-triples equation is equivalent to preservation of
-\(\tau\). Its real-part expression
-\(\operatorname{Re}((\bar x\bar y)\bar z)\) is cyclic and is
-invariant under \((x,y,z)\mapsto(Ky,Kx,Kz)\).
-Indeed \(\operatorname{Re}((xy)z)=\operatorname{Re}(x(yz))\)
-follows from \(L_x^*=L_{\bar x}\), conjugation and the inner
-product with \(1\). Cyclic invariance also uses
-\(\operatorname{Re}(xy)=\operatorname{Re}(yx)\). Conjugating the
-product reverses the order. Thus cyclic permutation and
-transposition with simultaneous conjugation give automorphisms
-of orders \(3\) and \(2\) satisfying the \(S_3\) relations.
-The four sign triples with \(A=BC\) are central.
-The vector projection has order-two kernel, and the permutation
-automorphisms give the other two kernels and covers. The action
-on the three kernels is faithful, and inner automorphisms fix them.
-The diagram theorem bounds the outer automorphism group of the
-simply connected compact group of type \(D_4\) by the symmetry
-group of its three end nodes \cite[\S2.4]{Baez}.
-A diagonal triple is an orthogonal algebra automorphism. Every
-algebra automorphism is isometric by the quadratic equation for
-\(x\notin\mathbb R\), and preserves orientation by connectedness
-of the space of octonion basic triples \cite[\S4.1]{Baez}.
-\end{proof}
-
-\subsection{Quaternionic splitting and restricted weights}\label{tr:weights}
-
-Use the ordered basis \(e_0,\ldots,e_7=(1,i,j,k,\ell,i\ell,j\ell,k\ell)\).
-Let \(t_1,t_2,t_3,t_4\) be the angular coordinates for the real
-planes \((e_0,e_1),(e_2,e_3),(e_4,e_5),(e_6,e_7)\).
-A weight \(\lambda\) means the torus acts by \(e^{i\lambda}\).
-Restrictions below refer to complexifications of the real modules
-unless specified otherwise.
-
-\begin{lemma}[Spin weights and the count]\label{tr:spinweights}
-The weights of \(8_v\) are \(\pm t_a\) for \(1\leq a\leq4\).
-The weights of \(8_\pm\) are
-\[
- \tfrac12\sum_{a=1}^{4}s_a t_a,\qquad s_a\in\{1,-1\},\qquad
- \prod_{a=1}^{4}s_a=\pm1.
-\]
-Every weight in each module has multiplicity one. Here \(8_+\)
-is slot \(C\) and \(8_-\) is slot \(A\) in the given orientation.
-\end{lemma}
-\begin{proof}
-Write \(c_j=c(e_j)\). The infinitesimal lift of the rotation
-sending \(e_j\) towards \(e_k\) is \(c_jc_k/2\), because its commutator
-with \(c_j\) is \(c_k\), with \(c_k\) is \(-c_j\), and with the
-remaining generators is zero. The four plane bivectors square to
-\(-I\) and commute. Conjugation by a single \(c_j\) reverses the sign
-for its own plane and preserves the other signs. On the full complex
-spin space all \(16\) sign choices therefore occur once.
-The volume element \(c_0\cdots c_7\) acts as \((-I,I)\) in the
-two blocks. The upper block is \(-L_iL_jL_kL_\ell L_{i\ell}L_{j\ell}L_{k\ell}\).
-The seven-matrix product sends \(1\) to \(1\) by the multiplication
-table and commutes with each imaginary \(L_{e_j}\), so is the identity
-on the basis. The lower block has the opposite sign.
-The volume eigenvalue on a weight is \(\prod_a s_a\).
-Each weight set is one Weyl orbit under permutations and even sign
-changes, so any nonzero invariant subspace contains all its weights.
-
-For exhaustion use the simple roots \(t_1-t_2,t_2-t_3,t_3-t_4,t_3+t_4\)
-of \(D_4\). The three modules realise the three end fundamental
-weights. The middle fundamental weight \(t_1+t_2\) is the highest
-root and gives the \(28\)-dimensional adjoint representation.
-By the Weyl dimension formula adding a nonzero dominant weight
-strictly increases dimension, since each positive coroot pairing
-is nondecreasing and some simple coroot pairing increases.
-Therefore the three displayed modules are the only nontrivial
-complex irreducibles of dimension at most \(8\). A nontrivial real
-irreducible of real dimension \(8\) then has one of these as its
-complexification. The three have real forms by construction.
-Two real forms of a complex irreducible are equivalent because
-their equivariant conjugations differ by a scalar of unit modulus,
-and conjugation by a scalar can make them equal. We use the
-highest-weight and dimension theorems \cite[\S\S21, 24]{tr:Humphreys}.
-\end{proof}
-
-\begin{proposition}[The two stabilisers of a quaternionic subalgebra]\label{tr:quaternion}
-For the vector action the inverse image of the connected oriented
-block stabiliser of \(\mathbb H\oplus\mathbb H\ell\) is
-\[
- K_{\mathbb H}=
- \bigl(\mathrm{Spin}(4)\times\mathrm{Spin}(4)\bigr)/
-                 \langle(-1,-1)\rangle .
-\]
-Order the four \(\SU(2)\) factors of the covering group
-as left and right for \(\mathbb H\), then left and right for
-\(\mathbb H\ell\). Their restrictions are
-\begin{align}
- 8_v&=(2,2,1,1)+(1,1,2,2),\nonumber\\
- 8_+&=(2,1,2,1)+(1,2,1,2),\label{tr:branch4}\\
- 8_-&=(2,1,1,2)+(1,2,2,1).\nonumber
-\end{align}
-Each summand has a real form of dimension four. The stabiliser of
-\(\mathbb H\) in diagonal \(G_2\) is
-\((\SU(2)_p\times\SU(2)_q)/\langle(-1,-1)\rangle\)
-with action
-\[
- (a,b)\longmapsto(pap^{-1},qbp^{-1}).
-\]
-In all three modules its branching is \((1,1)+(3,1)+(2,2)\).
-Fixing the clock unit \(i\) inside \(\mathbb H\) restricts \(p\)
-to its circle centraliser and leaves \(q\) free. In the covering
-\(\U(1)_p\times\SU(2)_q\) notation the restriction
-is \(1_0+1_0+1_2+1_{-2}+2_1+2_{-1}\).
-\end{proposition}
-\begin{proof}
-Even Clifford products in the two orthogonal blocks commute.
-Their product maps onto the connected block group and contains
-the kernel of the spin double cover. An element of the product
-is trivial precisely when both vector actions are trivial and
-the two spin signs multiply to \(1\). This gives the simultaneous
-central quotient. Dropping the orientation on the blocks gives
-\(\mathrm S(\mathrm O(4)\times\mathrm O(4))\) in the vector rotation
-group, with an additional component.
-
-Put \(p_1=(t_1+t_2)/2,\ p_2=(t_1-t_2)/2,\ 
-p_3=(t_3+t_4)/2,\ p_4=(t_3-t_4)/2\).
-A doublet in factor \(j\) has weights \(\pm p_j\).
-The vector weights are all sums \(\pm p_1\pm p_2\) and
-\(\pm p_3\pm p_4\). The half-spin weights pair the equal-sign
-or opposite-sign choices in the two blocks, giving
-\eqref{tr:branch4}. These are left and right factors because
-left multiplication by \(e^{i\alpha}\) rotates the two planes
-in the same direction, and right multiplication rotates them in
-opposite directions. The tensor product of two quaternionic
-doublets has an invariant conjugation, given by the tensor product
-of their equivariant antilinear maps squaring to \(-I\).
-The resulting real module is \(x\mapsto lxr^{-1}\)
-on \(\mathbb H\), for the indicated two factors.
-
-An automorphism preserving \(\mathbb H\) restricts to conjugation
-by \(p\) and sends \(\ell\) to a unit of \(\mathbb H\ell\).
-The displayed formula preserves multiplication by substitution
-and accounts for every such image. Its kernel has \(p=q=\pm1\).
-Its four factors in the vector block action are \((p,p,q,p)\),
-and diagonal \(G_2\) acts identically in every slot.
-Conjugation by \(p=e^{i\alpha}\) on \(\mathbb H\) gives one
-scalar plus the triplet with weights \(0,\pm2\alpha\).
-The \(\mathbb H\ell\) weights are \(\pm\alpha\pm\beta\)
-for \(q=e^{i\beta}\). This proves both restrictions.
-\end{proof}
-
-\begin{proposition}[Spin, automorphism and colour subgroups]\label{tr:stab}
-For \(\mathrm{Spin}(7)\) fixing \(1\) in \(8_v\) and
-\(\mathrm{Spin}(6)\) fixing \(1,i\) pointwise in \(8_v\), the restrictions are
-\[
-\begin{array}{c|ccc}
- &8_v&8_+&8_-\\ \hline
- \mathrm{Spin}(7)&1+7&8&8\\
- G_2&1+7&1+7&1+7\\
- \SU(3)\subset G_2&1+1+3+\bar3&1+1+3+\bar3&1+1+3+\bar3\\
- \mathrm{Spin}(6)\cong\SU(4)&6+1+1&4+\bar4&4+\bar4
-\end{array}
-\]
-The \(8\)'s for \(\mathrm{Spin}(7)\) are its spin module.
-The \(\SU(3)\) in the third row fixes \(i\) in \(G_2\).
-Retaining the first plane rotation gives
-\(\mathrm{Spin}(6)\cdot\mathrm{Spin}(2)\), the product modulo the
-simultaneous spin sign, with restrictions
-\[
- 8_v=6_0+1_1+1_{-1},\qquad
- 8_+=4_{1/2}+\bar4_{-1/2},\qquad
- 8_-=\bar4_{1/2}+4_{-1/2},
-\]
-where subscripts are the coefficients of \(t_1\).
-\end{proposition}
-\begin{proof}
-Fixing \(1\) restricts the torus to \(t_1=0\).
-The vector has weights \(0,0,\pm t_2,\pm t_3,\pm t_4\).
-Each half-spin module has all eight weights
-\(\frac12(\pm t_2\pm t_3\pm t_4)\), with the missing
-sign determined by its parity. The Weyl group for
-\(\mathrm{Spin}(7)\) acts transitively on these spin weights.
-The group fixing the plane pointwise is \(\mathrm{Spin}(6)\).
-Its root system is \(D_3=A_3\). Take \(4\) to have the four
-three-sign weights of positive sign product. The negative
-product gives its dual, and the exterior square gives the
-six weights \(\pm t_2,\pm t_3,\pm t_4\).
-Separating the \(s_1\) signs gives the restrictions with \(t_1\).
-
-Within the related triples, fixing \(1\) in both slots \(A,B\)
-implies \(A=C\) by the product with first input \(1\),
-then \(A=B\) by the product with second input \(1\).
-The intersection is diagonal \(G_2\).
-It is transitive on the imaginary unit sphere by extending
-an imaginary unit to an octonion basic triple, which also proves
-irreducibility of the real imaginary seven-space.
-Triality transports the vector \(\mathrm{Spin}(7)\) and its
-branchings to the two other embeddings obtained by fixing unit
-spinors. The vector \(\mathrm{Spin}(7)\) acts transitively on
-each spin sphere. For slot \(A\), the stabiliser of \(1\) is
-the diagonal \(G_2\), of dimension \(6+5+3=14\) from the
-successive choices of a basic triple. The compact orbit is
-open and closed in the seven-sphere because its dimension
-is \(21-14=7\). The same intersection argument works with
-\(C(1)=B(1)=1\).
-
-For the stabiliser of \(i\), let \(W=\langle1,i\rangle^\perp\)
-and \(Jx=xi\). Any automorphism fixing \(i\) is unitary on
-\((W,J)\). On \(W\) the form \(\varphi(x,y,z)=\langle xy,z\rangle\)
-is the real part of a complex volume form for the ordered
-\(J\)-complex orthonormal basis \(j,\ell,j\ell\).
-Its \(J\)-companions are \(-k,-i\ell,k\ell\).
-The multiplication formula gives \(1\) on the basis triple,
-\(-1\) when two entries are replaced by their companions,
-and \(0\) for one or three replacements or a triple with two
-entries from the same complex coordinate. This identifies the
-alternating forms. The products of vectors \(x,y\in W\)
-have real and \(i\)-components
-\(-\langle x,y\rangle\) and \(-\langle Jx,y\rangle\),
-using \(L_x^*=-L_x\). The \(W\)-component is recovered from
-\(\varphi\), and products involving \(1,i\) follow from \(J\)
-and \(ix=-xi\) on \(W\).
-Thus a unitary map on \(W\) extends to an automorphism fixing
-\(i\) exactly when it preserves \(\varphi\).
-A unitary map multiplies complex volume by its determinant,
-and preserving the real part forces determinant \(1\).
-This gives \(\SU(3)\), with weights
-\(z_1=-t_2,z_2=-t_3,z_3=t_4\), where \(z_1+z_2+z_3=0\).
-In every slot the weights are \(0,0,\pm z_1,\pm z_2,\pm z_3\).
-This is a maximal torus of \(G_2\) because a real orthogonal torus
-action in odd dimension has a nonzero fixed vector, so every
-torus of \(G_2\) lies in an imaginary unit stabiliser.
-These also give the weights for the \(G_2\) row.
-\end{proof}
-
-\begin{proposition}[The unitary stabiliser of the clock]\label{tr:clock}
-For \(J=R_i\) on the vector \(\mathbb O\), its centraliser in
-\(\SO(8)\) is \(\U(4)_J\).
-The determinant-one group lifts isomorphically to a subgroup
-of \(\mathrm{Spin}(8)\) whose restrictions are
-\[
- 8_v=4+\bar4,\qquad 8_+=1+6+1,\qquad 8_-=4+\bar4.
-\]
-For the identity-component lift of the central clock circle,
-parametrised by its vector complex phase, the refinements
-are \(4_1+\bar4_{-1}\), \(1_2+6_0+1_{-2}\), and
-\(4_{-1}+\bar4_1\), respectively.
-The centraliser of \(J\) in \(G_2\) is the \(\SU(3)\)
-acting on \((\mathbb O,J)\) by \(1+3\).
-For the left clock \(L_i\), the two half-spin rows and their
-central weights are interchanged. The pointwise plane stabiliser
-and the two special unitary clock subgroups represent the three
-triality positions of the block \(\mathrm{Spin}(6)\).
-\end{proposition}
-\begin{proof}
-An orthogonal map commuting with \(J\) is unitary for the
-resulting Hermitian structure, and every unitary map preserves
-real orientation. The lift exists and is injective because
-\(\SU(4)\) is simply connected and its vector action
-is faithful. The doubling formula gives \(R_i(a,b)=(ai,-bi)\).
-Write \((\delta_1,\ldots,\delta_4)=(t_1,-t_2,-t_3,t_4)\)
-for the unitary angular coordinates. The complex vector weights
-on \((\mathbb O,J)\) are \(\delta_j\).
-On the special unitary torus their sum is zero, and a spin weight
-with plus signs on the index set \(I\) restricts to
-\(\sum_{j\in I}\delta_j\). Parity is preserved by the two sign
-reversals. The even cardinalities \(0,2,4\) give the trivial,
-exterior-square and trivial modules. The odd cardinalities
-\(1,3\) give the fundamental and its dual. Adding the same
-phase to all four coordinates gives central weight \(|I|-2\).
-A full turn in all four planes lifts to \(1\), as each
-individual full turn lifts to \(-1\).
-Finally an automorphism \(g\) conjugates \(R_i\) to \(R_{g(i)}\),
-so it commutes with \(J\) exactly when it fixes \(i\).
-Proposition~\ref{tr:stab} gives its action.
-For \(L_i\), the doubling formula gives \(L_i(a,b)=(ia,bi)\),
-whose rotation signs \((1,1,1,-1)\) reverse spin parity.
-Each clock's determinant-one subgroup fixes a real two-plane
-pointwise in the half-spin module where the table has two
-trivial weights. By triality, the connected pointwise stabiliser
-of that plane is a copy of \(\mathrm{Spin}(6)\), and the lifted
-\(\SU(4)\) equals it by connectedness and equality of
-dimension.
-\end{proof}
-
-\begin{remark}[Using the quaternion and clock data together]\label{tr:joint}
-The connected joint stabiliser in the vector rotation group
-preserves the complex \(2+2\) splitting
-\((\mathbb H,J)\oplus(\mathbb H\ell,J)\). It is
-\(\U(2)\times\U(2)\), intersecting
-\(\SU(4)_J\) in \(\mathrm S(\U(2)\times\U(2))\).
-Let \(E,F\) be the complex blocks with weights
-\((\delta_1,\delta_2),(\delta_3,\delta_4)\), and let \(D\) be
-the determinant square-root character on the spin preimage.
-The restrictions of the three representations are
-\[
-\begin{split}
- &E+F+E^*+F^*,\\
- &D^{-1}\!\!\bigoplus_{r+s\ \mathrm{even}}\!\Lambda^rE\otimes\Lambda^sF,
- \qquad
- D^{-1}\!\!\bigoplus_{r+s\ \mathrm{odd}}\!\Lambda^rE\otimes\Lambda^sF,
- \quad 0\leq r,s\leq2 .
-\end{split}
-\]
-A generator of the fundamental group of \(\U(4)\)
-rotates one real plane through a full turn and lifts to \(-1\).
-Thus the spin cover over \(\U(4)\) is the determinant
-square-root cover, and \(D^{-1}\) supplies minus half the angular
-trace in Lemma~\ref{tr:spinweights}.
-Inside \(G_2\), simultaneous preservation of the quaternion
-and clock gives the smaller group in
-Proposition~\ref{tr:quaternion}.
-\end{remark}
-
-\subsection{The gauge obstruction and the larger spin group}\label{tr:gauge}
-
-\begin{proposition}[No colour--weak subgroup in \(\mathrm{Spin}(8)\)]\label{tr:obstruction}
-Every nonzero \(\mathfrak{su}(3)\) subalgebra of
-\(\mathfrak{spin}(8)\) has abelian Lie algebra centraliser of dimension at
-most two. The obstruction in Theorem~\ref{tr:main} is therefore
-independent of the choice of clock and of hypercharge normalization.
-\end{proposition}
-\begin{proof}
-The vector action identifies \(\mathfrak{spin}(8)\) with
-\(\mathfrak{so}(8)\). By the \(A_2\) dimension formula
-\(\dim(a,b)=(a+1)(b+1)(a+b+2)/2\), the nontrivial complex
-irreducibles of dimension at most \(8\) are \(3,\bar3,6,\bar6,8\)
-\cite[\S24]{tr:Humphreys}. Complex conjugation exchanges the
-members of each pair of dimensions three and six.
-Thus the complexification of the real vector is the adjoint
-\(8\) or \(3+\bar3+1+1\).
-In the first case the real commutant is scalar by complex
-Schur's lemma, so its skew part vanishes.
-In the second case the real space is
-\(\mathbb C^3_{\mathbb R}\oplus\mathbb R^2\), and the skew
-commutant is \(\mathfrak u(1)\oplus\mathfrak{so}(2)\).
-There are no off-diagonal intertwiners because one summand is
-trivial and the other has no fixed vectors.
-An injective commuting \(\mathfrak{su}(2)\) would lie in
-this abelian algebra. Finite central quotients leave the
-gauge Lie algebra unchanged. Pati--Salam also fails the
-rank test \(3+1+1>4\).
-The obstruction also excludes \(\mathfrak{su}(4)\oplus
-\mathfrak{su}(2)\), by restriction to its colour
-\(\mathfrak{su}(3)\).
-\end{proof}
-
-\begin{proposition}[Pati--Salam in \(\mathrm{Spin}(10)\)]\label{tr:spin10}
-For the oriented \(6+4\) block splitting of the real vector
-representation of \(\mathrm{Spin}(10)\), the connected lifted
-block group is
-\[
- \bigl(\SU(4)\times\SU(2)_L\times
-              \SU(2)_R\bigr)/\langle(-I,-I,-I)\rangle.
-\]
-Its restrictions of the vector, chiral spinors, and adjoint are
-\begin{align*}
- 10&=(6,1,1)+(1,2,2),\\
- 16_+&=(4,2,1)+(\bar4,1,2),\\
- 16_-&=(\bar4,2,1)+(4,1,2),\\
- 45&=(15,1,1)+(1,3,1)+(1,1,3)+(6,2,2).
-\end{align*}
-For the \(8+2\) block splitting the vector becomes
-\((8_v)_0+1_1+1_{-1}\), and the chiral spinors become
-\((8_+)_{\pm1/2}+(8_-)_{\mp1/2}\), with subscripts referring
-to the last plane rotation.
-\end{proposition}
-\begin{proof}
-The simultaneous central sign calculation in
-Proposition~\ref{tr:quaternion} applies to the \(6+4\) splitting.
-Use coordinates \(a_1,a_2,a_3,b_1,b_2\) on its planes.
-The vector weights are the signed coordinate weights.
-The spinor weights are
-\(\frac12(\sum s_i a_i+\sum r_j b_j)\) with total sign
-product specified by chirality. The commuting plane
-bivectors and sign flips are as in Lemma~\ref{tr:spinweights}.
-One may extend its Clifford matrices by tensoring the old
-generators with \(\sigma_3\) and adjoining
-\(I\otimes i\sigma_1,I\otimes i\sigma_2\), using Pauli matrices.
-The three-sign subsets give \(4,\bar4\), and the two-sign
-subsets give the doublets with weights
-\(\pm(b_1+b_2)/2,\pm(b_1-b_2)/2\).
-Matching parities give \(16_+\), and opposite parities give \(16_-\).
-The adjoint is the exterior square of the vector. Its zero weight
-has multiplicity five, with \(3,1,1\) from the three block
-adjoints. The nonzero weights are all \(\pm a_i\pm a_j\) for
-\(i<j\), \(\pm b_1\pm b_2\), and \(\pm a_i\pm b_j\).
-Leaving the last sign separate gives the \(8+2\) rule.
-The Pati--Salam embedding in conventional gauge notation
-is described in \cite[\S3]{BaezHuerta}.
-\end{proof}
-
-\begin{remark}[Identification with Hypothesis G]\label{tr:matching}
-In Hypothesis~G, \(V_2=(V,J_T)\otimes_{\mathbb C}(V,J_T)\)
-is the closed pair of elementary readings, of complex dimension four.
-An elementary kernel (the \(V_1\) type) and the third kernel \(V_3\)
-each have real dimension four. Proposition~\ref{tr:triples}
-gives an equivariant bilinear product from slots \(B,C\) to \(A\)
-and an invariant trilinear coupling of all three. These restrict
-to the quaternion multiplication and its inner-product tensor on
-the three copies of \(\mathbb H\) under the diagonal quaternion
-stabiliser. The full triality slots all have real dimension eight.
-The real fours in \eqref{tr:branch4} also fail to reproduce
-complex tensor product by multiplication. In fact there are no
-complex structures \(J_B,J_C,J_A\) on the three copies of
-\(\mathbb H\) that make this product complex bilinear.
-Complex linearity would require
-\(J_A(xy)=(J_B x)y=x(J_C y)\). Evaluating at \(x=1\) and
-\(y=1\) gives \(J_A=L_{J_B(1)}=R_{J_C(1)}\).
-The two parameters agree by evaluation at \(1\), and their
-common value lies in the real centre of \(\mathbb H\).
-Such a scalar operator cannot square to \(-I\).
-For the chosen right clock, \((1i)j=k\) whereas \((1j)i=-k\).
-Triality permutes the three tensor roles. G(i) specifies different
-groups for \(V_2\) and \(V_3\).
-
-The \(l x r^{-1}\) action on \(\mathbb H\) in \eqref{tr:branch4}
-realises the bidoublet of Proposition~\ref{prop:parity}(ii).
-The real commutant of both transports is scalar. A map commuting
-with all left multiplications is right multiplication by its value
-at \(1\), and commuting with the right multiplications forces that
-quaternion to be real. A clock supplies a complex structure for
-a one-sided doublet as in Proposition~\ref{prop:parity}(iii).
-Separately, identify \((\mathbb O,J)\) of Proposition~\ref{tr:clock}
-unitarily with \(V_2\) by mapping \(1\) to \(\omega\).
-The unit vector stabiliser in \(\SU(4)_J\) gives the
-\(1+3\) colour decomposition of Proposition~\ref{prop:pairsu3}.
-The ray stabiliser has a traceless central generator
-\(B-L\), with eigenvalues \(-1\) on the line and \(1/3\)
-on the triplet in that proposition's normalization.
-The joint stabiliser in Remark~\ref{tr:joint} preserves two
-complex two-planes, excluding the full \(\SU(4)_J\).
-Proposition~\ref{tr:obstruction} excludes alternative placements
-of the gauge subgroup as well.
-
-The complex Weyl module \(16_+\) of \(\mathrm{Spin}(10)\) contains
-\(S_L\oplus S_R^c\), with charge conjugation sending the right
-\(4\) to \(\bar4\) and the right doublet to its equivalent dual.
-Use \(Y=T_{3R}+(B-L)/2\) on physical left and right modules and
-reverse the charges on the conjugates, as in Theorem~\ref{thm:sm}.
-On the all-left multiplets
-\((Q_L,u_R^c,d_R^c,L_L,e_R^c,\nu_R^c)\) this gives
-\[
- Y=(1/6,-2/3,1/3,-1/2,1,0).
-\]
-The two right weights are \(\pm1/2\). On the real bidoublet
-\(Y=T_{3R}\) has complex weights \(\pm1/2\), each twice.
-An independent scalar valued in the full \(16_-\) of a
-\(\mathrm{Spin}(10)\) theory supplies a \((4,1,2)\) component
-after restriction to the Pati--Salam group.
-Taking a neutral expectation value \(\Xi=\omega\otimes v\)
-is the additional input G(iv). The stabiliser theorem
-\ref{thm:sm} then gives the faithful Standard Model quotient
-by \(\mathbb Z_6\). The eight real dimensions of a triality
-slot and the eight complex components of \(S_L\) or \(S_R\)
-count different objects.
-\end{remark}
-
-\subsection{Couplings, multiplicities and dynamics}\label{tr:boundary}
-
-\begin{remark}[Common trace as a matching input]\label{tr:traceinput}
-G(v) assumes a common positive trace coefficient at a matching scale.
-A direct-product gauge model with a specified Weyl representation can
-likewise assume \(g_A^{-2}=\kappa_{\mathrm{arc}}\operatorname{tr}(X_A^2)\)
-with one positive \(\kappa_{\mathrm{arc}}\) and the Hermitian generators in
-the normalization of Theorem~\ref{thm:sm}. Positive linear combinations
-of the invariant positive forms on the separate gauge factors give
-invariant kinetic forms with independent coefficients. A clock does
-not prescribe the common coefficient or the matching scale.
-\end{remark}
-
-\begin{proposition}[Trace and colour count with prescribed matter]\label{tr:traces}
-Use the one-generation Weyl multiplets of Remark~\ref{tr:matching}
-with \(N_c\geq2\) colours. Fix \(Y_L=-1/2\), a neutral neutrino,
-and vectorlike electric charges \(Q_u=Y_Q+1/2,\ Q_d=Y_Q-1/2\).
-Then \(\operatorname{tr}(T_c^2)=2\) and
-\(\operatorname{tr}(T_3^2)=(N_c+1)/2\) for fundamental-normalized
-colour and weak generators. Under the common trace input, equality of
-colour and weak couplings is equivalent to \(N_c=3\).
-The mixed weak anomaly condition \(N_cY_Q=1/2\) gives
-\(\sin^2\theta_W=N_c/[2(N_c+1)]\). Fixing the quark charges
-to \(2/3,-1/3\) gives \(9(N_c+1)/[4(9+5N_c)]\).
-As rational functions on positive \(N_c\), the ratios intersect
-only at \(N_c=3\), with common value \(3/8\).
-\end{proposition}
-\begin{proof}
-Two fundamentals and two duals give colour trace \((2+1+1)/2=2\).
-Each of the \(N_c+1\) weak doublets contributes \(1/2\), so
-\(g_c^2/g_L^2=(N_c+1)/4\). The mixed weak anomaly is proportional
-to \(N_cY_Q+Y_L\). The trace \(\operatorname{tr}(YT_3)=0\)
-since \(Y\) is constant on each doublet and \(T_3\) vanishes on
-singlets. With \(Q=T_3+Y\) the trace normalization gives
-\(\sin^2\theta_W=\operatorname{tr}(T_3^2)/\operatorname{tr}(Q^2)\).
-Counting charged states gives
-\(\operatorname{tr}(Q^2)=2[1+N_c(Q_u^2+Q_d^2)]\).
-The quark charge squares sum to \((N_c^2+1)/(2N_c^2)\) on the
-anomaly branch and \(5/9\) on the fixed-charge branch. The difference
-of the resulting ratios is
-\[
- \frac{(N_c-3)(N_c+3)}{4(N_c+1)(9+5N_c)}.
-\]
-The denominator and \(N_c+3\) are positive. Thus the intersection
-tests the same condition as the mixed anomaly at \(Y_Q=1/6\).
-At \(N_c=3\) the individual colour, weak and hypercharge traces are
-\(2,2,10/3\), as in Proposition~\ref{prop:angle38}.
-\end{proof}
-
-\begin{remark}[A scale test of the matching input]\label{tr:running}
-Use the one-loop inputs of Remark~\ref{rem:scales} with Standard Model
-content and no thresholds. Write \(u_i=\alpha_i^{-1}(M_Z)\),
-\(a=\ln(\mu/M_Z)/(2\pi)\), and \(b=(41/6,-19/6,-7)\) in the
-order \(Y,2,3\). The simultaneous matching equations require both
-\[
- a=\frac{u_Y-\tfrac53u_2}{b_Y-\tfrac53 b_2},
- \qquad
- a=\frac{u_2-u_3}{b_2-b_3}.
-\]
-These follow by equating the appropriate inverse couplings
-\(u_i-b_i a\). With the central inputs they give \(a\) close to
-\(4.05\) and \(5.51\), respectively. Thus the one-loop matching fails.
-The electroweak crossing alone uses measured electroweak couplings to
-fix its scale. Reverse running from that crossing therefore reproduces
-the input. In the direct-product model, rescaling the inverse
-hypercharge strength by \(\lambda>0\) changes the angle ratio
-\(u_2/(u_Y+u_2)\) to \(u_2/(\lambda u_Y+u_2)\) at that scale.
-\end{remark}
-
-\begin{proposition}[Anomaly conditions and generation count]\label{tr:anomaly}
-For one all-left generation with \(N_c\geq2\), write \((q,u,d,l,e)\)
-for the charges on the five multiplets of Remark~\ref{tr:matching}
-excluding the sterile field. The four mixed and abelian local
-anomaly equations have solution set
-\[
- d=-2q-u,\quad l=-N_cq,\quad e=2N_cq,\qquad
- q=0\ \text{or}\ u+q=\pm N_cq.
-\]
-If the extra singlet carries charge \(n\), replace \(e=2N_cq\)
-by \(e+n=2N_cq\) and the last condition by \(q=0\) or
-\((e-n)/2=\pm(u+q)\). These conditions together with the usual
-\(\SU(2)\) global doublet parity allow any positive
-number of identical Standard Model generations.
-\end{proposition}
-\begin{proof}
-The colour-squared, weak-squared and mixed gravitational
-conditions are \(2q+u+d=0\), \(N_cq+l=0\), and
-\(2N_cq+N_c(u+d)+2l+e+n=0\). Set \(n=0\) in the first case.
-The cubic coefficient is \(2N_cq^3+N_c(u^3+d^3)+2l^3+e^3+n^3\).
-With \(t=u+q,\ w=(e-n)/2\), substitute
-\(u=-q+t,\ d=-q-t,\ l=-N_cq,\ e=N_cq+w,\ n=N_cq-w\).
-Expansion gives \(6N_cq(w^2-t^2)\).
-Thus the five-field solution consists of three lines and the
-six-field solution consists of three planes.
-The choice \(q=1/N_c,\ t=w=0\) gives the continuous \(B-L\)
-direction of the six-field solution. A gauge-invariant Majorana
-mass on the singlet requires \(2n=0\), giving the slice above.
-Pure colour cubic terms cancel between fundamentals and duals,
-and the weak cubic expression vanishes for doublets.
-The hypercharges in Remark~\ref{tr:matching} give \(t=-1/2\)
-and \(w=1/2\) and satisfy the linear equations at \(N_c=3\).
-The four weak doublets give even parity \cite{ub:witten}.
-Direct sums add local anomaly coefficients and the doublet count.
-\end{proof}
-
-\begin{remark}[relation to the unification section]\label{rem:trunif}
-The scale test of Remark~\ref{tr:running} assumes Standard Model content and no thresholds; its two logarithms, $a\simeq4.05$ and $5.51$, are the
-electroweak crossing $1.03\times10^{13}$\,GeV and the strong--weak meeting $9.7\times10^{16}$\,GeV of Remark~\ref{rem:scales}.
-Section~\ref{sec:unification} assumes an intermediate spectrum (Hypothesis~Ps) and fits two scales; the two
-statements concern different inputs and agree.
-\end{remark}
-
-\begin{remark}[What the count of three measures]\label{tr:multiplicity}
-A generation requires a chiral matter representation. The direct
-sums in Proposition~\ref{tr:anomaly} show that anomaly cancellation
-places no upper bound on the generation count. Cavity dimension
-does not bound mode number either. Dirichlet functions on a cube
-of side \(L>0\) given by products of sines have eigenvalues
-\(\pi^2(n_1^2+n_2^2+n_3^2)/L^2\) for positive integers \(n_j\),
-by differentiating twice in each variable. Taking \((n,1,1)\)
-gives an unbounded sequence. Scaling an allowed Yukawa coefficient
-preserves gauge invariance and scales the corresponding mass
-matrix at fixed vacuum. With a nonzero mass matrix the resulting
-spectra differ, since singular values are invariant under unitary
-basis changes.
-
-Remark~\ref{rem:hopf} concerns a separate sequence of qubit
-composites, of complex dimension \(2^N\). For \(N=1,2,3\)
-the unit spheres are \(S^3,S^7,S^{15}\), the total spaces of
-the complex, quaternionic and octonionic Hopf fibrations.
-The Hopf-invariant-one restriction \cite{Adams} bounds this
-sequence of fibrations by \(N\leq3\).
-Proposition~\ref{prop:symmetric} singles out \(N=2,3\) for
-symmetric origin-free generators in its stated range.
-Selecting the last Hopf case would require another criterion
-and a reason for the one-sided third module.
-\end{remark}
-
-\begin{remark}[status of Hypothesis~G]\label{rem:trstatus}
-The ``three'' of Hypothesis~G has an algebraic source: the related-triples group of the octonions has exactly
-three real irreducible eight-dimensional modules, permuted by triality (Theorem~\ref{tr:main}), and the
-bidoublet and the colour four-space are realised separately in the vector module.  The simultaneous
-identification of the three modules with the field content and gauge action of G is refuted
-(Proposition~\ref{tr:obstruction}): a common colour--weak Lie algebra would lie in the vector $\mathfrak{so}(8)$, where
-the centraliser of any $\mathfrak{su}(3)$ is abelian of dimension at most two.  Triality does not count generations:
-one conventional generation passes the anomaly tests (Proposition~\ref{tr:anomaly}).  Hypothesis~G therefore
-remains an input; the further inputs below are hypotheses, and its derivation is a programme.
-\end{remark}
-
-\smallskip\noindent\textbf{Hypothesis Sb (separate bundles, scalar bridge, common normalisation).}  Separate colour, weak and
-hypercharge bundles over the comparison complex with product-group holonomies, a covariant scalar map
-between left and right Weyl bundles, and the common trace coefficient of Remark~\ref{tr:traceinput}.
-
-\begin{remark}[Comparison-field hypotheses and research programme]\label{tr:programme}
-One can posit separate colour, weak and hypercharge bundles over
-a spatial comparison complex, with product-group link holonomies
-and a covariant scalar map between left and right Weyl bundles.
-A universal comparison frequency and the common trace of
-Remark~\ref{tr:traceinput} are additional inputs.
-If the gauge algebra consists of the separate factors, its
-connection has no off-diagonal leptoquark gauge generators.
-Other baryon-violating operators and topological defects depend
-on the field content and symmetry breaking. The
-\(\mathrm{Spin}(10)\) extension includes the \((6,2,2)\)
-generators of Proposition~\ref{tr:spin10} before breaking.
-
-A derivation from comparison data would need to construct the
-gauge and matter bundles, select a scalar representation and
-neutral vacuum, and specify the kinetic form, scale and thresholds.
-A flavour mechanism would need to fix chiral multiplicities and
-produce a Yukawa spectrum. Relating comparison phases to
-gravitational curvature would require a covariant action or a
-controlled continuum limit. Two algebraic ingredients are
-\(Uf-fU=(\widetilde f-f)U\) if \(Uf=\widetilde fU\), by
-distribution, and \(R^2=-I\) if \(R^*=-R\), \(RR^*=I\),
-by substitution.
-\end{remark}
-
-\subsection{Relation to division-algebra models}\label{tr:literature}
-
-Baez's survey describes normed triality, its three eight-dimensional
-modules, and \(G_2\) via octonion basic triples
-\cite[\S\S2.4, 4.1]{Baez}; it is an exposition and proves no Standard Model statement. The calculations here compare the
-reductions relevant to G and use the small real representations
-of colour to give an obstruction for any colour embedding.
-G\"unaydin and G\"ursey show, in a split octonion basis, that the subgroup of $G_2$ fixing an imaginary unit
-is $\SU(3)$, under which the octonions decompose as $1+1+3+\bar3$, and use this for coloured quark states
-\cite{tr:GG}; Proposition~\ref{tr:stab} recovers this decomposition. Dixon builds a spinor space on
-\(\mathbb C\otimes\mathbb H\otimes\mathbb O\) whose decomposition reproduces the representation content of one
-generation \cite{tr:Dixon}.
-Furey obtains the colour and electric-charge multiplets of one generation from
-minimal left ideals of the multiplication operator algebra of
-the complex octonions, with a number operator whose third is the electric charge
-\cite{tr:FureyCharge}. These constructions change the carrier on
-which the symmetry acts.
-
-Todorov and Dubois-Violette show that $\mathrm S(\U(2)\times\U(3))$ is the intersection of two maximal subgroups of
-$F_4$, the automorphism group of the exceptional Jordan algebra, singled out by the splitting
-\(\mathbb O=\mathbb C\oplus\mathbb C^3\) \cite{tr:TodorovDV}.  Boyle and Farnsworth give a Jordan algebra whose
-model is the Standard Model extended by three right-handed neutrinos, a complex scalar and a $\U(1)_{B-L}$ gauge
-field, and a related Jordan formulation of Pati--Salam \cite{tr:BoyleFarnsworth}. Pati and Salam propose
-lepton number as the fourth colour \cite{PatiSalam}, and
-Baez and Huerta describe the spin-group embedding and global
-forms \cite[\S3]{BaezHuerta}.
-The identification with Hypothesis~G is partial. The count of
-three is forced for irreducible eight-dimensional modules of
-the related-triples group. The full gauge hypothesis requires
-an enlarged representation or an independent gauge action.
 
 %=====================================================================================
 \section{Unification scales, a tick budget for time dilation, and entanglement gravity on the space of caps}\label{sec:unification}
@@ -7206,6 +6383,1669 @@ does not supply; the cap geometry and the invariant de~Sitter background it does
 \end{remark}
 
 %=====================================================================================
+\smallskip\noindent\emph{Three examinations.}  The next three sections examine the inputs that Hypothesis~G and
+the coupling table leave open: where the three structures could come from (triality), where three
+generations could come from (index, McKay, triality and empirical counts), and where the coupling ratios
+could come from (a connection metric and a fermion trace).  Each separates what is proved from what is
+refuted and from what remains an input.
+
+\section{Why three structures: $\mathrm{Spin}(8)$ triality and the octonionic solution}\label{sec:triality}
+
+Can the three comparison structures in Hypothesis~G be the three
+eight-dimensional representations of octonionic triality? A quaternionic
+subalgebra gives a real bidoublet of the required type, and an octonionic
+clock singles out a complex four-space with the same colour stabiliser as
+the closed pair. The two identifications cannot be made into a common gauge
+action inside \(\mathrm{Spin}(8)\). In fact, colour and weak isospin
+cannot even commute there as nontrivial connected groups. The count of
+three applies to the triality orbit of modules. The tensor-product
+assignment in Hypothesis~G and the chiral hypercharges require additional
+structure. The standard \(\mathrm{Spin}(10)\) embedding makes the
+additional representation content explicit.
+
+\begin{theorem}[Scope of the triality identification]\label{tr:main}
+Take the standard positive-definite octonion product and its group of
+orthogonal related triples with determinant one in each slot. The vector
+and the two half-spin representations exhaust its eight-dimensional
+irreducible real representations. Their isomorphism classes form one orbit
+under the outer automorphism group \(S_3\). For a quaternionic subalgebra and a right multiplication clock generated
+by a unit imaginary quaternion in it, the vector module realises separately the
+bidoublet of Proposition~\ref{prop:parity}(ii) and the complex
+four-space model of Proposition~\ref{prop:pairsu3}. No Lie algebra
+injection
+\[
+ \mathfrak{su}(3)\oplus\mathfrak{su}(2)\longrightarrow\mathfrak{spin}(8)
+\]
+exists. In particular, neither the Pati--Salam nor the Standard Model gauge
+action of Theorem~\ref{thm:sm} is obtained as a gauge subgroup acting on
+these three modules.
+\end{theorem}
+The algebra and weights below establish the count and the two
+identifications. Proposition~\ref{tr:obstruction} proves the obstruction.
+
+\subsection{The multiplication tensor}\label{tr:algebra}
+
+Paper~I gives roundness without the third heap identity
+\cite[Thm.~5.18, Cor.~5.19]{PaperI}, with the dimension count from Hurwitz's theorem \cite[Prop.~5.13]{PaperI} and
+rigidity on $S^3$ \cite[Thm.~5.15]{PaperI}; the list $S^1,S^3,S^7$ is a classification, not a forced tower of
+encodings \cite[Rem.~5C.5]{PaperI}. Its Propositions~5.16
+and~5.17 distinguish the
+family of ternary operations on \(S^7\) from the operation
+\(T(a,b,x)=(a\bar b)x\) selected by \((\mathrm C_o)\).
+We use the positive-definite product of the selected model at the unit.
+The construction applies to an individual base product after choosing a
+base point and an octonion isomorphism. Metric roundness gives the rotation
+group \(\SO(8)\) of the sphere. The related-triples group
+preserves multiplication with separate actions on its three slots.
+An automorphism of the product uses the same action in all slots.
+Theorem~\ref{thm:main} concerns the associative setting.
+
+\begin{lemma}[Quaternionic coordinates and Moufang identities]\label{tr:oct}
+Write \(\mathbb O=\mathbb H\oplus\mathbb H\ell\) and use coordinates
+\[
+ (a,b)(c,d)=(ac-\bar d b,\,da+b\bar c),\qquad
+ \overline{(a,b)}=(\bar a,-b),\qquad |(a,b)|^2=|a|^2+|b|^2 .
+\]
+Conjugation reverses products and the norm is multiplicative. The
+associator \([x,y,z]=(xy)z-x(yz)\) is alternating. The following
+Moufang identities hold:
+\begin{align*}
+ (xy)(zx)&=(x(yz))x,\\
+ x(y(xz))&=((xy)x)z,\\
+ ((zx)y)x&=z(x(yx)).
+\end{align*}
+The unit sphere is a Moufang loop. Any two elements generate an
+associative subalgebra.
+\end{lemma}
+\begin{proof}
+Conjugation follows by taking the conjugate of each quaternionic
+coordinate. In the norm of the product the two cross terms cancel
+because \(\operatorname{Re}(ac\bar b d)=\operatorname{Re}(da c\bar b)\)
+in \(\mathbb H\). The four remaining squared terms give
+\((|a|^2+|b|^2)(|c|^2+|d|^2)\).
+For \(x=(a,b)\), its square is \(2\operatorname{Re}(a)x-|x|^2 1\).
+Writing \(L_x y=xy\), expansion of \(x(x(c,d))\) gives
+\[
+ (a^2c-|b|^2c-2\operatorname{Re}(a)\bar d b,\,
+ da^2-|b|^2d+2\operatorname{Re}(a)b\bar c).
+\]
+This is \(x^2(c,d)\). Conjugation gives right alternativity, and
+polarising both gives alternation. The three identities and the
+two-generator assertion follow from the Moufang identities and
+Artin's theorem for alternative algebras \cite[Chapter~III, \S1]{tr:Schafer}.
+The inverse laws follow from
+\(L_{\bar x}L_x=|x|^2 I\) and its right-handed version, since
+\(\bar x\in\operatorname{span}_{\mathbb R}(1,x)\).
+\end{proof}
+
+\begin{example}[The Fano table and the associator]\label{tr:fano}
+The imaginary basis
+\[
+ (f_1,\ldots,f_7)=(i,j,\ell,k,j\ell,-k\ell,i\ell)
+\]
+has oriented lines
+\((124),(235),(346),(457),(561),(672),(713)\), where an oriented
+triple means \(f_a f_b=f_c\) and its cyclic rotations. This follows
+by substituting the basis in Lemma~\ref{tr:oct}, with reversed order
+giving the opposite sign. The \(7\) lines among the
+\(\binom{7}{3}=35\) unordered triples give quaternionic subalgebras
+and zero associators. For each of the other \(28\), the third basis
+unit is perpendicular to the quaternionic algebra spanned by the
+first two and their product. In coordinates relative to that
+subalgebra, \([i,j,\ell]=2k\ell\), so each has associator norm \(2\).
+The choice of a perpendicular unit gives the same Cayley--Dickson
+formula by the octonion basic-triple construction \cite[\S4.1]{Baez}.
+For the displayed basis,
+\([f_1,f_2,f_3]=-2f_6\),
+\([f_1,f_2,f_5]=2f_7\), and
+\([f_1,f_2,f_6]=2f_3\).
+The seven subalgebras are attached to this basis. For example,
+\(i\) and \(\cos\theta\,j+\sin\theta\,\ell\) generate distinct
+quaternionic subalgebras for \(0\leq\theta<\pi\), as their intersections
+with \(\operatorname{span}_{\mathbb R}(j,\ell)\) are distinct lines.
+A further Cayley--Dickson double gives a concrete limit to this
+construction. With the same doubling formula over \(\mathbb O\),
+\((f_1,f_2)(f_3,f_6)=0\) and the reverse product is zero.
+The two coordinates are \((f_7-f_7,f_5-f_5)\), and the reverse
+calculation gives \((-f_7+f_7,f_5-f_5)\).
+The same formula gives two further pairs with zero products in both
+orders, \((f_1,f_3),(f_2,-f_6)\) and \((f_1,f_4),(f_3,f_5)\).
+Each factor in these pairs has squared norm \(2\).
+\end{example}
+
+\begin{proposition}[Related triples and outer automorphisms]\label{tr:triples}
+The group
+\[
+ \{(A,B,C)\in\SO(\mathbb O)^3:
+                    A(xy)=B(x)C(y)\text{ for all }x,y\in\mathbb O\}
+\]
+is \(\mathrm{Spin}(8)\), with the vector representation in slot \(B\)
+and the two real half-spin representations in \(A,C\).
+The three maps to \(\SO(8)\) are double covers with distinct
+kernels. In para-octonion coordinates an action of \(S_3\) permutes
+the three representations, giving all outer automorphism classes.
+The diagonal subgroup is \(G_2=\operatorname{Aut}(\mathbb O)\).
+\end{proposition}
+\begin{proof}
+On \(\mathbb O\oplus\mathbb O\), put
+\[
+ c(x)=\begin{pmatrix}0&L_x\\-L_{\bar x}&0\end{pmatrix}.
+\]
+The inverse identity gives \(c(x)^2=-|x|^2I\).
+Polarisation gives the Clifford relations. The inverse identity
+and norm multiplication give \(L_x^*=L_{\bar x}\), including
+\(x=0\), and hence \(c(x)^*=-c(x)\).
+For a product \(g\) of an even number of unit Clifford vectors,
+conjugation by \(g\) sends \(c(x)\) to \(c(Bx)\) for its standard
+vector action \(B\). Writing the diagonal blocks of \(g\) as \(A,C\),
+the upper off-diagonal equality is \(A L_x=L_{Bx}C\).
+The blocks are in \(\SO(8)\) by connectedness.
+
+To exhaust the triples, lift \(B\) by the spin double cover
+and divide by the lift. If \(B=I\), then \(x=1\) gives \(A=C\),
+and \(y=1\) gives \(A(x)=xa\), where \(a=A(1)\).
+Thus \([x,y,a]=0\) for all \(x,y\). If \(a=(b,d)\) then
+\([i,j,a]=(0,2dk)\), so \(d=0\). For \(h=i,j\),
+\([h,\ell,a]=(0,h\bar b-\bar b h)\) then forces \(b\) to be real.
+Since \(a\) is a unit, the two possibilities are precisely the
+images of \(1\) and \(-1\). The latter acts by \(-I\) in the
+two Clifford blocks, which also proves injectivity.
+This is the normed triality construction with a specified
+vector slot \cite[\S2.4]{Baez}.
+
+Put \(Kx=\bar x\) and use
+\((P,Q,R)=(KBK,KCK,A)\) on the three variables of
+\(\tau(x,y,z)=\langle\bar x\bar y,z\rangle\).
+The related-triples equation is equivalent to preservation of
+\(\tau\). Its real-part expression
+\(\operatorname{Re}((\bar x\bar y)\bar z)\) is cyclic and is
+invariant under \((x,y,z)\mapsto(Ky,Kx,Kz)\).
+Indeed \(\operatorname{Re}((xy)z)=\operatorname{Re}(x(yz))\)
+follows from \(L_x^*=L_{\bar x}\), conjugation and the inner
+product with \(1\). Cyclic invariance also uses
+\(\operatorname{Re}(xy)=\operatorname{Re}(yx)\). Conjugating the
+product reverses the order. Thus cyclic permutation and
+transposition with simultaneous conjugation give automorphisms
+of orders \(3\) and \(2\) satisfying the \(S_3\) relations.
+The four sign triples with \(A=BC\) are central.
+The vector projection has order-two kernel, and the permutation
+automorphisms give the other two kernels and covers. The action
+on the three kernels is faithful, and inner automorphisms fix them.
+The diagram theorem bounds the outer automorphism group of the
+simply connected compact group of type \(D_4\) by the symmetry
+group of its three end nodes \cite[\S2.4]{Baez}.
+A diagonal triple is an orthogonal algebra automorphism. Every
+algebra automorphism is isometric by the quadratic equation for
+\(x\notin\mathbb R\), and preserves orientation by connectedness
+of the space of octonion basic triples \cite[\S4.1]{Baez}.
+\end{proof}
+
+\subsection{Quaternionic splitting and restricted weights}\label{tr:weights}
+
+Use the ordered basis \(e_0,\ldots,e_7=(1,i,j,k,\ell,i\ell,j\ell,k\ell)\).
+Let \(t_1,t_2,t_3,t_4\) be the angular coordinates for the real
+planes \((e_0,e_1),(e_2,e_3),(e_4,e_5),(e_6,e_7)\).
+A weight \(\lambda\) means the torus acts by \(e^{i\lambda}\).
+Restrictions below refer to complexifications of the real modules
+unless specified otherwise.
+
+\begin{lemma}[Spin weights and the count]\label{tr:spinweights}
+The weights of \(8_v\) are \(\pm t_a\) for \(1\leq a\leq4\).
+The weights of \(8_\pm\) are
+\[
+ \tfrac12\sum_{a=1}^{4}s_a t_a,\qquad s_a\in\{1,-1\},\qquad
+ \prod_{a=1}^{4}s_a=\pm1.
+\]
+Every weight in each module has multiplicity one. Here \(8_+\)
+is slot \(C\) and \(8_-\) is slot \(A\) in the given orientation.
+\end{lemma}
+\begin{proof}
+Write \(c_j=c(e_j)\). The infinitesimal lift of the rotation
+sending \(e_j\) towards \(e_k\) is \(c_jc_k/2\), because its commutator
+with \(c_j\) is \(c_k\), with \(c_k\) is \(-c_j\), and with the
+remaining generators is zero. The four plane bivectors square to
+\(-I\) and commute. Conjugation by a single \(c_j\) reverses the sign
+for its own plane and preserves the other signs. On the full complex
+spin space all \(16\) sign choices therefore occur once.
+The volume element \(c_0\cdots c_7\) acts as \((-I,I)\) in the
+two blocks. The upper block is \(-L_iL_jL_kL_\ell L_{i\ell}L_{j\ell}L_{k\ell}\).
+The seven-matrix product sends \(1\) to \(1\) by the multiplication
+table and commutes with each imaginary \(L_{e_j}\), so is the identity
+on the basis. The lower block has the opposite sign.
+The volume eigenvalue on a weight is \(\prod_a s_a\).
+Each weight set is one Weyl orbit under permutations and even sign
+changes, so any nonzero invariant subspace contains all its weights.
+
+For exhaustion use the simple roots \(t_1-t_2,t_2-t_3,t_3-t_4,t_3+t_4\)
+of \(D_4\). The three modules realise the three end fundamental
+weights. The middle fundamental weight \(t_1+t_2\) is the highest
+root and gives the \(28\)-dimensional adjoint representation.
+By the Weyl dimension formula adding a nonzero dominant weight
+strictly increases dimension, since each positive coroot pairing
+is nondecreasing and some simple coroot pairing increases.
+Therefore the three displayed modules are the only nontrivial
+complex irreducibles of dimension at most \(8\). A nontrivial real
+irreducible of real dimension \(8\) then has one of these as its
+complexification. The three have real forms by construction.
+Two real forms of a complex irreducible are equivalent because
+their equivariant conjugations differ by a scalar of unit modulus,
+and conjugation by a scalar can make them equal. We use the
+highest-weight and dimension theorems \cite[\S\S21, 24]{tr:Humphreys}.
+\end{proof}
+
+\begin{proposition}[The two stabilisers of a quaternionic subalgebra]\label{tr:quaternion}
+For the vector action the inverse image of the connected oriented
+block stabiliser of \(\mathbb H\oplus\mathbb H\ell\) is
+\[
+ K_{\mathbb H}=
+ \bigl(\mathrm{Spin}(4)\times\mathrm{Spin}(4)\bigr)/
+                 \langle(-1,-1)\rangle .
+\]
+Order the four \(\SU(2)\) factors of the covering group
+as left and right for \(\mathbb H\), then left and right for
+\(\mathbb H\ell\). Their restrictions are
+\begin{align}
+ 8_v&=(2,2,1,1)+(1,1,2,2),\nonumber\\
+ 8_+&=(2,1,2,1)+(1,2,1,2),\label{tr:branch4}\\
+ 8_-&=(2,1,1,2)+(1,2,2,1).\nonumber
+\end{align}
+Each summand has a real form of dimension four. The stabiliser of
+\(\mathbb H\) in diagonal \(G_2\) is
+\((\SU(2)_p\times\SU(2)_q)/\langle(-1,-1)\rangle\)
+with action
+\[
+ (a,b)\longmapsto(pap^{-1},qbp^{-1}).
+\]
+In all three modules its branching is \((1,1)+(3,1)+(2,2)\).
+Fixing the clock unit \(i\) inside \(\mathbb H\) restricts \(p\)
+to its circle centraliser and leaves \(q\) free. In the covering
+\(\U(1)_p\times\SU(2)_q\) notation the restriction
+is \(1_0+1_0+1_2+1_{-2}+2_1+2_{-1}\).
+\end{proposition}
+\begin{proof}
+Even Clifford products in the two orthogonal blocks commute.
+Their product maps onto the connected block group and contains
+the kernel of the spin double cover. An element of the product
+is trivial precisely when both vector actions are trivial and
+the two spin signs multiply to \(1\). This gives the simultaneous
+central quotient. Dropping the orientation on the blocks gives
+\(\mathrm S(\mathrm O(4)\times\mathrm O(4))\) in the vector rotation
+group, with an additional component.
+
+Put \(p_1=(t_1+t_2)/2,\ p_2=(t_1-t_2)/2,\ 
+p_3=(t_3+t_4)/2,\ p_4=(t_3-t_4)/2\).
+A doublet in factor \(j\) has weights \(\pm p_j\).
+The vector weights are all sums \(\pm p_1\pm p_2\) and
+\(\pm p_3\pm p_4\). The half-spin weights pair the equal-sign
+or opposite-sign choices in the two blocks, giving
+\eqref{tr:branch4}. These are left and right factors because
+left multiplication by \(e^{i\alpha}\) rotates the two planes
+in the same direction, and right multiplication rotates them in
+opposite directions. The tensor product of two quaternionic
+doublets has an invariant conjugation, given by the tensor product
+of their equivariant antilinear maps squaring to \(-I\).
+The resulting real module is \(x\mapsto lxr^{-1}\)
+on \(\mathbb H\), for the indicated two factors.
+
+An automorphism preserving \(\mathbb H\) restricts to conjugation
+by \(p\) and sends \(\ell\) to a unit of \(\mathbb H\ell\).
+The displayed formula preserves multiplication by substitution
+and accounts for every such image. Its kernel has \(p=q=\pm1\).
+Its four factors in the vector block action are \((p,p,q,p)\),
+and diagonal \(G_2\) acts identically in every slot.
+Conjugation by \(p=e^{i\alpha}\) on \(\mathbb H\) gives one
+scalar plus the triplet with weights \(0,\pm2\alpha\).
+The \(\mathbb H\ell\) weights are \(\pm\alpha\pm\beta\)
+for \(q=e^{i\beta}\). This proves both restrictions.
+\end{proof}
+
+\begin{proposition}[Spin, automorphism and colour subgroups]\label{tr:stab}
+For \(\mathrm{Spin}(7)\) fixing \(1\) in \(8_v\) and
+\(\mathrm{Spin}(6)\) fixing \(1,i\) pointwise in \(8_v\), the restrictions are
+\[
+\begin{array}{c|ccc}
+ &8_v&8_+&8_-\\ \hline
+ \mathrm{Spin}(7)&1+7&8&8\\
+ G_2&1+7&1+7&1+7\\
+ \SU(3)\subset G_2&1+1+3+\bar3&1+1+3+\bar3&1+1+3+\bar3\\
+ \mathrm{Spin}(6)\cong\SU(4)&6+1+1&4+\bar4&4+\bar4
+\end{array}
+\]
+The \(8\)'s for \(\mathrm{Spin}(7)\) are its spin module.
+The \(\SU(3)\) in the third row fixes \(i\) in \(G_2\).
+Retaining the first plane rotation gives
+\(\mathrm{Spin}(6)\cdot\mathrm{Spin}(2)\), the product modulo the
+simultaneous spin sign, with restrictions
+\[
+ 8_v=6_0+1_1+1_{-1},\qquad
+ 8_+=4_{1/2}+\bar4_{-1/2},\qquad
+ 8_-=\bar4_{1/2}+4_{-1/2},
+\]
+where subscripts are the coefficients of \(t_1\).
+\end{proposition}
+\begin{proof}
+Fixing \(1\) restricts the torus to \(t_1=0\).
+The vector has weights \(0,0,\pm t_2,\pm t_3,\pm t_4\).
+Each half-spin module has all eight weights
+\(\frac12(\pm t_2\pm t_3\pm t_4)\), with the missing
+sign determined by its parity. The Weyl group for
+\(\mathrm{Spin}(7)\) acts transitively on these spin weights.
+The group fixing the plane pointwise is \(\mathrm{Spin}(6)\).
+Its root system is \(D_3=A_3\). Take \(4\) to have the four
+three-sign weights of positive sign product. The negative
+product gives its dual, and the exterior square gives the
+six weights \(\pm t_2,\pm t_3,\pm t_4\).
+Separating the \(s_1\) signs gives the restrictions with \(t_1\).
+
+Within the related triples, fixing \(1\) in both slots \(A,B\)
+implies \(A=C\) by the product with first input \(1\),
+then \(A=B\) by the product with second input \(1\).
+The intersection is diagonal \(G_2\).
+It is transitive on the imaginary unit sphere by extending
+an imaginary unit to an octonion basic triple, which also proves
+irreducibility of the real imaginary seven-space.
+Triality transports the vector \(\mathrm{Spin}(7)\) and its
+branchings to the two other embeddings obtained by fixing unit
+spinors. The vector \(\mathrm{Spin}(7)\) acts transitively on
+each spin sphere. For slot \(A\), the stabiliser of \(1\) is
+the diagonal \(G_2\), of dimension \(6+5+3=14\) from the
+successive choices of a basic triple. The compact orbit is
+open and closed in the seven-sphere because its dimension
+is \(21-14=7\). The same intersection argument works with
+\(C(1)=B(1)=1\).
+
+For the stabiliser of \(i\), let \(W=\langle1,i\rangle^\perp\)
+and \(Jx=xi\). Any automorphism fixing \(i\) is unitary on
+\((W,J)\). On \(W\) the form \(\varphi(x,y,z)=\langle xy,z\rangle\)
+is the real part of a complex volume form for the ordered
+\(J\)-complex orthonormal basis \(j,\ell,j\ell\).
+Its \(J\)-companions are \(-k,-i\ell,k\ell\).
+The multiplication formula gives \(1\) on the basis triple,
+\(-1\) when two entries are replaced by their companions,
+and \(0\) for one or three replacements or a triple with two
+entries from the same complex coordinate. This identifies the
+alternating forms. The products of vectors \(x,y\in W\)
+have real and \(i\)-components
+\(-\langle x,y\rangle\) and \(-\langle Jx,y\rangle\),
+using \(L_x^*=-L_x\). The \(W\)-component is recovered from
+\(\varphi\), and products involving \(1,i\) follow from \(J\)
+and \(ix=-xi\) on \(W\).
+Thus a unitary map on \(W\) extends to an automorphism fixing
+\(i\) exactly when it preserves \(\varphi\).
+A unitary map multiplies complex volume by its determinant,
+and preserving the real part forces determinant \(1\).
+This gives \(\SU(3)\), with weights
+\(z_1=-t_2,z_2=-t_3,z_3=t_4\), where \(z_1+z_2+z_3=0\).
+In every slot the weights are \(0,0,\pm z_1,\pm z_2,\pm z_3\).
+This is a maximal torus of \(G_2\) because a real orthogonal torus
+action in odd dimension has a nonzero fixed vector, so every
+torus of \(G_2\) lies in an imaginary unit stabiliser.
+These also give the weights for the \(G_2\) row.
+\end{proof}
+
+\begin{proposition}[The unitary stabiliser of the clock]\label{tr:clock}
+For \(J=R_i\) on the vector \(\mathbb O\), its centraliser in
+\(\SO(8)\) is \(\U(4)_J\).
+The determinant-one group lifts isomorphically to a subgroup
+of \(\mathrm{Spin}(8)\) whose restrictions are
+\[
+ 8_v=4+\bar4,\qquad 8_+=1+6+1,\qquad 8_-=4+\bar4.
+\]
+For the identity-component lift of the central clock circle,
+parametrised by its vector complex phase, the refinements
+are \(4_1+\bar4_{-1}\), \(1_2+6_0+1_{-2}\), and
+\(4_{-1}+\bar4_1\), respectively.
+The centraliser of \(J\) in \(G_2\) is the \(\SU(3)\)
+acting on \((\mathbb O,J)\) by \(1+3\).
+For the left clock \(L_i\), the two half-spin rows and their
+central weights are interchanged. The pointwise plane stabiliser
+and the two special unitary clock subgroups represent the three
+triality positions of the block \(\mathrm{Spin}(6)\).
+\end{proposition}
+\begin{proof}
+An orthogonal map commuting with \(J\) is unitary for the
+resulting Hermitian structure, and every unitary map preserves
+real orientation. The lift exists and is injective because
+\(\SU(4)\) is simply connected and its vector action
+is faithful. The doubling formula gives \(R_i(a,b)=(ai,-bi)\).
+Write \((\delta_1,\ldots,\delta_4)=(t_1,-t_2,-t_3,t_4)\)
+for the unitary angular coordinates. The complex vector weights
+on \((\mathbb O,J)\) are \(\delta_j\).
+On the special unitary torus their sum is zero, and a spin weight
+with plus signs on the index set \(I\) restricts to
+\(\sum_{j\in I}\delta_j\). Parity is preserved by the two sign
+reversals. The even cardinalities \(0,2,4\) give the trivial,
+exterior-square and trivial modules. The odd cardinalities
+\(1,3\) give the fundamental and its dual. Adding the same
+phase to all four coordinates gives central weight \(|I|-2\).
+A full turn in all four planes lifts to \(1\), as each
+individual full turn lifts to \(-1\).
+Finally an automorphism \(g\) conjugates \(R_i\) to \(R_{g(i)}\),
+so it commutes with \(J\) exactly when it fixes \(i\).
+Proposition~\ref{tr:stab} gives its action.
+For \(L_i\), the doubling formula gives \(L_i(a,b)=(ia,bi)\),
+whose rotation signs \((1,1,1,-1)\) reverse spin parity.
+Each clock's determinant-one subgroup fixes a real two-plane
+pointwise in the half-spin module where the table has two
+trivial weights. By triality, the connected pointwise stabiliser
+of that plane is a copy of \(\mathrm{Spin}(6)\), and the lifted
+\(\SU(4)\) equals it by connectedness and equality of
+dimension.
+\end{proof}
+
+\begin{remark}[Using the quaternion and clock data together]\label{tr:joint}
+The connected joint stabiliser in the vector rotation group
+preserves the complex \(2+2\) splitting
+\((\mathbb H,J)\oplus(\mathbb H\ell,J)\). It is
+\(\U(2)\times\U(2)\), intersecting
+\(\SU(4)_J\) in \(\mathrm S(\U(2)\times\U(2))\).
+Let \(E,F\) be the complex blocks with weights
+\((\delta_1,\delta_2),(\delta_3,\delta_4)\), and let \(D\) be
+the determinant square-root character on the spin preimage.
+The restrictions of the three representations are
+\[
+\begin{split}
+ &E+F+E^*+F^*,\\
+ &D^{-1}\!\!\bigoplus_{r+s\ \mathrm{even}}\!\Lambda^rE\otimes\Lambda^sF,
+ \qquad
+ D^{-1}\!\!\bigoplus_{r+s\ \mathrm{odd}}\!\Lambda^rE\otimes\Lambda^sF,
+ \quad 0\leq r,s\leq2 .
+\end{split}
+\]
+A generator of the fundamental group of \(\U(4)\)
+rotates one real plane through a full turn and lifts to \(-1\).
+Thus the spin cover over \(\U(4)\) is the determinant
+square-root cover, and \(D^{-1}\) supplies minus half the angular
+trace in Lemma~\ref{tr:spinweights}.
+Inside \(G_2\), simultaneous preservation of the quaternion
+and clock gives the smaller group in
+Proposition~\ref{tr:quaternion}.
+\end{remark}
+
+\subsection{The gauge obstruction and the larger spin group}\label{tr:gauge}
+
+\begin{proposition}[No colour--weak subgroup in \(\mathrm{Spin}(8)\)]\label{tr:obstruction}
+Every nonzero \(\mathfrak{su}(3)\) subalgebra of
+\(\mathfrak{spin}(8)\) has abelian Lie algebra centraliser of dimension at
+most two. The obstruction in Theorem~\ref{tr:main} is therefore
+independent of the choice of clock and of hypercharge normalization.
+\end{proposition}
+\begin{proof}
+The vector action identifies \(\mathfrak{spin}(8)\) with
+\(\mathfrak{so}(8)\). By the \(A_2\) dimension formula
+\(\dim(a,b)=(a+1)(b+1)(a+b+2)/2\), the nontrivial complex
+irreducibles of dimension at most \(8\) are \(3,\bar3,6,\bar6,8\)
+\cite[\S24]{tr:Humphreys}. Complex conjugation exchanges the
+members of each pair of dimensions three and six.
+Thus the complexification of the real vector is the adjoint
+\(8\) or \(3+\bar3+1+1\).
+In the first case the real commutant is scalar by complex
+Schur's lemma, so its skew part vanishes.
+In the second case the real space is
+\(\mathbb C^3_{\mathbb R}\oplus\mathbb R^2\), and the skew
+commutant is \(\mathfrak u(1)\oplus\mathfrak{so}(2)\).
+There are no off-diagonal intertwiners because one summand is
+trivial and the other has no fixed vectors.
+An injective commuting \(\mathfrak{su}(2)\) would lie in
+this abelian algebra. Finite central quotients leave the
+gauge Lie algebra unchanged. Pati--Salam also fails the
+rank test \(3+1+1>4\).
+The obstruction also excludes \(\mathfrak{su}(4)\oplus
+\mathfrak{su}(2)\), by restriction to its colour
+\(\mathfrak{su}(3)\).
+\end{proof}
+
+\begin{proposition}[Pati--Salam in \(\mathrm{Spin}(10)\)]\label{tr:spin10}
+For the oriented \(6+4\) block splitting of the real vector
+representation of \(\mathrm{Spin}(10)\), the connected lifted
+block group is
+\[
+ \bigl(\SU(4)\times\SU(2)_L\times
+              \SU(2)_R\bigr)/\langle(-I,-I,-I)\rangle.
+\]
+Its restrictions of the vector, chiral spinors, and adjoint are
+\begin{align*}
+ 10&=(6,1,1)+(1,2,2),\\
+ 16_+&=(4,2,1)+(\bar4,1,2),\\
+ 16_-&=(\bar4,2,1)+(4,1,2),\\
+ 45&=(15,1,1)+(1,3,1)+(1,1,3)+(6,2,2).
+\end{align*}
+For the \(8+2\) block splitting the vector becomes
+\((8_v)_0+1_1+1_{-1}\), and the chiral spinors become
+\((8_+)_{\pm1/2}+(8_-)_{\mp1/2}\), with subscripts referring
+to the last plane rotation.
+\end{proposition}
+\begin{proof}
+The simultaneous central sign calculation in
+Proposition~\ref{tr:quaternion} applies to the \(6+4\) splitting.
+Use coordinates \(a_1,a_2,a_3,b_1,b_2\) on its planes.
+The vector weights are the signed coordinate weights.
+The spinor weights are
+\(\frac12(\sum s_i a_i+\sum r_j b_j)\) with total sign
+product specified by chirality. The commuting plane
+bivectors and sign flips are as in Lemma~\ref{tr:spinweights}.
+One may extend its Clifford matrices by tensoring the old
+generators with \(\sigma_3\) and adjoining
+\(I\otimes i\sigma_1,I\otimes i\sigma_2\), using Pauli matrices.
+The three-sign subsets give \(4,\bar4\), and the two-sign
+subsets give the doublets with weights
+\(\pm(b_1+b_2)/2,\pm(b_1-b_2)/2\).
+Matching parities give \(16_+\), and opposite parities give \(16_-\).
+The adjoint is the exterior square of the vector. Its zero weight
+has multiplicity five, with \(3,1,1\) from the three block
+adjoints. The nonzero weights are all \(\pm a_i\pm a_j\) for
+\(i<j\), \(\pm b_1\pm b_2\), and \(\pm a_i\pm b_j\).
+Leaving the last sign separate gives the \(8+2\) rule.
+The Pati--Salam embedding in conventional gauge notation
+is described in \cite[\S3]{BaezHuerta}.
+\end{proof}
+
+\begin{remark}[Identification with Hypothesis G]\label{tr:matching}
+In Hypothesis~G, \(V_2=(V,J_T)\otimes_{\mathbb C}(V,J_T)\)
+is the closed pair of elementary readings, of complex dimension four.
+An elementary kernel (the \(V_1\) type) and the third kernel \(V_3\)
+each have real dimension four. Proposition~\ref{tr:triples}
+gives an equivariant bilinear product from slots \(B,C\) to \(A\)
+and an invariant trilinear coupling of all three. These restrict
+to the quaternion multiplication and its inner-product tensor on
+the three copies of \(\mathbb H\) under the diagonal quaternion
+stabiliser. The full triality slots all have real dimension eight.
+The real fours in \eqref{tr:branch4} also fail to reproduce
+complex tensor product by multiplication. In fact there are no
+complex structures \(J_B,J_C,J_A\) on the three copies of
+\(\mathbb H\) that make this product complex bilinear.
+Complex linearity would require
+\(J_A(xy)=(J_B x)y=x(J_C y)\). Evaluating at \(x=1\) and
+\(y=1\) gives \(J_A=L_{J_B(1)}=R_{J_C(1)}\).
+The two parameters agree by evaluation at \(1\), and their
+common value lies in the real centre of \(\mathbb H\).
+Such a scalar operator cannot square to \(-I\).
+For the chosen right clock, \((1i)j=k\) whereas \((1j)i=-k\).
+Triality permutes the three tensor roles. G(i) specifies different
+groups for \(V_2\) and \(V_3\).
+
+The \(l x r^{-1}\) action on \(\mathbb H\) in \eqref{tr:branch4}
+realises the bidoublet of Proposition~\ref{prop:parity}(ii).
+The real commutant of both transports is scalar. A map commuting
+with all left multiplications is right multiplication by its value
+at \(1\), and commuting with the right multiplications forces that
+quaternion to be real. A clock supplies a complex structure for
+a one-sided doublet as in Proposition~\ref{prop:parity}(iii).
+Separately, identify \((\mathbb O,J)\) of Proposition~\ref{tr:clock}
+unitarily with \(V_2\) by mapping \(1\) to \(\omega\).
+The unit vector stabiliser in \(\SU(4)_J\) gives the
+\(1+3\) colour decomposition of Proposition~\ref{prop:pairsu3}.
+The ray stabiliser has a traceless central generator
+\(B-L\), with eigenvalues \(-1\) on the line and \(1/3\)
+on the triplet in that proposition's normalization.
+The joint stabiliser in Remark~\ref{tr:joint} preserves two
+complex two-planes, excluding the full \(\SU(4)_J\).
+Proposition~\ref{tr:obstruction} excludes alternative placements
+of the gauge subgroup as well.
+
+The complex Weyl module \(16_+\) of \(\mathrm{Spin}(10)\) contains
+\(S_L\oplus S_R^c\), with charge conjugation sending the right
+\(4\) to \(\bar4\) and the right doublet to its equivalent dual.
+Use \(Y=T_{3R}+(B-L)/2\) on physical left and right modules and
+reverse the charges on the conjugates, as in Theorem~\ref{thm:sm}.
+On the all-left multiplets
+\((Q_L,u_R^c,d_R^c,L_L,e_R^c,\nu_R^c)\) this gives
+\[
+ Y=(1/6,-2/3,1/3,-1/2,1,0).
+\]
+The two right weights are \(\pm1/2\). On the real bidoublet
+\(Y=T_{3R}\) has complex weights \(\pm1/2\), each twice.
+An independent scalar valued in the full \(16_-\) of a
+\(\mathrm{Spin}(10)\) theory supplies a \((4,1,2)\) component
+after restriction to the Pati--Salam group.
+Taking a neutral expectation value \(\Xi=\omega\otimes v\)
+is the additional input G(iv). The stabiliser theorem
+\ref{thm:sm} then gives the faithful Standard Model quotient
+by \(\mathbb Z_6\). The eight real dimensions of a triality
+slot and the eight complex components of \(S_L\) or \(S_R\)
+count different objects.
+\end{remark}
+
+\subsection{Couplings, multiplicities and dynamics}\label{tr:boundary}
+
+\begin{remark}[Common trace as a matching input]\label{tr:traceinput}
+G(v) assumes a common positive trace coefficient at a matching scale.
+A direct-product gauge model with a specified Weyl representation can
+likewise assume \(g_A^{-2}=\kappa_{\mathrm{arc}}\operatorname{tr}(X_A^2)\)
+with one positive \(\kappa_{\mathrm{arc}}\) and the Hermitian generators in
+the normalization of Theorem~\ref{thm:sm}. Positive linear combinations
+of the invariant positive forms on the separate gauge factors give
+invariant kinetic forms with independent coefficients. A clock does
+not prescribe the common coefficient or the matching scale.
+\end{remark}
+
+\begin{proposition}[Trace and colour count with prescribed matter]\label{tr:traces}
+Use the one-generation Weyl multiplets of Remark~\ref{tr:matching}
+with \(N_c\geq2\) colours. Fix \(Y_L=-1/2\), a neutral neutrino,
+and vectorlike electric charges \(Q_u=Y_Q+1/2,\ Q_d=Y_Q-1/2\).
+Then \(\operatorname{tr}(T_c^2)=2\) and
+\(\operatorname{tr}(T_3^2)=(N_c+1)/2\) for fundamental-normalized
+colour and weak generators. Under the common trace input, equality of
+colour and weak couplings is equivalent to \(N_c=3\).
+The mixed weak anomaly condition \(N_cY_Q=1/2\) gives
+\(\sin^2\theta_W=N_c/[2(N_c+1)]\). Fixing the quark charges
+to \(2/3,-1/3\) gives \(9(N_c+1)/[4(9+5N_c)]\).
+As rational functions on positive \(N_c\), the ratios intersect
+only at \(N_c=3\), with common value \(3/8\).
+\end{proposition}
+\begin{proof}
+Two fundamentals and two duals give colour trace \((2+1+1)/2=2\).
+Each of the \(N_c+1\) weak doublets contributes \(1/2\), so
+\(g_c^2/g_L^2=(N_c+1)/4\). The mixed weak anomaly is proportional
+to \(N_cY_Q+Y_L\). The trace \(\operatorname{tr}(YT_3)=0\)
+since \(Y\) is constant on each doublet and \(T_3\) vanishes on
+singlets. With \(Q=T_3+Y\) the trace normalization gives
+\(\sin^2\theta_W=\operatorname{tr}(T_3^2)/\operatorname{tr}(Q^2)\).
+Counting charged states gives
+\(\operatorname{tr}(Q^2)=2[1+N_c(Q_u^2+Q_d^2)]\).
+The quark charge squares sum to \((N_c^2+1)/(2N_c^2)\) on the
+anomaly branch and \(5/9\) on the fixed-charge branch. The difference
+of the resulting ratios is
+\[
+ \frac{(N_c-3)(N_c+3)}{4(N_c+1)(9+5N_c)}.
+\]
+The denominator and \(N_c+3\) are positive. Thus the intersection
+tests the same condition as the mixed anomaly at \(Y_Q=1/6\).
+At \(N_c=3\) the individual colour, weak and hypercharge traces are
+\(2,2,10/3\), as in Proposition~\ref{prop:angle38}.
+\end{proof}
+
+\begin{remark}[A scale test of the matching input]\label{tr:running}
+Use the one-loop inputs of Remark~\ref{rem:scales} with Standard Model
+content and no thresholds. Write \(u_i=\alpha_i^{-1}(M_Z)\),
+\(a=\ln(\mu/M_Z)/(2\pi)\), and \(b=(41/6,-19/6,-7)\) in the
+order \(Y,2,3\). The simultaneous matching equations require both
+\[
+ a=\frac{u_Y-\tfrac53u_2}{b_Y-\tfrac53 b_2},
+ \qquad
+ a=\frac{u_2-u_3}{b_2-b_3}.
+\]
+These follow by equating the appropriate inverse couplings
+\(u_i-b_i a\). With the central inputs they give \(a\) close to
+\(4.05\) and \(5.51\), respectively. Thus the one-loop matching fails.
+The electroweak crossing alone uses measured electroweak couplings to
+fix its scale. Reverse running from that crossing therefore reproduces
+the input. In the direct-product model, rescaling the inverse
+hypercharge strength by \(\lambda>0\) changes the angle ratio
+\(u_2/(u_Y+u_2)\) to \(u_2/(\lambda u_Y+u_2)\) at that scale.
+\end{remark}
+
+\begin{proposition}[Anomaly conditions and generation count]\label{tr:anomaly}
+For one all-left generation with \(N_c\geq2\), write \((q,u,d,l,e)\)
+for the charges on the five multiplets of Remark~\ref{tr:matching}
+excluding the sterile field. The four mixed and abelian local
+anomaly equations have solution set
+\[
+ d=-2q-u,\quad l=-N_cq,\quad e=2N_cq,\qquad
+ q=0\ \text{or}\ u+q=\pm N_cq.
+\]
+If the extra singlet carries charge \(n\), replace \(e=2N_cq\)
+by \(e+n=2N_cq\) and the last condition by \(q=0\) or
+\((e-n)/2=\pm(u+q)\). These conditions together with the usual
+\(\SU(2)\) global doublet parity allow any positive
+number of identical Standard Model generations.
+\end{proposition}
+\begin{proof}
+The colour-squared, weak-squared and mixed gravitational
+conditions are \(2q+u+d=0\), \(N_cq+l=0\), and
+\(2N_cq+N_c(u+d)+2l+e+n=0\). Set \(n=0\) in the first case.
+The cubic coefficient is \(2N_cq^3+N_c(u^3+d^3)+2l^3+e^3+n^3\).
+With \(t=u+q,\ w=(e-n)/2\), substitute
+\(u=-q+t,\ d=-q-t,\ l=-N_cq,\ e=N_cq+w,\ n=N_cq-w\).
+Expansion gives \(6N_cq(w^2-t^2)\).
+Thus the five-field solution consists of three lines and the
+six-field solution consists of three planes.
+The choice \(q=1/N_c,\ t=w=0\) gives the continuous \(B-L\)
+direction of the six-field solution. A gauge-invariant Majorana
+mass on the singlet requires \(2n=0\), giving the slice above.
+Pure colour cubic terms cancel between fundamentals and duals,
+and the weak cubic expression vanishes for doublets.
+The hypercharges in Remark~\ref{tr:matching} give \(t=-1/2\)
+and \(w=1/2\) and satisfy the linear equations at \(N_c=3\).
+The four weak doublets give even parity \cite{ub:witten}.
+Direct sums add local anomaly coefficients and the doublet count.
+\end{proof}
+
+\begin{remark}[relation to the unification section]\label{rem:trunif}
+The scale test of Remark~\ref{tr:running} assumes Standard Model content and no thresholds; its two logarithms, $a\simeq4.05$ and $5.51$, are the
+electroweak crossing $1.03\times10^{13}$\,GeV and the strong--weak meeting $9.7\times10^{16}$\,GeV of Remark~\ref{rem:scales}.
+Section~\ref{sec:unification} assumes an intermediate spectrum (Hypothesis~Ps) and fits two scales; the two
+statements concern different inputs and agree.
+\end{remark}
+
+\begin{remark}[What the count of three measures]\label{tr:multiplicity}
+A generation requires a chiral matter representation. The direct
+sums in Proposition~\ref{tr:anomaly} show that anomaly cancellation
+places no upper bound on the generation count. Cavity dimension
+does not bound mode number either. Dirichlet functions on a cube
+of side \(L>0\) given by products of sines have eigenvalues
+\(\pi^2(n_1^2+n_2^2+n_3^2)/L^2\) for positive integers \(n_j\),
+by differentiating twice in each variable. Taking \((n,1,1)\)
+gives an unbounded sequence. Scaling an allowed Yukawa coefficient
+preserves gauge invariance and scales the corresponding mass
+matrix at fixed vacuum. With a nonzero mass matrix the resulting
+spectra differ, since singular values are invariant under unitary
+basis changes.
+
+Remark~\ref{rem:hopf} concerns a separate sequence of qubit
+composites, of complex dimension \(2^N\). For \(N=1,2,3\)
+the unit spheres are \(S^3,S^7,S^{15}\), the total spaces of
+the complex, quaternionic and octonionic Hopf fibrations.
+The Hopf-invariant-one restriction \cite{Adams} bounds this
+sequence of fibrations by \(N\leq3\).
+Proposition~\ref{prop:symmetric} singles out \(N=2,3\) for
+symmetric origin-free generators in its stated range.
+Selecting the last Hopf case would require another criterion
+and a reason for the one-sided third module.
+\end{remark}
+
+\begin{remark}[status of Hypothesis~G]\label{rem:trstatus}
+The ``three'' of Hypothesis~G has an algebraic source: the related-triples group of the octonions has exactly
+three real irreducible eight-dimensional modules, permuted by triality (Theorem~\ref{tr:main}), and the
+bidoublet and the colour four-space are realised separately in the vector module.  The simultaneous
+identification of the three modules with the field content and gauge action of G is refuted
+(Proposition~\ref{tr:obstruction}): a common colour--weak Lie algebra would lie in the vector $\mathfrak{so}(8)$, where
+the centraliser of any $\mathfrak{su}(3)$ is abelian of dimension at most two.  Triality does not count generations:
+one conventional generation passes the anomaly tests (Proposition~\ref{tr:anomaly}).  Hypothesis~G therefore
+remains an input; the further inputs below are hypotheses, and its derivation is a programme.
+\end{remark}
+
+\smallskip\noindent\textbf{Hypothesis Sb (separate bundles, scalar bridge, common normalisation).}  Separate colour, weak and
+hypercharge bundles over the comparison complex with product-group holonomies, a covariant scalar map
+between left and right Weyl bundles, and the common trace coefficient of Remark~\ref{tr:traceinput}.
+
+\begin{remark}[Comparison-field hypotheses and research programme]\label{tr:programme}
+One can posit separate colour, weak and hypercharge bundles over
+a spatial comparison complex, with product-group link holonomies
+and a covariant scalar map between left and right Weyl bundles.
+A universal comparison frequency and the common trace of
+Remark~\ref{tr:traceinput} are additional inputs.
+If the gauge algebra consists of the separate factors, its
+connection has no off-diagonal leptoquark gauge generators.
+Other baryon-violating operators and topological defects depend
+on the field content and symmetry breaking. The
+\(\mathrm{Spin}(10)\) extension includes the \((6,2,2)\)
+generators of Proposition~\ref{tr:spin10} before breaking.
+
+A derivation from comparison data would need to construct the
+gauge and matter bundles, select a scalar representation and
+neutral vacuum, and specify the kinetic form, scale and thresholds.
+A flavour mechanism would need to fix chiral multiplicities and
+produce a Yukawa spectrum. Relating comparison phases to
+gravitational curvature would require a covariant action or a
+controlled continuum limit. Two algebraic ingredients are
+\(Uf-fU=(\widetilde f-f)U\) if \(Uf=\widetilde fU\), by
+distribution, and \(R^2=-I\) if \(R^*=-R\), \(RR^*=I\),
+by substitution.
+\end{remark}
+
+\subsection{Relation to division-algebra models}\label{tr:literature}
+
+Baez's survey describes normed triality, its three eight-dimensional
+modules, and \(G_2\) via octonion basic triples
+\cite[\S\S2.4, 4.1]{Baez}; it is an exposition and proves no Standard Model statement. The calculations here compare the
+reductions relevant to G and use the small real representations
+of colour to give an obstruction for any colour embedding.
+G\"unaydin and G\"ursey show, in a split octonion basis, that the subgroup of $G_2$ fixing an imaginary unit
+is $\SU(3)$, under which the octonions decompose as $1+1+3+\bar3$, and use this for coloured quark states
+\cite{tr:GG}; Proposition~\ref{tr:stab} recovers this decomposition. Dixon builds a spinor space on
+\(\mathbb C\otimes\mathbb H\otimes\mathbb O\) whose decomposition reproduces the representation content of one
+generation \cite{tr:Dixon}.
+Furey obtains the colour and electric-charge multiplets of one generation from
+minimal left ideals of the multiplication operator algebra of
+the complex octonions, with a number operator whose third is the electric charge
+\cite{tr:FureyCharge}. These constructions change the carrier on
+which the symmetry acts.
+
+Todorov and Dubois-Violette show that $\mathrm S(\U(2)\times\U(3))$ is the intersection of two maximal subgroups of
+$F_4$, the automorphism group of the exceptional Jordan algebra, singled out by the splitting
+\(\mathbb O=\mathbb C\oplus\mathbb C^3\) \cite{tr:TodorovDV}.  Boyle and Farnsworth give a Jordan algebra whose
+model is the Standard Model extended by three right-handed neutrinos, a complex scalar and a $\U(1)_{B-L}$ gauge
+field, and a related Jordan formulation of Pati--Salam \cite{tr:BoyleFarnsworth}. Pati and Salam propose
+lepton number as the fourth colour \cite{PatiSalam}, and
+Baez and Huerta describe the spin-group embedding and global
+forms \cite[\S3]{BaezHuerta}.
+The identification with Hypothesis~G is partial. The count of
+three is forced for irreducible eight-dimensional modules of
+the related-triples group. The full gauge hypothesis requires
+an enlarged representation or an independent gauge action.
+
+%=====================================================================================
+\section{Why three generations: tests of three candidate mechanisms}\label{sec:generations}
+
+Theorem~\ref{thm:sm}(iv) gives the charges of one generation under
+C0--C3 and Hypothesis~G. The observed replication of that representation is a separate
+input. A quaternionic clock triple acts on a single irreducible real module.
+The binary icosahedral McKay graph supplies a symmetric tensor-product
+matrix. Triality permutes inequivalent representations of the same spin
+group. The Dirac index does furnish a multiplicity of three, conditional on
+a specified topological charge and a link to the matter representation: there the
+three enters as the charge (or as explicit repetition at unit charge), so it is realised, not derived.
+
+Write $G_{\rm SM}$ for the group of Theorem~\ref{thm:sm}(iii), using triples
+$(r_c,r_L,Y)$ for its representations, with $Q=T_{3L}+Y$. In all-left
+conventions its minimal family is
+\begin{equation}\label{gn:family}
+ F=(3,2,\tfrac16)\oplus(\bar3,1,-\tfrac23)\oplus
+   (\bar3,1,\tfrac13)\oplus(1,2,-\tfrac12)\oplus(1,1,1).
+\end{equation}
+The sterile $(1,1,0)$ of Hypothesis~G may be appended, giving
+$F\oplus(1,1,0)=(S_L\oplus S_R^*)|_{G_{\rm SM}}$.
+A net chiral spectrum is counted in the representation ring by
+left-handed minus right-handed copies with the same gauge action, or
+equivalently by the excess of all-left multiplets over their conjugates,
+with the difference taken once per conjugate pair. We count the sterile
+summand separately when using this criterion because it is self-conjugate.
+To obtain full generations, the nonsterile zero modes must supply the
+same multiplicity for each summand of~\eqref{gn:family}.
+
+\begin{theorem}[Three multiplicity tests]\label{gn:main}
+For the clock module of Proposition~\ref{prop:clock}, the defining McKay
+construction for $2I\subset\SU(2)$, and the vector and half-spin
+modules in $\mathrm{Spin}(8)$ triality, respectively, the following hold.
+\begin{enumerate}
+\item The clock sphere gives no decomposition into three invariant
+submodules. On a round $S^4$ the spin Dirac index in the irreducible
+$\SU(2)$ representation $\operatorname{Sym}^n\mathbb C^2$ has absolute
+value $|k|\binom{n+2}{3}$, where $k$ is the second Chern number in the defining
+representation. This equals three precisely for $n=1$ and $|k|=3$.
+On $S^2$ the spin Dirac index of a line of Chern number $m$ is $m$.
+\item The McKay graph has three unequal arms. Its defining adjacency
+matrix has zero antisymmetric part, and the binary icosahedral
+representations there are all self-dual.
+\item The three triality modules have distinct central kernels.
+They cannot be three copies of a single $\mathrm{Spin}(8)$ representation
+for a fixed group action. In the standard $\mathrm{Spin}(10)$ extension
+of Hypothesis~G, the two half-spin slots occur together in one family.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+The clock claim is Proposition~\ref{gn:clocks}. The sphere calculations are
+Propositions~\ref{gn:s2} and~\ref{gn:s4}. The McKay calculation is
+Proposition~\ref{gn:mckay} and Corollary~\ref{gn:mckayobstruction}.
+Proposition~\ref{gn:triality} proves the last assertion.
+\end{proof}
+
+\subsection{Quaternionic clocks and chiral indices}\label{gn:quaternion}
+
+\begin{proposition}[One module and a sphere of complex structures]\label{gn:clocks}
+On $V=\mathbb H$ the quarter-turn operators of the right clocks are
+$R_u:x\mapsto xu$ for $u\in\operatorname{Im}\mathbb H$, $|u|=1$. For
+$I=R_i$, $J=R_j$, $K=R_{-k}$ one has
+$I^2=J^2=K^2=-1$, $IJ=K=-JI$, $JK=I=-KJ$ and $KI=J=-IK$.
+Every ordered triple with these properties among the commuting
+quarter turns is conjugate to this triple. The real $\mathcal L$-module
+$V$ is irreducible. After choosing $I$, it is a single complex
+$\mathcal L$-doublet, with $J$ and $K$ acting antilinearly.
+\end{proposition}
+\begin{proof}
+Paper~I's internal-clock corollary \cite[Cor.~5C.22]{PaperI} gives
+the right-clock formula under its readout hypotheses. In the quaternionic
+model Proposition~\ref{prop:clock} identifies all such quarter turns.
+Composition is $R_uR_v=R_{vu}$. The anticommutator is thus
+$-2\langle u,v\rangle\,1$ and $IJ=R_{ji}=R_{-k}$. The other identities
+follow from the quaternion relations. The first two units of any triple
+are orthogonal, and their reversed product determines the third.
+Conjugation by unit quaternions acts by all rotations on the imaginary
+units and is transitive on ordered orthonormal pairs. Extending the
+operators constantly on $\mathbb R^4$ gives the flat hyperk\"ahler triple:
+the operators are orthogonal and parallel, with constant closed K\"ahler
+forms. If a real $\mathcal L$-invariant subspace contains $x\ne0$ it
+contains $\{ax:|a|=1\}$, the full sphere of radius $|x|$, so it equals
+$V$. The complex doublet is that of Proposition~\ref{prop:clock}(ii).
+Anticommutation with $I$ is the antilinearity condition. In particular
+the three quarter turns are automorphisms of the same real module.
+\end{proof}
+
+\begin{proposition}[Spin Dirac operator on $S^2$]\label{gn:s2}
+Identify the oriented round clock sphere with $\mathbb C P^1$. For the
+untwisted spin Dirac operator, both chiral kernels vanish. Twisting
+by a unitary line $L$ of degree $m$ gives
+\[
+ \dim_{\mathbb C}\ker D^+_L=\max(m,0),\qquad
+ \dim_{\mathbb C}\ker D^-_L=\max(-m,0),\qquad
+ \operatorname{ind}D^+_L=m.
+\]
+A twist by an associated bundle of a principal $\SU(2)$ bundle
+has index zero. The all-sector statement about a line applies to
+a chosen $\U(1)$ flux, not to the fundamental
+$\SU(2)$ bundle on the clock sphere.
+\end{proposition}
+\begin{proof}
+The spin structure on $\mathbb C P^1$ has holomorphic spin line
+$K_{\mathbb C P^1}^{1/2}=\mathcal O(-1)$. A unitary line connection
+induces a holomorphic structure because there are no $(0,2)$ forms,
+and the holomorphic line of degree $m$ is $\mathcal O(m)$.
+The spin Dirac operator is $\sqrt2(\bar\partial+\bar\partial^*)$ for
+this spin line with the twist \cite[Ch.~II, \S\S4--5]{cr:lawson}.
+The kernels in degrees $0,1$ are the Dolbeault cohomology of
+$\mathcal O(m-1)$. On the two affine charts the transition rule gives
+the polynomials of degree at most $m-1$ for global sections, with no
+sections when $m-1<0$. By Serre duality the other kernel has dimension
+$h^0(\mathcal O(-m-1))$. These dimensions also give the spin
+Atiyah--Singer formula $\int_{S^2}\widehat A(TS^2)\operatorname{ch}(L)
+=\int_{S^2}c_1(L)=m$ \cite[Theorem~1.1]{gn:AS}.
+Clutching over the equator for $\SU(2)\cong S^3$ uses
+$\pi_1(\SU(2))=0$, hence every such principal bundle on $S^2$
+is trivial. Its associated bundles have $c_1=0$ and index zero.
+For example, embed $\U(1)$ by the diagonal characters of
+weights $1,-1$. The connection on $L\oplus L^{-1}$ with $m=3$
+gives three zero modes of each chirality, despite the zero net index.
+\end{proof}
+
+\begin{proposition}[Spin Dirac operator on $\mathbb H P^1$]\label{gn:s4}
+Let $P$ be a principal $\SU(2)$ bundle on the oriented round
+$S^4\cong\mathbb H P^1$ of Proposition~\ref{prop:hbhopf}, and define
+$k=\langle c_2(E_1),[S^4]\rangle$, where $E_n=P\times_{\SU(2)}
+\operatorname{Sym}^n\mathbb C^2$. The index of $D^+_{E_n}$ is
+\begin{equation}\label{gn:index}
+ \operatorname{ind}D^+_{E_n}
+  =-k\binom{n+2}{3}\qquad(n\geq0).
+\end{equation}
+For a self-dual or anti-self-dual connection the kernel lies entirely
+in the chirality selected by a nonzero index, and its total complex
+dimension is the absolute value in~\eqref{gn:index}. At index zero
+both kernels vanish. The tautological quaternionic line
+of the Hopf fibration has $|k|=1$.
+\end{proposition}
+\begin{proof}
+The tangent bundle of the sphere is stably trivial, so $p_1=0$.
+Use the splitting principle with Chern roots $x,-x$ for $E_1$,
+so $c_2(E_1)=-x^2$. The weights on $\operatorname{Sym}^n$ are $n-2j$
+for $0\le j\le n$, so the degree-four term of its Chern character is
+\[
+ \tfrac12\sum_{j=0}^n(n-2j)^2x^2
+ =\tfrac{n(n+1)(n+2)}6x^2 .
+\]
+For the equality expand the square and use
+$\sum_{j=0}^n j=n(n+1)/2$ and $\sum_{j=0}^n j^2=n(n+1)(2n+1)/6$.
+The degree-four term of $\widehat A$ is $-p_1/24$, so the spin index
+formula gives~\eqref{gn:index} \cite[Theorem~1.1]{gn:AS}.
+In the twisted Weitzenb\"ock formula
+$D^2=\nabla^*\nabla+\operatorname{Scal}/4+c(F)$
+(with $c(F)$ the curvature action), self-dual curvature acts trivially
+on one spin chirality and anti-self-dual curvature on the other.
+This follows from the two commuting $\mathfrak{su}(2)$ ideals in
+$\Lambda^2=\Lambda^+\oplus\Lambda^-$, each acting on a different
+half-spin module. Integrating on the chirality without this term gives
+$0=\|\nabla s\|^2+\int\operatorname{Scal}|s|^2/4$ for a zero mode $s$,
+forcing $s=0$ \cite[Ch.~II, \S8]{cr:lawson}. The sign of the index
+then determines the surviving chirality, and at index zero both kernels
+vanish. Clutch the Hopf line in the two quaternionic affine charts.
+On the unit equator its transition is multiplication by the unit
+quaternion coordinate or its inverse, depending on the chart order.
+The Euler number of the underlying oriented real rank-four bundle is
+the degree of the equatorial transition applied to a fixed unit vector,
+by the obstruction to extending a nonzero section over the other
+ball. This degree has absolute value one. The Euler class equals the
+top Chern class of the associated complex rank-two bundle, giving
+$|k|=1$.
+\end{proof}
+
+\begin{corollary}[Which twists give three?]\label{gn:sectors}
+The trivial flat twist on the round $S^4$ has no zero modes. The
+Hopf charge in the defining representation gives one chiral zero mode
+for a duality-satisfying connection. Charge $|k|=3$ in that
+representation gives three. For $n=0$ the index is zero, for $n=1$
+its magnitude is $|k|$, and for $n\ge2$ the coefficient is at least
+$4$. For a reducible twist $\bigoplus_n a_nE_n$ on the same bundle,
+the magnitude is $|k|\sum_n a_n\binom{n+2}{3}$. Thus the only way
+to get three at $|k|=1$ is three explicit fundamental summands,
+with arbitrary trivial summands.
+\end{corollary}
+\begin{proof}
+Apply~\eqref{gn:index} and the vanishing argument, using the same
+duality on every summand. The binomial coefficient is strictly
+increasing for $n\ge1$, starting at $1,4$. For reducible twists,
+indices add and their signs agree on the nontrivial terms.
+All integer sectors exist topologically by clutching with maps
+$S^3\to\SU(2)$ of arbitrary degree, and round-sphere instantons
+of arbitrary positive absolute charge are supplied by the
+multi-instanton construction with orientation reversal
+\cite{gn:JNR,gn:ADHM}.
+\end{proof}
+
+\begin{proposition}[Dirac--K\"ahler gradings]\label{gn:dk}
+On either of the two spheres, the complex differential-form operator
+$d_A+d_A^*$ twisted by a rank-$r$ complex bundle has even-to-odd index
+$2r$. In the untwisted case its kernel consists of constants and
+constant multiples of the volume form. With the grading by
+\emph{left spin} chirality, its index for the $S^2$ line twist is $2m$
+and for the $S^4$ twist $E_n$ it is $-4k\binom{n+2}{3}$.
+\end{proposition}
+\begin{proof}
+The even-to-odd principal symbol is the Euler symbol tensored by the
+twist. Its index is $\int e(TS^d)\operatorname{ch}(E)$, which is
+$r\chi(S^d)=2r$ for $d=2,4$ \cite{gn:AS,cr:lawson}. If the
+connection is flat, $d_A^2=0$. In particular the untwisted kernel is
+ordinary harmonic cohomology, and the spheres have
+one generator in each of degrees $0,d$ and none in other degrees.
+For left spin chirality, the complex exterior bundle is the Clifford
+bimodule $S\otimes S^*$, with $S=S^+\oplus S^-$ and the standard induced
+connections. Left Clifford multiplication acts on $S$, so the index
+uses twist $S^*\otimes E$. The full spin character in dimension two
+has rank $2$ and first Chern class zero (its weights are opposite).
+In dimension four, for formal tangent roots $x_1,x_2$, the full
+dual spin character is
+$\prod_{j=1}^2(e^{x_j/2}+e^{-x_j/2})=4+
+(x_1^2+x_2^2)/2$ through degree four. The degree-four term is $p_1/2$,
+which vanishes here. Substitution into Propositions~\ref{gn:s2}
+and~\ref{gn:s4} gives the formulas. Neither grading yields an index
+of absolute value three on these twists.
+\end{proof}
+
+\smallskip\noindent\textbf{Hypothesis Ix (Internal index and matter).}  Let the compact internal spin space $X$ be either the round $S^2$
+with a line twist $E$ of degree $|m|=3$ or the round $S^4$ with the
+defining twist $E$ of a duality-satisfying $\SU(2)$ bundle
+of charge $|k|=3$. The effective
+four-dimensional massless matter lies in the internal Dirac kernel.
+The higher-dimensional chirality assignment makes that kernel supply
+all-left matter of type $F$. The action of $G_{\rm SM}$ on each
+multiplet factors through $F$, with the internal Dirac operator acting
+as $D_E\otimes 1_F$.
+
+
+\begin{corollary}[Conditional family count]\label{gn:conditional}
+Under Hypothesis~Ix, the massless internal kernel
+produces three copies of $F$ with the assigned spacetime chirality.
+\end{corollary}
+\begin{proof}
+Taking a basis for $F$ writes the operator as a direct sum of
+$\dim F$ copies of $D_E$. Its kernel is $\ker D_E\otimes F$ as a
+$G_{\rm SM}$ module. In each stipulated sector the appropriate proposition
+makes $\dim\ker D_E=3$ in one chirality, so the kernel is $F^{\oplus3}$.
+\end{proof}
+\begin{remark}[Selecting the twist]\label{gn:selection}
+The internal bundle, gauge factorisation, relation between internal
+and spacetime chirality, and topological sector are additional inputs
+beyond [Cl] and Hypothesis~G. The Hopf bundle in
+Proposition~\ref{prop:hbhopf} supplies a distinguished unit-charge bundle
+once its quaternionic structure is chosen. The CP$^1$ clock sphere
+likewise has the degree-one line up to dual and orientation.
+A generation count from the index of a specified internal gauge bundle
+is familiar in compactification \cite{gn:chsw,gn:cim}. Here the index
+test uses the two sphere geometries attached to the comparison models.
+A proposed replacement for the replication input must produce the
+operator and the required sector from the comparison dynamics.
+\end{remark}
+
+\subsection{The binary icosahedral McKay correspondence}\label{gn:binary}
+
+\begin{proposition}[Irreducibles and tensor products of $2I$]\label{gn:mckay}
+Let $2I$ be the inverse image in $\SU(2)$ of the rotation
+group of the icosahedron, and let $W$ be the defining doublet. There are
+nine irreducible complex representations. Label six of them by
+$F_j=\operatorname{Sym}^jW$ for $0\le j\le5$ and the other three by
+$B_3,B_4,B_2$, with the subscript denoting dimension.
+The edges of the McKay graph for tensoring with $W$ are exactly the
+consecutive edges in the paths
+\begin{equation}\label{gn:arms}
+ F_5-F_4-F_3-F_2-F_1-F_0,\qquad F_5-B_4-B_2,\qquad F_5-B_3 .
+\end{equation}
+This is affine $E_8$. The arm lengths in edges are $5,2,1$.
+\end{proposition}
+\begin{proof}
+Write $x=\operatorname{Tr}_W(g)$, $\varphi=(1+\sqrt5)/2$, and
+$b=\varphi^{-1}=\varphi-1$. The icosahedral rotation axes through
+opposite edges, faces and vertices number $15,10,6$, respectively.
+They give $15$ half-turns, $20$ rotations of unsigned angle $2\pi/3$,
+and $12$ each with unsigned angles $2\pi/5$ and $4\pi/5$.
+The lifts of a rotation of unsigned angle $\theta$ have traces
+$\pm2\cos(\theta/2)$. Including identity lifts, $x$ runs over
+$\pm2,\pm\varphi,\pm1,\pm b,0$, with respective multiplicities
+$1,12,20,12,30$ at each indicated value (one trace value for $0$).
+In particular $|2I|=120$. The equalities
+$2\cos(\pi/5)=\varphi$ and $2\cos(2\pi/5)=b$ follow by solving
+$1+2\cos(2\pi/5)+2\cos(4\pi/5)=0$ with the double-angle formula
+and choosing the positive roots.
+
+The characters $f_j$ of $F_j$ satisfy $f_0=1$, $f_1=x$,
+$f_{j+1}=xf_j-f_{j-1}$ by the two eigenvalues $z,z^{-1}$ of $W$.
+Continue the recurrence through $j=7$ and use the virtual characters
+\[
+ b_2=f_7-f_5,\qquad b_4=xb_2,\qquad b_3=x f_5-f_4-b_4.
+\]
+At nonnegative traces their evaluations are
+\[
+\begin{array}{c|rrrrr}
+ &2&\varphi&1&b&0\\\hline
+ f_0&1&1&1&1&1\\
+ f_1&2&\varphi&1&b&0\\
+ f_2&3&\varphi&0&-b&-1\\
+ f_3&4&1&-1&-1&0\\
+ f_4&5&0&-1&0&1\\
+ f_5&6&-1&0&1&0\\
+ b_3&3&-b&0&\varphi&-1\\
+ b_4&4&-1&1&-1&0\\
+ b_2&2&-b&1&-\varphi&0
+\end{array}
+\]
+The parity of $f_j$ is the parity of $j$, those of $b_3,b_4$ are
+even, and $b_2$ is odd. To check the inner products, separate the
+even and odd rows. In each block take its row matrix $M$; then
+$M\operatorname{diag}(2,24,40,24,30)M^{\mathsf T}=120\,1$ by
+$\varphi b=1$ and $\varphi^2+b^2=3$. Mixed parities cancel at
+opposite traces and have zero product at $0$. Thus all nine
+characters are orthonormal. Each virtual character of norm one is
+one signed irreducible, because its integral multiplicities have
+squares summing to one. Positivity at $2$ selects the positive sign.
+The squares of these dimensions sum to $120$, so the regular
+representation leaves no further irreducibles.
+
+For the first five vertices along the long arm the recurrence gives
+the claimed products. The definitions give the products at $F_5$
+and $B_2$. The two remaining identities $xb_4=f_5+b_2$ and $xb_3=f_5$
+hold at every trace by the table and parity. Equality of characters gives equality of
+representations. This proves the graph directly in McKay's
+classification \cite{gn:mckaysource}. Deleting the trivial end
+vertex $F_0$ leaves finite $E_8$, with edge lengths $4,2,1$.
+Counting the central vertex in each finite arm gives $5,3,2$.
+These are also the orders of the rotations generating the three
+axis stabilisers in the icosahedral group on $S^2$.
+\end{proof}
+
+\begin{corollary}[Chirality and the McKay matrix]\label{gn:mckayobstruction}
+For irreducibles $U_i$ in Proposition~\ref{gn:mckay}, the matrix
+$A_{ij}=\dim\operatorname{Hom}_{2I}(U_j,W\otimes U_i)$ has
+$A-A^{\mathsf T}=0$. All the $U_i$ are self-dual.
+The three arms supply neither three identical $2I$-modules nor
+a net chiral spectrum from the defining arrows.
+\end{corollary}
+\begin{proof}
+The invariant alternating form on $W$ identifies it with $W^*$.
+Tensor--Hom adjunction and complete reducibility give
+$A_{ij}=A_{ji}$. All characters in the table are real, so each
+agrees with the character of its dual. Consequently every complex representation
+of $2I$ is self-dual by complete reducibility, and the same adjunction
+gives a symmetric matrix for tensoring with any such representation.
+Each arm has a different
+length and every vertex labels a distinct irreducible. An edge
+interpreted as a bifundamental arrow is accompanied by the reverse
+arrow with the same multiplicity, which cancels its contribution
+to left-minus-conjugate-left matter. The representation
+$\operatorname{Sym}^2 W$ is a canonical dimension-three representation,
+but assigning it as an external flavour factor on $F$ requires the
+choice of a tensor product with $F$ and the input that this factor
+has three massless modes.
+\end{proof}
+
+\begin{example}[The spherical quotient]\label{gn:quotient}
+The free right action of $2I$ gives the round space form $S^3/2I$.
+There is no even-dimensional spin grading there. For any spin lift
+and unitary flat twist the Lichnerowicz identity reduces to
+$D^2=\nabla^*\nabla+\operatorname{Scal}/4$, and the inherited scalar
+curvature is positive. Thus this ordinary Dirac operator has zero
+kernel. The geometry alone therefore supplies a second explicit
+test of the three-arm count.
+\end{example}
+
+\begin{remark}[The arithmetic $E_8$ construction]\label{gn:icosians}
+The same binary group gives the $120$ unit vertices of the
+$600$-cell in quaternion coordinates \cite{gn:conway}. The
+coordinates, up to the displayed signs and permutations, are
+\[
+ (\pm1,0,0,0),\qquad
+ \tfrac12(\pm1,\pm1,\pm1,\pm1),\qquad
+ \tfrac12(0,\pm1,\pm\varphi^{-1},\pm\varphi)
+ \quad\text{(even permutations in the last set)}.
+\]
+The counts are $8,16,96$, and the squared norm of a point in the
+last set is $(1+b^2+\varphi^2)/4=1$. The $\mathbb Z$-span of
+$2I$ is the icosian ring $\mathcal I$. For a quaternion in the ring,
+write its reduced norm as $a+b_0\varphi$ and write $\sigma$ for
+coefficientwise Galois conjugation. The quadratic form for the
+icosian model of the $E_8$ lattice is
+\[
+ \operatorname{Tr}_{\mathbb Q(\sqrt5)/\mathbb Q}
+   \!\left(\tfrac{2\varphi}{\sqrt5}\operatorname{Nrd}(q)\right)
+ =2(a+b_0)=
+ \tfrac{2\varphi}{\sqrt5}|q|^2+
+ \tfrac{2\varphi^{-1}}{\sqrt5}|q^\sigma|^2 .
+\]
+Indeed $\varphi-\varphi^\sigma=\sqrt5$ and
+$\varphi^2-(\varphi^\sigma)^2=\sqrt5$. The ring contains $\varphi$
+as the sum of a unit of trace $\varphi$ and its inverse, so it is
+stable under $O=\mathbb Z[\varphi]$. For $u,v\in2I$, the polar
+bilinear form is $a+b_0$ when $2\operatorname{Re}(u\bar v)=a+b_0\varphi$.
+This is integral by the trace table, since $u\bar v\in2I$.
+Each generator has quadratic value $2$, so the span is even integral.
+Consider the $O$-sublattice generated by
+\[
+ 1,\quad i,\quad (1+i+j+k)/2,\quad (i+\varphi^{-1}j+\varphi k)/2 .
+\]
+These are unit vertices, and their determinant in the quaternion
+basis over $\mathbb Q(\sqrt5)$ is $(\varphi-\varphi^{-1})/4=1/4$.
+On $O^4$ the integral Gram matrix is four copies of
+$\left(\begin{smallmatrix}2&2\\2&4\end{smallmatrix}\right)$, from the
+trace pairing on $1,\varphi$. The two real embeddings of the change
+of basis therefore give Gram determinant
+$4^4\operatorname{Norm}_{\mathbb Q(\sqrt5)/\mathbb Q}(1/4)^2=1$.
+Integrality puts $\mathcal I$ in the dual of this unimodular sublattice,
+so the two coincide. The unique positive even unimodular lattice of
+rank eight is $E_8$, with $240$ roots \cite[Ch.~8]{gn:conway}.
+The two distinct shells $2I\sqcup\varphi^{-1}2I$ both have quadratic
+value $2$, with reduced norms $1$ and $2-\varphi$, respectively.
+They exhaust the roots. Thirty points in each shell have zero real part
+by counting the zeros in the trace table. The pure imaginary
+icosian lattice has rank $6$. Its rational span lies in the
+three imaginary coordinates over the quadratic field, and it
+contains $i,j,k$ and their $\varphi$ multiples. These lattice ranks and root counts concern
+a quadratic form on the quaternionic coordinates.
+\end{remark}
+
+\subsection{Triality and the representation of one family}\label{gn:spin}
+
+\begin{proposition}[Triality and replication]\label{gn:triality}
+For a fixed $\mathrm{Spin}(8)$ action the real vector module $8_v$
+and the two real half-spin modules $8_+,8_-$ are inequivalent, even
+after complexification. Their order-three permutation is induced
+by an outer automorphism. The complex half-spin module of
+$\mathrm{Spin}(10)$ restricting to $(4,2,1)\oplus(\bar4,1,2)$
+under the Pati--Salam subgroup restricts to $(8_+)_{\mathbb C}
+\oplus(8_-)_{\mathbb C}$ under the coordinate $\mathrm{Spin}(8)$.
+The $\mathrm{Spin}(10)$ vector restricts to
+$(8_v)_{\mathbb C}\oplus1\oplus1$ after complexification.
+\end{proposition}
+\begin{proof}
+The related-triples realisation of triality
+in Proposition~\ref{tr:triples}
+identifies the three modules with the three octonion slots
+of the multiplication tensor \cite[\S2.4]{Baez}.
+For a proof of inequivalence, take the even Clifford algebra
+with $e_i^2=-1$ and let $\omega_8=e_1\cdots e_8$ for an oriented
+orthonormal frame. The central elements $1,-1,\omega_8,-\omega_8$
+are distinct and $\omega_8^2=1$. On the vector module $-1$ is
+trivial and $\omega_8$ acts as $-1$ since it anticommutes with
+each $e_i$. On spinors the scalar $-1$ acts as $-1$ and
+$\omega_8$ acts as $+1$ and $-1$ on the respective half-spin
+modules. Their kernels are consequently
+$\{1,-1\}$, $\{1,\omega_8\}$ and $\{1,-\omega_8\}$, since each
+is a double cover in the related-triples realisation. Inner
+automorphisms fix central elements, so a triality permutation
+of the kernels is outer. An equivariant linear map between
+two such slots vanishes: a central element acts by opposite
+scalars there. Thus a permutation of full-group slots acts on
+the group action as well as the vectors.
+
+For the branching, the complex half-spin weights in dimension
+$2d$ are $\frac12(\pm1,\ldots,\pm1)$ with fixed parity of minus
+signs, each once \cite{cr:lawson,BaezHuerta}. In the decomposition of
+the ten coordinates as $6+4$, a weight of even parity has matching
+parity on blocks of $3$ and $2$ rotation planes. The dimension-six
+half-spins are $4$ and $\bar4$ of $\SU(4)$ and the
+dimension-four half-spins are the two $\SU(2)$ doublets.
+Choose their names so even overall parity gives
+$(4,2,1)+(\bar4,1,2)$. This is $S_L\oplus S_R^*$, since the
+$\SU(2)$ doublet is self-dual. In the $8+2$
+decomposition, dropping the last sign gives each of the
+two dimension-eight half-spin weight sets once, since the
+discarded sign is determined by parity. The vector restriction
+follows by fixing the orthogonal two-plane pointwise. The
+resulting matter block is the single family in~\eqref{gn:family}
+with its sterile state.
+\end{proof}
+
+\begin{remark}[Common subgroups and the two uses of triality]\label{gn:restriction}
+The inequivalence statement is for the full spin group. On the
+diagonal $G_2$ in the related-triples model all three slots are the
+same $1\oplus7$ octonion module, with the invariant unit and the
+imaginary subspace. The identification of this diagonal action
+supplies a common representation of $G_2$ without the charges
+of~\eqref{gn:family}. More generally, equivalent restrictions
+would require an identified subgroup and a branching calculation
+for the specified gauge action. The companion triality section's
+colour--weak subgroup test
+(Proposition~\ref{tr:obstruction})
+addresses precisely the attempt to put both factors in $\mathrm{Spin}(8)$.
+Independently, each complexified slot has complex dimension eight,
+whereas even the nonsterile gauge module in~\eqref{gn:family}
+has dimension fifteen. Reading the two half-spin slots as the
+two parts of one family in the $\mathrm{Spin}(10)$ branching
+and reading those same slots as two independent families
+are incompatible uses. Any separate triality-based flavour
+construction must exhibit new matter spaces and an action
+that preserves their gauge quantum numbers.
+\end{remark}
+
+\subsection{Field-theoretic, empirical and quantitative constraints}\label{gn:constraints}
+
+\begin{proposition}[Anomalies of one supplied family]\label{gn:anomaly}
+The local gauge and mixed gravitational anomaly coefficients of $F$
+vanish, the measured-charge case of Proposition~\ref{ub:anomalies}.
+Its four weak doublets also cancel the ordinary Witten
+$\SU(2)$ anomaly on spin spacetime. These cancellations hold
+for every positive number $N_{\rm gen}$ of copies, also with a
+sterile neutrino per copy.
+\end{proposition}
+\begin{proof}
+Normalize the quadratic index of a fundamental to $1/2$ and the
+cubic index of a colour fundamental to $1$, with opposite cubic
+index for its dual. The five coefficients in all-left conventions
+are obtained by tracing over the spectator representations
+\cite[\S7.3]{gn:bilal}:
+\[
+\begin{aligned}
+ \SU(3)^3:        &\quad 2-1-1=0,\\
+ \SU(3)^2Y:       &\quad \tfrac12(2\tfrac16-\tfrac23+\tfrac13)=0,\\
+ \SU(2)^2Y:       &\quad \tfrac12(3\tfrac16-\tfrac12)=0,\\
+ \mathrm{grav}^2Y:        &\quad 1-2+1-1+1=0,\\
+ Y^3:                    &\quad \tfrac{1-32+4-9+36}{36}=0 .
+\end{aligned}
+\]
+The weak factor has no cubic invariant, and terms with a single
+generator of a simple factor vanish by tracelessness. There is
+no pure local gravitational anomaly in four dimensions.
+The number of complex Weyl components in~\eqref{gn:family}
+is $6+3+3+2+1=15$. There are $3+1=4$ fundamental weak
+doublets, counting colour, so the Witten sign is $(-1)^4=1$
+\cite{ub:witten}. Neutral singlets do not enter the traces or
+the sign. Traces add under direct sum and parity stays even.
+\end{proof}
+
+\begin{remark}[Global form of the gauge group]\label{gn:global}
+The Witten test in Proposition~\ref{gn:anomaly} concerns the ordinary
+$\SU(2)$ transformation on spin spacetime. For the precise
+$\mathbb Z_6$ quotient of Theorem~\ref{thm:sm}(iii), the corresponding
+spin-bordism calculation gives
+$\Omega^{\rm Spin}_5(BG_{\rm SM})=0$
+\cite[\S4]{gn:dgl}. The local polynomial can be computed using the
+covering product and applies to representations descending to the quotient.
+\end{remark}
+
+\begin{proposition}[QCD and quark mixing]\label{gn:bounds}
+With $N_f=2N_{\rm gen}$ Dirac colour fundamentals and no additional
+coloured matter in the ultraviolet, positive one-loop QCD coefficient
+requires $N_{\rm gen}\leq8$. If the only source of quark-sector CP
+violation under consideration is a unitary CKM matrix of
+$N_{\rm gen}$ sequential generations, the existence of CP violation
+requires $N_{\rm gen}\geq3$. For generic nondegenerate quark masses,
+the number of physical CKM phases is
+$(N_{\rm gen}-1)(N_{\rm gen}-2)/2$.
+These criteria together with anomaly cancellation permit every
+integer from $3$ through $8$.
+\end{proposition}
+\begin{proof}
+With $\mu\,dg_3/d\mu=-b_0g_3^3/(16\pi^2)+O(g_3^5)$, the one-loop
+coefficient is $b_0=11-\frac23N_f$ \cite{gn:gw,gn:politzer}.
+Thus $N_f<33/2$, or $N_f\le16$ for integral $N_f$, and there are
+at most eight full generations. In particular $b_0=1/3$ at eight
+and $b_0=-1$ at nine.
+
+For $N=N_{\rm gen}$, a generic unitary mixing matrix has real
+dimension $N^2$. For nondegenerate masses the independent up- and
+down-field rephasings give an orbit of dimension $2N-1$.
+Indeed, at a matrix with every entry nonzero only the common
+phase fixes it. The real orthogonal locus has dimension
+$N(N-1)/2$. Its generic rephasing equivalences within that
+locus are row and column signs, since any phase multiplier of a
+nonzero real entry must be real. Subtracting this dimension from
+$N^2-(2N-1)$ gives the stated phase count. For $N=1$ the single phase
+is removable. For $N=2$ one can rephase the first row and first
+column to be real, after which row orthogonality makes the last
+entry real whenever the off-diagonal entries are nonzero. If
+an entry vanishes, unitarity makes the matrix a permutation
+times phases. For existence at $N=3$, take
+$U_{ab}=\zeta^{ab}/\sqrt3$ for $a,b=0,1,2$,
+where $\zeta=e^{2\pi i/3}$. The sum of the three roots of unity
+vanishes, giving unitarity, and
+$\operatorname{Im}(U_{00}U_{11}\overline{U_{01}U_{10}})
+=\sqrt3/18\ne0$. This product is invariant under all rephasings.
+Adjoin an identity block for $N>3$ and choose nondegenerate masses.
+This is the CKM setting of Kobayashi and Maskawa \cite{gn:km}.
+Proposition~\ref{gn:anomaly} imposes no further restriction.
+\end{proof}
+
+\smallskip\noindent\textbf{Hypothesis Zw (Interpreting the invisible $Z$ width).}  To use the invisible $Z$ width as a count of generations, assume
+exactly one neutrino per generation is much lighter than $m_Z/2$
+and contributes the Standard Model width for one species. Assume
+there are no other invisible decay contributions.
+
+\begin{remark}[The LEP and SLD combination]\label{gn:lep}
+The 2006 LEP/SLD $Z$-pole report quotes $N_\nu=2.9840\pm0.0082$,
+i.e.\ $2.984\pm0.008$ after rounding \cite[abstract]{gn:lepsource}.
+It measures the invisible width in units of the predicted width
+for one light Standard Model neutrino species. Under
+Hypothesis~Zw, three is the only integer in the
+two-sided Gaussian $95\%$ interval, lying $1.95$ standard deviations
+from the central value. An updated analysis with a revised LEP
+luminosity calibration gives $2.9963\pm0.0074$ \cite{gn:janot}.
+Neutrinos heavier than the pair-production threshold and
+sterile neutrinos with zero $Z$ coupling do not enter this count.
+\end{remark}
+
+\begin{proposition}[Anomaly and trace tests for colour]\label{gn:colour}
+For a family with colour fundamentals of dimension $N_c$,
+$Y_L=-1/2$ and quark doublet charge $Y_Q$, the mixed weak anomaly
+imposes $N_cY_Q=1/2$. With the measured $Y_Q=1/6$ this selects
+$N_c=3$. Without that quark charge input the mixed condition
+allows $Y_Q=1/(2N_c)$. With the all-left matter of
+Theorem~\ref{thm:sm}(iv), taking $N_{\rm gen}$ replicas
+multiplies the two quadratic traces in
+Proposition~\ref{prop:angle38} by the same factor.
+\end{proposition}
+\begin{proof}
+The $\SU(2)^2Y$ coefficient is
+$(N_cY_Q+Y_L)/2$. In the vectorlike electric assignment with
+$Q_u=Y_Q+1/2$, $Q_d=Y_Q-1/2$, a charged lepton of charge $-1$
+and an electrically neutral neutrino, the trace over both
+chiralities is $\operatorname{Tr}Q^2=
+2[1+N_c(Q_u^2+Q_d^2)]$. The weak generator instead gives
+$\operatorname{Tr}T_{3L}^2=(N_c+1)/2$ on the left doublets.
+For the measured charges and $N_c=3$ these values are $16/3$
+and $2$, giving $3/8$ under the matching assumption in
+Proposition~\ref{prop:angle38}. Both traces are additive.
+\end{proof}
+
+\begin{corollary}[Electroweak instanton selection rule]\label{gn:bl}
+In the weak-instanton setting of Remark~\ref{ub:topology}, let $\ell$
+be the signed index for one left
+doublet, the anomalous fermion-number changes are
+$\Delta B=\Delta L=N_{\rm gen}\ell$, with quark baryon charge
+$1/3$ and lepton number one for the lepton doublet. The weak
+instanton conserves $B-L$.
+\end{corollary}
+\begin{proof}
+The fundamental index in~\eqref{gn:index} is one per unit absolute
+charge. The anomalous change of an additive fermion number is
+the index weighted by that number \cite{ub:thooft}.
+For each family three colour copies of the quark doublet give
+$3(1/3)\ell=\ell$, and the lepton doublet gives $\ell$. Singlets
+give zero. Summing over the supplied families proves the formula.
+In QCD the left and conjugated right colour fundamentals contribute
+opposite baryon numbers and have the same quadratic index, hence
+the corresponding vector baryon current has zero instanton
+anomaly. The weak formula is a response of a supplied spectrum.
+For $N_{\rm gen}=3$ it permits $|\Delta B|=3$ in a unit sector and
+excludes $|\Delta B|=1,2$ from weak instantons alone.
+\end{proof}
+
+\begin{example}[Three spatial directions and infinitely many modes]\label{gn:cavity}
+On $(0,\pi)^3$ with Dirichlet boundary conditions, the products
+$\psi_{\mathbf n}(\mathbf x)=\prod_{j=1}^3\sin(n_jx_j)$,
+$n_j\ge1$, have eigenvalues $\sum_{j=1}^3 n_j^2$ for $-\Delta$.
+Twice differentiating gives this formula, and each product vanishes
+on the boundary. Orthogonality follows by factorizing the inner
+product into three sine integrals, each equal to
+$(\pi/2)\delta_{n_j,m_j}$. In particular $(n,1,1)$ gives infinitely
+many mutually orthogonal modes at distinct eigenvalues $n^2+2$.
+The dimension of the cavity is fixed. The exterior algebra of
+three real directions has graded dimensions $(1,3,3,1)$ by
+counting subsets of a basis. Its grading supplies types of
+forms, without selecting three chiral copies of~\eqref{gn:family}.
+\end{example}
+
+\begin{proposition}[Continuous parameters at fixed discrete data]\label{gn:continuous}
+For three copies of~\eqref{gn:family}, gauge invariance permits
+independent positive gauge kinetic coefficients and continuously
+varying Yukawa matrices $Y_u,Y_d,Y_e\in\mathrm{GL}_3(\mathbb C)$.
+At fixed nonzero Higgs vacuum parameter $v$ the charged fermion
+masses and the quark mixing matrix can change while the charges,
+Clifford module and anomaly coefficients stay fixed.
+\end{proposition}
+\begin{proof}
+An independent positive multiple of the standard invariant
+quadratic form on each gauge factor defines an invariant kinetic
+form. The gauge representations in~\eqref{gn:family} and the Higgs
+doublet determine which Yukawa contractions are invariant. The
+three-copy index of each such contraction is a pair of multiplicity
+labels, so its coefficient can be any matrix on those labels.
+The singular values of $vY_f/\sqrt2$ give the mass eigenvalues.
+Multiplying one invertible matrix by a positive scalar changes its
+nonzero singular values. Fix diagonal positive matrices $D_u,D_d$
+with distinct entries and take $Y_u=D_u$, $Y_d=U D_d$ with a unitary
+$U$. The relative left diagonalisation is $U$, and varying a real
+rotation in $U$ changes a mixing angle. Taking the Fourier matrix in
+Proposition~\ref{gn:bounds} for $U$ gives an allowed CP phase.
+None of these kinetic coefficients or matrices enters the traces
+in Proposition~\ref{gn:anomaly}. The same argument for lepton
+mixing requires a neutrino mass matrix to compare with $Y_e$.
+\end{proof}
+
+\begin{remark}[Input parameters and matching]\label{gn:running}
+In the massless-neutrino Standard Model the conventional count
+is nineteen parameters when the strong CP angle is included:
+three gauge coefficients, two Higgs potential parameters,
+nine charged-fermion masses, four CKM parameters, and the
+strong CP angle. Three nondegenerate Dirac neutrinos add three
+masses and four mixing parameters, for twenty-six. Three
+Majorana neutrinos allow two further column phases, for
+twenty-eight, because a nonzero Majorana mass preserves only a
+sign rephasing. These counts use the generic mixing argument in
+Proposition~\ref{gn:bounds}. The benchmarks in
+Remark~\ref{rem:scales} use specified scales and schemes. For
+example the Thomson-limit $\alpha(0)^{-1}\simeq137.036$ and the
+reference value $\widehat\alpha(m_Z)^{-1}\simeq127.95$ use different
+definitions, while the electroweak $\overline{\mathrm{MS}}$ fit
+gives $\hat s_Z^2=0.23122(6)$ \cite{ex-PDG26,PDG}. An ultraviolet
+prediction of the couplings or masses would require boundary
+conditions and renormalisation-group evolution with specified
+threshold matching and scales.
+\end{remark}
+
+\subsection{Discrete arithmetic and the remaining selection problem}\label{gn:boundary}
+
+\begin{remark}[Three in recurrences and six on a sphere]\label{gn:leandiscrete}
+The positive root of $X^3-X^2-X-1$ is the Tribonacci constant.
+For every integer $d\ge2$ the positive root of
+$X^d-\sum_{j=0}^{d-1}X^j$ lies in $(1,2)$.
+Indeed for $x>0$ the equation is $\sum_{j=1}^d x^{-j}=1$,
+whose left side is strictly decreasing, above one at $1$ and
+below one at $2$. Thus $d=3$ specialises an available family
+of recurrence orders \cite[DBonacci/PerronRoot]{ub:lean}.
+The three-gap theorem bounds the
+number of distinct circular gaps for a finite rotation orbit
+by three \cite{gn:sos,ub:lean}. The orbit points $j a\bmod1$ for
+$j=0,\ldots,N-1$ give examples with one, two and three lengths
+at $(a,N)=(1/3,3),(2/5,2),(3/8,4)$, respectively.
+The optimal number for a finite relatively open cover of the
+real unit two-sphere by sets without an orthogonal pair is six.
+The lower bound is the orthogonality-cover theorem, and the
+rational six-axis cover attains it \cite{ub:lean}.
+These are statements about positive polynomial roots, rotation
+orbits and real open covers. An identification of any of these
+integers with flavour multiplicity requires an additional map
+to chiral gauge modules.
+\end{remark}
+
+\begin{remark}[Trace and norm integrality]\label{gn:leanarith}
+For integers $t,P,Q$, the form
+$P^2-(2t+1)PQ+(t^2+t+1)Q^2$ has discriminant $-3$ and
+under $(P,Q)\mapsto(P-(t+1)Q,Q)$ becomes the Eisenstein norm
+$x^2+xy+y^2$. This integral substitution has an integral
+inverse, so the value sets coincide. For $g=a+b\varphi$ with
+$a,b\in\mathbb Z$, its trace is $2a+b$ and its norm is
+$a^2+ab-b^2$. Expansion gives
+$(2a+b)^2-5b^2=4(a^2+ab-b^2)$. For the unit norm values $\pm1$,
+the integral solutions $(x,y)$ of $x^2-5y^2=\pm4$ are exactly
+the simultaneous signs of $(L_n,F_n)$, with
+$L_n=\varphi^n+(\varphi^\sigma)^n$,
+$F_n=(\varphi^n-(\varphi^\sigma)^n)/\sqrt5$ and $n\in\mathbb Z$.
+This classification is the signed Lucas--Fibonacci theorem in
+the \texttt{GoldenPell} module \cite{ub:lean}.
+Thus the golden parameter in the holonomies of
+Proposition~\ref{gn:mckay} also appears in an arithmetic norm
+law, whose solutions have free index $n$.
+
+For a rational quaternion algebra with generators $i^2=s$,
+$j^2=t$ and $ij=-ji$, conjugation negates $i,j,ij$.
+Writing $q=a_0+a_1i+a_2j+a_3ij$, multiplication gives
+$\operatorname{Trd}(q)=2a_0$ and
+$\operatorname{Nrd}(q)=a_0^2-sa_1^2-ta_2^2+st a_3^2$,
+since different imaginary generators anticommute and
+$(ij)^2=-st$. For the Hamilton case $s=t=-1$ this is the
+sum of four squares. Norms $1,2,3$ of integral coordinate
+quaternions have respectively $8,24,32$ representatives,
+from choosing one, two or three signed unit coordinates.
+Norm $4$ has $24$, from a signed $2$ or four signed units.
+The local--global use of reduced traces to define
+$\mathbb Z$ in $\mathbb Q$ has separate number-theoretic
+inputs \cite[Theorem~1]{gn:koenigsmann}. These norm conditions
+supply discrete arithmetic sets and place no constraint on the
+internal characteristic classes in~\eqref{gn:index}.
+\end{remark}
+
+\begin{conjecture}[A comparison-determined index]\label{gn:conjecture}
+There exists a completion of the comparison dynamics with an
+internal elliptic operator and gauge action, constructed from
+comparison data independently of the observed family count,
+whose admissible vacuum sector has equivariant chiral index
+$3[F]$ with the chirality of~\eqref{gn:family}.
+\end{conjecture}
+\begin{remark}[Requirements for a selection mechanism]\label{gn:programme}
+Proposition~\ref{gn:s4} gives a model for this index and its stability
+under smooth connection deformations at fixed topology. The
+vanishing proof shows how a definite curvature duality can remove
+opposite-chirality zero modes. A derivation requires a comparison
+action or constraint that selects the charge sector, fixes the
+matter representation and supplies the vanishing or a mechanism for
+lifting vectorlike pairs. It must distinguish the trivial and
+unit-charge sectors and the other admissible charges. A
+nonperturbative lattice version would need a chiral regulator
+with a stated way around the hypotheses of the fermion-doubling
+theorem \cite{gn:nn}. A prediction for flavour masses would
+add a dynamical Yukawa operator and matching conditions.
+
+The dimension-three clock frame, the three McKay arms and the
+three triality slots are numerically compatible with three
+generations. As identifications based on the integer alone they
+are \textsc{numerology}. The compact Dirac construction realises
+three massless copies under Hypothesis~Ix, with the three put in as the charge. The
+topological sector and the coupling to a full chiral family
+would have to be derived to replace the generation-count input of
+Paper~II.
+\end{remark}
+
+\begin{remark}[what does not hold]\label{rem:gnnogo}
+(i) Three quaternionic quarter turns do not give three submodules: $V=\HH$ is irreducible under left
+multiplication, and after choosing $I$, $J$ and $K$ are antilinear on the same doublet (Proposition~\ref{gn:clocks}).
+(ii) The clock or Hopf geometry does not fix the multiplicity: a flat connection has no zero modes and the Hopf
+bundle has unit charge (Corollary~\ref{gn:sectors}).  (iii) The three affine McKay arms are not equivalent
+branches (lengths $5,2,1$) and give no net chirality (every arrow is paired with its reverse;
+Corollary~\ref{gn:mckayobstruction}).  (iv) Triality does not permute three family copies for the fixed spin-group
+action: the central element $-1$ and the volume element separate the slots (Proposition~\ref{gn:triality},
+consistent with Section~\ref{sec:triality}).  (v) A three-dimensional cavity does not force three modes
+(Example~\ref{gn:cavity}).  (vi) Anomaly freedom, recurrence order and the asymptotic-freedom bound do not select
+three: four copies pass the listed tests (Propositions~\ref{gn:anomaly}, \ref{gn:bounds}).  (vii) The invisible
+$Z$ width does not count all generations: a state without $Z$ coupling does not contribute, and the LEP/SLD value
+$N_\nu=2.9840\pm0.0082$ is $1.95$ standard deviations from three \cite{gn:lepsource} (Remark~\ref{gn:lep}).  (viii) Charged
+Yukawa matrices alone do not determine lepton mixing (Proposition~\ref{gn:continuous}).
+\end{remark}
+
+\begin{remark}[status]\label{rem:gnstatus}
+The number of generations remains an input of this paper.  Mechanisms examined: the quaternionic clock
+triple, the clock and Hopf geometries, the binary icosahedral McKay graph, triality, a three-dimensional
+cavity, anomaly, recurrence and asymptotic-freedom counts, and the invisible $Z$ width; each fails for the
+reason in Remark~\ref{rem:gnnogo}.  The index construction realises three families under Hypothesis~Ix, with
+three as the charge; deriving the sector is Conjecture~\ref{gn:conjecture} and the programme of
+Remark~\ref{gn:programme}.
+\end{remark}
+
+%=====================================================================================
 \section{Coupling ratios from the total space: Kaluza--Klein reduction and the heat-kernel normalisation}\label{sec:couplings}
 
 Can the comparison geometry fix the coefficients of the gauge kinetic
@@ -8140,7 +8980,7 @@ group, its breaking and the hypercharges (C0--C3, [Span], G(i)--(iv)); $\sin^2\t
 the round-$S^4$ couplings $\kappa_V=\sqrt{1-\xi}$, $\kappa_{2V}=1-2\xi$ (F, F$_{\mathrm g}$(a), F$_{\mathrm H}$); the obstruction for the ungauged back-reacting centre field and the zero-stress flat vacuum (E, F, GR; F$_{\mathrm g}$).
 \emph{Inputs not derived}: [Bil], [Bil$_\cL$], [Span], [Loc], [O], [N], Postulates C1(b), C2, C3, [Sub], the reading
 inputs [L], [W], [Comp], [T], and [B] or, equivalently, [Cl] with [NT], the hypotheses $w\ge0$, $w=f(\beta_N)$ and (a)--(c) of
-Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), [R], [Tr], [Cd], [Bs], [Gw], [Ac], [Lq], [Sb], [KK], [Sn], [Om], [Cc], [Ps], [Ea], [Ck], [Gl], [Eq], [Ue], [Ca], Hypotheses Ap, U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm H}$ (with F$_{\mathrm{Hf}}$), F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
+Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), [R], [Tr], [Cd], [Bs], [Gw], [Ac], [Lq], [Sb], [Ix], [Zw], [KK], [Sn], [Om], [Cc], [Ps], [Ea], [Ck], [Gl], [Eq], [Ue], [Ca], Hypotheses Ap, U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm H}$ (with F$_{\mathrm{Hf}}$), F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
 [Bil$_\cL$], [Loc], [O] and [N] for the composite.
 \emph{Open}: a unit of length; $G_Nv^2$; Hypothesis~GR with sources and its consistency with
 Hypothesis~E; the ratio $g'/g$; the number of structures; three generations; scales, masses and
@@ -8636,6 +9476,7 @@ Electroweak sector under F, F$_{\mathrm g}$(a), F$_{\mathrm H}$: round $S^4$ tar
 Pati--Salam group, global form, hypercharges, anomaly cancellation & [M] under G(i)--(iv); agree with the Standard Model; no breaking scale or heavy vectors supplied\\
 $\sin^2\theta_W=\tfrac38$ (G(v)) or $\tfrac12$ as boundary values & [X]: with Standard Model running and no thresholds the colour condition fails; the required shifts are Remark~\ref{rem:couplings}; $\hat s_Z^2$ is [D]\\
 Computation & [M]: universality, recovery, bounds; [S]: standard quantum information; nothing distinguishing\\
+Three generations & [D]: the number of generations is an input; [M]: index and refutations; the invisible $Z$ width ($2.9840\pm0.0082$) counts light $Z$-coupled neutrinos only\\
 Three structures from triality & [M]: the count and the obstruction; the generation count is not obtained (one generation passes the anomaly tests)\\
 Unification & [X]: with Hypothesis~Ps fixed, $\alpha_s$ and $\hat s_Z^2$ are not independent tests (two scales fitted to two differences); the fit becomes a test only if $M_R$ or $M_{\mathrm{PS}}$ is fixed beforehand, e.g.\ by proton decay ($\tau_p\propto M_{\mathrm{PS}}^4$; the dimensional proxy gives about $2.6\times10^{36}$ years at $M_{\mathrm{PS}}$ against the bound $2.4\times10^{34}$ years) or by a seesaw scale; [D]: $\alpha_s$, $\hat s_Z^2$, $\hat\alpha^{-1}$\\
 Gravity from cap entanglement & [M]: conditional on Hypothesis~Eq; no test until Eq is derived\\
@@ -8645,6 +9486,7 @@ Single outcomes & [M]: martingale equivalence, threshold and simplex laws, inver
 Closed register and internal clocks & [M]: finite identities and bounds; Conjecture~\ref{conj:cueth} is a mathematical statement that computation at larger $n$ could refute; [S]: the conditional dynamics is that of standard quantum mechanics with a Page--Wootters reading; the physical readings [U], [A] are not tested here\\
 Topological particles under F$_{\mathrm S}$ & [M]: bounds and topology; [X]: a particle identification (Hypothesis~P) would be testable once $v$, $e_{\mathrm S}$ and the quantisation character are fixed; none is fixed here\\
 Coupling ratios from the total space: Kaluza--Klein curvature identity and Killing integrals, heat-coefficient trace normalisation, sphere radii, one-stage and two-stage running tests, vacuum topology & theorem under KK, Sn, Om (Thms.~\ref{cr:eh}, \ref{cr:heat}; Props.~\ref{cr:s3}, \ref{cr:s7}, \ref{cr:onestage}, \ref{cr:twostage}, \ref{cr:topology}); Hopf-quotient source, transport-invariance and equal-radius readings refuted; $g'/g$ open; regulator: conjecture (Conj.~\ref{cr:conjecture})\\
+Three generations & input; index on $S^2$ or $S^4$ gives three families under Hypothesis~Ix with three as the charge (Cor.~\ref{gn:conditional}); quaternionic clocks, Hopf geometry, McKay arms, triality, cavity, anomaly and running counts, invisible $Z$ width refuted as selectors (Rem.~\ref{rem:gnnogo}); comparison-derived index: conjecture (Conj.~\ref{gn:conjecture})\\
 Three structures: triality count & theorem: three real irreducible eight-dimensional modules of the octonionic related-triples group (Thm.~\ref{tr:main}); separate bidoublet and colour four-space identifications; simultaneous identification with G refuted (Prop.~\ref{tr:obstruction}); G remains an input; [Sb] hypothesis\\
 Three structures, generations, scales, masses, $g'/g$ & open; not derived\\
 \bottomrule
@@ -8740,7 +9582,8 @@ Derive Hypothesis~G, or at least the number of structures (a pair and one more),
 real irreducible eight-dimensional modules of the octonionic related-triples group (Theorem~\ref{tr:main}),
 and the bidoublet and colour four-space occur separately in its vector module; the simultaneous
 identification with G's fields and gauge action is impossible inside $\mathrm{Spin}(8)$
-(Proposition~\ref{tr:obstruction}), so the selection of G remains open; explain three generations; determine the
+(Proposition~\ref{tr:obstruction}), so the selection of G remains open; explain three generations (Section~\ref{sec:generations}: the mechanisms examined fail as selectors; an index
+construction realises three only with three as input charge, Remark~\ref{rem:gnstatus}); determine the
 breaking scale and the failure of the strong coupling to meet the electroweak couplings at one loop
 (Remark~\ref{rem:scales}); with the spectrum of Hypothesis~Ps the scales are fitted, not derived
 (Remark~\ref{rem:ubscales}).
@@ -8782,7 +9625,10 @@ Kac recurrence; the decoherence-freeze threshold; the common-phase polynomial th
 blindness and the Robertson--Schr\"odinger relation; no-cloning and the cloning machine spectrum; syndrome
 decoding and Kraus reversibility; braid colouring transport and Markov invariance; Jordan--Wigner
 anticommutation; uniform amplitude amplification; torus equidistribution and window returns; Krylov growth;
-and connected-ray phase rigidity.  For Section~\ref{sec:attention}: no-cloning, the cloning machine, Kraus
+and connected-ray phase rigidity.  For Section~\ref{sec:generations}: the Perron root of the $d$-bonacci
+polynomials and the Tribonacci constant, the three-gap theorem, the six-set orthogonality-free cover of the
+sphere and its rational attainment, the signed Lucas--Fibonacci solutions of the golden Pell equations,
+the Eisenstein form of the crossing norm, and the icosahedral axis orbits.  For Section~\ref{sec:attention}: no-cloning, the cloning machine, Kraus
 left-inverse necessity and scalar-product reversibility, orthogonal syndrome decoding, Pauli word
 multiplication, Jordan--Wigner anticommutation, braid colouring transport and quandle Markov invariance,
 the weighted Artin representation, quantum Fourier transform circuit action, phase-estimation tails and
@@ -8839,7 +9685,9 @@ of the symmetric coin) and \texttt{check\_triality.py} (Section~\ref{sec:trialit
 own construction of the octonions by Cayley--Dickson doubling, the infinitesimal triality, the slot
 weights, the colour centralisers, the $\mathrm{Spin}(10)$ branching and the two logarithms) and \texttt{check\_couplings.py} (Section~\ref{sec:couplings}: six groups; own Monte Carlo Killing
 integrals, the Clifford computation of the heat coefficient, the traces, the radius table, the stationary
-ratio and its unstable mode, and all running numbers recomputed).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
+ratio and its unstable mode, and all running numbers recomputed) and \texttt{check\_generations.py} (Section~\ref{sec:generations}: six groups; own
+construction of the binary icosahedral group from the $600$-cell, its characters and McKay graph, the index
+coefficients, the family anomalies and the empirical and arithmetic counts).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
 \ref{thm:product}; Propositions~\ref{prop:relative}, \ref{prop:solder}, \ref{prop:pairsu3}, \ref{prop:angle38},
 \ref{prop:universal}, \ref{prop:cosmo}, \ref{prop:solderunique}, \ref{prop:centre}, \ref{prop:superselection} (with its
 classification of weights and free split), \ref{prop:rtclosed}, \ref{prop:symsector}, \ref{prop:subops},
@@ -9637,6 +10485,40 @@ contributions.
 \bibitem{cr:gg} H.~Georgi and S.~L.~Glashow, Unity of all elementary-particle forces, Phys.\ Rev.\ Lett.\ \textbf{32}, 438--441 (1974).
 
 \bibitem{cr:sakharov} A.~D.~Sakharov, Vacuum quantum fluctuations in curved space and the theory of gravitation, Dokl.\ Akad.\ Nauk SSSR \textbf{177}, 70--71 (1967), English transl.\ Sov.\ Phys.\ Dokl.\ \textbf{12}, 1040--1041 (1968).
+
+\bibitem{gn:AS} M.~F. Atiyah and I.~M. Singer, The index of elliptic operators: I, Ann.\ of Math. (2) \textbf{87} (1968), 484--530.
+
+\bibitem{gn:JNR} R. Jackiw, C. Nohl and C. Rebbi, Conformal properties of pseudoparticle configurations, Phys.\ Rev.\ D \textbf{15} (1977), 1642--1646.
+
+\bibitem{gn:ADHM} M.~F. Atiyah, N.~J. Hitchin, V.~G. Drinfeld and Yu.~I. Manin, Construction of instantons, Phys.\ Lett.\ A \textbf{65} (1978), 185--187.
+
+\bibitem{gn:mckaysource} J. McKay, Graphs, singularities, and finite groups, in \emph{The Santa Cruz Conference on Finite Groups}, Proc.\ Sympos.\ Pure Math. \textbf{37}, American Mathematical Society, 1980, pp.~183--186.
+
+\bibitem{gn:conway} J.~H. Conway and N.~J.~A. Sloane, \emph{Sphere Packings, Lattices and Groups}, 3rd ed., Grundlehren Math.\ Wiss. \textbf{290}, Springer, 1999, Ch.~8.
+
+\bibitem{gn:bilal} A. Bilal, \emph{Lectures on Anomalies}, \S7.3, arXiv:0802.0634, 2008.
+
+\bibitem{gn:dgl} J. Davighi, B. Gripaios and N. Lohitsiri, Global anomalies in the Standard Model(s) and beyond, J.\ High Energy Phys. \textbf{2020} (07), 232, arXiv:1910.11277.
+
+\bibitem{gn:gw} D.~J. Gross and F. Wilczek, Ultraviolet behavior of non-Abelian gauge theories, Phys.\ Rev.\ Lett. \textbf{30} (1973), 1343--1346.
+
+\bibitem{gn:politzer} H.~D. Politzer, Reliable perturbative results for strong interactions?, Phys.\ Rev.\ Lett. \textbf{30} (1973), 1346--1349.
+
+\bibitem{gn:km} M. Kobayashi and T. Maskawa, CP-violation in the renormalizable theory of weak interaction, Prog.\ Theor.\ Phys. \textbf{49} (1973), 652--657.
+
+\bibitem{gn:lepsource} ALEPH, DELPHI, L3, OPAL and SLD Collaborations, LEP Electroweak Working Group, SLD Electroweak and Heavy Flavour Groups, Precision electroweak measurements on the $Z$ resonance, Phys.\ Rep. \textbf{427} (2006), 257--454, arXiv:hep-ex/0509008.
+
+\bibitem{gn:sos} V.~T. S\'os, On the distribution mod 1 of the sequence $n\alpha$, Ann. Univ. Sci. Budapest. E\"otv\"os Sect. Math. \textbf{1} (1958), 127--134.
+
+\bibitem{gn:koenigsmann} J. Koenigsmann, Defining $\mathbb Z$ in $\mathbb Q$, Ann.\ of Math. (2) \textbf{183} (2016), 73--93.
+
+\bibitem{gn:nn} H.~B. Nielsen and M. Ninomiya, Absence of neutrinos on a lattice. I. Proof by homotopy theory, Nucl.\ Phys.\ B \textbf{185} (1981), 20--40, Erratum \textbf{195} (1982), 541.
+
+\bibitem{gn:janot} P. Janot and S. Jadach, Improved Bhabha cross section at LEP and the number of light neutrino species, Phys.\ Lett.\ B \textbf{803} (2020), 135319, arXiv:1912.02067.
+
+\bibitem{gn:chsw} P. Candelas, G.~T. Horowitz, A. Strominger and E. Witten, Vacuum configurations for superstrings, Nucl.\ Phys.\ B \textbf{258} (1985), 46--74.
+
+\bibitem{gn:cim} D. Cremades, L.~E. Ib\'a\~nez and F. Marchesano, Computing Yukawa couplings from magnetized extra dimensions, J.\ High Energy Phys. \textbf{2004} (05), 079, arXiv:hep-th/0404229.
 
 \bibitem{CLT74} J.~M.~Cornwall, D.~N.~Levin, and G.~Tiktopoulos, Derivation of gauge invariance from high-energy unitarity bounds on the S matrix, Phys.\ Rev.\ D \textbf{10}, 1145 (1974); Erratum \textbf{11}, 972 (1975).
 

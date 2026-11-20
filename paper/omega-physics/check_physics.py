@@ -3129,4 +3129,95 @@ print(f"     running tests recomputed (crossings, residuals -5.58, 17.64, -13.71
 if not okr5: print([nd for nd in need if nd not in txt])
 results.append(okr5)
 
+# =====================================================================================
+# 56. (Round 33) generations: index coefficients, binary icosahedral McKay graph, anomalies, counts
+spg = importlib.util.spec_from_file_location("check_generations", os.path.join(here, "check_generations.py"))
+mg_ = importlib.util.module_from_spec(spg); buf = io.StringIO()
+try:
+    with contextlib.redirect_stdout(buf):
+        spg.loader.exec_module(mg_)
+        for fn in ("check_clocks", "check_indices", "check_mckay_and_icosians", "check_triality", "check_physics", "check_cavity_and_arithmetic"):
+            getattr(mg_, fn)()
+    okg_ = True
+except Exception as ex:
+    okg_ = False; print("     check_generations error:", repr(ex))
+print(f"     check_generations.py: all six groups passed: {okg_}")
+results.append(okg_)
+def _gn_block():
+    import itertools
+    from math import comb
+    ok={}
+    # index coefficient: (1/2) sum (n-2j)^2 = C(n+2,3)
+    ok['symindex']=all(abs(0.5*sum((n-2*j)**2 for j in range(n+1))-comb(n+2,3))<1e-12 for n in range(12))
+    ok['three_only']=[ (n,k) for n in range(6) for k in range(1,6) if k*comb(n+2,3)==3]==[(1,3)]
+    # 2I from 600-cell vertices
+    phi=(1+5**.5)/2; b=phi-1
+    V=set()
+    def add(v): V.add(tuple(np.round(v,12)))
+    for i in range(4):
+        for s in (1,-1): v=np.zeros(4); v[i]=s; add(v)
+    for s in itertools.product([1,-1],repeat=4): add(np.array(s)/2)
+    evenperms=[p for p in itertools.permutations(range(4)) if sum(1 for i in range(4) for j in range(i+1,4) if p[i]>p[j])%2==0]
+    for s in itertools.product([1,-1],repeat=3):
+        base=np.array([0,s[0]*1,s[1]*b,s[2]*phi])/2
+        for p in evenperms: add(base[list(p)])
+    G=np.array(sorted(V)); ok['order120']=len(G)==120
+    def qm(a,c):
+        a0,a1,a2,a3=a; b0,b1,b2,b3=c
+        return np.array([a0*b0-a1*b1-a2*b2-a3*b3,a0*b1+a1*b0+a2*b3-a3*b2,a0*b2-a1*b3+a2*b0+a3*b1,a0*b3+a1*b2-a2*b1+a3*b0])
+    Vk={tuple(np.round(v,9)) for v in G}
+    ok['closed']=all(tuple(np.round(qm(x,y),9)) in Vk for x in G[::7] for y in G[::5])
+    x=2*G[:,0]   # trace in defining rep
+    # characters via class functions on traces: f_j Chebyshev
+    f=[np.ones(120),x.copy()]
+    for j in range(2,8): f.append(x*f[-1]-f[-2])
+    b2=f[7]-f[5]; b4=x*b2; b3=x*f[5]-f[4]-b4
+    chars=[f[0],f[1],f[2],f[3],f[4],f[5],b3,b4,b2]
+    names=['F0','F1','F2','F3','F4','F5','B3','B4','B2']
+    gram=np.array([[np.mean(a*c) for c in chars] for a in chars])
+    ok['orthonormal']=np.allclose(gram,np.eye(9))
+    A=np.array([[round(np.mean(x*chars[i]*chars[j])) for j in range(9)] for i in range(9)])
+    ok['symmetric']=(A==A.T).all()
+    edges={(names[i],names[j]) for i in range(9) for j in range(i+1,9) if A[i,j]}
+    expected={('F0','F1'),('F1','F2'),('F2','F3'),('F3','F4'),('F4','F5'),('F5','B4'),('F5','B3'),('B4','B2')}
+    ok['edges']={tuple(sorted(e)) for e in edges}=={tuple(sorted(e)) for e in expected}
+    ok['dims']=sum(int(round(c[np.argmax(x)]))**2 for c in chars)==120
+    # anomalies
+    fam=[(3,2,1/6),(-3,1,-2/3),(-3,1,1/3),(1,2,-1/2),(1,1,1)]
+    def dimc(c): return abs(c)
+    su3cube=sum((1 if c==3 else -1 if c==-3 else 0)*w for c,w,y in fam)
+    su3y=sum(0.5*w*y for c,w,y in fam if abs(c)==3)
+    su2y=sum(0.5*dimc(c)*y for c,w,y in fam if w==2)
+    grav=sum(dimc(c)*w*y for c,w,y in fam)
+    y3=sum(dimc(c)*w*y**3 for c,w,y in fam)
+    ok['anomaly']=all(abs(t)<1e-12 for t in (su3cube,su3y,su2y,grav,y3)) and sum(dimc(c)*w for c,w,y in fam)==15
+    ok['qcd']=[n for n in range(1,12) if 11-2/3*2*n>0][-1]==8 and abs(11-2/3*16-1/3)<1e-12 and abs(11-2/3*18+1)<1e-12
+    z=np.exp(2j*np.pi/3); U=np.array([[z**(a*c) for c in range(3)] for a in range(3)])/np.sqrt(3)
+    ok['jarlskog']=np.allclose(U@U.conj().T,np.eye(3)) and abs((U[0,0]*U[1,1]*np.conj(U[0,1]*U[1,0])).imag-np.sqrt(3)/18)<1e-14
+    ok['phases']=[(N-1)*(N-2)//2 for N in (1,2,3,4)]==[0,0,1,3]
+    ok['lep']=abs((3-2.9840)/0.0082-1.95)<0.01 and abs((3-2.9963)/0.0074-0.5)<0.01
+    ok['params']=3+2+9+4+1==19 and 19+7==26 and 26+2==28
+    from scipy.optimize import brentq
+    ok['dbonacci']=all(1<brentq(lambda X: X**d-sum(X**j for j in range(d)),1.0001,2)<2 for d in range(2,9))
+    def gaps(a,N):
+        pts=np.sort([(j*a)%1 for j in range(N)]); g=np.diff(np.append(pts,pts[0]+1)); return len(set(np.round(g,12)))
+    ok['threegap']=[gaps(1/3,3),gaps(2/5,2),gaps(3/8,4)]==[1,2,3]
+    ok['eisenstein']=all((P*P-(2*t+1)*P*Q+(t*t+t+1)*Q*Q)==((P-(t+1)*Q)**2+(P-(t+1)*Q)*Q+Q*Q) for t in range(-3,4) for P in range(-4,5) for Q in range(-4,5))
+    ok['golden']=all((2*a+bb)**2-5*bb*bb==4*(a*a+a*bb-bb*bb) for a in range(-5,6) for bb in range(-5,6))
+    L=[2,1];F=[0,1]
+    for _ in range(10): L.append(L[-1]+L[-2]); F.append(F[-1]+F[-2])
+    ok['pell']=all(L[n]**2-5*F[n]**2 in (4,-4) for n in range(12))
+    cnt={m:0 for m in (1,2,3,4)}
+    for q in itertools.product(range(-2,3),repeat=4):
+        nn=sum(c*c for c in q)
+        if nn in cnt: cnt[nn]+=1
+    ok['quatnorms']=cnt=={1:8,2:24,3:32,4:24}
+    ok['600cellnorm']=abs((1+b*b+phi*phi)/4-1)<1e-14 and len([v for v in G if abs(v[0])<1e-9])==30
+    return ok
+_gn = _gn_block()
+okgn = all(bool(v) for v in _gn.values())
+print(f"     own code: C(n+2,3) index coefficients and three only at (n,|k|) = (1,3); 2I built from the 600-cell (order 120, closed); nine orthonormal characters; McKay adjacency symmetric with arms 5,2,1 (affine E8); family anomalies zero, 15 Weyl components; QCD bound 8; Jarlskog sqrt3/18; LEP 1.95 sigma; parameter counts; d-bonacci roots, three-gap, Eisenstein, Pell, quaternion norm counts: {okgn}")
+if not okgn: print([k for k, v in _gn.items() if not v])
+results.append(okgn)
+
 print(f"\nALL CHECKS PASSED: {all(results)}  ({sum(results)}/{len(results)})")
