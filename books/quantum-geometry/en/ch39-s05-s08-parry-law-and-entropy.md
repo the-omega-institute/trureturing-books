@@ -1074,6 +1074,17 @@ For example, suppose both retained pairs alternate with the sole discarded pair 
 
 Choose any subset of the initially biased retained orbitals, including the empty set, and balance the selected orbitals one at a time. The number of strict purity decreases equals the dimension gain of the span of the restricted rows. Let $S_0$ be the span of the initially balanced orbitals' restricted rows, and let $S_1$ be the span after adjoining all the selected rows. Each step adjoins a single row. If the row lies in the current span, both dimension and purity stay the same. If it lies outside, the dimension increases by one and purity strictly decreases. Thus every ordering gives $\dim S_1-\dim S_0$ strict decreases. Purity is nonincreasing at every step, so the final purity is strictly below its initial value exactly when $\dim S_1>\dim S_0$.
 
+**When a family of parity outputs is jointly independent (written derivation).** Consider finitely many affine binary parity outputs on the same independent free difference bits. Rows may share coordinates, and constant outputs are allowed. Assume each bit has probability $0<t_j\le 1/2$ of a $1$. Let $U$ be the fair coordinates and restrict each coefficient row to $U$. Joint independence holds exactly when both conditions hold.
+
+- The indexed family of nonzero restrictions is linearly independent over $\mathbb F_2$.
+- The rows with zero restriction have pairwise disjoint supports on the biased coordinates.
+
+Fix the biased bits. The fair bits are uniform on $\mathbb F_2^U$. If the nonzero restrictions are linearly independent, their linear map onto the corresponding output space is surjective, and every output vector has the same number of preimages. The fixed affine shifts preserve this uniform law. These outputs are thus independent fair bits conditional on the biased inputs, with a conditional law that is constant across those inputs. The remaining outputs use only biased coordinates, so their disjoint supports give independence among them.
+
+Conversely, suppose a nonempty collection of the nonzero restrictions sums to zero. The sum of its outputs depends only on biased bits and a constant offset. The expectation of its parity sign is a signed product of the factors $1-2t_j$ over the biased bits that survive the sum. This expectation is nonzero. Each selected row contains a fair bit, so the expectation of its sign is zero. Joint independence would give zero for the expectation of the product of the selected signs. Now consider two rows with zero restriction that share a biased coordinate. The product of their separate sign expectations includes the squared bias factors from their shared bits. In the expectation of the product of their signs, the shared signs square to $1$ and only the bias factors from the symmetric difference remain. Since the bias factors are strictly between zero and one, the two expectations differ and the outputs cannot be independent.
+
+For example, take independent fair bits $Y_1,Y_2$. The outputs $Y_1$, $Y_2$, and $Y_1+Y_2$ are independent in pairs. The binary sum of all three outputs is always zero, so the family is jointly dependent.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
