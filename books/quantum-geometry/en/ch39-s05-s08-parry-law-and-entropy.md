@@ -1057,6 +1057,15 @@ For empty $H$, this probability is $1$ for $d=0$ and zero for $d=1$. Two nonempt
 
 In the example above with $C=(1\ \ 1)$, the basis bit is zero precisely when the free bit is $1$, which has probability $3/8$. The basis-bit coefficient is $2/3$, so $S_J=1/4$ and the improved bound $(3/32)(1+1/4)=15/128$ equals the actual decrease.
 
+**When two parity events are independent (written derivation).** Let $H$ and $K$ be the supports of events $E_a$ and $E_b$, with right-hand sides $d_a$ and $d_b$. Set $\epsilon_a=(-1)^{d_a}$ and $\epsilon_b=(-1)^{d_b}$, and write $M(S)=\prod_{j\in S}(1-2t_j)$. Expand the product of the two indicator functions and take its expectation. In the product of the two parity signs, each shared bit contributes its sign squared. Only the signs on the symmetric difference $H\triangle K$ remain. Subtract the product of the individual probabilities and use $M(H)M(K)=M(H\triangle K)M(H\cap K)^2$ to get
+
+$$
+4\bigl(\Pr(E_a\cap E_b)-\Pr(E_a)\Pr(E_b)\bigr)=
+\epsilon_a\epsilon_b\,M(H\triangle K)\bigl(1-M(H\cap K)^2\bigr).
+$$
+
+The free bits have $0<t_j\le 1/2$, so every bias factor lies in $[0,1)$. The right side vanishes exactly when the supports are disjoint or a fair bit belongs to exactly one support. A fair bit on one side can therefore give independence even when the events share biased bits. For example, if $Y_2$ is fair, the events $Y_1=0$ and $Y_1+Y_2=0$ are independent.
+
 **Choosing a column basis (worked example).** Take retained pairs $(1,5)$ and $(6,10)$ and discarded pairs $(0,2)$, $(7,11)$, and $(3,8)$, in that order. Their later-endpoint probabilities are $(1/4,1/2)$ and $(1/8,1/4,1/4)$ respectively. When balancing the first retained orbital,
 
 $$
