@@ -1079,7 +1079,7 @@ B_J\sum_{\substack{S\subseteq\mathcal A\\|S|\le d}}
 \Pr\!\left[\bigcap_{a\in S}E_a\right].
 $$
 
-The empty set contributes $1$ to the sum. Expanding $\prod_{a\in\mathcal A}(1+g_a(Y))$ and taking its expectation gives $\Delta$ after multiplication by $B_J$. All terms are nonnegative, so $B_J^{(d)}$ increases weakly with $d$ and stays below or equal to $\Delta$. Every free-bit assignment has positive probability. If an assignment raises at least $d+1$ factors above their minima, any $d+1$ of them give a strictly positive omitted term. Conversely, if every assignment raises at most $d$ factors, every omitted term vanishes. The smallest degree that recovers $\Delta$ is therefore the maximum number of factors that exceed their minima at the same feasible solution.
+The empty set contributes $1$ to the sum. Expanding $\prod_{a\in\mathcal A}(1+g_a(Y))$ and taking its expectation gives $\Delta$ after multiplication by $B_J$. All terms are nonnegative, so $B_J^{(d)}$ increases weakly with $d$ and stays below or equal to $\Delta$. Every free-bit assignment has positive probability. If an assignment makes at least $d+1$ factors exceed their lower bounds in $B_J$, any $d+1$ of them give a strictly positive omitted term. Conversely, if at most $d$ factors exceed those lower bounds at each assignment, every omitted term vanishes. The smallest degree that recovers $\Delta$ is therefore the maximum number of simultaneous positive excesses.
 
 The quadratic correction uses joint probabilities. Write $E_a=\{\sum_{j\in H_a}Y_j=d_a\}$, let $\epsilon_a=(-1)^{d_a}$, and put $M(H)=\prod_{j\in H}(1-2t_j)$. In the product of the two indicator functions, the signs from shared bits square to $1$. Taking expectations gives
 
