@@ -1154,6 +1154,29 @@ For $x\ne y$, exactly half of the characters distinguish $x$ from $y$. Each such
 
 A one-bit quotient already approaches the constant $2$. Fix $0<\varepsilon<1$ and take bias factors $\varepsilon$ and $\varepsilon+h$ with $0<h<1-\varepsilon$. The total variation is $h/2$, and the log difference is $\log(1+h/\varepsilon)$. Its ratio to $\operatorname{TV}(P,Q)/\varepsilon$ tends to $2$ as $h\downarrow0$.
 
+**The finite-distance bound and its equality condition (written derivation).** Write $N=|C|\ge 2$, $\beta=1-1/N$, and $\delta=\operatorname{TV}(P,Q)$. With the same moment floor as above, the tighter bound is
+
+$$
+\left|\log q_a(P)-\log q_a(Q)\right|
+  \le 2\beta\log\!\left(1+\frac{\delta}{\beta\varepsilon}\right).
+$$
+
+Let $u_\lambda=|m_P(\lambda)-m_Q(\lambda)|$. Choose $r_\lambda\in\{-1,1\}$ so that $r_\lambda(m_P(\lambda)-m_Q(\lambda))=u_\lambda$. Then $\sum_\lambda u_\lambda$ is the difference of the expectations of $\sum_\lambda r_\lambda\chi_\lambda(x)$ under the two laws. This function has oscillation at most $N$, since each pair of distinct points has sign difference $2$ at exactly $N/2$ characters. Centering the function at the midpoint of its range gives $\sum_\lambda u_\lambda\le N\delta$. The trivial character contributes zero to this sum.
+
+The absolute log difference at a character is the logarithm of the larger absolute moment divided by the smaller one. It is at most $\log(1+u_\lambda/\varepsilon)$ by the moment floor and the reverse triangle inequality. Concavity of $\log$ bounds the sum over the $N-1$ nontrivial characters by $(N-1)\log(1+N\delta/((N-1)\varepsilon))$. Multiplying by $2/N$ in the recovery formula gives the claimed bound.
+
+For $\delta>0$, let $h=\log(1+\delta/(\beta\varepsilon))$ and $B=\log\varepsilon$. Equality requires all the $u_\lambda$ for nontrivial $\lambda$ to be equal and positive, by strict concavity. Equality in the scalar bound then forces the moments to have the same sign at every character, with one absolute moment equal to $\varepsilon$ and the other to $\varepsilon e^h$. The moment signs determine the offset because the factors are positive and the characters separate points. The triangle inequality in the recovery formula is an equality only if the signed log differences align. After interchanging the laws if needed, the nontrivial characters with $\chi_\lambda(a)=1$ have log magnitudes $B+h$ in $P$ and $B$ in $Q$. Those with $\chi_\lambda(a)=-1$ have the reversed values. The recovery formula therefore gives $\log q_a(Q)=2B/N+h$. If the target column $a$ is present with factors strictly below $1$, this log product is negative, so $\varepsilon e^{Nh/2}<1$.
+
+Conversely, suppose $\varepsilon e^{Nh/2}<1$. Use offset zero and one input bit for each nonzero $c\in C$. Assign their log factors by
+
+$$
+\log q_c(P)=\frac{2(B+h)}{N}-h\,\mathbf 1_{\{c=a\}},
+\qquad
+\log q_c(Q)=\frac{2B}{N}+h\,\mathbf 1_{\{c=a\}}.
+$$
+
+All these log factors are negative. Each nontrivial character multiplies the factors of exactly $N/2$ columns, so these choices give exactly the two log magnitude profiles above. Their moment difference is $\varepsilon(e^h-1)\chi_\lambda(a)$ on nontrivial characters and zero at the trivial one. Fourier inversion gives $P(x)-Q(x)=\varepsilon(e^h-1)(\mathbf 1_{\{x=a\}}-1/N)$, which has total variation $\delta$. The log gap on $a$ is $2\beta h$, so this family attains the bound. Thus, with freedom to choose the common columns and with $a$ present, the strict condition on $\varepsilon e^{Nh/2}$ is both necessary and sufficient.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$

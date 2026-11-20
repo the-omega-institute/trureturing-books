@@ -1154,6 +1154,29 @@ $$
 
 常数 $2$ 已可在一位陪集上逼近。固定 $0<\varepsilon<1$，取两个偏置因子 $\varepsilon$ 和 $\varepsilon+h$，其中 $0<h<1-\varepsilon$。此时总变差为 $h/2$，而两对数之差为 $\log(1+h/\varepsilon)$。它与 $\operatorname{TV}(P,Q)/\varepsilon$ 的比值在 $h\downarrow0$ 时趋于 $2$。
 
+**有限距离下的误差界与取等条件（书面推导）。** 记 $N=|C|\ge 2$、$\beta=1-1/N$，以及 $\delta=\operatorname{TV}(P,Q)$。在上述符号矩下界的条件下，有更紧的界
+
+$$
+\left|\log q_a(P)-\log q_a(Q)\right|
+  \le 2\beta\log\!\left(1+\frac{\delta}{\beta\varepsilon}\right).
+$$
+
+令 $u_\lambda=|m_P(\lambda)-m_Q(\lambda)|$，并取 $r_\lambda\in\{-1,1\}$ 使 $r_\lambda(m_P(\lambda)-m_Q(\lambda))=u_\lambda$。此时 $\sum_\lambda u_\lambda$ 等于函数 $\sum_\lambda r_\lambda\chi_\lambda(x)$ 在两种分布下的期望差。任意两个不同点在恰好 $N/2$ 个特征标上的符号差绝对值为 $2$，故该函数的最大值与最小值之差至多为 $N$。从函数中减去值域的中点，得到 $\sum_\lambda u_\lambda\le N\delta$。平凡特征标在这个和中贡献为零。
+
+对每个特征标，对数之差的绝对值是较大绝对矩除以较小绝对矩所得比值的对数。由矩的下界和反三角不等式，这个量至多为 $\log(1+u_\lambda/\varepsilon)$。用 $\log$ 的凹性对 $N-1$ 个非平凡特征标求和，得到上界 $(N-1)\log(1+N\delta/((N-1)\varepsilon))$。再乘上恢复公式中的 $2/N$，即得所述结论。
+
+当 $\delta>0$ 时，令 $h=\log(1+\delta/(\beta\varepsilon))$ 和 $B=\log\varepsilon$。由严格凹性，取等要求所有非平凡特征标的 $u_\lambda$ 相等且为正。逐项的对数界取等又要求两个矩同号，且一个绝对值为 $\varepsilon$，另一个为 $\varepsilon e^h$。由于偏置因子为正，且特征标能够区分各点，这些符号确定了偏移。恢复公式中的三角不等式取等要求乘上 $\chi_\lambda(a)$ 后的对数差同号。必要时交换 $P,Q$，则 $\chi_\lambda(a)=1$ 的非平凡特征标在 $P,Q$ 下的对数绝对矩分别为 $B+h,B$，而 $\chi_\lambda(a)=-1$ 时这两个值互换。恢复公式随即给出 $\log q_a(Q)=2B/N+h$。若目标列 $a$ 确实存在，所对应的偏置因子均严格小于 $1$，这个对数乘积必须为负，故 $\varepsilon e^{Nh/2}<1$。
+
+反过来，设 $\varepsilon e^{Nh/2}<1$。令偏移为零，每个非零 $c\in C$ 配置一个输入位，并指定对数偏置因子
+
+$$
+\log q_c(P)=\frac{2(B+h)}{N}-h\,\mathbf 1_{\{c=a\}},
+\qquad
+\log q_c(Q)=\frac{2B}{N}+h\,\mathbf 1_{\{c=a\}}.
+$$
+
+这些对数偏置因子均为负。每个非平凡特征标恰好选取 $N/2$ 列作乘积，因此所得的对数绝对矩正是上述两组数值。非平凡特征标的矩之差为 $\varepsilon(e^h-1)\chi_\lambda(a)$，平凡特征标的矩之差为零。傅里叶反演给出 $P(x)-Q(x)=\varepsilon(e^h-1)(\mathbf 1_{\{x=a\}}-1/N)$，其总变差为 $\delta$。目标列 $a$ 的对数差为 $2\beta h$，故此构造达到上界。当两种分布的公共列族可选且包含 $a$ 时，$\varepsilon e^{Nh/2}<1$ 就是取等的充要条件。
+
 在这个实际词上，普通字母计数的平衡性与按位置奇偶加权的和是不同的量。沿用 $A=0$、$B=1$、$C=2$ 的字母编码，取整数权重
 
 $$
