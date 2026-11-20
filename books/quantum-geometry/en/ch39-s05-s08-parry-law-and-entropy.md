@@ -1112,6 +1112,23 @@ Each original point over $(c,v)$ receives $Q(c,v)/|H|$ under the product law. Th
 
 For example, use $Y_1,Y_2,Y_1+Y_2+B$ and $B$ as four outputs. The coset of the first three is determined by their binary sum $B$. The reduced joint law has output $(B,B)$, while the reduced product law replaces the first coordinate by an independent fair bit. For each value of the second coordinate, the two conditional laws of the first have total variation $1/2$. Hence the four-output total variation is $1/2$.
 
+**Which laws can independent bits generate? (Written derivation)** The sign moments constrain the laws that independent bits can generate. Consider two linear functionals $\lambda,\nu$. A single input bit with factor $q=1-2t$ and column $c$ contributes either $1$ or $q$ to each of $m_\lambda$ and $m_\nu$, according to the value of the corresponding functional on $c$. If both functionals give $1$, their sum gives $0$, so this column contributes $|q|^2$ on the left and $1$ on the right. In the other three cases the contributions agree. Independence therefore gives
+
+$$
+|m_\lambda|\,|m_\nu|\le |m_{\lambda+\nu}|.
+$$
+
+The affine offset affects only the signs, so the constraint also covers negative biases and fair bits. On $\mathbb F_2^2$, take masses $(17,1,7,7)/32$ in the order $00,10,01,11$. The sign moments for the first coordinate, the second coordinate, and their sum are $1/2,1/8,1/2$, respectively. For the first coordinate and the sum, the left side is $1/4$ and the right side is $1/8$. Thus no finite collection of independent input bits with an affine offset generates this law.
+
+The same law has no convolution root of any order $n\ge 2$. Such a root is a probability law whose $n$-fold convolution with itself gives the stated law. If one exists, let $r^n=1/2$ with $r\ge 0$. The three nontrivial moments of the root have magnitudes $r,r^3,r$ in the same order. The first coordinate and the sum are linearly independent functionals, so at some point both moments give negative contributions to the inversion formula. The mass at that point is at most
+
+$$
+\frac{1-2r+r^3}{4}
+=\frac{(r-1)(r^2+r-1)}{4}<0,
+$$
+
+since $1/\sqrt{2}\le r<1$. This contradicts nonnegative mass.
+
 **Recovering biases from the coset law (written derivation).** Let the biased input bits $X_j$ be independent, with $\Pr(X_j=1)=t_j\in(0,1/2)$. Write $c_j\in C$ for the image of the column of input $j$ in the quotient. The coset output is $Y=s+\sum_j c_jX_j$, with the projected affine offset $s$. For each nonzero $c\in C$, define $q_c=\prod_{j:c_j=c}(1-2t_j)$, with empty product $1$.
 
 For a linear functional $\lambda\in C^*$, write $\chi_\lambda(c)=(-1)^{\lambda(c)}$ and let $m_\lambda=\mathbb E[\chi_\lambda(Y)]$. Independence of the inputs gives
