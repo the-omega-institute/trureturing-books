@@ -1057,6 +1057,19 @@ For empty $H$, this probability is $1$ for $d=0$ and zero for $d=1$. Two nonempt
 
 In the example above with $C=(1\ \ 1)$, the basis bit is zero precisely when the free bit is $1$, which has probability $3/8$. The basis-bit coefficient is $2/3$, so $S_J=1/4$ and the improved bound $(3/32)(1+1/4)=15/128$ equals the actual decrease.
 
+**Choosing a column basis (worked example).** Take retained pairs $(1,5)$ and $(6,10)$ and discarded pairs $(0,2)$, $(7,11)$, and $(3,8)$, in that order. Their later-endpoint probabilities are $(1/4,1/2)$ and $(1/8,1/4,1/4)$ respectively. When balancing the first retained orbital,
+
+$$
+C=\begin{pmatrix}
+1&0&1\\
+0&1&1
+\end{pmatrix},
+\qquad e=\begin{pmatrix}1\\0\end{pmatrix},
+\qquad (t_1,t_2,t_3)=(7/32,3/8,3/8).
+$$
+
+The two solutions of $Cw=e$ are $(1,0,0)$ and $(0,1,1)$. Add their probabilities and multiply by $b_1=1/4$ to obtain the actual drop of $25/512$. Columns $2,3$ give the largest original bound, $9/256$. Whenever the free bit $w_1=1$, both basis bits are zero and each contributes a relative excess of $2/3$. The first-order bound keeps the two linear terms and gives $(9/256)(1+2(7/32)(2/3))=93/2048$. Columns $1,2$ give an original bound of $21/1024$. Exactly one basis bit is zero at either solution, so the first-order bound reaches $25/512$.
+
 For example, suppose both retained pairs alternate with the sole discarded pair and its endpoint probability satisfies $0<q<1$. Both restricted rows are $(1)$. When the first retained orbital is already balanced, balancing the second leaves purity unchanged. When all three later-endpoint probabilities start at $1/4$, balancing just the second retained orbital lowers purity from $83/128$ to $5/8$.
 
 Choose any subset of the initially biased retained orbitals, including the empty set, and balance the selected orbitals one at a time. The number of strict purity decreases equals the dimension gain of the span of the restricted rows. Let $S_0$ be the span of the initially balanced orbitals' restricted rows, and let $S_1$ be the span after adjoining all the selected rows. Each step adjoins a single row. If the row lies in the current span, both dimension and purity stay the same. If it lies outside, the dimension increases by one and purity strictly decreases. Thus every ordering gives $\dim S_1-\dim S_0$ strict decreases. Purity is nonincreasing at every step, so the final purity is strictly below its initial value exactly when $\dim S_1>\dim S_0$.
