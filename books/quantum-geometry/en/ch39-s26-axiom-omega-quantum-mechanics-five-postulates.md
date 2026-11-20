@@ -133,6 +133,12 @@ Suppose the rule reads only the labeled weights $(w,1-w)$ and has to swap its se
 Without the nesting requirement, three seeds $a,b,c$ of weights $1/5,2/5,2/5$ suffice for $m=5$. For $k=0,\ldots,5$, take $\varnothing,\{a\},\{b\},\{a,b\},\{b,c\},\{a,b,c\}$ in that order. These events have masses $k/5$. Exchanging $b,c$ and fixing $a$ sends $E_k$ to the complement of $E_{5-k}$. The seed law is an additional input of this model.
 :::
 
+**Largest grid with prescribed half-integer pair weights (manual derivation).** Use one seed law to calibrate the full binary grid of even denominator, and impose pointwise covariance under one weight-preserving involution. The midpoint event pairs the seeds. After scaling by the denominator, suppose exactly $h$ pairs have noninteger half-integer weights and the other $t$ pairs have integer weights. The midpoint takes one seed from every pair and has integer scaled mass, so $h$ is even.
+
+An integer mass requires the occupancy digits on the first $h$ pairs to have even sum. The digits lie in $\{0,1,2\}$. Read them as a ternary number. Since $3$ is odd, the number and its digit sum have the same parity. There are $W=(3^h+1)/2$ even integers from $0$ through $3^h-1$. The remaining pairs have $3^t$ possible occupancies, giving the upper bound $W3^t-1$ on the denominator.
+
+For $h+t>0$ the bound is attainable. Give the first $h$ pairs common weights $3^i/2$ for $0\le i<h$, so their integer masses cover $0$ through $W-1$. Give the remaining $t$ pairs weights $W3^j$ for $0\le j<t$. Their occupancies produce adjacent blocks of $W$ integers. The total scaled seed mass is $W3^t-1$. Normalize by this total, select one seed per pair at the midpoint, and choose an event of the required mass at each lower level. Swap each pair and take complements to obtain the upper events.
+
 ## 39.3.3 Formal Anchor Theorem, Literature & Appendix E Scope, Quantitative Audit, and Bridge to the Exteriorless Ternion Ontology {#sec-ch39-26-3}
 
 We formalize the five-postulate projection map, assemble the twenty-three frozen Lean 4 anchors of its two theorem boxes, record classical attributions, and verify all five invariants quantitatively below:
