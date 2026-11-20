@@ -971,6 +971,17 @@ On the supported occupation basis, $(MM^\dagger)_{xx'}$ is $\sqrt{\mu(x)\mu(x')}
 
 When one retained pair alternates with one discarded pair, $A=(1)$. Adding the terms for $z=0$ and $z=1$ gives purity $1-8p(1-p)q(1-q)$. For instance, $p=q=1/4$ gives $23/32$, while $p=q=1/2$ gives $1/2$.
 
+**Purity excess and the two endpoint laws (written derivation).** Return to the two image spaces of size $d=2^r$ with laws $P,Q$. Write $\Delta_P=\sum_u(P(u)-1/d)^2$ and define $\Delta_Q$ in the same way. Let $m=\min_u P(u)$. Then
+
+$$
+\operatorname{Tr}(\rho_I^2)-\frac1d
+\ \ge\ \Delta_P+(2dm-d^2m^2)\Delta_Q .
+$$
+
+The bound also holds with the two sides exchanged and the coefficient calculated from $\min_v Q(v)$. Equality holds in the displayed bound when $P$ exceeds $m$ at at most one site. For a single alternating pair on each side with $p=q=1/4$, the two deviations are both $1/8$. The right side is $7/32$, exactly $23/32-1/2$.
+
+Set $C=H\operatorname{diag}(Q)H^\mathsf T$. This real symmetric matrix has $C_{uu}=1$. Since $H^\mathsf T H=dI$ and $H_{uv}^2=1$, each row has squared norm $d\sum_v Q(v)^2$. Removing the diagonal contribution leaves $d\Delta_Q$ in every row and column. The marginal purity is $\sum_{u,u'}P(u)P(u')C_{uu'}^2$. On the off-diagonal terms, write $P(u)=m+R(u)$. The constant and linear terms contribute $(dm^2+2m\sum_u R(u))d\Delta_Q$. Using $\sum_u R(u)=1-dm$ and subtracting the uniform-spectrum purity $1/d$ gives the displayed right side plus the nonnegative remainder $\sum_{u\ne u'}R(u)R(u')C_{uu'}^2$. This remainder vanishes when the surplus is concentrated at one site. Transposing the amplitude matrix exchanges the sides and preserves the nonzero spectrum, so the same calculation controls the other law.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
