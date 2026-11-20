@@ -1029,6 +1029,34 @@ The remaining columns span $e$ after deletion of column $j$ exactly when $Cw=e$ 
 
 Take retained pairs $(0,2)$ and $(4,5)$ and discarded pair $(1,3)$, each with later-endpoint probability $1/4$. Balancing $(0,2)$ decreases purity by $3/32$, with a lower bound of $3/128$. The second retained pair has zero restricted row, so the first condition fails. Next take retained pair $(2,5)$ and discarded pairs $(0,3)$ and $(1,4)$, again with probabilities $1/4$. Now $C=(1\ \ 1)$ and either singleton column basis gives a bound of $3/32$. Only unequal difference bits contribute, giving a drop of $15/128$. Both coordinate rows lie outside the coset, so the second condition fails.
 
+**Improving the lower bound with parity probabilities (written derivation).** Assume strict decrease and fix a column basis $J$. Write $B_J$ for the product lower bound above. Set $F=L\setminus J$ and $t_j=2q_j(1-q_j)$. Draw the free difference bits $Y_j$ on $F$ independently, with probability $t_j$ of a $1$, and extend them uniquely to the solution $w(Y)$ of $Cw=e$.
+
+For a basis column $j\in J$, divide its probability factor by its lower bound $t_j$. The result is $1$ plus $(1-2t_j)/t_j$ times the indicator of $w_j(Y)=0$. The factor for each other biased retained orbital $k$, divided by its lower bound $b_k$, is $1$ plus $(1-b_k)/b_k$ times the indicator of $a_k\cdot w(Y)=0$. Write $\Delta$ for the purity decrease. Keeping the constant and linear terms in the product of these normalized factors gives
+
+$$
+\begin{aligned}
+\Delta &\ge B_J(1+S_J),\\
+S_J &=
+\sum_{j\in J}\frac{1-2t_j}{t_j}\Pr[w_j(Y)=0]\\
+&\quad+
+\sum_{\substack{k\ne i\\p_k\ne 1/2}}
+\frac{1-b_k}{b_k}\Pr[a_k\cdot w(Y)=0].
+\end{aligned}
+$$
+
+Every term is nonnegative. If the original bound for this basis is strictly below the actual decrease, then $S_J>0$ because every free-bit assignment has positive probability. The improved bound is attained exactly when each assignment makes at most one factor exceed its lower bound. If two factors exceed their lower bounds at the same assignment, the product expansion contains a quadratic term that is positive there. Events with zero coefficient play no role in equality.
+
+The extension $w(Y)$ is affine, so each event has the form $\sum_{j\in H}Y_j=d$ over $\mathbb F_2$, where $H\subseteq F$. Its indicator is $(1+(-1)^d\prod_{j\in H}(-1)^{Y_j})/2$. Independence gives
+
+$$
+\Pr\!\left[\sum_{j\in H}Y_j=d\right]
+=\frac{1+(-1)^d\prod_{j\in H}(1-2t_j)}{2}.
+$$
+
+For empty $H$, this probability is $1$ for $d=0$ and zero for $d=1$. Two nonempty events are disjoint exactly when they have the same support $H$ and opposite right-hand sides $d$. Distinct nonzero binary linear forms are linearly independent, so there is an assignment satisfying both equations. If one equation holds everywhere, its event intersects every nonempty event. Checking these pairs among the nonempty events with positive coefficients decides whether the improved bound is attained.
+
+In the example above with $C=(1\ \ 1)$, the basis bit is zero precisely when the free bit is $1$, which has probability $3/8$. The basis-bit coefficient is $2/3$, so $S_J=1/4$ and the improved bound $(3/32)(1+1/4)=15/128$ equals the actual decrease.
+
 For example, suppose both retained pairs alternate with the sole discarded pair and its endpoint probability satisfies $0<q<1$. Both restricted rows are $(1)$. When the first retained orbital is already balanced, balancing the second leaves purity unchanged. When all three later-endpoint probabilities start at $1/4$, balancing just the second retained orbital lowers purity from $83/128$ to $5/8$.
 
 Choose any subset of the initially biased retained orbitals, including the empty set, and balance the selected orbitals one at a time. The number of strict purity decreases equals the dimension gain of the span of the restricted rows. Let $S_0$ be the span of the initially balanced orbitals' restricted rows, and let $S_1$ be the span after adjoining all the selected rows. Each step adjoins a single row. If the row lies in the current span, both dimension and purity stay the same. If it lies outside, the dimension increases by one and purity strictly decreases. Thus every ordering gives $\dim S_1-\dim S_0$ strict decreases. Purity is nonincreasing at every step, so the final purity is strictly below its initial value exactly when $\dim S_1>\dim S_0$.
