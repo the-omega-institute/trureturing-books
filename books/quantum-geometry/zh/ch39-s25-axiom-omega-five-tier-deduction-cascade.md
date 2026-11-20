@@ -70,11 +70,22 @@ $$
 :::
 
 ::: {.remark #rem-ch39-axiom-omega-tier3-pati-salam title="第三阶的结构来源：宇称、电弱质量关系与三个结构的 Pati–Salam 嵌入"}
-**单个结构（`手工推导`）。** 迁移反转 $\iota$（模型中 $z \mapsto \bar{z}$）保持 $\kappa$ 并交换左、右迁移，$\iota\mathcal{L}\iota = \mathcal{R}$：宇称就是迁移反转。与时钟相容的自同构构成 $\mathrm{U}(2)$。在比较结构场丛的假设下（`MODEL`），时钟场把结构群约化到 $\mathrm{U}(2)$，原点的稳定子是由 $Q = T_3 + Y$ 生成的圆周；纤维形式对 $\mathrm{Aut}(\mathcal{M})$ 不变的协变导数二次密度在差一个因子的意义下只有一种，即 $v^2 h(D\sigma, D\sigma)$（$h$ 为 $\kappa$ 的海森形式），由它得到 $m_W = m_Z\cos\theta_W$。这一关系来自法则 (II) 的双侧不变：只对 $\mathrm{U}(2)$ 不变的纤维形式会留下自由的比值 $\alpha/\beta$，即 $\rho$ 参数（保管对称性见 M. Veltman, *Nucl. Phys. B* **123**, 89–99, 1977，`文献结果`）。
+**单个结构（`手工推导`）。** 迁移反转 $\iota$（模型中 $z \mapsto \bar{z}$）保持 $\kappa$ 并交换左、右迁移，$\iota\mathcal{L}\iota = \mathcal{R}$：宇称就是迁移反转。与时钟相容的自同构构成 $\mathrm{U}(2)$。在比较结构场丛的假设下（`MODEL`），时钟场把结构群约化到 $\mathrm{U}(2)$，原点的稳定子是由 $Q = T_3 + Y$ 生成的圆周；纤维形式对 $\mathrm{Aut}(\mathcal{M})$ 不变的协变导数二次密度在差一个因子的意义下只有一种，即 $v^2 h(D\sigma, D\sigma)$（$h$ 为 $\kappa$ 的海森形式），其质量形式的特征值之比为 $g^2 : (g^2 + g'^2)$；把这些特征值读作质量，还要求联络是动力学的（[@rem-ch39-axiom-omega-field-hypotheses-and-limits] 中的 F$_{\mathrm{g}}$(a)），这时得到树图上的 $m_W = m_Z\cos\theta_W$。这一关系来自法则 (II) 的双侧不变：只对 $\mathrm{U}(2)$ 不变的纤维形式会留下自由的比值 $\alpha/\beta$，即 $\rho$ 参数（保管对称性见 M. Veltman, *Nucl. Phys. B* **123**, 89–99, 1977，`文献结果`）。
 
 **一对闭合结构（`手工推导`）。** 一对结构的核空间 $V_2 = \mathbb{C}^2 \otimes \mathbb{C}^2$ 中，反对称单位向量 $\omega$ 张成唯一在联合迁移下不变的射线，其正交补为 $\mathrm{Sym}^2 V \cong \mathbb{C}^3$；$\omega$ 在 $\mathrm{SU}(V_2) \cong \mathrm{SU}(4)$ 中的稳定子是 $\mathrm{SU}(3)$，在 $\mathrm{Sym}^2 V$ 上取定义表示。
 
 **三个结构（`MODEL`）。** 以下每一项都是假设：规范群为 $\mathrm{SU}(V_2) \times \mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$（后两个因子是第三个结构的左、右迁移），物质多重态为 $(4, 2, 1)$ 与 $(4, 1, 2)$，破缺构型为 $\Xi = \omega \otimes v$（$v$ 为第三个结构上的一点）。则 $\Xi$ 的稳定子的李代数为 $\mathfrak{su}(3) \oplus \mathfrak{su}(2)_L \oplus \mathfrak{u}(1)_Y$，其中 $Y = T_{3R} + \frac{1}{2}(B - L)$，忠实作用的整体形式为 $(\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1))/\mathbb{Z}_6$。$Y$ 在左手多重态上取 $-\frac{1}{2}$（轻子）与 $\frac{1}{6}$（夸克），在右手多重态上取 $0, -1$（轻子）与 $\frac{2}{3}, -\frac{1}{3}$（夸克），正是含右手中微子的一代费米子的超荷，轻子沿 $\omega$、夸克沿 $\mathrm{Sym}^2 V$。再假设以单一迹形式归一且三个因子耦合相等（同属 `MODEL` 假设），得 $\sin^2\theta_W = \operatorname{Tr}T_{3L}^2 / \operatorname{Tr}Q^2 = \frac{3}{8}$；若超荷就是单个结构的时钟生成元 $T_{3R}$，同一归一给出 $\frac{1}{2}$。按标准模型一圈跑动（不计阈值），$\sin^2\theta_W$ 约在 $1.0 \times 10^{13}\;\mathrm{GeV}$ 达到 $\frac{3}{8}$、约在 $5.4 \times 10^{20}\;\mathrm{GeV}$ 达到 $\frac{1}{2}$；但以标准模型的物质内容，一圈下没有任何能标实现三个耦合相等：在 $1.0 \times 10^{13}\;\mathrm{GeV}$ 处 $\alpha_3^{-1} = 36.8$，而 $\alpha_2^{-1} = 42.4$。所以 $\frac{3}{8}$ 与 $\frac{1}{2}$ 只是群论边界值，不是对低能值的预言。以上就是 Pati–Salam 嵌入（J. C. Pati & A. Salam, *Phys. Rev. D* **10**, 275–289, 1974）与 Georgi–Quinn–Weinberg（1974）的取值，`文献结果`；新增的只是把各要素对应到比较结构的对象上。规范群的这条假设由母公理之外给出；代的数目、能标与耦合常数保持 `OPEN`（[@prob-ch39-af-gut-threshold-and-proton-stability]、[@prob-ch34-sm-generations-and-couplings]）。
+:::
+
+::: {.remark #rem-ch39-axiom-omega-field-hypotheses-and-limits title="场论假设及其界限"}
+本注记中各项假设标 `MODEL`，在这些假设下推出的结论标 `手工推导`；场论部分整体是假设性的。
+
+1. **事件（假设 E，`MODEL`）。** $S^3$ 的球冠在包含关系下构成 de Sitter 空间，包含即因果序；这是关于比较结构本身的定理（见 [@rem-ch39-axiom-omega-tier2-velocity-and-de-sitter]）。把球冠读作物理事件是假设 E。
+2. **未规范化的中心场作为源（假设 F 与 GR 为 `MODEL`；结论为 `手工推导`）。** 假设比较结构的场丛 F（取平凡联络）与动力学度规 GR（带宇宙学常数的爱因斯坦方程），并以把每个球冠映到其中心的中心场为源（$v \ne 0$）。这时不变度规不是解，因为中心场在每个类光向量上的能动张量为正；E、F 与 GR 的每个解都是一条更长的 FLRW 分支在长度为 $\pi$ 的开共形时间区间上的限制，因而可以延拓：没有哪个极大解带有完整的球冠序。
+3. **可选假设 F$_{\mathrm{g}}$（`MODEL`）。** (a) 联络是动力学的，带正的杨—米尔斯项；(b) 带中心场的球冠几何是 (a) 的平坦、协变常值真空。在此假设下（`手工推导`），中心场经一个大规范变换成为纯规范的，能动张量为零；三个矢量场获得质量，树图上 $m_W = m_Z\cos\theta_W$，光子无质量。
+4. **结构定出的与定不出的（`手工推导`）。** 结构定出质量矩阵的形式与树图上的 $\rho = 1$，定不出 $g'/g$：$\frac{1}{2}$、$\frac{3}{8}$、$\frac{3}{10}$ 分别对应不同的归一化（单个结构上反演对称的系数；三个结构的单一迹形式；$\mathfrak{su}(4) \oplus \mathfrak{su}(2) \oplus \mathfrak{su}(2)$ 基灵形式的同一系数）；按所用输入，在弱耦合与强耦合相交的能标上三者都不实现。
+5. **必须明说的界限（`手工推导`）。** 在 F 与 F$_{\mathrm{g}}$(a) 下，电弱部分是没有标量的规范非线性 $\sigma$ 模型，即去掉径向（希格斯）模式的标准模型。照现状它不含标量粒子，而观测到一个质量为 $125.13 \pm 0.11\;\mathrm{GeV}$ 的标量（粒子数据组 2026 版，F. Takahashi 等, *Int. J. Mod. Phys. A* **41**, 2630011, 2026），所以它与观测矛盾。需要另加输入，例如带势的径向模式，而母公理不提供这个势；测得的耦合修正因子（$\kappa_V = 1.023 \pm 0.026$，$\kappa_{2V} = 1.02 \pm 0.23$）并不单独选出径向模式。三个结构的假设中的双二重态正是这种取值于锥的场，但该假设没有给出势。
+6. **可检验性。** 运动学部分精确重现标准量子力学，没有哪个例子能把二者区分开；场论部分是假设性的。按可能失败的方式，陈述分为：在命名假设下的数学推论；在命名假设下的标准物理推论；测量输入或拟合；可能与数据或显式补全冲突的陈述（如作为边界值的 $\frac{3}{8}$ 与 $\frac{1}{2}$，以及未规范化中心场使几何测得的曲率半径与膨胀中的曲率项相差因子 $1 - 4\pi G_N v^2$）；不加输入就与数据矛盾的陈述（第 5 项）。
 :::
 
 2. **第四阶推导：算术谱半密度矢高相变与舒尔正定脊线（Tier 4，呼应 [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md)–[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md)）**：
