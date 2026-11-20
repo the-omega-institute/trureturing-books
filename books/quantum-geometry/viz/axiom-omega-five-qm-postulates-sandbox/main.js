@@ -185,6 +185,36 @@
       psi0 = [C(cs(u)), C(sn(u))],
       psi = m.spinor,
       rho = outer(psi, psi);
+    // rayKernel_*: a spinor (v₀, v₁) read as the unit quaternion q with s(q) = (q₀ + q₁i, −q₂ + q₃i)
+    const toQ = (v) => [v[0][0], v[0][1], -v[1][0], v[1][1]],
+      qm = (a, b) => [
+        a[0] * b[0] - a[1] * b[1] - a[2] * b[2] - a[3] * b[3],
+        a[0] * b[1] + a[1] * b[0] + a[2] * b[3] - a[3] * b[2],
+        a[0] * b[2] - a[1] * b[3] + a[2] * b[0] + a[3] * b[1],
+        a[0] * b[3] + a[1] * b[2] - a[2] * b[1] + a[3] * b[0]
+      ],
+      qd = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3],
+      QI4 = [0, 1, 0, 0],
+      QONE = [1, 0, 0, 0],
+      hopfOf = (q) => qm(qm(q, QI4), [q[0], -q[1], -q[2], -q[3]]),
+      kq = (a, b) => (1 + qd(a, b)) / 2,
+      rayK = (a, b) => (2 * kq(a, b) - 1) ** 2 + (2 * kq(a, qm(b, QI4)) - 1) ** 2;
+    const x0 = toQ(psi0),
+      xq = toQ(psi),
+      hx = hopfOf(xq);
+    let phaseDrift = 0;
+    for (let k = 0; k < 12; k++) {
+      const c = [cs((k * PI) / 6), sn((k * PI) / 6), 0, 0];
+      phaseDrift = Math.max(phaseDrift, Math.abs(rayK(qm(x0, c), QONE) - rayK(x0, QONE)), Math.abs(rayK(QONE, qm(x0, c)) - rayK(QONE, x0)));
+    }
+    const rayKernel = {
+      fiber: rayK(x0, xq),
+      value: rayK(xq, QONE),
+      hopf: Math.abs(rayK(xq, QONE) - (1 + qd(hx, hopfOf(QONE))) / 2),
+      born: Math.abs(rayK(xq, QONE) - cabs2(inner(psi, [C(1), C(0)]))),
+      phaseDrift,
+      bloch: Math.max(...blochOf2(outer(psi, psi)).map((v, i) => Math.abs(v - [hx[3], hx[2], hx[1]][i])))
+    };
     // a balanced split of the rotor S that takes |0⟩ to ψ₀: A = S(I + iσz)/2, B = S(I − iσz)/2
     const Sr = [[C(cs(u)), C(-sn(u))], [C(sn(u)), C(cs(u))]];
     const A = msc(mmul(Sr, madd(I2, msc(SZ, C(0, 1)))), C(0.5)),
@@ -252,6 +282,7 @@
       unitGram: { inner: m.overlap, distance: vnorm(psi.map((z, k) => cadd(z, cmul(C(-1), psi0[k])))), norms: [vnorm(psi0), vnorm(psi)] },
       blochNorm: { r: m.r, norm: Math.sqrt(m.rNorm2) },
       blochSurjective: { preimage: psi0, residual: Math.max(...blochOf(psi0).map((x, i) => Math.abs(x - m.r[i]))) },
+      rayKernel,
       commonPhase: { value: inner(psi, apply(outer(psi0, psi0), psi)), H: outer(psi0, psi0) },
       balanced: { unitary: gap(mmul(Sr, adj(Sr)), I2), sum: gap(madd(A, B), Sr), halfA: gap(mmul(A, adj(A)), half), halfB: gap(mmul(B, adj(B)), half), skew: gap(adj(cross), msc(cross, C(-1))), cross: gap(cross, msc(rsig, C(0, 0.5))) },
       robertson: { lhs: nA * nB, covariance: cov, commutatorHalf: comm, G, identity: Math.abs(nA * nB - (cov * cov + cabs2(comm) + G)), reCov: Math.abs(uv[0] - cov), imComm: hypot(uv[1] - comm[0], comm[1]) },

@@ -1,0 +1,37 @@
+{
+  "title": "The ball only shrinks",
+  "title_zh": "球只缩不长",
+  "summary": "A qubit is a point in the Bloch ball, pure on the skin and mixed inside, and every noise moves the whole ball at once. Pinching keeps the diagonal of the density matrix and erases the rest: on the ball every point slides sideways onto the vertical axis. For the state with matrix [[0.9, 0.3], [0.3, 0.1]] the Hilbert–Schmidt squared size 1 splits into 0.82 kept and 0.18 thrown away, and Lean checks that this Pythagorean split holds for every 2×2 complex matrix, the discarded part being exactly |ρ₀₁|² + |ρ₁₀|²; phase damping does the same step by step, multiplying the off-diagonal entries by c each time, so the ball slims into a cigar. Energy loss shrinks the ball and lifts it toward the ground state at the north pole: at γ = 0.36 heights become 0.64 z + 0.36 and widths shrink to 0.8, so the south pole climbs to −0.28 while the north pole stays put. With the north pole and that height rule fixed, Lean checks that the whole ball stays inside itself if and only if the width factor squared is at most the height factor; 0.8² = 0.64 puts amplitude damping exactly on the edge, while width 0.9 pushes the point (0.6, 0.8) out to squared radius 1.052. The trace distance of two qubit states is half the straight distance between their points; a pair 0.8 apart stays 0.8 apart under pinching and comes to 0.512 under energy loss, and Lean checks that no quantum channel ever increases the trace distance. Never growing is not always shrinking, staying inside the ball does not make a map a channel, and the Bloch pictures of the named noises are textbook results not formalized in the book.",
+  "summary_zh": "一个量子比特是布洛赫球里的一个点：纯态在球皮上，混合态在球里面；每一种噪声都一次挪动整颗球。捏合保留密度矩阵的对角元、抹掉其余两个，在球上就是每个点横着滑到竖轴上。矩阵为 [[0.9, 0.3], [0.3, 0.1]] 的态，希尔伯特—施密特平方大小 1 分成留下的 0.82 与丢掉的 0.18；Lean 检验了这一勾股分解对任意 2×2 复矩阵成立，丢掉的部分正是 |ρ₀₁|² + |ρ₁₀|²。相位阻尼一步一步做同样的事，每步把非对角元乘以 c，球瘦成一根雪茄。能量耗散把球缩小并往北极的基态抬：γ = 0.36 时高度变为 0.64 z + 0.36，宽度缩到 0.8 倍，南极爬到 −0.28，北极纹丝不动。固定北极和这条高度规则，Lean 检验了整颗球留在球里，当且仅当宽度因子的平方不超过高度因子；0.8² = 0.64 让振幅阻尼恰好压在边界上，宽度取 0.9 时点 (0.6, 0.8) 的像平方半径为 1.052，刺出了球皮。两个单比特态的迹距离是两点直线距离的一半：相距 0.8 的一对，捏合后仍是 0.8，能量耗散后是 0.512；Lean 检验了任何量子信道都不会让迹距离变大。不变大不等于一定变小，留在球里不等于就是信道，各种噪声在球上的样子是教科书结果，本书没有形式化。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-20",
+  "duration": "2:19",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a lit glass Bloch ball, pinching onto the vertical axis, a phase-damping cigar, amplitude damping drifting north, the north-pole width test, trace distances before and after noise",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean",
+    "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass",
+    "D5/S3/Quantum/QubitWitnesses.phaseDampingIterate_apply",
+    "D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.north_pole_ball_preserving_iff",
+    "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_contract"
+  ],
+  "solid": true,
+  "scripts": [
+    "viz/two-angle-addressing/model.js",
+    "viz/qubit-geometry/model.js"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_noise-in-the-ball_720p_narrated.mp4",
+    "cover": "quantum-geometry_noise-in-the-ball_cover.jpg"
+  }
+}

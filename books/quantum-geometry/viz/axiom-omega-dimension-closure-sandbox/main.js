@@ -209,6 +209,62 @@
     return { B, eig, signature: '(' + signs.join(', ') + ')' };
   }
   const KILLING = Object.fromEntries(Object.entries(ALG).map(([k, a]) => [k, killing(a.br)]));
+  /** Determinant and numerical rank of a square real matrix, by Gaussian elimination with partial pivoting. */
+  function eliminate(M) {
+    const A = M.map((r) => r.slice()),
+      n = A.length,
+      cols = A[0].length,
+      scaleTol = 1e-9 * Math.max(1, ...A.flat().map(Math.abs));
+    let det = 1,
+      rank = 0;
+    for (let c = 0; c < cols && rank < n; c++) {
+      let p = rank;
+      for (let r = rank + 1; r < n; r++) if (Math.abs(A[r][c]) > Math.abs(A[p][c])) p = r;
+      if (Math.abs(A[p][c]) <= scaleTol) { det = 0; continue; }
+      if (p !== rank) { [A[p], A[rank]] = [A[rank], A[p]]; det = -det; }
+      det *= A[rank][c];
+      for (let r = 0; r < n; r++) if (r !== rank) { const f = A[r][c] / A[rank][c]; for (let k = c; k < cols; k++) A[r][k] -= f * A[rank][k]; }
+      rank++;
+    }
+    return { det: rank === n && n === cols ? det : 0, rank, rows: A.slice(0, rank) };
+  }
+  const detN = (M) => eliminate(M).det;
+  const numRank = (M) => eliminate(M).rank;
+  /** The invariant bilinear forms Φ([x, y], z) = −Φ(y, [x, z]) of an algebra: a basis of the solutions, as n × n matrices. */
+  function invariantForms(br) {
+    const n = br.length,
+      rows = [];
+    for (let x = 0; x < n; x++)
+      for (let y = 0; y < n; y++)
+        for (let z = 0; z < n; z++) {
+          const row = new Array(n * n).fill(0);
+          for (let k = 0; k < n; k++) {
+            row[k * n + z] += br[x][y][k];
+            row[y * n + k] += br[x][z][k];
+          }
+          rows.push(row);
+        }
+    const R = eliminate(rows).rows,
+      pivots = R.map((r) => r.findIndex((v) => Math.abs(v) > 1e-12)),
+      free = [...Array(n * n).keys()].filter((c) => !pivots.includes(c));
+    return free.map((f) => {
+      const v = new Array(n * n).fill(0);
+      v[f] = 1;
+      R.forEach((r, i) => { v[pivots[i]] = -r[f] / r[pivots[i]]; });
+      return Array.from({ length: n }, (_, i) => v.slice(i * n, i * n + n));
+    });
+  }
+  /** aff(1) (H, E with [H, E] = E): every invariant form has Φ(E, ·) = 0, so E lies in its left kernel. */
+  const AFF_FORMS = (() => {
+    const forms = invariantForms(ALG.aff.br);
+    return { dim: forms.length, forms, eRowZero: forms.every((F) => F[1].every((v) => Math.abs(v) < 1e-12)) };
+  })();
+  /** Twenty fixed unit quaternions in general position (a linear congruential sequence), for the kernel ranks. */
+  const RANK_POINTS = (() => {
+    let s = 20261119;
+    const r = () => ((s = (s * 48271) % 2147483647) / 2147483647) * 2 - 1;
+    return Array.from({ length: 20 }, () => { const q = [r(), r(), r(), r()]; return scale(q, 1 / norm(q)); });
+  })();
   /** Ad of the flow exp(s G): exp(s ad G), with its operator norm. */
   function adFlow(name, s) {
     const a = ALG[name],
@@ -459,7 +515,31 @@
       B = cscale(cmm(S, cadd(CI, iS3, -1)), cx(0.5));
     const half = cscale(CI, cx(0.5)),
       AB = cmm(A, cdag(B));
+    // tri_eq_mul_inv_mul, baseChange_bijective, noncommutative_iff: the group at the current bridge o
+    const o = m.bridge,
+      star = (a, b) => heap(a, o, b),
+      invO = (a) => heap(o, a, o),
+      sampleQ = [ONE, scale(ONE, -1), QI, QJ, QK, ...anchors];
+    let triGap = 0,
+      changeGap = 0,
+      orderGap = 0;
+    for (const x of sampleQ) for (const y of sampleQ) for (const z of sampleQ) triGap = Math.max(triGap, qgap(heap(x, y, z), star(star(x, invO(y)), z)));
+    for (const o2 of [ONE, QK]) for (const x of sampleQ) changeGap = Math.max(changeGap, qgap(heap(heap(x, o, o2), o2, o), x));
+    for (const x of [QI, QJ, QK]) for (const y of [QI, QJ, QK]) orderGap = Math.max(orderGap, qgap(heap(x, o, y), heap(y, o, x)));
+    // quaternionModel_hasFeatureRank_five, five_le_of_hasFeatureRank: the reading table of 1, −1, i, j, k
+    const five = [ONE, scale(ONE, -1), QI, QJ, QK],
+      K5 = five.map((p) => five.map((q) => kappa(p, q)));
+    let realize = 0;
+    for (const p of five) for (const q of five) realize = Math.max(realize, Math.abs(dot(motherFeature(p), motherFeature(q)) - kappa(p, q)));
+    // finrank_span_sum_character_kernel: the numerical rank of each kernel on fixed points of S³
+    const kernelRanks = Object.fromEntries(
+      Object.entries(KERNELS).map(([k, K]) => [k, numRank(RANK_POINTS.map((p) => RANK_POINTS.map((q) => K.f(Math.acos(Math.max(-1, Math.min(1, dot(p, q))))))))])
+    );
     return {
+      basePoint: { triGap, changeGap, orderGap },
+      rankFive: { det: detN(K5), rank: numRank(K5), realize },
+      lowDim: { aff: AFF_FORMS, su2Residual: su2BracketResidual, c: SU2_BRACKETS[0][1][2] },
+      characterRank: kernelRanks,
       partition: readout,
       unitGram: { worstSame, leastOther, integerEqual: qgap(intK, intNegK) < 1e-12, integerOverlap: dot(intK, intNegK) },
       born: { weight: w0, overlapSq: overlap[0] ** 2 + overlap[1] ** 2, half: cs(e / 2) ** 2, unreadGap: cgap(unread, recombined), total: w0 + w1 },

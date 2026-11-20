@@ -1,0 +1,47 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "Sorkin": "Sorkin"},
+  "music": {"bpm": 80, "progression": "d-minor"},
+  "scenes": [
+    {"id": "slits", "name": "THREE SLITS", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Open one slit, and light lands evenly on the screen. Open two, and stripes appear.", "开一条缝，光均匀地落在屏上；开两条缝，条纹就出来了。"],
+      ["That is interference: some places get more than the two slits alone, some get less.", "这就是干涉：有的地方比两条缝各开一次之和多，有的地方少。"],
+      ["Now open a third. Does it bring a new interference, one that needs all three at once?", "再开第三条缝：会不会冒出一种新的干涉，非得三条缝同时在场才有？"]
+    ], "cues": [{"line": 2, "at": 3.6, "kind": "glitch"}]},
+    {"id": "square", "name": "SQUARE OF A SUM", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.0, 0.2], "lines": [
+      ["At one point on the screen, each open slit sends an arrow: its amplitude.", "屏上某一点，每条开着的缝都送来一支箭头：它的振幅。"],
+      ["The arrows add head to tail. Here they sum to length two, so the weight is four.", "箭头首尾相接；这里加起来长度是 2，权重就是 2² = 4。"],
+      ["Multiply the sum by its own conjugate, and you get nine tiles.", "把这个和乘以它自己的共轭，展开来一共九块。"],
+      ["Each tile pairs one slit with one slit: three on the diagonal, six that mix two slits.", "每一块只把一条缝和一条缝配成一对：对角线上三块，另外六块各混两条缝。"],
+      ["No tile ever holds all three slits.", "没有哪一块同时装着三条缝。"]
+    ], "cues": [{"line": 1, "at": 3.4, "kind": "chime"}, {"line": 4, "at": 0.8, "kind": "stamp"}]},
+    {"id": "count", "name": "SEVEN WEIGHTS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["Sorkin's test takes seven weights: all three, minus each pair, plus each single slit.", "索金的检验取七个权重：三缝全开，减去每一对，再加回每一条单缝。"],
+      ["Follow a diagonal tile: plus one with all three, minus two in the pairs, plus one alone. Zero.", "盯住一块对角块：三缝里 +1，两对里 −2，单缝里 +1，合起来是零。"],
+      ["A mixed tile appears only with all three and in its own pair: plus one, minus one. Zero again.", "一块交叉块只在三缝和它自己那一对里出现：+1，−1，又是零。"],
+      ["At sixty degrees: four, minus three, one and three, plus three ones. Zero.", "60° 时：4 − 3 − 1 − 3 + 1 + 1 + 1 = 0。"],
+      ["With every arrow equal to one: nine, minus three fours, plus three ones. Zero.", "让三支箭头都等于 1：9 − 4 − 4 − 4 + 1 + 1 + 1 = 0。"]
+    ], "cues": [{"line": 1, "at": 4.6, "kind": "chime"}, {"line": 3, "at": 4.2, "kind": "chime"}]},
+    {"id": "sweep", "name": "SLIDE THE DETECTOR", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.8, 0.7, 0.3, 0.3], "lines": [
+      ["Now slide the detector across the screen. Every arrow turns, and every weight changes.", "现在让探测点沿着屏幕滑动：每支箭头都在转，每个权重都在变。"],
+      ["Yet the three-slit pattern is always the three pair patterns, minus the three single slits.", "可三缝图样始终等于三对双缝图样之和，减去三条单缝。"],
+      ["The pair terms swing up and down. The third-order term stays flat at zero.", "两两的交叉项起起落落，三阶项却一路平躺在零上。"]
+    ], "cues": [{"line": 2, "at": 2.8, "kind": "chime"}]},
+    {"id": "theorem", "name": "WHY A SQUARE", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Why a square? Lean checks that for a pure state and a one-line shutter, the weight is the squared modulus of their inner product.", "为什么是平方？Lean 内核检验：纯态配一维快门，权重就是两者内积的模平方。"],
+      ["The inner product is linear, so the amplitude is a sum over the slits.", "内积是线性的，所以振幅就是各条缝的振幅之和。"],
+      ["A slit can be a whole bundle of paths. Lean checks that the seven terms cancel for any three disjoint bundles.", "“缝”可以是一束路径；Lean 内核检验：三束互不相交时，七项相消为零。"],
+      ["It holds in any commutative ring with a conjugation. The proof just expands the square.", "这在任何带共轭的交换环里都成立；证明只是把平方展开。"]
+    ], "cues": [{"line": 0, "at": 4.8, "kind": "stamp"}, {"line": 2, "at": 4.4, "kind": "stamp"}]},
+    {"id": "edge", "name": "ONE WAY ONLY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["With a fourth power instead, equal arrows give eighty-one, minus forty-eight, plus three: thirty-six.", "换成四次方，三支相等的箭头给出 81 − 48 + 3 = 36。"],
+      ["A fourth-power rule would leave a true three-way term.", "四次方的规则会留下真正的三方干涉项。"],
+      ["The street runs one way. A square weight forces the third-order term to vanish.", "这是单行道：平方权重迫使三阶项为零。"],
+      ["A zero third-order term alone does not single out the Born rule, and the identity ignores leaks between real slits.", "单凭三阶项为零挑不出玻恩规则；这条恒等式也不管真实狭缝之间的串扰。"]
+    ], "cues": [{"line": 0, "at": 5.6, "kind": "impact"}]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter two.", "《量子计算的几何直觉》· 第二章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}
