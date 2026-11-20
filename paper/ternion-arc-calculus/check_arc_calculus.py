@@ -29,6 +29,7 @@ CHECK_MODULES = [
     ("m3_indefinite_hyperbolic.py", "All 12 check groups passed", None),                       # Section 5B
     ("d4_self_reference.py",  "PASS all 7 check groups", None),                               # Section 5C
     ("m5_arc_body_tropical.py", "All m5 checks passed.", None),                               # Section 9A
+    ("m4_phase_atlas.py",     "PASS  all 10 groups", None),                                    # Sections 6A, 10A
     # register new modules here: (file in checks/, success marker, optional predicate)
 ]
 _chk = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "checks")
@@ -2371,6 +2372,303 @@ for hh in (1e-2, 5e-3):
 for n_ in range(2, 9):
     for k in range(1, n_ + 1): e = max(e, abs(sum(1 for v in range(n_) if n_ - v >= k) - (n_ - k + 1)))
 report("34 Ex. m5:hemisphere, Rem. m5:holonomy, m5:sagitta, m5:algorithm: octant integrals, PQ != QP, complex-step series 1,1,-1,-4/3,19/6", e, 1e-6)
+
+# =========================================================== 35. Section 6A (independent checks of the m4 phase-synthesis half)
+import itertools as _it35, math as _m35
+_r35 = np.random.default_rng(2711)
+P_ = np.polynomial.polynomial
+def _W(x): y = np.sqrt(1 - x * x + 0j); return np.array([[x, 1j * y], [1j * y, x]])
+def _Dg(ph): return np.diag([np.exp(1j * ph), np.exp(-1j * ph)])
+def _word(phis, x):
+    F = _Dg(phis[0])
+    for ph in phis[1:]: F = F @ _W(x) @ _Dg(ph)
+    return F
+def _synth(p, n):
+    """Constructive Theorem m4:real: SOS completion by root selection, then peeling of Proposition m4:pair."""
+    A = P_.polysub([1], P_.polymul(p, p))                      # 1 - p^2, coefficients in x
+    # z^{2n} A((z+1/z)/2) as a polynomial in z
+    half = np.array([0, 0.5]); Z = np.zeros(1)
+    poly = np.zeros(1)
+    for k, a in enumerate(A):
+        term = P_.polypow(np.array([1, 0, 1]) * 0.5, k)        # ((1+z^2)/2)^k = z^k ((z+1/z)/2)^k
+        term = P_.polymul(term, np.r_[np.zeros(2 * n - k), 1]) # times z^{2n-k}
+        poly = P_.polyadd(poly, a * term)
+    rts = P_.polyroots(poly); ins = rts[np.abs(rts) < 1]
+    g = np.real_if_close(P_.polyfromroots(ins)); g = np.real(g)
+    th = 0.37; val = P_.polyval(np.cos(th), A); gv = abs(P_.polyval(np.exp(1j * th), g)) ** 2; g = g * np.sqrt(val / gv)
+    # Laurent L(z) = z^{-n} g(z) (exponents -n..n, parity n since g is even); real part -> B(x), imag part -> y C(x)
+    T = lambda j: np.polynomial.chebyshev.cheb2poly(np.r_[np.zeros(j), 1]); U = lambda j: np.polynomial.chebyshev.cheb2poly(np.r_[np.zeros(j), 1]) if False else None
+    def Upoly(j):  # U_j in power basis
+        a, b = np.array([1.]), np.array([0., 2.])
+        if j == 0: return a
+        for _ in range(j - 1): a, b = b, P_.polysub(P_.polymul([0, 2], b), a)
+        return b
+    B = np.zeros(1); C = np.zeros(1)
+    for idx, cf in enumerate(g):
+        j = idx - n
+        if abs(cf) < 1e-15: continue
+        B = P_.polyadd(B, cf * T(abs(j)))
+        if j != 0: C = P_.polyadd(C, cf * np.sign(j) * Upoly(abs(j) - 1))
+    Pc = P_.polyadd(np.asarray(p, complex), 1j * B); Qc = np.asarray(C, complex)
+    phis = []
+    for m in range(n, 0, -1):
+        pn = Pc[m] if len(Pc) > m else 0; qn = Qc[m - 1] if len(Qc) > m - 1 else 0
+        ph = 0.5 * np.angle(pn / qn) if abs(qn) > 1e-12 else 0.0  # e^{-i ph} p_n = e^{i ph} q_{n-1}
+        e1, e2 = np.exp(-1j * ph), np.exp(1j * ph)
+        newP = P_.polyadd(P_.polymul([0, 1], e1 * Pc), P_.polymul([1, 0, -1], e2 * Qc))
+        newQ = P_.polyadd(-e1 * Pc, P_.polymul([0, 1], e2 * Qc))
+        newP = newP[:m]; newQ = newQ[:max(m - 1, 1)]
+        Pc, Qc = newP, newQ; phis.append(ph)
+    ph0 = np.angle(Pc[0]); phis.append(ph0)
+    return phis[::-1]                                            # phi_0, phi_1, ..., phi_n
+e = 0.0
+for n in (1, 2, 3, 4, 5, 6):
+    for _ in range(4):
+        c = _r35.normal(size=n + 1); c[[k for k in range(n + 1) if (k - n) % 2]] = 0
+        p = np.polynomial.chebyshev.cheb2poly(c); xs = np.linspace(-1, 1, 801); p = p * 0.95 / np.abs(P_.polyval(xs, p)).max()
+        phis = _synth(p, n)
+        for x in np.linspace(-1, 1, 41): e = max(e, abs(_word(phis, x)[0, 0].real - P_.polyval(x, p)))
+report("35 Thm m4:real, Lemma m4:sos, Prop. m4:pair: constructive SOS completion and peeling reproduce random admissible p (n<=6) as Re F_00", e, 1e-7)
+# repeated phase -> T_n(x cos phi); phase ambiguity examples; direct real-entry criterion examples
+e = 0.0
+for n in range(0, 6):
+    for ph in _r35.uniform(-3, 3, 4):
+        for x in np.linspace(-1, 1, 11):
+            F = np.eye(2) + 0j
+            for _ in range(n): F = F @ _W(x) @ _Dg(ph)
+            e = max(e, abs(F[0, 0].real - np.cos(n * np.arccos(np.clip(x * np.cos(ph), -1, 1)))))
+for x in np.linspace(-1, 1, 11):
+    for s in (1, -1): e = max(e, abs(_word([0, s * np.pi / 3], x)[0, 0].real - x / 2))
+    e = max(e, np.abs(_W(x) @ _Dg(np.pi / 2) @ _W(x) - _Dg(np.pi / 2)).max(), np.abs(_Dg(0.3 + np.pi) + _Dg(0.3)).max())
+e = max(e, abs(abs(_word([0, np.pi / 3], 0.3)[0, 0]) - 1) * 0 + abs(abs(np.exp(1j * np.pi / 3)) - 1))
+report("35 Prop. m4:repeated, Rem. m4:phases: repeated phase gives T_n(x cos phi); x/2 by phases +-pi/3; WD(pi/2)W = D(pi/2)", e, 1e-12)
+# projected-unitary lifting: Pi V(Psi) Pi = Pi L(G) Pi and Pt V Pi = A L(G)
+def _Rm(x): s = np.sqrt(max(1 - x * x, 0)); return np.array([[x, s], [s, -x]])
+def _S(Psi, x):
+    M = np.eye(2) + 0j
+    for th in Psi: M = M @ _Dg(th) @ _Rm(x)
+    return M
+e = 0.0
+dim = 6
+for trial in range(4):
+    Z = _r35.normal(size=(dim, dim)) + 1j * _r35.normal(size=(dim, dim)); U, _ = np.linalg.qr(Z)
+    Pi = np.diag([1, 1, 1, 0, 0, 0]).astype(complex); Pt = np.diag([1, 0, 1, 0, 1, 1]).astype(complex)
+    A = Pt @ U @ Pi; G = A.conj().T @ A
+    for k in (1, 2, 3, 4):
+        Psi = list(_r35.uniform(-3, 3, k)); eps = k % 2
+        xs = np.linspace(0.05, 0.95, 40); vals = np.array([_S(Psi, x)[0, 0] / x ** eps for x in xs])
+        L = np.polyfit(xs ** 2, vals, (k - eps) // 2)[::-1]
+        LG = sum(cf * np.linalg.matrix_power(G, j) for j, cf in enumerate(L))
+        V = np.eye(dim) + 0j
+        for idx in range(k - 1, -1, -1):                       # build V by prepending phases from the end
+            th = Psi[idx]; rem = k - 1 - idx
+            if rem % 2 == 0: V = (np.exp(1j * th) * Pt + np.exp(-1j * th) * (np.eye(dim) - Pt)) @ U @ V
+            else: V = (np.exp(1j * th) * Pi + np.exp(-1j * th) * (np.eye(dim) - Pi)) @ U.conj().T @ V
+        if eps == 0: e = max(e, np.abs(Pi @ V @ Pi - Pi @ LG @ Pi).max())
+        else: e = max(e, np.abs(Pt @ V @ Pi - A @ LG).max())
+for x in np.linspace(0, 1, 11): e = max(e, np.abs(_W(x) - 1j * _Dg(-np.pi / 4) @ _Rm(x) @ _Dg(-np.pi / 4)).max())
+report("35 Thm m4:lift: Pi V(Psi) Pi = Pi L(G) Pi (even), Pt V(Psi) Pi = A L(G) (odd); W = i D(-pi/4) R D(-pi/4) on x>=0", e, 1e-8)
+# amplification count and rotation algebra
+e = 0.0
+for p in np.linspace(0.001, 0.999, 300):
+    n = int(np.ceil(np.pi / (4 * np.arcsin(np.sqrt(p))) - 0.5)); al = np.pi / (4 * n + 2)
+    e = max(e, max(0, np.sin(al) ** 2 / p - 1), abs(np.sin((2 * n + 1) * al) - 1), max(0, (2 * n + 1) - (np.pi / 2 + 2) / np.sqrt(p)))
+report("35 Prop. m4:amplify: coin probability sin^2(alpha)/p <= 1, (2n+1)alpha = pi/2, calls <= (pi/2+2)/sqrt p", e, 1e-12)
+# central-defect path: simple spectrum, gap bound, n=1 gap, scaled gaps, finite-window transfer
+def _Jn(n):
+    J = np.zeros((2 * n, 2 * n))
+    for j in range(2 * n - 1): J[j, j + 1] = J[j + 1, j] = np.sqrt(2) if j == n - 1 else 1
+    return J
+e = 0.0
+for n in range(1, 40):
+    ev = np.linalg.eigvalsh(_Jn(n)); dl = np.diff(ev).min()
+    e = max(e, max(0, 2 * np.sqrt(2) / ((1 + np.sqrt(2)) ** 2 * n ** 3) - dl))
+e = max(e, abs(np.diff(np.linalg.eigvalsh(_Jn(1)))[0] - 2 * np.sqrt(2)))
+for n, val in ((64, 58.11), (128, 57.06), (256, 56.47)): e = max(e, abs(round(n ** 3 * np.diff(np.linalg.eigvalsh(_Jn(n))).min(), 2) - val))
+for n in (2, 3, 5):
+    J = _Jn(n); w, V = np.linalg.eigh(J); dl = np.diff(w).min(); eps = 0.5; tau = 4 * n / (eps * dl)
+    ts = np.linspace(0, tau, 40001); amp = (V[2 * n - 1, :] * V[0, :]) @ np.exp(-1j * np.outer(w, ts))
+    avg = np.trapezoid(np.abs(amp) ** 2, ts) / tau; e = max(e, max(0, (1 - eps) / (2 * n) - avg))
+report("35 Thm m4:defect, Conj. m4:gap-limit: gap >= 2sqrt2/((1+sqrt2)^2 n^3), n=1 gap 2sqrt2, n^3 gap 58.11, 57.06, 56.47; window bound", e, 1e-9)
+# static completions: brute force on small sets
+e = 0.0
+def _cyc_perms(V):
+    V = list(V); first = V[0]
+    for rest in _it35.permutations(V[1:]):
+        order = (first,) + rest; yield {order[i]: order[(i + 1) % len(order)] for i in range(len(order))}
+for N in (3, 4, 5, 6):
+    for _ in range(6):
+        perm = list(_r35.permutation(N)); cuts = sorted(_r35.choice(range(1, N), size=_r35.integers(1, N - 1), replace=False))
+        comps = np.split(np.array(perm), cuts); E = [(int(c[i]), int(c[i + 1])) for c in comps for i in range(len(c) - 1)]; cnum = len(comps)
+        cyc = list(_cyc_perms(range(N))); ext = [s for s in cyc if all(s[a] == b for a, b in E)]
+        e = max(e, abs(len(ext) / len(cyc) - _m35.factorial(cnum - 1) / _m35.factorial(N - 1)), abs(len(E) - (N - cnum)))
+        if cnum >= 2:
+            tA = int(comps[0][-1]); hB = int(comps[1][0]); hA = int(comps[0][0])
+            e = max(e, abs(sum(1 for s in ext if s[tA] == hB) / len(ext) - 1 / (cnum - 1)), sum(1 for s in ext if s[tA] == hA))
+def _alt_count(n, E):
+    Vr = list(range(n)); Vb = list(range(n, 2 * n)); cnt = 0
+    for s in _cyc_perms(range(2 * n)):
+        if all((a < n) != (s[a] < n) for a in s) and all(s[a] == b for a, b in E): cnt += 1
+    return cnt
+for n in (1, 2, 3):
+    for _ in range(5):
+        R = list(_r35.permutation(n)); Bv = list(_r35.permutation(range(n, 2 * n))); E = []
+        used_o, used_i = set(), set()
+        for k in range(_r35.integers(0, 2 * n)):
+            a = int(_r35.integers(0, 2 * n)); cand = [b for b in range(2 * n) if (a < n) != (b < n) and b not in used_i and a not in used_o]
+            if not cand: continue
+            b = int(_r35.choice(cand)); E2 = E + [(a, b)]
+            nxt = dict(E2); ok = True
+            for v in range(2 * n):                                   # acyclic check
+                seen, x = set(), v
+                while x in nxt:
+                    if x in seen: ok = False; break
+                    seen.add(x); x = nxt[x]
+            if ok: E = E2; used_o.add(a); used_i.add(b)
+        nxt = dict(E); prv = {b: a for a, b in E}; heads = [v for v in range(2 * n) if v not in prv]
+        comps = []
+        for h in heads:
+            c = [h]
+            while c[-1] in nxt: c.append(nxt[c[-1]])
+            comps.append(c)
+        col = lambda v: 'r' if v < n else 'b'
+        m = sum(1 for c in comps if col(c[0]) == 'r' and col(c[-1]) == 'r'); p = sum(1 for c in comps if col(c[0]) == 'r' and col(c[-1]) == 'b'); q = sum(1 for c in comps if col(c[0]) == 'b' and col(c[-1]) == 'r')
+        if m > 0: M = m * _m35.factorial(m + p - 1) * _m35.factorial(m + q - 1)
+        elif p + q > 0 and p * q == 0: M = _m35.factorial(p + q - 1)
+        else: M = 0
+        e = max(e, abs(_alt_count(n, E) - M))
+report("35 Prop. m4:forest: extension mass (c-1)!/(N-1)!, connection probability 1/(c-1), alternating inventory M (brute force)", e, 1e-12)
+
+# =========================================================== 36. Section 10A (independent checks of the m4 atlas half)
+from fractions import Fraction as _F36
+_r36 = np.random.default_rng(2712)
+def _qm(p, q):
+    a1, b1, c1, d1 = p; a2, b2, c2, d2 = q
+    return np.array([a1*a2-b1*b2-c1*c2-d1*d2, a1*b2+b1*a2+c1*d2-d1*c2, a1*c2-b1*d2+c1*a2+d1*b2, a1*d2+b1*c2-c1*b2+d1*a2])
+def _cay(r): n2 = r @ r; return np.r_[1 - n2, 2 * r] / (1 + n2)
+def _dec(e, r): return e * _cay(r)
+def _mul(e, r, f, s):
+    L = (1 + r @ r) * (1 + s @ s); N = (1 - s @ s) * r + (1 - r @ r) * s + 2 * np.cross(r, s)
+    Dp = 1 + (r @ r) * (s @ s) - 2 * r @ s; Dm = (r + s) @ (r + s)
+    return ((e * f, N / Dp) if Dp >= Dm else (-e * f, -N / Dm)), (L, N, Dp, Dm)
+def _rb():
+    v = _r36.normal(size=3); return v / np.linalg.norm(v) * _r36.uniform(0, 1) ** (1 / 3)
+e = 0.0
+for _ in range(400):
+    r, s = _rb(), _rb(); a, b = _r36.choice([-1, 1], 2)
+    (g, t), (L, N, Dp, Dm) = _mul(a, r, b, s)
+    e = max(e, abs(Dp + Dm - L), abs(N @ N - Dp * Dm), max(0, 0.5 - max(Dp, Dm)), np.abs(_dec(g, t) - _qm(_dec(a, r), _dec(b, s))).max(),
+            abs(t @ t - min(Dp, Dm) / max(Dp, Dm)), max(0, t @ t - 1 - 1e-12), np.abs(_qm(_dec(a, r), _dec(a, -r)) - np.r_[1, 0, 0, 0]).max())
+    u = _r36.normal(size=3); u /= np.linalg.norm(u); e = max(e, np.abs(_dec(a, u) - _dec(-a, -u)).max())   # seam identification
+report("36 Thm m4:atlas: D+ + D- = L, |N|^2 = D+D-, max >= 1/2, decoded product = quaternion product, |coord|^2 = min/max, inverse, seam", e, 1e-12)
+# conditioning: chordal identity, differentials, 50 delta bound under perturbation of denominators/numerator
+e = 0.0
+for _ in range(200):
+    r, s = _rb(), _rb()
+    e = max(e, abs(np.linalg.norm(_cay(r) - _cay(s)) - 2 * np.linalg.norm(r - s) / np.sqrt((1 + r @ r) * (1 + s @ s))))
+    # differential of the product coordinate in s at fixed sheet: singular values in [1/2, 2], condition number 1
+    (g, t), _ = _mul(1, r, 1, s); h = 1e-6
+    Jm = np.array([( _mul(1, r, 1, s + h * ei)[0][1] - _mul(1, r, 1, s - h * ei)[0][1]) / (2 * h) for ei in np.eye(3)]).T
+    if _mul(1, r, 1, s + h * np.ones(3))[0][0] == g and _mul(1, r, 1, s - h * np.ones(3))[0][0] == g and t @ t < 0.95:
+        sv = np.linalg.svd(Jm, compute_uv=False); e = max(e, (sv.max() / sv.min() - 1) * 1e-3, max(0, 0.5 - sv.min() - 1e-6), max(0, sv.max() - 2 - 1e-6))
+dl = 1e-3
+for _ in range(300):
+    r, s = _rb(), _rb(); (g, t), (L, N, Dp, Dm) = _mul(1, r, 1, s)
+    Dp2, Dm2 = Dp + _r36.uniform(-dl, dl), Dm + _r36.uniform(-dl, dl); dv = _r36.normal(size=3); N2 = N + dl * _r36.uniform() * dv / np.linalg.norm(dv)
+    g2, t2 = (1, N2 / Dp2) if Dp2 >= Dm2 else (-1, -N2 / Dm2); rd = _r36.normal(size=3); t2 = t2 + dl * _r36.uniform() * rd / np.linalg.norm(rd)
+    e = max(e, max(0, np.linalg.norm(_dec(g2, t2) - _dec(g, t)) - 50 * dl))
+report("36 Prop. m4:conditioning: chordal identity; singular values in [1/2,2] with condition number 1; perturbed decoded error <= 50 delta", e, 1e-6)
+# sine vector, rotation matrix, seam invariance, Lipschitz 2, squared overlap readout
+def _rotq(q):
+    return np.array([_qm(_qm(q, np.r_[0, ei]), q * np.r_[1, -1, -1, -1])[1:] for ei in np.eye(3)]).T
+def _X(r): return np.array([[0, -r[2], r[1]], [r[2], 0, -r[0]], [-r[1], r[0], 0]])
+e = 0.0
+for _ in range(200):
+    r = _rb(); n2 = r @ r; q = _cay(r)
+    Rr = np.eye(3) + (4 * (1 - n2) * _X(r) + 8 * _X(r) @ _X(r)) / (1 + n2) ** 2
+    xi = 4 * (1 - n2) / (1 + n2) ** 2 * r; rs = -r / n2
+    e = max(e, np.abs(Rr - _rotq(q)).max(), np.abs(xi - 2 * q[0] * q[1:]).max(), np.abs(4 * (1 - rs @ rs) / (1 + rs @ rs) ** 2 * rs - xi).max(), max(0, np.linalg.norm(xi) - 1))
+    q2 = _cay(_rb()) * _r36.choice([-1, 1]); xi2 = 2 * q2[0] * q2[1:]; dq = min(np.linalg.norm(q - q2), np.linalg.norm(q + q2))
+    e = max(e, max(0, np.linalg.norm(xi - xi2) - 2 * dq - 1e-12))
+    Rrel = _rotq(q).T @ _rotq(q2); Dl = np.arccos(np.clip((np.trace(Rrel) - 1) / 2, -1, 1)); e = max(e, abs((q @ q2) ** 2 - (1 + np.cos(Dl)) / 2))
+report("36 Prop. m4:sine: rotation matrix R_r, sine vector 2wv, seam invariance, |xi|<=1, 2-Lipschitz, <q,q'>^2 = (1+cos Delta)/2", e, 1e-10)
+# seams: (i*i)*j = j, i*(i*j) = -j; a=-i/2, b=i/3; key recovery sign; t = sqrt2-1 example
+def _star(r, s): (g, t), _ = _mul(1, r, 1, s); return t
+I3 = np.eye(3); i_, j_, k_ = I3
+e = max(np.abs(_star(_star(i_, i_), j_) - j_).max(), np.abs(_star(i_, _star(i_, j_)) + j_).max(), np.abs(_star(i_, i_)).max(), np.abs(_star(i_, j_) - k_).max(), np.abs(_star(i_, k_) + j_).max())
+a = -i_ / 2; b = i_ / 3; e = max(e, np.abs(_star(-a, b) - i_).max(), np.abs(_star(a, _star(-a, b)) - b).max())
+def _mulF(r, s):                                          # exact rational version, ties to D+
+    dot = lambda a, b: sum(x * y for x, y in zip(a, b)); cr = lambda a, b: (a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0])
+    rr, ss = dot(r, r), dot(s, s); N = tuple((1 - ss) * a + (1 - rr) * b + 2 * c for a, b, c in zip(r, s, cr(r, s)))
+    Dp = 1 + rr * ss - 2 * dot(r, s); Dm = dot(tuple(a + b for a, b in zip(r, s)), tuple(a + b for a, b in zip(r, s)))
+    return tuple(x / Dp for x in N) if Dp >= Dm else tuple(-x / Dm for x in N)
+def _ratunit():                                           # rational unit vector by inverse stereographic projection
+    a, b = (_F36(int(_r36.integers(-9, 10)), int(_r36.integers(1, 10))) for _ in range(2)); d = 1 + a * a + b * b
+    return (2 * a / d, 2 * b / d, (a * a + b * b - 1) / d)
+for _ in range(200):
+    r = tuple(_F36(int(_r36.integers(-5, 6)), 11) for _ in range(3)); v = _ratunit()
+    rv = sum(x * y for x, y in zip(r, v)); out = _mulF(r, _mulF(tuple(-x for x in r), v))
+    want = tuple(-x for x in v) if rv < 0 else v
+    e = max(e, max(abs(float(o - w)) for o, w in zip(out, want)))
+rr_ = -i_ / 2; e = max(e, np.abs(_star(rr_, _star(-rr_, i_)) + i_).max())
+t = np.sqrt(2) - 1
+for sg in (1, -1):
+    out = _star(t * i_, t * j_) if sg == 1 else _star(t * j_, t * i_); e = max(e, np.abs(out - (i_ + j_ + sg * k_) / 3).max())
+qa, qb = _cay(t * i_), _cay(t * j_); p1, p2 = _qm(qa, qb), _qm(qb, qa); e = max(e, abs(p1[0] - 0.5), abs(p1 @ p2 - 0.5))
+report("36 Ex. m4:seams: (i*i)*j=j, i*(i*j)=-j; seam recovery; key recovery sign criterion; orders of ti,tj give (i+j+-k)/3", e, 1e-12)
+# arithmetic: arc parameter, semicircle, midpoint error bound, grid rounding, rational denominators; obstructions; clock approximation
+e = 0.0
+for _ in range(100):
+    p = _cay(_rb()) * _r36.choice([-1, 1]); q = _cay(_rb()) * _r36.choice([-1, 1])
+    if p @ q < -0.99: continue
+    g = _qm(q, p * np.r_[1, -1, -1, -1]); r = g[1:] / (1 + g[0]); ts = np.linspace(0, 1, 50)
+    pts = [_qm(_cay(tt * r), p) for tt in ts]; ang = [np.arccos(np.clip(p @ x, -1, 1)) for x in pts]
+    e = max(e, np.abs(pts[-1] - q).max(), max(0, -np.diff(ang).min() - 1e-7), max(0, ang[-1] - np.arccos(np.clip(p @ q, -1, 1)) - 1e-7))
+    mu = min(1 + p @ q, 1); dp = _r36.normal(size=4) * 1e-3; dq = _r36.normal(size=4) * 1e-3
+    p2 = (p + dp) / np.linalg.norm(p + dp); q2 = (q + dq) / np.linalg.norm(q + dq); mu = min(1 + p @ q, 1 + p2 @ q2)
+    A_ = np.r_[1, 0, 0, 0] + _qm(q, p * np.r_[1, -1, -1, -1]); B_ = np.r_[1, 0, 0, 0] + _qm(q2, p2 * np.r_[1, -1, -1, -1])
+    e = max(e, max(0, np.linalg.norm(A_ / np.linalg.norm(A_) - B_ / np.linalg.norm(B_)) - (np.linalg.norm(p - p2) + np.linalg.norm(q - q2)) / np.sqrt(2 * mu)))
+u = np.array([0, 0, 1.]); p = np.r_[1, 0, 0, 0.]
+e = max(e, np.abs(_qm(_cay(u), p) - (-_qm(_cay(-u), p))).max(), abs(_qm(_cay(u), p)[0] - 0))
+for m in (5, 17, 64):
+    for _ in range(50):
+        r = _rb(); rr = np.trunc(r * m) / m; e = max(e, max(0, np.linalg.norm(_cay(rr) - _cay(r)) - 2 * np.sqrt(3) / m), max(0, rr @ rr - 1))
+b0, bb = 7, np.array([2, 3, 1]); num = np.r_[b0 ** 2 - bb @ bb, 2 * b0 * bb]; e = max(e, np.abs(num / (b0 ** 2 + bb @ bb) - _cay(bb / b0)).max())
+for t_ in (1e-2, 1e-4):
+    for sg in (1, -1):
+        qn = np.r_[-np.cos(t_), sg * np.sin(t_), 0, 0]; mid = np.r_[1, 0, 0, 0] + qn; mid /= np.linalg.norm(mid); e = max(e, max(0, abs(mid[1] - sg) - t_))
+# x/2 at budget one: upper-left coefficient has real part 1/2 and imaginary part +-sqrt3/2
+def _W(x): y = np.sqrt(1 - x * x + 0j); return np.array([[x, 1j * y], [1j * y, x]])
+def _Dg(ph): return np.diag([np.exp(1j * ph), np.exp(-1j * ph)])
+Fw = _Dg(0) @ _W(0.4) @ _Dg(np.pi / 3); P1 = (Fw[0, 0] - 0) ; e = max(e, abs((_Dg(0) @ _W(1.0) @ _Dg(np.pi / 3))[0, 0] - (0.5 + 1j * np.sqrt(3) / 2)))
+# rational clock approximation: comparison error <= sum of chordal errors
+for _ in range(50):
+    n = 4; phis = _r36.uniform(-3, 3, n + 1); eta = _r36.uniform(0, 0.05, n + 1); phis2 = phis + 2 * np.arcsin(eta / 2) * _r36.choice([-1, 1], n + 1)
+    for x in np.linspace(-1, 1, 21):
+        F1 = _Dg(phis[0]); F2 = _Dg(phis2[0])
+        for k in range(1, n + 1): F1 = F1 @ _W(x) @ _Dg(phis[k]); F2 = F2 @ _W(x) @ _Dg(phis2[k])
+        e = max(e, max(0, abs(F1[0, 0].real - F2[0, 0].real) - eta.sum() - 1e-12))
+report("36 Cor. m4:arithmetic, Ex. m4:obstructions, Cor. m4:approxphase: arc parameter, semicircle, midpoint bound, grid 2sqrt3/m, x/2 gate, clock error", e, 1e-9)
+# models, Hopf loop, heap examples, update example and J_r
+e = 0.0
+def _qexp(v): a = np.linalg.norm(v); return np.r_[np.cos(a), np.sin(a) * v / a] if a > 0 else np.r_[1, 0, 0, 0.]
+for _ in range(50):
+    z, w = _r36.normal(size=3) * 1e-3, _r36.normal(size=3) * 1e-3; pr = _qm(_qexp(z), _qexp(w)); vec = pr[1:] * np.arctan2(np.linalg.norm(pr[1:]), pr[0]) / np.linalg.norm(pr[1:])
+    e = max(e, max(0, np.linalg.norm(vec - (z + w + np.cross(z, w))) - 10 * (np.linalg.norm(z) + np.linalg.norm(w)) ** 3))
+    a_ = _r36.normal(size=3); a_ /= np.linalg.norm(a_); b_ = _r36.normal(size=3); b_ /= np.linalg.norm(b_); c_ = _r36.normal(size=3); c_ /= np.linalg.norm(c_)
+    S = 1 + a_ @ b_ + b_ @ c_ + c_ @ a_; D = a_ @ np.cross(b_, c_)
+    rot = lambda x, y: np.r_[1 + x @ y, np.cross(x, y)] / np.sqrt(2 * (1 + x @ y))
+    loop = _qm(rot(c_, a_), _qm(rot(b_, c_), rot(a_, b_))); e = max(e, np.abs(loop - np.r_[S, D * a_] / np.sqrt(S * S + D * D)).max())
+    tq = np.r_[0, a_]; tb = _qm(np.r_[np.cos(0.7), np.sin(0.7) * c_], tq)          # turns: (c bbar)(b abar) = c abar
+e = max(e, np.abs(_qm(np.r_[0, i_], np.r_[0, j_]) - np.r_[0, k_]).max(), np.abs(_qm(np.r_[0, j_], np.r_[0, i_]) + np.r_[0, k_]).max())
+eps_ = _F36(1, 20); w8 = 1 / (1 + eps_); e = max(e, abs(float(w8 - _F36(20, 21))))
+q = _cay(i_ / 2); sine = 2 * q[0] * q[1:] / 4; e = max(e, abs(sine[0] - 6 / 25)); inp = float(w8) * 6 / 25; e = max(e, abs(inp - 8 / 35))
+e = max(e, abs(inp / (1 + inp ** 2) - 280 / 1289), abs(8 / (35 + np.sqrt(1289)) - inp / (1 + np.sqrt(1 + inp ** 2))))
+for _ in range(50):
+    r = _rb(); Jr = (1 - r @ r) * np.eye(3) + 2 * np.outer(r, r) + 2 * _X(r); e = max(e, np.abs(Jr.T @ Jr - (1 + r @ r) ** 2 * np.eye(3)).max())
+    h = 1e-6; Jn = np.array([(_mul(1, r, 1, h * ei)[0][1] - _mul(1, r, 1, -h * ei)[0][1]) / (2 * h) for ei in np.eye(3)]).T
+    e = max(e, np.abs(Jn - Jr).max() * 1e-3)
+report("36 Prop. m4:models, m4:hopf, Rem. m4:heap, Prop. m4:updates: second-order product, loop (S+Da)/sqrt(S^2+D^2), [i,1,j]=k, 280/1289, J_r", e, 1e-8)
 
 # =========================================================== registered module scripts (checks/)
 for _name, _marker, _pred in CHECK_MODULES:

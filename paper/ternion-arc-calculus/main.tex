@@ -78,7 +78,9 @@ central quotients of $\widetilde{\mathrm{SL}}(2,\R)$ with Chebyshev comparisons 
 matrices the arc calculus becomes hyperbolic: the Thomas--Wigner rotation of a triangle is a rational function of its vertices and
 rotates through minus its area.  A space of finite comparison rank $r$ cannot encode the full family of its
 comparison-preserving maps, which needs rank $r^2$; and the logarithm of an exponentially scaled Gram elimination tends to the
-shortest-path value under a sign condition, which cannot be dropped.  Before any manifold, the chord--sagitta identity and an
+shortest-path value under a sign condition, which cannot be dropped.  Inserting a clock phase at each step of the geodesic recurrence
+realises exactly the polynomials of the comparison bounded by one on $[-1,1]$ with the permitted degree and parity, and a two-chart
+rational atlas makes the whole arc calculus bounded and exactly rational on $S^3$.  Before any manifold, the chord--sagitta identity and an
 elliptic/parabolic/hyperbolic trichotomy already hold for fair elements of a star algebra, and sparse comparisons on a chordal graph
 with triangle defects at most $\varepsilon$ come from a potential up to $(|V|-2)\varepsilon$, the obstruction on other graphs being a
 lattice gauge connection.  The key step concerns the duplication equation $f(x^2)=2f(x)^2-1$: on the line it has continuous non-cosine
@@ -109,7 +111,7 @@ rational rotations.  A final section indicates which of these results are classi
 
 \maketitle
 
-\section{Introduction}
+\section{Introduction}\label{sec:intro}
 
 \subsection{Objects}
 The three-sphere $M=S^3$ of unit quaternions carries the ternary operation $\hp xyz=x\bar yz$.  Unlike
@@ -140,10 +142,13 @@ error otherwise; the sphere list is a classification, not an encoding tower, and
 symmetry or differential-rank hypothesis.  Part~\ref{part:arc} (Sections~\ref{sec:recur}--\ref{sec:rational}) develops a
 calculus in which the difference $y-x$ of linear calculus is replaced by the transport $\hp y x\cdot$; Section~\ref{sec:m5} compares
 chord, cap arc and two-arc route of a right cell and shows that the logarithm of an eliminated Gram comparison tends to the min--plus
-(shortest-path) value exactly when the signed coefficients of the shortest paths do not cancel.  Part~\ref{part:final}
+(shortest-path) value exactly when the signed coefficients of the shortest paths do not cancel.  Section~\ref{sec:m4} inserts a clock
+phase at each step of the recurrence: the attainable comparisons are exactly the bounded polynomials of the permitted degree and parity;
+Section~\ref{sec:m4atlas} replaces the Cayley chart by a bounded two-chart rational atlas on all of $S^3$ with uniform error bounds.
+Part~\ref{part:final}
 (Sections~\ref{sec:known}--\ref{sec:open}) places the results in the literature, records what is formalised, and lists the open problems.
-% ROADMAP, temporary (delete each line when its part lands): phase synthesis and the rational atlas (m4) join the arc calculus; Part "Arithmetic
-% and holonomy" (m6) goes after it; the final part keeps known work, formalisation and open problems.
+% ROADMAP, temporary (delete each line when its part lands): Part "Arithmetic
+% and holonomy" (m6) goes after the arc calculus; the final part keeps known work, formalisation and open problems.
 In the arc calculus the guiding observation is that linear calculus discards two second-order quantities
 that are exact and computable in the heap: the radial sagitta of each step, and the failure of the
 square roots of displacements to telescope.  The first is the quadratic-variation (It\^o) term, the
@@ -5557,6 +5562,221 @@ So the heap gives a second difference that is intrinsic, exactly tangent in its 
 the same order as the linear second difference $x(t+h)-2x(t)+x(t-h)=h^2\ddot x+O(h^4)$, whose normal part
 $-h^2\lvert\dot x\rvert^2x$ is the sagitta term $-2v\,x$ of Theorem~\ref{thm:recur}(iii).
 
+% Section 6A: lettered so that the following sections (cited by Paper II) keep their numbers.
+\setcounter{section}{0}
+\renewcommand{\thesection}{6\Alph{section}}
+\renewcommand{\theHsection}{arcB.\arabic{section}}
+\section{Phase synthesis on the three-sphere}\label{sec:m4}
+
+Theorem~\ref{thm:recur} says that equal minimal-arc steps produce the Chebyshev polynomials of the comparison. Which comparison
+polynomials can a sequence of equal minimal-arc steps produce when a clock phase is inserted at each step? With an orthogonal signal
+and clock axis, the attainable real comparisons are exactly the interval-bounded polynomials of the permitted degree and parity
+(Theorem~\ref{m4:real}). The proof completes the target by an interval sum of squares and removes signal factors one at a time; the
+existence of phases is the quantum signal processing theorem \cite{m4:GSLW,m4:Haah,m4:LC}, and what the origin-free formulation adds is
+that the steps are relative right heap translations, so that the readout is the comparison $c$ and the word is covariant under change of
+frame. The same phases act on projected unitaries (Theorem~\ref{m4:lift}). A boundary-perturbed recurrence (Theorem~\ref{m4:defect})
+closes the section. Proposition~\ref{m4:direct} treats the stronger requirement that the whole upper-left entry be real, and
+Remark~\ref{m4:physical} records what is left to the companion. The bounded rational evaluation of these words is
+Section~\ref{sec:m4atlas}.
+
+\subsection{Clock twists and polynomial comparison}
+
+Fix a reference point $a\in M$ and two perpendicular unit imaginary quaternions $u,k$. Write $g=x+yu$ for $x^2+y^2=1$ and $d_\phi=\cos\phi+k\sin\phi$. Use the right heap translations $z\mapsto\hp{z}{a}{ag}=zg$ and $z\mapsto\hp{z}{a}{ad_\phi}=zd_\phi$. The first moves each point along a great circle through that point. For $x>-1$ the displaced point specifies the minimal arc, and at $x=-1$ the displayed axis specifies its semicircle. Both signs of $y$ represent directed steps. Use the matrix model with $u\mapsto iX$, $k\mapsto iZ$, where $X,Z$ are the Pauli matrices with off-diagonal entries $1$ and diagonal entries $1,-1$, respectively. These images square to $-I$ and anticommute, so they determine a quaternion representation. Its unit matrices have the form
+\[
+ W(x,y)=\begin{pmatrix}x&iy\\iy&x\end{pmatrix},\qquad
+ D(\phi)=\begin{pmatrix}e^{i\phi}&0\\0&e^{-i\phi}\end{pmatrix},\qquad
+ F_\phi=D(\phi_0)\prod_{j=1}^n W(x,y)D(\phi_j).
+\]
+Products are ordered left to right in increasing $j$. The observed comparison $c(a,aF_\phi)$ is $\re(F_{\phi,00})$, since the scalar part is half the matrix trace. Under the change $z\mapsto lzh$ with fixed $l,h\in M$, each right factor is conjugated by $h^{-1}$, the two axes are carried with the factors, and the comparison is unchanged. Thus the construction uses relative translations and a relative two-axis frame. The comparison value $x$ alone supplies neither axis. Right multipliers describe the order of translations on configurations. The displayed matrices represent the multiplier product, with the usual right-to-left action when acting on column vectors.
+
+\begin{theorem}[Real comparison synthesis]\label{m4:real}
+For $n\ge0$, a real polynomial $p$ is $c(a,aF_\phi)$ on the entire signed circle if and only if
+\[
+ \deg p\le n,\qquad p(-x)=(-1)^n p(x),\qquad
+ |p(x)|\le1\quad (|x|\le1).
+\]
+For $n>0$ one may set $\phi_0=0$ for this real readout, with one freely chosen phase after each signal step. The same polynomials result if the experiment uses the open comparison interval and the endpoint values are taken by continuity.
+\end{theorem}
+
+The factorization below is the rotation-convention result of Gily\'en, Su, Low and Wiebe \cite[Theorems 3 and 5 and Lemma 6, arXiv v1]{m4:GSLW}. Low and Chuang use phase modulation for optimal Hamiltonian simulation \cite{m4:LC}. The translation to the heap identifies the operational readout with Paper I's comparison and shows covariance of the frame and word. Setting every phase to zero recovers the comparison recurrence in Theorem~\ref{thm:recur}. The additional result concerns the attainable comparisons when the phases can vary.
+
+\begin{lemma}[Parity interval sum of squares]\label{m4:sos}
+Let $A$ be even and real, $\deg A\le2n$, and $A\ge0$ on $[-1,1]$. Then
+\[
+ \begin{gathered}
+ A=B^2+(1-x^2)C^2,\qquad \deg B\le n,\quad \deg C\le n-1,\\
+ B(-x)=(-1)^nB(x),\qquad C(-x)=(-1)^{n-1}C(x).
+ \end{gathered}
+\]
+as a polynomial identity. The zero polynomial has degree $-\infty$, so $C=0$ at $n=0$.
+\end{lemma}
+\begin{proof}
+Put $x=(z+z^{-1})/2$. Evenness gives $A(x)=H(z^2)$ with $H(t)=\sum_{j=-m}^{m}h_jt^j$, $h_{-j}=h_j\in\R$, and $m\le n$. For $H=0$ take both squares zero. For a positive constant $H$ take $G=\sqrt H$. Otherwise $t^mH(t)$ has degree $2m$, nonzero constant term and reciprocal, conjugation-invariant roots with multiplicity. Unit-circle roots have even multiplicity, since the nonnegative real analytic function $H(e^{i\theta})$ has an even order at each zero and $e^{i\theta}$ has nonzero derivative. Select all roots inside the circle and half the multiplicity of every root on the circle. This gives $m$ roots and a monic real polynomial $G_0$. Then $H(t)$ is a constant times $G_0(t)G_0(t^{-1})$ by matching the roots and Laurent degrees. At a point of the circle where $H>0$ the constant is positive. Absorb its square root into $G$.
+
+The real-coefficient Laurent polynomial $z^{-n}G(z^2)$ is supported in $[-n,n]$ with indices of parity $n$. On $z=x+iy$, its real part is a linear combination of $T_{|j|}(x)$ and its imaginary part is $y$ times a linear combination of $\operatorname{sign}(j)U_{|j|-1}(x)$ for $j\ne0$. This follows from $z^j=\cos(j\theta)+i\sin(j\theta)$ and the two Chebyshev recurrences. Their degrees and parities give the required $B,C$. Its squared modulus equals $A(x)$ on the circle, yielding the polynomial identity on the real line.
+\end{proof}
+
+\begin{proposition}[Full complex word and reconstruction]\label{m4:pair}
+Write $P^*,Q^*$ for coefficient conjugation of complex polynomials. The matrix field
+\[
+ M(P,Q)=\begin{pmatrix}P(x)&iyQ(x)\\iyQ^*(x)&P^*(x)\end{pmatrix}
+\]
+equals a length-$n$ word $F_\phi$ if and only if $P,Q$ have the degree bounds and parities of $B,C$ in Lemma~\ref{m4:sos} and satisfy
+\[
+ PP^*+(1-x^2)QQ^*=1.
+\]
+The equality holds on the entire signed circle.
+\end{proposition}
+\begin{proof}
+Start with $(e^{i\phi_0},0)$. Right multiplication by $WD(\phi)$ sends the pair to
+\[
+ \big(e^{i\phi}(xP-(1-x^2)Q),\ e^{-i\phi}(P+xQ)\big).
+\]
+The degree and parity bounds follow by induction and the norm identity follows from unitarity. Conversely for $n>0$, let $p_n,q_{n-1}$ be the top permitted coefficients. Their moduli agree by comparing degree $2n$ in the norm identity. Choose $\phi$ so $e^{-i\phi}p_n=e^{i\phi}q_{n-1}$, with any phase when both coefficients vanish. Right multiplication by $D(-\phi)W^{-1}$ sends the pair to
+\[
+ \big(xe^{-i\phi}P+(1-x^2)e^{i\phi}Q,\ -e^{-i\phi}P+xe^{i\phi}Q\big).
+\]
+The leading terms cancel in both coordinates and parity drops the degree bounds to $n-1,n-2$. Unitarity preserves the norm identity on the circle and hence as a polynomial. At $n=0$ the pair is a unit constant and $0$. Induction reconstructs the word, including budgets above the actual degree.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{m4:real}]
+Proposition~\ref{m4:pair} gives necessity. For sufficiency apply Lemma~\ref{m4:sos} to $A=1-p^2$, and use the pair $(P,Q)=(p+iB,C)$. If $n>0$, cyclically move $D(\phi_0)$ to the right under the trace and add $\phi_0$ to $\phi_n$. Polynomial continuity supplies the endpoints. For $n=0$ choose $\cos\phi_0=p$.
+\end{proof}
+
+\begin{proposition}[One repeated clock phase]\label{m4:repeated}
+With no initial twist and a single phase $\phi$ held constant, the length-$n$ comparison is $T_n(x\cos\phi)$. More generally, if $z_j$ is the state after $j$ repetitions, $z_{j+2}=2x\cos\phi\,z_{j+1}-z_j$ in $\R^4$.
+\end{proposition}
+\begin{proof}
+The unit step $h=gd_\phi$ has real part $x\cos\phi$ by orthogonality. Since $h+h^{-1}=2\re h$, multiply on the left by $z_jh$ to get the recurrence and use the initial comparisons $1,\re h$. For example, $T_2(x\cos\phi)=2x^2\cos^2\phi-1$ has constant term $-1$ for every $\phi$, so zero is unattainable in this repeated-phase model at length two. In a commutative ring, inverses $a_1b_1=1$ likewise give the trace recurrence for $t_j=a_1^j+b_1^j$ by expanding $(a_1+b_1)t_{j+1}=t_{j+2}+t_j$.
+\end{proof}
+
+\begin{remark}[Phases and ordered projector factors]\label{m4:phases}
+The real comparison can have distinct complex completions. For $p=x/2$ and $n=1$, the two choices $\phi_1=\pm\pi/3$, $\phi_0=0$, give different words with the same comparison. Even for a fixed word one can add $\pi$ to any two phase entries because $D(\phi+\pi)=-D(\phi)$. A two-step identity follows from $WD(\pi/2)W=D(\pi/2)$, since $D(\pi/2)$ anticommutes with $iX$. It permits padding by $WD(\pi/2)WD(-\pi/2)$.
+
+Haah's uniqueness theorem \cite[Definition 1 and Theorem 2, arXiv v4]{m4:Haah} takes as input the entire matrix Laurent polynomial $F(z)=\sum_j C_jz^j$ in $\SU(2)$ on the circle, with actual degree $n$ and exponents of parity $n$. It gives a unique ordered length-$n$ decomposition $F=E_0\prod (zP_j+z^{-1}(I-P_j))$, with $P_j$ rank-one orthogonal projectors and $E_0\in\SU(2)$. Indeed the Laurent determinant and unitarity identities give $\det C_{\pm n}=0$ and $C_n C_{-n}^*=0$ for $n>0$. Thus the terminal projector must be the projection onto the row space of $C_n$ if that coefficient is nonzero, or the orthogonal complement of the row space of $C_{-n}$ otherwise. Multiplication on the right by $z^{-1}P_n+z(I-P_n)$ cancels the two extreme coefficients. Parity bounds the remaining degree by $n-1$, and it equals $n-1$ because restoring one factor increases degree by at most one. Induction terminates at a constant. These factors are unitary with determinant $1$ on the circle and their products have the prescribed parity. At overbudget length the identity $E_P E_{I-P}=I$ permits multiple lists.
+\end{remark}
+
+\begin{proposition}[When the upper-left entry itself is real]\label{m4:direct}
+For $n>0$, a real $p$ of degree at most $n$ and parity $n$ can be the entire upper-left entry if and only if, in addition to the interval bound, $|p(x)|\ge1$ for real $|x|\ge1$, and for even $n$, $p(it)^2\ge1$ for every real $t$. For $n=0$ the entire real entry can only be $1$ or $-1$.
+\end{proposition}
+\begin{proof}
+Proposition~\ref{m4:pair} requires $1-p^2=(1-x^2)QQ^*$. The real inequalities follow by evaluating at real $x$ and, for even $n$, using $QQ^*(it)=-|Q(it)|^2$ by odd parity. Conversely the endpoint conditions permit division by $1-x^2$. The quotient $S$ is even with $\deg S\le2n-2$ and is nonnegative on the real line by the stated bounds and continuity. For odd $n$ write $S(x)=L(x^2)$. For $s<0$, evaluate at $x=i\sqrt{-s}$: $p(x)$ is purely imaginary so $L(s)\ge0$. For even $n$ the condition at $t=0$ and the interval bound give $S(0)=0$. Write $S(x)=x^2L(x^2)$, and on the imaginary axis the extra inequality gives $L(s)\ge0$ for $s<0$. In both cases $L\ge0$ on all of $\R$. A nonzero nonnegative real polynomial has positive leading coefficient, real roots of even multiplicity, and conjugate pairs of nonreal roots. Taking half the real roots, one side of each conjugate pair, and the square root of the leading coefficient gives $L=JJ^*$ with $\deg J=\deg L/2$. The case $L=0$ gives $J=0$. Take $Q=J(x^2)$ for odd $n$ and $Q=xJ(x^2)$ for even $n$. The degree bound on $S$ gives the required bound on $Q$ and Proposition~\ref{m4:pair} applies.
+\end{proof}
+
+\subsection{Projected unitary transformations}
+
+\begin{theorem}[The same phases on a projected unitary]\label{m4:lift}
+Let $U$ be unitary on a finite-dimensional complex Hilbert space, $\Pi,\widetilde\Pi$ orthogonal projections, $A=\widetilde\Pi U\Pi$, and $G=A^*A$. For a projection $J$ put $D_J(\theta)=e^{i\theta}J+e^{-i\theta}(I-J)$. Define $V([])=I$, and for a prepended phase $\theta$ set
+\[
+ V(\theta::\Theta)=
+ \begin{cases}
+ D_{\widetilde\Pi}(\theta)\,U V(\Theta)&|\Theta|\text{ even},\\
+ D_\Pi(\theta)\,U^*V(\Theta)&|\Theta|\text{ odd}.
+ \end{cases}
+\]
+The scalar model is $S(\Psi,x)=\prod_{\theta\in\Psi}D(\theta)R(x)$ in list order, where $R(x)=\begin{psmallmatrix}x&s\\s&-x\end{psmallmatrix}$ and $s=\sqrt{1-x^2}$. If $S(\Psi,x)_{00}=x^\epsilon L(x^2)$ on $[0,1]$, where $\epsilon=|\Psi|\bmod2$ and $L$ is a complex polynomial, then the even compression is $\Pi V(\Psi)\Pi=\Pi L(G)\Pi$ and the odd compression is $\widetilde\Pi V(\Psi)\Pi=A L(G)$.
+
+For a target $p$ in Theorem~\ref{m4:real} and $n>0$ the same $B,C,\phi_0,\ldots,\phi_n$ yield $M(p+iB,C)$ on the signed circle and give the preceding compression of $P=p+iB$ by using
+\[
+ \Psi=(\phi_0+\phi_n+(n-1)\pi/2,\ \phi_1-\pi/2,\ldots,\phi_{n-1}-\pi/2).
+\]
+Here $L$ is obtained by writing $P(x)=x^\epsilon L(x^2)$ coefficientwise. To extract the real target at the operator level, use the $|+\rangle$ compression of a control choosing between $V(\Psi)$ and $V(-\Psi)$ and apply the same parity projections.
+\end{theorem}
+\begin{proof}
+Choose an orthonormal eigenbasis for $G$ on $\operatorname{ran}\Pi$. For a basis vector $v$ of eigenvalue $x^2$, $0\le x\le1$ since $\|A\|\le1$. For $0<x<1$ take the output frame $b=Av/x$, $b_\perp=(I-\widetilde\Pi)Uv/s$ and the input complement $v_\perp=(U^*b-xv)/s$. The two frames are orthonormal: $\Pi U^*b=xv$, and $Uv=xb+sb_\perp$ with the terms in orthogonal projection spaces. In these frames $Uv_\perp=sb-xb_\perp$ by substitution. Thus $U$ and $U^*$ both have matrix $R(x)$ between the appropriate frames. Each corresponding projection phase is $D(\theta)$. At $x=0$, $Uv$ lies in the output complement and $U^*Uv=v$. The word alternates between those two actual states, as does the model with $R(0)=X$ on the first basis vector. At $x=1$, $Uv$ is in the output range and $U^*Uv=v$, and the first model coordinate stays in its line. These endpoint arguments require no additional basis vectors. Acting on each basis vector and compressing gives $L(x^2)v$ in the even case and $L(x^2)Av$ in the odd case, including the kernel. Both sides annihilate $(\operatorname{ran}\Pi)^\perp$. Here $L(G)$ is the usual operator polynomial with constant term times $I$.
+
+On the nonnegative half-circle, $W=iD(-\pi/4)R D(-\pi/4)$ by entrywise multiplication. In the complete word the scalar $i^n$ and the last right diagonal factor combine into the initial phase for the $00$ entry. This gives the displayed $\Psi$, retaining the entire signed field equality with the original rotation word. Since $R$ is real, $S(-\Psi,x)_{00}=\overline{S(\Psi,x)_{00}}$. Control compression averages the two operators, so the scalar polynomials of the two compressed words average to $p$. In degree budget zero the rotation word is constant and a real target is a scalar multiple of the input projector, obtainable by the same averaging of opposite constant phases with no $U$ calls.
+\end{proof}
+
+This is the projected-unitary reflection convention of \cite[Corollary 8, Theorem 17 and Corollary 18, arXiv v1]{m4:GSLW}. The controlled implementation assumes access to projection phases and the controlled choice of word. Each branch uses $n$ alternating signal queries. When the common signal calls can be applied unconditionally, the choice is made by controlling the phase factors and the coherent implementation also uses $n$ signal queries.
+
+\begin{proposition}[Source queries for exact amplification]\label{m4:amplify}
+Let $J$ be an isometric initialization, $U$ a unitary source, and $E$ the successful projection. Suppose $(EUJ)^*(EUJ)=pI$ with $0<p\le1$ known. An auxiliary coin and reflections give the exact success isometry $EUJ/\sqrt p$ with the coin returned to its initialized value, using at most $(\pi/2+2)/\sqrt p$ source or inverse-source calls.
+\end{proposition}
+\begin{proof}
+For $p=1$ use one call. Otherwise set $n=\lceil\pi/(4\arcsin\sqrt p)-1/2\rceil$ and $\alpha=\pi/(4n+2)$. A coin rotation with initialized-output probability $\sin^2\alpha/p\le1$ changes the probability for the joint good projection to $\sin^2\alpha$. Write the resulting source isometry as $C$. As maps from the input space, the good and bad components of $C$, divided by $\sin\alpha,\cos\alpha$ respectively, are mutually orthogonal isometries. In each such pair of copies the reflection $2CC^*-I$ followed in algebraic order by the good sign flip $I-2E_{\rm joint}$ has matrix $\begin{psmallmatrix}\cos 2\alpha&\sin 2\alpha\\-\sin 2\alpha&\cos 2\alpha\end{psmallmatrix}$ in good,bad order. It advances $(\sin\beta,\cos\beta)$ to $(\sin(\beta+2\alpha),\cos(\beta+2\alpha))$. After $n$ iterations $(2n+1)\alpha=\pi/2$. The normalized joint good component is the advertised success isometry with initialized coin. Equality of these maps also gives equality after tensoring with an identity. The initial isometry uses one source call, each copy reflection two. Finally $2n+1\le\pi/(2\arcsin\sqrt p)+2\le(\pi/2+2)/\sqrt p$. This count uses continuous phases and distinguishes source queries from finite-alphabet gate synthesis \cite{m4:BHMT,d4-dawson}.
+\end{proof}
+
+
+\begin{proposition}[Two-axis control and finite word sets]\label{m4:axes}
+The two rotation circles about any noncollinear axes generate $\SU(2)$ and $\SO(3)$ by finite words. At fixed word-length budget a finite gate alphabet has finitely many states in the orbit of a given unit Bloch vector. Their convex hull is a polytope of dimension at most three, and the worst angular distance from a unit vector to the finite orbit is positive.
+\end{proposition}
+\begin{proof}
+Conjugate the second circle by a quarter spatial turn around the first. It gives a third circle whose axis, together with the original two, spans $\R^3$. The product of the three circle parameters has invertible differential at the origin, so the subgroup generated contains an open neighborhood. Its cosets are open, and connectedness of $S^3$ forces it to be the entire group. The adjoint map is onto. For the finite alphabet, the list of words of bounded length is finite, and its image is finite. A sphere point outside the orbit has positive distance to every member of that finite set, giving the last claim.
+\end{proof}
+
+\subsection{A path with a central defect}
+
+\begin{theorem}[Spectral and finite-window bounds]\label{m4:defect}
+Let $J_n$ be the zero-diagonal path matrix on $2n$ vertices, $n\ge1$, with edge weight $1$ except for the middle edge of weight $\sqrt2$. All its eigenvalues are simple. The minimum gap $\delta_n$ and the end-to-end transfer obey
+\[
+ \delta_n\ge \frac{2\sqrt2}{(1+\sqrt2)^2n^3},\qquad
+ \frac1{\tau}\int_0^\tau |(e^{-itJ_n})_{2n-1,0}|^2\,dt
+ >\frac{1-\varepsilon}{2n}
+ \quad\left(\varepsilon>0,\ \tau\ge\frac{4n}{\varepsilon\delta_n}\right).
+\]
+In the single-edge case $n=1$ the gap is $2\sqrt2$.
+\end{theorem}
+\begin{proof}
+For a real recurrence $y_{j+1}=t y_j-y_{j-1}$ with $y_0=0$ and $y_{n+1}=b y_n$, backward iteration gives $y_{n-r}=(U_r(t/2)-b U_{r-1}(t/2))y_n$ for $0\le r<n$. For $|t|\le2$ write $t/2=\cos\theta$. The geometric sum for $U_r$ consists of $r+1$ unit terms (including at $\pm1$), giving $|y_{n-r}|\le(1+|b|)n|y_n|$. For $|t|>2$, starting from $y_0=0$ gives nondecreasing absolute values by the reverse triangle inequality and induction. In both cases $\sum_{j=1}^n y_j^2\le(1+|b|)^2 n^3 y_n^2$.
+
+Reflection splits $J_n$ into two length-$n$ Jacobi matrices $H_\pm$ in the even and odd sum-and-difference bases, with last diagonal entry $\pm\sqrt2$ and all internal edges of weight $1$. The endpoint bound at $b=\pm\sqrt2$ forces each normalized eigenvector to have last entry of modulus at least $(1+\sqrt2)^{-1}n^{-3/2}$. For eigenvectors $u_-,v_+$ of eigenvalues $\lambda,\mu$ respectively, the identity
+\[
+ (\mu-\lambda)\ip{u_-}{v_+}=2\sqrt2\,u_-(n)v_+(n)
+\]
+gives the stated gap across the sectors. Within either sector a first entry determines all coordinates by the recurrence, so each eigenspace is one dimensional. For the rank-one update $H_+=H_-+2\sqrt2\,ee^{\mathsf T}$, the increasing eigenvalue lists interlace: min--max gives $\lambda_j^-\le\lambda_j^+$, and intersecting the span of the lowest $j+1$ eigenvectors of $H_-$ with $e^\perp$ gives $\lambda_j^+\le\lambda_{j+1}^-$. Cross-sector separation makes both inequalities strict where defined. Every pair in the full spectrum is therefore separated by at least the cross-sector bound. For $n=1$ the folded blocks are the two scalars.
+
+Let $N=2n$. Reflection acts by $s_j=\pm1$ on each normalized real eigenvector $v_j$, so the transfer amplitude is $\sum_j s_jw_j e^{-it\lambda_j}$ with $w_j=v_j(0)^2$ and $\sum_j w_j=1$. The diagonal contribution to the time average is $D=\sum_j w_j^2\ge1/N$. Each nonzero frequency $\omega$ contributes a factor $(1-e^{-i\tau\omega})/(i\tau\omega)$ of modulus at most $2/(\tau|\omega|)$. Thus the deviation is at most $\frac{2}{\tau\delta_n}(1-D)$. Since $D>0$, this bound is strictly less than $2/(\tau\delta_n)\le\varepsilon/N$. The same deviation bound proves convergence to $D$ as $\tau\to\infty$.
+\end{proof}
+
+This is a boundary-perturbed instance of the scalar recurrence in Theorem~\ref{thm:recur}. In the glued-trees walk of Childs et al.\ \cite[\S III.D, Lemmas 1--2 and Eqs.~(25)--(27), (42)--(49), arXiv v2]{m4:Childs}, two binary trees of depth $d$ are joined by an alternating cycle on their leaves. On normalized uniform column states the ordinary hopping matrix element is $\sqrt2\gamma$ since neighboring binary columns have size ratio two, and the middle element is $2\gamma$ since each leaf has two neighbors across the cycle. The adjacencies are biregular across each neighboring pair, so the column space is invariant. Taking $\gamma=1/\sqrt2$ gives $J_{d+1}$. The path estimate is independent of oracle simulation. The algorithmic separation in that reference has its own black-box graph and access assumptions.
+
+\begin{conjecture}[minimum gap]\label{m4:gap-limit}
+We conjecture that $\lim_{n\to\infty}n^3\delta_n=4\sqrt2\,\pi^2$ for this normalization. For $n=64,128,256$ the respective values of $n^3\delta_n$ to two decimal places are $58.11$, $57.06$ and $56.47$, compared with $4\sqrt2\,\pi^2\simeq55.83$. A proof would have to control the smallest spacing uniformly over root indices, including the two exterior eigenvalues.
+\end{conjecture}
+
+\subsection{Static cycle completions for the walk graph}
+
+\begin{proposition}[Path contraction and alternating completions]\label{m4:forest}
+Let $E$ be a directed acyclic edge set on a finite labelled set $V$, with in- and out-degrees at most one. Its weak components, including isolated vertices, are uniquely ordered directed paths. On $N=|V|\ge2$ vertices with $c\ge2$ components, $|E|=N-c$. The uniform law on cyclic permutations of $V$ gives mass $(c-1)!/(N-1)!$ to the extensions of $E$. Conditional on extension, a specified tail connects to a specified head in a different component with probability $1/(c-1)$, and to its own head with probability zero.
+
+Suppose in addition that $V$ has $n$ labels of each of two colors, and each known edge alternates. Let $m$ be the number of red-to-red paths (classified by head and tail color), and let $p,q$ count red-to-blue and blue-to-red paths. The number of blue-to-blue paths is also $m$. The number $M$ of alternating cyclic extensions is
+\[
+ \begin{cases}
+ 0 & n=0,\\
+ m(m+p-1)!(m+q-1)! & m>0,\\
+ (p+q-1)! & m=0,\ p+q>0,\ pq=0,\\
+ 0 & m=0,\ p,q>0.
+ \end{cases}
+\]
+A cycle is required to have a nonempty carrier, with the identity allowed on one label. For $n>0$ the uniform law on alternating cycles gives extension mass $M/[n!(n-1)!]$. Given extension and $M>0$, all $M$ extensions are equiprobable. For distinct compatible components $A,B$ the conditional probability of $A$'s tail connecting to $B$'s head is $M'/M$, where $M'$ is the same inventory count after replacing $A,B$ by their concatenation.
+\end{proposition}
+\begin{proof}
+Following the unique predecessor and successor terminates by finiteness and acyclicity, giving the entire weak component since an edge to any outside vertex would violate an endpoint condition or uniqueness. Each path uses one fewer edge than vertices. An extending permutation must biject the remaining tails to the remaining heads. Following the permutation from one head to the next traverses the path, so its first-return action is the induced component permutation. Conversely any cyclic component permutation specifies the missing edges via these tails and heads. Fix a component as start of a cycle and permute the remaining components to count $(c-1)!$. Fixing its next component leaves $(c-2)!$ possibilities. The unrestricted and alternating conditional uniform laws follow from restricting finite uniform measures.
+
+For colors, each alternating path with equal endpoint colors has one more vertex of that color. The other paths have equal color counts, so equality in the total counts forces equally many red-to-red and blue-to-blue paths. Use the component labels as auxiliary arcs from head color to the opposite of tail color. Each component may only be followed by an arc whose source is its target. The equal-endpoint components give $m$ crossings in each direction. With just these, take an arbitrary bijection from the red-source arcs to the blue-source arcs and an arbitrary cyclic first return on the red-source arcs. This fixes the reverse bijection and gives $m!(m-1)!$ choices. Inserting a new loop arc at a color can be done immediately before any arc with that source color, and deleting it in an enlarged compatible cycle inverts this choice. Inserting all $p,q$ loops in a fixed order yields the stated factorial product. When there are no crossings, a nonempty compatible cycle must stay at one color, giving the other two nonempty-carrier cases. For the empty original graph, $m=n$ and $p=q=0$, giving the denominator $n!(n-1)!$. The prescribed connection $A$ to $B$ is equivalent to replacing the two auxiliary arcs by the single arc from the first source to the second target, and then expanding it as the ordered adjacent pair. This works also when one arc remains, because its closure exactly enforces the final compatibility. Thus the count of connections is $M'$.
+
+Ordinary contraction and its endpoint law appear in Tsaban \cite[Lemmas 1.1--1.5]{m4:Tsaban}. The positive-crossing inventory formula is also the two-vertex case of the BEST theorem \cite[Theorem 1]{m4:BEST}. The count here is for a static revealed edge set.
+\end{proof}
+
+\begin{proposition}[Undirected orientation fibers]\label{m4:orientation}
+For $|V|\ge3$ let $F$ be any simple graph on $V$. For each undirected spanning cycle $C$ containing $F$, exactly two pairs $(E,\sigma)$ have shadow $C$, where $\sigma$ is a cyclic permutation and $E$ is an orientation of $F$ extended by $\sigma$. They are exchanged by $(E,\sigma)\mapsto(E^{\rm op},\sigma^{-1})$. Requiring adjacency of $u\ne v$ in the shadow gives the pairs for $F+uv$ by orienting the added edge as prescribed by $\sigma$.
+\end{proposition}
+\begin{proof}
+Choose a direction at one vertex of a spanning cycle. At each next vertex it is forced to continue along the edge different from the edge of arrival, and this exhausts the cycle. The two initial choices give distinct successor permutations because the cycle has length at least three. Each forces the orientation of all edges in $F$. Conversely the shadow of a cyclic permutation has exactly the two distinct incident neighbors furnished by the permutation and its inverse. If the shadow already contains the new edge, the same successor permutation supplies its unique orientation, and restriction to $F$ inverts the extension. Edge addition commutes with reversal.
+\end{proof}
+
+
+\begin{remark}[physical realisation]\label{m4:physical}
+Statements about implementing the clock phases on hardware (calibrated resonant drives, virtual phase updates, rotating frames and
+ordered pulse kernels) and the entanglement of a coined walk on a cycle concern physical realisations; they belong to the companion
+paper and are not reproduced here.  Hardware is a hypothesis there; nothing in this section depends on it.
+\end{remark}
+
+\setcounter{section}{6}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\theHsection}{\arabic{section}}
+
 \section{Sagittas and quadratic variation}
 
 \begin{proposition}[exact split]\label{prop:split}
@@ -7084,7 +7304,182 @@ With $E=\Cay(\cdot/2)$ in Theorem~\ref{thm:ftc}(i), discrete integration of a ra
 exact over $\Q$; this is the Cayley-transform method of \cite{DLP,Iserles01}, whose orders (one for left tags,
 two for midpoint tags) we confirmed numerically.
 
-% ---- insertion point: sections of the arc calculus from modules m4 (phase synthesis, rational atlas) and m5 (arc body, tropical limit)
+% Section 10A: lettered so that the following sections (cited by Paper II) keep their numbers.
+\setcounter{section}{0}
+\renewcommand{\thesection}{10\Alph{section}}
+\renewcommand{\theHsection}{arcC.\arabic{section}}
+\section{A singularity-free rational atlas}\label{sec:m4atlas}
+
+Proposition~\ref{prop:cayley} gives a rational chart on $M\setminus\{-1\}$, and Theorem~\ref{thm:rational} shows that the arc calculus
+is rational in it; but the chart is unbounded near $-1$ and loses the sign of the spin lift.  Two signed charts with two denominators
+give a bounded rational product on all of $M$ that retains the sheet and has uniform error bounds in chordal distance
+(Theorem~\ref{m4:atlas}, Proposition~\ref{m4:conditioning}).  For computation this supersedes the single chart of
+Proposition~\ref{prop:cayley}(i); the statements of Section~\ref{sec:rational} remain true as stated.  The atlas also delimits what
+rational arithmetic can do: minimal midpoints and near-antipodal endpoints are genuine obstructions (Example~\ref{m4:obstructions}).
+Example~\ref{m4:seams} shows why the sign bit is needed, Corollary~\ref{m4:approxphase} approximates clocks by rational points,
+Proposition~\ref{m4:models} and the two results after it compare five representations of $S^3$, and Proposition~\ref{m4:updates}
+gives rational update rules on the adjoint quotient.
+
+\subsection{Two denominators, with the spin sheet retained}
+
+\begin{theorem}[Bounded rational multiplication]\label{m4:atlas}
+A signed chart representative of $q\in M$ is $(e,r)$, with $e\in\{1,-1\}$, $r\in\im\HH$, $|r|\le1$, and $q=e\Cay(r)$. Along $|r|=1$ identify $(e,r)$ with $(-e,-r)$. With $r,s\in\im\HH$ define
+\begin{align*}
+ L&=(1+|r|^2)(1+|s|^2),\\
+ N&=(1-|s|^2)r+(1-|r|^2)s+2r\times s,\\
+ D_+&=1+|r|^2|s|^2-2\ip rs,\qquad D_-=|r+s|^2 .
+\end{align*}
+Then $D_++D_-=L$, $|N|^2=D_+D_-$ and $\max(D_+,D_-)\ge1/2$. The product is represented by
+\[
+ (e,r)(f,s)=
+ \begin{cases}
+ (ef,N/D_+) & D_+\ge D_-,\\
+ (-ef,-N/D_-) & D_+<D_-.
+ \end{cases}
+\]
+Its coordinate norm squared is $\min(D_+,D_-)/\max(D_+,D_-)$. Inversion is $(e,r)^{-1}=(e,-r)$. These operations give the group law on $M$ and via $x\bar yz$ the heap law, using rational arithmetic and comparisons only.
+\end{theorem}
+\begin{proof}
+Proposition~\ref{prop:cayley} gives the inverse coordinate $r=e\im q/(1+e\re q)$ for $e\re q\ge0$. On the open overlap of the full stereographic charts the transition is $r\mapsto-r/|r|^2$, yielding the stated equatorial identification on the bounded parts. The quaternion product $\Cay(r)\Cay(s)$ has scalar part $(D_+-D_-)/L$ and imaginary part $2N/L$, by expanding its two numerators. Its norm is one, hence $4|N|^2=L^2-(D_+-D_-)^2$. Both denominators are nonnegative, since $D_- = |r+s|^2$ and $D_+=(1-\ip rs)^2+|r\times s|^2$. Their sum is $L\ge1$. Applying the inverse coordinate rule with the larger denominator gives the two branches, each decoding to the actual product. Equatorial alternatives decode to the same quaternion. The two balls are compact, so the continuous bijection from their glued space to $M$ is a homeomorphism. This proves representative independence and associativity after gluing, including when an intermediate product lies on the seam. Conjugation of $\Cay(r)$ gives the inverse formula.
+\end{proof}
+
+\begin{proposition}[Conditioning and accumulated error]\label{m4:conditioning}
+Each signed chart has conformal factor $\lambda(r)=2/(1+|r|^2)\in[1,2]$ on the closed unit ball, with singular-value condition number $1$. For either fixed sheet,
+\[
+ |\Cay(r)-\Cay(s)|=\frac{2|r-s|}{\sqrt{(1+|r|^2)(1+|s|^2)}}.
+\]
+An input coordinate error of size $\eta$ changes its decoded quaternion by at most $2\eta$. In fixed charts at unit-ball input and output, multiplication in either argument has all singular values in $[1/2,2]$ and condition number $1$. With both arguments varied, its three nonzero singular values coincide. Multiplication is nonexpansive in each argument in chordal distance, so exact products satisfy
+\[
+ |q_1\cdots q_m-\widetilde q_1\cdots\widetilde q_m|
+ \le\sum_{j=1}^m|q_j-\widetilde q_j|.
+\]
+If both computed denominators and the computed numerator differ from their exact values for the supplied coordinates by at most $\delta\le1/8$ in absolute value and Euclidean norm respectively, and the divided coordinate has an additional rounding error of at most $\delta$, the local decoded product error is at most $50\delta$. The sheet sign must follow the selected branch. For a left-to-right product with bounded coordinates supplied to each step, local decoded errors add to the input error bound. The bound measures decoded points across a branch change.
+\end{proposition}
+\begin{proof}
+Compute the squared chord from the inner product of the two inverse-stereographic expressions. Cancellation of the constant and mixed squared norms yields $4|r-s|^2/L$. Taking the differential gives the conformal factor. In fixed charts a partial differential is the composition of a scaled isometry, an isometric group translation, and an inverse scaled isometry. If both inputs vary, the differential is the sum of two such maps with the same target, so its product with its adjoint is a scalar times the target identity. For the global estimate, multiplication by any unit quaternion preserves chordal distance and telescoping gives the sum.
+
+On bounded inputs $L\le4$ and $|N|\le L/2\le2$. The selected computed denominator is at least $1/2-\delta\ge3/8$, even when rounding changes which branch wins. Its corresponding true denominator is at least $1/2-2\delta\ge1/4$. For that branch the exact signed coordinate reconstructs the exact product via its full stereographic chart, even if the coordinate lies just outside the unit ball. Subtracting the two quotients bounds the coordinate error by
+\[
+ \frac{\delta}{3/8}+\frac{2\delta}{(3/8)(1/4)}+\delta=25\delta.
+\]
+The chordal identity bounds decoding error by twice this amount for unrestricted coordinates as well. Exact recharting preserves the decoded point. If needed, any coordinate of norm above one can be replaced by its shadow with the opposite sign bit before the next step. Telescoping the exact decoded products and the local errors gives the last assertion.
+\end{proof}
+
+\begin{proposition}[Adjoint quotient and seam-invariant readouts]\label{m4:sine}
+The unsigned modified Rodrigues parameters with shadow switching give the quotient $\SO(3)$ under $q\mapsto\Ad(q)$, with opposite boundary points identified. If $[r]_\times v=r\times v$, the rotation matrix and its sine vector are
+\[
+ R_r=I+\frac{4(1-|r|^2)[r]_\times+8[r]_\times^2}{(1+|r|^2)^2},
+ \qquad
+ \xi(r)=\frac{4(1-|r|^2)}{(1+|r|^2)^2}r.
+\]
+For $q=w+v$ this is $\xi=2wv$, or $\sin\theta\,u$ for an adjoint angle $\theta$ about $u$. It has norm at most one, vanishes on the seam and is invariant under $r\mapsto-r/|r|^2$. With distance $\min(|q-q'|,|q+q'|)$ on the quotient, $\xi$ is $2$-Lipschitz. Also $\ip q{q'}^2$ is a rational quotient readout equal to $(1+\cos\Delta)/2$, where $\Delta\in[0,\pi]$ is the relative rotation angle.
+\end{proposition}
+\begin{proof}
+For unit $q=w+v$, expanding $qz\bar q$ for imaginary $z$ gives $z+2w(v\times z)+2v\times(v\times z)$. This is the displayed matrix on using $\Cay(r)$, and its antisymmetric part divided by two is $[2wv]_\times$. The kernel of $\Ad$ consists of unit quaternions commuting with every imaginary quaternion, namely $\pm1$, and every axis rotation lifts to $\cos(\theta/2)+u\sin(\theta/2)$. Products $2wv$ are sign-invariant, and $2|w||v|\le w^2+|v|^2=1$. For a second lift $q'=w'+v'$, the difference has norm at most $2(|w||v-v'|+|v'||w-w'|)$. The sharper factor $2$ follows by integrating the derivative of $(w,v)\mapsto2wv$ along the ambient segment from $q$ to $q'$: its norm is at most $2|(w,v)|$, which is at most two along the segment. Choose the closer lift. Finally $\re(\bar q q')=\ip q{q'}=\pm\cos(\Delta/2)$, which gives the squared readout.
+\end{proof}
+
+\begin{example}[The equatorial seam and order]\label{m4:seams}
+Write $r\star s$ for the chart vector output with the sign bit dropped and ties assigned to $D_+$. Denote the oriented coordinate unit vectors by $i,j,k$. Then
+\[
+ (i\star i)\star j=j,\qquad i\star(i\star j)=-j .
+\]
+Indeed $i\star i=0$, $i\star j=k$, and $i\star k=-j$. The expressions are equal in the quotient. In the signed atlas the two output representatives are $( -1,j)$ and $(1,-j)$ for positive input signs. Likewise for $a=-i/2$, $b=i/3$ the inner product $(-a)\star b=i$ lies on the seam and $a\star((-a)\star b)=b$. More generally the heap cancellation recovers the chart vector if the result lies in the open ball and recovers its equivalence class even at the seam.
+
+For an unsigned key match with target $v$ on the seam, the scalar part of $\Cay(-r)\Cay(v)$ is $2\ip rv/(1+|r|^2)$. Hence $r\star((-r)\star v)$ returns $-v$ exactly when $\ip rv<0$ and returns $v$ otherwise. At the final tie the default branch retains the sign induced by the inner lift. For example $r=-i/2,\ v=i$ returns $-i$.
+
+For $t=\sqrt2-1$, the two orders of composing $ti$ and $tj$ give $(i+j\pm k)/3$. The identity $1-t^2=2t$ gives $N=2t^2(i+j\pm k)$ and $D_+=6t^2>D_-=2t^2$. The corresponding lifts have scalar part $1/2$ and vector parts $(i+j\pm k)/2$. They have inner product $1/2$, so their relative adjoint rotation angle is $2\pi/3$.
+\end{example}
+
+\begin{corollary}[Exact rational inputs and arc operations]\label{m4:arithmetic}
+The atlas gives bounded rational coordinates with one sign for every $q\in M(\Q)$ and the represented rational points form a dense subgroup. Relative translations, sampled recurrence, polygon products, $c,\kappa$ and $v$ use rational operations. The matrix of the adjoint and the cosine of triangle excess in Theorem~\ref{thm:rational} are rational readouts as well. Signed chordal bounds for approximate rational inputs follow from Proposition~\ref{m4:conditioning}. For nonantipodal $p,q$ put $g=q\bar p$ and $r=\im g/(1+\re g)$. Then $\Cay(tr)p$, $0\le t\le1$, parametrizes the minimal arc, with rational evaluations at rational $t$ for rational endpoints. At the antipode an explicitly supplied rational unit direction $u$ gives the semicircle by using $\Cay(tu)p$ on one half and $-\Cay(-tu)p$ on the other, with $t$ running from $0$ to $1$ and back to $0$ respectively. The formulas agree at $t=1$.
+
+For the Levi-Civita transport of Proposition~\ref{prop:LCarc}, store the projective quaternion $[1+q\bar p]$ and apply its adjoint as in Theorem~\ref{thm:rational}. Products give exact rational transport and holonomy in $\SO(3)$ for rational vertices. A spin holonomy can be carried as the rational unnormalized product $H$ of those factors, with the positive normalization $H/\sqrt{|H|^2}$. This lift lies in $M(\Q)$ exactly when $|H|^2$ is a square in $\Q$.
+
+For two endpoint pairs $(p,q)$ and $(p',q')$ with $1+c(p,q),1+c(p',q')\ge\mu>0$, their midpoint lifts in right trivialization differ in chordal norm by at most
+\[
+ \frac{|p-p'|+|q-q'|}{\sqrt{2\mu}}.
+\]
+The adjoint transport error in operator norm is at most twice this bound.
+\end{corollary}
+\begin{proof}
+All chart formulas preserve rationality. Rational vectors in the ball are dense, including at its boundary by approximation from inside. A rational grid of mesh $1/m$ rounded toward zero in each coordinate stays in the ball and changes the decoded point by at most $2\sqrt3/m$. Quaternion products, conjugation and the rational operations of Theorem~\ref{thm:rational} therefore use the same bounded representation. If $(b_0,b)\in\mathbb Z\times\mathbb Z^3$ with $b_0>0$ represents $r=b/b_0$, the homogeneous reconstruction has denominator $b_0^2+|b|^2$ and numerator $(b_0^2-|b|^2,2b_0b)$ up to sheet sign. Multiplication of homogeneous integer quaternion numerators multiplies their input denominators before any cancellation. This gives an exact arithmetic height bound by the sum of input denominator bit lengths up to an additive constant.
+
+The angle of $\Cay(tr)$ is $2\arctan(t|r|)$ from the scalar and vector formulas, so it runs monotonically through the required arc, with the coincident case constant. The two semicircle formulas run from angles zero to $\pi/2$ and then from $\pi/2$ to $\pi$, since $-\Cay(-u)=\Cay(u)$ for unit $u$. For the transport $1+g$ is nonzero and its positive normalization is the half-step. Adjoint action cancels scalar normalization. A nonzero rational coordinate of $H$ recovers the rationality of $\sqrt{|H|^2}$ from a rational normalized lift, proving the converse square criterion.
+For $a=1+q\bar p$ and $b=1+q'\bar p'$, write $\alpha=|a|$, $\beta=|b|$. Both are at least $\sqrt{2\mu}$. Expanding the squared chord gives $|a-b|^2=(\alpha-\beta)^2+\alpha\beta|a/\alpha-b/\beta|^2$. The product estimate bounds $|a-b|$ by the sum of endpoint errors. For normalized lifts the adjoints differ by at most twice the lift difference, by expanding the two conjugations and using norm multiplicativity.
+\end{proof}
+
+\begin{example}[Limits of rational and uniform arc evaluation]\label{m4:obstructions}
+The endpoints $1,i$ are rational, and their unique midpoint $(1+i)/\sqrt2$ is irrational. The rational arc parameter of Corollary~\ref{m4:arithmetic} is not in general proportional to length. A continuous extension of endpoint-determined midpoints to $(1,-1)$ is impossible. The midpoints toward $-\cos t+i\sin t$ and $-\cos t-i\sin t$ tend to $i$ and $-i$ respectively as $t\downarrow0$. Thus uniform conditioning applies to chart arithmetic and specified steps, rather than to recovery of the minimal midpoint from arbitrarily near-antipodal endpoints. A rational target can likewise require irrational phase gates. In budget one the upper-left coefficient of the word is a unit complex number of real part $1/2$ for $p=x/2$, so it has imaginary part $\pm\sqrt3/2$. If both phase gates had rational quaternion entries this coefficient would have rational imaginary part.
+\end{example}
+
+\begin{corollary}[Approximating clocks by rational points]\label{m4:approxphase}
+With rational orthogonal unit axes, each clock may be approximated in its own circle by rational clocks. For the same signal, phase gate errors of at most $\eta_j$ in chordal distance give a comparison error at most $\sum_j\eta_j$, uniformly on the signed signal circle.
+\end{corollary}
+\begin{proof}
+Use the chart on the line $\R k$, keeping the sheet, and approximate its bounded coordinate by rationals. The product estimate in Proposition~\ref{m4:conditioning} and the unit norm of the comparison test vector give the bound.
+\end{proof}
+
+\subsection{Five geometric representations}
+
+\begin{proposition}[Exponentials, rational charts and turns]\label{m4:models}
+The group $M$ has equivalent representations by the radius-$\pi$ exponential ball with its boundary collapsed, the signed rational atlas, and Hamilton's turns. The radius-$\pi/2$ exponential ball with antipodal boundary points identified represents $\SO(3)$ in the corresponding half-angle units.
+\end{proposition}
+\begin{proof}
+The exponential formula of the Conventions in Section~\ref{sec:intro} gives a bijection from the open radius-$\pi$ ball to $M\setminus\{-1\}$ and sends the boundary to $-1$. Compactness makes the induced continuous bijection a homeomorphism. The inverse at $q=w+v$ with $v\ne0$ is $\operatorname{atan2}(|v|,w)\,v/|v|$. At $1$ use zero and at $-1$ use the collapsed class. The corresponding spatial angle variable is twice the exponential coordinate. Modulo $\pm1$ one uses the hemisphere $w\ge0$ and glues antipodal points on its boundary. The change of variables on the positive stereographic chart is $r=u\tan(\alpha/2)$ for exponential input $\alpha u$, and Theorem~\ref{m4:atlas} covers the remaining chart. For two inputs $\alpha u,\beta v$ with unit $u,v$, multiply the two quaternion exponentials. The scalar and vector parts of the product are
+\[
+ \cos\alpha\cos\beta-\ip uv\sin\alpha\sin\beta,\qquad
+ u\sin\alpha\cos\beta+v\cos\alpha\sin\beta+(u\times v)\sin\alpha\sin\beta .
+\]
+Applying the preceding inverse gives the exact exponential-coordinate product, including its central cases. For small $\zeta,\eta\in\im\HH$, expansion gives vector part $\zeta+\eta+\zeta\times\eta+O((|\zeta|+|\eta|)^3)$. Since $\alpha/\sin\alpha=1+O(\alpha^2)$ near zero, this is also the local exponential-coordinate product to second order. In spatial-angle units the cross term has coefficient $1/2$.
+
+A turn is a pair of unit imaginary quaternions $(a,b)$ modulo equality of scalar product and oriented cross product. Its value is $b\bar a=\ip ab+a\times b$. For $w+v$ with $v\ne0$, choose $a$ perpendicular to $v$ and set $b=(w+v)a$. This is unit imaginary, and $b\bar a=w+v$. At $1$ take $b=a$, and at $-1$ take $b=-a$. For general successive turns $q_1,q_2$, choose an intermediate unit axis perpendicular to both imaginary parts. Then $a=\bar q_1 b$ and $c=q_2 b$ are imaginary unit endpoints, so every product can be represented by turns sharing $b$. Composition deletes $b$ because $(c\bar b)(b\bar a)=c\bar a$. In particular turns close around a triangle. This is Hamilton's construction \cite{m4:Hamilton,m4:Turns}.
+\end{proof}
+
+\begin{proposition}[Hopf coordinates and spherical transport]\label{m4:hopf}
+A fourth representation is the Bloch sphere with its full Hopf circle coordinate. On the overlap of the north and south gauges its azimuth is $\varphi$, and the fiber angles satisfy $\psi_S-\psi_N=\varphi\bmod 2\pi$. The north and south connection forms are $\frac12(1-\cos\vartheta)d\varphi$ and $\frac12(-1-\cos\vartheta)d\varphi$. For unit Bloch directions $a,b,c$ with no antipodal pair put
+\[
+ S=1+\ip ab+\ip bc+\ip ca,\qquad D=a\cdot(b\times c).
+\]
+In the Pauli convention $v\mapsto-i(v\cdot\boldsymbol{\sigma})$, the product of the positive-scalar shortest spin rotations along $a\to b\to c\to a$ is the quaternion $(S+D a)/\sqrt{S^2+D^2}$. On the initial positive Pauli eigenline its phase is $(S-iD)/\sqrt{S^2+D^2}$. For the positively oriented coordinate octant the phase is $e^{-i\pi/4}$.
+\end{proposition}
+\begin{proof}
+The first column $(z_0,z_1)$ of an $\SU(2)$ matrix determines its second column $(-\bar z_1,\bar z_0)$. The rank-one projector of this column gives its Bloch vector, with fibers exactly common multiplication by a unit scalar. At spherical angle $(\vartheta,\varphi)$ a local section is $s_N=(\cos(\vartheta/2),e^{i\varphi}\sin(\vartheta/2))$. Set $s_S=e^{-i\varphi}s_N$, which extends over the south pole. Writing the same column as $e^{i\psi_N}s_N=e^{i\psi_S}s_S$ gives the stated transition and reconstructs the column, including at the poles in the corresponding gauges. The forms are $-i s^*ds$, computed by differentiation. Their common curvature is $\frac12\sin\vartheta\,d\vartheta\wedge d\varphi$. Horizontality sets the total form $d\psi-i s^*ds$ to zero. Stokes' theorem on gauge pieces thus gives horizontal phase $e^{-i\Omega/2}$ for an oriented spherical area $\Omega$ modulo $4\pi$. Changing gauge pieces cancels their boundary terms by the displayed transition, modulo $2\pi$ in the phase. A full turn about a fixed axis gives the double-cover lift $\exp(tu/2)$, $0\le t\le2\pi$, from $1$ to $-1$. Any continuous lift of that path differs by a continuous sign, hence by a constant sign. This rules out a continuous global section of the spin cover.
+
+The rotation from $a$ to $b$ is the unit quaternion with numerator $1+a\cdot b+a\times b$ and denominator $\sqrt{2(1+a\cdot b)}$ since its adjoint rotates through the angle between the two axes. Its action on the positive eigenline of $a$ is normalized projection to the positive eigenline of $b$. To see this in matrices, if $P_a=(I+a\cdot\boldsymbol{\sigma})/2$, then $P_bP_a$ acting on that line is $(I+(b\cdot\boldsymbol{\sigma})(a\cdot\boldsymbol{\sigma}))/2$. The Pauli multiplication rule gives the numerator of the gate divided by $2$, and $\|P_b z_a\|^2=(1+a\cdot b)/2$ for a unit $z_a$. The phase of the loop is therefore the phase of $\operatorname{tr}(P_aP_cP_b)$. Expanding the Pauli products gives $\operatorname{tr}(P_aP_bP_c)=(S+iD)/4$. The loop trace is its conjugate and is nonzero, since its modulus is the product of the three nonzero pair overlap moduli. More generally the trace of an ordered cycle of rank-one projectors is the cyclic product of vector overlaps, by multiplying the rank-one operators. The closed spin rotation commutes with $a$ and is determined by its eigenvalue on the positive line, proving the quaternion formula. On a single shortest leg the lifted path $\exp(t(a\times b)/|a\times b|)z_a$ is horizontal because the generator is perpendicular to $a$ and remains perpendicular to the moving Bloch vector. The coincident case uses a constant lift. Thus the formula gives the spherical half-excess phase and extends the geometric comparison with Theorem~\ref{thm:triangle}. For the coordinate octant $S=D=1$ and its oriented area is $\pi/2$.
+\end{proof}
+
+\begin{remark}[The heap representation and its tangent triple system]\label{m4:heap}
+For the fifth representation retain the global set $M$ with $\hp xyz=x\bar yz$. Choosing any $a\in M$ makes $x\cdot_a y=\hp xay$ a group with identity $a$. The map $x\mapsto\bar a x$ is a group isomorphism by multiplication, so this representation recovers every other one after choosing the frame used there. For example $\hp i1j=k$ and $\hp j1i=-k$. The heap cancellation and reversed middle term in para-associativity follow from $(u z^{-1}y)^{-1}=y^{-1}zu^{-1}$. Left and right translations preserve the heap, by cancellation of the translated middle inverse, as in Lemma~\ref{lem:certaine}.
+
+In an oriented orthonormal tangent frame set $[v,w,z]_{\rm tr}=(v\times w)\times z=(v\cdot z)w-(w\cdot z)v$. This bracket is alternating in the first two entries, satisfies the cyclic identity by cancellation of the three dot-product expressions, and satisfies the derivation identity because the infinitesimal rotations $(v\times w)\times(\cdot)$ differentiate both cross products by the product rule. The sphere curvature at unit radius is $R(v,w)z=-[v,w,z]_{\rm tr}$ for $R(v,w)=[\nabla_v,\nabla_w]-\nabla_{[v,w]}$: the tangential part of the ambient Euclidean derivative is $\nabla$ and the Gauss equation gives $(w\cdot z)v-(v\cdot z)w$. For quaternion Lie brackets this is $-\tfrac14[[v,w],z]$ since each bracket doubles the cross product. The tangent triple system is shared by $M$ and its locally isometric adjoint quotient. The global heap supplies the topology and sheet information.
+\end{remark}
+
+\begin{proposition}[Rational updates on the adjoint quotient]\label{m4:updates}
+Consider a finite family of quotient states and form nonnegative weights $b_j=\ip{q_j}{k_j}^2$ with unit lifts. Integer powers of averages of these weights can be used as scores $s_j\ge0$, with $\alpha_j=s_j/(\varepsilon+\sum_\ell s_\ell)$ for $\varepsilon>0$. Then $\sum_j\alpha_j<1$ and it tends to zero as all scores tend to zero. A value can be transported by $\hp{q_j}{k_j}{v_j}$ and converted to a relative update by taking one quarter of the sine vector of its displacement from the current state. Weighted sums, cross products and the triple bracket of Remark~\ref{m4:heap} applied to these sine vectors are smooth functions of the quotient inputs. The update $r(u)=u/(1+|u|^2)$, followed by multiplication in the atlas, uses rational arithmetic and has coordinate radius at most $1/2$.
+
+In a fixed stereographic chart, the derivative at $s=0$ of the first-chart product coordinate of $r$ followed by $s$ is
+\[
+ J_r=(1-|r|^2)I+2rr^{\mathsf T}+2[r]_\times,\qquad
+ J_r^{\mathsf T}J_r=(1+|r|^2)^2 I.
+\]
+It gives $\tfrac12 J_r^{\mathsf T}\nabla L$ for the right-increment gradient in unit quaternion tangent coordinates, where $\nabla L$ denotes the Euclidean gradient in the chart. A left increment reverses the sign of the cross term.
+\end{proposition}
+\begin{proof}
+The weight and sine identities follow from Proposition~\ref{m4:sine}. In particular the score sum is divided by itself plus $\varepsilon$. Heap cancellation gives exactly the value on a matched query and key. Formulas for the sine and weight are polynomial in lifts and invariant under changing the sign of a lift. They therefore descend smoothly. The norm of $r(u)$ is at most $1/2$ by $2|u|\le1+|u|^2$, with equality at unit norm. The differential follows by differentiating $N/D_+$ in its second slot, holding $r$ fixed. Its singular-value identity also follows from Proposition~\ref{m4:conditioning} with input $s=0$ and output $r$, and holds in the full chart. An infinitesimal quaternion increment has half its length in coordinates at zero, explaining the factor $1/2$ in the gradient pullback. For a finite algebraic half-angle map $u/(1+\sqrt{1+|u|^2})$, the inverse is $2r/(1-|r|^2)$ on the open unit ball. Its derivative at zero is $I/2$. Left multiplication switches the order of the cross product in $N$.
+\end{proof}
+
+For a single matched slot with score $1$ and reserve $\varepsilon=1/20$, the weight is $20/21$. With current state the identity and the transported value represented by $i/2$, the relative sine divided by four is $6i/25$. The weighted input is $8i/35$. The rational update gives $(280/1289)i$, and the algebraic half-angle map gives $8i/(35+\sqrt{1289})$, by substitution. These two choices implement distinct finite steps.
+
+\subsection{Rational updates and applications}
+
+\begin{remark}[Applications requiring further input]\label{m4:programme}
+The rational quotient operations define candidate components for a field-valued sequence model. One choice is to use noncommuting positional products, two-sided translations, butterfly mixing with Schur-complement quadratic weights, the rational relative-update kernel, and the triple bracket on groups of slots indexed by the cyclic Fano incidence pattern. Individual two-sided translations are isometries by norm multiplicativity. A displacement-based stopping rule would require a quantitative forward bound on the omitted layers or an applicable invariant subspace. Independently varying the layers gives no such bound from a single small displacement. End-to-end approximation under fixed-point quantization requires bounds for the mixing and learned updates in addition to the per-product bound. Comparative claims about training at the seam, language modeling, retrieval and throughput require matched empirical tests. A physical identification of the resulting optimization with a least-action law would additionally require a specified action, dynamical limit and comparison of observables.
+\end{remark}
+
+\setcounter{section}{10}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\theHsection}{\arabic{section}}
+
 % ---- insertion point: Part "Arithmetic and holonomy" (module m6)
 \paperpart{part:final}{Context, formalisation and open problems}
 
@@ -7101,6 +7496,8 @@ Thm.~\ref{m1:chordal}, Prop.~\ref{m1:sharp} & Simplicial vertices: Dirac \cite{m
 Thm.~\ref{m1:gauge}, Prop.~\ref{m1:clique} & Classical in substance (edge-path group \cite{m1:Spanier}, spanning-tree coordinates \cite{Levy10}); the filling estimate elementary\\
 Props.~\ref{m1:gram}, \ref{m1:distance}, \ref{m1:near-gram} & Classical ingredients \cite{m1:Schoenberg,m1:JordanVonNeumann,m1:Grone}; Prop.~\ref{m1:near-gram} elementary\\
 Thm.~\ref{m2:classification} & Classical in substance \cite{Loos,Helgason,Wang52,Cartan26,Besse78}; new: axiomatisation by the round-trip law with continuous $\kappa$ (Rem.~\ref{m2:placement})\\
+Thm.~\ref{m4:real}, Prop.~\ref{m4:pair}, Thm.~\ref{m4:lift} & Quantum signal processing: existence of phases \cite{m4:LC,m4:GSLW,m4:Haah}; new: the heap formulation and the frame covariance\\
+Thm.~\ref{m4:atlas}, Prop.~\ref{m4:conditioning} & Stereographic and shadow-switching charts classical \cite{SJ}; the signed two-denominator product with error bound not found in the searched scope\\
 Thm.~\ref{d4:rank}, Prop.~\ref{d4:spectral} & Diagonal arguments \cite{d4-lawvere,d4-yanofsky}; low-rank approximation \cite{d4-ey}; no-cloning and programming \cite{d4-wootters,d4-dieks,d4-program}; the span-rank criterion for comparison maps not found in the searched scope\\
 Thm.~\ref{m5:tropical}, Cor.~\ref{m5:sign} & Maslov dequantisation \cite{m5:Litvinov}; path sums \cite{m5:Giscard}; elimination and fill \cite{m5:Rose}; signed tie coefficient and rate derived here\\
 Thm.~\ref{m3:classification} & Lie-theoretic ingredients classical \cite{Helgason}; the classification by Chebyshev comparisons and the counterexamples of Ex.~\ref{m3:obstructions} not found in the searched scope\\
@@ -7279,7 +7676,7 @@ black box; a formal statement of Theorem~\ref{thm:main} can avoid it by assuming
 
 All identities and limits of Part~\ref{part:arc} that are not textbook facts, and the identities of Part~\ref{part:axiom} used there, were
 checked numerically on random or explicit inputs by the accompanying script \texttt{check\_arc\_calculus.py} (numpy and the
-standard library; 192 checks, eight of them for Part~\ref{part:alg}, six for Section~\ref{sec:m2}, fourteen for Section~\ref{sec:m3}, eight for Section~\ref{sec:d4} and seven for Section~\ref{sec:m5}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present fourteen: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file, and one each for Sections~\ref{sec:m3}, \ref{sec:d4} and \ref{sec:m5}); everything runs
+standard library; 204 checks, eight of them for Part~\ref{part:alg}, six for Section~\ref{sec:m2}, fourteen for Section~\ref{sec:m3}, eight for Section~\ref{sec:d4}, seven for Section~\ref{sec:m5} and twelve for Sections~\ref{sec:m4}, \ref{sec:m4atlas}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present fifteen: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file, one each for Sections~\ref{sec:m3}, \ref{sec:d4} and \ref{sec:m5}, and one for Sections~\ref{sec:m4}, \ref{sec:m4atlas}); everything runs
 from the directory of this paper.  These include the recurrence and its Chebyshev form, the residual expansion of
 Theorem~\ref{thm:consist}, the inequality of Theorem~\ref{thm:action}, the split and the Brownian limits of
 Theorem~\ref{thm:sagitta} (simulated, $\tfrac32T$ to two decimals), the transport formula of
@@ -7509,6 +7906,32 @@ Part~\ref{part:alg}.
 No declaration was found for Theorem~\ref{d4:rank}, Proposition~\ref{d4:spectral}, Corollaries~\ref{d4:clock}, \ref{d4:differential},
 Theorem~\ref{m5:ladder} or Theorem~\ref{m5:tropical}.
 
+For Sections~\ref{sec:m4} and \ref{sec:m4atlas} the following declarations were located (no \texttt{sorry} in their files); they
+formalise the phase-synthesis core.
+{\small\raggedright
+\begin{itemize}[leftmargin=1.5em]
+\item Theorem~\ref{m4:real} and Proposition~\ref{m4:pair}: \texttt{D5/S3/ContinuousObservables/PhaseSynthesis.lean},
+\texttt{exists\_phase\_factorization}, \texttt{exists\_phases}.
+\item Lemma~\ref{m4:sos}: \texttt{D5/S3/ContinuousObservables/IntervalSOSCompletion.lean}, \texttt{exists\_sumsq\_decomposition},
+\texttt{exists\_phase\_unitary\_completion}.
+\item Proposition~\ref{m4:repeated}: \texttt{D5/S1/Recurrence/NormOneTraceAddition.lean}, \texttt{trace\_recurrence}.
+\item Remark~\ref{m4:phases}: \texttt{D5/S3/ContinuousObservables/LaurentLoopFactorization.lean}, \texttt{haah\_factorization}.
+\item Theorem~\ref{m4:lift}: \texttt{D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lean}, \texttt{polynomial\_lifting},
+\texttt{altSeq\_apply\_singular}; \texttt{D5/S3/ContinuousObservables/PhaseSynthesisLifting.lean}, \texttt{native\_phase\_lifting}.
+\item Proposition~\ref{m4:amplify}: \texttt{D5/S3/Quantum/Recovery/CoherentUniformAmplification.lean}, \texttt{exact\_coherent\_amplification}.
+\item Proposition~\ref{m4:axes}: \texttt{D5/S3/Geometry/TwoAxisFiniteRotation.lean}, \texttt{two\_axis\_finite\_word}.
+\item Theorem~\ref{m4:defect}, endpoint bound and gap: \texttt{D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap.lean},
+\texttt{recurrence\_endpoint\_observability}, \texttt{central\_spectral\_gap} (not the window average).
+\item Proposition~\ref{m4:forest}: \texttt{D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion.lean}, \texttt{directed\_forest\_completion};
+\texttt{CompatibleCycleInventory.lean}, \texttt{alternating\_completion\_classification}; \texttt{AlternatingCompletionLaw.lean},
+\texttt{alternating\_completion\_law}; \texttt{AlternatingConnectorLaw.lean}, \texttt{connector\_mass}.
+\item Proposition~\ref{m4:orientation}, local step: \texttt{D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.lean}, \texttt{cycle\_boundary\_walk}.
+\item Proposition~\ref{m4:hopf}: \texttt{ShortestGateHolonomy.lean}, \texttt{rotor\_shortest\_gate}, \texttt{shortest\_gate\_triangle\_holonomy};
+\texttt{CircleDoubleCoverNoSection.lean}, \texttt{no\_continuous\_global\_section}.
+\end{itemize}}
+No declaration was found for the bounded two-denominator atlas (Theorem~\ref{m4:atlas}), Proposition~\ref{m4:conditioning},
+Corollary~\ref{m4:arithmetic} or the window average in Theorem~\ref{m4:defect}.
+
 \section{What remains open}\label{sec:open}
 
 \begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2.6em]
@@ -7560,6 +7983,9 @@ Remark~\ref{m3:programme}: the indefinite classification outside dimension three
 \item \emph{Self-reference and elimination.}  (a) Conjecture~\ref{d4:conjecture}: an $O(N^{-1})$ deficit along one Hadamard/$\pi/8$
 trajectory (proved: $O((\log N)^a/N)$).  (b) The physical questions of Remark~\ref{d4:programme} and the multiscale programme of
 Remark~\ref{m5:programme}: size-uniform control of the logarithmic error under repeated elimination, and a transport-sensitive version.
+\item \emph{Phase synthesis.}  Conjecture~\ref{m4:gap-limit}: $n^3\delta_n\to4\sqrt2\,\pi^2$ for the central-defect path (numerical evidence
+$58.11,57.06,56.47$ at $n=64,128,256$); and the applications listed in Remark~\ref{m4:programme}, which need forward estimates or
+empirical evidence.
 \end{enumerate}
 
 \section*{Use of AI tools}
@@ -7790,6 +8216,16 @@ The authors used AI tools, namely Claude Fable 5.2 and Claude Opus 5.5 (via Clau
 \bibitem{m5:ST} W.~Squire and G.~Trapp, Using complex variables to estimate derivatives of real functions, \emph{SIAM Rev.} \textbf{40} (1998), 110--112.
 \bibitem{m5:Agmon} S.~Agmon, \emph{Lectures on Exponential Decay of Solutions of Second-Order Elliptic Equations: Bounds on Eigenfunctions of \(N\)-Body Schr\"odinger Operators}, Mathematical Notes 29, Princeton University Press, 1982.
 \bibitem{m5:HTrip} E.~A.~\"Ozaslan and T.~\"Ozaslan, H-TRIP: exact many-to-many distance index for multi-robot exploration, arXiv:2611.08139v1 (2026).
+% Sections 6A and 10A references (checked 2026-11-20 via Crossref DOIs and the arXiv API; Hamilton 1853 and BHMT 2002 bibliographic only).
+\bibitem{m4:LC} G.~H. Low and I.~L. Chuang, Optimal Hamiltonian simulation by quantum signal processing, \emph{Phys. Rev. Lett.} \textbf{118} (2017), 010501, \href{https://doi.org/10.1103/PhysRevLett.118.010501}{doi:10.1103/PhysRevLett.118.010501}, \href{https://arxiv.org/abs/1606.02685}{arXiv:1606.02685}.
+\bibitem{m4:GSLW} A.~Gily\'en, Y.~Su, G.~H. Low, and N.~Wiebe, Quantum singular value transformation and beyond: exponential improvements for quantum matrix arithmetics, \emph{Proc. 51st ACM STOC} (2019), 193--204, \href{https://doi.org/10.1145/3313276.3316366}{doi:10.1145/3313276.3316366}. Locators refer to \href{https://arxiv.org/abs/1806.01838v1}{arXiv:1806.01838v1}.
+\bibitem{m4:Haah} J.~Haah, Product decomposition of periodic functions in quantum signal processing, \emph{Quantum} \textbf{3} (2019), 190, \href{https://doi.org/10.22331/q-2019-10-07-190}{doi:10.22331/q-2019-10-07-190}, \href{https://arxiv.org/abs/1806.10236v4}{arXiv:1806.10236v4}.
+\bibitem{m4:Childs} A.~M. Childs, R.~Cleve, E.~Deotto, E.~Farhi, S.~Gutmann, and D.~A. Spielman, Exponential algorithmic speedup by a quantum walk, \emph{Proc. 35th ACM STOC} (2003), 59--68, \href{https://doi.org/10.1145/780542.780552}{doi:10.1145/780542.780552}. Locators refer to \href{https://arxiv.org/abs/quant-ph/0209131v2}{arXiv:quant-ph/0209131v2}.
+\bibitem{m4:Hamilton} W.~R. Hamilton, \emph{Lectures on Quaternions}, Hodges and Smith, Dublin, 1853.
+\bibitem{m4:Turns} R.~Simon, N.~Mukunda, and E.~C.~G. Sudarshan, Hamilton's theory of turns generalized to $\mathrm{Sp}(2,\R)$, \emph{Phys. Rev. Lett.} \textbf{62} (1989), 1331--1334, \href{https://doi.org/10.1103/PhysRevLett.62.1331}{doi:10.1103/PhysRevLett.62.1331}.
+\bibitem{m4:BHMT} G.~Brassard, P.~H{\o}yer, M.~Mosca, and A.~Tapp, Quantum amplitude amplification and estimation, \emph{Contemp. Math.} \textbf{305} (2002), 53--74, \href{https://arxiv.org/abs/quant-ph/0005055}{arXiv:quant-ph/0005055}.
+\bibitem{m4:Tsaban} B.~Tsaban, Permutation graphs, fast forward permutations, and sampling the cycle structure of a permutation, \emph{J. Algorithms} \textbf{47} (2003), 104--121, \href{https://doi.org/10.1016/S0196-6774(03)00017-8}{doi:10.1016/S0196-6774(03)00017-8}.
+\bibitem{m4:BEST} P.~Creed and M.~Cryan, The number of Euler tours of random directed graphs, \emph{Electron. J. Combin.} \textbf{20} (2013), no.~3, P13, \href{https://doi.org/10.37236/2377}{doi:10.37236/2377}.
 \end{thebibliography}
 
 \end{document}
