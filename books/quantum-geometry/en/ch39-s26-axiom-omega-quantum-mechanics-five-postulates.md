@@ -188,6 +188,15 @@ With two orbits, let $u,v$ be the per-seed weights in the two orbits scaled by $
 
 Three orbits suffice. The complete eight-outcome grid of denominator $1680$ satisfies the divisibility hypothesis above and has a three-orbit construction. Multiplying each integer coordinate by eight embeds the original grid into the finer grid. The embedding preserves all probabilities and commutes with each label permutation, so the fine-grid law and readout also calibrate the original grid. The minimum support is $3\cdot8!=120960$. Under these assumptions a natural-number budget $B$ is feasible exactly when $120960\le B$. See the [exact support budget theorem](lean:D5/S3/ConceptDynamics/Attribution/EightOutcomeGridSupport.grid_support_budget_iff).
 
+**Maximum mass of seeds fixed by the whole group.** Let a group $G$ act on finite input and output sets $X$ and $Y$, with $X$ nonempty. Let $P$ be a probability kernel satisfying $P(gx,gy)=P(x,y)$. Write $G_x=\{g\in G:gx=x\}$ and $A_x=\{y\in Y:gy=y\text{ for every }g\in G_x\}$. Among all calibrations with a finite seed set, positive $G$-invariant seed weights and a pointwise equivariant deterministic readout, the maximum total mass of seeds fixed by the whole group is
+$$
+\alpha=\min_{x\in X}\sum_{y\in A_x}P(x,y).
+$$
+
+At input $x$, a seed fixed by the whole group must read out a label in $A_x$. Thus every row gives an upper bound. To attain the smallest bound, put $a_x=\sum_{y\in A_x}P(x,y)$. If $\alpha>0$, take mass $\alpha$ from within $A_x$ in each row in proportion to its probabilities. This yields the subkernel $Q(x,y)=\alpha P(x,y)\mathbf{1}_{A_x}(y)/a_x$. At a representative of each input orbit, draw an output independently from the normalized $Q$ and transport it to the rest of the orbit by the group action. The representative's stabilizer fixes the sampled output, so the transported value is independent of the chosen group element. Each resulting table can serve as a seed fixed by the whole group.
+
+If $\alpha<1$, calibrate the residual kernel $(P-Q)/(1-\alpha)$ by independently drawing each row of a table. Covariance makes the product weights of these tables invariant under the group action. Mix the two laws in proportion to their masses to recover the shared calibration. At $\alpha=0$, use independent row draws from the original kernel. At $\alpha=1$, use only the tables fixed by the whole group. Keep only positive-weight seeds at each endpoint.
+
 ## 39.3.3 Formal Anchor Theorem, Literature & Appendix E Scope, Quantitative Audit, and Bridge to the Exteriorless Ternion Ontology {#sec-ch39-26-3}
 
 We formalize the five-postulate projection map, assemble the twenty-three frozen Lean 4 anchors of its two theorem boxes, record classical attributions, and verify all five invariants quantitatively below:
