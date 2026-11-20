@@ -188,6 +188,23 @@ With two orbits, let $u,v$ be the per-seed weights in the two orbits scaled by $
 
 Three orbits suffice. The complete eight-outcome grid of denominator $1680$ satisfies the divisibility hypothesis above and has a three-orbit construction. Multiplying each integer coordinate by eight embeds the original grid into the finer grid. The embedding preserves all probabilities and commutes with each label permutation, so the fine-grid law and readout also calibrate the original grid. The minimum support is $3\cdot8!=120960$. Under these assumptions a natural-number budget $B$ is feasible exactly when $120960\le B$. See the [exact support budget theorem](lean:D5/S3/ConceptDynamics/Attribution/EightOutcomeGridSupport.grid_support_budget_iff).
 
+**An exact linear program for any subgroup.** Let $G$ act on a nonempty finite input set $X$ and a finite output set $Y$, and let $P$ be a $G$-covariant probability kernel. Fix a subgroup $H\le G$ and use finite shared seed laws with positive $G$-invariant weights and pointwise $G$-covariant readouts. Let $T=Y^X$ be the set of deterministic readout tables, with action $(g\cdot t)(x)=g\cdot t(g^{-1}\cdot x)$. Write $T^H$ for the tables fixed by $H$. For each $G$-orbit $O\subseteq T$ define
+$$
+a_O(x,y)=\frac{|\{t\in O:t(x)=y\}|}{|O|},
+\qquad
+b_O=\frac{|O\cap T^H|}{|O|}.
+$$
+The maximum total weight of $H$-fixed seeds is the attained optimum of
+$$
+\max_{(z_O)} \sum_O z_O b_O,
+\qquad
+z_O\ge 0,\quad \sum_O z_O=1,\quad
+\sum_O z_O a_O(x,y)=P(x,y)\quad(x\in X,\ y\in Y).
+$$
+Send each seed to its table of outputs across all rows. The table distribution is invariant and has marginals $P$. Every $H$-fixed seed maps to an $H$-fixed table, so the fixed mass can only increase. An invariant table distribution assigns equal weight to all tables within each orbit. Its orbit totals $z_O$ therefore obey the displayed constraints, and its fixed mass is the displayed objective.
+
+Conversely, for any feasible vector give each table in $O$ weight $z_O/|O|$. Use the positive-weight tables as the seeds, with evaluation at $x$ as the readout. This realizes the kernel and attains the objective exactly. Independent row draws give an invariant table distribution, so the constraints are feasible. They define a closed subset of the finite-dimensional probability simplex, and the linear objective attains a maximum there.
+
 ## 39.3.3 Formal Anchor Theorem, Literature & Appendix E Scope, Quantitative Audit, and Bridge to the Exteriorless Ternion Ontology {#sec-ch39-26-3}
 
 We formalize the five-postulate projection map, assemble the twenty-three frozen Lean 4 anchors of its two theorem boxes, record classical attributions, and verify all five invariants quantitatively below:
