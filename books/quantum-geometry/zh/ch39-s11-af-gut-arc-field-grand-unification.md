@@ -246,7 +246,7 @@ $N_c = 3$、不提希格斯粒子时反常相消（含混合引力反常）给�
      \pi_2(S^3) \;=\; 0,
      $$
 
-     理论中**严格不存在任何拓扑稳定的特胡夫特—波利亚科夫大统一磁单极子**，无需额外假定暴胀稀释即可彻底免除普雷斯基尔（Preskill, 1979）磁单极子过密危机！
+     理论中**严格不存在任何拓扑稳定的特胡夫特—波利亚科夫大统一磁单极子**，这一结论只对乘积规范群加单个希格斯二重态成立。若高能端还有 Pati–Salam 阶段（本书第三阶的结构来源），其伴随破缺的真空轨道 $\mathrm{SU}(4)/\mathrm{S}(\mathrm{U}(3)\times\mathrm{U}(1)) \cong \mathbb{CP}^3$ 由霍普夫纤维化 $S^1 \to S^7 \to \mathbb{CP}^3$ 给出 $\pi_2 = \mathbb{Z}$，第一次相变即容许单极子拓扑；能否避开普雷斯基尔（Preskill, 1979）过密危机，取决于规范群的选择与宇宙学丰度计算（`手工推导`）。
    - **（iii）矢量型强色瞬子严格保重子数（$\Delta B_{\mathrm{QCD}} = 0$）与红外斯格明子拓扑保护**：在三维色概念纤维上，尽管第三同伦群 $\pi_3(\mathrm{SU}(3)_C) = \mathbb{Z}$ 分类了非平凡的欧氏 BPST 胶子瞬子（Belavin–Polyakov–Schwarz–Tyupkin, 1975），但由于 $\mathrm{SU}(3)_C$ 对左右手夸克作**严格等权的矢量耦合**，胶子瞬子仅破坏轴矢味对称性 $\mathrm{U}(1)_A$（赋予 $\eta'$ 介子质量），而使矢量重子流散度恒为零，**严格保持 $\Delta B_{\mathrm{QCD}} \equiv 0$**；与此同时，在低能禁闭相中，手征介子陪集流形 $\mathrm{SU}(2)_L \times \mathrm{SU}(2)_R / \mathrm{SU}(2)_V \cong S^3$ 的绕数群 $\pi_3(S^3) = \mathbb{Z}$ 从红外拓扑上保护了核物质的整数重子荷（[§33.4](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers)）。
    - **（iv）手征电弱瞬子选择定则 $\Delta B = \Delta L = 3\Delta N_{\mathrm{CS}} \in 3\mathbb{Z}$ 与隧穿振幅 vs. 跃迁率的指数二倍铁律**：唯有单手征耦合的弱同位旋群 $\mathrm{SU}(2)_L$（$\pi_3(\mathrm{SU}(2)_L) = \mathbb{Z}$）通过特胡夫特手征反常（'t Hooft, 1976）诱发陈—西蒙斯绕数跃迁 $\Delta N_{\mathrm{CS}} \in \mathbb{Z}$，使三代夸克与轻子同步改变重子数与轻子数：
 
