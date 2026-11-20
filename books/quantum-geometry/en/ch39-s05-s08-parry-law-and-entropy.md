@@ -1186,23 +1186,20 @@ Choose the $h$ fair positions first, and fill them with a basis in the order of 
 
 Every choice produces the prescribed law. The fair columns give $H$, the absolute biases give the grouped products on the quotient, and the adjusted offset recovers the signs of the nonzero moments. The fair bits make the other moments vanish. Each realization also determines these choices uniquely. The choices of fair positions and their complement therefore contribute $\binom{n}{h}b!=n!/h!$.
 
-**The bias space with fixed columns and offset (written derivation).** Even with more than the minimum number of inputs, we can fix the columns $c_i$ and the raw offset $s$ and vary the signed biases $q_i$ in $[-1,1]$. Choose a reference realization $q^{(0)}$ and let $F$ be the set of bias vectors that produce the same law, with the usual Euclidean topology. Write $H$ for the fair subgroup, $ar c_i=c_i+H$, and $J={i:ar c_i
-e 0}$. If the projected columns for $iin J$ span a space of dimension $r$, then $F$ has exactly $2^{|J|-r}$ connected components, each contractible.
+**The bias space with fixed columns and offset (written derivation).** Even with more than the minimum number of inputs, we can fix the columns $c_i$ and the raw offset $s$ and vary the signed biases $q_i$ in $[-1,1]$. Choose a reference realization $q^{(0)}$ and let $F$ be the set of bias vectors that produce the same law, with the usual Euclidean topology. Write $H$ for the fair subgroup, $\bar c_i=c_i+H$, and $J=\{i:\bar c_i\ne 0\}$. If the projected columns for $i\in J$ span a space of dimension $r$, then $F$ has exactly $2^{|J|-r}$ connected components, each contractible.
 
-The law determines $H$, so all biases on $J$ stay nonzero throughout $F$. Let $arepsilon_i$ be $1$ when $q_i<0$ and $0$ otherwise. Since the raw offset is fixed, the condition on the adjusted offset coset is the binary linear equation
+The law determines $H$, so all biases on $J$ stay nonzero throughout $F$. Let $\varepsilon_i$ be $1$ when $q_i<0$ and $0$ otherwise. Since the raw offset is fixed, the condition on the adjusted offset coset is the binary linear equation
 
 $$
-sum_{iin J}arepsilon_iar c_i
-=sum_{iin J}arepsilon_i^{(0)}ar c_i.
+\sum_{i\in J}\varepsilon_i\bar c_i
+=\sum_{i\in J}\varepsilon_i^{(0)}\bar c_i.
 $$
 
 The solutions form a coset of the kernel and give $2^{|J|-r}$ sign patterns. Each sign region is both open and closed in $F$, since changing any of its signs requires passing through zero. Every solution can be realized with the reference magnitudes. Give the biases on $J$ the chosen signs and retain the reference biases at the other labels. This preserves the fair subgroup, the grouped absolute products on the quotient, and the adjusted offset coset, so it preserves all moments and the mass at every point.
 
-Fix an allowed sign pattern. For $iin J$, use the continuous coordinate $x_i=-log|q_i|$, with inverse $pm e^{-x_i}$ in the fixed sign. Each nonzero projected column $u$ that occurs gives a block of constraints $x_ige 0$ and $sum_{ar c_i=u}x_i=-log q_u$, where $q_u$ is the grouped absolute bias recovered from the law. This block is a scaled simplex, reduced to one point when its right-hand side is zero. Outside $J$, the only condition is that the columns with zero bias still span $H$. Multiply these coordinates by $1-t$ together, for $0le tle 1$. For $t<1$ their zero set is preserved. At $t=1$ every one of those columns is fair and they still span $H$. At the same time, move the log coordinates on $J$ along straight lines to fixed points of their simplices. Both moves are continuous and preserve the law. Together they contract the sign region to a point, so each region is a connected component.
+Fix an allowed sign pattern. For $i\in J$, use the continuous coordinate $x_i=-\log|q_i|$, with inverse $\pm e^{-x_i}$ in the fixed sign. Each nonzero projected column $u$ that occurs gives a block of constraints $x_i\ge 0$ and $\sum_{\bar c_i=u}x_i=-\log q_u$, where $q_u$ is the grouped absolute bias recovered from the law. This block is a scaled simplex, reduced to one point when its right-hand side is zero. Outside $J$, the only condition is that the columns with zero bias still span $H$. Multiply these coordinates by $1-t$ together, for $0\le t\le 1$. For $t<1$ their zero set is preserved. At $t=1$ every one of those columns is fair and they still span $H$. At the same time, move the log coordinates on $J$ along straight lines to fixed points of their simplices. Both moves are continuous and preserve the law. Together they contract the sign region to a point, so each region is a connected component.
 
-For example, let two columns project to the same nonzero class with grouped absolute bias $
-hoin(0,1)$. If the adjusted offset requires an even number of negative signs on those two inputs, there are two components, one with both signs positive and one with both negative. In the log coordinates of either component, the magnitudes vary along the segment $x_1+x_2=-log
-ho$.
+For example, suppose $J$ consists of two labels whose columns project to the same nonzero class with grouped absolute bias $\rho\in(0,1)$. If the adjusted offset requires an even number of negative signs on those two inputs, there are two components, one with both signs positive and one with both negative. In the log coordinates of either component, the magnitudes vary along the segment $x_1+x_2=-\log\rho$.
 
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
