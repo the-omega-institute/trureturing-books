@@ -104,7 +104,7 @@
    - **旋转概念块 $\mathfrak{so}(3)_{\mathrm{rot}} \cong \Lambda^2(\mathbb{R}^3)$（二阶有向角动量面，$\dim = \binom{3}{2} = 3$）**：无穷小刚体转动由角动量三元组 $\mathbf{J} = (J_x, J_y, J_z)$（满足 $[J_a, J_b] = i\hbar\varepsilon_{abc} J_c$）生成，居住在二阶双矢量楔积空间 $\Lambda^2(\mathbb{R}^3) = \operatorname{span}\{e_2\wedge e_3,\, e_3\wedge e_1,\, e_1\wedge e_2\}$ 上，同样精确具有 **$\binom{3}{2} = 3$** 个独立分量，且任意两根严格不共线轴的有限字乘积即可遍历整个三维旋转群 $\mathrm{SO}(3)$（[`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word)，`LEAN ✓`）；
    - **缩放概念块（空间主轴对数应变 $\mathbb{R}^3_{\mathrm{scale}}$ 与动力学共形标度三元组 $\mathfrak{sl}(2, \mathbb{R})$，双双锁定 $\dim = 3$）**：
      初看之下，有人或许会问：“整体均匀放大缩小 $r \mapsto \lambda r$ 难道不是只有 $1$ 个自由度吗？为什么说缩放作为场概念也是三维的？”只要从**空间形变几何**与**量子标度动力学**两面同时落刀，缩放隐藏的三维真身便纤毫毕现（`手工推导` + `文献结果`）：
-     第一，在三维连续介质与仿射场几何中，对保定向一般线性变换群 $\mathrm{GL}^+(3, \mathbb{R})$ 施行极分解 $F = R U$（$R \in \mathrm{SO}(3)$ 为刚体旋转，$U = Q\,\operatorname{diag}(\lambda_1, \lambda_2, \lambda_3)\,Q^\top \in \operatorname{Sym}^+(3)$ 为正定对称拉伸张量，主伸长比 $\lambda_1, \lambda_2, \lambda_3 > 0$），剥离旋转后沿三根正交主轴的纯缩放恰好由**三维亨基（Hencky, 1928）对数主应变向量**
+     第一，在三维连续介质与仿射场几何中，对保定向一般线性变换群 $\mathrm{GL}^+(3, \mathbb{R})$ 施行极分解 $F = R U$（$R \in \mathrm{SO}(3)$ 为刚体旋转，$U = Q\,\operatorname{diag}(\lambda_1, \lambda_2, \lambda_3)\,Q^\top \in \operatorname{Sym}^+(3)$ 为正定对称拉伸张量，主伸长比 $\lambda_1, \lambda_2, \lambda_3 > 0$），剥离旋转后，一般的正定拉伸 $U$ 有 $6$ 个独立分量：三个主伸长比之外，主轴方向 $Q$ 还占 $3$ 个（$6 = 3 + 3$，`手工推导`）；主轴取定之后，沿这三根正交主轴的纯缩放恰好由**三维亨基（Hencky, 1928）对数主应变向量**
 
      $$
      \mathbf{s} \;:=\; \bigl(\ln\lambda_1,\; \ln\lambda_2,\; \ln\lambda_3\bigr) \;\in\; \mathbb{R}^3_{\mathrm{scale}}
@@ -149,7 +149,7 @@
      \mathfrak{so}(4) \;\cong\; \mathfrak{su}(2)_L \;\oplus\; \mathfrak{su}(2)_R \;\cong\; \mathfrak{so}(3)_L \;\oplus\; \mathfrak{so}(3)_R \qquad (6 \;=\; 3 + 3)!
      $$
 
-     你看，连数学本身都拒绝维持一个不可约的“四维欧氏旋转场”——你刚想造出一个四维场，李代数立刻把它拆回希尔伯特账本上并排坐着的**左右两栏三维场**！（这是 $d = 4$ 特有的：$d \ge 5$ 时 $\mathfrak{so}(d)$ 是单李代数，$\dim\mathfrak{so}(5) = 10$，不再劈裂；排除 $d \ge 5$ 的是上面的 $\binom{d}{2} > d$，即本节对“场”的规定，`MODEL`。）
+     你看，连数学本身都拒绝维持一个不可约的“四维欧氏旋转场”——你刚想在四维造出一个旋转场，李代数立刻把它拆回希尔伯特账本上并排坐着的**左右两栏三维场**！这一劈裂只发生在二阶的旋转平面上，四维矢量本身并不劈裂：$\mathrm{SO}(4)$ 在 $\mathbb{R}^4$ 的单位矢量上可迁（对单位四元数 $u, v$ 有 $v = (v\bar{u})u$），所以 $\mathbb{R}^4$ 不会分成两套独立的三维矢量几何（`手工推导`）。（这是 $d = 4$ 特有的：$d \ge 5$ 时 $\mathfrak{so}(d)$ 是单李代数，$\dim\mathfrak{so}(5) = 10$，不再劈裂；排除 $d \ge 5$ 的是上面的 $\binom{d}{2} > d$，即本节对“场”的规定，`MODEL`。）
 
 2. **第二重锁死——结合赋范可除代数天花板与四元数纯虚李球 $\operatorname{Im}\mathbb{H} \cong \mathbb{R}^3$（`文献结果` + `手工推导`）**。
    场在连续传播中必须同时满足两条底线：振幅乘积保范数 $\lVert q_1 q_2\rVert = \lVert q_1\rVert\,\lVert q_2\rVert$（概率通量不凭空漏失），且多步演化复合满足结合律 $(q_1 q_2)q_3 = q_1(q_2 q_3)$（路径串接不因加括号次序而错乱，方可表示为希尔伯特空间上的线性算符）。弗罗贝尼乌斯（Frobenius, 1878）定理严格证明：实数域上有限维结合可除代数总共只有三座——实数 $\mathbb{R}$（$1$ 维）、复数 $\mathbb{C}$（$2$ 维）与哈密顿**四元数 $\mathbb{H}$（$4$ 维）**（见 [@rem-ch39-von-neumann-grassmann-hodge-hurwitz-literature] 第 4 款）。剥去与实恒等元 $1$ 对应的标量时间/模长轴后，四元数的**纯虚生成元空间 $\operatorname{Im}\mathbb{H} = \operatorname{span}_{\mathbb{R}}\{\mathbf{i}, \mathbf{j}, \mathbf{k}\}$ 不多不少正好是三维实空间 $\mathbb{R}^3$**，其换位子直接给出两倍三维叉乘 $[\mathbf{e}_a, \mathbf{e}_b] = 2\varepsilon_{abc}\mathbf{e}_c$，单位四元数群 $S^3 \cong \mathrm{SU}(2)$ 正是三维旋转群 $\mathrm{SO}(3)$ 的旋量双覆叠！倘若再往上硬推一步到胡尔维茨（Hurwitz, 1898）定理仅剩的八元数 $\mathbb{O}$（纯虚部 $7$ 维），**乘法结合律当场崩塌**，连续场传播子的算符群结构随之瓦解。因此，$\dim\operatorname{Im}\mathbb{H} = \mathbf{3}$ 是结合赋范场代数不可逾越的绝对封顶线！

@@ -1,0 +1,43 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "Cauchy": "Koshee", "Schwarz": "Shvarts", "Englert": "Englert"},
+  "music": {"bpm": 78, "progression": "d-minor"},
+  "scenes": [
+    {"id": "meet", "name": "TWO ARROWS", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Two arrows meet. Between them there are exactly two things: a line and an area.", "两支箭头相遇，它们之间恰好只有两样东西：一条线，一块面积。"],
+      ["The line is the shadow of one arrow on the other. The area is the parallelogram they span.", "线是一支箭头落在另一支上的影子；面积是两者撑开的平行四边形。"],
+      ["Turn one arrow, and the line shrinks while the area grows.", "转动一支箭头：线变短，面积就变大。"]
+    ], "cues": [{"line": 2, "at": 2.4, "kind": "chime"}]},
+    {"id": "squares", "name": "SQUARES ADD UP", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
+      ["Take two arrows with whole-number parts: one, two, two, and one, one, zero.", "取两支分量都是整数的箭头：(1, 2, 2) 与 (1, 1, 0)。"],
+      ["Their squared lengths multiply to eighteen. Their dot product is three, and three squared is nine.", "长度平方相乘：9 × 2 = 18；点积是 3，平方是 9。"],
+      ["The missing nine is area.", "差的 9 是面积。"],
+      ["The parallelogram casts shadows of one, two and two on the coordinate planes: one plus four plus four.", "平行四边形在三个坐标面上的影子是 1、2、2：1 + 4 + 4 = 9。"],
+      ["Lean checks this for any two lists of real numbers.", "Lean 内核检验：对任意两组实数都成立。"],
+      ["Squared lengths multiplied, minus the squared dot product, is the sum of the squared plane areas.", "长度平方之积减去点积平方，等于各坐标面面积平方之和。"],
+      ["So the dot product can never beat the lengths; the gap is exactly the area squared.", "所以点积永远超不过长度之积，差的正是面积的平方。"],
+      ["For unit arrows, that is cos squared plus sine squared equals one.", "对单位箭头，这就是 cos²θ + sin²θ = 1。"]
+    ], "cues": [{"line": 3, "at": 2.6, "kind": "chime"}, {"line": 4, "at": 0.8, "kind": "stamp"}]},
+    {"id": "slits", "name": "TWO SLITS, TWO MARKS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["Now send a particle through two slits, and let each slit leave a mark: a little arrow in the environment.", "现在让粒子穿过双缝，每条缝都留下一个记号：环境里的一支小箭头。"],
+      ["If the two marks are the same, nothing tells the paths apart, and the screen shows full stripes.", "两支记号相同，就分不出走了哪条缝，屏上是满对比度的条纹。"],
+      ["If the marks are perpendicular, the path is fully known, and the stripes are gone.", "两支记号垂直，路径一清二楚，条纹就没了。"],
+      ["In between, the stripe contrast is the overlap of the two marks. Here it is zero point eight.", "介于两者之间，条纹的对比度就是两支记号的重叠：这里是 0.8。"]
+    ], "cues": [{"line": 2, "at": 2.6, "kind": "glitch"}]},
+    {"id": "circle", "name": "LINE AND AREA AGAIN", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["How well can the path be told? D is the square root of one minus V squared: here zero point six.", "路径能分辨到什么程度？D = √(1 − V²)：这里是 0.6。"],
+      ["Lean checks that D squared plus V squared is always one: zero point three six plus zero point six four.", "Lean 内核检验：D² + V² 恒等于 1；0.36 + 0.64 = 1。"],
+      ["At the ends, perpendicular marks give D one and V zero, and marks with full overlap give V one and D zero.", "两端：记号垂直时 D = 1、V = 0；记号完全重叠时 V = 1、D = 0。"],
+      ["Notice the swap: for the marks, their shared line is the stripes, and their area is the path knowledge.", "注意角色互换：对两支记号来说，共有的线是条纹，撑开的面积才是路径信息。"]
+    ], "cues": [{"line": 1, "at": 2.8, "kind": "stamp"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Here D is defined from V, so the circle follows at once; Cauchy–Schwarz only keeps V at most one.", "这里 D 是由 V 定义的，圆是直接推出来的；柯西—施瓦茨只保证 V 不超过 1。"],
+      ["That D is also the trace distance between the two marks is a literature result.", "D 同时等于两支记号之间的迹距离，这是文献结果。"],
+      ["With noisy marks the point falls inside the circle. That is Englert's inequality, not formalized in this book.", "记号带噪声时，点会落进圆内；这是 Englert 不等式，本书没有形式化。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter six.", "《量子计算的几何直觉》· 第六章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

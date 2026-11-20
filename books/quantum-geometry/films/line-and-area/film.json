@@ -1,0 +1,29 @@
+{
+  "title": "The line and the area",
+  "title_zh": "线与面积",
+  "summary": "Two arrows that meet have exactly two things between them: a line, the shadow of one on the other, and an area, the parallelogram they span; turning one arrow shortens the line as the area grows. For the arrows (1, 2, 2) and (2, 2, 1) the squared lengths multiply to 81 and the dot product is 8, so 64 is the line squared; the missing 17 is area, since the parallelogram's shadows on the three coordinate planes have areas 2, 3 and 2 and 4 + 9 + 4 = 17. Lean checks the Lagrange identity for any two finite lists of real numbers: the product of the squared lengths minus the squared dot product is the sum of the squared plane areas, so the Cauchy–Schwarz gap is exactly the area squared and, for unit arrows, cos²θ + sin²θ = 1. In a two-slit experiment each slit leaves a mark, a unit arrow in the environment: identical marks leave full stripes, perpendicular marks leave none, and in the equal-weight model the stripe contrast is the overlap V = |⟨r_L, r_R⟩|, here 0.8. With D = √(1 − V²) = 0.6, Lean checks that D² + V² = 1 for any two unit records, together with the two ends: orthogonal records give D = 1 and V = 0, full overlap gives V = 1 and D = 0. For the marks the roles swap: their shared line is the stripes and their area is the path knowledge. D is defined from V, so the circle follows at once; that D is also the trace distance of the marks, and that noisy marks fall inside the circle (Englert's inequality), are literature results not formalized in the book.",
+  "summary_zh": "两支箭头相遇，它们之间恰好只有两样东西：一条线，即一支落在另一支上的影子；一块面积，即两者撑开的平行四边形。转动一支箭头，线变短，面积就变大。箭头 (1, 2, 2) 与 (2, 2, 1) 的长度平方相乘得 81，点积是 8，线的平方是 64；差的 17 是面积：平行四边形在三个坐标面上的影子面积是 2、3、2，4 + 9 + 4 = 17。Lean 检验了任意两组有限实数的拉格朗日恒等式：长度平方之积减去点积平方，等于各坐标面面积平方之和；所以柯西—施瓦茨差的正是面积平方，对单位箭头就是 cos²θ + sin²θ = 1。双缝实验里，每条缝在环境里留下一支单位箭头作记号：记号相同，条纹满对比度；记号垂直，条纹消失；在等权模型里，条纹对比度就是两支记号的重叠 V = |⟨r_L, r_R⟩|，这里是 0.8。取 D = √(1 − V²) = 0.6，Lean 检验了任意两条单位记录都有 D² + V² = 1，以及两端：记录正交时 D = 1、V = 0，完全重叠时 V = 1、D = 0。对两支记号而言角色互换：共有的线是条纹，撑开的面积是路径信息。D 是由 V 定义的，圆直接推出；D 等于两支记号的迹距离、记号带噪声时点落进圆内（Englert 不等式），是文献结果，本书没有形式化。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-20",
+  "duration": "2:21",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · two arrows with their shadow and parallelogram, a parallelogram casting three plane shadows, a two-slit screen with which-path marks, the line and area of the two marks",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity",
+    "D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_line-and-area_720p_narrated.mp4",
+    "cover": "quantum-geometry_line-and-area_cover.jpg"
+  }
+}
