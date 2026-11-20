@@ -225,6 +225,19 @@ $$
 
   对 $1/2<\theta<1$，外部算术步骤在其切比雪夫型不等式和窗口假设下给出单侧界。对每个起点阈值 $R$，都存在 $Y\ge R$，使 $U(x)\le x^\theta$ 在整个 $[Y,Y^{3/2}]$ 上成立。Landau 判据由此推出 $\zeta$ 在 $\operatorname{Re}(s)>\theta$ 无零点。从 RH 出发的上界则覆盖每个充分大的 $Y$。[算术步骤](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean#L68-L81) · [窗口指数](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean#L8-L11) · [Landau 判据](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ZeroFreeOfRpowWindow.lean#L11-L14)
 
+::: {.theorem #thm-ch31-mangoldt-power-threshold title="完全曼戈尔特余项的临界幂指数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/RHPowerThreshold.u_div_rpow_tendsto_zero_iff"}
+假设黎曼猜想。对任意实数 $\theta$，沿实变量 $x\to+\infty$ 有
+
+$$
+\lim_{x\to+\infty}\frac{U(x)}{x^\theta}=0
+\quad\Longleftrightarrow\quad \theta>\frac12.
+$$
+:::
+
+::: proof
+写 $x=e^y$，则 $U(x)/x^\theta=G(y)e^{(1/2-\theta)y}$。当 $\theta>1/2$ 时，$G$ 在充分大的实数 $y$ 上有界，指数因子趋于零。反过来，设 $\theta\le1/2$。上面的常数 $M$ 严格为正。由 $G$ 的回归性，越过任何阈值都有自然数 $n$ 使 $G(n)>M/2$。此时 $e^{(1/2-\theta)n}\ge1$，所以在任意远的点 $x=e^n$ 商仍大于 $M/2$，包括 $\theta=1/2$。完整证明由 Lean 内核检查。
+:::
+
 **模 $1$ 的 Mellin 变换怎样看见零点？** 对 [@thm-ch34-riemann-prime-arc-bridge] 第 6 款的余项 $U$，外部形式化给出如下 Mellin 恒等式。每个素数幂 $n$ 的权重乘以 $\max(x/n-1,0)$，在 $x=n$ 处起步。对 $\operatorname{Re}(s)>1$，这段折线的 Mellin 积分是 $n^{-s}/[s(s-1)]$。按 $\Lambda(n)$ 求和，便出现对数导数 $-\zeta'(s)/\zeta(s)$。加上 $U$ 中两个初等修正项的积分，得到
 
 $$

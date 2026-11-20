@@ -225,6 +225,19 @@ Bridging the base of this four-grade tower (Grade-0 prime cells $\Lambda^0$) and
 
   Fix $1/2<\theta<1$. Under its Chebyshev-type inequality and window hypotheses, the arithmetic argument gives a one-sided bound. For every threshold $R$, there is some $Y\ge R$ such that $U(x)\le x^\theta$ throughout $[Y,Y^{3/2}]$. Landau's criterion then shows that $\zeta$ has no zeros in $\operatorname{Re}(s)>\theta$. The bound derived from RH covers every sufficiently large $Y$. [Arithmetic step](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean#L68-L81) · [Window exponent](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean#L8-L11) · [Landau criterion](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ZeroFreeOfRpowWindow.lean#L11-L14)
 
+::: {.theorem #thm-ch31-mangoldt-power-threshold title="The critical power exponent for the complete Mangoldt remainder" lean="D5/S3/Weil/Mertens/IntegratedExplicit/RHPowerThreshold.u_div_rpow_tendsto_zero_iff"}
+Assume the Riemann hypothesis. For every real $\theta$, with $x$ tending to $+\infty$ through real values,
+
+$$
+\lim_{x\to+\infty}\frac{U(x)}{x^\theta}=0
+\quad\Longleftrightarrow\quad \theta>\frac12.
+$$
+:::
+
+::: proof
+Write $x=e^y$. Then $U(x)/x^\theta=G(y)e^{(1/2-\theta)y}$. If $\theta>1/2$, $G$ is bounded on a real tail and the exponential factor tends to zero. Conversely, suppose $\theta\le1/2$. The constant $M$ above is strictly positive. By recurrence of $G$, beyond every threshold there is a natural number $n$ with $G(n)>M/2$. Since $e^{(1/2-\theta)n}\ge1$, the quotient exceeds $M/2$ at arbitrarily large $x=e^n$, including when $\theta=1/2$. The full proof is checked by the Lean kernel.
+:::
+
 **How does the modulus-one Mellin transform detect a zero?** Consider the remainder $U$ in Clause 6 of [@thm-ch34-riemann-prime-arc-bridge]. In the external formalization, each prime power $n$ contributes a ramp $\max(x/n-1,0)$ with weight $\Lambda(n)$. The ramp starts at $x=n$ and its Mellin integral for $\operatorname{Re}(s)>1$ is $n^{-s}/[s(s-1)]$. Summing with the weights $\Lambda(n)$ produces the logarithmic derivative $-\zeta'(s)/\zeta(s)$. Integrating the two elementary correction terms in $U$ gives
 
 $$
