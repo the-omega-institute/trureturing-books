@@ -1133,6 +1133,10 @@ $$
 
 The coset law thus determines the product of the bias factors for each nonzero column. With the offset fixed, those products in turn determine all sign moments, which determine the law. A zero column has no effect on the output. Repeated nonzero columns enter only through their product. For example, factors $(3/4,1/3)$ on one column and $(1/2,1/2)$ on the same column both give $1/4$. Every bias can be recovered individually exactly when the projected columns are nonzero and pairwise distinct.
 
+If $0<t_j<1/2$ still holds, the law also determines an unknown coset offset $s$. The product in the first moment formula is positive, so the sign of $m_\lambda$ gives $\chi_\lambda(s)$. Reading off $\lambda(s)$ for a basis of $C^*$ determines $s$. This recovers the offset in the quotient. Offsets in the original output space that differ by a vector in $H$ give the same coset.
+
+If $t_j>1/2$ is allowed, reversing the sign of a bias factor can compensate for a change in the offset. Replacing such an $X_j$ by $1-X_j$ and adding $c_j$ to the offset gives the same output pointwise. For instance, take one column $c_1=1$ in $C=\mathbb F_2$. The parameter pairs $(s,t_1)=(0,1/4)$ and $(1,3/4)$ both give $\Pr(Y=1)=1/4$.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
