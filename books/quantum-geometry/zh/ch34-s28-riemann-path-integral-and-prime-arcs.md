@@ -266,7 +266,13 @@ $$
 =-\frac{\zeta'(s)/\zeta(s)+(s-1)^{-1}+1-(1+\gamma_{\mathrm{EM}})s}{s(s-1)}.
 $$
 
-右端给出亚纯延拓。若非平凡零点 $\rho$ 的重数为 $m$，在其附近写 $\zeta(s)=(s-\rho)^m h(s)$，其中 $h(\rho)\ne0$。对数导数的极点项为 $m/(s-\rho)$，所以 $\Phi$ 在 $\rho$ 有一阶极点，留数 $c=m/[\rho(1-\rho)]$。这正是积分显式公式中同一零点按重数相加的系数。[模 $1$ 的 Mellin 恒等式](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/mellinGchiModOne.lean#L115-L121) · [留数计算](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/poleData.lean#L63-L83)
+上式右端给出积分的亚纯延拓。对 $\zeta$ 的每一个零点 $\rho$，包括负偶整数，记 $m$ 为该点的解析重数。写 $\zeta(s)=(s-\rho)^m h(s)$，其中 $h(\rho)\ne0$，便从对数导数中取出 $m/(s-\rho)$。显式函数 $\Phi$ 在 $\rho$ 的某个去心邻域满足
+
+$$
+\Phi(s)=\frac{c}{s-\rho}+H(s),\qquad c=\frac{m}{\rho(1-\rho)}\ne0,
+$$
+
+其中 $m\ge1$，$H$ 在 $\rho$ 处解析。因此无论重数多大，$\Phi$ 在该点都有一阶极点。对非平凡零点，$c$ 正是积分显式公式中同一零点按重数相加的系数。[零点的局部展开](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtLaurent.transform_integral_and_zero_germs) · [模 $1$ 的 Mellin 恒等式](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/mellinGchiModOne.lean#L115-L121) · [留数计算](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/poleData.lean#L63-L83)
 
 **单侧窗口上界为何能排除极点？** 固定 $1/2<\theta<1$。外部算术论证在群的大小、特征权重和误差的假设下，利用尺度约束 $m\le x^{1/2+\varepsilon/2}$ 得到特征和的估计 $G_{m,A}(x)\le x^{1/2+(C+3)\varepsilon}+\Sigma_A(x)$，其中 $\Sigma_A$ 是仍须控制的余项。再用 `gmA_eq` 将左端写成目标余项，用 `sigA_le` 控制 $\Sigma_A$。当 $x$ 充分大时，剩下的常数因子可吸收到 $x^\varepsilon$ 中，窗口上的切比雪夫型上界便是 $x^{1/2+(e_D+e_L+7)\varepsilon}$。损失指数 $e_D,e_L$ 先固定，随后选充分小的 $\varepsilon>0$ 使 $(e_D+e_L+7)\varepsilon\le\theta-1/2$。若满足该论证的窗口假设，便能对任意远的阈值找到 $Y$，使模 $1$ 的余项在整个 $[Y,Y^{3/2}]$ 上满足 $U(x)\le x^\theta$。[特征和估计的假设](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean#L343-L351) · [余项与常数的控制](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/PrimitiveCosets/CoreGm.lean#L55-L74) · [选取指数的次序](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean#L68-L81)
 
@@ -275,6 +281,20 @@ $$
 若有极点在 $\operatorname{Re}(s)>\theta$，源证明选取中心 $z=\sigma+it$ 及其最近极点 $\rho$，使 $d=|z-\rho|<r\le\sigma-\theta$，半径 $r$ 内只有这一个极点。它给 $D_k(z)$ 贡献 $c/(z-\rho)^{k+1}$。取内圈半径 $r'=(d+r)/2$，减去极点项后的解析函数在这条圆周上有界，因此 Cauchy 估计给出误差 $O((r')^{-k})$。在选取非实中心的情形，以 $\sigma$ 为中心、半径 $r'$ 的闭圆盘内无极点，Cauchy 估计给出 $\operatorname{Re}D_k(\sigma)\ge-M'(r')^{-k}$，其中 $M'$ 与 $k$ 无关。若隔离出实极点，则取 $z=\sigma$。其留数 $c>0$，故 $\operatorname{Re}D_k(\sigma)$ 的主项为 $c/d^{k+1}>0$，出现在窗口所控制的 $\lvert D_k(\sigma)\rvert+\operatorname{Re}D_k(\sigma)$ 中。将窗口上界与之比较，再乘以 $d^k$，极点项留下常数 $|c|/d>0$，解析误差为 $O((d/r')^k)$。取 $\eta>0$ 足够小，使 $e^\eta d/(\sigma-\theta)<1$，则窗口项也随 $k\ge a\to\infty$ 趋于零，矛盾。 [极点与 Cauchy 估计](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean#L83-L166)
 
 外部仓库的完整路线还用 $\theta$ 提升构造伽罗瓦表示，并用 Artin 互反律确定局部 Langlands 参数中所用的 Artin 映射，最终从全体狄利克雷特征的无零点结论推出 RH。[$\theta$ 提升](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/RowSrc.lean#L1-L6) · [Artin 互反律](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/ArtEx.lean#L7-L15) · [外部仓库的最终声明](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean#L7-L14)
+
+**窗口内只需控制切比雪夫误差尾积分的负部。** 对 $x\ge2$，记 $Q(x)=\int_x^\infty(\psi(t)-t)t^{-2}\,dt=-U(x)/x$，$Q^-(x)=\max\{-Q(x),0\}$。以下等价条件的逆向推导用到外部 Landau 判据（`手工推导`）。令
+
+$$
+A(Y)=\int_Y^{Y^{3/2}}\frac{Q^-(x)}{\sqrt{x}}\,dx .
+$$
+
+黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个 $Y_0\ge2$，都存在 $Y\ge Y_0$ 使 $A(Y)\le Y^\eta$。在 RH 下，先前的上界给出 $Q^-(x)\le x^{-1/2}$ 对所有充分大的 $x$ 成立，于是 $A(Y)\le\tfrac12\ln Y\le Y^\eta$ 对每个充分大的 $Y$ 成立。
+
+反过来，在 $u=\ln x$ 坐标写 $g(u)=U(e^u)$。外部窗口条件要求存在非负函数 $R\ge g$ 使 $\int R(u)e^{-\theta u}\,du$ 足够小。最小可取 $R(u)=\max\{g(u),0\}$，它在紧窗口上连续，因为 $U$ 在有界区间上是有限个连续折线与初等修正项之和。因 $U(x)=-xQ(x)$，换元后的最小积分就是 $I_\theta(Y)=\int_Y^{Y^{3/2}} Q^-(x)x^{-\theta}\,dx$。在 $\theta=1/2$ 处它等于 $A(Y)$。应用外部模 $1$ 特征族的极点数据和窗口判据 $\delta=1/2$，所有实部为正的 $\zeta$ 零点均满足 $\operatorname{Re}(\rho)\le1/2$。零点关于临界线的对称性遂给出 RH。 [窗口假设](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauZeroFreeCriterion.lean#L25-L29) · [模一族所用的极点数据](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/poleData.lean#L248-L261) · [Landau 判据](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean#L83-L90)
+
+当 $1/2<\theta<1$ 时，同一窗口上有 $I_\theta(Y)\le Y^{1/2-\theta}A(Y)$。反过来，$A(Y)\le Y^{(3/2)(\theta-1/2)}I_\theta(Y)$，所以若每个这样的 $\theta$ 和每个 $\eta'>0$ 都有任意远的窗口满足 $I_\theta(Y)\le Y^{\eta'}$，取 $(3/2)(\theta-1/2)+\eta'\le\eta$ 就得到临界条件。
+
+还可以只数素数。记 $\vartheta(t)=\sum_{p\le t}\ln p$，用它替换 $\psi$ 来定义 $Q_\vartheta$ 和 $A_\vartheta$。素数幂给尾积分带来的修正满足 $\sqrt{x}(Q(x)-Q_\vartheta(x))\to2$。取一个常数 $C$ 使 $\psi(t)-\vartheta(t)\le C\sqrt{t}$ 对所有 $t\ge1$ 成立，这样的 $C$ 无条件存在。负部随尾积分递减，窗口定理给出 $0\le A_\vartheta(Y)-A(Y)\le 2C\ln(Y^{3/2}/Y)=C\ln Y$。于是临界条件也可写成对每个 $\eta>0$ 都有任意远的窗口满足 $A_\vartheta(Y)\le Y^\eta$。从 $A$ 的条件取指数 $\eta/2$，再用 $Y^{\eta/2}+C\ln Y\le Y^\eta$ 对充分大的 $Y$ 成立即可。独立的算术任务是从素数分布证明这个负部积分界。 [素数幂修正的窗口估计](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.prime_power_window_correction)
 
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 
