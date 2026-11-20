@@ -26,6 +26,7 @@ CHECK_MODULES = [
     ("m2_indep_t_assoc.py",   "witness values", lambda out: "OK" in out),                         # Section 5A, independent
     ("m2_indep_t_complex.py", "CP^3 Bargmann max err", None),                                     # Section 5A, independent (asserts)
     ("m2_indep_t_misc.py",    "2I-J eigenvalues", None),                                          # Section 5A, independent (asserts)
+    ("m3_indefinite_hyperbolic.py", "All 12 check groups passed", None),                       # Section 5B
     # register new modules here: (file in checks/, success marker, optional predicate)
 ]
 _chk = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "checks")
@@ -1918,6 +1919,207 @@ for _ in range(200):
     rhs = (sum(be) - 1) / (2 * np.sqrt(np.prod(be)))
     e = max(e, abs(D - (S + 1j * Dt) / 4), abs(D.real / abs(D) - rhs), abs(rhs - np.cos(E / 2)), abs(abs(np.angle(D)) - E / 2))
 report("31 Bloch: Delta=(S+iD)/4; Re Delta/|Delta| equals the Re a of eq:tri with beta for kappa, and both are cos(E/2)", e, 1e-10)
+
+# =========================================================== 32. Section 5B (independent checks of the m3 section)
+_r32 = np.random.default_rng(2511)
+def _expm2(X):  # 2x2 traceless: exp X = C(q) I + S(q) X with X^2 = q I
+    q = (X @ X)[0, 0] + 0j; r = np.sqrt(q)
+    C = np.cosh(r); S = np.sinh(r) / r if abs(r) > 1e-12 else 1 + q / 6
+    return C * np.eye(2) + S * X
+def _F(s): return np.cos(np.sqrt(s)) if s >= 0 else np.cosh(np.sqrt(-s))
+def _T(m, s): return np.cos(m * np.arccos(s)) if abs(s) <= 1 else np.sign(s) ** m * np.cosh(m * np.arccosh(abs(s)))
+s1 = np.array([[0, 1], [1, 0]], complex); s2 = np.array([[0, -1j], [1j, 0]]); s3 = np.diag([1., -1]).astype(complex); I2 = np.eye(2)
+Jm = np.array([[0., -1], [1, 0]]); Dm = np.diag([1., -1]); Em = np.array([[0., 1], [1, 0]])
+class _Basis:
+    __array_ufunc__ = None
+    def __init__(self, mats): self.m = np.array(mats)
+    def __rmatmul__(self, c): return np.tensordot(c, self.m, 1)
+_SL = _Basis([Jm, Dm, Em]); _PA = _Basis([s1, s2, s3])
+# (1) one-parameter formula f(exp tX) = F(2 t^2 h(X,X)) with h = -m^2 tr(XY)/4 for f = T_m(tr/2) on SL(2,R)
+e = 0.0
+for m in (1, 2, 3):
+    for _ in range(30):
+        X = _r32.normal(size=3) @ _SL * 0.7; t = _r32.uniform(-2, 2)
+        g = _expm2(t * X).real
+        e = max(e, abs(_T(m, np.trace(g) / 2) - _F(2 * t * t * (-m * m * np.trace(X @ X) / 4))))
+report("32 Thm m3:classification: f(exp tX)=F(2t^2 h(X,X)), h=-m^2 tr(XY)/4, for T_m(tr/2), m=1,2,3", e, 1e-9)
+# brackets of J,D,E; m >= 2 violates the interference law, m = 1 satisfies it
+e = max(np.abs(Jm @ Dm - Dm @ Jm - 2 * Em).max(), np.abs(Dm @ Em - Em @ Dm + 2 * Jm).max(), np.abs(Em @ Jm - Jm @ Em - 2 * Dm).max())
+for m in (2, 3, 4):
+    a = np.cos(np.pi / (2 * m)); g = _expm2(np.pi / (2 * m) * Jm).real; u = _expm2(0.1 * Dm).real
+    lhs = _T(m, np.trace(g @ u) / 2) + _T(m, np.trace(g @ np.linalg.inv(u)) / 2); rhs = 2 * _T(m, np.trace(g) / 2) * _T(m, np.trace(u) / 2)
+    e = max(e, abs(rhs), 1e-3 - min(abs(lhs), 1e-3))       # rhs = 0, lhs bounded away from 0
+for _ in range(20):
+    g = _expm2(_r32.normal(size=3) @ _SL).real; u = _expm2(_r32.normal(size=3) @ _SL).real
+    e = max(e, abs(np.trace(g @ u) / 2 + np.trace(g @ np.linalg.inv(u)) / 2 - 2 * (np.trace(g) / 2) * (np.trace(u) / 2)))
+report("32 Cor m3:interference: [J,D]=2E etc.; m>=2 violates the two-variable law, m=1 satisfies it", e, 1e-9)
+# (2) six-dimensional two-step counterexample
+def _mul(p, q): return np.concatenate([p[:3] + q[:3], p[3:] + q[3:] + 0.5 * np.cross(p[:3], q[:3])])
+def _f6(p): return _F(2 * p[:3] @ p[3:])
+e = 0.0
+for _ in range(30):
+    p, q, r = _r32.normal(size=(3, 6)) * 0.6
+    inv = lambda p: -p
+    e = max(e, np.abs(_mul(_mul(p, q), r) - _mul(p, _mul(q, r))).max(), np.abs(_mul(p, inv(p))).max(), np.abs(_mul(p, p) - 2 * p).max(),
+            abs(_f6(_mul(_mul(q, p), inv(q))) - _f6(p)), abs(_f6(inv(p)) - _f6(p)), abs(_f6(_mul(p, p)) - (2 * _f6(p) ** 2 - 1)))
+Hs = np.zeros((6, 6)); Hs[:3, 3:] = np.eye(3); Hs[3:, :3] = np.eye(3); ev = np.linalg.eigvalsh(Hs)
+e = max(e, abs((ev > 0).sum() - 3), abs((ev < 0).sum() - 3), 1 - np.abs(_mul(np.r_[1, 0, 0, 0, 0, 0.], np.r_[0, 1, 0, 0, 0, 0.]) - _mul(np.r_[0, 1, 0, 0, 0, 0.], np.r_[1, 0, 0, 0, 0, 0.])).max())
+# zero set of the normalized SL(2,R) model and the split line
+for t in np.linspace(-5, 5, 11): e = max(e, abs((1 + np.trace(-I2 + t * np.array([[0, 1], [0, 0]])) / 2) / 2))
+report("32 Example m3:obstructions: 6-dim two-step group (assoc., duplication, invariance, signature (3,3)); zero line -I+tN", e, 1e-12)
+# (3) AdS: c = B, det(y-x) = 2(1-c); level kappa=1 = null lines through x; metric signature
+def _B(x, y): return 0.5 * np.trace((np.trace(x) * np.eye(2) - x) @ y)
+e = 0.0
+for _ in range(30):
+    x = _expm2(_r32.normal(size=3) @ _SL).real; y = _expm2(_r32.normal(size=3) @ _SL).real
+    e = max(e, abs(_B(x, y) - np.trace(np.linalg.inv(x) @ y) / 2), abs(np.linalg.det(y - x) - 2 * (1 - _B(x, y))))
+    # null tangent V at x: V = x N with N traceless nilpotent; then x + tV in SL2 and B(x, x+tV) = 1
+    N = np.array([[1., -1], [1, -1]]) * _r32.normal(); P = _expm2(_r32.normal(size=3) @ _SL).real; N = P @ N @ np.linalg.inv(P)
+    for t in (-3, 0.5, 7): y2 = x + t * x @ N; e = max(e, abs(np.linalg.det(y2) - 1), abs(_B(x, y2) - 1))
+e = max(e, abs(-np.linalg.det(Jm) + 1), abs(-np.linalg.det(Dm) - 1), abs(-np.linalg.det(Em) - 1))
+report("32 Prop m3:ads: c=B=tr(x^-1 y)/2, det(y-x)=2(1-c), null lines x+tV lie in the level kappa=1; signature (-,+,+)", e, 1e-9)
+# (4) parabolic indistinguishability and round trips
+e = 0.0
+for s in (1., -1.):
+    u = s * I2 + np.array([[0, 1.], [0, 0]]); c0 = s * I2
+    for n in range(1, 5):
+        un = np.linalg.matrix_power(u, 2 ** n); cn = np.linalg.matrix_power(c0, 2 ** n)
+        e = max(e, abs(np.trace(un) - np.trace(cn)))
+    e = max(e, np.abs(u @ u - (I2 + 2 * s * np.array([[0, 1.], [0, 0]]))).max())
+report("32 Cor m3:iteration: I and I+E12 (and -I, -I+E12) have identical scalar round-trip iterates, u^2=I+2sA", e, 1e-12)
+# (5) SL(2,C): complex comparison round trip, Hessian tr(XY)/4, congruence on Hermitian matrices, D^# D = -I
+e = 0.0
+def _rc(): return _expm2(((_r32.normal(size=3) + 1j * _r32.normal(size=3)) * 0.6) @ _PA)
+kap = lambda x, y: (1 + np.trace(np.linalg.inv(x) @ y) / 2) / 2
+for _ in range(20):
+    x, w = _rc(), _rc(); sw = x @ np.linalg.inv(w) @ x
+    e = max(e, abs(kap(w, sw) - (2 * kap(w, x) - 1) ** 2), abs(kap(x, w) - kap(w, x)))
+    X = (_r32.normal(size=3) + 1j * _r32.normal(size=3)) @ _PA; hh = 1e-4
+    hess = (kap(I2, _expm2(hh * X)) - 2 * kap(I2, I2) + kap(I2, _expm2(-hh * X))) / hh ** 2
+    e = max(e, abs(hess - np.trace(X @ X) / 4) * 1e-3)
+    u = _rc(); Hm = np.array([[2, 1 - 1j], [1 + 1j, 3]]); Hn = u @ Hm @ u.conj().T
+    e = max(e, abs(np.linalg.det(Hn) - np.linalg.det(Hm)), max(0, -np.linalg.eigvalsh(Hn).min()))
+Ds = np.trace(Dm) * I2 - Dm; e = max(e, np.abs(Ds @ Dm + I2).max())
+report("32 Prop m3:spin: complex round trip, Hessian tr(XY)/4, congruence preserves det and the future sheet, D^#D=-I", e, 1e-7)
+# (6) frames: closure and velocity addition; quarter-turn reverses q with det 1; proper-time example; rapidity gaps
+e = 0.0
+for K in (1.0, 0.0, -0.3):
+    Lv = lambda v: (1 / np.sqrt(1 - K * v * v)) * np.array([[1, K * v], [v, 1]])
+    for v, w in ((0.3, 0.5), (-0.2, 0.7)):
+        P = Lv(v) @ Lv(w); u = (v + w) / (1 + K * v * w); e = max(e, np.abs(P - Lv(u)).max())
+Q = np.array([[0, -1.], [1, 0]]); G = np.diag([1., -1]); e = max(e, np.abs(Q.T @ G @ Q + G).max(), abs(np.linalg.det(Q) - 1))
+Lb = np.array([[5 / 4, -3 / 4], [-3 / 4, 5 / 4]]); e = max(e, np.abs(Lb @ np.array([5, 3.]) - np.array([4, 0.])).max())
+th0 = 0.7; 
+for _ in range(100): th0 = np.cos(th0)
+eta0 = np.arctanh(np.sin(th0)); eta8 = eta0 + 8
+e = max(e, abs(th0 - 0.73908513) * 1e-1, abs(eta0 - 0.81732635) * 1e-1, abs((1 - np.tanh(eta8)) / 4.3893e-8 - 1) * 1e-5,
+        abs((np.pi / 2 - 2 * np.arctan(np.exp(eta8))) * 0 + (2 * np.arctan(np.exp(-eta8))) / 2.9629e-4 - 1) * 1e-5,
+        abs(np.tanh(eta0 / 2) - np.tan(np.arcsin(np.tanh(eta0)) / 2)), abs(np.log(np.tan(np.pi / 4 + th0 / 2)) - eta0))
+report("32 Prop m3:frames, Examples m3:proper, m3:rapidityBoundary: closure, Einstein/Galilean/elliptic addition, quarter turn, numbers", e, 1e-9)
+# (7) hyperboloid, transport, recurrence, triangle with numerical parallel transport
+def _rh(sc=1.0):
+    v = _r32.normal(size=3) * sc; t = np.linalg.norm(v); n = v / t
+    return np.cosh(t) * I2 + np.sinh(t) * (n @ _PA)
+Bh = lambda x, y: 0.5 * np.trace((np.trace(x) * np.eye(2) - x) @ y).real   # polarization of det
+def _sqrt_rel(y, x): c = Bh(x, y); return (I2 + y @ np.linalg.inv(x)) / np.sqrt(2 * (1 + c))
+e = 0.0
+for _ in range(20):
+    x, y, z = _rh(0.6), _rh(0.6), _rh(0.6); c = Bh(x, y)
+    e = max(e, np.abs(x @ np.linalg.inv(y) @ x - (2 * c * x - y)).max() / (1 + c))
+    A = _sqrt_rel(y, x); e = max(e, np.abs(A @ A - y @ np.linalg.inv(x)).max(), np.abs(A @ x @ A.conj().T - y).max())
+    V = _rh() - x; V = V - Bh(x, V) * x                                             # tangent at x (B(x,V)=0)
+    PV = A @ V @ A.conj().T; e = max(e, np.abs(PV - (V - Bh(y, V) / (1 + c) * (x + y))).max() / (1 + np.abs(PV).max()), abs(Bh(y, PV)) / (1 + np.abs(PV).max()))
+    # recurrence
+    xs = [x, y]
+    for n in range(2, 7): xs.append(xs[-1] @ np.linalg.inv(xs[-2]) @ xs[-1])
+    for n in range(1, 6): e = max(e, np.abs(xs[n + 1] - (2 * c * xs[n] - xs[n - 1])).max() / np.abs(xs[n + 1]).max(), abs(Bh(x, xs[n]) / _T(n, c) - 1))
+    e = max(e, abs(Bh(y, x @ np.linalg.inv(y) @ x) / (2 * c * c - 1) - 1))
+report("32 Thm m3:hyperboloid, Props m3:transport, Thm m3:recurrence: symmetry, round trip, square-root transvection, transport, recurrence", e, 1e-8)
+def _par(V, x, y, n=200):  # RK4 for V' = g(x', V) x, g = -B, along the exact geodesic x cosh t + tau sinh t
+    c = Bh(x, y); d = np.arccosh(max(c, 1.0)); tau = (y - c * x) / np.sinh(d); h = d / n
+    P = lambda t: np.cosh(t) * x + np.sinh(t) * tau; dP = lambda t: np.sinh(t) * x + np.cosh(t) * tau
+    f = lambda t, V: -Bh(dP(t), V) * P(t)
+    for i in range(n):
+        t = i * h; k1 = f(t, V); k2 = f(t + h / 2, V + h / 2 * k1); k3 = f(t + h / 2, V + h / 2 * k2); k4 = f(t + h, V + h * k3)
+        V = V + h / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
+    return V
+def _pc(X): return np.array([np.trace(X @ s).real / 2 for s in (s1, s2, s3)])
+e = 0.0
+for _ in range(6):
+    x = I2.astype(complex); y, z = _rh(0.9), _rh(0.9)
+    a, b, c = Bh(x, y), Bh(x, z), Bh(y, z); L = 1 + a + b + c; Dd = 1 + 2 * a * b * c - a * a - b * b - c * c
+    Nm = (I2 + x @ np.linalg.inv(z)) @ (I2 + z @ np.linalg.inv(y)) @ (I2 + y @ np.linalg.inv(x)); D0 = 8 * (1 + a) * (1 + b) * (1 + c)
+    e = max(e, np.abs(Nm / np.sqrt(D0) - _sqrt_rel(x, z) @ _sqrt_rel(z, y) @ _sqrt_rel(y, x)).max(), abs(np.linalg.det(Nm) - D0) / D0)
+    u, v = _pc(y), _pc(z); nrm = np.cross(u, v); nrm /= np.linalg.norm(nrm)
+    t1 = u / np.linalg.norm(u); t2 = np.cross(nrm, t1)                              # oriented frame of the plane at x: (u, v) positive
+    V0 = t1 @ _PA; V = _par(_par(_par(V0, x, y), y, z), z, x)
+    Vr = Nm @ V0 @ Nm.conj().T / D0                                                 # rational Thomas-Wigner return
+    ang = np.arctan2(_pc(V) @ t2, _pc(V) @ t1); Aform = 2 * np.arctan(np.sqrt(Dd) / L)
+    # interior angles from tangent directions
+    def tdir(p, q): cc = Bh(p, q); return (q - cc * p) / np.sqrt(cc * cc - 1)
+    def angle(p, q, r): return np.arccos(np.clip(-Bh(tdir(p, q), tdir(p, r)), -1, 1))
+    Aang = np.pi - angle(x, y, z) - angle(y, x, z) - angle(z, x, y)
+    e = max(e, np.abs(V - Vr).max(), abs(ang + Aform), abs(Aang - Aform), abs(np.cos(Aform) - (L * L - Dd) / (L * L + Dd)))
+report("32 Thm m3:triangle: N/sqrt(D0) = product of transvections, det N = D0, RK4 holonomy = rational return, angle = -area = -(pi - angles)", e, 1e-7)
+y = (5 * I2 + 3 * s1) / 4; z = (5 * I2 + 3 * s2) / 4; a, b, c = Bh(I2, y), Bh(I2, z), Bh(y, z); L = 1 + a + b + c; Dd = 1 + 2 * a * b * c - a * a - b * b - c * c
+e = max(abs(a - 1.25), abs(c - 25 / 16), abs(L - 81 / 16), abs(np.sqrt(Dd) - 9 / 16), abs(np.cos(2 * np.arctan(1 / 9)) - 40 / 41), abs((L * L - Dd) / (L * L + Dd) - 40 / 41),
+        np.abs(_sqrt_rel(y, I2) - (3 / (2 * np.sqrt(2)) * I2 + 1 / (2 * np.sqrt(2)) * s1)).max())
+report("32 Example m3:triangleExample: a=5/4, c=25/16, L=81/16, sqrt D=9/16, cos A=40/41, half-displacement coefficients", e, 1e-12)
+# (8) Brownian moments against the explicit H^3 heat kernel (generator Delta/2): p_t(r) = (2 pi t)^(-3/2) r/sinh r e^{-t/2 - r^2/(2t)}
+e = 0.0
+r = np.linspace(1e-9, 14, 200001); dr = r[1] - r[0]
+for h in (0.05, 0.2, 0.7):
+    p = (2 * np.pi * h) ** -1.5 * r / np.sinh(r) * np.exp(-h / 2 - r * r / (2 * h)) * 4 * np.pi * np.sinh(r) ** 2
+    m0 = np.sum(p) * dr; m1 = np.sum(p * np.cosh(r)) * dr; m2 = np.sum(p * np.cosh(r) ** 2) * dr
+    e = max(e, abs(m0 - 1), abs(m1 - np.exp(1.5 * h)), abs(m2 - (1 + 3 * np.exp(4 * h)) / 4))
+T = 1.0
+for N in (1000, 4000):
+    h = T / N; bias = N * (np.exp(1.5 * h) - 1) - 1.5 * T; var = N ** 2 * ((1 + 3 * np.exp(4 * h)) / 4 - np.exp(3 * h))
+    e = max(e, max(0, abs(bias * N / (9 * T * T / 8) - 1) - 1 / N), max(0, abs(var - 1.5 * T * T) - 4 / N))
+report("32 Prop m3:brownian: E cosh d = e^{3h/2}, E cosh^2 d = (1+3e^{4h})/4 from the H^3 heat kernel; bias 9T^2/(8N); variance -> 3T^2/2", e, 1e-5)
+# (9) plaquette sign: midpoint exponential edges, traversal order acting on the left
+def _expm(M):
+    w, Vv = np.linalg.eig(M); return Vv @ np.diag(np.exp(w)) @ np.linalg.inv(Vv)
+C0, C1, C2, C3, C4 = (_r32.normal(size=(2, 2)) for _ in range(5))
+A1 = lambda p: C0 + p[0] * C1 + p[1] * C2; A2 = lambda p: C3 + p[0] * C4 + p[1] * C1 @ C2 * 0.3
+d1A2 = C4; d2A1 = C2
+e = 0.0
+for hh in (1e-3,):
+    Bt = _expm(hh * A1((hh / 2, 0))); Rt = _expm(hh * A2((hh, hh / 2))); Tp = _expm(-hh * A1((hh / 2, hh))); Lt = _expm(-hh * A2((0, hh / 2)))
+    Ret = Lt @ Tp @ Rt @ Bt; F = d1A2 - d2A1 - (A1((0, 0)) @ A2((0, 0)) - A2((0, 0)) @ A1((0, 0)))
+    e = max(e, np.abs((Ret - np.eye(2)) / hh ** 2 - F).max() * 1e-2)
+report("32 Thm m3:product: small-square return h^2(d1A2 - d2A1 - [A1,A2]) + O(h^3) for midpoint exponential edges", e, 1e-3)
+# (10) Cayley chart: formula, rationality of inverse, distance bounds
+e = 0.0
+for _ in range(20):
+    rv = _r32.normal(size=3); rv *= _r32.uniform(0, 0.9) / np.linalg.norm(rv); sv = _r32.normal(size=3); sv *= _r32.uniform(0, 0.9) / np.linalg.norm(sv)
+    R = rv @ _PA; S = sv @ _PA; xr = (I2 + R) @ np.linalg.inv(I2 - R); xs_ = (I2 + S) @ np.linalg.inv(I2 - S)
+    e = max(e, np.abs(xr - ((1 + rv @ rv) * I2 + 2 * R) / (1 - rv @ rv)).max(), np.abs((xr - I2) @ np.linalg.inv(xr + I2) - R).max())
+    d = np.arccosh(Bh(xr, xs_)); R0 = max(np.linalg.norm(rv), np.linalg.norm(sv))
+    e = max(e, max(0, 2 * np.linalg.norm(rv - sv) - d - 1e-12), max(0, d - 2 * np.linalg.norm(rv - sv) / (1 - R0 ** 2) - 1e-12))
+xx = np.linspace(0, 40, 400001); e = max(e, max(0, -(np.cos(xx) - 1 + 2 * (xx + np.sin(xx)) / np.pi).min()))
+report("32 Prop m3:charts, Prop m3:timing: Cayley chart, 2|r-s| <= d <= 2|r-s|/(1-R0^2); cos x >= 1 - 2(x+sin x)/pi", e, 1e-10)
+# (11) actual transport U' = -C(xdot) U around the oriented rectangle: return I - st F + O((s+t)^3)
+K0, K1, K2, K3, K4, K5 = (_r32.normal(size=(2, 2)) for _ in range(6))
+Cf = [lambda p: K0 + p[0] * K1 + p[1] * K2 + p[0] * p[1] * K5, lambda p: K3 + p[0] * K4 + p[1] * K1 @ K2 * 0.3]
+dC = {(0, 1): K2, (1, 0): K4}                                                     # d_nu C_mu at 0: dC[(mu,nu)]
+def _edge(U, p0, dirn, length, n=200):
+    hh = length / n
+    f = lambda t, U: -(Cf[0](p0 + t * dirn) * dirn[0] + Cf[1](p0 + t * dirn) * dirn[1]) @ U
+    for i in range(n):
+        t = i * hh; k1 = f(t, U); k2 = f(t + hh / 2, U + hh / 2 * k1); k3 = f(t + hh / 2, U + hh / 2 * k2); k4 = f(t + hh, U + hh * k3)
+        U = U + hh / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
+    return U
+e = 0.0
+F01 = K4 - K2 + Cf[0]((0, 0)) @ Cf[1]((0, 0)) - Cf[1]((0, 0)) @ Cf[0]((0, 0))   # d_0 C_1 - d_1 C_0 + [C_0, C_1]
+errs = []
+for sc in (1e-2, 5e-3):
+    s_, t_ = sc, 0.7 * sc; U = np.eye(2); p = np.zeros(2)
+    for dirn, ln in ((np.r_[1., 0], s_), (np.r_[0., 1], t_), (np.r_[-1., 0], s_), (np.r_[0., -1], t_)):
+        U = _edge(U, p, dirn, ln); p = p + dirn * ln
+    errs.append(np.abs(U - (np.eye(2) - s_ * t_ * F01)).max())
+e = max(e, max(0, errs[1] / errs[0] - 0.2))                                      # third-order remainder: ratio ~ 1/8
+report("32 Prop m3:physicalGauge: rectangle return I - st F_{mu nu} with O((s+t)^3) remainder (ratio test)", e, 1e-12)
 
 # =========================================================== registered module scripts (checks/)
 for _name, _marker, _pred in CHECK_MODULES:

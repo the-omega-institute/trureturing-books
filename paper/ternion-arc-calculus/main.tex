@@ -15,6 +15,7 @@
 \newtheorem{conjecture}[theorem]{Conjecture}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
@@ -72,7 +73,10 @@ translations are continuous and preserve $\kappa$, with the round-trip law at th
 this $\kappa$, and the operations are then classified by Hurwitz's theorem.  Keeping only the reflections $s_x(w)=\hp xwx$ on a smooth manifold, the
 round-trip law characterises the compact rank-one symmetric spaces; unique zero partners select the spheres, which are exactly the cases
 where the reflected comparison is affine in two readouts, and on the higher projective spaces the missing term is the real part of the
-Bargmann invariant.  Before any manifold, the chord--sagitta identity and an
+Bargmann invariant.  Allowing an indefinite second-order germ instead of a bounded faithful comparison gives, in dimension three, the
+central quotients of $\widetilde{\mathrm{SL}}(2,\R)$ with Chebyshev comparisons (anti-de Sitter space), and on the positive Hermitian
+matrices the arc calculus becomes hyperbolic: the Thomas--Wigner rotation of a triangle is a rational function of its vertices and
+rotates through minus its area.  Before any manifold, the chord--sagitta identity and an
 elliptic/parabolic/hyperbolic trichotomy already hold for fair elements of a star algebra, and sparse comparisons on a chordal graph
 with triangle defects at most $\varepsilon$ come from a potential up to $(|V|-2)\varepsilon$, the obstruction on other graphs being a
 lattice gauge connection.  The key step concerns the duplication equation $f(x^2)=2f(x)^2-1$: on the line it has continuous non-cosine
@@ -125,10 +129,13 @@ octonionic family), proves that two-sided invariance alone forces a round sphere
 invariance gives and does not give (Section~\ref{sec:onesided}).  Part~\ref{part:beyond} (Section~\ref{sec:m2}) keeps only the reflections
 $s_x(w)=\hp xwx$: with the round-trip law they characterise the compact rank-one symmetric spaces, unique zero partners select the spheres,
 and on the higher projective spaces the reflected comparison carries a real three-point (Bargmann) term that two readouts cannot
-determine.  Part~\ref{part:arc} (Sections~\ref{sec:recur}--\ref{sec:rational}) develops a
+determine.  Section~\ref{sec:m3} drops boundedness, separation and unique zeros in favour of a nondegenerate second-order germ: in
+dimension three the solutions are central quotients of $\widetilde{\mathrm{SL}}(2,\R)$ (anti-de Sitter space, with its null cone as the
+local level $\kappa=1$), $\mathrm{SL}(2,\C)$ carries a complex comparison, and on the positive Hermitian matrices the arc calculus of
+Part~\ref{part:arc} transfers with the signs of curvature reversed (Remark~\ref{m3:transfer}).  Part~\ref{part:arc} (Sections~\ref{sec:recur}--\ref{sec:rational}) develops a
 calculus in which the difference $y-x$ of linear calculus is replaced by the transport $\hp y x\cdot$.  Part~\ref{part:final}
 (Sections~\ref{sec:known}--\ref{sec:open}) places the results in the literature, records what is formalised, and lists the open problems.
-% ROADMAP, temporary (delete each line when its part lands): indefinite and complex structures (m3) and self-reference (d4) join Part "Beyond the axiom" as Sections 5B, 5C;
+% ROADMAP, temporary (delete each line when its part lands): self-reference (d4) joins Part "Beyond the axiom" as Section 5C;
 % phase synthesis and the rational atlas (m4) and the arc body and tropical limit (m5) join the arc calculus; Part "Arithmetic
 % and holonomy" (m6) goes after it; the final part keeps known work, formalisation and open problems.
 In the arc calculus the guiding observation is that linear calculus discards two second-order quantities
@@ -3038,7 +3045,1429 @@ family of Remark~\ref{m2:phase-variation}.  That paper's reading and clock orien
 structure.
 \end{remark}
 
-% ---- insertion point: further sections of Part "Beyond the axiom" (modules m3, d4), numbered 5B, 5C
+\section{Indefinite comparisons and the hyperbolic arc calculus}\label{sec:m3}
+
+What replaces the compact classification when the comparison has a
+nondegenerate diagonal Hessian of unrestricted signature? In dimension three,
+an indefinite noncommutative heap has Lie algebra
+\(\mathfrak{sl}_2(\R)\). Global analyticity classifies its comparisons by
+integer Chebyshev polynomials of the half-trace. The first polynomial gives
+the curvature-\(-1\) anti-de Sitter metric and reads off the local null
+relation. The same matrix algebra gives a different space, the hyperbolic
+velocity space, by restricting the determinant to positive Hermitian matrices.
+There the geodesic recurrence and finite Stokes law persist, and triangle
+transport is a rational rotation whose signed angle is minus the area.
+
+\emph{Notation.}  In this section $B$ denotes the real polarization of the determinant (on $M_2(\R)$, and on the Hermitian
+$2\times2$ matrices), $B(x,y)=\tfrac12\operatorname{tr}(x^\sharp y)$ with $x^\sharp=(\operatorname{tr}x)I-x$; it is unrelated to the
+binary operation of Section~\ref{sec:round}.  As in Lemma~\ref{lem:class} we write $c=2\kappa-1$, and $f=c(e,\cdot)$ at a heap
+origin $e$.  The positive Hermitian space of Section~\ref{m3:hermitian-sub} is denoted $\mathcal P$.  Proposition~\ref{m3:abelian}
+treats the abelian case and Corollary~\ref{m3:interference} the two-variable law; Remark~\ref{m3:velocity} connects $\mathcal P$ with the
+velocity space of the companion paper, Remark~\ref{m3:twocolumn} compares the triangle theorems, and Remark~\ref{m3:transfer} lists
+what transfers from Part~\ref{part:arc}.  The claims refuted along the way are recorded in Example~\ref{m3:obstructions},
+Remark~\ref{m3:causal}, Corollary~\ref{m3:iteration}, Examples~\ref{m3:quarterturn} and \ref{m3:nonlinear}, Theorem~\ref{m3:hyperboloid}
+and Remark~\ref{m3:transfer}; Example~\ref{m3:rapidityBoundary} quantifies the open boundary of velocity space.
+
+\subsection{The real classification}
+
+\begin{definition}\label{m3:axiom}
+An \emph{indefinite comparison structure} is $(M,\hp\cdot\cdot\cdot,\kappa)$ with the following clauses of Definition~\ref{def:cs}.
+\emph{Kept:} $(\Omega1)$ (a connected topological manifold with a continuous heap), continuity of $\kappa$, $(\Omega2\mathrm a)$
+symmetry, $(\Omega2\mathrm c)$ invariance under both transports, half of $(\Omega2\mathrm b)$, namely $\kappa(x,x)=1$, and $(\Omega3)$.
+\emph{Replaced:} the range $[0,1]$ and the separation $\kappa(x,y)=1\Rightarrow x=y$ are replaced by a \emph{nondegenerate second-order
+germ}: $\kappa$ is real-valued and has a second-order Peano expansion in the second variable at one diagonal point, for the analytic
+structure of Lemma~\ref{lem:lie}, with nondegenerate Hessian.  \emph{Dropped:} $(\Omega2\mathrm d)$.  The replaced and dropped clauses
+fail in the intended models: in the trace model on $\mathrm{SL}(2,\R)$ the comparison takes every real value and equals $1$ on the
+whole null cone, a zero partner is never unique ($\kappa(I,-I+tE_{12})=0$ for all $t$), and the split line has no zeros at all
+(Example~\ref{m3:obstructions}).  Put
+\(c=2\kappa-1\), choose a heap origin \(e\), and write
+\(f(g)=c(e,g)\), \(h=-\operatorname{Hess}_e\kappa(e,\cdot)\).
+We use \(F(s)=\sum_{j\ge0}(-1)^j s^j/(2j)!\).
+\end{definition}
+
+\begin{theorem}\label{m3:classification}
+Let $(M,\hp\cdot\cdot\cdot,\kappa)$ be as in Definition~\ref{m3:axiom}.
+(i) In every dimension and signature the form \(h\) is bi-invariant, and
+\[
+ f(\exp tX)=F(2t^2h(X,X)).
+\]
+(ii) If the heap is noncommutative, has real dimension three and \(h\) is
+indefinite, its group at any origin is a central quotient of
+\(\widetilde{\mathrm{SL}}(2,\R)\); no further restriction on the quotient follows without (iii).
+(iii) If in addition \(f\) is real analytic globally, its
+lift to this universal group is
+\[
+ f(g)=T_m\bigl(\tfrac12\operatorname{tr}p(g)\bigr),
+ \qquad m\in\{1,2,\ldots\},
+\]
+where \(p\) is projection to \(\mathrm{SL}(2,\R)\) and \(T_m\) is the
+Chebyshev polynomial of the first kind. Write \(z\) for the lift of rotation
+through \(\pi\) along the rotation subgroup. The allowable quotients are
+by the trivial subgroup or by \(\langle z^k\rangle\), \(k\ge1\), with \(mk\)
+even. The diagonal form in the displayed models is
+\(h(X,Y)=-m^2\operatorname{tr}(XY)/4\).
+Without the dimension hypothesis neither the group nor its dimension is determined (Example~\ref{m3:obstructions}).
+\end{theorem}
+
+\begin{proof}
+Lemmas~\ref{lem:certaine} and \ref{lem:lie} supply the group and its analytic
+structure; they use only $(\Omega1)$. As in Lemma~\ref{lem:class}, \(c(x,y)=f(x^{-1}y)\), and \(f\)
+is conjugation and inversion invariant; that part of the lemma uses only $(\Omega2\mathrm{a,c})$. In exponential coordinates inversion
+is negation, so the first derivative at \(e\) vanishes. Invariance of the
+second-order term under the adjoint action gives a bi-invariant \(h\).
+Reflection in \(x\) sends \(w\) to \(xw^{-1}x\); hence
+\(f(g^2)=2f(g)^2-1\). Set \(\psi(t)=f(\exp tX)\) and
+\(a=h(X,X)\). For \(a>0\) and \(t\ne0\),
+\(\theta_n=\arccos\psi(t/2^n)\) is real for large \(n\), with
+\(2^n\theta_n\to |t|\sqrt{2a}\). The double-angle identity gives
+\(\psi(t)=\cos(2^n\theta_n)\). For \(a<0\) use \(\operatorname{arcosh}\)
+and the hyperbolic identity, giving \(\cosh(|t|\sqrt{-2a})\).
+For \(a=0\), choose on each sufficiently small input whichever inverse
+exists according to its side of \(1\), with zero at equality. The scaled
+angles tend to zero on both sides. This extends the argument of
+Lemma~\ref{lem:dup} to all signs.
+
+The trilinear form \(h([X,Y],Z)\) is alternating by invariance. In dimension
+three it is a nonzero multiple of the volume form in a pseudo-orthonormal
+basis. After temporarily choosing the overall sign of \(h\) to have index
+one, use \(e_0,e_1,e_2\) with squares \(-1,1,1\). For a nonzero \(b\),
+\([e_0,e_1]=be_2\), \([e_1,e_2]=-be_0\), and \([e_2,e_0]=be_1\).
+The matrices
+\[
+ J=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\quad
+ D=\begin{pmatrix}1&0\\0&-1\end{pmatrix},\quad
+ E=\begin{pmatrix}0&1\\1&0\end{pmatrix}
+\]
+have these brackets with \(b=2\), so mapping the basis to \(b/2\)
+times these matrices identifies the Lie algebras and \(h\) with a
+nonzero multiple of \(\tfrac12\operatorname{tr}(XY)\).
+The Lie group covering correspondence gives the central quotient
+\cite[Ch.~II]{Helgason}. In the real polar decomposition \(g=kb\)
+with \(k\in\mathrm{SO}(2)\) and \(b\) positive symmetric of determinant one,
+\(b\) is the exponential of a traceless symmetric matrix. Thus the polar
+coordinates give \(\mathrm{SL}(2,\R)\) the topology of \(S^1\times\R^2\).
+The center of the matrix group is \(\{\pm I\}\), by commutation with \(D,E\).
+Its full preimage is central in the universal group since a commutator
+with a fixed lift takes values in a discrete kernel and is continuous.
+This preimage is exactly \(\langle z\rangle\), since the rotation circle
+generates the fundamental group.
+
+The derivative of the lifted \(f\) at \(z\), translated to the Lie algebra,
+is invariant under conjugation and therefore vanishes on all brackets.
+The three displayed brackets span the Lie algebra, so this derivative is
+zero. On \(\exp(tJ)\), the one-parameter formula is either
+\(\cos(\lambda t)\) or \(\cosh(\lambda t)\), \(\lambda>0\).
+The derivative at \(t=\pi\) forces the circular case and
+\(\lambda=m\) a positive integer. This fixes \(h\).
+Near the identity every matrix is \(\exp X\), and
+\(X^2=\tfrac12\operatorname{tr}(X^2)I\). Taking the half-trace of the
+exponential series yields \(F(-\tfrac12\operatorname{tr}(X^2))\).
+The identity \(T_m(F(s))=F(m^2s)\) follows for positive \(s\) from
+\(T_m(\cos t)=\cos mt\), and for all \(s\) by power series continuation.
+Thus the analytic trace expression agrees near the identity and extends
+uniquely on the connected universal group. Conversely
+\(T_m\circ T_2=T_2\circ T_m\), and the matrix square has half-trace
+\(T_2(\tfrac12\operatorname{tr}p(g))\). This checks the round-trip law.
+Multiplication by \(z^k\) changes the sign of the half-trace by
+\((-1)^k\); \(T_m(-s)=(-1)^mT_m(s)\) gives exactly the stated descent
+condition. For the other axioms, use conjugation invariance, inversion
+invariance and the displayed nondegenerate Hessian.
+\end{proof}
+
+\begin{corollary}\label{m3:interference}
+If the two-variable interference law
+\(f(gu)+f(gu^{-1})=2f(g)f(u)\) is imposed for all \(g,u\),
+then \(f\) is real analytic. In the three-dimensional indefinite
+classification it selects exactly \(m=1\), with the quotients of
+Theorem~\ref{m3:classification} allowed for that value.
+\end{corollary}
+\begin{proof}
+Choose a smooth nonnegative density of compact support near the
+identity and average it with its pullback by inversion to obtain
+a symmetric density \(\mu\). By continuity and \(f(e)=1\), its
+support can be chosen so that \(\int f\,d\mu>0\).
+Integrating the two-variable law in \(u\) gives
+\(f(g)\int f\,d\mu=\int f(gu)\,d\mu(u)\).
+After the change of variable \(v=gu\), differentiating under the
+integral differentiates only the smooth translated density, whose
+support is uniformly compact for \(g\) near each fixed point.
+Thus \(f\) is smooth. Fix \(g\) and \(X\), and set
+\(Y(t)=f(g\exp tX)\). Applying the law at \(g\exp tX\) with
+\(u=\exp sX\) and differentiating twice in \(s\) at zero gives
+\(Y''(t)=-2h(X,X)Y(t)\).
+At time one its solution is \(f(g)F(2h(X,X))\) plus
+\(df_g(dL_g X)\sum_{j\ge0}(-2h(X,X))^j/(2j+1)!\), where
+\(L_g\) is left multiplication. This is analytic in \(X\) and
+gives analyticity near each \(g\).
+
+For \(m\ge2\) choose \(g=\exp(\pi J/(2m))\) and \(u=\exp(tD)\)
+on the universal group. The half-traces of \(p(gu)\) and
+\(p(gu^{-1})\) both equal \(a\cosh t\), where
+\(a=\cos(\pi/(2m))>0\). Then \(T_m(a)=0\) and
+\(T_m'(a)=m/\sin(\pi/(2m))\ne0\), so for small nonzero \(t\)
+the left side is \(2T_m(a\cosh t)\ne0\) whereas the right side
+is zero. For \(m=1\), the matrix identity
+\(p(u)+p(u)^{-1}=\operatorname{tr}(p(u))I\) gives the law by
+multiplying by \(p(g)\) and taking half-traces. This extends the
+two-variable closing analysis of Corollary~\ref{cor:interference}.
+\end{proof}
+
+\begin{proposition}\label{m3:abelian}
+The connected abelian solutions are \(\R^d\) with
+\(c(x,y)=F(2h(y-x,y-x))\) for any nondegenerate real symmetric \(h\),
+and the one-dimensional circular quotients for which the lattice is
+contained in the period lattice of this cosine. In particular the real
+line has circular and split readings. With \(j^2=1\) and \(\bar j=-j\),
+the split line is the identity component
+\(\cosh t+j\sinh t\) of the norm-one split-complex group, with
+\(c(t,t')=\cosh(t'-t)\).
+\end{proposition}
+\begin{proof}
+On the additive universal cover the exponential is the identity, so the
+one-parameter formula determines the comparison globally and the
+double-angle identity gives sufficiency. Write \(Q=2h\) as a quadratic
+form and suppose \(a\ne0\) is a period. If \(Q(a)<0\) then \(F(Q(a))>1\).
+If \(Q(a)=0\), the gradient of \(F(Q)\) at \(a\) is nonzero since
+\(F'(0)=-1/2\) and \(Q\) is nondegenerate. If \(Q(a)>0\),
+\(F(Q(a))=1\) implies \(\sqrt{Q(a)}\in2\pi\mathbb Z\); then
+\(F'(Q(a))=0\) and the Hessian at \(a\) has rank at most one. Periodicity
+would make it equal to the full-rank Hessian at zero. This leaves just
+the positive line with its ordinary cosine periods. The two alternatives
+on the line follow by rescaling, and the split exponential obeys addition
+by \(j^2=1\). The norm-one group in the real scalar algebra itself is
+\(\{\pm1\}\), so that realization is discrete.
+\end{proof}
+
+\begin{example}[what is not classified]\label{m3:obstructions}
+The claim that the indefinite noncommutative solution is the universal cover of $\mathrm{SL}(2,\R)$ is false as stated.
+The hypotheses of Theorem~\ref{m3:classification} cannot give uniqueness
+of the covering group. For instance \(m=1\) works both on
+\(\mathrm{SL}(2,\R)\) and its universal cover, and \(m=2\) works on
+\(\mathrm{PSL}(2,\R)\). Nor does the diagonal Hessian bound the dimension.
+On \(\R^3\times\R^3\) take
+\[
+ (x,a)(y,b)=(x+y,a+b+\tfrac12x\times y),\qquad
+ f(x,a)=F(2x\cdot a).
+\]
+Bilinearity of the cross product proves associativity by expanding three
+factors. The inverse is \((-x,-a)\), the square is \((2x,2a)\), and
+conjugation by \((y,b)\) adds \(y\times x\) to \(a\). Hence \(f\) has the
+required symmetries and duplication, and its Hessian is nondegenerate with
+signature \((3,3)\). The group is noncommutative since \(x\times y\) can
+be nonzero. Dimension three fixes the local structure (the Lie algebra $\mathfrak{sl}_2(\R)$), and the universal cover is singled out only
+by the additional requirement of simple connectivity. Also \((\Omega2\mathrm d)\) would exclude the normalized
+\(\mathrm{SL}(2,\R)\) trace model, where \(-I+t\begin{psmallmatrix}0&1\\0&0\end{psmallmatrix}\)
+gives infinitely many zeros from \(I\), and the split line, where
+\(\kappa\ge1\).
+\end{example}
+
+\begin{proposition}\label{m3:ads}
+For \(m=1\) let \(B\) be the polarization of the real determinant on
+\(M_2(\R)\). The metric \(g=-B\) on \(\det x=1\) has signature
+\((-,+,+)\), curvature \(-1\) and is bi-invariant. Its universal cover is
+the simply connected anti-de Sitter model \cite{m3ONeill}.
+For every pair,
+\[
+ c(x,y)=B(x,y),\qquad \det(y-x)=2(1-c(x,y)).
+\]
+In the matrix model the full level \(\kappa(x,y)=1\) is precisely the
+union of null geodesics through \(x\). On any cover carrying the
+normalized trace reading this level is the full preimage of that cone.
+Its germ at \(x\) is the null cone there.
+\end{proposition}
+\begin{proof}
+The formula for \(B\) is \(B(x,y)=\tfrac12\operatorname{tr}(x^\sharp y)\)
+with \(x^\sharp=(\operatorname{tr}x)I-x\). In particular on traceless
+matrices \(g(X,Y)=\tfrac12\operatorname{tr}(XY)\). This gives the
+signature using \(J,D,E\); left and right multiplications preserve the
+determinant. The tangent projection of ambient differentiation is
+\(\nabla_XY=\partial_XY-g(X,Y)x\), because
+\((-B)(x,x)=-1\) and differentiating \((-B)(Y,x)=0\) gives the normal
+coefficient \(g(X,Y)\). This defines a metric torsion-free connection.
+Taking tangential parts of the vanishing ambient curvature shows
+\(R(X,Y)Z=-(g(Y,Z)X-g(X,Z)Y)\).
+The geodesic equation is \(x''=g(x',x')x\); the coefficient is constant,
+so geodesics extend for all real parameters. A null geodesic is the line
+\(x+tV\) with \(B(x,V)=0=\det V\). If \(B(x,y)=1\), then
+\(V=y-x\) satisfies these two equations by polarization, and conversely.
+The metric, connection and comparison pull back to covers. In the universal
+cover, a distinct lift of \(x\) is at comparison one but cannot lie on a
+null geodesic from \(x\), since a nonconstant projected null line meets
+its starting point only once. The local relation recovers the unoriented
+null directions, and the sign of \(g\) selects the timelike component
+type. A choice of future sheet is extra data. At \(m>1\), the same local
+null relation holds by \(T_m'(1)=m^2\), whereas other global levels can occur.
+\end{proof}
+
+\begin{remark}[the causal level set]\label{m3:causal}
+The statement that in the universal cover the level $\kappa(x,\cdot)=1$ is the set of endpoints of null geodesics from $x$ is false: every
+other lift of $x$ lies in this level and on no null geodesic from $x$.  The correct statements are those of Proposition~\ref{m3:ads}.
+\emph{Globally}, on a cover carrying the normalised trace reading, $\{y:\kappa(x,y)=1\}$ is the full preimage of the matrix cone
+$\{y:\det(y-p(x))=0\}$ through $p(x)$, which in $\mathrm{SL}(2,\R)$ is exactly the union of null geodesics through the point.
+\emph{Locally}, near $x$, the level is the null cone of $g$ at $x$ (for every $m$), so the comparison determines the unoriented null
+directions; a time orientation (a future sheet) is additional data.
+\end{remark}
+
+\subsection{Trace, signature and the Lorentz group}
+
+\begin{proposition}[the $2\times2$ case of Part~0]\label{m3:trichotomy}
+In a unital associative algebra with involution, let \(u^*=u^{-1}\),
+\(S=(u+u^*)/2\), \(A=(u-u^*)/2\), and \(\Delta=u-1\).
+Then \(SA=AS\), \(S^2-A^2=1\), and
+\(\Delta^*\Delta=\Delta\Delta^*=2(1-S)\).
+For \(S=sI\), \(s\) real, let \(v=1-s\). Then
+\(A^2=(s^2-1)I=-v(2-v)I\) and
+\[
+ u^n=T_n(s)I+U_{n-1}(s)A,\qquad
+ u^{-n}=T_n(s)I-U_{n-1}(s)A\qquad(n\ge0,\ U_{-1}=0).
+\]
+For \(A\ne0\) the real algebra \(\R[A]\) is the complex, dual or
+split-complex algebra as \(s^2-1\) is negative, zero or positive.
+On this span the condition \(a^*a=-tI,\ t\ge0\Rightarrow a=0\) is
+equivalent to boundedness of all integer powers of \(u\).
+The powers have positive scalar part at every positive index exactly
+when \(s\ge1\). In particular the positive-power condition together
+with \(A^2\ne0\) selects \(s>1\).
+\end{proposition}
+\begin{proof}
+The identities and the power formulas are Propositions~\ref{m1:algebra} and \ref{m1:chebyshev}; we repeat the short argument.
+Expand \(uu^*=u^*u=1\), subtract and add, and expand
+\((u^*-1)(u-1)\). Multiplying \(u+u^{-1}=2sI\) by \(u\) gives the
+recurrence for powers. The two Chebyshev recurrences and the initial
+powers \(I,sI+A\) give the formulas. If \(A\ne0\), then \(I,A\) are
+linearly independent since \(A^*=-A\), so the indicated quadratic
+algebras have exactly those presentations. On this span
+\((xI+yA)^*(xI+yA)=(x^2-(s^2-1)y^2)I\), giving positivity exactly
+in the complex case and in the scalar case \(u=\pm I\).
+When \(|s|<1\), the power coefficients are
+\(\cos(n\alpha)\) and \(\sin(n\alpha)/\sin\alpha\) with
+\(\alpha=\arccos s\). At \(s=\pm1\), the coefficient of \(A\) is
+\(ns^{n-1}\); when \(|s|>1\) the scalar part has unbounded magnitude
+\(\cosh(n\operatorname{arcosh}|s|)\). The scalar case \(u=\pm I\)
+is bounded. For \(s\ge1\) the scalar parts are hyperbolic cosines;
+for \(s\le-1\) the first is negative. For \(-1<s<1\) the first
+negative index is \(n_0=\lfloor\pi/(2\alpha)\rfloor+1\),
+since \(n_0\alpha\in(\pi/2,3\pi/2)\) and earlier angles are
+in \([0,\pi/2]\).
+\end{proof}
+
+\noindent This is the growth criterion of Part~\ref{part:alg} (Theorem~\ref{m1:trichotomy}, Proposition~\ref{m1:time}) in the
+algebra $M_2(\R)$ with the adjugate involution: bounded powers in the elliptic case $|s|<1$, linear growth $ns^{n-1}$ in the parabolic
+case $s=\pm1$, $A\ne0$, exponential growth at rate $|s|+\sqrt{s^2-1}$ in the hyperbolic case.  What is added here is the equivalence of
+bounded powers with the positivity condition on $\R[A]$, which in Part~\ref{part:alg} is an input (scalar positivity), and the
+selection of the hyperbolic branch $s>1$ by positivity of all powers, which is the time-orientation condition used in
+Proposition~\ref{m3:frames}.
+
+\begin{corollary}\label{m3:iteration}
+For a real matrix displacement in \(\mathrm{SL}(2,\R)\) with
+\(s=\tfrac12\operatorname{tr}u=2\kappa-1\), a round trip
+\(\kappa'=(2\kappa-1)^2\) sends \(s\) to \(T_2(s)\).
+For \(-1<s<1\) it doubles an elliptic angle, with folding by cosine
+and possible arrival at \(u^2=-I\). For \(s>1\) it doubles a positive
+rapidity, while \(s<-1\) enters the positive branch in one step.
+For \(s=\pm1\) it sends the trace to \(2\), and \(u=sI+A\) with
+\(A\ne0\) has \(u^2=I+2sA\). Thus the scalar reading cannot
+distinguish central and parabolic displacements at the endpoints.
+\end{corollary}
+\begin{proof}
+Cayley--Hamilton gives \(u^\sharp=u^{-1}\) and
+\((u-sI)^2=(s^2-1)I\). Use Proposition~\ref{m3:trichotomy},
+\(T_2(s)=2s^2-1\) and the double-angle formulas. At \(s=\pm1\),
+the two cases \(A=0\) and \(A\ne0\) have identical scalar iterates,
+whereas the nilpotent part doubles in magnitude.  In particular the scalar round-trip law alone does not identify the parabolic
+case: $I$ and $I+E_{12}$ (and $-I$, $-I+E_{12}$) have the same scalar iterates, and only the displacement algebra separates them.
+\end{proof}
+
+\begin{proposition}\label{m3:spin}
+On \(\mathrm{SL}(2,\C)\), the heap \(xy^{-1}z\) and complex
+comparison \(\kappa(x,y)=(1+\tfrac12\operatorname{tr}(x^{-1}y))/2\)
+satisfy the symmetric, invariant, normalized and round-trip laws.
+The complex Hessian at the identity is
+\(\operatorname{tr}(XY)/4\).
+The real forms are the conjugates of \(\mathrm{SL}(2,\R)\) and
+\(\mathrm{SU}(2)\) as connected subgroups. The action
+\(X\mapsto uXu^\dagger\) on the real space of Hermitian matrices gives the
+universal double cover of \(\mathrm{SO}^+(1,3)\), so the acting group is
+\(\mathrm{Spin}^+(1,3)\). The involutions \(\sharp\) and \(\dagger\)
+are respectively adjugation and Hermitian adjunction.
+\end{proposition}
+\begin{proof}
+The trace and Hessian assertions follow from Cayley--Hamilton and the
+exponential series. For the complex conjugacy classification of elements,
+\(|s|<1\) on the real trace line gives unit-circle eigenvalues, and
+\(|s|>1\) on that line gives real reciprocal eigenvalues. At \(s=\pm1\)
+one has the two central cases and the nontrivial Jordan cases.
+For nonreal \(s\), the eigenvalues are neither real nor of unit modulus,
+giving a loxodromic element with nonzero rotation modulo \(2\pi\) in the
+projective action. This trace classification uses the chosen spin lift.
+
+For the real forms, a complex Lie automorphism of
+\(\mathfrak{sl}_2(\C)\) is inner: the image of \(D\) has the same
+adjoint eigenvalues \(0,\pm2\), so it is conjugate to \(D\); the two
+root lines then scale reciprocally, realized by diagonal conjugation.
+Thus a conjugate-linear involution is entrywise conjugation followed by
+\(\operatorname{Ad}(M)\), with \(M\bar M=aI\). Conjugating this equality
+and using invertibility gives \(a\in\R^\times\), and scaling \(M\)
+sets \(a=\pm1\). If \(a=1\), the anti-linear map \(v\mapsto M\bar v\)
+is a conjugation, with real fixed basis obtained from \(v+M\bar v\)
+and \(i(v-M\bar v)\). If \(a=-1\), \(v,M\bar v\) are independent for
+\(v\ne0\), since dependence would give \(-1=|\lambda|^2\). In this
+basis the anti-linear operator is \(J\) followed by conjugation.
+Its commuting traceless matrices have the shape
+\(\begin{psmallmatrix} it&w\\-\bar w&-it\end{psmallmatrix}\),
+the compact real form. Commutation at the group level gives
+respectively the real determinant-one group and the special unitary
+group. This identifies both connected subgroups.
+
+Use the Pauli matrices \(\sigma_1=E\),
+\(\sigma_2=iJ\), \(\sigma_3=D\). Direct multiplication gives
+\[
+ (a\cdot\sigma)(b\cdot\sigma)=(a\cdot b)I+i(a\times b)\cdot\sigma,\qquad
+ \det(tI+a\cdot\sigma)=t^2-|a|^2
+\]
+for real vectors. Congruence by \(u\) preserves the determinant and
+the future sheet. The kernel consists of unitaries that commute with
+all Hermitian matrices, hence is \(\{\pm I\}\). The derivative
+\(X\mapsto (V\mapsto XV+VX^\dagger)\) has trivial kernel by the
+same argument with traceless matrices, and both Lie algebras have real
+dimension six. Thus the image is an open subgroup of the connected
+proper orthochronous Lorentz group, so is the whole group. Complex polar
+decomposition follows by taking \(b=(u^\dagger u)^{1/2}\),
+\(k=ub^{-1}\). The positive factor is the exponential of a traceless
+Hermitian matrix, and \(\mathrm{SU}(2)\) is \(S^3\) from its first column.
+This proves connectedness and simple connectedness of the acting group.
+For a unit vector \(n\), \(e^{-i\theta n\cdot\sigma/2}\) represents
+the spatial rotation through \(\theta\) about \(n\), by the Pauli
+commutator. At \(\theta=2\pi\) the lift ends at \(-I\), and at
+\(4\pi\) it returns to \(I\). On this rotation circle a continuous
+section would be a right inverse to the circle squaring map.
+The degrees would have product one, which is impossible since
+squaring has degree two.
+Finally, imposing \(uu^\dagger=I\) in addition to \(uu^\sharp=I\)
+selects \(\mathrm{SU}(2)\). Its real quaternionic algebra is
+\(\operatorname{span}_{\R}(I,i\sigma_1,i\sigma_2,i\sigma_3)\), with
+\(a^\sharp a\) the positive sum of coordinate squares. In the whole
+matrix algebra \(D^\sharp D=-I\), which excludes any normalized
+linear functional positive on every \(a^\sharp a\).
+\end{proof}
+
+\begin{hypothesis}[Inertial comparison and calibration]\label{m3:calibration}
+In \(1+1\) dimensions suppose inertial coordinate changes are linear,
+of determinant one, and have reciprocal finite velocities. Assume one
+matrix \(L(v)\) for each velocity \(v\), identity at \(v=0\), a set of
+such matrices closed under products, and some nonzero velocity.
+If required, impose separately positive time readings under all positive
+powers and a nonzero square of the skew part for a nontrivial change.
+A physical identification of the limiting speed and a choice of future
+direction require calibration.  These are physical inputs, not consequences of the axiom; the velocity-space reading of the companion
+paper \cite[Thm.~53]{Companion} uses them in the same status.
+\end{hypothesis}
+
+\begin{proposition}\label{m3:frames}
+Under the first assumptions of Hypothesis~\ref{m3:calibration},
+\[
+ L(v)=\gamma(v)\begin{pmatrix}1&Kv\\v&1\end{pmatrix},\qquad
+ \gamma(v)^2(1-Kv^2)=1,\qquad v\oplus w=\frac{v+w}{1+Kvw}
+\]
+for a single constant \(K\). The two additional conditions select
+\(K>0\), \(\gamma>0\), two common invariant lines \(x=\pm t/\sqrt K\)
+and a finite speed \(1/\sqrt K\). If only time positivity is imposed,
+\(K=0\) also gives Galilean shears, with the invariant line \(t=0\).
+Without time positivity an individual nonzero member with \(K<0\)
+is elliptic. For any \(d\ge0\), a quadratic form vanishing on the
+null cone of \(q(t,w)=t^2-|w|^2\) is its scalar multiple. If a linear
+map \(B_0\) sends this cone into itself then \(q\circ B_0=\lambda q\),
+\(\lambda=q(B_0(1,0))\), and \(\det(B_0)^2=\lambda^{d+1}\).
+\end{proposition}
+
+\begin{proof}
+For \(L(v)=\begin{psmallmatrix}a&b\\c&d\end{psmallmatrix}\), the
+velocities read \(c/a\) and \(-c/d\); reciprocity at \(v\ne0\) gives
+\(a=d\). The determinant gives \(b=aK(v)v\). Equality of the diagonal
+entries of \(L(v)L(w)\) forces \(K(v)=K(w)\) for nonzero \(v,w\).
+The common diagonal never vanishes by the hypotheses. Taking the ratio
+of the lower-left to the upper-left entry gives the composition rule.
+The skew part has square \(\gamma^2 Kv^2I\), so the assertion about
+powers is Proposition~\ref{m3:trichotomy}. Eigenvectors give the two
+lines when \(K>0\), and for \(K=0\) the nilpotent has kernel \(t=0\).
+These assumptions are one version of the kinematic derivations
+in \cite{m3LevyLeblond,m3Mermin}.
+
+Write a quadratic form as \(a t^2+2t\ell(w)+S(w)\).
+Its vanishing at \((1,\pm w)\) for unit \(w\) gives \(\ell(w)=0\),
+\(S(w)=-a\), hence the result by homogeneity. In dimension zero the
+conclusion holds directly. Apply it to \(q\circ B_0\); taking
+determinants of its Gram matrix gives the last identity. For
+\(|\det B_0|=1\), signature gives \(\lambda=1\) when \(d\ne1\);
+in dimension \(1\), the quarter-turn \((t,x)\mapsto(-x,t)\) gives
+\(\lambda=-1\). The calibration \(\lambda=1\) gives interval preservation.
+The open set \(q>0\) has two components; with \(p\ge2\) positive
+coordinates the deformation \((a,b)\mapsto(a,(1-s)b)\), \(0\le s\le1\),
+instead retracts that set onto the connected \(\R^p\setminus\{0\}\).
+In an orthogonal Clifford basis, \((e_i e_j)^2=-e_i^2e_j^2\).
+Thus in signature \((1,d)\) the \(d(d-1)/2\) coordinate spatial
+planes are elliptic and the \(d\) mixed planes hyperbolic.
+\end{proof}
+
+\begin{example}[null preservation is not isometry]\label{m3:quarterturn}
+A linear map of determinant one preserving the null cone need not preserve $q$: in dimension $1+1$ the quarter-turn
+$(t,x)\mapsto(-x,t)$ has determinant one, maps the null lines $x=\pm t$ to each other and satisfies $q\circ B_0=-q$.  By
+Proposition~\ref{m3:frames} this is the only exception: for $d\ne1$, $|\det B_0|=1$ forces $\lambda=1$.  The calibration $\lambda=1$ is
+therefore an input in dimension $1+1$.
+\end{example}
+
+\begin{example}\label{m3:proper}
+With \(c_{\rm light}=1\), rapidity \(\eta=\log 2\) has
+\(\cosh\eta=5/4\), \(\sinh\eta=3/4\), and \(\beta=\tanh\eta=3/5\).
+The passive boost with off-diagonal entries \(-3/4\) takes
+\((5,3)\) to \((4,0)\), preserving \(q=16\). A Euclidean rotation
+preserves \(5^2+3^2=34\) and can take the event outside the null cone.
+The broken line \((0,0),(5,3),(10,0)\) has proper time \(8\)
+and the straight line between its endpoints proper time \(10\).
+For future timelike segments the reverse triangle inequality for
+\(\sqrt q\) follows by sending the first segment to rest, since the
+time component of the second is at least its Minkowski norm.
+Equality holds exactly for segments on the same future ray. In
+physical units the elapsed time of an inertial segment is
+\(\sqrt{q}/c_{\rm light}\) with temporal coordinate \(c_{\rm light}t\).
+Repeated nonzero collinear boosts add rapidities and satisfy
+\(|\tanh(n\eta)|<1\) at every finite \(n\), with limit \(1\) in
+magnitude. The corresponding conformal radial parameter is
+\(\tanh(n\eta/2)\), with the same open boundary.
+All numbers follow by substituting \(e^\eta=2\) and adding the two
+segment norms. The identity \(\cosh^2\eta-\sinh^2\eta=1\) follows
+from the exponential definitions.
+\end{example}
+
+\begin{example}\label{m3:rapidityBoundary}
+For one positive radial direction put \(\beta=\sin\theta\),
+\(0\le\theta<\pi/2\). Then
+\[
+ \eta=\operatorname{arctanh}(\sin\theta)
+     =\int_0^\theta\sec u\,du
+     =\log\tan(\pi/4+\theta/2),\qquad
+ \cos\theta=\operatorname{sech}\eta .
+\]
+Both inverse-rapidity expressions vanish at zero and have
+derivative \(\sec\theta\). The conformal radius is
+\(\tanh(\eta/2)=\tan(\theta/2)\), by the half-angle formula.
+For \(\eta_k=\eta_0+k\Delta\eta\), \(\Delta\eta>0\),
+\[
+ 1-\beta_k=\frac{2}{e^{2\eta_k}+1}>0,\qquad
+ \frac{\pi}{2}-\theta_k=2\arctan(e^{-\eta_k})>0.
+\]
+Both gaps tend to zero while the rapidity tends to infinity.
+For instance, choose \(\theta_0\) as the solution of
+\(\cos\theta_0=\theta_0\) in \([0,\pi/2)\), unique by strict
+monotonicity of \(\cos\theta-\theta\), and set \(\Delta\eta=1\).
+Then \(\theta_0\simeq0.73908513\), \(\eta_0\simeq0.81732635\).
+At \(k=8\) the velocity gap is approximately
+\(4.3893\times10^{-8}\) and the angular gap
+\(2.9629\times10^{-4}\) radians, by substitution.
+\end{example}
+
+\begin{example}[causal order does not force linearity in $1+1$]\label{m3:nonlinear}
+Causal order alone in \(1+1\) dimensions allows nonlinear changes.
+In null coordinates \(p=t+x,\ q_-=t-x\), the order is the product
+order. The map \((p,q_-)\mapsto(p+\tfrac12\sin p,q_-^3+q_-)\)
+and its inverse preserve this order, since both one-variable maps
+are strictly increasing bijections. The conformal scale and the
+linearity assumption therefore have separate roles. The distinction
+is dimension-sensitive in the classical causality theorem
+\cite[Theorem~1]{m3Zeeman}.
+\end{example}
+
+\subsection{The positive Hermitian space}\label{m3:hermitian-sub}
+
+\begin{theorem}\label{m3:hyperboloid}
+Let \(\mathcal P\) be the positive definite Hermitian \(2\times2\) matrices of
+determinant one. Write \(B\) for the real polarization of the
+Hermitian determinant, and \(g=-B\) on the tangent spaces. Then \(\mathcal P\)
+is complete hyperbolic three-space of curvature \(-1\). For \(x,y\in\mathcal P\),
+\[
+ c(x,y)=B(x,y)=\tfrac12\operatorname{tr}(x^{-1}y)=\cosh d(x,y),
+ \qquad \kappa(x,y)=\cosh^2(d(x,y)/2).
+\]
+Its geodesic symmetry is \(s_x(y)=xy^{-1}x=2B(x,y)x-y\).
+This symmetry and the comparison satisfy the round-trip law.
+The operation \(xy^{-1}z\) itself can leave \(\mathcal P\).
+\end{theorem}
+\begin{proof}
+In Pauli coordinates \(\mathcal P\) is the future sheet of \(B(x,x)=1\).
+After moving \(x\) to \(I\) by congruence with \(x^{-1/2}\), its
+tangent metric is Euclidean. The connection and curvature follow from
+the same ambient projection as in Proposition~\ref{m3:ads}.
+The curve \(\gamma(t)=\cosh t\,x+\sinh t\,v\) with \(g(v,v)=1\),
+\(B(x,v)=0\), has acceleration \(\gamma\) and unit speed. About \(x\)
+these curves give global polar coordinates away from \(x\), since
+after the congruence each point is \((\cosh t,\sinh t\,n)\),
+\(t>0\), \(|n|=1\). Differentiation gives the metric
+\(dt^2+\sinh^2t\,d n^2\). Every curve from \(x\) to a point
+at radius \(t\) has length at least \(t\), with equality only on the
+radial segment up to monotone reparametrization. This proves the
+distance and uniqueness. Radial closed balls are compact in these
+coordinates, yielding metric completeness. Cayley--Hamilton for
+\(x^{-1}y\) gives the symmetry formula. It preserves \(B\), fixes \(x\)
+and reverses each radial geodesic. It gives
+\(B(y,s_xy)=2B(x,y)^2-1\), hence the round-trip law.
+For \(y=I\), the product of \(x=\cosh t\,I+\sinh t\,\sigma_1\)
+and \(z=\cosh t\,I+\sinh t\,\sigma_3\), \(t\ne0\), is non-Hermitian
+since the factors do not commute. Thus \(\mathcal P\) is a reflection space
+as in Proposition~\ref{prop:conn}(iii), with no inherited heap law.
+\end{proof}
+
+\begin{remark}\label{m3:velocity}
+The velocity-space theorem of Paper II \cite[Thm.~53]{Companion}
+identifies the open Bloch ball with this hyperboloid. Indeed for
+\(\rho_r=(I+r\cdot\sigma)/2\), \(|r|<1\),
+\(\rho_r/\sqrt{\det\rho_r}=(I+r\cdot\sigma)/\sqrt{1-|r|^2}\).
+Thus the Bloch coordinate \(r\) is the Klein velocity coordinate,
+the relative Lorentz factor is \(B(x,y)=2\kappa(x,y)-1\), and
+\(\gamma(r)^{-1}=\sqrt{1-|r|^2}\).
+The trace comparison in the complex group and the comparison on
+\(\mathcal P\) agree on pairs in \(\mathcal P\). Congruence acts on \(yx^{-1}\)
+by similarity. The disk of a geodesic triangle describes changes of
+velocity. Its area and a clock's proper time along an event
+worldline are different geometric quantities.
+\end{remark}
+
+\begin{proposition}\label{m3:transport}
+Write \(c=B(x,y)\) and \(m=(x+y)/\sqrt{2(1+c)}\).
+The spin transvection and its tangent transport are
+\[
+ A_{yx}=(yx^{-1})^{1/2}=\frac{I+yx^{-1}}{\sqrt{2(1+c)}},\qquad
+ P_{yx}V=A_{yx}VA_{yx}^\dagger
+         =V-\frac{B(y,V)}{1+c}(x+y)\quad(V\in T_x\mathcal P).
+\]
+The arc midpoint is \(m\), the transport is \(-ds_m|_{T_x\mathcal P}\),
+and \(A_{xy}=A_{yx}^{-1}\).
+\end{proposition}
+\begin{proof}
+The matrix \(yx^{-1}\) is similar via \(x^{1/2}\) to
+\(x^{-1/2}yx^{-1/2}>0\). Cayley--Hamilton proves the formula for its
+positive-spectrum square root. Moving \(x\) to \(I\), that square root
+acts by congruence as the boost through the geodesic distance in the
+plane of the two endpoints. Indeed for \(y=\cosh d\,I+\sinh d\,n\cdot\sigma\)
+the root is \(\cosh(d/2)I+\sinh(d/2)n\cdot\sigma\).
+It acts identically on Hermitian vectors orthogonal to the geodesic
+plane since those anticommute with \(n\cdot\sigma\). In the geodesic
+plane it sends \(x\) and the forward tangent to \(y\) and the forward
+tangent there. Those tangent directions and the fixed perpendiculars
+are parallel by the ambient connection. The linear map
+\(V\mapsto V-2B(m,V)m\) fixes the same perpendiculars and sends the
+forward tangent to the forward tangent, as can be checked at
+\(\gamma(-d/2),\gamma(d/2)\) about \(m\). Substitution gives the rational
+formula. The coincident case gives \(m=x\) and identity on \(T_x\mathcal P\).
+Taking inverse square roots proves the reversal formula. This is the
+hyperbolic counterpart of Proposition~\ref{prop:LCarc}; the flat left
+and right heap transports of Proposition~\ref{prop:conn} are group
+transports and have no such restriction to \(\mathcal P\).
+\end{proof}
+
+\begin{theorem}\label{m3:recurrence}
+For two initial points \(x_0,x_1\) and \(c=B(x_0,x_1)\), the iterates
+\(x_{n+1}=s_{x_n}x_{n-1}\) satisfy
+\begin{align*}
+ x_n&=(x_1x_0^{-1})^n x_0=x_0(x_0^{-1}x_1)^n,\\
+ x_{n+1}&=2cx_n-x_{n-1},\\
+ x_n&=U_{n-1}(c)x_1-U_{n-2}(c)x_0\quad(n\ge1).
+\end{align*}
+They sample the geodesic through the initial pair with step
+\(\varepsilon=d(x_0,x_1)\).
+Every comparison \(B(y,x_n)\) obeys the same recurrence, with
+\(B(x_0,x_n)=T_n(c)\). The two matrix displacements and
+\(x_n\wedge x_{n+1}\) are constant. For a step put
+\[
+ v(x,y)=1-c(x,y),\qquad w(x,y)=-v(x,y)=\cosh d-1.
+\]
+The acceleration is \(x_{n+1}-2x_n+x_{n-1}=2w x_n\);
+the midpoint of the chord from \(x_{n-1}\) to \(x_{n+1}\) is
+\((1+w)x_n\).
+\end{theorem}
+\begin{proof}
+The symmetry identity makes \(x_{n+1}x_n^{-1}\) constant.
+The resulting matrix power and Cayley--Hamilton give the recurrence.
+Conversely the recurrence has unique ambient solution for given initial
+pair. If \(\varepsilon>0\) it is
+\(\cosh(n\varepsilon)x_0+\sinh(n\varepsilon)\tau\), where
+\(\tau=(x_1-cx_0)/\sinh\varepsilon\), by the hyperbolic addition laws.
+If \(\varepsilon=0\) the solution is constant. The Chebyshev formulas
+follow from the scalar recurrences and the initial data. The
+constant right displacement follows from the right-power formula,
+and \(x_n\wedge x_{n+1}=x_{n-1}\wedge x_n\) follows by wedging the
+recurrence. The last formulas follow by substitution. This gives
+Theorem~\ref{thm:recur} in the reflection space, with the normal
+acceleration reversed.
+\end{proof}
+
+\begin{theorem}\label{m3:action}
+For chains of \(N\ge1\) edges of fixed endpoints at distance \(\Theta\),
+\[
+ \sum_{k<N} w(x_k,x_{k+1})\ \ge\ N(\cosh(\Theta/N)-1).
+\]
+Equality holds precisely for equal subdivisions of their unique
+geodesic segment, including the constant chain when \(\Theta=0\).
+Every fixed-end critical chain satisfies the recurrence, and every
+recurrence chain is critical.
+For a \(C^4\) curve \(x(t)\), write \(e(t)=g(\dot x,\dot x)\)
+and \(c_\pm=B(x(t),x(t\pm h))\). Then, locally uniformly,
+\[
+ \begin{split}
+ x(t+h)-s_{x(t)}x(t-h)&=h^2\nabla_t\dot x+\tfrac12h^3e'(t)x(t)+O(h^4),\\
+ x(t+h)+x(t-h)-(c_++c_-)x(t)&=h^2\nabla_t\dot x+O(h^4).
+ \end{split}
+\]
+The second residual is always tangent. The first vanishes for all
+small steps exactly on affinely parametrized geodesics.
+\end{theorem}
+\begin{proof}
+Strict convexity and monotonicity of \(\cosh d-1\) on \(d\ge0\)
+give Jensen's inequality followed by the endpoint triangle
+inequality. Equality requires equal lengths and path length
+\(\Theta\). The uniqueness and radial length proof in
+Theorem~\ref{m3:hyperboloid} then put every step on the geodesic
+in order, including the zero case. An interior first variation
+requires \(x_{k-1}+x_{k+1}=\mu x_k\). Its pairing with \(x_k\)
+gives \(\mu\ge2\). Taking the norm of
+\(x_{k+1}=\mu x_k-x_{k-1}\) with respect to \(B\) gives
+\(\mu(\mu-2B(x_k,x_{k-1}))=0\), so it gives the recurrence.
+The converse follows from the same first variation. This extends
+Theorem~\ref{thm:action} without a step bound.
+
+Differentiating \(B(x,x)=1\) gives \(B(x,x')=0\),
+\(B(x,x'')=e\), \(B(x,x''')=3e'/2\); the tangent acceleration is
+\(x''-ex\). Substitute the Taylor expansions into the symmetry formula,
+as in Theorem~\ref{thm:consist}. Direct pairing proves tangency.
+Vanishing forces \(\nabla_t\dot x=0\), and the sampled geodesic
+recurrence proves the converse.
+\end{proof}
+
+\begin{proposition}\label{m3:sagitta}
+For \(x,y\in\mathcal P\), \(d=d(x,y)\), and \(w=\cosh d-1\), the exact
+chord split and the radial lengths are
+\[
+ y-x=(yx^{-1}-cI)x+wx,\qquad
+ \|(yx^{-1}-cI)x\|_{g}=\sinh d,\qquad
+ w=\tfrac12(-B)(y-x,y-x).
+\]
+The first term is the tangent projection of \(y-x\) at \(x\).
+The chord from \(y\) to \(s_xy\) has midpoint \((1+w)x\);
+the chord of the arc from \(x\) to \(y\) has midpoint
+\(\sqrt{\kappa(x,y)}\,m\), giving radial length \(\cosh(d/2)-1\)
+from \(m\). Along a chain the tangent terms sum to the endpoint
+increment minus \(\sum_k w_k x_k\).
+
+For any partition of a continuous path \(x:[0,T]\to\mathcal P\), with
+\(D=\max_k d_k\), the sum \(V_\pi=\sum w_k\) satisfies
+\[
+ \tfrac12\sum_k d_k^2\le V_\pi
+ \le\tfrac12\cosh D\sum_k d_k^2
+ \le\tfrac12\cosh D\,D\sum_k d_k .
+\]
+It tends to zero for rectifiable paths and is at most
+\(\tfrac12\cosh D\,H^2T|\pi|^{2\alpha-1}\) for
+\(d(x_s,x_t)\le H|s-t|^\alpha\). For partitions of vanishing mesh,
+if the measures \(\mu_\pi=\sum_k2w_k\delta_{t_k}\) converge weakly
+to an atomless measure \(\mu\), then for continuous \(f\) on the
+path image
+\[
+ \sum_k w_k f(x_k)\to\tfrac12\int f(x_t)\,d\mu(t),\qquad
+ \sum_k d_k^2 f(x_k)\to\int f(x_t)\,d\mu(t).
+\]
+The tangent sums converge to \(x_T-x_0-\tfrac12\int x_t\,d\mu(t)\).
+At equal step sizes \(aN^{-\alpha}\), \(a>0,\alpha>0\), the total is
+asymptotic to \(a^2N^{1-2\alpha}/2\). Taking \(\alpha=1/2\)
+therefore leaves \(a^2/2\), larger exponents give zero and smaller
+positive exponents give divergence. For \(a=0\) the sum vanishes.
+\end{proposition}
+\begin{proof}
+The tangent term is \(y-cx\), whose squared tangent length is
+\(c^2-1\). Polarization gives the chord norm and the reflection
+formula gives both chord midpoints. Summing the split telescopes.
+Integrating \(1\le\cosh s\le\cosh D\) twice on \([0,d]\)
+gives the inequalities. Apply uniform continuity and the path-length
+bound in the rectifiable case, and sum the H\"older bound on squared
+steps in the other case. Weak convergence gives the first limit
+because \(t\mapsto f(x_t)\) is continuous. The measures with
+weights \(d_k^2\) differ in mass by at most
+\((\cosh D-1)\sum d_k^2\), which goes to zero because
+\(\sum d_k^2\le\mu_\pi([0,T])\). The signed tangent conclusion
+follows from the exact split. Taylor expansion at zero proves the
+equal-step assertion. This extends Theorem~\ref{thm:sagitta} with an outward radial term
+and the ambient Lorentz form for the squared chord.
+\end{proof}
+
+\begin{proposition}\label{m3:brownian}
+Let \(x\) be Brownian motion on \(\mathcal P\) with generator \(\Delta/2\).
+The weighted sagitta limit in Proposition~\ref{m3:sagitta} holds
+with \(\mu=3\,dt\) in probability on every deterministic mesh
+sequence, and almost surely simultaneously for continuous \(f\)
+on nested meshes with summable mesh sizes. The tangent sums give
+the ambient It\^o integral of tangent projection against \(dx\).
+For \(N\) equal steps of size \(h=T/N\),
+\[
+ \mathbb E V_\pi=N(e^{3h/2}-1),\qquad
+ \operatorname{Var}(\sqrt N V_\pi)
+ =N^2\bigl[(1+3e^{4h})/4-e^{3h}\bigr]\longrightarrow 3T^2/2 .
+\]
+The variables \(\sqrt N(V_\pi-3T/2)\) converge stably in law to
+\(\mathcal N(0,3T^2/2)\). The centering bias before multiplication
+by \(\sqrt N\) is \(9T^2/(8N)+O(N^{-2})\).
+\end{proposition}
+\begin{proof}
+Use a global smooth tangent orthonormal frame, for instance by
+orthonormalizing the coordinate frame in the spatial Pauli coordinates.
+The coordinate It\^o drift is \(\Delta x/2=3x/2\), because the
+normal acceleration of each of three unit-speed geodesics is \(x\).
+The Euclidean ambient martingale coefficient has the three tangent frame
+vectors as columns. This description follows by applying the
+local It\^o formula to the coordinate functions and their products.
+The trace of the martingale covariance contracted with the constant
+bilinear form \(-B\) is therefore \(3\). To justify the quadratic
+variation limits, stop on compact balls. After stopping, all coefficients
+are bounded. On an interval of length \(h_k\) write the increment as
+\(M_k+D_k\) with bounded drift \(\|D_k\|\le C h_k\) and
+\(\mathbb E\|M_k\|^2\le C h_k\). Applying It\^o's formula to
+\((-B)(M_k,M_k)\) along the interval gives the contracted covariance
+plus a centered martingale increment of second moment \(O(h_k^2)\).
+Those increments are orthogonal in \(L^2\). By Cauchy--Schwarz,
+the sum of the cross terms has squared mean \(O(|\pi|)\);
+the sum of the drift squares is \(O(|\pi|)\). Hence for endpoints
+of the partitions the cumulative error has squared mean
+\(O(|\pi|)\), uniformly in the final endpoint. Use endpoints
+approaching each rational time and \(T\) for convergence in
+probability. For the summable meshes, Chebyshev and
+Borel--Cantelli give almost sure convergence on this countable set.
+The covariance up to stopping is \(3\,d(t\wedge\tau)\).
+Take the increasing union of events on which the path stays in
+one of the balls up to \(T\). The original nonnegative measures
+then converge weakly, by monotonicity of their cumulative masses
+and continuity of \(3t\). In the probability case apply the same
+argument along an almost surely convergent further subsequence of
+each subsequence. The tangential projection annihilates the drift
+and fixes the martingale, giving the claimed It\^o identification.
+
+For the moments, \(b(y)=B(x_0,y)\) satisfies
+\(\|\nabla b\|^2=b^2-1\) by tangent projection and
+\(\Delta b=3b\) by the geodesic acceleration. Thus
+\[
+ \tfrac12\Delta b^j=\tfrac12 j(j+2)b^j
+          -\tfrac12j(j-1)b^{j-2}.
+\]
+The resulting moment equations may be used unstopped: for each integer
+\(j\ge1\) the stopped expectation of \(b^j\) is bounded by
+\(\exp(j(j+2)t/2)\) via Gronwall, since \(b\ge1\).
+Using higher moments gives uniform integrability and permits passage
+to the integrated equations by dominated convergence. The same
+exit estimate for \(j=1\), using \(b=\cosh d(x_0,y)\), excludes
+explosion on finite time intervals. The equations give
+\(\mathbb E b=e^{3h/2}\), \(\mathbb E b^2=(1+3e^{4h})/4\).
+For \(J=b-1\), the generator on \(J^j\) is
+\(\tfrac12j(j+2)J^j+\tfrac12j(2j+1)J^{j-1}\).
+Induction with the integral moment equations, starting at \(J=0\),
+gives \(\mathbb E J^4=O(h^4)\).
+Isometry invariance and the Markov property make the \(N\) distances
+independent and identically distributed at each fixed \(N\).
+Taylor expansion gives the bias and the variance limit.
+For \(T>0\), the sum of fourth moments of the centered
+\(\sqrt N\)-scaled terms is \(O(N^3h^4)\to0\), giving the Lyapunov
+central limit theorem in law. For stability, use the realized
+covariance central limit theorem \cite[Theorem~5.4.2]{JP12},
+as in Proposition~\ref{prop:clt}, and contract the limiting covariance
+with the matrix \(G\) of \(-B\). Localize with smooth compact cutoffs
+of the It\^o coefficients equal to one on increasing compact balls.
+With \(C=\sum_{j=1}^3 e_je_j^\top\) for the tangent orthonormal frame,
+the conditional variance of the \(h^{-1/2}\)-scaled contraction
+on a path staying in such a ball through time \(T\) is
+\(2\int_0^T\operatorname{tr}(GCGC)\,dt=6T\), since
+\(\operatorname{tr}(GCGC)=\sum_{i,j}(e_i^\top G e_j)^2=3\).
+The complement probabilities tend to zero, so bounded test functions
+of the statistic and a fixed bounded random variable give the same
+stable limit after removing the cutoffs. The sum being contracted
+equals \(2V_\pi\), and \(\sqrt N=\sqrt T\,h^{-1/2}\), giving the
+stated stable variance. The case \(T=0\) is immediate.
+\end{proof}
+
+\subsection{Rational rotation and signed area}
+
+\begin{theorem}\label{m3:triangle}
+For the oriented triangle \(x\to y\to z\to x\) in \(\mathcal P\), write
+\(a=B(x,y)\), \(b=B(x,z)\), \(c=B(y,z)\), \(L=1+a+b+c\), and
+\(\mathcal D=1+2abc-a^2-b^2-c^2\). Define
+\[
+ N=(I+xz^{-1})(I+zy^{-1})(I+yx^{-1}),\qquad
+ D_0=8(1+a)(1+b)(1+c).
+\]
+The spin return is \(N/\sqrt{D_0}\). The Thomas--Wigner return acting
+on \(T_x\mathcal P\) is
+\begin{equation}
+ V\longmapsto \frac{NVN^\dagger}{D_0}
+       = N V x^{-1}N^{-1}x .
+ \label{m3:rational-rotation}
+\end{equation}
+This is a rational expression in the three vertices and is covariant
+under all Lorentz congruences. The skew operator in the spin stabilizer
+normalized by its scalar part is \(N/(2L)-I\). The rotation fixes
+the plane normal and acts in the oriented plane through the signed
+angle \(-\mathcal A\), with
+\[
+ \mathcal A=\pi-\alpha-\beta-\gamma,\qquad
+ \tan(\mathcal A/2)=\frac{\sqrt{\mathcal D}}{L},\qquad
+ \cos\mathcal A=\frac{L^2-\mathcal D}{L^2+\mathcal D}.
+\]
+Here \(\mathcal A\) is the Riemannian area and
+\(\alpha,\beta,\gamma\) are the interior angles of a nondegenerate
+triangle. Collinear or repeated vertices give \(\mathcal D=\mathcal A=0\)
+and identity return.
+\end{theorem}
+\begin{proof}
+Proposition~\ref{m3:transport} gives the product and its normalization,
+with every denominator positive. Since the spin product fixes \(x\)
+by congruence, \(NxN^\dagger=D_0x\), giving the other rational formula.
+Under \(x\mapsto gxg^\dagger\) every relative matrix transforms by
+\(u\mapsto gug^{-1}\), proving covariance. The return is the residual
+rotation of the composed transvections: \(A_{zx}^{-1}A_{zy}A_{yx}\);
+this specifies the order and orientation of the Thomas--Wigner
+rotation.
+
+For the computation move \(x\) to \(I\) by congruence and write
+\(y=aI+u\cdot\sigma,\ z=bI+v\cdot\sigma\). Expand
+\[
+ \begin{aligned}
+ N&=(I+z^{-1})(I+y)+(I+z)(I+y^{-1})\\
+  &=2\bigl(L I+i(u\times v)\cdot\sigma\bigr).
+ \end{aligned}
+\]
+Here \(u\cdot v=ab-c\). Hence
+\(|u\times v|^2=(a^2-1)(b^2-1)-(ab-c)^2=\mathcal D\).
+The determinant is \(4(L^2+\mathcal D)=D_0\).
+Since \(L>0\), the spin scalar part is positive.
+The Pauli identity gives
+\([i n\cdot\sigma,w\cdot\sigma]=-2(n\times w)\cdot\sigma\);
+therefore the rotation angle measured about
+\(n=(u\times v)/|u\times v|\) is
+\(-2\arctan(\sqrt{\mathcal D}/L)\) in \((-\pi,0)\) if \(u,v\)
+are independent. If they are dependent the expression is the identity.
+The plane is the intersection of \(\mathcal P\) with the real span of
+\(x,y,z\). It is totally geodesic by the radial formula and has a
+constant ambient normal.
+
+For the area calculation use hyperbolic polar coordinates \((r,\theta)\)
+in that plane about a point outside the disk. The positively oriented
+orthonormal frame \(\partial_r,(\sinh r)^{-1}\partial_\theta\)
+has connection form \(\omega=\cosh r\,d\theta\), defined by
+\(\nabla e_1=\omega e_2\); this follows by differentiating the
+polar parametrization, projecting tangentially and pairing with
+\(e_2\). Thus \(d\omega=\sinh r\,dr\wedge d\theta\) is the area
+form. A parallel vector's angle in this frame changes by
+\(-\int\omega\). The same holds for the tangent on each edge,
+with corner turns \(\pi-\alpha,\pi-\beta,\pi-\gamma\).
+The tangent has total winding one in any oriented frame extending
+over the disk. To see this, project to Klein coordinates where the
+sides are straight, and compare the two frames by a map of the
+disk into the positive-determinant linear group. Its boundary
+loop is homotopic to a constant, and the Euclidean triangular
+tangent has winding one when the positive corner turns are included.
+Stokes gives \(2\pi=-\mathcal A+3\pi-\alpha-\beta-\gamma\).
+In particular \(0<\mathcal A<\pi\), so the two angle representatives
+agree. This proves the area-defect law and the exact branch of the
+rotation. It extends Theorem~\ref{thm:triangle} with the curvature sign
+reversed. The identification of the Wigner angle with an anholonomy, equal to the area defect of a triangle in rapidity space, is classical
+\cite{m3Aravind,m3RhodesSemon}, and the gyrogroup formalism of Ungar expresses the Thomas rotation through Einstein addition
+\cite{m3Ungar88,m3Ungar97}; we make no priority claim.  The matrix formula uses a chosen triangle vertex as the base of transport and no
+preferred rest frame.
+\end{proof}
+
+\begin{example}\label{m3:triangleExample}
+Take \(x=I\) and the two vertices
+\(y=(5I+3\sigma_1)/4\) and \(z=(5I+3\sigma_2)/4\).
+They give \(a=b=5/4\), \(c=25/16\), \(L=81/16\), and
+\(\sqrt{\mathcal D}=9/16\). Thus
+\(\mathcal A=2\arctan(1/9)\) and \(\cos\mathcal A=40/41\).
+The axis at \(x\) is \(\sigma_3\), with negative rotation under
+the displayed ordering. The first half-displacement has coefficients
+\(3/(2\sqrt2)\) and \(1/(2\sqrt2)\) in \(I,\sigma_1\);
+its normalization is irrational although the return on vectors
+is rational. Substitution into Theorem~\ref{m3:triangle} gives
+each value.
+\end{example}
+
+\begin{remark}[spherical excess and hyperbolic defect]\label{m3:twocolumn}
+Theorem~\ref{thm:triangle} and Theorem~\ref{m3:triangle} are the two signs of one statement.  With $c$ the cosine of the
+distance on the unit sphere and $\cosh$ of the distance on $\mathcal P$:
+\begin{center}\small
+\begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
+\emph{Sphere} (Theorem~\ref{thm:triangle}, great $2$-sphere of $S^3$) & \emph{Hyperbolic plane} (Theorem~\ref{m3:triangle}, plane of $\mathcal P$)\\[2pt]
+$\tan\frac E2=\dfrac{\lVert x\wedge y\wedge z\rVert}{1+c_{xy}+c_{yz}+c_{zx}}$ &
+$\tan\frac{\mathcal A}2=\dfrac{\sqrt{\mathcal D}}{1+a+b+c}$, $\mathcal D$ the Lorentz Gram determinant\\[4pt]
+excess $E=\alpha+\beta+\gamma-\pi$ & defect $\mathcal A=\pi-\alpha-\beta-\gamma$\\
+holonomy of $x\to y\to z\to x$: rotation through $+E$ & Thomas--Wigner return: rotation through $-\mathcal A$\\
+spin holonomy $\cos\frac E2+\sin\frac E2\,\nu\bar x$ & spin return $\cos\frac{\mathcal A}2+i\sin\frac{\mathcal A}2\,n\cdot\sigma$\\
+$\arg\operatorname{Tr}(P_1P_2P_3)=+\Omega/2$, geometric phase $-\Omega/2$ & no projector reading; the return acts on velocities\\
+antipodal pairs excluded & every pair has a unique geodesic
+\end{tabular}
+\end{center}
+In both columns the rotation angle equals the integral of the Gaussian curvature ($+1$, resp.\ $-1$) over the triangle, and the
+formula is rational in the three vertices once the half-angle is eliminated (\eqref{m3:rational-rotation}; Example~\ref{m3:triangleExample}) ($\cos E=\dots$ in Theorem~\ref{thm:triangle},
+$\cos\mathcal A=(L^2-\mathcal D)/(L^2+\mathcal D)$ here).  The spin factors carry the half-angles.
+\end{remark}
+
+\begin{proposition}\label{m3:finite}
+On a finite shellable polygonal disk mapped by vertices to \(\mathcal P\),
+give an edge from \(p\) to \(q\) the spin factor \(A_{qp}\).
+The boundary return is the ordered product of face returns
+conjugated by transports to their base vertices, using the
+shelling order of Theorem~\ref{thm:stokes}. This identity also
+holds for arbitrary group-valued edge cochains with inverse
+reversal. For geodesically triangulated disks the spin angle
+\(2\arccos(\tfrac12\operatorname{tr}H)\) of the boundary return is
+bounded by the sum of unsigned triangle areas. In a common
+oriented hyperbolic plane the returns commute after rebasing,
+and the rotation angle is minus the signed area sum modulo \(2\pi\),
+with corresponding spin angle parameter modulo \(4\pi\).
+\end{proposition}
+\begin{proof}
+Each face attachment replaces an interface path \(\alpha\) from
+\(a\) to \(b\) by the complementary path \(\rho\) from \(a\) to
+\(b\). If the old boundary has path \(\tau\) from its base to
+\(a\), the new boundary word inserts the based loop
+\(\tau*\rho*\bar\alpha*\bar\tau\) before the old boundary.
+In the product rule the \(\bar\alpha,\alpha\) and
+\(\bar\tau,\tau\) cancel. Induction gives the ordered identity,
+with rebasing if the attachment meets the base. Equivalently one
+can use the cut identity of Lemma~\ref{lem:cut}, which works in
+any group. The face returns, after rebasing, lie in the compact
+spin stabilizer of the boundary base. There the round distance
+from the identity is \(\arccos(\operatorname{tr}H/2)\) and is
+bi-invariant. Apply the triangle inequality and
+Theorem~\ref{m3:triangle}. In a common plane all edge transports
+fix the constant ambient normal. Rebasing preserves this normal
+and the orientation, so all face returns lie in the same spin
+circle. Their parameters add. The abelian face-sum identity is
+also valid in every abelian edge cochain by interior-edge
+cancellation.
+\end{proof}
+
+\begin{proposition}\label{m3:gauge}
+On a finite connected graph with group-valued comparison factors
+\(U_{qp}=U_{pq}^{-1}\), choose a spanning tree and a root \(r\).
+Base-preserving gauges \(g_r=I\), acting as
+\(U_{qp}\mapsto g_q^{-1}U_{qp}g_p\), have a unique representative
+with all tree factors trivial. The off-tree factors of that
+representative are exactly the returns of the fundamental loops
+based at \(r\). Free root gauges give simultaneous conjugation.
+On a shellable disk, flatness on the faces is equivalent to
+\(U_{qp}=X_q X_p^{-1}\), with the potential unique up to
+a common right multiplier.
+\end{proposition}
+\begin{proof}
+Set \(g_p\) equal to the product along the unique tree path from
+\(r\) to \(p\). This kills the tree factors. Any other normalized
+gauge killing the tree factors obeys the same recursion along
+these paths. For a chord the resulting expression goes along
+the tree to its tail, crosses it and returns along the tree.
+Changing the root gauge follows by allowing a common right
+multiplier in the gauge. For a disk, build the vertex potential
+along the first face and then each new complementary boundary
+path of a shelling. Flatness identifies its product with that
+of the interface, which agrees with the existing endpoint
+values. This defines all vertex values consistently. A potential
+telescopes around every face, and the ratio of two potentials
+is constant along all edges. This specializes to the anchored
+\(U(1)\) phase calculation and extends
+Corollary~\ref{cor:poincare}. For example, on a cyclic square with
+edge factors \((1,1,1,i)\), a gauge acting as \(g_q U_{qp}g_p^{-1}\)
+with successive vertex values \((1,i,-1,-i)\) changes them to
+\((i,i,i,-1)\) and keeps return \(i\). This is the inverse
+parameter convention for the same action.
+\end{proof}
+
+\begin{theorem}\label{m3:product}
+For a piecewise \(C^3\) path \(x\), put
+\(\lambda=\dot x x^{-1}\) and solve \(\dot U=\tfrac12\lambda U\),
+\(U(0)=I\). Congruence by \(U(t)\) is Levi-Civita transport.
+The ordered product of arc factors for any partition of mesh
+\(\delta\) differs from \(U(T)\) by \(O(\delta^2)\), including
+partitions that cross the finitely many breaks.
+The full displacements \(x_{k+1}x_k^{-1}\) telescope and their
+product integral has coefficient \(\lambda\).
+For any group-valued connection written \(\dot U=A(\dot x)U\),
+the oriented small square has logarithmic return
+\[
+ h^2(\partial_1 A_2-\partial_2 A_1-[A_1,A_2])+O(h^3)
+\]
+for \(C^2\) coefficients and midpoint exponential edges.
+For the spin connection on \(\mathcal P\),
+\(A=dx\,x^{-1}/2\), and its curvature is
+\(\mathcal F_{12}=\tfrac14[\lambda_1,\lambda_2]\),
+where \(\lambda_i=\partial_i x\,x^{-1}\).
+\end{theorem}
+\begin{proof}
+Since \(Ax+xA^\dagger=dx\), the solution carries \(x(0)\)
+to \(x(t)\) by congruence. For a Hermitian tangent \(V\),
+differentiation of this congruence gives
+\(V'=(x'x^{-1}V+Vx^{-1}x')/2\).
+In coordinates sending \(x\) to \(I\), both tangent matrices are
+traceless Hermitian and their symmetrized product is scalar.
+Thus \(V'=g(x',V)x\), which is the parallel equation.
+The determinants of the factors and the ODE solution are one
+because the generators are traceless.
+
+On an interval of length \(\ell\) within one smooth piece, twice
+iterating the integral equation for \(W'=\lambda W\), \(W=I\)
+at the initial point, gives
+\(W=I+\ell\lambda_m+\ell^2\lambda_m^2/2+O(\ell^3)\),
+where \(\lambda_m\) is evaluated at the midpoint. For the single
+integral use the midpoint error, and in the double integral
+replacing either coefficient by \(\lambda_m\) incurs \(O(\ell^3)\);
+higher iterates have that order by the exponential norm bound.
+Here \(W=x_{\rm end}x_{\rm start}^{-1}\).
+The series for the square root gives
+\(I+\ell\lambda_m/2+\ell^2\lambda_m^2/8+O(\ell^3)\),
+which is the same expansion for the spin ODE.
+Across a break both steps equal
+\(I+\tfrac12\int\lambda+O(\ell^2)\).
+For small mesh every factor has norm at most \(1+C\ell\),
+so intermediate products have norm at most \(e^{CT}\).
+Telescoping the difference gives \(O(\sum\ell^3)\) plus
+\(O(\delta^2)\) for the finitely many break intervals.
+The full-displacement formula follows by cancellation and
+differentiation. More generally left or midpoint tags
+give respectively first- or second-order product integration
+for \(C^2\) coefficients by the same expansions.
+This transfers Theorems~\ref{thm:ftc} and \ref{thm:continuum}.
+
+For midpoint exponential edges expand the four exponentials to
+degree two in \(h\), in traversal order acting on the left.
+The first-order terms sum to
+\(h^2(\partial_1A_2-\partial_2A_1)+O(h^3)\).
+At degree two the undifferentiated coefficients are
+\(e^{-hA_2}e^{-hA_1}e^{hA_2}e^{hA_1}\), whose quadratic term
+is \(-h^2[A_1,A_2]\). The logarithm has the same expansion
+since the first-order term cancels. This is the sign convention of
+Proposition~\ref{prop:plaquette}. Differentiating \(x^{-1}\)
+shows \(\partial_1\lambda_2-\partial_2\lambda_1=[\lambda_1,\lambda_2]\),
+giving the curvature formula. Locally a flat coefficient satisfies
+\(A=dU\,U^{-1}\): solve in the first coordinate after solving on
+the transverse edge, and differentiate to see that the residual
+in the second equation satisfies a homogeneous linear equation
+with zero initial value. Conversely differentiation gives zero
+curvature for \(dU\,U^{-1}\).
+\end{proof}
+
+\begin{proposition}\label{m3:areaBound}
+For a \(C^3\) filling \(x=F(u,v)\) of the square, with boundary
+spin return \(H\), write \(\Theta(H)=2\arccos(\operatorname{tr}H/2)\).
+Then
+\[
+ \Theta(H)\le\int_{[0,1]^2}|F_u\wedge F_v|_g\,du\,dv .
+\]
+Equality and rank two on a dense subset force the image into a
+totally geodesic plane. A positively oriented Jordan disk in a
+totally geodesic plane, with piecewise \(C^1\) boundary and area
+\(A_\Sigma\), has spin return \(\exp(iA_\Sigma n\cdot\sigma/2)\)
+in coordinates with base \(I\) and positively oriented unit normal
+\(n\). Thus it attains equality when \(A_\Sigma\le2\pi\), and any
+square parametrization of such a disk with area \(A_\Sigma\) minimizes
+area among the stated fillings of its oriented boundary.
+\end{proposition}
+\begin{proof}
+Use the spin connection of Theorem~\ref{m3:product}. Let \(G(v,u)\)
+be the transport up the left side then across the row to \((u,v)\).
+Let \(Q(v)\) be the return around the rectangle of height \(v\)
+based at \((0,0)\) with positive orientation. Write \(Q=G(v,1)^{-1}K\),
+where \(K\) is the transport across the bottom then up the right side.
+From \(G_u=A_1G\), set \(Z=G_vG^{-1}-A_2\) and differentiate
+to obtain \(Z_u=-\mathcal F_{12}+[A_1,Z]\), \(Z(v,0)=0\).
+Multiplying by the inverse adjoint action of \(G\) integrates
+this equation in \(u\). Using \(K_v=A_2(v,1)K\) then gives
+\[
+ Q'=WQ,\qquad
+ W(v)=\int_0^1 G(v,u)^{-1}\mathcal F_{12}(u,v)G(v,u)\,du .
+\]
+After moving the point \(F(u,v)\) to \(I\), the two \(\lambda_i\)
+are \(a\cdot\sigma,b\cdot\sigma\), and \(\mathcal F_{12}\)
+is \(i(a\times b)\cdot\sigma/2\).
+Its norm in the spin stabilizer is \(|F_u\wedge F_v|_g/2\);
+conjugation by \(G^{-1}\) preserves that norm between stabilizers.
+The round distance bound for \(Q(1)\) by its length and the integral
+triangle inequality prove the assertion. The grid products of
+Proposition~\ref{m3:finite} converge to the same return by the
+boundary estimate of Theorem~\ref{m3:product}. This is the
+hyperbolic version of Lemma~\ref{lem:comb}.
+
+In the positive-area equality case the curve \(Q\) is a minimizing
+round geodesic up to monotone reparametrization, including the
+antipodal case. Thus \(W\) is everywhere a nonnegative multiple
+of one fixed unit generator \(Z_0\). Equality in the integral
+triangle inequality, first row by row by continuity and then
+pointwise by taking the inner product with \(Z_0\), makes each
+transported \(\mathcal F_{12}\) a nonnegative multiple of \(Z_0\).
+Where \(F\) has rank two, its oriented unit normal is therefore
+the Levi-Civita transport of the corresponding initial normal
+along the path defining \(G\). The transported normal has unit
+length and is orthogonal to \(F_u,F_v\) by density. As an ambient
+field \(\nu\) it is parallel along each row and on the left edge,
+so \(\partial_u\nu=g(F_u,\nu)F=0\) and
+\(\partial_v\nu|_{u=0}=g(F_v,\nu)F|_{u=0}=0\).
+Consequently \(\nu\) is constant and \(F\) lies in \(\nu^\perp\).
+Rank two somewhere guarantees positive area. With the rank
+condition removed, an out-and-back loop on three independent
+radial segments has trivial holonomy and a zero-area filling
+and need not be planar. One can fill the loop by a disk collapsing
+onto the three segments, using three smooth nonoverlapping
+radial bumps on the parameter disk and extending them by zero.
+
+For the planar formula, the oriented frame used in
+Theorem~\ref{m3:triangle} extends over the disk. In the spin frame
+lifting it, the rotation parameter accumulates continuously as
+\(-\int\omega\), with no extra central sign because the frame
+extends over the disk. Stokes gives \(-A_\Sigma\); the Pauli
+sign convention gives the displayed spin return. Green's theorem
+also applies to a piecewise \(C^1\) rectifiable Jordan boundary.
+The minimizing claim follows from the bound and the exact
+planar angle at \(A_\Sigma\le2\pi\). This transfers
+Theorem~\ref{thm:disk}, Corollary~\ref{cor:convex}, and
+Proposition~\ref{prop:converse} with the negative curvature sign.
+\end{proof}
+
+\begin{proposition}\label{m3:charts}
+For \(R=r\cdot\sigma\), \(|r|<1\), the Cayley chart and its inverse are
+\[
+ x=(I+R)(I-R)^{-1}=\frac{(1+|r|^2)I+2R}{1-|r|^2},
+ \qquad R=(x-I)(x+I)^{-1}.
+\]
+They are global rational coordinates, with metric
+\(4|dr|^2/(1-|r|^2)^2\). In particular for \(|r|,|s|\le R_0<1\),
+\(2|r-s|\le d(x(r),x(s))\le 2|r-s|/(1-R_0^2)\).
+The formulas for comparisons, positive or signed sagittas,
+symmetries, recurrences, the tangent transport, triangle cosine
+and polygonal vector holonomy preserve rational coordinates.
+For relative matrices \(u=yx^{-1}\) set \(L(u)=(u-I)(u+I)^{-1}\).
+For \(C^3\) paths the forward and centered difference quotients
+\[
+ \tfrac2h L(x(t+h)x(t)^{-1}),\qquad
+ \tfrac1h L(x(t+h)x(t-h)^{-1})
+\]
+equal \(\lambda+O(h)\) and \(\lambda+O(h^2)\), respectively.
+Cayley inversion integrates a sampled quotient exactly, and
+rational time steps preserve rationality.
+\end{proposition}
+\begin{proof}
+Use \(R^2=|r|^2I\) and the positive eigenvalues of \(x\).
+Writing \(r=\rho n\), the polar distance is
+\(2\operatorname{arctanh}\rho\), and the Klein coordinate is
+\(2r/(1+|r|^2)\) by taking the spatial coordinate over the time
+coordinate. The unit sphere is at infinite radial distance.
+Substituting the polar distance into
+\(dt^2+\sinh^2t\,dn^2\) gives the metric, also at zero by
+continuity. Integrate the lower pointwise bound on every curve
+and the upper bound on the Euclidean segment. Rational data
+are dense by rational approximation of \(r\), and inverses of
+determinant-one matrices are polynomial in the entries.
+The formulas above are rational over \(\Q\) in the four Pauli
+coordinates. In particular no spin square root is needed in
+vector holonomy. Relative matrix products can be expressed in
+the chart whenever \(uv+I\) is invertible by
+\((uv-I)(uv+I)^{-1}\); the product of positive Hermitian points
+does not in general stay in the Hermitian chart.
+For finite differences, \(L(e^Z)=Z/2+O(\|Z\|^3)\), by its power
+series. The forward relative logarithm is \(h\lambda+O(h^2)\).
+The centered relative matrix at \(-h\) is the inverse of that
+at \(h\), so its logarithm is odd with derivative \(2\lambda\)
+at zero. The inverse Cayley formula gives exact reconstruction.
+For a differential equation with per-step exponential increment
+\(e^Z\), the Cayley increment with tangent \(Z/2\) differs by
+\(O(\|Z\|^3)\); combining with Theorem~\ref{m3:product} gives
+the left and midpoint accuracy for smooth coefficients.
+These are the replacements for
+Proposition~\ref{prop:cayley}, Theorem~\ref{thm:rational},
+and Proposition~\ref{prop:ratdq}.
+\end{proof}
+
+\begin{remark}[transfer table]\label{m3:transfer}
+Each result of Part~\ref{part:arc} and its counterpart on $\mathcal P$.  ``Verbatim'' means the same statement with $\cosh$ for $\cos$ and
+$\mathcal P$ for $S^3$; ``sign'' means that a second-order term or the curvature changes sign; ``exception removed'' means that an
+antipodal or critical-step restriction of the spherical statement disappears.  The heap operation itself does not transfer: on
+$\mathcal P$ only the symmetry $xy^{-1}x$ and congruence transport close (Theorem~\ref{m3:hyperboloid}).
+\begin{center}\footnotesize
+\begin{tabular}{p{0.2\textwidth}p{0.27\textwidth}p{0.45\textwidth}}
+Part~\ref{part:arc} & On $\mathcal P$ & Change\\ \hline
+Def.~\ref{def:arc} & Thm.~\ref{m3:hyperboloid} & exception removed (no antipode); sagitta $v=1-c\le0$, use $w=\cosh d-1\ge0$ (sign)\\
+Thm.~\ref{thm:recur} & Thm.~\ref{m3:recurrence} & verbatim (Chebyshev form, $c=\cosh\varepsilon\ge1$); acceleration $+2wx_n$ outward (sign)\\
+Thm.~\ref{thm:action} & Thm.~\ref{m3:action} & bound $N(\cosh(\Theta/N)-1)$; no restriction $\Theta<\pi$ and no critical-step exception (exception removed)\\
+Thm.~\ref{thm:consist} & Thm.~\ref{m3:action} & cubic term $+\tfrac12h^3e'x$ (sign); centred residual verbatim\\
+Prop.~\ref{prop:split} & Prop.~\ref{m3:sagitta} & $y-x=$ tangent part $+\,wx$ (sign)\\
+Thm.~\ref{thm:sagitta} & Prop.~\ref{m3:sagitta} & limits verbatim; two-sided bounds with $\cosh D$; outward radial term (sign)\\
+Prop.~\ref{prop:clt} & Prop.~\ref{m3:brownian} & same limits $\tfrac32T$, $\mathcal N(0,\tfrac32T^2)$; $\mathbb EV=N(e^{3h/2}-1)$ and bias $+9T^2/(8N)$ (sign)\\
+Thm.~\ref{thm:ftc} & Thm.~\ref{m3:product} & verbatim, $\lambda=\dot xx^{-1}$\\
+Lemmas~\ref{lem:cut}, \ref{lem:glue} & --- & verbatim (topological)\\
+Thm.~\ref{thm:stokes}, Prop.~\ref{prop:grid} & Prop.~\ref{m3:finite} & verbatim (any group-valued cochain)\\
+Cor.~\ref{cor:poincare} & Prop.~\ref{m3:gauge} & verbatim\\
+Prop.~\ref{prop:plaquette} & Thm.~\ref{m3:product} & verbatim; $\mathcal F_{12}=\tfrac14[\lambda_1,\lambda_2]$, curvature $-1$ (sign)\\
+Thm.~\ref{thm:triangle} & Thm.~\ref{m3:triangle} & rotation $-\mathcal A$ for $+E$ (sign); pairwise non-antipodality not needed (exception removed)\\
+Lemma~\ref{lem:sign} & proof of Thm.~\ref{m3:triangle} & verbatim: normal $u\times v$ of the plane of the triangle\\
+Cor.~\ref{cor:excess} & Prop.~\ref{m3:finite} & bound by the sum of areas verbatim; Gauss--Bonnet with $-\sum\mathcal A_T$ (sign)\\
+Thm.~\ref{thm:continuum} & Thm.~\ref{m3:product} & verbatim ($\dot U=\tfrac12\lambda U$ is Levi-Civita transport)\\
+Cor.~\ref{cor:area} & Prop.~\ref{m3:areaBound} & verbatim\\
+Thm.~\ref{thm:disk} & Prop.~\ref{m3:areaBound} & $\exp(iA\,n\cdot\sigma/2)$, rotation $-A$ (sign)\\
+Cor.~\ref{cor:convex} & Prop.~\ref{m3:areaBound} & verbatim ($A\le2\pi$)\\
+Lemma~\ref{lem:comb} & proof of Prop.~\ref{m3:areaBound} & verbatim (any Lie group)\\
+Prop.~\ref{prop:converse} & Prop.~\ref{m3:areaBound} & verbatim, totally geodesic plane for great sphere; antipodal spin endpoint included\\
+Prop.~\ref{prop:cayley} & Prop.~\ref{m3:charts} & global chart, no excluded point (exception removed); Poincar\'e-ball metric\\
+Thm.~\ref{thm:rational} & Prop.~\ref{m3:charts} & verbatim for comparisons, symmetries, recurrences, transports; heap products excluded\\
+Prop.~\ref{prop:ratdq} & Prop.~\ref{m3:charts} & verbatim orders $O(h)$, $O(h^2)$
+\end{tabular}
+\end{center}
+\end{remark}
+
+\subsection{Spinor, gauge and timing applications}
+
+\begin{proposition}\label{m3:chiral}
+Put \(X=\sigma_1\), \(Z=\sigma_3\). The calibrated two-component
+Hamiltonian \(H_2=pZ+mX\) has
+\(H_2^2=(p^2+m^2)I\). In units \(\hbar=c_{\rm light}=1\), for
+\(E=\sqrt{p^2+m^2}>0\) its propagator is
+\[
+ e^{-itH_2}=\cos(Et)I-i\sin(Et)H_2/E .
+\]
+Starting in the \(+1\) eigenspace of \(Z\), the probability of the
+\(-1\) reading is \(m^2\sin^2(Et)/E^2\). At \(E=0\) the
+propagator is identity and the transition probability is zero.
+In the Weyl basis the free four-component Hamiltonian has
+diagonal blocks \(-p\cdot\sigma,p\cdot\sigma\) and off-diagonal
+blocks \(mI\). It squares to \((|p|^2+m^2)I\), decouples the
+chiral sectors at \(m=0\), and has energies \(\pm\sqrt{|p|^2+m^2}\).
+\end{proposition}
+\begin{proof}
+The two Pauli matrices are self-adjoint involutions and anticommute.
+Expand the square and separate even and odd terms of the exponential.
+In the \(Z\)-basis the off-diagonal amplitude is
+\(-im\sin(Et)/E\). In the Weyl block matrix, off-diagonal
+terms of the square cancel because its diagonal blocks are opposite.
+Both diagonal blocks of the square are
+\((|p|^2+m^2)I\). When the energy is positive the two eigenvalues
+occur because the trace is zero. See \cite{m3Dirac,m3Hestenes}
+for the free relativistic spinor context. The mass coupling scale
+at rest is \(mc_{\rm light}^2/\hbar\); a cross term between energy
+signs has angular frequency \(2E/\hbar\), hence rest scale
+\(2mc_{\rm light}^2/\hbar\) for \(m>0\). Such a term in a given
+observable requires a nonzero cross matrix element. The
+checkerboard turn weight \(i\varepsilon mc_{\rm light}^2/\hbar\)
+with step \(\varepsilon\) is a complex amplitude in that path model
+\cite{m3FeynmanHibbs}.
+\end{proof}
+
+\begin{proposition}\label{m3:physicalGauge}
+In a unital ring, \(Uf=f' U\) gives
+\([U,f]=(f'-f)U\). For a \(C^2\) matrix connection with
+\(D_\mu=\partial_\mu+C_\mu\), the multiplication operator
+\([D_\mu,D_\nu]\) is
+\(F_{\mu\nu}=\partial_\mu C_\nu-\partial_\nu C_\mu+[C_\mu,C_\nu]\).
+Actual transport \(U'=-C(\dot x)U\) around the oriented coordinate
+rectangle with sides \(s,t\ge0\) has return
+\(I-stF_{\mu\nu}+O((s+t)^3)\), uniformly for small \(s,t\) at
+a fixed base. If \(C=-iq A^{\rm phys}/\hbar\) is abelian, the return
+is \(\exp(iq\oint A^{\rm phys}/\hbar)\), and the integral equals
+flux when the loop bounds a surface in the domain of a smooth
+potential. For a free base gauge the return transforms by
+conjugation and its trace is invariant.
+\end{proposition}
+\begin{proof}
+The ring identity follows by subtracting \(fU\). Expanding on a
+test section cancels the mixed derivatives and the terms with one
+derivative on that section. For the actual edges, the integral
+equation gives, on a signed coordinate step \(\ell e_j\) at \(y\),
+\[
+ U_j(y,\ell)=I-\ell C_j(y)
+      +\tfrac12\ell^2(C_j(y)^2-\partial_j C_j(y))+O(|\ell|^3).
+\]
+Indeed the once-integrated term uses the second-derivative bound,
+the twice-integrated term differs from its constant-coefficient
+value by \(O(|\ell|^3)\), and the later ordered integrals are
+bounded by the exponential series tail on a fixed compact ball.
+In the product of four edges, first-order terms cancel. Write
+\(a=C_\mu(x)\), \(b=C_\nu(x)\). Taylor expansion to the common
+base gives a sum of single-edge quadratic terms
+\(s^2a^2+t^2b^2+st(\partial_\nu a-\partial_\mu b)\).
+The ordered products of linear terms give
+\(-s^2a^2-t^2b^2+st(ba-ab)\).
+All discarded terms are bounded by a constant times \((s+t)^3\)
+because the four factors are bounded. This proves the return
+and also the corresponding exponential expansion.
+Abelian integration solves the transport equation explicitly;
+apply ordinary Stokes for the flux statement. Gauge covariance
+is cancellation of the adjacent gauge factors. These formulas
+give the local plaquette and loop observables used in the gauge
+setting of Paper II \cite{Companion}.
+See also \cite{m3AharonovBohm,m3Wilson}.
+\end{proof}
+
+\begin{proposition}\label{m3:timing}
+For normalized solutions of
+\(i\hbar\dot\psi=H(t)\psi\) with a calibrated self-adjoint matrix
+\(H(t)\), the Fubini--Study speed for the convention
+\(\arccos|\langle\psi,\phi\rangle|\) is \(\Delta H/\hbar\).
+An orthogonal record requires integrated speed at least \(\pi/2\).
+A record chain with each successive pair orthogonal and speed
+bounded by \(E_{\max}/\hbar>0\) has at most
+\(2E_{\max}T/(\pi\hbar)\) such transitions in duration \(T\).
+For a constant \(H\) with lowest energy \(E_0\), orthogonalization
+also requires \(t\ge\pi\hbar/(2(\langle H\rangle-E_0))\)
+when the denominator is positive.
+\end{proposition}
+\begin{proof}
+The norm of
+\(\dot\psi-\psi\langle\psi,\dot\psi\rangle\) is
+\(\Delta H/\hbar\) by self-adjointness. This norm gives
+the metric speed by the expansion of
+\(|\langle\psi(t),\psi(t+h)\rangle|^2\) to second order.
+The projective angle is bounded by length: choose a horizontal
+unit-sphere lift of the path by integrating its phase derivative,
+use the real spherical distance bound, and minimize the
+endpoint spherical distance over phase. The record count follows
+by summing the orthogonal angle bound. For constant \(H\),
+shift \(E_0\) to zero and expand in an eigenbasis. For \(x\ge0\),
+\(\cos x\ge 1-2(x+\sin x)/\pi\): on \([0,\pi]\) the difference
+vanishes at the endpoints and its derivative changes sign once
+from positive to negative, since
+\(\sin x/(1+\cos x)=\tan(x/2)\) rises from zero to infinity.
+On \([\pi,\infty)\), \(x+\sin x\ge\pi\) by monotonicity.
+At orthogonalization the real and imaginary parts of the survival
+amplitude vanish. Averaging the inequality over spectral weights
+gives the energy bound. If \(\langle H\rangle=E_0\) the state
+stays on its eigenray. These are the Mandelstam--Tamm and
+Margolus--Levitin bounds \cite{m3MT,m3ML}. They use a calibrated
+Hamiltonian. The Lorentzian length and hyperbolic area formulas
+above use their own metric and transport inputs.
+\end{proof}
+
+\begin{conjecture}\label{m3:leastArea}
+Let a rectifiable Jordan loop in \(\mathcal P\) admit a Lipschitz disk
+filling with weakly monotone boundary trace. If the infimum of
+areas of such fillings equals its positive spin angle, then the
+loop lies in a totally geodesic plane. Proposition~\ref{m3:areaBound}
+gives the implication when the common value is attained by a
+\(C^3\) filling of dense rank two. Extending the proof requires
+control of transport and the equality argument at the regularity
+of an area minimizer.  The spherical counterpart is Q4 of Section~\ref{sec:open}.
+\end{conjecture}
+
+\begin{remark}\label{m3:programme}
+The group classification outside dimension three asks which
+invariant quadratic Lie algebras admit a continuous global
+extension of \(F(2h(X,X))\) from the exponential image
+subject to duplication. In dimension three, dropping global
+analyticity asks how continuity and squaring constrain comparison
+values in the lifted nonexponential regions. The kinematic model
+also leaves dynamics open. A field interpretation of the
+curvature would require a specified connection and action,
+a field equation, and observables that distinguish that equation
+from other dynamics with the same kinematic comparison and
+loop holonomy.
+\end{remark}
+
+% ---- insertion point: further section of Part "Beyond the axiom" (module d4), numbered 5C
 \setcounter{section}{5}
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\theHsection}{\arabic{section}}
@@ -3939,6 +5368,8 @@ Thm.~\ref{m1:chordal}, Prop.~\ref{m1:sharp} & Simplicial vertices: Dirac \cite{m
 Thm.~\ref{m1:gauge}, Prop.~\ref{m1:clique} & Classical in substance (edge-path group \cite{m1:Spanier}, spanning-tree coordinates \cite{Levy10}); the filling estimate elementary\\
 Props.~\ref{m1:gram}, \ref{m1:distance}, \ref{m1:near-gram} & Classical ingredients \cite{m1:Schoenberg,m1:JordanVonNeumann,m1:Grone}; Prop.~\ref{m1:near-gram} elementary\\
 Thm.~\ref{m2:classification} & Classical in substance \cite{Loos,Helgason,Wang52,Cartan26,Besse78}; new: axiomatisation by the round-trip law with continuous $\kappa$ (Rem.~\ref{m2:placement})\\
+Thm.~\ref{m3:classification} & Lie-theoretic ingredients classical \cite{Helgason}; the classification by Chebyshev comparisons and the counterexamples of Ex.~\ref{m3:obstructions} not found in the searched scope\\
+Thm.~\ref{m3:triangle} & Wigner angle as rapidity-space area: \cite{m3Aravind,m3RhodesSemon,m3Ungar88,m3Ungar97}; rational vertex form, no priority claimed\\
 Thm.~\ref{m2:bargmann}, Thm.~\ref{m2:two-readout} & Identity: expansion with the Bargmann invariant \cite{m2:Bargmann}, Jordan form $U_{2P-1}$ \cite{m2:FK}; the equivalence with $(\Omega2\mathrm d)$ not found in the searched scope\\
 Thm.~\ref{thm:main}, classification by $(\Omega1)$--$(\Omega3)$ & New as a theorem; ingredients classical \cite{Certaine,Gleason52,MZ,Milnor,Knapp}; see Rem.~\ref{rem:dalembert}\\
 Thm.~\ref{thm:noreg}, Cor.~\ref{cor:interference} & Group-level statement not found in the searched scope; Lemmas~\ref{lem:noline}, \ref{lem:circle} not claimed new (possible precursors \cite{Kuczma64,Sharkovskii73}, texts not obtained); Lemma~\ref{lem:elliptic} standard; Cor.~\ref{cor:interference} follows from \cite{Davison08} once compactness is known\\
@@ -4103,7 +5534,7 @@ black box; a formal statement of Theorem~\ref{thm:main} can avoid it by assuming
 
 All identities and limits of Part~\ref{part:arc} that are not textbook facts, and the identities of Part~\ref{part:axiom} used there, were
 checked numerically on random or explicit inputs by the accompanying script \texttt{check\_arc\_calculus.py} (numpy and the
-standard library; 163 checks, eight of them for Part~\ref{part:alg} and six for Section~\ref{sec:m2}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present eleven: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file); everything runs
+standard library; 177 checks, eight of them for Part~\ref{part:alg}, six for Section~\ref{sec:m2} and fourteen for Section~\ref{sec:m3}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present twelve: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file, and one for Section~\ref{sec:m3}); everything runs
 from the directory of this paper.  These include the recurrence and its Chebyshev form, the residual expansion of
 Theorem~\ref{thm:consist}, the inequality of Theorem~\ref{thm:action}, the split and the Brownian limits of
 Theorem~\ref{thm:sagitta} (simulated, $\tfrac32T$ to two decimals), the transport formula of
@@ -4290,6 +5721,29 @@ the complex and qubit statements only.
 No declaration was found for Theorem~\ref{m2:classification}, the quaternionic and Albert formulas of Proposition~\ref{m2:models} and
 Theorem~\ref{m2:bargmann}, or Theorem~\ref{m2:two-readout}.
 
+For Section~\ref{sec:m3} the following declarations were located (no \texttt{sorry} in their files); each is narrower than or adjacent
+to the statement named.
+{\small\raggedright
+\begin{itemize}[leftmargin=1.5em]
+\item Proposition~\ref{m3:frames}, null-cone rigidity: \texttt{D5/S0/Certificates/MinkowskiNullConeRigidity.lean},
+\texttt{null\_cone\_spatial\_rigidity}, \texttt{eq\_smul\_minkowski\_of\_null}, \texttt{exists\_smul\_minkowski\_of\_null}.
+\item Proposition~\ref{m3:trichotomy}: the Chebyshev and complex-structure declarations listed above for Part~\ref{part:alg}, and
+\texttt{EllipticHyperbolicReflectionTrichotomy.lean} (its middle model is zero; the nilpotent case is proved only here).
+\item Example~\ref{m3:proper}, hyperbolic norm: \texttt{D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.lean},
+\texttt{bogoliubov\_norm\_conservation}.
+\item Proposition~\ref{m3:gauge}: \texttt{D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.lean}, \texttt{selected\_tree\_transport},
+and \texttt{anchored\_phase\_classification} (circle-valued).
+\item Proposition~\ref{m3:chiral}: \texttt{D5/S3/Quantum/FiniteDimensional.lean}, \texttt{qubit\_weyl\_star} (the Pauli identities).
+\item Proposition~\ref{m3:physicalGauge}: \texttt{D5/S3/Quantum/Algebra/CovariantCommutator.lean}, \texttt{covariant\_commutator\_formula}.
+\item Proposition~\ref{m3:timing}: \texttt{D5/S3/QuantumBounds/FubiniStudyRecordTime.lean}, \texttt{fsAngle}, \texttt{fs\_angle\_triangle},
+\texttt{record\_time\_lower\_bound}, \texttt{record\_count\_upper\_bound}.
+\item Proposition~\ref{m3:spin}, no continuous section on the rotation circle:
+\texttt{D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.lean}, \texttt{no\_continuous\_global\_section}.
+\item Theorem~\ref{m3:product}, adjacent: \texttt{D5/S3/Quantum/Analysis/TrotterProduct.lean}, \texttt{trotter\_product}.
+\end{itemize}}
+No declaration was found for Theorem~\ref{m3:classification}, the level set of Proposition~\ref{m3:ads}, the spin cover as a Lorentz
+representation, the hyperbolic transport, Theorem~\ref{m3:triangle}, Proposition~\ref{m3:brownian} or Proposition~\ref{m3:areaBound}.
+
 \section{What remains open}\label{sec:open}
 
 \begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2.6em]
@@ -4336,6 +5790,8 @@ normalised face holonomies with curvature.
 \item \emph{Continuous reflections.}  Conjecture~\ref{m2:conjecture}: Theorem~\ref{m2:classification} for a merely continuous reflection
 map on a topological manifold.  Route: a smooth structure making $s$ smooth, constructed from the comparison data, or direct metric
 substitutes for the affine exponential and the compact Lie group steps.
+\item \emph{Indefinite comparisons.}  (a) Conjecture~\ref{m3:leastArea}: the hyperbolic counterpart of Q4.  (b) The programme of
+Remark~\ref{m3:programme}: the indefinite classification outside dimension three, and in dimension three without global analyticity.
 \end{enumerate}
 
 \section*{Use of AI tools}
@@ -4519,6 +5975,22 @@ The authors used AI tools, namely Claude Fable 5.2 and Claude Opus 5.5 (via Clau
 \bibitem{m2:Szabo} Z.~I.~Szab\'o, A short topological proof for the symmetry of $2$ point homogeneous spaces, \emph{Invent. Math.} \textbf{106} (1991), 61--64.
 \bibitem{m2:Chavel} I.~Chavel, On Riemannian symmetric spaces of rank one, \emph{Adv. Math.} \textbf{4} (1970), 236--263.
 \bibitem{m2:Bertram} W.~Bertram, \emph{The Geometry of Jordan and Lie Structures}, Lecture Notes in Math. \textbf{1754}, Springer, Berlin, 2000.
+% Section 5B references (checked 2026-11-20 via Crossref, except O'Neill 1983, Hestenes 1966 (Crossref has the 2015 edition) and Feynman--Hibbs 1965 (Crossref has a review), standard books).
+\bibitem{m3ONeill} B.~O'Neill, \emph{Semi-Riemannian Geometry with Applications to Relativity}, Academic Press, New York, 1983.
+\bibitem{m3RhodesSemon} J.~A.~Rhodes and M.~D.~Semon, Relativistic velocity space, Wigner rotation, and Thomas precession, \emph{Amer. J. Phys.} \textbf{72} (2004), 943--960, arXiv:gr-qc/0501070.
+\bibitem{m3LevyLeblond} J.-M.~L\'evy-Leblond, One more derivation of the Lorentz transformation, \emph{Amer. J. Phys.} \textbf{44} (1976), 271--277.
+\bibitem{m3Mermin} N.~D.~Mermin, Relativity without light, \emph{Amer. J. Phys.} \textbf{52} (1984), 119--124.
+\bibitem{m3Zeeman} E.~C.~Zeeman, Causality implies the Lorentz group, \emph{J. Math. Phys.} \textbf{5} (1964), 490--493.
+\bibitem{m3Dirac} P.~A.~M.~Dirac, The quantum theory of the electron, \emph{Proc. R. Soc. Lond. A} \textbf{117} (1928), 610--624.
+\bibitem{m3Hestenes} D.~Hestenes, \emph{Space-Time Algebra}, Gordon and Breach, 1966.
+\bibitem{m3FeynmanHibbs} R.~P.~Feynman and A.~R.~Hibbs, \emph{Quantum Mechanics and Path Integrals}, McGraw--Hill, 1965, Problem~2--6.
+\bibitem{m3AharonovBohm} Y.~Aharonov and D.~Bohm, Significance of electromagnetic potentials in the quantum theory, \emph{Phys. Rev.} \textbf{115} (1959), 485--491, doi:10.1103/PhysRev.115.485.
+\bibitem{m3Wilson} K.~G.~Wilson, Confinement of quarks, \emph{Phys. Rev. D} \textbf{10} (1974), 2445--2459, doi:10.1103/PhysRevD.10.2445.
+\bibitem{m3MT} L.~Mandelstam and I.~Tamm, The uncertainty relation between energy and time in non-relativistic quantum mechanics, \emph{J. Phys. (USSR)} \textbf{9} (1945), 249--254.
+\bibitem{m3ML} N.~Margolus and L.~B.~Levitin, The maximum speed of dynamical evolution, \emph{Physica D} \textbf{120} (1998), 188--195, arXiv:quant-ph/9710043.
+\bibitem{m3Aravind} P.~K.~Aravind, The Wigner angle as an anholonomy in rapidity space, \emph{Amer. J. Phys.} \textbf{65} (1997), 634--636.
+\bibitem{m3Ungar88} A.~A.~Ungar, Thomas rotation and the parametrization of the Lorentz transformation group, \emph{Found. Phys. Lett.} \textbf{1} (1988), 57--89.
+\bibitem{m3Ungar97} A.~A.~Ungar, Thomas precession: its underlying gyrogroup axioms and their use in hyperbolic geometry and relativistic physics, \emph{Found. Phys.} \textbf{27} (1997), 881--951.
 \end{thebibliography}
 
 \end{document}
