@@ -179,7 +179,7 @@ Now verify each clause of [@cor-complete-diagonal-topological-settlement] direct
    $$
 
 2. **Discontinuity and non-factorization**: The preimage of the discrete open singleton $\{0\} \subseteq \mathrm{Output}$ under $g$ is $g^{-1}(\{0\}) = \{a_2, a_3\}$, which slices straight through the coarse fiber $\{a_0, a_1, a_2\}$ and is not open in $\tau(\operatorname{latent})$; hence $g$ is discontinuous and cannot factor as $h(\operatorname{latent}(a))$.
-3. **Strict refinement upon adjoining $g$**: Forming $\operatorname{conceptJoin}(\operatorname{latent}, g)(a) = (\operatorname{latent}(a), g(a))$ maps $a_0 \mapsto (0, 1)$, $a_1 \mapsto (0, 1)$, $a_2 \mapsto (0, 0)$, and $a_3 \mapsto (1, 0)$. The three-element blind fiber $\{a_0, a_1, a_2\}$ splits cleanly into $\{a_0, a_1\}$ and $\{a_2\}$, strictly refining the partition topology from $2$ nonempty atomic open fibers to $3$!
+3. **Strict refinement upon adjoining $g$**: Forming $\operatorname{conceptJoin}(\operatorname{latent}, g)(a) = (\operatorname{latent}(a), g(a))$ maps $a_0 \mapsto (0, 1)$, $a_1 \mapsto (0, 1)$, $a_2 \mapsto (0, 0)$, and $a_3 \mapsto (1, 0)$. The three-element blind fiber $\{a_0, a_1, a_2\}$ splits cleanly into $\{a_0, a_1\}$ and $\{a_2\}$, strictly refining the partition topology from $2$ nonempty atomic open fibers to $3$! The refinement splits a fiber without raising dimension: both partition topologies live on the same four-point set and have topological dimension $0$ (`manual derivation`).
 :::
 
 ::: {.viz src="sphere-escape" preset="split" height="500"}

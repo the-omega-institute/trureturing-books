@@ -37,6 +37,11 @@ const GIDS = [
   'D5/S3/Quantum/Matrix/NumericalRange.blochPure_norm',
   'D5/S3/Quantum/Matrix/NumericalRange.blochPure_surjective',
   'D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem',
+  'D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_hopf',
+  'D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_mul_phase_left',
+  'D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_mul_phase_right',
+  'D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_one_iff',
+  'D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor',
   'D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum',
   'D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger',
   'D5/S3/Quantum/QubitWitnesses.pauli_observables_have_no_common_eigenvector',
@@ -212,7 +217,7 @@ for (const [file, src] of Object.entries(sources)) {
 }
 check('reserved identifiers are absent from the suite and registry entry', [suite, entryText].every((src) => !identifiers.test(src) && !shortAcronym.test(src) && !cjkTerms.test(src)));
 check(
-  'registration: chapter 39, §39.3, live since 2026-11-19, five cards, the eighteen GIDs, theory links',
+  'registration: chapter 39, §39.3, live since 2026-11-19, five cards, the cited GIDs, theory links',
   !!entry &&
     entry.chapter === 39 &&
     entry.section === SECTION &&
@@ -290,6 +295,15 @@ function verifyInstances(m, label) {
     ga = m.gammaDeg * DEG;
   check(label + ' unit Gram: ⟨ψ₀, e^{iχ}ψ₀⟩ = e^{iχ}, distance 2|sin(χ/2)|',
     near(I.unitGram.inner[0], Math.cos(chi)) && near(I.unitGram.inner[1], Math.sin(chi)) && near(I.unitGram.distance, 2 * Math.abs(Math.sin(chi / 2))) && I.unitGram.norms.every((x) => near(x, 1)));
+  {
+    // the ray kernel from the real coordinates of ψ = e^{iχ}(cos θ/2, sin θ/2): q = (Re ψ₀, Im ψ₀, −Re ψ₁, Im ψ₁),
+    // R(q, 1) = ⟨q, 1⟩² + ⟨q, i⟩² = q₀² + q₁² = cos²(θ/2); on the fibre through ψ₀ it is 1
+    const q = [Math.cos(chi) * Math.cos(t / 2), Math.sin(chi) * Math.cos(t / 2), -Math.cos(chi) * Math.sin(t / 2), Math.sin(chi) * Math.sin(t / 2)];
+    const R1 = q[0] ** 2 + q[1] ** 2,
+      Rk = I.rayKernel;
+    check(label + ' ray kernel: R = 1 on the fibre, R(q, 1) = cos²(θ/2) = (1 + ⟨h(q), h(1)⟩)/2, phase-invariant, Bloch = (h₃, h₂, h₁)',
+      near(Rk.fiber, 1, 1e-12) && near(Rk.value, R1, 1e-12) && near(R1, Math.cos(t / 2) ** 2, 1e-12) && Rk.hopf < 1e-12 && Rk.born < 1e-12 && Rk.phaseDrift < 1e-12 && Rk.bloch < 1e-12);
+  }
   check(label + ' Bloch norm 1 and an explicit preimage', near(I.blochNorm.norm, 1) && I.blochSurjective.residual < 1e-12);
   check(label + ' the phase-invariant form ψ* |ψ₀⟩⟨ψ₀| ψ = 1', near(I.commonPhase.value[0], 1) && near(I.commonPhase.value[1], 0));
   const b = I.balanced;
@@ -390,8 +404,8 @@ for (const lang of ['zh', 'en']) {
   check(lang + ' theory and open-problem links', [THEORY, ...OPEN_LINKS].every((x) => links.includes('../../' + lang + '/' + x)));
   check(lang + ' cited declarations in order', same(await page.locator('#evidence a[data-lean-gid]').evaluateAll((els) => els.map((el) => el.dataset.leanGid)), GIDS));
   check(
-    lang + ' eighteen green boxes and the argued, model, numeric and open boxes',
-    (await page.locator('#evidence .lean:not(.argued):not(.model):not(.num):not(.open):not(.frozen)').count()) === 18 &&
+    lang + ' nineteen green boxes (eighteen anchors and the ray kernel) and the argued, model, numeric and open boxes',
+    (await page.locator('#evidence .lean:not(.argued):not(.model):not(.num):not(.open):not(.frozen)').count()) === 19 &&
       (await page.locator('#evidence .lean.argued').count()) === 2 &&
       (await page.locator('#evidence .lean.model').count()) === 1 &&
       (await page.locator('#evidence .lean.num').count()) === 1 &&

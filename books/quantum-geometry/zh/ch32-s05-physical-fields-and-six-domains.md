@@ -73,7 +73,7 @@
    R_{\mu\nu} - \frac{1}{2}R\,g_{\mu\nu} + \Lambda\,g_{\mu\nu} \;=\; \frac{8\pi G}{c^4}\,T_{\mu\nu},
    $$
 
-   其中在 Jacobson 的原始推导里宇宙学常数 $\Lambda$ 作为积分常数出现（将 $\Lambda > 0$ 诠释为场内有限观察者 $90^\circ$ 正交赤道视界的内生曲率属本书 `MODEL` 假说）。
+   其中在 Jacobson 的原始推导里宇宙学常数 $\Lambda$ 作为积分常数出现（将 $\Lambda > 0$ 诠释为场内有限观察者 $90^\circ$ 正交赤道视界的内生曲率属本书 `MODEL` 假说；视界有限本身定不出 $\Lambda$ 的符号：平直时空中的有限因果菱形与林德勒视界都有 $\Lambda = 0$，有限反德西特因果区域有 $\Lambda < 0$，`手工推导`）。
 :::
 
 ## 28.5.1 六大疆域全息同构总表 {#sec-ch32-six-domain-synthesis}

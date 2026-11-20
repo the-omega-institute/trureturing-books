@@ -8,7 +8,7 @@
 
 ## 33.10.1 本体的绝对均匀性：全向单态闭合、局部边缘 $\frac{1}{D}\mathbf{1}$ 与量子全息底片 {#sec-ch39-12-1}
 
-为什么把全部三维概念场叠满宇宙每一点之后，本体非但不会结成杂乱无章的疙瘩，反而必然收束为点点全同的绝对均匀态？让我们顺着概念塔语法、紧群表示论与量子纠缠扇区分解逐层算清这笔账：
+为什么把全部三维概念场叠满宇宙每一点之后，本体非但不会结成杂乱无章的疙瘩，反而必然收束为点点全同的单点边缘态？这里的“全同”只说单点：全局单态的每个单点边缘都是 $\frac{1}{D}\mathbf{1}$，多点边缘则各不相同。以自旋 $\frac{1}{2}$ 格点的二聚体乘积单态为例，配对的两点边缘是纯态，未配对的两点边缘是 $\frac{1}{4}\mathbf{1}$；$2n$ 个格点上没有任何单态能让全部两点边缘同为 $\frac{1}{4}\mathbf{1}$（交换算符之和在单态空间上恒为 $n(n-2)$，全部两点边缘最大混合却要求它等于 $n(2n-1)/2$）。指定区域 $A$ 的边缘能否最大混合取决于所选单态，且只在 $\lvert A\rvert \le n$ 时可能；空间上的处处均匀还需另加平移不变性（`手工推导`）。让我们顺着概念塔语法、紧群表示论与量子纠缠扇区分解逐层算清这笔账：
 
 1. **`1 — 3 — 3 — 1` 场体闭合、哈尔缠绕通道与舒尔引理不可约判据（`手工推导` + `文献结果` + `MODEL`）**。
    在“点—线—面—体（`1 — 3 — 3 — 1`）”外代数八度循环（[§33.1](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)、[§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)）中，任何一个独立概念之所以成其为“场”，正是因为极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 在三维方向空间中走完三重路径积分后闭合成最高阶体积三形式 $\Lambda^3(\mathbb{R}^3)$，使单向箭头偏置全部归零（自由度从 $3$ 收束回标量 $1$）。当比较网络中的任意节点 $x$ 在全方向上无偏叠加紧凑对称群 $\mathcal{G}$（涵盖空间旋转群 $\mathrm{SU}(2)_{\mathrm{rot}}$ 与紧致内禀规范群）的全部轨道时，对任意归一化基准纯态 $\sigma_0 = \lvert\Delta\mathcal{T}_\epsilon\rangle\langle\Delta\mathcal{T}_\epsilon\rvert$（$\Tr\sigma_0 = 1$）执行归一化哈尔测度（Haar 1933；von Neumann 1934，见 [@rem-ch39-haar-hologram-page-wootters-moire-literature] 第 1 款，`文献结果`；一维圆周无理旋转遍历逼近哈尔积分的内核锚点见下文 [@thm-ch39-uniform-marginal-and-conditional-slice] 第 2 款 [`continuous_average_tendsto_haar`](lean:D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar)）积分，即得**哈尔缠绕（Haar twirling）信道**：

@@ -34,7 +34,7 @@
 
    请看清这行恒等式两侧的物理分工：
 
-   - **左账本 $\cos^2\epsilon$（未破缺稳定子保真度 $\leftrightarrow 0$ 阶顶点守恒荷）**：留在锚点方向 $\mathbb{C}\cdot\mathbf{v}_0$ 上的回归权重，在稳定子群 $H$ 作用下按不可约特征标变换，在本模型中对应电荷 $Q$、自旋螺旋度、重子奇偶等**精确量子化守恒荷**（`MODEL`）；
+   - **左账本 $\cos^2\epsilon$（未破缺稳定子保真度 $\leftrightarrow 0$ 阶顶点守恒荷）**：留在锚点方向 $\mathbb{C}\cdot\mathbf{v}_0$ 上的回归权重，在稳定子群 $H$ 作用下按不可约特征标变换，在本模型中对应电荷 $Q$、自旋螺旋度、重子奇偶等**精确量子化守恒荷**（`MODEL`）；这里的份额拆分是逐点的勾股恒等式，本身不带守恒律：若改看联络分量在切向量中所占的份额，它还随提升而变，在一点取 $k=1$、$dk = Z \in \mathfrak{h}$ 任意，垂直分量平移 $Z$ 而底流形上的曲线不变，份额随之改变；守恒律要由作用量及其场方程给出，即下文第 3 款导出的诺特流，它在提升变换 $u \mapsto uk$ 下不变（`手工推导`）；
    - **右账本 $\sin^2\epsilon$（破缺陪集逃逸份额 $\leftrightarrow 1$ 阶戈德斯通弧与 $2$ 阶曲率预算）**：溢出到正交陪集切空间 $T_{\mathbf{v}_0}(G/H) \cong \mathfrak{g}/\mathfrak{h}$ 的偏转权重，直接驱动无质量相位波与球面三面角曲率！
 
    **守恒预算少一分，破缺游走就多一分；破缺游走收一寸，锚点守恒就增一寸**——破缺与守恒根本不是两套独立机制，而是同一枚极小圆弧比较原语在锚点法向与陪集切向上的正交投影！
@@ -110,13 +110,13 @@
 :::
 
 2. **通道二（全局拓扑通道）：Skyrmion 第三同伦群 $\pi_3(G/H) = \mathbb{Z}$ 孤子缠绕与复合重子点生成**（`文献结果：Skyrme 1961; Witten 1983` + `手工推导`）。
-   倘若破缺对称性是**纯全局对称**（没有规范场来“吃掉”戈德斯通模），概念塔难道就永远停留在开放波纹而无法闭合成体吗？斯格明（Skyrme, 1961）与威滕（Witten, 1983）揭示了大自然另一条鬼斧神工的纯几何造物术：在三维物理空间 $\mathbb{R}^3$ 中，任何静态能量有限的陪集场构型 $U(\mathbf{x}) \in G/H$ 在空间无穷远处必须一致回到同一真空锚点 $\lim_{\lVert\mathbf{x}\rVert\to\infty} U(\mathbf{x}) = I$；经亚历山德罗夫单点紧化，无穷远边界捏合为一点，整座三维物理空间拓扑等价于三维球面 $\mathbb{R}^3 \cup \{\infty\} \cong S^3_{\mathrm{space}}$！只要破缺陪集流形的**第三同伦群非平凡**——例如手征对称破缺陪集 $G/H \cong \mathrm{SU}(2) \cong S^3$ 或 $\mathrm{SU}(3)$ 满足 $\pi_3(G/H) = \mathbb{Z}$——光滑场映射 $U : S^3_{\mathrm{space}} \to G/H$ 就能把纯由破缺毛雷尔—嘉当一形式 $L_\mu = U^{-1}\partial_\mu U$ 外积三次构成的**三阶体积三形式**严丝合缝地缠绕在整个三维空间上，锁死一个不依赖任何运动方程、严格取整数值的**拓扑重子绕数（Skyrmion Winding Number）**：
+   倘若破缺对称性是**纯全局对称**（没有规范场来“吃掉”戈德斯通模），概念塔难道就永远停留在开放波纹而无法闭合成体吗？斯格明（Skyrme, 1961）与威滕（Witten, 1983）揭示了大自然另一条鬼斧神工的纯几何造物术：在三维物理空间 $\mathbb{R}^3$ 中，取静态能量有限、且在空间无穷远处一致回到同一真空锚点 $\lim_{\lVert\mathbf{x}\rVert\to\infty} U(\mathbf{x}) = I$ 的陪集场构型 $U(\mathbf{x}) \in G/H$（这个极限是另加的边界条件，能量有限推不出它：取单位球内支撑、$\chi(0)=1$ 的光滑鼓包 $\chi$，在 $x_k=(k,0,0)$ 处放半径 $r_k=2^{-k-2}$ 的一串秩一鼓包 $U=\exp\bigl(e_3\sum_k\chi((\mathbf{x}-x_k)/r_k)\bigr)$，各流彼此对易，四次能为零，二次能正比于 $\sum_k r_k<\infty$，而 $U$ 在各球心取 $\exp e_3$、在球与球之间取 $1$，`手工推导`）；经亚历山德罗夫单点紧化，无穷远边界捏合为一点，整座三维物理空间拓扑等价于三维球面 $\mathbb{R}^3 \cup \{\infty\} \cong S^3_{\mathrm{space}}$！只要破缺陪集流形的**第三同伦群非平凡**——例如手征对称破缺陪集 $G/H \cong \mathrm{SU}(2) \cong S^3$ 或 $\mathrm{SU}(3)$ 满足 $\pi_3(G/H) = \mathbb{Z}$——光滑场映射 $U : S^3_{\mathrm{space}} \to G/H$ 就能把纯由破缺毛雷尔—嘉当一形式 $L_\mu = U^{-1}\partial_\mu U$ 外积三次构成的**三阶体积三形式**严丝合缝地缠绕在整个三维空间上，锁死一个不依赖任何运动方程、严格取整数值的**拓扑重子绕数（Skyrmion Winding Number）**：
 
    $$
    B \;=\; \frac{1}{24\pi^2}\int_{S^3}\operatorname{Tr}\!\Bigl((U^{-1}dU)\wedge(U^{-1}dU)\wedge(U^{-1}dU)\Bigr) \;\in\; \mathbb{Z}, \qquad \partial_t B \;\equiv\; 0!
    $$
 
-   在二阶陪集曲率平方项（Skyrme 四次稳定项 $\mathcal{L}_4 \propto \operatorname{Tr}([L_\mu, L_\nu]^2)$，即我们第 2 拍楔积 $e^a\wedge e^b$ 的范数平方！）抵抗径向塌缩（Derrick 定理）的支撑下，一团原本纯属玻色型的无质量戈德斯通介子波，在三维空间里打出一个解不开的 $B = 1$ 拓扑死结；更惊人的是，威滕（1983）证明在底层色数 $N_c = 3$ 的韦斯—祖米诺—威滕（WZW）五维拓扑反常项作用下，将这枚纯玻色孤子缓慢原地旋转 $2\pi$ 会精确拾取因子 $(-1)^{N_c} = (-1)^3 = -1$（恰如 [§33.3](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower) 的 `circle_double_cover_history_lift` 旋量换叶！），使其在下一层级（原子核物理层）直接蜕变为一枚携带半整数自旋 $\frac{1}{2}$、服从泡利不相容原理、拓扑上永不解开的**复合费米子“点核子”（质子与中子，$\Lambda^3_{\mathrm{chiral}} \equiv \Lambda^0_{\mathrm{nuclear}}$）**！
+   在二阶陪集曲率平方项（Skyrme 四次稳定项 $\mathcal{L}_4 \propto \operatorname{Tr}([L_\mu, L_\nu]^2)$，即我们第 2 拍楔积 $e^a\wedge e^b$ 的范数平方！）抵抗径向塌缩（Derrick 定理）的支撑下，一团原本纯属玻色型的无质量戈德斯通介子波，在三维空间里打出一个解不开的 $B = 1$ 拓扑死结；更惊人的是，威滕（1983）证明在底层色数 $N_c = 3$ 的韦斯—祖米诺—威滕（WZW）五维拓扑反常项作用下，将这枚纯玻色孤子缓慢原地旋转 $2\pi$ 会精确拾取因子 $(-1)^{N_c} = (-1)^3 = -1$（这个负号由 WZW 项提供：只有玻色作用量时，构型空间覆盖上的平凡与非平凡两种特征标都与同一经典作用量相容，自旋 $\frac{1}{2}$ 是允许的量子化，并不被强制；[§33.3](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower) 的 `circle_double_cover_history_lift` 讲的是单个系统态空间的圆周双覆盖，与这里构型空间的覆盖定义域不同，`文献结果`），使其在下一层级（原子核物理层）直接蜕变为一枚携带半整数自旋 $\frac{1}{2}$、服从泡利不相容原理、拓扑上永不解开的**复合费米子“点核子”（质子与中子，$\Lambda^3_{\mathrm{chiral}} \equiv \Lambda^0_{\mathrm{nuclear}}$）**！
 
 ::: {.viz src="coset-breaking-conservation-tower-sandbox" preset="skyrmion-baryon-winding" height="520"}
 **全局手征陪集 $\pi_3(\mathrm{SU}(2)) = \mathbb{Z}$ Skyrmion 拓扑体积缠绕实验卡（`skyrmion-baryon-winding`）。** 在紧化三维空间 $\mathbb{R}^3 \cup \{\infty\} \cong S^3$ 上观察刺猬孤子构型 $U(\mathbf{x}) = \exp\bigl(-i f(r)\,\hat{\mathbf{x}}\cdot\boldsymbol{\sigma}\bigr)$（边界轮廓 $f(0) = \pi \to f(\infty) = 0$）：追踪青色破缺介子一形式 $U^{-1}dU$ 如何沿径向与球面角向三轴满秩楔积成紫色拓扑荷密度三形式 $\frac{1}{24\pi^2}\operatorname{Tr}((U^{-1}dU)^3)$，积分锁死重子数 $B = +1 \in \mathbb{Z}$，并在 $N_c = 3$ WZW 相位下展现 $2\pi$ 旋量反号与 $4\pi$ 复原。

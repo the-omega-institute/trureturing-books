@@ -1,0 +1,29 @@
+{
+  "title": "Three slits, only pairs interfere",
+  "title_zh": "三条缝，只有两两干涉",
+  "summary": "Open one slit, then two, then three: does the third slit bring a new kind of interference that needs all three at once? At one point on the screen each open slit sends an arrow, and the weight is the squared length of their sum. Multiplying the sum by its own conjugate gives nine tiles, and every tile pairs one slit with one slit: three on the diagonal, six mixing two slits, none holding all three. Sorkin's combination of seven weights counts each diagonal tile as 1 − 2 + 1 and each mixed tile as 1 − 1, so it vanishes: with arrows 60° apart, 4 − 3 − 1 − 3 + 1 + 1 + 1 = 0; with equal arrows, 9 − 4 − 4 − 4 + 1 + 1 + 1 = 0; and as the detector slides across the screen, the three-slit pattern stays equal to the three pair patterns minus the three single slits. Lean checks that the record weight of a pure state on a one-line shutter is the squared modulus of their inner product, and that the seven-term sum of a quadratic amplitude weight is zero for any three disjoint bundles of paths over a commutative star ring. A fourth power would leave 81 − 48 + 3 = 36; the implication runs one way only, since a zero third-order term alone does not single out the Born rule.",
+  "summary_zh": "先开一条缝，再开两条，再开三条：第三条缝会不会带来一种非三条同时在场不可的新干涉？屏上某一点，每条开着的缝送来一支箭头，权重是箭头之和的长度平方。把和乘以它自己的共轭，展开成九块，每一块都只把一条缝和一条缝配成一对：对角线上三块，另外六块各混两条缝，没有哪一块装得下三条缝。索金的七项组合给每块对角块记 1 − 2 + 1，给每块交叉块记 1 − 1，于是整体为零：箭头相隔 60° 时 4 − 3 − 1 − 3 + 1 + 1 + 1 = 0，箭头都相等时 9 − 4 − 4 − 4 + 1 + 1 + 1 = 0；探测点沿屏幕滑动，三缝图样始终等于三对双缝图样之和减去三条单缝。Lean 检验了纯态配一维快门时，记录权重是两者内积的模平方；也检验了在带星运算的交换环上，任取三束互不相交的路径，二次振幅权重的七项之和为零。换成四次方会剩下 81 − 48 + 3 = 36；这条蕴涵只有一个方向，单凭三阶项为零挑不出玻恩规则。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-20",
+  "duration": "2:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · three slits and their screen pattern, head-to-tail amplitude arrows, the nine tiles of a squared sum, seven inclusion–exclusion grids, a sliding detector, a fourth-power contrast",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction",
+    "D5/S3/Quantum/SorkinThirdOrder.sorkin_third_order_cancellation"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_three-slits-pairwise_720p_narrated.mp4",
+    "cover": "quantum-geometry_three-slits-pairwise_cover.jpg"
+  }
+}

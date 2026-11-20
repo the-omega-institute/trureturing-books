@@ -45,7 +45,7 @@ $$
    \mathbf{r}_1 = (0, 0, 1), \qquad \mathbf{r}_2 = \left(\tfrac{\sqrt{3}}{2},\, 0,\, -\tfrac{1}{2}\right), \qquad \mathbf{r}_3 = \left(-\tfrac{\sqrt{3}}{2},\, 0,\, -\tfrac{1}{2}\right), \qquad \sum_{k=1}^3 \mathbf{r}_k = \mathbf{0} \;\Longrightarrow\; \sum_{k=1}^3 E_k = I_2,
    $$
 
-   effect additivity and homogeneity would demand $\sum_{k=1}^3 \frac{2}{3}f(P_{\mathbf{r}_k}) = f(I_2) = 1$; substituting $r_{1,z}^3 = 1$ and $r_{2,z}^3 = r_{3,z}^3 = -\frac{1}{8}$ instead yields
+   finite additivity on effects alone (it already forces rational homogeneity: $P_{\mathbf{r}} = 3\cdot\tfrac{1}{3}P_{\mathbf{r}}$ gives $p(\tfrac{2}{3}P_{\mathbf{r}}) = \tfrac{2}{3}f(P_{\mathbf{r}})$, with no homogeneity or continuity assumed; `manual derivation`) would demand $\sum_{k=1}^3 \frac{2}{3}f(P_{\mathbf{r}_k}) = f(I_2) = 1$; substituting $r_{1,z}^3 = 1$ and $r_{2,z}^3 = r_{3,z}^3 = -\frac{1}{8}$ instead yields
 
    $$
    \sum_{k=1}^3 \frac{2}{3}\,f(P_{\mathbf{r}_k}) \;=\; \frac{2}{3}\left[1 + \frac{1}{2}\left(1 - \frac{1}{8}\right) + \frac{1}{2}\left(1 - \frac{1}{8}\right)\right] \;=\; \frac{2}{3}\left(1 + \frac{7}{16} + \frac{7}{16}\right) \;=\; \frac{5}{4} \;\neq\; 1!
@@ -60,5 +60,5 @@ $$
      $$
 
      which satisfies $\operatorname{Tr}\bigl(W(A_1 \otimes A_2)\bigr) = \operatorname{Tr}(J A_1)\operatorname{Tr}(J A_2) = 0 \cdot 0 = 0$ for all real symmetric $A_1^{\mathsf{T}} = A_1,\; A_2^{\mathsf{T}} = A_2$—making the orthogonal states $\rho_{\pm} = \frac{1}{4}(I_4 \pm W)$ completely invisible to all local product measurements! Over $\mathbb{C}$, Hermitian real dimensions satisfy $(d_1 d_2)^2 = d_1^2 \cdot d_2^2$, closing local tomography exactly.
-   - *Non-minimal dark sector*: Embedding local operators into $(\mathcal{H}_1 \otimes_{\mathbb{C}} \mathcal{H}_2) \oplus \mathcal{K}$ ($\dim\mathcal{K} \ge 1$) via $(A_1 \otimes A_2) \oplus 0_{\mathcal{K}}$ preserves all single-system comparisons while hiding states on $\mathcal{K}$ from local probes. **Complex local tomographic minimality (`T2`)** uniquely locks $\mathcal{H}_1 \otimes_{\mathbb{C}} \mathcal{H}_2$.
+   - *Non-minimal dark sector*: Embedding local operators into $(\mathcal{H}_1 \otimes_{\mathbb{C}} \mathcal{H}_2) \oplus \mathcal{K}$ ($\dim\mathcal{K} \ge 1$) with local effects extended by the normalized trace, $E \otimes F \mapsto (E \otimes F) \oplus \frac{\operatorname{Tr}E}{d_1}\frac{\operatorname{Tr}F}{d_2}\,\mathbf{1}_{\mathcal{K}}$ ($d_i = \dim\mathcal{H}_i$; the zero extension $(A_1 \otimes A_2) \oplus 0_{\mathcal{K}}$ would give the unit test the value $0$ on $\mathcal{K}$ and break normalization), keeps complete product tests complete and the weights on $\mathcal{H}_1 \otimes_{\mathbb{C}} \mathcal{H}_2$ unchanged, while every state supported on $\mathcal{K}$ shows only the product statistics of the maximally mixed state $\mathbf{1}/(d_1 d_2)$, so two orthogonal states of $\mathcal{K}$ are indistinguishable by product tests (`manual derivation`). **Complex local tomographic minimality (`T2`)** uniquely locks $\mathcal{H}_1 \otimes_{\mathbb{C}} \mathcal{H}_2$.
 :::
