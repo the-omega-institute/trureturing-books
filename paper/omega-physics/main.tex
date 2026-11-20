@@ -102,7 +102,9 @@ not decided.  For finite memories, a Gram window weakly narrows the corridor of 
 memory reset costs at least $k_BT$ times the drop in conditional entropy while index restriction can cost
 nothing, an encoded phase is exactly recoverable iff the inaccessible conditional states agree, and
 local windows of several observers glue iff a positive semidefinite completion exists (on chordal
-patterns iff every clique is positive), which still gives neither a joint state nor joint outcomes.  In a closed register of $2n$ systems in a global singlet, an
+patterns iff every clique is positive), which still gives neither a joint state nor joint outcomes.
+In the velocity space of states, the squared reciprocal Lorentz factors of a qubit's pairs, defined by
+their concurrences, sum to at most that of its marginal, $\sum_B\gamma_{AB}^{-2}\le\gamma(r_A)^{-2}$, with deficit the residual three-tangle.  In a closed register of $2n$ systems in a global singlet, an
 exchange constraint gives conditional Schr\"odinger dynamics relative to an internal clock, with an
 explicit source from exchanges across the clock cut, and the unobservable clock [Cl] follows from the
 invisibility of the total phase under a stated bridge hypothesis.  The dichotomies of configurations form four-dimensional
@@ -262,6 +264,8 @@ composite reading built on one clock's complex structure, and a right transport 
 statistics unchanged is unobservable (Section~\ref{sec:closedreg}).
 \item[{[U], [A]}] The physical specification of a closed-universe state, and of an observer's accessible
 algebra (Hypotheses~U and~A, Section~\ref{sec:closedreg}).
+\item[{[Cd]}] Calibrated dynamics: Hamiltonian, time scale and fixed projector given; [Bs]: a common
+preparation, a common speed cap per branch and a sequential schedule (Section~\ref{sec:bounds}).
 \item[{[Gw]}] A finite Gram window of stored comparisons; [Ue]: the entropy drop of a reset equals the log
 area ratio of the cap corridors; [Ca]: causal record access in tensor-factor form (Section~\ref{sec:finitemem}).
 \item[{[R]}] A record process: one terminal vertex and absorbing record faces in the observer's filtration
@@ -393,8 +397,8 @@ Part~I (Sections~\ref{sec:axiom}--\ref{sec:geometry}) is the kinematics: the axi
 system, many systems, sub-structures of every dimension, and the geometry of states.  Part~II
 (Sections~\ref{sec:closedreg}--\ref{sec:outcomes}) concerns observers inside the structure: a closed universe with internal
 clocks; finite memory (Gram windows, the arrow of forgetting, erasure and consensus); and single outcomes as
-bounded martingales with finite-tick certification; a section on computation is to follow.  Part~III will collect bounds and budgets: speed limits, the Tsirelson bound and an
-entanglement budget.  Part~IV (Sections~\ref{sec:eventspace}--\ref{sec:sm}) contains the space of events,
+bounded martingales with finite-tick certification; a section on computation is to follow.  Part~III (Section~\ref{sec:bounds}) gives the bounds: speed limits with their
+sharp constants, the Tsirelson bound from a positive Gram completion, and a rapidity--entanglement budget.  Part~IV (Sections~\ref{sec:eventspace}--\ref{sec:sm}) contains the space of events,
 fields of structures, the variable radius, the round four-sphere target from a pair, topological
 particles with the Skyrme term, and the
 three-structure model; sections on unification scales, gravity and the origin of the three structures,
@@ -819,6 +823,7 @@ Uncertainty relation & equality (Thm.~\ref{thm:unc}) & none\\
 One clock; tensor product & Thm.~\ref{thm:oneclock}; or Thm.~\ref{thm:product}, Cor.~\ref{cor:ampmult}; Prop.~\ref{prop:avg} & clock-read factors with [Bil$_\cL$], [Span], [Loc], [O], [C2], [N], C1(b); or C0, C1, [Span], and C2 for $N\ge3$\\
 All unit vectors are states; all unitaries are operations & Thm.~\ref{thm:comp} & C0--C2, [Span]; C3 for operations\\
 Measurement update & conditional state $K_a\psi/\lVert K_a\psi\rVert$ (Prop.~\ref{prop:relative}, Thm.~\ref{thm:instruments}) & C0--C3, Convention T\\
+Bounds & Rapidity--entanglement budget $\sum_B\gamma_{AB}^{-2}\le\gamma(r_A)^{-2}$, deficit $4\lvert ae\rvert^2$, equality on $W$ (Thm.~\ref{thm:bdbudget}); $\tau_\perp\ge\pi\hbar/(2\Delta E)$, sharp; $\pi\hbar/(4\Delta E)$ for a Bloch right angle and two branches (Prop.~\ref{prop:bdmt}); $\lvert S\rvert\le2\sqrt2$ from a positive Gram completion, PR box excluded (Thm.~\ref{thm:bdchsh}) & C0--C2, [Span]; [Cd]; [Bs]; $n$-qubit budget: cited\\
 Finite memory & Gram-window extension and weak nesting (Thm.~\ref{thm:fmschur}); reset heat $\ge k_BT\,\Delta S(L|K)$ (Prop.~\ref{prop:fmheat}); exact phase recovery iff equal inaccessible states (Thm.~\ref{thm:fmeraser}); gluing iff PSD completion, chordal clique test (Thm.~\ref{thm:fmglue}) & [Gw]; Gibbs bath, joint unitary, kept side marginal; [Ca]\\
 Single outcomes & no covariant outcome rule (Prop.~\ref{prop:nooutcome}); for a record process, Born at every stage $\Leftrightarrow$ martingale weights (Thm.~\ref{thm:sorigidity}); threshold and simplex selection Born $\Leftrightarrow$ invariant auxiliary law (Thms.~\ref{thm:sosphere}, \ref{thm:sosimplex}) & [R]; [Ap] for an apparatus; the realised dynamics: open\\
 \bottomrule
@@ -3125,9 +3130,308 @@ budget alone gives an inverse-tick floor (Remark~\ref{rem:sobisection}).
 
 %=====================================================================================
 \paperpart{Part III.  Bounds and budgets}
-\noindent This part is reserved for speed limits, the Tsirelson bound and an entanglement budget; the
-sections are in preparation.  The velocity geometry of states (Section~\ref{sec:velocity}) is its present
-starting point.
+\noindent This part collects bounds: how fast a calibrated evolution can change a comparison (lines in the
+state space), how large the correlations of two parties can be (positivity of a Gram completion), and how
+a qubit's entanglement is shared among partners (areas in the velocity space of Section~\ref{sec:velocity}).
+
+%=====================================================================================
+\section{Lines are classical time, areas are quantum time: speed limits, the Tsirelson bound and a rapidity--entanglement budget}\label{sec:bounds}
+How much time does an orthogonal readout require, how strong can two-party correlations be, and how much
+of a qubit's entanglement can be shared pairwise?  The clock dynamics of Theorem~\ref{thm:dyn} gives projective
+speed limits, each with its own sharp constant; a positive Gram completion gives the CHSH bound $2\sqrt2$; and
+the velocity geometry of Theorem~\ref{thm:velocity} turns the monogamy of squared concurrence into a budget of
+squared reciprocal Lorentz factors.  The title records the two pictures: a rate is controlled by a length
+(a variance times a time), a change of comparison by an area (a commutator).
+
+\subsection{The rapidity--entanglement budget}\label{sec:bdbudget}
+For a pure state of a qubit $A$ and a system $R$, $C_{A|R}=2\sqrt{\det\rho_A}$ with $\rho_A=(\mathbf1+r_A\cdot\sigma)/2$; for mixed $A|R$ states $\tau_{A|R}$ is the convex
+roof of $C_{A|R}^2$; for a mixed two-qubit state $C_{AB}$ is the convex roof of $C_{A|B}$ (Wootters' concurrence
+\cite{Wootters}; Coffman--Kundu--Wootters tangle \cite{n4:CKW}).  Define the \emph{pair Lorentz factor} by
+$\gamma_{AB}^{-1}:=C_{AB}$ ($\gamma_{AB}=\infty$ at $C_{AB}=0$), with speed $\sqrt{1-C_{AB}^2}$ and rapidity $\mathrm{arcosh}(1/C_{AB})$: a radius in the Klein ball,
+without a direction.  The marginal itself gives the point $r_A$ and $\gamma(r_A)$ of Theorem~\ref{thm:velocity}.
+
+\begin{theorem}[rapidity--entanglement budget]\label{thm:bdbudget}
+For a pure state of $n$ qubits and $R$ the other $n-1$,
+\begin{equation}\label{eq:bdbudget}
+\sum_{B\ne A}\gamma_{AB}^{-2}\ \le\ \gamma(r_A)^{-2}=C_{A|R}^2=1-\lvert r_A\rvert^2=\mathrm{sech}^2d(\rho_0,\rho_A)\ \le\ 1 ,
+\end{equation}
+with equality on the right iff $r_A=0$; for mixed states the sum is at most $\tau_{A|R}\le1-\lvert r_A\rvert^2$.  For three pure qubits, written
+in local orthonormal bases as $a\lvert000\rangle+b\lvert100\rangle+c\lvert101\rangle+d\lvert110\rangle+e\lvert111\rangle$, $\gamma_{AB}^{-2}=4\lvert ad\rvert^2$, $\gamma_{AC}^{-2}=4\lvert ac\rvert^2$, $\gamma(r_A)^{-2}=4\lvert a\rvert^2(\lvert c\rvert^2+\lvert d\rvert^2+\lvert e\rvert^2)$,
+and the deficit is the residual three-tangle $4\lvert ae\rvert^2$; equality holds iff $ae=0$, and among genuinely tripartite
+entangled states exactly on the $W$ class.  For $n$ qubits the left inequality is the Osborne--Verstraete
+monogamy theorem \cite[Eq.~(1)]{n4:OV} (cited).
+\end{theorem}
+
+\begin{lemma}[two-qubit roofs]\label{lem:bdroof}
+For a decomposition $\rho=XX^\dagger$ and singular values $s_1\ge\dots\ge s_4$ of $X^{\mathsf T}(\sigma_y\otimes\sigma_y)X$: $C(\rho)=\max(0,s_1-s_2-s_3-s_4)$ and $\tau(\rho)=C(\rho)^2$.
+\end{lemma}
+\begin{proof}
+For a subnormalised vector $x$, $\lVert x\rVert^2$ times its concurrence is $\lvert x^{\mathsf T}(\sigma_y\otimes\sigma_y)x\rvert$; other factors differ by column mixings with
+orthonormal rows, which preserve the nonzero singular values.  Takagi factorisation diagonalises the
+symmetric overlap; for a mixing $U$, $\sum_j\lvert\sum_ks_kU_{kj}^2\rvert\ge s_1-\sum_{k>1}s_k$, and Jensen bounds the squared roof.  If $s_1\le\sum_{k>1}s_k$ phases
+close the polygon and a real $4\times4$ Hadamard mixing makes every diagonal overlap zero; if $q=s_1-\sum_{k>1}s_k>0$,
+rephase the last three columns by $i$ and use a real orthogonal change of basis making a trace-zero real
+symmetric matrix zero on the diagonal, so each overlap is $q$ times the column norm: both roofs attain
+their bounds.
+\end{proof}
+\begin{proof}[Proof of Theorem~\ref{thm:bdbudget}]
+For a pure $2\times m$ coefficient matrix $M$, $\rho_A=MM^\dagger$ and $4\det\rho_A=1-\lvert r_A\rvert^2=\gamma(r_A)^{-2}$ by Theorem~\ref{thm:velocity}(ii), (iv).  For an ensemble,
+$\sum_jp_j(1-\lvert r_j\rvert^2)=1-\lvert r_A\rvert^2-\sum_jp_j\lvert r_j-r_A\rvert^2$, which gives the mixed bound.  For $n$ qubits apply \cite[Eq.~(1)]{n4:OV} with
+Lemma~\ref{lem:bdroof}.  Three qubits directly: the determinant of a combination of the two $A$-slices is a quadratic
+with a projective zero; local unitaries make that slice $a\lvert00\rangle$, giving the normal form.  Tracing $C$, the $AB$ columns
+are $(a,0,b,d)^{\mathsf T}$, $(0,0,c,e)^{\mathsf T}$ with overlap matrix $T=\bigl(\begin{smallmatrix}-2ad&-ae\\-ae&0\end{smallmatrix}\bigr)$ and $(s_1-s_2)^2=\tr TT^\dagger-2\lvert\det T\rvert=4\lvert ad\rvert^2$ (for $AC$ exchange $c,d$);
+the rows of $M$ are $(a,0,0,0)$ and $(b,c,d,e)$.  If $ae=0$ and all cuts are entangled, $e=0$, and invertible local maps give $W$;
+conversely the slice polynomial $ae\,st+(be-cd)t^2$ of $W$ has a double root, forcing $ae=0$; products across a cut
+have zero residual.
+\end{proof}
+
+\begin{example}[Bell pair, $W$, GHZ]\label{ex:bdbudget}
+$(C_{AB}^2,C_{AC}^2,C_{A|BC}^2)$ is $(1,0,1)$ for $(\lvert000\rangle+\lvert110\rangle)/\sqrt2$; $(\tfrac49,\tfrac49,\tfrac89)$ for $W=(\lvert001\rangle+\lvert010\rangle+\lvert100\rangle)/\sqrt3$, with $\lvert r_A\rvert=\tfrac13$ (equality);
+$(0,0,4p(1-p))$ for $\sqrt p\lvert000\rangle+\sqrt{1-p}\lvert111\rangle$ (residual $4p(1-p)$).
+\end{example}
+
+\begin{remark}[the pair factor is not the Bloch factor of $A$]\label{rem:bdghz}
+Using the Lorentz factor $\gamma(r_A)$ of the actual marginal for each pair is refuted: for balanced GHZ, $\gamma(r_A)^{-1}=1$
+while both pair marginals are separable ($\gamma_{AB}^{-1}=\gamma_{AC}^{-1}=0$); the substitution would give $2\le1$.  The pair term must be the
+mixed-state concurrence.
+\end{remark}
+
+\begin{corollary}[local components and residual]\label{cor:bdlocal}
+For a test axis $r_p$, $P=\lvert r_A\cdot r_p\rvert$, $V=\lvert r_A-(r_A\cdot r_p)r_p\rvert$ and a pure composite, $P^2+V^2+\sum_{B\ne A}\gamma_{AB}^{-2}+\mathcal R_A=1$ with $\mathcal R_A\ge0$ (the residual
+three-tangle for three qubits); this refines Theorem~\ref{thm:velocity}(iv).
+\end{corollary}
+\noindent In the velocity space of Section~\ref{sec:velocity} the budget reads $\sum_B\mathrm{sech}^2\eta_{AB}\le\mathrm{sech}^2\eta_A$: each pair rapidity is at least the
+rapidity of the marginal, $\eta_{AB}\ge\eta_A$, and jointly the squared hyperbolic secants of the pair rapidities sum to at
+most that of the marginal.
+This relates the geometry of Part~I to composites (Section~\ref{sec:many}).
+
+\subsection{Commutator flow and minimal arcs}\label{sec:bdrates}
+
+\smallskip\noindent\textbf{Hypothesis Cd (calibrated dynamics).}  The Hamiltonian, the time scale (Theorem~\ref{thm:dyn} with $\hbar$
+restored) and a fixed projector $P$ are given; $p(t)=\tr(\rho_tP)$.
+
+\begin{proposition}[probability flow]\label{prop:bdflow}
+For continuous Hermitian $H_t$ and $i\hbar\dot U=H_tU$: $\dot p=\tfrac i\hbar\tr(\rho_t[H_t,P])$ and $\lvert\dot p\rvert\le\tfrac2\hbar\Delta_{\rho_t}H_t\sqrt{p(1-p)}$; $[H_t,P]=0$ conserves $p$; for a
+qubit with $H=h_0\mathbf1+h\cdot\sigma$, $P=(\mathbf1+n\cdot\sigma)/2$ the rate is $-r\cdot(h\times n)/\hbar$, the oriented area spanned by the two operator directions
+paired with the state.
+\end{proposition}
+\begin{proof}
+$\dot\rho=-\tfrac i\hbar[H,\rho]$ and cyclicity; the commutator trace is $2i\im$ of the Hilbert--Schmidt product of $(H-\langle H\rangle)\sqrt\rho$ and $(P-p)\sqrt\rho$,
+and Cauchy--Schwarz with $P^2=P$; $(h\cdot\sigma)(n\cdot\sigma)=(h\cdot n)\mathbf1+i(h\times n)\cdot\sigma$.
+\end{proof}
+
+\begin{proposition}[projective rate and its constants]\label{prop:bdmt}
+With $\theta(\psi,\phi)=\arccos\lvert\ip\psi\phi\rvert$, $\theta(\psi_0,\psi_t)\le\int_0^t\Delta_{\psi_s}H_s\,ds/\hbar$ (Mandelstam--Tamm, Anandan--Aharonov \cite{n4:MT,n4:AA}).
+(i) \emph{Orthogonal ray}: for constant $H$, $\tau_\perp\ge\pi\hbar/(2\Delta E)$, $\Delta E=\Delta_{\psi_0}H>0$; this is the sharp universal constant, attained exactly by
+equal weights on two energy levels.  (ii) \emph{Bloch right angle}: for a qubit the Bloch angle is $2\theta$, so a $90^\circ$
+Bloch comparison (transition probability $\tfrac12$) needs at least $\pi\hbar/(4\Delta E)$.  (iii) \emph{Two branches}: if from a common ray two
+protocols reach orthogonal rays with branch lengths at most $E_*\tau/\hbar$, then $\tau\ge\pi\hbar/(4E_*)$, and $N$ such sequential steps in time $T$
+satisfy $N\le4E_*T/(\pi\hbar)$ (Hypothesis Bs: common preparation, common cap, sequential schedule).
+\end{proposition}
+\begin{proof}
+A phase with derivative $\langle H\rangle/\hbar$ makes the lift horizontal, with speed $\lVert(H-\langle H\rangle)\psi\rVert/\hbar$; a sphere path is at least as long as
+the endpoint angle, minimised over the phase by the horizontal great-circle arc (the minimal arc).  For
+constant $H$, $\Delta E$ is conserved.  For equality in (i) the lift is the constant-speed quarter arc, so the occupied
+energies are $\langle H\rangle\pm\Delta E$ with equal weights; conversely equal weights give overlap $\lvert\cos(\Delta Et/\hbar)\rvert$.  (ii) is $\beta=(1+r\cdot r')/2$
+(Theorem~\ref{thm:born}).  (iii) Concatenating one reversed branch with the other joins orthogonal rays.
+\end{proof}
+
+\begin{remark}[the quarter constant is not the orthogonalisation constant]\label{rem:bdquarter}
+Treating $\pi\hbar/(4\Delta E)$ as the sharp time to an orthogonal ray is refuted: equal weights on two levels need exactly
+$\pi\hbar/(2\Delta E)$, and no state does better.  The quarter constant belongs to the Bloch right angle and the two-branch
+protocol (Proposition~\ref{prop:bdmt}(ii), (iii)); the two-branch count is the one used in
+Proposition~\ref{prop:fmspeed} and Remark~\ref{rem:soclock}.
+\end{remark}
+
+\begin{proposition}[mean energy]\label{prop:bdml}
+For constant $H$ with ground energy $E_0$ and $\bar E=\langle H\rangle-E_0>0$, $\tau_\perp\ge\pi\hbar/(2\bar E)$ (Margolus--Levitin \cite{n4:ML}), with equality exactly for
+equal weights on the ground eigenspace and one excited eigenspace.
+\end{proposition}
+\begin{proof}
+$\cos x\ge1-\tfrac2\pi(x+\sin x)$ for $x\ge0$, with equality only at $0,\pi$; average over the occupied phases, where orthogonality makes the
+cosine and sine averages vanish.
+\end{proof}
+
+\begin{corollary}[sagitta of a comparison]\label{cor:bdsagitta}
+For the phase-aligned lift of a comparison at angle $\theta$ the sagitta of \cite[Prop.~7.1]{PaperI} is $v=1-\cos\theta=1-\sqrt p$, with
+$1-p=2v-v^2$; along a smooth trajectory of speed $s=\Delta H/\hbar$, $v(t,t+dt)=s^2dt^2/2+o(dt^2)$, and on any finite subdivision
+$\sum_j(1-\cos\theta_j)\le\tfrac12\max_j\theta_j\sum_j\theta_j$ \cite[Thm.~7.2(a)]{PaperI}.
+\end{corollary}
+\begin{remark}[summed sagittas give no clock time]\label{rem:bdsagitta}
+The claim that summed sagittas along a smooth path give a nonzero continuum clock time is refuted: for a
+fixed angle $\theta$ split into $N$ equal steps, $N(1-\cos(\theta/N))\le\theta^2/(2N)\to0$, while the arc length $\theta$ stays.  Time is
+measured by the length (the minimal arcs), the sagitta is second order.
+\end{remark}
+
+\begin{example}[clocks]\label{ex:bdclocks}
+For equal weights on $0,E$: $\tau_\perp=\pi\hbar/E$, attaining (i), Proposition~\ref{prop:bdml} and (iii).  For weights $q\ne\tfrac12$ the overlap stays at least $\lvert2q-1\rvert$.
+For equal weights on $0,E,2E$ the overlap is $\lvert1+2\cos(Et/\hbar)\rvert/3$, first zero $2\pi\hbar/(3E)$, $(\Delta E,\bar E)=(\sqrt{2/3}E,E)$, both bounds strict, length $\tfrac{2\pi}3\sqrt{2/3}$.
+A gap $E=hf$, $f=5$\,GHz, gives $100$\,ps, and the count bound $4fT=500$ for $T=25$\,ns under Hypothesis Bs; a resonant drive
+$H=\hbar\Omega\sigma_x/2$, $\Omega/2\pi=10$\,MHz, gives $50$\,ns to orthogonality and $25$\,ns to a Bloch right angle.
+\end{example}
+
+\subsection{Positivity and the Tsirelson bound}\label{sec:bdbell}
+For Hermitian local contractions $A_0,A_1$, $B_0,B_1$ and a state $\rho$, $E_{ij}=\tr\rho(A_i\otimes B_j)$ and $S=E_{00}+E_{01}+E_{10}-E_{11}$ \cite{n2-chsh}.  The
+composite input is that of Section~\ref{sec:many}: under C0--C2, Theorem~\ref{thm:comp} gives the composite states,
+Theorem~\ref{thm:bornN} the joint weights, and Theorem~\ref{thm:instruments} (C0--C3, Convention~\ref{conv:T}) the
+binary tests $\{(\mathbf1\pm A_i)/2\}$.  These imply a real positive Gram completion with diagonals at most one: $x_i=(A_i\otimes\mathbf1)\sqrt\rho$ and
+$y_j=(\mathbf1\otimes B_j)\sqrt\rho$ in the real Hilbert--Schmidt space have cross entries $E_{ij}$, since the two sides commute.
+
+\begin{theorem}[Tsirelson's bound from a positive Gram completion]\label{thm:bdchsh}
+If the $E_{ij}$ have a real Gram representation by vectors of norm at most one, $\lvert S\rvert\le2\sqrt2$ \cite{n4:Tsirelson}; the bound
+is attained on $\Phi^+$ with $A_0=Z$, $A_1=X$, $B_{0,1}=(Z\pm X)/\sqrt2$.  The Popescu--Rohrlich correlators $E_{ij}=(-1)^{ij}$ ($S=4$) are
+nonsignalling and have no such completion \cite{n4:PR}.
+\end{theorem}
+\begin{proof}
+$\lvert\ip{x_0}{y_0+y_1}+\ip{x_1}{y_0-y_1}\rvert\le\lVert y_0+y_1\rVert+\lVert y_0-y_1\rVert\le2\sqrt2$ by Cauchy--Schwarz and the parallelogram law; equality needs unit vectors, $y_0\perp y_1$,
+$x_i=(y_0\pm y_1)/\sqrt2$.  For PR the first row forces $x_0=y_0=y_1$ and the second $y_0=-y_1$; outputs of parity $ij$ with probability
+$\tfrac12$ each have uniform marginals.
+\end{proof}
+\begin{remark}[no-signalling does not give Gram positivity]\label{rem:bdpr}
+The PR box is nonsignalling and violates the Gram bound: the bound $2\sqrt2$ uses the composite structure
+of Section~\ref{sec:many} (complex tensor product, joint Born weights), which no-signalling alone does not
+supply.
+\end{remark}
+
+\begin{proposition}[commutator term]\label{prop:bdlandau}
+For involutions, $\mathcal B=A_0\otimes(B_0+B_1)+A_1\otimes(B_0-B_1)$ satisfies $\mathcal B^2=4\mathbf1-[A_0,A_1]\otimes[B_0,B_1]$ \cite{n4:Landau}; a commuting pair on either side
+gives $\lvert S\rvert\le2$, the exact bound of local hidden-variable models.  For Pauli pairs at angles $\alpha$, $\beta$, $N=4\sin\alpha\sin\beta$ and the
+spectrum is $\{\pm\sqrt{4+N},\pm\sqrt{4-N}\}$.  For Alice's axes $Z$, $\cos\alpha Z+\sin\alpha X$ and Bob's $Z$, $\cos\beta Z-\sin\beta X$ on $\Phi^+$, $S=1+\cos\alpha+\cos\beta-\cos(\alpha+\beta)$;
+for $\alpha=\beta=0^\circ,30^\circ,45^\circ,60^\circ,90^\circ$: $N=0,1,2,3,4$ and $S=2,\tfrac12+\sqrt3,1+\sqrt2,\tfrac52,2$ (at $60^\circ$ below $\sqrt7$).
+\end{proposition}
+\begin{proof}
+Expand, using $A_i^2=B_j^2=\mathbf1$; deterministic signs give $\pm2$; Pauli commutators are $2i\sin\alpha$ times a normal Pauli, which also
+exchanges the eigenspaces of $\mathcal B$.
+\end{proof}
+\noindent The Pauli coefficients $\tr(\rho\,\sigma_i\otimes\sigma_j)/4$ determine a two-qubit operator; $\Phi^+$ has correlation matrix $\mathrm{diag}(1,-1,1)$ and the same
+marginals $\mathbf1/2$ as the fully mixed state.  $\lvert0\rangle\langle0\rvert\otimes\lvert0\rangle\langle0\rvert+\lvert1\rangle\langle0\rvert\otimes\lvert1\rangle\langle0\rvert$ has rank one and partial transpose of rank two; a rank classification
+of two-term sums under partial transpose is a library result (Section~\ref{sec:lean}).  For unitaries $A_0,A_1$,
+$B_0,\dots,B_{d-1}$ and $\omega=e^{2\pi i/d}$, the real expectation of $\sum_{x\le1,y<d}\omega^{xy}A_x\otimes B_y$ is at most $2/\sin(\pi/(2d))$ ($2\sqrt2$ at $d=2$): after
+diagonalising $A_0^\dagger A_1$ each block is $\sum_y(1+\omega^yz)B_y$, of norm at most $2\sum_y\lvert\cos(s+\pi y/d)\rvert$, a sum of $d$ signed unit directions with gap $\pi/d$.
+
+\subsection{Repeated tests, first return, reciprocity and phase}\label{sec:bdmonitor}
+
+\begin{proposition}[projected survival]\label{prop:bdzeno}
+For constant $H$ and a projector $P$, $(Pe^{-iHT/(\hbar N)}P)^N\to e^{-i(PHP)|_{\mathrm{ran}P}T/\hbar}$ in operator norm, so the probability of passing all $N$ tests tends to
+$\tr\rho_0P$ \cite{n3:Zeno}; for $H=\hbar\omega X/2$, $\rho_0=P=\lvert0\rangle\langle0\rvert$, $T=\pi/\omega$: $P_N=\cos^{2N}(\pi/(2N))=1-\pi^2/(4N)+O(N^{-2})$, i.e.\ $0,0.531,0.857,0.962$
+for $N=1,4,16,64$ (compare Proposition~\ref{prop:sozeno} and Example~\ref{ex:fmzeno}).
+\end{proposition}
+\begin{proof}
+The compressed step and the compressed-generator unitary differ by $O(\delta^2)$; telescoping $N$ contractions gives $O(N\delta^2)$.
+\end{proof}
+\begin{remark}[a static zero residual does not freeze]\label{rem:bdnofreeze}
+The claims that a static zero transverse residual implies Zeno freezing, or that evolution needs a
+growing dimension, are refuted: $H=\hbar\Omega X/2$ moves $\lvert0\rangle$, which has zero transverse component for a $Z$ readout, inside the
+same two-dimensional space; the projected limit needs actual repeated tests.
+\end{remark}
+
+\begin{theorem}[first return on the relevant space]\label{thm:bdkac}
+For a trace-preserving Kraus map $\mathcal E$, a unit $v$, $P=\lvert v\rangle\langle v\rvert$, $\mathcal F(X)=(\mathbf1-P)\mathcal E(X)(\mathbf1-P)$ and $C$ the span of Kraus words on $v$ with $\mathcal E(\Pi_C)=\Pi_C$, the
+first-return probabilities $p_{k+1}=\tr(P\mathcal E(\mathcal F^k(P)))$ satisfy $\sum_{k<N}p_{k+1}+\tr\mathcal F^N(P)=1$, $\sum_k\mathcal F^k(P)=\Pi_C$ and $\sum_k(k+1)p_{k+1}=\dim C$
+\cite{n4:SKKA,n4:SKA}; for a unitary the mean return time is the number of distinct eigenvalues occupied by $v$
+\cite[Thm.~2]{n4:GVWW}.  For $U=\cos\tfrac\delta2-i\sin\tfrac\delta2X$, $v=\lvert0\rangle$: $p_1=c^2$, $p_{k+1}=s^4c^{2(k-1)}$, mean $2$ ($s\ne0$).
+\end{theorem}
+\begin{proof}
+The monitored and unmonitored word spans agree; the support of $\sum_{k<b}\mathcal F^k(P)$ fills $C$ for some $b$, giving geometric decay of
+$\mathcal F^N(\Pi_C)$; $\mathcal F(\Pi_C)=\Pi_C-P$ telescopes; $p_{k+1}=s_k-s_{k+1}$; the Vandermonde system for the unitary case.
+\end{proof}
+
+\begin{proposition}[reciprocity, purity and phase]\label{prop:bdpurity}
+$\tr P_\psi P_\phi=\lvert\ip\psi\phi\rvert^2$ is symmetric; for $D=\rho-\mathbf1/d$ and a real subspace $L$ of traceless Hermitian operators, $\lVert P_LD\rVert^2+\lVert D-P_LD\rVert^2=\tr\rho^2-1/d\in[0,1-1/d]$,
+and for $L$ spanned by the traceless diagonals of mutually unbiased bases the first term is $\sum(p_{\ell j}-1/d)^2$.  A polynomial in
+$z,\bar z$ is invariant under a common phase iff each monomial has equal degrees; the invariants are generated by
+$z_i\bar z_j$, a nonconstant invariant has degree at least two, and the real quadratic ones are $z^\dagger Hz$.  With $u=(A-\langle A\rangle)\sqrt\rho$,
+$v=(B-\langle B\rangle)\sqrt\rho$ and $z=\ip uv_{\mathrm{HS}}$: $(\Delta A)^2(\Delta B)^2=(\re z)^2+(\im z)^2+G$, $G\ge0$, $\im z=\tr(\rho[A,B])/2i$ (Robertson--Schr\"odinger
+\cite{Robertson,Schrodinger30}; the area term of Theorem~\ref{thm:unc}).
+\end{proposition}
+\begin{proof}
+Pythagoras; MUB diagonals are orthogonal after removing $\mathbf1/d$; the substitution $z=x+iy$; Cauchy--Schwarz.
+\end{proof}
+
+\begin{remark}[two derivations of the exponent that fail]\label{rem:bdexponent}
+(i) \emph{Local reciprocity with binary normalisation does not give the Born exponent}: $w_p(\theta)=\lvert\cos\theta\rvert^p/(\lvert\cos\theta\rvert^p+\lvert\sin\theta\rvert^p)$ is
+symmetric and normalised for every $p>0$; $p=1$, $\theta=\pi/3$ gives $1/(1+\sqrt3)$ instead of $\tfrac14$.  (ii) \emph{Common-phase invariance does
+not force degree two}: $\lvert z\rvert^4$ is invariant; degree two is only the minimal degree.  The exponent in this paper comes
+from composition and normalisation: [W], [Comp] and [N] for one system (Theorem~\ref{thm:readings}), and for
+composites the normalisation and ancilla consistency of Theorem~\ref{thm:bornN}; additivity of effects
+(Gleason, Busch \cite{Gleason57,Busch03}) is another route.  Real squaring, circle squaring and the complex
+modulus squared have fibres of two signs, two antipodes (no continuous section: $2m=1$) and full circles.
+\end{remark}
+
+\noindent\emph{Erasure.}  The heat cost of erasure is Proposition~\ref{prop:fmheat} (with Remark~\ref{rem:fmzeroheat});
+the purity decomposition above is a fixed-state identity, and a unitary can move purity between axes with
+no bath.  For a scalar deposit $E_{\mathrm{pass}}-\Delta S/\beta$ with $\beta,E_{\mathrm{pass}}>0$, positivity is $\beta>\Delta S/E_{\mathrm{pass}}$ (Remark~\ref{rem:fmenergies}).
+
+\subsection{Cloning, recovery, braids, amplification and recurrence}\label{sec:bdmisc}
+
+\begin{proposition}[cloning]\label{prop:bdclone}
+An isometry $\psi\otimes b\mapsto\psi\otimes\psi$ on a set forces overlaps $z=z^2$ ($\lvert z\rvert\le\lvert z\rvert^2$ with input-dependent machine states) \cite{n4:WZ,n4:Dieks};
+orthogonal sets are clonable.  The Bu\v{z}ek--Hillery cloner gives clone Bloch vectors $2r/3$, fidelity $\tfrac56$, machine Bloch
+vector $-r/3$ and entropy $h_2(\tfrac13)$ \cite{n4:BH}; the optimal universal $1\to M$ cloner has Bloch factor $(M+2)/(3M)$ and fidelity
+$(2M+1)/(3M)$ \cite{n4:GM}.
+\end{proposition}
+\begin{proof}
+Inner products; the covariant map $\lvert0\rangle\mapsto\sqrt{2/3}\lvert001\rangle-(\lvert010\rangle+\lvert100\rangle)/\sqrt6$; for the optimum, the average fidelity is
+$\tfrac13+\tfrac1{3M}\tr(J\sum_iP^{Ri}_{\Phi^+})$, and $K=\sigma_R\cdot J_B$ satisfies $K^2+K=J_B\cdot J_B\le M(M+2)/4$, so $K\ge-M/2-1$, attained on the symmetric sector.
+\end{proof}
+
+\begin{proposition}[syndrome recovery]\label{prop:bdrecovery}
+For isometries with $S_i^\dagger S_j=\delta_{ij}\mathbf1$, $X\mapsto\sum_iS_i^\dagger XS_i$ sends $\sum m_{jk}S_j\rho S_k^\dagger$ to $(\tr m)\rho$; a Kraus family with $E_i^\dagger E_j=c_{ij}\mathbf1$ on a code
+has a trace-preserving recovery \cite{n4:KL}.  For the three-qubit repetition code with errors $\mathbf1,X_1,X_2,X_3$, the parities
+$Z_1Z_2,Z_2Z_3$ give syndromes $(+,+),(-,+),(-,-),(+,-)$, and the clock and shift satisfy $ZX=\omega XZ$.
+\end{proposition}
+\begin{proof}
+Orthogonality; diagonalise $c$ by unitary mixing; complete on the complement.
+\end{proof}
+
+\begin{proposition}[racks and braids]\label{prop:bdbraid}
+For a rack ($L_x$ bijective, $x*(y*z)=(x*y)*(x*z)$), $R(x,y)=(x*y,x)$ satisfies the braid relation, and for finite idempotent racks
+the fixed-colouring count is invariant under Markov moves; for $x*y=2x-y\bmod3$ the braids $\sigma_1,\sigma_1^2,\sigma_1^3$ have $3,3,9$ fixed
+colourings.  The Jordan--Wigner operators $c_j=Z_1\cdots Z_{j-1}\lvert0\rangle\langle1\rvert_j$ satisfy the canonical anticommutation relations; the
+physical exchange of anyons needs a configuration space and a unitary representation \cite{n4:Nayak}.
+\end{proposition}
+\begin{proof}
+Self-distributivity; stabilisation extends a fixed point by its last colour; $R=\mathbf1+K$ with $K^2=0$ over $\Z/3$.
+\end{proof}
+
+\begin{proposition}[coherent amplification and a query bound]\label{prop:bdamplify}
+For an isometry $J$ and a projector $P$ with $J^\dagger PJ=p\mathbf1$, $0<p<1$, $\vartheta=\arcsin\sqrt p$, the iterate $(2JJ^\dagger-\mathbf1)(\mathbf1-2P)$ maps $J$ after $m$ steps to
+$\sin((2m+1)\vartheta)W+\cos((2m+1)\vartheta)F$ \cite{ex-Grover97,n4:BHMT}.  In the oracle model, success $\ge\tfrac23$ for every marked item among $L\ge6$ needs
+$Q\ge\sqrt{L-3}/12$ queries \cite{n4:BBBV}.
+\end{proposition}
+\begin{proof}
+Two reflections rotate by $2\vartheta$ on each two-plane; the hybrid argument bounds the summed squared distances by $4Q^2$, and $L-3$
+items need distance at least $\tfrac16$.
+\end{proof}
+
+\begin{proposition}[closed orbits, windows and truncation]\label{prop:bdtorus}
+Averages of continuous functions along $x+ng$ on $\mathbb T^d$ converge uniformly to the Haar average on $x+\overline{\{ng\}}$ \cite{n4:Weyl}; open windows
+meeting the orbit closure are visited with bounded gaps.  For $\alpha\in(0,1)$ and the window $[a,a+1-\alpha)$, the visit count obeys
+$H_N-N(1-\alpha)=\{\xi+(N+1)\alpha\}-\{\xi+\alpha\}$ ($\xi=u-a$), e.g.\ $H_{21}=8$ for $\alpha=\varphi-1$, $a=u=0$.  Increasing closed subspaces have projections converging
+strongly to the projection onto their closed union, $\lVert\mathbf1-P_V\rVert=1$ for proper $V$, and the observability tower $\sum_{k\le m}(T^\dagger)^k\mathrm{ran}L^\dagger$
+has at most $\dim V-\rk L$ strict increases, the first plateau being permanent.  A unitary preserving the coordinate
+rays and a connected family of test rays is a common phase.
+\end{proposition}
+\begin{proof}
+Characters and Stone--Weierstrass; carries of $\lfloor\xi+n\alpha\rfloor$; best approximation; invariant subspaces; eigenvalues propagate along
+connected supports.
+\end{proof}
+\begin{remark}[projected periods]\label{rem:bdhelix}
+Not every projected period or truncation limit is spurious: a circular orbit is periodic and coordinate
+projections of $\ell^2$ converge strongly to $\mathbf1$; the helix $(\cos t,\sin t,ct)$, $c\ne0$, is injective with a periodic planar projection,
+and a readout including the level detects each step.  (Euclid's $\prod_{p\in S}p+1$ gives a new prime direction:
+$30031=59\cdot509$.)
+\end{remark}
+
+\begin{remark}[hypotheses and programme]\label{rem:bdprogramme}
+The time bounds assume calibrated dynamics (Hypothesis Cd), the rate of records the branch schedule
+(Hypothesis Bs); the correlation bound the composite structure; recurrence a compact orbit.  A physical
+identification of elapsed time with growing observable rank, or of proper time with the state-space
+rapidity of Theorem~\ref{thm:velocity}, needs a coupling to the event metric and a calibrated relation to
+clocks; energy eigenstates accrue phase without projective motion.  For pure evolution the total
+variation of a projection probability is at most the projective length.
+\end{remark}
+
 
 
 %=====================================================================================
@@ -4663,13 +4967,14 @@ modular flow and its Gibbs criterion (C0--C3, [Span], [T]), and [Cl] (under [Ph]
 outcomes, the statistics of any record process: Born at every stage iff martingale weights, with the
 restart converse, affine unread maps from no-signalling, and the Born threshold and simplex laws exactly
 for the invariant auxiliary law ([R], Theorems~\ref{thm:sorigidity}, \ref{thm:sosphere}, \ref{thm:sosimplex}), and the inverse-tick
-bound ([Tr]); for finite memories, Gram extension and weak nesting ([Gw]), the reset bound (Gibbs bath, joint
+bound ([Tr]); the rapidity--entanglement budget for three qubits, the speed limits with their
+sharp constants ([Cd]) and the Tsirelson bound from the composite inputs (Section~\ref{sec:bounds}); for finite memories, Gram extension and weak nesting ([Gw]), the reset bound (Gibbs bath, joint
 unitarity, kept side marginal), exact phase recovery and gluing on chordal patterns; $\U(2)$ and the mass-form eigenvalue ratio (F), and $m_W=m_Z\cos\theta_W$ as tree-level masses (F, F$_{\mathrm g}$(a)); the Pati--Salam
 group, its breaking and the hypercharges (C0--C3, [Span], G(i)--(iv)); $\sin^2\theta_W=\tfrac38$ (G(v));
 the round-$S^4$ couplings $\kappa_V=\sqrt{1-\xi}$, $\kappa_{2V}=1-2\xi$ (F, F$_{\mathrm g}$(a), F$_{\mathrm H}$); the obstruction for the ungauged back-reacting centre field and the zero-stress flat vacuum (E, F, GR; F$_{\mathrm g}$).
 \emph{Inputs not derived}: [Bil], [Bil$_\cL$], [Span], [Loc], [O], [N], Postulates C1(b), C2, C3, [Sub], the reading
 inputs [L], [W], [Comp], [T], and [B] or, equivalently, [Cl] with [NT], the hypotheses $w\ge0$, $w=f(\beta_N)$ and (a)--(c) of
-Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), [R], [Tr], [Gw], [Ue], [Ca], Hypotheses Ap, U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm H}$ (with F$_{\mathrm{Hf}}$), F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
+Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), [R], [Tr], [Cd], [Bs], [Gw], [Ue], [Ca], Hypotheses Ap, U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm H}$ (with F$_{\mathrm{Hf}}$), F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
 [Bil$_\cL$], [Loc], [O] and [N] for the composite.
 \emph{Open}: a unit of length; $G_Nv^2$; Hypothesis~GR with sources and its consistency with
 Hypothesis~E; the ratio $g'/g$; the number of structures; three generations; scales, masses and
@@ -5089,6 +5394,7 @@ Effects, POVMs, instruments, complete positivity, conditional states & theorem f
 Origin-free generators: clock, exchange; closed pair unique up to time unit & theorem; permutation-symmetric generator fixed up to time unit iff $N\in\{2,3\}$\\
 Connected closed clock-invariant round-trip-closed sets are spheres of complex subspaces; all dimensions $1\le d\le2^N$; exchange sector $\mathrm{Sym}^N(\C^2)$ & theorem (Prop.~\ref{prop:rtclosed}; Cor.~\ref{cor:substructure} under C0--C2, [Span]; Prop.~\ref{prop:symsector} under C0, C1, [Span], C3); as systems: [Sub]\\
 Skyrme term: area square, degree bound $6\pi^2v/e_{\mathrm S}$, scaling, Hopf charge and its bound, $\pi_1$ of configuration spaces, screening, radial unwinding & theorem under [F], [F$_{\mathrm S}$] (Thm.~\ref{thm:skbound}, Props.~\ref{prop:skhopf}, \ref{prop:skconfig}, \ref{prop:skscreen}, \ref{prop:skradial}, Thm.~\ref{thm:vk}); existence of minimisers and spin from rotations: cited; metastability: conjecture; particle readings: [P]\\
+Bounds: rapidity--entanglement budget (three qubits; $n$ qubits via Osborne--Verstraete), probability flow, speed limits with their constants, Margolus--Levitin, sagitta, Tsirelson bound and PR exclusion, Landau identity, first return, cloning, recovery, amplification & theorem (Thm.~\ref{thm:bdbudget}, Lemma~\ref{lem:bdroof}, Props.~\ref{prop:bdflow}, \ref{prop:bdmt}, \ref{prop:bdml}, Thms.~\ref{thm:bdchsh}, \ref{thm:bdkac}); $n$-qubit monogamy, Mandelstam--Tamm, Margolus--Levitin, Tsirelson, optimal cloning: cited and reproved where stated; time bounds under [Cd], [Bs]; physical clock identification: programme\\
 Finite memory: Gram extension and weak nesting, caps, capacity, reset heat, exact eraser criterion, gluing on chordal patterns, pointer records, redundancy, barycentre, holonomy bound & theorem (Thms.~\ref{thm:fmschur}, \ref{thm:fmeraser}, \ref{thm:fmglue}, \ref{thm:fmpointer}, \ref{thm:fmbary}, \ref{thm:fmberry}; Props.~\ref{prop:fmheat}, \ref{prop:fmredundancy}); window: [Gw]; geometry-to-entropy: [Ue]; access: [Ca]; broadcast: cited; small-phase control: conjecture (Conj.~\ref{conj:fmcontrol}); dynamical records: programme\\
 Single outcomes & no covariant rule at ties; Kochen--Specker for composites (Prop.~\ref{prop:nooutcome}); theorem under [R]: Born at every stage $\Leftrightarrow$ martingale (Thm.~\ref{thm:sorigidity}), restart converse (Cor.~\ref{cor:sorestart}); no-signalling $\Rightarrow$ affine unread map (Prop.~\ref{prop:sochannels}); threshold and simplex laws (Thms.~\ref{thm:sosphere}, \ref{thm:sosimplex}); inverse-tick bound under [Tr] (Prop.~\ref{prop:soresolution}); invariant apparatus sampling: [Ap], Conj.~\ref{conj:somixing}; which dynamics is realised: open\\
 Velocity space; $\gamma^{-1}=$ concurrence & theorem about states; (Q5) not answered\\
@@ -5133,6 +5439,7 @@ Electroweak sector under F, F$_{\mathrm g}$(a), F$_{\mathrm r}$: custodial Stand
 Electroweak sector under F, F$_{\mathrm g}$(a), F$_{\mathrm H}$: round $S^4$ target & [X]: $\kappa_{2V}=2\kappa_V^2-1$ with $\kappa_V\le1$ common to $W$ and $Z$, and Goldstone growth $s/f^2$; a significant deviation after radiative and matching corrections refutes F$_{\mathrm H}$; present bound from the quoted $\kappa_V$: $\xi\le0.039$, $f\ge1.24$\,TeV (one-sided 95\%, separate Gaussians, no covariance); $m_h$ is [D]\\
 Pati--Salam group, global form, hypercharges, anomaly cancellation & [M] under G(i)--(iv); agree with the Standard Model; no breaking scale or heavy vectors supplied\\
 $\sin^2\theta_W=\tfrac38$ (G(v)) or $\tfrac12$ as boundary values & [X]: with Standard Model running and no thresholds the colour condition fails; the required shifts are Remark~\ref{rem:couplings}; $\hat s_Z^2$ is [D]\\
+Bounds & [M]: budget, speed limits, CHSH bound; [S]: these are statements of standard quantum mechanics, so they distinguish nothing; a measured $\lvert S\rvert>2\sqrt2$ or a violated budget would contradict C0--C2\\
 Finite memory & [M]: extension, gluing and recovery criteria; [S]: the reset bound is the Landauer--Reeb--Wolf balance; physical record dynamics: programme\\
 Single outcomes & [M]: martingale equivalence, threshold and simplex laws, inverse-tick bound under [Tr]; the Born statistics are those of standard quantum mechanics, so no example distinguishes; an objective-collapse completion would be [X] through recoherence tests (Example~\ref{ex:sorecoherence}), none is fixed here\\
 Closed register and internal clocks & [M]: finite identities and bounds; Conjecture~\ref{conj:cueth} is a mathematical statement that computation at larger $n$ could refute; [S]: the conditional dynamics is that of standard quantum mechanics with a Page--Wootters reading; the physical readings [U], [A] are not tested here\\
@@ -5254,7 +5561,16 @@ matrices; orthogonal-complement projection identities; two-axis finite words and
 anchored and tree phase transport; a strictly increasing generation ledger; two- and three-anchor Gram
 determinant formulas and Gram realisability; Kraus completion; equal effects with different two-step
 joint laws; the axis-contraction commutator; the qubit Bargmann triple formula; a Bures--Wasserstein
-barycentre from a dual certificate; and the separable-cone residual witness.  These are library results,
+barycentre from a dual certificate; and the separable-cone residual witness.  For Section~\ref{sec:bounds}:
+the calibrated unitary group and the projection-probability flow; the Fubini--Study angle triangle and
+record-time bounds; Tsirelson tightness for a fixed Bell operator and state, the Landau identity, the
+commuting collapse, the CHSH spectrum and the exact classical bound; a classification of partial-transpose
+rank doubling for two-term tensor sums; the Fourier-weighted bound; monitored spectral mean and quantum
+Kac recurrence; the decoherence-freeze threshold; the common-phase polynomial theorem, diagonal phase
+blindness and the Robertson--Schr\"odinger relation; no-cloning and the cloning machine spectrum; syndrome
+decoding and Kraus reversibility; braid colouring transport and Markov invariance; Jordan--Wigner
+anticommutation; uniform amplitude amplification; torus equidistribution and window returns; Krylov growth;
+and connected-ray phase rigidity.  These are library results,
 not checks of this paper's statements.\par}
 
 {\sloppy Every identity stated above was checked numerically on random inputs by the accompanying
@@ -5285,7 +5601,11 @@ the cosine, spectral, basis and Zeno values) and \texttt{check\_finitemem.py} (S
 groups; own checks of the Schur slack and weak nesting, the reset balance with side information, the
 eraser trace distance, the gluing witnesses, CHSH and the Peres--Mermin square, the redundancy bound,
 the barycentre certificate, the latitude holonomy with zero work, the coverage bound, and the spiral
-areas by independent quadrature).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
+areas by independent quadrature) and \texttt{check\_bounds.py} (Section~\ref{sec:bounds}: seven groups;
+own checks of the budget on random three-qubit states against the residual tangle, the normal-form
+deficit, the Bell, $W$ and GHZ values, the orthogonalisation times against both bounds, the clock numbers,
+the vanishing sagitta sums, the CHSH Gram bound and the PR obstruction, the Landau identity and
+spectrum, the Fourier bound, the Zeno and Kac values, cloning, braid and window counts).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
 \ref{thm:product}; Propositions~\ref{prop:relative}, \ref{prop:solder}, \ref{prop:pairsu3}, \ref{prop:angle38},
 \ref{prop:universal}, \ref{prop:cosmo}, \ref{prop:solderunique}, \ref{prop:centre}, \ref{prop:superselection} (with its
 classification of weights and free split), \ref{prop:rtclosed}, \ref{prop:symsector}, \ref{prop:subops},
@@ -5921,6 +6241,46 @@ contributions.
 \bibitem{n2-peres} A.~Peres, Incompatible results of quantum measurements, Phys.\ Lett.\ A \textbf{151}, 107--108 (1990).
 
 \bibitem{n2-mermin} N.~D.~Mermin, Simple unified form for the major no-hidden-variables theorems, Phys.\ Rev.\ Lett. \textbf{65}, 3373--3376 (1990).
+
+\bibitem{n4:CKW} V.~Coffman, J.~Kundu, and W.~K.~Wootters, Distributed entanglement, Phys.\ Rev.\ A \textbf{61}, 052306 (2000).
+
+\bibitem{n4:OV} T.~J.~Osborne and F.~Verstraete, General monogamy inequality for bipartite qubit entanglement, Phys.\ Rev.\ Lett.\ \textbf{96}, 220503 (2006).
+
+\bibitem{n4:MT} L.~Mandelstam and I.~Tamm, The uncertainty relation between energy and time in non-relativistic quantum mechanics, J.\ Phys.\ USSR \textbf{9}, 249--254 (1945).
+
+\bibitem{n4:AA} J.~Anandan and Y.~Aharonov, Geometry of quantum evolution, Phys.\ Rev.\ Lett.\ \textbf{65}, 1697--1700 (1990).
+
+\bibitem{n4:ML} N.~Margolus and L.~B.~Levitin, The maximum speed of dynamical evolution, Physica D \textbf{120}, 188--195 (1998).
+
+\bibitem{n4:Tsirelson} B.~S.~Cirel'son, Quantum generalizations of Bell's inequality, Lett.\ Math.\ Phys.\ \textbf{4}, 93--100 (1980).
+
+\bibitem{n4:PR} S.~Popescu and D.~Rohrlich, Quantum nonlocality as an axiom, Found.\ Phys.\ \textbf{24}, 379--385 (1994).
+
+\bibitem{n4:Landau} L.~J.~Landau, On the violation of Bell's inequality in quantum theory, Phys.\ Lett.\ A \textbf{120}, 54--56 (1987).
+
+\bibitem{n4:GVWW} F.~A.~Gr\"unbaum, L.~Vel\'azquez, A.~H.~Werner, and R.~F.~Werner, Recurrence for discrete time unitary evolutions, Commun.\ Math.\ Phys.\ \textbf{320}, 543--569 (2013).
+
+\bibitem{n4:SKA} P.~Sinkovicz, T.~Kiss, and J.~K.~Asb\'oth, Generalized Kac lemma for recurrence time in iterated open quantum systems, Phys.\ Rev.\ A \textbf{93}, 050101(R) (2016).
+
+\bibitem{n4:WZ} W.~K.~Wootters and W.~H.~Zurek, A single quantum cannot be cloned, Nature \textbf{299}, 802--803 (1982).
+
+\bibitem{n4:Dieks} D.~Dieks, Communication by EPR devices, Phys.\ Lett.\ A \textbf{92}, 271--272 (1982).
+
+\bibitem{n4:BH} V.~Bu\v zek and M.~Hillery, Quantum copying: Beyond the no-cloning theorem, Phys.\ Rev.\ A \textbf{54}, 1844--1852 (1996).
+
+\bibitem{n4:GM} N.~Gisin and S.~Massar, Optimal quantum cloning machines, Phys.\ Rev.\ Lett.\ \textbf{79}, 2153--2156 (1997).
+
+\bibitem{n4:KL} E.~Knill and R.~Laflamme, Theory of quantum error-correcting codes, Phys.\ Rev.\ A \textbf{55}, 900--911 (1997).
+
+\bibitem{n4:Nayak} C.~Nayak, S.~H.~Simon, A.~Stern, M.~Freedman, and S.~Das~Sarma, Non-Abelian anyons and topological quantum computation, Rev.\ Mod.\ Phys.\ \textbf{80}, 1083--1159 (2008).
+
+\bibitem{n4:BHMT} G.~Brassard, P.~H{\o}yer, M.~Mosca, and A.~Tapp, Quantum amplitude amplification and estimation, Contemp.\ Math.\ \textbf{305}, 53--74 (2002), arXiv:quant-ph/0005055.
+
+\bibitem{n4:BBBV} C.~H.~Bennett, E.~Bernstein, G.~Brassard, and U.~Vazirani, Strengths and weaknesses of quantum computing, SIAM J.\ Comput.\ \textbf{26}, 1510--1523 (1997).
+
+\bibitem{n4:Weyl} H.~Weyl, \"Uber die Gleichverteilung von Zahlen mod.\ Eins, Math.\ Ann.\ \textbf{77}, 313--352 (1916).
+
+\bibitem{n4:SKKA} P.~Sinkovicz, Z.~Kurucz, T.~Kiss, and J.~K.~Asb\'oth, Quantized recurrence time in unital iterated open quantum dynamics, Phys.\ Rev.\ A \textbf{91}, 042108 (2015).
 
 \bibitem{CLT74} J.~M.~Cornwall, D.~N.~Levin, and G.~Tiktopoulos, Derivation of gauge invariance from high-energy unitarity bounds on the S matrix, Phys.\ Rev.\ D \textbf{10}, 1145 (1974); Erratum \textbf{11}, 972 (1975).
 

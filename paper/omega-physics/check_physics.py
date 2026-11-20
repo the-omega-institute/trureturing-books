@@ -2599,4 +2599,131 @@ oka &= np.allclose(Sch, np.diag([1/4, 441/580]))
 print(f"     spiral areas by quadrature {np.round(areas, 4)}, det 0.041133, emptiness certificates, common areas {common3:.4f}, {common9:.4f}, Gram eigenvalues, centroid, fill: {bool(oka)}")
 results.append(bool(oka))
 
+# =====================================================================================
+# 51. (Round 28) bounds: budget, speed limits, CHSH, Landau, Fourier bound, Zeno, Kac, cloning, braids, windows
+specb = importlib.util.spec_from_file_location("check_bounds", os.path.join(here, "check_bounds.py"))
+rb_ = importlib.util.module_from_spec(specb); buf = io.StringIO()
+try:
+    with contextlib.redirect_stdout(buf):
+        specb.loader.exec_module(rb_)
+        for fn in ("check_entanglement", "check_rates", "check_bell", "check_monitoring", "check_purity_and_phase",
+                   "check_cloning_and_codes", "check_recurrence_and_growth"):
+            getattr(rb_, fn)()
+    okb_ = True
+except Exception as ex:
+    okb_ = False; print("     check_bounds error:", repr(ex))
+print(f"     check_bounds.py: all seven test groups passed: {okb_}")
+results.append(okb_)
+SYY = np.kron(np.array([[0, -1j], [1j, 0]]), np.array([[0, -1j], [1j, 0]]))
+def conc(rho):
+    R = rho @ SYY @ rho.conj() @ SYY
+    ev = np.sort(np.sqrt(np.abs(np.linalg.eigvals(R))))[::-1]
+    return max(0.0, ev[0] - ev[1] - ev[2] - ev[3])
+def ptr3(psi, keep):
+    t = np.outer(psi, psi.conj()).reshape([2]*6)
+    if keep == 'AB': return np.einsum('abcdec->abde', t).reshape(4, 4)
+    if keep == 'AC': return np.einsum('abcdbf->acdf', t).reshape(4, 4)
+    if keep == 'A': return np.einsum('abcdbc->ad', t)
+def hyperdet(a):
+    a = a.reshape(2, 2, 2)
+    d1 = (a[0,0,0]**2*a[1,1,1]**2 + a[0,0,1]**2*a[1,1,0]**2 + a[0,1,0]**2*a[1,0,1]**2 + a[1,0,0]**2*a[0,1,1]**2)
+    d2 = (a[0,0,0]*a[1,1,1]*a[0,1,1]*a[1,0,0] + a[0,0,0]*a[1,1,1]*a[1,0,1]*a[0,1,0] + a[0,0,0]*a[1,1,1]*a[1,1,0]*a[0,0,1]
+          + a[0,1,1]*a[1,0,0]*a[1,0,1]*a[0,1,0] + a[0,1,1]*a[1,0,0]*a[1,1,0]*a[0,0,1] + a[1,0,1]*a[0,1,0]*a[1,1,0]*a[0,0,1])
+    d3 = (a[0,0,0]*a[1,1,0]*a[1,0,1]*a[0,1,1] + a[1,1,1]*a[0,0,1]*a[0,1,0]*a[1,0,0])
+    return d1 - 2*d2 + 4*d3
+ok = True
+for _ in range(100):
+    psi = rng.normal(size=8) + 1j*rng.normal(size=8); psi /= np.linalg.norm(psi)
+    rA = ptr3(psi, 'A'); cAB, cAC = conc(ptr3(psi, 'AB')), conc(ptr3(psi, 'AC'))
+    lhs = cAB**2 + cAC**2; rhs = 4*np.linalg.det(rA).real
+    tau3 = 4*abs(hyperdet(psi))
+    ok &= lhs <= rhs + 1e-6 and abs(rhs - lhs - tau3) < 1e-6 and rhs <= 1 + 1e-12
+for _ in range(50):
+    a, b, c, d, e = rng.normal(size=5) + 1j*rng.normal(size=5); v = np.zeros(8, complex)
+    v[0], v[4], v[5], v[6], v[7] = a, b, c, d, e; nv = np.linalg.norm(v); v /= nv; a, b, c, d, e = v[0], v[4], v[5], v[6], v[7]
+    ok &= abs(conc(ptr3(v, 'AB'))**2 - 4*abs(a*d)**2) < 1e-6 and abs(conc(ptr3(v, 'AC'))**2 - 4*abs(a*c)**2) < 1e-6
+    ok &= abs(4*np.linalg.det(ptr3(v, 'A')).real - 4*abs(a)**2*(abs(c)**2 + abs(d)**2 + abs(e)**2)) < 1e-10
+    ok &= abs(4*np.linalg.det(ptr3(v, 'A')).real - 4*abs(a*d)**2 - 4*abs(a*c)**2 - 4*abs(a*e)**2) < 1e-10
+W = np.zeros(8); W[[1, 2, 4]] = 1/np.sqrt(3); G = np.zeros(8); G[[0, 7]] = 1/np.sqrt(2); Bl = np.zeros(8); Bl[[0, 6]] = 1/np.sqrt(2)
+ok &= np.allclose([conc(ptr3(W, 'AB'))**2, conc(ptr3(W, 'AC'))**2, 4*np.linalg.det(ptr3(W, 'A')).real], [4/9, 4/9, 8/9])
+ok &= np.allclose([conc(ptr3(G, 'AB')), conc(ptr3(G, 'AC')), 4*np.linalg.det(ptr3(G, 'A')).real], [0, 0, 1])
+ok &= np.allclose([conc(ptr3(Bl, 'AB'))**2, conc(ptr3(Bl, 'AC'))**2, 4*np.linalg.det(ptr3(Bl, 'A')).real], [1, 0, 1])
+print(f"     budget on random three-qubit states (deficit = 4|hyperdet|), normal-form deficit 4|ae|^2, Bell/W/GHZ values: {bool(ok)}")
+results.append(bool(ok))
+# speed limits
+okr = True
+for _ in range(30):
+    dim_ = 4; Hm = rng.normal(size=(dim_, dim_)) + 1j*rng.normal(size=(dim_, dim_)); Hm = Hm + Hm.conj().T
+    w_, U_ = np.linalg.eigh(Hm); ps = rng.normal(size=dim_) + 1j*rng.normal(size=dim_); ps /= np.linalg.norm(ps)
+    c_ = U_.conj().T @ ps; pr = np.abs(c_)**2; dE = np.sqrt(pr @ w_**2 - (pr @ w_)**2); Eb = pr @ w_ - w_.min()
+    ts = np.linspace(1e-4, 40, 200001); ov = np.abs(np.exp(-1j*np.outer(ts, w_)) @ pr)
+    hit = ts[ov < 1e-3]
+    if hit.size: okr &= hit[0] >= np.pi/(2*dE) - 1e-3 and hit[0] >= np.pi/(2*Eb) - 1e-3
+    tt = rng.uniform(0, 5); okr &= np.arccos(min(1, abs(np.exp(-1j*w_*tt) @ pr))) <= dE*tt + 1e-12
+xg = np.linspace(0, 20, 200001); okr &= np.all(np.cos(xg) >= 1 - (2/np.pi)*(xg + np.sin(xg)) - 1e-12)
+okr &= abs(abs(0.5*(1 + np.exp(-1j*np.pi))) ) < 1e-15
+Eg = 1.0; t3 = 2*np.pi/3; okr &= abs(abs(1 + 2*np.cos(t3))/3) < 1e-12 and abs(np.sqrt(2/3) - np.sqrt((0 + 1 + 4)/3 - 1)) < 1e-12
+okr &= t3 > np.pi/(2*np.sqrt(2/3)) and t3 > np.pi/2
+f5 = 5e9; okr &= abs(1/(2*f5) - 100e-12) < 1e-24 and abs(4*f5*25e-9 - 500) < 1e-9 and abs(np.pi/(2*np.pi*10e6) - 50e-9) < 1e-20
+okr &= all(N_*(1 - np.cos(1.0/N_)) <= 1.0/(2*N_) + 1e-15 for N_ in (1, 10, 100, 1000))
+print(f"     orthogonalisation times >= pi hbar/(2 dE) and pi hbar/(2 Ebar); FS length bound; ML inequality; clock numbers; sagitta sums -> 0: {bool(okr)}")
+results.append(bool(okr))
+# CHSH: Gram bound, PR exclusion, Landau identity and spectrum, angle values, Fourier bound
+okc = True
+for _ in range(200):
+    Vv = rng.normal(size=(4, 6)); Vv /= np.maximum(1, np.linalg.norm(Vv, axis=1))[:, None]
+    x0, x1, y0, y1 = Vv; okc &= abs(x0 @ y0 + x0 @ y1 + x1 @ y0 - x1 @ y1) <= 2*np.sqrt(2) + 1e-12
+mineig = -10.0
+for u_ in np.linspace(-1, 1, 81):
+    for w2 in np.linspace(-1, 1, 81):
+        Gm = np.array([[1, u_, 1, 1], [u_, 1, 1, -1], [1, 1, 1, w2], [1, -1, w2, 1]])
+        mineig = max(mineig, np.min(np.linalg.eigvalsh(Gm)))
+okc &= mineig < -0.1
+def rot(t): return np.cos(t)*Zp + np.sin(t)*Xp
+for al in np.radians([0, 30, 45, 60, 90]):
+    A0, A1, B0, B1 = Zp, rot(al), Zp, np.cos(al)*Zp - np.sin(al)*Xp
+    Bop = np.kron(A0, B0 + B1) + np.kron(A1, B0 - B1)
+    okc &= np.allclose(Bop @ Bop, 4*np.eye(4) - np.kron(A0 @ A1 - A1 @ A0, B0 @ B1 - B1 @ B0))
+    Nn = 4*np.sin(al)**2; okc &= np.allclose(np.sort(np.linalg.eigvalsh(Bop)), np.sort([np.sqrt(4 + Nn), -np.sqrt(4 + Nn), np.sqrt(abs(4 - Nn)), -np.sqrt(abs(4 - Nn))]), atol=1e-7)
+    Sv = (phi.conj() @ Bop @ phi).real
+    okc &= abs(Sv - (1 + 2*np.cos(al) - np.cos(2*al))) < 1e-12
+okc &= abs((1 + 2*np.cos(np.pi/3) - np.cos(2*np.pi/3)) - 2.5) < 1e-12 and 2.5 < np.sqrt(7)
+from scipy.stats import unitary_group as _ug
+for dd in (2, 3, 4):
+    om_ = np.exp(2j*np.pi/dd); best = 0
+    for _ in range(40):
+        As_ = [_ug.rvs(2, random_state=rng) for _ in range(2)]; Bs_ = [_ug.rvs(2, random_state=rng) for _ in range(dd)]
+        Op = sum(om_**(x*y)*np.kron(As_[x], Bs_[y]) for x in range(2) for y in range(dd))
+        best = max(best, np.max(np.linalg.eigvalsh((Op + Op.conj().T)/2)))
+    okc &= best <= 2/np.sin(np.pi/(2*dd)) + 1e-9
+print(f"     CHSH Gram bound, PR correlators have no PSD completion (best smallest eigenvalue {mineig:.3f}), Landau identity and spectrum, S(alpha), Fourier bound: {bool(okc)}")
+results.append(bool(okc))
+# Zeno, Kac, reciprocity, cloning, braids, window, amplification, primes
+okz = all(abs(np.cos(np.pi/(2*N_))**(2*N_) - v_) < 5e-4 for N_, v_ in ((1, 0), (4, 0.531), (16, 0.857), (64, 0.962)))
+dl = 0.7; cc, ss = np.cos(dl/2), np.sin(dl/2)
+pk = [cc**2] + [ss**4*cc**(2*(k - 1)) for k in range(1, 4000)]
+okz &= abs(sum(pk) - 1) < 1e-12 and abs(sum((k + 1)*p for k, p in enumerate(pk)) - 2) < 1e-10
+for _ in range(5):
+    Uu = _ug.rvs(4, random_state=rng); v0 = np.zeros(4, complex); v0[0] = 1
+    Pp = np.outer(v0, v0.conj()); Qq = np.eye(4) - Pp; Fk = Pp.copy(); mean = 0; tot = 0
+    for k in range(4000):
+        pnext = np.trace(Pp @ Uu @ Fk @ Uu.conj().T).real; mean += (k + 1)*pnext; tot += pnext
+        Fk = Qq @ Uu @ Fk @ Uu.conj().T @ Qq
+    okz &= abs(tot - 1) < 1e-6 and abs(mean - 4) < 1e-3
+okz &= abs(0.5/(0.5 + np.sqrt(3)/2) - 1/(1 + np.sqrt(3))) < 1e-15 and abs(1/(1 + np.sqrt(3)) - 0.25) > 0.1
+okz &= abs(2/3*1 - (1 + 2/3)/2*0 - 2/3) < 1e-15 and abs((1 + 2/3)/2 - 5/6) < 1e-15 and all(abs((M_ + 2)/(3*M_) - (2*((2*M_ + 1)/(3*M_)) - 1)) < 1e-15 for M_ in range(1, 8))
+Rm = np.array([[2, -1], [1, 0]]); cnt = []
+for k in (1, 2, 3):
+    Rk = np.linalg.matrix_power(Rm, k) % 3; cnt.append(sum(1 for x in range(3) for y in range(3) if ((Rk @ [x, y]) % 3 == [x, y]).all()))
+okz &= cnt == [3, 3, 9]
+al_ = (1 + np.sqrt(5))/2 - 1; Hh = sum(1 for n_ in range(1, 22) if (n_*al_ % 1) < 1 - al_)
+okz &= Hh == 8 and abs(Hh - 21*(1 - al_) - (((22*al_) % 1) - (al_ % 1))) < 1e-12
+okz &= 2*3*5*7*11*13 + 1 == 30031 == 59*509
+th_ = np.arcsin(np.sqrt(0.1)); vec = np.array([np.sqrt(0.9), np.sqrt(0.1)])   # (F, W) coordinates: cos, sin
+Rg = np.array([[np.cos(2*th_), -np.sin(2*th_)], [np.sin(2*th_), np.cos(2*th_)]])
+for m_ in range(1, 5):
+    vm = np.linalg.matrix_power(Rg, m_) @ vec; okz &= np.allclose(vm, [np.cos((2*m_ + 1)*th_), np.sin((2*m_ + 1)*th_)])
+print(f"     Zeno values, Kac means (qubit 2, random U(4) 4), reciprocity 1/(1+sqrt3), cloning numbers, braid counts 3,3,9, H_21 = 8, amplification, 30031: {bool(okz)}")
+results.append(bool(okz))
+
 print(f"\nALL CHECKS PASSED: {all(results)}  ({sum(results)}/{len(results)})")
