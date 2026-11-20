@@ -226,6 +226,7 @@
   - [39.2 The Five-Tier Deduction Cascade of AXIOM-Ω and Apophatic Self-Transparency: Uniting Number Systems & Calculus, Dual Relativity, Four-Force Unification, Arithmetic Critical Spectra, and Geodesic Intelligence from One Origin-Free Axiom](ch39-s25-axiom-omega-five-tier-deduction-cascade.md)
   - [39.3 Deriving the Five Postulates of Quantum Mechanics from AXIOM-Ω: Dissolving the Century-Old Measurement Paradox as Ternion-Field Projection Geometry](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md)
   - [39.4 The Self-Contained Ternion Topological Particle, Field–Wave–Particle Grade Identity, and Fourfold Proof of "No Exterior": Why Nonlinearity and Isotropy Eliminate Extrinsic Point C and Every "Outside"](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)
+  - [39.5 Dyad Plus Relation Equals Ternion Field and Two-Order Future Recurrence: From 2+1=3 Orthogonal Commutator Closure, Gauge Connection, and Lie-Triple Curvature to Bianchi–Ostrogradsky Second-Order Finality](ch39-s28-dyad-relation-future-and-second-order-field.md)
 
 # Coda and Appendices
 

@@ -1112,6 +1112,27 @@ Each original point over $(c,v)$ receives $Q(c,v)/|H|$ under the product law. Th
 
 For example, use $Y_1,Y_2,Y_1+Y_2+B$ and $B$ as four outputs. The coset of the first three is determined by their binary sum $B$. The reduced joint law has output $(B,B)$, while the reduced product law replaces the first coordinate by an independent fair bit. For each value of the second coordinate, the two conditional laws of the first have total variation $1/2$. Hence the four-output total variation is $1/2$.
 
+**Recovering biases from the coset law (written derivation).** Let the biased input bits $X_j$ be independent, with $\Pr(X_j=1)=t_j\in(0,1/2)$. Write $c_j\in C$ for the image of the column of input $j$ in the quotient. The coset output is $Y=s+\sum_j c_jX_j$, with the projected affine offset $s$. For each nonzero $c\in C$, define $q_c=\prod_{j:c_j=c}(1-2t_j)$, with empty product $1$.
+
+For a linear functional $\lambda\in C^*$, write $\chi_\lambda(c)=(-1)^{\lambda(c)}$ and let $m_\lambda=\mathbb E[\chi_\lambda(Y)]$. Independence of the inputs gives
+
+$$
+\begin{aligned}
+m_\lambda&=\chi_\lambda(s)\prod_{c:\lambda(c)=1}q_c,\\
+\log|m_\lambda|&=\frac12\sum_{c\ne0}
+   \bigl(1-\chi_\lambda(c)\bigr)\log q_c.
+\end{aligned}
+$$
+
+The bias factors are strictly positive, so all these logarithms exist. Fix a nonzero column $a$, multiply the second equation by $\chi_\lambda(a)$, and sum over $\lambda$. The sum of $\chi_\lambda(a)$ over $\lambda$ vanishes. The sum of $\chi_\lambda(a+c)$ equals $|C|$ at $a=c$ and vanishes everywhere else. Hence
+
+$$
+\log q_a=-\frac{2}{|C|}
+  \sum_{\lambda\in C^*}\chi_\lambda(a)\log|m_\lambda|.
+$$
+
+The coset law thus determines the product of the bias factors for each nonzero column. With the offset fixed, those products in turn determine all sign moments, which determine the law. A zero column has no effect on the output. Repeated nonzero columns enter only through their product. For example, factors $(3/4,1/3)$ on one column and $(1/2,1/2)$ on the same column both give $1/4$. Every bias can be recovered individually exactly when the projected columns are nonzero and pairwise distinct.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$

@@ -350,7 +350,7 @@ $$
 
 ---
 
-**从母公理的四相熔合迈向五阶演绎级联、量子五大公理重铸与无外三元数本体收官。** 看清了**无偏比较 $\implies$ 三维三元数 $\implies$ 极小圆弧 $\implies$ 无边界闭合场**是同一条无源三元母公理 $\mathrm{AXIOM}\text{-}\Omega$ 的四副面孔之后，让我们接连踏上全书最后三级峰巅：先在 [§39.2 AXIOM-Ω 五阶大一统演绎级联与公理遮诠闭环](ch39-s25-axiom-omega-five-tier-deduction-cascade.md) 走完贯通五大科学疆域的五阶推演与公理透明化，再在 [§39.3 AXIOM-Ω 导出量子力学五大公理](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md) 将狄拉克—冯·诺依曼五大经验公设逐条还原为三元数场的投影几何定理，最后在压轴终节 [§39.4 自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明](ch39-s27-self-contained-ternion-particle-and-no-exterior.md) 证成无外置 $C$ 点与零外部空间的本体闭合！
+**从母公理的四相熔合迈向五阶演绎级联、量子五大公理重铸、无外三元数本体与两阶关系场收官。** 看清了**无偏比较 $\implies$ 三维三元数 $\implies$ 极小圆弧 $\implies$ 无边界闭合场**是同一条无源三元母公理 $\mathrm{AXIOM}\text{-}\Omega$ 的四副面孔之后，让我们接连踏上全书最后四级峰巅：先在 [§39.2 AXIOM-Ω 五阶大一统演绎级联与公理遮诠闭环](ch39-s25-axiom-omega-five-tier-deduction-cascade.md) 走完贯通五大科学疆域的五阶 `MODEL` 桥接推演与公理透明化，再在 [§39.3 AXIOM-Ω 导出量子力学五大公理](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md) 于显式 `T1–T4` 桥接条件与 `MODEL` 投影综合下将狄拉克—冯·诺依曼五大经验公设逐条还原为三元数场的切面投影几何，继而在 [§39.4 自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明](ch39-s27-self-contained-ternion-particle-and-no-exterior.md) 完成无外置 $C$ 点与零外部空间的本体合拢（`MODEL`），最后在压轴第五节 [§39.5 二元配关系成三元场与两阶关系推未来](ch39-s28-dyad-relation-future-and-second-order-field.md) 完成 $2+1=3$ 关系成场与两阶因果未来动力学的终极收束！
 
 ::: {.viz src="axiom-omega-dimension-closure-sandbox" height="620"}
 完整实验室：在“母公理读法”与“李群与正定核读法”双透镜间切换，在桥场景下沿 $x \to 1 \to z$ 拖动琥珀桥点 $o$，并调节三锚步长 $\varepsilon$ 与核选择器，逐一核验三元流群基点无关性、双不变正定度规排除海森堡群与 $\mathfrak{sl}(2,\mathbb{R})$、维数筛 $d = 1 \to 2 \to 3 \to 4/6/8$、三锚格拉姆正矢行列式与无边界嘉当三形式体闭合。十一条冻结声明、文献归属、数值核算与模型边界在依据栏与理论抽屉中分层标注。

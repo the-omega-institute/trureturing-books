@@ -158,6 +158,7 @@
 | **第 39 章** | [@thm-ch39-axiom-omega-ray-kernel-born-weight] | `D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor` | 单位四元数上由读数构成的两项射线核经旋量坐标等于两个秩一投影的迹配对（玻恩权重） |
 | **第 39 章** | [@thm-ch39-self-contained-ternion-and-no-exterior-anchors] | `D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization` | 标量域 `[RCLike 𝕜]` 上单位范数态族的重叠为 $1$ 当且仅当两态严格全同：锚定内禀去嵌入自重合律 $\kappa(x,x)\equiv 1$ |
 | **第 39 章** | [@thm-ch39-axiom-omega-two-point-homogeneity] | `D5/S3/Quantum/AURICOmega/QuaternionTwoPointHomogeneity.exists_mul_mul_eq_of_kappa_eq` | 读数相同的两对单位四元数由某个左右平移 $z \mapsto p z q$ 互相送到 |
+| **第 39 章** | [@thm-ch39-dyad-relation-future-and-second-order-field-anchors] | `D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.reflectionSeq_eq_pow` | 无源流群递推反射序列 `reflectionSeq C a b n` 在 `groupAt a` 中恒等于幂次 $b^n$：锚定两阶关系纵向自恒等自由惯性未来基线 |
 | **铸器与圣殿**：将矩阵化为异或 | [@thm-qubit-weyl-star] | `D5/S3/Quantum/FiniteDimensional.qubit_weyl_star` | 单量子比特外尔算子 $X, Z$ 的反对易、自伴与对合代数律 |
 | **铸器与圣殿** | [@lemma-qubit-no-character] | `D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character` | $2\times 2$ 量子比特矩阵代数不存在保全局矩阵乘法的复代数特征标 |
 | **铸器与圣殿** | [@prop-pauli-no-common-eigenvector] | `D5/S3/Quantum/QubitWitnesses.pauli_observables_have_no_common_eigenvector` | 非对易泡利可观测量 $X$ 与 $Z$ 不存在公共非零本征态 |

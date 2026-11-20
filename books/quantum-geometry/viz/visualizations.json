@@ -8507,6 +8507,113 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "dyad-relation-future-field-sandbox",
+      "code": "OMEGA//RELATIONS",
+      "title": "二元·关系·未来：三元数场两阶关系因果推演沙盘",
+      "title_en": "Dyad · Relation · Future: Two-Order Relational Field Sandbox",
+      "summary": "以当下为心，把三元数画成一只紫色实心球：过去与现在定下一个关系，下一步沿测地线等距延续；给定的第二个关系带来的品红曲率把未来折离直线；雅可比轮换和与四面体面相位上边缘（δF = 0，四个面相消；连续的比安基恒等式 d_A F = 0 是文献中的对应）都为零。",
+      "summary_en": "The ternion drawn as one violet solid ball around the present: the past and the present fix a relation and the next step continues along the geodesic at the same spacing; the magenta curvature of a supplied second relation refracts the future off the line; the cyclic Jacobi sum and the tetrahedral face-phase coboundary (δF = 0, four faces cancel; the continuum Bianchi identity d_A F = 0 is its counterpart in the literature) vanish.",
+      "path": "dyad-relation-future-field-sandbox/",
+      "thumbnail": "dyad-relation-future-field-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-20",
+      "chapter": 39,
+      "section": "39.5",
+      "presets": [
+        "dyad-orthogonal-relation-span",
+        "first-order-zeno-vs-transport",
+        "second-order-free-heap-geodesic",
+        "curvature-lie-triple-refraction",
+        "bianchi-jacobi-second-order-cap"
+      ],
+      "preset_titles": {
+        "dyad-orthogonal-relation-span": {
+          "zh": "二元配关系：第三个方向自己长出来",
+          "en": "A dyad and its relation: the third direction grows by itself"
+        },
+        "first-order-zeno-vs-transport": {
+          "zh": "一阶：θ₁ = 0 冻住，拉开至 60° 起步",
+          "en": "First order: frozen at θ₁ = 0, moving at 60°"
+        },
+        "second-order-free-heap-geodesic": {
+          "zh": "二阶自由：堆反射沿测地线等距延续",
+          "en": "Free second order: the heap reflection continues the geodesic"
+        },
+        "curvature-lie-triple-refraction": {
+          "zh": "曲率：第二个关系把未来折离测地线",
+          "en": "Curvature: a second relation refracts the future"
+        },
+        "bianchi-jacobi-second-order-cap": {
+          "zh": "二阶选型（MODEL）：雅可比轮换和与四面体面相位上边缘 δF 为零",
+          "en": "Second-order choice (MODEL): cyclic Jacobi sum and tetrahedral coboundary δF vanish"
+        }
+      },
+      "tags": [
+        "三元数",
+        "关系本体",
+        "堆反射",
+        "李三元组",
+        "比安基恒等式"
+      ],
+      "tags_en": [
+        "Ternion",
+        "Relational ontology",
+        "Heap reflection",
+        "Lie triple system",
+        "Bianchi identity"
+      ],
+      "theory": [
+        {
+          "label": "§39.5 · 二元配关系成三元场与两阶关系推未来",
+          "label_en": "§39.5 · Dyad Plus Relation Equals Ternion Field and Two-Order Future Recurrence",
+          "href": "../zh/ch39-s28-dyad-relation-future-and-second-order-field.html#sec-ch39-dyad-relation-future-and-second-order-field",
+          "href_en": "../en/ch39-s28-dyad-relation-future-and-second-order-field.html#sec-ch39-dyad-relation-future-and-second-order-field"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/UnitQuaternionPolar.exists_eq_cos_arccos_add_sin_smul"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/ActionLoopRequiresMemory.policy_change_implies_memory_change"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.reflectionSeq_eq_pow"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.kappa_reflectionSeq_add"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }

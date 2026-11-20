@@ -2,7 +2,7 @@
 
 > *“传统狄拉克—冯·诺依曼体系将复希尔伯特空间、厄米算符、玻恩概率、薛定谔幺正演化与测量坍缩作为五条彼此孤立的经验公设硬塞进物理学，并由此埋下了‘连续幺正演化与瞬间坍缩水火不容’的百年测量难题；而在无源母公理 $\mathrm{AXIOM}\text{-}\Omega$ 下，这五条公设无需任何人为假定，它们全都是受限观察切面 $o$ 将弯曲的三元数极小圆弧体场（$\mathbb{T}_3 \cong S^3$）投射到平直线性账本时依次涌现的纯几何定理。”*
 
-在 [§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure)–[§39.2](ch39-s25-axiom-omega-five-tier-deduction-cascade.md#sec-ch39-axiom-omega-five-tier-deduction-cascade) 立起无源保正三元比较闭合母公理 $\mathrm{AXIOM}\text{-}\Omega$ 并贯通五大宏观疆域之后，全书三十九章正文迎来了**第三级奠基收束台阶**（紧随其后的 [§39.4](ch39-s27-self-contained-ternion-particle-and-no-exterior.md) 将回返自包含三元数拓扑粒子与“至大无外”本体压轴收官）：回转身来，把这束澄澈的几何聚光灯直接打在现代量子力学自身的地基——统治物理学教科书近一个世纪的**狄拉克—冯·诺依曼五大公设**之上！
+在 [§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure)–[§39.2](ch39-s25-axiom-omega-five-tier-deduction-cascade.md#sec-ch39-axiom-omega-five-tier-deduction-cascade) 立起无源保正三元比较闭合母公理 $\mathrm{AXIOM}\text{-}\Omega$ 并贯通五大宏观疆域之后，全书三十九章正文迎来了**第三级奠基收束台阶**（紧随其后的 [§39.4](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)–[§39.5](ch39-s28-dyad-relation-future-and-second-order-field.md) 将回返自包含无外三元数本体与两阶关系场动力学压轴收官）：回转身来，把这束澄澈的几何聚光灯直接打在现代量子力学自身的地基——统治物理学教科书近一个世纪的**狄拉克—冯·诺依曼五大公设**之上！
 
 回望二十世纪量子力学史，为什么一代又一代物理学家被迫把“复希尔伯特射线”“厄米算符”“内积模平方概率”“薛定谔连续幺正演化”与“测量瞬间非幺正坍缩”当作五条来历不明、甚至第四条与第五条当面冲突的抽象公理生吞下去？根源只有一个：传统表述跳过了顶层无外置原点的弯曲**三元数极小圆弧体场**（$\mathbb{T}_3 \cong S^3(1)$），直接把底层**钉死观察切面后的平直线性再投影账本**误认作了物理本体本身！需明确界定的是：章首题记凝聚了这一宏观几何还原总纲（`MODEL`），而从 $\mathrm{AXIOM}\text{-}\Omega$ 严格走通全部五条教科书公设，还必须逐条显式对齐[附录 E §E.5](appendix-e-s05-quantum-postulates.md#sec-appe-quantum) 的 `T1–T4` 分析完备化与操作测量桥接条件（`H1, H3, H5–H7`：本节按标准教科书编排将态空间、厄米可观测量、玻恩概率、演化与坍缩统一、复合张量依次编号为公理一至五，分别对应附录 E §E.5 的第 I 条态空间、第 II 条可观测量与玻恩律 `H5`、第 III/IV 条条件更新与幺正流 `H6` 以及第 V 条复合张量 `H7`）。本节联立十八项冻结 **`LEAN ✓`** 内核声明与该审计台账（三元数切面投影总纲与 $\varepsilon_{\mathrm{self}}$ 停机坍缩统一诠释标为 **`MODEL`**，霍普夫纤维商、切生成元 $90^\circ$ 翻转、单态余弦关联与勾股核验属 **`手工推导` / `NUM`**，霍普夫丛、斯通定理、阿隆沙因再生核与局域层析重构归入 **`文献结果`**，单次实验选支实现与相对论协变视界边界保持 **`OPEN`** [@prob-ch34-single-outcome-realization]、[@prob-appendix-d-time-horizon]），逐条展示五大公设如何在显式桥接下从同一枚三元数极小圆弧体的正交切面投影中顺理成章地涌现。
 
@@ -127,7 +127,7 @@
 **单次结果（`手工推导` + `OPEN`）。** 障碍出现在等权重处：取 $q$ 使 $\beta(q, p) = \frac{1}{2}$，绕 $r_q$ 转 $\pi$ 的旋转固定 $q$ 而交换 $p$ 与 $p^\perp$，所以在等权重的检验上不存在协变的选支规则。给定结果时条件态是确定的；出现哪个结果，结构本身不提供，这与上文 [@prob-ch34-single-outcome-realization] 的 `OPEN` 定位一致。
 :::
 
-## 39.3.3 形式化锚定主定理、文献与附录 E 边界、五大公理定量核验与迈向无外三元数本体终章 {#sec-ch39-26-3}
+## 39.3.3 形式化锚定主定理、文献与附录 E 边界、五大公理定量核验与迈向无外三元数本体 {#sec-ch39-26-3}
 
 我们将 $\mathrm{AXIOM}\text{-}\Omega$ 导出量子力学五大公理的投影映射定义、十八项 Lean 4 内核定理、经典文献边界与定量核验正式确立如下：
 
@@ -240,9 +240,9 @@ $$
 
 ---
 
-**从量子五大公理的切面投影迈向第三十九章最终压轴节：为什么三元数本身即是无外部的自包含拓扑粒子？** 至此，在[附录 E §E.5](appendix-e-s05-quantum-postulates.md#sec-appe-quantum) 的 `T1–T4` 显式桥接条件下，$\mathrm{AXIOM}\text{-}\Omega$ 投影模型（`MODEL`）已将传统量子力学的五大经验公设悉数还原为三元数场在平直账本上的正交投影定理——复数来自观察切面的 $90^\circ$ 正交盲区，厄米算符来自球面切矢的实轴翻转，玻恩概率来自校准往返射线核与可加性锁定的勾股分账，张量纠缠来自多座三元数场的乘积再投影，而所谓“波函数坍缩”，不过是身处网络内部的有限观察者在自定精度 $\varepsilon_{\mathrm{self}}$ 处按下幂等停机键、将未读尽的干涉余项折入未来时间长河时留下的切面截痕。
+**从量子五大公理的切面投影迈向第三十九章后两节：为什么三元数本身即是无外部的自包含拓扑粒子与关系场？** 至此，在[附录 E §E.5](appendix-e-s05-quantum-postulates.md#sec-appe-quantum) 的 `T1–T4` 显式桥接条件下，$\mathrm{AXIOM}\text{-}\Omega$ 投影模型（`MODEL`）已将传统量子力学的五大经验公设悉数还原为三元数场在平直账本上的正交投影定理——复数来自观察切面的 $90^\circ$ 正交盲区，厄米算符来自球面切矢的实轴翻转，玻恩概率来自校准往返射线核与可加性锁定的勾股分账，张量纠缠来自多座三元数场的乘积再投影，而所谓“波函数坍缩”，不过是身处网络内部的有限观察者在自定精度 $\varepsilon_{\mathrm{self}}$ 处按下幂等停机键、将未读尽的干涉余项折入未来时间长河时留下的切面截痕。
 
-在合上三十九章正文之前，让我们跨入本章最后一节 [§39.4 自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)，回到三元数 $\mathbb{T}_3 \cong S^3(1)$ 本体自身，回答最后那声终极追问：**为什么这枚既不可线性书写、又处处齐性各向同性的闭合流形同时是场、是波、也是自包含粒子，并在彻底清零外置第 3 点 $C$ 的同时消除了宇宙的一切“之外”？**
+接下来，让我们跨入本章第四节 [§39.4 自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)（并由此直通第五节 [§39.5](ch39-s28-dyad-relation-future-and-second-order-field.md) 的两阶关系场动力学收官），回到三元数 $\mathbb{T}_3 \cong S^3(1)$ 本体自身，回答那声深层追问：**为什么这枚既不可线性书写、又处处齐性各向同性的闭合流形同时是场、是波、也是自包含粒子，并在彻底清零外置第 3 点 $C$ 的同时消除了宇宙的一切“之外”？**
 
 ::: {.viz src="axiom-omega-five-qm-postulates-sandbox" height="620"}
 完整实验室：在紫色旋量环面上拖动琥珀旋量珠改变盲区相位 $\chi$ 与子午线射线角 $\theta$，并调节各公设滑块（翻转角 $\vartheta$、停机捏合强度 $\lambda$ 与 Alice 两轴夹角 $\gamma$），在同一枚旋量体与布洛赫球及账本台上依次检验霍普夫盲区纤维商映射、反自伴切矢实轴翻转与罗伯逊不确定性、格里森—布施二次迹刚性、全局等距扩张配局域幂等捏合以及双场单态齐雷尔松上界 $2\sqrt{2}$。十八条冻结声明、文献与 `T1–T4` 桥接边界、数值核算及开放问题在依据栏与理论抽屉中分层标注。
