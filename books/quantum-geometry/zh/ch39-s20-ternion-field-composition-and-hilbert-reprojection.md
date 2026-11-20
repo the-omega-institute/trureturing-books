@@ -54,7 +54,7 @@ $$
 
    其中每条有向线 $(a, b, c) \in \mathcal{L}_{\mathrm{Fano}}$ 上的乘法满足循环右手律 $e_a e_b = -e_b e_a = e_c$。这幅七点七线图揭示了八元数最震撼的两重真相：
 
-   - **单场内部 $100\%$ 严格结合（阿廷定理 Artin's Theorem）**：$7$ 条法诺直线中的每一条 $\ell = (a, b, c)$，配观察者实轴 $\mathbf{1}$ 都严格张成一座同构于四元数的子代数 $\mathbb{H}_\ell = \operatorname{span}_{\mathbb{R}}\{\mathbf{1}, e_a, e_b, e_c\}$——即**一整座独立自持的三元数场 $\mathbb{T}_3^{(\ell)}$**，且任意两条不同的法诺线恰好相交于唯一 $1$ 根共享圆弧轴！阿廷定理严格证明：八元数 $\mathbb{O}$ 中**任意两个元素生成的子代数永远是结合代数**（落入某座单三元数场内），每条法诺线上的结合子（Associator）恒等于零：
+   - **单场内部 $100\%$ 严格结合（阿廷定理 Artin's Theorem）**：$7$ 条法诺直线中的每一条 $\ell = (a, b, c)$，配观察者实轴 $\mathbf{1}$ 都严格张成一座同构于四元数的子代数 $\mathbb{H}_\ell = \operatorname{span}_{\mathbb{R}}\{\mathbf{1}, e_a, e_b, e_c\}$——即**一整座独立自持的三元数场 $\mathbb{T}_3^{(\ell)}$**，且任意两条不同的法诺线恰好相交于唯一 $1$ 根共享圆弧轴！阿廷定理严格证明：八元数 $\mathbb{O}$ 中**任意两个元素生成的子代数永远是结合代数**（它同构于 $\mathbb{R}$、$\mathbb{C}$ 或 $\mathbb{H}$，却未必是这七座法诺子代数之一：纯虚元 $e_1 + \dots + e_7$ 不在七条法诺线的任何一个张成里，它与 $e_1 - e_2$ 生成的四元数子代数就不在这七座之中，`手工推导`），每条法诺线上的结合子（Associator）恒等于零：
 
      $$
      [e_a, e_b, e_c] \;:=\; (e_a e_b)e_c - e_a(e_b e_c) \;=\; e_c^2 - e_a^2 \;=\; (-\mathbf{1}) - (-\mathbf{1}) \;=\; 0 \qquad \bigl(\forall (a,b,c) \in \mathcal{L}_{\mathrm{Fano}}\bigr);

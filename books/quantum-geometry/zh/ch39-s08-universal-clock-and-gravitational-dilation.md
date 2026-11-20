@@ -38,7 +38,7 @@
      N_{\mathrm{ticks}} \;=\; \nu_0\,\Delta\tau \;=\; \frac{c\,\Delta\tau}{\ell_P}
      $$
 
-     次基础圆弧比较节拍，有限次离散节拍所能分辨的最细自指停机容差因而存在不可逾越的物理下界：
+     次基础圆弧比较节拍。节拍数有限本身并不给出与 $1/N_{\mathrm{ticks}}$ 成正比的精度下界：自适应二分每次比较把区间减半，$N_{\mathrm{ticks}}$ 拍后直径为 $2^{-N_{\mathrm{ticks}}}$，终将小于任何 $c/N_{\mathrm{ticks}}$；离散标签甚至一拍就能精确读出。只有再假定可用于一致认证的可区分终态记录至多 $A N_{\mathrm{ticks}}$ 条（$A$ 与 $N_{\mathrm{ticks}}$ 无关），覆盖论证才给出下面的停机容差下界（取 $A = 1$；反例为 `手工推导`，线性记录容量是模型假设，`MODEL`）：
 
      $$
      \varepsilon_{\mathrm{self}} \;\ge\; \varepsilon_{\mathrm{self,min}}(\Delta\tau) \;:=\; \frac{1}{N_{\mathrm{ticks}}} \;=\; \frac{\ell_P}{c\,\Delta\tau}.

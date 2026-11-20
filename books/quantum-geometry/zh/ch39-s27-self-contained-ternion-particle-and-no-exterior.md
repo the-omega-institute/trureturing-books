@@ -35,7 +35,7 @@
   \Delta_{S^3(R)}\psi_\mu \;=\; -\frac{3}{R^2}\,\psi_\mu \qquad \Bigl(\text{单位球 } R = 1 \text{ 时 }\Delta_{S^3(1)}\psi_\mu = -3\psi_\mu\Bigr).
   $$
 
-- **全局拓扑积分与跨层粗粒化读数为“粒子”（$\pi_3(\mathbb{T}_3) \cong \mathbb{Z},\;\Lambda^0$）**：对整座紧致无边流形做全局积分，连续切标架与空间基频谐波整体锁定为不可连续拆分的整数拓扑荷 $Q_{\mathrm{top}} = \frac{1}{2\pi^2 R^3}\int_{S^3(R)}\operatorname{vol}_{S^3(R)} = \frac{1}{2\pi^2}\int_{S^3(1)}\eta_1 = 1 \in \mathbb{Z}$，并在跨尺度粗粒化重整 $\Lambda^3_\ell \equiv \Lambda^0_{\ell+1}$（`MODEL`）中作为一颗单自由度离散“粒子”锚入更高一层比较网络。
+- **全局拓扑积分与跨层粗粒化读数为“粒子”（$\pi_3(\mathbb{T}_3) \cong \mathbb{Z},\;\Lambda^0$）**：对整座紧致无边流形做全局积分，任何连续构型的总拓扑荷都取整数，不能连续拆分；带单位荷的是恒等构型，常值场处在同一片紧致、带平行标架的流形上，荷却为 $0$，单侧半球则只承载 $\frac{1}{2}$ 的荷密度积分，所以紧致与平行标架只保证总荷取整数，并不使每个构型都成为单位荷粒子（`手工推导`）。恒等构型锁定的整数拓扑荷 $Q_{\mathrm{top}} = \frac{1}{2\pi^2 R^3}\int_{S^3(R)}\operatorname{vol}_{S^3(R)} = \frac{1}{2\pi^2}\int_{S^3(1)}\eta_1 = 1 \in \mathbb{Z}$，并在跨尺度粗粒化重整 $\Lambda^3_\ell \equiv \Lambda^0_{\ell+1}$（`MODEL`）中作为一颗单自由度离散“粒子”锚入更高一层比较网络。
 
 | 观测读数阶数 | 作用在三元数 $\mathbb{T}_3 \cong S^3(R)$ 上的算子 | 核心几何与代数不变量 | 涌现物理面貌 |
 | :--- | :--- | :--- | :--- |
@@ -85,7 +85,7 @@
 
 ## 39.4.4 “没有之外”的四重几何与关系论证：内禀去嵌入、度规对跖重聚、希高德分解与观测商闭合 {#sec-ch39-27-4}
 
-当外置第 3 点 $C$ 被彻底铲除，最后一个悬念迎刃而解：**在三元数宇宙本体 $\mathbb{T}_3$（以及耦合多概念三元数场丛构成的完备比较本体流形 $\mathcal{M}_{\mathrm{ont}}$）之外，还存不存在一个“外面”？** 答案在微分几何、黎曼度规、三维流形拓扑与关系商闭合四个层面上同时指向**无外部**：
+当外置第 3 点 $C$ 被彻底铲除，最后一个悬念迎刃而解：**在三元数宇宙本体 $\mathbb{T}_3$（以及耦合多概念三元数场丛构成的完备比较本体流形 $\mathcal{M}_{\mathrm{ont}}$）之外，还存不存在一个“外面”？** 答案在微分几何、黎曼度规、三维流形拓扑与关系商闭合四个层面上同时指向**无外部**，但四个层面的分量不同：前三重只说明 $\mathbb{T}_3$ 自身无边界、无需外部容器即可定义度规与拓扑，而无边界的内禀球面并不因此穷尽更大的物理空间或态集（嵌在 $\mathbb{R}^4$ 中的圆球面照样有 $\lVert q\rVert<1$ 与 $\lVert q\rVert>1$ 两块余区域，`手工推导`）；“无外部”最终依赖第四重里态集观测完备的极大/极小闭合公设（`MODEL`）：
 
 1. **第一重（拆穿嵌入错觉）：四维环境空间 $\mathbb{R}^4$ 只是平直坐标草稿纸，内禀本体无球内球外（`文献结果` + `MODEL` + `LEAN ✓`）**。
    人类直觉常以为“既然 $\mathbb{T}_3 \cong S^3(1)$ 是三维球面，那球壳里面 $\lVert q\rVert < 1$ 与球壳外面 $\lVert q\rVert > 1$ 不就是它的外部吗？”这是把**外在笛卡尔嵌入辅助空间 $\mathbb{R}^4$** 误认作了物理实在。由高斯绝妙定理与黎曼内禀流形几何（Gauss 1827；Riemann 1854 讲演 / 1868 刊印，`文献结果`），流形的度规、测地线与曲率完全内禀定义在三维 $\mathbb{T}_3$ 上，无需任何高维环境容器；而在母公理 $\mathrm{AXIOM}\text{-}\Omega$ 模型下，一切真实状态必满足自重合归一律 $\kappa(x, x) \equiv 1$（在三元比较结构中由 [`kappa_self`](lean:D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.kappa_self) 直接给出，`LEAN ✓`；对应内积空间单位范数态全同判据 [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization)，`LEAN ✓`），所谓 $\lVert q\rVert \neq 1$ 的离壳坐标点在状态本体论中严格是**空集**（`MODEL`）。
