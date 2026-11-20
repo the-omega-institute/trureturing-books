@@ -6,7 +6,7 @@
 **形式分层与认识论审计准则（`MODEL` + `手工推导`）。** 围绕比较公理 $\mathcal{A}_0$（[@def-ch32-axiom-of-comparison]），全部推导链严格区分以下三层比较签名与四类中间假设处理机制：
 
 1. **三层代数比较签名剥离**：
-   - **第 0 层（Layer 0：抽象类型化两槽比较接口）**：给定对象集合或类型 $X$ 及一个使元素 $2$ 可逆（$2 \in \mathcal{A}^\times$）的含幺结合 $*$-代数 $\mathcal{A}$，原始比较算子仅是一个两槽映射 $\mathrm{CMP} : X \times X \to \mathcal{A}$。因 $2$ 可逆，$\mathrm{CMP}$ 唯一正交分解为偶对称部分（相似读数）与奇反对称部分（有向差异）：
+   - **第 0 层（Layer 0：抽象类型化两槽比较接口）**：给定对象集合或类型 $X$ 及一个使元素 $2$ 可逆（$2 \in \mathcal{A}^\times$）的含幺结合 $*$-代数 $\mathcal{A}$，原始比较算子仅是一个两槽映射 $\mathrm{CMP} : X \times X \to \mathcal{A}$。因 $2$ 可逆，对换两槽 $\tau$ 的互补幂等元 $\tfrac{1}{2}(1 \pm \tau)$ 把 $\mathrm{CMP}$ 唯一分解为偶对称部分（相似读数）与奇反对称部分（有向差异）；这是代数直和，在引入内积之前不涉及度量意义上的正交（`手工推导`）：
 
      $$
      S(x, y) := \frac{1}{2}\bigl(\mathrm{CMP}(x, y) + \mathrm{CMP}(y, x)\bigr), \qquad A(x, y) := \frac{1}{2}\bigl(\mathrm{CMP}(x, y) - \mathrm{CMP}(y, x)\bigr),
@@ -25,7 +25,7 @@
 为什么绝不能把 Layer 1 的几何性质误当成 Layer 0 抽象两槽接口的“无条件免费赠品”？下面四个纯有限维手工反例逐一给出了铁证：
 
 ::: {.example #ex-appe-layer0-countermodels title="第 0 层抽象比较接口的四个有限代数反例（手工推导）"}
-**手工推导。** 以下四个有限代数模型均满足 $2$ 可逆与奇偶正交分解，(a)、(b)、(d) 还满足相应的对合或成对单位互易律（(c) 的 $B$ 不来自满足条款 III 的比较，见 [§E.8](appendix-e-s08-third-point-redundancy.md#sec-appe-third-point-redundancy)），却分别证伪了缺少 Layer 1 条件时的目标结论：
+**手工推导。** 以下四个有限代数模型均满足 $2$ 可逆与奇偶正交分解，(a)、(b)、(d) 还满足相应的对合或成对单位互易律（(c) 中的 $\tfrac{1}{2}B$ 正是公平元 $f = \tfrac{1}{2}(1 + e_1e_2)(1 + e_3e_4)$ 的奇部：在反转对合下 $ff^\dagger = 1$，令 $\mathrm{CMP}(x_0, x_1) = f$、$\mathrm{CMP}(x_1, x_0) = f^\dagger$、对角取 $1$，即得满足条款 I–III 的两点比较，其奇部平方 $(\tfrac{1}{2}B)^2 = -\tfrac{1}{2} + \tfrac{1}{2}e_1e_2e_3e_4$ 不是标量，`手工推导`；另见 [§E.8](appendix-e-s08-third-point-redundancy.md#sec-appe-third-point-redundancy)），却分别证伪了缺少 Layer 1 条件时的目标结论：
 
 1. **反例 (a) 负自配对单点模型（证伪仅靠互易导出 $S(x, x) \ge 0$）**：
    取单元素集 $X = \{x_0\}$，目标代数 $\mathcal{A} = \mathbb{R}$（平凡对合 $\lambda^\dagger = \lambda$），定义 $\mathrm{CMP}(x_0, x_0) = -1$。奇偶分解给出 $S(x_0, x_0) = -1$、$A(x_0, x_0) = 0$，且成对互易乘积满足 $\mathrm{CMP}(x_0, x_0)\mathrm{CMP}(x_0, x_0) = (-1)(-1) = +1$；然而 $S(x_0, x_0) = -1 < 0$，直接违背正定自相似！这证明单位自配对 $S(x, x) = +1$ 是显式的 Layer 1 正向标定条件，不能单从平方等于 $+1$ 推出。

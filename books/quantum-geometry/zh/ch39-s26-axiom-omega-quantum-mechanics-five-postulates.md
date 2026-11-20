@@ -11,7 +11,7 @@
 教科书前两条公设规定了量子舞台的“演员（复单位射线）”与“标尺（厄米线性算符）”。从 $\mathrm{AXIOM}\text{-}\Omega$ 出发，这两者在几何上同源共生：
 
 1. **公理一（态空间公设）：霍普夫盲区商映射导出复射影射线与全局不可测相位**：
-   教科书第一公设规定：孤立量子系统的纯态由复希尔伯特空间中的单位射线唯一描述，且全局复相位 $e^{\hat{\mathbf{i}}\chi}$ 物理不可观测。传统教材始终无法回答“为何自然界偏爱复数而非实数”以及“为何凭空多出一维不可测全局相位”；而在 $\mathrm{AXIOM}\text{-}\Omega$ 下，两步几何投影即水落石出（`MODEL` + `手工推导`）：
+   教科书第一公设规定：孤立量子系统的纯态由复希尔伯特空间中的单位射线唯一描述，且全局复相位 $e^{\hat{\mathbf{i}}\chi}$ 物理不可观测。传统教材始终无法回答“为何自然界偏爱复数而非实数”以及“为何凭空多出一维不可测全局相位”；在 $\mathrm{AXIOM}\text{-}\Omega$ 下，只要补上时钟输入——封闭系统自身时钟的相位不可观测——下面两步几何投影就给出答案；单凭封闭性与总相位不可见还不够：实读法 $K = \{\pm 1\}$ 的封闭实复合系统同样对总符号不敏感，$K$ 里却没有右迁移圆周（`MODEL` + `手工推导`）：
    - **三元数本体与 $90^\circ$ 盲区圆周纤维**：由 [§39.1.3](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-24-3) 第一步，母公理把最小非对易自持结构锁定为单位四元数模型，即单位三维球面 $\mathbb{T}_3 \cong S^3(1)$，读数为 $\cos^2\frac{d_{S^3}}{2}$（[@thm-ch39-axiom-omega-rank-five-unit-quaternion-embedding]、[@thm-ch39-axiom-omega-complete-rank-five-isomorphism]，`LEAN ✓`；流形表述下的李理论路线是同一结论的经典路线，`文献结果`；单位态重合核锚定 [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization)，`LEAN ✓`）。当局部观察切面 $o \in \mathbb{T}_3$ 建立自身实轴标尺（并选取 `T3` 相容复结构 $\hat{\mathbf{i}}$）时，垂直于实轴的 $90^\circ$ 正交虚方向形成一圈单向不可见的盲区圆周纤维 $S^1 = \{\exp(\hat{\mathbf{i}}\chi) \mid \chi \in [0, 2\pi)\}$（呼应 [§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md)）；注意 $S^3(1)$ 上的旋量母核 $\kappa_{S^3}(\psi, \phi) = \frac{1 + \operatorname{Re}\langle\phi\mid\psi\rangle}{2}$ 仍区分对跖旋量叶 $\pm\psi$，而下沉至物理可观测层面的往返秩一投影读数 $\kappa_{\mathrm{ray}}([\psi], [\phi]) = \operatorname{Tr}(P_\psi P_\phi) = \lvert\langle\phi\mid\psi\rangle\rvert^2$ 沿整条盲区纤维 $S^1$ 严格不变（共同相位二次不变代数完全刻画见 [`complete_common_phase_polynomial_theorem`](lean:D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem)，`LEAN ✓`；在单位四元数模型上，射线核对任一宗量右乘相位不变由 [`rayKernel_mul_phase_left`](lean:D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_mul_phase_left) 与 [`rayKernel_mul_phase_right`](lean:D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_mul_phase_right) 锁定，射线核与玻恩权重的等同见 [@thm-ch39-axiom-omega-ray-kernel-born-weight]，`LEAN ✓`）；
    - **霍普夫纤维化与最小复线性嵌入**：将弯曲的单位球面 $S^3(1) = \{(z_0, z_1) \in \mathbb{C}^2 \mid \lvert z_0\rvert^2 + \lvert z_1\rvert^2 = 1\} \subset \mathbb{C}^2$ 等距嵌入最小平直二维复线性空间 $\mathbb{C}^2$（配 `T1` 柯西完备化与 `T3` 相容复结构），再对不可见的盲区相位圆周 $S^1$ 取商，恰好构成拓扑学中的**霍普夫纤维丛**（Hopf 1931，`文献结果`），满射落上二维布洛赫单位球面（纯态单位范数与满射性由 [`blochPure_norm`](lean:D5/S3/Quantum/Matrix/NumericalRange.blochPure_norm) 与 [`blochPure_surjective`](lean:D5/S3/Quantum/Matrix/NumericalRange.blochPure_surjective) 锁定，`LEAN ✓`）：
 
@@ -158,9 +158,21 @@
 
 若 $h+t>0$，这个上界可以达到。前 $h$ 对取共同权重 $3^i/2$，其中 $0\le i<h$。它们可产生的整数质量覆盖 $0$ 至 $W-1$。后 $t$ 对取权重 $W3^j$，其中 $0\le j<t$，拼成相邻的长度 $W$ 的整数区间。两类种子总缩放质量为 $W3^t-1$。以这个总量归一，在中点每对选一个种子，低于中点的各档任选相应质量的事件，高于中点的事件由逐对交换与取补集决定。
 
+**三结果网格的最小种子支撑（手工推导）。** 设 $q$ 为正整数。取完整网格 $(x,y,z)/(6q)$，其中三个坐标为非负整数，和为 $6q$。固定一份有限种子分布，要求各权重严格为正，并且置换三个标签时分布保持不变。确定性读出须复现各标签的概率，同时置换概率向量和种子时，读出的标签也按同一置换变化。最小支撑数为 $6r$，其中 $r$ 是满足 $4^r\ge 3q+1$ 的最小整数。给定支撑上限时的充要条件见 [`triple_grid_support_budget_iff`](lean:D5/S3/ConceptDynamics/Attribution/ThreeOutcomeGridSupport.triple_grid_support_budget_iff)。
+
+在均匀分布处，三循环无法固定任何种子，因为读出的标签也必须固定。换位也无法固定种子。取被交换的两个标签各占一半、第三个标签权重为零的分布，固定种子会以正概率读出零权重标签。因此每个种子轨道都有六个元素，轨道内各元素等权。在 $(k,k,6q-2k)/(6q)$ 处，每个轨道内分给前两个标签的种子数相等，各只能取零至三。$r$ 个轨道最多给出 $4^r$ 种第一标签概率，而 $k=0,\ldots,3q$ 要求其中 $3q+1$ 种。
+
+为达到下界，取 $r$ 个六元素轨道，置换群在每个轨道上按左乘作用。以 $1/(6q)$ 为单位，每个轨道内的种子取相同的整数权重。依次取轨道权重 $1,4,4^2,\ldots$，将最后一项截到轨道权重之和恰为 $q$。设某一步之前的轨道权重之和为 $T$，新权重为 $d$，则 $d\le 3T+1$。每种权重允许取零至三份，新一步的四个平移区间连续衔接，可实现的整数总量由 $0,\ldots,3T$ 扩到 $0,\ldots,3(T+d)$。对总和为 $6(T+d)$ 的任意三个非负整数目标，也可把每个目标除以 $d$ 后向下取整，得到三个容量。它们的和至少为六，否则三个目标之和至多为 $5d+3(d-1)<6(T+d)$。在这些容量内分完六个新种子，余量由旧轨道补齐。有限数字的表示条件见 [Rødseth，引理 3.1–3.2](https://cs.uwaterloo.ca/journals/JIS/VOL10/Rodseth/rodseth8.html)。
+
+三个坐标互异时，直接使用以上分配。恰有两个坐标相等时，对应换位把每个六元素轨道拆成三对。按所需的数字选相应数量的对，每对给两个并列标签各分一个种子。其余各对的两个种子都给第三个标签。均匀分布处，把置换 $g$ 标记的种子分给 $g(1)$，每个标签刚好得到两个。对每条概率向量轨道选择一个代表，按置换把代表上的读出延拓到整个轨道。代表上的读出尊重其稳定子，故达到同一个向量的不同置换给出相同的规则。种子分布是该构造的输入。
+
+**三结果最小支撑的权重分母（手工推导）。** 设 $q>0$，在分母为 $6q$ 的完整三结果概率网格上取最小支撑的种子分布。各权重严格为正，读出在所有标签置换下逐点协变。记六元素种子轨道数为 $r$。把种子权重乘以 $6q$，记第 $j$ 个轨道内的共同缩放权重为 $u_j$。并列坐标的概率向量要求所有整数层 $0,\ldots,3q$ 都能写成 $\sum_j d_j u_j$，其中 $d_j\in\{0,1,2,3\}$。最小支撑给出 $3q+1>4^{r-1}$。由[整数倍上界](lean:D5/S3/Combinatorics/SubsetSpectrum/IntegralDigitWeights.exists_integral_multiple_of_capacity_gap)，每个 $u_j$ 的既约分母属于 $\{1,2,3\}$。
+
+由[混合分母排除定理](lean:D5/S3/Combinatorics/SubsetSpectrum/MixedDigitDenominators.no_mixed_denominators_of_capacity_gap)，既约分母 $2$ 与 $3$ 不能同时出现。若两个轨道的既约分母分别为 $2$ 和 $3$，记权重为 $a/2$ 和 $b/3$。固定其他轨道的数字。在同一类中将两个整数表示相减后乘六，可知第一个轨道的两个数字模 $2$ 相同，第二个轨道的两个数字模 $3$ 相同。这是因为 $3a$ 为奇数，而 $2b$ 不被三整除。在固定的同余类中，每个数字至多有两种取值。因此至多得到 $4^{r-2}\cdot4=4^{r-1}$ 个不同的整数质量，低于必须达到的数量。所以可以选同一个乘数 $1$、$2$ 或 $3$，使所有缩放权重都成为整数。
+
 **多结果网格的整数块需求（手工推导）。** 设标签数为 $k\ge2$，网格分母为 $m>0$。对整数坐标之和为 $m$ 的概率向量，把坐标相等的标签归为一组。记第 $i$ 组的大小为 $s_i$，共同坐标为 $v_i$，并令 $H=\prod_i s_i!$。保持向量不变的置换构成阶为 $H$ 的子群。它把置换群的正则种子轨道拆成大小为 $H$ 的块。把一块等变地分给第 $i$ 组时，该组每个标签恰好收到 $H/s_i$ 个种子。如果各轨道权重都是 $1/(m(k-2)!)$ 的整数倍，第 $i$ 组需要的加权块数为 $(k-2)!s_i v_i/H$。
 
-每个概率向量的这些需求都是整数，当且仅当 $k-1$ 整除 $m$。证明充分性时，固定一组 $i$，从该组删去一个标签。剩余各组大小 $b_j$ 之和为 $n=k-1$。令 $Q=n!/\prod_j b_j!$，这是整数多项式系数。对每个 $j$，$Qb_j/n$ 都是整数。$b_j=0$ 时它等于零，否则它是从第 $j$ 组再删一个标签得到的多项式系数。由于 $\sum_j b_j v_j=m-v_i$，两个整数相减得 $Qm/n-\sum_j v_j Qb_j/n=Qv_i/n$。恢复删去的标签即得 $Qv_i/n=(k-2)!s_i v_i/H$。证明必要性时，取一个标签的坐标为 $m$、其他坐标全为零的向量，该单元素组的需求就是 $m/(k-1)$。
+每个概率向量的这些需求都是整数，当且仅当 $k-1$ 整除 $m$。充分性由[稳定子块整除定理](lean:D5/S3/Combinatorics/Partitions/StabilizerFactorialDivisibility.factorial_product_dvd_scaled_coordinate)给出。证明充分性时，固定一组 $i$，从该组删去一个标签。剩余各组大小 $b_j$ 之和为 $n=k-1$。令 $Q=n!/\prod_j b_j!$，这是整数多项式系数。对每个 $j$，$Qb_j/n$ 都是整数。$b_j=0$ 时它等于零，否则它是从第 $j$ 组再删一个标签得到的多项式系数。由于 $\sum_j b_j v_j=m-v_i$，两个整数相减得 $Qm/n-\sum_j v_j Qb_j/n=Qv_i/n$。恢复删去的标签即得 $Qv_i/n=(k-2)!s_i v_i/H$。证明必要性时，取一个标签的坐标为 $m$、其他坐标全为零的向量，该单元素组的需求就是 $m/(k-1)$。
 
 **$k$ 个结果的最小种子支撑（手工推导）。** 设 $k\ge2$，正分母 $m$ 能被 $1$ 至 $k$ 的每个整数整除。取总和为 $m$ 的所有非负整数向量，再除以 $m$ 得到概率网格。使用同一份对所有标签置换保持不变的有限种子分布，各权重严格为正。确定性读出须复现各标签的概率，并在同一置换同时作用于向量和种子时逐点协变。最小支撑为 $k!r$，其中 $r$ 是满足 $(k+1)^r\ge m/(k-1)+1$ 的最小整数。
 
