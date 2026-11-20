@@ -6,15 +6,18 @@
 | :--- | :--- | :--- |
 | `ternion-arc-calculus/` | 纯数学篇 | 比较结构的公理与分类（模型恰为 $S^1$、$S^3$）、非结合情形与圆球性定理、极小圆弧微积分 |
 | `omega-physics/` | 物理篇 | 由公理 Ω 的读法得到量子力学的运动学结构、复合系统、物理例子，以及带明确假设身份的场论部分 |
+| `research-lifecycle/` | 方法篇 | 团队怎样用“许愿”驱动的自动科研系统做数学研究：目标文件、带关卡的代理席位、Lean 真值账本、执行与身份层、出版与专家外联 |
 
 ## 编译
 
-每个目录自成一体，不依赖外部文件：
+前两个目录自成一体，不依赖外部文件：
 
 ```sh
 cd paper/<目录>
 pdflatex main.tex && pdflatex main.tex && pdflatex main.tex
 ```
+
+方法篇含中文引文，用 XeLaTeX 编译：`xelatex main && bibtex main && xelatex main && xelatex main`。
 
 ## 数值核对
 
