@@ -104,7 +104,12 @@ nothing, an encoded phase is exactly recoverable iff the inaccessible conditiona
 local windows of several observers glue iff a positive semidefinite completion exists (on chordal
 patterns iff every clique is positive), which still gives neither a joint state nor joint outcomes.
 In the velocity space of states, the squared reciprocal Lorentz factors of a qubit's pairs, defined by
-their concurrences, sum to at most that of its marginal, $\sum_B\gamma_{AB}^{-2}\le\gamma(r_A)^{-2}$, with deficit the residual three-tangle.  In a closed register of $2n$ systems in a global singlet, an
+their concurrences, sum to at most that of its marginal, $\sum_B\gamma_{AB}^{-2}\le\gamma(r_A)^{-2}$, with deficit the residual three-tangle.
+Observers can compute by choosing local test axes (left transports) on a conditioned graph resource, and
+round-trip-closed sub-structures correct errors exactly under the compressed Knill--Laflamme conditions.
+With an assumed intermediate Pati--Salam spectrum the equal couplings are fitted at
+$9.7\times10^{16}$\,GeV with a right-handed scale $1.3\times10^{10}$\,GeV (a fit, not a prediction), and linearised Einstein
+equations follow from cap entanglement only under named continuum hypotheses.  In a closed register of $2n$ systems in a global singlet, an
 exchange constraint gives conditional Schr\"odinger dynamics relative to an internal clock, with an
 explicit source from exchanges across the clock cut, and the unobservable clock [Cl] follows from the
 invisibility of the total phase under a stated bridge hypothesis.  The dichotomies of configurations form four-dimensional
@@ -264,6 +269,11 @@ composite reading built on one clock's complex structure, and a right transport 
 statistics unchanged is unobservable (Section~\ref{sec:closedreg}).
 \item[{[U], [A]}] The physical specification of a closed-universe state, and of an observer's accessible
 algebra (Hypotheses~U and~A, Section~\ref{sec:closedreg}).
+\item[{[Ac]}] Access to a graph resource with local tests and feedforward; [Lq]: local indistinguishability for
+a fusion space (Section~\ref{sec:attention}).
+\item[{[Ps]}] The intermediate Pati--Salam spectrum with step matching; [Ea]: an effective action for
+comparison fields; [Ck]: the saturated clock budget; [Gl]: the static information load; [Eq]: local
+continuum entanglement equilibrium (Section~\ref{sec:unification}).
 \item[{[Cd]}] Calibrated dynamics: Hamiltonian, time scale and fixed projector given; [Bs]: a common
 preparation, a common speed cap per branch and a sequential schedule (Section~\ref{sec:bounds}).
 \item[{[Gw]}] A finite Gram window of stored comparisons; [Ue]: the entropy drop of a reset equals the log
@@ -397,12 +407,14 @@ Part~I (Sections~\ref{sec:axiom}--\ref{sec:geometry}) is the kinematics: the axi
 system, many systems, sub-structures of every dimension, and the geometry of states.  Part~II
 (Sections~\ref{sec:closedreg}--\ref{sec:outcomes}) concerns observers inside the structure: a closed universe with internal
 clocks; finite memory (Gram windows, the arrow of forgetting, erasure and consensus); and single outcomes as
-bounded martingales with finite-tick certification; a section on computation is to follow.  Part~III (Section~\ref{sec:bounds}) gives the bounds: speed limits with their
-sharp constants, the Tsirelson bound from a positive Gram completion, and a rapidity--entanglement budget.  Part~IV (Sections~\ref{sec:eventspace}--\ref{sec:sm}) contains the space of events,
+bounded martingales with finite-tick certification, preceded by computation by local measurements
+and error-correcting sub-structures.  Part~III (Section~\ref{sec:bounds}) gives the bounds: speed limits with their
+sharp constants, the Tsirelson bound from a positive Gram completion, and a rapidity--entanglement budget.  Part~IV (Sections~\ref{sec:eventspace}--\ref{sec:unification}) contains the space of events,
 fields of structures, the variable radius, the round four-sphere target from a pair, topological
 particles with the Skyrme term, and the
-three-structure model; sections on unification scales, gravity and the origin of the three structures,
-of three generations and of the coupling ratios are to follow.  Part~V (Sections~\ref{sec:examples}--\ref{sec:lean}) collects the
+three-structure model, and unification scales with a tick budget and a conditional route from cap
+entanglement to linearised gravity; sections on the origin of the three structures, of three generations
+and of the coupling ratios are to follow.  Part~V (Sections~\ref{sec:examples}--\ref{sec:lean}) collects the
 physical examples, the status of every statement, what could fail, the open problems and the
 numerical checks.  Statements that are not proved keep their status as hypothesis, conjecture or
 programme.
@@ -823,6 +835,8 @@ Uncertainty relation & equality (Thm.~\ref{thm:unc}) & none\\
 One clock; tensor product & Thm.~\ref{thm:oneclock}; or Thm.~\ref{thm:product}, Cor.~\ref{cor:ampmult}; Prop.~\ref{prop:avg} & clock-read factors with [Bil$_\cL$], [Span], [Loc], [O], [C2], [N], C1(b); or C0, C1, [Span], and C2 for $N\ge3$\\
 All unit vectors are states; all unitaries are operations & Thm.~\ref{thm:comp} & C0--C2, [Span]; C3 for operations\\
 Measurement update & conditional state $K_a\psi/\lVert K_a\psi\rVert$ (Prop.~\ref{prop:relative}, Thm.~\ref{thm:instruments}) & C0--C3, Convention T\\
+Computation & Measurement-based universality with gflow corrections (Thms.~\ref{cp:determinism}, \ref{cp:universal}); exact recovery iff compressed products are scalar (Thm.~\ref{cp:kl}); five qubits minimal (Cor.~\ref{cp:mincode}); exact parameter shift (Thm.~\ref{cp:shift}) & C0--C3, [T], [Sub]; [Ac]; anyons: [Lq]\\
+Unification, clocks, gravity & Two-scale one-loop fit $M_R=1.29\times10^{10}$, $M_{\mathrm{PS}}=9.71\times10^{16}$\,GeV (Thm.~\ref{ub:fit}); proper time of a saturated clock (Thm.~\ref{ub:clock}); cut bound and saturation criterion (Thm.~\ref{ub:cut}); finite cap first law (Thm.~\ref{ub:caplaw}); conditional linearised Einstein equation (Thm.~\ref{ub:einstein}) & G, [Ps]; [Ck], [Gl]; [Eq]\\
 Bounds & Rapidity--entanglement budget $\sum_B\gamma_{AB}^{-2}\le\gamma(r_A)^{-2}$, deficit $4\lvert ae\rvert^2$, equality on $W$ (Thm.~\ref{thm:bdbudget}); $\tau_\perp\ge\pi\hbar/(2\Delta E)$, sharp; $\pi\hbar/(4\Delta E)$ for a Bloch right angle and two branches (Prop.~\ref{prop:bdmt}); $\lvert S\rvert\le2\sqrt2$ from a positive Gram completion, PR box excluded (Thm.~\ref{thm:bdchsh}) & C0--C2, [Span]; [Cd]; [Bs]; $n$-qubit budget: cited\\
 Finite memory & Gram-window extension and weak nesting (Thm.~\ref{thm:fmschur}); reset heat $\ge k_BT\,\Delta S(L|K)$ (Prop.~\ref{prop:fmheat}); exact phase recovery iff equal inaccessible states (Thm.~\ref{thm:fmeraser}); gluing iff PSD completion, chordal clique test (Thm.~\ref{thm:fmglue}) & [Gw]; Gibbs bath, joint unitary, kept side marginal; [Ca]\\
 Single outcomes & no covariant outcome rule (Prop.~\ref{prop:nooutcome}); for a record process, Born at every stage $\Leftrightarrow$ martingale weights (Thm.~\ref{thm:sorigidity}); threshold and simplex selection Born $\Leftrightarrow$ invariant auxiliary law (Thms.~\ref{thm:sosphere}, \ref{thm:sosimplex}) & [R]; [Ap] for an apparatus; the realised dynamics: open\\
@@ -1880,8 +1894,8 @@ of events.
 %=====================================================================================
 \paperpart{Part II.  Observers inside}
 \noindent This part treats what an observer inside the structure can know and record.  It contains a
-closed universe with internal clocks, finite memory with erasure and consensus, and single outcomes; a
-section on computation is in preparation.
+closed universe with internal clocks, finite memory with erasure and consensus, computation by local
+tests (attention) with error-correcting sub-structures, and single outcomes.
 
 %=====================================================================================
 \section{The closed universe: a global singlet and internal clocks}\label{sec:closedreg}
@@ -2757,6 +2771,367 @@ state nor joint outcomes (Theorem~\ref{thm:fmglue}, Examples~\ref{ex:fmoutcomes}
 or a generic shared POVM does not single out a pointer basis (Remarks~\ref{rem:fmaxisbary}, \ref{rem:fmbph}).  (vii) Positive
 Schur slack does not give continuous reachability (Proposition~\ref{prop:fmspeed}).  (viii) Holonomy neither forces
 nor fixes work (Theorem~\ref{thm:fmberry}).
+\end{remark}
+
+%=====================================================================================
+\section{Attention as computation: measurement-based computation and error-correcting sub-structures}\label{sec:attention}
+
+Attention, in this section, is the choice of which local test to perform next.  Can an observer compute on a conditioned register by choosing only local tests, and can the resulting logical states survive errors in that register? A square-lattice cluster and classical feedforward suffice for circuit simulation. The graph stabilizers give corrections supported on later sites under the flow conditions. A clock-invariant code admits exact recovery precisely when its compressed error products are scalar. The same real round-trip reflection that supplies the register comparison yields an exact two-setting derivative for a single involutory rotation.
+
+\subsection{The resource and its measurement axes}
+
+Use $V_N=(\mathbb C^2)^{\otimes N}$ with its common clock and $c_N=\operatorname{Re}\langle\cdot,\cdot\rangle$ as in Theorem~\ref{thm:comp}. Theorem~\ref{thm:bornN} supplies the weights. Theorem~\ref{thm:instruments} gives an instrument realization under C3 and [T]. The postselection below uses the relative-state rule of Proposition~\ref{prop:relative}.
+
+\smallskip\noindent\textbf{Hypothesis Ac (Access to a graph resource).}  At a conditioned slice the observer has an oriented register, a graph resource with an input port, the local projective instruments specified below, and classical records that can control later settings in a chosen order. Output Pauli operations are available if a state in a fixed output frame is required. The input can be entangled with an untouched reference.
+
+
+This supplies operational access in addition to the kinematics of Theorem~\ref{thm:cucond}. The resulting simulation substitutes a prepared entangled resource and adaptive tests for the run-time gate access of Proposition~\ref{prop:universal} under C3. In a gate-based preparation the same proposition supplies the entangling gates. The hypothesis allows other methods of preparation.
+
+\begin{proposition}[Singlet slice]\label{cp:slice}
+Every unit vector $\psi\in V_N$ occurs as a rank-one conditioned slice of a $2N$-qubit singlet with weight $2^{-N}$. An unconditioned subsystem of a singlet has an invariant density operator under the diagonal $\SU(2)$ action. In particular, the two-vertex graph state cannot occur as a pure unconditioned two-qubit marginal of a singlet.
+\end{proposition}
+\begin{proof}
+Pair each target qubit with a reference qubit in $(|01\rangle-|10\rangle)/\sqrt2$, invariant since the determinant of each diagonal action is one. With reference factors ordered first, their product is
+$2^{-N/2}\sum_j |j\rangle\otimes J|j\rangle$, where $J$ is the tensor-product time reversal $(-iY)^{\otimes N}$ followed by conjugation in the computational basis. Contraction against $c$ on the reference gives $2^{-N/2}Jc$. Take $c=J^{-1}\psi$. Invariance under the diagonal action survives partial trace. An invariant pure state spans a one-dimensional representation, trivial for $\SU(2)$, so a pure two-qubit marginal would lie in the singlet line of Theorem~\ref{thm:cusinglet}. The vector $(|00\rangle+|01\rangle+|10\rangle-|11\rangle)/2$ is symmetric under swap, hence orthogonal to that line.
+\end{proof}
+
+A pure graph-state resource is thus obtained from the closed-register singlet of Section~\ref{sec:closedreg} only by
+rank-one conditioning: the two-node cluster lies in the symmetric sector, whereas a pure invariant two-qubit
+marginal lies in the singlet line.  The conditioning effect can be entangled across the reference qubits. Its existence is a statement about the available slices, with operational access as in Hypothesis~Ac.
+
+\begin{proposition}[Axis and Pauli corrections]\label{cp:axis}
+Write $X,Y,Z$ for the Pauli matrices and $R_z(t)=e^{-itZ/2}$. The dichotomy with axis $a_\alpha=(\cos\alpha,\sin\alpha,0)$ measures
+\[
+ A_\alpha=\cos\alpha\,X+\sin\alpha\,Y
+ =R_z(\alpha)X R_z(\alpha)^*,\qquad
+ |s_\alpha\rangle=(|0\rangle+(-1)^se^{i\alpha}|1\rangle)/\sqrt2
+ \quad(s=0,1).
+\]
+The projectors are $(I+(-1)^sA_\alpha)/2$. The axis is that of the clock-preserving transport $e^{-itA_\alpha/2}$ in $\mathcal L$. On rays a local Pauli correction is represented by a left heap translation on the elementary factor.
+\end{proposition}
+\begin{proof}
+The two eigenvectors follow by multiplication by the off-diagonal matrix $A_\alpha$ with upper-right entry $e^{-i\alpha}$. The transport lies in $\SU(2)$ and commutes with the scalar clock. By Proposition~\ref{prop:clock} the left group is $\SU(2)$, so each of $-iX,-iY,-iZ$ is represented by $z\mapsto[a,b,z]$ on its factor. Scalar phase cancels on rays. The right clock of that proposition acts by $e^{i\chi}I$ and fixes every projector. Thus the choice of axis is a choice of a dichotomy in the fixed clock reading. The register-level action is the tensor extension of local translations, as required by Theorem~\ref{thm:comp}(v).
+\end{proof}
+
+\begin{remark}[the direction of attention is a left transport]\label{rem:cpattention}
+A tempting reading takes a measurement setting to be a choice of right clock phase.  On the complex
+register the right clock acts as the scalar $e^{i\chi}$ (Proposition~\ref{prop:clock}(ii)) and fixes every projector, so it selects no
+test.  A setting is a choice of equatorial test axis $a_\alpha$, and the axis is moved by the left transport $R_z(\alpha)\in\cL$
+(Proposition~\ref{cp:axis}); the right clock is the unobservable phase of every outcome.
+\end{remark}
+
+\subsection{Deterministic graph computation}
+
+For a finite simple graph $G=(V,E)$ and input and output subsets $I,O\subseteq V$, in this subsection write $I^c=V\setminus I$, $O^c=V\setminus O$. Let
+\[
+ E_G=\prod_{uv\in E}\mathrm{CZ}_{uv},\qquad
+ W_G\psi=E_G(\psi_I\otimes |+\rangle_{I^c}^{\otimes |I^c|}),\qquad
+ |+\rangle=(|0\rangle+|1\rangle)/\sqrt2,\quad
+ \mathrm{CZ}=\operatorname{diag}(1,1,1,-1).
+\]
+Here the tensor product places one $|+\rangle$ on each vertex of $I^c$. When $I=\varnothing$, $W_G1$ is the graph state. For a subset $S\subseteq V$ let $X_S,Z_S$ denote products of local Paulis and $\operatorname{Odd}(S)$ the vertices with an odd number of neighbors in $S$.
+
+\begin{definition}[Equatorial flow and gflow]\label{cp:gflow}
+An equatorial gflow is a map $g:O^c\to 2^{I^c}$ and a strict partial order $\prec$ on $V$ such that for every $i\in O^c$,
+\[
+ i\in\operatorname{Odd}(g(i)),\qquad
+ i\prec j\quad(j\in g(i)\cup(\operatorname{Odd}(g(i))\setminus\{i\})).
+\]
+A flow is the singleton case $g(i)=\{f(i)\}$, equivalently $i$ is a neighbor of $f(i)$, $i\prec f(i)$, and every other neighbor of $f(i)$ follows $i$.
+\end{definition}
+
+\begin{theorem}[Determinism in the clocked register]\label{cp:determinism}
+Given an equatorial gflow, measure $O^c$ in any linear extension of its order with assigned equatorial angles $\alpha_i$. After outcome $s_i$, apply on the surviving factors $X_{g(i)}^{s_i}Z_{\operatorname{Odd}(g(i))\setminus\{i\}}^{s_i}$, up to scalar phase. Every corrected branch induces the same input-to-output channel, an isometry, with branch weight $2^{-|O^c|}$. If $|I|=|O|$ the isometry is unitary. The corrections before output can instead be kept in a Pauli frame and implemented by adaptive choices of local axes and outcome labels.
+\end{theorem}
+\begin{proof}
+For $v\in I^c$, $K_v=E_GX_vE_G^*=X_v Z_{N(v)}$ fixes $W_G\psi$. Indeed $\mathrm{CZ}$ conjugates the first $X$ into $X\otimes Z$ and commutes with each $Z$. The product $K_{g(i)}=\prod_{v\in g(i)}K_v$ is a scalar-phase multiple of $X_{g(i)}Z_{\operatorname{Odd}(g(i))}$. By gflow this is $Z_i$ times a Pauli $C_i$ on later vertices, with phase absorbed in $C_i$. Let $B$ be the product of the earlier all-zero bras. Since $K_{g(i)}$ acts trivially on earlier sites, $B K_{g(i)}=Z_i C_i B$, so $B W_G$ is stabilized by $Z_i C_i$. Since $\langle s_\alpha|=\langle 0_\alpha|Z^s$, one has $C_i^s\langle s_{\alpha_i}|BW_G=\langle0_{\alpha_i}|BW_G$, with the phase convention from $K_{g(i)}$. Induction gives the all-zero map $M$ in each corrected branch. An orthogonal complete local projective measurement preserves total squared norm on summing branches. Unitary corrections preserve each norm. Therefore $2^{|O^c|}M^*M=I$, by polarization. This also proves the equality for an untouched reference by tensoring the branch map with the identity. An empty measurement list has the single isometric branch $W_G$.
+
+For an incoming frame $X^xZ^z$ on the next site,
+$\langle r_\beta|X^xZ^z$ is proportional to
+$\langle(r\oplus z)_{(-1)^x\beta}|$, by the displayed eigenvectors. Choose $\beta=(-1)^x\alpha_i$ and use $s_i=r\oplus z$ in the frame update. A fixed-frame quantum output needs the inverse known frame. For a classical readout the frame conjugates the output tests and can relabel their outcomes.
+\end{proof}
+
+This is the equatorial sufficiency direction of the flow and gflow results of Danos--Kashefi and Browne--Kashefi--Mhalla--Perdrix, proved here by comparing fixed-angle contractions in the register. \cite{n5-flow,n5-gflow}
+
+\begin{lemma}[One-edge gate]\label{cp:edge}
+For an input on $u$ and $|+\rangle$ on its successor $v$, contracting the $u$ factor of $\mathrm{CZ}_{uv}$ with $\langle s_\alpha|$ gives the map
+\[
+ 2^{-1/2}X^s H\operatorname{diag}(1,e^{-i\alpha})
+ =2^{-1/2}e^{-i\alpha/2}X^s H R_z(-\alpha),
+ \qquad H=(X+Z)/\sqrt2 .
+\]
+\end{lemma}
+\begin{proof}
+The two input basis vectors yield $|0\rangle|+\rangle$ and $|1\rangle|-\rangle$, respectively, where $|-\rangle=Z|+\rangle$. The contraction multiplies the first column by $2^{-1/2}$ and the second by $2^{-1/2}(-1)^s e^{-i\alpha}$. The spectral definition of $R_z$ gives the phase in the formula.
+\end{proof}
+
+\begin{theorem}[One-way universality on a square cluster]\label{cp:universal}
+The circuit-simulation form of Raussendorf--Briegel universality is that a sufficiently large two-dimensional square-lattice cluster, with a logical input supplied at chosen boundary sites, implements any finite circuit of single-qubit unitaries and controlled-NOT gates by single-site projective measurements and classical feedforward, up to a known output Pauli frame and irrelevant scalar phases. The required rectangle has polynomial size in the wire count and circuit length. The output sits on unmeasured sites, and includes the original input's correlations with an external reference. With a product input this gives the state-preparation and computational-readout version of the one-way model. \cite{n5-rb,n5-rbb}
+\end{theorem}
+\begin{proof}
+Set $J(\alpha)=H R_z(-\alpha)$. Products of $J$ implement $R_z$ rotations since $J(0)J(\alpha)=R_z(-\alpha)$, and $H R_z(t)H=R_x(t)=e^{-itX/2}$. The $Z$--$X$--$Z$ Euler decomposition follows, for example, from
+$R_z(a)R_x(b)R_z(c)$, whose upper row has entries $e^{-i(a+c)/2}\cos(b/2)$ and $-ie^{-i(a-c)/2}\sin(b/2)$. These realize any upper row of an $\SU(2)$ matrix by choice of the phases and $b\in[0,\pi]$, with free phase when a term is zero. Its second row is fixed by unitarity and determinant one. Controlled-NOT is $\mathrm{CZ}$ conjugated by $H$ on the target. Three controlled-NOTs, alternating control, implement a swap by $(a,b)\mapsto(a,a\oplus b)\mapsto(b,a\oplus b)\mapsto(b,a)$. Thus nearest-neighbor wire couplings suffice with at most linear routing overhead per two-qubit gate.
+
+First use horizontal paths as wires and insert a graph edge between two live sites at each desired $\mathrm{CZ}$ stage. A $\mathrm{CZ}$ at stage $t$ commutes with every earlier measurement bra supported on columns before $t$. The all-zero branch of Theorem~\ref{cp:determinism} therefore performs the $\mathrm{CZ}$ at the live column, then the one-edge gates to the next column. A flow takes a site to its horizontal successor, with order by column. Neighbors of the successor other than its predecessor are in the successor column or beyond. On four edges the product
+$J(\alpha_4)J(\alpha_3)J(\alpha_2)J(\alpha_1)$ ranges over $\SU(2)$ up to phase by taking $\alpha_4=0$, which yields three alternating rotations about $Z,X,Z$. The idle choice is four $J(0)$ gates. Hence one can place each coupling at the beginning of a four-edge identity block and independently use four-edge single-wire blocks.
+
+For an actual square lattice, put the wire rows two lattice spacings apart. Retain between them one mediator $m$ in each column scheduled for a coupling, choosing distinct coupling columns separated by at least two. Measure every other vertex off the wires in the $Z$ basis. For a recorded $Z$ bit $s$ at a vertex, its incident controlled phases leave $Z^s$ on each surviving neighbor. This follows by evaluating the diagonal edge operators in that bit, so the remaining register is the induced graph with known Pauli corrections. Each mediator now has precisely its intended two wire neighbors $a,b$.
+Measuring it in the $Y$ basis gives
+\[
+ \tfrac12(I-i(-1)^s Z_a Z_b)
+ =2^{-1/2}e^{-i(-1)^s\pi Z_a Z_b/4}.
+\]
+The two outcomes differ, up to phase, by $Z_aZ_b$. With $S=\operatorname{diag}(1,i)$ the zero-branch gate is $e^{-i\pi/4}(S\otimes S)\mathrm{CZ}$. Measure the mediators first, relabeling the $Y$ outcomes wherever deletion left a $Z$ frame on a mediator. Track the resulting Pauli corrections on the wires. Their fixed $S$ factors commute with all controlled phases. On a measured wire site $\langle s_\beta|S=\langle s_{\beta-\pi/2}|$, so choosing $\beta=\alpha+\pi/2$ there absorbs each such $S$. Leave a final identity block with no couplings so the output column carries no fixed $S$. The post-preparation operations are precisely single-site tests and Pauli frame updates. The columns are bounded by a constant times the routed gate count plus a final block, and the number of rows is linear in the wire count. This constructs the asserted rectangle.
+\end{proof}
+
+\begin{remark}[Conditional dynamics and circuit examples]\label{cp:compprogramme}
+An autonomous implementation in the closed sector would need an observer-accessible preparation or conditioning instrument coupled to record storage and a physical implementation of the required measurement order. Proposition~\ref{cp:slice} gives an existential slice. Theorem~\ref{cp:universal} gives conditional dynamics on that slice. To realize the programme with the clock of Theorem~\ref{thm:cucond}, one must exhibit the record-bearing joint state or interaction and check that the resulting conditional branch maps agree with those above.
+
+Circuit universality applies to the Grover iterate of Example~\ref{ex:grover} and to finite Fourier and phase-estimation circuits. For a Fourier register of size $Q$, the positive-exponent convention uses the unitary with entries $Q^{-1/2}e^{2\pi i xy/Q}$. Its column inner products are one for equal labels. For unequal labels the finite geometric sum vanishes because its ratio is a nontrivial $Q$th root of unity. Reversing the Fourier sign permutes its output labels by $y\mapsto-y\pmod Q$. The simulation preserves these circuit channels, including inverse Fourier sign in the phase-estimation convention. An oracle count for amplitude amplification or an order-reconstruction or factoring probability requires the separate input, oracle, or sampling hypotheses of those algorithms. \cite{n5-qft,n5-shor}
+\end{remark}
+
+\begin{example}[gflow beyond flow]\label{cp:gflowexample}
+Take inputs $0,1$, outputs $3,4$, and edges $02,03,04,13,14,23$. With $\{0,1\}\prec2\prec\{3,4\}$ the sets $g(0)=\{2,3,4\}$, $g(1)=\{2,4\}$ and $g(2)=\{3,4\}$ have odd neighborhoods $\{0,2,3\}$, $\{1,3\}$ and $\{2\}$. These follow by counting the listed incident edges modulo two. A maximal measured vertex in a flow must have an output successor adjacent to it alone among the measured vertices. The measured degrees of outputs $3,4$ are $3,2$, so no flow exists.
+\end{example}
+
+\subsection{Comparison, cloning and exact recovery}
+
+\begin{proposition}[Comparison obstruction to cloning]\label{cp:noclone}
+A fixed blank and a clock-preserving linear isometry can clone a set of pure rays exactly if and only if the distinct rays are pairwise orthogonal, with a finite-dimensional register understood. For exact vector cloning with a fixed blank and no environment, $z=\langle\phi,\psi\rangle$ must satisfy $z=z^2$, so $\phi=\psi$ or $z=0$. Allowing a deterministic channel and an environment gives the same criterion for rays. \cite{n4:WZ,n4:Dieks}
+\end{proposition}
+\begin{proof}
+A clock-preserving round-trip isometry preserves both the real comparison and its quarter-turn quadrature, so it preserves the complex inner product by Proposition~\ref{prop:clock}. Tensor comparison multiplies complex inner products in $V_N$. The blank contributes a factor one, and the two copies contribute $z^2$. The roots of $z=z^2$ are $0,1$, with $z=1$ implying that the difference of the two unit vectors has zero norm. For a channel use the isometric dilation $v\mapsto\sum_a K_av\otimes|a\rangle$, where $\sum_a K_a^*K_a=I$ gives the isometry as in Theorem~\ref{thm:instruments}. An output with pure two-copy marginal is a product of the two-copy vector and an environment unit vector, by the Schmidt decomposition. Thus $|z|=|z|^2|\langle e_\phi,e_\psi\rangle|\le |z|^2$. Together with $|z|\le1$ this forces $|z|=0$ or $1$, the latter precisely equality of rays. For an orthonormal list of representatives, the map taking each representative with the blank to its two copies preserves an orthonormal basis of its domain subspace. Extend both lists to bases of the equal-dimensional joint space to obtain a unitary extension. For $|0\rangle,|+\rangle$ the two overlaps are $1/\sqrt2$ and $1/2$.
+\end{proof}
+
+\begin{proposition}[Optimal symmetric guarantee for approximate qubit copies]\label{cp:approxclone}
+The largest common lower bound on the two pure-state overlaps of a deterministic qubit $1\to2$ cloner is $5/6$. The Bu\v zek--Hillery isometry has clone marginals $\tfrac56 P_\psi+\tfrac16 P_{J\psi}$ and machine marginal $\tfrac13 P_\psi+\tfrac23 P_{J\psi}$, where $P_\xi=|\xi\rangle\langle\xi|$ and $J\psi=(-\bar\psi_1,\bar\psi_0)$. The clone Bloch vectors are $2r_\psi/3$ and the machine vector is $-r_\psi/3$. Its machine determinant is $2/9$ and its entropy in bits is $\log_2 3-2/3$. \cite{n4:BH,n4:GM}
+\end{proposition}
+\begin{proof}
+With $s=(|01\rangle-|10\rangle)/\sqrt2$, use the linear map
+$(\psi_A s_{BM}+\psi_B s_{AM})/\sqrt3$ in the ordered tensor product $A,B,M$. Since $\psi,J\psi$ are orthonormal and have determinant one, $s=(\psi\otimes J\psi-J\psi\otimes\psi)/\sqrt2$. The image is thus
+$\sqrt{2/3}\,\psi\psi J\psi-(\psi J\psi+J\psi\psi)\psi/\sqrt6$.
+The two displayed terms are orthogonal with squared norms $2/3,1/3$, so the linear map is isometric by polarization. Tracing out the two copies gives the claimed machine marginal. Tracing out the machine first leaves the mixture of $\psi\psi$ and the normalized symmetric cross term. Each single-copy reduction of the cross term is $(P_\psi+P_{J\psi})/2$. The determinant, Bloch coefficients and entropy follow from the two eigenvalues in the stated marginals.
+
+For the upper bound, let $L$ be the unnormalized Choi matrix of a channel from the qubit to $AB$, using reference slot $R$, so $L\ge0$, $\operatorname{Tr}L=2$, and outputs are obtained by tracing against the transposed input in $R$. These facts follow by writing $L=\sum_e |K_e\rangle\langle K_e|$ with $|K_e\rangle=\sum_j |j\rangle_R\otimes K_e|j\rangle$ for the channel's normalized Kraus family. The six Pauli eigenprojectors satisfy
+$\sum_P P^{\mathsf T}\otimes P=I+2|\Phi\rangle\langle\Phi|$, where $\Phi=(|00\rangle+|11\rangle)/\sqrt2$. Expanding $(I\pm\sigma)/2$ gives $(3I+X\otimes X-Y\otimes Y+Z\otimes Z)/2$, equal to the claimed expression by multiplication in the computational basis. Let $Q_A,Q_B$ project onto $\Phi$ on $RA,RB$ respectively with identity on the spectator. The sum of the twelve predicted single-copy overlaps is $\operatorname{Tr}(L[2I+2(Q_A+Q_B)])$. The two ranges have orthonormal bases $a_j=\Phi_{RA}|j\rangle_B$ and $b_j=\Phi_{RB}|j\rangle_A$, with $\langle a_i,b_j\rangle=\delta_{ij}/2$ by contraction. On their span $a_j\pm b_j$ are eigenvectors of $Q_A+Q_B$ of eigenvalues $1\pm\tfrac12$ and the orthogonal complement is its kernel. The sum is therefore at most $5\operatorname{Tr}L=10$. At least one overlap is at most $10/12=5/6$, and the displayed isometry attains the bound on every input.
+\end{proof}
+
+\begin{theorem}[Recovery of a round-trip-closed code]\label{cp:kl}
+Let $D:\mathcal H_L\to V_N$ be a complex isometry with $\dim\mathcal H_L>0$, let $U=\operatorname{ran}D$ and $P_U=DD^*$. Under [Sub], $S(U)$ is a clock-invariant round-trip-closed code carrier. Let $\mathcal E(A)=\sum_i E_i A E_i^*$ be a finite Kraus channel on $V_N$ with $\sum_i E_i^*E_i=I$. The following are equivalent.
+\begin{enumerate}
+\item A trace-preserving completely positive decoder $\mathcal R$ to $\mathcal H_L$ satisfies $\mathcal R\mathcal E(DAD^*)=A$ for all logical density matrices.
+\item There is a scalar matrix $\Lambda=(\lambda_{ij})$ such that $P_UE_i^*E_jP_U=\lambda_{ij}P_U$ for all $i,j$.
+\item After a unitary change of Kraus basis, all nonzero restricted errors have the form $F_rD=\sqrt{d_r}\,S_r$, where $d_r>0$, $\sum_r d_r=1$, and $S_r^*S_t=\delta_{rt}I_L$. Zero-weight restrictions vanish.
+\end{enumerate}
+The decoder can be followed by $D$ to give recovery into $S(U)$ at the level of pure logical states. Each $S_r$ carries the same clock and intertwines round trips in its image.
+\end{theorem}
+\begin{proof}
+Corollary~\ref{cor:substructure} gives the carrier and its comparison. A complex isometry commutes with scalar phase and preserves the real inner product, so the formula $s_xw=2c_N(x,w)x-w$ intertwines on its image.
+
+For necessity, write the decoder with Kraus operators $R_a$. On a unit vector $v$ the sum of the positive rank-one terms with vectors $R_a E_i Dv$ equals $|v\rangle\langle v|$. Taking diagonal form against any vector orthogonal to $v$ forces each $R_a E_i Dv$ to lie in $\mathbb C v$. A linear map with that property is scalar, by testing basis vectors and their pairwise sums, including the one-dimensional case. Write $R_a E_iD=c_{ai}I_L$. Then
+\[
+ D^* E_i^* E_j D=\sum_a (R_a E_iD)^*(R_a E_jD)
+              =\Bigl(\sum_a\bar c_{ai}c_{aj}\Bigr)I_L .
+\]
+Multiplying by $D$ and $D^*$ gives the compressed identity.
+
+For diagonalization, the matrix $\Lambda$ is positive semidefinite since its quadratic form is $\|\sum_i b_iE_iDv\|^2$ for any fixed unit logical $v$. Its trace is one by channel normalization. If $B^*\Lambda B=\operatorname{diag}(d_r)$ is a unitary diagonalization, set $F_r=\sum_i E_i B_{ir}$. This does not change the channel, by summing $B_{ir}\overline{B_{jr}}$. Now $D^*F_r^*F_tD=d_r\delta_{rt}I_L$, so each zero-weight restriction vanishes and division by $\sqrt{d_r}$ gives the claimed isometries.
+
+For sufficiency, the partial decoder with Kraus operators $S_r^*$ has normalization $Q=\sum_r S_r S_r^*$, the orthogonal projector onto the sum of the images. Complete it by Kraus operators $|0_L\rangle\langle w|$ for an orthonormal basis $w$ of $Q^\perp$ and any fixed unit logical $0_L$. The resulting channel is trace preserving on all physical inputs. In fact for arbitrary logical matrices $A$ and syndrome matrices $\sigma$ one has
+\[
+ \sum_k S_k^*\Bigl(\sum_{r,t}\sigma_{rt}S_r A S_t^*\Bigr)S_k
+   =\operatorname{Tr}(\sigma) A.
+\]
+The complement Kraus terms vanish on these blocks. The noisy logical input has $\sigma=\operatorname{diag}(d_r)$ and returns exactly $A$.
+\end{proof}
+
+The compressed criterion is Knill--Laflamme. The formulation above puts the ambient comparison on both the code and its orthogonal syndrome copies. It replaces an assumption that noisy operations stay in $U$ by an exact criterion for their corrected composite to return to $U$. \cite{n4:KL}
+
+\begin{remark}[Scope of the isometry criterion]\label{cp:scaled}
+Individual restrictions that are multiples of isometries do not ensure correction. On the full single-qubit code, $I/\sqrt2,Z/\sqrt2$ are isometric up to scale, but their cross product is $Z/2$ and their channel maps both $|+\rangle$ and $|-\rangle$ to $I/2$. Conversely, a single common isometry for all errors is too restrictive. The identity and a single bit flip in Example~\ref{cp:rep} have orthogonal restricted ranges. Recovery constrains every pair of errors and permits distinct syndrome images outside $U$.
+\end{remark}
+
+\begin{proposition}[Pauli syndromes]\label{cp:stabilizer}
+For a finite register of $p$-level systems, $p\ge2$ an integer, write $X|a\rangle=|a+1\rangle$, $Z|a\rangle=\omega^a|a\rangle$ with indices modulo $p$ and $\omega=e^{2\pi i/p}$. For tensor words $W(x,z)=X_x Z_z$ their product is
+$W(x,z)W(x',z')=\omega^{z\cdot x'}W(x+x',z+z')$.
+For $p=2$, independent commuting Hermitian Pauli generators $g_j$ ($1\le j\le m$) with no nonempty scalar product define the code projector $P_U=\prod_j(I+g_j)/2$ of rank $2^{N-m}$. The bit syndrome of an error is its list of anticommutations with the $g_j$.
+Distinct syndromes yield orthogonal error images and satisfy $P_UE_i^*E_jP_U=0$. A Pauli with zero syndrome acts as a scalar on $U$ precisely when it is in the stabilizer up to phase. In particular, if all weight-one Paulis have nonzero syndrome then all encoded states have maximally mixed single-qubit marginals.
+\end{proposition}
+\begin{proof}
+Multiplication on basis vectors gives $ZX=\omega XZ$, and different factors commute. For the qubit code, commuting $+1$ projectors multiply to the joint projector. Expanding the product leaves only its identity term in the trace, since nonidentity Pauli words have zero trace and generator independence excludes nonempty scalar products. The eigenvalues of $g_j$ on $E_iU$ are its syndrome signs, so distinct signs in any position imply orthogonality. If a commuting Pauli $E$ acts as a scalar, its compression trace has modulus $\dim U$. Expanding $\operatorname{Tr}(P_U E)$ shows it can be nonzero only when some stabilizer element times $E$ is scalar. Conversely each stabilizer word restricts to identity. A nonzero syndrome gives zero compression by conjugating with an anticommuting generator; the three resulting zero Bloch coordinates give $I/2$. This connects the local marginal blind spot to recovery. The hypothesis about weight one follows, for example, from distance at least two and absence of weight-one elements in the full stabilizer, where distance is the minimum weight of a commuting Pauli outside scalar multiples of the stabilizer.
+\end{proof}
+
+The Pauli convention and distance criterion are the stabilizer formalism of Gottesman. The single-site marginal statement concerns the code state before errors, and complements the distinction between local and correlation observables in the clocked composite. \cite{n5-gottesman}
+
+\begin{example}[Three-qubit repetition]\label{cp:rep}
+The generators $ZZI,IZZ$ stabilize $|000\rangle,|111\rangle$, which by rank span the code. The errors $I,X_1,X_2,X_3$ have ordered syndromes $00,10,11,01$, directly from the $Z$ positions. Thus the four images, spanned respectively by computational pairs $(000,111),(100,011),(010,101),(001,110)$, exhaust the register. With syndrome probabilities $(1/2,1/4,1/8,1/8)$, the decoder returns $|+\rangle\langle+|$ from the corresponding mixture by Theorem~\ref{cp:kl}. A general encoded state $a|000\rangle+b|111\rangle$ has single-qubit density $\operatorname{diag}(|a|^2,|b|^2)$ by partial trace, with Bloch $z$ coordinate $|a|^2-|b|^2$. The equal-weight GHZ state has maximally mixed marginals. The error $Z_1$ has zero syndrome and takes the GHZ state to the orthogonal logical minus state. The error $X_1 X_2$ has the syndrome of $X_3$, so decoding it applies a net logical $X_1X_2X_3$. The unrestricted Pauli distance is one, and the guaranteed correction above concerns single $X$ errors.
+\end{example}
+
+\begin{example}[Five-qubit perfect code]\label{cp:five}
+Use the generators $XZZXI,IXZZX,XIXZZ,ZXIXZ$. They commute since each pair differs by an even number of overlapping anticommutations (two for each pair). Their binary $X$ masks $10010,01001,10100,01010$ are independent. The $X$-error syndrome at a position is the corresponding column of the generators' $Z$ masks, and the $Z$-error syndrome is the corresponding column of the $X$ masks. For $Y$ add these columns modulo two. This gives
+\[
+\begin{array}{c|ccccc}
+ &1&2&3&4&5\\\hline
+ X&0001&1000&1100&0110&0011\\
+ Z&1010&0101&0010&1001&0100\\
+ Y&1011&1101&1110&1111&0111
+\end{array}
+\]
+Together with the identity these fill all $16$ syndromes, so the $16$ images of the rank-two code exhaust dimension $32$. All nonidentity Pauli classes of weight at most two have nonzero syndrome because weight two adds two distinct nonzero columns of this table. The word $XXXXX$ commutes with the stabilizer and anticommutes with $ZZZZZ$, which also commutes with the stabilizer. Therefore $XXXXX$ acts nontrivially on the code. Multiplying it by the first generator gives weight three and the same logical action up to phase. This proves distance three. Any channel whose Kraus operators lie in the linear span of the listed errors is corrected, by bilinearity in Theorem~\ref{cp:kl}. \cite{n5-five-ref,n5-gottesman}
+\end{example}
+
+\begin{example}[Steane code]\label{cp:steane}
+Take three $X$ checks and three $Z$ checks from the rows of a parity-check matrix $B$ with columns $001,010,011,100,101,110,111$. Its rows are independent because those columns include the three coordinate vectors. Each row has weight four and each distinct pair intersects in two positions, hence $BB^{\mathsf T}=0$ over the binary field. Thus the six independent generators commute and the code has dimension two in dimension $128$. With $X$ checks first, at position $j$ the $X,Z,Y$ syndromes are respectively $(0,b_j),(b_j,0),(b_j,b_j)$. All $21$ nonidentity single-qubit syndromes differ. These and the identity give $22$ orthogonal code images, and the decoder on their orthogonal complement can use the completion in Theorem~\ref{cp:kl}. As above, no weight-one or weight-two Pauli has zero syndrome. The $Z$ word on positions $1,2,3$ has zero syndrome because $b_1+b_2+b_3=0$. Every nonzero combination of check rows has weight four, since a nonzero binary functional on the seven nonzero columns takes value one four times. The weight-three word is therefore outside the stabilizer. This proves distance three and exact correction of the linear span of single-site Pauli errors. \cite{n5-steane-ref}
+\end{example}
+
+\begin{corollary}[Minimum block length for one arbitrary error]\label{cp:mincode}
+Encoding one logical qubit with exact correction of the span of single-site errors requires at least five physical qubits.
+\end{corollary}
+\begin{proof}
+If there were at most four sites, partition them into $A,B$ with at most two each. Theorem~\ref{cp:kl} compresses every Pauli supported in $A$ or $B$ to a scalar since it is a product of two operators from the correctable family. By linearity the same holds for every operator supported on either side. Encode one half of a maximally entangled pair and denote its untouched reference by $R$. For a local operator $L$ on either side, the conditional matrix entries on $R$ are $\langle i|D^*LD|j\rangle/2$, up to transpose. Since this is a scalar multiple of the identity, $\rho_{RA}=\rho_R\otimes\rho_A$ and $\rho_{RB}=\rho_R\otimes\rho_B$. Additivity of von Neumann entropy on products and equality of the entropies of complementary parts of a pure state give
+$S(R)+S(A)=S(B)$ and $S(R)+S(B)=S(A)$. This forces $S(R)=0$, while $R$ has entropy one bit. Example~\ref{cp:five} attains the bound.
+\end{proof}
+
+\begin{remark}[Recovery and physical fault tolerance]\label{cp:recoveryprogramme}
+The five-qubit and Steane codes have maximally mixed single-qubit marginals by Proposition~\ref{cp:stabilizer}. Their carrier closure follows from Corollary~\ref{cor:substructure}. Physical recovery by an internal observer additionally uses the instruments and controllable couplings of Theorem~\ref{thm:instruments}. Fault-tolerant graph computation would require a noise model for preparation, feedforward and recovery and a verified bound on how physical faults spread into logical errors.
+\end{remark}
+
+\begin{remark}[repetition-code facts that do not hold]\label{rem:cprep}
+The three-qubit repetition code does not correct arbitrary one-site errors ($Z_1$ has zero syndrome and acts
+logically), and its encoded states do not all have vanishing local Bloch vectors ($\lvert000\rangle$ has local $z$ coordinate
+one); it corrects single $X$ errors, and only the balanced GHZ state has maximally mixed marginals
+(Example~\ref{cp:rep}).  The code carriers are the round-trip-closed sub-structures of
+Section~\ref{sec:otherdim} (Corollary~\ref{cor:substructure}).
+\end{remark}
+
+\subsection{Gradients from two settings}
+
+\begin{lemma}[Weights and the infinitesimal derivative]\label{cp:infinitesimal}
+For a complex matrix $A$ and a complete family of orthogonal projectors $P_k$,
+$\sum_k\operatorname{Tr}(A P_k)=\operatorname{Tr}A$. For a density $\rho$ and $L=L^*$, set $\rho_t=e^{-itL}\rho e^{itL}$. For Hermitian $B$,
+\[
+ \frac{d}{dt}\operatorname{Tr}(\rho_t B)=i\operatorname{Tr}(\rho_t[L,B]).
+\]
+Both traces giving the expectation and its derivative are real. If $[L,B]=0$, the expectation is constant.
+\end{lemma}
+\begin{proof}
+Distributivity and completeness prove the first identity. Differentiate the matrix exponentials by their convergent power series and use cyclicity of trace. For Hermitian $D$, $\operatorname{Tr}(\rho_t D)$ is real by adjunction and cyclicity. Apply this to $B$ and $i[L,B]$.
+\end{proof}
+
+\begin{theorem}[Parameter shift from the real two-readout law]\label{cp:shift}
+Suppose $P=P^*$, $P^2=I$ on a clocked register and a real parameter appears in the circuit only as $U_\theta=e^{-i\theta P/2}$. For fixed input density $\rho$ and fixed Hermitian observable $B$, including the effects of all parameter-independent processing, the expectation
+$f(\theta)=\operatorname{Tr}(B U_\theta\rho U_\theta^*)$ satisfies
+\[
+ f(\theta)=d+a\cos\theta+b\sin\theta,\qquad
+ f'(\theta)=\frac{f(\theta+h)-f(\theta-h)}{2\sin h}
+ \quad(\sin h\ne0).
+\]
+In particular $h=\pi/2$ gives an exact two-setting identity. \cite{n5-shift-ref}
+\end{theorem}
+\begin{proof}
+For a unit input $x$ the exponential series gives $x_\theta=\cos(\theta/2)x+\sin(\theta/2)(-iPx)$. The spanning vectors are real-orthonormal, since $P$ is a self-adjoint involution. Thus $c_N(x_\theta,x_{\theta+h})=\cos(h/2)$ and the reflection of $x_{\theta+h}$ at $x_\theta$ is $x_{\theta-h}$. By the real two-readout law of Theorems~\ref{thm:trd} and \ref{thm:comp},
+\[
+ c_N(y,x_{\theta+h})+c_N(y,x_{\theta-h})
+ =2\cos(h/2)c_N(y,x_\theta).
+\]
+The reflection centered at $q=x_{\theta+\pi}$ takes $x_{\theta+h}$ to $-x_{\theta-h}$. The same law therefore gives the difference of the two readouts as $2\sin(h/2)c_N(y,q)$. Multiplying sum and difference gives
+\[
+ c_N(y,x_{\theta+h})^2-c_N(y,x_{\theta-h})^2
+ =2\sin h\,c_N(y,x_\theta)c_N(y,q).
+\]
+Since $\dot x_\theta=q/2$, the last product is the derivative of the squared readout. The Born probability for a unit ray $y$ is the sum of the squares of the same reading and its phase quadrature $c_N(iy,x_\theta)$, by Theorem~\ref{thm:bornN}. Adding the squared-readout identities proves the Born shift rule. Squaring the half-angle waveforms also gives only the constant and first harmonic in $\theta$. Spectral decomposition of $\rho$ and $B$ extends both identities to the general expectation by linearity. If $P$ is scalar on the input, its action changes phase alone and both sides are zero. The two-readout law used here is the real comparison on unit vectors before the clock quotient, in the form of the real readout identities of Paper~I. \cite{PaperI}
+\end{proof}
+
+Multiplying a general two-eigenvalue Hermitian generator by an inverse half-gap and subtracting its scalar midpoint reduces it to the involution. For eigenvalues $\ell_-,\ell_+$ with gap $\Delta>0$, the settings are $\theta\pm\pi/(2\Delta)$ and the multiplier is $\Delta/2$ by the chain rule. When a parameter occurs in several gates, expose independent gate parameters, apply the rule for each occurrence, and sum those derivatives on the parameter diagonal. For two successive $Y$ rotations of angle $\theta$ on $|0\rangle$, the $Z$ expectation is $\cos(2\theta)$. Its two shifts by $\pm\pi/2$ coincide, although the derivative at $\theta=\pi/4$ is $-2$.
+
+The same rule applies to an averaged cost when a single equatorial test changes angle and subsequent angle-independent processing may depend on its outcome. At that test let the joint state be $\rho$ and let $B_s$ denote the observable pulled back through the processing after outcome $s$. The contribution of branch $s$ is $\operatorname{Tr}[(P_s(\alpha)\otimes B_s)\rho]$, since the site is discarded and $P_s^2=P_s$. In view of Proposition~\ref{cp:axis}, summing over $s$ gives exactly the first harmonic and hence the same shift. A normalized postselected cost divides by a possibly angle-dependent probability and need not have that harmonic form.
+
+\begin{example}[Truncation and sampling error]\label{cp:shots}
+For $R_y(\theta)|0\rangle$ with $R_y(\theta)=e^{-i\theta Y/2}$, the $Z$ expectation is $f=\cos\theta$. At $\theta=\pi/3$ the expectation, positive shift and negative shift are respectively $1/2,-\sqrt3/2,\sqrt3/2$. The derivative is $-\sqrt3/2$, and the derivative of the north-pole probability $(1+f)/2$ is $-\sqrt3/4$. The central difference with denominator $2h$ has multiplicative factor $\sin h/h$ on the derivative, by Theorem~\ref{cp:shift}. At $h=\pi/6$ the magnitude falls by $1-3/\pi$, about $4.5\%$.
+
+For independent samples of a $\pm1$ test at the two settings, $n$ shots per setting and estimator $(\overline X_+-\overline X_-)/(2d)$, the variance is
+$(2-f_+^2-f_-^2)/(4nd^2)$ because each individual variance is $1-f_\pm^2$. At $\theta=\pi/3$, $n=100$, the standard deviations are about $0.0354$ for the exact shift ($h=\pi/2,d=1$) and $0.5826$ for $h=d=\pi/30$, by substitution. With $d=h$ the bias at a fixed angle is $(\sin h/h-1)f'(\theta)=O(h^2)$ by the sine series. If $1-f(\theta)^2>0$, its standard deviation grows in proportion to $1/|h|$ at fixed $n$ as $h\to0$ by continuity of the variance numerator. The exact rule eliminates truncation error and retains statistical error.
+\end{example}
+
+\begin{proposition}[Gradient and quotient metric]\label{cp:grad}
+Let $F$ be a $C^1$ potential on a Riemannian manifold with continuous metric. On any $C^1$ solution of $\dot q=-\operatorname{grad}F(q)$ on $[0,T]$,
+\[
+ F(q(T))-F(q(0))=-\int_0^T\|\dot q(t)\|^2\,dt.
+\]
+For a clocked qubit, the Fubini--Study convention $ds^2=\|d\psi\|^2-|\langle\psi,d\psi\rangle|^2$ gives one quarter of the unit Bloch sphere metric. The corresponding gradient is four times the unit-sphere gradient. \cite{n5-qng}
+\end{proposition}
+\begin{proof}
+The metric dual of $dF$ gives $dF(\dot q)=-\|\dot q\|^2$. The integrand is continuous, so the fundamental theorem of calculus applies. Equality of endpoint energies holds exactly for a constant curve, since a continuous nonnegative integrand with zero integral vanishes. For the metric, take $\psi=(\cos(\vartheta/2),e^{i\varphi}\sin(\vartheta/2))$. Then
+$\|d\psi\|^2=d\vartheta^2/4+\sin^2(\vartheta/2)d\varphi^2$ and $\langle\psi,d\psi\rangle=i\sin^2(\vartheta/2)d\varphi$ by substitution. Their difference gives $(d\vartheta^2+\sin^2\vartheta\,d\varphi^2)/4$, which extends to the poles as the same smooth sphere metric. Constant metric rescaling inversely rescales the gradient. Pulling the metric back along a parametrized circuit identifies a kernel exactly where the horizontal differential vanishes on parameter directions, so metric inversion there requires a quotient of the tangent space or a pseudoinverse on identifiable directions.
+\end{proof}
+
+\begin{example}[Height on the Bloch sphere]\label{cp:height}
+For $F(r)=r_z$ the unit-sphere gradient is $e_z-r_zr$, the tangential projection of $e_z$. At $r=(\sqrt3/2,0,1/2)$ it is $(-\sqrt3/4,0,3/4)$ with squared length $3/4$, so the instantaneous descent rate is $-3/4$. Subtracting one tenth of the gradient and normalizing gives
+$r'=(21\sqrt3,0,17)/(2\sqrt{403})$ by direct calculation. Its height $17/(2\sqrt{403})$ is below $1/2$ since $17^2<403$. The only stationary points are the poles, and the tangent linearization there is $-r_z I$ on a two-plane, giving index $+1$ at each. The $R_y$ path in Example~\ref{cp:shots} is a unit-speed Bloch meridian and hence has Fubini--Study speed $1/2$.
+\end{example}
+
+\begin{proposition}[Concentration and trace counting]\label{cp:concentration}
+For a uniform unit vector $x\in\mathbb R^d$ and any fixed unit axis $u$, $\mathbb E\langle u,x\rangle^2=1/d$ and $\Pr(|\langle u,x\rangle|\ge\epsilon)\le\min(1,1/(d\epsilon^2))$ for $\epsilon>0$. If $\lambda_j\ge0$ and $\sum_j\lambda_j=RW/\pi$ is finite, there are at most $RW/(\pi\tau)$ terms $\lambda_j\ge\tau>0$.
+\end{proposition}
+\begin{proof}
+Take $u$ as the first coordinate and sum the identical second moments to obtain $1$. Markov's inequality follows from $\epsilon^2\mathbf1_{\{|\langle u,x\rangle|\ge\epsilon\}}\le\langle u,x\rangle^2$. For the trace bound any finite collection of $k$ above-threshold terms has sum at least $k\tau$ and at most the total, ruling out infinitely many. Equality requires every retained term equal to $\tau$ and all remaining terms zero.
+\end{proof}
+
+For $d=2^{20}$ and $\epsilon=1/10$ the bound is $100/2^{20}$. For $\lambda_j=2^{-j-1}$ with $j\ge0$ the sum is one by the geometric series and $\tau=1/8$ selects precisely three terms, out of the bound of eight. The harmonic sequence has finite superlevel sets at every positive threshold and infinite sum. Uniform real amplitudes in dimension $2^N$ model a restricted ensemble. The full complex register has real unit sphere of ambient dimension $2^{N+1}$ and a phase quotient. A statement about the distribution of circuit gradients needs assumptions on the circuit ensemble and observable. Random-design and cost-locality conditions in published barren-plateau results supply such assumptions. For a simple obstruction to a general implication, $B=I$ has identically zero gradient for all ensembles, while $R_y(\theta)$ on one qubit tensored with arbitrarily many idle qubits gives the same derivative $-\sin\theta$ at every register size. \cite{n5-barren,n5-localcost}
+
+\subsection{Braid actions and protected sectors}
+
+\begin{proposition}[Point-particle exchanges]\label{cp:exchange}
+For unordered configurations of $n\ge2$ distinct points of $\mathbb R^d$, the exchange group is $B_n$ for $d=2$ and $S_n$ for $d\ge3$. Its one-dimensional unitary representations send elementary exchanges to a common phase in the first case and to a common sign in the second. \cite{n5-artin,n5-lm}
+\end{proposition}
+\begin{proof}
+In two dimensions a configuration path traces a geometric braid in $\mathbb R^2\times[0,1]$, and path homotopy is braid isotopy through such traces. Artin's braid theorem gives generators with adjacent braid and distant commutation relations. For $d\ge3$ consider the ordered configuration space, the complement in $\mathbb R^{dn}$ of finitely many collision diagonals of codimension $d$. It is path connected by polygonal paths using generic intermediate vertices. To see simple connectivity, approximate any loop by a polygonal loop and join them by short line segments in the complement, using the positive distance of the original compact loop from the diagonals. Cone the polygon to a generic apex. For each edge and diagonal, a bad apex has form $(p-(1-t)e)/t$ with $p$ on the diagonal, $e$ on the edge and $0<t\le1$. This is a countable union of smooth images of bounded parameter patches of dimension at most $dn-d+2<dn$, hence a null set. A simultaneous good apex gives the disk. The ordered space is therefore the universal cover of the unordered space, with deck group $S_n$. Adjacent generators become equal in an Abelian image by cancellation in the braid relation, and transpositions in $S_n$ have order two. The planar result concerns configuration paths. Closed knots in three-space remain governed by link isotopy, as in the closure construction below.
+\end{proof}
+
+\begin{proposition}[Rack transport and link colorings]\label{cp:braid}
+Let $Q$ be a finite rack, with bijective left translations $L_x y=x\triangleright y$ and $x\triangleright(y\triangleright z)=(x\triangleright y)\triangleright(x\triangleright z)$. Assign the adjacent crossing $(x,y)\mapsto(x\triangleright y,x)$. These permutations on $Q^n$ define a $B_n$ action. For a quandle, meaning a rack with $x\triangleright x=x$, the fixed-point count is invariant under algebraic Markov moves and therefore under oriented braid closure isotopy.
+\end{proposition}
+\begin{proof}
+The inverse crossing sends $(u,v)$ to $(v,L_v^{-1}u)$. Distant crossings commute. The paths through the adjacent braid relation both end with second and third entries $(x\triangleright y,x)$ and first entry either $(x\triangleright y)\triangleright(x\triangleright z)$ or $x\triangleright(y\triangleright z)$. Self-distributivity makes them equal. Conjugation sends the fixed colorings bijectively by its conjugating permutation.
+
+For positive stabilization, act by the new last crossing first and the old braid on the first $n$ positions second. The last color in a fixed tuple must equal the old last color $x$, since the crossing outputs $x$ on the added strand. The first coordinate of that pair then remains $L_x x=x$. For negative stabilization, the inverse on $(x,y)$ gives $(y,L_y^{-1}x)$, and the last-color equation $L_y^{-1}x=y$ is equivalent to $x=L_y y=y$. In each sign the fixed colorings correspond by duplicating the last original color. This covers inverse moves by bijectivity. Alexander's theorem gives braid representatives of oriented links, and Markov's theorem identifies precisely the moves between representatives of isotopic closures. \cite{n5-alexander,n5-birman}
+\end{proof}
+
+\begin{example}[Three colors]\label{cp:colors}
+On $\mathbb Z/3$ the quandle operation $x\triangleright y=2x-y$ has bijective involutory translations, is idempotent, and both sides of self-distributivity reduce to $2x-2y+z$. The two-strand crossing has three diagonal fixed points and two three-cycles, through $(0,1)$ and $(0,2)$ because $(x,y)\mapsto(-x-y,x)$. Thus the counts for the first three positive powers are $3,3,9$ and each count persists under both signs of stabilization. The closure of the $k$th power is the torus link $T(2,k)$, with the unknot at $k=1$ and the trefoil at $k=3$. Their counts distinguish them. Equal counts can occur on distinct links, as for the first two powers, whose closures have one and two components by the induced strand permutations. The rack $x\triangleright y=y+1$ on the same set has bijective translations and both sides of the distributive law equal $z+2$. Its identity one-strand braid has three fixed colorings and its positive stabilization has none, since $(y+1,x)=(x,y)$ is impossible. \cite{n5-birman}
+\end{example}
+
+\begin{proposition}[Fermion signs on a register]\label{cp:jw}
+With sites ordered from $0$, let $c_j=(\prod_{i<j}Z_i)\sigma^-_j$ and $\sigma^-=|0\rangle\langle1|$, $\sigma^+=(\sigma^-)^*$. Then $\{c_i,c_j\}=0$ and $\{c_i,c_j^*\}=\delta_{ij}I$, where $\{A,B\}=AB+BA$. A nearest-neighbor hopping $c_j^*c_{j+1}$ is $\sigma^+_j\sigma^-_{j+1}$, and a hop across one intervening site retains its $Z$. \cite{n5-jw-ref}
+\end{proposition}
+\begin{proof}
+For $i<j$ the products in each anticommutator differ by the sign from commuting $\sigma^-_i$ through the unique unmatched $Z_i$ on its site. All other tensor factors have the same order or commute. At equal sites the squared lowering operator vanishes and $\sigma^-\sigma^++\sigma^+\sigma^-=I$. Hopping cancels the common $Z$ factors and $\sigma^+Z=\sigma^+$. For two sites without the $Z$ string the lowering anticommutator is $2\sigma^-\otimes\sigma^-$, whereas with the string the two creation orders on the vacuum give $|11\rangle$ and $-|11\rangle$. This is an operator representation of fermionic statistics on a register.
+\end{proof}
+
+\smallskip\noindent\textbf{Hypothesis Lq (Local indistinguishability for a fusion space).}  A specified gapped planar model has a finite tensor-register realization with a protected subspace $U$ on which $P_U A P_U$ is scalar on $U$ for every operator $A$ supported in one of a specified family of small regions. Its adiabatic exchange operations on well-separated quasiparticles give a projective unitary braid representation on $U$ in the topological limit. \cite{n4:Nayak,n5-kitaev}
+
+
+\begin{corollary}[Correction in a locally indistinguishable space]\label{cp:anyoncode}
+Under Hypothesis~Lq, any finite normalized error family for which each $E_i^*E_j$ is supported in an allowed region is exactly correctable. In particular this holds when all errors are supported in one allowed region.
+\end{corollary}
+\begin{proof}
+Apply the compression hypothesis to each product and use Theorem~\ref{cp:kl}.
+\end{proof}
+
+\begin{remark}[Finite-size and dynamical requirements]\label{cp:anyonprogramme}
+To obtain a physical realization from the field theory of Section~\ref{sec:fields}, specify a Hamiltonian and boundary or defect conditions, prove a gap and control the finite-separation error in local indistinguishability and braid transport. A model in which the splitting is bounded by $C e^{-L/\xi}$ admits an operating regime if the adiabatic lower bound on operation time is small compared with the inverse splitting. A quantitative fault-tolerance conclusion also requires a noise bound, including thermally excited mobile quasiparticles at nonzero temperature. Braid universality in any concrete representation requires a separate gate-generation result. \cite{n4:Nayak}
+\end{remark}
+
+\begin{remark}[what does not hold]\label{rem:cpnogo}
+(i) A measurement setting is not a right clock phase (Remark~\ref{rem:cpattention}).  (ii) A pure graph-state resource
+is not an unconditioned singlet marginal (Proposition~\ref{cp:slice}).  (iii) Scaled-isometry restrictions,
+individually or through one shared isometry, do not characterise correction (Remark~\ref{cp:scaled}).  (iv) The
+repetition code statements of Remark~\ref{rem:cprep}.  (v) One $\pm\pi/2$ pair does not differentiate a shared parameter:
+two $Y$ rotations give $\cos2\theta$, whose shifts coincide where the derivative is $-2$; differentiate each occurrence or use
+the actual frequency set.  (vi) Register dimension alone does not force gradient concentration: one active
+qubit with idle spectators keeps the derivative $-\sin\theta$.  (vii) The three-dimensional point-exchange collapse
+does not trivialise knots: the trefoil and the unknot have $9$ and $3$ colourings.  (viii) Rack colourings are not
+Markov invariant without idempotence: the shift rack gives $3\to0$.
 \end{remark}
 
 %=====================================================================================
@@ -4877,7 +5252,8 @@ requires $g_4=g_3$, fails for the strong coupling by $5.6$ in $\alpha^{-1}$, as 
 non-supersymmetric Standard Model.  Two-loop terms, thresholds and intermediate states are ignored.
 The strong and weak couplings meet at $9.7\times10^{16}$\,GeV, where $\sin^2\theta_W=0.436$ (with
 $\alpha_s=0.1177$: $\alpha_3^{-1}=36.85$ at the $\tfrac38$ crossing, $1.031\times10^{13}$\,GeV, and the meeting at $9.4\times10^{16}$\,GeV); so with
-Standard Model content no scale realises the equal couplings of Hypothesis~G(v) at one loop.  Neither
+Standard Model content no scale realises the equal couplings of Hypothesis~G(v) at one loop
+(with an assumed intermediate spectrum they can be fitted by two scales, Section~\ref{sec:unification}).  Neither
 boundary value is a prediction of the low-energy value $0.231$.
 \end{remark}
 
@@ -4885,7 +5261,8 @@ boundary value is a prediction of the low-energy value $0.231$.
 Under Hypothesis~G(i)--(iv), the stabiliser of $\Xi$, its global form and the hypercharge table are
 theorems; $\sin^2\theta_W=\tfrac38$ follows from clause (v), which one-loop running does not realise.  Not obtained: why there are
 three structures (a pair and one more) and not another number; three generations; the breaking
-scale; masses and Yukawa couplings; unification of the strong coupling; any dynamics.
+scale; masses and Yukawa couplings; unification of the strong coupling (with an assumed intermediate
+spectrum it is a two-scale fit, Remark~\ref{rem:ubscales}); any dynamics.
 Theorem~\ref{thm:sm} and Proposition~\ref{prop:angle38} reproduce the Pati--Salam embedding with
 lepton number as the fourth colour \cite{PatiSalam}, the left--right symmetric structure
 \cite{MohapatraPati,SenjanovicMohapatra} and the value of \cite{GQW}; see \cite{BaezHuerta} for the
@@ -4938,6 +5315,1045 @@ its time unit exactly for $N\in\{2,3\}$.  Neither selects $3$ over $2$; a princi
 
 
 %=====================================================================================
+\section{Unification scales, a tick budget for time dilation, and entanglement gravity on the space of caps}\label{sec:unification}
+
+Two successive breaking thresholds reconcile the equal-coupling boundary condition of
+Proposition~\ref{prop:angle38} with the gauge inputs of Remark~\ref{rem:scales}
+at one loop for an explicit scalar spectrum. The same comparison framework gives
+a kinematic clock identity on its velocity ball and a finite entropy first law
+for cap restrictions. To turn the latter identity into linearised Einstein
+equations requires a continuum vacuum, a local modular energy and an entropy
+equilibrium postulate. We give the implication with those inputs and identify
+which parts are already supplied by the comparison structure.
+
+\subsection{Two-stage Pati--Salam breaking}
+
+\smallskip\noindent\textbf{Hypothesis Ps (Spectrum and tree matching).}  Use Theorem~\ref{thm:sm} and Hypothesis G(v) at an upper matching scale
+$M_{\rm PS}$. For running above that scale the fields are three families of
+Weyl fermions $(4,2,1)\oplus(\bar4,1,2)$ in all-left-handed notation,
+a real bidoublet $\Phi=(1,2,2)$, a complex $\chi_R=(4,1,2)$ and
+a real adjoint $\Sigma=(15,1,1)$. The bidoublet uses the real form of
+the tensor product of two pseudoreal doublets, so its two weak columns
+are conjugate and it contains one independent complex left doublet.
+The adjoint expectation value is along
+$\operatorname{diag}(1,1,1,-3)$ and leaves the connected intermediate Lie algebra
+$\mathfrak{su}(3)\oplus\mathfrak{su}(2)_L\oplus\mathfrak{su}(2)_R
+\oplus\mathfrak u(1)_{B-L}$. Between $M_R$ and $M_{\rm PS}$ the fermions
+are three families of $Q_L=(3,2,1,1/3)$, $L_L=(1,2,1,-1)$,
+$Q_R^c=(\bar3,1,2,-1/3)$, $L_R^c=(1,1,2,1)$, where the last entry is
+$B-L$. The only scalars in this interval are the real $(1,2,2,0)$
+and the complex $(1,1,2,-1)$ component of $\chi_R$. At $M_R$ the
+component with $T_{3R}=1/2$ acquires a vacuum value as in Theorem~\ref{thm:sm}.
+Below $M_R$ the charged running is that of three Standard Model generations
+and one complex Higgs doublet of $Y=1/2$. The right-handed neutrinos are
+gauge singlets in this interval. Put all other scalar components at their
+respective matching thresholds. Use mass-independent one-loop running with
+step decoupling, neglect finite matching corrections and use the inputs
+of Remark~\ref{rem:scales} as boundary data.
+
+
+\begin{remark}[One- and two-loop evolution]\label{ub:beta}
+Let $A_i=\alpha_i^{-1}=4\pi/g_i^2$ and
+$\operatorname{tr}_{\rm fund}T^aT^b=\delta^{ab}/2$.
+For a simple factor $T_i$ denotes the trace index multiplied by spectator
+dimensions. For an abelian factor it is the sum of squared generator
+eigenvalues. With Weyl fermions, complex scalars and real scalars the
+one-loop coefficient is
+\[
+ b_i=-\frac{11}{3}C_2(G_i)+\frac23\sum_f T_i(f)
+                  +\frac13\sum_{\rm complex}T_i(s)+\frac16\sum_{\rm real}T_i(s),
+ \qquad \frac{dA_i}{d\log\mu}=-\frac{b_i}{2\pi}.
+\]
+The adjoint term vanishes for a $U(1)$. At two loops in the same
+scheme the extra terms in $dA_i/d\log\mu$ are
+\[
+ -\frac{\sum_j b_{ij}\alpha_j}{8\pi^2}
+ +\frac{\sum_a c_{ia}\operatorname{tr}(Y_a^\dagger Y_a)}{32\pi^3},
+\]
+defining $b_{ij}$ and $c_{ia}$ by the usual $g_i^3 g_j^2$ and
+$-g_i^3\operatorname{tr}(Y_a^\dagger Y_a)$ terms in $(16\pi^2)^2\beta_{g_i}$.
+The evolution is then coupled and loses its affine dependence on
+logarithmic interval lengths. A calculation at that accuracy also requires
+one-loop decoupling and the heavy mass ratios, together with Yukawa running.
+Hypothesis~Ps fixes the step spectrum and leaves these further
+inputs free. \cite{ub:mv83,ub:mv84,ub:lx}
+\end{remark}
+
+\begin{proposition}[Matching and coefficients]\label{ub:matching}
+With $X=\sqrt{3/8}(B-L)$, $g_1=\sqrt{5/3}\,g_Y$ and scales understood
+as one-sided limits, the tree conditions are
+\[
+ A_3(M_{\rm PS}^-)=A_X(M_{\rm PS}^-)=A_4(M_{\rm PS}^+),\qquad
+ A_1(M_R^-)=\tfrac35 A_R(M_R^+)+\tfrac25 A_X(M_R^+).
+\]
+The spectator couplings are continuous. The one-loop coefficients are
+\[
+ \begin{array}{c|c|c}
+ \text{interval}&\text{order}& b\\ \hline
+ (M_Z,M_R)&1,L,3&(41/10,-19/6,-7)\\
+ (M_R,M_{\rm PS})&X,L,R,3&(17/4,-19/6,-3,-7)\\
+ (M_{\rm PS},\text{UV})&4,L,R&(-29/3,-19/6,-5/2)
+ \end{array}
+\]
+and the projected intermediate vector in order $(1,L,3)$ is
+$(-1/10,-19/6,-7)$.
+\end{proposition}
+\begin{proof}
+The adjoint centraliser is block diagonal by its two eigenspaces and
+contains the color generators normalised as in $SU(4)$.
+$X=\operatorname{diag}(1,1,1,-3)/(2\sqrt6)$ has trace square $1/2$.
+In the convention in which the coupling is in the kinetic term,
+restricting the diagonal inverse kinetic form to
+$Y=T_{3R}+\sqrt{2/3}\,X$ gives
+$A_Y=A_R+(2/3)A_X$. The generator commuting with the condensate is
+thus exactly the hypercharge of Theorem~\ref{thm:sm}. The neutral
+mixing direction is unique because the two abelian coefficients of
+the condensate charge are both nonzero. Canonical hypercharge
+normalisation multiplies $A_Y$ by $3/5$. Above $M_R$,
+$SU(2)_R$ and $SU(4)$, or $SU(2)_R$ and $U(1)_X$, forbid an abelian
+mixing term between $T_{3R}$ and $X$.
+
+In each interval the fermion index sum for three generations is $6$
+for each displayed factor. In particular for $X$, per generation it is
+$(3/8)(12/9+4)=2$. For normalised hypercharge it is
+$(3/5)(6/36+3(4/9+1/9)+2/4+1)=2$.
+The low Higgs indices for $(1,L,3)$ are $(3/10,1/2,0)$.
+The real bidoublet has index $1$ for each weak factor. The surviving
+complex right doublet has indices $3/4$ and $1/2$ for $X$ and $R$,
+respectively. Above $M_{\rm PS}$ the complex right field has
+indices $1$ and $2$ for $4$ and $R$, and the real adjoint has index $4$
+for $4$. Inserting these in Remark~\ref{ub:beta} gives the table and
+$(3/5)(-3)+(2/5)(17/4)=-1/10$.
+\end{proof}
+
+\begin{theorem}[Unique ordered one-loop fit]\label{ub:fit}
+Use Hypothesis~Ps and the inputs
+\[
+ (M_Z,\widehat{\alpha}^{-1},\hat s_Z^2,\alpha_s)
+   =(91.1879\,{\rm GeV},127.95,0.23122,0.1180).
+\]
+The unique fit is
+\[
+ M_R=1.2928\,10^{10}\,{\rm GeV},\qquad
+ M_{\rm PS}=9.7068\,10^{16}\,{\rm GeV},\qquad A_{\rm PS}=47.0233
+\]
+to the displayed precision. With a complex bidoublet above $M_R$
+and the same single low-energy doublet, the corresponding fit is
+$(2.5798\,10^{10}\,{\rm GeV},5.1653\,10^{16}\,{\rm GeV},46.3205)$.
+\end{theorem}
+\begin{proof}
+Put $x=\log(M_R/M_Z)/(2\pi)$, $y=\log(M_{\rm PS}/M_R)/(2\pi)$.
+Write $B$ for the low vector, $C$ for the projected intermediate vector
+and $A^0=(\frac35(1-\hat s_Z^2)\widehat\alpha^{-1},
+\hat s_Z^2\widehat\alpha^{-1},1/\alpha_s)$.
+Integrating downward and using Proposition~\ref{ub:matching} gives
+\[
+ A^0=A_{\rm PS}(1,1,1)+Bx+Cy.
+\]
+Write $D_{ij}=A_i^0-A_j^0$ and $\Delta B_{ij}=B_i-B_j$,
+$\Delta C_{ij}=C_i-C_j$. The two differences are two linear equations
+for $x,y$. In the real case they yield
+\[
+ L=x+y=\frac{6D_{L3}}{23},\qquad
+ x=\frac{D_{1L}-(46/15)L}{21/5},\qquad
+ A_{\rm PS}=A_3^0+7L .
+\]
+They give $x\simeq2.9872913$ and $y\simeq2.5196712$, both positive.
+The equality $B_L=C_L$, $B_3=C_3$ explains the coincidence of $M_{\rm PS}$
+with the strong--weak crossing of Remark~\ref{rem:scales}.
+The complex bidoublet adds $1/6$ to each weak slope above $M_R$, giving
+$C=(0,-3,-7)$ and upper coefficients $(-29/3,-3,-7/3)$. The difference matrix on rows $(1,L)$ and $(L,3)$
+has determinant $(109/15)4-3(23/6)=527/30\ne0$.
+Inversion gives $x\simeq3.0972580$, $y\simeq2.3093001$ and
+$A_{\rm PS}=A_3^0+7(x+y)$. Positive endpoint inverse couplings imply
+positive couplings throughout the two fitted affine intervals.
+\end{proof}
+
+\begin{remark}[What the fit constrains]\label{ub:fitcount}
+After eliminating the overall inverse coupling, two measured differences
+determine two logarithms for any chosen spectrum with invertible difference
+matrix and positive solution. Geometrically the observed difference vector
+must lie in the open cone generated by its two slope-difference columns.
+On a boundary the corresponding interval shrinks. With parallel columns the
+vector must lie on the same line, and any interior solution can then be
+varied along the null direction. Thus an additional scale is an additional
+fit parameter. For example if $C=B$ with the inputs in
+Theorem~\ref{ub:fit}, the two columns are equal and the two crossing scales
+of Remark~\ref{rem:scales} disagree. The measured splittings are independent
+tests if both threshold scales are fixed beforehand. Taking the same data with
+$\alpha_s=0.1177$ gives $M_R=1.3266\,10^{10}\,{\rm GeV}$, $M_{\rm PS}=9.3691\,10^{16}\,{\rm GeV}$
+and $A_{\rm PS}=47.0055$. Mass ratios and
+extra multiplets can shift it further. The comparison structure supplies the
+group and its generators under G, while
+Hypothesis~Ps supplies the adjoint, scalar reality condition,
+mass hierarchy and splitting, and identifies the equality scale with the
+upper threshold. It replaces the single Standard Model running interval in
+Remark~\ref{rem:scales}. The real bidoublet has only one independent
+renormalisable Pati--Salam Yukawa matrix for a given fermion bilinear.
+Its conjugate column supplies no independent flavour matrix. A realistic
+flavour fit therefore needs further scalar or effective Yukawa inputs.
+\end{remark}
+
+\begin{remark}[relation to Remark~\ref{rem:scales}]\label{rem:ubscales}
+Remark~\ref{rem:scales} stands: with Standard Model content no scale realises the equal couplings at one
+loop.  With the spectrum of Hypothesis~Ps the equal couplings hold at $M_{\mathrm{PS}}=9.7068\times10^{16}$\,GeV with $\alpha^{-1}_{\mathrm{PS}}=47.0233$ and
+$M_R=1.2928\times10^{10}$\,GeV ($\alpha_s=0.1180$; with $0.1177$: $9.3691\times10^{16}$, $47.0055$, $1.3266\times10^{10}$).  This is a fit: two measured differences of inverse
+couplings determine the two logarithms, and $\alpha^{-1}_{\mathrm{PS}}$ follows; nothing is predicted unless both scales are fixed
+beforehand.  $M_{\mathrm{PS}}$ coincides with the Standard Model strong--weak meeting point of Remark~\ref{rem:scales}
+because the weak and strong slopes are the same below and above $M_R$.  \emph{One free scale does not always
+suffice}: an adjustable lower threshold with unchanged slopes ($C=B$) gives two incompatible crossing
+conditions; for any fixed content, solvability is the condition that the measured difference vector lies in
+the open cone of the two slope-difference columns (Remark~\ref{ub:fitcount}).
+\end{remark}
+
+\begin{proposition}[Trace boundary and hypercharge constraints]\label{ub:traces}
+On one left-handed Weyl family with $N\ge2$ colors and a neutral or absent
+singlet neutrino, the color and weak trace squares are $2$ and $(N+1)/2$.
+A common positive trace coefficient in the inverse kinetic form gives
+$g_3^2/g_2^2=(N+1)/4$. With vector electromagnetic charges and an electron
+of charge $-1$, the trace weak angle for the anomaly-compatible charges is
+$N/[2(N+1)]$. If the quark charges are fixed to $2/3,-1/3$, it is
+$9(N+1)/[4(9+5N)]$. The two curves intersect only at $N=3$.
+\end{proposition}
+\begin{proof}
+There are four defining or conjugate color copies and $N+1$ weak doublets.
+On every weak doublet $Y$ is scalar, so $\operatorname{tr}(T_3Y)=0$.
+The common trace coefficient gives
+$\sin^2\theta_W=\operatorname{tr}T_3^2/\operatorname{tr}Q^2$.
+Using the left-handed conjugates, the total electromagnetic trace is
+$2[1+N(q_u^2+q_d^2)]$, with a factor of two from the two chiralities.
+With $Y_L=-1/2$, the $SU(2)^2Y$ equation gives $Y_Q=1/(2N)$, so
+$q_u,q_d=(1\pm N)/(2N)$, in the up and down order. Substitution yields
+the first angle and $\operatorname{tr}Y^2/\operatorname{tr}T_3^2=(N+2)/N$.
+Substituting the fixed quark charges gives the second angle. Their
+difference is $(N^2-9)/(4(N+1)(9+5N))$. In particular the value $3/8$
+at $N=3$ is the boundary of Proposition~\ref{prop:angle38}.
+Allowing positive invariant weights on the five multiplets
+$Q,u^c,d^c,L,e^c$ changes the color-to-weak squared coupling ratio to
+$(Nw_Q+w_L)/(2w_Q+w_u+w_d)$. This attains every positive value
+since with $w_Q=1$ the numerator and denominator independently range
+over $(N,\infty)$ and $(2,\infty)$. A single scalar doublet with $Y=1/2$
+would instead give trace angle $1/2$.
+\end{proof}
+
+\begin{proposition}[One-family anomaly varieties]\label{ub:anomalies}
+Let the left-handed charges be $(q,u,d,\ell,e,n)$, with $n=0$ for an
+absent or neutral $\nu^c$. The four perturbative mixed and abelian anomaly
+conditions reduce to
+\[
+ d=-2q-u,\qquad \ell=-Nq,\qquad e+n=2Nq,\qquad
+ 6Nq(w-t)(w+t)=0,\quad t=u+q,\quad w=e-Nq .
+\]
+Thus with $n=0$ there are three lines, and with unrestricted $n$ there
+are three planes. A charged singlet neutrino permits a $B-L$ shift of
+hypercharge even when all four Dirac Yukawa terms are gauge invariant.
+\end{proposition}
+\begin{proof}
+The $SU(N)^2Y$, $SU(2)^2Y$ and gravitational mixed anomalies give the
+three linear conditions by their defining trace sums. There are equal
+numbers of fundamental and conjugate color representations, and the
+cubic weak trace vanishes. The cubic abelian polynomial is
+$2Nq^3+Nu^3+Nd^3+2\ell^3+e^3+n^3$. Substitute
+$u,d=-q\pm t$, $e,n=Nq\pm w$, and $\ell=-Nq$ to obtain the factorisation.
+For $n=0$ this forces $q=0$ or $t=\pm Nq$. Requiring $Y_L=-1/2$
+and vector electric charges chooses the standard branch.
+If only the three quark hypercharges $(1/6,-2/3,1/3)$ are fixed with
+$n=0$, the cubic residual is $N(N^2-9)/36$, which vanishes only at $N=3$.
+With a Higgs of hypercharge $1/2$, the four Dirac terms
+$QHu^c,QH^*d^c,LH^*e^c,LH\nu^c$ fix $t=-1/2$, $w=1/2$
+and leave $q$ free. The derivative of the charge vector with respect to
+$q$ is $(1,-1,-1,-N,N,N)$, proportional to $B-L$. Requiring a bare
+Majorana term imposes $n=0$, fixing $q=1/(2N)$ on this branch. The global
+$SU(2)$ anomaly further requires an even total number of doublets,
+so $N$ is odd for an odd number of identical generations. For odd $N$,
+the baryons with $(N\pm1)/2$ up quarks have charges $1,0$, respectively,
+by summing the charges in Proposition~\ref{ub:traces}.
+\cite{ub:geng,ub:witten,ub:bar,ub:babu}
+\end{proof}
+
+\smallskip\noindent\textbf{Hypothesis Ea (Effective action for comparison fields).}  On a simplicial regulator model the spatial coframe, hypercharge, left
+weak and color data by separate bundles. Use gauge links
+$U_\ell=\exp(i\epsilon_\ell \mathcal A_\ell)$ with Hermitian
+$\mathcal A_\ell=g_YB_\ell Y+g_LW_\ell^i T_L^i+g_3G_\ell^aT_c^a$,
+a chirality-changing Higgs map between matter bundles, and a hinge
+action proportional to $\sum_h V_{d-2}(h)\delta_h$ in spacetime dimension
+$d$, with $\delta_h=2\pi-\sum_{\sigma\supset h}\theta_{\sigma,h}$ for
+Euclidean hinges. A possible ultraviolet kinetic hypothesis is one common
+Weyl trace coefficient as in Proposition~\ref{ub:traces}. Here the real part of a link in the Wilson action is its Hermitian part.
+A clock version of this ansatz assumes
+$\nu_{\rm clock}^2+\sum_A\nu_A^2=\nu_0^2$, with nonnegative rates
+for the clock and specified spatial, gauge and Higgs channels.
+An assignment of a channel rate to a field invariant needs a physical
+calibration. One can choose the product gauge group over the whole regulator or implement
+Hypothesis~Ps at high energy. These choices have different
+heavy gauge sectors. A common phase for the gauge, matter and hinge actions
+is an action ansatz. Its measure, field equations and continuum limit require further input.
+One possible scalar ansatz is $\ell_P^2\mathcal R=\kappa\,\mathcal L$,
+where $\mathcal R$ is scalar curvature,
+$\mathcal L=\sum_A\nu_A^2/\nu_0^2$ and $\kappa$ is dimensionless.
+The clock sum supplies a nonnegative scalar $\mathcal L$.
+A conserved stress tensor and a covariant metric variation would be
+needed to obtain a tensor field equation. \cite{ub:regge,ub:wilson,n7:CC}
+
+
+\begin{remark}[Finite identities and continuum dynamics]\label{ub:arclimits}
+If $Uf=f'U$, then $Uf-fU=(f'-f)U$. For a unitary skew-adjoint
+matrix $J$, $J^\dagger J=I=-J^2$. The first applies to a transported
+Higgs map and the second to a balanced unitary chirality exchange,
+which is an additional assumption about that map. For the two-level
+illustration $H=3Z+4X_0$ with Pauli matrices $Z,X_0$, anticommutation
+gives $H^2=25I$ and $\operatorname{tr}H=0$, hence eigenvalues $\pm5$
+with eigenvectors $(2,1)/\sqrt5$ and $(1,-2)/\sqrt5$ by substitution.
+Expanding the evolution operator gives
+$e^{-iHt/\hbar}=I\cos(5t/\hbar)-i(H/5)\sin(5t/\hbar)$, so an initial
+upper component has lower-component probability
+$(16/25)\sin^2(5t/\hbar)$. A Dirac rest Hamiltonian has energy
+eigenvalues $\pm mc^2$, so a matrix element coupling the two sectors
+oscillates at angular frequency $2mc^2/\hbar$. Its off-diagonal
+rest-energy matrix element in a chiral basis has magnitude $mc^2$.
+Reading it as a clock rate requires a model.
+Finite gauge transport and spanning-tree normalisation are already
+proved in Paper~I \cite[Part~0]{PaperI}. The continuum commutator of covariant derivatives gives the
+curvature two-form. A small face holonomy $U=\exp(iF)$ has a
+dimensionless Hermitian logarithm $F$ in this notation and measures the Wilson action deficit
+$\operatorname{tr}(I-\operatorname{Re}U)
+=\frac12\operatorname{tr}F^2+O(\|F\|^4)$ in fixed matrix dimension,
+by the cosine expansion. Hinge deficits are signed angles. For three
+right-angle sectors the deficit is $\pi/2$, while six such sectors
+give $-\pi$. A count $E-3N+6$ for a generic free infinitesimally
+rigid bar framework with $N\ge3$ noncollinear vertices is the
+dimension of self-stresses by rank-nullity for its rigidity matrix.
+In particular the count equals $(N-3)(N-4)/2$ for the complete graph.
+Flexible graphs need the actual rank. These finite statements give
+neither a metric field equation nor the normalization of $G_N$.
+\end{remark}
+
+\begin{proposition}[Gauge selection and seesaw benchmarks]\label{ub:decay}
+Perturbative gauge exchange in the Pati--Salam spectrum has no
+single-proton decay amplitude from the broken $SU(4)$ vector alone.
+A $B$-violating dimension-six operator is consistent with the
+gauge symmetry. If such a term has effective scale $M$ and coefficient
+$C/M^2$, its dimensional lifetime estimate is
+$\hbar M^4/(|C|^2m_p^5)$. A type-I seesaw at $M_N=M_R$ in the real-bidoublet
+fit requires $m_D\simeq0.804\,{\rm GeV}$ to give $m_\nu=0.050\,{\rm eV}$.
+\end{proposition}
+\begin{proof}
+Each broken off-diagonal $SU(4)$ vector connects a lepton to a quark.
+In physical chirality notation, the $B$ charge is $1/4+(B-L)/4$ on
+the fundamental fermion multiplets, and the vector carries the
+corresponding commutator charge $\pm1/3$. The kinetic vertices contain
+a quark-lepton current and its conjugate, with no diquark vertex.
+Tree exchange pairs these two currents and preserves $B$.
+More generally the gauge vertices and mass terms for the vectors
+preserve this charge in perturbation theory. In the Standard Model
+$QQQL$ is color, weak and hypercharge neutral after antisymmetric
+contractions, and has $\Delta B=\Delta L=1$. At the Pati--Salam level
+the four left-handed fundamental indices can be contracted by
+$\varepsilon_{ABCD}$, with two weak and spinor pairings. Flavour
+choices with distinguishable fields give a nonzero invariant. It changes
+fermion number and conserves $B-L$.
+Squaring the inverse-mass coefficient and supplying the fifth power of
+the hadronic energy scale gives the stated dimensional estimate. It is
+an estimate of dimension and ignores hadronic matrix elements, flavor,
+running and phase space. With $m_p=0.938\,{\rm GeV}$,
+$\hbar=6.5821\,10^{-25}\,{\rm GeV\,s}$ and a year of
+$3.15576\,10^7\,{\rm s}$, $|C|=1$ gives about $2.55\,10^{36}$ years at
+$M_{\rm PS}$, $8.0\,10^8$ years at $M_R$, and $6.4\,10^{44}$ years
+at $1.22\,10^{19}\,{\rm GeV}$. The same proxy would put a scale at
+about $3.0\,10^{16}\,{\rm GeV}$ from the Super-Kamiokande
+$90\%$ lower bound $2.4\,10^{34}$ years for the partial lifetime
+$p\to e^+\pi^0$. A channel-specific limit requires its own matrix element
+and matching coefficient. \cite{ub:takenaka}
+
+For a single generation the mass matrix on $(\nu,\nu^c)$ has entries
+$(0,m_D;m_D,M_N)$. Its signed eigenvalues are
+$(M_N\pm\sqrt{M_N^2+4m_D^2})/2$, so the smaller absolute eigenvalue is
+$m_D^2/M_N+O(m_D^4/M_N^3)$ for $m_D\ll M_N$.
+Inserting the stated masses gives $m_D=\sqrt{m_\nu(M_N+m_\nu)}$, or Yukawa
+coupling $m_D/(174\,{\rm GeV})\simeq0.00462$. A $100\,{\rm GeV}$ Dirac
+mass at the same $M_N$ instead gives a light mass near $774\,{\rm eV}$.
+The doublet breaking of Hypothesis~Ps allows a Majorana
+mass from a two-fermion two-scalar operator, schematically
+$(\psi_R^c\chi_R)^2/\Lambda_N$ with weak and color singlet contractions.
+It gives $M_N\sim v_R^2/\Lambda_N$ for coefficient of order unity.
+If $v_R=M_R$ and $\Lambda_N=M_{\rm PS}$ this is about
+$1.72\,10^3\,{\rm GeV}$ and a $0.050\,{\rm eV}$ light mass requires
+$m_D\simeq2.93\,10^{-4}\,{\rm GeV}$. An added scalar coupling
+renormalisably to $\psi_R^c\psi_R^c$ with a neutral component of
+$|B-L|=2$ can give $M_N\sim f v_R$, where $f$ is a Yukawa coupling.
+A light intermediate triplet changes the table of slopes. The spectrum
+alone leaves the seesaw masses and mixings free. \cite{ub:seesaw}
+\end{proof}
+
+\begin{remark}[Topological and anomalous selection rules]\label{ub:topology}
+For the product Standard Model with one Higgs doublet of fixed nonzero
+norm, the transitive gauge orbit of that doublet is its unit $S^3$.
+Thus $\pi_2$ gives no electroweak monopole charge of the smooth
+'t~Hooft--Polyakov kind. The high-stage adjoint Pati--Salam vacuum
+orbit is $SU(4)/S(U(3)\times U(1))\cong\mathbb{CP}^3$, by
+identifying the distinguished eigenline. The Hopf fibration
+$S^1\to S^7\to\mathbb{CP}^3$ gives $\pi_2=\mathbb Z$ by its exact
+sequence. That two-stage model admits a monopole topology at its first
+transition. The actual abundance requires a cosmological calculation.
+
+For the minimal renormalisable Standard Model, the color anomaly of
+vector baryon number vanishes by cancellation of opposite baryon charges
+of left-handed conjugates. A weak instanton contributes one zero mode
+per weak doublet per unit winding. Each generation therefore contributes
+$3(1/3)=1$ to $B$ and $1$ to $L$, giving
+$\Delta B=\Delta L=3\Delta N_{\rm CS}$ for three generations.
+Perturbation theory preserves $B$ and this nonperturbative gauge
+selection permits multiples of three. For a classical semiclassical
+benchmark with $g_L(M_Z)$, the single-instanton action
+$8\pi^2/g_L^2=2\pi A_L^0$ is about $185.9$, so the bare exponential
+factor is about $1.9\,10^{-81}$ in amplitude and
+$3.5\,10^{-162}$ in its modulus squared. A rate requires determinants,
+the instanton-size integral and the external-state matrix elements.
+Thermal sphaleron transitions and the topological pion field of
+Section~\ref{sec:skyrme} have separate dynamical assumptions.
+\cite{ub:thooft,ub:sphaleron}
+\end{remark}
+
+\subsection{A tick budget on the velocity ball}
+
+\begin{remark}[Quantum speed limits and serial records]\label{ub:qsl}
+For a pure state under a fixed Hamiltonian, the projective angle is
+$d_{\rm FS}(\psi,\phi)=\arccos|\langle\psi,\phi\rangle|$.
+Removing the component of $-iH\psi/\hbar$ parallel to $\psi$
+gives speed $\Delta H/\hbar$, so the time for a direct orthogonal
+transition is at least $\pi\hbar/(2\Delta H)$. The independent
+Margolus--Levitin bound uses instead $E-E_0$, the mean energy above the
+ground, in the same expression. Both bounds concern the specified
+state and Hamiltonian. In particular $H=(\hbar\omega/2)X_0$ on an
+initial $Z$-eigenstate reaches its orthogonal state at $\pi/\omega$,
+and varying $\omega>0$ varies the bound.
+\cite{n4:MT,n4:ML}
+
+For a different task, suppose a reference ray is within angle
+$e\,\Delta t/\hbar$ of each of two orthogonal record rays, with $e>0$.
+The projective triangle inequality gives
+$\pi/2\le 2e\Delta t/\hbar$. Thus $N$ such serial records take
+at least $N\pi\hbar/(4e)$. This follows by summing the individual
+latencies and agrees with the record-time and count declarations
+for this angle convention. It extends the accounting of
+Remark~\ref{rem:soclock}. Proposition~\ref{prop:soresolution}
+requires its resolution protocol to convert a tick count into a
+precision floor.
+\end{remark}
+
+\smallskip\noindent\textbf{Hypothesis Ck (Saturated clock budget).}  Fix a laboratory time $t$, a positive rate $\nu_0$ and a speed
+calibration $c>0$. For a locally absolutely continuous trajectory
+$z(t)$ in a flat inertial laboratory chart, identify
+$\dot z(t)/c=r(t)$ almost everywhere, where $r$ is the Klein coordinate
+of Theorem~\ref{thm:velocity}, with $\|r\|<1$. Write $v=\|\dot z\|$.
+Assume nonnegative clock and spatial rates with
+\[
+ \nu_{\rm space}=\nu_0\|r\|,\qquad
+ \nu_{\rm clock}^2+\nu_{\rm space}^2=\nu_0^2,\qquad
+ d\tau=(\nu_{\rm clock}/\nu_0)\,dt .
+\]
+If a microscopic model uses serial hops of length at most $\ell_0$
+per tick, one may choose $c=\ell_0\nu_0$ and, with an independent
+Planck calibration, $\ell_0=\ell_P=(\hbar G_N/c^3)^{1/2}$.
+A quantum speed limit can motivate a bound on an allowed class of
+transitions. State-independent calibration and saturation are
+separate assumptions.
+
+
+\noindent The speed limits used here are those of Proposition~\ref{prop:bdmt}, each with its own constant; no
+universal orthogonal flip rate follows from them, since rescaling the Hamiltonian changes the
+orthogonalisation time.  The clock budget below is a model with the named Hypothesis~Ck, set on the velocity
+space of Section~\ref{sec:velocity}, where the rate $\gamma(r)^{-1}$ is also the squared-concurrence factor of
+Theorem~\ref{thm:bdbudget}.
+
+\begin{theorem}[Proper time of the calibrated clock]\label{ub:clock}
+Under Hypothesis~Ck,
+\[
+ \tau(t_2)-\tau(t_1)
+ =\int_{t_1}^{t_2}\sqrt{1-v(t)^2/c^2}\,dt,\qquad
+ \frac{d\tau}{dt}=\gamma(r)^{-1}=2\sqrt{\det\rho_r}.
+\]
+The integral is the Minkowski proper time of the calibrated path.
+The rate equals the concurrence of any pure two-qubit purification
+of $\rho_r$ almost everywhere. The rate is $1$ at rest and tends to $0$ at the
+null boundary. With the same calibration and only an upper bound
+on the quadratic budget, the right side is an upper bound on the
+rate, with equality exactly at saturation.
+\end{theorem}
+\begin{proof}
+The nonnegative root gives $\nu_{\rm clock}/\nu_0
+=\sqrt{1-\|r\|^2}$. The path tangent $(1,\dot z/c)$ has positive
+Minkowski norm square $1-\|r\|^2$, and the Lorentz action of
+Theorem~\ref{thm:velocity} preserves that norm. Integrating along
+the path yields the stated proper time. The determinant and
+purification identities are Theorem~\ref{thm:velocity}(ii),(iv).
+The endpoint values are those of the continuous square root, with
+the null endpoint outside the open velocity ball. With a budget
+inequality, for example $r=0$ and $\nu_{\rm clock}=\nu_0/2$,
+the bound is strict.
+\end{proof}
+
+\begin{remark}[Causal and algebraic checks]\label{ub:clockchecks}
+The hop calibration bounds the net distance of $N$ serial hops by
+$N\ell_0$ by the triangle inequality. A radar return from radius
+$R$ within time $\Delta\tau$ in a stationary local inertial laboratory
+therefore requires $2R\le c\Delta\tau$ if each leg is speed-limited
+by $c$. With $20$ available serial ticks the inverse-count benchmark
+under the protocol in Proposition~\ref{prop:soresolution} is $0.05$.
+For a quadratic form vanishing on $(\pm\|w\|,w)$ in
+$\mathbb R\oplus\mathbb R^d$, the sum of the two equations fixes
+the spatial quadratic form to $-Q(1,0)\|w\|^2$ and their difference
+annuls the mixed linear form. This recovers Minkowski form up to
+scale, as in the null-cone geometry of Theorems~\ref{thm:cone}
+and~\ref{thm:velocity}. The Gram identity
+$\|u\|^2\|w\|^2-(u\cdot w)^2=\sum_{i<j}(u_iw_j-u_jw_i)^2$ follows
+by expansion. The hyperbolic identity $\cosh^2a-\sinh^2a=1$ follows
+from the exponential definitions. The clock budget is a separate
+assumption even in the presence of both identities.
+\end{remark}
+
+\smallskip\noindent\textbf{Hypothesis Gl (Static information load).}  Outside a spherical mass $M$ at areal radius $R>r_s=2G_NM/c^2$,
+assign a fractional load $\eta=r_s/R$ to the squared clock
+budget, followed by the kinematic budget with local physical velocity
+$v_{\rm loc}$. Assume universal coupling of this lapse to local
+matter clocks. Calling $\eta$ an information fraction amounts to
+calibrating it by $M/M_{\rm sat}(R)$ with
+$M_{\rm sat}(R)=Rc^2/(2G_N)$. A microscopic theory would have to
+identify the information observable that has this ratio.
+
+
+\begin{proposition}[Exterior comparison with Schwarzschild]\label{ub:lapse}
+Hypothesis~Gl gives
+$d\tau/dt=\sqrt{(1-\eta)(1-v_{\rm loc}^2/c^2)}$, where $t$
+is asymptotic static time. This is the proper-time rate of a
+Schwarzschild observer in the exterior with that local speed.
+\end{proposition}
+\begin{proof}
+The successive remaining squared fractions multiply.
+In the Schwarzschild metric the proper time of the local static
+frame is $dt_{\rm stat}=\sqrt{1-r_s/R}\,dt$, so the local
+orthonormal-frame norm is
+$c^2d\tau^2=c^2dt_{\rm stat}^2(1-v_{\rm loc}^2/c^2)$.
+At $R\longrightarrow r_s^+$ the static rate tends to zero in
+these coordinates. For any two co-located clock readouts subject to
+the same positive lapse, this common factor cancels from the ratio
+of their coordinate rates. At the static horizon this ratio is defined
+by the exterior limit. A freely falling proper clock has a regular
+local rate at the horizon. The lapse alone also permits, for example,
+a different positive radial coefficient on the open exterior.
+Thus the lapse does not determine the radial metric or its field equation.
+With $A=4\pi R^2$ and $\ell_P^2=\hbar G_N/c^3$,
+$2\pi R M_{\rm sat}c/\hbar=A/(4\ell_P^2)$. This is an algebraic
+comparison of the Bekenstein energy--radius expression and the
+black-hole area entropy at the Schwarzschild mass. It uses no extension
+of the weak-gravity entropy bound up to arbitrary strongly gravitating
+matter. \cite{ub:schwarz,ub:bek,n1-hawking}
+\end{proof}
+
+\begin{example}[Clock rates in a fixed reference window]\label{ub:clocknumbers}
+With $N_0=20$ reference ticks and $\beta=v_{\rm loc}/c$, the effective
+count proxy is $N_0 f$ for $f=d\tau/dt$. For $(\beta,\eta)$ equal
+to $(0,0)$, $(0.8,0)$, $(0,0.4)$ and $(0.6,0.36)$, substitution gives
+$f$ equal to $1,0.6,\sqrt{0.6},0.64$, respectively. The corresponding
+inverse-count proxies are $0.0500,0.0833,0.0645,0.0781$ to four
+decimals. The third example has $R=2.5r_s$. The fourth leaves
+$0.4096$ of the squared budget and uses $0.5904$. For the exterior
+static limiting rate $f\to0^+$ the formal reciprocal diverges.
+\end{example}
+
+\subsection{Tensor cuts and finite cap entropy}
+
+\begin{theorem}[Cut bound and equality criterion]\label{ub:cut}
+Let a finite tensor network of finite positive bond dimensions
+$D_e$ give a nonzero pure boundary state. For a boundary bipartition
+$A,A^c$ and any edge cut $\mathcal E$ separating them, the Schmidt
+rank is at most $\prod_{e\in\mathcal E}D_e$, and with natural
+logarithms
+\[
+ S(A)\le\log(\operatorname{rank}\rho_A)
+         \le\min_{\mathcal E}\sum_{e\in\mathcal E}\log D_e.
+\]
+Entropy attains the last bound exactly when the rank reaches the
+minimum cut capacity and all nonzero Schmidt weights are equal.
+\end{theorem}
+\begin{proof}
+Fixing the indices on the severed edges leaves a product of an
+$A$-vector and an $A^c$-vector. Summing over the cut indices gives
+at most the stated number of simple tensors, bounding matrix rank.
+For positive Schmidt probabilities $p_j$ on a rank $r$ support,
+strict concavity of $\log$ gives
+$\sum_j p_j\log(1/p_j)\le\log\sum_jp_j(1/p_j)=\log r$,
+with equality precisely for equal weights. The logarithm preserves
+order on positive capacities, so equality of the full chain gives
+the criterion. A cut of no edges has capacity one.
+\end{proof}
+
+\begin{remark}[Width-three bridge rank theorem]\label{ub:bridge}
+Let $M_r\in\mathbb C^{a\times b}$,
+$N_r\in\mathbb C^{d\times c}$ for $r=0,1,2$, and
+$F=\sum_rM_r\otimes N_r$ on the row--column bipartition
+$(a,d)\mid(b,c)$. Let $Q_{\max}$ be the maximum rank and
+write $Q_{\min}=\min(3ac,ad,bc)$ for the formal capacity.
+On the ordered dimensions below it equals the graph minimum since
+the fourth cut $3bd$ is at least $3ac$. The maximum exists
+because zero is attainable and all ranks are integers bounded by
+$ad$. Each term has rank at most $ac$ and the total rank is at most
+$ad$ and $bc$, so $Q_{\max}\le Q_{\min}$. For
+\[
+ 0<a\le b,\quad 0<c\le d,\qquad
+ a^2+b^2\le3ab,\quad c^2+d^2\le3cd
+\]
+the formal bridge theorem gives $Q_{\max}=Q_{\min}=\min(ad,bc)$.
+Indeed $b<3a$ and $d<3c$ under these cone conditions. The reverse
+rank bound is the formal result corresponding to the ordered
+width-three case of a bridge conjecture of Gesmundo, Lysikov and
+Steffan \cite{ub:gls}. The proof uses rational witnesses
+in the square and mixed regions and a base witness when both
+ratios lie in $(1,2)$. The case of both ratios at least two uses
+the smaller ordered tuple $(3a-b,a,3c-d,c)$ and preservation of the
+rank deficit under castling. The quadratic expressions are invariant
+under these replacements, and $a+c<b+d$. The formal declaration and
+the imported witnesses are identified in the verification record. \cite{ub:lean}
+Only the rank appears in this equality.
+\end{remark}
+
+\begin{example}[Cut facets and exact saturation]\label{ub:bridgeexamples}
+The log capacity is the lower envelope of the three affine expressions
+$\log3+\log a+\log c$, $\log a+\log d$ and $\log b+\log c$.
+For $(a,b,c)=(2,3,2)$ and $d=2,3,4$ the capacities are $4,6,6$,
+with the outer cuts tied at $d=3$. At $d=3$, take
+$M_0=[I_2\ 0]$, $N_0=[I_2\ 0]^{\mathsf T}$,
+$M_1=E_{02}$, $N_1=E_{20}$, $M_2=E_{12}$, $N_2=E_{21}$,
+with indices from zero. The first term fixes the four input
+pairs in $\{0,1\}^2$ and the other two send $(2,0),(2,1)$ to
+$(0,2),(1,2)$. Hence $F$ is a permutation, and the associated
+pure state has entropy $\log6$.
+For $(a,b,c,d)=(2,3,3,5)$ let the three left slices be the same
+scaled by $\sqrt2$, and take $N_0=[I_3\ 0]^{\mathsf T}$,
+$N_1=E_{30}$, $N_2=E_{31}+E_{42}$. The first term fills six
+columns; the other terms send $(2,0),(2,1),(2,2)$ to
+$(0,3),(1,3),(1,4)$. These nine distinct coordinates give
+$F^\dagger F=2I_9$ and entropy $\log9$. Outside the cone, at
+$(1,5,1,5)$ each channel has rank at most one and three diagonal
+matrix units realise rank three, the inner bottleneck.
+\end{example}
+
+\begin{remark}[Flat-spectrum results]\label{ub:flat}
+Here native means that the row and column grouping stays
+$(a,d)\mid(b,c)$. For $c=2q$, $d=3q$ and $q>0$, an identity column Gram is
+attainable exactly when $2b\le3a$.
+For $2b\le3a$ and $3c\le2d$, each $\lambda>0$ is realised by a
+native $F^\dagger F=\lambda I_{bc}$.
+Conversely $3a<2b$ and a positive scalar column Gram force
+$2c\le d$. These are the declarations
+\texttt{NativeSaturation.native\_saturation\_iff},
+\texttt{NativeScalarGram.native\_scalar\_gram\_exists}, and
+\texttt{NativeRectangularBound.bound} in the bridge graph sources
+\cite{ub:lean}. The last proof uses a common neutral two-plane for
+the Hermitian coefficient kernel of the injectively stacked
+three independent left factors in the regime $3a<2b$. When
+$c>0$ and $b>2a$, one has the stronger $3c\le d$. In this last
+regime the injective stack has a $b$-dimensional image in
+$\mathbb C^3\otimes\mathbb C^a$ and meets each
+$z\otimes\mathbb C^a$ for $z\ne0$. If a linear combination of the
+nine $M_r^\dagger M_s$ vanishes, pairing with such vectors
+annuls the coefficient quadratic form for all complex $z$, hence
+all coefficients vanish by polarization. Comparing each right
+matrix entry in the scalar Gram identity with a fixed diagonal
+entry then gives $N_r^\dagger N_s=H_{rs}I_c$. The left stack
+compression of $H\otimes I_a$ has rank $b>2a$ so $H$ has rank
+three. Concatenating the $N_r$ gives a Gram matrix of rank $3c$
+and therefore $d\ge3c$.
+\end{remark}
+
+\begin{example}[Full rank with strict entropy gap]\label{ub:flatcounter}
+For $(a,b,c,d)=(2,5,2,5)$, the cone test gives $29\le30$
+on both sides and Theorem~\ref{ub:cut} and Remark~\ref{ub:bridge}
+give rank capacity $10$. A scalar Gram would force $5\ge6$
+by the stronger obstruction. For $(3,5,3,5)$, the cone test is
+$34\le45$, the capacity is $15$, and $b\le2a$, $d\le2c$ both hold.
+Here $3a<2b$ still gives the contradiction $5\ge6$.
+In both cases every bridge state has entropy strictly below the
+logarithm of the cut capacity, including every maximal-rank witness.
+Proposition~\ref{ub:compact} strengthens this pointwise conclusion.
+\end{example}
+
+\begin{remark}[Rectangular routing and local recovery]\label{ub:othernets}
+If finite $X\times Y$ is partitioned by rectangles $I_t\times J_t$
+and each active $J_t$ is in bijection with $I_t$ via $\phi_t$,
+write $P_t$ for the corresponding partial permutation from
+$\mathbb C^Y$ to $\mathbb C^X$. Then $U=\sum_tP_t\otimes P_t^\dagger$
+is unitary from $\mathbb C^Y\otimes\mathbb C^X$ to
+$\mathbb C^X\otimes\mathbb C^Y$. In fact each input pair belongs to
+exactly one block with its coordinates reversed, and its image belongs
+to the same block, with the inverse obtained by reversing the two
+partial maps. Realignment takes each term to an outer product of the
+vectorized factors. Their supports for distinct $t$ are disjoint
+on both sides, so its rank is the number of nonempty blocks.
+Every simple tensor gives realignment rank at most one, proving
+optimality for this operator. For $|X|=5$, $|Y|=6$, the first three
+rows split into two $3$-by-$3$ blocks and the last two into three
+$2$-by-$2$ blocks. This constructs a $30$-dimensional unitary
+with exact width five.
+
+In a separate finite setting, for homogeneous bond-two
+open-boundary qubit matrix product states of length $3+m$, a state
+satisfying the observable-chart condition is determined up to unit
+phase among such states by its raw three-site prefix marginal.
+For $m\ge2$, the formal intrinsic interior result gives a nonempty open
+dense principal locus, defined by nonvanishing of a real polynomial
+of prefix marginal entries, where any interior three-site marginal
+determines the state up to phase. These use unnormalised marginals and
+the chart hypotheses of the declarations
+\texttt{observable\_chart\_phase\_recovery} and
+\texttt{intrinsic\_interior\_recovery} in the matrix product state
+sources \cite{ub:lean}. At the degenerate
+pair $(|0^5\rangle\pm|1^5\rangle)/\sqrt2$, all three-site marginals
+agree because tracing any of the other sites kills the cross term,
+and the two orthogonal states have bond dimension two by the diagonal
+two-projector construction. Finite recovery and tensor cuts apply to
+a specified network state and local tensor factorisation.
+The multiscale entanglement renormalisation ansatz (MERA)
+is one network architecture with such cuts
+\cite{ub:vidal,ub:cui}.
+\end{remark}
+
+\begin{proposition}[A uniform gap at fixed bridge dimensions]\label{ub:compact}
+For either dimension tuple in Example~\ref{ub:flatcounter}, the entropy
+maximum over all nonzero bridge states is attained and is strictly
+less than $\log Q_{\min}$.
+\end{proposition}
+\begin{proof}
+On the stated bipartition Frobenius-normalise $F$. Realign its entries
+$F_{(i,k),(j,l)}$ as a matrix with row $(i,j)$ and column $(k,l)$.
+The possible sums of at most three tensor products are exactly the
+matrices whose realignment has rank at most three. One direction
+uses outer products, and the other follows by reshaping any rank
+factorisation and padding it with zeros. Rank at most three is a
+closed condition given by minors. Its intersection with the unit
+Frobenius sphere is compact and nonempty. The entropy of $FF^\dagger$
+is continuous, including at eigenvalue zero by $-s\log s\to0$.
+A maximizer exists, and Example~\ref{ub:flatcounter} excludes
+equality there.
+\end{proof}
+
+\begin{conjecture}[Entropy gap with increasing bond dimensions]\label{ub:uniform}
+There is an $\epsilon>0$ independent of the integer $k\ge1$ such
+that the entropy of every nonzero width-three bridge at
+$(2k,5k,2k,5k)$ is at most $\log(10k^2)-\epsilon$. The dimension obstruction continues at every
+$k$ with the same ratios $b/a=5/2$ and $d/c=5/2$, and the
+compactness proof of Proposition~\ref{ub:compact} gives a strict gap
+for each $k$. A quantitative stability estimate for the scalar
+Gram obstruction would be required to bound these gaps uniformly.
+\end{conjecture}
+
+\begin{theorem}[First variation on finite caps]\label{ub:caplaw}
+Fix a finite spatial regulator with a tensor factor for each site on
+$M=S^3$. A cap $C_\xi$ of Theorem~\ref{thm:desitter} selects the sites
+it contains. Let $\rho_0$ be a global reference state and suppose its
+cap marginal $\rho_{C,0}$ is faithful, or restrict to its support and
+vary within that fixed support. For a differentiable global path of
+states with tangent $\dot\rho$, put $K_C=-\log\rho_{C,0}$ on that
+support. Then
+\[
+ \delta S_C=\operatorname{tr}\bigl(K_C\operatorname{tr}_{C^c}\dot\rho\bigr)
+             =\delta\langle K_C\rangle .
+\]
+If rotations act covariantly on the regional algebras and preserve
+$\rho_0$, then $K_{gC}=U_g K_C U_g^\dagger$ under the induced
+regional identification, and reference cap entropy depends only on radius
+for a rotation-transitive family of cap centres.
+\end{theorem}
+\begin{proof}
+The exact identity with relative entropy is
+\[
+ S(\rho_C)-S(\rho_{C,0})
+  =\operatorname{tr}((\rho_C-\rho_{C,0})K_C)
+       -D(\rho_C\Vert\rho_{C,0}).
+\]
+This follows by expanding $D(\rho\Vert\sigma)
+=\operatorname{tr}\rho(\log\rho-\log\sigma)$.
+At a faithful reference, differentiation of the spectral trace of
+$s\log s$ gives
+$\delta\operatorname{tr}\rho_C\log\rho_C
+=\operatorname{tr}((\log\rho_{C,0}+I)\delta\rho_C)$.
+For example, approximate the analytic function and its derivative
+by polynomials on a compact positive spectral interval, where the trace
+derivative of a matrix power follows by cyclicity.
+Since $\operatorname{tr}\delta\rho_C=0$, this gives the first law.
+Functional calculus respects unitary conjugation, proving covariance.
+For a singular $\rho_{C,0}$ one cannot allow arbitrary new
+support. For $\rho_{C,0}=\operatorname{diag}(1,0)$ and
+$\rho_C(s)=\operatorname{diag}(1-s,s)$ the one-sided entropy quotient
+diverges like $-\log s$ as $s\downarrow0$.
+\cite{n1-blanco}
+\end{proof}
+
+\begin{example}[Rotation symmetry and modular locality]\label{ub:tracial}
+On any finite set of $m$ qubit sites take the tracial reference
+$I/2^m$. These density matrices are consistent under every partial trace
+and define a product state on the algebra generated by finite subsets
+of qubit sites indexed by the sphere. Rotations act by relabelling and
+preserve the state. A finite cap restriction with $m_C$ retained qubits
+has $K_C=m_C\log2\,I$ and $S_C=m_C\log2$. This first law has zero
+response to every trace-preserving perturbation. On meshes with
+asymptotically uniform number density the reference entropy counts bulk
+sites, giving a volume law. Even at a fixed finite cutoff, a faithful
+permutation-invariant reference proportional to
+$\exp(-\lambda\sum_{i<j}Z_i Z_j)$ has a nontrivial interaction in its
+modular Hamiltonian on the full set. Take $\lambda\ne0$ here. Symmetry of the state constrains
+the transformation of its modular generators and leaves their form free.
+
+A pure rotation-invariant example puts the same symmetric Bell pair on
+each antipodal pair $\{x,-x\}$, with tensor product over pairs. These
+finite-pair states define a consistent state on the algebra generated
+by all finite site sets. Any convex decomposition must restrict
+trivially on each finite union of pairs because those restrictions are
+pure. Such unions contain every finite set of sites, so the full state
+is pure. Rotations preserve antipodal pairs and the pair state is
+symmetric under interchange, giving rotation invariance. An open cap
+of angular radius $a\le\pi/2$ contains at most one point of every pair.
+Each finite restriction of that cap is therefore tracial, with the
+same scalar modular Hamiltonian and bulk site count. A singlet as in Theorem~\ref{thm:cusinglet} is invariant under
+the internal rotation. A representation of spatial rotations on
+its regional algebras is a separate input.
+\end{example}
+
+\begin{remark}[Spectra, modular temperatures and entropy accounting]\label{ub:thermo}
+Proposition~\ref{prop:curestrict} supplies the partial trace once the
+tensor sites are chosen. For
+$\cos\theta\,|00\rangle+\sin\theta\,|11\rangle$, its eigenweights
+are $1-q,q$ with $q=\sin^2\theta$. With $0<\theta<\pi/4$ and reference
+Hamiltonian $\operatorname{diag}(0,\Delta E)$, the logarithm of the
+population ratio gives $\beta_{\rm eff}\Delta E=2\log\cot\theta$.
+The purity is $(1-q)^2+q^2$, the entropy is
+$h(q)=-q\log q-(1-q)\log(1-q)$, and the deficit from $\log2$ equals
+$D(\rho\Vert I/2)$. At $\theta=0$ the state has rank one and is
+the zero-temperature limit. At $\theta=\pi/4$ it is the infinite
+positive-temperature limit along this path. Its modular gap is zero
+and the modular flow acts trivially. The finite modular KMS identity
+and the Gibbs-generator criterion are Theorem~\ref{thm:cumodular}
+and Corollary~\ref{cor:cugibbs}. Two states can each obey modular KMS
+and transfer energy upon contact, as in Remark~\ref{rem:cuarrow}.
+
+For $12$ sites in six independent nested pairs $(i,13-i)$,
+$i=1,\ldots,6$, the prefix of $j$ sites cuts $\min(j,12-j)$ pairs,
+so its entropy is $\min(j,12-j)h(q)$ by tensor additivity. This
+uses the mechanism of Example~\ref{ex:cupage} with a specified
+pairing. In the thermal-bath setting of
+Proposition~\ref{prop:culandauer}, an entropy decrease $s$ costs bath
+heat at least $s/\beta$. At the unique root $\theta_*=\cos\theta_*$ in
+$[0,1]$ from Remark~\ref{rem:cuarrow}, the heat bounds in units of
+$\Delta E$ for a maximally mixed bit and for the Schmidt marginal
+are respectively $\log2/(2\log\cot\theta_*)\simeq3.736288$ and
+$h(q)/(2\log\cot\theta_*)\simeq3.713198$. The prefix maximum is
+about $4.133181$ nats. Dynamical selection of this angle would require
+a physical cooling and replenishment mechanism. A flat cut of Bell
+pairs gives an exact discrete area law when the number of cut pairs
+is proportional to area. A network then specifies which pairs
+cross, a choice that controls the entire prefix curve. A constant global
+entropy is compatible with dynamics. A pure qubit under the
+Hamiltonian of Remark~\ref{ub:qsl} moves to an orthogonal ray with
+global entropy zero throughout.
+\end{remark}
+
+\subsection{From small-ball equilibrium to linearised gravity}
+
+\begin{remark}[Ball modular energy and holographic area]\label{ub:classicalgrav}
+For the Lorentz-invariant vacuum of a relativistic QFT the wedge
+modular automorphism is a boost under the Bisognano--Wichmann
+hypotheses. For a CFT vacuum, the conformal map to the diamond of
+a ball $B_l$ of radius $l$ gives on its central flat spatial slice
+\[
+ K_{B_l}=\frac{2\pi}{\hbar}\int_{B_l}\frac{l^2-|x|^2}{2l}
+               T_{00}(x)\,d^3x+\text{constant}
+\]
+in units $c=1$. On the Einstein cylinder with spatial unit
+$S^3$, a CFT vacuum ball of angular radius $a$ instead has weight
+$(\cos\vartheta-\cos a)/\sin a$ with the spatial volume form of
+the sphere, where $\vartheta$ is angular distance from the centre.
+The cylinder weight is the time component on the central section of
+the conformal Killing generator. In null radial coordinates
+$u=t-\vartheta$, $v=t+\vartheta$, its components are
+$(\cos u-\cos a)/\sin a$ and $(\cos v-\cos a)/\sin a$.
+These vanish on the corresponding null faces and have unit
+normalised slope at the tips, fixing the same $2\pi$ convention.
+The small-$a$ expansion gives the flat ball kernel.
+In general curved space this leading kernel needs a locally
+relativistic continuum vacuum and control of curvature and cutoff
+errors. The generator is defined by the field theory and the state.
+\cite{n1-bw,ub:chm}
+
+In the leading semiclassical static AdS/CFT setting, the
+Ryu--Takayanagi rule is
+$S_C=\operatorname{Area}(\gamma_C)/(4G_N\hbar)$ with a common
+UV regulator. The surface $\gamma_C$ is bulk minimal, anchored on
+$\partial C$ and homologous to $C$. In a near-vacuum Einstein-AdS
+problem, Faulkner, Guica, Hartman, Myers and Van Raamsdonk use the
+first law for every boundary ball in all boosted frames, the vacuum
+CFT modular integral, the linearised holographic stress-tensor
+dictionary and the area variation at the extremal surface. The
+two variations are boundary integrals of the same bulk gravitational
+charge form $\chi$, with $\int_C\chi=\delta\langle K_C\rangle$ and
+$\int_{\gamma_C}\chi=\delta S_C$ in the specified orientations.
+Its exterior derivative is proportional to
+$\xi^a\delta E_{ab}\varepsilon^b$, where $\xi$ is the bulk Killing
+generator of the ball, $E$ is the Einstein equation tensor and
+$\varepsilon^b$ is the volume form with one index contracted. Stokes' theorem supplies integrated constraints, and the
+all-ball inversion and radial constraints give the linearised vacuum
+bulk Einstein equations at the classical order. Their argument assumes
+appropriate asymptotically AdS boundary conditions, including the
+stress-tensor constraints, and uses the leading Einstein entropy
+functional. The HRT rule uses extremal surfaces for time-dependent
+states, and bulk quantum entropy corrections enter at higher order.
+This AdS bulk argument and the local equilibrium argument below use
+different area inputs and assign different roles to the ball.
+
+Jacobson's 1995 argument uses the Clausius relation for local Rindler
+horizons in all null directions with the Unruh temperature and an
+area entropy. His 2016 argument uses stationarity of the combined
+vacuum entanglement at fixed volume of spatial geodesic balls.
+The latter is the mechanism of Theorem~\ref{ub:einstein}.
+\cite{n1-rt,ub:hrt,ub:flm,ub:faulkner,n1-jacobson,ub:jac16}
+\end{remark}
+
+\smallskip\noindent\textbf{Hypothesis Eq (Local continuum entanglement equilibrium).}  Use units $c=1$. Let $g_0$ be a smooth four-dimensional maximally
+symmetric Lorentzian background of signature $(-+++)$ with
+$G(g_0)+\Lambda g_0=0$. Absorb any constant vacuum stress into
+$\Lambda$. Identify local comparison data with physical spatial
+geodesic balls in the slices of small causal diamonds. At each point
+$p$ and for each unit future timelike $u$, take balls of small
+proper radius $l$ in spacelike slices whose second fundamental form
+vanishes at $p$ in each metric in the perturbation. Assume smooth
+first variations of the metric and a conserved vacuum-subtracted
+stress tensor with $\delta T$ smooth near $p$.
+
+Assume a regulated local relativistic vacuum and first law for the
+matter entropy, with the leading vacuum modular variation given by the
+flat CFT ball integral of Remark~\ref{ub:classicalgrav} and a
+remainder $o(l^4)$ in the first variation. For instance, a local CFT
+vacuum would require controlling curvature corrections in this
+formula. At fixed volume assume that the UV entropy varies as
+$\delta S_{\rm UV}|_V=\eta_0\,\delta A|_V+o(l^4)$ with a finite
+positive constant $\eta_0$ independent of point, direction and state.
+Use a common renormalisation prescription, and take the cutoff
+$\epsilon/l\to0$ in the first variation before shrinking $l$ relative
+to the background curvature and stress variation scales.
+Assume the error statements in this order of limits. Finally assume
+$\delta(S_{\rm UV}+S_{\rm matter})|_V=0$ for all these balls.
+These are local geometric and dynamical assumptions beyond Theorem~\ref{thm:desitter}.
+
+
+\begin{theorem}[Conditional Einstein equation]\label{ub:einstein}
+Under Hypothesis~Eq, a first variation $h=\delta g$
+obeys
+\[
+ \delta(G+\Lambda g)=8\pi G_N\,\delta T,\qquad
+ G_N=(4\hbar\eta_0)^{-1}.
+\]
+If the modular input includes a smooth scalar contribution
+$\delta X$ replacing $\delta T_{uu}$ by $\delta T_{uu}+\delta X$ at
+leading order, then $\delta X$ is constant on each connected
+component and can be absorbed as a first variation of $\Lambda$.
+\end{theorem}
+\begin{proof}
+Let $\Omega_2=4\pi$ be the area of the unit two-sphere. In spatial
+normal coordinates $x$ at $p$, the volume density is
+$1-\operatorname{Ric}^{(3)}_{ij}x^ix^j/6+O(|x|^3)$.
+The spherical average of $x^ix^j$ is
+$|x|^2\delta^{ij}/3$ by rotation symmetry and tracing.
+Integration in $|x|$ gives, with the spatial scalar curvature
+$R^{(3)}$ at $p$,
+\[
+ V(l)=\frac{\Omega_2 l^3}{3}-\frac{\Omega_2 R^{(3)}l^5}{90}+O(l^6),
+ \qquad
+ A(l)=\Omega_2 l^2-\frac{\Omega_2 R^{(3)}l^4}{18}+O(l^5).
+\]
+The area formula follows directly by angular integration of the
+polar volume density. Smooth local families allow the displayed
+remainders also in first variation.
+Keeping the volume fixed gives
+$\delta l= l^3\delta R^{(3)}/90+O(l^4)$.
+Hence $\delta A|_V=-\Omega_2 l^4\delta R^{(3)}/30+o(l^4)$.
+The Gauss identity with zero second fundamental form at the centre
+gives $R^{(3)}=2G_{uu}$. Since $g(u,u)=-1$ in each perturbed
+frame and $(G+\Lambda g)_0=0$, one obtains
+$\delta R^{(3)}=2\,\delta(G+\Lambda g)_{uu}$ with $u$ evaluated
+in the background frame. In particular
+\[
+ \delta A|_V=-\frac{\Omega_2 l^4}{15}\delta(G+\Lambda g)_{uu}
+                 +o(l^4).
+\]
+The integral of the flat modular weight is
+$\Omega_2(2l)^{-1}\int_0^l (l^2-r^2)r^2\,dr
+=\Omega_2 l^4/15$.
+Smoothness replaces the stress variation under the integral by
+$\delta T_{uu}(p)+O(l)$, and the fixed-volume radius adjustment is
+higher order in this vacuum-subtracted variation. The matter first
+law and stationarity now give, after dividing by $\Omega_2 l^4/15$
+and taking the prescribed limits,
+$\eta_0\delta(G+\Lambda g)_{uu}=(2\pi/\hbar)\delta T_{uu}$.
+A symmetric two-tensor whose contraction vanishes on all future
+unit timelike vectors vanishes on the open future cone by
+homogeneity. Its quadratic polynomial then has all coefficients
+zero. This proves the tensor equation with the stated constant.
+For an additional scalar the tensor equation has source
+$\delta T-\delta Xg_0$. The contracted Bianchi identity linearised
+at $(G+\Lambda g)_0=0$ and stress conservation imply
+$d\,\delta X=0$, yielding the asserted constant shift.
+\cite{ub:jac16,n1-jacobson}
+\end{proof}
+
+\begin{remark}[The cap dynamics problem]\label{ub:programme}
+Theorem~\ref{thm:desitter} supplies the cap geometry, nesting order
+and invariant de Sitter vacuum metric of Paper~II.
+Theorem~\ref{ub:caplaw} supplies the regulated entropy variation
+after a spatial site assignment and state are chosen.
+The cap order by itself provides neither a continuum algebra and
+state with local modular generators, nor a controlled entropy
+variation with coefficient $\eta_0$. A rotation-invariant tracial state
+already gives a counterexample to those implications. The finite
+rank theorem does not identify cut-counting with the area
+variation on physical small balls. In particular, caps in $M$ are
+regions indexed by $\mathcal D$, whereas Theorem~\ref{ub:einstein}
+uses geodesic balls in rest slices through points of a candidate
+spacetime. An identification with comparison regions for every
+point and every timelike direction is part of the physical input,
+as is the calibration of the curvature radius.
+
+To replace Hypothesis GR in Section~\ref{sec:scope}, a derivation
+must construct the regional algebras, a reference vacuum and its
+conserved stress tensor, prove convergence of regulated first
+variations to the local modular integral, and derive the area
+coefficient and the fixed-volume stationarity. A holographic route
+would instead need a bulk reconstruction, a boundary-to-bulk
+stress dictionary, and a limit of cut entropies and their first
+variations to extremal areas. The scale hierarchy and both
+identifications must be compatible with Hypothesis E and
+Propositions~\ref{prop:nullobstruction} and~\ref{prop:friedmann}.
+In particular, imposing the full cap order on arbitrary metric
+perturbations is a substantial additional restriction on the
+geometry. Theorem~\ref{ub:einstein} provides the local conditional
+step for sources and leaves this dynamical programme open.
+\end{remark}
+
+\begin{remark}[what does not hold; relation to the cap theorems]\label{rem:ubnogo}
+(i) One free intermediate scale does not always suffice (Remark~\ref{rem:ubscales}).  (ii) Discrete entropy does not
+saturate the cut bound on the whole cone (Example~\ref{ub:flatcounter}); uniform weights and cut-saturating rank are
+necessary and sufficient (Theorem~\ref{ub:cut}).  (iii) No universal orthogonal flip rate follows from a speed limit
+(Remark~\ref{ub:qsl}).  (iv) Rotation invariance plus the first law does not solve the sourced cap problem: antipodal
+Bell pairs (Example~\ref{ub:tracial}).  (v) Gauge-group choice gives neither universal proton stability ($QQQL$ is
+gauge invariant) nor absence of monopoles (the adjoint vacuum orbit $\C P^3$ has $\pi_2=\Z$) (Proposition~\ref{ub:decay},
+Remark~\ref{ub:topology}).  (vi) A maximally mixed finite marginal has zero inverse temperature, not zero
+temperature, and a pure stationary entropy does not freeze dynamics (Remark~\ref{ub:thermo}).  The theorems on
+caps, the de~Sitter order and the order obstruction (Theorem~\ref{thm:desitter}, Propositions~\ref{prop:nullobstruction},
+\ref{prop:friedmann}) are unchanged: Theorem~\ref{ub:caplaw} adds a finite first law on caps, and
+Theorem~\ref{ub:einstein} a conditional local route to linearised Einstein equations whose inputs (Hypothesis~Eq:
+continuum vacuum, local modular energy, area coefficient, fixed-volume equilibrium) the comparison structure
+does not supply; the cap geometry and the invariant de~Sitter background it does supply.
+\end{remark}
+
+%=====================================================================================
 \paperpart{Part V.  Status, tests and open problems}
 
 %=====================================================================================
@@ -4968,18 +6384,22 @@ outcomes, the statistics of any record process: Born at every stage iff martinga
 restart converse, affine unread maps from no-signalling, and the Born threshold and simplex laws exactly
 for the invariant auxiliary law ([R], Theorems~\ref{thm:sorigidity}, \ref{thm:sosphere}, \ref{thm:sosimplex}), and the inverse-tick
 bound ([Tr]); the rapidity--entanglement budget for three qubits, the speed limits with their
-sharp constants ([Cd]) and the Tsirelson bound from the composite inputs (Section~\ref{sec:bounds}); for finite memories, Gram extension and weak nesting ([Gw]), the reset bound (Gibbs bath, joint
+sharp constants ([Cd]) and the Tsirelson bound from the composite inputs (Section~\ref{sec:bounds}); measurement-based
+universality and exact recovery for round-trip-closed codes ([Ac], [Sub]); the two-scale one-loop fit
+under [Ps], the clock proper time under [Ck], the cap first law, and linearised Einstein equations under
+[Eq] (Section~\ref{sec:unification}); for finite memories, Gram extension and weak nesting ([Gw]), the reset bound (Gibbs bath, joint
 unitarity, kept side marginal), exact phase recovery and gluing on chordal patterns; $\U(2)$ and the mass-form eigenvalue ratio (F), and $m_W=m_Z\cos\theta_W$ as tree-level masses (F, F$_{\mathrm g}$(a)); the Pati--Salam
 group, its breaking and the hypercharges (C0--C3, [Span], G(i)--(iv)); $\sin^2\theta_W=\tfrac38$ (G(v));
 the round-$S^4$ couplings $\kappa_V=\sqrt{1-\xi}$, $\kappa_{2V}=1-2\xi$ (F, F$_{\mathrm g}$(a), F$_{\mathrm H}$); the obstruction for the ungauged back-reacting centre field and the zero-stress flat vacuum (E, F, GR; F$_{\mathrm g}$).
 \emph{Inputs not derived}: [Bil], [Bil$_\cL$], [Span], [Loc], [O], [N], Postulates C1(b), C2, C3, [Sub], the reading
 inputs [L], [W], [Comp], [T], and [B] or, equivalently, [Cl] with [NT], the hypotheses $w\ge0$, $w=f(\beta_N)$ and (a)--(c) of
-Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), [R], [Tr], [Cd], [Bs], [Gw], [Ue], [Ca], Hypotheses Ap, U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm H}$ (with F$_{\mathrm{Hf}}$), F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
+Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), [R], [Tr], [Cd], [Bs], [Gw], [Ac], [Lq], [Ps], [Ea], [Ck], [Gl], [Eq], [Ue], [Ca], Hypotheses Ap, U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm H}$ (with F$_{\mathrm{Hf}}$), F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
 [Bil$_\cL$], [Loc], [O] and [N] for the composite.
 \emph{Open}: a unit of length; $G_Nv^2$; Hypothesis~GR with sources and its consistency with
 Hypothesis~E; the ratio $g'/g$; the number of structures; three generations; scales, masses and
 Yukawa couplings; which single-outcome dynamics, if any, is realised (Hypothesis~Ap, Conjecture~\ref{conj:somixing}); small-phase control
-in a cap corridor (Conjecture~\ref{conj:fmcontrol}); a derivation of [Loc], [O], C2, [Cl] (other than from [Ph]) or [B]; local equilibration in the
+in a cap corridor (Conjecture~\ref{conj:fmcontrol}); a uniform entropy gap for growing bridges (Conjecture~\ref{ub:uniform});
+the continuum hypotheses of Theorem~\ref{ub:einstein}; a derivation of [Loc], [O], C2, [Cl] (other than from [Ph]) or [B]; local equilibration in the
 singlet sector (Conjecture~\ref{conj:cueth}); a principle selecting the radial potential; a microscopic origin of the round $S^4$ target
 (Conjecture~\ref{conj:hbmicro}).
 \emph{Testability} (Table~\ref{tab:falsify} lists it statement by statement).  The kinematic part (one system under the clock reading, composites under the inputs of
@@ -5394,6 +6814,8 @@ Effects, POVMs, instruments, complete positivity, conditional states & theorem f
 Origin-free generators: clock, exchange; closed pair unique up to time unit & theorem; permutation-symmetric generator fixed up to time unit iff $N\in\{2,3\}$\\
 Connected closed clock-invariant round-trip-closed sets are spheres of complex subspaces; all dimensions $1\le d\le2^N$; exchange sector $\mathrm{Sym}^N(\C^2)$ & theorem (Prop.~\ref{prop:rtclosed}; Cor.~\ref{cor:substructure} under C0--C2, [Span]; Prop.~\ref{prop:symsector} under C0, C1, [Span], C3); as systems: [Sub]\\
 Skyrme term: area square, degree bound $6\pi^2v/e_{\mathrm S}$, scaling, Hopf charge and its bound, $\pi_1$ of configuration spaces, screening, radial unwinding & theorem under [F], [F$_{\mathrm S}$] (Thm.~\ref{thm:skbound}, Props.~\ref{prop:skhopf}, \ref{prop:skconfig}, \ref{prop:skscreen}, \ref{prop:skradial}, Thm.~\ref{thm:vk}); existence of minimisers and spin from rotations: cited; metastability: conjecture; particle readings: [P]\\
+Computation: singlet slice, axis and corrections, gflow determinism, square-cluster universality, no-cloning and optimal $5/6$, compressed Knill--Laflamme theorem, stabiliser codes, minimal length five, parameter shift, gradient flow, braids and colourings, Jordan--Wigner & theorem under C0--C3, [T], [Sub] (Thms.~\ref{cp:determinism}, \ref{cp:universal}, \ref{cp:kl}, \ref{cp:shift}); access [Ac]; universality, flow theorems, Knill--Laflamme: cited and reproved where stated; anyonic protection [Lq]: hypothesis and programme\\
+Unification and gravity: matching and slopes, the two-scale fit and its cone condition, trace and anomaly constraints, proton and seesaw benchmarks, monopole topology, clock proper time, Schwarzschild lapse, cut bound, bridge rank (library), cap first law, conditional Einstein equation & theorem under G, [Ps] (fit), [Ck], [Gl], [Eq]; one-loop only; entropy-gap growth: conjecture (Conj.~\ref{ub:uniform}); continuum gravity: programme\\
 Bounds: rapidity--entanglement budget (three qubits; $n$ qubits via Osborne--Verstraete), probability flow, speed limits with their constants, Margolus--Levitin, sagitta, Tsirelson bound and PR exclusion, Landau identity, first return, cloning, recovery, amplification & theorem (Thm.~\ref{thm:bdbudget}, Lemma~\ref{lem:bdroof}, Props.~\ref{prop:bdflow}, \ref{prop:bdmt}, \ref{prop:bdml}, Thms.~\ref{thm:bdchsh}, \ref{thm:bdkac}); $n$-qubit monogamy, Mandelstam--Tamm, Margolus--Levitin, Tsirelson, optimal cloning: cited and reproved where stated; time bounds under [Cd], [Bs]; physical clock identification: programme\\
 Finite memory: Gram extension and weak nesting, caps, capacity, reset heat, exact eraser criterion, gluing on chordal patterns, pointer records, redundancy, barycentre, holonomy bound & theorem (Thms.~\ref{thm:fmschur}, \ref{thm:fmeraser}, \ref{thm:fmglue}, \ref{thm:fmpointer}, \ref{thm:fmbary}, \ref{thm:fmberry}; Props.~\ref{prop:fmheat}, \ref{prop:fmredundancy}); window: [Gw]; geometry-to-entropy: [Ue]; access: [Ca]; broadcast: cited; small-phase control: conjecture (Conj.~\ref{conj:fmcontrol}); dynamical records: programme\\
 Single outcomes & no covariant rule at ties; Kochen--Specker for composites (Prop.~\ref{prop:nooutcome}); theorem under [R]: Born at every stage $\Leftrightarrow$ martingale (Thm.~\ref{thm:sorigidity}), restart converse (Cor.~\ref{cor:sorestart}); no-signalling $\Rightarrow$ affine unread map (Prop.~\ref{prop:sochannels}); threshold and simplex laws (Thms.~\ref{thm:sosphere}, \ref{thm:sosimplex}); inverse-tick bound under [Tr] (Prop.~\ref{prop:soresolution}); invariant apparatus sampling: [Ap], Conj.~\ref{conj:somixing}; which dynamics is realised: open\\
@@ -5439,6 +6861,9 @@ Electroweak sector under F, F$_{\mathrm g}$(a), F$_{\mathrm r}$: custodial Stand
 Electroweak sector under F, F$_{\mathrm g}$(a), F$_{\mathrm H}$: round $S^4$ target & [X]: $\kappa_{2V}=2\kappa_V^2-1$ with $\kappa_V\le1$ common to $W$ and $Z$, and Goldstone growth $s/f^2$; a significant deviation after radiative and matching corrections refutes F$_{\mathrm H}$; present bound from the quoted $\kappa_V$: $\xi\le0.039$, $f\ge1.24$\,TeV (one-sided 95\%, separate Gaussians, no covariance); $m_h$ is [D]\\
 Pati--Salam group, global form, hypercharges, anomaly cancellation & [M] under G(i)--(iv); agree with the Standard Model; no breaking scale or heavy vectors supplied\\
 $\sin^2\theta_W=\tfrac38$ (G(v)) or $\tfrac12$ as boundary values & [X]: with Standard Model running and no thresholds the colour condition fails; the required shifts are Remark~\ref{rem:couplings}; $\hat s_Z^2$ is [D]\\
+Computation & [M]: universality, recovery, bounds; [S]: standard quantum information; nothing distinguishing\\
+Unification & [X]: with Hypothesis~Ps fixed, $\alpha_s$ and $\hat s_Z^2$ are not independent tests (two scales fitted to two differences); the fit becomes a test only if $M_R$ or $M_{\mathrm{PS}}$ is fixed beforehand, e.g.\ by proton decay ($\tau_p\propto M_{\mathrm{PS}}^4$; the dimensional proxy gives about $2.6\times10^{36}$ years at $M_{\mathrm{PS}}$ against the bound $2.4\times10^{34}$ years) or by a seesaw scale; [D]: $\alpha_s$, $\hat s_Z^2$, $\hat\alpha^{-1}$\\
+Gravity from cap entanglement & [M]: conditional on Hypothesis~Eq; no test until Eq is derived\\
 Bounds & [M]: budget, speed limits, CHSH bound; [S]: these are statements of standard quantum mechanics, so they distinguish nothing; a measured $\lvert S\rvert>2\sqrt2$ or a violated budget would contradict C0--C2\\
 Finite memory & [M]: extension, gluing and recovery criteria; [S]: the reset bound is the Landauer--Reeb--Wolf balance; physical record dynamics: programme\\
 Single outcomes & [M]: martingale equivalence, threshold and simplex laws, inverse-tick bound under [Tr]; the Born statistics are those of standard quantum mechanics, so no example distinguishes; an objective-collapse completion would be [X] through recoherence tests (Example~\ref{ex:sorecoherence}), none is fixed here\\
@@ -5511,6 +6936,9 @@ permutation-symmetric generator for $N\ge4$?
 Derive Hypothesis~GR in the presence of sources, or another dynamics for the metric of $\cD$, from the
 structure, consistently with Hypothesis~E (with an ungauged back-reacting centre field no maximal solution
 carries the full cap order, Propositions~\ref{prop:nullobstruction}, \ref{prop:friedmann}); or derive Hypothesis~F$_{\mathrm g}$ and prove the coupled stability of its vacuum.
+Status: Theorem~\ref{ub:einstein} reduces the linearised sourced equations to the named continuum hypotheses Eq
+(regional algebras and vacuum, local modular energy, area coefficient, fixed-volume equilibrium), which
+the structure does not supply; the problem is not solved.
 \end{problem}
 \begin{problem}
 Which record dynamics, if any, is realised: does an apparatus produce absorbing records and the
@@ -5531,7 +6959,8 @@ or not invariant under the left transports.  Can any of [Loc], [O], C2, [Cl] or 
 Derive Hypothesis~G, or at least the number of structures (a pair and one more), from the axiom
 (Remark~\ref{rem:hopf} states the missing principle); explain three generations; determine the
 breaking scale and the failure of the strong coupling to meet the electroweak couplings at one loop
-(Remark~\ref{rem:scales}).
+(Remark~\ref{rem:scales}); with the spectrum of Hypothesis~Ps the scales are fitted, not derived
+(Remark~\ref{rem:ubscales}).
 \end{problem}
 \noindent The later sections of \cite{CRQO} (a relational automaton, closure as a least fixed point,
 and relational time) concern how histories are generated and are outside the scope of this paper.
@@ -5570,7 +6999,16 @@ Kac recurrence; the decoherence-freeze threshold; the common-phase polynomial th
 blindness and the Robertson--Schr\"odinger relation; no-cloning and the cloning machine spectrum; syndrome
 decoding and Kraus reversibility; braid colouring transport and Markov invariance; Jordan--Wigner
 anticommutation; uniform amplitude amplification; torus equidistribution and window returns; Krylov growth;
-and connected-ray phase rigidity.  These are library results,
+and connected-ray phase rigidity.  For Section~\ref{sec:attention}: no-cloning, the cloning machine, Kraus
+left-inverse necessity and scalar-product reversibility, orthogonal syndrome decoding, Pauli word
+multiplication, Jordan--Wigner anticommutation, braid colouring transport and quandle Markov invariance,
+the weighted Artin representation, quantum Fourier transform circuit action, phase-estimation tails and
+Shor's counting marginal and continued fractions, gradient dissipation and finite-rank concentration.  For
+Section~\ref{sec:unification}: quantum max-flow $\le$ min-cut, its attainment and the width-two and width-three
+bridge results, castling deficit, native saturation, native scalar Gram and rectangular bounds, the
+width-at-most-three refutation and scalar obstruction, rectangular block unitaries of exact width,
+open-boundary matrix-product-state recovery, the Landauer statements, Fubini--Study record bounds,
+Minkowski null-cone rigidity and Lagrange's Gram identity.  These are library results,
 not checks of this paper's statements.\par}
 
 {\sloppy Every identity stated above was checked numerically on random inputs by the accompanying
@@ -5605,7 +7043,11 @@ areas by independent quadrature) and \texttt{check\_bounds.py} (Section~\ref{sec
 own checks of the budget on random three-qubit states against the residual tangle, the normal-form
 deficit, the Bell, $W$ and GHZ values, the orthogonalisation times against both bounds, the clock numbers,
 the vanishing sagitta sums, the CHSH Gram bound and the PR obstruction, the Landau identity and
-spectrum, the Fourier bound, the Zeno and Kac values, cloning, braid and window counts).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
+spectrum, the Fourier bound, the Zeno and Kac values, cloning, braid and window counts), \texttt{check\_attention.py} (Section~\ref{sec:attention}: seven groups) and
+\texttt{check\_unification.py} (Section~\ref{sec:unification}: six groups), with own checks of the one-edge gate,
+gflow neighbourhoods, five-qubit and Steane syndromes, the dephasing counterexample, the shift and shot
+numbers, the slope table from the field content, the three fits, the inconsistency of $C=B$, the lifetime
+and seesaw benchmarks, the clock and heat numbers and the ball volume and area expansions).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
 \ref{thm:product}; Propositions~\ref{prop:relative}, \ref{prop:solder}, \ref{prop:pairsu3}, \ref{prop:angle38},
 \ref{prop:universal}, \ref{prop:cosmo}, \ref{prop:solderunique}, \ref{prop:centre}, \ref{prop:superselection} (with its
 classification of weights and free split), \ref{prop:rtclosed}, \ref{prop:symsector}, \ref{prop:subops},
@@ -6281,6 +7723,92 @@ contributions.
 \bibitem{n4:Weyl} H.~Weyl, \"Uber die Gleichverteilung von Zahlen mod.\ Eins, Math.\ Ann.\ \textbf{77}, 313--352 (1916).
 
 \bibitem{n4:SKKA} P.~Sinkovicz, Z.~Kurucz, T.~Kiss, and J.~K.~Asb\'oth, Quantized recurrence time in unital iterated open quantum dynamics, Phys.\ Rev.\ A \textbf{91}, 042108 (2015).
+
+\bibitem{n5-rb} R. Raussendorf and H. J. Briegel, A one-way quantum computer, Phys.\ Rev.\ Lett. \textbf{86}, 5188--5191 (2001).
+
+\bibitem{n5-rbb} R. Raussendorf, D. E. Browne, and H. J. Briegel, Measurement-based quantum computation on cluster states, Phys.\ Rev.\ A \textbf{68}, 022312 (2003), arXiv:quant-ph/0301052.
+
+\bibitem{n5-flow} V. Danos and E. Kashefi, Determinism in the one-way model, Phys.\ Rev.\ A \textbf{74}, 052310 (2006), arXiv:quant-ph/0506062.
+
+\bibitem{n5-gflow} D. E. Browne, E. Kashefi, M. Mhalla, and S. Perdrix, Generalized flow and determinism in measurement-based quantum computation, New J.\ Phys. \textbf{9}, 250 (2007), arXiv:quant-ph/0702212.
+
+\bibitem{n5-gottesman} D. Gottesman, Stabilizer codes and quantum error correction, Ph.D. thesis, California Institute of Technology (1997), arXiv:quant-ph/9705052.
+
+\bibitem{n5-five-ref} R. Laflamme, C. Miquel, J. P. Paz, and W. H. Zurek, Perfect quantum error correcting code, Phys.\ Rev.\ Lett. \textbf{77}, 198--201 (1996), arXiv:quant-ph/9602019.
+
+\bibitem{n5-steane-ref} A. M. Steane, Error correcting codes in quantum theory, Phys.\ Rev.\ Lett. \textbf{77}, 793--797 (1996).
+
+\bibitem{n5-shift-ref} M. Schuld, V. Bergholm, C. Gogolin, J. Izaac, and N. Killoran, Evaluating analytic gradients on quantum hardware, Phys.\ Rev.\ A \textbf{99}, 032331 (2019).
+
+\bibitem{n5-qng} J. Stokes, J. Izaac, N. Killoran, and G. Carleo, Quantum natural gradient, Quantum \textbf{4}, 269 (2020).
+
+\bibitem{n5-barren} J. R. McClean, S. Boixo, V. N. Smelyanskiy, R. Babbush, and H. Neven, Barren plateaus in quantum neural network training landscapes, Nat.\ Commun. \textbf{9}, 4812 (2018).
+
+\bibitem{n5-localcost} M. Cerezo, A. Sone, T. Volkoff, L. Cincio, and P. J. Coles, Cost function dependent barren plateaus in shallow parametrized quantum circuits, Nat.\ Commun. \textbf{12}, 1791 (2021).
+
+\bibitem{n5-qft} R. Cleve, A. Ekert, C. Macchiavello, and M. Mosca, Quantum algorithms revisited, Proc.\ R.\ Soc.\ Lond.\ A \textbf{454}, 339--354 (1998), arXiv:quant-ph/9708016.
+
+\bibitem{n5-shor} P. W. Shor, Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer, SIAM J.\ Comput. \textbf{26}, 1484--1509 (1997), arXiv:quant-ph/9508027.
+
+\bibitem{n5-artin} E. Artin, Theory of braids, Ann.\ Math. \textbf{48}, 101--126 (1947).
+
+\bibitem{n5-lm} J. M. Leinaas and J. Myrheim, On the theory of identical particles, Nuovo Cimento B \textbf{37}, 1--23 (1977).
+
+\bibitem{n5-alexander} J. W. Alexander, A lemma on systems of knotted curves, Proc.\ Natl.\ Acad.\ Sci.\ USA \textbf{9}, 93--95 (1923).
+
+\bibitem{n5-birman} J. S. Birman, Braids, Links, and Mapping Class Groups, Annals of Mathematics Studies 82, Princeton University Press (1974), Theorem~2.3.
+
+\bibitem{n5-jw-ref} P. Jordan and E. Wigner, \"Uber das Paulische \"Aquivalenzverbot, Z.\ Phys. \textbf{47}, 631--651 (1928).
+
+\bibitem{n5-kitaev} A. Y. Kitaev, Fault-tolerant quantum computation by anyons, Ann.\ Phys. \textbf{303}, 2--30 (2003), arXiv:quant-ph/9707021.
+
+\bibitem{ub:mv83} M.~E. Machacek and M.~T. Vaughn, Two-loop renormalization group equations in a general quantum field theory. I. Wave function renormalization, Nucl.\ Phys.\ B \textbf{222}, 83--103 (1983).
+
+\bibitem{ub:mv84} M.~E. Machacek and M.~T. Vaughn, Two-loop renormalization group equations in a general quantum field theory. II. Yukawa couplings, Nucl.\ Phys.\ B \textbf{236}, 221--232 (1984).
+
+\bibitem{ub:lx} M.-x. Luo and Y. Xiao, Two-loop renormalization group equations in the Standard Model, Phys.\ Rev.\ Lett.\ \textbf{90}, 011601 (2003), arXiv:hep-ph/0207271.
+
+\bibitem{ub:geng} C.~Q. Geng and R.~E. Marshak, Uniqueness of quark and lepton representations in the standard model from the anomalies viewpoint, Phys.\ Rev.\ D \textbf{39}, 693--696 (1989).
+
+\bibitem{ub:witten} E. Witten, An $SU(2)$ anomaly, Phys.\ Lett.\ B \textbf{117}, 324--328 (1982).
+
+\bibitem{ub:bar} O. B\"ar and U.-J. Wiese, Can one see the number of colors?, Nucl.\ Phys.\ B \textbf{609}, 225--246 (2001), arXiv:hep-ph/0105258.
+
+\bibitem{ub:babu} K.~S. Babu and R.~N. Mohapatra, Quantization of electric charge from anomaly constraints and a Majorana neutrino, Phys.\ Rev.\ Lett.\ \textbf{63}, 938--941 (1989).
+
+\bibitem{ub:regge} T. Regge, General relativity without coordinates, Nuovo Cimento \textbf{19}, 558--571 (1961).
+
+\bibitem{ub:wilson} K.~G. Wilson, Confinement of quarks, Phys.\ Rev.\ D \textbf{10}, 2445--2459 (1974).
+
+\bibitem{ub:takenaka} A. Takenaka \emph{et al.}\ (Super-Kamiokande Collaboration), Search for proton decay via $p\to e^+\pi^0$ and $p\to\mu^+\pi^0$ with an enlarged fiducial volume in Super-Kamiokande I--IV, Phys.\ Rev.\ D \textbf{102}, 112011 (2020), arXiv:2010.16098.
+
+\bibitem{ub:seesaw} R.~N. Mohapatra and G. Senjanovi\'c, Neutrino mass and spontaneous parity nonconservation, Phys.\ Rev.\ Lett.\ \textbf{44}, 912--915 (1980).
+
+\bibitem{ub:thooft} G. 't Hooft, Symmetry breaking through Bell--Jackiw anomalies, Phys.\ Rev.\ Lett.\ \textbf{37}, 8--11 (1976).
+
+\bibitem{ub:sphaleron} F.~R. Klinkhamer and N.~S. Manton, A saddle-point solution in the Weinberg--Salam theory, Phys.\ Rev.\ D \textbf{30}, 2212--2220 (1984).
+
+\bibitem{ub:schwarz} K. Schwarzschild, \"Uber das Gravitationsfeld eines Massenpunktes nach der Einsteinschen Theorie, Sitzungsber.\ Preuss.\ Akad.\ Wiss.\ Berlin, 189--196 (1916), English translation arXiv:physics/9905030.
+
+\bibitem{ub:bek} J.~D. Bekenstein, Universal upper bound on the entropy-to-energy ratio for bounded systems, Phys.\ Rev.\ D \textbf{23}, 287--298 (1981).
+
+\bibitem{ub:gls} F. Gesmundo, V. Lysikov and V. Steffan, Quantum max-flow in the bridge graph, Transform.\ Groups \textbf{30}, 1751--1784 (2025), arXiv:2212.09794.
+
+\bibitem{ub:lean} TrureTuring, Lean source for the bridge graph and matrix product state results, repository modules \texttt{D5/S3/Quantum/TensorNetworks}, with bridge graph results under \texttt{BridgeGraph}, \url{https://github.com/the-omega-institute/trureturing}.
+
+\bibitem{ub:cui} S.~X. Cui, M.~H. Freedman, O. Sattath, R. Stong and G. Minton, Quantum max-flow/min-cut, J.\ Math.\ Phys.\ \textbf{57}, 062206 (2016), arXiv:1508.04644.
+
+\bibitem{ub:vidal} G. Vidal, Entanglement renormalization, Phys.\ Rev.\ Lett.\ \textbf{99}, 220405 (2007), arXiv:cond-mat/0512165.
+
+\bibitem{ub:chm} H. Casini, M. Huerta and R.~C. Myers, Towards a derivation of holographic entanglement entropy, JHEP \textbf{05}, 036 (2011), arXiv:1102.0440.
+
+\bibitem{ub:hrt} V.~E. Hubeny, M. Rangamani and T. Takayanagi, A covariant holographic entanglement entropy proposal, JHEP \textbf{07}, 062 (2007), arXiv:0705.0016.
+
+\bibitem{ub:flm} T. Faulkner, A. Lewkowycz and J. Maldacena, Quantum corrections to holographic entanglement entropy, JHEP \textbf{11}, 074 (2013), arXiv:1307.2892.
+
+\bibitem{ub:faulkner} T. Faulkner, M. Guica, T. Hartman, R.~C. Myers and M. Van Raamsdonk, Gravitation from entanglement in holographic CFTs, JHEP \textbf{03}, 051 (2014), arXiv:1312.7856.
+
+\bibitem{ub:jac16} T. Jacobson, Entanglement equilibrium and the Einstein equation, Phys.\ Rev.\ Lett.\ \textbf{116}, 201101 (2016), arXiv:1505.04753.
 
 \bibitem{CLT74} J.~M.~Cornwall, D.~N.~Levin, and G.~Tiktopoulos, Derivation of gauge invariance from high-energy unitarity bounds on the S matrix, Phys.\ Rev.\ D \textbf{10}, 1145 (1974); Erratum \textbf{11}, 972 (1975).
 

@@ -2726,4 +2726,101 @@ for m_ in range(1, 5):
 print(f"     Zeno values, Kac means (qubit 2, random U(4) 4), reciprocity 1/(1+sqrt3), cloning numbers, braid counts 3,3,9, H_21 = 8, amplification, 30031: {bool(okz)}")
 results.append(bool(okz))
 
+# =====================================================================================
+# 52. (Round 29) attention/computation and unification/clock/gravity
+for modname, fns in (("check_attention", ("check_measurements", "check_cluster", "check_slice_and_cloning", "check_recovery",
+                                           "check_gradients", "check_braids", "check_fourier_and_local_indistinguishability")),
+                     ("check_unification", ("test_running", "test_traces_and_anomalies", "test_gauge_examples", "test_clocks",
+                                            "test_networks", "test_entropy_and_gravity"))):
+    spx = importlib.util.spec_from_file_location(modname, os.path.join(here, modname + ".py"))
+    mx = importlib.util.module_from_spec(spx); buf = io.StringIO()
+    try:
+        with contextlib.redirect_stdout(buf):
+            spx.loader.exec_module(mx)
+            for fn in fns: getattr(mx, fn)()
+        okx = True
+    except Exception as ex:
+        okx = False; print(f"     {modname} error:", repr(ex))
+    print(f"     {modname}.py: all {len(fns)} test groups passed: {okx}")
+    results.append(okx)
+# own checks: computation
+H2 = (Xp + Zp)/np.sqrt(2); CZ = np.diag([1, 1, 1, -1.])
+okc2 = True
+for al in (0.3, 1.1):
+    for s_ in (0, 1):
+        ket = np.array([1, (-1)**s_*np.exp(1j*al)])/np.sqrt(2)
+        plus = np.array([1, 1])/np.sqrt(2)
+        Mmap = np.zeros((2, 2), complex)
+        for b in range(2):
+            vin = np.kron(np.eye(2)[b], plus); out = (CZ @ vin).reshape(2, 2)
+            Mmap[:, b] = ket.conj() @ out
+        target = np.linalg.matrix_power(Xp, s_) @ H2 @ np.diag([1, np.exp(-1j*al)])/np.sqrt(2)
+        okc2 &= np.allclose(Mmap, target)
+edges = [(0, 2), (0, 3), (0, 4), (1, 3), (1, 4), (2, 3)]
+def oddn(S): return {v for v in range(5) if sum(1 for a, b in edges if (a == v and b in S) or (b == v and a in S)) % 2}
+okc2 &= oddn({2, 3, 4}) == {0, 2, 3} and oddn({2, 4}) == {1, 3} and oddn({3, 4}) == {2}
+# five-qubit code syndromes
+gens = ["XZZXI", "IXZZX", "XIXZZ", "ZXIXZ"]
+def anti(p, q): return sum(1 for a, b in zip(p, q) if a != 'I' and b != 'I' and a != b) % 2
+synd = {}
+for pos in range(5):
+    for P_ in "XYZ":
+        e = ['I']*5; e[pos] = P_; synd[(P_, pos)] = ''.join(str(anti(''.join(e), g)) for g in gens)
+okc2 &= [synd[('X', i)] for i in range(5)] == ['0001', '1000', '1100', '0110', '0011'] and len(set(synd.values())) == 15 and '0000' not in synd.values()
+# Steane: 21 distinct nonzero single-qubit syndromes
+Bm = np.array([[int(c) for c in format(j, '03b')] for j in range(1, 8)]).T
+st = set()
+for j in range(7):
+    b = tuple(Bm[:, j]); st |= {(0, 0, 0) + b, b + (0, 0, 0), b + b}
+okc2 &= len(st) == 21 and (Bm @ Bm.T % 2 == 0).all()
+# KL counterexample: I/sqrt2, Z/sqrt2 dephase |+> and |->
+pl = np.array([1, 1])/np.sqrt(2); mi = np.array([1, -1])/np.sqrt(2)
+deph = lambda v: 0.5*np.outer(v, v.conj()) + 0.5*Zp @ np.outer(v, v.conj()) @ Zp
+okc2 &= np.allclose(deph(pl), np.eye(2)/2) and np.allclose(deph(mi), np.eye(2)/2)
+# parameter shift: double rotation, shots
+f2 = lambda t: np.cos(2*t); okc2 &= abs(f2(np.pi/4 + np.pi/2) - f2(np.pi/4 - np.pi/2)) < 1e-15
+fs = lambda t: np.cos(t); th3 = np.pi/3
+var = lambda h, d, n: (2 - fs(th3 + h)**2 - fs(th3 - h)**2)/(4*n*d**2)
+okc2 &= abs(np.sqrt(var(np.pi/2, 1, 100)) - 0.0354) < 5e-5 and abs(np.sqrt(var(np.pi/30, np.pi/30, 100)) - 0.5826) < 5e-5 and abs(1 - np.sin(np.pi/6)/(np.pi/6) - (1 - 3/np.pi)) < 1e-15
+# height example and clone machine entropy
+r0 = np.array([np.sqrt(3)/2, 0, .5]); gr = np.array([0, 0, 1]) - r0[2]*r0; r1 = r0 - .1*gr; r1 /= np.linalg.norm(r1)
+okc2 &= np.allclose(gr, [-np.sqrt(3)/4, 0, .75]) and np.allclose(r1, np.array([21*np.sqrt(3), 0, 17])/(2*np.sqrt(403)))
+okc2 &= abs(-(1/3)*np.log2(1/3) - (2/3)*np.log2(2/3) - (np.log2(3) - 2/3)) < 1e-14
+print(f"     computation: one-edge gate, gflow odd neighbourhoods, five-qubit and Steane syndromes, dephasing counterexample, shift and shot numbers, height step, machine entropy: {bool(okc2)}")
+results.append(bool(okc2))
+# own checks: unification
+def bcoef(gauge, ferm, cplx, real):
+    return -11/3*gauge + 2/3*ferm + 1/3*cplx + 1/6*real
+okb3 = np.allclose([bcoef(3, 6, 0, 0), bcoef(2, 6, 0, 1), bcoef(2, 6, .5, 1), bcoef(0, 6, .75, 0)], [-7, -19/6, -3, 17/4])
+okb3 &= np.allclose([bcoef(4, 6, 1, 4), bcoef(2, 6, 0, 1), bcoef(2, 6, 2, 1)], [-29/3, -19/6, -5/2]) and abs(.6*(-3) + .4*17/4 + .1) < 1e-15
+A0v = lambda a_s: np.array([.6*(1 - .23122)*127.95, .23122*127.95, 1/a_s])
+Bv = np.array([41/10, -19/6, -7]); Cv = np.array([-1/10, -19/6, -7])
+def fit(a_s, C):
+    Aps, x, y = np.linalg.solve(np.column_stack([np.ones(3), Bv, C]), A0v(a_s))
+    return 91.1879*np.exp(2*np.pi*x), 91.1879*np.exp(2*np.pi*(x + y)), Aps, x, y
+MR, MPS, Aps, x_, y_ = fit(.1180, Cv)
+okb3 &= abs(MR/1.2928e10 - 1) < 5e-5 and abs(MPS/9.7068e16 - 1) < 5e-5 and abs(Aps - 47.0233) < 5e-5 and x_ > 0 and y_ > 0
+MR2, MPS2, Aps2, _, _ = fit(.1177, Cv); okb3 &= abs(MR2/1.3266e10 - 1) < 5e-5 and abs(MPS2/9.3691e16 - 1) < 5e-5 and abs(Aps2 - 47.0055) < 5e-5
+MR3, MPS3, Aps3, _, _ = fit(.1180, np.array([0, -3, -7])); okb3 &= abs(MR3/2.5798e10 - 1) < 5e-5 and abs(MPS3/5.1653e16 - 1) < 5e-5 and abs(Aps3 - 46.3205) < 5e-5
+# one-scale counterexample C = B: two crossing conditions disagree (singular system, inconsistent)
+Msing = np.column_stack([np.ones(3), Bv, Bv]); okb3 &= np.linalg.matrix_rank(Msing) == 2 and np.linalg.matrix_rank(np.column_stack([Msing, A0v(.1180)])) == 3
+hbar = 6.5821e-25; yr = 3.15576e7; mp = .938
+life = lambda M: hbar*M**4/mp**5/yr
+okb3 &= abs(life(MPS)/2.55e36 - 1) < 0.01 and abs(life(MR)/8.0e8 - 1) < 0.01 and abs(life(1.22e19)/6.4e44 - 1) < 0.01 and abs((2.4e34*yr*mp**5/hbar)**.25/3.0e16 - 1) < 0.01
+okb3 &= abs(np.sqrt(.05e-9*(MR + .05e-9)) - .804) < 1e-3 and abs(1e4/MR*1e9 - 774) < 1 and abs(MR**2/MPS - 1.72e3) < 5
+okb3 &= abs(2*np.pi*.23122*127.95 - 185.9) < .05
+for (be, et, fv) in ((0, 0, 1), (.8, 0, .6), (0, .4, np.sqrt(.6)), (.6, .36, .64)):
+    okb3 &= abs(np.sqrt((1 - et)*(1 - be**2)) - fv) < 1e-12
+ths = 0.7390851332151607; qq = np.sin(ths)**2; hq = -qq*np.log(qq) - (1 - qq)*np.log(1 - qq); den = 2*np.log(1/np.tan(ths))
+okb3 &= abs(np.log(2)/den - 3.736288) < 5e-6 and abs(hq/den - 3.713198) < 5e-6 and abs(6*hq - 4.133181) < 5e-6
+# V(l), A(l) expansions on a round 3-sphere of radius rho: R3 = 6/rho^2
+rho_ = 7.0; l_ = .05; R3 = 6/rho_**2
+Vex = 2*np.pi*rho_**3*(l_/rho_ - np.sin(2*l_/rho_)/2)*1.0
+Vexact = np.pi*rho_**3*(2*l_/rho_ - np.sin(2*l_/rho_)); Aexact = 4*np.pi*rho_**2*np.sin(l_/rho_)**2
+okb3 &= abs(Vexact - (4*np.pi*l_**3/3 - 4*np.pi*R3*l_**5/90)) < 1e-10 and abs(Aexact - (4*np.pi*l_**2 - 4*np.pi*R3*l_**4/18)) < 1e-10
+okb3 &= abs(4*np.pi/(2*1.0)*(1/3 - 1/5) - 4*np.pi/15) < 1e-14
+okb3 &= all((N_ - 3)*(N_ - 4)//2 == N_*(N_ - 1)//2 - 3*N_ + 6 for N_ in range(3, 12))
+print(f"     unification: slope table from content, fits (0.1180, 0.1177, complex bidoublet), C = B inconsistent, lifetimes and seesaw, instanton action, clock and heat numbers, ball volume and area expansions: {bool(okb3)}")
+results.append(bool(okb3))
+
 print(f"\nALL CHECKS PASSED: {all(results)}  ({sum(results)}/{len(results)})")
