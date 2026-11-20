@@ -2151,4 +2151,165 @@ ok_m &= all(abs(2*abs((1 - x_)/2 - .25) - 3/(2*(2*nn - 1))) < 1e-14 for x_, nn i
 print(f"     KMS boundary identity, Gibbs modular Hamiltonian, erasure balance, fixed-point values, projector benchmark: {bool(ok_m)}")
 results.append(bool(ok_m))
 
+# =====================================================================================
+# 48. (Round 25) round four-sphere target: Hopf map, vector couplings, amplitudes, Yukawas, potential, data
+spech = importlib.util.spec_from_file_location("check_hopfbase", os.path.join(here, "check_hopfbase.py"))
+rh = importlib.util.module_from_spec(spech); buf = io.StringIO()
+try:
+    with contextlib.redirect_stdout(buf):
+        spech.loader.exec_module(rh)
+        for fn in ("check_hopf", "check_pair_obstruction_and_marginals", "check_vector_and_precision",
+                   "check_scattering", "check_yukawa", "check_loops_and_potential", "check_data", "check_transport"):
+            getattr(rh, fn)()
+    okh = True
+except Exception as ex:
+    okh = False; print("     check_hopfbase error:", repr(ex))
+print(f"     check_hopfbase.py: all eight test groups passed: {okh}")
+results.append(okh)
+import itertools as _it
+from statistics import NormalDist as _ND
+# (1) Hopf map y = 2 q1 conj(q2), z = |q1|^2 - |q2|^2 on unit H^2; right invariance; horizontal factor 2
+e = 0.0
+for _ in range(200):
+    v8 = unit(8); q1, q2 = v8[:4], v8[4:]
+    y = 2*qmul(q1, qconj(q2)); z = q1 @ q1 - q2 @ q2
+    lam = unit(4); y2 = 2*qmul(qmul(q1, lam), qconj(qmul(q2, lam)))
+    e = max(e, abs(y @ y + z*z - 1), np.max(np.abs(y2 - y)))
+w = unit(4); eps_ = 1e-6
+dy = 2*qmul(np.array([1., 0, 0, 0]), qconj(eps_*w))/eps_
+e = max(e, abs(np.linalg.norm(dy) - 2))
+report("Hopf map S^7 -> S^4: |y|^2 + z^2 = 1, right Sp(1) invariance, horizontal stretch 2", e)
+# (2) vector masses and modifiers at U = 1
+ok = True
+for _ in range(20):
+    g_, gp_ = rng.uniform(0.2, 1.0, 2); f_ = rng.uniform(300, 3000); chi0 = rng.uniform(0.05, 1.5)
+    T = [np.array([[0, 1], [1, 0]])/2, np.array([[0, -1j], [1j, 0]])/2, np.diag([.5, -.5])]
+    Mq = np.zeros((4, 4))
+    for a in range(4):
+        for b in range(4):
+            ea = np.eye(4)[a]; eb = np.eye(4)[b]
+            DA = -1j*(g_*sum(ea[k]*T[k] for k in range(3)) - gp_*ea[3]*T[2])
+            DB = -1j*(g_*sum(eb[k]*T[k] for k in range(3)) - gp_*eb[3]*T[2])
+            Mq[a, b] = 0.5*np.real(np.trace(DA.conj().T @ DB))
+    ref = 0.25*np.array([[g_**2, 0, 0, 0], [0, g_**2, 0, 0], [0, 0, g_**2, -g_*gp_], [0, 0, -g_*gp_, gp_**2]])
+    ok &= np.allclose(Mq, ref)
+    v_ = f_*np.sin(chi0); mass2 = np.sort(np.linalg.eigvalsh(f_**2*np.sin(chi0)**2*Mq))   # = m^2 for each real field
+    ok &= np.allclose(mass2, np.sort([0, g_**2*v_**2/4, g_**2*v_**2/4, (g_**2 + gp_**2)*v_**2/4]), rtol=1e-9, atol=1e-6)
+    hh = 1e-3*f_
+    rat = lambda h: np.sin(chi0 + h/f_)**2/np.sin(chi0)**2
+    k1 = (rat(hh) - rat(-hh))/(2*hh)*v_/2; k2 = (rat(hh) - 2 + rat(-hh))/hh**2*v_**2/2
+    xi_ = (v_/f_)**2
+    ok &= abs(k1 - np.cos(chi0)) < 1e-6 and abs(k2 - (1 - 2*xi_)) < 1e-5 and abs(np.cos(chi0) - np.sqrt(1 - xi_)) < 1e-12
+print(f"     vector masses gv/2, g_Z v/2, 0 and kappa_V = sqrt(1-xi), kappa_2V = 1-2xi: {bool(ok)}")
+results.append(bool(ok))
+# (3) Goldstone contact amplitude from L4 = (1/(2f^2)) (phi.dphi)^2 by enumeration of leg assignments
+def amp(I, p, f_):
+    # slots: A0 (undiff), A1 (diff), B0, B1 (diff); contraction A0=A1 index, B0=B1 index
+    tot = 0.0
+    for perm in _it.permutations(range(4)):
+        a0, a1, b0, b1 = perm
+        if I[a0] != I[a1] or I[b0] != I[b1]: continue
+        tot += -(p[a1] @ mink @ p[b1])     # (-i p_a1).(-i p_b1)
+    return tot/(2*f_**2)
+mink = np.diag([1., -1, -1, -1])
+pa = np.array([3., 0, 0, 1.2]); pa[0] = np.linalg.norm(pa[1:]); pb = np.array([0, 0, 0, -1.2]); pb[0] = 1.2; pb[1:] = -pa[1:]
+pc = -np.array([pa[0], 1.2*np.sin(.7), 0, 1.2*np.cos(.7)]); pd = -(pa + pb + pc)
+P4 = [pa, pb, pc, pd]; fF = 2.0
+sM = (pa + pb) @ mink @ (pa + pb); tM = (pa + pc) @ mink @ (pa + pc); uM = (pa + pd) @ mink @ (pa + pd)
+ok_a = True
+for I in _it.product(range(4), repeat=4):
+    pred = (sM*(I[0] == I[1])*(I[2] == I[3]) + tM*(I[0] == I[2])*(I[1] == I[3]) + uM*(I[0] == I[3])*(I[1] == I[2]))/fF**2
+    ok_a &= abs(amp(I, P4, fF) - pred) < 1e-9
+# kinetic expansion: f^2/2 |dPhi|^2 - [1/2 |dphi|^2 + (d|phi|^2)^2/(8 f^2)] = O(f^-4)
+errs = []
+for fF2 in (10., 20.):
+    ph = rng.normal(size=4); dph = rng.normal(size=4)
+    r2 = ph @ ph/fF2**2; dsq = np.sqrt(1 - r2); ddsq = -(ph @ dph)/(fF2**2*dsq)
+    exact = fF2**2/2*(ddsq**2 + (dph @ dph)/fF2**2)
+    approx = 0.5*(dph @ dph) + (2*ph @ dph)**2/(8*fF2**2)
+    errs.append(abs(exact - approx)*fF2**4)
+ok_a &= max(errs) < 50
+print(f"     Goldstone contact amplitude (s dd + t dd + u dd)/f^2 from leg enumeration; kinetic expansion: {bool(ok_a)}")
+results.append(bool(ok_a))
+# (4) Yukawa modifiers and the 14 contractions
+ok_y = True
+for _ in range(20):
+    chi0 = rng.uniform(0.1, 1.4); s0, c0 = np.sin(chi0), np.cos(chi0); xi_ = s0**2; A_, B_ = rng.normal(size=2)
+    for mfun, pred in ((lambda c: np.sin(c), c0), (lambda c: np.sin(c)*np.cos(c), (1 - 2*xi_)/c0),
+                       (lambda c: np.sin(c)*np.cos(c)*(A_ + B_*np.sin(c)**2), (1 - 2*xi_)/c0 + 2*B_*xi_*c0/(A_ + B_*xi_))):
+        hd = 1e-6; kap = s0*(np.log(abs(mfun(chi0 + hd))) - np.log(abs(mfun(chi0 - hd))))/(2*hd)
+        ok_y &= abs(kap - pred) < 1e-6*max(1, abs(pred))
+    u = np.zeros(5, complex); u[:4] = rng.normal(size=4) + 1j*rng.normal(size=4)
+    e5 = np.eye(5)[4]; Phi = s0*np.eye(5)[3] + c0*e5
+    L = np.outer(u, e5) + np.outer(e5, u); R = np.diag([1, 1, 1, 1, -4.])
+    c1 = (L @ Phi).conj() @ (R @ Phi); c2 = np.conj(Phi @ L @ Phi)*(Phi @ R @ Phi)
+    ok_y &= abs(c1 - (-3*s0*c0*np.conj(u[3]))) < 1e-12 and abs(c2 - 2*s0*c0*(1 - 5*c0**2)*np.conj(u[3])) < 1e-12
+print(f"     Yukawa modifiers for 4, 5/10, 14 and the two 14 contractions: {bool(ok_y)}")
+results.append(bool(ok_y))
+# (5) two-term potential: xi, m^2, kappa_lambda; mass counterexample and cubic term
+ok_p = True
+for _ in range(20):
+    bt = rng.uniform(.5, 2); al = -rng.uniform(.05, 1.95)*bt; fF3 = rng.uniform(1, 3)
+    V = lambda c: al*np.sin(c)**2 + bt*np.sin(c)**4
+    xs = np.linspace(1e-3, np.pi/2 - 1e-3, 200001); c0_ = xs[np.argmin(V(xs))]
+    from scipy.optimize import minimize_scalar as _ms
+    c0_ = _ms(V, bounds=(max(1e-6, c0_ - 1e-3), min(np.pi/2, c0_ + 1e-3)), method="bounded", options={"xatol": 1e-13}).x
+    xi_ = np.sin(c0_)**2; hd = 1e-3
+    d2 = (V(c0_ + hd) - 2*V(c0_) + V(c0_ - hd))/hd**2/fF3**2
+    d3 = (V(c0_ + 2*hd) - 2*V(c0_ + hd) + 2*V(c0_ - hd) - V(c0_ - 2*hd))/(2*hd**3)/fF3**3
+    vv = fF3*np.sin(c0_)
+    ok_p &= abs(xi_ + al/(2*bt)) < 1e-8 and abs(d2 - 8*bt*xi_*(1 - xi_)/fF3**2) < 1e-5 \
+            and abs(vv*d3/(3*d2) - (1 - 2*xi_)/np.sqrt(1 - xi_)) < 1e-4
+xi_ = 0.3; C_ = 1.0
+m2 = lambda C: 8*C*xi_*(1 - xi_)
+ok_p &= abs(np.sqrt(m2(4*C_)/m2(C_)) - 2) < 1e-14
+D_ = 0.7; Vc = lambda x: C_*(x - xi_)**2 + D_*(x - xi_)**3
+xx = np.linspace(0, 1, 100001); ok_p &= abs(xx[np.argmin(Vc(xx))] - xi_) < 1e-4 and np.all(C_ + D_*(xx - xi_) > 0)
+print(f"     two-term vacuum xi = -alpha/(2beta), m^2 = 8 beta xi(1-xi)/f^2, kappa_lambda; C vs 4C mass ratio 2; cubic keeps vacuum: {bool(ok_p)}")
+results.append(bool(ok_p))
+# (6) obstruction: C = (eps x eps)K commutes with SU(2) x SU(2), C^2 = 1; commutant of the tensor action is scalar
+eps2 = np.array([[0, 1], [-1, 0]]); Mc = np.kron(eps2, eps2)
+ok_o = True
+for _ in range(10):
+    La = _expm(1j*sum(rng.normal()*sp_ for sp_ in (np.array([[0, 1], [1, 0]]), np.array([[0, -1j], [1j, 0]]), np.diag([1., -1]))))
+    Lb = _expm(1j*sum(rng.normal()*sp_ for sp_ in (np.array([[0, 1], [1, 0]]), np.array([[0, -1j], [1j, 0]]), np.diag([1., -1]))))
+    G2 = np.kron(La, Lb)
+    ok_o &= np.allclose(Mc @ G2.conj(), G2 @ Mc)      # C G v = M conj(G v) = M conj(G) conj(v) = G M conj(v)
+ok_o &= np.allclose(Mc @ Mc.conj(), np.eye(4))
+paulis = [np.eye(2), np.array([[0, 1], [1, 0]]), np.array([[0, -1j], [1j, 0]]), np.diag([1., -1])]
+span = np.array([np.kron(a, b).ravel() for a in paulis for b in paulis])
+ok_o &= np.linalg.matrix_rank(span) == 16
+# SU(3) stabiliser: real span of an SU(3)-orbit of a unit vector in C^3 is R^6
+vec = np.array([1, 0, 0], complex); orb = []
+for _ in range(12):
+    Hm = rng.normal(size=(3, 3)) + 1j*rng.normal(size=(3, 3)); Hm = Hm + Hm.conj().T; Hm -= np.trace(Hm)/3*np.eye(3)
+    w3 = _expm(1j*Hm) @ vec; orb.append(np.concatenate([w3.real, w3.imag]))
+ok_o &= np.linalg.matrix_rank(np.array(orb)) == 6
+print(f"     tensor action: C commutes, C^2 = 1, commutant scalar; SU(3) orbit spans R^6 (no invariant 3-plane): {bool(ok_o)}")
+results.append(bool(ok_o))
+# (7) marginal example: right multiplication by (1+j)/sqrt2 turns a product state into a maximally entangled one
+def rmul(zw, ab):
+    z, w_ = zw; a, b = ab
+    return (z*a - np.conj(w_)*b, np.conj(z)*b + w_*a)
+q1 = (1/np.sqrt(2), 0j); q2 = (1j/np.sqrt(2), 0j); pq = (1/np.sqrt(2), 1/np.sqrt(2))
+Z0 = np.array([[q1[0], q1[1]], [q2[0], q2[1]]])
+r1, r2 = rmul(q1, pq), rmul(q2, pq); Z1 = np.array([[r1[0], r1[1]], [r2[0], r2[1]]])
+ok_mx = np.allclose(Z1, np.array([[1, 1], [1j, -1j]])/2) and abs(np.linalg.matrix_rank(Z0 @ Z0.conj().T) - 1) == 0 \
+        and np.allclose(Z1 @ Z1.conj().T, np.eye(2)/2)
+print(f"     quaternionic line: coefficient matrices as stated, marginals pure and 1/2: {bool(ok_mx)}")
+results.append(bool(ok_mx))
+# (8) bounds on xi and f
+GF = 1.1663785e-5; vEW = (np.sqrt(2)*GF)**-0.5
+z1 = _ND().inv_cdf(0.95); z2 = _ND().inv_cdf(0.975)
+bnds = []
+for z_ in (z1, z2):
+    LV = 1.023 - z_*0.026; L2 = 1.02 - z_*0.23
+    bnds.append((1 - LV**2, (1 - L2)/2))
+fV = vEW/np.sqrt(bnds[0][0])/1000; f2 = vEW/np.sqrt(bnds[0][1])/1000
+ok_d = abs(vEW - 246.22) < 0.005 and abs(bnds[0][0] - 0.03914) < 5e-5 and abs(bnds[0][1] - 0.17916) < 5e-5 \
+       and abs(bnds[1][0] - 0.05514) < 5e-5 and abs(bnds[1][1] - 0.21540) < 5e-5 and abs(fV - 1.245) < 5e-4 and abs(f2 - 0.582) < 5e-4 \
+       and abs(vEW/np.sqrt(bnds[1][0])/1000 - 1.049) < 5e-4 and abs(vEW/np.sqrt(bnds[1][1])/1000 - 0.531) < 5e-4
+print(f"     v = {vEW:.3f} GeV; xi <= {bnds[0][0]:.5f}, {bnds[0][1]:.5f} (one-sided); {bnds[1][0]:.5f}, {bnds[1][1]:.5f} (central); f >= {fV:.3f}, {f2:.3f} TeV: {bool(ok_d)}")
+results.append(bool(ok_d))
+
 print(f"\nALL CHECKS PASSED: {all(results)}  ({sum(results)}/{len(results)})")
