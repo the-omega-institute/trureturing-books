@@ -225,6 +225,57 @@ $$
 
   对 $1/2<\theta<1$，外部算术步骤在其切比雪夫型不等式和窗口假设下给出单侧界。对每个起点阈值 $R$，都存在 $Y\ge R$，使 $U(x)\le x^\theta$ 在整个 $[Y,Y^{3/2}]$ 上成立。Landau 判据由此推出 $\zeta$ 在 $\operatorname{Re}(s)>\theta$ 无零点。从 RH 出发的上界则覆盖每个充分大的 $Y$。[算术步骤](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean#L68-L81) · [窗口指数](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean#L8-L11) · [Landau 判据](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ZeroFreeOfRpowWindow.lean#L11-L14)
 
+::: {.theorem #thm-ch31-mangoldt-power-threshold title="完全曼戈尔特余项的临界幂指数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/RHPowerThreshold.u_div_rpow_tendsto_zero_iff"}
+假设黎曼猜想。对任意实数 $\theta$，沿实变量 $x\to+\infty$ 有
+
+$$
+\lim_{x\to+\infty}\frac{U(x)}{x^\theta}=0
+\quad\Longleftrightarrow\quad \theta>\frac12.
+$$
+:::
+
+::: proof
+写 $x=e^y$，则 $U(x)/x^\theta=G(y)e^{(1/2-\theta)y}$。当 $\theta>1/2$ 时，$G$ 在充分大的实数 $y$ 上有界，指数因子趋于零。反过来，设 $\theta\le1/2$。上面的常数 $M$ 严格为正。由 $G$ 的回归性，越过任何阈值都有自然数 $n$ 使 $G(n)>M/2$。此时 $e^{(1/2-\theta)n}\ge1$，所以在任意远的点 $x=e^n$ 商仍大于 $M/2$，包括 $\theta=1/2$。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-mangoldt-quartic-sampling title="第四次幂采样的黎曼猜想判据" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampling.rh_iff_eventually_quartic_samples"}
+黎曼猜想成立，当且仅当存在 $N\in\mathbb N$，使每个 $n\in\mathbb N$ 在 $n\ge N$ 时都满足 $U(n^4)<n^2$。
+:::
+
+::: proof
+在 RH 下，充分大的 $x$ 都满足 $\lvert U(x)\rvert<\sqrt{x}$，取 $x=n^4$ 即得所需的严格上界。
+
+反过来，设采样上界成立。取充分大的 $n\ge1$，令 $a=n^4$、$b=(n+1)^4$。每个曼戈尔特权重非负，乘以凸折线 $\max(x/j-1,0)$ 后仍是凸函数，因此折线之和在 $[a,b]$ 上不超过端点的弦。余项 $U$ 还含有 $-x\ln x$ 和线性项。把 $x\ln x$ 在 $a$ 的切线减去，留下非负函数，其在 $b$ 的值由 $\ln(b/a)\le b/a-1$ 控制在 $(b-a)^2/a$ 以内。于是对于 $a\le x\le b$，
+
+$$
+U(x)\le\max\{U(a),U(b)\}+\frac{(b-a)^2}{a}
+\le 4n^2+225n^2=229n^2.
+$$
+
+这里用了 $(n+1)^2\le4n^2$ 和 $b-a\le15n^3$。相邻采样区间覆盖整个尾部，且 $n^2\le\sqrt{x}$。将界代入积分显式公式的归一化算术核，取 $x=e^t$，平凡零点修正满足 $\operatorname{trivialT}(t)\le1-\ln2$。所以在充分大的 $t$ 上，$e^{-t/2}[U(e^t)-\ln(2\pi)+\operatorname{trivialT}(t)]\le229+e^{-t/2}\le230$。算术核的仿射上界判据遂给出 RH。完整证明由 Lean 内核检查。
+:::
+
+这个判据把独立的算术任务落在素数幂的计数上。对 $x\ge2$，切比雪夫误差核可积，其尾积分等于 $-U(x)/x$。在 $x=n^4$ 处，所需的采样假设因而等价于对每个充分大的自然数 $n$ 证明严格下界 $\int_{n^4}^{\infty}(\psi(t)-t)t^{-2}\,dt>-1/n^2$（`手工推导`）。 [`complete_chebyshev_tail_identity`](lean:D5/S3/Weil/Mertens/CompleteChebyshevTailIdentity.complete_chebyshev_tail_identity) · [`chebyshev_error_kernel_integrable`](lean:D5/S3/Weil/Mertens/WeightedPrimeLimit.chebyshev_error_kernel_integrable)
+
+**模 $1$ 的 Mellin 变换怎样看见零点？** 令 $U$ 为 [@thm-ch34-riemann-prime-arc-bridge] 第 6 款的余项。对每个满足 $\operatorname{Re}(s)>1$ 的 $s\in\mathbb C$，$y\mapsto e^{-sy}U(e^y)$ 在 $(0,\infty)$ 上绝对可积，其 Laplace 积分可无条件求出。换元 $x=e^y$ 后，$e^{-sy}\,dy=x^{-s-1}\,dx$，便得到下式左端的 Mellin 积分。[完全余项的半平面变换](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtHalfPlane.u_laplace_half_plane)
+
+每个素数幂 $n$ 的权重 $\Lambda(n)$ 乘以折线 $\max(x/n-1,0)$，在 $x=n$ 处起步。折线的 Mellin 积分是 $n^{-s}/[s(s-1)]$。按 $\Lambda(n)$ 求和，分子成为对数导数 $-\zeta'(s)/\zeta(s)$。$U$ 中两个初等修正项的积分分别为 $-1/(s-1)^2$ 和 $(1+\gamma_{\mathrm{EM}})/(s-1)$。将三项通分，就得到外部模 $1$ 公式的写法
+
+$$
+\Phi(s)=\int_1^\infty U(x)x^{-s-1}\,dx
+=-\frac{\zeta'(s)/\zeta(s)+(s-1)^{-1}+1-(1+\gamma_{\mathrm{EM}})s}{s(s-1)}.
+$$
+
+右端给出亚纯延拓。若非平凡零点 $\rho$ 的重数为 $m$，在其附近写 $\zeta(s)=(s-\rho)^m h(s)$，其中 $h(\rho)\ne0$。对数导数的极点项为 $m/(s-\rho)$，所以 $\Phi$ 在 $\rho$ 有一阶极点，留数 $c=m/[\rho(1-\rho)]$。这正是积分显式公式中同一零点按重数相加的系数。[模 $1$ 的 Mellin 恒等式](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/mellinGchiModOne.lean#L115-L121) · [留数计算](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/poleData.lean#L63-L83)
+
+**单侧窗口上界为何能排除极点？** 固定 $1/2<\theta<1$。外部算术论证在群的大小、特征权重和误差的假设下，利用尺度约束 $m\le x^{1/2+\varepsilon/2}$ 得到特征和的估计 $G_{m,A}(x)\le x^{1/2+(C+3)\varepsilon}+\Sigma_A(x)$，其中 $\Sigma_A$ 是仍须控制的余项。再用 `gmA_eq` 将左端写成目标余项，用 `sigA_le` 控制 $\Sigma_A$。当 $x$ 充分大时，剩下的常数因子可吸收到 $x^\varepsilon$ 中，窗口上的切比雪夫型上界便是 $x^{1/2+(e_D+e_L+7)\varepsilon}$。损失指数 $e_D,e_L$ 先固定，随后选充分小的 $\varepsilon>0$ 使 $(e_D+e_L+7)\varepsilon\le\theta-1/2$。若满足该论证的窗口假设，便能对任意远的阈值找到 $Y$，使模 $1$ 的余项在整个 $[Y,Y^{3/2}]$ 上满足 $U(x)\le x^\theta$。[特征和估计的假设](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean#L343-L351) · [余项与常数的控制](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/PrimitiveCosets/CoreGm.lean#L55-L74) · [选取指数的次序](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean#L68-L81)
+
+换元 $u=\ln x$，令 $g(u)=U(e^u)$。在 $\operatorname{Re}(z)=\sigma>2$ 上，$D_k(z)=(-1)^k\Phi^{(k)}(z)/k!$ 是 $g$ 对核 $u^k e^{-zu}/k!$ 的积分。实部固定时，核的模在 $u=k/\sigma$ 取得最大值，可以调节 $k$ 来控制窗口外的积分。设 $a=\ln Y$。在窗口内，$g\le e^{\theta u}$ 给出 $\lvert g\rvert+g\le 2e^{\theta u}$。这解释了源证明为何同时保留实中心的导数项。存在固定的 $\sigma>2$ 和常数 $C$。对每个 $\eta>0$，可以选到任意远的窗口及相应的阶数 $k\ge a$，使所有实数 $t$ 都满足 $\lvert D_k(\sigma+it)\rvert+\operatorname{Re}D_k(\sigma)\le C e^{\eta a}/(\sigma-\theta)^k$。[导数积分](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/LandauCoeff.lean#L10-L18) · [窗口估计](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean#L40-L56)
+
+若有极点在 $\operatorname{Re}(s)>\theta$，源证明选取中心 $z=\sigma+it$ 及其最近极点 $\rho$，使 $d=|z-\rho|<r\le\sigma-\theta$，半径 $r$ 内只有这一个极点。它给 $D_k(z)$ 贡献 $c/(z-\rho)^{k+1}$。取内圈半径 $r'=(d+r)/2$，减去极点项后的解析函数在这条圆周上有界，因此 Cauchy 估计给出误差 $O((r')^{-k})$。在选取非实中心的情形，以 $\sigma$ 为中心、半径 $r'$ 的闭圆盘内无极点，Cauchy 估计给出 $\operatorname{Re}D_k(\sigma)\ge-M'(r')^{-k}$，其中 $M'$ 与 $k$ 无关。若隔离出实极点，则取 $z=\sigma$。其留数 $c>0$，故 $\operatorname{Re}D_k(\sigma)$ 的主项为 $c/d^{k+1}>0$，出现在窗口所控制的 $\lvert D_k(\sigma)\rvert+\operatorname{Re}D_k(\sigma)$ 中。将窗口上界与之比较，再乘以 $d^k$，极点项留下常数 $|c|/d>0$，解析误差为 $O((d/r')^k)$。取 $\eta>0$ 足够小，使 $e^\eta d/(\sigma-\theta)<1$，则窗口项也随 $k\ge a\to\infty$ 趋于零，矛盾。 [极点与 Cauchy 估计](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean#L83-L166)
+
+外部仓库的完整路线还用 $\theta$ 提升构造伽罗瓦表示，并用 Artin 互反律确定局部 Langlands 参数中所用的 Artin 映射，最终从全体狄利克雷特征的无零点结论推出 RH。[$\theta$ 提升](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/RowSrc.lean#L1-L6) · [Artin 互反律](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/ArtEx.lean#L7-L15) · [外部仓库的最终声明](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean#L7-L14)
+
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 
   $$
