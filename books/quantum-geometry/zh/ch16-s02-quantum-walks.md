@@ -828,6 +828,16 @@ $$
 两条路径都没有立即折返，末边互异排除了交接处的折返。森林中没有立即折返的游走是一条简单路径。因此，这样的非空闭游走必经过一条不属于 $H$ 的边。越过最后一条这样的边后，整个尾段都在 $H$ 中，并且仍不立即折返。它是两端之间唯一的简单路径，长度等于森林距离。完整证明由 Lean 内核检查。
 :::
 
+::: {.theorem #thm-fresh-meeting-arm title="第二条路径的下一条边尚未披露" lean="D5/S3/Combinatorics/Graph/Walks/FreshMeetingArm.fresh_edge_after_first_arm"}
+在同一张简单无向图上，取两条从同一顶点出发的简单路径。若第一条路径非空，要求两条路径的首边不同。第二条路径的内部顶点都不在第一条路径上，终点可以落在第一条路径上。披露第一条路径的边以及第二条路径一个严格前缀的边。第二条路径的下一条边不在这些已披露的边中。
+:::
+
+::: proof
+在共同起点，简单路径经过的相邻边只有它的首边。其后，第二条路径每一步的出发顶点都在第一条路径之外，因此该步的边也不在第一条路径上。第二条路径本身不会重复经过同一条边。完整证明由 Lean 内核检查。
+:::
+
+此处每步记录路径选中的边。完整的邻居回答还包括同一顶点的其他邻边。
+
 **通向经典黑盒下界仍需哪些桥梁？** [@thm-directed-forest-cycle-completion] 给出普通有向模型的静态均匀律，[@thm-alternating-forest-classification] 给出交替模型的补全计数，[@thm-alternating-completion-law] 给出固定边集的条件律。它们与 [@rem-qsvt-walks-literature] 的黏合树结果之间还有三层区别：
 
 1. **图的分布与方向。** Ben-David 等人（*SIAM Journal on Computing* **53**(6)，2024，[doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975)，§6.3.2，Lemmas 6.11–6.13，PDF 第 37–39 页）在 self-weld 中使用每侧叶子上的一个均匀整圈，在 weld 中使用两侧叶子间的均匀交替整圈。[@thm-alternating-forest-classification] 给出交替补全的分类与基数，[@thm-alternating-completion-law] 给出固定延拓事件的概率和条件律。普通无向整圈的定向与表示重数现由 [@thm-undirected-cycle-orientation-fibers] 在同一实际完成图上给出：每个纤维恰为一对反向提升，并保留加边事件。[@thm-uniform-undirected-cycle-completion] 进一步给出固定 $F$ 下普通无向补全的均匀律。[@thm-alternating-connector-mass] 给出指定连接的条件概率，[@thm-alternating-successor-set-bound] 将它转化为整个候选后继集合的概率上界。[@thm-alternating-forest-successor-bound] 将这个上界写成给定有向边数的函数。[@thm-alternating-undirected-completion-law] 给出无向交替整圈的总数和固定边条件律。 [@thm-alternating-weld-orientation] 把有向与无向黏合补全放在同一个概率空间中。
