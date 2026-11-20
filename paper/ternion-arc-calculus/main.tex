@@ -44,6 +44,12 @@
 \newcommand{\SL}{\mathrm{SL}}
 \newcommand{\Cay}{\mathsf{C}}
 \newcommand{\hol}{\operatorname{hol}}
+% Parts.  Parts are numbered automatically, in order of appearance, by \paperpart; a part that has not yet
+% been included simply does not appear, and every reference "Part~\ref{part:...}" follows.  When the algebraic
+% Part 0 (expansion module m1) is included, put \setcounter{ppart}{-1} before its \paperpart so that it is Part 0.
+\newcounter{ppart}
+\renewcommand{\theppart}{\ifnum\value{ppart}=0 0\else\Roman{ppart}\fi}
+\newcommand{\paperpart}[2]{\refstepcounter{ppart}\part*{Part \theppart. #2}\label{#1}}
 
 \title[Ternions and minimal arcs]{Ternions and minimal arcs:\\ an origin-free calculus on the three-sphere}
 % AUTHORS: to be supplied by the owner
@@ -62,7 +68,10 @@ unit quaternions $S^3$, with $\hp xyz=xy^{-1}z$ and $\kappa(x,y)=\lVert(x+y)/2\r
 $\kappa$ nothing is assumed: dimension, compactness, smoothness and positive semidefiniteness are derived.  Associativity is not needed for the
 geometry: if the heap identities are replaced by a binary operation with a two-sided unit at one point whose left and right
 translations are continuous and preserve $\kappa$, with the round-trip law at that point, the space is still a round sphere $S^1$, $S^3$ or $S^7$ with
-this $\kappa$, and the operations are then classified by Hurwitz's theorem.  The key step concerns the duplication equation $f(x^2)=2f(x)^2-1$: on the line it has continuous non-cosine
+this $\kappa$, and the operations are then classified by Hurwitz's theorem.  Before any manifold, the chord--sagitta identity and an
+elliptic/parabolic/hyperbolic trichotomy already hold for fair elements of a star algebra, and sparse comparisons on a chordal graph
+with triangle defects at most $\varepsilon$ come from a potential up to $(|V|-2)\varepsilon$, the obstruction on other graphs being a
+lattice gauge connection.  The key step concerns the duplication equation $f(x^2)=2f(x)^2-1$: on the line it has continuous non-cosine
 solutions, none of them faithful, and on a connected Lie group every faithful continuous solution that is an even class
 function is the cosine of an angle ($\re$ on $S^1$ and $\SU(2)$, the cosine of the rotation angle on $\SO(3)$).  Under a $C^2$ hypothesis, two further closing laws, minimal
 dimension and completeness of comparison, select the same Lie algebra $\su(2)$; without any regularity hypothesis the
@@ -101,16 +110,26 @@ great-circle arc between two consecutive points of a sampled curve a \emph{minim
 $v(x,y)=1-\cos d(x,y)$ the \emph{sagitta} of the step from $x$ to $y$ (Definition~\ref{def:arc}; it is
 the height of the arc from $y$ through $x$ to the mirror image $\hp xyx$ above its chord).
 
-The paper has two parts.  Part~I (Sections~\ref{sec:def}--\ref{sec:geom}) characterises the heap $S^3$
-together with its comparison $\kappa(x,y)=\lVert (x+y)/2\rVert^2=\cos^2(d/2)$ by axioms that do not
-mention a unit, and describes its geometry.  Part~II (Sections~\ref{sec:recur}--\ref{sec:rational})
-develops a calculus in which the difference $y-x$ of linear calculus is replaced by the transport
-$\hp y x\cdot$.  The guiding observation is that linear calculus discards two second-order quantities
+\emph{Roadmap.}  Part~\ref{part:alg} (Section~\ref{sec:m1}) works before any manifold: in a star algebra a fair comparison already
+has the chord--sagitta identity and an elliptic/parabolic/hyperbolic trichotomy by growth of powers, and on a graph sparse
+comparisons are reconstructed from a potential on chordal graphs, with explicit error constants, while on other graphs the
+obstruction is a lattice gauge connection (cycle holonomies modulo simultaneous conjugacy).  Part~\ref{part:axiom}
+(Sections~\ref{sec:def}--\ref{sec:geom}) states the axiom and classifies its models: it
+characterises the heap $S^3$ together with its comparison $\kappa(x,y)=\lVert (x+y)/2\rVert^2=\cos^2(d/2)$ by axioms that do not mention a
+unit, describes the geometry of the heap, develops the theory without associativity (Mal'cev identities, Hurwitz's theorem, the
+octonionic family), proves that two-sided invariance alone forces a round sphere (Section~\ref{sec:round}), and shows what one-sided
+invariance gives and does not give (Section~\ref{sec:onesided}).  Part~\ref{part:arc} (Sections~\ref{sec:recur}--\ref{sec:rational}) develops a
+calculus in which the difference $y-x$ of linear calculus is replaced by the transport $\hp y x\cdot$.  Part~\ref{part:final}
+(Sections~\ref{sec:known}--\ref{sec:open}) places the results in the literature, records what is formalised, and lists the open problems.
+% ROADMAP, temporary (delete each line when its part lands): Part "Beyond the axiom" (reflection spaces m2, indefinite and complex structures m3, self-reference d4) goes after Part I;
+% phase synthesis and the rational atlas (m4) and the arc body and tropical limit (m5) join the arc calculus; Part "Arithmetic
+% and holonomy" (m6) goes after it; the final part keeps known work, formalisation and open problems.
+In the arc calculus the guiding observation is that linear calculus discards two second-order quantities
 that are exact and computable in the heap: the radial sagitta of each step, and the failure of the
 square roots of displacements to telescope.  The first is the quadratic-variation (It\^o) term, the
 second is curvature.
 
-\subsection{Results of Part I}
+\subsection{Results of Part~\ref{part:axiom}}
 \noindent\textbf{Theorem A} (Theorem~\ref{thm:noreg}; Theorem~\ref{thm:main}).  Let $M$ be a connected manifold with a
 continuous heap operation and $\kappa\colon M\times M\to[0,1]$ continuous, symmetric, faithful and invariant under
 transports, with exactly one zero partner for each point and satisfying the round-trip law (axioms $(\Omega1)$--$(\Omega3)$ of
@@ -157,7 +176,7 @@ geodesic symmetry; the torsion $3$-form obstructs heaps on all spheres other tha
 (Theorem~\ref{thm:obstruction}).  Levi-Civita transport along a minimal arc from $u$ to $w$ is conjugation
 by $(w\bar u)^{1/2}$ (Proposition~\ref{prop:LCarc}).
 
-\subsection{Results of Part II}
+\subsection{Results of Part~\ref{part:arc}}
 \noindent\textbf{Geodesic recurrence} (Theorems~\ref{thm:recur}, \ref{thm:action}, \ref{thm:consist}).
 The recurrence $x_{n+1}=\hp{x_n}{x_{n-1}}{x_n}$ holds iff
 $x_n=U_{n-1}(c)\,x_1-U_{n-2}(c)\,x_0$ for $n\ge1$, with $c=\ip{x_0}{x_1}$ and $U_k$ the Chebyshev polynomials of the
@@ -210,7 +229,953 @@ distance), $\kappa=\tfrac12(1+c)$, and $\exp\xi=\cos\lvert\xi\rvert+\sin\lvert\x
 so $d(1,\exp\xi)=\lvert\xi\rvert$ for $\lvert\xi\rvert\le\pi$.  Tangent vectors are written in the
 \emph{right trivialisation} $T_uM=\{\xi u:\xi\in\im\HH\}$.  The rational points are $M(\Q)=S^3(\Q):=M\cap\Q^4$.
 
-\part*{Part I. The heap \texorpdfstring{$S^3$}{S3}}
+\setcounter{ppart}{-1}
+\paperpart{part:alg}{Algebra and graphs before manifolds}
+
+% Part 0 has the single Section 0, so that the numbers of Sections 2 onwards (cited by Paper II) are unchanged.
+\setcounter{section}{-1}
+\section{Fair comparisons in star algebras and on graphs}
+\label{sec:m1}\label{m1:section}
+
+Which comparison identities require a manifold, and when do sparse comparisons
+come from a single choice of representatives? Two-sided fairness alone gives
+the exact chord--sagitta identity in an associative star algebra. When the
+symmetric part is a real scalar, the powers give a bounded, linear or
+exponential growth criterion for the three comparison types. On a chordal
+graph, triangle defects bounded by \(\varepsilon\) give a vertex potential with
+uniform edge error at most \(\max\{|V|-2,0\}\varepsilon\). For arbitrary graphs
+the gauge class of the edge data is determined by based cycle holonomies up
+to simultaneous conjugacy. These results precede the manifold hypotheses of
+Section~\ref{sec:def}.
+
+\subsection{The chord and its sagitta}
+
+\begin{proposition}\label{m1:algebra}
+Let \(\mathcal A\) be a unital associative \(*\)-algebra with \(2\)
+invertible, and call \(u\) \emph{fair} if \(u^*u=uu^*=1\).
+For a fair element set \(S=(u+u^*)/2\), \(A=(u-u^*)/2\),
+\(v=1-S\) and \(\Delta=u-1\). Then
+\begin{equation}\label{m1:chord-eq}
+ SA=AS,\qquad S^2-A^2=1,\qquad
+ A^2=-v(2-v),\qquad \Delta^*\Delta=\Delta\Delta^*=2v .
+\end{equation}
+In particular \(S=0\) gives \(A^2=-1\).
+\end{proposition}
+\begin{proof}
+Both \(u\) and \(u^*\) commute because each product is \(1\), so their
+linear combinations \(S\) and \(A\) commute. Now
+\((S+A)(S-A)=1\) gives \(A^2=S^2-1=(1-v)^2-1\).
+Expansion of \((u^*-1)(u-1)\) and of the reversed product gives
+\(2-u-u^*=2v\).
+\end{proof}
+
+For unit quaternions \(x,y\) take \(u=y\bar x\) and \(u^*=\bar u\).
+Then \(S=c(x,y)\), \(A=\operatorname{Im}(y\bar x)\) and
+\(y-x=\Delta x=Ax-vx\), with \(|y-x|^2=2v\). Thus
+Proposition~\ref{prop:split} is the quaternionic instance of the two
+algebraic components of the chord. Its tangent-projection interpretation
+and the limiting laws of Theorem~\ref{thm:sagitta} also use the round
+geometry.
+
+\begin{example}\label{m1:algebra-boundaries}
+Over \(\mathbb F_2\) with the identity involution, \(u=1\) is fair
+and \(2S=u+u^*\) and \(2A=u-u^*\) both reduce to \(0=0\).
+The undivided identity
+\(\Delta^*\Delta=\Delta\Delta^*=2-u-u^*\) still holds. The scalar
+condition on \(S\) in the growth criterion below is also substantive.
+In \(M_2(\mathbb C)\) with the Hermitian adjoint,
+\(u=\operatorname{diag}(1,i)\) is fair and has
+\(A^2=\operatorname{diag}(0,-1)\). In \(\mathrm{Cl}_{4,0}\) with
+reversion, put \(B=e_1e_2+e_3e_4\) for orthonormal generators \(e_i\).
+The two summands commute and square to \(-1\), so
+\(B^*=-B\) and \(B^2=-2+2e_1e_2e_3e_4\). This \(B\) cannot itself
+be the odd part of a fair element in this algebra. Indeed left
+multiplication on the Clifford basis is a faithful real matrix
+representation with transpose as the adjoint, since each unit
+generator acts by a symmetric signed permutation. The odd part of
+an orthogonal matrix has operator norm at most \(1\), whereas \(B^*B\)
+has eigenvalue \(4\) on the nonzero vector \(1-e_1e_2e_3e_4\). The product
+\((1+e_1e_2)(1+e_3e_4)/2\) is fair and has odd part \(B/2\)
+and even part \((1+e_1e_2e_3e_4)/2\).
+\end{example}
+
+\subsection{Repeated comparisons and positivity}
+
+\begin{proposition}\label{m1:chebyshev}
+For a fair \(u\) in a real or complex unital associative \(*\)-algebra,
+let \(T_0=1,T_1=X,U_{-1}=0,U_0=1\) and use the recurrence
+\(P_{k+1}=2XP_k-P_{k-1}\) for each family. For \(n\ge0\),
+\begin{equation}\label{m1:cheb-eq}
+ u^{\pm n}=T_n(S)\pm U_{n-1}(S)A,\qquad
+ v(u^n)=1-T_n(1-v(u)).
+\end{equation}
+If the algebra is normed with continuous involution, the integer powers
+are bounded if and only if both \(T_n(S)\) and \(U_{n-1}(S)A\) are
+uniformly bounded for \(n\ge0\). Boundedness of nonnegative powers
+suffices in this case. In a nonzero unital \(C^*\)-algebra every fair
+element has \(\|u^n\|=1\) for all integers \(n\).
+\end{proposition}
+\begin{proof}
+For the scalar Chebyshev formulas see \cite[\S18.5(i)]{m1:DLMF}.
+The identity \(u+u^{-1}=2S\) gives
+\(u^{\pm(n+1)}=2Su^{\pm n}-u^{\pm(n-1)}\) for \(n\ge1\).
+The displayed expressions have the same recurrence and the same
+initial values at \(n=0,1\). Averaging the two expressions gives the
+sagitta formula and taking their half difference gives the odd term.
+The triangle inequality in both directions of this decomposition gives
+the boundedness criterion. Continuity of the involution gives a
+constant \(C\) with \(\|u^{-n}\|=\|(u^n)^*\|\le C\|u^n\|\).
+For a \(C^*\)-norm, \(\|u^n\|^2=\|(u^n)^*u^n\|=\|1\|=1\).
+\end{proof}
+
+\begin{theorem}[real scalar symmetric part]\label{m1:trichotomy}
+Suppose that \(\mathcal A\ne0\) and \(S=s1\) for \(s\in\mathbb R\).
+Write \(v=(1-s)1\). For \(A\ne0\), the algebra \(\mathbb R[A]\)
+with involution has the following three types. The growth statements
+hold for any norm on \(\operatorname{span}_{\mathbb R}\{1,A\}\), in
+particular the restriction of a Banach \(*\)-algebra norm.
+\begin{enumerate}
+\item Elliptic, \(0<1-s<2\). The algebra is \(\mathbb C\) with
+conjugation and the powers are bounded.
+\item Parabolic, \(1-s\in\{0,2\}\). The algebra is the dual-number
+algebra. Its powers have linear growth in \(|n|\).
+\item Hyperbolic, \(1-s\notin[0,2]\). The algebra is the split
+complex algebra. Its powers grow exponentially in \(|n|\), with rate
+\(\rho=|s|+\sqrt{s^2-1}\) in the sense
+\(\lim_{|n|\to\infty}\|u^n\|^{1/|n|}=\rho\).
+\end{enumerate}
+The scalar endpoints \(u=\pm1\) have bounded powers. In particular
+bounded powers occur exactly for \(|s|<1\) or \(u=\pm1\).
+\end{theorem}
+\begin{proof}
+Skew-adjointness makes \(1,A\) real-linearly independent when
+\(A\ne0\), and \(A^2=(s^2-1)1\). Rescaling \(A\) by
+\(\sqrt{|s^2-1|}\) when \(s^2\ne1\) gives the indicated quadratic
+algebras, each with the generator sent to its negative by the
+involution. For \(|s|<1\), put \(s=\cos\theta\), \(0<\theta<\pi\), and
+\(J=A/\sin\theta\). The multiplication law for \(J^2=-1\) and the
+angle addition formulas give \(u^n=\cos(n\theta)1+\sin(n\theta)J\)
+for every integer \(n\).
+For \(s=\pm1\), \(A^2=0\) gives \(u^n=s^n(1+nsA)\) for all integers
+\(n\) by multiplication and inversion. Equivalence of norms on the
+two-dimensional span bounds the norm above and below by positive
+multiples of \(1+|n|\).
+
+For \(|s|>1\), write \(b=\sqrt{s^2-1}\) and \(p_\pm=(1\pm A/b)/2\).
+These nonzero idempotents have \(p_+p_-=0\) and \(p_++p_-=1\), so
+\(u^n=(s+b)^n p_++(s-b)^n p_-\) for every integer \(n\).
+The two coefficients have maximum modulus \(\rho^{|n|}\), because
+\((s+b)(s-b)=1\). Norm equivalence in this basis gives fixed
+positive lower and upper multiples of \(\rho^{|n|}\), whose
+\(|n|\)-th roots tend to \(1\). Finally \(A=0\) implies \(s^2=1\).
+\end{proof}
+
+\begin{definition}\label{m1:positivity}
+The involution is said to satisfy the scalar positivity condition
+if \(a^*a=-t1\) with \(t\ge0\) implies \(a=0\).
+\end{definition}
+
+\begin{corollary}\label{m1:positive-powers}
+Under the scalar hypothesis of Theorem~\ref{m1:trichotomy},
+the implication in Definition~\ref{m1:positivity} for \(a=A\),
+scalar positivity on \(\mathbb R[A]\), and bounded powers of \(u\)
+are equivalent. A normalized faithful positive linear functional
+on \(\mathcal A\) implies the ambient scalar positivity condition.
+The condition also holds in every \(C^*\)-algebra.
+\end{corollary}
+\begin{proof}
+If \(A\ne0\), the implication for \(A\) is equivalent to
+\(1-s^2>0\) by \(A^*A=(1-s^2)1\). In that case
+\((x+yA)^*(x+yA)=(x^2+(1-s^2)y^2)1\) with \(x,y\in\mathbb R\),
+which proves the condition on the whole span. For \(A=0\)
+the span consists of real scalars and its squares are nonnegative.
+If a functional \(\omega\) is normalized and faithful, then
+\(\omega(a^*a)=-t\ge0\) forces \(t=0\) and \(a=0\).
+In a \(C^*\)-algebra the spectrum of \(a^*a\) lies in
+\([0,\infty)\), so \(a^*a=-t1\) forces \(t=0\) and the norm
+identity gives \(a=0\).
+\end{proof}
+
+\begin{example}\label{m1:power-boundaries}
+The dual generator \(D^*=-D,\ D^2=0,\ D\ne0\) gives the fair
+pair \(1\pm D\) with \(D^*D=0\). The split generator
+\(J^*=-J,\ J^2=1\) gives the fair pair \(\cosh\eta\pm J\sinh\eta\),
+\(\eta\ne0\), with \(J^*J=-1\). Without scalar \(S\), even a
+singleton spectrum for \(S\) at \(1\) permits faster growth.
+Use the real Banach algebra \(\mathbb R[t]/(t^3)\) with coefficient
+\(\ell^1\) norm and \(t^*=-t\). Multiplication discards terms of
+degree at least three, so the norm is submultiplicative and
+\[
+ u=1+t+\tfrac12 t^2,\quad u^*=1-t+\tfrac12t^2,\quad
+ u^n=1+nt+\tfrac12 n^2t^2,\quad S=1+\tfrac12t^2.
+\]
+The power formula follows from multiplication for positive and
+negative indices, starting with \(uu^*=1\). In the complexification,
+\(S-\lambda1\) is invertible for \(\lambda\ne1\) by the finite
+geometric series and nilpotent at \(\lambda=1\). The power norms are
+\(1+|n|+n^2/2\).
+\end{example}
+
+\begin{proposition}\label{m1:time}
+The real scalar comparison satisfies \(S(u^n)>0\) as a scalar
+for all \(n\ge1\) exactly when \(s\ge1\).
+For \(s=\cos\theta\), \(0<\theta<\pi\), the first strictly negative
+reading occurs at \(n_0=\lfloor\pi/(2\theta)\rfloor+1\).
+The simultaneous conditions of bounded powers and all positive
+readings select \(u=1\). Positive readings and \(A^2\ne0\)
+select \(s>1\).
+\end{proposition}
+\begin{proof}
+The scalar reading is \(T_n(s)\). For \(s=\cosh\eta\ge1\) it
+equals \(\cosh(n\eta)\) by the recurrence and hyperbolic addition,
+and for \(s\le-1\) the first reading is negative. In the other
+case it is \(\cos(n\theta)\). For \(0\le n<n_0\) the angle
+is in \([0,\pi/2]\), whereas \(n_0\theta\) lies strictly between
+\(\pi/2\) and \(3\pi/2\). Apply Theorem~\ref{m1:trichotomy}
+and \(A^2=(s^2-1)1\) for the two selections.
+\end{proof}
+
+\begin{remark}\label{m1:matrix}
+On \(M_2(\mathbb C)\) viewed as a real algebra the adjugate
+\(a^\sharp=\operatorname{tr}(a)1-a\) is an involution.
+Indeed it squares to the identity as a linear map, is the identity
+on \(1\), and equals \(\det(a)a^{-1}\) on invertible matrices.
+That expression proves reversal of products on invertible matrices
+and the polynomial identity extends to all matrices by density.
+The fair group is \(\mathrm{SL}(2,\mathbb C)\) by
+\(aa^\sharp=a^\sharp a=\det(a)1\). Its complex scalar sagitta is
+\(1-\operatorname{tr}(u)/2\). For \(u\ne\pm1\) the real values
+in \((0,2)\), at \(\{0,2\}\), and outside \([0,2]\) give the three
+types in Theorem~\ref{m1:trichotomy}. A nonreal value gives the
+loxodromic case with nonreal trace. To see the projective
+classification, the eigenvalues are \(\lambda,\lambda^{-1}\).
+At a repeated eigenvalue the nonscalar Jordan block induces a
+translation in suitable projective coordinates. Otherwise the
+projective map is conjugate to \(z\mapsto\lambda^2 z\).
+A real trace in \((-2,2)\) gives conjugate unit-modulus eigenvalues
+and a real trace outside \([-2,2]\) gives real reciprocal
+eigenvalues. Nonreal trace forces \(|\lambda|\ne1\) and nonreal
+\(\lambda\). The convention calls positive real dilation hyperbolic and
+includes a dilation with a nontrivial rotation among loxodromic maps.
+There is no normalized positive functional for \(\sharp\) because
+\(\operatorname{diag}(1,-1)^\sharp\operatorname{diag}(1,-1)=-1\).
+Imposing Hermitian fairness as well gives \(\mathrm{SU}(2)\), whose
+noncentral elements are elliptic by the unitary eigenvalues.
+\end{remark}
+
+\begin{remark}[rotations and boosts]\label{m1:spin}
+On Hermitian \(2\times2\) matrices the action \(X\mapsto uXu^\dagger\)
+of \(\mathrm{SL}(2,\mathbb C)\) preserves
+\(\det(t1+\mathbf x\cdot\boldsymbol\sigma)=t^2-|\mathbf x|^2\),
+where \(\boldsymbol\sigma\) are the Pauli matrices.
+The action preserves the future cone of positive definite matrices,
+and its real determinant is \(1\) by connectedness. Indeed the polar
+decomposition \(u=kb\), with \(b=(u^\dagger u)^{1/2}\) positive of
+determinant \(1\) and \(k\) special unitary, gives a path to \(k\),
+which in turn is diagonalizable with entries \(e^{\pm i\theta}\)
+and is joined to \(1\). For surjectivity onto the proper
+orthochronous Lorentz group, such a transformation sends \(1\) to
+some positive \(X\) of determinant \(1\). The matrix \(X^{1/2}\)
+realizes that step. A remaining transformation fixing \(1\) is a
+spatial rotation. For a unit vector \(\mathbf n\),
+\(\exp(i\theta\,\mathbf n\cdot\boldsymbol\sigma)\) acts on its
+orthogonal spatial plane by a rotation through angle of magnitude
+\(2\theta\), by the Pauli multiplication rule. Since every spatial
+rotation has an axis, these matrices realize the remaining step.
+The kernel consists of the unitary matrices that commute with every
+Hermitian matrix, hence the scalar matrices \(\pm1\).
+At the identity the derivative sends a traceless complex matrix
+\(Z\) to the map \(X\mapsto ZX+XZ^\dagger\). In its kernel,
+\(X=1\) gives skew-adjointness, then every Hermitian \(X\)
+commutes with \(Z\), so tracelessness forces \(Z=0\).
+The real Lie groups both have dimension six, so the derivative
+is an isomorphism. The inverse function theorem and translation by
+the two kernel elements give the classical spin double cover. The group contains rotations, boosts
+and null rotations. Diagonal matrices with entries \(e^{\pm i\theta}\)
+rotate the spatial off-diagonal plane, those with entries
+\(e^{\pm\eta/2}\) rescale the two null coordinates \(t\pm x_3\)
+by \(e^{\pm\eta}\), and the nontrivial unipotent upper triangular
+matrices induce unipotent maps fixing the null ray of
+\(\operatorname{diag}(1,0)\). For the upper triangular matrix with
+off-diagonal entry \(z\), write the diagonal entries of \(X\) as
+\(a,b\) and its upper off-diagonal entry as \(w\). The new
+entries are \(a+2\operatorname{Re}(z\bar w)+|z|^2 b\), \(b\)
+and \(w+zb\), giving a unitriangular map in the order
+\((b,\operatorname{Re}w,\operatorname{Im}w,a)\).
+The quadratic-algebra generators are represented by
+\(\operatorname{diag}(i,-i)\),
+\(\bigl(\begin{smallmatrix}0&1\\0&0\end{smallmatrix}\bigr)\), and
+\(\operatorname{diag}(1,-1)\), with squares \(-1,0,1\) respectively.
+Indefinite fairness permits all these cases. Using the
+positivity or time-order condition requires a choice of which
+comparisons model states or coordinate changes.
+\end{remark}
+
+\subsection{Reconstructing sparse comparisons}
+
+\begin{definition}\label{m1:gains}
+Let \(G=(V,E)\) be a simple graph and \(H\) a group. A
+\emph{gain assignment} chooses \(g_{ij}\in H\) on each oriented edge
+with \(g_{ji}=g_{ij}^{-1}\). For a walk \(w=(x_0,\ldots,x_r)\)
+write \(P_g(w)=g_{x_0x_1}\cdots g_{x_{r-1}x_r}\), with empty product
+\(1\). A vertex potential is a map \(\phi:V\to H\) with exact edge
+values \(\phi_i^{-1}\phi_j\). A graph is chordal if every simple
+cycle of length at least four has an edge between nonconsecutive
+vertices of the cycle.
+\end{definition}
+
+\begin{theorem}\label{m1:chordal}
+Let \(G\) be finite chordal and \(d\) a bi-invariant pseudometric
+on \(H\). If every triangle satisfies
+\(d(g_{ij}g_{jk}g_{ki},1)\le\varepsilon\), with \(\varepsilon\ge0\),
+there is a map \(\phi:V\to H\) such that
+\begin{equation}\label{m1:stab-eq}
+ d(g_{ij},\phi_i^{-1}\phi_j)
+ \le \max\{|V|-2,0\}\varepsilon\qquad(\{i,j\}\in E).
+\end{equation}
+The same construction gives an exact potential in any group
+when all triangle holonomies are \(1\).
+\end{theorem}
+\begin{proof}
+Bi-invariance gives \(d(ab,c)=d(abc^{-1},1)\), conjugation
+invariance, and \(d(a^{-1},b^{-1})=d(a,b)\) by left multiplication
+by \(a\) and right multiplication by \(b\). Thus the triangle
+bound is independent of its start and orientation and is equivalent
+to \(d(g_{ij}g_{jk},g_{ik})\le\varepsilon\).
+
+We give the graph argument for the simplicial-vertex step of
+Dirac's theorem \cite{m1:Dirac}. A vertex is simplicial when its
+neighbors form a clique. By induction a nonempty finite chordal graph
+has a simplicial vertex, and a noncomplete one has two nonadjacent
+such vertices. For a complete graph every vertex works. In a
+disconnected graph take one from each of two components by induction.
+In a connected noncomplete graph choose nonadjacent \(a,b\) and an
+inclusion-minimal set \(D\subset V\setminus\{a,b\}\) separating
+them. Every vertex of \(D\) has a neighbor in each of the components
+\(X,Y\) of \(a,b\) in \(G-D\), since restoring that vertex alone
+gives an \(a\)-to-\(b\) path. If \(p,q\in D\) were nonadjacent,
+take shortest \(p\)-to-\(q\) paths with interiors in \(X\) and \(Y\).
+Each has no chord by minimal length, the interiors have no edges
+between them, and their union is a chordless cycle of length at
+least four. Hence \(D\) is a clique. The proper induced graphs on
+\(D\cup X\) and \(D\cup Y\) are chordal. If either is complete,
+any vertex in its component outside \(D\) is simplicial there.
+Otherwise induction supplies two nonadjacent simplicial vertices
+and at least one lies outside the clique \(D\). The two selected
+vertices have no additional neighbors in \(G\), so they are
+nonadjacent simplicial vertices of \(G\).
+
+Choose a simplicial vertex \(x\), solve on \(G-x\) by induction,
+and keep the old values \(\psi_i\). If \(x\) has no neighbor, put
+\(\phi_x=1\). Otherwise choose a neighbor \(w\) and put
+\(\phi_x=\psi_w g_{wx}\). The edge \(xw\) is fitted exactly.
+Every other neighbor \(j\) is adjacent to \(w\), and
+\[
+ d(g_{xj},\phi_x^{-1}\phi_j)
+ \le \varepsilon+d(g_{wj},\psi_w^{-1}\psi_j).
+\]
+Here the first step replaces \(g_{xj}\) by \(g_{xw}g_{wj}\), and
+left invariance gives the second term. Reverse edges have the same
+error. The empty graph and graphs of at most two vertices admit
+exact fits, and each later step adds at most \(\varepsilon\).
+The exact assertion follows by the same induction with each
+comparison an equality.
+\end{proof}
+
+For \(H\) the fair group of a unital \(C^*\)-algebra,
+\(d(a,b)=\|a-b\|\) is bi-invariant. Left multiplication by a unitary
+is an isometry by the \(C^*\)-identity and right multiplication is
+an isometry by taking adjoints. A pseudometric suffices for
+\eqref{m1:stab-eq}. At zero error exact reconstruction follows from
+actual triangle equalities, or from zero distances when \(d\) is
+a metric.
+
+\begin{proposition}[sharpness of the reconstruction bound]\label{m1:sharp}
+For \(n\ge3\) and \(\varepsilon>0\), the error
+\((n-2)\varepsilon\) can be attained by the specified simplicial
+reconstruction with a permissible choice of neighbors. For an
+unconstrained choice of potential, the coefficient \(1\) at \(n=3\)
+is optimal over bi-invariant metric groups. For \(n\ge4\) the
+universal upper bound can already be reduced to
+\((n-3)\varepsilon\). With \(H=(\mathbb R,+)\) and its usual metric,
+the optimal universal coefficient at \(n\ge3\) is \((n-2)/n\).
+\end{proposition}
+\begin{proof}
+Take the fan on \(0,\ldots,n-1\) with all spokes \(0j\) and the
+path edges \(j,j+1\) for \(1\le j<n-1\). Give the outward spokes
+gain \(0\) and the increasing path edges gain \(\varepsilon\).
+Its only triangles are the fan faces, of defect \(\varepsilon\).
+Eliminate \(n-1,n-2,\ldots,2\), each time using its predecessor
+as the neighbor when reinserting it. Starting with the zero
+potential on \(0,1\) gives \(\phi_j=(j-1)\varepsilon\)
+for \(j\ge1\). The last spoke has error \((n-2)\varepsilon\).
+For a triangle in the additive group \(\mathbb Z\) with metric
+\(\varepsilon|a-b|\), put gain \(1\) on one oriented edge and \(0\)
+on the other two. Error strictly less than \(\varepsilon\) would
+force equality on all edges and is impossible because the oriented
+sum is \(1\).
+
+At four vertices, a connected chordal graph with a triangle has
+a vertex adjacent to every other vertex. In fact the fourth vertex
+is adjacent to some triangle vertex. Its star fits exactly and
+every other edge then has error at most \(\varepsilon\). A triangle-free
+chordal graph is a forest, where fitting tree edges successively
+is exact. Disconnected four-vertex graphs have component size at
+most three. Starting the induction of Theorem~\ref{m1:chordal}
+at four vertices gives the stated improvement.
+
+For real additive gains let \(r\) be the maximum, over simple
+oriented cycles \(C\), of \(|\sum_C g|/|C|\), with maximum \(0\)
+for a forest. Telescoping potentials gives the lower bound \(r\)
+on uniform error. Give the arc \(ij\) weight \(g_{ij}+r\).
+Every directed closed walk has nonnegative weight, because it
+splits at repeated vertices into simple cycles and immediate
+reversals, and the latter have weight \(2r\). Add a source
+with zero-weight arcs to all vertices. The minimum path weight
+\(\phi_j\) to each vertex exists by removing nonnegative closed
+subwalks and minimizing over the finitely many simple paths.
+It satisfies \(\phi_j\le\phi_i+g_{ij}+r\) for every arc, so both
+orientations give \(|g_{ij}-(\phi_j-\phi_i)|\le r\).
+A simple \(k\)-cycle in a chordal graph splits along chords into
+\(k-2\) triangles, counted by induction using
+\(k_1+k_2=k+2\) when a chord splits it. Thus
+\(|\sum_C g|\le(k-2)\varepsilon\) and \(r\le(n-2)\varepsilon/n\).
+The full outer cycle of the fan has sum \((n-2)\varepsilon\)
+and length \(n\), giving equality for the optimal real error.
+\end{proof}
+
+\begin{proposition}[complete comparisons]\label{m1:complete}
+Suppose \(X\ne\varnothing\) and \(c_{xy}\) takes values in the
+fair group of \(\mathcal A\) for every pair, including repeated
+points, with \(c_{yx}=c_{xy}^*\).
+The third-point law \(c_{xy}c_{yz}=c_{xz}\) for every triple
+is equivalent to \(c_{xy}=f_x^*f_y\) for fair \(f_x\).
+It gives \(c_{xx}=1\), and anchoring at \(o\in X\) gives
+\(f_x=c_{ox}\). Two representations differ by one common
+left factor. The equivalence relation of identical comparison
+profiles is equality of \(f_x\). Products along every finite
+sampled path give \(c_{x_0x_N}\). These assertions hold also
+for infinite \(X\).
+\end{proposition}
+\begin{proof}
+An invertible idempotent \(c_{xx}\) must be \(1\), and using
+the intermediate point \(o\) gives the representation. The converse
+and the path assertion follow by telescoping. If \(f'\) represents
+the same data, \(f_x'f_x^{-1}=f_o'f_o^{-1}\) follows from comparing
+at \(o\). Equality of representatives gives equality of both profiles,
+and equality of the profile at the single anchor recovers the
+representative. For unit Clifford vectors the gain \(c_{xy}=xy\)
+satisfies the law since \(y^2=1\).
+\end{proof}
+
+The third-point law gives the endpoint property of the heap in
+Paper~I, equation~\eqref{eq:telescope}, on each finite partition with factors
+multiplied in path order. Fairness on its own permits
+\(c_{xx}=-1\) in the one-point real example, with \(c_{xx}^2=1\).
+Thus the third-point law can supply self-pairing for the scalar
+Gram input discussed below.
+
+\subsection{Cycle holonomy and the gauge quotient}
+
+\begin{definition}\label{m1:gauge-def}
+A vertex gauge \(k:V\to H\) acts on gains by
+\(g^k_{ij}=k_i^{-1}g_{ij}k_j\).
+For a graph, write \(H^1(G;H)\) for the pointed set of all
+gain assignments modulo these gauges, pointed by the identity
+assignment. When triangles are filled in, \(H^1\) of the
+resulting complex denotes the same quotient restricted to
+assignments with trivial face holonomy.
+\end{definition}
+
+\begin{theorem}\label{m1:gauge}
+For a finite graph with components \(G_a=(V_a,E_a)\), the gauge
+quotient is
+\[
+ H^1(G;H)\ \cong\
+ \prod_a H^{\,|E_a|-|V_a|+1}/H ,
+\]
+where each \(H\) acts by simultaneous conjugation. The coordinates
+are fundamental cycle products transported to one root per
+component. A potential exists exactly when every closed walk has
+identity holonomy, and it suffices to test the simple chordless
+cycles, including the triangles. On the triangle-flat locus the
+obstruction is therefore carried by chordless cycles of length at
+least four.
+\end{theorem}
+\begin{proof}
+On a walk from \(i\) to \(j\), the gauge changes its product to
+\(k_i^{-1}P_g(w)k_j\). For a rooted spanning tree let \(t_i\) be
+the product on the tree path from the root to \(i\), with \(t_o=1\).
+Gauge by \(k_i=t_i^{-1}\). The resulting tree values are \(1\)
+and each directed non-tree edge \(ij\) has value
+\(t_i g_{ij}t_j^{-1}\), the based fundamental cycle product.
+A gauge preserving identity on all tree edges is constant on
+the component. Conversely all choices of the non-tree values
+occur on tree-normalized assignments. Counting the non-tree
+edges proves the formula, including isolated vertices. The
+identity class consists of potentials, since gauging the identity gives
+\(k_i^{-1}k_j\), and gauging such an assignment by \(k_i^{-1}\)
+on the vertices returns the identity.
+
+Closed products telescope for a potential. To go from chordless
+cycles to all closed walks, delete backtracks and split at repeated
+vertices. A closed subwalk rooted away from the original root
+contributes with conjugation by its initial access path. For a
+simple cycle with a chord, start at one endpoint of the chord
+and write the cycle as paths \(p:a\to b\) and \(q:b\to a\).
+Its product factors as
+\[
+ P_g(p)P_g(q)=(P_g(p)g_{ba})(g_{ab}P_g(q)).
+\]
+Both factors are shorter simple cycle products. A different base
+vertex changes the product by conjugation. Induction reduces to
+chordless cycles. This also proves the potential criterion via the
+tree normalization.
+\end{proof}
+
+\begin{corollary}[anchored abelian comparisons]\label{m1:anchored}
+Let \(G\) be finite and connected and \(H\) abelian. Let \(R\) be a
+nonempty set of vertices at which the gauges must be \(1\).
+In a rooted spanning tree at \(o\in R\), the gauge
+coordinates are the \(|E|-|V|+1\) based fundamental cycle
+gains and the \(|R|-1\) rooted tree path gains to the other
+anchors. The quotient is therefore isomorphic to \(H^{|E|+|R|-|V|}\).
+\end{corollary}
+\begin{proof}
+The tree path gains between anchors are gauge invariant by the
+endpoint law. So are the rooted loop gains since the root is fixed.
+For two assignments with equal coordinates, write \(t_i,t_i'\)
+for their tree path gains. The gauge \(k_i=t_i^{-1}t_i'\)
+is \(1\) at the anchors, gives the new tree path gains \(t_i'\),
+and preserves the based cycle gains. The tree normalization
+in Theorem~\ref{m1:gauge} then forces all new edge gains to
+be those of the second assignment. To realize prescribed
+coordinates, set the \(t_i\) to the prescribed values at the
+anchors and to \(1\) elsewhere. Use \(t_i^{-1}t_j\) on tree
+edges, and \(t_i^{-1}h_{ij}t_j\) off the tree for the given
+based cycle gains \(h_{ij}\). Reversal determines the other
+orientation. The coordinate map respects multiplication
+because \(H\) is abelian.
+\end{proof}
+
+\begin{proposition}\label{m1:clique}
+Fill the triangles of \(G\), and let \(\Pi_a\) be the group
+of rooted closed walks in each component with concatenation,
+modulo backtrack moves and triangle moves \(i,j,k\leftrightarrow
+i,k\). Then the triangle-flat gauge quotient is
+\(\prod_a\operatorname{Hom}(\Pi_a,H)/H\).
+Triangle flatness forces a potential for every coefficient group
+if and only if every \(\Pi_a\) is trivial. If \(d\) is bi-invariant
+and the triangle defects are bounded by \(\varepsilon\), a
+closed walk reduced to a point by \(N\) triangle moves has
+\(d(P_g(w),1)\le N\varepsilon\), with moves counted in either
+direction.
+\end{proposition}
+\begin{proof}
+Concatenation respects the moves and reversal gives inverses.
+A triangle-flat assignment gives a homomorphism by taking the
+product, and a gauge conjugates it at the root. Conversely, given
+a homomorphism \(\rho:\Pi_a\to H\), take rooted tree paths
+\(\gamma_i\) and set
+\(g_{ij}=\rho([\gamma_i(ij)\gamma_j^{-1}])\).
+The tree paths cancel on composition, so the assignment reverses
+correctly and satisfies the triangle law. It is identity on tree
+edges and realizes \(\rho\) on every rooted loop. The residual
+gauge is common conjugation as above. Taking \(H=\Pi_a\) and
+\(\rho=\mathrm{id}\) proves necessity for the assertion over
+all groups. For the estimate, a backtrack leaves the product
+unchanged. A triangle move replaces a subproduct by one at
+distance at most \(\varepsilon\), also after multiplication
+by the prefix and suffix. Sum these distances along the reduction.
+\end{proof}
+
+\begin{remark}[topological interpretation]\label{m1:topology}
+The classical edge-path description identifies \(\Pi_a\) with
+\(\pi_1\) of the clique complex \cite[Ch.~3]{m1:Spanier}.
+Only its \(2\)-skeleton enters the relations. A chordal
+component has contractible clique complex. At each simplicial
+vertex with a neighbor the simplex on the vertex and its
+neighbors retracts linearly onto the neighbor face by sending
+the vertex to one chosen neighbor, keeping that face fixed.
+Deletion preserves connectivity since paths crossing the vertex
+can detour through its clique. Iteration ends at a point.
+Abstract gain balance and switching are classical
+\cite{m1:Zaslavsky}. The spanning-tree basis for reduced loops is
+also the one in L\'evy's Lemma~1.3.33 \cite{Levy10}. Angular synchronization uses the same
+relative-label model over the circle \cite{m1:Singer}.
+Lerman and Shi characterize exact compact-group synchronization
+by cycle consistency and use inconsistent cycles to estimate
+corruptions \cite[\S3, Proposition~3]{m1:LermanShi}. The deterministic estimate
+\eqref{m1:stab-eq} uses uniform triangle defects and chordality. Duncan and Kileel
+extend the exact cycle-consistency criterion to hyperedge data
+\cite[Theorems~3.1 and 3.5]{m1:DuncanKileel}.
+\end{remark}
+
+\begin{example}\label{m1:cycles}
+On a four-cycle there are no triangles, so making three edge
+values \(1\) and the fourth \(h\) realizes any holonomy \(h\).
+For \(h\ne1\) there is no potential. Adding a hub gives an
+induced outer four-cycle but makes triangle flatness sufficient
+by taking the hub values as the potential, with hub value \(1\).
+For a separate example, join two triangles at one vertex, with
+no filled faces, and use \(H=S_3\).
+Tree normalization can give based tuples \(((12),(12))\)
+and \(((12),(23))\). They have the same separate conjugacy
+classes on the simple cycles. Only the first tuple has equal
+coordinates, so the two assignments lie in different gauge classes.
+\end{example}
+
+\begin{remark}[finite Stokes and gauge fields]\label{m1:stokes-link}
+For a simple \(k\)-cycle in a chordal graph, the chord
+factorization in the proof of Theorem~\ref{m1:gauge} gives a
+boundary product of \(k-2\) triangle factors transported to the
+base vertex. Applying bi-invariance gives the holonomy bound
+\((k-2)\varepsilon\). It equals the fan's boundary defect in
+Proposition~\ref{m1:sharp}. The finite Stokes theorem
+(Theorem~\ref{thm:stokes}) gives the ordered face factorization
+for shellable disks with a specified \(\mathrm{SU}(2)\)-cochain.
+Its transport convention multiplies later edges on the left.
+Putting its transport from \(i\) to \(j\) equal to \(g_{ij}^{-1}\)
+gives its path holonomy \(P_g(w)^{-1}\).
+In our convention transporting a face based at \(a\) to the base \(o\) along
+\(\gamma:o\to a\) gives
+\(P_g(\gamma)P_g(\partial f)P_g(\gamma)^{-1}\).
+Lattice link variables and face products provide the
+corresponding finite kinematics for the bundles of Paper~II
+\cite[Sec.~\emph{Fields of comparison structures}, Theorem on Hypothesis F]{Companion}.
+\end{remark}
+
+\begin{remark}[continuum hypothesis]\label{m1:continuum-input}
+To obtain the gauge fields of Paper~II, Hypothesis F supplies
+a base manifold, a bundle of comparison structures, a clock
+and a clock-preserving connection. The resulting structure groups
+before and after the clock reduction are \(\mathrm{SO}(4)\)
+and \(\mathrm U(2)\), respectively, in that model.
+\end{remark}
+
+\begin{remark}[continuum programme]\label{m1:continuum-programme}
+A continuum reconstruction from sparse gain data would need a
+refinement of the underlying graph, compatibilities or estimates
+on links under subdivision, compactness modulo vertex gauge,
+and a proof identifying normalized face holonomies with the
+curvature of a limiting connection. A field equation would also
+require a dynamical law and a convergence argument for that law.
+The gauge quotient above specifies the finite data for such a
+limit. A separate finite problem is to determine the optimal
+stability constants for arbitrary bi-invariant metric groups at
+each graph size beyond the cases where sharpness was proved above.
+\end{remark}
+
+\subsection{From potentials to Gram geometry}
+
+\begin{proposition}\label{m1:gram}
+Suppose \(c_{xy}=f_x^*f_y\) as in Proposition~\ref{m1:complete}.
+Let \(\omega\) be a normalized positive linear functional with
+\(\omega(a^*)=\overline{\omega(a)}\), or the corresponding real
+condition for a real algebra. Then
+\(G_{ij}=\omega(S(c_{x_ix_j}))\) is a real positive semidefinite
+matrix with diagonal \(1\), and
+\[
+ d(x,y)^2=2\omega(v(c_{xy}))
+          =\omega((f_y-f_x)^*(f_y-f_x))
+\]
+is the square of a Hilbert-space pseudodistance. If the reads
+\(S(c_{x_ix_j})=s_{ij}1\) are real scalars, scalar positivity
+alone gives positive semidefiniteness of \((s_{ij})\).
+Conversely, every real positive semidefinite matrix with
+diagonal \(1\) is an even readout of flat fair comparisons.
+\end{proposition}
+\begin{proof}
+For \(\alpha_i\in\mathbb R\), the element \(a=\sum_i\alpha_i f_{x_i}\)
+satisfies \(a^*a=\sum_{ij}\alpha_i\alpha_j S(c_{x_ix_j})\) since the
+odd parts cancel in transposed pairs. Applying \(\omega\) gives
+the Gram inequality. For scalar reads \(a^*a=(\alpha^{\mathsf T}
+(s_{ij})\alpha)1\), and a strictly negative scalar would force
+\(a=0\) by Definition~\ref{m1:positivity}, a contradiction.
+On the real underlying vector space the symmetric bilinear form
+\(\operatorname{Re}\omega(a^* b)\) is positive semidefinite.
+Cauchy--Schwarz follows from nonnegativity of its quadratic on
+\(a+tb\) for all real \(t\), so its nullspace is orthogonal to
+everything. Quotient by that nullspace and complete to obtain a
+real Hilbert space. Since \(f_y-f_x=f_x(c_{xy}-1)\),
+Proposition~\ref{m1:algebra} gives the distance formula.
+For the converse, factor the matrix as the Gram matrix of
+real unit vectors \(f_i\) by diagonalization. In the Euclidean
+Clifford algebra with reversion these vectors are fair and
+\(S(f_i f_j)=(f_i f_j+f_j f_i)/2=\langle f_i,f_j\rangle1\).
+The scalar-part functional is normalized and positive because
+the scalar part of \(a^*a\) is the sum of squared coefficients
+in the orthonormal Clifford monomial basis.
+\end{proof}
+
+Third-point redundancy, scalar even reads and scalar positivity
+supply the normalized self-read, elliptic scalar square and Gram
+positivity. A positive
+functional supplies the Gram inequality without scalar even
+reads. It gives a Hilbert norm after quotient and hence supplies
+the parallelogram law on the linear realization by expanding
+\(\|x+y\|^2+\|x-y\|^2=2\|x\|^2+2\|y\|^2\).
+Conversely the Jordan--von Neumann theorem recovers the inner
+product of a normed linear space with that law
+\cite{m1:JordanVonNeumann}. In \(\ell^1_2\), the two sides for the
+two coordinate vectors are \(8\) and \(4\).
+A unit-sphere constraint concerns the induced geometry on this
+realization, as in Theorem~\ref{thm:round} of the manifold theory.
+
+\begin{proposition}\label{m1:distance}
+Let \(D\) be a symmetric real matrix with zero diagonal, and put
+\(J=I-\mathbf 1\mathbf 1^{\mathsf T}/m\) for \(m\ge1\).
+The entries of \(D\) are squared Euclidean distances exactly when
+\(-JDJ/2\) is positive semidefinite. For a complex Gram matrix the
+full labeled entries determine any finite vector realization
+up to a unitary isomorphism of the spans, which extends to an
+ambient unitary when the ambient spaces have the same finite
+dimension.
+\end{proposition}
+\begin{proof}
+For a Gram matrix \(K\), the associated squared distance is
+\(D_{ij}=K_{ii}+K_{jj}-2K_{ij}\). Then
+\(-JDJ/2=JKJ\), the Gram matrix of centered vectors.
+Conversely factor \(-JDJ/2\) as a real Gram matrix. Its induced
+distance matrix \(D'\) has \(JD'J=JDJ\), and
+\(J(D-D')J=0\) implies
+\((D-D')_{ij}=r_i+r_j-r\), where \(r_i\) are row means and \(r\)
+the overall mean. The zero diagonal forces \(2r_i=r\) for all
+\(i\) and the difference vanishes. This is the finite
+distance criterion of Schoenberg \cite{m1:Schoenberg}.
+For the complex assertion, map
+\(\sum_i a_i x_i\mapsto\sum_i a_i y_i\).
+Squared norms of both linear combinations are \(a^*Ka\), so
+the map is well-defined, onto the second span and isometric.
+Polarization gives preservation of the complex inner product,
+and a bijection of orthonormal bases of the complements gives
+the extension. In particular, for the squared distances of a
+real Gram matrix, \(a^{\mathsf T}Da=-2a^{\mathsf T}Ka\le0\)
+whenever \(\sum_i a_i=0\).
+\end{proof}
+
+The chordal partial Gram completion theorem of Grone, Johnson,
+S\'a and Wolkowicz \cite{m1:Grone} concerns consistent clique
+submatrices with positive semidefinite Gram realizations.
+Theorem~\ref{m1:chordal} concerns group-valued edge products
+and their triangle defects. The shared graph condition permits
+the common simplicial elimination step.
+
+\begin{proposition}[two readout identities]\label{m1:readout-identities}
+For real vectors \(x,y\) in a finite orthonormal coordinate
+system,
+\[
+ \|x\|^2\|y\|^2-\langle x,y\rangle^2
+ =\sum_{i<j}(x_i y_j-x_j y_i)^2 .
+\]
+A complex polynomial in \(z,\bar z\) invariant under common
+phase is a polynomial in the quadratic entries \(\bar z_i z_j\).
+If it is homogeneous of degree two and real-valued, it has
+the form \(z^\dagger Mz\) for a unique Hermitian matrix \(M\),
+and is nonnegative everywhere exactly when \(M\) is positive
+semidefinite.
+\end{proposition}
+\begin{proof}
+Expanding the squared wedges and combining the two orders
+of the indices gives the left-hand side. For the phase
+assertion, the change from real and imaginary variables to the
+formal variables \(z,\bar z\) is complex-linearly invertible.
+Polynomial identities on the real coordinate space therefore
+identify coefficients in \(z,\bar z\). The monomial
+\(z^\alpha\bar z^\beta\) acquires factor
+\(e^{i\theta(|\alpha|-|\beta|)}\) under phase rotation.
+Invariance at every \(\theta\) forces equal counts for every
+monomial of nonzero coefficient. Pairing the factors gives a
+product of the indicated quadratic entries. In degree two
+these entries are independent monomials. Conjugating the value
+swaps their indices and conjugates the coefficients, so reality
+is precisely Hermiticity. The sign criterion is the definition
+of a positive semidefinite Hermitian form.
+\end{proof}
+
+\begin{example}\label{m1:negative-gram}
+Local ellipticity alone does not give a Gram matrix, even
+with complete flat gains. In \(M_2(\mathbb R)\) with the
+adjugate involution put
+\[
+ J_1=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\qquad
+ J_2=\begin{pmatrix}0&-2\\1/2&0\end{pmatrix},\qquad
+ f_0=1,\quad f_1=(1+J_1)/\sqrt2,\quad f_2=(1-J_2)/\sqrt2 .
+\]
+Both \(J_k\) square to \(-1\) and are odd, so the \(f_i\) are
+fair. Half-traces of \(f_i^\sharp f_j\) on edges \(01,02,12\)
+are \(1/\sqrt2,1/\sqrt2,-1/8\), the last because
+\(J_1J_2=\operatorname{diag}(-1/2,-2)\). The determinant
+of the unit-diagonal read table is \(-9/64\) by expansion.
+The group generated by the comparisons is unbounded since
+it contains \(f_1^2 f_2^2=-J_1J_2=\operatorname{diag}(1/2,2)\).
+
+Conversely, positivity in the ambient algebra leaves room
+for a nonflat comparison. Take complex circle gains
+\(c_{01}=c_{02}=e^{i\pi/6}\), \(c_{12}=-1\), inverse gains on
+reversed edges and \(c_{ii}=1\). The triangle product is
+\(-1\), and replacing \(c_{12}\) by the product through \(0\)
+has chord error \(2\). The real reads on \(01,02,12\) are
+\(\sqrt3/2,\sqrt3/2,-1\). The table has eigenvalue \(2\)
+on \((0,1,-1)\). The complementary block in the orthonormal
+basis \((1,0,0),(0,1,1)/\sqrt2\) has eigenvalues
+\((1\pm\sqrt7)/2\). The determinant is \(-3\). The two
+chords through \(0\) have length sum
+\(2\sqrt{2-\sqrt3}=\sqrt6-\sqrt2<2=d(1,2)\).
+\end{example}
+
+\begin{proposition}\label{m1:near-gram}
+For \(m\ge2\) labeled points with normalized diagonal and complete
+fair gains in a unital \(C^*\)-algebra with a state \(\omega\),
+fix one of the labels \(o\) and let
+\(\delta_o=\max_{ij}\|c_{ij}-c_{io}c_{oj}\|\).
+Then the real read matrix satisfies
+\(\lambda_{\min}(G)\ge -(m-2)\delta_o\).
+For an external anchor the bound is \(-(m-1)\delta_o\).
+The single-label matrix is \((1)\).
+\end{proposition}
+\begin{proof}
+Subtract from \(G\) the positive semidefinite Gram matrix of
+the anchored values \(f_i=c_{oi}\) in Proposition~\ref{m1:gram}.
+The symmetric error matrix \(F\) has entries bounded by
+\(\delta_o\), by \(|\omega(a)|\le\|a\|\), and zero diagonal.
+With an internal anchor its row and column vanish. For a
+real vector \(z\), apply \(2|z_i z_j|\le z_i^2+z_j^2\) to
+\(\sum_{ij}|F_{ij}||z_i z_j|\).
+This bounds the quadratic form by the largest absolute row sum
+times \(\|z\|^2\), proving both bounds.
+\end{proof}
+
+\begin{remark}\label{m1:unitarize}
+There is a stronger sufficient input for a family of comparisons
+represented on a finite-dimensional real or complex vector space.
+Assume the subgroup \(\Gamma\) generated by the fair gains is bounded. Its matrix closure is a compact group. In fact the
+inverses lie in the same bounded set, so for a convergent sequence
+a subsequence of inverses converges to an inverse of the limit.
+Average a positive definite inner product over that compact
+group with normalized Haar measure to get a positive definite
+invariant form. Each \(g^*\) for \(g\in\Gamma\) is then the
+adjoint of \(g\) for this form. By real linearity the involution
+agrees with that adjoint on the real span of \(\Gamma\).
+Thus scalar positivity holds on the span, and for flat
+fair gains with real scalar even reads Proposition~\ref{m1:gram}
+applies. A faithful operator realization is understood here.
+\end{remark}
+
+\begin{example}[spherical excess]\label{m1:spherical}
+Let \(a=e_1\), \(b=\cos\epsilon\,e_1+\sin\epsilon\,e_2\) and
+\(p=\cos\epsilon\,e_1+\sin\epsilon\,e_3\) on the unit \(2\)-sphere,
+\(0<\epsilon\le\pi/2\). The Gram determinants of
+\((a,b,e_3)\) and \((a,b,p)\) are \(\sin^2\epsilon\) and
+\(\sin^4\epsilon\), by squaring the corresponding column
+determinants. In oriented dimension three the Hodge star
+identifies unit plane bivectors with normal directions. In dimension two the star of a \(2\)-form is a
+scalar and two independent directions have no common nonzero
+normal in the plane. In dimensions above three the star of a
+bivector has degree greater than one.
+The angle at \(a\) is \(\pi/2\). Writing \(c=\cos\epsilon\),
+the cosine of the angle \(\beta\) at each of \(b,p\) is
+\(c/\sqrt{1+c^2}\) by projecting the other two vertices
+orthogonally to the tangent plane. Hence
+\(\tan(\beta-\pi/4)=(1-c)/(1+c)=\tan^2(\epsilon/2)\),
+with the endpoint \(c=0\) obtained directly at \(\beta=\pi/2\).
+Girard's theorem gives area equal to the spherical excess,
+here
+\[
+ \Omega=\pi/2+2\beta-\pi=2\arctan(\tan^2(\epsilon/2))
+        =\epsilon^2/2+O(\epsilon^4)>0 .
+\]
+Taylor expansion at \(0\) gives the leading term. The exact
+formula is compatible with Theorem~\ref{thm:disk}.
+The third side has cosine \(c^2\), so equality of the three
+side lengths in this range occurs only at \(\epsilon=\pi/2\).
+An affine Euclidean triangle has zero excess.
+\end{example}
+
+\begin{remark}[Gram phases and order]\label{m1:phase}
+For unit vectors \(\psi_i\) in a complex Hilbert space use
+\(K_{ij}=\langle\psi_i,\psi_j\rangle\), antilinear in the first
+slot. On the graph of nonzero overlaps the gains
+\(g_{ij}=K_{ij}/|K_{ij}|\) reverse by conjugation. Rephasing
+the vectors gives the vertex gauge law. For
+\(P_i=\psi_i\psi_i^\dagger\) the trace of \(P_1P_2P_3\) is
+\(K_{12}K_{23}K_{31}\) by rank-one multiplication. Its phase
+is the triangle holonomy in our product order. For the octant
+\(e_3,e_1,e_2\) use
+\((1,0)^{\mathsf T},(1,1)^{\mathsf T}/\sqrt2,
+(1,i)^{\mathsf T}/\sqrt2\), whose overlap product is \((1+i)/4\).
+Replacing \(e_2\) by \(-e_2\) conjugates this value.
+The phase of the returned state for horizontal transport is the
+inverse phase, as in Paper~II's proposition on the Hopf fibre and
+its holonomy \cite{Companion,MS93}. The octant has solid angle
+\(\pi/2\). The three Bloch overlap magnitudes are the same for
+both orientations, so squared moduli alone lose this datum.
+Full Gram reconstruction concerns reindexing or reading the
+table. For noncommuting transports, consider the quarter-turns
+\(R_x,R_y\) about the positive \(x,y\) axes give \(R_xR_y e_3=e_1\) and
+\(R_yR_x e_3=-e_2\) by the right-hand rule.
+Also \(P_0 P_+\ne P_+P_0\) for the rank-one projections onto
+\((1,0)^{\mathsf T}\) and \((1,1)^{\mathsf T}/\sqrt2\).
+\end{remark}
+
+\begin{example}[overlap data and contextuality]\label{m1:overlap-boundaries}
+For two unit vectors, an inner product of \(1\) is equivalent
+to equality, since their squared difference is
+\(2-2\operatorname{Re}K_{ij}\). For
+\(\psi(z)=(\sqrt{1-t},\sqrt t\,z)\), \(0\le t\le1\),
+\(|z|=1\), the overlap with \(\psi(w)\) is
+\(1-t+t\bar z w\). The endpoints remain valid by direct
+substitution.
+Global Gram realization is an issue about one vector family.
+An obstruction to assigning common signs to overlapping
+commuting operator contexts can occur even with legitimate
+matrices, as in the Peres--Mermin square \cite{m1:Mermin}.
+With \(X,Y,Z\) the Pauli matrices and \(I\) the
+identity, take
+\[
+ \begin{pmatrix}
+ X\otimes I&I\otimes X&X\otimes X\\
+ I\otimes Y&Y\otimes I&Y\otimes Y\\
+ X\otimes Y&Y\otimes X&Z\otimes Z
+ \end{pmatrix}.
+\]
+The rows and columns are commuting triples. The product in
+each row and in the first two columns is \(I\otimes I\), and
+in the last column it is \(-I\otimes I\). Indeed the first
+two entries multiply to the third except in the last column,
+where \(XY=iZ\) gives its negative. Since the first two entries
+commute and square to identity, the third commutes with them.
+An assignment of signs with these products would multiply the
+six context products to \(-1\), whereas each assigned sign
+occurs twice and the product is \(1\).
+\end{example}
+
+\begin{example}[sequential instruments]\label{m1:sequential}
+Write \(P_1=I-P_0\) and \(X=\bigl(\begin{smallmatrix}0&1\\1&0
+\end{smallmatrix}\bigr)\). The two Kraus families \(P_b\) and
+\(XP_b\), \(b=0,1\), have the same effects \(P_b\) because \(X\)
+is unitary. With initial state \(P_0\), branch \(0\) is \(P_0\)
+in the first instrument and \(P_1\) in the second. The second
+effect \(P_1\) therefore gives joint weights
+\(\operatorname{Tr}(P_0P_1)=0\) and
+\(\operatorname{Tr}(P_1^2)=1\).
+\end{example}
+
+\begin{remark}[how Part~0 connects to the rest]\label{m1:links}
+(i) Proposition~\ref{m1:algebra} is the algebraic content of the sagitta: for $u=y\bar x$ on $S^3$ it gives the exact split of
+Proposition~\ref{prop:split} (where $v(x,y)=1-\re(y\bar x)$), and the sagitta sums of Theorem~\ref{thm:sagitta} add up the quantity $v=1-S$ of
+\eqref{m1:chord-eq}; the Chebyshev form \eqref{m1:cheb-eq} is the algebraic form of the geodesic recurrence of
+Theorem~\ref{thm:recur}.  (ii) The cycle holonomies of Theorem~\ref{m1:gauge} and the chord factorisation of
+Remark~\ref{m1:stokes-link} are the graph form of the finite Stokes theorem (Theorem~\ref{thm:stokes}) and of its continuum comb
+order (Lemma~\ref{lem:comb}); an $\SU(2)$-cochain of Section~\ref{sec:stokes} is a gain assignment (Definition~\ref{m1:gains}) on the
+$1$-skeleton, with the inversion convention of Remark~\ref{m1:stokes-link}.  (iii) The Gram statements of Propositions~\ref{m1:gram}, \ref{m1:distance} and \ref{m1:near-gram} are
+the finite counterparts of the positive semidefiniteness and rank in Theorems~\ref{thm:main} and \ref{thm:round}, and of the four-point
+Gram test of Proposition~\ref{prop:onesidedpos}(ii); Example~\ref{m1:negative-gram} shows why such a test is needed as an input.
+\end{remark}
+
+\setcounter{section}{1}
+
+\paperpart{part:axiom}{The axiom and its classification}
 
 \section{Comparison structures}\label{sec:def}
 
@@ -1549,7 +2514,8 @@ non-constancy is a numerical, not an interval-certified, statement.
 \end{remark}
 
 
-\part*{Part II. The calculus of minimal arcs}
+% ---- insertion point: Part "Beyond the axiom" (modules m2, m3, d4)
+\paperpart{part:arc}{The calculus of minimal arcs}
 
 \section{Minimal arcs and the geodesic recurrence}\label{sec:recur}
 
@@ -2408,7 +3374,7 @@ $\Ad(N)\xi=N\xi\bar N/\lvert N\rvert^2$ is rational; products of rational rotati
 holonomy is $\prod N_{qp}/\prod\lvert N_{qp}\rvert$.  (iii) is the second formula of Theorem~\ref{thm:triangle}.
 \end{proof}
 
-Theorem~\ref{thm:rational} is the exact counterpart of the floating-point statements of Part~II: on rational data
+Theorem~\ref{thm:rational} is the exact counterpart of the floating-point statements of Part~\ref{part:arc}: on rational data
 the arc calculus, including curvature, can be carried out in exact arithmetic, and the only irrational
 quantities are the square roots that normalise half-displacements, which cancel under $\Ad$.
 
@@ -2428,6 +3394,10 @@ With $E=\Cay(\cdot/2)$ in Theorem~\ref{thm:ftc}(i), discrete integration of a ra
 exact over $\Q$; this is the Cayley-transform method of \cite{DLP,Iserles01}, whose orders (one for left tags,
 two for midpoint tags) we confirmed numerically.
 
+% ---- insertion point: sections of the arc calculus from modules m4 (phase synthesis, rational atlas) and m5 (arc body, tropical limit)
+% ---- insertion point: Part "Arithmetic and holonomy" (module m6)
+\paperpart{part:final}{Context, formalisation and open problems}
+
 \section{Relation to known work}\label{sec:known}
 
 \begin{center}
@@ -2436,6 +3406,10 @@ two for midpoint tags) we confirmed numerically.
 \toprule
 Statement & Status\\
 \midrule
+Prop.~\ref{m1:algebra}, Prop.~\ref{m1:chebyshev}, Thm.~\ref{m1:trichotomy} & Elementary; Chebyshev identities classical \cite{m1:DLMF}; the scope statements (Examples~\ref{m1:algebra-boundaries}, \ref{m1:power-boundaries}) not found in the searched scope\\
+Thm.~\ref{m1:chordal}, Prop.~\ref{m1:sharp} & Simplicial vertices: Dirac \cite{m1:Dirac}; exact cycle consistency classical \cite{m1:Zaslavsky,m1:LermanShi,m1:Singer}; the $\varepsilon$-bound and its sharpness not found in the searched scope\\
+Thm.~\ref{m1:gauge}, Prop.~\ref{m1:clique} & Classical in substance (edge-path group \cite{m1:Spanier}, spanning-tree coordinates \cite{Levy10}); the filling estimate elementary\\
+Props.~\ref{m1:gram}, \ref{m1:distance}, \ref{m1:near-gram} & Classical ingredients \cite{m1:Schoenberg,m1:JordanVonNeumann,m1:Grone}; Prop.~\ref{m1:near-gram} elementary\\
 Thm.~\ref{thm:main}, classification by $(\Omega1)$--$(\Omega3)$ & New as a theorem; ingredients classical \cite{Certaine,Gleason52,MZ,Milnor,Knapp}; see Rem.~\ref{rem:dalembert}\\
 Thm.~\ref{thm:noreg}, Cor.~\ref{cor:interference} & Group-level statement not found in the searched scope; Lemmas~\ref{lem:noline}, \ref{lem:circle} not claimed new (possible precursors \cite{Kuczma64,Sharkovskii73}, texts not obtained); Lemma~\ref{lem:elliptic} standard; Cor.~\ref{cor:interference} follows from \cite{Davison08} once compactness is known\\
 Thm.~\ref{thm:parsimony} & Proof uses \cite{PW,Folland}\\
@@ -2566,7 +3540,7 @@ Theorem~\ref{thm:triangle} are classical spherical trigonometry \cite{Todhunter}
 
 \section{Formalisation status}\label{sec:lean}
 
-Three units of Part~I are machine-checked in the Lean~4 library \cite{Tru}; they were merged into branch \texttt{dev} after the
+Three units of Part~\ref{part:axiom} are machine-checked in the Lean~4 library \cite{Tru}; they were merged into branch \texttt{dev} after the
 commit cited in the bibliography, through the pull requests named below (statements read at the merge commits).
 \begin{enumerate}[label=(\alph*),leftmargin=2em]\sloppy
 \item \emph{Rank-one classification} (pull request 31765): \texttt{D5.\allowbreak S3.\allowbreak Quantum.\allowbreak Algebra.\allowbreak Comparison.\allowbreak RoundTripClassification.\allowbreak comparison\_\allowbreak classification}.
@@ -2581,9 +3555,10 @@ Section~\ref{sec:ready} (Lemmas~\ref{lem:noline}, \ref{lem:circle}).
 the item F7 of Section~\ref{sec:ready} (the group-theoretic core of Theorem~\ref{thm:operational}).
 \end{enumerate}
 No \texttt{sorry} occurs in the three files.  These three units are all that is machine-checked.  Not formalised are: the topological
-steps of Part~I (Lemma~\ref{lem:lie}, the Gleason--Montgomery--Zippin theorem, the regularity-free argument as a whole), the remaining results
+steps of Part~\ref{part:axiom} (Lemma~\ref{lem:lie}, the Gleason--Montgomery--Zippin theorem, the regularity-free argument as a whole), the remaining results
 of Sections~\ref{sec:class}--\ref{sec:geom}, including the roundness theorem (Section~\ref{sec:round}) and the one-sided results
-(Section~\ref{sec:onesided}), and all of Part~II.  A preregistered formalisation of the classification core (Sections~\ref{sec:def}--\ref{sec:class}) is tracked at
+(Section~\ref{sec:onesided}), all of Part~\ref{part:arc}, and Part~\ref{part:alg} as written here (for the library declarations
+that cover parts of it, see Section~\ref{sec:leanlib}).  A preregistered formalisation of the classification core (Sections~\ref{sec:def}--\ref{sec:class}) is tracked at
 \begin{center}\small\url{https://github.com/the-omega-institute/trureturing/issues/31739}.\end{center}
 Earlier, the library already contained, in the file
 \begin{center}\small\texttt{D5/S3/Quantum/Algebra/RankOneInvariantMetric.lean} (line 444),\end{center}
@@ -2596,10 +3571,10 @@ declaration gives $\dim\g\in\{1,3\}$, and with the invariant inner product $\g\c
 were verified at commit \texttt{153b52e} of branch \texttt{dev}.  The Gleason--Montgomery--Zippin theorem is used as a
 black box; a formal statement of Theorem~\ref{thm:main} can avoid it by assuming a Lie group from the start.
 
-All identities and limits of Part~II that are not textbook facts, and the identities of Part~I used there, were
+All identities and limits of Part~\ref{part:arc} that are not textbook facts, and the identities of Part~\ref{part:axiom} used there, were
 checked numerically on random or explicit inputs by the accompanying script \texttt{check\_arc\_calculus.py} (numpy and the
-standard library; 154 checks), which also runs the five accompanying scripts in the subdirectory \texttt{checks/}; everything runs from
-the directory of this paper.  These include the recurrence and its Chebyshev form, the residual expansion of
+standard library; 157 checks, eight of them for Part~\ref{part:alg}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present six, one of them for Part~\ref{part:alg}); everything runs
+from the directory of this paper.  These include the recurrence and its Chebyshev form, the residual expansion of
 Theorem~\ref{thm:consist}, the inequality of Theorem~\ref{thm:action}, the split and the Brownian limits of
 Theorem~\ref{thm:sagitta} (simulated, $\tfrac32T$ to two decimals), the transport formula of
 Proposition~\ref{prop:LCarc} against the explicit transport on the round sphere, all formulas of
@@ -2722,6 +3697,46 @@ $\mathbb E\,c(\psi_0,\psi_t)=e^{-3Dt/4}$ by Proposition~\ref{prop:clt}, the stan
 isotropic rotational diffusion, and sagitta sums over $[0,t]$ tend to $\tfrac34Dt$.  We cite no measurement of this decay.
 \end{enumerate}
 
+\subsection{Library declarations related to Part~\ref{part:alg}}\label{sec:leanlib}
+The following declarations of the library \cite{Tru} were located by name and their statements read (local clone at commit
+\texttt{9d18ab6}); no \texttt{sorry} occurs in the files of the first six.  They are results of the library, not formalisations
+carried out for this paper, and several are narrower than the corresponding statements of Part~\ref{part:alg}, as indicated.
+{\small\raggedright
+\begin{itemize}[leftmargin=1.5em]
+\item Proposition~\ref{m1:algebra}, matrix slice (skew-adjoint unitary squares to $-1$):
+\texttt{D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.lean},
+\texttt{square\_eq\_neg\_one\_of\_skewAdjoint\_unitary}; nearby \texttt{relativeComplexStructure\_square}.
+\item Proposition~\ref{m1:time}: \texttt{D5/S3/Analytic/Chebyshev/PositivityThreshold.lean},
+\texttt{forall\_pos\_eval\_T\_iff\_one\_le} and \texttt{eval\_T\_cos\_floor\_succ\_neg\_and\_nonneg\_before}.
+\item Remark~\ref{m1:spin}, generator slice: \texttt{D5/S3/Analytic/ReflectedSpectrum/EllipticHyperbolicReflectionTrichotomy.lean},
+\texttt{elliptic\_hyperbolic\_reflection\_trichotomy} (its middle generator is the zero matrix).
+\item Theorem~\ref{m1:chordal}: \texttt{D5/S3/Combinatorics/Graph/Chordal/GainPotential.lean},
+\texttt{SimpleGraph.IsChordal.exists\_gain\_potential} (exact case) and \texttt{GainPotentialStability.lean},
+\texttt{SimpleGraph.IsChordal.exists\_approximate\_gain\_potential} (the bound $(|V|-2)\varepsilon$ with truncated subtraction, for a metric
+invariant on both sides); simplicial vertex: \texttt{Dirac.lean}, \texttt{SimpleGraph.IsChordal.exists\_isSimplicial}.
+\item Corollary~\ref{m1:anchored}: \texttt{D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.lean},
+\texttt{anchored\_phase\_classification} (circle-valued links).
+\item Chordal positive semidefinite completion \cite{m1:Grone}: \texttt{D5/S3/QuadraticForms/ChordalPsdCompletion.lean},
+\texttt{exists\_posSemidef\_completion}; rank-bounded version \texttt{RankBoundedChordalPsdCompletion.lean},
+\texttt{exists\_posSemidef\_completion\_rank\_le}.
+\item Propositions~\ref{m1:gram}, \ref{m1:distance}: \texttt{D5/S3/Quantum/Measurement/AntidistinguishabilityGram.lean}, \texttt{gramPsd};
+\texttt{D5/S3/Weil/Probability/FiniteGaussianSchoenberg.lean}, \texttt{gram\_distance\_conditionally\_negative};
+\texttt{D5/S3/Quantum/Algebra/GramUnitaryExtension.lean}, \texttt{exists\_unitary\_mul\_eq\_of\_conjTranspose\_mul\_eq};
+parallelogram law: \texttt{D5/S3/QuantumContext/ParallelogramNormLaw.lean}, \texttt{inner\_product\_norm\_parallelogram\_law}.
+\item Proposition~\ref{m1:readout-identities}: \texttt{D5/S3/QuantumBounds/LagrangeGramIdentity.lean}, \texttt{lagrange\_gram\_identity};
+\texttt{D5/S3/Quantum/Algebra/CommonPhasePolynomial.lean}, \texttt{complete\_common\_phase\_polynomial\_theorem}.
+\item Example~\ref{m1:overlap-boundaries}: \texttt{D5/S3/Quantum/PureState/UnitGramIndistinguishability.lean},
+\texttt{unit\_gram\_overlap\_characterization}; \texttt{D5/S3/Quantum/Information/BargmannImaginaryMaximizers.lean},
+\texttt{Latitude.latitude\_dot}; a larger contextuality statement: \texttt{D5/S3/Quantum/Contextuality/LinearDoilyNegativeLineParity.lean},
+\texttt{result}.
+\item Remark~\ref{m1:phase}: \texttt{D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.lean}, \texttt{triple\_bargmann\_bloch}
+and \texttt{explicit\_qubit\_orientation}; \texttt{BargmannImaginaryMaximizers.lean}, \texttt{bargmann\_path\_product}.
+\item Example~\ref{m1:sequential}: \texttt{D5/S3/Quantum/Measurement/StaticEffectSequentialSeparation.lean},
+\texttt{same\_effects\_different\_two\_step\_joint\_law}.
+\end{itemize}}
+No declaration was found for the gauge quotient of Theorem~\ref{m1:gauge}, the filling estimate of Proposition~\ref{m1:clique}, the
+norm trichotomy of Theorem~\ref{m1:trichotomy} or the sharpness results of Proposition~\ref{m1:sharp}.
+
 \section{What remains open}\label{sec:open}
 
 \begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2.6em]
@@ -2761,6 +3776,10 @@ yes (Proposition~\ref{prop:converse}); without a rank condition, no (the tripod 
 For smooth Jordan curves the answer is yes provided Morrey's minimiser is $C^3$ up to the boundary and immersed inside, as the
 regularity theory summarised in \cite{White16} states (Remark~\ref{rem:converse}(ii)); we have not checked the original statements
 \cite{Morrey48,Osserman70,Gulliver73,Hildebrandt69,HH70}, and for piecewise $C^3$ curves the corners need a separate argument.
+\item \emph{Sparse comparisons.}  (a) The optimal universal coefficient in Theorem~\ref{m1:chordal} for groups with a bi-invariant metric
+is $1$ for three vertices, at most $n-3$ for $n\ge4$ vertices, and $(n-2)/n$ for the real line (Proposition~\ref{m1:sharp}); what is it in
+general?  (b) The continuum programme of Remark~\ref{m1:continuum-programme}: refinement, compactness modulo gauge, and identification of
+normalised face holonomies with curvature.
 \end{enumerate}
 
 \section*{Use of AI tools}
@@ -2916,6 +3935,19 @@ The authors used AI tools, namely Claude Fable 5.2 and Claude Opus 5.5 (via Clau
 \bibitem{Weinstein74} A.~Weinstein, On the volume of manifolds all of whose geodesics are closed, \emph{J. Differential Geom.} \textbf{9} (1974), 513--517.
 \bibitem{Yang80} C.~T.~Yang, Odd-dimensional Wiedersehen manifolds are spheres, \emph{J. Differential Geom.} \textbf{15} (1980), 91--96.
 \bibitem{McKay16} B.~McKay, Summary of progress on the Blaschke conjecture, arXiv:1309.1326v5, 2016.
+% Part 0 references: data of all eleven entries checked via Crossref (journal items), arXiv API (Duncan-Kileel) and the DLMF page
+% (2026-11-20); Spanier is a standard textbook.
+\bibitem{m1:Dirac} G.~A.~Dirac, On rigid circuit graphs, \emph{Abh. Math. Sem. Univ. Hamburg} \textbf{25} (1961), 71--76.
+\bibitem{m1:DLMF} F.~W.~J.~Olver et al.\ (eds.), \emph{NIST Digital Library of Mathematical Functions}, \S18.5(i), equations 18.5.1--18.5.2.
+\bibitem{m1:Grone} R.~Grone, C.~R.~Johnson, E.~M.~S\'a, H.~Wolkowicz, Positive definite completions of partial Hermitian matrices, \emph{Linear Algebra Appl.} \textbf{58} (1984), 109--124.
+\bibitem{m1:JordanVonNeumann} P.~Jordan, J.~von Neumann, On inner products in linear, metric spaces, \emph{Ann. of Math. (2)} \textbf{36} (1935), 719--723.
+\bibitem{m1:LermanShi} G.~Lerman, Y.~Shi, Robust group synchronization via cycle-edge message passing, \emph{Found. Comput. Math.} \textbf{22} (2022), 1665--1741, arXiv:1912.11347.
+\bibitem{m1:Schoenberg} I.~J.~Schoenberg, Remarks to Maurice Fr\'echet's article {Sur la d\'efinition axiomatique d'une classe d'espace distanci\'es vectoriellement applicable sur l'espace de Hilbert}, \emph{Ann. of Math. (2)} \textbf{36} (1935), 724--732.
+\bibitem{m1:Singer} A.~Singer, Angular synchronization by eigenvectors and semidefinite programming, \emph{Appl. Comput. Harmon. Anal.} \textbf{30} (2011), 20--36, arXiv:0905.3174.
+\bibitem{m1:Spanier} E.~H.~Spanier, \emph{Algebraic Topology}, McGraw--Hill, New York, 1966, Chapter 3.
+\bibitem{m1:Zaslavsky} T.~Zaslavsky, Biased graphs. I. Bias, balance, and gains, \emph{J. Combin. Theory Ser. B} \textbf{47} (1989), 32--52.
+\bibitem{m1:DuncanKileel} A.~L.~Duncan, J.~Kileel, Higher-order group synchronization, arXiv:2505.21932v2 (2025).
+\bibitem{m1:Mermin} N.~D.~Mermin, Simple unified form for the major no-hidden-variables theorems, \emph{Phys. Rev. Lett.} \textbf{65} (1990), 3373--3376.
 \end{thebibliography}
 
 \end{document}
