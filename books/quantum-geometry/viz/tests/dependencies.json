@@ -2802,6 +2802,8 @@
     ],
     "axiom-omega-dimension-closure-sandbox.test.mjs": [
       "@citations",
+      "books/quantum-geometry/en/ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md",
+      "books/quantum-geometry/zh/ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md",
       "books/quantum-geometry/book.toml",
       "@registry-entry",
       "package-lock.json",

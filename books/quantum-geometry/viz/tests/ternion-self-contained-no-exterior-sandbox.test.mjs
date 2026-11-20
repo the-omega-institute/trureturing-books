@@ -46,7 +46,12 @@ const GIDS = [
   'D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle',
   'D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization',
   'D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel',
-  'D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor'
+  'D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor',
+  'D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul',
+  'D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.reflectionSeq_eq_pow',
+  'D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.kappa_reflectionSeq_add',
+  'D5/S3/Quantum/AURICOmega/QuaternionTwoPointHomogeneity.kappa_mul_mul',
+  'D5/S3/Quantum/AURICOmega/QuaternionTwoPointHomogeneity.exists_mul_mul_eq_of_kappa_eq'
 ];
 const CODA_GID = 'D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package';
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
@@ -249,7 +254,7 @@ for (const [file, src] of Object.entries(sources)) {
 }
 check('reserved identifiers are absent from the suite and registry entry', [suite, entryText].every((src) => !identifiers.test(src) && !shortAcronym.test(src) && !cjkTerms.test(src) && !hangul.test(src)));
 check(
-  'registration: §39.4, live, five cards and the twelve GIDs in order',
+  'registration: §39.4, live, five cards and the cited GIDs in order',
   !!entry &&
     entry.chapter === 39 &&
     entry.section === SECTION &&
@@ -470,6 +475,34 @@ function verifyMath(m, label) {
 }
 /** The instances the evidence panel names, against constructions written here. */
 function verifyInstances(m, I, label) {
+  {
+    // the heap steps against the powers A (A⁻¹B)ⁿ computed here, and the readings n steps apart
+    const ab = qm(qinvM(EX_A), EX_B),
+      kq = (a, b) => (1 + dot(a, b)) / 2,
+      xs = [EX_A, EX_B];
+    while (xs.length < 7) xs.push(qm(qm(xs[xs.length - 1], qinvM(xs[xs.length - 2])), xs[xs.length - 1]));
+    let pw = [1, 0, 0, 0],
+      pow = 0,
+      shift = 0;
+    for (const x of xs) { pow = Math.max(pow, Math.hypot(...x.map((v, i) => v - qm(EX_A, pw)[i]))); pw = qm(pw, ab); }
+    for (let a = 0; a < xs.length; a++) for (let n = 0; a + n < xs.length; n++) shift = Math.max(shift, Math.abs(kq(xs[a], xs[a + n]) - kq(EX_A, xs[n])));
+    check(label + ' reflection sequence: xₙ = A (A⁻¹B)ⁿ for n ≤ 6 and κ(xₘ, xₘ₊ₙ) = κ(A, xₙ)',
+      I.reflection.steps === 6 && I.reflection.powGap < 1e-12 && pow < 1e-12 && I.reflection.shiftGap < 1e-12 && shift < 1e-12 && near(kq(xs[3], EX_A), 0, 1e-12));
+    // two-point homogeneity: apply the page's p, q here; readings equal 0.75; invariance under random p, q made here
+    const ok = I.twoPoint.carries.every((c, k) => {
+      const [x2, y2] = k === 0 ? [EX_B, HEAP] : [EX_B, EX_A];
+      const img = (z) => qm(qm(c.p, z), c.q);
+      const d = (u, v) => Math.hypot(...u.map((t, i) => t - v[i]));
+      return near(Math.hypot(...c.p), 1, 1e-12) && near(Math.hypot(...c.q), 1, 1e-12) && d(img(EX_A), x2) < 1e-12 && d(img(EX_B), y2) < 1e-12 && c.kappa.every((v) => near(v, 0.75, 1e-12));
+    });
+    let seed = 11,
+      worst = 0;
+    const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647) * 2 - 1,
+      unit4 = () => { const q = [rnd(), rnd(), rnd(), rnd()], n = Math.hypot(...q); return q.map((v) => v / n); };
+    for (let k = 0; k < 40; k++) { const p = unit4(), q = unit4(); worst = Math.max(worst, Math.abs(kq(qm(qm(p, EX_A), q), qm(qm(p, EX_B), q)) - kq(EX_A, EX_B))); }
+    check(label + ' two-point homogeneity: p A q = x′, p B q = y′ for (B, [B, A, B]) and (B, A); κ(p x q, p y q) = κ(x, y)',
+      ok && I.twoPoint.invariance < 1e-12 && worst < 1e-12);
+  }
   // the octahedral net of S²: vertices ±eᵢ, faces the octants, edges the orthogonal pairs
   const V = [];
   for (let i = 0; i < 3; i++) for (const s of [1, -1]) V.push([0, 1, 2].map((j) => (j === i ? s : 0)));
