@@ -49,7 +49,7 @@ $$
    W_{\mathrm{eff}}(p_1, p_2) \;=\; \min\!\Bigl(W_{p_1 p_2},\; \min_{b \in \mathrm{Interior}}\bigl(W_{p_1 b} + W_{b p_2}\bigr)\Bigr)
    $$
 
-   （其中 $W_{p_1 b}$ 表示 $k$ 步局部闭包内从 $p_1$ 弛豫至内部点 $b$ 的有效距离）。在 $\Delta\mathcal{T}_\epsilon$ 的三维空间里看过去，把中间脊点 $\mathbf{B}$ 与内部非瓶颈自由度彻底隐去之后，跃迁轨迹不再沿着鼓出的品红球壳表面绕行，而是沿着切过圆弧体肚子的**青色平直内割弦面 $\triangle_{\mathrm{flat}} ABC$**（连同对角直割扇面 $OAC$），顺着欧氏直线割弦 $\overline{AC}$ 一剑穿心！该穿底割弦的欧氏长度精确等于 $L_{\mathrm{tunnel}}(\epsilon) = \lVert\mathbf{A}(\epsilon) - \mathbf{C}(\epsilon)\rVert = \sqrt{2}\sin\epsilon$；在弦中点 $\mathbf{M}(\epsilon) = \frac{1}{2}\bigl(\mathbf{A}(\epsilon) + \mathbf{C}(\epsilon)\bigr) = \bigl(\frac{1}{2}\sin\epsilon, \cos\epsilon, \frac{1}{2}\sin\epsilon\bigr)$ 处，轨迹潜入单位球壳内部（$\lVert\mathbf{M}(\epsilon)\rVert < 1$）的最大径向体深度为
+   （其中 $W_{p_1 b}$ 表示 $k$ 步局部闭包内从 $p_1$ 弛豫至内部点 $b$ 的有效距离）。在 $\Delta\mathcal{T}_\epsilon$ 的三维空间里看过去，把中间脊点 $\mathbf{B}$ 与内部非瓶颈自由度彻底隐去之后（消元只给出 $\min(W_{AC}, W_{AB} + W_{BC})$：边权取球面距离时，结果至少是顶盖测地长 $\arccos(\cos^2\epsilon)$；要得到下面的欧氏弦长，须另行允许以弦长计价的边 $AC$，`手工推导`），跃迁轨迹不再沿着鼓出的品红球壳表面绕行，而是沿着切过圆弧体肚子的**青色平直内割弦面 $\triangle_{\mathrm{flat}} ABC$**（连同对角直割扇面 $OAC$），顺着欧氏直线割弦 $\overline{AC}$ 一剑穿心！该穿底割弦的欧氏长度精确等于 $L_{\mathrm{tunnel}}(\epsilon) = \lVert\mathbf{A}(\epsilon) - \mathbf{C}(\epsilon)\rVert = \sqrt{2}\sin\epsilon$；在弦中点 $\mathbf{M}(\epsilon) = \frac{1}{2}\bigl(\mathbf{A}(\epsilon) + \mathbf{C}(\epsilon)\bigr) = \bigl(\frac{1}{2}\sin\epsilon, \cos\epsilon, \frac{1}{2}\sin\epsilon\bigr)$ 处，轨迹潜入单位球壳内部（$\lVert\mathbf{M}(\epsilon)\rVert < 1$）的最大径向体深度为
 
    $$
    \Delta r_{\mathrm{bulk}}(\epsilon) \;=\; 1 - \sqrt{\frac{1 + \cos^2\epsilon}{2}} \;=\; 1 - \sqrt{1 - \frac{1}{2}\sin^2\epsilon} \;=\; \frac{\epsilon^2}{4} + O(\epsilon^4) \;>\; 0.
