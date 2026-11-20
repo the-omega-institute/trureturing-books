@@ -140,7 +140,7 @@
 
 | 编号 | 中间桥梁假设（与附录 E §E.7 一一对应） | 分类 | 作用的推论链与被排除的极小反例 | 核心 `LEAN ✓` / 外部文献锚点 |
 | :--- | :--- | :---: | :--- | :--- |
-| **`H1`** | 比较核商化 $X/{\sim_{\mathrm{CMP}}}$（并保留 $\operatorname{char}\neq 2$，即 $2 \in \mathcal{A}^\times$） | `T1` | 消除不可测冗余核导出商外延性；排除非商集重名对象与特征 $2$ 奇偶坍缩反例 | `partition_inseparable_iff_kernel`、`future_word_orthogonal_residual`（`LEAN ✓`）；Yoneda（1954） |
+| **`H1`** | 比较核商化 $X/{\sim_{\mathrm{CMP}}}$（并保留 $2 \in \mathcal{A}^\times$；仅有 $\operatorname{char}\neq 2$ 不够，$\mathbb{Z}/6\mathbb{Z}$ 中 $2\cdot 3 = 0$，`手工推导`） | `T1` | 消除不可测冗余核导出商外延性；排除非商集重名对象与特征 $2$ 奇偶坍缩反例 | `partition_inseparable_iff_kernel`、`future_word_orthogonal_residual`（`LEAN ✓`）；Yoneda（1954） |
 | **`H2`** | 正自配对 $S(x,x)=+1$、简单二阶椭圆双向量 $(x\wedge y)^2=-\|x\wedge y\|^2\mathbf{1}$ 与 $n$ 点格拉姆半正定 $G \succeq 0$ | `T3` + 第 1 层 | 第 0 层升第 1 层并解锁球面三面角角超 $\Omega(\epsilon)>0$（对比切平面 $\kappa=0$ 与双曲 $\kappa<0$ 分支）；排除 $S=-1$、对偶数 $A^2=0$、分裂复数 $j^2=+1$、$\mathcal{Cl}_{4,0}$ 四秩双向量与违背三角不等式的伪表 $\det S=-3<0$ | `lagrange_gram_identity`、`tetra_defects_incidence_repair_and_exactness`（`LEAN ✓`）；Schoenberg（1935） |
 | **`H3`** | 平行四边形极化对称性与度量柯西完备化 | `T2` + `T1` | 由范数唯一恢复内积并填平有理缝隙；排除 $\ell^p$（$p\neq 2$）范数空间与未完备内积前希尔伯特空间 $\mathbb{Q}^n$、$\mathbb{Q}[i]^n$ | `inner_product_norm_parallelogram_law`（`LEAN ✓`）；Jordan & von Neumann（1935） |
 | **`H4`** | 正交余量不竭 $S_n^\perp \neq \bot$、$R^2=-I$ 偶数实维/复载体与奥斯特洛夫斯基估值选择（$\mathbb{R}$ 对 $\mathbb{Q}_p$） | `T2`/`T4` + `T3` | 供给无限后继步与复结构载体并选定阿基米德或 $p$ 进完备分支；排除有限维封顶 $\mathbb{C}^N$、奇数实维空间 $\mathbb{R}^{2m+1}$（注：固定维 $\Pi_N:S^D\setminus\{N\}\xrightarrow{\sim}\mathbb{R}^D$ 与三维 $K_N$ 桁架刚性不自动免除 $\dim\mathcal{H}=\infty$） | `finite_layer_projection_escape`、`prime_axis_escape`、`square_eq_neg_one_of_skewAdjoint_unitary`（`LEAN ✓`）；Ostrowski（1918） |

@@ -78,7 +78,7 @@ $$
 **对角线逃出清单。** 逐行读出对角线上的那一位并翻转，拼成品红色的 $d$；$d$ 与第 $k$ 行在第 $k$ 位不同，所以不在清单里（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) 取 $\operatorname{latent} = \mathrm{id}$、$\operatorname{twist} = \neg$）。右侧的点阵是全部 $2^N$ 个串，与 $d$ 相容的候选每步减半。
 :::
 
-由此，在 Lean 模块 `DiagonalTopologicalEscape` 中，我们迎来了刻画“球内语言必然破裂、概念拓扑被迫升维”的四条核心形式化定理。
+由此，在 Lean 模块 `DiagonalTopologicalEscape` 中，我们迎来了刻画“球内语言必然破裂、概念拓扑被迫加细”的四条核心形式化定理（加细只劈开旧纤维，不必提高维数：本章四点表的例子里，加细前后都是拓扑维数为 $0$ 的有限空间，`手工推导`）。
 
 ::: {.theorem #thm-complete-diagonal-not-continuous title="完备解码目录诱导的相对语义对角线必不连续" lean="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous"}
 设 `Address`、`Coordinate`、`Output` 为类型，其中 `Address` 非空（`[Nonempty Address]`）。给定映射 $\operatorname{twist} : \mathrm{Output} \to \mathrm{Output}$、潜概念读出 $\operatorname{latent} : \operatorname{Concept}\ \mathrm{Address}\ \mathrm{Coordinate}$ 及解码器目录 $\operatorname{decoderCatalog} : \mathrm{Address} \to \mathrm{Coordinate} \to \mathrm{Output}$。若：
@@ -136,7 +136,7 @@ $$
 由等价定理 [`coordinate_inadequate_iff_strict_join_refinement`](lean:D5/S3/ConceptDynamics/ObservationTopology/RedundantCoordinateTopology.coordinate_inadequate_iff_strict_join_refinement)，联合读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)$ 的划分拓扑严格加细 $\operatorname{partitionTopology}(\operatorname{latent})$，当且仅当目标 $g$ 对原潜坐标不充分（$\neg\operatorname{TargetAdequate}(\operatorname{latent}, g)$，即 $\neg\operatorname{Refines}(g, \operatorname{latent})$）。直接代入 [`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective) 给出的不可分解性即得证。完整证明由 Lean 内核检查。
 :::
 
-最后，我们将“不可分解、拓扑不连续、分离亏损非空、并入后拓扑严格升维”这四重结论铸成一条完整的总结算定理。
+最后，我们将“不可分解、拓扑不连续、分离亏损非空、并入后拓扑严格加细”这四重结论（加细不必提高维数，`手工推导`）铸成一条完整的总结算定理。
 
 ::: {.corollary #cor-complete-diagonal-topological-settlement title="完备相对语义对角线的四重拓扑逃逸总结算定理" lean="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement"}
 设 `Address`、`Coordinate`、`Output` 为类型，`Address` 非空，$\operatorname{twist} : \mathrm{Output} \to \mathrm{Output}$ 满足 $\forall o,\; \operatorname{twist}(o) \neq o$，且 $\operatorname{decoderCatalog} : \mathrm{Address} \to \mathrm{Coordinate} \to \mathrm{Output}$ 满射。记 $g = \operatorname{relativeSemanticDiagonal}(\operatorname{twist}, \operatorname{latent}, \operatorname{decoderCatalog})$，则以下四项结论同时成立：
@@ -179,7 +179,7 @@ $$
    $$
 
 2. **验证不连续性与不可分解性**：在离散输出拓扑下，单点集 $\{0\} \subseteq \mathrm{Output}$ 是开集，但它的原像 $g^{-1}(\{0\}) = \{a_2, a_3\}$ 既砍断了旧纤维 $\{a_0, a_1, a_2\}$，又不是 $\tau(\operatorname{latent})$ 中的开集，故 $g$ 不连续，也不可能写成 $h(\operatorname{latent}(a))$。
-3. **验证并入新轴后的严格拓扑加细**：将 $g$ 并入潜坐标形成二维读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)(a) = (\operatorname{latent}(a), g(a))$，四个地址的联合坐标分别为 $a_0 \mapsto (0, 1)$、$a_1 \mapsto (0, 1)$、$a_2 \mapsto (0, 0)$、$a_3 \mapsto (1, 0)$。原先粘成一团的三元盲区纤维 $\{a_0, a_1, a_2\}$ 被当场劈裂为 $\{a_0, a_1\}$ 与 $\{a_2\}$ 两块正交子纤维，观测拓扑从 $2$ 个非空原子开集严格升维为 $3$ 个非空原子开集！
+3. **验证并入新轴后的严格拓扑加细**：将 $g$ 并入潜坐标形成二维读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)(a) = (\operatorname{latent}(a), g(a))$，四个地址的联合坐标分别为 $a_0 \mapsto (0, 1)$、$a_1 \mapsto (0, 1)$、$a_2 \mapsto (0, 0)$、$a_3 \mapsto (1, 0)$。原先粘成一团的三元盲区纤维 $\{a_0, a_1, a_2\}$ 被当场劈裂为 $\{a_0, a_1\}$ 与 $\{a_2\}$ 两块正交子纤维，观测拓扑从 $2$ 个非空原子开集严格加细为 $3$ 个非空原子开集！加细劈开的是纤维，维数并不升高：前后两种划分拓扑都落在同一个四点集上，拓扑维数都是 $0$（`手工推导`）。
 :::
 
 ::: {.viz src="sphere-escape" preset="split" height="500"}
