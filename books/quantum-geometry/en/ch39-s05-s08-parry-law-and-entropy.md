@@ -969,6 +969,8 @@ $$
 
 On the supported occupation basis, $(MM^\dagger)_{xx'}$ is $\sqrt{\mu(x)\mu(x')}$ times $\mathbb E_{y\sim\nu}[(-1)^{z^\mathsf{T}Ay}]$. Independence factors the expectation over $y_j$. Each coordinate with $(A^\mathsf{T}z)_j=1$ contributes $1-2q_j$, and every other coordinate contributes $1$. The trace of the square of a Hermitian matrix is the sum of the squared moduli of its entries. Summing over $x,x'$ gives the formula. Conjugating by the diagonal unitary of retained phases and inserting zero rows and columns for the other occupations preserve the trace. The empty product equals $1$, so the purity is $1$ when $A$ is zero.
 
+The [purity formula for the ordinary occupation marginal](lean:D5/S3/Quantum/Fermionic/WeightedSlaterPairCut.orderedMarginal_purity) allows arbitrary complex endpoint amplitudes, including zeros. When their squared moduli are normalized endpoint probabilities, the retained mass autocorrelations give the distribution of $z$.
+
 When one retained pair alternates with one discarded pair, $A=(1)$. Adding the terms for $z=0$ and $z=1$ gives purity $1-8p(1-p)q(1-q)$. For instance, $p=q=1/4$ gives $23/32$, while $p=q=1/2$ gives $1/2$.
 
 **Purity excess and the two endpoint laws (written derivation).** Return to the two image spaces of size $d=2^r$ with laws $P,Q$. Write $\Delta_P=\sum_u(P(u)-1/d)^2$ and define $\Delta_Q$ in the same way. Let $m=\min_u P(u)$. Then
