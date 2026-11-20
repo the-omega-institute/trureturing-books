@@ -970,8 +970,9 @@
         L('', ' ')
       );
       $('plotMetaB').textContent = L('L = q̈²/2 · H = P₁Q₂ + P₂²/2 · 切片 Q₂ = 1, P₂ = 0', 'L = q̈²/2 · H = P₁Q₂ + P₂²/2 · slice Q₂ = 1, P₂ = 0');
-      // the top of the range is headroom: the three-row legend sits above E = p²/2, which reaches 2.42 at the edges
-      const g = kit.plot(cb, { x: [-2.2, 2.2], y: [-2.4, 7.6], pad: [34, 14, 12, 22] });
+      // the top of the range is headroom: the three-row legend sits above E = p²/2, which reaches 2.42 at the edges; on the
+      // shortest 118 px strip (84 px plot) 9.6 puts that edge at y ≈ 62 px, so a deeper system-font descent still clears it
+      const g = kit.plot(cb, { x: [-2.2, 2.2], y: [-2.4, 9.6], pad: [34, 14, 12, 22] });
       g.axes({ xTicks: [-2, -1, 0, 1, 2], yTicks: [-2, 0, 2, 4, 6], xLabel: 'P₁' });
       g.line(sample(200, (t) => [-2.2 + 4.4 * t, 0]), P.violet, { width: 2 });
       g.line(sample(200, (t) => {
