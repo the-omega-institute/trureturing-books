@@ -87,7 +87,7 @@ $$
 **加边格拉姆舒尔补裕度 $\Delta_{\mathrm{Schur}}(M)$ 与球面相干帽交集走廊 $\Omega_M$ 实验卡（`schur-cap-corridor`）。** 球面舞台展示 $M = 2$ 两顶 $60^\circ$ 相干帽交成的青色透镜走廊 $\Omega_2$（$2.297861\;\mathrm{sr}$）、青色虚线锚点大圆 $\operatorname{span}(\mathbf{v}_1,\mathbf{v}_2)$ 及法向极点 $\mathbf{n}$，琥珀色可拖动候选态 $\mathbf{x}$ 离开锚点平面的品红高度弧 $\delta$ 直接给出舒尔补自由裕度 $\Delta_{\mathrm{Schur}} = 1 - \mathbf{c}_2^\top G_2^{-1}\mathbf{c}_2 = \sin^2\delta \approx 0.178606$（将 $\mathbf{x}$ 拖至虚线大圆上则 $\Delta_{\mathrm{Schur}}$ 与 $\det G_3$ 同步归零；绿色 `LEAN ✓` 对应 `gram_realizability`、`orthogonal_complement_projection_identities`、`finite_layer_projection_escape` 与 `two_anchor_gram_det_formula`）。
 :::
 
-把这两幅几何图像叠合在三维物理空间（[§29.11](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)）上，本书便把 **$M = 3$ 称作三维观察者的“黄金格拉姆窗口”**（`MODEL`：示例参数下的选择，并无最优性判据）！当 $M = 1$ 时只锁住一维步长，方向绕单轴自由打转而毫无转弯记忆；当 $M = 2$ 时双帽交成透镜形二角域，虽能感知单面曲率却尚未定死左右手性法向；唯有推进到 **$M = 3$** 时，三枚不共面历史锚点由 [`three_anchor_gram_det_pos_iff`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff) 首次撑满三维线性无关基（$\det G_3 > 0$，与下一拍候选态 $\mathbf{x}$ 恰构成最小三维静定刚性核 $K_4$），同时三片相干帽在 $S^2$ 上围成一枚饱满舒展的**球面曲边三角弧面域 $\Omega_3$**——既拥有毫不含糊的三维手性自我坐标系，又尚未引入任何 $M \ge 4$ 的冗余跨代切割！
+把这两幅几何图像叠合在三维物理空间（[§29.11](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)）上，本书便把 **$M = 3$ 称作三维观察者的“黄金格拉姆窗口”**（`MODEL`：示例参数下的选择，并无最优性判据）！当 $M = 1$ 时只锁住一维步长，方向绕单轴自由打转而毫无转弯记忆；当 $M = 2$ 时双帽交成透镜形二角域，虽能感知单面曲率却尚未定死左右手性法向；唯有推进到 **$M = 3$** 时，三枚不共面历史锚点由 [`three_anchor_gram_det_pos_iff`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff) 首次撑满三维线性无关基（$\det G_3 > 0$，与下一拍候选态 $\mathbf{x}$ 恰构成最小三维静定刚性核 $K_4$），同时三片相干帽在 $S^2$ 上围成一枚饱满舒展的**球面曲边三角弧面域 $\Omega_3$**——它张成三维坐标基，又尚未引入任何 $M \ge 4$ 的冗余跨代切割；手性却仍未定下：格拉姆阵只在含反射的 $\mathrm{O}(3)$ 下确定三枚锚点的几何，镜像锚组给出同一张格拉姆阵，而且锚点个数本身既不保证走廊非空，也不给出最优的记忆策略（`手工推导`）！
 
 ::: {.viz src="gram-window-consensus-sandbox" preset="golden-triangle-m3" height="520"}
 **三维满秩黄金窗口 $M = 3$ 与球面曲边三角可行域 $\Omega_3$ 实验卡（`golden-triangle-m3`）。** 将窗口锁定在 $M = 3$（相干半角 $\alpha_{\mathrm{coh}} = 60^\circ$）：三枚黄金角螺旋锚点张成满秩三维格拉姆核 $\det G_3 \approx 0.041133 > 0$（绿色 `LEAN ✓` 对应 `three_anchor_gram_det_formula` 与 `three_anchor_gram_det_pos_iff`），三段品红边界小圆弧在单位球面 $S^2$ 上围出宽敞的青色曲边三角走廊 $\lvert\Omega_3\rvert \approx 1.802272\;\mathrm{sr}$（占全球面 $14.3420\%$，琥珀色圆点标出可自由转向的候选态 $\mathbf{x}$），兼得刚性三维定位与充沛转向自由。
@@ -103,7 +103,7 @@ $$
    0 \;\le\; Q_1(\mathbf{x}) \;\le\; Q_2(\mathbf{x}) \;\le\; \dots \;\le\; Q_M(\mathbf{x}) \;\le\; 1 \quad\Longleftrightarrow\quad 1 \;\ge\; \Delta_{\mathrm{Schur}}(1) \;\ge\; \Delta_{\mathrm{Schur}}(2) \;\ge\; \dots \;\ge\; \Delta_{\mathrm{Schur}}(M) \;\ge\; 0.
    $$
 
-2. **球面可行走廊的嵌套萎缩与过约束芝诺—拉普拉斯死锁**：在方向球面 $S^2$ 上，每多保留一枚旧锚点就多落下一次交集裁切，可行域序列严格单调嵌套收缩：
+2. **球面可行走廊的嵌套萎缩与过约束芝诺—拉普拉斯死锁**：在方向球面 $S^2$ 上，每多保留一枚旧锚点就多落下一次交集裁切，可行域序列单调嵌套、只缩不涨，却未必真缩：全部锚点相同时帽面积恒为 $2\pi(1-\cos\alpha_{\mathrm{coh}})$，嵌套可以原地不动（`手工推导`）：
 
    $$
    \Omega_0 = S^2 \;\supseteq\; \Omega_1 \;\supseteq\; \Omega_2 \;\supseteq\; \dots \;\supseteq\; \Omega_M, \qquad 4\pi = \lvert\Omega_0\rvert \;\ge\; \lvert\Omega_1\rvert \;\ge\; \lvert\Omega_2\rvert \;\ge\; \dots \;\ge\; \lvert\Omega_M\rvert \;\ge\; 0.
@@ -115,7 +115,7 @@ $$
 **过约束紧窗 $M = 9$ 挤压与芝诺—拉普拉斯死锁实验卡（`overconstrained-lock-m9`）。** 将格拉姆窗口从 $M = 3$ 连续推深至 $M = 9$：九片黄金角螺旋球面帽层层收紧品红边界，把青色可行走廊从 $1.802272\;\mathrm{sr}$ 猛烈挤压逾三十三倍至狭小针尖 $\lvert\Omega_9\rvert \approx 0.054604\;\mathrm{sr}$（仅占球面 $0.4345\%$，球心投射放大镜同步特写，第十顶帽合拢至 $M = 10$ 即严格触发品红 $\Omega_{10} = \emptyset$、$\lvert\Omega_{10}\rvert = 0$ 死锁，同时对应正交族 $G_M = I_M$ 在 $M \ge 5$ 时的负舒尔补不可实现相）；绿色 `LEAN ✓` 对应 `surviving_copy_blocks_reversal`、`finite_memory_history_capacity` 与 `gram_realizability`。
 :::
 
-反过来，怎么才能打破过约束死锁、在严丝合缝的因果网中重新凿出选择活路？答案正是**主动遗忘——让格拉姆窗口向前滑动一拍，通过偏迹 $\operatorname{Tr}_{\mathbf{v}_{t-M}}$ 主动释放最陈旧的历史锚点 $\mathbf{v}_{t-M}$**！在代数上，抹去 $G_M$ 的首行首列使约束矩阵降回 $G_{M-1}$；在球面几何上，原本从后方死死勒住走廊的那道最老圆弧帽边界瞬间撤除，受挤压的可行走廊当场发生单步重开 $\Omega_M \hookrightarrow \Omega_{M-1}$，其无量纲相空间重开对数比定义为
+反过来，怎么才能打破过约束死锁、在严丝合缝的因果网中重新凿出选择活路？答案正是**主动遗忘——让格拉姆窗口向前滑动一拍，通过偏迹 $\operatorname{Tr}_{\mathbf{v}_{t-M}}$ 主动释放最陈旧的历史锚点 $\mathbf{v}_{t-M}$**！在代数上，抹去 $G_M$ 的首行首列使约束矩阵降回 $G_{M-1}$；在球面几何上，原本从后方死死勒住走廊的那道最老圆弧帽边界瞬间撤除，受挤压的可行走廊扩回 $\Omega_M \hookrightarrow \Omega_{M-1}$；只有被删的旧帽原本参与裁切时才真正重开，删去一枚重复锚点则走廊分毫不变，$q_M = 0$（`手工推导`）。其无量纲相空间重开对数比定义为
 
 $$
 q_M \;:=\; \ln\!\frac{\lvert\Omega_{M-1}\rvert}{\lvert\Omega_M\rvert} \;\ge\; 0 \qquad \Bigl(\text{折合比特数为 }\frac{q_M}{\ln 2} = \log_2\!\frac{\lvert\Omega_{M-1}\rvert}{\lvert\Omega_M\rvert}\;\mathrm{bits}\Bigr).
@@ -127,14 +127,14 @@ $$
 \Delta Q_{\mathrm{forget}} \;\ge\; k_B T_{\mathrm{eff}}\,q_M \;=\; k_B T_{\mathrm{eff}}\,\ln\!\frac{\lvert\Omega_{M-1}\rvert}{\lvert\Omega_M\rvert}.
 $$
 
-这一不等式揭示了遗忘最深刻的生命热力学意义（`MODEL`）：无论是微观开放量子系统的有限相干时间、夜间睡眠对白昼冗余突触权重的修剪重整（参见[§36.1](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)），还是生命代际繁衍时的初始化清零（参见[§35.1](ch35-light-pulse-and-self-referential-table.md)），**遗忘从来不是硬件劣质导致的记忆漏损，而是有限观察者以兰道尔散热为代价主动买回当下自由立体角的演化刻刀**！下表将窗口阶数 $M$ 从 $0$ 到 $\ge 4$ 的五档几何与动力学相态汇总如下（纯单行单元格排版）：
+这一不等式揭示了遗忘最深刻的生命热力学意义（`MODEL`）：无论是微观开放量子系统的有限相干时间、夜间睡眠对白昼冗余突触权重的修剪重整（参见[§36.1](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)），还是生命代际繁衍时的初始化清零（参见[§35.1](ch35-light-pulse-and-self-referential-table.md)），**遗忘是有限观察者主动买回当下自由立体角的演化刻刀**；热代价只在物理复位时出现：复用一枚最大混合比特至少付出 $k_B T\ln 2$，单纯的指标限制或丢弃一份记录却可以零热完成——在简并哈密顿量下，用受控拷贝把系统写进纯记录比特，就以联合幺正实现了捏合，局部熵增 $h(\sin^2\theta)$ 而热库能量不变，拷贝在仍可访问时还能撤回（`手工推导`）。下表将窗口阶数 $M$ 从 $0$ 到 $\ge 4$ 的五档几何与动力学相态汇总如下（纯单行单元格排版）：
 
 | 格拉姆窗口阶数 | 加边矩阵维数 | 球面可行走廊 $\Omega_M$ 几何形态 | 舒尔补裕度与自由度状态 | 物理与认知动力学特征 |
 | :--- | :---: | :--- | :--- | :--- |
 | **$M = 0$（失锚迷雾窗）** | $1 \times 1$ | 整颗单位球面 $S^2$（立体角 $4\pi\;\mathrm{sr}$） | $Q_0 = 0,\;\Delta_{\mathrm{Schur}} = 1$（无历史基准） | 零历史连续性，退化为无自指刻度的各向同性白噪乱撞，“全自由”因无自我坐标而归零 |
 | **$M = 1$（一阶马尔可夫窗）** | $2 \times 2$ | 单片圆形球面相干帽 $C(\mathbf{v}_t, \alpha_{\mathrm{coh}})$ | $\det G_2 = 1 - c_{1x}^2$（仅锁一阶步长“线”） | 仅维持单步相邻重保真，无转弯平面与曲率记忆，轨迹呈无方向惯性的马尔可夫漂移 |
 | **$M = 2$（二阶圆弧曲率窗）** | $3 \times 3$ | 双球面帽交集（透镜形二角域 $\Omega_2$） | $\det G_3 = (1 - c_{12}^2)\Delta_{\mathrm{Schur}}(2)$（感知“面”曲率） | 首次围合单枚极小圆弧体并感知潘查拉特纳姆—贝里角盈曲率，但镜面左右手性尚未封顶 |
-| **$M = 3$（三维满秩黄金窗）** | $4 \times 4$ | **球面曲边三角弧面域 $\Omega_3$** | $\det G_3 > 0$ 满秩锚定 $\mathbb{R}^3$（锁定手性“体”与 $K_4$ 刚性） | **本书选定的生命工作点**（`MODEL`）：三锚定死三维手性自我坐标系，同时保留宽敞可行立体角且零冗余切割 |
+| **$M = 3$（三维满秩黄金窗）** | $4 \times 4$ | **球面曲边三角弧面域 $\Omega_3$** | $\det G_3 > 0$ 满秩锚定 $\mathbb{R}^3$（张成三维“体”与 $K_4$ 刚性；格拉姆阵只定到含反射的 $\mathrm{O}(3)$，手性未定） | **本书选定的生命工作点**（`MODEL`）：三锚张成三维自我坐标系（镜像锚组的格拉姆阵相同，手性另需输入，`手工推导`），在示例参数下保留宽敞可行立体角且零冗余切割 |
 | **$M \ge 4$（冗余/过约束紧窗）** | $(M+1) \times (M+1)$ | 多重圆弧切割窄缝，随蜿蜒推进收缩至 $\emptyset$ | $\mathbb{R}^3$ 内 $G_M$ 奇异（$\operatorname{rank}\le 3$），高维等式窗易触发 $\Delta_{\mathrm{Schur}} \le 0$ | 触发跨代过约束挤压；$M$ 越大历史包袱越沉，直至可行走廊彻底闭合陷入宿命死锁 |
 
 ::: {.viz src="gram-window-consensus-sandbox" preset="forgetting-reopen" height="520"}
