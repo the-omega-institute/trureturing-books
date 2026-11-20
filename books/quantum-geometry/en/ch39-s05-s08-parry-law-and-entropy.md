@@ -1217,6 +1217,10 @@ Fix any linear order on the signed labels. Compare two facets by placing first t
 
 Let $d=n-h$. Each face introduced at $B$ consists of $R(B)$ together with an arbitrary subset of $B\setminus R(B)$. Weighting a face $S$ by $t^{|S|}$ gives the face enumerator $\sum_B t^{|R(B)|}(1+t)^{d-|R(B)|}$ when there are nonempty facets. This sum counts the empty face at its first containing facet. If there are no nonempty facets, the empty face alone contributes the constant $1$.
 
+**Elementary collapses at a shelling step (written derivation).** Suppose the restriction face $R(B)$ is nonempty and proper in $B$. Fix $v\in B\setminus R(B)$. Pair every new subface $S$ avoiding $v$ with $S\cup\{v\}$, and delete the pairs in decreasing order of $|S|$, breaking ties arbitrarily. Every new subface belongs to exactly one pair. An earlier subface cannot contain $S$, since that would make $S$ earlier as well. Any new strict coface of $S$ other than $S\cup\{v\}$ still strictly contains $S$ after removing $v$, so its pair has already been deleted. At the turn of $S$, its sole strict coface is $S\cup\{v\}$, and deleting the pair is an elementary collapse. The sequence leaves the subcomplex from before the addition of $B$.
+
+If $R(B)=B$, the only new face is $B$ and its entire boundary is in the preceding subcomplex. The first facet gives the initial simplex, starting from the empty realization.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
