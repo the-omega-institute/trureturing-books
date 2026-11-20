@@ -952,25 +952,29 @@ $$
 此处每步记录路径选中的边。完整的邻居回答还包括同一顶点的其他邻边。
 
 ::: {.theorem #thm-proper-edge-color-posterior title="合法边着色能改变图的后验" lean="D5/S3/Combinatorics/Graph/Queries/ProperEdgeColorPosterior.proper_edge_colors_change_posterior"}
-在带固定名字 $0,1,2,3$ 的顶点上，以相等先验概率选取路径 $0$–$1$–$2$–$3$ 或在同一路径上加边 $30$ 得到的四边形。给定图，从其所有使用三种给定颜色的合法边着色中均匀抽取一个着色。两次查询都读取这一着色，分别返回顶点 $1$ 和 $2$ 的全部邻居与对应边色。
+在带固定名字 $0,1,2,3$ 的顶点上，以相等先验概率选取路径 $0$–$1$–$2$–$3$ 或在同一路径上加边 $30$ 得到的四边形。给定图，给每条边从三种可用颜色中选色，并在所有合法的整图边着色中均匀抽取一个。两次查询都读取这一着色，分别返回顶点 $1$ 和 $2$ 的全部邻居与对应边色。
 
 两张图在两次查询中的无色答复相同。指定有色记录要求边 $01$ 和 $23$ 取色 $0$，边 $12$ 取色 $1$。路径的十二种着色中有一种产生该记录，四边形的十八种着色中有两种产生该记录。因此在该有色记录下，四边形的后验概率为 $4/7$。
 :::
 
 ::: proof
-路径可依次用 $3,2,2$ 种方式给三条边着色。四边形前三条边中，若首尾同色，则有六种序列，每种可用两种颜色闭合。若首尾异色，则也有六种序列，每种仅有一色可闭合。指定记录的首尾同色，故四边形有两种相容着色。相等先验抵消后，后验是 $(2/18)/(1/12+2/18)=4/7$。Lean 在实际边集上核对满足约束的着色计数和有理数比值。
+路径可依次用 $3,2,2$ 种方式给三条边着色。四边形前三条边中，若首尾同色，则有六种序列，每种可用两种颜色闭合。若首尾异色，则也有六种序列，每种仅有一色可闭合。指定记录的首尾同色，故四边形有两种相容着色。相等先验抵消后，后验是 $(2/18)/(1/12+2/18)=4/7$。完整证明由 Lean 内核检查。
 :::
 
 ::: {.theorem #thm-erased-replies-lose-color-information title="擦除颜色会丢失似然信息" lean="D5/S3/Combinatorics/Graph/Queries/ProperEdgeColorPosterior.erasedRepliesDoNotDetermineColorLikelihood"}
 在四个带固定名字的顶点上，即使候选图在顶点 $1$ 和 $2$ 有相同的完整无色答复，且各自存在合法三色边着色，上面指定的有色记录在两张图中的似然也可以不同。
 :::
 
-在路径与四边形的例子里，两边的似然分别为 $1/12$ 和 $1/9$。只看无色记录时，两张图的后验仍然各为 $1/2$。
+::: proof
+取上一条定理中的路径与四边形。它们实现相同的无色记录，各自有合法边着色，但指定有色记录的似然分别为 $1/12$ 和 $1/9$。完整证明由 Lean 内核检查。
+:::
+
+只看无色记录时，两张图的后验仍然各为 $1/2$。
 
 **通向经典黑盒下界仍需哪些桥梁？** [@thm-directed-forest-cycle-completion] 给出普通有向模型的静态均匀律，[@thm-alternating-forest-classification] 给出交替模型的补全计数，[@thm-alternating-completion-law] 给出固定边集的条件律。它们与 [@rem-qsvt-walks-literature] 的黏合树结果之间还有三层区别：
 
 1. **图的分布与方向。** Ben-David 等人（*SIAM Journal on Computing* **53**(6)，2024，[doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975)，§6.3.2，Lemmas 6.11–6.13，PDF 第 37–39 页）在 self-weld 中使用每侧叶子上的一个均匀整圈，在 weld 中使用两侧叶子间的均匀交替整圈。[@thm-alternating-forest-classification] 给出交替补全的分类与基数，[@thm-alternating-completion-law] 给出固定延拓事件的概率和条件律。普通无向整圈的定向与表示重数现由 [@thm-undirected-cycle-orientation-fibers] 在同一实际完成图上给出：每个纤维恰为一对反向提升，并保留加边事件。[@thm-uniform-undirected-cycle-completion] 进一步给出固定 $F$ 下普通无向补全的均匀律。[@thm-alternating-connector-mass] 给出指定连接的条件概率，[@thm-alternating-successor-set-bound] 将它转化为整个候选后继集合的概率上界。[@thm-alternating-forest-successor-bound] 将这个上界写成给定有向边数的函数。[@thm-alternating-undirected-completion-law] 给出无向交替整圈的总数和固定边条件律。 [@thm-alternating-weld-orientation] 把有向与无向黏合补全放在同一个概率空间中。
-2. **条件信息。** 固定边集的概率律以 $E$ 中的边全部出现为条件。标号固定且回答给出完整的无序邻居集合时，[@thm-complete-neighborhood-history] 把记录事件刻画为边包含与度数上界。当候选图逐点度数相同时，记录事件等同于固定边集出现。每个顶点使用固定次序时，有序记录的似然见 [@thm-fixed-neighbor-order-likelihood]。在固定图上，[@thm-uniform-remaining-name-hit] 给出固定部分命名下的命中概率，[@thm-named-neighborhood-fresh-name-hit] 给出实际无序记录下的新名字命中概率。图与名字同时随机时，[@thm-joint-named-transcript-posterior] 给出实际完整无序记录下的图后验。带颜色或同时使用端口与随机命名的条件律还需证明。 [@thm-unordered-weld-transcript-law] 给出实际无序回复前缀下的无向黏合环条件分布。
+2. **条件信息。** 固定边集的概率律以 $E$ 中的边全部出现为条件。标号固定且回答给出完整的无序邻居集合时，[@thm-complete-neighborhood-history] 把记录事件刻画为边包含与度数上界。当候选图逐点度数相同时，记录事件等同于固定边集出现。每个顶点使用固定次序时，有序记录的似然见 [@thm-fixed-neighbor-order-likelihood]。在固定图上，[@thm-uniform-remaining-name-hit] 给出固定部分命名下的命中概率，[@thm-named-neighborhood-fresh-name-hit] 给出实际无序记录下的新名字命中概率。图与名字同时随机时，[@thm-joint-named-transcript-posterior] 给出实际完整无序记录下的图后验。[@thm-erased-replies-lose-color-information] 表明固定名字时颜色已经能改变似然。结合颜色与随机命名的一般条件律，以及同时使用端口与随机命名的条件律，仍需证明。 [@thm-unordered-weld-transcript-law] 给出实际无序回复前缀下的无向黏合环条件分布。
 3. **查询、嵌入与成功事件。** Childs 等人 [quant-ph/0209131v2 第 IV 节](https://arxiv.org/abs/quant-ph/0209131v2) 先处理猜中新名字、颜色与已知名字查询的游戏转换，再转向树的随机嵌入，最后分别控制碰撞和 `EXIT` 事件，才得到原文 Theorem 9。[@thm-first-observed-cycle] 给出已知顶点探索中首次出现环的确定性判据，碰撞概率还取决于随机黏合图在实际查询记录下的条件分布。在入口度数为二、最大度数为三的模型中，[@thm-known-name-exploration-size] 给出 $q$ 次实际黑盒调用后的已知名字数上界 $1+2q$。Ben-David 等人脚注 14 特别说明：一次回答全部邻居的查询对应嵌入树中的 $O(t)$ 个顶点，并非严格 $t$ 个。其印刷论证中的分量下界 $2^k-2t$、配对界 $2/(2^k-2t)$ 与式 (6.4) 的 $O(t^2/(2^k-t))$ 各按原文保留；这里不将它们拼成未经证明的显式常数或参数范围。
 
 因此，普通收缩律提供静态计数与条件概率环节，交替结果给出实际载体上的分类、计数和固定边集的条件律，[@thm-undirected-cycle-orientation-fibers] 则以书面证明给出普通无向整圈的同图定向纤维、反向取商与加边对应。普通无向补全律见 [@thm-uniform-undirected-cycle-completion]。实际命名记录给出固定图上的单步命中率。整个查询预算内的新名命中界见 [@thm-fresh-name-budget-survival]，[@thm-fresh-name-budget-attainment] 给出达到该界的策略。查询复杂度和完整经典 `EXIT` 下界仍待证明。[请求 #11](https://github.com/the-omega-institute/trureturing-requests/issues/11) 的更广范围仍未完成。下一节转到量子一侧，考察已经明确给定的加权路径及其端点概率。
