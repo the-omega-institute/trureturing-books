@@ -70,7 +70,7 @@ unit quaternions $S^3$, with $\hp xyz=xy^{-1}z$ and $\kappa(x,y)=\lVert(x+y)/2\r
 $\kappa$ nothing is assumed: dimension, compactness, smoothness and positive semidefiniteness are derived.  Associativity is not needed for the
 geometry: if the heap identities are replaced by a binary operation with a two-sided unit at one point whose left and right
 translations are continuous and preserve $\kappa$, with the round-trip law at that point, the space is still a round sphere $S^1$, $S^3$ or $S^7$ with
-this $\kappa$, and the operations are then classified by Hurwitz's theorem.  Keeping only the reflections $s_x(w)=\hp xwx$ on a smooth manifold, the
+this $\kappa$, and the operations are then classified by Hurwitz's theorem (two unit sedenions can multiply to zero).  Keeping only the reflections $s_x(w)=\hp xwx$ on a smooth manifold, the
 round-trip law characterises the compact rank-one symmetric spaces; unique zero partners select the spheres, which are exactly the cases
 where the reflected comparison is affine in two readouts, and on the higher projective spaces the missing term is the real part of the
 Bargmann invariant.  Allowing an indefinite second-order germ instead of a bounded faithful comparison gives, in dimension three, the
@@ -142,7 +142,10 @@ comparison space can encode its own maps: exactly when the span rank of the spec
 error otherwise; the sphere list is a classification, not an encoding tower, and a clock follows from finite rank only under an added
 symmetry or differential-rank hypothesis.  Section~\ref{sec:m7} reads the diagonal operation as an involutory quandle: braids act on
 colourings, the trefoil and figure-eight colouring spaces of $S^3$ are computed, comparison-valued crossing weights are shown to be
-trivial on $S^3$, and Pauli syndromes are read as heap commutators.  Part~\ref{part:arc} (Sections~\ref{sec:recur}--\ref{sec:rational}) develops a
+trivial on $S^3$, and Pauli syndromes are read as heap commutators.  Section~\ref{sec:m10} follows Cayley--Dickson doubling to the
+sedenions, where unit zero divisors take the transport off the sphere (Remark~\ref{m10:fit} relates this to the dimension theorems),
+classifies the two orientations of the three-dimensional spin factor, and separates the Hodge criterion for dimension three from
+readings that fail.  Part~\ref{part:arc} (Sections~\ref{sec:recur}--\ref{sec:rational}) develops a
 calculus in which the difference $y-x$ of linear calculus is replaced by the transport $\hp y x\cdot$; Section~\ref{sec:m5} compares
 chord, cap arc and two-arc route of a right cell and shows that the logarithm of an eliminated Gram comparison tends to the min--plus
 (shortest-path) value exactly when the signed coefficients of the shortest paths do not cancel; Section~\ref{sec:m8} passes to arbitrary
@@ -6372,6 +6375,1034 @@ Knill--Laflamme recovery theorem \cite[Thm.~122]{Companion} (cf.\ Proposition~\r
 \cite[Props.~120, 121]{Companion} (cf.\ Remark~\ref{m7:clone}, Propositions~\ref{m7:cloning-machine}, \ref{m7:clone-bound}).
 \end{remark}
 
+\section{The Cayley--Dickson ladder, spin factors and where the hierarchy stops}
+\label{sec:m10}
+
+Which comparison laws survive Cayley--Dickson doubling, and which distinguish
+three dimensions? The octonions retain the round comparison and
+two-generator associativity on their unit sphere. At the next doubling, two
+unit elements can have zero product, so the ternary transport leaves the
+sphere. The Jordan and Clifford constructions preserve different parts of
+this reading. Spin factors retain the reflection and its two readouts in
+every sphere dimension, while the Hodge identification of the full
+vorticity two-form with a vector singles out dimension three. We make
+these distinctions using the standard comparison of
+Definition~\ref{def:cs} and the reflection formula of
+Lemma~\ref{lem:opmodel}.
+
+\emph{Placement.} Theorem~\ref{m10:ladder}, Proposition~\ref{m10:pieces},
+Example~\ref{m10:zero} and Remark~\ref{m10:fit} compare the doubling
+ladder with the classification of Part~\ref{part:axiom}; Remark~\ref{m10:fit}
+states how Proposition~\ref{prop:dim}, Theorem~\ref{thm:rigid},
+Theorem~\ref{thm:round} and Remark~\ref{d4:tower} fit together.
+Definition~\ref{m10:spin} to Remark~\ref{m10:exclusion} treat spin factors,
+their orientation classification and their relation to
+Section~\ref{sec:m2}. Remark~\ref{m10:clifford} restates the two-readout
+law of Theorem~\ref{thm:operational} in geometric-product form.
+Theorem~\ref{m10:curl} is the dimension-three criterion, and
+Remark~\ref{m10:folklore} lists the dimension-three readings that fail,
+each with its counterexample. Hypothesis~\ref{m10:field-model} is a
+hypothesis, Remark~\ref{m10:programme} is a programme, and no conjecture is
+asserted. The Moreno, Hurwitz, Adams, Brown--Gray, Eckmann and
+Jordan--von Neumann--Wigner inputs are classical and cited.
+
+\subsection{The Cayley--Dickson comparison laws}
+
+For a real Cayley--Dickson algebra \(A\) write \(N(x)=|x|^2\) for the
+Euclidean squared norm. We use the doubling convention
+\[
+ (a,b)(p,q)=(ap-\bar q b,\,qa+b\bar p),\qquad
+ \overline{(a,b)}=(\bar a,-b),\qquad
+ N(a,b)=N(a)+N(b).
+\]
+Start with \(\R\) and ordinary conjugation. The successive doublings are
+\(\C,\HH,\mathbb O,\mathbb S\), where \(\mathbb S\) denotes the
+sedenions. In every rung the unit is denoted by \(1\). Write \(S(A)\)
+for the unit sphere and \(T(x,y,z)=(x\bar y)z\), bracketing as indicated.
+On \(S(A)\) use \(c(x,y)=\ip{x}{y}\) and \(\kappa=(1+c)/2\).
+
+\begin{theorem}[Survival of the comparison laws]\label{m10:ladder}
+The algebra dimensions are \(1,2,4,8,16\) and the unit spheres have
+dimensions \(0,1,3,7,15\). On \(S(\R),S(\C),S(\HH)\), \(T\) is a heap
+and satisfies the comparison clauses and round-trip law. The real
+case has the disconnected zero-dimensional domain described after
+Theorem~\ref{thm:main}. The real and complex base groups are
+commutative. The quaternionic base group is noncommutative.
+
+On \(S(\mathbb O)\), \(T\) satisfies both Mal'cev identities, all
+comparison clauses, the round-trip law and the two-readout reflection
+identity. The third heap identity holds on every subsystem generated
+by two elements and fails globally. With base point \(1\) the binary
+product is a di-associative Moufang loop.
+
+At \(\mathbb S\), Euclidean norm composition fails and \(T\) is not
+closed on \(S(\mathbb S)\). As an ambient formula, \(T(x,x,z)=z\)
+still holds for unit \(x\). The other Mal'cev identity can fail, and
+the ambient formula \(T(x,w,x)\) can give zero. The function \(\kappa\)
+continues to be a smooth symmetric sphere comparison with the unique
+zero partner \(-x\).
+\end{theorem}
+
+\begin{proof}
+The doubling formula gives the dimensions and, by induction, the
+anti-involution, \(x+\bar x=2\ip{x}{1}1\) and \(x\bar x=\bar x x=N(x)1\).
+Indeed conjugating the first component of a product gives
+\(\bar p\bar a-\bar b q\), and negating the second gives
+\(-qa-b\bar p\), the two components of \(\overline{(p,q)}\,
+\overline{(a,b)}\). In the product with the conjugate the second
+component vanishes and the first is \(N(a)+N(b)\). Polarization gives
+\(x\bar y+y\bar x=2\ip{x}{y}1\).
+
+The first doubling is ordinary complex multiplication. For the second,
+the complex matrix
+\(\left(\begin{smallmatrix}a&-b\\\bar b&\bar a\end{smallmatrix}\right)\)
+represents \((a,b)\) multiplicatively, by matrix multiplication with
+commuting entries. This proves associativity, and the two imaginary
+generators \((i,0)\) and \((0,1)\) anticommute. For each doubling from an
+associative norm-composition rung, the squared norm of the product is
+\[
+ (N(a)+N(b))(N(p)+N(q))
+ -2\re(ap\bar bq)+2\re(qap\bar b).
+\]
+The cross terms cancel by cyclicity of the real part. For quaternions,
+cyclicity follows from the matrix trace representation above divided
+by \(2\). The same argument works over \(\R,\C\). Thus the formula proves
+norm composition up to and including \(\mathbb O\).
+
+In a unital Euclidean composition algebra, left multiplication \(L_x\)
+satisfies \(L_x^*L_x=N(x)I\). Polarizing this identity with \(L_1=I\)
+gives \(L_x^*+L_x=2\ip{x}{1}I\), so \(L_x^*=L_{\bar x}\).
+The corresponding formulas hold for right multiplication. Consequently
+\[
+ L_x^2=2\ip{x}{1}L_x-N(x)I=L_{x^2},\qquad
+ R_x^2=R_{x^2}.
+\]
+These are the two alternative laws. Linearizing them makes the
+associator alternating. Artin's two-generator theorem and the Moufang
+identities for alternative algebras apply
+\cite[\S1.1]{Baez02}, \cite{Schafer66}. For a unit \(x\), multiplication by \(\bar x\)
+on the corresponding side inverts multiplication by \(x\), since
+\(L_{\bar x}=2\ip{x}{1}I-L_x\), and likewise on the right.
+Hence the unit octonions form a loop, and the two-generator subgroup
+is contained in the associative subalgebra generated by the two
+elements. The same argument gives the Mal'cev identities
+\(T(x,x,z)=z\) and \(T(x,y,y)=x\). A two-generator subsystem for \(T\)
+is contained in the unital subalgebra generated by those elements
+because conjugation is a real linear combination of the element and
+\(1\). Associative multiplication proves the heap identity on these
+subsystems, and globally on the first three rungs. Taking both middle
+variables equal to \(1\) in the heap identity recovers binary
+associativity. The nonzero associator in
+Example~\ref{m10:fano} therefore gives global failure at \(\mathbb O\).
+
+Norm composition makes \(z\mapsto (x\bar y)z\) and
+\(z\mapsto(z\bar x)y\) orthogonal when \(x,y\) are units. This gives
+two-sided comparison invariance. Smoothness, faithfulness and the
+antipodal zero partner follow directly from the sphere formulas.
+Right alternativity, or the inverse identity proved above, gives
+\((w\bar x)x=w\). Polarization of \(x\bar w\) therefore gives
+\[
+ s_xw=T(x,w,x)=2c(x,w)x-w,\qquad
+ c(y,s_xw)=2c(x,w)c(y,x)-c(y,w).
+\]
+Taking \(y=w\) proves \((\Omega3)\). This also supplies
+\((\Omega3')\) with coefficients \(2c(x,w),-1,1-c(x,w)\) for \(\kappa\),
+the coefficients of Lemma~\ref{lem:opmodel}.
+At the last rung, \((x\bar x)z=z\) for unit \(x\) follows from the
+doubling identity. The rest of the failures follow from
+Example~\ref{m10:zero}.
+\end{proof}
+
+\begin{example}[Fano basis and associators]\label{m10:fano}
+Number the canonical doubling basis \(f_0,\ldots,f_7\) by putting the
+first summand before the second at each step. Set
+\[
+ (e_1,\ldots,e_7)=(f_1,f_2,f_4,f_3,f_6,-f_7,f_5).
+\]
+Substitution in the doubling formula gives the seven cyclic product
+triples
+\[
+ (1,2,4),\ (2,3,5),\ (3,4,6),\ (4,5,7),\
+ (5,6,1),\ (6,7,2),\ (7,1,3).
+\]
+For instance \(e_2e_3=f_2f_4=f_6=e_5\) and
+\(e_3e_4=f_4f_3=-f_7=e_6\). In each triple \((i,j,k)\),
+\(e_i e_j=e_k\), the reverse product has the opposite sign, and the
+other cyclic identities follow by alternativity. The unsigned
+canonical indices multiply by bitwise exclusive-or, directly by
+induction on doubling. Thus the triples are the lines on the seven
+nonzero vectors of \(\mathbb F_2^3\), and different lines meet in one
+point by the dimension formula for two-dimensional subspaces.
+
+A collinear basis triple has zero associator since its span with
+\(1\) is quaternionic. On the \(\binom73-7=28\) noncollinear unordered
+triples the associator has norm \(2\). To see this, index the seven
+points cyclically. Cyclic shift preserves the product and the
+following four triples represent distinct orbits, as their cyclic
+gap sequences \((1,1,5),(1,3,3),(1,4,2),(2,2,3)\) show.
+Each orbit has length seven. Direct lookup gives
+\[
+\begin{array}{c|rrrr}
+(i,j,k)&(1,2,3)&(1,2,5)&(1,2,6)&(1,3,5)\\ \hline
+(e_i e_j)e_k&-e_6&e_7&e_3&-e_4\\
+e_i(e_j e_k)&e_6&-e_7&-e_3&e_4
+\end{array}
+\]
+Alternation handles every ordering.
+\end{example}
+
+\begin{proposition}[The seven quaternionic pieces]\label{m10:pieces}
+For each line \(L=(i,j,k)\) of Example~\ref{m10:fano} let
+\(H_L=\operatorname{span}(1,e_i,e_j,e_k)\).
+\begin{enumerate}[label=(\roman*)]
+\item Each \(H_L\) is a subalgebra isomorphic to \(\HH\).
+\item The pieces are not independent. For distinct lines \(L,L'\) with
+common point \(m\), \(H_L\cap H_{L'}=\R1\oplus\R e_m\), a complex
+subalgebra, and the unit \(3\)-spheres of the two pieces share the unit
+circle of this subalgebra. The imaginary parts of the seven pieces have
+total dimension \(21\) and span the seven-dimensional space
+\(\im\mathbb O\).
+\item The pieces do not exhaust the quaternionic subalgebras. The
+imaginary vector \(s=e_1+\cdots+e_7\) lies in none of the seven
+\(H_L\); its distance to each is \(2\). With \(t=e_1-e_2\), the
+subalgebra generated by \(s\) and \(t\) is isomorphic to \(\HH\) and
+differs from every \(H_L\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) The cyclic triple relations, the reversed signs and \(e_i^2=-1\)
+are the multiplication table of \(\HH\) on \(1,e_i,e_j,e_k\).
+(ii) The four basis vectors of \(H_L\) and of \(H_{L'}\) share exactly
+\(1\) and \(e_m\), so the intersection of the two coordinate spans is
+\(\R1\oplus\R e_m\), closed under multiplication because \(e_m^2=-1\).
+Three imaginary basis vectors in each of seven pieces give \(21\)
+generators, and every \(e_i\) occurs. (iii) The vector \(s\) has
+coordinate \(1\) at each \(e_i\), and \(H_L\) contains only the
+coordinates \(1,e_i,e_j,e_k\); the four remaining coordinates give
+distance \(2\). The elements \(s/\sqrt7\) and \(t/\sqrt2\) are
+orthogonal unit imaginary octonions. By the alternative laws, their
+product \(u\) is a unit imaginary octonion orthogonal to both, and
+\(1,s/\sqrt7,t/\sqrt2,u\) multiply as \(1,i,j,k\); this four-dimensional
+subalgebra contains \(s\), so it is not one of the \(H_L\).
+\end{proof}
+
+Artin's theorem concerns arbitrary pairs, and
+Proposition~\ref{m10:pieces}(iii) shows that their subalgebras need not
+lie in one of the seven coordinate subalgebras. The Fano table locates
+nonassociativity on coordinate triples; it does not list the
+two-generated subalgebras.
+
+\begin{example}[Sedenion zero divisors and failed transport]\label{m10:zero}
+In the above Fano convention take the following pairs in
+\(\mathbb O\oplus\mathbb O\):
+\[
+\begin{array}{c|cc|cc}
+ &u&v&\text{first component of }uv&\text{second component of }uv\\ \hline
+1&(e_1,e_2)&(e_3,e_6)&e_7-e_7&e_5-e_5\\
+2&(e_1,e_3)&(e_2,-e_6)&e_4-e_4&-e_5+e_5\\
+3&(e_1,e_4)&(e_3,e_5)&e_7-e_7&-e_6+e_6
+\end{array}
+\]
+Each row follows by substituting in the doubling formula and using
+the cyclic triples. Each pair is orthogonal, \(N(u)=N(v)=2\),
+\(N(u)N(v)=4\), and \(uv=0\).
+Put \(x=u/\sqrt2\) and \(w=v/\sqrt2\) in any row. Since
+\(\bar w=-w\), \(T(x,1,w)=T(x,w,w)=T(x,w,x)=0\).
+Thus \((xw)w=0\) whereas \(x(w^2)=-x\), so right alternativity fails.
+Conjugating \(uv=0\) gives \(vu=0\).
+
+The correct inference from these witnesses is the following. Each
+normalized witness \(x\) has a two-sided conjugate inverse as an
+element, \(x\bar x=\bar x x=1\), and still annihilates the unit
+element \(w\) on both sides. So the existence of two-sided inverses
+does not give cancellation at rank \(16\): the linear map \(L_x\) has
+\(w\) in its kernel, which is four-dimensional, and
+\(L_{\bar x}L_x\ne I\).
+For the ambient linear maps \(z\mapsto T(x,1,z)\) and
+\(z\mapsto T(z,1,w)\), the antipodal pairs \(w,-w\) and
+\(x,-x\), respectively, have coincident images at zero.
+The diagonal transport differs from the sphere reflection
+\(2c(x,w)x-w=-w\), which exists independently of multiplication: the
+round unit sphere \(S^{15}\) keeps its geometric reflection, and the
+product bracket returns zero.
+Each later doubling contains this one isometrically by \(a\mapsto(a,0)\),
+so these failures persist.
+\end{example}
+
+\begin{remark}[Geometry of sedenion zero divisors]\label{m10:moreno}
+Moreno identifies the space of ordered pairs of unit sedenions
+with zero product with the compact exceptional group \(G_2\)
+\cite{m10:Moreno}. Example~\ref{m10:zero} gives three such pairs
+after normalization, and uses no global classification. The
+accompanying script checks the dimension count: the unit zero divisors
+\((a,b)/\sqrt2\) with \(a\perp b\) unit imaginary octonions form an
+\(11\)-dimensional family, each has a four-dimensional annihilator,
+and \(11+3=14=\dim G_2\).
+\end{remark}
+
+\begin{remark}[How the ladder, the dimension theorems and Remark~\ref{d4:tower} fit together]\label{m10:fit}
+Three kinds of statement in this paper concern the same list of spheres.
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Classification.} Proposition~\ref{prop:dim} and
+Theorem~\ref{thm:rigid} assume a round sphere with the standard
+comparison and two-sided transport invariance; Hurwitz's theorem then
+leaves algebra dimensions \(1,2,4,8\). Theorem~\ref{thm:round} derives
+the round sphere and the standard comparison from the comparison axioms
+alone and leaves the connected cases \(S^1,S^3,S^7\). These results list
+every model.
+\item \emph{Construction.} Theorem~\ref{m10:ladder} produces the models.
+Doubling gives \(\R,\C,\HH,\mathbb O\), whose unit spheres realize every
+entry of the list, with the heap identity exactly on the first three
+rungs. At rank \(16\) the hypothesis of Proposition~\ref{prop:dim} that
+fails first is two-sided transport invariance: for a witness \(x\) of
+Example~\ref{m10:zero} the transport \(z\mapsto T(x,1,z)\) has a
+nonzero kernel, so it is not an isometry.
+\item \emph{Encoding.} Remark~\ref{d4:tower} concerns maps between the
+entries. The doubling inclusions \(a\mapsto(a,0)\) embed each rung as a
+subalgebra, so \(S^1\subset S^3\subset S^7\) as unit spheres. The rank
+count there decides which map spaces fit: the map space of \(S^1\), of
+rank \(4\), fits in \(S^3\), while those of \(S^3\) and \(S^7\), of ranks
+\(16\) and \(64\), exceed the largest permitted state rank \(8\).
+\end{enumerate}
+Thus the classification gives the list, the ladder realizes it and
+locates the first failure beyond it, and Remark~\ref{d4:tower} records
+that consecutive entries are related by algebra inclusions, with an
+exact encoding of map spaces only at the first step.
+\end{remark}
+
+\begin{remark}[Dimension restrictions]\label{m10:restrictions}
+Hurwitz's theorem \cite{Hurwitz1898,SV00} enters Proposition~\ref{prop:dim} after
+linearization to a unital positive-definite composition product.
+Adams' Hopf-invariant-one theorem \cite{Adams} enters
+Proposition~\ref{prop:moufang}(ii) using only a continuous
+multiplication with a two-sided unit on a positive-dimensional
+sphere, obtained by fixing the middle variable of \(T\).
+These give the same positive sphere dimensions for different
+hypotheses. Theorem~\ref{thm:round} and Corollary~\ref{cor:round}
+derive roundness and those dimensions before imposing any form of the
+third heap identity. Proposition~\ref{prop:weaknot} gives the precise
+gap between two-generator ternary associativity and binary
+di-associativity for arbitrary \(T\). The examples above locate the
+failures for the displayed multiplication at \(S^7\) and \(S^{15}\).
+Theorem~\ref{thm:obstruction} excludes positive-dimensional heap
+spheres beyond \(S^1,S^3\).
+
+There is also an elementary obstruction in any odd algebra dimension
+greater than one. In a unital real bilinear algebra take
+\(x\notin\R 1\). The real characteristic polynomial of \(L_x\) has odd
+degree, so \(L_x v=\lambda v\) for some real \(\lambda\) and nonzero
+\(v\). Then \((x-\lambda 1)v=0\) with both factors nonzero. This
+obstruction concerns a linear algebra on \(\R^3\). The unit
+quaternions realize the three-dimensional group \(S^3\) by a
+four-dimensional algebra. A continuous injective chart of all of
+\(S^3\) or all of \(\SO(3)\) in \(\R^3\) would have compact open
+image by invariance of domain \cite{d4-brouwer}. Proposition~\ref{prop:cayley}
+and Theorem~\ref{m4:atlas} give the local and two-chart rational
+replacements.
+\end{remark}
+
+\subsection{Spin factors, orientations, and reflections}
+
+\begin{definition}\label{m10:spin}
+Let \(V\) be a finite-dimensional Euclidean space. The spin factor
+\(J(V)=\R\oplus V\) has unit \(1=(1,0)\) and product
+\[
+ (s,x)\circ(t,y)=(st+\ip{x}{y},\,sy+tx).
+\]
+Write \(a\ge0\) for the cone of squares and \(a\le b\) for \(b-a\ge0\).
+The mass of \((s,x)\) is \(s\), and the order-unit norm is
+\(\inf\{r\ge0:-r1\le a\le r1\}\).
+\end{definition}
+
+\begin{proposition}[The spin-factor cone and the projective line]\label{m10:spin-geometry}
+The product is a Euclidean Jordan product of Clifford type. The
+cone of squares has \(s\ge |x|\), its mass-one slice is the unit
+ball in \(V\), and the order-unit norm is \(|s|+|x|\).
+For \(\dim V\ge 1\), the extreme points of the slice are
+\((1,x)\) with \(|x|=1\). For \(K=\R,\C,\HH,\mathbb O\),
+\(J(\R\oplus K)\) is isomorphic as a unital Jordan algebra to
+\(\operatorname{Herm}_2(K)\) with symmetrized matrix product.
+The real algebra dimensions are \(3,4,6,10\), and the spheres of
+primitive trace-one idempotents have dimensions \(1,2,4,8\).
+For arbitrary \(V\) with \(\dim V\ge2\), the sphere of primitive
+idempotents has the comparison and reflection in
+\eqref{m2:sphere}.
+\end{proposition}
+
+\begin{proof}
+In the real Clifford algebra with \(x^2=|x|^2\), the symmetric
+part of multiplication gives the displayed product. An associative
+algebra with symmetrized product satisfies the Jordan identity, since
+the left and right multiplications by \(a\) commute with those by
+\(a^2\). The inner product \(st+\ip{x}{y}\) on \(J(V)\) makes all
+Jordan multiplication operators self-adjoint by substitution.
+Equivalently, formal reality follows since the scalar part of a
+square is \(s^2+|x|^2\).
+For \(|u|=1\), \(p_{\pm u}=(1,\pm u)/2\) are orthogonal idempotents
+with sum \(1\). If \(x\ne0\) take \(u=x/|x|\), so
+\(a=(s+|x|)p_u+(s-|x|)p_{-u}\). The square of \((t,y)\) has scalar
+part \(t^2+|y|^2\ge 2|t||y|\), and the spectral expression gives a
+square root whenever \(s\ge|x|\). The case \(x=0\) follows by taking
+a scalar square root. Applying the cone inequalities to \(r1\pm a\)
+gives the claimed norm. Strict convexity of the Euclidean ball
+gives extremality on the boundary. Every interior point is a
+midpoint of two distinct ball points.
+
+For \(K\) as above use the map
+\[
+ (s,(t,z))\longmapsto
+ \begin{pmatrix}s+t&z\\ \bar z&s-t\end{pmatrix}.
+\]
+Squaring this matrix gives scalar part \(s^2+t^2+|z|^2\) and
+vector part \(2s(t,z)\). Linear polarization gives the Jordan
+product, including at \(K=\mathbb O\), since this calculation
+uses only binary scalar products. The same square formula
+classifies all nonzero proper idempotents as \(p_u\). Each is
+primitive because the only nonzero proper idempotents have
+mass \(1/2\). The matrix trace here is twice the mass.
+
+For \(p=p_x\), the formula \(I+8(L_p^2-L_p)\) from
+\eqref{m2:albert} fixes the scalar line and \(x\), and negates
+\(x^\perp\): \(L_p\) has eigenvalues \(1,0,1/2\) on \(p_x,p_{-x}\)
+and \((0,x^\perp)\), respectively. The trace pairing normalized
+by \(\operatorname{tr}(1)=2\) gives
+\(\operatorname{tr}(p_x\circ p_y)=(1+\ip{x}{y})/2\).
+This proves the reflection formula and the reflection-only
+two-readout law of Theorem~\ref{m2:two-readout}. For comparison
+with the composition rungs, the projective-line sphere over
+\(K\) has dimension \(\dim_{\R}K\), and the sphere of scalars of
+unit norm in \(K\) has dimension \(\dim_{\R}K-1\).
+\end{proof}
+
+The spin factors of dimension at least three form the rank-two
+simple family in the finite-dimensional formally real Jordan
+classification of Jordan, von Neumann and Wigner \cite{m2:JNW}.
+Hanche-Olsen and St{\o}rmer \cite{m10:HOS} treat their
+operator-algebraic realization. An
+orthogonal map on \(V\) preserves the product and cone. Conversely
+a unital Jordan automorphism preserves \(V\), since the nonzero
+elements whose square is scalar and which are outside \(\R 1\)
+are exactly the nonzero vectors in \(V\). It then preserves norms
+by taking squares. In particular the cone and symmetric product
+allow both orientations in dimension three.
+
+\begin{remark}[Spin factors and Section~\ref{sec:m2}]\label{m10:spin-5A}
+Remark~\ref{m2:jordan} realizes every sphere \(S^n\) of
+Proposition~\ref{m2:models} as the primitive idempotents of the spin
+factor \(J(\R^{n+1})\), and Proposition~\ref{m10:spin-geometry} adds the
+cone, the order-unit norm and the state space. The mass-one slice is the
+ball whose extreme points are those idempotents, so each round sphere of
+Section~\ref{sec:m2} is the pure-state space of a spin factor. For the
+projective lines \(\mathbb FP^1\), \(\mathbb F=\R,\C,\HH\), the
+isomorphism \(J(\R\oplus\mathbb F)\cong\operatorname{Herm}_2(\mathbb F)\)
+identifies \(\mathbb FP^1\) with \(S^{\dim_\R\mathbb F}\), with
+\(\beta=\kappa\) by \eqref{m2:associative}; the case \(\mathbb O\) gives
+\(S^8\), the octonionic projective line. In the companion paper's
+readings, recalled in Remark~\ref{m2:paper2}, the clocked qubit is the
+case \(\mathbb F=\C\) (its Bloch ball, Proposition~\ref{m2:bloch}), and the
+quaternionic qubit is the case \(\mathbb F=\HH\). The orientation
+classification below adds a directed relation to the spin factor of
+\(\R^3\); positivity of the cone alone leaves both orientations.
+\end{remark}
+
+\begin{definition}[Two-point positivity and phase balance]\label{m10:contract}
+Use \(V=\R^3\) and \(J=J(V)\). The positive linear evaluations are
+\(\alpha_{m,v}(s,x)=ms+\ip{v}{x}\) for \(m\ge |v|\).
+For a map \(D:J\times J\to J\) define
+\[
+ R_\alpha(a,b)=\alpha(a\circ b)-i\alpha(D(a,b)),\qquad
+ Q_\alpha(b,c)=\alpha(b^2+c^2)+2\alpha(D(b,c)).
+\]
+The condition \(\mathrm{P2}\) requires the \(2\times2\) matrix
+of \(R_\alpha\) on every pair to be positive semidefinite for
+every positive evaluation. The condition \(\mathrm{PB}\) requires
+\(Q_\alpha(b+h,c+k)=Q_\alpha(b-h,c-k)\) for every \(a,b,c,\alpha\),
+where \(h=D(a,b)-a\circ c\) and \(k=a\circ b+D(a,c)\).
+Both conditions are hypotheses on \(D\).
+\end{definition}
+
+\begin{theorem}[Orientation from \(\mathrm{P2}\) and \(\mathrm{PB}\)]
+\label{m10:orientation}
+An arbitrary \(D:J\times J\to J\) satisfies
+\(\mathrm{P2}\) and \(\mathrm{PB}\) exactly when, for one fixed
+\(\epsilon\in\{+1,-1\}\),
+\[
+ D((s,x),(t,y))=(0,\epsilon\,x\times y),
+\]
+where \(\times\) uses the ordered coordinate basis. The sign is unique.
+\end{theorem}
+
+\begin{proof}
+The forward implication is the library theorem
+\texttt{complete\_consequences} \cite{Tru} (Section~\ref{sec:leanlib}).
+In that theorem \(E=\R\times(\operatorname{Fin}3\to\R)\), the
+operations \texttt{jordan}, \texttt{evaluate}, \texttt{P2}, and
+\texttt{PB} are the product, evaluations and identities above,
+and the pointwise conclusion is \(D(a,b)=\texttt{crossD}\,
+\epsilon\,a\,b\). In particular there is no regularity
+hypothesis on \(D\). The matrix realization and the reverse
+implication are proved in Proposition~\ref{m10:pauli}. Evaluation
+on the first two spatial basis vectors distinguishes the signs.
+\end{proof}
+
+The accompanying script also samples the multiples \(\lambda\,x\times y\)
+with \(\lambda\in\{0,\pm\tfrac12,\tfrac32,2\}\): each violates
+\(\mathrm{P2}\) or \(\mathrm{PB}\) (for \(\lambda=\tfrac12\) only
+\(\mathrm{PB}\)), consistent with the theorem. Both signs induce
+opposite associative products on the same ordered Jordan space, so
+spin-factor positivity alone does not select the complex product; the
+classification concerns the directed relation with both contracts.
+
+\begin{proposition}[Matrix interface]\label{m10:pauli}
+Let \(D\) be one of the two displayed relations in
+Theorem~\ref{m10:orientation}. Put
+\(\phi(s,x)=sI+x_1\sigma_X+x_2\sigma_Y+x_3\sigma_Z\), where
+\[
+ \sigma_X=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+ \sigma_Y=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad
+ \sigma_Z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+\]
+Then \(\phi(a\circ b)-i\phi(D(a,b))\) is the ordinary product
+\(\phi(a)\phi(b)\) for \(\epsilon=-1\) and the opposite product
+\(\phi(b)\phi(a)\) for \(\epsilon=+1\). Write
+\(\rho_{m,v}=\phi(m,v)/2\). Its trace is \(m\), it is positive
+semidefinite exactly when \(m\ge |v|\), and
+\(\operatorname{Tr}(\rho_{m,v}\phi(a))=\alpha_{m,v}(a)\).
+All positive semidefinite matrices and all positive evaluations
+are obtained this way. The map \(\phi\) is an order isomorphism
+on the Hermitian parts and identifies the order-unit norm with
+the operator norm.
+
+Both orientation relations satisfy \(\mathrm{P2}\) and
+\(\mathrm{PB}\), and the matrices of \(R_\alpha\) on arbitrary
+finite lists are positive semidefinite. The relation \(D\)
+is skew and bilinear, vanishes on scalars in either slot, and
+obeys
+\[
+\begin{split}
+ \|D(a,b)\|&\le \|a\|\|b\|,\\
+ \|D(a,b)-D(a',b')\|&\le
+ \|a-a'\|\|b\|+\|a'\|\|b-b'\|,\\
+ (a\circ b)\circ c-a\circ(b\circ c)
+ &=D(D(a,b),c)-D(a,D(b,c)).
+\end{split}
+\]
+\end{proposition}
+
+\begin{proof}
+Multiplying the three displayed matrices gives
+\(\sigma_j\sigma_k=\delta_{jk}I+i\sum_\ell
+\varepsilon_{jk\ell}\sigma_\ell\) in the order \(X,Y,Z\).
+Thus the signed product formula holds, including on the spatial
+test pair \(X,Y\), for which the ordinary product is \(i\sigma_Z\).
+The eigenvalues of \(\phi(s,x)\) are \(s\pm |x|\), because
+\((x\cdot\sigma)^2=|x|^2 I\) and \(x\cdot\sigma\) is traceless.
+The trace formula follows from the same matrix products, and
+\(I,\sigma_X,\sigma_Y,\sigma_Z\) form a real basis of Hermitian
+matrices. A positive functional has coefficients \(m,v\) in the
+dual Euclidean coordinates. Cauchy--Schwarz proves positivity
+when \(m\ge |v|\), and testing \((1,-v/|v|)\) when \(v\ne0\),
+or \(1\) when \(v=0\), gives necessity. In particular
+\(\rho_{1,(0,0,1)}=\operatorname{diag}(1,0)\), and purity at
+mass one holds exactly for \(|v|=1\).
+
+Use \(\star\) for the selected product and extend \(\alpha\)
+complex linearly by \(\operatorname{Tr}(\rho_{m,v}\,\cdot)\).
+For \(z=\sum_j\lambda_j\phi(a_j)\), the Gram quadratic form is
+\(\alpha(z^*\star z)\ge0\): in the two products the matrix
+inside \(\alpha\) is \(z^*z\) or \(zz^*\), respectively.
+To check phase balance, omit \(\phi\) in the matrix coordinates
+and write \(z=b+ic\). Then \(Q_\alpha(b,c)=\alpha(z^*\star z)\),
+and replacing \((b,c)\) by \((b\pm h,c\pm k)\) replaces \(z\)
+by \(z\pm ia\star z\). By associativity and self-adjointness of
+\(a\), the cross terms cancel, giving
+\(\alpha(z^*\star(1+a^2)\star z)\) for either sign.
+Bilinearity and the norm bounds follow from the cross product
+and \(|x\times y|\le |x||y|\), so \(D\) is continuous.
+Comparing real parts of \((a\star b)\star c=a\star(b\star c)\)
+gives the last identity.
+\end{proof}
+
+\begin{remark}[Exclusion at a pure state]\label{m10:exclusion}
+The quadratic inequality \(b^2\le t(1-t)\) is equivalent to
+\((t-\tfrac12)^2+b^2\le\tfrac14\) by completing the square.
+In the trace-one positive semidefinite \(3\times3\) Hermitian
+cone slice, let \(p\) be a unit-vector projector. The zero set
+of \(q\mapsto\operatorname{Tr}(pq)\) is an exposed face.
+Indeed for \(p=aa^*\) the value is \(\|q^{1/2}a\|^2\), and
+vanishes exactly when \(qa=0\). The face is the trace-one
+positive semidefinite slice on \(a^\perp\) and hence is a
+three-dimensional Bloch ball by Proposition~\ref{m10:spin-geometry}.
+The same argument in matrix size \(n\) gives an exclusion face
+of real affine dimension \((n-1)^2-1\) for \(n\ge2\); it is a ball
+only for \(n\le3\).
+The abstract cone and face classification with the exclusion-ball
+hypothesis is a separate library statement,
+\texttt{exclusion\_ball\_faces} \cite{Tru}.
+These cone faces concern mixed states. Their pure boundary
+agrees with the projective cut-locus description in
+Proposition~\ref{m2:models}.
+\end{remark}
+
+\subsection{Clifford comparison and the two readouts}
+
+\begin{remark}[Geometric-product form of the two-readout law]\label{m10:clifford}
+In the Euclidean Clifford algebra of \(V\), with \(v^2=|v|^2\), take
+unit vectors \(x,y,w\). Then
+\[
+ xy^{-1}=xy=c(x,y)+B,\qquad B=x\wedge y,\qquad
+ B^2=-|B|^2,\qquad c(x,y)^2+|B|^2=1.
+\]
+If \(0<\theta=\arccos c(x,y)<\pi\), then
+\(xy^{-1}=\cos\theta+\sin\theta\,U=\exp(\theta U)\), where
+\(U=B/|B|\) is the unit oriented plane of the pair. At \(x=\pm y\)
+the bivector is zero and the comparison is \(\pm1\). For unit
+elements of any of the four composition algebras, the comparison
+\(x\bar y\) has the same scalar part and the same imaginary
+magnitude. Its imaginary unit plays the role of \(U\) in the
+two-dimensional real algebra generated by that comparison.
+
+This is a restatement of Theorem~\ref{thm:operational} in the
+geometric product. There the readout is
+\(\psi=2\kappa(o,\cdot)-1=\re\) in the models with a zero partner, and
+\(c(x,y)=\psi(x^{-1}y)\); here the scalar part of \(xy^{-1}\) is
+the same readout \(c(x,y)\), and the bivector part carries the
+remaining magnitude \(\sin\theta\). The Clifford sandwich \(xwx\) is
+the spherical point reflection. Consequently \(\kappa(y,x)\) and
+\(\kappa(y,w)\) determine \(\kappa(y,xwx)\) for fixed \(x,w\), with
+the coefficients of Lemma~\ref{lem:opmodel} and
+Theorem~\ref{m10:ladder}. This realizes the diagonal form of the
+two-readout law of Lemma~\ref{lem:opmodel} and
+Theorem~\ref{m2:two-readout} in any dimension; it adds no new theorem.
+\end{remark}
+
+\begin{proof}[Justification]
+The Clifford relation \(xy+yx=2\ip{x}{y}\) gives the symmetric
+scalar and antisymmetric bivector parts. For \(y=cx+v\) with
+\(v\perp x\), \(B=xv\), so \(B^2=-v^2=-|v|^2\) and
+\(|v|^2=1-c^2\). This is the unit-vector form of the Gram identity
+\(|x\wedge y|^2=|x|^2|y|^2-\ip{x}{y}^2\); scaling gives the
+general form, including zero inputs. The exponential follows
+by separating even and odd powers. In a composition algebra,
+\(\re(x\bar y)=\ip{x}{y}\) by polarization and \(N(x\bar y)=1\).
+A nonzero imaginary part, after normalization, squares to
+\(-1\) by \(a\bar a=N(a)1\); its real span with \(1\) is a
+complex subalgebra. The plane in the Clifford formula records
+the order of the pair, and reversing the order negates \(B\).
+The corresponding comparison in a composition algebra is
+conjugated. These are pairwise formulas.
+
+Multiplying \(xw+wx=2\ip{x}{w}\) on the right by \(x\) gives
+\(xwx=2\ip{x}{w}x-w\). Pairing with \(y\) gives the law by
+linearity. At \(w=x\) the result is \(x\); at \(w=-x\) it is
+\(-x\); and at \(w\perp x\) it is \(-w\). The formula applies
+without any choice of an oriented plane in the degenerate cases.
+\end{proof}
+
+\begin{example}[Rotation angle and half-angle]\label{m10:rotors}
+For an oriented orthonormal pair \(e_1,e_2\), let \(U=e_1e_2\) in
+the positive Euclidean Clifford convention. The rotor
+\(R(t)=\exp(-tU/2)\) acts by \(v\mapsto R(t)vR(t)^{-1}\).
+It fixes the orthogonal complement and rotates \(e_1\) toward
+\(e_2\) by \(t\). Indeed \(U\) commutes with vectors orthogonal
+to the plane and anticommutes with its vectors. On \(e_1\) the
+sandwich is \(R(t)^2e_1=\cos t\, e_1+\sin t\,e_2\).
+At \(t=2\pi\) the rotor is \(-1\) and at \(4\pi\) it is \(1\).
+A scalar complex phase cancels in a conjugation on observables.
+
+In \(\HH\), take \(ij=k\). Imaginary units have commutators
+\([i,j]=2k\) and cyclic permutations, so the basis
+\(i/2,j/2,k/2\) has cyclic structure constants \(1\). For a unit
+imaginary \(u\), \(\exp(tu/2)=\cos(t/2)+u\sin(t/2)\), whose
+conjugation action rotates through \(t\) with the orientation
+of \(ij=k\). For example
+\[
+ \frac{1+j}{\sqrt2}\frac{1+i}{\sqrt2}
+ =\frac{1+i+j-k}{2}
+ =\cos(\pi/3)+\frac{i+j-k}{\sqrt3}\sin(\pi/3).
+\]
+The two orthogonal quarter-turns in this order compose to an
+angle \(2\pi/3\). The rotation trace is \(1+2\cos t=4s^2-1\)
+for \(s=\cos(t/2)\), whereas the normalized trace of the
+quaternion's \(\SU(2)\)-matrix is \(s\) by the matrix
+realization in Theorem~\ref{m10:ladder}. Restriction of the
+quaternion product to \(\R\oplus\R u\) gives the complex circle.
+Orthogonal projection of \(S(\HH)\) to this plane gives the
+entire disk, since an orthogonal vector of length
+\(\sqrt{1-|p|^2}\) completes any disk point \(p\) to a unit
+quaternion. The projection to the real line gives \([-1,1]\).
+\end{example}
+
+\begin{remark}[Phase and coherence]\label{m10:phase}
+The balanced sum of matrices gives another instance of an imaginary
+slot. If \(SS^*=I\), \(S=A+B\), and \(AA^*=BB^*=I/2\), expansion
+gives \(AB^*+BA^*=0\). If also \(B^*B=I/2\), the skew-adjoint
+\(J=2AB^*\) has \(JJ^*=I\), hence \(J^2=-I\) and \(iJ\) is a
+self-adjoint involution. For normalized path-record states \(a,b\)
+with equal path amplitudes, the reduced path matrix has diagonal
+entries \(1/2\) and off-diagonal modulus \(|\langle a,b\rangle|/2\).
+Thus the interference visibility \(2|\rho_{12}|\) and the trace
+distance \(\tfrac12\operatorname{Tr}|aa^*-bb^*|\) between the
+records have squares summing to one. Indeed the two possible
+nonzero eigenvalues of \(aa^*-bb^*\) are
+\(\pm\sqrt{1-|\langle a,b\rangle|^2}\), by its trace and the trace
+of its square. These statements use the specified
+preparation and readouts. The comparison reflection itself uses
+only the real identity of Remark~\ref{m10:clifford}.
+The phase-sensitive projective replacement is
+Theorem~\ref{m2:bargmann}.
+\end{remark}
+
+\subsection{The dimension-three criterion and its scope}
+
+\begin{theorem}[Vector-valued Hodge curl]\label{m10:curl}
+Let \(V\) be a real oriented Euclidean space of dimension \(d\ge1\).
+An isomorphism between all bivectors and vectors requires \(d=3\).
+In dimension three the Hodge star supplies such an isometry.
+For a smooth vector field \(A\) on an oriented Riemannian manifold,
+its vorticity is \(dA^\flat\), a two-form. In dimension three
+\(\operatorname{curl} A=(*dA^\flat)^\sharp\) has zero divergence.
+In dimension two the Hodge representative of vorticity is a
+scalar in the chosen orientation. The dimensions of the
+exterior powers in dimension three are \(1,3,3,1\).
+\end{theorem}
+
+\begin{proof}
+An orthonormal basis gives
+\(\dim\Lambda^r V=\binom dr\). Equality of the dimensions in
+degrees one and two is \(d(d-3)=0\). In dimension three the
+Hodge definition on ordered orthonormal wedges sends a two-form
+to the complementary signed one-form. It is an isometry and
+\(*^2=1\) on one- and two-forms. Thus
+\(d*(\operatorname{curl} A)^\flat=d^2A^\flat=0\), which is
+the divergence equation by the defining volume-form formula.
+In dimension two the complementary degree is zero.
+\end{proof}
+
+\begin{example}[Octonionic cross product and quaternionic curl]
+\label{m10:cross-curl}
+For imaginary octonions let \(x\times y=\im(xy)\). Polarization
+gives \(xy=-\ip{x}{y}+x\times y\), and norm composition gives
+\(|x\times y|^2=|x|^2|y|^2-\ip{x}{y}^2\). The product is alternating,
+and the adjoint identities in Theorem~\ref{m10:ladder} give
+\(\ip{xy}{x}=-\ip{y}{x^2}=0\) and
+\(\ip{xy}{y}=-\ip{x}{y^2}=0\).
+Hence there is a perpendicular normed cross product in seven
+dimensions. Its linear map from \(\Lambda^2\R^7\) is surjective
+by the Fano products, with kernel dimension \(21-7=14\), the dimension
+of the derivation algebra of \(\mathbb O\) (both computed in the
+accompanying script).
+It is not equivariant under all of \(\SO(7)\): an orientation-preserving
+diagonal sign change can fix \(e_1,e_2\) and negate \(e_4=e_1e_2\)
+and one further basis vector. The Hodge criterion concerns
+invertibility on the entire space of vorticities. Continuous vector
+cross products of two vectors exist only in dimensions \(3\) and \(7\)
+\cite{m10:Eckmann}; for the classification of multilinear normed vector
+cross products see \cite[\S2]{m10:BrownGray}.
+
+On the unit quaternion sphere with its round metric and the
+orientation \(i,j,k\) at \(1\), take the orthonormal left-invariant
+frame \(E_a(q)=q i_a\) for \(i_a=i,j,k\). Differentiating these
+linear vector fields gives \([E_i,E_j]=2E_k\) cyclically.
+For its dual coframe \(\eta_i\), the exterior derivative on
+left-invariant fields is \(d\eta_i(X,Y)=-\eta_i([X,Y])\), so
+\(d\eta_i=-2\eta_j\wedge\eta_k\) cyclically. Each frame field
+is a curl eigenfield with eigenvalue \(-2\) and has zero divergence.
+The sphere is compact without boundary and
+\(\int_{S^3}d\omega=0\) for every smooth two-form \(\omega\)
+by Stokes' theorem. This identifies a closed geometry and an
+explicit curl family. A persistence law for physical dynamics
+would require an evolution equation.
+\end{example}
+
+\begin{proposition}[The two Hodge splittings in dimension four]
+\label{m10:four}
+On oriented Euclidean \(\R^4\), \(*^2=1\) in degree two
+and each Hodge eigenspace has dimension three. The left and right
+quaternion actions \(v\mapsto a v\bar b\) for \((a,b)\in S(\HH)^2\)
+give the double cover of \(\SO(4)\), with differential the
+direct sum of two copies of \(\mathfrak{su}(2)\) and image the two
+Hodge eigenspaces under the skew-operator identification.
+For Lorentz signature \((1,3)\), \(*^2=-1\) on real
+two-forms. Thus after complexification the two eigenspaces have
+eigenvalues \(+i,-i\) and are exchanged by conjugation. In an
+oriented orthonormal time-space splitting a real two-form is
+specified by \((\mathbf E,\mathbf B)\), with three real entries
+each. Its two complex parts may be recorded by
+\(\mathbf E\pm i\mathbf B\) in units equating the field components.
+\end{proposition}
+
+\begin{proof}
+In either signature the three complementary pairs are
+\(e^0\wedge e^j,e^k\wedge e^\ell\) for cyclic \(j,k,\ell\).
+The Hodge definition swaps each pair with signs whose product
+is \(+1\) in the Euclidean case and \(-1\) in Lorentz signature.
+This gives the multiplicities and the electric and magnetic
+coordinates. For the double cover, the left/right action is a
+homomorphism by associativity and norm multiplicativity. Its
+kernel has \(a=b\) by evaluation at \(1\), and commuting with all
+quaternions forces \(a=b=\pm1\). The injective differential has
+dimension six on both sides. Its image group is open and equals
+the connected \(\SO(4)\). In the basis \(1,i,j,k\), the two
+operators \(v\mapsto iv\) and \(v\mapsto -vi\) rotate the
+\((1,i)\) and \((j,k)\) planes with equal signs and opposite signs,
+respectively. The same holds cyclically. These are exactly the
+two triples of Hodge eigenvectors. The domain \(S^3\times S^3\)
+is simply connected, giving the spin cover.
+\end{proof}
+
+\begin{remark}[Lorentzian spinor readout]\label{m10:lorentz}
+The determinant of \(\phi(s,x)\) is \(s^2-|x|^2\) by
+Proposition~\ref{m10:pauli}. The congruence
+\(X\mapsto gXg^*\) for \(g\in\mathrm{SL}(2,\C)\) preserves it.
+The kernel is \(\{\pm I\}\): evaluating at \(X=I\) forces \(g\)
+unitary, and commuting with the Pauli matrices forces \(g\)
+scalar. The differential identifies its six real dimensions with
+the Lorentz Lie algebra, and connectedness gives surjectivity
+onto the identity component. Here connectedness of
+\(\mathrm{SL}(2,\C)\) follows by polar decomposition into
+\(\SU(2)\) and positive Hermitian determinant-one matrices,
+both path connected. Its infinitesimal generators consist of the
+three traceless skew-Hermitian directions and their three
+Hermitian multiples by \(i\). For a nonzero column \(\psi\),
+\(\psi\psi^*\) is rank one and positive, so its corresponding
+vector is future null. General Hermitian matrices span all
+four real directions. This matrix construction identifies
+the Lorentzian symmetry carried by the spin-factor determinant.
+\end{remark}
+
+\begin{proposition}[Orthogonal components and tensor correlations]
+\label{m10:blocks}
+For \(k\) prescribed orthogonal three-dimensional summands the
+block-preserving Lie algebra is
+\[
+ \bigoplus_{\alpha=1}^k\mathfrak{so}(3).
+\]
+Its codimension in \(\mathfrak{so}(3k)\) is
+\[
+ \binom{3k}{2}-3k=9\binom{k}{2}.
+\]
+In particular the within-block, total and cross-block rotation
+counts for \(k=2,3,5\) are respectively
+\((6,15,9),(9,36,27),(15,105,90)\).
+
+For a bipartite complex Hilbert space of dimensions \(m,n\ge1\),
+traceless Hermitian operators split orthogonally under the
+Hilbert--Schmidt inner product into the two local traceless
+sectors and the sector traceless on both factors. Their dimensions
+are \(m^2-1,n^2-1,(m^2-1)(n^2-1)\), with sum \(m^2n^2-1\).
+The correlation sector is the common kernel of the two partial
+traces. For dimensions \((2,2),(2,3),(3,3)\) the local-plus-correlation
+counts are \(6+9=15,\ 11+24=35,\ 16+64=80\).
+The embeddings \(X\mapsto X\otimes I\), \(Y\mapsto I\otimes Y\)
+give a direct sum of the traceless local Lie algebras, and sums
+exponentiate to products of the two local operators.
+\end{proposition}
+
+\begin{proof}
+Write a skew matrix in blocks. The diagonal blocks are
+three-dimensional, and every unordered pair of blocks contributes
+an arbitrary real \(3\times3\) off-diagonal block, the reverse
+block being its negative transpose. Normalized weights
+\(w_\alpha\ge0\) with \(\sum_\alpha w_\alpha=1\) give a unit
+vector \(\sum_\alpha\sqrt{w_\alpha}x_\alpha\) for unit
+\(x_\alpha\) in the respective summands, by orthogonality.
+For the tensor claim, take normalized identities and real
+orthonormal traceless Hermitian bases on both factors. Their
+tensor products are orthonormal by the trace product formula.
+Removing the identity tensor gives the three sectors. Partial
+trace kills the both-traceless terms and detects the two local
+sectors separately. On the traceless Lie algebras this also
+shows the two embeddings have zero intersection. They commute
+by tensor multiplication, which proves the exponential formula
+by the binomial theorem in the power series. If scalar
+generators are included on both factors the shared scalar
+direction must be quotiented from their sum.
+\end{proof}
+
+\begin{proposition}[Mode truncation and tensor-product size]\label{m10:modes}
+Let \(S_0,S_1,\ldots\) be closed Hilbert subspaces with
+\(S_{j+1}=S_j\oplus E_{j+1}\) for a closed orthogonal shell
+\(E_{j+1}\). Then
+\[
+ H=S_0\oplus E_1\oplus\cdots\oplus E_j\oplus S_j^\perp,\qquad
+ S_j^\perp=E_{j+1}\oplus S_{j+1}^\perp .
+\]
+If the union is dense, the orthogonal projections \(P_j\) tend
+strongly to \(I\); each proper \(S_j\) has \(\|I-P_j\|=1\).
+For a nonnegative summable sequence with sum \(T\), the number
+of terms at least \(\varepsilon>0\) is at most
+\(\lfloor T/\varepsilon\rfloor\). A trace formula such as
+\(T=RW/\pi\) gives the corresponding bound when the spectral
+model supplies that trace.
+
+The tensor product of \(N\ge1\) qubit carriers has complex
+dimension \(2^N\), with \(4^N-1\) real traceless Hermitian
+Pauli coordinates. Its pure rays have real dimension
+\(2(2^N-1)\), and \(\SU(2)^N\) has dimension \(3N\).
+For a chain with matrix product bond dimensions at most \(D\),
+an open-boundary tensor description uses at most \(2ND^2\)
+complex entries. Its Schmidt rank at a single bond is at most
+\(D\). For even \(N\), some states have Schmidt rank \(2^{N/2}\)
+at the middle cut.
+\end{proposition}
+
+\begin{proof}
+Orthogonal splitting and induction give the two shell formulas.
+For strong convergence approximate a given vector by a vector
+from one \(S_j\) and use the best approximation property for
+all later indices. The norm assertion follows by evaluating
+\(I-P_j\) on a unit vector of \(S_j^\perp\) and using
+orthogonal contraction. Summing \(\varepsilon\) over any
+finite subset of the active indices proves the threshold
+bound and finiteness. A positive threshold can leave an
+infinite tail, as the summable sequence \(2^{-j}\), \(j\ge1\),
+illustrates.
+
+Tensor bases multiply dimensions and Pauli bases give the
+traceless count by removing the identity. Quotienting the
+unit sphere by phase, or using the projective coordinate
+charts, gives the ray dimension. The product group dimension
+is the sum of the sphere dimensions. Open boundaries are
+one-dimensional and each site tensor has at most \(2D^2\)
+entries. Cutting one internal index expresses the coefficient
+matrix as a sum of at most \(D\) rank-one matrices. With
+\(d_0=2^{N/2}\), the normalized vector
+\(d_0^{-1/2}\sum_{\ell=1}^{d_0}e_\ell\otimes e_\ell\) has
+coefficient matrix \(I/\sqrt{d_0}\), giving the matching
+exponential requirement on that example. Local unitary actions
+preserve product states and cannot create this vector from a
+product input when \(d_0>1\).
+\end{proof}
+
+\begin{example}[A prefix marginal can lose a global sign]\label{m10:prefix}
+For \(N>3\) put \(\psi_\pm=(|0^N\rangle\pm |1^N\rangle)/\sqrt2\).
+The two vectors are orthogonal and their three-site prefix
+densities agree. Tracing out at least one site kills both
+off-diagonal terms because \(\langle0,1\rangle=0\). Both vectors
+are translation-homogeneous open-boundary matrix product states
+of bond dimension two. Take the two site matrices to be
+\(\operatorname{diag}(1,0)\), \(\operatorname{diag}(0,1)\),
+the left boundary to be \((1,1)\), and the right boundary
+to be \((1,\pm1)^{\mathsf T}/\sqrt2\). Multiplying the same
+site matrices at every position gives exactly the two displayed
+vectors. Prefix recovery up to phase has a formal theorem on
+the observable chart, the library theorem
+\texttt{observable\_chart\_phase\_recovery} \cite{Tru};
+that theorem keeps its observable-chart hypothesis, which these two
+vectors show cannot be dropped.
+\end{example}
+
+\begin{remark}[Tensor statements and the companion paper]\label{m10:tensor-companion}
+The companion paper composes qubit carriers by tensor products
+(Remarks~\ref{m2:paper2} and~\ref{m7:companion} list the places used
+here). The three precise statements of this subsection are:
+(i) the traceless Hermitian operators of a bipartite system are the
+orthogonal sum of the two local sectors and a correlation sector of
+dimension \((m^2-1)(n^2-1)\), the common kernel of both partial traces
+(Proposition~\ref{m10:blocks}); local pure data of dimension \(3N\)
+therefore misses the correlations, and local unitary orbits of product
+states contain only product states;
+(ii) a matrix product state of bond dimension \(D\) has Schmidt rank at
+most \(D\) at every cut, and the middle-cut maximally entangled vector
+needs \(D\ge2^{N/2}\) (Proposition~\ref{m10:modes});
+(iii) three-site prefix marginals do not determine a homogeneous
+bond-two open-boundary state up to phase (Example~\ref{m10:prefix}).
+\end{remark}
+
+\begin{hypothesis}[Three-dimensional field model]\label{m10:field-model}
+A proposed physical model assigns a distinguished oriented
+Euclidean direction space to each elementary field and requires
+its full vorticity two-form to be representable by a vector in
+that same space through an isomorphism. For independent classical
+channels it additionally selects a decomposition and
+block-preserving symmetries as in Proposition~\ref{m10:blocks}.
+Under the vorticity requirement Theorem~\ref{m10:curl} forces
+the elementary direction spaces to have dimension three.
+\end{hypothesis}
+
+\begin{remark}[Dimension-three readings that fail]\label{m10:folklore}
+Each of the following readings attributes to comparison, or to a
+field law, a selection of dimension three. Each is refuted by the
+example given; Theorem~\ref{m10:curl} is the correct statement, and
+Hypothesis~\ref{m10:field-model} is the physical assumption that uses it.
+\begin{enumerate}[label=(\roman*)]
+\item \emph{A smooth field law forces dimension three.} The field
+\(A=x_1\partial_2\) on \(\R^4\) is smooth, with vorticity
+\(dA^\flat=dx^1\wedge dx^2\). Only the isomorphism from the entire
+two-form space to vectors forces \(d=3\).
+\item \emph{A perpendicular normed vector cross product forces
+dimension three.} The imaginary octonions carry one in dimension seven
+(Example~\ref{m10:cross-curl}); continuous cross products of two vectors
+exist exactly in dimensions \(3\) and \(7\) \cite{m10:Eckmann},
+\cite[\S2]{m10:BrownGray}.
+\item \emph{Four-dimensional Euclidean geometry splits into independent
+three-dimensional vector geometries.} The group \(\SO(4)\) acts
+transitively on the unit vectors of \(\R^4\) (\(v=(v\bar u)u\) for unit
+quaternions), so the vector representation is irreducible; the Hodge
+split \(3+3\) of Proposition~\ref{m10:four} is in degree two. In
+Lorentz signature the degree-two split is complex conjugate, with
+\(*^2=-1\).
+\item \emph{Every exclusion chart is a three-dimensional ball.} In
+complex matrix size \(n\) the exclusion face of a pure state has
+dimension \((n-1)^2-1\) (Remark~\ref{m10:exclusion}); in size four it is
+the eight-dimensional state space of a three-level system.
+\item \emph{Full stretching has three coordinates.} A general positive
+symmetric stretch of \(\R^3\) has six independent entries, including
+the directions of its principal axes; three log principal stretches
+parameterize positive diagonal stretch in a fixed frame, and isotropic
+dilation has one parameter. In the diagonal coordinates the line
+\((1,1,1)\) controls volume and its perpendicular plane controls ratios
+of lengths.
+\end{enumerate}
+\end{remark}
+
+\begin{remark}[Remaining dimension counts]\label{m10:interpretations}
+The rank-three cone-response map used in a model of color
+perception is a linear readout on spectra. Equality of readings
+is equivalence modulo its kernel. The defining color
+representation of \(\SU(3)\) has complex dimension three and
+its traceless skew-Hermitian generator algebra has real
+dimension \(3^2-1=8\). Spatial translation has three parameters
+in \(\R^3\) and rotation has three.
+
+A quaternionic circle supports an integer winding for loops in
+that chosen circle. Inside \(S^3\) these loops can contract.
+The integer degree for maps \(S^3\to S^3\) instead records a
+three-dimensional homotopy invariant. The degrees add under
+pointwise multiplication of maps: the multiplication
+pullback of the generator of \(H^3(S^3;\mathbb Z)\) is the
+sum of its two pullbacks, as restriction to each factor
+determines the two coefficients. A rational ratio of two
+integer degrees uses an additional choice of nonzero
+denominator and gives the usual field of fractions. This
+observation supplies neither a canonical projection of a
+single unit quaternion to a rational number nor a new
+arithmetic on such ratios. The arithmetic of actual
+quaternionic coordinates is developed in
+Proposition~\ref{m6:hurwitz} and the subsequent results of
+Section~\ref{sec:m6}.
+\end{remark}
+
+\begin{remark}[Field reconstruction programme]\label{m10:programme}
+This remark is a programme; no conjecture is asserted.
+A derivation of Hypothesis~\ref{m10:field-model} from transport
+would require a comparison-defined differential complex and
+an intrinsic justification that every two-form is represented
+by a single tangent vector. A physical identification of
+orthogonal Hilbert tails with a time variable would require a
+map from the tails to clock observables and an evolution and
+convergence statement. A reconstruction of interacting states
+from local spherical data would have to recover the tensor
+correlations of Proposition~\ref{m10:blocks}, with separate
+hypotheses for any restricted state family.
+A related algebraic question is which finite-dimensional spin
+factors allow arbitrary relations satisfying the two contracts
+of Definition~\ref{m10:contract}. Theorem~\ref{m10:orientation}
+settles the spatial dimension three case.
+\end{remark}
+
 \setcounter{section}{5}
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\theHsection}{\arabic{section}}
@@ -10969,6 +12000,9 @@ Thm.~\ref{m7:core}, Prop.~\ref{m7:braids} & Cores and knot quandles \cite{m7:Joy
 Prop.~\ref{m7:cocycle} & Quandle cocycles \cite{m7:CJKLS}; the triviality of comparison-valued weights on $S^3$ not found in the searched scope\\
 Thm.~\ref{m8:counts} & Maxwell count \cite{m8:maxwell}; redundant rigidity and coning \cite{m8:hendrickson,m8:coning}; the sharp spherical scalar counts not found in the searched scope\\
 Thm.~\ref{m8:poly} & Descartes defect sum classical; piecewise-flat curvature \cite{m8:cheeger}; the normal-polygon convergence proof elementary\\
+Thm.~\ref{m10:ladder}, Prop.~\ref{m10:pieces}, Ex.~\ref{m10:zero} & Doubling, Artin, Moufang \cite{Baez02,Schafer66}; sedenion zero divisors \cite{m10:Moreno}; the witnesses elementary\\
+Prop.~\ref{m10:spin-geometry}, Thm.~\ref{m10:orientation} & Spin factors \cite{m2:JNW,m10:HOS}; the orientation classification is a library theorem (\S\ref{sec:leanlib})\\
+Thm.~\ref{m10:curl}, Rem.~\ref{m10:folklore} & Hodge duality classical; vector cross products \cite{m10:Eckmann,m10:BrownGray}\\
 Thm.~\ref{m6:cover} & Spectral gap \cite{m6:LPS,m6:PS}; strong approximation \cite{m6:Sardari}; synthesis \cite{m6:RS}; the covering consequences elementary given these\\
 \bottomrule
 \end{tabular}
@@ -11162,7 +12196,7 @@ black box; a formal statement of Theorem~\ref{thm:main} can avoid it by assuming
 
 All identities and limits of Part~\ref{part:arc} that are not textbook facts, and the identities of Part~\ref{part:axiom} used there, were
 checked numerically on random or explicit inputs by the accompanying script \texttt{check\_arc\_calculus.py} (numpy and the
-standard library; 223 checks, eight of them for Part~\ref{part:alg}, six for Section~\ref{sec:m2}, fourteen for Section~\ref{sec:m3}, eight for Section~\ref{sec:d4}, six for Section~\ref{sec:m7}, seven for Section~\ref{sec:m5}, six for Section~\ref{sec:m8}, twelve for Sections~\ref{sec:m4}, \ref{sec:m4atlas} and seven for Section~\ref{sec:m6}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present eighteen: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file, one each for Sections~\ref{sec:m3}, \ref{sec:d4}, \ref{sec:m7}, \ref{sec:m5}, \ref{sec:m8} and \ref{sec:m6}, and one for Sections~\ref{sec:m4}, \ref{sec:m4atlas}); everything runs
+standard library; 238 checks, eight of them for Part~\ref{part:alg}, six for Section~\ref{sec:m2}, fourteen for Section~\ref{sec:m3}, eight for Section~\ref{sec:d4}, six for Section~\ref{sec:m7}, fifteen for Section~\ref{sec:m10}, seven for Section~\ref{sec:m5}, six for Section~\ref{sec:m8}, twelve for Sections~\ref{sec:m4}, \ref{sec:m4atlas} and seven for Section~\ref{sec:m6}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present nineteen: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file, one each for Sections~\ref{sec:m3}, \ref{sec:d4}, \ref{sec:m7}, \ref{sec:m10}, \ref{sec:m5}, \ref{sec:m8} and \ref{sec:m6}, and one for Sections~\ref{sec:m4}, \ref{sec:m4atlas}); everything runs
 from the directory of this paper.  These include the recurrence and its Chebyshev form, the residual expansion of
 Theorem~\ref{thm:consist}, the inequality of Theorem~\ref{thm:action}, the split and the Brownian limits of
 Theorem~\ref{thm:sagitta} (simulated, $\tfrac32T$ to two decimals), the transport formula of
@@ -11471,6 +12505,31 @@ Theorem~\ref{m8:counts} or the limit in Theorem~\ref{m8:poly}.
 \texttt{CircleDoubleCoverNoSection.lean}, \texttt{no\_continuous\_global\_section}.
 \end{itemize}}
 
+For Section~\ref{sec:m10} the following declarations were located (no \texttt{sorry} in their files).
+{\small\raggedright
+\begin{itemize}[leftmargin=1.5em]
+\item Theorem~\ref{m10:orientation}, forward implication: \texttt{D5/S3/Quantum/SpinFactor/OriginalClassification.lean},
+\texttt{complete\_consequences} (arbitrary $D$; \texttt{P2}, \texttt{PB} in \texttt{OriginalDContract.lean} are those of Definition~\ref{m10:contract}).
+\item Remark~\ref{m10:exclusion}: \texttt{D5/S3/Quantum/OriginExclusionSegmentRigidity.lean}, \texttt{b\_constraint\_recenter};
+\texttt{D5/S3/Quantum/Foundation/ExclusionBallFaces.lean}, \texttt{exclusion\_ball\_faces} (abstract cone with the exclusion-ball
+hypothesis); \texttt{D5/S3/Quantum/Foundation/HermitianExclusionBall.lean}, \texttt{all\_pure\_charts} (three-dimensional chart at
+every pure qutrit state).
+\item Proposition~\ref{m10:pauli}, Bloch form: \texttt{D5/S3/Quantum/Information/ActualPureQubitGeometry.lean},
+\texttt{bloch\_geometry\_of\_isHermitian}; Example~\ref{m10:rotors}, spinor rotor: \texttt{ShortestGateHolonomy.lean}, \texttt{rotor\_shortest\_gate}.
+\item Remark~\ref{m10:phase}: \texttt{BalancedUnitarySum.lean}, \texttt{crossTerms\_eq\_zero}; \texttt{BalancedUnitaryComplexStructure.lean},
+\texttt{relativeComplexStructure\_square}; \texttt{D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean},
+\texttt{pure\_record\_distinguishability\_coherence\_complementarity}.
+\item Proposition~\ref{m10:blocks}, tensor sectors: \texttt{D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.lean},
+\texttt{local\_marginal\_correlation\_blind\_spot}.
+\item Proposition~\ref{m10:modes}: \texttt{D5/S3/Quantum/Completion/IncreasingProjectionStrongLimit.lean},
+\texttt{increasing\_projection\_strong\_limit}; \texttt{D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.lean},
+\texttt{finite\_rank\_concentration\_mode\_bound}.
+\item Example~\ref{m10:prefix}: \texttt{D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSDensityRecovery.lean},
+\texttt{observable\_chart\_phase\_recovery} (under its observable-chart hypothesis).
+\end{itemize}}
+No declaration was found by name search for Theorem~\ref{m10:ladder}, Proposition~\ref{m10:pieces}, Example~\ref{m10:zero} or
+Theorem~\ref{m10:curl}.
+
 \section{What remains open}\label{sec:open}
 
 \begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2.6em]
@@ -11534,6 +12593,9 @@ targets); and the anyon realisation programme of Remark~\ref{m7:anyons-programme
 \item \emph{Polyhedral defects and rigidity.}  Conjecture~\ref{m8:conjecture}: convergence of $4^jD_j$ for the dyadic icosahedral
 refinement (values $1.047198$, $1.237365$, $1.343633$, $1.468071$, $1.503815$ at $j=0,\dots,4$); and the programmes of
 Remark~\ref{m8:programmes}.
+\item \emph{Doubling, spin factors and fields.}  The programme of Remark~\ref{m10:programme}: a comparison-defined differential
+complex that would justify Hypothesis~\ref{m10:field-model}, and the directed relations satisfying the contracts of
+Definition~\ref{m10:contract} on spin factors of spatial dimension other than three.
 \end{enumerate}
 
 \section*{Use of AI tools}
@@ -11839,6 +12901,12 @@ The authors used AI tools, namely Claude Fable 5.2 and Claude Opus 5.5 (via Clau
 \bibitem{m8:bott} R.~Bott and J.~Milnor, On the parallelizability of the spheres, \emph{Bull. Amer. Math. Soc.} \textbf{64} (1958), 87--89.
 \bibitem{m8:kervaire} M.~A.~Kervaire, Non-parallelizability of the $n$-sphere for $n>7$, \emph{Proc. Natl. Acad. Sci. USA} \textbf{44} (1958), 280--283.
 \bibitem{m8:maxwell} J.~C.~Maxwell, On the calculation of the equilibrium and stiffness of frames, \emph{Philos. Mag.} (4) \textbf{27} (1864), 294--299.
+% Section 5E references (checked 2026-11-20: Brown--Gray and Eckmann via Crossref, titles included; Moreno via zbMATH and the
+% arXiv abstract page; Hanche-Olsen--Stormer via zbMATH).
+\bibitem{m10:HOS} H.~Hanche-Olsen and E.~St{\o}rmer, \emph{Jordan Operator Algebras}, Monographs and Studies in Mathematics \textbf{21}, Pitman, Boston, 1984.
+\bibitem{m10:BrownGray} R.~B.~Brown and A.~Gray, Vector cross products, \emph{Comment. Math. Helv.} \textbf{42} (1967), 222--236.
+\bibitem{m10:Eckmann} B.~Eckmann, Stetige L\"osungen linearer Gleichungssysteme, \emph{Comment. Math. Helv.} \textbf{15} (1942), 318--339.
+\bibitem{m10:Moreno} G.~Moreno, The zero divisors of the Cayley--Dickson algebras over the real numbers, \emph{Bol. Soc. Mat. Mexicana (3)} \textbf{4} (1998), 13--28, arXiv:q-alg/9710013.
 \end{thebibliography}
 
 \end{document}

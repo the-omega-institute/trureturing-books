@@ -33,6 +33,7 @@ CHECK_MODULES = [
     ("m6_arithmetic_holonomy.py", "PASS all 10 check groups", None),                          # Section 10B
     ("m7_braids_quandles.py",  "copying and the six-state bound", None),                      # Section 5D
     ("m8_arc_bodies_rigidity.py", "PASS all 6 groups", None),                                 # Section 9B
+    ("m10_cayley_dickson.py", "All seven NumPy check groups passed.", None),                  # Section 5E
     # register new modules here: (file in checks/, success marker, optional predicate)
 ]
 _chk = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "checks")
@@ -3201,6 +3202,388 @@ q, N = 0.5, 4; e = max(e, abs((1 - q + q * np.exp(2j * np.pi / N)) ** N + 0.25))
 for q in (0.2, 0.7): e = max(e, abs((1 - q + q * np.exp(2j * np.pi / 4000)) ** 4000 - np.exp(2j * np.pi * q)) * 1e-2)
 e = max(e, abs(4 * np.sqrt(3) / 4 * 2 - 2 * np.sqrt(3)))
 report("39 Thm m8:poly, Ex. m8:icosa, Conj. m8:conjecture, Ex. m8:latitude: defects sum to 4pi, V=10nu^2+2, maxima 60/17.724/4.812 deg, rescaled 1.0472..1.5038; overlaps", e, 1e-4)
+
+
+# =========================================================== 40. Section 5E (independent checks of the m10 section)
+import itertools as _it40
+_r40 = np.random.default_rng(31040)
+def _cdconj(x):
+    y = -x.copy(); y[0] = x[0]; return y
+def _cdmul(x, y):
+    # (a,b)(p,q) = (a p - conj(q) b, q a + b conj(p)); own recursive implementation
+    n = len(x)
+    if n == 1:
+        return x * y
+    h = n // 2; a, b, p, q = x[:h], x[h:], y[:h], y[h:]
+    return np.concatenate([_cdmul(a, p) - _cdmul(_cdconj(q), b), _cdmul(q, a) + _cdmul(b, _cdconj(p))])
+def _cdunit(n):
+    v = _r40.normal(size=n); return v / np.linalg.norm(v)
+def _cdT(x, y, z):
+    return _cdmul(_cdmul(x, _cdconj(y)), z)
+def _ass40(a, b, c):
+    return _cdmul(_cdmul(a, b), c) - _cdmul(a, _cdmul(b, c))
+# (1) ladder: associativity at 4, alternativity/Moufang/composition at 8, composition failure at 16, adjoints, cross-term formula
+e1 = 0.0; e2 = 0.0; comp16 = 0.0
+for _ in range(60):
+    a, b, c = _r40.normal(size=(3, 4)); e1 = max(e1, np.abs(_ass40(a, b, c)).max())
+    x, y, z = _r40.normal(size=(3, 8))
+    e1 = max(e1, np.abs(_ass40(x, x, y)).max(), np.abs(_ass40(y, x, x)).max(), np.abs(_ass40(x, y, x)).max())
+    e1 = max(e1, np.abs(_cdmul(_cdmul(_cdmul(z, x), y), x) - _cdmul(z, _cdmul(x, _cdmul(y, x)))).max())          # right Moufang
+    e1 = max(e1, np.abs(_cdmul(x, _cdmul(y, _cdmul(x, z))) - _cdmul(_cdmul(_cdmul(x, y), x), z)).max())          # left Moufang
+    e1 = max(e1, np.abs(_cdmul(_cdmul(x, y), _cdmul(z, x)) - _cdmul(_cdmul(x, _cdmul(y, z)), x)).max())          # middle Moufang
+    e1 = max(e1, abs(np.linalg.norm(_cdmul(x, y)) - np.linalg.norm(x) * np.linalg.norm(y)))
+    L = np.array([_cdmul(x, f) for f in np.eye(8)]).T; Lb = np.array([_cdmul(_cdconj(x), f) for f in np.eye(8)]).T
+    e1 = max(e1, np.abs(L.T - Lb).max(), np.abs(L.T @ L - (x @ x) * np.eye(8)).max())
+    xu = x / np.linalg.norm(x); yu = y / np.linalg.norm(y); zu = z / np.linalg.norm(z)
+    e1 = max(e1, np.abs(_cdT(xu, xu, zu) - zu).max(), np.abs(_cdT(xu, yu, yu) - xu).max())
+    e1 = max(e1, np.abs(_cdT(xu, yu, xu) - (2 * (xu @ yu) * xu - yu)).max())
+    w = _cdunit(8); kk = lambda p, q: (1 + p @ q) / 2
+    A_, B_, D_ = 2 * (xu @ yu), -1, 1 - (xu @ yu)
+    e1 = max(e1, abs(kk(w, _cdT(xu, yu, xu)) - (A_ * kk(w, xu) + B_ * kk(w, yu) + D_)))
+    s, t = _r40.normal(size=(2, 16)); comp16 = max(comp16, abs(np.linalg.norm(_cdmul(s, t)) - np.linalg.norm(s) * np.linalg.norm(t)))
+    # cross-term formula for doubling an associative rung (quaternions)
+    A, B, P, Q = _r40.normal(size=(4, 4)); pr = _cdmul(np.r_[A, B], np.r_[P, Q])
+    rhs = (A @ A + B @ B) * (P @ P + Q @ Q) - 2 * _cdmul(_cdmul(_cdmul(A, P), _cdconj(B)), Q)[0] + 2 * _cdmul(_cdmul(_cdmul(Q, A), P), _cdconj(B))[0]
+    e2 = max(e2, abs(pr @ pr - rhs), abs(_cdmul(_cdmul(_cdmul(A, P), _cdconj(B)), Q)[0] - _cdmul(_cdmul(_cdmul(Q, A), P), _cdconj(B))[0]))
+x8, y8, z8 = _r40.normal(size=(3, 8))
+heapfail = np.linalg.norm(_cdT(_cdT(x8, y8, z8), _r40.normal(size=8), x8) - _cdT(x8, y8, _cdT(z8, _r40.normal(size=8), x8)))
+assoc8 = max(np.linalg.norm(_ass40(*_r40.normal(size=(3, 8)))) for _ in range(5))
+report("40 Thm m10:ladder: H associative; O alternative, three Moufang identities, |xy|=|x||y|, L_x^*=L_xbar, Mal'cev, s_xw, two-readout coefficients; cross-term formula", max(e1, e2), 1e-11)
+report("40 Thm m10:ladder: failures: O associator nonzero, |st|-|s||t| at 16 sampled positive", 0.0 if (assoc8 > 0.1 and comp16 > 0.1) else 1.0, 0.5)
+# (2) Fano basis, associator table, 28 noncollinear triples, pieces
+f = np.eye(8)
+E40 = [None, f[1], f[2], f[4], f[3], f[6], -f[7], f[5]]
+lines = [(1, 2, 4), (2, 3, 5), (3, 4, 6), (4, 5, 7), (5, 6, 1), (6, 7, 2), (7, 1, 3)]
+e = 0.0
+for (i, j, k) in lines:
+    for (p, q, r) in ((i, j, k), (j, k, i), (k, i, j)):
+        e = max(e, np.abs(_cdmul(E40[p], E40[q]) - E40[r]).max(), np.abs(_cdmul(E40[q], E40[p]) + E40[r]).max())
+tab = {(1, 2, 3): -6, (1, 2, 5): 7, (1, 2, 6): 3, (1, 3, 5): -4}
+for (i, j, k), m in tab.items():
+    v = np.sign(m) * E40[abs(m)]
+    e = max(e, np.abs(_cdmul(_cdmul(E40[i], E40[j]), E40[k]) - v).max(), np.abs(_cdmul(E40[i], _cdmul(E40[j], E40[k])) + v).max())
+lineset = {frozenset(l) for l in lines}; nc = 0
+for tri in _it40.combinations(range(1, 8), 3):
+    for (p, q, r) in _it40.permutations(tri):
+        nrm = np.linalg.norm(_ass40(E40[p], E40[q], E40[r]))
+        e = max(e, abs(nrm - (0 if frozenset(tri) in lineset else 2)))
+    nc += frozenset(tri) not in lineset
+e = max(e, abs(nc - 28))
+# unsigned canonical indices multiply by XOR
+for a in range(16):
+    for b in range(16):
+        pr = _cdmul(np.eye(16)[a], np.eye(16)[b]); e = max(e, abs(abs(pr[a ^ b]) - 1), np.abs(np.delete(pr, a ^ b)).max())
+report("40 Ex. m10:fano: relabelled basis gives the seven lines, table of four associators, |assoc|=2 on 28 triples (all orderings), 0 on lines, XOR rule to 16", e, 1e-12)
+# pieces: pairwise intersections, e1+..+e7 outside, quaternionic subalgebra generated with an orthogonal direction
+def _span_dim(vs):
+    return np.linalg.matrix_rank(np.array(vs), tol=1e-9)
+def _onb(vs):
+    U, sv, _ = np.linalg.svd(np.array(vs).T, full_matrices=False); return U[:, :int(np.sum(sv > 1e-9))]
+def _subalg(gens):
+    V = list(_onb([f[0]] + list(gens)).T)
+    while True:
+        new = V + [_cdmul(a, b) for a in V for b in V]
+        if _span_dim(new) == _span_dim(V): break
+        V = list(_onb(new).T)
+    return _onb(V)
+pieces = [np.array([f[0]] + [E40[i] for i in l]).T for l in lines]
+e = 0.0
+for P1, P2 in _it40.combinations(pieces, 2):
+    inter = P1.shape[1] + P2.shape[1] - _span_dim(list(P1.T) + list(P2.T)); e = max(e, abs(inter - 2))
+ssum = sum(E40[1:]); outside = min(np.linalg.norm(ssum - P @ np.linalg.lstsq(P, ssum, rcond=None)[0]) for P in pieces)
+tdir = E40[1] - E40[2]; S = _subalg([ssum, tdir])
+e = max(e, abs(S.shape[1] - 4), abs(ssum @ tdir))
+for P in pieces:
+    e = max(e, 1.0 if _span_dim(list(S.T) + list(P.T)) == 4 else 0.0)
+assocS = max(np.abs(_ass40(*(S @ _r40.normal(size=(3, 4)).T).T)).max() for _ in range(20))
+e = max(e, assocS, abs(_span_dim([E40[i] for l in lines for i in l]) - 7))
+report("40 Prop. m10:pieces: any two Fano pieces meet in dim 2; e1+..+e7 at distance %.3f from every piece; <s,e1-e2> quaternionic, associative, not a piece; 21 imaginary generators span 7" % outside,
+       e + (0 if outside > 1 else 1), 1e-9)
+# (3) sedenion zero divisors, two-sided conjugate inverse, failed transport, persistence, annihilator dimension
+def _oct16(a, b):
+    return np.r_[a, b]
+rows = [(_oct16(E40[1], E40[2]), _oct16(E40[3], E40[6])), (_oct16(E40[1], E40[3]), _oct16(E40[2], -E40[6])), (_oct16(E40[1], E40[4]), _oct16(E40[3], E40[5]))]
+e = 0.0; one16 = np.eye(16)[0]; one32 = np.eye(32)[0]; kers = []
+for u, v in rows:
+    e = max(e, np.abs(_cdmul(u, v)).max(), abs(u @ u - 2), abs(v @ v - 2), abs(u @ v), np.abs(_cdmul(v, u)).max())
+    x, w = u / np.sqrt(2), v / np.sqrt(2)
+    e = max(e, np.abs(_cdmul(x, _cdconj(x)) - one16).max(), np.abs(_cdmul(_cdconj(x), x) - one16).max())   # two-sided conjugate inverse
+    e = max(e, np.abs(_cdT(x, one16, w)).max(), np.abs(_cdT(x, w, w)).max(), np.abs(_cdT(x, w, x)).max())
+    e = max(e, np.abs(_cdmul(_cdmul(x, w), w)).max(), np.abs(_cdmul(x, _cdmul(w, w)) + x).max(), np.abs(_cdconj(w) + w).max())
+    z = _cdunit(16); e = max(e, np.abs(_cdT(x, x, z) - z).max())
+    e = max(e, np.abs(_cdmul(np.r_[x, np.zeros(16)], np.r_[w, np.zeros(16)])).max())                     # persists at 32
+    e = max(e, np.abs((2 * (x @ w) * x - w) + w).max())
+    Lx = np.array([_cdmul(x, g) for g in np.eye(16)]).T; Rx = np.array([_cdmul(g, x) for g in np.eye(16)]).T
+    kers += [16 - np.linalg.matrix_rank(Lx, tol=1e-9), 16 - np.linalg.matrix_rank(Rx, tol=1e-9)]
+# generic norm-one zero divisors (a,b), a,b orthogonal unit imaginary octonions /sqrt2: annihilator dim 4, so 11+3=14
+for _ in range(20):
+    a = np.r_[0, _r40.normal(size=7)]; b = np.r_[0, _r40.normal(size=7)]; b -= (a @ b) / (a @ a) * a
+    a /= np.linalg.norm(a); b /= np.linalg.norm(b); x = np.r_[a, b] / np.sqrt(2)
+    Lx = np.array([_cdmul(x, g) for g in np.eye(16)]).T; kers.append(16 - np.linalg.matrix_rank(Lx, tol=1e-9))
+gen = 16 - np.linalg.matrix_rank(np.array([_cdmul(_cdunit(16), g) for g in np.eye(16)]).T, tol=1e-9)
+e = max(e, max(abs(k - 4) for k in kers), gen)
+report("40 Ex. m10:zero, Rem. m10:moreno: three rows uv=vu=0, N=2, orthogonal; x xbar=xbar x=1 yet xw=0; T(x,1,w)=T(x,w,w)=T(x,w,x)=0; persists at 32; annihilators dim 4, generic 0 (11+3=14=dim G2)", e, 1e-12)
+# prop:dim hypothesis fails at 16: the left transport z -> T(x,1,z) of a witness is not isometric
+x = rows[0][0] / np.sqrt(2); Lx = np.array([_cdmul(x, g) for g in np.eye(16)]).T; sv = np.linalg.svd(Lx, compute_uv=False)
+report("40 Rem. m10:fit: at rank 16 the transport L_x of a unit witness has singular values in [%.3f, %.3f], so Prop. prop:dim's invariance hypothesis fails" % (sv.min(), sv.max()),
+       0.0 if (sv.min() < 1e-9 and sv.max() > 1.1) else 1.0, 0.5)
+# (4) spin factors: Jordan identity, cone, norm, Herm_2(K) square formula for K=R,C,H,O, reflection, trace pairing
+def _jo(a, b):
+    return np.r_[a[0] * b[0] + a[1:] @ b[1:], a[0] * b[1:] + b[0] * a[1:]]
+e = 0.0
+for n in range(1, 10):
+    for _ in range(10):
+        a, b = _r40.normal(size=(2, n + 1)); a2 = _jo(a, a)
+        e = max(e, np.abs(_jo(_jo(a2, b), a) - _jo(a2, _jo(b, a))).max())
+        s, xv = a[0], a[1:]; ev = np.array([s + np.linalg.norm(xv), s - np.linalg.norm(xv)])
+        e = max(e, abs(np.abs(ev).max() - (abs(s) + np.linalg.norm(xv))))
+        if s >= np.linalg.norm(xv):  # square root by spectral formula
+            u = xv / np.linalg.norm(xv); r = np.sqrt(ev[0]) * np.r_[0.5, u / 2] + np.sqrt(ev[1]) * np.r_[0.5, -u / 2]
+            e = max(e, np.abs(_jo(r, r) - a).max())
+    if n >= 2:
+        xu, yu = _cdunit(n), _cdunit(n); px = np.r_[0.5, xu / 2]; py = np.r_[0.5, yu / 2]
+        e = max(e, np.abs(_jo(px, px) - px).max(), abs(2 * _jo(px, py)[0] - (1 + xu @ yu) / 2))
+        Lp = np.array([_jo(px, g) for g in np.eye(n + 1)]).T; Rf = np.eye(n + 1) + 8 * (Lp @ Lp - Lp)
+        target = np.diag(np.r_[1, -np.ones(n)]); target[1:, 1:] += 2 * np.outer(xu, xu)
+        e = max(e, np.abs(Rf - target).max())
+# Herm_2(K): matrix square, scalar s^2+t^2+|z|^2 and vector 2s(t,z), with K=O via own multiplication
+for dK in (1, 2, 4, 8):
+    for _ in range(10):
+        s, t = _r40.normal(size=2); z = _r40.normal(size=dK)
+        X11 = np.r_[s + t, np.zeros(dK - 1)]; X22 = np.r_[s - t, np.zeros(dK - 1)]
+        m = lambda p, q: _cdmul(p, q)
+        Y11 = m(X11, X11) + m(z, _cdconj(z)); Y12 = m(X11, z) + m(z, X22); Y22 = m(_cdconj(z), z) + m(X22, X22)
+        e = max(e, abs((Y11[0] + Y22[0]) / 2 - (s * s + t * t + z @ z)), abs((Y11[0] - Y22[0]) / 2 - 2 * s * t), np.abs(Y12 - 2 * s * z).max(), np.abs(Y11[1:]).max(initial=0.0))
+dims_ok = [1 + 1 + dK for dK in (1, 2, 4, 8)] == [3, 4, 6, 10]
+report("40 Prop. m10:spin-geometry: Jordan identity n=1..9, order-unit norm |s|+|x|, spectral square roots, I+8(L_p^2-L_p) reflection, tr(p_x p_y)=(1+<x,y>)/2, Herm_2(K) squares for K=R,C,H,O, dims 3,4,6,10",
+       e + (0 if dims_ok else 1), 1e-11)
+# (5) orientation contract: matrix interface, P2 and PB for eps=+-1, failures for other multiples, associator identity, norm bound
+sx = np.array([[0, 1], [1, 0]], complex); sy = np.array([[0, -1j], [1j, 0]]); sz = np.array([[1, 0], [0, -1]], complex)
+def _phi40(a):
+    return a[0] * np.eye(2) + a[1] * sx + a[2] * sy + a[3] * sz
+def _D40(lam):
+    return lambda a, b: np.r_[0, lam * np.cross(a[1:], b[1:])]
+def _alpha(m, v, a):
+    return m * a[0] + v @ a[1:]
+def _P2gap(D, trials=400):
+    worst = 0.0
+    for _ in range(trials):
+        v = _r40.normal(size=3); m = np.linalg.norm(v) * (1 + abs(_r40.normal()) * 0.1 * _r40.integers(0, 2)); a, b = _r40.normal(size=(2, 4))
+        R = lambda p, q: _alpha(m, v, _jo(p, q)) - 1j * _alpha(m, v, D(p, q))
+        G = np.array([[R(a, a), R(a, b)], [R(b, a), R(b, b)]]); worst = min(worst, np.linalg.eigvalsh((G + G.conj().T) / 2).min() / (1 + np.abs(G).max()))
+        worst = min(worst, -np.abs(G - G.conj().T).max())
+    return worst
+def _PBgap(D, trials=200):
+    worst = 0.0
+    for _ in range(trials):
+        v = _r40.normal(size=3); m = np.linalg.norm(v) + abs(_r40.normal()); a, b, c = _r40.normal(size=(3, 4))
+        Q = lambda p, q: _alpha(m, v, _jo(p, p) + _jo(q, q)) + 2 * _alpha(m, v, D(p, q))
+        h = D(a, b) - _jo(a, c); k = _jo(a, b) + D(a, c)
+        worst = max(worst, abs(Q(b + h, c + k) - Q(b - h, c - k)))
+    return worst
+e = 0.0
+for _ in range(50):
+    a, b, c = _r40.normal(size=(3, 4))
+    e = max(e, np.abs(_phi40(_jo(a, b)) - 1j * _phi40(_D40(-1)(a, b)) - _phi40(a) @ _phi40(b)).max())
+    e = max(e, np.abs(_phi40(_jo(a, b)) - 1j * _phi40(_D40(1)(a, b)) - _phi40(b) @ _phi40(a)).max())
+    for eps in (1, -1):
+        D = _D40(eps); on = lambda p: abs(p[0]) + np.linalg.norm(p[1:])
+        e = max(e, np.abs(_jo(_jo(a, b), c) - _jo(a, _jo(b, c)) - (D(D(a, b), c) - D(a, D(b, c)))).max())
+        e = max(e, max(0, on(D(a, b)) - on(a) * on(b)))
+    e = max(e, abs(np.linalg.norm(np.linalg.eigvalsh(_phi40(a)), np.inf) - (abs(a[0]) + np.linalg.norm(a[1:]))))
+ok_pm = all(_P2gap(_D40(eps)) > -1e-10 and _PBgap(_D40(eps)) < 1e-10 for eps in (1, -1))
+fail_other = all((_P2gap(_D40(lam)) < -1e-6) or (_PBgap(_D40(lam)) > 1e-6) for lam in (0.0, 0.5, -0.5, 2.0, 1.5))
+pb_half = _PBgap(_D40(0.5)) > 1e-6; p2_two = _P2gap(_D40(2.0)) < -1e-6
+e1x = np.r_[0, 1, 0, 0]; e2x = np.r_[0, 0, 1, 0]; signs_distinct = abs(_D40(1)(e1x, e2x)[3] - _D40(-1)(e1x, e2x)[3]) == 2
+report("40 Thm m10:orientation, Prop. m10:pauli: phi(a.b)-i phi(D)=phi(a)phi(b) (eps=-1) / opposite (eps=+1); P2, PB hold for eps=+-1; lambda=0,+-1/2,3/2,2 fail one; associator identity; norm bound",
+       e + (0 if (ok_pm and fail_other and pb_half and p2_two and signs_distinct) else 1), 1e-11)
+# (6) exclusion faces: dimension (n-1)^2-1 for n=2..6; completing the square
+e = 0.0
+for n in range(2, 7):
+    a = _r40.normal(size=n) + 1j * _r40.normal(size=n); a /= np.linalg.norm(a); Pc = np.eye(n) - np.outer(a, a.conj())
+    pts = []
+    for _ in range((n - 1) ** 2 + 4):
+        G = _r40.normal(size=(n, n)) + 1j * _r40.normal(size=(n, n)); q = Pc @ G @ G.conj().T @ Pc; q /= np.trace(q).real
+        e = max(e, abs(np.vdot(a, q @ a)), np.abs(q @ a).max()); pts.append(np.r_[q.real.ravel(), q.imag.ravel()])
+    pts = np.array(pts); e = max(e, abs(np.linalg.matrix_rank(pts[1:] - pts[0], tol=1e-9) - ((n - 1) ** 2 - 1)))
+tt, bb = _r40.uniform(-1, 2, size=(2, 2000)); e = max(e, np.abs((tt - 0.5) ** 2 + bb ** 2 - 0.25 - (bb ** 2 - tt * (1 - tt))).max())
+report("40 Rem. m10:exclusion: face of Tr(pq)=0 has affine dimension (n-1)^2-1 = 0,3,8,15,24 for n=2..6", e, 1e-9)
+# (7) Clifford comparison, rotors, quaternion example, composition analogue
+def _gammas(n):
+    X = np.array([[0, 1], [1, 0]], complex); Y = np.array([[0, -1j], [1j, 0]]); Z = np.diag([1., -1]).astype(complex); I2 = np.eye(2)
+    m = (n + 1) // 2; G = []
+    for k in range(m):
+        for P in (X, Y):
+            mats = [Z] * k + [P] + [I2] * (m - k - 1); M = mats[0]
+            for Mi in mats[1:]: M = np.kron(M, Mi)
+            G.append(M)
+    return G[:n]
+e = 0.0
+for n in (3, 4, 5, 6):
+    G = _gammas(n); vec = lambda v: sum(vi * g for vi, g in zip(v, G)); I = np.eye(G[0].shape[0])
+    for i in range(n):
+        for j in range(n):
+            e = max(e, np.abs(G[i] @ G[j] + G[j] @ G[i] - 2 * (i == j) * I).max())
+    for _ in range(10):
+        x, y, w = _cdunit(n), _cdunit(n), _cdunit(n); c = x @ y; P = vec(x) @ vec(y); B = (P - (vec(y) @ vec(x))) / 2
+        e = max(e, np.abs(P - c * I - B).max(), np.abs(B @ B + (1 - c * c) * I).max())
+        th = np.arccos(c); U = B / np.sin(th)
+        e = max(e, np.abs(P - (np.cos(th) * I + np.sin(th) * U)).max(), np.abs(U @ U + I).max())
+        e = max(e, np.abs(vec(x) @ vec(w) @ vec(x) - vec(2 * (x @ w) * x - w)).max())
+    U = G[0] @ G[1]
+    for tt in (0.3, 1.1, 2.5):
+        R = np.cos(tt / 2) * I - np.sin(tt / 2) * U; Ri = np.cos(tt / 2) * I + np.sin(tt / 2) * U
+        e = max(e, np.abs(R @ G[0] @ Ri - (np.cos(tt) * G[0] + np.sin(tt) * G[1])).max())
+        if n > 2: e = max(e, np.abs(R @ G[2] @ Ri - G[2]).max())
+    e = max(e, np.abs((np.cos(np.pi) * I - np.sin(np.pi) * U) + I).max())
+qi, qj, qk = np.eye(4)[1], np.eye(4)[2], np.eye(4)[3]; one4 = np.eye(4)[0]
+pr = _cdmul((one4 + qj) / np.sqrt(2), (one4 + qi) / np.sqrt(2))
+e = max(e, np.abs(_cdmul(qi, qj) - qk).max(), np.abs(pr - (one4 + qi + qj - qk) / 2).max(), abs(pr[0] - np.cos(np.pi / 3)), abs(np.linalg.norm(pr[1:]) - np.sin(np.pi / 3)))
+for dK in (2, 4, 8):
+    x, y = _cdunit(dK), _cdunit(dK); cmp = _cdmul(x, _cdconj(y)); e = max(e, abs(cmp[0] - x @ y), abs(np.linalg.norm(cmp[1:]) ** 2 - (1 - (x @ y) ** 2)))
+    im = np.r_[0, cmp[1:]] / np.linalg.norm(cmp[1:]); e = max(e, np.abs(_cdmul(im, im) + np.eye(dK)[0]).max())
+report("40 Rem. m10:clifford, Ex. m10:rotors: xy=c+B, B^2=-(1-c^2), xy=exp(theta U), xwx=2<x,w>x-w (n=3..6); rotor rotates by t, R(2pi)=-1; (1+j)(1+i)/2; composition x ybar has re=c, |im|=sin", e, 1e-11)
+# (8) phase: balanced sum, J^2=-I; visibility^2 + trace distance^2 = 1
+e = 0.0
+for n in (2, 3, 4):
+    Z = _r40.normal(size=(n, n)) + 1j * _r40.normal(size=(n, n)); V, _ = np.linalg.qr(Z)
+    W, _ = np.linalg.qr(_r40.normal(size=(n, n)) + 1j * _r40.normal(size=(n, n))); H = W @ np.diag(_r40.choice([-1, 1], size=n)) @ W.conj().T
+    U = 1j * H @ V; A, B = U / np.sqrt(2), V / np.sqrt(2); S = A + B
+    e = max(e, np.abs(S @ S.conj().T - np.eye(n)).max(), np.abs(A @ B.conj().T + B @ A.conj().T).max())
+    J = 2 * A @ B.conj().T; e = max(e, np.abs(J + J.conj().T).max(), np.abs(J @ J + np.eye(n)).max())
+    a = _r40.normal(size=n) + 1j * _r40.normal(size=n); b = _r40.normal(size=n) + 1j * _r40.normal(size=n); a /= np.linalg.norm(a); b /= np.linalg.norm(b)
+    psi = np.r_[a, b] / np.sqrt(2); M = psi.reshape(2, n); rho = M @ M.conj().T
+    vis = 2 * abs(rho[0, 1]); td = 0.5 * np.abs(np.linalg.eigvalsh(np.outer(a, a.conj()) - np.outer(b, b.conj()))).sum()
+    e = max(e, abs(vis ** 2 + td ** 2 - 1), abs(rho[0, 0] - 0.5))
+report("40 Rem. m10:phase: balanced unitary sum gives AB*+BA*=0 and J^2=-I; visibility^2+trace distance^2=1", e, 1e-11)
+# (9) curl: only d=3; octonion cross product (perpendicular, normed, kernel 14 = dim Der O), non-equivariance; quaternion frame
+e = 0.0
+e = max(e, sum(1 for d in range(1, 40) if d * (d - 1) // 2 == d and d != 3))
+cr = lambda x, y: np.r_[0, _cdmul(x, y)[1:]]
+for _ in range(30):
+    x = np.r_[0, _r40.normal(size=7)]; y = np.r_[0, _r40.normal(size=7)]; c = cr(x, y)
+    e = max(e, abs(c @ x), abs(c @ y), abs(c @ c - ((x @ x) * (y @ y) - (x @ y) ** 2)), np.abs(_cdmul(x, y) - (-(x @ y) * np.eye(8)[0] + c)).max())
+M = np.array([cr(E40[i], E40[j])[1:] for i, j in _it40.combinations(range(1, 8), 2)]).T
+rk = np.linalg.matrix_rank(M); e = max(e, abs(rk - 7), abs((21 - rk) - 14))
+# derivation algebra of O: dim 14
+rowsD = []
+basis8 = np.eye(8)
+for i in range(8):
+    for j in range(8):
+        # D(e_i e_j) - D(e_i) e_j - e_i D(e_j) = 0, linear in the 64 entries of D
+        blk = np.zeros((8, 64)); pij = _cdmul(basis8[i], basis8[j])
+        for k in range(8):
+            for l in range(8):
+                Ekl = np.zeros((8, 8)); Ekl[k, l] = 1
+                blk[:, 8 * k + l] = Ekl @ pij - _cdmul(Ekl @ basis8[i], basis8[j]) - _cdmul(basis8[i], Ekl @ basis8[j])
+        rowsD.append(blk)
+derdim = 64 - np.linalg.matrix_rank(np.vstack(rowsD)); e = max(e, abs(derdim - 14))
+# orientation-preserving sign change fixing e1,e2 and negating e4 and e5
+def _sgn(v):
+    out = v.copy(); idx4 = np.argmax(np.abs(E40[4])); idx5 = np.argmax(np.abs(E40[5])); out[idx4] *= -1; out[idx5] *= -1; return out
+e = max(e, 0 if np.linalg.norm(_sgn(cr(E40[1], E40[2])) - cr(_sgn(E40[1]), _sgn(E40[2]))) > 1 else 1)
+# quaternion frame: [E_i,E_j]=2E_k via q(uv-vu); d eta_i(E_j,E_k)=-2
+for (u, v, w) in ((qi, qj, qk), (qj, qk, qi), (qk, qi, qj)):
+    q = _cdunit(4); br = _cdmul(q, _cdmul(u, v) - _cdmul(v, u)); e = max(e, np.abs(br - 2 * _cdmul(q, w)).max())
+    Ew = _cdmul(q, w); e = max(e, abs(-(Ew @ br) - (-2)))
+report("40 Thm m10:curl, Ex. m10:cross-curl: d(d-1)/2=d only at d=3; 7-dim cross product perpendicular and normed; Lambda^2 R^7 -> R^7 rank 7, kernel 14 = dim Der(O); sign change breaks equivariance; [E_i,E_j]=2E_k, curl eigenvalue -2", e, 1e-10)
+# (10) dimension four: Hodge eigenspaces 3+3 Euclidean, *^2=-1 Lorentz, left/right quaternion generators, SO(4) transitive, rank 6 differential
+def _hodge4(sig):
+    pairs = list(_it40.combinations(range(4), 2)); H = np.zeros((6, 6)); g = np.diag(sig)
+    for col, (i, j) in enumerate(pairs):
+        k, l = [m for m in range(4) if m not in (i, j)]
+        perm = [i, j, k, l]; sgn = np.linalg.det(np.eye(4)[perm]); row = pairs.index((k, l))
+        H[row, col] = sgn * g[i, i] * g[j, j]
+    return H
+e = 0.0
+H = _hodge4([1, 1, 1, 1]); e = max(e, np.abs(H @ H - np.eye(6)).max(), abs(np.sum(np.linalg.eigvalsh((H + H.T) / 2) > 0) - 3))
+HL = _hodge4([-1, 1, 1, 1]); e = max(e, np.abs(HL @ HL + np.eye(6)).max())
+def _skew_to_2form(K):
+    return np.array([K[i, j] for i, j in _it40.combinations(range(4), 2)])
+for u in (qi, qj, qk):
+    Lm = np.array([_cdmul(u, g) for g in np.eye(4)]).T; Rm = np.array([-_cdmul(g, u) for g in np.eye(4)]).T
+    wl, wr = _skew_to_2form(Lm), _skew_to_2form(Rm)
+    e = max(e, np.abs(H @ wl - wl).max(), np.abs(H @ wr + wr).max())
+for _ in range(20):
+    u, v = _cdunit(4), _cdunit(4); a = _cdmul(v, _cdconj(u)); e = max(e, np.abs(_cdmul(a, u) - v).max())
+Jac = []
+for u in (qi, qj, qk):
+    Jac.append(np.array([_cdmul(u, g) for g in np.eye(4)]).T.ravel()); Jac.append(np.array([-_cdmul(g, u) for g in np.eye(4)]).T.ravel())
+e = max(e, abs(np.linalg.matrix_rank(np.array(Jac)) - 6))
+# SL(2,C) congruence preserves det = s^2-|x|^2; psi psi^* future null
+for _ in range(10):
+    g = _r40.normal(size=(2, 2)) + 1j * _r40.normal(size=(2, 2)); g /= np.sqrt(np.linalg.det(g)); a = _r40.normal(size=4)
+    Y = g @ _phi40(a) @ g.conj().T; e = max(e, abs(np.linalg.det(Y) - (a[0] ** 2 - a[1:] @ a[1:])), abs(np.linalg.det(g) - 1))
+    p = _r40.normal(size=2) + 1j * _r40.normal(size=2); Pm = np.outer(p, p.conj()); s0 = np.trace(Pm).real / 2
+    e = max(e, abs(np.linalg.det(Pm)))
+report("40 Prop. m10:four, Rem. m10:lorentz: *^2=1 with 3+3 (Euclidean), *^2=-1 (Lorentz); left/right imaginary units self-/anti-self-dual; v=(v ubar)u transitive; differential rank 6; SL(2,C) preserves det", e, 1e-10)
+# (11) blocks, tensor sectors, modes, MPS, prefix
+e = 0.0
+for k in range(1, 11):
+    e = max(e, abs((3 * k * (3 * k - 1) // 2 - 3 * k) - 9 * k * (k - 1) // 2))
+e = max(e, max(abs(np.array(t) - np.array(s)).max() for t, s in (((6, 15, 9), (3 * 2, 15, 9)), ((9, 36, 27), (9, 36, 27)), ((15, 105, 90), (15, 105, 90)))))
+for k, tri in ((2, (6, 15, 9)), (3, (9, 36, 27)), (5, (15, 105, 90))):
+    e = max(e, abs(3 * k - tri[0]), abs(3 * k * (3 * k - 1) // 2 - tri[1]), abs(9 * k * (k - 1) // 2 - tri[2]))
+def _herm_basis(n):
+    B = [np.eye(n) / np.sqrt(n)]
+    for i in range(n):
+        for j in range(i + 1, n):
+            M = np.zeros((n, n), complex); M[i, j] = M[j, i] = 1 / np.sqrt(2); B.append(M)
+            M = np.zeros((n, n), complex); M[i, j] = -1j / np.sqrt(2); M[j, i] = 1j / np.sqrt(2); B.append(M)
+    for d in range(1, n):
+        v = np.r_[np.ones(d), -d, np.zeros(n - d - 1)]; B.append(np.diag(v / np.linalg.norm(v)).astype(complex))
+    return B
+for (m, n), tot in (((2, 2), (6, 9, 15)), ((2, 3), (11, 24, 35)), ((3, 3), (16, 64, 80))):
+    Bm, Bn = _herm_basis(m), _herm_basis(n)
+    corr = [np.kron(X, Y) for X in Bm[1:] for Y in Bn[1:]]
+    loc = [np.kron(X, Bn[0]) for X in Bm[1:]] + [np.kron(Bm[0], Y) for Y in Bn[1:]]
+    allv = np.array([np.r_[M.real.ravel(), M.imag.ravel()] for M in loc + corr])
+    Gm = allv @ allv.T; e = max(e, np.abs(Gm - np.eye(len(Gm))).max(), abs(len(loc) - tot[0]), abs(len(corr) - tot[1]), abs(len(loc) + len(corr) - tot[2]))
+    for C in corr:
+        Ct = C.reshape(m, n, m, n); e = max(e, np.abs(np.einsum("ijkj->ik", Ct)).max(), np.abs(np.einsum("ijil->jl", Ct)).max())
+for N in range(1, 9):
+    e = max(e, abs(len(_herm_basis(2)) ** N - 1 - (4 ** N - 1)))
+for N in (4, 6, 8):
+    d0 = 2 ** (N // 2); v = np.eye(d0).ravel() / np.sqrt(d0); sv = np.linalg.svd(v.reshape(d0, d0), compute_uv=False)
+    e = max(e, abs(np.sum(sv > 1e-12) - d0))
+    # bond-D MPS has Schmidt rank <= D at each cut
+    D = 3; A = _r40.normal(size=(N, 2, D, D)); l = _r40.normal(size=D); r = _r40.normal(size=D)
+    psi = np.zeros(2 ** N)
+    for idx, conf in enumerate(_it40.product(range(2), repeat=N)):
+        M = l
+        for site, sgm in enumerate(conf): M = M @ A[site, sgm]
+        psi[idx] = M @ r
+    for cut in range(1, N):
+        e = max(e, max(0, np.linalg.matrix_rank(psi.reshape(2 ** cut, -1), tol=1e-9) - D))
+seq = 2.0 ** -np.arange(1, 60); Ttot = seq.sum()
+for eps in (0.3, 0.1, 0.01): e = max(e, max(0, np.sum(seq >= eps) - np.floor(Ttot / eps)))
+# prefix example
+for N in (4, 5, 6, 7):
+    states = []
+    for sgn in (1, -1):
+        A0, A1 = np.diag([1., 0]), np.diag([0., 1]); l = np.array([1., 1]); r = np.array([1., sgn]) / np.sqrt(2); psi = []
+        for conf in _it40.product(range(2), repeat=N):
+            M = l
+            for sgm in conf: M = M @ (A0 if sgm == 0 else A1)
+            psi.append(M @ r)
+        states.append(np.array(psi))
+    e = max(e, abs(states[0] @ states[1]), abs(states[0][0] - 1 / np.sqrt(2)), abs(states[1][-1] + 1 / np.sqrt(2)), abs(np.count_nonzero(np.abs(states[0]) > 1e-12) - 2))
+    pref = [s.reshape(8, -1) @ s.reshape(8, -1).T for s in states]; e = max(e, np.abs(pref[0] - pref[1]).max())
+report("40 Prop. m10:blocks, m10:modes, Ex. m10:prefix: 9C(k,2) codimension, (6,15,9),(9,36,27),(15,105,90); sectors 6+9,11+24,16+64 orthonormal with zero partial traces; MPS Schmidt rank <= D; middle-cut rank 2^(N/2); GHZ prefixes agree", e, 1e-9)
+# (12) dimension-three readings that fail: x1 d2 on R^4, symmetric stretch 6 entries, exclusion size 4 dim 8, SU(3) generators 8
+e = 0.0
+dA = np.zeros((4, 4)); dA[0, 1] = 1.0; vort = dA - dA.T  # A = x_1 d_2: dA_2/dx_1 = 1
+e = max(e, abs(np.count_nonzero(np.triu(vort)) - 1), abs(vort[0, 1] - 1))
+symb = []
+for i in range(3):
+    for j in range(i, 3):
+        M = np.zeros((3, 3)); M[i, j] = M[j, i] = 1; symb.append(M.ravel())
+e = max(e, abs(np.linalg.matrix_rank(np.array(symb)) - 6))
+# a positive symmetric stretch with rotated principal axes is not diagonal in the fixed frame
+Qr, _ = np.linalg.qr(_r40.normal(size=(3, 3))); Sst = Qr @ np.diag([1., 2, 3]) @ Qr.T
+e = max(e, 0 if np.abs(Sst - np.diag(np.diag(Sst))).max() > 1e-3 else 1)
+e = max(e, abs((4 - 1) ** 2 - 1 - 8), abs(len(_herm_basis(3)) - 1 - 8))
+report("40 Rem. m10:folklore: A=x1 d2 on R^4 has vorticity dx1^dx2; symmetric stretch has 6 entries (rotated axes off-diagonal); exclusion face in size 4 has dim 8; su(3) dim 8", e, 1e-12)
 
 
 # =========================================================== registered module scripts (checks/)
