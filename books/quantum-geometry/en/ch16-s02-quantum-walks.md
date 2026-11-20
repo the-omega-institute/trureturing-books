@@ -470,6 +470,8 @@ This equivalence keeps $\sigma$ and the same shadow and commutes with reversal. 
 :::
 
 ::: {.proof #pf-undirected-cycle-orientation-fibers}
+The following geometric argument derives the reversal fibers through the two faces of a rotation system. Lean proves the same fiber identity by propagating a chosen successor around the cycle.
+
 **Construct an actual representation from the raw graph.** In a finite connected simple graph $C$ of degree two everywhere, start at any vertex and continue along edges, always avoiding the edge just traversed. Degree two makes each next step unique, and finiteness eventually forces a repeated vertex. The first repetition must return to the starting vertex: any other repeated vertex already has two neighbors on the simple path so far, and another arrival would require a third neighbor or an immediate backtrack. This gives a simple closed walk $p$. Both edges at each vertex of the cycle are already occupied, so no edge can leave it. Connectedness therefore makes its support all of $V$ and its undirected edges exactly those of $C$.
 
 Taking successors along $p$ defines a full-cycle permutation $\tau$ on $V$. Since $|V|\ge3$, it has neither fixed points nor two-cycles, and its shadow is exactly $C$. For $F\le C$, put
