@@ -565,7 +565,7 @@ $$
 
 读法（手工推导）：$E$ 为链、$P$ 为小方格，$M_{pe} = 1$ 当且仅当链 $e$ 在小方格 $p$ 的边界上；$\sigma_e \in \mathbb{F}_2$ 给出链变量 $\operatorname{sgn}(\sigma_e) = \pm 1$，小方格的值是 $\operatorname{sgn}((M\sigma)_p)$，$S$ 是小方格集合，$M^{\mathsf T}S$ 是它模 $2$ 的边界。由 $e^{\beta_p\sigma} = \cosh\beta_p\,(1 + \tanh\beta_p\,\sigma)$（$\sigma = \pm 1$）取 $t_p = \tanh\beta_p$：$c = 0$ 给出配分函数 $Z = 2^{\lvert E\rvert}\prod_p\cosh\beta_p\sum_{\partial S = 0}\prod_{p \in S}\tanh\beta_p$；$c$ 取闭路 $C$ 的指示向量给出 $Z\,\mathbb{E}[W_C]$，求和换成 $\partial S = C$；$C$ 模 $2$ 不是边界时右端是空和，$\mathbb{E}[W_C] = 0$。下面三处用到它：[@rem-ch39-strong-coupling-higher-dimensions] 第 1 条的证明，[@rem-ch39-wegner-duality-finite-identity] 第 1、3 条；各小方格可以带不同的 $\beta_p$，例如 [@rem-ch39-hamiltonian-limit-kinetic-laplacian] 中的 $\beta_t$ 与 $\beta_s$。
 
-二维的面积律对一切 $\beta$ 精确成立；在三维与四维，能证明的是强耦合端：
+在平面区域上，二维的面积律对一切 $\beta$ 精确成立；在环面上，闭路两侧的面积都进入答案，平面值 $w^A$ 只是环面变大时的极限，例如 $\mathbb{Z}_2$、$\beta=1.3$、$3\times3$ 环面上 $A=4$ 时环面值为 $0.813439$，平面值为 $0.551405$（`手工推导`）。在三维与四维，能证明的是强耦合端：
 
 ::: {.remark #rem-ch39-strong-coupling-higher-dimensions title="三维及更高维：强耦合首项与已知的相图（手工推导与文献结果）"}
 **手工推导（三维 $\mathbb{Z}_2$ 有限盒子）；其余为文献结果，未在本书形式化。**

@@ -101,7 +101,7 @@ $$
 第二重机制则从主观读出直抵客观动力学——**量子芝诺（Quantum Zeno）现实雕刻**。由于观察者并非隔着单向玻璃偷看的局外幽灵，而是真实嵌在比较网络内部的耦合节点，一旦观察者选定测量基 $\mathcal{B}$ 并在总时长 $T$ 内以步长 $\Delta t = T/N$ 持续执行频闪基捏合 $\rho \mapsto \sum_k P_{\mathbf{b}_k}\rho P_{\mathbf{b}_k}$，物理演化本身就会被测量基重塑（`手工推导` + Misra & Sudarshan 1977 `文献结果`）：
 
 - 在单步微时间窗 $\Delta t$ 内，哈密顿驱动诱导的横向偏转角仅为 $\delta\theta = \frac{\Omega\,\Delta t}{2} = \frac{\Omega T}{2N}$，逃离当前基轴 $\lvert\mathbf{b}_k\rangle$ 的单步漏失概率被压低至**二阶无穷小** $\sin^2(\delta\theta) = \frac{(\Omega T)^2}{4 N^2} + \mathcal{O}(N^{-4})$（相关但不同的首返协议：每一步受监测无返回历史与首次返回振幅的严格有限步概率守恒，由 [@thm-ch39-self-halting-pythagoras-krylov-and-zeno] 第 7 款 [`monitored_return_conservation`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation) 直接锁定）；
-- 经过连续 $N$ 次自指停机投影重校后，目标基态的累积留存率高达
+- 连续 $N$ 次投影、且每一次都读出目标基态（全成功历史）的概率为（若中间各次只做捏合而不读取，末次的目标基态布居是另一个可观测量 $\bigl[1 + \cos^N(\Omega T/N)\bigr]/2$，在 $\Omega T = \pi/2$、$N = 16$ 时为 $0.962838$，下式给出的则是 $0.962166$，`手工推导`）
 
 $$
 P_{\mathrm{surv}}(N) \;=\; \left[\cos^2\!\left(\frac{\Omega T}{2N}\right)\right]^N \;=\; 1 - \frac{(\Omega T)^2}{4N} + \mathcal{O}(N^{-2}) \;\xrightarrow{\;N \to \infty\;}\; 1.

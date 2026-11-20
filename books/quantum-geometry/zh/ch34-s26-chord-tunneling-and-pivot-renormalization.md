@@ -17,7 +17,7 @@ $$
 在连接 $\mathbf{A}(\epsilon)$ 与 $\mathbf{C}(\epsilon)$ 的同一枚原胞 $\Delta\mathcal{T}_\epsilon$ 上，天然叠放着**三张曲率与维度截然不同的几何边界面**，精准对应最短路径寻路从经典贪心排队走向跨尺度穿底跳跃的三重境界（`MODEL` + `手工推导`）：
 
 1. **两扇正交侧壁（$OAB \cup OBC$）——经典 Dijkstra 全局一维优先队列与 $\Omega(n\log n)$ 排序税**：
-   明明东侧候选点 $\mathbf{A}(\epsilon)$ 与西侧候选点 $\mathbf{C}(\epsilon)$ 分处两支因果独立的分支，彼此正交、互不遮挡；经典 Dijkstra 算法却在全图头顶悬置了一把充当“全知外部第 3 点”的**全局一维优先队列（Priority Queue）**。每往前推进一步，算法都强迫全宇宙所有待定边界点排成唯一一条严格非递减的一维纵队，非要先比出“全图此刻谁是绝对第一名（`extract-min`）”才肯放行。反映在 $\Delta\mathcal{T}_\epsilon$ 上，这种逐点一维去相干排队禁止斜向并行跨越，只能贴着两扇正交坐标侧壁 $OAB \cup OBC$ 走“正交两次”的直角折线阶梯 $\widehat{AB} + \widehat{BC}$，路径总弧长为
+   明明东侧候选点 $\mathbf{A}(\epsilon)$ 与西侧候选点 $\mathbf{C}(\epsilon)$ 分处两支因果独立的分支，彼此正交、互不遮挡；经典 Dijkstra 算法却在全图头顶悬置了一把充当“全知外部第 3 点”的**全局一维优先队列（Priority Queue）**。每往前推进一步，算法都强迫全宇宙所有待定边界点排成唯一一条严格非递减的一维纵队，非要先比出“全图此刻谁是绝对第一名（`extract-min`）”才肯放行。反映在 $\Delta\mathcal{T}_\epsilon$ 上，这种逐点一维去相干排队禁止斜向并行跨越，只能贴着两扇正交坐标侧壁 $OAB \cup OBC$ 的球面边走“正交两次”的直角折线阶梯 $\widehat{AB} + \widehat{BC}$（若允许路径进入两扇侧壁的整个扇面，最短路是经过 $\cos\epsilon\,\mathbf{B}$ 的两条直线段，长 $2\sin\epsilon$，`手工推导`），路径总弧长为
 
    $$
    L_{\mathrm{walls}}(\epsilon) \;=\; \operatorname{arc}(\widehat{AB}) + \operatorname{arc}(\widehat{BC}) \;=\; \epsilon + \epsilon \;=\; 2\epsilon.
