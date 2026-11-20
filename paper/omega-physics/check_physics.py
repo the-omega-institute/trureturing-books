@@ -2878,4 +2878,135 @@ for p_, n_ in ((2, 3), (3, 2), (3, 4)):
 print(f"     frame identity R_phi R_z = R_z R_(phi - lambda), example states, pulse numbers, rotating-frame cancellation, kernel bound 5/4 t^2, symmetric coin maximises geometric entanglement (optimised): {bool(okp)}")
 results.append(bool(okp))
 
+# =====================================================================================
+# 54. (Round 31) triality: octonions from Cayley--Dickson, infinitesimal triality, weights, colour centralisers
+spt = importlib.util.spec_from_file_location("check_triality", os.path.join(here, "check_triality.py"))
+mt_ = importlib.util.module_from_spec(spt); buf = io.StringIO()
+try:
+    with contextlib.redirect_stdout(buf):
+        spt.loader.exec_module(mt_); mt_.main()
+    okt_ = True
+except Exception as ex:
+    okt_ = False; print("     check_triality error:", repr(ex))
+print(f"     check_triality.py: all seven groups passed: {okt_}")
+results.append(okt_)
+_tri_log = []
+def _trip(*a): _tri_log.append(a)
+def _tri_block():
+    import itertools as _itx
+    def qm(a,b):
+        a0,a1,a2,a3=a; b0,b1,b2,b3=b
+        return np.array([a0*b0-a1*b1-a2*b2-a3*b3,a0*b1+a1*b0+a2*b3-a3*b2,a0*b2-a1*b3+a2*b0+a3*b1,a0*b3+a1*b2-a2*b1+a3*b0])
+    qc=lambda a: a*np.array([1,-1,-1,-1.])
+    def om(x,y):
+        a,b=x[:4],x[4:]; c,d=y[:4],y[4:]
+        return np.concatenate([qm(a,c)-qm(qc(d),b), qm(d,a)+qm(b,qc(c))])
+    E=np.eye(8)
+    T=np.array([[om(E[i],E[j]) for j in range(8)] for i in range(8)])   # T[i,j] = e_i e_j
+    mul=lambda x,y: np.einsum('i,j,ijk->k',x,y,T)
+    rng=np.random.default_rng(5)
+    ok=True
+    for _ in range(50):
+        x,y,z=rng.normal(size=(3,8))
+        ok&=abs(np.linalg.norm(mul(x,y))-np.linalg.norm(x)*np.linalg.norm(y))<1e-9
+        ok&=np.allclose(mul(mul(x,y),mul(z,x)), mul(mul(x,mul(y,z)),x))
+        ok&=np.allclose(mul(x,mul(y,mul(x,z))), mul(mul(mul(x,y),x),z))
+        ok&=np.allclose(mul(mul(mul(z,x),y),x), mul(z,mul(x,mul(y,x))))
+        ok&=not np.allclose(mul(mul(x,y),z), mul(x,mul(y,z)))
+    _trip('octonion norm, Moufang, nonassociative:',ok)
+    # infinitesimal triality: for D_B in so(8) solve D_A(xy) = D_B(x) y + x D_C(y)
+    def so8basis():
+        B=[]
+        for a in range(8):
+            for b in range(a+1,8):
+                M=np.zeros((8,8)); M[b,a]=1; M[a,b]=-1; B.append(M)
+        return B
+    S=so8basis()
+    def tri(DB):
+        # unknown coefficients alpha (28) for D_A, gamma (28) for D_C
+        rows=[];rhs=[]
+        for i in range(8):
+            for j in range(8):
+                xy=T[i,j]
+                lhs_cols=[]
+                for M in S: lhs_cols.append(M@xy)               # D_A(e_i e_j)
+                for M in S: lhs_cols.append(-mul(E[i],M@E[j]))   # - e_i D_C(e_j)
+                rows.append(np.array(lhs_cols).T); rhs.append(mul(DB@E[i],E[j]))
+        A=np.vstack(rows); b=np.concatenate(rhs)
+        sol,res,rk,_=np.linalg.lstsq(A,b,rcond=None)
+        DA=sum(c*M for c,M in zip(sol[:28],S)); DC=sum(c*M for c,M in zip(sol[28:],S))
+        return DA,DC,np.linalg.norm(A@sol-b),rk
+    DA,DC,r,rk=tri(S[3]); _trip('triality solvable, residual',r,'rank',rk)
+    # torus weights
+    def plane(a,b):
+        M=np.zeros((8,8)); M[b,a]=1; M[a,b]=-1; return M
+    P=[plane(0,1),plane(2,3),plane(4,5),plane(6,7)]
+    t=np.array([0.11,0.23,0.37,0.53])
+    DB=sum(ti*Pi for ti,Pi in zip(t,P)); DA,DC,r,_=tri(DB)
+    w=lambda M: np.sort(np.abs(np.linalg.eigvals(M).imag))
+    vw=np.sort(np.abs(np.concatenate([t,-t]))); 
+    sp=lambda par: np.sort(np.abs([0.5*np.dot(s,t) for s in _itx.product([1,-1],repeat=4) if np.prod(s)==par]))
+    _trip('8_v weights ok',np.allclose(w(DB),vw),' slot A matches 8_-:',np.allclose(w(DA),sp(-1)),'8_+:',np.allclose(w(DA),sp(1)),' slot C 8_+:',np.allclose(w(DC),sp(1)),'8_-:',np.allclose(w(DC),sp(-1)))
+    # G2 = derivations; su(3) = stabiliser of e1
+    def derivations(extra=None):
+        rows=[]
+        for i in range(8):
+            for j in range(8):
+                cols=[M@T[i,j]-mul(M@E[i],E[j])-mul(E[i],M@E[j]) for M in S]
+                rows.append(np.array(cols).T)
+        if extra is not None: rows.append(np.array([M@extra for M in S]).T)
+        A=np.vstack(rows); u,sv,vh=np.linalg.svd(A); null=vh[np.sum(sv>1e-9):]
+        return [sum(c*M for c,M in zip(v,S)) for v in null]
+    G2=derivations(); SU3=derivations(E[1])
+    def centraliser(gens):
+        A=np.vstack([np.array([(M@g-g@M).ravel() for M in S]).T for g in gens])
+        u,sv,vh=np.linalg.svd(A); null=vh[np.sum(sv>1e-9):]
+        return [sum(c*M for c,M in zip(v,S)) for v in null]
+    C1=centraliser(SU3)
+    ab=all(np.allclose(a@b,b@a) for a in C1 for b in C1)
+    _trip('dim G2',len(G2),'dim su3',len(SU3),'centraliser dim',len(C1),'abelian',ab)
+    # su(3) inside su(4)_J, J = right multiplication by i, fixing the vector 1
+    J=np.array([mul(E[k],E[1]) for k in range(8)]).T
+    U4=centraliser([J]); 
+    A=np.vstack([np.array([(M@E[0]) for M in U4]).T])
+    u,sv,vh=np.linalg.svd(A); null=vh[np.sum(sv>1e-9):]; stab=[sum(c*M for c,M in zip(v,U4)) for v in null]
+    # remove centre (J itself) : take derived algebra span
+    comm=[a@b-b@a for a in stab for b in stab]
+    X=np.array([c.ravel() for c in comm]); uu,ss,vv=np.linalg.svd(X); r=np.sum(ss>1e-9)
+    SU3b=[vv[k].reshape(8,8) for k in range(r)]
+    C2=centraliser(SU3b); ab2=all(np.allclose(a@b,b@a) for a in C2 for b in C2)
+    _trip('dim u4_J',len(U4),'derived stabiliser dim',r,'centraliser dim',len(C2),'abelian',ab2)
+    # Spin(10) 16 -> (4,2,1)+(4bar,1,2): count weights by sign patterns
+    cnt={}
+    for s in _itx.product([1,-1],repeat=5):
+        if np.prod(s)!=1: continue
+        a=s[:3]; b=s[3:]
+        four = 'four' if np.prod(a)==1 else 'fourbar'
+        two = 'L' if b[0]*b[1]==1 else 'R'
+        cnt[(four,two)]=cnt.get((four,two),0)+1
+    _trip('16_+ sign classes',cnt)
+    # running
+    s2=0.23122; ai=127.95; uY=(1-s2)*ai; u2=s2*ai; u3=1/0.1180
+    bY,b2,b3=41/6,-19/6,-7
+    _trip('a1',(uY-5/3*u2)/(bY-5/3*b2),'a2',(u2-u3)/(b2-b3))
+    return ok, r, rk, DB, DA, DC, len(G2), len(SU3), len(C1), ab, len(U4), r, len(C2), ab2, cnt
+_res = _tri_block()
+okT = bool(_res[0])
+for a in _tri_log:
+    pass
+flat = {str(a[0]): a[1:] for a in _tri_log}
+okT &= flat['triality solvable, residual'][0] < 1e-10 and flat['triality solvable, residual'][2] == 56
+w8 = flat['8_v weights ok']
+okT &= w8[0] and w8[2] and not w8[4] and w8[6] and not w8[8]
+g2 = flat['dim G2']
+okT &= g2[0] == 14 and g2[2] == 8 and g2[4] == 2 and g2[6]
+u4 = flat['dim u4_J']
+okT &= u4[0] == 16 and u4[2] == 8 and u4[4] == 2 and u4[6]
+cl = flat['16_+ sign classes'][0]
+okT &= cl == {('four', 'L'): 8, ('fourbar', 'R'): 8}
+lg = flat['a1']
+okT &= abs(lg[0] - 4.0506) < 1e-3 and abs(lg[2] - 5.5070) < 1e-3
+print(f"     own octonion code: norm and Moufang identities, unique infinitesimal triality (rank 56), slot weights 8_v, 8_- (A), 8_+ (C), G2 dim 14, su(3) and su(4)_J colour centralisers 2-dim abelian, 16_+ -> (4,2,1)+(4bar,1,2), logs 4.05, 5.51: {okT}")
+results.append(okT)
+
 print(f"\nALL CHECKS PASSED: {all(results)}  ({sum(results)}/{len(results)})")
