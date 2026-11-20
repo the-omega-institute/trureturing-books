@@ -1172,6 +1172,20 @@ In every realization the fair-bit columns span $H$, requiring at least $\dim_{\m
 
 A constant output has $H=\{0\}$ and all $q_u=1$. It uses zero bits, with the affine offset equal to the constant. For a uniform law on a coset $s+H$, the quotient output is constant and every $q_u=1$, so the minimum is $\dim_{\mathbb F_2}H$. In particular, a uniform output on all of $C$ takes exactly $\dim_{\mathbb F_2}C$ fair bits.
 
+**Counting realizations with the minimum number of inputs (written derivation).** Fix a realizable law. Let $h=\dim_{\mathbb F_2}H$, let $b$ count the nonzero cosets with $q_u<1$, and label the minimum $n=h+b$ input positions. A realization specifies the signed bias factors, the columns in the original space, and the affine offset. The number of realizations is
+
+$$
+\frac{n!}{h!}\left(\prod_{j=0}^{h-1}(2^h-2^j)\right)|H|^{b+1}2^b.
+$$
+
+The empty product is $1$.
+
+At the minimum, the lower bounds for the numbers of fair and nonfair bits both hold with equality. The $h$ fair columns span $H$ and hence form a basis. Each nonzero coset with $q_u<1$ needs one nonfair input. There are exactly $b$ positions available, so each such coset gets exactly one bit. Its absolute bias equals the recovered factor $q_u$.
+
+Choose the $h$ fair positions first, and fill them with a basis in the order of the chosen positions. After choosing $j$ basis vectors, their span has $2^j$ elements, leaving $2^h-2^j$ choices for the next vector. The remaining positions can be matched to the $b$ nonzero cosets in $b!$ ways. Each such coset has $|H|$ choices for its column representative and two choices for the bias sign. The law fixes the adjusted offset coset. Choose one of its representatives and subtract the sum of the negative-bias columns to recover the raw offset.
+
+Every choice produces the prescribed law. The fair columns give $H$, the absolute biases give the grouped products on the quotient, and the adjusted offset recovers the signs of the nonzero moments. The fair bits make the other moments vanish. Each realization also determines these choices uniquely. The choices of fair positions and their complement therefore contribute $\binom{n}{h}b!=n!/h!$.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
