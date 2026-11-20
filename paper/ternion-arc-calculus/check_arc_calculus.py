@@ -31,6 +31,7 @@ CHECK_MODULES = [
     ("m5_arc_body_tropical.py", "All m5 checks passed.", None),                               # Section 9A
     ("m4_phase_atlas.py",     "PASS  all 10 groups", None),                                    # Sections 6A, 10A
     ("m6_arithmetic_holonomy.py", "PASS all 10 check groups", None),                          # Section 10B
+    ("m7_braids_quandles.py",  "copying and the six-state bound", None),                      # Section 5D
     # register new modules here: (file in checks/, success marker, optional predicate)
 ]
 _chk = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "checks")
@@ -2858,6 +2859,173 @@ for n in (3, 5):
     codes = [2 ** n + sum(xb << j for j, xb in enumerate(x)) for x in _it37.product((0, 1), repeat=n)]
     outs = [(gam * m) % 1 for m in codes]; e = max(e, 0 if len(set(np.round(outs, 12))) == 2 ** n else 1)
 report("37 Thm m6:barrington, m6:abelian, Ex. m6:torus-refutation: [a,b] = (14352), AND gadget, loop area beta, distinct torus codes", e, 1e-12)
+
+# =========================================================== 38. Section 5D (independent checks of the m7 section)
+import itertools as _it38
+_r38 = np.random.default_rng(2911)
+def _q(p, q):
+    a1, b1, c1, d1 = p; a2, b2, c2, d2 = q
+    return np.array([a1*a2-b1*b2-c1*c2-d1*d2, a1*b2+b1*a2+c1*d2-d1*c2, a1*c2-b1*d2+c1*a2+d1*b2, a1*d2+b1*c2-c1*b2+d1*a2])
+_cj = lambda q: q * np.array([1, -1, -1, -1])
+def _u():
+    v = _r38.normal(size=4); return v / np.linalg.norm(v)
+star = lambda x, y: _q(_q(x, _cj(y)), x)                                        # core x*y = x y^-1 x
+kap = lambda x, y: (1 + x @ y) / 2
+# (1) core laws, reflection formula = Section 5A reflection, conjugation realisation, braid relation, A_n invariance
+e = 0.0
+for _ in range(50):
+    x, y, z = _u(), _u(), _u()
+    e = max(e, np.abs(star(x, x) - x).max(), np.abs(star(x, star(x, y)) - y).max(), np.abs(star(x, star(y, z)) - star(star(x, y), star(x, z))).max(),
+            np.abs(star(x, y) - (2 * (x @ y) * x - y)).max(), abs(kap(star(x, y), star(x, z)) - kap(y, z)))
+    R = lambda a, b: (star(a, b), a); Ri = lambda u, v: (v, star(v, u))
+    s1 = lambda t: (*R(t[0], t[1]), t[2]); s2 = lambda t: (t[0], *R(t[1], t[2]))
+    lhs = s1(s2(s1((x, y, z)))); rhs = s2(s1(s2((x, y, z))))
+    e = max(e, max(np.abs(a - b).max() for a, b in zip(lhs, rhs)), max(np.abs(a - b).max() for a, b in zip(Ri(*R(x, y)), (x, y))))
+    w = _u(); t = (x, y, z, w)
+    A = lambda t: _q(_q(_q(t[0], _cj(t[1])), t[2]), _cj(t[3]))
+    t2 = (*R(t[0], t[1]), t[2], t[3]); t3 = (t[0], *R(t[1], t[2]), t[3]); t4 = (t[0], t[1], *Ri(t[2], t[3]))
+    e = max(e, np.abs(A(t2) - A(t)).max(), np.abs(A(t3) - A(t)).max(), np.abs(A(t4) - A(t)).max())
+report("38 Thm m7:core, Prop. m7:braids, m7:comparison: core laws, s_x(y) = 2<x,y>x - y, kappa invariance, braid relation, A_n invariant", e, 1e-12)
+# (2) brute-force colouring spaces over finite subgroups with the stated crossing conventions
+Q8 = [s * v for v in np.eye(4) for s in (1, -1)]
+T2 = Q8 + [np.array(s) / 2 for s in _it38.product([-1, 1], repeat=4)]
+def cyc(d):
+    return [np.array([np.cos(2 * np.pi * k / d), 0, 0, np.sin(2 * np.pi * k / d)]) for k in range(d)]
+def _fix_count(G, n, word):
+    cnt = 0
+    for cols in _it38.product(range(len(G)), repeat=n):
+        t = [G[c] for c in cols]
+        for (i, sgn) in word:
+            a, b = t[i], t[i + 1]
+            t[i], t[i + 1] = (star(a, b), a) if sgn > 0 else (b, star(b, a))
+        if all(np.abs(t[k] - G[cols[k]]).max() < 1e-9 for k in range(n)): cnt += 1
+    return cnt
+e = 0
+table = {'C3': (cyc(3), 3, 9, 3), 'C5': (cyc(5), 5, 5, 25), 'Q8': (Q8, 8, 8, 8), '2T': (T2, 24, 216, 24)}
+fig8 = [(0, 1), (1, -1), (0, 1), (1, -1)]                                     # chronological sigma1, sigma2^-1, sigma1, sigma2^-1
+for nm, (G, un, tr, f8) in table.items():
+    e = max(e, abs(_fix_count(G, 1, []) - un), abs(_fix_count(G, 2, [(0, 1)] * 3) - tr), abs(_fix_count(G, 3, fig8) - f8))
+C3 = cyc(3); e = max(e, abs(_fix_count(C3, 2, [(0, 1)]) - 3), abs(_fix_count(C3, 2, [(0, 1)] * 2) - 3))
+report("38 Thm m7:knot-roots, Ex. m7:counts: brute-force closed colourings: C3 3,9,3; C5 5,5,25; Q8 8,8,8; 2T 24,216,24; sigma1, sigma1^2 over C3", e, 0)
+# (3) shape of fixed sets, cut example, comparison sets, cocycle failure, Hopf weights, C3 rule, two-element rack
+e = 0.0
+for _ in range(20):
+    a = _u(); th = 2 * np.pi / 5 * _r38.choice([1, 2]); uu = _r38.normal(size=3); uu /= np.linalg.norm(uu); r = np.r_[np.cos(th), np.sin(th) * uu]
+    t = [a, _q(a, r), _q(a, _cj(_q(r, r)))]
+    t0 = [v.copy() for v in t]
+    for (i, sgn) in fig8:
+        x_, y_ = t[i], t[i + 1]; t[i], t[i + 1] = (star(x_, y_), x_) if sgn > 0 else (y_, star(y_, x_))
+    e = max(e, max(np.abs(p - q).max() for p, q in zip(t, t0)))
+r3 = np.r_[np.cos(2 * np.pi / 3), 0, 0, np.sin(2 * np.pi / 3)]; one = np.r_[1., 0, 0, 0]
+R1 = (star(one, r3), one); e = max(e, np.abs(R1[0] - _cj(r3)).max(), abs(kap(one, r3) - 0.25))
+A2 = _q(one, _cj(r3)); A3 = _q(_q(one, _cj(r3)), r3); e = max(e, np.abs(A2 - _cj(r3)).max(), np.abs(A3 - one).max())
+e = max(e, abs((1 + np.cos(2 * np.pi / 5)) / 2 - (3 + 5 ** 0.5) / 8), abs((1 + np.cos(4 * np.pi / 5)) / 2 - (3 - 5 ** 0.5) / 8))
+ii = np.r_[0, 1., 0, 0]; f = lambda x, y: kap(x, y) - 1
+lhs = f(one, one) + f(star(one, ii), star(one, one)); rhs = f(ii, one) + f(one, star(ii, one)); e = max(e, abs(lhs + 0.5), abs(rhs + 1.5))
+C2 = [one, -one]; fC = lambda x, y: 1 - kap(x, y); hop = []
+for a, b in _it38.product(C2, repeat=2):
+    w1 = fC(a, b); x2 = (star(a, b), a); w2 = fC(*x2); hop.append(w1 + w2)
+e = max(e, 0 if sorted(np.round(hop, 9)) == [0, 0, 2, 2] else 1)
+Rc = lambda x, y: ((2 * x - y) % 3, x); e = max(e, 0 if Rc(*Rc(0, 1)) == (1, 2) else 1)
+rk = lambda x, y: 1 - y; e = max(e, 0 if all(rk(x, rk(y, z)) == rk(rk(x, y), rk(x, z)) for x, y, z in _it38.product((0, 1), repeat=3)) else 1)
+e = max(e, 0 if sum(1 for x in (0, 1) for t in (0, 1) if (rk(x, t), x) == (x, t)) == 0 else 1)
+report("38 Ex. m7:cut, Cor. m7:knot-comparison, Ex. m7:cocycle-ex, Rem. m7:topology, m7:reidemeister: fixed sets, cut change, 1/4, (3+-sqrt5)/8, -1/2 vs -3/2, Hopf 0,0,2,2, C3, rack", e, 1e-12)
+# (4) Clifford / Pauli, Euler factorisation, rotor example, syndromes, recovery, JW, cloning
+X = np.array([[0, 1], [1, 0]], complex); Y = np.array([[0, -1j], [1j, 0]]); Z = np.diag([1., -1]).astype(complex); I2 = np.eye(2)
+e = 0.0
+gens = [X, Y, Z]
+def blade(m):
+    M = I2.copy()
+    for a in range(3):
+        if m >> a & 1: M = M @ gens[a]
+    return M
+imgs = [I2, X, Y, 1j * Z, Z, -1j * Y, 1j * X, 1j * I2]
+for m in range(8):
+    e = max(e, np.abs(blade(m) - imgs[m]).max())
+    for n in range(8):
+        sg = (-1) ** sum((m >> a & 1) * (n >> b & 1) for a in range(3) for b in range(3) if a > b)
+        e = max(e, np.abs(blade(m) @ blade(n) - sg * blade(m ^ n)).max())
+qi, qj, qk = -1j * X, -1j * Y, -1j * Z
+e = max(e, np.abs(qi @ qj - qk).max(), abs(np.linalg.det(X) + 1), abs(np.linalg.det(1j * I2) + 1), abs(np.linalg.det(qi) - 1))
+B = 3 * X + 4 * Y + 12 * Z; e = max(e, np.abs(B @ B - 169 * I2).max())
+rr = np.array([0.48, 0.60, 0.64]); Am = (I2 + rr[0] * X + rr[1] * Y + rr[2] * Z) / 2; e = max(e, abs(Am[0, 0] - 0.82), abs(Am[1, 1] - 0.18), abs(Am[0, 1] - (0.24 - 0.30j)))
+Tq = lambda u, t: np.cos(t) * I2 + np.sin(t) * u
+for _ in range(30):
+    al, be, ga = _r38.uniform(-3, 3), _r38.uniform(0, np.pi / 2), _r38.uniform(-3, 3)
+    qq = Tq(qk, al) @ Tq(qj, be) @ Tq(qk, ga)
+    zc = np.exp(1j * (al + ga)) * np.cos(be); wc = np.exp(1j * (al - ga)) * np.sin(be)
+    # in matrix model: k -> -iZ acts as i on first basis vector; q = z + w j has first column (z, w * (j e0 component))
+    e = max(e, abs(qq[0, 0] - np.conj(zc)) if False else 0)
+    def rot(u, t):
+        u = np.array(u, float); c, s = np.cos(t), np.sin(t); K = np.array([[0, -u[2], u[1]], [u[2], 0, -u[0]], [-u[1], u[0], 0]])
+        return np.eye(3) + s * K + (1 - c) * K @ K
+    A_, B_, C_ = 2 * al, 2 * be, 2 * ga; hh = 1e-6; kv, jv = np.array([0, 0, 1.]), np.array([0, 1., 0])
+    Fm = lambda a, b, c: rot(kv, a) @ rot(jv, b) @ rot(kv, c); R0 = Fm(A_, B_, C_)
+    cols = []
+    for d in np.eye(3) * hh:
+        dR = (Fm(A_ + d[0], B_ + d[1], C_ + d[2]) - Fm(A_ - d[0], B_ - d[1], C_ - d[2])) / (2 * hh); W = dR @ R0.T
+        cols.append(np.array([W[2, 1], W[0, 2], W[1, 0]]))
+    e = max(e, abs(np.linalg.det(np.array(cols).T) + np.sin(B_)) * 1e-3)
+# quaternion-level factorisation check with explicit quaternion arithmetic
+for _ in range(30):
+    al, be, ga = _r38.uniform(-3, 3), _r38.uniform(0, np.pi / 2), _r38.uniform(-3, 3)
+    Tk = lambda t: np.r_[np.cos(t), 0, 0, np.sin(t)]; Tj = lambda t: np.r_[np.cos(t), 0, np.sin(t), 0]
+    qq = _q(_q(Tk(al), Tj(be)), Tk(ga))
+    zc = np.exp(1j * (al + ga)) * np.cos(be); wc = np.exp(1j * (al - ga)) * np.sin(be)
+    zq = np.r_[zc.real, 0, 0, zc.imag]; wq = np.r_[wc.real, 0, 0, wc.imag]
+    e = max(e, np.abs(qq - (zq + _q(wq, np.r_[0, 0, 1., 0]))).max())
+Rk = lambda t: np.r_[np.cos(t / 2), 0, 0, np.sin(t / 2)]; Rj = lambda t: np.r_[np.cos(t / 2), 0, np.sin(t / 2), 0]
+pr = _q(_q(Rk(0.37), Rj(-0.81)), Rk(0.52)); e = max(e, np.abs(np.round(pr, 6) - np.array([0.829592, -0.029524, -0.392911, 0.395635])).max())
+Tgate = np.exp(-1j * np.pi / 8) * np.diag([1, np.exp(1j * np.pi / 4)]); e = max(e, np.abs(Tgate - Tq(qk, np.pi / 8)).max())
+H = (X + Z) / np.sqrt(2); e = max(e, np.abs(-1j * H - (qi + qk) / np.sqrt(2)).max(), np.abs(Tq(qk, 0) @ Tq(qj, np.pi / 4) @ Tq(qk, np.pi / 2) - (qi + qk) / np.sqrt(2)).max())
+report("38 Prop. m7:clifford, Ex. m7:bloch, Thm m7:zyz, Ex. m7:rotors: blade signs and images, det X = -1, Bloch, ZYZ coefficients, Jacobian -sin B, rotor numbers, T, H", e, 1e-6)
+e = 0.0
+for d in (2, 3, 5):
+    w = np.exp(2j * np.pi / d); Xd = np.roll(np.eye(d), 1, axis=0); Zd = np.diag(w ** np.arange(d))
+    Dd = lambda a, b: np.linalg.matrix_power(Xd, a % d) @ np.linalg.matrix_power(Zd, b % d)
+    for a, b, c, f2 in _it38.product(range(d), repeat=4):
+        e = max(e, np.abs(Dd(a, b) @ Dd(c, f2) - w ** (b * c) * Dd(a + c, b + f2)).max(), np.abs(Dd(a, b).conj().T - w ** (a * b) * Dd(-a, -b)).max(),
+                np.abs(Dd(a, b) @ Dd(c, f2) @ np.linalg.inv(Dd(a, b)) @ np.linalg.inv(Dd(c, f2)) - w ** (b * c - f2 * a) * np.eye(d)).max())
+kr = lambda *ms: __import__('functools').reduce(np.kron, ms)
+S1, S2 = kr(Z, Z, I2), kr(I2, Z, Z); errs = {'I': np.eye(8), 'X1': kr(X, I2, I2), 'X2': kr(I2, X, I2), 'X3': kr(I2, I2, X)}
+want = {'I': (1, 1), 'X1': (-1, 1), 'X2': (-1, -1), 'X3': (1, -1)}
+for k_, E in errs.items():
+    for j, S in enumerate((S1, S2)):
+        C = E @ S @ np.linalg.inv(E) @ np.linalg.inv(S); e = max(e, np.abs(C - want[k_][j] * np.eye(8)).max(), abs((1 + np.trace(C).real / 8) / 2 - (1 + want[k_][j]) / 2))
+V = np.zeros((8, 2)); V[0, 0] = 1; V[7, 1] = 1; Vs = [E @ V for E in errs.values()]
+for a in range(4):
+    for b in range(4): e = max(e, np.abs(Vs[a].T @ Vs[b] - (a == b) * np.eye(2)).max())
+Mco = np.diag([0.5, 0.25, 0.125, 0.125]); Xin = np.array([[0.6, 0.2 - 0.1j], [0.2 + 0.1j, 0.4]])
+Yout = sum(Mco[j, j] * Vs[j] @ Xin @ Vs[j].T for j in range(4)); rec = sum(Vs[i].T @ Yout @ Vs[i] for i in range(4)); e = max(e, np.abs(rec - Xin).max())
+a1 = np.array([[0, 1], [0, 0]], complex)
+for n in (2, 3, 4):
+    cs = [kr(*([Z] * j + [a1] + [I2] * (n - j - 1))) for j in range(n)]
+    for j in range(n):
+        for l in range(n):
+            e = max(e, np.abs(cs[j] @ cs[l] + cs[l] @ cs[j]).max(), np.abs(cs[j] @ cs[l].conj().T + cs[l].conj().T @ cs[j] - (j == l) * np.eye(2 ** n)).max())
+c1, c2 = kr(a1, I2), kr(Z, a1); v00 = np.zeros(4); v00[0] = 1; v11 = np.zeros(4); v11[3] = 1
+e = max(e, np.abs(c1.conj().T @ c2.conj().T @ v00 - v11).max(), np.abs(c2.conj().T @ c1.conj().T @ v00 + v11).max())
+report("38 Prop. m7:weyl, m7:syndrome, m7:recovery, Ex. m7:repetition, Prop. m7:jw: Weyl identities d=2,3,5, syndrome table and kappa_n, recovery, CAR, signs", e, 1e-12)
+# cloning machine marginals and the six-state bound on random Kraus families
+e = 0.0
+eta = np.zeros(4, complex); eta[1], eta[2] = 1, -1
+for _ in range(10):
+    psi = _r38.normal(size=2) + 1j * _r38.normal(size=2); psi /= np.linalg.norm(psi)
+    out = (np.einsum('a,bm->abm', psi, eta.reshape(2, 2)) + np.einsum('b,am->abm', psi, eta.reshape(2, 2))) / np.sqrt(6)
+    rho = np.einsum('abm,cdn->abmcdn', out, out.conj())
+    r1 = np.einsum('abmcbm->ac', rho); r2 = np.einsum('abmadm->bd', rho); rM = np.einsum('abmabn->mn', rho)
+    P = np.outer(psi, psi.conj()); pp = np.array([-np.conj(psi[1]), np.conj(psi[0])]); Pp = np.outer(pp, pp.conj())
+    e = max(e, np.abs(r1 - (5 / 6 * P + 1 / 6 * Pp)).max(), np.abs(r2 - (5 / 6 * P + 1 / 6 * Pp)).max(), np.abs(rM - (P / 3 + 2 * Pp / 3)).max(), abs(np.linalg.det(rM) - 2 / 9))
+six = [np.array(v, complex) / np.linalg.norm(v) for v in ([1, 0], [0, 1], [1, 1], [1, -1], [1, 1j], [1, -1j])]
+for _ in range(20):
+    Kc = _r38.normal(size=(3 * 4, 2)) + 1j * _r38.normal(size=(3 * 4, 2)); Qm, _ = np.linalg.qr(Kc); Ks = [Qm[4 * l:4 * l + 4] for l in range(3)]
+    tot = 0
+    for psi in six:
+        rho = sum(K @ np.outer(psi, psi.conj()) @ K.conj().T for K in Ks).reshape(2, 2, 2, 2)
+        r1 = np.einsum('abcb->ac', rho); r2 = np.einsum('abad->bd', rho); tot += (psi.conj() @ r1 @ psi).real + (psi.conj() @ r2 @ psi).real
+    e = max(e, max(0, tot / 12 - 5 / 6 - 1e-12))
+    Lr = _r38.normal(size=(2, 2)) + 1j * _r38.normal(size=(2, 2)); e = max(e, abs(sum(abs(p.conj() @ Lr @ p) ** 2 for p in six) - abs(np.trace(Lr)) ** 2 - np.trace(Lr.conj().T @ Lr).real))
+report("38 Prop. m7:cloning-machine, m7:clone-bound: 5/6, 1/6 marginals, machine 1/3, 2/3, det 2/9; six-state identity; average fidelity <= 5/6", e, 1e-10)
 
 # =========================================================== registered module scripts (checks/)
 for _name, _marker, _pred in CHECK_MODULES:

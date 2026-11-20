@@ -83,7 +83,9 @@ realises exactly the polynomials of the comparison bounded by one on $[-1,1]$ wi
 rational atlas makes the whole arc calculus bounded and exactly rational on $S^3$.  For ordered products of rotations the deterministic
 convergence criterion is the angular sum, not the sagitta sum (both directions fail), and holonomy words in the binary icosahedral
 group recognise exactly nonuniform $\mathrm{NC}^1$, while commutative words cannot compute two-input AND under a two-output promise.
-Before any manifold, the chord--sagitta identity and an
+The diagonal operation is an involutory quandle whose closed-braid colouring spaces on $S^3$ are $S^3\times(\{1\}\sqcup S^2)$ for the
+trefoil and $S^3\times(\{1\}\sqcup S^2\sqcup S^2)$ for the figure-eight, and no nonconstant function of the comparison is a crossing
+cocycle there.  Before any manifold, the chord--sagitta identity and an
 elliptic/parabolic/hyperbolic trichotomy already hold for fair elements of a star algebra, and sparse comparisons on a chordal graph
 with triangle defects at most $\varepsilon$ come from a potential up to $(|V|-2)\varepsilon$, the obstruction on other graphs being a
 lattice gauge connection.  The key step concerns the duplication equation $f(x^2)=2f(x)^2-1$: on the line it has continuous non-cosine
@@ -142,7 +144,9 @@ local level $\kappa=1$), $\mathrm{SL}(2,\C)$ carries a complex comparison, and o
 Part~\ref{part:arc} transfers with the signs of curvature reversed (Remark~\ref{m3:transfer}).  Section~\ref{sec:d4} asks when a
 comparison space can encode its own maps: exactly when the span rank of the specified family fits the target budget, with a spectral
 error otherwise; the sphere list is a classification, not an encoding tower, and a clock follows from finite rank only under an added
-symmetry or differential-rank hypothesis.  Part~\ref{part:arc} (Sections~\ref{sec:recur}--\ref{sec:rational}) develops a
+symmetry or differential-rank hypothesis.  Section~\ref{sec:m7} reads the diagonal operation as an involutory quandle: braids act on
+colourings, the trefoil and figure-eight colouring spaces of $S^3$ are computed, comparison-valued crossing weights are shown to be
+trivial on $S^3$, and Pauli syndromes are read as heap commutators.  Part~\ref{part:arc} (Sections~\ref{sec:recur}--\ref{sec:rational}) develops a
 calculus in which the difference $y-x$ of linear calculus is replaced by the transport $\hp y x\cdot$; Section~\ref{sec:m5} compares
 chord, cap arc and two-arc route of a right cell and shows that the logarithm of an eliminated Gram comparison tends to the min--plus
 (shortest-path) value exactly when the signed coefficients of the shortest paths do not cancel.  Section~\ref{sec:m4} inserts a clock
@@ -5425,6 +5429,951 @@ depth, elapsed time and geometric volume requires a rate and a
 mapping from the circuit model to physical observables.
 \end{remark}
 
+\section{Braids, quandles and stabilisers from the diagonal operation}\label{sec:m7}
+
+What does the diagonal transport $\hp xyx$ retain about braids and about the
+finite Pauli operations on the quaternion model? It defines a core quandle on
+every heap. On $S^3$ its closed-braid colouring spaces for the trefoil and
+figure-eight reduce to the third and fifth roots of unity, respectively, with
+a free choice of one base colour. The same heap gives a commutator readout for
+Pauli syndromes. The image of a colouring gives Markov-invariant
+comparison data. The Pauli commutator gives an exact binary readout. A nonconstant function of
+the pair comparison cannot furnish a normalized quandle crossing weight on
+$S^3$. We use the heap reduction of Lemma~\ref{lem:certaine}, the $S^3$ model
+of Example~\ref{ex:models} and the reflection in Section~\ref{sec:def}.  The diagonal operation is the reflection of
+Section~\ref{sec:m2}: the quandle laws below are the reflection laws \eqref{m2:reflection}, so a comparison reflection space
+(Definition~\ref{m2:def}) is an involutory quandle with an invariant comparison, and on $S^3$ the core is the geodesic symmetry of
+Proposition~\ref{m2:models}.  Statements of Section~\ref{sec:m2} are not repeated here; what is new is the braid action, the
+colouring spaces, the crossing weights and the Pauli readouts.  Physical interpretations (codes, measurement, anyons) belong to the
+companion paper; Remark~\ref{m7:companion} lists the corresponding places there.  Guide: Remark~\ref{m7:reflection} and Definition~\ref{m7:braid-def} fix
+conventions, Remark~\ref{m7:link} passes to links, Example~\ref{m7:cut} and Corollary~\ref{m7:knot-comparison} treat comparison data,
+Example~\ref{m7:cocycle-ex} the crossing weights, Proposition~\ref{m7:clifford}, Example~\ref{m7:bloch}, Remark~\ref{m7:clifford-circuits},
+Example~\ref{m7:rotors} and Remark~\ref{m7:phase-limits} the Pauli and Euler material, and Remark~\ref{m7:placement} summarises.
+
+\subsection{Diagonal transport and closed braids}
+
+\begin{theorem}[The core and conjugation]\label{m7:core}
+For a heap satisfying the identities of $(\Omega1)$, write
+$x*y=s_x(y)=\hp xyx$. This is a left involutory quandle:
+$x*x=x$, $x*(x*y)=y$, and $x*(y*z)=(x*y)*(x*z)$.
+With any heap origin the operation is $x*y=xy^{-1}x$ on the associated
+group $G$. For the left conjugation operation $u\triangleright v=uvu^{-1}$,
+the map $x\mapsto s_x$ is a quandle homomorphism into the permutation group
+of the heap equipped with conjugation. Its fibres in group coordinates
+are the cosets of $\{g\in Z(G):g^2=1\}$. There is a faithful conjugation
+realization in $(G\times G)\rtimes\langle\tau\rangle$, where $\tau$ has order
+two and interchanges the factors, via $x\mapsto(x,x^{-1})\tau$.
+The core and conjugation operations agree on the subset $\{x:x^2=1\}$.
+\end{theorem}
+\begin{proof}
+The heap product at an origin, and hence $x*y=xy^{-1}x$, follow by the
+algebraic proof of Lemma~\ref{lem:certaine}. Substitute this formula
+into the three laws to obtain
+\[
+\begin{gathered}
+ xx^{-1}x=x,\qquad x(xy^{-1}x)^{-1}x=y,\\
+ x(yz^{-1}y)^{-1}x=xy^{-1}zy^{-1}x
+  =(xy^{-1}x)(xz^{-1}x)^{-1}(xy^{-1}x).
+\end{gathered}
+\]
+Thus $s_{x*y}=s_xs_ys_x^{-1}$. Left translation is a core automorphism, since
+$(ax)*(ay)=a(x*y)$. Applying translation by $x^{-1}$ reduces equality of
+$s_x,s_y$ to $s_1=s_g$ for $g=x^{-1}y$. Evaluating at $1$ gives $g^2=1$,
+and evaluating at every inverse $t$ gives $gtg=t$, equivalent to centrality.
+Conversely such $g$ satisfies the required equality. Put $t_x=(x,x^{-1})\tau$.
+Then $t_x^2=1$ and $t_xt_yt_x=(xy^{-1}x,(xy^{-1}x)^{-1})\tau$.
+The first coordinate gives injectivity. For involutions $x,y$ in $G$,
+$xy^{-1}x=xyx^{-1}$ and its square is $1$.
+\end{proof}
+
+\begin{remark}[Quaternion reflections]\label{m7:reflection}
+The group of the $S^3$ heap is the group of unit quaternions, identified
+with $\SU(2)$ using the paper's Pauli convention. Its reflections are
+$s_x(y)=2\ip xyx-y$ by Example~\ref{ex:models}, so each preserves the
+comparison $\kappa(x,y)=(1+\ip xy)/2$. Opposite points induce the same
+reflection. These are the only identifications, since each reflection has
+a unique fixed line in $\R^4$. The usual conjugation on $\SU(2)$ fixes the
+identity in every left operand and preserves the real part of its right
+operand. On the circle it acts trivially, whereas the core is $2x-y$ in
+additive angle coordinates. On the full group the identity map intertwines
+the two operations precisely when every element squares to $1$, as follows
+by testing the left operand $1$ and applying Theorem~\ref{m7:core}.  The formula $s_x(y)=2\ip xyx-y$ is \eqref{m2:sphere}.
+\end{remark}
+
+\begin{definition}[Rack crossing convention]\label{m7:braid-def}
+In a left rack $Q$, $L_x(y)=x*y$ is bijective and left self-distributive.
+A quandle is an idempotent rack. A positive crossing and its inverse,
+with the overstrand unchanged, act by
+\[
+R(x,y)=(x*y,x),\qquad R^{-1}(u,v)=(v,L_v^{-1}u).
+\]
+For a braid $b\in B_n$, write $\rho_n(b)$ for the action with generator
+$\sigma_i$ operating on slots $i,i+1$. Products act rightmost first. Write
+$\mathcal F_Q(b)=\{\mathbf x\in Q^n:\rho_n(b)\mathbf x=\mathbf x\}$.
+\end{definition}
+
+\begin{proposition}[Colouring transport]\label{m7:braids}
+The rack crossings give an action of the Artin braid group on $Q^n$.
+Closure colourings are exactly $\mathcal F_Q(b)$.
+For a quandle, braid conjugation and either Markov stabilization give
+bijections of the closed-colouring sets. For a topological quandle with
+jointly continuous maps $(x,y)\mapsto x*y$ and $(x,y)\mapsto L_x^{-1}y$,
+these bijections are homeomorphisms in
+the subspace topology. The core of a heap gives such an action on $M^n$.
+\end{proposition}
+\begin{proof}
+The two crossing formulas compose to the identity in either order.
+Generators acting on disjoint pairs commute, and the two three-crossing
+words send $(x,y,z)$ to
+\[
+((x*y)*(x*z),x*y,x)\quad\text{and}\quad(x*(y*z),x*y,x).
+\]
+The rack law identifies the outputs. Assigning colours on a cut determines
+all colours in the braid, and the splice equations are the fixed-point
+conditions. Conjugation $b\mapsto gbg^{-1}$ transports a fixed point by
+$\rho_n(g)$, with inverse $\rho_n(g^{-1})$. For stabilization use
+$\sigma_n^{\pm1}\iota(b)$, where $\iota$ adds an untouched last strand.
+Write $\rho_n(b)\mathbf x=\mathbf y$ and let the new colour be $t$.
+At a positive crossing the last two outputs are $(y_n*t,y_n)$.
+Fixedness gives $t=y_n$, then $x_n=y_n$. At a negative crossing the outputs
+are $(t,L_t^{-1}y_n)$, giving $y_n=L_t(t)=t=x_n$. In both cases the first
+$n-1$ slots give $y_i=x_i$. Hence the bijection appends $x_n$ and its
+inverse deletes the last colour. Stabilizing with multiplication on the
+other side follows by braid conjugation. All maps used are continuous
+in both directions under the stated assumptions. In a heap the inverse
+left action is the same reflection.
+\end{proof}
+
+\begin{remark}[From algebraic closure to links]\label{m7:link}
+Artin's presentation identifies the abstract braid group above with
+geometric braids. Alexander's theorem gives a closed braid for every
+oriented link, and Markov's theorem identifies oriented isotopy of the
+closures with conjugation and both stabilizations
+\cite{m7:Artin,m7:Alexander,m7:Markov}\cite[Theorem~2.3]{m7:Birman}. 
+\end{remark}
+
+\begin{remark}[Reidemeister moves and the rack condition]\label{m7:reidemeister}
+In core colouring of a diagram, the two underarc colours at a crossing
+are related by $s_x$, where $x$ is the overarc colour. Involutivity lets
+either underarc be the input. At a curl the overarc equals one underarc
+and idempotence forces the other underarc to have that colour. The two
+inverse crossings give Reidemeister II. For Reidemeister III the top
+colour $x$ stays fixed, the middle colour $y$ changes to $s_x(y)$, and
+the two possible transports of the bottom colour are
+$s_xs_y$ and $s_{s_x(y)}s_x$. They agree by Theorem~\ref{m7:core}.
+These checks preserve boundary colours and give inverse bijections
+of local extensions. In particular the core counts are invariant under
+mirroring as well. The knot-quandle construction and its classification
+theorems are due independently to Joyce and Matveev
+\cite{m7:Joyce,m7:Matveev}. The fundamental quandle has diagram arcs as
+generators and one relation at each crossing, with the corresponding
+inverse action at a negative crossing. Therefore a colouring by a
+quandle $Q$ is a homomorphism from the fundamental quandle into $Q$:
+assigning the generator images gives one exactly when the crossing
+relations are satisfied. For a core target the inverse left action
+equals the positive one.
+
+For a rack without idempotence the preceding stabilization can fail.
+On $\{0,1\}$ put $x*y=1-y$. Both sides of left self-distributivity
+equal $z$ and the left actions are bijective. The one-strand identity
+has two fixed colours, whereas the stabilized crossing has none,
+since $x=1-y$ and $y=x$ are incompatible. The corresponding general rack
+invariance is for framed links \cite{m7:FennRourke}.
+\end{remark}
+
+\begin{proposition}[Comparison data at a cut]\label{m7:comparison}
+Fix a target $Q$ in a comparison heap, closed under core operations.
+For a closed colouring let $C$ be the subquandle of $Q$ generated by
+its cut colours. Then $C$ is unchanged by braid transport, under the
+Markov bijections, and under the core Reidemeister bijections. Hence the
+assignment
+\[
+ \mathbf x\longmapsto\{\kappa(u,v):u,v\in C\}
+\]
+defines link-invariant comparison data on the colouring space.
+For finite $Q$, its multiset over all colourings is invariant, as are
+counts weighted by any function of $C$. The same holds for the multiset
+of comparison values over ordered pairs in $C$ when $C$ is finite.
+If $Q=G$ is a group core, then
+\[
+ A_n(\mathbf x)=x_1x_2^{-1}x_3\cdots x_n^{(-1)^{n-1}}
+\]
+is pointwise invariant under $B_n$, hence is preserved under braid
+conjugation on closed colourings. Stabilization changes it to
+$A_n(\mathbf x)x_n^{(-1)^n}$.
+\end{proposition}
+\begin{proof}
+New crossing colours belong to the old generated subquandle, and the
+inverse crossing gives the opposite inclusion. Stabilization duplicates
+a generator. In a Reidemeister move the local colours on either side
+are obtained from the boundary colours by the transports in
+Remark~\ref{m7:reidemeister}, so the generated subquandles agree.
+At adjacent slots, $(xy^{-1}x)x^{-1}=xy^{-1}$ and
+$(xy^{-1}x)^{-1}x=x^{-1}y$. These are the two possible local blocks
+of $A_n$. The stabilization formula follows by appending $x_n$.
+\end{proof}
+
+\begin{example}[Cut dependence]\label{m7:cut}
+For $r\ne1$ with $r^3=1$, the trefoil colouring $(1,r)$ in
+Theorem~\ref{m7:knot-roots} stabilizes to $(1,r,r)$. Conjugating the
+stabilized braid by $\sigma_1$ carries the latter to $(r^{-1},1,r)$.
+The comparison in the last pair changes from $1$ to $\kappa(1,r)<1$.
+The comparison $\kappa(1,A_n)$ also changes under stabilization in
+this example, from $\kappa(1,r^{-1})$ to $1$. A simultaneous
+comparison of two colours acted on by the same $s_x$ is preserved,
+as is the local over-under comparison $\kappa(x,y)=\kappa(x,s_xy)$
+by $(\Omega2\mathrm c)$.
+\end{example}
+
+\begin{theorem}[Trefoil and figure-eight colouring spaces]\label{m7:knot-roots}
+Write $G[m]=\{r\in G:r^m=1\}$. Read crossings in chronological order
+in the following words. The fixed sets for $\sigma_1^m$ and
+$(\sigma_1,\sigma_2^{-1},\sigma_1,\sigma_2^{-1})$ are respectively
+\[
+ \{(a,ar):a\in G,\ r\in G[m]\},\qquad
+ \{(a,ar,ar^{-2}):a\in G,\ r\in G[5]\}.
+\]
+Consequently the trefoil and figure-eight core-colouring spaces are
+homeomorphic to $G\times G[3]$ and $G\times G[5]$ for topological $G$.
+For a finite target group, these products give the exact counts.
+\end{theorem}
+\begin{proof}
+The standard closed braids for the trefoil and figure-eight are the
+two indicated words with $m=3$ for the first
+\cite[Ch.~1]{m7:Birman}. The two-strand step sends $(a,ar)$ to
+$(ar^{-1},a)$, with the difference $r$ unchanged. Iterating gives
+$(ar^{-m},ar^{1-m})$, so fixedness is equivalent to $r^m=1$.
+For three strands put $(x_1,x_2,x_3)=(a,ap,apq)$.
+The first crossing sends $(a,p,q)$ to $(ap^{-1},p,pq)$ and the
+negative crossing on slots $2,3$ sends general coordinates
+$(a,p,q)$ to $(a,pq,q)$. One pair of moves therefore sends the
+differences to $(p^2q,pq)$. After two pairs the second difference
+is $p^2qpq$, so its fixedness is equivalent to $q=p^{-3}$.
+Under that condition the first difference after two pairs is
+$(p^2q)^2pq=p^{-4}$. It is fixed exactly when $p^5=1$.
+The first coordinates change by right multiplication by
+$p^{-1}(p^2q)^{-1}=1$ under the same condition. Then
+$x_3=ap^{-2}$. The inverse parametrization takes the first colour and the
+difference $x_1^{-1}x_2$, so both directions are continuous.
+\end{proof}
+
+\begin{example}[Finite and continuous targets]\label{m7:counts}
+The following counts apply to four subgroups of $S^3$.
+\[
+\begin{array}{c|rrr}
+G & \text{unknot}&\text{trefoil}&\text{figure-eight}\\ \hline
+C_3&3&9&3\\
+C_5&5&5&25\\
+Q_8&8&8&8\\
+2T&24&216&24
+\end{array}
+\]
+Here $C_d$ is the order-$d$ subgroup of a clock circle, $Q_8$ is
+$\{\pm1,\pm i,\pm j,\pm k\}$, and $2T$ adds the sixteen independent
+sign choices $(\pm1\pm i\pm j\pm k)/2$ to $Q_8$. Also the
+two-strand powers $\sigma_1,\sigma_1^2,\sigma_1^3$ have
+$3,3,9$ fixed colourings over $C_3$. The core of $C_3$ is the usual
+three-colour rule $2x-y$ modulo $3$ \cite{m7:Fox}.
+Over $C_3$ the Hopf link $\widehat{\sigma_1^2}$ therefore has
+three colourings, and the two-component unlink has nine, since
+the identity on two strands fixes every pair.
+Over $\SU(2)$, the respective spaces are $S^3$,
+$S^3\times(\{1\}\sqcup S^2)$ and
+$S^3\times(\{1\}\sqcup S^2\sqcup S^2)$.
+On each nonconstant component the displayed first-pair comparison
+equals $(1+\cos(2\pi j/m))/2$, with $j=1$ for $m=3$ and
+$j=1,2$ for $m=5$.
+\end{example}
+\begin{proof}
+The cyclic group contributes $\gcd(d,m)$ roots, and all elements of $Q_8$
+have orders dividing four. To see the subgroup description of $2T$, put
+$h=(1+i+j+k)/2$. Direct multiplication gives $hih^{-1}=j$,
+$hjh^{-1}=k$, $hkh^{-1}=i$, and $h^3=-1$. Thus
+$Q_8\cup Q_8h\cup Q_8h^2$ is a subgroup and the two disjoint
+nontrivial cosets give the sixteen half-integral elements. Indeed $h,h^2$
+lie outside $Q_8$ and their cosets are distinct because $h\notin Q_8$.
+The eight with real part $-1/2$ have order three and those with $1/2$
+have order six, by the quaternion angle formula. There are no elements
+of order five. The unknot is the closure of the one-strand identity.
+In general a unit quaternion other than $\pm1$ has a unique
+$\cos\theta+u\sin\theta$ with $0<\theta<\pi$ and $u$ a unit imaginary
+quaternion. Its $m$th power is $\cos(m\theta)+u\sin(m\theta)$.
+Thus for odd $m$ the roots are $1$ and the angle spheres
+$\theta=2\pi j/m$ for $1\le j\le(m-1)/2$. The finite disjoint union is
+topological because the spheres have distinct real parts. Left
+invariance gives $\kappa(a,ar)=\kappa(1,r)$, which evaluates to the
+stated values.
+\end{proof}
+
+\begin{corollary}[Comparison records for the two knots]\label{m7:knot-comparison}
+For a nonconstant quaternion colouring, the comparison set in
+Proposition~\ref{m7:comparison} is $\{1,1/4\}$ on the trefoil and
+$\{1,(3+\sqrt5)/8,(3-\sqrt5)/8\}$ on the figure-eight.
+For a constant colouring it is $\{1\}$.
+\end{corollary}
+\begin{proof}
+The formulas in Theorem~\ref{m7:knot-roots} put the cut colours
+in $a\langle r\rangle=\{ar^j:j\in\Z\}$. The core acts on the exponents
+by $j*l=2j-l$. The exponents $0,1$ generate all exponents, since
+$j*(j-1)=j+1$. Thus the generated subquandle is the whole coset.
+The comparisons are $(1+\cos(2\pi j/m))/2$ as $j$ runs through the
+residues modulo the order $m$ of $r$. For $m=3$ the nonidentity
+real part is $-1/2$. For $m=5$, the reciprocal pairs of primitive
+roots give real parts $v=\cos(2\pi/5)$ and $\cos(4\pi/5)$.
+Each solves $1+2v+2(2v^2-1)=0$ by summing the five roots and
+taking real parts. This gives the stated pair of comparisons.
+\end{proof}
+
+\subsection{Crossing weights and the comparison}
+
+\begin{proposition}[Quandle weights and an obstruction]\label{m7:cocycle}
+Let $Q$ be a left quandle, $A$ an abelian group in additive notation,
+and $f:Q^2\to A$.
+Use $f(x,y)$ at a positive crossing with positive input $(x,y)$ and
+use $-f(x,y)$ on the inverse edge from $R(x,y)$ back to $(x,y)$.
+The signed sums of these weights are preserved under braid relations
+exactly when
+\[
+ f(x,z)+f(x*y,x*z)=f(y,z)+f(x,y*z).
+\]
+Under this equation, the sums on closed colourings are preserved by
+conjugation and both Markov stabilizations along the natural
+bijections precisely when $f(x,x)=0$ for all $x$. In particular their
+multiset is a link invariant for a finite target. These are the
+additive normalized quandle $2$-cocycle weights in the left convention
+\cite{m7:CJKLS}.
+
+Suppose $Q$ is a core subquandle in a heap with $(\Omega2)$, and take
+$f(x,y)=F(\kappa(x,y))$ for a function $F$ on the range of the comparison
+restricted to $Q$. The cocycle equation then holds
+precisely when $f(x,\cdot)$ is constant on each orbit under the
+reflections. On the full $S^3$ target this forces $F$ to be constant
+on $[0,1]$, and normalization forces it to vanish. On any restricted
+target, a normalized weight of this form vanishes at every crossing
+of a knot colouring.
+\end{proposition}
+\begin{proof}
+The sums along the two braid words of Reidemeister III are
+$f(x,y)+f(x,z)+f(x*y,x*z)$ and
+$f(y,z)+f(x,y*z)+f(x,y)$. Inverse edges cancel, disjoint moves commute,
+and the displayed equation is the remaining defining relation.
+The same relation compares closed colourings by applying it to the
+prefix of a braid followed by the inverse of that prefix, so failure
+of the relation can change a sum even on a closed colouring.
+Conjugation inserts transports of a fixed point along mutually
+inverse paths. The two extra contributions cancel. Stabilization
+adds a crossing of two equal colours, with contribution $\pm f(x,x)$.
+Testing this move on each colour of the one-strand identity makes the
+diagonal condition necessary.
+For an invariant heap comparison as in $(\Omega2)$, two-sided
+invariance gives
+$\kappa(u,v)=\kappa(1,u^{-1}v)$ after fixing an origin.
+Inversion preserves it, since $\kappa(u^{-1},v^{-1})=\kappa(v,u)$ by
+left and right multiplication followed by symmetry.
+Each $s_x$ is inversion followed by left and right multiplication by
+$x$. Thus $f(x*y,x*z)=f(y,z)$, and the equation is precisely
+$f(x,z)=f(x,s_yz)$ for all $x,y,z$. On $S^3$, to send $z$ to $w$ take
+$y=vz$ with $v^2=wz^{-1}$, which has a solution by halving a
+quaternion angle, including at $-1$. For fixed $x$ the comparison
+ranges over $[0,1]$. Along a single knot component every colour lies in
+the same orbit, since overarc colours continue unchanged and the
+underarc transitions are reflections. The value at a crossing then
+equals $f(x,x)$.
+\end{proof}
+
+\begin{example}[A failed weight and a telescoping weight]\label{m7:cocycle-ex}
+Take $x=z=1$ and $y=i$ in the quaternion target. Then $y*z=-1$,
+and the two sides of the cocycle equation for $f=\kappa-1$ are
+$-1/2$ and $-3/2$. The same failure holds after any constant shift.
+The unsigned raw sum also changes by $1$ on stabilizing a closed
+colouring, and a constant signed weight contributes its value times
+the writhe, the exponent sum of the braid. By contrast,
+$f(x,y)=h(x*y)-h(y)$ for $h:Q\to A$ has zero sum around every closed
+colouring. It telescopes along each component, since it is the
+change of $h$ along the underarc and the overarc is unchanged.
+A restricted target can give nontrivial link weights. On
+$C_2=\{1,-1\}$ all reflections are the identity and $f=1-\kappa$
+is a normalized cocycle. The two mixed-colour assignments to
+the positive Hopf link each give weight $2$. All four colourings
+of the two-component unlink have weight $0$.
+\end{example}
+
+\begin{remark}[Configuration space and physical input]\label{m7:topology}
+For point configurations, the unordered configuration space of $n$
+distinct points in $\R^2$ has fundamental group $B_n$ by the geometric
+description of braids. In dimension $d\ge3$ the ordered configuration
+space is the complement of the pairwise diagonals in $\R^{dn}$. It is
+path connected and simply connected because polygonal paths and
+piecewise-linear filling disks can be put in general position relative
+to the finitely many diagonals. A simplex of dimension at most two
+then misses every diagonal of codimension $d\ge3$. More explicitly,
+one can approximate a loop by a polygon in the open complement,
+homotoping along short segments there, and cone its edges to an
+apex outside the finite union of the affine spans of each edge with
+each diagonal. If any triangle hits a diagonal, its apex belongs
+to one of those spans, each of dimension at most $dn-d+2<dn$.
+The same choice with endpoint vertices gives paths. The free covering
+by the ordered space has deck group $S_n$, hence the unordered
+fundamental group is $S_n$ \cite{m7:Fadell,m7:Birman}.
+For $n=2$ the double planar exchange exemplifies the lost loop:
+on $C_3$, $R^2(0,1)=(1,2)$. Thus involutory left translations do not
+force $R^2=1$. One-dimensional unitary representations of $S_n$ for
+$n\ge2$ send each adjacent transposition to the same sign, since the
+transpositions are conjugate involutions. The planar generators can
+all take any common unit phase by the braid relations.
+These configuration spaces concern point exchanges. The trefoil
+colourings in Example~\ref{m7:counts} distinguish a closed embedded
+curve from the unknot within the ambient three-space.
+\end{remark}
+
+\begin{hypothesis}[Physical exchange input]\label{m7:anyons-input}
+A model of non-Abelian anyonic gates specifies a gapped
+two-dimensional system, a fusion subspace for separated excitations,
+and adiabatic transports inducing a projective unitary braid action
+there \cite{m7:Nayak}. Local indistinguishability on that subspace,
+with projector $P$, takes the form $PAP=\lambda_A P$ for operators
+$A$ supported in specified local regions. Accuracy of a physical
+implementation requires estimates for local perturbations and
+finite separation, together with an operation time compatible
+with both the bulk gap and any residual splitting.
+\end{hypothesis}
+
+\begin{remark}[Realization programme]\label{m7:anyons-programme}
+On a finite target, braid permutations act unitarily on the vector
+space with orthonormal basis the colourings of an open cut. For the
+quaternion target, each $s_x$ preserves normalized spherical measure,
+and Fubini followed by slot interchange shows that each $R_i$
+preserves the product measure. Pullback by the inverse action
+therefore gives a unitary action on $L^2((S^3)^n)$ as well.
+Local indistinguishability gives the scalar products in
+Proposition~\ref{m7:recovery} whenever each error product $E_a^*E_b$
+is supported in an allowed region, by compressing to the fusion
+subspace. A physical realization would require identifying an invariant
+encoded subspace in a concrete model satisfying
+Hypothesis~\ref{m7:anyons-input}, intertwiners for the generators,
+and bounds on leakage and logical error. In an architecture with
+exponentially small splitting this would include a model-specific
+bound of the form $C e^{-L/\xi}$ at separation $L$, plus control of
+thermal excitations if the system is operated at nonzero temperature.
+\end{remark}
+
+\subsection{Clifford multiplication and clock-axis factorization}
+
+\begin{proposition}[XOR multiplication and the determinant-one Pauli subgroup]\label{m7:clifford}
+Let $e_a$ ($a=1,2,3$) be the orthonormal Clifford generators of
+$\mathrm{Cl}_{3,0}$, with $e_a^2=1$ and pairwise anticommutation.
+For a mask $m\in\{0,1\}^3$ let $E_m=\prod_{a=1}^3 e_a^{m_a}$
+in increasing order, and write $|m|=\sum_a m_a$.
+With $\oplus$ denoting bitwise addition,
+\[
+ E_m E_n=(-1)^{\sum_{a>b}m_a n_b}E_{m\oplus n},
+ \qquad \widetilde E_m=(-1)^{|m|(|m|-1)/2}E_m.
+\]
+Both $E_m^2$ and the reversion sign in this formula equal
+$(-1)^{|m|(|m|-1)/2}$.
+The real algebra map taking $e_1,e_2,e_3$ to the Pauli matrices
+$X,Y,Z$ is an isomorphism with $M_2(\C)$. The four even masks span
+$\HH$ with oriented quaternion units
+$i=-e_2e_3$, $j=-e_3e_1$, $k=-e_1e_2$.
+The even signed blades form the unit-quaternion subgroup $Q_8$. Its
+left heap translations give a faithful copy of $Q_8$. The full one-qubit
+Pauli group in $\mathrm U(2)$ is the group of all sixteen signed blades,
+with determinant-one subgroup $Q_8$ and centre $\{\pm I,\pm\mathrm i I\}$.
+The quotient by that centre is $Q_8/\{\pm1\}$.
+\end{proposition}
+\begin{proof}
+Moving each factor from the second blade past the larger indices
+in the first costs one minus sign per inversion. Adjacent repeated
+indices cancel since $e_a^2=1$. Reversing $|m|$ factors costs
+$\binom{|m|}{2}$ swaps. The product formula with $m=n$ gives the
+same exponent. In decimal mask order $0,1,\ldots,7$, the matrix
+images are
+\[
+ I,\ X,\ Y,\ \mathrm i Z,\ Z,\ -\mathrm iY,\ \mathrm iX,\ \mathrm iI .
+\]
+These are a real basis, since $I,X,Y,Z$ are a complex basis and the
+images give the four real and four imaginary directions. Reduction
+to ordered products spans the algebra by the eight blades, which
+proves the isomorphism. The pseudoscalar $J=e_1e_2e_3$ is central,
+since moving a generator through the other two gives two swaps,
+and $J^2=-1$. The displayed images give the quaternion units
+$-\mathrm iX,-\mathrm iY,-\mathrm iZ$ with $ij=k$ and cyclic variants.
+The even signed blades have determinant one. The eight signed odd
+blades have determinant minus one. The centre follows by commuting
+a matrix with $X$ and $Z$, which generate the matrix algebra,
+and the quotient assertion follows because each central phase
+coset has a determinant-one representative. Finally
+$\ell_{g,1}(x)=\hp g1x=gx$, so the translations compose by multiplication
+and evaluation at $1$ recovers $g$. This is the Clifford algebra
+realization of the quaternion convention used in
+Proposition~\ref{m3:chiral} \cite[Chs.~3 and 16]{m7:Lounesto}.
+\end{proof}
+
+\begin{example}[Signs and Bloch coordinates]\label{m7:bloch}
+The mask identities give $e_1e_2=-e_2e_1$ with output mask $3$, and
+$e_1e_2e_3$ has mask $7$ and square $-1$. For
+$B(r)=r_1X+r_2Y+r_3Z$ they give $B(r)^2=\|r\|^2 I$, in particular
+$B(3,4,12)^2=169I$. There is no unital complex algebra character of
+$M_2(\C)$ and $X,Z$ have no nonzero common eigenvector. In either
+case, the two involutions would act by scalars of square one, and
+anticommutation would force their scalar product to be its own
+negative.
+
+A Hermitian matrix has unique coordinates $A=(tI+B(r))/2$, with
+$t=\operatorname{tr}A$ and
+$r=(2\re A_{12},-2\operatorname{Im}A_{12},A_{11}-A_{22})$ using
+matrix indices $1,2$. This follows by reading the entries
+of the Pauli matrices. The eigenvalues are $(t\pm\|r\|)/2$,
+since $B(r)$ is traceless and its square is $\|r\|^2 I$.
+The determinant is $(t^2-\|r\|^2)/4$, and positive semidefiniteness is equivalent
+to $t\ge\|r\|$. At trace one, idempotence is equivalent to $\|r\|=1$,
+including the converse by the eigenvalues. For example
+$(t,r)=(1,(0.48,0.60,0.64))$ has entries
+$A_{11}=0.82$, $A_{22}=0.18$, $A_{12}=0.24-0.30\mathrm i$.
+These Bloch coordinates give the matrix readout used in
+Proposition~\ref{m2:bloch}.
+\end{example}
+
+\begin{theorem}[Clock-axis-clock decomposition]\label{m7:zyz}
+Let $k$ be a unit imaginary quaternion specifying a clock circle,
+and let $j$ be a unit imaginary perpendicular to $k$. Set $i=jk$ and put
+$T_u(t)=\cos t+u\sin t$. Relative to
+$\C_k=\R+\R k$, write $q=z+w j$, where $z,w\in\C_k$ and
+$|z|^2+|w|^2=1$. Then every $q\in S^3$ has a factorization
+\[
+ q=T_k(\alpha)T_j(\beta)T_k(\gamma),\qquad
+ z=e^{k(\alpha+\gamma)}\cos\beta,\quad
+ w=e^{k(\alpha-\gamma)}\sin\beta,\quad
+ 0\le\beta\le\pi/2 .
+\]
+For $zw\ne0$ there is a unique choice with
+$\alpha+\gamma,\alpha-\gamma\in(-\pi,\pi]$. Without that restriction
+the ambiguity is precisely the lattice
+$(\Delta\alpha,\Delta\gamma)=(\pi(m+n),\pi(m-n))$ with $m,n\in\Z$.
+At $\beta=0$ only the sum is specified modulo $2\pi$.
+At $\beta=\pi/2$ only the difference is specified modulo $2\pi$.
+The factorization gives the classical $Z Y Z$ decomposition on the
+adjoint $\SO(3)$, with each angle doubled and with lifts $q$ and $-q$.
+For $zw\ne0$, on the adjoint quotient the angles $\alpha$ and $\gamma$
+are each determined modulo $\pi$. At $\beta=0$ and $\beta=\pi/2$ the
+specified sum or difference, respectively, is determined modulo $\pi$.
+In the spatial angles $(A,B,C)=(2\alpha,2\beta,2\gamma)$ the
+angular-velocity Jacobian has determinant $-\sin B$ in the
+oriented basis $(i,j,k)$, with rank two at the two boundary fibres.
+\end{theorem}
+\begin{proof}
+Because $jk=-kj$, one has $j e^{k\gamma}=e^{-k\gamma}j$.
+Distributing the middle factor gives the two coefficient formulas.
+Take $\beta=\operatorname{atan2}(|w|,|z|)$ and take the two
+arguments of $z$ and $w$ where defined. Solving the two linear
+equations gives $\alpha$ and $\gamma$. This proves existence,
+the lattice, and the two boundary cases. For a unit imaginary
+vector $v$ perpendicular to $u$ the adjoint sends
+\[
+ T_u(t)vT_u(-t)=\cos(2t)v+\sin(2t)(u\times v).
+\]
+Indeed $vu=-uv$, $uvu=v$, and $uv=u\times v$ for perpendicular
+imaginary units. The parallel component is fixed. Every spatial
+rotation has an axis and therefore admits such an adjoint lift.
+An element fixing all imaginary units is central in $\HH$ and
+unit, hence equals $1$ or $-1$. Replacing $q$ by $-q$ changes the arguments
+of both nonzero coordinates by $\pi$ modulo $2\pi$. The two quaternion
+lattices for the two possible lifts combine to give independently
+$\alpha$ and $\gamma$ modulo $\pi$. If a coordinate vanishes, the same
+sign change affects only the specified sum or difference. In Clifford
+coordinates reversion
+on even blades is quaternion conjugation, so these are also the
+rotor sandwich formulas for $\mathrm{Spin}(3)$. In matrix coordinates
+$T_k(t)=e^{-\mathrm i t Z}$ and $T_j(t)=e^{-\mathrm i tY}$ for the
+corresponding Pauli axes. For a general $U\in\mathrm U(2)$ remove a
+scalar square root of $\det U$ before applying the decomposition
+\cite[Theorem~4.1]{m7:NC}\cite[Lemma~4.1]{m7:Barenco}.
+
+Write $U_u(\theta)$ for the spatial rotation about $u$ by $\theta$.
+Differentiate $U_k(A)U_j(B)U_k(C)$ and multiply on the right
+by the inverse product to express the angular velocity in spatial
+coordinates. The three columns are $k$, $U_k(A)j$ and
+$U_k(A)U_j(B)k$. Applying $U_k(-A)$ to all columns leaves the
+determinant unchanged and gives $k,j,i\sin B+k\cos B$. The
+determinant is $-\sin B$, and at the boundary the first two
+columns still span a plane.
+\end{proof}
+
+\begin{example}[Compilation and phase synthesis]\label{m7:rotors}
+Let $R_u(\theta)=T_u(\theta/2)$. For the spatial angles
+$(0.37,-0.81,0.52)$ the product $R_k(0.37)R_j(-0.81)R_k(0.52)$
+has quaternion coordinates $(0.829592,-0.029524,-0.392911,0.395635)$
+to six decimals. This is in scalar, $i,j,k$ order. Its action on
+the imaginary basis has matrix, rounded to six decimals,
+\[
+ \begin{pmatrix}
+ 0.378188&-0.633230&-0.675273\\
+ 0.679631&0.685203&-0.261913\\
+ 0.628550&-0.359884&0.689498
+ \end{pmatrix}.
+\]
+The coefficient formula in Theorem~\ref{m7:zyz} applies also to
+signed $\beta$ for this computation. Under the matrix convention
+the phased $T$ gate satisfies
+$e^{-\mathrm i\pi/8}\operatorname{diag}(1,e^{\mathrm i\pi/4})
+=T_k(\pi/8)$. For the Hadamard matrix $H=(X+Z)/\sqrt2$,
+$-\mathrm iH=(i+k)/\sqrt2=T_k(0)T_j(\pi/4)T_k(\pi/2)$.
+The associated half-turn exchanges the $i$ and $k$ axes and negates
+$j$, either by direct multiplication or by reflecting in its axis.
+
+The orthogonal pair gives a word of length three for one rotor.
+This specializes the variable-axis control of
+Proposition~\ref{m4:axes}. Theorems~\ref{m4:real}
+and~\ref{m4:lift} solve a different synthesis problem, choosing one
+ordered list of phases that realizes a prescribed response throughout
+a signal interval or on all relevant invariant blocks.
+\end{example}
+
+\subsection{Pauli comparison readouts and recovery}
+
+\begin{proposition}[Weyl phases and the Pauli quotient]\label{m7:weyl}
+For $d\ge2$ let $X\lvert j\rangle=\lvert j+1\rangle$ and
+$Z\lvert j\rangle=\omega^j\lvert j\rangle$ on $\C^d$, where
+$\omega=e^{2\pi\mathrm i/d}$ and indices are in $\Z/d$.
+On $n$ factors set $D(a,b)=\bigotimes_{j=1}^n X^{a_j} Z^{b_j}$.
+Then
+\[
+\begin{gathered}
+ D(a,b)D(c,e)=\omega^{b\cdot c}D(a+c,b+e),\\
+ D(a,b)^*=\omega^{a\cdot b}D(-a,-b),\\
+ [D(a,b),D(c,e)]_{\rm grp}=\omega^{b\cdot c-e\cdot a}I ,
+\end{gathered}
+\]
+where $[G,H]_{\rm grp}=GHG^{-1}H^{-1}$.
+For $d=2$ the single-site words are $I,X,Z,XZ=-\mathrm iY$ and
+the product sign is $(-1)^{b\cdot c}$. For $d=3$, exchanging the
+order from $XZ$ to $ZX$ introduces the phase $e^{2\pi\mathrm i/3}$. Modulo its scalar phases, the full $n$-qubit
+Pauli group has the symplectic space $\mathbb F_2^{2n}$ as its group
+of labels, with pairing
+$\langle(a,b),(c,e)\rangle_{\rm sp}=b\cdot c+e\cdot a$.
+The tensor image of $Q_8^n$ is a subgroup of order $2^{2n+1}$
+with phases $\{\pm I\}$. Modulo phases this image gives the same labels.
+\end{proposition}
+\begin{proof}
+Acting on basis vectors gives $ZX=\omega XZ$. Moving all clock
+powers past the shift powers gives the first identity, and
+reversing the order with negative powers gives the second.
+The quotient of the two product phases in opposite order
+gives the commutator. Each $D(a,b)$ first shifts a computational
+basis string by $a$. If it is scalar, $a=0$, and evaluation on zero
+and all coordinate strings gives $b=0$. Thus distinct labels
+represent distinct scalar cosets. The pairing has zero pairings
+with all $(c,e)$ only for $(a,b)=0$, by testing the coordinate
+vectors. The single-site quaternion group provides one
+representative of each label and both central signs. Tensoring
+shows the stated order, with kernel in $Q_8^n$ consisting of site
+signs of product $+1$. This is the binary symplectic convention
+for stabilizer codes \cite[Chs.~2--3]{m7:Gottesman}.
+\end{proof}
+
+\begin{remark}[Clifford circuits]\label{m7:clifford-circuits}
+Clifford unitaries normalize the Pauli group. They act by
+linear transformations on the phase-free labels and preserve
+the symplectic pairing, since they preserve products and fix scalar
+commutators. Stabilizer preparation, Clifford gates and Pauli
+measurements admit efficient classical simulation in the usual
+stabilizer circuit model \cite{m7:Gottesman,m7:AaronsonGottesman}.
+\end{remark}
+
+\begin{proposition}[Syndromes from heap comparisons]\label{m7:syndrome}
+Let $S_1,\ldots,S_h$ be commuting Hermitian Pauli words on
+$n\ge1$ qubits. Assume their phase-free labels are independent.
+Let $E$ be a Pauli error, and let
+$\epsilon_j=\langle\operatorname{label}(E),
+\operatorname{label}(S_j)\rangle_{\rm sp}$. For every vector in the
+common $+1$ code space, its image under $E$ has eigenvalues
+$(-1)^{\epsilon_j}$ for the checks. The projector for outcome
+$u\in\mathbb F_2^h$ is
+\[
+ P_u=\prod_{j=1}^h\frac{I+(-1)^{u_j}S_j}{2},
+ \qquad \operatorname{rank}P_u=2^{n-h}.
+\]
+On $\mathrm U(2^n)$ use the normalized trace comparison
+$\kappa_n(U,V)=(1+\re\operatorname{tr}(U^*V)/2^n)/2$. Then
+\[
+ \kappa_n(I,[E,S_j]_{\rm grp})
+ =\kappa_n(S_j,ES_jE^{-1})
+ =\frac{1+(-1)^{\epsilon_j}}2 .
+\]
+For $n=1$ its restriction to $\SU(2)$ is $\kappa$.
+For general $n$ the same number is recovered from the $n$
+quaternion site commutators, taking $E_t,S_{jt}\in Q_8$ as site lifts. Multiply their correlations
+$c(1,[E_t,S_{jt}]_{\rm grp})$ and take $(1+c_{\rm product})/2$, where $c_{\rm product}$ denotes that product.
+Any scalar phases in choosing the representatives cancel.
+\end{proposition}
+\begin{proof}
+The commutator in Proposition~\ref{m7:weyl} gives
+$S_j E=(-1)^{\epsilon_j} E S_j$. Each factor of $P_u$ is a
+spectral projector. The factors commute, and summing over all signs
+gives $I$ by distributivity. Different outcomes give orthogonal
+projections, from opposite factors at the first different bit.
+On expanding $P_u$ the sole scalar term is $I$, by independence.
+Each other term has a nonidentity Pauli factor up to phase and
+has trace zero. This gives the rank. A scalar commutator has the
+same comparison with the identity as $S_j$ has with its conjugate.
+In quaternion coordinates half the matrix trace is the real part,
+so $\kappa_1=\kappa$ on the unit quaternions. Each site commutator
+is a central sign, the tensor commutator is their product, and
+$c(1,\pm1)=\pm1$. With origin $1$, the group commutator of two
+unit quaternions is the value at $1$ of the commutator of their left
+heap translations. Thus the site formula uses only heap operations
+and comparisons after an origin and Pauli directions have been chosen.
+An operational interpretation as a joint syndrome measurement uses
+the tensor-register and commuting-projector measurement model of
+the companion paper \cite[Prop.~124]{Companion}.
+\end{proof}
+
+\begin{remark}[Phase and degeneracy]\label{m7:phase-limits}
+The product sign $(-1)^{b\cdot c}$ is a group $2$-cocycle on the
+additive labels because bilinearity makes the two exponents in the
+associative product of three labels agree. It is the antisymmetrized
+exponent that enters the syndrome. Passing from quaternions to
+the adjoint group identifies both central signs. For example
+$[i,j]_{\rm grp}=-1$ and $[i,1]_{\rm grp}=1$, so comparison of
+the quotient commutator with the identity gives the same result
+in both cases. The ordered pair of phase-free labels still
+determines the sign through its symplectic pairing. For general $d$, the
+real trace reads $(1+\cos(2\pi(b\cdot c-e\cdot a)/d))/2$ on the
+commutator; it identifies the two opposite exponents. The full
+normalized complex trace recovers the phase. Finally, two Pauli
+errors have the same syndrome exactly when their relative error
+commutes with every check, by additivity of the pairing.
+A commuting relative error can have nontrivial logical action.
+For instance $\mathbf1$ and $X^{\otimes3}$ share the zero syndrome
+of the repetition code below, and $X^{\otimes3}$ interchanges its
+two logical basis vectors.
+\end{remark}
+
+\begin{proposition}[Orthogonal recovery and its completion]\label{m7:recovery}
+Let $d,N$ be positive integers and let $V_j:\C^d\to\C^N$ satisfy $V_i^*V_j=\delta_{ij}I$.
+For arbitrary complex matrices $M=(m_{jk})$ and $X$ of the
+appropriate sizes,
+\[
+ \sum_i V_i^*\left(\sum_{j,k}m_{jk}V_j X V_k^*\right)V_i
+    =(\operatorname{tr}M)X .
+\]
+The map $Y\mapsto\sum_iV_i^*YV_i$ preserves trace on the direct sum
+of the ranges and extends to a trace-preserving completely positive
+map on all $N$ dimensions. In particular if
+$E_a:\C^d\to\C^N$ have $\sum_aE_a^*E_a=I$ and
+$E_a^*E_b=c_{ab}I$, then the channel
+$X\mapsto\sum_aE_a X E_a^*$ has a trace-preserving left inverse.
+This is the sufficient direction of the finite-dimensional
+Knill--Laflamme criterion in rectangular form
+\cite{m7:KL,m7:Gottesman}; the criterion with its necessity direction, in the comparison-space formulation, is
+\cite[Thm.~122]{Companion}.
+\end{proposition}
+\begin{proof}
+The two orthogonality factors in each summand leave only $i=j=k$.
+Write $P=\sum_iV_iV_i^*$, an orthogonal projector by the same
+relations. The sum of the recovery Kraus adjoint products is $P$,
+so cyclicity of trace gives the trace assertion on its support.
+For an orthonormal basis $(v_l)$ of $\operatorname{ran}(I-P)$
+and one unit vector $u$ in $\C^d$, add the Kraus operators $uv_l^*$.
+Their adjoint products sum to $I-P$ and they annihilate the given
+supported output. Here $d\ge1$.
+
+For the rectangular error family, $c_{ab}$ is the Gram matrix
+of $(E_a u)$, so it is positive semidefinite. Choose a unitary
+$W$ with $W^*cW=\operatorname{diag}(\lambda_j)$, and put
+$F_j=\sum_a W_{aj}E_a$. The channel is unchanged by unitarity.
+Then $F_i^*F_j=\delta_{ij}\lambda_i I$, and zero eigenvalues
+give zero operators. For the positive eigenvalues put
+$V_i=F_i/\sqrt{\lambda_i}$, which are mutually orthogonal
+isometries. Normalization gives $\sum_i\lambda_i=1$, so the
+first part with $M=\operatorname{diag}(\lambda_i)$ recovers
+$X$ and the added operators give a channel on the full input.
+For a code embedding $V$ into the physical system, apply the
+statement to $E_aV$ with the physical error Kraus operators $E_a$.
+\end{proof}
+
+\begin{example}[Repetition code]\label{m7:repetition}
+For $V\lvert0\rangle=\lvert000\rangle$ and
+$V\lvert1\rangle=\lvert111\rangle$, the checks $Z_1Z_2,Z_2Z_3$
+give the outcomes
+\[
+\begin{array}{c|cccc}
+ E&I&X_1&X_2&X_3\\ \hline
+ \text{eigenvalues}&(+,+)&(-,+)&(-,-)&(+,-)
+\end{array}
+\]
+by counting overlaps of the $X$ positions with each check.
+The four $8$ by $2$ isometries $EV$ have mutually orthogonal
+ranges. Their direct sum is the full physical space since
+$4\cdot2=8$. Proposition~\ref{m7:recovery} recovers the input
+for any coefficient matrix of trace one, including
+$\operatorname{diag}(1/2,1/4,1/8,1/8)$ and coherent coefficients.
+For phase errors, the conjugate code obtained by $H^{\otimes3}$
+has checks $X_1X_2,X_2X_3$ and the same table for $I,Z_1,Z_2,Z_3$.
+In the original code $Z_1$ preserves the syndrome and acts as
+logical $Z$. A two-flip error $X_1X_2$ has the syndrome of $X_3$.
+Applying that single-flip correction gives $X^{\otimes3}$, a
+logical $X$. Each single-site marginal of
+$\alpha\lvert000\rangle+\beta\lvert111\rangle$ is
+$\operatorname{diag}(|\alpha|^2,|\beta|^2)$ because the
+two vectors on the other sites are orthogonal. A balanced
+state has marginal $I/2$ at each site.
+\end{example}
+
+\begin{proposition}[Fermionic signs from Pauli strings]\label{m7:jw}
+Let $a=\lvert0\rangle\langle1\rvert$ on a qubit, and put
+$c_j=Z_1\cdots Z_{j-1}a_j$ on a register.
+These operators satisfy
+$c_j c_l+c_l c_j=0$ and
+$c_j c_l^*+c_l^*c_j=\delta_{jl}I$.
+This is the Jordan--Wigner representation \cite{m7:JW}.
+For two sites the plain operators $a_1,a_2$ instead have
+anticommutator $2a\otimes a\ne0$. The two orders of creating from
+$\lvert00\rangle$ give
+$c_1^*c_2^*\lvert00\rangle=\lvert11\rangle$ and
+$c_2^*c_1^*\lvert00\rangle=-\lvert11\rangle$.
+\end{proposition}
+\begin{proof}
+For $j<l$, swapping the factors produces one minus sign at
+site $j$, where $Za=a=-aZ$. At the other sites they commute.
+Replacing $c_l$ by $c_l^*$ leaves the factor $Z$ at site $j$
+and gives the same result. At one site $a^2=0$ and
+$aa^*+a^*a=I$, while the prefix squares to $I$.
+The example follows by applying the matrices to the two basis bits.
+The same product gives $c_j^*c_{j+1}=a_j^*a_{j+1}$, since
+$a^*Z=a^*$. One intervening site leaves its $Z$ factor.
+In higher-dimensional arrays a one-dimensional site order can
+introduce strings across geometrically adjacent sites. Alternative
+encodings address that locality cost
+\cite{m7:BravyiKitaev,m7:VerstraeteCirac}.
+\end{proof}
+
+\subsection{The overlap obstruction and approximate copying}
+
+\begin{remark}[Exact copying and its scope]\label{m7:clone}
+The exact copying obstruction uses the complex overlap $z=\langle\phi,\psi\rangle$ of unit inputs. A fixed
+unit blank contributes a factor one and two output copies contribute
+$z^2$. Thus $z=z^2$ and the vectors coincide or are orthogonal, as in
+Remark~\ref{d4:cloning}.
+With state-dependent output phases or unit machine states, taking
+absolute values gives $|z|\le |z|^2$. Equality at $|z|=1$ identifies
+rays, and $|z|=0$ gives distinct orthogonal rays
+\cite{d4-wootters,d4-dieks}. Orthogonal inputs admit an isometry on the
+span of the specified inputs with blanks, by mapping one
+orthonormal family to the other. In finite dimension it extends by
+completing orthonormal bases. For a real $z\in[0,1]$ the gap
+$z-z^2$ is in $[0,1/4]$, by completing the square.
+For $z=1/\sqrt2$ it is $1/\sqrt2-1/2$. The overlap argument
+uses a linear tensor-product model as in the companion paper.
+\end{remark}
+
+\begin{proposition}[Two clones and the machine]\label{m7:cloning-machine}
+For a unit input $\psi\in\C^2$ write
+$\psi^\perp=(-\overline{\psi_2},\overline{\psi_1})$ and
+$P_\psi=\psi\psi^*$. There is an isometry from a qubit to two
+clone qubits and one machine qubit with marginal states
+\[
+ \rho_1=\rho_2=\tfrac56P_\psi+\tfrac16P_{\psi^\perp},
+ \qquad
+ \rho_M=\tfrac13P_\psi+\tfrac23P_{\psi^\perp}.
+\]
+Their Bloch vectors are $2r/3,2r/3,-r/3$, respectively,
+for input Bloch vector $r$. The machine has determinant $2/9$,
+eigenvalues $1/3,2/3$ and entropy $\log_2 3-2/3$ in bits.
+The clone entropy is $h_2(1/6)$, where
+$h_2(t)=-t\log_2t-(1-t)\log_2(1-t)$.
+\end{proposition}
+\begin{proof}
+Use the (unnormalized) singlet $\eta=\lvert01\rangle-\lvert10\rangle$.
+With output slots $A,B,M$, send $\psi$ to
+$(\psi_A\eta_{BM}+\psi_B\eta_{AM})/\sqrt6$.
+This map is linear. Substitution on the two computational inputs
+gives orthonormal outputs, with squared norms $(4+1+1)/6$ and
+disjoint computational supports. The determinant-one change of
+basis $(\psi,\psi^\perp)$ leaves $\eta$ fixed by antisymmetry.
+In this basis the output is
+\[
+ \sqrt{\tfrac23}\,\psi_A\psi_B\psi_M^\perp
+ -\tfrac1{\sqrt6}(\psi_A\psi_B^\perp+\psi_A^\perp\psi_B)\psi_M .
+\]
+The two machine factors are orthogonal, as are the corresponding
+clone-pair vectors. Tracing both clone factors gives $\rho_M$.
+Tracing the machine and one clone gives $\rho_1$ or $\rho_2$,
+since the normalized symmetric clone-pair vector in the second
+term has both marginals $I/2$. The Bloch vectors follow by
+linearity and $P_{\psi^\perp}=I-P_\psi$. The eigenvalues follow in
+the displayed basis, and their product and binary entropy give the
+remaining formulas. This is the Bu\v{z}ek--Hillery cloner
+\cite{m7:BH}.
+\end{proof}
+
+\begin{proposition}[A six-state upper bound for copying quality]\label{m7:clone-bound}
+For any channel from one qubit to two with a finite Kraus
+representation, some pure input has at least one marginal with
+squared fidelity at most $5/6$ with that input. The bound is
+attained uniformly by Proposition~\ref{m7:cloning-machine}.
+\end{proposition}
+\begin{proof}
+Let $K_l$ be the $4$ by $2$ Kraus matrices, with
+$\sum_l K_l^*K_l=I_2$. For the six unit Pauli eigenstates, let $A_i$
+be the mean squared fidelity $\langle\psi,\rho_i(\psi)\psi\rangle$
+of clone $i$. For any $2$ by $2$ complex matrix $L$,
+\[
+ \sum_{\psi}|\langle\psi,L\psi\rangle|^2
+ = |\operatorname{tr} L|^2+\operatorname{tr}(L^*L).
+\]
+Indeed expand $L=l_0 I+l_1 X+l_2Y+l_3 Z$. The two eigenstates of
+axis $j$ give $l_0\pm l_j$, so the sum is
+$6|l_0|^2+2\sum_{j=1}^3|l_j|^2$, also the right side by trace
+orthogonality. For one $K_l$ with successive rows
+$(a,b),(c,d),(e,f),(g,h)$, take the two matrices obtained by
+fixing the discarded clone's computational index. For clone one
+their traces are $a+f,c+h$. For clone two they are $a+d,e+h$.
+For either clone their squared Frobenius norms sum to
+$\|K_l\|_{\mathrm F}^2$. Consequently
+\[
+\begin{aligned}
+ 6(A_1+A_2)&=\sum_l(5\|K_l\|_{\mathrm F}^2-q_l),\\
+ q_l&=|a-d-f|^2+|d-f|^2+3|b|^2+3|g|^2
+                  +2|c-h/2|^2+2|e-h/2|^2 .
+\end{aligned}
+\]
+To obtain the second line, subtract the four squared traces
+from $3\|K_l\|_{\mathrm F}^2$. The $a,d,f$ terms give
+$|a-d-f|^2+|d-f|^2$ and the $c,e,h$ terms give the last two squares.
+Taking the normalization trace gives $\sum_l\|K_l\|_{\mathrm F}^2=2$.
+The twelve fidelities therefore average to at most $5/6$,
+and one is at most the average. The two-copy bound belongs to
+the universal cloning problem treated by Gisin and Massar
+\cite{m7:GM}.
+\end{proof}
+
+\begin{remark}[Comparison and additional structure]\label{m7:placement}
+The core construction uses $(\Omega1)$ alone, applies to finite
+subgroups without a smoothness assumption, and extends the
+reflection identities of Section~\ref{sec:def} to closed braids.
+The generated subquandle is preserved by the colouring transports,
+so its pair comparisons give link data. Its role in syndrome extraction uses the central sign
+in a specified Pauli subgroup and the tensor-register structure
+of the companion paper. The signed-word algebra, Euler
+factorization, stabilizer checks and recovery are classical.
+The results here give explicit closed-colouring spaces in the
+quaternion comparison model, characterize its scalar crossing
+weights of comparison form, and express the syndrome directly
+through heap-translation commutators.
+\end{remark}
+
+\begin{remark}[physical counterparts in the companion paper]\label{m7:companion}
+The mathematics of this section is self-contained.  Its physical counterparts are in the companion paper: point-particle exchanges
+\cite[Prop.~138]{Companion} (cf.\ Remark~\ref{m7:topology}), rack transport and link colourings \cite[Prop.~139 and Ex.~140]{Companion}
+(cf.\ Proposition~\ref{m7:braids}, Example~\ref{m7:counts}), fermion signs \cite[Prop.~141]{Companion} (cf.\ Proposition~\ref{m7:jw}),
+correction in a locally indistinguishable space and its finite-size requirements \cite[Cor.~142, Rem.~143]{Companion}
+(cf.\ Hypothesis~\ref{m7:anyons-input}, Remark~\ref{m7:anyons-programme}; the anyon realisation is a programme), Pauli syndromes and the
+three-qubit repetition code \cite[Prop.~124, Ex.~125]{Companion} (cf.\ Proposition~\ref{m7:syndrome}, Example~\ref{m7:repetition}), the
+Knill--Laflamme recovery theorem \cite[Thm.~122]{Companion} (cf.\ Proposition~\ref{m7:recovery}), and copying
+\cite[Props.~120, 121]{Companion} (cf.\ Remark~\ref{m7:clone}, Propositions~\ref{m7:cloning-machine}, \ref{m7:clone-bound}).
+\end{remark}
+
 \setcounter{section}{5}
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\theHsection}{\arabic{section}}
@@ -7174,7 +8123,7 @@ A physical positive minimum comparison scale would be an additional
 resolution hypothesis. Interpreting a Gram interval as a set of
 physically selectable states needs a dynamical reachability hypothesis.
 Static Gram constraints describe admissibility by a realization.
-The Schur-residual lemma of the companion paper \cite[Lemma~224]{Companion} applies to comparison spaces with
+The Schur-residual lemma of the companion paper \cite[Lemma~359]{Companion} applies to comparison spaces with
 specified dimension. The residual construction here gives its
 positive-definite counterpart with a parameterized Gram family.
 
@@ -8758,7 +9707,19 @@ Thm.~\ref{m1:chordal}, Prop.~\ref{m1:sharp} & Simplicial vertices: Dirac \cite{m
 Thm.~\ref{m1:gauge}, Prop.~\ref{m1:clique} & Classical in substance (edge-path group \cite{m1:Spanier}, spanning-tree coordinates \cite{Levy10}); the filling estimate elementary\\
 Props.~\ref{m1:gram}, \ref{m1:distance}, \ref{m1:near-gram} & Classical ingredients \cite{m1:Schoenberg,m1:JordanVonNeumann,m1:Grone}; Prop.~\ref{m1:near-gram} elementary\\
 Thm.~\ref{m2:classification} & Classical in substance \cite{Loos,Helgason,Wang52,Cartan26,Besse78}; new: axiomatisation by the round-trip law with continuous $\kappa$ (Rem.~\ref{m2:placement})\\
+Thm.~\ref{m7:core}, Prop.~\ref{m7:braids} & Cores and knot quandles \cite{m7:Joyce,m7:Matveev}; racks \cite{m7:FennRourke}; Markov \cite{m7:Markov}, \cite[Thm.~2.3]{m7:Birman}\\
+Prop.~\ref{m7:cocycle} & Quandle cocycles \cite{m7:CJKLS}; the triviality of comparison-valued weights on $S^3$ not found in the searched scope\\
 Thm.~\ref{m6:cover} & Spectral gap \cite{m6:LPS,m6:PS}; strong approximation \cite{m6:Sardari}; synthesis \cite{m6:RS}; the covering consequences elementary given these\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.47\textwidth}p{0.47\textwidth}@{}}
+\toprule
+Statement & Status\\
+\midrule
 Thms.~\ref{m6:det-product}, \ref{m6:three} & Compare Liao's three-series theorem on Lie groups \cite{m6:Liao}; the compact-group form with quaternion martingale not found in the searched scope\\
 Thms.~\ref{m6:barrington}, \ref{m6:abelian} & Barrington \cite{m6:Barrington}; Barrington--Th\'erien \cite{m6:BT}; \cite{m6:BST}; the loop realisation by holonomy elementary\\
 Thm.~\ref{m4:real}, Prop.~\ref{m4:pair}, Thm.~\ref{m4:lift} & Quantum signal processing: existence of phases \cite{m4:LC,m4:GSLW,m4:Haah}; new: the heap formulation and the frame covariance\\
@@ -8941,7 +9902,7 @@ black box; a formal statement of Theorem~\ref{thm:main} can avoid it by assuming
 
 All identities and limits of Part~\ref{part:arc} that are not textbook facts, and the identities of Part~\ref{part:axiom} used there, were
 checked numerically on random or explicit inputs by the accompanying script \texttt{check\_arc\_calculus.py} (numpy and the
-standard library; 211 checks, eight of them for Part~\ref{part:alg}, six for Section~\ref{sec:m2}, fourteen for Section~\ref{sec:m3}, eight for Section~\ref{sec:d4}, seven for Section~\ref{sec:m5}, twelve for Sections~\ref{sec:m4}, \ref{sec:m4atlas} and seven for Section~\ref{sec:m6}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present sixteen: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file, one each for Sections~\ref{sec:m3}, \ref{sec:d4}, \ref{sec:m5} and \ref{sec:m6}, and one for Sections~\ref{sec:m4}, \ref{sec:m4atlas}); everything runs
+standard library; 217 checks, eight of them for Part~\ref{part:alg}, six for Section~\ref{sec:m2}, fourteen for Section~\ref{sec:m3}, eight for Section~\ref{sec:d4}, six for Section~\ref{sec:m7}, seven for Section~\ref{sec:m5}, twelve for Sections~\ref{sec:m4}, \ref{sec:m4atlas} and seven for Section~\ref{sec:m6}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present seventeen: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file, one each for Sections~\ref{sec:m3}, \ref{sec:d4}, \ref{sec:m7}, \ref{sec:m5} and \ref{sec:m6}, and one for Sections~\ref{sec:m4}, \ref{sec:m4atlas}); everything runs
 from the directory of this paper.  These include the recurrence and its Chebyshev form, the residual expansion of
 Theorem~\ref{thm:consist}, the inequality of Theorem~\ref{thm:action}, the split and the Brownian limits of
 Theorem~\ref{thm:sagitta} (simulated, $\tfrac32T$ to two decimals), the transport formula of
@@ -9216,6 +10177,22 @@ For Section~\ref{sec:m6} the following declarations were located (no \texttt{sor
 No declaration was found for Theorem~\ref{m6:cover}, Theorems~\ref{m6:det-product}, \ref{m6:three}, \ref{m6:prime-products},
 Proposition~\ref{m6:hb}, Theorem~\ref{m6:barrington} or Theorem~\ref{m6:abelian}.
 
+For Section~\ref{sec:m7} the following declarations were located (no \texttt{sorry} in their files).
+{\small\raggedright
+\begin{itemize}[leftmargin=1.5em]
+\item Proposition~\ref{m7:braids}: \texttt{D5/S0/Certificates/Quandles/BraidColoringTransport.lean}, \texttt{crossing\_yang\_baxter};
+\texttt{D5/S3/Topology/QuandleMarkovColoring.lean}, \texttt{quandle\_coloring\_markov\_invariant} (algebraic Markov moves).
+\item Proposition~\ref{m7:weyl}: \texttt{D5/S3/Quantum/Algebra/WeylDisplacement.lean}, \texttt{displacement\_mul};
+\texttt{D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.lean}, \texttt{pauli\_word\_mul}.
+\item Proposition~\ref{m7:recovery}: \texttt{D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.lean}, \texttt{orthogonal\_syndrome\_recovery};
+\texttt{D5/S3/Quantum/Recovery/FiniteKrausReversibility.lean}, \texttt{scalar\_products\_construct\_left\_inverse}.
+\item Proposition~\ref{m7:jw}: \texttt{D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.lean}, \texttt{fullC\_CAR}.
+\item Remark~\ref{m7:clone}: \texttt{D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.lean}, \texttt{no\_cloning\_inner\_product\_criterion};
+Proposition~\ref{m7:cloning-machine}: \texttt{D5/S3/Quantum/CloningMachine.lean}, \texttt{machine\_reduced\_spectrum}.
+\end{itemize}}
+No declaration was found for Theorem~\ref{m7:knot-roots}, Proposition~\ref{m7:cocycle}, Theorem~\ref{m7:zyz} or
+Proposition~\ref{m7:clone-bound}.
+
 \section{What remains open}\label{sec:open}
 
 \begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2.6em]
@@ -9273,6 +10250,9 @@ empirical evidence.
 \item \emph{Arithmetic and holonomy.}  (a) Conjecture~\ref{m6:cover-conjecture}: the uniform covering exponent $N_n^{-1/4+\eta}$ for
 even words.  (b) Conjecture~\ref{m6:dottie-conj}: algebraic independence of $\alpha$ and $\pi$ (implied by Schanuel's conjecture).
 (c) The kernel programme of Remark~\ref{m6:kernel-programme} and the architecture programme of Remark~\ref{m6:architecture-programme}.
+\item \emph{Quandles and braids.}  Comparison-valued link invariants beyond the record of the generated subquandle in
+Proposition~\ref{m7:comparison} (a nonconstant comparison weight is excluded on $S^3$ by Proposition~\ref{m7:cocycle} but not on restricted
+targets); and the anyon realisation programme of Remark~\ref{m7:anyons-programme}.
 \end{enumerate}
 
 \section*{Use of AI tools}
@@ -9536,6 +10516,30 @@ The authors used AI tools, namely Claude Fable 5.2 and Claude Opus 5.5 (via Clau
 \bibitem{m6:Shor} P.~W.~Shor, Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer, \emph{SIAM J. Comput.} \textbf{26} (1997), 1484--1509.
 \bibitem{m6:RS} N.~J.~Ross and P.~Selinger, Optimal ancilla-free Clifford$+T$ approximation of $z$-rotations, \emph{Quantum Inf. Comput.} \textbf{16} (2016), 901--953.
 \bibitem{m6:BST} D.~A.~Mix Barrington, H.~Straubing and D.~Th\'erien, Non-uniform automata over groups, \emph{Inform. and Comput.} \textbf{89} (1990), 109--132.
+% Section 5D references (checked 2026-11-20 via Crossref and arXiv, titles included; Markov 1936 via Math-Net.Ru; Fox 1962, Birman 1974,
+% Lounesto 2001 and Nielsen--Chuang 2010 are standard books).
+\bibitem{m7:Artin} E.~Artin, Theory of braids, \emph{Ann. of Math.} (2) \textbf{48} (1947), 101--126.
+\bibitem{m7:Alexander} J.~W. Alexander, A lemma on systems of knotted curves, \emph{Proc. Natl. Acad. Sci. USA} \textbf{9} (1923), 93--95.
+\bibitem{m7:Markov} A.~A.~Markov, \"Uber die freie \"Aquivalenz der geschlossenen Z\"opfe, \emph{Rec. Math. [Mat. Sbornik] N.S.} \textbf{1(43)} (1936), 73--78.
+\bibitem{m7:Birman} J.~S. Birman, \emph{Braids, Links, and Mapping Class Groups}, Annals of Mathematics Studies 82, Princeton University Press, 1974.
+\bibitem{m7:Joyce} D.~Joyce, A classifying invariant of knots, the knot quandle, \emph{J. Pure Appl. Algebra} \textbf{23} (1982), 37--65.
+\bibitem{m7:Matveev} S.~V. Matveev, Distributive groupoids in knot theory, \emph{Mat. Sb.} \textbf{119(161)} (1982), 78--88, 160. English translation in \emph{Math. USSR-Sb.} \textbf{47} (1984), 73--83.
+\bibitem{m7:Fox} R.~H. Fox, A quick trip through knot theory, in \emph{Topology of 3-Manifolds and Related Topics}, M.~K. Fort, Jr., ed., Prentice-Hall, 1962, pp.~120--167.
+\bibitem{m7:CJKLS} J.~S. Carter, D.~Jelsovsky, S.~Kamada, L.~Langford, and M.~Saito, Quandle cohomology and state-sum invariants of knotted curves and surfaces, \emph{Trans. Amer. Math. Soc.} \textbf{355} (2003), 3947--3989.
+\bibitem{m7:Fadell} E.~Fadell and L.~Neuwirth, Configuration spaces, \emph{Math. Scand.} \textbf{10} (1962), 111--118.
+\bibitem{m7:Nayak} C.~Nayak, S.~H. Simon, A.~Stern, M.~Freedman, and S.~Das Sarma, Non-Abelian anyons and topological quantum computation, \emph{Rev. Mod. Phys.} \textbf{80} (2008), 1083--1159.
+\bibitem{m7:Lounesto} P.~Lounesto, \emph{Clifford Algebras and Spinors}, 2nd ed., London Mathematical Society Lecture Note Series 286, Cambridge University Press, 2001.
+\bibitem{m7:NC} M.~A. Nielsen and I.~L. Chuang, \emph{Quantum Computation and Quantum Information}, 10th anniversary ed., Cambridge University Press, 2010, Sect.~4.2.
+\bibitem{m7:Barenco} A.~Barenco, C.~H. Bennett, R.~Cleve, D.~P. DiVincenzo, N.~Margolus, P.~Shor, T.~Sleator, J.~A. Smolin, and H.~Weinfurter, Elementary gates for quantum computation, \emph{Phys. Rev. A} \textbf{52} (1995), 3457--3467.
+\bibitem{m7:Gottesman} D.~Gottesman, \emph{Stabilizer Codes and Quantum Error Correction}, Ph.D. thesis, California Institute of Technology, 1997, arXiv:quant-ph/9705052.
+\bibitem{m7:KL} E.~Knill and R.~Laflamme, Theory of quantum error-correcting codes, \emph{Phys. Rev. A} \textbf{55} (1997), 900--911.
+\bibitem{m7:JW} P.~Jordan and E.~Wigner, \"Uber das Paulische \"Aquivalenzverbot, \emph{Z. Phys.} \textbf{47} (1928), 631--651.
+\bibitem{m7:BH} V.~Bu\v{z}ek and M.~Hillery, Quantum copying: Beyond the no-cloning theorem, \emph{Phys. Rev. A} \textbf{54} (1996), 1844--1852.
+\bibitem{m7:GM} N.~Gisin and S.~Massar, Optimal quantum cloning machines, \emph{Phys. Rev. Lett.} \textbf{79} (1997), 2153--2156.
+\bibitem{m7:FennRourke} R.~Fenn and C.~Rourke, Racks and links in codimension two, \emph{J. Knot Theory Ramifications} \textbf{1} (1992), 343--406.
+\bibitem{m7:AaronsonGottesman} S.~Aaronson and D.~Gottesman, Improved simulation of stabilizer circuits, \emph{Phys. Rev. A} \textbf{70} (2004), 052328.
+\bibitem{m7:BravyiKitaev} S.~B. Bravyi and A.~Yu. Kitaev, Fermionic quantum computation, \emph{Ann. Phys.} \textbf{298} (2002), 210--226.
+\bibitem{m7:VerstraeteCirac} F.~Verstraete and J.~I. Cirac, Mapping local Hamiltonians of fermions to local Hamiltonians of spins, \emph{J. Stat. Mech.} (2005), P09012.
 \end{thebibliography}
 
 \end{document}
