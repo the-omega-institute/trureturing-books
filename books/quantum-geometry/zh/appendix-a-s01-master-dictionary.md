@@ -1571,6 +1571,20 @@ $Q_{\mathrm{top}}=\frac{1}{2\pi^2}\int_{S^3(1)}\eta_1=1\in\mathbb{Z},\quad \Delt
 **认识论状态 (Status)：**
 `LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.4](ch39-s27-self-contained-ternion-particle-and-no-exterior.md#sec-ch39-self-contained-ternion-particle-and-no-exterior))
 
+**二元配关系成三元场（2+1=3）与两阶关系推演未来动力学封顶**（Dyad-Plus-Relation Ternion Field Closure & Two-Order Relational Future Finality）
+
+**本书几何直觉语言 (Geometric Intuition Term)：**
+自旋因子三维叉乘唯一分类、平衡幺正和反自伴交叉积、拉格朗日—格拉姆二阶余子式恒等式、定基流群逆乘分解 `tri_eq_mul_inv_mul`、单位四元数极分解、下游策略改变必伴记忆改变判据、命名生成树阿贝尔相位规范协变传输与锚定和乐分类、无源流群反射序列幂次律 `reflectionSeq_eq_pow` 与保真间距平移律 `kappa_reflectionSeq_add`、两两非对跖布洛赫三角三旋子门返回和乐、全有限单纯形二上链四面体上边缘正合以及完备秩五非交换链连通且触零的三元比较结构向单位四元数球面保结构双射同构的十三条冻结锚点（`LEAN ✓`）；配对静态伴随不变内积下同一切空间内不共线换位子严格 $90^\circ$ 正交 $\langle[\mathbf{X},\mathbf{Y}],\mathbf{X}\rangle=\langle[\mathbf{X},\mathbf{Y}],\mathbf{Y}\rangle=0$ 撑开第三维并在单位球面半换位叉乘括号 $[\mathbf{e}_i,\mathbf{e}_j]_\times=\varepsilon_{ijk}\mathbf{e}_k$（等价地 $g_{R=2}$ 半泡利普通换位子 $[\mathbf{E}_i,\mathbf{E}_j]_{\mathrm{Lie}}=\varepsilon_{ijk}\mathbf{E}_k$）下循环闭合（$2+1=3$，在 `MODEL` 诠释下闭合成三元数场：状态即驻留的关系、关系即流转的状态）、动态第一拍无源右流群传输 $\tau_{x_{t-1}\to x_t}(z)=[z,x_{t-1},x_t]$（对比 $\theta_1=0$ 孤立单点芝诺冻结 $[x_t,x_t,x_t]=x_t$ 与开树规范可抹平性）与第二拍以现在态自定基切对数构造且条件于给定横向语境态 $x_{\mathrm{ctx}}$（无横向耦合时仅凭 $(x_{t-1},x_t)$ 自足闭合）的无外置基点双侧 $\mathrm{SO}(4)$ 等变单步二阶未来模型方程 $x_{t+1}=[x_t,x_{t-1},x_t]\star_{x_t}\exp_{x_t}(\eta\{\boldsymbol{\omega}_{t-1\to t},\boldsymbol{\omega}_{\mathrm{ctx}},\boldsymbol{\omega}_{t-1\to t}\})$（$\theta_1=60^\circ,\;\theta_{\mathrm{ctx}}=45^\circ$ 正交折射角 $\frac{\pi^3}{36}\approx 0.86128546\;\mathrm{rad}$，$\kappa\approx 0.82573138$），并在微分比安基反对称闭合 $D_A F\equiv 0$、雅可比循环和归零与非退化高阶拉格朗日奥斯特罗格拉茨基线性动量无下界定理（区分爱因斯坦—希尔伯特边界项与洛夫洛克/霍恩德斯基最高阶时间导数动能退化结构）的映照下构成本书的二阶场动力学（连续粗糙面和乐与微观引力涌现保持 `OPEN`：`prob-ch34-rough-nonabelian-surface-calculus`、`prob-ch34-gravity-dynamics-and-coupling`）。
+
+**Lean 4 形式对象 / 锁定声明 GID：**
+[`complete_consequences`](lean:D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences), [`crossProduct_is_skewAdjoint_of_balanced_sum`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum), [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity), [`tri_eq_mul_inv_mul`](lean:D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul), [`exists_eq_cos_arccos_add_sin_smul`](lean:D5/S3/Quantum/AURICOmega/UnitQuaternionPolar.exists_eq_cos_arccos_add_sin_smul), [`policy_change_implies_memory_change`](lean:D5/S3/Observer/AgencyHolonomy/ActionLoopRequiresMemory.policy_change_implies_memory_change), [`selected_tree_transport`](lean:D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport), [`reflectionSeq_eq_pow`](lean:D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.reflectionSeq_eq_pow), [`kappa_reflectionSeq_add`](lean:D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.kappa_reflectionSeq_add), [`anchored_phase_classification`](lean:D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification), [`shortest_gate_triangle_holonomy`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy), [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness), [`exists_unitQuaternion_equiv`](lean:D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv)
+
+**一行核心不变量 / 恒等式 (One-Line Invariant)：**
+$\langle[\mathbf{X},\mathbf{Y}],\mathbf{X}\rangle=0,\quad x_{t+1}=[x_t,x_{t-1},x_t]\star_{x_t}\exp_{x_t}\!\bigl(\eta\{\boldsymbol{\omega}_1,\boldsymbol{\omega}_{\mathrm{ctx}},\boldsymbol{\omega}_1\}\bigr),\quad D_A F\equiv 0$
+
+**认识论状态 (Status)：**
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§39.5](ch39-s28-dyad-relation-future-and-second-order-field.md#sec-ch39-dyad-relation-future-and-second-order-field))
+
 :::
 
 ---
