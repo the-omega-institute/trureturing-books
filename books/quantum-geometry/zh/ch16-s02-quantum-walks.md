@@ -428,9 +428,9 @@ $$
 
 五个点排成一个无向整圈，顺时针与逆时针是两个不同的后继置换，却给出完全相同的边。忘掉方向时，必须识别的是这两个实际表示，而不只是把一个计数除以二。下面在原来的标号顶点上完成这个对应；已知边甚至可以已经组成整圈。
 
-本节的完整应用见 trureturing 的 [RotationFaces 书面推导](https://github.com/the-omega-institute/trureturing/blob/2731c2994260e6ac22ed3385bbc04b37a63ac7a3/Blueprint/D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.md)。其中调用的冻结结果是 [`cycle_boundary_walk`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_boundary_walk)：它从实际旋转系统、简单闭游走及一个精确的二元面边界，辨认游走的两个方向。下面的较广陈述还要从原始图与置换构造这些输入，因此保留完整书面证明，不将整条应用标为 Lean 验证。
+本节的完整应用见 trureturing 的 [RotationFaces 书面推导](https://github.com/the-omega-institute/trureturing/blob/2731c2994260e6ac22ed3385bbc04b37a63ac7a3/Blueprint/D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.md)。其中调用的冻结结果是 [`cycle_boundary_walk`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_boundary_walk)：它从实际旋转系统、简单闭游走及一个精确的二元面边界，辨认游走的两个方向。下面的定理在原始图与置换上给出完整的纤维、取商与加边对应。其 Lean 证明使用整圈后继的局部定向唯一性。
 
-::: {.theorem #thm-undirected-cycle-orientation-fibers title="同一无向整圈的定向纤维与加边对应" status="written-proof" proof="pf-undirected-cycle-orientation-fibers" repository="https://github.com/the-omega-institute/trureturing" source="RotationFaces, orientation-fiber application" request="https://github.com/the-omega-institute/trureturing-requests/issues/12"}
+::: {.theorem #thm-undirected-cycle-orientation-fibers title="同一无向整圈的定向纤维与加边对应" lean="D5/S3/Combinatorics/Graph/LinearForests/CycleLiftQuotient.reversal_quotient_and_added_edges" proof="pf-undirected-cycle-orientation-fibers"}
 设 $V$ 为有限标号集，$|V|\ge3$，$F$ 为 $V$ 上任意简单图。令
 
 $$
@@ -520,7 +520,7 @@ E'(x,y)\quad\Longleftrightarrow\quad
 (F+uv).\operatorname{Adj}(x,y)\ \text{且}\ \sigma(x)=y.
 $$
 
-影图含 $F+uv$，无二循环使每条边恰选一次方向；入、出度约束由置换保证。强制定向公式说明限制与扩张互逆，且扩张唯一。两者保留影图；把 $\sigma$ 换为逆置换正好反转所有选择，所以它们与 $\iota$ 交换。整个论证容许加边后已经封成整圈。以上为书面证明，由作者与评审负责。
+影图含 $F+uv$，无二循环使每条边恰选一次方向；入、出度约束由置换保证。强制定向公式说明限制与扩张互逆，且扩张唯一。两者保留影图；把 $\sigma$ 换为逆置换正好反转所有选择，所以它们与 $\iota$ 交换。整个论证容许加边后已经封成整圈。完整证明由 Lean 内核检查。
 :::
 
 简单整圈的两个置换表示有经典先例：Greenhill、Janson、Kim 与 Wormald，*Permutation pseudographs and contiguity*，[doi:10.1017/S0963548301005065](https://doi.org/10.1017/S0963548301005065)，原文第 3 页给出二正则伪图的置换重数。本节使用至少三个顶点的普通简单整圈；两顶点时逆置换相同，断开的多个圈也不是一个整圈置换的影图。该出处说明经典重数的谱系，不单独承担本节全部增强的对应与加边结论。
@@ -957,4 +957,4 @@ $$
 2. **条件信息。** 固定边集的概率律以 $E$ 中的边全部出现为条件。标号固定且回答给出完整的无序邻居集合时，[@thm-complete-neighborhood-history] 把记录事件刻画为边包含与度数上界。当候选图逐点度数相同时，记录事件等同于固定边集出现。每个顶点使用固定次序时，有序记录的似然见 [@thm-fixed-neighbor-order-likelihood]。在固定图上，[@thm-uniform-remaining-name-hit] 给出固定部分命名下的命中概率，[@thm-named-neighborhood-fresh-name-hit] 给出实际无序记录下的新名字命中概率。图与名字同时随机时，[@thm-joint-named-transcript-posterior] 给出实际完整无序记录下的图后验。带颜色或同时使用端口与随机命名的条件律还需证明。 [@thm-unordered-weld-transcript-law] 给出实际无序回复前缀下的无向黏合环条件分布。
 3. **查询、嵌入与成功事件。** Childs 等人 [quant-ph/0209131v2 第 IV 节](https://arxiv.org/abs/quant-ph/0209131v2) 先处理猜中新名字、颜色与已知名字查询的游戏转换，再转向树的随机嵌入，最后分别控制碰撞和 `EXIT` 事件，才得到原文 Theorem 9。[@thm-first-observed-cycle] 给出已知顶点探索中首次出现环的确定性判据，碰撞概率还取决于随机黏合图在实际查询记录下的条件分布。在入口度数为二、最大度数为三的模型中，[@thm-known-name-exploration-size] 给出 $q$ 次实际黑盒调用后的已知名字数上界 $1+2q$。Ben-David 等人脚注 14 特别说明：一次回答全部邻居的查询对应嵌入树中的 $O(t)$ 个顶点，并非严格 $t$ 个。其印刷论证中的分量下界 $2^k-2t$、配对界 $2/(2^k-2t)$ 与式 (6.4) 的 $O(t^2/(2^k-t))$ 各按原文保留；这里不将它们拼成未经证明的显式常数或参数范围。
 
-因此，普通收缩律提供静态计数与条件概率环节，交替结果给出实际载体上的分类、计数和固定边集的条件律，[@thm-undirected-cycle-orientation-fibers] 则以书面证明给出普通无向整圈的同图定向纤维、反向取商与加边对应。普通无向补全律见 [@thm-uniform-undirected-cycle-completion]。实际命名记录给出固定图上的单步命中率。整个查询预算内的新名命中界见 [@thm-fresh-name-budget-survival]，[@thm-fresh-name-budget-attainment] 给出达到该界的策略。查询复杂度和完整经典 `EXIT` 下界仍待证明。[请求 #11](https://github.com/the-omega-institute/trureturing-requests/issues/11) 的更广范围仍未完成。下一节转到量子一侧，考察已经明确给定的加权路径及其端点概率。
+因此，普通收缩律提供静态计数与条件概率环节，交替结果给出实际载体上的分类、计数和固定边集的条件律，[@thm-undirected-cycle-orientation-fibers] 给出普通无向整圈的同图定向纤维、反向取商与加边对应。普通无向补全律见 [@thm-uniform-undirected-cycle-completion]。实际命名记录给出固定图上的单步命中率。整个查询预算内的新名命中界见 [@thm-fresh-name-budget-survival]，[@thm-fresh-name-budget-attainment] 给出达到该界的策略。查询复杂度和完整经典 `EXIT` 下界仍待证明。[请求 #11](https://github.com/the-omega-institute/trureturing-requests/issues/11) 的更广范围仍未完成。下一节转到量子一侧，考察已经明确给定的加权路径及其端点概率。
