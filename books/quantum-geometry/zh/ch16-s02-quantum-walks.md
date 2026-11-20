@@ -951,6 +951,22 @@ $$
 
 此处每步记录路径选中的边。完整的邻居回答还包括同一顶点的其他邻边。
 
+::: {.theorem #thm-proper-edge-color-posterior title="合法边着色能改变图的后验" lean="D5/S3/Combinatorics/Graph/Queries/ProperEdgeColorPosterior.proper_edge_colors_change_posterior"}
+在带固定名字 $0,1,2,3$ 的顶点上，以相等先验概率选取路径 $0$–$1$–$2$–$3$ 或在同一路径上加边 $30$ 得到的四边形。给定图，从其所有使用三种给定颜色的合法边着色中均匀抽取一个着色。两次查询都读取这一着色，分别返回顶点 $1$ 和 $2$ 的全部邻居与对应边色。
+
+两张图在两次查询中的无色答复相同。指定有色记录要求边 $01$ 和 $23$ 取色 $0$，边 $12$ 取色 $1$。路径的十二种着色中有一种产生该记录，四边形的十八种着色中有两种产生该记录。因此在该有色记录下，四边形的后验概率为 $4/7$。
+:::
+
+::: proof
+路径可依次用 $3,2,2$ 种方式给三条边着色。四边形前三条边中，若首尾同色，则有六种序列，每种可用两种颜色闭合。若首尾异色，则也有六种序列，每种仅有一色可闭合。指定记录的首尾同色，故四边形有两种相容着色。相等先验抵消后，后验是 $(2/18)/(1/12+2/18)=4/7$。Lean 在实际边集上核对满足约束的着色计数和有理数比值。
+:::
+
+::: {.theorem #thm-erased-replies-lose-color-information title="擦除颜色会丢失似然信息" lean="D5/S3/Combinatorics/Graph/Queries/ProperEdgeColorPosterior.erasedRepliesDoNotDetermineColorLikelihood"}
+在四个带固定名字的顶点上，即使候选图在顶点 $1$ 和 $2$ 有相同的完整无色答复，且各自存在合法三色边着色，上面指定的有色记录在两张图中的似然也可以不同。
+:::
+
+在路径与四边形的例子里，两边的似然分别为 $1/12$ 和 $1/9$。只看无色记录时，两张图的后验仍然各为 $1/2$。
+
 **通向经典黑盒下界仍需哪些桥梁？** [@thm-directed-forest-cycle-completion] 给出普通有向模型的静态均匀律，[@thm-alternating-forest-classification] 给出交替模型的补全计数，[@thm-alternating-completion-law] 给出固定边集的条件律。它们与 [@rem-qsvt-walks-literature] 的黏合树结果之间还有三层区别：
 
 1. **图的分布与方向。** Ben-David 等人（*SIAM Journal on Computing* **53**(6)，2024，[doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975)，§6.3.2，Lemmas 6.11–6.13，PDF 第 37–39 页）在 self-weld 中使用每侧叶子上的一个均匀整圈，在 weld 中使用两侧叶子间的均匀交替整圈。[@thm-alternating-forest-classification] 给出交替补全的分类与基数，[@thm-alternating-completion-law] 给出固定延拓事件的概率和条件律。普通无向整圈的定向与表示重数现由 [@thm-undirected-cycle-orientation-fibers] 在同一实际完成图上给出：每个纤维恰为一对反向提升，并保留加边事件。[@thm-uniform-undirected-cycle-completion] 进一步给出固定 $F$ 下普通无向补全的均匀律。[@thm-alternating-connector-mass] 给出指定连接的条件概率，[@thm-alternating-successor-set-bound] 将它转化为整个候选后继集合的概率上界。[@thm-alternating-forest-successor-bound] 将这个上界写成给定有向边数的函数。[@thm-alternating-undirected-completion-law] 给出无向交替整圈的总数和固定边条件律。 [@thm-alternating-weld-orientation] 把有向与无向黏合补全放在同一个概率空间中。

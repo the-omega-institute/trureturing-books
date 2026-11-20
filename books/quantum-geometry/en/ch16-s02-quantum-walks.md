@@ -949,6 +949,22 @@ At the common start, a simple path uses only its first edge incident to that ver
 
 Each step in this disclosure records the selected path edge. A full neighborhood reply also includes the other edges incident to the queried vertex.
 
+::: {.theorem #thm-proper-edge-color-posterior title="Proper edge colors can change the graph posterior" lean="D5/S3/Combinatorics/Graph/Queries/ProperEdgeColorPosterior.proper_edge_colors_change_posterior"}
+On vertices with fixed names $0,1,2,3$, choose with equal prior probabilities between the path $0$–$1$–$2$–$3$ and the four-cycle formed by adding edge $30$. Given the graph, choose uniformly among its proper edge colorings with three available colors. Both queries read this same coloring and return the complete neighbor sets with their edge colors at vertices $1$ and $2$.
+
+The uncolored replies are identical in both graphs. Consider the colored record with color $0$ on edges $01$ and $23$ and color $1$ on edge $12$. One of the path's twelve colorings gives this record, and two of the cycle's eighteen colorings do. Given the colored record, the posterior probability of the cycle is $4/7$.
+:::
+
+::: proof
+For the path, the consecutive edges have $3,2,2$ choices. For the first three cycle edges, there are six sequences with the same color on the first and third edges and six with different colors. Each sequence in the first case has two ways to close the cycle. Each in the second case has one. The specified record has equal first and third colors, so it admits two cycle colorings. The equal prior factors cancel and give $(2/18)/(1/12+2/18)=4/7$. Lean checks the counts on the actual edge sets and the rational ratio.
+:::
+
+::: {.theorem #thm-erased-replies-lose-color-information title="Erased replies can lose likelihood information" lean="D5/S3/Combinatorics/Graph/Queries/ProperEdgeColorPosterior.erasedRepliesDoNotDetermineColorLikelihood"}
+On four vertices with fixed names, two candidate graphs can admit proper edge colorings with three colors and have identical complete uncolored replies at vertices $1$ and $2$, while giving different likelihoods to the specified colored record.
+:::
+
+The path and cycle give likelihoods $1/12$ and $1/9$. Conditioning on their shared uncolored record preserves the equal probabilities $1/2$.
+
 **Which bridges to a classical oracle lower bound remain?** [@thm-directed-forest-cycle-completion] gives the ordinary directed model's static uniform law, and [@thm-alternating-forest-classification] counts the alternating completions, with the conditional law given by [@thm-alternating-completion-law]. Three distinctions separate them from the glued-trees result in [@rem-qsvt-walks-literature]:
 
 1. **Graph distribution and orientation.** Ben-David et al. (*SIAM Journal on Computing* **53**(6), 2024, [doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975), §6.3.2, Lemmas 6.11–6.13, PDF pages 37–39) use one uniform cycle on each side's leaves for the self-weld, and a uniform alternating cycle between the two sides for the weld. [@thm-alternating-forest-classification] gives the alternating completion counts, and [@thm-alternating-completion-law] gives the fixed-edge event mass and conditional law. For ordinary undirected full cycles, [@thm-undirected-cycle-orientation-fibers] now identifies orientations and representation multiplicities over the same actual completed graph: each fiber is exactly a pair of reversed lifts, with edge-insertion events preserved. [@thm-uniform-undirected-cycle-completion] gives the uniform law for ordinary undirected completions of a fixed $F$. [@thm-alternating-connector-mass] gives the conditional probability of a specified connector, and [@thm-alternating-successor-set-bound] bounds the probability of a whole set of candidate successors. [@thm-alternating-forest-successor-bound] gives the resulting estimate in terms of the number of prescribed directed edges. [@thm-alternating-undirected-completion-law] gives the ambient count and fixed-edge conditional law for undirected alternating cycles. [@thm-alternating-weld-orientation] puts the directed and undirected weld completions on one probability space.
