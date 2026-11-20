@@ -1221,6 +1221,8 @@ Let $d=n-h$. Each face introduced at $B$ consists of $R(B)$ together with an arb
 
 If $R(B)=B$, the only new face is $B$ and its entire boundary is in the preceding subcomplex. The first facet gives the initial simplex, starting from the empty realization.
 
+**After retaining the boundaries, the remaining subcomplex collapses to the first simplex (written derivation).** Remove every facet $B$ with $R(B)=B$ from the direction complex, keeping all proper subfaces. The first facet has empty restriction face, so its simplex is retained in full. Process the later facets in reverse shelling order. When $R(B)=B$, the two successive prefixes become equal after the deletion. At every other step the previous pairing still applies. Both members of a pair lie in $B$. If either equaled a removed maximal face, maximality would force it to equal $B$, and this step retains $B$. Removing other facets also cannot create a new strict coface. The elementary collapses therefore concatenate to a collapse of the retained subcomplex onto the first simplex. This conclusion assumes at least one nonempty facet.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
