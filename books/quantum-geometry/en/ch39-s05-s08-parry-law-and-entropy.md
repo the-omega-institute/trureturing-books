@@ -1213,6 +1213,10 @@ Write $E$ for the label set, $r(B)$ for the rank of the columns at $B\subseteq E
 
 Fix any linear order on the signed labels. Compare two facets by placing first the one containing the least label of their symmetric difference. This gives a shelling order. If $A$ precedes $B$, let $x\in A\setminus B$ be that least label. The independent set $(A\cap B)\cup\{x\}$ extends to a basis $C$ inside $B\cup\{x\}$. Since $B$ and $C$ have the same size, $C$ replaces exactly one vertex of $B$ with $x$. The removed vertex lies outside $A\cap B$ and follows $x$ in the label order. Thus $C$ precedes $B$, and $C\cap B$ is a codimension-one face containing $A\cap B$. This gives the required intersection condition for a shelling.
 
+**The new faces introduced by each facet (written derivation).** For a facet $B$ in the shelling, let $R(B)$ consist of the vertices $v$ such that $B\setminus\{v\}$ is contained in an earlier facet. A subface $S\subseteq B$ appears for the first time at $B$ exactly when $R(B)\subseteq S$. If $S$ omits a vertex $v$ of $R(B)$, it already appears with $B\setminus\{v\}$. Conversely, if an earlier facet $A$ contains $S$, the shelling criterion gives an earlier facet $C$ containing $A\cap B$ and omitting exactly one vertex of $B$. This vertex belongs to $R(B)$ and is outside $S$.
+
+Let $d=n-h$. Each face introduced at $B$ consists of $R(B)$ together with an arbitrary subset of $B\setminus R(B)$. Weighting a face $S$ by $t^{|S|}$ gives the face enumerator $\sum_B t^{|R(B)|}(1+t)^{d-|R(B)|}$ when there are nonempty facets. This sum counts the empty face at its first containing facet. If there are no nonempty facets, the empty face alone contributes the constant $1$.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
