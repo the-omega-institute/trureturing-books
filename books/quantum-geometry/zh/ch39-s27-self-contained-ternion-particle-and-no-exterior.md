@@ -80,7 +80,7 @@
    - **临时桥 $C$ 的零残渣撤除**：即便局部跨态搬运 $[A, C, D]$ 临时借用某点 $C$ 作参照桥，法则 (I) 保证桥重合时 $[A, C, C] \equiv A$ 当场自消去，法则 (II) 保证双侧平移下 $\kappa([A, C, D], [B, C, D]) \equiv \kappa(A, B)$ 与桥点 $(C, D)$ 完全无关（两者即三元比较结构 [@def-ch39-ternary-comparison-structure] 的公理字段 [`tri_self_right`](lean:D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_self_right) 与 [`kappa_tri_right`](lean:D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.kappa_tri_right)，`LEAN ✓`）；而在跨语境诠释结构 `ObjectiveInterpretationClaim` 下，不动点语义 `isFixedMeaning` 所共享的客观结论必归结为与语境无关的不变公共因子（[`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)，`LEAN ✓`；该定理只是把 `ObjectiveInterpretationClaim` 的定义解包，不涉及迁移、读数或桥点，将它与临时桥的撤除并置属 `MODEL` 类比）。
 
 ::: {.viz src="ternion-self-contained-no-exterior-sandbox" preset="origin-free-no-point-c" height="500"}
-消去外置 C 点卡：拖动外置参考点 $C(\varphi)$，品红锚定向量和 $A + B - C$ 随 $C$ 漂移且脱离球壳（$C_1$ 处模方 $1.1716$，$C_2$ 处暴涨至 $4.0000$），而青色弯曲流群步 $[B, A, B] = (0, -\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 0)$ 严格留在单位球壳上（模方 $1.0000$，跨八组辅助基点偏差 $0.0000$；平行四边形范数律与客观不变公因子标 `LEAN ✓`，两点齐性空间文献标 `ARGUED`，实算对账标 `NUM`）。
+消去外置 C 点卡：拖动外置参考点 $C(\varphi)$，品红锚定向量和 $A + B - C$ 随 $C$ 漂移且脱离球壳（$C_1$ 处模方 $1.1716$，$C_2$ 处暴涨至 $4.0000$），而青色弯曲流群步 $[B, A, B] = (0, -\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 0)$ 严格留在单位球壳上（模方 $1.0000$，跨八组辅助基点偏差 $0.0000$；平行四边形范数律、基点群还原 `tri_eq_mul_inv_mul`、单位四元数模型的两点齐性 `kappa_mul_mul` 与 `exists_mul_mul_eq_of_kappa_eq` 以及客观不变公因子标 `LEAN ✓`，两点齐性空间的分类文献标 `ARGUED`，实算对账标 `NUM`）。
 :::
 
 ## 39.4.4 “没有之外”的四重几何与关系论证：内禀去嵌入、度规对跖重聚、希高德分解与观测商闭合 {#sec-ch39-27-4}
@@ -102,7 +102,7 @@
    - 一旦越过赤道进入后半程 $\frac{\pi}{2}R < r < \pi R$，所有向外笔直疾行的测地线**既未撞上任何墙壁、亦未发生半点折返**，波前球面面积 $\mathcal{A}(r)$ 却开始单调缩小，并于 $r \to \pi R$ 时精确收缩归零 $\mathcal{A}(\pi R) = 0$，包络满全部有限体积 $V(\pi R) = 2\pi^2 R^3$——**向四面八方“往外逃逸”的全部射线，最终在唯一一颗对跖内点 $\bar{A}$（$\kappa_{S^3}(A, \bar{A}) = 0$）处严丝合缝地重新聚焦为一！** 在正曲率三元数中，“极度向外”在度规上字面等同于“向对跖内点向内收拢”。
 
 ::: {.viz src="ternion-self-contained-no-exterior-sandbox" preset="wavefront-outward-is-inward" height="500"}
-向外即向内测地重聚卡：自 $A$ 向全方向发射十八条青色测地射线，琥珀波前面积 $\mathcal{A}(r) = 4\pi\sin^2 r$ 在接缝 $r = \frac{\pi}{2}$ 达峰值 $4\pi \approx 12.5664$（包络 $50\%$ 体积 $\pi^2$），越过接缝后不撞墙、不折返而单调收缩，于 $r = \pi$ 精确重聚于对跖内点 $\bar{A}$（$\mathcal{A}(\pi) = 0$，包满 $2\pi^2$；读出划分商核与单位格拉姆判据标 `LEAN ✓`，内禀度规文献标 `ARGUED`，波前曲线标 `NUM`）。
+向外即向内测地重聚卡：自 $A$ 向全方向发射十八条青色测地射线，琥珀波前面积 $\mathcal{A}(r) = 4\pi\sin^2 r$ 在接缝 $r = \frac{\pi}{2}$ 达峰值 $4\pi \approx 12.5664$（包络 $50\%$ 体积 $\pi^2$），越过接缝后不撞墙、不折返而单调收缩，于 $r = \pi$ 精确重聚于对跖内点 $\bar{A}$（$\mathcal{A}(\pi) = 0$，包满 $2\pi^2$；波前面积与体积公式标 `手工推导`，内禀度规文献标 `ARGUED`，波前曲线标 `NUM`）。
 :::
 
 3. **第三重（拓扑论证）：单点紧化与亏格 $0$ 赤道希高德（Heegaard）分解将“无穷远外部”收编为对称有限闭球（`文献结果` + `手工推导`）**。
@@ -205,5 +205,5 @@ $$
 在步入全书[终章](coda.md)《在所有的球之外》之前，让我们在紧接其后的收官压轴节 [§39.5](ch39-s28-dyad-relation-future-and-second-order-field.md#sec-ch39-dyad-relation-future-and-second-order-field) 揭开这枚无外三元数场的静态生成与动态因果机枢：**为什么两个不共线状态方向配上一阶正交关系直接闭合成三维三元数场（$2 + 1 = 3$），以及“过去态经一阶关系生现在、关系之关系推未来”如何在比安基反对称闭合与奥斯特罗格拉茨基非退化边界的映照下构成本书自足的二阶场动力学（`MODEL`）。**
 
 ::: {.viz src="ternion-self-contained-no-exterior-sandbox" height="620"}
-完整实验室：在“本体读法 · 无外三元数”与“坐标读法 · $\mathbb{R}^4$ 中的投影”双透镜间切换，拖动琥珀波前手柄或外置参考点 $C(\varphi)$ 滑块，对照整绕数 $Q = 1$ 无边界自锁、弯曲流群步 $[B, A, B]$ 消除外置 $C$ 点、向外波前对跖重聚 $\mathcal{A}(\pi) = 0$ 与希高德双球无缝粘合，并体验场·波·粒三阶同体的模型读法（`MODEL`）。十二条冻结声明、经典拓扑与几何文献、实时数值核算及模型边界在依据栏与理论抽屉中分层标注。
+完整实验室：在“本体读法 · 无外三元数”与“坐标读法 · $\mathbb{R}^4$ 中的投影”双透镜间切换，拖动琥珀波前手柄或外置参考点 $C(\varphi)$ 滑块，对照整绕数 $Q = 1$ 无边界自锁、弯曲流群步 $[B, A, B]$ 消除外置 $C$ 点、向外波前对跖重聚 $\mathcal{A}(\pi) = 0$ 与希高德双球无缝粘合，并体验场·波·粒三阶同体的模型读法（`MODEL`）。冻结声明、经典拓扑与几何文献、实时数值核算及模型边界在依据栏与理论抽屉中分层标注。
 :::

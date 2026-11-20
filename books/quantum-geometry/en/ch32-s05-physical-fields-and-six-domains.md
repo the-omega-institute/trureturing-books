@@ -73,7 +73,7 @@ The continuum special-relativistic spinor, non-Abelian gauge curvature, and hori
    R_{\mu\nu} - \frac{1}{2}R\,g_{\mu\nu} + \Lambda\,g_{\mu\nu} \;=\; \frac{8\pi G}{c^4}\,T_{\mu\nu},
    $$
 
-   where $\Lambda$ enters Jacobson's derivation as an integration constant (identifying $\Lambda > 0$ with a finite observer's $90^\circ$ equatorial horizon curvature is our `MODEL` hypothesis).
+   where $\Lambda$ enters Jacobson's derivation as an integration constant (identifying $\Lambda > 0$ with a finite observer's $90^\circ$ equatorial horizon curvature is our `MODEL` hypothesis; a finite horizon alone does not fix the sign of $\Lambda$: finite causal diamonds and Rindler horizons in flat spacetime have $\Lambda = 0$, and finite anti-de Sitter causal regions have $\Lambda < 0$, `manual derivation`).
 :::
 
 ## 28.5.1 Six-Domain Holographic Isomorphism Synthesis {#sec-ch32-six-domain-synthesis}

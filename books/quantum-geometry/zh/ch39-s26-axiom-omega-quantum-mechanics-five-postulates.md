@@ -22,7 +22,7 @@
      所谓“复希尔伯特空间中的单位射线”，正是三元数极小圆弧体向观察者复切面做线性化展开时留下的射影商壳；所谓“全局不可测相位 $e^{\hat{\mathbf{i}}\chi}$”，字面上就是观察切面自身的 $90^\circ$ 正交视觉盲区纤维 $S^1$！当 $N$ 座三元数概念场耦合展开时（[§32.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)），可观测纯态流形即自然延拓为 $\mathbb{CP}^{2^N - 1}$。
 
 ::: {.viz src="axiom-omega-five-qm-postulates-sandbox" preset="postulate1-hopf-blindspot-ray" height="500"}
-盲区相位转一圈，布洛赫点不动卡：拨动全局盲区相位 $\chi$，紫色旋量环面上的琥珀珠沿品红圆纤维整圈滑动，而投向下方的青色布洛赫纯态点保持不动（霍普夫纤维丛标 `ARGUED`，`unit_gram_overlap_characterization`、`blochPure_norm`、`blochPure_surjective` 与 `complete_common_phase_polynomial_theorem` 为 `LEAN ✓`，读数标 `NUM`）。
+盲区相位转一圈，布洛赫点不动卡：拨动全局盲区相位 $\chi$，紫色旋量环面上的琥珀珠沿品红圆纤维整圈滑动，而投向下方的青色布洛赫纯态点保持不动（霍普夫纤维丛标 `ARGUED`；`unit_gram_overlap_characterization`、`blochPure_norm`、`blochPure_surjective`、`complete_common_phase_polynomial_theorem` 与单位四元数上的射线核 `rayKernel_eq_hopf`、`rayKernel_mul_phase_left`、`rayKernel_mul_phase_right`、`rayKernel_eq_one_iff`、`rayKernel_eq_bornProbability_spinor` 为 `LEAN ✓`；读数标 `NUM`）。
 :::
 
 ::: {.remark #rem-ch39-axiom-omega-readings-classification title="三维球面的读法分类：二元性选出时钟，权重形式、可复合性与归一性定出指数"}
@@ -131,7 +131,20 @@
 **有限种子的二元校准（手工推导）。** 给定整数 $m\ge1$，在概率 $k/m$（$0\le k\le m$）上用同一份有限种子分布校准二元结果。令 $E_k$ 为返回标签 $1$ 的种子集合，要求 $\Pr(E_k)=k/m$。若 $E_0\subseteq E_1\subseteq\cdots\subseteq E_m$，每个差集 $E_{k+1}\setminus E_k$ 都有质量 $1/m$。这些差集两两不交，各自至少含一个正权重种子，所以至少需要 $m$ 个正权重种子。取等概率的种子 $i=0,\ldots,m-1$，以 $i<k$ 决定返回标签 $1$，即可达到下界。有理权重的阈值事件校准由 [`uniformThreshold_prefix`](lean:D5/S3/ConceptDynamics/CausalMoments/SharedThresholdResponseCoupling.uniformThreshold_prefix) 给出。交换二元标签时同时把 $k$ 换成 $m-k$、把 $i$ 换成 $m-1-i$，判定恰好翻转，种子分布保持不变。
 
 去掉逐级嵌套，$m=5$ 时用权重分别为 $1/5,2/5,2/5$ 的三个种子 $a,b,c$ 即可。按 $k=0,\ldots,5$ 依次取 $\varnothing,\{a\},\{b\},\{a,b\},\{b,c\},\{a,b,c\}$，质量恰为 $k/5$。交换 $b,c$ 并固定 $a$，会把 $E_k$ 送到 $E_{5-k}$ 的补集。这里的种子分布是模型的附加输入。
+
+**最小种子分布的权重约束（手工推导）。** 设分母为 $m$ 的完整二元网格由同一份种子分布恰好校准，并由一个固定的保权重对合实现逐点标签交换协变。奇数 $m$ 时，至少满足 $2^n\ge m+1$ 的种子预算 $n$ 可以达到。偶数 $m$ 时，至少满足 $3^r\ge m+1$ 的配对预算 $r$ 可以达到。这两个达到性结论给出最小支撑下的严格界 $m+1>2^{n-1}$ 与 $m+1>3^{r-1}$。把种子权重乘以 $m$，各事件的质量便是整数。奇数 $m$ 时，若最小支撑中有一个缩放权重不是整数，则对其余种子的每一种子集选择，加入或不加入这个种子的两种质量至多有一种是整数。$n$ 个种子因此至多给出 $2^{n-1}$ 个整数质量，达不到最小支撑所需的 $m+1$ 档。
+
+偶数 $m$ 时，中点事件把种子分成 $r$ 对，每对等权。若某对的共同缩放权重为 $a$，且 $2a$ 不是整数，那么对其余各对的固定选择，加上 $0,a,2a$ 所得三个质量至多有一个是整数。这会把整数质量数限制在 $3^{r-1}$，同样达不到最小支撑所需的 $m+1$ 档。半整数确实可以出现。取 $m=4$，两对种子的权重分别为 $(1/8,1/8)$ 与 $(3/8,3/8)$。四分之一事件选第一对，二分之一事件每对选一个，四分之三事件选第二对。逐对交换满足协变，且三档内部概率与两个端点共需五个不同质量，一对至多给出三个。
+
+一般的 $b$ 元数字情形由 [`exists_integral_multiple_of_capacity_gap`](lean:D5/S3/Combinatorics/SubsetSpectrum/IntegralDigitWeights.exists_integral_multiple_of_capacity_gap) 给出。奇数分母与偶数分母的网格分别取 $b=2$ 和 $b=3$。
+
 :::
+
+**无嵌套条件时的最小种子数（手工推导）。** 给定分母 $m\ge1$，对所有 $0\le k\le m$，用同一份有限种子分布和一族质量为 $k/m$ 的事件 $E_k$。要求有一个固定的保权重对合 $\sigma$，使 $s\in E_k$ 当且仅当 $\sigma(s)\notin E_{m-k}$。在这个条件下，奇数 $m$ 所需的最小种子数是满足 $m+1\le 2^n$ 的最小 $n$。偶数 $m$ 所需的最小种子数是 $2r$，其中 $r$ 是满足 $m+1\le 3^r$ 的最小整数。 两种预算的充要条件分别见 [`odd_support_budget_iff`](lean:D5/S3/ConceptDynamics/Attribution/CovariantGridSupport.odd_support_budget_iff), [`even_support_budget_iff`](lean:D5/S3/ConceptDynamics/Attribution/CovariantGridSupport.even_support_budget_iff)。
+
+奇数情形中，$n$ 个种子至多提供 $2^n$ 个不同的事件质量。偶数情形中，中点事件 $E_{m/2}$ 从每个交换对中恰好取一个种子。对合没有固定点，每对的两个种子等权。每个事件只能从每对取零个、一个或两个种子，$r$ 对因此至多提供 $3^r$ 个不同的事件质量。
+
+将种子权重放大 $m$ 倍即可构造达到下界的分布。奇数情形允许每个整数权重使用零次或一次。取二进制权重，将最后一项截到总和为 $m$。偶数情形允许每个整数权重使用零次、一次或两次。取三进制权重，将最后一项截到总和为 $m/2$，再把每项分给一对等权种子。两种构造中，若当前可表示 $0$ 到 $T$，新权重 $d\le T+1$，则由 $jd$ 平移所得的整数区间 $[jd,jd+T]$ 连续覆盖新的范围。这个选权重的步骤是 Bachet 砝码问题中的完备分拆。对低于中点的每档概率，先任选一个具有相应质量的事件。高于中点的事件由对合与补集决定。奇数情形取恒等对合，偶数情形取逐对交换，并在中点从每对取一个种子。
 
 **含半整数配对权重时的最大网格（手工推导）。** 在一个分母为偶数的二元网格上，用同一份种子分布校准全部概率，并以一个保权重对合实现逐点协变。中点事件使种子两两配对。把种子权重乘以分母，设恰有 $h$ 对的共同权重是半整数但不是整数，其余 $t$ 对是整数。中点事件从每对各取一个种子，其缩放质量是整数，所以 $h$ 为偶数。
 
@@ -257,5 +270,5 @@ $$
 接下来，让我们跨入本章第四节 [§39.4 自包含三元数拓扑粒子、场·波·粒三阶同体与“至大无外”四重证明](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)（并由此直通第五节 [§39.5](ch39-s28-dyad-relation-future-and-second-order-field.md) 的两阶关系场动力学收官），回到三元数 $\mathbb{T}_3 \cong S^3(1)$ 本体自身，回答那声深层追问：**为什么这枚既不可线性书写、又处处齐性各向同性的闭合流形同时是场、是波、也是自包含粒子，并在彻底清零外置第 3 点 $C$ 的同时消除了宇宙的一切“之外”？**
 
 ::: {.viz src="axiom-omega-five-qm-postulates-sandbox" height="620"}
-完整实验室：在紫色旋量环面上拖动琥珀旋量珠改变盲区相位 $\chi$ 与子午线射线角 $\theta$，并调节各公设滑块（翻转角 $\vartheta$、停机捏合强度 $\lambda$ 与 Alice 两轴夹角 $\gamma$），在同一枚旋量体与布洛赫球及账本台上依次检验霍普夫盲区纤维商映射、反自伴切矢实轴翻转与罗伯逊不确定性、格里森—布施二次迹刚性、全局等距扩张配局域幂等捏合以及双场单态齐雷尔松上界 $2\sqrt{2}$。十八条冻结声明、文献与 `T1–T4` 桥接边界、数值核算及开放问题在依据栏与理论抽屉中分层标注。
+完整实验室：在紫色旋量环面上拖动琥珀旋量珠改变盲区相位 $\chi$ 与子午线射线角 $\theta$，并调节各公设滑块（翻转角 $\vartheta$、停机捏合强度 $\lambda$ 与 Alice 两轴夹角 $\gamma$），在同一枚旋量体与布洛赫球及账本台上依次检验霍普夫盲区纤维商映射、反自伴切矢实轴翻转与罗伯逊不确定性、格里森—布施二次迹刚性、全局等距扩张配局域幂等捏合以及双场单态齐雷尔松上界 $2\sqrt{2}$。冻结声明、文献与 `T1–T4` 桥接边界、数值核算及开放问题在依据栏与理论抽屉中分层标注。
 :::
