@@ -38,7 +38,7 @@ Within our discrete comparison-network model (`MODEL`), represent the cosmic sub
      N_{\mathrm{ticks}} \;=\; \nu_0\,\Delta\tau \;=\; \frac{c\,\Delta\tau}{\ell_P}
      $$
 
-     elementary minimal-arc comparison ticks, enforcing a nonzero physical floor on self-halting precision:
+     elementary minimal-arc comparison ticks. A finite tick count does not by itself force a floor proportional to $1/N_{\mathrm{ticks}}$: adaptive bisection halves the interval at every comparison and reaches diameter $2^{-N_{\mathrm{ticks}}}$, eventually below any $c/N_{\mathrm{ticks}}$, and a discrete label can be read exactly in one tick. Only under the further assumption that at most $A N_{\mathrm{ticks}}$ distinguishable terminal transcripts are available for uniform certification ($A$ independent of $N_{\mathrm{ticks}}$) does the covering argument give the following floor on self-halting precision (with $A = 1$; the counterexample is a `manual derivation`, the linear transcript capacity is a `MODEL` assumption):
 
      $$
      \varepsilon_{\mathrm{self}} \;\ge\; \varepsilon_{\mathrm{self,min}}(\Delta\tau) \;:=\; \frac{1}{N_{\mathrm{ticks}}} \;=\; \frac{\ell_P}{c\,\Delta\tau}.

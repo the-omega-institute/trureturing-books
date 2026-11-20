@@ -60,5 +60,5 @@ $$
      $$
 
      给出：对任意实对称局域可观测量 $A_1^{\mathsf{T}} = A_1,\; A_2^{\mathsf{T}} = A_2$，因反对称与对称矩阵乘积迹恒为零，恒有 $\operatorname{Tr}\bigl(W(A_1 \otimes A_2)\bigr) = \operatorname{Tr}(J A_1)\operatorname{Tr}(J A_2) = 0 \cdot 0 = 0$——全局正交态 $\rho_{\pm} = \frac{1}{4}(I_4 \pm W)$ 在一切局域乘积测量下完全隐身！而在复希尔伯特空间 $\mathbb{C}^d$ 上，厄米空间实维数满足 $(d_1 d_2)^2 = d_1^2 \cdot d_2^2$，局域层析严丝合缝。
-   - *直和暗扇区非极小扩张*：若令复合空间取 $(\mathcal{H}_1 \otimes_{\mathbb{C}} \mathcal{H}_2) \oplus \mathcal{K}$（$\dim\mathcal{K} \ge 1$），并将局域算子嵌入为 $(A_1 \otimes A_2) \oplus 0_{\mathcal{K}}$，全部单子系统比较关系原封不动，但支撑在暗扇区 $\mathcal{K}$ 上的状态对一切局域探针读数全为零。故必须联合**复标量结构与无冗余暗扇区的局域层析极小性（`T2`）**，才能唯一锁定 $\mathcal{H}_1 \otimes_{\mathbb{C}} \mathcal{H}_2$。
+   - *直和暗扇区非极小扩张*：若令复合空间取 $(\mathcal{H}_1 \otimes_{\mathbb{C}} \mathcal{H}_2) \oplus \mathcal{K}$（$\dim\mathcal{K} \ge 1$），并按迹归一延拓局域效应，$E \otimes F \mapsto (E \otimes F) \oplus \frac{\operatorname{Tr}E}{d_1}\frac{\operatorname{Tr}F}{d_2}\,\mathbf{1}_{\mathcal{K}}$（$d_i = \dim\mathcal{H}_i$；零延拓 $(A_1 \otimes A_2) \oplus 0_{\mathcal{K}}$ 会让单位测试在 $\mathcal{K}$ 上取零，破坏归一化），则完备乘积测试仍完备、$\mathcal{H}_1 \otimes_{\mathbb{C}} \mathcal{H}_2$ 上的权重原封不动，而支撑在暗扇区 $\mathcal{K}$ 上的每个态都只给出最大混合态 $\mathbf{1}/(d_1 d_2)$ 的乘积统计，$\mathcal{K}$ 中两个正交态无法被任何乘积测试区分（`手工推导`）。故必须联合**复标量结构与无冗余暗扇区的局域层析极小性（`T2`）**，才能唯一锁定 $\mathcal{H}_1 \otimes_{\mathbb{C}} \mathcal{H}_2$。
 :::
