@@ -1177,6 +1177,8 @@ $$
 
 All these log factors are negative. Each nontrivial character multiplies the factors of exactly $N/2$ columns, so these choices give exactly the two log magnitude profiles above. Their moment difference is $\varepsilon(e^h-1)\chi_\lambda(a)$ on nontrivial characters and zero at the trivial one. Fourier inversion gives $P(x)-Q(x)=\varepsilon(e^h-1)(\mathbf 1_{\{x=a\}}-1/N)$, which has total variation $\delta$. The log gap on $a$ is $2\beta h$, so this family attains the bound. Thus, with freedom to choose the common columns and with $a$ present, the strict condition on $\varepsilon e^{Nh/2}$ is both necessary and sufficient.
 
+For example, take a two-dimensional quotient with the nonzero columns ordered as $a,b,a+b$ and both offsets zero. Use bias factors $(1/32,1/8,1/8)$ for $P$ and $(1/4,1/16,1/16)$ for $Q$. At every nontrivial character, one sign moment is $1/256$ and the other is $1/64$. Taking $\varepsilon=1/256$, the inversion formula above gives $\delta=(3/4)(1/64-1/256)=9/1024$. The target bias products have ratio $8$, whose logarithm equals the bound $(3/2)\log 4$.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
