@@ -995,6 +995,15 @@ $$
 
 Every term is nonnegative. The support of $w$ consists of all binary strings that vanish off $L$. The decrease is strictly positive precisely when one of these strings has dot product $1$ with row $i$ and dot product zero with every other balanced row. Such a string cannot exist if the restricted row is in their span. Otherwise append the restricted row to a basis of that span and extend to a basis of $\mathbb F_2^L$. The functional taking value $1$ on the appended row and zero on the other basis vectors gives the required string under the dot product.
 
+**How large is the purity decrease?** If the decrease is strict, form a matrix $C$ from row $i$ and the other balanced rows, all restricted to $L$. Choose any index set $J$ whose columns form a basis of the column space of $C$. The purity before balancing minus the purity afterward is at least
+
+$$
+b_i\left(\prod_{\substack{k\ne i\\p_k\ne 1/2}} b_k\right)
+    \left(\prod_{j\in J} 2q_j(1-q_j)\right).
+$$
+
+The first product ranges over the other biased orbitals. Each $b_k$ is at most $1$, so the product in the purity difference is at least this product whenever $Cw=e$, where $e$ takes value $1$ in row $i$ and zero in every other balanced row. Strict decrease guarantees that $e$ belongs to the column space of $C$. Fix the difference bits outside $J$ and subtract their contribution from $e$. The residual is still in the column space, so the basis columns uniquely determine the required bits in $J$. At each $j\in J$, the probability of a $1$ is $2q_j(1-q_j)\le 1/2$, which also lower bounds the probability of either prescribed bit. Multiply these bounds using independence and average over the bits outside $J$. This gives the claimed purity bound. When one retained pair alternates with one discarded pair, $C=(1)$ and the constraint asks for the sole discarded bit to be $1$, so equality holds.
+
 For example, suppose both retained pairs alternate with the sole discarded pair and its endpoint probability satisfies $0<q<1$. Both restricted rows are $(1)$. When the first retained orbital is already balanced, balancing the second leaves purity unchanged. When all three later-endpoint probabilities start at $1/4$, balancing just the second retained orbital lowers purity from $83/128$ to $5/8$.
 
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
