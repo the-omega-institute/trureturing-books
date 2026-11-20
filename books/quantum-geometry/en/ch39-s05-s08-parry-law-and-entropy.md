@@ -1201,6 +1201,10 @@ Fix an allowed sign pattern. For $i\in J$, use the continuous coordinate $x_i=-\
 
 For example, suppose $J$ consists of two labels whose columns project to the same nonzero class with grouped absolute bias $\rho\in(0,1)$. If the adjusted offset requires an even number of negative signs on those two inputs, there are two components, one with both signs positive and one with both negative. In the log coordinates of either component, the magnitudes vary along the segment $x_1+x_2=-\log\rho$.
 
+**Local directions among the fair-subgroup columns (written derivation).** Within one sign component, fix the biases on $J$ and examine how the remaining coordinates can leave their common zero point. Write $x_i$ for these coordinates and take the section $\sum_i |x_i|=1$. A direction is feasible exactly when the columns at its zero coordinates still span $H$. For example, suppose exactly two columns lie in the fair subgroup and both equal the same nonzero generator of $H$. Then either bias can move while the other stays fair. The section has four points, the positive and negative directions of each of the two coordinates.
+
+In general, give each label $i$ two signed vertices $i^+$ and $i^-$. A simplex face uses at most one sign of each label and leaves a family of unselected columns spanning $H$. Every nonempty subface satisfies the same conditions. The section is homeomorphic to the realization of this simplicial complex. Its barycentric coordinates are $\lambda_{i^+}=\max(x_i,0)$ and $\lambda_{i^-}=\max(-x_i,0)$, and they sum to $1$. The inverse is $x_i=\lambda_{i^+}-\lambda_{i^-}$. At most one weight at a label is nonzero, so this difference involves no cancellation. Both maps are continuous and preserve the nonzero coordinates and their signs. If the fair-subgroup columns already form a basis, every one must stay fair and the section is empty.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
