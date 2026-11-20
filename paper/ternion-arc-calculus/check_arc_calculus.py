@@ -21,6 +21,11 @@ CHECK_MODULES = [
     ("onesided_models.py",    "PASS all NumPy checks", lambda out: "FAIL" not in out),             # Props 5.26, 5.27
     ("onesided_witnesses.py", "PASS", lambda out: "FAIL" not in out),                              # Prop 5.26
     ("m1_algebra_graphs.py",  "PASS: algebra, powers, spin", None),                            # Part 0
+    ("m2_reflection_spaces.py", "PASS: reflections, closing law", None),                         # Section 5A
+    ("m2_indep_t_albert.py",  "Albert witness / phase family OK", None),                          # Section 5A, independent
+    ("m2_indep_t_assoc.py",   "witness values", lambda out: "OK" in out),                         # Section 5A, independent
+    ("m2_indep_t_complex.py", "CP^3 Bargmann max err", None),                                     # Section 5A, independent (asserts)
+    ("m2_indep_t_misc.py",    "2I-J eigenvalues", None),                                          # Section 5A, independent (asserts)
     # register new modules here: (file in checks/, success marker, optional predicate)
 ]
 _chk = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "checks")
@@ -1805,6 +1810,114 @@ for r_ in range(3): e = max(e, np.abs(sq[r_][0] @ sq[r_][1] @ sq[r_][2] - I4).ma
 for c_ in range(3): e = max(e, np.abs(sq[0][c_] @ sq[1][c_] @ sq[2][c_] - (I4 if c_ < 2 else -I4)).max())
 P0_ = np.diag([1., 0]); P1_ = np.diag([0., 1]); e = max(e, abs(np.trace(Xp @ P0_ @ P0_ @ Xp @ P1_) - 1), abs(np.trace(P0_ @ P1_)))
 report("30 Examples m1:spherical, m1:phase, m1:overlap-boundaries, m1:sequential: excess, octant (1+i)/4, Peres-Mermin, instruments", e, 1e-12)
+
+# =========================================================== 31. Section 5A (independent checks of the m2 section)
+_r31 = np.random.default_rng(2411)
+# ---- octonions by Cayley-Dickson: (a,b)(c,d) = (ac - conj(d) b, d a + b conj(c))
+def _cj(x):
+    y = -x.copy(); y[0] = x[0]; return y
+def _om(x, y):
+    n = len(x)
+    if n == 1: return x * y
+    h = n // 2; a, b, c, d = x[:h], x[h:], y[:h], y[h:]
+    return np.concatenate([_om(a, c) - _om(_cj(d), b), _om(d, a) + _om(b, _cj(c))])
+O1 = np.eye(8)[0]
+def _ro(): return _r31.normal(size=8)
+# octonion Hermitian 3x3 matrices as arrays (3,3,8)
+def _mm(A, B):
+    C = np.zeros((3, 3, 8))
+    for i in range(3):
+        for j in range(3):
+            for k in range(3): C[i, j] += _om(A[i, k], B[k, j])
+    return C
+def _jp(A, B): return (_mm(A, B) + _mm(B, A)) / 2
+def _tr(A): return sum(A[i, i, 0] for i in range(3))
+def _proj(u2, u3):  # (1,u)(1,u)^* / (1+|u|^2)
+    v = [O1, u2, u3]; P = np.zeros((3, 3, 8))
+    for i in range(3):
+        for j in range(3): P[i, j] = _om(v[i], _cj(v[j]))
+    return P / (1 + u2 @ u2 + u3 @ u3)
+def _U(P, B):  # I + 8(L_P^2 - L_P) applied to B
+    LB = _jp(P, B); return B + 8 * (_jp(P, LB) - LB)
+e = 0.0
+for _ in range(20):
+    Px, Pw, Py = (_proj(_ro(), _ro()) for _ in range(3))
+    for P in (Px, Pw, Py): e = max(e, np.abs(_mm(P, P) - P).max(), abs(_tr(P) - 1))
+    b = lambda P, Q: _tr(_jp(P, Q))
+    S = _U(Px, Pw)
+    e = max(e, np.abs(_mm(S, S) - S).max(), abs(_tr(S) - 1))                                  # reflected point is a point of OP^2
+    e = max(e, np.abs(2 * _jp(Px, _jp(Px, Pw)) - _jp(Px, Pw) - b(Px, Pw) * Px).max())          # U_P = 2L_P^2 - L_P is the Peirce-1 projection
+    e = max(e, abs(b(Py, S) - (4 * b(Py, Px) * b(Px, Pw) + b(Py, Pw) - 4 * _tr(_jp(Py, _jp(Px, Pw))))))  # reflected Born weight
+    e = max(e, abs(b(Pw, S) - (2 * b(Pw, Px) - 1) ** 2))                                        # scalar closing law
+    e = max(e, np.abs(_U(Px, S) - Pw).max())                                                    # involution
+report("31 Albert: random points of OP^2 in the chart; U_{2P-1} gives a point, Peirce-1 identity, reflected weight, closing law, involution", e, 1e-11)
+# cut point fibre on OP^2: unit v in O^2 with vv^* = Q form a 7-sphere (v2 free on a sphere, v3 determined)
+e = 0.0
+for _ in range(20):
+    p = _r31.uniform(0.05, 0.95); z = _ro(); z *= np.sqrt(p * (1 - p)) / np.linalg.norm(z)
+    for _ in range(5):
+        v2 = _ro(); v2 *= np.sqrt(p) / np.linalg.norm(v2)
+        v3 = _cj(_om(_cj(v2) / p, z))                     # conj(v3) = v2^{-1} z
+        e = max(e, abs(v2 @ v2 - p), abs(v3 @ v3 - (1 - p)), np.abs(_om(v2, _cj(v3)) - z).max())
+report("31 OP^2 cut locus: each cut point of E is reached from a 7-sphere of unit directions", e, 1e-12)
+# uniform Jordan form on spin factors R + R^{n+1}: P_x = (1, x)/2, U_{2P_x-1} P_w = P_{s_x w}, tr(P o Q) = (1 + <x,y>)/2
+def _sj(a, b): return np.concatenate([[a[0] * b[0] + a[1:] @ b[1:]], a[0] * b[1:] + b[0] * a[1:]])
+e = 0.0
+for n in (1, 2, 4, 8):
+    x, w = (v / np.linalg.norm(v) for v in _r31.normal(size=(2, n + 1)))
+    Px = np.concatenate([[0.5], x / 2]); Pw = np.concatenate([[0.5], w / 2]); a = 2 * Px - np.eye(n + 2)[0]
+    U = 2 * _sj(a, _sj(a, Pw)) - _sj(_sj(a, a), Pw)
+    e = max(e, np.abs(U - np.concatenate([[0.5], (2 * (x @ w) * x - w) / 2])).max(), abs(2 * _sj(Px, Pw)[0] - (1 + x @ w) / 2))
+report("31 spin factors: U_{2P_x-1}P_w = P_{s_x w} and tr(P_x o P_y) = (1+<x,y>)/2 (spheres in the uniform Jordan form)", e, 1e-13)
+# complex and quaternionic Bargmann identity, quaternionic conjugacy law (quaternions as 2x2 complex blocks)
+def _q2c(q):
+    a, b = q[0] + 1j * q[1], q[2] + 1j * q[3]; return np.array([[a, -np.conj(b)], [b, np.conj(a)]])
+def _qvec(n): v = _r31.normal(size=(n, 4)); v /= np.linalg.norm(v); return np.block([[_q2c(r)] for r in v])  # (2n x 2) column of blocks
+e = 0.0
+for _ in range(50):
+    X, W, Y = _qvec(3), _qvec(3), _qvec(3)
+    P = lambda V: V @ V.conj().T
+    rt = lambda A: np.trace(A).real / 2
+    SW = (2 * P(X) - np.eye(6)) @ W
+    b = lambda A, B: rt(P(A) @ P(B))
+    e = max(e, abs(b(Y, SW) - (4 * b(Y, X) * b(X, W) + b(Y, W) - 4 * rt(P(Y) @ P(X) @ P(W)))))
+    D = (Y.conj().T @ X) @ (X.conj().T @ W) @ (W.conj().T @ Y)
+    q = _q2c(_r31.normal(size=4)); q /= np.sqrt(abs(np.linalg.det(q)))
+    D2 = ((Y @ q).conj().T @ X) @ (X.conj().T @ W) @ (W.conj().T @ (Y @ q))
+    e = max(e, np.abs(D2 - q.conj().T @ D @ q).max(), abs(np.trace(D).real / 2 - rt(P(Y) @ P(X) @ P(W))))
+report("31 HP^2: reflected Born weight with real three-point trace; cycle transforms by conjugation", e, 1e-12)
+# two-readout: sphere affine law; witness and phase family; four-cycle; clock descent; torus
+x = np.array([1, 0, 0.]); w = np.array([1, 1, 0]) / np.sqrt(2); sw = 2 * (x @ w) * x - w
+yp = np.array([1, 1, np.sqrt(8)]) / np.sqrt(10); ym = np.array([1, -3, 0]) / np.sqrt(10); bb = lambda a, c: abs(np.vdot(a, c)) ** 2
+e = max(abs(bb(yp, x) - .1), abs(bb(ym, x) - .1), abs(bb(yp, w) - .2), abs(bb(ym, w) - .2), abs(bb(yp, sw)), abs(bb(ym, sw) - .8))
+for th in np.linspace(0, 2 * np.pi, 37):
+    y = np.array([1, 2 * np.exp(1j * th) - 1, np.sqrt(4 + 4 * np.cos(th))]) / np.sqrt(10)
+    D = np.vdot(y, x) * np.vdot(x, w) * np.vdot(w, y)
+    e = max(e, abs(D - np.exp(1j * th) / 10), abs(bb(y, sw) - 0.4 * (1 - np.cos(th))), abs(np.linalg.norm(y) - 1))
+V = [np.array([1, 0, 0]), np.ones(3) / np.sqrt(3), np.array([0, 1, 0]), np.array([1, 1j, -1 - 1j]) / 2]
+cyc = np.vdot(V[0], V[1]) * np.vdot(V[1], V[2]) * np.vdot(V[2], V[3]) * np.vdot(V[3], V[0])
+e = max(e, abs(cyc - 1j / 12), abs(np.vdot(V[0], V[2])), abs(np.vdot(V[1], V[3])))
+c1 = np.array([1, 0]); c2 = np.array([1j, 0]); wq = np.array([1, 1]) / np.sqrt(2)
+rr = lambda c, v: 2 * np.real(np.vdot(c, v)) * c - v
+e = max(e, abs(np.vdot(rr(c1, wq), rr(c2, wq))))
+s_ = lambda a, b: (2 * a - b) % (2 * np.pi); k_ = lambda a, b: (2 + np.cos(a[0] - b[0]) + np.cos(a[1] - b[1])) / 4
+wt = np.array([0., 0]); xt = np.array([np.pi, 0])
+e = max(e, abs(k_(wt, s_(xt, wt)) - 1), abs((2 * k_(wt, xt) - 1) ** 2))
+report("31 witnesses: (1/10,1/5) -> 0 and 4/5; phase family [0,4/5]; four-cycle i/12; clock descent orthogonal; torus 1 vs 0", e, 1e-12)
+# Bloch formulas, horizontal return, and the triangle connection: Re D/|D| = (sum beta - 1)/(2 sqrt(prod beta)) = cos(E/2)
+e = 0.0
+def _ang(P0, P1, P2):
+    t1 = P1 - (P1 @ P0) * P0; t2 = P2 - (P2 @ P0) * P0; return np.arccos(np.clip(t1 @ t2 / np.linalg.norm(t1) / np.linalg.norm(t2), -1, 1))
+sig = [np.array([[0, 1], [1, 0]]), np.array([[0, -1j], [1j, 0]]), np.diag([1., -1])]
+for _ in range(200):
+    a, b, c = (v / np.linalg.norm(v) for v in _r31.normal(size=(3, 3)))
+    Pr = lambda n: (np.eye(2) + sum(n[k] * sig[k] for k in range(3))) / 2
+    D = np.trace(Pr(a) @ Pr(b) @ Pr(c)); p, q, r = a @ b, b @ c, c @ a; S = 1 + p + q + r; Dt = a @ np.cross(b, c)
+    E = _ang(a, b, c) + _ang(b, a, c) + _ang(c, a, b) - np.pi
+    be = [(1 + p) / 2, (1 + q) / 2, (1 + r) / 2]
+    rhs = (sum(be) - 1) / (2 * np.sqrt(np.prod(be)))
+    e = max(e, abs(D - (S + 1j * Dt) / 4), abs(D.real / abs(D) - rhs), abs(rhs - np.cos(E / 2)), abs(abs(np.angle(D)) - E / 2))
+report("31 Bloch: Delta=(S+iD)/4; Re Delta/|Delta| equals the Re a of eq:tri with beta for kappa, and both are cos(E/2)", e, 1e-10)
 
 # =========================================================== registered module scripts (checks/)
 for _name, _marker, _pred in CHECK_MODULES:

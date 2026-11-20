@@ -12,6 +12,7 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \theoremstyle{remark}
@@ -68,7 +69,10 @@ unit quaternions $S^3$, with $\hp xyz=xy^{-1}z$ and $\kappa(x,y)=\lVert(x+y)/2\r
 $\kappa$ nothing is assumed: dimension, compactness, smoothness and positive semidefiniteness are derived.  Associativity is not needed for the
 geometry: if the heap identities are replaced by a binary operation with a two-sided unit at one point whose left and right
 translations are continuous and preserve $\kappa$, with the round-trip law at that point, the space is still a round sphere $S^1$, $S^3$ or $S^7$ with
-this $\kappa$, and the operations are then classified by Hurwitz's theorem.  Before any manifold, the chord--sagitta identity and an
+this $\kappa$, and the operations are then classified by Hurwitz's theorem.  Keeping only the reflections $s_x(w)=\hp xwx$ on a smooth manifold, the
+round-trip law characterises the compact rank-one symmetric spaces; unique zero partners select the spheres, which are exactly the cases
+where the reflected comparison is affine in two readouts, and on the higher projective spaces the missing term is the real part of the
+Bargmann invariant.  Before any manifold, the chord--sagitta identity and an
 elliptic/parabolic/hyperbolic trichotomy already hold for fair elements of a star algebra, and sparse comparisons on a chordal graph
 with triangle defects at most $\varepsilon$ come from a potential up to $(|V|-2)\varepsilon$, the obstruction on other graphs being a
 lattice gauge connection.  The key step concerns the duplication equation $f(x^2)=2f(x)^2-1$: on the line it has continuous non-cosine
@@ -118,10 +122,13 @@ obstruction is a lattice gauge connection (cycle holonomies modulo simultaneous 
 characterises the heap $S^3$ together with its comparison $\kappa(x,y)=\lVert (x+y)/2\rVert^2=\cos^2(d/2)$ by axioms that do not mention a
 unit, describes the geometry of the heap, develops the theory without associativity (Mal'cev identities, Hurwitz's theorem, the
 octonionic family), proves that two-sided invariance alone forces a round sphere (Section~\ref{sec:round}), and shows what one-sided
-invariance gives and does not give (Section~\ref{sec:onesided}).  Part~\ref{part:arc} (Sections~\ref{sec:recur}--\ref{sec:rational}) develops a
+invariance gives and does not give (Section~\ref{sec:onesided}).  Part~\ref{part:beyond} (Section~\ref{sec:m2}) keeps only the reflections
+$s_x(w)=\hp xwx$: with the round-trip law they characterise the compact rank-one symmetric spaces, unique zero partners select the spheres,
+and on the higher projective spaces the reflected comparison carries a real three-point (Bargmann) term that two readouts cannot
+determine.  Part~\ref{part:arc} (Sections~\ref{sec:recur}--\ref{sec:rational}) develops a
 calculus in which the difference $y-x$ of linear calculus is replaced by the transport $\hp y x\cdot$.  Part~\ref{part:final}
 (Sections~\ref{sec:known}--\ref{sec:open}) places the results in the literature, records what is formalised, and lists the open problems.
-% ROADMAP, temporary (delete each line when its part lands): Part "Beyond the axiom" (reflection spaces m2, indefinite and complex structures m3, self-reference d4) goes after Part I;
+% ROADMAP, temporary (delete each line when its part lands): indefinite and complex structures (m3) and self-reference (d4) join Part "Beyond the axiom" as Sections 5B, 5C;
 % phase synthesis and the rational atlas (m4) and the arc body and tropical limit (m5) join the arc calculus; Part "Arithmetic
 % and holonomy" (m6) goes after it; the final part keeps known work, formalisation and open problems.
 In the arc calculus the guiding observation is that linear calculus discards two second-order quantities
@@ -2514,7 +2521,528 @@ non-constancy is a numerical, not an interval-certified, statement.
 \end{remark}
 
 
-% ---- insertion point: Part "Beyond the axiom" (modules m2, m3, d4)
+\paperpart{part:beyond}{Beyond the axiom}
+
+% Sections of this part are numbered 5A, 5B, ... so that the numbers of Sections 6 onwards (cited by Paper II) are unchanged.
+\setcounter{section}{0}
+\renewcommand{\thesection}{5\Alph{section}}
+\renewcommand{\theHsection}{beyond.\arabic{section}}
+\section{Comparison reflection spaces and the Bargmann obstruction}\label{sec:m2}
+
+What survives of the classification when the only retained operation is the diagonal one, $s_x(w)=\hp xwx$?  On a connected smooth
+manifold, invariance under these reflections together with the round-trip law characterises the compact rank-one symmetric spaces with
+their canonical comparisons, even when $\kappa$ is assumed only continuous (Theorem~\ref{m2:classification}).  The reflections supply a
+Riemannian metric, and the round-trip law forces its geodesics to close.  The theorem is classical in substance (Remark~\ref{m2:placement}).
+Uniqueness of zero partners, $(\Omega2\mathrm d)$, is exactly what singles out the round spheres in this class, and on the spheres, and only
+there, the reflected comparison is an affine function of two readouts (Theorem~\ref{m2:two-readout}).  On the higher projective spaces
+the reflected comparison contains a real three-point trace, which in complex projective space is the cosine of a geometric phase
+(Theorem~\ref{m2:bargmann}).
+
+\emph{Scale.}  In this section $d$ denotes the Riemannian distance normalised by $\operatorname{diam}=\pi/2$, so that $\kappa=\cos^2d$.  On
+the heap $S^3$ this $d$ is half the distance $d(x,y)=2\arccos\sqrt{\kappa(x,y)}$ of Definition~\ref{def:arc}; the sphere then has radius
+$\tfrac12$.
+
+\subsection{Classification from the round-trip law}
+
+\begin{definition}\label{m2:def}
+A \emph{comparison reflection space} consists of a connected smooth finite-dimensional manifold $M$ without boundary, of positive
+dimension, a smooth map $(x,w)\mapsto s_xw$, and a continuous symmetric $\kappa:M^2\to[0,1]$.  The reflection laws are
+\begin{equation}\label{m2:reflection}
+s_xx=x,\qquad s_x^2=\mathrm{id},\qquad s_xs_ys_x=s_{s_xy}.
+\end{equation}
+These are axioms (1)--(3) of a symmetric space in the sense of Loos \cite[Ch.~II, \S1]{Loos}; his axiom (4), that $x$ is an isolated
+fixed point of $s_x$, is not assumed here and is derived from the round-trip law in the first step of the proof below.  The comparison
+is faithful, $\kappa(x,y)=1$ exactly when $x=y$, and invariant, $\kappa(s_zx,s_zy)=\kappa(x,y)$.  The \emph{scalar closing law} is the
+round-trip law of Definition~\ref{def:cs},
+\begin{equation}\label{m2:closing}
+\kappa(w,s_xw)=(2\kappa(w,x)-1)^2 .
+\end{equation}
+Isomorphisms are diffeomorphisms preserving $s$ and $\kappa$.
+\end{definition}
+
+\begin{theorem}\label{m2:classification}
+The comparison reflection spaces of Definition~\ref{m2:def} are, up to isomorphism, precisely the round $S^n$ ($n\ge1$),
+$\R P^n$, $\C P^n$, $\HH P^n$ ($n\ge2$), and $\mathbb O P^2$.  In each case $s$ is the geodesic symmetry and
+\begin{equation}\label{m2:normalization}
+\kappa(x,y)=\cos^2 d(x,y),\qquad \operatorname{diam}(M,d)=\pi/2 ,
+\end{equation}
+where $d$ is the standard Riemannian distance at this scale.  In particular $\R P^1,\C P^1,\HH P^1$ are the already listed spheres of
+dimensions $1,2,4$ with this comparison.  The octonionic projective line is the round $S^8$ with the same normalisation.
+\end{theorem}
+
+\begin{proof}[Proof of the classification and normalisation]
+\emph{Isolated centres.}  At a fixed point $w$ of $s_x$, set $a=\kappa(w,x)$.  Equation~\eqref{m2:closing} gives $(2a-1)^2=\kappa(w,w)=1$,
+hence $\kappa(w,x)\in\{0,1\}$.  Continuity and faithfulness therefore make $x$ an isolated fixed point of $s_x$ (Loos's axiom (4)).  Average
+a local metric with its pullback by $s_x$.  In exponential coordinates at $x$ for this local metric the involution is linear, so an
+isolated fixed point forces $(ds_x)_x=-\mathrm{id}$.
+
+\emph{Invariant connection.}  Torsion-free connections are the sections of an affine bundle $C\to M$ modelled on the symmetric part of
+$T^*M\otimes T^*M\otimes TM$.  Since $s_x$ fixes $x$, it acts on the fibre $C_x$ through its $2$-jet at $x$.  This action is an affine
+involution whose linear part is $A\mapsto-A$, because $(ds_x)_x=-\mathrm{id}$ and $A$ has two covariant slots and one contravariant slot.
+Its unique fixed point is the midpoint of $\nabla^0_x$ and $(s_x^*\nabla^0)_x$, for any torsion-free connection $\nabla^0$; changing
+$\nabla^0$ by a tensor $A$ changes the two points by $A_x$ and $-A_x$ and leaves the midpoint unchanged.  The relation
+$s_ys_xs_y=s_{s_yx}$ shows that $s_y$ carries the fixed point at $x$ to the fixed point at $s_yx$.  The fixed points therefore form a
+section $\nabla$ of $C$, smooth by joint smoothness of $s$, and every reflection is an affine map of $\nabla$; this is Loos's canonical
+connection \cite[Ch.~II, \S2]{Loos}.  Write $\exp_x$ for its local exponential.  Let $H$ be the group generated by the reflections.
+Differentiating $s_zz=z$ shows that $z\mapsto s_zx$ has derivative $2\,\mathrm{id}$ at $z=x$.  Each $H$-orbit is thus open, and
+connectedness gives transitivity.
+
+\emph{Invariant metric.}  Fix $o$ and a radius $r>0$ for which $\exp_o$ is a chart on a neighbourhood of the closed tangent ball of
+radius $r$ (for some norm on $T_oM$).  On the image of its boundary, $q=\max\kappa(o,\cdot)<1$.  Choose $0<\delta<r$ such that
+$\kappa(o,\exp_ov)>q$ for $|v|\le\delta$.  For $h\in H$ fixing $o$, $h\exp_o(tv)=\exp_o(t(dh)_ov)$ wherever the right-hand chart
+expression is defined.  If $|v|\le\delta$ and $|(dh)_ov|\ge r$, following this identity up to the first hit of the radius $r$ contradicts
+invariance of $\kappa$.  Thus these derivatives are uniformly bounded, as are their inverses.  Their closure in $\mathrm{GL}(T_oM)$ is a
+compact group.  Average an inner product over it and translate that inner product by $H$.  This is well defined, and smooth since the
+maps $z\mapsto s_zx$ give smooth local sections for translating from $x$ to nearby points.  The resulting metric $g$ is $H$-invariant.
+The isometry $s_x$ fixes $x$ with derivative $-\mathrm{id}$, hence reverses every geodesic through $x$.  Reflection at a point of a
+geodesic extends it past any finite endpoint of its parameter interval, so $g$ is complete.
+
+\emph{The isometry group.}  Let $G$ be the group of $g$-isometries preserving $\kappa$.  It is a closed subgroup of the Riemannian isometry
+group and is a Lie group by Myers--Steenrod and the closed subgroup theorem \cite{m2:MyersSteenrod}.  It contains $H$ and is transitive.
+Write $K=G_o$ and let $\mathfrak k\oplus\mathfrak p$ be the $+1$ and $-1$ eigenspaces of $\Ad(s_o)$ in the Lie algebra of $G$.  Evaluation
+at $o$, $X\mapsto\frac d{dt}\big|_0\exp(tX)o$, is surjective, because the orbit map of a transitive action of a second-countable Lie group
+is a submersion.  A vector of the Lie algebra whose fundamental field vanishes at $o$ generates a one-parameter group fixing $o$, so the
+kernel of evaluation is the Lie algebra of $K$.  The value of a vector in $\mathfrak k$ vanishes because $(ds_o)_o=-\mathrm{id}$.
+Conversely an element of the Lie algebra of $K$ belongs to $\mathfrak k$, since every isometry fixing $o$ commutes with $s_o$: the
+conjugate fixes $o$ with derivative $-\mathrm{id}$, and an isometry of a connected manifold is determined by its value and derivative at
+one point.  Thus the kernel is $\mathfrak k$, evaluation identifies $\mathfrak p$ with $T_oM$, and
+$[\mathfrak p,\mathfrak p]\subseteq\mathfrak k$.  For $X\in\mathfrak p$, the curve $\gamma(t)=\exp(tX)o$ is a geodesic.  Its acceleration
+at $0$ is sent to its negative by $s_o$, which reverses the curve and hence preserves this acceleration.  It vanishes, and the isometric
+flow translates the calculation to every $t$.
+
+\emph{Return and compactness.}  For a unit-speed geodesic $\gamma$ issuing from $o$ define $f(t)\in[0,\pi]$
+by $\cos f(t)=2\kappa(o,\gamma(t))-1$.  Geodesic reversal at $\gamma(t)$ and \eqref{m2:closing} give
+\begin{equation}\label{m2:tent}
+ f(2t)=T(f(t)),\qquad T(u)=
+ \begin{cases}2u&0\le u\le\pi/2,\\2\pi-2u&\pi/2\le u\le\pi.\end{cases}
+\end{equation}
+Choose $t_0>0$ within a normal neighbourhood uniformly in the unit direction at $o$.  By compactness of the unit tangent sphere the
+values of $f(t_0)$ have a positive lower bound.  Doubling $t_0$ until $f\ge\pi/2$ takes uniformly boundedly many steps.  By continuity
+there is some $\tau>0$ in this bounded parameter interval with $f(\tau)=\pi/2$, and then $f(2\tau)=\pi$ and $f(4\tau)=0$.  By faithfulness
+$\gamma(4\tau)=o$.  As $\gamma$ is an orbit of a one-parameter group, $4\tau$ is a period.  Thus every point, reached by Hopf--Rinow along
+a geodesic from $o$, lies in a closed ball of uniformly bounded radius, and Hopf--Rinow gives compactness.
+
+\emph{Rank one.}  There can be no two independent commuting elements $X,Y\in\mathfrak p$.  Otherwise $\{(u,v):\exp(uX+vY)o=o\}$ is a
+closed subgroup of $\R^2$, discrete because the orbit map has injective differential at zero.  A discrete subset of $\R^2$ is countable,
+whereas geodesic return requires this subgroup to meet every line through zero away from zero.
+
+\emph{Isotropy.}  Since $M$ is compact, the isometry group of $(M,g)$ is compact \cite{m2:MyersSteenrod}, and $G$ is closed in it; so $G$
+is compact.  Choose an $\Ad(G)$-invariant inner product $(\cdot,\cdot)$ on its Lie algebra by averaging.  For nonzero $X,Y\in\mathfrak p$,
+maximise $(\Ad(k)X,Y)$ over $K$.  At a maximiser, with $X'=\Ad(k)X$, differentiation gives $(Z,[X',Y])=0$ for every $Z\in\mathfrak k$.
+Since $[X',Y]$ lies in $\mathfrak k$, this bracket vanishes.  Thus $X'$ and $Y$ are collinear.  If the evaluations of $X$ and $Y$ at $o$
+have unit $g$-length, the scalar is $1$ or $-1$.  The latter sign is reversed by $s_o\in K$.  Consequently $K$ is transitive on the unit
+tangent sphere, hence on each distance sphere by the exponential and Hopf--Rinow.  Together with transitivity on $M$, this gives two-point
+homogeneity by elements of $G$ itself.  By the classification of compact two-point homogeneous spaces \cite{Wang52} (equivalently,
+$M$ being a compact Riemannian symmetric space of rank one, by Cartan's classification \cite{Cartan26,Cartan27}, \cite[Ch.~X]{Helgason};
+see \cite[Ch.~3]{Besse78}) $M$ is one of the listed manifolds with its standard metric up to scale.
+
+\emph{Normalisation.}  $K$-transitivity gives a common least positive period $L$ to all unit-speed geodesics at $o$.  Such a period exists
+because the return set is a subgroup of $\R$ and the geodesic is injective near zero.  For any of these geodesics, $f$ is even and
+$L$-periodic.  It vanishes exactly on $L\Z$, so $f(L/2)=\pi$.  If $f(t)=\pi/2$, then $4t\in L\Z$ and $2t\notin L\Z$.  Also
+$f(L/4)=\pi/2$ by \eqref{m2:tent}.  By continuity these facts place $f(t)$ in the same half of $[0,\pi]$ as
+$f_0(t)=2\pi\operatorname{dist}(t/L,\Z)$ at every $t$, including the common branch boundaries.  Both functions obey \eqref{m2:tent}.
+Therefore $|f(2^jt)-f_0(2^jt)|=2^j|f(t)-f_0(t)|\le\pi$ for all $j\ge0$, which gives $f=f_0$.  Every point is reached at some
+$0\le t\le L/2$ by periodicity and possible reversal of initial direction.  A geodesic endpoint at $L/2$ has comparison zero, and every
+geodesic reaching that point must have length at least $L/2$.  The diameter is thus $L/2$.  Rescale distances by $\pi/L$ to obtain
+\eqref{m2:normalization}.  The converse, with the distance and zero sets in concrete models, is Proposition~\ref{m2:models}.
+\end{proof}
+
+\begin{remark}[placement]\label{m2:placement}
+Theorem~\ref{m2:classification} is classical in substance, and its steps are attributed as follows.  A manifold with a smooth multiplication
+satisfying \eqref{m2:reflection} and with isolated fixed points is a symmetric space in the sense of Loos \cite[Ch.~II, \S1]{Loos}, an
+affine symmetric space for its canonical connection \cite[Ch.~II, \S2]{Loos}.  A continuous, faithful, invariant comparison bounds the
+isotropy and makes the space Riemannian symmetric.  The maximisation over $K$ is the argument for the conjugacy of maximal abelian
+subspaces of $\mathfrak p$ \cite[Ch.~V, \S6]{Helgason}, and the absence of two commuting independent directions is rank one.  In a compact
+symmetric space of rank at least two a flat torus of dimension two carries geodesics that do not close, so the closing forced by the
+round-trip law is rank one; the compact rank-one spaces are the listed ones, by Cartan's
+classification \cite{Cartan26,Cartan27}, \cite[Ch.~X]{Helgason} (their geometry: \cite[Ch.~3]{Besse78}), or via two-point homogeneity by
+Wang \cite{Wang52}; Tits \cite{Tits55} treats the non-compact companion, which is not needed here.  For a short proof that two-point
+homogeneous spaces are symmetric see Szab\'o \cite{m2:Szabo}; see also Chavel \cite{m2:Chavel}.  The normalisation step is elementary.  What is new here is (i) the axiomatisation by one scalar law with a merely
+continuous comparison: no metric, connection or regularity of $\kappa$ is assumed, and Loos's isolation axiom is a consequence;
+(ii) the uniform formulae $\kappa=\operatorname{tr}(P\circ Q)$ and $P_{s_xw}=U_{2P_x-1}P_w$ across all five families
+(Remark~\ref{m2:jordan}); (iii) the exact place where unique zero partners select the spheres (Theorem~\ref{m2:two-readout}).  The projector
+models with $\operatorname{tr}(P\circ Q)=\cos^2d$ are classical \cite{m2:Tai}, \cite[Ch.~3]{Besse78}; for the Cayley plane see Freudenthal
+\cite{m2:Freudenthal} and Springer--Veldkamp \cite{SV00}.  The list coincides
+with the spaces of pure states (primitive idempotents) of the simple Euclidean Jordan algebras: $\mathrm{Herm}_{n+1}(\mathbb F)$ gives
+$\mathbb FP^n$, $\mathrm{Herm}_3(\mathbb O)$ gives $\mathbb OP^2$, and the spin factors give the spheres; the algebras were classified by
+Jordan, von Neumann and Wigner \cite{m2:JNW} (see \cite[Ch.~V]{m2:FK}), their state spaces are treated by Alfsen and Shultz
+\cite{m2:AlfsenShultz}, and they appear in the characterisation of quantum theory by single-system postulates of Barnum, M\"uller and
+Ududec \cite{m2:BMU}.  The identity of Theorem~\ref{m2:bargmann} is the expansion of $|\ip y{(2P_x-I)w}|^2$, with the Bargmann three-point
+invariant \cite{m2:Bargmann} as cross term; $I+8(L_P^2-L_P)$ is the quadratic representation $U_{2P-1}$, and $2L_P^2-L_P=U_P$ is the
+projection onto the Peirce $1$-space of $P$ \cite[Ch.~IV]{m2:FK}.  For reflection spaces without the isolation axiom see Loos's notes to
+\cite[Ch.~II]{Loos}, and for the Jordan-theoretic geometry of such spaces Bertram \cite{m2:Bertram}.  Example~\ref{m2:torus} shows that the reflection laws without the
+closing law do not suffice; Remarks~\ref{m2:roundness} and \ref{m2:triangle-link} relate the section to Theorems~\ref{thm:round} and
+\ref{thm:triangle}, and Remark~\ref{m2:paper2} to the readings of the companion paper.
+\end{remark}
+
+\begin{example}[algebraic closure is not enough]\label{m2:torus}
+The reflection laws \eqref{m2:reflection} alone permit the flat torus $(\R/2\pi\Z)^2$, with $s_xw=2x-w$ and
+$\kappa(x,y)=(2+\cos(x_1-y_1)+\cos(x_2-y_2))/4$.  Coordinate subtraction verifies \eqref{m2:reflection} and invariance.  The comparison is
+symmetric, continuous and faithful, and the unique zero partner of each $x$ is $x+(\pi,\pi)$.  At $w=(0,0)$ and $x=(\pi,0)$ the left side
+of \eqref{m2:closing} is $1$ and the right side is $0$.  Its flat metric admits no isometry group transitive on unit tangent directions,
+since axial geodesics close and geodesics of irrational slope do not.  With the scalar closing law the classification above holds.
+\end{example}
+
+\subsection{Models, distances and cut loci}
+
+Use $\operatorname{Tr}$ for the matrix trace and $\operatorname{tr}$ for its real part on associative matrices.  In the Albert algebra
+$J=\mathrm{Herm}_3(\mathbb O)$, $\operatorname{tr}$ is the sum of the real diagonal entries and $A\circ B=(AB+BA)/2$ is the Jordan product.
+The Cayley plane is the manifold of trace-one idempotents of $J$ \cite[\S3.4]{Baez02}.  Its automorphism group $F_4$ acts transitively on
+it and preserves the trace form $\operatorname{tr}(A\circ B)$ \cite[\S\S3.4, 4.2]{Baez02}, \cite{SV00}.  Use the metric induced by half the
+trace form.  For $\mathbb F=\R,\C,\HH$ use the right-line model in $\mathbb F^{n+1}$, with projector $P_x=xx^*$ for a unit representative
+$x$ and $*$ denoting conjugate transpose.  The same letter indexing a projector or reflection denotes a line in a projective formula.
+Write $\beta$ for the projective comparison (in $\C P^n$ the Born weight of the companion paper).
+
+\begin{proposition}\label{m2:models}
+On a round sphere of radius $\tfrac12$, with unit vectors as coordinates,
+\begin{equation}\label{m2:sphere}
+ \kappa(x,y)=\tfrac12(1+\ip{x}{y}),\qquad s_xw=2\ip{x}{w}x-w .
+\end{equation}
+On $\mathbb FP^n$ for $\mathbb F=\R,\C,\HH$,
+\begin{equation}\label{m2:associative}
+ \beta(x,y)=\operatorname{tr}(P_xP_y)=|x^*y|^2,\qquad P_{s_xw}=(2P_x-I)P_w(2P_x-I).
+\end{equation}
+On $\mathbb OP^2$,
+\begin{equation}\label{m2:albert}
+ \beta(x,y)=\operatorname{tr}(P_x\circ P_y),\qquad P_{s_xw}=\bigl(I_{\rm op}+8(L_{P_x}^2-L_{P_x})\bigr)P_w ,
+\end{equation}
+where $L_PB=P\circ B$ and $I_{\rm op}$ is the identity operator.  These are comparison reflection spaces.  In each case the zero set at
+$x$ is its cut locus and its set at distance $\pi/2$.  It is $\{-x\}$ on the sphere, $\mathbb FP^{n-1}$ on $\mathbb FP^n$, and
+$\mathbb OP^1\cong S^8$ on $\mathbb OP^2$.  In particular,
+\begin{equation}\label{m2:fixed}
+ \operatorname{Fix}(s_x)=\{x\}\ \cup\ \{y:\kappa(x,y)=0\},
+\end{equation}
+with $\kappa=\beta$ in the projective cases.  On the projective spaces each cut point of $x$ is reached from $x$ by a sphere
+$S^{\dim_\R\mathbb F-1}$ of unit initial directions; for $\mathbb F\ne\R$ it is also the first conjugate point along each of these geodesics.
+\end{proposition}
+
+\begin{proof}
+On the sphere the comparison follows from the half-angle identity.  Great circles minimise uniquely up to the antipode and reach it at
+distance $\pi/2$.  The orthogonal reflection in the radial line reverses the tangent space and fixes the two unit vectors on that line.
+
+For associative matrices $\operatorname{tr}(AB)=\operatorname{tr}(BA)$ by entrywise expansion and $\re(ab)=\re(ba)$ for scalars.  This gives
+the trace formula.  At $E=\operatorname{diag}(1,0,\dots,0)$, conjugation by $2E-I$ negates the off-diagonal blocks incident to the first
+coordinate.  In the Albert algebra the same sign action equals $I_{\rm op}+8(L_E^2-L_E)$: $L_E$ multiplies those blocks by $\tfrac12$, the
+top-left entry by $1$, and the lower block by $0$.  The sign action is conjugation by the real diagonal matrix $\operatorname{diag}(-1,1,1)$,
+hence a trace-preserving Jordan automorphism.  Conjugating by $F_4$ gives \eqref{m2:albert} at any centre.  Unitary changes of coordinates
+serve the same purpose in \eqref{m2:associative}.
+
+At $E$ write the top entry of a trace-one idempotent as $a$, the lower first column as $b$, and the complementary block as $C$.  In the
+associative models $0\le a\le1$ and $C=bb^*/a$ if $a>0$ by the unit-projector formula.  In the octonionic model $a(1-a)=|b|^2$ by the
+diagonal equation.  For $a>0$ the $(2,3)$ equation gives $aC_{23}=b_2\overline{b_3}$.  If $b_2\ne0$ the $(2,1)$ equation then gives
+$C_{22}=|b_2|^2/a$, since $(b_2\overline{b_3})b_3=b_2|b_3|^2$, and the trace gives $C_{33}=|b_3|^2/a$; if $b_3\ne0$ the $(3,1)$ equation
+gives the same in the other order.  When both vanish, $a=1$ and both remaining diagonal entries vanish because they sum to zero and are
+nonnegative by their diagonal idempotence equations.  Thus $C=bb^*/a$ in the octonionic model too.  The open part $a>0$ has coordinates
+\[
+ Q=\frac{(1,u)(1,u)^*}{1+|u|^2},\qquad u=b/a .
+\]
+For octonions this expression uses the associative subalgebra generated by the two entries of $u$, by Artin's theorem for alternative
+algebras \cite[\S1.1]{Baez02}.  In these coordinates the sign map is $u\mapsto-u$.  Since it is an isometry of the trace metric and has
+derivative $-\mathrm{id}$, it is the geodesic symmetry.  Conjugation of these isometries yields \eqref{m2:reflection} in all models by
+uniqueness of the symmetry at its centre.  The trace is preserved, so the comparison is invariant.
+
+With the metric induced by $\tfrac12\operatorname{tr}(dQ\circ dQ)$, using the symmetrised product also over the associative algebras, the
+geodesics from $E$ with unit initial directions are
+\begin{equation}\label{m2:projectivegeo}
+ Q_v(t)=q_v(t)q_v(t)^*,\qquad q_v(t)=(\cos t,v\sin t),\quad |v|=1 .
+\end{equation}
+Their tangent at $0$ has off-diagonal blocks $v,v^*$ and length $1$.  For the entries in \eqref{m2:projectivegeo} all products take place in
+an associative subalgebra.  There the operator in \eqref{m2:albert} equals conjugation by $2P-I$, by expansion of $L_P^2$ for an idempotent
+$P$.  The symmetry at $Q_v(t)$ takes $Q_v(t+h)$ to $Q_v(t-h)$ by ordinary unit-line reflection.  As it acts on the tangent space by
+$-\mathrm{id}$, the acceleration vanishes.
+
+Each projective model is compact.  The geodesics from $E$ have period $\pi$, so a minimising segment has length at most $\pi/2$ by
+periodicity and reversal.  For $0<t<\pi/2$ the chart gives $u=v\tan t$, determining $t,v$ uniquely.  Segment extensions within that
+interval still minimise, by the same uniqueness.  At $\pi/2$ each endpoint is reached by $v$ and $-v$ and extensions cease to minimise.  In
+the associative cases the endpoints are exactly lines in the complementary space.  In the octonionic case $a=0$ forces $b=0$ and the
+complementary trace-one idempotents are
+\[
+ \begin{pmatrix}p&z\\\overline z&1-p\end{pmatrix},\qquad |z|^2=p(1-p).
+\]
+These are parametrised by unit vectors $(2p-1,2z)\in\R\oplus\mathbb O$.  Each is $vv^*$ for a unit pair $v$: use
+$(\sqrt p,\overline z/\sqrt p)$ for $p>0$ and $(0,1)$ for $p=0$.  Since $\beta(E,Q_v(t))=\cos^2t$, this proves faithfulness, the range
+and the distance and cut claims by transitivity.  On each projective line the same coordinates $(2p-1,2z)$ give the pairing
+$\tfrac12(1+\ip xy)$ in sphere coordinates.  The reflection formula preserves the subalgebra of matrices supported on the chosen two
+coordinates.  It restricts to an isometry of the line fixing its centre with derivative $-\mathrm{id}$, hence to the spherical reflection.
+The trace metric on this sphere is the round metric of radius $\tfrac12$, since its line element squared is
+$\tfrac14|(d(2p-1),d(2z))|^2$.
+
+The directions reaching a cut point $vv^*$ at time $\pi/2$ are the unit $v'$ with $v'v'^*=vv^*$.  For $\mathbb F=\R,\C,\HH$ these are
+$v\lambda$ with $|\lambda|=1$, a sphere $S^{\dim_\R\mathbb F-1}$.  For $\mathbb O$, write $v'=(v_2',v_3')$: if $p>0$, $v_2'$ ranges over
+the sphere $|v_2'|^2=p$ and determines $v_3'$ through $v_2'\overline{v_3'}=z$, since left division is defined in the alternative division
+algebra $\mathbb O$; if $p=0$, $v_3'$ ranges over the unit sphere.  Either way the directions form a $7$-sphere.  For
+$\mathbb F\ne\R$ this sphere is connected, and a curve $v(s)$ in it gives a variation of geodesics from $E$ with common endpoint at time
+$\pi/2$ whose variation field is nonzero for $0<t<\pi/2$ (its first-column block is $v'(0)\sin t\cos t$); this Jacobi field vanishes at
+$0$ and $\pi/2$, so the cut point is conjugate.  There is no earlier conjugate point, since the segments minimise on $[0,\pi/2]$.
+
+For a geodesic beginning at $w$ that reaches $x$ at time $t$, $s_xw$ is its point at $2t$.  In every model the comparison with the initial
+point is $\cos^2t$ on the entire geodesic, so \eqref{m2:closing} is the double-angle identity.  The radial and block sign formulas fix the
+cut loci pointwise.  The scalar law and faithfulness exclude any further fixed points.
+\end{proof}
+
+\begin{remark}[uniform Jordan form]\label{m2:jordan}
+All five families are spaces of primitive idempotents of a simple Euclidean Jordan algebra $V$, with $\kappa(x,y)=\operatorname{tr}(P_x\circ P_y)$
+and $P_{s_xw}=U_{2P_x-1}P_w$, where $U_a=2L_a^2-L_{a^2}$.  For $\mathbb FP^n$ and $\mathbb OP^2$ this is \eqref{m2:associative} and
+\eqref{m2:albert}, since $U_{2P-1}=2(2L_P-I_{\rm op})^2-I_{\rm op}=I_{\rm op}+8(L_P^2-L_P)$ and, in an associative algebra,
+$U_ab=aba$.  For the sphere $S^n$ take the spin factor $V=\R\oplus\R^{n+1}$ with $(\alpha,a)\circ(\beta,b)=(\alpha\beta+\ip ab,\alpha b+\beta a)$
+and $\operatorname{tr}(\alpha,a)=2\alpha$; its primitive idempotents are $P_x=\tfrac12(1,x)$ with $|x|=1$.  Then
+$\operatorname{tr}(P_x\circ P_y)=\tfrac12(1+\ip xy)$, and with $e=2P_x-1=(0,x)$, $e^2=1$ and $e\circ(e\circ(\beta,b))=(\beta,\ip xbx)$, so
+$U_eP_w=\tfrac12(1,2\ip xwx-w)=P_{s_xw}$, which is \eqref{m2:sphere}.
+\end{remark}
+
+\begin{remark}[relation to the roundness theorem]\label{m2:roundness}
+The scalar law of Theorem~\ref{thm:round} persists throughout this classification; what changes is the zero set.  Uniqueness of zero
+partners, $(\Omega2\mathrm d)$, holds precisely on the spheres, including the projective lines, since by Proposition~\ref{m2:models} the zero set
+of $x$ in $\mathbb FP^n$ is $\mathbb FP^{n-1}$; adding $(\Omega2\mathrm d)$ to Definition~\ref{m2:def} therefore selects the round spheres
+$S^n$, $n\ge1$.  The cut locus replaces the single antipode on the higher projective spaces.  The reflection centres giving zero
+round-trip comparison with $w$ form the distance sphere $d(w,x)=\pi/4$, since $\kappa(w,s_xw)=\cos^22d(w,x)$.  In Theorem~\ref{thm:round},
+where both families of translations are invariant, the zero-partner assumption and the binary operation restrict the dimensions to
+$1,3,7$, and Theorem~\ref{thm:main} with the heap law selects $1,3$.  On these spherical models $x\bar wx=2\ip xwx-w$ is the reflection
+\eqref{m2:sphere}.  Under reflection-only axioms, dropping zero uniqueness admits the higher projective families.
+\end{remark}
+
+\begin{remark}[continuous reflections]\label{m2:programme}
+Theorem~\ref{m2:classification} assumes a smooth reflection map.  We state the extension as a conjecture.
+\end{remark}
+
+\begin{conjecture}\label{m2:conjecture}
+Let $M$ be a connected topological manifold of positive dimension, $(x,w)\mapsto s_xw$ a continuous map satisfying \eqref{m2:reflection},
+and $\kappa$ a continuous, symmetric, faithful, $s$-invariant comparison satisfying \eqref{m2:closing}.  Then $(M,s,\kappa)$ is isomorphic,
+by a homeomorphism, to one of the spaces of Theorem~\ref{m2:classification}.
+\end{conjecture}
+
+\noindent\emph{Evidence and route.}  The first step of the proof (each centre is an isolated fixed point) uses only continuity, and on the
+smooth models a continuous comparison already suffices for the metric and return arguments.  A proof would either construct a compatible
+smooth structure in which $s$ is smooth from the comparison data (as Gleason--Montgomery--Zippin does for the heap in
+Lemma~\ref{lem:lie}), or replace the affine exponential and the compact Lie group steps by direct metric arguments for the reflections.
+The conjecture is listed in Section~\ref{sec:open}.
+
+\subsection{The reflected Born weight}
+
+\begin{theorem}\label{m2:bargmann}
+Put $\tau(y,x,w)=\operatorname{tr}(P_yP_xP_w)$ in the associative models and $\tau(y,x,w)=\operatorname{tr}\bigl(P_y\circ(P_x\circ P_w)\bigr)$
+on the Cayley plane.  Then
+\begin{equation}\label{m2:interference}
+ \beta(y,s_xw)=4\beta(y,x)\beta(x,w)+\beta(y,w)-4\tau(y,x,w).
+\end{equation}
+For complex rays, $\tau=\re\Delta$, where
+\begin{equation}\label{m2:cycle}
+ \Delta(y,x,w)=\operatorname{Tr}(P_yP_xP_w)=(y^*x)(x^*w)(w^*y).
+\end{equation}
+Thus $|\Delta|^2=\beta(y,x)\beta(x,w)\beta(w,y)$, and at a nonzero cycle the term is $-4|\Delta|\cos(\arg\Delta)$.  For quaternionic rays
+the cyclic scalar product transforms by conjugation and has invariant real part and norm.  On the Cayley plane the invariant in the formula
+is the real Jordan trace.
+\end{theorem}
+
+\begin{proof}
+In each projective model
+\begin{equation}\label{m2:primitive}
+ (2L_{P_x}^2-L_{P_x})P_w=\beta(x,w)P_x.
+\end{equation}
+At $E$, the operator keeps the top diagonal entry and kills the remaining blocks, since at Peirce values $1,\tfrac12,0$ its eigenvalues are
+$1,0,0$.  Transport to $x$ by the coordinate changes of Proposition~\ref{m2:models}.  Writing the reflection operator as
+$I_{\rm op}+4(2L_P^2-L_P)-4L_P$ and pairing with $P_y$ gives \eqref{m2:interference}.  For associative matrices the four terms of the
+symmetrised product have the same real trace, by taking adjoints and cycling.  Multiplication of the outer products gives \eqref{m2:cycle}.
+For quaternionic representatives the same multiplication and real trace give the real part of the cyclic scalar product.  The change
+$y\mapsto yq_y$, $x\mapsto xq_x$, $w\mapsto wq_w$ with unit scalars sends the cycle to $\overline{q_y}\Delta q_y$.  The norm formulas follow
+from multiplicativity of the scalar norm.  Vanishing overlaps are included in \eqref{m2:interference}.
+\end{proof}
+
+\begin{theorem}[two readouts on reflection spaces]\label{m2:two-readout}
+For a comparison reflection space $(M,s,\kappa)$ the following are equivalent:
+\begin{enumerate}[label=(\alph*)]
+\item the diagonal form of $(\Omega3')$ in Section~\ref{sec:operational} holds: for all $x,w$ there are $A,B,D$ with
+$\kappa(y,s_xw)=A\kappa(y,x)+B\kappa(y,w)+D$ for every $y\in M$;
+\item for all $x,w$ the value $\kappa(y,s_xw)$ depends on $y$ only through the pair $(\kappa(y,x),\kappa(y,w))$;
+\item every point has exactly one zero partner, $(\Omega2\mathrm d)$;
+\item $M$ is a round sphere $S^n$, $n\ge1$, with \eqref{m2:sphere}.
+\end{enumerate}
+In that case $A=2c(x,w)$, $B=-1$, $D=1-c(x,w)$ with $c=2\kappa-1$, as in Lemma~\ref{lem:opmodel}.  On every higher projective space the
+failure is witnessed at a fixed pair $(x,w)$ by two rays with the same three pair weights (Example~\ref{m2:witness-ex}).
+\end{theorem}
+
+\begin{proof}
+(c)$\Leftrightarrow$(d) is Theorem~\ref{m2:classification} with Proposition~\ref{m2:models}.  (d)$\Rightarrow$(a): with $c=2\kappa-1$,
+\eqref{m2:sphere} gives $c(y,s_xw)=2c(x,w)c(y,x)-c(y,w)$, and the coefficients for $\kappa$ are as stated.  (a)$\Rightarrow$(b) is clear.
+(b)$\Rightarrow$(d): by Theorem~\ref{m2:classification} $M$ is a round sphere or a projective space $\mathbb FP^n$, $n\ge2$, or
+$\mathbb OP^2$ (projective lines being spheres); in the latter cases all four families contain the real rays of
+Example~\ref{m2:witness-ex}, which give, at the pair $(x,w)$ there, two points $y_\pm$ with equal readouts and reflected weights $0$ and
+$\tfrac45$, contradicting (b).
+\end{proof}
+
+\noindent The heap axiom is essential in Theorem~\ref{thm:operational}: the spheres $S^n$ with $n\ne1,3$ satisfy $(\Omega2)$ and the
+diagonal form of $(\Omega3')$, but carry no heap structure with this $\kappa$.
+
+\begin{example}[readout determinacy fails from projective dimension two]\label{m2:witness-ex}
+Use the real coordinate rays
+\begin{equation}\label{m2:witness}
+ x=e_1,\quad w=(e_1+e_2)/\sqrt2,\quad y_+=(e_1+e_2+\sqrt8\,e_3)/\sqrt{10},\quad y_-=(e_1-3e_2)/\sqrt{10}.
+\end{equation}
+Since $x^*w=1/\sqrt2$, $x^*y_\pm=1/\sqrt{10}$, $w^*y_\pm=\pm2/\sqrt{20}$, and $s_xw$ is represented by $(e_1-e_2)/\sqrt2$,
+\begin{gather}
+ \beta(x,w)=\tfrac12,\quad \beta(y_\pm,x)=\tfrac1{10},\quad \beta(y_\pm,w)=\tfrac15,\quad \tau(y_\pm,x,w)=\pm\tfrac1{10},\notag\\
+ \beta(y_+,s_xw)=0,\qquad \beta(y_-,s_xw)=\tfrac45 .\label{m2:witness-values}
+\end{gather}
+All four projective families contain these real projectors, with the same product and reflection at $x$, and all three pair weights
+agree.  The correction is the real three-point term of \eqref{m2:interference}.
+\end{example}
+
+\begin{remark}[phase variation]\label{m2:phase-variation}
+In $\C P^n$ for $n\ge2$, keep $x,w$ from \eqref{m2:witness} and use
+\[
+ y_\theta=(1,\,2e^{i\theta}-1,\,\sqrt{4+4\cos\theta},\,0,\dots)/\sqrt{10}.
+\]
+The squared norm is $(1+5-4\cos\theta+4+4\cos\theta)/10=1$.  Here $\Delta(y_\theta,x,w)=e^{i\theta}/10$ and
+$\beta(y_\theta,s_xw)=\tfrac25(1-\cos\theta)$, filling $[0,\tfrac45]$ at the three fixed weights in \eqref{m2:witness-values}.  Restricting entries
+to a copy of $\C$ gives the same range in $\HH P^n$ and $\mathbb OP^2$.  In the Albert algebra these projectors satisfy the same idempotence
+equations and have the same trace and reflection at $E$.  The two real witnesses are $\theta=0,\pi$, the two possible signs of the cyclic
+product at these nonzero weights.
+\end{remark}
+
+\subsection{Gram data, orientation and readings}
+
+\begin{proposition}\label{m2:gram}
+For complex representatives $v_j$ the full labelled Gram matrix $G_{ij}=v_i^*v_j$ determines the family up to a common unitary, and
+\begin{equation}\label{m2:chain}
+ \operatorname{Tr}(v_0v_0^*\cdots v_mv_m^*)=G_{01}\cdots G_{m-1,m}G_{m0}.
+\end{equation}
+For three unit vectors the determinant of $G$ is $1-\sum_{i<j}|G_{ij}|^2+2\re(G_{01}G_{12}G_{20})$.  In particular on $\C P^1$,
+\begin{equation}\label{m2:ranktwo}
+ \re\Delta=\tfrac12\bigl(\beta(x,y)+\beta(y,w)+\beta(w,x)-1\bigr).
+\end{equation}
+For every projective model $\beta$ is a positive semidefinite kernel.  On every higher projective space the Gram matrix of $2\beta-1$ on
+three mutually orthogonal rays is indefinite.
+\end{proposition}
+
+\begin{proof}
+If two families have Gram matrix $G$, every linear combination with coefficient vector $b$ has squared norm $b^*Gb$ in both realisations.
+Sending corresponding vectors to one another therefore defines an isometry between their spans.  Complete orthonormal bases to extend it to
+a unitary in the common ambient dimension.  Multiplying adjacent outer products gives \eqref{m2:chain}, with the empty product when $m=0$.
+Expansion gives the determinant, which vanishes at rank at most two and yields \eqref{m2:ranktwo}.  For kernel positivity, $\beta$ is the
+real Gram pairing of the projectors under the positive trace form, whose squared norm is the sum of squared entry norms.  On the three
+coordinate rays the Gram matrix of $2\beta-1$ is $2I-\mathbf 1\mathbf 1^{\mathsf T}$, with eigenvalues $2,2,-1$.
+\end{proof}
+
+\begin{remark}[real rephasing]\label{m2:rephasing}
+The full complex Gram table also decides whether a finite ray family has real representatives in some common orthonormal basis.  Join two
+indices by an edge when $G_{ij}\ne0$.  A cycle product of Gram entries is unchanged by multiplying the representatives by phases.  If the
+family can be made real, every such product is real.  Conversely, suppose every cycle product is real.  In each connected component, choose
+a spanning tree and successively rephase vertices away from the root to make the tree entries positive.  For each remaining edge its cycle
+with the tree path has real product, and the other factors are positive, so its entry is real.  A real positive semidefinite Gram matrix
+has a real factorisation, and Proposition~\ref{m2:gram} supplies the common unitary.  It is enough to test triangles if the cycle space is
+generated over $\Z$ by oriented triangle boundaries, since the squared normalised edge phases multiply to $1$ on each triangle; generation
+modulo $2$ is not enough.  In particular a vertex adjacent to all other vertices reduces the test to triangles through it.
+
+Without that condition on cycles, triangles alone can miss a phase.  In $\C^3$ the unit vectors $e_1$, $(e_1+e_2+e_3)/\sqrt3$, $e_2$, and
+$(e_1+ie_2-(1+i)e_3)/2$, in that order, have zero overlaps on the two diagonals.  Direct multiplication gives overlaps
+$1/\sqrt3,1/\sqrt3,i/2,1/2$ around the four-cycle and product $i/12$.  Thus the triangle tests hold vacuously and the family admits no real
+rephasing.  In the language of Section~\ref{sec:m1}, the normalised entries $G_{ij}/|G_{ij}|$ form a $\mathrm U(1)$ gain
+assignment (Definition~\ref{m1:gains}) whose cycle holonomies are these products (Theorem~\ref{m1:gauge}), and the example is a chordless
+four-cycle as in Example~\ref{m1:cycles}.
+\end{remark}
+
+\begin{proposition}\label{m2:bloch}
+For unit Bloch vectors $a,b,c$ of three complex rays in $\C P^1$, put $p=\ip ab$, $q=\ip bc$, $r=\ip ca$, $S=1+p+q+r$ and
+$D=a\cdot(b\times c)$.  In cyclic order $a,b,c$,
+\begin{equation}\label{m2:bloch-cycle}
+ \Delta=\frac{S+iD}{4},\qquad D^2=1+2pqr-p^2-q^2-r^2,\qquad S^2+D^2=2(1+p)(1+q)(1+r).
+\end{equation}
+The three Born weights determine $\re\Delta$ and $|D|$.  Complex conjugation preserves these weights and reverses $D$.  For a complex
+projective triangle with all pairs nonorthogonal, horizontal transport around the shorter geodesics gives return phase $-\arg\Delta$ in
+cyclic order.
+\end{proposition}
+
+\begin{proof}
+The Pauli identity $\sigma_i\sigma_j=\delta_{ij}I+i\sum_k\epsilon_{ijk}\sigma_k$ follows by multiplying the three standard matrices.  Expand
+$P_a=(I+a\cdot\sigma)/2$ in the triple trace.  The identity, pair and triple terms have traces $2$, $2(p+q+r)$ and $2iD$, respectively, and
+the linear terms are traceless.  The square of the scalar triple product is the determinant of the real Gram matrix.  The last identity
+follows from the modulus formula in Theorem~\ref{m2:bargmann}, since $\beta(a,b)=(1+p)/2$ by the two-factor Pauli trace.  Conjugation
+negates the second Bloch coordinate and so reverses the scalar triple product.
+
+Choose consecutive unit representatives with positive real overlap on every leg.  The lifted leg takes the form $u\cos t+v\sin t$ with
+$v^*u=0$ and $|u|=|v|=1$, as in \eqref{m2:projectivegeo}.  Its Hermitian pairing with its derivative vanishes.  Normalised projection to the
+next ray chooses precisely the lift at the end of this horizontal leg.  By \eqref{m2:chain}, the composition around the triangle multiplies
+the initial lift by $\overline\Delta/|\Delta|$.  This is the Pancharatnam phase in the horizontal-return convention
+\cite{m2:Pancharatnam,SB88,MS93}.
+\end{proof}
+
+\begin{remark}[relation to the triangle theorem and the geometric phase]\label{m2:triangle-link}
+For three points of a great $2$-sphere of $S^3$, identified with the Bloch sphere as in item (iii) of the closing section on physics pointers, the restriction of $\kappa$
+is $\tfrac12(1+\ip ab)=\beta$, and the second formula of \eqref{eq:tri} in Theorem~\ref{thm:triangle} reads
+$\re a=(\beta_{ab}+\beta_{bc}+\beta_{ca}-1)/(2\sqrt{\beta_{ab}\beta_{bc}\beta_{ca}})$, which by \eqref{m2:ranktwo} and the modulus formula of
+Theorem~\ref{m2:bargmann} is $\re\Delta/|\Delta|=\cos(\arg\Delta)$.  Both equal $\cos(E/2)$ for the spherical excess $E$ of the triangle:
+Theorem~\ref{thm:triangle} gives $\Theta(a)=E$, and here $|\arg\Delta|=E/2$ (Example~\ref{m2:octant}).  The return phase
+$-\arg\Delta$ of Proposition~\ref{m2:bloch} is the geometric phase $-\Omega/2$ recorded there, with
+$\arg\operatorname{Tr}(P_1P_2P_3)=+\Omega/2$.  What the projective setting adds is the cross term of \eqref{m2:interference}: on
+$\C P^1$ only its cosine enters and is fixed by the three pair weights, while from $\C P^2$ on it is an independent datum.
+\end{remark}
+
+\begin{example}\label{m2:octant}
+For $a=e_3,b=e_1,c=\pm e_2$ all pair weights are $\tfrac12$, $\Delta=(1\pm i)/4$, and the return phases are $\mp\pi/4$.  The positive triangle
+is an octant of the unit sphere and has area $4\pi/8=\pi/2$.  More generally take $a=e_3$, $b=(\sin\theta,0,\cos\theta)$ and
+$c=(0,\sin\theta,\cos\theta)$ with $0<\theta<\pi$.  Then $p=r=\cos\theta$, $q=\cos^2\theta$ and $D=\sin^2\theta$, so
+\[
+ \Delta=\frac{(1+\cos\theta)^2+i\sin^2\theta}{4},\qquad \arg\Delta=\arctan\bigl(\tan^2(\theta/2)\bigr).
+\]
+The formula of van Oosterom and Strackee \cite{VOS} gives this argument as half the signed solid angle of the triangle.  At $\theta=0$ the
+phase tends to zero.  At $\theta=\pi$ the cycle vanishes and the displayed phase has a one-sided limit.  For unit lifts of the positive
+octant use $(1,0),(1,1)/\sqrt2,(1,i)/\sqrt2$, with middle overlap $(1+i)/2$.  The four equatorial lifts $(1,i^j)/\sqrt2$, $0\le j\le3$, have
+consecutive overlaps including the closing overlap all equal to $(1+i)/2$, with product $-\tfrac14$.
+\end{example}
+
+\begin{remark}[polarisation and Gram realisation]\label{m2:polarization}
+The parallelogram law follows by adding the expansions of $\|u+v\|^2$ and $\|u-v\|^2$ in an inner-product space.  Also
+$\|u\|^2\|v\|^2-|\ip uv|^2\ge0$: for $u\ne0$ it is $\|u\|^2$ times the squared norm of the component of $v$ orthogonal to $u$.  In the real
+$\ell^1$ plane the two sides of the parallelogram law for $e_1,e_2$ are $8$ and $4$.  The table with unit diagonal and off-diagonal values
+$S_{12}=S_{13}=\sqrt3/2$, $S_{23}=-1$ has determinant $-3$ by expansion, so pairwise bounds do not ensure a Gram realisation
+(Example~\ref{m1:negative-gram}); positive semidefiniteness is the correct condition.  The finite Euclidean realisation criterion is
+Proposition~\ref{m1:distance} \cite{m1:Schoenberg}.  The triangle $(a,b,p)$ of Example~\ref{m1:spherical} is congruent to
+the triangle of Example~\ref{m2:octant} with $\theta=\epsilon$, and its area $2\arctan(\tan^2(\epsilon/2))$ is twice the argument found there.  The Hodge dual of a two-form in oriented
+dimension $D_0$ has degree $D_0-2$, so it produces a vector by this rule only in dimension three.
+\end{remark}
+
+\begin{remark}[physical reading]\label{m2:reading-input}
+For the physical complex reading, assume that pure outcomes are unit rays, that a rank-one test $P_y$ has weight
+$\operatorname{Tr}(P_yP_w)$ on input $P_w$, and that a successful projective test prepares the normalised projection; the companion paper
+derives these from its axioms \cite[Thms.~14 and~24]{Companion}.  The weights of a complete orthogonal family sum to $1$ by $\sum P_y=I$, and
+the conditional vector for positive weight is $P_yw/\|P_yw\|$.  Therefore the transmitted probability through linear polarisers at
+$0,\pi/4,\pi/2$ is $\tfrac12\cdot\tfrac12=\tfrac14$, while direct transmission from $0$ to $\pi/2$ has weight zero.  This follows from
+$P_yw=y(y^*w)$ and the angle pairing.  The reflection applies the norm-preserving operator $2P_y-I$ and retains the cross term in
+\eqref{m2:interference}.
+\end{remark}
+
+\begin{example}[instruments]\label{m2:instruments}
+Static effects also leave the action of a measurement instrument undetermined.  Set $P=\operatorname{diag}(1,0)$, $Q=I-P$, and let $X$
+swap the two basis vectors.  The two binary instruments $(P,Q)$ and $(XP,XQ)$ have the same effects $(P,Q)$, since $X^*X=I$ and $P,Q$ are
+idempotent.  On input $P$, the first branch followed by the test $Q$ gives joint weights $\operatorname{Tr}(QP)=0$ and
+$\operatorname{Tr}(QXPX^*)=\operatorname{Tr}(Q^2)=1$.  The full products of Kraus operators determine the sequence
+(Example~\ref{m1:sequential}).
+\end{example}
+
+\begin{remark}[the readings of the companion paper]\label{m2:paper2}
+The companion paper applies three quotients to the same sphere $S^3$ in $\R^4\cong\C^2\cong\HH^1$ \cite[Thms.~14 and~24]{Companion}.  The
+sign quotient gives $\R P^3$ with a real projective plane of zero partners and four orthogonal coordinate rays.  A clock gives
+$\C P^1\cong S^2$ with one zero partner and two orthogonal coordinate rays.  Quotienting by unit quaternions on the right leaves $\HH P^0$, a
+single ray.  These counts follow from the dimension bound on mutually orthogonal vectors over the corresponding division algebra, attained
+by the coordinate basis.  A quaternionic qubit has pure rays $\HH P^1\cong S^4$.
+
+The sphere reflection descends through the sign quotient, because $s_{-x}=s_x$ and $s_x(-w)=-s_xw$.  It does not descend directly through
+the clock quotient: for $w=(e_1+e_2)/\sqrt2$, the sphere reflection at $e_1$ gives $(e_1-e_2)/\sqrt2$, whereas the sphere reflection at
+$ie_1$ gives $-w$, and these output rays are orthogonal although the two centres have the same ray.  The correct descent first chooses the
+phase of $x$ so that $x^*w$ is real; then the real sphere reflection of $w$ equals $(2P_x-I)w$ in that representative, since
+$\re(x^*w)x=x(x^*w)$, and this is the projective reflection.
+
+The clocked qubit has affine reflection determinacy although its three-ray phase can change sign, by Theorem~\ref{m2:two-readout} and
+Proposition~\ref{m2:bloch}.  The higher complex projective rays of the composites in the companion paper \cite[Thm.~41]{Companion} admit the
+family of Remark~\ref{m2:phase-variation}.  That paper's reading and clock orientation supply physical inputs beyond the reflection
+structure.
+\end{remark}
+
+% ---- insertion point: further sections of Part "Beyond the axiom" (modules m3, d4), numbered 5B, 5C
+\setcounter{section}{5}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\theHsection}{\arabic{section}}
+
 \paperpart{part:arc}{The calculus of minimal arcs}
 
 \section{Minimal arcs and the geodesic recurrence}\label{sec:recur}
@@ -3410,6 +3938,8 @@ Prop.~\ref{m1:algebra}, Prop.~\ref{m1:chebyshev}, Thm.~\ref{m1:trichotomy} & Ele
 Thm.~\ref{m1:chordal}, Prop.~\ref{m1:sharp} & Simplicial vertices: Dirac \cite{m1:Dirac}; exact cycle consistency classical \cite{m1:Zaslavsky,m1:LermanShi,m1:Singer}; the $\varepsilon$-bound and its sharpness not found in the searched scope\\
 Thm.~\ref{m1:gauge}, Prop.~\ref{m1:clique} & Classical in substance (edge-path group \cite{m1:Spanier}, spanning-tree coordinates \cite{Levy10}); the filling estimate elementary\\
 Props.~\ref{m1:gram}, \ref{m1:distance}, \ref{m1:near-gram} & Classical ingredients \cite{m1:Schoenberg,m1:JordanVonNeumann,m1:Grone}; Prop.~\ref{m1:near-gram} elementary\\
+Thm.~\ref{m2:classification} & Classical in substance \cite{Loos,Helgason,Wang52,Cartan26,Besse78}; new: axiomatisation by the round-trip law with continuous $\kappa$ (Rem.~\ref{m2:placement})\\
+Thm.~\ref{m2:bargmann}, Thm.~\ref{m2:two-readout} & Identity: expansion with the Bargmann invariant \cite{m2:Bargmann}, Jordan form $U_{2P-1}$ \cite{m2:FK}; the equivalence with $(\Omega2\mathrm d)$ not found in the searched scope\\
 Thm.~\ref{thm:main}, classification by $(\Omega1)$--$(\Omega3)$ & New as a theorem; ingredients classical \cite{Certaine,Gleason52,MZ,Milnor,Knapp}; see Rem.~\ref{rem:dalembert}\\
 Thm.~\ref{thm:noreg}, Cor.~\ref{cor:interference} & Group-level statement not found in the searched scope; Lemmas~\ref{lem:noline}, \ref{lem:circle} not claimed new (possible precursors \cite{Kuczma64,Sharkovskii73}, texts not obtained); Lemma~\ref{lem:elliptic} standard; Cor.~\ref{cor:interference} follows from \cite{Davison08} once compactness is known\\
 Thm.~\ref{thm:parsimony} & Proof uses \cite{PW,Folland}\\
@@ -3557,8 +4087,8 @@ the item F7 of Section~\ref{sec:ready} (the group-theoretic core of Theorem~\ref
 No \texttt{sorry} occurs in the three files.  These three units are all that is machine-checked.  Not formalised are: the topological
 steps of Part~\ref{part:axiom} (Lemma~\ref{lem:lie}, the Gleason--Montgomery--Zippin theorem, the regularity-free argument as a whole), the remaining results
 of Sections~\ref{sec:class}--\ref{sec:geom}, including the roundness theorem (Section~\ref{sec:round}) and the one-sided results
-(Section~\ref{sec:onesided}), all of Part~\ref{part:arc}, and Part~\ref{part:alg} as written here (for the library declarations
-that cover parts of it, see Section~\ref{sec:leanlib}).  A preregistered formalisation of the classification core (Sections~\ref{sec:def}--\ref{sec:class}) is tracked at
+(Section~\ref{sec:onesided}), all of Part~\ref{part:arc}, and Parts~\ref{part:alg} and \ref{part:beyond} as written here (for the library declarations
+that cover parts of them, see Section~\ref{sec:leanlib}).  A preregistered formalisation of the classification core (Sections~\ref{sec:def}--\ref{sec:class}) is tracked at
 \begin{center}\small\url{https://github.com/the-omega-institute/trureturing/issues/31739}.\end{center}
 Earlier, the library already contained, in the file
 \begin{center}\small\texttt{D5/S3/Quantum/Algebra/RankOneInvariantMetric.lean} (line 444),\end{center}
@@ -3573,7 +4103,7 @@ black box; a formal statement of Theorem~\ref{thm:main} can avoid it by assuming
 
 All identities and limits of Part~\ref{part:arc} that are not textbook facts, and the identities of Part~\ref{part:axiom} used there, were
 checked numerically on random or explicit inputs by the accompanying script \texttt{check\_arc\_calculus.py} (numpy and the
-standard library; 157 checks, eight of them for Part~\ref{part:alg}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present six, one of them for Part~\ref{part:alg}); everything runs
+standard library; 163 checks, eight of them for Part~\ref{part:alg} and six for Section~\ref{sec:m2}), which also runs the module scripts registered in it from the subdirectory \texttt{checks/} (at present eleven: one for Part~\ref{part:alg}, five for Section~\ref{sec:m2}, of which four were written independently of the section, with a shared helper file); everything runs
 from the directory of this paper.  These include the recurrence and its Chebyshev form, the residual expansion of
 Theorem~\ref{thm:consist}, the inequality of Theorem~\ref{thm:action}, the split and the Brownian limits of
 Theorem~\ref{thm:sagitta} (simulated, $\tfrac32T$ to two decimals), the transport formula of
@@ -3697,7 +4227,7 @@ $\mathbb E\,c(\psi_0,\psi_t)=e^{-3Dt/4}$ by Proposition~\ref{prop:clt}, the stan
 isotropic rotational diffusion, and sagitta sums over $[0,t]$ tend to $\tfrac34Dt$.  We cite no measurement of this decay.
 \end{enumerate}
 
-\subsection{Library declarations related to Part~\ref{part:alg}}\label{sec:leanlib}
+\subsection{Library declarations related to Parts~\ref{part:alg} and \ref{part:beyond}}\label{sec:leanlib}
 The following declarations of the library \cite{Tru} were located by name and their statements read (local clone at commit
 \texttt{9d18ab6}); no \texttt{sorry} occurs in the files of the first six.  They are results of the library, not formalisations
 carried out for this paper, and several are narrower than the corresponding statements of Part~\ref{part:alg}, as indicated.
@@ -3736,6 +4266,29 @@ and \texttt{explicit\_qubit\_orientation}; \texttt{BargmannImaginaryMaximizers.l
 \end{itemize}}
 No declaration was found for the gauge quotient of Theorem~\ref{m1:gauge}, the filling estimate of Proposition~\ref{m1:clique}, the
 norm trichotomy of Theorem~\ref{m1:trichotomy} or the sharpness results of Proposition~\ref{m1:sharp}.
+
+For Section~\ref{sec:m2} the following declarations were located in the same clone (no \texttt{sorry} in their files); they concern
+the complex and qubit statements only.
+{\small\raggedright
+\begin{itemize}[leftmargin=1.5em]
+\item Proposition~\ref{m2:gram}: \texttt{GramUnitaryExtension.lean}, \texttt{exists\_unitary\_mul\_eq\_of\_conjTranspose\_mul\_eq} (as above);
+\eqref{m2:chain} in complex dimension two: \texttt{BargmannImaginaryMaximizers.lean}, \texttt{bargmann\_path\_product}.
+\item Remark~\ref{m2:rephasing}, the case of a vertex adjacent to all others: \texttt{D5/S3/Quantum/PureState/BargmannRealRephasing.lean},
+\texttt{exists\_real\_rephasing\_iff\_triple\_products\_real} and \texttt{exists\_real\_gram\_rephasing\_iff\_triple\_products\_real}.
+\item Proposition~\ref{m2:bloch} and Example~\ref{m2:octant}: \texttt{C129QubitBargmann.lean}, \texttt{triple\_bargmann\_bloch},
+\texttt{explicit\_qubit\_orientation}, \texttt{explicit\_state\_orientation};
+\texttt{D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.lean}, \texttt{triangle\_gram} and
+\texttt{shortest\_gate\_triangle\_holonomy} (the identity $S^2+D^2=2(1+p)(1+q)(1+r)$ and the normalised qubit cycle);
+\texttt{BargmannImaginaryMaximizers.lean}, \texttt{Latitude.latitude\_dot}.
+\item Remark~\ref{m2:polarization}: \texttt{ParallelogramNormLaw.lean} and \texttt{LagrangeGramIdentity.lean} (as above).
+\item Remark~\ref{m2:reading-input}: \texttt{D5/S3/Quantum/FiniteDimensional.lean}, \texttt{born\_probability\_skeleton};
+\texttt{D5/S3/Observer/BornReduction.lean}, \texttt{rank\_one\_pure\_state\_modulus\_square\_reduction};
+\texttt{D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean}, \texttt{rank\_one\_born\_pairing\_weight};
+\texttt{D5/S3/Observer/Conditioning.lean}, \texttt{conditionalState\_isState}.
+\item Example~\ref{m2:instruments}: \texttt{StaticEffectSequentialSeparation.lean} (as above).
+\end{itemize}}
+No declaration was found for Theorem~\ref{m2:classification}, the quaternionic and Albert formulas of Proposition~\ref{m2:models} and
+Theorem~\ref{m2:bargmann}, or Theorem~\ref{m2:two-readout}.
 
 \section{What remains open}\label{sec:open}
 
@@ -3780,6 +4333,9 @@ regularity theory summarised in \cite{White16} states (Remark~\ref{rem:converse}
 is $1$ for three vertices, at most $n-3$ for $n\ge4$ vertices, and $(n-2)/n$ for the real line (Proposition~\ref{m1:sharp}); what is it in
 general?  (b) The continuum programme of Remark~\ref{m1:continuum-programme}: refinement, compactness modulo gauge, and identification of
 normalised face holonomies with curvature.
+\item \emph{Continuous reflections.}  Conjecture~\ref{m2:conjecture}: Theorem~\ref{m2:classification} for a merely continuous reflection
+map on a topological manifold.  Route: a smooth structure making $s$ smooth, constructed from the comparison data, or direct metric
+substitutes for the affine exponential and the compact Lie group steps.
 \end{enumerate}
 
 \section*{Use of AI tools}
@@ -3948,6 +4504,21 @@ The authors used AI tools, namely Claude Fable 5.2 and Claude Opus 5.5 (via Clau
 \bibitem{m1:Zaslavsky} T.~Zaslavsky, Biased graphs. I. Bias, balance, and gains, \emph{J. Combin. Theory Ser. B} \textbf{47} (1989), 32--52.
 \bibitem{m1:DuncanKileel} A.~L.~Duncan, J.~Kileel, Higher-order group synchronization, arXiv:2505.21932v2 (2025).
 \bibitem{m1:Mermin} N.~D.~Mermin, Simple unified form for the major no-hidden-variables theorems, \emph{Phys. Rev. Lett.} \textbf{65} (1990), 3373--3376.
+% Section 5A references (checked 2026-11-20: journal items and books via Crossref; Loos, Baez locators read in the sources).
+\bibitem{m2:MyersSteenrod} S.~B.~Myers, N.~E.~Steenrod, The group of isometries of a Riemannian manifold, \emph{Ann. of Math. (2)} \textbf{40} (1939), 400--416.
+\bibitem{m2:Pancharatnam} S.~Pancharatnam, Generalized theory of interference, and its applications. Part I. Coherent pencils, \emph{Proc. Indian Acad. Sci. Sect. A} \textbf{44} (1956), 247--262.
+\bibitem{Cartan26} \'E.~Cartan, Sur une classe remarquable d'espaces de Riemann, \emph{Bull. Soc. Math. France} \textbf{54} (1926), 214--264.
+\bibitem{Cartan27} \'E.~Cartan, Sur une classe remarquable d'espaces de Riemann. II, \emph{Bull. Soc. Math. France} \textbf{55} (1927), 114--134.
+\bibitem{m2:Tai} S.~S.~Tai, Minimum imbeddings of compact symmetric spaces of rank one, \emph{J. Differential Geom.} \textbf{2} (1968), 55--66.
+\bibitem{m2:Freudenthal} H.~Freudenthal, Oktaven, Ausnahmegruppen und Oktavengeometrie, \emph{Geom. Dedicata} \textbf{19} (1985), 7--63.
+\bibitem{m2:JNW} P.~Jordan, J.~von Neumann, E.~Wigner, On an algebraic generalization of the quantum mechanical formalism, \emph{Ann. of Math. (2)} \textbf{35} (1934), 29--64.
+\bibitem{m2:AlfsenShultz} E.~M.~Alfsen, F.~W.~Shultz, \emph{Geometry of State Spaces of Operator Algebras}, Birkh\"auser, Boston, 2003.
+\bibitem{m2:BMU} H.~Barnum, M.~P.~M\"uller, C.~Ududec, Higher-order interference and single-system postulates characterizing quantum theory, \emph{New J. Phys.} \textbf{16} (2014), 123029.
+\bibitem{m2:Bargmann} V.~Bargmann, Note on Wigner's theorem on symmetry operations, \emph{J. Math. Phys.} \textbf{5} (1964), 862--868.
+\bibitem{m2:FK} J.~Faraut, A.~Kor\'anyi, \emph{Analysis on Symmetric Cones}, Oxford University Press, 1994.
+\bibitem{m2:Szabo} Z.~I.~Szab\'o, A short topological proof for the symmetry of $2$ point homogeneous spaces, \emph{Invent. Math.} \textbf{106} (1991), 61--64.
+\bibitem{m2:Chavel} I.~Chavel, On Riemannian symmetric spaces of rank one, \emph{Adv. Math.} \textbf{4} (1970), 236--263.
+\bibitem{m2:Bertram} W.~Bertram, \emph{The Geometry of Jordan and Lie Structures}, Lecture Notes in Math. \textbf{1754}, Springer, Berlin, 2000.
 \end{thebibliography}
 
 \end{document}
