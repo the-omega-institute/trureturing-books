@@ -1013,6 +1013,16 @@ Every assignment of the bits in $L\setminus J$ has positive probability and exte
 
 Choose a solution $w_0$ of $Cw=e$. The full solution set is $w_0+\ker C$. A row $r$ has dot product $1$ with every solution exactly when it annihilates $\ker C$ and $r\cdot w_0=1$. The annihilator is the row space $S+\mathbb F_2 a_i$. Rows of $S$ give zero on $w_0$, and $a_i$ gives $1$, so the required rows form precisely $a_i+S$.
 
+**Does any column basis attain the bound? (Written derivation.)** Continue to assume a strict decrease and suppose the retained-row condition above holds. Let $Q=\{j\in L:q_j=1/2\}$, and let $C_Q$ consist of the columns for those balanced discarded orbitals. Let $K$ contain the indices $j\in L\setminus Q$ for which deleting column $j$ from $C$ removes $e$ from the span of the remaining columns. Some column basis attains the bound exactly when
+
+$$
+\operatorname{rank} C_Q + |K| = \operatorname{rank} C.
+$$
+
+In that case, take any column basis of $C_Q$ and add every column indexed by $K$. If the retained-row condition fails, every column basis gives a lower bound strictly below the actual decrease.
+
+The remaining columns span $e$ after deletion of column $j$ exactly when $Cw=e$ has a solution with $w_j=0$. Thus $K$ consists precisely of the unbalanced indices whose difference bits are $1$ in every solution. For $j\in K$, the other columns cannot span column $j$, since that would let us delete it without changing the column space. Each of these columns therefore belongs to every column basis, and together they are linearly independent modulo the column space of $C_Q$. The equality criterion permits only columns in $Q\cup K$. Their span has dimension $\operatorname{rank}C_Q+|K|$ and fills the entire column space exactly when this dimension equals the rank of $C$.
+
 Take retained pairs $(0,2)$ and $(4,5)$ and discarded pair $(1,3)$, each with later-endpoint probability $1/4$. Balancing $(0,2)$ decreases purity by $3/32$, with a lower bound of $3/128$. The second retained pair has zero restricted row, so the first condition fails. Next take retained pair $(2,5)$ and discarded pairs $(0,3)$ and $(1,4)$, again with probabilities $1/4$. Now $C=(1\ \ 1)$ and either singleton column basis gives a bound of $3/32$. Only unequal difference bits contribute, giving a drop of $15/128$. Both coordinate rows lie outside the coset, so the second condition fails.
 
 For example, suppose both retained pairs alternate with the sole discarded pair and its endpoint probability satisfies $0<q<1$. Both restricted rows are $(1)$. When the first retained orbital is already balanced, balancing the second leaves purity unchanged. When all three later-endpoint probabilities start at $1/4$, balancing just the second retained orbital lowers purity from $83/128$ to $5/8$.
