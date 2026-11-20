@@ -993,7 +993,7 @@ $$
 
 Every term is nonnegative. The support of $w$ consists of all binary strings that vanish off $L$. The decrease is strictly positive precisely when one of these strings has dot product $1$ with row $i$ and dot product zero with every other balanced row. Such a string cannot exist if the restricted row is in their span. Otherwise append the restricted row to a basis of that span and extend to a basis of $\mathbb F_2^L$. The functional taking value $1$ on the appended row and zero on the other basis vectors gives the required string under the dot product.
 
-For example, if both retained pairs alternate with the same discarded pair, the two restricted rows are $(1)$. When the first retained orbital is already balanced, balancing the second leaves purity unchanged. When all three later-endpoint probabilities start at $1/4$, balancing just the second retained orbital lowers purity from $83/128$ to $5/8$.
+For example, suppose both retained pairs alternate with the sole discarded pair and its endpoint probability satisfies $0<q<1$. Both restricted rows are $(1)$. When the first retained orbital is already balanced, balancing the second leaves purity unchanged. When all three later-endpoint probabilities start at $1/4$, balancing just the second retained orbital lowers purity from $83/128$ to $5/8$.
 
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
