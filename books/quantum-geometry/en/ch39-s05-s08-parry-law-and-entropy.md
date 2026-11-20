@@ -1133,14 +1133,14 @@ $$
 
 The coset law thus determines the product of the bias factors for each nonzero column. With the offset fixed, those products in turn determine all sign moments, which determine the law. A zero column has no effect on the output. Repeated nonzero columns enter only through their product. For example, factors $(3/4,1/3)$ on one column and $(1/2,1/2)$ on the same column both give $1/4$. Every bias can be recovered individually exactly when the projected columns are nonzero and pairwise distinct.
 
-**An error bound for bias recovery (written derivation).** Let $P,Q$ be two coset laws with the same projected columns and affine offset, and suppose that all absolute sign moments of both laws are at least $\varepsilon>0$. Write $q_a(P),q_a(Q)$ for their bias products on a nonzero column $a$. Then
+**An error bound for bias recovery (written derivation).** Let $P,Q$ be two coset laws with the same projected columns and possibly different affine offsets. Suppose that all absolute sign moments of both laws are at least $\varepsilon>0$. Write $q_a(P),q_a(Q)$ for their bias products on a nonzero column $a$. Then
 
 $$
 \left|\log q_a(P)-\log q_a(Q)\right|
   \le \frac{2}{\varepsilon}\operatorname{TV}(P,Q).
 $$
 
-Translate both laws by the same amount to remove the offset. This preserves total variation and makes every sign moment positive. For each $\lambda$, write the difference of the two log moments as $w_\lambda$ times the difference of the moments. The mean value theorem gives $0\le w_\lambda\le 1/\varepsilon$. If the moments agree, set $w_\lambda=0$. Substitution into the recovery formula gives
+For each $\lambda$, let $m_P,m_Q$ be the two sign moments. Write $\log|m_P|-\log|m_Q|=w_\lambda(m_P-m_Q)$, taking $w_\lambda=0$ when the moments agree. The mean value theorem on the positive absolute moments bounds the log difference by $\big||m_P|-|m_Q|\big|/\varepsilon$. The reverse triangle inequality gives $|w_\lambda|\le 1/\varepsilon$ even when the two moments have opposite signs. Substitution into the recovery formula gives
 
 $$
 \begin{aligned}
