@@ -1085,6 +1085,19 @@ Conversely, suppose a nonempty collection of the nonzero restrictions sums to ze
 
 For example, take independent fair bits $Y_1,Y_2$. The outputs $Y_1$, $Y_2$, and $Y_1+Y_2$ are independent in pairs. The binary sum of all three outputs is always zero, so the family is jointly dependent.
 
+**Total variation in a minimal dependent group (written derivation).** Take a dependent group of outputs $S$ whose every proper subset is jointly independent. Let $\mu$ be its joint law and $\nu$ the product of its marginal laws. For $u\in\{0,1\}^S$, write $\chi(u)=(-1)^{\sum_{i\in S}u_i}$ and let $d=\mathbb E_\mu[\chi]-\mathbb E_\nu[\chi]$. Then
+
+$$
+\begin{aligned}
+\mu(u)-\nu(u)&=2^{-|S|}d\,\chi(u),\\
+\operatorname{TV}(\mu,\nu)&=\frac{|d|}{2}.
+\end{aligned}
+$$
+
+Choose one bit and fix the rest. The two laws agree after deleting that bit because the remaining outputs form a proper subset of $S$. Their probability differences at the two values of the deleted bit therefore sum to zero. Starting from the all-zero vector, each flip on the way to $u$ reverses the sign of the difference. Thus $\mu(u)-\nu(u)=c\,\chi(u)$, where $c=\mu(0)-\nu(0)$. Multiply by $\chi(u)$ and sum over $u$ to obtain $d=2^{|S|}c$. Total variation is half the sum of the absolute mass differences, so it equals $|d|/2$.
+
+For the three fair outputs above, the parity sign is always $1$ under $\mu$ and has mean zero under $\nu$, giving total variation $1/2$. Add an independent biased bit $B$ to the third output, with $\Pr(B=1)=t<1/2$. Every pair is still uniform conditional on $B$, and the binary sum of all three outputs is now $B$. Total variation drops to $(1-2t)/2$. If two outputs are copies of the same biased bit $B$, the joint law instead has parity sign always $1$, while the product of the marginals has sign mean $(1-2t)^2$. In that case the total variation is $2t(1-t)$.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
