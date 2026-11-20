@@ -238,6 +238,25 @@ $$
 Write $x=e^y$. Then $U(x)/x^\theta=G(y)e^{(1/2-\theta)y}$. If $\theta>1/2$, $G$ is bounded on a real tail and the exponential factor tends to zero. Conversely, suppose $\theta\le1/2$. The constant $M$ above is strictly positive. By recurrence of $G$, beyond every threshold there is a natural number $n$ with $G(n)>M/2$. Since $e^{(1/2-\theta)n}\ge1$, the quotient exceeds $M/2$ at arbitrarily large $x=e^n$, including when $\theta=1/2$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.theorem #thm-ch31-mangoldt-quartic-sampling title="A fourth-power sampling criterion for the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampling.rh_iff_eventually_quartic_samples"}
+The Riemann hypothesis holds if and only if there exists $N\in\mathbb N$ such that $U(n^4)<n^2$ for every $n\in\mathbb N$ with $n\ge N$.
+:::
+
+::: proof
+Under RH, every sufficiently large $x$ satisfies $\lvert U(x)\rvert<\sqrt{x}$. Setting $x=n^4$ gives the strict sample bound.
+
+Conversely, assume the sample bound. For sufficiently large $n\ge1$ put $a=n^4$ and $b=(n+1)^4$. Each Mangoldt weight is nonnegative, so multiplying the convex ramp $\max(x/j-1,0)$ by the weight preserves convexity. The sum of the ramps lies below its endpoint chord on $[a,b]$. The remainder $U$ also contains $-x\ln x$ and a linear term. Subtract the tangent to $x\ln x$ at $a$ from $x\ln x$. The difference is nonnegative, and $\ln(b/a)\le b/a-1$ bounds its value at $b$ by $(b-a)^2/a$. Thus for $a\le x\le b$,
+
+$$
+U(x)\le\max\{U(a),U(b)\}+\frac{(b-a)^2}{a}
+\le 4n^2+225n^2=229n^2.
+$$
+
+Here $(n+1)^2\le4n^2$ and $b-a\le15n^3$. Consecutive sample intervals cover the whole tail, and $n^2\le\sqrt{x}$. Apply the bound to the normalized arithmetic kernel of the integrated explicit formula with $x=e^t$. The trivial-zero correction satisfies $\operatorname{trivialT}(t)\le1-\ln2$, so $e^{-t/2}[U(e^t)-\ln(2\pi)+\operatorname{trivialT}(t)]\le229+e^{-t/2}\le230$ for all sufficiently large $t$. The affine upper-bound criterion for the arithmetic kernel now gives RH. The full proof is checked by the Lean kernel.
+:::
+
+The arithmetic input can be stated in terms of the prime-power counting function. For $x\ge2$ the Chebyshev error kernel is integrable and its tail integral equals $-U(x)/x$. At $x=n^4$, the sample hypothesis therefore amounts to proving the strict lower bound $\int_{n^4}^{\infty}(\psi(t)-t)t^{-2}\,dt>-1/n^2$ for every sufficiently large natural number $n$ (`manual derivation`). [`complete_chebyshev_tail_identity`](lean:D5/S3/Weil/Mertens/CompleteChebyshevTailIdentity.complete_chebyshev_tail_identity) · [`chebyshev_error_kernel_integrable`](lean:D5/S3/Weil/Mertens/WeightedPrimeLimit.chebyshev_error_kernel_integrable)
+
 **How does the modulus-one Mellin transform detect a zero?** Consider the remainder $U$ in Clause 6 of [@thm-ch34-riemann-prime-arc-bridge]. In the external formalization, each prime power $n$ contributes a ramp $\max(x/n-1,0)$ with weight $\Lambda(n)$. The ramp starts at $x=n$ and its Mellin integral for $\operatorname{Re}(s)>1$ is $n^{-s}/[s(s-1)]$. Summing with the weights $\Lambda(n)$ produces the logarithmic derivative $-\zeta'(s)/\zeta(s)$. Integrating the two elementary correction terms in $U$ gives
 
 $$

@@ -238,6 +238,25 @@ $$
 写 $x=e^y$，则 $U(x)/x^\theta=G(y)e^{(1/2-\theta)y}$。当 $\theta>1/2$ 时，$G$ 在充分大的实数 $y$ 上有界，指数因子趋于零。反过来，设 $\theta\le1/2$。上面的常数 $M$ 严格为正。由 $G$ 的回归性，越过任何阈值都有自然数 $n$ 使 $G(n)>M/2$。此时 $e^{(1/2-\theta)n}\ge1$，所以在任意远的点 $x=e^n$ 商仍大于 $M/2$，包括 $\theta=1/2$。完整证明由 Lean 内核检查。
 :::
 
+::: {.theorem #thm-ch31-mangoldt-quartic-sampling title="第四次幂采样的黎曼猜想判据" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampling.rh_iff_eventually_quartic_samples"}
+黎曼猜想成立，当且仅当存在 $N\in\mathbb N$，使每个 $n\in\mathbb N$ 在 $n\ge N$ 时都满足 $U(n^4)<n^2$。
+:::
+
+::: proof
+在 RH 下，充分大的 $x$ 都满足 $\lvert U(x)\rvert<\sqrt{x}$，取 $x=n^4$ 即得所需的严格上界。
+
+反过来，设采样上界成立。取充分大的 $n\ge1$，令 $a=n^4$、$b=(n+1)^4$。每个曼戈尔特权重非负，乘以凸折线 $\max(x/j-1,0)$ 后仍是凸函数，因此折线之和在 $[a,b]$ 上不超过端点的弦。余项 $U$ 还含有 $-x\ln x$ 和线性项。把 $x\ln x$ 在 $a$ 的切线减去，留下非负函数，其在 $b$ 的值由 $\ln(b/a)\le b/a-1$ 控制在 $(b-a)^2/a$ 以内。于是对于 $a\le x\le b$，
+
+$$
+U(x)\le\max\{U(a),U(b)\}+\frac{(b-a)^2}{a}
+\le 4n^2+225n^2=229n^2.
+$$
+
+这里用了 $(n+1)^2\le4n^2$ 和 $b-a\le15n^3$。相邻采样区间覆盖整个尾部，且 $n^2\le\sqrt{x}$。将界代入积分显式公式的归一化算术核，取 $x=e^t$，平凡零点修正满足 $\operatorname{trivialT}(t)\le1-\ln2$。所以在充分大的 $t$ 上，$e^{-t/2}[U(e^t)-\ln(2\pi)+\operatorname{trivialT}(t)]\le229+e^{-t/2}\le230$。算术核的仿射上界判据遂给出 RH。完整证明由 Lean 内核检查。
+:::
+
+这个判据把独立的算术任务落在素数幂的计数上。对 $x\ge2$，切比雪夫误差核可积，其尾积分等于 $-U(x)/x$。在 $x=n^4$ 处，所需的采样假设因而等价于对每个充分大的自然数 $n$ 证明严格下界 $\int_{n^4}^{\infty}(\psi(t)-t)t^{-2}\,dt>-1/n^2$（`手工推导`）。 [`complete_chebyshev_tail_identity`](lean:D5/S3/Weil/Mertens/CompleteChebyshevTailIdentity.complete_chebyshev_tail_identity) · [`chebyshev_error_kernel_integrable`](lean:D5/S3/Weil/Mertens/WeightedPrimeLimit.chebyshev_error_kernel_integrable)
+
 **模 $1$ 的 Mellin 变换怎样看见零点？** 对 [@thm-ch34-riemann-prime-arc-bridge] 第 6 款的余项 $U$，外部形式化给出如下 Mellin 恒等式。每个素数幂 $n$ 的权重乘以 $\max(x/n-1,0)$，在 $x=n$ 处起步。对 $\operatorname{Re}(s)>1$，这段折线的 Mellin 积分是 $n^{-s}/[s(s-1)]$。按 $\Lambda(n)$ 求和，便出现对数导数 $-\zeta'(s)/\zeta(s)$。加上 $U$ 中两个初等修正项的积分，得到
 
 $$
