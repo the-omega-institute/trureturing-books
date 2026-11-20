@@ -188,6 +188,14 @@ With two orbits, let $u,v$ be the per-seed weights in the two orbits scaled by $
 
 Three orbits suffice. The complete eight-outcome grid of denominator $1680$ satisfies the divisibility hypothesis above and has a three-orbit construction. Multiplying each integer coordinate by eight embeds the original grid into the finer grid. The embedding preserves all probabilities and commutes with each label permutation, so the fine-grid law and readout also calibrate the original grid. The minimum support is $3\cdot8!=120960$. Under these assumptions a natural-number budget $B$ is feasible exactly when $120960\le B$. See the [exact support budget theorem](lean:D5/S3/ConceptDynamics/Attribution/EightOutcomeGridSupport.grid_support_budget_iff).
 
+**Seeds fixed by a normal subgroup.** Let a group $G$ act on a nonempty finite input set $X$ and a finite output set $Y$, let $P$ be a $G$-covariant probability kernel, and let $H\triangleleft G$. Among finite calibrations of $P$ with positive $G$-invariant weights and pointwise $G$-covariant readouts, the maximum total weight of seeds fixed by $H$ is
+$$
+\min_{x\in X}\sum_{y\in Y^{H\cap G_x}}P(x,y).
+$$
+Here $G_x$ fixes the input $x$, and $Y^{H\cap G_x}$ consists of the outputs fixed by every element of $H\cap G_x$. Covariance forces any $H$-fixed seed to read out in this set at $x$, giving the bound row by row.
+
+For attainment, first restrict the input and output actions to $H$ and apply the full-group result to $H$. Push its attaining seed law to the deterministic tables $t:X\to Y$ by sending each seed to its entire readout. This preserves the row marginals, and every $H$-fixed seed maps to an $H$-fixed table. Under the table action $(g\cdot t)(x)=g\cdot t(g^{-1}\cdot x)$, the image of $G$ is finite. Average the table law over that image. Each translate has marginals $P$ by covariance. Normality preserves the set of $H$-fixed tables under every translate, so the average has at least the original $H$-fixed seed mass on that set. Use the positive-weight tables as the seeds and evaluate at $x$. The row bound makes the attained mass exact. The finite averaging step is an instance of orbit averaging for symmetric linear constraints. [Bödi, Herr and Joswig, Proposition 13](https://arxiv.org/html/1012.4941#Thmtheorem13)
+
 ## 39.3.3 Formal Anchor Theorem, Literature & Appendix E Scope, Quantitative Audit, and Bridge to the Exteriorless Ternion Ontology {#sec-ch39-26-3}
 
 We formalize the five-postulate projection map, assemble the twenty-three frozen Lean 4 anchors of its two theorem boxes, record classical attributions, and verify all five invariants quantitatively below:
