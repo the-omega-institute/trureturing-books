@@ -98,7 +98,11 @@ and are systems under an explicit restriction of preparations, tests and operati
 outcome rule covariant at ties exists; for a stochastic record process with one terminal record, the Born rule
 at every stage is equivalent to the weights being martingales, and a hidden-threshold or simplex
 selection is Born exactly when its auxiliary law is the invariant one; which dynamics is realised is
-not decided.  In a closed register of $2n$ systems in a global singlet, an
+not decided.  For finite memories, a Gram window weakly narrows the corridor of the next comparison, a
+memory reset costs at least $k_BT$ times the drop in conditional entropy while index restriction can cost
+nothing, an encoded phase is exactly recoverable iff the inaccessible conditional states agree, and
+local windows of several observers glue iff a positive semidefinite completion exists (on chordal
+patterns iff every clique is positive), which still gives neither a joint state nor joint outcomes.  In a closed register of $2n$ systems in a global singlet, an
 exchange constraint gives conditional Schr\"odinger dynamics relative to an internal clock, with an
 explicit source from exchanges across the clock cut, and the unobservable clock [Cl] follows from the
 invisibility of the total phase under a stated bridge hypothesis.  The dichotomies of configurations form four-dimensional
@@ -258,6 +262,8 @@ composite reading built on one clock's complex structure, and a right transport 
 statistics unchanged is unobservable (Section~\ref{sec:closedreg}).
 \item[{[U], [A]}] The physical specification of a closed-universe state, and of an observer's accessible
 algebra (Hypotheses~U and~A, Section~\ref{sec:closedreg}).
+\item[{[Gw]}] A finite Gram window of stored comparisons; [Ue]: the entropy drop of a reset equals the log
+area ratio of the cap corridors; [Ca]: causal record access in tensor-factor form (Section~\ref{sec:finitemem}).
 \item[{[R]}] A record process: one terminal vertex and absorbing record faces in the observer's filtration
 (Definition~\ref{def:soprocess}).  [Tr]: a linear number of terminal transcripts in the tick count.  [Ap]: a
 preparation-independent, unitary-invariant apparatus sampling law (Section~\ref{sec:outcomes}).
@@ -386,8 +392,8 @@ the structure (Section~\ref{sec:sm}).
 Part~I (Sections~\ref{sec:axiom}--\ref{sec:geometry}) is the kinematics: the axiom and its solutions, one
 system, many systems, sub-structures of every dimension, and the geometry of states.  Part~II
 (Sections~\ref{sec:closedreg}--\ref{sec:outcomes}) concerns observers inside the structure: a closed universe with internal
-clocks, and single outcomes as bounded martingales with finite-tick certification; sections on finite-memory observers, erasure and consensus, and
-computation are to follow.  Part~III will collect bounds and budgets: speed limits, the Tsirelson bound and an
+clocks; finite memory (Gram windows, the arrow of forgetting, erasure and consensus); and single outcomes as
+bounded martingales with finite-tick certification; a section on computation is to follow.  Part~III will collect bounds and budgets: speed limits, the Tsirelson bound and an
 entanglement budget.  Part~IV (Sections~\ref{sec:eventspace}--\ref{sec:sm}) contains the space of events,
 fields of structures, the variable radius, the round four-sphere target from a pair, topological
 particles with the Skyrme term, and the
@@ -813,6 +819,7 @@ Uncertainty relation & equality (Thm.~\ref{thm:unc}) & none\\
 One clock; tensor product & Thm.~\ref{thm:oneclock}; or Thm.~\ref{thm:product}, Cor.~\ref{cor:ampmult}; Prop.~\ref{prop:avg} & clock-read factors with [Bil$_\cL$], [Span], [Loc], [O], [C2], [N], C1(b); or C0, C1, [Span], and C2 for $N\ge3$\\
 All unit vectors are states; all unitaries are operations & Thm.~\ref{thm:comp} & C0--C2, [Span]; C3 for operations\\
 Measurement update & conditional state $K_a\psi/\lVert K_a\psi\rVert$ (Prop.~\ref{prop:relative}, Thm.~\ref{thm:instruments}) & C0--C3, Convention T\\
+Finite memory & Gram-window extension and weak nesting (Thm.~\ref{thm:fmschur}); reset heat $\ge k_BT\,\Delta S(L|K)$ (Prop.~\ref{prop:fmheat}); exact phase recovery iff equal inaccessible states (Thm.~\ref{thm:fmeraser}); gluing iff PSD completion, chordal clique test (Thm.~\ref{thm:fmglue}) & [Gw]; Gibbs bath, joint unitary, kept side marginal; [Ca]\\
 Single outcomes & no covariant outcome rule (Prop.~\ref{prop:nooutcome}); for a record process, Born at every stage $\Leftrightarrow$ martingale weights (Thm.~\ref{thm:sorigidity}); threshold and simplex selection Born $\Leftrightarrow$ invariant auxiliary law (Thms.~\ref{thm:sosphere}, \ref{thm:sosimplex}) & [R]; [Ap] for an apparatus; the realised dynamics: open\\
 \bottomrule
 \end{tabular}
@@ -1868,8 +1875,8 @@ of events.
 %=====================================================================================
 \paperpart{Part II.  Observers inside}
 \noindent This part treats what an observer inside the structure can know and record.  It contains a
-closed universe with internal clocks and the single-outcome section; sections on finite-memory
-observers, erasure and consensus, and computation are in preparation.
+closed universe with internal clocks, finite memory with erasure and consensus, and single outcomes; a
+section on computation is in preparation.
 
 %=====================================================================================
 \section{The closed universe: a global singlet and internal clocks}\label{sec:closedreg}
@@ -2321,6 +2328,431 @@ law or a black-hole Page curve, a controlled local model with a continuum limit 
 modular information.
 \end{remark}
 
+
+%=====================================================================================
+\section{Finite memory: Gram windows, the arrow of forgetting, erasure and consensus}\label{sec:finitemem}
+How does a finite record constrain the next comparison, and when can another observer recover or agree
+with what was recorded?  A Gram window determines an exact extension set, and retaining more comparisons
+weakly decreases the squared norm available outside their span, with an explicit equality criterion and a
+projection limit.  Physical forgetting costs heat only through a memory reset; loss of access to coherent
+records has a different criterion, set by the states left in the inaccessible register.  Local
+comparison windows of several observers have a common realisation exactly when the partial Gram matrix
+has a positive semidefinite completion; a common Gram matrix gives neither a joint state nor joint
+outcomes.  These results refine the restriction model of Proposition~\ref{prop:curestrict}.
+
+\subsection{Gram windows and loss of constraints}\label{sec:fmwindows}
+
+\smallskip\noindent\textbf{Hypothesis Gw (finite Gram window).}  An observer stores, at time $t$, the Gram matrix
+$G_M=(\ip{v_i}{v_j})_{i,j}$ of the unit representatives $v_j$ of its last $M$ records in a real or complex Hilbert space $V$
+(phase conventions are part of the stored data); records are ordered newest to oldest, so depth $M$ uses the
+first $M$ of a fixed list.  Write $B_Ma=\sum_{j\le M}v_ja_j$, $S_M=\mathrm{ran}\,B_M$, $P_M$ the orthogonal projection onto $S_M$, and for
+proposed overlaps $c\in\mathrm{ran}\,G_M$ the \emph{Schur slack} $\Delta(M;c)=1-c^*G_M^+c$ ($+$: Moore--Penrose inverse; $\Delta(0;\cdot)=1$).  Finite
+depth is a storage or sampling assumption.
+
+\begin{theorem}[extension, weak nesting and saturation]\label{thm:fmschur}
+For $G=G_M$: $\bigl(\begin{smallmatrix}G&c\\ c^*&1\end{smallmatrix}\bigr)\succeq0$ iff $c\in\mathrm{ran}\,G$ and $\Delta(M;c)\ge0$; the bordered rank is $\rk G+\mathbf1_{\{\Delta>0\}}$, the
+bordered determinant is $\det G\cdot\Delta$ for invertible $G$, and the unit vectors with overlaps $c$ are $BG^+c+w$, $w\in S_M^\perp$,
+$\lVert w\rVert^2=\Delta$ (so positive slack in a fixed ambient space also needs $S_M^\perp\ne0$).  For a fixed unit $x$ and $c_M=B_M^*x$,
+\[
+\Delta(M;c_M)=\lVert(\mathbf1-P_M)x\rVert^2,\qquad \Delta(M;c_M)-\Delta(M{+}1;c_{M+1})=\lVert(P_{M+1}-P_M)x\rVert^2\ge0 ,
+\]
+so the corridors $\{x:\lVert(\mathbf1-P_M)x\rVert^2\ge\delta\}$ are \emph{weakly} nested (deleting anchors reverses the inclusion), and the slack
+decreases to $\lVert(\mathbf1-P_\infty)x\rVert^2$, $P_\infty$ the projection onto the closed union of the spans (eventually constant in finite
+dimension).
+\end{theorem}
+\begin{proof}
+For $a\in\ker G$, positivity on $(sa,1)$ for all scalars $s$ forces $a^*c=0$.  With $b=G^+c$ the form on $(a,z)$ is
+$(a+bz)^*G(a+bz)+\lvert z\rvert^2\Delta$, and the shear has determinant one.  $B^*B=G$ gives $\ker B=\ker G$, $B^*BG^+c=c$, $\lVert BG^+c\rVert^2=c^*G^+c$, and
+other solutions differ by $w\in\ker B^*=S_M^\perp$.  For actual overlaps the minimum-norm solution is $P_Mx$, and
+$S_{M+1}=S_M\oplus(S_{M+1}\cap S_M^\perp)$ gives the increment; approximation of $P_\infty x$ from some $S_{M_0}$ gives the limit
+\cite{n2-schur,n2-albert}.
+\end{proof}
+
+\begin{corollary}[overlap and cap corridors]\label{cor:fmcaps}
+With one extra dimension available the feasible overlaps form the ellipsoid $G^{1/2}\{z\in\mathrm{ran}\,G:\lVert z\rVert\le1\}$ (volume
+$\pi^{M/2}\sqrt{\det G}/\Gamma(1+M/2)$ for real invertible $G$), and the deeper ellipsoid projects onto the old one; if the
+anchors span $V$, only $\lVert z\rVert=1$ is allowed.  For real directions on $S^2$ and $0<\alpha<\pi/2$, the caps
+$\Omega_M=\{x:v_j\cdot x\ge\cos\alpha,\ j\le M\}$ satisfy $\Omega_{M+1}\subseteq\Omega_M$ and $\lvert\Omega_M\rvert\downarrow\lvert\bigcap\Omega_M\rvert$; two anchors more than $2\alpha$ apart give $\Omega=\varnothing$,
+and a nested chain with empty intersection is empty at a finite stage; a nonempty $\Omega_M$ ($M\ge1$) is
+geodesically convex and can have zero area.  Removing an anchor enlarges $\Omega$, strictly iff a newly
+admitted direction violated its inequality.
+\end{corollary}
+\begin{proof}
+Spectral coordinates and Theorem~\ref{thm:fmschur}; continuity of measure from above; compactness; the angular
+triangle inequality; the normalised chord between two feasible points lies on their shorter arc and
+normalisation only increases positive lower bounds.
+\end{proof}
+
+\begin{remark}[growth does not inevitably lock; sliding need not tighten]\label{rem:fmnolock}
+Nesting is weak and can be stationary: identical anchors give a constant cap of area $2\pi(1-\cos\alpha)$, and in $\ell^2$
+the orthogonal candidate $x=e_1$ with anchors $v_j=e_{j+1}$ has slack one at every depth; the limit is a squared projection
+residual, and a physical Zeno locking requires dynamics (Example~\ref{ex:fmzeno}).  A sliding window need not
+tighten: two consecutive antipodal single-anchor caps are disjoint, hence incomparable; deleting a
+duplicate anchor changes nothing.
+\end{remark}
+
+\begin{example}[saturation, release and fixed dimension]\label{ex:fmgram}
+For real $a=\ip{v_1}{v_2}$, $b=\ip{v_1}x$, $c=\ip{v_2}x$ the bordered determinant is $1+2abc-a^2-b^2-c^2=(1-a^2)(1-b^2)-(c-ab)^2$.  For $a=b=\tfrac45$
+the feasible range is $\tfrac7{25}\le c\le1$, with determinant $\tfrac{13}{125}$ at $c=\tfrac45$ and $-\tfrac7{25}$ at $c=0$; deleting the second anchor gives
+$1-b^2=\tfrac9{25}$ and releases $c$.  For $a=b=\tfrac12$ the endpoints are $-\tfrac12$ and $1$.  For $c_M=\tfrac12\mathbf1$ and $G_M=\tfrac23I+\tfrac13\mathbf1\mathbf1^*$:
+$\det G_M=(\tfrac23)^{M-1}(M+2)/3$ and $\Delta=(M+8)/(4(M+2))\downarrow\tfrac14$; for orthogonal anchors $\Delta=1-M/4$, with the unique solution $\tfrac12\sum v_j$
+at $M=4$ and none for $M\ge5$.  Three independent real anchors span $\R^3$ and their Gram matrix fixes their
+geometry up to $\OO(3)$, reflections included \cite[Prop.~0.25]{PaperI}: three anchors fix no chirality, and
+their caps can contain an open patch while every actual direction has zero slack.  Two caps whose
+centres are exactly $2\alpha$ apart meet in one point.
+\end{example}
+
+\begin{proposition}[memory capacity]\label{prop:fmcapacity}
+A $d$-dimensional register holds at most $d$ perfectly distinguishable density matrices; a Gram window of
+pure descriptions can index more than $d$ records and has rank at most $d$; $\ip uv=1$ iff $u=v$ for unit vectors.
+\end{proposition}
+\begin{proof}
+A perfectly discriminating POVM forces pairwise orthogonal supports; $\lVert u-v\rVert^2=2-2\re\ip uv$.
+\end{proof}
+
+\subsection{Forgetting and heat}\label{sec:fmheat}
+
+\begin{proposition}[restriction and thermodynamic reset]\label{prop:fmheat}
+(i) Deleting comparison data implements the readout restriction of a partial trace when the records lie
+in distinct tensor factors and the retained comparisons act on the retained factors; then every retained
+expectation is preserved (Proposition~\ref{prop:curestrict}).
+(ii) Let $L$ be an old memory, $K$ retained side information, $R$ a finite reservoir, initially $\rho_{LK}\otimes\omega_R$ with
+$\omega_R=e^{-\beta H_R}/Z$ (Gibbs initialisation), $\beta=1/k_BT>0$; let a joint unitary give $\rho'_{LKR}$ with $\rho'_K=\rho_K$ (side marginal
+kept).  With $Q_R=\tr H_R(\rho'_R-\omega_R)$ and $S(L|K)=S(LK)-S(K)$,
+\[
+\beta Q_R+\Delta S(L|K)=D(\rho'_{LKR}\Vert\rho'_{LK}\otimes\omega_R)\ge D(\rho'_R\Vert\omega_R)\ge0,\qquad\text{so}\qquad Q_R\ge k_BT\,[S(L|K)-S'(L|K)],
+\]
+with equality iff $\rho'_{LKR}=\rho'_{LK}\otimes\omega_R$.  For a correlated input with Gibbs reservoir marginal, $-I(LK{:}R)_{\mathrm{in}}$ is added on the
+right of $\beta Q_R+\Delta S(L|K)=I(LK{:}R)'+D(\rho'_R\Vert\omega_R)$.
+\end{proposition}
+\begin{proof}
+(i) is the defining property of the partial trace.  (ii) On the support, $D=-S(\rho'_{LKR})+S(\rho'_{LK})+\beta\tr H_R\rho'_R+\log Z$; unitary invariance,
+$S(\omega_R)=\beta\tr H_R\omega_R+\log Z$ and $\rho'_K=\rho_K$ give the identity; monotonicity of relative entropy under $\tr_{LK}$ and under the
+trace gives the inequalities \cite{n2-lindblad,n2-uhlmann-dpi}, and the equality case is that of
+Proposition~\ref{prop:cubalances}.  For trivial $K$ this is Proposition~\ref{prop:culandauer} and Reeb--Wolf
+\cite[Thm.~3]{n1-reeb}; the one-bit case is Landauer's bound $k_BT\log2$ \cite{n1-landauer,n2-bennett}.
+\end{proof}
+
+\begin{remark}[index restriction costs no heat]\label{rem:fmzeroheat}
+\emph{Pure index restriction or discarding a record can cost zero heat}: with degenerate Hamiltonians a
+controlled copy into a pure record realises the pinching $\Pi(\rho)=\sum P_j\rho P_j$ by a joint unitary, and restriction then
+raises the local entropy by $h(\sin^2\theta)$ for $(\cos\theta,\sin\theta)$ (and removes squared Hilbert--Schmidt mass $\tfrac12\sin^22\theta$; maximal
+$\log2$ and $\tfrac12$ at $\theta=\pi/4$; in dimension $d$ a state diagonal in a basis unbiased to the pinching goes to $\mathbf1/d$) with zero
+reservoir energy change; the copy can be uncomputed while accessible.  The bound of
+Proposition~\ref{prop:fmheat} concerns a physical reset: reusing a maximally mixed bit costs at least $k_BT\log2$, and
+exact purification by a finite faithful bath is excluded by the rank argument of
+Proposition~\ref{prop:culandauer}.  This is the arrow of forgetting: a record arrow under repeated discard and
+reuse, with these resources.
+\end{remark}
+
+\smallskip\noindent\textbf{Hypothesis Ue (uniform phase-space encoding).}  If deletion enlarges a cap corridor from area $A>0$ to
+$A'$, the old memory was encoded and reset with $S(L|K)-S'(L|K)=q:=\log(A'/A)$ (e.g.\ uniform classical memories on $m$ and $m'$
+cells with $m/m'=A'/A$).  Under Gibbs initialisation, joint unitarity and a kept side marginal the reset then costs
+at least $k_BTq$.  The identification of entropy drop and geometry is this hypothesis; it is unavailable at $A=0$.
+
+\subsection{Coherent erasure and the accessible algebra}\label{sec:fmerasure}
+
+\smallskip\noindent\textbf{Hypothesis Ca (causal record access).}  In the tensor-factor form of Hypothesis~A
+(Section~\ref{sec:cuhorizon}), the observer acts jointly on the system $S$ and an accessible record $A$, and the
+inaccessible record $E$ is traced out.  In the static-patch model the two-way region of an observer is
+$W_x=I^+(\gamma_x)\cap I^-(\gamma_x)$ (Proposition~\ref{prop:static}), and records outside $J^-(\gamma_x)$ cannot signal to it; assignment to $A$ also
+needs availability within the experiment and coherent control.  The cap geometry specifies neither a
+register factorisation nor dynamics.
+
+\begin{theorem}[exact recovery of an encoded phase]\label{thm:fmeraser}
+Let a controlled isometry encode a qubit by $\lvert i\rangle\mapsto\lvert i\rangle\lvert r_i\rangle_{AE}$, $X=\tr_E\lvert r_0\rangle\langle r_1\rvert$, $\sigma_i=\tr_A\lvert r_i\rangle\langle r_i\rvert$.  For the
+equal-amplitude inputs of opposite sign,
+$\tfrac12\lVert\rho^+_{SA}-\rho^-_{SA}\rVert_1=\lVert X\rVert_1=\lVert\sigma_0^{1/2}\sigma_1^{1/2}\rVert_1$.  One channel on $SA$ recovers every input qubit exactly iff $\sigma_0=\sigma_1$ (equal
+inaccessible conditional states); orthogonal supports make all phases indistinguishable on $SA$.  For product
+records $r_i=a_i\otimes e_i$, $\gamma=\ip{e_1}{e_0}$, input $\sqrt p\lvert0\rangle+e^{i\chi}\sqrt{1-p}\lvert1\rangle$ and a record effect $0\le F\le\mathbf1$ on $A$ with
+$a=\ip{a_0}{Fa_0}$, $b=\ip{a_1}{Fa_1}$, $d=\ip{a_1}{Fa_0}$, the outcome has probability $pa+(1-p)b$ and conditional fringe visibility
+$2\sqrt{p(1-p)}\lvert d\gamma\rvert/(pa+(1-p)b)\le\lvert\gamma\rvert$; orthogonal accessible markers read in the diagonal basis give two outcomes of probability $\tfrac12$
+with opposite fringes of visibility $2\sqrt{p(1-p)}\lvert\gamma\rvert$.  The unread system marginal is invariant under every
+record-only channel.
+\end{theorem}
+\begin{proof}
+The difference of the two accessible states is $\bigl(\begin{smallmatrix}0&X\\ X^*&0\end{smallmatrix}\bigr)$.  With coefficient matrices $C_i$, $X=C_0C_1^*$ and $\sigma_i=(C_i^*C_i)^{\mathsf T}$,
+whose polar factors preserve the singular values of $\lvert C_0\rvert\lvert C_1\rvert$.  $\lVert\sqrt{\sigma_0}\sqrt{\sigma_1}\rVert_1=\max_U\lvert\tr U\sqrt{\sigma_0}\sqrt{\sigma_1}\rvert\le1$ with equality iff
+$\sigma_0=\sigma_1$; a channel contracts trace distance, so exact recovery needs distance one, and for $\sigma_0=\sigma_1$ a
+unitary on $A$ conditioned on label $1$ maps $r_1$ to $r_0$.  For $F$ the unnormalised state has diagonal $(pa,(1-p)b)$ and
+off-diagonal $e^{-i\chi}\sqrt{p(1-p)}\,d\gamma$; $\lvert d\rvert\le\sqrt{ab}$ and the arithmetic--geometric mean inequality.  Record-only channels fix $\mathbf1$ in
+the dual.
+\end{proof}
+
+\begin{remark}[forgetting or replay does not universally restore interference]\label{rem:fmcopies}
+A discarded orthogonal marker makes opposite phases identical on the accessible algebra, and no later
+operation on $SA$ restores them.  With product copies the coherence is multiplied by $\prod_j\gamma_j$; controlled
+inverse couplings on accessible copies remove their factors; a conjugate replay on a subset multiplies by
+$\prod\overline{\gamma_j}$, so the all-copy replay gives $\prod\lvert\gamma_j\rvert^2$, which restores interference only if every $\lvert\gamma_j\rvert=1$.  For two copies with
+records $((1,0),(i,0))$ the coherence $\tfrac12$ becomes $-\tfrac12$, then $-\tfrac i2$ after one replay and $\tfrac12$ after both; a zero overlap
+makes replay ineffective.  Orthogonal accessible markers instead support the conditional eraser
+protocol of Theorem~\ref{thm:fmeraser} \cite{n2-scully,n2-herzog,n2-kim}; conditional fringes need the outcome
+label, and summing outcomes returns the original marginal.
+\end{remark}
+
+\subsection{Agreement between observers}\label{sec:fmagreement}
+
+\begin{theorem}[gluing local windows]\label{thm:fmglue}
+Let observers supply Hermitian Gram matrices on windows of a finite labelled record set, agreeing on
+common entries, with all diagonals specified, and let the graph join labels whose comparison is
+specified.  A simultaneous realisation by unit vectors exists iff the partial matrix has a positive
+semidefinite completion with unit diagonal (of rank at most $d$ in dimension $d$).  If the graph is chordal, a
+completion exists iff every fully specified clique submatrix is positive semidefinite, and the minimum
+rank is the largest clique rank \cite{n2-dirac,n2-grone}; on every nonchordal graph there are locally
+positive definite data with no completion.
+\end{theorem}
+\begin{proof}
+A completion's square root gives a realisation.  For chordal graphs eliminate a simplicial vertex,
+realise the rest in dimension $d$ (the largest clique rank) by induction, realise the vertex's clique, and
+match the two realisations of the common neighbours by an isometry of their spans extended to a unitary
+(\cite[Thm.~7]{n2-grone} and closure).  Every clique of the union graph must be tested: separate windows can
+supply the three edges of a triangle that no window contains.  For an induced cycle of length $k\ge4$, put
+$r=1-1/(2k^2)$ on all edges but one and $-r$ on the closing edge (other off-diagonals zero): cliques are positive
+definite, consecutive distances are $\sqrt{2-2r}=1/k$, so the endpoints are within $(k-1)/k<1$, whereas $-r$ requires distance
+$\sqrt{2+2r}>1$.
+\end{proof}
+\noindent This is the completion structure of the companion's Part~0: a triangle-flat comparison on a chordal
+graph has a potential \cite[Thm.~0.12, Prop.~0.18]{PaperI}, and cycles carry the obstruction
+\cite[Sec.~0.4]{PaperI}; Gram realisation and its uniqueness up to a unitary are
+\cite[Props.~0.24, 0.25]{PaperI}.
+
+\begin{example}[comparison, marginal and outcome consistency]\label{ex:fmoutcomes}
+A four-cycle with three edges $+1$ and one edge $-1$ has positive semidefinite edge windows and no realisation
+(the first three force equal vectors); $I_4$ has a completion but none in dimension three.  Two realised
+directions $v,-v$ already give $\Omega_A\cap\Omega_B=\varnothing$ for every $\alpha<\pi/2$.  \emph{A common Gram does not yield a joint state}: if $AB$
+and $AC$ are both assigned the pure Bell state, a positive extension with pure $AB$ marginal is a product
+across $AB|C$, so its $AC$ marginal is a product, a contradiction.  \emph{Nor joint outcomes}: for $\lvert\Phi^+\rangle$ with
+$A_1=Z$, $A_2=X$, $B_{1,2}=(Z\pm X)/\sqrt2$ the CHSH sum is $2\sqrt2$, exceeding the bound $2$ of any joint $\pm1$ assignment
+\cite{n2-chsh}, although the four correlations have a real Gram realisation by the corresponding
+axes in a plane.  Extended Wigner-friend protocols locate the outcome question with further assumptions
+\cite{n2-brukner,n3:Bong}.
+\end{example}
+
+\begin{example}[contextuality]\label{ex:fmcontext}
+In the Peres--Mermin square with rows $(X\otimes\mathbf1,\mathbf1\otimes X,X\otimes X)$, $(\mathbf1\otimes Z,Z\otimes\mathbf1,Z\otimes Z)$, $(X\otimes Z,Z\otimes X,Y\otimes Y)$ every row and
+column consists of commuting observables, with products $+\mathbf1$ except the last column ($-\mathbf1$); a sign assignment
+respecting the context products would give $+1$ and $-1$ for the product of all six context products
+\cite{n2-peres,n2-mermin}.  The obstruction concerns signs on overlapping contexts, not inner products.
+\end{example}
+
+\begin{theorem}[perfect records select an operational basis]\label{thm:fmpointer}
+If the reduced channel to $S$ and fragments $F_1,\dots,F_N$ is $\rho\mapsto\sum_i\rho_{ii}\lvert i\rangle\langle i\rvert\otimes\bigotimes_j\sigma_i^j$ with $\sigma_i^j$ of pairwise
+orthogonal supports for each $j$, every observer reads the same label by a local measurement without
+disturbing the output, and among rank-one bases preserved by the system marginal the pointer projectors
+are unique up to permutation.  The same holds for a coherent controlled copy when at least one disjoint
+perfect copy is discarded.
+\end{theorem}
+\begin{proof}
+Project on the conditional supports (completing the test); the marginal on $S$ is pinching, whose rank-one
+fixed projectors are diagonal; a discarded orthogonal copy kills the cross terms.
+\end{proof}
+
+\begin{remark}[generic broadcast; cited]\label{rem:fmbph}
+Environment-induced selection and quantum Darwinism \cite{n2-zurek81,n2-zurek09,n2-blumekohout}
+motivate the distinction between stability and redundancy.  Brand\~ao, Piani and Horodecki's
+generic-channel theorem \cite[Thm.~1]{n2-bph} gives, for fixed input dimension and $0<\delta<1$, one POVM and at
+least $(1-\delta)N$ of $N$ outputs whose marginal channels are $o(1)$-close in diamond norm to measure-and-prepare channels
+$\rho\mapsto\sum_i\tr(M_i\rho)\sigma_i^j$; a constant-output channel satisfies this without revealing a label.  Perfect distinguishability
+and nondemolition (Theorem~\ref{thm:fmpointer}) give the operational claim, in the spectrum-broadcast setting
+\cite{n2-horodecki}.
+\end{remark}
+
+\begin{proposition}[redundancy in a two-branch model]\label{prop:fmredundancy}
+For the product-branch encoding of Theorem~\ref{thm:fmeraser} with copies $J$, weights $p,1-p$, overlaps $\gamma_j$, $g_F=\prod_{j\in F}\gamma_j$ and
+$H(z)=h\bigl((1-\sqrt{1-4p(1-p)(1-\lvert z\rvert^2)})/2\bigr)$: $I(S{:}F)=H(g_J)+H(g_F)-H(g_{J\setminus F})$, which is $0$ at $F=\varnothing$, $2S(\rho_S)$ at $F=J$, and tends to $h(p)$ when both
+$g_F$ and $g_{J\setminus F}$ tend to zero.  For $p=\tfrac12$, $N=16$, $\lvert\gamma_j\rvert=0.3$ and $3\le\lvert F\rvert\le13$, $\lvert I(S{:}F)-S(\rho_S)\rvert<5.26\times10^{-4}$ bits.
+\end{proposition}
+\begin{proof}
+The reduced fragment state is $CC^*$ with $C^*C$ of trace one and determinant $p(1-p)(1-\lvert g_F\rvert^2)$; purity gives $S(SF)=S(J\setminus F)$.  At
+$p=\tfrac12$, $H(0)-H(z)=\int_0^{\lvert z\rvert}\mathrm{artanh}\,t\,dt\le\lvert z\rvert^2/2+\lvert z\rvert^4/[12(1-\lvert z\rvert^2)]$, and both moduli are at most $0.3^3=0.027$.
+\end{proof}
+
+\begin{theorem}[Bures--Wasserstein barycentre]\label{thm:fmbary}
+For positive definite $A_j$ and weights $w_j>0$ summing to one, $f(X)=\sum_jw_j[\tr X+\tr A_j-2\tr(A_j^{1/2}XA_j^{1/2})^{1/2}]$ has a unique positive
+semidefinite minimiser $W$, which is positive definite and characterised by $T_jWT_j=A_j$, $T_j>0$, $\sum_jw_jT_j=\mathbf1$
+\cite[Thm.~8, Eq.~(57)]{n2-bjl}; on the trace-one slice the minimiser is unique and positive definite, with
+$\sum_jw_jT_j=\lambda\mathbf1$.
+\end{theorem}
+\begin{proof}
+$2\tr(A^{1/2}XA^{1/2})^{1/2}\le\tr(XT)+\tr(AT^{-1})$ for $T>0$, with equality iff $TXT=A$ (minimise $\lVert T^{1/2}X^{1/2}-T^{-1/2}A^{1/2}U\rVert_{\mathrm{HS}}^2$ over unitaries), so twice the
+trace square root is an infimum of affine majorants and strictly concave on segments of positive definite
+matrices.  $f$ is coercive; at singular $X$, $X+t\mathbf1$ gains at least $\sqrt{t\lambda_{\min}(A_j)}$ per term against a linear cost, also after
+renormalisation to trace one.  The derivative is $\tr(T\,\cdot)$, giving the balance conditions, and a positive solution
+gives a supporting affine bound, hence the minimiser.
+\end{proof}
+
+\begin{remark}[a unique barycentre does not single out a pointer basis]\label{rem:fmaxisbary}
+For commuting inputs with eigenvalues $a_{ji}$, $s_i=\sum_jw_j\sqrt{a_{ji}}$, the barycentre has eigenvalues $s_i^2$ (normalised on the trace-one
+slice); a simple spectrum fixes the common eigenbasis.  But with all inputs $\mathbf1/d$ the unique barycentre is $\mathbf1/d$
+and every basis is an eigenbasis: uniqueness of the barycentre does not select a basis, and objective
+records need a recording channel (Theorem~\ref{thm:fmpointer}).  Scalar inputs $1,9$ with equal weights give
+$f=(\sqrt x-2)^2+1$, minimum $1$ at $x=4$, whereas the arithmetic mean $5$ gives $10-4\sqrt5>1$.  For independently chosen qubit
+test axes $n_j$ with weights $w_j$, mixed with the identity at transverse multiplier $\lambda$, the mean Bloch vector is
+$(\lambda\mathbf1+(1-\lambda)M)^kr_0$, $M=\sum w_jn_jn_j^{\mathsf T}$; for $\lambda<1$ a simple top eigenvalue gives a slowest-decaying line, an exactly
+preserved direction exists iff all axes are parallel, isotropic axes ($M=\mathbf1/3$) give none, and ordered steps
+differ from mean steps by $(n\cdot m)(nm^{\mathsf T}-mn^{\mathsf T})$.
+\end{remark}
+
+\subsection{Sequential control and geometric phase}\label{sec:fmcontrol}
+
+\begin{proposition}[instruments, readout and intervention]\label{prop:fminstrument}
+A history-dependent instrument $\{\mathcal I_i\}$ followed by feedback $U_i$ updates $\rho\mapsto U_i\mathcal I_i(\rho)U_i^*$; traces are branch weights,
+the sum is the unread channel, and composition gives the joint law and the conditional states of
+Proposition~\ref{prop:relative} and Theorem~\ref{thm:instruments}.  First-step effects do not determine the joint
+law (Kraus operators $P_i$ and $XP_i$ have equal effects, and a following test repeats or reverses the
+outcome).  Kraus operators with $\sum K_i^*K_i=P$ a projection complete to the channel
+$X\mapsto\sum K_iXK_i^*+\tr((\mathbf1-P)X)\lvert v\rangle\langle v\rvert$, agreeing on inputs supported in $P$ (for $K_1=P=\lvert0\rangle\langle0\rvert$, $v=\lvert0\rangle$: the reset).
+\end{proposition}
+\begin{proof}
+Trace preservation and cyclicity; the added Kraus operators $\lvert v\rangle\langle u_j\rvert(\mathbf1-P)$.
+\end{proof}
+
+\begin{example}[control with a fixed reference]\label{ex:fmaction}
+For $U_\theta=e^{-i\theta Y/2}$, $P=(\mathbf1+Z)/2$, $\rho=(\mathbf1+X)/2$: rotating the state gives readout $(1-\sin\theta)/2$, rotating the effect $(1+\sin\theta)/2$;
+pinching before the rotation gives $\tfrac12$; the reset $\sigma\mapsto\tr(\sigma)P$ gives $1$ and entropy change $-\log2$, at the cost of
+Proposition~\ref{prop:fmheat}.  For $\rho=\mathrm{diag}(\tfrac34,\tfrac14)$ and probes at polar angles $\pi/3$, $2\pi/3$ (both at Fubini--Study distance
+$\pi/12$ from the equatorial probe), the outcome probabilities are $\tfrac58,\tfrac38$, the cross-entropies against $(\tfrac34,\tfrac14)$ are
+$\log4-\tfrac58\log3$ and $\log4-\tfrac38\log3$, and the differences of cross- and relative entropy are both $\tfrac14\log3$; a controller
+minimising either chooses the first probe, given a specified reference and objective, as in a
+generative model \cite{n2-friston}; in a causal model an intervention also specifies which mechanism it
+changes \cite{n2-pearl}.
+\end{example}
+
+\begin{proposition}[reachability and speed]\label{prop:fmspeed}
+Rotations about two nonparallel axes generate $\SO(3)$ by finite words, and invariance under two moving-axis
+actions implies invariance under all rotations.  \emph{Positive Schur slack does not give continuous
+reachability}: on $S^2$ the exact constraints $x\cdot e_1=x\cdot e_2=0$ leave only $\pm e_3$, with no feasible path between them
+(deleting one restores a great circle), and $x\cdot e_i=0$ for $i=1,2,3$ admits no unit solution although the bordered
+Gram matrix is $I_4$.  The Fubini--Study speed of $i\hbar\dot\psi=H\psi$ is $\Delta_\psi H/\hbar$, and two protocols from one ray reaching
+two orthogonal record rays in time $\tau$ with time-averaged uncertainty at most $E$ need $\tau\ge\pi\hbar/(4E)$, attained by two qubit
+meridians from their midpoint.
+\end{proposition}
+\begin{proof}
+Conjugation produces a third independent axis and the inverse function theorem a neighbourhood of
+the identity; in a moving frame left rotations about $Oa$ act as right rotations about $a$.  The squared ray speed is
+$\lVert\dot\psi\rVert^2-\lvert\ip\psi{\dot\psi}\rvert^2$; the triangle inequality gives $\pi/2\le2E\tau/\hbar$.
+\end{proof}
+
+\begin{example}[a dynamical Zeno limit]\label{ex:fmzeno}
+For $H=\hbar\omega X$, initial $\lvert0\rangle$ and $n$ tests of $\lvert0\rangle\langle0\rvert$ in $[0,t]$, the all-success probability $\cos^{2n}(\omega t/n)$ has failure at most
+$(\omega t)^2/n$ \cite{n3:Zeno}; this uses repeated instruments and a time budget, whereas the nesting of
+Theorem~\ref{thm:fmschur} holds without them.
+\end{example}
+
+\begin{proposition}[anchored scalar transport]\label{prop:fmgraphphase}
+On a connected multigraph with $n$ vertices and $m$ edges carrying phases $u_e\in\U(1)$, with $k\ge1$ anchored vertices
+(including a root) where gauge transformations are trivial, the gauge quotient is a torus of dimension
+$m+k-n$, with coordinates the tree transports to anchored vertices and the loop phases of non-tree edges.  For
+unitary matrices the loop products transform by conjugation ($XZ=-ZX$); compare the group-valued
+analysis of \cite[Sec.~0.4]{PaperI}.
+\end{proposition}
+\begin{proof}
+Tree normalisation; every coordinate list is realised, and equal coordinates give the allowed gauge;
+$m-(n-1)$ loops and $k-1$ open coordinates.
+\end{proof}
+
+\begin{theorem}[perception--action holonomy]\label{thm:fmberry}
+For a closed piecewise smooth loop of pure qubit rays with parallel transport for $\ip\psi{d\psi}$ and a spanning
+surface of signed area $\mathcal A$ on the Bloch sphere, the holonomy is $e^{-i\mathcal A/2}$, so the principal phase is at most half the
+unsigned area; for a geodesic polygon with spinors $\psi_1,\dots,\psi_m$ it is $e^{-i\arg B}$, $B=\prod\ip{\psi_i}{\psi_{i+1}}$; for Bloch length $\ell<2\pi$,
+$\lvert\gamma\rvert\le(\ell/2)\tan(\ell/4)$; and $\tr(P_aP_bP_c)=\tfrac14[1+a\cdot b+b\cdot c+c\cdot a+i\,a\cdot(b\times c)]$, which is $(1+i)/4$ for the positive octant,
+with phase $-\pi/4$.  \emph{The holonomy bounds a spanning area; it neither forces nor fixes work}: $H=i\hbar[\dot P,P]$
+transports the ray exactly with $\tr(PH)=0$ and zero isolated driving work $\int\tr(P\dot H)dt$ on a loop with
+nonzero phase, and a separate reset actuator adds work $a>0$ (exciting and releasing an auxiliary qubit of
+gap $a$) without changing the loop.
+\end{theorem}
+\begin{proof}
+Horizontal lifts on arcs; the connection $i\sin^2(\theta/2)d\phi$ has curvature $\tfrac i2\sin\theta\,d\theta\wedge d\phi$, and Stokes; for the length bound
+$\lvert\sin^2(\theta/2)d\phi\rvert\le\tfrac12\tan(\ell/4)ds$ in polar coordinates about the base point; $(a\cdot\sigma)(b\cdot\sigma)=(a\cdot b)\mathbf1+i(a\times b)\cdot\sigma$.  This is the
+spinor form of the excess of \cite[Thm.~9.9, Cor.~9.11]{PaperI}
+\cite{n2-pancharatnam,n2-berry,n2-simon,n2-sb}.  Differentiating $P^2=P$ gives $P\dot PP=0$, $[H,P]=i\hbar\dot P$, $\tr(PH)=0$ and
+$\tr(P\dot H)=0$.
+\end{proof}
+
+\begin{remark}[three free energies; coverage]\label{rem:fmenergies}
+For a reference model $p(s,o|u)$,
+\[
+\textstyle\sum_sq(s)\log[q(s)/p(s,o|u)]=D(q\Vert p(\cdot|o,u))-\log p(o|u)
+\]
+is dimensionless; $\tr\rho H-k_BTS(\rho)$ has energy units; an energy model with passive increment $\Delta E_{\mathrm p}>0$ and entropy tax $\Delta s$ gives $\Delta E_{\mathrm p}-\Delta s/\beta$, positive iff $\beta>\Delta s/\Delta E_{\mathrm p}$; a
+measured deposit needs dynamics.  For a fixed sequence of full axis tests $P_j=n_jn_j^{\mathsf T}$ (or partial, single-step loss
+$(1-\lambda_j^2)\lVert(\mathbf1-P_j)r_{j-1}\rVert^2$), the loss $D=\lVert r_0\rVert^2-\lVert r_L\rVert^2$ and the initial coverage $C=\sum_{j\le L}\lVert(\mathbf1-P_j)r_0\rVert^2$ satisfy $D\ge2C/[L(L+1)]$.
+\end{remark}
+
+\begin{conjecture}[small-phase control in a cap corridor]\label{conj:fmcontrol}
+For an interior direction $p$ and control axes $a,b$ with $J=\lvert p\cdot(a\times b)\rvert>0$, using piecewise rotations of unit speed
+about either axis, the least total rotation $L(\varphi)$ of closed loops at $p$ in the corridor with spinor holonomy
+$e^{i\varphi}$ satisfies $L(\varphi)/\sqrt{\lvert\varphi\rvert}\to4\sqrt{2/J}$ as $\varphi\to0$.
+\end{conjecture}
+\noindent Evidence: in the tangent model with coordinates along $a\times p$, $b\times p$ the cost is $V_1+V_2$ (total variations),
+the signed area is at most $V_1V_2/4$, attained by a square, physical area is $J$ times this and phase half the
+area (Theorem~\ref{thm:fmberry}).  A proof needs uniform control of arbitrary switching and closure corrections.
+
+\subsection{Reproducible examples}\label{sec:fmexamples}
+
+\begin{proposition}[area of a cap intersection]\label{prop:fmarea}
+For finitely many caps $v_i\cdot x\ge h$ ($0<h<1$) with nonempty interior and transverse two-cap corners,
+$A=2\pi-h\sum_{\mathrm{arcs}}\delta_i-\sum_{\mathrm{corners}}\arccos\frac{v_i\cdot v_j-h^2}{1-h^2}$, $\delta_i$ the angular sweeps.
+\end{proposition}
+\begin{proof}
+Gauss--Bonnet for a convex disk \cite[Ch.~4, \S5]{n2-docarmo}: the small circle has geodesic curvature $h/\sqrt{1-h^2}$, and adjacent
+inward normals have inner product $(v_i\cdot v_j-h^2)/(1-h^2)$.
+\end{proof}
+
+\begin{example}[an expanding spiral of anchors]\label{ex:fmspiral}
+For $h=\tfrac12$ and $v_j$ at azimuth $(j-1)\pi(3-\sqrt5)$ and polar angle $(12+6(j-1))^\circ$, the solid angles for $M=1,\dots,9$ are
+$3.141593$, $2.297861$, $1.802272$, $1.412802$, $1.049640$, $0.720881$, $0.436215$, $0.208320$, $0.054604$ (boundary arcs $1,2,3,3,\dots,3$); the
+first three anchors have Gram determinant $0.041133$; $\log(A_8/A_9)=1.338960$ nats ($1.931710$ bits), $\log(4\pi/A_9)=5.438666$, $A_3/A_9=33.0060$.
+For $M\ge10$ the corridor is empty: $0.2388v_8+0.4261v_9+0.3351v_{10}$ has norm $<0.496$, whereas a feasible unit vector has inner
+product at least $\tfrac12$ with it.  For a second observer with $w_j=R_y(10^\circ)v_j$ the common areas are $1.570105$ ($M=3$) and
+$0.010419$ ($M=9$), ratios to the first observer's $0.871181$ and $0.190813$; the nonzero eigenvalues of the combined Gram
+matrices are $(0.167199,0.456613,5.376189)$ and $(2.744723,3.881656,11.373621)$.  At $25^\circ$ and $30^\circ$ the $M=8$ common areas are $0.043804$
+and $0.022659$, and at $M=9$ the means of $(v_8,w_9)$ and $(v_5,w_9)$ have norms $0.498642$ and $0.468178$, certifying emptiness.  The
+anchor count alone supplies neither a feasible corridor nor an optimal memory policy.
+\end{example}
+
+\begin{example}[replacing versus deleting anchors]\label{ex:fmcentroid}
+Replacing the three coordinate anchors by $(1,1,1)/\sqrt3$, keeping the last, or keeping the last two gives slacks
+$1-(q_1+q_2+q_3)^2/3$, $1-q_3^2$, $q_1^2$: $(\tfrac2{27},\tfrac89,\tfrac49)$ at $q=(2,2,1)/3$ and $(\tfrac{26}{27},\tfrac59,\tfrac19)$ at $q=(1,2,-2)/3$.  Which compression is
+better depends on the future queries.
+\end{example}
+
+\begin{example}[elimination and fill]\label{ex:fmfill}
+For the divisibility graph on $\{2,\dots,6\}$ (edges $24,26,36$) and $L+\mathbf1/4$ with terminals $5,6$, eliminating $2$ first creates the
+fill entry $-\tfrac49$ between $4$ and $6$; the order $(4,3,2)$ creates none; both give the terminal diagonal $(\tfrac14,\tfrac{441}{580})$
+($\tfrac{29}{20}-\tfrac{20}{29}$).  A truncated Schur block $\tilde S$ leaves the residual $(S-\tilde S)\tilde x_T$ on the terminals.  For maximum degree $d$,
+$P=\mathbf1-L/(1+d)$ is stochastic with spectrum in $(-1,1]$, and $P^k$ is positive exactly on pairs joined by walks of length $\le k$.
+\end{example}
+
+\begin{proposition}[a separability witness]\label{prop:fmseparable}
+For Hermitian $R$ and its Hilbert--Schmidt projection $P$ onto the closed cone of separable matrices, $W=P-R$
+pairs nonnegatively with every separable matrix and $\tr(WR)=-\lVert R-P\rVert_{\mathrm{HS}}^2$, a strict witness when $R$ is outside the cone.
+\end{proposition}
+\begin{proof}
+The cone over the compact convex hull of product projectors is closed; the variational inequality at
+the nearest point, tested at $S=0$ and $S=2P$.
+\end{proof}
+
+\begin{remark}[programme]\label{rem:fmprogramme}
+Assign operational algebras to regions of the cap geometry with a causal composition rule and identify
+the access restriction of Theorem~\ref{thm:fmeraser}; give a record-writing mechanism, an initial record condition
+and a heat or work account with retained side information; quantify recovery by restricted local
+instruments with matching bounds; and give a prediction target that distinguishes useful compression
+from overlap deletion.  These connect the Gram model to Conjecture~\ref{conj:cueth} without assuming
+equilibration.
+\end{remark}
+
+\begin{remark}[what does not hold]\label{rem:fmnogo}
+(i) Growth does not inevitably lock and sliding does not always tighten; deletion need not reopen
+(Remark~\ref{rem:fmnolock}).  (ii) Three anchors fix no chirality and give no nonempty optimal window
+(Examples~\ref{ex:fmgram}, \ref{ex:fmspiral}).  (iii) Index restriction or discarding can cost zero heat
+(Remark~\ref{rem:fmzeroheat}).  (iv) Forgetting or conjugate replay does not universally restore interference
+(Remark~\ref{rem:fmcopies}).  (v) Local consistency does not give a global Gram, and a common Gram gives neither a joint
+state nor joint outcomes (Theorem~\ref{thm:fmglue}, Examples~\ref{ex:fmoutcomes}, \ref{ex:fmcontext}).  (vi) A unique barycentre
+or a generic shared POVM does not single out a pointer basis (Remarks~\ref{rem:fmaxisbary}, \ref{rem:fmbph}).  (vii) Positive
+Schur slack does not give continuous reachability (Proposition~\ref{prop:fmspeed}).  (viii) Holonomy neither forces
+nor fixes work (Theorem~\ref{thm:fmberry}).
+\end{remark}
 
 %=====================================================================================
 \section{Single outcomes: bounded martingales and finite-tick halting}\label{sec:outcomes}
@@ -4231,16 +4663,18 @@ modular flow and its Gibbs criterion (C0--C3, [Span], [T]), and [Cl] (under [Ph]
 outcomes, the statistics of any record process: Born at every stage iff martingale weights, with the
 restart converse, affine unread maps from no-signalling, and the Born threshold and simplex laws exactly
 for the invariant auxiliary law ([R], Theorems~\ref{thm:sorigidity}, \ref{thm:sosphere}, \ref{thm:sosimplex}), and the inverse-tick
-bound ([Tr]); $\U(2)$ and the mass-form eigenvalue ratio (F), and $m_W=m_Z\cos\theta_W$ as tree-level masses (F, F$_{\mathrm g}$(a)); the Pati--Salam
+bound ([Tr]); for finite memories, Gram extension and weak nesting ([Gw]), the reset bound (Gibbs bath, joint
+unitarity, kept side marginal), exact phase recovery and gluing on chordal patterns; $\U(2)$ and the mass-form eigenvalue ratio (F), and $m_W=m_Z\cos\theta_W$ as tree-level masses (F, F$_{\mathrm g}$(a)); the Pati--Salam
 group, its breaking and the hypercharges (C0--C3, [Span], G(i)--(iv)); $\sin^2\theta_W=\tfrac38$ (G(v));
 the round-$S^4$ couplings $\kappa_V=\sqrt{1-\xi}$, $\kappa_{2V}=1-2\xi$ (F, F$_{\mathrm g}$(a), F$_{\mathrm H}$); the obstruction for the ungauged back-reacting centre field and the zero-stress flat vacuum (E, F, GR; F$_{\mathrm g}$).
 \emph{Inputs not derived}: [Bil], [Bil$_\cL$], [Span], [Loc], [O], [N], Postulates C1(b), C2, C3, [Sub], the reading
 inputs [L], [W], [Comp], [T], and [B] or, equivalently, [Cl] with [NT], the hypotheses $w\ge0$, $w=f(\beta_N)$ and (a)--(c) of
-Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), [R], [Tr], Hypotheses Ap, U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm H}$ (with F$_{\mathrm{Hf}}$), F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
+Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), [R], [Tr], [Gw], [Ue], [Ca], Hypotheses Ap, U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm H}$ (with F$_{\mathrm{Hf}}$), F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
 [Bil$_\cL$], [Loc], [O] and [N] for the composite.
 \emph{Open}: a unit of length; $G_Nv^2$; Hypothesis~GR with sources and its consistency with
 Hypothesis~E; the ratio $g'/g$; the number of structures; three generations; scales, masses and
-Yukawa couplings; which single-outcome dynamics, if any, is realised (Hypothesis~Ap, Conjecture~\ref{conj:somixing}); a derivation of [Loc], [O], C2, [Cl] (other than from [Ph]) or [B]; local equilibration in the
+Yukawa couplings; which single-outcome dynamics, if any, is realised (Hypothesis~Ap, Conjecture~\ref{conj:somixing}); small-phase control
+in a cap corridor (Conjecture~\ref{conj:fmcontrol}); a derivation of [Loc], [O], C2, [Cl] (other than from [Ph]) or [B]; local equilibration in the
 singlet sector (Conjecture~\ref{conj:cueth}); a principle selecting the radial potential; a microscopic origin of the round $S^4$ target
 (Conjecture~\ref{conj:hbmicro}).
 \emph{Testability} (Table~\ref{tab:falsify} lists it statement by statement).  The kinematic part (one system under the clock reading, composites under the inputs of
@@ -4655,6 +5089,7 @@ Effects, POVMs, instruments, complete positivity, conditional states & theorem f
 Origin-free generators: clock, exchange; closed pair unique up to time unit & theorem; permutation-symmetric generator fixed up to time unit iff $N\in\{2,3\}$\\
 Connected closed clock-invariant round-trip-closed sets are spheres of complex subspaces; all dimensions $1\le d\le2^N$; exchange sector $\mathrm{Sym}^N(\C^2)$ & theorem (Prop.~\ref{prop:rtclosed}; Cor.~\ref{cor:substructure} under C0--C2, [Span]; Prop.~\ref{prop:symsector} under C0, C1, [Span], C3); as systems: [Sub]\\
 Skyrme term: area square, degree bound $6\pi^2v/e_{\mathrm S}$, scaling, Hopf charge and its bound, $\pi_1$ of configuration spaces, screening, radial unwinding & theorem under [F], [F$_{\mathrm S}$] (Thm.~\ref{thm:skbound}, Props.~\ref{prop:skhopf}, \ref{prop:skconfig}, \ref{prop:skscreen}, \ref{prop:skradial}, Thm.~\ref{thm:vk}); existence of minimisers and spin from rotations: cited; metastability: conjecture; particle readings: [P]\\
+Finite memory: Gram extension and weak nesting, caps, capacity, reset heat, exact eraser criterion, gluing on chordal patterns, pointer records, redundancy, barycentre, holonomy bound & theorem (Thms.~\ref{thm:fmschur}, \ref{thm:fmeraser}, \ref{thm:fmglue}, \ref{thm:fmpointer}, \ref{thm:fmbary}, \ref{thm:fmberry}; Props.~\ref{prop:fmheat}, \ref{prop:fmredundancy}); window: [Gw]; geometry-to-entropy: [Ue]; access: [Ca]; broadcast: cited; small-phase control: conjecture (Conj.~\ref{conj:fmcontrol}); dynamical records: programme\\
 Single outcomes & no covariant rule at ties; Kochen--Specker for composites (Prop.~\ref{prop:nooutcome}); theorem under [R]: Born at every stage $\Leftrightarrow$ martingale (Thm.~\ref{thm:sorigidity}), restart converse (Cor.~\ref{cor:sorestart}); no-signalling $\Rightarrow$ affine unread map (Prop.~\ref{prop:sochannels}); threshold and simplex laws (Thms.~\ref{thm:sosphere}, \ref{thm:sosimplex}); inverse-tick bound under [Tr] (Prop.~\ref{prop:soresolution}); invariant apparatus sampling: [Ap], Conj.~\ref{conj:somixing}; which dynamics is realised: open\\
 Velocity space; $\gamma^{-1}=$ concurrence & theorem about states; (Q5) not answered\\
 $dS_4$ of dichotomies; causal order; cosmological form; static patch & classical; theorem\\
@@ -4698,6 +5133,7 @@ Electroweak sector under F, F$_{\mathrm g}$(a), F$_{\mathrm r}$: custodial Stand
 Electroweak sector under F, F$_{\mathrm g}$(a), F$_{\mathrm H}$: round $S^4$ target & [X]: $\kappa_{2V}=2\kappa_V^2-1$ with $\kappa_V\le1$ common to $W$ and $Z$, and Goldstone growth $s/f^2$; a significant deviation after radiative and matching corrections refutes F$_{\mathrm H}$; present bound from the quoted $\kappa_V$: $\xi\le0.039$, $f\ge1.24$\,TeV (one-sided 95\%, separate Gaussians, no covariance); $m_h$ is [D]\\
 Pati--Salam group, global form, hypercharges, anomaly cancellation & [M] under G(i)--(iv); agree with the Standard Model; no breaking scale or heavy vectors supplied\\
 $\sin^2\theta_W=\tfrac38$ (G(v)) or $\tfrac12$ as boundary values & [X]: with Standard Model running and no thresholds the colour condition fails; the required shifts are Remark~\ref{rem:couplings}; $\hat s_Z^2$ is [D]\\
+Finite memory & [M]: extension, gluing and recovery criteria; [S]: the reset bound is the Landauer--Reeb--Wolf balance; physical record dynamics: programme\\
 Single outcomes & [M]: martingale equivalence, threshold and simplex laws, inverse-tick bound under [Tr]; the Born statistics are those of standard quantum mechanics, so no example distinguishes; an objective-collapse completion would be [X] through recoherence tests (Example~\ref{ex:sorecoherence}), none is fixed here\\
 Closed register and internal clocks & [M]: finite identities and bounds; Conjecture~\ref{conj:cueth} is a mathematical statement that computation at larger $n$ could refute; [S]: the conditional dynamics is that of standard quantum mechanics with a Page--Wootters reading; the physical readings [U], [A] are not tested here\\
 Topological particles under F$_{\mathrm S}$ & [M]: bounds and topology; [X]: a particle identification (Hypothesis~P) would be testable once $v$, $e_{\mathrm S}$ and the quantisation character are fixed; none is fixed here\\
@@ -4811,7 +5247,15 @@ Fubini--Study angle triangle and record-time and record-count bounds (with the t
 the cosine fixed point; qubit pinching and its discarded mass; $R^2=-\mathbf1$ for skew-adjoint unitaries, Krylov growth
 and permanent stability; and monitored first-return conservation.  No declaration was found for the
 martingale equivalence, the threshold and simplex converses, the adaptive transcript bound or the Zeno
-limit.  These are library results, not checks of this paper's statements.\par}
+limit.  For Section~\ref{sec:finitemem} the same inspection located declarations for the Landauer bound, identity,
+saturation and strictness from supplied balances; finite record pinching idempotence and the fixed-point
+criterion; joint coherent reversal and the surviving-copy obstruction; unitary extension from equal Gram
+matrices; orthogonal-complement projection identities; two-axis finite words and moving-axis invariance;
+anchored and tree phase transport; a strictly increasing generation ledger; two- and three-anchor Gram
+determinant formulas and Gram realisability; Kraus completion; equal effects with different two-step
+joint laws; the axis-contraction commutator; the qubit Bargmann triple formula; a Bures--Wasserstein
+barycentre from a dual certificate; and the separable-cone residual witness.  These are library results,
+not checks of this paper's statements.\par}
 
 {\sloppy Every identity stated above was checked numerically on random inputs by the accompanying
 scripts (numpy; sympy optional): \texttt{check\_identities.py} (Section~\ref{sec:one}, Proposition~\ref{prop:avg}),
@@ -4837,7 +5281,11 @@ amplitude, the Yukawa logarithmic derivatives, the two-term vacuum, mass and tri
 counterexample, the stabiliser obstruction, the marginal example and the bounds on $\xi$ and $f$) and
 \texttt{check\_outcomes.py} (Section~\ref{sec:outcomes}: eight groups; own checks of the two-tick counterexample,
 the threshold laws and flows, the simplex race and the coarse block mass, the five-state chain, and
-the cosine, spectral, basis and Zeno values).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
+the cosine, spectral, basis and Zeno values) and \texttt{check\_finitemem.py} (Section~\ref{sec:finitemem}: nine
+groups; own checks of the Schur slack and weak nesting, the reset balance with side information, the
+eraser trace distance, the gluing witnesses, CHSH and the Peres--Mermin square, the redundancy bound,
+the barycentre certificate, the latitude holonomy with zero work, the coverage bound, and the spiral
+areas by independent quadrature).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
 \ref{thm:product}; Propositions~\ref{prop:relative}, \ref{prop:solder}, \ref{prop:pairsu3}, \ref{prop:angle38},
 \ref{prop:universal}, \ref{prop:cosmo}, \ref{prop:solderunique}, \ref{prop:centre}, \ref{prop:superselection} (with its
 classification of weights and free split), \ref{prop:rtclosed}, \ref{prop:symsector}, \ref{prop:subops},
@@ -5419,6 +5867,60 @@ contributions.
 \bibitem{n3:Bong} K.-W.~Bong et al., A strong no-go theorem on the Wigner's friend paradox, Nat.\ Phys.\ \textbf{16}, 1199--1205 (2020).
 
 \bibitem{n3:Williams} D.~Williams, \emph{Probability with Martingales} (Cambridge University Press, 1991).
+
+\bibitem{n2-schur} I.~Schur, \"Uber Potenzreihen, die im Innern des Einheitskreises beschr\"ankt sind, J.\ Reine Angew.\ Math. \textbf{147}, 205--232 (1917).
+
+\bibitem{n2-albert} A.~Albert, Conditions for positive and nonnegative definiteness in terms of pseudoinverses, SIAM J.\ Appl.\ Math. \textbf{17}, 434--440 (1969).
+
+\bibitem{n2-dirac} G.~A.~Dirac, On rigid circuit graphs, Abh.\ Math.\ Sem.\ Univ.\ Hamburg \textbf{25}, 71--76 (1961).
+
+\bibitem{n2-grone} R.~Grone, C.~R.~Johnson, E.~M.~S\'a and H.~Wolkowicz, Positive definite completions of partial Hermitian matrices, Linear Algebra Appl.\ \textbf{58}, 109--124 (1984).
+
+\bibitem{n2-lindblad} G.~Lindblad, Completely positive maps and entropy inequalities, Commun.\ Math.\ Phys. \textbf{40}, 147--151 (1975).
+
+\bibitem{n2-uhlmann-dpi} A.~Uhlmann, Relative entropy and the Wigner--Yanase--Dyson--Lieb concavity in an interpolation theory, Commun.\ Math.\ Phys. \textbf{54}, 21--32 (1977).
+
+\bibitem{n2-bennett} C.~H.~Bennett, The thermodynamics of computation---a review, Int.\ J.\ Theor.\ Phys. \textbf{21}, 905--940 (1982).
+
+\bibitem{n2-scully} M.~O.~Scully and K.~Dr\"uhl, Quantum eraser: A proposed photon correlation experiment concerning observation and delayed choice in quantum mechanics, Phys.\ Rev.\ A \textbf{25}, 2208--2213 (1982).
+
+\bibitem{n2-herzog} T.~J.~Herzog, P.~G.~Kwiat, H.~Weinfurter and A.~Zeilinger, Complementarity and the quantum eraser, Phys.\ Rev.\ Lett. \textbf{75}, 3034--3037 (1995).
+
+\bibitem{n2-kim} Y.-H.~Kim, R.~Yu, S.~P.~Kulik, Y.~H.~Shih and M.~O.~Scully, Delayed choice quantum eraser, Phys.\ Rev.\ Lett. \textbf{84}, 1--5 (2000).
+
+\bibitem{n2-chsh} J.~F.~Clauser, M.~A.~Horne, A.~Shimony and R.~A.~Holt, Proposed experiment to test local hidden-variable theories, Phys.\ Rev.\ Lett. \textbf{23}, 880--884 (1969).
+
+\bibitem{n2-brukner} \v{C}.~Brukner, A no-go theorem for observer-independent facts, Entropy \textbf{20}, 350 (2018).
+
+\bibitem{n2-zurek81} W.~H.~Zurek, Pointer basis of quantum apparatus: Into what mixture does the wave packet collapse?, Phys.\ Rev.\ D \textbf{24}, 1516--1525 (1981).
+
+\bibitem{n2-zurek09} W.~H.~Zurek, Quantum Darwinism, Nature Phys.\ \textbf{5}, 181--188 (2009).
+
+\bibitem{n2-blumekohout} R.~Blume-Kohout and W.~H.~Zurek, A simple example of quantum Darwinism: Redundant information storage in many-spin environments, Found.\ Phys. \textbf{35}, 1857--1876 (2005).
+
+\bibitem{n2-bph} F.~G.~S.~L.~Brand\~ao, M.~Piani and P.~Horodecki, Generic emergence of classical features in quantum Darwinism, Nat.\ Commun. \textbf{6}, 7908 (2015), arXiv:1311.0258.
+
+\bibitem{n2-horodecki} R.~Horodecki, J.~K. Korbicz and P.~Horodecki, Quantum origins of objectivity, Phys.\ Rev.\ A \textbf{91}, 032122 (2015).
+
+\bibitem{n2-bjl} R.~Bhatia, T.~Jain and Y.~Lim, On the Bures--Wasserstein distance between positive definite matrices, Expo.\ Math. \textbf{37}, 165--191 (2019).
+
+\bibitem{n2-pearl} J.~Pearl, Causal inference in statistics: An overview, Statist.\ Surv. \textbf{3}, 96--146 (2009).
+
+\bibitem{n2-friston} K.~Friston, The free-energy principle: A unified brain theory?, Nat.\ Rev.\ Neurosci. \textbf{11}, 127--138 (2010).
+
+\bibitem{n2-pancharatnam} S.~Pancharatnam, Generalized theory of interference, and its applications. Part I. Coherent pencils, Proc.\ Indian Acad.\ Sci. A \textbf{44}, 247--262 (1956).
+
+\bibitem{n2-berry} M.~V.~Berry, Quantal phase factors accompanying adiabatic changes, Proc.\ R.\ Soc.\ Lond. A \textbf{392}, 45--57 (1984).
+
+\bibitem{n2-simon} B.~Simon, Holonomy, the quantum adiabatic theorem, and Berry's phase, Phys.\ Rev.\ Lett. \textbf{51}, 2167--2170 (1983).
+
+\bibitem{n2-sb} J.~Samuel and R.~Bhandari, General setting for Berry's phase, Phys.\ Rev.\ Lett. \textbf{60}, 2339--2342 (1988).
+
+\bibitem{n2-docarmo} M.~P.~do Carmo, Differential Geometry of Curves and Surfaces, Prentice-Hall (1976), Chapter~4, \S~5.
+
+\bibitem{n2-peres} A.~Peres, Incompatible results of quantum measurements, Phys.\ Lett.\ A \textbf{151}, 107--108 (1990).
+
+\bibitem{n2-mermin} N.~D.~Mermin, Simple unified form for the major no-hidden-variables theorems, Phys.\ Rev.\ Lett. \textbf{65}, 3373--3376 (1990).
 
 \bibitem{CLT74} J.~M.~Cornwall, D.~N.~Levin, and G.~Tiktopoulos, Derivation of gauge invariance from high-energy unitarity bounds on the S matrix, Phys.\ Rev.\ D \textbf{10}, 1145 (1974); Erratum \textbf{11}, 972 (1975).
 

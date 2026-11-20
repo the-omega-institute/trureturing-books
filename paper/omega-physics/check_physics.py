@@ -2392,4 +2392,211 @@ ok_n &= abs(20 and 1/20 - 0.05) < 1e-15 and 2.0**-20 < 1/20
 print(f"     cosine iterates and residual window, digits, spectral shares, masses, basis weights, Zeno values, tick bounds: {bool(ok_n)}")
 results.append(bool(ok_n))
 
+# =====================================================================================
+# 50. (Round 27) finite memory: Schur windows, heat, eraser, gluing, redundancy, barycentre, holonomy, spiral
+specm = importlib.util.spec_from_file_location("check_finitemem", os.path.join(here, "check_finitemem.py"))
+rm_ = importlib.util.module_from_spec(specm); buf = io.StringIO()
+try:
+    with contextlib.redirect_stdout(buf):
+        specm.loader.exec_module(rm_)
+        for fn in ("gram_checks", "cap_checks", "thermodynamic_checks", "eraser_checks", "agreement_checks",
+                   "barycentre_checks", "control_checks", "holonomy_checks", "elimination_checks"):
+            getattr(rm_, fn)()
+    okm = True
+except Exception as ex:
+    okm = False; print("     check_finitemem error:", repr(ex))
+print(f"     check_finitemem.py: all nine test groups passed: {okm}")
+results.append(okm)
+from scipy.linalg import sqrtm as _sqrtm
+def _H(ev):
+    ev = np.asarray(ev); ev = ev[ev > 1e-15]; return float(-np.sum(ev*np.log(ev)))
+# (1) Schur: bordered PSD iff range + slack; slack = residual; weak nesting increments; examples
+ok = True
+for _ in range(50):
+    d_ = 5; Mx = rng.integers(1, 5); V_ = rng.normal(size=(d_, 6)) + 1j*rng.normal(size=(d_, 6)); V_ /= np.linalg.norm(V_, axis=0)
+    x_ = rng.normal(size=d_) + 1j*rng.normal(size=d_); x_ /= np.linalg.norm(x_)
+    sl = []
+    for M_ in range(0, 6):
+        B_ = V_[:, :M_]
+        if M_ == 0: sl.append(1.0); continue
+        G_ = B_.conj().T @ B_; c_ = B_.conj().T @ x_
+        Ds = 1 - (c_.conj() @ np.linalg.pinv(G_) @ c_).real
+        Pm = B_ @ np.linalg.pinv(G_) @ B_.conj().T
+        ok &= abs(Ds - np.linalg.norm(x_ - Pm @ x_)**2) < 1e-10
+        sl.append(Ds)
+    ok &= all(sl[i] >= sl[i + 1] - 1e-12 for i in range(5))
+for M_ in range(1, 9):
+    G_ = 2/3*np.eye(M_) + np.ones((M_, M_))/3; c_ = np.full(M_, .5)
+    ok &= abs(1 - c_ @ np.linalg.solve(G_, c_) - (M_ + 8)/(4*(M_ + 2))) < 1e-12 and abs(np.linalg.det(G_) - (2/3)**(M_ - 1)*(M_ + 2)/3) < 1e-12
+det3 = lambda a, b, c: np.linalg.det(np.array([[1, a, b], [a, 1, c], [b, c, 1]]))
+ok &= abs(det3(.8, .8, .8) - 13/125) < 1e-12 and abs(det3(.8, .8, 0) + 7/25) < 1e-12 and abs(det3(.8, .8, 7/25)) < 1e-12 and abs(det3(.5, .5, -.5)) < 1e-12
+print(f"     Schur slack = residual, weak nesting, equicorrelated slack (M+8)/(4(M+2)), 13/125 and -7/25: {bool(ok)}")
+results.append(bool(ok))
+# (2) heat identity with side information on random L, K, R qubits
+okh2 = True
+for _ in range(5):
+    A_ = rng.normal(size=(4, 4)) + 1j*rng.normal(size=(4, 4)); rLK = A_ @ A_.conj().T; rLK /= np.trace(rLK).real
+    HR = np.diag([0, 1.7]); bR = 0.6; om = _expm(-bR*HR); om /= np.trace(om).real
+    # joint unitary acting on L and R only, keeping the K marginal (K is the second qubit)
+    Xr = rng.normal(size=(4, 4)) + 1j*rng.normal(size=(4, 4)); U_LR = _expm(1j*(Xr + Xr.conj().T))
+    U = np.einsum('aibj,kl->aikbjl', U_LR.reshape(2, 2, 2, 2), np.eye(2)).reshape(8, 8)   # order (L, R, K)
+    rin = np.kron(rLK.reshape(2, 2, 2, 2).transpose(0, 2, 1, 3).reshape(4, 4), np.eye(1))  # (L,K)
+    full_in = np.einsum('ab,cd->acbd', rLK, om).reshape(2, 2, 2, 2, 2, 2)                  # (L,K),(R) -> indices
+    rho_in = np.einsum('lkLK,rR->lrkLRK', rLK.reshape(2, 2, 2, 2), om).reshape(8, 8)        # order (L,R,K)
+    rho_out = U @ rho_in @ U.conj().T
+    t6 = rho_out.reshape(2, 2, 2, 2, 2, 2)
+    rLK_o = np.einsum('lrkLrK->lkLK', t6).reshape(4, 4); rK_o = np.einsum('lrklrK->kK', t6); rR_o = np.einsum('lrklRk->rR', t6)
+    rK_i = np.einsum('lklK->kK', rLK.reshape(2, 2, 2, 2))
+    QR = np.trace(HR @ (rR_o - om)).real
+    SLK = lambda r: _H(np.linalg.eigvalsh(r))
+    dS = (SLK(rLK_o) - SLK(rK_o)) - (SLK(rLK) - SLK(rK_i))
+    ref = np.einsum('lkLK,rR->lrkLRK', rLK_o.reshape(2, 2, 2, 2), om).reshape(8, 8)
+    Dv = np.trace(rho_out @ (_logm(rho_out + 1e-300*np.eye(8)) - _logm(ref))).real if np.min(np.linalg.eigvalsh(rho_out)) > 1e-12 else None
+    okh2 &= np.allclose(rK_o, rK_i, atol=1e-12) and Dv is not None and abs(bR*QR + dS - Dv) < 1e-8 and bR*QR + dS >= -1e-12
+print(f"     reset balance beta Q + Delta S(L|K) = D(rho'||rho'_LK x omega) >= 0 with kept K marginal: {bool(okh2)}")
+results.append(bool(okh2))
+# (3) eraser: half trace distance = ||X||_1 = ||sqrt(s0) sqrt(s1)||_1; copies example
+oke = True
+for _ in range(20):
+    r0 = rng.normal(size=6) + 1j*rng.normal(size=6); r0 /= np.linalg.norm(r0)
+    r1 = rng.normal(size=6) + 1j*rng.normal(size=6); r1 /= np.linalg.norm(r1)
+    C0, C1 = r0.reshape(2, 3), r1.reshape(2, 3)      # A x E
+    X_ = C0 @ C1.conj().T
+    s0 = (C0.conj().T @ C0).T; s1 = (C1.conj().T @ C1).T
+    lhs = np.sum(np.linalg.svd(X_, compute_uv=False))
+    rhs = np.sum(np.linalg.svd(_sqrtm(s0) @ _sqrtm(s1), compute_uv=False))
+    # accessible states for (|0> +- |1>)/sqrt2
+    def acc(sg):
+        psi = (np.kron([1, 0], r0) + sg*np.kron([0, 1], r1))/np.sqrt(2)
+        t = np.outer(psi, psi.conj()).reshape(2, 2, 3, 2, 2, 3)
+        return np.einsum('aieAIe->aiAI', t).reshape(4, 4)
+    td = 0.5*np.sum(np.abs(np.linalg.eigvalsh(acc(1) - acc(-1))))
+    oke &= abs(lhs - rhs) < 1e-8 and abs(td - lhs) < 1e-10
+g_ = np.vdot([1j, 0], [1, 0])           # <r^(1), r^(0)> = -i
+oke &= abs(0.5*g_*g_ + 0.5) < 1e-15 and abs(0.5*g_*g_*np.conj(g_) + 0.5j) < 1e-15 and abs(0.5*g_*g_*np.conj(g_)**2 - 0.5) < 1e-15
+print(f"     eraser trace distance = ||X||_1 = root fidelity; copies 1/2 -> -1/2 -> -i/2 -> 1/2: {bool(oke)}")
+results.append(bool(oke))
+# (4) gluing: nonchordal counterexample, four-cycle, CHSH with Gram realisation, Peres-Mermin products, Bell extension
+okg = True
+for k_ in (4, 5, 6):
+    r_ = 1 - 1/(2*k_**2); okg &= abs(np.sqrt(2 - 2*r_) - 1/k_) < 1e-14 and np.sqrt(2 + 2*r_) > (k_ - 1)/k_
+    # PSD completion of the cycle: minimise lambda_min over free entries is hard; check the distance argument numerically
+I2 = np.eye(2); Xp = np.array([[0, 1], [1, 0]]); Yp = np.array([[0, -1j], [1j, 0]]); Zp = np.diag([1., -1])
+phi = np.array([1, 0, 0, 1])/np.sqrt(2)
+E_ = lambda A, B: (phi.conj() @ np.kron(A, B) @ phi).real
+B1, B2 = (Zp + Xp)/np.sqrt(2), (Zp - Xp)/np.sqrt(2)
+chsh = E_(Zp, B1) + E_(Zp, B2) + E_(Xp, B1) - E_(Xp, B2)
+ang = np.array([0, 90, 45, -45])*np.pi/180; ax = np.stack([np.cos(ang), np.sin(ang)], 1); Gch = ax @ ax.T
+okg &= abs(chsh - 2*np.sqrt(2)) < 1e-12 and abs(Gch[0, 2] - E_(Zp, B1)) < 1e-12 and abs(Gch[1, 3] - E_(Xp, B2)) < 1e-12 and np.min(np.linalg.eigvalsh(Gch)) > -1e-12
+sq = [[np.kron(Xp, I2), np.kron(I2, Xp), np.kron(Xp, Xp)], [np.kron(I2, Zp), np.kron(Zp, I2), np.kron(Zp, Zp)], [np.kron(Xp, Zp), np.kron(Zp, Xp), np.kron(Yp, Yp)]]
+for i_ in range(3):
+    okg &= np.allclose(sq[i_][0] @ sq[i_][1] @ sq[i_][2], np.eye(4))
+for j_ in range(3):
+    okg &= np.allclose(sq[0][j_] @ sq[1][j_] @ sq[2][j_], (np.eye(4) if j_ < 2 else -np.eye(4)))
+print(f"     nonchordal witness distances, CHSH 2 sqrt2 with a planar Gram realisation, Peres-Mermin products (+,+,+;+,+,-): {bool(okg)}")
+results.append(bool(okg))
+# (5) redundancy bound
+p_ = .5; gam = .3; N_ = 16
+Hz = lambda z: _H([(1 - np.sqrt(1 - 4*p_*(1 - p_)*(1 - z**2)))/2, (1 + np.sqrt(1 - 4*p_*(1 - p_)*(1 - z**2)))/2])
+SrS = Hz(gam**N_)
+disc = max(abs(Hz(gam**N_) + Hz(gam**f_) - Hz(gam**(N_ - f_)) - SrS) for f_ in range(3, 14))/np.log(2)
+# direct check of the mutual information formula on a 3-copy model
+r0s = [np.array([1, 0.]), np.array([1, 0.]), np.array([1, 0.])]; r1s = [np.array([.3, np.sqrt(1 - .09)])]*3
+psi = (np.kron([1, 0], np.kron(np.kron(r0s[0], r0s[1]), r0s[2])) + np.kron([0, 1], np.kron(np.kron(r1s[0], r1s[1]), r1s[2])))/np.sqrt(2)
+t = np.outer(psi, psi.conj()).reshape([2]*8)
+rS = np.einsum('sabcSabc->sS', t); rF = np.einsum('sabcsABc->abAB', t).reshape(4, 4); rSF = np.einsum('sabcSABc->sabSAB', t).reshape(8, 8)
+Imi = _H(np.linalg.eigvalsh(rS)) + _H(np.linalg.eigvalsh(rF)) - _H(np.linalg.eigvalsh(rSF))
+okr = disc < 5.26e-4 and abs(Imi - (Hz(.3**3) + Hz(.3**2) - Hz(.3))) < 1e-10
+print(f"     redundancy: I(S:F) formula on a 3-copy model; max discrepancy {disc:.3e} bits < 5.26e-4: {bool(okr)}")
+results.append(bool(okr))
+# (6) barycentre by fixed-point iteration with certificate; scalar example; maximally mixed inputs
+okb = True
+As = []
+for _ in range(3):
+    A_ = rng.normal(size=(3, 3)) + 1j*rng.normal(size=(3, 3)); As.append(A_ @ A_.conj().T + 0.3*np.eye(3))
+ws = np.array([.2, .3, .5]); W_ = np.eye(3)
+for _ in range(400):
+    Wh = _sqrtm(W_); Wih = np.linalg.inv(Wh)
+    W_ = Wih @ np.linalg.matrix_power(sum(w*_sqrtm(Wh @ A_ @ Wh) for w, A_ in zip(ws, As)), 2) @ Wih
+Wh = _sqrtm(W_); Wih = np.linalg.inv(Wh)
+Ts = [Wih @ _sqrtm(Wh @ A_ @ Wh) @ Wih for A_ in As]
+okb &= np.allclose(sum(w*T for w, T in zip(ws, Ts)), np.eye(3), atol=1e-8) and all(np.allclose(T @ W_ @ T, A_, atol=1e-8) for T, A_ in zip(Ts, As))
+fsc = lambda x: 0.5*((x + 1 - 2*np.sqrt(x)) + (x + 9 - 6*np.sqrt(x)))
+okb &= abs(fsc(4) - 1) < 1e-14 and abs(fsc(5) - (10 - 4*np.sqrt(5))) < 1e-14 and fsc(5) > 1
+print(f"     Bures-Wasserstein barycentre certificate T W T = A, sum w T = I; scalar example 1 at x = 4: {bool(okb)}")
+results.append(bool(okb))
+# (7) holonomy: octant trace, zero-work control on a latitude loop, length bound, coverage bound
+okb2 = True
+Pv = lambda a: (np.eye(2) + a[0]*Xp + a[1]*Yp + a[2]*Zp)/2
+tr3 = np.trace(Pv([1, 0, 0]) @ Pv([0, 1, 0]) @ Pv([0, 0, 1]))
+okb2 &= abs(tr3 - (1 + 1j)/4) < 1e-14 and abs(-np.angle(tr3) + np.pi/4) < 1e-14
+th0 = 1.0; nst = 4000; ts_ = np.linspace(0, 2*np.pi, nst + 1)
+Ploop = lambda t: Pv([np.sin(th0)*np.cos(t), np.sin(th0)*np.sin(t), np.cos(th0)])
+psi_ = np.array([np.cos(th0/2), np.sin(th0/2)], complex); work = 0.0; dtl = ts_[1] - ts_[0]
+Hprev = None
+for i_ in range(nst):
+    t0, t1 = ts_[i_], ts_[i_ + 1]; tm = (t0 + t1)/2
+    Pd = (Ploop(t1) - Ploop(t0))/dtl; Pm = Ploop(tm)
+    Hm = 1j*(Pd @ Pm - Pm @ Pd)
+    psi_ = _expm(-1j*Hm*dtl) @ psi_
+    if Hprev is not None: work += np.trace(Pm @ (Hm - Hprev)).real
+    Hprev = Hm
+psi0 = np.array([np.cos(th0/2), np.sin(th0/2)], complex)
+hol = np.vdot(psi0, psi_); area = 2*np.pi*(1 - np.cos(th0))
+Pdot_ = lambda t: (np.sin(th0)*(-np.sin(t))*Xp + np.sin(th0)*np.cos(t)*Yp)/2
+Hex = lambda t: 1j*(Pdot_(t) @ Ploop(t) - Ploop(t) @ Pdot_(t))
+tg = np.linspace(0, 2*np.pi, 2001)[:-1]; hh_ = 1e-5
+work = np.sum([np.trace(Ploop(t) @ (Hex(t + hh_) - Hex(t - hh_))/(2*hh_)).real for t in tg])*(2*np.pi/2000)
+okb2 &= abs(abs(hol) - 1) < 1e-5 and abs(np.angle(hol) - np.angle(np.exp(-1j*area/2))) < 1e-4 and abs(work) < 1e-8 \
+        and all(abs(np.trace(Ploop(t) @ Hex(t))) < 1e-12 for t in tg[::50])
+# coverage bound with random axes
+for _ in range(50):
+    Lq = rng.integers(1, 7); r0v = rng.normal(size=3); rv = r0v.copy(); Cc = 0
+    for j_ in range(Lq):
+        n_ = unit(3); Cc += np.linalg.norm(r0v - n_*(n_ @ r0v))**2; rv = n_*(n_ @ rv)
+    okb2 &= (r0v @ r0v - rv @ rv) >= 2*Cc/(Lq*(Lq + 1)) - 1e-12
+print(f"     octant Bargmann (1+i)/4, phase -pi/4; latitude loop with H = i[P',P]: holonomy e^(-iA/2), zero work; coverage bound: {bool(okb2)}")
+results.append(bool(okb2))
+# (8) spiral areas by direct quadrature; emptiness certificates; Gram determinant; two-observer eigenvalues; centroid; fill
+def spiral(M_, eta=0.0):
+    out = []
+    for j_ in range(1, M_ + 1):
+        az = (j_ - 1)*np.pi*(3 - np.sqrt(5)); po = np.radians(12 + 6*(j_ - 1))
+        out.append([np.sin(po)*np.cos(az), np.sin(po)*np.sin(az), np.cos(po)])
+    V = np.array(out)
+    if eta:
+        c_, s_ = np.cos(np.radians(eta)), np.sin(np.radians(eta)); Ry = np.array([[c_, 0, s_], [0, 1, 0], [-s_, 0, c_]]); V = V @ Ry.T
+    return V
+def cap_area(V, nz=3000, nph=6000):
+    z = -1 + (np.arange(nz) + .5)*2/nz; ph = (np.arange(nph) + .5)*2*np.pi/nph
+    tot = 0
+    for zc in np.array_split(z, 30):
+        Zg, Pg = np.meshgrid(zc, ph, indexing='ij'); rr = np.sqrt(1 - Zg**2)
+        Xg = np.stack([rr*np.cos(Pg), rr*np.sin(Pg), Zg], -1)
+        tot += np.all(Xg @ V.T >= .5, axis=-1).sum()
+    return tot*(2/nz)*(2*np.pi/nph)
+Vs = spiral(10)
+areas = [cap_area(Vs[:m]) for m in (1, 2, 3, 5, 9)]
+oka = np.allclose(areas, [3.141593, 2.297861, 1.802272, 1.049640, 0.054604], atol=3e-3)
+oka &= abs(np.linalg.det(Vs[:3] @ Vs[:3].T) - 0.041133) < 5e-7
+comb = 0.2388*Vs[7] + 0.4261*Vs[8] + 0.3351*Vs[9]; oka &= np.linalg.norm(comb) < 0.496 and abs(sum([0.2388, 0.4261, 0.3351]) - 1) < 1e-12
+W10 = spiral(9, 10.0)
+common3 = cap_area(np.vstack([Vs[:3], W10[:3]])); common9 = cap_area(np.vstack([Vs[:9], W10[:9]]))
+oka &= abs(common3 - 1.570105) < 3e-3 and abs(common9 - 0.010419) < 1.5e-3
+ev3 = np.sort(np.linalg.eigvalsh(np.vstack([Vs[:3], W10[:3]]).T @ np.vstack([Vs[:3], W10[:3]])))
+ev9 = np.sort(np.linalg.eigvalsh(np.vstack([Vs[:9], W10[:9]]).T @ np.vstack([Vs[:9], W10[:9]])))
+oka &= np.allclose(ev3, [0.167199, 0.456613, 5.376189], atol=5e-6) and np.allclose(ev9, [2.744723, 3.881656, 11.373621], atol=5e-6)
+oka &= abs(np.linalg.norm((Vs[7] + spiral(9, 25.0)[8])/2) - 0.498642) < 5e-6 and abs(np.linalg.norm((Vs[4] + spiral(9, 30.0)[8])/2) - 0.468178) < 5e-6
+qa = np.array([2, 2, 1])/3; qb = np.array([1, 2, -2])/3
+sl3 = lambda q: (1 - q.sum()**2/3, 1 - q[2]**2, q[0]**2)
+oka &= np.allclose(sl3(qa), (2/27, 8/9, 4/9)) and np.allclose(sl3(qb), (26/27, 5/9, 1/9))
+Lg = np.zeros((5, 5)); idx = {2: 0, 3: 1, 4: 2, 5: 3, 6: 4}
+for a_, b_ in ((2, 4), (2, 6), (3, 6)):
+    i_, j_ = idx[a_], idx[b_]; Lg[i_, i_] += 1; Lg[j_, j_] += 1; Lg[i_, j_] -= 1; Lg[j_, i_] -= 1
+Kq = Lg + np.eye(5)/4; el = [0, 1, 2]; te = [3, 4]
+Sch = Kq[np.ix_(te, te)] - Kq[np.ix_(te, el)] @ np.linalg.solve(Kq[np.ix_(el, el)], Kq[np.ix_(el, te)])
+oka &= np.allclose(Sch, np.diag([1/4, 441/580]))
+print(f"     spiral areas by quadrature {np.round(areas, 4)}, det 0.041133, emptiness certificates, common areas {common3:.4f}, {common9:.4f}, Gram eigenvalues, centroid, fill: {bool(oka)}")
+results.append(bool(oka))
+
 print(f"\nALL CHECKS PASSED: {all(results)}  ({sum(results)}/{len(results)})")
