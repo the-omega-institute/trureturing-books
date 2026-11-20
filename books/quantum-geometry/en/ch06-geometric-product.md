@@ -248,6 +248,10 @@ By the Cauchy–Schwarz inequality and $\|r_L\| = \|r_R\| = 1$, we have $0 \le V
 
 Property 3 is the other end: when the two markers coincide, $V = 1$ and $D = 0$, and the screen shows fringes of full contrast.
 
+::: {.film src="line-and-area"}
+**The line and the area (2 min 21 s).** Two unit arrows have exactly two things between them: the cyan shadow is the line $\cos\theta$ and the magenta parallelogram is the area $\sin\theta$; turn one arrow and the line shortens as the area grows. For the arrows $(1, 2, 2)$ and $(1, 1, 0)$ the squared lengths multiply to $18$ and the squared dot product is $9$, and the missing $9$ is the sum $1 + 4 + 4$ of the squared areas of the parallelogram's shadows on the three coordinate planes ([@thm-lagrange-gram-identity]); for unit arrows this is $\cos^2\theta + \sin^2\theta = 1$. Each path of a double slit leaves a marker arrow: identical markers leave full fringes, perpendicular markers leave none, and at an angle of $\arccos 0.8$ the contrast is $V = 0.8$ and the distinguishability $D = 0.6$, with $0.36 + 0.64 = 1$ ([@thm-record-coherence-complementarity]); for the two markers, their shared line is the fringes and the area they span is the path information. The screen pattern is a schematic of the equal-weight model with a scanned reference phase; that $D$ is the trace distance of the two markers, and that noisy markers fall inside the circle, are literature results; every number in the film is computed on screen.
+:::
+
 Back on the single qubit of Section 6.1, this wave end is the one where the area is full and the line has shrunk to a point:
 
 ::: {.viz src="qubit-geometry" preset="area" height="500"}
