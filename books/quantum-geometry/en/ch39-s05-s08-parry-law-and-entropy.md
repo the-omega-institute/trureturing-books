@@ -1112,7 +1112,7 @@ Each original point over $(c,v)$ receives $Q(c,v)/|H|$ under the product law. Th
 
 For example, use $Y_1,Y_2,Y_1+Y_2+B$ and $B$ as four outputs. The coset of the first three is determined by their binary sum $B$. The reduced joint law has output $(B,B)$, while the reduced product law replaces the first coordinate by an independent fair bit. For each value of the second coordinate, the two conditional laws of the first have total variation $1/2$. Hence the four-output total variation is $1/2$.
 
-**Which laws can independent bits generate? (Written derivation)** The sign moments constrain the laws that independent bits can generate. Consider two linear functionals $\lambda,\nu$. A single input bit with factor $q=1-2t$ and column $c$ contributes either $1$ or $q$ to each of $m_\lambda$ and $m_\nu$, according to the value of the corresponding functional on $c$. If both functionals give $1$, their sum gives $0$, so this column contributes $|q|^2$ on the left and $1$ on the right. In the other three cases the contributions agree. Independence therefore gives
+**Which laws can independent bits generate? (Written derivation)** For a random binary vector $Y$, let $m_\lambda=\mathbb E[(-1)^{\lambda(Y)}]$ be the sign moment of a linear functional $\lambda$. Consider two functionals $\lambda,\nu$. A single input bit with factor $q=1-2t$ and column $c$ contributes either $1$ or $q$ to each of $m_\lambda$ and $m_\nu$, according to the value of the corresponding functional on $c$. If both functionals give $1$, their sum gives $0$, so this column contributes $|q|^2$ on the left and $1$ on the right. In the other three cases the contributions agree. Independence therefore gives
 
 $$
 |m_\lambda|\,|m_\nu|\le |m_{\lambda+\nu}|.
@@ -1128,6 +1128,30 @@ $$
 $$
 
 since $1/\sqrt{2}\le r<1$. This contradicts nonnegative mass.
+
+**Exact distance to affine independent-bit laws on four points (written derivation).** Order the three nontrivial sign moments by absolute value. Choose the two characters with the larger moments as coordinates, and translate the law so that their moments are $0\le a\le c$. The remaining character is their product. Write $b$ for its signed moment, so $|b|\le a$ and $c\le1$. In sign coordinates $u,v\in\{-1,1\}$, the mass at $(u,v)$ is $(1+au+cv+buv)/4$. Coordinate changes and translations preserve total variation and the class of affine independent-bit laws. The minimum distance to that class is
+
+$$
+d_*=\frac{\max(0,ac-b)}{2(1+c)}.
+$$
+
+If $b\ge ac$ and $b>0$, use three independent input bits with bias factors $\sqrt{ac/b}$, $\sqrt{ab/c}$, and $\sqrt{bc/a}$. In the two character coordinates, assign them columns $(1,1)$, $(1,0)$, and $(0,1)$, respectively. All three factors are in $[0,1]$, since $ac\le b$, $ab\le c$, and $bc\le a$. The three products of factors give $a,c,b$, which determine the law. If $b=0$ and $b\ge ac$, then $a=0$ and the product of independent sign laws with moments $0,c$ realizes the law.
+
+Now suppose $b<ac$. Consider a competing affine law with moments $a',c',b'$ at total variation distance $d$. Each atom changes by at most $d$ and each moment by at most $2d$. The signs of three nonzero moments of an affine law multiply to $+1$. A single column contributes a signed bias in exactly two characters or in none, and the offsets give a product of $+1$. If $b'<0$, then at least one of $a',c'$ is nonpositive. Thus $d\ge a/2\ge d_*$, using $b\ge-a$ in the last inequality.
+
+For $b'\ge0$, put $x=\max(0,a-a')$, $y=\max(0,c-c')$, and $z=b'-b$. Each is bounded above by $2d$, and $x+y+z\le4d$. If $x$ or $y$ is zero, use the individual bounds. Otherwise the sum equals four times the mass increase at the sign pair $(-,-)$. Put $\alpha=\min(a,|a'|)$ and $\gamma=\min(c,|c'|)$. Then $a-\alpha\le x$ and $c-\gamma\le y$. Writing $ac-\alpha\gamma=c(a-\alpha)+\alpha(c-\gamma)$ and using the moment constraint $|a'||c'|\le b'$ gives
+
+$$
+ac-b\le c(x+y)+z=c(x+y+z)+(1-c)z\le2(1+c)d.
+$$
+
+To attain the bound, transfer mass $d_*$ from $(+,-)$ to $(-,-)$. The source atom can supply it because
+
+$$
+P(+,-)-d_*=\frac{(1-c)(1+c+a+b)}{4(1+c)}\ge0.
+$$
+
+The resulting moments are $a-2d_*,c,b+2d_*$. The last is the product of the first two, so Fourier inversion gives the product of the two marginal sign laws. The inverse coordinate map realizes this product using two independent bits. The transfer changes total variation by exactly $d_*$. For the example with masses $(17,1,7,7)/32$ the minimum distance is $1/24$.
 
 **Recovering biases from the coset law (written derivation).** Let the biased input bits $X_j$ be independent, with $\Pr(X_j=1)=t_j\in(0,1/2)$. Write $c_j\in C$ for the image of the column of input $j$ in the quotient. The coset output is $Y=s+\sum_j c_jX_j$, with the projected affine offset $s$. For each nonzero $c\in C$, define $q_c=\prod_{j:c_j=c}(1-2t_j)$, with empty product $1$.
 
