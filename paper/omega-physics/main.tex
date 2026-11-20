@@ -95,7 +95,10 @@ the Born weights are the only nonnegative functions of the transition probabilit
 certain on the state's own ray and consistent with adjoining ancillas, and that ancillas give all effects, Kraus instruments and conditional states; complex Hilbert spaces
 of every finite dimension occur as round-trip-closed, clock-invariant sub-structures of these registers,
 and are systems under an explicit restriction of preparations, tests and operations.  No
-outcome rule covariant at ties exists.  In a closed register of $2n$ systems in a global singlet, an
+outcome rule covariant at ties exists; for a stochastic record process with one terminal record, the Born rule
+at every stage is equivalent to the weights being martingales, and a hidden-threshold or simplex
+selection is Born exactly when its auxiliary law is the invariant one; which dynamics is realised is
+not decided.  In a closed register of $2n$ systems in a global singlet, an
 exchange constraint gives conditional Schr\"odinger dynamics relative to an internal clock, with an
 explicit source from exchanges across the clock cut, and the unobservable clock [Cl] follows from the
 invisibility of the total phase under a stated bridge hypothesis.  The dichotomies of configurations form four-dimensional
@@ -255,6 +258,9 @@ composite reading built on one clock's complex structure, and a right transport 
 statistics unchanged is unobservable (Section~\ref{sec:closedreg}).
 \item[{[U], [A]}] The physical specification of a closed-universe state, and of an observer's accessible
 algebra (Hypotheses~U and~A, Section~\ref{sec:closedreg}).
+\item[{[R]}] A record process: one terminal vertex and absorbing record faces in the observer's filtration
+(Definition~\ref{def:soprocess}).  [Tr]: a linear number of terminal transcripts in the tick count.  [Ap]: a
+preparation-independent, unitary-invariant apparatus sampling law (Section~\ref{sec:outcomes}).
 \item[{[G]}] The group, multiplets, breaking configuration and equal couplings of
 Section~\ref{sec:sm} (Hypothesis~G, clauses (i)--(v)).
 \item[{[GR]}] Einstein's equations with a source (Hypothesis~GR).
@@ -293,7 +299,8 @@ Q7 & $\U(2)$ and the ratio $g^2:(g^2+g'^2)$ of the mass-form eigenvalues; with [
 
 \subsection{What is not claimed}
 The Hamiltonian, the coupling constants and the direction of any external field are free.  A
-mechanism for single outcomes is not proposed.  The probabilistic reading of weights is [T].  That
+mechanism for single outcomes is not proposed: Section~\ref{sec:outcomes} characterises the statistics of any
+single-outcome record process (Theorem~\ref{thm:sorigidity}) and does not select a dynamics.  The probabilistic reading of weights is [T].  That
 states are clock orbits is a theorem under [L], [B], equivalently [L], [Cl], [NT]
 (Proposition~\ref{prop:clockB}), and the square needs [W], [Comp] and [N] (Theorem~\ref{thm:readings}); without [B] the
 real four-level reading ($K=\{\pm1\}$, weight $c^2$) is also composable.  The single clock of a composite (C0) is derived for clock-read factors under [Bil], [Loc], [O], [C2] and
@@ -379,7 +386,7 @@ the structure (Section~\ref{sec:sm}).
 Part~I (Sections~\ref{sec:axiom}--\ref{sec:geometry}) is the kinematics: the axiom and its solutions, one
 system, many systems, sub-structures of every dimension, and the geometry of states.  Part~II
 (Sections~\ref{sec:closedreg}--\ref{sec:outcomes}) concerns observers inside the structure: a closed universe with internal
-clocks, and single outcomes; sections on finite-memory observers, erasure and consensus, and
+clocks, and single outcomes as bounded martingales with finite-tick certification; sections on finite-memory observers, erasure and consensus, and
 computation are to follow.  Part~III will collect bounds and budgets: speed limits, the Tsirelson bound and an
 entanglement budget.  Part~IV (Sections~\ref{sec:eventspace}--\ref{sec:sm}) contains the space of events,
 fields of structures, the variable radius, the round four-sphere target from a pair, topological
@@ -806,7 +813,7 @@ Uncertainty relation & equality (Thm.~\ref{thm:unc}) & none\\
 One clock; tensor product & Thm.~\ref{thm:oneclock}; or Thm.~\ref{thm:product}, Cor.~\ref{cor:ampmult}; Prop.~\ref{prop:avg} & clock-read factors with [Bil$_\cL$], [Span], [Loc], [O], [C2], [N], C1(b); or C0, C1, [Span], and C2 for $N\ge3$\\
 All unit vectors are states; all unitaries are operations & Thm.~\ref{thm:comp} & C0--C2, [Span]; C3 for operations\\
 Measurement update & conditional state $K_a\psi/\lVert K_a\psi\rVert$ (Prop.~\ref{prop:relative}, Thm.~\ref{thm:instruments}) & C0--C3, Convention T\\
-Single outcomes & no covariant outcome rule (Prop.~\ref{prop:nooutcome}) & open\\
+Single outcomes & no covariant outcome rule (Prop.~\ref{prop:nooutcome}); for a record process, Born at every stage $\Leftrightarrow$ martingale weights (Thm.~\ref{thm:sorigidity}); threshold and simplex selection Born $\Leftrightarrow$ invariant auxiliary law (Thms.~\ref{thm:sosphere}, \ref{thm:sosimplex}) & [R]; [Ap] for an apparatus; the realised dynamics: open\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -2316,7 +2323,17 @@ modular information.
 
 
 %=====================================================================================
-\section{What the structure does not supply: single outcomes}\label{sec:outcomes}
+\section{Single outcomes: bounded martingales and finite-tick halting}\label{sec:outcomes}
+The weights $\beta$ of a complete test are the complete covariant description of the test; an outcome needs
+further data.  This section determines what those data must satisfy.  If the trajectories of a
+stochastic measurement tend almost surely to single orthogonal records, the Born rule at every stage is
+equivalent to the current weights being martingales in the observer's filtration; the Born rule at
+preparation alone is weaker.  On the Bloch sphere and on the simplex, a hidden threshold selects outcomes
+with Born probabilities exactly when its law is the invariant one.  Finite certification is a separate
+question: an inverse-tick resolution bound holds when a transcript distinguishes at most linearly many
+alternatives, and adaptive binary comparisons beat it exponentially.
+
+\subsection{What the structure does not supply}
 
 \begin{proposition}[outcome rules]\label{prop:nooutcome}
 (i) For one system there is no map $F$ assigning to a ray $q$ and a test $\{p,p^\perp\}$ with
@@ -2333,11 +2350,345 @@ $p$ and $p^\perp$, so $F(q,\{p,p^\perp\})$ would be fixed by $g$, which fixes ne
 is a $\{0,1\}$-valued function on rays summing to one on every orthonormal basis, which the
 Kochen--Specker theorem excludes in dimension $\ge3$.
 \end{proof}
-For one system the obstruction is only at ties; for composites it is the Kochen--Specker theorem.  The
-number $\beta$ is the complete covariant description of a test; an outcome requires data that
-$(M,\hp{\cdot}{\cdot}{\cdot},\kappa,T)$ does not contain, and the axiom is silent on what these data are.  The
-update rule is a different matter: given an outcome, the conditional state is determined
-(Proposition~\ref{prop:relative}, Theorem~\ref{thm:instruments}); which outcome occurs is not.
+For one system the obstruction is only at ties; for composites it is the Kochen--Specker theorem.  An
+outcome requires data that $(M,\hp{\cdot}{\cdot}{\cdot},\kappa,T)$ does not contain.  Given an outcome, the conditional
+state is determined (Proposition~\ref{prop:relative}, Theorem~\ref{thm:instruments}).  The models below use additional
+random data and the context of the implemented test, so Proposition~\ref{prop:nooutcome}, which concerns
+deterministic assignments on the original data, does not apply to them.
+
+\subsection{Weights, terminal records and martingales}\label{sec:sorecords}
+Let $P_1,\dots,P_d$ be nonzero orthogonal record projections with $\sum_iP_i=\mathbf1$ on the space of Theorems~\ref{thm:born} and
+\ref{thm:bornN}, $w_i(\rho)=\tr(P_i\rho)$, and $e_i$ the vertices of the simplex $\Delta_{d-1}$; the $w_i$ are nonnegative and sum to
+one, they are the weights $\beta$, $\beta_N$ (summed over blocks for coarse tests), and Convention~\ref{conv:T} reads
+them as probabilities.  A law for conditioned trajectories lets us prove this reading for the
+frequencies of a fixed test.
+
+\begin{definition}[record process]\label{def:soprocess}
+Let $(\mathcal F_t)$ be the observer's filtration, in discrete time $t\in\mathbb N_0$ or in continuous time $t\ge0$ (then complete and
+right-continuous, with right-continuous weight paths with left limits).  An adapted density process $\rho_t$ has
+weights $W_i(t)=w_i(\rho_t)$.  It is a \emph{record process} ([R]) if $W(t)\to e_J$ almost surely for a record index $J$
+measurable in $\mathcal F_\infty$ (one terminal vertex), and a vertex once attained is absorbing (absorbing record
+faces).  The limit may be asymptotic.
+\end{definition}
+
+\begin{theorem}[Born weights and conditional probabilities]\label{thm:sorigidity}
+For a record process the following are equivalent:
+(i) $W_i(t)=\mathbb P(J=i\mid\mathcal F_t)$ almost surely for every deterministic $t$ and every $i$ (conditional Born
+calibration at every time); (ii) every $W_i$ is a bounded $(\mathcal F_t)$-martingale.
+Either gives the same formula at every almost surely finite stopping time $\tau$ (optional stopping); at
+a deterministic preparation the winning probabilities are $w_i(\rho_0)$, and for independent repetitions the
+frequencies converge to them almost surely.  In discrete time (ii) is zero conditional one-step drift; in
+continuous time, for a special semimartingale $W_i=W_i(0)+M_i+A_i$ with predictable finite-variation $A_i$, it is $A_i=0$.
+\end{theorem}
+\begin{proof}
+(i)$\Rightarrow$(ii) is the tower property.  Conversely, $\mathbb E[W_i(s)\mid\mathcal F_t]=W_i(t)$, $0\le W_i\le1$ and $W_i(s)\to\mathbf1_{\{J=i\}}$ give (i)
+by conditional dominated convergence as $s\to\infty$.  For a bounded finite-valued $\tau$ test on each slice $\{\tau=t\}$;
+in continuous time round a bounded $\tau$ up on dyadic grids, use right continuity and dominated
+convergence; for finite $\tau$ test on $B\cap\{\tau\le m\}$ and let $m\to\infty$.  The frequencies follow from the strong
+law.  The drift statement is uniqueness of the canonical decomposition, a bounded local martingale
+being a martingale \cite{n3:Williams}.
+\end{proof}
+
+\begin{corollary}[fresh-start calibration and restart]\label{cor:sorestart}
+Suppose the conditional continuation given $\mathcal F_t$ is the same law restarted at $\rho_t$ (and at time $t$ for a
+time-inhomogeneous family); a Markov family with the density as state and the natural filtration has this
+property at deterministic times.  Then Born terminal probabilities at every admissible start (fresh-start
+calibration) imply the martingale property, and conversely.  A declaration $\hat J$ at a finite stopping time
+with $W_{\hat J}(\tau)\ge1-\alpha$ has conditional error at most $\alpha$, also on the declaration event of a rule with an
+undecided output.
+\end{corollary}
+\begin{proof}
+Restart gives $\mathbb P(J=i\mid\mathcal F_t)=w_i(\rho_t)$, which is (i); the converse is Theorem~\ref{thm:sorigidity} at each start.  On
+$\{\hat J=i\}$ the error is $1-W_i(\tau)$.
+\end{proof}
+
+\begin{remark}[Born at preparation does not force zero drift]\label{rem:somemory}
+For two rank-one outcomes, $p=w_1(\rho_0)\in(0,1)$ and $a=p(1-p)$, put $W_1(1)=p+Sa$ with an equiprobable sign $S$, and from
+tick two on $W_1=\mathbf1_{\{J=1\}}$ with $J$ drawn with probability $p$ independently of $S$ (diagonal densities).
+$W_1(1)\in(0,1)$ since $p-a=p^2$ and $1-p-a=(1-p)^2$.  Both unread maps from preparation are the pinching channel, which
+is CPTP and affine, and every preparation has Born winning probabilities; yet $\mathbb E[W_1(2)\mid\mathcal F_1]=p\ne W_1(1)$.
+\emph{Born calibration at preparation plus affine unread evolution does not force zero conditional drift};
+the correct statement is Theorem~\ref{thm:sorigidity} (calibration at every time) or Corollary~\ref{cor:sorestart}
+(fresh-start calibration plus restart).  The conditional increments cancel in expectation from preparation;
+a drift of fixed sign (a strict sub- or supermartingale) does change the terminal probabilities.
+\end{remark}
+
+\begin{proposition}[unread channels and record weights]\label{prop:sochannels}
+If $\mathbb E[\rho_t\mid\mathcal F_s]=\Phi_{s,t}(\rho_s)$ ($s\le t$) with CPTP maps preserving every record face, the weights are martingales.
+Face-preserving CPTP maps from deterministic preparations to the unread averages give Born terminal
+probabilities at preparation only.  With remote steering and local tomography, absence of signalling by
+a remote choice of ensemble requires an affine unread map on density matrices; local CPTP maps satisfy
+it.
+\end{proposition}
+\begin{proof}
+$E_i=\Phi^*_{s,t}(P_i)$ satisfies $0\le E_i\le\mathbf1$, and face preservation gives $\ip v{E_iv}=1$ on face $i$ and $0$ on the others;
+a vector with zero expectation of a positive operator is in its kernel, so $E_i=P_i$, and tracing gives the
+martingale identity.  From preparations the same argument gives $\mathbb EW_i(t)=w_i(\rho_0)$, and bounded convergence
+gives the terminal law.  For an ensemble $\sum_aq_a\rho_a=\rho$, the purification with coefficients $\sqrt{\lambda_j}$ and the
+effects $(\rho^{-1/2}q_a\rho_a\rho^{-1/2})^{\mathsf T}$ on the purifying side steer to $q_a\rho_a$; local tomography makes every such
+ensemble give the same unread density, which is the affine law.  The dual of a local CPTP map fixes $\mathbf1$, so
+remote effects $\mathbf1\otimes E$ keep their expectations.
+\end{proof}
+
+\begin{proposition}[unread and selected states]\label{prop:sopinching}
+$\mathcal D(\rho)=\sum_iP_i\rho P_i=\sum_{i:w_i>0}w_i\rho_i$ with $\rho_i=P_i\rho P_i/w_i$; $\mathcal D$ is idempotent, fixes exactly the block-diagonal
+matrices, and is the reduced channel of the isometry $v\mapsto\sum_iP_iv\otimes\lvert i\rangle$.  If a rank-one coupling sends $\lvert i\rangle$
+to $\lvert i\rangle\otimes E_i$ and $m$ fresh registers are used, the $(i,j)$ entry becomes $\rho_{ij}\ip{E_j}{E_i}^m$, and if $\lvert\ip{E_j}{E_i}\rvert\le q<1$ for
+$i\ne j$, $\lVert\rho_m-\mathcal D(\rho)\rVert_{\mathrm{HS}}\le q^m\lVert\rho-\mathcal D(\rho)\rVert_{\mathrm{HS}}$.
+\end{proposition}
+\begin{proof}
+Blocks are positive with trace $w_i$; orthogonality gives $P_i\mathcal D(\rho)P_j=\delta_{ij}P_i\rho P_i$; the partial trace removes the terms
+$i\ne j$.  Inner products multiply on tensor products.  (A reused environment needs its own analysis.)
+\end{proof}
+
+\begin{remark}[one surviving record needs more than linearity, pinching or stabilisation]\label{rem:sononselection}
+At ray angle $30^\circ$ the unread density $\mathrm{diag}(\tfrac34,\tfrac14)$ is fixed by pinching with both weights in $(0,1)$: linearity
+and pinching keep both candidates.  A map $U$ on subsets with $U(A)\subseteq A$ stabilises within $\lvert S_0\rvert$ updates, but
+$U(A)=A$ with $\lvert S_0\rvert=2$ keeps both candidates; only if $U$ preserves nonemptiness and strictly shrinks every
+nonsingleton does a nonempty $S_0$ reach a singleton (within $\lvert S_0\rvert-1$ updates).
+\end{remark}
+
+\begin{example}[ideal continuous nondemolition measurement]\label{ex:sodiffusion}
+For $A=\sum_ia_iP_i$ with distinct real $a_i$ and no Hamiltonian mixing of record faces, the conditional diffusion
+$d\rho_t=-\gamma[A,[A,\rho_t]]dt+\sqrt{2\gamma}(A\rho_t+\rho_tA-2\bar a_t\rho_t)dB_t$, $\bar a_t=\tr(A\rho_t)$, is a record process with martingale weights.
+Construction: with $\eta=\sqrt{2\gamma}$ let $Y_t$ be Brownian motion with drift $2\eta a_i$ chosen with probability $w_i(\rho_0)$;
+$K_t=\exp(\eta AY_t-\eta^2A^2t)$, $X_t=K_t\rho_0K_t$, $\rho_t=X_t/\tr X_t$ gives the posterior weights (the likelihood of drift $2\eta a_i$
+is $\exp(2\eta a_iY_t-2\eta^2a_i^2t)$), and $B_t=Y_t-\int_0^t2\eta\bar a_sds$ is Brownian in the observation filtration.  It\^o's rule gives
+$dX=\eta(AX+XA)dY-\gamma[A,[A,X]]dt$ and the quotient rule the stated equation.  Then
+$dW_i=2\sqrt{2\gamma}(a_i-\bar a_t)W_idB_t$; the It\^o isometry bounds $\mathbb E\int_0^\infty8\gamma(a_i-\bar a_t)^2W_i^2dt$ by one, so $(a_i-\bar a_\infty)W_i(\infty)=0$ and exactly
+one limit is positive; the stochastic-exponential form keeps positive weights positive at finite times.
+The mean is the dephasing channel, block $(i,j)$ multiplied by $e^{-\gamma t(a_i-a_j)^2}$, the average of $e^{-iAX}\cdot e^{iAX}$ over real
+Gaussian $X$ of variance $2\gamma t$.  The construction uses the projective weights in the observation law.
+\end{example}
+
+\begin{remark}[relation to stochastic measurement theory]\label{rem:sohistory}
+Gisin's ensemble argument concerns dependence of the dynamics on the density, and Simon, Bu\v{z}ek and
+Gisin extend it to composites \cite{n3:Gisin,n3:Simon}; Gisin and Percival represent unread evolution by
+quantum-state diffusion, and Di\'osi models continuous measurement by stochastic evolution
+\cite{n3:GisinPercival,n3:Diosi}; Jacobs and Steck review continuous monitoring \cite{n3:Jacobs}; Adler,
+Brody, Brun and Hughston use martingales for energy-driven reduction and its terminal probabilities
+\cite{n3:Adler}; Bassi and Ghirardi, and Bassi et al., discuss dynamical reduction and its empirical
+distinctions from unitary dynamics \cite{n3:BassiGhirardi,n3:Bassi}.  Theorem~\ref{thm:sorigidity} states, independently of a
+choice of diffusion, which filtration and restart conditions give the Born rule across stages, and
+Remark~\ref{rem:somemory} shows that the weaker condition at preparation does not.
+\end{remark}
+
+\subsection{Attraction basins on the sphere and the simplex}\label{sec:sobasins}
+Orient the Bloch axis $u$ (Theorem~\ref{thm:born}) towards record one; for ray angle $\theta$ from it, $z=r\cdot u=2w_1-1=\cos2\theta$.
+
+\begin{theorem}[threshold selection on the Bloch sphere]\label{thm:sosphere}
+Let $k>0$ and draw $\lambda\in(-1,1)$ from one Borel law for all input rays.  For fixed $\lambda$ the flow $\dot r=k(z-\lambda)(u-zr)$
+on $\lvert r\rvert=1$, with $\dot z=k(z-\lambda)(1-z^2)$, sends $z>\lambda$ to $+u$ and $z<\lambda$ to $-u$ (asymptotically) and leaves the latitude
+$z=\lambda$ fixed.  The north probability is $(1+z)/2$ for every input iff $\lambda$ is uniform, and the uniform law is the
+push-forward of the rotation-invariant area on $S^2$ under $r\mapsto r\cdot u$ (Archimedes' hat-box theorem).
+\end{theorem}
+\begin{proof}
+$r\cdot(u-zr)=0$, so the field is tangent; the equilibria $1,-1,\lambda$ of the scalar equation have derivatives $-2k(1-\lambda)$,
+$-2k(1+\lambda)$, $k(1-\lambda^2)$, and $z(t)$ is strictly monotone towards its pole in each basin; $\lvert r\mp u\rvert^2=2(1\mp z)$.  The north
+probability is $\mathbb P(\lambda<z)$; equality with $(1+z)/2$ for all $z$ fixes the law on half-open intervals and excludes atoms.  In
+coordinates $(\sqrt{1-z^2}\cos\varphi,\sqrt{1-z^2}\sin\varphi,z)$ the area is $dz\,d\varphi$ \cite{n3:Archimedes}; averaging over $\SO(3)$ shows uniqueness of the
+invariant probability.
+\end{proof}
+
+\begin{remark}[symmetry alone is not enough; no affine flow]\label{rem:sothresholds}
+The deterministic $\lambda=0$ leaves the equator undecided.  The north--south symmetric density $3\lambda^2/2$ gives north
+probability $(1+z^3)/2$, i.e.\ $9/16$ at $z=\tfrac12$ (Born: $3/4$) and $7/16$ at $z=-\tfrac12$; an even atomless law only fixes $\tfrac12$ at the
+equator.  Even the uniform law gives no affine collapse flow: the mean initial velocity is $kz(1-z^2)u$ for a mixture
+of two rays at height $z$ with opposite transverse components and $0$ for the mixture of poles with weights
+$(1\pm z)/2$, although both have the same density; the terminal law is the pinched density.
+\end{remark}
+
+\begin{theorem}[simplex selection and its sampling law]\label{thm:sosimplex}
+For $d\ge2$ let $U$ be a random point of the open simplex $\Delta_{d-1}$ with law independent of the input weights $p$, and let
+the winner be the strict minimiser of $U_i/p_i$ over $p_i>0$ (ties undecided).  Every input has winning
+probabilities $p_i$ iff $U$ is uniform ($\mathrm{Dirichlet}(1,\dots,1)$), which is the push-forward of the invariant probability on $\C P^{d-1}$
+by the squared moduli in the record basis.
+\end{theorem}
+\begin{proof}
+For a standard complex Gaussian vector $G$ the ray is unitary invariant and $X_i=\lvert G_i\rvert^2$ are independent rate-one
+exponentials; $U_i=X_i/s$, $s=\sum X_i$, has Jacobian $s^{d-1}$ and $\int_0^\infty e^{-s}s^{d-1}ds=(d-1)!$, the uniform density.  $X_i/p_i$ is
+exponential of rate $p_i$, and $i$ wins with probability $\int_0^\infty p_ie^{-t}dt=p_i$.  Conversely, for interior $p$ with $p_i=t_ip_d$,
+the winning event of $d$ is $\{U_i/U_d>t_i\ \forall i<d\}$, so the required probabilities fix the joint survival function of
+the ratios, hence the law of $U$.
+\end{proof}
+
+\begin{remark}[scope of the simplex rule]\label{rem:sobasinscope}
+For $d=2$, $\lambda=2U_1-1$ recovers Theorem~\ref{thm:sosphere}.  With $b_i=p_i/U_i$, $x_i(t)=p_ie^{b_it}/\sum_jp_je^{b_jt}$ solves $\dot x_i=x_i(b_i-\sum_jx_jb_j)$
+and tends to the winner, a continuous realisation of the basins with frozen scores.  The rule is the
+exponential-race form of the vertex-opposite partition of the simplex; Aerts and Sassoli de Bianchi use
+uniform simplex volumes \cite{n3:Aerts}, and complex Gaussian coordinates for invariant rays are used
+in \cite{n3:Zyczkowski}.  For coarse tests sample in a fine basis and group labels; raw block masses are
+$\mathrm{Dirichlet}$ with the block ranks and do not implement the coarse race: for ranks $(2,1)$ and weights $(\tfrac12,\tfrac12)$
+the first block wins with probability $\int_0^{1/2}2u\,du=\tfrac14$.  For an actual apparatus the invariant auxiliary law is
+an input (Hypothesis~Ap below).
+\end{remark}
+
+\begin{example}[five-state comparison]\label{ex:sochain}
+On $p_j=j/4$ ($0\le j\le4$) with absorbing ends and interior up-probability $q$, the absorption time has tail at most
+$(1-q^4)^m$ after $4m$ ticks but no deterministic bound from $j=2$.  The upper hitting probability is $h_j=j/4$ for $q=\tfrac12$
+(mean time $j(4-j)$) and $h_j=(1-2^{-j})/(1-2^{-4})$ for $q=\tfrac23$, i.e.\ $8/15,4/5,14/15$ against Born $1/4,1/2,3/4$, with drift
+$(2q-1)/4=1/12$: a drift of fixed sign changes the probabilities.
+\end{example}
+
+\subsection{Finite comparison ticks}\label{sec:soticks}
+
+\begin{definition}[certified resolution]\label{def:sotranscript}
+An unknown parameter ranges over an interval of length $L>0$; a protocol of at most $N_{\mathrm{ticks}}\ge1$ ticks reports a
+terminal transcript, and certifies resolution $\varepsilon_{\mathrm{self}}$ if for every transcript the compatible inputs lie in
+an interval of length (diameter) at most $\varepsilon_{\mathrm{self}}$; certification of absolute error by one estimate uses
+the radius.
+\end{definition}
+
+\smallskip\noindent\textbf{Hypothesis Tr (linear transcript capacity).}  For the measurement and parameter in question
+at most $AN_{\mathrm{ticks}}$ distinguishable terminal transcripts are available for uniform certification, $A>0$ independent
+of $N_{\mathrm{ticks}}$; the transcript contains all information used, including any recorded stopping time.
+
+\begin{proposition}[inverse-tick resolution]\label{prop:soresolution}
+With at most $M$ transcripts, $\varepsilon_{\mathrm{self}}\ge L/M$ (diameter); under Hypothesis~Tr, $\varepsilon_{\mathrm{self}}\ge c_{\mathrm{res}}/N_{\mathrm{ticks}}$ with
+$c_{\mathrm{res}}=L/A$; for absolute error the constants are halved.  Equal cells attain the bound (e.g.\ diameter $0.05$ for
+$L=1$, $M=N_{\mathrm{ticks}}=20$).
+\end{proposition}
+\begin{proof}
+The certified intervals cover the input interval.  Equal cells with $M-1$ fixed cuts attain the bound, their
+midpoints the radius bound.  For randomised protocols with the seed known to the certifier, apply the
+argument at each seed.
+\end{proof}
+
+\begin{remark}[the unrestricted inverse-tick bound is false]\label{rem:sobisection}
+Adaptive bisection halves the interval at each binary comparison and reaches diameter $2^{-N_{\mathrm{ticks}}}$ on $[0,1]$,
+optimal for depth-$N_{\mathrm{ticks}}$ binary trees, and $2^{-N}<c_{\mathrm{res}}/N$ eventually for every $c_{\mathrm{res}}>0$.  A discrete label can be
+read exactly in one tick.  A finite tick count or a speed limit therefore does not by itself give an
+inverse-tick floor; Hypothesis~Tr does.
+\end{remark}
+
+\begin{remark}[clock and causal budgets]\label{rem:soclock}
+With one comparison per period $1/\nu_0$ the serial budget in a window $\Delta\tau$ is $\lfloor\nu_0\Delta\tau\rfloor$; a round trip over distance $R$
+at speed at most $c_{\mathrm{light}}$ needs $2R\le c_{\mathrm{light}}\Delta\tau$; a lattice with hop length $\ell$ per period has speed $\ell\nu_0$.  With $L=1$, $A=1$,
+Proposition~\ref{prop:soresolution} gives $\varepsilon_{\mathrm{self}}\ge1/\lfloor\nu_0\Delta\tau\rfloor\ge\ell/(c_{\mathrm{light}}\Delta\tau)$ if $c_{\mathrm{light}}=\ell\nu_0$; a universal clock and the
+capacity are physical inputs (a nearest-neighbour cubic lattice has a different reachable set from a light
+cone).  Separately, under an assumed Fubini--Study angular speed $E/\hbar$, a stage within angle $E\tau/\hbar$ of two
+orthogonal rays needs $\pi/2\le2E\tau/\hbar$, so $n\le4E\Delta\tau/(\pi\hbar)$ such stages fit in $\Delta\tau$; using this as a precision bound
+needs a link to the transcript capacity.  The geodesic recurrence of \cite[Thm.~6.2]{PaperI} advances along
+an arc; a measurement comparison also needs the observable and the information returned.
+\end{remark}
+
+\begin{proposition}[residual certificate]\label{prop:soresidual}
+For a contraction $F$ with constant $q<1$ of a complete metric space, $x_n=F(x_{n-1})$ and $r_n=d(x_n,x_{n-1})$: $r_n\le q^{n-1}r_1$
+and $d(x_n,x_*)\le\frac q{1-q}r_n$, so a residual test with positive tolerance halts in finite time with this error bound.
+\end{proposition}
+\begin{proof}
+$r_{n+1}\le qr_n$ and the geometric tail; uniqueness by contraction.
+\end{proof}
+\noindent For $\cos$ on $[0,1]$ ($q=\sin1$) from $x_0=0$: $1$, $0.540302$, $0.857553$, $0.654290$, $0.793480$; the fifth residual $0.139191$ is the
+first below $0.150$, with actual error $0.054395$; the set $\{\lvert\cos x-x\rvert\le0.150\}$ is $[0.6476,0.8270]$.  At tolerance zero there is
+no finite halt from $0$ (injectivity), whereas a start at the fixed point halts at once, so zero residual does
+not universally prevent termination.  The shift $x\mapsto\{10x\}$ reveals the digits $0.739$, $0.390$, $0.908$, $0.085$, $0.851$ of
+$x_*=0.7390851332\ldots$, since $\{10\{10^tx\}\}=\{10^{t+1}x\}$.
+
+\subsection{Spectral truncation and repeated readout}\label{sec:sospectra}
+
+\begin{proposition}[tails and finite observability]\label{prop:sotails}
+For an orthogonal projection $P$ and a skew-adjoint unitary $R$, $R^2=-\mathbf1$ and $\lVert Pv\rVert^2+\lVert R(\mathbf1-P)v\rVert^2=\lVert v\rVert^2$; the rotated tail
+stays in the discarded subspace for all $v$ iff that subspace is $R$-invariant (the quarter turn $R(x,y)=(-y,x)$ with $P$
+the first coordinate is a counterexample), and $\re\ip v{Rv}=0$.  For $T\colon V\to V$, $C\colon V\to Y$ finite-dimensional, the tower
+$K_m=\mathrm{span}\{(T^\dagger)^kC^\dagger y:k\le m\}$ has at most $\dim V-\rk C$ strict inclusions, and the first equality is permanent.
+\end{proposition}
+\begin{proof}
+$RR^\dagger=\mathbf1$ with $R^\dagger=-R$; orthogonality and norm preservation.  Each strict inclusion raises the dimension, and
+$T^\dagger K_m\subseteq K_{m+1}=K_m$ propagates.  (The identity update saturates at once, so saturation is no ranking.)
+\end{proof}
+
+\begin{proposition}[power filtering and truncation]\label{prop:sopower}
+For $G\ge0$ with eigenpairs $(\sigma_i,u_i)$, $\sigma_1\ge\dots\ge\sigma_d$, and $v=\sum c_iu_i$: $\sigma_1^{-n}G^nv=\sum(\sigma_i/\sigma_1)^nc_iu_i$; if $\sigma_1>\sigma_2$ and $c_1\ne0$ the
+normalised iterates converge to $u_1$ with orthogonal part at most $(\sigma_2/\sigma_1)^n(\sum_{i>1}\lvert c_i\rvert^2)^{1/2}/\lvert c_1\rvert$; with a repeated
+top eigenvalue the limit is the normalised leading projection, and with zero leading projection the
+largest populated positive eigenspace controls the limit \cite{n3:vonMises}.  The truncated singular-value
+decomposition minimises spectral and Frobenius errors among rank-$\le r$ matrices, with errors $s_{r+1}$ and
+$(\sum_{i>r}s_i^2)^{1/2}$ \cite{n3:EckartYoung,n3:Mirsky}.
+\end{proposition}
+\begin{proof}
+Diagonalise.  For rank $\le r$, $\ker B$ meets the span of the first $r+1$ right singular vectors; for Frobenius, a projection
+$Q$ onto $d-r$ kernel vectors gives $\sum_is_i^2\ip{v_i}{Qv_i}$ with coefficients in $[0,1]$ summing to $d-r$.
+\end{proof}
+\noindent For $\sigma=(1,0.76,0.54,0.35,0.20,0.10)$ the fourth powers are $(1,0.333622,0.085031,0.015006,0.001600,0.000100)$; the shares of the first
+two modes for $k=2,8,10$ in $\sum_{i\le2}\sigma_i^k/\sum\sigma_i^k$ are $0.772689$, $0.993334$, $0.997997$ (operator, fourth power, fourth-power output of
+an input $\propto\sigma_i$).  The masses $\sigma_i^2/\sum\sigma_j^2$ above $0.100$ retain $0.9155$; releasing one discarded mode per tick gives
+$0.9951$ after two ticks (a specified schedule).
+
+\begin{remark}[basis-dependent weights]\label{rem:sobasis}
+Weights are Rayleigh quotients $\ip{b_i}{\rho b_i}$: $\psi=(1,2,5)/\sqrt{30}$ has weights $(1,4,25)/30$ in the coordinate basis and $(1,0,0)$ in a
+basis starting with $\psi$.  Interpolating from the coordinate basis to the real orthonormal basis $F$ with
+columns $(1,1,1)/\sqrt3$, $(1,0,-1)/\sqrt2$, $(-1,2,-1)/\sqrt6$ ($\det F=1$) by $F(t)=\mathbf1+\sin(t\omega)K+(1-\cos(t\omega))K^2$, $\omega=\arccos((\tr F-1)/2)$,
+$K=(F-F^{\mathsf T})/(2\sin\omega)$, gives at $t=65/90$ the weights $0.6273$, $0.2525$, $0.1202$.  Inner-product scoring also occurs in
+attention, $\mathrm{softmax}(QK^{\mathsf T}/\sqrt{d_k})V$ \cite[Sec.~3.2.1]{n3:Attention}; quantum weights use squared moduli and
+orthogonal completeness, and the similarity is an analogy.
+\end{remark}
+
+\begin{proposition}[repeated readout and Zeno survival]\label{prop:sozeno}
+For a qubit in record zero rotated through angle $a/N$ between tests, the probability of record zero at all $N$
+tests is $S_N=\cos^{2N}(a/N)=1-a^2/N+O(N^{-2})$, increasing in $N$ for $0<a<\pi/2$; with unread intermediate tests the final
+probability is $[1+\cos^N(2a/N)]/2$.  For $a=\pi/4$: $N=1$ both $\tfrac12$; $N=16$ (step loss $0.002408$) $0.962166$ and $0.962838$;
+$S_N=0.728553,0.856232,0.925676,0.990408$ for $N=2,4,8,64$ \cite{n3:Zeno}.
+\end{proposition}
+\begin{proof}
+Each success resets the state; the unread transition matrix has eigenvalues $1$, $\cos(2a/N)$; $2\log\cos x=-x^2+O(x^4)$; the
+derivative of $2N\log\cos(a/N)$ in $N$ is $2(\log\cos x+x\tan x)>0$ at $x=a/N$.
+\end{proof}
+\noindent The all-success history and the unread final population are different observables.  For first
+returns, $h_n=((\mathbf1-P)U)^nv$, $s_n=\lVert h_n\rVert^2$ and $p_{n+1}=\lvert\ip v{Uh_n}\rvert^2$ satisfy $p_{n+1}=s_n-s_{n+1}$ and $\sum_{n<N}p_{n+1}+s_N=1$.
+
+\subsection{Physical origin of the record law}\label{sec:soscope}
+
+\begin{example}[interference with a retained record]\label{ex:sorecoherence}
+For $\Psi=\sqrt p\,v_0+\sqrt{1-p}\,v_1$ with orthonormal joint record vectors, $\Psi$ and $p\lvert v_0\rangle\langle v_0\rvert+(1-p)\lvert v_1\rangle\langle v_1\rvert$ have the same
+system marginal, but the joint test of $\lvert\Psi\rangle\langle\Psi\rvert$ (undo the coupling and test the initial ray) gives $1$ and $p^2+(1-p)^2$,
+differing by $2p(1-p)$.
+\end{example}
+\noindent Decoherence suppresses interference; the selection of a realised record is a separate
+question \cite{n3:Schlosshauer}.  Unread pinching and the selected process agree on the reduced ensemble
+(Proposition~\ref{prop:sopinching}) and differ on a conditioned run.  Theorem~\ref{thm:sorigidity} is a process criterion
+for the frequencies of realised records, given that a terminal record exists; the absorption law, the
+observer's information and the coupling to the apparatus are physical ingredients.
+
+\smallskip\noindent\textbf{Hypothesis Ap (preparation-independent apparatus sampling).}  An implemented test has
+apparatus degrees of freedom inducing an auxiliary ray independent of the system preparation, with a
+unitary-invariant law before the test-dependent selection rule; in a binary test the height is then
+uniform, and a fine test can be modelled by the simplex rule of Theorem~\ref{thm:sosimplex}.
+
+\begin{conjecture}[invariant sampling from apparatus dynamics]\label{conj:somixing}
+There is a regime of apparatus dynamics driven by local comparisons in which the conditional law of the
+auxiliary ray, before the fixed test is applied, converges to the invariant projective probability
+uniformly in the preparations.
+\end{conjecture}
+\noindent Evidence: independent isotropic complex Gaussian amplitudes give this limit law exactly
+(Theorem~\ref{thm:sosimplex}).  A derivation must specify the microscopic measure and dynamics independently of the
+target frequencies, an apparatus sequence, a topology of convergence and control uniform in the
+preparation.
+
+\begin{remark}[programme]\label{rem:soprogramme}
+An effective account must specify the observed record, the omitted bath degrees of freedom and when
+conditional instruments approximate the stochastic dynamics; an objective-collapse account must specify a
+modified joint evolution, verify the unread maps on entangled composites and predict recoherence tests; a
+nested-observer account must assign filtrations to actual observations and interventions and compare
+joint predictions, under the constraints of extended Wigner-friend protocols \cite{n3:FR,n3:Bong}.
+Reading a rotated tail as a source of physical time, a tolerance as causal control, or a coarse-graining
+gain in effective information \cite{n3:Hoel} as a property of an apparatus each needs a dynamics and an
+intervention model.
+\end{remark}
+
+\begin{remark}[what this settles]\label{rem:sosettles}
+Settled, as theorems: the statistics of any single-outcome dynamics of the kind considered (a record
+process with one terminal vertex and absorbing record faces in the observer's filtration) agree with the
+weights at every stage iff the weights are martingales (Theorem~\ref{thm:sorigidity}); unread evolution compatible
+with no-signalling is affine (Proposition~\ref{prop:sochannels}), and a face-preserving CPTP conditional law gives the
+martingale property; a hidden-threshold or simplex selection is Born iff its auxiliary law is the invariant
+one (Theorems~\ref{thm:sosphere}, \ref{thm:sosimplex}).  Not settled: which dynamics, if any, is realised; why records
+are absorbing; and whether an apparatus produces the invariant law (Hypothesis~Ap, Conjecture~\ref{conj:somixing}).
+Refuted: Born calibration at preparation with affine unread evolution forces zero drift
+(Remark~\ref{rem:somemory}); north--south symmetry gives the Born law, or the uniform threshold an affine flow
+(Remark~\ref{rem:sothresholds}); linearity, pinching or stabilisation give one record (Remark~\ref{rem:sononselection}); a tick
+budget alone gives an inverse-tick floor (Remark~\ref{rem:sobisection}).
+\end{remark}
 
 
 %=====================================================================================
@@ -3876,16 +4227,20 @@ uniqueness among nonnegative functions of $\beta_N$ with (a)--(c) of Theorem~\re
 instruments and conditional states (C0--C3, [T]); sub-structures of every finite dimension (C0--C2, [Span]),
 and their operations and composites (C0--C3, [T]), as systems under [Sub]; the singlet sector of a closed
 register, the conditional dynamics relative to an internal clock with its cross-cut source, the finite
-modular flow and its Gibbs criterion (C0--C3, [Span], [T]), and [Cl] (under [Ph], Corollary~\ref{cor:clbridge}); $\U(2)$ and the mass-form eigenvalue ratio (F), and $m_W=m_Z\cos\theta_W$ as tree-level masses (F, F$_{\mathrm g}$(a)); the Pati--Salam
+modular flow and its Gibbs criterion (C0--C3, [Span], [T]), and [Cl] (under [Ph], Corollary~\ref{cor:clbridge}); for single
+outcomes, the statistics of any record process: Born at every stage iff martingale weights, with the
+restart converse, affine unread maps from no-signalling, and the Born threshold and simplex laws exactly
+for the invariant auxiliary law ([R], Theorems~\ref{thm:sorigidity}, \ref{thm:sosphere}, \ref{thm:sosimplex}), and the inverse-tick
+bound ([Tr]); $\U(2)$ and the mass-form eigenvalue ratio (F), and $m_W=m_Z\cos\theta_W$ as tree-level masses (F, F$_{\mathrm g}$(a)); the Pati--Salam
 group, its breaking and the hypercharges (C0--C3, [Span], G(i)--(iv)); $\sin^2\theta_W=\tfrac38$ (G(v));
 the round-$S^4$ couplings $\kappa_V=\sqrt{1-\xi}$, $\kappa_{2V}=1-2\xi$ (F, F$_{\mathrm g}$(a), F$_{\mathrm H}$); the obstruction for the ungauged back-reacting centre field and the zero-stress flat vacuum (E, F, GR; F$_{\mathrm g}$).
 \emph{Inputs not derived}: [Bil], [Bil$_\cL$], [Span], [Loc], [O], [N], Postulates C1(b), C2, C3, [Sub], the reading
 inputs [L], [W], [Comp], [T], and [B] or, equivalently, [Cl] with [NT], the hypotheses $w\ge0$, $w=f(\beta_N)$ and (a)--(c) of
-Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), Hypotheses U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm H}$ (with F$_{\mathrm{Hf}}$), F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
+Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), [R], [Tr], Hypotheses Ap, U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm H}$ (with F$_{\mathrm{Hf}}$), F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
 [Bil$_\cL$], [Loc], [O] and [N] for the composite.
 \emph{Open}: a unit of length; $G_Nv^2$; Hypothesis~GR with sources and its consistency with
 Hypothesis~E; the ratio $g'/g$; the number of structures; three generations; scales, masses and
-Yukawa couplings; single outcomes; a derivation of [Loc], [O], C2, [Cl] (other than from [Ph]) or [B]; local equilibration in the
+Yukawa couplings; which single-outcome dynamics, if any, is realised (Hypothesis~Ap, Conjecture~\ref{conj:somixing}); a derivation of [Loc], [O], C2, [Cl] (other than from [Ph]) or [B]; local equilibration in the
 singlet sector (Conjecture~\ref{conj:cueth}); a principle selecting the radial potential; a microscopic origin of the round $S^4$ target
 (Conjecture~\ref{conj:hbmicro}).
 \emph{Testability} (Table~\ref{tab:falsify} lists it statement by statement).  The kinematic part (one system under the clock reading, composites under the inputs of
@@ -4300,7 +4655,7 @@ Effects, POVMs, instruments, complete positivity, conditional states & theorem f
 Origin-free generators: clock, exchange; closed pair unique up to time unit & theorem; permutation-symmetric generator fixed up to time unit iff $N\in\{2,3\}$\\
 Connected closed clock-invariant round-trip-closed sets are spheres of complex subspaces; all dimensions $1\le d\le2^N$; exchange sector $\mathrm{Sym}^N(\C^2)$ & theorem (Prop.~\ref{prop:rtclosed}; Cor.~\ref{cor:substructure} under C0--C2, [Span]; Prop.~\ref{prop:symsector} under C0, C1, [Span], C3); as systems: [Sub]\\
 Skyrme term: area square, degree bound $6\pi^2v/e_{\mathrm S}$, scaling, Hopf charge and its bound, $\pi_1$ of configuration spaces, screening, radial unwinding & theorem under [F], [F$_{\mathrm S}$] (Thm.~\ref{thm:skbound}, Props.~\ref{prop:skhopf}, \ref{prop:skconfig}, \ref{prop:skscreen}, \ref{prop:skradial}, Thm.~\ref{thm:vk}); existence of minimisers and spin from rotations: cited; metastability: conjecture; particle readings: [P]\\
-Single outcomes & no covariant rule at ties; Kochen--Specker for composites; no mechanism\\
+Single outcomes & no covariant rule at ties; Kochen--Specker for composites (Prop.~\ref{prop:nooutcome}); theorem under [R]: Born at every stage $\Leftrightarrow$ martingale (Thm.~\ref{thm:sorigidity}), restart converse (Cor.~\ref{cor:sorestart}); no-signalling $\Rightarrow$ affine unread map (Prop.~\ref{prop:sochannels}); threshold and simplex laws (Thms.~\ref{thm:sosphere}, \ref{thm:sosimplex}); inverse-tick bound under [Tr] (Prop.~\ref{prop:soresolution}); invariant apparatus sampling: [Ap], Conj.~\ref{conj:somixing}; which dynamics is realised: open\\
 Velocity space; $\gamma^{-1}=$ concurrence & theorem about states; (Q5) not answered\\
 $dS_4$ of dichotomies; causal order; cosmological form; static patch & classical; theorem\\
 Tetrad, torsion; uniqueness of the soldering & theorem, unique relative to the imposed equivariance\\
@@ -4343,6 +4698,7 @@ Electroweak sector under F, F$_{\mathrm g}$(a), F$_{\mathrm r}$: custodial Stand
 Electroweak sector under F, F$_{\mathrm g}$(a), F$_{\mathrm H}$: round $S^4$ target & [X]: $\kappa_{2V}=2\kappa_V^2-1$ with $\kappa_V\le1$ common to $W$ and $Z$, and Goldstone growth $s/f^2$; a significant deviation after radiative and matching corrections refutes F$_{\mathrm H}$; present bound from the quoted $\kappa_V$: $\xi\le0.039$, $f\ge1.24$\,TeV (one-sided 95\%, separate Gaussians, no covariance); $m_h$ is [D]\\
 Pati--Salam group, global form, hypercharges, anomaly cancellation & [M] under G(i)--(iv); agree with the Standard Model; no breaking scale or heavy vectors supplied\\
 $\sin^2\theta_W=\tfrac38$ (G(v)) or $\tfrac12$ as boundary values & [X]: with Standard Model running and no thresholds the colour condition fails; the required shifts are Remark~\ref{rem:couplings}; $\hat s_Z^2$ is [D]\\
+Single outcomes & [M]: martingale equivalence, threshold and simplex laws, inverse-tick bound under [Tr]; the Born statistics are those of standard quantum mechanics, so no example distinguishes; an objective-collapse completion would be [X] through recoherence tests (Example~\ref{ex:sorecoherence}), none is fixed here\\
 Closed register and internal clocks & [M]: finite identities and bounds; Conjecture~\ref{conj:cueth} is a mathematical statement that computation at larger $n$ could refute; [S]: the conditional dynamics is that of standard quantum mechanics with a Page--Wootters reading; the physical readings [U], [A] are not tested here\\
 Topological particles under F$_{\mathrm S}$ & [M]: bounds and topology; [X]: a particle identification (Hypothesis~P) would be testable once $v$, $e_{\mathrm S}$ and the quantisation character are fixed; none is fixed here\\
 Three structures, generations, scales, masses, $g'/g$ & open; not derived\\
@@ -4414,7 +4770,9 @@ structure, consistently with Hypothesis~E (with an ungauged back-reacting centre
 carries the full cap order, Propositions~\ref{prop:nullobstruction}, \ref{prop:friedmann}); or derive Hypothesis~F$_{\mathrm g}$ and prove the coupled stability of its vacuum.
 \end{problem}
 \begin{problem}
-Which data, compatible with Proposition~\ref{prop:nooutcome}, select single outcomes?
+Which record dynamics, if any, is realised: does an apparatus produce absorbing records and the
+invariant auxiliary law of Theorems~\ref{thm:sosphere} and \ref{thm:sosimplex} (Conjecture~\ref{conj:somixing}), and does the
+observer's filtration satisfy the martingale condition of Theorem~\ref{thm:sorigidity}?
 \end{problem}
 \begin{problem}
 Find a principle, formulated in the comparison structure, that selects the potential of the radial
@@ -4444,6 +4802,17 @@ Theorem~\ref{thm:trd}; the Lie-algebra step of Theorem~\ref{thm:main}; the finit
 of Appendix~\ref{app:formal}), are preregistered at
 \url{https://github.com/the-omega-institute/trureturing/issues/31739}.\par}
 
+{\sloppy\emph{Library results.}  For Section~\ref{sec:outcomes}, source inspection of an existing Lean library (no build
+for this paper) located declarations for finite parts: the rank-one weight pairing, weight sums,
+conditional states and the unread ensemble (\texttt{Observer/Conditioning}); idempotence of record pinching and
+the nonselective marginal; fresh-environment and repeated-record coherence decay; stabilisation of finite
+contracting candidate sets (a stationary tail, without uniqueness); the qubit Bloch formulas; the
+Fubini--Study angle triangle and record-time and record-count bounds (with the two-target speed premise);
+the cosine fixed point; qubit pinching and its discarded mass; $R^2=-\mathbf1$ for skew-adjoint unitaries, Krylov growth
+and permanent stability; and monitored first-return conservation.  No declaration was found for the
+martingale equivalence, the threshold and simplex converses, the adaptive transcript bound or the Zeno
+limit.  These are library results, not checks of this paper's statements.\par}
+
 {\sloppy Every identity stated above was checked numerically on random inputs by the accompanying
 scripts (numpy; sympy optional): \texttt{check\_identities.py} (Section~\ref{sec:one}, Proposition~\ref{prop:avg}),
 \texttt{check\_extensions.py} (Example~\ref{ex:mirror}, the Lie-algebra dimension in
@@ -4465,7 +4834,10 @@ cross-edge example, the conditional equation and its bound, the modular and Gibb
 erasure balance and the fixed-point values) and \texttt{check\_hopfbase.py} (Section~\ref{sec:hopfbase}: eight groups;
 own checks of the Hopf map and its factor two, the vector masses and modifiers, the Goldstone contact
 amplitude, the Yukawa logarithmic derivatives, the two-term vacuum, mass and trilinear, the mass
-counterexample, the stabiliser obstruction, the marginal example and the bounds on $\xi$ and $f$).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
+counterexample, the stabiliser obstruction, the marginal example and the bounds on $\xi$ and $f$) and
+\texttt{check\_outcomes.py} (Section~\ref{sec:outcomes}: eight groups; own checks of the two-tick counterexample,
+the threshold laws and flows, the simplex race and the coarse block mass, the five-state chain, and
+the cosine, spectral, basis and Zeno values).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
 \ref{thm:product}; Propositions~\ref{prop:relative}, \ref{prop:solder}, \ref{prop:pairsu3}, \ref{prop:angle38},
 \ref{prop:universal}, \ref{prop:cosmo}, \ref{prop:solderunique}, \ref{prop:centre}, \ref{prop:superselection} (with its
 classification of weights and free split), \ref{prop:rtclosed}, \ref{prop:symsector}, \ref{prop:subops},
@@ -5005,6 +5377,48 @@ contributions.
 \bibitem{n7:CC} A.~H.~Chamseddine and A.~Connes, The spectral action principle, Commun.\ Math.\ Phys.\ \textbf{186}, 731--750 (1997), arXiv:hep-th/9606001.
 
 \bibitem{n7:CC12} A.~H.~Chamseddine and A.~Connes, Resilience of the spectral Standard Model, JHEP \textbf{09}, 104 (2012), arXiv:1208.1030.
+
+\bibitem{n3:Gisin} N.~Gisin, Stochastic quantum dynamics and relativity, Helv.\ Phys.\ Acta \textbf{62}, 363--371 (1989).
+
+\bibitem{n3:Simon} C.~Simon, V.~Bu\v{z}ek, and N.~Gisin, No-signaling condition and quantum dynamics, Phys.\ Rev.\ Lett.\ \textbf{87}, 170405 (2001).
+
+\bibitem{n3:GisinPercival} N.~Gisin and I.~C.~Percival, The quantum-state diffusion model applied to open systems, J.\ Phys.\ A \textbf{25}, 5677--5691 (1992).
+
+\bibitem{n3:Diosi} L.~Di\'osi, Continuous quantum measurement and It\^o formalism, Phys.\ Lett.\ A \textbf{129}, 419--423 (1988).
+
+\bibitem{n3:Jacobs} K.~Jacobs and D.~A.~Steck, A straightforward introduction to continuous quantum measurement, Contemp.\ Phys.\ \textbf{47}, 279--303 (2006).
+
+\bibitem{n3:Adler} S.~L.~Adler, D.~C.~Brody, T.~A.~Brun, and L.~P.~Hughston, Martingale models for quantum state reduction, J.\ Phys.\ A \textbf{34}, 8795--8820 (2001).
+
+\bibitem{n3:BassiGhirardi} A.~Bassi and G.~C.~Ghirardi, Dynamical reduction models, Phys.\ Rep.\ \textbf{379}, 257--426 (2003).
+
+\bibitem{n3:Bassi} A.~Bassi, K.~Lochan, S.~Satin, T.~P.~Singh, and H.~Ulbricht, Models of wave-function collapse, underlying theories, and experimental tests, Rev.\ Mod.\ Phys.\ \textbf{85}, 471--527 (2013).
+
+\bibitem{n3:Schlosshauer} M.~Schlosshauer, Decoherence, the measurement problem, and interpretations of quantum mechanics, Rev.\ Mod.\ Phys.\ \textbf{76}, 1267--1305 (2005).
+
+\bibitem{n3:Archimedes} Archimedes, On the sphere and cylinder, Book I, in \emph{The Works of Archimedes}, edited by T.~L.~Heath (Cambridge University Press, 1897).
+
+\bibitem{n3:Aerts} D.~Aerts and M.~Sassoli de Bianchi, The extended Bloch representation of quantum mechanics and the hidden-measurement solution to the measurement problem, Ann.\ Phys.\ \textbf{351}, 975--1025 (2014).
+
+\bibitem{n3:Zyczkowski} K.~\.Zyczkowski and H.-J.~Sommers, Induced measures in the space of mixed quantum states, J.\ Phys.\ A \textbf{34}, 7111--7125 (2001).
+
+\bibitem{n3:vonMises} R.~von Mises and H.~Pollaczek-Geiringer, Praktische Verfahren der Gleichungsaufl\"osung, Z.\ Angew.\ Math.\ Mech.\ \textbf{9}, 58--77, 152--164 (1929).
+
+\bibitem{n3:EckartYoung} C.~Eckart and G.~Young, The approximation of one matrix by another of lower rank, Psychometrika \textbf{1}, 211--218 (1936).
+
+\bibitem{n3:Mirsky} L.~Mirsky, Symmetric gauge functions and unitarily invariant norms, Q.\ J.\ Math.\ \textbf{11}, 50--59 (1960).
+
+\bibitem{n3:Zeno} B.~Misra and E.~C.~G.~Sudarshan, The Zeno's paradox in quantum theory, J.\ Math.\ Phys.\ \textbf{18}, 756--763 (1977).
+
+\bibitem{n3:Attention} A.~Vaswani et al., Attention is all you need, Adv.\ Neural Inf.\ Process.\ Syst.\ \textbf{30}, 5998--6008 (2017).
+
+\bibitem{n3:Hoel} E.~P.~Hoel, L.~Albantakis, and G.~Tononi, Quantifying causal emergence shows that macro can beat micro, Proc.\ Natl.\ Acad.\ Sci.\ U.S.A.\ \textbf{110}, 19790--19795 (2013).
+
+\bibitem{n3:FR} D.~Frauchiger and R.~Renner, Quantum theory cannot consistently describe the use of itself, Nat.\ Commun.\ \textbf{9}, 3711 (2018).
+
+\bibitem{n3:Bong} K.-W.~Bong et al., A strong no-go theorem on the Wigner's friend paradox, Nat.\ Phys.\ \textbf{16}, 1199--1205 (2020).
+
+\bibitem{n3:Williams} D.~Williams, \emph{Probability with Martingales} (Cambridge University Press, 1991).
 
 \bibitem{CLT74} J.~M.~Cornwall, D.~N.~Levin, and G.~Tiktopoulos, Derivation of gauge invariance from high-energy unitarity bounds on the S matrix, Phys.\ Rev.\ D \textbf{10}, 1145 (1974); Erratum \textbf{11}, 972 (1975).
 

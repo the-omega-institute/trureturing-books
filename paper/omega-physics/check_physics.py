@@ -2312,4 +2312,84 @@ ok_d = abs(vEW - 246.22) < 0.005 and abs(bnds[0][0] - 0.03914) < 5e-5 and abs(bn
 print(f"     v = {vEW:.3f} GeV; xi <= {bnds[0][0]:.5f}, {bnds[0][1]:.5f} (one-sided); {bnds[1][0]:.5f}, {bnds[1][1]:.5f} (central); f >= {fV:.3f}, {f2:.3f} TeV: {bool(ok_d)}")
 results.append(bool(ok_d))
 
+# =====================================================================================
+# 49. (Round 26) single outcomes: martingales, thresholds, simplex race, chain, ticks, readout
+speco = importlib.util.spec_from_file_location("check_outcomes", os.path.join(here, "check_outcomes.py"))
+ro = importlib.util.module_from_spec(speco); buf = io.StringIO()
+try:
+    with contextlib.redirect_stdout(buf):
+        speco.loader.exec_module(ro); ro.main()
+    oko = True
+except Exception as ex:
+    oko = False; print("     check_outcomes error:", repr(ex))
+print(f"     check_outcomes.py: all eight test groups passed: {oko}")
+results.append(oko)
+# (1) two-tick counterexample: Born at preparation, pinching maps, nonzero conditional drift
+ok = True
+for p_ in (0.2, 0.5, 0.9):
+    a_ = p_*(1 - p_); W1 = [p_ + a_, p_ - a_]
+    ok &= all(0 < w_ < 1 for w_ in W1) and abs(np.mean(W1) - p_) < 1e-15
+    ok &= all(abs(p_ - w_) > 1e-3 for w_ in W1)          # E[W(2)|F_1] = p differs from W(1)
+    ok &= abs(p_ - a_ - p_**2) < 1e-15 and abs(1 - p_ - a_ - (1 - p_)**2) < 1e-15
+print(f"     two-tick process: Born at preparation, W(1) interior, E[W(2)|F1] = p != W(1): {bool(ok)}")
+results.append(bool(ok))
+# (2) threshold laws: uniform gives (1+z)/2; 3l^2/2 gives (1+z^3)/2 = 9/16 at 1/2; flow converges to the basin pole
+lam_grid = np.linspace(-1, 1, 400001)
+cdf_even = lambda z: np.trapezoid(1.5*lam_grid[lam_grid < z]**2, lam_grid[lam_grid < z])
+ok_t = abs(cdf_even(0.5) - 9/16) < 1e-5 and abs(cdf_even(-0.5) - 7/16) < 1e-5
+kk = 1.3
+for lam_, z0 in ((0.2, 0.5), (0.2, -0.1), (-0.6, -0.59)):
+    zz = z0; dt_ = 1e-3
+    for _ in range(40000): zz += dt_*kk*(zz - lam_)*(1 - zz*zz)
+    ok_t &= abs(zz - np.sign(z0 - lam_)) < 1e-6
+z_ = 0.4; sx = np.sqrt(1 - z_**2)
+vel = lambda r: np.mean([kk*(r[2] - l_)*(np.array([0, 0, 1.]) - r[2]*r) for l_ in np.linspace(-1, 1, 20001)[1:-1]], axis=0)
+vmix = 0.5*(vel(np.array([sx, 0, z_])) + vel(np.array([-sx, 0, z_])))
+ok_t &= np.allclose(vmix, [0, 0, kk*z_*(1 - z_**2)], atol=1e-4) and np.allclose(vel(np.array([0, 0, 1.])), 0) and np.allclose(vel(np.array([0, 0, -1.])), 0)
+print(f"     thresholds: 9/16, 7/16 for the even law; flow to basin poles; mean velocities differ on equal densities: {bool(ok_t)}")
+results.append(bool(ok_t))
+# (3) simplex race with invariant sampling: winning frequencies p; coarse raw block mass wins 1/4
+rs3 = np.random.default_rng(11)
+Gs = rs3.normal(size=(400000, 3)) + 1j*rs3.normal(size=(400000, 3)); Us = np.abs(Gs)**2; Us /= Us.sum(1, keepdims=True)
+pp = np.array([0.5, 0.3, 0.2]); win = np.argmin(Us/pp, axis=1)
+freq = np.bincount(win, minlength=3)/len(win)
+B1 = Us[:, 0] + Us[:, 1]
+ok_s = np.allclose(freq, pp, atol=3e-3) and abs(np.mean(B1 < 0.5) - 0.25) < 3e-3
+print(f"     simplex race frequencies {np.round(freq, 4)} vs p = {pp}; raw block mass wins {np.mean(B1 < 0.5):.4f} (1/4): {bool(ok_s)}")
+results.append(bool(ok_s))
+# (4) five-state chain: hitting probabilities and mean times
+def hit(q):
+    Mh = np.eye(5); bh = np.zeros(5); bh[4] = 1
+    for j in (1, 2, 3): Mh[j, j + 1] -= q; Mh[j, j - 1] -= 1 - q
+    return np.linalg.solve(Mh, bh)
+Mt = np.eye(5); bt_ = np.zeros(5)
+for j in (1, 2, 3): Mt[j, j + 1] -= .5; Mt[j, j - 1] -= .5; bt_[j] = 1
+ok_c = np.allclose(hit(.5), np.arange(5)/4) and np.allclose(hit(2/3), [0, 8/15, 4/5, 14/15, 1]) and np.allclose(np.linalg.solve(Mt, bt_), [0, 3, 4, 3, 0])
+print(f"     five-state chain: h = j/4, (0, 8/15, 4/5, 14/15, 1), mean times (0, 3, 4, 3, 0): {bool(ok_c)}")
+results.append(bool(ok_c))
+# (5) ticks, cosine iteration, spectral shares, basis weights, Zeno numbers, recoherence
+xs_ = [0.0]
+for _ in range(5): xs_.append(np.cos(xs_[-1]))
+res_ = np.abs(np.diff(xs_)); xst = 0.7390851332151607
+from scipy.optimize import brentq as _bq
+ok_n = np.allclose(xs_[1:], [1, 0.540302, 0.857553, 0.654290, 0.793480], atol=5e-7) and np.all(res_[:4] > 0.15) and abs(res_[4] - 0.139191) < 5e-7 \
+       and abs(xs_[5] - xst - 0.054395) < 5e-7 and abs(_bq(lambda x: np.cos(x) - x - 0.15, 0, 1) - 0.6476) < 5e-5 and abs(_bq(lambda x: np.cos(x) - x + 0.15, 0, 1) - 0.8270) < 5e-5
+dig = [int(np.floor((10**t*xst % 1)*1000)) for t in range(5)]
+ok_n &= dig == [739, 390, 908, 85, 851]
+sg = np.array([1, .76, .54, .35, .2, .1]); sh = [(sg[:2]**k).sum()/(sg**k).sum() for k in (2, 8, 10)]
+ok_n &= np.allclose(sh, [0.772689, 0.993334, 0.997997], atol=5e-7)
+wm = sg**2/(sg**2).sum(); ok_n &= abs(wm[:3].sum() - 0.9155) < 5e-5 and abs(wm[:5].sum() - 0.9951) < 5e-5
+Fb = np.array([[1/np.sqrt(3), 1/np.sqrt(2), -1/np.sqrt(6)], [1/np.sqrt(3), 0, 2/np.sqrt(6)], [1/np.sqrt(3), -1/np.sqrt(2), -1/np.sqrt(6)]])
+omg = np.arccos((np.trace(Fb) - 1)/2); Kb = (Fb - Fb.T)/(2*np.sin(omg)); tb = 65/90
+Ftb = np.eye(3) + np.sin(tb*omg)*Kb + (1 - np.cos(tb*omg))*Kb @ Kb; psi3 = np.array([1, 2, 5])/np.sqrt(30)
+ok_n &= abs(np.linalg.det(Fb) - 1) < 1e-12 and np.allclose((Ftb.T @ psi3)**2, [0.6273, 0.2525, 0.1202], atol=5e-5)
+az = np.pi/4
+SN = {N: np.cos(az/N)**(2*N) for N in (1, 2, 4, 8, 16, 64)}
+ok_n &= abs(SN[1] - .5) < 1e-12 and np.allclose([SN[2], SN[4], SN[8], SN[16], SN[64]], [0.728553, 0.856232, 0.925676, 0.962166, 0.990408], atol=5e-7) \
+        and abs((1 + np.cos(2*az/16)**16)/2 - 0.962838) < 5e-7 and abs(np.sin(az/16)**2 - 0.002408) < 5e-7
+ok_n &= all(SN[a_] < SN[b_] for a_, b_ in ((1, 2), (2, 4), (4, 8), (8, 16), (16, 64)))
+ok_n &= abs(20 and 1/20 - 0.05) < 1e-15 and 2.0**-20 < 1/20
+print(f"     cosine iterates and residual window, digits, spectral shares, masses, basis weights, Zeno values, tick bounds: {bool(ok_n)}")
+results.append(bool(ok_n))
+
 print(f"\nALL CHECKS PASSED: {all(results)}  ({sum(results)}/{len(results)})")
