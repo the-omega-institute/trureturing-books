@@ -1635,7 +1635,7 @@ def _check_citation(c: Citation, ed: DeckEdition, s: Slide, lock: lean.Lock | No
             err(ed.path, s.line, f'<{c.tag}> needs gid="<GID>" (a frozen Lean declaration) or status="open|argued|written-proof"')
         return
     try:
-        lean.parse_gid(c.gid)
+        lean.parse_gid(c.gid, mode=lock.mode if lock else config.site_mode())
     except lean.LeanError as exc:
         err(ed.path, s.line, str(exc))
         return
@@ -2093,19 +2093,29 @@ footer p {{ margin: 4px 0; }}
     root.lang = {json.dumps({lang: config.bcp47(lang) for lang in langs}, ensure_ascii=False)}[lang];
     document.querySelectorAll("[data-lang-set]").forEach(function (b) {{ b.setAttribute("aria-pressed", String(b.getAttribute("data-lang-set") === lang)); }});
   }}
+  function remember(lang) {{
+    try {{ localStorage.setItem(key, lang); }} catch (e) {{}}
+  }}
+  function share(lang) {{
+    try {{
+      var url = new URL(location.href);
+      if (url.searchParams.get("lang") === lang) return;
+      url.searchParams.set("lang", lang);
+      history.replaceState(history.state, "", url);
+    }} catch (e) {{}}
+  }}
   var q = new URLSearchParams(location.search).get("lang"), stored = null;
   try {{ stored = localStorage.getItem(key); }} catch (e) {{}}
-  apply(langs.includes(q) ? q : langs.includes(stored) ? stored : langs[0]);
+  if (langs.includes(q) && langs.length > 1) remember(q);
+  var lang = langs.includes(q) ? q : langs.includes(stored) ? stored : langs[0];
+  if (langs.length > 1) share(lang);
+  apply(lang);
   document.querySelectorAll("[data-lang-set]").forEach(function (b) {{
     b.addEventListener("click", function () {{
-      var lang = b.getAttribute("data-lang-set");
-      apply(lang);
-      try {{ localStorage.setItem(key, lang); }} catch (e) {{}}
-      try {{
-        var url = new URL(location.href);
-        url.searchParams.set("lang", lang);
-        history.replaceState(history.state, "", url);
-      }} catch (e) {{}}
+      var next = b.getAttribute("data-lang-set");
+      remember(next);
+      share(next);
+      apply(next);
     }});
   }});
 }})();
