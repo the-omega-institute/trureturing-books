@@ -1225,7 +1225,11 @@ If $R(B)=B$, the only new face is $B$ and its entire boundary is in the precedin
 
 **The quotient by the retained subcomplex (written derivation).** Suppose there is at least one nonempty facet. Collapse the realization of the retained subcomplex to a point. Each simplex with $R(B)=B$ meets the retained part in its entire boundary. A point of that simplex is in the intersection exactly when at least one coordinate on $B$ is zero. Distinct such simplices meet only in the retained part. The quotient therefore comes from the disjoint sum of these simplices and a basepoint, with all the boundary points identified with the basepoint. The finitely many closed simplices and the retained part cover the realization, so the quotient maps on those pieces induce a homeomorphism. A one-vertex facet has empty boundary and contributes one isolated point alongside the basepoint. If no facet has full restriction face, the quotient is a point.
 
-For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
+**The homotopy type is a wedge of spheres (written derivation).** Let $X$ be the realization of the direction complex and $C$ the realization of its retained subcomplex. The collapse to the first simplex makes $C$ contractible. A subcomplex inclusion has the homotopy extension property, so a contraction of $C$ extends to a homotopy of $X$ starting at the identity. Its endpoint is constant on $C$ and factors through $q:X\to X/C$ to define $s:X/C\to X$. The extension gives $s q\simeq\mathrm{id}_X$. Each stage carries $C$ into $C$, so it also descends to the quotient and gives $q s\simeq\mathrm{id}_{X/C}$. Thus the quotient map itself is a homotopy equivalence.
+
+Every facet has $d=n-h$ vertices. If $d\ge 2$, collapsing the boundary of a $(d-1)$-simplex gives $S^{d-1}$, with the boundary class as its basepoint. If $d=1$, the simplex point together with the added basepoint gives $S^0$. The attachment description identifies precisely these factor basepoints with the common quotient point. Hence $X/C$ is homeomorphic, with its basepoint, to the finite wedge of one $S^{n-h-1}$ for each facet with $R(B)=B$. The empty wedge is a point.
+
+For the Tribonacci word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
 \begin{aligned}
