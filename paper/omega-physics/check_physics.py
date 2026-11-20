@@ -2010,4 +2010,145 @@ ok_cs = all(abs((-t**2 + 2*t**3/3)/(-1/3) - (3*t**2 - 2*t**3)) < 1e-14 for t in 
 print(f"     barrier family: P0' and two roots iff kappa > 24: {bool(ok_b)}; CS(tP) = (3t^2 - 2t^3) Q: {ok_cs}")
 results.append(bool(ok_b and ok_cs))
 
+# =====================================================================================
+# 47. (Round 24) closed register: singlets, constraint, internal clock, phase, modular flow, balances
+specc = importlib.util.spec_from_file_location("check_closedreg", os.path.join(here, "check_closedreg.py"))
+rc = importlib.util.module_from_spec(specc); buf = io.StringIO()
+try:
+    with contextlib.redirect_stdout(buf):
+        specc.loader.exec_module(rc)
+        for fn in ("check_singlets_and_kernel", "check_twirling_and_correlations", "check_clock_examples",
+                   "check_conditional_equations", "check_finite_readouts", "check_phase_and_restrictions",
+                   "check_paired_entropy", "check_modular", "check_thermodynamics", "check_records",
+                   "check_fixed_point_and_interference", "check_singlet_chain_benchmarks"):
+            getattr(rc, fn)()
+    okc = True
+except Exception as ex:
+    okc = False; print("     check_closedreg error:", repr(ex))
+print(f"     check_closedreg.py: all twelve test groups passed: {okc}")
+results.append(okc)
+from math import comb as _comb
+from scipy.linalg import expm as _expm, logm as _logm
+def _kr(*ms):
+    out = np.array([[1.0 + 0j]])
+    for m_ in ms: out = np.kron(out, m_)
+    return out
+def _swap(nq, k, l):
+    d = 2**nq; M_ = np.zeros((d, d))
+    for b in range(d):
+        bits = [(b >> (nq - 1 - i)) & 1 for i in range(nq)]
+        bits[k], bits[l] = bits[l], bits[k]
+        M_[sum(bit << (nq - 1 - i) for i, bit in enumerate(bits)), b] = 1
+    return M_
+def _singlet_basis(nq):
+    # null space of the total spin generators
+    sx = np.array([[0, 1], [1, 0]]); sy = np.array([[0, -1j], [1j, 0]]); sz = np.diag([1., -1.])
+    gens = []
+    for s_ in (sx, sy, sz):
+        G = sum(_kr(*[s_ if i == j else np.eye(2) for i in range(nq)]) for j in range(nq))
+        gens.append(G)
+    A = np.vstack(gens); u, sv, vh = np.linalg.svd(A)
+    return vh[np.sum(sv > 1e-9):].conj().T
+ok = True
+for nn in (1, 2, 3):
+    B = _singlet_basis(2*nn)
+    ok &= B.shape[1] == _comb(2*nn, nn)//(nn + 1)
+    Ssum = sum(_swap(2*nn, k, l) for k in range(2*nn) for l in range(k + 1, 2*nn))
+    ok &= np.allclose(B.conj().T @ Ssum @ B, nn*(nn - 2)*np.eye(B.shape[1]))
+print(f"     singlet dimensions 1, 2, 5 = Catalan; sum of swaps = n(n-2) on singlets: {bool(ok)}")
+results.append(bool(ok))
+# constraint kernel for n = 3: matched swaps + (n-2)^{-1} sum of all swaps, unique zero on singlets
+B = _singlet_basis(6)
+H = _swap(6, 0, 1) + _swap(6, 2, 3) + _swap(6, 4, 5) + sum(_swap(6, k, l) for k in range(6) for l in range(k + 1, 6))
+ev = np.linalg.eigvalsh(B.conj().T @ H @ B)
+ok_k = abs(ev[0]) < 1e-10 and ev[1] > 0.5
+# four sites: every swap traceless on the singlet space
+B4 = _singlet_basis(4)
+ok_k &= all(abs(np.trace(B4.conj().T @ _swap(4, k, l) @ B4)) < 1e-10 for k in range(4) for l in range(k + 1, 4))
+print(f"     n = 3 unshifted unique constrained singlet (eigenvalues {ev[0]:.1e}, {ev[1]:.3f}); swaps traceless on S_4: {bool(ok_k)}")
+results.append(bool(ok_k))
+# eight-site clock
+s2 = np.array([0, 1, -1, 0])/np.sqrt(2); tp = np.array([1, 0, 0, 0.]); t0 = np.array([0, 1, 1, 0])/np.sqrt(2); tm = np.array([0, 0, 0, 1.])
+minus = np.kron(s2, s2); plus = (np.kron(tp, tm) - np.kron(t0, t0) + np.kron(tm, tp))/np.sqrt(3)
+code = np.stack([minus, plus], axis=1)
+X12 = code.T @ _swap(4, 0, 1) @ code; X23 = code.T @ _swap(4, 1, 2) @ code; X13 = code.T @ _swap(4, 0, 2) @ code
+ok_e = np.allclose(X12, np.diag([-1, 1])) and np.allclose(X23, [[.5, np.sqrt(3)/2], [np.sqrt(3)/2, -.5]]) \
+       and np.allclose((2*X23 + X12)/np.sqrt(3), [[0, 1], [1, 0]]) and np.allclose(X13, [[.5, -np.sqrt(3)/2], [-np.sqrt(3)/2, -.5]])
+J_ = 0.8; p_ = 0.3; hb = 1.0
+HC = J_*_swap(4, 0, 1)
+Psi = np.sqrt(p_)*np.kron(plus, minus) + np.sqrt(1 - p_)*np.kron(minus, plus)
+Htot = np.kron(HC, np.eye(16)) + np.kron(np.eye(16), HC)
+ok_e &= np.allclose(Htot @ Psi, 0)
+c0 = (plus + minus)/np.sqrt(2); err = 0
+for t in np.linspace(0, 5, 11):
+    ct = _expm(-1j*t*HC/hb) @ c0
+    phi = ct.conj() @ Psi.reshape(16, 16)
+    chi_pred = np.sqrt(p_)*np.exp(1j*J_*t)*minus + np.sqrt(1 - p_)*np.exp(-1j*J_*t)*plus
+    err = max(err, abs(np.linalg.norm(phi)**2 - .5), np.linalg.norm(phi/np.linalg.norm(phi) - chi_pred))
+    obs = np.outer(minus, plus) + np.outer(plus, minus); chi = phi/np.linalg.norm(phi)
+    err = max(err, abs((chi.conj() @ obs @ chi).real - 2*np.sqrt(p_*(1 - p_))*np.cos(2*J_*t)))
+ok_e &= err < 1e-10 and abs(c0 @ (_expm(-1j*np.pi/(2*J_)*HC) @ c0)) < 1e-12
+print(f"     eight-site clock: code matrices, constraint, p_t = 1/2, chi_t and the cos(2Jt) mean: {bool(ok_e)}")
+results.append(bool(ok_e))
+# cross-edge example: V = -H_C on S_4, phi_t and p_t = 1/3
+cross = sum(_swap(4, k, l) for k in (0, 1) for l in (2, 3))
+ok_x = np.allclose(B4.conj().T @ (cross + _swap(4, 0, 1) + _swap(4, 2, 3)) @ B4, 0)
+Psi4 = (plus + minus)/np.sqrt(2); HC2 = J_*_swap(2, 0, 1)
+seed = (t0 + s2)/np.sqrt(2); e2 = 0
+for t in np.linspace(0, 4, 9):
+    ct = _expm(-1j*t*HC2/hb) @ seed
+    phi = ct.conj() @ Psi4.reshape(4, 4)
+    pred = .5*np.exp(-1j*J_*t)*s2 - np.exp(1j*J_*t)*t0/(2*np.sqrt(3))
+    e2 = max(e2, np.linalg.norm(phi - pred))
+ok_x &= e2 < 1e-12
+print(f"     cross-edge example: V = -H_C on singlets, phi_t as stated, p_t = 1/3: {bool(ok_x)}")
+results.append(bool(ok_x))
+# conditional equation and error bound on a random 2+2 qubit model with a non-constrained vector
+Jr = rng.uniform(-1, 1, 6); pairs = [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]
+Ht = sum(j_*_swap(4, k, l) for j_, (k, l) in zip(Jr, pairs))
+HCr = Jr[0]*_swap(2, 0, 1); HSr = Jr[5]*_swap(2, 0, 1); Vr = Ht - np.kron(HCr, np.eye(4)) - np.kron(np.eye(4), HSr)
+Pr = rng.normal(size=16) + 1j*rng.normal(size=16); Pr /= np.linalg.norm(Pr)
+d_ = Ht @ Pr; c0r = np.array([1, 0, 0, 0.]); e3 = 0; ok_b = True
+for t in np.linspace(-2, 2, 9):
+    ct = _expm(-1j*t*HCr) @ c0r
+    phi = ct.conj() @ Pr.reshape(4, 4)
+    h_ = 1e-6
+    dphi = ((_expm(-1j*(t + h_)*HCr) @ c0r).conj() @ Pr.reshape(4, 4) - (_expm(-1j*(t - h_)*HCr) @ c0r).conj() @ Pr.reshape(4, 4))/(2*h_)
+    r_ = ct.conj() @ (Vr @ Pr).reshape(4, 4); dd = ct.conj() @ d_.reshape(4, 4)
+    e3 = max(e3, np.linalg.norm(1j*dphi - (HSr @ phi + r_ - dd)))
+    phi0 = c0r @ Pr.reshape(4, 4)
+    ok_b &= np.linalg.norm(phi - _expm(-1j*t*HSr) @ phi0) <= abs(t)*(np.linalg.norm(Vr, 2) + np.linalg.norm(d_)) + 1e-12
+report("conditional equation i dphi/dt = H_S phi + L_t V Psi - L_t H_tot Psi", e3, tol=1e-6)
+print(f"     error bound |phi_t - e^(-itH_S) phi_0| <= |t|(|V| + |d|): {bool(ok_b)}")
+results.append(bool(ok_b))
+# modular flow, KMS and Gibbs; erasure balance; fixed point
+dA = 3; G_ = rng.normal(size=(dA, dA)) + 1j*rng.normal(size=(dA, dA)); rho = G_ @ G_.conj().T; rho /= np.trace(rho).real
+Bm = rng.normal(size=(dA, dA)) + 1j*rng.normal(size=(dA, dA)); Dm = rng.normal(size=(dA, dA)) + 1j*rng.normal(size=(dA, dA))
+w_, U_ = np.linalg.eigh(rho)
+def rpow(z): return U_ @ np.diag(w_.astype(complex)**z) @ U_.conj().T
+sgm = lambda z, D: rpow(1j*z) @ D @ rpow(-1j*z)
+s_ = 0.37
+ok_m = abs(np.trace(rho @ Bm @ sgm(s_ - 1j, Dm)) - np.trace(rho @ sgm(s_, Dm) @ Bm)) < 1e-10
+HA = rng.normal(size=(dA, dA)); HA = HA + HA.T; beta_ = 0.7
+gibbs = _expm(-beta_*HA); gibbs /= np.trace(gibbs)
+K_ = -_logm(gibbs); Z_ = np.trace(_expm(-beta_*HA)).real
+ok_m &= np.allclose(K_, beta_*HA + np.log(Z_)*np.eye(dA), atol=1e-9)
+# erasure balance: memory qubit, reservoir qubit, random joint unitary
+def _S(r): ev_ = np.linalg.eigvalsh(r); ev_ = ev_[ev_ > 1e-14]; return float(-np.sum(ev_*np.log(ev_)))
+def _D(a, b): return float(np.trace(a @ (_logm(a) - _logm(b))).real)
+q_ = 0.2; dE = 1.3; bR = np.log((1 - q_)/q_)/dE; omega = np.diag([1 - q_, q_]); HR = np.diag([0, dE])
+rhoM = np.diag([0.6, 0.4]); Xr = rng.normal(size=(4, 4)) + 1j*rng.normal(size=(4, 4)); Uj = _expm(1j*(Xr + Xr.conj().T))
+out = Uj @ np.kron(rhoM, omega) @ Uj.conj().T
+oM = np.einsum('ijkj->ik', out.reshape(2, 2, 2, 2)); oR = np.einsum('ijil->jl', out.reshape(2, 2, 2, 2))
+QR = np.trace(HR @ (oR - omega)).real; I_ = _S(oM) + _S(oR) - _S(out)
+ok_m &= abs(bR*QR - (-(_S(oM) - _S(rhoM)) + I_ + _D(oR, omega))) < 1e-9
+xf = 0.7
+for _ in range(200): xf = np.cos(xf)
+sx2 = np.sin(xf)**2; hq = -sx2*np.log(sx2) - (1 - sx2)*np.log(1 - sx2)
+ok_m &= abs(xf - 0.73908513) < 1e-8 and abs(hq - 0.688864) < 1e-6 and abs(1/(2*np.log(1/np.tan(xf))) - 5.390324) < 1e-6 and abs(np.log(2) - hq - 0.004284) < 1e-6
+nb = [(nn - 2)/(2*nn - 1) for nn in (3, 4, 5, 6)]
+ok_m &= all(abs(2*abs((1 - x_)/2 - .25) - 3/(2*(2*nn - 1))) < 1e-14 for x_, nn in zip(nb, (3, 4, 5, 6)))
+print(f"     KMS boundary identity, Gibbs modular Hamiltonian, erasure balance, fixed-point values, projector benchmark: {bool(ok_m)}")
+results.append(bool(ok_m))
+
 print(f"\nALL CHECKS PASSED: {all(results)}  ({sum(results)}/{len(results)})")

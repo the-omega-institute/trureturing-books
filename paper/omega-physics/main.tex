@@ -95,7 +95,10 @@ the Born weights are the only nonnegative functions of the transition probabilit
 certain on the state's own ray and consistent with adjoining ancillas, and that ancillas give all effects, Kraus instruments and conditional states; complex Hilbert spaces
 of every finite dimension occur as round-trip-closed, clock-invariant sub-structures of these registers,
 and are systems under an explicit restriction of preparations, tests and operations.  No
-outcome rule covariant at ties exists.  The dichotomies of configurations form four-dimensional
+outcome rule covariant at ties exists.  In a closed register of $2n$ systems in a global singlet, an
+exchange constraint gives conditional Schr\"odinger dynamics relative to an internal clock, with an
+explicit source from exchanges across the clock cut, and the unobservable clock [Cl] follows from the
+invisibility of the total phase under a stated bridge hypothesis.  The dichotomies of configurations form four-dimensional
 de~Sitter space with inclusion as causal order, a classical fact; every invariant metric on it solves
 the vacuum Einstein equations with $\Lambda\ell^2=3$.  That physical events are dichotomies is a hypothesis; under
 it, observers correspond to binary alternatives whose static patches are the dichotomies separating them.  With an ungauged
@@ -191,7 +194,7 @@ $(\Omega2\mathrm d)$ at the level of states.  Orthogonality is $s_K=0$ here and 
 it agrees with $w=0$ iff $\mathsf F^{-1}(0)=\{0\}$.  Under [L] it is equivalent to [Cl] with [NT] (Proposition~\ref{prop:clockB}).
 \item[{[Cl]}] \emph{Unobservable clock.}  The unobservable group of an elementary system contains a clock:
 for a closed system the phase of its own clock is not observable.  An input with this physical reading,
-not derived from the axiom.
+not derived from the axiom; it is a theorem under [Ph] (Corollary~\ref{cor:clbridge}), which is itself an input.
 \item[{[NT]}] \emph{Non-triviality.}  Some pair of classes is orthogonal.
 \item[{[T]}] Convention~\ref{conv:T}: a complete test is a maximal family of pairwise orthogonal classes,
 weights are numbers in $[0,1]$ read as probabilities, and weights of disjoint blocks add.
@@ -241,6 +244,11 @@ canonical renormalisable action (Hypothesis~F$_{\mathrm r}$, Section~\ref{sec:ra
 dynamical connection; [F$_{\mathrm{Sr}}$]: its polynomial extension with the radial mode (Section~\ref{sec:skyrme}).
 \item[{[P]}] A localised degree texture is read as a baryon-like, a clock-quotient configuration as a
 lepton-like excitation (Hypothesis~P, Section~\ref{sec:skyrme}).
+\item[{[Ph]}] \emph{Phase bridge.}  Composite statistics of elementary configurations are those of the complex
+composite reading built on one clock's complex structure, and a right transport leaving all internal
+statistics unchanged is unobservable (Section~\ref{sec:closedreg}).
+\item[{[U], [A]}] The physical specification of a closed-universe state, and of an observer's accessible
+algebra (Hypotheses~U and~A, Section~\ref{sec:closedreg}).
 \item[{[G]}] The group, multiplets, breaking configuration and equal couplings of
 Section~\ref{sec:sm} (Hypothesis~G, clauses (i)--(v)).
 \item[{[GR]}] Einstein's equations with a source (Hypothesis~GR).
@@ -267,6 +275,7 @@ Q1 & The orthogonal complex structures commuting with $\cL$ are the quarter turn
 Q2 & The weight of a composable normalised clock reading is $s_T^2=\beta$: the square follows from multiplicativity and normalisation (Theorem~\ref{thm:readings}); it is the clock-invariant second moment of $\kappa$; for composites it is the only nonnegative function of $\beta_N$ with the properties of Theorem~\ref{thm:bornN} (Gleason). & [L], [W], [Comp], [B], [N]; probability: [T]; composites: [C0], [C1], [Span], [C2] and (a)--(c) of Theorem~\ref{thm:bornN}(iii), including marginal consistency (c) & \ref{ex:malus}(b)\\
 Q3 & Clock-preserving symmetries are unitary, clock-reversing ones antiunitary; clock reversals commuting with $\cL$ square to $-1$ (one system). & $(\Omega)$, [NC], with the clock reading & \ref{ex:kramers}(a,b)\\
 Q4 & Entangled states follow from reflection closure in the tensor product; effects, Kraus instruments and conditional states follow by dilation. & [C0], [C1], [Span], [C2], [C3], [T] & \ref{ex:exchange}(b), \ref{ex:grover}(a,b), \ref{ex:pvc}(a,b)\\
+U & Closed register of $2n$ systems: singlet dimension $\frac1{n+1}\binom{2n}{n}$, which marginals can be flat; conditional Schr\"odinger equation with a cross-cut source relative to an internal clock (exact eight-site example); [Cl] from the invisible total phase under [Ph]; finite modular flow equals exchange time iff Gibbs; local equilibration in the singlet sector: conjecture. & [C0]--[C3], [Span], [T]; [Ph]; [U], [A] & ---\\
 Q5 & Not answered: only the geometry of the state space (hyperbolic interior, filters, $\gamma^{-1}=$ concurrence). & --- & \ref{ex:boosts}(a), \ref{ex:pvc}(a,b)\\
 Q6 & The dichotomies of $M$ form $dS_4$ with inclusion as causal order (classical); every invariant metric solves the vacuum equations; that events are dichotomies is [E]; with an ungauged back-reacting centre field no maximal solution carries the full cap order (Props.~\ref{prop:nullobstruction}, \ref{prop:friedmann}); under [F$_{\mathrm g}$] the centre field is pure gauge. & $(\Omega)$, [NC]; [E]; [F], [GR], [F$_{\mathrm g}$] & \ref{ex:desitter}(c)\\
 P & Under F$_{\mathrm S}$: degree-$\mathcal Q$ textures with $E\ge6\pi^2(v/e_{\mathrm S})\lvert\mathcal Q\rvert$, minimisers in degree $\pm1$ (cited), Hopf charge with the Vakulenko--Kapitanski\u{\i} bound; spin $\tfrac12$ allowed, not forced; a dynamical connection or radius removes the protection; particle readings are a hypothesis. & [F], [F$_{\mathrm S}$]; [F$_{\mathrm{Sg}}$], [F$_{\mathrm{Sr}}$]; [P] & ---\\
@@ -362,9 +371,9 @@ the structure (Section~\ref{sec:sm}).
 \subsection{Roadmap}
 Part~I (Sections~\ref{sec:axiom}--\ref{sec:geometry}) is the kinematics: the axiom and its solutions, one
 system, many systems, sub-structures of every dimension, and the geometry of states.  Part~II
-(Section~\ref{sec:outcomes}) concerns observers inside the structure; it will receive sections on a closed
-universe with internal clocks, finite-memory observers, erasure and consensus, single outcomes and
-computation.  Part~III will collect bounds and budgets: speed limits, the Tsirelson bound and an
+(Sections~\ref{sec:closedreg}--\ref{sec:outcomes}) concerns observers inside the structure: a closed universe with internal
+clocks, and single outcomes; sections on finite-memory observers, erasure and consensus, and
+computation are to follow.  Part~III will collect bounds and budgets: speed limits, the Tsirelson bound and an
 entanglement budget.  Part~IV (Sections~\ref{sec:eventspace}--\ref{sec:sm}) contains the space of events,
 fields of structures, the variable radius, topological particles with the Skyrme term, and the
 three-structure model; sections on unification scales, gravity and the origin of the three structures,
@@ -965,6 +974,9 @@ states it is excluded by binarity (Theorem~\ref{thm:readings}(ii)) and equally b
 quantum theory as real quantum theory with an operator $J$ commuting with all observables
 \cite{Stueckelberg}: here $J$ generates the unobservable clock, and every quantity defined on classes is
 invariant under it.  [Cl] is an input with this physical reading; it is not derived from the axiom.
+Corollary~\ref{cor:clbridge} derives it from the invisibility of the total phase of a closed composite under the
+phase bridge [Ph], which posits the complex composite at the level of configurations; the real reading
+shows that closure with an invisible total phase alone does not give it (Remark~\ref{rem:clreal}).
 
 \begin{proposition}[the comparison reading does not compose]\label{prop:nogo}
 Let $w(x,y)=f(c(x,y))$ be an $\Aut(M)$-invariant weight on configurations with $f(c)=0$ iff $c=-1$ ($\kappa$ is
@@ -1840,9 +1852,460 @@ of events.
 
 %=====================================================================================
 \paperpart{Part II.  Observers inside}
-\noindent This part treats what an observer inside the structure can know and record.  It contains the
-single-outcome section; sections on a closed universe with internal clocks, finite-memory observers,
-erasure and consensus, and computation are in preparation.
+\noindent This part treats what an observer inside the structure can know and record.  It contains a
+closed universe with internal clocks and the single-outcome section; sections on finite-memory
+observers, erasure and consensus, and computation are in preparation.
+
+%=====================================================================================
+\section{The closed universe: a global singlet and internal clocks}\label{sec:closedreg}
+Can a closed register of comparison systems have no preferred spin direction and still show change
+relative to one of its own subsystems?  For $2n$ elementary systems we construct the global singlets and
+determine which marginals can be maximally mixed.  An exchange constraint then gives a conditional
+Schr\"odinger equation with an explicit term for the exchanges across the clock cut; eight elementary
+systems suffice for an exact example in which both the clock reading and the changing observable are
+measured inside local singlet sectors.  The invisibility of the total phase gives [Cl] under a named
+bridge hypothesis.  Restriction to the observables across another cut gives a modular flow, whose
+agreement with exchange time has an exact Gibbs criterion.
+
+\subsection{The closed singlet sector}\label{sec:cusinglet}
+Assume C0--C2 and [Span] for the composite, so that $V_{2n}=(\C^2)^{\otimes2n}$ with the complex composite reading of
+Theorem~\ref{thm:comp}; the factors are identified as in Theorem~\ref{thm:originfree}, joint transport is $g^{\otimes2n}$
+($g\in\SU(2)$), and $X_{kl}$ exchanges factors $k$ and $l$.  Let $Q$ be the set of the $2n$ sites ($n\ge1$); for $A\subseteq Q$
+put $\bar A=Q\setminus A$, $\rho_A=\tr_{\bar A}\lvert\Psi\rangle\langle\Psi\rvert$ and $S(\rho)=-\tr\rho\log\rho$ (natural logarithm, $0\log0=0$).  Inner
+products are conjugate-linear in the first argument.  A \emph{singlet} is a vector fixed by joint transport.
+The closed-register model includes every measurement and reference system used in its statistics; its
+origin-free kinematics is that of the heap and the round-trip law \cite[Def.~2.3, Thm.~3.1]{PaperI}.
+The choice of a global singlet is a condition on the state.
+
+\begin{theorem}[singlets and maximally mixed marginals]\label{thm:cusinglet}
+The singlet space $\mathcal S_{2n}$ has dimension $d_n=\binom{2n}{n}-\binom{2n}{n-1}=\frac1{n+1}\binom{2n}{n}$.  Every perfect
+matching $\mathcal M$ of $Q$ gives a unit singlet $\bigotimes_{\{k,l\}\in\mathcal M}s_{kl}$, $s_{kl}=(\lvert0_k1_l\rangle-\lvert1_k0_l\rangle)/\sqrt2$ ($k<l$).  The
+singlet ray is unique exactly for $n=1$.  Every singlet ray has global entropy zero, and its one-site
+marginals are $\mathbf1/2$.  For a specified cut $A\vert\bar A$, a singlet with $\rho_A$ maximally mixed exists exactly when
+$\lvert A\rvert\le n$; for $2\le\lvert A\rvert\le n$ whether $\rho_A$ is maximally mixed depends on the singlet, and for an individual
+singlet it is the condition $DD^*=2^{-\lvert A\rvert}\mathbf1$ on its coefficient matrix $D$ across the cut.  No singlet has maximally
+mixed marginals on all pairs.
+\end{theorem}
+\begin{proof}
+The antisymmetric two-site tensor transforms by $\det g=1$, so products over a matching are singlets.  In
+the decomposition of Proposition~\ref{prop:symmetric} a spin $j$ contributes one weight vector at each $m=-j,\dots,j$, so
+$\dim V[m{=}0]-\dim V[m{=}1]$ is the multiplicity of spin zero; counting bit strings with $n$ and $n-1$ ones gives
+$d_n$.  For $n>1$ the matchings $(12)(34)$ and $(13)(24)$, extended by the same pairs, give distinct rays: their
+$12$ marginals have rank one and four.  An invariant ray is fixed as a vector, since its character of the
+connected perfect group $\SU(2)$ is trivial.  The projector has spectrum $1,0,\dots,0$.  Invariance passes to
+$\rho_A$; at one site a commuting operator is scalar by irreducibility.  In product bases $\rho_A=DD^*$, so
+$\rk\rho_A\le2^{2n-\lvert A\rvert}$, which excludes $\lvert A\rvert>n$; if $\lvert A\rvert\le n$, matching each site of $A$ to a distinct site of $\bar A$
+gives $\rho_A=2^{-\lvert A\rvert}\mathbf1$, and a pair inside $A$ gives a non-maximal marginal.  By Proposition~\ref{prop:symmetric},
+$\sum_{k<l}X_{kl}=n(n-2)\mathbf1$ on $\mathcal S_{2n}$.  If every pair marginal were $\mathbf1/4$, every swap would have expectation $\tfrac12$,
+and the sum would be $n(2n-1)/2=n(n-2)+3n/2$.
+\end{proof}
+
+\begin{corollary}[equal one-site states, different correlations]\label{cor:cucorr}
+One-site isotropy admits distinct global states, including $\mathbf1/2^{2n}$ of entropy $2n\log2$.  In the traceless
+Hermitian operators of a bipartite system the local sectors $A_0\otimes\mathbf1$, $\mathbf1\otimes B_0$ and the correlation sector
+spanned by $A_0\otimes B_0$ ($A_0$, $B_0$ traceless) are mutually orthogonal; the correlation sector has dimension
+$(d_A^2-1)(d_B^2-1)$.  When both marginals are maximally mixed, the traceless part of the state lies in the
+correlation sector; $\rho_A$ is maximally mixed exactly when every non-identity Pauli string supported in $A$ has
+expectation zero.
+\end{corollary}
+\begin{proof}
+Products of orthonormal Hermitian bases (normalised identity and traceless elements) are orthonormal by
+factorisation of the trace, and a local coefficient of the state is the corresponding marginal
+coefficient.
+\end{proof}
+
+\begin{proposition}[twirling]\label{prop:cutwirl}
+For a finite-dimensional unitary representation $U$ of a compact group with normalised Haar measure
+\cite{n1-haar}, $P=\int U(g)\,dg$ is the orthogonal projection onto the fixed vectors, and $\mathcal T(D)=\int U(g)DU(g)^*dg$
+maps onto the commutant.  On a complex irreducible representation of dimension $d$, $\mathcal T(D)=\tr(D)\mathbf1/d$; on a
+sum of pairwise inequivalent irreducibles $\mathcal T(D)=\sum_a(w_a/d_a)\mathbf1_a$ with $w_a=\tr(P_aD)$.  A tensor product of
+irreducibles of independent compact groups is irreducible for the product.  For a singlet of any compact
+diagonal symmetry with an irreducible single-site representation, the one-site state is maximally mixed.
+\end{proposition}
+\begin{proof}
+Invariance of Haar measure gives $U(h)P=P$, and inversion gives $P^*=P$; the same invariance makes $\mathcal T(D)$
+commute with the action and fixes every commuting operator.  Schur's lemma (kernel and image of an
+intertwiner are invariant; an endomorphism of a complex irreducible minus an eigenvalue has a kernel)
+gives the block form, and the trace on each block its weight.  Successive averaging over independent
+factors sends every simple tensor to a multiple of $\mathbf1$, so the commutant is scalar.  With repeated
+irreducible components the commutant acts on the multiplicity space and scalarity needs further data.
+\end{proof}
+
+\begin{remark}[twirling does not prepare a pure singlet; spatial symmetry is separate]\label{rem:cutransl}
+An average of vectors is a projection, and a nonzero projected vector can be normalised; an average of
+density operators can be mixed: for two sites the twirl of $\lvert01\rangle\langle01\rvert$ has weight $\tfrac12$ on the singlet and $\tfrac12$
+on the triplet, eigenvalues $(\tfrac12,\tfrac16,\tfrac16,\tfrac16)$.  Invariance under spin rotations and under a group of site
+permutations are separate requirements; the actions commute, so their joint invariants are obtained by
+averaging the permutations on $\mathcal S_{2n}$.  On a ring with $2n\ge4$ and unit shift $\mathsf T$, $d=s_{12}s_{34}\cdots s_{2n-1,2n}$ has
+$\mathsf T^2d=d$, and $d+\mathsf Td$ is nonzero (the $12$ marginals of $d$ and $\mathsf Td$ differ) and $\mathsf T$-invariant; for $2n=2$ the singlet
+has shift eigenvalue $-1$.  For $2n\ge4$ no ray is invariant under all permutations: all transpositions are
+conjugate, so they would act by a common sign, putting the ray in the symmetric tensors (spin $n$) or the
+alternating ones (zero on more than two factors of $\C^2$).  \emph{Isotropy does not give spatial homogeneity}:
+the two-site marginals of a dimer product are pure on a matched pair and $\mathbf1/4$ on an unmatched pair.
+\end{remark}
+
+\smallskip\noindent\textbf{Hypothesis U (closed-universe state).}  A cosmological use of the register specifies
+the physical sites and their local representations, the spatial translations and the joint invariant
+state; identifying a closed universe with such a state, and choosing a common comparison frequency or an
+observer window, are physical inputs.  Total momentum and gauge charge require representations of their
+own groups.  Reading the compact comparison manifold of each system as a closed space, or identifying
+field, wave and particle descriptions of one excitation, requires a dynamical map from that geometry to
+spacetime and matter (cf.\ Remark~\ref{rem:skintrinsic}).
+
+\subsection{Conditioning on a clock}\label{sec:cuclock}
+Membership in $\mathcal S_{2n}$ gives rotational invariance.  For stationarity choose real $J_{kl}=J_{lk}$ (energy units) and
+$H_{\mathrm{tot}}=\sum_{k<l}J_{kl}X_{kl}$; Theorem~\ref{thm:originfree} allows the whole Hermitian exchange algebra, and the linear choice
+specifies dynamics.  A Hamiltonian commuting with joint transport preserves $\mathcal S_{2n}$.
+
+\begin{proposition}[compatibility with the constraint]\label{prop:cukernel}
+Unit constrained singlets ($H_{\mathrm{tot}}\Psi=0$) exist exactly when $0$ is in the spectrum of $H_{\mathrm{tot}}|_{\mathcal S_{2n}}$, and form one
+ray exactly when this eigenvalue is simple.  The couplings admitting one form the zero set of a nonzero
+polynomial.  For uniform coupling $J$ the restriction is $Jn(n-2)\mathbf1$.  For $n=2$ the kernel on $\mathcal S_4$ has dimension
+$0$ or $2$.  For every $n\ge3$ some unshifted couplings select a unique singlet ray.  With a scalar offset, any
+singlet eigenvector of eigenvalue $E$ solves $(H_{\mathrm{tot}}-E)\Psi=0$, and the unconstrained evolution changes by the phase
+$e^{iEt/\hbar}$.
+\end{proposition}
+\begin{proof}
+The determinant of the restriction is a polynomial in the $J_{kl}$, nonzero at $H_{\mathrm{tot}}=X_{12}$, whose restriction
+squares to $\mathbf1$; a nonzero polynomial does not vanish on an open set.  The uniform value is Proposition~\ref{prop:symmetric}.
+On $\mathcal S_4$ every swap is conjugate to $X_{12}=\mathrm{diag}(-1,1)$ (Example~\ref{ex:cueight}), so the restriction is a traceless
+Hermitian $2\times2$ matrix, invertible or zero.  For $n\ge3$ take the sum of the swaps of one perfect matching
+plus $(n-2)^{-1}\sum_{k<l}X_{kl}$: the second term is $n$ on singlets, the first is at least $-n$ with equality exactly
+on the product singlet of that matching.
+\end{proof}
+
+For a nonempty proper clock register $C\subset Q$ and $S=Q\setminus C$, the edges give
+\begin{equation}\label{eq:cusplit}
+H_{\mathrm{tot}}=H_C\otimes\mathbf1+\mathbf1\otimes H_S+V,\qquad H_D=\sum_{k<l\in D}J_{kl}X_{kl}\ (D=C,S),\qquad V=\sum_{k\in C,\,l\in S}J_{kl}X_{kl}.
+\end{equation}
+A clock reading uses a unit seed $c_0\in V_C$ and the covariant vectors $c_t=e^{-itH_C/\hbar}c_0$; put $L_t=\langle c_t\rvert\otimes\mathbf1$,
+$\phi_t=L_t\Psi$, $p_t=\lVert\phi_t\rVert^2$ and, for $p_t>0$, $\chi_t=\phi_t/\sqrt{p_t}$.  This is Proposition~\ref{prop:relative} for the rank-one tests
+parametrised by $t$; a scalar weight of a rank-one effect density cancels in $\chi_t$.
+
+\begin{theorem}[exchange constraint and conditional dynamics]\label{thm:cucond}
+Let $H_{\mathrm{tot}}\Psi=0$, $\lVert\Psi\rVert=1$, and $r_t=L_tV\Psi$.  Then
+\begin{align}
+i\hbar\dot\phi_t&=H_S\phi_t+r_t,\qquad \dot p_t=\tfrac2\hbar\im\ip{\phi_t}{r_t},\label{eq:cusource}\\
+i\hbar\dot\chi_t&=H_S\chi_t+\frac{r_t}{\sqrt{p_t}}-\frac{i\hbar\dot p_t}{2p_t}\chi_t\qquad(p_t>0).\label{eq:cunormalized}
+\end{align}
+For $V=0$, $p_t=p_0$ and $\phi_t=e^{-itH_S/\hbar}\phi_0$; the vector equation with $H_S$ holds whenever $r_t=0$, and at positive
+weight the conditional rays follow $H_S$ on an interval exactly when $r_t$ is parallel to $\phi_t$ there.  For any
+unit $\Psi$, with $d=H_{\mathrm{tot}}\Psi$ and $\eta(t)=\lvert t\rvert(\lVert V\rVert+\lVert d\rVert)/\hbar$,
+\begin{equation}\label{eq:cuerr}
+\lVert\phi_t-e^{-itH_S/\hbar}\phi_0\rVert\le\eta(t),\qquad
+\lVert\chi_t-e^{-itH_S/\hbar}\chi_0\rVert\le\frac{2\eta(t)}{\sqrt{p_0}}\quad(\eta(t)<\sqrt{p_0}).
+\end{equation}
+For a differentiable imperfect readout $\widetilde L_t=\langle\tilde c_t\rvert\otimes\mathbf1$ with unit $\tilde c_t$, the additional source is $B_t\Psi$,
+$B_t=i\hbar\dot{\widetilde L}_t+\widetilde L_t(H_C\otimes\mathbf1)$, and $\hbar^{-1}\int_{\min(0,t)}^{\max(0,t)}\lVert B_u\rVert\,du$ is added to $\eta(t)$.
+\end{theorem}
+\begin{proof}
+$i\hbar\dot\phi_t=-L_t(H_C\otimes\mathbf1)\Psi$, and \eqref{eq:cusplit} gives $-L_tH_C\Psi=H_S\phi_t+r_t-L_td$.  Differentiating the norm and
+dividing by $\sqrt{p_t}$ give the other identities.  In the frame rotating with $H_S$ the derivative of the vector is
+$-(i/\hbar)e^{itH_S/\hbar}(r_t-L_td)$; the ray is constant exactly when this is a multiple of the vector, and integration
+with $\lVert L_t\rVert=1$ gives the first bound.  For nonzero $u,v$, $\lVert u/\lVert u\rVert-v/\lVert v\rVert\rVert\le2\lVert u-v\rVert/\lVert v\rVert$ (insert $u/\lVert v\rVert$), with
+$\lVert v\rVert=\sqrt{p_0}$; $\eta<\sqrt{p_0}$ ensures $u\ne0$.  For $\widetilde L_t$, $i\hbar\,\tfrac{d}{dt}(\widetilde L_t\Psi)=B_t\Psi-\widetilde L_t(H_C\otimes\mathbf1)\Psi$, and the same
+substitution applies.  Each swap has norm one, so $\lVert V\rVert\le\sum_{k\in C,l\in S}\lvert J_{kl}\rvert$.
+\end{proof}
+
+With sitewise Pauli matrices, $X_{kl}=\tfrac12(\mathbf1+\sum_a\sigma^a_k\sigma^a_l)$ (Theorem~\ref{thm:originfree}) gives
+\begin{equation}\label{eq:cuexsource}
+r_t=\tfrac12\sum_{k\in C,\,l\in S}J_{kl}\Bigl(\phi_t+\sum_{a=1}^3\sigma^a_l\,(\langle c_t\rvert\sigma^a_k\otimes\mathbf1)\Psi\Bigr),
+\end{equation}
+which involves clock contractions other than $\phi_t$.  If $V\Psi=(\mathbf1\otimes W)\Psi$ with $W$ Hermitian, the evolution is
+autonomous with $H_S+W$.  On a subspace $\mathcal P$ of constrained vectors an operator $W_t$ with $L_tV|_{\mathcal P}=W_tL_t|_{\mathcal P}$ exists
+exactly when $\ker(L_t|_{\mathcal P})\subseteq\ker(L_tV|_{\mathcal P})$ (the map is then well defined on the range and extends), and a
+Hermitian one exactly when the form $(\Phi,\Psi)\mapsto\ip{L_t\Phi}{L_tV\Psi}$ is Hermitian on $\mathcal P$ (block extension on the range and
+its complement; necessity by taking adjoints).  The internal $S$ edges give the free Hamiltonian; the cross
+edges give the corrections through their clock matrix elements.
+
+\begin{proposition}[energy matching and finite readouts]\label{prop:cuspectrum}
+Let $V=0$ and $\Psi=\sum_E\Psi_E$, $\Psi_E\in V_C(E)\otimes V_S(-E)$ ($V_D(e)$ the eigenspace of $H_D$).  On a branch with $p_t>0$ the
+conditional rays are nonconstant exactly when $(\langle c_0\rvert\otimes\mathbf1)\Psi_E\ne0$ for at least two distinct $E$.  If the occupied
+clock energies are $E_0+k\hbar\omega$ ($k\in\Z$), a seed with amplitudes $m^{-1/2}$ on one unit eigenvector for each of $m$
+selected energies gives a normalised covariant measurement on their span, with outcome measure $dt/T$
+modulo $T=2\pi/\omega$ and effect density $m\lvert c_t\rangle\langle c_t\rvert$; for $m$ consecutive levels the ticks $t_j=jT/m$ form an orthonormal
+basis.  For incommensurate gaps the uniform average of $m\lvert c_t\rangle\langle c_t\rvert$ over $[0,\ell]$ has off-diagonal entries of modulus at
+most $2\hbar/(\lvert E'-E\rvert\ell)$.  No normalised translation-covariant real-time measurement and no pair with
+$[T_C,H_C]=i\hbar\mathbf1$ exists in finite dimension.
+\end{proposition}
+\begin{proof}
+The product eigenbasis diagonalises the additive constraint; the contractions for different $E$ are
+orthogonal on $S$ and carry phases $e^{iEt/\hbar}$, so the ray changes exactly when two survive.  With amplitudes
+$m^{-1/2}$ the diagonal orbit integrals are $1/m$ and off-diagonal ones vanish by integer frequency
+differences; the geometric sum gives orthogonality of the ticks; $\lvert(e^{ix}-1)/(ix)\rvert\le2/\lvert x\rvert$.  A covariant
+normalised measurement on $\R$ would give, after the normalised trace, a translation-invariant probability
+measure on $\R$, and the integer translates of $[0,1)$ would have equal mass.  The trace of a commutator
+is zero.
+\end{proof}
+\noindent A finite resolution of the reading (an independent offset $u$ with law $\mu$, $V=0$) multiplies the matrix
+element of $\chi_t$ between system energies $e,e'$ by $\int e^{-iu(e-e')/\hbar}d\mu(u)$, of modulus at most one; a uniform offset over
+a period removes all coherences between distinct matched energies.  This classical smearing differs
+from the dynamical cross-edge source.
+
+\begin{example}[a periodic clock made of exchanges]\label{ex:cueight}
+On four sites use the unit singlets $\lvert-\rangle=s_{12}s_{34}$ and $\lvert+\rangle=(t_+t_--t_0t_0+t_-t_+)/\sqrt3$, with $t_+=\lvert00\rangle$,
+$t_0=(\lvert01\rangle+\lvert10\rangle)/\sqrt2$, $t_-=\lvert11\rangle$ on the pairs $(12)$, $(34)$; the total raising operator sends $t_-\mapsto\sqrt2t_0$ and
+$t_0\mapsto\sqrt2t_+$ on each pair, and the raised terms cancel.  On the code basis $(\lvert-\rangle,\lvert+\rangle)$, $X_{12}=X_{34}=\mathrm{diag}(-1,1)$ and $X_{23}$ has
+diagonal $(\tfrac12,-\tfrac12)$ and off-diagonal entries $\tfrac{\sqrt3}2$, so $(2X_{23}+X_{12})/\sqrt3$ restricts to $\sigma_x$.  Take $C=\{1,2,3,4\}$,
+$S=\{5,6,7,8\}$, $H_{\mathrm{tot}}=J(X_{12}+X_{56})$, $J>0$, and for $0<p<1$
+\[
+\Psi=\sqrt p\,\lvert+\rangle_C\lvert-\rangle_S+\sqrt{1-p}\,\lvert-\rangle_C\lvert+\rangle_S ,
+\]
+a singlet with $H_{\mathrm{tot}}\Psi=0$.  With $c_0=(\lvert+\rangle+\lvert-\rangle)/\sqrt2$, $p_t=\tfrac12$ and $\chi_t=\sqrt p\,e^{iJt/\hbar}\lvert-\rangle_S+\sqrt{1-p}\,e^{-iJt/\hbar}\lvert+\rangle_S$, and the system
+observable $\lvert-\rangle\langle+\rvert+\lvert+\rangle\langle-\rvert$ has conditional mean $2\sqrt{p(1-p)}\cos(2Jt/\hbar)$.  The seed is the positive eigenvector of
+$(2X_{23}+X_{12})/\sqrt3$ on the code, and conjugation by $e^{-itH_C/\hbar}$ gives the readout projectors; the clock
+measurement on $C$ is the covariant family of Proposition~\ref{prop:cuspectrum} on the code ($m=2$, period $\pi\hbar/J$, two
+orthogonal ticks $\pi\hbar/(2J)$ apart), completed by the projector onto the complement of the code.  All these
+effects act inside spin-zero sectors and commute with joint rotations; they are realised by the
+instruments of Theorem~\ref{thm:instruments}.  At $p\in\{0,1\}$ the conditional ray is constant; for a one-site clock $H_C=0$
+and the orbit is constant even for this constrained entangled state.
+\end{example}
+
+\begin{example}[a cross-edge term that changes conditional rays]\label{ex:cucross}
+On four sites let $C=\{1,2\}$, $S=\{3,4\}$, $H_C=JX_{12}$, $H_S=0$, $V=\tfrac J2\sum_{k\in C,l\in S}X_{kl}$.  On $\mathcal S_4$, $\sum_{k\in C,l\in S}X_{kl}=-(X_{12}+X_{34})$ and
+$X_{12}=X_{34}$, so $V=-H_C$ there, and $(\lvert+\rangle+\lvert-\rangle)/\sqrt2$ solves the constraint.  The seed $c_0=(t_0+s_{12})/\sqrt2$ gives
+$\phi_t=\tfrac12e^{-iJt/\hbar}s_{34}-\tfrac1{2\sqrt3}e^{iJt/\hbar}t_0$, $p_t=\tfrac13$: the relative phase changes although $H_S=0$.  This seed mixes inequivalent
+spin sectors of $C$; if admissible clock effects must commute with rotations of $C$, it needs an internal
+spin reference, which the spin-zero clock of Example~\ref{ex:cueight} avoids.  On two sites $H_{\mathrm{tot}}=JX_{12}$, $J\ne0$, has no
+zero-energy singlet; with $H_{\mathrm{tot}}=0$ the singlet solves the constraint and both proper clocks ($H_C=0$) have constant
+readouts.  Entanglement, stationarity, covariance and a nontrivial clock are distinct conditions.
+\end{example}
+
+\begin{remark}[relational time]\label{rem:cupw}
+Page and Wootters introduced conditional evolution from a stationary joint state \cite{n1-pw}, Wootters
+the correlation interpretation \cite{n1-wootters}, Giovannetti, Lloyd and Maccone a history-state
+formulation \cite{n1-glm}; H\"ohn, Smith and Lock relate the Page--Wootters reduction to relational Dirac
+observables \cite{n1-hoehn}, and Smith and Ahmadi treat interacting clocks \cite{n1-smith}.  Here
+\eqref{eq:cusource} and \eqref{eq:cuexsource} apply conditioning to the origin-free exchange generators, specify which couplings
+enter the conditional equation, and Example~\ref{ex:cueight} gives a finite clock with rotation-invariant readout.  A
+change of clock changes the split, the readout and the conditional probabilities; in the additive case a
+shift of the seed shifts the time origin, since $e^{-i\tau H_C/\hbar}\otimes e^{-i\tau H_S/\hbar}$ fixes a zero-energy vector.  These are
+conditional probabilities at prescribed readings (Proposition~\ref{prop:relative}); single outcomes remain the
+question of Section~\ref{sec:outcomes}.
+\end{remark}
+
+\subsection{Total phase and the elementary clock}\label{sec:cuphase}
+
+\begin{proposition}[total phase is invisible]\label{prop:cuphase}
+In the complex composite reading with the instruments of Theorem~\ref{thm:instruments} (C0--C3, Convention~\ref{conv:T}), $\Psi$ and
+$e^{i\gamma}\Psi$ have the same statistics for every internal observer, including conditional and adaptive statistics
+on events of positive weight.  Relative phases between coherent components are measurable.
+\end{proposition}
+\begin{proof}
+The projectors coincide; an instrument assigns its outputs from the projector, composition along each
+branch gives the same weights and updated states, and partial traces and division by a common positive
+weight preserve equality.  Observers whose ancillas are part of the register are included.  The mixing
+observable of Example~\ref{ex:cueight} measures a relative phase.
+\end{proof}
+
+\smallskip\noindent\textbf{Hypothesis Ph (phase bridge).}  Fix a clock $T=\{\rho_\gamma\}\subseteq\cR$ of an elementary system and its
+complex structure, in which $\rho_\gamma$ acts as the scalar $e^{i\gamma}$ (Proposition~\ref{prop:clock}(ii)).  (a) The statistics of
+elementary configurations inside every admissible composite are those of the complex composite reading
+built on these complex structures, so that $\rho_\gamma$ on one factor acts as the scalar $e^{i\gamma}$ on the composite.
+(b) A right transport under which all internal statistics in every admissible surrounding preparation
+are unchanged belongs to the unobservable group $K$.
+
+\begin{corollary}[{[Cl]} from the phase bridge]\label{cor:clbridge}
+Under Hypothesis~Ph, $T\subseteq K$, which is [Cl].  With [NT], Proposition~\ref{prop:clockB} gives $K=T$ and binarity.
+\end{corollary}
+\begin{proof}
+By multilinearity, a scalar on one factor multiplies every simple tensor, hence every vector, by that
+scalar.  Proposition~\ref{prop:cuphase} and Ph(b) place each $\rho_\gamma$ in $K$.
+\end{proof}
+
+\begin{remark}[what the corollary does and does not give]\label{rem:clreal}
+\emph{Closure and the invisibility of the total phase do not give [Cl]}: the real reading $K=\{\pm1\}$ of
+Section~\ref{sec:readings} has closed real composites whose statistics are insensitive to the total sign, and $K$
+contains no right-transport circle.  The content of Ph is (a): that composite statistics are computed in
+a complex realisation in which the elementary clock is the scalar phase.  In this paper the complex
+composite reading is derived for factors that are already read through clocks
+(Theorem~\ref{thm:oneclock}); Ph(a) posits it at the level of configurations, so Corollary~\ref{cor:clbridge} replaces the
+input [Cl] by the input Ph and does not derive [Cl] from the axiom.  Three circles have different roles:
+the scalar circle acts trivially on all rays; the clock of Example~\ref{ex:cueight} has two energies and its reading
+varies through a relative phase; the common time shift generated by $H_{\mathrm{tot}}$ is the identity on its kernel.
+\end{remark}
+
+\subsection{Restriction to an observer's horizon}\label{sec:cuhorizon}
+
+\smallskip\noindent\textbf{Hypothesis A (accessible algebra).}  An observer has the full matrix algebra on a site set $A$,
+embedded by $O\mapsto O\otimes\mathbf1_{\bar A}$.  This models a horizon or a restriction of available records; a geometric
+identification with a spacetime horizon requires a causal model.
+
+\begin{proposition}[restriction and conditional ensembles]\label{prop:curestrict}
+The restriction of the closed state to the accessible algebra is the unique density operator $\rho_A$ with
+$\tr(\rho_AO)=\ip{\Psi}{(O\otimes\mathbf1)\Psi}$.  With Schmidt coefficients $\sqrt{\lambda_a}$ across $A\vert\bar A$ the nonzero spectra of $\rho_A$ and
+$\rho_{\bar A}$ are $(\lambda_a)$, so $S(\rho_A)=S(\rho_{\bar A})$ and $\tr\rho_A^2=\sum_a\lambda_a^2$.  After a complete rank-one test of $\bar A$ with
+orthonormal $b_i$, the unread marginal is $\sum_ip_i\lvert\chi_i\rangle\langle\chi_i\rvert$, $\phi_i=(\langle b_i\rvert\otimes\mathbf1)\Psi$, $p_i=\lVert\phi_i\rVert^2$, $\chi_i=\phi_i/\sqrt{p_i}$.  A
+conditional vector is pure on the whole unmeasured register; its further restrictions can be mixed.
+\end{proposition}
+\begin{proof}
+The partial trace satisfies the identity and matrix units determine $\rho_A$; a singular value decomposition
+gives the Schmidt form; expanding in the test basis gives the ensemble, null outcomes included.
+\end{proof}
+\noindent For a singlet pair, conditioning on $\lvert0\rangle$ has weight $\tfrac12$ and leaves $\lvert1\rangle$, and a further test of
+$\cos\alpha\lvert0\rangle+\sin\alpha\lvert1\rangle$ has conditional weight $\sin^2\alpha$.  In a product of two singlets a one-site test leaves the other pair
+entangled with maximally mixed one-site marginals: a nonzero branch neither purifies every unmeasured
+site nor breaks the homogeneity of the untouched pair.  A finite Gram window or a precision threshold
+can enter as a specification of admissible effects.
+
+\begin{example}[entropy of a cut through independent pairs]\label{ex:cupage}
+For a product of pure pairs an uncut pair contributes $0$ to $S(\rho_A)$ and a cut pair with Schmidt weights $p,1-p$
+contributes $h(p)=-p\log p-(1-p)\log(1-p)$.  For $12$ sites in the nested matching $(1,12),(2,11),\dots,(6,7)$ the prefix
+of $m$ sites cuts $\min(m,12-m)$ pairs, with entropy $\min(m,12-m)h(p)$, peak $6\log2$ for singlets.  Pairing every site
+of a half-register across the cut gives $n\log2$ irrespective of any geometric boundary assigned to the cut.
+Page's average concerns random pure states \cite{n1-page}, and the holographic area law a geometric
+setting \cite{n1-rt}; \emph{restriction alone gives no area law}: a spatial area law or a Page curve
+requires a relation between dynamics, state and geometry.
+\end{example}
+
+\begin{theorem}[finite-dimensional modular flow and KMS]\label{thm:cumodular}
+Let $\rho=\rho_A>0$ and $K_A=-\log\rho$.  In the Hilbert--Schmidt representation by left multiplication with vector
+$\Omega=\rho^{1/2}$, the Tomita operator $\mathcal S(O\Omega)=O^*\Omega$ has polar decomposition $\mathcal S=\mathcal J\Delta^{1/2}$, $\mathcal J(Y)=Y^*$, $\Delta(Y)=\rho Y\rho^{-1}$,
+and the modular automorphisms are $\sigma_s(O)=\rho^{is}O\rho^{-is}=e^{-isK_A}Oe^{isK_A}$.  For $F(z)=\tr(\rho B\sigma_z(D))$, $F$ is entire, bounded
+on $-1\le\im z\le0$, and $F(s-i)=\tr(\rho\,\sigma_s(D)B)$.  For singular $\rho$ the statements hold on the support algebra.
+\end{theorem}
+\begin{proof}
+$\mathcal S(Y)=\rho^{-1/2}Y^*\rho^{1/2}$; on matrix units in an eigenbasis of $\rho$, $\Delta$ has eigenvalues $\lambda_i/\lambda_j$ and $\mathcal J\Delta^{1/2}=\mathcal S$.
+Conjugation by $\Delta^{is}$ on left multipliers gives $\sigma_s$.  $F$ is a finite sum $\sum\lambda_c^{1-iz}\lambda_b^{iz}(\cdot)$, bounded for
+$-1\le\im z\le0$; at $z=s-i$, $\sigma_{s-i}(D)=\rho\sigma_s(D)\rho^{-1}$ and cyclicity gives the identity.  For singular $\rho$ the kernel
+projection annihilates $\Omega$, which is then not separating on the full algebra \cite{n1-takesaki,n1-hhw}.
+\end{proof}
+
+\begin{corollary}[when modular flow is exchange time]\label{cor:cugibbs}
+For Hermitian $H_A$ on the full accessible factor and $0<\beta<\infty$ the following are equivalent for faithful $\rho$:
+$\rho=e^{-\beta H_A}/Z$; $K_A=\beta H_A+(\log Z)\mathbf1$; $\sigma_s=\alpha_{-\hbar\beta s}$ with $\alpha_t(O)=e^{itH_A/\hbar}Oe^{-itH_A/\hbar}$; the KMS condition for $\alpha$ at $i\hbar\beta$.
+\end{corollary}
+\begin{proof}
+Logarithms and substitution give the first equivalences; equality of generators makes $K_A-\beta H_A$ central,
+hence scalar, fixed by normalisation.  KMS at $t=0$ and nondegeneracy of the trace pairing give
+$e^{-\beta H_A}De^{\beta H_A}\rho=\rho D$ for all $D$, so $e^{\beta H_A}\rho$ is scalar.  For singular $\rho$ the criterion applies on a support
+preserved by the dynamics; at $\beta=0$ the Gibbs state is $\mathbf1/d$ and its modular flow is trivial.
+\end{proof}
+\noindent The unread register $S$ of Example~\ref{ex:cueight} has energies $\mp J$ with populations $p,1-p$ on its code, which $H_S$
+preserves; for $p>\tfrac12$ the criterion holds at $\beta=(2J)^{-1}\log(p/(1-p))$.  At $p=\tfrac12$ the marginal has trivial modular flow
+while its conditioned observable is time dependent.  For $\cos\theta\lvert00\rangle+\sin\theta\lvert11\rangle$, $0<\theta<\pi/4$, and $H_A=\mathrm{diag}(0,\Delta E)$,
+$\beta\Delta E=2\log\cot\theta$: with $\beta=1/k_BT$ the matched temperature tends to $0$ as $\theta\downarrow0$ and to $\infty$ as $\theta\uparrow\pi/4$.  The
+energy scale is an input; an $H_A$ not commuting with $\rho_A$ has no matched $\beta$.
+
+\begin{remark}[thermal time and continuum horizons]\label{rem:cuthermal}
+Connes and Rovelli propose the modular group as physical time \cite{n1-connes}; the finite construction
+supplies an accessible algebra and a restricted state, and calibration requires the matching of
+Corollary~\ref{cor:cugibbs}.  Bisognano and Wichmann identify vacuum wedge modular flow with boosts \cite{n1-bw};
+the Unruh and Hawking temperatures \cite{n1-unruh,n1-hawking} use their spacetime dynamics and time
+normalisations.  A comparison-register analogue requires a continuum algebra, a state and a geometric
+modular action with its scale; the event geometry of Section~\ref{sec:eventspace} is a candidate kinematic setting
+(programme).
+\end{remark}
+
+\subsection{Entropy balances and tests}\label{sec:cuentropy}
+
+\begin{proposition}[finite entropy balances]\label{prop:cubalances}
+For faithful $\rho$, any density $\tau$ and $D(\tau\Vert\rho)=\tr\tau(\log\tau-\log\rho)$,
+\begin{equation}\label{eq:cufirstlaw}
+S(\tau)-S(\rho)=\tr\bigl((\tau-\rho)K_A\bigr)-D(\tau\Vert\rho),\qquad K_A=-\log\rho,
+\end{equation}
+so $\delta S=\tr(\delta\rho\,K_A)$ to first order \cite{n1-blanco}.  For a pinching $\Pi$ onto orthogonal blocks,
+$\lVert D_0\rVert_{\mathrm{HS}}^2=\lVert\Pi D_0\rVert_{\mathrm{HS}}^2+\lVert D_0-\Pi D_0\rVert_{\mathrm{HS}}^2$ and $S(\Pi\tau)-S(\tau)=D(\tau\Vert\Pi\tau)\ge0$, with equality exactly when $\tau=\Pi\tau$; along
+unitary steps each followed by pinching the entropy increase telescopes into these relative entropies.
+\end{proposition}
+\begin{proof}
+Expanding the traces gives \eqref{eq:cufirstlaw}; $\frac{d}{d\epsilon}\tr f(\rho+\epsilon\delta)=\tr f'(\rho)\delta$ for $f(x)=-x\log x$, and $\tr\delta=0$.  Block-diagonal and
+off-block matrices are orthogonal; $\log\Pi\tau$ is block diagonal on its support (which contains that of $\tau$), so
+$\tr\tau\log\Pi\tau=\tr\Pi\tau\log\Pi\tau$.  Nonnegativity and equality: with eigenvalues $a_i$, $b_j$ and squared overlaps $w_{ij}$,
+$D$ is the classical divergence of $(a_iw_{ij})$ and $(b_jw_{ij})$, and $-\log x\ge1-x$ with equality iff the arrays agree,
+which forces equal states.  Unitary steps preserve entropy.
+\end{proof}
+\noindent For qubit pinching the discarded mass is $\lvert(D_0)_{01}\rvert^2+\lvert(D_0)_{10}\rvert^2$; a state diagonal in a basis mutually unbiased
+to the pinching basis goes to $\mathbf1/d$, gaining $\log d-S(\tau)$.
+
+\begin{proposition}[finite-bath erasure]\label{prop:culandauer}
+Let memory $M$ and reservoir $R$ start in $\rho_M\otimes\omega_R$, $\omega_R=e^{-\beta H_R}/Z$, $0<\beta<\infty$, and let a joint unitary produce $\rho'_{MR}$.
+With $Q_R=\tr H_R(\rho'_R-\omega_R)$ and $\Delta S_D=S(\rho'_D)-S(\rho_D)$,
+\[
+\beta Q_R=-\Delta S_M+I(M{:}R)'+D(\rho'_R\Vert\omega_R)\ge-\Delta S_M ,
+\]
+with equality exactly when the output is uncorrelated and $\rho'_R=\omega_R$.  A mixed memory cannot be made pure by
+such a protocol \cite{n1-landauer,n1-reeb}.
+\end{proposition}
+\begin{proof}
+Unitary invariance and the product input give $I(M{:}R)'=\Delta S_M+\Delta S_R$; \eqref{eq:cufirstlaw} with $\rho=\omega_R$ gives
+$\beta Q_R=\Delta S_R+D(\rho'_R\Vert\omega_R)$.  A pure output memory forces rank at most $\dim V_R$, while the input rank
+$\rk(\rho_M)\dim V_R$ is preserved.  For a correlated input with reservoir marginal $\omega_R$, $I'-I$ replaces $I'$.
+\end{proof}
+\noindent With a qubit reservoir $\mathrm{diag}(0,\Delta E)$ of excited weight $0<q<\tfrac12$, swapping with a maximally mixed memory
+gives $Q_R=\Delta E(\tfrac12-q)$ and an excess of $\beta Q_R$ over $\log2-h(q)$ equal to $D(\mathbf1/2\Vert\omega_R)>0$.  A controlled bit flip
+copies $(\lvert0\rangle\pm\lvert1\rangle)/\sqrt2$ to $(\lvert00\rangle\pm\lvert11\rangle)/\sqrt2$; without the record both signs give the same local state, with it the
+inverse operation restores them, and a surviving copy outside the recovery algebra removes the cross
+terms.  Entropy rises under repeated nonselective pinching and falls when a copying operation is
+reversed.  In the stationary model of Example~\ref{ex:cueight}, for $A=\{5,7\}$, $X_{57}=X_{56}X_{67}X_{56}$ has diagonal $(\tfrac12,-\tfrac12)$ and
+off-diagonal $-\tfrac{\sqrt3}2$ on the code, the singlet weight $w_t=(1-\ip{\chi_t}{X_{57}\chi_t})/2$ is periodic and nonconstant for $0<p<1$,
+and the conditional entropy $h(w_t)+(1-w_t)\log3$, strictly concave in $w_t$, oscillates.  A record arrow needs an
+initial record condition and a mechanism for continued loss of access.
+
+\begin{remark}[equilibrium, cooling and a fixed point]\label{rem:cuarrow}
+Two diagonal qubits with the same gap and different populations each satisfy KMS for their own
+modular flow, yet a swap transfers energy (gap times population difference): \emph{modular KMS is no
+zeroth law}, and a physical temperature needs shared calibrated dynamics and a class of contacts.  The
+rank obstruction concerns closed unitary erasure with a full-rank bath: a swap with an additional pure
+register prepares an exactly pure state, and entanglement can persist elsewhere while a selected site is
+pure \cite{n1-mo}.  A gravitational use of the entanglement first law needs local equilibrium, a
+geometric entropy law and a continuum modular generator \cite{n1-jacobson}.  A finite benchmark: $x=\cos x$
+has a unique solution in $[0,1]$ ($\cos$ maps $[0,1]$ into itself with Lipschitz constant $\sin1<1$), lying in
+$(0,\pi/4)$, so it is a Schmidt angle of the two-level example: $x\simeq0.73908513$, $h(\sin^2x)\simeq0.688864$,
+$k_BT/\Delta E\simeq5.390324$, $\log2-h(\sin^2x)\simeq0.004284$.  A dissipative model selecting this angle would have to derive its update
+law, its records and its free-energy supply (programme).
+\end{remark}
+
+\begin{remark}[interference and spatial observables]\label{rem:cuinterf}
+Equal amplitudes with relative phase $q=\Delta k\cdot x-\omega t$ give $\lvert1+e^{iq}\rvert^2/4=(1+\cos q)/2$; for $\Delta k\ne0$ a constant-phase
+plane moves with signed speed $\omega/\lvert\Delta k\rvert$; two planar reciprocal vectors of length $2\pi/a$ at angle $\vartheta$ give the
+period $a/(2\lvert\sin(\vartheta/2)\rvert)$; a centred aperture of length $L$ along $\Delta k$ multiplies the cosine by $\sin(\lvert\Delta k\rvert L/2)/(\lvert\Delta k\rvert L/2)$.  An
+irrational rotation of the circle averages every continuous function to its Haar mean.  Band structure,
+signal velocity or a stress tensor require dynamics.  The trace-free part $T_{\mu\nu}-g_{\mu\nu}T^\alpha{}_\alpha/4$ is unchanged by $T_{\mu\nu}\mapsto T_{\mu\nu}+cg_{\mu\nu}$;
+a cosmology using this cancellation must derive its field equations, their integration constant and a
+positive observed value.  A sector annihilated by a readout is invisible to it; a dark-matter reading
+would need a conserved stress tensor, clustering, lensing and abundances.  A spatially invariant global
+state could supply homogeneous initial data; explaining the horizon problem requires a mechanism
+selecting it and a derivation of the primordial spectrum.  These are a programme.
+\end{remark}
+
+\begin{conjecture}[local equilibration in the singlet sector]\label{conj:cueth}
+For a periodic chain of $2n$ qubits with independent nearest- and next-nearest-neighbour exchange couplings
+uniform in $[0.9,1.1]$ and $[0.45,0.55]$, consider the singlet eigenvectors within $n^{1/4}$ of the normalised singlet
+trace mean.  The probability that this window is nonempty tends to one, and, conditional on that, for a
+uniformly chosen eigenvector of an orthonormal eigenbasis in the window the marginal of two specified
+neighbouring sites converges to $\mathbf1/4$ in trace norm in probability.
+\end{conjecture}
+\noindent Evidence.  The normalised singlet projector commutes with permutations and rotations; its swap
+expectation is $(n-2)/(2n-1)$, its pair singlet weight $(n+1)/(2(2n-1))$, and its trace-norm distance to $\mathbf1/4$ is
+$3/(2(2n-1))$.  For $n=3,4,5,6$ and $20$ coupling samples each (generator seed $441$), the window contains $2$, $4$--$5$,
+$13$--$15$ and $43$--$47$ levels, and the mean pair distances are $0.432733$, $0.251560$, $0.209589$, $0.165086$.  A proof
+needs control of the level count and of eigenvector fluctuations in the window \cite{n1-eth}.
+
+\begin{remark}[what does not hold]\label{rem:cunogo}
+(i) The two-site marginals of a global singlet are not all maximally mixed: a matched pair of a
+dimer product is pure, and the swap sum excludes jointly flat pairs (Theorem~\ref{thm:cusinglet}).  (ii) Isotropy does
+not give spatial homogeneity (Remark~\ref{rem:cutransl}).  (iii) Twirling does not prepare a pure singlet: the
+twirl of $\lvert01\rangle\langle01\rvert$ has spectrum $(\tfrac12,\tfrac16,\tfrac16,\tfrac16)$.  (iv) A singlet does not solve the unshifted exchange
+constraint in general: the two-site singlet has energy $-J$ for $H=JX_{12}$ (Proposition~\ref{prop:cukernel}).  (v) Not every
+subsystem evolves by its complement's Hamiltonian: a one-site clock has $H_C=0$ and a constant orbit, and
+in Example~\ref{ex:cucross} the conditional ray changes with $H_S=0$.  (vi) A nonzero branch need not purify every
+unmeasured site (after Proposition~\ref{prop:curestrict}).  (vii) Closure with invisible total phase does not give [Cl]
+(Remark~\ref{rem:clreal}).  (viii) Restriction alone gives neither an area law (Example~\ref{ex:cupage}) nor a physical
+temperature (Remark~\ref{rem:cuarrow}).  (ix) A stationary pure register need not have frozen observations
+(Example~\ref{ex:cueight}), and local entropy obeys no one-way law under reversible protocols.  (x) Remaining
+entanglement elsewhere does not preclude a pure local state, and a pure ancilla can prepare one.
+\end{remark}
+
+\begin{remark}[programme]\label{rem:cuprogramme}
+Derive a record boundary condition and loss mechanism for an arrow of time; a continuum observable
+algebra with a geometric modular action and a physical scale on the event geometry; a gravitational
+first-law limit; a primordial spectrum with acoustic phase correlations; field equations with the
+residual vacuum energy; a conserved dark sector with clustering and lensing; and, for a spacetime area
+law or a black-hole Page curve, a controlled local model with a continuum limit preserving entropy or
+modular information.
+\end{remark}
+
 
 %=====================================================================================
 \section{What the structure does not supply: single outcomes}\label{sec:outcomes}
@@ -3128,16 +3591,19 @@ symmetry of the weight excludes superselection (Proposition~\ref{prop:superselec
 product (in addition C1(b)); entangled states (C2); Born weights of composites (C0--C2, [Span]) and their
 uniqueness among nonnegative functions of $\beta_N$ with (a)--(c) of Theorem~\ref{thm:bornN}(iii); effects, Kraus
 instruments and conditional states (C0--C3, [T]); sub-structures of every finite dimension (C0--C2, [Span]),
-and their operations and composites (C0--C3, [T]), as systems under [Sub]; $\U(2)$ and the mass-form eigenvalue ratio (F), and $m_W=m_Z\cos\theta_W$ as tree-level masses (F, F$_{\mathrm g}$(a)); the Pati--Salam
+and their operations and composites (C0--C3, [T]), as systems under [Sub]; the singlet sector of a closed
+register, the conditional dynamics relative to an internal clock with its cross-cut source, the finite
+modular flow and its Gibbs criterion (C0--C3, [Span], [T]), and [Cl] (under [Ph], Corollary~\ref{cor:clbridge}); $\U(2)$ and the mass-form eigenvalue ratio (F), and $m_W=m_Z\cos\theta_W$ as tree-level masses (F, F$_{\mathrm g}$(a)); the Pati--Salam
 group, its breaking and the hypercharges (C0--C3, [Span], G(i)--(iv)); $\sin^2\theta_W=\tfrac38$ (G(v));
 the obstruction for the ungauged back-reacting centre field and the zero-stress flat vacuum (E, F, GR; F$_{\mathrm g}$).
 \emph{Inputs not derived}: [Bil], [Bil$_\cL$], [Span], [Loc], [O], [N], Postulates C1(b), C2, C3, [Sub], the reading
 inputs [L], [W], [Comp], [T], and [B] or, equivalently, [Cl] with [NT], the hypotheses $w\ge0$, $w=f(\beta_N)$ and (a)--(c) of
-Theorem~\ref{thm:bornN}(iii), Hypotheses E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
+Theorem~\ref{thm:bornN}(iii), [Ph] (which gives [Cl]), Hypotheses U, A, E, F, F$_{\mathrm g}$, F$_{\mathrm r}$, F$_{\mathrm S}$ (with F$_{\mathrm{Sg}}$, F$_{\mathrm{Sr}}$), P, G, GR; on the second route C0 and C1(a) in place of [Bil],
 [Bil$_\cL$], [Loc], [O] and [N] for the composite.
 \emph{Open}: a unit of length; $G_Nv^2$; Hypothesis~GR with sources and its consistency with
 Hypothesis~E; the ratio $g'/g$; the number of structures; three generations; scales, masses and
-Yukawa couplings; single outcomes; a derivation of [Loc], [O], C2, [Cl] or [B]; a principle selecting the radial potential.
+Yukawa couplings; single outcomes; a derivation of [Loc], [O], C2, [Cl] (other than from [Ph]) or [B]; local equilibration in the
+singlet sector (Conjecture~\ref{conj:cueth}); a principle selecting the radial potential.
 \emph{Testability} (Table~\ref{tab:falsify} lists it statement by statement).  The kinematic part (one system under the clock reading, composites under the inputs of
 Theorem~\ref{thm:oneclock} including C2, C1(b) and C3) reproduces standard quantum mechanics exactly, so no example below distinguishes the inputs
 of this paper from standard quantum mechanics.  The field part has no confirmed numerical consequence
@@ -3531,6 +3997,8 @@ Carrier $S^1$ or $S^3$; kernel; dimension $3$; compactness; positivity & theorem
 Round-trip law $\Leftrightarrow$ two-readout determinacy & theorem (given $(\Omega1)$, $(\Omega2)$)\\
 Linear space $\R^4$ & theorem\\
 Complex structures commuting with $\cL$ $=$ clocks, all conjugate & theorem\\
+{[Cl]} from the invisible total phase & theorem under [Ph] (Cor.~\ref{cor:clbridge}); [Ph] is an input; closure with invisible total phase alone does not suffice (Rem.~\ref{rem:clreal})\\
+Closed register: singlets and marginals, constraint kernel, conditional dynamics with cross-cut source and error bounds, finite readouts, eight-site clock, restriction, finite modular flow and Gibbs criterion, entropy balances, finite-bath erasure & theorem under C0--C3, [Span], [T] (Thm.~\ref{thm:cusinglet}, Props.~\ref{prop:cukernel}, \ref{prop:cuspectrum}, Thms.~\ref{thm:cucond}, \ref{thm:cumodular}, Cor.~\ref{cor:cugibbs}, Props.~\ref{prop:cubalances}, \ref{prop:culandauer}); physical readings: [U], [A]; thermal time, area law, arrow, cosmology: programme; local equilibration: conjecture\\
 States are clock orbits; weight $\beta$ (exponent $2$) & theorem under [L], [B], equivalently [L], [Cl], [NT] (Prop.~\ref{prop:clockB}); exponent $2$ with [W], [Comp], [N] (Thm.~\ref{thm:readings})\\
 Real four-level and quaternionic one-level readings of the same $\R^4$ & theorem: composable but not binary; trivial\\
 Born weight for one system; unitary/antiunitary symmetries; $\Theta^2=-1$ & theorem; probability reading: [T]\\
@@ -3585,6 +4053,7 @@ Electroweak sector under F, F$_{\mathrm g}$(a): gauged $\OO(4)/\OO(3)$ sigma mod
 Electroweak sector under F, F$_{\mathrm g}$(a), F$_{\mathrm r}$: custodial Standard Model scalar sector & [S]: $\rho=1$, $\kappa_V=\kappa_{2V}=1$ at tree level, compatible with the quoted values; $m_h$ is [D] (fitted); no distinguishing statement\\
 Pati--Salam group, global form, hypercharges, anomaly cancellation & [M] under G(i)--(iv); agree with the Standard Model; no breaking scale or heavy vectors supplied\\
 $\sin^2\theta_W=\tfrac38$ (G(v)) or $\tfrac12$ as boundary values & [X]: with Standard Model running and no thresholds the colour condition fails; the required shifts are Remark~\ref{rem:couplings}; $\hat s_Z^2$ is [D]\\
+Closed register and internal clocks & [M]: finite identities and bounds; Conjecture~\ref{conj:cueth} is a mathematical statement that computation at larger $n$ could refute; [S]: the conditional dynamics is that of standard quantum mechanics with a Page--Wootters reading; the physical readings [U], [A] are not tested here\\
 Topological particles under F$_{\mathrm S}$ & [M]: bounds and topology; [X]: a particle identification (Hypothesis~P) would be testable once $v$, $e_{\mathrm S}$ and the quantisation character are fixed; none is fixed here\\
 Three structures, generations, scales, masses, $g'/g$ & open; not derived\\
 \bottomrule
@@ -3606,7 +4075,9 @@ Assumption & Used by & Not implied by the others & Weakest sufficient form\\
 {[NC]} & Secs.~\ref{sec:one}--\ref{sec:sm} & $S^1$ is a solution (rebit) & ---\\
 {[L]} & Lemma~\ref{lem:normaliser}, Thm.~\ref{thm:readings} & $K$ a circle of left transports with $w=\lvert\ip xy\rvert^2$ for the left complex structure: binary, composable, normalised, not normalised by $\cL$ & left transports act on classes\\
 {[W]} & Thm.~\ref{thm:readings}(i), (iii) & relative to [L]: $K=\{\pm1\}$ with $w=\beta$, $\cL$-invariant and not of this form (not binary); with [B] (a clock) no model with a continuous $\cL$-invariant weight & automatic for a clock (continuous $\cL$-invariant weights)\\
-{[Cl]} & Prop.~\ref{prop:clockB} (with [NT], equivalent to [B] under [L]) & relative to [L], [NT]: $K=\{\pm1\}$ (real four-level reading), not binary & a one-parameter group in $K$\\
+{[Cl]} & Prop.~\ref{prop:clockB} (with [NT], equivalent to [B] under [L]); a theorem under [Ph] (Cor.~\ref{cor:clbridge}) & relative to [L], [NT]: $K=\{\pm1\}$ (real four-level reading), not binary & a one-parameter group in $K$\\
+{[Ph]} & Cor.~\ref{cor:clbridge} & the real reading: closed composites with invisible total sign, $K=\{\pm1\}$, no circle (Rem.~\ref{rem:clreal}) & (a) and (b) as stated\\
+{[U]}, {[A]} & Sec.~\ref{sec:closedreg} (physical readings only) & the finite theorems hold without them & as stated\\
 {[NT]} & Prop.~\ref{prop:clockB} & $K=N(T)$ or $\SU(2)$: [Cl] holds, no orthogonal classes & one orthogonal pair\\
 {[B]} & Thm.~\ref{thm:readings}(ii) (under [L], given by [Cl] with [NT]) & not implied by [L], [W], [Comp], [N]: $K=\{\pm1\}$, $w=c^2$, composable, normalised, not binary & one class with exactly one orthogonal class\\
 {[Comp]} & Thm.~\ref{thm:readings}(i), (iii) & $K=T$ with $\mathsf F(s)=3s^4-2s^6$: binary, normalised, $\mathsf F$ not multiplicative & as in Def.~\ref{def:reading}\\
@@ -3695,7 +4166,11 @@ and \ref{sec:sm}) and \texttt{check\_radial.py} (Section~\ref{sec:radial}, with 
 bilinear identity, the radial mass, the cancellation of the longitudinal growth and the fit to the
 quoted data) and \texttt{check\_skyrme.py} (Section~\ref{sec:skyrme}, with own checks of the completed square, the
 two normalisations, the trial integrals and binding, the Hopf coefficients, the compact centre field and
-its conformal threshold $\sqrt2$, the barrier family and the Chern--Simons interpolation).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
+its conformal threshold $\sqrt2$, the barrier family and the Chern--Simons interpolation) and \texttt{check\_closedreg.py}
+(Section~\ref{sec:closedreg}: twelve groups, including the singlet-chain data of Conjecture~\ref{conj:cueth}; own checks of the
+Catalan dimensions, the swap sum, the constraint kernels, the eight-site clock and its code matrices, the
+cross-edge example, the conditional equation and its bound, the modular and Gibbs identities, the
+erasure balance and the fixed-point values).  Among them: Theorems~\ref{thm:trd}, \ref{thm:bornN}, \ref{thm:instruments}, \ref{thm:sm},
 \ref{thm:product}; Propositions~\ref{prop:relative}, \ref{prop:solder}, \ref{prop:pairsu3}, \ref{prop:angle38},
 \ref{prop:universal}, \ref{prop:cosmo}, \ref{prop:solderunique}, \ref{prop:centre}, \ref{prop:superselection} (with its
 classification of weights and free split), \ref{prop:rtclosed}, \ref{prop:symsector}, \ref{prop:subops},
@@ -4173,6 +4648,46 @@ contributions.
 \bibitem{n6:axler} S.~Axler, P.~Bourdon, and W.~Ramey, \emph{Harmonic Function Theory}, 2nd ed.\ (Springer, 2001).
 
 \bibitem{Manton87} N.~S.~Manton, Geometry of skyrmions, Commun.\ Math.\ Phys.\ \textbf{111}, 469--478 (1987).
+
+\bibitem{n1-haar} A.~Haar, Der Massbegriff in der Theorie der kontinuierlichen Gruppen, Ann.\ of Math. \textbf{34}, 147--169 (1933).
+
+\bibitem{n1-pw} D.~N.~Page and W.~K.~Wootters, Evolution without evolution: Dynamics described by stationary observables, Phys.\ Rev.\ D \textbf{27}, 2885--2892 (1983).
+
+\bibitem{n1-wootters} W.~K.~Wootters, Time replaced by quantum correlations, Int.\ J.\ Theor.\ Phys. \textbf{23}, 701--711 (1984).
+
+\bibitem{n1-glm} V.~Giovannetti, S.~Lloyd, and L.~Maccone, Quantum time, Phys.\ Rev.\ D \textbf{92}, 045033 (2015).
+
+\bibitem{n1-hoehn} P.~A.~H\"ohn, A.~R.~H.~Smith, and M.~P.~E.~Lock, Trinity of relational quantum dynamics, Phys.\ Rev.\ D \textbf{104}, 066001 (2021), arXiv:1912.00033.
+
+\bibitem{n1-smith} A.~R.~H.~Smith and M.~Ahmadi, Quantizing time: Interacting clocks and systems, Quantum \textbf{3}, 160 (2019).
+
+\bibitem{n1-page} D.~N.~Page, Average entropy of a subsystem, Phys.\ Rev.\ Lett. \textbf{71}, 1291--1294 (1993).
+
+\bibitem{n1-rt} S.~Ryu and T.~Takayanagi, Holographic derivation of entanglement entropy from AdS/CFT, Phys.\ Rev.\ Lett. \textbf{96}, 181602 (2006).
+
+\bibitem{n1-takesaki} M.~Takesaki, \emph{Tomita's Theory of Modular Hilbert Algebras and Its Applications}, Lecture Notes in Mathematics \textbf{128} (Springer, Berlin, 1970).
+
+\bibitem{n1-hhw} R.~Haag, N.~M.~Hugenholtz, and M.~Winnink, On the equilibrium states in quantum statistical mechanics, Commun.\ Math.\ Phys. \textbf{5}, 215--236 (1967).
+
+\bibitem{n1-connes} A.~Connes and C.~Rovelli, Von Neumann algebra automorphisms and time-thermodynamics relation in generally covariant quantum theories, Class.\ Quantum Grav. \textbf{11}, 2899--2918 (1994).
+
+\bibitem{n1-bw} J.~J.~Bisognano and E.~H.~Wichmann, On the duality condition for a Hermitian scalar field, J.\ Math.\ Phys. \textbf{16}, 985--1007 (1975).
+
+\bibitem{n1-unruh} W.~G.~Unruh, Notes on black-hole evaporation, Phys.\ Rev.\ D \textbf{14}, 870--892 (1976).
+
+\bibitem{n1-hawking} S.~W.~Hawking, Particle creation by black holes, Commun.\ Math.\ Phys. \textbf{43}, 199--220 (1975).
+
+\bibitem{n1-blanco} D.~D.~Blanco, H.~Casini, L.-Y.~Hung, and R.~C.~Myers, Relative entropy and holography, J.\ High Energy Phys. \textbf{08}, 060 (2013).
+
+\bibitem{n1-landauer} R.~Landauer, Irreversibility and heat generation in the computing process, IBM J.\ Res.\ Dev. \textbf{5}, 183--191 (1961).
+
+\bibitem{n1-reeb} D.~Reeb and M.~M.~Wolf, An improved Landauer principle with finite-size corrections, New J.\ Phys. \textbf{16}, 103011 (2014).
+
+\bibitem{n1-jacobson} T.~Jacobson, Thermodynamics of spacetime: The Einstein equation of state, Phys.\ Rev.\ Lett. \textbf{75}, 1260--1263 (1995).
+
+\bibitem{n1-mo} Ll.~Masanes and J.~Oppenheim, A general derivation and quantification of the third law of thermodynamics, Nat.\ Commun. \textbf{8}, 14538 (2017).
+
+\bibitem{n1-eth} M.~Srednicki, Chaos and quantum thermalization, Phys.\ Rev.\ E \textbf{50}, 888--901 (1994).
 
 \bibitem{CLT74} J.~M.~Cornwall, D.~N.~Levin, and G.~Tiktopoulos, Derivation of gauge invariance from high-energy unitarity bounds on the S matrix, Phys.\ Rev.\ D \textbf{10}, 1145 (1974); Erratum \textbf{11}, 972 (1975).
 
