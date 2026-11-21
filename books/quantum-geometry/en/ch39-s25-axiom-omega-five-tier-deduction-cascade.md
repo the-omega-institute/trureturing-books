@@ -346,7 +346,13 @@ $$
 
 Both $Z$ and $I-Z$ have eigenvalues $1/2\pm r$. Thus all these weights are positive semidefinite exactly when $|r|\le1/2$. The mixed response is $sD_{12}(s)=rA(s)$, while the two diagonal responses obey $sD_{11}(s)=sD_{22}(s)=1-A(s)/2$. For $r\ne0$, division by the massless mixed residue $r=\lim_{s\downarrow0}sD_{12}(s)$ recovers the preceding half-value prediction. Doubling the momentum magnitude multiplies $s$ by $4$.
 
-The same bound on the mixed residue holds for any two-source model with total spectral weight $I$. Its zero-mass spectral matrix $Z_0$ satisfies $0\preceq Z_0\preceq I$. Its expectations on the unit vectors $e_\pm=(1,\pm1)/\sqrt2$ both lie in $[0,1]$, and their difference is $2(Z_0)_{12}$. If $|(Z_0)_{12}|=1/2$, the two expectations must be $0$ and $1$ in some order. A vector on which a positive semidefinite quadratic form vanishes belongs to the kernel of its matrix. Applying this to $Z_0$ and $I-Z_0$ shows that $e_\pm$ are eigendirections and both diagonal entries must equal $1/2$.
+::: {.theorem #thm-ch39-two-source-massless-residue title="Mixed residue for two normalized sources" lean="D5/S3/Quantum/TwoSource/MasslessResidue.sharp_mixed_residue"}
+Fix $r\in\mathbb R$. A real $2\times2$ matrix $Z_0$ satisfying $0\preceq Z_0\preceq I$ and $(Z_0)_{12}=r$ exists exactly when $|r|\le1/2$. If $|r|=1/2$, every realization has both diagonal entries equal to $1/2$ and both off-diagonal entries equal to $r$.
+:::
+
+::: proof
+Consider any two-source model with total spectral weight $I$. Its zero-mass spectral matrix $Z_0$ satisfies $0\preceq Z_0\preceq I$. Its expectations on the unit vectors $e_\pm=(1,\pm1)/\sqrt2$ both lie in $[0,1]$, and their difference is $2(Z_0)_{12}$. If $|(Z_0)_{12}|=1/2$, the two expectations must be $0$ and $1$ in some order. A vector on which a positive semidefinite quadratic form vanishes belongs to the kernel of its matrix. Applying this to $Z_0$ and $I-Z_0$ shows that $e_\pm$ are eigendirections and both diagonal entries must equal $1/2$. Conversely, the preceding construction of $Z$ realizes every $r$ in the interval. The full proof is checked by the Lean kernel.
+:::
 
 Positivity also constrains how the two sources couple to massive modes. Let $v,w$ denote the two source directions, choose the sign so that $r>0$, and write $H(s)=D(s)-Z_0/s$ for the positive semidefinite bilinear form contributed by the massive spectrum. If the mixed response satisfies $sD(v,w)=rA(s)$ and $Z_0(v,w)=r$, then
 
