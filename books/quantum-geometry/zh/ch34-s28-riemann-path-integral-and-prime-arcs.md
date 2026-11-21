@@ -352,9 +352,17 @@ Levent Alpöge 提出的证明在模 $1$ 使用外部算术输入构造这族整
 
 针对上述手工衔接，已有一次条件性的外部 Lean 内核复核。固定在参考库的 Lean 4.33.1 环境中，`rh_of_family_and_unit_host` 从族输入 `TopG` 和模一特征标的宿主输入 `HostExW (3/2) (GChi PChar.one).req` 推出黎曼猜想。对每个 $\kappa>0$，两个输入共同给出任意远的 $[Y,Y^{3/2}]$，使同一族在窗内每个实数 $x$ 处都有 $\mathrm{Gz}(x)\le x^{1/2+\kappa}$。这里 $\mathrm{Gz}(x)=U(x)$ 正是本书的完整 Mangoldt 余项，故可应用上文的素数窗口判据。此次内核重放以这两个输入为假设，参考库中提供它们的构造在重放范围之外。复现记录给出兼容补丁及成功的内核重放，其中 `PinnedTop`、`WindowConsumer` 和 `UnifiedWindowRH` 核验这条条件推论，`PinnedMesh` 核验另一条固定特征标的窗口判据。[固定环境中的条件推论与复现源码](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059461340)
 
-后续的外部内核复核细化了宿主输入。对 $0<\varepsilon<1/52$、$A\ge1$ 和每个充分大的 $Y$，模一的均方估计 `QH.pairEx` 给出在整个 $[Y,Y^A]$ 上满足测试的同一对 $q,d$。外窗的构造还使用上同调窗口输入；此时先固定 $Y,q,d$，然后再量化外窗内的实点。特别地，在模一特征标处，`supplyChi` 把 `VWinAt PChar.one 401` 送入上段的宿主条件。由此在同一环境核验了 `TopG → VWinAt PChar.one 401 → RiemannHypothesis`。这个上同调窗口要求同一数域、同一秩下相应的 Galois 上同调长度有限，并且它们对每个有限素数集以 $\log\ell$ 加权的和满足规定上界。[固定素数对与外窗的量词](https://github.com/the-omega-institute/trureturing/issues/32627#issuecomment-7059642097) · [上同调窗口的条件推论](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059734329)
+外部参考库的均方定理 `QH.pairEx` 给出了同时覆盖内窗的素数对。取模数 $1$、$0<\varepsilon<1/52$ 与 $A\ge1$。对每个充分大的 $Y$，存在一对素数 $q,d$ 满足 `PairGood 1 ε Y (Y^A) q d`，其中含有 `WinPair` 的大小与同余条件。对每个合乎条件的非平凡二次扭转，诱导该扭转的本原特征标 $\chi$ 在整个 $Y\le y\le Y^A$ 上同时满足 $|g_\chi(y)|\le y^{1/2+\varepsilon/2}$ 与 $|D_\chi|\le4\log y$；定义还包括指定实特征标扭转的零点排除区域。这里选择 $q,d$ 只用参考库已核验的均方定理。[固定素数对与外窗的量词](https://github.com/the-omega-institute/trureturing/issues/32627#issuecomment-7059642097)
 
-模一特征标 $\chi$ 生成的群只有一个元素。数域构造给出 $1\le c\le|\langle\chi\rangle|$，所以秩公式 $c2^e$ 化为 $2^e$，直接满足 $x^{2+8\varepsilon}\le2^e\le2x^{2+8\varepsilon}$。于是模一情形可把上同调截断指数从 $401$ 降到 $400$。外窗 $[Z,Z^{3/2}]$ 上的每个 $x$ 都使用同一组 $Y,q,d$，秩指数 $e$ 可随 $x$ 改变；上同调长度求和只用 $1\le j<\lfloor x^{400}\rfloor$。同一外部环境还核验了 `TopG → VWinAt PChar.one 400 → RiemannHypothesis`。族输入与这个较弱的模一窗口输入都是该推论的假设。[指数 400 的源码与内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059864808)
+从内窗到模一宿主另用上同调输入 `VWinAt PChar.one`，记其截断指数为 $C$。对每个上述 $\varepsilon$ 以及每个在 $x\ge1$ 满足 $x^{2+8\varepsilon}\le2^{e(x)}\le2x^{2+8\varepsilon}$ 的秩指数函数 $e(x)$，该输入给出 $J\ge1$ 与起点。对于起点以后的每个 $X$ 以及内层尺度 $X^{1/J}$ 上每对合乎条件的 $q,d$，它给出共同子窗 $[W,W^2]\subseteq[X^{1/J},X]$。子窗内每个 $x$ 的估计适用于匹配该特征标、$e(x),q,d$ 的每个数域。固定这样的数域及其任意代数闭包和局部系数数据，令 $t=\lfloor x^C\rfloor$。对于每个素数 $\ell$ 与 $1\le j<t$，上同调长度 $\operatorname{shaLen}(\ell,j)$ 都有限，且对每个有限素数集 $S$ 有
+
+$$
+\sum_{\ell\in S}\log\ell\sum_{1\le j<t}\operatorname{shaLen}(\ell,j)\le\sqrt{\exp(x^\varepsilon)}.
+$$
+
+取 $C=401$ 时，共同子窗的构造先选好 $Y,q,d$，再量化外窗 $[Z,Z^{3/2}]$ 内的实点。`supplyChi` 给出上段所需的模一宿主。同一外部 Lean 环境由此核验了 `TopG → VWinAt PChar.one 401 → RiemannHypothesis`。[上同调窗口的条件推论](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059734329)
+
+模一特征标 $\chi$ 生成的群只有一个元素。数域构造给出 $1\le c\le|\langle\chi\rangle|$，所以宿主构造中的阶 $c2^e$ 等于 $2^e$，直接满足上述秩估计。这使模一情形的截断指数可以从 $401$ 降到 $400$，求和只用 $1\le j<\lfloor x^{400}\rfloor$。在指数 $400$ 的窗口假设下，`fixed_of_400` 对每个上述 $\varepsilon$ 给出 $J\ge1$，使得超过任意给定起点都能找到外窗 $[Z,Z^{3/2}]$ 与一组共同的 $Y,q,d$，其中 $Y\le Z\le Z^{3/2}\le Y^J$。这对素数在 $[Y,Y^J]$ 上满足 `PairGood`，外窗内每个 $x$ 又有与之匹配的 $e(x)$ 和上述长度界。同一外部环境核验了 `TopG → VWinAt PChar.one 400 → RiemannHypothesis`。族输入与这个较弱的模一窗口输入都是该推论的假设。[指数 400 的源码与内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059864808)
 
 **怎样让同一个判别式在几个素数处都分裂？** 对奇素数 $p$，记 $J(-d,p)=\bigl(\frac{-d}{p}\bigr)$。值为 $1$ 的意思是 $t^2\equiv-d\pmod p$ 有非零解。取 $B=3$，要检查的小奇素数只有 $3$。素数 $d=23$ 满足 $d\equiv7\pmod{16}$ 及 $-23\equiv1\pmod3$。再取素数 $q=59\equiv3\pmod8$，有 $-23\equiv36=6^2\pmod{59}$。这一对满足所需的两个分裂条件。下面的构造用特定剩余类一次保证所有有限条件，这些剩余类只占可用素数的一部分。
 
@@ -613,7 +621,7 @@ $$
 
 **手工推导。** 系数 $ej_qj_d$ 的本原导子为 $8qd>1$，而主特征标的导子为 $1$，因此它满足非主条件，可以在上式中代入 $h=8qd$。要进一步估计 $L'/L$，仍需在所指定的区域控制 $L$ 的零点。
 
-**从同一实端点控制 $L'/L$。** 取正整数模数 $h$、模 $h$ 的非主复 Dirichlet 特征标 $\chi$，记 $D_\chi=L'(1,\chi)/L(1,\chi)$。在正实数 $x$ 处定义斜坡和及非主分支的读数
+**从同一实端点控制 $L'/L$。** 取正整数模数 $h$、模 $h$ 的非主复 Dirichlet 特征标 $\chi$，记 $D_\chi=L'(1,\chi)/L(1,\chi)$。在正实数 $x$ 处定义斜坡和及非主分支的平滑中心化和
 
 $$
 R_\chi(x)=\sum_{1\le n\le\lfloor x\rfloor}\Lambda(n)\max(x/n-1,0)\chi(n),
@@ -650,7 +658,7 @@ $$
 用斜坡界除以 $x$，得 $|g_\chi(x)|/x\le x^{\varepsilon-1/2}\to0$。Chebyshev 误差核绝对可积，故 $I(x)\to0$。取 $X$ 使这两项的误差各小于 $\eta/2$，代入上一条端点界即可。二者只依赖实端点和误差参数，所以同一个起点适用于所有模数与特征标。完整证明由 Lean 内核检查。
 :::
 
-**手工推导。** 固定 $\eta=1$，就得到充分大 $x$ 处的 $|D_\chi|\le\log x-\gamma\le4\log x$。在非主分支上，同一特征标的 $g_\chi$ 界由此给出参考库宿主条件中要求的系数 $4$。主特征标的分支有单独的定义。
+**手工推导。** 由定义，非主分支上的 $g_\chi$ 就是上文所用的参考库平滑中心化和 `An.gChi`。设同一特征标在端点 $x$ 满足 $|g_\chi(x)|\le x^{1/2+\varepsilon}$，其中 $\varepsilon<1/2$。取 $\eta=1$，在充分大的 $x$ 处就有 $|D_\chi|\le\log x-\gamma\le4\log x$，这给出宿主条件 `EAtH.bdL` 在非主分支上所需的对数导数界。主特征标的分支有单独的定义。
 
 **窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
 
