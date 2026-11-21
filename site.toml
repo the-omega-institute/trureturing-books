@@ -39,5 +39,5 @@ order = ["quantum-geometry"]
 hide = ["example-*"]
 
 [release]
-# 有尚未预览的 dev 提交时，每天最多发布一次 GitHub 预览版。
-daily_dev_preview = true
+# 有尚未预览的 main 提交时，每天最多发布一次 GitHub 预览版。
+preview_branch = "main"
