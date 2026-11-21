@@ -538,6 +538,30 @@ If the exceptional zero exists and $\chi(a)=1$, put $\delta=1-\beta$ and $W=1-Y^
 
 In the cancellation case $\delta\log Y\ge s/m^2$, so $1-e^{-u}\ge(1-e^{-1})\min\{u,1\}$ gives $W\ge (1-e^{-1})\min\{s,1\}m^{-2}$. This bound also holds for $W=1$. Dividing by $\varphi(m)\le m$ proves the claim. For the second-prime parameters $y=x^{\varepsilon/5}$, $m\le e^{4y}$ and $D=e^{y(\log x)^2}$, we have $\log D/\log(4m)\ge y(\log x)^2/(\log4+4y)\to\infty$. The same threshold therefore applies at every sufficiently large $x$. If the number of integers in the class failing either test is smaller than this prime lower bound, at least one prime passes both tests. [The counting hypothesis in the reference](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Definitions/GlobalTwisting/GeneralHyps.lean#L113-L118)
 
+**How can the same $d$ pass both tests?** Fix $\varepsilon>0$ and put $y=x^{\varepsilon/5}$, $D=\exp(y(\log x)^2)$ and $N=\lfloor x^{400}\rfloor$. Enumerate a residue class by $d_i=b+m(A+i)$ for $0\le i<L$. Write $J(n,r)$ for the product of the Legendre symbols over the prime factors of $r$, counted with multiplicity, taking the empty product $1$ at $r=0,1$. On positive odd denominators this is the Jacobi symbol. Put $w_n=\Lambda(n)\min\{1,x/n\}$. At the same index $i$, form the two sums
+
+$$
+S_i=\sum_{n=1}^N w_n J(n,d_i),\qquad
+S_{q,i}=\sum_{n=1}^N w_n J(n,d_i)J(n,q).
+$$
+
+Let $H$ contain exactly the indices for which $|S_i|>x^{1/2+\varepsilon}/2$ or $|S_{q,i}|>x^{1/2+\varepsilon}/2$. Thus $i\notin H$ means that both sums meet the bound.
+
+::: {.theorem #thm-ch31-splitting-progression-power-tail title="Exceptional indices for two tests in one splitting progression" lean="D5/S3/CharacterSums/SplittingProgressionExponentialTail.splitting_progression_power_tail"}
+For every fixed $\varepsilon>0$ and every sufficiently large real $x$, take any natural numbers $q,b,m,A,L$ with $b\equiv3\pmod4$ and $4\mid m$. Assume every prime divisor $p$ of $m$ satisfies $p\le x^{1/2+\varepsilon/2}$ or $p>N$. If $L\ge D/(4e^{4y})$, then
+
+$$
+|H|\le L D^{-\min\{\varepsilon,1\}/38400}.
+$$
+
+:::
+
+::: proof
+Extract from each sum the terms at odd primes that do not divide $m$. The clipped weights and the condition on the prime divisors of $m$ bound the remaining contributions from higher prime powers, $2$, and primes dividing $m$ by $x^{1/2+\varepsilon}/4$ for sufficiently large $x$. Over a full period modulo the product of the retained primes, the Chinese remainder theorem makes their residue coordinates independent. This bounds the high even moments in terms of the sum of the squared coefficients. Expanding the same moment on the actual interval of length $L$ leaves an endpoint remainder for each tuple of primes after its complete periods are removed. At order $2\lfloor y\log x/4800\rfloor$ the length assumption absorbs the remainders. At each failing index at least one of the two retained sums has absolute value at least $x^{1/2+\varepsilon}/4$. Summing the two nonnegative even powers therefore bounds the entire exceptional set. The full proof is checked by the Lean kernel.
+:::
+
+**Hand derivation.** For every fixed $B>0$ we eventually have $D^{-\min\{\varepsilon,1\}/38400}\le e^{-By}$. To obtain an actual prime, enumerate just the elements of the specified class in the preceding interval $(D/2,D]$. Suppose $3\le m\le e^{4y}$, the class $a=b\bmod m$ is a unit, and the enumeration meets the hypotheses above. Then $L\le D+1$. There are at most $(D+1)D^{-\min\{\varepsilon,1\}/38400}$ failing indices. The ratio of this bound to the prime lower bound $c m^{-3}(D/2)/\log(D/2)$ tends to zero since $m^3\le e^{12y}$ and $\log D=y(\log x)^2$. At every such sufficiently large height, some prime $d$ therefore passes both tests.
+
 **How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
 
 $$

@@ -538,6 +538,30 @@ $$
 
 在发生抵消的情形，$\delta\log Y\ge s/m^2$。由 $1-e^{-u}\ge(1-e^{-1})\min\{u,1\}$ 得 $W\ge (1-e^{-1})\min\{s,1\}m^{-2}$；$W=1$ 时也成立。再除以 $\varphi(m)\le m$ 即得下界。对选 $d$ 所用的 $y=x^{\varepsilon/5}$、$m\le e^{4y}$ 和 $D=e^{y(\log x)^2}$，有 $\log D/\log(4m)\ge y(\log x)^2/(\log4+4y)\to\infty$，因此同一门槛适用于每个充分大的 $x$。若该类里未通过任一测试的整数数目小于这个素数下界，就至少留下一枚同时通过两项测试的素数。[参考库中的计数假设](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Definitions/GlobalTwisting/GeneralHyps.lean#L113-L118)
 
+**怎样在同一枚 $d$ 上通过两项测试？** 固定 $\varepsilon>0$，记 $y=x^{\varepsilon/5}$、$D=\exp(y(\log x)^2)$、$N=\lfloor x^{400}\rfloor$。沿同余类取 $d_i=b+m(A+i)$，其中 $0\le i<L$。写 $J(n,r)$ 为把 $r$ 的各素因子按重数取 Legendre 符号后相乘的值，$r=0,1$ 时取空积 $1$。对正奇数分母，它就是雅可比符号。置 $w_n=\Lambda(n)\min\{1,x/n\}$。在同一个 $i$ 上计算
+
+$$
+S_i=\sum_{n=1}^N w_n J(n,d_i),\qquad
+S_{q,i}=\sum_{n=1}^N w_n J(n,d_i)J(n,q).
+$$
+
+索引集合 $H$ 收录满足 $|S_i|>x^{1/2+\varepsilon}/2$ 或 $|S_{q,i}|>x^{1/2+\varepsilon}/2$ 的 $i$。于是 $i\notin H$ 表示两个和同时达到所需界。
+
+::: {.theorem #thm-ch31-splitting-progression-power-tail title="同一分裂同余类上两项测试的例外索引" lean="D5/S3/CharacterSums/SplittingProgressionExponentialTail.splitting_progression_power_tail"}
+对每个固定的 $\varepsilon>0$ 和每个充分大的实数 $x$，任取自然数 $q,b,m,A,L$，设 $b\equiv3\pmod4$、$4\mid m$，且每个整除 $m$ 的素数 $p$ 都满足 $p\le x^{1/2+\varepsilon/2}$ 或 $p>N$。若 $L\ge D/(4e^{4y})$，则
+
+$$
+|H|\le L D^{-\min\{\varepsilon,1\}/38400}.
+$$
+
+:::
+
+::: proof
+从两个和中取出不整除 $m$ 的奇素数项。较高素数幂、$2$ 和整除 $m$ 的素数项由截断权重及因子条件控制，对每项测试的误差最终至多为 $x^{1/2+\varepsilon}/4$。对剩余素数的乘积取一个完整周期，中国剩余定理使各素数坐标独立。每个和的高偶次矩因而可由各系数的平方和控制。在实际长度 $L$ 的区间上展开同一个矩，每个素数元组在完整周期之外只留下端点余项。取矩阶 $2\lfloor y\log x/4800\rfloor$，给定的长度门槛足以吸收这些余项。在任何失败索引上，至少一个剩余素数和的绝对值达到 $x^{1/2+\varepsilon}/4$；用两个非负偶次幂之和同时控制全部失败索引即得所示界。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 对每个固定的 $B>0$，$D^{-\min\{\varepsilon,1\}/38400}\le e^{-By}$ 最终成立。要把整数索引变成真正的素数，可取上一段的 $(D/2,D]$ 并只枚举其中指定同余类的元素。若 $m\ge3$、$m\le e^{4y}$、$a=b\bmod m$ 为可逆类，且这个枚举满足定理的诸条件，则 $L\le D+1$。失败索引至多 $(D+1)D^{-\min\{\varepsilon,1\}/38400}$，它与素数个数下界 $c m^{-3}(D/2)/\log(D/2)$ 的比值趋于零，因为 $m^3\le e^{12y}$ 而 $\log D=y(\log x)^2$。所以在每个这样的充分大高度，至少一枚素数 $d$ 同时通过两项测试。
+
 **窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
 
 $$
