@@ -281,7 +281,7 @@ Alpöge 原证明的声明是 `riemannHypothesis : RiemannHypothesis`，其右�
 
 本节整数块路线的两个局部模块 `DesignIntegerBlocks` 与 `RawDesignIntegerBlocks` 均已分别通过定向内核重放。局部的设计到算术族这一步以九项闭合估计为输入。
 
-另一条路线从原始伽罗瓦行取得模一算术族，再由 `BookIntegerHostBlocks.of_reference` 得到整数块。其算术模块只向这一论证提供 `TopG`。在参考库的 Lean 4.33.1 环境中，`leanchecker` 已分别重放算术模块、最终结论模块与独立审计模块。审计文件 `IntegerBlockAudit.lean` 核对了 Mathlib 命题 `BookReference.riemannHypothesis_via_integer_blocks : RiemannHypothesis`，并打印出以下证明项。
+另一条路线从原始伽罗瓦行取得模一算术族，再由 `BookIntegerHostBlocks.of_reference` 得到整数块。其算术模块只向这一论证提供 `TopG`。在参考库的 Lean 4.33.1 环境中，`leanchecker` 已分别重放算术模块、最终结论模块与独立审计模块。审计文件 `IntegerBlockAudit.lean` 确认声明 `BookReference.riemannHypothesis_via_integer_blocks` 的类型为 Mathlib 的 `RiemannHypothesis`，并打印出以下证明项。
 
 ```lean
 BookIntegerHostBlocks.rh_of_blocks
