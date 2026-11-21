@@ -273,9 +273,25 @@ $$
 在 RH 下，[@thm-ch31-mangoldt-pointwise-power-window] 给出整窗上界，取其中的采样点即可。反向给定损失 $\kappa>0$，先在样点处使用 $\delta=\min\{\kappa/2,1/2\}$，并记 $p=1/2+\delta\le1$。对 $x\in[Y,Z]$，取一个包含 $x$ 的相邻四次幂区间 $[n^4,(n+1)^4]$（$n\ge1$），再与 $[Y,Z]$ 取交，得到 $[a,z]$。两端都在 $S(Y,Z)$ 内。斜坡的弦界和对数项的切线估计给出的误差至多为 $(z-a)^2/a\le225n^2$，因为 $a\ge n^4$ 且 $z-a\le15n^3$。两个端点的 $p$ 次幂都至多为 $16x^p$，而 $n^2\le x^p$，故 $U(x)\le241x^p$。选取足够晚的采样窗使 $x^{\kappa-\delta}\ge241$ 在整个窗上成立，就得到 [@thm-ch31-mangoldt-pointwise-power-window] 所需的逐点上界。完整证明由 Lean 内核检查。
 :::
 
+在两个端点本身都是四次幂时，所有采样点都可直接用整数下标表示。
+
+::: {.theorem #thm-ch31-quartic-integer-blocks title="仅检验四次幂整数块的黎曼猜想判据" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampling.rh_iff_quartic_integer_blocks"}
+黎曼猜想成立，当且仅当对每个实数 $\kappa>0$ 和每个自然数 $A$，都存在自然数 $k\ge\max\{A,2\}$，使每个满足 $k^3\le n\le k^4$ 的自然数 $n$ 都有
+
+$$
+U(n^4)\le (n^4)^{1/2+\kappa}.
+$$
+:::
+
+::: proof
+在 RH 下，[@thm-ch31-mangoldt-quartic-sampling] 给出 $U(n^4)<n^2$ 对所有充分大的 $n$ 成立。取 $k\ge\max\{A,2\}$ 大到达到这个起点。块中的每个 $n$ 都满足 $n\ge k^3\ge k$，故 $U(n^4)<n^2=(n^4)^{1/2}\le(n^4)^{1/2+\kappa}$。
+
+反过来，给定损失 $\kappa>0$ 和任意实数起点 $R$，选取自然数 $A\ge R$，再取条件所给的 $k$。令 $Y=k^{12}$，则 $Y\ge R$，且 $Y^{4/3}=k^{16}$。窗口的两个端点是 $(k^3)^4$ 和 $(k^4)^4$。由于四次幂在自然数上严格递增，两端及其间所有四次幂恰为这个整数块上的 $n^4$。对 $b=4/3$ 应用 [@thm-ch31-quartic-power-windows] 即得 RH。完整证明由 Lean 内核检查。
+:::
+
 参考库与本书共同使用的外部 Lean 环境还给出了同一宿主的有限检验。在 `samples Y Z` 中，依次枚举 $0\le n\le\lfloor\sqrt{\sqrt Z}\rfloor$，保留窗内的 $n^4$ 并加入两端，得到上述有限集。固定 $b>1$，对每个 $\kappa>0$，先选 $\varepsilon>0$ 及实常数 $e_D,e_L,K,c_{HH},e_K$，满足 $(e_D+e_L+7)\varepsilon\le\kappa$。此后对任意起点下界取一个更晚的窗。窗中每个采样点 $t$ 可选自己的框架、宿主 $H$ 和有限集 $T$，要求该点的 `EAtH`（模一特征标，系数 $4$）与 `CoreAtH` 使用同一个 $H,T$。`of_unit_family` 从 `FamilyClassConnected ((GChi PChar.one).cls b)` 导出这些数据，`rh_of_finite_hosts` 由它们推出 RH。每个窗的检验点有限；给定每一组固定损失后，算术假设仍须提供任意晚的窗口及其见证。[同一宿主的逐点比较](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061455789) · [有限采样与宿主推论的内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061515678)
 
-在参考库取 $b=3/2$ 的设计中，常数为 $C_{\mathrm{abs}}=2$、$C_0=3$，所得模一族满足 $e_D=2$、$e_L=0$。给定这样的族，有 $\varepsilon_1>0$，使每个 $0<\varepsilon<\varepsilon_1$ 都能先固定 $K,c_{HH},e_K$，再对每个自然数下界 $A$ 找到 $k\ge\max\{A,2\}$。对整数块 $k^3\le n\le k^4$ 中的每个 $n$，在 $x=n^4$ 取同一宿主和有限集上的 `EAtH` 与 `CoreAtH`。比较的幂指数为 $1/2+(2+0+7)\varepsilon=1/2+9\varepsilon$。给定目标损失 $\kappa>0$，选取足够小的 $\varepsilon$ 使 $9\varepsilon\le\kappa$，这些任意晚的整数块就给出通向 RH 的条件推论。[整数块、设计输入与指数的定向核验](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061662378)
+在参考库取 $b=3/2$ 的设计中，常数为 $C_{\mathrm{abs}}=2$、$C_0=3$，所得模一族满足 $e_D=2$、$e_L=0$。给定这样的族，有 $\varepsilon_1>0$，使每个 $0<\varepsilon<\varepsilon_1$ 都能先固定 $K,c_{HH},e_K$，再对每个自然数下界 $A$ 找到 $k\ge\max\{A,2\}$。对整数块 $k^3\le n\le k^4$ 中的每个 $n$，在 $x=n^4$ 取同一宿主和有限集上的 `EAtH` 与 `CoreAtH`。比较的幂指数为 $1/2+(2+0+7)\varepsilon=1/2+9\varepsilon$。给定目标损失 $\kappa>0$，选取足够小的 $\varepsilon$ 使 $9\varepsilon\le\kappa$，这些任意晚的整数块满足 [@thm-ch31-quartic-integer-blocks] 的条件，由此推出 RH。[整数块、设计输入与指数的定向核验](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061662378)
 
 Alpöge 原证明的声明是 `riemannHypothesis : RiemannHypothesis`，其右端为 Mathlib 的定义。Sutherland 公布的审计日志列出该声明的三个公理 `propext`、`Classical.choice`、`Quot.sound`。本节参考算术模块所钉的 `ddf1d5f8` 与登记公开核验的 `6977b88c` 有相同的 `src` 源码树、Lean 工具链与 Lake 锁文件。[原证明公理审计](https://math.mit.edu/~drew/grh/audit.log) · [公开核验文件](https://math.mit.edu/~drew/grh/)
 
