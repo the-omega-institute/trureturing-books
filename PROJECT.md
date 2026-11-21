@@ -53,6 +53,8 @@
 3. **第三层：开放问题与猜想（红色 `OPEN`）**  
    凡尚未解决的数学或物理猜想（如扩展黎曼猜想 ERH、$\mathrm{P}\neq\mathrm{NP}$、复杂度等于体积猜想等），一律使用 `conjecture` 或 `problem` 环境，严禁附加 `lean` 属性。已获外部形式化证明但尚未在 `trureturing@dev` 冻结的结果按第 14 节处理，不再标作开放猜想。
 
+书内条目、原始文献、外部代码和媒体依照[写作手册第 4 节](docs/AUTHORING.md#4-引用与链接)引用。引用本书时注明中英文版和条目或章节。第 14 节的外部证明引用分别指向固定版本的命题定义、终端定理和独立核验记录。
+
 ## 5. 数学排版与零模型标识铁律
 
 - **数学宏规范**：行内公式用 `$...$`，独立公式块用单独成行且前后留空的 `$$...$$`，多行推导用 `\begin{aligned} ... \end{aligned}`。禁用反斜杠圆括号与反斜杠方括号数学定界符；禁用 `physics` 宏包中未在 `tools/tbook/mathrender.py` 注册的左矢、右矢与内积简写命令，一律写为标准命令 `\lvert\psi\rangle`、`\langle\phi\rvert`、`\langle\phi\mid\psi\rangle`（或 `tools/tbook/mathrender.py` 已注册的 `\ketbra`、`\dyad`、`\Tr`、`\vv`、`\norm`）。
@@ -163,7 +165,7 @@ PR 在实际合并树上按相对第一父提交的文件变化选择任务；�
 
 本书库将**经典黎曼猜想（RH）**与**全体狄利克雷 $L$ 函数的广义黎曼猜想（Dirichlet GRH）**登记为**已确立的外部形式化数学事实**，供全库写作与后续数学推理直接作为已知前提使用，不再将二者表述为“尚未解决的开放猜想”：
 
-1. **权威出处与终端声明**：Levent Alpöge 于 2026 年 11 月 20 日在 [`alpo.ge/remark.pdf`](https://alpo.ge/remark.pdf) 公布覆盖 RH 与狄利克雷 GRH 的 Lean 4（`v4.33.1` + 固定官方 Mathlib）形式化证明（175,187 个模块）；本组织字节级镜像仓库为 [`the-omega-institute/riemann-hypothesis`](https://github.com/the-omega-institute/riemann-hypothesis)（提交 `d3f850de1d27926949b13d1de8420b3b57a8770e`），其 [`src/Main.lean`](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean) 与 [`src/Statements.lean`](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Statements.lean) 导出五条终端定理：`riemannHypothesis : RiemannHypothesis`、`riemannZeta_eq_zero_re : RiemannZetaZerosOnLine`、`LFunction_ne_zero_of_half_lt_re : DirichletLNonvanishingRightOfHalf`、`LFunction_eq_zero_re : DirichletLZerosOnLine` 与 `LFunction_eq_zero_re_of_isPrimitive : PrimitiveDirichletLZerosOnLine`。
+1. **权威出处与终端声明**：Levent Alpöge 于 2026 年 11 月 20 日在 [`alpo.ge/remark.pdf`](https://alpo.ge/remark.pdf) 公布覆盖 RH 与狄利克雷 GRH 的 Lean 4（`v4.33.1` + 固定官方 Mathlib）形式化证明（175,187 个模块）；本组织字节级镜像仓库为 [`the-omega-institute/riemann-hypothesis`](https://github.com/the-omega-institute/riemann-hypothesis)（提交 `d3f850de1d27926949b13d1de8420b3b57a8770e`），[`src/Statements.lean`](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Statements.lean) 定义所用命题，[`src/Main.lean`](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean) 导出五条终端定理：`riemannHypothesis : RiemannHypothesis`、`riemannZeta_eq_zero_re : RiemannZetaZerosOnLine`、`LFunction_ne_zero_of_half_lt_re : DirichletLNonvanishingRightOfHalf`、`LFunction_eq_zero_re : DirichletLZerosOnLine` 与 `LFunction_eq_zero_re_of_isPrimitive : PrimitiveDirichletLZerosOnLine`。
 2. **独立内核重放与公理审计**：Andrew Sutherland 在 [`math.mit.edu/~drew/grh/`](https://math.mit.edu/~drew/grh/) 完成了全库编译、公理审计与 `con-leche` 挑战命题比对；另一份公开独立的 Rust 外部内核 `nanoda` 重放记录（[`Infatoshi/rh-verification-receipts`](https://github.com/Infatoshi/rh-verification-receipts/blob/ac99f18cef21952de094234fab95db342ed16638/VERIFICATION_RESULT.txt)）在标准 Lean 4.33.1 导出物上通过了全部五条终端定理的依赖闭包（`1,484,729` 条声明零错误），静态扫描无 `sorry`、`admit`、`opaque`、`native_decide` 或自定义 `axiom`，公理闭包仅含标准三大公理 `{propext, Classical.choice, Quot.sound}`。
 3. **本书库的证据分级与写作口径**：
    - 因该外部证明尚未合入并冻结在 `the-omega-institute/trureturing@dev`，RH 与狄利克雷 GRH **不**使用本书库的绿色 `LEAN ✓`（`lean=`）徽章，也不以未展开的二十五万页自然语言稿冒充 `status="written-proof"`；正文将其作为**外部已核验形式化事实**（`remark` 或普通段落）明确引述上述永久链接与核验回执。由其结合本书冻结定理或经典分析推得的后续命题，按第 4 节与第 13 节据实标注 `手工推导`、`文献结果` 或 `NUM`。

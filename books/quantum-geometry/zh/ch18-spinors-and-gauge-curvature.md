@@ -137,7 +137,7 @@ $$
 U_\square = \exp\left(\frac{iq}{\hbar} F^{\mathrm{phys}}_{\mu\nu}\Delta x^\mu \Delta x^\nu\right) + O\bigl(\norm{\Delta x}^3\bigr) \qquad (\text{连续小方格近似}).
 $$
 
-对于非阿贝尔规范群（如 $SU(N)$），沿闭合回路绕行一周的平行移动和乐（holonomy）在基点规范变换下按群共轭 $U_\square \mapsto g_0 U_\square g_0^{-1}$ 变换，因此只有其**共轭类**或威尔逊圈迹（Wilson loop trace，$\Tr U_\square$）才是规范不变量。必须明确：上述无穷小方格展开式属于连续统微积分近似，而本章随后两节经 Lean 验证的定理（[@thm-tree-phase-transport] 与 [@cor-anchored-phase-classification]）严格建立在命名图上的精确离散阿贝尔单位圆群 $\operatorname{Circle} = U(1)$ 相位之上，既不依赖任何连续极限近似，也不能直接提升为非阿贝尔连续规范场定理。参见 Y. Aharonov & D. Bohm, *Phys. Rev.* **115**, 485 (1959), DOI: `10.1103/PhysRev.115.485`；以及 K. G. Wilson, *Phys. Rev. D* **10**, 2445 (1974), DOI: `10.1103/PhysRevD.10.2445`。
+对于非阿贝尔规范群（如 $SU(N)$），沿闭合回路绕行一周的平行移动和乐（holonomy）在基点规范变换下按群共轭 $U_\square \mapsto g_0 U_\square g_0^{-1}$ 变换，因此只有其**共轭类**或威尔逊圈迹（Wilson loop trace，$\Tr U_\square$）才是规范不变量。必须明确：上述无穷小方格展开式属于连续统微积分近似，而本章随后两节经 Lean 验证的定理（[@thm-tree-phase-transport] 与 [@cor-anchored-phase-classification]）严格建立在命名图上的精确离散阿贝尔单位圆群 $\operatorname{Circle} = U(1)$ 相位之上，既不依赖任何连续极限近似，也不能直接提升为非阿贝尔连续规范场定理。参见 Y. Aharonov & D. Bohm, *Phys. Rev.* **115**, 485 (1959), DOI: [10.1103/PhysRev.115.485](https://doi.org/10.1103/PhysRev.115.485)；以及 K. G. Wilson, *Phys. Rev. D* **10**, 2445 (1974), DOI: [10.1103/PhysRevD.10.2445](https://doi.org/10.1103/PhysRevD.10.2445)。
 :::
 
 ::: {.remark #rem-actual-small-loop-cubic-remainder title="实际小回路的三阶余项（手工应用，未在本书形式化）"}
@@ -306,7 +306,7 @@ $$
 
 故 $s=0$ 或 $t=0$ 时正反向边恰好消去，整个回路给出 $H=I$，估计仍成立。
 
-**文献与适用边界。** R. L. Karp、F. Mansouri 与 J. S. Rno，`hep-th/9903221v1`，定理 8（DOI: `10.48550/arXiv.hep-th/9903221`）给出的是有序曲率曲面积分关系，并非这里逐字陈述的统一三阶界。其式 (48) 在 $(A_1,A_0)=(-A_\mu,-A_\nu)$ 的代入下给出 $-F$；式 (49)–(50) 的指标与路径次序须连同原文约定阅读，这里的符号则由上述 ODE 和四边顺序直接固定。`arXiv:2004.04700v2` 的式 (1.1)（DOI: `10.1088/1361-6382/abb874`）只给出正方形小回路的 $o(\varepsilon^2)$ 渐近式，也不是本注记的双边长统一三阶估计。这里的定量界是上面完整写出的手工应用，不冒用这些文献或一般估计的形式化证据。在物理势约定下，$-stF=(iq/\hbar)stF^{\mathrm{phys}}_{\mu\nu}(x)$，与上一注记的相位和定向一致。适用对象始终是固定邻域内同一光滑反厄米矩阵联络的实际平行移动；常数是局部的，不提供全局一致界、物理实证或任意晶格模型的连续极限。
+**文献与适用边界。** R. L. Karp、F. Mansouri 与 J. S. Rno，`hep-th/9903221v1`，定理 8（DOI: [10.48550/arXiv.hep-th/9903221](https://doi.org/10.48550/arXiv.hep-th/9903221)）给出的是有序曲率曲面积分关系，并非这里逐字陈述的统一三阶界。其式 (48) 在 $(A_1,A_0)=(-A_\mu,-A_\nu)$ 的代入下给出 $-F$；式 (49)–(50) 的指标与路径次序须连同原文约定阅读，这里的符号则由上述 ODE 和四边顺序直接固定。[arXiv:2004.04700v2](https://arxiv.org/abs/2004.04700v2) 的式 (1.1)（DOI: [10.1088/1361-6382/abb874](https://doi.org/10.1088/1361-6382/abb874)）只给出正方形小回路的 $o(\varepsilon^2)$ 渐近式，也不是本注记的双边长统一三阶估计。这里的定量界是上面完整写出的手工应用，不冒用这些文献或一般估计的形式化证据。在物理势约定下，$-stF=(iq/\hbar)stF^{\mathrm{phys}}_{\mu\nu}(x)$，与上一注记的相位和定向一致。适用对象始终是固定邻域内同一光滑反厄米矩阵联络的实际平行移动；常数是局部的，不提供全局一致界、物理实证或任意晶格模型的连续极限。
 :::
 
 ## 18.3 选定生成树上的相位输运 {#sec-tree-gauge-transport}

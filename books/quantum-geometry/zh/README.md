@@ -213,7 +213,7 @@ $$
 3. **开口螺旋轴向投影的几何直觉类比（启发式意象，非物理定理）**：作为帮助直观把握维度递推的**几何类比**（而非已证物理定律或形式化定理），若把每一次外围嵌入 $\mathbb{R}^n \hookrightarrow \mathbb{R}^{n+1}$ 比拟为沿新增法向轴的抬升，则低维视角下看似首尾咬合的闭合圆周，好比一条开口上升螺旋线顺着法轴方向投下的平面阴影。
 4. **有限精度代数读数与有限步迭代的非零残差（数学事实）**：如 [@rem-prelude-dottie-literature] 所示，任何有限精度仪器给出的有理数（乃至任意代数数）刻度 $q \in \overline{\mathbb{Q}}$，都严格满足 $|\cos q - q| > 0$；与此同时，若考察从 $\theta_0 = 1$（或任意 $\theta_0 \in [0, 1] \setminus \{\theta^*\}$）出发的精确函数迭代序列 $\theta_{k+1} = \cos(\theta_k)$，由于 $\cos$ 在 $[0, \pi]$ 上严格单射且 $\theta_0 \neq \theta^*$，归纳可知对一切有限步数 $k \in \mathbb{N}$ 恒有 $\theta_k \neq \theta^*$，从而残差 $|\cos\theta_k - \theta_k| > 0$ 亦步步非零——用本书的格言说，*“近似之裂缝，皆是万物生长之门”*。
 
-有限门集的稠密性参见 P. O. Boykin 等，*On Universal and Fault-Tolerant Quantum Computing*，§3（[quant-ph/9906054](https://arxiv.org/abs/quant-ph/9906054)）；标准含逆门编译条件参见 C. M. Dawson 与 M. A. Nielsen，*The Solovay–Kitaev algorithm*，§2（[quant-ph/0505030](https://arxiv.org/abs/quant-ph/0505030)）。余弦级数见 [DLMF 4.19.2](https://dlmf.nist.gov/4.19.E2)，非零性与界限由上述尾项比值推出。
+有限门集的稠密性参见 P. O. Boykin 等，*On Universal and Fault-Tolerant Quantum Computing*，§3（[arXiv:quant-ph/9906054](https://arxiv.org/abs/quant-ph/9906054)）；标准含逆门编译条件参见 C. M. Dawson 与 M. A. Nielsen，*The Solovay–Kitaev algorithm*，§2（[arXiv:quant-ph/0505030](https://arxiv.org/abs/quant-ph/0505030)）。余弦级数见 [DLMF 4.19.2](https://dlmf.nist.gov/4.19.E2)，非零性与界限由上述尾项比值推出。
 :::
 
 展开来，它是横跨量子计算、物理时空与数理逻辑的万里长征；收回去，不过是 $\psi$ 拿自己作尺子，丈量自己张开的角度，在永不封死的近似裂缝中认出那个刻度就是自己。

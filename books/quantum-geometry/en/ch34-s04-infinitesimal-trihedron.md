@@ -210,7 +210,7 @@ The full proof is checked by the Lean kernel.
 :::
 
 ::: {.example #ex-ch34-trihedron-subentropy-and-kernel title="Equal-Mixture Subentropy and Near-Pure Application on the Minimal Trihedron"}
-**Epistemic status**: This example reuses the finite-dimensional determinant-integral definition of subentropy, pure-state vanishing, the qubit spectral formula, and the [near-pure qubit subentropy bound](#thm-ch34-qubit-subentropy-near-pure); the small-angle expansion for the equal-weight trihedron mixture and its geometric comparison remain explicit hand applications (not Lean-verified mappings).
+**Epistemic status**: This example reuses the finite-dimensional determinant-integral definition of subentropy, pure-state vanishing, the qubit spectral formula, and the near-pure qubit subentropy bound in [@thm-ch34-qubit-subentropy-near-pure]; the small-angle expansion for the equal-weight trihedron mixture and its geometric comparison remain explicit hand applications (not Lean-verified mappings).
 
 For any finite-dimensional positive semidefinite unit-trace density operator $\rho$, subentropy in natural-log units (`nats`) is defined by
 
@@ -224,7 +224,7 @@ $$
 q(r) := Q(\rho) = -\frac{a^2\ln a - b^2\ln b}{r} \quad (0 < r < 1),
 $$
 
-with $q(0) = \ln 2 - \frac{1}{2}$ and $q(1) = 0$. By the [near-pure qubit subentropy bound](#thm-ch34-qubit-subentropy-near-pure), $Q(\rho) = \delta + O(\delta^2|\ln\delta|)$ as $\delta \to 0^+$.
+with $q(0) = \ln 2 - \frac{1}{2}$ and $q(1) = 0$. By the near-pure qubit subentropy bound in [@thm-ch34-qubit-subentropy-near-pure], $Q(\rho) = \delta + O(\delta^2|\ln\delta|)$ as $\delta \to 0^+$.
 
 Now mix the three vertex pure states of $\Delta\mathcal{T}_\epsilon$ equally into the mixed state $\bar{\rho} = \frac{1}{3}(\rho_A + \rho_B + \rho_C)$ (a globally coherent pure state still has $Q = 0$). From $\mathbf{A} = (\sin\epsilon, c, 0)$, $\mathbf{B} = (0, 1, 0)$, and $\mathbf{C} = (0, c, \sin\epsilon)$ ($c = \cos\epsilon$), the mean Bloch vector is $\bar{\mathbf{r}} = \frac{1}{3}(\sin\epsilon, 1 + 2c, \sin\epsilon)$, with squared radius and determinant
 

@@ -73,7 +73,7 @@ d_{jk} &= (x_j - x_k)^2 + (y_j - y_k)^2 .
 \end{aligned}
 $$
 
-囚禁玻色—爱因斯坦凝聚体中少数几个量子化涡旋的粒子模型，在此之外给每个涡旋加上一项绕阱心的进动，转向由涡旋自身的符号决定。[@def-ch30-alternating-vortex-polygon] 的方程与交错多边形构型取自 A. M. Barry 与 P. G. Kevrekidis 的论文 *Few-particle vortex cluster equilibria in Bose–Einstein condensates: existence and stability*（arXiv:1306.1545，2013）。下文冻结的是这组常微分方程本身的性质；它与 Gross–Pitaevskii 方程或纳维—斯托克斯方程的解之间的关系，不在本书的形式化范围内。
+囚禁玻色—爱因斯坦凝聚体中少数几个量子化涡旋的粒子模型，在此之外给每个涡旋加上一项绕阱心的进动，转向由涡旋自身的符号决定。[@def-ch30-alternating-vortex-polygon] 的方程与交错多边形构型取自 A. M. Barry 与 P. G. Kevrekidis 的论文 *Few-particle vortex cluster equilibria in Bose–Einstein condensates: existence and stability*（[arXiv:1306.1545](https://arxiv.org/abs/1306.1545)，2013）。下文冻结的是这组常微分方程本身的性质；它与 Gross–Pitaevskii 方程或纳维—斯托克斯方程的解之间的关系，不在本书的形式化范围内。
 :::
 
 ::: {.definition #def-ch30-alternating-vortex-polygon title="带进动项的点涡场、无碰撞构型、交错正多边形与归一化雅可比矩阵" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.CollisionFree D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.charge D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.field D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.polygon D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.rotate D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.radius D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.jacobian"}

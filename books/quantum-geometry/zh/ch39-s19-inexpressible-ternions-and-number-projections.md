@@ -104,7 +104,7 @@ $$
 
 2. **复数赤道切片 $\Pi_{\mathbb C}^{(\hat{\mathbf i})}$ 与霍普夫底空间的复坐标**。取 $\hat{\mathbf i}=\mathbf i$，四元数 $q=w+x\mathbf i+y\mathbf j+z\mathbf k$ 在复平面 $\mathbb C_{\mathbf i}=\mathbb R\mathbf1\oplus\mathbb R\mathbf i$ 上的正交投影为 $\Pi_{\mathbb C}^{(\mathbf i)}(q)=w+x\mathbf i$。单位四元数 $S^3$ 的投影填满闭单位圆盘，而 $S^3$ 与该平面相交所得的大圆 $S^1_{\mathbf i}$ 是可交换的单位复数乘法群。允许径向缩放，就得到整个复平面。
 
-   [第 1 章的霍普夫映射](ch01-measurement.md#rem-pure-ray-literature)把归一化旋量 $(\psi_0,\psi_1)$ 送到布洛赫球上的射线。当 $\psi_0\ne0$ 时，这条射线有复坐标 $\zeta=\psi_1/\psi_0$，分子和分母中的共同相位在比值中抵消。北极 $[1:0]$ 对应 $\zeta=0$，南极 $[0:1]$ 在另一张图中取坐标 $\psi_0/\psi_1=0$。
+   [@rem-pure-ray-literature] 中的霍普夫映射把归一化旋量 $(\psi_0,\psi_1)$ 送到布洛赫球上的射线。当 $\psi_0\ne0$ 时，这条射线有复坐标 $\zeta=\psi_1/\psi_0$，分子和分母中的共同相位在比值中抵消。北极 $[1:0]$ 对应 $\zeta=0$，南极 $[0:1]$ 在另一张图中取坐标 $\psi_0/\psi_1=0$。
 
 3. **实数内积迹算子 $\Pi_{\mathbb{R}}^{\mathrm{tr}} : \mathbb{T}_3 \to [-1, 1] \subset \mathbb{R}$（一维观察者实轴迹与测地弧长拉直）**：对三元数的 $2 \times 2$ 幺正旋量表示 $U \in \mathrm{SU}(2)$ 取观察者恒等基准上的归一化内积迹
 
@@ -180,7 +180,7 @@ $$
 
 1. **罗德里格斯旋转参数与哈密顿十三载三元数探索史**（O. Rodrigues, *J. Math. Pures Appl.* **5**, 380–440, 1840；W. R. Hamilton, *Proc. R. Irish Acad.* **2**, 424–434, 1844；*Philos. Mag.* **25**, 489–495, 1844）：罗德里格斯于 1840 年率先导出三维旋转半角复合公式与切向量 $\mathbf{g} = \tan(\frac{\theta}{2})\hat{\mathbf{u}}$；哈密顿自 1830 年起长期探索三元线性乘法无果，最终于 1843 年 10 月 16 日引入第四维实标量部创立四元数 $\mathbb{H}$；
 2. **实可除代数、赋范合成代数与球面平行化的 `1, 2, 4, 8` 分类链**（F. G. Frobenius, *J. Reine Angew. Math.* **84**, 1–63, 1878；A. Hurwitz, *Nachr. Ges. Wiss. Göttingen*, 309–316, 1898；H. Hopf, *Math. Ann.* **104**, 637–665, 1931 & *Comment. Math. Helv.* **13**, 219–239, 1940；R. Bott & J. Milnor, *Bull. Amer. Math. Soc.* **64**, 87–89, 1958；M. Kervaire, *Proc. Natl. Acad. Sci. USA* **44**, 280–283, 1958；J. F. Adams, *Ann. of Math.* **72**, 20–104, 1960）：弗罗贝尼乌斯分类有限维实结合可除代数为 $\mathbb{R}, \mathbb{C}, \mathbb{H}$；胡尔维茨分类带单位元实赋范合成代数为 $1, 2, 4, 8$ 维；霍普夫用上同调环证明有限维实可除代数维数必为 $2$ 的幂，博特—米尔诺与凯尔维尔最终利用 $K$-理论证明不要求结合律的有限维实可除代数亦仅存在于维数 $1, 2, 4, 8$，同一组定理也表明仅 $S^1, S^3, S^7$ 全局可平行化，亚当斯则证明承载连续带单位乘法的球面仅 $S^0, S^1, S^3, S^7$；
-3. **$\mathrm{SO}(3)$ 与 $S^3$ 的全局平直坐标图禁律及图册下界**（J. Stuelpnagel, *SIAM Rev.* **6**(4), 422–430, 1964, DOI `10.1137/1006093`）：严格证明不存在任何无奇点或单射连续的三维平直参数化覆盖紧致群 $\mathrm{SO}(3)$，任何光滑图册至少需要 $4$ 张局部坐标图（而 $S^3$ 的柳斯捷尔尼克—施尼雷尔曼范畴决定其至少需要 $2$ 张球极坐标图）；
+3. **$\mathrm{SO}(3)$ 与 $S^3$ 的全局平直坐标图禁律及图册下界**（J. Stuelpnagel, *SIAM Rev.* **6**(4), 422–430, 1964, DOI [10.1137/1006093](https://doi.org/10.1137/1006093)）：严格证明不存在任何无奇点或单射连续的三维平直参数化覆盖紧致群 $\mathrm{SO}(3)$，任何光滑图册至少需要 $4$ 张局部坐标图（而 $S^3$ 的柳斯捷尔尼克—施尼雷尔曼范畴决定其至少需要 $2$ 张球极坐标图）；
 4. **同伦绕数 $\pi_3(S^3) \cong \mathbb{Z}$ 与素数本原闭合轨道的几何边界**（H. Hopf, 1931；A. Selberg, *J. Indian Math. Soc.* **20**, 47–87, 1956）：三阶同伦群 $\pi_3(S^3) \cong \mathbb{Z}$ 与一阶基本群 $\pi_1(S^1) \cong \mathbb{Z}$ 为严格代数拓扑定理；而将素数 $\mathbb{P}$ 诠释为“不可分解本原闭合圆弧结”（呼应 [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)）属本书比较算术模型（`MODEL`）——须明确指出，常正曲率圆球面 $S^3$ 上的本原闭合测地大圆弧长恒为 $2\pi$，经典塞尔伯格迹公式中具有离散对数长度谱 $\{\ln N(\gamma_p)\}$ 的本原闭合测地线定义在**负常曲率双曲曲面 $\Gamma\backslash\mathbb{H}^2$**（或数域阿代尔商空间）上，绝不能误称为圆球面 $S^3$ 的黎曼拉普拉斯谱定理，且经典黎曼猜想 [@conj-riemann-hypothesis] 仍严格保持为 `OPEN`。
 :::
 

@@ -399,7 +399,7 @@ self_test()
 ::: {.remark #rem-zyz-euler-compilation-literature title="SU(2)→SO(3) 双覆盖与单比特 ZYZ 欧拉角分解定理（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 关于任意单比特幺正门 $U \in \mathrm{U}(2)$ 的 ZYZ 欧拉角完备分解与双覆盖同态，其经典文献出处与本章冻结定理的职责边界如下：
 
-1. **单比特幺正门的通用 ZYZ 欧拉角分解**（参见 M. A. Nielsen & I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary Ed., Cambridge University Press, 2010, Theorem 4.1, §4.2；以及 A. Barenco et al., *Elementary gates for quantum computation*, Phys. Rev. A **52**, 3457, 1995, DOI `10.1103/PhysRevA.52.3457`）：对任意单比特幺正矩阵 $U \in \mathrm{U}(2)$，存在实角 $(\delta, \alpha, \beta, \gamma) \in \mathbb{R}^4$ 使得
+1. **单比特幺正门的通用 ZYZ 欧拉角分解**（参见 M. A. Nielsen & I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary Ed., Cambridge University Press, 2010, Theorem 4.1, §4.2；以及 A. Barenco et al., *Elementary gates for quantum computation*, Phys. Rev. A **52**, 3457, 1995, DOI [10.1103/PhysRevA.52.3457](https://doi.org/10.1103/PhysRevA.52.3457)）：对任意单比特幺正矩阵 $U \in \mathrm{U}(2)$，存在实角 $(\delta, \alpha, \beta, \gamma) \in \mathbb{R}^4$ 使得
    $$
    U = e^{i\delta}\,R_z(\alpha)\,R_y(\beta)\,R_z(\gamma).
    $$

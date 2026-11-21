@@ -653,7 +653,7 @@ $$
 :::
 
 ::: {.proof #pf-ch31-cyclotomic-tz}
-在 Thorner 与 Zaman 的定理 1.4 中取 $L=\mathbb Q(\zeta_m)$，基域为 $\mathbb Q$，阿贝尔子群取 $H=G=(\mathbb Z/m\mathbb Z)^\times$，共轭类取 $\{\sigma_a\}$。于是固定域为 $\mathbb Q$，其判别式和次数均为 $1$。原文式 (1–11)、(3–1) 中的两个导子参数都化为这里的 $Q$，密度系数为 $1/\varphi(m)$。每个原始导子整除 $m$，而 $m\ge3$ 时群有非平凡特征标，其原始导子至少为 $3$，所以 $3\le Q\le m$。定理 1.4 给出所写相对误差和例外项，定理 3.3 给出 $\lambda\ge sQ^{-2}$。两者的常数均绝对有效。Jesse Thorner and Asif Zaman, “A unified and improved Chebotarev density theorem,” *Algebra & Number Theory* **13**(5) (2019), 1039–1068. [DOI](https://doi.org/10.2140/ant.2019.13.1039) · [原刊定理 1.4](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=5) · [原刊定理 3.3](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=15)
+在 Thorner 与 Zaman 的定理 1.4 中取 $L=\mathbb Q(\zeta_m)$，基域为 $\mathbb Q$，阿贝尔子群取 $H=G=(\mathbb Z/m\mathbb Z)^\times$，共轭类取 $\{\sigma_a\}$。于是固定域为 $\mathbb Q$，其判别式和次数均为 $1$。原文式 (1–11)、(3–1) 中的两个导子参数都化为这里的 $Q$，密度系数为 $1/\varphi(m)$。每个原始导子整除 $m$，而 $m\ge3$ 时群有非平凡特征标，其原始导子至少为 $3$，所以 $3\le Q\le m$。定理 1.4 给出所写相对误差和例外项，定理 3.3 给出 $\lambda\ge sQ^{-2}$。两者的常数均绝对有效。Jesse Thorner and Asif Zaman, “A unified and improved Chebotarev density theorem,” *Algebra & Number Theory* **13**(5) (2019), 1039–1068. [10.2140/ant.2019.13.1039](https://doi.org/10.2140/ant.2019.13.1039) · [原刊定理 1.4](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=5) · [原刊定理 3.3](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=15)
 :::
 
 **手工推导。** 存在绝对有效常数 $c,K,D_0>0$，使每个 $m\ge3$、每个可逆类 $a$ 和每个 $D\ge\max\{D_0,(4m)^K\}$ 都满足下界

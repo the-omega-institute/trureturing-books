@@ -32,7 +32,7 @@
 
 **指数（`手工推导`）。** 权重形式、可复合性与归一性此后只用来定指数：可复合的读法有 $F(s) = s^p$（$p \ge 0$），归一性再给出 $p = 2$，权重即玻恩权重 $\beta$。对单个系统，只有归一性定不了指数：复维数为 $2$ 时，凡满足 $F(\cos t) + F(\sin t) = 1$ 的 $F$ 都归一，例如 $F(s) = 3s^4 - 2s^6$；加上权重形式与可复合性，或在复合系统上，指数才定为 $2$。同一个 $\mathbb{R}^4$ 按 $\mathbb{R}$、$\mathbb{C}$、$\mathbb{H}$ 来读（$K = \{\pm 1\}$、时钟、全体右迁移）分别给出 $4$、$2$、$1$ 个完全可区分的态，二元性恰在除代数维数为 $2$ 时成立。可复合性要求类相关也相乘：$K = \{1\}$、$w = \kappa$ 时，在 $(\mathbb{R} \oplus V)^{\otimes 2}$ 上取 $F_{12}(c) = \max(c, 0)$ 可使权重精确相乘，类相关却不相乘。复合系统只带一个时钟这一点另有输入，见 [@rem-ch39-axiom-omega-one-clock-for-composites]（`MODEL`）。
 
-**文献（`文献结果`）。** 实、复、四元数量子理论的三重分类见 F. J. Dyson, *J. Math. Phys.* **3**, 1199–1215, 1962 与 J. C. Baez, *Found. Phys.* **42**, 819–855, 2012；由可乘性与归一性得出指数 $2$ 的论证接近 S. Aaronson, arXiv:quant-ph/0401062, 2004。
+**文献（`文献结果`）。** 实、复、四元数量子理论的三重分类见 F. J. Dyson, *J. Math. Phys.* **3**, 1199–1215, 1962 与 J. C. Baez, *Found. Phys.* **42**, 819–855, 2012；由可乘性与归一性得出指数 $2$ 的论证接近 S. Aaronson, [arXiv:quant-ph/0401062](https://arxiv.org/abs/quant-ph/0401062), 2004。
 :::
 
 ::: {.remark #rem-ch39-axiom-omega-one-clock-for-composites title="复合系统只有一个时钟：输入、结论与被排除的情形"}
@@ -40,7 +40,7 @@
 
 **结论（`手工推导`）。** 实张量积 $V_1 \otimes_{\mathbb{R}} \cdots \otimes_{\mathbb{R}} V_N$ 分解为 $2^{N-1}$ 个特征标互异的分量，每个分量都是一个复张量积。若出现两个分量，就有两个大小不同的极大正交族（两个比特、各因子的左迁移也等变时，大小分别为 $8$ 与 $4$）；对称且归一的权重在两族上双重计数，得 $\sum_{a \in A}\sum_{b \in B} w(a, b) = \lvert A\rvert = \lvert B\rvert$，矛盾，所以这样的权重不存在。于是只剩一个分量：一个时钟、复张量积（左迁移也等变时）、权重 $\lvert\langle u, v\rangle\rvert^2$，乘积上的权重相乘；各因子时钟在这个分量上取哪一个定向，仍是输入。
 
-**被排除的情形与定位。** 被排除的是带两个超选择扇区的复量子力学：在两分量复合空间上，超选择权重 $\operatorname{Tr}(\rho_u\Pi_x)$ 是归一的，但不对称（一个方向取 $1$，反方向取 $\frac{1}{2}$）。所以这一结果在数学上是把“无超选择且纯态跃迁概率对称”改用“哪些量不可观测”来表述；在这一类复合系统上，这些输入与局域层析选出同一个复合系统（局域层析见 L. Hardy, arXiv:quant-ph/0101012, 2001；J. Barrett, *Phys. Rev. A* **75**, 032304, 2007；Ll. Masanes & M. P. Müller, *New J. Phys.* **13**, 063001, 2011，`文献结果`）。
+**被排除的情形与定位。** 被排除的是带两个超选择扇区的复量子力学：在两分量复合空间上，超选择权重 $\operatorname{Tr}(\rho_u\Pi_x)$ 是归一的，但不对称（一个方向取 $1$，反方向取 $\frac{1}{2}$）。所以这一结果在数学上是把“无超选择且纯态跃迁概率对称”改用“哪些量不可观测”来表述；在这一类复合系统上，这些输入与局域层析选出同一个复合系统（局域层析见 L. Hardy, [arXiv:quant-ph/0101012](https://arxiv.org/abs/quant-ph/0101012), 2001；J. Barrett, *Phys. Rev. A* **75**, 032304, 2007；Ll. Masanes & M. P. Müller, *New J. Phys.* **13**, 063001, 2011，`文献结果`）。
 
 **只有乘积构型时（`手工推导`）。** 两个系统时，只用乘积构型分辨不了两个分量：只含乘积的两分量模型满足除 (5) 以外的全部输入（$2 \otimes n$ 中不存在不可扩展乘积基，D. P. DiVincenzo, T. Mor, P. W. Shor, J. A. Smolin & B. M. Terhal, *Commun. Math. Phys.* **238**, 379–410, 2003）。三个系统时，只用乘积构型连归一性都不满足：C. H. Bennett, D. P. DiVincenzo, T. Mor, P. W. Shor, J. A. Smolin & B. M. Terhal（*Phys. Rev. Lett.* **82**, 5385–5388, 1999）的不可扩展乘积基 $\{\lvert 0, 1, {+}\rangle, \lvert 1, {+}, 0\rangle, \lvert {+}, 0, 1\rangle, \lvert {-}, {-}, {-}\rangle\}$ 是极大正交族，$\lvert 000\rangle$ 对它的权重之和为 $\frac{1}{8}$。
 :::
@@ -48,7 +48,7 @@
 ::: {.remark #rem-ch39-axiom-omega-systems-of-other-dimensions title="其他维数的系统"}
 **往返封闭的子集（`手工推导`）。** 在单位球面上取闭子集，并要求它对往返反射 $s_x(w) = 2\langle x, w\rangle x - w$ 封闭：连通且多于一点的这类子集恰是大子球面 $S(U)$；若它还在时钟下不变，$U$ 就是复子空间。因此在 $N$ 个结构的寄存器 $(\mathbb{C}^2)^{\otimes N}$ 中（复合系统的输入见 [@rem-ch39-axiom-omega-one-clock-for-composites]），连通、闭、时钟不变、往返封闭的子结构恰是复子空间的单位球面，从 $1$ 到 $2^N$ 的每个复维数都出现。子结构继承权重 $\lvert\langle u, v\rangle\rvert^2$，极大正交族是子空间的正交基，归一性成立；二元性只在复维数为 $2$ 时成立；维数不小于 $3$ 时，满足归一性的非负权重唯一（A. M. Gleason, *J. Math. Mech.* **6**, 885–893, 1957，`文献结果`；其中复维数 $N \ge 3$ 上非负、归一、两两正交投影可加的测度唯一表为 $p(P) = \operatorname{Re}\operatorname{Tr}(\rho P)$ 一步由 [`gleason_representation`](lean:D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation) 锁定，`LEAN ✓`；由极大正交族上的归一权重得到投影可加测度一步仍属上述文献结果，再由 $w(u, u) = 1$ 定出 $\rho = \lvert u\rangle\langle u\rvert$ 为 `手工推导`）。$N$ 个副本中在全部交换下不变的扇区维数为 $N + 1$，在集体左迁移下是自旋 $\frac{N}{2}$ 的不可约表示。
 
-**把子结构称作系统（`MODEL`）。** 把这样的子结构当作一个系统（只在其中制备构型，完备检验是其中的极大正交族，操作是宿主中保持该子空间的操作），是另加的输入 [Sub]。重构文献中有对应的子空间公理：L. Hardy 的公理 3（arXiv:quant-ph/0101012, 2001）、Ll. Masanes & M. P. Müller 的要求 3（*New J. Phys.* **13**, 063001, 2011）、B. Dakić & Č. Brukner 的公理 1（in *Deep Beauty*, ed. H. Halvorson, Cambridge Univ. Press, 2011, pp. 365–392）（`文献结果`）。那些公理断言一个限制与另一个独立给定的系统等价；[Sub] 没有可比较的独立系统，直接把限制宣布为系统。母公理自身的模型仍然只有 $S^1$ 与 $S^3$。
+**把子结构称作系统（`MODEL`）。** 把这样的子结构当作一个系统（只在其中制备构型，完备检验是其中的极大正交族，操作是宿主中保持该子空间的操作），是另加的输入 [Sub]。重构文献中有对应的子空间公理：L. Hardy 的公理 3（[arXiv:quant-ph/0101012](https://arxiv.org/abs/quant-ph/0101012), 2001）、Ll. Masanes & M. P. Müller 的要求 3（*New J. Phys.* **13**, 063001, 2011）、B. Dakić & Č. Brukner 的公理 1（in *Deep Beauty*, ed. H. Halvorson, Cambridge Univ. Press, 2011, pp. 365–392）（`文献结果`）。那些公理断言一个限制与另一个独立给定的系统等价；[Sub] 没有可比较的独立系统，直接把限制宣布为系统。母公理自身的模型仍然只有 $S^1$ 与 $S^3$。
 :::
 
 2. **公理二（可观测量公设）：切空间反自伴生成元 $90^\circ$ 翻转导出厄米算符与罗伯逊—薛定谔不确定性**：
@@ -379,7 +379,7 @@ $$
 **量子基础文献归属与附录 E 严密边界对齐。**
 
 1. **五大教科书公设与霍普夫射影几何**：标准量子力学公理体系源出 P. A. M. Dirac（*The Principles of Quantum Mechanics*, Oxford Univ. Press, 1930）与 J. von Neumann（*Mathematische Grundlagen der Quantenmechanik*, Springer, 1932，区分幺正过程 II 与测量过程 I）；球面纤维丛 $S^1 \hookrightarrow S^3 \to S^2$ 见 H. Hopf（*Math. Ann.* **104**, 637–665, 1931）；不确定性下界见 H. P. Robertson（*Phys. Rev.* **34**, 163–164, 1929）与 E. Schrödinger（*Sitzungsber. Preuss. Akad. Wiss.*, 296–303, 1930）；
-2. **玻恩规则唯一性、吕德斯更新、再生核张量积与非定域极值**：闭子空间投影测度唯一性见 A. M. Gleason（*J. Math. Mech.* **6**, 885–893, 1957），包含 $d = 2$ 的正算子值效应测度唯一性见 P. Busch（*Phys. Rev. Lett.* **91**, 120403, 2003，DOI `10.1103/PhysRevLett.91.120403`）；选言投影更新与开放系统等距扩张见 G. Lüders（*Ann. Phys.* **443**, 322–328, 1950/1951）与 W. F. Stinespring（*Proc. Amer. Math. Soc.* **6**, 211–216, 1955）；乘积正定核诱导张量积希尔伯特空间见 N. Aronszajn（*Trans. Amer. Math. Soc.* **68**, 337–404, 1950），操作局域层析重构见 L. Hardy（2001）与 G. Chiribella, G. M. D'Ariano & P. Perinotti（*Phys. Rev. A* **84**, 012311, 2011）；经典与量子关联界见 J. S. Bell（1964）、J. F. Clauser, M. A. Horne, A. Shimony & R. A. Holt（*Phys. Rev. Lett.* **23**, 880–884, 1969）及 B. S. Cirel'son［Tsirelson］（*Lett. Math. Phys.* **4**, 93–100, 1980，DOI `10.1007/BF00417500`）。本节严格遵守[附录 E §E.5](appendix-e-s05-quantum-postulates.md#sec-appe-quantum) 的全部 `T1–T4` 操作桥接条件与反例边界。
+2. **玻恩规则唯一性、吕德斯更新、再生核张量积与非定域极值**：闭子空间投影测度唯一性见 A. M. Gleason（*J. Math. Mech.* **6**, 885–893, 1957），包含 $d = 2$ 的正算子值效应测度唯一性见 P. Busch（*Phys. Rev. Lett.* **91**, 120403, 2003，DOI [10.1103/PhysRevLett.91.120403](https://doi.org/10.1103/PhysRevLett.91.120403)）；选言投影更新与开放系统等距扩张见 G. Lüders（*Ann. Phys.* **443**, 322–328, 1950/1951）与 W. F. Stinespring（*Proc. Amer. Math. Soc.* **6**, 211–216, 1955）；乘积正定核诱导张量积希尔伯特空间见 N. Aronszajn（*Trans. Amer. Math. Soc.* **68**, 337–404, 1950），操作局域层析重构见 L. Hardy（2001）与 G. Chiribella, G. M. D'Ariano & P. Perinotti（*Phys. Rev. A* **84**, 012311, 2011）；经典与量子关联界见 J. S. Bell（1964）、J. F. Clauser, M. A. Horne, A. Shimony & R. A. Holt（*Phys. Rev. Lett.* **23**, 880–884, 1969）及 B. S. Cirel'son［Tsirelson］（*Lett. Math. Phys.* **4**, 93–100, 1980，DOI [10.1007/BF00417500](https://doi.org/10.1007/BF00417500)）。本节严格遵守[附录 E §E.5](appendix-e-s05-quantum-postulates.md#sec-appe-quantum) 的全部 `T1–T4` 操作桥接条件与反例边界。
 :::
 
 ::: {.remark #rem-ch39-axiom-omega-kappa-versus-born title="母核 $\kappa_{S^3}$ 与玻恩核的精确关系"}

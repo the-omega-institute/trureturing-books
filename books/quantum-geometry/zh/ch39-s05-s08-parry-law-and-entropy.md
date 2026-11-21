@@ -352,7 +352,7 @@ h_{\mathrm{KS}}(\rho,T)=-\log p
 \end{aligned}
 $$
 
-对数为自然对数，单位为每原始步的纳特。$h_{\mathrm{KS}}$ 是所有有限可测分割的熵率的上确界，先视为扩展实数；上式同时证明它在这里是有限值。竞争范围是全部不变 Borel 概率测度，不另假定马尔可夫性、遍历性、生成性质、熵极限或唯一性。有符号扩张 $\nu$ 参与构造 $\mu$，但熵比较的载体始终是无符号空间 $X_K$。推导的所属源文见[双向帕里律的论述](https://github.com/the-omega-institute/trureturing/blob/dev/Blueprint/D5/S3/TotalVariation/ParryBilateralLaw.md)；[@thm-ch39-p2e-parry-ks-entropy] 形式化了上界和达到性。等号判据见 [@thm-ch39-p2e-parry-ks-maximizer]，下文展开证明。
+对数为自然对数，单位为每原始步的纳特。$h_{\mathrm{KS}}$ 是所有有限可测分割的熵率的上确界，先视为扩展实数；上式同时证明它在这里是有限值。竞争范围是全部不变 Borel 概率测度，不另假定马尔可夫性、遍历性、生成性质、熵极限或唯一性。有符号扩张 $\nu$ 参与构造 $\mu$，但熵比较的载体始终是无符号空间 $X_K$。推导的所属源文见[双向帕里律的论述](https://github.com/the-omega-institute/trureturing/blob/07e441357b0ee5d7f285cdf7b48876eb9e0e8b64/Blueprint/D5/S3/TotalVariation/ParryBilateralLaw.md)；[@thm-ch39-p2e-parry-ks-entropy] 形式化了上界和达到性。等号判据见 [@thm-ch39-p2e-parry-ks-maximizer]，下文展开证明。
 
 **从实际后缀到双向生成分割。** 令 $J_t(r)=J_t^e(r)$，即 $e(\mathrm{false},r)$ 在整数时刻 $t$ 的第二坐标。最近零位刻画使 $J_t$ 恰等于 $t$ 之前的连续真位数，且与符号锚点无关。它对每条合法路径满足
 
@@ -374,7 +374,7 @@ $$
 h_{\mathrm{KS}}(\rho,T)=h_\rho(T,\mathcal P).
 $$
 
-所用双向生成定理与整数迭代见 Marcel Morgenstern 的[生成定理](https://github.com/marcmorningstar/lean4-ergodic-theory/blob/040fec2e0ddf4fcba49af9f76c866d295308dd7f/ErgodicTheory/Entropy/GeneratorTheoremTwoSided.lean)及[整数迭代](https://github.com/marcmorningstar/lean4-ergodic-theory/blob/040fec2e0ddf4fcba49af9f76c866d295308dd7f/ErgodicTheory/Krieger/ZIterate.lean)，归属与许可见[熵论依据说明](https://github.com/the-omega-institute/trureturing/blob/dev/Library/Entropy/morgenstern2026ks.md)。这些是库依据，不作为本书新增的冻结定理引用。仅用非负时间的生成条件不能代替这里的双向步骤。
+所用双向生成定理与整数迭代见 Marcel Morgenstern 的[生成定理](https://github.com/marcmorningstar/lean4-ergodic-theory/blob/040fec2e0ddf4fcba49af9f76c866d295308dd7f/ErgodicTheory/Entropy/GeneratorTheoremTwoSided.lean)及[整数迭代](https://github.com/marcmorningstar/lean4-ergodic-theory/blob/040fec2e0ddf4fcba49af9f76c866d295308dd7f/ErgodicTheory/Krieger/ZIterate.lean)，归属与许可见[熵论依据说明](https://github.com/the-omega-institute/trureturing/blob/07e441357b0ee5d7f285cdf7b48876eb9e0e8b64/Library/Entropy/morgenstern2026ks.md)。这些是库依据，不作为本书新增的冻结定理引用。仅用非负时间的生成条件不能代替这里的双向步骤。
 
 **有限历史与熵率。** 对 $n\ge0$、$w\in(\operatorname{Fin}K)^n$，记
 
@@ -397,7 +397,7 @@ h_\rho(T,\mathcal P)&\le c_m\quad(m\ge0).
 \end{aligned}
 $$
 
-第二行只是将 $H_N=H_m+\sum_{i=m}^{N-1}c_i$ 逐项估计，第三行随之取极限。这把熵极限与每个有限历史联系起来，并未把极限存在当作额外假设。有限链式法则、条件熵与极限的依据分别见库中的[分割](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Entropy/KolmogorovSinai/Partition.lean)、[条件化](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Entropy/KolmogorovSinai/GeneratorConditioning.lean)和[熵率](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Entropy/KolmogorovSinai/EntropyRate.lean)；它们的分割条件熵恒等式也不等于下面另列的首次回归公式。
+第二行只是将 $H_N=H_m+\sum_{i=m}^{N-1}c_i$ 逐项估计，第三行随之取极限。这把熵极限与每个有限历史联系起来，并未把极限存在当作额外假设。有限链式法则、条件熵与极限的依据分别见库中的[分割](https://github.com/the-omega-institute/trureturing/blob/07e441357b0ee5d7f285cdf7b48876eb9e0e8b64/D5/S3/Entropy/KolmogorovSinai/Partition.lean)、[条件化](https://github.com/the-omega-institute/trureturing/blob/07e441357b0ee5d7f285cdf7b48876eb9e0e8b64/D5/S3/Entropy/KolmogorovSinai/GeneratorConditioning.lean)和[熵率](https://github.com/the-omega-institute/trureturing/blob/07e441357b0ee5d7f285cdf7b48876eb9e0e8b64/D5/S3/Entropy/KolmogorovSinai/EntropyRate.lean)；它们的分割条件熵恒等式也不等于下面另列的首次回归公式。
 
 **同一联合分布的 KL 缺陷。** 沿用原律的 $Q=\operatorname{suffixKernel}(K)$、$q_j=\operatorname{suffixLaw}(K,j)$，并写 $R_j=w_j=\operatorname{suffixWeight}(K,p,j)$。由 [@thm-ch39-p2e-parry-escape-laws] 的范围与归一化性质，$p>1/2$、$0<R_j\le1$、$R_0=1$，且 $Q$ 非负、每行和为 $1$。在且仅在允许的边 $i\to j$（$j=0$，或存在的 $j=i+1$）上，$Q(i,j)>0$，并有
 
@@ -836,7 +836,7 @@ $$
 
 Dereziński 的 [§7.1–§7.2、式 (7.51)–(7.54)](https://www.fuw.edu.pl/~derezins/clifford.pdf) 给出占据基与 Slater 约定；其定理 8.1，特别是式 (8.103) 的 $\omega_\pi(d\Gamma(h))=\Tr(\pi h)$，给出对应的一体期望公式。Peschel 的式 (7)、(9)–(10) 使用 $C$；其式 (12) 中的转置对复模式不能略去。Peschel 还指出，对非 Slater 态，按同一二点函数重建的自由费米密度矩阵一般不能复现其他期望值，故关联矩阵相合不能确定一般密度矩阵。更一般的粒子数规范不变高斯密度矩阵也有上述谱配方，但须另给高斯性假设；这与从指定行列式振幅出发的推导范围不同。含 $0$ 或 $1$ 时，不能直接套用 Peschel 式 (12) 的矩阵对数。任意非前缀格点子集还涉及 Jordan–Wigner 字符串与费米子系统选择，须另行建立对应；地址数位切口也仍不能充当物理空间切口。
 
-Moustaj–Krebbekx–Morais Smith 的 *Anomalous Polarization in One-dimensional Aperiodic Insulators*（[doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003)，§IV–V、§V.C 与附录 B）讨论含在位项的泵浦族及指定填充，其关联矩阵方法依赖所选 Slater／高斯态与子系统，不能直接移用于任意编码态。$\delta_{\rho,j}$ 只是单粒子能量到零的距离；多体激发隙还需填充、粒子数扇区与间隙约定。上述极限只处理这一单粒子谱前提：物理长度 $R$ 与内部窗坐标的对应、空间切口与劳齐边界的联系及熵标度，仍需另外建立；[@prob-ch39-p2e-fractal-horizon] 的完整问题仍然保留。
+Moustaj–Krebbekx–Morais Smith 的 *Anomalous Polarization in One-dimensional Aperiodic Insulators*（[10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003)，§IV–V、§V.C 与附录 B）讨论含在位项的泵浦族及指定填充，其关联矩阵方法依赖所选 Slater／高斯态与子系统，不能直接移用于任意编码态。$\delta_{\rho,j}$ 只是单粒子能量到零的距离；多体激发隙还需填充、粒子数扇区与间隙约定。上述极限只处理这一单粒子谱前提：物理长度 $R$ 与内部窗坐标的对应、空间切口与劳齐边界的联系及熵标度，仍需另外建立；[@prob-ch39-p2e-fractal-horizon] 的完整问题仍然保留。
 :::
 
 **不连续格点的手算例。** 在按 $0,1,2,3$ 排列的四个格点上取正交归一轨道 $u=(e_0+e_2)/\sqrt{2}$ 和 $v=(e_1+e_3)/\sqrt{2}$，保留 $I=\{0,2\}$。按递增格点顺序取两行的行列式，得到
@@ -1712,11 +1712,11 @@ $$
 
 长度下界来自 $\sigma^{k+1}(A)=\sigma^k(A)\sigma^k(B)$（$k\ge0$）：每个 $B$ 像非空，故长度从一开始，每一步至少增加一。因而 $\ell_n\to\infty$，而 $|Q(0,\ell_n)|/(\log(\ell_n+2))^2\to0$：不存在 $c>0$ 与 $m_0\in\mathbb N$，使所有 $m\ge m_0$ 都有 $|Q(0,m)|\ge c(\log(m+2))^2$。对所有起点同时要求这种下界也不成立，因为它包含起点零。若固定精确长度后才对起点取上确界，记 $E(m)=\sup_{s\in\mathbb N}|Q(s,m)|$，则是否存在 $c>0$、$m_0\in\mathbb N$，使每个 $m\ge m_0$ 都满足 $E(m)\ge c(\log(m+2))^2$，并未由这里的论证确定；一个起点上的常电荷不控制其他起点，而累计最大值允许选取较短的长度。最优常数同样未在这里确定。$m_n$ 是键字的前缀长度，不能直接等同于前面指定的偶数格点数 $N_j$。
 
-Adamczewski，*Symbolic discrepancy and self-similar dynamics*（[doi:10.5802/aif.2079](https://doi.org/10.5802/aif.2079)，定理 1、命题 10–11）提供替代系统偏差与临界谱消去的一般框架。其加权下界中存在合适零均值字母权重的结论，并不自动指定这里随位置交替的权重；若把位置奇偶性编码进扩充字母表，还须另行核对本原性、频率、权重与消去条件。上面的证明直接计算原始字，既不借用该存在性结论来指定权重，也不据此主张机制或具体公式的文献新颖性。
+Adamczewski，*Symbolic discrepancy and self-similar dynamics*（[10.5802/aif.2079](https://doi.org/10.5802/aif.2079)，定理 1、命题 10–11）提供替代系统偏差与临界谱消去的一般框架。其加权下界中存在合适零均值字母权重的结论，并不自动指定这里随位置交替的权重；若把位置奇偶性编码进扩充字母表，还须另行核对本原性、频率、权重与消去条件。上面的证明直接计算原始字，既不借用该存在性结论来指定权重，也不据此主张机制或具体公式的文献新颖性。
 
-对物理谱量，Juhász 从开边界横场 Ising 链得到辅助矩阵方法（[doi:10.1103/PhysRevB.106.064204](https://doi.org/10.1103/PhysRevB.106.064204)，arXiv:2206.11575v2）：式 (6) 的 $2L\times2L$ 零对角开链矩阵（$L>1$，相邻耦合均非零）的正本征值，等于式 (7) 双对角矩阵的奇异值；式 (18)、(28) 给出最小正值的有限链上下界。其附录 B 式 (B4) 将常用近似能隙放在严格下界之下，该近似因而不能充作真能隙的上界。这里可比较的是辅助矩阵的谱问题，不能直接把原 Ising 多体能隙认作本跃迁链的多体能隙。
+对物理谱量，Juhász 从开边界横场 Ising 链得到辅助矩阵方法（[10.1103/PhysRevB.106.064204](https://doi.org/10.1103/PhysRevB.106.064204)，[arXiv:2206.11575v2](https://arxiv.org/abs/2206.11575v2)）：式 (6) 的 $2L\times2L$ 零对角开链矩阵（$L>1$，相邻耦合均非零）的正本征值，等于式 (7) 双对角矩阵的奇异值；式 (18)、(28) 给出最小正值的有限链上下界。其附录 B 式 (B4) 将常用近似能隙放在严格下界之下，该近似因而不能充作真能隙的上界。这里可比较的是辅助矩阵的谱问题，不能直接把原 Ising 多体能隙认作本跃迁链的多体能隙。
 
-Hermisson 对多字母替代的边缘重整化特征值与无穷动力学指数的讨论（[doi:10.1088/0305-4470/33/1/304](https://doi.org/10.1088/0305-4470/33/1/304)，arXiv:cond-mat/9808238，第 11 页）没有在该处给出本字的特定标度。Hida 的 Fibonacci XXZ 分析（[doi:10.1143/JPSJ.73.2296](https://doi.org/10.1143/JPSJ.73.2296)，arXiv:cond-mat/0404606v2）中，式 (38) 的 $\Delta E\sim\exp[-\kappa(\log N)^2]$ 属于强弱耦合分离下的相互作用各向同性模型的微扰重整化；式 (28) 的自由 XY 情形给出的是有限指数幂律 $\Delta E\sim N^{-z}$。这些结论不替代对本链实际有限矩阵、端点、奇偶截断与所求谱量的核对。
+Hermisson 对多字母替代的边缘重整化特征值与无穷动力学指数的讨论（[10.1088/0305-4470/33/1/304](https://doi.org/10.1088/0305-4470/33/1/304)，[arXiv:cond-mat/9808238](https://arxiv.org/abs/cond-mat/9808238)，第 11 页）没有在该处给出本字的特定标度。Hida 的 Fibonacci XXZ 分析（[10.1143/JPSJ.73.2296](https://doi.org/10.1143/JPSJ.73.2296)，[arXiv:cond-mat/0404606v2](https://arxiv.org/abs/cond-mat/0404606v2)）中，式 (38) 的 $\Delta E\sim\exp[-\kappa(\log N)^2]$ 属于强弱耦合分离下的相互作用各向同性模型的微扰重整化；式 (28) 的自由 XY 情形给出的是有限指数幂律 $\Delta E\sim N^{-z}$。这些结论不替代对本链实际有限矩阵、端点、奇偶截断与所求谱量的核对。
 
 [@thm-ch39-p2e-tribonacci-prefix-log-refutation] 排除了把该统一对数区段界当作逆矩阵估计前提的路线。[@thm-ch39-p2e-tribonacci-uniform-log-squared] 提供的是实际词上、对起点一致的交替电荷控制；结合前面的有限乘积恒等式，它可作为分析跃迁比值的组合输入。它本身没有给出完整逆矩阵的范数或质量估计，也没有反驳某个多项式谱隙界。[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 另用具体正电荷前缀和一个完整逆矩阵元素证明 $\delta_{\rho,j}\to0$；下文 [@ex-ch39-p2e-tribonacci-prefix-rate] 已按同一组实际跃迁、奇数重复窗口与完整逆矩阵质量估计的前提，完成更强的 $73728/N_j$ 纸面应用，并给出参数一致收敛；它不由交替电荷界单独推出。沿前述 Slater 态路线讨论空间纠缠时，还须构造实际占据投影并分析空间压缩；物理态、空间切口与劳齐边界的对应及 [@prob-ch39-p2e-fractal-horizon] 的熵标度仍需独立建立。
 :::

@@ -407,7 +407,7 @@ $$
    $$
    其中联合互信息 $I(S' : E') \ge 0$ 与热浴相对熵 $D(\rho_E' \,\|\, \rho_E) \ge 0$ 均非负，从而在微观量子力学框架下无需热力学极限假设即严格导出 $\Delta Q_{\mathrm{bath}} \ge k_B T \Delta S_S$。
 
-Reeb–Wolf 的定理 3（arXiv:1306.4352v3，DOI：10.1088/1367-2630/16/10/103011）给出了上述有限模型。[@rem-density-matrix-balance-inputs-literature] 已说明如何用既有矩阵声明，在同一实际直积初态、联合演化及末态偏迹上得到恒等式与两项非负性；将浴能量变化读作热量及采用正温物理单位，仍须上述模型解释。[@prop-landauer-identity-from-balances] 保留两条实数平衡假设，[@cor-landauer-bound-saturation] 的取等与严格判据仍是关于这些实数的条件结论。它们不构造可达的重置或饱和协议；这里的纯态复位只是逻辑操作的示意，并非有限吉布斯热浴中的可达性声明。本应用没有给出取等态分类、功耗、秩约化、无限维热浴或无限逆温度结论。
+Reeb–Wolf 的定理 3（[arXiv:1306.4352v3](https://arxiv.org/abs/1306.4352v3)，[10.1088/1367-2630/16/10/103011](https://doi.org/10.1088/1367-2630/16/10/103011)）给出了上述有限模型。[@rem-density-matrix-balance-inputs-literature] 已说明如何用既有矩阵声明，在同一实际直积初态、联合演化及末态偏迹上得到恒等式与两项非负性；将浴能量变化读作热量及采用正温物理单位，仍须上述模型解释。[@prop-landauer-identity-from-balances] 保留两条实数平衡假设，[@cor-landauer-bound-saturation] 的取等与严格判据仍是关于这些实数的条件结论。它们不构造可达的重置或饱和协议；这里的纯态复位只是逻辑操作的示意，并非有限吉布斯热浴中的可达性声明。本应用没有给出取等态分类、功耗、秩约化、无限维热浴或无限逆温度结论。
 :::
 
 ::: {.viz src="erasure-ledger" height="560"}

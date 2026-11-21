@@ -644,7 +644,7 @@ $$
 \qquad\text{对所有 }t\in\mathbb R.
 $$
 
-这里的射影夹角就是 $\arccos$ 重叠模长，不额外乘 $2$。可参见 S. Deffner 与 S. Campbell，*Quantum speed limits: from Heisenberg's uncertainty principle to optimal quantum control*，J. Phys. A: Math. Theor. **50**, 453001 (2017)，[arXiv:1705.08023v2](https://arxiv.org/abs/1705.08023v2) §2.5，式 (23)、(28)–(33)，[DOI:10.1088/1751-8121/aa86c6](https://doi.org/10.1088/1751-8121/aa86c6)。下面将其自治纯态特例的推导展开，连同端点一并处理。
+这里的射影夹角就是 $\arccos$ 重叠模长，不额外乘 $2$。可参见 S. Deffner 与 S. Campbell，*Quantum speed limits: from Heisenberg's uncertainty principle to optimal quantum control*，J. Phys. A: Math. Theor. **50**, 453001 (2017)，[arXiv:1705.08023v2](https://arxiv.org/abs/1705.08023v2) §2.5，式 (23)、(28)–(33)，[10.1088/1751-8121/aa86c6](https://doi.org/10.1088/1751-8121/aa86c6)。下面将其自治纯态特例的推导展开，连同端点一并处理。
 
 **去掉不改变射影态的相位。** 令 $I$ 为恒等算子，取
 

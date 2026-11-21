@@ -210,7 +210,7 @@ $$
 :::
 
 ::: {.example #ex-ch34-trihedron-subentropy-and-kernel title="极小三角弧面体的等权混态 subentropy 与近纯态应用"}
-**证据分级**：本例复用既有有限维 subentropy 行列式积分定义、纯态归零律、单比特谱公式及[单比特近纯态核比较定理](#thm-ch34-qubit-subentropy-near-pure)；三面角原胞等权混合的小角展开与其几何对照仍为显式手工应用（未作为 Lean 映射锁定）。
+**证据分级**：本例复用既有有限维 subentropy 行列式积分定义、纯态归零律、单比特谱公式及 [@thm-ch34-qubit-subentropy-near-pure]；三面角原胞等权混合的小角展开与其几何对照仍为显式手工应用（未作为 Lean 映射锁定）。
 
 对任意有限维半正定、迹为一的密度算符 $\rho$，自然对数单位下的 subentropy 定义为
 
@@ -224,7 +224,7 @@ $$
 q(r) := Q(\rho) = -\frac{a^2\ln a - b^2\ln b}{r} \quad (0 < r < 1),
 $$
 
-且 $q(0) = \ln 2 - \frac{1}{2}$、$q(1) = 0$。由[单比特近纯态核比较定理](#thm-ch34-qubit-subentropy-near-pure)可知，在近纯态极限 $\delta \to 0^+$ 下成立渐近展开 $Q(\rho) = \delta + O(\delta^2|\ln\delta|)$。
+且 $q(0) = \ln 2 - \frac{1}{2}$、$q(1) = 0$。由 [@thm-ch34-qubit-subentropy-near-pure] 可知，在近纯态极限 $\delta \to 0^+$ 下成立渐近展开 $Q(\rho) = \delta + O(\delta^2|\ln\delta|)$。
 
 现将本节直角三面角原胞 $\Delta\mathcal{T}_\epsilon$ 的三个顶点纯态等权混合为混态 $\bar{\rho} = \frac{1}{3}(\rho_A + \rho_B + \rho_C)$（全局相干纯态仍满足 $Q = 0$）。由 $\mathbf{A} = (\sin\epsilon, c, 0)$、$\mathbf{B} = (0, 1, 0)$、$\mathbf{C} = (0, c, \sin\epsilon)$（$c = \cos\epsilon$），平均布洛赫矢为 $\bar{\mathbf{r}} = \frac{1}{3}(\sin\epsilon, 1 + 2c, \sin\epsilon)$，其半径平方与行列式分别为
 

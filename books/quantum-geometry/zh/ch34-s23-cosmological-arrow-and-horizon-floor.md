@@ -32,7 +32,7 @@ $$
    $$
 
    这从纯线性代数与谱熵层面锁死了：任何声称“无需特殊初态、仅凭幺正演化加偏迹即可无条件导出 $\Delta S_A + \Delta S_B \ge 0$”的论证皆违背上述恒等式中的 $-I(\rho)$ 项。
-2. **宇宙学过去假设与早期低引力熵边界（`文献结果，未在本书形式化`）**：R. Penrose（载 *General Relativity: An Einstein Centenary Survey*, S. W. Hawking & W. Israel 编, Cambridge Univ. Press, 581–638, 1979）指出早期宇宙辐射与物质虽接近局域热平衡，引力自由度却处于外尔曲率张量近乎归零（$C_{\mu\nu\rho\sigma} \to 0$）的极端低熵态，可观测宇宙重子数对应的贝肯斯坦—霍金最大黑洞熵相空间体积比高达约 $10^{10^{123}}$；D. Z. Albert（*Time and Chance*, Harvard Univ. Press, 2000）将这一宇宙初始低熵边界条件系统命名为**过去假设（Past Hypothesis）**，论证统计力学正向时间箭头与可靠记忆记录均依赖该额外公设；S. M. Carroll & J. Chen（`arXiv:hep-th/0410270`, 2004）进一步探讨了在无界熵容量引力背景下通过德西特背景暴胀自发孕育双向时间箭头子宇宙的宇宙学假说。
+2. **宇宙学过去假设与早期低引力熵边界（`文献结果，未在本书形式化`）**：R. Penrose（载 *General Relativity: An Einstein Centenary Survey*, S. W. Hawking & W. Israel 编, Cambridge Univ. Press, 581–638, 1979）指出早期宇宙辐射与物质虽接近局域热平衡，引力自由度却处于外尔曲率张量近乎归零（$C_{\mu\nu\rho\sigma} \to 0$）的极端低熵态，可观测宇宙重子数对应的贝肯斯坦—霍金最大黑洞熵相空间体积比高达约 $10^{10^{123}}$；D. Z. Albert（*Time and Chance*, Harvard Univ. Press, 2000）将这一宇宙初始低熵边界条件系统命名为**过去假设（Past Hypothesis）**，论证统计力学正向时间箭头与可靠记忆记录均依赖该额外公设；S. M. Carroll & J. Chen（[arXiv:hep-th/0410270](https://arxiv.org/abs/hep-th/0410270), 2004）进一步探讨了在无界熵容量引力背景下通过德西特背景暴胀自发孕育双向时间箭头子宇宙的宇宙学假说。
 3. **比较网络共享初始走廊诠释（`MODEL`）**：在本书的比较几何模型中，我们所能观测到的亿万受限观察者之所以共享一致的兰道尔擦除正向时间箭头，是因为所有这些局域格拉姆窗口皆从同一条低边缘熵、跨区域近似无纠缠（$I_0 \approx 0,\; S_{\alpha,0} \ll S_{\alpha,\max}$）的早期宇宙分支走廊分岔展开（`MODEL`）；至于这条初始走廊本身能否从零背景比较公理动力学中非循环导出，则严格归入节末开放问题 [@prob-ch34-past-hypothesis-and-cosmological-constant]（`OPEN`）。
 :::
 
@@ -128,7 +128,7 @@ $$
    \Lambda_{\mathrm{cos}} \;=\; c\,\delta_{\mathrm{blind}}^2 \cdot \frac{\Lambda_{\mathrm{cos}}}{3} \quad \Longrightarrow \quad \Lambda_{\mathrm{cos}}\Bigl(1 - \frac{c\,\delta_{\mathrm{blind}}^2}{3}\Bigr) \;=\; 0!
    $$
 
-   对任何 $\Lambda_{\mathrm{cos}} \neq 0$，**待求的物理标度 $\Lambda_{\mathrm{cos}}$ 在方程两侧恒等对消**，只剩一条无标度参数绑定关系 $c\,\delta_{\mathrm{blind}}^2 = 3$，而 $\Lambda_{\mathrm{cos}}$ 本身相对于普朗克曲率标度 $\ell_P^{-2} := c_{\mathrm{light}}^3 / (\hbar G)$ 的数值大小**完全悬空未定**！正如 S. Weinberg 在经典综述 *The cosmological constant problem*（*Rev. Mod. Phys.* **61**, 1–23, 1989, DOI: `10.1103/RevModPhys.61.1`，`文献结果`）中所深刻揭示的，宇宙学常数真正的定量硬骨头在于解释观测值与朴素普朗克截断零点能之间跨越 **$122$ 个数量级**的无量纲等级鸿沟：
+   对任何 $\Lambda_{\mathrm{cos}} \neq 0$，**待求的物理标度 $\Lambda_{\mathrm{cos}}$ 在方程两侧恒等对消**，只剩一条无标度参数绑定关系 $c\,\delta_{\mathrm{blind}}^2 = 3$，而 $\Lambda_{\mathrm{cos}}$ 本身相对于普朗克曲率标度 $\ell_P^{-2} := c_{\mathrm{light}}^3 / (\hbar G)$ 的数值大小**完全悬空未定**！正如 S. Weinberg 在经典综述 *The cosmological constant problem*（*Rev. Mod. Phys.* **61**, 1–23, 1989, DOI: [10.1103/RevModPhys.61.1](https://doi.org/10.1103/RevModPhys.61.1)，`文献结果`）中所深刻揭示的，宇宙学常数真正的定量硬骨头在于解释观测值与朴素普朗克截断零点能之间跨越 **$122$ 个数量级**的无量纲等级鸿沟：
 
    $$
    \Lambda_{\mathrm{cos}}\,\ell_P^2 \;\sim\; \Bigl(\frac{\ell_P}{R_H}\Bigr)^2 \;\sim\; 10^{-122} \;\ll\; 1.

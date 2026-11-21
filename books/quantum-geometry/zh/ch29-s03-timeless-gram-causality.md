@@ -175,7 +175,7 @@ $$
 
 并要求 $A[W_k,W_k]\succeq0$。这里使用同一张表，已经要求重叠窗口的共同条目相等；如果分别输入各窗口的表，必须另外核对这一相等条件。
 
-这组条件足以得到一张完整的实半正定矩阵 $B$，满足 $B_{ij}=A_{ij}$（$|i-j|\le M$）。存在性由 [@thm-ch29-chordal-psd-completion] 供应。对应的经典文献是 Vandenberghe–Andersen，*Chordal Graphs and Semidefinite Optimization*，[DOI: 10.1561/2400000006](https://doi.org/10.1561/2400000006)，[作者全文](https://www.seas.ucla.edu/~vandenbe/publications/chordalsdp.pdf)，定理 10.1：有限弦图上的部分实对称矩阵可半正定补全，当且仅当每个团的指定主块半正定。该结论允许奇异团块与奇异交叠，不需要取逆或正定假设。
+这组条件足以得到一张完整的实半正定矩阵 $B$，满足 $B_{ij}=A_{ij}$（$|i-j|\le M$）。存在性由 [@thm-ch29-chordal-psd-completion] 供应。对应的经典文献是 Vandenberghe–Andersen，*Chordal Graphs and Semidefinite Optimization*，[10.1561/2400000006](https://doi.org/10.1561/2400000006)，[作者全文](https://www.seas.ucla.edu/~vandenbe/publications/chordalsdp.pdf)，定理 10.1：有限弦图上的部分实对称矩阵可半正定补全，当且仅当每个团的指定主块半正定。该结论允许奇异团块与奇异交叠，不需要取逆或正定假设。
 
 本模型与该定理的对应如下：把 $0,\ldots,N$ 看成顶点，以 $0<|i-j|\le M$ 连边。按递增顺序删去顶点时，当前顶点的剩余邻居两两相邻，因此这是一个完美消去序，图为弦图。每个非空团都包含于以其最小顶点起始的某个 $W_k$，所以窗口半正定供应所有团条件。对补全后的 $B$ 作实 Gram 分解，可取共同的单位向量 $P_0,\ldots,P_N\in\mathbb R^{N+1}$，使 $\langle P_i,P_j\rangle=A_{ij}$ 对所有保留条目成立。这里的图对应与 $N+1$ 维 Gram 推导是一般定理的书面应用；上面的 Lean 引用验证一般补全存在性，不单独验证这个维数表述或整个应用。
 

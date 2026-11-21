@@ -165,8 +165,8 @@ $$
 ::: {.remark #rem-ch39-rope-swiglu-sinks-butterfly-clifford-literature title="RoPE、RMSNorm、SwiGLU、注意力塌陷、蝶形结构矩阵、自适应早停与几何代数网络文献考辨"}
 **深度学习与几何优化文献归属。** 本节对照与引用的核心文献如下：
 
-1. **标准现代 Transformer 组件与注意力塌陷现象**：`RMSNorm` 见 B. Zhang & R. Sennrich（*NeurIPS*, 2019，`arXiv:1910.07467`）；`SwiGLU` 门控前馈层见 N. Shazeer（2020，`arXiv:2002.05202`）；旋转位置编码 `RoPE` 见 J. Su 等人（*Neurocomputing* **568**, 127063, 2024，DOI `10.1016/j.neucom.2023.127063`）；`Softmax` 强行归一诱发的首词注意力塌陷（Attention Sinks）见 G. Xiao 等人（`StreamingLLM`, *ICLR*, 2024，`arXiv:2309.17453`）；
-2. **对数蝶形结构化矩阵、动态早停与四元数 / 克利福德几何网络**：蝶形可学习快速变换见 T. Dao 等人（*ICML*, 2019；`Kaleidoscope`, *ICLR*, 2020；`Monarch`, *ICML*, 2022）；词元级自适应计算与早停见 A. Graves（2016）、M. Elbayad 等人（*ICLR*, 2020）与 T. Schuster 等人（`CALM`, *NeurIPS*, 2022）；四元数与克利福德群等变神经网络见 T. Parcollet 等人（*ICLR*, 2019）、D. Ruhe, J. Brandstetter & P. Forré（*NeurIPS*, 2023）以及 J. Brehmer 等人（`GATr`, *NeurIPS*, 2023）；乘积流形黎曼自适应优化见 G. Bécigneul & O.-E. Ganea（*ICLR*, 2019，`arXiv:1810.00760`）。
+1. **标准现代 Transformer 组件与注意力塌陷现象**：`RMSNorm` 见 B. Zhang & R. Sennrich（*NeurIPS*, 2019，[arXiv:1910.07467](https://arxiv.org/abs/1910.07467)）；`SwiGLU` 门控前馈层见 N. Shazeer（2020，[arXiv:2002.05202](https://arxiv.org/abs/2002.05202)）；旋转位置编码 `RoPE` 见 J. Su 等人（*Neurocomputing* **568**, 127063, 2024，DOI [10.1016/j.neucom.2023.127063](https://doi.org/10.1016/j.neucom.2023.127063)）；`Softmax` 强行归一诱发的首词注意力塌陷（Attention Sinks）见 G. Xiao 等人（`StreamingLLM`, *ICLR*, 2024，[arXiv:2309.17453](https://arxiv.org/abs/2309.17453)）；
+2. **对数蝶形结构化矩阵、动态早停与四元数 / 克利福德几何网络**：蝶形可学习快速变换见 T. Dao 等人（*ICML*, 2019；`Kaleidoscope`, *ICLR*, 2020；`Monarch`, *ICML*, 2022）；词元级自适应计算与早停见 A. Graves（2016）、M. Elbayad 等人（*ICLR*, 2020）与 T. Schuster 等人（`CALM`, *NeurIPS*, 2022）；四元数与克利福德群等变神经网络见 T. Parcollet 等人（*ICLR*, 2019）、D. Ruhe, J. Brandstetter & P. Forré（*NeurIPS*, 2023）以及 J. Brehmer 等人（`GATr`, *NeurIPS*, 2023）；乘积流形黎曼自适应优化见 G. Bécigneul & O.-E. Ganea（*ICLR*, 2019，[arXiv:1810.00760](https://arxiv.org/abs/1810.00760)）。
 :::
 
 为严守科学诚实底线，我们将 TFT 在大规模预训练语言建模质量、赤道折缝梯度行为与现代 GPU 硬件吞吐上的待检验实证前沿明确立为开放问题：

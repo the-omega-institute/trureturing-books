@@ -331,7 +331,7 @@ $$
 
 1. **纯态两角参数化与单比特门三参数欧拉分解**（参见 M. A. Nielsen & I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary Ed., Cambridge University Press, 2010, §1.2 与 §4.2）：两角公式 $\vv{r}(\theta, \varphi) = (\sin\theta\cos\varphi, \sin\theta\sin\varphi, \cos\theta)$ 与 $\lvert\psi\rangle = \cos(\theta/2)\lvert 0\rangle + e^{i\varphi}\sin(\theta/2)\lvert 1\rangle$ 仅参数化**单比特纯态射线**（从固定北极出发的轨道点）。若要分解任意单比特幺正门 $U \in U(2)$，除将北极送往目标轴的两个角度外，还必须包含绕轴自转的第三个欧拉角以及可能的全局相位因子 $e^{i\alpha}$（即 $U = e^{i\alpha} R_z(\beta) R_y(\gamma) R_z(\delta)$）。
 2. **有限旋转字存在性与门计数复杂度的严格区分**：[@thm-two-axis-finite-word] 仅证明在允许连续轴圆 $\operatorname{axisCircle}(a), \operatorname{axisCircle}(b)$ 的前提下存在某个有限乘积列表表示目标旋转 $R \in \mathrm{SO}(3)$。这一纯存在性定理不给出最短字长上界，不涉及有限离散门集编译（如 Solovay–Kitaev 定理），更不能等同于对计算复杂性问题 $\mathrm{P}$ 与 $\mathrm{NP}$ 的判定。
-3. **有理六轴覆盖的文献来源与几何范畴**：[@prop-rational-six-axis-cover] 中的显式有理六轴构造源自对 D. Feldman & A. Wilce（arXiv:2608.13320v1, Question 3）相关问题的形式化解答，正如源码模块所载，本书不主张该六轴构造的原始发现权。同时，[@prop-rational-six-axis-cover] 与 [@cor-six-colors-necessary] 讨论的是**不含正交向量对的球面开子集覆盖**（$\operatorname{OrthogonalityFree}$），而非微分拓扑中球面切丛的全局光滑标架问题——后者属于[下一章](ch10-gram-geometry-and-order.md)将专门剖析的毛球定理与霍普纤维丛范畴。
+3. **有理六轴覆盖的文献来源与几何范畴**：[@prop-rational-six-axis-cover] 中的显式有理六轴构造源自对 D. Feldman & A. Wilce（[arXiv:2608.13320v1](https://arxiv.org/abs/2608.13320v1), Question 3）相关问题的形式化解答，正如源码模块所载，本书不主张该六轴构造的原始发现权。同时，[@prop-rational-six-axis-cover] 与 [@cor-six-colors-necessary] 讨论的是**不含正交向量对的球面开子集覆盖**（$\operatorname{OrthogonalityFree}$），而非微分拓扑中球面切丛的全局光滑标架问题——后者属于[下一章](ch10-gram-geometry-and-order.md)将专门剖析的毛球定理与霍普纤维丛范畴。
 :::
 
 ::: {.viz src="two-angle-addressing" height="560"}

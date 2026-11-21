@@ -201,7 +201,7 @@ This gives exact finite-length boundaries: $R=K$ precisely when $m,n\ge K-1$, an
 ::: {.example #ex-ch39-p2e-uniform-entropy title="Paper derivation (not Lean-verified): entanglement vanishes uniformly as the forbidden run grows"}
 Increasing the automaton's number of states need not increase the entanglement of this specified state. For the positive equal-amplitude family in [@ex-ch39-p2e-finite-kernel], a classical correlation inequality gives a bound uniform over all finite cuts. This remains a paper derivation and adds no Lean verification.
 
-Under the uniform law on binary words of length $m+n$, let $D$ mean that each half is legal, and let $E$ mean that an all-ones window of length $K$ crosses the cut. Represent a word by its set of one-positions. Then $D$ is closed under deleting positions, whereas $E$ is closed under adding them. The Harris–Kleitman inequality makes such a decreasing event and increasing event negatively correlated; this is a classical literature result (Kleitman, *Families of Non-disjoint Subsets*, [doi:10.1016/S0021-9800(66)80012-1](https://doi.org/10.1016/S0021-9800(66)80012-1), lemma on p.154). Consequently,
+Under the uniform law on binary words of length $m+n$, let $D$ mean that each half is legal, and let $E$ mean that an all-ones window of length $K$ crosses the cut. Represent a word by its set of one-positions. Then $D$ is closed under deleting positions, whereas $E$ is closed under adding them. The Harris–Kleitman inequality makes such a decreasing event and increasing event negatively correlated; this is a classical literature result (Kleitman, *Families of Non-disjoint Subsets*, [10.1016/S0021-9800(66)80012-1](https://doi.org/10.1016/S0021-9800(66)80012-1), lemma on p.154). Consequently,
 
 $$
 \begin{aligned}

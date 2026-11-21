@@ -61,7 +61,7 @@
      \end{aligned}
      $$
 
-   由于每一项反常在**单代内部已经精确归零**，$N_{\mathrm{gen}}$ 代直和给出的总反常恒为 $N_{\mathrm{gen}} \times 0 = 0$——因此局部与全局反常相消对**任意正整数 $N_{\mathrm{gen}} \in \{1, 2, 3, 4, \dots\}$** 完全自洽（参见 A. Bilal, *Lectures on Anomalies*, arXiv:0802.0634, 2008），单凭反常相消绝对锁不定 $N_{\mathrm{gen}} = 3$！哪怕联合其他经典场论判据：小林—益川（M. Kobayashi & T. Maskawa, *Prog. Theor. Phys.* **49**, 652, 1973）夸克混合矩阵可观测 CP 破坏相位数 $\frac{1}{2}(N_{\mathrm{gen}} - 1)(N_{\mathrm{gen}} - 2) \ge 1$ 只给出**下界 $N_{\mathrm{gen}} \ge 3$** 而不封死上界；单圈 QCD 渐近自由判据 $b_0 = \frac{11}{3}N_c - \frac{2}{3}N_f > 0$ 在 $N_c = 3$ 时（$11 - \frac{2}{3}N_f > 0$）则容许至多 $N_f \le 16$ 种狄拉克夸克味，即多达 **$N_{\mathrm{gen}} \le 8$ 代**！
+   由于每一项反常在**单代内部已经精确归零**，$N_{\mathrm{gen}}$ 代直和给出的总反常恒为 $N_{\mathrm{gen}} \times 0 = 0$——因此局部与全局反常相消对**任意正整数 $N_{\mathrm{gen}} \in \{1, 2, 3, 4, \dots\}$** 完全自洽（参见 A. Bilal, *Lectures on Anomalies*, [arXiv:0802.0634](https://arxiv.org/abs/0802.0634), 2008），单凭反常相消绝对锁不定 $N_{\mathrm{gen}} = 3$！哪怕联合其他经典场论判据：小林—益川（M. Kobayashi & T. Maskawa, *Prog. Theor. Phys.* **49**, 652, 1973）夸克混合矩阵可观测 CP 破坏相位数 $\frac{1}{2}(N_{\mathrm{gen}} - 1)(N_{\mathrm{gen}} - 2) \ge 1$ 只给出**下界 $N_{\mathrm{gen}} \ge 3$** 而不封死上界；单圈 QCD 渐近自由判据 $b_0 = \frac{11}{3}N_c - \frac{2}{3}N_f > 0$ 在 $N_c = 3$ 时（$11 - \frac{2}{3}N_f > 0$）则容许至多 $N_f \le 16$ 种狄拉克夸克味，即多达 **$N_{\mathrm{gen}} \le 8$ 代**！
 
 2. **反例 (ii) 三维空间腔 $(0, \pi)^3$ 狄利克雷驻波本征模的可数无穷重数**：
    在 [§33.2](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave) 中，我们曾将三代费米子直观类比为三维圆弧核的一维、二维、三维内部驻波模态。然而，考察固定三维空间立方腔 $\Omega = (0, \pi)^3$ 上的标准狄利克雷拉普拉斯算子 $-\nabla^2\psi = E\,\psi$（$\psi\rvert_{\partial\Omega} = 0$），其精确正交驻波本征族为

@@ -251,7 +251,7 @@ $$
 ::: {.remark #rem-psi-fixed-point-synthesis-literature title="冯·诺依曼测量链、吕德斯规则与自指不动点综合（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 关于量子测量条件化、退相干不动点与自指不动点方程的经典文献背景如下：
 
-1. **冯·诺依曼—吕德斯投影更新规则**（J. von Neumann, *Mathematische Grundlagen der Quantenmechanik*, Springer, 1932；G. Lüders, *Über die Zustandsänderung durch den Meßprozeß*, Annalen der Physik **443**(5–8), 322–328, 1950, DOI `10.1002/andp.19504430510`）：吕德斯将冯·诺依曼的一维投影测量推广到任意维正交投影族 $\{P_k\}$，给出了条件化更新 $\rho \mapsto P_k \rho P_k / \Tr(\rho P_k)$ 与非选择性对角挤压信道 $\rho \mapsto \sum_k P_k \rho P_k$。在本书的冻结定理 [@prop-audit-conditional-state] 与 [@cor-audit-unread-fixed-iff] 中，这两条规则在任意有限维完备正交投影族上得到了无漏洞的内核级形式化（这一句说的是本书的冻结定理，不是文献结果）。
+1. **冯·诺依曼—吕德斯投影更新规则**（J. von Neumann, *Mathematische Grundlagen der Quantenmechanik*, Springer, 1932；G. Lüders, *Über die Zustandsänderung durch den Meßprozeß*, Annalen der Physik **443**(5–8), 322–328, 1950, DOI [10.1002/andp.19504430510](https://doi.org/10.1002/andp.19504430510)）：吕德斯将冯·诺依曼的一维投影测量推广到任意维正交投影族 $\{P_k\}$，给出了条件化更新 $\rho \mapsto P_k \rho P_k / \Tr(\rho P_k)$ 与非选择性对角挤压信道 $\rho \mapsto \sum_k P_k \rho P_k$。在本书的冻结定理 [@prop-audit-conditional-state] 与 [@cor-audit-unread-fixed-iff] 中，这两条规则在任意有限维完备正交投影族上得到了无漏洞的内核级形式化（这一句说的是本书的冻结定理，不是文献结果）。
 2. **题记 $\psi = \psi(\psi)$ 的哲学综合与形式化纪律边界**：在本书中，符号 $\psi = \psi(\psi)$ 是统摄多条严格不动点定理的**哲学与几何母题**，它在各章分别具象化为具体的绿色冻结定理：在[第三章](ch03-projectors-and-duality.md)与本章中体现为未读挤压算子的幂等性与零相干不动点判据 $\operatorname{unreadState}(P, \rho) = \rho$（[@cor-audit-pinching-idempotent]、[@cor-audit-unread-fixed-iff]）；在第二十一章中体现为观察拓扑对角见证的四合取逃逸结算；在第二十四章中体现为有限集删减更新 $U(S)\subseteq S$ 在 $(S_0).\mathrm{ncard}$ 步内达不动点以及正实数域上黄金不动点 $\varphi = 1 + 1/\varphi$ 的唯一性。遵循本书的验证契约，我们绝不将未形式化的宇宙学或意识哲学外推包装成 `LEAN ✓` 定理——每一分绿色的确定性，都精准停留在 Lean 4 内核所签发的定义、前提与结论之内。
 :::
 

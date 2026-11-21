@@ -13,7 +13,7 @@ P(X)&=p(X)+iB(X)\\
 $$
 这样端点处 $|P(1)|=1$，同时 $\operatorname{Re}P(x)=p(x)$。实目标仍被保留，只是归一化所需的其余分量有了容身之处。
 
-区间平方和的文献依据是 Gilyén、Su、Low 与 Wiebe 上述论文的 [arXiv:1806.01838v1，Lemma 6 与 Theorems 3、5](https://arxiv.org/abs/1806.01838v1)（STOC 2019，doi:10.1145/3313276.3316366）。以下按该引理及 shosonoda 的 [lean-qsvt 固定版本](https://github.com/auto-res/lean-qsvt/tree/42c4b9149d5957db497e4226bc02da92d10f7a3c) 中 `exists_sumsq_decomposition`、`exists_complement` 的证明路线展开；该源码版权归 shosonoda（2026），采用 Apache-2.0 许可。[@thm-interval-sumsq-decomposition] 引用主仓对原平方和证明的复用，[@thm-phase-unitary-completion] 引用其原生连续矩阵场应用；不主张数学新颖性。
+区间平方和的文献依据是 Gilyén、Su、Low 与 Wiebe 上述论文的 [arXiv:1806.01838v1，Lemma 6 与 Theorems 3、5](https://arxiv.org/abs/1806.01838v1)（STOC 2019，[10.1145/3313276.3316366](https://doi.org/10.1145/3313276.3316366)）。以下按该引理及 shosonoda 的 [lean-qsvt 固定版本](https://github.com/auto-res/lean-qsvt/tree/42c4b9149d5957db497e4226bc02da92d10f7a3c) 中 `exists_sumsq_decomposition`、`exists_complement` 的证明路线展开；该源码版权归 shosonoda（2026），采用 Apache-2.0 许可。[@thm-interval-sumsq-decomposition] 引用主仓对原平方和证明的复用，[@thm-phase-unitary-completion] 引用其原生连续矩阵场应用；不主张数学新颖性。
 
 记 $c(R)=R.\mathrm{map}(\mathrm{algebraMap}\,\mathbb R\,\mathbb C)$ 为实多项式的复化。源码中的 $\operatorname{IsEven}(c(R))$ 表示所有奇次系数为零，$\operatorname{HasParity}(c(R),m)$ 表示与 $m$ 奇偶性相反的系数为零；对实多项式，这分别写成 $R(-X)=R(X)$ 与 $R(-X)=(-1)^mR(X)$。以下 $k-1$ 的自然数减法均取截断值 $\max(k-1,0)$，$\operatorname{natDegree}0=0$。
 

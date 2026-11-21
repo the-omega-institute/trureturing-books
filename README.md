@@ -28,6 +28,10 @@ Read the [contribution guidelines](CONTRIBUTING.md) before opening an issue or p
 - **文本许可 / Text License**：`CC-BY-4.0`
 - **出版 DOI / Publication DOI**：[10.5281/zenodo.24156135](https://doi.org/10.5281/zenodo.24156135)（Zenodo 概念 DOI，跨版本保持不变 / Zenodo concept DOI, shared across versions）
 
+引用全书可写作「Auric，《量子计算的几何直觉：从两子丈量、球外之球到 $\psi = \psi(\psi)$》，[10.5281/zenodo.24156135](https://doi.org/10.5281/zenodo.24156135)」。引用具体段落时，注明所读版本的 DOI 或 Release、语言和章节。
+
+To cite the English edition, use “Auric, *Geometric Intuition of Quantum Computing: From Pairwise Measurement and Spheres Beyond Spheres to $\psi = \psi(\psi)$*, [10.5281/zenodo.24156135](https://doi.org/10.5281/zenodo.24156135).” For a specific passage, include the version DOI or release, language, and section.
+
 本书使用 Zenodo 概念 DOI 作为跨版本的稳定出版标识，具体版本的 DOI 以 Zenodo 记录为准。出版 DOI 填在 [`books/quantum-geometry/book.toml`](books/quantum-geometry/book.toml) 的 `[book].doi`；省略时，构建会依次从根目录 `.zenodo.json`、`CITATION.cff` 与 README 中明确的 Zenodo DOI 链接读取。站点书目、PDF/EPUB 版权页与 EPUB 元数据会显示该 DOI。
 
 The Zenodo concept DOI provides a stable identifier across versions; version-specific DOIs are listed in the Zenodo records. Set the publication DOI in [`books/quantum-geometry/book.toml`](books/quantum-geometry/book.toml) as `[book].doi`. When omitted, the build checks the root `.zenodo.json`, `CITATION.cff`, then explicit Zenodo DOI links in README. The DOI appears in the site catalog, PDF/EPUB copyright pages, and EPUB metadata.

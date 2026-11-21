@@ -118,7 +118,7 @@ $$
 
 为什么我们要花力气把 [@thm-open-circuit-min-depth] 与 [@ex-open-circuit-depths] 的组合层序交由 Lean 内核逐行核验？因为即便是如此具体的有限门列表深度问题，单凭直觉归纳和手头小样本外推也极易失手！
 
-在原始文献（M. García Fernández、C. Paletta 与 A. L. Retore，*Open-boundary integrable quantum circuits with different geometries*，`arXiv:2607.02093v1`）中，作者曾针对奇数 $N$ 与偶数 $N$ 分别提出了两条形如线性减法的最小深度猜想公式：`conjectureOne` 预测奇数 $N$ 时最小深度为 $(N + 3)/2 - \kappa$，`conjectureTwo` 预测偶数 $N$ 时最小深度为 $(N + 4)/2 - \kappa$。当 $\kappa = 1$ 时，$\lfloor N/2\rfloor + 1$ 确实与这两条线性公式吻合；但一旦跨到 $\kappa = 2$，多出来的分割点允许把电路切分成 $\kappa + 1 = 3$ 段并行子链，真实最小深度立刻以斜率 $1/(\kappa+1) = 1/3$ 低于斜率 $1/2$ 的原猜想！我们在 [@ex-open-circuit-depths] 中算出的 $N = 8, \kappa = 2$ 与 $N = 11, \kappa = 2$，恰好就是一举击穿这两条原文献公式的精确反例。
+在原始文献（M. García Fernández、C. Paletta 与 A. L. Retore，*Open-boundary integrable quantum circuits with different geometries*，[arXiv:2607.02093v1](https://arxiv.org/abs/2607.02093v1)）中，作者曾针对奇数 $N$ 与偶数 $N$ 分别提出了两条形如线性减法的最小深度猜想公式：`conjectureOne` 预测奇数 $N$ 时最小深度为 $(N + 3)/2 - \kappa$，`conjectureTwo` 预测偶数 $N$ 时最小深度为 $(N + 4)/2 - \kappa$。当 $\kappa = 1$ 时，$\lfloor N/2\rfloor + 1$ 确实与这两条线性公式吻合；但一旦跨到 $\kappa = 2$，多出来的分割点允许把电路切分成 $\kappa + 1 = 3$ 段并行子链，真实最小深度立刻以斜率 $1/(\kappa+1) = 1/3$ 低于斜率 $1/2$ 的原猜想！我们在 [@ex-open-circuit-depths] 中算出的 $N = 8, \kappa = 2$ 与 $N = 11, \kappa = 2$，恰好就是一举击穿这两条原文献公式的精确反例。
 
 ::: {.lemma #lemma-open-circuit-depth-refutation title="两条深度公式的反例" lean="D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.result"}
 定义关于开放边界可积电路最小深度 $\operatorname{minDepth}(N, \kappa)$ 的两条命题及其析取 `claim` 如下：
@@ -147,7 +147,7 @@ $$
 **旧公式多算了一层。** N = 11、S = {4, 8}：12 道门排成每层 3 道的 4 层，顶在白线上；灰色虚线是奇数 N 的旧公式 (N + 3)/2 − κ 预测的 5 层（[@lemma-open-circuit-depth-refutation]）。
 :::
 
-必须严格声明：[@lemma-open-circuit-depth-refutation] 证伪的仅仅是 `arXiv:2607.02093v1` 中关于特定可积电路族并行深度的两条算术猜想 `conjectureOne` 与 `conjectureTwo`，**绝不是**对全息“复杂度等于体积（CV）”猜想、$\mathrm{ER}=\mathrm{EPR}$ 猜想或 $\mathrm{P}\neq\mathrm{NP}$ 猜想的反例。
+必须严格声明：[@lemma-open-circuit-depth-refutation] 证伪的仅仅是 [arXiv:2607.02093v1](https://arxiv.org/abs/2607.02093v1) 中关于特定可积电路族并行深度的两条算术猜想 `conjectureOne` 与 `conjectureTwo`，**绝不是**对全息“复杂度等于体积（CV）”猜想、$\mathrm{ER}=\mathrm{EPR}$ 猜想或 $\mathrm{P}\neq\mathrm{NP}$ 猜想的反例。
 
 在从具体的可积电路深度转向高能物理中的黑洞内部复杂度假说之前，我们先在文献注记中厘清量子态复杂度增长模型的物理前提，随后正式列出带有红色 `OPEN` 徽章的复杂度—体积猜想。
 
@@ -156,10 +156,10 @@ $$
 
 特别地，必须严格区分**有限离散门集下的 $\varepsilon$-近似态复杂度**与**连续门族（或 Nielsen 几何）下的精确复杂度**：
 
-1. **有限普适门集（如 Clifford + $T$）与正误差容限 $\varepsilon > 0$**：若基本门集 $\mathcal{G}$ 是有限集合，则所有有限长电路在零误差（$\varepsilon = 0$）下能精确到达的量子态至多有可数多个，而非平稳的连续时间态轨道 $\lvert\psi(t)\rangle = e^{-iHt/\hbar}\lvert\psi(0)\rangle$ 通常包含不可数多个态。因此，为保证一般目标态在有限普适门集下具有有限复杂度，以下**固定近似容限 $\varepsilon > 0$**（要求电路输出态与目标态的距离不超过 $\varepsilon$，参见 S. Aaronson, `arXiv:1607.05256`, Definitions 3.2.1 & 3.3.1）；在固定 $\varepsilon > 0$ 下，多比特态与酉算子的近似合成复杂度受限于指数级天花板 $\mathcal{C}_\varepsilon(\lvert\psi(t)\rangle) \le \exp(O(N))$（例如结合连续双比特分解与 Solovay–Kitaev 编译：先把目标分解为 $L$ 个连续双比特门，态合成 $L = O(2^N)$、酉合成 $L = O(4^N)$；再把每个门逐一编译到误差 $\varepsilon/L$ 以内，使 $L$ 个门累加的误差不超过 $\varepsilon$，每个门需 $\operatorname{poly}(\log(L/\varepsilon))$ 个门，合计 $O(L \operatorname{poly}(\log(L/\varepsilon)))$，即 $O(2^N \operatorname{poly}(N + \log(1/\varepsilon)))$ 的态合成上界或 $O(4^N \operatorname{poly}(N + \log(1/\varepsilon)))$ 的酉合成上界；参见 C. M. Dawson & M. A. Nielsen, `arXiv:quant-ph/0505030`）。
+1. **有限普适门集（如 Clifford + $T$）与正误差容限 $\varepsilon > 0$**：若基本门集 $\mathcal{G}$ 是有限集合，则所有有限长电路在零误差（$\varepsilon = 0$）下能精确到达的量子态至多有可数多个，而非平稳的连续时间态轨道 $\lvert\psi(t)\rangle = e^{-iHt/\hbar}\lvert\psi(0)\rangle$ 通常包含不可数多个态。因此，为保证一般目标态在有限普适门集下具有有限复杂度，以下**固定近似容限 $\varepsilon > 0$**（要求电路输出态与目标态的距离不超过 $\varepsilon$，参见 S. Aaronson, [arXiv:1607.05256](https://arxiv.org/abs/1607.05256), Definitions 3.2.1 & 3.3.1）；在固定 $\varepsilon > 0$ 下，多比特态与酉算子的近似合成复杂度受限于指数级天花板 $\mathcal{C}_\varepsilon(\lvert\psi(t)\rangle) \le \exp(O(N))$（例如结合连续双比特分解与 Solovay–Kitaev 编译：先把目标分解为 $L$ 个连续双比特门，态合成 $L = O(2^N)$、酉合成 $L = O(4^N)$；再把每个门逐一编译到误差 $\varepsilon/L$ 以内，使 $L$ 个门累加的误差不超过 $\varepsilon$，每个门需 $\operatorname{poly}(\log(L/\varepsilon))$ 个门，合计 $O(L \operatorname{poly}(\log(L/\varepsilon)))$，即 $O(2^N \operatorname{poly}(N + \log(1/\varepsilon)))$ 的态合成上界或 $O(4^N \operatorname{poly}(N + \log(1/\varepsilon)))$ 的酉合成上界；参见 C. M. Dawson & M. A. Nielsen, [arXiv:quant-ph/0505030](https://arxiv.org/abs/quant-ph/0505030)）。
 2. **连续双比特门族或连续 Nielsen 几何（$\varepsilon = 0$）**：若允许任意连续参数的单比特与双比特门 $\mathcal{G} = \mathrm{SU}(4)$ 按单位成本计价（或采用酉群流形上的连续 Nielsen 测地线距离），则任意 $N$ 比特纯态或酉算子的精确合成（$\varepsilon = 0$）对一切时刻 $t$ 均良定义，且同样受限于指数级构造上界 $\exp(O(N))$（态合成 $O(2^N)$、一般酉算子合成 $O(4^N)$）。
 
-在混沌多体量子系统与全息黑洞模型的物理叙述中，当系统演化越过热化时间 $t_{\mathrm{th}}$ 后，子系统纠缠熵 $S(t)$ 已达热平衡饱和值 $S_{\mathrm{th}} \sim O(N)$，而在中间时间窗 $t_{\mathrm{th}} \ll t \ll e^{O(N)}$ 内，$\varepsilon$-近似态复杂度（或连续 Nielsen 复杂度）被预期继续随时间 $t$ 近似线性增长。但在任何具有有限维希尔伯特空间与有界能谱的封闭量子系统中，态复杂度无法跨越 $\exp(O(N))$ 天花板，且在依赖于具体能谱与演化模型的更长时间尺度（典型情形下如双指数级量子庞加莱回归时间）上必然发生饱和与回归，绝不可能对一切 $t \to \infty$ 永远保持单调线性增长。参见 L. Susskind, *Fortschr. Phys.* **64**, 24–43 (2016), DOI: `10.1002/prop.201500092`；以及 S. Aaronson (2016), `arXiv:1607.05256`。
+在混沌多体量子系统与全息黑洞模型的物理叙述中，当系统演化越过热化时间 $t_{\mathrm{th}}$ 后，子系统纠缠熵 $S(t)$ 已达热平衡饱和值 $S_{\mathrm{th}} \sim O(N)$，而在中间时间窗 $t_{\mathrm{th}} \ll t \ll e^{O(N)}$ 内，$\varepsilon$-近似态复杂度（或连续 Nielsen 复杂度）被预期继续随时间 $t$ 近似线性增长。但在任何具有有限维希尔伯特空间与有界能谱的封闭量子系统中，态复杂度无法跨越 $\exp(O(N))$ 天花板，且在依赖于具体能谱与演化模型的更长时间尺度（典型情形下如双指数级量子庞加莱回归时间）上必然发生饱和与回归，绝不可能对一切 $t \to \infty$ 永远保持单调线性增长。参见 L. Susskind, *Fortschr. Phys.* **64**, 24–43 (2016), DOI: [10.1002/prop.201500092](https://doi.org/10.1002/prop.201500092)；以及 S. Aaronson (2016), [arXiv:1607.05256](https://arxiv.org/abs/1607.05256)。
 :::
 
 ::: {.viz src="complexity-growth" preset="saturate" height="500"}
@@ -181,7 +181,7 @@ $$
 
 其中 $G_N$ 为体时空牛顿引力常数，$\ell_*$ 为用于量纲匹配与归一化的特征体长度尺度（例如在渐近反德西特时空中取曲率半径 $\ell_{\mathrm{AdS}}$）。
 
-适用范围与开放边界说明：上式中的 $V_{\mathrm{ren}}(\Sigma_t)$ 是余维一类空切片的**空间体积**；请勿将其与另一项独立的全息假说——**复杂度等于作用量（Complexity = Action，简称 CA）猜想**——相混淆，后者将态复杂度对应于边界切片所锚定的体时空 **Wheeler–DeWitt（WDW）因果楔形区**上的在壳引力作用量 $\mathcal{C}_A(\psi(t)) = I_{\mathrm{WDW}} / (\pi\hbar)$（包含体时空爱因斯坦—希尔伯特项、类空/类时/零超曲面边界项与拐角项，而非单纯的四维时空体积）。CV 与 CA 的比例系数均依赖于门成本加权与紫外正则化方案的选择，且不声称有限离散电路的精确最小门数与连续体几何量之间存在脱离正则化极限的逐数相等。参见 L. Susskind, *Fortschr. Phys.* **64**, 24–43 (2016), DOI: `10.1002/prop.201500092`；以及 A. R. Brown, D. A. Roberts, L. Susskind, B. Swingle & Y. Zhao, *Phys. Rev. Lett.* **116**, 191301 (2016), DOI: `10.1103/PhysRevLett.116.191301`。
+适用范围与开放边界说明：上式中的 $V_{\mathrm{ren}}(\Sigma_t)$ 是余维一类空切片的**空间体积**；请勿将其与另一项独立的全息假说——**复杂度等于作用量（Complexity = Action，简称 CA）猜想**——相混淆，后者将态复杂度对应于边界切片所锚定的体时空 **Wheeler–DeWitt（WDW）因果楔形区**上的在壳引力作用量 $\mathcal{C}_A(\psi(t)) = I_{\mathrm{WDW}} / (\pi\hbar)$（包含体时空爱因斯坦—希尔伯特项、类空/类时/零超曲面边界项与拐角项，而非单纯的四维时空体积）。CV 与 CA 的比例系数均依赖于门成本加权与紫外正则化方案的选择，且不声称有限离散电路的精确最小门数与连续体几何量之间存在脱离正则化极限的逐数相等。参见 L. Susskind, *Fortschr. Phys.* **64**, 24–43 (2016), DOI: [10.1002/prop.201500092](https://doi.org/10.1002/prop.201500092)；以及 A. R. Brown, D. A. Roberts, L. Susskind, B. Swingle & Y. Zhao, *Phys. Rev. Lett.* **116**, 191301 (2016), DOI: [10.1103/PhysRevLett.116.191301](https://doi.org/10.1103/PhysRevLett.116.191301)。
 :::
 
 ::: {.viz src="complexity-growth" preset="cv" height="500"}
@@ -196,7 +196,7 @@ $$
 **边界时间往后走，穿过黑洞内部的切片越拉越长；它与门数是否成正比是开放问题。** 示意的双边黑洞彭罗斯图：左右竖边是两个边界，上下锯齿线是奇点，对角虚线是视界。紫色的切片 $\Sigma_t$ 两端钉在边界时刻 $t = 0, 1, 2, 3$ 上，越往后越长（示意，未计算体积）。红色标签是复杂度—体积猜想（[@conj-complexity-equals-volume]），开放问题。
 :::
 
-这一下界原是 X. Huang、T. Kosugi、H. Nishi 与 Y.-i. Matsushita（*Optimized Synthesis of Circuits for Diagonal Unitary Matrices with Reflection Symmetry*，J. Phys. Soc. Jpn. 93, 054002 (2024)，arXiv:2310.06676）在结论节提出的猜想，该文的算法 1 给出了匹配的上界（文献结果，未在本书形式化）。Lean 的 `D5.S3.Quantum.Magic.ReflectionDiagonalCNOTLowerBound` 模块对偶数比特数 $m = 2n$（$n \ge 1$）给出了一个干净利落的肯定定理。让我们先把模块中的电路与门集定义交代清楚：
+这一下界原是 X. Huang、T. Kosugi、H. Nishi 与 Y.-i. Matsushita（*Optimized Synthesis of Circuits for Diagonal Unitary Matrices with Reflection Symmetry*，J. Phys. Soc. Jpn. 93, 054002 (2024)，[arXiv:2310.06676](https://arxiv.org/abs/2310.06676)）在结论节提出的猜想，该文的算法 1 给出了匹配的上界（文献结果，未在本书形式化）。Lean 的 `D5.S3.Quantum.Magic.ReflectionDiagonalCNOTLowerBound` 模块对偶数比特数 $m = 2n$（$n \ge 1$）给出了一个干净利落的肯定定理。让我们先把模块中的电路与门集定义交代清楚：
 
 - 记 $m$ 比特计算基类型为 $\operatorname{Qubits}(m) = (\operatorname{Fin} m \to \operatorname{Bool})$（共 $2^m$ 个布尔位串）；
 - 无辅助比特（ancilla-free）基本门类型 `gate m` 定义为两类门的不交并
@@ -276,7 +276,7 @@ $$
 ::: {.conjecture #conj-er-equals-epr title="ER=EPR"}
 在允许半经典高维引力几何描述的适当纠缠双体系（典型原型为处于热场双态 thermofield double state 下的双边永恒反德西特黑洞）中，**$\mathrm{ER}=\mathrm{EPR}$ 猜想**认为：连接左右两个渐近边界外部区域的非可穿越**爱因斯坦—罗森桥**（Einstein–Rosen bridge，简称 ER 虫洞），在体几何上对偶于左右两套边界量子系统之间的**爱因斯坦—波多尔斯基—罗森**（Einstein–Podolsky–Rosen，简称 EPR）量子纠缠。
 
-适用范围与开放边界说明：这一猜想性对应建立在半经典引力有效适用域内，**并不意味着**实验室中任意一对处于贝尔纠缠态的微观量子比特之间都存在光滑的经典广义相对论虫洞几何；它完全遵守量子力学的无超光速通信定理（no-signaling principle，不可穿越虫洞不传递因果信号），而构造可穿越虫洞则必须额外引入直接耦合左右两个边界的相互作用项。参见 J. Maldacena & L. Susskind, *Fortschr. Phys.* **61**, 781–811 (2013), DOI: `10.1002/prop.201300020`。
+适用范围与开放边界说明：这一猜想性对应建立在半经典引力有效适用域内，**并不意味着**实验室中任意一对处于贝尔纠缠态的微观量子比特之间都存在光滑的经典广义相对论虫洞几何；它完全遵守量子力学的无超光速通信定理（no-signaling principle，不可穿越虫洞不传递因果信号），而构造可穿越虫洞则必须额外引入直接耦合左右两个边界的相互作用项。参见 J. Maldacena & L. Susskind, *Fortschr. Phys.* **61**, 781–811 (2013), DOI: [10.1002/prop.201300020](https://doi.org/10.1002/prop.201300020)。
 :::
 
 ## 20.4 计算模型、资源边界与 P≠NP {#sec-computational-complexity-boundary}
@@ -332,7 +332,7 @@ $$
 1. **预处理与查表成本不可逃逸**：任何输入重编码、基变换或构建查找表的预处理过程，其本身消耗的时间与空间资源都必须计入总计算成本。对于编码长度为 $n = |x|$、含 $k$ 个布尔变量的逻辑公式（如 3-SAT），将其全部 $2^k$ 个变量赋值的真值表预先算好存入内存需要指数级 $\Theta(2^k \operatorname{poly}(n))$ 的预处理时间与 $\Theta(2^k)$ 的存储空间（若试图预存所有编码长度为 $n$ 的候选输入实例的答案，更需要 $\Theta(2^n)$ 规模的查找表）；即使放宽到允许随输入长度 $n$ 先验给定提示串 $a_n$ 的**非统一复杂性类 $\mathrm{P/poly}$**，其定义也严格要求**提示串长度受多项式约束 $|a_n| \le \operatorname{poly}(n)$**（等价于多项式规模布尔电路族），指数级大小的预存查找表连 $\mathrm{P/poly}$ 的多项式提示串预算都无法装下，更绝不能由此宣称统一图灵机模型下的 $\mathrm{P} = \mathrm{NP}$。
 2. **酉矩阵精确合成的指数下界不等于 $\mathrm{P} \neq \mathrm{NP}$**：在 [@prop-reflection-cnot-lower-bound] 中，无辅助比特 $\{\mathrm{CNOT}, R_z\}$ 电路精确合成显式反射对称硬相位算子 $\operatorname{diag}(e^{i\theta_{\mathrm{hard}}(x)})$ 需要至少 $2^{2n-1} + 2n - 2$ 个 $\mathrm{CNOT}$ 门，这是因为该显式证人在全部 $2^{2n-1} - 1$ 个非零偶奇偶 Walsh–Hadamard 特征标上均取非平凡值 $-1$，迫使电路逐一生成全部非零偶奇偶标签并完成 $2n - 1$ 次导线奇复原（而在未在本书形式化的量子电路文献中，如 V. V. Shende, I. L. Markov & S. S. Bullock, *Phys. Rev. A* **69**, 062321 (2004)，合成一般 $m$ 比特酉群 $\mathrm{U}(2^m)$ 中的矩阵亦因 $4^m$ 维连续实参数流形维数计数而需要 $\Omega(4^m)$ 个双比特门）。然而，$\mathrm{NP}$ 判定问题是由编码长度为 $n = |x|$ 的紧凑布尔公式或图灵机实例描述的判定问题；无论是针对全空间对角算子 $\theta_{\mathrm{hard}}$ 的指数级奇偶输出计数下界，还是一般酉算子族的连续参数计数下界，都不能阻止某个特定紧凑判定问题拥有 $\operatorname{poly}(n)$ 时间算法，因此不能用来证明 $\mathrm{P} \neq \mathrm{NP}$。
 
-参见 S. A. Cook, "The complexity of theorem-proving procedures," *Proc. 3rd Annual ACM Symposium on Theory of Computing (STOC)*, pp. 151–158 (1971), DOI: `10.1145/800157.805047`；以及 S. Aaronson, *The Complexity of Quantum States and Transformations: From Quantum Money to Black Holes* (2016), `arXiv:1607.05256`。
+参见 S. A. Cook, "The complexity of theorem-proving procedures," *Proc. 3rd Annual ACM Symposium on Theory of Computing (STOC)*, pp. 151–158 (1971), DOI: [10.1145/800157.805047](https://doi.org/10.1145/800157.805047)；以及 S. Aaronson, *The Complexity of Quantum States and Transformations: From Quantum Money to Black Holes* (2016), [arXiv:1607.05256](https://arxiv.org/abs/1607.05256)。
 :::
 
 ::: {.figure src="ch20-lookup-budget"}
@@ -346,7 +346,7 @@ $$
 \mathrm{P} \neq \mathrm{NP}.
 $$
 
-适用范围与开放边界说明：该命题的证明与反证目前在数学上均处于开放状态（千禧年七大数学难题之一）；无论是通过选取特殊的量子测量基、假定免计成本的预存查找表，还是援引特定门集上的量子门合成下界或引力时空几何类比，都不能推出该猜想的解答。参见 S. A. Cook, *Proc. 3rd Annual ACM STOC*, pp. 151–158 (1971), DOI: `10.1145/800157.805047`。
+适用范围与开放边界说明：该命题的证明与反证目前在数学上均处于开放状态（千禧年七大数学难题之一）；无论是通过选取特殊的量子测量基、假定免计成本的预存查找表，还是援引特定门集上的量子门合成下界或引力时空几何类比，都不能推出该猜想的解答。参见 S. A. Cook, *Proc. 3rd Annual ACM STOC*, pp. 151–158 (1971), DOI: [10.1145/800157.805047](https://doi.org/10.1145/800157.805047)。
 :::
 
 ### 20.4.1 从时空门计数通往无时间因果与场线分野 {#sec-timeless-crystal-page-numbers}

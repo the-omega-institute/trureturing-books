@@ -379,7 +379,7 @@ Let us verify the compiled multivector coefficients and rotated basis vectors on
 ::: {.remark #rem-zyz-euler-compilation-literature title="The SU(2)→SO(3) Double Cover and Universal ZYZ Euler Decomposition (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Two classical theorems from quantum computation and Lie group theory frame the compiler construction above:
 
-1. **Universal ZYZ Euler decomposition for single-qubit unitaries** (M. A. Nielsen & I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary Ed., Cambridge University Press, 2010, Theorem 4.1, §4.2; A. Barenco et al., *Phys. Rev. A* **52**, 3457, 1995, DOI `10.1103/PhysRevA.52.3457`): For every $U \in \mathrm{U}(2)$, there exist real angles $(\delta, \alpha, \beta, \gamma) \in \mathbb{R}^4$ such that
+1. **Universal ZYZ Euler decomposition for single-qubit unitaries** (M. A. Nielsen & I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary Ed., Cambridge University Press, 2010, Theorem 4.1, §4.2; A. Barenco et al., *Phys. Rev. A* **52**, 3457, 1995, DOI [10.1103/PhysRevA.52.3457](https://doi.org/10.1103/PhysRevA.52.3457)): For every $U \in \mathrm{U}(2)$, there exist real angles $(\delta, \alpha, \beta, \gamma) \in \mathbb{R}^4$ such that
    $$
    U = e^{i\delta}\,R_z(\alpha)\,R_y(\beta)\,R_z(\gamma).
    $$

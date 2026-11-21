@@ -551,7 +551,7 @@ Two guardrails are mandatory when comparing discrete tensor-network bounds with 
 1. **Never write $S(A) = a \wedge b$** or assert that arbitrary tensor networks universally saturate their minimum cut;
 2. **Respect the R3 discrete-facet boundary**: in this book, the geometric bridge from [@thm-bridge-quantum-maxflow-mincut] to holographic ideas proceeds strictly through the discrete log-capacity polyhedral facets, bottlenecks, and seam stitching of [@ex-log-capacity-facets], without claiming that a continuum limit or holographic duality has been proved.
 
-See S. Ryu & T. Takayanagi, *Phys. Rev. Lett.* **96**, 181602 (2006), DOI: `10.1103/PhysRevLett.96.181602`; B. Swingle, *Phys. Rev. D* **86**, 065007 (2012), DOI: `10.1103/PhysRevD.86.065007`; and J. D. Bekenstein, *Phys. Rev. D* **7**, 2333 (1973), DOI: `10.1103/PhysRevD.7.2333`.
+See S. Ryu & T. Takayanagi, *Phys. Rev. Lett.* **96**, 181602 (2006), DOI: [10.1103/PhysRevLett.96.181602](https://doi.org/10.1103/PhysRevLett.96.181602); B. Swingle, *Phys. Rev. D* **86**, 065007 (2012), DOI: [10.1103/PhysRevD.86.065007](https://doi.org/10.1103/PhysRevD.86.065007); and J. D. Bekenstein, *Phys. Rev. D* **7**, 2333 (1973), DOI: [10.1103/PhysRevD.7.2333](https://doi.org/10.1103/PhysRevD.7.2333).
 :::
 
 ::: {.viz src="layered-network-cut" preset="grow" height="500"}

@@ -70,7 +70,7 @@ $$
 
 实对称矩阵的谱定理保证上面所需的完整实根列表存在，因此该条件不是空的；结论中的严格正下界进一步推出所有根都是单根。估计对所有 $n\ge1$ 有效，不删除区间外的能量，也不把只对固定根编号成立的渐近式当作统一界。以通常的渐近记号表达，它给出共同常数 $c=2\sqrt2/(1+\sqrt2)^2$ 与阈值 $N=1$。
 
-**有限快门如何压低交叉项。** 每条谱线的相位不断转动；随机选择观测时刻，就是对有限快门内的概率求平均。不同谱线留下的交叉项可以由真实谱隙控制，但还须证明两个端点在每条谱线上的权重相同。以下是 Childs 等人 [arXiv:quant-ph/0209131v2，Section III.D，Lemma 1，式 (42)–(49)，PDF 第 13–14 页](https://arxiv.org/abs/quant-ph/0209131v2) 的加权路径表述，出处为 [doi:10.1145/780542.780552](https://doi.org/10.1145/780542.780552)。这是可复用的文献结论，不主张数学新颖性。当前钉版中的 [@thm-central-defect-spectral-gap] 已有 Lean 验证；下面的完整端点平均结论采用书面证明，当前钉版检索未找到匹配的冻结声明，形式化需求登记在既有[请求 #10](https://github.com/the-omega-institute/trureturing-requests/issues/10)。
+**有限快门如何压低交叉项。** 每条谱线的相位不断转动；随机选择观测时刻，就是对有限快门内的概率求平均。不同谱线留下的交叉项可以由真实谱隙控制，但还须证明两个端点在每条谱线上的权重相同。以下是 Childs 等人 [arXiv:quant-ph/0209131v2，Section III.D，Lemma 1，式 (42)–(49)，PDF 第 13–14 页](https://arxiv.org/abs/quant-ph/0209131v2) 的加权路径表述，出处为 [10.1145/780542.780552](https://doi.org/10.1145/780542.780552)。这是可复用的文献结论，不主张数学新颖性。当前钉版中的 [@thm-central-defect-spectral-gap] 已有 Lean 验证；下面的完整端点平均结论采用书面证明，当前钉版检索未找到匹配的冻结声明，形式化需求登记在既有[请求 #10](https://github.com/the-omega-institute/trureturing-requests/issues/10)。
 
 ::: {.theorem #thm-central-defect-endpoint-average title="中央缺陷路径的有限时间端点平均" status="written-proof" proof="pf-central-defect-endpoint-average" doi="10.1145/780542.780552" source="Lemma 1 (Section III.D, Eqs. 42-49)" request="https://github.com/the-omega-institute/trureturing-requests/issues/10"}
 设 $n\in\mathbb N$、$n\ge1$，$J_n$ 是以 $0,\ldots,2n-1$ 编号的实对称矩阵：对角元为零，最近邻权重为 $1$，唯独中央边 $(n-1,n)$ 及其对称位置的权重为 $\sqrt2$，其余矩阵元为零。令实数列表 $\lambda_0,\ldots,\lambda_{2n-1}$ 作为多重集恰为 $J_n$ 的全部特征值，保留代数重数，并定义实际最小谱隙

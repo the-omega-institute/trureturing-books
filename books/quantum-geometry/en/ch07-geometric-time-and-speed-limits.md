@@ -642,7 +642,7 @@ $$
 \qquad\text{for every }t\in\mathbb R.
 $$
 
-The projective angle here is precisely the arccosine of the overlap modulus, with no extra factor of $2$. See S. Deffner and S. Campbell, *Quantum speed limits: from Heisenberg's uncertainty principle to optimal quantum control*, J. Phys. A: Math. Theor. **50**, 453001 (2017), [arXiv:1705.08023v2](https://arxiv.org/abs/1705.08023v2), §2.5, Eqs. (23), (28)–(33), [DOI:10.1088/1751-8121/aa86c6](https://doi.org/10.1088/1751-8121/aa86c6). We spell out the autonomous pure-state case below, including its endpoints.
+The projective angle here is precisely the arccosine of the overlap modulus, with no extra factor of $2$. See S. Deffner and S. Campbell, *Quantum speed limits: from Heisenberg's uncertainty principle to optimal quantum control*, J. Phys. A: Math. Theor. **50**, 453001 (2017), [arXiv:1705.08023v2](https://arxiv.org/abs/1705.08023v2), §2.5, Eqs. (23), (28)–(33), [10.1088/1751-8121/aa86c6](https://doi.org/10.1088/1751-8121/aa86c6). We spell out the autonomous pure-state case below, including its endpoints.
 
 **Remove the phase that leaves the projective state unchanged.** Let $I$ be the identity operator and set
 

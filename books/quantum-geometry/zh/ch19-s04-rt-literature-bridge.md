@@ -551,7 +551,7 @@ $$
 1. **绝不将纠缠熵写成双矢量外积 $S(A) = a \wedge b$**，也绝不宣称任意张量网络在任意参数下都普遍达到最小割饱和；
 2. **严守 R3 离散分片边界**：本章从 [@thm-bridge-quantum-maxflow-mincut] 到全息几何的联系，仅限于 [@ex-log-capacity-facets] 所示的“离散对数容量多面体分片、最小割瓶颈与分片接缝粘接”的数学结构示意，并不证明张量网络的连续统极限或连续时空的全息对偶。
 
-参见 S. Ryu & T. Takayanagi, *Phys. Rev. Lett.* **96**, 181602 (2006), DOI: `10.1103/PhysRevLett.96.181602`；B. Swingle, *Phys. Rev. D* **86**, 065007 (2012), DOI: `10.1103/PhysRevD.86.065007`；以及 J. D. Bekenstein, *Phys. Rev. D* **7**, 2333 (1973), DOI: `10.1103/PhysRevD.7.2333`。
+参见 S. Ryu & T. Takayanagi, *Phys. Rev. Lett.* **96**, 181602 (2006), DOI: [10.1103/PhysRevLett.96.181602](https://doi.org/10.1103/PhysRevLett.96.181602)；B. Swingle, *Phys. Rev. D* **86**, 065007 (2012), DOI: [10.1103/PhysRevD.86.065007](https://doi.org/10.1103/PhysRevD.86.065007)；以及 J. D. Bekenstein, *Phys. Rev. D* **7**, 2333 (1973), DOI: [10.1103/PhysRevD.7.2333](https://doi.org/10.1103/PhysRevD.7.2333)。
 :::
 
 ::: {.viz src="layered-network-cut" preset="grow" height="500"}
