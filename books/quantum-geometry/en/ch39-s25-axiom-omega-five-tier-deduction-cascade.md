@@ -174,6 +174,25 @@ Within the standard qubit model, we can construct a channel that reproduces the 
 
 **Two nodes give a Tier 2 state.** Take any two-by-two principal block of $H$ and denote its off-diagonal entry by $h$. Positive definiteness gives $|h|<1$. Dividing the block by its trace $2$ gives a full-rank qubit state $B$ with Bloch vector $(h,0,0)$. Its hyperbolic distance from the center $I_2/2$ satisfies $\cosh d(B,I_2/2)=1/\sqrt{1-h^2}$. Regard the two normalized spectral vectors as unit vectors in the underlying real inner-product space, with the real part of the complex inner product. Their inner product is $h$, so the squared norm of their chord midpoint is $(1+h)/2$. Thus $h$ gives the Tier 2 distance in state space and obeys the same half-angle identity used on the Tier 1 Behrend shell. Interpreting that distance as a physical velocity or clock reading requires a corresponding measurement procedure. [@rem-ch39-axiom-omega-tier2-velocity-and-de-sitter]
 
+The same zero ordinate $\gamma$ can supply the input to two phase encodings. Write $z=2^{i\gamma}$ and $w=3^{i\gamma}$. Recording the constant and the two individual phases gives the unit vector $(1,z,w)/\sqrt3$. Recording their product $zw=6^{i\gamma}$ as well gives $(1,z,w,zw)/2$. Sampling ordinates from a common probability distribution produces a mixed state for each encoding. The mean squared overlap of two independent draws equals the purity $\operatorname{Tr}(\rho^2)$ of the mixture. The following bound compares the purity losses of the two encodings.
+
+::: {.theorem #thm-ch39-phase-ensemble-purity title="Sharp coefficient for the product phase encoding" lean="D5/S3/Quantum/PureState/PhaseProductFidelity.mixed_coefficient_iff"}
+Fix an integer $n\ge1$ and a real number $C$. For a vector $u=(u_1,\ldots,u_n)$ of complex coordinates, define
+
+$$
+A(u)=\frac{|1+\sum_k u_k|^2}{(n+1)^2},\qquad
+B(u)=\prod_k\frac{1+\Re u_k}{2}.
+$$
+
+Take any finite list of complex rows $v_i$ with real weights $p_i$. Assume every product $p_i p_j$ is nonnegative and every coordinate of a row of nonzero weight lies in the closed unit disk. Put $u_{ij,k}=\overline{v_{ik}}v_{jk}$ and $L(F)=\sum_{i,j}p_i p_j(1-F(u_{ij}))$. The inequality $L(B)\le C L(A)$ holds for every such finite ensemble if and only if $C\ge(n+1)^2/4$.
+:::
+
+::: {.proof}
+Omit rows of weight zero. For every remaining pair of inputs, each factor in the product lies in $[0,1]$, so one minus the product is at most the sum of the individual losses. Expanding $A$ and using $|\sum_k u_k|\le n$ gives the bound for each pair of inputs. Summing with the nonnegative pair weights preserves it. For sharpness take two equally weighted rows, one consisting of ones and the other consisting of a single unit phase repeated in every coordinate. As that phase approaches one, the loss ratio tends to $(n+1)^2/4$. The full proof is checked by the Lean kernel.
+:::
+
+The two-phase encodings above have $n=2$, giving the sharp coefficient $9/4$. For probability weights and unit phases, $L(A)$ and $L(B)$ are each one minus the purity of the corresponding mixture. Sharpness holds over all finite unit-phase ensembles. Any particular choice of zeros and weights inherits the inequality.
+
 **What can the same spectrum tell us about the Tier 3 couplings?** Use the [one-loop inputs of §33.9](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-11-2), with $A_i=\alpha_i^{-1}(M_Z)$ and $b=(41/10,-19/6,-7)$. For sector thresholds $\Delta_i$, matching at a common scale $\mu$ requires $A_i=a+t b_i+\Delta_i$, where $a=\alpha_U^{-1}$ and $t=\log(\mu/M_Z)/(2\pi)$. Eliminating $a,t$ gives
 
 $$
