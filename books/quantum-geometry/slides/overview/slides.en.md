@@ -485,13 +485,13 @@ If $\operatorname{Re}(s) > 1$, then $\prod_{p} \bigl(1 - p^{-s}\bigr)^{-1} = \op
 <Source>Chapter 21 (DiagonalTopologicalEscape) · Chapter 22 (ZetaIdentities)</Source>
 
 ---
-# 28 Part VI · literature and open problems
+# 28 Part VI · literature, external proof and open problems
 section: "Part VI · warrant"
 ---
 
 <div class="body">
-  <p class="kicker">Literature · open conjectures</p>
-  <h2 class="t">Gödel is literature; <em class="warn">the Riemann Hypothesis is open</em></h2>
+  <p class="kicker">Literature · external formal proof · open problems</p>
+  <h2 class="t">Gödel in the literature, <em>RH and Dirichlet GRH proved</em></h2>
   <div class="g2 mt-s">
     <div class="card violet">
       <h4>Literature · Chapter 21</h4>
@@ -499,14 +499,14 @@ section: "Part VI · warrant"
       <p>The book verifies an abstract diagonal escape; the hypotheses of the Cantor, Lawvere, Gödel and Tarski theorems are compared only as literature, not formalized here.</p>
     </div>
     <div>
-      <TheoremCard class="compact" label="Conjecture 22.36" title="The Riemann Hypothesis" status="open" cite="conj-riemann-hypothesis">
-        <p>Every zero of the zeta function in the critical strip <Tex t="0 \lt \operatorname{Re}(s) \lt 1" /> lies on the critical line <Tex t="\operatorname{Re}(s) = 1/2" />.</p>
+      <TheoremCard class="compact" label="Remark 22.36" title="The Riemann Hypothesis and Dirichlet GRH" status="argued" cite="conj-riemann-hypothesis">
+        <p>An external Lean 4 proof established both in 2026. Its declarations have yet to be frozen in the book's pinned trureturing commit.</p>
       </TheoremCard>
-      <p class="lead mt-s">Chapter 24 adds one more: <span class="hl-warn">Schanuel's conjecture</span> would make <Tex t="\theta^*" /> and <Tex t="\pi" /> algebraically independent.</p>
+      <p class="lead mt-s"><span class="hl-warn">Schanuel's conjecture</span> (Ch. 24) and the <span class="hl-warn">Extended Riemann Hypothesis</span> (ERH) for Dedekind zeta functions remain open.</p>
     </div>
   </div>
 </div>
-<Source>Chapter 21 literature remark · Chapters 22 and 24, conjectures</Source>
+<Source>Ch. 21 Gödel–Tarski literature · Ch. 22 <a href="https://alpo.ge/remark.pdf">Alpöge (2026)</a> and open ERH · Ch. 24 Schanuel's conjecture</Source>
 
 ---
 # 29 Part VI · Crossing the Horizon · picture (continued)

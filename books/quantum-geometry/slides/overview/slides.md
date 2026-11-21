@@ -485,13 +485,13 @@ section: "第六部 · 定理"
 <Source>第二十一章（DiagonalTopologicalEscape）· 第二十二章（ZetaIdentities）</Source>
 
 ---
-# 28 第六部 · 文献结果与开放问题
+# 28 第六部 · 文献、外部证明与开放问题
 section: "第六部 · 依据"
 ---
 
 <div class="body">
-  <p class="kicker">Literature · open conjectures</p>
-  <h2 class="t">哥德尔是文献，<em class="warn">黎曼猜想仍然开放</em></h2>
+  <p class="kicker">文献结果 · 外部形式化证明 · 开放问题</p>
+  <h2 class="t">哥德尔定理见文献，<em>RH 与狄利克雷 GRH 已证</em></h2>
   <div class="g2 mt-s">
     <div class="card violet">
       <h4>文献结果 · 第二十一章</h4>
@@ -499,14 +499,14 @@ section: "第六部 · 依据"
       <p>本书验证的是抽象的对角线逃逸；康托尔、Lawvere、哥德尔与塔斯基定理各自的前提边界只作文献对照，未在本书形式化。</p>
     </div>
     <div>
-      <TheoremCard class="compact" label="猜想22.36" title="黎曼猜想" status="open" cite="conj-riemann-hypothesis">
-        <p>ζ 函数位于临界带 <Tex t="0 \lt \operatorname{Re}(s) \lt 1" /> 内的每个零点都在临界线 <Tex t="\operatorname{Re}(s) = 1/2" /> 上。</p>
+      <TheoremCard class="compact" label="注22.36" title="黎曼猜想与狄利克雷广义黎曼猜想" status="argued" cite="conj-riemann-hypothesis">
+        <p>两者均于 2026 年由外部 Lean 4 形式化证明确立。相关声明尚未冻结于本书所钉的 trureturing 提交。</p>
       </TheoremCard>
-      <p class="lead mt-s">第二十四章另有一条：<span class="hl-warn">沙努埃尔猜想</span>推出 <Tex t="\theta^*" /> 与 <Tex t="\pi" /> 代数无关。</p>
+      <p class="lead mt-s"><span class="hl-warn">沙努埃尔猜想</span>（第 24 章）与<span class="hl-warn">扩展黎曼猜想</span>（ERH，涉及戴德金 ζ 函数）仍未解决。</p>
     </div>
   </div>
 </div>
-<Source>第二十一章 文献注记 · 第二十二章、第二十四章 猜想</Source>
+<Source>第 21 章哥德尔–塔斯基文献 · 第 22 章 <a href="https://alpo.ge/remark.pdf">Alpöge（2026）</a> 与开放问题 ERH · 第 24 章沙努埃尔猜想</Source>
 
 ---
 # 29 第六部 · 越界 · 图景（续）

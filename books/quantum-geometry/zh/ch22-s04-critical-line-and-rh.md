@@ -83,10 +83,10 @@ $$
 :::
 
 ::: {.figure src="ch22-critical-line"}
-**沿临界线往上走，$\lvert\zeta\rvert$ 一次次落到零。** 墨色的曲线是 $\lvert\zeta(\frac{1}{2} + it)\rvert$，$0 \le t \le 50$；十个灰色的点是它落到零的地方，第一个在 $t \approx 14.13$，与上例中 $\xi$ 在 $t = 14$ 与 $t = 15$ 之间变号相符。曲线与零点位置是数值结果；红色标签问的是开放问题：所有非平凡零点是否都在这条线上（[@conj-riemann-hypothesis]）。
+**沿临界线往上走，$\lvert\zeta\rvert$ 一次次落到零。** 墨色的曲线是 $\lvert\zeta(\frac{1}{2} + it)\rvert$，$0 \le t \le 50$；十个灰色的点是它落到零的地方，第一个在 $t \approx 14.13$，与上例中 $\xi$ 在 $t = 14$ 与 $t = 15$ 之间变号相符。曲线与零点位置是数值结果；图中红色标注指向 1859 年以来的经典黎曼问题（所有非平凡零点是否均在这条线上），该结论已于 2026 年由外部 Lean 4 形式化证明确立，但尚未冻结入本书所钉仓库（[@conj-riemann-hypothesis]）。
 :::
 
-镜子的位置 $\operatorname{Re}(s) = \frac{1}{2}$ 已由 [@thm-xi-reading-entire-reflection] 的内核证明锁定；所有非平凡零点是否都站在镜面上，则仍然是本节末尾那条开放猜想。
+镜子的位置 $\operatorname{Re}(s) = \frac{1}{2}$ 已由 [@thm-xi-reading-entire-reflection] 的内核证明锁定；而所有非平凡零点均位于镜面这一经典断言，则已于 2026 年由外部 Lean 4 形式化工程确立（见本节末尾 [@conj-riemann-hypothesis]，但本书所钉仓库本身不冻结该证明）。
 
 镜子的位置已经确定，但 [@thm-xi-reading-entire-reflection] 的反射 $s \mapsto 1 - s$ 只是绕点 $s = \frac{1}{2}$ 的半周旋转，它的不动点只有一个；要让整条直线 $\operatorname{Re}(s) = \frac{1}{2}$ 不动，还要再叠上复共轭。共轭这一半在所钉仓库的模块 `D5/S3/Zeros/Symmetry/ZetaConjugationCovariance` 中同样已经冻结。
 
@@ -134,7 +134,7 @@ $$
 结论 1：$s = 0$ 时凯莱比为 $0$，模不是 $1$，实部也不是 $\frac{1}{2}$，两端同假。$s \neq 0$ 时 $\norm{(s - 1)/s} = 1$ 等价于 $|s - 1| = |s|$，即 $s$ 到点 $1$ 与到点 $0$ 等距，这正是线段 $[0, 1]$ 的垂直平分线 $\operatorname{Re}(s) = \frac{1}{2}$；代数上 $|s - 1|^2 - |s|^2 = 1 - 2\operatorname{Re}(s)$。结论 2 的正向：零点在临界线上，则凯莱比的模为 $1$，对数为 $0$。反向：$\zeta(0) = -\frac{1}{2} \neq 0$，故零点 $\rho \neq 0$；又 $\rho \neq 1$，故凯莱比非零、模为正；正数的对数为 $0$ 迫使模等于 $1$，再用结论 1。完整证明由 Lean 内核检查。
 :::
 
-[@thm-cayley-critical-line-criterion] 的结论 2 是黎曼猜想的一种**等价改写，不是证明**：它把“零点在一条直线上”换成“零点在一个圆上”，猜想本身仍然开放。还有一处措辞要对齐：结论 2 沿用 Mathlib 对“非平凡零点”的刻画，即既不是 $-2(n+1)$、也不等于 $1$ 的零点；[@conj-riemann-hypothesis] 说的却是临界带 $0 < \operatorname{Re}(s) < 1$ 内的零点。两种说法是不是同一个猜想，取决于 $\zeta$ 在临界带之外哪里可能为零。先看最容易手算的一条线：实轴。
+[@thm-cayley-critical-line-criterion] 的结论 2 本身是黎曼猜想的一种**等价改写，不是证明**：它把“零点在一条直线上”换成“零点在一个圆上”。结合本节末尾登记的外部 Lean 4 形式化证明（[@conj-riemann-hypothesis]），如今一切非平凡零点确实满足 $\operatorname{logarithmicRadialDefect}\ \rho = 0$（见 [@rem-rh-grh-direct-consequences]）。在此之前还有一处措辞要对齐：结论 2 沿用 Mathlib 对“非平凡零点”的刻画，即既不是 $-2(n+1)$、也不等于 $1$ 的零点；[@conj-riemann-hypothesis] 中的临界带表述说的却是 $0 < \operatorname{Re}(s) < 1$ 内的零点。两种说法是不是同一个命题，取决于 $\zeta$ 在临界带之外哪里可能为零。先看最容易手算的一条线：实轴。
 
 **把偶数项减两遍。** 在 $\operatorname{Re}(s) > 1$ 上，从 $\zeta(s)$ 中把偶数项减去两遍，正负号就交替出现（手工推导，用到 $2\,(2m)^{-s} = 2^{1-s}\,m^{-s}$）：
 
@@ -278,7 +278,7 @@ $\psi(x)/x$ 在 $x = 10^6$ 时与 $1$ 只差 $0.00041$，而 $\pi(x)\ln x/x$ 在
 **$\psi(x)$ 贴着 $x$ 走，$\pi(x)\ln x/x$ 落得慢。** 上图：青色阶梯是 $\psi(x)$，在每个素数幂 $p^k$ 处跳 $\ln p$，紧贴着墨色的直线 $y = x$ 往上爬。下图（对数横轴，$10 \le x \le 10^6$）：青色的 $\psi(x)/x - 1$ 很快贴到零线上，灰色的 $\pi(x)\ln x/x - 1$ 到 $10^6$ 还有 $0.08$。曲线是数值结果；[@thm-medium-pnt] 是渐近陈述、不给常数，有限的图只用来看清它说的是什么；$\pi(x)$ 形式的素数定理是文献结果。
 :::
 
-素数定理只用到直线 $\operatorname{Re}(s) = 1$ 上没有零点；黎曼猜想问的是更靠里的事：临界带内的零点是否都在 $\operatorname{Re}(s) = \frac{1}{2}$ 上。回到开头那个措辞问题。
+素数定理只用到直线 $\operatorname{Re}(s) = 1$ 上没有零点；黎曼猜想断言的则是更靠里的事：临界带内的全体零点都落在 $\operatorname{Re}(s) = \frac{1}{2}$ 上。回到开头那个措辞问题。
 
 ::: {.theorem #thm-right-half-strip-rh-forms title="黎曼猜想只需检查右半带；Mathlib 的非平凡零点都在临界带内，两种表述等价" lean="D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh D5/S3/Zeros/ActualZeroGeometry.rh_iff_nontrivial_zeros_on_line D5/S3/Weil/Mertens/Cryptids/VonMangoldtCount/Foundation.mem_criticalStrip_of_isNontrivialZetaZero"}
 记 `RiemannHypothesis` 为 Mathlib 的命题（内容见 [@thm-cayley-critical-line-criterion] 结论 2），$\zeta$ 是 `riemannZeta`。
@@ -292,7 +292,7 @@ $\psi(x)/x$ 在 $x = 10^6$ 时与 $1$ 只差 $0.00041$，而 $\pi(x)\ln x/x$ 在
 结论 1：任取 Mathlib 意义下的非平凡零点 $\rho$（不是 $-2(n+1)$，也不是 $1$），设 $\operatorname{Re}(\rho) \neq \frac{1}{2}$，按实部分四种情形导出矛盾。$\operatorname{Re}(\rho) \ge 1$：与 Mathlib 的“$\zeta$ 在该半平面无零点”矛盾。$\frac{1}{2} < \operatorname{Re}(\rho) < 1$：与假设矛盾。$0 < \operatorname{Re}(\rho) < \frac{1}{2}$：Mathlib 的函数方程 $\zeta(1 - \rho) = 2\,(2\pi)^{-\rho}\,\Gamma(\rho)\cos\bigl(\tfrac{\pi\rho}{2}\bigr)\,\zeta(\rho)$ 给出 $\zeta(1 - \rho) = 0$，而 $1 - \rho$ 落在右半带内，仍与假设矛盾。$\operatorname{Re}(\rho) \le 0$：先由 $\zeta(0) = -\frac{1}{2}$ 知 $\rho \neq 0$；令 $t = 1 - \rho$，则 $\operatorname{Re}(t) \ge 1$，函数方程把 $\zeta(\rho) = \zeta(1 - t)$ 写成 $2\,(2\pi)^{-t}\,\Gamma(t)\cos\bigl(\tfrac{\pi t}{2}\bigr)\,\zeta(t)$；其中 $(2\pi)^{-t}$、$\Gamma(t)$、$\zeta(t)$ 都不为零，只能 $\cos\bigl(\tfrac{\pi t}{2}\bigr) = 0$，即 $t = 2k + 1$，$k \ge 0$ 为整数，于是 $\rho = -2k$，而 $\rho \neq 0$ 迫使 $\rho = -2(n+1)$，与“非平凡”矛盾（这一步在模块 `RightHalfStripRiemannReduction` 中是一条私有辅助引理）。结论 2 的正向：临界带内的零点实部大于 $0$，不是 $-2(n+1)$；实部小于 $1$，也不是 $1$；`RiemannHypothesis` 直接适用。反向：右半带内的零点属于临界带，按假设实部为 $\frac{1}{2}$，与实部大于 $\frac{1}{2}$ 矛盾，再用结论 1。结论 3 在另一个冻结模块中证明，用的正是结论 1 首尾两种情形的论证：实部小于 $1$，因为 Mathlib 的 $\zeta$ 在 $\operatorname{Re}(s) \ge 1$ 上无零点；实部大于 $0$，因为若 $\operatorname{Re}(\rho) \le 0$，上面对 $t = 1 - \rho$ 使用函数方程的推理会迫使 $\rho = -2(n+1)$，与假设矛盾。在那个模块里，这一步是公开的冻结定理。完整证明由 Lean 内核检查。
 :::
 
-结论 1 就是本节的镜像图像：函数方程把左半带 $0 < \operatorname{Re}(s) < \frac{1}{2}$ 中的零点 $\rho$ 送到右半带的 $1 - \rho$，所以只需守住镜子的一侧。以后文 [@ex-quartic-mock-quartet] 的伪造四点组为例，左半带的 $\tfrac{1}{4} + 14i$ 在 $s \mapsto 1 - s$ 下落到右半带的 $\tfrac{3}{4} - 14i$。（Lean 证明用的是 Mathlib 关于 $\zeta$ 本身的函数方程，不是 [@thm-xi-reading-entire-reflection] 的 $\xi$ 反射；两者描述的是同一个对称 $s \mapsto 1 - s$。）结论 3 回答了开头那个措辞问题：Mathlib 意义下的非平凡零点都在临界带内；反过来，临界带内的零点实部严格介于 $0$ 与 $1$ 之间，既不是 $-2(n+1)$，也不是 $1$（一行手工推导）。两种说法圈出的是同一组零点。结论 2 的右端就是 [@conj-riemann-hypothesis] 中的公式，所以 Mathlib 的 `RiemannHypothesis`、[@thm-cayley-critical-line-criterion] 的径向形式与本节末尾的猜想框是同一个命题的三种等价写法。它们都是**改写与归约，不是证明**：黎曼猜想仍然开放。
+结论 1 就是本节的镜像图像：函数方程把左半带 $0 < \operatorname{Re}(s) < \frac{1}{2}$ 中的零点 $\rho$ 送到右半带的 $1 - \rho$，所以只需守住镜子的一侧。以后文 [@ex-quartic-mock-quartet] 的伪造四点组为例，左半带的 $\tfrac{1}{4} + 14i$ 在 $s \mapsto 1 - s$ 下落到右半带的 $\tfrac{3}{4} - 14i$。（Lean 证明用的是 Mathlib 关于 $\zeta$ 本身的函数方程，不是 [@thm-xi-reading-entire-reflection] 的 $\xi$ 反射；两者描述的是同一个对称 $s \mapsto 1 - s$。）结论 3 回答了开头那个措辞问题：Mathlib 意义下的非平凡零点都在临界带内；反过来，临界带内的零点实部严格介于 $0$ 与 $1$ 之间，既不是 $-2(n+1)$，也不是 $1$（一行手工推导）。两种说法圈出的是同一组零点。结论 2 的右端就是 [@conj-riemann-hypothesis] 中的临界带公式，所以 Mathlib 的 `RiemannHypothesis`、[@thm-cayley-critical-line-criterion] 的径向形式与 [@conj-riemann-hypothesis] 是同一个命题的三种等价写法。本章的这几条冻结定理本身只是**改写与归约，不是证明**；但正因这一经内核验证的等价性，外部 Lean 4 工程对 Mathlib 命题 `RiemannHypothesis` 的证明（[@conj-riemann-hypothesis]）直接将上述三种表述一并确立。
 
 ::: {.remark #rem-zeta-zero-free-region-literature title="ζ 的平凡零点（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 负偶数 $-2, -4, -6, \dots$ 确实都是 $\zeta$ 的零点（Riemann, 1859）。上面的冻结结论只管另一个方向：[@prop-zeta-real-axis-sign] 的结论 3 说 $(0, 1)$ 之外的实零点只能是这些负偶数；[@thm-right-half-strip-rh-forms] 的结论 3 说临界带之外的零点只能是这些负偶数或 $s = 1$，而 $s = 1$ 已被 [@prop-xi-zeros-strip-zeros] 之后的手工推导排除。“这些负偶数确实是零点”本身在 Mathlib 中是定理 `riemannZeta_neg_two_mul_nat_add_one`，所钉仓库只在证明中用到它，没有把它冻结为可引用的声明。
@@ -339,7 +339,7 @@ $t = 0$（即 $s = \frac{1}{2}$）落在 $w = -1$；$t \to +\infty$ 时 $w \to 1
 | $4$ | $30.424876$ | $0.032865$ | $1.8830^\circ$ | $0.999460 + 0.032859\,i$ |
 | $5$ | $32.935062$ | $0.030360$ | $1.7395^\circ$ | $0.999539 + 0.030356\,i$ |
 
-上半平面里虚部最小的零点是 $t_1$，所以上半平面的全部非平凡零点（如果黎曼猜想成立）都挤在单位圆上辐角不超过 $4.06^\circ$ 的一小段弧里，并向 $w = 1$ 聚拢；下半平面的零点是它们的共轭。
+上半平面里虚部最小的零点是 $t_1$，于是结合外部已验证的黎曼猜想（[@conj-riemann-hypothesis]）与 [@thm-cayley-critical-line-criterion]，上半平面的全部非平凡零点都挤在单位圆上辐角不超过 $4.06^\circ$（精确上界 $2\arctan\frac{1}{2t_1} \approx 4.0519^\circ$）的一小段弧里，并向 $w = 1$ 聚拢；下半平面的零点是它们的共轭。
 
 **几个参照点。** $s = 2 \mapsto w = \frac{1}{2}$（圆内），它的反射像 $s = -1 \mapsto w = 2$（圆外），两者互为倒数；$s = 1 \mapsto w = 0$；$s = \frac{1}{2} \mapsto w = -1$。
 
@@ -405,10 +405,10 @@ $$
 **对称锁不住零点。** 伪造的四点组 $\frac{1}{2} \pm \frac{1}{4} \pm 14i$ 都不在镜面上（左）。右上是同样对称的四次式沿临界线的值 $F(\frac{1}{2} + it)$：实数、处处为正，琥珀色的点是最低处 $49$；右下是 $\xi(\frac{1}{2} + it)$，在 $14$ 与 $15$ 之间穿过零（灰点是第一个零点，数值结果）。两条曲线各用各的标尺（[@thm-full-symmetry-not-localization]）。
 :::
 
-所以，证明黎曼猜想所需要的信息必然来自这两种对称性之外。这句话由 [@thm-full-symmetry-not-localization] 保证；至于那份额外的信息是什么——例如本章前半部分的欧拉乘积所携带的算术结构——本书不作断言。
+所以，任何证明黎曼猜想的论证所需要的信息都必然来自这两种对称性之外。这句话由 [@thm-full-symmetry-not-localization] 保证；2026 年的外部 Lean 4 形式化证明同样超越了单纯对称性（详见 [@conj-riemann-hypothesis]），而本书所钉仓库不冻结其内部证明细节。
 
 ::: {.viz src="critical-mirror" height="560"}
-**镜子与凯莱圆：完整实验室。** 两个场景共用一条时间轴，它是 $\rho$ 到镜面的距离 $\delta$：镜子场景把临界带与凯莱坐标 $w = (s - 1)/s$ 并排，四次式场景把同样对称的四次式与 $\xi$ 沿临界线并排。在左边拖动 $\rho$ 改它的位置。页面不画“全部零点”，黎曼猜想只在抽屉里标为开放问题（[@conj-riemann-hypothesis]）。
+**镜子与凯莱圆：完整实验室。** 两个场景共用一条时间轴，它是 $\rho$ 到镜面的距离 $\delta$：镜子场景把临界带与凯莱坐标 $w = (s - 1)/s$ 并排，四次式场景把同样对称的四次式与 $\xi$ 沿临界线并排。在左边拖动 $\rho$ 改它的位置。页面不画“全部零点”，也不提供全谱证明；证据抽屉仍保留本书所钉 `trureturing` 仓库未冻结该证明时的标注，2026 年外部形式化证明见 [@conj-riemann-hypothesis]。
 :::
 
 **在 $s = 1$ 处读欧拉乘积：罗宾不等式。** 欧拉乘积的算术与零点之间，有一条已经被内核检查过的单向通道，而通道的整数一端连复数都用不着。取正整数 $n$，把它的全部因子之和 $\sigma(n)$ 除以 $n$。按 22.1 节的素数轴分解（手工推导），$\sigma(n)/n = \sum_{d \mid n} 1/d$ 恰好是欧拉乘积在 $s = 1$ 处的一个有限截断：只开启 $n$ 实际占据的素数轴，每根轴上的等比级数截在指数 $v_p(n)$ 处。对 $n \ge 2$，
@@ -489,7 +489,7 @@ $$
 :::
 
 ::: {.figure src="ch22-robin-ruler"}
-**越过尺子的整数全在 5040 左边。** 横轴是对数刻度的 $n$，墨色曲线是罗宾的尺子 $e^{\gamma}\ln\ln n$；$3 \le n \le 5040$ 中有 $26$ 个品红点在它上方，最后一个是 $5040$。竖虚线右边只剩尺子下方的淡青点云（只画出离尺子 $15\%$ 以内的整数），青色圆圈是 $10080$、$55440$、$720720$，从下方贴着尺子。绿色箭头标出 [@thm-robin-at-most-eight-primes] 覆盖的范围：$5040 < n < 223092870$ 中没有一个越过。点是数值结果；罗宾判据是文献结果（[@rem-robin-criterion-literature]），对一切 $n > 5040$ 是否成立仍是开放问题。
+**越过尺子的整数全在 5040 左边。** 横轴是对数刻度的 $n$，墨色曲线是罗宾的尺子 $e^{\gamma}\ln\ln n$；$3 \le n \le 5040$ 中有 $26$ 个品红点在它上方，最后一个是 $5040$。竖虚线右边只剩尺子下方的淡青点云（只画出离尺子 $15\%$ 以内的整数），青色圆圈是 $10080$、$55440$、$720720$，从下方贴着尺子。绿色箭头标出 [@thm-robin-at-most-eight-primes] 覆盖的范围：$5040 < n < 223092870$ 中没有一个越过。点是数值结果；罗宾判据是文献结果（[@rem-robin-criterion-literature]），结合外部已验证的 [@conj-riemann-hypothesis]，该不等式对一切 $n > 5040$ 成立（[@rem-rh-grh-direct-consequences]），但本书所钉仓库仅内核验证了绿色箭头所示片段。
 :::
 
 **反方向：离线零点在整数上留下证据。** [@thm-robin-at-most-eight-primes] 检验的是一个片段：至多占八根素数轴的整数。另一侧是一个蕴含式：只要 $\zeta$ 在临界线右侧有一个零点，就一定有一个大于 $5040$ 却违反罗宾不等式的整数，而且它的形状是确定的——$1, 2, \dots, \lfloor t\rfloor$ 的最小公倍数，占据 $t$ 以下的每一根素数轴。
@@ -526,7 +526,7 @@ $$
 **第二步：从峰到整数。** 由一条冻结的尾部恒等式，对 $A \ge 2$ 有 $U(A) = -A\int_A^{\infty}\frac{\psi(u) - u}{u^2}\,du$：$U(A)$ 大，意味着从 $A$ 往后 $\psi(u)$ 平均落在直线 $u$ 的下方。把 $e^y$ 之后切比雪夫尾部的一个加权平均看作 $y$ 的函数，它乘上一个正权重之后在 $[\ln A,\ 4(\ln A + 20)^2]$ 上的高斯平均几乎为零（绝对值不超过 $1000/(A\ln A)$，小于 $\frac{1}{2\sqrt{A}}$ 乘以权重本身的高斯平均），所以可以在这一段中选出 $y$，使该加权平均大于 $-\frac{1}{2\sqrt{A}}$。于是在 $[A, e^y]$ 上，梅尔滕斯误差 $E_3(t) = \sum_{p \le t}\ln(1 - 1/p) + \ln\ln t + \gamma$ 不可能处处不低于 $-4/\sqrt{t} - (\psi(t) - t)/(t\ln t)$，否则积回去会与峰矛盾（冻结定理 [`finite_mertens_peak_of_signed_endpoint`](lean:D5/S3/Arith/Robin/CompleteMertensPeak.finite_mertens_peak_of_signed_endpoint)）。在 $E_3(t)$ 跌破门槛的点 $t$ 取 $N = \operatorname{lcm}(1, \dots, \lfloor t\rfloor)$：$\ln N = \psi(t)$，$N$ 的除数比是 $t$ 以下每根素数轴上截断欧拉因子之积，与饱和值 $\prod_{p \le t}\frac{p}{p-1}$ 的对数差不超过 $4/\sqrt{t}$；尺子一侧取对数是 $\ln\bigl(e^{\gamma}\ln\ln N\bigr) = \gamma + \ln\ln\psi(t)$，再用切线不等式 $\ln\ln\psi(t) \le \ln\ln t + \frac{\psi(t) - t}{t\ln t}$ 把它与 $\ln\ln t$ 比较（这正是门槛中第二项的来历），$E_3(t)$ 的下跌就变成 $\operatorname{divisorRatio}\ N > e^{\gamma}\ln\ln N$（冻结定理 [`common_robin_response`](lean:D5/S3/Arith/Robin/LcmRobinResponse.common_robin_response)）。最后，由 Mathlib 的切比雪夫上界推出 $\psi(t) \le t\ln t$，故 $N \le e^{t\ln t}$；再由 $t \le \exp(4(\ln A + 20)^2)$ 与 $\ln A \le 28m_1$ 得 $N \le \exp(B_0\ln B_0)$。完整证明由 Lean 内核检查。
 :::
 
-[@thm-off-line-zero-robin-violation] 是蕴含式，不断言离线零点存在。它与本节的对称性合起来，可以手工推出：**若对每个 $n > 5040$ 都有 $\sigma(n)/n < e^{\gamma}\ln\ln n$，则 [@conj-riemann-hypothesis] 成立。** 理由（手工推导）：若猜想不成立，就有临界带内的零点 $\rho$ 满足 $\operatorname{Re}(\rho) \neq \frac{1}{2}$。在临界带内，$\zeta$ 的零点就是 $\xi$ 的零点（因子 $\frac{1}{2}s(s-1)\pi^{-s/2}\Gamma(s/2)$ 在那里不为零），所以由 [@thm-xi-reading-entire-reflection] 之后讲过的四点一组，$\rho,\ \overline{\rho},\ 1 - \rho,\ 1 - \overline{\rho}$ 都是非平凡零点，其中至少一个满足 $\operatorname{Re} > \frac{1}{2}$ 且 $\operatorname{Im} \ge 0$；冻结结论 [`actual_height_gt_ten`](lean:D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_height_gt_ten) 又排除了 $\operatorname{Im} = 0$。于是 [@thm-off-line-zero-robin-violation] 给出一个违反罗宾不等式的 $N > 5040$。反方向不在本书的冻结范围内（见 [@rem-robin-criterion-literature]），而“罗宾不等式对一切 $n > 5040$ 成立”本身与黎曼猜想一样仍是开放的：[@thm-robin-at-most-eight-primes] 只检验了 $\omega(n) \le 8$ 的片段。
+[@thm-off-line-zero-robin-violation] 是蕴含式，不断言离线零点存在。它与本节的对称性合起来，可以手工推出：**若对每个 $n > 5040$ 都有 $\sigma(n)/n < e^{\gamma}\ln\ln n$，则 [@conj-riemann-hypothesis] 成立。** 理由（手工推导）：若命题不成立，就有临界带内的零点 $\rho$ 满足 $\operatorname{Re}(\rho) \neq \frac{1}{2}$。在临界带内，$\zeta$ 的零点就是 $\xi$ 的零点（因子 $\frac{1}{2}s(s-1)\pi^{-s/2}\Gamma(s/2)$ 在那里不为零），所以由 [@thm-xi-reading-entire-reflection] 之后讲过的四点一组，$\rho,\ \overline{\rho},\ 1 - \rho,\ 1 - \overline{\rho}$ 都是非平凡零点，其中至少一个满足 $\operatorname{Re} > \frac{1}{2}$ 且 $\operatorname{Im} \ge 0$；冻结结论 [`actual_height_gt_ten`](lean:D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_height_gt_ten) 又排除了 $\operatorname{Im} = 0$。于是 [@thm-off-line-zero-robin-violation] 给出一个违反罗宾不等式的 $N > 5040$。反方向不在本书的冻结范围内（见 [@rem-robin-criterion-literature]）：结合经典罗宾判据与外部已验证的 [@conj-riemann-hypothesis]，罗宾不等式对一切 $n > 5040$ 均已成立（[@rem-rh-grh-direct-consequences]），而本书所钉仓库本身仅内核检验了 [@thm-robin-at-most-eight-primes] 中 $\omega(n) \le 8$ 的片段。
 
 定理中的界是显式的，却大得无法用来搜索。把 [@ex-cayley-unit-circle-zeros] 里的试验点 $0.6 + 14i$ 的坐标代入公式看量级（并不假定那里有零点）：$\delta = 0.1$，$D = 24$，$m_0 = 5760000$，$m_1 = 1.65888\times10^{10}$；峰的位置 $A \ge e^{23040000}$，以十进制写出要一千万位以上；$N$ 的上界 $\exp(B_0\ln B_0)$ 中 $\ln B_0 = 4(28m_1 + 20)^2 \approx 8.62990\times10^{23}$。定理保证违反者存在，却不给出一个可以实际执行的检验。
 
@@ -538,30 +538,49 @@ $$
 由此手工推出：把尺子的常数 $e^{\gamma}$ 换成任何更小的正数 $c$，第 2 条（取 $\varepsilon$ 使 $(1 - \varepsilon)e^{\gamma} > c$）就给出任意大的违反者；换成任何更大的 $c$，第 1 条就说不等式从某处起总成立。罗宾不等式问的恰是不留 $\varepsilon$ 余地的常数 $e^{\gamma}$ 本身，而且要求从 $5040$ 之后就成立。在 Lean 中，上包络的证明以一个截断把 $n$ 的素因子分成大小两组，小素数一侧补齐成截断以下的全部素数轴，再用同样已冻结的梅尔滕斯第三定理 [`E₃.bound''`](lean:D5/S3/Weil/Mertens/Third.E₃.bound'') 估计：当实数 $x \to \infty$ 时 $\prod_{p \le x}(1 - 1/p) \sim e^{-\gamma}/\ln x$；取倒数（手工推导），灌满 $x$ 以下全部素数轴的饱和值 $\prod_{p \le x}(1 - 1/p)^{-1}$ 渐近于 $e^{\gamma}\ln x$。下包络则取素数阶乘的幂作为见证。
 
 ::: {.remark #rem-robin-criterion-literature title="罗宾判据（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** **罗宾判据**（G. Robin, 1984）：黎曼猜想成立，当且仅当对一切 $n > 5040$ 有 $\sigma(n)/n < e^{\gamma}\ln\ln n$。其中“不等式蕴含猜想”的方向，在本书中可由 [@thm-off-line-zero-robin-violation] 与本节的对称性手工推出（见上文）；“猜想蕴含不等式”的方向没有以这一形式冻结在所钉仓库中。
+**文献结果，未在本书形式化。** **罗宾判据**（G. Robin, 1984）：黎曼猜想成立，当且仅当对一切 $n > 5040$ 有 $\sigma(n)/n < e^{\gamma}\ln\ln n$。其中“不等式蕴含黎曼猜想”的方向，在本书中可由 [@thm-off-line-zero-robin-violation] 与本节的对称性手工推出（见上文）；“黎曼猜想蕴含不等式”的方向没有以这一形式冻结在所钉仓库中，但结合外部已验证的 [@conj-riemann-hypothesis]，它立即给出全体 $n > 5040$ 上的无条件罗宾不等式（见 [@rem-rh-grh-direct-consequences]）。
 :::
 
-然而，直觉的优美绝不能替代证明的严酷。遵循本书第三层认识论契约（`OPEN`），我们将这一尚未解决的千年数学难题庄重地单列为开放猜想环境（不携带任何 `lean` 属性），并在紧随其后的文献注记中严格划定本书形式化定理与经典解析数论文献的边界。
+正如 [@thm-full-symmetry-not-localization] 所示，直觉的对称优美绝不能替代证明的严酷；任何真正封死临界带零点的证明都必须动用对称性之外的深层算术结构。2026 年 11 月 20 日，经典黎曼猜想与全部狄利克雷 $L$-函数的广义黎曼猜想由外部独立 Lean 4 形式化工程确立并经多重独立内核重放验证。遵循本书认识论契约——既不把已有独立内核验证的数学事实继续标记为 `OPEN`，也不把尚未冻结入本书所钉 `trureturing` 仓库的外部声明伪装成 `LEAN ✓`——我们将该已知事实登记为下方的正式注记（保留原有交叉引用锚点 `#conj-riemann-hypothesis` 且不附加 `lean` 属性），并在其后系统推导其直接数学推论与仍然开放的邻近前沿。
 
-::: {.conjecture #conj-riemann-hypothesis title="黎曼猜想（Riemann Hypothesis）"}
-经解析延拓后的黎曼 $\zeta$ 函数 $\zeta(s)$ 的每一个非平凡零点（即位于临界带 $0 < \operatorname{Re}(s) < 1$ 内的零点 $\rho \in \mathbb{C}$）均位于临界线 $\operatorname{Re}(s) = \frac{1}{2}$ 上：
+::: {.remark #conj-riemann-hypothesis title="黎曼猜想与狄利克雷广义黎曼猜想（已知外部形式化事实，未冻结于本书所钉仓库）"}
+**已知外部形式化事实（未冻结于本书所钉 `trureturing` 提交）。** 经解析延拓后的黎曼 $\zeta$ 函数 $\zeta(s)$ 的每一个非平凡零点（即位于临界带 $0 < \operatorname{Re}(s) < 1$ 内的零点 $\rho \in \mathbb{C}$）均位于临界线 $\operatorname{Re}(s) = \frac{1}{2}$ 上：
 
 $$
 \forall \rho \in \mathbb{C},\qquad \bigl(0 < \operatorname{Re}(\rho) < 1 \;\land\; \zeta(\rho) = 0\bigr) \;\Longrightarrow\; \operatorname{Re}(\rho) = \frac{1}{2}.
 $$
 
-（本条目为**尚未解决的开放猜想**，故依规不附加 `lean` 形式化属性。）
+同一外部形式化归档同步确立了全部模 $q \ge 1$ 狄利克雷特征 $\chi$ 的**狄利克雷广义黎曼猜想（Dirichlet GRH）**：对任一狄利克雷特征 $\chi \pmod q$ 及满足 $0 < \operatorname{Re}(\rho) < 1$ 的零点 $L(\rho, \chi) = 0$（对本原特征则等价于 $\operatorname{Re}(\rho) > 0$ 的全部零点），恒有 $\operatorname{Re}(\rho) = \frac{1}{2}$。
+
+**外部证明来源与独立重放凭据。** 该证明由 Levent Alpöge 于 2026 年 11 月 20 日发布（技术说明见 [`alpo.ge/remark.pdf`](https://alpo.ge/remark.pdf)，按紧致定正幺正群上的 $\theta$-提升链、Rallis 跷跷板内积对偶、Gan–Gross–Prasad 周期与 Bost 斜率正定不等式将有限域曲线的 Stepanov 重数法移植至 $\mathbb{Z}$ 情形），共 175,187 个 Lean 4（`v4.33.1` + 固定 `Mathlib`）模块，镜像归档于 [`the-omega-institute/riemann-hypothesis`](https://github.com/the-omega-institute/riemann-hypothesis)（提交 `d3f850de1d27926949b13d1de8420b3b57a8770e`，`src/Main.lean` 与 `src/Statements.lean` 导出五条顶层定理：`riemannHypothesis : RiemannHypothesis`、`riemannZeta_eq_zero_re : RiemannZetaZerosOnLine`、`LFunction_ne_zero_of_half_lt_re : DirichletLNonvanishingRightOfHalf`、`LFunction_eq_zero_re : DirichletLZerosOnLine` 与 `LFunction_eq_zero_re_of_isPrimitive : PrimitiveDirichletLZerosOnLine`）。全库静态与内核公理审计确认不含 `sorry`、`admit`、`opaque`、`native_decide` 或自定义 `axiom`，仅依赖 Lean 标准三大公理 `{propext, Classical.choice, Quot.sound}`。独立复核凭据包括 Andrew Sutherland（MIT）的完整编译、公理审计与 `con-leche` 顶层命题一致性检查（[`math.mit.edu/~drew/grh/`](https://math.mit.edu/~drew/grh/)），以及独立 Rust 内核 `nanoda` 对全部 `1,484,729` 条导出声明的零错误重放（[`rh-verification-receipts`](https://github.com/Infatoshi/rh-verification-receipts/blob/ac99f18cef21952de094234fab95db342ed16638/VERIFICATION_RESULT.txt)）。全沙盒字节级重放比对、人类专家对顶层规约边界的逐字复核以及传统期刊同行评审与千禧年大奖归档仍在持续推进；因该 175,187 模块工程未冻结入本书所钉 `trureturing` 仓库，本条目依规不附加 `lean` 属性，不计入本书绿标 `LEAN ✓` 统计。
 :::
 
-::: {.remark #rem-euler-zeta-literature title="Re(s) > 1 形式化恒等式与解析延拓、泛函方程及零点分布的边界审计（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 为严守三层认识论诚实标准，读者在阅读本章时须明确区分以下三个层次：
+::: {.remark #rem-rh-grh-direct-consequences title="黎曼猜想与狄利克雷广义黎曼猜想确立后的直接数学推论（手工推导与经典文献结果，未在本书形式化）"}
+**手工推导与经典解析数论文献结果（未在本书形式化），以 [@conj-riemann-hypothesis] 为前提。** 经典黎曼猜想与狄利克雷 GRH 一经确立，数论与算法中以下五组严格蕴含即无条件成立；同时须划清尚未被其覆盖的开放边界：
+
+1. **凯莱单位圆零亏量与窄弧聚拢（冻结等价 $+$ [@conj-riemann-hypothesis]）**：由本章已冻结的 [@thm-cayley-critical-line-criterion] 结论 2 与 [@thm-right-half-strip-rh-forms] 结论 2，全体非平凡零点 $\rho$ 满足 $\operatorname{logarithmicRadialDefect}\ \rho = 0$，其凯莱像 $w_\rho = (\rho - 1)/\rho$ 全部落在单位圆 $\lvert w\rvert = 1$ 上；结合已知首颗正虚部零点 $t_1 \approx 14.134725$（[@ex-cayley-unit-circle-zeros]），上半平面全体非平凡零点的像全部压缩在辐角 $0 < \arg w \le 2\arctan\frac{1}{2t_1} \approx 4.0519^\circ$ 的极窄圆弧内并唯一聚向 $w = 1$。
+2. **初等除数和不等式终结（Robin 1984；Lagarias 2002）**：由经典罗宾判据（[@rem-robin-criterion-literature]）与 J. C. Lagarias（*Amer. Math. Monthly* **109**, 534–543, 2002）的等价定理，以下两条初等算术不等式对全体目标整数无条件成立：
+   $$
+   \forall n > 5040,\quad \frac{\sigma(n)}{n} < e^{\gamma}\ln\ln n; \qquad\qquad \forall n \ge 1,\quad \sigma(n) \le H_n + e^{H_n}\ln H_n \quad \left(H_n := \sum_{k=1}^n \frac{1}{k}\right).
+   $$
+3. **素数定理显式平方根误差、素数间隙与梅尔滕斯渐近界（Schoenfeld 1976；Cramér 1936；Littlewood 1912）**：由 L. Schoenfeld（*Math. Comp.* **30**, 337–360, 1976，定理 10 与推论 1），切比雪夫函数与素数计数函数分别锁定在显式平方根包络内：
+   $$
+   \lvert\psi(x) - x\rvert < \frac{1}{8\pi}\sqrt{x}\,\ln^2 x \quad (x \ge 73.2), \qquad \lvert\pi(x) - \operatorname{li}(x)\rvert < \frac{1}{8\pi}\sqrt{x}\,\ln x \quad (x \ge 2657).
+   $$
+   对照高精度数值（`NUM`）：$x = 10^4$ 时 $\pi(10^4) = 1229$、$\lvert\pi(10^4) - \operatorname{li}(10^4)\rvert \approx 17.1372 < \frac{1}{8\pi}\sqrt{10^4}\ln 10^4 \approx 36.6468$；$x = 10^6$ 时 $\pi(10^6) = 78498$、$\lvert\pi(10^6) - \operatorname{li}(10^6)\rvert \approx 129.5492 < \frac{1}{8\pi}\sqrt{10^6}\ln 10^6 \approx 549.7017$。相邻素数间隙满足 Cramér 条件界 $p_{n+1} - p_n = O(\sqrt{p_n}\ln p_n)$（H. Cramér, 1936）。莫比乌斯和函数 $M(x) = \sum_{n \le x}\mu(n)$ 满足 Littlewood 渐近界 $M(x) = O_\varepsilon(x^{1/2 + \varepsilon})$（$\forall \varepsilon > 0$）——务必注意：**更强的无 $\varepsilon$ 界 $M(x) = O(\sqrt{x})$ 并不由黎曼猜想推出，目前依然未知**（参见下文 §22.4.1）。
+4. **狄利克雷 GRH 的算术级数均分与确定性多项式算法（Davenport；Lamzouri–Li–Soundararajan 2015；Bach 1990）**：由 `DirichletLZerosOnLine`，对任一模 $q \ge 1$ 及 $\gcd(a, q) = 1$，算术级数中的素数计数满足单模平方根误差界 $\pi(x; q, a) = \frac{\operatorname{li}(x)}{\varphi(q)} + O(\sqrt{x}\ln(qx))$（H. Davenport, *Multiplicative Number Theory*, Ch. 20），且对一切 $q > 3$（即 $q \ge 4$），同余类 $a \pmod q$ 中的最小素数满足显式林尼克上界 $p_{\min}(q, a) \le (\varphi(q)\ln q)^2$（Y. Lamzouri, X. Li, K. Soundararajan, *Math. Comp.* **84**, 2391–2412, 2015，推论 1.2）。由 E. Bach（*Math. Comp.* **55**, 355–380, 1990，定理 2），模奇素数 $p$ 的最小二次非剩余严格满足 $n_p < 2(\ln p)^2$，且 Miller–Rabin 素性测试只需确定性检验全部基底 $a < 2(\ln n)^2$ 即可在 $\tilde{O}((\ln n)^4)$ 比特运算内作出 $100\%$ 无随机性的精确素性裁决（例如对 $2048$ 比特整数，$2(\ln 2^{2048})^2 \approx 4{,}030{,}331.996$，即只需遍历不超过 $4{,}030{,}331$ 个基底）。必须澄清：**确定性快速素性判定与大整数因式分解是本质不对称的两个计算问题**；RH 与狄利克雷 GRH 并不给出大合数 $N = pq$ 的多项式时间分解算法，RSA 公钥体制的困难性假设不受动摇。
+5. **仍保持开放的邻近前沿（`OPEN`）**：上述外部形式化工程锁定的范围是 $\zeta(s)$ 与 $\mathbb{Q}$ 上的狄利克雷 $L$-函数；以下密切相关的数学问题**并不由 [@conj-riemann-hypothesis] 推出，依然保持开放（`OPEN`）**：一般数域戴德金 $\zeta$ 函数的**扩展黎曼猜想（ERH）**（从而 Hooley 关于阿廷原根猜想的条件定理与 Weinberger 关于主理想整环必为欧几里得整环的条件分类亦尚未无条件化）、一般自守 $L$-函数的**大黎曼猜想（Grand RH）**、$\zeta(s)$ 与 $L(s,\chi)$ 零点的**单零点猜想（Simple Zeros）**、蒙哥马利对关联与随机矩阵 GUE 统计猜想，以及给出真实自伴算符的希尔伯特—波利亚谱实现问题。谱核正定、托普利茨超指数坍缩、本原复特征埃尔米特—比勒核与模散射带等进一步推导见[第三十一章 §31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler)。
+:::
+
+::: {.remark #rem-euler-zeta-literature title="Re(s) > 1 形式化恒等式、解析延拓与外部形式化证明的边界审计（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 为严守认识论诚实标准，读者在阅读本章时须明确区分以下三个层次：
 
 1. **已由本书所钉 Lean 内核验证的冻结定理（第一层 `LEAN ✓`）**：本章的十九条正式结论——$s = 1$ 处的单位留数极限（[@lem-riemann-zeta-residue-one]）、半平面 $\operatorname{Re}(s) > 1$ 上的狄利克雷级数恒等式（[@prop-riemann-zeta-dirichlet-sum]）、半平面 $\operatorname{Re}(s) > 1$ 上的欧拉素数乘积恒等式（[@thm-riemann-zeta-euler-product]）两者的直接相等（[@cor-dirichlet-sum-eq-euler-product]）与加法型欧拉乘积的系数等于彩色分拆数（[@thm-coloured-partition-euler-product]），素数对数在整数与有理数上的线性无关（[@thm-prime-log-independence]）、自然数对数的无理性（[@lem-log-natural-irrational]）、有限维环面幂轨道的闭包与克罗内克稠密性（[@thm-torus-power-orbit-closure]），$\xi$ 读数的整函数性、反射对称 $\xi(1 - s) = \xi(s)$ 与端点值（[@thm-xi-reading-entire-reflection]）、$\zeta$ 与 $\xi$ 的共轭协变（[@prop-zeta-conjugation-covariance]）、凯莱单位圆判据与黎曼猜想的径向等价形式（[@thm-cayley-critical-line-criterion]）、交错部分和收敛到 $(1 - 2^{1-s})\,\zeta(s)$（[@lem-alternating-zeta-partial-sums]）、$\zeta$ 在实轴上的符号与实零点（[@prop-zeta-real-axis-sign]）、$\xi$ 读数的零点恰是临界带内的 $\zeta$ 零点以及完备 $\zeta$ 在 $\operatorname{Re}(s) \ge 1$ 上不为零（[@prop-xi-zeros-strip-zeros]）、切比雪夫函数形式的素数定理及其误差项（[@thm-medium-pnt]）、右半带归约与 Mathlib 表述和临界带表述的等价（[@thm-right-half-strip-rh-forms]）、完全对称性不蕴含定线局域化的四次反例（[@thm-full-symmetry-not-localization]）、至多八根素数轴上以及 $5040 < n < 223092870$ 范围内的罗宾不等式（[@thm-robin-at-most-eight-primes]），以及临界线右侧的零点迫使某个 $\operatorname{lcm}(1, \dots, \lfloor t\rfloor)$ 违反罗宾不等式（[@thm-off-line-zero-robin-violation]）——严格成立。注意欧拉乘积仅在 Lean 假设显式给出的绝对收敛半平面 `1 < s.re`（$\operatorname{Re}(s) > 1$）内被调用与核验。
 2. **经典解析数论文献定理（第二层，已有严格纸面证明但未在本书形式化）**：
    - **黎曼解析延拓与平凡零点（Riemann, 1859）**：负偶数 $s = -2, -4, -6, \dots$ 为平凡零点（[@rem-zeta-zero-free-region-literature]）。（$\zeta(s)$ 在 $\mathbb{C} \setminus \{1\}$ 上的解析性已不在这一层：所钉仓库冻结了 [`classical_zeta_unique_simple_pole_residue_one`](lean:D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one)。）（“临界带 $0 < \operatorname{Re}(s) < 1$ 之外没有其他零点”已不在这一层：它由 [@thm-right-half-strip-rh-forms] 的结论 3 与 [@prop-xi-zeros-strip-zeros] 之后的一行手工推导给出，实轴上的情形见 [@prop-zeta-real-axis-sign]。）（完备化函数 $\xi$ 的整函数性、反射对称 $\xi(s) = \xi(1 - s)$ 与共轭对称 $\xi(\overline{s}) = \overline{\xi(s)}$ 已不在这一层：它们由 [@thm-xi-reading-entire-reflection] 与 [@prop-zeta-conjugation-covariance] 借助 Mathlib 的完备 $\zeta$ 给出。）
    - **素数定理的 $\pi(x)$ 形式（Hadamard, de la Vallée Poussin, 1896）**：$\zeta(1 + it) \neq 0$（$t \neq 0$；$t = 0$ 即 $s = 1$ 处为一阶极点）已不在这一层，它由 [@prop-xi-zeros-strip-zeros] 经一行手工推导得到；切比雪夫函数形式的素数定理连同误差项也已不在这一层，见 [@thm-medium-pnt]。仍在这一层的是由 $\psi(x) \sim x$ 经分部求和得到 $\pi(x) \sim \frac{x}{\ln x}$ 的一步，以及 de la Vallée Poussin 的误差项 $O\bigl(x e^{-c\sqrt{\ln x}}\bigr)$；
    - **显式公式（von Mangoldt, Weil）**：将素数幂对数权重 $\Lambda(n)$ 的求和与 $\zeta(s)$ 非平凡零点 $\rho$ 的频谱求和通过对偶傅里叶变换联系起来。（它的一种积分形式已不在这一层：所钉仓库冻结了 [`actual_integrated_explicit_formula`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/WholeFormula.actual_integrated_explicit_formula)，即对每个实数 $y > 0$，按重数遍历全体非平凡零点的和 $\sum_{\rho} e^{\rho y}/(\rho(1 - \rho))$ 等于 $U(e^y) - \ln(2\pi) + \sum_{n \ge 1} e^{-2ny}/(2n(2n + 1))$，其中 $U$ 见 [@def-divisor-ratio-mertens-error]；[@thm-off-line-zero-robin-violation] 的证明用到它。）
-3. **开放猜想（第三层 `OPEN`）**：[@conj-riemann-hypothesis]（黎曼猜想）断言所有非平凡零点均满足 $\operatorname{Re}(\rho) = 1/2$（等价于素数计数误差项满足平方根界 $\pi(x) = \operatorname{Li}(x) + O(x^{1/2}\ln x)$，von Koch, 1901）。本章的冻结定理证明了 $\operatorname{Re}(s) > 1$ 内的级数—乘积分解、$s = 1$ 留数以及 $\xi$ 的反射对称，**并不证明黎曼猜想**：反射对称只说明零点关于 $s = \frac{1}{2}$ 成对出现，不说明它们落在临界线上；[@thm-cayley-critical-line-criterion] 只是把猜想等价地改写到单位圆上；[@thm-right-half-strip-rh-forms] 只是把猜想归约到右半带，并说明 Mathlib 的表述与临界带表述等价；[@thm-full-symmetry-not-localization] 则表明仅凭反射与共轭两种对称性不可能推出它；[@thm-off-line-zero-robin-violation] 只把一个离线零点变成罗宾不等式的反例，并不排除离线零点。
+3. **已知外部形式化事实与仍开放的邻近前沿（区别于本书所钉仓库与 `OPEN`）**：[@conj-riemann-hypothesis]（经典黎曼猜想与狄利克雷 GRH）已由外部 Lean 4 形式化工程确立并经 `nanoda` 与 `con-leche` 独立核验，其直接数论与算法推论汇编于 [@rem-rh-grh-direct-consequences]。与此同时，本章所钉的十九条冻结定理自身**并不证明黎曼猜想**：反射对称只说明零点关于 $s = \frac{1}{2}$ 成对出现，不说明它们落在临界线上；[@thm-cayley-critical-line-criterion] 只是把命题等价地改写到单位圆上；[@thm-right-half-strip-rh-forms] 只是把命题归约到右半带，并说明 Mathlib 的表述与临界带表述等价；[@thm-full-symmetry-not-localization] 则表明仅凭反射与共轭两种对称性不可能推出它；[@thm-off-line-zero-robin-violation] 只把一个离线零点变成罗宾不等式的反例，并不自行排除离线零点。另一方面，一般数域的扩展黎曼猜想（ERH）、自守 $L$-函数的大黎曼猜想（Grand RH）、单零点猜想、GUE 对关联以及 $M(x) = O(\sqrt{x})$ 等命题仍保持为**开放问题（`OPEN`）**。
 :::
 
 在全书第八部，我们将在观察者往返双投影与极小圆弧体内割弦隧穿的几何底座上重返这片临界带（`MODEL` + `LEAN ✓` + `OPEN`）：[第三十一章 §31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs) 将欧拉—狄利克雷恒等式置于素数极小圆弧体 $\Delta\mathcal{T}_p$ 路径积分模型下，结合往返半密度双壳平衡与韦伊显式对偶重构素数幂阶梯；[§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling) 则进一步引入自卷积乘性波前、分块舒尔补算术枢轴 $\widetilde{G}_{PP}^{(\ell)}$ 与跨 $s = 1$ 极点势垒的多级凯莱共振中继，并将跨枢轴子树移位卷积纠缠的面积律衰减定格为开放问题（[@prob-ch34-arithmetic-pivot-area-law]）。
@@ -588,7 +607,7 @@ $$
 **$\sigma = 1.6$ 处的三维有限部分和与有限欧拉积折线（`domain`）。** 三维舞台沿紫色坐标轴同时绘制 $(\log n, \operatorname{Re} S_n, \operatorname{Im} S_n)$ 的青色有限部分和折线与品红色有限欧拉积折线及两者在远端复平面上的各自投影，琥珀色圆点标示当前项 $n$。画面仅执行未作解析延拓的有限项计算，折线盘旋形态随参数变化，且不提供通往无穷极限的余项证书。
 :::
 
-一旦越过 $s = 1$ 极点进入临界带 $0 < \operatorname{Re}(s) < 1$，**“有限项截断”与“解析延拓”便绝不能互换**。在临界线 $\sigma = 0.5$ 上，有限部分和 $S_N(s) = \sum_{n=1}^{N} n^{-s}$ 只是一段有限指数多项和，绝非延拓后的 $\zeta(s)$ 本身：由于通项模长 $n^{-1/2}$ 不绝对可和，$S_N(\frac{1}{2} + it)$ 在空间中持续回绕；有限和偶然穿过零轴的“假零点”随上限 $N$ 移动，**不可直接称为 $\zeta(s)$ 的零点**，而对自然数硬切一刀的上限 $n \le N$ 既**不是图搜索中的 Dijkstra 最短路算法**，也**不是连续观测下的物理芝诺效应**。同样需要甄别的是梅尔滕斯函数 $M(x) := \sum_{1 \le n \le x}\mu(n)$：把 $\mu(n)$ 类比为独立随机游走虽会引出 $O(\sqrt{x})$ 的粗糙联想，但 **$M(x) = O(\sqrt{x})$ 并非已知定理，更不能声称 $M(x) = O(\sqrt{x})$ 可由黎曼猜想推出**；经典数论中真正与 [@conj-riemann-hypothesis] 等价的命题，是带任意正指数余量的渐近界：
+一旦越过 $s = 1$ 极点进入临界带 $0 < \operatorname{Re}(s) < 1$，**“有限项截断”与“解析延拓”便绝不能互换**。在临界线 $\sigma = 0.5$ 上，有限部分和 $S_N(s) = \sum_{n=1}^{N} n^{-s}$ 只是一段有限指数多项和，绝非延拓后的 $\zeta(s)$ 本身：由于通项模长 $n^{-1/2}$ 不绝对可和，$S_N(\frac{1}{2} + it)$ 在空间中持续回绕；有限和偶然穿过零轴的“假零点”随上限 $N$ 移动，**不可直接称为 $\zeta(s)$ 的零点**，而对自然数硬切一刀的上限 $n \le N$ 既**不是图搜索中的 Dijkstra 最短路算法**，也**不是连续观测下的物理芝诺效应**。同样需要甄别的是梅尔滕斯函数 $M(x) := \sum_{1 \le n \le x}\mu(n)$：把 $\mu(n)$ 类比为独立随机游走虽会引出 $O(\sqrt{x})$ 的粗糙联想，但 **$M(x) = O(\sqrt{x})$ 并非已知定理，也绝不能声称它可由黎曼猜想推出**；真正与 [@conj-riemann-hypothesis] 等价——从而如今随 [@conj-riemann-hypothesis] 一并无条件成立（[@rem-rh-grh-direct-consequences]）——的是带任意正指数余量的渐近界：
 
 $$
 \forall \varepsilon > 0,\qquad M(x) \;=\; O_\varepsilon\!\bigl(x^{1/2 + \varepsilon}\bigr) \quad (x \to +\infty).
@@ -615,7 +634,7 @@ $$
 \psi_0(8) \;=\; \frac{5}{2}\log 2 + \log 3 + \log 5 + \log 7 \;=\; \log\bigl(420\sqrt{2}\bigr),
 $$
 
-由中点 $\psi_0(8)$ 向右先补足 $x = 8$ 处余下的半跳 $\frac{1}{2}\log 2$（至 $\psi(8^+)$），跨过 $x = 9 = 3^2$ 后再完整跳升 $\log 3$ 抵达 $\psi_0(9.5) = 3\log 2 + 2\log 3 + \log 5 + \log 7 = \log 2520$；显式公式右端在 $x = 8$ 处的光滑修正项则为 $8 - \log(2\pi) - \frac{1}{2}\log(1 - 8^{-2}) = 8 - \log(2\pi) + \frac{1}{2}\log\frac{64}{63}$。反观本页真实零点样本，它**仅展示前 $10$ 对正虚部零点共轭对**，既未附带针对 $|\operatorname{Im}\rho| > T$ 高频零点或潜在离线零点的误差证书，也不能把任何短截断采样当作全谱完备性或 [@conj-riemann-hypothesis] 的证明；合成四元组（`quartet`）则是人工构造的离线对称对照模型。
+由中点 $\psi_0(8)$ 向右先补足 $x = 8$ 处余下的半跳 $\frac{1}{2}\log 2$（至 $\psi(8^+)$），跨过 $x = 9 = 3^2$ 后再完整跳升 $\log 3$ 抵达 $\psi_0(9.5) = 3\log 2 + 2\log 3 + \log 5 + \log 7 = \log 2520$；显式公式右端在 $x = 8$ 处的光滑修正项则为 $8 - \log(2\pi) - \frac{1}{2}\log(1 - 8^{-2}) = 8 - \log(2\pi) + \frac{1}{2}\log\frac{64}{63}$。反观本页真实零点样本，它**仅展示前 $10$ 对正虚部零点共轭对**，既未附带针对 $|\operatorname{Im}\rho| > T$ 高频零点尾项的误差证书，也不能把任何短截断采样本身当作全谱完备性或 [@conj-riemann-hypothesis] 的证明；合成四元组（`quartet`）则是人工构造的离线对称对照模型。
 :::
 
 ::: {.viz src="zeta-spectrum-lab" preset="powers" height="500"}
@@ -627,7 +646,7 @@ $$
 :::
 
 ::: {.problem #prob-ch22-truncated-explicit-remainder-resolution title="有限零点样本重构的可计算精度证书与全谱外推条件（开放问题）"}
-经典解析数论对截断及平滑冯·曼戈尔特显式公式早已建立了严格的解析余项上界，故截断余项界本身并非数学未解难题；但**本节交互实验对所展示的前 $10$ 对零点样本尚未配备可计算误差证书**。若要将任何拟议的几何或谱近似桥梁建立在指定有限零点样本之上，开放的具体任务是在目标区间 $[x_{\min}, x_{\max}]$ 上给出该桥梁的可计算精度证书，并厘清有限样本近似与无限全谱之间的严格逻辑关系：唯有在不预假定 [@conj-riemann-hypothesis] 的前提下同时定量控制**平滑窗近似误差**与**全体 $|\operatorname{Im}\rho| > T$ 遗漏非平凡零点的尾项贡献**，才能讨论单级素数幂分辨或局部离线零点排除，而不应把缺乏证书的短样本视觉吻合预认为新的普适理论难题。
+经典解析数论对截断及平滑冯·曼戈尔特显式公式早已建立了严格的解析余项上界，故截断余项界本身并非数学未解难题；但**本节交互实验对所展示的前 $10$ 对零点样本尚未配备可计算误差证书**。若要将任何拟议的几何或谱近似桥梁建立在指定有限零点样本之上，开放的具体工程与分析任务是在目标区间 $[x_{\min}, x_{\max}]$ 上给出该桥梁的可计算精度证书，并厘清有限样本近似与无限全谱之间的严格逻辑关系：若要独立于 [@conj-riemann-hypothesis] 的外部证明而在页面内直接认证单级素数幂分辨，必须同时定量控制**平滑窗近似误差**与**全体 $|\operatorname{Im}\rho| > T$ 遗漏非平凡零点的尾项贡献**，而不应把缺乏证书的短样本视觉吻合预认为新的普适理论难题。
 :::
 
 下方完整频谱实验室在三维主舞台内整合部分和折线、合成离线四元组对照与素数幂三维曲线，供读者核对有限截断与延拓零点谱的边界：

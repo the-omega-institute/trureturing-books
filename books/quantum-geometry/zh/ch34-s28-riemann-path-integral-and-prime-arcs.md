@@ -2,11 +2,11 @@
 
 > “黎曼猜想在几何与物理底层不仅就是路径积分，而且是算术宇宙最纯粹的一座素数极小圆弧体（$\Delta\mathcal{T}_p$）费曼配分函数：欧拉乘积是单枚素数圆弧体的局域绕行算子，狄利克雷级数是遍历全体自然数复合路径的相位求和，而非平凡零点之所以被死死钉在临界线 $\operatorname{Re}(s) = \frac{1}{2}$ 上，本质上是‘往返双投影平方律（$\cos^2\theta$ 半密度幺正性）’与‘反者道之动（正逆对偶路径 $100\%$ 反相相消）’共同锁死的几何必然。”
 
-题记是作者的原话，说的是一幅几何图像（`MODEL`）；其中“非平凡零点被钉在临界线上”就是黎曼猜想（[@conj-riemann-hypothesis]，`OPEN`），至今没有证明，本节也不证明它。
+题记是作者的原话，描述本书的几何图像（`MODEL`）。其中“非平凡零点被钉在临界线上”是黎曼猜想（[@conj-riemann-hypothesis]）的内容。Alpöge 在外部 Lean 库中给出了这一命题的形式证明，Sutherland 公布了独立核验记录。[§39.2.2](ch39-s25-axiom-omega-five-tier-deduction-cascade.md#sec-ch39-25-2) 介绍了核验的声明与依据。
 
 在上一章 [§30.2](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit) 与 [§30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes) 中，我们看到物理粒子一旦从观察者可见实轴 `I` 偏转 $90^\circ$ 潜入正交虚数盲区 `i`（满足 $\hat{\mathbf{i}}^2 = -1$），就能在空间上沿极小圆弧体的平直内割弦穿墙隧穿、在时间上借未闭合窗口实现跨时刻双缝自干涉，并以比较旋子与弦弧矢高重塑了圆弧体微积分；而在 [§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) 中，我们更已从观察者自包含测量的雷达回波闭环推出了**往返双投影平方律** $\cos^2\theta$（[@thm-ch34-roundtrip-born-and-imaginary-blindspot]）。现在，让我们把这套“实轴阻尼投影 `I` $+$ 正交虚盲区相位旋转 `i` $+$ 极小圆弧体路径求和”的完整几何显微镜，直接对准[第二十二章 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4) 开启的算术宇宙核心腹地——**黎曼 $\zeta(s)$ 函数与临界线 $\operatorname{Re}(s) = \frac{1}{2}$**（`MODEL`）。
 
-在展开这幅算术路径积分画卷之前，我们首先按全书认识论契约钉牢三道精确边界：第一，素数对数在 $\mathbb{Q}$ 上的线性无关性、半平面 $\operatorname{Re}(s) > 1$ 上的欧拉—狄利克雷恒等式、完备读数 $\operatorname{xiReading}$ 的全局反射与共轭协变对称、半平面 $\operatorname{Re}(s) > 0$（$s \neq 1$）上的交错级数延拓、正实轴 $y > 0$ 上的无条件积分显式公式，以及证明“单靠反射与共轭对称绝不足以将零点锁死在定直线上”的四次整函数反例，均已在所钉 `trureturing` 仓库中由 Lean 内核严格检核（见下文 [@thm-ch34-riemann-prime-arc-bridge]，`LEAN ✓`）；第二，莫比乌斯倒数级数、Littlewood 等价定理、von Mangoldt–Weil 点态显式公式以及量子混沌与统计物理中的素数气体模型属于经典数学物理文献成果（`文献结果，未在本书形式化`），配套算例全部经百位精度核算校准（`手工推导` / `NUM`）；第三，章首引语将素数解读为正交极小圆弧体 $\Delta\mathcal{T}_p$、将临界线解读为往返半密度幺正脊线的物理图像属于本书建立的统一几何诠释模型（`MODEL`），而断言**全体**非平凡零点无一例外落在 $\operatorname{Re}(s) = \frac{1}{2}$ 上的**黎曼猜想**（[@conj-riemann-hypothesis]）至今仍是尚未解决的开放问题（`OPEN`）——看清“单对正逆圆弧双臂平衡”与“无穷多路径求和”之间的精确代数鸿沟，恰恰为我们下一节 [§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling) 引入算术舒尔枢轴重整与多级共振隧穿铺平道路。
+在展开这幅算术路径积分画卷之前，我们首先按全书认识论契约钉牢三道精确边界：第一，素数对数在 $\mathbb{Q}$ 上的线性无关性、半平面 $\operatorname{Re}(s) > 1$ 上的欧拉—狄利克雷恒等式、完备读数 $\operatorname{xiReading}$ 的全局反射与共轭协变对称、半平面 $\operatorname{Re}(s) > 0$（$s \neq 1$）上的交错级数延拓、正实轴 $y > 0$ 上的无条件积分显式公式，以及证明“单靠反射与共轭对称绝不足以将零点锁死在定直线上”的四次整函数反例，均已在所钉 `trureturing` 仓库中由 Lean 内核严格检核（见下文 [@thm-ch34-riemann-prime-arc-bridge]，`LEAN ✓`）；第二，莫比乌斯倒数级数、Littlewood 等价定理、von Mangoldt–Weil 点态显式公式以及量子混沌与统计物理中的素数气体模型属于经典数学物理文献成果（`文献结果，未在本书形式化`），配套算例全部经百位精度核算校准（`手工推导` / `NUM`）；第三，章首引语将素数解读为正交极小圆弧体 $\Delta\mathcal{T}_p$、将临界线解读为往返半密度幺正脊线的物理图像属于本书建立的统一几何诠释模型（`MODEL`），而断言**全体**非平凡零点无一例外落在 $\operatorname{Re}(s) = \frac{1}{2}$ 上的**黎曼猜想**（[@conj-riemann-hypothesis]）有上引外部形式证明。看清“单对正逆圆弧双臂平衡”与“无穷多路径求和”之间的精确代数鸿沟，恰恰为我们下一节 [§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling) 引入算术舒尔枢轴重整与多级共振隧穿铺平道路。
 
 ## 31.1.1 欧拉乘积 $\equiv$ 路径积分：不可约素数极小圆弧体 $\Delta\mathcal{T}_p$、可加作用量 $S[\Gamma_n] = \ln n$ 与费米型莫比乌斯外积阶 $\Lambda^k$ {#sec-ch34-28-1}
 
@@ -148,7 +148,7 @@ $$
 \rho_{\mathrm{rogue}} \;=\; \frac{1}{2} \pm \delta \pm i\gamma_0 \qquad (\delta \neq 0,\; \gamma_0 \neq 0)!
 $$
 
-在解析数论史上，Davenport 与 Heilbronn（1936）构造的狄利克雷级数线性组合同样满足完全相同的黎曼型函数方程与临界线实值性，却因为**缺乏素数欧拉乘积**而在 $\sigma \neq \frac{1}{2}$ 处滋生出无穷多颗离线零点（`文献结果，未在本书形式化`）。换言之：半密度平方律与正逆双臂平衡深刻揭示了为什么 $\sigma = \frac{1}{2}$ 是算术宇宙唯一的幺正对称脊线（`MODEL`）；临界线上确有无穷多个零点，这是 Hardy（1914）的定理（`文献结果，未在本书形式化`），上文的图像只说明实值函数每变号一次给出一个零点，并不推出变号无穷多次；但若要彻底排除无穷多条路径在 $\sigma \neq \frac{1}{2}$ 处“四点串谋相消”的极端可能，照本书的读法，就要把 $\sigma > 1$ 区**欧拉乘积独有的乘性正定性**一路无损运送过 $s = 1$ 极点势垒——这一步至今没有任何已知证明，这正是为什么**黎曼猜想（[@conj-riemann-hypothesis]）至今仍列为开放猜想（`OPEN`）**，也正是下一节 [§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling) 必须引入乘性波前舒尔补枢轴与多级共振隧穿的根本原因！
+在解析数论史上，Davenport 与 Heilbronn（1936）构造的狄利克雷级数线性组合同样满足完全相同的黎曼型函数方程与临界线实值性，却因为**缺乏素数欧拉乘积**而在 $\sigma \neq \frac{1}{2}$ 处滋生出无穷多颗离线零点（`文献结果，未在本书形式化`）。换言之：半密度平方律与正逆双臂平衡深刻揭示了为什么 $\sigma = \frac{1}{2}$ 是算术宇宙唯一的幺正对称脊线（`MODEL`）；临界线上确有无穷多个零点，这是 Hardy（1914）的定理（`文献结果，未在本书形式化`），上文的图像只说明实值函数每变号一次给出一个零点，并不推出变号无穷多次。在本书的几何模型中，要从双臂平衡排除 $\tfrac12\pm\delta\pm i\gamma_0$ 这样的离线四元组，还需说明怎样把 $\sigma>1$ 区**欧拉乘积的乘性正定性**运送过 $s=1$ 极点。下一节以乘性舒尔枢轴与多级共振隧穿探讨这一步。[§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)
 
 **第三重机制——莫比乌斯外积随机游走标度律：Littlewood 等价定理与无偏 $\sqrt{x}$ 包络。** 从费米型外积路径积分 $1/\zeta(s) = \sum_{n \ge 1}\mu(n)n^{-s}$ 的另一侧面看，J. E. Littlewood（1912）严格证明了黎曼猜想（[@conj-riemann-hypothesis]）与梅尔滕斯莫比乌斯累加函数 $M(x)$ 的平方根渐近界完全等价（`文献结果，未在本书形式化`）：
 
@@ -190,7 +190,7 @@ $$
 在紧接下方的实验卡中，将实部偏置滑块从 $\sigma = 0.50$ 拨向 $\sigma = 0.62$ 或 $\sigma = 0.38$，即可直观看到 [@ex-ch34-critical-zeros-and-dual-shells] 算出的正逆双壳分裂包络如何与 `offCriticalQuartic` 离线四元组反例同台对照：
 
 ::: {.viz src="riemann-prime-arc-path-integral-sandbox" preset="off-line-shell-imbalance" height="520"}
-**偏离临界线（$\sigma = 0.38 / 0.62$）正逆双壳失衡分裂与离线四元组认识论对照实验卡（`off-line-shell-imbalance`）。** 拖动琥珀色手柄或实部滑块拨离 $\sigma = 0.50$（预设停在 $\sigma = 0.62,\; t = \gamma_1$，亦可对称拨至 $\sigma = 0.38$）：地面上青色正向壳 $p^{-\sigma}$（如 $2^{-0.62} \approx 0.6507$）与品红逆向对偶壳 $p^{-(1-\sigma)}$（$2^{-0.38} \approx 0.7684$）瞬间一缩一胀分裂脱钩，紫色路径螺旋的中心轴随之移位，琥珀色延拓轴与落点珠 $\zeta(s)$ 弹离原点 `O` 至 $\lvert\zeta(0.62 + i\gamma_1)\rvert \approx 0.0907$；右侧读数与依据栏同步在 $\delta = \sigma - \frac{1}{2},\; \gamma = t$ 处核验 `full_symmetry_not_fixed_line_localization` 的对称离线四元组反例 $F(s)$，并以红色 `OPEN` 徽章标明 [@conj-riemann-hypothesis] 的开放边界。
+**偏离临界线（$\sigma = 0.38 / 0.62$）正逆双壳失衡分裂与离线四元组认识论对照实验卡（`off-line-shell-imbalance`）。** 拖动琥珀色手柄或实部滑块拨离 $\sigma = 0.50$（预设停在 $\sigma = 0.62,\; t = \gamma_1$，亦可对称拨至 $\sigma = 0.38$）：地面上青色正向壳 $p^{-\sigma}$（如 $2^{-0.62} \approx 0.6507$）与品红逆向对偶壳 $p^{-(1-\sigma)}$（$2^{-0.38} \approx 0.7684$）瞬间一缩一胀分裂脱钩，紫色路径螺旋的中心轴随之移位，琥珀色延拓轴与落点珠 $\zeta(s)$ 弹离原点 `O` 至 $\lvert\zeta(0.62 + i\gamma_1)\rvert \approx 0.0907$；右侧读数与依据栏同步在 $\delta = \sigma - \frac{1}{2},\; \gamma = t$ 处核验 `full_symmetry_not_fixed_line_localization` 的对称离线四元组反例 $F(s)$。卡片中关于 RH 状态的文字（包括红色 `OPEN` 徽章、依据栏和读数说明）均沿用外部核验公布前的版本。
 :::
 
 ## 31.1.3 算术 1—3—3—1 概念塔与韦伊显式对偶：素数积出零点，零点雕出素数 {#sec-ch34-28-3}
@@ -256,6 +256,28 @@ $$
 :::
 
 这个判据把独立的算术任务落在素数幂的计数上。对 $x\ge2$，切比雪夫误差核可积，其尾积分等于 $-U(x)/x$。在 $x=n^4$ 处，所需的采样假设因而等价于对每个充分大的自然数 $n$ 证明严格下界 $\int_{n^4}^{\infty}(\psi(t)-t)t^{-2}\,dt>-1/n^2$（`手工推导`）。 [`complete_chebyshev_tail_identity`](lean:D5/S3/Weil/Mertens/CompleteChebyshevTailIdentity.complete_chebyshev_tail_identity) · [`chebyshev_error_kernel_integrable`](lean:D5/S3/Weil/Mertens/WeightedPrimeLimit.chebyshev_error_kernel_integrable)
+
+任意晚的幂窗也只需检验有限个实点。给定 $2\le Y\le Z$，记
+
+$$
+S(Y,Z)=\{Y,Z\}\cup\{n^4:n\in\mathbb N,\ Y\le n^4\le Z\}.
+$$
+
+把窗的两个端点列入，即使它们都不是四次幂，窗边经过裁剪的小区间也有可用的端点界。
+
+::: {.theorem #thm-ch31-quartic-power-windows title="在任意晚的幂窗内只检验两端与四次幂" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampling.rh_iff_quartic_power_windows"}
+固定实数 $b>1$。黎曼假设成立，当且仅当对每个 $\kappa>0$ 和每个实数 $R$，存在 $Y\ge\max\{R,2\}$，使同一个窗的每个 $t\in S(Y,Y^b)$ 满足 $U(t)\le t^{1/2+\kappa}$。
+:::
+
+::: proof
+在 RH 下，[@thm-ch31-mangoldt-pointwise-power-window] 给出整窗上界，取其中的采样点即可。反向给定损失 $\kappa>0$，先在样点处使用 $\delta=\min\{\kappa/2,1/2\}$，并记 $p=1/2+\delta\le1$。对 $x\in[Y,Z]$，取一个包含 $x$ 的相邻四次幂区间 $[n^4,(n+1)^4]$（$n\ge1$），再与 $[Y,Z]$ 取交，得到 $[a,z]$。两端都在 $S(Y,Z)$ 内。斜坡的弦界和对数项的切线估计给出的误差至多为 $(z-a)^2/a\le225n^2$，因为 $a\ge n^4$ 且 $z-a\le15n^3$。两个端点的 $p$ 次幂都至多为 $16x^p$，而 $n^2\le x^p$，故 $U(x)\le241x^p$。选取足够晚的采样窗使 $x^{\kappa-\delta}\ge241$ 在整个窗上成立，就得到 [@thm-ch31-mangoldt-pointwise-power-window] 所需的逐点上界。完整证明由 Lean 内核检查。
+:::
+
+参考库与本书共同使用的外部 Lean 环境还给出了同一宿主的有限检验。在 `samples Y Z` 中，依次枚举 $0\le n\le\lfloor\sqrt{\sqrt Z}\rfloor$，保留窗内的 $n^4$ 并加入两端，得到上述有限集。固定 $b>1$，对每个 $\kappa>0$，先选 $\varepsilon>0$ 及实常数 $e_D,e_L,K,c_{HH},e_K$，满足 $(e_D+e_L+7)\varepsilon\le\kappa$。此后对任意起点下界取一个更晚的窗。窗中每个采样点 $t$ 可选自己的框架、宿主 $H$ 和有限集 $T$，要求该点的 `EAtH`（模一特征标，系数 $4$）与 `CoreAtH` 使用同一个 $H,T$。`of_unit_family` 从 `FamilyClassConnected ((GChi PChar.one).cls b)` 导出这些数据，`rh_of_finite_hosts` 由它们推出 RH。每个窗的检验点有限；给定每一组固定损失后，算术假设仍须提供任意晚的窗口及其见证。[同一宿主的逐点比较](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061455789) · [有限采样与宿主推论的内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061515678)
+
+在参考库取 $b=3/2$ 的设计中，常数为 $C_{\mathrm{abs}}=2$、$C_0=3$，所得模一族满足 $e_D=2$、$e_L=0$。给定这样的族，有 $\varepsilon_1>0$，使每个 $0<\varepsilon<\varepsilon_1$ 都能先固定 $K,c_{HH},e_K$，再对每个自然数下界 $A$ 找到 $k\ge\max\{A,2\}$。对整数块 $k^3\le n\le k^4$ 中的每个 $n$，在 $x=n^4$ 取同一宿主和有限集上的 `EAtH` 与 `CoreAtH`。比较的幂指数为 $1/2+(2+0+7)\varepsilon=1/2+9\varepsilon$。给定目标损失 $\kappa>0$，选取足够小的 $\varepsilon$ 使 $9\varepsilon\le\kappa$，这些任意晚的整数块就给出通向 RH 的条件推论。[整数块、设计输入与指数的定向核验](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061662378)
+
+Alpöge 原证明的声明是 `riemannHypothesis : RiemannHypothesis`，其右端为 Mathlib 的定义。Sutherland 公布的审计日志列出该声明的三个公理 `propext`、`Classical.choice`、`Quot.sound`。本节参考算术模块所钉的 `ddf1d5f8` 与登记公开核验的 `6977b88c` 有相同的 `src` 源码树、Lean 工具链与 Lake 锁文件。本节整数块路线的两个局部模块 `DesignIntegerBlocks` 与 `RawDesignIntegerBlocks` 均已分别通过定向内核重放。局部的设计到算术族这一步以九项闭合估计为输入。另一路线从原始伽罗瓦行出发，经 `BookIntegerHostBlocks.of_reference` 取得整数块，再推出 RH；该完整拼接已按源码核对。[原证明公理审计](https://math.mit.edu/~drew/grh/audit.log) · [公开核验文件](https://math.mit.edu/~drew/grh/)
 
 **单调性本身对负部窗口给出什么限制？**
 
@@ -502,6 +524,54 @@ $$
 ::: proof
 在 RH 下，对归一化余项 $U(x)/\sqrt{x}$ 的绝对包络取正损失 $C-M$，即得充分大 $x$ 处的上界 $C\sqrt{x}$。反过来，对任意 $\kappa>0$，起点取得足够大时，整个窗口上都有 $C\le x^\kappa$。同一窗口因此满足逐点幂界，由 [@thm-ch31-mangoldt-pointwise-power-window] 得到 RH。完整证明由 Lean 内核检查。
 :::
+
+临界系数 $C=M$ 涉及原始余项与曲线 $M\sqrt{x}$ 的**可加差额**。将其除以 $\sqrt{x}$ 会掩去固定尺度的节省。
+
+::: {.theorem #thm-ch31-mangoldt-critical-gap title="临界包络下的可加差额趋于正无穷" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtCriticalGap.rh_iff_critical_gap_tendsto_atTop"}
+令 $M=2+\gamma_{\mathrm{EM}}-\ln(4\pi)$。黎曼假设成立，当且仅当沿实数 $x\to+\infty$ 有
+
+$$
+M\sqrt{x}-U(x)\longrightarrow+\infty.
+$$
+
+换言之，对每个固定实数 $D$，存在 $X$，使所有实数 $x\ge X$ 都满足 $U(x)\le M\sqrt{x}-D$。
+:::
+
+::: proof
+令 $y=\ln x$。在 RH 下，归一化零点和的实部可写成 $F(y)=\sum_k a_k\cos(\gamma_k y)$，其中 $a_k\ge0$ 且 $\sum_k a_k=M$。记 $d(y)=M-F(y)$。利用 $(1-\cos(\gamma_k y))(1+\cos(\gamma_k h))\ge0$ 并逐项求和，得到
+
+$$
+2d(h)-4d(y)\le2F(y)-F(y+h)-F(y-h).
+$$
+
+在原点右侧，显式公式给出 $d(h)/h\to+\infty$。在远端取 $h=e^{-y/2}$。各个 Mangoldt 斜坡的带权中点不等式与归一化余项的显式公式误差一起，将右端从上方控制为 $O(h)$。除以 $h$，得到 $d(y)/h\to+\infty$。由于 $|e^{-y/2}U(e^y)-F(y)|=O(e^{-y/2})$，换回 $x=e^y$ 后，可加差额与 $d(y)/h$ 只差一个有界量。
+
+反过来，差额趋于正无穷蕴含 $U(x)\le M\sqrt{x}$ 在整个尾部成立。对任意 $\kappa>0$，充分大时 $M\le x^\kappa$，从而满足 [@thm-ch31-mangoldt-pointwise-power-window] 的逐点幂窗条件。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 固定 $b>1$。对每个实数 $R$ 都存在 $Y\ge\max\{R,2\}$，使同一个 $[Y,Y^b]$ 上每一点都满足 $U(x)\le M\sqrt{x}$，这一条件等价于 RH。在 RH 下取上一定理中的 $D=0$，每个充分晚的窗口都成立。反向只假设任意晚存在这样的窗口。给定 $\kappa>0$，把起点下界提到 $x^\kappa\ge M$ 的阈值以上，再取这样一个窗口，应用 [@thm-ch31-mangoldt-pointwise-power-window] 即可。
+
+::: {.theorem #thm-ch31-mangoldt-bounded-gap-peak title="归一化余项在整数对数时间上有界间隔地回近临界质量" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtWindowPhase.bounded_gap_actual_G_peak"}
+设 RH 成立，记 $G(y)=e^{-y/2}U(e^y)$。对每个 $\delta>0$ 存在自然数 $L$，使每个自然数 $n$ 都有某个自然数 $k\le L$ 满足
+
+$$
+|G(n+k)-M|<\delta.
+$$
+:::
+
+::: proof
+在 RH 下，归一化零点和是相位紧群上连续函数沿整数次幂的取值，单位元处的函数值为 $M$。取单位元的开邻域，使其上相位和到 $M$ 的距离小于 $\delta/2$。在相位生成的循环子群的闭包上，回到这个邻域所需的非负整数步数有统一上界，这来自开覆盖的有限子覆盖。归一化余项与零点和实部之差最终小于 $\delta/2$，故有界等待时间内的一个整数对数时刻给出所需估计。增大 $L$ 可把有限的初始时段一并计入。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-mangoldt-no-windows-below-mass title="低于第一 Li 质量的系数排除任意晚的整窗" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtWindowPhase.no_windows_below_mass"}
+固定实数 $b>1$ 与 $C<M$。无条件地，存在实数 $R$，使每个 $Y\ge\max\{R,2\}$ 都有某个 $x\in[Y,Y^b]$ 满足 $U(x)>C\sqrt{x}$。
+:::
+
+::: proof
+若任意晚都有一个整窗满足 $U(x)\le C\sqrt{x}$，同一批窗口也满足较大的系数 $M+1$ 的上界。由 [@thm-ch31-mangoldt-pointwise-sqrt-window] 得到 RH。取 $\delta=M-C>0$，在 [@thm-ch31-mangoldt-bounded-gap-peak] 中从 $n=\lceil\ln Y\rceil$ 出发。充分大的 $Y$ 满足 $(b-1)\ln Y\ge L+1$，故 $n+k\in[\ln Y,b\ln Y]$。取 $x=e^{n+k}$，便在同一窗内得到 $U(x)/\sqrt{x}>M-\delta=C$，与假设矛盾。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 令 $P_b(Y)=\max_{Y\le x\le Y^b}U(x)/\sqrt{x}$。对 $Y\ge2$，归一化余项连续，故闭窗上能取到最大值。对任意 $a<M$，上一条定理给出充分大 $Y$ 处的 $P_b(Y)>a$。在 RH 下，绝对包络对每个 $c>M$ 又给出充分大的 $Y$ 处 $P_b(Y)<c$，所以 $P_b(Y)\to M$。若 RH 不成立，给定任意实数 $T$，取 $C=\max\{T,M+1\}$，则 [@thm-ch31-mangoldt-pointwise-sqrt-window] 的逆否命题给出充分大的 $Y$ 处 $P_b(Y)>C\ge T$。此时 $P_b(Y)\to+\infty$。[整窗最大值的外部内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7060137372)
 
 ::: {.theorem #thm-ch31-wide-prime-window title="宽窗口质量的下界与 RH 失败时的一致发散" lean="D5/S3/Weil/Mertens/IntegratedExplicit/WidePrimeWindowMass.prime_tail_wide_window_mass"}
 对于实际素数尾项，记实端点 $2\le A\le B$ 的窗口质量为
@@ -859,7 +929,7 @@ $$
 
 在 $\operatorname{Re}(s)>-3/4$ 上使用亚纯延拓，取弱有界性条件中的左端 $\sigma_0=-1/2$。这样所有非平凡零点都计入单位高度区间的重数和，Riemann–von Mangoldt 公式将该和控制在 $O(\ln t)$。局部的 $\zeta'/\zeta$ 公式给出零点倒距离和与 $O(\ln t)$ 余项。对 $\operatorname{Re}(s)\le2$，每个倒距离可用 $\exp(\sum_{|\operatorname{Im}\rho-t|\le1} m_\rho|\ln|s-\rho||)$ 控制，右侧半平面则用绝对收敛的 Dirichlet 级数。在余下的有界高度范围，减去有限个极点的主部，再用紧性控制全纯余项。乘上 $k(s)$ 和 $1/[s(s-1)]$ 后仍满足振荡定理所需的竖向界。从 $-1/4$ 起绕实轴奇点的围道只需计入 $0$ 处的简单极点，所得主项是常数。[Srinivas，引理 3 和 4](https://www.impan.pl/shop/en/publication/transaction/download/product/83372?download.pdf)
 
-给定实部为 $\beta>1/2$ 的非平凡零点，Radziejewski 的定理给出交替振荡，幅度下界为常数乘 $x^\beta/(\ln x)^M$。有界主项可被吸收，偶数子序列给出正平均，两个相邻对数比的乘积仍趋于 $1$。因此由 [@thm-positive-average-prime-window] 得到同一窗口下界。这一步使用文献中的振荡定理，Lean 定理的范围是从正平均序列到窗口质量。任意远处的小预算窗口仍需算术证明。[Radziejewski，定理 3.2，DOI 10.4064/aa163-2-7](https://www.impan.pl/shop/en/publication/transaction/download/product/82009?download.pdf#page=8)
+给定实部为 $\beta>1/2$ 的非平凡零点，Radziejewski 的定理给出交替振荡，幅度下界为常数乘 $x^\beta/(\ln x)^M$。有界主项可被吸收，偶数子序列给出正平均，两个相邻对数比的乘积仍趋于 $1$。因此由 [@thm-positive-average-prime-window] 得到同一窗口下界。这一步使用文献中的振荡定理，Lean 定理的范围是从正平均序列到窗口质量。小预算上界另由 [@thm-ch31-prime-window-rh] 的正向给出。取外部证明的 RH，对每个固定的 $b>1$ 和 $\eta>0$，所有充分大的 $Y$ 都满足 $A_{\vartheta,b}(Y)\le Y^\eta$。[Radziejewski，定理 3.2，DOI 10.4064/aa163-2-7](https://www.impan.pl/shop/en/publication/transaction/download/product/82009?download.pdf#page=8)
 
 ::: {.theorem #thm-ch31-prime-attained-critical-width title="归一化负部质量的临界宽度" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeAttainedCriticalWidth.prime_tail_zero_liminf_iff_le_critical_width"}
 设某个非平凡零点取到最大实部 $\beta>1/2$，令 $p=\beta-1/2$。对每个固定对数宽度 $W\ge0$，定义
@@ -876,7 +946,7 @@ $$
 反复出现的零质量短窗使零点集包含一段正宽度。较宽的窗口具有精确幂次的统一正下界，因此零点集有界。连续性使零点集包含自己的上确界。完整证明由 Lean 内核检查。
 :::
 
-临界宽度处，任意晚都能找到归一化质量任意小的窗口。超过临界宽度后，每个足够晚的窗口都有同一严格正下界，该下界可以依赖宽度。确定 $W_*$ 的值以及宽度恰为 $W_*$ 的零质量窗口是否反复出现，仍是这里的开放问题。
+在该定理的假设下，宽度恰为 $W_*$ 时，任意晚都有归一化质量任意小的窗口。超过 $W_*$ 后，每个足够晚的窗口都有严格正下界，该下界可依赖宽度。黎曼 ζ 函数的所有非平凡零点都在临界线上，因而这里定义 $W_*$ 所需的假设（有零点达到最大实部 $\beta>1/2$）对它不成立。
 
 ::: {.theorem #thm-ch31-prime-phase-cluster title="固定宽度窗口的全部簇值" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePhaseCluster.prime_tail_mass_cluster_iff_of_upper_bound"}
 设 $\beta>1/2$ 是所有黎曼 ζ 函数非平凡零点实部的上界，令 $p=\beta-1/2$。对固定实数 $W\ge0$，记 $M_W(B)=N(Be^{-W},B)/B^p$。将非平凡零点按重数列为 $\rho_k$，记 $\gamma_k=\operatorname{Im}\rho_k$。设 $a_k=1/[\rho_k(1-\rho_k)]$ 当 $\operatorname{Re}\rho_k=\beta$，其余 $a_k=0$。在单位圆的乘积空间中，记 $H$ 为相位轨道 $\phi(t)=(e^{i\gamma_k t})_k$（$t\in\mathbb R$）的闭包。对 $h\in H$，定义
@@ -897,6 +967,50 @@ $$
 
 簇值的集合是一个紧区间，因为实相位轨道的闭包连通，窗口泛函连续。若没有零点实部等于 $\beta$，或 $W=0$，该区间退化为 $\{0\}$。当某个非平凡零点取到最大实部 $\beta>1/2$ 且 $W>0$ 时，这个区间的左端点等于临界宽度定理中的下极限。零属于簇集只要求任意晚的窗口质量可在归一化下逼近零。
 
+**零质量窗口与中间零点。** 设 $\beta>1/2$ 是所有非平凡零点实部的上界，记 $p=\beta-1/2$，并令 $C=2+\gamma_{\mathrm E}-\ln(4\pi)$，其中 $\gamma_{\mathrm E}$ 是欧拉常数。用上文按重数列出的 $\rho_k$ 定义
+
+$$
+G_\beta(u)=
+\sum_{1/2<\operatorname{Re}\rho_k<\beta}
+\frac{\exp((\operatorname{Re}\rho_k-1/2)u)}{|\rho_k(1-\rho_k)|}.
+$$
+
+::: {.theorem #thm-ch31-prime-critical-residual title="晚期零质量窗口的三种情形" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeCriticalResidual.prime_tail_mass_pos_or_intermediate_or_wider_zero_cluster"}
+记 $G_\beta$ 如上。 任取 $0<d<2-C$。存在实数 $T$，对每个上述上界 $\beta$，每个 $W>0$、$t-W\ge T$ 的窗口至少满足以下一项。
+
+- $N(e^{t-W},e^t)>0$。
+- 存在 $u\in[t-W,t]$ 使 $G_\beta(u)\ge d$。
+- 存在 $W'>W$，使零是 $N(Be^{-W'},B)/B^p$ 在实数 $B\to+\infty$ 时的簇值。
+:::
+
+[平方根尺度的余项界](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimeCriticalResidual.eventually_prime_tail_root_scale)。
+
+在平方根尺度上，从完整尾项减去素数幂的修正趋于 $2$。临界线上的系数为正实数，它们的总和至多为第一 Li 系数 $C$。临界线左侧的零点项由可和的系数模支配，且每项随 $u\to+\infty$ 衰减，故其总和趋于零。$G_\beta$ 控制其余低于上界线的零点。对充分大的 $u$，从上界线的贡献减去 $d$ 并加上 $G_\beta(u)$，仍得到 $e^{u/2}Q_\vartheta(e^u)$ 的上界。若窗口质量为零且整窗都有 $G_\beta<d$，连续性给出 $Q_\vartheta\ge0$，上界线的相位曲线因而在整窗上严格为正。它在左端点连续，可以向左延伸一点。延伸后的相位曲线在更宽的窗口上给出零负部质量，固定宽度簇集公式随即给出相应的零簇值。中间谱和 $G_\beta(u)$ 随 $u$ 单调不减。因此，若右端点满足 $G_\beta(t)\le d<2-C$，可选 $d<d'<2-C$，用 $d'$ 的阈值保证整窗的严格余量。
+
+若某个非平凡零点取到最大实部 $\beta>1/2$，且实部小于 $\beta$ 的非平凡零点都满足 $\operatorname{Re}\rho\le1/2$，则 $G_\beta=0$。第一 Li 系数满足 $C<1/3$，故可取 $d=1$。现在令 $W=W_*$。更宽窗口的下极限严格为正，排除了第三项，所以每个充分晚的临界宽度窗口都有严格正的质量。任何同一右端点、更宽且左端点至少为 $2$ 的窗口都包含这个临界窗口，因而质量也严格为正。临界宽度的归一化质量仍可任意接近零。若存在实部严格介于 $1/2$ 和 $\beta$ 的零点，临界宽度下精确零质量窗口是否反复出现仍待确定。
+
+::: {.theorem #thm-ch31-growing-prime-tail-clusters title="增长对数宽度的全部簇值" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeGrowingWidthCluster.prime_tail_growing_width_cluster_iff_of_upper_bound"}
+设 $β>1/2$ 是所有非平凡零点实部的上界。仍取 $p=\beta-1/2>0$ 和同一轨道闭包 $H$。设实数左端点 $A(B)$ 对所有充分大的 $B$ 满足 $2\le A(B)\le B$，且 $\ln(B/A(B))\to+\infty$。$N(A(B),B)/B^p$ 的簇集为
+$$
+\left\{I_\infty(h):h\in H\right\},\qquad
+I_\infty(h)=\int_0^\infty e^{-ps}\max(-F_h(-s),0)\,ds .
+$$
+其中包括 $A(B)=2$，也允许 $A(B)$ 随 $B$ 非连续或非单调地变化。
+:::
+
+固定 $L\ge0$。当 $B$ 充分大，窗口包含 $[Be^{-L},B]$。存在充分大的 $X\ge2$，使负部密度在 $[X,\infty)$ 上由 $Cx^{p-1}$ 控制。在 $\max(A(B),X)$ 处分开 $Be^{-L}$ 左侧的部分，归一化后的贡献至多为 $N(2,X)/B^p+(C/p)e^{-pL}$。相位积分在 $L$ 之后的尾部至多为 $(S/p)e^{-pL}$，其中 $S=\sum_k |1/(\rho_k(1-\rho_k))|$。前一个估计对允许的左端点一致成立，后一个对相位一致成立。先选 $L$，再令 $B$ 增长，便得到由 $\ln B$ 处实际相位给出的近似，与固定宽度情形相同。有限宽度相位积分的一致收敛给出 $I_\infty$ 的连续性。轨道闭包紧且连通，故簇集是紧区间。当实部为 $\beta$ 的直线没有零点时，相位积分恒为零，归一化质量趋于零。
+
+::: {.theorem #thm-ch31-growing-prime-tail-error title="同一右端点下的统一误差界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeGrowingWidthCluster.prime_tail_window_extent_bound_of_upper_bound"}
+仍设 $\beta>1/2$ 是所有非平凡零点实部的上界。存在依赖于 $\beta$ 的 $K\ge0$，使对每个 $\varepsilon>0$，当 $B$ 充分大时，所有 $a\in[2,B]$ 都满足
+$$
+\left|\frac{N(a,B)}{B^p}-I_\infty(\phi(\ln B))\right|
+\le \varepsilon+K(a/B)^p .
+$$
+有符号误差 $N(a,B)/B^p-I_\infty(\phi(\ln B))$ 也至多为 $\varepsilon$。
+:::
+
+先与从 $2$ 开始的累积质量比较。移去 $[2,a]$ 时，质量减少 $N(2,a)$。沿用早期区间的固定积分与后期的幂函数界，可得 $N(2,a)\le Ka^p$。因此幂函数项控制移动左端点损失的质量，$\varepsilon$ 来自累积质量的相位近似。省略质量的误差随对数宽度指数衰减。移去的质量非负，所以有符号误差的上界没有幂函数项。
+
 **两条谱线在临界窗口的共同触点。** 设某个非平凡零点取到最大实部 $\beta>1/2$，并设 $1/2<\gamma<\beta$，使所有实部小于 $\beta$ 的非平凡零点的实部都至多为 $\gamma$。用 $F_{\alpha,h}(u)$ 表示把上文相位级数的系数限制到实部为 $\alpha$ 的直线后得到的曲线。两条曲线都使用同一个 $h\in H$。先从完整零点级数中精确扣除 $\beta$ 线，再在 $\gamma$ 尺度归一化，得到
 $$
 e^{(1-\gamma)u}Q_\vartheta(e^u)=
@@ -910,6 +1024,7 @@ $$
 这个判据允许只检查一部分触点。设 $K$ 是 $H\times[0,W_*]$ 中的紧集，每个 $(h,s)\in K$ 的 $s$ 都是最高谱线在该窗口的最低点，且每个 $h\in H$ 至少对应 $K$ 中一个最低点。只需在 $K$ 中满足 $F_{\beta,h}(-s)=0$ 的点检查 $F_{\gamma,h}(-s)<0$。取 $K$ 为全体最低点组成的紧集，就得到上面的判据。
 
 每个相位下，最高谱线在窗口内的最小值至多为零。否则，左端的严格正性允许把窗口拓宽，产生与临界宽度定理冲突的零簇值。在 $K$ 上，$F_\beta$ 或 $F_\gamma$ 至少一个严格为负，所以二者较小值的最大值严格为负。当最高谱线有这份负余量时，增长因子压过次高谱线的有界贡献。当次高谱线给出负余量时，最高谱线仍非正。于是同一相位的同一个窗口内存在所需的负点。若精确零质量的临界窗口任意晚地出现，则至少有一个共同触点满足 $F_\gamma\ge0$。两条谱线的实部条件及共同触点的符号条件在这里仍是前提。
+
 
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 
@@ -959,18 +1074,18 @@ $$
 **韦伊显式对偶：临界线零点驻波曲面雕刻切比雪夫素数阶梯实验卡（`weil-explicit-prime-staircase`）。** 推进谱截止频率 $t$ 或调节零点对上限 $K \in [5, 50]$（预设停在 $t = 145 > \gamma_{50}$ 叠满 $50$ 对零点，点按播放可从 $t = 0$ 重演逐层生长；琥珀色标出最前排当前重构剖面 $K(t)$ 与可拖动读数点手柄 $x^*$）：后缘主项斜坡逐行累加驻波谐波 $-2\operatorname{Re}(x^{\rho_k}/\rho_k)$ 铺成紫色三维部分和曲面，最前排琥珀色剖面在 $x = 6, 10, 12$ 等合数处异相抵消压平，而在 $x = 2, 3, 4, 5, 7, 8, 9, 11, 13$ 处陡升紧贴青色精确中点阶梯 $\psi_0(x)$，前方地面上品红色零点驻波残差同步逼近青色锯齿，条带小图逐整数对比青色精确阶跃 $\Lambda(n)$ 与紫色重建升高（绿色 `LEAN ✓` 标出 `actual_integrated_explicit_formula`）。
 :::
 
-## 31.1.4 文献脉络与认识论边界审计，及向 §34.29 算术枢轴隧穿的交棒 {#sec-ch34-28-4}
+## 31.1.4 文献脉络与认识论边界审计，及向 §31.2 算术枢轴隧穿的交棒 {#sec-ch34-28-4}
 
 在进入完整三维交互沙盘并向下一节交棒之前，我们将本节横跨解析数论、量子统计物理、半经典量子混沌与 Lean 内核形式化定理的五重认识论边界逐条归档：
 
 ::: {.remark #rem-ch34-riemann-path-integral-literature title="黎曼路径积分、素数气体、半经典迹公式与显式对偶的文献脉络及五层认识论边界审计（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本节严格区分以下五个认识论层级，绝不将物理模型或有限双臂机制混同于开放猜想的形式证明：
+**文献结果，未在本书形式化。** 以下五项分别列出本节涉及的定理、文献、计算、几何模型与尚待实现的谱构造。
 
 1. **Lean 4 内核形式化定理（[@thm-ch34-riemann-prime-arc-bridge] 及 [§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) 锚点）**：素数对数在 $\mathbb{Q}$ 上的线性无关性（`prime_log_rational_independence`）、严格半平面 `1 < s.re` 上的欧拉—狄利克雷恒等式（`riemann_zeta_dirichlet_sum_eq_euler_product`）、完备读数的整函数反射对称与共轭协变（`xi_reading_reflection`、`xi_reading_one_sub_conj`）、证明全对称整函数可拥有离线四元组零点 $\{\frac{1}{2}\pm\delta\pm i\gamma\}$ 的四次反例（`full_symmetry_not_fixed_line_localization`，$\delta \neq 0,\; \gamma \neq 0$）、严格正实轴 `0 < y` 上的无条件积分显式公式（`actual_integrated_explicit_formula`）、半平面 `0 < s.re` 且 $s \neq 1$ 上的交错狄利克雷部分和延拓（`tendsto_alternating_partialSums_eta_of_ne_one`），以及秩一测量玻恩模平方配对权重（`rank_one_born_pairing_weight`），均已由本书所钉 `trureturing` 仓库在 Lean 内核中完整检核。
 2. **经典解析数论、量子统计与量子混沌文献定理（已有严格文献证明或理论体系，未以连续统形式在本书形式化）**：$\zeta(s)$ 的解析延拓、圆周 $\vartheta$ 函数泊松求和推导函数方程及临界线猜想始自 B. Riemann（*Monatsber. Königl. Preuss. Akad. Wiss. Berlin*, 671–680, 1859）；素数幂切比雪夫阶梯 $\psi_0(x)$ 的点态对称截断显式公式及其局部群傅里叶对偶推广由 H. von Mangoldt（*J. Reine Angew. Math.* **114**, 255–305, 1895）与 A. Weil（*Medd. Lunds Univ. Mat. Sem.*, Tome Supplémentaire, 252–265, 1952）奠定；黎曼猜想与莫比乌斯和平方根界 $M(x) = \mathcal{O}_\varepsilon(x^{1/2+\varepsilon})$ 的等价性由 J. E. Littlewood（*C. R. Acad. Sci. Paris* **154**, 263–266, 1912）证出；满足黎曼型函数方程但无欧拉乘积且具离线零点的狄利克雷级数反例由 H. Davenport 与 H. Heilbronn（*J. London Math. Soc.* **11**, 181–185 & 307–312, 1936）构造；双曲曲面闭合测地线迹公式与半经典周期轨道稳定性幅值因子 $\lvert\det(I - M_p)\rvert^{-1/2} \sim e^{-L_p/2}$ 由 A. Selberg（*J. Indian Math. Soc.* **20**, 47–87, 1956）与 M. C. Gutzwiller（*J. Math. Phys.* **12**, 343–358, 1971）建立，标度流哈密顿量 $\hat{H} = \frac{1}{2}(\hat{x}\hat{p} + \hat{p}\hat{x})$ 的半经典黎曼谱纲领由 M. V. Berry 与 J. P. Keating（*SIAM Rev.* **41**, 236–266, 1999）系统阐述；将 $\zeta(\beta)$ 解释为对数能谱 $E_p = \ln p$ 的自由玻色“素数气体”与非交换量子统计配分函数（伴随 $\beta = 1$ 自发对称破缺相变）由 B. Julia（*Number Theory and Physics*, Springer Proc. Phys. **47**, 276–293, 1990）与 J.-B. Bost & A. Connes（*Selecta Math. (N.S.)* **1**, 411–457, 1995）创立；几何量子化中的半密度（$\frac{1}{2}$-density）内积框架见 B. Kostant（*Lecture Notes in Math.* **170**, 1970）与 J.-M. Souriau（*Structure des systèmes dynamiques*, Dunod, 1970）。
 3. **代数手算与百位精度基准（`手工推导` / `NUM`）**：单枚素数正逆双臂干涉仪下界 $\lvert p^{-\sigma}e^{i\alpha} + p^{-(1-\sigma)}e^{i\beta}\rvert \ge \lvert p^{-\sigma} - p^{-(1-\sigma)}\rvert$、由反射与共轭协变导出临界线虚部恒零 $\operatorname{Im}\operatorname{xiReading}(\frac{1}{2}+it) = 0$，以及 [@ex-ch34-critical-zeros-and-dual-shells] 与 [@ex-ch34-weil-prime-staircase-reconstruction] 中的全部数值表格，均属初等严格手算与 100 位有效数字独立核算结果。
 4. **极小圆弧体与概念塔统一诠释模型（`MODEL`）**：将素数 $p$ 视为正交极小圆弧体 $\Delta\mathcal{T}_p$、自然数对数 $\ln n$ 视为复合路径作用量、莫比乌斯符号 $\mu(n)$ 视为克利福德外积 $\Lambda^k$ 泡利不相容手性签名，并在 `1—3—3—1` 概念塔中把 $\sigma = \frac{1}{2}$ 诠释为观察者往返双投影半密度幺正脊线，属于本书提出的统一几何物理模型。
-5. **开放问题边界（`OPEN`）**：**黎曼猜想**（[@conj-riemann-hypothesis]）断言临界带 $0 < \operatorname{Re}(s) < 1$ 内一切零点均满足 $\operatorname{Re}(s) = \frac{1}{2}$，目前仍是**未解决的开放猜想（`OPEN`）**；同样，构造一个无条件自伴且其本征谱被严格证明精确等于黎曼非平凡零点纵坐标的 Hilbert–Pólya / Berry–Keating 算子，亦属当代数学与数学物理的开放问题。
+5. **开放的谱构造（`OPEN`）**。Hilbert–Pólya / Berry–Keating 路线仍需构造自伴算子，并证明其谱精确给出黎曼非平凡零点的纵坐标。黎曼猜想本身的外部形式证明及独立核验见 [§39.2.2](ch39-s25-axiom-omega-five-tier-deduction-cascade.md#sec-ch39-25-2)。
 :::
 
 现在，请步入下方这座完整交互式《黎曼路径积分与素数极小圆弧体临界线相消沙盘》亲手验证全节脉络：先在临界线 $\sigma = 0.50$ 上依次点按前五颗真实零点胶囊 $\gamma_1$ 至 $\gamma_5$，目睹那条由素数与合数一步步拼接抬升的紫色极小圆弧路径螺旋，如何在每一次抵达 $\gamma_k$ 时都围绕穿过原点靶心 `O` 的琥珀色延拓轴盘旋张开、令琥珀色落点珠分毫不差归零（$\lvert\zeta\rvert = 0.0000$）；随后轻轻拖动琥珀色手柄或“实部 $\sigma$”滑块离开 $0.50$ 哪怕 $0.05$ 或 $0.12$，观察地面上代表正向路径 $p^{-\sigma}$ 的青色壳环与代表逆向对偶路径 $p^{-(1-\sigma)}$ 的品红壳环如何瞬间一缩一胀分道扬镳，将原本严丝合缝归零的琥珀色延拓落点当场弹离原点；最后切入“素数阶梯”场景，看临界线上的零点驻波曲面如何反过来在连续实轴上雕琢出刀削般的青色素数阶梯！
@@ -978,5 +1093,5 @@ $$
 与此同时，这座沙盘也把整部数论最惊心动魄的悬念摆到了我们面前：既然在右侧 $\sigma > 1$ 的欧拉乘积安全区里，每一枚素数极小圆弧体 $\Delta\mathcal{T}_p$ 原本完全乘性解耦、严格无零点且具备天然正定性，为什么过去一百多年的传统解析数论一旦试图把这份正定性推过 $s = 1$ 发散极点山峰去猎杀假想的离线四元组 $\frac{1}{2} \pm \delta \pm i\gamma_0$，就会在按自然数大小 $n = 1, 2, \dots, M$ 排队截断时迎头撞上**算术一维排序壁垒**与**图兰（Turán）芝诺假零点陷阱**，甚至连最强的单级磨光器也卡在 $\vartheta = \frac{4}{7}$ 衰减墙前？把 [§30.1](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization) 破除排序壁垒的**局部波前稀疏舒尔枢轴重整**与 [§30.2](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit) 潜入 $90^\circ$ 盲区的**内割弦多级共振隧穿**双剑合璧——请翻开下一节 [§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)！
 
 ::: {.viz src="riemann-prime-arc-path-integral-sandbox" height="640"}
-**黎曼路径积分与素数极小圆弧体临界线相消完整交互实验室（`riemann-prime-arc-path-integral-sandbox`）。** 在统一暗色三栏实验台中自由切换全部四张递进实验卡——“欧拉局域绕行、复合路径螺旋与莫比乌斯外积对偶”、“临界线 $\sigma = \frac{1}{2}$ 半密度双壳锁相与零点归零”、“偏离临界线正逆双壳失衡分裂”以及“韦伊显式对偶：零点驻波曲面雕刻素数阶梯”——实时联动实部滑块 $\sigma \in [0.20, 2.00]$、路径数 $N \in [20, 400]$、前五颗真实黎曼零点胶囊 $\gamma_1\text{–}\gamma_5$、莫比乌斯外积对偶开关与显式公式零点对数 $K \in [5, 50]$（紫色绘制自然数复合路径链 $\sum n^{-s}$、欧拉部分乘积、零点驻波部分和曲面与 `ARGUED` 文献依据，青色绘制地面正向壳环 $p^{-\sigma}$ 与精确切比雪夫阶梯 $\psi_0(x)$ 及 $\Lambda(n)$ 阶跃，品红色标示逆向对偶壳环 $p^{-(1-\sigma)}$、莫比乌斯外积链 $\sum\mu(n)n^{-s}$ 与零点驻波残差，琥珀色标出延拓竖轴与落点珠 $\zeta(s)$、当前零点胶囊 $\gamma_k$、最前排重构剖面 $K(t)$ 及交互手柄，红色专用于标示 [@conj-riemann-hypothesis] 的 `OPEN` 开放边界，绿色 `LEAN ✓` 标出 [@thm-ch34-riemann-prime-arc-bridge] 的全部七项 `trureturing` 内核定理实例）。
+**黎曼路径积分与素数极小圆弧体临界线相消完整交互实验室（`riemann-prime-arc-path-integral-sandbox`）。** 在统一暗色三栏实验台中自由切换全部四张递进实验卡——“欧拉局域绕行、复合路径螺旋与莫比乌斯外积对偶”、“临界线 $\sigma = \frac{1}{2}$ 半密度双壳锁相与零点归零”、“偏离临界线正逆双壳失衡分裂”以及“韦伊显式对偶：零点驻波曲面雕刻素数阶梯”——实时联动实部滑块 $\sigma \in [0.20, 2.00]$、路径数 $N \in [20, 400]$、前五颗真实黎曼零点胶囊 $\gamma_1\text{–}\gamma_5$、莫比乌斯外积对偶开关与显式公式零点对数 $K \in [5, 50]$（紫色绘制自然数复合路径链 $\sum n^{-s}$、欧拉部分乘积、零点驻波部分和曲面与 `ARGUED` 文献依据，青色绘制地面正向壳环 $p^{-\sigma}$ 与精确切比雪夫阶梯 $\psi_0(x)$ 及 $\Lambda(n)$ 阶跃，品红色标示逆向对偶壳环 $p^{-(1-\sigma)}$、莫比乌斯外积链 $\sum\mu(n)n^{-s}$ 与零点驻波残差，琥珀色标出延拓竖轴与落点珠 $\zeta(s)$、当前零点胶囊 $\gamma_k$、最前排重构剖面 $K(t)$ 及交互手柄，红色 `OPEN` 徽章及其配套的 RH 状态文字沿用外部核验公布前的版本，绿色 `LEAN ✓` 标出 [@thm-ch34-riemann-prime-arc-bridge] 的全部七项 `trureturing` 内核定理实例）。
 :::
