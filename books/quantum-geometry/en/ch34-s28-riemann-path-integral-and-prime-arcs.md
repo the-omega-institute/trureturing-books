@@ -1020,11 +1020,11 @@ There is a $K>0$ such that every $2\le a\le B$ satisfies
 $$
 |E(a,B)|\le K\left[(a/B)^p+
 \begin{cases}
-B^{\gamma-\beta},&\gamma>1/2,\\
+\dfrac{B^{\gamma-1/2}-a^{\gamma-1/2}}{B^p},&\gamma>1/2,\\
 B^{-p}\ln(B/a),&\gamma=1/2.
 \end{cases}\right]
 $$
-After the $\beta$-line is subtracted, absolute summability of the zero coefficients bounds the error density by a constant times $x^{\gamma-3/2}$. Taking negative parts is $1$-Lipschitz, and the same power bound absorbs the square-root-scale correction for prime powers. Integrating the density over $[a,B]$ produces a logarithm at $\gamma=1/2$. The phase integral beyond $\ln(B/a)$ gives the $(a/B)^p$ term.
+After the $\beta$-line is subtracted, absolute summability of the zero coefficients bounds the error density by a constant times $x^{\gamma-3/2}$. Taking negative parts is $1$-Lipschitz, and the same power bound absorbs the square-root-scale correction for prime powers. Integrating the density over $[a,B]$ retains both endpoints. It gives a difference of powers for $\gamma>1/2$ and a logarithm at $\gamma=1/2$. Each spectral error term vanishes at $a=B$. The phase integral beyond $\ln(B/a)$ gives the $(a/B)^p$ term.
 
 Suppose a nontrivial zero attains the largest real part $\beta>1/2$ and every nontrivial zero strictly to its left has real part at most $1/2$. Then there are $c,C>0$ such that all sufficiently large $B$ satisfy
 $$
