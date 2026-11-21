@@ -653,14 +653,17 @@ $$
 在同一归一化下，实部小于 $\beta$ 的零点项趋于零。零点系数的绝对可和性给出支配界，允许任意接近最右线的低实部零点。最右线上的零点项构成一致连续的函数。素数幂修正的归一化量也趋于零，因为 $\beta>1/2$。因此，足够晚的正峰可延伸为一段固定的右向对数宽度，在整个区间内仍有 $Q_\vartheta>0$。指数换元将找到下一处正峰所需的固定对数距离变成倍数 $K$，并将正号区间的固定宽度变成比例 $\kappa_0$。 完整证明由 Lean 内核检查。
 :::
 
-**最大实部取到时，固定比例窗口的有限极限。** 假设某个非平凡零点 $\rho$ 取到最大实部 $\beta=\operatorname{Re}\rho>1/2$。对任意固定的实数 $\kappa>1$，设
+::: {.theorem #thm-ch31-prime-mass-no-finite-limit title="最大实部取到时的固定比例质量无有限极限" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeAttainedMassNonconvergence.prime_tail_mass_no_finite_limit_of_attained_zero"}
+假设某个非平凡零点 $\rho$ 取到最大实部 $\beta=\operatorname{Re}\rho>1/2$。对任意固定的实数 $\kappa>1$，设
 
 $$
 M_\kappa(B)=\frac{N(B/\kappa,B)}{B^{\beta-1/2}}.
 $$
 
 当实数 $B\to+\infty$ 时，$M_\kappa(B)$ 没有有限极限。
+:::
 
+::: proof
 取 $p=\beta-1/2$ 及 $1<\lambda\le\min(\kappa,\kappa_0)$。把同一窗口 $[B/(\lambda\kappa),B]$ 分别在 $B/\lambda$ 和 $B/\kappa$ 处分割，得到
 
 $$
@@ -670,7 +673,10 @@ $$
 
 若 $M_\kappa$ 趋于有限值 $L$，则 $0\le M_\lambda\le M_\kappa$ 给出晚期有界性。上式右边趋于 $(1-\lambda^{-p})L$，而 $0<\kappa^{-p}<1$，所以递推迫使 $M_\lambda$ 趋于 $(1-\lambda^{-p})L/(1-\kappa^{-p})$。将候选极限从递推两边扣除。固定迭代次数 $n$ 后，初始误差乘以 $\kappa^{-np}$，其余项由趋于零的误差和收敛的几何级数控制。任意晚的零质量短窗使这个极限为零，从而 $L=0$。
 
-取一个固定整数 $m$，使 $\kappa^m$ 至少达到固定比例幂下界所要求的比例。将 $[B/\kappa^m,B]$ 划分为 $m$ 个比例为 $\kappa$ 的相邻窗口。归一化总质量是 $m$ 项带有固定权重的 $M_\kappa$ 之和，因此也趋于零。这与该较大窗口在同一指数 $p$ 下的正下界矛盾。Bingham 和 Gashi 在离散对数移动平均中也使用几何展开，将延迟平均与累积平均相联。[Bingham–Gashi，式（2.3）–（2.4）](https://arxiv.org/abs/1408.1301)
+取一个固定整数 $m$，使 $\kappa^m$ 至少达到固定比例幂下界所要求的比例。将 $[B/\kappa^m,B]$ 划分为 $m$ 个比例为 $\kappa$ 的相邻窗口。归一化总质量是 $m$ 项带有固定权重的 $M_\kappa$ 之和，因此也趋于零。这与该较大窗口在同一指数 $p$ 下的正下界矛盾。 完整证明由 Lean 内核检查。
+:::
+
+Bingham 和 Gashi 在离散对数移动平均中也使用几何展开，将延迟平均与累积平均相联。[Bingham–Gashi，式（2.3）–（2.4）](https://arxiv.org/abs/1408.1301)
 
 ::: {.theorem #thm-positive-average-prime-window title="正平均序列给出每个充分晚的窗口下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.eventual_prime_window_lower_of_log_frequency"}
 沿用完全曼戈尔特余项 $U$ 和素数负部质量 $N$，对实数 $v$ 记 $H(v)=\int_{v-\ln 2}^v U(e^t)\,dt$。给定实序列 $u_n\to+\infty$，满足 $u_{n+1}/u_n\to1$，并且对某些 $c>0$、$\beta>1/2$ 和 $M\in\mathbb R$，充分大的 $n$ 都满足 $H(u_n)\ge c e^{\beta u_n}/u_n^M$。那么对每个 $\varepsilon>0$，充分大的 $Y$ 都有
