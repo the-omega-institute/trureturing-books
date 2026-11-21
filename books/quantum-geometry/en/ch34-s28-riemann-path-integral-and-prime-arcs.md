@@ -456,6 +456,40 @@ Conversely, suppose $\zeta(\rho)=0$ with $\beta=\operatorname{Re}\rho>1/2$. For 
 Take $\varepsilon=\eta=b(\beta-1/2)/3$. The lower bound becomes $Y^{2\eta}$, in contradiction with $A_{\vartheta,b}(Y)\le Y^\eta$ on arbitrarily late windows. This excludes zeros to the right of the critical line. Reflection of the nontrivial zeros across that line gives RH. The full proof is checked by the Lean kernel.
 :::
 
+For the complete Mangoldt remainder $U(x)=-xQ(x)$, one can bound the value at each real point directly. Both criteria below use a one-sided upper bound. For fixed $b>1$ the logarithmic length of the window is $(b-1)\ln Y$, which grows with its starting point $Y$.
+
+::: {.theorem #thm-ch31-mangoldt-pointwise-power-window title="A pointwise power-window criterion for the complete Mangoldt remainder" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtPointwiseWindows.rh_iff_pointwise_power_windows"}
+Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\kappa>0$ and every real starting bound $R$ there is a $Y\ge\max\{R,2\}$ such that every real $x$ in the same closed interval $[Y,Y^b]$ satisfies
+
+$$
+U(x)\le x^{1/2+\kappa}.
+$$
+:::
+
+::: proof
+Under RH the absolute envelope above gives $|U(x)|\le\sqrt{x}$ for all sufficiently large $x$, so for each $\kappa>0$ every sufficiently late window works.
+
+Conversely, given a target exponent $\eta>0$ for the prime-tail mass, take $\kappa=\eta/(2b)$. The prime-power correction satisfies $\sqrt{x}(Q(x)-Q_\vartheta(x))\to2$, so it is at most $3$ throughout sufficiently late windows. Substituting $U(x)/\sqrt{x}=-\sqrt{x}Q(x)$ into the pointwise bound and taking the positive part gives $\max\{-\sqrt{x}Q_\vartheta(x),0\}\le x^\kappa+3$. Divide by $x$ and integrate over the window to obtain
+
+$$
+A_{\vartheta,b}(Y)\le4Y^{b\kappa}(b-1)\ln Y\le Y^\eta
+$$
+
+on every sufficiently late window satisfying the pointwise bound. Such $Y$ are arbitrarily large, so [@thm-ch31-prime-window-rh] gives RH. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-mangoldt-pointwise-sqrt-window title="A fixed square-root coefficient for complete Mangoldt windows" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtPointwiseWindows.rh_iff_pointwise_sqrt_windows"}
+Write $M=2+\gamma_{\mathrm{EM}}-\ln(4\pi)$ for the first Li mass, where $\gamma_{\mathrm{EM}}$ is Euler’s constant. Fix real numbers $b>1$ and $C>M$. The Riemann hypothesis holds if and only if for every real $R$ there is a $Y\ge\max\{R,2\}$ such that every $x\in[Y,Y^b]$ satisfies
+
+$$
+U(x)\le C\sqrt{x}.
+$$
+:::
+
+::: proof
+Under RH, taking the positive margin $C-M$ in the absolute envelope for $U(x)/\sqrt{x}$ gives the upper bound $C\sqrt{x}$ at all sufficiently large $x$. Conversely, for each $\kappa>0$, moving the starting bound sufficiently far out ensures $C\le x^\kappa$ throughout the window. The same window then satisfies the pointwise power bound, and [@thm-ch31-mangoldt-pointwise-power-window] gives RH. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.theorem #thm-ch31-wide-prime-window title="A lower mass bound on wide windows and uniform divergence if RH fails" lean="D5/S3/Weil/Mertens/IntegratedExplicit/WidePrimeWindowMass.prime_tail_wide_window_mass"}
 For the actual prime-only tail, write the mass at real endpoints $2\le A\le B$ as
 

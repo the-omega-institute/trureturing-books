@@ -456,6 +456,40 @@ $$
 取 $\varepsilon=\eta=b(\beta-1/2)/3$，下界就成为 $Y^{2\eta}$，与任意远处仍有 $A_{\vartheta,b}(Y)\le Y^\eta$ 矛盾。因此临界线右侧无零点，再用非平凡零点关于临界线的对称性即得 RH。完整证明由 Lean 内核检查。
 :::
 
+对完整 Mangoldt 余项 $U(x)=-xQ(x)$，也可以直接限制每个实点上的函数值。下列两个判据都只要求上界。窗口指数 $b>1$ 固定后，窗口的对数长度为 $(b-1)\ln Y$，随起点 $Y$ 增长。
+
+::: {.theorem #thm-ch31-mangoldt-pointwise-power-window title="完整 Mangoldt 余项的逐点幂窗判据" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtPointwiseWindows.rh_iff_pointwise_power_windows"}
+固定实数 $b>1$。黎曼假设成立，当且仅当对每个 $\kappa>0$、每个实数起点下界 $R$，都存在 $Y\ge\max\{R,2\}$，使得同一个闭区间 $[Y,Y^b]$ 内的每个实数 $x$ 都满足
+
+$$
+U(x)\le x^{1/2+\kappa}.
+$$
+:::
+
+::: proof
+在 RH 下，前述绝对包络对所有充分大的 $x$ 给出 $|U(x)|\le\sqrt{x}$，故可对每个 $\kappa>0$ 取任意充分晚的窗口。
+
+反过来，给定素数尾项的质量损失 $\eta>0$，取 $\kappa=\eta/(2b)$。素数幂修正满足 $\sqrt{x}(Q(x)-Q_\vartheta(x))\to2$，所以充分晚的窗口内该修正至多为 $3$。把 $U(x)/\sqrt{x}=-\sqrt{x}Q(x)$ 代入逐点上界，同时取正部，得到 $\max\{-\sqrt{x}Q_\vartheta(x),0\}\le x^\kappa+3$。除以 $x$ 后在窗上积分，便有
+
+$$
+A_{\vartheta,b}(Y)\le4Y^{b\kappa}(b-1)\ln Y\le Y^\eta
+$$
+
+对所有充分晚且满足逐点上界的窗口成立。这样的 $Y$ 任意大，故 [@thm-ch31-prime-window-rh] 给出 RH。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-mangoldt-pointwise-sqrt-window title="固定平方根系数的完整 Mangoldt 窗口判据" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtPointwiseWindows.rh_iff_pointwise_sqrt_windows"}
+记第一 Li 质量为 $M=2+\gamma_{\mathrm{EM}}-\ln(4\pi)$，其中 $\gamma_{\mathrm{EM}}$ 为欧拉常数。固定实数 $b>1$ 与 $C>M$。黎曼假设成立，当且仅当对每个实数 $R$，都存在 $Y\ge\max\{R,2\}$，使得对每个 $x\in[Y,Y^b]$ 都有
+
+$$
+U(x)\le C\sqrt{x}.
+$$
+:::
+
+::: proof
+在 RH 下，对归一化余项 $U(x)/\sqrt{x}$ 的绝对包络取正损失 $C-M$，即得充分大 $x$ 处的上界 $C\sqrt{x}$。反过来，对任意 $\kappa>0$，起点取得足够大时，整个窗口上都有 $C\le x^\kappa$。同一窗口因此满足逐点幂界，由 [@thm-ch31-mangoldt-pointwise-power-window] 得到 RH。完整证明由 Lean 内核检查。
+:::
+
 ::: {.theorem #thm-ch31-wide-prime-window title="宽窗口质量的下界与 RH 失败时的一致发散" lean="D5/S3/Weil/Mertens/IntegratedExplicit/WidePrimeWindowMass.prime_tail_wide_window_mass"}
 对于实际素数尾项，记实端点 $2\le A\le B$ 的窗口质量为
 
