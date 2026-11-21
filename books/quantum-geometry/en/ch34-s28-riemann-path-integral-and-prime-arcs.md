@@ -277,7 +277,19 @@ The joint external Lean environment also checks a finite set of same-host tests.
 
 In the reference design at $b=3/2$ the constants are $C_{\mathrm{abs}}=2$ and $C_0=3$, and the resulting modulus-one family has $e_D=2$ and $e_L=0$. Given such a family, there exists $\varepsilon_1>0$ such that for each $0<\varepsilon<\varepsilon_1$ one can first fix $K,c_{HH},e_K$ and then, for every natural lower bound $A$, find $k\ge\max\{A,2\}$. At $x=n^4$ for each integer $k^3\le n\le k^4$, `EAtH` and `CoreAtH` hold for the same host and finite set. The power exponent in the comparison is $1/2+(2+0+7)\varepsilon=1/2+9\varepsilon$. For any target loss $\kappa>0$, choose $\varepsilon$ small enough that $9\varepsilon\le\kappa$. The resulting arbitrarily late integer blocks give the conditional implication to RH. [Directed kernel replay of the integer blocks, design input, and exponent](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061662378)
 
-The declaration in Alpöge’s original proof is `riemannHypothesis : RiemannHypothesis`, with Mathlib’s definition on the right. Sutherland’s public audit lists the declaration’s three axioms as `propext`, `Classical.choice`, and `Quot.sound`. The arithmetic modules used here are pinned at `ddf1d5f8`, which has the same `src` tree, Lean toolchain, and Lake manifest as `6977b88c`, the commit documenting the public verification. The two local modules for the integer-block argument, `DesignIntegerBlocks` and `RawDesignIntegerBlocks`, each passed a targeted kernel replay. The local design-to-family step takes nine closure estimates as inputs. A separate route from the original Galois row obtains integer blocks via `BookIntegerHostBlocks.of_reference` and then deduces RH. This complete composition has been checked at source level. [Axiom audit of the original proof](https://math.mit.edu/~drew/grh/audit.log) · [Public verification files](https://math.mit.edu/~drew/grh/)
+The declaration in Alpöge’s original proof is `riemannHypothesis : RiemannHypothesis`, with Mathlib’s definition on the right. Sutherland’s public audit lists the declaration’s three axioms as `propext`, `Classical.choice`, and `Quot.sound`. The arithmetic modules used here are pinned at `ddf1d5f8`, which has the same `src` tree, Lean toolchain, and Lake manifest as `6977b88c`, the commit documenting the public verification. [Axiom audit of the original proof](https://math.mit.edu/~drew/grh/audit.log) · [Public verification files](https://math.mit.edu/~drew/grh/)
+
+The two local modules for the integer-block argument, `DesignIntegerBlocks` and `RawDesignIntegerBlocks`, each passed a targeted kernel replay. The local design-to-family step takes nine closure estimates as inputs.
+
+A separate route obtains the modulus-one arithmetic family from the original Galois row and then obtains integer blocks via `BookIntegerHostBlocks.of_reference`. The arithmetic module supplies only `TopG` to this argument. In the reference library’s Lean 4.33.1 environment, `leanchecker` replayed the arithmetic module, the final conclusion module, and an independent audit module. The audit file `IntegerBlockAudit.lean` checked the declaration `BookReference.riemannHypothesis_via_integer_blocks : RiemannHypothesis` against Mathlib’s statement and printed the following proof term.
+
+```lean
+BookIntegerHostBlocks.rh_of_blocks
+  (BookReference.integer_blocks_of_row
+    UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter)
+```
+
+Its only axioms are `propext`, `Classical.choice`, and `Quot.sound`. The entry point imports neither `Main` nor `MainConclusion` from the original library. The frozen fourth-power window criterion cited in this section comes from the book’s Lean 4.35 environment. [Complete integer-block proof and kernel replay](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7063096204)
 
 **What does monotonicity alone tell us about negative mass in a window?**
 

@@ -277,7 +277,19 @@ $$
 
 在参考库取 $b=3/2$ 的设计中，常数为 $C_{\mathrm{abs}}=2$、$C_0=3$，所得模一族满足 $e_D=2$、$e_L=0$。给定这样的族，有 $\varepsilon_1>0$，使每个 $0<\varepsilon<\varepsilon_1$ 都能先固定 $K,c_{HH},e_K$，再对每个自然数下界 $A$ 找到 $k\ge\max\{A,2\}$。对整数块 $k^3\le n\le k^4$ 中的每个 $n$，在 $x=n^4$ 取同一宿主和有限集上的 `EAtH` 与 `CoreAtH`。比较的幂指数为 $1/2+(2+0+7)\varepsilon=1/2+9\varepsilon$。给定目标损失 $\kappa>0$，选取足够小的 $\varepsilon$ 使 $9\varepsilon\le\kappa$，这些任意晚的整数块就给出通向 RH 的条件推论。[整数块、设计输入与指数的定向核验](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061662378)
 
-Alpöge 原证明的声明是 `riemannHypothesis : RiemannHypothesis`，其右端为 Mathlib 的定义。Sutherland 公布的审计日志列出该声明的三个公理 `propext`、`Classical.choice`、`Quot.sound`。本节参考算术模块所钉的 `ddf1d5f8` 与登记公开核验的 `6977b88c` 有相同的 `src` 源码树、Lean 工具链与 Lake 锁文件。本节整数块路线的两个局部模块 `DesignIntegerBlocks` 与 `RawDesignIntegerBlocks` 均已分别通过定向内核重放。局部的设计到算术族这一步以九项闭合估计为输入。另一路线从原始伽罗瓦行出发，经 `BookIntegerHostBlocks.of_reference` 取得整数块，再推出 RH；该完整拼接已按源码核对。[原证明公理审计](https://math.mit.edu/~drew/grh/audit.log) · [公开核验文件](https://math.mit.edu/~drew/grh/)
+Alpöge 原证明的声明是 `riemannHypothesis : RiemannHypothesis`，其右端为 Mathlib 的定义。Sutherland 公布的审计日志列出该声明的三个公理 `propext`、`Classical.choice`、`Quot.sound`。本节参考算术模块所钉的 `ddf1d5f8` 与登记公开核验的 `6977b88c` 有相同的 `src` 源码树、Lean 工具链与 Lake 锁文件。[原证明公理审计](https://math.mit.edu/~drew/grh/audit.log) · [公开核验文件](https://math.mit.edu/~drew/grh/)
+
+本节整数块路线的两个局部模块 `DesignIntegerBlocks` 与 `RawDesignIntegerBlocks` 均已分别通过定向内核重放。局部的设计到算术族这一步以九项闭合估计为输入。
+
+另一条路线从原始伽罗瓦行取得模一算术族，再由 `BookIntegerHostBlocks.of_reference` 得到整数块。其算术模块只向这一论证提供 `TopG`。在参考库的 Lean 4.33.1 环境中，`leanchecker` 已分别重放算术模块、最终结论模块与独立审计模块。审计文件 `IntegerBlockAudit.lean` 核对了 Mathlib 命题 `BookReference.riemannHypothesis_via_integer_blocks : RiemannHypothesis`，并打印出以下证明项。
+
+```lean
+BookIntegerHostBlocks.rh_of_blocks
+  (BookReference.integer_blocks_of_row
+    UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter)
+```
+
+该声明的公理仅为 `propext`、`Classical.choice` 和 `Quot.sound`，入口未导入原库的 `Main` 与 `MainConclusion`。本节四次幂窗口判据的冻结声明来自书库所引的 Lean 4.35 环境。[完整整数块证明与内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7063096204)
 
 **单调性本身对负部窗口给出什么限制？**
 
