@@ -255,6 +255,21 @@ Since $T_A\cap T_B=T_{A\cap B}$ and $T_A\cup T_B\subseteq T_{A\cup B}$, the sum 
 
 For example, under the trivial action, the first row gives equal probabilities to flags $(1,0),(0,1)$ and the second gives equal probabilities to $(1,1),(0,0)$. Both single-flag row minima are $1/2$. Pairing the second row's $(1,1)$ with $(1,0)$ attains the first bound. Pairing it with $(0,1)$ attains the second. Here $i=0$ and $u=1/2$, so one table law cannot attain both bounds at once.
 
+**Three-bit profiles of opposite parity.** The first row is uniform on the four even profiles and the second is uniform on the four odd profiles. For a coupling, let $\alpha_i$ be the mass on which bit $i$ is $1$ in both rows. The attainable vectors are exactly those satisfying
+
+$$
+\begin{gathered}
+\alpha_1\le \alpha_2+\alpha_3,\quad
+\alpha_2\le \alpha_3+\alpha_1,\quad
+\alpha_3\le \alpha_1+\alpha_2,\\
+\alpha_1+\alpha_2+\alpha_3\le 1.
+\end{gathered}
+$$
+
+Each bit has a fair marginal in both rows. Its common-zero mass is therefore also $\alpha_i$, and its agreement probability is $2\alpha_i$. Opposite parity requires either a one-bit flip or a three-bit flip. If $r_i$ is the probability of flipping only bit $i$, then $2\alpha_i=r_j+r_k$ for distinct $i,j,k$, which gives $r_i=\alpha_j+\alpha_k-\alpha_i$. The probability of flipping all three bits is $1-\sum_i\alpha_i$. Nonnegativity of these four probabilities yields the stated inequalities. Conversely, sample a uniform even profile and independently choose one of the four flips with the given probabilities. Each fixed odd flip is a bijection from the even profiles to the odd profiles, so the construction has the two required marginals. [Exact region of common-flag masses](lean:D5/S3/ConceptDynamics/Attribution/ParityProfileRegion.attainable_iff)
+
+The largest possible $\min_i\alpha_i$ is $1/3$. The sum bound gives the upper bound, and choosing the three single-bit flips with equal probability attains $1/3$ at every coordinate.
+
 **An optimal uniform calibration for rational marginals.** Let $G$ act on finite input and output sets $X$ and $Y$, let $P$ be a $G$-covariant probability kernel, and let $H$ be any subgroup. If a positive integer $m$ makes every $mP(x,y)$ integral, a uniform seed law attains the maximum $H$-fixed mass. One sufficient seed count is $m|\det B|$, where $B$ is an invertible square submatrix of the integer constraint matrix below, using the positive support of a suitable optimizer as its columns.
 
 Write $q_O$ for the weight of each deterministic readout table $t:X\to Y$ in its $G$-orbit $O$. The normalization row of $A$ has entry $|O|$ in column $O$. The row for cell $(x,y)$ has entry $|\{t\in O:t(x)=y\}|$. The corresponding entries of $b$ are $1$ and $P(x,y)$. Let $c_O$ count the tables in $O$ that are fixed by $H$. Sending seeds equivariantly to their complete readout tables preserves the marginals and sends every $H$-fixed seed to an $H$-fixed table. Conversely, using the positive-weight tables as seeds and evaluating them realizes any feasible table law. The maximum fixed mass is therefore the maximum of $\sum_O c_Oq_O$ subject to $Aq=b$ and $q\ge0$. Independent draws from the rows give an invariant table law. The normalization row makes the feasible set bounded, and its closedness ensures the maximum is attained.
