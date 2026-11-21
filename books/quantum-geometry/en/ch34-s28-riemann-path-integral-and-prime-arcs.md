@@ -289,11 +289,59 @@ Under RH, [@thm-ch31-mangoldt-quartic-sampling] gives $U(n^4)<n^2$ for every suf
 Conversely, given a loss $\kappa>0$ and any real starting bound $R$, take a natural number $A\ge R$ and choose $k$ from the block condition. Set $Y=k^{12}$. Then $Y\ge R$ and $Y^{4/3}=k^{16}$. The endpoints are $(k^3)^4$ and $(k^4)^4$. Since fourth powers are strictly increasing on the natural numbers, the endpoints and all fourth powers between them are precisely the values $n^4$ in this integer block. Applying [@thm-ch31-quartic-power-windows] with $b=4/3$ gives RH. The full proof is checked by the Lean kernel.
 :::
 
+The pointwise test also admits a formulation with one weighted sum. Taking the positive part of $U(n^4)$ prevents negative samples from cancelling large positive samples in the same block. For positive integers $n$ and $1\le a\le b$, write
+
+$$
+s_n=\frac{\max\{U(n^4),0\}}{n^3},\qquad
+M(a,b)=\sum_{n=a}^{b}s_n.
+$$
+
+Let $Q_\vartheta(x)=\int_x^\infty(\vartheta(t)-t)t^{-2}\,dt$, where $\vartheta(t)=\sum_{p\le t}\ln p$ sums over primes.
+
+::: {.theorem #thm-ch31-quartic-prime-mass title="Weighted samples control the negative part of the prime tail" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.prime_mass_le_samples"}
+There is a real constant $C\ge0$ such that for all natural numbers $2\le a\le b$,
+
+$$
+\int_{a^4}^{b^4}\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx+15s_b
+\le 135M(a,b)+C(\ln b-\ln a).
+$$
+:::
+
+::: proof
+On each interval between successive fourth powers, the positive parts at the endpoints and the chord error bound the positive part of $U$. Integrating and adding over the cells gives coefficient $135$ at interior samples and $120$ at the final sample, leaving $15s_b$ on the left. The Chebyshev bound for the contribution of higher prime powers transfers the estimate from the complete tail to the prime tail by increasing the uniform coefficient of the logarithmic error. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-quartic-mass-log title="A logarithmic bound for the weighted sample sum under RH" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.eventual_logarithmic_bound"}
+Assume RH. For every sufficiently large natural number $a$ and every natural number $b\ge a$, one has $M(a,b)<1/a+\ln b-\ln a$.
+:::
+
+::: proof
+Under RH, $U(n^4)<n^2$ for all sufficiently large $n$, so $s_n<1/n$. Keep the first term $1/a$ and bound the remaining harmonic sum by $\int_a^b dt/t$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-quartic-mass-zero title="A zero right of the critical line forces power growth of the sample sum" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.off_line_zero_forces_sample_mass"}
+Let $z\in\mathbb C$ satisfy $\zeta(z)=0$ with $\beta=\operatorname{Re}z>1/2$. For every real $\varepsilon>0$ and all sufficiently large natural numbers $k$, one has $k^{16(\beta-1/2)-\varepsilon}\le M(k^3,k^4)$.
+:::
+
+::: proof
+Take $Y=k^{12}$ and apply the prime-tail mass lower bound forced by the zero on $[Y,Y^{4/3}]=[k^{12},k^{16}]$. The comparison in [@thm-ch31-quartic-prime-mass] transfers that bound to $M(k^3,k^4)$. Use a smaller exponent loss in the window bound and absorb the constants and logarithmic error with the remaining loss. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-quartic-mass-rh title="A weighted sample criterion on arbitrarily late integer blocks" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.rh_iff_subpower_sample_mass"}
+RH holds if and only if, for every real $\eta>0$ and every natural number $A$, there is a natural number $k\ge\max\{A,2\}$ with $M(k^3,k^4)\le k^\eta$.
+:::
+
+::: proof
+Under RH, [@thm-ch31-quartic-mass-log] gives $M(k^3,k^4)<k^{-3}+\ln k$ for large $k$, which is eventually bounded by $k^\eta$. Conversely, if a zero has real part $\beta>1/2$, take $\eta=4(\beta-1/2)$. With $\varepsilon=\eta$, [@thm-ch31-quartic-mass-zero] gives the eventual lower bound $k^{3\eta}$, contradicting the upper bound on arbitrarily late blocks. Reflection in the critical strip then gives RH. The full proof is checked by the Lean kernel.
+:::
+
 The joint external Lean environment also checks a finite set of same-host tests. The set `samples Y Z` enumerates $0\le n\le\lfloor\sqrt{\sqrt Z}\rfloor$, keeps the fourth powers inside the window, and includes both endpoints. Fix $b>1$. For each $\kappa>0$ first choose $\varepsilon>0$ and real constants $e_D,e_L,K,c_{HH},e_K$ with $(e_D+e_L+7)\varepsilon\le\kappa$. Beyond any starting bound, choose a window. Each sampled $t$ may have its own frame, host $H$ and finite set $T$. At that point `EAtH` for the unit character with coefficient $4$ and `CoreAtH` must use the same $H,T$. The reference consumer `of_unit_family` extracts these data from `FamilyClassConnected ((GChi PChar.one).cls b)`, and `rh_of_finite_hosts` deduces RH from them. There are finitely many tests on each window. For every fixed loss the arithmetic hypothesis must still supply windows arbitrarily far out and the witnesses on them. [Pointwise comparison on a common host](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061455789) · [Kernel replay for finite samples and the host implication](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061515678)
 
 At $b=3/2$ the original modulus-one design takes $C_{\mathrm{abs}}=2$ and $C_0=3$ and specifies $e_D=2$, $e_L=0$. The `TopG` interface records only the existence of the two exponents. The Lean 4.33.1 proof starts from the original Galois row and uses `BookDesignIntegerBlocks.of_design` at the design step to retain the specified values. This gives the closed declaration `BookFixedReference.unit_family`. Its consequence `BookFixedReference.fixed_integer_blocks` gives some $\varepsilon_1>0$. For each $0<\varepsilon<\varepsilon_1$ it first fixes $K,c_{HH},e_K$ and then, for every natural lower bound $A$, supplies $k\ge\max\{A,2\}$. For every natural $n$ with $k^3\le n\le k^4$, `EAtH` and `CoreAtH` use the same host and finite set at $x=n^4$. The power exponent in the comparison is $1/2+(2+0+7)\varepsilon=1/2+9\varepsilon$. Given $\kappa>0$, choosing $\varepsilon$ small enough that $9\varepsilon\le\kappa$ gives the condition of [@thm-ch31-quartic-integer-blocks]. [Original design with fixed exponents](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061662378) · [Kernel replay of fixed-exponent blocks from the Galois row](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7064831569)
 
 The declaration in Alpöge’s original proof is `riemannHypothesis : RiemannHypothesis`, with Mathlib’s definition on the right. Sutherland’s public audit lists the declaration’s three axioms as `propext`, `Classical.choice`, and `Quot.sound`. The arithmetic modules used here are pinned at `ddf1d5f8`, which has the same `src` tree, Lean toolchain, and Lake manifest as `6977b88c`, the commit documenting the public verification. [Axiom audit of the original proof](https://math.mit.edu/~drew/grh/audit.log) · [Public verification files](https://math.mit.edu/~drew/grh/)
+
+On 21 November 2026, the Lean and Mathlib communities issued a joint statement endorsed by the Lean FRO and the Mathlib Initiative. It certifies the correctness of both the statement and the proof of the classical Riemann hypothesis. Two independent tools, `comparator` and `con-leche --compare`, confirmed that the theorem in Alpöge’s library matches `RiemannHypothesis` as stated using Mathlib alone. [Joint statement by the Lean and Mathlib communities](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/)
 
 The local integer-block modules `DesignIntegerBlocks` and `RawDesignIntegerBlocks` each passed a targeted replay. In Lean 4.35.0, `BookNativeDesign.rh_of_unit_design` assumes existence of the smooth twisted design, two inclusions between family classes, and nine closure estimates. The unit-character class supplies `HypV`. The construction in `topDesWin` retains the given $e_D,e_L$. Given a target loss $\kappa>0$, choose $\varepsilon>0$ sufficiently small that $(e_D+e_L+7)\varepsilon\le\kappa$, then choose $k$ at least as large as the threshold for the comparison estimate `core_gm`. Every $n^4\ge k$ in the block is then in range, and [@thm-ch31-quartic-integer-blocks] gives RH. [Kernel replay from the design hypotheses to the frozen integer-block criterion](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7064767463)
 
@@ -317,6 +365,14 @@ In the external Lean 4.35.0 lattice construction, for every datum `D : D7` and l
 
 Thus `BookNativeClosedLattice.design_from_twist_selection` takes just the choice provider on the original twisted class, the size estimate `cT ε Fm.CYL ≤ Fm.CTu → TuSize Fm` with its family-dependent threshold and closure on the enriched class, and `TwistSelection 𝒜`. It gives `DesignExists (WithTw (WithSm (Enriched 𝒜))) 3`. Setting $C_0=3$ and taking `Enriched 𝒜` as the underlying class $\mathcal C'$ supplies the design for the native RH theorem above. That theorem also uses the two family inclusions and nine closure estimates before applying the book’s frozen integer-block criterion. [Research source and kernel replay for the design from twist selection](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7065978544)
 
+For the modulus-one character, the two inclusions are projections. Given a base class $B$, let $\mathcal A$ be its intersection with the modulus-one family class at window exponent $3/2$. Membership in `Enriched 𝒜` supplies both components of membership in $\mathcal A$, hence membership in $B$ and in the modulus-one class. The equivalence `BookUnitDesignConnection.twist_selection_iff` characterizes existence of the twist selection. Each family `Fm` in $\mathcal A$ has its own real threshold $x_0$. At every scale with $x>x_1$ and $x\ge x_0$, each index $i$ must admit an `ExtraDataRecursive` record. Conversely, choosing one such record at every required index gives the twist selection for the family. [The unit-class projections and the record criterion](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7066410252)
+
+The reference construction `UpperTheory.Top.designS` has been replayed on Lean 4.35.0. In `BookUnitKits.rh_of_unit_kits`, the base class `Linked Q` requires a parameter $\kappa$ to which the family is linked and whose point-class condition $Q(\kappa)$ it satisfies. For the modulus-one character, `designS` combines the pointwise arithmetic hypothesis `KitCPW` with the proved Minkowski divisibility bound to supply the original twisted choices. Four inputs remain for this native RH theorem. They are the unit-character `KitCPW`, the closed thresholded size estimate on the twisted smooth enrichment, eventual recursive records for the linked modulus-one families, and the nine closure estimates on `Des (Linked Q) 3`. The construction `UpperTheory.Top.kitS` in turn obtains the required `KitCPW` from the unit-character window-host hypothesis `DC.HostWW` and the arithmetic object condition `ObjCP` at each required index. [Twisted choices from the pointwise hypothesis](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7066607957) · [Pointwise kits from window hosts and arithmetic objects](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067228472)
+
+For modulus-one windows, `UpperTheory.Top.hostWW` constructs `DC.HostWW` from the window existence hypothesis `DC.HostExQW`, existence of arithmetic objects, and the closed weight estimates `DC.WClosed`. The `ObjCP` hypothesis above supplies the arithmetic objects needed here. In the native Lean 4.35.0 port, `signs_closed` gives, on each family class, the closed condition that `Fm.GK.La` is positive and `Fm.cX.Ce` is nonnegative. The theorem `family_log_bound_closed` gives the family’s window logarithm bound. The operation `Closed.and` combines their thresholds so that both estimates apply together. [Inputs to the modulus-one window host](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067345972) · [Kernel replay of the sign and window logarithm estimates](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7068431330)
+
+The native theorem `GlobalTheory.EX.G4.w_of` combines the first-theorem estimate for a family with $\mathrm{La}>0$ and the window logarithm bound to give one threshold $x_0$ for that family. At every scale $x\ge x_0$, each index of the family has a weight vector. Consequently, `BookRangeOneWeights.closed_weights_of_range_one` needs only the uniform range-one estimate to derive `DC.WClosed`. There exist $T_0>0$ and functions $T_2,C$ such that for each $C_0\ge T_0$, both $T_2(C_0)$ and $C(C_0)$ are positive, and `flipOneThree.Conclusion2 D C₀ CH (C C₀)` holds for every $CH\ge T_2(C_0)$ and every `D : D7`. In the Lean 4.33.1 reference proof, `GlobalTheory.EX.RangeOne.rangeOne_abs` establishes this estimate. The native theorem `BookRangeOneWeights.rh_of_unit_range_one` takes it as a hypothesis, together with host existence, arithmetic objects, a closed size bound, recursive records at every sufficiently late scale, and nine linkage estimates. [Kernel replay of the construction of weights from the range-one estimate](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7068577494)
+
 The original library and the book’s integer-block argument share the original Galois row. The library first proves `EveryCharacter`, the nonvanishing of Dirichlet $L$-functions for characters of every positive modulus in $\operatorname{Re}(s)>1/2$, with $s=1$ excluded for the principal character. It then deduces RH by `rh_of_every`. The book specializes the arithmetic row to the modulus-one family and obtains integer blocks via `BookIntegerHostBlocks.of_reference`. The arithmetic module supplies only `TopG` to this argument. In the reference library’s Lean 4.33.1 environment, `leanchecker` replayed the arithmetic module, the final conclusion module, and an independent audit module. The audit file `IntegerBlockAudit.lean` checked the declaration `BookReference.riemannHypothesis_via_integer_blocks : RiemannHypothesis` against Mathlib’s statement and printed the following proof term. [The original library’s deduction of RH from all characters](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Supplements/Kernels/MainTheorems.lean#L7-L9)
 
 ```lean
@@ -325,7 +381,33 @@ BookIntegerHostBlocks.rh_of_blocks
     UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter)
 ```
 
-Its only axioms are `propext`, `Classical.choice`, and `Quot.sound`. The entry point imports neither `Main` nor `MainConclusion` from the original library. The frozen fourth-power window criterion cited in this section comes from the book’s Lean 4.35 environment. [Complete integer-block proof and kernel replay](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7063096204)
+In Lean 4.33.1 the book uses the independently replayed reference arithmetic to close the modulus-one integer-block proof of RH with no additional hypotheses. The arithmetic inputs listed above belong to the conditional theorems of the native Lean 4.35.0 port. The closed declaration’s only axioms are `propext`, `Classical.choice`, and `Quot.sound`. The entry point imports neither `Main` nor `MainConclusion` from the original library. The frozen fourth-power window criterion cited in this section comes from the book’s Lean 4.35 environment. [Public replays of the reference proof](https://github.com/the-omega-institute/riemann-hypothesis/blob/1ef6c4e2e944fb2784ecf3168a84810bf50ca6db/README.md#public-kernel-replay-results) · [Complete integer-block proof and kernel replay](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7063096204)
+
+The same reference Galois row also gives two bounds with a common witness. For every real $\eta>0$ and natural number $A$, `BookArithmeticWeightedBlocks.joint_window_from_reference_arithmetic` gives an integer $k\ge\max\{A,2\}$ such that
+
+$$
+\sum_{n=k^3}^{k^4}\frac{\max\{U(n^4),0\}}{n^3}\le k^\eta,
+\qquad
+U(x)\le x^{1/2+\eta}\quad (k^{12}\le x\le k^{16}).
+$$
+
+The sum ranges over the integers in the block. The second bound holds for every real $x$ in the closed interval, including both endpoints. Taking $\kappa=\min\{\eta/32,1/2\}$, the proof bounds the weighted samples by a harmonic sum after division by $n^3$ and interpolates between fourth powers on the same block to cover the real window. A single $k$ can meet the thresholds for both estimates. The weighted sum here is $M(k^3,k^4)$ in [@thm-ch31-quartic-mass-rh]. [Both bounds from the reference arithmetic on one block](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067180276)
+
+The first of these two bounds suffices for another closed Lean 4.33.1 proof. Given $\eta>0$, the reference arithmetic supplies arbitrarily large $k$ with $M(k^3,k^4)\le k^\eta$. Put $a=k^3$ and $b=k^4$ in the comparison of [@thm-ch31-quartic-prime-mass] and drop the nonnegative endpoint term from its left side. This gives
+
+$$
+\int_{k^{12}}^{k^{16}}\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx
+\le 135M(k^3,k^4)+C\ln k\le (k^{12})^\eta
+$$
+
+with $C\ge0$ independent of $k$. The second inequality holds on the selected blocks once $k$ is sufficiently large. With $Y=k^{12}$ we have $Y^{4/3}=k^{16}$, so the prime-window criterion [@thm-ch31-prime-window-rh] gives RH. The external declaration `BookPrimeMass433.riemannHypothesis_via_weighted_samples` has Mathlib’s type `RiemannHypothesis` and the closed proof term
+
+```lean
+BookPrimeMass433.rh_of_weighted_samples
+  BookArithmeticWeightedBlocks.subpower_from_reference_arithmetic
+```
+
+This proof obtains the weighted-sum bound from the reference Galois row. Deriving this bound independently from the book’s prime estimates remains an open arithmetic problem. [Kernel replay of the weighted sum, prime window, and closed proof term](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7068410601)
 
 **What does monotonicity alone tell us about negative mass in a window?**
 
@@ -557,6 +639,49 @@ $$
 ::: proof
 The zero ordinates are bounded away from zero, so the coefficients remain absolutely summable after termwise integration. In logarithmic coordinates the two endpoints give the difference of values of the same function $P$. The residual is absolutely integrable, so its absolute integral on any $[\ln a,\ln B]$ is bounded by the entire tail from $\ln a$. At fixed $a$ the residual integral converges to a constant. The actual orbit approaches each point of the closure at arbitrarily late times and hence realizes every cluster value in the interval. The closure is compact and connected, and the primitive along the orbit has strictly positive derivative at time zero, so the interval has distinct endpoints. The result uses the actual joint phase relations. The full proof is checked by the Lean kernel.
 :::
+
+**The cube term and half phase of the square cutoff.** Keep $E(a,B)=N(a,B)-2\ln(B/a)$. Enumerate all actual nontrivial zeros $\rho_k$ with multiplicity, put $\gamma_k=\operatorname{Im}\rho_k$ and $c_k=1/[\rho_k(1-\rho_k)]$, use the preceding series to define $P$, and set $\phi(u)_k=e^{i\gamma_k u}$. For $x>0$, define
+
+$$
+A_2(x)=4\operatorname{Re}\sum_\rho
+\frac{x^{(\rho-1)/2}}{\rho(1-\rho)(2-\rho)}.
+$$
+
+::: {.theorem #thm-ch31-prime-window-cube-square title="The cube term, square spectrum, and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/RHRootCorrection.rh_iff_prime_window_cube_and_square"}
+The Riemann hypothesis holds if and only if there exist $a_0\ge2$ and $K>0$ such that every real pair $B\ge a\ge a_0$ satisfies
+
+$$
+\begin{aligned}
+\bigl|E(a,B)&-P(\phi(\ln B))+P(\phi(\ln a))\\
+ &-9(a^{-1/6}-B^{-1/6})-A_2(B)+A_2(a)\bigr|
+ \le K(a^{-3/10}-B^{-3/10}).
+\end{aligned}
+$$
+:::
+
+::: proof
+Under RH, Costa Pereira's inequalities isolate the square-root and cube-root cutoffs of $\psi$ in $\psi-\vartheta$, leaving a remainder bounded by $\psi(x^{1/5})$. After integration and normalization, the cube main term contributes $(3/2)x^{-1/6}$ to the density. Integration over the log window gives the coefficient $9$. Writing $y=\sqrt{x}$ gives the centered square-cutoff correction $2Q(y)-2y\int_y^\infty Q(s)s^{-2}\,ds$. Substituting the integrated explicit formula for the complete tail gives the coefficient $-2/[\rho(2-\rho)]$ at each zero. Integrating the modes gives $A_2(B)-A_2(a)$.
+
+The square-cutoff term uses phase $e^{i\gamma_\rho\ln(x)/2}$, whose square is the phase of the same zero in $\phi(\ln x)$. The remaining log density is bounded by a constant times $x^{-3/10}$. Integrating over the actual window keeps both endpoints, so the error bound also vanishes as the window shrinks. [Restatement of Costa Pereira's inequalities](https://arxiv.org/html/2002.11068v2#S3.E16)
+
+The same estimate also implies RH. Both endpoint primitives are uniformly bounded for positive cutoffs at least one by absolute convergence and the known critical-strip bounds. The cube term and the power error are bounded as well. If the estimate holds uniformly, then $E(a,B)$ stays bounded at a fixed admissible $a$ as $B$ grows. If RH fails, the wide-window theorem gives arbitrarily large excess over $2\ln(B/a)$ for sufficiently large $B\ge a^2$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-rh-prime-fifth-window title="The fifth prime-power term in the actual prime window" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/RHFifthWindow.prime_window_fifth_of_rh"}
+Under RH let $R(a,B)$ be the signed expression inside the absolute value in the cube and square estimate above. Write $D_s(a,B)=a^{-s}-B^{-s}$. There exist $a_0\ge2$ and $K>0$ such that for every real $B\ge a\ge a_0$,
+$$
+\left|R(a,B)-\frac{25}{6}D_{3/10}(a,B)\right|\le K D_{1/3}(a,B).
+$$
+:::
+
+::: proof
+
+The finite Chebyshev decomposition writes each $\psi(t^{1/d})$ as the sum of $\vartheta(t^{1/k})$ over exponents $k$ divisible by $d$, including multiplicities of prime powers through the same cutoff $t$. In $\psi(t)-\vartheta(t)-\psi(t^{1/2})-\psi(t^{1/3})-\psi(t^{1/5})$, the coefficients at exponents 2 through 5 vanish, and the coefficient at 6 is $-1$. The remaining terms have total absolute value at most $4\ln(t)t^{1/7}$ for $t\ge2$. The sixth root and this tail give an $O(t^{1/6})$ bound. This arithmetic estimate is unconditional.
+
+Integrating the uncentered fifth root against $dt/t^2$ and multiplying by $\sqrt{x}$ gives the log-density term $(5/4)x^{-3/10}$. Under RH the centered fifth-root tail is of order $x^{-2/5}$, while the arithmetic bound gives order $x^{-1/3}$ after the same integration and scaling. Over $[\ln a,\ln B]$ the fifth-root term contributes $(25/6)D_{3/10}(a,B)$ and the integrated error is bounded by a constant times $D_{1/3}(a,B)$. Both terms vanish for $B=a$. The full and half-logarithmic phases still use the same actual zeros. The full proof is checked by the Lean kernel.
+:::
+
+For $B>a$, one has $D_{1/3}(a,B)\le(10/9)a^{-1/30}D_{3/10}(a,B)$ by comparing the two power derivatives over $[a,B]$. Thus $R(a,B)/D_{3/10}(a,B)$ tends to $25/6$ as $a\to\infty$, uniformly in all $B>a$, including windows whose length tends to zero.
 
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.

@@ -289,11 +289,59 @@ $$
 反过来，给定损失 $\kappa>0$ 和任意实数起点 $R$，选取自然数 $A\ge R$，再取条件所给的 $k$。令 $Y=k^{12}$，则 $Y\ge R$，且 $Y^{4/3}=k^{16}$。窗口的两个端点是 $(k^3)^4$ 和 $(k^4)^4$。由于四次幂在自然数上严格递增，两端及其间所有四次幂恰为这个整数块上的 $n^4$。对 $b=4/3$ 应用 [@thm-ch31-quartic-power-windows] 即得 RH。完整证明由 Lean 内核检查。
 :::
 
+还可以把逐点检验换成一个加权和。只计入 $U(n^4)$ 的正部，让负值无法抵消同一块上过大的样本。对正整数 $n$ 和 $1\le a\le b$，记
+
+$$
+s_n=\frac{\max\{U(n^4),0\}}{n^3},\qquad
+M(a,b)=\sum_{n=a}^{b}s_n.
+$$
+
+令 $Q_\vartheta(x)=\int_x^\infty(\vartheta(t)-t)t^{-2}\,dt$，其中 $\vartheta(t)=\sum_{p\le t}\ln p$ 只对素数求和。
+
+::: {.theorem #thm-ch31-quartic-prime-mass title="素数尾项的负部质量由加权样本控制" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.prime_mass_le_samples"}
+存在实数 $C\ge0$，使所有满足 $2\le a\le b$ 的自然数端点都有
+
+$$
+\int_{a^4}^{b^4}\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx+15s_b
+\le 135M(a,b)+C(\ln b-\ln a).
+$$
+:::
+
+::: proof
+在每个相邻四次幂区间上，用两端的正部及弦误差控制 $U$ 的正部。积分并逐段相加后，内点样本的系数为 $135$，末端样本的系数为 $120$，故可把 $15s_b$ 放到左边。用切比雪夫素数幂估计将完全尾项换成素数尾项，只需增大对数误差的统一系数。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-quartic-mass-log title="RH 下加权样本和的对数上界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.eventual_logarithmic_bound"}
+若 RH 成立，则对每个充分大的自然数 $a$ 和所有自然数 $b\ge a$，有 $M(a,b)<1/a+\ln b-\ln a$。
+:::
+
+::: proof
+RH 给出对所有充分大的 $n$ 成立的严格界 $U(n^4)<n^2$，因此 $s_n<1/n$。单独留下首项 $1/a$，其余调和和不超过 $\int_a^b dt/t$。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-quartic-mass-zero title="临界线右侧零点强制加权样本和按幂增长" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.off_line_zero_forces_sample_mass"}
+设 $z\in\mathbb C$ 满足 $\zeta(z)=0$，且 $\beta=\operatorname{Re}z>1/2$。对每个实数 $\varepsilon>0$ 和所有充分大的自然数 $k$，有 $k^{16(\beta-1/2)-\varepsilon}\le M(k^3,k^4)$。
+:::
+
+::: proof
+取 $Y=k^{12}$，将线外零点所迫的素数尾项质量下界用于 $[Y,Y^{4/3}]=[k^{12},k^{16}]$。[@thm-ch31-quartic-prime-mass] 把该质量转给 $M(k^3,k^4)$。先在窗口下界中保留较小的指数损失，再用余下的损失吸收常数及对数误差。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-quartic-mass-rh title="任意晚整数块上的加权样本和判据" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.rh_iff_subpower_sample_mass"}
+RH 成立，当且仅当对每个实数 $\eta>0$ 和每个自然数 $A$，都存在自然数 $k\ge\max\{A,2\}$ 使 $M(k^3,k^4)\le k^\eta$。
+:::
+
+::: proof
+在 RH 下，[@thm-ch31-quartic-mass-log] 对充分大的 $k$ 给出 $M(k^3,k^4)<k^{-3}+\ln k$，可由 $k^\eta$ 控制。反过来，若有实部 $\beta>1/2$ 的零点，取 $\eta=4(\beta-1/2)$。[@thm-ch31-quartic-mass-zero] 以损失 $\varepsilon=\eta$ 给出最终下界 $k^{3\eta}$，与任意晚整数块上的上界矛盾。由临界带的反射对称性得到 RH。完整证明由 Lean 内核检查。
+:::
+
 参考库与本书共同使用的外部 Lean 环境还给出了同一宿主的有限检验。在 `samples Y Z` 中，依次枚举 $0\le n\le\lfloor\sqrt{\sqrt Z}\rfloor$，保留窗内的 $n^4$ 并加入两端，得到上述有限集。固定 $b>1$，对每个 $\kappa>0$，先选 $\varepsilon>0$ 及实常数 $e_D,e_L,K,c_{HH},e_K$，满足 $(e_D+e_L+7)\varepsilon\le\kappa$。此后对任意起点下界取一个更晚的窗。窗中每个采样点 $t$ 可选自己的框架、宿主 $H$ 和有限集 $T$，要求该点的 `EAtH`（模一特征标，系数 $4$）与 `CoreAtH` 使用同一个 $H,T$。`of_unit_family` 从 `FamilyClassConnected ((GChi PChar.one).cls b)` 导出这些数据，`rh_of_finite_hosts` 由它们推出 RH。每个窗的检验点有限；给定每一组固定损失后，算术假设仍须提供任意晚的窗口及其见证。[同一宿主的逐点比较](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061455789) · [有限采样与宿主推论的内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061515678)
 
 在 $b=3/2$ 的模一设计中，原构造取 $C_{\mathrm{abs}}=2$、$C_0=3$，并指定 $e_D=2$、$e_L=0$。接口 `TopG` 只记录两个指数的存在性。Lean 4.33.1 的证明从原始伽罗瓦行出发，在应用设计定理时用 `BookDesignIntegerBlocks.of_design` 保留这两个指定值，得到无额外假设的 `BookFixedReference.unit_family`。其推论 `BookFixedReference.fixed_integer_blocks` 给出某个 $\varepsilon_1>0$。对每个 $0<\varepsilon<\varepsilon_1$，先固定 $K,c_{HH},e_K$，再对每个自然数下界 $A$ 取得 $k\ge\max\{A,2\}$。对所有 $k^3\le n\le k^4$ 的自然数 $n$，`EAtH` 与 `CoreAtH` 在 $x=n^4$ 处共用同一宿主和有限集。比较所得幂指数为 $1/2+(2+0+7)\varepsilon=1/2+9\varepsilon$。给定 $\kappa>0$，取足够小的 $\varepsilon$ 使 $9\varepsilon\le\kappa$，便满足 [@thm-ch31-quartic-integer-blocks] 的条件。[固定指数的原设计](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061662378) · [从伽罗瓦行取得固定指数整数块的内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7064831569)
 
 Alpöge 原证明的声明是 `riemannHypothesis : RiemannHypothesis`，其右端为 Mathlib 的定义。Sutherland 公布的审计日志列出该声明的三个公理 `propext`、`Classical.choice`、`Quot.sound`。本节参考算术模块所钉的 `ddf1d5f8` 与登记公开核验的 `6977b88c` 有相同的 `src` 源码树、Lean 工具链与 Lake 锁文件。[原证明公理审计](https://math.mit.edu/~drew/grh/audit.log) · [公开核验文件](https://math.mit.edu/~drew/grh/)
+
+2026 年 11 月 21 日，Lean 与 Mathlib 社群发表了由 Lean FRO 和 Mathlib Initiative 背书的联合声明，认证 Alpöge 对经典黎曼假设的命题与证明均正确。两种独立工具 `comparator` 和 `con-leche --compare` 均确认库中所证命题与仅导入 Mathlib 时陈述的 `RiemannHypothesis` 完全一致。[Lean 与 Mathlib 社群联合声明](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/)
 
 整数块路线的局部模块 `DesignIntegerBlocks` 和 `RawDesignIntegerBlocks` 各有定向重放。在 Lean 4.35.0 中，`BookNativeDesign.rh_of_unit_design` 以平滑扭曲设计的存在性、两个族类包含关系和九项闭合估计为输入。模一特征标的族类给出 `HypV`。`topDesWin` 的构造保留给定的 $e_D,e_L$。给定目标损失 $\kappa>0$，先取充分小的 $\varepsilon>0$ 使 $(e_D+e_L+7)\varepsilon\le\kappa$，再取 $k$ 达到比较估计 `core_gm` 的起点。于是块内每个 $n^4\ge k$ 都处于估计范围内，[@thm-ch31-quartic-integer-blocks] 即给出 RH。[设计条件与冻结整数块判据的内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7064767463)
 
@@ -317,6 +365,14 @@ $$
 
 于是 `BookNativeClosedLattice.design_from_twist_selection` 只用原扭曲族类上的选择提供者、上述在增广族类上闭合且带族门槛的尺寸估计 `cT ε Fm.CYL ≤ Fm.CTu → TuSize Fm`，以及 `TwistSelection 𝒜`，便得到 `DesignExists (WithTw (WithSm (Enriched 𝒜))) 3`。取 $C_0=3$、令设计的底类 $\mathcal C'$ 为 `Enriched 𝒜`，便得到上文原生 RH 定理所需的设计。该定理还使用两个族类包含关系和九项闭合估计，最后应用本书冻结的整数块判据。[从扭曲选择构造设计的研究源码与内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7065978544)
 
+模一特化将这两个包含关系化为投影。给定底类 $B$，取 $\mathcal A$ 为 $B$ 与窗指数 $3/2$ 的模一族类的交。从 `Enriched 𝒜` 取出 $\mathcal A$ 的两个分量，便分别得到 $B$ 和模一族条件。`BookUnitDesignConnection.twist_selection_iff` 还给出扭曲选择存在的等价条件。对 $\mathcal A$ 的每个族 `Fm`，存在属于该族的实数门槛 $x_0$，使每个满足 $x>x_1$、$x\ge x_0$ 的尺度和每个指标 $i$ 都有一份 `ExtraDataRecursive` 记录。反向证明对每个这样的指标选一份记录，组成该族的扭曲选择。[模一族的投影与逐族递归记录](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7066410252)
+
+原库的 `UpperTheory.Top.designS` 已在 Lean 4.35.0 中重放。在 `BookUnitKits.rh_of_unit_kits` 中，底类 `Linked Q` 要求存在参数 $\kappa$，使该族既与 $\kappa$ 相连，又满足 $Q(\kappa)$ 对应的点类条件。在模一特化下，`designS` 把逐点算术条件 `KitCPW` 与已证的 Minkowski 整除界合起来，给出原扭曲族类上的选择。这个原生 RH 入口仍使用四组输入，即模一的 `KitCPW`、增广平滑扭曲族类上带门槛的闭合尺寸估计、相连模一族的最终递归记录，以及 `Des (Linked Q) 3` 上的九项闭合估计。`UpperTheory.Top.kitS` 又可从模一窗口的宿主条件 `DC.HostWW` 和逐指标的算术对象条件 `ObjCP` 构造所需的 `KitCPW`。[从逐点条件构造选择](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7066607957) · [从窗口宿主和算术对象构造逐点条件](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067228472)
+
+对模一窗口，`UpperTheory.Top.hostWW` 从窗口的存在条件 `DC.HostExQW`、算术对象的存在性和闭合权重估计 `DC.WClosed` 构造 `DC.HostWW`。这里的算术对象可由上文的 `ObjCP` 提供。在 Lean 4.35.0 原生移植中，对每个族类，`signs_closed` 给出族参数 `Fm.GK.La` 为正、`Fm.cX.Ce` 非负的闭合条件，`family_log_bound_closed` 给出该族的窗口对数界。`Closed.and` 合并两者的门槛，得到同时适用的估计。[模一窗口宿主的输入](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067345972) · [符号与窗口对数界的内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7068431330)
+
+原生定理 `GlobalTheory.EX.G4.w_of` 把逐族第一定理估计、$\mathrm{La}>0$ 和窗口对数界合起来，为该族给出一个门槛 $x_0$。在每个 $x\ge x_0$ 的尺度上，该族的每个指标都有一个权重向量。于是，`BookRangeOneWeights.closed_weights_of_range_one` 只需范围一的统一估计就能推出 `DC.WClosed`。具体地，存在 $T_0>0$ 以及函数 $T_2,C$，使每个 $C_0\ge T_0$ 都满足 $T_2(C_0)>0$、$C(C_0)>0$，且对所有 $CH\ge T_2(C_0)$ 和每个 `D : D7`，都有 `flipOneThree.Conclusion2 D C₀ CH (C C₀)`。Lean 4.33.1 参考证明中的 `GlobalTheory.EX.RangeOne.rangeOne_abs` 给出这项估计。原生入口 `BookRangeOneWeights.rh_of_unit_range_one` 以它为前提，还用到宿主存在性、算术对象、闭合的规模界、在所有充分晚的尺度上提供的递归记录，以及九项联结估计。[从范围一估计构造权重的内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7068577494)
+
 原库和本书的整数块路线共用原始伽罗瓦行。原库先证明 `EveryCharacter`，即所有正整数模的狄利克雷特征标在 $\operatorname{Re}(s)>1/2$ 的 $L$ 函数非消失性（主特征标除去 $s=1$），再由 `rh_of_every` 得到 RH。本书从该算术行取出模一族，再由 `BookIntegerHostBlocks.of_reference` 得到整数块。其算术模块只向这一论证提供 `TopG`。在参考库的 Lean 4.33.1 环境中，`leanchecker` 已分别重放算术模块、最终结论模块与独立审计模块。审计文件 `IntegerBlockAudit.lean` 确认声明 `BookReference.riemannHypothesis_via_integer_blocks` 的类型为 Mathlib 的 `RiemannHypothesis`，并打印出以下证明项。[原库从全体特征标推出 RH 的声明](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Supplements/Kernels/MainTheorems.lean#L7-L9)
 
 ```lean
@@ -325,7 +381,33 @@ BookIntegerHostBlocks.rh_of_blocks
     UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter)
 ```
 
-该声明的公理仅为 `propext`、`Classical.choice` 和 `Quot.sound`，入口未导入原库的 `Main` 与 `MainConclusion`。本节四次幂窗口判据的冻结声明来自书库所引的 Lean 4.35 环境。[完整整数块证明与内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7063096204)
+在 Lean 4.33.1 中，本书引用已由多方重放的参考算术，模一整数块路线由此给出无附加假设的 RH 证明。上文所列的算术输入属于 Lean 4.35.0 原生移植的条件定理。该闭合声明的公理仅为 `propext`、`Classical.choice` 和 `Quot.sound`，入口未导入原库的 `Main` 与 `MainConclusion`。本节四次幂窗口判据的冻结声明来自书库所引的 Lean 4.35 环境。[参考证明的公开重放](https://github.com/the-omega-institute/riemann-hypothesis/blob/1ef6c4e2e944fb2784ecf3168a84810bf50ca6db/README.md#public-kernel-replay-results) · [完整整数块证明与内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7063096204)
+
+同一个参考伽罗瓦行还给出两个共用见证的上界。对任意实数 $\eta>0$ 和自然数 $A$，`BookArithmeticWeightedBlocks.joint_window_from_reference_arithmetic` 给出一个整数 $k\ge\max\{A,2\}$，使
+
+$$
+\sum_{n=k^3}^{k^4}\frac{\max\{U(n^4),0\}}{n^3}\le k^\eta,
+\qquad
+U(x)\le x^{1/2+\eta}\quad (k^{12}\le x\le k^{16}).
+$$
+
+求和遍历整块内的整数，第二个界对闭区间内每个实数 $x$ 成立，含两个端点。证明取 $\kappa=\min\{\eta/32,1/2\}$，将采样上界除以 $n^3$ 后用调和和估计，另用同一块上的四次幂插值控制实窗。两个比较所需的门槛可由同一个 $k$ 满足。这里的加权和正是 [@thm-ch31-quartic-mass-rh] 中的 $M(k^3,k^4)$。[从参考算术直接推出同一块的两个界](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067180276)
+
+上述双上界的第一项就足以闭合另一条 Lean 4.33.1 证明。给定 $\eta>0$，参考算术提供任意晚的 $k$，使 $M(k^3,k^4)\le k^\eta$。在 [@thm-ch31-quartic-prime-mass] 的比较式中取 $a=k^3$、$b=k^4$，略去左边非负的末端项，得到
+
+$$
+\int_{k^{12}}^{k^{16}}\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx
+\le 135M(k^3,k^4)+C\ln k\le (k^{12})^\eta
+$$
+
+其中 $C\ge0$ 与 $k$ 无关，第二个不等式对所选的充分晚的块成立。取 $Y=k^{12}$，则 $Y^{4/3}=k^{16}$，故 [@thm-ch31-prime-window-rh] 的素数窗口判据给出 RH。外部声明 `BookPrimeMass433.riemannHypothesis_via_weighted_samples` 的类型就是 Mathlib 的 `RiemannHypothesis`，其闭合证明项为
+
+```lean
+BookPrimeMass433.rh_of_weighted_samples
+  BookArithmeticWeightedBlocks.subpower_from_reference_arithmetic
+```
+
+这一证明从参考伽罗瓦行取得加权和上界。仅用本书的素数估计独立推出该上界，仍是开放的算术问题。[加权和、素数窗口与闭合证明项的内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7068410601)
 
 **单调性本身对负部窗口给出什么限制？**
 
@@ -557,6 +639,49 @@ $$
 ::: proof
 零点虚部有远离零的一致下界，因而逐项积分后的系数仍绝对可和。对数坐标下，积分的两个端点给出同一个 $P$ 的差。剩下的误差绝对可积，所以其在任何 $[\ln a,\ln B]$ 上的绝对积分都受整个左端尾积分控制。对固定 $a$，剩余积分趋于常数。实际轨道在任意晚的时刻逼近闭包中的每个相位，因而实现所给区间的每个簇值。相位闭包紧且连通，而沿轨道的原函数在零时刻有严格正的斜率，因此区间两端不同。结论只用实际联合相位关系。 完整证明由 Lean 内核检查。
 :::
+
+**素数立方项与平方截断的半相位。** 沿用 $E(a,B)=N(a,B)-2\ln(B/a)$。对全部实际非平凡零点 $\rho_k$ 按重数编号，取 $\gamma_k=\operatorname{Im}\rho_k$ 和 $c_k=1/[\rho_k(1-\rho_k)]$，用前一定理中的级数定义 $P$，并令 $\phi(u)_k=e^{i\gamma_k u}$。对 $x>0$，定义
+
+$$
+A_2(x)=4\operatorname{Re}\sum_\rho
+\frac{x^{(\rho-1)/2}}{\rho(1-\rho)(2-\rho)}.
+$$
+
+::: {.theorem #thm-ch31-prime-window-cube-square title="素数尾窗的立方项、平方谱与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/RHRootCorrection.rh_iff_prime_window_cube_and_square"}
+黎曼猜想成立，当且仅当存在 $a_0\ge2$ 和 $K>0$，使所有实数 $B\ge a\ge a_0$ 满足
+
+$$
+\begin{aligned}
+\bigl|E(a,B)&-P(\phi(\ln B))+P(\phi(\ln a))\\
+ &-9(a^{-1/6}-B^{-1/6})-A_2(B)+A_2(a)\bigr|
+ \le K(a^{-3/10}-B^{-3/10}).
+\end{aligned}
+$$
+:::
+
+::: proof
+在 RH 下，Costa Pereira 的夹逼从 $\psi-\vartheta$ 中分出平方根和立方根处的 $\psi$，余项至多为 $\psi(x^{1/5})$。积分并归一化后，立方主项贡献 $(3/2)x^{-1/6}$。再作一次对数窗口积分，得到系数 $9$。平方截断取 $y=\sqrt{x}$ 后，中心化修正为 $2Q(y)-2y\int_y^\infty Q(s)s^{-2}\,ds$。代入完整尾项的积分显式公式，得到逐零系数 $-2/[\rho(2-\rho)]$。积分这些模式便得到 $A_2(B)-A_2(a)$。
+
+平方截断项使用相位 $e^{i\gamma_\rho\ln(x)/2}$，其平方是同一零点在 $\phi(\ln x)$ 中的相位。剩余对数密度受常数倍的 $x^{-3/10}$ 控制。在实际窗口上积分保留两端，误差界因而随窗口收缩而消失。[Costa Pereira 夹逼的复述](https://arxiv.org/html/2002.11068v2#S3.E16)
+
+这条估计也反推 RH。利用绝对收敛和已知的临界带界，两个端点原函数在截止点至少为 $1$ 时一致有界。立方项与幂次余项也都一致有界。如果这条估计对所有右端点成立，固定一个满足条件的 $a$ 后，$E(a,B)$ 随 $B$ 增长始终有界。若 RH 不成立，取 $B\ge a^2$，宽窗定理给出超出 $2\ln(B/a)$ 任意多的实际窗口质量。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-rh-prime-fifth-window title="实际素数窗口的五次幂项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/RHFifthWindow.prime_window_fifth_of_rh"}
+在 RH 下，令 $R(a,B)$ 为上面立方项与平方谱估计绝对值内的有符号表达式。记 $D_s(a,B)=a^{-s}-B^{-s}$。存在 $a_0\ge2$ 与 $K>0$，使得每对实数 $B\ge a\ge a_0$ 都满足
+$$
+\left|R(a,B)-\frac{25}{6}D_{3/10}(a,B)\right|\le K D_{1/3}(a,B).
+$$
+:::
+
+::: proof
+
+有限 Chebyshev 分解把每个 $\psi(t^{1/d})$ 写为 $\vartheta(t^{1/k})$ 之和，其中 $k$ 遍历 $d$ 的倍数，始终使用同一个素数幂截止点 $t$。在 $\psi(t)-\vartheta(t)-\psi(t^{1/2})-\psi(t^{1/3})-\psi(t^{1/5})$ 中，指数 $2$ 至 $5$ 的系数全部抵消，指数 $6$ 的系数为 $-1$。当 $t\ge2$ 时，其余项的绝对值之和至多为 $4\ln(t)t^{1/7}$。将六次根项与这段余项合计，得到 $O(t^{1/6})$ 的无条件算术界。
+
+五次根主项对 $dt/t^2$ 积分，再乘 $\sqrt{x}$，给出对数密度项 $(5/4)x^{-3/10}$。RH 下，中心化五次根尾项为 $x^{-2/5}$ 阶，而算术误差经同样的积分和缩放后为 $x^{-1/3}$ 阶。在 $[\ln a,\ln B]$ 上积分得到五次幂贡献 $(25/6)D_{3/10}(a,B)$，以及由 $D_{1/3}(a,B)$ 的常数倍控制的余量。两项均在 $B=a$ 时消失。原相位与半对数相位依旧沿同一组实际零点计算。 完整证明由 Lean 内核检查。
+:::
+
+对 $B>a$，在 $[a,B]$ 上比较两个幂函数的导数可得 $D_{1/3}(a,B)\le(10/9)a^{-1/30}D_{3/10}(a,B)$。因此当 $a\to\infty$ 时，$R(a,B)/D_{3/10}(a,B)$ 一致趋于 $25/6$，范围包括所有 $B>a$，也包括宽度趋于零的窗口。
 
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。

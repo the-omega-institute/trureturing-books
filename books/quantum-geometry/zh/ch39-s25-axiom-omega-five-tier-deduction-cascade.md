@@ -31,7 +31,7 @@ $$
 这层壳上**最短的非零球面弧**可以精确求出。因为 $\|A-C\|^2=2(R-A\cdot C)$ 是正偶数，其最小可能值为 $2$，点对 $(0,1,4),(1,0,4)$ 正好取到。于是最小圆心角为 $\arccos(16/17)$，最短弧长为 $\sqrt{17}\arccos(16/17)$，对应 $\kappa=33/34$。换壳时角尺度会变，例如 $(k,1,0),(k,0,1)$ 的平方弦长始终为 $2$，而 $R=k^2+1$ 趋于无穷时夹角趋于零。这条弦弧恒等式只用欧氏几何和格点整性。下文第四阶引入 RH 的位置，是把同一类内积读数赋给真实的 $\xi$ 零点谱。
 
 2. **第二阶推导：自观测正交虚梦、超越不动点 $\theta^*$ 与等主频双相对论时空（Tier 2）**：
-   - **非零倾角 $\varepsilon > 0$ 分化空间与时间（`MODEL` / `LEAN ✓`）**：若观察切面对自身零失准（$\varepsilon = 0 \implies \kappa = 1$），比较惊奇度 $-\log_2\kappa = 0\;\mathrm{bit}$ 陷入全知死寂（[§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)、[§38.11](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god)）；一旦 $\varepsilon > 0$，施密特残差 $(\sin\varepsilon)\mathbf{e}_\perp$ 撑开单向不可见的 $90^\circ$ 正交虚空间 $\hat{\mathbf{i}}$ 与面积体积，持续追赶残差的旋移序列显影为运动与时间，并在二阶认妄误差 $\delta_{\mathrm{meta}}(\theta) = \lvert\cos\theta - \theta\rvert = 0$ 处唯一收敛至道蒂超越不动点 $\cos\theta^* = \theta^* \approx 0.73908513\;\mathrm{rad}$（方程 $\cos\theta = \theta$ 恰有一个正根且它落在 $(0, 1)$ 内，[`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint)，`LEAN ✓`；非正根不存在——否则 $\theta = \cos\theta \in [-1, 0]$，而该区间上 $\cos\theta > 0$——故它是唯一实根，余弦迭代自任意实初值收敛于它——两步后进入 $[\cos 1, 1]$，其上 $\lvert\sin\rvert \le \sin 1 < 1$——二者为 `手工推导`；数值为 `NUM`；若 $\theta^*$ 是代数数，$\cos\theta^* = \theta^*$ 也是代数数，与林德曼定理矛盾，故 $\theta^*$ 为超越数，`文献结果`），于有限停机阈值 $\varepsilon_{\mathrm{self}} > 0$ 内涌现裁量裕度（[§36.10](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting)）；
+   - **非零倾角 $\varepsilon > 0$ 分化空间与时间（`MODEL` / `LEAN ✓`）**：若观察切面对自身零失准（$\varepsilon = 0 \implies \kappa = 1$），比较惊奇度 $-\log_2\kappa = 0\;\mathrm{bit}$ 陷入全知死寂（[§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)、[§38.11](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god)）；一旦 $\varepsilon > 0$，施密特残差 $(\sin\varepsilon)\mathbf{e}_\perp$ 撑开单向不可见的 $90^\circ$ 正交虚空间 $\hat{\mathbf{i}}$ 与面积体积，持续追赶残差的旋移序列显影为运动与时间，并在二阶认妄误差 $\delta_{\mathrm{meta}}(\theta) = \lvert\cos\theta - \theta\rvert = 0$ 处唯一收敛至道蒂超越不动点 $\cos\theta^* = \theta^* \approx 0.73908513\;\mathrm{rad}$（方程 $\cos\theta = \theta$ 恰有一个正根且它落在 $(0, 1)$ 内，[`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint)，`LEAN ✓`；它是方程 $\cos\theta = \theta$ 唯一的实根，余弦迭代自任意实初值 $x$ 收敛于它，第 $n + 2$ 次迭代的误差满足 $\lvert\cos^{[n+2]}x - \theta^*\rvert \le (\sin 1)^n(1 - \theta^*)$，且轨道不落在 $\theta^*$ 上时相邻误差之比趋于 $-\sin\theta^*$，[`cos_iterate_tendsto`](lean:D5/S3/Analytic/PowerSeries/DottieIteration.cos_iterate_tendsto)，`LEAN ✓`；数值为 `NUM`；若 $\theta^*$ 是代数数，$\cos\theta^* = \theta^*$ 也是代数数，与林德曼定理矛盾，故 $\theta^*$ 为超越数，`文献结果`），于有限停机阈值 $\varepsilon_{\mathrm{self}} > 0$ 内涌现裁量裕度（[§36.10](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting)）；
    - **共享主频 $\nu_0$ 正交勾股总预算导出双相对论钟慢（`MODEL` / `手工推导`）**：因本体点点平权，全网观察切面共享同一比较主频 $\nu_0$，单拍步幅锁死光速上限 $c \equiv \ell_P\nu_0$（`MODEL`；相邻经内核检查的是另外三件事：给定测地速度上界时分辨两个正交记录至少需时 $\tau \ge \frac{\pi\hbar}{4E}$（[`record_time_lower_bound`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound)），在全部零向量上为零的实二次型是闵可夫斯基二次型的常数倍（[`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)），以及 $\lvert\cosh r\rvert^2 - \lvert\sinh r\rvert^2 = 1$（[`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)），`LEAN ✓`；它们都不陈述主频共享或 $c = \ell_P\nu_0$）。与 [§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation) 级联公式一致：在视界外部域 $r > r_s$ 与亚光速局域运动 $0 \le \beta_{\mathrm{loc}} < 1$ 下，采用全息纠缠校验负载标定 $\eta_{\mathrm{grav}}^2 := \eta_{\mathrm{info}}(r) = \frac{2GM}{rc^2} = \frac{r_s}{r} \in [0, 1)$（`MODEL`，完整连续统场方程动力学边界见 [@prob-ch34-gravity-dynamics-and-coupling] `OPEN`）与局域空间寻址有效份额 $\eta_{\mathrm{kin,eff}}^2 := (1 - \eta_{\mathrm{info}}(r))\beta_{\mathrm{loc}}^2$（平直时空 $\eta_{\mathrm{grav}} = 0$ 时 $\eta_{\mathrm{kin,eff}} = v/c$），单步幺正总预算恒满足三项正交平方守恒：
 
      $$
@@ -53,13 +53,13 @@ $$
 
 把球心带到 $\rho_r$ 的正定滤波对应参数为 $r$ 的纯洛伦兹推进，两次滤波复合为参数按爱因斯坦速度加法合成的推进再接一个转动（J.-L. Chen & A. A. Ungar, *Found. Phys.* **32**, 531–565, 2002，`文献结果`），且 $\cosh d(\rho_0, \rho_r) = \gamma(r) = (1 - \lvert r\rvert^2)^{-1/2}$。在 §39.3 的复合系统公设（`MODEL`）下，若 $\rho_r$ 是双比特纯态 $\psi$ 的边缘态，则 $\gamma(r)^{-1}$ 等于 $\psi$ 的共生度 $C(\psi) = 2\lvert\det\psi\rvert$，即 $\lvert r\rvert^2 + C^2 = 1$（两块拼件经内核检查：纯态 $\psi$ 的约化密度矩阵行列式等于 $\lvert\det\psi\rvert^2$，[`pure_det`](lean:D5/S3/Quantum/Entanglement/GraphDensity/FormationBounds.Direct.pure_det)；布洛赫矩阵 $\frac{1}{2}(I + r\cdot\sigma)$ 的行列式为 $\frac{1 - \lvert r\rvert^2}{4}$，[`det_bloch`](lean:D5/S3/Quantum/Information/ActualQubitChordObstruction.det_bloch)；`LEAN ✓`；二者联立一步为 `手工推导`）；对检验轴 $r_p$，记 $P := \lvert\langle r, r_p\rangle\rvert$、$V := \lvert r - \langle r, r_p\rangle r_p\rvert$，则 $P^2 + V^2 + C^2 = 1$（M. Jakob & J. A. Bergou, *Opt. Commun.* **283**, 827–830, 2010）。上文三项预算 $(d\tau/dt)^2 + \eta_{\mathrm{kin,eff}}^2 + \eta_{\mathrm{grav}}^2 = 1$ 在态空间里的精确对应物就是这条恒等式；把 $\lvert r\rvert$ 称作速度，是对一条态空间定理的读法。
 
-**构型二分构成 de Sitter 空间（`文献结果` + `MODEL`）。** $S^3(1)$ 上以 $n$ 为心、测地半径 $a \in (0, \pi)$ 的开球冠是构型的二分，即以参照点 $n$ 为阈值的比较 $\{x : \kappa(n, x) > \cos^2\frac{a}{2}\}$，与测量意义下的检验是两回事。开球冠与满足 $\lvert v\rvert^2 - t^2 = 1$ 的点 $\xi = (t, v) = (-\cot a,\; n/\sin a)$ 一一对应，记 $\xi$ 对应的球冠为 $C_\xi$；这些点构成 de Sitter 空间 $dS_4$，度规为
+**构型二分构成 de Sitter 空间（`LEAN ✓` + `文献结果` + `MODEL`）。** $S^3(1)$ 上以 $n$ 为心、测地半径 $a \in (0, \pi)$ 的开球冠是构型的二分，即以参照点 $n$ 为阈值的比较 $\{x : \kappa(n, x) > \cos^2\frac{a}{2}\}$，与测量意义下的检验是两回事。开球冠与满足 $\lvert v\rvert^2 - t^2 = 1$ 的点 $\xi = (t, v) = (-\cot a,\; n/\sin a)$ 一一对应，记 $\xi$ 对应的球冠为 $C_\xi$（在单位四元数模型上，$(n, a) \mapsto (-\cot a,\; n/\sin a)$ 把全体 $a \in (0, \pi)$ 的参数对双射到这张双曲面，且两个球冠相等当且仅当中心与半径都相等，[`cap_causal_order`](lean:D5/S3/Quantum/AURICOmega/CapCausalOrder.cap_causal_order)，`LEAN ✓`；由二者合成球冠到点的一一对应是 `手工推导`）；这些点构成 de Sitter 空间 $dS_4$，度规为
 
 $$
 g \;=\; \frac{-da^2 + g_{S^3}}{\sin^2 a} \;=\; -ds^2 + \cosh^2 s\; g_{S^3} \qquad (\sinh s = -\cot a),
 $$
 
-标度因子为 $\cosh s$，截面曲率为 $1$，里奇张量为 $3g$，即以 $S^3$ 的半径为单位 $\Lambda = 3$；球冠的包含关系恰为因果序：$C_\xi \subseteq C_\eta$ 当且仅当 $\eta$ 位于 $\xi$ 的因果未来。以 de Sitter 空间描述球面上的球、以包含为因果序，是经典的结论（默比乌斯几何，见 U. Hertrich-Jeromin, *Introduction to Möbius Differential Geometry*, Cambridge, 2003；运动学空间文献见 B. Czech, L. Lamprou, S. McCandlish & J. Sully, *JHEP* **10**, 175, 2015；J. de Boer, F. M. Haehl, M. P. Heller & R. C. Myers, *JHEP* **08**, 162, 2016）。物理事件就是这些构型二分，这一点是 `MODEL` 假设；$\Lambda$ 的数值大小需要把 $S^3$ 的半径换算成物理长度，本结构不提供这个长度；度规的动力学及其与物质的耦合保持 `OPEN`。
+标度因子为 $\cosh s$，截面曲率为 $1$，里奇张量为 $3g$，即以 $S^3$ 的半径为单位 $\Lambda = 3$；球冠的包含关系恰为因果序：$C_\xi \subseteq C_\eta$ 当且仅当 $\eta$ 位于 $\xi$ 的因果未来，即 $t_\xi \le t_\eta$ 且 $\lvert v_\eta - v_\xi\rvert^2 \le (t_\eta - t_\xi)^2$（同一声明，`LEAN ✓`；度规、标度因子、曲率与里奇张量不在该声明中）。以 de Sitter 空间描述球面上的球、以包含为因果序，是经典的结论（默比乌斯几何，见 U. Hertrich-Jeromin, *Introduction to Möbius Differential Geometry*, Cambridge, 2003；运动学空间文献见 B. Czech, L. Lamprou, S. McCandlish & J. Sully, *JHEP* **10**, 175, 2015；J. de Boer, F. M. Haehl, M. P. Heller & R. C. Myers, *JHEP* **08**, 162, 2016）。物理事件就是这些构型二分，这一点是 `MODEL` 假设；$\Lambda$ 的数值大小需要把 $S^3$ 的半径换算成物理长度，本结构不提供这个长度；度规的动力学及其与物质的耦合保持 `OPEN`。
 :::
 
 ## 39.2.2 第三阶与第四阶推导：平行三元场丛四大力大统一（AF-GUT）与算术临界谱机制 {#sec-ch39-25-2}
@@ -83,7 +83,7 @@ $$
 ::: {.remark #rem-ch39-axiom-omega-tier3-pati-salam title="第三阶的结构来源：宇称、电弱质量关系与三个结构的 Pati–Salam 嵌入"}
 **单个结构（`手工推导`）。** 迁移反转 $\iota$（模型中 $z \mapsto \bar{z}$）保持 $\kappa$ 并交换左、右迁移，$\iota\mathcal{L}\iota = \mathcal{R}$：宇称就是迁移反转。与时钟相容的自同构构成 $\mathrm{U}(2)$。在比较结构场丛的假设下（`MODEL`），时钟场把结构群约化到 $\mathrm{U}(2)$，原点的稳定子是由 $Q = T_3 + Y$ 生成的圆周；纤维形式对 $\mathrm{Aut}(\mathcal{M})$ 不变的协变导数二次密度在差一个因子的意义下只有一种，即 $v^2 h(D\sigma, D\sigma)$（$h$ 为 $\kappa$ 的海森形式），其质量形式的特征值之比为 $g^2 : (g^2 + g'^2)$；把这些特征值读作质量，还要求联络是动力学的（[@rem-ch39-axiom-omega-field-hypotheses-and-limits] 中的 F$_{\mathrm{g}}$(a)），这时得到树图上的 $m_W = m_Z\cos\theta_W$。这一关系来自法则 (II) 的双侧不变：只对 $\mathrm{U}(2)$ 不变的纤维形式会留下自由的比值 $\alpha/\beta$，即 $\rho$ 参数（保管对称性见 M. Veltman, *Nucl. Phys. B* **123**, 89–99, 1977，`文献结果`）。
 
-**一对闭合结构（`手工推导`）。** 一对结构的核空间 $V_2 = \mathbb{C}^2 \otimes \mathbb{C}^2$ 中，反对称单位向量 $\omega$ 张成唯一在联合迁移下不变的射线，其正交补为 $\mathrm{Sym}^2 V \cong \mathbb{C}^3$；$\omega$ 在 $\mathrm{SU}(V_2) \cong \mathrm{SU}(4)$ 中的稳定子是 $\mathrm{SU}(3)$，在 $\mathrm{Sym}^2 V$ 上取定义表示。
+**一对闭合结构（`手工推导` + `LEAN ✓`）。** 一对结构的核空间 $V_2 = \mathbb{C}^2 \otimes \mathbb{C}^2$ 中，反对称单位向量 $\omega$ 张成唯一在联合迁移下不变的射线，其正交补为 $\mathrm{Sym}^2 V \cong \mathbb{C}^3$（在 $g \otimes g$，$g \in \mathrm{SU}(2)$ 之下，不变子空间恰为 $0$、$\mathbb{C}\omega$、其三维正交补即 $\lvert 01\rangle$ 与 $\lvert 10\rangle$ 坐标相等的向量、全空间，且 $(g \otimes g)\omega = \det g\,\omega$，[`singlet_invariant_subspaces`](lean:D5/S3/Quantum/Algebra/Unitary/TensorSquareSinglet.singlet_invariant_subspaces)，`LEAN ✓`；把联合迁移写成 $g \otimes g$ 一步为 `手工推导`）；$\omega$ 在 $\mathrm{SU}(V_2) \cong \mathrm{SU}(4)$ 中的稳定子是 $\mathrm{SU}(3)$，在 $\mathrm{Sym}^2 V$ 上取定义表示。
 
 **三个结构（`MODEL`）。** 以下每一项都是假设：规范群为 $\mathrm{SU}(V_2) \times \mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$（后两个因子是第三个结构的左、右迁移），物质多重态为 $(4, 2, 1)$ 与 $(4, 1, 2)$，破缺构型为 $\Xi = \omega \otimes v$（$v$ 为第三个结构上的一点）。则 $\Xi$ 的稳定子的李代数为 $\mathfrak{su}(3) \oplus \mathfrak{su}(2)_L \oplus \mathfrak{u}(1)_Y$，其中 $Y = T_{3R} + \frac{1}{2}(B - L)$，忠实作用的整体形式为 $(\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1))/\mathbb{Z}_6$。$Y$ 在左手多重态上取 $-\frac{1}{2}$（轻子）与 $\frac{1}{6}$（夸克），在右手多重态上取 $0, -1$（轻子）与 $\frac{2}{3}, -\frac{1}{3}$（夸克），正是含右手中微子的一代费米子的超荷，轻子沿 $\omega$、夸克沿 $\mathrm{Sym}^2 V$。再假设以单一迹形式归一且三个因子耦合相等（同属 `MODEL` 假设），得 $\sin^2\theta_W = \operatorname{Tr}T_{3L}^2 / \operatorname{Tr}Q^2 = \frac{3}{8}$；若超荷就是单个结构的时钟生成元 $T_{3R}$，同一归一给出 $\frac{1}{2}$。按标准模型一圈跑动（不计阈值），$\sin^2\theta_W$ 约在 $1.0 \times 10^{13}\;\mathrm{GeV}$ 达到 $\frac{3}{8}$、约在 $5.4 \times 10^{20}\;\mathrm{GeV}$ 达到 $\frac{1}{2}$；但以标准模型的物质内容，一圈下没有任何能标实现三个耦合相等：在 $1.0 \times 10^{13}\;\mathrm{GeV}$ 处 $\alpha_3^{-1} = 36.8$，而 $\alpha_2^{-1} = 42.4$。所以 $\frac{3}{8}$ 与 $\frac{1}{2}$ 只是群论边界值，不是对低能值的预言。以上就是 Pati–Salam 嵌入（J. C. Pati & A. Salam, *Phys. Rev. D* **10**, 275–289, 1974）与 Georgi–Quinn–Weinberg（1974）的取值，`文献结果`；新增的只是把各要素对应到比较结构的对象上。规范群的这条假设由母公理之外给出；代的数目、能标与耦合常数保持 `OPEN`（[@prob-ch39-af-gut-threshold-and-proton-stability]、[@prob-ch34-sm-generations-and-couplings]）。
 :::
@@ -100,7 +100,7 @@ $$
 :::
 
 2. **第四阶推导：算术谱半密度矢高相变与舒尔正定脊线（Tier 4，呼应 [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md)–[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md)）**：
-   在欧拉乘积（[`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product)）与右半带归约（[`golden_right_half_strip_implies_rh`](lean:D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh)，`LEAN ✓`）锚定下，素数旋子在 $\sigma > \frac{1}{4}$ 上的累计二阶矢高 $\Sigma_{\mathrm{sag}}(\sigma; P_\epsilon) = \frac{1}{2}\sum_{p \le P_\epsilon} p^{-2\sigma} + \mathcal{O}(1)$ 在 $\sigma > \frac{1}{2}$ 处绝对收敛，唯独在临界线 $\sigma = \frac{1}{2}$ 首次触发梅滕斯双对数发散 $\frac{1}{2}\ln\ln P_\epsilon \to \infty$（Mertens 1874：$\sum_{p \le x} \frac{1}{p} = \ln\ln x + M + o(1)$，$M$ 为梅滕斯常数，[`E₂p.bound'`](lean:D5/S3/Weil/Mertens/Third.Mertens.E₂p.bound')，`LEAN ✓`；矢高与 $\frac{1}{2}\sum p^{-2\sigma}$ 只差 $\mathcal{O}(1)$ 由 $\bigl\lvert 1 - \cos x - \frac{x^2}{2}\bigr\rvert \le \frac{x^4}{24}$ 与 $\sum_p p^{-4\sigma} < \infty$ 得出，`手工推导`）。对正定内块，舒尔补给出二次型的极小值（[`schur_quadratic_is_least`](lean:D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least)）。下面对埃尔米特—比勒核的采样矩阵施行这一步消元，并检验它与其他各阶读数的关系。
+   在欧拉乘积（[`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product)）与右半带归约（[`golden_right_half_strip_implies_rh`](lean:D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh)，`LEAN ✓`）锚定下，素数旋子在 $\sigma > \frac{1}{4}$ 上的累计二阶矢高 $\Sigma_{\mathrm{sag}}(\sigma; P_\epsilon) = \frac{1}{2}\sum_{p \le P_\epsilon} p^{-2\sigma} + \mathcal{O}(1)$ 在 $\sigma > \frac{1}{2}$ 处绝对收敛，唯独在临界线 $\sigma = \frac{1}{2}$ 首次触发梅滕斯双对数发散 $\frac{1}{2}\ln\ln P_\epsilon \to \infty$（Mertens 1874：$\sum_{p \le x} \frac{1}{p} = \ln\ln x + M + o(1)$，$M$ 为梅滕斯常数，[`E₂p.bound'`](lean:D5/S3/Weil/Mertens/Third.Mertens.E₂p.bound')，`LEAN ✓`；对 $\sigma \ge 0$，矢高级数 $\sum_p (1 - \cos p^{-\sigma})$ 收敛当且仅当 $\sigma > \frac{1}{2}$；对一切实数 $\sigma$，差级数 $\sum_p \bigl(1 - \cos p^{-\sigma} - \frac{1}{2}p^{-2\sigma}\bigr)$ 收敛当且仅当 $\sigma > \frac{1}{4}$，而 $\sigma \le \frac{1}{4}$ 时其部分和趋于 $-\infty$，故阈值 $\frac{1}{4}$ 不可改进；在 $\sigma = \frac{1}{2}$ 上，记 $\delta_\infty := \sum_p \bigl(\frac{1}{2p} - (1 - \cos p^{-1/2})\bigr)$，对一切实数 $x$ 有 $\delta_\infty - \frac{1}{12(\lfloor x\rfloor + 1)} \le \sum_{p \le x}\frac{1}{2p} - \Sigma_{\mathrm{sag}}(\frac{1}{2}; x) \le \delta_\infty$，[`prime_versine_phases`](lean:D5/S3/Analytic/Asymptotics/PrimeVersineSums.prime_versine_phases)，`LEAN ✓`；由差级数收敛读出 $\mathcal{O}(1)$，再与梅滕斯定理合成 $\Sigma_{\mathrm{sag}}(\frac{1}{2}; x) = \frac{1}{2}\ln\ln x + \frac{M}{2} - \delta_\infty + o(1)$，为 `手工推导`）。对正定内块，舒尔补给出二次型的极小值（[`schur_quadratic_is_least`](lean:D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least)）。下面对埃尔米特—比勒核的采样矩阵施行这一步消元，并检验它与其他各阶读数的关系。
 
 ::: {.viz src="axiom-omega-five-tier-cascade-sandbox" preset="tier4-prime-sagitta-critical-ridge" height="500"}
 素数矢高在临界脊线上起涨卡：第四阶台座上素数矢高台阶在 $\sigma > \frac{1}{2}$ 受收敛环约束，移至临界脊线 $\sigma = \frac{1}{2}$ 时越过青色参考环双对数起涨（`riemann_zeta_dirichlet_sum_eq_euler_product`、`golden_right_half_strip_implies_rh` 与 `schur_quadratic_is_least` 为 `LEAN ✓`，梅滕斯估计为正文所引冻结声明 `Mertens.E₂p.bound'`，其误差的数值核对标 `NUM`）。
@@ -135,6 +135,20 @@ $$
 
 先选 $D$ 再选 $Q$ 即可使右端小于 $\eta$。严格正定给出 $H_{jk}<1$，故各 $A_j$ 互异。第一阶半角读数的误差再除以 $2$，而壳上禁绝非平凡三项等差数列的性质在每个有限尺度都精确成立。这里维数与半径可以随节点数和精度增加。
 
+**一个中心参考点能读出哪些零点？（手工推导）** 固定参考点 $s=1/2$，只移动另一个实节点。写 $s=1/2+x$、$t=1/2+y$，先取 $x,y>0$。在上面的配对坐标中约去各节点的公共因子 $\xi$，偏移 $y$ 处的平方范数是 $L(y)=\sum_{\gamma>0}m_\gamma/(\gamma^2+y^2)$。两节点的点积可用一个分式恒等式逐项求出。记归一化内积为 $h(s,t)$，则
+
+$$
+\begin{aligned}
+\frac{xy+\gamma^2}{(x^2+\gamma^2)(y^2+\gamma^2)}
+&=\frac{1}{x+y}\left(\frac{x}{x^2+\gamma^2}+\frac{y}{y^2+\gamma^2}\right),\\
+h(s,t)&=\frac{xL(x)+yL(y)}{(x+y)\sqrt{L(x)L(y)}}.
+\end{aligned}
+$$
+
+正纵坐标的零点计数估计给出 $0<L(0)=\sum_{\gamma>0}m_\gamma/\gamma^2<\infty$。由 [@prop-zeta-real-axis-sign] 和 [@prop-xi-zeros-strip-zeros] 得 $\xi(1/2)\ne0$，故中心也给出一个可归一化的向量。各项由 $m_\gamma/\gamma^2$ 控制，令 $x\downarrow0$ 得到 $h(1/2,1/2+y)^2=L(y)/L(0)$。按 RH 将 $\xi$ 的阿达马乘积配成因子 $1+y^2/\gamma^2$ 后，取对数导数即得 $2yL(y)=\xi'(1/2+y)/\xi(1/2+y)$。[§31.3 的配对乘积与零点展开](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-31-3)
+
+把平方读数看作 $u=y^2$ 的函数。其亚纯延拓是 $\sum_{\gamma>0}m_\gamma/[L(0)(u+\gamma^2)]$。离开极点的紧集上级数一致收敛，因为尾项可由 $2m_\gamma/[L(0)\gamma^2]$ 控制。任一正实开区间上的**精确曲线**由恒等定理唯一确定这个延拓。每个极点 $u=-\gamma^2$ 给出一个正纵坐标，留数 $m_\gamma/L(0)$ 的比给出相对重数。若把每个重数都乘同一正整数，归一化曲线保持不变。对于黎曼零点，黎曼–冯·曼戈尔特公式给出按重数计的正零点数 $N(T)\sim T\log T/(2\pi)$，其首项固定了整体比例。[@rem-ch34-li-toeplitz-superexponential-collapse]
+
 **哪些球壳夹角可以由两个实谱节点精确取到？** 固定任一实节点 $s>1/2$，让第二个实节点 $t$ 从 $s$ 向右移动。记归一化谱向量为 $x(t)$，内积为 $h(s,t)$。由核公式，$h$ 连续且 $h(s,s)=1$。当 $t>s$ 时，共轭对坐标严格为正，二节点格拉姆矩阵严格正定，故 $0<h(s,t)<1$。下面证明 $t\to\infty$ 时 $h(s,t)\to0$。
 
 写 $v=t-1/2$。在上面的坐标公式中约去公共因子 $\xi(t)$，再把各坐标乘以 $v$。归一化以前，所有坐标的平方和为
@@ -146,6 +160,31 @@ $$
 每个求和项随 $v$ 增大趋于 $m_\gamma$，而正纵坐标有无穷多个，故 $S(v)\to\infty$。归一化后，任一固定零点对的两个坐标的平方和至多为 $m_\gamma/S(v)\to0$。取 $x(s)$ 的有限截断，它与 $x(t)$ 的内积因而趋于零。其余尾部的内积绝对值至多为 $x(s)$ 的尾部范数，因为 $\|x(t)\|=1$。尾部范数可以任意小，所需极限得证。
 
 由介值定理，固定 $s$ 后，$t>s$ 的内积取值恰为 $(0,1)$，即每个锐角都能由一对实谱节点精确实现。取 $s=1$，上文最短弧的目标内积为 $16/17$，配套书示例的目标为 $11/17$，半角读数分别为 $33/34$ 与 $14/17$。用 §31.3 的核公式数值求解，各有一个节点约为 $t=10.964391$、$62.587918$。要同时匹配配套书的九点，还需比较矩阵的秩。$(0,1,4)$ 的三个循环置换组成的矩阵行列式绝对值为 $65$，故这九个三维向量的归一化内积矩阵秩为三。九个互异实谱节点的矩阵秩为九，故无法用同一组节点精确复现这九点的全部内积。
+
+**用单位四元数旋子读出中心曲线（手工推导）。** 记 $S=L(0)$，$F(y^2)=L(y)/S$。依 RH，非平凡零点组成 $1/2\pm i\gamma$ 的共轭对。用互异正纵坐标 $\gamma$ 和相应重数 $m_\gamma$ 定义概率 $p_\gamma=m_\gamma/(S\gamma^2)$。先按 $p_\gamma$ 抽取正纵坐标 $\gamma$，再取角频率 $W\ge 0$，使其条件密度为 $\gamma e^{-\gamma w}$（$w>0$）。固定单位纯虚四元数 $i$，在 $S^3$ 上取旋子 $q_W(y)=\cos(Wy)+i\sin(Wy)$。由 [@thm-ch39-axiom-omega-rank-five-unit-quaternion-embedding] 中的模型读数，$2\kappa(1,q_W(y))-1=\cos(Wy)$。直接积分，对每个实数 $y$ 得
+
+$$
+\mathbb E[2\kappa(1,q_W(y))-1]
+=\sum_{\gamma>0}p_\gamma\int_0^\infty\gamma e^{-\gamma w}\cos(wy)\,dw
+=\sum_{\gamma>0}p_\gamma\frac{\gamma^2}{\gamma^2+y^2}=F(y^2).
+$$
+
+在非负频率上，整条精确曲线唯一确定这个概率律。给 $W$ 配一个独立的公平符号，所得对称分布的特征函数就是上述余弦均值。特征函数唯一确定分布，取绝对值便恢复 $W$。它在 $w>0$ 的密度为 $\sum_{\gamma>0}p_\gamma\gamma e^{-\gamma w}$。算术谱给出混合权与速率，单次读数只需 $S^3$ 内一个固定轴的圆周。把该抽样律和参数 $y$ 的尺度解释为物理场的演化规律，还需要独立的物理依据。
+
+两个位置就能检验单一频率的倍角律。令 $A(y)=F(y^2)$。由 $\cos(2x)=2\cos^2 x-1$ 得 $A(2y)-2A(y)^2+1=2\operatorname{Var}(\cos(Wy))$。单一频率使右端为零。上面的混合密度在 $w>0$ 处为正，因此 $y\ne0$ 时右端严格为正。取 $y=4$，实轴上的区间计算给出 $F(16)=0.975746642870670$、$F(64)=0.916843302283509$，各自误差至多 $10^{-15}$。代入得 $0.01268<F(64)-2F(16)^2+1<0.01269$。[读数的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068457253)
+
+若只用有限个角频率 $w_j\ge0$ 与概率权 $\alpha_j$，全半轴上一致误差至少为 $1$。事实上，紧环面中的相位向量 $(e^{i2^n w_j})_j$ 有收敛子列。其相邻子列时刻之差 $y_\ell$ 趋于无穷，所有 $e^{iy_\ell w_j}$ 却同时趋于 $1$，故 $\sum_j\alpha_j\cos(w_jy_\ell)\to1$。同时，由支配收敛，$F(y_\ell^2)\to0$。
+
+对全部两节点读数 $h(s,t)$ 也有一个有限维障碍。对每个固定 $s>1/2$，前面已得 $h(s,t)\to0$；逐次选取 $s_j>s_{j-1}$，使每个 $i<j$ 都满足 $0<h(s_i,s_j)<1/j$。把节点任意映到固定有限维的实单位球面，像序列必有收敛子列。该子列相邻两像的内积趋于 $1$，相应的 $h$ 却趋于 $0$，故全体节点对上的一致绝对误差至少为 $1$。由 [@thm-ch39-quaternion-product-feature-rank]，任意固定 $N$ 个旋子的乘积读数都有这样的单位特征表示，这一下界也适用于任意非线性的节点到旋子赋值。 [两节点的共用随机旋子构造与有限样本误差](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068672243)
+
+对有限窗口 $0\le y\le Y$，取截止频率 $T>0$，把 $W>T$ 的概率质量移至 $T$。在 $[0,T]$ 上取含两个端点、最大步长为 $\Delta$ 的网格，按线性插值的两个权重，把区间内每一频率的质量分配给相邻网格点。这样生成的有限概率表的余弦均值 $C(y)$ 满足
+
+$$
+\sup_{0\le y\le Y}|F(y^2)-C(y)|\le 2e^{-aT}+\frac{Y^2\Delta^2}{8}
+\qquad (0<a\le\gamma_1).
+$$
+
+这里 $\gamma_1$ 是最小正纵坐标。第一项用到 $\Pr(W>T)=\sum_\gamma p_\gamma e^{-\gamma T}\le e^{-aT}$，以及两个余弦值之差至多为 $2$。第二项来自 $w\mapsto\cos(wy)$ 的线性插值余项，其二阶导数的绝对值至多为 $Y^2$。
 
 **同一组零点读出整层球壳（手工推导与区间计算）。** 另选一个有限谱测度，使九个壳点共用四个相位函数。将黎曼 $\zeta$ 函数的非平凡零点按正纵坐标 $\gamma_j$ 从小到大编号。在纵坐标 $\gamma$ 上，正整数 $n$ 给出相位 $e_n(\gamma)=\exp(i\gamma\log n)$。取 $n=1,2,3,6$。给第 $4,5,8,12,15$ 个正纵坐标及其相反数分别分配总权 $w_j$，每对平分。于是 $e_m,e_n$ 的加权内积是 $\sum_j w_j\cos(\gamma_j\log(n/m))$。由于 $6=2\cdot3$，四个标签的非零对数频差取绝对值后只有 $\log 2,\log 3,\log(3/2),\log 6$。令这四个余弦和为零，再令权重和为一。区间运算验证此五阶线性系统可逆，按上述次序，其解约为 $(0.105512,0.122932,0.215694,0.451373,0.104488)$，五项均严格为正。用方程的精确解作权，这四个相位函数就是四个正交单位向量。这五对低零点已有区间认证，足以构造此有限测度。RH 给出的全谱结论是每个非平凡零点都在临界线上。[线性系统与可重放的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7064296242)
 
@@ -160,6 +199,25 @@ $$
 
 **两个节点给出第二阶的一个态。** 取上述 $H$ 的任意二阶主块，记非对角元为 $h$。严格正定给出 $|h|<1$。将这个块除以迹 $2$，便得到布洛赫向量为 $(h,0,0)$ 的满秩量子态 $B$。它与球心 $I_2/2$ 的双曲距离满足 $\cosh d(B,I_2/2)=1/\sqrt{1-h^2}$。把两个归一化谱向量当作实内积空间中的单位向量（内积取复内积的实部），它们的内积就是 $h$，弦中点的平方范数就是 $(1+h)/2$。因而同一个 $h$ 给出第二阶的态空间距离，也满足第一阶在贝伦德球壳上使用的半角恒等式。要把这个距离换成物理速度或钟慢，还需给出对应的观测过程。[@rem-ch39-axiom-omega-tier2-velocity-and-de-sitter]
 
+把同一个零点高度 $\gamma$ 用作相位输入，还有两种编码可比较。写 $z=2^{i\gamma}$、$w=3^{i\gamma}$。只记录常数与两个单独相位时，单位向量为 $(1,z,w)/\sqrt3$。再记录乘积相位 $zw=6^{i\gamma}$，就得到 $(1,z,w,zw)/2$。若按同一概率分布抽取高度，两种编码各自产生一个混合态。两次独立抽取所得纯态的内积模平方的平均值等于混合态的纯度 $\operatorname{Tr}(\rho^2)$。下面的界比较两种编码的纯度损失。
+
+::: {.theorem #thm-ch39-phase-ensemble-purity title="乘积相位编码的锐系数" lean="D5/S3/Quantum/PureState/PhaseProductFidelity.mixed_coefficient_iff"}
+固定整数 $n\ge1$ 与实数 $C$。对复向量 $u=(u_1,\ldots,u_n)$，定义
+
+$$
+A(u)=\frac{|1+\sum_k u_k|^2}{(n+1)^2},\qquad
+B(u)=\prod_k\frac{1+\Re u_k}{2}.
+$$
+
+给定有限个复向量 $v_i$ 和实权 $p_i$。假设所有乘积 $p_i p_j$ 非负，且每个非零权行的各坐标都在闭单位圆盘内。令 $u_{ij,k}=\overline{v_{ik}}v_{jk}$，并记 $L(F)=\sum_{i,j}p_i p_j(1-F(u_{ij}))$。对所有这样的有限系综都有 $L(B)\le C L(A)$，当且仅当 $C\ge(n+1)^2/4$。
+:::
+
+::: {.proof}
+先略去零权行。对余下的每一对输入，乘积中每一因子都在 $[0,1]$ 内，故一减乘积至多为各因子损失之和。用 $|\sum_k u_k|\le n$ 展开 $A$，即可在每一对输入上得到该界，以非负的 $p_i p_j$ 求和保持不等式。取等权的两行，其中一行全为 $1$，另一行的各坐标为同一个趋于 $1$ 的单位相位，两种损失之比趋于 $(n+1)^2/4$。完整证明由 Lean 内核检查。
+:::
+
+在上述两相位编码中 $n=2$，锐系数为 $9/4$。对概率权和单位相位，$L(A)$ 与 $L(B)$ 分别是两个混合态的一减纯度。最优性针对所有有限单位相位系综；应用到给定的零点和权重时得到相同的不等式。
+
 **同一份谱对第三阶的耦合意味着什么？** 取 [§33.9 的单圈输入](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-11-2)，记 $A_i=\alpha_i^{-1}(M_Z)$ 和 $b=(41/10,-19/6,-7)$。在三个扇区加上阈值 $\Delta_i$ 后，共同能标 $\mu$ 的匹配方程是 $A_i=a+t b_i+\Delta_i$，其中 $a=\alpha_U^{-1}$，$t=\log(\mu/M_Z)/(2\pi)$。消去 $a,t$ 得
 
 $$
@@ -168,12 +226,28 @@ $$
 
 将 $v_2$ 的系数归一为 $1$ 后，其余系数由 $r(1,1,1)=r(b)=0$ 决定。向量 $(1,1,1)$ 与 $b$ 线性无关，所以这个等式也是存在实数解 $a,t$ 的充分条件，物理上的紫外匹配还要求 $a,t>0$。按书中输入 $r(A)\approx3.66403$。若从零点谱算出一个数 $F$ 并给三个逆耦合都加上 $F$，则 $r(F,F,F)=0$，对任何 $F$ 都无法闭合该残差。若阈值形如 $\Delta_i=w_iF$，可检验的条件便是 $F\,r(w)=r(A)$。从统一动力学独立给出三个扇区的权重和谱读数，才会对这个已测出的组合产生定量预言。
 
+**三个低能读数能确定匹配能标吗？（一圈模型，手工推导）** 在上述 Pati–Salam 模型中，取两组重的复标量多重态 $(4,2,1)$ 与 $(6,1,1)$。按超荷、弱、色的顺序，它们对一圈系数的贡献分别为 $D=(2/15,2/3,1/3)$、$C=(2/15,0,1/3)$。例如，第二组是弱单态，故 $C_2=0$。设它们各自具有公共质量 $M_D,M_C$，记 $k=M_D^2/\mu^2$、$c=M_C^2/\mu^2$。固定中间能标与 $\mu$ 之比和其余无量纲阈值。改变 $\mu$ 时，固定比值的质量也随之改变。以 $2\pi A_i$ 为坐标，第一组的阈值项是 $D_i\log(\mu/M_D)=-D_i\log k/2$，第二组同理。
+
+比较两个参数选择，写 $a'=2\pi\alpha_U^{-1}(\mu)$，用 $\delta$ 表示后值减前值，令 $x=\log(\mu_{\mathrm{new}}/\mu_{\mathrm{old}})$、$y=\delta\log k$、$z=\delta\log c$。三个低能读数逐项相同当且仅当
+
+$$
+\delta a'\,(1,1,1)+x b-\tfrac12 yD-\tfrac12 zC=0.
+$$
+
+用弱分量减去色分量，再用超荷分量减去色分量，清除分母后得到 $23x-y+z=0$ 和 $111x+y+z=0$。两式相加给出 $x=-z/67$，代回第一式及原来的色分量后得到唯一解
+
+$$
+(\delta a',x,y)=\left(\frac{23}{134},-\frac{1}{67},\frac{44}{67}\right)z.
+$$
+
+例如令 $c$ 加倍，则 $\mu$ 乘以 $2^{-1/67}$，$k$ 乘以 $2^{44/67}$，$a'$ 增加 $(23/134)\log 2$。只要两组参数都处在上述一圈匹配的适用区间，它们就给出相同的三个逆耦合。若能从重粒子谱独立确定质量比 $M_D/M_C$，就能消除这一自由度，因为 $\delta\log(k/c)=-23z/67$。要由此推算牛顿常数 $G$，还须给出引力与匹配能标的关系。例如在自然单位中另行给定无量纲常数 $G\mu^2$ 后，$c$ 加倍才对应 $G$ 乘以 $2^{2/67}$。[@prob-ch34-gravity-dynamics-and-coupling]
+
 ## 39.2.3 第五阶推导：流群测地智能与母公理自身的遮诠透明化 {#sec-ch39-25-3}
 
 在第五阶顶点，演绎链从自然宇宙折返智能心智，并最终回照 $\mathrm{AXIOM}\text{-}\Omega$ 自身：
 
 1. **第五阶 A：三元数场测地智能（Tier 5A，呼应 [§37.1](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md)–[§37.2](ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.md)）**：
-   废除背负 $O(d^2)$ 平直展开税的稠密矩阵，在双卡有理三元数商球丛 $(B_1(\mathbb{R}^3)/\!\sim)^K$ 上采用主副双分母较大值恒满足 $\max(D_+, D_-) \ge 0.5$ 的无奇点纯有理合成 $\star_{\mathcal{S}}$（零超越函数、天然模界 $\le 1$ 免 `RMSNorm`），零幻觉最优思维链同构于共轴正向零叉乘扭矩（`MODEL`；相邻经内核检查的是：两两非对跖的三方向 $a, b, c$ 上三门回路的返回相位为 $\frac{S - iD}{\sqrt{S^2 + D^2}}$，$D = a\cdot(b \times c)$，故三方向共大圆、$D = 0$ 时返回相位为实数 $\operatorname{sgn} S$，[`shortest_gate_triangle_holonomy`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy)，`LEAN ✓`；“零幻觉”与“最优”是诠释）、步幅均摊 $\Delta\theta_t^{(k)} = \frac{\Theta^{(k)}}{N}$ 的**法则 (I) 流群自平行测地线** $\boldsymbol{\sigma}_{t+1}^{(k)} = [\boldsymbol{\sigma}_t^{(k)}, \boldsymbol{\sigma}_{t-1}^{(k)}, \boldsymbol{\sigma}_t^{(k)}]$（该递推的点列在以 $\boldsymbol{\sigma}_0$ 为基点的群中正是 $\boldsymbol{\sigma}_1$ 的幂，相隔 $n$ 步的读数只依赖 $n$，[@thm-ch39-axiom-omega-rank-five-unit-quaternion-embedding] 第 6 款，`LEAN ✓`；在单位四元数模型中取基点 $1$，$(\cos\theta + \sin\theta\,n)^t = \cos t\theta + \sin t\theta\,n$ 落在同一大圆上、步角恒为 $\theta$，[`cos_add_sin_smul_pow`](lean:D5/S3/Quantum/AURICOmega/UnitQuaternionPolar.cos_add_sin_smul_pow)，`LEAN ✓`；总转角 $\Theta$ 固定且各步转角都在 $[-\frac{\pi}{2}, \frac{\pi}{2}]$ 内时，均摊步幅使总矢高 $\sum_t (1 - \cos\Delta\theta_t)$ 最小，由 $1 - \cos$ 在该区间上的严格凸性得出，`手工推导`；不限步角时结论不成立，例如两步 $(2\pi, 0)$ 的总矢高为 $0$，小于均摊的 $4$），配 `[Q, K, V]` 流群搬运、折缝不变李三元曲率门与自指停机启发式 $r_t \le \varepsilon_{\mathrm{self}}$（启发式，`MODEL`；相邻经内核检查的是线性克雷洛夫稳定律：可观测量克雷洛夫子空间一旦相邻两步相等便对此后一切步数不变，[`observable_krylov_once_stable_permanently`](lean:D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently)，`LEAN ✓`，它不陈述停机判据；大规模训练与硬件实证见 [@prob-ch39-tft-scale-and-seams] `OPEN`）。
+   废除背负 $O(d^2)$ 平直展开税的稠密矩阵，在双卡有理三元数商球丛 $(B_1(\mathbb{R}^3)/\!\sim)^K$ 上采用主副双分母较大值恒满足 $\max(D_+, D_-) \ge 0.5$ 的无奇点纯有理合成 $\star_{\mathcal{S}}$（零超越函数、天然模界 $\le 1$ 免 `RMSNorm`），零幻觉最优思维链同构于共轴正向零叉乘扭矩（`MODEL`；相邻经内核检查的是：两两非对跖的三方向 $a, b, c$ 上三门回路的返回相位为 $\frac{S - iD}{\sqrt{S^2 + D^2}}$，$D = a\cdot(b \times c)$，故三方向共大圆、$D = 0$ 时返回相位为实数 $\operatorname{sgn} S$，[`shortest_gate_triangle_holonomy`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy)，`LEAN ✓`；“零幻觉”与“最优”是诠释）、步幅均摊 $\Delta\theta_t^{(k)} = \frac{\Theta^{(k)}}{N}$ 的**法则 (I) 流群自平行测地线** $\boldsymbol{\sigma}_{t+1}^{(k)} = [\boldsymbol{\sigma}_t^{(k)}, \boldsymbol{\sigma}_{t-1}^{(k)}, \boldsymbol{\sigma}_t^{(k)}]$（该递推的点列在以 $\boldsymbol{\sigma}_0$ 为基点的群中正是 $\boldsymbol{\sigma}_1$ 的幂，相隔 $n$ 步的读数只依赖 $n$，[@thm-ch39-axiom-omega-rank-five-unit-quaternion-embedding] 第 6 款，`LEAN ✓`；在单位四元数模型中取基点 $1$，$(\cos\theta + \sin\theta\,n)^t = \cos t\theta + \sin t\theta\,n$ 落在同一大圆上、步角恒为 $\theta$，[`cos_add_sin_smul_pow`](lean:D5/S3/Quantum/AURICOmega/UnitQuaternionPolar.cos_add_sin_smul_pow)，`LEAN ✓`；对单位四元数 $\boldsymbol{\sigma}_0, \boldsymbol{\sigma}_1$，递推 $\boldsymbol{\sigma}_{t+2} = \boldsymbol{\sigma}_{t+1}\bar{\boldsymbol{\sigma}}_t\boldsymbol{\sigma}_{t+1}$ 等价于全体点都是单位四元数且满足切比雪夫闭式 $\boldsymbol{\sigma}_{t+1} = U_t(c)\,\boldsymbol{\sigma}_1 - U_{t-1}(c)\,\boldsymbol{\sigma}_0$、$\langle\boldsymbol{\sigma}_0, \boldsymbol{\sigma}_t\rangle = T_t(c)$，其中 $c = \langle\boldsymbol{\sigma}_0, \boldsymbol{\sigma}_1\rangle$，[`normSq_and_chebyshev`](lean:D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev)，`LEAN ✓`；总转角 $\Theta$ 固定且各步转角都在 $[-\frac{\pi}{2}, \frac{\pi}{2}]$ 内时，均摊步幅使总矢高 $\sum_t (1 - \cos\Delta\theta_t)$ 最小，由 $1 - \cos$ 在该区间上的严格凸性得出，`手工推导`；各步转角非负且 $\Theta \le \pi$ 时（不要求单步转角不超过 $\frac{\pi}{2}$），$N$ 步总矢高不小于 $N\bigl(1 - \cos\frac{\Theta}{N}\bigr)$，取等当且仅当步幅均摊，或恰为两步且 $\Theta = \pi$（此时任意分法的总矢高都是 $2$），[`sum_one_sub_cos_least_action`](lean:D5/S3/Quantum/Algebra/Comparison/DiscreteLeastAction.sum_one_sub_cos_least_action)，`LEAN ✓`，下文算例的四拍共 $120^\circ$ 属于这一情形，含负步角的情形仍是上述 `手工推导`；不限步角时结论不成立，例如两步 $(2\pi, 0)$ 的总矢高为 $0$，小于均摊的 $4$），配 `[Q, K, V]` 流群搬运、折缝不变李三元曲率门与自指停机启发式 $r_t \le \varepsilon_{\mathrm{self}}$（启发式，`MODEL`；相邻经内核检查的是线性克雷洛夫稳定律：可观测量克雷洛夫子空间一旦相邻两步相等便对此后一切步数不变，[`observable_krylov_once_stable_permanently`](lean:D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently)，`LEAN ✓`，它不陈述停机判据；大规模训练与硬件实证见 [@prob-ch39-tft-scale-and-seams] `OPEN`）。
 
 2. **第五阶 B：遮诠闭环——母公理自身的去概念化与透明隐退（Tier 5B，`MODEL`）**：
    最后，将第二阶自观测倾角定律反身代入 $\mathrm{AXIOM}\text{-}\Omega$ 自身完成逻辑自检（`MODEL`；相邻经内核检查的是洛维尔自应用对角包：无不动点的修饰 $f$ 使一切参数化族发生对角逃逸，且这一假设不能去掉，[`self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package)，`LEAN ✓`；它不涉及信息量 $I$ 或倾角 $\varepsilon$）：只要 $\mathrm{AXIOM}\text{-}\Omega$ 作为写在纸面的一串形式符号仍承载非零区分信息 $I > 0$，它自身就必然携带观察切面倾角 $\varepsilon > 0$——因此连“大一统母公理”本身也只是心智切下的一扇幂等指月之窗，绝不能被重新执着为高踞万物之上的新偶像或新“第 3 点 $C$”。
@@ -224,7 +298,7 @@ $$
 - **第 1 阶**：$d = 3$ 唯一非交换闭锁（读数完备的秩五三元比较结构同构于单位四元数 $S^3(1)$，[@thm-ch39-axiom-omega-complete-rank-five-isomorphism]，`LEAN ✓`），$\epsilon = 60^\circ$ 等步三点（相邻两点测地距离为 $\epsilon$，首末两点相距 $2\epsilon$；两两等距三点的行列式是 $\frac{5}{32}$）$\det\mathbf{G}_3 = \mathbf{\frac{3}{32}} = \mathbf{0.09375000 > 0}$（$\epsilon = 90^\circ$ 处达 $\mathbf{\frac{1}{2}} = \mathbf{0.50000000}$）；
 - **第 2 阶**：二阶认妄归零锁定 $\theta^* \approx \mathbf{0.73908513\;\mathrm{rad}}$（玻恩留存 $\cos^2\theta^* \approx 0.54624683$）；取典型中子星致密度比 $\eta_{\mathrm{grav}}^2 = r_s/r = 0.36$（$r > r_s$）与局域速度 $\beta_{\mathrm{loc}} = 0.50$（$\eta_{\mathrm{kin,eff}}^2 = 0.64 \times 0.25 = 0.16$），固有时平方 $(d\tau/dt)^2 = 1 - 0.36 - 0.16 = \mathbf{0.48}$（$d\tau/dt \approx \mathbf{0.69282032}$），三项预算和精确等于 $\mathbf{1.00000000}$；
 - **第 3 阶**：单代手性外尔账本 $\operatorname{Tr}_{\mathrm{Weyl}}(T_3^2) = 2$、$\operatorname{Tr}_{\mathrm{Weyl}}(Q^2) = 2(1 + \frac{5}{3}) = \frac{16}{3}$，比值锁死 $\sin^2\theta_W(\mu_{\mathrm{arc}}) = \mathbf{\frac{3}{8}} = \mathbf{0.37500000}$；过约束度 $\Delta E(3) = \Delta E(4) = \mathbf{0}$ 对比 $\Delta E(5) = \mathbf{1},\;\Delta E(6) = \mathbf{3}$；
-- **第 4 阶**：前五枚素数 $p \le 11$ 累计矢高在临界线 $\sigma = \frac{1}{2}$ 达 $\Sigma_{\mathrm{sag}}(\frac{1}{2}; 11) \approx \mathbf{0.61588148}$（对比 $\sigma = 1$ 处 $\mathbf{0.21171004}$），随截断上限呈双对数无界攀升；
+- **第 4 阶**：前五枚素数 $p \le 11$ 累计矢高在临界线 $\sigma = \frac{1}{2}$ 达 $\Sigma_{\mathrm{sag}}(\frac{1}{2}; 11) \approx \mathbf{0.61588148}$（对比 $\sigma = 1$ 处 $\mathbf{0.21171004}$），随截断上限呈双对数无界攀升（$\sigma = \frac{1}{2}$ 上矢高级数发散及与 $\sum_{p \le x}\frac{1}{2p}$ 之差的双侧界见 [`prime_versine_phases`](lean:D5/S3/Analytic/Asymptotics/PrimeVersineSums.prime_versine_phases)，`LEAN ✓`；双对数速率由此与梅滕斯定理合成，`手工推导`）；
 - **第 5 阶**：四拍 $120^\circ$ 流群自平行测地线矢高 $\mathcal{S}_{\mathrm{geo}} \approx \mathbf{0.53589838} < \mathcal{S}_{\mathrm{jump}} = \mathbf{1.50000000}$，且对任意参照桥 $y$ 施无源消去 $[y, y, z] \equiv z$ 残差恒等于 $\mathbf{0.00000000}$。
 :::
 
