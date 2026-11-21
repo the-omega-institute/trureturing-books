@@ -14,10 +14,10 @@ $$
 
 看清上面这对映射的几何结构了吗？唯一素因子分解把每一个正整数 $n$ 嵌入了以形式基向量 $\{\vv{e}_p\}_{p \in \mathrm{Primes}}$ 张成的可数无穷维**形式指数晶格** $\bigoplus_{p \in \mathrm{Primes}} \mathbb{Z}\vv{e}_p$（若赋予这组形式基向量标准正交内积 $\langle \vv{e}_p, \vv{e}_q\rangle = \delta_{pq}$，指数 $v_p(n) \in \mathbb{N}$ 就是整数 $n$ 在第 $p$ 根形式素数轴 $\vv{e}_p$ 上的非负整数坐标）；与此同时，取自然对数给出了作用在该指数晶格上的线性权重泛函 $\ln n = \sum_p v_p(n)\,\ln p$，其中不同素数的对数权重 $\ln 2, \ln 3, \ln 5, \dots$ 在有理数域 $\mathbb{Q}$ 上线性无关（[@thm-prime-log-independence]）——没有任何一根素数轴能在另一根素数轴上投下一丝一毫的有理整除影子（下文所说的“素数正交基轴”，即指这一配备了 $\mathbb{Q}$-线性无关对数权重的形式指数坐标晶格几何）。
 
-本章将沿着这一“素数即算术正交基”的几何直觉，严格建立**狄利克雷（Dirichlet）自然数级数**与**欧拉（Euler）无穷素数乘积**在绝对收敛半平面 $\operatorname{Re}(s) > 1$ 上的机器形式化恒等式，剖析有限素数筛的“多面体截断余项”，并在严谨的三层认识论契约下远眺数论皇冠上的开放猜想——**黎曼猜想（Riemann Hypothesis）**。
+本章将沿着这一“素数即算术正交基”的几何直觉，严格建立**狄利克雷（Dirichlet）自然数级数**与**欧拉（Euler）无穷素数乘积**在绝对收敛半平面 $\operatorname{Re}(s) > 1$ 上的机器形式化恒等式，剖析有限素数筛的“多面体截断余项”，并在严谨的认识论分层下登记经典**黎曼猜想（Riemann Hypothesis）**与狄利克雷广义黎曼猜想（GRH）在 2026 年完成的外部形式化证明及其直接算术推论，同时划清其与仍保持开放的高阶 $L$ 函数猜想的界线。
 
 ::: {.figure src="ch22-overview"}
-**图 22。** 本章地图：第 I 栏，横走一步乘 $2$、竖走一步乘 $3$，每个整数是素数轴上的一个格点，青色的箭头走到 $12 = 2^2 \times 3$；第 II 栏，$1$ 到 $30$ 中只用 $2, 3, 5$ 乘得出的格子是青色，其余是品红，第一个品红格是 $7$（[@ex-prime-log-orthogonality-and-sieve]）；第 III 栏，临界带 $0 < \operatorname{Re}(s) < 1$ 中央的虚线是 $\sigma = \frac{1}{2}$，前十个灰色的零点（数值结果）都落在线上，$s = 1$ 处的叉是极点；红色的问号与标签说的是开放问题：是否所有非平凡零点都在这条线上（[@conj-riemann-hypothesis]）；问号成对画在线的两侧，因为离线零点若有，必关于 $\sigma = \frac{1}{2}$ 成对出现（[@thm-xi-reading-entire-reflection]、[@prop-zeta-conjugation-covariance]）。
+**图 22。** 本章地图：第 I 栏，横走一步乘 $2$、竖走一步乘 $3$，每个整数是素数轴上的一个格点，青色的箭头走到 $12 = 2^2 \times 3$；第 II 栏，$1$ 到 $30$ 中只用 $2, 3, 5$ 乘得出的格子是青色，其余是品红，第一个品红格是 $7$（[@ex-prime-log-orthogonality-and-sieve]）；第 III 栏，临界带 $0 < \operatorname{Re}(s) < 1$ 中央的虚线是 $\sigma = \frac{1}{2}$，前十个灰色的零点（数值结果）都落在线上，$s = 1$ 处的叉是极点；图中的红色问号沿用历史记号标示 1859 年的零点定位问题——该问题已由 2026 年的外部 Lean 4 形式化与独立内核重放解决（[@conj-riemann-hypothesis]），问号成对画在线的两侧则示意离线零点若存在必关于 $\sigma = \frac{1}{2}$ 成对出现（[@thm-xi-reading-entire-reflection]、[@prop-zeta-conjugation-covariance]）。
 :::
 
 - [22.1 算术正交基与因式分解消除无穷](ch22-s01-arithmetic-basis.md)
