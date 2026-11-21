@@ -301,7 +301,7 @@ Choose an integer vector $u$ with $M_Ju=hw$. Set $b=B/h$, take $k_0=1+\sum_{j\in
 $$
 qp+ru,\qquad (q+1)p+(r-b)u
 $$
-is nonnegative. Indeed, each vector in this span at degree $t$ has the form $(t/b)p+c(u-p/b)$ where $c\equiv r\pmod b$. The vector at $c=0$ is nonnegative. If a feasible $c$ is nonnegative, then $r$ is between $0$ and $c$. If a feasible $c$ is negative, then $r-b$ is between $c$ and $0$. The corresponding candidate is nonnegative by convexity.
+is nonnegative. Indeed, each vector in this span at degree $t$ has the form $(t/b)p+c(u-p/b)$ where $c\equiv r\pmod b$. The vector at $c=0$ is nonnegative. If a feasible $c$ is nonnegative, then $r$ is between $0$ and $c$. If a feasible $c$ is negative, then $r-b$ is between $c$ and $0$. The corresponding candidate is nonnegative by convexity. [Lean proves this feasibility equivalence](lean:D5/S3/Combinatorics/NumericalSemigroup/TwoWitnessResidues.nonnegative_at_nearest_residue).
 
 For each residue $r$, let $q_r$ be the least nonnegative integer $q$ for which either candidate is nonnegative. These minima exist because $p$ is strictly positive. Adding $p$ makes every subsequent degree in the same residue feasible. The least degree in residue $r$ is $bq_r+r$, so the cutoff for this span is $\max_r(bq_r+r)-b+1$. It is an upper bound for the cutoff using all integer solutions. For the row matrix $(2,3)$ with $w=1$, take $p=(2,1)$ and $u=(-1,1)$, so $b=7$. In residue order the least degrees are $0,8,9,17,18,12,6$, giving cutoff $12$. All nonnegative integer vectors give the degrees $2a+3c$ for $a,c\ge0$ integral, with cutoff $2$.
 
