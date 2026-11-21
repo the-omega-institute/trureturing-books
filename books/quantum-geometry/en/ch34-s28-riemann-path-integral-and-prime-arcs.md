@@ -257,17 +257,27 @@ Here $(n+1)^2\le4n^2$ and $b-a\le15n^3$. Consecutive sample intervals cover the 
 
 The arithmetic input can be stated in terms of the prime-power counting function. For $x\ge2$ the Chebyshev error kernel is integrable and its tail integral equals $-U(x)/x$. At $x=n^4$, the sample hypothesis therefore amounts to proving the strict lower bound $\int_{n^4}^{\infty}(\psi(t)-t)t^{-2}\,dt>-1/n^2$ for every sufficiently large natural number $n$ (`manual derivation`). [`complete_chebyshev_tail_identity`](lean:D5/S3/Weil/Mertens/CompleteChebyshevTailIdentity.complete_chebyshev_tail_identity) · [`chebyshev_error_kernel_integrable`](lean:D5/S3/Weil/Mertens/WeightedPrimeLimit.chebyshev_error_kernel_integrable)
 
-**What does monotonicity alone tell us about negative mass in a window?** Take $0<s\le1/2$. Put $A_s(t)=t-t^2(t-2)/16$ for $2-s<t\le2+s$ and $A_s(t)=t$ elsewhere. The polynomial is increasing on $[3/2,5/2]$. Its values at the left and right cutoffs are at least $2-s$ and at most $2+s$, respectively. Joining the polynomial to the linear pieces therefore gives a nondecreasing function on the real line, nonnegative for $t\ge1$.
+**What does monotonicity alone tell us about negative mass in a window?**
 
-Let $Q_s(z)=\int_z^\infty(A_s(t)-t)t^{-2}\,dt$. The integrand is $(2-t)/16$ on the chosen interval and zero elsewhere. Its integral over that interval is zero, so the tail vanishes outside the closed interval and equals $((z-2)^2-s^2)/32$ inside it. The depth and the weighted mass thus satisfy
+::: {.theorem #thm-ch31-monotone-window-sharpness title="A monotone count with quadratic depth and cubic window mass" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MonotoneTailSharpness.monotone_tail_quadratic_depth_cubic_mass"}
+For every real $0<s\le1/2$, there is a nondecreasing $A_s\colon\mathbb R\to\mathbb R$, nonnegative for $t\ge1$ and equal to $t$ outside $[2-s,2+s]$, such that $(A_s(t)-t)/t^2$ is integrable on the real line. Its tail $Q_s(z)=\int_z^\infty(A_s(t)-t)t^{-2}\,dt$ satisfies
 
 $$
 -Q_s(2)=\frac{s^2}{32},
 \qquad
 \int_1^3\frac{\max\{-Q_s(z),0\}}{\sqrt z}\,dz\le\frac{s^3}{16}.
 $$
+:::
 
-The integral bound uses the length $2s$, the maximum negative part $s^2/32$, and the weight $1/\sqrt z\le1$ on the interval. As $s\to0^+$, this family violates every uniform upper bound on the depth of the form a constant times the window mass to the power $\alpha$ when $\alpha>2/3$. A stronger bound for the actual prime count would require information beyond monotonicity.
+::: proof
+Take $0<s\le1/2$. Put $A_s(t)=t-t^2(t-2)/16$ for $2-s<t\le2+s$ and $A_s(t)=t$ elsewhere. The polynomial is increasing on $[3/2,5/2]$. Its values at the left and right cutoffs are at least $2-s$ and at most $2+s$, respectively. Joining the polynomial to the linear pieces therefore gives a nondecreasing function on the real line, nonnegative for $t\ge1$.
+
+Let $Q_s(z)=\int_z^\infty(A_s(t)-t)t^{-2}\,dt$. The integrand is $(2-t)/16$ on the chosen interval and zero elsewhere. Its integral over that interval is zero, so the tail vanishes outside the closed interval and equals $((z-2)^2-s^2)/32$ inside it. The depth and the weighted mass thus satisfy
+
+The integral bound uses the length $2s$, the maximum negative part $s^2/32$, and the weight $1/\sqrt z\le1$ on the interval. The full proof is checked by the Lean kernel.
+:::
+
+As $s\to0^+$, this family violates every uniform upper bound on the depth of the form a constant times the window mass to the power $\alpha$ when $\alpha>2/3$. A stronger bound for the actual prime count would require information beyond monotonicity.
 
 **How does the modulus-one Mellin transform detect a zero?** Consider the remainder $U$ in Clause 6 of [@thm-ch34-riemann-prime-arc-bridge]. For every $s\in\mathbb C$ with $\operatorname{Re}(s)>1$, the function $y\mapsto e^{-sy}U(e^y)$ is absolutely integrable on $(0,\infty)$, and its Laplace integral can be evaluated unconditionally. Setting $x=e^y$ gives $e^{-sy}\,dy=x^{-s-1}\,dx$, so this is the Mellin integral on the left below. [Half-plane transform of the complete remainder](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtHalfPlane.u_laplace_half_plane)
 
@@ -307,6 +317,28 @@ Conversely, put $g(u)=U(e^u)$ in logarithmic coordinates $u=\ln x$. The external
 For $1/2<\theta<1$ the same windows satisfy $I_\theta(Y)\le Y^{1/2-\theta} A(Y)$. Conversely, $A(Y)\le Y^{(3/2)(\theta-1/2)} I_\theta(Y)$, so bounds $I_\theta(Y)\le Y^{\eta'}$ on arbitrarily late windows for every $1/2<\theta<1$ and every $\eta'>0$ give the critical condition by taking $(3/2)(\theta-1/2)+\eta'\le\eta$.
 
 The criterion can also be stated using primes alone. Put $\vartheta(t)=\sum_{p\le t}\ln p$ and use it in place of $\psi$ to define $Q_\vartheta$ and $A_\vartheta$. The prime-power correction to the tail satisfies $\sqrt{x}(Q(x)-Q_\vartheta(x))\to2$. Choose $C$ so that $\psi(t)-\vartheta(t)\le C\sqrt{t}$ for all $t\ge1$. Such a $C$ exists unconditionally. The negative part is nonincreasing, and the window theorem gives $0\le A_\vartheta(Y)-A(Y)\le 2C\ln(Y^{3/2}/Y)=C\ln Y$. Thus the critical condition is equivalent to $A_\vartheta(Y)\le Y^\eta$ on arbitrarily late windows for every $\eta>0$. For the implication from $A$, use its bound with exponent $\eta/2$, then take $Y$ large enough that $Y^{\eta/2}+C\ln Y\le Y^\eta$. The independent arithmetic task is to establish this bound on the integral of the negative part from the distribution of the primes. [Window bound for the prime-power correction](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.prime_power_window_correction)
+
+**How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
+
+$$
+Q_{\vartheta}(x)=\int_x^\infty\frac{\vartheta(t)-t}{t^2}\,dt,
+\qquad N(a,b)=\int_a^b\frac{\max\{-Q_{\vartheta}(z),0\}}{\sqrt z}\,dz.
+$$
+
+::: {.theorem #thm-ch31-prime-tail-negative-window title="Window mass forced by an interior negative value" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.prime_tail_negative_window_lower"}
+Let $a,b,x,r$ be real with $0<r\le 1/2$, $1\le a\le(1-r)x$, and $(1+r)x\le b$. If $Q_{\vartheta}(x)\le-4r^2$, then $N(a,b)\ge r^3\sqrt{x}$.
+:::
+
+::: proof
+The estimate holds at real cutoffs, including prime jumps.
+
+Monotonicity lets us compare $\vartheta(t)$ to $\vartheta(x)$ inside the local integral. It gives
+$Q_{\vartheta}(z)-Q_{\vartheta}(x)\le\ln(z/x)+\vartheta(x)(1/z-1/x)$.
+Choose the left side if $\vartheta(x)\le x$ and the right side otherwise. On the chosen side the upper bound is at most $\ln(z/x)+x/z-1$. The inequality $\ln t\le t-1$ reduces this to $(z-x)^2/(zx)\le 2r^2$. Throughout that interval of length $rx$ we have $-Q_{\vartheta}(z)\ge 2r^2$ and $\sqrt{z}\le2\sqrt{x}$. Integration gives the lower bound. The full proof is checked by the Lean kernel.
+
+:::
+
+A window budget strictly below $r^3\sqrt{x}$ therefore rules out a dip of depth $4r^2$ at that interior point. The margins on both sides determine which $r$ can be used. The arbitrarily late windows with small budgets required by the Landau argument still require a separate arithmetic estimate.
 
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 

@@ -257,17 +257,27 @@ $$
 
 这个判据把独立的算术任务落在素数幂的计数上。对 $x\ge2$，切比雪夫误差核可积，其尾积分等于 $-U(x)/x$。在 $x=n^4$ 处，所需的采样假设因而等价于对每个充分大的自然数 $n$ 证明严格下界 $\int_{n^4}^{\infty}(\psi(t)-t)t^{-2}\,dt>-1/n^2$（`手工推导`）。 [`complete_chebyshev_tail_identity`](lean:D5/S3/Weil/Mertens/CompleteChebyshevTailIdentity.complete_chebyshev_tail_identity) · [`chebyshev_error_kernel_integrable`](lean:D5/S3/Weil/Mertens/WeightedPrimeLimit.chebyshev_error_kernel_integrable)
 
-**单调性本身对负部窗口给出什么限制？** 取 $0<s\le 1/2$。在 $2-s<t\le 2+s$ 令 $A_s(t)=t-t^2(t-2)/16$，其余地方令 $A_s(t)=t$。区间内的多项式在 $[3/2,5/2]$ 上单调递增。在左端代入多项式得到不小于 $2-s$ 的值，在右端得到不大于 $2+s$ 的值。因此接上两边的直线后，$A_s$ 在实轴上单调不减，在 $t\ge1$ 时非负。
+**单调性本身对负部窗口给出什么限制？**
 
-令 $Q_s(z)=\int_z^\infty(A_s(t)-t)t^{-2}\,dt$。被积函数在选定区间内为 $(2-t)/16$，其余地方为零。全区间的积分为零，所以 $Q_s$ 在闭区间外恒为零，区间内等于 $((z-2)^2-s^2)/32$。于是负值深度与加权积分满足
+::: {.theorem #thm-ch31-monotone-window-sharpness title="单调计数的二次深度与三次窗口质量" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MonotoneTailSharpness.monotone_tail_quadratic_depth_cubic_mass"}
+对每个实数 $0<s\le1/2$，存在单调不减的实函数 $A_s$，在 $t\ge1$ 时非负，在 $[2-s,2+s]$ 外等于 $t$，且 $(A_s(t)-t)/t^2$ 在实轴上可积。令 $Q_s(z)=\int_z^\infty (A_s(t)-t)t^{-2}\,dt$，则
 
 $$
 -Q_s(2)=\frac{s^2}{32},
 \qquad
 \int_1^3\frac{\max\{-Q_s(z),0\}}{\sqrt z}\,dz\le\frac{s^3}{16}.
 $$
+:::
 
-积分界来自长度 $2s$、最大负部 $s^2/32$ 和区间上的权重 $1/\sqrt z\le1$。令 $s\to0^+$，任何形如“深度不超过常数乘窗口质量的 $\alpha$ 次幂”的统一界，在 $\alpha>2/3$ 时都会被这一族违反。实际素数计数如果允许更强的估计，就需要使用超出单调性的信息。
+::: proof
+取 $0<s\le 1/2$。在 $2-s<t\le 2+s$ 令 $A_s(t)=t-t^2(t-2)/16$，其余地方令 $A_s(t)=t$。区间内的多项式在 $[3/2,5/2]$ 上单调递增。在左端代入多项式得到不小于 $2-s$ 的值，在右端得到不大于 $2+s$ 的值。因此接上两边的直线后，$A_s$ 在实轴上单调不减，在 $t\ge1$ 时非负。
+
+令 $Q_s(z)=\int_z^\infty(A_s(t)-t)t^{-2}\,dt$。被积函数在选定区间内为 $(2-t)/16$，其余地方为零。全区间的积分为零，所以 $Q_s$ 在闭区间外恒为零，区间内等于 $((z-2)^2-s^2)/32$。于是负值深度与加权积分满足
+
+积分界来自长度 $2s$、最大负部 $s^2/32$ 和区间上的权重 $1/\sqrt z\le1$。 完整证明由 Lean 内核检查。
+:::
+
+令 $s\to0^+$，任何形如“深度不超过常数乘窗口质量的 $\alpha$ 次幂”的统一界，在 $\alpha>2/3$ 时都会被这一族违反。实际素数计数如果允许更强的估计，就需要使用超出单调性的信息。
 
 **模 $1$ 的 Mellin 变换怎样看见零点？** 令 $U$ 为 [@thm-ch34-riemann-prime-arc-bridge] 第 6 款的余项。对每个满足 $\operatorname{Re}(s)>1$ 的 $s\in\mathbb C$，$y\mapsto e^{-sy}U(e^y)$ 在 $(0,\infty)$ 上绝对可积，其 Laplace 积分可无条件求出。换元 $x=e^y$ 后，$e^{-sy}\,dy=x^{-s-1}\,dx$，便得到下式左端的 Mellin 积分。[完全余项的半平面变换](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtHalfPlane.u_laplace_half_plane)
 
@@ -307,6 +317,28 @@ $$
 当 $1/2<\theta<1$ 时，同一窗口上有 $I_\theta(Y)\le Y^{1/2-\theta}A(Y)$。反过来，$A(Y)\le Y^{(3/2)(\theta-1/2)}I_\theta(Y)$，所以若每个这样的 $\theta$ 和每个 $\eta'>0$ 都有任意远的窗口满足 $I_\theta(Y)\le Y^{\eta'}$，取 $(3/2)(\theta-1/2)+\eta'\le\eta$ 就得到临界条件。
 
 还可以只数素数。记 $\vartheta(t)=\sum_{p\le t}\ln p$，用它替换 $\psi$ 来定义 $Q_\vartheta$ 和 $A_\vartheta$。素数幂给尾积分带来的修正满足 $\sqrt{x}(Q(x)-Q_\vartheta(x))\to2$。取一个常数 $C$ 使 $\psi(t)-\vartheta(t)\le C\sqrt{t}$ 对所有 $t\ge1$ 成立，这样的 $C$ 无条件存在。负部随尾积分递减，窗口定理给出 $0\le A_\vartheta(Y)-A(Y)\le 2C\ln(Y^{3/2}/Y)=C\ln Y$。于是临界条件也可写成对每个 $\eta>0$ 都有任意远的窗口满足 $A_\vartheta(Y)\le Y^\eta$。从 $A$ 的条件取指数 $\eta/2$，再用 $Y^{\eta/2}+C\ln Y\le Y^\eta$ 对充分大的 $Y$ 成立即可。独立的算术任务是从素数分布证明这个负部积分界。 [素数幂修正的窗口估计](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.prime_power_window_correction)
+
+**窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
+
+$$
+Q_{\vartheta}(x)=\int_x^\infty\frac{\vartheta(t)-t}{t^2}\,dt,
+\qquad N(a,b)=\int_a^b\frac{\max\{-Q_{\vartheta}(z),0\}}{\sqrt z}\,dz.
+$$
+
+::: {.theorem #thm-ch31-prime-tail-negative-window title="内点负值给出的窗口积分下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.prime_tail_negative_window_lower"}
+设 $a,b,x,r$ 为实数，满足 $0<r\le 1/2$、$1\le a\le(1-r)x$ 和 $(1+r)x\le b$。若 $Q_{\vartheta}(x)\le-4r^2$，则 $N(a,b)\ge r^3\sqrt{x}$。
+:::
+
+::: proof
+这个估计适用于实数截点，包括素数处的跃迁。
+
+由 $\vartheta$ 的单调性，将局部积分中的 $\vartheta(t)$ 与 $\vartheta(x)$ 比较，得到
+$Q_{\vartheta}(z)-Q_{\vartheta}(x)\le\ln(z/x)+\vartheta(x)(1/z-1/x)$。
+当 $\vartheta(x)\le x$ 时取左侧，反之取右侧。在所选方向上，右端由 $\ln(z/x)+x/z-1$ 控制，而 $\ln t\le t-1$ 将它进一步控制在 $(z-x)^2/(zx)\le 2r^2$ 以内。于是长度为 $rx$ 的那一侧都有 $-Q_{\vartheta}(z)\ge 2r^2$，且 $\sqrt{z}\le2\sqrt{x}$。积分即得下界。 完整证明由 Lean 内核检查。
+
+:::
+
+因此，只要已知窗口预算严格小于 $r^3\sqrt{x}$，就可以排除该内点的深度 $4r^2$。两侧余量决定可用的 $r$。Landau 论证所需的任意远小预算窗口仍需独立的算术估计。
 
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 
