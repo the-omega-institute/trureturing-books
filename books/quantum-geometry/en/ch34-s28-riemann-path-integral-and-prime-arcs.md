@@ -373,6 +373,41 @@ One can also start with a prescribed prime $q\equiv3\pmod8$. Increase the cutoff
 
 The whole-window estimate also requires the two primes to fit the same prescribed scale. Under its analytic hypotheses, the quantitative result in the reference fixes $0<\varepsilon<1/52$ and supplies $x_0$ and a constant $C>0$. For every real $x\ge x_0$ it then chooses $q$ and then $d$ for that $q$, with the same pair satisfying $\sqrt{X_1}<q\le X_1$ and $\sqrt{X_2}<d\le X_2$, where $X_1,X_2$ depend on $x,\varepsilon$. Its `QDq` condition uses the same $C$ in the estimates at scale $x$ for three quadratic characters, those attached to $q$, to $d$, and their product. The `Boxq` condition imposes six zero-free region conditions on characters and their twists. For every integer $1\le n\le2x^{2+8\varepsilon}$ the same pair must also meet the splitting requirements and the bound on $\ln(4nqd)$ in `Rowq`. These conditions select a pair for each $x$. Put $t=\varepsilon/5$. Since $X_1=\exp(x^t)$, the size condition gives $x^t/2<\ln q\le x^t$. Reusing one $q$ at the endpoints $Y$ and $Y^b$ would give $Y^{bt}/2<\ln q\le Y^t$, hence $Y^{(b-1)t}<2$. For fixed $b>1$, satisfying the `Rowq` size bound at the two endpoints of a sufficiently distant window therefore requires different primes $q$ (`manual derivation`). Passing from the choice at each scale to the error bound on the whole window uses the character estimates and arithmetic construction in the reference. [Quantitative construction choosing $q$ before $d$](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBounds.lean) · [Hypotheses and quantifiers for the quantitative choice](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBoundsStatement.lean#L17) · [Character and size conditions](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/InertJacobiLevels/AsmIface.lean#L166-L185)
 
+**When can one pair of auxiliary primes serve an entire window?** Fix a prime $q\equiv3\pmod8$, put $L=\ln q>1$, and fix a real $b>1$. For a window starting at $Y\ge e^5$, take a loss $\varepsilon>0$ that stays fixed on the window. Write $u=x^{\varepsilon/5}$ for each real $x\in[Y,Y^b]$. The external `Rowq` condition constrains $q,d$ at a given $x,n$. Here we require a single prime $d\equiv7\pmod{16}$ to satisfy the inequalities throughout the window.
+
+$$
+u/2<L\le u,\qquad u(\ln x)^2/2<\ln d\le u(\ln x)^2 .
+$$
+
+It also requires $(-d/q)=1$, the splitting condition $(-d/p)=1$ for each odd prime $p\le u$, and $-d\equiv1\pmod8$ at $2$. For each integer $1\le n\le2x^{2+8\varepsilon}$, the conductor bound is $\ln(4nqd)\le2u(\ln x)^2$. [Pointwise arithmetic conditions in the external source](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/InertJacobiLevels/AsmIface.lean#L179-L185)
+
+::: {.theorem #thm-ch31-fixed-prime-row-width title="Window widths admitting one fixed pair of auxiliary primes" lean="D5/S3/CharacterSums/MovingPrimeRowWidth.prime_pair_power_window_iff"}
+Fix $q,b$ as above. The following are equivalent.
+
+1. For every real $R$ and every $\eta>0$ there exist $Y\ge\max(R,e^5)$, a loss $0<\varepsilon<\min(\eta,1/52)$, and a prime $d$ satisfying all the conditions above for every real $x\in[Y,Y^b]$.
+2. The width satisfies $b^2L^{b-1}<2$.
+:::
+
+::: proof
+First compare the endpoints. Put $u_0=Y^{\varepsilon/5}$, so $L\le u_0$ and the value of $u$ at the right endpoint is $u_0^b$. The strict lower bound there and the upper bound at the left endpoint give $b^2u_0^b(\ln Y)^2/2<\ln d\le u_0(\ln Y)^2$. Hence $b^2L^{b-1}<2$. At equality, the strict lower bound at the right already reaches the largest value allowed at the left.
+
+Conversely, put $B=\lceil L^b\rceil$. With $q$ fixed first, there are arbitrarily large $d$ for which $q$ and every odd prime $p\le B$ split. [Prime supply with $q$ fixed first](lean:D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series)
+
+Set $a=\sqrt{\ln d/L}$, $Y=e^a$, and $\varepsilon=5\ln L/a$. As $d$ grows, $Y$ tends to infinity and $\varepsilon$ tends to zero. Write each point of the window as $x=e^{sa}$ with $1\le s\le b$. Then
+
+$$
+u=L^s,\qquad \frac{u(\ln x)^2}{\ln d}=s^2L^{s-1}\in[1,b^2L^{b-1}].
+$$
+
+This gives both size bounds for $d$. The inequalities $u\le L^b<2L$ and $L\le u$ give the bounds for $q$. Finally, put $t=\ln x\ge5$. For the specified $n$, use $L\le u$, $\ln 8<4$, and $2+8\varepsilon<3$ to obtain $\ln(4nq)\le4+3t+u\le ut^2$. The last inequality follows from $u\ge1$ and $t^2-1\ge4+3t$. Adding $\ln d\le ut^2$ gives the conductor bound. The full proof is checked by the Lean kernel.
+:::
+
+Take the prime $q=60083\equiv3\pmod8$ and $b=9/8$. Since $11<L<12$ and $12<(3/2)^8$, we have $b^2L^{b-1}<(81/64)(3/2)=243/128<2$. This yields windows on which $u\ge L>11$ at every point.
+
+The external analytic proof that selects $q$ also requires $(\ln Y)^2\ln(8)/4\le Y^{\varepsilon/5}$ at the starting point. Our construction has $Y^{\varepsilon/5}=L$, while the left side tends to infinity with $Y$. If the selector’s threshold holds, the ratio of the endpoint values of $u$ is $(Y^{\varepsilon/5})^{b-1}\ge((\ln Y)^2\ln(8)/4)^{b-1}$. For every natural $k$, this lower bound eventually exceeds $2^k$. Choose $k+1$ points along the window where $u$ doubles successively. Their half-open intervals $(u/2,u]$ are disjoint, so covering the window requires at least $k+1$ distinct values of $q$, even when $\varepsilon$ varies between windows. Given its analytic inputs, the external source fixes $0<\varepsilon<1/52$ and obtains a threshold $x_0$ and a constant $C$. It selects a pair $q,d$ for each $x\ge x_0$, then uses that pair for every admissible $n$. [Scale condition in the external selector](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean#L83-L92) · [The external theorem selecting a pair at each point](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBoundsStatement.lean#L17) · [Uses of the condition](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean#L131-L156)
+
+Here $\varepsilon$ changes with the window. Bounding $U$ pointwise on these windows would also require the external `QDq` and `Boxq` character estimates for the same pair $q,d$, and control of how the comparison threshold depends on $\varepsilon$. [Character estimates and pointwise arithmetic conditions in the external source](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/InertJacobiLevels/AsmIface.lean#L166-L192)
+
 For any fixed real $b>1$, write
 
 $$

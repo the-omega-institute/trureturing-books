@@ -373,6 +373,41 @@ $$
 
 整窗估计还要在给定尺度上同时选好这一对素数。外库的定量命题在其解析假设下，固定 $0<\varepsilon<1/52$ 后，先给出 $x_0$ 和一个常数 $C>0$，再对每个实数 $x\ge x_0$ 先选 $q$ 再为它选 $d$，使同一对素数满足 $\sqrt{X_1}<q\le X_1$、$\sqrt{X_2}<d\le X_2$，其中 $X_1,X_2$ 由 $x,\varepsilon$ 决定。`QDq` 以同一常数 $C$ 控制三个二次特征标在尺度 $x$ 的估计（对应 $q$、$d$ 及两者的乘积），`Boxq` 对特征标及其扭曲给出六个无零点区域条件。对所有整数 $1\le n\le2x^{2+8\varepsilon}$，同一对素数还须满足 `Rowq` 的分裂及 $\ln(4nqd)$ 上界。这些条件对每个 $x$ 选一对素数。令 $t=\varepsilon/5$，由 $X_1=\exp(x^t)$ 得 $x^t/2<\ln q\le x^t$。若 $Y$ 和 $Y^b$ 两端沿用同一个 $q$，就有 $Y^{bt}/2<\ln q\le Y^t$，从而 $Y^{(b-1)t}<2$。固定 $b>1$ 后，要在充分远窗口的两个端点都满足 `Rowq` 的大小限制，必须换用不同的 $q$（`手工推导`）。从逐尺度选择到上文的整窗误差界，还需外库的特征标估计及算术构造。[先选 $q$ 再选 $d$ 的定量构造](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBounds.lean) · [定量选取的假设与量词](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBoundsStatement.lean#L17) · [特征标与范围条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/InertJacobiLevels/AsmIface.lean#L166-L185)
 
+**怎样在整个窗口内沿用同一对辅助素数？** 固定素数 $q\equiv3\pmod8$，记 $L=\ln q>1$，固定实数 $b>1$。给定窗口起点 $Y\ge e^5$，取在窗内固定的损失 $\varepsilon>0$。对每个实数 $x\in[Y,Y^b]$ 记 $u=x^{\varepsilon/5}$。外库的 `Rowq` 在给定 $x,n$ 处对 $q,d$ 施加条件。下面要求一个素数 $d\equiv7\pmod{16}$ 在整窗上满足
+
+$$
+u/2<L\le u,\qquad u(\ln x)^2/2<\ln d\le u(\ln x)^2 .
+$$
+
+还要求 $(-d/q)=1$，每个奇素数 $p\le u$ 都有 $(-d/p)=1$，在 $2$ 处有 $-d\equiv1\pmod8$。当 $1\le n\le2x^{2+8\varepsilon}$ 为整数时，还要验证 $\ln(4nqd)\le2u(\ln x)^2$。[外库的逐点算术条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/InertJacobiLevels/AsmIface.lean#L179-L185)
+
+::: {.theorem #thm-ch31-fixed-prime-row-width title="整窗沿用同一对辅助素数的宽度" lean="D5/S3/CharacterSums/MovingPrimeRowWidth.prime_pair_power_window_iff"}
+固定上述 $q,b$。以下两条等价。
+
+1. 对任意实数 $R$ 和任意 $\eta>0$，存在 $Y\ge\max(R,e^5)$、损失 $0<\varepsilon<\min(\eta,1/52)$ 及素数 $d$，使上述条件对每个实数 $x\in[Y,Y^b]$ 成立。
+2. 窗宽满足 $b^2L^{b-1}<2$。
+:::
+
+::: proof
+先看两端。令 $u_0=Y^{\varepsilon/5}$，于是 $L\le u_0$，右端的 $u$ 为 $u_0^b$。把右端的严格下界和左端的上界合起来，有 $b^2u_0^b(\ln Y)^2/2<\ln d\le u_0(\ln Y)^2$，故 $b^2L^{b-1}<2$。等号处，右端所需的严格下界已经达到左端容许的最大值。
+
+反过来，取 $B=\lceil L^b\rceil$，先固定 $q$，可选到任意大的 $d$，使 $q$ 和所有奇素数 $p\le B$ 均分裂。[先固定 $q$ 的素数供给](lean:D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series)
+
+置 $a=\sqrt{\ln d/L}$、$Y=e^a$、$\varepsilon=5\ln L/a$。增大 $d$ 同时使 $Y$ 趋于无穷、$\varepsilon$ 趋于零。把整窗上的 $x$ 写成 $e^{sa}$，其中 $1\le s\le b$。于是
+
+$$
+u=L^s,\qquad \frac{u(\ln x)^2}{\ln d}=s^2L^{s-1}\in[1,b^2L^{b-1}].
+$$
+
+这给出 $d$ 的两个尺寸界，且 $u\le L^b<2L$ 给出 $q$ 的严格下界。由于 $u\ge L$，另一个界 $L\le u$ 也成立。最后令 $t=\ln x\ge5$。对给定范围的 $n$，由 $L\le u$、$\ln 8<4$、$2+8\varepsilon<3$ 得 $\ln(4nq)\le4+3t+u\le ut^2$。最后一个不等式利用 $u\ge1$ 和 $t^2-1\ge4+3t$。再加上 $\ln d\le ut^2$ 即得导子估计。完整证明由 Lean 内核检查。
+:::
+
+取素数 $q=60083\equiv3\pmod8$ 和 $b=9/8$。因 $11<L<12$ 且 $12<(3/2)^8$，有 $b^2L^{b-1}<(81/64)(3/2)=243/128<2$。这给出一族整窗，在每一点都有 $u\ge L>11$。
+
+外库选取 $q$ 的解析证明还在起点要求 $(\ln Y)^2\ln(8)/4\le Y^{\varepsilon/5}$。这里的构造有 $Y^{\varepsilon/5}=L$，而左端随 $Y$ 趋于无穷。若要求满足这个解析门槛，窗口两端的 $u$ 之比 $(Y^{\varepsilon/5})^{b-1}$ 至少为 $((\ln Y)^2\ln(8)/4)^{b-1}$。对任意自然数 $k$，后者最终超过 $2^k$。沿窗取 $u$ 依次加倍的 $k+1$ 个点，相应的半开区间 $(u/2,u]$ 两两不交。因此覆盖整窗至少需要 $k+1$ 个不同的 $q$，即使 $\varepsilon$ 可按窗选取。外库使用其解析输入，先固定 $0<\varepsilon<1/52$ 并取得门槛 $x_0$ 和常数 $C$，对每个 $x\ge x_0$ 选择 $q,d$，再使这对素数适用于给定范围的所有 $n$。 [外库筛选的尺度条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean#L83-L92) · [外库逐点选对的定理](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBoundsStatement.lean#L17) · [该条件的两次调用](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean#L131-L156)
+
+这里 $\varepsilon$ 随所选窗口而变。要从这些窗口取得余项 $U$ 的点态界，仍须在同一对 $q,d$ 上证明外库的 `QDq` 与 `Boxq` 特征标估计，并控制比较门槛对 $\varepsilon$ 的依赖。[外库的特征标估计与逐点算术条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/InertJacobiLevels/AsmIface.lean#L166-L192)
+
 对任一固定的实数 $b>1$，记
 
 $$
