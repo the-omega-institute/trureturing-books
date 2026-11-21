@@ -168,6 +168,22 @@ $$
 
 With the coefficient of $v_2$ set to $1$, the other coefficients follow from $r(1,1,1)=r(b)=0$. The vectors $(1,1,1)$ and $b$ are independent, so the condition also suffices for real $a,t$ to exist. Physical ultraviolet matching further requires $a,t>0$. The book's inputs give $r(A)\approx3.66403$. If one computes a number $F$ from the zeros and adds it to all three inverse couplings, then $r(F,F,F)=0$ for every $F$, leaving the discrepancy intact. For thresholds $\Delta_i=w_iF$, the test becomes $F\,r(w)=r(A)$. A quantitative prediction for this measured combination requires the dynamics to supply the sector weights and the spectral reading independently.
 
+**Do the three low-energy readings determine the matching scale? (One-loop model, manual derivation.)** Take two heavy complex scalar multiplets, $(4,2,1)$ and $(6,1,1)$, in the Pati–Salam model above. In hypercharge, weak and colour order, their contributions to the one-loop coefficients are $D=(2/15,2/3,1/3)$ and $C=(2/15,0,1/3)$, respectively. For example, the second multiplet is a weak singlet, so $C_2=0$. Let $M_D,M_C$ be the common masses within the respective multiplets and write $k=M_D^2/\mu^2$, $c=M_C^2/\mu^2$. Hold the ratio of the intermediate scale to $\mu$ and all other dimensionless thresholds fixed. The masses with fixed ratios therefore move with $\mu$. In the coordinates $2\pi A_i$, the first multiplet contributes $D_i\log(\mu/M_D)=-D_i\log k/2$ to the thresholds, with the analogous term for the second.
+
+Compare two parameter choices. Write $a'=2\pi\alpha_U^{-1}(\mu)$, let $\delta$ denote the new value minus the old one, and set $x=\log(\mu_{\rm new}/\mu_{\rm old})$, $y=\delta\log k$, $z=\delta\log c$. The three low-energy readings agree component by component exactly when
+
+$$
+\delta a'\,(1,1,1)+x b-\tfrac12 yD-\tfrac12 zC=0.
+$$
+
+Subtract the colour component from the weak component and then from the hypercharge component. Clearing denominators gives $23x-y+z=0$ and $111x+y+z=0$. Adding gives $x=-z/67$. Substitution into the first difference and the original colour component gives the unique solution
+
+$$
+(\delta a',x,y)=\left(\frac{23}{134},-\frac{1}{67},\frac{44}{67}\right)z.
+$$
+
+For example, doubling $c$ multiplies $\mu$ by $2^{-1/67}$ and $k$ by $2^{44/67}$, and increases $a'$ by $(23/134)\log 2$. Both parameter choices give the same three inverse couplings whenever they lie in the domain of this one-loop matching model. An independent determination of $M_D/M_C$ from the heavy spectrum would remove this freedom because $\delta\log(k/c)=-23z/67$. Inferring Newton's constant $G$ also requires a relation between gravity and the matching scale. For example, if an independent calibration fixes the dimensionless product $G\mu^2$ in natural units, doubling $c$ multiplies $G$ by $2^{2/67}$. [@prob-ch34-gravity-dynamics-and-coupling]
+
 ## 39.2.3 Tier 5: Heap-Geodesic Intelligence and Apophatic Self-Transparency of AXIOM-Ω {#sec-ch39-25-3}
 
 At Tier 5, the cascade turns from physical cosmos to intelligent mind, and finally reflects $\mathrm{AXIOM}\text{-}\Omega$ upon itself:
