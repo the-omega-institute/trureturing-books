@@ -860,6 +860,15 @@ The product of unit circles is compact. The integer-time phases return arbitrari
 
 The cluster set is a compact interval because the real phase orbit has connected closure and the window functional is continuous. If no zero has real part $\beta$, or if $W=0$, the interval is the singleton $\{0\}$. When a nontrivial zero attains the maximum $\beta>1/2$ and $W>0$, the lower endpoint is the lower limit in the critical-width theorem. A zero cluster value allows the normalized mass to approach zero along arbitrarily late windows.
 
+**Growing logarithmic widths.** Keep $p=\beta-1/2>0$ and the same orbit closure $H$. Let a real left endpoint $A(B)$ satisfy $2\le A(B)\le B$ for all sufficiently large $B$ and $\ln(B/A(B))\to+\infty$. The cluster set of $N(A(B),B)/B^p$ is
+$$
+\left\{I_\infty(h):h\in H\right\},\qquad
+I_\infty(h)=\int_0^\infty e^{-ps}\max(-F_h(-s),0)\,ds .
+$$
+This includes $A(B)=2$ and allows $A(B)$ to vary without continuity or monotonicity.
+
+Fix $L\ge0$. Eventually the window contains $[Be^{-L},B]$. For sufficiently large $X\ge2$ the negative-part density is bounded by $Cx^{p-1}$ on $[X,\infty)$. Split the part to the left of $Be^{-L}$ at $\max(A(B),X)$. After normalization its contribution is at most $N(2,X)/B^p+(C/p)e^{-pL}$. The phase integral past $L$ is at most $(S/p)e^{-pL}$, where $S=\sum_k |1/(\rho_k(1-\rho_k))|$. Both estimates hold uniformly in the choice of phase or admissible left endpoint, respectively. Choosing $L$ first and then letting $B$ grow gives the same approximation by the actual phase at $\ln B$ as in the fixed-width case. The uniform convergence of the finite phase integrals gives continuity of $I_\infty$. Since the orbit closure is compact and connected, the cluster set is a compact interval. When there is no zero on the line with real part $\beta$, the phase integral vanishes identically and the normalized mass tends to zero.
+
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 
   $$
