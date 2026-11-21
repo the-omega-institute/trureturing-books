@@ -869,7 +869,7 @@ G_\beta(u)=
 $$
 
 ::: {.theorem #thm-ch31-prime-critical-residual title="晚期零质量窗口的三种情形" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeCriticalResidual.prime_tail_mass_pos_or_intermediate_or_wider_zero_cluster"}
-记 $G_eta$ 如上。 任取 $0<d<2-C$。存在实数 $T$，对每个上述上界 $eta$，每个 $W>0$、$t-W\ge T$ 的窗口至少满足以下一项。
+记 $G_\beta$ 如上。 任取 $0<d<2-C$。存在实数 $T$，对每个上述上界 $\beta$，每个 $W>0$、$t-W\ge T$ 的窗口至少满足以下一项。
 
 - $N(e^{t-W},e^t)>0$。
 - 存在 $u\in[t-W,t]$ 使 $G_\beta(u)\ge d$。

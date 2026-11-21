@@ -869,7 +869,7 @@ G_\beta(u)=
 $$
 
 ::: {.theorem #thm-ch31-prime-critical-residual title="A late window and the intermediate spectrum" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeCriticalResidual.prime_tail_mass_pos_or_intermediate_or_wider_zero_cluster"}
-Use the intermediate sum $G_eta$ defined above. Fix $0<d<2-C$. There is a real threshold $T$ that works for every upper bound $eta$ as above. Every window with $W>0$ and $t-W\ge T$ satisfies at least one of the following.
+Use the intermediate sum $G_\beta$ defined above. Fix $0<d<2-C$. There is a real threshold $T$ that works for every upper bound $\beta$ as above. Every window with $W>0$ and $t-W\ge T$ satisfies at least one of the following.
 
 - $N(e^{t-W},e^t)>0$.
 - Some $u\in[t-W,t]$ satisfies $G_\beta(u)\ge d$.
