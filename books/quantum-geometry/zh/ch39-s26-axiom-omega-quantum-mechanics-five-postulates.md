@@ -265,7 +265,7 @@ $$
 $$
 rL_H-dL_N=\sum_{s\in S\setminus S^N} a(s)\,(\ell(s)-d).
 $$
-右边每一项都非负。于是 $dL_N=rL_H$ 当且仅当每颗被 $N$ 移动的正权重种子恰好落入 $d$ 个不同事件。
+右边每一项都非负。于是 $dL_N=rL_H$ 当且仅当每颗被 $N$ 移动的正权重种子恰好落入 $d$ 个不同事件。[精确差额与等号判据](lean:D5/S3/ConceptDynamics/Attribution/ConjugateFailureMultiplicity.normal_closure_loss_gap_and_eq)。
 
 按事件重数加总的思路也用于有限事件并集的概率恒等式。[Kuai、Alajaji 与 Takahara，引理 1](https://fady-alajaji.github.io/Journal/d_math00.pdf)
 

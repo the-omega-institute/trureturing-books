@@ -265,7 +265,7 @@ For the exact gap, let $d$ be any nonnegative integer such that every positive-w
 $$
 rL_H-dL_N=\sum_{s\in S\setminus S^N} a(s)\,(\ell(s)-d).
 $$
-Every summand is nonnegative. Thus $dL_N=rL_H$ exactly when each positive-weight seed moved by $N$ lies in precisely $d$ distinct events.
+Every summand is nonnegative. Thus $dL_N=rL_H$ exactly when each positive-weight seed moved by $N$ lies in precisely $d$ distinct events. [Exact loss and equality criterion](lean:D5/S3/ConceptDynamics/Attribution/ConjugateFailureMultiplicity.normal_closure_loss_gap_and_eq).
 
 Counting by event multiplicity also gives the probability identity for a finite union of events. [Kuai, Alajaji and Takahara, Lemma 1](https://fady-alajaji.github.io/Journal/d_math00.pdf)
 
