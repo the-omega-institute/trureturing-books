@@ -596,6 +596,18 @@ $$
 
 比例和目标指数先给定，系数和阈值可依赖二者。该陈述的范围是 $\sigma<\Theta$ 且上确界未取到。
 
+**未取到上确界时的端点指数。** 设 $\Theta>1/2$ 是黎曼 ζ 函数非平凡零点实部的上确界，且每个非平凡零点的实部都严格小于 $\Theta$。令 $p=\Theta-1/2$。当实数 $B\to+\infty$ 时，
+
+$$
+\frac{N(2,B)}{B^p}\longrightarrow0.
+$$
+
+以 $x^{1-\Theta}$ 归一化完全尾项。每个零点的贡献在这一尺度上趋于零，而零点系数的绝对和给出统一的支配界，因此可将极限移入级数。平凡零点和常数项在这一尺度上消失。素数幂修正原为 $O(x^{-1/2})$，因 $\Theta>1/2$，归一化后也趋于零。因此 $x^{1-\Theta}Q_\vartheta(x)\to0$。
+
+任给 $\varepsilon>0$，选定一个阈值 $X\ge2$，使 $x\ge X$ 时质量的被积函数至多为 $\varepsilon p x^{p-1}$。于是在 $[X,B]$ 上积分至多为 $\varepsilon(B^p-X^p)$。固定的初段质量 $N(2,X)$ 除以 $B^p$ 后趋于零。这个论证同样适用于 $\Theta=1$。
+
+质量非负，故对每个 $2\le A\le B$，都有 $0\le N(A,B)\le N(2,B)$。端点极限因而同时控制所有这些窗口。预定比例的下界可取每个严格低于 $\Theta-1/2$ 的正幂，在端点幂上，归一化后的质量趋于零。
+
 ::: {.theorem #thm-ch31-prime-attained-short-windows title="上确界取到时的零质量短窗口" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeAttainedShortWindows.prime_tail_positive_short_windows_of_attained_zero"}
 设有非平凡零点 $\rho$，其 $\beta=\operatorname{Re}\rho>1/2$，且所有非平凡零点的实部都不超过 $\beta$。存在实数 $\kappa_0>1$、$K\ge1$ 和 $X_0\ge2$，使每个 $X\ge X_0$ 都有 $A\in[X,KX]$，满足
 

@@ -596,6 +596,18 @@ The substitution $x=e^t$ and the comparison $Q_\vartheta\le Q$ transfer the boun
 
 The constant and threshold can depend on the prescribed ratio and exponent. The statement applies to $\sigma<\Theta$ when the supremum is unattained.
 
+**The endpoint exponent when the supremum is unattained.** Let $\Theta>1/2$ be the supremum of the real parts of nontrivial zeros of the Riemann zeta function, and suppose every nontrivial zero has real part strictly below $\Theta$. Put $p=\Theta-1/2$. As real $B\to+\infty$,
+
+$$
+\frac{N(2,B)}{B^p}\longrightarrow0.
+$$
+
+Normalize the complete tail by $x^{1-\Theta}$. Each nontrivial zero contributes a term that tends to zero at this scale. The absolute sum of the zero coefficients supplies a common bound, so the limit passes through the series. The trivial-zero and constant terms vanish at this scale. The prime-power correction is $O(x^{-1/2})$ and also vanishes after normalization because $\Theta>1/2$. It follows that $x^{1-\Theta}Q_\vartheta(x)\to0$.
+
+For any $\varepsilon>0$, fix $X\ge2$ beyond which the mass integrand is at most $\varepsilon p x^{p-1}$. The integral over $[X,B]$ is at most $\varepsilon(B^p-X^p)$. The initial mass $N(2,X)$ is fixed and vanishes after division by $B^p$. The argument includes $\Theta=1$.
+
+Nonnegativity gives $0\le N(A,B)\le N(2,B)$ for every $2\le A\le B$, so the endpoint limit controls all of these windows at once. The prescribed-ratio lower bound holds at every positive exponent strictly below $\Theta-1/2$. At the endpoint exponent, the normalized mass tends to zero.
+
 ::: {.theorem #thm-ch31-prime-attained-short-windows title="Short zero-mass windows when the supremum is attained" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeAttainedShortWindows.prime_tail_positive_short_windows_of_attained_zero"}
 Suppose a nontrivial zero $\rho$ has $\beta=\operatorname{Re}\rho>1/2$, and every nontrivial zero has real part at most $\beta$. There are real constants $\kappa_0>1$, $K\ge1$, and $X_0\ge2$ such that every $X\ge X_0$ admits an $A\in[X,KX]$ with
 
