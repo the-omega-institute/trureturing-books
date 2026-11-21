@@ -106,7 +106,7 @@ $$
 素数矢高在临界脊线上起涨卡：第四阶台座上素数矢高台阶在 $\sigma > \frac{1}{2}$ 受收敛环约束，移至临界脊线 $\sigma = \frac{1}{2}$ 时越过青色参考环双对数起涨（`riemann_zeta_dirichlet_sum_eq_euler_product`、`golden_right_half_strip_implies_rh` 与 `schur_quadratic_is_least` 为 `LEAN ✓`，梅滕斯估计为正文所引冻结声明 `Mertens.E₂p.bound'`，其误差的数值核对标 `NUM`）。
 :::
 
-**第四阶采用的算术输入。** Alpöge 的终端声明 `riemannHypothesis : RiemannHypothesis` 给出 Mathlib 的黎曼猜想。Sutherland 对五条终端声明做了公理审计，并用 con-leche 将证明与单独写出的挑战命题比对。另一份独立的 nanoda 重放记录报告五条声明的证明依赖全部通过。记录中 RH 用到的公理是 `propext`、`Classical.choice`、`Quot.sound`。以下把零点定位作为外部已核验的输入。从零点到本章比较读数的步骤是手工推导。[终端声明](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean) · [Sutherland 的重放与命题比对](https://math.mit.edu/~drew/grh/) · [独立公理审计与重放日志](https://github.com/Infatoshi/rh-verification-receipts/blob/ac99f18cef21952de094234fab95db342ed16638/VERIFICATION_RESULT.txt)
+**第四阶采用的算术输入。** Alpöge 的终端声明 `riemannHypothesis : RiemannHypothesis` 给出 Mathlib 的黎曼猜想。Sutherland 对五条终端声明做了公理审计，并用 con-leche 将证明与单独写出的挑战命题比对。另一份独立的 nanoda 重放记录报告五条声明的证明依赖全部通过。记录中 RH 用到的公理是 `propext`、`Classical.choice`、`Quot.sound`。以下把零点定位作为外部已核验的输入。从零点到本章比较读数的步骤是手工推导。[终端声明](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean) · [Sutherland 的重放与命题比对](https://math.mit.edu/~drew/grh/) · [独立公理审计与重放日志](https://github.com/Infatoshi/rh-verification-receipts/blob/ac99f18cef21952de094234fab95db342ed16638/VERIFICATION_RESULT.txt) · [Lean 与 Mathlib 社群联合声明，2026-11-21](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/)
 
 **从零点到舒尔枢轴。** 取右半平面 $\operatorname{Re}s>1/2$ 中 $N$ 个互异节点 $s_j$，记 $G_{jk}=K_\epsilon(s_j,s_k)$。在 [§31.3 的零点展开](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-31-3)中，每个互异零点 $\rho$ 的重数为 $m_\rho$。任给系数 $c_j\in\mathbb C$，有
 
@@ -148,6 +148,39 @@ $$
 正纵坐标的零点计数估计给出 $0<L(0)=\sum_{\gamma>0}m_\gamma/\gamma^2<\infty$。由 [@prop-zeta-real-axis-sign] 和 [@prop-xi-zeros-strip-zeros] 得 $\xi(1/2)\ne0$，故中心也给出一个可归一化的向量。各项由 $m_\gamma/\gamma^2$ 控制，令 $x\downarrow0$ 得到 $h(1/2,1/2+y)^2=L(y)/L(0)$。按 RH 将 $\xi$ 的阿达马乘积配成因子 $1+y^2/\gamma^2$ 后，取对数导数即得 $2yL(y)=\xi'(1/2+y)/\xi(1/2+y)$。[§31.3 的配对乘积与零点展开](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-31-3)
 
 把平方读数看作 $u=y^2$ 的函数。其亚纯延拓是 $\sum_{\gamma>0}m_\gamma/[L(0)(u+\gamma^2)]$。离开极点的紧集上级数一致收敛，因为尾项可由 $2m_\gamma/[L(0)\gamma^2]$ 控制。任一正实开区间上的**精确曲线**由恒等定理唯一确定这个延拓。每个极点 $u=-\gamma^2$ 给出一个正纵坐标，留数 $m_\gamma/L(0)$ 的比给出相对重数。若把每个重数都乘同一正整数，归一化曲线保持不变。对于黎曼零点，黎曼–冯·曼戈尔特公式给出按重数计的正零点数 $N(T)\sim T\log T/(2\pi)$，其首项固定了整体比例。[@rem-ch34-li-toeplitz-superexponential-collapse]
+
+**有限次读数怎样围住零点的最小正纵坐标？** 令 $F(u)=L(\sqrt u)/S$，其中 $S=L(0)$。最小正纵坐标记作 $\gamma_1$，写 $a=\gamma_1^2$。令 $p_\gamma=m_\gamma/(S\gamma^2)$，则 $\sum p_\gamma=1$，而 $F(u)=\sum p_\gamma\gamma^2/(\gamma^2+u)$。取步长 $\delta>0$。只读一次 $F(\delta)$ 时，由 $F(0)=1$ 可算得 $(1-F(\delta))/\delta=\sum p_\gamma/(\gamma^2+\delta)$。每个分母都至少为 $a+\delta$，而最小纵坐标自身至少占有权重 $1/(Sa)$。这分别给出了此读数差的上界和下界。
+
+对整数 $k\ge1$，令 $\Delta_\delta f(u)=f(u+\delta)-f(u)$、$P_k(x)=\prod_{j=1}^k(x+j\delta)$。逐次取差，每次引入一个新的分母。用上一段的两种估计得
+
+$$
+D_k=\frac{(-1)^k\Delta_\delta^k F(0)}{k!\delta^k}
+  =\sum_{\gamma>0}\frac{p_\gamma}{P_k(\gamma^2)},
+\qquad
+\frac{1}{SaP_k(a)}\le D_k\le\frac{1}{P_k(a)}.
+$$
+
+设归一化读数 $F(0)=1$ 精确，其余各 $F(j\delta)$ 的绝对误差至多为 $\varepsilon$，并以这些读数计算 $\widehat D_k$。差分的二项式系数中，带误差各项的绝对值之和为 $2^k-1$，故 $|\widehat D_k-D_k|\le\eta_k=(2^k-1)\varepsilon/(k!\delta^k)$。对于上述归一化正谱，带误差的读数直接满足 $1\le SaP_k(a)(\widehat D_k+\eta_k)$ 和 $P_k(a)(\widehat D_k-\eta_k)\le1$。对总权重为一的非负离散谱，只要原点读数精确且首点权重满足 $Sa p_0\ge1$，同一估计成立。此处 $Sa p_0=m_{\gamma_1}\ge1$。见 [`noisy_first_atom_enclosure`](lean:D5/S3/Analytic/Stieltjes/NoisyFirstAtom.noisy_first_atom_enclosure)。
+
+下面手算区间端点。取已认证的 $S_+\ge S$。只要数据与上述误差相容且 $\widehat D_k>\eta_k$，就可求两个正根
+
+$$
+S_+\ell P_k(\ell)(\widehat D_k+\eta_k)=1,\qquad P_k(r)(\widehat D_k-\eta_k)=1.
+$$
+
+因为 $xP_k(x)$ 与 $P_k(x)$ 都在正半轴上严格递增，两式给出 $\ell\le a\le r$，即 $\sqrt{\ell}\le\gamma_1\le\sqrt r$。若 $\widehat D_k\le\eta_k$，上面的差分仍可给出下界，仅凭该阶差分及其误差界尚不能给出有限上界。
+
+还可利用相邻两阶差分收紧右端点。取 $D_0=1$、$\eta_0=0$，则 $D_{k-1}-(a+k\delta)D_k=\sum p_\gamma(\gamma^2-a)/P_k(\gamma^2)\ge0$，所以当 $\widehat D_k>\eta_k$ 时，
+
+$$
+a\le\frac{\widehat D_{k-1}+\eta_{k-1}}{\widehat D_k-\eta_k}-k\delta.
+$$
+
+取 $\delta=16$、$k=10$。从 $\xi$ 在实轴的函数值与导数可直接算出十个 $F(j\delta)$。中心对称性给出 $S=\xi''(1/2)/(2\xi(1/2))$。区间运算给出 $S<0.023105$，并把每个正节点的绝对误差认证到 $\varepsilon=10^{-15}$ 以内。对左端使用 $S_+=0.023105$，对右端使用相邻差分商。用有理数代入两端的不等式，得到 $14.1338<\gamma_1<14.1432$。十个输入均取自实轴计算，无须先查零点表。[读数与可重放的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068457253)
+
+也可从实轴的欧拉乘积直接求未归一化读数。取 $u_j=196+16j$，$0\le j\le40$，对应的 $s_j=1/2+\sqrt{u_j}$ 均大于 $1$。用前 $25$ 个素数（$p\le97$）的欧拉因子求 $\zeta'/\zeta$，遗漏部分的绝对值至多为 $\int_{97}^\infty(\log x)x^{-s_j}\,dx$。配合 $\xi$ 的其余因子即可包围 $G(u_j)=L(\sqrt{u_j})$。写 $d_k=(-1)^k\Delta_{16}^kG(196)/(k!\,16^k)$。差分后每个纵坐标的贡献为 $m_\gamma/\prod_{j=0}^k(\gamma^2+u_j)$，因此首个纵坐标的重数给出 $d_k\prod_{j=0}^k(a+u_j)\ge1$，相邻两阶给出 $(a+u_k)d_k\le d_{k-1}$。在 $k=40$ 处用区间算术检验两端，得到 $14.134723<\gamma_1<14.134756$。[欧拉乘积与尾界的独立证书](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068568073)
+
+有限个精确读数本身也允许不同的正离散谱。在包括原点的 $K$ 个固定采样点上保留读数和 $S$ 时，可以联合移动 $K+1$ 个互异谱点各一份重数。[保持有限采样的谱变形](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068509921)
 
 **哪些球壳夹角可以由两个实谱节点精确取到？** 固定任一实节点 $s>1/2$，让第二个实节点 $t$ 从 $s$ 向右移动。记归一化谱向量为 $x(t)$，内积为 $h(s,t)$。由核公式，$h$ 连续且 $h(s,s)=1$。当 $t>s$ 时，共轭对坐标严格为正，二节点格拉姆矩阵严格正定，故 $0<h(s,t)<1$。下面证明 $t\to\infty$ 时 $h(s,t)\to0$。
 
@@ -241,6 +274,16 @@ $$
 $$
 
 例如令 $c$ 加倍，则 $\mu$ 乘以 $2^{-1/67}$，$k$ 乘以 $2^{44/67}$，$a'$ 增加 $(23/134)\log 2$。只要两组参数都处在上述一圈匹配的适用区间，它们就给出相同的三个逆耦合。若能从重粒子谱独立确定质量比 $M_D/M_C$，就能消除这一自由度，因为 $\delta\log(k/c)=-23z/67$。要由此推算牛顿常数 $G$，还须给出引力与匹配能标的关系。例如在自然单位中另行给定无量纲常数 $G\mu^2$ 后，$c$ 加倍才对应 $G$ 乘以 $2^{2/67}$。[@prob-ch34-gravity-dynamics-and-coupling]
+
+**怎样用另一个探针区分这两个能标？（模型假设）** 假设能量 $E$ 经过独立标定，且探针的无量纲响应为 $Q(E)=F((E/\mu)^2)$。取上述两组参数，$\mu_B=2^{-1/67}\mu_A$。在同一探针能量 $E=14\mu_A$ 下，两组参数对应 $u=196$ 与 $v=196\cdot2^{2/67}$。在 $F(u)-F(v)$ 的正谱和中只保留最小纵坐标的一份重数，用上文的 $B=14.1432^2$ 与 $S_+=0.023105$ 得
+
+$$
+F(u)-F(v)\ge\frac{v-u}{S_+(B+u)(B+v)}>0.00111.
+$$
+
+若每个预测读数的允许误差为 $0.00055$，两者的允许区间互不相交。直接在实轴计算所得读数差约为 $0.00242931$。要用这项比较判定物理能标，须独立建立能量与谱参数的对应。若探针实际响应为 $F((\kappa E/\mu)^2)$，而转换因子 $\kappa>0$ 可调，$\kappa,\mu$ 同比缩放会给出相同的全部读数，探针只能确定 $\mu/\kappa$。[同能量比较与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068528778)
+
+即使 $\kappa$ 与 $\mu$ 都未知，该模型仍预言一个只依赖能量比的读数。把探针调到 $Q(E_*)=1/2$，再把能量精确加倍，便有 $Q(2E_*)=F(4F^{-1}(1/2))\approx0.330835577358412$。若初次校准的真实读数距半值至多为 $\epsilon$，第二个真实读数相对精确预测的偏差至多为 $4\epsilon$。这是因为 $u>0$ 时 $4F'(4u)/F'(u)\le4$，可从正谱表示逐项求导得到。[半值校准的数值区间与误差推导](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068618897)
 
 ## 39.2.3 第五阶推导：流群测地智能与母公理自身的遮诠透明化 {#sec-ch39-25-3}
 

@@ -106,7 +106,7 @@ In this remark the hypotheses are labelled `MODEL` and what is derived under the
 Prime sagitta takes off on the critical ridge card: Tier 4 shows the staircase of prime sagittas bounded on $\sigma > \frac{1}{2}$ and crossing the cyan reference ring into double-logarithmic growth right at $\sigma = \frac{1}{2}$ (`riemann_zeta_dirichlet_sum_eq_euler_product`, `golden_right_half_strip_implies_rh`, and `schur_quadratic_is_least` `LEAN ✓`, the Mertens estimate is the frozen statement `Mertens.E₂p.bound'` cited by the text, with the numerical check of its error `NUM`).
 :::
 
-**The arithmetic input to Tier 4.** Alpöge's final declaration `riemannHypothesis : RiemannHypothesis` establishes Mathlib's Riemann hypothesis. Sutherland audited the axioms of all five headline theorems and used con-leche to compare the proofs with independently stated challenges. A separate nanoda run reports successful replay of the proof dependencies of all five. The axiom audits list `propext`, `Classical.choice` and `Quot.sound` for RH. We use zero localization as an externally checked input. The deductions relating the zeros to this chapter's comparison readings are by hand. [Final declarations](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean) · [Sutherland's replay and statement comparison](https://math.mit.edu/~drew/grh/) · [Independent axiom audit and replay log](https://github.com/Infatoshi/rh-verification-receipts/blob/ac99f18cef21952de094234fab95db342ed16638/VERIFICATION_RESULT.txt)
+**The arithmetic input to Tier 4.** Alpöge's final declaration `riemannHypothesis : RiemannHypothesis` establishes Mathlib's Riemann hypothesis. Sutherland audited the axioms of all five headline theorems and used con-leche to compare the proofs with independently stated challenges. A separate nanoda run reports successful replay of the proof dependencies of all five. The axiom audits list `propext`, `Classical.choice` and `Quot.sound` for RH. We use zero localization as an externally checked input. The deductions relating the zeros to this chapter's comparison readings are by hand. [Final declarations](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean) · [Sutherland's replay and statement comparison](https://math.mit.edu/~drew/grh/) · [Independent axiom audit and replay log](https://github.com/Infatoshi/rh-verification-receipts/blob/ac99f18cef21952de094234fab95db342ed16638/VERIFICATION_RESULT.txt) · [Joint statement by the Lean and Mathlib communities, 2026-11-21](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/)
 
 **From zeros to Schur pivots.** Take $N$ distinct nodes $s_j$ in the half-plane $\operatorname{Re}s>1/2$ and set $G_{jk}=K_\epsilon(s_j,s_k)$. In the [zero expansion of §31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-31-3), let $m_\rho$ be the multiplicity of each distinct zero $\rho$. For any coefficients $c_j\in\mathbb C$,
 
@@ -148,6 +148,39 @@ $$
 The zero-counting estimate for positive ordinates gives $0<L(0)=\sum_{\gamma>0}m_\gamma/\gamma^2<\infty$. By [@prop-zeta-real-axis-sign] and [@prop-xi-zeros-strip-zeros], $\xi(1/2)\ne0$, so the central vector also admits normalization. Each term is bounded by $m_\gamma/\gamma^2$, so taking $x\downarrow0$ gives $h(1/2,1/2+y)^2=L(y)/L(0)$. Under RH, pairing the factors in the Hadamard product of $\xi$ gives factors $1+y^2/\gamma^2$. Logarithmic differentiation then yields $2yL(y)=\xi'(1/2+y)/\xi(1/2+y)$. [Paired product and zero expansion in §31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-31-3)
 
 Regard the squared reading as a function of $u=y^2$. Its meromorphic continuation is $\sum_{\gamma>0}m_\gamma/[L(0)(u+\gamma^2)]$. The series converges uniformly on compact sets away from its poles since its tail terms are bounded in modulus by $2m_\gamma/[L(0)\gamma^2]$. By the identity theorem, the **exact curve** on any open interval of the positive real axis determines this continuation uniquely. Each pole $u=-\gamma^2$ gives a positive ordinate, and ratios of the residues $m_\gamma/L(0)$ give the relative multiplicities. Multiplying every multiplicity by the same positive integer preserves the normalized curve. For the Riemann zeros, the Riemann–von Mangoldt formula gives $N(T)\sim T\log T/(2\pi)$ for the number of positive ordinates counted with multiplicity. Its leading coefficient fixes the overall factor. [@rem-ch34-li-toeplitz-superexponential-collapse]
+
+**How do finitely many readings bracket the first positive zero ordinate?** Put $F(u)=L(\sqrt u)/S$ with $S=L(0)$. Denote the smallest positive ordinate by $\gamma_1$ and write $a=\gamma_1^2$. The weights $p_\gamma=m_\gamma/(S\gamma^2)$ satisfy $\sum p_\gamma=1$, and $F(u)=\sum p_\gamma\gamma^2/(\gamma^2+u)$. Take a spacing $\delta>0$. With just one reading $F(\delta)$, the identity $F(0)=1$ gives $(1-F(\delta))/\delta=\sum p_\gamma/(\gamma^2+\delta)$. Every denominator is at least $a+\delta$, and the smallest ordinate itself carries weight at least $1/(Sa)$. These observations give upper and lower bounds, respectively, on the first difference with its sign reversed.
+
+For an integer $k\ge1$, put $\Delta_\delta f(u)=f(u+\delta)-f(u)$ and $P_k(x)=\prod_{j=1}^k(x+j\delta)$. Each successive difference introduces another denominator. The same two bounds give
+
+$$
+D_k=\frac{(-1)^k\Delta_\delta^k F(0)}{k!\delta^k}
+  =\sum_{\gamma>0}\frac{p_\gamma}{P_k(\gamma^2)},
+\qquad
+\frac{1}{SaP_k(a)}\le D_k\le\frac{1}{P_k(a)}.
+$$
+
+Suppose the normalized reading $F(0)=1$ is exact and the absolute error in each remaining $F(j\delta)$ is at most $\varepsilon$. Compute $\widehat D_k$ from these readings. The absolute binomial coefficients on the terms carrying error sum to $2^k-1$, giving $|\widehat D_k-D_k|\le\eta_k=(2^k-1)\varepsilon/(k!\delta^k)$. For this normalized positive spectrum the noisy readings satisfy $1\le SaP_k(a)(\widehat D_k+\eta_k)$ and $P_k(a)(\widehat D_k-\eta_k)\le1$. The same bounds hold for nonnegative discrete weights summing to one when the origin reading is exact and the first-atom weight satisfies $Sa p_0\ge1$. Here $Sa p_0=m_{\gamma_1}\ge1$. See [`noisy_first_atom_enclosure`](lean:D5/S3/Analytic/Stieltjes/NoisyFirstAtom.noisy_first_atom_enclosure).
+
+To compute the endpoints by hand, take a certified upper bound $S_+\ge S$. If the readings are compatible with the error bound and $\widehat D_k>\eta_k$, solve for the two positive roots
+
+$$
+S_+\ell P_k(\ell)(\widehat D_k+\eta_k)=1,\qquad P_k(r)(\widehat D_k-\eta_k)=1.
+$$
+
+Both $xP_k(x)$ and $P_k(x)$ are strictly increasing on the positive half-line. It follows that $\ell\le a\le r$, so $\sqrt{\ell}\le\gamma_1\le\sqrt r$. When $\widehat D_k\le\eta_k$, the difference can still supply a lower bound. This order of difference and its error bound alone then give no finite upper bound.
+
+Two successive differences can tighten the upper endpoint. Put $D_0=1$ and $\eta_0=0$. Then $D_{k-1}-(a+k\delta)D_k=\sum p_\gamma(\gamma^2-a)/P_k(\gamma^2)\ge0$, so for $\widehat D_k>\eta_k$,
+
+$$
+a\le\frac{\widehat D_{k-1}+\eta_{k-1}}{\widehat D_k-\eta_k}-k\delta.
+$$
+
+Take $\delta=16$ and $k=10$. Values of $\xi$ and its derivative on the real axis directly give the ten readings $F(j\delta)$. At the centre, symmetry gives $S=\xi''(1/2)/(2\xi(1/2))$. Interval arithmetic bounds $S<0.023105$ and certifies an absolute error of at most $\varepsilon=10^{-15}$ at each positive node. Use $S_+=0.023105$ for the lower endpoint and the successive-difference ratio for the upper endpoint. Rational substitution into the two inequalities gives $14.1338<\gamma_1<14.1432$. The ten inputs come directly from real-axis evaluations, without requiring a table of zero ordinates. [Readings and reproducible interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068457253)
+
+The real-axis Euler product also gives the unnormalized readings directly. Take $u_j=196+16j$ for $0\le j\le40$, so each $s_j=1/2+\sqrt{u_j}$ exceeds $1$. Use the Euler factors for the first $25$ primes ($p\le97$) to evaluate $\zeta'/\zeta$. The omitted terms have total magnitude at most $\int_{97}^\infty(\log x)x^{-s_j}\,dx$. The remaining factors of $\xi$ then give an enclosure for $G(u_j)=L(\sqrt{u_j})$. Write $d_k=(-1)^k\Delta_{16}^kG(196)/(k!\,16^k)$. Each ordinate contributes $m_\gamma/\prod_{j=0}^k(\gamma^2+u_j)$ to this difference. The multiplicity of the first ordinate gives $d_k\prod_{j=0}^k(a+u_j)\ge1$, and two successive differences give $(a+u_k)d_k\le d_{k-1}$. Checking both endpoints by interval arithmetic at $k=40$ yields $14.134723<\gamma_1<14.134756$. [Independent Euler-product and tail certificate](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068568073)
+
+Even finitely many exact readings allow different positive discrete spectra. With the readings at $K$ fixed nodes including the origin and $S$ held fixed, one copy of each of $K+1$ distinct spectral points can move jointly. [Deformations preserving the sampled readings](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068509921)
 
 **Which shell angles occur exactly between two real spectral nodes?** Fix any real node $s>1/2$ and let a second real node $t$ move to the right from $s$. Write $x(t)$ for its normalized spectral vector and $h(s,t)$ for its inner product with $x(s)$. The kernel formula gives continuity and $h(s,s)=1$. For $t>s$, the coordinates from each conjugate pair are positive and the two-node Gram matrix is positive definite, so $0<h(s,t)<1$. We can also determine the limit of this inner product as $t\to\infty$.
 
@@ -241,6 +274,16 @@ $$
 $$
 
 For example, doubling $c$ multiplies $\mu$ by $2^{-1/67}$ and $k$ by $2^{44/67}$, and increases $a'$ by $(23/134)\log 2$. Both parameter choices give the same three inverse couplings whenever they lie in the domain of this one-loop matching model. An independent determination of $M_D/M_C$ from the heavy spectrum would remove this freedom because $\delta\log(k/c)=-23z/67$. Inferring Newton's constant $G$ also requires a relation between gravity and the matching scale. For example, if an independent calibration fixes the dimensionless product $G\mu^2$ in natural units, doubling $c$ multiplies $G$ by $2^{2/67}$. [@prob-ch34-gravity-dynamics-and-coupling]
+
+**How could a further probe distinguish these two scales? (Model assumption.)** Suppose the probe energy $E$ is independently calibrated and its dimensionless response is $Q(E)=F((E/\mu)^2)$. For the two parameter choices above, $\mu_B=2^{-1/67}\mu_A$. At the same probe energy $E=14\mu_A$, their arguments are $u=196$ and $v=196\cdot2^{2/67}$. Keep just one copy of the smallest ordinate in the positive spectral sum for $F(u)-F(v)$. The bounds $B=14.1432^2$ and $S_+=0.023105$ above give
+
+$$
+F(u)-F(v)\ge\frac{v-u}{S_+(B+u)(B+v)}>0.00111.
+$$
+
+If each predicted reading allows an error of $0.00055$, the two allowed intervals are disjoint. Direct real-axis evaluation gives a difference of approximately $0.00242931$. Using this comparison to determine a physical matching scale requires an independent relation between the energy and the spectral argument. If the response is $F((\kappa E/\mu)^2)$ with an adjustable conversion factor $\kappa>0$, rescaling $\kappa,\mu$ together preserves all readings. The probe then determines only $\mu/\kappa$. [Common-energy comparison and interval check](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068528778)
+
+With both $\kappa$ and $\mu$ unknown, the model still predicts a reading that depends only on an energy ratio. Adjust the probe until $Q(E_*)=1/2$ and double the energy exactly. Then $Q(2E_*)=F(4F^{-1}(1/2))\approx0.330835577358412$. If the true reading at calibration is within $\epsilon$ of one half, the second true reading is within $4\epsilon$ of the exact prediction. Indeed, for $u>0$, differentiating the positive spectral sum term by term gives $4F'(4u)/F'(u)\le4$. [Half-value calibration, interval and error bound](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068618897)
 
 ## 39.2.3 Tier 5: Heap-Geodesic Intelligence and Apophatic Self-Transparency of AXIOM-Ω {#sec-ch39-25-3}
 
