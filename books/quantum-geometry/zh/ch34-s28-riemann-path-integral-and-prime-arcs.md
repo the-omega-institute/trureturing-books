@@ -311,9 +311,13 @@ $$
 
 左边是最低空间的复维数。右边把零层类的个数乘以各 $\rho$ 处的局部因子。参考数据保证两个宿主素数和 $u$ 的层素数都在宿主的全实域中完全分裂。从秩条件出发，把其门槛增至 $\max\{x_0,3,x_1+1\}$（$x_1=\mathrm{Fm.x1}$），便同时得到 `GBig` 和层数据。此时各列的稳定子平凡，秩条件即给出所列等式。反过来，若等式在某一门槛后成立，在该门槛上配合已知分裂即可恢复秩条件。
 
-参考设计仍需提供这个维数等式。`BookNativeLowestSpace.design_of_lowest_dimension` 使用原扭曲族类上的算术选择，并要求三个条件在增广族类 `WithTw (WithSm (Enriched 𝒜))` 上闭合。它们是上文的尺寸条件、对每个 $x>x_1$ 和每个指标成立的类数公式 `ClassNumberFormula₂`，以及上述最终维数等式。这些输入给出该族类在参数 $3$ 的设计存在性。[最低空间秩等价与条件设计的源码及内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7065658421)
+局部定理 `BookNativeLowestSpace.design_of_lowest_dimension` 接受原扭曲族类上的算术选择，并要求三个条件在增广族类 `WithTw (WithSm (Enriched 𝒜))` 上闭合，即上文的尺寸条件、对每个 $x>x_1$ 和每个指标成立的类数公式 `ClassNumberFormula₂`，以及上述最终维数等式。它们给出该族类在参数 $3$ 的设计存在性。[最低空间秩等价与条件设计的源码及内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7065658421)
 
-另一条路线从原始伽罗瓦行取得模一算术族，再由 `BookIntegerHostBlocks.of_reference` 得到整数块。其算术模块只向这一论证提供 `TopG`。在参考库的 Lean 4.33.1 环境中，`leanchecker` 已分别重放算术模块、最终结论模块与独立审计模块。审计文件 `IntegerBlockAudit.lean` 确认声明 `BookReference.riemannHypothesis_via_integer_blocks` 的类型为 Mathlib 的 `RiemannHypothesis`，并打印出以下证明项。
+在外部 Lean 4.35.0 的格论构造中，对任意数据 `D : D7` 和层 `Lv : LevelData D`，`GlobalTheory.ColClassNumber.classNumber_all` 用自对偶上格和稳定子层指数公式证明 `ClassNumberFormula₂ D Lv`。公式中的计数等式在其大素数与分裂条件下成立。给定 `TwistSelection 𝒜`，`tied_families_of_choice_alt` 直接给出第二陈类相容性，`second_chern_linked_closed_rank_ties` 再给出闭合的格秩条件。这一步由扭曲选择本身提供所需数据，无须另设 `Duty` 假设。
+
+于是 `BookNativeClosedLattice.design_from_twist_selection` 只用原扭曲族类上的选择提供者、上述在增广族类上闭合且带族门槛的尺寸估计 `cT ε Fm.CYL ≤ Fm.CTu → TuSize Fm`，以及 `TwistSelection 𝒜`，便得到 `DesignExists (WithTw (WithSm (Enriched 𝒜))) 3`。取 $C_0=3$、令设计的底类 $\mathcal C'$ 为 `Enriched 𝒜`，便得到上文原生 RH 定理所需的设计。该定理还使用两个族类包含关系和九项闭合估计，最后应用本书冻结的整数块判据。[从扭曲选择构造设计的研究源码与内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7065978544)
+
+原库和本书的整数块路线共用原始伽罗瓦行。原库先证明 `EveryCharacter`，即所有正整数模的狄利克雷特征标在 $\operatorname{Re}(s)>1/2$ 的 $L$ 函数非消失性（主特征标除去 $s=1$），再由 `rh_of_every` 得到 RH。本书从该算术行取出模一族，再由 `BookIntegerHostBlocks.of_reference` 得到整数块。其算术模块只向这一论证提供 `TopG`。在参考库的 Lean 4.33.1 环境中，`leanchecker` 已分别重放算术模块、最终结论模块与独立审计模块。审计文件 `IntegerBlockAudit.lean` 确认声明 `BookReference.riemannHypothesis_via_integer_blocks` 的类型为 Mathlib 的 `RiemannHypothesis`，并打印出以下证明项。[原库从全体特征标推出 RH 的声明](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Supplements/Kernels/MainTheorems.lean#L7-L9)
 
 ```lean
 BookIntegerHostBlocks.rh_of_blocks
