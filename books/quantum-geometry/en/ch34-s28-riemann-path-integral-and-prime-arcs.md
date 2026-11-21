@@ -751,7 +751,7 @@ There is a unique real $W_*>0$ such that, for every $W\ge0$, $a(W)=0$ if and onl
 :::
 
 ::: proof
-Increasing $W$ extends the integration interval to the left, so $a$ is nonnegative and nondecreasing. The zero coefficients on the rightmost line are absolutely summable, and the normalized prime-power correction tends to zero. Far enough out, the mass density is therefore at most $Cx^{p-1}$. Increasing the width from $U$ to $W$ adds only the mass on $[Be^{-W},Be^{-U}]$. At the normalized scale the addition is at most $(C/p)(e^{-pU}-e^{-pW})$. Taking lower limits in the right endpoint gives continuity.
+Increasing $W$ extends the integration interval to the left, so $a$ is nonnegative and nondecreasing. In the integrated explicit formula, the normalized complete tail is approximated by minus the real part of the rightmost-line series. The series is bounded by the sum of its coefficient magnitudes, and the normalized prime-power correction tends to zero. Thus $x^{1-\beta}Q_\vartheta(x)$ is eventually bounded in absolute value by some $C$, and the mass density is at most $Cx^{p-1}$. Increasing the width from $U$ to $W$ adds only the mass on $[Be^{-W},Be^{-U}]$. At the normalized scale the addition is at most $(C/p)(e^{-pU}-e^{-pW})$. Taking lower limits in the right endpoint gives continuity.
 
 The recurring short windows with zero mass put a positive width in the zero set. A uniform lower bound at the exact power on wider windows makes that zero set bounded. Continuity puts its supremum in the zero set. The full proof is checked by the Lean kernel.
 :::
