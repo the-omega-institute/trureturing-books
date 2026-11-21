@@ -1390,6 +1390,32 @@ Induct backwards through the facets. At any facet with nonzero coefficient, its 
 
 When $B$ is a full-restriction facet, the chain contraction above gives the normalized cycle $I(e_B)$. If a top cycle $z$ satisfies $pz=e_B$, then $I(pz)=z$ gives uniqueness. When every full-restriction coefficient is zero, the same identity gives $z=0$. Existence and uniqueness use the chain contraction [actualContraction](lean:D5/S3/TotalVariation/FairBiasChainContraction.actualContraction).
 
+**Circuit decomposition of a normalized cycle.** Regard the coordinates of $I(e_B)$ as basis coordinates for the ordered matroid $M$. For any finite ordered matroid, write $z_B(M)$ for the integral cycle whose coordinates on the fully passive bases are $1$ at $B$ and $0$ elsewhere. In positive rank take the least nonloop $e$. It cannot belong to the fully passive basis $B$, since no smaller element can replace it. Let $C$ be the fundamental circuit in $B\cup\{e\}$ and put $D=B\setminus C$. Order the remaining elements of the contraction $M/C$ by the inherited order. In rank zero the cycle is the basis chain of the empty face.
+
+Write $[C]$ for the simplex oriented by the increasing order. For disjoint oriented face chains, $[A]\wedge[T]$ concatenates the ordered vertices of $A$ and $T$ and then sorts them with the sign of the reordering. The normalized cycle satisfies
+
+$$
+z_B(M)=\epsilon_B\,\partial[C]\wedge z_D(M/C),
+$$
+
+where $\epsilon_B\in\{-1,1\}$ sets the coefficient at $B$ to $1$. Each nonzero coefficient of $z_D(M/C)$ at a basis $T$ produces exactly $|C|$ nonzero coordinates, one for each element removed from $C$ before taking the union with $T$. The intersection of the resulting basis with $C$ identifies the removed element, and the difference identifies $T$. These coordinates are distinct, so this step multiplies the support size by $|C|$.
+
+For any $c\in C$, deleting $c$ from the circuit gives a basis of $C$, so $\left(C\setminus\{c\}\right)\cup T$ is a basis of $M$. The boundary obeys the signed product rule for the join. Since $\partial^2[C]=0$ and $\partial z_D(M/C)=0$, the joined chain is a cycle. When $c\ne e$, the resulting basis contains $e$ and cannot be fully passive. When $c=e$, every element of $C\setminus\{e\}$ can be exchanged for $e$. For an element of $T$, inserting another element of $C$ cannot produce a new basis because $C$ is already in the closure of $C\setminus\{e\}$. An exchange with an element outside $C$ is precisely an exchange in the contraction. This proves that $D$ is fully passive in the contraction and that the only nonzero fully passive coordinate of the join is $\pm1$ at $B$.
+
+Each contraction reduces the basis size by $|C|-1$. Since $e$ is a nonloop, $|C|\ge 2$, and induction from the empty face gives existence. For uniqueness, take the lexicographically last basis with a nonzero coefficient in the difference of two normalized cycles. It has a nonpassive element. Deleting that element gives a ridge that occurs only in this basis and in later bases. Its boundary coefficient is thus the nonzero coefficient times a sign, contradicting the cycle equation.
+
+For example, take two zero columns and order their signed labels so that the parallel pairs are $\{1,3\}$ and $\{2,4\}$ in numerical order. For $B=\{3,4\}$ the fundamental circuit is $\{1,3\}$ and the normalized cycle of the contraction is $[4]-[2]$. Joining the two oriented edge boundaries gives
+
+$$
+z_B=[3,4]+[2,3]-[1,4]+[1,2].
+$$
+
+The positive coefficient at $[2,3]$ comes from reordering the concatenation of $[3]$ and $[2]$.
+
+The choice of least nonloop controls the normalization. Two equal nonzero binary columns give four parallel signed labels, ordered $1<2<3<4$. The normalized cycle at $\{4\}$ is $[4]-[1]$. Choosing $2$ to form the circuit $\{2,4\}$ gives $[4]-[2]$, which also has coefficient $-1$ at the fully passive basis $\{2\}$.
+
+Björner's classical construction gives homology bases of matroids supported on joins of simplex boundaries. [Chari, *Two decompositions in topological combinatorics with applications to matroid complexes* (1997), §1](https://doi.org/10.1090/S0002-9947-97-01921-1)
+
 **Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 If there are no nonempty facets, the original realization is empty and its reduced integral homology vanishes in every nonnegative degree. When facets exist and $d=1$, the wedge is a discrete space with $m+1$ points and reduced degree-zero generators $[p_B]-[p_0]$, where $p_B$ is the point contributed by $B$ and $p_0$ is the common basepoint. When facets exist and $m=0$, the wedge is a point and every reduced group vanishes. For a nonempty family of facets, the reduced Euler characteristic is $(-1)^{d-1}m$, so the earlier Tutte evaluation gives $m=2^d T_M(1,1/2)$.
