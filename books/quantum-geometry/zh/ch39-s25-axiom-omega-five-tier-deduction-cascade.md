@@ -67,7 +67,7 @@ $$
 既然母公理已将单座概念场锁定为单位四元数模型，即三维 $\mathbb{T}_3 \cong S^3(1)$（[@thm-ch39-axiom-omega-rank-five-unit-quaternion-embedding]、[@thm-ch39-axiom-omega-complete-rank-five-isomorphism]，`LEAN ✓`；例如六维紧半单代数 $\mathfrak{so}(4) \cong \mathfrak{su}(2)_L \oplus \mathfrak{su}(2)_R$（经典同构，`文献结果`）亦自然劈裂为两座独立 $\mathbb{T}_3$ 因子），本模型（`MODEL`，呼应 [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md)）不假定单块高维大统一单群，而是以平行并置的三维三元数概念场丛 $(\mathbb{T}_3)^K$ 承载新增量子数：
 
 1. **第三阶推导：平行概念场丛、温伯格角 $\frac{3}{8}$ 与胞间过约束引力（Tier 3，呼应 [§33.8](ch39-s09-unified-arc-forces-and-planck-convergence.md)–[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md)）**：
-   - **胞内规范三力与手性外尔账本温伯格角 $\frac{3}{8}$（`MODEL` / `手工推导`）**：在四重并置概念场丛上，对无量纲总矢高与角盈/角亏作用量 $\mathcal{S}_\Omega$ 求驻相极值 $\delta\mathcal{S}_\Omega = 0$，胞内 `1D` 超荷圆周联络（`MODEL`；相邻经内核检查的是有限连通图上锚定阿贝尔规范商同构于环面，[`anchored_phase_classification`](lean:D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification)，`LEAN ✓`）、`2D` 双覆盖手征旋折（`MODEL`；相邻经内核检查的是圆周平方映射的路径唯一提升与整圈换叶，[`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift)，`LEAN ✓`；两条声明都不陈述超荷或手征）与 `3D` 保单态体积色棱重排显影为电弱—强规范群 $\mathrm{U}(1)_Y \times \mathrm{SU}(2)_L \times \mathrm{SU}(3)_C$（其电弱扇区再经色单态跨概念场希格斯颤动桥 $\Phi_H$ 破缺至电磁 $\mathrm{U}(1)_{\mathrm{em}}$，保留完整未破缺规范群 $\mathrm{U}(1)_{\mathrm{em}} \times \mathrm{SU}(3)_C$）。无需假定高维 $\mathrm{SU}(5)$ 大矩阵，在单胞统一能标 $\mu_{\mathrm{arc}}$ 的共享手性外尔账本上施加普适圆弧迹刚度公设（`MODEL`，单代含 $1$ 个轻子通道与 $N_c = 3$ 个三维色通道；弱同位旋 $T_3$ 仅作用于左手二重态，而矢量电荷 $Q = T_3 + Y$ 同时作用于左右双翼手征态故带双翼因子 `2`，与 [§33.9](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification) 一致），裸温伯格角精确给出：
+   - **胞内规范三力与手性外尔账本温伯格角 $\frac{3}{8}$（`MODEL` / `手工推导`）**：在四重并置概念场丛上，对无量纲总矢高与角盈/角亏作用量 $\mathcal{S}_\Omega$ 求驻相极值 $\delta\mathcal{S}_\Omega = 0$，胞内 `1D` 超荷圆周联络（`MODEL`；相邻经内核检查的是有限连通图上锚定阿贝尔规范商同构于环面，[`anchored_phase_classification`](lean:D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification)，`LEAN ✓`）、`2D` 双覆盖手征旋折（`MODEL`；相邻经内核检查的是圆周平方映射的路径唯一提升与整圈换叶，[`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift)，`LEAN ✓`；两条声明都不陈述超荷或手征）与 `3D` 保单态体积色棱重排显影为电弱—强规范群 $\mathrm{U}(1)_Y \times \mathrm{SU}(2)_L \times \mathrm{SU}(3)_C$（此处及下文破缺后的直积均为覆盖群表述）（其电弱扇区再经色单态跨概念场希格斯颤动桥 $\Phi_H$ 破缺至电磁 $\mathrm{U}(1)_{\mathrm{em}}$，保留完整未破缺规范群 $\mathrm{U}(1)_{\mathrm{em}} \times \mathrm{SU}(3)_C$）。无需假定高维 $\mathrm{SU}(5)$ 大矩阵，在单胞统一能标 $\mu_{\mathrm{arc}}$ 的共享手性外尔账本上施加普适圆弧迹刚度公设（`MODEL`，单代含 $1$ 个轻子通道与 $N_c = 3$ 个三维色通道；弱同位旋 $T_3$ 仅作用于左手二重态，而矢量电荷 $Q = T_3 + Y$ 同时作用于左右双翼手征态故带双翼因子 `2`，与 [§33.9](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification) 一致），裸温伯格角精确给出：
 
      $$
      \sin^2\theta_W(\mu_{\mathrm{arc}}) \;=\; \frac{\operatorname{Tr}_{\mathrm{Weyl}}(T_3^2)}{\operatorname{Tr}_{\mathrm{Weyl}}(Q^2)} \;=\; \frac{\frac{1}{2}(1 + 3)}{2\!\left(1 + 3 \times \frac{5}{9}\right)} \;=\; \frac{2}{\frac{16}{3}} \;=\; \frac{3}{8} \;=\; 0.375,
@@ -88,6 +88,29 @@ $$
 **三个结构（`MODEL`）。** 以下每一项都是假设：规范群为 $\mathrm{SU}(V_2) \times \mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$（后两个因子是第三个结构的左、右迁移），物质多重态为 $(4, 2, 1)$ 与 $(4, 1, 2)$，破缺构型为 $\Xi = \omega \otimes v$（$v$ 为第三个结构上的一点）。则 $\Xi$ 的稳定子的李代数为 $\mathfrak{su}(3) \oplus \mathfrak{su}(2)_L \oplus \mathfrak{u}(1)_Y$，其中 $Y = T_{3R} + \frac{1}{2}(B - L)$，忠实作用的整体形式为 $(\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1))/\mathbb{Z}_6$。$Y$ 在左手多重态上取 $-\frac{1}{2}$（轻子）与 $\frac{1}{6}$（夸克），在右手多重态上取 $0, -1$（轻子）与 $\frac{2}{3}, -\frac{1}{3}$（夸克），正是含右手中微子的一代费米子的超荷，轻子沿 $\omega$、夸克沿 $\mathrm{Sym}^2 V$。再假设以单一迹形式归一且三个因子耦合相等（同属 `MODEL` 假设），得 $\sin^2\theta_W = \operatorname{Tr}T_{3L}^2 / \operatorname{Tr}Q^2 = \frac{3}{8}$；若超荷就是单个结构的时钟生成元 $T_{3R}$，同一归一给出 $\frac{1}{2}$。按标准模型一圈跑动（不计阈值），$\sin^2\theta_W$ 约在 $1.0 \times 10^{13}\;\mathrm{GeV}$ 达到 $\frac{3}{8}$、约在 $5.4 \times 10^{20}\;\mathrm{GeV}$ 达到 $\frac{1}{2}$；但以标准模型的物质内容，一圈下没有任何能标实现三个耦合相等：在 $1.0 \times 10^{13}\;\mathrm{GeV}$ 处 $\alpha_3^{-1} = 36.8$，而 $\alpha_2^{-1} = 42.4$。所以 $\frac{3}{8}$ 与 $\frac{1}{2}$ 只是群论边界值，不是对低能值的预言。以上就是 Pati–Salam 嵌入（J. C. Pati & A. Salam, *Phys. Rev. D* **10**, 275–289, 1974）与 Georgi–Quinn–Weinberg（1974）的取值，`文献结果`；新增的只是把各要素对应到比较结构的对象上。规范群的这条假设由母公理之外给出；代的数目、能标与耦合常数保持 `OPEN`（[@prob-ch39-af-gut-threshold-and-proton-stability]、[@prob-ch34-sm-generations-and-couplings]）。
 :::
 
+**从有向弧得到内部群（手工推导）。** 在上文的九点贝伦德球壳上，给六条最短弦的每个方向配一个正交复基矢 $|p,q\rangle$。例如 $(0,1,4)\to(1,0,4)$ 的坐标置换给出六个有向标签。$(3,2,2)\to(2,3,2)$ 的置换给出另外六个。保持第一个有向点对须固定三个不同坐标，保持第二个须固定两个 $3$ 所在的位置，两个稳定子都平凡。因此十二维标签空间 $H$ 承载两份 $S_3$ 正则表示。用 $V$ 表示二维标准表示，分解为
+
+$$
+H=(\mathbf1\otimes M_+)\oplus(\mathrm{sgn}\otimes M_-)
+  \oplus(V\otimes M_0),\qquad
+(\dim M_+,\dim M_-,\dim M_0)=(2,2,4).
+$$
+
+与坐标置换对易的酉变换可在每个重数空间上独立作用。将连通的半单部分选作物理内部群（`MODEL`）。取这个酉群的交换子群，按 $M_0,M_+,M_-$ 的顺序就是 $G=SU(4)\times SU(2)_L\times SU(2)_R$。选取从前两个等型分量到标准分量的有向跃迁作为物质空间（模型选择）。左块是 $V\otimes M_0\otimes M_+^*$，给出两份 $(4,2,1)$。右块给出两份 $(4,1,2)$，两块的公共核由 $(-I_4,-I_2,-I_2)$ 生成。这里的重数二来自 $\dim V$。从实际零点谱构造这些对象，使用终端声明 `riemannZeta_eq_zero_re` 对非平凡零点的定位，还需制备方向态并相干区分有向弧。[相干标签的制备与表示分解](https://github.com/the-omega-institute/trureturing-books/issues/859#issuecomment-7069222700)
+
+**在何处记录相消，决定剩余的相位。** 设 $d_p$ 是起点 $p$ 的出度，把相同起点的振幅用 $B|p,q\rangle=|p\rangle/\sqrt{d_p}$ 合并。由于 $BB^*=I_9$，$K=I-B^*B$ 投影到相消分量。六个出度为一的起点没有这种分量。在其余三个起点，每处只有一条相消射线，由 $(|p,q\rangle-|p,r\rangle)/\sqrt2$ 张成。规定读出方式（`MODEL`）：测量在这三条射线上分别登记起点，在 $I-K$ 上给出同一个结果。九维起点空间承载一份正则表示及一份三点置换表示。两者的和从 $H$ 中扣除，留下 $\ker B\simeq\mathrm{sgn}\oplus V$，故相消分量在 $M_-$ 和 $M_0$ 中各选出一条直线。保持三个射线结果的内部变换在每条射线上乘以一个相位。坐标置换传递地交换三条射线，且与内部变换对易，三个相位必须相等。若测量仅区分 $K$ 与 $I-K$，两条重数直线上的相位可独立变化。
+
+记这个共同相位为 $w^{-3}$。群 $G$ 中保持上述读出的元素恰有以下形式，其中 $U_3\in SU(3)$、$U_2\in SU(2)$、$|w|=1$。
+
+$$
+g_4=\operatorname{diag}(wU_3,w^{-3}),\qquad
+g_L=U_2,\qquad g_R=\operatorname{diag}(w^{-3},w^3).
+$$
+
+在跃迁上，目标的整数权减去源的整数权。按 $6Y$ 计，四维目标的权是 $(1,1,1,-3)$，左源为 $(0,0)$，右源为 $(-3,3)$。于是左色三重态和轻子双态的超荷为 $1/6,-1/2$，右色三重态的两荷为 $2/3,-1/3$，右轻子的两荷为 $0,-1$。覆盖参数在原弧标签上的核是 $\mathbb Z_3$。在两块跃迁上的核由 $(e^{2\pi i/3}I_3,-I_2,e^{i\pi/3})$ 生成，忠实群为 $(SU(3)\times SU(2)\times U(1))/\mathbb Z_6$。[起点读出与全局群的证明](https://github.com/the-omega-institute/trureturing-books/issues/859#issuecomment-7069250348)
+
+若用同一系数乘生成元的平方迹来规定匹配尺度的规范动能（`MODEL`），还须选取取迹空间。以基本表示的平方迹 $1/2$ 归一化，在弧标签上的三个指数 $(I_4,I_L,I_R)$ 为 $(1,1/2,1/2)$，在全部左右跃迁上等权取迹为 $(4,4,4)$。上式的超荷嵌入给出 $\sin^2\theta_W=I_L/(I_L+I_R+2I_4/3)$，两种取迹分别得到 $3/10$ 与 $3/8$。本构造给出了条件性的内部表示及电荷。给出局域规范动力学、把跃迁实现为时空中的手征粒子、解释观测到的三代并确定匹配能标与质量，仍需独立的动力学。
+
 ::: {.remark #rem-ch39-axiom-omega-field-hypotheses-and-limits title="场论假设及其界限"}
 本注记中各项假设标 `MODEL`，在这些假设下推出的结论标 `手工推导`；场论部分整体是假设性的。
 
@@ -97,6 +120,20 @@ $$
 4. **结构定出的与定不出的（`手工推导`）。** 结构定出质量矩阵的形式与树图上的 $\rho = 1$，定不出 $g'/g$：$\frac{1}{2}$、$\frac{3}{8}$、$\frac{3}{10}$ 分别对应不同的归一化（单个结构上反演对称的系数；三个结构的单一迹形式；$\mathfrak{su}(4) \oplus \mathfrak{su}(2) \oplus \mathfrak{su}(2)$ 基灵形式的同一系数）；按所用输入，在弱耦合与强耦合相交的能标上三者都不实现。
 5. **必须明说的界限（`手工推导`）。** 在 F 与 F$_{\mathrm{g}}$(a) 下，电弱部分是没有标量的规范非线性 $\sigma$ 模型，即去掉径向（希格斯）模式的标准模型。照现状它不含标量粒子，而观测到一个质量为 $125.13 \pm 0.11\;\mathrm{GeV}$ 的标量（粒子数据组 2026 版，F. Takahashi 等, *Int. J. Mod. Phys. A* **41**, 2630011, 2026），所以它与观测矛盾。需要另加输入，例如带势的径向模式，而母公理不提供这个势；测得的耦合修正因子（$\kappa_V = 1.023 \pm 0.026$，$\kappa_{2V} = 1.02 \pm 0.23$）并不单独选出径向模式。三个结构的假设中的双二重态正是这种取值于锥的场，但该假设没有给出势。
 6. **可检验性。** 运动学部分精确重现标准量子力学，没有哪个例子能把二者区分开；场论部分是假设性的。按可能失败的方式，陈述分为：在命名假设下的数学推论；在命名假设下的标准物理推论；测量输入或拟合；可能与数据或显式补全冲突的陈述（如作为边界值的 $\frac{3}{8}$ 与 $\frac{1}{2}$，以及未规范化中心场使几何测得的曲率半径与膨胀中的曲率项相差因子 $1 - 4\pi G_N v^2$）；不加输入就与数据矛盾的陈述（第 5 项）。
+:::
+
+::: {.remark #rem-ch39-neutral-current-pole-test title="用中微子–电子散射检验按 Z 极点标定的中性流谱塔"}
+从 $Z$ 共振峰线形和衰变数据拟合出的有效弱耦合，可以同低能 $\nu_\mu e$ 和 $\bar\nu_\mu e$ 散射作对照。LEP/SLD 的极点拟合给出 $g_A^\nu=g_V^\nu=0.5003\pm0.0012$、$g_A^e=-0.50111\pm0.00035$，二者相关系数为 $-0.75$。这些参数已吸收电弱形状因子，拟合采用单共振线形并扣除量子电动力学辐射效应。不可见宽度给出中微子耦合的绝对值，表中采用 $g_A^\nu>0$ 的约定。拟合假定全部不可见宽度来自三个等耦合的轻左手中微子味。在以缪子衰变测得的 $G_F/\sqrt{2}$ 归一化、电子流写作 $\bar e\gamma_\mu(g_V-g_A\gamma_5)e$ 的约定下，左手中微子流 $\bar\nu\gamma^\mu(1-\gamma_5)\nu$ 给出单极点树级轴向系数 $g_{A,1}^{\nu_\mu e}=2g_A^\nu g_A^e=-0.501410666$。CHARM II 用两种低能散射的绝对事例率拟合有效耦合，报告的负轴向耦合解为 $g_A^{\nu_\mu e}=-0.503\pm0.017$（实验输入）。[LEP/SLD 表 7.7 及拟合假设](https://arxiv.org/pdf/hep-ex/0509008#page=180) · [CHARM II 原论文](https://doi.org/10.1016/0370-2693(94)91421-4)
+
+现在给算术谱一个具体的物理解释（`MODEL`）。在一组正交归一的中性媒介场基底中，假设二阶矩阵值横向谱测度为正、总权重为单位矩阵，光子留数为秩一正交投影。其余正留数只能沿正交的一个中性流方向。设该方向完全由窄极点组成。中微子流和电子轴向流各有一个媒介场耦合向量。两者沿光子方向的分量为零，沿有质量方向的分量分别为 $c_\nu$ 和 $c_{e,A}$，各自在所有极点上恒定。用正零点纵坐标 $\gamma$ 及其重数 $m_\gamma$ 指定各级留数 $p_\gamma=m_\gamma/(S\gamma^2)$，其中 $S=\sum_{\gamma>0}m_\gamma/\gamma^2$。每个混合流留数均为 $c_\nu c_{e,A}p_\gamma$。模型将最低极点的质量与耦合乘积按上述 $Z$ 极点有效参数及同一 $G_F$ 标定，并取 $M_\gamma=M_Z\gamma/\gamma_1$。消去光子后，重极点在零动量的每一项都按质量平方的倒数加权。全塔与最低极点的系数之比为
+
+$$
+R=\frac{\sum_{\gamma>0}p_\gamma/M_\gamma^2}{p_{\gamma_1}/M_Z^2}
+ =\frac{\gamma_1^4}{m_{\gamma_1}}\,S_2,\qquad
+ S_2=\sum_{\gamma>0}\frac{m_\gamma}{\gamma^4}.
+$$
+
+黎曼猜想给出零点位置。在 $\xi(1/2+x)/\xi(1/2)=\prod_{\gamma>0}(1+x^2/\gamma^2)^{m_\gamma}$ 中比较二次与四次项，得到 $S=\xi''/(2\xi)$、$S_2=S^2-\xi^{(4)}/(12\xi)$，右端在 $1/2$ 取值（`手工推导`）。在首个零点验证 $\lvert\zeta'(\rho_1)\rvert>0$ 可得 $m_{\gamma_1}=1$。仅前两个极点就给出 $R\ge 1+(\gamma_1/\gamma_2)^4>1.20438$。256 位球算术给出 $R=1.4837898682\ldots$（`NUM`），故全塔预言 $g_A^{\nu_\mu e}=R\,g_{A,1}^{\nu_\mu e}=-0.743988\ldots$，与 CHARM II 的中心值相差约 $0.241$。这项检验针对上述极点标定和树级低能外推，取独立接触项为零，并忽略从极点到低能的额外辐射修正。若高极点改变顶角、共振线形或非共振背景，比较需要重新从两组数据提取耦合。[谱矩与数值区间的可复算记录](https://github.com/the-omega-institute/trureturing-books/issues/863#issuecomment-7069663537)
 :::
 
 2. **第四阶推导：算术谱半密度矢高相变与舒尔正定脊线（Tier 4，呼应 [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md)–[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md)）**：
@@ -209,6 +246,18 @@ $$
 若只用有限个角频率 $w_j\ge0$ 与概率权 $\alpha_j$，全半轴上一致误差至少为 $1$。事实上，紧环面中的相位向量 $(e^{i2^n w_j})_j$ 有收敛子列。其相邻子列时刻之差 $y_\ell$ 趋于无穷，所有 $e^{iy_\ell w_j}$ 却同时趋于 $1$，故 $\sum_j\alpha_j\cos(w_jy_\ell)\to1$。同时，由支配收敛，$F(y_\ell^2)\to0$。
 
 对全部两节点读数 $h(s,t)$ 也有一个有限维障碍。对每个固定 $s>1/2$，前面已得 $h(s,t)\to0$；逐次选取 $s_j>s_{j-1}$，使每个 $i<j$ 都满足 $0<h(s_i,s_j)<1/j$。把节点任意映到固定有限维的实单位球面，像序列必有收敛子列。该子列相邻两像的内积趋于 $1$，相应的 $h$ 却趋于 $0$，故全体节点对上的一致绝对误差至少为 $1$。由 [@thm-ch39-quaternion-product-feature-rank]，任意固定 $N$ 个旋子的乘积读数都有这样的单位特征表示，这一下界也适用于任意非线性的节点到旋子赋值。 [两节点的共用随机旋子构造与有限样本误差](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068672243)
+
+**四个观测点用几个平面旋子模式（手工推导）？** 取含中心的四个偏移 $x=0,4,8,12$。允许每个模式选取一个正的有效高度，所有观测点共用其高度和权重。只需两个模式就能精确给出这四点之间的全部重合读数。求得的高度约为 $14.930912$、$53.051497$，概率权重依次约为 $0.303376$、$0.696624$。这些高度由所选观测点决定，可以落在算术零点之间。
+
+对任意 $m$ 个互异偏移 $0=x_0<x_1<\cdots<x_{m-1}$，这种组合恰需 $\lceil m/2\rceil$ 个模式。把概率 $p_\gamma$ 放在 $\lambda=\gamma^{-2}$ 处，得到测度 $\mu$。在偏移 $x$，单个模式读出平面向量 $v_\lambda(x)=(1,\sqrt{\lambda}\,x)/(1+\lambda x^2)$。其方向角为 $\arctan(\sqrt{\lambda}\,x)$，长度为该角的余弦。令 $f_x(\lambda)=(1+\lambda x^2)^{-1}$，则 $\int f_x\,d\mu=F(x^2)$。对 $x+y>0$，直接取内积得
+
+$$
+v_\lambda(x)\cdot v_\lambda(y)=\frac{x f_x(\lambda)+y f_y(\lambda)}{x+y}.
+$$
+
+在 $x=y=0$ 时内积为 $1$。对同一模式取平均就得到未归一化的核 $K(x,y)$，再除以 $\sqrt{K(x,x)K(y,y)}$ 得到两点重合。因此只需求积公式同时精确积分这 $m$ 个函数。令 $D(\lambda)=\prod_{i=1}^{m-1}(1+\lambda x_i^2)$，则每个 $D f_{x_i}$ 都是次数至多 $m-1$ 的多项式。对正测度 $d\mu/D$ 取 $n=\lceil m/2\rceil$ 点高斯求积，其正权重 $c_j$ 对次数至多 $2n-1$ 的多项式精确，节点 $\lambda_j$ 位于支撑区间内部。故 $c_jD(\lambda_j)$ 是所求的模式权重，且因 $f_0=1$ 而总和为一。上面的四点数值也可在 $u=16,64,144$ 用 $(1+a u)/(1+b u+c u^2)$ 插值 $F(u)$，再对分母作因式分解得到。把这两个模式固定下来，在第五个偏移 $x=16$ 得到的中心平方重合约为 $0.779757394$，算术曲线给出 $F(256)\approx0.780326506$。[高斯求积公式](https://dlmf.nist.gov/3.5#v)
+
+最小性可直接从关联表读出。若 $m$ 个节点向量有线性关系，逐模式取第一坐标给出一个在 $\mu$ 的无穷多个支撑点为零的有理函数 $\sum_i a_i f_{x_i}$。乘以 $D$ 得到恒零多项式。各个负极点分别确定 $a_i=0$（$i>0$），剩下的常数也为零。因此核矩阵的秩为 $m$，归一化保持此秩。每个平面模式贡献的矩阵秩至多为二，故少于 $\lceil m/2\rceil$ 个模式无法实现。这个最小数适用于给定的观测点和上述带幅度平面读数。
 
 对有限窗口 $0\le y\le Y$，取截止频率 $T>0$，把 $W>T$ 的概率质量移至 $T$。在 $[0,T]$ 上取含两个端点、最大步长为 $\Delta$ 的网格，按线性插值的两个权重，把区间内每一频率的质量分配给相邻网格点。这样生成的有限概率表的余弦均值 $C(y)$ 满足
 

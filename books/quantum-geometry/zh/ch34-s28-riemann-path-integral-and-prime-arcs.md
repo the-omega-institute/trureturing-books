@@ -713,6 +713,36 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
+以 $N(a,B)$ 记实际素数尾项的负部质量，以 $P(u)$ 记原零点谱的原函数在对数相位轨道上的取值。对整数 $n\ge2$ 和截点 $x>0$，记
+$$
+A_n(x)=2n^2\operatorname{Re}\sum_\rho
+\frac{x^{\rho/n-1/2}}{\rho(n-\rho)(n-2\rho)}.
+$$
+求和遍历全部实际非平凡零点，重数照计。各次根谱在同一对数坐标下使用对应的相位 $e^{i\gamma_\rho\ln(x)/n}$。记 $s_m=1/2-1/(m+1)$，$D_s(a,B)=a^{-s}-B^{-s}$。
+
+::: {.theorem #thm-ch31-prime-window-mobius title="任意截断阶数共用一个阈值" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/RHMobiusWindow.prime_window_mobius_of_rh"}
+假设 RH。存在常数 $a_0\ge2$ 与 $K>0$，使任意整数 $m\ge2$ 和任意一对实数截点 $B\ge a\ge a_0$ 都满足
+
+$$
+\begin{aligned}
+&\Bigg|N(a,B)-2\ln(B/a)-P(\ln B)+P(\ln a)\\
+&\quad+\sum_{n=3}^{m}\frac{2\mu(n)n^2}{(n-1)(n-2)}D_{1/2-1/n}(a,B)
++\sum_{\substack{2\le n\le m\\2n<m+1}}\mu(n)\bigl(A_n(B)-A_n(a)\bigr)\Bigg|
+\le K m(1+\ln m)^2 D_{s_m}(a,B).
+\end{aligned}
+$$
+:::
+
+::: proof
+有限 Chebyshev 恒等式用 $\mu(n)$ 加权 $\psi(t^{1/n})$ 表示 $\vartheta-\psi$。当 $t<2^n$ 时，$n$ 次根项为零。其余情形用 $\psi$ 的全局线性界控制几何尾部，给出随 $m$ 线性增长的常数。
+
+在第 $n$ 阶先对完整尾项的平凡零点部分作中心化。第 $j$ 个平凡零点的系数变为 $n/[2j(n+2j)]$，其绝对总量用调和数控制。由此得到包括根变量等于一的 $O((1+\ln n)x^{-1/2})$ 界。实际非平凡零点按 $|\operatorname{Im}\rho|\le n$ 和 $|\operatorname{Im}\rho|>n$ 分段估计，保留重数。这样得到的谱密度界为 $O((1+\ln n)^2x^{1/(2n)-1/2})$。当 $2n\ge m+1$ 时，该谱密度满足目标衰减阶。对 $n\le m$ 求和。取一个与 $m$ 无关的阈值，使整段都有 $-Q_\vartheta(x)>0$。于是 $N(a,B)=\int_a^B[-Q_\vartheta(x)]\,dx/\sqrt{x}$，在对数坐标 $u=\ln x$ 下的密度为 $-e^{u/2}Q_\vartheta(e^u)$。再在 $[\ln a,\ln B]$ 积分，因 $s_m\ge1/6$，积分引入的因子 $1/s_m$ 至多为六。等端点 $B=a$ 时，两边都为零。完整证明由 Lean 内核检查。
+:::
+
+取 $m=9$ 时，第八、九次幂的 Möbius 系数为零，保留的谱项也与六、七次幂结果相同。因此同一余量满足 $D_{2/5}(a,B)$ 阶的界。
+
+在十阶展开中，第八、九次幂系数为零。十次主项为 $-(25/9)D_{2/5}(a,B)$，与五次根谱同阶。保留两项后，剩余的误差界指数为 $9/22$。结论对每个有限截断阶数给出统一估计。当截断阶数随端点变化时，余项仍由同一对常数控制，其大小还取决于右边的端点幂差。 [Möbius 反演，DLMF 27.5.6](https://dlmf.nist.gov/27.5.E6) · [Suzuki，式 (36)](https://arxiv.org/html/2411.07436v3#S2.E36) · [Zhao 的式 (14) 与引理 7](https://arxiv.org/html/2411.18903v2)
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::
