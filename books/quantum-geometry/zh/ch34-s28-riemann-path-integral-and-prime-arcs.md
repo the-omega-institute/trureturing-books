@@ -332,6 +332,28 @@ $$
 
 外部算术窗口若已给出 $U(x)\le x^{1/2+\varepsilon}$，可以直接把它传给只计素数的条件（`手工推导`）。在同一个 $[Y,Y^{3/2}]$ 上，$Q^-(x)/\sqrt{x}=\max(U(x),0)/x^{3/2}\le x^{\varepsilon-1}$，故 $A(Y)\le \tfrac12 Y^{3\varepsilon/2}\ln Y$。再加素数幂修正 $C\ln Y$。给定 $\eta>0$，取 $\varepsilon=\min(\eta/3,1/4)$，则和式在充分大的此类窗口上至多为 $Y^\eta$。这里用的算术输入是在任意远处都有一整个窗口满足点态界。
 
+这族整窗来自 Levent Alpöge 的外部算术构造。在模 $1$，该构造用 $\theta$ 提升、伽罗瓦表示、余体积界与局部匹配构造 `HypsAlt`，再取得 `TopG`。取 $\lambda=3/2$，构造中固定的损失为 $e_D=2,e_L=0$。每个充分小的 $\varepsilon>0$ 都在同一族中给出任意远的整窗、统一误差界和 `ChainTied` 条件。提高起点下限后，模 $1$ 的算术估计在整窗上给出 $U(x)\le x^{1/2+9\varepsilon}$。这一步发生在应用无零点判据之前。取 $9\varepsilon\le\min(\eta/3,1/4)$，上段的积分便在这族窗口上给出 $A_\vartheta(Y)\le Y^\eta$（`手工推导`）。[构造 HypsAlt 的算术输入](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean#L44-L68) · [从 HypsAlt 到 TopG](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean#L12-L15) · [损失参数](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopShape.lean#L48-L54) · [同一族的三个条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/ZeroFreeAllOfTopG.lean#L19-L33) · [窗内的算术估计](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/PrimitiveCosets/LevelGmLeOnFamilyScales.lean#L28-L30)
+
+对任一固定的实数 $b>1$，记
+
+$$
+A_{\vartheta,b}(Y)=\int_Y^{Y^b}\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx,\qquad Y\ge2.
+$$
+
+上文的 $A_\vartheta$ 即 $A_{\vartheta,3/2}$。
+
+::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
+固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
+:::
+
+::: proof
+在 RH 下，$|U(x)|/\sqrt{x}$ 对充分大的 $x$ 有界。将这个界与素数幂修正在 $[Y,Y^b]$ 上积分，得到 $A_{\vartheta,b}(Y)\le C_b\ln Y$，故每个充分大的 $Y$ 都满足所需的幂次上界。
+
+反过来，设 $\zeta(\rho)=0$，$\beta=\operatorname{Re}\rho>1/2$。对每个 $\varepsilon>0$，所有充分大的 $Y$ 都满足 $A_{\vartheta,b}(Y)\ge Y^{b(\beta-1/2)-\varepsilon}$。取小量 $0<\delta<\beta-1/2$。半径相同的两个圆盘把极点贡献与误差分开。复中心 $p$ 到所隔离极点的距离 $d<\sigma-\beta+\delta$，其中 $\sigma=\operatorname{Re}p$。这个极点可以对应另一个零点。实中心的无零点圆盘给出 Cauchy 误差界。将 Gamma 核的峰放在 $h\ln Y$ 附近（$1<h<b$），窗口外的贡献便可吸收。窗内留下的增长率满足 $h\sigma\ln((\sigma-1/2)/d)>h(\beta-1/2-\delta)$。取 $h$ 足够接近 $b$、$\delta$ 足够小，指数损失便小于 $\varepsilon$。[偏线零点迫使窗口积分增长](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.off_line_zero_forces_window_mass)
+
+取 $\varepsilon=\eta=b(\beta-1/2)/3$，下界就成为 $Y^{2\eta}$，与任意远处仍有 $A_{\vartheta,b}(Y)\le Y^\eta$ 矛盾。因此临界线右侧无零点，再用非平凡零点关于临界线的对称性即得 RH。完整证明由 Lean 内核检查。
+:::
+
 **窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
 
 $$
@@ -352,7 +374,7 @@ $Q_{\vartheta}(z)-Q_{\vartheta}(x)\le\ln(z/x)+\vartheta(x)(1/z-1/x)$。
 
 :::
 
-因此，只要已知窗口预算严格小于 $r^3\sqrt{x}$，就可以排除该内点的深度 $4r^2$。两侧余量决定可用的 $r$。Landau 论证所需的任意远小预算窗口仍需独立的算术估计。
+因此，只要已知窗口预算严格小于 $r^3\sqrt{x}$，就可以排除该内点的深度 $4r^2$。两侧余量决定可用的 $r$。这个局部估计以窗口预算为前提。上文的模 $1$ 算术构造供给任意远的小预算窗口。
 
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 

@@ -332,6 +332,28 @@ The criterion can also be stated using primes alone. Put $\vartheta(t)=\sum_{p\l
 
 A pointwise bound from the external arithmetic argument transfers directly to the prime-only condition (`manual derivation`). Suppose $U(x)\le x^{1/2+\varepsilon}$ throughout $[Y,Y^{3/2}]$. On that same window, $Q^-(x)/\sqrt{x}=\max(U(x),0)/x^{3/2}\le x^{\varepsilon-1}$. Thus $A(Y)\le \tfrac12 Y^{3\varepsilon/2}\ln Y$. Adding the prime-power correction costs at most $C\ln Y$. Given $\eta>0$, take $\varepsilon=\min(\eta/3,1/4)$. The sum is at most $Y^\eta$ on every sufficiently large window satisfying the pointwise bound. The arithmetic input is the existence of such whole windows arbitrarily far out.
 
+Levent Alpöge’s external arithmetic construction supplies these windows at modulus one. It uses theta lifts, Galois representations, a covolume bound, and local matching to construct `HypsAlt` and then obtain `TopG`. For $\lambda=3/2$ the construction fixes $e_D=2$ and $e_L=0$. For every sufficiently small $\varepsilon>0$, one family supplies arbitrarily late whole windows, a uniform error bound, and the `ChainTied` condition. Raising the starting threshold gives $U(x)\le x^{1/2+9\varepsilon}$ throughout each such window, before the external argument invokes its zero-free criterion. Choose $9\varepsilon\le\min(\eta/3,1/4)$. The preceding integral estimate gives $A_\vartheta(Y)\le Y^\eta$ on these same windows (`manual derivation`). [Arithmetic inputs to HypsAlt](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean#L44-L68) · [From HypsAlt to TopG](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean#L12-L15) · [Loss exponents](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopShape.lean#L48-L54) · [Three conditions on the same family](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/ZeroFreeAllOfTopG.lean#L19-L33) · [Arithmetic bound on the windows](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/PrimitiveCosets/LevelGmLeOnFamilyScales.lean#L28-L30)
+
+For any fixed real $b>1$, write
+
+$$
+A_{\vartheta,b}(Y)=\int_Y^{Y^b}\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx,\qquad Y\ge2.
+$$
+
+The quantity $A_\vartheta$ above is $A_{\vartheta,3/2}$.
+
+::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
+Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
+:::
+
+::: proof
+Under RH, $|U(x)|/\sqrt{x}$ is bounded for all sufficiently large $x$. Integrating this bound and the prime-power correction over $[Y,Y^b]$ gives $A_{\vartheta,b}(Y)\le C_b\ln Y$. Thus every sufficiently large $Y$ satisfies the required power bound.
+
+Conversely, suppose $\zeta(\rho)=0$ with $\beta=\operatorname{Re}\rho>1/2$. For every $\varepsilon>0$, all sufficiently large $Y$ satisfy $A_{\vartheta,b}(Y)\ge Y^{b(\beta-1/2)-\varepsilon}$. Choose a small $0<\delta<\beta-1/2$. Two disks of the same radius separate the pole contribution from the error. The complex center $p$ lies at distance $d<\sigma-\beta+\delta$ from the isolated pole, where $\sigma=\operatorname{Re}p$. This pole can come from a different zero. The zero-free disk at the real center gives a Cauchy error bound. Placing the Gamma kernel’s peak near $h\ln Y$ with $1<h<b$ controls the contribution from outside the window. The growth rate left inside is $h\sigma\ln((\sigma-1/2)/d)>h(\beta-1/2-\delta)$. Taking $h$ close enough to $b$ and $\delta$ small enough keeps the exponent loss below $\varepsilon$. [Window mass forced by an off-line zero](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.off_line_zero_forces_window_mass)
+
+Take $\varepsilon=\eta=b(\beta-1/2)/3$. The lower bound becomes $Y^{2\eta}$, in contradiction with $A_{\vartheta,b}(Y)\le Y^\eta$ on arbitrarily late windows. This excludes zeros to the right of the critical line. Reflection of the nontrivial zeros across that line gives RH. The full proof is checked by the Lean kernel.
+:::
+
 **How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
 
 $$
@@ -352,7 +374,7 @@ Choose the left side if $\vartheta(x)\le x$ and the right side otherwise. On the
 
 :::
 
-A window budget strictly below $r^3\sqrt{x}$ therefore rules out a dip of depth $4r^2$ at that interior point. The margins on both sides determine which $r$ can be used. The arbitrarily late windows with small budgets required by the Landau argument still require a separate arithmetic estimate.
+A window budget strictly below $r^3\sqrt{x}$ therefore rules out a dip of depth $4r^2$ at that interior point. The margins on both sides determine which $r$ can be used. This local estimate takes a window budget as input. The modulus-one arithmetic construction above supplies arbitrarily late windows with a small budget.
 
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 
