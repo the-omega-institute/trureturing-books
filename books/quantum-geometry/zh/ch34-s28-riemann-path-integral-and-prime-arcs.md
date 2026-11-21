@@ -882,6 +882,20 @@ $$
 先给定 $c<1/48$，再选取一个有限的 $N$ 使 $c<C_N$，即可在某个实数尾部取得所需不等式。取 $N=3$ 时 $C_3=1/54>1/64$，所以单步估计的端点 $c=1/64$ 也在本定理的范围内。反向使用 [@thm-ch31-mangoldt-log-squared-gap]。每个 $c<1/64$ 都满足 $c<1/48$，所以这里的尾部不等式蕴含单步判据，从而得到 RH。完整证明由 Lean 内核检查。
 :::
 
+::: {.theorem #thm-ch31-mangoldt-uniform-fejer-gap title="同一实数尾部上的 Fejér 差额与对数修正" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtUniformFejerGap.rh_iff_eventually_uniform_fejer_gap"}
+令 $y=\ln x$，记 $M$ 为第一 Li 质量。经典黎曼假设成立，当且仅当存在常数 $C\ge0$ 和实数 $X>e$，使每个实数 $x\ge X$ 都满足
+
+$$
+U(x)\le M\sqrt{x}-\frac{y^2}{48}+\frac{y\ln y}{12}+Cy.
+$$
+:::
+
+::: proof
+这条不等式在同一条实数尾部给出一个带显式修正项的包络。取 $q=e^{-y/2}$、$t=byq$。当 $y$ 充分大时，每个 $0\le b\le1/2$ 都满足 $yt\le1$。这个共同门槛使原点展开的二次余项和中点不等式的误差可以同时估计。对 $N$ 个等距相位，取 $b_{jk}=|j-k|/(2N)$。对所有有序对求平均，$b_{jk}/2-b_{jk}^2$ 和 $b_{jk}$ 的均值分别是 $(1-N^{-2})/24$ 和 $(1-N^{-2})/6$。谱的中点比较再给出因子 $1/2$，于是 $y^2$ 和 $y\ln y$ 两项的系数分别为 $(1-N^{-2})/48$ 和 $(1-N^{-2})/12$。
+
+现在固定一个已经超过共同门槛的 $y$，让 $N\to\infty$，再用 $Cy$ 吸收线性及常数误差。反向证明只需观察 $(y\ln y/12+Cy)/y^2\to0$。给定 $c<1/48$，修正项最终至多为 $(1/48-c)y^2$，故 [@thm-ch31-mangoldt-fejer-gap] 给出 RH。完整证明由 Lean 内核检查。
+:::
+
 ::: {.theorem #thm-ch31-mangoldt-bounded-gap-peak title="归一化余项在整数对数时间上有界间隔地回近临界质量" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtWindowPhase.bounded_gap_actual_G_peak"}
 设 RH 成立，记 $G(y)=e^{-y/2}U(e^y)$。对每个 $\delta>0$ 存在自然数 $L$，使每个自然数 $n$ 都有某个自然数 $k\le L$ 满足
 
