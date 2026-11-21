@@ -291,7 +291,7 @@ $$
 $$
 N=mk,\qquad M_J n=k w,\qquad n\in\mathbb Z_{\ge0}^{J}.
 $$
-这里 $m\mid N$ 是因为 $Nb'$ 的每项都由计数给出。令 $h$ 为 $w$ 在整数商群 $\mathbb Z^{\operatorname{rows}(M)}/M_J\mathbb Z^J$ 中的元素阶。任一个可用的 $N$ 都是 $mh$ 的倍数。
+这里 $m\mid N$ 是因为 $Nb'$ 的每项都由计数给出。令 $h$ 为 $w$ 在整数商群 $\mathbb Z^{\operatorname{rows}(M)}/M_J\mathbb Z^J$ 中的元素阶。任一个可用的 $N$ 都是 $mh$ 的倍数。预算为正时，$J$ 之外的轨道的副本数为零，因为把可行计数向量除以 $N$ 就得到最优表律。整数计数定理同时处理所有事件行。反向构造中，任一子群固定某个副本，当且仅当它固定原表。[整数轨道计数的等价定理](lean:D5/S3/ConceptDynamics/Attribution/UniformOrbitCounts.orbit_event_counts_match_fiber)。
 
 对每个 $J$ 中的轨道，取一个在该轨道上有正权重的最优解。取这些解的均值，就得到在 $J$ 上处处为正的最优解。约束 $M_J q=b'$ 为有理线性方程。消元给出有理特解和有理零空间基，因此可在同一解空间内把这个严格正解近似为严格正的有理解。选取该有理解的公分母 $Bm$，使其同时为 $m$ 的倍数。乘以 $Bm$ 后得到处处正的整数向量 $p$，满足 $M_Jp=Bw$。所以 $h$ 有限且整除 $B$。
 
