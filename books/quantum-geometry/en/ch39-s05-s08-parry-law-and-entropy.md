@@ -1420,7 +1420,7 @@ The choice of least nonloop controls the normalization. Two equal nonzero binary
 
 Björner's classical construction gives homology bases of matroids supported on joins of simplex boundaries. [Chari, *Two decompositions in topological combinatorics with applications to matroid complexes* (1997), §1, p. 3927](https://doi.org/10.1090/S0002-9947-97-01921-1)
 
-**Decomposition of top integral cycles at any nonloop.** Let $Q$ be a finite ordered matroid and write $Z(Q)$ for its top augmented integral cycle group. Choose any nonloop $e$, let $\mathcal C_e$ be the set of circuits through $e$, and for $C\in\mathcal C_e$ write $A_C=C\setminus\{e\}$. Put $s_D(x)=(-1)^{|\{y\in D:y<x\}|}$ for the insertion sign and let $\sigma(A,T)$ be the sign of putting the concatenated ordered lists of $A$ and $T$ into increasing order. The following integral linear maps are inverses.
+**Decomposition of top integral cycles at a chosen element.** Let $Q$ be a finite ordered matroid and write $Z(Q)$ for its top augmented integral cycle group. Choose any element $e$ of the ground set, let $\mathcal C_e$ be the set of circuits through $e$, and for $C\in\mathcal C_e$ write $A_C=C\setminus\{e\}$. Put $s_D(x)=(-1)^{|\{y\in D:y<x\}|}$ for the insertion sign and let $\sigma(A,T)$ be the sign of putting the concatenated ordered lists of $A$ and $T$ into increasing order. The following integral linear maps are inverses.
 
 $$
 Z(Q)\ \cong\ \bigoplus_{C\in\mathcal C_e}Z(Q/C),\qquad
@@ -1429,13 +1429,13 @@ z\longmapsto (w_C)_C,\qquad
 $$
 
 The chain $w_C$ on $Q/C$ has coefficient at each basis $T$ given by
-$w_C(T)=s_{A_C}(e)\,\sigma(A_C,T)\,z(A_C\cup T)$, with zero coefficients at other faces. If $Q/C$ has rank zero, $T$ is the empty face. If $e$ is a coloop, every basis contains $e$, $\mathcal C_e$ is empty, and the cycle group is zero.
+$w_C(T)=s_{A_C}(e)\,\sigma(A_C,T)\,z(A_C\cup T)$, with zero coefficients at other faces. If $Q/C$ has rank zero, $T$ is the empty face. If $e$ is a coloop, every basis contains $e$, $\mathcal C_e$ is empty, and the cycle group is zero. If $e$ is a loop, the only circuit through it is $\{e\}$, whose simplex boundary is the empty face.
 
 To verify the cycle condition on $w_C$, take a ridge $D$ in the contraction and put $R=A_C\cup D$. For $x\notin C\cup D$ we have
 $s_D(x)\sigma(A_C,D\cup\{x\})=(-1)^{|A_C|}\sigma(A_C,D)s_R(x)$.
 The elements of $A_C$ before and after $x$ account for the exponent $|A_C|$. The basis condition in the contraction is equivalent to that obtained by adjoining $A_C$ and testing for a basis of $Q$. Inserting $e$ produces a dependent set containing $C$, so its chain coefficient vanishes. Thus the coefficient of $\partial w_C$ at $D$ is the coefficient of $\partial z$ at $R$ times one common sign, and hence is zero. Conversely the signed product rule gives a cycle $\partial[C]\wedge w_C$ for each summand.
 
-A basis omitting $e$, say $F$, uniquely determines its summand. Its extension $F\cup\{e\}$ has fundamental circuit $C$, so $F=A_C\cup(F\setminus C)$. Reading the coefficient and forming the join each contribute the same sign on that face, giving a product of one. For a basis containing $e$, the zero boundary equation on the ridge obtained by deleting $e$ uniquely recovers its coefficient from those at bases omitting $e$. The maps are therefore inverses on the entire cycle group.
+A basis omitting $e$, say $F$, uniquely determines its summand. Its extension $F\cup\{e\}$ has fundamental circuit $C$, so $F=A_C\cup(F\setminus C)$. Reading the coefficient and forming the join each contribute the same sign on that face, giving a product of one. For a basis containing $e$, the zero boundary equation on the ridge obtained by deleting $e$ uniquely recovers its coefficient from those at bases omitting $e$. The maps are therefore inverses on the entire cycle group. [Circuit decomposition of top integral cycles](lean:D5/S3/Combinatorics/Matroids/CircuitCycleDecomposition.circuit_cycle_decomposition)
 
 This gives the support overlap for normalized cycles by a short derivation. When their first fundamental circuits at the least nonloop differ, every basis in their common support contains $e$. When both first circuits are $C$, each contracted basis $T$ contributes $|C|$ joined coordinates, and the reordering sign squares to one in the coefficient product. The integral coefficient inner product over all bases is therefore the contracted inner product times $|C|\epsilon_B\epsilon_{B'}$. Distinct circuits can still contribute an inner product through coordinates containing $e$. In the rank-one matroid on three nonloops, $[2]-[1]$ and $[3]-[1]$ belong to distinct circuits at $e=1$ and have inner product $1$.
 
