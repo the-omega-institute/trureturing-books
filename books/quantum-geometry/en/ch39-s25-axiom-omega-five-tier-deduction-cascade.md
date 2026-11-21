@@ -106,7 +106,7 @@ In this remark the hypotheses are labelled `MODEL` and what is derived under the
 Prime sagitta takes off on the critical ridge card: Tier 4 shows the staircase of prime sagittas bounded on $\sigma > \frac{1}{2}$ and crossing the cyan reference ring into double-logarithmic growth right at $\sigma = \frac{1}{2}$ (`riemann_zeta_dirichlet_sum_eq_euler_product`, `golden_right_half_strip_implies_rh`, and `schur_quadratic_is_least` `LEAN ✓`, the Mertens estimate is the frozen statement `Mertens.E₂p.bound'` cited by the text, with the numerical check of its error `NUM`).
 :::
 
-**The arithmetic input to Tier 4.** Alpöge's final declaration `riemannHypothesis : RiemannHypothesis` establishes Mathlib's Riemann hypothesis. Sutherland audited the axioms of all five headline theorems and used con-leche to compare the proofs with independently stated challenges. A separate nanoda run reports successful replay of the proof dependencies of all five. The axiom audits list `propext`, `Classical.choice` and `Quot.sound` for RH. We use zero localization as an externally checked input. The deductions relating the zeros to this chapter's comparison readings are by hand. [Final declarations](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean) · [Sutherland's replay and statement comparison](https://math.mit.edu/~drew/grh/) · [Independent axiom audit and replay log](https://github.com/Infatoshi/rh-verification-receipts/blob/ac99f18cef21952de094234fab95db342ed16638/VERIFICATION_RESULT.txt) · [Joint statement by the Lean and Mathlib communities, 2026-11-21](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/)
+**The arithmetic input to Tier 4.** Alpöge's final declaration `riemannHypothesis : RiemannHypothesis` proves the classical Riemann hypothesis as stated in Mathlib. On November 21, 2026, the Lean and Mathlib communities confirmed the correctness of the proof and the identity of its conclusion with Mathlib’s statement. The Lean FRO and the Mathlib Initiative endorsed their joint statement. Sutherland audited the axioms of all five headline theorems and used con-leche to compare the proofs with independently stated challenges. A separate nanoda run reports successful replay of the proof dependencies of all five. The axiom audits list `propext`, `Classical.choice` and `Quot.sound` for RH. The chapter uses the localization form `riemannZeta_eq_zero_re`, which states that every nontrivial zero of the Riemann zeta function lies on the line $\Re s=1/2$. The deductions relating the zeros to this chapter's comparison readings are by hand. [Joint statement by the Lean and Mathlib communities](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/) · [Mathlib proposition](https://github.com/leanprover-community/mathlib4/blob/0df444a360eaa60ab8c11dca51a86af692955474/Mathlib/NumberTheory/LSeries/RiemannZeta.lean#L185) · [Zero localization statement](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Statements.lean#L3) · [Final declarations](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean) · [Sutherland's replay and statement comparison](https://math.mit.edu/~drew/grh/) · [Independent axiom audit and replay log](https://github.com/Infatoshi/rh-verification-receipts/blob/ac99f18cef21952de094234fab95db342ed16638/VERIFICATION_RESULT.txt)
 
 **From zeros to Schur pivots.** Take $N$ distinct nodes $s_j$ in the half-plane $\operatorname{Re}s>1/2$ and set $G_{jk}=K_\epsilon(s_j,s_k)$. In the [zero expansion of §31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-31-3), let $m_\rho$ be the multiplicity of each distinct zero $\rho$. For any coefficients $c_j\in\mathbb C$,
 
@@ -250,6 +250,35 @@ Omit rows of weight zero. For every remaining pair of inputs, each factor in the
 :::
 
 The two-phase encodings above have $n=2$, giving the sharp coefficient $9/4$. For probability weights and unit phases, $L(A)$ and $L(B)$ are each one minus the purity of the corresponding mixture. Sharpness holds over all finite unit-phase ensembles. Any particular choice of zeros and weights inherits the inequality.
+
+If each complex coordinate may range over the disk of radius $R$, the same formulas define $L(A)$ and $L(B)$ as algebraic deficits. The zero-ordinate encoding has unit-modulus phases, so its probability ensembles satisfy the purity bound for $R=1$.
+
+Consider one row $(t,t)$ of weight one, with $t$ real and nonnegative. Both relative coordinates equal $x=t^2$. The two losses are $1-(1+2x)^2/9$ and $1-(1+x)^2/4$. For $x\ne1$ the ratio of the second to the first is $9(3+x)/[16(2+x)]$. Both losses change sign as $t$ passes through one. The choice of disk radius therefore affects the allowable lower coefficient.
+
+::: {.theorem #thm-ch39-phase-pair-loss-floor title="Sharp lower coefficient for two coordinates on a disk" lean="D5/S3/Quantum/PureState/PhasePairLossFloor.mixed_lower_coefficient_iff"}
+Use the two-coordinate functions $A,B,L$ above, and fix real numbers $R\ge0$ and $C$. Consider every finite ensemble with real weights satisfying $p_i p_j\ge0$ and with both coordinates of every nonzero-weight row bounded in modulus by $R$. The inequality $C L(A)\le L(B)$ holds for all these ensembles if and only if the following condition holds.
+
+$$
+\begin{cases}
+C\le 9(3+R^2)/[16(2+R^2)],&0\le R\le1,\\
+C=3/4,&R>1.
+\end{cases}
+$$
+
+:::
+
+::: {.proof}
+For a pair of nonzero-weight rows, let $u_1,u_2$ denote the relative coordinates and put $x=(\Re u_1+\Re u_2)/2$. When $y=R^2\le1$ we have $x\le y$. At the endpoint coefficient $c=9(3+y)/[16(2+y)]$, direct expansion gives
+
+$$
+(1-B)-c(1-A)=
+\frac{(1-x)(y-x)}{4(2+y)}
++\frac{(\Re u_1-\Re u_2)^2}{16}
++\frac{c(\Im u_1+\Im u_2)^2}{9}.
+$$
+
+All three terms are nonnegative. The relative coordinates lie in the unit disk, so $A\le1$ and every smaller coefficient also works. For relative coordinates of arbitrary modulus, the same expansion at $c=3/4$ gives $(1-x)^2/12$ as the first term, with the two remaining squares still nonnegative. Summing with weights $p_i p_j$ gives the ensemble inequality. In the single-row example above, $t=R$ attains the endpoint ratio when $R<1$. At $R=1$, taking $t$ to one from below forces $C\le3/4$. For $R>1$ we can also approach from above, where the change of sign forces $C\ge3/4$. The full proof is checked by the Lean kernel.
+:::
 
 **What can the same spectrum tell us about the Tier 3 couplings?** Use the [one-loop inputs of §33.9](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-11-2), with $A_i=\alpha_i^{-1}(M_Z)$ and $b=(41/10,-19/6,-7)$. For sector thresholds $\Delta_i$, matching at a common scale $\mu$ requires $A_i=a+t b_i+\Delta_i$, where $a=\alpha_U^{-1}$ and $t=\log(\mu/M_Z)/(2\pi)$. Eliminating $a,t$ gives
 
