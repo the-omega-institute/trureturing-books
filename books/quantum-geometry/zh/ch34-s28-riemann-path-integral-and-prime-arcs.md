@@ -512,7 +512,7 @@ $$
 取整数 $m\ge3$ 及模 $m$ 的可逆剩余类 $a$。在分圆域 $\mathbb Q(\zeta_m)$ 中，记 $\sigma_a(\zeta_m)=\zeta_m^a$，$\Pi_a(t)$ 为不超过 $t$、在此扩张中非分歧且 Frobenius 为 $\sigma_a$ 的有理素数个数。令 $Q$ 为此 Galois 群所有特征标的原始导子的最大值。记 $\operatorname{Li}(t)=\int_2^t du/\log u$。
 
 ::: {.theorem #thm-ch31-cyclotomic-tz title="带例外零点项的分圆素数计数" status="written-proof" proof="pf-ch31-cyclotomic-tz" doi="10.2140/ant.2019.13.1039" source="Theorems 1.4 and 3.3, pp. 1042 and 1052" request="https://github.com/the-omega-institute/trureturing-requests/issues/455"}
-存在绝对有效常数 $A,c_2,c_3,s>0$。若无例外零点，取 $F(t)=\operatorname{Li}(t)$。若有，例外实特征标唯一，记为 $\chi$，其例外零点为 $\beta=1-\lambda/\log Q$，其中 $sQ^{-2}\le\lambda<1/8$。此时取 $F(t)=\operatorname{Li}(t)-\chi(a)\operatorname{Li}(t^\beta)$。对每个 $m,a$ 和每个 $t\ge Q^{c_2}$ 都有
+存在绝对有效常数 $A,c_2,c_3,s>0$。这里的例外零点是某个实特征标对应的原始 Dirichlet $L$ 函数在 $0<\lambda<1/8$、$\beta=1-\lambda/\log Q$ 范围内的实零点。若无例外零点，取 $F(t)=\operatorname{Li}(t)$。若有，例外实特征标唯一，记为 $\chi$，其例外零点为 $\beta=1-\lambda/\log Q$，其中 $sQ^{-2}\le\lambda<1/8$。此时取 $F(t)=\operatorname{Li}(t)-\chi(a)\operatorname{Li}(t^\beta)$。对每个 $m,a$ 和每个 $t\ge Q^{c_2}$ 都有
 
 $$
 \left|\varphi(m)\Pi_a(t)-F(t)\right|
@@ -522,7 +522,7 @@ $$
 :::
 
 ::: {.proof #pf-ch31-cyclotomic-tz}
-在 Thorner 与 Zaman 的定理 1.4 中取 $L=\mathbb Q(\zeta_m)$，基域为 $\mathbb Q$，交换子群取整个 $G=(\mathbb Z/m\mathbb Z)^\times$，共轭类取 $\{\sigma_a\}$。于是固定域为 $\mathbb Q$，其判别式和次数均为 $1$。原文式 (1–11)、(3–1) 中的两个导子参数都化为这里的 $Q$，密度系数为 $1/\varphi(m)$。每个原始导子整除 $m$，而 $m\ge3$ 时群有非平凡特征标，其原始导子至少为 $3$，所以 $3\le Q\le m$。定理 1.4 给出所写相对误差和例外项，定理 3.3 给出 $\lambda\ge sQ^{-2}$。两者的常数均绝对有效。[原刊定理 1.4](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=5) · [原刊定理 3.3](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=15)
+在 Thorner 与 Zaman 的定理 1.4 中取 $L=\mathbb Q(\zeta_m)$，基域为 $\mathbb Q$，阿贝尔子群取 $H=G=(\mathbb Z/m\mathbb Z)^\times$，共轭类取 $\{\sigma_a\}$。于是固定域为 $\mathbb Q$，其判别式和次数均为 $1$。原文式 (1–11)、(3–1) 中的两个导子参数都化为这里的 $Q$，密度系数为 $1/\varphi(m)$。每个原始导子整除 $m$，而 $m\ge3$ 时群有非平凡特征标，其原始导子至少为 $3$，所以 $3\le Q\le m$。定理 1.4 给出所写相对误差和例外项，定理 3.3 给出 $\lambda\ge sQ^{-2}$。两者的常数均绝对有效。Jesse Thorner and Asif Zaman, “A unified and improved Chebotarev density theorem,” *Algebra & Number Theory* **13**(5) (2019), 1039–1068. [DOI](https://doi.org/10.2140/ant.2019.13.1039) · [原刊定理 1.4](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=5) · [原刊定理 3.3](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=15)
 :::
 
 **手工推导。** 存在绝对有效常数 $c,K,D_0>0$，使每个 $m\ge3$、每个可逆类 $a$ 和每个 $D\ge\max\{D_0,(4m)^K\}$ 都满足下界
