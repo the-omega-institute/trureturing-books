@@ -170,7 +170,7 @@ With the coefficient of $v_2$ set to $1$, the other coefficients follow from $r(
 
 **Do the three low-energy readings determine the matching scale? (One-loop model, manual derivation.)** Take two heavy complex scalar multiplets, $(4,2,1)$ and $(6,1,1)$, in the Pati–Salam model above. In hypercharge, weak and colour order, their contributions to the one-loop coefficients are $D=(2/15,2/3,1/3)$ and $C=(2/15,0,1/3)$, respectively. For example, the second multiplet is a weak singlet, so $C_2=0$. Let $M_D,M_C$ be the common masses within the respective multiplets and write $k=M_D^2/\mu^2$, $c=M_C^2/\mu^2$. Hold the ratio of the intermediate scale to $\mu$ and all other dimensionless thresholds fixed. The masses with fixed ratios therefore move with $\mu$. In the coordinates $2\pi A_i$, the first multiplet contributes $D_i\log(\mu/M_D)=-D_i\log k/2$ to the thresholds, with the analogous term for the second.
 
-Compare two parameter choices. Write $a'=2\pi\alpha_U^{-1}(\mu)$, let $\delta$ denote the new value minus the old one, and set $x=\log(\mu_{\rm new}/\mu_{\rm old})$, $y=\delta\log k$, $z=\delta\log c$. The three low-energy readings agree component by component exactly when
+Compare two parameter choices. Write $a'=2\pi\alpha_U^{-1}(\mu)$, let $\delta$ denote the new value minus the old one, and set $x=\log(\mu_{\mathrm{new}}/\mu_{\mathrm{old}})$, $y=\delta\log k$, $z=\delta\log c$. The three low-energy readings agree component by component exactly when
 
 $$
 \delta a'\,(1,1,1)+x b-\tfrac12 yD-\tfrac12 zC=0.
