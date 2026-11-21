@@ -100,6 +100,24 @@ $$
 
 **在何处记录相消，决定剩余的相位。** 设 $d_p$ 是起点 $p$ 的出度，把相同起点的振幅用 $B|p,q\rangle=|p\rangle/\sqrt{d_p}$ 合并。由于 $BB^*=I_9$，$K=I-B^*B$ 投影到相消分量。六个出度为一的起点没有这种分量。在其余三个起点，每处只有一条相消射线，由 $(|p,q\rangle-|p,r\rangle)/\sqrt2$ 张成。规定读出方式（`MODEL`）：测量在这三条射线上分别登记起点，在 $I-K$ 上给出同一个结果。九维起点空间承载一份正则表示及一份三点置换表示。两者的和从 $H$ 中扣除，留下 $\ker B\simeq\mathrm{sgn}\oplus V$，故相消分量在 $M_-$ 和 $M_0$ 中各选出一条直线。保持三个射线结果的内部变换在每条射线上乘以一个相位。坐标置换传递地交换三条射线，且与内部变换对易，三个相位必须相等。若测量仅区分 $K$ 与 $I-K$，两条重数直线上的相位可独立变化。
 
+::: {.theorem #thm-ch39-rank-one-projection-commutator title="秩一算子与正交投影的对易子范数" lean="D5/S3/HilbertOperators/RankOneProjectionCommutator.norm_rankOne_projection_commutator"}
+设 $H$ 是任意实或复半赋范内积空间，$P:H\to H$ 是关于内积对称的连续线性幂等算子。对任意 $v\in H$，记 $R_v x=\langle v,x\rangle v$，内积对第二个变量线性。则
+
+$$
+\norm{R_vP-PR_v}=\norm{Pv}\,\norm{v-Pv}.
+$$
+
+左端取算子范数，右端取向量半范数。
+:::
+
+::: proof
+令 $a=Pv$、$b=v-Pv$。利用 $P$ 的对称性与幂等性，对易子把 $x$ 送到 $\langle a,x\rangle b-\langle b,x\rangle a$。这两项正交，两个内积分别只取 $Px$ 与 $x-Px$ 的分量。逐项用柯西–施瓦茨不等式，再用勾股恒等式合并两个分量的平方，得到算子范数的上界 $\norm{a}\norm{b}$。若 $\norm{a}>0$，在 $a$ 上测试时输出为 $\norm{a}^2 b$，给出下界。若 $\norm{a}=0$，上界已给出等号。完整证明由 Lean 内核检查。
+:::
+
+三条局部相消射线彼此正交。坐标置换传递地交换它们，且在符号直线的单位向量 $s$ 上只改变符号，所以 $s$ 在每条射线上的投影长度平方都是 $1/3$。令 $P$ 正交投影到所选 $m$ 条射线的张成空间，则 $\norm{Ps}^2=m/3$，$\norm{s-Ps}^2=(3-m)/3$。在相消空间 $\ker B$ 上取酉算子 $U=zR_s+w(I-R_s)$，其中 $\lvert z\rvert=\lvert w\rvert=1$，$z$ 和 $w$ 分别是符号直线和标准分量上的相位。
+
+单位输入 $x\in\ker B$ 的事件概率差为 $\langle x,(U^*PU-P)x\rangle$。由自伴算子的变分原理，该差值的绝对值在单位输入上的上确界等于 $\norm{U^*PU-P}$。左乘酉算子保持范数，故由 $U^*PU-P=U^*(PU-UP)$ 与 $PU-UP=(z-w)(PR_s-R_sP)$，得上确界为 $\lvert z-w\rvert\sqrt{m(3-m)}/3$。对 $m$ 取最大值，在 $m=1$ 或 $2$ 时得到 $\frac{\sqrt{2}}{3}\lvert z-w\rvert$（应用 [@thm-ch39-rank-one-projection-commutator] 的有限维手工推导）。
+
 记这个共同相位为 $w^{-3}$。群 $G$ 中保持上述读出的元素恰有以下形式，其中 $U_3\in SU(3)$、$U_2\in SU(2)$、$|w|=1$。
 
 $$
@@ -156,6 +174,32 @@ a&=1+E+L-X-Y,\qquad K^2=\frac{F}{q(Y-X)}.
 $$
 
 区间计算表明，三个 CKM 混合角 $\theta_{12},\theta_{23},\theta_{13}$ 和 CP 相位 $\delta$ 同时落入各自的一倍边际区间。这是在给定质量谱下的样本内相容性结果。物理推导还须独立确定质量动力学、匹配能标与所取零点。[给定质量的拟合及区间证书](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070186249)
+
+沿 $(0,1,4)\to(2,2,3)\to(2,3,2)\to(0,1,4)$ 走一圈，三段弦长的平方依次是 $6,2,12$。这三个点位于平方半径为 $17$ 的九点贝伦德球壳上，在 $\{0,\ldots,4\}^3$ 内，壳点恰为 $(0,1,4)$ 与 $(2,2,3)$ 的坐标排列。在每条边上赋予 $U(1)$ 相位，反向取复共轭。逐点改相位会改变边上的读数，但沿闭路相乘时这些改动彼此抵消。平方弦长截断在 $2$ 时，图中只有一个内三角环和三条外侧线段；纳入 $6$ 后，每条外侧线段的两个端点接到同一个内点，增添三个外三角环。这些三角环生成整个环空间，每个三角环都可由某个坐标换位反向。因此，若联络的规范等价类在整个 $S_3$ 下不变，每个生成环的乘积 $h$ 都满足 $h=h^{-1}$，只能是 $\pm1$。下一个平方弦长是 $12$。对该长度的边，从坐标和为 $5$ 的外点到坐标和为 $7$ 的内点赋相位 $e^{i\beta}$，其余长度的边取 $+1$。置换保持坐标和，于是仍有完整的 $S_3$ 对称，而开头那条闭路的乘积为 $e^{-i\beta}$。这就是该壳首次容许与复共轭有别的环相位的截断。[弦长与标量联络的分类](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070573753)
+
+在截断 $12$ 的图上作一个有限动力学假设。各边跃迁幅的模相同，单粒子哈密顿量 $H=-M$，其中 $M$ 是磁邻接矩阵，变分遍及所有 $S_3$ 不变的标量联络规范类。另假定三个互不作用的无自旋费米子填充三个最低单粒子模式。以单边跃迁幅的绝对值为能量单位，基态能量 $\mathcal E$ 等于磁邻接矩阵最大三个本征值之和的负数。书面证明按置换对称性分块，并比较四个符号扇区。获胜扇区的外侧配对边为 $+1$，内三角形边为 $-1$，平方弦长 $6$ 的边为 $+1$，平方弦长 $12$ 的边沿坐标和 $5$ 到 $7$ 的方向仍为 $e^{i\beta}$。在此扇区，记 $x=\cos\beta$，$s(x)$ 为标准表示块的最大本征值，则
+
+$$
+-\mathcal E(\beta)=\frac{-1+\sqrt{25+16x}}{2}+2s(x).
+$$
+
+这个和是 $x$ 的严格凹函数，唯一最大点在 $x=-0.55826996\ldots$。其余三个扇区的本征值和均有更低的上界。极小值对应 $\beta=\pm2.1630954\ldots$（模 $2\pi$）。因内边取负，开头的三角环乘积为 $-e^{-i\beta}$，主值角为 $\pm0.9784972\ldots$。选取极小值只用球壳与跃迁假设，未用夸克观测；两个复共轭极小态等能，动力学未选定符号。[三费米子能量的证明与证书](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070661311)
+
+再作一项模型对应，取 $\beta=\gamma\log(3/2)$。已证的经典黎曼猜想给出非平凡零点 $\rho=\tfrac12+i\gamma$。对任一非零整数频率 $m$，$(3/2)^{|m|}$ 不是整数素数幂，Landau 的零点和公式给出 $\sum_{0<\gamma\le T}e^{im\beta}=O_m(\log T)$。以 $N(T)\sim T\log T/(2\pi)$ 归一后，Weyl 判别法给出圆周等分布，零点按正纵坐标递增并计重数。因此固定能量窗的极限比例等于其对应相位弧长占全圆的比例。取 $\mathcal E-\mathcal E_{\min}\le10^{-4}$，两个相位区间合计占 $1.24808006\%$。逐点区间检验给出 $\sin\beta>0$ 与 $\sin\beta<0$ 两支入窗的最早零点分别为第 $101$ 和第 $242$ 个。[RH 的零点定位](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean#L6) · [Landau 公式](https://doi.org/10.1007/BF02418819) · [低能窗与零点证书](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070727925)
+
+前面四个能标的排除针对固定三次记录的四十八标签模型。为检验球壳低能条件，先看一个能通过同能标检验的对照。修改后的模型沿用前面的实箭头形矩阵结构，在两扇区都用可见度 $v=15/16$，使 $\xi_u=-v\cos\phi_2$、$\xi_d=-v\cos\phi_3$，并将 CKM 读出的相对单态相位加倍为 $2(\phi_3-\phi_2)$。共同的 $A$ 含四十八标签的接受因子，两个扇区各自的 $\epsilon$ 来自十二弧的随机记录次数。
+
+$$
+\begin{aligned}
+A&=\frac{8}{9\cdot48^2},\\
+\epsilon_u&=\frac{5/12^3+1/12^4}{6},\qquad
+\epsilon_d=\frac{1/12+26/12^2}{27}.
+\end{aligned}
+$$
+
+记录概率在查看 $1\,\mathrm{TeV}$ 的局部拟合后选定。以表 2 的重味中心值 $y_t=0.8616$、$y_b=0.01401$ 定标，在第 $20{,}564{,}893{,}302$ 个零点，由四个质量比换算出的轻味和中味汤川耦合、三个 CKM 混合角及 CP 相位，均落入同一能标各自的一倍边际区间。[随机次数模型与相容零点证书](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070525892) · [Antusch、Hinze 与 Saad，表 2](https://arxiv.org/html/2510.01312v2#Sx1.T2)
+
+联合检验令球壳的 $\beta$ 等于未加倍的 $\phi_3-\phi_2$，并固定上述随机记录规则。凡能同时匹配 $1\,\mathrm{TeV}$ 六个汤川耦合各自一倍边际区间的相位，都须满足 $\mathcal E-\mathcal E_{\min}>0.002$。区间证书允许两个扇区独立定标，让共同的平面权重 $q$ 在 $[0,1]$ 内自由变化，并用迹归一后的行列式与二阶主子式之和检验质量谱。排除覆盖连续相位，因而也排除用第 $101$ 或第 $242$ 个零点作同能标直接匹配。这一能隙针对等强跃迁、三粒子填充、直接共用相位和这组固定读出规则组成的联合模型。[全相位质量排除证书](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070727925)
 
 ::: {.remark #rem-ch39-axiom-omega-field-hypotheses-and-limits title="场论假设及其界限"}
 本注记中各项假设标 `MODEL`，在这些假设下推出的结论标 `手工推导`；场论部分整体是假设性的。
