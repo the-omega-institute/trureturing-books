@@ -491,7 +491,8 @@ $$
 
 特别地，$A_{\vartheta,b}(Y)=2(b-1)\ln Y+O(1)$。同一个常数也适用于变动的 $b>1$。Zhao 的式 (14) 把这里的 $Q_\vartheta$ 写成第一 Mertens 误差的累积积分及端点项。这里的主项来自对该尾项作一次带权窗口积分，并以 RH 为前提。[Zhao，式 (14)](https://arxiv.org/html/2411.18903v2#S2.E14)
 
-**临界线情形的端点余项。** 在 RH 条件下，把素数尾项负部质量减去主项，记作 $E(a,B)=N(a,B)-2\ln(B/a)$。这里 $N(a,B)=\int_a^B\max(-Q_\vartheta(x),0)x^{-1/2}\,dx$。按重数枚举全部非平凡零点，记 $\rho_k=1/2+i\gamma_k$、$c_k=1/[\rho_k(1-\rho_k)]$。令 $\phi(u)_k=e^{i\gamma_k u}$，并令 $H$ 为这条实参数轨道在单位圆乘积空间中的闭包。在 $H$ 上定义连续函数
+::: {.theorem #thm-ch31-rh-prime-window-remainder title="临界线情形的端点余项与簇集" lean="D5/S3/Weil/Mertens/IntegratedExplicit/RHPrimeWindowRemainder.prime_window_remainder_of_rh"}
+在 RH 条件下，把素数尾项负部质量减去主项，记作 $E(a,B)=N(a,B)-2\ln(B/a)$。这里 $N(a,B)=\int_a^B\max(-Q_\vartheta(x),0)x^{-1/2}\,dx$。按重数枚举全部非平凡零点，记 $\rho_k=1/2+i\gamma_k$、$c_k=1/[\rho_k(1-\rho_k)]$。令 $\phi(u)_k=e^{i\gamma_k u}$，并令 $H$ 为这条实参数轨道在单位圆乘积空间中的闭包。在 $H$ 上定义连续函数
 
 $$
 P(h)=\operatorname{Re}\sum_k\frac{c_k h_k}{i\gamma_k}.
@@ -515,8 +516,11 @@ $$
 C(a)+P(H),\qquad
 C(a)=\int_{\ln a}^\infty e(u)\,du-P\bigl(\phi(\ln a)\bigr).
 $$
+:::
 
-零点虚部有远离零的一致下界，因而逐项积分后的系数仍绝对可和。对数坐标下，积分的两个端点给出同一个 $P$ 的差。剩下的误差绝对可积，所以其在任何 $[\ln a,\ln B]$ 上的绝对积分都受整个左端尾积分控制。对固定 $a$，剩余积分趋于常数。实际轨道在任意晚的时刻逼近闭包中的每个相位，因而实现所给区间的每个簇值。相位闭包紧且连通，而沿轨道的原函数在零时刻有严格正的斜率，因此区间两端不同。结论只用实际联合相位关系。
+::: proof
+零点虚部有远离零的一致下界，因而逐项积分后的系数仍绝对可和。对数坐标下，积分的两个端点给出同一个 $P$ 的差。剩下的误差绝对可积，所以其在任何 $[\ln a,\ln B]$ 上的绝对积分都受整个左端尾积分控制。对固定 $a$，剩余积分趋于常数。实际轨道在任意晚的时刻逼近闭包中的每个相位，因而实现所给区间的每个簇值。相位闭包紧且连通，而沿轨道的原函数在零时刻有严格正的斜率，因此区间两端不同。结论只用实际联合相位关系。 完整证明由 Lean 内核检查。
+:::
 
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
