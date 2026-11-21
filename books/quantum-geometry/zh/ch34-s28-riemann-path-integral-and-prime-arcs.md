@@ -318,15 +318,23 @@ $Q_{\vartheta}(z)-Q_{\vartheta}(x)\le\ln(z/x)+\vartheta(x)(1/z-1/x)$。
 
 因此，只要已知窗口预算严格小于 $r^3\sqrt{x}$，就可以排除该内点的深度 $4r^2$。两侧余量决定可用的 $r$。Landau 论证所需的任意远小预算窗口仍需独立的算术估计。
 
-**怎样把频繁出现的正平均转化为每个远处窗口的下界？** 沿用完全曼戈尔特余项 $U$ 和素数负部质量 $N$，对实数 $v$ 记 $H(v)=\int_{v-\ln 2}^v U(e^t)\,dt$。假设存在实序列 $u_n\to+\infty$，满足 $u_{n+1}/u_n\to1$，并且对某些 $c>0$、$\beta>1/2$ 和 $M\in\mathbb R$，充分大的 $n$ 都满足 $H(u_n)\ge c e^{\beta u_n}/u_n^M$。那么对每个 $\varepsilon>0$，充分大的 $Y$ 都有
+::: {.theorem #thm-positive-average-prime-window title="正平均序列给出每个充分晚的窗口下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.eventual_prime_window_lower_of_log_frequency"}
+沿用完全曼戈尔特余项 $U$ 和素数负部质量 $N$，对实数 $v$ 记 $H(v)=\int_{v-\ln 2}^v U(e^t)\,dt$。给定实序列 $u_n\to+\infty$，满足 $u_{n+1}/u_n\to1$，并且对某些 $c>0$、$\beta>1/2$ 和 $M\in\mathbb R$，充分大的 $n$ 都满足 $H(u_n)\ge c e^{\beta u_n}/u_n^M$。那么对每个 $\varepsilon>0$，充分大的 $Y$ 都有
 
 $$
 N(Y,Y^{3/2})\ge Y^{(3/2)(\beta-1/2)-\varepsilon}.
 $$
+:::
 
-写 $y=\ln Y$。固定 $1<k<3/2$，在足够大的指标后取首个满足 $u_n\ge ky$ 的指标。前一项小于 $ky$，相邻项比例最终小于 $3/(2k)$，所以 $ky\le u_n\le3y/2$。当 $(k-1)y\ge\ln 2$ 时，$[e^{u_n}/2,e^{u_n}]$ 全部落在 $[Y,Y^{3/2}]$ 内。用 $U(x)=-xQ(x)$ 换元后，$H(u_n)=-\int_{e^{u_n}/2}^{e^{u_n}}Q(x)\,dx$。素数幂修正给出 $Q_\vartheta\le Q$，而短区间上 $\sqrt x\le e^{u_n/2}$，因此 $H(u_n)\le e^{u_n/2}N(Y,Y^{3/2})$。取 $k$ 充分接近 $3/2$，留出任意小的指数损失来吸收 $c$ 和 $u_n^M$。
+::: proof
+写 $y=\ln Y$。固定 $1<k<3/2$，在足够大的指标后取首个满足 $u_n\ge ky$ 的指标。前一项小于 $ky$，相邻项比例最终小于 $3/(2k)$，所以 $ky\le u_n\le3y/2$。当 $(k-1)y\ge\ln 2$ 时，$[e^{u_n}/2,e^{u_n}]$ 全部落在 $[Y,Y^{3/2}]$ 内。用 $U(x)=-xQ(x)$ 换元后，$H(u_n)=-\int_{e^{u_n}/2}^{e^{u_n}}Q(x)\,dx$。素数幂修正给出 $Q_\vartheta\le Q$，而短区间上 $\sqrt x\le e^{u_n/2}$，因此 $H(u_n)\le e^{u_n/2}N(Y,Y^{3/2})$。取 $k$ 充分接近 $3/2$，留出任意小的指数损失来吸收 $c$ 和 $u_n^M$。 完整证明由 Lean 内核检查。
+:::
 
-连接零点还需要解析前提。Radziejewski 的对数频率振荡定理给出交替序列，满足 $\ln x_{n+1}/\ln x_n\to1$，并给出带对数损失的振幅下界。要从 $\operatorname{Re}(\rho)>1/2$ 的零点取得本段所需的正平均，仍要对这个实际平均的 Mellin 变换逐项建立定理的弱有界性和实轴主项条件。[Radziejewski，定理 3.2](https://doi.org/10.4064/aa163-2-7)
+**从 ζ 零点取得正平均。** 把 $U$ 在 $0<x<1$ 上置零，所得函数记为 $U_0$。令 $H_*(x)=\int_1^2 U_0(x/v)\,dv/v$，则 $x>2$ 时 $H_*(x)=H(\ln x)$。在 $\operatorname{Re}(s)>1$ 上交换两个绝对收敛的积分，得到 $H_*$ 的 Mellin 变换 $k(s)\Phi_*(s)$，其中 $\Phi_*$ 是在 $1$ 处补值的完全曼戈尔特变换，$k(s)=(1-2^{-s})/s$。$H_*$ 在对数坐标中局部 Lipschitz，在 $x<1$ 时为零，并满足 $O(x\ln^2 x)$ 界。由于 $|2^{-\rho}|=2^{-\operatorname{Re}(\rho)}<1$，这个平均保留所有非平凡零点处的极点。每个极点的实部都至多是 $H_*$ 的增长横坐标，否则原 Mellin 积分会在该点全纯。
+
+在 $\operatorname{Re}(s)>-3/4$ 上使用亚纯延拓，取弱有界性条件中的左端 $\sigma_0=-1/2$。这样所有非平凡零点都计入单位高度区间的重数和，Riemann–von Mangoldt 公式将该和控制在 $O(\ln t)$。局部的 $\zeta'/\zeta$ 公式给出零点倒距离和与 $O(\ln t)$ 余项。对 $\operatorname{Re}(s)\le2$，每个倒距离可用 $\exp(\sum_{|\operatorname{Im}\rho-t|\le1} m_\rho|\ln|s-\rho||)$ 控制，右侧半平面则用绝对收敛的 Dirichlet 级数。乘上 $k(s)$ 和 $1/[s(s-1)]$ 后仍满足振荡定理所需的竖向界。从 $-1/4$ 起绕实轴奇点的围道只需计入 $0$ 处的简单极点，所得主项是常数。[Srinivas，引理 3 和 4](https://www.impan.pl/shop/en/publication/transaction/download/product/83372?download.pdf)
+
+给定实部为 $\beta>1/2$ 的非平凡零点，Radziejewski 的定理给出交替振荡，幅度下界为常数乘 $x^\beta/(\ln x)^M$。有界主项可被吸收，偶数子序列给出正平均，两个相邻对数比的乘积仍趋于 $1$。因此由 [@thm-positive-average-prime-window] 得到同一窗口下界。这一步使用文献中的振荡定理，Lean 定理的范围是从正平均序列到窗口质量。任意远处的小预算窗口仍需算术证明。[Radziejewski，定理 3.2](https://doi.org/10.4064/aa163-2-7)
 
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 
