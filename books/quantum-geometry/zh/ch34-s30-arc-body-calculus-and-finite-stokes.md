@@ -226,7 +226,7 @@ $$
 | $3$ | $0.2076389$ | $0.998930$ |
 | $4$ | $0.3687905$ | $0.997995$ |
 
-$\lambda_1$ 与第 2 款的闭式 $1+\tfrac{\gamma_{\mathrm{EM}}}{2}-\ln(2\sqrt\pi)$ 一致。第三列略小于 $1$。对单位圆上的旋子有 $1-\cos n\theta\le n^2(1-\cos\theta)$（手工推导：$\lvert\sin nx\rvert\le n\lvert\sin x\rvert$）；因此在“全部零点都在临界线上”的前提下，[@rem-ch34-li-criterion-sagitta-literature] 的公式给出 $\lambda_n\le n^2\lambda_1$（以黎曼猜想为前提的推导）。表中四个比值与这一不等式相容；这四个数都是正的，是数值事实，不是对一切 $n$ 的结论。
+$\lambda_1$ 与第 2 款的闭式 $1+\tfrac{\gamma_{\mathrm{EM}}}{2}-\ln(2\sqrt\pi)$ 一致。第三列略小于 $1$。对单位圆上的旋子有 $1-\cos n\theta\le n^2(1-\cos\theta)$（手工推导：$\lvert\sin nx\rvert\le n\lvert\sin x\rvert$）；结合外部已验证的 [@conj-riemann-hypothesis] 与 [@rem-ch34-li-criterion-sagitta-literature] 的零点和公式，对一切 $n\ge1$ 成立 $0<\lambda_n\le n^2\lambda_1$（详见下文 [@rem-ch34-li-curvature-wiener-and-sign-changes]，且实际上 $\lambda_n$ 仅按 $\frac{n}{2}\ln n$ 增长，故比值 $\lambda_n/(n^2\lambda_1)\to0$）。单看表中这四个数为正只是有限数值事实，本身并不能推出对一切 $n$ 的结论。
 
 **一组假想的离线四点。** 取 $\tfrac{7}{10}\pm5i$、$\tfrac{3}{10}\pm5i$（它们不是 ζ 的零点）。这四个点在 $s\mapsto1-s$ 与共轭下封闭，但 $\operatorname{Re}\sum\bigl[1-(1-\tfrac1\rho)^{n}\bigr]$ 在 $n=31$ 处第一次变负，值为 $-0.0943$；$n=31$ 处为负已冻结为 [`li_positivity_distinguishes_the_off_line_toy_spectrum`](lean:D5/S3/Zeros/ToySpectrum/OffLineToySpectrum.li_positivity_distinguishes_the_off_line_toy_spectrum)。换一组点，变负可以晚得多：把假四点放到 $\tfrac12\pm0.1\pm14i$，单独这四点的和在 $n=88$ 第一次为负；再配上前 $80$ 对真实零点组成一个有限族，在线零点的非负贡献把第一次为负推迟到 $n=8446$（值为 $-0.858$）。这是这一个有限族的数值结果，不是关于 $\zeta$ 的 $\lambda_n$ 的陈述，也不是一般规律。不过，有限族中只要有旋子离开闭单位圆盘，变负迟早会发生（[@rem-ch34-finite-rotor-li-criterion]）。
 :::
@@ -262,7 +262,7 @@ $$
 \Lambda_n=2-\frac{\alpha^n+\beta^n}{q^{n/2}},\qquad N_n=\bigl(q^{n/2}-1\bigr)^2+q^{n/2}\,\Lambda_n
 $$
 
-（手工推导）。这两个旋子的模长互为倒数，按 [@rem-ch34-finite-rotor-li-criterion]，“一切 $n$ 有 $N_n\ge\bigl(q^{n/2}-1\bigr)^2$”等价于 $\lvert u\rvert=1$，即 $\lvert a\rvert\le2\sqrt q$（手工推导）。后者就是哈塞定理（H. Hasse, 1936），所以这里的 Li 和全部非负，并且 $0\le\Lambda_n\le4$。例如 $y^2=x^3+x+1$ 在 $\mathbb{F}_7$ 上 $a=3$，$N_1,N_2,N_3=5,55,380$，与上式一致（数值核对）。这里的正性有独立的来源：同源的次数是正定二次型；它不是从累计矢高推出来的。数域情形没有已知的这样的来源。
+（手工推导）。这两个旋子的模长互为倒数，按 [@rem-ch34-finite-rotor-li-criterion]，“一切 $n$ 有 $N_n\ge\bigl(q^{n/2}-1\bigr)^2$”等价于 $\lvert u\rvert=1$，即 $\lvert a\rvert\le2\sqrt q$（手工推导）。后者就是哈塞定理（H. Hasse, 1936），所以这里的 Li 和全部非负，并且 $0\le\Lambda_n\le4$。例如 $y^2=x^3+x+1$ 在 $\mathbb{F}_7$ 上 $a=3$，$N_1,N_2,N_3=5,55,380$，与上式一致（数值核对）。这里的正性有独立的来源：同源的次数是正定二次型；它不是从累计矢高推出来的。数域情形没有已知的由同源次数给出的此类来源（关于 $\zeta$ 与狄利克雷 $L$-函数借助定正幺正群 $\theta$-提升链与 Bost 斜率正性不等式建立的外部证明，见 [@conj-riemann-hypothesis]）。
 :::
 
 回到 $\zeta$ 本身。经典的无零点论证也依赖一个累计余矢高的正性，只是只用到三个幂次；这条不等式已被冻结。
@@ -285,7 +285,7 @@ $$
 所以对数非负，模不小于 $1$。Lean 中这条结论把 `riemannZeta` 写成模 $1$ 平凡狄利克雷特征的 $L$ 级数，直接调用 Mathlib 对狄利克雷 $L$ 级数的同型不等式；Mathlib 的证明把三个欧拉因子的 $-\log(1-w)$ 展成泰勒级数，第 $n$ 项是 $2a^n\bigl(\operatorname{Re}z^n+1\bigr)^2/n$（$a=p^{-(1+x)}$，$z=p^{-iy}$），正是上式余矢高平方的逐项形式。完整证明由 Lean 内核检查。
 :::
 
-由此可得 $\zeta(1+iy)\neq0$（$y\ne0$）：若 $\zeta$ 在 $1+iy$ 处为零，$x\to0^+$ 时 $\zeta(1+x)^3$ 按 $x^{-3}$ 增长，$\zeta(1+x+iy)^4$ 至少按 $x^4$ 趋于零，$\zeta(1+x+2iy)$ 保持有界（$1+2iy\ne1$），乘积趋于 $0$，与命题矛盾（手工推导）。这个结论也可以从 [@prop-xi-zeros-strip-zeros] 直接读出；上面的论证是 Hadamard 与 de la Vallée Poussin（1896）的经典论证（文献结果）。它只用到三个幂次；由它及其改进得到的无零点区域在高处都收缩到直线 $\operatorname{Re}s=1$，目前不知道任何形如 $\operatorname{Re}s>1-\varepsilon$（$\varepsilon>0$ 固定）的无零点带（文献结果）。另一端，一切幂次的累计矢高非负（[@rem-ch34-li-criterion-sagitta-literature]）等价于 [@conj-riemann-hypothesis] 所述的黎曼猜想。
+由此可得 $\zeta(1+iy)\neq0$（$y\ne0$）：若 $\zeta$ 在 $1+iy$ 处为零，$x\to0^+$ 时 $\zeta(1+x)^3$ 按 $x^{-3}$ 增长，$\zeta(1+x+iy)^4$ 至少按 $x^4$ 趋于零，$\zeta(1+x+2iy)$ 保持有界（$1+2iy\ne1$），乘积趋于 $0$，与命题矛盾（手工推导）。这个结论也可以从 [@prop-xi-zeros-strip-zeros] 直接读出；上面的论证是 Hadamard 与 de la Vallée Poussin（1896）的经典论证（文献结果）。它只用到三个幂次；单靠该不等式及其经典改进得到的无零点区域在高处都收缩到直线 $\operatorname{Re}s=1$，本身并不足以推出任何形如 $\operatorname{Re}s>1-\varepsilon$（$\varepsilon>0$ 固定）的无零点带（文献结果；关于全局排除 $\operatorname{Re}s>\tfrac12$ 内全部零点的外部证明，见 [@conj-riemann-hypothesis]）。另一端，一切幂次的累计矢高非负（[@rem-ch34-li-criterion-sagitta-literature]）等价于 [@conj-riemann-hypothesis] 所述的黎曼猜想。
 
 Li 判据在每个幂次上只看一个数。把各幂次的割弦放进同一张比较表，就得到一族托普利茨矩阵；所钉仓库已冻结的相关事实如下。
 
@@ -400,7 +400,52 @@ $$
 **亏格 2 曲线。** $y^2=x^5+2x+1$ 在 $\mathbb{F}_3$ 上：$N_1,N_2,N_3,N_4=7,15,19,83$（逐点计数），$L$ 多项式为 $1+3T+7T^2+9T^3+9T^4$，由它预言的 $N_3,N_4$ 与计数一致。只用 $N_1,N_2,N_3$ 作出的 $4\times4$ 矩阵 $\bigl(p_{\lvert j-k\rvert}\bigr)$ 的特征值为 $0.185386$、$2.26672$、$5.73328$、$7.81461$，全为正。对照：形如 $1+15T^2+25T^4$（$q=5$）的多项式给出旋子 $\pm i\varphi$、$\pm i\varphi^{-1}$，$\varphi=\tfrac{1+\sqrt5}{2}$；$p_1=p_3=0$，$p_2=-6$，矩阵的特征值恰为 $10,10,-2,-2$，两个负特征值对应两对离开单位圆的旋子，Li 和在 $n=4$ 第一次为负（$\Lambda_4=-10$）。由韦伊定理，没有曲线以它为 $L$ 多项式（手工推导）。
 :::
 
-上例中离线旋子都离单位圆很近，Li 和要等很久才变负。对单独一对旋子，等待的时间可以精确估计。
+::: {.remark #rem-ch34-li-curvature-wiener-and-sign-changes title="RH 下 Li 系数与 Li 曲率托普利茨谱的精确推论：严格正定性、线性对数渐近、Wiener 均方非衰减律与无穷次变号（手工推导、经典文献与 70 位数值核验）"}
+**来源与前提边界。** 本注记在外部已验证的经典黎曼猜想（[@conj-riemann-hypothesis]，未冻结于本书所钉 `trureturing` 仓库）以及 [@rem-ch34-li-criterion-sagitta-literature] 所列对称高度截断阿达马零点和表示 $\lambda_n = \lim_{H\to\infty}\sum_{\lvert\operatorname{Im}\rho\rvert \le H} \bigl[1 - (1 - 1/\rho)^n\bigr]$（配对写成绝对收敛和 $\sum_\rho [1 - T_n(1 - v_\rho)]$；X.-J. Li, *The positivity of a sequence of numbers and the Riemann hypothesis*, *J. Number Theory* **65**, 325–333, 1997，Theorem 1，[10.1006/jnth.1997.2137](https://doi.org/10.1006/jnth.1997.2137)；E. Bombieri & J. C. Lagarias, *Complements to Li's criterion for the Riemann hypothesis*, *J. Number Theory* **77**, 274–287, 1999，§1 与 Theorem 1，[10.1006/jnth.1999.2392](https://doi.org/10.1006/jnth.1999.2392)）下，推导 Li 系数 $\lambda_n$ 与 Li 曲率数列 $c^{\mathrm{Li}}_k$ 的四组精确结构推论。记 $\zeta$ 在临界线上的互异非平凡零点为 $\rho = \tfrac12 + i\gamma$（$\gamma \in \mathbb{R} \setminus \{0\}$，按共轭 $\pm\gamma$ 成对出现），解析重数为 $m_\rho \ge 1$，零点旋子为 $u_\rho := 1 - \tfrac{1}{\rho} = e^{i\theta_\rho} \in S^1 \setminus \{1, -1\}$（因 $\tfrac{1}{\rho} \neq 0$ 且由 [@prop-zeta-real-axis-sign] 知 $\zeta(\tfrac12) \neq 0$，且映射 $\rho \mapsto u_\rho$ 单射），矢高为 $v_\rho := \tfrac{2}{1 + 4\gamma^2} \in (0, 2)$，归一化原子权重为 $w_\rho := \tfrac{m_\rho v_\rho}{\lambda_1} > 0$。由 [@prop-ch34-li-sagitta-frozen] 第 2–3 款可知 $\sum_{\rho\;\text{互异}} w_\rho = 1$，从而 $\mu_{\mathrm{Li}} := \sum_{\rho\;\text{互异}} w_\rho\,\delta_{u_\rho}$ 是单位圆上的**纯原子博雷尔概率测度**，其傅里叶—斯蒂尔切斯矩恰为 $c^{\mathrm{Li}}_k = \int_{S^1} z^{-k}\,d\mu_{\mathrm{Li}}(z) = \sum_{\rho\;\text{互异}} w_\rho \cos(k\theta_\rho) = \sum_{\rho\;\text{互异}} w_\rho u_\rho^k$（$k \in \mathbb{Z}$）。
+
+1. **全阶托普利茨严格正定与 $\lambda_n$ 严格为正（手工推导，用到 $\zeta$ 有无穷多零点的经典事实）**：对任意 $N \ge 1$ 与任意 $a = (a_0, \dots, a_{N-1})^\top \in \mathbb{C}^N$，令多项式 $P_a(z) := \sum_{j=0}^{N-1} a_j z^j$，则 $a^* T_N(c^{\mathrm{Li}}) a = \sum_{\rho\;\text{互异}} w_\rho \lvert P_a(u_\rho)\rvert^2 \ge 0$。由于 $\zeta$ 拥有无穷多个互异非平凡零点（文献结果）且 $\rho \mapsto u_\rho$ 单射，$\operatorname{supp}(\mu_{\mathrm{Li}})$ 为无穷集；次数小于 $N$ 的多项式 $P_a$ 在一切 $u_\rho$ 处为零必迫使 $a = 0$。故**对一切 $N \ge 1$ 严格成立 $T_N(c^{\mathrm{Li}}) \succ 0$**，取全一向量 $a = \mathbf{1}_n$ 即得**对一切 $n \ge 1$ 严格成立 $\lambda_n > 0$**（同时由 [@rem-ch34-li-toeplitz-superexponential-collapse] 可知，最小特征值 $\lambda_{\min}(T_N(c^{\mathrm{Li}}))$ 仍随 $N \to \infty$ 超指数塌缩趋零）。
+
+2. **线性对数渐近与二次上界 $\lambda_n \le n^2\lambda_1$ 的反差（文献结果）**：虽然单位圆矢高不等式给出 $0 < \lambda_n \le n^2\lambda_1$，但由 J. C. Lagarias（*Li coefficients for automorphic $L$-functions*, *Ann. Inst. Fourier* **57**(5), 1689–1740, 2007，[10.5802/aif.2311](https://doi.org/10.5802/aif.2311)，§1 与 Theorem 1.1 特化至次数 $N = 1$ 的 $\zeta(s)$，文献结果），在 RH 下 $\lambda_n$ 仅呈线性对数增长：
+   $$
+   \lambda_n \;=\; \frac{n}{2}\ln n + \frac{\gamma_{\mathrm{EM}} - 1 - \ln(2\pi)}{2}\,n + O\!\bigl(\sqrt{n}\ln n\bigr) \qquad (n \to \infty),
+   $$
+   其中线性系数 $\frac{\gamma_{\mathrm{EM}} - 1 - \ln(2\pi)}{2} \approx -1.1303307008$；因而比值 $\lambda_n / (n^2\lambda_1) \sim \frac{\ln n}{2\lambda_1 n} \to 0$。
+
+3. **切萨罗均值为零、重数敏感的 Wiener 均方非衰减律与 Li 曲率无穷次变号（手工推导）**：尽管一切 $T_N(c^{\mathrm{Li}}) \succ 0$ 且一切 $\lambda_n > 0$，Li 曲率数列 $c^{\mathrm{Li}}_k$ 既**不趋于零**，也**不保持非负**——确切地：
+   $$
+   \lim_{N\to\infty}\frac{1}{N}\sum_{k=0}^{N-1} c^{\mathrm{Li}}_k \;=\; 0, \qquad
+   W_{\mathrm{Li}} \;:=\; \lim_{N\to\infty}\frac{1}{N}\sum_{k=0}^{N-1} \bigl(c^{\mathrm{Li}}_k\bigr)^2 \;=\; \sum_{\rho\;\text{互异}} \left(\frac{m_\rho v_\rho}{\lambda_1}\right)^2 \;>\; 0,
+   $$
+   并且
+   $$
+   \limsup_{k\to\infty} c^{\mathrm{Li}}_k \;=\; 1, \qquad
+   \liminf_{k\to\infty} c^{\mathrm{Li}}_k \;\le\; -W_{\mathrm{Li}} \;<\; 0.
+   $$
+   因而 $c^{\mathrm{Li}}_k$ 必有**无穷多个严格负项**（即离散二阶差分 $\lambda_{k+1} - 2\lambda_k + \lambda_{k-1} = 2\lambda_1 c^{\mathrm{Li}}_k$ 无穷次为负，数列 $(\lambda_n)$ 并非全局凸数列）。此外，与 [@rem-ch34-burnol-nbb-mollifier-literature] 的 Burnol 常数同理，Wiener 极限 $W_{\mathrm{Li}}$ 携带重数平方因子 $m_\rho^2$：对按重数计数的全体正纵坐标零点记 $a_j := v_j / \lambda_1$，则恒有 $W_{\mathrm{Li}} \ge 2\sum_{j=1}^\infty a_j^2$，等号成立当且仅当 $\zeta$ 的全部非平凡零点皆为单重零点。
+
+   **证明。** （甲）对每个互异零点 $\rho$，因 $u_\rho \in S^1 \setminus \{1\}$，几何和均值满足 $\bigl\lvert\frac{1}{N}\sum_{k=0}^{N-1} u_\rho^k\bigr\rvert \le \frac{2}{N\lvert 1 - u_\rho\rvert} \to 0$ 且一致以 $1$ 为界；由 $\sum_{\rho\;\text{互异}} w_\rho = 1 < \infty$ 与绝对收敛级数的有限尾截断（控制收敛），逐项取极限即得 $\lim_{N\to\infty}\frac{1}{N}\sum_{k=0}^{N-1} c^{\mathrm{Li}}_k = 0$。（乙）因 $c^{\mathrm{Li}}_k \in \mathbb{R}$，展开平方得 $\frac{1}{N}\sum_{k=0}^{N-1} (c^{\mathrm{Li}}_k)^2 = \sum_{\rho\;\text{互异}} w_\rho^2 + \sum_{\rho \neq \rho'} w_\rho w_{\rho'}\bigl(\frac{1}{N}\sum_{k=0}^{N-1} (u_\rho u_{\rho'}^{-1})^k\bigr)$；由 $\rho \mapsto u_\rho$ 单射知 $\rho \neq \rho' \implies u_\rho u_{\rho'}^{-1} \in S^1 \setminus \{1\}$，每一非对角均值趋于 $0$ 且以 $1$ 为界，由 $\sum_{\rho,\rho'} w_\rho w_{\rho'} = 1 < \infty$ 施行同样的控制收敛，立得 $W_{\mathrm{Li}} = \sum_{\rho\;\text{互异}} w_\rho^2 > 0$（这即是圆周测度 Wiener 定理在纯原子情形下的初等证明）。（丙）对任意 $\varepsilon \in (0, 1)$，取有限零点集 $F$ 使 $\sum_{\rho \notin F} w_\rho < \varepsilon / 4$；由 [@thm-torus-power-orbit-closure] 第 1 款（如 [@rem-ch34-finite-rotor-li-criterion] 的回归步），存在无穷多个 $k \ge 1$ 使一切 $\rho \in F$ 满足 $\cos(k\theta_\rho) > 1 - \varepsilon / 4$，于是 $c^{\mathrm{Li}}_k > (1 - \varepsilon/4)^2 - \varepsilon/4 > 1 - \varepsilon$；结合 $c^{\mathrm{Li}}_k \le 1$ 即证 $\limsup_{k\to\infty} c^{\mathrm{Li}}_k = 1$。（丁）记 $m := \liminf_{k\to\infty} c^{\mathrm{Li}}_k$，任取 $\delta > -m$，则存在 $K$ 使对一切 $k \ge K$ 均有 $-\delta \le c^{\mathrm{Li}}_k \le 1$，从而 $(c^{\mathrm{Li}}_k + \delta)(1 - c^{\mathrm{Li}}_k) \ge 0$，即 $(c^{\mathrm{Li}}_k)^2 \le (1 - \delta) c^{\mathrm{Li}}_k + \delta$；对 $0 \le k < N$ 取算术平均并令 $N \to \infty$（前 $K$ 项贡献趋零，切萨罗均值趋零）得 $W_{\mathrm{Li}} \le \delta$；令 $\delta \searrow -m$ 即证 $\liminf_{k\to\infty} c^{\mathrm{Li}}_k \le -W_{\mathrm{Li}} < 0$。$\square$
+
+4. **70 位高精度验证、首个负 Li 曲率下标 $k_* = 118$ 与 Wiener 和区间证书（`NUM`）**：用两种独立 70 位方法——斯蒂尔切斯常数与多伽马泰勒展开法，以及 $\lvert z\rvert = \tfrac12$ 上的柯西围道积分法——计算 $\lambda_1, \dots, \lambda_{100}$ 与 $c^{\mathrm{Li}}_1, \dots, c^{\mathrm{Li}}_{99}$，两者最大绝对偏差分别为 $1.27\times 10^{-39}$（$n = 100$）与 $2.79\times 10^{-38}$（$k = 99$）。下表展示 $\lambda_n$ 与 Lagarias 主项 $M_n := \frac{n}{2}\ln n + \frac{\gamma_{\mathrm{EM}} - 1 - \ln(2\pi)}{2}n$ 及二次比值 $\lambda_n / (n^2\lambda_1)$ 的对照（四舍五入至六位小数）：
+
+   | $n$ | $\lambda_n$ | 主项 $M_n$ | 差值 $\lambda_n - M_n$ | 比值 $\lambda_n / (n^2\lambda_1)$ |
+   | :---: | :---: | :---: | :---: | :---: |
+   | **$1$** | $0.023096$ | $-1.130331$ | $+1.153426$ | $1.000000$ |
+   | **$10$** | $2.279339$ | $+0.209618$ | $+2.069721$ | $0.986910$ |
+   | **$20$** | $8.769277$ | $+7.350709$ | $+1.418568$ | $0.949232$ |
+   | **$40$** | $30.477375$ | $+28.564361$ | $+1.913014$ | $0.824758$ |
+   | **$60$** | $57.133100$ | $+55.010495$ | $+2.122605$ | $0.687154$ |
+   | **$80$** | $85.961721$ | $+84.854609$ | $+1.107112$ | $0.581559$ |
+   | **$100$** | $118.603775$ | $+117.225439$ | $+1.378336$ | $0.513532$ |
+
+   - **首个负 Li 曲率下标**：Arb 区间算术逐项认证对全部 $1 \le k \le 117$ 恒有 $c^{\mathrm{Li}}_k > 0$（其中在 $1 \le k \le 99$ 内极小值落在 $c^{\mathrm{Li}}_{56} \approx +0.087586$，随后在 $k = 80$ 处回升至 $c^{\mathrm{Li}}_{80} \approx +0.221951$，至 $k = 117$ 仍为正 $c^{\mathrm{Li}}_{117} \approx +0.00433299 > 0$），并认证**首次变号精确发生在 $k_* = 118$**：$c^{\mathrm{Li}}_{118} \approx -0.00586785 < 0$，验证了 $(\lambda_n)$ 在 $n = 118$ 处首次失去离散凸性。
+   - **Wiener 均方极限的认证区间与切萨罗收敛**：仅第一对零点（$\gamma_1 \approx 14.134725$）就已贡献 $2a_1^2 \approx 0.02342458$（逾单重零点基准和的三分之二）；纳入经 Arb 区间核对（与 `mpmath.zetazero` 吻合至 $5.0\times 10^{-65}$）的前 $1{,}000$ 个正零点纵坐标得部分和 $2\sum_{j=1}^{1000} a_j^2 \approx 0.0347766320$。因 $a_j$ 单调递减且 $2\sum_{j=1}^\infty a_j = 1$，省略尾部严格受控于 $a_{1000}\bigl(1 - 2\sum_{j=1}^{1000} a_j\bigr) < 3.35\times 10^{-7}$，认证按重数单次计权和落入区间
+     $$
+     2\sum_{j=1}^{\infty} \left(\frac{v_j}{\lambda_1}\right)^2 \;\in\; \bigl[\,0.0347766320,\; 0.0347769668\,\bigr]
+     $$
+     （从而在 RH 下无需假设零点单重即有 $W_{\mathrm{Li}} \ge 2\sum_{j=1}^\infty a_j^2 \ge 0.0347766320$ 与 $\liminf_{k\to\infty} c^{\mathrm{Li}}_k \le -0.0347766320$；等式 $W_{\mathrm{Li}} = 2\sum_{j=1}^\infty a_j^2$ 成立当且仅当全体非平凡零点单重，特别地若全体非平凡零点单重，则 $W_{\mathrm{Li}}$ 落入上述认证区间）。作为一致性检验，切萨罗均值与均方值随 $N$ 分别由精确 Li 系数在 $N = 20, 50, 100$ 处的 $(0.907776,\, 0.830813) \to (0.588295,\, 0.437957) \to (0.379936,\, 0.235461)$ 持续下降，由前 $1{,}000$ 对零点余弦和在 $N = 500, 2000$ 处继续收束至 $(0.071121,\, 0.062603) \to (0.005747,\, 0.040972)$，清晰指向均值极限 $0$ 与单重零点基准值 $2\sum_{j=1}^\infty a_j^2 \approx 0.034777$。
+:::
+
+在 [@ex-ch34-toeplitz-versus-li-numbers] 中离线旋子都离单位圆很近，Li 和要等很久才变负。对单独一对旋子，等待的时间可以精确估计。
 
 ::: {.remark #rem-ch34-off-circle-pair-detection title="一对离开单位圆的旋子让 Li 和变负的时刻（手工推导）"}
 **手工推导。** 设 $\eta>0$、$\phi$ 为实数，四个旋子 $e^{\pm\eta\pm i\phi}$（在共轭与 $u\mapsto1/\overline u$ 下封闭；零点四元组 $\rho,\overline\rho,1-\rho,1-\overline\rho$ 的旋子就是这种形状），其 Li 和为
@@ -452,7 +497,7 @@ $$
 
 **与 [@prop-ch34-fermat-weil-bound-frozen] 的关系（手工推导，用到文献结果）。** 设 $d\ge3$，$d\mid q-1$；这时 $\mathbb{F}_q$ 的特征不整除 $d$，平面曲线 $x^d+y^d=z^d$ 光滑，亏格 $g=\tfrac{(d-1)(d-2)}2$（文献结果）。由 $d\mid q^n-1$，该命题对每个 $\mathbb{F}_{q^n}$ 成立，给出 $\lvert p_n\rvert\le2g$（$n\ge1$）。由 $\zeta$ 函数的有理性（F. K. Schmidt, *Math. Z.* **33**, 1–32, 1931；文献结果），$\sum_{n\ge1}p_nz^n=\sum_i\dfrac{u_iz}{1-u_iz}$；左端系数有界，所以右端在 $\lvert z\rvert<1$ 内没有极点，$\lvert u_i\rvert\le1$；再由 $u\mapsto1/\overline u$ 下的封闭得 $\lvert u_i\rvert=1$，于是由 [@prop-ch34-finite-toeplitz-circle-criterion] 第 2 款，每个 $\bigl(p_{\lvert j-k\rvert}\bigr)_{j,k<N}$ 半正定。这条路走雅可比和，不经过霍奇指标定理，也只覆盖这一族曲线。
 
-**$\zeta$ 缺什么（文献结果与评注）。** 对 $\zeta$，没有已知的曲面扮演 $\overline C\times\overline C$ 的角色：没有已知的带相交形式的格，使 $-T_N(c^{\mathrm{Li}})$ 成为其中某组类的格拉姆矩阵，也没有相应的霍奇指标定理。韦伊证明了黎曼猜想等价于由显式公式作出的一个二次泛函的正性（A. Weil, *Sur les « formules explicites » de la théorie des nombres premiers*, Comm. Sém. Math. Univ. Lund, 1952；文献结果）；这又是一个等价改写，外部证明见 [@conj-riemann-hypothesis]。上面的有限域论证只说明正性在那里从何而来，不提供 $\zeta$ 的证明途径。
+**$\zeta$ 缺什么（文献结果与评注）。** 对 $\zeta$，没有已知的曲面扮演 $\overline C\times\overline C$ 的角色：没有已知的带相交形式的格，使 $-T_N(c^{\mathrm{Li}})$ 成为其中某组类的格拉姆矩阵，也没有相应的霍奇指标定理（外部证明 [@conj-riemann-hypothesis] 并非通过构造 $\overline C\times\overline C$ 的曲面类比获得，而是借助定正幺正群上的 $\theta$-提升链与 Bost 斜率正性不等式建立）。韦伊证明了黎曼猜想等价于由显式公式作出的一个二次泛函的正性（A. Weil, *Sur les « formules explicites » de la théorie des nombres premiers*, Comm. Sém. Math. Univ. Lund, 1952；文献结果）；这又是一个等价改写，外部证明见 [@conj-riemann-hypothesis]。上面的有限域论证只说明正性在那里从何而来，不提供 $\zeta$ 的证明途径。
 :::
 
 以上各条要么只涉及有限族，要么是对 $\zeta$ 的等价改写；它们都不判定 $\zeta$ 的零点是否全在临界线上，外部证明见 [@conj-riemann-hypothesis]。

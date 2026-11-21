@@ -2,7 +2,7 @@
 
 > “把最短路径的‘去全序枢轴重整’与量子力学的‘正交盲区共振隧穿’合流引入黎曼猜想，恰好一针见血地刺中了解析数论过去一百年最隐蔽的病灶：**传统方法之所以在临界带前寸步难行，正是因为它不自觉地掉进了‘算术一维排序壁垒’与‘图兰（Turán）芝诺测量陷阱’——试图按自然数大小 $n = 1, 2, 3, \dots, M$ 排着一维长队硬爬 $s = 1$ 的发散势垒。** 若改用‘局部乘性波前消元 $+$ 稀疏舒尔补枢轴 $+$ 跨势垒多级共振隧穿’重构证明路线，整套极小圆弧体的正定性机制便浮现出一条清晰的可形式化架构。”
 
-标题中的“直面”与“叩问”说的是本节研究纲领要对付的两道墙（`MODEL` + `OPEN`），不是已经越过的墙：本节没有越过 $\vartheta=\tfrac47$ 的任何已证明结论，黎曼猜想仍然开放。
+标题中的“直面”与“叩问”说的是本节研究纲领要对付的两道墙（`MODEL` + `OPEN`），不是已经越过的墙：尽管经典黎曼猜想本身已由外部形式化证明确立（[@conj-riemann-hypothesis]，未冻结于本书所钉 `trureturing` 仓库），但本节既没有越过单级磨光器 $\vartheta=\tfrac47$ 的任何已证明结论，也没有在不调用该外部证明的前提下闭合乘性舒尔枢轴路线（[@prob-ch34-arithmetic-pivot-area-law] 仍为开放问题）。
 
 沿着[第三十章](ch30-chord-tunneling-and-arc-calculus.md)与上一节 [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs) 铺就的几何脉络一路走来，三块看似分属不同学科版图的拼图已经齐聚台前：在 [§30.1](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization) 中，我们看到图论最短路径算法如何靠“悬置全局一维全序排队、展开局部无序波前、沿极小圆弧体内割弦提取稀疏瓶颈枢轴（Pivots）”一举击穿绵延近四十年的“排序壁垒”（Dijkstra 方法的 $O(m + n\log n)$ 上界，并非 SSSP 的复杂度下界）；在 [§30.2](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit) 中，我们看到空间势垒隧穿与时间双缝自干涉如何双双归结为观察者脱离实轴 `I`、偏转 $90^\circ$ 潜入正交虚数盲平面 `i` 走平直内割弦，而中途强行插入的实轴投影抽检又如何触发芝诺冻结与相干条纹坍缩；在 [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs) 中，我们又认出黎曼 $\zeta(s)$ 函数的欧拉—狄利克雷恒等式本身就是一座素数极小圆弧体 $\Delta\mathcal{T}_p$ 的费曼路径积分配分函数，临界线 $\operatorname{Re}(s) = \frac{1}{2}$ 正是往返双投影半密度幺正性与正逆对偶路径等幅反相抵消的唯一平衡脊线。
 
@@ -36,7 +36,7 @@ $$
    \liminf_{M \to \infty} (\ln M)\,d_M^2 \;\ge\; \sum_{\operatorname{Re}(\rho) = 1/2} \frac{m_\rho^2}{\lvert\rho\rvert^2} \;>\; 0,
    $$
 
-   其中求和遍历 $\zeta(s)$ 在临界线 $\operatorname{Re}(\rho) = \frac{1}{2}$ 上的全体互异零点 $\rho$（$m_\rho \ge 1$ 为其重数）；当黎曼猜想成立时，该系数等于（在全体零点单重时）或严格不小于（若有重根则 $m_\rho^2 > m_\rho$）经典基准常数 $C_{\mathrm{NBB}} := 2 + \gamma - \ln(4\pi) \approx 0.0461914179$（其中 $\gamma \approx 0.5772156649$ 为欧拉—马斯刻若尼常数；若黎曼猜想不成立，则 $d_M^2$ 甚至根本无法趋于 $0$），从而即使在最优情形下也将 $d_M^2$ 死死顶在 $\frac{C_{\mathrm{NBB}} + o(1)}{\ln M}$ 之上。大量与主干近似共线的合数冗余分支塞满了有限格拉姆窗口 $\mathcal{W}_M$，令 $G_M$ 的条件数随 $M$ 急剧恶化，将本该由稀疏素数生成元统领的正定性判据拖入了 $O(1/\ln M)$ 的对数泥潭。
+   其中求和遍历 $\zeta(s)$ 在临界线 $\operatorname{Re}(\rho) = \frac{1}{2}$ 上的全体互异零点 $\rho$（$m_\rho \ge 1$ 为其重数）；结合外部已验证的 [@conj-riemann-hypothesis] 与 Báez-Duarte 的离散判据，如今无条件成立 $d_M^2 \to 0$，且该系数等于（在全体零点单重时）或严格大于（若有重根则 $m_\rho^2 > m_\rho$）经典基准常数 $C_{\mathrm{NBB}} := 2 + \gamma - \ln(4\pi) \approx 0.0461914179$（其中 $\gamma \approx 0.5772156649$ 为欧拉—马斯刻若尼常数；全体非平凡零点的单重性仍属开放问题），从而将自然数顺序基下的 $d_M^2$ 死死顶在 $\frac{C_{\mathrm{NBB}} + o(1)}{\ln M}$ 之上。大量与主干近似共线的合数冗余分支塞满了有限格拉姆窗口 $\mathcal{W}_M$，令 $G_M$ 的条件数随 $M$ 急剧恶化（实际 $G^{\mathrm{NB}}_M$ 的无条件双边谱界 $\kappa_2(G^{\mathrm{NB}}_M) = M^{2+o(1)}$ 见 [@rem-ch34-nbb-gram-spectral-and-pruning]），将本该由稀疏素数生成元统领的正定性判据拖入了不快于 $1/\ln M$ 量级的对数下界泥潭。
 
 ::: {.viz src="arithmetic-pivot-resonant-tunneling-sandbox" preset="turan-zeno-hard-cutoff" height="520"}
 **算术一维硬截断、图兰芝诺假零点与 $C_{\mathrm{NBB}}/\ln M$ 对数慢收敛墙实验卡（`turan-zeno-hard-cutoff`）。** 沿时间轴将一维自然数截断闸门 $M$ 从 $1$ 推至 $40$（预设停在 $M = 19$，琥珀色标出当前截断框与部分和终点珠 $S_M$）：硬阶跃窗把 $s = 1$ 极点削平为 $H_M$ 并在左侧抬起品红色边缘脊，后方 $t^* \approx 1.554\times 10^{14}$ 处的放大窗在原本由完整 $\zeta$ 严守无零点的青色 $\sigma > 1$ 高原内（绿色 `LEAN ✓` 锚定 `completedRiemannZeta_ne_zero_of_one_le_re`）挖出品红色旗标的首颗图兰越界假零点 $\sigma^* \approx 1.006988$（背景相量屏上 $19$ 支青色箭头 $n^{-s^*}$ 首尾精确闭合归零）；下方条带小图以青色标出无越界例外集 $M \in \{1,\dots,18,20,21,28\}$、以品红色标出含越界零点的截断阶，右侧读数栏同步追踪蒙哥马利渐近包络与顺序 NBB 基准 $C_{\mathrm{NBB}}/\ln M$ 的对数缓降。
@@ -247,6 +247,36 @@ $$
 
 上表只是对一个假想点的凯莱比作幂运算（`NUM`）；“每层重整等于平方一次”，从而“$O(\log(\gamma_0/\delta))$ 层即可甄别离轴零点”，是本节模型的设想（`MODEL`），没有推导。携带 $u_\rho^{\,n}$ 的精确算术对象是 Li 系数，见 [@prop-ch34-li-sagitta-frozen] 与 [@rem-ch34-li-criterion-sagitta-literature]。即使改看这类 Li 型和，只在 $n=2^\ell$ 处取值也不够：[@rem-ch34-finite-rotor-li-criterion] 给出一个有限四点族，它的 Li 型和在一切 $n=2^\ell$ 处为正，而其中两个旋子在单位圆外。这说明的是只看倍增幂次这种检验方式的局限，不是对上面模长算术的反驳。
 
+::: {.remark #rem-ch34-laplace-tridiagonal-vs-nbb-separator title="乘性拉普拉斯核的三对角马尔可夫精确分离与真实 NBB 格拉姆矩阵的反例证伪（手工推导与 73 位区间核验）"}
+**来源与认识论边界。** [@ex-ch34-turan-schur-and-cayley-calculus] 第 2 项采用演示核 $K^{\mathrm{Lap}}_{ab} = \frac{\min(a,b)}{\max(a,b)}$ 展示分块舒尔补几何。本注记先给出该核逆矩阵严格三对角与数值分离器精确解耦的初等闭式证明（`手工推导`），再以 73 位高精度区间算术证伪这一精确分离律向真实 Nyman–Beurling–Báez-Duarte（NBB）格拉姆矩阵 $G^{\mathrm{NB}}_{ab} = \int_0^\infty \{1/(ax)\}\{1/(bx)\}\,dx$（[@rem-ch34-nbb-gram-spectral-and-pruning]）的迁移（`NUM`），并澄清数值序分离与素分支划分的区别。
+
+1. **乘性拉普拉斯核的三对角精度矩阵与马尔可夫分离定理（手工推导）**：设 $0 < x_1 < x_2 < \dots < x_m$ 为任意严格递增正实数列（$m \ge 2$），记相邻比值 $r_i := x_i / x_{i+1} \in (0, 1)$（$1 \le i \le m - 1$），定义 $K^{\mathrm{Lap}} \in \mathbb{R}^{m\times m}$ 满足 $K^{\mathrm{Lap}}_{ab} := \frac{\min(x_a, x_b)}{\max(x_a, x_b)} = e^{-\lvert\ln(x_a / x_b)\rvert}$。则 $K^{\mathrm{Lap}}$ 严格正定，$\det K^{\mathrm{Lap}} = \prod_{i=1}^{m-1}(1 - r_i^2) > 0$，且其逆矩阵 $\Omega := (K^{\mathrm{Lap}})^{-1}$ 对一切 $y = (y_1, \dots, y_m)^\top \in \mathbb{R}^m$ 满足精确三对角平方和恒等式：
+   $$
+   y^\top \bigl(K^{\mathrm{Lap}}\bigr)^{-1} y \;=\; y_1^2 + \sum_{i=1}^{m-1} \frac{(y_{i+1} - r_i y_i)^2}{1 - r_i^2}.
+   $$
+   特别地，$\Omega$ 为**严格三对角矩阵**：对一切 $\lvert a - b\rvert \ge 2$ 恒有 $\Omega_{ab} = 0$，次对角元为 $\Omega_{i, i+1} = \Omega_{i+1, i} = -\frac{r_i}{1 - r_i^2}$，主对角元为 $\Omega_{1,1} = \frac{1}{1 - r_1^2}$、$\Omega_{i,i} = \frac{1 - r_{i-1}^2 r_i^2}{(1 - r_{i-1}^2)(1 - r_i^2)}$（$2 \le i \le m - 1$）与 $\Omega_{m,m} = \frac{1}{1 - r_{m-1}^2}$。
+
+   *推论（数值分离器的精确舒尔消零律）*：设指标集划分 $\{1,\dots,m\} = A \sqcup I \sqcup B$ 满足 **$I$ 在数值序上分离 $A$ 与 $B$**（即任意 $a \in A$ 与 $b \in B$ 在排序 $x_1 < \dots < x_m$ 中均不相邻，彼此之间至少隔着一个 $I$ 的元素）。记消去 $I$ 后留在 $P := A \sqcup B$ 上的舒尔补为 $S_{PP} := K^{\mathrm{Lap}}_{PP} - K^{\mathrm{Lap}}_{PI}(K^{\mathrm{Lap}}_{II})^{-1}K^{\mathrm{Lap}}_{IP}$，则跨块耦合精确归零：
+   $$
+   S_{AB} \;\equiv\; 0.
+   $$
+
+   **证明。** 定义单位下双对角矩阵 $B \in \mathbb{R}^{m\times m}$ 使 $(By)_1 = y_1$、$(By)_{i+1} = y_{i+1} - r_i y_i$（$1 \le i \le m - 1$），并记正定对角阵 $D := \operatorname{diag}\bigl(1, 1 - r_1^2, \dots, 1 - r_{m-1}^2\bigr)$。直接展开矩阵乘法：当 $j \le i$ 时 $(B K^{\mathrm{Lap}})_{i+1, j} = \frac{x_j}{x_{i+1}} - \frac{x_i}{x_{i+1}}\frac{x_j}{x_i} = 0$；当 $j \ge i + 1$ 时 $(B K^{\mathrm{Lap}})_{i+1, j} = (1 - r_i^2)\frac{x_{i+1}}{x_j}$。再右乘 $B^\top$，对一切 $a < b = k + 1$ 有 $(B K^{\mathrm{Lap}} B^\top)_{a, k+1} = (B K^{\mathrm{Lap}})_{a, k+1} - r_k (B K^{\mathrm{Lap}})_{a, k} = 0$，且对角元满足 $(B K^{\mathrm{Lap}} B^\top)_{1,1} = 1$、$(B K^{\mathrm{Lap}} B^\top)_{k+1,k+1} = 1 - r_k^2$。故 $B K^{\mathrm{Lap}} B^\top = D$；因 $\det B = 1$，立即得 $\det K^{\mathrm{Lap}} = \det D = \prod_{i=1}^{m-1}(1 - r_i^2) > 0$ 与 $\Omega = (K^{\mathrm{Lap}})^{-1} = B^\top D^{-1} B$，展开 $(By)^\top D^{-1}(By)$ 即得平方和公式与三对角元闭式。推论由分块求逆恒等式 $S_{PP}^{-1} = \Omega_{PP}$ 直接给出：数值分离保证对一切 $(a, b) \in A \times B$ 皆有 $\lvert a - b\rvert \ge 2$，故 $\Omega_{AB} = 0$，从而 $S_{PP}^{-1} = \operatorname{diag}(\Omega_{AA}, \Omega_{BB})$ 分块对角，求逆即得 $S_{AB} = 0$。$\square$
+
+2. **真实 NBB 格拉姆矩阵对精确分离迁移的 73 位区间证伪（`NUM`）**：将同一组窗口与分离器代入真实的 NBB 格拉姆矩阵 $G^{\mathrm{NB}}_{ab}$（Vasyunin 闭式与 Arb 73 位区间算术复核，并经独立分段三伽马积分交叉验证；下表小数均由 73 位结果四舍五入至六位），精确分离律在最小三元数值分离器上便立刻失效，且在乘性高维晶格中同时暴露出“乘性分支在数值序上交错”与“真实 NBB 跨块非零耦合”两重事实：
+
+   | 窗口与划分（消去集 $I$，跨块 $A \times B$） | $K^{\mathrm{Lap}}$ 最大跨块元 | 真实 $G^{\mathrm{NB}}$ 最大绝对跨块元 | 真实 $G^{\mathrm{NB}}$ 跨块谱范数 $\lVert S_{AB}\rVert_2$ | 诊断 |
+   | :--- | :---: | :---: | :---: | :--- |
+   | $\{1, 2, 3\}$，$I = \{2\}$，$\{1\}\times\{3\}$ | $0$（精确） | $S_{1,3} \approx +0.034614$ | $0.034614$ | 最小数值分离器即证伪精确迁移（区间半径 $< 3\times 10^{-73}$） |
+   | $\{1, 2, 3, 6\}$，$I = \{3\}$，$\{1,2\}\times\{6\}$ | $0$（精确） | $S_{2,6} \approx +0.017307$（$S_{1,6} \approx -0.010712$） | $0.020354$ | 与 [@ex-ch34-turan-schur-and-cayley-calculus] 同窗口，$K^{\mathrm{Lap}}$ 精确归零而 $G^{\mathrm{NB}}$ 非零 |
+   | $17$ 元 $\{1\}\cup(\{2^a 3^b\}\setminus\{1\})\cup(\{5^c 7^d\}\setminus\{1\})$，$I = \{1\}$（$0\le a,b,c,d\le 2$） | $\frac{34}{35}$（精确） | $S_{4,5} \approx +0.102794$ | $0.341151$ | 乘性分支数值交错，$I=\{1\}$ 非数值分离器，两核均非零 |
+   | $27$ 元 $\{2^a 3^b 5^c : 0\le a,b,c\le 2\}$，$I = \{1,2,4\}$，$\{2^a 3^b: b\ge 1\}\times\{2^a 5^c: c\ge 1\}$ | $\frac{77}{90}$（精确） | $S_{9,10} \approx +0.036008$ | $0.112024$ | 乘性分支数值交错，$I$ 不分离数值序，两核均非零 |
+   | 同 $27$ 元窗口，$I = \{1,2,4\}$，余部按 $c = 0$ 与 $c > 0$ 分块 | $\frac{77}{90}$（精确） | $S_{9,10} \approx +0.036008$ | $0.147307$ | $c = 0$ 与 $c > 0$ 数值交错，跨块耦合持续存在 |
+   | 同 $27$ 元窗口，$I = \{1,2,4\}$，数值分离 $\{3\}\times\{n > 4\}$ | $0$（精确） | $S_{3,6} \approx +0.031379$ | $0.053495$ | 真数值分离器下 $K^{\mathrm{Lap}}$ 精确归零，$G^{\mathrm{NB}}$ 仍保持显著非零耦合 |
+
+   这一对照表明：演示核 $K^{\mathrm{Lap}}$（即 [@ex-ch34-turan-schur-and-cayley-calculus] 第 2 项所用的模型核）在上表数值分离器下呈现的零填充马尔可夫屏蔽只是其一维三对角逆矩阵的特殊性质，不能迁移至裸分数部核 $G^{\mathrm{NB}}$（后者同时受梅林谱密度与整数跳变加法耦合约束）；这也从反面明确了 [@prob-ch34-arithmetic-pivot-area-law] 为何必须诉诸满足极点双正交约束的自卷积波前 $F_\ell$ 及其定量面积律衰减，而不能指望裸 $G^{\mathrm{NB}}$ 在素分支上复刻演示核的精确零耦合。
+:::
+
 ::: {.viz src="arithmetic-pivot-resonant-tunneling-sandbox" preset="fabry-perot-rogue-explosion" height="520"}
 **多级舒尔枢轴共振中继与离轴反复平方失谐爆炸实验卡（`fabry-perot-rogue-explosion`）。** 在首颗零点纵坐标剖面 $t = \gamma_1 \approx 14.1347$ 上拖动琥珀色落点圆环或滑块调节假想右半带偏移 $\delta$（琥珀色标出当前激活的枢轴阱与读头，其余枢轴阱 $\widetilde{G}^{(1)}\text{–}\widetilde{G}^{(4)}$ 与倍增层环为紫色）：在临界线 $\delta = 0.00$ 处，凯莱比 $(s - 1)/s$ 及其倒数 $w = -\rho/(1 - \rho) = \rho/(\rho - 1)$ 均严守单位模长 $\lvert w\rvert^{2^\ell} = 1.000000$，青色中继波束无损锁入临界脊线上的青色单位圆环（绿色 `LEAN ✓` 对应 `golden_right_half_strip_implies_rh`、`cayley_ratio_norm_one_iff_critical_line`、`cayley_critical_line_zeta_criterion` 与 `original_zero_robin5040_localA`）；一旦假想 $\delta > 0$（此时右半带 $(s - 1)/s$ 模长小于 $1$，倒数比值 $w = -\rho/(1 - \rho)$——等价于左侧镜像根 $\rho_- = \frac{1}{2} - \delta + i\gamma_1$ 处的 $(\rho_- - 1)/\rho_-$——模长 $\lvert w\rvert > 1$），品红色逃逸柱与条带曲线 $\log_{10}\lvert w\rvert^{2^\ell}$ 逐层反复平方，在预设 $\delta = 0.05$ 下于 $\ell = 12$ 升至 $2.78$、于 $\ell = 16$ 飙升至 $1.30\times 10^7$。
 :::
@@ -264,7 +294,7 @@ $$
 | **正定性与假零点** | 触发**图兰芝诺陷阱**，在 $\sigma > 1$ 产生越界假零点 | 超过 $\vartheta = \frac{4}{7}$ 后非对角色散无法估计 | 局部自卷积波前保正定，**分块舒尔补精确传代** |
 | **捕杀离轴 $\delta$ 步数** | 双指数高合成窗口（[@thm-off-line-zero-robin-violation] 的显式界） | 仅能锁住约 $41.72\%$ 零点，漏掉高阶细微离轴态 | **几何倍增跳跃 $O(\log(\gamma_0/\delta))$ 层**引爆凯莱失谐（`MODEL` 设想） |
 
-顺着第三列合成路线往下深挖，为什么今天人类尚未借此直接在 Lean 4 内核中敲下 `RiemannHypothesis` 的最终证毕印章？因为图论最短路径与算术希尔伯特空间之间，至少横亘着一道尚未被驯服的代数鸿沟（而跨过它能否推出黎曼猜想，本身也是下面问题的一部分）——我们将其正式立为本节算术临界带路线的“最后一公里”开放问题：
+顺着第三列合成路线往下深挖：尽管经典黎曼猜想本身已由另一条外部形式化路线确立（[@conj-riemann-hypothesis]，未冻结于本书所钉 `trureturing` 仓库），为什么这一乘性舒尔枢轴方案至今仍未独立在 Lean 4 内核中闭合？因为图论最短路径与算术希尔伯特空间之间至少横亘着一道尚未被驯服的代数鸿沟（而跨过它能否不依赖上述外部证明独立推出黎曼猜想，本身也是下面问题的一部分）——我们将其正式立为本节算术临界带路线的“最后一公里”开放问题：
 
 ::: {.problem #prob-ch34-arithmetic-pivot-area-law title="对称自卷积乘性波前下跨算术枢轴子树横向移位纠缠的面积律衰减猜想（最后一公里开放问题）"}
 在 [§30.1](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization) 的有向图最短路径问题中，边权合成运算落在**热带半环 $(\min, +)$** 上，满足幂等律 $\min(a, a) = a$ 且绝无负号相消干涉，因此消去局部前驱子树后不会在兄弟枢轴分支之间凭空激发出破坏单调性的横向负相位纠缠。相反，在临界带 $\sigma \in (\frac{1}{2}, 1]$ 上的算术希尔伯特空间分块舒尔补
@@ -273,22 +303,22 @@ $$
 \widetilde{G}_{PP}^{(\ell)} = G_{PP}^{(\ell)} - G_{PI}^{(\ell)} \bigl(G_{II}^{(\ell)}\bigr)^+ G_{IP}^{(\ell)}
 $$
 
-中，乘性素数生成树虽然在乘法结构上严格正交，但底数嵌入整数环后却耦合着**加法移位关联**——即二元移位莫比乌斯自相关和 $\sum_{n \le X} \mu(n)\mu(n + h)$（Chowla 二元关联问题 / 孪生素数型移位卷积和）以及非对角 Kloosterman 和色散相位，它们会在不同乘性枢轴子树之间编织出非零的**横向非对角量子纠缠**。
+中，乘性素数生成树虽然在乘法结构上严格正交，但底数嵌入整数环后却耦合着**加法移位关联**——即二元移位莫比乌斯自相关和 $\sum_{n \le X} \mu(n)\mu(n + h)$（Chowla 二元关联问题 / 孪生素数型移位卷积和）以及非对角 Kloosterman 和色散相位，它们会在不同乘性枢轴子树之间编织出非零的**横向非对角量子纠缠**（[@rem-ch34-laplace-tridiagonal-vs-nbb-separator] 亦已用 73 位区间反例证明，演示核 $K^{\mathrm{Lap}}$ 的精确数值分离消零律不能直接迁移到裸分数部矩阵 $G^{\mathrm{NB}}$）。
 
-**开放目标**：试在二进重整化尺度序列 $X_1 < X_2 < \dots < X_K$ 上构造一族满足极点双正交约束 $\mathcal{M}_{1/2}[f_\ell]\!\bigl(\pm\tfrac{1}{2}\bigr) = 0$ 的对称自卷积乘性波前 $F_\ell = f_\ell * \tilde{f}_\ell^*$ 与稀疏算术枢轴划分 $I_\ell \sqcup P_\ell$，严格证明或证伪：
+**开放目标**：试在不调用外部证明 [@conj-riemann-hypothesis] 的前提下，在二进重整化尺度序列 $X_1 < X_2 < \dots < X_K$ 上构造一族满足极点双正交约束 $\mathcal{M}_{1/2}[f_\ell]\!\bigl(\pm\tfrac{1}{2}\bigr) = 0$ 的对称自卷积乘性波前 $F_\ell = f_\ell * \tilde{f}_\ell^*$ 与稀疏算术枢轴划分 $I_\ell \sqcup P_\ell$，严格证明或证伪：
 
 1. **横向纠缠面积律衰减界（Area-Law Bound）**：每一级分块舒尔补消元满足列空间相容性 $\operatorname{im}(G_{IP}^{(\ell)}) \subseteq \operatorname{im}(G_{II}^{(\ell)})$，且跨兄弟乘性枢轴子树的横向移位非对角耦合范数服从关于子树边界尺度的**面积律衰减**（而非体积律发散），从而将每一级中继的横漏损耗严格锁在法布里—珀罗幺正共振阈值之内，同时保证有效枢轴基数 $\lvert P_\ell\rvert$ 关于作用量深度 $\ln X_\ell$ 仅呈多项式增长（不发生指数反弹）；
-2. **全临界带半正定闭环**：由上述面积律受控的多级舒尔枢轴中继链，把 $\sigma > 1$ 欧拉乘积区的严格正定性零损耗传递至全部 $\sigma \in (\frac{1}{2}, 1)$，进而经 [@thm-ch34-critical-strip-barrier-and-cayley-bridge] 第 2 款导出黎曼猜想 [@conj-riemann-hypothesis]。
+2. **全临界带正定传递与右半带排零独立闭环**：由上述面积律受控的多级舒尔枢轴中继链，将 $\sigma > 1$ 欧拉乘积区的正定性无损传递至全部 $\sigma \in (\frac{1}{2}, 1)$，并严格证明所得正定性排除开带 $\frac{1}{2} < \operatorname{Re}(\rho) < 1$ 内的一切 $\zeta$ 零点，进而经 [@thm-ch34-critical-strip-barrier-and-cayley-bridge] 第 2 款独立导出黎曼猜想 [@conj-riemann-hypothesis]。
 :::
 
-依照全书一以贯之的认识论诚实准则，请务必看清这道认识论边界：**在 [@prob-ch34-arithmetic-pivot-area-law]（以及 [@conj-riemann-hypothesis] 本身）获得严格数学证明之前，本节建立的“局部乘性波前 $+$ 分块舒尔补算术枢轴 $+$ 多级法布里—珀罗共振隧穿”体系，是一套试图将百年解析数论瓶颈收束到单一代数目标的构造性研究纲领与统一几何诠释（`MODEL` $+$ `OPEN`），绝不是已经完成的黎曼猜想证明！**
+依照全书一以贯之的认识论诚实准则，请务必看清这道认识论边界：**尽管经典黎曼猜想本身已由另一条外部形式化证明确立（[@conj-riemann-hypothesis]，未冻结于本书所钉 `trureturing` 仓库），但在 [@prob-ch34-arithmetic-pivot-area-law] 获得严格解决之前，本节建立的“局部乘性波前 $+$ 分块舒尔补算术枢轴 $+$ 多级法布里—珀罗共振隧穿”体系仍是一套把解析数论瓶颈收束到单一代数目标的构造性研究纲领与统一几何诠释（`MODEL` $+$ `OPEN`），绝不是已经完成的独立证明！**
 
 ::: {.remark #rem-ch34-arithmetic-pivot-literature title="图兰部分和零点、Nyman–Beurling 对数下界、4/7 磨光器定理与最短路径枢轴移植的文献脉络及认识论边界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本节汇聚的数论定理、高精度证书与跨学科几何架构严格区分以下五个认识论层级：
 
 1. **机器验证的 Lean 4 内核定理锚点（`LEAN ✓`）**：[@thm-ch34-critical-strip-barrier-and-cayley-bridge] 所列的全部九条 `trureturing` 冻结声明——`classical_zeta_unique_simple_pole_residue_one`、`completedRiemannZeta_ne_zero_of_one_le_re`、`golden_right_half_strip_implies_rh`、`cayley_ratio_norm_one_iff_critical_line`、`cayley_critical_line_zeta_criterion`、`gram_realizability`、`exists_posSemidef_completion`、`exists_posSemidef_completion_rank_le` 与 `original_zero_robin5040_localA`——连同 [@prop-ch34-hermitian-schur-variational-minimum] 的埃尔米特分块舒尔补二次型变分极小定理 `schur_quadratic_is_least`，均已在所钉提交上经 Lean 4 内核零公理缺口验证通过（`LEAN ✓`）。
 2. **解析数论与图论算法经典文献（未在本书形式化）**：部分和 $\zeta_M(s)$ 无越界零点蕴含 RH 的判据由 P. Turán（*Danske Vid. Selsk. Mat.-Fys. Medd.* **24**(17), 1–36, 1948）提出；刘维尔和符号猜想的渐近反例由 C. B. Haselgrove（*Mathematika* **5**, 141–145, 1958）给出；大 $M$ 越界零点最大实部渐近公式 $\psi_M = 1 + (\frac{4}{\pi} - 1 - o(1))\frac{\ln\ln M}{\ln M}$ 由 H. L. Montgomery（*Studies in Pure Mathematics: To the Memory of Paul Turán*, Birkhäuser, 497–506, 1983；零点存在方向）与 H. L. Montgomery & R. C. Vaughan（*Period. Math. Hungar.* **43**, 199–214；上界方向）合起来给出；结合 R. Spira（*Math. Comp.* **20**, 542–550, 1966；*Duke Math. J.* **35**, 79–82, 1968；*Math. Comp.* **22**, 168–173, 1968）与 W. R. Monach（密歇根大学博士论文, 1980），$\zeta_M(s)$ 在 $\operatorname{Re}(s) > 1$ 无零点当且仅当 $M \in \{1,\dots,18, 20, 21, 28\}$ 的完整分类定理最终由 D. J. Platt & T. S. Trudgian（*LMS J. Comput. Math.* **19**(1), 37–41, 2016，[arXiv:1507.01340](https://arxiv.org/abs/1507.01340)）确立。希尔伯特空间逼近准则与自然数顺序无条件对数下界 $\liminf_{M \to \infty}(\ln M)\,d_M^2 \ge \sum_{\operatorname{Re}(\rho)=1/2} m_\rho^2 / \lvert\rho\rvert^2 > 0$（黎曼猜想成立时该和等于或不小于 $C_{\mathrm{NBB}} = 2 + \gamma - \ln(4\pi) \approx 0.0461914179$）源自 B. Nyman（1950）、A. Beurling（1955）、L. Báez-Duarte, M. Balazard, B. Landreau & E. Saias（*Adv. Math.* **149**, 130–144, 2000）、J.-F. Burnol（*Adv. Math.* **170**(1), 56–70, 2002，[arXiv:math/0103058](https://arxiv.org/abs/math/0103058)，将无条件对数下界分子强化至重数平方 $m_\rho^2$）与 L. Báez-Duarte（2003，[arXiv:math/0202141](https://arxiv.org/abs/math/0202141)）。临界线零点正比例与磨光器极限源自 A. Selberg（1942）、N. Levinson（*Adv. Math.* **13**, 383–436, 1974，$\vartheta = \frac{1}{2}$ 下 $> 34.74\%$）、J.-M. Deshouillers & H. Iwaniec（*Invent. Math.* **70**, 219–288, 1982）、J. B. Conrey（*J. Reine Angew. Math.* **399**, 1–26, 1989，$\vartheta = \frac{4}{7}$ 原始下界 $> 40.77\%$，后在同一 $\vartheta < \frac{4}{7}$ 多项式框架内精化至 $\ge 40.88\%$）及 K. Pratt, N. Robles, A. Zaharescu & D. Zeindler（*Res. Math. Sci.* **7**, 2, 2020，引入附加代数长度达 $> 41.72\%$）。有向图单源最短路径破除排序壁垒的局部波前与稀疏枢轴算法源自 R. Duan, J. Mao, X. Mao, X. Shu & L. Yin（*STOC 2025* / [arXiv:2504.17033](https://arxiv.org/abs/2504.17033), 2025；参见 [§30.1](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization)）。
-3. **高精度区间认证与精确有理算例（`手工推导` / `NUM`）**：分块 $LDU$ 行列式分解与奇异情形下的阿尔伯特摩尔—彭罗斯广义舒尔补恒等式，以及 [@ex-ch34-turan-schur-and-cayley-calculus] 中的 $\zeta_{19}$ 百位鲁歇区间证书、$1 \le M \le 10^6$ 刘维尔正性证书、`[1, 2 | 3, 6]` 精确有理舒尔补消元和凯莱反复平方条件数值表，均为精确代数恒等式或独立复核的区间算术结果（`NUM`）。
+3. **高精度区间认证与精确有理算例（`手工推导` / `NUM`）**：分块 $LDU$ 行列式分解与奇异情形下的阿尔伯特摩尔—彭罗斯广义舒尔补恒等式、[@rem-ch34-laplace-tridiagonal-vs-nbb-separator] 中 $K^{\mathrm{Lap}}$ 的三对角精度定理与真实 $G^{\mathrm{NB}}$ 的 73 位区间分离反例，以及 [@ex-ch34-turan-schur-and-cayley-calculus] 中的 $\zeta_{19}$ 百位鲁歇区间证书、$1 \le M \le 10^6$ 刘维尔正性证书、`[1, 2 | 3, 6]` 精确有理舒尔补消元和凯莱反复平方条件数值表，均为精确代数恒等式或独立复核的区间算术结果（`NUM`）。
 4. **跨学科统一几何架构（`MODEL`）**：将一维截断解释为中途芝诺斩波、将单级磨光器解释为受限于 $\vartheta = \frac{4}{7}$ 的单跳裸隧穿、以及用算术 MERA 舒尔枢轴重整与法布里—珀罗多级共振腔统一重构临界带穿越路线，属于本书建立的几何综合模型（`MODEL`）。
 5. **未解核心数学猜想（`OPEN`）**：跨算术枢轴子树横向移位关联的面积律衰减（[@prob-ch34-arithmetic-pivot-area-law]）与高阶 Chowla 移位莫比乌斯自相关猜想（参见[附录 C](appendix-c.md#sec-appendix-c-open-register) 开放问题边界），均属当代数学尚未解决的开放命题（`OPEN`）。
 :::
