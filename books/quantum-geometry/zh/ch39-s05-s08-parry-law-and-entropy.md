@@ -1445,9 +1445,9 @@ $$
 G_{C,D}(w,v)=\langle\partial[C]\wedge w,\partial[D]\wedge v\rangle .
 $$
 
-若 $\operatorname{rk}_Q(U)+2\ne |U|$，则 $G_{C,D}$ 恒为零。要让同一个基在两条提升中都有非零系数，它必须从 $C,D$ 各漏掉一个元素。若漏掉的是同一个元素，则该元素与这个基的并集含两个回路，违反基本回路的唯一性。若两处漏掉的元素不同，其中任何一个属于交集都会被另一条回路保留在基中，产生矛盾。两个漏掉的元素因而分别属于 $P,L$。从 $U$ 删去这两点所得的集合张成 $U$，因为每个回路删去任一点后都张成原回路。这个集合还包含在共同支撑的基中，故独立且大小恰为 $|U|-2$。
+若 $\operatorname{rk}_Q(U)+2\ne |U|$，则 $G_{C,D}$ 恒为零。要让同一个基在两条提升中都有非零系数，它必须从 $C,D$ 各漏掉一个元素。若漏掉的是同一个元素，则该元素与这个基的并集含两个回路，违反基本回路的唯一性。若两处漏掉的元素不同，其中任何一个属于交集都会被另一条回路保留在基中，产生矛盾。两个漏掉的元素因而分别属于 $P,L$。从 $U$ 删去这两点所得的集合张成 $U$，因为每个回路删去任一点后都张成原回路。这个集合还包含在共同支撑的基中，故独立且大小恰为 $|U|-2$。 [正交判据](lean:D5/S3/Combinatorics/Matroids/CircuitPairInnerProduct.circuitPairing_eq_zero)
 
-若 $\operatorname{rk}_Q(U)+2=|U|$，则 $L$ 是 $Q/C$ 中的回路，$P$ 是 $Q/D$ 中的回路。对前者，把上文的有符号取系数在所有删除顶点上相加，得到函数
+若 $\operatorname{rk}_Q(U)+2=|U|$，则 $L$ 是 $Q/C$ 中的回路，$P$ 是 $Q/D$ 中的回路。 [收缩后的回路](lean:D5/S3/Combinatorics/Matroids/CircuitPairInnerProduct.residual_circuits)对前者，把上文的有符号取系数在所有删除顶点上相加，得到函数
 
 $$
 (A_Lw)(T)=\sum_{x\in L} s_{L\setminus\{x\}}(x)\,\sigma(L\setminus\{x\},T)\,w((L\setminus\{x\})\cup T),
@@ -1460,9 +1460,9 @@ G_{C,D}(w,v)=\sigma(S,P)\sigma(S,L)(-1)^{(|P|-1)(|L|-1)}
   \langle A_Lw,A_Pv\rangle .
 $$
 
-每一对从 $P,L$ 删去的顶点都确定 $U$ 的一个基。再取 $Q/U$ 的一个基，就得到参与两次提升的共同坐标。比较两次拼接时，可先把共同部分放在首位。两种拼接顺序交换了删点后的两个独有部分，因此产生公式中固定的交换符号。其余符号随各自的删点归入两个求和。
+每一对从 $P,L$ 删去的顶点都确定 $U$ 的一个基。再取 $Q/U$ 的一个基，就得到参与两次提升的共同坐标。比较两次拼接时，可先把共同部分放在首位。两种拼接顺序交换了删点后的两个独有部分，因此产生公式中固定的交换符号。其余符号随各自的删点归入两个求和。 [整系数内积分解](lean:D5/S3/Combinatorics/Matroids/CircuitPairInnerProduct.circuitPairing_factor)
 
-复合 $A_L$ 与沿回路 $L$ 的提升，会把 $Q/U$ 的每个循环乘以 $|L|$。类似地，$A_P$ 与沿回路 $P$ 的提升复合，会乘以 $|P|$。因此这两个映射在有理系数上都满射。共同目标上的坐标内积无根基，所以双线性形式 $G_{C,D}$ 在有理数上的秩，恰等于 $Q/U$ 的顶次增广循环空间的维数。收缩后的秩若为零，此处仍计入空面。
+复合 $A_L$ 与沿回路 $L$ 的提升，会把 $Q/U$ 的每个循环乘以 $|L|$。类似地，$A_P$ 与沿回路 $P$ 的提升复合，会乘以 $|P|$。因此这两个映射在有理系数上都满射。共同目标上的坐标内积无根基，所以双线性形式 $G_{C,D}$ 在有理数上的秩，恰等于 $Q/U$ 的顶次增广循环空间的维数。收缩后的秩若为零，此处仍计入空面。 [有理配对的秩](lean:D5/S3/Combinatorics/Matroids/CircuitPairInnerProduct.circuitPairing_rank)
 
 **方向复形的约化整数同调（书面推导）。** 设至少有一个非空极大面，记 $d=n-h$，令 $m$ 为满足 $R(B)=B$ 的极大面数。上面的商映射是同伦等价，因此把 $X$ 的约化整数同调与楔和的约化整数同调相识别。每个球面都有以基点为子复形的 CW 结构，因此相应球面在有限楔和的约化同调中给出一个直和项。每个 $S^{d-1}$ 在 $d-1$ 次贡献一个 $\mathbb Z$，在其余非负次数均为零。因此 $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$，而 $k\ne d-1$ 时 $\widetilde H_k(X;\mathbb Z)=0$。[Hatcher，《Algebraic Topology》，推论 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
