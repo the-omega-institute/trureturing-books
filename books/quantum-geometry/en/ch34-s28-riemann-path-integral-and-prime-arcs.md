@@ -538,7 +538,7 @@ If the exceptional zero exists and $\chi(a)=1$, put $\delta=1-\beta$ and $W=1-Y^
 
 In the cancellation case $\delta\log Y\ge s/m^2$, so $1-e^{-u}\ge(1-e^{-1})\min\{u,1\}$ gives $W\ge (1-e^{-1})\min\{s,1\}m^{-2}$. This bound also holds for $W=1$. Dividing by $\varphi(m)\le m$ proves the claim. For the second-prime parameters $y=x^{\varepsilon/5}$, $m\le e^{4y}$ and $D=e^{y(\log x)^2}$, we have $\log D/\log(4m)\ge y(\log x)^2/(\log4+4y)\to\infty$. The same threshold therefore applies at every sufficiently large $x$. If the number of integers in the class failing either test is smaller than this prime lower bound, at least one prime passes both tests. [The counting hypothesis in the reference](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Definitions/GlobalTwisting/GeneralHyps.lean#L113-L118)
 
-**How can the same $d$ pass both tests?** Fix $\varepsilon>0$ and put $y=x^{\varepsilon/5}$, $D=\exp(y(\log x)^2)$ and $N=\lfloor x^{400}\rfloor$. Enumerate a residue class by $d_i=b+m(A+i)$ for $0\le i<L$. Write $J(n,r)$ for the product of the Legendre symbols over the prime factors of $r$, counted with multiplicity, taking the empty product $1$ at $r=0,1$. On positive odd denominators this is the Jacobi symbol. Put $w_n=\Lambda(n)\min\{1,x/n\}$. At the same index $i$, form the two sums
+**How can the same $d$ pass both tests?** Fix $\varepsilon>0$ and put $y=x^{\varepsilon/5}$, $D=\exp(y(\log x)^2)$ and $N=\lfloor x^{400}\rfloor$. Enumerate a residue class by $d_i=b+m(A+i)$ for $0\le i<L$. Write $J(n,r)$ for the product of the Legendre symbols over the prime factors of $r$, counted with multiplicity, taking the empty product $1$ at $r=0,1$. The factor at $2$ is $1$ for odd $n$ and $0$ for even $n$. On positive odd denominators this is the Jacobi symbol. Put $w_n=\Lambda(n)\min\{1,x/n\}$. At the same index $i$, form the two sums
 
 $$
 S_i=\sum_{n=1}^N w_n J(n,d_i),\qquad
@@ -561,6 +561,8 @@ Extract from each sum the terms at odd primes that do not divide $m$. The clippe
 :::
 
 **Hand derivation.** For every fixed $B>0$ we eventually have $D^{-\min\{\varepsilon,1\}/38400}\le e^{-By}$. To obtain an actual prime, enumerate just the elements of the specified class in the preceding interval $(D/2,D]$. Suppose $3\le m\le e^{4y}$, the class $a=b\bmod m$ is a unit, and the enumeration meets the hypotheses above. Then $L\le D+1$. There are at most $(D+1)D^{-\min\{\varepsilon,1\}/38400}$ failing indices. The ratio of this bound to the prime lower bound $c m^{-3}(D/2)/\log(D/2)$ tends to zero since $m^3\le e^{12y}$ and $\log D=y(\log x)^2$. At every such sufficiently large height, some prime $d$ therefore passes both tests.
+
+For the first prime $e^{y/2}<q\le e^y$ chosen above, take $M=q\prod_{2<p\le y,\ p\text{ prime}}p$, $m=16M$ and $b=8M-1$. Then $b\equiv3\pmod4$ and $\gcd(b,m)=1$. The bound $\vartheta(y)\le y\log 4$ gives $\log m\le\log16+(1+\log4)y\le4y$ for large $x$. Every prime divisor of $m$ is at most $\max\{2,y\}$ or equals $q>e^{y/2}>N$. Enumerating this class in $(D/2,D]$ gives at least $D/(2m)-1\ge D/(4m)$ indices, meeting the length threshold. At the same $x$, the first prime $q$ and the resulting $d$ pass the first test and both tests above.
 
 **How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
 

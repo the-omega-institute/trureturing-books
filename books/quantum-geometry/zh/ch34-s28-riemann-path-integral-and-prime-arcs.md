@@ -538,7 +538,7 @@ $$
 
 在发生抵消的情形，$\delta\log Y\ge s/m^2$。由 $1-e^{-u}\ge(1-e^{-1})\min\{u,1\}$ 得 $W\ge (1-e^{-1})\min\{s,1\}m^{-2}$；$W=1$ 时也成立。再除以 $\varphi(m)\le m$ 即得下界。对选 $d$ 所用的 $y=x^{\varepsilon/5}$、$m\le e^{4y}$ 和 $D=e^{y(\log x)^2}$，有 $\log D/\log(4m)\ge y(\log x)^2/(\log4+4y)\to\infty$，因此同一门槛适用于每个充分大的 $x$。若该类里未通过任一测试的整数数目小于这个素数下界，就至少留下一枚同时通过两项测试的素数。[参考库中的计数假设](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Definitions/GlobalTwisting/GeneralHyps.lean#L113-L118)
 
-**怎样在同一枚 $d$ 上通过两项测试？** 固定 $\varepsilon>0$，记 $y=x^{\varepsilon/5}$、$D=\exp(y(\log x)^2)$、$N=\lfloor x^{400}\rfloor$。沿同余类取 $d_i=b+m(A+i)$，其中 $0\le i<L$。写 $J(n,r)$ 为把 $r$ 的各素因子按重数取 Legendre 符号后相乘的值，$r=0,1$ 时取空积 $1$。对正奇数分母，它就是雅可比符号。置 $w_n=\Lambda(n)\min\{1,x/n\}$。在同一个 $i$ 上计算
+**怎样在同一枚 $d$ 上通过两项测试？** 固定 $\varepsilon>0$，记 $y=x^{\varepsilon/5}$、$D=\exp(y(\log x)^2)$、$N=\lfloor x^{400}\rfloor$。沿同余类取 $d_i=b+m(A+i)$，其中 $0\le i<L$。写 $J(n,r)$ 为把 $r$ 的各素因子按重数取 Legendre 符号后相乘的值，$r=0,1$ 时取空积 $1$。素因子 $2$ 对奇数 $n$ 贡献 $1$，对偶数 $n$ 贡献 $0$；对正奇数分母，$J$ 就是雅可比符号。置 $w_n=\Lambda(n)\min\{1,x/n\}$。在同一个 $i$ 上计算
 
 $$
 S_i=\sum_{n=1}^N w_n J(n,d_i),\qquad
@@ -561,6 +561,8 @@ $$
 :::
 
 **手工推导。** 对每个固定的 $B>0$，$D^{-\min\{\varepsilon,1\}/38400}\le e^{-By}$ 最终成立。要把整数索引变成真正的素数，可取上一段的 $(D/2,D]$ 并只枚举其中指定同余类的元素。若 $m\ge3$、$m\le e^{4y}$、$a=b\bmod m$ 为可逆类，且这个枚举满足定理的诸条件，则 $L\le D+1$。失败索引至多 $(D+1)D^{-\min\{\varepsilon,1\}/38400}$，它与素数个数下界 $c m^{-3}(D/2)/\log(D/2)$ 的比值趋于零，因为 $m^3\le e^{12y}$ 而 $\log D=y(\log x)^2$。所以在每个这样的充分大高度，至少一枚素数 $d$ 同时通过两项测试。
+
+对前文选出的第一枚素数 $e^{y/2}<q\le e^y$，取 $M=q\prod_{2<p\le y,\ p\text{ 为素数}}p$，$m=16M$，$b=8M-1$。此时 $b\equiv3\pmod4$ 且 $\gcd(b,m)=1$。由 $\vartheta(y)\le y\log4$ 得 $\log m\le\log16+(1+\log4)y\le4y$（$x$ 充分大）。整除 $m$ 的素数或者不超过 $\max\{2,y\}$，或者是 $q>e^{y/2}>N$。在 $(D/2,D]$ 中枚举该类，索引数至少为 $D/(2m)-1\ge D/(4m)$，从而满足长度门槛。在同一个 $x$ 上，第一枚素数 $q$ 与由此获得的 $d$ 使第一项测试以及上述两项测试全部通过。
 
 **窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
 
