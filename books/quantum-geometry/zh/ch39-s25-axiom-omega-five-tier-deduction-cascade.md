@@ -174,7 +174,9 @@ $$
 a\le\frac{\widehat D_{k-1}+\eta_{k-1}}{\widehat D_k-\eta_k}-k\delta.
 $$
 
-取 $\delta=16$、$k=10$。从 $\xi$ 在实轴的函数值与导数可直接算出十个 $F(j\delta)$。在中心用对称性得到 $S=\xi''(1/2)/(2\xi(1/2))<0.023105$。用区间运算把每个正节点的绝对误差认证到 $\varepsilon=10^{-15}$ 以内。对左端使用 $S_+=0.023105$，对右端使用相邻差分商。用有理数代入两端的不等式，得到 $14.1338<\gamma_1<14.1432$。十个输入均取自实轴计算，无须先查零点表。[读数与可重放的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068457253)
+取 $\delta=16$、$k=10$。从 $\xi$ 在实轴的函数值与导数可直接算出十个 $F(j\delta)$。中心对称性给出 $S=\xi''(1/2)/(2\xi(1/2))$。区间运算给出 $S<0.023105$，并把每个正节点的绝对误差认证到 $\varepsilon=10^{-15}$ 以内。对左端使用 $S_+=0.023105$，对右端使用相邻差分商。用有理数代入两端的不等式，得到 $14.1338<\gamma_1<14.1432$。十个输入均取自实轴计算，无须先查零点表。[读数与可重放的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068457253)
+
+另取 $41$ 个 $s>1$ 的实节点，用前 $25$ 个素数（$p\le97$）的欧拉因子和其余项的积分上界估计未归一化的对数导数，同法得到 $14.134723<\gamma_1<14.134756$。该算例从实轴欧拉乘积取得绝对归一化。[欧拉乘积与尾界的独立证书](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068568073)
 
 有限个精确读数本身也允许不同的正离散谱。在包括原点的 $K$ 个固定采样点上保留读数和 $S$ 时，可以联合移动 $K+1$ 个互异谱点各一份重数。[保持有限采样的谱变形](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068509921)
 
