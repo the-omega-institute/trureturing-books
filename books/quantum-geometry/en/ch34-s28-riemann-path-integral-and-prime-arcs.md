@@ -807,7 +807,8 @@ The recurring short windows with zero mass put a positive width in the zero set.
 
 At the critical width, windows with arbitrarily small normalized mass occur arbitrarily late. Above it, a strictly positive lower bound holds for every sufficiently late window and may depend on its width. Determining $W_*$ and deciding whether exact zero-mass windows recur at $W_*$ remain open here.
 
-**All cluster values at a fixed width.** Let $\beta>1/2$ bound the real parts of all nontrivial zeta zeros, and put $p=\beta-1/2$. For each fixed real width $W\ge0$, write $M_W(B)=N(Be^{-W},B)/B^p$. Enumerate the nontrivial zero occurrences as $\rho_k$, with $\gamma_k=\operatorname{Im}\rho_k$. Set $a_k=1/[\rho_k(1-\rho_k)]$ when $\operatorname{Re}\rho_k=\beta$ and $a_k=0$ otherwise. Let $H$ be the closure of the orbit $\phi(t)=(e^{i\gamma_k t})_k$, $t\in\mathbb R$, in the product of unit circles. For $h\in H$ define
+::: {.theorem #thm-ch31-prime-phase-cluster title="All cluster values at a fixed width" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePhaseCluster.prime_tail_mass_cluster_iff_of_upper_bound"}
+Let $\beta>1/2$ bound the real parts of all nontrivial zeta zeros, and put $p=\beta-1/2$. For each fixed real width $W\ge0$, write $M_W(B)=N(Be^{-W},B)/B^p$. Enumerate the nontrivial zero occurrences as $\rho_k$, with $\gamma_k=\operatorname{Im}\rho_k$. Set $a_k=1/[\rho_k(1-\rho_k)]$ when $\operatorname{Re}\rho_k=\beta$ and $a_k=0$ otherwise. Let $H$ be the closure of the orbit $\phi(t)=(e^{i\gamma_k t})_k$, $t\in\mathbb R$, in the product of unit circles. For $h\in H$ define
 
 $$
 F_h(u)=-\operatorname{Re}\sum_k a_k h_k e^{i\gamma_k u},
@@ -815,10 +816,13 @@ F_h(u)=-\operatorname{Re}\sum_k a_k h_k e^{i\gamma_k u},
 $$
 
 A real number $y$ is a cluster value of $M_W(B)$ as $B\to+\infty$ if and only if $y=I_W(h)$ for some $h\in H$.
+:::
 
+::: proof
 Write $B=e^t$ and change variables by $x=e^{t-s}$. The normalized mass is a weighted integral over $0\le s\le W$ with the negative part applied to $e^{(1-\beta)(t-s)}Q_\vartheta(e^{t-s})$. The integrated explicit formula and prime-power correction show that this input differs from $F_{\phi(t)}(-s)$ by an error tending to zero. Since $t-s\ge t-W$, the error tends to zero uniformly on the entire window. Taking negative parts increases no distance, so the integrated error tends to zero as well.
 
-The product of unit circles is compact. The integer-time phases return arbitrarily close to the identity at arbitrarily late times. Translating these returns makes every orbit point approachable at arbitrarily late times. Taking the closure gives the same property for every point of $H$. Absolute summability of the coefficients gives continuity of $I_W$, so its image of $H$ is closed. The uniform window estimate then identifies this image with the cluster set.
+The product of unit circles is compact. The integer-time phases return arbitrarily close to the identity at arbitrarily late times. Translating these returns makes every orbit point approachable at arbitrarily late times. Taking the closure gives the same property for every point of $H$. Absolute summability of the coefficients gives continuity of $I_W$, so its image of $H$ is closed. The uniform window estimate then identifies this image with the cluster set. The full proof is checked by the Lean kernel.
+:::
 
 The cluster set is a compact interval because the real phase orbit has connected closure and the window functional is continuous. If no zero has real part $\beta$, or if $W=0$, the interval is the singleton $\{0\}$. When a nontrivial zero attains the maximum $\beta>1/2$ and $W>0$, the lower endpoint is the lower limit in the critical-width theorem. A zero cluster value allows the normalized mass to approach zero along arbitrarily late windows.
 

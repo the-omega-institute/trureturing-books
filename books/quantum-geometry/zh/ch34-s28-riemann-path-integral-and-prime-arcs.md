@@ -807,7 +807,8 @@ $$
 
 临界宽度处，任意晚都能找到归一化质量任意小的窗口。超过临界宽度后，每个足够晚的窗口都有同一严格正下界，该下界可以依赖宽度。确定 $W_*$ 的值以及宽度恰为 $W_*$ 的零质量窗口是否反复出现，仍是这里的开放问题。
 
-**固定宽度窗口的全部簇值。** 设 $\beta>1/2$ 是所有黎曼 ζ 函数非平凡零点实部的上界，令 $p=\beta-1/2$。对固定实数 $W\ge0$，记 $M_W(B)=N(Be^{-W},B)/B^p$。将非平凡零点按重数列为 $\rho_k$，记 $\gamma_k=\operatorname{Im}\rho_k$。设 $a_k=1/[\rho_k(1-\rho_k)]$ 当 $\operatorname{Re}\rho_k=\beta$，其余 $a_k=0$。在单位圆的乘积空间中，记 $H$ 为相位轨道 $\phi(t)=(e^{i\gamma_k t})_k$（$t\in\mathbb R$）的闭包。对 $h\in H$，定义
+::: {.theorem #thm-ch31-prime-phase-cluster title="固定宽度窗口的全部簇值" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePhaseCluster.prime_tail_mass_cluster_iff_of_upper_bound"}
+设 $\beta>1/2$ 是所有黎曼 ζ 函数非平凡零点实部的上界，令 $p=\beta-1/2$。对固定实数 $W\ge0$，记 $M_W(B)=N(Be^{-W},B)/B^p$。将非平凡零点按重数列为 $\rho_k$，记 $\gamma_k=\operatorname{Im}\rho_k$。设 $a_k=1/[\rho_k(1-\rho_k)]$ 当 $\operatorname{Re}\rho_k=\beta$，其余 $a_k=0$。在单位圆的乘积空间中，记 $H$ 为相位轨道 $\phi(t)=(e^{i\gamma_k t})_k$（$t\in\mathbb R$）的闭包。对 $h\in H$，定义
 
 $$
 F_h(u)=-\operatorname{Re}\sum_k a_k h_k e^{i\gamma_k u},
@@ -815,10 +816,13 @@ F_h(u)=-\operatorname{Re}\sum_k a_k h_k e^{i\gamma_k u},
 $$
 
 实数 $y$ 是 $B\to+\infty$ 时 $M_W(B)$ 的簇值，当且仅当存在 $h\in H$ 使 $y=I_W(h)$。
+:::
 
+::: proof
 令 $B=e^t$，以 $x=e^{t-s}$ 换元。归一化质量成为对 $0\le s\le W$ 的加权积分，负部的输入是 $e^{(1-\beta)(t-s)}Q_\vartheta(e^{t-s})$。积分显式公式与素数幂修正给出该输入与 $F_{\phi(t)}(-s)$ 之差趋于零。由于 $t-s\ge t-W$，误差在全窗上一致趋于零。取负部至多保留原误差，积分之后仍趋于零。
 
-相位乘积空间是紧空间。整数时刻的相位任意晚都能回到单位元的任意邻域，平移这个回归就能在任意晚的时刻逼近每一个轨道点。再取闭包，得到 $H$ 内每一点都可由晚期相位逼近。系数绝对可和使 $I_W$ 连续，所以它在 $H$ 上的像闭合。结合全窗误差，簇集恰为 $I_W(H)$。
+相位乘积空间是紧空间。整数时刻的相位任意晚都能回到单位元的任意邻域，平移这个回归就能在任意晚的时刻逼近每一个轨道点。再取闭包，得到 $H$ 内每一点都可由晚期相位逼近。系数绝对可和使 $I_W$ 连续，所以它在 $H$ 上的像闭合。结合全窗误差，簇集恰为 $I_W(H)$。完整证明由 Lean 内核检查。
+:::
 
 簇值的集合是一个紧区间，因为实相位轨道的闭包连通，窗口泛函连续。若没有零点实部等于 $\beta$，或 $W=0$，该区间退化为 $\{0\}$。当某个非平凡零点取到最大实部 $\beta>1/2$ 且 $W>0$ 时，这个区间给出此前临界宽度定理所用的下极限。零属于簇集只要求任意晚的窗口质量可在归一化下逼近零。
 
