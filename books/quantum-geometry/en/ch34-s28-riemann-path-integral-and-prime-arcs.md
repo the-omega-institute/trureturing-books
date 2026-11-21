@@ -868,11 +868,15 @@ G_\beta(u)=
 \frac{\exp((\operatorname{Re}\rho_k-1/2)u)}{|\rho_k(1-\rho_k)|}.
 $$
 
-Fix $0<d<2-C$. There is a real threshold $T$ such that every window with $W>0$ and $t-W\ge T$ satisfies at least one of the following.
+::: {.theorem #thm-ch31-prime-critical-residual title="A late window and the intermediate spectrum" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeCriticalResidual.prime_tail_mass_pos_or_intermediate_or_wider_zero_cluster"}
+Use the intermediate sum $G_eta$ defined above. Fix $0<d<2-C$. There is a real threshold $T$ that works for every upper bound $eta$ as above. Every window with $W>0$ and $t-W\ge T$ satisfies at least one of the following.
 
 - $N(e^{t-W},e^t)>0$.
 - Some $u\in[t-W,t]$ satisfies $G_\beta(u)\ge d$.
 - There is a width $W'>W$ at which zero is a cluster value of $N(Be^{-W'},B)/B^p$ as real $B\to+\infty$.
+:::
+
+[The square-root residual bound](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimeCriticalResidual.eventually_prime_tail_root_scale).
 
 At the square-root scale, the correction for prime powers subtracted from the complete tail tends to $2$. The critical-line coefficients are positive reals with total at most the first Li coefficient $C$. The terms from zeros strictly to the left of the critical line each decay as $u\to+\infty$. Summability of the coefficient norms gives decay of their sum. The intermediate budget $G_\beta(u)$ bounds the contributions from the remaining zeros below the upper-bound line. For all sufficiently large $u$, the contribution from the upper-bound line plus $G_\beta(u)-d$ is therefore an upper bound for $e^{u/2}Q_\vartheta(e^u)$. If the mass is zero and $G_\beta<d$ throughout the window, continuity gives $Q_\vartheta\ge0$ there, so the phase profile on the upper-bound line is strictly positive throughout. Continuity at the left endpoint extends the positive interval a little farther to the left. Its negative-part mass stays zero at the wider width, and the fixed-width cluster formula realizes this zero as a cluster value. Each intermediate summand is nondecreasing in $u$. If the right endpoint satisfies $G_\beta(t)\le d<2-C$, choose $d<d'<2-C$ and use the threshold for $d'$ to obtain a strict margin throughout the window.
 

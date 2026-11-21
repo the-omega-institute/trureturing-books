@@ -868,11 +868,15 @@ G_\beta(u)=
 \frac{\exp((\operatorname{Re}\rho_k-1/2)u)}{|\rho_k(1-\rho_k)|}.
 $$
 
-任取 $0<d<2-C$。存在实数 $T$，使每个 $W>0$、$t-W\ge T$ 的窗口至少满足以下一项。
+::: {.theorem #thm-ch31-prime-critical-residual title="晚期零质量窗口的三种情形" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeCriticalResidual.prime_tail_mass_pos_or_intermediate_or_wider_zero_cluster"}
+记 $G_eta$ 如上。 任取 $0<d<2-C$。存在实数 $T$，对每个上述上界 $eta$，每个 $W>0$、$t-W\ge T$ 的窗口至少满足以下一项。
 
 - $N(e^{t-W},e^t)>0$。
 - 存在 $u\in[t-W,t]$ 使 $G_\beta(u)\ge d$。
 - 存在 $W'>W$，使零是 $N(Be^{-W'},B)/B^p$ 在实数 $B\to+\infty$ 时的簇值。
+:::
+
+[平方根尺度的余项界](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimeCriticalResidual.eventually_prime_tail_root_scale)。
 
 在平方根尺度上，从完整尾项减去素数幂的修正趋于 $2$。临界线上的系数为正实数，它们的总和至多为第一 Li 系数 $C$。临界线左侧的零点项由可和的系数模支配，且每项随 $u\to+\infty$ 衰减，故其总和趋于零。$G_\beta$ 控制其余低于上界线的零点。对充分大的 $u$，从上界线的贡献减去 $d$ 并加上 $G_\beta(u)$，仍得到 $e^{u/2}Q_\vartheta(e^u)$ 的上界。若窗口质量为零且整窗都有 $G_\beta<d$，连续性给出 $Q_\vartheta\ge0$，上界线的相位曲线因而在整窗上严格为正。它在左端点连续，可以向左延伸一点。延伸后的相位曲线在更宽的窗口上给出零负部质量，固定宽度簇集公式随即给出相应的零簇值。中间谱和 $G_\beta(u)$ 随 $u$ 单调不减。因此，若右端点满足 $G_\beta(t)\le d<2-C$，可选 $d<d'<2-C$，用 $d'$ 的阈值保证整窗的严格余量。
 
