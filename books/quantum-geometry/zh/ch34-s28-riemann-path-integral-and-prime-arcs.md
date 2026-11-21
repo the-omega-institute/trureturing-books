@@ -708,7 +708,7 @@ $$
 
 立方根谱的模态系数为 $-3/[\rho(3-\rho)]$，相位为 $e^{i\gamma_\rho\ln(x)/3}$，其幂衰减为 $x^{-1/3}$，与六次幂主密度同阶。平方根和立方根中心化尾项各自与对应谱密度相差 $O(x^{-1/2})$，完整尾项的显式公式误差也为 $O(x^{-1/2})$。五次根中心化尾项为 $O(x^{-2/5})$。取共同起点足够大，使整个窗口上的 $-Q_\vartheta(x)$ 为正，负部质量便可写成对数坐标下的有符号积分。对谱逐项积分得到 $A_3(B)-A_3(a)$，对六、七次幂的主密度积分得到系数 $-18/5$ 与 $49/15$。在同一个区间 $[\ln a,\ln B]$ 上积分误差密度，所得界为常数乘 $D_{3/8}(a,B)$，涵盖 $B=a$。
 
-参考仓库的 `FormBAt.mono` 在同一窗口中通过指数的单调性限制幂次。这里沿用在原窗口内比较的思路。 [参考仓库的窗口限制](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Window.lean#L37-L44)
+参考仓库的 `FormBAt.mono` 利用幂函数关于指数的单调性，把逐点上界限制到左端点相同、右端点更近的窗口。这里直接在原窗口的每一点比较衰减率，并保留两个端点。 [参考仓库的窗口限制](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Window.lean#L37-L44)
 
 完整证明由 Lean 内核检查。
 :::
