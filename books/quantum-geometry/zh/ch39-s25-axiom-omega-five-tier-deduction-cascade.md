@@ -106,7 +106,7 @@ $$
 素数矢高在临界脊线上起涨卡：第四阶台座上素数矢高台阶在 $\sigma > \frac{1}{2}$ 受收敛环约束，移至临界脊线 $\sigma = \frac{1}{2}$ 时越过青色参考环双对数起涨（`riemann_zeta_dirichlet_sum_eq_euler_product`、`golden_right_half_strip_implies_rh` 与 `schur_quadratic_is_least` 为 `LEAN ✓`，梅滕斯估计为正文所引冻结声明 `Mertens.E₂p.bound'`，其误差的数值核对标 `NUM`）。
 :::
 
-**第四阶采用的算术输入。** Alpöge 的终端声明 `riemannHypothesis : RiemannHypothesis` 给出 Mathlib 的黎曼猜想。Sutherland 对五条终端声明做了公理审计，并用 con-leche 将证明与单独写出的挑战命题比对。另一份独立的 nanoda 重放记录报告五条声明的证明依赖全部通过。记录中 RH 用到的公理是 `propext`、`Classical.choice`、`Quot.sound`。以下把零点定位作为外部已核验的输入。从零点到本章比较读数的步骤是手工推导。[终端声明](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean) · [Sutherland 的重放与命题比对](https://math.mit.edu/~drew/grh/) · [独立公理审计与重放日志](https://github.com/Infatoshi/rh-verification-receipts/blob/ac99f18cef21952de094234fab95db342ed16638/VERIFICATION_RESULT.txt)
+**第四阶采用的算术输入。** Alpöge 的终端声明 `riemannHypothesis : RiemannHypothesis` 给出 Mathlib 的黎曼猜想。Sutherland 对五条终端声明做了公理审计，并用 con-leche 将证明与单独写出的挑战命题比对。另一份独立的 nanoda 重放记录报告五条声明的证明依赖全部通过。记录中 RH 用到的公理是 `propext`、`Classical.choice`、`Quot.sound`。以下把零点定位作为外部已核验的输入。从零点到本章比较读数的步骤是手工推导。[终端声明](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean) · [Sutherland 的重放与命题比对](https://math.mit.edu/~drew/grh/) · [独立公理审计与重放日志](https://github.com/Infatoshi/rh-verification-receipts/blob/ac99f18cef21952de094234fab95db342ed16638/VERIFICATION_RESULT.txt) · [Lean 与 Mathlib 社群联合声明，2026-11-21](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/)
 
 **从零点到舒尔枢轴。** 取右半平面 $\operatorname{Re}s>1/2$ 中 $N$ 个互异节点 $s_j$，记 $G_{jk}=K_\epsilon(s_j,s_k)$。在 [§31.3 的零点展开](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-31-3)中，每个互异零点 $\rho$ 的重数为 $m_\rho$。任给系数 $c_j\in\mathbb C$，有
 
@@ -176,7 +176,7 @@ $$
 
 取 $\delta=16$、$k=10$。从 $\xi$ 在实轴的函数值与导数可直接算出十个 $F(j\delta)$。中心对称性给出 $S=\xi''(1/2)/(2\xi(1/2))$。区间运算给出 $S<0.023105$，并把每个正节点的绝对误差认证到 $\varepsilon=10^{-15}$ 以内。对左端使用 $S_+=0.023105$，对右端使用相邻差分商。用有理数代入两端的不等式，得到 $14.1338<\gamma_1<14.1432$。十个输入均取自实轴计算，无须先查零点表。[读数与可重放的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068457253)
 
-另取 $41$ 个 $s>1$ 的实节点，用前 $25$ 个素数（$p\le97$）的欧拉因子和其余项的积分上界估计未归一化的对数导数，同法得到 $14.134723<\gamma_1<14.134756$。该算例从实轴欧拉乘积取得绝对归一化。[欧拉乘积与尾界的独立证书](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068568073)
+也可从实轴的欧拉乘积直接求未归一化读数。取 $u_j=196+16j$，$0\le j\le40$，对应的 $s_j=1/2+\sqrt{u_j}$ 均大于 $1$。用前 $25$ 个素数（$p\le97$）的欧拉因子求 $\zeta'/\zeta$，遗漏部分的绝对值至多为 $\int_{97}^\infty(\log x)x^{-s_j}\,dx$。配合 $\xi$ 的其余因子即可包围 $G(u_j)=L(\sqrt{u_j})$。写 $d_k=(-1)^k\Delta_{16}^kG(196)/(k!\,16^k)$。差分后每个纵坐标的贡献为 $m_\gamma/\prod_{j=0}^k(\gamma^2+u_j)$，因此首个纵坐标的重数给出 $d_k\prod_{j=0}^k(a+u_j)\ge1$，相邻两阶给出 $(a+u_k)d_k\le d_{k-1}$。在 $k=40$ 处用区间算术检验两端，得到 $14.134723<\gamma_1<14.134756$。[欧拉乘积与尾界的独立证书](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068568073)
 
 有限个精确读数本身也允许不同的正离散谱。在包括原点的 $K$ 个固定采样点上保留读数和 $S$ 时，可以联合移动 $K+1$ 个互异谱点各一份重数。[保持有限采样的谱变形](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068509921)
 
@@ -255,6 +255,8 @@ F(u)-F(v)\ge\frac{v-u}{S_+(B+u)(B+v)}>0.00111.
 $$
 
 若每个预测读数的允许误差为 $0.00055$，两者的允许区间互不相交。直接在实轴计算所得读数差约为 $0.00242931$。要用这项比较判定物理能标，须独立建立能量与谱参数的对应。若探针实际响应为 $F((\kappa E/\mu)^2)$，而转换因子 $\kappa>0$ 可调，$\kappa,\mu$ 同比缩放会给出相同的全部读数，探针只能确定 $\mu/\kappa$。[同能量比较与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068528778)
+
+即使 $\kappa$ 与 $\mu$ 都未知，该模型仍预言一个只依赖能量比的读数。把探针调到 $Q(E_*)=1/2$，再把能量精确加倍，便有 $Q(2E_*)=F(4F^{-1}(1/2))\approx0.330835577358412$。若初次校准的真实读数距半值至多为 $\epsilon$，第二个真实读数相对精确预测的偏差至多为 $4\epsilon$。这是因为 $u>0$ 时 $4F'(4u)/F'(u)\le4$，可从正谱表示逐项求导得到。[半值校准的数值区间与误差推导](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068618897)
 
 ## 39.2.3 第五阶推导：流群测地智能与母公理自身的遮诠透明化 {#sec-ch39-25-3}
 
