@@ -705,6 +705,30 @@ Dividing the bound on the centered sum $|g_\chi(x)|$ by $x$ gives $|g_\chi(x)|/x
 
 **Hand derivation.** On the nonprincipal branch, the reference’s smoothed, centered sum `An.gChi` used above agrees with $g_\chi$ by definition. For each bounded host character and each nonprincipal primitive character $\chi$ inducing it, the host condition `EAtH.bdG` gives $|g_\chi(x)|\le x^{1/2+\varepsilon}$ at the same endpoint $x$. If $\varepsilon<1/2$, take $\eta=1$. Then $|D_\chi|\le\log x-\gamma\le4\log x$ for every sufficiently large $x$. This is the inequality required by `EAtH.bdL` with coefficient $4$ for that $\chi$. The principal character has a separate branch. [Definitions of the centered sum and logarithmic derivative](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Analytic.lean#L9-L27) · [The two pointwise host conditions](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ExplicitFormulaErrorOfHostConditions.lean#L144-L151)
 
+For the same nonprincipal character, finitely many knots also control $g_\chi$ on a whole window. Write $D_\chi=L'(1,\chi)/L(1,\chi)$ and use the same ramp formula $g_\chi(x)=R_\chi(x)+xD_\chi$ at all real $x$. Given $Y\le Z$, let $T_\chi(Y,Z)$ consist of the two endpoints and all natural numbers $Y<n<Z$ for which $\Lambda(n)\chi(n)\ne0$. The interior knots are prime powers at which the character is nonzero.
+
+::: {.theorem #thm-ch31-character-concave-window title="Testing a concave envelope at the endpoints and active knots" lean="D5/S3/CharacterSums/DirichletRampWindow.concave_window_iff"}
+Take a positive integer modulus $N$ and a nonprincipal complex Dirichlet character $\chi$ modulo $N$. For any real $Y\le Z$ and any real-valued function $B$ concave on $[Y,Z]$, the inequality $|g_\chi(x)|\le B(x)$ holds throughout $[Y,Z]$ if and only if it holds at every point of $T_\chi(Y,Z)$.
+:::
+
+::: proof
+Between consecutive test points the ramps that have already started are affine, and the ramps that start later vanish. Any term entering strictly between those points has zero coefficient. Thus the complex-valued $g_\chi$ is affine on that segment. Write an interior point as a convex combination of the two ends. The triangle inequality bounds its norm by the chord of the endpoint norms, and concavity bounds the chord of the endpoint values of $B$ by $B(x)$. If the endpoints coincide there is just one inequality to check. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-character-power-log-window title="A joint finite test for a power envelope and a logarithmic derivative" lean="D5/S3/CharacterSums/DirichletRampWindow.power_log_window_iff"}
+Take the same type of modulus and character. Let $0<Y\le Z$, $0\le p\le1$, and $A,c\ge0$. Both inequalities
+
+$$
+|g_\chi(x)|\le A x^p,\qquad |D_\chi|\le c\ln x
+$$
+
+hold at every $x\in[Y,Z]$ if and only if $|g_\chi(t)|\le A t^p$ for every $t\in T_\chi(Y,Z)$ and $|D_\chi|\le c\ln Y$.
+:::
+
+::: proof
+For these exponents, $x\mapsto A x^p$ is concave on the positive real axis, so [@thm-ch31-character-concave-window] applies to the first bound. In the second bound the left-hand side is constant in $x$, and $c\ln x$ is nondecreasing on the window. Its value at $Y$ therefore suffices. The full proof is checked by the Lean kernel.
+:::
+
 **How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
 
 $$

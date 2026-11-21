@@ -705,6 +705,30 @@ $$
 
 **手工推导。** 非主分支上，前文使用的参考库平滑中心化和 `An.gChi` 与上式的 $g_\chi$ 定义一致。对宿主有界集合中的每个特征标及诱导它的每个非主本原特征标 $\chi$，宿主条件 `EAtH.bdG` 在同一端点 $x$ 给出 $|g_\chi(x)|\le x^{1/2+\varepsilon}$。若 $\varepsilon<1/2$，取 $\eta=1$，则每个充分大的 $x$ 都有 $|D_\chi|\le\log x-\gamma\le4\log x$。这给出 `EAtH.bdL` 对该 $\chi$ 要求的系数 $4$ 的不等式。主特征标有单独的分支。[中心化和与对数导数的定义](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Analytic.lean#L9-L27) · [宿主的两个逐点条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ExplicitFormulaErrorOfHostConditions.lean#L144-L151)
 
+对同一非主特征标，整窗上的 $g_\chi$ 还可由有限个结点控制。记 $D_\chi=L'(1,\chi)/L(1,\chi)$，并将 $g_\chi(x)=R_\chi(x)+xD_\chi$ 的同一斜坡公式用于所有实数 $x$。给定 $Y\le Z$，把两个端点与所有满足 $Y<n<Z$、$\Lambda(n)\chi(n)\ne0$ 的自然数 $n$ 合并成有限集 $T_\chi(Y,Z)$。内部结点是特征标值非零的素数幂。
+
+::: {.theorem #thm-ch31-character-concave-window title="用端点与有效结点检验凹包络" lean="D5/S3/CharacterSums/DirichletRampWindow.concave_window_iff"}
+取正整数模数 $N$ 和模 $N$ 的非主复 Dirichlet 特征标 $\chi$。对任意实数 $Y\le Z$ 及在 $[Y,Z]$ 上凹的实值函数 $B$，整窗上每点都满足 $|g_\chi(x)|\le B(x)$，当且仅当 $T_\chi(Y,Z)$ 的每个点都满足这个不等式。
+:::
+
+::: proof
+相邻检验点之间，已经开始的各个斜坡都是仿射函数，还未开始的斜坡取零。可能在两点之间进入的项系数为零。因此复值函数 $g_\chi$ 在这一段上仿射。把内部点写成两端的凸组合，三角不等式将其范数控制在端点范数的弦之下，而 $B$ 的凹性把端点函数值的弦控制在 $B(x)$ 之下。端点重合时只需该点的不等式。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-character-power-log-window title="幂包络与对数导数的有限联合检验" lean="D5/S3/CharacterSums/DirichletRampWindow.power_log_window_iff"}
+取上述模数与特征标。设 $0<Y\le Z$，$0\le p\le1$，$A,c\ge0$。整窗上每个 $x\in[Y,Z]$ 都同时满足
+
+$$
+|g_\chi(x)|\le A x^p,\qquad |D_\chi|\le c\ln x
+$$
+
+当且仅当 $|g_\chi(t)|\le A t^p$ 对每个 $t\in T_\chi(Y,Z)$ 成立，并且 $|D_\chi|\le c\ln Y$。
+:::
+
+::: proof
+在给定指数范围内，$x\mapsto A x^p$ 在正实轴上凹，故第一项可直接应用 [@thm-ch31-character-concave-window]。第二项的左边不随 $x$ 改变，而 $c\ln x$ 在窗上单调不减，在 $Y$ 处检验即可。完整证明由 Lean 内核检查。
+:::
+
 **窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
 
 $$
