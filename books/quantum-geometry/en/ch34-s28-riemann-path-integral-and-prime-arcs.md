@@ -384,8 +384,7 @@ Conversely, suppose $\zeta(\rho)=0$ with $\beta=\operatorname{Re}\rho>1/2$. For 
 Take $\varepsilon=\eta=b(\beta-1/2)/3$. The lower bound becomes $Y^{2\eta}$, in contradiction with $A_{\vartheta,b}(Y)\le Y^\eta$ on arbitrarily late windows. This excludes zeros to the right of the critical line. Reflection of the nontrivial zeros across that line gives RH. The full proof is checked by the Lean kernel.
 :::
 
-**A lower mass bound on wide windows and uniform divergence if RH fails.**
-
+::: {.theorem #thm-ch31-wide-prime-window title="A lower mass bound on wide windows and uniform divergence if RH fails" lean="D5/S3/Weil/Mertens/IntegratedExplicit/WidePrimeWindowMass.prime_tail_wide_window_mass"}
 For the actual prime-only tail, write the mass at any ordered real endpoints as
 
 $$
@@ -393,8 +392,11 @@ N(A,B)=\int_A^B \frac{\max\{-Q_\vartheta(x),0\}}{\sqrt x}\,dx .
 $$
 
 Fix $b>1$. There is a constant $C_b\ge0$ such that $N(A,B)\ge 2\ln(B/A)-C_b$ whenever $2\le A$ and $A^b\le B$. If RH fails, for each real $K$ a single right-endpoint threshold $S$ gives $N(A,B)-2\ln(B/A)\ge K$ for every $B\ge S$ and every admissible $A$.
+:::
 
-The threshold can be chosen independently of $A$ by setting $Y=B^{1/b}$. Since $A^b\le B$, the interval $[Y,B]=[Y,Y^b]$ lies inside $[A,B]$. Integrating the same nonnegative function over the larger interval can only increase the mass. If RH fails, symmetry supplies a zero with real part $\beta>1/2$. The fixed-power estimate allows any positive exponent loss, so choosing $b(\beta-1/2)/2$ gives $N(A,B)\ge B^{(\beta-1/2)/2}$. This power eventually exceeds $2\ln B$ plus any fixed constant. Since $2\ln(B/A)\le2\ln B$, the discrepancy diverges uniformly. At bounded right endpoints the logarithmic term is bounded and the mass is nonnegative, which extends the lower bound to the whole domain. If RH holds, the bounded remainder for all ordered endpoints gives the same lower bound directly.
+::: proof
+The threshold can be chosen independently of $A$ by setting $Y=B^{1/b}$. Since $A^b\le B$, the interval $[Y,B]=[Y,Y^b]$ lies inside $[A,B]$. Integrating the same nonnegative function over the larger interval can only increase the mass. If RH fails, symmetry supplies a zero with real part $\beta>1/2$. The fixed-power estimate allows any positive exponent loss, so choosing $b(\beta-1/2)/2$ gives $N(A,B)\ge B^{(\beta-1/2)/2}$. This power eventually exceeds $2\ln B$ plus any fixed constant. Since $2\ln(B/A)\le2\ln B$, the discrepancy diverges uniformly. At bounded right endpoints the logarithmic term is bounded and the mass is nonnegative, which extends the lower bound to the whole domain. If RH holds, the bounded remainder for all ordered endpoints gives the same lower bound directly. The full proof is checked by the Lean kernel.
+:::
 
 The exponent $b>1$ is fixed in advance. In logarithmic coordinates the condition $B\ge A^b$ requires the window to widen with the scale. At fixed ratio $B/A$, the inclusion used above gives no corresponding bound.
 
