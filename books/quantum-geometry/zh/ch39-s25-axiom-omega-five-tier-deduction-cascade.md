@@ -149,7 +149,7 @@ $$
 
 把平方读数看作 $u=y^2$ 的函数。其亚纯延拓是 $\sum_{\gamma>0}m_\gamma/[L(0)(u+\gamma^2)]$。离开极点的紧集上级数一致收敛，因为尾项可由 $2m_\gamma/[L(0)\gamma^2]$ 控制。任一正实开区间上的**精确曲线**由恒等定理唯一确定这个延拓。每个极点 $u=-\gamma^2$ 给出一个正纵坐标，留数 $m_\gamma/L(0)$ 的比给出相对重数。若把每个重数都乘同一正整数，归一化曲线保持不变。对于黎曼零点，黎曼–冯·曼戈尔特公式给出按重数计的正零点数 $N(T)\sim T\log T/(2\pi)$，其首项固定了整体比例。[@rem-ch34-li-toeplitz-superexponential-collapse]
 
-**有限次读数怎样围住零点的最小正纵坐标？（手工推导）** 令 $F(u)=L(\sqrt u)/S$，其中 $S=L(0)$。最小正纵坐标记作 $\gamma_1$，写 $a=\gamma_1^2$。令 $p_\gamma=m_\gamma/(S\gamma^2)$，则 $\sum p_\gamma=1$，而 $F(u)=\sum p_\gamma\gamma^2/(\gamma^2+u)$。取步长 $\delta>0$。只读一次 $F(\delta)$ 时，由 $F(0)=1$ 可算得 $(1-F(\delta))/\delta=\sum p_\gamma/(\gamma^2+\delta)$。每个分母都至少为 $a+\delta$，而最小纵坐标自身至少占有权重 $1/(Sa)$。这分别给出了此读数差的上界和下界。
+**有限次读数怎样围住零点的最小正纵坐标？** 令 $F(u)=L(\sqrt u)/S$，其中 $S=L(0)$。最小正纵坐标记作 $\gamma_1$，写 $a=\gamma_1^2$。令 $p_\gamma=m_\gamma/(S\gamma^2)$，则 $\sum p_\gamma=1$，而 $F(u)=\sum p_\gamma\gamma^2/(\gamma^2+u)$。取步长 $\delta>0$。只读一次 $F(\delta)$ 时，由 $F(0)=1$ 可算得 $(1-F(\delta))/\delta=\sum p_\gamma/(\gamma^2+\delta)$。每个分母都至少为 $a+\delta$，而最小纵坐标自身至少占有权重 $1/(Sa)$。这分别给出了此读数差的上界和下界。
 
 对整数 $k\ge1$，令 $\Delta_\delta f(u)=f(u+\delta)-f(u)$、$P_k(x)=\prod_{j=1}^k(x+j\delta)$。逐次取差，每次引入一个新的分母。用上一段的两种估计得
 
@@ -160,7 +160,9 @@ D_k=\frac{(-1)^k\Delta_\delta^k F(0)}{k!\delta^k}
 \frac{1}{SaP_k(a)}\le D_k\le\frac{1}{P_k(a)}.
 $$
 
-设归一化读数 $F(0)=1$ 精确，其余各 $F(j\delta)$ 的绝对误差至多为 $\varepsilon$，并以这些读数计算 $\widehat D_k$。差分的二项式系数中，带误差各项的绝对值之和为 $2^k-1$，故 $|\widehat D_k-D_k|\le\eta_k=(2^k-1)\varepsilon/(k!\delta^k)$。取已认证的 $S_+\ge S$。只要数据与上述误差相容且 $\widehat D_k>\eta_k$，就可求两个正根
+设归一化读数 $F(0)=1$ 精确，其余各 $F(j\delta)$ 的绝对误差至多为 $\varepsilon$，并以这些读数计算 $\widehat D_k$。差分的二项式系数中，带误差各项的绝对值之和为 $2^k-1$，故 $|\widehat D_k-D_k|\le\eta_k=(2^k-1)\varepsilon/(k!\delta^k)$。对于上述归一化正谱，带误差的读数直接满足 $1\le SaP_k(a)(\widehat D_k+\eta_k)$ 和 $P_k(a)(\widehat D_k-\eta_k)\le1$。对总权重为一的非负离散谱，只要原点读数精确且首点权重满足 $Sa p_0\ge1$，同一估计成立。此处 $Sa p_0=m_{\gamma_1}\ge1$。见 [`noisy_first_atom_enclosure`](lean:D5/S3/Analytic/Stieltjes/NoisyFirstAtom.noisy_first_atom_enclosure)。
+
+下面手算区间端点。取已认证的 $S_+\ge S$。只要数据与上述误差相容且 $\widehat D_k>\eta_k$，就可求两个正根
 
 $$
 S_+\ell P_k(\ell)(\widehat D_k+\eta_k)=1,\qquad P_k(r)(\widehat D_k-\eta_k)=1.
