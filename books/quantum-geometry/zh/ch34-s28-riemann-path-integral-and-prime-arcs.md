@@ -661,6 +661,21 @@ $$
 
 对 $B>a$，在 $[a,B]$ 上比较两个幂函数的导数可得 $D_{1/3}(a,B)\le(10/9)a^{-1/30}D_{3/10}(a,B)$。因此当 $a\to\infty$ 时，$R(a,B)/D_{3/10}(a,B)$ 一致趋于 $25/6$，范围包括所有 $B>a$，也包括宽度趋于零的窗口。
 
+**六次幂、七次幂与立方根谱。** 沿用有符号余量 $R(a,B)$，保留五次项，并定义
+$$
+A_3(x)=18\operatorname{Re}\sum_\rho
+\frac{x^{\rho/3-1/2}}{\rho(3-\rho)(3-2\rho)}.
+$$
+求和仍取原零点谱与平方根谱所用的全部实际零点，重数照计。在 RH 下，存在 $a_0\ge2$ 与 $K>0$，使得每一对实数 $B\ge a\ge a_0$ 都满足
+$$
+\left|R(a,B)-\frac{25}{6}D_{3/10}(a,B)
++\frac{18}{5}D_{1/3}(a,B)-A_3(B)+A_3(a)
+-\frac{49}{15}D_{5/14}(a,B)\right|
+\le K D_{3/8}(a,B).
+$$
+
+有限 Chebyshev 分解在第六、七次幂给出系数 $-1$ 与 $+1$，第八次幂抵消。RH 下 $\vartheta(y)-y=O(\sqrt y\ln^2 y)$，因此这两个 Chebyshev 项可以用各自的幂函数主项积分。归一化后的密度分别为 $-(6/5)x^{-1/3}$ 与 $(7/6)x^{-5/14}$，在对数坐标积分给出窗口系数 $-18/5$ 与 $49/15$。中心化立方根尾项的零点系数为 $-3/[\rho(3-\rho)]$，相位为 $e^{i\gamma_\rho\ln(x)/3}$，实幂为 $x^{-1/3}$，因此立方根谱与六次主项同阶。绝对可和性允许在实际对数窗口逐项积分，得到原函数 $A_3$。中心化五次根尾项为 $x^{-2/5}$ 阶，纳入 $O(x^{-3/8})$ 的余量密度界。积分保留两个端点，包括 $B=a$ 的情形。 [Johnston，引理 2.7](https://arxiv.org/html/2201.06184v2#S2.Thmtheorem7) · [参考仓库的窗口限制](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Window.lean#L37-L44)
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::

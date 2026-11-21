@@ -661,6 +661,21 @@ Integrating the uncentered fifth root against $dt/t^2$ and multiplying by $\sqrt
 
 For $B>a$, one has $D_{1/3}(a,B)\le(10/9)a^{-1/30}D_{3/10}(a,B)$ by comparing the two power derivatives over $[a,B]$. Thus $R(a,B)/D_{3/10}(a,B)$ tends to $25/6$ as $a\to\infty$, uniformly in all $B>a$, including windows whose length tends to zero.
 
+**The sixth and seventh powers and the cube-root spectrum.** For the same signed residual $R(a,B)$, keep the fifth term and define
+$$
+A_3(x)=18\operatorname{Re}\sum_\rho
+\frac{x^{\rho/3-1/2}}{\rho(3-\rho)(3-2\rho)}.
+$$
+The sum runs over the same actual zeros with multiplicity as in the ordinary and square-root primitives. Under RH, there exist $a_0\ge2$ and $K>0$ such that all real $B\ge a\ge a_0$ satisfy
+$$
+\left|R(a,B)-\frac{25}{6}D_{3/10}(a,B)
++\frac{18}{5}D_{1/3}(a,B)-A_3(B)+A_3(a)
+-\frac{49}{15}D_{5/14}(a,B)\right|
+\le K D_{3/8}(a,B).
+$$
+
+In the finite Chebyshev decomposition the coefficients at degrees six and seven are $-1$ and $+1$. Degree eight cancels. Under RH, $artheta(y)-y=O(\sqrt y\ln^2 y)$, so the two retained Chebyshev terms can be integrated with their ordinary power main terms. After normalization their densities are $-(6/5)x^{-1/3}$ and $(7/6)x^{-5/14}$. Integrating in log coordinates gives the window coefficients $-18/5$ and $49/15$. The centered cube-root tail has modes with coefficients $-3/[\rho(3-\rho)]$. Their phases are $e^{i\gamma_\rho\ln(x)/3}$ and their real power is $x^{-1/3}$, so the cube spectrum enters at the same order as the sixth main term. Absolute summability permits integration over the actual log window and gives the primitive $A_3$. The centered fifth-root tail decays at order $x^{-2/5}$ and fits inside the remaining density bound $O(x^{-3/8})$. Integration preserves both endpoints, including $B=a$. [Johnston, Lemma 2.7](https://arxiv.org/html/2201.06184v2#S2.Thmtheorem7) · [Window restriction in the reference project](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Window.lean#L37-L44)
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::
