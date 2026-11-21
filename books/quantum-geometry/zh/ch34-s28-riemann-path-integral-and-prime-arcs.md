@@ -507,6 +507,37 @@ $$
 
 **手工推导。** 下界为正，故每个这样的 $x$ 都有合格素数；所选的 $q$ 可以随 $x$ 与 $E$ 改变。由每个素数的权重上界 $Te^{-T/2}$ 还可得 $|S_x(E)|\ge e^{T/2}/173065984000$。若能把违反参考库两个无零点条件中任一项的候选素数全部装入这样的 $E$，定理就会给出同时满足两项的素数。把这些素数装入规定大小的集合，还需要独立的估计。
 
+**第二枚素数落在移动的同余类里。** 先选 $q$ 后，选 $d$ 的模数 $m$ 可以随高度增大。要从区间 $(D/2,D]$ 中删去未通过测试的整数，需要先知道指定同余类里实际有多少素数。对固定 $m$ 的渐近式，其起算点可能依赖 $m$。这里需要对所有 $m$ 同时有效的起算条件。
+
+取整数 $m\ge3$ 及模 $m$ 的可逆剩余类 $a$。在分圆域 $\mathbb Q(\zeta_m)$ 中，记 $\sigma_a(\zeta_m)=\zeta_m^a$，$\Pi_a(t)$ 为不超过 $t$、在此扩张中非分歧且 Frobenius 为 $\sigma_a$ 的有理素数个数。令 $Q$ 为此 Galois 群所有特征标的原始导子的最大值。记 $\operatorname{Li}(t)=\int_2^t du/\log u$。
+
+::: {.theorem #thm-ch31-cyclotomic-tz title="带例外零点项的分圆素数计数" status="written-proof" proof="pf-ch31-cyclotomic-tz" doi="10.2140/ant.2019.13.1039" source="Theorems 1.4 and 3.3, pp. 1042 and 1052" request="https://github.com/the-omega-institute/trureturing-requests/issues/455"}
+存在绝对有效常数 $A,c_2,c_3,s>0$。若无例外零点，取 $F(t)=\operatorname{Li}(t)$。若有，例外实特征标唯一，记为 $\chi$，其例外零点为 $\beta=1-\lambda/\log Q$，其中 $sQ^{-2}\le\lambda<1/8$。此时取 $F(t)=\operatorname{Li}(t)-\chi(a)\operatorname{Li}(t^\beta)$。对每个 $m,a$ 和每个 $t\ge Q^{c_2}$ 都有
+
+$$
+\left|\varphi(m)\Pi_a(t)-F(t)\right|
+\le A\left(e^{-c_3\log t/\log Q}+e^{-\sqrt{c_3\log t}}\right)F(t).
+$$
+
+:::
+
+::: {.proof #pf-ch31-cyclotomic-tz}
+在 Thorner 与 Zaman 的定理 1.4 中取 $L=\mathbb Q(\zeta_m)$，基域为 $\mathbb Q$，交换子群取整个 $G=(\mathbb Z/m\mathbb Z)^\times$，共轭类取 $\{\sigma_a\}$。于是固定域为 $\mathbb Q$，其判别式和次数均为 $1$。原文式 (1–11)、(3–1) 中的两个导子参数都化为这里的 $Q$，密度系数为 $1/\varphi(m)$。每个原始导子整除 $m$，而 $m\ge3$ 时群有非平凡特征标，其原始导子至少为 $3$，所以 $3\le Q\le m$。定理 1.4 给出所写相对误差和例外项，定理 3.3 给出 $\lambda\ge sQ^{-2}$。两者的常数均绝对有效。[原刊定理 1.4](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=5) · [原刊定理 3.3](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=15)
+:::
+
+**手工推导。** 存在绝对有效常数 $c,K,D_0>0$，使每个 $m\ge3$、每个可逆类 $a$ 和每个 $D\ge\max\{D_0,(4m)^K\}$ 都满足下界
+
+$$
+\#\{Y<p\le2Y:p\text{ 为素数},\ p\equiv a\pmod m\}
+\ \ge\ c\,m^{-3}\frac{Y}{\log Y},\qquad Y=D/2.
+$$
+
+先取充分大的 $K\ge2$，再取充分大的 $D_0$。由 $\log Y/\log Q\ge K-1$ 和 $Y\ge D_0/2$，可使 $Y>m$、$Y\ge Q^{c_2}$，且定理在 $Y,2Y$ 处的相对误差均不超过 $1/100$。区间中的素数 $p>m$ 非分歧，其 Frobenius 把 $\zeta_m$ 送到 $\zeta_m^p$。故两端计数之差正是所求素数个数。
+
+若例外零点存在且 $\chi(a)=1$，置 $\delta=1-\beta$，$W=1-Y^{-\delta}$；其余情形置 $W=1$。在 $[Y,2Y]$ 上有 $F'(t)\ge W/\log(2Y)$，故 $F(2Y)-F(Y)\ge WY/(2\log Y)$。在发生抵消的情形，$\beta>1/2$，从 $t^\beta$ 到 $t$ 积分得 $0\le F(t)\le2t(1-t^{-\delta})/\log t$。又因 $1-(2Y)^{-\delta}\le1-Y^{-2\delta}\le2W$，两端之和至多为 $10WY/\log Y$。其余情形有 $0\le F(t)\le2\operatorname{Li}(t)\le6t/\log t$（$t$ 充分大），故各情形都满足 $F(Y)+F(2Y)\le18WY/\log Y$。减去两端误差后，$\varphi(m)(\Pi_a(2Y)-\Pi_a(Y))\ge WY/(4\log Y)$。
+
+在发生抵消的情形，$\delta\log Y\ge s/m^2$。由 $1-e^{-u}\ge(1-e^{-1})\min\{u,1\}$ 得 $W\ge (1-e^{-1})\min\{s,1\}m^{-2}$；$W=1$ 时也成立。再除以 $\varphi(m)\le m$ 即得下界。对选 $d$ 所用的 $y=x^{\varepsilon/5}$、$m\le e^{4y}$ 和 $D=e^{y(\log x)^2}$，有 $\log D/\log(4m)\ge y(\log x)^2/(\log4+4y)\to\infty$，因此同一门槛适用于每个充分大的 $x$。若该类里未通过任一测试的整数数目小于这个素数下界，就至少留下一枚同时通过两项测试的素数。[参考库中的计数假设](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Definitions/GlobalTwisting/GeneralHyps.lean#L113-L118)
+
 **窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
 
 $$

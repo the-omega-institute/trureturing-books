@@ -507,6 +507,37 @@ Put $D=86532992000$. The primes congruent to $3$ modulo $8$ in the full interval
 
 **Hand derivation.** The positive lower bound supplies a prime at every such $x$. The choice of $q$ may vary with $x$ and $E$. The single-prime weight bound $Te^{-T/2}$ also gives $|S_x(E)|\ge e^{T/2}/173065984000$. If a set $E$ of the allowed size contains every candidate failing either zero-free condition in the reference, the theorem supplies a prime meeting both conditions. Bounding that exceptional set requires an independent estimate.
 
+**The second prime belongs to a moving residue class.** Once $q$ is chosen, the modulus $m$ for selecting $d$ can grow with the height. To discard the integers that fail a test in $(D/2,D]$, we first need a count of the actual primes in the prescribed class. An asymptotic for fixed $m$ may start at a height that depends on $m$. Here the starting condition must work for all $m$.
+
+Fix an integer $m\ge3$ and a unit $a$ modulo $m$. In the cyclotomic field $\mathbb Q(\zeta_m)$ write $\sigma_a(\zeta_m)=\zeta_m^a$. Let $\Pi_a(t)$ count the rational primes up to $t$ that are unramified in this extension and have Frobenius $\sigma_a$. Let $Q$ be the maximum of the primitive conductors of the characters of its Galois group. Write $\operatorname{Li}(t)=\int_2^t du/\log u$.
+
+::: {.theorem #thm-ch31-cyclotomic-tz title="Cyclotomic prime counting with an exceptional zero term" status="written-proof" proof="pf-ch31-cyclotomic-tz" doi="10.2140/ant.2019.13.1039" source="Theorems 1.4 and 3.3, pp. 1042 and 1052" request="https://github.com/the-omega-institute/trureturing-requests/issues/455"}
+There exist absolute effective constants $A,c_2,c_3,s>0$. In the absence of an exceptional zero, put $F(t)=\operatorname{Li}(t)$. If one exists, its real character $\chi$ is unique and the zero is $\beta=1-\lambda/\log Q$ with $sQ^{-2}\le\lambda<1/8$. In this case put $F(t)=\operatorname{Li}(t)-\chi(a)\operatorname{Li}(t^\beta)$. For every $m,a$ as above and every $t\ge Q^{c_2}$,
+
+$$
+\left|\varphi(m)\Pi_a(t)-F(t)\right|
+\le A\left(e^{-c_3\log t/\log Q}+e^{-\sqrt{c_3\log t}}\right)F(t).
+$$
+
+:::
+
+::: {.proof #pf-ch31-cyclotomic-tz}
+Apply Theorem 1.4 of Thorner and Zaman to $L=\mathbb Q(\zeta_m)$ over $\mathbb Q$, with the entire group $G=(\mathbb Z/m\mathbb Z)^\times$ as the abelian subgroup and $\{\sigma_a\}$ as the conjugacy class. The fixed field is $\mathbb Q$, of discriminant and degree $1$. Both conductor parameters in (1–11) and (3–1) reduce to $Q$, and the density factor is $1/\varphi(m)$. Each primitive conductor divides $m$. For $m\ge3$ the group has a nontrivial character, whose primitive conductor is at least $3$, so $3\le Q\le m$. Theorem 1.4 gives the relative error and exceptional term above, and Theorem 3.3 gives $\lambda\ge sQ^{-2}$. Both sets of constants are absolute and effective. [Published Theorem 1.4](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=5) · [Published Theorem 3.3](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=15)
+:::
+
+**Hand derivation.** There exist absolute effective constants $c,K,D_0>0$ such that for every $m\ge3$, every unit $a$ and every $D\ge\max\{D_0,(4m)^K\}$,
+
+$$
+\#\{Y<p\le2Y:p\text{ prime},\ p\equiv a\pmod m\}
+\ \ge\ c\,m^{-3}\frac{Y}{\log Y},\qquad Y=D/2.
+$$
+
+First choose $K\ge2$ sufficiently large, then choose $D_0$ sufficiently large. Since $\log Y/\log Q\ge K-1$ and $Y\ge D_0/2$, these choices ensure $Y>m$, $Y\ge Q^{c_2}$ and relative errors at most $1/100$ at both $Y$ and $2Y$. Every prime in the interval is unramified since $p>m$, and its Frobenius takes $\zeta_m$ to $\zeta_m^p$. The difference of the two endpoint counts is therefore the desired prime count.
+
+If the exceptional zero exists and $\chi(a)=1$, put $\delta=1-\beta$ and $W=1-Y^{-\delta}$. In every other case put $W=1$. On $[Y,2Y]$ we have $F'(t)\ge W/\log(2Y)$, giving $F(2Y)-F(Y)\ge WY/(2\log Y)$. In the cancellation case $\beta>1/2$, so integrating from $t^\beta$ to $t$ gives $0\le F(t)\le2t(1-t^{-\delta})/\log t$. Since $1-(2Y)^{-\delta}\le1-Y^{-2\delta}\le2W$, the sum of the two endpoints is at most $10WY/\log Y$. In the other cases $0\le F(t)\le2\operatorname{Li}(t)\le6t/\log t$ for large $t$. Hence $F(Y)+F(2Y)\le18WY/\log Y$ in every case. Subtracting the two endpoint errors leaves $\varphi(m)(\Pi_a(2Y)-\Pi_a(Y))\ge WY/(4\log Y)$.
+
+In the cancellation case $\delta\log Y\ge s/m^2$, so $1-e^{-u}\ge(1-e^{-1})\min\{u,1\}$ gives $W\ge (1-e^{-1})\min\{s,1\}m^{-2}$. This bound also holds for $W=1$. Dividing by $\varphi(m)\le m$ proves the claim. For the second-prime parameters $y=x^{\varepsilon/5}$, $m\le e^{4y}$ and $D=e^{y(\log x)^2}$, we have $\log D/\log(4m)\ge y(\log x)^2/(\log4+4y)\to\infty$. The same threshold therefore applies at every sufficiently large $x$. If the number of integers in the class failing either test is smaller than this prime lower bound, at least one prime passes both tests. [The counting hypothesis in the reference](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Definitions/GlobalTwisting/GeneralHyps.lean#L113-L118)
+
 **How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
 
 $$
