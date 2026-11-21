@@ -526,15 +526,22 @@ The full proof is checked by the Lean kernel.
 
 The ratio, coefficient, and threshold may depend on the supplied zero. The bound retains its full exponent for every zero satisfying the hypothesis. Allowing every prescribed $\kappa>1$ would require further control of the filter support and oscillation period.
 
-**A prescribed ratio when the supremum is unattained.** Let $\Theta$ be the supremum of the real parts of nontrivial zeros of the Riemann zeta function, and suppose every nontrivial zero has real part strictly below $\Theta$. Fix any real $\kappa>1$ and $1/2<\sigma<\Theta$. There are constants $c>0$ and $S$ such that every pair of real endpoints with $B\ge S$, $A\ge2$, and $\kappa A\le B$ satisfies
+::: {.theorem #thm-ch31-prime-prescribed-ratio-mass title="A prescribed-ratio mass bound when the supremum is unattained" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePrescribedRatioWindowMass.prime_tail_prescribed_ratio_mass_of_unattained"}
+Let $\Theta$ be the supremum of the real parts of nontrivial zeros of the Riemann zeta function, and suppose every nontrivial zero has real part strictly below $\Theta$. Fix any real $\kappa>1$ and $1/2<\sigma<\Theta$. There are constants $c>0$ and $S$ such that every pair of real endpoints with $B\ge S$, $A\ge2$, and $\kappa A\le B$ satisfies
 
 $$
 N(A,B)\ge cB^{\sigma-1/2}.
 $$
+:::
 
-For logarithmic width $W=\ln\kappa$, choose a probability filter supported within width $W/2$. When the supremum is unattained, all zeros below any fixed height can be kept to the left of a cutoff strictly below $\Theta$. A retained conjugate pair can then have real part $\beta>\sigma$ and an ordinate large enough that two cosine periods and the filter support fit inside width $W$. The averaged cosine dominates the error throughout a subinterval of fixed length. Exchanging the probability average with integration over that subinterval gives a lower bound on the unaveraged negative mass within the same window.
+::: proof
 
-The substitution $x=e^t$ and the comparison $Q_\vartheta\le Q$ transfer the bound from $[\ln B-W,\ln B]$ to $[B/\kappa,B]$, with exponent $\beta-1/2$. This subwindow lies in every admissible $[A,B]$, and for sufficiently large $B$ the same constant gives the bound with exponent $\sigma-1/2$. The constant and threshold can depend on the prescribed ratio and exponent. The statement applies to $\sigma<\Theta$ when the supremum is unattained.
+For logarithmic width $W=\ln\kappa$, reserve width $W/2$ for the support of the probability filter. When the supremum is unattained, the zeros with ordinates in any bounded range can be kept to the left of a cutoff strictly below $\Theta$. A retained conjugate pair can then have real part $\beta>\sigma$ and an ordinate large enough that two cosine periods and the filter support fit inside width $W$. The averaged cosine dominates the error throughout a subinterval of fixed length. Exchanging the probability average with integration over that subinterval gives a lower bound on the unaveraged negative mass within the same window.
+
+The substitution $x=e^t$ and the comparison $Q_\vartheta\le Q$ transfer the bound from $[\ln B-W,\ln B]$ to $[B/\kappa,B]$, with exponent $\beta-1/2$. This subwindow lies in every admissible $[A,B]$, and for sufficiently large $B$ the same constant gives the bound with exponent $\sigma-1/2$. The full proof is checked by the Lean kernel.
+:::
+
+The constant and threshold can depend on the prescribed ratio and exponent. The statement applies to $\sigma<\Theta$ when the supremum is unattained.
 
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 
