@@ -871,10 +871,10 @@ $$
 
 误差还可对左端点一致估计。存在依赖于 $\beta$ 的 $K\ge0$，使对每个 $\varepsilon>0$，当 $B$ 充分大时，所有 $a\in[2,B]$ 都满足
 $$
-\left|\frac{N(a,B)}{B^p}-I_\infty(\varphi(\ln B))\right|
+\left|\frac{N(a,B)}{B^p}-I_\infty(\phi(\ln B))\right|
 \le \varepsilon+K(a/B)^p .
 $$
-先与从 $2$ 开始的累积质量比较。移去 $[2,a]$ 时，质量减少 $N(2,a)$。沿用早期区间的固定积分与后期的幂函数界，可得 $N(2,a)\le Ka^p$。因此幂函数项控制移动左端点损失的质量，$\varepsilon$ 来自累积质量的相位近似。省略质量的误差随对数宽度指数衰减。 误差的上侧还满足 $N(a,B)/B^p-I_\infty(\varphi(\ln B))\le\varepsilon$，因为移去的质量非负。
+先与从 $2$ 开始的累积质量比较。移去 $[2,a]$ 时，质量减少 $N(2,a)$。沿用早期区间的固定积分与后期的幂函数界，可得 $N(2,a)\le Ka^p$。因此幂函数项控制移动左端点损失的质量，$\varepsilon$ 来自累积质量的相位近似。省略质量的误差随对数宽度指数衰减。 误差的上侧还满足 $N(a,B)/B^p-I_\infty(\phi(\ln B))\le\varepsilon$，因为移去的质量非负。
 
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 

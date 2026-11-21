@@ -871,7 +871,7 @@ Fix $L\ge0$. Eventually the window contains $[Be^{-L},B]$. For sufficiently larg
 
 There is also a uniform estimate in the left endpoint. For some $K\ge0$ depending on $\beta$, every $\varepsilon>0$ has a threshold in $B$ beyond which all $a\in[2,B]$ satisfy
 $$
-\left|\frac{N(a,B)}{B^p}-I_\infty(\varphi(\ln B))\right|
+\left|\frac{N(a,B)}{B^p}-I_\infty(\phi(\ln B))\right|
 \le \varepsilon+K(a/B)^p .
 $$
 Compare first with the cumulative mass from $2$. Removing $[2,a]$ changes the mass by $N(2,a)$, which is at most $Ka^p$ by the same early-interval and late-power estimates. Thus the displayed power controls what is lost by moving the left endpoint, and $\varepsilon$ comes from the cumulative phase approximation. The estimate gives a rate in logarithmic width for the omitted mass. The signed error also has upper bound $\varepsilon$ because the removed mass is nonnegative.
