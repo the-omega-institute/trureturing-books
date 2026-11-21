@@ -364,6 +364,19 @@ $$
 
 模一特征标 $\chi$ 生成的群只有一个元素。数域构造给出 $1\le c\le|\langle\chi\rangle|$，所以宿主构造中的阶 $c2^e$ 等于 $2^e$，直接满足上述秩估计。这使模一情形的截断指数可以从 $401$ 降到 $400$，求和只用 $1\le j<\lfloor x^{400}\rfloor$。在指数 $400$ 的窗口假设下，`fixed_of_400` 对每个上述 $\varepsilon$ 给出 $J\ge1$，使得超过任意给定起点都能找到外窗 $[Z,Z^{3/2}]$ 与一组共同的 $Y,q,d$，其中 $Y\le Z\le Z^{3/2}\le Y^J$。这对素数在 $[Y,Y^J]$ 上满足 `PairGood`，外窗内每个 $x$ 又有与之匹配的 $e(x)$ 和上述长度界。同一外部环境核验了 `TopG → VWinAt PChar.one 400 → RiemannHypothesis`。族输入与这个较弱的模一窗口输入都是该推论的假设。[指数 400 的源码与内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059864808)
 
+在模一上同调窗口中，参考库还在同一外部 Lean 环境重放了正特征子空间的计数。模一的例外素数集恰为 $\{3,7\}$。参考证明已给出情形 IV 以及主特征标消失所需的情形 Z。情形 I 归结到判别式 $-7$ 的虚二次数域 $\mathbb Q(\sqrt{-7})$ 上的一项轨道估计。测试素数可以固定为 $11,13$，当选窗的两个辅助素数 $q,d$ 均大于 $13$ 时，这一对测试对同一宿主同时适用。轨道估计仍要求一个常数统一控制允许的指数、模数、特征标轨道、系数数据与有限素数集。[模一的例外素数集](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7060326962) · [计数 I、IV、Z 与条件推论](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061140456)
+
+情形 V 的两个高导子计数只用扭转指标 $e=1$。令 $c_2(\psi)$ 为宿主特征标 $\psi$ 在素数 $2$ 处局部分量的导子中 $2$ 的指数。去掉 $2$ 处分量后，剩余特征标的平方为主特征标。于是对 $\ell=3,7$，定义中的阶数 $f_0$ 都等于 $\ell$ 模 $4$ 的乘法阶 $2$。门槛 $R_1=16\ell^2\,4^{v_2(\ell^2-1)}$ 在 $\ell=3$ 处等于 $9216$，在 $\ell=7$ 处等于 $200704$。把 $R_1$ 与 $2^{c_2(\psi)}$ 比较就得到确切分界。
+
+| 例外素数 $\ell$ | $v_2(\ell^2-1)$ | 情形 V | 对应的情形 Vs |
+| --- | --- | --- | --- |
+| $3$ | $3$ | $c_2(\psi)\ge14$ | $c_2(\psi)\le13$ |
+| $7$ | $4$ | $c_2(\psi)\ge18$ | $c_2(\psi)\le17$ |
+
+`unit_countV_iff` 表明，模一的情形 V 等价于存在一个共同的自然数指数 $A$，使上述两个高导子族都满足参考库的 `VLe` 界 $(\ell N)^A$，其中 $N$ 是宿主模数。该界量化每个模一宿主、满足 `h.Big t` 的 $t>1$、每个允许的代数闭包与系数系统，以及这种宿主在扭转 $1$ 处的每个合格特征标。表中的数字给出被计入的条件；每个具体宿主提供哪些特征标由其自身决定。[两项高导子计数的等价式与内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061244097)
+
+把这两项计数作为假设代入 `rh_of_one_orbit_estimate`，还须给定算术族 `TopG`、模一几何窗口 `UnitB K 400`、奇素数界 `Odd.PrimeBound`、上述固定域轨道估计和模一情形 II。情形 Vs 所用的输入为 Poitou–Tate 对偶、局部有限性、局部 Tate 对偶，以及某个实数 $C_K$ 对应的次数估计 `LemmaK`。在这些假设下，外部内核复核的推论由本章的 Mangoldt 窗口判据得到 RH。
+
 **怎样让同一个判别式在几个素数处都分裂？** 对奇素数 $p$，记 $J(-d,p)=\bigl(\frac{-d}{p}\bigr)$。值为 $1$ 的意思是 $t^2\equiv-d\pmod p$ 有非零解。取 $B=3$，要检查的小奇素数只有 $3$。素数 $d=23$ 满足 $d\equiv7\pmod{16}$ 及 $-23\equiv1\pmod3$。再取素数 $q=59\equiv3\pmod8$，有 $-23\equiv36=6^2\pmod{59}$。这一对满足所需的两个分裂条件。下面的构造用特定剩余类一次保证所有有限条件，这些剩余类只占可用素数的一部分。
 
 ::: {.theorem #thm-ch31-split-prime-host-series title="满足局部分裂条件的辅助素数的加权级数" lean="D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series"}
