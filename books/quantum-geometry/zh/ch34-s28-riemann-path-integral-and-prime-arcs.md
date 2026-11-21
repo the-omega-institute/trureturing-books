@@ -469,6 +469,26 @@ $$
 
 因此每个起始块 $K_0$ 之后，都有某个 $k\ge K_0$ 和该块的一个素数 $q$ 达到上述界。发散允许部分块内没有好素数。这里估计的是外库在第一次选 $q$ 时使用的有限和，对应附加扭曲 $\kappa=1$。在外库规定的解析、大小与无零点条件下，对应特征标的平滑中心化和 $g_\chi(x_k)$ 满足 $|g_\chi(x_k)+T_k(q)|\le x_k^\varepsilon$，近似项的符号为负。第一次选 $q$ 时还须同时满足两个无零点条件。随后选 $d$ 时的扭曲和模数随 $q,x$ 变化，相应的对数导数估计与无零点盒条件仍需分别论证。[参考库的有限和](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/SmoothedRemainderRealIntegralFormula.lean#L139-L147) · [平滑和的近似](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/GChiApproximationSumStatement.lean#L14) · [第一次选素数的条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean)
 
+**如果先指定实高度，仍然能选出素数吗？** 现在先给定实数 $x$，令 $T=x^{\varepsilon/5}$。把前面的截断和写成 $T_x(q)$，即在同一个 $x$ 上取权重 $\Lambda(n)\min\{1,x/n\}$，乘上雅可比符号 $(n/q)$，一直加到 $\lfloor x^{400}\rfloor$。选素数的区间随 $x$ 移动。为给随后要避开的整数留出余地，再给定一个有限集 $E\subset\mathbb N$。记 $S_x(E)$ 为满足下列条件的素数之集：
+
+$$
+e^{T/2}<q\le e^T,\qquad q\equiv3\pmod8,\qquad
+q\notin E,\qquad |T_x(q)|\le \tfrac12 x^{1/2+\varepsilon}.
+$$
+
+::: {.theorem #thm-ch31-real-scale-mangoldt-prime-supply title="每个充分大实高度的好素数权重" lean="D5/S3/CharacterSums/DyadicMangoldtPrimeSupply.real_scale_quadratic_mangoldt_supply"}
+对每个固定的 $\varepsilon>0$，存在 $x_0(\varepsilon)$，使得对每个实数 $x\ge x_0(\varepsilon)$ 和每个满足 $|E|\le e^{T/3}$ 的有限集 $E\subset\mathbb N$，都有
+$$
+\sum_{q\in S_x(E)}\frac{\ln q}{q}\ \ge\ \frac{T}{173065984000}.
+$$
+:::
+
+::: proof
+令 $D=86532992000$。在上述区间内，所有模 $8$ 余 $3$ 的素数的总权重最终至少为 $T/D$。按二进块估计二次矩，在每块中都保持同一个实高度 $x$ 和截点 $\lfloor x^{400}\rfloor$。超过阈值的素数的总权重最终至多为 $36T^2/x^\varepsilon$，除以 $T$ 后趋于零。对 $E$ 中的素数，每项至多为 $Te^{-T/2}$，删去至多 $e^{T/3}$ 项所损失的权重至多为 $Te^{-T/6}$。当 $x$ 充分大时，两项损失各不超过 $T/(4D)$，余下至少 $T/(2D)$。完整证明由 Lean 内核验证。
+:::
+
+**手工推导。** 下界为正，故每个这样的 $x$ 都有合格素数；所选的 $q$ 可以随 $x$ 与 $E$ 改变。由每个素数的权重上界 $Te^{-T/2}$ 还可得 $|S_x(E)|\ge e^{T/2}/173065984000$。若要用这个选择同时满足参考库的两个无零点条件，还须证明所有违反任一条件的候选素数都落在一个符合上述大小限制的 $E$ 中。
+
 **窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
 
 $$

@@ -469,6 +469,26 @@ Sum $|T_k|^2$ over every integer in the block congruent to $3$ modulo $8$. These
 
 Thus for every starting block $K_0$ there exist a $k\ge K_0$ and a prime $q$ in that block meeting the bound. Divergence allows individual blocks to contain no good prime. The estimate concerns the finite sum for the first selection of $q$ in the reference, with the extra twist $\kappa=1$. Under the analytic, size and zero-free hypotheses in the reference, the corresponding smoothed, centered character sum satisfies $|g_\chi(x_k)+T_k(q)|\le x_k^\varepsilon$, so the approximating term is $-T_k(q)$. The first choice of $q$ must also satisfy two zero-free conditions simultaneously. In the subsequent choice of $d$, the twists and modulus vary with $q,x$. The logarithmic derivative estimates and zero-free boxes require separate arguments. [Finite sum in the reference](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/SmoothedRemainderRealIntegralFormula.lean#L139-L147) · [Approximation for the smoothed sum](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/GChiApproximationSumStatement.lean#L14) · [Conditions in the first prime selection](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean)
 
+**Can the height be prescribed before choosing the prime?** Fix a real height $x$ and put $T=x^{\varepsilon/5}$. Write $T_x(q)$ for the same truncated sum evaluated at this $x$. Each term is $\Lambda(n)\min\{1,x/n\}$ times the Jacobi symbol $(n/q)$, and the sum ends at $\lfloor x^{400}\rfloor$. As the interval for $q$ moves with $x$, we allow a finite set $E\subset\mathbb N$ of integers to be avoided. Let $S_x(E)$ consist of the primes satisfying
+
+$$
+e^{T/2}<q\le e^T,\qquad q\equiv3\pmod8,\qquad
+q\notin E,\qquad |T_x(q)|\le \tfrac12 x^{1/2+\varepsilon}.
+$$
+
+::: {.theorem #thm-ch31-real-scale-mangoldt-prime-supply title="Good prime weight at every sufficiently large real height" lean="D5/S3/CharacterSums/DyadicMangoldtPrimeSupply.real_scale_quadratic_mangoldt_supply"}
+For every fixed $\varepsilon>0$ there exists $x_0(\varepsilon)$ such that for every real $x\ge x_0(\varepsilon)$ and every finite set $E\subset\mathbb N$ with $|E|\le e^{T/3}$,
+$$
+\sum_{q\in S_x(E)}\frac{\ln q}{q}\ \ge\ \frac{T}{173065984000}.
+$$
+:::
+
+::: proof
+Put $D=86532992000$. The primes congruent to $3$ modulo $8$ in the full interval eventually have total weight at least $T/D$. The second-moment estimate uses dyadic blocks, each at the same real height $x$ and cutoff $\lfloor x^{400}\rfloor$. The primes exceeding the threshold eventually have total weight at most $36T^2/x^\varepsilon$, which tends to zero after division by $T$. Each prime in the interval has weight at most $Te^{-T/2}$, so deleting at most $e^{T/3}$ integers costs at most $Te^{-T/6}$. For sufficiently large $x$ each loss is at most $T/(4D)$, leaving at least $T/(2D)$. The full proof is checked by the Lean kernel.
+:::
+
+**Hand derivation.** The positive lower bound supplies a prime at every such $x$. The choice of $q$ may vary with $x$ and $E$. The single-prime weight bound $Te^{-T/2}$ also gives $|S_x(E)|\ge e^{T/2}/173065984000$. To use this selection for both zero-free conditions in the reference, one still needs to show that all candidates failing either condition lie in some $E$ within the stated size bound.
+
 **How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
 
 $$
