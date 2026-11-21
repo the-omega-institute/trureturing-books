@@ -111,6 +111,52 @@ $$
 
 若用同一系数乘生成元的平方迹来规定匹配尺度的规范动能（`MODEL`），还须选取取迹空间。以基本表示的平方迹 $1/2$ 归一化，在弧标签上的三个指数 $(I_4,I_L,I_R)$ 为 $(1,1/2,1/2)$，在全部左右跃迁上等权取迹为 $(4,4,4)$。上式的超荷嵌入给出 $\sin^2\theta_W=I_L/(I_L+I_R+2I_4/3)$，两种取迹分别得到 $3/10$ 与 $3/8$。本构造给出了条件性的内部表示及电荷。给出局域规范动力学、把跃迁实现为时空中的手征粒子、解释观测到的三代并确定匹配能标与质量，仍需独立的动力学。
 
+同一组有向弧也可用来检验一套夸克质量处方。经典黎曼猜想已经证明，所用的算术结论由声明 `riemannZeta_eq_zero_re` 给出，即非平凡零点的实部都是 $1/2$。将零点按正纵坐标 $\gamma$ 递增编号，计入重数。[零点定位定理](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean)
+
+模型令 $\phi_j=\gamma\log j$，其中 $j=2,3,5$。对不全相等的三个余弦，减去均值后归一为单位向量 $v$，取 $p=(1+\sqrt6\sum_j v_j^3)/2$、$q=1-p$。上型、下型扇区分别取 $\xi_u=-\cos\phi_2$、$\xi_d=-\cos\phi_3$。制备时使用两个互相独立的寄存器。第一个从十二条有向弧中均匀抽取。第二个在每条弧上加两个独立等概率的共轭符号，得到四十八个等概率标签。每个寄存器各独立抽取三次，三次标签完全相同的概率分别为 $\epsilon=12^{-2}$ 和 $A=48^{-2}$。单态取平面负本征方向的强度因子 $1-\xi$，再乘第二个寄存器的接受概率 $A$。这项制备是在早先的质量拟合之后选定的。
+
+在每个扇区代入相应的 $\xi$，记 $a=A(1-\xi)$、$Y=p(1+\xi)$、$X=q(1-\xi)$、$K^2=a(1-\epsilon)(1-\xi^2)/2$，取 $K\ge0$。去掉单态相位后，质量平方矩阵为
+
+$$
+H_f=\begin{pmatrix}
+a & K\sqrt p & K\sqrt q\\
+K\sqrt p & Y & 0\\
+K\sqrt q & 0 & X
+\end{pmatrix},\qquad f=u,d.
+$$
+
+本征值的平方根之比给出各扇区的质量比。令 $O_f$ 的列为按质量递增排列的实标准正交本征向量。在上型的单态分量乘 $e^{i\phi_2}$，在下型的单态分量乘 $e^{i\phi_3}$。这样，相对素数相位 $d=\phi_3-\phi_2$ 就进入混合矩阵 $V_{\mathrm{CKM}}=O_u^{\mathsf T}\operatorname{diag}(e^{id},1,1)O_d$。
+
+在纵坐标的小区间中搜索，得到一个候选零点。证书核验 Hardy 的 $Z$ 函数在区间两端异号，且零点总数恰增加一至 $27{,}995{,}488$，再按该编号计算读数的区间。四个质量比、三个 CKM 角的正弦和 CP 相位都落在预先给定的宽盒内，其中 $m_u/m_c=0.00849243$（舍入值），落在 $[0.001,0.010]$。[质量处方与宽盒区间证书](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7069969421)
+
+Antusch、Hinze 与 Saad 的 *Updated Running Quark and Lepton Parameters at Various Scales* 表 2 以 2024 年 PDG 数据为输入，给出标准模型的 $\overline{\mathrm{MS}}$ 运行参数及其 $1\sigma$ 最高后验密度区间。在 $1,3,10,100\,\mathrm{TeV}$ 四列分别检验，将本征值的平方根之比直接等同于该能标的汤川耦合之比，每个扇区可自由选取一个总质量尺度。在 $1\,\mathrm{TeV}$，中心值之比为 $y_u/y_c=6.15\times10^{-6}/(3.11\times10^{-3})\simeq0.00198$。让 $y_u,y_c$ 在各自的边际区间内独立变化，比值的向外舍入区间为 $[0.00190189,0.00205556]$，上述模型质量比超出此区间。[表 2（arXiv:2510.01312v2）](https://arxiv.org/html/2510.01312v2#Sx1.T2)
+
+将 $H_f$ 除以迹，以帽号表示归一化后的矩阵参数。设 $E,L$ 分别为中、轻质量与重质量之比的平方。归一化矩阵的三个二阶主子式之和 $b$ 和行列式 $c$ 必须分别满足
+
+$$
+\begin{aligned}
+b&=\widehat X\widehat Y+\widehat a(\widehat X+\widehat Y)-\widehat K^2
+  =\frac{E+L+EL}{(1+E+L)^2},\\
+c&=\epsilon\widehat a\widehat X\widehat Y=\frac{EL}{(1+E+L)^3}.
+\end{aligned}
+$$
+
+行列式的左式来自单态的舒尔补 $a\epsilon$。两扇区都须满足 $\widehat a:\widehat X=A:q$。区间证书用向外舍入覆盖共同的 $q$、经由 $\widehat Y$ 独立变化的两个 $\xi$，以及任意相对相位。六个汤川耦合各自在一倍边际半宽内变化时，四列均排除两谱同时匹配的可能。将两扇区的平面方向对应起来，$\widehat Y_f$ 就是沿共同正本征方向的期望。把迹一矩阵与各自的重本征线投影相比较，得到 $\lvert\widehat Y_u-\widehat Y_d\rvert\le\sqrt{1-|V_{tb}|^2}+2-h_u-h_d$，其中 $h_f$ 是迹一矩阵的最大本征值，$|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$ 是两条重本征线夹角的余弦。六个耦合和这两个角的边际半宽同时放大到三倍，四列仍全部排除，放大到四倍时仍排除 $1$、$3\,\mathrm{TeV}$ 两列。每项检验都取各边际区间的矩形乘积。[全相位区间证书](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070084444)
+
+上位模型保留同一箭头形矩阵、共同的平面基、为零的平面非对角元，以及单态耦合到平面的方向 $(\sqrt p,\sqrt q)$。另一次搜索找到候选零点。证书核验 Hardy $Z$ 变号及零点计数恰增加一至 $37{,}409{,}621$，再用该编号的零点按原来的三素数公式重算共同的 $p,q$ 和相对相位 $d=\phi_3-\phi_2$。
+
+解除 $A,\epsilon$ 的固定制备值与两项扇区间等式 $A_u=A_d$、$\epsilon_u=\epsilon_d$，也解除两个扇区各自的 $\xi$ 余弦约束。以 $1\,\mathrm{TeV}$ 的汤川中心值给定各扇区归一化的质量平方谱 $L,E,1$，每个扇区独立重建矩阵，各用一个系数 $\eta_f$ 设定 $X=L+\eta_f(E-L)$。其中 $\eta_u=0.007720749408108672$、$\eta_d=0.04156918949309874$ 正是用随后检验的四个 $1\,\mathrm{TeV}$ CKM 中心值拟合得到的。取 $Y$ 的高根分支补全矩阵。
+
+$$
+\begin{aligned}
+F&=(X-L)(E-X)(1-X),\\
+(Y-L)(Y-E)(1-Y)&=\frac{pF}{q},\qquad \frac{7}{8}<Y<1,\\
+a&=1+E+L-X-Y,\qquad K^2=\frac{F}{q(Y-X)}.
+\end{aligned}
+$$
+
+区间计算表明，三个 CKM 混合角 $\theta_{12},\theta_{23},\theta_{13}$ 和 CP 相位 $\delta$ 同时落入各自的一倍边际区间。这是在给定质量谱下的样本内相容性结果。物理推导还须独立确定质量动力学、匹配能标与所取零点。[给定质量的拟合及区间证书](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070186249)
+
 ::: {.remark #rem-ch39-axiom-omega-field-hypotheses-and-limits title="场论假设及其界限"}
 本注记中各项假设标 `MODEL`，在这些假设下推出的结论标 `手工推导`；场论部分整体是假设性的。
 

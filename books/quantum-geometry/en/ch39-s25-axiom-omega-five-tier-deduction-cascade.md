@@ -111,6 +111,52 @@ A transition has the integer weight of its target minus that of its source. In u
 
 Normalizing the gauge kinetic terms at the matching scale by a common coefficient times the trace of the squared generators requires a choice of trace space (`MODEL`). With fundamental trace-square $1/2$, the three indices $(I_4,I_L,I_R)$ are $(1,1/2,1/2)$ on the arc labels and $(4,4,4)$ on the equally weighted left and right transition blocks together. The hypercharge embedding above gives $\sin^2\theta_W=I_L/(I_L+I_R+2I_4/3)$, hence $3/10$ and $3/8$ for the two traces, respectively. The construction gives conditional internal representations and charges. Local gauge dynamics, spacetime chirality, the three observed generations, the matching scale and the particle masses require further physical input.
 
+The same arcs give a quark-mass proposal to test. The proved classical Riemann hypothesis supplies the arithmetic input through `riemannZeta_eq_zero_re`, which places every nontrivial zero at real part $1/2$. Index the zeros by increasing positive ordinate $\gamma$, counting multiplicities. [Zero localization theorem](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean)
+
+The model sets $\phi_j=\gamma\log j$ for $j=2,3,5$. For a nonconstant cosine triple, subtract its mean and normalize to a unit vector $v$. Set $p=(1+\sqrt6\sum_j v_j^3)/2$, $q=1-p$, $\xi_u=-\cos\phi_2$ and $\xi_d=-\cos\phi_3$. Prepare two independent registers, one with twelve uniform directed arc labels and one with forty-eight equiprobable labels obtained by adding two independent fair conjugation signs to each arc. Make three independent draws in each register. The probabilities of three identical labels are $\epsilon=12^{-2}$ and $A=48^{-2}$, respectively. Give the singlet the plane's negative-direction factor $1-\xi$ times $A$. This preparation was chosen after an earlier mass fit.
+
+In each sector, use its own $\xi$ and set $a=A(1-\xi)$, $Y=p(1+\xi)$, $X=q(1-\xi)$ and $K^2=a(1-\epsilon)(1-\xi^2)/2$ with $K\ge0$. Removing the singlet phase leaves the squared-mass matrix
+
+$$
+H_f=\begin{pmatrix}
+a & K\sqrt p & K\sqrt q\\
+K\sqrt p & Y & 0\\
+K\sqrt q & 0 & X
+\end{pmatrix},\qquad f=u,d.
+$$
+
+Ratios of square roots of its eigenvalues give the mass ratios. Let the columns of $O_f$ be the real orthonormal eigenvectors in increasing mass order. Multiply their singlet components by $e^{i\phi_2}$ in the up sector and $e^{i\phi_3}$ in the down sector. The relative prime phase $d=\phi_3-\phi_2$ enters the mixing matrix $V_{\mathrm{CKM}}=O_u^{\mathsf T}\operatorname{diag}(e^{id},1,1)O_d$.
+
+A search of narrow ordinate windows found a candidate zero. The certificate checks opposite Hardy $Z$ signs at the endpoints and a zero count rising by one to $27{,}995{,}488$, then encloses the observables at that index. All four mass ratios, three CKM angle sines and the CP phase pass the prespecified broad box. In particular, $m_u/m_c=0.00849243$ to the digits shown, inside $[0.001,0.010]$. [Mass prescription and broad-box interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7069969421)
+
+Table 2 of Antusch, Hinze and Saad's *Updated Running Quark and Lepton Parameters at Various Scales* uses 2024 PDG inputs to give Standard Model $\overline{\mathrm{MS}}$ running parameters and their $1\sigma$ highest posterior density intervals. Each column at $1,3,10,100\,\mathrm{TeV}$ is a separate test, matching the square-root eigenvalue ratios directly to Yukawa ratios at that scale with one free overall mass scale per sector. At $1\,\mathrm{TeV}$ the central values give $y_u/y_c=6.15\times10^{-6}/(3.11\times10^{-3})\simeq0.00198$. Varying $y_u,y_c$ independently within their marginal intervals gives the outward-rounded ratio interval $[0.00190189,0.00205556]$, which excludes the model mass ratio above. [Table 2 (arXiv:2510.01312v2)](https://arxiv.org/html/2510.01312v2#Sx1.T2)
+
+Divide $H_f$ by its trace and mark the rescaled parameters with hats. Let $E,L$ be the squared middle-to-heavy and light-to-heavy mass ratios. The sum $b$ of the second-order principal minors and the determinant $c$ satisfy
+
+$$
+\begin{aligned}
+b&=\widehat X\widehat Y+\widehat a(\widehat X+\widehat Y)-\widehat K^2
+  =\frac{E+L+EL}{(1+E+L)^2},\\
+c&=\epsilon\widehat a\widehat X\widehat Y=\frac{EL}{(1+E+L)^3}.
+\end{aligned}
+$$
+
+The determinant follows from the singlet Schur complement $a\epsilon$. Both sectors obey $\widehat a:\widehat X=A:q$. The outward-rounded interval certificate covers the shared $q$, independent sector $\xi$ values through $\widehat Y$, and every relative phase. The six Yukawas at their tabulated marginal half-widths rule out a simultaneous match in all four columns. Identify the plane directions across sectors so $\widehat Y_f$ is the expectation along the shared positive direction. Comparing the trace-one matrices with their heavy eigenline projectors gives $\lvert\widehat Y_u-\widehat Y_d\rvert\le\sqrt{1-|V_{tb}|^2}+2-h_u-h_d$, where $h_f$ is the largest trace-one eigenvalue and $|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$ is the cosine of the angle between the lines. Tripling the marginal half-widths for all six Yukawas and both angles still excludes all four columns. Quadrupling them excludes $1$ and $3\,\mathrm{TeV}$. Each test uses the rectangular product of the marginal intervals. [All-phase interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070084444)
+
+The parent model keeps the same arrowhead form, common plane basis, zero off-diagonal entry within the plane, and singlet-to-plane direction $(\sqrt p,\sqrt q)$. A separate search found a candidate zero. The certificate checks a Hardy $Z$ sign change and a one-step zero count increase to $37{,}409{,}621$, then recomputes the shared $p,q$ and relative phase $d=\phi_3-\phi_2$ at that indexed zero using the same three-prime formulas.
+
+The parent drops the fixed preparation values of $A,\epsilon$, both cross-sector equalities $A_u=A_d$ and $\epsilon_u=\epsilon_d$, and both sector $\xi$ cosine prescriptions. The $1\,\mathrm{TeV}$ central Yukawas supply the normalized squared-mass spectrum $L,E,1$ in each sector. Reconstruct the sectors independently, setting $X=L+\eta_f(E-L)$ with one coefficient per sector. The values $\eta_u=0.007720749408108672$ and $\eta_d=0.04156918949309874$ were fitted to the same four $1\,\mathrm{TeV}$ CKM central values used to assess the fit. Complete each matrix on the high-$Y$ branch.
+
+$$
+\begin{aligned}
+F&=(X-L)(E-X)(1-X),\\
+(Y-L)(Y-E)(1-Y)&=\frac{pF}{q},\qquad \frac{7}{8}<Y<1,\\
+a&=1+E+L-X-Y,\qquad K^2=\frac{F}{q(Y-X)}.
+\end{aligned}
+$$
+
+The interval calculation places the three CKM angles $\theta_{12},\theta_{23},\theta_{13}$ and the CP phase $\delta$ simultaneously within their respective one-sigma marginal intervals. This is an in-sample compatibility result conditional on the supplied masses. A physical derivation still has to select the mass dynamics, matching scale and zero independently. [Fit with supplied masses and interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070186249)
+
 ::: {.remark #rem-ch39-axiom-omega-field-hypotheses-and-limits title="The Field Hypotheses and Their Limits"}
 In this remark the hypotheses are labelled `MODEL` and what is derived under them `manual derivation`; the field part as a whole is hypothetical.
 
