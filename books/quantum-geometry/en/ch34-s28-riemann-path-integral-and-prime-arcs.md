@@ -869,6 +869,13 @@ This includes $A(B)=2$ and allows $A(B)$ to vary without continuity or monotonic
 
 Fix $L\ge0$. Eventually the window contains $[Be^{-L},B]$. For sufficiently large $X\ge2$ the negative-part density is bounded by $Cx^{p-1}$ on $[X,\infty)$. Split the part to the left of $Be^{-L}$ at $\max(A(B),X)$. After normalization its contribution is at most $N(2,X)/B^p+(C/p)e^{-pL}$. The phase integral past $L$ is at most $(S/p)e^{-pL}$, where $S=\sum_k |1/(\rho_k(1-\rho_k))|$. Both estimates hold uniformly in the choice of phase or admissible left endpoint, respectively. Choosing $L$ first and then letting $B$ grow gives the same approximation by the actual phase at $\ln B$ as in the fixed-width case. The uniform convergence of the finite phase integrals gives continuity of $I_\infty$. Since the orbit closure is compact and connected, the cluster set is a compact interval. When there is no zero on the line with real part $\beta$, the phase integral vanishes identically and the normalized mass tends to zero.
 
+There is also a uniform estimate in the left endpoint. For some $K\ge0$ depending on $\beta$, every $\varepsilon>0$ has a threshold in $B$ beyond which all $a\in[2,B]$ satisfy
+$$
+\left|\frac{N(a,B)}{B^p}-I_\infty(\varphi(\ln B))\right|
+\le \varepsilon+K(a/B)^p .
+$$
+Compare first with the cumulative mass from $2$. Removing $[2,a]$ changes the mass by $N(2,a)$, which is at most $Ka^p$ by the same early-interval and late-power estimates. Thus the displayed power controls what is lost by moving the left endpoint, and $\varepsilon$ comes from the cumulative phase approximation. The estimate gives a rate in logarithmic width for the omitted mass. The signed error also has upper bound $\varepsilon$ because the removed mass is nonnegative.
+
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 
   $$

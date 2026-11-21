@@ -869,6 +869,13 @@ $$
 
 固定 $L\ge0$。当 $B$ 充分大，窗口包含 $[Be^{-L},B]$。存在充分大的 $X\ge2$，使负部密度在 $[X,\infty)$ 上由 $Cx^{p-1}$ 控制。在 $\max(A(B),X)$ 处分开 $Be^{-L}$ 左侧的部分，归一化后的贡献至多为 $N(2,X)/B^p+(C/p)e^{-pL}$。相位积分在 $L$ 之后的尾部至多为 $(S/p)e^{-pL}$，其中 $S=\sum_k |1/(\rho_k(1-\rho_k))|$。前一个估计对允许的左端点一致成立，后一个对相位一致成立。先选 $L$，再令 $B$ 增长，便得到由 $\ln B$ 处实际相位给出的近似，与固定宽度情形相同。有限宽度相位积分的一致收敛给出 $I_\infty$ 的连续性。轨道闭包紧且连通，故簇集是紧区间。当实部为 $\beta$ 的直线没有零点时，相位积分恒为零，归一化质量趋于零。
 
+误差还可对左端点一致估计。存在依赖于 $\beta$ 的 $K\ge0$，使对每个 $\varepsilon>0$，当 $B$ 充分大时，所有 $a\in[2,B]$ 都满足
+$$
+\left|\frac{N(a,B)}{B^p}-I_\infty(\varphi(\ln B))\right|
+\le \varepsilon+K(a/B)^p .
+$$
+先与从 $2$ 开始的累积质量比较。移去 $[2,a]$ 时，质量减少 $N(2,a)$。沿用早期区间的固定积分与后期的幂函数界，可得 $N(2,a)\le Ka^p$。因此幂函数项控制移动左端点损失的质量，$\varepsilon$ 来自累积质量的相位近似。省略质量的误差随对数宽度指数衰减。 误差的上侧还满足 $N(a,B)/B^p-I_\infty(\varphi(\ln B))\le\varepsilon$，因为移去的质量非负。
+
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 
   $$
