@@ -257,6 +257,28 @@ $$
 
 这个判据把独立的算术任务落在素数幂的计数上。对 $x\ge2$，切比雪夫误差核可积，其尾积分等于 $-U(x)/x$。在 $x=n^4$ 处，所需的采样假设因而等价于对每个充分大的自然数 $n$ 证明严格下界 $\int_{n^4}^{\infty}(\psi(t)-t)t^{-2}\,dt>-1/n^2$（`手工推导`）。 [`complete_chebyshev_tail_identity`](lean:D5/S3/Weil/Mertens/CompleteChebyshevTailIdentity.complete_chebyshev_tail_identity) · [`chebyshev_error_kernel_integrable`](lean:D5/S3/Weil/Mertens/WeightedPrimeLimit.chebyshev_error_kernel_integrable)
 
+**单调性本身对负部窗口给出什么限制？**
+
+::: {.theorem #thm-ch31-monotone-window-sharpness title="单调计数的二次深度与三次窗口质量" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MonotoneTailSharpness.monotone_tail_quadratic_depth_cubic_mass"}
+对每个实数 $0<s\le1/2$，存在单调不减的实函数 $A_s$，在 $t\ge1$ 时非负，在 $[2-s,2+s]$ 外等于 $t$，且 $(A_s(t)-t)/t^2$ 在实轴上可积。令 $Q_s(z)=\int_z^\infty (A_s(t)-t)t^{-2}\,dt$，则
+
+$$
+-Q_s(2)=\frac{s^2}{32},
+\qquad
+\int_1^3\frac{\max\{-Q_s(z),0\}}{\sqrt z}\,dz\le\frac{s^3}{16}.
+$$
+:::
+
+::: proof
+取 $0<s\le 1/2$。在 $2-s<t\le 2+s$ 令 $A_s(t)=t-t^2(t-2)/16$，其余地方令 $A_s(t)=t$。区间内的多项式在 $[3/2,5/2]$ 上单调递增。在左端代入多项式得到不小于 $2-s$ 的值，在右端得到不大于 $2+s$ 的值。因此接上两边的直线后，$A_s$ 在实轴上单调不减，在 $t\ge1$ 时非负。
+
+令 $Q_s(z)=\int_z^\infty(A_s(t)-t)t^{-2}\,dt$。被积函数在选定区间内为 $(2-t)/16$，其余地方为零。全区间的积分为零，所以 $Q_s$ 在闭区间外恒为零，区间内等于 $((z-2)^2-s^2)/32$。
+
+积分界来自长度 $2s$、最大负部 $s^2/32$ 和区间上的权重 $1/\sqrt z\le1$。 完整证明由 Lean 内核检查。
+:::
+
+令 $s\to0^+$，任何形如“深度不超过常数乘窗口质量的 $\alpha$ 次幂”的统一界，在 $\alpha>2/3$ 时都会被这一族违反。实际素数计数如果允许更强的估计，就需要使用超出单调性的信息。
+
 **模 $1$ 的 Mellin 变换怎样看见零点？** 令 $U$ 为 [@thm-ch34-riemann-prime-arc-bridge] 第 6 款的余项。对每个满足 $\operatorname{Re}(s)>1$ 的 $s\in\mathbb C$，$y\mapsto e^{-sy}U(e^y)$ 在 $(0,\infty)$ 上绝对可积，其 Laplace 积分可无条件求出。换元 $x=e^y$ 后，$e^{-sy}\,dy=x^{-s-1}\,dx$，便得到下式左端的 Mellin 积分。[完全余项的半平面变换](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtHalfPlane.u_laplace_half_plane)
 
 每个素数幂 $n$ 的权重 $\Lambda(n)$ 乘以折线 $\max(x/n-1,0)$，在 $x=n$ 处起步。折线的 Mellin 积分是 $n^{-s}/[s(s-1)]$。按 $\Lambda(n)$ 求和，分子成为对数导数 $-\zeta'(s)/\zeta(s)$。$U$ 中两个初等修正项的积分分别为 $-1/(s-1)^2$ 和 $(1+\gamma_{\mathrm{EM}})/(s-1)$。将三项通分，就得到外部模 $1$ 公式的写法
@@ -280,15 +302,21 @@ $$
 
 换元 $u=\ln x$，令 $g(u)=U(e^u)$。对每个非负整数 $k$ 和每个 $\operatorname{Re}(z)>1$，$\Phi^{(k)}(z)$ 等于 $(-u)^k e^{-zu}g(u)$ 在正半轴上的绝对收敛积分。一次求导带出一个 $-u$，故 $D_k(z)=(-1)^k\Phi^{(k)}(z)/k!$ 的积分核是 $u^k e^{-zu}/k!$。固定实部 $\sigma>2$ 且 $k>0$ 时，核的模在 $u=k/\sigma$ 取得最大值，可以调节 $k$ 来控制窗口外的积分。设 $a=\ln Y$。在窗口内，$g\le e^{\theta u}$ 给出 $\lvert g\rvert+g\le 2e^{\theta u}$。这解释了源证明为何同时保留实中心的导数项。存在固定的 $\sigma>2$ 和常数 $C$。对每个 $\eta>0$，可以选到任意远的窗口及相应的阶数 $k\ge a$，使所有实数 $t$ 都满足 $\lvert D_k(\sigma+it)\rvert+\operatorname{Re}D_k(\sigma)\le C e^{\eta a}/(\sigma-\theta)^k$。[导数积分](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/LandauCoeff.lean#L10-L18) · [窗口估计](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean#L40-L56) [完整变换的各阶导数](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtMoments.iterated_derivative_moment)
 
-**实轴导数怎样选出余项的一侧？** 用在 $1$ 处解析补值的 $\Phi_*$ 定义 $D_k(s)=(-1)^k\Phi_*^{(k)}(s)/k!$。给定非负整数 $k$ 和复数 $p$，设 $\sigma=\operatorname{Re}(p)>1$、$K_k(u)=u^ke^{-\sigma u}/k!$。对任意 $0<a\le b$、$\alpha<\sigma$ 和 $e\in\{-1,1\}$，
+::: {.theorem #thm-signed-mangoldt-window title="实轴导数与复导数给出指定符号的窗口上界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtSignedWindow.signed_window_moment_bound"}
+用在 $1$ 处解析补值的 $\Phi_*$ 定义 $D_k(s)=(-1)^k\Phi_*^{(k)}(s)/k!$。给定非负整数 $k$ 和复数 $p$，设 $\sigma=\operatorname{Re}(p)>1$、$K_k(u)=u^ke^{-\sigma u}/k!$。对任意 $0<a\le b$、$\alpha<\sigma$ 和 $e\in\{-1,1\}$，
 
 $$
 |D_k(p)|+e\operatorname{Re}D_k(\sigma)
 \le \frac{2}{(\sigma-\alpha)^k}\int_a^b\max\{eg(u),0\}e^{-\alpha u}\,du
 +2\int_{(0,\infty)\setminus[a,b]}|g(u)|K_k(u)\,du.
 $$
+:::
 
-在复点取模给出 $\int |g|K_k$ 的上界项。在实点保留符号项 $e\int gK_k$，将两项合并成 $2\int\max\{eg,0\}K_k$。窗内由指数级数得到 $K_k(u)\le(\sigma-\alpha)^{-k}e^{-\alpha u}$，窗外用 $|g|$ 控制。$e=1$ 给出上面极点论证所需的正部估计，$e=-1$ 时可用同一个核控制负部。窗外项仍需独立的衰减估计。
+::: proof
+在复点取模给出 $\int |g|K_k$ 的上界项。在实点保留符号项 $e\int gK_k$，将两项合并成 $2\int\max\{eg,0\}K_k$。窗内由指数级数得到 $K_k(u)\le(\sigma-\alpha)^{-k}e^{-\alpha u}$，窗外用 $|g|$ 控制。 完整证明由 Lean 内核检查。
+:::
+
+$e=1$ 给出上面极点论证所需的正部估计，$e=-1$ 时可用同一个核控制负部。窗外项仍需独立的衰减估计。
 
 若有极点在 $\operatorname{Re}(s)>\theta$，源证明选取中心 $z=\sigma+it$ 及其最近极点 $\rho$，使 $d=|z-\rho|<r\le\sigma-\theta$，半径 $r$ 内只有这一个极点。它给 $D_k(z)$ 贡献 $c/(z-\rho)^{k+1}$。取内圈半径 $r'=(d+r)/2$，减去极点项后的解析函数在这条圆周上有界，因此 Cauchy 估计给出误差 $O((r')^{-k})$。在选取非实中心的情形，以 $\sigma$ 为中心、半径 $r'$ 的闭圆盘内无极点，Cauchy 估计给出 $\operatorname{Re}D_k(\sigma)\ge-M'(r')^{-k}$，其中 $M'$ 与 $k$ 无关。若隔离出实极点，则取 $z=\sigma$。其留数 $c>0$，故 $\operatorname{Re}D_k(\sigma)$ 的主项为 $c/d^{k+1}>0$，出现在窗口所控制的 $\lvert D_k(\sigma)\rvert+\operatorname{Re}D_k(\sigma)$ 中。将窗口上界与之比较，再乘以 $d^k$，极点项留下常数 $|c|/d>0$，解析误差为 $O((d/r')^k)$。取 $\eta>0$ 足够小，使 $e^\eta d/(\sigma-\theta)<1$，则窗口项也随 $k\ge a\to\infty$ 趋于零，矛盾。 [极点与 Cauchy 估计](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean#L83-L166) 对于 $\zeta$ 的零点，这个误差估计也可直接应用于 $\Phi_*$。设以 $p\ne\rho$ 为中心、半径 $r'>0$ 的闭圆盘避开 $0$，盘中的每个 $\zeta$ 零点都等于 $\rho$。则存在与 $k$ 无关的 $B\ge0$，满足 $|D_k(p)-c/(p-\rho)^{k+1}|\le B/(r')^k$，这里 $D_k$ 由补值后的变换定义。即使圆盘经过 $1$，减去极点主部后的函数仍在盘上解析。 [完整变换的圆盘估计](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtAtOne.completed_disk_cauchy)
 

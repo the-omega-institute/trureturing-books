@@ -257,6 +257,28 @@ Here $(n+1)^2\le4n^2$ and $b-a\le15n^3$. Consecutive sample intervals cover the 
 
 The arithmetic input can be stated in terms of the prime-power counting function. For $x\ge2$ the Chebyshev error kernel is integrable and its tail integral equals $-U(x)/x$. At $x=n^4$, the sample hypothesis therefore amounts to proving the strict lower bound $\int_{n^4}^{\infty}(\psi(t)-t)t^{-2}\,dt>-1/n^2$ for every sufficiently large natural number $n$ (`manual derivation`). [`complete_chebyshev_tail_identity`](lean:D5/S3/Weil/Mertens/CompleteChebyshevTailIdentity.complete_chebyshev_tail_identity) · [`chebyshev_error_kernel_integrable`](lean:D5/S3/Weil/Mertens/WeightedPrimeLimit.chebyshev_error_kernel_integrable)
 
+**What does monotonicity alone tell us about negative mass in a window?**
+
+::: {.theorem #thm-ch31-monotone-window-sharpness title="A monotone count with quadratic depth and cubic window mass" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MonotoneTailSharpness.monotone_tail_quadratic_depth_cubic_mass"}
+For every real $0<s\le1/2$, there is a nondecreasing $A_s\colon\mathbb R\to\mathbb R$, nonnegative for $t\ge1$ and equal to $t$ outside $[2-s,2+s]$, such that $(A_s(t)-t)/t^2$ is integrable on the real line. Its tail $Q_s(z)=\int_z^\infty(A_s(t)-t)t^{-2}\,dt$ satisfies
+
+$$
+-Q_s(2)=\frac{s^2}{32},
+\qquad
+\int_1^3\frac{\max\{-Q_s(z),0\}}{\sqrt z}\,dz\le\frac{s^3}{16}.
+$$
+:::
+
+::: proof
+Take $0<s\le1/2$. Put $A_s(t)=t-t^2(t-2)/16$ for $2-s<t\le2+s$ and $A_s(t)=t$ elsewhere. The polynomial is increasing on $[3/2,5/2]$. Its values at the left and right cutoffs are at least $2-s$ and at most $2+s$, respectively. Joining the polynomial to the linear pieces therefore gives a nondecreasing function on the real line, nonnegative for $t\ge1$.
+
+Let $Q_s(z)=\int_z^\infty(A_s(t)-t)t^{-2}\,dt$. The integrand is $(2-t)/16$ on the chosen interval and zero elsewhere. Its integral over that interval is zero, so the tail vanishes outside the closed interval and equals $((z-2)^2-s^2)/32$ inside it.
+
+The integral bound uses the length $2s$, the maximum negative part $s^2/32$, and the weight $1/\sqrt z\le1$ on the interval. The full proof is checked by the Lean kernel.
+:::
+
+As $s\to0^+$, this family violates every uniform upper bound on the depth of the form a constant times the window mass to the power $\alpha$ when $\alpha>2/3$. A stronger bound for the actual prime count would require information beyond monotonicity.
+
 **How does the modulus-one Mellin transform detect a zero?** Consider the remainder $U$ in Clause 6 of [@thm-ch34-riemann-prime-arc-bridge]. For every $s\in\mathbb C$ with $\operatorname{Re}(s)>1$, the function $y\mapsto e^{-sy}U(e^y)$ is absolutely integrable on $(0,\infty)$, and its Laplace integral can be evaluated unconditionally. Setting $x=e^y$ gives $e^{-sy}\,dy=x^{-s-1}\,dx$, so this is the Mellin integral on the left below. [Half-plane transform of the complete remainder](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtHalfPlane.u_laplace_half_plane)
 
 Each prime power $n$ contributes a ramp $\max(x/n-1,0)$ with weight $\Lambda(n)$. The ramp starts at $x=n$ and its Mellin integral is $n^{-s}/[s(s-1)]$. Summing with the weights $\Lambda(n)$ gives the logarithmic derivative $-\zeta'(s)/\zeta(s)$ in the numerator. The two elementary correction terms in $U$ contribute $-1/(s-1)^2$ and $(1+\gamma_{\mathrm{EM}})/(s-1)$. Putting the three terms over a common denominator gives the external modulus-one formula
@@ -280,15 +302,21 @@ To continue across $s=1$, remove the pole of $\zeta$ by setting $h(s)=(s-1)\zeta
 
 Put $u=\ln x$ and $g(u)=U(e^u)$. For each nonnegative integer $k$ and each $\operatorname{Re}(z)>1$, $\Phi^{(k)}(z)$ is the absolutely convergent integral of $(-u)^k e^{-zu}g(u)$ over the positive half-line. Each derivative contributes one factor of $-u$, so $D_k(z)=(-1)^k\Phi^{(k)}(z)/k!$ integrates $g$ against $u^k e^{-zu}/k!$. For fixed $\sigma>2$ and $k>0$, the magnitude of the kernel is largest at $u=k/\sigma$, so the choice of $k$ helps control the integral outside the window. Write $a=\ln Y$. Inside the window, $g\le e^{\theta u}$ gives $\lvert g\rvert+g\le 2e^{\theta u}$. This explains the derivative at the real center in the source estimate. There are fixed constants $\sigma>2$ and $C$. For every $\eta>0$ one can choose arbitrarily late windows and orders $k\ge a$ such that $\lvert D_k(\sigma+it)\rvert+\operatorname{Re}D_k(\sigma)\le C e^{\eta a}/(\sigma-\theta)^k$ for every real $t$. [Derivative integral](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/LandauCoeff.lean#L10-L18) · [Window estimate](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean#L40-L56) [All derivatives of the complete transform](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtMoments.iterated_derivative_moment)
 
-**How does the real-axis derivative select one sign of the remainder?** Use the analytic value of $\Phi_*$ at $1$ and put $D_k(s)=(-1)^k\Phi_*^{(k)}(s)/k!$. For a nonnegative integer $k$ and a complex point $p$, write $\sigma=\operatorname{Re}(p)>1$ and $K_k(u)=u^ke^{-\sigma u}/k!$. For each $0<a\le b$, $\alpha<\sigma$, and $e\in\{-1,1\}$,
+::: {.theorem #thm-signed-mangoldt-window title="Paired derivatives bound either sign on the window" lean="D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtSignedWindow.signed_window_moment_bound"}
+Use the analytic value of $\Phi_*$ at $1$ and put $D_k(s)=(-1)^k\Phi_*^{(k)}(s)/k!$. For a nonnegative integer $k$ and a complex point $p$, write $\sigma=\operatorname{Re}(p)>1$ and $K_k(u)=u^ke^{-\sigma u}/k!$. For each $0<a\le b$, $\alpha<\sigma$, and $e\in\{-1,1\}$,
 
 $$
 |D_k(p)|+e\operatorname{Re}D_k(\sigma)
 \le \frac{2}{(\sigma-\alpha)^k}\int_a^b\max\{eg(u),0\}e^{-\alpha u}\,du
 +2\int_{(0,\infty)\setminus[a,b]}|g(u)|K_k(u)\,du.
 $$
+:::
 
-Taking the modulus at the complex point bounds it by $\int |g|K_k$. At the real point the signed term is $e\int gK_k$, so the sum is bounded by $2\int\max\{eg,0\}K_k$. On the window, the exponential series gives $K_k(u)\le(\sigma-\alpha)^{-k}e^{-\alpha u}$. On its complement, use $|g|$. The choice $e=1$ gives the positive part used in the pole argument above. The choice $e=-1$ uses the same kernel for the negative part. The integral outside the window calls for its own decay estimate.
+::: proof
+Taking the modulus at the complex point bounds it by $\int |g|K_k$. At the real point the signed term is $e\int gK_k$, so the sum is bounded by $2\int\max\{eg,0\}K_k$. On the window, the exponential series gives $K_k(u)\le(\sigma-\alpha)^{-k}e^{-\alpha u}$. On its complement, use $|g|$. The full proof is checked by the Lean kernel.
+:::
+
+The choice $e=1$ gives the positive part used in the pole argument above. The choice $e=-1$ uses the same kernel for the negative part. The integral outside the window calls for its own decay estimate.
 
 Suppose a pole lies in $\operatorname{Re}(s)>\theta$. The source proof selects a center $z=\sigma+it$ and a nearest pole $\rho$ with $d=|z-\rho|<r\le\sigma-\theta$ such that the disk of radius $r$ contains only this pole. Its contribution to $D_k(z)$ is $c/(z-\rho)^{k+1}$. Take the inner radius $r'=(d+r)/2$. After subtraction of the pole term, the analytic function is bounded on that circle, so the Cauchy estimate gives an error $O((r')^{-k})$. When the proof chooses a nonreal center, the closed disk of radius $r'$ about $\sigma$ is free of poles. Cauchy's estimate gives $\operatorname{Re}D_k(\sigma)\ge-M'(r')^{-k}$ with $M'$ independent of $k$. For an isolated real pole, take $z=\sigma$. Its residue $c$ is positive, so the leading term of $\operatorname{Re}D_k(\sigma)$ is $c/d^{k+1}>0$, and the window estimate bounds $\lvert D_k(\sigma)\rvert+\operatorname{Re}D_k(\sigma)$. Compare with the window estimate and multiply by $d^k$. The pole contributes a constant $|c|/d>0$ and the analytic error is $O((d/r')^k)$. Choose $\eta>0$ so small that $e^\eta d/(\sigma-\theta)<1$. The window term then also tends to zero as $k\ge a\to\infty$, a contradiction. [Pole and Cauchy estimates](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean#L83-L166) For a zeta zero, this error bound also follows directly for $\Phi_*$. Suppose that the closed disk of radius $r'>0$ about $p\ne\rho$ avoids $0$ and that every zeta zero in the disk equals $\rho$. There is a $B\ge0$, independent of $k$, such that $|D_k(p)-c/(p-\rho)^{k+1}|\le B/(r')^k$, with $D_k$ formed from the completed transform. Removing the principal part gives an analytic remainder even if the disk crosses $1$. [Disk bound for the complete transform](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtAtOne.completed_disk_cauchy)
 
