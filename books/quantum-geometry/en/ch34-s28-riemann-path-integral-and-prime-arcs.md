@@ -491,6 +491,33 @@ In the prime-power layers, higher powers bound the difference between $\psi(x)-\
 
 In particular, $A_{\vartheta,b}(Y)=2(b-1)\ln Y+O(1)$ with the same error bound even when $b>1$ varies. Zhao's equation (14) expresses this $Q_\vartheta$ in terms of the cumulative first Mertens error and an endpoint correction. The main term here results from a further weighted window integral and uses RH. [Zhao, equation (14)](https://arxiv.org/html/2411.18903v2#S2.E14)
 
+**The endpoint remainder on the critical line.** Under RH, write $E(a,B)=N(a,B)-2\ln(B/a)$ for the prime-tail negative mass with its main term removed. Here $N(a,B)=\int_a^B\max(-Q_\vartheta(x),0)x^{-1/2}\,dx$. Enumerate the nontrivial zeros with multiplicity as $\rho_k=1/2+i\gamma_k$ and put $c_k=1/[\rho_k(1-\rho_k)]$. Let $\phi(u)_k=e^{i\gamma_k u}$ and let $H$ be the closure of this real-parameter orbit in the product of circles. Define the continuous function
+
+$$
+P(h)=\operatorname{Re}\sum_k\frac{c_k h_k}{i\gamma_k}.
+$$
+
+Let $e(u)=\max(-e^{u/2}Q_\vartheta(e^u),0)-2-\operatorname{Re}\sum_k c_k\phi(u)_k$. For every real pair $B\ge a\ge2$, the exact identity is
+
+$$
+E(a,B)-P\bigl(\phi(\ln B)\bigr)+P\bigl(\phi(\ln a)\bigr)=\int_{\ln a}^{\ln B}e(u)\,du.
+$$
+
+For every $\varepsilon>0$ there is an $X\ge2$ such that every real pair $B\ge a\ge X$ satisfies
+
+$$
+\left|E(a,B)-P\bigl(\phi(\ln B)\bigr)+P\bigl(\phi(\ln a)\bigr)\right|<\varepsilon .
+$$
+
+For every fixed $a\ge2$, the full cluster set of $E(a,B)$ as $B\to\infty$ is the nondegenerate compact interval
+
+$$
+C(a)+P(H),\qquad
+C(a)=\int_{\ln a}^\infty e(u)\,du-P\bigl(\phi(\ln a)\bigr).
+$$
+
+The zero ordinates are bounded away from zero, so the coefficients remain absolutely summable after termwise integration. In logarithmic coordinates the two endpoints give the difference of values of the same function $P$. The residual is absolutely integrable, so its absolute integral on any $[\ln a,\ln B]$ is bounded by the entire tail from $\ln a$. At fixed $a$ the residual integral converges to a constant. The actual orbit approaches each point of the closure at arbitrarily late times and hence realizes every cluster value in the interval. The closure is compact and connected, and the primitive along the orbit has strictly positive derivative at time zero, so the interval has distinct endpoints. The result uses the actual joint phase relations.
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::
