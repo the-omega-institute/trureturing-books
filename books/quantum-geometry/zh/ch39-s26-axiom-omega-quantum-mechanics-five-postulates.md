@@ -368,7 +368,7 @@ $$
 
 [轨道内计数的传递](lean:D5/S3/ConceptDynamics/Attribution/CoordinateFibreCounts.orbit_fixed_fibre_counts) · [同时实现的充要判据](lean:D5/S3/ConceptDynamics/Attribution/CoordinateFibreCounts.exact_orbit_fibre_counts)
 
-**三维的完整固定计数谱。** 在两路均匀着色奇偶读出及坐标颜色作用下，设种子预算为 $N=16k$。向量 $z$ 可实现，当且仅当存在非负整数 $u_i$，满足 $z_i=4u_i$ 和
+**三维的完整固定计数谱。** 在两路均匀着色奇偶读出及坐标颜色作用下，设种子预算为 $N=16k$，其中 $k$ 为正整数。向量 $z$ 可实现，当且仅当存在非负整数 $u_i$，满足 $z_i=4u_i$ 和
 $$
 u_i\le 2k,\qquad \sum_i u_i\le4k,
 $$

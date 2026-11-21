@@ -368,7 +368,7 @@ For the converse, use the same set of labels over each point of an orbit. Take $
 
 [Transport of counts along an orbit](lean:D5/S3/ConceptDynamics/Attribution/CoordinateFibreCounts.orbit_fixed_fibre_counts) · [Exact simultaneous realization](lean:D5/S3/ConceptDynamics/Attribution/CoordinateFibreCounts.exact_orbit_fibre_counts)
 
-**The complete three-dimensional fixed-count spectrum.** Keep the two uniform coloured parity readouts and the coordinate colour action, with seed budget $N=16k$. A vector $z$ is attainable exactly when there are nonnegative integers $u_i$ with $z_i=4u_i$ and
+**The complete three-dimensional fixed-count spectrum.** Keep the two uniform coloured parity readouts and the coordinate colour action, with seed budget $N=16k$ for a positive integer $k$. A vector $z$ is attainable exactly when there are nonnegative integers $u_i$ with $z_i=4u_i$ and
 $$
 u_i\le 2k,\qquad \sum_i u_i\le4k,
 $$
