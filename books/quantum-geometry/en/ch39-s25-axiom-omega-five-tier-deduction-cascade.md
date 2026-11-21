@@ -149,6 +149,25 @@ The zero-counting estimate for positive ordinates gives $0<L(0)=\sum_{\gamma>0}m
 
 Regard the squared reading as a function of $u=y^2$. Its meromorphic continuation is $\sum_{\gamma>0}m_\gamma/[L(0)(u+\gamma^2)]$. The series converges uniformly on compact sets away from its poles since its tail terms are bounded in modulus by $2m_\gamma/[L(0)\gamma^2]$. By the identity theorem, the **exact curve** on any open interval of the positive real axis determines this continuation uniquely. Each pole $u=-\gamma^2$ gives a positive ordinate, and ratios of the residues $m_\gamma/L(0)$ give the relative multiplicities. Multiplying every multiplicity by the same positive integer preserves the normalized curve. For the Riemann zeros, the Riemann–von Mangoldt formula gives $N(T)\sim T\log T/(2\pi)$ for the number of positive ordinates counted with multiplicity. Its leading coefficient fixes the overall factor. [@rem-ch34-li-toeplitz-superexponential-collapse]
 
+**How do finitely many readings bracket the first positive zero ordinate? (Manual derivation.)** Put $F(u)=L(\sqrt u)/S$ with $S=L(0)$. Denote the smallest positive ordinate by $\gamma_1$ and write $a=\gamma_1^2$. The weights $p_\gamma=m_\gamma/(S\gamma^2)$ satisfy $\sum p_\gamma=1$, and $F(u)=\sum p_\gamma\gamma^2/(\gamma^2+u)$. Take a spacing $h>0$. With just one reading $F(h)$, the identity $F(0)=1$ gives $(1-F(h))/h=\sum p_\gamma/(\gamma^2+h)$. Every denominator is at least $a+h$, and the smallest ordinate itself carries weight at least $1/(Sa)$. These observations give upper and lower bounds, respectively, on the first difference with its sign reversed.
+
+For an integer $k\ge1$, put $\Delta_h f(u)=f(u+h)-f(u)$ and $P(x)=\prod_{j=1}^k(x+jh)$. Each successive difference introduces another denominator. The same two bounds give
+
+$$
+D=\frac{(-1)^k\Delta_h^k F(0)}{k!h^k}
+  =\sum_{\gamma>0}\frac{p_\gamma}{P(\gamma^2)},
+\qquad
+\frac{1}{SaP(a)}\le D\le\frac{1}{P(a)}.
+$$
+
+Suppose the normalized reading $F(0)=1$ is exact and the absolute error in each remaining $F(jh)$ is at most $\varepsilon$. Compute $\widehat D$ from these readings. The absolute binomial coefficients on the terms carrying error sum to $2^k-1$, giving $|\widehat D-D|\le\eta=(2^k-1)\varepsilon/(k!h^k)$. Take a certified upper bound $S_+\ge S$. If the readings are compatible with the error bound and $\widehat D>\eta$, solve for the two positive roots
+
+$$
+S_+\ell P(\ell)(\widehat D+\eta)=1,\qquad P(r)(\widehat D-\eta)=1.
+$$
+
+Both $xP(x)$ and $P(x)$ are strictly increasing on the positive half-line. It follows that $\ell\le a\le r$, so $\sqrt{\ell}\le\gamma_1\le\sqrt r$. When $\widehat D\le\eta$, the difference can still supply a lower bound. A finite upper bound from this difference then requires more accurate readings.
+
 **Which shell angles occur exactly between two real spectral nodes?** Fix any real node $s>1/2$ and let a second real node $t$ move to the right from $s$. Write $x(t)$ for its normalized spectral vector and $h(s,t)$ for its inner product with $x(s)$. The kernel formula gives continuity and $h(s,s)=1$. For $t>s$, the coordinates from each conjugate pair are positive and the two-node Gram matrix is positive definite, so $0<h(s,t)<1$. We can also determine the limit of this inner product as $t\to\infty$.
 
 Put $v=t-1/2$. In the coordinate formula above, cancel the common factor $\xi(t)$ and multiply every coordinate by $v$. Before normalization, the sum of their squares is

@@ -149,6 +149,25 @@ $$
 
 把平方读数看作 $u=y^2$ 的函数。其亚纯延拓是 $\sum_{\gamma>0}m_\gamma/[L(0)(u+\gamma^2)]$。离开极点的紧集上级数一致收敛，因为尾项可由 $2m_\gamma/[L(0)\gamma^2]$ 控制。任一正实开区间上的**精确曲线**由恒等定理唯一确定这个延拓。每个极点 $u=-\gamma^2$ 给出一个正纵坐标，留数 $m_\gamma/L(0)$ 的比给出相对重数。若把每个重数都乘同一正整数，归一化曲线保持不变。对于黎曼零点，黎曼–冯·曼戈尔特公式给出按重数计的正零点数 $N(T)\sim T\log T/(2\pi)$，其首项固定了整体比例。[@rem-ch34-li-toeplitz-superexponential-collapse]
 
+**有限次读数怎样围住第一个正零点？（手工推导）** 令 $F(u)=L(\sqrt u)/S$，其中 $S=L(0)$。最小正纵坐标记作 $\gamma_1$，写 $a=\gamma_1^2$。令 $p_\gamma=m_\gamma/(S\gamma^2)$，则 $\sum p_\gamma=1$，而 $F(u)=\sum p_\gamma\gamma^2/(\gamma^2+u)$。取步长 $h>0$。只读一次 $F(h)$ 时，由 $F(0)=1$ 可算得 $(1-F(h))/h=\sum p_\gamma/(\gamma^2+h)$。每个分母都至少为 $a+h$，而最小纵坐标自身至少占有权重 $1/(Sa)$。这分别给出了此读数差的上界和下界。
+
+对整数 $k\ge1$，令 $\Delta_h f(u)=f(u+h)-f(u)$、$P(x)=\prod_{j=1}^k(x+jh)$。逐次取差，每次引入一个新的分母。用上一段的两种估计得
+
+$$
+D=\frac{(-1)^k\Delta_h^k F(0)}{k!h^k}
+  =\sum_{\gamma>0}\frac{p_\gamma}{P(\gamma^2)},
+\qquad
+\frac{1}{SaP(a)}\le D\le\frac{1}{P(a)}.
+$$
+
+设归一化读数 $F(0)=1$ 精确，其余各 $F(jh)$ 的绝对误差至多为 $\varepsilon$，并以这些读数计算 $\widehat D$。差分的二项式系数中，带误差各项的绝对值之和为 $2^k-1$，故 $|\widehat D-D|\le\eta=(2^k-1)\varepsilon/(k!h^k)$。取已认证的 $S_+\ge S$。只要数据与上述误差相容且 $\widehat D>\eta$，就可求两个正根
+
+$$
+S_+\ell P(\ell)(\widehat D+\eta)=1,\qquad P(r)(\widehat D-\eta)=1.
+$$
+
+因为 $xP(x)$ 与 $P(x)$ 都在正半轴上严格递增，两式给出 $\ell\le a\le r$，即 $\sqrt{\ell}\le\gamma_1\le\sqrt r$。若 $\widehat D\le\eta$，上面的差分仍可给出下界，求有限上界则需要更精确的读数。
+
 **哪些球壳夹角可以由两个实谱节点精确取到？** 固定任一实节点 $s>1/2$，让第二个实节点 $t$ 从 $s$ 向右移动。记归一化谱向量为 $x(t)$，内积为 $h(s,t)$。由核公式，$h$ 连续且 $h(s,s)=1$。当 $t>s$ 时，共轭对坐标严格为正，二节点格拉姆矩阵严格正定，故 $0<h(s,t)<1$。下面证明 $t\to\infty$ 时 $h(s,t)\to0$。
 
 写 $v=t-1/2$。在上面的坐标公式中约去公共因子 $\xi(t)$，再把各坐标乘以 $v$。归一化以前，所有坐标的平方和为
