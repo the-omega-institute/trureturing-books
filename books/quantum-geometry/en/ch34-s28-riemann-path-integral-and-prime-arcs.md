@@ -442,6 +442,8 @@ Conversely, suppose $\zeta(\rho)=0$ with $\beta=\operatorname{Re}\rho>1/2$. For 
 Take $\varepsilon=\eta=b(\beta-1/2)/3$. The lower bound becomes $Y^{2\eta}$, in contradiction with $A_{\vartheta,b}(Y)\le Y^\eta$ on arbitrarily late windows. This excludes zeros to the right of the critical line. Reflection of the nontrivial zeros across that line gives RH. The full proof is checked by the Lean kernel.
 :::
 
+The preceding criterion integrates the negative part of the prime tail over each window. Lee Crossley gives a pointwise criterion on power windows of the same form. For fixed $b>1$, RH follows if there are arbitrarily large $Y$ such that, at every $x\in[Y,Y^b]$, his weighted sum of $\ln p$ over primes $x/4<p<x$ is at most $(x/2)\ln 2$. [Crossley, *An ordinary-prime window criterion for the Riemann hypothesis*](https://doi.org/10.5281/zenodo.24410878), [Lean statement](https://github.com/leecrossley/prime-window-rh-criterion/blob/3206456c860df1bb565de076457f7d0253000258/PrimeWindow.lean#L195)
+
 ::: {.theorem #thm-ch31-wide-prime-window title="A lower mass bound on wide windows and uniform divergence if RH fails" lean="D5/S3/Weil/Mertens/IntegratedExplicit/WidePrimeWindowMass.prime_tail_wide_window_mass"}
 For the actual prime-only tail, write the mass at real endpoints $2\le A\le B$ as
 
