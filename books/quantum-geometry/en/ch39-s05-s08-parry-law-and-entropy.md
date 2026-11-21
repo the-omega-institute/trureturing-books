@@ -1420,6 +1420,52 @@ The choice of least nonloop controls the normalization. Two equal nonzero binary
 
 Björner's classical construction gives homology bases of matroids supported on joins of simplex boundaries. [Chari, *Two decompositions in topological combinatorics with applications to matroid complexes* (1997), §1, p. 3927](https://doi.org/10.1090/S0002-9947-97-01921-1)
 
+**Decomposition of top integral cycles at a chosen element.** Let $Q$ be a finite ordered matroid and write $Z(Q)$ for its top augmented integral cycle group. Choose any element $e$ of the ground set, let $\mathcal C_e$ be the set of circuits through $e$, and for $C\in\mathcal C_e$ write $A_C=C\setminus\{e\}$. Put $s_D(x)=(-1)^{|\{y\in D:y<x\}|}$ for the insertion sign and let $\sigma(A,T)$ be the sign of putting the concatenated ordered lists of $A$ and $T$ into increasing order. The following integral linear maps are inverses.
+
+$$
+Z(Q)\ \cong\ \bigoplus_{C\in\mathcal C_e}Z(Q/C),\qquad
+z\longmapsto (w_C)_C,\qquad
+(w_C)_C\longmapsto \sum_{C\in\mathcal C_e}\partial[C]\wedge w_C.
+$$
+
+The chain $w_C$ on $Q/C$ has coefficient at each basis $T$ given by
+$w_C(T)=s_{A_C}(e)\,\sigma(A_C,T)\,z(A_C\cup T)$, with zero coefficients at other faces. If $Q/C$ has rank zero, $T$ is the empty face. If $e$ is a coloop, every basis contains $e$, $\mathcal C_e$ is empty, and the cycle group is zero. If $e$ is a loop, the only circuit through it is $\{e\}$, whose simplex boundary is the empty face.
+
+To verify the cycle condition on $w_C$, take a ridge $D$ in the contraction and put $R=A_C\cup D$. For $x\notin C\cup D$ we have
+$s_D(x)\sigma(A_C,D\cup\{x\})=(-1)^{|A_C|}\sigma(A_C,D)s_R(x)$.
+The elements of $A_C$ before and after $x$ account for the exponent $|A_C|$. The basis condition in the contraction is equivalent to that obtained by adjoining $A_C$ and testing for a basis of $Q$. Inserting $e$ produces a dependent set containing $C$, so its chain coefficient vanishes. Thus the coefficient of $\partial w_C$ at $D$ is the coefficient of $\partial z$ at $R$ times one common sign, and hence is zero. Conversely the signed product rule gives a cycle $\partial[C]\wedge w_C$ for each summand.
+
+A basis omitting $e$, say $F$, uniquely determines its summand. Its extension $F\cup\{e\}$ has fundamental circuit $C$, so $F=A_C\cup(F\setminus C)$. Reading the coefficient and forming the join each contribute the same sign on that face, giving a product of one. For a basis containing $e$, the zero boundary equation on the ridge obtained by deleting $e$ uniquely recovers its coefficient from those at bases omitting $e$. The maps are therefore inverses on the entire cycle group. [Circuit decomposition of top integral cycles](lean:D5/S3/Combinatorics/Matroids/CircuitCycleDecomposition.circuit_cycle_decomposition)
+
+This gives the support overlap for normalized cycles by a short derivation. When their first fundamental circuits at the least nonloop differ, every basis in their common support contains $e$. When both first circuits are $C$, each contracted basis $T$ contributes $|C|$ joined coordinates, and the reordering sign squares to one in the coefficient product. The integral coefficient inner product over all bases is therefore the contracted inner product times $|C|\epsilon_B\epsilon_{B'}$. Distinct circuits can still contribute an inner product through coordinates containing $e$. In the rank-one matroid on three nonloops, $[2]-[1]$ and $[3]-[1]$ belong to distinct circuits at $e=1$ and have inner product $1$.
+
+**Inner products between distinct circuits.** In a finite ordered matroid $Q$, take two distinct circuits $C,D$. Put $S=C\cap D$, $P=C\setminus D$, $L=D\setminus C$, and $U=C\cup D$. Take the contractions $Q/C$, $Q/D$ and top augmented cycles $w,v$ in them. Consider the integral coordinate inner product of their lifts.
+
+$$
+G_{C,D}(w,v)=\langle\partial[C]\wedge w,\partial[D]\wedge v\rangle .
+$$
+
+If $\operatorname{rk}_Q(U)+2\ne |U|$, then $G_{C,D}$ vanishes identically. A basis with a nonzero coefficient in both lifts must omit one element from each of $C,D$. If it omitted the same element from both, adjoining that element to the basis would give two circuits, contradicting fundamental circuit uniqueness. With distinct omissions, an element omitted from one circuit is present in the other circuit's part of the basis if it belongs to both. The omitted elements therefore belong to $P,L$ respectively. Deleting those two elements from $U$ leaves a spanning set of $U$ because deleting any one element from a circuit leaves a spanning set of that circuit. The remaining set is also contained in the shared supporting basis, so it is independent and has size $|U|-2$. [Orthogonality criterion](lean:D5/S3/Combinatorics/Matroids/CircuitPairInnerProduct.circuitPairing_eq_zero)
+
+Now suppose $\operatorname{rk}_Q(U)+2=|U|$. Deleting one element from each of $P,L$ leaves a set that spans $U$ and has size equal to its rank, so the remaining set is a basis of $U$. It contains a basis of $C$ obtained by deleting one element from $C$. After contracting $C$, every single-element deletion of $L$ is independent, while $L$ has size one more than its rank in the contraction. Thus $L$ is a circuit of $Q/C$. The same argument makes $P$ a circuit of $Q/D$. [Circuits in the contractions](lean:D5/S3/Combinatorics/Matroids/CircuitPairInnerProduct.residual_circuits)
+
+For the first circuit, add the signed restrictions above over all choices of a deleted vertex to get
+
+$$
+(A_Lw)(T)=\sum_{x\in L} s_{L\setminus\{x\}}(x)\,\sigma(L\setminus\{x\},T)\,w((L\setminus\{x\})\cup T),
+$$
+
+where $T$ ranges over bases of $Q/U$, with zero coefficients elsewhere. Define $A_Pv$ by the same rule. The inner product then factors as
+
+$$
+G_{C,D}(w,v)=\sigma(S,P)\sigma(S,L)(-1)^{(|P|-1)(|L|-1)}
+  \langle A_Lw,A_Pv\rangle .
+$$
+
+Each choice of a deleted vertex from $P,L$ determines a basis of $U$. Adjoining a basis of $Q/U$ gives the shared coordinate in the two lifts. To compare the joined orders, place the common part first. The two orders interchange the exclusive parts after deletion, giving the fixed interchange sign in the formula. The remaining signs belong to the two sums over the deleted vertices. [Integral pairing factorization](lean:D5/S3/Combinatorics/Matroids/CircuitPairInnerProduct.circuitPairing_factor)
+
+Composing $A_L$ with the lift along the circuit $L$ multiplies every cycle of $Q/U$ by $|L|$. Likewise, composing $A_P$ with the lift along $P$ multiplies by $|P|$. Both maps are therefore surjective over the rationals. The coordinate inner product on their common target has trivial radical because the self-pairing of a nonzero cycle is a positive sum of squares. Thus the rank over the rationals of the bilinear form $G_{C,D}$ equals the dimension of the top augmented cycle space of $Q/U$. A rank-zero contraction still contributes the empty-face coordinate. [Rank of the rational pairing](lean:D5/S3/Combinatorics/Matroids/CircuitPairInnerProduct.circuitPairing_rank)
+
 **Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 If there are no nonempty facets, the original realization is empty and its reduced integral homology vanishes in every nonnegative degree. When facets exist and $d=1$, the wedge is a discrete space with $m+1$ points and reduced degree-zero generators $[p_B]-[p_0]$, where $p_B$ is the point contributed by $B$ and $p_0$ is the common basepoint. When facets exist and $m=0$, the wedge is a point and every reduced group vanishes. For a nonempty family of facets, the reduced Euler characteristic is $(-1)^{d-1}m$, so the earlier Tutte evaluation gives $m=2^d T_M(1,1/2)$.

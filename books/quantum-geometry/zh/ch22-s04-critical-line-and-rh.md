@@ -645,8 +645,106 @@ $$
 **形式化边界与文献分工。** 本书前文带有冻结 Lean 引用的相应定理各自负责其已验证范围（包括 $\operatorname{Re}(s) > 1$ 上 $\zeta(s)$ 的狄利克雷级数与欧拉乘积恒等式、$\xi(s)$ 的整性与反射关系及部分零点结论），而本段额外引用的莫比乌斯倒数与反演、梅尔滕斯等价定理及完整点态显式公式均按经典文献结果使用，既未在本书形式化，也不声称由本页有限计算验证。相关标准定义与定理须分源核查：$\zeta(s)$ 在 $\operatorname{Re}(s) > 1$ 上的狄利克雷级数、欧拉乘积与解析延拓见 [DLMF §25.2](https://dlmf.nist.gov/25.2)；莫比乌斯倒数级数 $1/\zeta(s) = \sum_{n=1}^{\infty}\mu(n)n^{-s}$ 见 [DLMF 27.4.E5](https://dlmf.nist.gov/27.4.E5)，狄利克雷卷积与莫比乌斯反演见 [DLMF §27.5](https://dlmf.nist.gov/27.5)；临界带非平凡零点性质见 [DLMF §25.10](https://dlmf.nist.gov/25.10)；切比雪夫函数 $\psi(x)$ 的定义与素数定理主项渐近式见 [DLMF §25.16](https://dlmf.nist.gov/25.16)（如 [DLMF 25.16.E2](https://dlmf.nist.gov/25.16.E2)），但该页仅给 $\psi(x)$ 的定义与渐近式，并不包含莫比乌斯倒数、梅尔滕斯等价定理或完整点态显式公式的完整证明。作为经典解析数论文献结果，梅尔滕斯渐近界 $M(x) = O_\varepsilon(x^{1/2+\varepsilon})$（$\forall \varepsilon > 0$）与黎曼猜想的等价性以及狄利克雷级数与零点分布基础可参阅 E. C. Titchmarsh, *The Theory of the Riemann Zeta-Function*, second edition (revised by D. R. Heath-Brown), Chapters 3, 4, and 14；$x > 1$ 上的完整点态冯·曼戈尔特显式公式（含全体非平凡零点、重数、对称高度极限与端点均值约定）亦见 H. Davenport, *Multiplicative Number Theory*, third edition, Chapter 17。
 :::
 
-::: {.problem #prob-ch22-truncated-explicit-remainder-resolution title="有限零点样本重构的可计算精度证书与全谱外推条件（开放问题）"}
-经典解析数论对截断及平滑冯·曼戈尔特显式公式早已建立了严格的解析余项上界，故截断余项界本身并非数学未解难题；但**本节交互实验对所展示的前 $10$ 对零点样本尚未配备可计算误差证书**。若要将任何拟议的几何或谱近似桥梁建立在指定有限零点样本之上，开放的具体工程与分析任务是在目标区间 $[x_{\min}, x_{\max}]$ 上给出该桥梁的可计算精度证书，并厘清有限样本近似与无限全谱之间的严格逻辑关系：若要独立于 [@conj-riemann-hypothesis] 的外部证明而在页面内直接认证单级素数幂分辨，必须同时定量控制**平滑窗近似误差**与**全体 $|\operatorname{Im}\rho| > T$ 遗漏非平凡零点的尾项贡献**，而不应把缺乏证书的短样本视觉吻合预认为新的普适理论难题。
+::: {.remark #rem-ch22-integrated-explicit-certificate title="由冻结积分显式公式导出的零平滑误差三点差分恒等式与双轨可计算误差证书（手工推导与高精度数值，未在本书形式化）"}
+**手工推导与高精度区间算术核验（`NUM`，未在本书形式化），以本书已冻结的四个 Lean 声明为分析起点。** 本页 `powers` 视图绘制精确素数幂阶梯 $\psi_0(x)$ 与可选截断 $K = 0, \dots, 10$ 的未平滑逐点截断曲线（其满截断对照曲线为 $\psi^{(10)}(x) = x - 2\sum_{j=1}^{10}\operatorname{Re}(x^{\rho_j}/\rho_j) - \log(2\pi) - \frac{1}{2}\log(1 - x^{-2})$）。此类未平滑逐点截断之所以难以附带严格证书，根源在于逐点零点级数 $\sum_\rho x^\rho/\rho$ 仅按对称高度**条件收敛**，尾项无法仅凭零点总权重绝对控制。改用本书所钉仓库已冻结的积分显式公式，即可彻底绕过这一障碍并一次性消除平滑窗误差（本段沿用上文约定，以 $\log$ 表自然对数）：
+
+1. **冻结积分恒等式与平凡零点级数的初等闭式**：由 [@def-divisor-ratio-mertens-error] 中冻结的 [`U`](lean:D5/S3/Arith/Robin/CompleteMertensPeak.U) 与冻结定理 [`actual_integrated_explicit_formula`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/WholeFormula.actual_integrated_explicit_formula)（其定义域为 $y > 0$，即 $x = e^y > 1$），对一切 $x > 1$ 成立精确恒等式
+
+   $$
+   U(x) \;=\; \sum_{\rho}\frac{x^\rho}{\rho(1-\rho)} \;+\; \log(2\pi) \;-\; T(x),
+   \qquad
+   T(x) \;:=\; \sum_{m=1}^{\infty}\frac{x^{-2m}}{2m(2m+1)},
+   $$
+
+   其中求和按重数遍历临界带 $0 < \operatorname{Re}(\rho) < 1$ 内全体非平凡零点（含正负虚部）。利用部分分式 $\frac{1}{2m(2m+1)} = \frac{1}{2m} - \frac{1}{2m+1}$ 与对数、双曲反正切级数，平凡零点修正项在 $x > 1$ 上具有**无截断的初等闭式**：
+
+   $$
+   T(x) \;=\; 1 \;-\; \frac{1}{2}\log\bigl(1 - x^{-2}\bigr) \;-\; \frac{x}{2}\log\frac{x + 1}{x - 1}
+   \qquad \bigl(x > 1,\;\text{例如 } T(2) \approx 0.045229\bigr).
+   $$
+
+2. **零平滑误差的三点中心差分恒等式（精确提取 $\Lambda(n)$）**：令 $(v)_+ := \max(v, 0)$。由 [`U`](lean:D5/S3/Arith/Robin/CompleteMertensPeak.U) 的算术定义，对一切 $x > 0$ 有
+
+   $$
+   U(x) + x\log x \;=\; (1 + \gamma)\,x \;+\; \sum_{m=1}^{\infty}\frac{\Lambda(m)}{m}\,(x - m)_+.
+   $$
+
+   对任一整数 $n \ge 2$ 及满足 $0 < h \le 1$ 且 $n - h > 1$ 的步长 $h$（从而三节点 $n - h,\ n,\ n + h$ 均落在积分公式定义域 $(1, \infty)$ 内），定义中心二阶差分 $\Delta_h^2 f(n) := f(n+h) - 2f(n) + f(n-h)$。线性项 $(1+\gamma)x$ 与常数项 $\log(2\pi)$ 在 $\Delta_h^2$ 下恒为零，而对每个正整数 $m$ 都有 $\Delta_h^2(x - m)_+\big|_{x=n} = (h - \lvert n - m\rvert)_+$；因 $0 < h \le 1$，该三角形核在全体整数 $m \neq n$ 处**严格为零**，仅在 $m = n$ 处取值 $h$。由此（结合下方第 3 条所证的绝对收敛性）得到**平滑窗误差恒为零**的精确提取公式：
+
+   $$
+   \Lambda(n) \;=\; \frac{n}{h}\,\Delta_h^2\bigl(U(x) + x\log x\bigr)\Big|_{x=n} \;=\; \frac{n}{h}\,\Delta_h^2(x\log x)\Big|_{x=n} \;+\; \frac{n}{h}\sum_{\rho}\frac{(n+h)^\rho - 2n^\rho + (n-h)^\rho}{\rho(1-\rho)} \;-\; \frac{n}{h}\,\Delta_h^2 T(n).
+   $$
+
+   300 比特 Arb 区间算术在 $n = 2, \dots, 10$ 上按下表采用的步长方案（$n = 2$ 取 $h = \frac{1}{2}$，$n = 3, \dots, 10$ 取 $h = 1$）直接验算了该算术差分恒等式（无穷零点和通过冻结积分公式代换），全部残差落入半径小于 $1.1 \times 10^{-86}$ 的含零区间。
+3. **基于冻结总谱质量 $2\lambda_1$ 的双轨可计算尾项证书（RH 轨与完全无条件轨）**：冻结定理 [`actual_complex_pairWeight_hasSum`](lean:D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_complex_pairWeight_hasSum) 确立了全体非平凡零点（按重数计）的精确谱权总量
+
+   $$
+   \sum_{\rho}\frac{1}{\rho(1-\rho)} \;=\; 2\lambda_1 \;=\; 2 + \gamma - 2\log(2\sqrt{\pi}) \;=\; 2 + \gamma - \log(4\pi) \;\approx\; 0.0461914179.
+   $$
+
+   设 $\rho_j = \frac{1}{2} + i\gamma_j$（$1 \le j \le K$，$0 < \gamma_1 < \dots < \gamma_K =: T_K$）为前 $K$ 个正虚部临界线零点，且经有限区间算术验证：它们均为单零点，并穷尽区域 $0 < \operatorname{Im}(\rho) \le T_K$ 内的全部非平凡零点（文献中 D. Platt & T. Trudgian，*The Riemann hypothesis is true up to $3\cdot 10^{12}$*，*Bull. London Math. Soc.* **53**(3), 792–797, 2021，定理 1 与 §2，[10.1112/blms.12460](https://doi.org/10.1112/blms.12460)，在 §2 中借助图灵方法将临界线变号零点数与临界带总零点计数精确匹配，从而同时确立单零点性与无遗漏性，将该有限验证推进至 $3 \times 10^{12}$；下述 $K \le 3000$ 的临界截断及其前驱亦经 FLINT/Arb 零点隔离与临界带零点计数独立复核）。结合冻结定理 [`actual_height_gt_ten`](lean:D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_height_gt_ten)（$\lvert\operatorname{Im}\rho\rvert > 10$，排除实轴零点）以及共轭对称性（[@prop-zeta-conjugation-covariance]、[@prop-xi-zeros-strip-zeros]），对总权恒等式取实部并减去前 $K$ 个共轭对的精确贡献，即得**仅由前 $K$ 个纵坐标完全决定的精确尾项实部质量**：
+
+   $$
+   R_K \;:=\; \sum_{\lvert\operatorname{Im}\rho\rvert > T_K}\operatorname{Re}\!\left(\frac{1}{\rho(1-\rho)}\right) \;=\; 2\lambda_1 \;-\; 2\sum_{j=1}^{K}\frac{1}{\frac{1}{4} + \gamma_j^2} \;>\; 0.
+   $$
+
+   （例如 Arb 区间中心值给出 $R_{10} \approx 0.019121$、$R_{50} \approx 0.009108$、$R_{100} \approx 0.006222$、$R_{500} \approx 0.002298$、$R_{1000} \approx 0.001439$、$R_{2000} \approx 0.000885$、$R_{3000} \approx 0.000660$，各区间半径均小于 $5 \times 10^{-66}$。）记前 $K$ 对临界线零点给出的截断重构为
+
+   $$
+   U_K(x) \;:=\; \sum_{j=1}^{K}\frac{2\sqrt{x}\cos(\gamma_j\log x)}{\frac{1}{4} + \gamma_j^2} \;+\; \log(2\pi) \;-\; T(x),
+   \qquad
+   \Lambda_K(n; h) \;:=\; \frac{n}{h}\,\Delta_h^2\bigl(U_K(x) + x\log x\bigr)\Big|_{x=n}.
+   $$
+
+   对任一被截去的非平凡零点 $\rho = \beta + i\gamma$（$0 < \beta < 1$，$\lvert\gamma\rvert > T_K > 0$），记 $z = \rho(1-\rho) = \bigl(\beta(1-\beta) + \gamma^2\bigr) + i\,\gamma(1 - 2\beta)$。因 $\beta(1-\beta) > 0$ 且 $\lvert 1 - 2\beta\rvert < 1$，恒有 $\operatorname{Re}(z) > \gamma^2 > 0$ 且 $\lvert\operatorname{Im}(z)\rvert < \lvert\gamma\rvert$，故 $\lvert\operatorname{Im}(z)\rvert / \operatorname{Re}(z) < 1/\lvert\gamma\rvert < T_K^{-1}$；代入 $\operatorname{Re}(z) > 0$ 时的初等恒等式 $\frac{1}{\lvert z\rvert} = \sqrt{1 + (\operatorname{Im}(z)/\operatorname{Re}(z))^2}\,\operatorname{Re}(1/z)$，立即推出**无需任何零点定线假设的逐项绝对控制**：
+
+   $$
+   \frac{1}{\lvert\rho(1-\rho)\rvert} \;<\; C_K\,\operatorname{Re}\!\left(\frac{1}{\rho(1-\rho)}\right),
+   \qquad
+   C_K \;:=\; \sqrt{1 + T_K^{-2}}
+   $$
+
+   （同式以 $\lvert\gamma\rvert > 10$ 亦直接保证全级数 $\sum_\rho x^\rho / (\rho(1-\rho))$ 对每个 $x > 1$ 绝对收敛）。由此对任意 $x > 1$ 与任意容许 $(n, h)$ 同时导出两条严格可计算余项证书：
+   - **RH 轨（调用 [@conj-riemann-hypothesis] 所登记的外部终端声明 `riemannZeta_eq_zero_re : RiemannZetaZerosOnLine`，从而全部尾项满足 $\operatorname{Re}(\rho) = \frac{1}{2}$、$\lvert x^\rho\rvert = \sqrt{x}$ 且 $\frac{1}{\lvert\rho(1-\rho)\rvert} = \operatorname{Re}\!\left(\frac{1}{\rho(1-\rho)}\right) = \frac{1}{\frac{1}{4}+\gamma^2}$）**：
+
+     $$
+     \lvert U(x) - U_K(x)\rvert \;\le\; \sqrt{x}\,R_K,
+     \qquad
+     \lvert\Lambda(n) - \Lambda_K(n; h)\rvert \;\le\; B_{\mathrm{RH}}(n, h; K) \;:=\; \frac{n}{h}\bigl(\sqrt{n+h} + 2\sqrt{n} + \sqrt{n-h}\bigr)\,R_K.
+     $$
+
+   - **完全无条件轨（完全独立于 [@conj-riemann-hypothesis]，仅利用有限验证至 $T_K$ 与 $\lvert x^\rho\rvert = x^\beta < x$）**：
+
+     $$
+     \lvert U(x) - U_K(x)\rvert \;\le\; x\,C_K\,R_K,
+     \qquad
+     \lvert\Lambda(n) - \Lambda_K(n; h)\rvert \;\le\; B_{\mathrm{uncond}}(n, h; K) \;:=\; \frac{4n^2}{h}\,C_K\,R_K
+     $$
+
+     （其中 $(n+h) + 2n + (n-h) = 4n$ 恰好消去分子中的步长 $h$）。
+4. **$[2, 10]$ 上的高精度数值认证与未平滑展品对照（`NUM`）**：
+   - **前 $10$ 对零点（$K = 10$，$T_{10} = \gamma_{10} \approx 49.773832$）的连续函数对照**：在 $[2, 10]$ 上，积分截断误差的连续最大值 $\max_{x \in [2, 10]}\lvert U(x) - U_{10}(x)\rvert \approx 0.012682$（在 $x = 7$ 取得，该点处 RH 与无条件逐点界分别为 $\approx 0.050589$ 与 $\approx 0.133874$），全程稳居一致证书 $\sqrt{10}\,R_{10} \approx 0.060466$（RH 轨）与 $10\,C_{10}\,R_{10} \approx 0.191249$（无条件轨）之内（将精确纵坐标换为展品代码存储的 IEEE-754 双精度数组 `GAMMAS` 时，$U_{10}(x)$ 的一致舍入偏差小于 $2.671 \times 10^{-16}$）。作为鲜明反差，本页 `powers` 视图的满截断未平滑曲线 $\psi^{(10)}(x)$（无论按精确纵坐标还是按展品代码存储的双精度 `GAMMAS` 计算，下述六位小数结果均完全一致）在整数节点的最大偏差约 $0.110045$（$x = 9$）、半整数节点最大偏差约 $0.189644$（$x = 6.5$），而连续上确界 $\sup_{x \in [2, 10]}\lvert\psi_0(x) - \psi^{(10)}(x)\rvert \approx 1.023368$（当 $x \to 7^-$ 时趋近 $\psi^{(10)}(7) - \log 60$），已远超单级素数幂判决半门槛 $\frac{1}{2}\log 2 \approx 0.346574$。
+   - **单级素数幂分辨的一致半隙门槛与逐节点区间门槛**：因对任意整数 $n \ge 2$ 有谱隙 $\Lambda(n) \in \{0\} \cup [\log 2, \infty)$（$\log 2 \approx 0.693147$），只要可计算误差界满足一致半隙充分条件 $B(n, h; K) < \frac{1}{2}\log 2 \approx 0.346574$，认证区间 $[\Lambda_K - B,\ \Lambda_K + B]$ 便自动严格隔开 $0$ 与 $[\log 2, \infty)$（$\Lambda_K > \frac{1}{2}\log 2$ 严格证实 $n$ 为素数幂，$\Lambda_K < \frac{1}{2}\log 2$ 严格证实 $n$ 非素数幂）。固定 $[2, 10]$ 上的容许步长（$n = 2$ 取 $h = \frac{1}{2}$，$n = 3, \dots, 10$ 取 $h = 1$），两条上界的最紧节点恒为 $n = 10$ 且随 $K$ 严格单调递减：
+     - **一致半隙条件 $B < \frac{1}{2}\log 2$ 的 RH 轨最小截断为 $K = 382$**：$K = 381$ 时 $B_{\mathrm{RH}}(10, 1; 381) \approx 0.346915 > \frac{1}{2}\log 2$ 尚差一步；$K = 382$ 时 $B_{\mathrm{RH}}(10, 1; 382) \approx 0.346327 < \frac{1}{2}\log 2$，使全部九行同时满足一致半隙条件并严格认证 $\{2, 3, 4, 5, 7, 8, 9\}$ 为素数幂、$\{6, 10\}$ 非素数幂（基准 $K = 500$ 时该界进一步降至 $\approx 0.290441$，实际误差仅 $\approx 0.013743$）。
+     - **一致半隙条件 $B < \frac{1}{2}\log 2$ 的完全无条件轨最小截断为 $K = 2060$**：$K = 2059$ 时 $B_{\mathrm{uncond}}(10, 1; 2059) \approx 0.346593 > \frac{1}{2}\log 2$；$K = 2060$ 时 $B_{\mathrm{uncond}}(10, 1; 2060) \approx 0.346472 < \frac{1}{2}\log 2$（实际误差仅 $\approx 0.004330$），**在不援引 [@conj-riemann-hypothesis] 的前提下以一致半隙条件严格认证 $[2, 10]$ 上全部九个整数的素数幂与非素数幂分类**。
+     - **逐节点区间直接分类的更紧截断与 $K = 10$ 对照**：若不要求统一满足 $B < \frac{1}{2}\log 2$，而直接检验各节点自身认证区间 $[\Lambda_K - B,\ \Lambda_K + B]$ 是否排除 $0$（素数幂：$\Lambda_K - B > 0$）或排除 $[\log 2, \infty)$（非素数幂：$\Lambda_K + B < \log 2$），则同一组上界在 **$K = 137$（RH 轨）**与 **$K = 778$（完全无条件轨）**处即已完整分类全部九个整数。回到 $K = 10$，全部九行均未满足一致半隙条件 $B < \frac{1}{2}\log 2$；仅就单个认证区间是否排除 $0$ 而言，RH 轨可单独证实 $n \in \{2, 3, 4, 5, 7\}$ 为素数幂，无条件轨仅能证实 $n \in \{2, 3\}$，而合数素数幂 $8, 9$ 与非素数幂合数 $6, 10$ 在两条轨道下都无法与另一类严格分离。下表汇总关键截断处的 Arb 核验结果（表中数值均四舍五入至小数点后六位）：
+
+| $n$ | $h$ | $\Lambda(n)$ | $\Lambda_{10}$ | $B_{\mathrm{RH}}^{(10)}$ | $B_{\mathrm{uncond}}^{(10)}$ | $\Lambda_{382}$ | $B_{\mathrm{RH}}^{(382)}$ | $\Lambda_{2060}$ | $B_{\mathrm{uncond}}^{(2060)}$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $2$ | $1/2$ | $0.693147$ | $0.668602$ | $0.430935$ | $0.611996$ | $0.690421$ | $0.061745$ | $0.692466$ | $0.027718$ |
+| $3$ | $1$ | $1.098612$ | $1.087448$ | $0.394561$ | $0.688496$ | $1.097461$ | $0.056533$ | $1.098314$ | $0.031183$ |
+| $4$ | $1$ | $0.693147$ | $0.721527$ | $0.609434$ | $1.223992$ | $0.695755$ | $0.087320$ | $0.693799$ | $0.055436$ |
+| $5$ | $1$ | $1.609438$ | $1.512954$ | $0.852953$ | $1.912488$ | $1.603260$ | $0.122212$ | $1.607880$ | $0.086618$ |
+| $6$ | $1$ | $0$ | $0.169280$ | $1.122113$ | $2.753982$ | $0.010388$ | $0.160777$ | $0.002629$ | $0.124730$ |
+| $7$ | $1$ | $1.945910$ | $1.787942$ | $1.414686$ | $3.748476$ | $1.935019$ | $0.202697$ | $1.943158$ | $0.169771$ |
+| $8$ | $1$ | $0.693147$ | $0.778065$ | $1.728939$ | $4.895969$ | $0.699462$ | $0.247723$ | $0.694755$ | $0.221742$ |
+| $9$ | $1$ | $1.098612$ | $1.035803$ | $2.063470$ | $6.196460$ | $1.092223$ | $0.295655$ | $1.096966$ | $0.280643$ |
+| $10$ | $1$ | $0$ | $0.148596$ | $2.417122$ | $7.649951$ | $0.016891$ | $0.346327$ | $0.004330$ | $0.346472$ |
+
+:::
+
+::: {.problem #prob-ch22-truncated-explicit-remainder-resolution title="交互展品的实时证书接入与大区间高阶光滑核门槛压缩（开放问题）"}
+[@rem-ch22-integrated-explicit-certificate] 已在 $[2, 10]$ 上完成了数学层面的双轨可计算精度证书：借助冻结积分显式公式的三点中心差分，平滑窗误差降为恒等零，$K = 10$ 即可给出 $U_{10}(x)$ 的严格一致包络；全部九个整数 $n \in \{2, \dots, 10\}$ 的单级素数幂与非素数幂分类在逐节点区间检验下已于 $K = 137$（RH 轨）与 $K = 778$（完全独立于 [@conj-riemann-hypothesis] 的无条件轨）处完成严格认证，而满足一致半隙条件 $B < \frac{1}{2}\log 2$ 的最小截断分别为 $K = 382$ 与 $K = 2060$。由此，原问题的剩余开放工程与分析任务进一步收窄为两项明确目标：第一，本页交互展品 `zeta-spectrum-lab` 的 `powers` 视图目前绘制精确素数幂阶梯与可选 $K = 0, \dots, 10$ 的未平滑截断曲线（其满截断曲线即上文对照的 $\psi^{(10)}(x)$），尚未接入上述实时可计算误差带与积分差分视图，将其安全、可审计地集成到交互界面尚待工程实现；第二，上述三点差分仅利用 $\lvert\rho(1-\rho)\rvert^{-1} = O(\gamma^{-2})$ 的衰减，在 $h = 1$ 且目标区间 $[x_{\min}, x_{\max}]$ 远大于 $10$ 时，$B_{\mathrm{RH}}$ 与 $B_{\mathrm{uncond}}$ 分别按 $4n^{3/2}R_K$ 与 $4n^2 C_K R_K$ 增长，仍需设计兼具极小支撑（或可计算平滑窗误差界）与更快高频衰减（如高阶 B 样条或带紧支撑的光滑梅林核）的联合最优证书，以显著压低大区间上实现无条件或 RH 条件下单级素数幂认证所需的零点对数 $K$。
 :::
 
 下方完整频谱实验室在三维主舞台内整合部分和折线、合成离线四元组对照与素数幂三维曲线，供读者核对有限截断与延拓零点谱的边界：
