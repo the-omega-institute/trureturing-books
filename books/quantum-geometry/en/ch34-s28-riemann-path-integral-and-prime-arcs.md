@@ -1012,6 +1012,26 @@ The signed difference $N(a,B)/B^p-I_\infty(\phi(\ln B))$ is at most $\varepsilon
 Compare first with the cumulative mass from $2$. Removing $[2,a]$ changes the mass by $N(2,a)$, which is at most $Ka^p$ by the same early-interval and late-power estimates. Thus the displayed power controls what is lost by moving the left endpoint, and $\varepsilon$ comes from the cumulative phase approximation. The estimate gives a rate in logarithmic width for the omitted mass. Nonnegativity of the removed mass gives the upper bound for the signed error.
 
 
+**Quantitative error under a spectral gap.** Suppose $\beta>1/2$ bounds the real parts of all nontrivial zeros, and suppose $1/2\le\gamma<\beta$ bounds the real parts of those strictly to the left of $\beta$. Keep $p=\beta-1/2$ and write
+$$
+E(a,B)=\frac{N(a,B)}{B^p}-I_\infty(\phi(\ln B)).
+$$
+There is a $K>0$ such that every $2\le a\le B$ satisfies
+$$
+|E(a,B)|\le K\left[(a/B)^p+
+\begin{cases}
+B^{\gamma-\beta},&\gamma>1/2,\\
+B^{-p}\ln(B/a),&\gamma=1/2.
+\end{cases}\right]
+$$
+After the $\beta$-line is subtracted, absolute summability of the zero coefficients bounds the error density by a constant times $x^{\gamma-3/2}$. Taking negative parts is $1$-Lipschitz, and the same power bound absorbs the square-root-scale correction for prime powers. Integrating the density over $[a,B]$ produces a logarithm at $\gamma=1/2$. The phase integral beyond $\ln(B/a)$ gives the $(a/B)^p$ term.
+
+Suppose a nontrivial zero attains the largest real part $\beta>1/2$ and every nontrivial zero strictly to its left has real part at most $1/2$. Then there are $c,C>0$ such that all sufficiently large $B$ satisfy
+$$
+c\ln B\le N(2,B)-B^p I_\infty(\phi(\ln B))\le C\ln B .
+$$
+At the square-root scale, the signed residual eventually lies below a strictly negative constant. Where the top-line profile is nonpositive, the actual negative part therefore exceeds the model by a fixed margin on that scale. At any fixed width $W>W_*$ the phase mass has a positive minimum over the compact phase closure. Boundedness of the profile forces a positive contribution to the error on every log interval of length $W$. Adding adjacent windows gives the lower bound. The finite initial interval and the infinite phase tail contribute only a bounded term. The logarithmic order holds under the stated spectral gap, and the exact logarithmic coefficient remains open.
+
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 
   $$
