@@ -289,6 +289,52 @@ $$
 反过来，给定损失 $\kappa>0$ 和任意实数起点 $R$，选取自然数 $A\ge R$，再取条件所给的 $k$。令 $Y=k^{12}$，则 $Y\ge R$，且 $Y^{4/3}=k^{16}$。窗口的两个端点是 $(k^3)^4$ 和 $(k^4)^4$。由于四次幂在自然数上严格递增，两端及其间所有四次幂恰为这个整数块上的 $n^4$。对 $b=4/3$ 应用 [@thm-ch31-quartic-power-windows] 即得 RH。完整证明由 Lean 内核检查。
 :::
 
+还可以把逐点检验换成一个加权和。只计入 $U(n^4)$ 的正部，让负值无法抵消同一块上过大的样本。对正整数 $n$ 和 $1\le a\le b$，记
+
+$$
+s_n=\frac{\max\{U(n^4),0\}}{n^3},\qquad
+M(a,b)=\sum_{n=a}^{b}s_n.
+$$
+
+令 $Q_\vartheta(x)=\int_x^\infty(\vartheta(t)-t)t^{-2}\,dt$，其中 $\vartheta(t)=\sum_{p\le t}\ln p$ 只对素数求和。
+
+::: {.theorem #thm-ch31-quartic-prime-mass title="素数尾项的负部质量由加权样本控制" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.prime_mass_le_samples"}
+存在实数 $C\ge0$，使所有满足 $2\le a\le b$ 的自然数端点都有
+
+$$
+\int_{a^4}^{b^4}\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx+15s_b
+\le 135M(a,b)+C(\ln b-\ln a).
+$$
+:::
+
+::: proof
+在每个相邻四次幂区间上，用两端的正部及弦误差控制 $U$ 的正部。积分并逐段相加后，内点样本的系数为 $135$，末端样本的系数为 $120$，故可把 $15s_b$ 放到左边。用切比雪夫素数幂估计将完全尾项换成素数尾项，只需增大对数误差的统一系数。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-quartic-mass-log title="RH 下加权样本和的对数上界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.eventual_logarithmic_bound"}
+若 RH 成立，则对每个充分大的自然数 $a$ 和所有自然数 $b\ge a$，有 $M(a,b)<1/a+\ln b-\ln a$。
+:::
+
+::: proof
+RH 给出对所有充分大的 $n$ 成立的严格界 $U(n^4)<n^2$，因此 $s_n<1/n$。单独留下首项 $1/a$，其余调和和不超过 $\int_a^b dt/t$。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-quartic-mass-zero title="临界线右侧零点强制加权样本和按幂增长" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.off_line_zero_forces_sample_mass"}
+设 $z\in\mathbb C$ 满足 $\zeta(z)=0$，且 $\beta=\operatorname{Re}z>1/2$。对每个实数 $\varepsilon>0$ 和所有充分大的自然数 $k$，有 $k^{16(\beta-1/2)-\varepsilon}\le M(k^3,k^4)$。
+:::
+
+::: proof
+取 $Y=k^{12}$，将线外零点所迫的素数尾项质量下界用于 $[Y,Y^{4/3}]=[k^{12},k^{16}]$。[@thm-ch31-quartic-prime-mass] 把该质量转给 $M(k^3,k^4)$。先在窗口下界中保留较小的指数损失，再用余下的损失吸收常数及对数误差。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-quartic-mass-rh title="任意晚整数块上的加权样本和判据" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.rh_iff_subpower_sample_mass"}
+RH 成立，当且仅当对每个实数 $\eta>0$ 和每个自然数 $A$，都存在自然数 $k\ge\max\{A,2\}$ 使 $M(k^3,k^4)\le k^\eta$。
+:::
+
+::: proof
+在 RH 下，[@thm-ch31-quartic-mass-log] 对充分大的 $k$ 给出 $M(k^3,k^4)<k^{-3}+\ln k$，可由 $k^\eta$ 控制。反过来，若有实部 $\beta>1/2$ 的零点，取 $\eta=4(\beta-1/2)$。[@thm-ch31-quartic-mass-zero] 以损失 $\varepsilon=\eta$ 给出最终下界 $k^{3\eta}$，与任意晚整数块上的上界矛盾。由临界带的反射对称性得到 RH。完整证明由 Lean 内核检查。
+:::
+
 参考库与本书共同使用的外部 Lean 环境还给出了同一宿主的有限检验。在 `samples Y Z` 中，依次枚举 $0\le n\le\lfloor\sqrt{\sqrt Z}\rfloor$，保留窗内的 $n^4$ 并加入两端，得到上述有限集。固定 $b>1$，对每个 $\kappa>0$，先选 $\varepsilon>0$ 及实常数 $e_D,e_L,K,c_{HH},e_K$，满足 $(e_D+e_L+7)\varepsilon\le\kappa$。此后对任意起点下界取一个更晚的窗。窗中每个采样点 $t$ 可选自己的框架、宿主 $H$ 和有限集 $T$，要求该点的 `EAtH`（模一特征标，系数 $4$）与 `CoreAtH` 使用同一个 $H,T$。`of_unit_family` 从 `FamilyClassConnected ((GChi PChar.one).cls b)` 导出这些数据，`rh_of_finite_hosts` 由它们推出 RH。每个窗的检验点有限；给定每一组固定损失后，算术假设仍须提供任意晚的窗口及其见证。[同一宿主的逐点比较](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061455789) · [有限采样与宿主推论的内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061515678)
 
 在 $b=3/2$ 的模一设计中，原构造取 $C_{\mathrm{abs}}=2$、$C_0=3$，并指定 $e_D=2$、$e_L=0$。接口 `TopG` 只记录两个指数的存在性。Lean 4.33.1 的证明从原始伽罗瓦行出发，在应用设计定理时用 `BookDesignIntegerBlocks.of_design` 保留这两个指定值，得到无额外假设的 `BookFixedReference.unit_family`。其推论 `BookFixedReference.fixed_integer_blocks` 给出某个 $\varepsilon_1>0$。对每个 $0<\varepsilon<\varepsilon_1$，先固定 $K,c_{HH},e_K$，再对每个自然数下界 $A$ 取得 $k\ge\max\{A,2\}$。对所有 $k^3\le n\le k^4$ 的自然数 $n$，`EAtH` 与 `CoreAtH` 在 $x=n^4$ 处共用同一宿主和有限集。比较所得幂指数为 $1/2+(2+0+7)\varepsilon=1/2+9\varepsilon$。给定 $\kappa>0$，取足够小的 $\varepsilon$ 使 $9\varepsilon\le\kappa$，便满足 [@thm-ch31-quartic-integer-blocks] 的条件。[固定指数的原设计](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061662378) · [从伽罗瓦行取得固定指数整数块的内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7064831569)
@@ -339,7 +385,7 @@ $$
 U(x)\le x^{1/2+\eta}\quad (k^{12}\le x\le k^{16}).
 $$
 
-求和遍历整块内的整数，第二个界对闭区间内每个实数 $x$ 成立，含两个端点。证明取 $\kappa=\min\{\eta/32,1/2\}$，将采样上界除以 $n^3$ 后用调和和估计，另用同一块上的四次幂插值控制实窗。两个比较所需的门槛可由同一个 $k$ 满足。[从参考算术直接推出同一块的两个界](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067180276)
+求和遍历整块内的整数，第二个界对闭区间内每个实数 $x$ 成立，含两个端点。证明取 $\kappa=\min\{\eta/32,1/2\}$，将采样上界除以 $n^3$ 后用调和和估计，另用同一块上的四次幂插值控制实窗。两个比较所需的门槛可由同一个 $k$ 满足。这里的加权和正是 [@thm-ch31-quartic-mass-rh] 中的 $M(k^3,k^4)$。[从参考算术直接推出同一块的两个界](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067180276)
 
 **单调性本身对负部窗口给出什么限制？**
 
