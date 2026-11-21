@@ -354,6 +354,8 @@ Levent Alpöge 提出的证明在模 $1$ 使用外部算术输入构造这族整
 
 后续的外部内核复核细化了宿主输入。对 $0<\varepsilon<1/52$、$A\ge1$ 和每个充分大的 $Y$，模一的均方估计 `QH.pairEx` 给出在整个 $[Y,Y^A]$ 上满足测试的同一对 $q,d$。外窗的构造还使用上同调窗口输入；此时先固定 $Y,q,d$，然后再量化外窗内的实点。特别地，在模一特征标处，`supplyChi` 把 `VWinAt PChar.one 401` 送入上段的宿主条件。由此在同一环境核验了 `TopG → VWinAt PChar.one 401 → RiemannHypothesis`。这个上同调窗口要求同一数域、同一秩下相应的 Galois 上同调长度有限，并且它们对每个有限素数集以 $\log\ell$ 加权的和满足规定上界。[固定素数对与外窗的量词](https://github.com/the-omega-institute/trureturing/issues/32627#issuecomment-7059642097) · [上同调窗口的条件推论](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059734329)
 
+模一特征标 $\chi$ 生成的群只有一个元素。数域构造给出 $1\le c\le|\langle\chi\rangle|$，所以秩公式 $c2^e$ 化为 $2^e$，直接满足 $x^{2+8\varepsilon}\le2^e\le2x^{2+8\varepsilon}$。于是模一情形可把上同调截断指数从 $401$ 降到 $400$。外窗 $[Z,Z^{3/2}]$ 上的每个 $x$ 都使用同一组 $Y,q,d$，秩指数 $e$ 可随 $x$ 改变；上同调长度求和只用 $1\le j<\lfloor x^{400}\rfloor$。同一外部环境还核验了 `TopG → VWinAt PChar.one 400 → RiemannHypothesis`。族输入与这个较弱的模一窗口输入都是该推论的假设。[指数 400 的源码与内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059864808)
+
 **怎样让同一个判别式在几个素数处都分裂？** 对奇素数 $p$，记 $J(-d,p)=\bigl(\frac{-d}{p}\bigr)$。值为 $1$ 的意思是 $t^2\equiv-d\pmod p$ 有非零解。取 $B=3$，要检查的小奇素数只有 $3$。素数 $d=23$ 满足 $d\equiv7\pmod{16}$ 及 $-23\equiv1\pmod3$。再取素数 $q=59\equiv3\pmod8$，有 $-23\equiv36=6^2\pmod{59}$。这一对满足所需的两个分裂条件。下面的构造用特定剩余类一次保证所有有限条件，这些剩余类只占可用素数的一部分。
 
 ::: {.theorem #thm-ch31-split-prime-host-series title="满足局部分裂条件的辅助素数的加权级数" lean="D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series"}
