@@ -358,6 +358,20 @@ $$
 
 The quantity $A_\vartheta$ above is $A_{\vartheta,3/2}$.
 
+::: {.theorem #thm-ch31-prime-window-mean title="The logarithmic main term of the window mass under RH" lean="D5/S3/Weil/Mertens/IntegratedExplicit/RHPrimeWindowMean.prime_tail_logarithmic_mass_of_rh"}
+Assume the Riemann hypothesis. There is a constant $C\ge0$ such that every pair of real cutoffs $B\ge A\ge2$ satisfies
+
+$$
+\left|\int_A^B\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx-2\ln(B/A)\right|\le C.
+$$
+:::
+
+::: proof
+In the prime-power layers, higher powers bound the difference between $\psi(x)-\vartheta(x)$ and $\psi(\sqrt{x})$. Apply Schoenfeld's bound at $\sqrt{x}$ and integrate to obtain $\sqrt{x}(Q(x)-Q_\vartheta(x))=2+O(x^{-1/12})$. This error is absolutely integrable on the tail after setting $y=\ln x$. The normalized complete remainder consists of the zero series and an exponentially decaying term. Under RH the series has absolutely summable coefficients, modulus less than $2$, and frequencies of absolute value greater than $10$. Integrating each mode divides its coefficient by the frequency, giving a common bound for integrals of the zero series over every interval. Adding $2$ to the real part of this series gives a nonnegative approximation to $\max\{-\sqrt{x}Q_\vartheta(x),0\}$. Taking positive parts preserves the bound on the integrable error. Continuity bounds the error over the finite initial interval. Integrating the constant $2$ gives the logarithmic main term, and the other contributions are bounded uniformly in both endpoints. The full proof is checked by the Lean kernel.
+:::
+
+In particular, $A_{\vartheta,b}(Y)=2(b-1)\ln Y+O(1)$ with the same error bound even when $b>1$ varies. Zhao's equation (14) expresses this $Q_\vartheta$ in terms of the cumulative first Mertens error and an endpoint correction. The main term here results from a further weighted window integral and uses RH. [Zhao, equation (14)](https://arxiv.org/html/2411.18903v2#S2.E14)
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::
