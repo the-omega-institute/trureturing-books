@@ -645,8 +645,106 @@ and moving right from the midpoint $\psi_0(8)$ contributes the remaining half-ju
 **Formalization boundary and literature sources.** Earlier theorems in this book that carry frozen Lean citations cover their respective verified scope—including the Dirichlet series and Euler product identities for $\zeta(s)$ on $\operatorname{Re}(s) > 1$, the entireness and reflection properties of $\xi(s)$, and partial zero results—whereas the Möbius reciprocal series and inversion, the Mertens equivalence, and the full pointwise explicit formula cited additionally here are used as classical literature results without formalization in this book and without any claim of verification by the finite computations on this page. The standard definitions and theorems belong to distinct references: the Dirichlet series, Euler product on $\operatorname{Re}(s) > 1$, and analytic continuation of $\zeta(s)$ appear in [DLMF §25.2](https://dlmf.nist.gov/25.2); the Möbius reciprocal Dirichlet series $1/\zeta(s) = \sum_{n=1}^{\infty}\mu(n)n^{-s}$ in [DLMF 27.4.E5](https://dlmf.nist.gov/27.4.E5), with Dirichlet convolution and Möbius inversion in [DLMF §27.5](https://dlmf.nist.gov/27.5); properties of nontrivial zeros in the critical strip in [DLMF §25.10](https://dlmf.nist.gov/25.10); and the definition of Chebyshev's $\psi(x)$ together with its leading Prime Number Theorem asymptotic in [DLMF §25.16](https://dlmf.nist.gov/25.16) (such as [DLMF 25.16.E2](https://dlmf.nist.gov/25.16.E2)), noting that §25.16 gives only the definition and asymptotic formula for $\psi(x)$ rather than proofs of the Möbius reciprocal series, the Mertens equivalence, or the full pointwise explicit formula. As classical analytic number theory results, the Dirichlet-series and zero-distribution foundations as well as the equivalence between the Riemann Hypothesis and the Mertens bound $M(x) = O_\varepsilon(x^{1/2+\varepsilon})$ ($\forall \varepsilon > 0$) are treated in E. C. Titchmarsh, *The Theory of the Riemann Zeta-Function*, second edition (revised by D. R. Heath-Brown), Chapters 3, 4, and 14; the full pointwise von Mangoldt explicit formula on $x > 1$ (under the conventions of all nontrivial zeros counted with multiplicity, symmetric height limit, and midpoint values) is likewise proved in H. Davenport, *Multiplicative Number Theory*, third edition, Chapter 17.
 :::
 
-::: {.problem #prob-ch22-truncated-explicit-remainder-resolution title="Computable Accuracy Certificates for Finite-Zero Reconstructions and Conditions for Full-Spectrum Extrapolation (Open Problem)"}
-Classical analytic number theory already possesses rigorous remainder bounds for truncated and smoothed von Mangoldt explicit formulas, so the existence of truncation remainder bounds is not an unsolved mathematical problem; however, **the interactive visual experiment in this section attaches no computable error certificate to its $10$-pair zero sample**. For any proposed geometric or spectral bridge evaluated on a specified finite zero sample, the concrete open engineering and analytic task is to supply a computable accuracy certificate over $[x_{\min}, x_{\max}]$ and establish its precise logical link to the full infinite spectrum: to certify single-step prime-power resolution on the page independently of the external proof of [@conj-riemann-hypothesis], one must simultaneously bound both the **smoothing-window error** and the **tail contribution of all omitted nontrivial zeros with $|\operatorname{Im}\rho| > T$**, without mistaking uncertified visual agreement on short samples for a new universal theoretical mystery.
+::: {.remark #rem-ch22-integrated-explicit-certificate title="Zero-Smoothing-Error Three-Point Stencil and Dual Computable Error Certificates from the Frozen Integrated Explicit Formula (Manual Derivation and High-Precision Numerics, Not Formalized in This Book)"}
+**Manual derivation and high-precision interval-arithmetic verification (`NUM`, not formalized in this book), starting from four frozen Lean declarations in this book.** The `powers` view on this page plots the exact prime-power staircase $\psi_0(x)$ alongside unsmoothed pointwise truncations with selectable $K = 0, \dots, 10$ (its full-cutoff comparison curve being $\psi^{(10)}(x) = x - 2\sum_{j=1}^{10}\operatorname{Re}(x^{\rho_j}/\rho_j) - \log(2\pi) - \frac{1}{2}\log(1 - x^{-2})$). The obstacle to attaching a rigorous error certificate to such unsmoothed pointwise truncations is that the pointwise zero series $\sum_\rho x^\rho/\rho$ converges only **conditionally** under symmetric height cutoffs, so its omitted tail cannot be bounded absolutely from total zero weight alone. Switching to the integrated explicit formula already frozen in this book's pinned repository removes both obstructions at once and eliminates the smoothing-window error identically (continuing the convention above that $\log$ denotes the natural logarithm throughout):
+
+1. **Frozen integrated identity and elementary closed form for the trivial-zero series**: By [`U`](lean:D5/S3/Arith/Robin/CompleteMertensPeak.U) in [@def-divisor-ratio-mertens-error] and the frozen theorem [`actual_integrated_explicit_formula`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/WholeFormula.actual_integrated_explicit_formula) (whose domain is $y > 0$, i.e. $x = e^y > 1$), every $x > 1$ satisfies the exact identity
+
+   $$
+   U(x) \;=\; \sum_{\rho}\frac{x^\rho}{\rho(1-\rho)} \;+\; \log(2\pi) \;-\; T(x),
+   \qquad
+   T(x) \;:=\; \sum_{m=1}^{\infty}\frac{x^{-2m}}{2m(2m+1)},
+   $$
+
+   where the sum ranges over all nontrivial zeros in the critical strip $0 < \operatorname{Re}(\rho) < 1$ counted with multiplicity (both signs of $\operatorname{Im}\rho$). By partial fractions $\frac{1}{2m(2m+1)} = \frac{1}{2m} - \frac{1}{2m+1}$ together with the logarithm and inverse hyperbolic tangent series, the trivial-zero correction admits an **exact elementary closed form with no truncation** on $x > 1$:
+
+   $$
+   T(x) \;=\; 1 \;-\; \frac{1}{2}\log\bigl(1 - x^{-2}\bigr) \;-\; \frac{x}{2}\log\frac{x + 1}{x - 1}
+   \qquad \bigl(x > 1,\;\text{e.g. } T(2) \approx 0.045229\bigr).
+   $$
+
+2. **Zero-smoothing-error three-point centered stencil (exact extraction of $\Lambda(n)$)**: Write $(v)_+ := \max(v, 0)$. From the arithmetic definition of [`U`](lean:D5/S3/Arith/Robin/CompleteMertensPeak.U), every $x > 0$ satisfies
+
+   $$
+   U(x) + x\log x \;=\; (1 + \gamma)\,x \;+\; \sum_{m=1}^{\infty}\frac{\Lambda(m)}{m}\,(x - m)_+.
+   $$
+
+   For any integer $n \ge 2$ and any step size $h$ with $0 < h \le 1$ and $n - h > 1$ (so all three stencil nodes $n - h,\ n,\ n + h$ lie inside the domain $(1, \infty)$ of the integrated formula), define the centered second difference $\Delta_h^2 f(n) := f(n+h) - 2f(n) + f(n-h)$. Both the linear term $(1+\gamma)x$ and the constant $\log(2\pi)$ vanish identically under $\Delta_h^2$, while every positive integer $m$ satisfies $\Delta_h^2(x - m)_+\big|_{x=n} = (h - \lvert n - m\rvert)_+$; because $0 < h \le 1$, this triangular kernel vanishes **identically** at every integer $m \neq n$ and equals $h$ at $m = n$. Together with the absolute convergence established in item 3 below, this yields an exact extraction identity with **identically zero smoothing-window error**:
+
+   $$
+   \Lambda(n) \;=\; \frac{n}{h}\,\Delta_h^2\bigl(U(x) + x\log x\bigr)\Big|_{x=n} \;=\; \frac{n}{h}\,\Delta_h^2(x\log x)\Big|_{x=n} \;+\; \frac{n}{h}\sum_{\rho}\frac{(n+h)^\rho - 2n^\rho + (n-h)^\rho}{\rho(1-\rho)} \;-\; \frac{n}{h}\,\Delta_h^2 T(n).
+   $$
+
+   Using 300-bit Arb interval arithmetic across $n = 2, \dots, 10$ under the step schedule used in the table below ($h = \frac{1}{2}$ at $n = 2$ and $h = 1$ at $n = 3, \dots, 10$, evaluating the infinite zero sum via the frozen integrated identity), every stencil residual is enclosed in a zero-containing interval of radius below $1.1 \times 10^{-86}$.
+3. **Dual computable tail certificates from the frozen total spectral mass $2\lambda_1$ (RH track and completely unconditional track)**: The frozen theorem [`actual_complex_pairWeight_hasSum`](lean:D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_complex_pairWeight_hasSum) establishes the exact total reciprocal-quadratic spectral mass over all nontrivial zeros (counted with multiplicity):
+
+   $$
+   \sum_{\rho}\frac{1}{\rho(1-\rho)} \;=\; 2\lambda_1 \;=\; 2 + \gamma - 2\log(2\sqrt{\pi}) \;=\; 2 + \gamma - \log(4\pi) \;\approx\; 0.0461914179.
+   $$
+
+   Let $\rho_j = \frac{1}{2} + i\gamma_j$ ($1 \le j \le K$, $0 < \gamma_1 < \dots < \gamma_K =: T_K$) be the first $K$ positive-ordinate critical-line zeros, certified by finite interval arithmetic to be simple and to exhaust all nontrivial zeros with $0 < \operatorname{Im}(\rho) \le T_K$ (in the literature, D. Platt & T. Trudgian, *The Riemann hypothesis is true up to $3\cdot 10^{12}$*, *Bull. London Math. Soc.* **53**(3), 792–797, 2021, Theorem 1 and §2, [10.1112/blms.12460](https://doi.org/10.1112/blms.12460), rigorously verify this up to $3 \times 10^{12}$, where matching the count of certified critical-line sign changes against the full critical-strip zero count via Turing's method in §2 establishes both simplicity and exhaustiveness; the decisive cutoffs and their predecessors below for $K \le 3000$ were also independently checked via FLINT/Arb zero enclosure and critical-strip zero counting). Combining the frozen theorem [`actual_height_gt_ten`](lean:D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_height_gt_ten) ($\lvert\operatorname{Im}\rho\rvert > 10$, ruling out real zeros) with conjugation symmetry ([@prop-zeta-conjugation-covariance], [@prop-xi-zeros-strip-zeros]), taking real parts of the mass identity and subtracting the exact contribution of the first $K$ conjugate pairs gives the **exact real tail mass determined solely by the first $K$ ordinates**:
+
+   $$
+   R_K \;:=\; \sum_{\lvert\operatorname{Im}\rho\rvert > T_K}\operatorname{Re}\!\left(\frac{1}{\rho(1-\rho)}\right) \;=\; 2\lambda_1 \;-\; 2\sum_{j=1}^{K}\frac{1}{\frac{1}{4} + \gamma_j^2} \;>\; 0.
+   $$
+
+   (Arb interval centers give, for instance, $R_{10} \approx 0.019121$, $R_{50} \approx 0.009108$, $R_{100} \approx 0.006222$, $R_{500} \approx 0.002298$, $R_{1000} \approx 0.001439$, $R_{2000} \approx 0.000885$, and $R_{3000} \approx 0.000660$, each with interval radius below $5 \times 10^{-66}$.) Define the $K$-pair truncated reconstructions
+
+   $$
+   U_K(x) \;:=\; \sum_{j=1}^{K}\frac{2\sqrt{x}\cos(\gamma_j\log x)}{\frac{1}{4} + \gamma_j^2} \;+\; \log(2\pi) \;-\; T(x),
+   \qquad
+   \Lambda_K(n; h) \;:=\; \frac{n}{h}\,\Delta_h^2\bigl(U_K(x) + x\log x\bigr)\Big|_{x=n}.
+   $$
+
+   For any omitted nontrivial zero $\rho = \beta + i\gamma$ ($0 < \beta < 1$, $\lvert\gamma\rvert > T_K > 0$), put $z = \rho(1-\rho) = \bigl(\beta(1-\beta) + \gamma^2\bigr) + i\,\gamma(1 - 2\beta)$. Since $\beta(1-\beta) > 0$ and $\lvert 1 - 2\beta\rvert < 1$, one has $\operatorname{Re}(z) > \gamma^2 > 0$ and $\lvert\operatorname{Im}(z)\rvert < \lvert\gamma\rvert$, whence $\lvert\operatorname{Im}(z)\rvert / \operatorname{Re}(z) < 1/\lvert\gamma\rvert < T_K^{-1}$; substituting into the elementary identity $\frac{1}{\lvert z\rvert} = \sqrt{1 + (\operatorname{Im}(z)/\operatorname{Re}(z))^2}\,\operatorname{Re}(1/z)$ (valid for $\operatorname{Re}(z) > 0$) yields **termwise absolute control without assuming any localization of omitted zeros**:
+
+   $$
+   \frac{1}{\lvert\rho(1-\rho)\rvert} \;<\; C_K\,\operatorname{Re}\!\left(\frac{1}{\rho(1-\rho)}\right),
+   \qquad
+   C_K \;:=\; \sqrt{1 + T_K^{-2}}
+   $$
+
+   (the same inequality with $\lvert\gamma\rvert > 10$ also establishes the absolute convergence of $\sum_\rho x^\rho/(\rho(1-\rho))$ for every $x > 1$). For every $x > 1$ and every admissible $(n, h)$, two rigorous computable remainder certificates follow immediately:
+   - **RH track (invoking the external headline theorem `riemannZeta_eq_zero_re : RiemannZetaZerosOnLine` recorded in [@conj-riemann-hypothesis], so every omitted zero satisfies $\operatorname{Re}(\rho) = \frac{1}{2}$, $\lvert x^\rho\rvert = \sqrt{x}$, and $\frac{1}{\lvert\rho(1-\rho)\rvert} = \operatorname{Re}\!\left(\frac{1}{\rho(1-\rho)}\right) = \frac{1}{\frac{1}{4}+\gamma^2}$)**:
+
+     $$
+     \lvert U(x) - U_K(x)\rvert \;\le\; \sqrt{x}\,R_K,
+     \qquad
+     \lvert\Lambda(n) - \Lambda_K(n; h)\rvert \;\le\; B_{\mathrm{RH}}(n, h; K) \;:=\; \frac{n}{h}\bigl(\sqrt{n+h} + 2\sqrt{n} + \sqrt{n-h}\bigr)\,R_K.
+     $$
+
+   - **Completely unconditional track (entirely independent of [@conj-riemann-hypothesis], using only the finite verification up to $T_K$ and $\lvert x^\rho\rvert = x^\beta < x$)**:
+
+     $$
+     \lvert U(x) - U_K(x)\rvert \;\le\; x\,C_K\,R_K,
+     \qquad
+     \lvert\Lambda(n) - \Lambda_K(n; h)\rvert \;\le\; B_{\mathrm{uncond}}(n, h; K) \;:=\; \frac{4n^2}{h}\,C_K\,R_K
+     $$
+
+     (since $(n+h) + 2n + (n-h) = 4n$ cancels $h$ cleanly in the numerator).
+4. **High-precision certification on $[2, 10]$ and contrast with the unsmoothed exhibit (`NUM`)**:
+   - **Continuous comparison at $K = 10$ pairs ($T_{10} = \gamma_{10} \approx 49.773832$)**: On $[2, 10]$, the continuous maximum integrated error is $\max_{x \in [2, 10]}\lvert U(x) - U_{10}(x)\rvert \approx 0.012682$ (attained at $x = 7$, where the pointwise RH and unconditional bounds are $\approx 0.050589$ and $\approx 0.133874$), staying well inside the uniform certificates $\sqrt{10}\,R_{10} \approx 0.060466$ (RH track) and $10\,C_{10}\,R_{10} \approx 0.191249$ (unconditional track) (replacing the exact ordinates by the exhibit's stored IEEE-754 double-precision array `GAMMAS` shifts $U_{10}(x)$ uniformly by less than $2.671 \times 10^{-16}$). By sharp contrast, the full-cutoff unsmoothed curve $\psi^{(10)}(x)$ from the `powers` view (whose printed six-decimal errors below agree identically whether evaluated with exact ordinates or with the exhibit's stored double-precision `GAMMAS`) exhibits an integer-node maximum error of $\approx 0.110045$ (at $x = 9$), a half-integer-node maximum error of $\approx 0.189644$ (at $x = 6.5$), and a continuous supremum $\sup_{x \in [2, 10]}\lvert\psi_0(x) - \psi^{(10)}(x)\rvert \approx 1.023368$ (approached as $x \to 7^-$, equaling $\psi^{(10)}(7) - \log 60$), nearly three times the single-step prime-power half-gap $\frac{1}{2}\log 2 \approx 0.346574$.
+   - **Uniform half-gap cutoffs and per-node interval cutoffs for single-step prime-power resolution**: Because every integer $n \ge 2$ obeys the strict spectral gap $\Lambda(n) \in \{0\} \cup [\log 2, \infty)$ ($\log 2 \approx 0.693147$), whenever a computable error bound satisfies the uniform half-gap criterion $B(n, h; K) < \frac{1}{2}\log 2 \approx 0.346574$, the certified interval $[\Lambda_K - B,\ \Lambda_K + B]$ automatically separates $0$ from $[\log 2, \infty)$ ($\Lambda_K > \frac{1}{2}\log 2$ rigorously certifies that $n$ is a prime power, while $\Lambda_K < \frac{1}{2}\log 2$ rigorously certifies that $n$ is not a prime power). Fixing the admissible step schedule on $[2, 10]$ ($h = \frac{1}{2}$ at $n = 2$ and $h = 1$ at $n = 3, \dots, 10$), the tightest node for both bounds is always $n = 10$ and both bounds decrease strictly with $K$:
+     - **Smallest RH-track cutoff for the uniform half-gap criterion $B < \frac{1}{2}\log 2$ is $K = 382$**: at $K = 381$, $B_{\mathrm{RH}}(10, 1; 381) \approx 0.346915 > \frac{1}{2}\log 2$ falls just short; at $K = 382$, $B_{\mathrm{RH}}(10, 1; 382) \approx 0.346327 < \frac{1}{2}\log 2$, bringing all nine rows below the half-gap simultaneously and strictly certifying that $\{2, 3, 4, 5, 7, 8, 9\}$ are prime powers and $\{6, 10\}$ are not (at the benchmark $K = 500$ this bound drops further to $\approx 0.290441$, with actual error $\approx 0.013743$).
+     - **Smallest completely unconditional cutoff for the uniform half-gap criterion $B < \frac{1}{2}\log 2$ is $K = 2060$**: at $K = 2059$, $B_{\mathrm{uncond}}(10, 1; 2059) \approx 0.346593 > \frac{1}{2}\log 2$; at $K = 2060$, $B_{\mathrm{uncond}}(10, 1; 2060) \approx 0.346472 < \frac{1}{2}\log 2$ (with actual error $\approx 0.004330$), **strictly certifying the prime-power versus non-prime-power classification of all nine integers in $[2, 10]$ under the uniform half-gap criterion without invoking [@conj-riemann-hypothesis]**.
+     - **Sharper per-node interval cutoffs and contrast with $K = 10$**: If one instead applies the same bounds to each node's certified interval $[\Lambda_K - B,\ \Lambda_K + B]$ individually (requiring $\Lambda_K - B > 0$ for prime powers and $\Lambda_K + B < \log 2$ for non-prime-powers), all nine integers are already strictly classified at **$K = 137$ (RH track)** and **$K = 778$ (unconditional track)**. Returning to $K = 10$, every row fails the uniform half-gap criterion $B < \frac{1}{2}\log 2$; checking solely whether an individual certified interval excludes $0$, the RH track already certifies $n \in \{2, 3, 4, 5, 7\}$ as prime powers and the unconditional track certifies $n \in \{2, 3\}$, whereas the composite prime powers $8, 9$ and the non-prime-power composites $6, 10$ cannot yet be separated from the opposite class under either track. The table below summarizes the Arb-verified values at the key cutoffs (all entries rounded to six decimal places):
+
+| $n$ | $h$ | $\Lambda(n)$ | $\Lambda_{10}$ | $B_{\mathrm{RH}}^{(10)}$ | $B_{\mathrm{uncond}}^{(10)}$ | $\Lambda_{382}$ | $B_{\mathrm{RH}}^{(382)}$ | $\Lambda_{2060}$ | $B_{\mathrm{uncond}}^{(2060)}$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $2$ | $1/2$ | $0.693147$ | $0.668602$ | $0.430935$ | $0.611996$ | $0.690421$ | $0.061745$ | $0.692466$ | $0.027718$ |
+| $3$ | $1$ | $1.098612$ | $1.087448$ | $0.394561$ | $0.688496$ | $1.097461$ | $0.056533$ | $1.098314$ | $0.031183$ |
+| $4$ | $1$ | $0.693147$ | $0.721527$ | $0.609434$ | $1.223992$ | $0.695755$ | $0.087320$ | $0.693799$ | $0.055436$ |
+| $5$ | $1$ | $1.609438$ | $1.512954$ | $0.852953$ | $1.912488$ | $1.603260$ | $0.122212$ | $1.607880$ | $0.086618$ |
+| $6$ | $1$ | $0$ | $0.169280$ | $1.122113$ | $2.753982$ | $0.010388$ | $0.160777$ | $0.002629$ | $0.124730$ |
+| $7$ | $1$ | $1.945910$ | $1.787942$ | $1.414686$ | $3.748476$ | $1.935019$ | $0.202697$ | $1.943158$ | $0.169771$ |
+| $8$ | $1$ | $0.693147$ | $0.778065$ | $1.728939$ | $4.895969$ | $0.699462$ | $0.247723$ | $0.694755$ | $0.221742$ |
+| $9$ | $1$ | $1.098612$ | $1.035803$ | $2.063470$ | $6.196460$ | $1.092223$ | $0.295655$ | $1.096966$ | $0.280643$ |
+| $10$ | $1$ | $0$ | $0.148596$ | $2.417122$ | $7.649951$ | $0.016891$ | $0.346327$ | $0.004330$ | $0.346472$ |
+
+:::
+
+::: {.problem #prob-ch22-truncated-explicit-remainder-resolution title="Live Certificate Integration in the Interactive Exhibit and Higher-Order Smooth-Kernel Thresholds on Large Intervals (Open Problem)"}
+[@rem-ch22-integrated-explicit-certificate] resolves the analytical side of the computable accuracy certificate on $[2, 10]$: using the centered three-point stencil of the frozen integrated explicit formula, the smoothing-window error vanishes identically, $K = 10$ already yields rigorous uniform envelopes for $U_{10}(x)$, per-node interval checks strictly classify all nine integers $n \in \{2, \dots, 10\}$ into prime powers versus non-prime-powers already at $K = 137$ (RH track) and $K = 778$ (completely unconditional track independent of [@conj-riemann-hypothesis]), and the uniform half-gap criterion $B < \frac{1}{2}\log 2$ holds across all nine nodes starting at $K = 382$ and $K = 2060$, respectively. The remaining open engineering and analytic task narrows to two concrete goals: first, the `powers` view of the interactive exhibit `zeta-spectrum-lab` currently draws the prime-power staircase together with selectable unsmoothed truncations for $K = 0, \dots, 10$ (its full-cutoff curve being the benchmark $\psi^{(10)}(x)$ analyzed above) without rendering these computable error bands or the integrated stencil view, so integrating audited live certificates into the interactive exhibit remains an engineering task; second, because the three-point stencil exploits only $\lvert\rho(1-\rho)\rvert^{-1} = O(\gamma^{-2})$ decay, at $h = 1$ on intervals $[x_{\min}, x_{\max}]$ much larger than $10$ its bounds $B_{\mathrm{RH}}$ and $B_{\mathrm{uncond}}$ scale asymptotically as $4n^{3/2}R_K$ and $4n^2 C_K R_K$, leaving open the design of jointly optimal higher-order smooth kernels (such as higher-order B-splines or compactly supported smooth Mellin kernels) that combine compact support or computable smoothing-window bounds with faster high-frequency zero decay to compress the zero-pair count $K$ required for certified single-step resolution at large scales.
 :::
 
 The full spectrum laboratory below brings together the 3D partial-sum polylines, the synthetic off-line quartet model, and the 3D prime-power curves so readers can inspect the boundary between finite truncation and analytic continuation:

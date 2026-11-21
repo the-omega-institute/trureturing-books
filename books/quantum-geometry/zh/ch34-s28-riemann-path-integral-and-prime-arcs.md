@@ -317,6 +317,10 @@ $$
 
 于是 `BookNativeClosedLattice.design_from_twist_selection` 只用原扭曲族类上的选择提供者、上述在增广族类上闭合且带族门槛的尺寸估计 `cT ε Fm.CYL ≤ Fm.CTu → TuSize Fm`，以及 `TwistSelection 𝒜`，便得到 `DesignExists (WithTw (WithSm (Enriched 𝒜))) 3`。取 $C_0=3$、令设计的底类 $\mathcal C'$ 为 `Enriched 𝒜`，便得到上文原生 RH 定理所需的设计。该定理还使用两个族类包含关系和九项闭合估计，最后应用本书冻结的整数块判据。[从扭曲选择构造设计的研究源码与内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7065978544)
 
+模一特化将这两个包含关系化为投影。给定底类 $B$，取 $\mathcal A$ 为 $B$ 与窗指数 $3/2$ 的模一族类的交。从 `Enriched 𝒜` 取出 $\mathcal A$ 的两个分量，便分别得到 $B$ 和模一族条件。`BookUnitDesignConnection.twist_selection_iff` 还给出扭曲选择存在的等价条件。对 $\mathcal A$ 的每个族 `Fm`，存在属于该族的实数门槛 $x_0$，使每个满足 $x>x_1$、$x\ge x_0$ 的尺度和每个指标 $i$ 都有一份 `ExtraDataRecursive` 记录。反向证明对每个这样的指标选一份记录，组成该族的扭曲选择。[模一族的投影与逐族递归记录](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7066410252)
+
+原库的 `UpperTheory.Top.designS` 已在 Lean 4.35.0 中重放。在 `BookUnitKits.rh_of_unit_kits` 中，底类 `Linked Q` 要求存在参数 $\kappa$，使该族既与 $\kappa$ 相连，又满足 $Q(\kappa)$ 对应的点类条件。在模一特化下，`designS` 把逐点算术条件 `KitCPW` 与已证的 Minkowski 整除界合起来，给出原扭曲族类上的选择。这个原生 RH 入口仍使用四组输入，即模一的 `KitCPW`、增广平滑扭曲族类上带门槛的闭合尺寸估计、相连模一族的最终递归记录，以及 `Des (Linked Q) 3` 上的九项闭合估计。`UpperTheory.Top.kitS` 又可从模一窗口的宿主条件 `DC.HostWW` 和逐指标的算术对象条件 `ObjCP` 构造所需的 `KitCPW`。[从逐点条件构造选择](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7066607957) · [从窗口宿主和算术对象构造逐点条件](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067228472)
+
 原库和本书的整数块路线共用原始伽罗瓦行。原库先证明 `EveryCharacter`，即所有正整数模的狄利克雷特征标在 $\operatorname{Re}(s)>1/2$ 的 $L$ 函数非消失性（主特征标除去 $s=1$），再由 `rh_of_every` 得到 RH。本书从该算术行取出模一族，再由 `BookIntegerHostBlocks.of_reference` 得到整数块。其算术模块只向这一论证提供 `TopG`。在参考库的 Lean 4.33.1 环境中，`leanchecker` 已分别重放算术模块、最终结论模块与独立审计模块。审计文件 `IntegerBlockAudit.lean` 确认声明 `BookReference.riemannHypothesis_via_integer_blocks` 的类型为 Mathlib 的 `RiemannHypothesis`，并打印出以下证明项。[原库从全体特征标推出 RH 的声明](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Supplements/Kernels/MainTheorems.lean#L7-L9)
 
 ```lean
@@ -325,7 +329,17 @@ BookIntegerHostBlocks.rh_of_blocks
     UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter)
 ```
 
-该声明的公理仅为 `propext`、`Classical.choice` 和 `Quot.sound`，入口未导入原库的 `Main` 与 `MainConclusion`。本节四次幂窗口判据的冻结声明来自书库所引的 Lean 4.35 环境。[完整整数块证明与内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7063096204)
+在 Lean 4.33.1 中，本书引用已由多方重放的参考算术，模一整数块路线由此给出无附加假设的 RH 证明。上文所列的算术输入属于 Lean 4.35.0 原生移植的条件定理。该闭合声明的公理仅为 `propext`、`Classical.choice` 和 `Quot.sound`，入口未导入原库的 `Main` 与 `MainConclusion`。本节四次幂窗口判据的冻结声明来自书库所引的 Lean 4.35 环境。[参考证明的公开重放](https://github.com/the-omega-institute/riemann-hypothesis/blob/1ef6c4e2e944fb2784ecf3168a84810bf50ca6db/README.md#public-kernel-replay-results) · [完整整数块证明与内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7063096204)
+
+同一个参考伽罗瓦行还给出两个共用见证的上界。对任意实数 $\eta>0$ 和自然数 $A$，`BookArithmeticWeightedBlocks.joint_window_from_reference_arithmetic` 给出一个整数 $k\ge\max\{A,2\}$，使
+
+$$
+\sum_{n=k^3}^{k^4}\frac{\max\{U(n^4),0\}}{n^3}\le k^\eta,
+\qquad
+U(x)\le x^{1/2+\eta}\quad (k^{12}\le x\le k^{16}).
+$$
+
+求和遍历整块内的整数，第二个界对闭区间内每个实数 $x$ 成立，含两个端点。证明取 $\kappa=\min\{\eta/32,1/2\}$，将采样上界除以 $n^3$ 后用调和和估计，另用同一块上的四次幂插值控制实窗。两个比较所需的门槛可由同一个 $k$ 满足。[从参考算术直接推出同一块的两个界](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067180276)
 
 **单调性本身对负部窗口给出什么限制？**
 
