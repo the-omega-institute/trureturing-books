@@ -1064,7 +1064,7 @@ $$
 \epsilon_a\epsilon_b\,M(H\triangle K)\bigl(1-M(H\cap K)^2\bigr).
 $$
 
-The free bits have $0<t_j\le 1/2$, so every bias factor lies in $[0,1)$. The right side vanishes exactly when the supports are disjoint or a fair bit belongs to exactly one support. A fair bit on one side can therefore give independence even when the events share biased bits. For example, if $Y_2$ is fair, the events $Y_1=0$ and $Y_1+Y_2=0$ are independent.
+The free bits have $0<t_j\le 1/2$, so every bias factor lies in $[0,1)$. The right side vanishes exactly when the supports are disjoint or a fair bit belongs to exactly one support. A fair bit on one side can therefore give independence even when the events share biased bits. For example, if $Y_2$ is fair, the events $Y_1=0$ and $Y_1+Y_2=0$ are independent. [Lean proof of parity event independence](https://github.com/the-omega-institute/trureturing/blob/2aeab5c403ee83e81d64b7b9865b2830b1296d7f/Blueprint/D5/S3/Analytic/Probability/BernoulliParityIndependence.md)
 
 **Choosing a column basis (worked example).** Take retained pairs $(1,5)$ and $(6,10)$ and discarded pairs $(0,2)$, $(7,11)$, and $(3,8)$, in that order. Their later-endpoint probabilities are $(1/4,1/2)$ and $(1/8,1/4,1/4)$ respectively. When balancing the first retained orbital,
 
@@ -1088,7 +1088,7 @@ B_J\sum_{\substack{S\subseteq\mathcal A\\|S|\le d}}
 \Pr\!\left[\bigcap_{a\in S}E_a\right].
 $$
 
-The empty set contributes $1$ to the sum. Expanding $\prod_{a\in\mathcal A}(1+g_a(Y))$ and taking its expectation gives $\Delta$ after multiplication by $B_J$. All terms are nonnegative, so $B_J^{(d)}$ increases weakly with $d$ and stays below or equal to $\Delta$. Every free-bit assignment has positive probability. If an assignment makes at least $d+1$ factors exceed their lower bounds in $B_J$, any $d+1$ of them give a strictly positive omitted term. Conversely, if at most $d$ factors exceed those lower bounds at each assignment, every omitted term vanishes. The smallest degree that recovers $\Delta$ is therefore the maximum number of simultaneous positive excesses.
+The empty set contributes $1$ to the sum. Expanding $\prod_{a\in\mathcal A}(1+g_a(Y))$ and taking its expectation gives $\Delta$ after multiplication by $B_J$. All terms are nonnegative, so $B_J^{(d)}$ increases weakly with $d$ and stays below or equal to $\Delta$. Every free-bit assignment has positive probability. If an assignment makes at least $d+1$ factors exceed their lower bounds in $B_J$, any $d+1$ of them give a strictly positive omitted term. Conversely, if at most $d$ factors exceed those lower bounds at each assignment, every omitted term vanishes. The smallest degree that recovers $\Delta$ is therefore the maximum number of simultaneous positive excesses. [Lean proof for finite product truncation](https://github.com/the-omega-institute/trureturing/blob/40c26026ec7a8a5f3361efd8213c04105759ccd0/Blueprint/D5/S3/Analytic/Probability/FiniteProductTruncation.md)
 
 The quadratic correction uses joint probabilities. Write $E_a=\{\sum_{j\in H_a}Y_j=d_a\}$, let $\epsilon_a=(-1)^{d_a}$, and put $M(H)=\prod_{j\in H}(1-2t_j)$. In the product of the two indicator functions, the signs from shared bits square to $1$. Taking expectations gives
 
