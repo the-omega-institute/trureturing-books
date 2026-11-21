@@ -645,6 +645,22 @@ The square-cutoff term uses phase $e^{i\gamma_\rho\ln(x)/2}$, whose square is th
 The same estimate also implies RH. Both endpoint primitives are uniformly bounded for positive cutoffs at least one by absolute convergence and the known critical-strip bounds. The cube term and the power error are bounded as well. If the estimate holds uniformly, then $E(a,B)$ stays bounded at a fixed admissible $a$ as $B$ grows. If RH fails, the wide-window theorem gives arbitrarily large excess over $2\ln(B/a)$ for sufficiently large $B\ge a^2$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.theorem #thm-ch31-rh-prime-fifth-window title="The fifth prime-power term in the actual prime window" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/RHFifthWindow.prime_window_fifth_of_rh"}
+Under RH let $R(a,B)$ be the signed expression inside the absolute value in the cube and square estimate above. Write $D_s(a,B)=a^{-s}-B^{-s}$. There exist $a_0\ge2$ and $K>0$ such that for every real $B\ge a\ge a_0$,
+$$
+\left|R(a,B)-\frac{25}{6}D_{3/10}(a,B)\right|\le K D_{1/3}(a,B).
+$$
+:::
+
+::: proof
+
+The finite Chebyshev decomposition writes each $\psi(t^{1/d})$ as the sum of $\vartheta(t^{1/k})$ over exponents $k$ divisible by $d$, including multiplicities of prime powers through the same cutoff $t$. In $\psi(t)-\vartheta(t)-\psi(t^{1/2})-\psi(t^{1/3})-\psi(t^{1/5})$, the coefficients at exponents 2 through 5 vanish, and the coefficient at 6 is $-1$. The remaining terms have total absolute value at most $4\ln(t)t^{1/7}$ for $t\ge2$. The sixth root and this tail give an $O(t^{1/6})$ bound. This arithmetic estimate is unconditional.
+
+Integrating the uncentered fifth root against $dt/t^2$ and multiplying by $\sqrt{x}$ gives the log-density term $(5/4)x^{-3/10}$. Under RH the centered fifth-root tail is of order $x^{-2/5}$, while the arithmetic bound gives order $x^{-1/3}$ after the same integration and scaling. Over $[\ln a,\ln B]$ the fifth-root term contributes $(25/6)D_{3/10}(a,B)$ and the integrated error is bounded by a constant times $D_{1/3}(a,B)$. Both terms vanish for $B=a$. The full and half-logarithmic phases still use the same actual zeros. The full proof is checked by the Lean kernel.
+:::
+
+For $B>a$, one has $D_{1/3}(a,B)\le(10/9)a^{-1/30}D_{3/10}(a,B)$ by comparing the two power derivatives over $[a,B]$. Thus $R(a,B)/D_{3/10}(a,B)$ tends to $25/6$ as $a\to\infty$, uniformly in all $B>a$, including windows whose length tends to zero.
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::
