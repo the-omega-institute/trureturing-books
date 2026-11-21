@@ -406,15 +406,22 @@ Choose the left side if $\vartheta(x)\le x$ and the right side otherwise. On the
 
 A window budget strictly below $r^3\sqrt{x}$ therefore rules out a dip of depth $4r^2$ at that interior point. The margins on both sides determine which $r$ can be used. This local estimate takes a window budget as input. Under the external arithmetic inputs specified above, the modulus-one construction gives arbitrarily late windows with a small budget.
 
-**A fixed-ratio window bound from an off-line zero.** Let $\rho$ be a nontrivial zero with $\beta=\operatorname{Re}\rho>1/2$. There are real constants $\kappa>1$, $c>0$, and $S$ such that every real window with $B\ge S$, $A\ge2$, and $B\ge\kappa A$ satisfies
+::: {.theorem #thm-ch31-prime-fixed-ratio-mass title="A fixed-ratio window bound from an off-line zero" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeFixedRatioWindowMass.prime_tail_fixed_ratio_mass_of_zero"}
+Let $\rho$ be a nontrivial zero with $\beta=\operatorname{Re}\rho>1/2$. There are real constants $\kappa>1$, $c>0$, and $S$ such that every real window with $B\ge S$, $A\ge2$, and $B\ge\kappa A$ satisfies
 
 $$
 N(A,B)\ge cB^{\beta-1/2}.
 $$
+:::
+
+::: proof
 
 Use the member of the conjugate pair with positive imaginary part. Choose a line strictly between $1/2$ and $\beta$. A compactly supported probability average retains the pair and cancels the other zeros to the right of that line. Write $Q$ for the complete tail defined using $\psi$. In the coordinate $t=\ln x$, the shifted average of $-Q(e^t)$ has a leading cosine at scale $e^{(\beta-1)t}$. The error has a strictly smaller exponent, so it eventually falls below one quarter of the leading amplitude.
 
 Choose a subinterval of fixed length where the cosine is at least $1/2$. When the probability and interval integrations are exchanged, each translated subinterval lies in the same window enlarged by the support of the filter. The signed integral over each translate is bounded by the integral of the positive part of $-Q(e^t)$ over that enlarged window. On $[T,T+W]$, the substitution $x=e^t$ contributes a weight of at least $e^{T/2}$, and $Q_\vartheta\le Q$. The resulting prime-only mass is bounded below at scale $e^{(\beta-1/2)T}$. With $T=\ln B-W$ and $\kappa=e^W$, the subwindow is $[B/\kappa,B]$ and lies inside every admissible $[A,B]$.
+
+The full proof is checked by the Lean kernel.
+:::
 
 The ratio, coefficient, and threshold may depend on the supplied zero. The bound retains its full exponent for every zero satisfying the hypothesis. Allowing every prescribed $\kappa>1$ would require further control of the filter support and oscillation period.
 

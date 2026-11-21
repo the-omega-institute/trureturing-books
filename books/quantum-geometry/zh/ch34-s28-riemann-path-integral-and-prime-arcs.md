@@ -406,15 +406,22 @@ $Q_{\vartheta}(z)-Q_{\vartheta}(x)\le\ln(z/x)+\vartheta(x)(1/z-1/x)$。
 
 因此，只要已知窗口预算严格小于 $r^3\sqrt{x}$，就可以排除该内点的深度 $4r^2$。两侧余量决定可用的 $r$。这个局部估计以窗口预算为前提。在上文列出的外库算术输入下，模 $1$ 构造给出任意远的小预算窗口。
 
-**偏线零点在固定比例窗口上的质量。** 设 $\rho$ 是非平凡零点，且 $\beta=\operatorname{Re}\rho>1/2$。存在实数 $\kappa>1$、$c>0$ 和 $S$，使每个 $B\ge S$、$A\ge2$ 且 $B\ge\kappa A$ 的实窗口都满足
+::: {.theorem #thm-ch31-prime-fixed-ratio-mass title="偏线零点给出的固定比例窗口质量下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeFixedRatioWindowMass.prime_tail_fixed_ratio_mass_of_zero"}
+设 $\rho$ 是非平凡零点，且 $\beta=\operatorname{Re}\rho>1/2$。存在实数 $\kappa>1$、$c>0$ 和 $S$，使每个 $B\ge S$、$A\ge2$ 且 $B\ge\kappa A$ 的实窗口都满足
 
 $$
 N(A,B)\ge cB^{\beta-1/2}.
 $$
+:::
+
+::: proof
 
 取 $\rho$ 与其共轭中虚部为正的一项。选实部在 $1/2$ 与 $\beta$ 之间的截线，以紧支撑的概率测度保留这对零点，并消去截线右侧的其余零点。令 $Q$ 为以 $\psi$ 定义的完全余项。在对数坐标 $t=\ln x$ 中，$-Q(e^t)$ 的平移平均以尺度 $e^{(\beta-1)t}$ 的余弦为主项。截线给出的严格指数差使误差最终小于余弦振幅的四分之一。
 
 取一段固定长度的子窗，使余弦至少为 $1/2$。交换对子窗和概率测度的积分后，每个平移后的子窗都落在由滤波支撑加宽后的同一大窗内。每个有符号积分都由大窗中 $-Q(e^t)$ 的正部积分控制。在大窗 $[T,T+W]$ 上，换元 $x=e^t$ 带来至少 $e^{T/2}$ 的权重，且 $Q_\vartheta\le Q$。于是素数尾积分的下界具有尺度 $e^{(\beta-1/2)T}$。取 $T=\ln B-W$ 和 $\kappa=e^W$，子窗就成为 $[B/\kappa,B]$，包含在每个允许的 $[A,B]$ 内。
+
+完整证明由 Lean 内核检查。
+:::
 
 比例、系数和阈值都可随给定零点改变。论证适用于任一符合前提的偏线零点，且所给幂指数没有损失。任意预先指定的 $\kappa>1$ 是否可用，需要进一步控制滤波支撑和振荡周期。
 
