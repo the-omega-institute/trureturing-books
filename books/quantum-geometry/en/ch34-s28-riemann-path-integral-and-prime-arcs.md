@@ -301,6 +301,18 @@ In the same Lean 4.35.0 environment, let `C` be a family class. Applying the cho
 
 The family class determines the application. The theorem `BookNativeRawDesign.arithmetic_design_of_reference_choice` lifts the original twist choices on `GlobalTheory.EX.DC.WithTw 𝒜` to `WithTw (WithSm (Enriched 𝒜))`. The two closure conditions on that enriched class then give its design. The theorem `BookNativeRawDesign.rh_of_arithmetic_choices` takes choices on `C = WithTw (WithSm 𝒞')` and the two closure conditions there, with $C_{\mathrm{abs}}=2,C_0=3,e_D=2,e_L=0$. Adding the two family inclusions and nine closure estimates gives RH via the frozen integer-block criterion. [Kernel replay of the arithmetic choices, thin-scale estimate, and two conditional theorems](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7065062798)
 
+For a reference family, the lattice rank condition used in the character proviso can be expressed as a dimension count. The external Lean 4.35.0 research source proves the following equivalence in `BookNativeLowestSpace.rank_iff_eventual_dimension`. For each reference family `Fm`, `RankTiesF Fm` holds if and only if there is a real threshold $x_0$ such that, for every $x\ge x_0$, every index $i\in\mathrm{Fm.Ix}(x)$ and every word $u$ of the datum $D=\mathrm{Fm.D}(x,i)$, we have
+
+$$
+\dim_{\mathbb C}\mu_0(D,u)
+= \lvert\mathrm{cls}_{D,u}(0)\rvert
+  \prod_{\rho}\mathrm{dimV}\bigl(\mathrm{uColR}(D,u,\rho)\bigr).
+$$
+
+The left side is the complex dimension of the lowest space. The right side counts the level-zero classes and multiplies that count by one local factor for each $\rho$. The reference data ensure that both host primes and the level prime of $u$ split completely in the totally real host field. Starting from the rank condition, raise its threshold to $\max\{x_0,3,x_1+1\}$, where $x_1=\mathrm{Fm.x1}$. This supplies both `GBig` and the level data, so the column stabilizers are trivial and the rank condition gives the displayed equality. Conversely, the equality and the known splitting give the rank condition at the threshold of the equality itself.
+
+The dimension identity remains an input to the reference design. `BookNativeLowestSpace.design_of_lowest_dimension` also uses the arithmetic choices on the original twisted class, the size condition closed on the enriched class `WithTw (WithSm (Enriched 𝒜))`, and the class-number formula `ClassNumberFormula₂` on that class for every $x>x_1$ and every index. When the dimension condition is also closed on the enriched class, these inputs give existence of its design at parameter $3$. [Source and kernel replay for the lowest-space rank equivalence and conditional design](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7065658421)
+
 A separate route obtains the modulus-one arithmetic family from the original Galois row and then obtains integer blocks via `BookIntegerHostBlocks.of_reference`. The arithmetic module supplies only `TopG` to this argument. In the reference library’s Lean 4.33.1 environment, `leanchecker` replayed the arithmetic module, the final conclusion module, and an independent audit module. The audit file `IntegerBlockAudit.lean` checked the declaration `BookReference.riemannHypothesis_via_integer_blocks : RiemannHypothesis` against Mathlib’s statement and printed the following proof term.
 
 ```lean

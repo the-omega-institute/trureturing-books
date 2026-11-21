@@ -301,6 +301,18 @@ Alpöge 原证明的声明是 `riemannHypothesis : RiemannHypothesis`，其右�
 
 具体应用取决于族类。`BookNativeRawDesign.arithmetic_design_of_reference_choice` 把原库在 `GlobalTheory.EX.DC.WithTw 𝒜` 上的扭曲选择提升到 `WithTw (WithSm (Enriched 𝒜))`，并在上述两个条件对该增广族类闭合时得到其设计存在性。`BookNativeRawDesign.rh_of_arithmetic_choices` 则以 `C = WithTw (WithSm 𝒞')` 上的选择和相应的两个闭合条件为输入，取 $C_{\mathrm{abs}}=2,C_0=3,e_D=2,e_L=0$。加上两个族类包含关系和九项闭合估计，冻结的整数块判据即给出 RH。[算术选择、薄尺度估计与两条条件定理的内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7065062798)
 
+对参考族，特征标条件中的格秩输入可以写成一次维数计数。外部 Lean 4.35.0 研究源码中的 `BookNativeLowestSpace.rank_iff_eventual_dimension` 给出如下等价。对每个参考族 `Fm`，`RankTiesF Fm` 成立，当且仅当存在一个实数门槛 $x_0$，使每个 $x\ge x_0$、每个指标 $i\in\mathrm{Fm.Ix}(x)$ 和相应数据 $D=\mathrm{Fm.D}(x,i)$ 的每个字 $u$ 都满足
+
+$$
+\dim_{\mathbb C}\mu_0(D,u)
+= \lvert\mathrm{cls}_{D,u}(0)\rvert
+  \prod_{\rho}\mathrm{dimV}\bigl(\mathrm{uColR}(D,u,\rho)\bigr).
+$$
+
+左边是最低空间的复维数。右边把零层类的个数乘以各 $\rho$ 处的局部因子。参考数据保证两个宿主素数和 $u$ 的层素数都在宿主的全实域中完全分裂。从秩条件出发，把其门槛增至 $\max\{x_0,3,x_1+1\}$（$x_1=\mathrm{Fm.x1}$），便同时得到 `GBig` 和层数据。此时各列的稳定子平凡，秩条件即给出所列等式。反过来，若等式在某一门槛后成立，在该门槛上配合已知分裂即可恢复秩条件。
+
+参考设计仍需提供这个维数等式。`BookNativeLowestSpace.design_of_lowest_dimension` 还使用原扭曲族上的算术选择、增广族类 `WithTw (WithSm (Enriched 𝒜))` 上闭合的尺寸条件，以及同一族类上对每个 $x>x_1$ 和每个指标成立的类数公式 `ClassNumberFormula₂`。当维数条件也对该族类闭合时，得到它在参数 $3$ 的设计存在性。[最低空间秩等价与条件设计的源码及内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7065658421)
+
 另一条路线从原始伽罗瓦行取得模一算术族，再由 `BookIntegerHostBlocks.of_reference` 得到整数块。其算术模块只向这一论证提供 `TopG`。在参考库的 Lean 4.33.1 环境中，`leanchecker` 已分别重放算术模块、最终结论模块与独立审计模块。审计文件 `IntegerBlockAudit.lean` 确认声明 `BookReference.riemannHypothesis_via_integer_blocks` 的类型为 Mathlib 的 `RiemannHypothesis`，并打印出以下证明项。
 
 ```lean
