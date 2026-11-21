@@ -166,7 +166,7 @@ $$
 S_+\ell P_k(\ell)(\widehat D_k+\eta_k)=1,\qquad P_k(r)(\widehat D_k-\eta_k)=1.
 $$
 
-Both $xP_k(x)$ and $P_k(x)$ are strictly increasing on the positive half-line. It follows that $\ell\le a\le r$, so $\sqrt{\ell}\le\gamma_1\le\sqrt r$. When $\widehat D_k\le\eta_k$, the difference can still supply a lower bound. A finite upper bound from this difference then requires more accurate readings.
+Both $xP_k(x)$ and $P_k(x)$ are strictly increasing on the positive half-line. It follows that $\ell\le a\le r$, so $\sqrt{\ell}\le\gamma_1\le\sqrt r$. When $\widehat D_k\le\eta_k$, the difference can still supply a lower bound. This order of difference and its error bound alone then give no finite upper bound.
 
 Two successive differences can tighten the upper endpoint. Put $D_0=1$ and $\eta_0=0$. Then $D_{k-1}-(a+k\delta)D_k=\sum p_\gamma(\gamma^2-a)/P_k(\gamma^2)\ge0$, so for $\widehat D_k>\eta_k$,
 
@@ -174,7 +174,9 @@ $$
 a\le\frac{\widehat D_{k-1}+\eta_{k-1}}{\widehat D_k-\eta_k}-k\delta.
 $$
 
-Take $\delta=16$ and $k=10$. Values of $\xi$ and its derivative on the real axis directly give the ten readings $F(j\delta)$. At the centre, symmetry gives $S=\xi''(1/2)/(2\xi(1/2))<0.023105$. Interval arithmetic certifies an absolute error of at most $\varepsilon=10^{-15}$ at each positive node. Use $S_+=0.023105$ for the lower endpoint and the successive-difference ratio for the upper endpoint. Rational substitution into the two inequalities gives $14.1338<\gamma_1<14.1432$. All ten readings come from real-axis function evaluations. [Readings and reproducible interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068457253)
+Take $\delta=16$ and $k=10$. Values of $\xi$ and its derivative on the real axis directly give the ten readings $F(j\delta)$. At the centre, symmetry gives $S=\xi''(1/2)/(2\xi(1/2))<0.023105$. Interval arithmetic certifies an absolute error of at most $\varepsilon=10^{-15}$ at each positive node. Use $S_+=0.023105$ for the lower endpoint and the successive-difference ratio for the upper endpoint. Rational substitution into the two inequalities gives $14.1338<\gamma_1<14.1432$. The ten inputs come directly from real-axis evaluations, without requiring a table of zero ordinates. [Readings and reproducible interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068457253)
+
+Even finitely many exact readings allow different positive discrete spectra. With the readings at $K$ fixed nodes including the origin and $S$ held fixed, one copy of each of $K+1$ distinct spectral points can move jointly. [Deformations preserving the sampled readings](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068509921)
 
 **Which shell angles occur exactly between two real spectral nodes?** Fix any real node $s>1/2$ and let a second real node $t$ move to the right from $s$. Write $x(t)$ for its normalized spectral vector and $h(s,t)$ for its inner product with $x(s)$. The kernel formula gives continuity and $h(s,s)=1$. For $t>s$, the coordinates from each conjugate pair are positive and the two-node Gram matrix is positive definite, so $0<h(s,t)<1$. We can also determine the limit of this inner product as $t\to\infty$.
 
@@ -243,6 +245,14 @@ $$
 $$
 
 For example, doubling $c$ multiplies $\mu$ by $2^{-1/67}$ and $k$ by $2^{44/67}$, and increases $a'$ by $(23/134)\log 2$. Both parameter choices give the same three inverse couplings whenever they lie in the domain of this one-loop matching model. An independent determination of $M_D/M_C$ from the heavy spectrum would remove this freedom because $\delta\log(k/c)=-23z/67$. Inferring Newton's constant $G$ also requires a relation between gravity and the matching scale. For example, if an independent calibration fixes the dimensionless product $G\mu^2$ in natural units, doubling $c$ multiplies $G$ by $2^{2/67}$. [@prob-ch34-gravity-dynamics-and-coupling]
+
+**How could a further probe distinguish these two scales? (Model assumption.)** Suppose the probe energy $E$ is independently calibrated and its dimensionless response is $Q(E)=F((E/\mu)^2)$. For the two parameter choices above, $\mu_B=2^{-1/67}\mu_A$. At the same probe energy $E=14\mu_A$, their arguments are $u=196$ and $v=196\cdot2^{2/67}$. Keep just one copy of the smallest ordinate in the positive spectral sum for $F(u)-F(v)$. The bounds $B=14.1432^2$ and $S_+=0.023105$ above give
+
+$$
+F(u)-F(v)\ge\frac{v-u}{S_+(B+u)(B+v)}>0.00111.
+$$
+
+If each predicted reading allows an error of $0.00055$, the two allowed intervals are disjoint. Direct real-axis evaluation gives a difference of approximately $0.00242931$. Using this comparison to determine a physical matching scale requires an independent relation between the energy and the spectral argument. If the response is $F((\kappa E/\mu)^2)$ with an adjustable conversion factor $\kappa>0$, rescaling $\kappa,\mu$ together preserves all readings. The probe then determines only $\mu/\kappa$. [Common-energy comparison and interval check](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068528778)
 
 ## 39.2.3 Tier 5: Heap-Geodesic Intelligence and Apophatic Self-Transparency of AXIOM-Ω {#sec-ch39-25-3}
 
