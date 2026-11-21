@@ -745,10 +745,12 @@ $$
 
 ::: {.theorem #thm-ch31-prime-window-mobius-single-log title="任意截断阶数的单对数余项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/RHMobiusSingleLog.prime_window_mobius_one_log_of_rh"}
 假设 RH。仍以 [@thm-ch31-prime-window-mobius] 左端绝对值内的量为有符号余项 $E_m(a,B)$。存在常数 $a_0\ge2$ 与 $K>0$，使任意整数 $m\ge2$ 和任意实数截点 $B\ge a\ge a_0$ 都满足
+
 $$
 |E_m(a,B)|\le K m(1+\ln m)\bigl(a^{-s_m}-B^{-s_m}\bigr),
 \qquad s_m=\tfrac12-\tfrac1{m+1}.
 $$
+
 :::
 
 ::: proof
@@ -757,7 +759,11 @@ $$
 提出目标衰减因子后，每项仍带权重 $\exp[-u(1/q-1/(2n))]$。从第一个未纳入次数 $\lceil q/2\rceil$ 开始，这些权重受一个几何级数控制。总和至多为 $m$，当 $\lambda>0$ 时也至多为 $1+q/\lambda$。两种因子相乘，在 $\lambda\le1$、$1<\lambda\le1+\ln m$ 和 $\lambda>1+\ln m$ 三个范围内都由常数乘 $m(1+\ln m)$ 控制。已保留谱项的平凡零点误差也符合该界。最后在原来的对数窗口上积分。因 $s_m\ge1/6$，积分因子至多为六。完整证明由 Lean 内核检查。
 :::
 
-这条界对 $B=a$ 也成立，两边均为零。对同一余项，是否可以统一取 $K m$ 的因子仍是开放问题。
+这条界对 $B=a$ 也成立，两边均为零。
+
+::: {.problem #prob-ch31-prime-window-linear-remainder title="素数尾窗的线性阶数余项"}
+在 RH 下，同一余项能否在所述全部阶数和实数端点上统一满足 $|E_m(a,B)|\le K m D_{s_m}(a,B)$？ [形式化研究](https://github.com/the-omega-institute/trureturing/issues/32976)
+:::
 
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。

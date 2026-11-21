@@ -745,10 +745,12 @@ At order ten the eighth and ninth coefficients vanish. The tenth main term is $-
 
 ::: {.theorem #thm-ch31-prime-window-mobius-single-log title="A single-logarithm remainder for every truncation order" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/RHMobiusSingleLog.prime_window_mobius_one_log_of_rh"}
 Assume RH. Let $E_m(a,B)$ be the signed expression inside the absolute value in [@thm-ch31-prime-window-mobius]. There are constants $a_0\ge2$ and $K>0$ such that for every integer $m\ge2$ and all real cutoffs $B\ge a\ge a_0$,
+
 $$
 |E_m(a,B)|\le K m(1+\ln m)\bigl(a^{-s_m}-B^{-s_m}\bigr),
 \qquad s_m=\tfrac12-\tfrac1{m+1}.
 $$
+
 :::
 
 ::: proof
@@ -757,7 +759,11 @@ At log coordinate $u=\ln x$, set $q=m+1$ and $\lambda=u/q$. For the same centere
 After factoring out the target decay, each term carries the weight $\exp[-u(1/q-1/(2n))]$. Starting at the first omitted degree $\lceil q/2\rceil$, these weights are bounded by a geometric sequence. Their sum is at most $m$ and at most $1+q/\lambda$ when $\lambda>0$. Multiplying the two bounds in the ranges $\lambda\le1$, $1<\lambda\le1+\ln m$, and $\lambda>1+\ln m$ gives a constant times $m(1+\ln m)$. The trivial-zero error at retained degrees fits the same bound. Integrate over the original log window. The integration factor is at most six because $s_m\ge1/6$. The full proof is checked by the Lean kernel.
 :::
 
-The bound includes $B=a$, where both sides vanish. A uniform factor $K m$ for the same residual remains open.
+The bound includes $B=a$, where both sides vanish.
+
+::: {.problem #prob-ch31-prime-window-linear-remainder title="A prime-window remainder linear in the truncation order"}
+Under RH, can the same residual satisfy $|E_m(a,B)|\le K m D_{s_m}(a,B)$ uniformly over the stated orders and real endpoints? [Formalization research](https://github.com/the-omega-institute/trureturing/issues/32976)
+:::
 
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
