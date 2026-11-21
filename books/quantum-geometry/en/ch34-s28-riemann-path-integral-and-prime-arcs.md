@@ -1026,7 +1026,8 @@ The criterion can use a smaller set of contacts. Let $K$ be a compact subset of 
 The minimum of the top profile in the window is nonpositive for every phase. A positive minimum would allow an extension at the left endpoint, producing a zero cluster value at a wider width. At every pair in $K$, at least one profile is strictly negative, so the maximum of their pointwise minimum is strictly negative. When the top profile supplies this negative margin, its growing factor dominates the bounded second profile. When the second profile supplies the margin, the top profile remains nonpositive. This produces the required negative point in the window at the actual shared phase. If exact zero-mass critical windows occur arbitrarily late, there must be a joint contact with $F_\gamma\ge0$. The real-part bounds and the sign at joint contacts remain hypotheses.
 
 
-**Quantitative error under a spectral gap.** Suppose $\beta>1/2$ bounds the real parts of all nontrivial zeros, and suppose $1/2\le\gamma<\beta$ bounds the real parts of those strictly to the left of $\beta$. Keep $p=\beta-1/2$ and write
+::: {.theorem #thm-ch31-prime-window-spectral-error title="Uniform window error under a spectral gap" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeGrowingWidthRate.prime_tail_window_error_of_lower_spectral_bound"}
+Suppose $\beta>1/2$ bounds the real parts of all nontrivial zeros, and suppose $1/2\le\gamma<\beta$ bounds the real parts of those strictly to the left of $\beta$. Keep $p=\beta-1/2$ and write
 $$
 E(a,B)=\frac{N(a,B)}{B^p}-I_\infty(\phi(\ln B)).
 $$
@@ -1038,13 +1039,22 @@ $$
 B^{-p}\ln(B/a),&\gamma=1/2.
 \end{cases}\right]
 $$
-After the $\beta$-line is subtracted, absolute summability of the zero coefficients bounds the error density by a constant times $x^{\gamma-3/2}$. Taking negative parts is $1$-Lipschitz, and the same power bound absorbs the square-root-scale correction for prime powers. Integrating the density over $[a,B]$ retains both endpoints. It gives a difference of powers for $\gamma>1/2$ and a logarithm at $\gamma=1/2$. Each spectral error term vanishes at $a=B$. The phase integral beyond $\ln(B/a)$ gives the $(a/B)^p$ term.
+:::
 
+::: proof
+After the $\beta$-line is subtracted, absolute summability of the zero coefficients bounds the error density by a constant times $x^{\gamma-3/2}$. Taking negative parts is $1$-Lipschitz, and the same power bound absorbs the square-root-scale correction for prime powers. Integrating the density over $[a,B]$ retains both endpoints. It gives a difference of powers for $\gamma>1/2$ and a logarithm at $\gamma=1/2$. Each spectral error term vanishes at $a=B$. The phase integral beyond $\ln(B/a)$ gives the $(a/B)^p$ term. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-prime-window-cumulative-log-error title="Logarithmic cumulative error at the critical gap" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeGrowingWidthRate.prime_tail_cumulative_error_log_order"}
 Suppose a nontrivial zero attains the largest real part $\beta>1/2$ and every nontrivial zero strictly to its left has real part at most $1/2$. Then there are $c,C>0$ such that all sufficiently large $B$ satisfy
 $$
 c\ln B\le N(2,B)-B^p I_\infty(\phi(\ln B))\le C\ln B .
 $$
-At the square-root scale, the signed residual eventually lies below a strictly negative constant. Where the top-line profile is nonpositive, the actual negative part therefore exceeds the model by a fixed margin on that scale. At any fixed width $W>W_*$ the phase mass has a positive minimum over the compact phase closure. Boundedness of the profile forces a positive contribution to the error on every log interval of length $W$. Adding adjacent windows gives the lower bound. The finite initial interval and the infinite phase tail contribute only a bounded term. The logarithmic order holds under the stated spectral gap, and the exact logarithmic coefficient remains open.
+:::
+
+::: proof
+At the square-root scale, the signed residual eventually lies below a strictly negative constant. Where the top-line profile is nonpositive, the actual negative part therefore exceeds the model by a fixed margin on that scale. At any fixed width $W>W_*$ the phase mass has a positive minimum over the compact phase closure. Boundedness of the profile forces a positive contribution to the error on every log interval of length $W$. Adding adjacent windows gives the lower bound. The finite initial interval and the infinite phase tail contribute only a bounded term. The logarithmic order holds under the stated spectral gap, and the exact logarithmic coefficient remains open. The full proof is checked by the Lean kernel.
+:::
 
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 

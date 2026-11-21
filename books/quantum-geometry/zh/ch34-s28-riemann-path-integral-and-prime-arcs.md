@@ -1026,7 +1026,8 @@ $$
 每个相位下，最高谱线在窗口内的最小值至多为零。否则，左端的严格正性允许把窗口拓宽，产生与临界宽度定理冲突的零簇值。在 $K$ 上，$F_\beta$ 或 $F_\gamma$ 至少一个严格为负，所以二者较小值的最大值严格为负。当最高谱线有这份负余量时，增长因子压过次高谱线的有界贡献。当次高谱线给出负余量时，最高谱线仍非正。于是同一相位的同一个窗口内存在所需的负点。若精确零质量的临界窗口任意晚地出现，则至少有一个共同触点满足 $F_\gamma\ge0$。两条谱线的实部条件及共同触点的符号条件在这里仍是前提。
 
 
-**谱隙下的定量误差。** 设 $\beta>1/2$ 是非平凡零点实部的上界，并设 $1/2\le\gamma<\beta$，使所有实部小于 $\beta$ 的零点都满足 $\operatorname{Re}\rho\le\gamma$。仍取 $p=\beta-1/2$，并记
+::: {.theorem #thm-ch31-prime-window-spectral-error title="谱隙下的统一窗口误差" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeGrowingWidthRate.prime_tail_window_error_of_lower_spectral_bound"}
+设 $\beta>1/2$ 是非平凡零点实部的上界，并设 $1/2\le\gamma<\beta$，使所有实部小于 $\beta$ 的零点都满足 $\operatorname{Re}\rho\le\gamma$。仍取 $p=\beta-1/2$，并记
 $$
 E(a,B)=\frac{N(a,B)}{B^p}-I_\infty(\phi(\ln B)).
 $$
@@ -1038,13 +1039,22 @@ $$
 B^{-p}\ln(B/a),&\gamma=1/2.
 \end{cases}\right]
 $$
-扣除 $\beta$ 线后，零点项的绝对可和性把负部积分的误差密度控制为常数倍的 $x^{\gamma-3/2}$。取负部的映射是 $1$-Lipschitz，平方根尺度的素数幂修正也可由同一个幂函数控制。在 $[a,B]$ 上积分时保留两个端点。$\gamma>1/2$ 给出幂差，$\gamma=1/2$ 给出对数。两个谱误差项都在 $a=B$ 时为零。无限相位积分在 $\ln(B/a)$ 之后的尾部给出 $(a/B)^p$ 项。
+:::
 
+::: proof
+扣除 $\beta$ 线后，零点项的绝对可和性把负部积分的误差密度控制为常数倍的 $x^{\gamma-3/2}$。取负部的映射是 $1$-Lipschitz，平方根尺度的素数幂修正也可由同一个幂函数控制。在 $[a,B]$ 上积分时保留两个端点。$\gamma>1/2$ 给出幂差，$\gamma=1/2$ 给出对数。两个谱误差项都在 $a=B$ 时为零。无限相位积分在 $\ln(B/a)$ 之后的尾部给出 $(a/B)^p$ 项。 完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-prime-window-cumulative-log-error title="临界谱隙下累积误差的对数阶" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeGrowingWidthRate.prime_tail_cumulative_error_log_order"}
 若某个非平凡零点取到最大实部 $\beta>1/2$，且所有实部更小的零点都在临界线或其左侧，则存在 $c,C>0$，对所有充分大的 $B$ 有
 $$
 c\ln B\le N(2,B)-B^p I_\infty(\phi(\ln B))\le C\ln B .
 $$
-平方根尺度上的有符号余项最终有严格负的上界。因而当最高谱线的曲线为非正时，实际负部比相位模型至少多出一个固定的平方根尺度余量。取任意固定宽度 $W>W_*$，该宽度的相位负部质量在紧相位闭包上有严格正的最小值。曲线有界，因此每个长度为 $W$ 的对数窗口都贡献一份统一为正的误差。拼接相邻窗口便得到下界，初始有限区间与无限相位尾部只改变一个有界项。对数阶成立于上述谱隙条件，精确的对数系数仍待确定。
+:::
+
+::: proof
+平方根尺度上的有符号余项最终有严格负的上界。因而当最高谱线的曲线为非正时，实际负部比相位模型至少多出一个固定的平方根尺度余量。取任意固定宽度 $W>W_*$，该宽度的相位负部质量在紧相位闭包上有严格正的最小值。曲线有界，因此每个长度为 $W$ 的对数窗口都贡献一份统一为正的误差。拼接相邻窗口便得到下界，初始有限区间与无限相位尾部只改变一个有界项。对数阶成立于上述谱隙条件，精确的对数系数仍待确定。 完整证明由 Lean 内核检查。
+:::
 
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 
