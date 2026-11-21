@@ -352,9 +352,9 @@ Levent Alpöge 提出的证明在模 $1$ 使用外部算术输入构造这族整
 
 针对上述手工衔接，已有一次条件性的外部 Lean 内核复核。固定在参考库的 Lean 4.33.1 环境中，`rh_of_family_and_unit_host` 从族输入 `TopG` 和模一特征标的宿主输入 `HostExW (3/2) (GChi PChar.one).req` 推出黎曼猜想。对每个 $\kappa>0$，两个输入共同给出任意远的 $[Y,Y^{3/2}]$，使同一族在窗内每个实数 $x$ 处都有 $\mathrm{Gz}(x)\le x^{1/2+\kappa}$。这里 $\mathrm{Gz}(x)=U(x)$ 正是本书的完整 Mangoldt 余项，故可应用上文的素数窗口判据。此次内核重放以这两个输入为假设，参考库中提供它们的构造在重放范围之外。复现记录给出兼容补丁及成功的内核重放，其中 `PinnedTop`、`WindowConsumer` 和 `UnifiedWindowRH` 核验这条条件推论，`PinnedMesh` 核验另一条固定特征标的窗口判据。[固定环境中的条件推论与复现源码](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059461340)
 
-外部参考库的均方定理 `QH.pairEx` 给出了同时覆盖内窗的素数对。取模数 $1$、$0<\varepsilon<1/52$ 与 $A\ge1$。对每个充分大的 $Y$，存在一对素数 $q,d$ 满足 `PairGood 1 ε Y (Y^A) q d`，其中含有 `WinPair` 的大小与同余条件。对每个合乎条件的非平凡二次扭转，诱导该扭转的本原特征标 $\chi$ 在整个 $Y\le y\le Y^A$ 上同时满足 $|g_\chi(y)|\le y^{1/2+\varepsilon/2}$ 与 $|D_\chi|\le4\log y$；定义还包括指定实特征标扭转的零点排除区域。这里选择 $q,d$ 只用参考库已核验的均方定理。[固定素数对与外窗的量词](https://github.com/the-omega-institute/trureturing/issues/32627#issuecomment-7059642097)
+外部参考库的均方定理 `QH.pairEx` 给出了同时覆盖内窗的素数对。取模数 $1$、$0<\varepsilon<1/52$ 与 $A\ge1$。对每个充分大的 $Y$，存在一对素数 $q,d$ 满足 `PairGood 1 ε Y (Y^A) q d`，其中 `WinPair` 的大小、同余与分裂条件都在固定尺度 $Y$ 处计算。对三组扭转指标 $(i,j)=(1,0),(0,1),(1,1)$，诱导相应二次扭转的每个本原特征标 $\chi$ 在整个 $Y\le y\le Y^A$ 上同时满足 $|g_\chi(y)|\le y^{1/2+\varepsilon/2}$ 与 $|D_\chi|\le4\log y$；对于导子整除 $8$ 的实本原基特征标，定义还要求这三组扭转的本原诱导特征标在指定矩形内无零点。这里选择 $q,d$ 只用参考库已核验的均方定理。[固定素数对与外窗的量词](https://github.com/the-omega-institute/trureturing/issues/32627#issuecomment-7059642097)
 
-从内窗到模一宿主另用上同调输入 `VWinAt PChar.one`，记其截断指数为 $C$。对每个上述 $\varepsilon$ 以及每个在 $x\ge1$ 满足 $x^{2+8\varepsilon}\le2^{e(x)}\le2x^{2+8\varepsilon}$ 的秩指数函数 $e(x)$，该输入给出 $J\ge1$ 与起点。对于起点以后的每个 $X$ 以及内层尺度 $X^{1/J}$ 上每对合乎条件的 $q,d$，它给出共同子窗 $[W,W^2]\subseteq[X^{1/J},X]$。子窗内每个 $x$ 的估计适用于匹配该特征标、$e(x),q,d$ 的每个数域。固定这样的数域及其任意代数闭包和局部系数数据，令 $t=\lfloor x^C\rfloor$。对于每个素数 $\ell$ 与 $1\le j<t$，上同调长度 $\operatorname{shaLen}(\ell,j)$ 都有限，且对每个有限素数集 $S$ 有
+从内窗到模一宿主另用上同调输入 `VWinAt PChar.one`，记其截断指数为 $C$。对每个上述 $\varepsilon$ 以及每个在 $x\ge1$ 满足 $x^{2+8\varepsilon}\le2^{e(x)}\le2x^{2+8\varepsilon}$ 的秩指数函数 $e\colon\mathbb R\to\mathbb N$，该输入给出 $J\ge1$ 与起点。对于起点以后的每个 $X$ 以及每对满足 `WinPair ε (X^(1/J)) q d` 的素数，它给出共同子窗 $[W,W^2]\subseteq[X^{1/J},X]$。子窗内每个 $x$ 的估计适用于匹配该特征标、$e(x),q,d$ 的每个数域（`IsChiField`）。固定这样的数域、任意代数闭包，以及一族按素数 $\ell$ 编号的局部系数数据，令 $t=\lfloor x^C\rfloor$。对于每个素数 $\ell$ 与 $1\le j<t$，上同调长度 $\operatorname{shaLen}(\ell,j)$ 都有限，且对每个有限素数集 $S$ 有
 
 $$
 \sum_{\ell\in S}\log\ell\sum_{1\le j<t}\operatorname{shaLen}(\ell,j)\le\sqrt{\exp(x^\varepsilon)}.
@@ -655,10 +655,10 @@ $$
 :::
 
 ::: proof
-用斜坡界除以 $x$，得 $|g_\chi(x)|/x\le x^{\varepsilon-1/2}\to0$。Chebyshev 误差核绝对可积，故 $I(x)\to0$。取 $X$ 使这两项的误差各小于 $\eta/2$，代入上一条端点界即可。二者只依赖实端点和误差参数，所以同一个起点适用于所有模数与特征标。完整证明由 Lean 内核检查。
+用中心化和 $|g_\chi(x)|$ 的界除以 $x$，得 $|g_\chi(x)|/x\le x^{\varepsilon-1/2}\to0$。Chebyshev 误差核绝对可积，故 $I(x)\to0$。取 $X$ 使这两项的误差各小于 $\eta/2$，代入上一条端点界即可。二者只依赖实端点和误差参数，所以同一个起点适用于所有模数与特征标。完整证明由 Lean 内核检查。
 :::
 
-**手工推导。** 由定义，非主分支上的 $g_\chi$ 就是上文所用的参考库平滑中心化和 `An.gChi`。设同一特征标在端点 $x$ 满足 $|g_\chi(x)|\le x^{1/2+\varepsilon}$，其中 $\varepsilon<1/2$。取 $\eta=1$，在充分大的 $x$ 处就有 $|D_\chi|\le\log x-\gamma\le4\log x$，这给出宿主条件 `EAtH.bdL` 在非主分支上所需的对数导数界。主特征标的分支有单独的定义。
+**手工推导。** 非主分支上，前文使用的参考库平滑中心化和 `An.gChi` 与上式的 $g_\chi$ 定义一致。对宿主有界集合中的每个特征标及诱导它的每个非主本原特征标 $\chi$，宿主条件 `EAtH.bdG` 在同一端点 $x$ 给出 $|g_\chi(x)|\le x^{1/2+\varepsilon}$。若 $\varepsilon<1/2$，取 $\eta=1$，则每个充分大的 $x$ 都有 $|D_\chi|\le\log x-\gamma\le4\log x$。这给出 `EAtH.bdL` 对该 $\chi$ 要求的系数 $4$ 的不等式。主特征标有单独的分支。[中心化和与对数导数的定义](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Analytic.lean#L9-L27) · [宿主的两个逐点条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ExplicitFormulaErrorOfHostConditions.lean#L144-L151)
 
 **窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
 
