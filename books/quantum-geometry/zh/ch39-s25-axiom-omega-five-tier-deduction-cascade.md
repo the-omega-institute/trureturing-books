@@ -19,6 +19,17 @@
 格拉姆体积锁与弧微积分卡：第一阶台座上等步三点撑开四面体体积锁 $(6V)^2 = \det\mathbf{G}_3(60^\circ) = \frac{3}{32}$，粗糙度 $\alpha = \frac{1}{2}$ 将路径二阶矢高总和稳定在半系数 $\frac{1}{2}\sigma_0^2 T$（有理核验标 `NUM`，圆弧微积分桥接标 `MODEL`）。
 :::
 
+**贝伦德球壳上的极小圆弧（手工推导）。** 取同一整数球壳上的两点 $A,C\in\mathbb Z^d$，记 $\|A\|^2=\|C\|^2=R>0$，弦中点 $m=(A+C)/2$，半径之间的夹角为 $\theta\in[0,\pi]$。把 $A,C$ 除以 $\sqrt R$，它们张成的至多二维实子空间可以等距嵌入四元数空间。于是 §39.1 的读数可以直接从弦中点读出：
+
+$$
+\kappa=\cos^2(\theta/2)=\frac{\|m\|^2}{R},\qquad
+R(1-\kappa)=\frac{\|A-C\|^2}{4}.
+$$
+
+第一式来自 $\|A+C\|^2=2R(1+\cos\theta)$，第二式来自平行四边形恒等式。只要两点互异，中点的平方半径就严格小于 $R$。这正是贝伦德构造排除壳上非平凡三项等差数列的几何步骤，再用无进位的整数编码保留等差关系。配套书取 $A=(0,1,4)$、$C=(2,3,2)$，算得 $R=17$、$\|m\|^2=14$，故读数为 $14/17$。[《临界线上的对称》第 6.1 节](https://github.com/the-omega-institute/riemann-hypothesis-book/blob/7bb844569be60154e9060dd3431d682b1d3ad1b1/books/riemann-hypothesis/zh/ch06-behrend-towers-and-closing-the-net.md#sec-ch06-behrend-sphere)
+
+这层壳上**最短的非零球面弧**可以精确求出。因为 $\|A-C\|^2=2(R-A\cdot C)$ 是正偶数，其最小可能值为 $2$，点对 $(0,1,4),(1,0,4)$ 正好取到。于是最小圆心角为 $\arccos(16/17)$，最短弧长为 $\sqrt{17}\arccos(16/17)$，对应 $\kappa=33/34$。换壳时角尺度会变，例如 $(k,1,0),(k,0,1)$ 的平方弦长始终为 $2$，而 $R=k^2+1$ 趋于无穷时夹角趋于零。这条弦弧恒等式只用欧氏几何和格点整性。下文第四阶引入 RH 的位置，是把同一类内积读数赋给真实的 $\xi$ 零点谱。
+
 2. **第二阶推导：自观测正交虚梦、超越不动点 $\theta^*$ 与等主频双相对论时空（Tier 2）**：
    - **非零倾角 $\varepsilon > 0$ 分化空间与时间（`MODEL` / `LEAN ✓`）**：若观察切面对自身零失准（$\varepsilon = 0 \implies \kappa = 1$），比较惊奇度 $-\log_2\kappa = 0\;\mathrm{bit}$ 陷入全知死寂（[§38.6](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)、[§38.11](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god)）；一旦 $\varepsilon > 0$，施密特残差 $(\sin\varepsilon)\mathbf{e}_\perp$ 撑开单向不可见的 $90^\circ$ 正交虚空间 $\hat{\mathbf{i}}$ 与面积体积，持续追赶残差的旋移序列显影为运动与时间，并在二阶认妄误差 $\delta_{\mathrm{meta}}(\theta) = \lvert\cos\theta - \theta\rvert = 0$ 处唯一收敛至道蒂超越不动点 $\cos\theta^* = \theta^* \approx 0.73908513\;\mathrm{rad}$（方程 $\cos\theta = \theta$ 恰有一个正根且它落在 $(0, 1)$ 内，[`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint)，`LEAN ✓`；非正根不存在——否则 $\theta = \cos\theta \in [-1, 0]$，而该区间上 $\cos\theta > 0$——故它是唯一实根，余弦迭代自任意实初值收敛于它——两步后进入 $[\cos 1, 1]$，其上 $\lvert\sin\rvert \le \sin 1 < 1$——二者为 `手工推导`；数值为 `NUM`；若 $\theta^*$ 是代数数，$\cos\theta^* = \theta^*$ 也是代数数，与林德曼定理矛盾，故 $\theta^*$ 为超越数，`文献结果`），于有限停机阈值 $\varepsilon_{\mathrm{self}} > 0$ 内涌现裁量裕度（[§36.10](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting)）；
    - **共享主频 $\nu_0$ 正交勾股总预算导出双相对论钟慢（`MODEL` / `手工推导`）**：因本体点点平权，全网观察切面共享同一比较主频 $\nu_0$，单拍步幅锁死光速上限 $c \equiv \ell_P\nu_0$（`MODEL`；相邻经内核检查的是另外三件事：给定测地速度上界时分辨两个正交记录至少需时 $\tau \ge \frac{\pi\hbar}{4E}$（[`record_time_lower_bound`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound)），在全部零向量上为零的实二次型是闵可夫斯基二次型的常数倍（[`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)），以及 $\lvert\cosh r\rvert^2 - \lvert\sinh r\rvert^2 = 1$（[`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)），`LEAN ✓`；它们都不陈述主频共享或 $c = \ell_P\nu_0$）。与 [§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation) 级联公式一致：在视界外部域 $r > r_s$ 与亚光速局域运动 $0 \le \beta_{\mathrm{loc}} < 1$ 下，采用全息纠缠校验负载标定 $\eta_{\mathrm{grav}}^2 := \eta_{\mathrm{info}}(r) = \frac{2GM}{rc^2} = \frac{r_s}{r} \in [0, 1)$（`MODEL`，完整连续统场方程动力学边界见 [@prob-ch34-gravity-dynamics-and-coupling] `OPEN`）与局域空间寻址有效份额 $\eta_{\mathrm{kin,eff}}^2 := (1 - \eta_{\mathrm{info}}(r))\beta_{\mathrm{loc}}^2$（平直时空 $\eta_{\mathrm{grav}} = 0$ 时 $\eta_{\mathrm{kin,eff}} = v/c$），单步幺正总预算恒满足三项正交平方守恒：
@@ -89,11 +100,34 @@ $$
 :::
 
 2. **第四阶推导：算术谱半密度矢高相变与舒尔正定脊线（Tier 4，呼应 [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md)–[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md)）**：
-   在欧拉乘积（[`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product)）与右半带归约（[`golden_right_half_strip_implies_rh`](lean:D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh)，`LEAN ✓`）锚定下，素数旋子在 $\sigma > \frac{1}{4}$ 上的累计二阶矢高 $\Sigma_{\mathrm{sag}}(\sigma; P_\epsilon) = \frac{1}{2}\sum_{p \le P_\epsilon} p^{-2\sigma} + \mathcal{O}(1)$ 在 $\sigma > \frac{1}{2}$ 处绝对收敛，唯独在临界线 $\sigma = \frac{1}{2}$ 首次触发梅滕斯双对数发散 $\frac{1}{2}\ln\ln P_\epsilon \to \infty$（Mertens 1874：$\sum_{p \le x} \frac{1}{p} = \ln\ln x + M + o(1)$，$M$ 为梅滕斯常数，[`E₂p.bound'`](lean:D5/S3/Weil/Mertens/Third.Mertens.E₂p.bound')，`LEAN ✓`；矢高与 $\frac{1}{2}\sum p^{-2\sigma}$ 只差 $\mathcal{O}(1)$ 由 $\bigl\lvert 1 - \cos x - \frac{x^2}{2}\bigr\rvert \le \frac{x^4}{24}$ 与 $\sum_p p^{-4\sigma} < \infty$ 得出，`手工推导`）；同时严格正定内部块上的埃尔米特舒尔补变分极小（[`schur_quadratic_is_least`](lean:D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least)，`LEAN ✓`；退化内部块在全格拉姆块半正定 $G \succeq 0$ 即 $\operatorname{ran} G_{IP} \subseteq \operatorname{ran} G_{II}$ 下经 Albert 1969 摩尔—彭罗斯伪逆延拓，`文献结果`）将乘性稀疏算术枢轴 $\widetilde{G}_{PP}^{(\ell)} = G_{PP}^{(\ell)} - G_{PI}^{(\ell)}(G_{II}^{(\ell)})^+ G_{IP}^{(\ell)}$ 与埃尔米特—比勒再生核正定性 $K_\epsilon \succeq 0 \iff \operatorname{RH}$ 对齐在同一条对称脊线 $\rho = 1 - \bar{\rho}$ 上（经典 ZFC 下的黎曼猜想 [@conj-riemann-hypothesis] 与最后一英里舒尔—德布朗热桥接引理 [@prob-ch34-schur-hb-kernel-positivity-bridge] 严格保持为 `OPEN`）。
+   在欧拉乘积（[`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product)）与右半带归约（[`golden_right_half_strip_implies_rh`](lean:D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh)，`LEAN ✓`）锚定下，素数旋子在 $\sigma > \frac{1}{4}$ 上的累计二阶矢高 $\Sigma_{\mathrm{sag}}(\sigma; P_\epsilon) = \frac{1}{2}\sum_{p \le P_\epsilon} p^{-2\sigma} + \mathcal{O}(1)$ 在 $\sigma > \frac{1}{2}$ 处绝对收敛，唯独在临界线 $\sigma = \frac{1}{2}$ 首次触发梅滕斯双对数发散 $\frac{1}{2}\ln\ln P_\epsilon \to \infty$（Mertens 1874：$\sum_{p \le x} \frac{1}{p} = \ln\ln x + M + o(1)$，$M$ 为梅滕斯常数，[`E₂p.bound'`](lean:D5/S3/Weil/Mertens/Third.Mertens.E₂p.bound')，`LEAN ✓`；矢高与 $\frac{1}{2}\sum p^{-2\sigma}$ 只差 $\mathcal{O}(1)$ 由 $\bigl\lvert 1 - \cos x - \frac{x^2}{2}\bigr\rvert \le \frac{x^4}{24}$ 与 $\sum_p p^{-4\sigma} < \infty$ 得出，`手工推导`）。对正定内块，舒尔补给出二次型的极小值（[`schur_quadratic_is_least`](lean:D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least)）。下面对埃尔米特—比勒核的采样矩阵施行这一步消元，并检验它与其他各阶读数的关系。
 
 ::: {.viz src="axiom-omega-five-tier-cascade-sandbox" preset="tier4-prime-sagitta-critical-ridge" height="500"}
-素数矢高在临界脊线上起涨卡：第四阶台座上素数矢高台阶在 $\sigma > \frac{1}{2}$ 受收敛环约束，移至临界脊线 $\sigma = \frac{1}{2}$ 时越过青色参考环双对数起涨（`riemann_zeta_dirichlet_sum_eq_euler_product`、`golden_right_half_strip_implies_rh` 与 `schur_quadratic_is_least` 为 `LEAN ✓`，梅滕斯估计为正文所引冻结声明 `Mertens.E₂p.bound'`，其误差的数值核对标 `NUM`，黎曼猜想与舒尔桥接标 `OPEN`）。
+素数矢高在临界脊线上起涨卡：第四阶台座上素数矢高台阶在 $\sigma > \frac{1}{2}$ 受收敛环约束，移至临界脊线 $\sigma = \frac{1}{2}$ 时越过青色参考环双对数起涨（`riemann_zeta_dirichlet_sum_eq_euler_product`、`golden_right_half_strip_implies_rh` 与 `schur_quadratic_is_least` 为 `LEAN ✓`，梅滕斯估计为正文所引冻结声明 `Mertens.E₂p.bound'`，其误差的数值核对标 `NUM`）。
 :::
+
+**第四阶采用的算术输入。** Alpöge 的终端声明 `riemannHypothesis : RiemannHypothesis` 给出 Mathlib 的黎曼猜想。Sutherland 对五条终端声明做了公理审计，并用 con-leche 将证明与单独写出的挑战命题比对。另一份独立的 nanoda 重放记录报告五条声明的证明依赖全部通过。记录中 RH 用到的公理是 `propext`、`Classical.choice`、`Quot.sound`。以下把零点定位作为外部已核验的输入。从零点到本章比较读数的步骤是手工推导。[终端声明](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean) · [Sutherland 的重放与命题比对](https://math.mit.edu/~drew/grh/) · [独立公理审计与重放日志](https://github.com/Infatoshi/rh-verification-receipts/blob/ac99f18cef21952de094234fab95db342ed16638/VERIFICATION_RESULT.txt)
+
+**从零点到舒尔枢轴。** 取右半平面 $\operatorname{Re}s>1/2$ 中 $N$ 个互异节点 $s_j$，记 $G_{jk}=K_\epsilon(s_j,s_k)$。在 [§31.3 的零点展开](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-31-3)中，每个互异零点 $\rho$ 的重数为 $m_\rho$。任给系数 $c_j\in\mathbb C$，有
+
+$$
+c^*Gc=\frac12\sum_\rho m_\rho\,|R(\rho)|^2,\qquad
+R(z)=\sum_{j=1}^N\frac{c_j\,\xi(s_j)}{s_j-z}.
+$$
+
+RH 保证所有 $\xi(s_j)\ne0$。若二次型等于零，有理函数 $R$ 就在无穷多个互异零点处消失。通分后的分子次数至多为 $N-1$，只可能是零多项式。逐一取 $s_j$ 处的留数便得到每个 $c_j=0$。所以 $G$ 严格正定。在任意非空划分 $I\sqcup P$ 下，对每个 $y\ne0$，舒尔补的二次型是 $(x,y)^*G(x,y)$ 关于 $x$ 的最小值，在 $x=-G_{II}^{-1}G_{IP}y$ 处取到，故仍严格为正。这也给出 [@prob-ch34-schur-hb-kernel-positivity-bridge] 所问存在性的见证 $M_L\equiv1$。[@prob-ch34-arithmetic-pivot-area-law] 指定的是由乘性子树生成的另一族矩阵，其与 $G$ 的对应及跨子树范数界仍须给出。
+
+**一个四元数原胞能读出多少个节点？** 将节点取在实轴 $s_j>1/2$。共轭零点成对，所以 $G$ 为实矩阵。归一化到单位对角线 $H_{jk}=G_{jk}/\sqrt{G_{jj}G_{kk}}$ 后，其秩仍为 $N$。§39.1 的单胞比较读数满足 $2\kappa(q_j,q_k)-1=\langle q_j,q_k\rangle_{\mathbb R^4}$，其中 $q_j$ 是单位四元数。要在全部点对上用这个中心化读数重现 $H$，充要条件是 **$N\le4$**。事实上，$N\le4$ 时将 $H$ 分解为 $V^{\mathsf T}V$，把 $V$ 的单位列向量补零至四维即可。$N=5$ 时，五个互异节点已经给出秩五的 $H$，而任何五个四元数的实内积矩阵秩至多为四。§39.1 所说的秩五包含未中心化读数的常数项。这个界只约束这里指定的两两读数。[@thm-ch39-axiom-omega-complete-rank-five-isomorphism]
+
+**两个节点给出第二阶的一个态。** 取上述 $H$ 的任意二阶主块，记非对角元为 $h$。严格正定给出 $|h|<1$。将这个块除以迹 $2$，便得到布洛赫向量为 $(h,0,0)$ 的满秩量子态 $B$。它与球心 $I_2/2$ 的双曲距离满足 $\cosh d(B,I_2/2)=1/\sqrt{1-h^2}$。把两个归一化谱向量当作实内积空间中的单位向量（内积取复内积的实部），它们的内积就是 $h$，弦中点的平方范数就是 $(1+h)/2$。因而同一个 $h$ 同时给出第一阶的贝伦德半角读数与第二阶的态空间距离。要把这个距离换成物理速度或钟慢，还需给出对应的观测过程。[@rem-ch39-axiom-omega-tier2-velocity-and-de-sitter]
+
+**同一份谱对第三阶的耦合意味着什么？** 取 [§33.9 的单圈输入](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-11-2)，记 $A_i=\alpha_i^{-1}(M_Z)$ 和 $b=(41/10,-19/6,-7)$。在三个扇区加上阈值 $\Delta_i$ 后，共同能标 $\mu$ 的匹配方程是 $A_i=a+t b_i+\Delta_i$，其中 $a=\alpha_U^{-1}$，$t=\log(\mu/M_Z)/(2\pi)$。消去 $a,t$ 得
+
+$$
+r(\Delta)=r(A),\qquad r(v)=v_2-\frac{115v_1+218v_3}{333}.
+$$
+
+将 $v_2$ 的系数归一为 $1$ 后，其余系数由 $r(1,1,1)=r(b)=0$ 决定。向量 $(1,1,1)$ 与 $b$ 线性无关，所以这个等式也是存在实数解 $a,t$ 的充分条件，物理上的紫外匹配还要求 $a,t>0$。按书中输入 $r(A)\approx3.66403$。若从零点谱算出一个数 $F$ 并给三个逆耦合都加上 $F$，则 $r(F,F,F)=0$，对任何 $F$ 都无法闭合该残差。若阈值形如 $\Delta_i=w_iF$，可检验的条件便是 $F\,r(w)=r(A)$。从统一动力学独立给出三个扇区的权重和谱读数，才会对这个已测出的组合产生定量预言。
 
 ## 39.2.3 第五阶推导：流群测地智能与母公理自身的遮诠透明化 {#sec-ch39-25-3}
 
@@ -109,6 +143,10 @@ $$
 ::: {.viz src="axiom-omega-five-tier-cascade-sandbox" preset="tier5-geodesic-mind-bridge-erasure" height="500"}
 测地四拍与参照桥自消卡：第五阶台座比较匀速四拍流群测地线矢高 $0.5359$ 对末步跳步 $1.5000$，并在倾角拉回零时见证参照桥 $[y, y, z] = z$ 零残渣自消去（`shortest_gate_triangle_holonomy`、`observable_krylov_once_stable_permanently` 与 `self_application_fragment_package` 为 `LEAN ✓`，撤梯诠释标 `MODEL`）。
 :::
+
+**用同一零点谱检验第五阶的有限步稳定。** 固定一个实节点 $s>1/2$，在以互异零点为指标的 $\ell^2$ 中取向量 $v_\rho=\sqrt{m_\rho/2}\,\xi(s)/(s-\rho)$。上面的零点展开给出 $\|v\|^2=K_\epsilon(s,s)$，且每个分量非零。写 $\rho=1/2+i\gamma_\rho$。选择步长 $\tau\in\mathbb R$ 并令每一步在第 $\rho$ 个分量上乘以 $e^{i\tau\gamma_\rho}$，就定义了一个幺正算子 $U$。用 $d_\tau$ 表示互异相位的个数，允许为无穷。前 $n$ 步向量 $v,Uv,\ldots,U^{n-1}v$ 张成的维数恰为 $\min(n,d_\tau)$。因为 $p(U)v=0$ 等价于多项式 $p$ 在每个相位上为零；有 $d_\tau$ 个相位时，最低次首一消去多项式就是相应 $d_\tau$ 个一次因子的积，无穷多个相位时无非零消去多项式。对于实际的零点谱，每个 $\tau\ne0$ 都给出无穷多个相位。若只有有限种，则纵坐标全落在有限个公差为 $2\pi/|\tau|$ 的等差数列中，高度 $T$ 以内至多有 $O_\tau(T)$ 个互异正纵坐标。但由黎曼–冯·曼戈尔特计数公式及 Bui、Conrey、Young 的定理 1.1，临界线上的单零点在全部零点中占正比例，故至少有常数倍 $T\log T$ 个互异正纵坐标，矛盾。这样每个非零步长都在每一步增加一个独立方向，零步长则自始至终只有一个方向。[单零点比例的证明](https://doi.org/10.4064/aa150-1-3)
+
+这里的步进是明确定义的谱模型；将它用于第五阶的推理系统，还需指定该系统的演化和读出。
 
 ::: {.definition #def-ch39-axiom-omega-five-tier-cascade title="AXIOM-Ω 五阶大一统演绎级联与无源参照桥自消去闭环（模型定义）"}
 在母公理 $\mathrm{AXIOM}\text{-}\Omega$（[@def-ch39-axiom-omega-ternary-comparison-closure]）与[附录 E](appendix-e.md) 显式桥接契约下，定义全书**五阶大一统演绎级联** $\mathfrak{C}_\Omega = (\mathrm{Tier}_1, \dots, \mathrm{Tier}_5)$（`MODEL`）：
@@ -138,7 +176,7 @@ $$
 **哲学文献呼应与科学开放边界总清点。**
 
 1. **公理去概念化的东西方经典呼应**：第五阶 B 以流群消去律 $[x, x, z] = z$ 刻画公理在完成贯通后自发隐退，在西方分析哲学中呼应 L. Wittgenstein《逻辑哲学论》（*Tractatus Logico-Philosophicus*, 1921）命题 `6.54` 的“登高撤梯”，在东方经典中呼应《金刚经》与巴利藏《蛇喻经》的“法尚应舍，何况非法（筏喻）”及龙树《中论》（*Mūlamadhyamakakārikā*）对自性原点的破斥（[§29.6](ch34-s05-triadic-bootstrap.md)、[§36.8](ch38-s07-blindspot-and-relativization.md)）；
-2. **绝不越界冒充定理的认识论铁律**：$\mathrm{AXIOM}\text{-}\Omega$ 的使命是将全书分散的概念收束为一幅逻辑自洽的几何总蓝图（`MODEL`），而非抹除具体科学问题的技术门槛。凡跨层级所需的中间桥接假设（如柯西完备化 `H3`、无穷素数余项 `H4`、复合张量局域层析与连续统极限）均以[附录 E](appendix-e.md) 台账为准；黎曼猜想 [@conj-riemann-hypothesis]（及舒尔—德布朗热桥接 [@prob-ch34-schur-hb-kernel-positivity-bridge]）、非相对化复杂性 [@prob-ch38-unrelativized-p-vs-np-and-independence]、标准模型三代连续耦合 [@prob-ch34-sm-generations-and-couplings]、连续统自旋-$2$ 引力动力学 [@prob-ch34-gravity-dynamics-and-coupling]、AF-GUT 阈值与宇宙学定量峰谱 [@prob-ch39-af-gut-threshold-and-proton-stability]、[@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 以及三元数场网络大规模实证基准 [@prob-ch39-tft-scale-and-seams] 全部保持清澈独立的 `OPEN` 身份。
+2. **绝不越界冒充定理的认识论铁律**：$\mathrm{AXIOM}\text{-}\Omega$ 的使命是将全书分散的概念收束为一幅逻辑自洽的几何总蓝图（`MODEL`），而非抹除具体科学问题的技术门槛。凡跨层级所需的中间桥接假设（如柯西完备化 `H3`、无穷素数余项 `H4`、复合张量局域层析与连续统极限）均以[附录 E](appendix-e.md) 台账为准；乘性子树的面积律 [@prob-ch34-arithmetic-pivot-area-law]、非相对化复杂性 [@prob-ch38-unrelativized-p-vs-np-and-independence]、标准模型三代连续耦合 [@prob-ch34-sm-generations-and-couplings]、连续统自旋-$2$ 引力动力学 [@prob-ch34-gravity-dynamics-and-coupling]、AF-GUT 阈值与宇宙学定量峰谱 [@prob-ch39-af-gut-threshold-and-proton-stability]、[@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 以及三元数场网络大规模实证基准 [@prob-ch39-tft-scale-and-seams] 全部保持清澈独立的 `OPEN` 身份。
 :::
 
 ::: {.example #ex-ch39-axiom-omega-five-tier-invariants-audit title="AXIOM-Ω 五阶定量不变量联立核验：从 3/32 格拉姆锁到 3/8 温伯格迹比与零残渣撤桥"}

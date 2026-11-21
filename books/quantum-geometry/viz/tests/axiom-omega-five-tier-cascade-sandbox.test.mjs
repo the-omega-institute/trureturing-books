@@ -47,7 +47,7 @@ const GIDS = [
   'D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package'
 ];
 const OPEN = [
-  'ch22-s04-critical-line-and-rh.html#conj-riemann-hypothesis',
+  'ch34-s29-arithmetic-pivots-and-resonant-tunneling.html#prob-ch34-arithmetic-pivot-area-law',
   'ch34-s25-generations-and-quantitative-boundary.html#prob-ch34-sm-generations-and-couplings',
   'ch34-s24-interaction-sign-and-sagitta-composition.html#prob-ch34-gravity-dynamics-and-coupling',
   'ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.html#prob-ch39-tft-scale-and-seams'
@@ -279,7 +279,7 @@ check('the suite is declared in dependencies.json with the chapter it reads', Ar
 const AUDIT = ['0.09375000', '0.50000000', '0.73908513', '0.54624683', '0.69282032', '1.00000000', '0.37500000', '0.61588148', '0.21171004', '0.53589838', '1.50000000', '0.00000000'];
 check('the chapter (zh, en) states every audited value of the page', AUDIT.every((v) => chapters.zh.includes(v) && chapters.en.includes(v)));
 check('the chapter (zh, en) cites the twelve theorems the page shows', GIDS.every((g) => chapters.zh.includes(g) && chapters.en.includes(g)));
-check('the chapter (zh, en) names the four open problems the page names', ['conj-riemann-hypothesis', 'prob-ch34-sm-generations-and-couplings', 'prob-ch34-gravity-dynamics-and-coupling', 'prob-ch39-tft-scale-and-seams'].every((id) => chapters.zh.includes(id) && chapters.en.includes(id)));
+check('the chapter (zh, en) names the four open problems the page names', ['prob-ch34-arithmetic-pivot-area-law', 'prob-ch34-sm-generations-and-couplings', 'prob-ch34-gravity-dynamics-and-coupling', 'prob-ch39-tft-scale-and-seams'].every((id) => chapters.zh.includes(id) && chapters.en.includes(id)));
 
 /* ---------- helpers on the page ---------- */
 const state = (p = page) => p.evaluate(() => window.OMEGA_CASCADE_DEBUG.state);
