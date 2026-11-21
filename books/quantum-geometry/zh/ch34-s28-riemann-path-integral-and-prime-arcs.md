@@ -538,6 +538,32 @@ $$
 
 在发生抵消的情形，$\delta\log Y\ge s/m^2$。由 $1-e^{-u}\ge(1-e^{-1})\min\{u,1\}$ 得 $W\ge (1-e^{-1})\min\{s,1\}m^{-2}$；$W=1$ 时也成立。再除以 $\varphi(m)\le m$ 即得下界。对选 $d$ 所用的 $y=x^{\varepsilon/5}$、$m\le e^{4y}$ 和 $D=e^{y(\log x)^2}$，有 $\log D/\log(4m)\ge y(\log x)^2/(\log4+4y)\to\infty$，因此同一门槛适用于每个充分大的 $x$。若该类里未通过任一测试的整数数目小于这个素数下界，就至少留下一枚同时通过两项测试的素数。[参考库中的计数假设](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Definitions/GlobalTwisting/GeneralHyps.lean#L113-L118)
 
+**怎样在同一枚 $d$ 上通过两项测试？** 固定 $\varepsilon>0$，记 $y=x^{\varepsilon/5}$、$D=\exp(y(\log x)^2)$、$N=\lfloor x^{400}\rfloor$。沿同余类取 $d_i=b+m(A+i)$，其中 $0\le i<L$。写 $J(n,r)$ 为把 $r$ 的各素因子按重数取 Legendre 符号后相乘的值，$r=0,1$ 时取空积 $1$。素因子 $2$ 对奇数 $n$ 贡献 $1$，对偶数 $n$ 贡献 $0$；对正奇数分母，$J$ 就是雅可比符号。置 $w_n=\Lambda(n)\min\{1,x/n\}$。在同一个 $i$ 上计算
+
+$$
+S_i=\sum_{n=1}^N w_n J(n,d_i),\qquad
+S_{q,i}=\sum_{n=1}^N w_n J(n,d_i)J(n,q).
+$$
+
+索引集合 $H$ 收录满足 $|S_i|>x^{1/2+\varepsilon}/2$ 或 $|S_{q,i}|>x^{1/2+\varepsilon}/2$ 的 $i$。于是 $i\notin H$ 表示两个和同时达到所需界。
+
+::: {.theorem #thm-ch31-splitting-progression-power-tail title="同一分裂同余类上两项测试的例外索引" lean="D5/S3/CharacterSums/SplittingProgressionExponentialTail.splitting_progression_power_tail"}
+对每个固定的 $\varepsilon>0$ 和每个充分大的实数 $x$，任取自然数 $q,b,m,A,L$，设 $b\equiv3\pmod4$、$4\mid m$，且每个整除 $m$ 的素数 $p$ 都满足 $p\le x^{1/2+\varepsilon/2}$ 或 $p>N$。若 $L\ge D/(4e^{4y})$，则
+
+$$
+|H|\le L D^{-\min\{\varepsilon,1\}/38400}.
+$$
+
+:::
+
+::: proof
+从两个和中取出不整除 $m$ 的奇素数项。较高素数幂、$2$ 和整除 $m$ 的素数项由截断权重及因子条件控制，对每项测试的误差最终至多为 $x^{1/2+\varepsilon}/4$。因 $d_i\equiv3\pmod4$，二次互反律把每个 $J(p,d_i)$ 写为固定符号乘以 $d_i\bmod p$ 的二次特征标。在剩余素数乘积的完整周期上，对每个保留的素数 $p$，由于 $p\nmid m$，模 $p$ 的每个剩余类出现的次数相同。中国剩余定理给出各坐标的独立性。每个特征标有界且均值为零，因此各系数的平方和控制高偶次矩。在实际长度 $L$ 的区间上展开同一个矩，每个素数元组在完整周期之外只留下端点余项。取矩阶 $2\lfloor y\log x/4800\rfloor$，给定的长度门槛足以吸收这些余项。在任何失败索引上，至少一个剩余素数和的绝对值达到 $x^{1/2+\varepsilon}/4$；用两个非负偶次幂之和同时控制全部失败索引即得所示界。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 对每个固定的 $B>0$，$D^{-\min\{\varepsilon,1\}/38400}\le e^{-By}$ 最终成立。要把整数索引变成真正的素数，可取上一段的 $(D/2,D]$ 并只枚举其中指定同余类的元素。若 $m\ge3$、$m\le e^{4y}$、$a=b\bmod m$ 为可逆类，且这个枚举满足定理的诸条件，则 $L\le D+1$。失败索引至多 $(D+1)D^{-\min\{\varepsilon,1\}/38400}$，它与素数个数下界 $c m^{-3}(D/2)/\log(D/2)$ 的比值趋于零，因为 $m^3\le e^{12y}$ 而 $\log D=y(\log x)^2$。所以在每个这样的充分大高度，至少一枚素数 $d$ 同时通过两项测试。
+
+对前文选出的第一枚素数 $e^{y/2}<q\le e^y$，取 $M=q\prod_{2<p\le y,\ p\text{ 为素数}}p$，$m=16M$，$b=8M-1$。此时 $b\equiv3\pmod4$ 且 $\gcd(b,m)=1$。由 $\vartheta(y)\le y\log4$ 得 $\log m\le\log16+(1+\log4)y\le4y$（$x$ 充分大）。整除 $m$ 的素数或者不超过 $\max\{2,y\}$，或者是 $q>e^{y/2}>N$。在 $(D/2,D]$ 中枚举该类，索引数至少为 $D/(2m)-1\ge D/(4m)$，从而满足长度门槛。在同一个 $x$ 上，第一枚素数 $q$ 与由此获得的 $d$ 使第一项测试以及上述两项测试全部通过。
+
 **窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
 
 $$
@@ -596,6 +622,22 @@ $$
 
 比例和目标指数先给定，系数和阈值可依赖二者。该陈述的范围是 $\sigma<\Theta$ 且上确界未取到。
 
+::: {.theorem #thm-ch31-prime-unattained-endpoint-mass title="未取到上确界时的端点指数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeUnattainedEndpointMass.prime_tail_endpoint_mass_tendsto_zero"}
+设 $\Theta>1/2$ 是黎曼 ζ 函数非平凡零点实部的上确界，且每个非平凡零点的实部都严格小于 $\Theta$。令 $p=\Theta-1/2$。当实数 $B\to+\infty$ 时，
+
+$$
+\frac{N(2,B)}{B^p}\longrightarrow0.
+$$
+:::
+
+::: proof
+以 $x^{1-\Theta}$ 归一化完全尾项。每个零点的贡献在这一尺度上趋于零，而零点系数的绝对和给出统一的支配界，因此可将极限移入级数。平凡零点和常数项在这一尺度上消失。素数幂修正原为 $O(x^{-1/2})$，因 $\Theta>1/2$，归一化后也趋于零。因此 $x^{1-\Theta}Q_\vartheta(x)\to0$。
+
+任给 $\varepsilon>0$，选定一个阈值 $X\ge2$，使 $x\ge X$ 时质量的被积函数至多为 $\varepsilon p x^{p-1}$。于是在 $[X,B]$ 上积分至多为 $\varepsilon(B^p-X^p)$。固定的初段质量 $N(2,X)$ 除以 $B^p$ 后趋于零。这个论证同样适用于 $\Theta=1$。 完整证明由 Lean 内核检查。
+:::
+
+质量非负，故对每个 $2\le A\le B$，都有 $0\le N(A,B)\le N(2,B)$。端点极限因而同时控制所有这些窗口。预定比例的下界可取每个严格低于 $\Theta-1/2$ 的正幂，在端点幂上，归一化后的质量趋于零。
+
 ::: {.theorem #thm-ch31-prime-attained-short-windows title="上确界取到时的零质量短窗口" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeAttainedShortWindows.prime_tail_positive_short_windows_of_attained_zero"}
 设有非平凡零点 $\rho$，其 $\beta=\operatorname{Re}\rho>1/2$，且所有非平凡零点的实部都不超过 $\beta$。存在实数 $\kappa_0>1$、$K\ge1$ 和 $X_0\ge2$，使每个 $X\ge X_0$ 都有 $A\in[X,KX]$，满足
 
@@ -610,6 +652,24 @@ $$
 
 在同一归一化下，实部小于 $\beta$ 的零点项趋于零。零点系数的绝对可和性给出支配界，允许任意接近最右线的低实部零点。最右线上的零点项构成一致连续的函数。素数幂修正的归一化量也趋于零，因为 $\beta>1/2$。因此，足够晚的正峰可延伸为一段固定的右向对数宽度，在整个区间内仍有 $Q_\vartheta>0$。指数换元将找到下一处正峰所需的固定对数距离变成倍数 $K$，并将正号区间的固定宽度变成比例 $\kappa_0$。 完整证明由 Lean 内核检查。
 :::
+
+::: {.theorem #thm-positive-average-prime-window title="正平均序列给出每个充分晚的窗口下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.eventual_prime_window_lower_of_log_frequency"}
+沿用完全曼戈尔特余项 $U$ 和素数负部质量 $N$，对实数 $v$ 记 $H(v)=\int_{v-\ln 2}^v U(e^t)\,dt$。给定实序列 $u_n\to+\infty$，满足 $u_{n+1}/u_n\to1$，并且对某些 $c>0$、$\beta>1/2$ 和 $M\in\mathbb R$，充分大的 $n$ 都满足 $H(u_n)\ge c e^{\beta u_n}/u_n^M$。那么对每个 $\varepsilon>0$，充分大的 $Y$ 都有
+
+$$
+N(Y,Y^{3/2})\ge Y^{(3/2)(\beta-1/2)-\varepsilon}.
+$$
+:::
+
+::: proof
+写 $y=\ln Y$。固定 $1<k<3/2$，在足够大的指标后取首个满足 $u_n\ge ky$ 的指标。前一项小于 $ky$，相邻项比例最终小于 $3/(2k)$，所以 $ky\le u_n\le3y/2$。当 $(k-1)y\ge\ln 2$ 时，$[e^{u_n}/2,e^{u_n}]$ 全部落在 $[Y,Y^{3/2}]$ 内。用 $U(x)=-xQ(x)$ 换元后，$H(u_n)=-\int_{e^{u_n}/2}^{e^{u_n}}Q(x)\,dx$。素数幂修正给出 $Q_\vartheta\le Q$，而短区间上 $\sqrt x\le e^{u_n/2}$，因此 $H(u_n)\le e^{u_n/2}N(Y,Y^{3/2})$。取 $k$ 充分接近 $3/2$，留出任意小的指数损失来吸收 $c$ 和 $u_n^M$。 完整证明由 Lean 内核检查。
+:::
+
+**从 ζ 零点取得正平均。** 把 $U$ 在 $0<x<1$ 上置零，所得函数记为 $U_0$。令 $H_*(x)=\int_1^2 U_0(x/v)\,dv/v$，则 $x>2$ 时 $H_*(x)=H(\ln x)$。在 $\operatorname{Re}(s)>1$ 上交换两个绝对收敛的积分，得到 $H_*$ 的 Mellin 变换 $k(s)\Phi_*(s)$，其中 $\Phi_*$ 是在 $1$ 处补值的完全曼戈尔特变换，$k(s)=(1-2^{-s})/s$。$H_*$ 在对数坐标中局部 Lipschitz，在 $x<1$ 时为零，并满足 $O(x\ln^2 x)$ 界。由于 $|2^{-\rho}|=2^{-\operatorname{Re}(\rho)}<1$，这个平均保留所有非平凡零点处的极点。每个极点的实部都至多是 $H_*$ 的增长横坐标，否则原 Mellin 积分会在该点全纯。
+
+在 $\operatorname{Re}(s)>-3/4$ 上使用亚纯延拓，取弱有界性条件中的左端 $\sigma_0=-1/2$。这样所有非平凡零点都计入单位高度区间的重数和，Riemann–von Mangoldt 公式将该和控制在 $O(\ln t)$。局部的 $\zeta'/\zeta$ 公式给出零点倒距离和与 $O(\ln t)$ 余项。对 $\operatorname{Re}(s)\le2$，每个倒距离可用 $\exp(\sum_{|\operatorname{Im}\rho-t|\le1} m_\rho|\ln|s-\rho||)$ 控制，右侧半平面则用绝对收敛的 Dirichlet 级数。在余下的有界高度范围，减去有限个极点的主部，再用紧性控制全纯余项。乘上 $k(s)$ 和 $1/[s(s-1)]$ 后仍满足振荡定理所需的竖向界。从 $-1/4$ 起绕实轴奇点的围道只需计入 $0$ 处的简单极点，所得主项是常数。[Srinivas，引理 3 和 4](https://www.impan.pl/shop/en/publication/transaction/download/product/83372?download.pdf)
+
+给定实部为 $\beta>1/2$ 的非平凡零点，Radziejewski 的定理给出交替振荡，幅度下界为常数乘 $x^\beta/(\ln x)^M$。有界主项可被吸收，偶数子序列给出正平均，两个相邻对数比的乘积仍趋于 $1$。因此由 [@thm-positive-average-prime-window] 得到同一窗口下界。这一步使用文献中的振荡定理，Lean 定理的范围是从正平均序列到窗口质量。任意远处的小预算窗口仍需算术证明。[Radziejewski，定理 3.2，DOI 10.4064/aa163-2-7](https://www.impan.pl/shop/en/publication/transaction/download/product/82009?download.pdf#page=8)
 
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 

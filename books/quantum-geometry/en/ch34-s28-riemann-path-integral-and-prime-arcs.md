@@ -538,6 +538,32 @@ If the exceptional zero exists and $\chi(a)=1$, put $\delta=1-\beta$ and $W=1-Y^
 
 In the cancellation case $\delta\log Y\ge s/m^2$, so $1-e^{-u}\ge(1-e^{-1})\min\{u,1\}$ gives $W\ge (1-e^{-1})\min\{s,1\}m^{-2}$. This bound also holds for $W=1$. Dividing by $\varphi(m)\le m$ proves the claim. For the second-prime parameters $y=x^{\varepsilon/5}$, $m\le e^{4y}$ and $D=e^{y(\log x)^2}$, we have $\log D/\log(4m)\ge y(\log x)^2/(\log4+4y)\to\infty$. The same threshold therefore applies at every sufficiently large $x$. If the number of integers in the class failing either test is smaller than this prime lower bound, at least one prime passes both tests. [The counting hypothesis in the reference](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Definitions/GlobalTwisting/GeneralHyps.lean#L113-L118)
 
+**How can the same $d$ pass both tests?** Fix $\varepsilon>0$ and put $y=x^{\varepsilon/5}$, $D=\exp(y(\log x)^2)$ and $N=\lfloor x^{400}\rfloor$. Enumerate a residue class by $d_i=b+m(A+i)$ for $0\le i<L$. Write $J(n,r)$ for the product of the Legendre symbols over the prime factors of $r$, counted with multiplicity, taking the empty product $1$ at $r=0,1$. The factor at $2$ is $1$ for odd $n$ and $0$ for even $n$. On positive odd denominators this is the Jacobi symbol. Put $w_n=\Lambda(n)\min\{1,x/n\}$. At the same index $i$, form the two sums
+
+$$
+S_i=\sum_{n=1}^N w_n J(n,d_i),\qquad
+S_{q,i}=\sum_{n=1}^N w_n J(n,d_i)J(n,q).
+$$
+
+Let $H$ contain exactly the indices for which $|S_i|>x^{1/2+\varepsilon}/2$ or $|S_{q,i}|>x^{1/2+\varepsilon}/2$. Thus $i\notin H$ means that both sums meet the bound.
+
+::: {.theorem #thm-ch31-splitting-progression-power-tail title="Exceptional indices for two tests in one splitting progression" lean="D5/S3/CharacterSums/SplittingProgressionExponentialTail.splitting_progression_power_tail"}
+For every fixed $\varepsilon>0$ and every sufficiently large real $x$, take any natural numbers $q,b,m,A,L$ with $b\equiv3\pmod4$ and $4\mid m$. Assume every prime divisor $p$ of $m$ satisfies $p\le x^{1/2+\varepsilon/2}$ or $p>N$. If $L\ge D/(4e^{4y})$, then
+
+$$
+|H|\le L D^{-\min\{\varepsilon,1\}/38400}.
+$$
+
+:::
+
+::: proof
+Extract from each sum the terms at odd primes that do not divide $m$. The clipped weights and the condition on the prime divisors of $m$ bound the remaining contributions from higher prime powers, $2$, and primes dividing $m$ by $x^{1/2+\varepsilon}/4$ for sufficiently large $x$. Since $d_i\equiv3\pmod4$, quadratic reciprocity expresses each $J(p,d_i)$ as a fixed sign times the quadratic character of $d_i\bmod p$. Over a full period modulo the product of the retained primes, $p\nmid m$ makes each residue coordinate uniform, and the Chinese remainder theorem makes the coordinates independent. Each character is bounded and has mean zero, so the sum of the squared coefficients controls the high even moments. Expanding the same moment on the actual interval of length $L$ leaves an endpoint remainder for each tuple of primes after its complete periods are removed. At order $2\lfloor y\log x/4800\rfloor$ the length assumption absorbs the remainders. At each failing index at least one of the two retained sums has absolute value at least $x^{1/2+\varepsilon}/4$. Summing the two nonnegative even powers therefore bounds the entire exceptional set. The full proof is checked by the Lean kernel.
+:::
+
+**Hand derivation.** For every fixed $B>0$ we eventually have $D^{-\min\{\varepsilon,1\}/38400}\le e^{-By}$. To obtain an actual prime, enumerate just the elements of the specified class in the preceding interval $(D/2,D]$. Suppose $3\le m\le e^{4y}$, the class $a=b\bmod m$ is a unit, and the enumeration meets the hypotheses above. Then $L\le D+1$. There are at most $(D+1)D^{-\min\{\varepsilon,1\}/38400}$ failing indices. The ratio of this bound to the prime lower bound $c m^{-3}(D/2)/\log(D/2)$ tends to zero since $m^3\le e^{12y}$ and $\log D=y(\log x)^2$. At every such sufficiently large height, some prime $d$ therefore passes both tests.
+
+For the first prime $e^{y/2}<q\le e^y$ chosen above, take $M=q\prod_{2<p\le y,\ p\text{ prime}}p$, $m=16M$ and $b=8M-1$. Then $b\equiv3\pmod4$ and $\gcd(b,m)=1$. The bound $\vartheta(y)\le y\log 4$ gives $\log m\le\log16+(1+\log4)y\le4y$ for large $x$. Every prime divisor of $m$ is at most $\max\{2,y\}$ or equals $q>e^{y/2}>N$. Enumerating this class in $(D/2,D]$ gives at least $D/(2m)-1\ge D/(4m)$ indices, meeting the length threshold. At the same $x$, the first prime $q$ and the resulting $d$ pass the first test and both tests above.
+
 **How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
 
 $$
@@ -596,6 +622,22 @@ The substitution $x=e^t$ and the comparison $Q_\vartheta\le Q$ transfer the boun
 
 The constant and threshold can depend on the prescribed ratio and exponent. The statement applies to $\sigma<\Theta$ when the supremum is unattained.
 
+::: {.theorem #thm-ch31-prime-unattained-endpoint-mass title="The endpoint exponent when the supremum is unattained" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeUnattainedEndpointMass.prime_tail_endpoint_mass_tendsto_zero"}
+Let $\Theta>1/2$ be the supremum of the real parts of nontrivial zeros of the Riemann zeta function, and suppose every nontrivial zero has real part strictly below $\Theta$. Put $p=\Theta-1/2$. As real $B\to+\infty$,
+
+$$
+\frac{N(2,B)}{B^p}\longrightarrow0.
+$$
+:::
+
+::: proof
+Normalize the complete tail by $x^{1-\Theta}$. Each nontrivial zero contributes a term that tends to zero at this scale. The absolute sum of the zero coefficients supplies a common bound, so the limit passes through the series. The trivial-zero and constant terms vanish at this scale. The prime-power correction is $O(x^{-1/2})$ and also vanishes after normalization because $\Theta>1/2$. It follows that $x^{1-\Theta}Q_\vartheta(x)\to0$.
+
+For any $\varepsilon>0$, fix $X\ge2$ beyond which the mass integrand is at most $\varepsilon p x^{p-1}$. The integral over $[X,B]$ is at most $\varepsilon(B^p-X^p)$. The initial mass $N(2,X)$ is fixed and vanishes after division by $B^p$. The argument includes $\Theta=1$. The full proof is checked by the Lean kernel.
+:::
+
+Nonnegativity gives $0\le N(A,B)\le N(2,B)$ for every $2\le A\le B$, so the endpoint limit controls all of these windows at once. The prescribed-ratio lower bound holds at every positive exponent strictly below $\Theta-1/2$. At the endpoint exponent, the normalized mass tends to zero.
+
 ::: {.theorem #thm-ch31-prime-attained-short-windows title="Short zero-mass windows when the supremum is attained" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeAttainedShortWindows.prime_tail_positive_short_windows_of_attained_zero"}
 Suppose a nontrivial zero $\rho$ has $\beta=\operatorname{Re}\rho>1/2$, and every nontrivial zero has real part at most $\beta$. There are real constants $\kappa_0>1$, $K\ge1$, and $X_0\ge2$ such that every $X\ge X_0$ admits an $A\in[X,KX]$ with
 
@@ -610,6 +652,24 @@ In logarithmic coordinates, a compactly supported positive filter retains a conj
 
 Under the same normalization, the terms from zeros with real part below $\beta$ tend to zero. Absolute summability of the zero coefficients supplies the dominating bound, allowing zeros arbitrarily close to the rightmost line. The terms on that line form a uniformly continuous function. The normalized prime-power correction also tends to zero because $\beta>1/2$. Each sufficiently late peak therefore extends to its right across a fixed logarithmic width on which $Q_\vartheta>0$. Exponentiation converts the distance to the next peak into the factor $K$ and the width of the positive interval into the ratio $\kappa_0$. The full proof is checked by the Lean kernel.
 :::
+
+::: {.theorem #thm-positive-average-prime-window title="Frequent positive averages force a lower bound in every late window" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.eventual_prime_window_lower_of_log_frequency"}
+Use the complete Mangoldt remainder $U$ and the prime-only negative mass $N$ defined above. For real $v$ put $H(v)=\int_{v-\ln 2}^v U(e^t)\,dt$. Let $(u_n)$ be a real sequence with $u_n\to+\infty$ and $u_{n+1}/u_n\to1$. Suppose also that $H(u_n)\ge c e^{\beta u_n}/u_n^M$ for all sufficiently large $n$, for some $c>0$, $\beta>1/2$, and $M\in\mathbb R$. Then for every $\varepsilon>0$ and every sufficiently large $Y$,
+
+$$
+N(Y,Y^{3/2})\ge Y^{(3/2)(\beta-1/2)-\varepsilon}.
+$$
+:::
+
+::: proof
+Write $y=\ln Y$ and fix $1<k<3/2$. Starting past a sufficiently late index, take the first $n$ with $u_n\ge ky$. The preceding term is below $ky$, and successive ratios are eventually below $3/(2k)$, so $ky\le u_n\le3y/2$. Once $(k-1)y\ge\ln 2$, the entire interval $[e^{u_n}/2,e^{u_n}]$ lies within $[Y,Y^{3/2}]$. Substituting $x=e^t$ and using $U(x)=-xQ(x)$ gives $H(u_n)=-\int_{e^{u_n}/2}^{e^{u_n}}Q(x)\,dx$. The prime-power correction gives $Q_\vartheta\le Q$, and $\sqrt x\le e^{u_n/2}$ on the shorter interval. Thus $H(u_n)\le e^{u_n/2}N(Y,Y^{3/2})$. Taking $k$ close to $3/2$ leaves an arbitrarily small exponent loss to absorb $c$ and $u_n^M$. The full proof is checked by the Lean kernel.
+:::
+
+**Positive averages from a zeta zero.** Extend $U$ by zero on $0<x<1$ and call the resulting function $U_0$. For $H_*(x)=\int_1^2 U_0(x/v)\,dv/v$ we have $H_*(x)=H(\ln x)$ when $x>2$. On $\operatorname{Re}(s)>1$, exchanging two absolutely convergent integrals gives the Mellin transform $k(s)\Phi_*(s)$, where $\Phi_*$ is the complete Mangoldt transform with its analytic value at $1$ and $k(s)=(1-2^{-s})/s$. The averaged function is locally Lipschitz in the logarithmic variable, vanishes for $x<1$, and is $O(x\ln^2 x)$ at infinity. Since $|2^{-\rho}|=2^{-\operatorname{Re}(\rho)}<1$, averaging retains the pole at every nontrivial zero. The real part of each pole is at most the growth abscissa of $H_*$, since otherwise the original Mellin integral would be holomorphic at the pole.
+
+Use the meromorphic continuation on $\operatorname{Re}(s)>-3/4$ and take $\sigma_0=-1/2$ in the weak-boundedness conditions. This includes all nontrivial zeros in the local count. The Riemann–von Mangoldt formula bounds the number of zeros with multiplicity in a unit-height interval by $O(\ln t)$. For $\operatorname{Re}(s)\le2$, the local expansion of $\zeta'/\zeta$ writes it as a sum of reciprocal differences from nearby zeros plus an $O(\ln t)$ error. Each reciprocal distance is bounded by $\exp(\sum_{|\operatorname{Im}\rho-t|\le1}m_\rho|\ln|s-\rho||)$. To the right of this strip the absolutely convergent Dirichlet series gives a uniform bound. On the remaining bounded height range, subtract the finitely many pole terms and bound the holomorphic remainder on the compact strip. The factors $k(s)$ and $1/[s(s-1)]$ preserve the required vertical bound. The contour around the real singularities can start at $-1/4$. Its only pole is the simple pole at $0$, so its contribution is constant. [Srinivas, Lemmas 3 and 4](https://www.impan.pl/shop/en/publication/transaction/download/product/83372?download.pdf)
+
+For a nontrivial zero of real part $\beta>1/2$, Radziejewski's theorem gives alternating oscillations of magnitude at least a constant times $x^\beta/(\ln x)^M$. The bounded main term is absorbed by this lower bound. Taking the even subsequence gives positive averages, and the product of two consecutive logarithmic ratios still tends to $1$. The same lower bound on window mass now follows from [@thm-positive-average-prime-window]. This step uses the published oscillation theorem. The Lean result covers the transfer from positive averages to window mass. The existence of arbitrarily late windows with small budgets remains an arithmetic problem. [Radziejewski, Theorem 3.2, DOI 10.4064/aa163-2-7](https://www.impan.pl/shop/en/publication/transaction/download/product/82009?download.pdf#page=8)
 
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 
