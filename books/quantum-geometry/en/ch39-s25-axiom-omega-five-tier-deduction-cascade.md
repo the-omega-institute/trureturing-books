@@ -119,7 +119,23 @@ RH gives $\xi(s_j)\ne0$ for every node. If the quadratic form vanishes, the rati
 
 **How many nodes can one quaternionic cell represent?** Take real nodes $s_j>1/2$. Conjugate zeros occur in pairs, so $G$ is real. Normalizing it to unit diagonal by $H_{jk}=G_{jk}/\sqrt{G_{jj}G_{kk}}$ preserves its rank $N$. In §39.1 the single-cell reading satisfies $2\kappa(q_j,q_k)-1=\langle q_j,q_k\rangle_{\mathbb R^4}$ for unit quaternions $q_j$. This centered reading reproduces $H$ on every pair **if and only if $N\le4$**. For $N\le4$, factor $H=V^{\mathsf T}V$ and pad the unit columns of $V$ with zeros to dimension four. At $N=5$, five distinct nodes already give a rank-five $H$, whereas the real inner products of five quaternions form a matrix of rank at most four. The rank five in §39.1 includes the constant term of the uncentered reading. This bound concerns the specified pairwise readings. [@thm-ch39-axiom-omega-complete-rank-five-isomorphism]
 
-**Two nodes give a Tier 2 state.** Take any two-by-two principal block of $H$ and denote its off-diagonal entry by $h$. Positive definiteness gives $|h|<1$. Dividing the block by its trace $2$ gives a full-rank qubit state $B$ with Bloch vector $(h,0,0)$. Its hyperbolic distance from the center $I_2/2$ satisfies $\cosh d(B,I_2/2)=1/\sqrt{1-h^2}$. Regard the two normalized spectral vectors as unit vectors in the underlying real inner-product space, with the real part of the complex inner product. Their inner product is $h$, so the squared norm of their chord midpoint is $(1+h)/2$. Thus the same $h$ gives both the Tier 1 half-angle reading on a Behrend shell and the Tier 2 distance in state space. Interpreting that distance as a physical velocity or clock reading requires a corresponding measurement procedure. [@rem-ch39-axiom-omega-tier2-velocity-and-de-sitter]
+**Approximating all spectral readings on one integer shell.** For finitely many distinct real nodes $s_j>1/2$, put $u_j=s_j-1/2$. Pair the zeros $\tfrac12\pm i\gamma$ for $\gamma>0$, with multiplicity $m_\gamma$. This pair contributes two real coordinates at node $j$,
+
+$$
+\sqrt{m_\gamma}\,\xi(s_j)\frac{(u_j,\gamma)}{u_j^2+\gamma^2}.
+$$
+
+Their dot product across two nodes is exactly the pair's contribution to $G$. Since $\xi(1)>0$ and the real half-line $s>1/2$ is zero-free, the coordinates are nonnegative. Divide the full coordinate vector for each node by $\sqrt{G_{jj}}$ to obtain a nonnegative unit vector $x_j$ with $\langle x_j,x_k\rangle=H_{jk}$.
+
+Given $\eta>0$, keep the first $D$ real coordinates so that every $x_j$ has squared tail norm at most $\delta<\eta/2$. For a positive integer $Q$, round the retained coordinates down to $a_{j\ell}=\lfloor Qx_{j\ell}\rfloor$. Give each $j$ a private set of $Q^2-\sum_\ell a_{j\ell}^2$ additional coordinates. Set those entries of $A_j$ to $1$ and those of every other vector to $0$. The resulting nonnegative integer vectors lie on one shell of squared radius $Q^2$. The diagonal readings equal $1$ exactly. For $j\ne k$, the discarded inner product is at most $\delta$, each scaled rounding error has norm at most $\sqrt D/Q$, and the private coordinates contribute zero to the cross term. Consequently
+
+$$
+0\le H_{jk}-\frac{A_j\cdot A_k}{Q^2}\le\delta+\frac{2\sqrt D}{Q}.
+$$
+
+Choosing $D$ and then $Q$ makes the bound smaller than $\eta$. Positive definiteness gives $H_{jk}<1$, so the $A_j$ are distinct. The Tier 1 half-angle readings have half this error. The shell excludes nonconstant three-term arithmetic progressions exactly at every finite scale. Its dimension and radius may grow with the number of nodes and the requested precision.
+
+**Two nodes give a Tier 2 state.** Take any two-by-two principal block of $H$ and denote its off-diagonal entry by $h$. Positive definiteness gives $|h|<1$. Dividing the block by its trace $2$ gives a full-rank qubit state $B$ with Bloch vector $(h,0,0)$. Its hyperbolic distance from the center $I_2/2$ satisfies $\cosh d(B,I_2/2)=1/\sqrt{1-h^2}$. Regard the two normalized spectral vectors as unit vectors in the underlying real inner-product space, with the real part of the complex inner product. Their inner product is $h$, so the squared norm of their chord midpoint is $(1+h)/2$. Thus $h$ gives the Tier 2 distance in state space and obeys the same half-angle identity used on the Tier 1 Behrend shell. Interpreting that distance as a physical velocity or clock reading requires a corresponding measurement procedure. [@rem-ch39-axiom-omega-tier2-velocity-and-de-sitter]
 
 **What can the same spectrum tell us about the Tier 3 couplings?** Use the [one-loop inputs of §33.9](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-11-2), with $A_i=\alpha_i^{-1}(M_Z)$ and $b=(41/10,-19/6,-7)$. For sector thresholds $\Delta_i$, matching at a common scale $\mu$ requires $A_i=a+t b_i+\Delta_i$, where $a=\alpha_U^{-1}$ and $t=\log(\mu/M_Z)/(2\pi)$. Eliminating $a,t$ gives
 
