@@ -367,6 +367,8 @@ $$
 
 原库的 `UpperTheory.Top.designS` 已在 Lean 4.35.0 中重放。在 `BookUnitKits.rh_of_unit_kits` 中，底类 `Linked Q` 要求存在参数 $\kappa$，使该族既与 $\kappa$ 相连，又满足 $Q(\kappa)$ 对应的点类条件。在模一特化下，`designS` 把逐点算术条件 `KitCPW` 与已证的 Minkowski 整除界合起来，给出原扭曲族类上的选择。这个原生 RH 入口仍使用四组输入，即模一的 `KitCPW`、增广平滑扭曲族类上带门槛的闭合尺寸估计、相连模一族的最终递归记录，以及 `Des (Linked Q) 3` 上的九项闭合估计。`UpperTheory.Top.kitS` 又可从模一窗口的宿主条件 `DC.HostWW` 和逐指标的算术对象条件 `ObjCP` 构造所需的 `KitCPW`。[从逐点条件构造选择](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7066607957) · [从窗口宿主和算术对象构造逐点条件](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067228472)
 
+对模一窗口，`UpperTheory.Top.hostWW` 从窗口的存在条件 `DC.HostExQW`、算术对象的存在性和闭合权重估计 `DC.WClosed` 构造 `DC.HostWW`。这里的算术对象可由上文的 `ObjCP` 提供。在 Lean 4.35.0 原生移植中，对每个族类，`signs_closed` 给出族参数 `Fm.GK.La` 为正、`Fm.cX.Ce` 非负的闭合条件，`family_log_bound_closed` 给出该族的窗口对数界。`Closed.and` 合并两者的门槛，得到同时适用的估计。参考证明 `GlobalTheory.EX.G4.wClosed` 还用到从范围一的绝对估计推出的逐族第一定理估计，以及每个充分晚的尺度上逐指标的权重向量构造。[模一窗口宿主的输入](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067345972) · [符号与窗口对数界的内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7068431330)
+
 原库和本书的整数块路线共用原始伽罗瓦行。原库先证明 `EveryCharacter`，即所有正整数模的狄利克雷特征标在 $\operatorname{Re}(s)>1/2$ 的 $L$ 函数非消失性（主特征标除去 $s=1$），再由 `rh_of_every` 得到 RH。本书从该算术行取出模一族，再由 `BookIntegerHostBlocks.of_reference` 得到整数块。其算术模块只向这一论证提供 `TopG`。在参考库的 Lean 4.33.1 环境中，`leanchecker` 已分别重放算术模块、最终结论模块与独立审计模块。审计文件 `IntegerBlockAudit.lean` 确认声明 `BookReference.riemannHypothesis_via_integer_blocks` 的类型为 Mathlib 的 `RiemannHypothesis`，并打印出以下证明项。[原库从全体特征标推出 RH 的声明](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Supplements/Kernels/MainTheorems.lean#L7-L9)
 
 ```lean
@@ -386,6 +388,22 @@ U(x)\le x^{1/2+\eta}\quad (k^{12}\le x\le k^{16}).
 $$
 
 求和遍历整块内的整数，第二个界对闭区间内每个实数 $x$ 成立，含两个端点。证明取 $\kappa=\min\{\eta/32,1/2\}$，将采样上界除以 $n^3$ 后用调和和估计，另用同一块上的四次幂插值控制实窗。两个比较所需的门槛可由同一个 $k$ 满足。这里的加权和正是 [@thm-ch31-quartic-mass-rh] 中的 $M(k^3,k^4)$。[从参考算术直接推出同一块的两个界](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067180276)
+
+上述双上界的第一项就足以闭合另一条 Lean 4.33.1 证明。给定 $\eta>0$，参考算术提供任意晚的 $k$，使 $M(k^3,k^4)\le k^\eta$。在 [@thm-ch31-quartic-prime-mass] 的比较式中取 $a=k^3$、$b=k^4$，略去左边非负的末端项，得到
+
+$$
+\int_{k^{12}}^{k^{16}}\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx
+\le 135M(k^3,k^4)+C\ln k\le (k^{12})^\eta
+$$
+
+其中 $C\ge0$ 与 $k$ 无关，第二个不等式对所选的充分晚的块成立。取 $Y=k^{12}$，则 $Y^{4/3}=k^{16}$，故 [@thm-ch31-prime-window-rh] 的素数窗口判据给出 RH。外部声明 `BookPrimeMass433.riemannHypothesis_via_weighted_samples` 的类型就是 Mathlib 的 `RiemannHypothesis`，其闭合证明项为
+
+```lean
+BookPrimeMass433.rh_of_weighted_samples
+  BookArithmeticWeightedBlocks.subpower_from_reference_arithmetic
+```
+
+这一证明从参考伽罗瓦行取得加权和上界。仅用本书的素数估计独立推出该上界，仍是开放的算术问题。[加权和、素数窗口与闭合证明项的内核回执](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7068410601)
 
 **单调性本身对负部窗口给出什么限制？**
 

@@ -367,6 +367,8 @@ For the modulus-one character, the two inclusions are projections. Given a base 
 
 The reference construction `UpperTheory.Top.designS` has been replayed on Lean 4.35.0. In `BookUnitKits.rh_of_unit_kits`, the base class `Linked Q` requires a parameter $\kappa$ to which the family is linked and whose point-class condition $Q(\kappa)$ it satisfies. For the modulus-one character, `designS` combines the pointwise arithmetic hypothesis `KitCPW` with the proved Minkowski divisibility bound to supply the original twisted choices. Four inputs remain for this native RH theorem. They are the unit-character `KitCPW`, the closed thresholded size estimate on the twisted smooth enrichment, eventual recursive records for the linked modulus-one families, and the nine closure estimates on `Des (Linked Q) 3`. The construction `UpperTheory.Top.kitS` in turn obtains the required `KitCPW` from the unit-character window-host hypothesis `DC.HostWW` and the arithmetic object condition `ObjCP` at each required index. [Twisted choices from the pointwise hypothesis](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7066607957) · [Pointwise kits from window hosts and arithmetic objects](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067228472)
 
+For modulus-one windows, `UpperTheory.Top.hostWW` constructs `DC.HostWW` from the window existence hypothesis `DC.HostExQW`, existence of arithmetic objects, and the closed weight estimates `DC.WClosed`. The `ObjCP` hypothesis above supplies the arithmetic objects needed here. In the native Lean 4.35.0 port, `signs_closed` gives, on each family class, the closed condition that `Fm.GK.La` is positive and `Fm.cX.Ce` is nonnegative. The theorem `family_log_bound_closed` gives the family’s window logarithm bound. The operation `Closed.and` combines their thresholds so that both estimates apply together. The reference proof `GlobalTheory.EX.G4.wClosed` also uses the first-theorem estimate for each family, obtained from the absolute range-one estimate, and a construction of weight vectors at every index of each sufficiently late scale. [Inputs to the modulus-one window host](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067345972) · [Kernel replay of the sign and window logarithm estimates](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7068431330)
+
 The original library and the book’s integer-block argument share the original Galois row. The library first proves `EveryCharacter`, the nonvanishing of Dirichlet $L$-functions for characters of every positive modulus in $\operatorname{Re}(s)>1/2$, with $s=1$ excluded for the principal character. It then deduces RH by `rh_of_every`. The book specializes the arithmetic row to the modulus-one family and obtains integer blocks via `BookIntegerHostBlocks.of_reference`. The arithmetic module supplies only `TopG` to this argument. In the reference library’s Lean 4.33.1 environment, `leanchecker` replayed the arithmetic module, the final conclusion module, and an independent audit module. The audit file `IntegerBlockAudit.lean` checked the declaration `BookReference.riemannHypothesis_via_integer_blocks : RiemannHypothesis` against Mathlib’s statement and printed the following proof term. [The original library’s deduction of RH from all characters](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Supplements/Kernels/MainTheorems.lean#L7-L9)
 
 ```lean
@@ -386,6 +388,22 @@ U(x)\le x^{1/2+\eta}\quad (k^{12}\le x\le k^{16}).
 $$
 
 The sum ranges over the integers in the block. The second bound holds for every real $x$ in the closed interval, including both endpoints. Taking $\kappa=\min\{\eta/32,1/2\}$, the proof bounds the weighted samples by a harmonic sum after division by $n^3$ and interpolates between fourth powers on the same block to cover the real window. A single $k$ can meet the thresholds for both estimates. The weighted sum here is $M(k^3,k^4)$ in [@thm-ch31-quartic-mass-rh]. [Both bounds from the reference arithmetic on one block](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067180276)
+
+The first of these two bounds suffices for another closed Lean 4.33.1 proof. Given $\eta>0$, the reference arithmetic supplies arbitrarily large $k$ with $M(k^3,k^4)\le k^\eta$. Put $a=k^3$ and $b=k^4$ in the comparison of [@thm-ch31-quartic-prime-mass] and drop the nonnegative endpoint term from its left side. This gives
+
+$$
+\int_{k^{12}}^{k^{16}}\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx
+\le 135M(k^3,k^4)+C\ln k\le (k^{12})^\eta
+$$
+
+with $C\ge0$ independent of $k$. The second inequality holds on the selected blocks once $k$ is sufficiently large. With $Y=k^{12}$ we have $Y^{4/3}=k^{16}$, so the prime-window criterion [@thm-ch31-prime-window-rh] gives RH. The external declaration `BookPrimeMass433.riemannHypothesis_via_weighted_samples` has Mathlib’s type `RiemannHypothesis` and the closed proof term
+
+```lean
+BookPrimeMass433.rh_of_weighted_samples
+  BookArithmeticWeightedBlocks.subpower_from_reference_arithmetic
+```
+
+This proof obtains the weighted-sum bound from the reference Galois row. Deriving this bound independently from the book’s prime estimates remains an open arithmetic problem. [Kernel replay of the weighted sum, prime window, and closed proof term](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7068410601)
 
 **What does monotonicity alone tell us about negative mass in a window?**
 
