@@ -275,6 +275,10 @@ $$
 
 参考库与本书共同使用的外部 Lean 环境还给出了同一宿主的有限检验。在 `samples Y Z` 中，依次枚举 $0\le n\le\lfloor\sqrt{\sqrt Z}\rfloor$，保留窗内的 $n^4$ 并加入两端，得到上述有限集。固定 $b>1$，对每个 $\kappa>0$，先选 $\varepsilon>0$ 及实常数 $e_D,e_L,K,c_{HH},e_K$，满足 $(e_D+e_L+7)\varepsilon\le\kappa$。此后对任意起点下界取一个更晚的窗。窗中每个采样点 $t$ 可选自己的框架、宿主 $H$ 和有限集 $T$，要求该点的 `EAtH`（模一特征标，系数 $4$）与 `CoreAtH` 使用同一个 $H,T$。`of_unit_family` 从 `FamilyClassConnected ((GChi PChar.one).cls b)` 导出这些数据，`rh_of_finite_hosts` 由它们推出 RH。每个窗的检验点有限；给定每一组固定损失后，算术假设仍须提供任意晚的窗口及其见证。[同一宿主的逐点比较](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061455789) · [有限采样与宿主推论的内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061515678)
 
+在参考库取 $b=3/2$ 的设计中，常数为 $C_{\mathrm{abs}}=2$、$C_0=3$，所得模一族满足 $e_D=2$、$e_L=0$。给定这样的族，有 $\varepsilon_1>0$，使每个 $0<\varepsilon<\varepsilon_1$ 都能先固定 $K,c_{HH},e_K$，再对每个自然数下界 $A$ 找到 $k\ge\max\{A,2\}$。对整数块 $k^3\le n\le k^4$ 中的每个 $n$，在 $x=n^4$ 取同一宿主和有限集上的 `EAtH` 与 `CoreAtH`。比较的幂指数为 $1/2+(2+0+7)\varepsilon=1/2+9\varepsilon$。给定目标损失 $\kappa>0$，选取足够小的 $\varepsilon$ 使 $9\varepsilon\le\kappa$，这些任意晚的整数块就给出通向 RH 的条件推论。[整数块、设计输入与指数的定向核验](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061662378)
+
+Alpöge 原证明的声明是 `riemannHypothesis : RiemannHypothesis`，其右端为 Mathlib 的定义。Sutherland 公布的审计日志列出该声明的三个公理 `propext`、`Classical.choice`、`Quot.sound`。本节参考算术模块所钉的 `ddf1d5f8` 与登记公开核验的 `6977b88c` 有相同的 `src` 源码树、Lean 工具链与 Lake 锁文件。本节从该算术族到有限采样和整数块的衔接有上文所引的定向内核重放。[原证明公理审计](https://math.mit.edu/~drew/grh/audit.log) · [公开核验文件](https://math.mit.edu/~drew/grh/)
+
 **单调性本身对负部窗口给出什么限制？**
 
 ::: {.theorem #thm-ch31-monotone-window-sharpness title="单调计数的二次深度与三次窗口质量" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MonotoneTailSharpness.monotone_tail_quadratic_depth_cubic_mass"}
