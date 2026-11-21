@@ -683,6 +683,36 @@ Integrating the uncentered fifth root against $dt/t^2$ and multiplying by $\sqrt
 
 For $B>a$, one has $D_{1/3}(a,B)\le(10/9)a^{-1/30}D_{3/10}(a,B)$ by comparing the two power derivatives over $[a,B]$. Thus $R(a,B)/D_{3/10}(a,B)$ tends to $25/6$ as $a\to\infty$, uniformly in all $B>a$, including windows whose length tends to zero.
 
+For the same signed residual $R(a,B)$, keep the fifth term and define
+
+$$
+A_3(x)=18\operatorname{Re}\sum_\rho
+\frac{x^{\rho/3-1/2}}{\rho(3-\rho)(3-2\rho)}.
+$$
+
+The sum runs over the same actual zeros with multiplicity as in the ordinary and square-root primitives.
+
+::: {.theorem #thm-ch31-prime-window-seventh title="The sixth and seventh powers and the cube-root spectrum" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/RHSeventhWindow.prime_window_seventh_of_rh"}
+Under RH, there exist $a_0\ge2$ and $K>0$ such that all real $B\ge a\ge a_0$ satisfy
+
+$$
+\left|R(a,B)-\frac{25}{6}D_{3/10}(a,B)
++\frac{18}{5}D_{1/3}(a,B)-A_3(B)+A_3(a)
+-\frac{49}{15}D_{5/14}(a,B)\right|
+\le K D_{3/8}(a,B).
+$$
+:::
+
+::: proof
+The finite Chebyshev decomposition gives coefficients $-1$ and $+1$ at degrees six and seven, and degree eight cancels. The absolute remainder from degree nine onward is at most $4\ln(t)t^{1/9}$. Under RH, replacing the two Chebyshev values $\vartheta(t^{1/n})$ by $t^{1/n}$ and adding that remainder gives an $O(t^{1/8})$ error. The normalized tail integral gives the main densities $-(6/5)x^{-1/3}$ and $(7/6)x^{-5/14}$ with an arithmetic error density of order $x^{-3/8}$. [Normalized sixth- and seventh-power estimate](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SeventhCutoff.sixth_seventh_normalized)
+
+The cube-root spectral modes have coefficients $-3/[\rho(3-\rho)]$ and phases $e^{i\gamma_\rho\ln(x)/3}$. They decay as $x^{-1/3}$, the order of the sixth-power main term. Each of the centered square- and cube-root tails differs from its spectral density by $O(x^{-1/2})$. The complete-tail explicit formula has an error of the same order, and the centered fifth-root tail is $O(x^{-2/5})$. A common left cutoff makes $-Q_\vartheta(x)$ positive throughout the window, so the negative-part mass becomes a signed integral in log coordinates. Integrating the spectrum term by term gives $A_3(B)-A_3(a)$, and integrating the sixth- and seventh-power densities gives coefficients $-18/5$ and $49/15$. Integrating the error density on the same interval $[\ln a,\ln B]$ gives a constant times $D_{3/8}(a,B)$, including $B=a$.
+
+The reference repository’s `FormBAt.mono` uses monotonicity in the exponent to restrict a pointwise bound to a shorter window with the same left endpoint. Here we compare decay rates at each point of the original window and retain both endpoints. [Window restriction in the reference project](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Window.lean#L37-L44)
+
+The full proof is checked by the Lean kernel.
+:::
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::

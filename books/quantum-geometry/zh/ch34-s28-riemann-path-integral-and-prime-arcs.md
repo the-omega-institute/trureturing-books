@@ -683,6 +683,36 @@ $$
 
 对 $B>a$，在 $[a,B]$ 上比较两个幂函数的导数可得 $D_{1/3}(a,B)\le(10/9)a^{-1/30}D_{3/10}(a,B)$。因此当 $a\to\infty$ 时，$R(a,B)/D_{3/10}(a,B)$ 一致趋于 $25/6$，范围包括所有 $B>a$，也包括宽度趋于零的窗口。
 
+沿用有符号余量 $R(a,B)$，保留五次项，并定义
+
+$$
+A_3(x)=18\operatorname{Re}\sum_\rho
+\frac{x^{\rho/3-1/2}}{\rho(3-\rho)(3-2\rho)}.
+$$
+
+求和仍取原零点谱与平方根谱所用的全部实际零点，重数照计。
+
+::: {.theorem #thm-ch31-prime-window-seventh title="六次幂、七次幂与立方根谱" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/RHSeventhWindow.prime_window_seventh_of_rh"}
+在 RH 下，存在 $a_0\ge2$ 与 $K>0$，使得每一对实数 $B\ge a\ge a_0$ 都满足
+
+$$
+\left|R(a,B)-\frac{25}{6}D_{3/10}(a,B)
++\frac{18}{5}D_{1/3}(a,B)-A_3(B)+A_3(a)
+-\frac{49}{15}D_{5/14}(a,B)\right|
+\le K D_{3/8}(a,B).
+$$
+:::
+
+::: proof
+有限 Chebyshev 分解给第六、七次幂赋予系数 $-1$ 与 $+1$，第八次幂抵消。从第九次幂起，余项绝对值至多为 $4\ln(t)t^{1/9}$。在 RH 下，把前两项中的 $\vartheta(t^{1/n})$ 换成 $t^{1/n}$，与这段余项合并后，所得误差为 $O(t^{1/8})$。对尾积分归一化后，六、七次幂的主密度分别为 $-(6/5)x^{-1/3}$ 和 $(7/6)x^{-5/14}$，算术误差密度为 $O(x^{-3/8})$。 [六、七次幂的归一化估计](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SeventhCutoff.sixth_seventh_normalized)
+
+立方根谱的模态系数为 $-3/[\rho(3-\rho)]$，相位为 $e^{i\gamma_\rho\ln(x)/3}$，其幂衰减为 $x^{-1/3}$，与六次幂主密度同阶。平方根和立方根中心化尾项各自与对应谱密度相差 $O(x^{-1/2})$，完整尾项的显式公式误差也为 $O(x^{-1/2})$。五次根中心化尾项为 $O(x^{-2/5})$。取共同起点足够大，使整个窗口上的 $-Q_\vartheta(x)$ 为正，负部质量便可写成对数坐标下的有符号积分。对谱逐项积分得到 $A_3(B)-A_3(a)$，对六、七次幂的主密度积分得到系数 $-18/5$ 与 $49/15$。在同一个区间 $[\ln a,\ln B]$ 上积分误差密度，所得界为常数乘 $D_{3/8}(a,B)$，涵盖 $B=a$。
+
+参考仓库的 `FormBAt.mono` 利用幂函数关于指数的单调性，把逐点上界限制到左端点相同、右端点更近的窗口。这里直接在原窗口的每一点比较衰减率，并保留两个端点。 [参考仓库的窗口限制](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Window.lean#L37-L44)
+
+完整证明由 Lean 内核检查。
+:::
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::
