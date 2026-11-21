@@ -336,7 +336,7 @@ $$
 \frac{A(s)}s=\frac1s-\sum_\gamma\frac{p_\gamma}{s+b_\gamma}.
 $$
 
-Take two distinguishable real scalar sources. Describe the spectral weight at each mass by a positive semidefinite matrix, with total weight normalized to the identity $I$. Put the matrix $Z$ at zero mass and $p_\gamma(I-Z)$ at squared mass $b_\gamma$, where
+Take two distinguishable real scalar sources. Describe the spectral weight at each mass by a positive semidefinite matrix, with total weight normalized to the identity $I$. Place the matrix $Z$ at zero mass. At squared mass $b_\gamma$, place $p_\gamma(I-Z)$, where
 $$
  Z=\begin{pmatrix}1/2&r\\r&1/2\end{pmatrix},\qquad
  D(s)=\frac{Z}{s}+(I-Z)\sum_\gamma\frac{p_\gamma}{s+b_\gamma}.
@@ -345,10 +345,20 @@ Both $Z$ and $I-Z$ have eigenvalues $1/2\pm r$. Thus all these weights are posit
 
 The same bound on the mixed residue holds for any two-source model with total spectral weight $I$. Its zero-mass spectral matrix $Z_0$ satisfies $0\preceq Z_0\preceq I$. Its expectations on the unit vectors $e_\pm=(1,\pm1)/\sqrt2$ both lie in $[0,1]$, and their difference is $2(Z_0)_{12}$. If $|(Z_0)_{12}|=1/2$, the two expectations must be $0$ and $1$ in some order. A vector on which a positive semidefinite quadratic form vanishes belongs to the kernel of its matrix. Applying this to $Z_0$ and $I-Z_0$ shows that $e_\pm$ are eigendirections and both diagonal entries must equal $1/2$.
 
+Positivity also constrains how the two sources couple to massive modes. Let $v,w$ denote the two source directions, choose the sign so that $r>0$, and write $H(s)=D(s)-Z_0/s$ for the positive semidefinite bilinear form contributed by the massive spectrum. If the mixed response satisfies $sD(v,w)=rA(s)$ and $Z_0(v,w)=r$, then
+$$
+ H(v-w,v-w)=H(v+w,v+w)+\frac{4r[1-A(s)]}{s}.
+$$
+The second term on the right is strictly positive for every $s>0$. The sources must therefore differ in their couplings to the massive spectrum. In the construction with $r=1/2$ the symmetric combination has no massive component, attaining the least possible difference and making the coefficient $4$ sharp.
+
+The tree-level neutral electroweak propagator gives a single-pole comparison. For conserved sources take the transverse propagator. The gauge basis $B,W^3$ is an orthogonal mixture of the massless photon and the massive boson of mass $m_Z$ and field $Z$. Dividing $sD_{BW^3}(s)$ by the massless mixed residue $\sin\theta_W\cos\theta_W$ leaves the two-pole expression $A_Z(s)=m_Z^2/(s+m_Z^2)$. At $s=m_Z^2$ the response takes the value $1/2$. Doubling the momentum magnitude gives $A_Z(4m_Z^2)=1/5$. The arithmetic spectrum predicts approximately $0.330835577358412$ under the same half-value calibration. These are different response shapes. Relating either to an experimental reading requires the external sources and their couplings.
+
 At the endpoint $r=1/2$ of the construction above, the symmetric combination of sources couples only to the massless mode, and the antisymmetric combination couples only to the gapped spectrum. For static point sources at separation $R>0$ in three spatial dimensions, the Green function for each mass $M\gamma$ is $e^{-M\gamma R}/(4\pi R)$. Summing with the mixed spectral residues gives the exchange kernel
 $$
 \frac{r}{4\pi R}\left(1-\sum_\gamma p_\gamma e^{-M\gamma R}\right).
 $$
+At short distances many high-mass modes contribute to the exchange. Put $x=MR$, $h(x)=1-\sum_\gamma p_\gamma e^{-x\gamma}$ and $T=1/x$. For $\gamma\le T$, using $x\gamma$ in place of $1-e^{-x\gamma}$ incurs total error $O(x^2N(T)/S)$. The remaining terms sum to $O(x\log(1/x)/S)$. Partial summation with the Riemann–von Mangoldt count including multiplicity, $N(T)\sim T\log T/(2\pi)$, gives $\sum_{\gamma\le T}m_\gamma/\gamma\sim(\log T)^2/(4\pi)$. Hence $h(x)\sim x[\log(1/x)]^2/(4\pi S)$. The leading short-distance term of the exchange kernel is $rM[\log(1/(MR))]^2/(16\pi^2S)$.
+
 The potential energy also includes the source couplings and their signs. This construction specifies spin zero, a positive spectrum, two sources and a normalization. Identifying a physical interaction requires independent information about the sources, their couplings and the mass scale $M$.
 
 ## 39.2.3 Tier 5: Heap-Geodesic Intelligence and Apophatic Self-Transparency of AXIOM-Ω {#sec-ch39-25-3}
