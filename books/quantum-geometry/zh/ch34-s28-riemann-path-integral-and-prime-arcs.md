@@ -785,6 +785,25 @@ $$
 
 **手工推导。** 固定 $b>1$。对每个实数 $R$ 都存在 $Y\ge\max\{R,2\}$，使同一个 $[Y,Y^b]$ 上每一点都满足 $U(x)\le M\sqrt{x}$，这一条件等价于 RH。在 RH 下取上一定理中的 $D=0$，每个充分晚的窗口都成立。反向只假设任意晚存在这样的窗口。给定 $\kappa>0$，把起点下界提到 $x^\kappa\ge M$ 的阈值以上，再取这样一个窗口，应用 [@thm-ch31-mangoldt-pointwise-power-window] 即可。
 
+::: {.theorem #thm-ch31-mangoldt-log-squared-gap title="临界 Mangoldt 包络下的对数平方差额" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtLogSquareGap.rh_iff_eventually_log_squared_gap"}
+令 $M=2+\gamma_{\mathrm{EM}}-\ln(4\pi)$，即第一 Li 质量（`firstLiMass`）。经典黎曼假设成立，当且仅当对每个实数 $c<1/64$，存在实数 $X_c>1$，使每个实数 $x\ge X_c$ 都满足
+
+$$
+U(x)\le M\sqrt{x}-c(\ln x)^2.
+$$
+:::
+
+::: proof
+令 $y=\ln x$、$q=e^{-y/2}$、$G(y)=qU(e^y)$。沿用上文的谱亏量 $d(t)=M-F(t)$。它在原点右侧满足 $d(t)\sim \tfrac12 t\ln(1/t)$。在 RH 下，把谱的二阶差分与 Mangoldt 斜坡的中点上界比较。这次取步长 $h=yq/4$。把两边除以 $y^2q$ 后，原点项 $2d(h)/(y^2q)$ 趋于 $1/8$，因为 $\ln(1/h)/y\to1/2$。算术中点项 $q^{-1}h\,2\sinh(h/2)/(y^2q)$ 趋于 $1/16$。由 $G(y)$ 最终有界且 $|G(y)-F(y)|=O(q)$，其余各项在同一尺度下趋于零。因此
+
+$$
+\liminf_{y\to\infty}\frac{M-G(y)}{y^2q}
+\ge\frac14\left(\frac18-\frac1{16}\right)=\frac1{64}.
+$$
+
+换回 $x=e^y$，左侧的比值就是 $(M\sqrt{x}-U(x))/(\ln x)^2$，故每个固定 $c<1/64$ 都给出所述尾部估计。反向只需取 $c=1/128$。此时差额最终至少为 $(\ln x)^2/128$，从而趋于正无穷，由 [@thm-ch31-mangoldt-critical-gap] 得到 RH。完整证明由 Lean 内核检查。
+:::
+
 ::: {.theorem #thm-ch31-mangoldt-bounded-gap-peak title="归一化余项在整数对数时间上有界间隔地回近临界质量" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtWindowPhase.bounded_gap_actual_G_peak"}
 设 RH 成立，记 $G(y)=e^{-y/2}U(e^y)$。对每个 $\delta>0$ 存在自然数 $L$，使每个自然数 $n$ 都有某个自然数 $k\le L$ 满足
 

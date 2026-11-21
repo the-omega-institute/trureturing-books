@@ -785,6 +785,25 @@ Conversely, divergence of the gap gives $U(x)\le M\sqrt{x}$ on the entire tail. 
 
 **Hand derivation.** Fix $b>1$. RH is equivalent to the following window condition. For every real $R$ there exists $Y\ge\max\{R,2\}$ such that every point of the same interval $[Y,Y^b]$ satisfies $U(x)\le M\sqrt{x}$. Under RH take $D=0$ in the preceding theorem. Every sufficiently late window then works. For the converse assume such windows exist arbitrarily late. Given $\kappa>0$, increase the starting bound until $x^\kappa\ge M$ throughout the tail, choose one of the windows there, and apply [@thm-ch31-mangoldt-pointwise-power-window].
 
+::: {.theorem #thm-ch31-mangoldt-log-squared-gap title="A logarithm-squared gap below the critical Mangoldt envelope" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtLogSquareGap.rh_iff_eventually_log_squared_gap"}
+Let $M=2+\gamma_{\mathrm{EM}}-\ln(4\pi)$ be the first Li mass (`firstLiMass`). The classical Riemann hypothesis holds if and only if for every real $c<1/64$ there is a real $X_c>1$ such that every real $x\ge X_c$ satisfies
+
+$$
+U(x)\le M\sqrt{x}-c(\ln x)^2.
+$$
+:::
+
+::: proof
+Set $y=\ln x$, $q=e^{-y/2}$ and $G(y)=qU(e^y)$. The spectral deficit $d(t)=M-F(t)$ from the preceding argument satisfies $d(t)\sim \tfrac12 t\ln(1/t)$ as $t\downarrow0$. Under RH, compare the spectral second difference with the midpoint bound for the Mangoldt ramps, now taking the step $h=yq/4$. After division by $y^2q$, the contribution $2d(h)/(y^2q)$ from the origin tends to $1/8$, since $\ln(1/h)/y\to1/2$. The arithmetic midpoint term $q^{-1}h\,2\sinh(h/2)/(y^2q)$ tends to $1/16$. All remaining terms tend to zero on this scale because $G(y)$ is eventually bounded and $|G(y)-F(y)|=O(q)$. Hence
+
+$$
+\liminf_{y\to\infty}\frac{M-G(y)}{y^2q}
+\ge\frac14\left(\frac18-\frac1{16}\right)=\frac1{64}.
+$$
+
+With $x=e^y$, the ratio on the left equals $(M\sqrt{x}-U(x))/(\ln x)^2$, giving the stated tail bound for each fixed $c<1/64$. For the converse take just $c=1/128$. The gap is then eventually at least $(\ln x)^2/128$ and tends to positive infinity, so [@thm-ch31-mangoldt-critical-gap] gives RH. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.theorem #thm-ch31-mangoldt-bounded-gap-peak title="Bounded gaps between returns of the normalized remainder near the critical mass" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtWindowPhase.bounded_gap_actual_G_peak"}
 Assume RH and set $G(y)=e^{-y/2}U(e^y)$. For every $\delta>0$ there is a natural number $L$ such that for every natural number $n$ some natural number $k\le L$ satisfies
 
