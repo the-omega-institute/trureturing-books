@@ -272,7 +272,7 @@ $$
 ::: proof
 Take $0<s\le1/2$. Put $A_s(t)=t-t^2(t-2)/16$ for $2-s<t\le2+s$ and $A_s(t)=t$ elsewhere. The polynomial is increasing on $[3/2,5/2]$. Its values at the left and right cutoffs are at least $2-s$ and at most $2+s$, respectively. Joining the polynomial to the linear pieces therefore gives a nondecreasing function on the real line, nonnegative for $t\ge1$.
 
-Let $Q_s(z)=\int_z^\infty(A_s(t)-t)t^{-2}\,dt$. The integrand is $(2-t)/16$ on the chosen interval and zero elsewhere. Its integral over that interval is zero, so the tail vanishes outside the closed interval and equals $((z-2)^2-s^2)/32$ inside it. The depth and the weighted mass thus satisfy
+Let $Q_s(z)=\int_z^\infty(A_s(t)-t)t^{-2}\,dt$. The integrand is $(2-t)/16$ on the chosen interval and zero elsewhere. Its integral over that interval is zero, so the tail vanishes outside the closed interval and equals $((z-2)^2-s^2)/32$ inside it.
 
 The integral bound uses the length $2s$, the maximum negative part $s^2/32$, and the weight $1/\sqrt z\le1$ on the interval. The full proof is checked by the Lean kernel.
 :::
