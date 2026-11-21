@@ -349,27 +349,97 @@ $$
 :::
 
 ::: {.remark #rem-ch34-burnol-nbb-mollifier-literature title="Burnol 连续缩放子空间下界与磨光器参数 4/7 的文献边界（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 对照解析数论文献时须守住两处边界：其一，J.-F. Burnol（[arXiv:math/0103058v2](https://arxiv.org/abs/math/0103058v2)，Theorem 1.3）在 $L^2(0, \infty)$ 中定义子空间 $B_\lambda$ 为连续缩放分数部函数 $x \mapsto \{\theta / x\}$（$\lambda \le \theta \le 1$）的有限线性组合，记目标 $L^2$ 指示函数 $\chi = 1_{(0, 1)}$ 到 $B_\lambda$ 的 $L^2$ 距离为 $D_\lambda := \operatorname{dist}(\chi, B_\lambda)$，证明了渐近下极限不等式
+**文献结果，未在本书形式化。** 对照解析数论文献时须守住两处边界：其一，J.-F. Burnol（*A lower bound in an approximation problem involving the zeros of the Riemann zeta function*, [arXiv:math/0103058v2](https://arxiv.org/abs/math/0103058v2)，Theorem 1.3）在 $L^2(0, \infty)$ 中定义子空间 $B_\lambda$ 为连续缩放分数部函数 $x \mapsto \{\theta / x\}$（$\lambda \le \theta \le 1$）的有限线性组合，记目标 $L^2$ 指示函数 $\chi = 1_{(0, 1)}$ 到 $B_\lambda$ 的 $L^2$ 距离为 $D_\lambda := \operatorname{dist}(\chi, B_\lambda)$，证明了无条件渐近下极限不等式
 
 $$
 \liminf_{\lambda \to 0^+} D_\lambda\sqrt{\log(1/\lambda)} \;\ge\; \sqrt{\sum_{\operatorname{Re}(\rho)=1/2} \frac{m_\rho^2}{|\rho|^2}}
 $$
 
-（其中右端带 $m_\rho^2$ 之和按**不同**的临界线非平凡零点 $\rho$ 求和，$m_\rho$ 为其重数，且若黎曼猜想不成立则左端发散至 $+\infty$）。注意该文讨论的是**连续缩放子空间 $B_\lambda$**，与离散有限整数 $a = 1, \dots, N$ 生成的有限格拉姆逼近**并非同一个有限问题**；在黎曼猜想成立且全体非平凡零点均为单重的情形下，上式右端根号内的和化为 $2 + \gamma - \log(4\pi) \approx 0.04619$，这并不直接给出任意有限截断规模下的精确等式。其二，分数 $\frac{4}{7}$ 只是特定狄利克雷多项式**磨光器（mollifier）**估计中的对数长度参数，并非普适物理隧穿墙，[arXiv:1207.6583v3](https://arxiv.org/abs/1207.6583v3) 已将特定有限比例磨光器界与任意长磨光器区分开来。
+（其中右端带 $m_\rho^2$ 之和按**不同**的临界线非平凡零点 $\rho$ 求和，$m_\rho$ 为其重数；由外部已验证的 [@conj-riemann-hypothesis] 结合 Báez-Duarte 的离散判据（见 [@rem-ch34-arithmetic-pivot-literature]），离散距离满足 $d_N \to 0$，再由子空间包含关系 $D_{1/N} \le d_N$ 与 $D_\lambda$ 关于 $\lambda$ 的单调性即得连续距离 $D_\lambda \to 0$，而上式 Burnol 下界本身是独立于该收敛性的渐近下限，全体非平凡零点的单重性仍属开放问题）。注意该文讨论的是**连续缩放子空间 $B_\lambda$**，与离散有限整数 $a = 1, \dots, N$ 生成的有限格拉姆逼近**并非同一个有限问题**；在结合 [@conj-riemann-hypothesis] 且若全体非平凡零点均为单重的情形下，上式右端根号内的和化为 $2 + \gamma - \log(4\pi) \approx 0.0461914$（若有重根则因 $m_\rho^2 > m_\rho$ 而严格大于该值），这并不直接给出任意有限截断规模下的精确等式。其二，分数 $\frac{4}{7}$ 只是特定狄利克雷多项式**磨光器（mollifier）**估计中的对数长度参数，并非普适物理隧穿墙，M. Radziwiłł（*Limitations to mollifying $\zeta(s)$*, [arXiv:1207.6583v3](https://arxiv.org/abs/1207.6583v3)，§1 与 Theorem 1）已将特定有限比例磨光器界与任意长磨光器区分开来。
 
-此外，离散伸缩参数 $\theta = 1/n$（$1 \le n \le M$）张成的有限维子空间仅包含于连续子空间 $B_{1/M}$ 之内，二者并非同一有限逼近问题，不能将连续子空间距离 $D_{1/M}$ 与离散子空间逼近距离等同；而在黎曼猜想成立、非平凡零点全为单零点且采用双侧零点计数的约定下，成立 $\liminf_{M \to \infty} D_{1/M}^2 \log M \ge 0.046191\dots$，即 $0.046191\dots$ 是 $D_{1/M}^2 \log M$ 在 $M \to \infty$ 时的渐近 $\liminf$ 下界常数，而非有限 $M$ 处的等式。
+此外，离散伸缩参数 $\theta = 1/n$（$1 \le n \le M$）张成的有限维子空间仅包含于连续子空间 $B_{1/M}$ 之内，二者并非同一有限逼近问题，不能将连续子空间距离 $D_{1/M}$ 与离散子空间逼近距离等同；在 [@conj-riemann-hypothesis] 成立、且采用双侧零点计数的约定下，若零点全为单零点则 $\liminf_{M \to \infty} D_{1/M}^2 \log M \ge 2 + \gamma - \log(4\pi) \approx 0.0461914$（一般重数情形右端不小于该常数），即该常数是 $D_{1/M}^2 \log M$ 在 $M \to \infty$ 时的渐近 $\liminf$ 下界常数，而非有限 $M$ 处的等式。
 :::
 
-在由连续子空间迈向离散与局部化算术逼近之前，须先澄清空间侧的一件基本事实：**真实的 Nyman–Beurling 格拉姆矩阵从一开始就不是稀疏矩阵**。对任意正整数 $a, b \ge 1$，取分数部函数 $f_a(x) := \{1/(ax)\}$，其中 $\{u\} = u - \lfloor u\rfloor \in [0, 1)$。由于被积项在 $(0, \infty)$ 上逐点非负，且当 $x > 1$ 时恒有 $0 < \frac{1}{ax} < 1$ 从而 $f_a(x) = \frac{1}{ax}$，仅在半轴 $(1, \infty)$ 上积分便得逐元严格正下界
+在由连续子空间迈向离散与局部化算术逼近之前，须先澄清空间侧的一件基本事实：**真实的 Nyman–Beurling 格拉姆矩阵从一开始就不是稀疏矩阵**。对任意正整数 $a, b \ge 1$，取分数部函数 $f_a(x) := \{1/(ax)\}$，其中 $\{u\} = u - \lfloor u\rfloor \in [0, 1)$。由于被积项在 $(0, \frac{1}{\min(a,b)})$ 上几乎处处严格为正，且当 $x > \frac{1}{\min(a,b)}$ 时恒有 $0 < \frac{1}{ax}, \frac{1}{bx} < 1$ 从而 $f_a(x) = \frac{1}{ax}$、$f_b(x) = \frac{1}{bx}$，舍去 $(0, \frac{1}{\min(a,b)})$ 上的严格正积分贡献即给出比仅积 $(1, \infty)$ 所得 $\frac{1}{ab}$ 逐元严格正下界（右端不小于 $1/(ab)$）
 
 $$
-G^{\mathrm{NB}}_{ab} \;=\; \int_0^\infty \left\{\frac{1}{ax}\right\}\left\{\frac{1}{bx}\right\}dx \;\ge\; \int_1^\infty \frac{dx}{ab\,x^2} \;=\; \frac{1}{ab} \;>\; 0.
+G^{\mathrm{NB}}_{ab} \;=\; \int_0^\infty \left\{\frac{1}{ax}\right\}\left\{\frac{1}{bx}\right\}dx \;>\; \int_{1/\min(a,b)}^\infty \frac{dx}{ab\,x^2} \;=\; \frac{1}{\max(a, b)} \;>\; 0.
 $$
 
-由于分数部核在无穷远处按双曲尾部 $1/(ax)$ 缓慢衰减，任意两列伸缩基函数都在 $(1, \infty)$ 上产生不可抵消的正重叠：不同于仅在消去公共枢纽后才生出填充边的稀疏图矩阵，$G^{\mathrm{NB}}$ 在任何消元启动前就已全矩阵稠密，不存在可供保留的结构零元。既然空间侧内积天然稠密，另一条思路便转向傅里叶—韦伊谱侧：试想在实轴有限窗口 $[-R, R]$ 内配置光滑偶波包 $g$，要求其变换在一对共轭镜像谱点 $t \pm i\eta$ 处分别读出相反符号 $+1$ 与 $-1$；一旦谱点逼近临界线对应的实轴（$\eta \to 0$）或逼近对称虚轴（$t \to 0$），偶性与有限支集便会急剧压缩核函数的差分杠杆，迫使波包支付可量化的幅值与曲率账单。
+由于分数部核在无穷远处按双曲尾部 $1/(ax)$ 缓慢衰减，任意两列伸缩基函数都在 $\bigl(\frac{1}{\min(a,b)}, \infty\bigr)$ 上产生不可抵消的正重叠：不同于仅在消去公共枢纽后才生出填充边的稀疏图矩阵，$G^{\mathrm{NB}}$ 在任何消元启动前就已全矩阵稠密，不存在可供保留的结构零元。下条注记直接对真实的 $G^{\mathrm{NB}}_N$（而非教学整除图模型）建立精确闭式、无条件双边多项式谱界与条件数律，并用 65 位精度反例证伪固定绝对阈值舒尔裁剪。
 
-::: {.remark #rem-ch34-signed-orbit-support-budget title="紧支集偶函数分辨带符号轨道的支集—幅值必要预算（应用推导，未形式化）"}
-**来源与验证状态。** 本注记给出紧支集偶测试函数分辨单条带符号谱轨道的初等必要判据，判据本身由下文初等推导独立给出。该应用尚未形式化：下文提到的 `UnitSupportBurnolPacket`、`OrbitBurnolPacket` 等构造名指尚未冻结的候选构造，其支集窗口在此作为假设使用；新增必要预算由本注记书面推导负责。对于一般指数型函数，经典的共轭点差分界见 R. P. Boas, Jr., [10.7146/math.scand.a-10453](https://doi.org/10.7146/math.scand.a-10453) 第 29 页式 (1.3)；对测试函数施加偶性后额外出现的低频反射因子 $m = \min(1, R|t|)$、二阶导数射流约束及带符号包读出关系，均由下文初等推导直接给出。
+::: {.remark #rem-ch34-nbb-gram-spectral-and-pruning title="实际 NBB 格拉姆矩阵的精确闭式、无条件双边多项式谱界与固定阈值舒尔裁剪反例（手工推导、经典文献与高精度数值核验）"}
+**来源与验证状态。** 设 $N \ge 1$，记真实 Nyman–Beurling–Báez-Duarte（NBB）格拉姆矩阵 $G^{\mathrm{NB}}_N := \bigl[\langle f_a, f_b\rangle_{L^2(0,\infty)}\bigr]_{a,b=1}^N$、常数 $C := \ln(2\pi) - \gamma \approx 1.2606614015$、对角归一化相关矩阵 $H^{\mathrm{NB}}_N := D_N G^{\mathrm{NB}}_N D_N$（其中 $(D_N)_{aa} := \sqrt{a / C}$，故 $(H^{\mathrm{NB}}_N)_{aa} = 1$）、谐和数 $H_N := \sum_{k=1}^N \frac{1}{k}$，以及右端内积向量 $b_a = \langle f_a, \chi\rangle = \frac{\ln a + 1 - \gamma}{a}$（已在所钉仓库冻结为 [`fractional_reciprocal_inner_product`](lean:D5/S3/Constants/InnerProducts/FractionalReciprocalInnerProduct.fractional_reciprocal_inner_product)，有限距离公式 $d_N^2 = 1 - b^\top (G^{\mathrm{NB}}_N)^{-1} b$ 见 [@prop-ch34-nyman-beurling-frozen-facts] 与 [`nyman_beurling_finite_gram_distance`](lean:D5/S3/Observer/Hilbert/NymanBeurlingFiniteGramDistance.nyman_beurling_finite_gram_distance)）。下文第 1 款的 Vasyunin 闭式属经典文献结果（已见 [@ex-ch34-nyman-beurling-numbers]），第 2–4 款的双边谱界、条件数指数、$L^2$ 残差扰动恒等式与固定阈值裁剪反例均为本注记无条件手工推导与 65–82 位高精度数值核验（不依赖 [@conj-riemann-hypothesis]）。
+
+1. **Vasyunin 精确闭式与梅林—普朗歇尔 Bochner 表示（文献结果 $+$ 手工推导）**：令 $d = \gcd(a, b)$、$p = a / d$、$q = b / d$，定义 Vasyunin 余切和 $V(p, q) := \sum_{k=1}^{q-1} \bigl\{\frac{kp}{q}\bigr\}\cot\frac{\pi k}{q}$（$q = 1$ 时为空和 $0$）。由 V. I. Vasyunin（1995）、L. Báez-Duarte, M. Balazard, B. Landreau & E. Saias（*Étude de l'autocorrélation multiplicative de la fonction « partie fractionnaire »*, *Ramanujan J.* **9**, 215–240, 2005，[10.1007/s11139-005-0834-4](https://doi.org/10.1007/s11139-005-0834-4)；工作稿 [arXiv:math/0306251v1](https://arxiv.org/abs/math/0306251v1) Propositions 87, 89）与 S. Bettin & J. B. Conrey（*Period functions and cotangent sums*, *Algebra Number Theory* **7**, 215–242, 2013，[10.2140/ant.2013.7.215](https://doi.org/10.2140/ant.2013.7.215)，Eq. (13)），任意一对正整数 $(a, b)$ 精确满足缩放律 $G^{\mathrm{NB}}_{da, db} = \frac{1}{d} G^{\mathrm{NB}}_{a, b}$、对角闭式 $G^{\mathrm{NB}}_{aa} = \frac{C}{a}$ 以及有限初等和闭式
+   $$
+   G^{\mathrm{NB}}_{ab} \;=\; \frac{C(a + b) + (a - b)\ln(b/a) - \pi d\,\bigl[V(p, q) + V(q, p)\bigr]}{2ab}.
+   $$
+   另一方面，在已冻结的梅林恒等式 [`fractionalMellin_eq_zeta`](lean:D5/S3/Weil/ZetaPntBounds/NymanFractionalMellin.fractionalMellin_eq_zeta)（对 $0 < \theta \le 1$ 与 $0 < \operatorname{Re} s < 1$，有 $\int_0^1 \{\theta/x\}x^{s-1}\,dx = \frac{\theta}{s-1} - \frac{\theta^s\zeta(s)}{s}$；此处取 $\theta = 1/a \in (0, 1]$）两侧加上 $(1, \infty)$ 上的初等积分 $\int_1^\infty \frac{\theta}{x}x^{s-1}\,dx = -\frac{\theta}{s-1}$（$0 < \operatorname{Re} s < 1$），极点项精确消去得 $(\mathcal{M} f_a)(s) = -a^{-s}\zeta(s)/s$；由 $L^2(0,\infty)$ 上的梅林—普朗歇尔等距即得正谱密度 Bochner 表示（手工推导）：
+   $$
+   G^{\mathrm{NB}}_{ab} \;=\; \frac{1}{2\pi}\int_{-\infty}^{\infty} \frac{\lvert\zeta(\frac{1}{2} + it)\rvert^2}{\frac{1}{4} + t^2}\,a^{-\frac{1}{2} - it}\,b^{-\frac{1}{2} + it}\,dt,
+   $$
+   可见缩放核 $\sqrt{ab}\,G^{\mathrm{NB}}_{ab}$ 仅依赖于对数比值 $\ln(a/b)$。对全部 $78$ 个上三角矩阵元 $(a, b)$（$1 \le a \le b \le 12$，含对角元），上述闭式与 82 位精度分段三伽马积分 $G^{\mathrm{NB}}_{ab} = \frac{1}{L}\int_0^1 \{Lt/a\}\{Lt/b\}\psi_1(t)\,dt$（$L = \operatorname{lcm}(a, b)$）最大偏差仅为 $2.48\times 10^{-83}$，且经 132 项 $\psi_1(1 + t)$ 泰勒区间证书逐项包络确认全部区间宽度小于 $1.89\times 10^{-61}$（`NUM`）。
+
+2. **无条件双边多项式谱界与二次条件数律（手工推导，不依赖 RH）**：对一切 $N \ge 2$，记相邻伸缩差模方 $L_N := \bigl\lVert N f_N - (N - 1) f_{N-1}\bigr\rVert_{L^2(0,\infty)}^2$。则 $L_N$ 具有精确闭式与渐近式
+   $$
+   L_N \;=\; \ln\frac{N}{N - 1} + \pi\bigl[V(1, N - 1) - V(1, N)\bigr] \;=\; \ln N + 1 - C + \frac{1}{2N} + O\!\left(\frac{1}{N^2}\right),
+   $$
+   并且 $G^{\mathrm{NB}}_N$ 与 $H^{\mathrm{NB}}_N$ 对**每一个 $N \ge 2$** 均无条件严格正定且服从显式双边特征值与条件数界：
+   $$
+   \begin{aligned}
+   \frac{1}{36 N^2 H_N^2} &\;\le\; \lambda_{\min}\bigl(G^{\mathrm{NB}}_N\bigr) \;\le\; \frac{L_N}{N^2 + (N - 1)^2}, \qquad &
+   C &\;\le\; \lambda_{\max}\bigl(G^{\mathrm{NB}}_N\bigr) \;\le\; C H_N, \\
+   \frac{1}{36 C N H_N^2} &\;\le\; \lambda_{\min}\bigl(H^{\mathrm{NB}}_N\bigr) \;\le\; \frac{L_N}{C(2N - 1)}, \qquad &
+   \frac{2N - 1}{3C} &\;\le\; \lambda_{\max}\bigl(H^{\mathrm{NB}}_N\bigr) \;\le\; N.
+   \end{aligned}
+   $$
+   由此立即锁定两者的渐近多项式指数：$\lambda_{\min}(G^{\mathrm{NB}}_N) = N^{-2 + o(1)}$、$\lambda_{\min}(H^{\mathrm{NB}}_N) = N^{-1 + o(1)}$；尽管对角归一化把最小特征值的渐近标度从 $N^{-2 + o(1)}$ 抬升至 $N^{-1 + o(1)}$（抬升因子为 $N^{1 + o(1)}$），它同时把最大特征值从区间 $[C, C H_N]$（量级 $N^{o(1)}$）推升至 $\Theta(N)$，使得**两者的 $2$-条件数均按二次多项式指数 $N^{2 + o(1)}$ 增长**：
+   $$
+   \frac{C\bigl(N^2 + (N - 1)^2\bigr)}{L_N} \;\le\; \kappa_2\bigl(G^{\mathrm{NB}}_N\bigr) \;\le\; 36 C N^2 H_N^3, \qquad
+   \frac{(2N - 1)^2}{3 L_N} \;\le\; \kappa_2\bigl(H^{\mathrm{NB}}_N\bigr) \;\le\; 36 C N^2 H_N^2,
+   $$
+   即 $\kappa_2(G^{\mathrm{NB}}_N) = N^{2 + o(1)}$ 与 $\kappa_2(H^{\mathrm{NB}}_N) = N^{2 + o(1)}$。
+
+   **证明。** *下界*：对任意 $c = (c_1, \dots, c_N) \in \mathbb{C}^N$，令 $g(u) := \sum_{a=1}^N c_a \{u/a\}$，经换元 $u = 1/x$ 有 $c^* G^{\mathrm{NB}}_N c = \int_0^\infty \lvert g(u)\rvert^2 \frac{du}{u^2}$。在每个开单位区间 $(j - 1, j)$（$j \in \mathbb{Z}_{\ge 1}$）内不含整数，故每个 $\{u/a\}$ 在其上仿射线性，从而 $g$ 在 $(j - 1, j)$ 上仿射；在整数 $j \ge 1$ 处的下跳幅恰为 $J_j := g(j^-) - g(j^+) = \sum_{a \mid j} c_a$。对任意复仿射函数 $\ell(t) = \ell(0)(1 - t) + \ell(1)t$（$t \in [0, 1]$），直接展开得精确恒等式 $4\int_0^1 \lvert\ell(t)\rvert^2\,dt - \lvert\ell(0)\rvert^2 = \frac{1}{3}\lvert\ell(0) + 2\ell(1)\rvert^2 \ge 0$ 与 $4\int_0^1 \lvert\ell(t)\rvert^2\,dt - \lvert\ell(1)\rvert^2 = \frac{1}{3}\lvert 2\ell(0) + \ell(1)\rvert^2 \ge 0$。在 $(j - 1, j)$ 上 $\frac{1}{j^2} \le \frac{1}{u^2}$，故 $\frac{\lvert g(j^-)\rvert^2}{j^2} \le 4\int_{j-1}^j \lvert g(u)\rvert^2\frac{du}{u^2}$；在 $(j, j + 1)$ 上 $u \le j + 1 \le 2j$ 即 $\frac{1}{j^2} \le \frac{4}{u^2}$，故 $\frac{\lvert g(j^+)\rvert^2}{j^2} \le 16\int_j^{j+1}\lvert g(u)\rvert^2\frac{du}{u^2}$。利用精确平方恒等式 $3\lvert z\rvert^2 + \frac{3}{2}\lvert w\rvert^2 - \lvert z - w\rvert^2 = \lvert\sqrt{2}z + \frac{1}{\sqrt{2}}w\rvert^2 \ge 0$ 得
+   $$
+   \frac{\lvert J_j\rvert^2}{j^2} \;\le\; 12\int_{j-1}^j \lvert g(u)\rvert^2\frac{du}{u^2} + 24\int_j^{j+1} \lvert g(u)\rvert^2\frac{du}{u^2}.
+   $$
+   对 $j = 1, \dots, N$ 求和（每段内部区间至多出现两次，总系数 $12 + 24 = 36$）得 $\sum_{j=1}^N \frac{\lvert J_j\rvert^2}{j^2} \le 36\int_0^{N+1}\lvert g(u)\rvert^2\frac{du}{u^2} \le 36\,c^* G^{\mathrm{NB}}_N c$。对 $J_j = \sum_{a \mid j} c_a$ 施行莫比乌斯反演 $c_a = \sum_{k \mid a} \mu(k) J_{a/k}$ 并除以 $a$，记 $v_j := J_j / j$ 及 $\ell^2$-压缩伸缩算子 $(D_k v)_a := v_{a/k}$ 若 $k \mid a$、否则为 $0$（满足 $\lVert D_k v\rVert_2 \le \lVert v\rVert_2$），三角不等式给出
+   $$
+   \left(\sum_{a=1}^N \frac{\lvert c_a\rvert^2}{a^2}\right)^{1/2} \;=\; \left\lVert\sum_{k=1}^N \frac{\mu(k)}{k} D_k v\right\rVert_2 \;\le\; \left(\sum_{k=1}^N \frac{\lvert\mu(k)\rvert}{k}\right)\lVert v\rVert_2 \;\le\; H_N \lVert v\rVert_2.
+   $$
+   平方即得 $\sum_{a=1}^N \frac{\lvert c_a\rvert^2}{a^2} \le 36 H_N^2\, c^* G^{\mathrm{NB}}_N c$。代入 $\frac{1}{N^2}\lVert c\rVert_2^2 \le \sum_{a=1}^N \frac{\lvert c_a\rvert^2}{a^2}$ 立证 $\lambda_{\min}(G^{\mathrm{NB}}_N) \ge \frac{1}{36 N^2 H_N^2}$；再取 $c_a = \sqrt{a}\,x_a$，由 $x^* H^{\mathrm{NB}}_N x = \frac{1}{C}c^* G^{\mathrm{NB}}_N c$ 与 $\frac{1}{N}\lVert x\rVert_2^2 \le \sum_{a=1}^N \frac{\lvert c_a\rvert^2}{a^2}$ 立证 $\lambda_{\min}(H^{\mathrm{NB}}_N) \ge \frac{1}{36 C N H_N^2}$。
+
+   *上界与最大特征值*：因 $N\{u/N\} - (N - 1)\{u/(N - 1)\} \equiv 0$ 在 $(0, N - 1)$ 上恒为零，直接以 Vasyunin 闭式展开 $L_N = N^2 G^{\mathrm{NB}}_{NN} + (N - 1)^2 G^{\mathrm{NB}}_{N-1,N-1} - 2N(N - 1)G^{\mathrm{NB}}_{N-1,N}$ 并用 $\gcd(N - 1, N) = 1$、$V(N - 1, N) = -V(1, N)$（由 $\sum_{k=1}^{N-1}\cot\frac{\pi k}{N} = 0$）与 $V(N, N - 1) = V(1, N - 1)$，即得 $L_N = \ln\frac{N}{N - 1} + \pi\bigl[V(1, N - 1) - V(1, N)\bigr]$。从 $x\cot(\pi x)$ 中减去端点极点 $-\frac{1}{\pi(1 - x)}$ 并对光滑函数 $h(x) := x\cot(\pi x) + \frac{1}{\pi(1 - x)}$ 施欧拉—麦克劳林公式（$\int_0^1 h(x)\,dx = \frac{\ln(2\pi)}{\pi}$，$h(0) = \frac{2}{\pi}$，$h(1) = \frac{1}{\pi}$，$h'(0) = \frac{1}{\pi}$，$h'(1) = -\frac{\pi}{3}$），可得 $\pi V(1, n) = -n(\ln n - C) - 1 - \frac{\pi^2}{36n} + O(n^{-3})$，作差即得 $L_N = \ln N + 1 - C + \frac{1}{2N} + O(N^{-2})$。以试探向量 $u_N := (N e_N - (N - 1)e_{N-1})/\sqrt{N^2 + (N - 1)^2}$ 用于 $G^{\mathrm{NB}}_N$、以 $(\sqrt{N} e_N - \sqrt{N - 1}e_{N-1})/\sqrt{2N - 1}$ 用于 $H^{\mathrm{NB}}_N$，立得两条 $\lambda_{\min}$ 上界。最大特征值方面：$C = G^{\mathrm{NB}}_{1,1} \le \lambda_{\max}(G^{\mathrm{NB}}_N) \le \operatorname{tr}(G^{\mathrm{NB}}_N) = C H_N$；而由前文 $G^{\mathrm{NB}}_{ab} \ge \frac{1}{\max(a, b)}$ 得 $H^{\mathrm{NB}}_{ab} \ge \frac{1}{C}\sqrt{\frac{\min(a,b)}{\max(a,b)}}$，在全一单位向量 $\frac{1}{\sqrt{N}}\mathbf{1}_N$ 上由 $\sum_{a=1}^b \sqrt{a} \ge \int_0^b \sqrt{t}\,dt = \frac{2}{3}b^{3/2}$ 得 $\lambda_{\max}(H^{\mathrm{NB}}_N) \ge \frac{1}{NC}\bigl(2\sum_{b=1}^N \frac{2}{3}b - N\bigr) = \frac{2N - 1}{3C}$，且 $\lambda_{\max}(H^{\mathrm{NB}}_N) \le \operatorname{tr}(H^{\mathrm{NB}}_N) = N$。$\square$
+
+3. **对称近似消元的 $L^2(0,\infty)$ 精确残差扰动恒等式（手工推导）**：设任何压缩或近似舒尔消元方案将 $G := G^{\mathrm{NB}}_N$ 替换为实对称近似矩阵 $\widetilde{G} = G + E$，满足 $\lVert E\rVert_2 < \lambda_{\min}(G)$（从而 $\widetilde{G} \succ 0$）。记近似系数 $\tilde{c} := \widetilde{G}^{-1} b$、近似残差 $\widetilde{d}_N^2 := 1 - b^\top \widetilde{G}^{-1} b$，以及由 $\tilde{c}$ 在原 $L^2(0,\infty)$ 空间中诱导的**真实残差平方** $d_{\mathrm{true}}^2(\tilde{c}) := \bigl\lVert\chi - \sum_{a=1}^N \tilde{c}_a f_a\bigr\rVert_{L^2(0,\infty)}^2 = d_N^2 + (\tilde{c} - G^{-1}b)^\top G(\tilde{c} - G^{-1}b)$。由 $G(\tilde{c} - G^{-1}b) = -E\tilde{c}$ 与预解恒等式 $\widetilde{G}^{-1} - G^{-1} = -G^{-1} E \widetilde{G}^{-1}$，精确成立：
+   $$
+   d_{\mathrm{true}}^2(\tilde{c}) - d_N^2 \;=\; \bigl\lVert G^{-1/2} E \widetilde{G}^{-1} b\bigr\rVert_2^2 \;\le\; \frac{\lVert E\rVert_2^2\,\lVert\tilde{c}\rVert_2^2}{\lambda_{\min}(G)}, \qquad
+   \bigl\lvert\widetilde{d}_N^2 - d_N^2\bigr\rvert \;\le\; \frac{\lVert E\rVert_2\,\lVert b\rVert_2^2}{\lambda_{\min}(G)\bigl(\lambda_{\min}(G) - \lVert E\rVert_2\bigr)}.
+   $$
+   结合第 2 款的上界 $\lambda_{\min}(G) \le \frac{L_N}{N^2 + (N - 1)^2} = O\!\left(\frac{\ln N}{N^2}\right)$ 可知：上述保证正定性与可控 $L^2$ 残差偏差的充分条件 $\lVert E\rVert_2 < \lambda_{\min}(G)$ 要求谱扰动范数严格低于 $\lambda_{\min}(G)$，特别须满足上界 $\lVert E\rVert_2 < \frac{L_N}{N^2 + (N - 1)^2} = O\!\left(\frac{\ln N}{N^2}\right)$（例如由第 2 款下界可知 $\lVert E\rVert_2 < \frac{1}{36 N^2 H_N^2}$ 即可确保进入该充分区间），因此任何维持常数阶谱误差的固定绝对阈值裁剪策略在大 $N$ 下都不再落入这一充分证书范围；对真实 $G^{\mathrm{NB}}_N$ 与 $H^{\mathrm{NB}}_N$ 而言，固定绝对阈值裁剪究竟会在何处实际破坏正定性，由下文第 4 款的显式反例直接给出。
+
+4. **实际 $G^{\mathrm{NB}}_N$ 谱表、固定阈值舒尔裁剪证伪反例与非对角块奇异谱（`NUM`，65 位十进制计算并与双精度交叉核验）**：
+   先列精确谱与真实 NBB 距离平方（下表数值由 65 位精度计算并四舍五入至所示位数，与双精度特征值相对偏差 $< 1.6\times 10^{-13}$、$d_N^2$ 偏差 $< 4.2\times 10^{-16}$）：
+
+   | $N$ | $\lambda_{\max}(G^{\mathrm{NB}}_N)$ | $\lambda_{\min}(G^{\mathrm{NB}}_N)$ | $\kappa_2(G^{\mathrm{NB}}_N)$ | $\lambda_{\min}(H^{\mathrm{NB}}_N)$ | $\kappa_2(H^{\mathrm{NB}}_N)$ | $d_N^2$ | $(\ln N)\,d_N^2$ | 试探商 $u_N^\top G u_N / \lambda_{\min}(G)$ |
+   | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+   | **$2$** | $1.77954$ | $1.11448\times 10^{-1}$ | $15.968$ | $1.33733\times 10^{-1}$ | $13.955$ | $0.289965$ | $0.200988$ | $1.244$ |
+   | **$8$** | $2.85453$ | $1.42229\times 10^{-2}$ | $200.70$ | $6.51743\times 10^{-2}$ | $102.34$ | $0.024161$ | $0.050242$ | $1.171$ |
+   | **$32$** | $3.81823$ | $9.97655\times 10^{-4}$ | $3827.2$ | $1.84249\times 10^{-2}$ | $1388.9$ | $0.014052$ | $0.048700$ | $1.626$ |
+   | **$64$** | $4.23451$ | $2.80096\times 10^{-4}$ | $15118$ | $1.01399\times 10^{-2}$ | $5009.0$ | $0.011376$ | $0.047312$ | $1.729$ |
+   | **$128$** | $4.60766$ | $7.26460\times 10^{-5}$ | $63426$ | $5.44004\times 10^{-3}$ | $18600$ | $0.009659$ | $0.046864$ | $1.946$ |
+
+   *针对真实 $G^{\mathrm{NB}}_N$ 与 $H^{\mathrm{NB}}_N$ 上叶优先整除序绝对阈值舒尔裁剪的反例检验*：先消去 NBB 指标 $1$，其余指标沿用本节 $\{2,\dots,N\}$ 整除图的动态最小度序（在该图上更新填充、平手取最大指标，保留末块 $4a > 3N$），在真实 $G^{\mathrm{NB}}_N$ 与 $H^{\mathrm{NB}}_N$ 上测试对原始矩阵、末舒尔块或每步主元后实施绝对阈值裁剪 $\tau \in \{10^{-2}, 10^{-3}, 10^{-4}, 10^{-5}\}$（保留对角元，舍去绝对值小于 $\tau$ 的对称非对角元；65 位重算核验残差偏差 $< 2.6\times 10^{-12}$）：
+   - **实测固定绝对阈值直接破坏正定性并放大真实残差平方**：在 $N = 64$、末舒尔块裁剪 $\tau = 10^{-3}$ 时，仅相对谱误差 $\lVert E\rVert_2 / \lVert G\rVert_2 = 9.06\times 10^{-4}$ 即在等效全矩阵中催生 **$2$ 个负特征值**（$\lambda_{\min} = -3.81\times 10^{-4}$）；在 $N = 128$、末舒尔块裁剪 $\tau = 10^{-3}$ 时出现 **$7$ 个负特征值**（$\lambda_{\min} = -1.49\times 10^{-3}$），真实残差平方 $d_{\mathrm{true}}^2$ 从最优基准 $d_{128}^2 \approx 0.009659$ 升至 $0.018048$；在 $N = 128$、每步主元后裁剪原始 $G^{\mathrm{NB}}_{128}$ 且 $\tau = 10^{-4}$ 时，相对谱误差仅 **$0.060\%$**（$6.00\times 10^{-4}$），却产生 **$14$ 个负特征值**（$\lambda_{\min} = -3.72\times 10^{-4}$），并将真实 $L^2$ 残差平方拉爆至 **$3.5390$（最优残差平方的 $366$ 倍，即 $L^2$ 残差范数的 $19.1$ 倍）**！即便换用对角归一化 $H^{\mathrm{NB}}_{128}$，每步主元后按 $\tau = 10^{-2}$ 裁剪仍产生 **$20$ 个负特征值**（$d_{\mathrm{true}}^2 = 2.110$），而在 $\tau = 10^{-3}$ 处虽保正定，仍使真实 $L^2$ 残差平方翻倍至 $0.01936$。上述反例直接证伪了在该整除消元序与实测固定绝对阈值（$10^{-2}$ 至 $10^{-4}$）下保持正定性与可控残差的设想；若采用第 3 款的充分证书，则所允许的谱误差上限随 $N$ 收缩。
+   - **非对角块奇异谱与 Vasyunin 余项相消现象**：将 $G^{\mathrm{NB}}_{ab}$ 拆为秩至多 $4$ 的光滑背景 $K^{\mathrm{smooth}}_{ab} := \frac{C(a+b)+(a-b)\ln(b/a)}{2ab}$ 与 Vasyunin 余切余项 $R_{ab} := -\frac{\pi d}{2ab}[V(p,q)+V(q,p)]$，在 $N = 64, 128, 256$ 上对分离块（$\{1,\dots,N/4\} \times \{3N/4+1,\dots,N\}$）与相邻块（$\{1,\dots,N/2\} \times \{N/2+1,\dots,N\}$）作 65–70 位高精度奇异值分解核验（并与双精度交叉印证；例如在 $N = 64$ 分离块上，双精度与 70 位结果对全部奇异值的最大逐元相对偏差为 $1.09\times 10^{-12}$）：虽然 $G^{\mathrm{NB}}$ 的非对角奇异值随序号衰减且未在 $N \le 256$ 呈现平坦算术下限，但 $K^{\mathrm{smooth}}$ 与 $R$ 之间存在剧烈抵消——在 $N = 256$ 时 $\lVert R\rVert_2$ 反而是原块 $\lVert G^{\mathrm{NB}}\rVert_2$ 的 **$29.1$ 倍（分离块）与 $19.9$ 倍（相邻块）**（归一化矩阵 $D R D$ 亦为 $7.21$ 倍与 $3.75$ 倍）。在共同容差 $10^{-4}\lVert G_{\text{block}}\rVert_2$ 下，原块 $G^{\mathrm{NB}}$ 的数值秩随 $N = 64 \to 128 \to 256$ 持续爬升（分离块 $12 \to 19 \to 23$，相邻块 $24 \to 39 \to 42$），而余项 $R$ 在同一容差下的数值秩与之几乎完全重合（$N = 64$ 分离块为 $11$ 对 $12$、$N = 128$ 相邻块为 $38$ 对 $39$，至 $N = 256$ 两类块均与原块持平，分别为 $23$ 与 $42$）；因此面向真实 $G^{\mathrm{NB}}_N$ 的一致多级低秩（$\mathcal{H}$-矩阵）证书及其复杂度仍保持为开放问题。
+:::
+
+既然空间侧内积天然稠密且条件数按 $N^{2+o(1)}$ 增长，另一条思路便转向傅里叶—韦伊谱侧：试想在实轴有限窗口 $[-R, R]$ 内配置光滑偶波包 $g$，要求其变换在一对共轭镜像谱点 $t \pm i\eta$ 处分别读出相反符号 $+1$ 与 $-1$；一旦谱点逼近临界线对应的实轴（$\eta \to 0$）或逼近对称虚轴（$t \to 0$），偶性与有限支集便会急剧压缩核函数的差分杠杆，迫使波包支付可量化的幅值与曲率账单。
+
+::: {.remark #rem-ch34-signed-orbit-support-budget title="紧支集偶函数分辨带符号轨道的支集—幅值必要预算与精确 L2 极小范数（应用推导，未形式化）"}
+**来源与验证状态。** 本注记给出紧支集偶测试函数分辨单条带符号谱轨道的初等必要判据与精确 $L^2$ 极小范数闭式，判据与闭式均由下文初等推导独立给出。该应用未在本节引用为绿色 `lean=` 核验定理：下文提到的 `UnitSupportBurnolPacket`、`OrbitBurnolPacket` 等构造名对应 `trureturing` 中用于研究有限谱轨道包的构造，单位支集存在性及合成支集上界分别见冻结声明 [`exists_unit_support_orbitBurnolPacket`](lean:D5/S3/Weil/BurnolGram/UnitSupportBurnolPacket.exists_unit_support_orbitBurnolPacket) 与 [`unit_support_burnol_radius`](lean:D5/S3/Weil/BurnolGram/UnitSupportBurnolPacket.unit_support_burnol_radius)，而本注记的必要预算与精确 $L^2$ 极小值由下文书面推导独立负责。对于一般指数型函数，经典的增长与不等式背景见 R. P. Boas, Jr.（*Inequalities for functions of exponential type*, *Math. Scand.* **4**, 29–32, 1956，[10.7146/math.scand.a-10453](https://doi.org/10.7146/math.scand.a-10453)）；下文共轭点差分界、对测试函数施加偶性后出现的低频反射因子 $m = \min(1, R|t|)$、二阶导数射流约束、精确 $L^2$ 舒尔补极小范数及带符号包读出关系，均由下文初等推导直接给出。
 
 **无量纲归一化、变换约定与两条必要不等式。** 在黎曼 $\zeta$ 谱映射 $\rho = \beta + it$ 下，离线位移 $\eta = \frac{1}{2} - \beta$ 与谱高度 $t$ 均为无量纲纯数，切勿与量子力学中带量纲的物理虚动量 $i\hbar\kappa$ 混同。以下统一固定满足 $t\eta \neq 0$ 的无量纲谱坐标 $t, \eta \in \mathbb{R}$ 以及与之对偶的无量纲实轴坐标 $x \in \mathbb{R}$，从而支集半宽上限 $R > 0$ 亦无量纲。取任意光滑复值偶函数 $g : \mathbb{R} \to \mathbb{C}$，满足 $g(-x) = g(x)$ 且支集包含关系 $\operatorname{supp} g \subseteq [-R, R]$，采用实轴上指数不含 $2\pi$ 的角频率傅里叶—拉普拉斯变换
 
@@ -398,7 +468,7 @@ $$
 L_0 + L_2 \;\ge\; \frac{1 + |t^2 - \eta^2|}{S}.
 $$
 
-须注意，$1/S$ 与有限误差下的 $(1 - \varepsilon)/S$ 来自核函数逐点绝对值放缩，仅为 $L_0$ 的必要下界，并非某个插值最小范数的精确极值。
+须注意，$1/S$ 与有限误差下的 $(1 - \varepsilon)/S$ 来自核函数逐点绝对值放缩，仅为 $L_0$ 的必要下界，并非某个插值最小范数的精确极值；而若改在 $L^2([-R, R])$ 能量范数下同时施加两条精确矩约束，下面将用 $2\times 2$ 格拉姆舒尔补给出精确的唯一极小范数闭式。
 
 **偶性余弦差与两次分部积分推导。** 由 $\operatorname{supp} g \subseteq [-R, R]$ 知 $F(z)$ 绝对收敛。令 $x \mapsto -x$ 并用偶性 $g(-x) = g(x)$，可将积分化为 $F(z) = \int_{-R}^{R} \cos(zx)g(x)\,dx$。展开 $\cos\bigl((t \pm i\eta)x\bigr) = \cos(tx)\cosh(\eta x) \mp i\sin(tx)\sinh(\eta x)$，共轭镜像点处的余弦核差恒为
 
@@ -423,7 +493,23 @@ $$
 
 将余弦核差分上界用于偶函数 $g''$ 得 $|F_{g''}(z_+) - F_{g''}(z_-)| \le 2 S L_2$，结合 $L_2 \ge 0$ 即证第二条有限误差不等式；取 $\varepsilon = 0$ 并与 $L_0 \ge 1/S$ 求和即得精确读出下的 $L_0 + L_2$ 下界。由于 $|z_+^2 - z_-^2| = |z_+ - z_-|\cdot |z_+ + z_-| = 4|t\eta|$，且 $R|t|, R|\eta|$ 均小时 $S \sim R^2|t\eta|$，直接碰撞（$\eta \to 0$）与反射碰撞（$t \to 0$）均直接源于点求值泛函，更换插值基系数无法规避；而在退化情形 $\eta = 0$ 即 $z_+ = z_-$，或 $t = 0$ 即 $z_- = -z_+$ 且偶性迫使 $F(-z) = F(z)$ 时，只要相对误差小于 $1$，非零相反符号目标便迫使同一复数值落入两个不相交误差圆盘而矛盾。
 
-**实际 Burnol 包、支集半宽上限与重复平方。** 该候选构造对谱点 $\rho = \beta + it$ 取
+**精确 $L^2([-R, R])$ 最小范数闭式（$2\times 2$ 格拉姆舒尔补，手工推导）。** 在精确读出 $F(z_+) = 1,\; F(z_-) = -1$ 下，令实值偶函数 $P(x) := \cos(tx)\cosh(\eta x)$ 与 $Q(x) := \sin(tx)\sinh(\eta x)$，则两项读出等价于两条精确矩方程 $\int_{-R}^R P(x)g(x)\,dx = 0$ 与 $\int_{-R}^R Q(x)g(x)\,dx = i$。记 $z := \eta + it$、$W := \frac{\sinh(2Rz)}{4z}$，直接积分 $P^2 + Q^2 = \frac{1}{2}\bigl(\cosh(2\eta x) + \cos(2tx)\bigr)$ 与 $(P + iQ)^2 = \frac{1}{2}\bigl(1 + \cosh(2zx)\bigr)$ 得 $2\times 2$ 格拉姆矩阵元：
+
+$$
+A_P := \int_{-R}^R P^2 = \frac{R}{2} + \frac{\sinh(2R\eta)}{4\eta} + \frac{\sin(2Rt)}{4t} + \operatorname{Re} W, \qquad
+A_Q := \int_{-R}^R Q^2 = -\frac{R}{2} + \frac{\sinh(2R\eta)}{4\eta} + \frac{\sin(2Rt)}{4t} - \operatorname{Re} W, \qquad
+J := \int_{-R}^R PQ = \operatorname{Im} W.
+$$
+
+当 $R > 0$ 且 $t\eta \neq 0$ 时，$P(0) = 1$ 而 $Q(0) = 0$ 且 $Q$ 不恒为零，故 $P, Q$ 在 $L^2([-R, R])$ 中线性无关，舒尔补 $A_Q - J^2/A_P > 0$ 严格为正。取 $Q$ 在 $P^\perp$ 上的正交投影 $Q - (J/A_P)P$，即得满足两条约束的**唯一**最小 $L^2([-R, R])$ 范数偶复函数及其精确最小范数：
+
+$$
+g_*(x) \;=\; i\,\frac{Q(x) - (J/A_P)\,P(x)}{A_Q - J^2/A_P}, \qquad \min_{\substack{g \in L^2_{\mathrm{even}}([-R,R]) \\ F(z_+) = 1,\; F(z_-) = -1}} \lVert g\rVert_{L^2} \;=\; \frac{1}{\sqrt{A_Q - J^2/A_P}}.
+$$
+
+将其在 $[-R, R]$ 外零延拓即可满足 $\operatorname{supp} g_* \subseteq [-R, R]$；而若限定为光滑紧支集偶函数 $C_c^\infty((-R, R))_{\mathrm{even}}$，因 $g_*$ 在区间内解析且零延拓不能在两端点同时光滑，该值不能被光滑函数达到，但由 $C_c^\infty((-R, R))_{\mathrm{even}}$ 在 $L^2_{\mathrm{even}}([-R, R])$ 中的稠密性及二维矩修正，同一数值 $\frac{1}{\sqrt{A_Q - J^2/A_P}}$ 仍是**精确下确界**。对照由 $L_0 \ge 1/S$ 与柯西—施瓦茨不等式得出的粗糙 $L^2$ 下界 $\lVert g\rVert_{L^2} \ge \frac{1}{\sqrt{2R}\,S}$：在小窗口极限 $R|t|, R|\eta| \to 0$ 下，正交化核在 $[-R, R]$ 上满足一致泰勒展开 $Q(x) - (J/A_P)P(x) = t\eta\bigl(x^2 - \frac{R^2}{3}\bigr) + O\!\left(|t\eta|R^2\bigl((Rt)^2 + (R\eta)^2\bigr)\right)$，积分即得 $A_Q - J^2/A_P = \frac{8}{45} t^2\eta^2 R^5\bigl(1 + O((Rt)^2 + (R\eta)^2)\bigr)$，因而精确最小 $L^2$ 范数严格高出上述柯西—施瓦茨界一个渐近常数倍 **$\frac{3\sqrt{5}}{2} \approx 3.354102$**（80 位数值核验并四舍五入，矩残差 $< 10^{-75}$：`NUM`：$(R, t, \eta) = (1, 1, 0.1)$ 时精确最小值约 $23.32135$，为 $1/(\sqrt{2R}S) \approx 7.05930$ 的 $3.3036$ 倍；$(1, 4, 0.3)$ 时约 $7.10488$ 对 $2.32204$，即 $3.0598$ 倍；$(2, 1, 0.3)$ 时约 $1.50665$ 对 $0.78536$，即 $1.9184$ 倍；$(1, 0.001, 0.002)$ 时约 $1.185854\times 10^6$ 对 $3.53553\times 10^5$，比值 $3.354104$ 精准逼近 $\frac{3\sqrt{5}}{2}$）。
+
+**实际 Burnol 包、支集半宽上限与重复平方。** 上述 Burnol 包构造对谱点 $\rho = \beta + it$ 取
 
 $$
 \gamma \;:=\; \frac{\rho - 1/2}{i} \;=\; t + i\!\left(\frac{1}{2} - \beta\right), \qquad \eta \;=\; \frac{1}{2} - \beta,
@@ -443,7 +529,7 @@ $$
 B_{\min} \;:=\; \frac{1 - \varepsilon}{\min(1, R|t|)\sinh(R|\eta|)}.
 $$
 
-该量只是 $B$ 必须跨过的预算必要下界，并非可达最小值，也不是插值最小范数的精确值。最后须明确四条边界：本推导不断言存在任何实际离线 $\zeta$ 零点，不构成黎曼猜想证明，不能将半范数 $(L_0, L_2)$ 的下界逻辑求逆为混合谱主控量的下界，亦不给出无条件算术或位复杂度下界。
+该量只是 $B$ 必须跨过的 $L^1$ 预算必要下界，并非可达最小值（在精确单位读出 $\varepsilon = 0$ 时，精确 $L^2$ 极小范数由上文舒尔补闭式 $\frac{1}{\sqrt{A_Q - J^2/A_P}}$ 给出；当 $0 < \varepsilon < 1$ 时，缩放函数 $(1 - \varepsilon)g_*$ 已满足误差容限且范数更小，为 $\frac{1 - \varepsilon}{\sqrt{A_Q - J^2/A_P}}$）。最后须明确四条边界：本推导不断言存在任何实际离线 $\zeta$ 零点（由外部已验证的 [@conj-riemann-hypothesis] 实际离线零点不存在），自身不构成黎曼猜想证明，不能将半范数 $(L_0, L_2)$ 的下界逻辑求逆为混合谱主控量的下界，亦不给出无条件算术或位复杂度下界。
 :::
 
 ::: {.viz src="arithmetic-schur-lab" preset="budget" height="500"}
@@ -451,17 +537,17 @@ $$
 :::
 
 ::: {.problem #prob-ch34-signed-orbit-joint-budget title="单位支集 Burnol 包的节点认证、混合主控与位复杂度联合预算（开放问题）"}
-在所给有限谱轨道框架下，针对模块 `UnitSupportBurnolPacket` 的单位支集构造所给出的同一实际有限轨道包 `OrbitBurnolPacket` 及其局部化合成 `burnolSynthesis`，建立或在给定资源上限下证伪一套显式可计算的条件联合认证：对同一实际包一并给出经区间认证的节点包络与（直接、反射及轨道间）分离度、目标带符号读出值、二阶射流上界预算 $(J_0, J_2)$、完整首尾混合谱主控量上界，以及总位成本上界，并将上述指标共同表示为谱高度 $|t|$、离线距离 $|\eta|$、通道数 $q = |\iota|$、公共局部化深度 $N$ 与误差容限 $\varepsilon$ 的显式函数。其中混合主控量上界须由合成结构正面导出而不能倒置半范数下界，总位成本亦须正面审计而不能由稀疏系数合成推断格拉姆矩阵稀疏或多项式位成本。黎曼猜想仍未解决，本问题不提供也不断言存在任何实际离线 $\zeta$ 零点；复平面一般测试谱节点可用于对候选预算作压力测试，但不能取代面向同一实际包的条件认证消费者，单凭一般测试节点并不足以认证真实算术轨道框架。该问题具有一条直接证伪判据：对任意拟议单位目标预算 $(R, L, \varepsilon)$（$0 \le \varepsilon < 1$，$t\eta \neq 0$），若在一般测试谱节点的认证包络 $|\eta| \le \eta_{\max}$ 上成立
+在所给有限谱轨道框架下，针对模块 `UnitSupportBurnolPacket` 的单位支集构造所给出的同一实际有限轨道包 `OrbitBurnolPacket` 及其局部化合成 `burnolSynthesis`，建立或在给定资源上限下证伪一套显式可计算的条件联合认证：对同一实际包一并给出经区间认证的节点包络与（直接、反射及轨道间）分离度、目标带符号读出值、二阶射流上界预算 $(J_0, J_2)$、完整首尾混合谱主控量上界，以及总位成本上界，并将上述指标共同表示为谱高度 $|t|$、离线距离 $|\eta|$、通道数 $q = |\iota|$、公共局部化深度 $N$ 与误差容限 $\varepsilon$ 的显式函数。其中混合主控量上界须由合成结构正面导出而不能倒置半范数下界，总位成本亦须正面审计而不能由稀疏系数合成推断格拉姆矩阵稀疏或多项式位成本。由于该轨道框架定义要求每个通道对应一条真实离线零点，在外部已验证的经典黎曼猜想（[@conj-riemann-hypothesis]，未冻结于本书所钉 `trureturing` 仓库）前提下真实离线零点不存在，该框架在实际上仅允许空通道数 $q = 0$；因此本开放问题明确采取**不调用上述外部证明的条件审计口径**——在假设存在非空有限离线框架的条件下（或对一般复平面测试谱节点作压力测试时）给出上述联合预算与位复杂度认证。该问题具有一条直接证伪判据：对任意拟议单位目标预算 $(R, L, \varepsilon)$（$0 \le \varepsilon < 1$，$t\eta \neq 0$），若在一般测试谱节点的认证包络 $|\eta| \le \eta_{\max}$ 上成立
 
 $$
 L\sinh(R\eta_{\max}) \;<\; 1 - \varepsilon,
 $$
 
-则该单位目标预算即刻证伪；未被该不等式排除则仅通过单轨道必要检验，不提供多节点插值存在证书或黎曼猜想证书。本问题审计傅里叶—韦伊谱侧紧支集偶波包的轨道合成、混合主控与位成本，与紧接其后审计 $L^2(0, \infty)$ 空间侧稠密分数部格拉姆矩阵 $G^{\mathrm{NB}}_{ab}$ 多级枢轴压缩的开放问题分属不同数学对象。
+则该单位目标预算即刻证伪（在精确单位读出 $\varepsilon = 0$ 时，精确 $L^2$ 舒尔补极小范数下界为 [@rem-ch34-signed-orbit-support-budget] 的 $\frac{1}{\sqrt{A_Q - J^2/A_P}}$）；未被该不等式排除则仅通过单轨道必要检验，不提供多节点插值存在证书或独立的黎曼猜想证书。本问题审计傅里叶—韦伊谱侧紧支集偶波包的轨道合成、混合主控与位成本，与紧接其后审计 $L^2(0, \infty)$ 空间侧稠密分数部格拉姆矩阵 $G^{\mathrm{NB}}_{ab}$ 多级枢轴压缩的开放问题分属不同数学对象。
 :::
 
 ::: {.problem #prob-ch34-arithmetic-schur-subcubic-question title="实际算术 Gram 对象与多级枢轴压缩的桥梁（开放问题）"}
-本节整除图矩阵 $G = L_D + \frac{1}{4}I$ 仅是教学模型，**并不等于 NBB 格拉姆矩阵**，且其对称严格对角占优结构本身已有已知次立方求解器，绝不可把有限整除图的已知快解算法冒称为黎曼猜想进展。通向实际算术对象的具体下一步是：在复希尔伯特空间 $L^2(0, \infty)$ 中，针对实际 NBB 目标函数 $\chi$ 与分数部向量族 $f_a(x) = \{1/(ax)\}$（$1 \le a \le N$），显式计算有限格拉姆矩阵 $G^{\mathrm{NB}}_{ab} = \langle f_a, f_b\rangle$ 与右端内积向量 $b_a = \langle f_a, \chi\rangle$，明确指定多级枢轴压缩或近似消元方案及其误差范数；进而寻找或排除这样一类可计算证书——它能够将该方案在原 $L^2(0, \infty)$ 空间中的目标逼近残差严格控制在 $\varepsilon$ 以内，并给出随规模 $N$、精度 $\varepsilon$ 与零点检测高度一致成立的条件数、存储规模及总算术成本上界。同时必须将**从任意有限 $N$ 可计算证书外推至 $N \to \infty$ 极限残差趋于 $0$（即等价于 [@conj-riemann-hypothesis] 的路线）**单列为尚未证明的独立步骤。直接可证伪的首项检验是：采用带独立积分误差界的实际 $G^{\mathrm{NB}}_{ab}$ 矩阵元，实测所拟多级压缩方案的谱误差是否随层级深度单调下降；一旦出现谱误差停滞或反升的反例，即须修正或放弃该压缩方案。
+本节整除图矩阵 $G = L_D + \frac{1}{4}I$ 仅是教学模型，**并不等于 NBB 格拉姆矩阵**，且其对称严格对角占优结构本身已有已知次立方求解器，绝不可把有限整除图的已知快解算法冒称为黎曼猜想进展。[@rem-ch34-nbb-gram-spectral-and-pruning] 已经迈出了通向实际算术对象的第一步：给出了真实 $G^{\mathrm{NB}}_N$ 的精确 Vasyunin 闭式与梅林表示、无条件双边多项式谱界（$\lambda_{\min}(G^{\mathrm{NB}}_N) = N^{-2+o(1)}$、$\kappa_2(G^{\mathrm{NB}}_N) = N^{2+o(1)}$、$\kappa_2(H^{\mathrm{NB}}_N) = N^{2+o(1)}$）以及精确 $L^2$ 残差扰动恒等式，并在实测叶优先整除消元序与固定绝对阈值下直接给出反例（在 $N = 128,\; \tau = 10^{-4}$ 处仅 $0.060\%$ 相对谱误差即破坏正定性并将真实 $L^2$ 残差平方放大 $366$ 倍，即残差范数放大 $19.1$ 倍）。仍然开放的核心算法与分析问题是：针对真实 $G^{\mathrm{NB}}_N$ 与右端内积向量 $b_a = \langle f_a, \chi\rangle$，构造——或从下界排除——一种带尺度自适应容差的多级低秩/$\mathcal{H}$-矩阵压缩或预条件近似求解方案及其可计算证书，使原 $L^2(0, \infty)$ 目标逼近残差相对有限最优值 $d_N$ 的超额偏差满足 $d_{\mathrm{true}}(\tilde{c}) - d_N \le \varepsilon$（或对任意可行目标 $\varepsilon > d_N$ 保证 $d_{\mathrm{true}}(\tilde{c}) \le \varepsilon$），并给出随规模 $N$ 与精度 $\varepsilon$ 一致成立的数值秩、存储规模与次立方算术成本上界（[@rem-ch34-nbb-gram-spectral-and-pruning] 第 4 款显示在 $10^{-4}$ 容差下非对角数值秩已随 $N = 64 \to 128 \to 256$ 增长）。同时，尽管结合外部已验证的 [@conj-riemann-hypothesis] 与 Báez-Duarte 判据已知 $d_N \to 0$，**不循环调用该外部证明而直接从有限 $N$ 可计算证书独立推出 $d_N \to 0$** 仍须作为独立开放步骤保留。
 :::
 
 下方完整实验室将整除网络上的自然序填充、叶优先消元、最终舒尔块阈值裁剪、带自环随机游走重复平方，以及紧支集偶函数分辨带符号轨道的三维预算必要下界曲面并置在同一交互主舞台中，供读者切换核验：
