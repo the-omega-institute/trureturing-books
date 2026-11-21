@@ -566,6 +566,47 @@ $$
 
 对前文选出的第一枚素数 $e^{y/2}<q\le e^y$，取 $M=q\prod_{2<p\le y,\ p\text{ 为素数}}p$，$m=16M$，$b=8M-1$。此时 $b\equiv3\pmod4$ 且 $\gcd(b,m)=1$。由 $\vartheta(y)\le y\log4$ 得 $\log m\le\log16+(1+\log4)y\le4y$（$x$ 充分大）。整除 $m$ 的素数或者不超过 $\max\{2,y\}$，或者是 $q>e^{y/2}>N$。在 $(D/2,D]$ 中枚举该类，索引数至少为 $D/(2m)-1\ge D/(4m)$，从而满足长度门槛。在同一个 $x$ 上，第一枚素数 $q$ 与由此获得的 $d$ 使第一项测试以及上述两项测试全部通过。
 
+**六个系数分别属于哪个导子？** 取互异的奇素数 $q,d$，写 $j_p(n)=J(n,p)$。令 $e(n)=\chi_8(n)$，它在偶数上取零，在模 $8$ 余 $1,7$ 时取 $1$，余 $3,5$ 时取 $-1$。称 $f$ 在模 $a$ 上有本原表示，是指存在导子为 $a$ 的模 $a$ Dirichlet 特征标，在每个自然数 $n$ 处都取值 $f(n)$。这里的取值包含非单位。
+
+::: {.theorem #thm-ch31-six-primitive-quadratic-levels title="六个二次系数的本原表示" lean="D5/S3/CharacterSums/PrimitiveQuadraticConductors.six_quadratic_levels"}
+对每一对互异奇素数 $q,d$，下列六对函数与模数均给出复 Dirichlet 特征标的本原表示：
+
+$$
+(j_q,q),\quad(ej_q,8q),\quad(j_d,d),\quad(ej_d,8d),\quad
+(j_qj_d,qd),\quad(ej_qj_d,8qd).
+$$
+
+:::
+
+::: proof
+奇素数模的二次特征标非平凡，因此在该素数模上本原。模 $8$ 的特征标 $e$ 在 $1$ 和 $5$ 上取相反值，这两个数模 $4$ 同余，因此它不能经由 $4$ 或其因子下降。将互素模数的本原特征标提升至乘积模数后相乘，导子是原导子的乘积。逐次用于 $8,q,d$ 即得六个表示；若一个整数与乘积模数不互素，相应因子取零，故乘积取值公式在该整数上也成立。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-primitive-inducing-level title="从互素处的取值恢复本原导子" lean="D5/S3/CharacterSums/PrimitiveQuadraticConductors.inducing_level_and_values"}
+令 $R$ 为带零交换幺半群，$r,a,M$ 为正整数，$\chi$ 为模 $r$ 的本原 $R$ 值 Dirichlet 特征标。设 $f:\mathbb N\to R$ 在模 $a$ 上有本原表示，且对所有与 $M$ 互素的 $n$ 都有 $\chi(n)=f(n)$。则 $r=a$，且对每个自然数 $n$ 都有 $\chi(n)=f(n)$。
+:::
+
+::: proof
+把 $\chi$ 和表示 $f$ 的特征标都提升到模 $raM$。该模数的每个单位都能用与 $M$ 互素的整数代表，故两个提升在单位上相同，进而是同一特征标。提升保持导子，所以两个本原导子相等。此时从同一原模数出发的提升是单射，两者的全部取值相同。完整证明由 Lean 内核检查。
+:::
+
+**进入右半平面时，特征标本身提供什么界？** 记 $h$ 为特征标的模数，$s=\sigma+it$。下面的估计也适用于非本原的非主特征标。
+
+::: {.theorem #thm-ch31-nonprincipal-half-totient title="非主 Dirichlet L 函数的严格半欧拉函数界" lean="D5/S3/CharacterSums/NonprincipalCharacterGrowth.nonprincipal_growth"}
+对每个正整数 $h$、每个模 $h$ 的非主复 Dirichlet 特征标 $\chi$ 和每个满足 $\sigma=\operatorname{Re}s>0$ 的复数 $s$，都有
+
+$$
+|L(s,\chi)|<\frac{\varphi(h)}{2}\frac{|s|}{\sigma}.
+$$
+
+:::
+
+::: proof
+令 $A(u)=\sum_{1\le n\le u}\chi(n)$。完整周期的和为零，一个周期内的前缀与余段的和互为相反数。两段中单位的总数为 $\varphi(h)$，用其中较少的一段估计就得 $|A(u)|\le\varphi(h)/2$。部分求和给出 $L(s,\chi)=s\int_1^\infty A(u)u^{-s-1}\,du$。当 $h<u<h+1$ 时，$A(u)$ 恰好是一个完整周期的和，等于零，而用来估计积分的函数 $\varphi(h)u^{-\sigma-1}/2$ 在该区间为正。积分因而严格小于上界，得到所写不等式。完整证明由 Lean 内核检查。
+:::
+
+例如对系数 $ej_qj_d$，其本原模数为 $8qd$，可直接在上式中代入 $h=8qd$。要进一步估计 $L'/L$，仍需在所指定的区域控制 $L$ 的零点。
+
 **窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
 
 $$

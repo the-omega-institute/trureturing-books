@@ -566,6 +566,47 @@ Extract from each sum the terms at odd primes that do not divide $m$. The clippe
 
 For the first prime $e^{y/2}<q\le e^y$ chosen above, take $M=q\prod_{2<p\le y,\ p\text{ prime}}p$, $m=16M$ and $b=8M-1$. Then $b\equiv3\pmod4$ and $\gcd(b,m)=1$. The bound $\vartheta(y)\le y\log 4$ gives $\log m\le\log16+(1+\log4)y\le4y$ for large $x$. Every prime divisor of $m$ is at most $\max\{2,y\}$ or equals $q>e^{y/2}>N$. Enumerating this class in $(D/2,D]$ gives at least $D/(2m)-1\ge D/(4m)$ indices, meeting the length threshold. At the same $x$, the first prime $q$ and the resulting $d$ pass the first test and both tests above.
 
+**Which conductor belongs to each of the six coefficients?** Take distinct odd primes $q,d$ and write $j_p(n)=J(n,p)$. Put $e(n)=\chi_8(n)$, which vanishes at even integers, takes the value $1$ in classes $1,7$ modulo $8$, and takes the value $-1$ in classes $3,5$. A primitive representation of $f$ at level $a$ is a Dirichlet character modulo $a$ of conductor $a$ whose value at every natural number $n$ is $f(n)$, including at nonunits.
+
+::: {.theorem #thm-ch31-six-primitive-quadratic-levels title="Primitive representatives for six quadratic coefficients" lean="D5/S3/CharacterSums/PrimitiveQuadraticConductors.six_quadratic_levels"}
+For every pair of distinct odd primes $q,d$, each function has a primitive complex Dirichlet character representing it at the indicated level:
+
+$$
+(j_q,q),\quad(ej_q,8q),\quad(j_d,d),\quad(ej_d,8d),\quad
+(j_qj_d,qd),\quad(ej_qj_d,8qd).
+$$
+
+:::
+
+::: proof
+The nontrivial quadratic character modulo an odd prime is primitive at that prime. The character $e$ takes opposite values at $1$ and $5$, which are congruent modulo $4$, so it cannot descend to $4$ or any of its divisors. Lifting primitive characters of coprime moduli to their product and multiplying gives a character whose conductor is the product of their conductors. Apply this successively to $8,q,d$. If an integer shares a prime factor with the product modulus, the corresponding factor vanishes, so the coefficient identity also holds there. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-primitive-inducing-level title="Recovering a primitive conductor from values at coprime arguments" lean="D5/S3/CharacterSums/PrimitiveQuadraticConductors.inducing_level_and_values"}
+Let $R$ be a commutative monoid with zero, let $r,a,M$ be positive integers, and let $\chi$ be a primitive $R$-valued Dirichlet character modulo $r$. Suppose $f:\mathbb N\to R$ has a primitive representation at level $a$, and $\chi(n)=f(n)$ for every $n$ coprime to $M$. Then $r=a$ and $\chi(n)=f(n)$ for every natural number $n$.
+:::
+
+::: proof
+Lift both $\chi$ and the representative of $f$ to modulus $raM$. Every unit modulo $raM$ has a representative coprime to $M$, so the lifts agree on all units and hence are equal as characters. Lifting preserves conductors, giving equality of the two primitive levels. Lifting from this common level is injective, which gives agreement at every argument. The full proof is checked by the Lean kernel.
+:::
+
+**What bound does the character itself supply in the right half-plane?** Write $h$ for its modulus and $s=\sigma+it$. The estimate also covers imprimitive nonprincipal characters.
+
+::: {.theorem #thm-ch31-nonprincipal-half-totient title="A strict half-totient bound for nonprincipal Dirichlet L-functions" lean="D5/S3/CharacterSums/NonprincipalCharacterGrowth.nonprincipal_growth"}
+For every positive integer $h$, every nonprincipal complex Dirichlet character $\chi$ modulo $h$, and every complex $s$ with $\sigma=\operatorname{Re}s>0$,
+
+$$
+|L(s,\chi)|<\frac{\varphi(h)}{2}\frac{|s|}{\sigma}.
+$$
+
+:::
+
+::: proof
+Put $A(u)=\sum_{1\le n\le u}\chi(n)$. A complete period sums to zero, so a prefix in one period and its complementary suffix have opposite sums. They contain a total of $\varphi(h)$ units, and the smaller unit count bounds $|A(u)|$ by $\varphi(h)/2$. Partial summation gives $L(s,\chi)=s\int_1^\infty A(u)u^{-s-1}\,du$. For $h<u<h+1$, the sum $A(u)$ consists of exactly one full period and vanishes. The majorant $\varphi(h)u^{-\sigma-1}/2$ is positive on that interval. This gives strict inequality after integration. The full proof is checked by the Lean kernel.
+:::
+
+For example, the coefficient $ej_qj_d$ has primitive modulus $8qd$, so one may set $h=8qd$ in the estimate. Bounding $L'/L$ further requires control of the zeros of $L$ in the specified region.
+
 **How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
 
 $$
