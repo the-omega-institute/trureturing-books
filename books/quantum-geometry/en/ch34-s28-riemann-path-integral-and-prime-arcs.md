@@ -713,6 +713,36 @@ The reference repository’s `FormBAt.mono` uses monotonicity in the exponent to
 The full proof is checked by the Lean kernel.
 :::
 
+Let $N(a,B)$ denote the actual prime-only negative tail mass. Write $P(u)$ for the ordinary spectral primitive evaluated on the joint log-phase orbit. For an integer $n\ge2$ and cutoff $x>0$, set
+$$
+A_n(x)=2n^2\operatorname{Re}\sum_\rho
+\frac{x^{\rho/n-1/2}}{\rho(n-\rho)(n-2\rho)}.
+$$
+The sum runs over all actual nontrivial zeros with multiplicity. Each root spectrum uses the corresponding phase $e^{i\gamma_\rho\ln(x)/n}$ on the same log coordinate. Write $s_m=1/2-1/(m+1)$ and $D_s(a,B)=a^{-s}-B^{-s}$.
+
+::: {.theorem #thm-ch31-prime-window-mobius title="One threshold for every truncation order" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/RHMobiusWindow.prime_window_mobius_of_rh"}
+Assume RH. There are constants $a_0\ge2$ and $K>0$ such that for every integer $m\ge2$ and every pair of real cutoffs $B\ge a\ge a_0$,
+
+$$
+\begin{aligned}
+&\Bigg|N(a,B)-2\ln(B/a)-P(\ln B)+P(\ln a)\\
+&\quad+\sum_{n=3}^{m}\frac{2\mu(n)n^2}{(n-1)(n-2)}D_{1/2-1/n}(a,B)
++\sum_{\substack{2\le n\le m\\2n<m+1}}\mu(n)\bigl(A_n(B)-A_n(a)\bigr)\Bigg|
+\le K m(1+\ln m)^2 D_{s_m}(a,B).
+\end{aligned}
+$$
+:::
+
+::: proof
+The finite Chebyshev identity for $\vartheta-\psi$ weights $\psi(t^{1/n})$ by $\mu(n)$. The terms of degree $n$ vanish for $t<2^n$. The global linear bound for $\psi$ gives a geometric bound for the remaining tail, with a constant growing linearly in $m$.
+
+The centered transform of the complete tail sends the coefficient of the $j$th trivial zero to $n/[2j(n+2j)]$. Its absolute sum is bounded by a harmonic number. This yields an $O((1+\ln n)x^{-1/2})$ bound even at rooted argument one. Split the actual nontrivial zero occurrences at $|\operatorname{Im}\rho|=n$, keeping their multiplicities. The resulting bound for each spectral density is $O((1+\ln n)^2x^{1/(2n)-1/2})$. When $2n\ge m+1$, this decay fits the target exponent. Sum over $n\le m$. The eventual strict sign of the prime tail supplies one threshold for all $m$ and identifies the negative-part mass with the integral of the signed negative tail throughout the window. Integrate on $[\ln a,\ln B]$. Since $s_m\ge1/6$, the integration factor $1/s_m$ is at most six. Both sides vanish at $B=a$. The full proof is checked by the Lean kernel.
+:::
+
+At $m=9$, the Möbius coefficients at degrees eight and nine vanish and the retained spectra are the same as in the sixth- and seventh-power result. The same residual therefore has a bound of order $D_{2/5}(a,B)$.
+
+At order ten the eighth and ninth coefficients vanish. The tenth main term is $-(25/9)D_{2/5}(a,B)$ and the fifth-root primitive contributes at the same decay rate. Including both leaves a bound with exponent $9/22$. The statement concerns a finite truncation at every order with a uniform estimate. The same constants apply when the order varies with the endpoints. The size of the error still depends on the endpoint power difference. [Möbius inversion, DLMF 27.5.6](https://dlmf.nist.gov/27.5.E6) · [Suzuki, equation (36)](https://arxiv.org/html/2411.07436v3#S2.E36) · [Zhao, equation (14) and Lemma 7](https://arxiv.org/html/2411.18903v2)
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::
