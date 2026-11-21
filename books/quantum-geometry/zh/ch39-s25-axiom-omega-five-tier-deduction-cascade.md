@@ -106,7 +106,7 @@ $$
 素数矢高在临界脊线上起涨卡：第四阶台座上素数矢高台阶在 $\sigma > \frac{1}{2}$ 受收敛环约束，移至临界脊线 $\sigma = \frac{1}{2}$ 时越过青色参考环双对数起涨（`riemann_zeta_dirichlet_sum_eq_euler_product`、`golden_right_half_strip_implies_rh` 与 `schur_quadratic_is_least` 为 `LEAN ✓`，梅滕斯估计为正文所引冻结声明 `Mertens.E₂p.bound'`，其误差的数值核对标 `NUM`）。
 :::
 
-**第四阶采用的算术输入。** Alpöge 的终端声明 `riemannHypothesis : RiemannHypothesis` 给出 Mathlib 的黎曼猜想。Sutherland 对五条终端声明做了公理审计，并用 con-leche 将证明与单独写出的挑战命题比对。另一份独立的 nanoda 重放记录报告五条声明的证明依赖全部通过。记录中 RH 用到的公理是 `propext`、`Classical.choice`、`Quot.sound`。以下把零点定位作为外部已核验的输入。从零点到本章比较读数的步骤是手工推导。[终端声明](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean) · [Sutherland 的重放与命题比对](https://math.mit.edu/~drew/grh/) · [独立公理审计与重放日志](https://github.com/Infatoshi/rh-verification-receipts/blob/ac99f18cef21952de094234fab95db342ed16638/VERIFICATION_RESULT.txt)
+**第四阶采用的算术输入。** Alpöge 的终端声明 `riemannHypothesis : RiemannHypothesis` 证明了 Mathlib 中的经典黎曼猜想。2026 年 11 月 21 日，Lean 与 Mathlib 社群发表联合声明，确认证明正确，所证命题与 Mathlib 的陈述相同。Lean FRO 与 Mathlib Initiative 为该声明背书。Sutherland 对五条终端声明做了公理审计，并用 con-leche 将证明与单独写出的挑战命题比对。另一份独立的 nanoda 重放记录报告五条声明的证明依赖全部通过。记录中 RH 用到的公理是 `propext`、`Classical.choice`、`Quot.sound`。以下采用终端声明 `riemannZeta_eq_zero_re` 给出的形式：黎曼 $\zeta$ 函数的每个非平凡零点都在直线 $\Re s=1/2$ 上。从零点到本章比较读数的步骤是手工推导。[Lean 与 Mathlib 社群联合声明](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/) · [Mathlib 的命题定义](https://github.com/leanprover-community/mathlib4/blob/0df444a360eaa60ab8c11dca51a86af692955474/Mathlib/NumberTheory/LSeries/RiemannZeta.lean#L185) · [零点定位命题](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Statements.lean#L3) · [终端声明](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean) · [Sutherland 的重放与命题比对](https://math.mit.edu/~drew/grh/) · [独立公理审计与重放日志](https://github.com/Infatoshi/rh-verification-receipts/blob/ac99f18cef21952de094234fab95db342ed16638/VERIFICATION_RESULT.txt)
 
 **从零点到舒尔枢轴。** 取右半平面 $\operatorname{Re}s>1/2$ 中 $N$ 个互异节点 $s_j$，记 $G_{jk}=K_\epsilon(s_j,s_k)$。在 [§31.3 的零点展开](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-31-3)中，每个互异零点 $\rho$ 的重数为 $m_\rho$。任给系数 $c_j\in\mathbb C$，有
 
@@ -192,6 +192,35 @@ $$
 :::
 
 在上述两相位编码中 $n=2$，锐系数为 $9/4$。对概率权和单位相位，$L(A)$ 与 $L(B)$ 分别是两个混合态的一减纯度。最优性针对所有有限单位相位系综；应用到给定的零点和权重时得到相同的不等式。
+
+把每个复坐标的模放宽到半径 $R$ 后，$L(A)$ 和 $L(B)$ 仍是按上式计算的代数亏损。零点编码给出的相位模长为一，所以它的概率系综适用 $R=1$ 的纯度界。
+
+只取一行 $(t,t)$，权重为一，$t$ 为非负实数。两个相对坐标都等于 $x=t^2$，两项损失为 $1-(1+2x)^2/9$ 和 $1-(1+x)^2/4$。当 $x\ne1$ 时，后一项除以前一项得 $9(3+x)/[16(2+x)]$。当 $t$ 穿过一时，两项损失同时变号。这使圆盘半径的选择影响允许的下系数。
+
+::: {.theorem #thm-ch39-phase-pair-loss-floor title="两相位读数在圆盘上的锐下系数" lean="D5/S3/Quantum/PureState/PhasePairLossFloor.mixed_lower_coefficient_iff"}
+取上文两坐标的 $A,B,L$，固定实数 $R\ge0$ 和 $C$。对所有有限系综，实权满足 $p_i p_j\ge0$，每个非零权行的两个坐标模均至多为 $R$。不等式 $C L(A)\le L(B)$ 对全部这些系综成立的充要条件如下。
+
+$$
+\begin{cases}
+C\le 9(3+R^2)/[16(2+R^2)],&0\le R\le1,\\
+C=3/4,&R>1.
+\end{cases}
+$$
+
+:::
+
+::: {.proof}
+在一对非零权行上，把两个相对坐标记为 $u_1,u_2$，令 $x=(\Re u_1+\Re u_2)/2$。当 $y=R^2\le1$ 时，$x\le y$。在端点系数 $c=9(3+y)/[16(2+y)]$，直接展开得到
+
+$$
+(1-B)-c(1-A)=
+\frac{(1-x)(y-x)}{4(2+y)}
++\frac{(\Re u_1-\Re u_2)^2}{16}
++\frac{c(\Im u_1+\Im u_2)^2}{9}.
+$$
+
+三项均非负。又因相对坐标在单位圆盘内，$A\le1$，所有更小的系数也成立。对任意模的相对坐标，取 $c=3/4$ 时同一展开的首项为 $(1-x)^2/12$，两个平方余项仍非负。以 $p_i p_j$ 求和就得到系综不等式。上面的单行算例在 $R<1$ 时取 $t=R$ 达到端点比值。$R=1$ 时让 $t$ 从下方趋于一，迫使 $C\le3/4$。$R>1$ 时还可从上方趋于一，损失变号又迫使 $C\ge3/4$。完整证明由 Lean 内核检查。
+:::
 
 **同一份谱对第三阶的耦合意味着什么？** 取 [§33.9 的单圈输入](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-11-2)，记 $A_i=\alpha_i^{-1}(M_Z)$ 和 $b=(41/10,-19/6,-7)$。在三个扇区加上阈值 $\Delta_i$ 后，共同能标 $\mu$ 的匹配方程是 $A_i=a+t b_i+\Delta_i$，其中 $a=\alpha_U^{-1}$，$t=\log(\mu/M_Z)/(2\pi)$。消去 $a,t$ 得
 
