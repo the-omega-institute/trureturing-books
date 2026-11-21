@@ -350,6 +350,8 @@ A pointwise bound from the external arithmetic argument transfers directly to th
 
 Levent Alpöge’s proposed proof constructs these windows at modulus one from external arithmetic inputs. The construction uses theta lifts, Galois representations, a covolume bound, and local matching to construct `HypsAlt` and then obtain `TopG`. For $\lambda=3/2$ the construction fixes $e_D=2$ and $e_L=0$. For every sufficiently small $\varepsilon>0$, one family supplies arbitrarily late whole windows, a uniform error bound, and the `ChainTied` condition. Raising the starting threshold gives $U(x)\le x^{1/2+9\varepsilon}$ throughout each such window, before the external argument invokes its zero-free criterion. Choose $9\varepsilon\le\min(\eta/3,1/4)$. The preceding integral estimate gives $A_\vartheta(Y)\le Y^\eta$ on these same windows (`manual derivation`). The resulting existence of these windows depends on the external arithmetic inputs. [The source repository’s account of the proposed proof](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/README.md#L1-L5) · [Arithmetic inputs to HypsAlt](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean#L44-L68) · [From HypsAlt to TopG](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean#L12-L15) · [Loss exponents](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopShape.lean#L48-L54) · [Three conditions on the same family](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/ZeroFreeAllOfTopG.lean#L19-L33) · [Arithmetic bound on the windows](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/PrimitiveCosets/LevelGmLeOnFamilyScales.lean#L28-L30)
 
+The preceding link between the two arguments has also undergone a conditional external Lean kernel check. In the reference repository’s pinned Lean 4.33.1 environment, `rh_of_family_and_unit_host` derives the Riemann hypothesis from the family input `TopG` and the modulus-one host input `HostExW (3/2) (GChi PChar.one).req`. For each $\kappa>0$ the two inputs produce arbitrarily late windows $[Y,Y^{3/2}]$ on which the same family gives $\mathrm{Gz}(x)\le x^{1/2+\kappa}$ at every real $x$. Here $\mathrm{Gz}(x)=U(x)$ is the book’s complete Mangoldt remainder, so the prime-only window criterion applies. This kernel replay takes the two inputs as hypotheses. The reference constructions that supply them lie outside its scope. The reproduction record includes the compatibility patch and successful kernel replay. `PinnedTop`, `WindowConsumer`, and `UnifiedWindowRH` check this conditional implication. `PinnedMesh` checks a separate fixed-character window criterion. [Conditional implication and reproducible source](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059461340)
+
 **How can one discriminant split at several primes?** For an odd prime $p$, write $J(-d,p)=\bigl(\frac{-d}{p}\bigr)$. A value of $1$ means that $t^2\equiv-d\pmod p$ has a nonzero solution. With $B=3$, the only small odd prime to test is $3$. The prime $d=23$ satisfies $d\equiv7\pmod{16}$ and $-23\equiv1\pmod3$. Take the prime $q=59\equiv3\pmod8$. Since $-23\equiv36=6^2\pmod{59}$, this pair passes both splitting tests. The construction below enforces all the finite conditions through particular residue classes. Those classes account for only some of the eligible primes.
 
 ::: {.theorem #thm-ch31-split-prime-host-series title="Weighted series for auxiliary primes with prescribed splitting" lean="D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series"}
@@ -695,6 +697,31 @@ In logarithmic coordinates, a compactly supported positive filter retains a conj
 
 Under the same normalization, the terms from zeros with real part below $\beta$ tend to zero. Absolute summability of the zero coefficients supplies the dominating bound, allowing zeros arbitrarily close to the rightmost line. The terms on that line form a uniformly continuous function. The normalized prime-power correction also tends to zero because $\beta>1/2$. Each sufficiently late peak therefore extends to its right across a fixed logarithmic width on which $Q_\vartheta>0$. Exponentiation converts the distance to the next peak into the factor $K$ and the width of the positive interval into the ratio $\kappa_0$. The full proof is checked by the Lean kernel.
 :::
+
+::: {.theorem #thm-ch31-prime-mass-no-finite-limit title="No finite mass limit at a fixed ratio when a zero attains the largest real part" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeAttainedMassNonconvergence.prime_tail_mass_no_finite_limit_of_attained_zero"}
+Suppose a nontrivial zero $\rho$ attains the largest real part $\beta=\operatorname{Re}\rho>1/2$. For any fixed real $\kappa>1$, set
+
+$$
+M_\kappa(B)=\frac{N(B/\kappa,B)}{B^{\beta-1/2}}.
+$$
+
+Then $M_\kappa(B)$ has no finite limit as real $B\to+\infty$.
+:::
+
+::: proof
+Put $p=\beta-1/2$ and choose $1<\lambda\le\min(\kappa,\kappa_0)$. Split the same window $[B/(\lambda\kappa),B]$ in two ways, at $B/\lambda$ and at $B/\kappa$, to obtain
+
+$$
+M_\lambda(B)-\kappa^{-p}M_\lambda(B/\kappa)
+=M_\kappa(B)-\lambda^{-p}M_\kappa(B/\lambda).
+$$
+
+If $M_\kappa$ tends to a finite $L$, then $0\le M_\lambda\le M_\kappa$ makes $M_\lambda$ eventually bounded. The right-hand side tends to $(1-\lambda^{-p})L$. Since $0<\kappa^{-p}<1$, the recurrence forces $M_\lambda$ to tend to $(1-\lambda^{-p})L/(1-\kappa^{-p})$. Subtract the proposed limit from the recurrence. After any fixed number $n$ of steps, the initial error is multiplied by $\kappa^{-np}$. The remaining terms are controlled by the vanishing error and a convergent geometric series. The arbitrarily late zero-mass windows force this limit to be zero, hence $L=0$.
+
+Choose a fixed integer $m$ so that $\kappa^m$ meets the ratio required by the fixed-ratio power lower bound. Split $[B/\kappa^m,B]$ into $m$ adjacent windows of ratio $\kappa$. The normalized total mass is a sum of $m$ values of $M_\kappa$ with fixed weights and would also tend to zero. This contradicts the positive lower bound at the same power $p$ on the larger window. The full proof is checked by the Lean kernel.
+:::
+
+Bingham and Gashi also use a geometric expansion to connect delayed and cumulative means for discrete logarithmic moving averages. [Bingham–Gashi, equations (2.3)–(2.4)](https://arxiv.org/abs/1408.1301)
 
 ::: {.theorem #thm-positive-average-prime-window title="Frequent positive averages force a lower bound in every late window" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.eventual_prime_window_lower_of_log_frequency"}
 Use the complete Mangoldt remainder $U$ and the prime-only negative mass $N$ defined above. For real $v$ put $H(v)=\int_{v-\ln 2}^v U(e^t)\,dt$. Let $(u_n)$ be a real sequence with $u_n\to+\infty$ and $u_{n+1}/u_n\to1$. Suppose also that $H(u_n)\ge c e^{\beta u_n}/u_n^M$ for all sufficiently large $n$, for some $c>0$, $\beta>1/2$, and $M\in\mathbb R$. Then for every $\varepsilon>0$ and every sufficiently large $Y$,

@@ -291,7 +291,7 @@ An optimal uniform calibration sends seeds equivariantly to their readout tables
 $$
 N=mk,\qquad M_J n=k w,\qquad n\in\mathbb Z_{\ge0}^{J}.
 $$
-Here $m$ divides $N$ because each entry of $Nb'$ is a count. Let $h$ be the order of the class of $w$ in the additive quotient $\mathbb Z^{\operatorname{rows}(M)}/M_J\mathbb Z^J$. Every feasible $N$ is a multiple of $mh$.
+Here $m$ divides $N$ because each entry of $Nb'$ is a count. Let $h$ be the order of the class of $w$ in the additive quotient $\mathbb Z^{\operatorname{rows}(M)}/M_J\mathbb Z^J$. Every feasible $N$ is a multiple of $mh$. At positive $N$, an orbit outside $J$ has zero copies because dividing its feasible count vector by $N$ gives an optimal table law. The integer count theorem handles all event rows together. In the reverse construction, each subgroup fixes a copy exactly when it fixes the underlying table. [Integer orbit-count equivalence](lean:D5/S3/ConceptDynamics/Attribution/UniformOrbitCounts.orbit_event_counts_match_fiber).
 
 Choose one optimal solution giving positive weight to each orbit in $J$ and average these choices. This gives an optimal solution that is strictly positive on $J$. Gaussian elimination gives a rational particular solution and a rational nullspace basis for $M_Jq=b'$. Rational approximation of the coefficients in this basis gives a strictly positive rational solution. Multiply by a common denominator of the solution that is also a multiple $Bm$ of $m$. This gives a strictly positive integer vector $p$ with $M_Jp=Bw$. Thus $h$ is finite and divides $B$.
 

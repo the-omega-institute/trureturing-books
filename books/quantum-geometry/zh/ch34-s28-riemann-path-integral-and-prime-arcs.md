@@ -350,6 +350,8 @@ $$
 
 Levent Alpöge 提出的证明在模 $1$ 使用外部算术输入构造这族整窗。在该路线中，外库用 $\theta$ 提升、伽罗瓦表示、余体积界与局部匹配构造 `HypsAlt`，再取得 `TopG`。取 $\lambda=3/2$，构造中固定的损失为 $e_D=2,e_L=0$。每个充分小的 $\varepsilon>0$ 都在同一族中给出任意远的整窗、统一误差界和 `ChainTied` 条件。提高起点下限后，模 $1$ 的算术估计在整窗上给出 $U(x)\le x^{1/2+9\varepsilon}$。这一步发生在应用无零点判据之前。取 $9\varepsilon\le\min(\eta/3,1/4)$，上段的积分便在这族窗口上给出 $A_\vartheta(Y)\le Y^\eta$（`手工推导`）。据此得到的窗口存在性以外库的这些算术输入为前提。[外库对证明的说明](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/README.md#L1-L5) · [构造 HypsAlt 的算术输入](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean#L44-L68) · [从 HypsAlt 到 TopG](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean#L12-L15) · [损失参数](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopShape.lean#L48-L54) · [同一族的三个条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/ZeroFreeAllOfTopG.lean#L19-L33) · [窗内的算术估计](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/PrimitiveCosets/LevelGmLeOnFamilyScales.lean#L28-L30)
 
+针对上述手工衔接，已有一次条件性的外部 Lean 内核复核。固定在参考库的 Lean 4.33.1 环境中，`rh_of_family_and_unit_host` 从族输入 `TopG` 和模一特征标的宿主输入 `HostExW (3/2) (GChi PChar.one).req` 推出黎曼猜想。对每个 $\kappa>0$，两个输入共同给出任意远的 $[Y,Y^{3/2}]$，使同一族在窗内每个实数 $x$ 处都有 $\mathrm{Gz}(x)\le x^{1/2+\kappa}$。这里 $\mathrm{Gz}(x)=U(x)$ 正是本书的完整 Mangoldt 余项，故可应用上文的素数窗口判据。此次内核重放以这两个输入为假设，参考库中提供它们的构造在重放范围之外。复现记录给出兼容补丁及成功的内核重放，其中 `PinnedTop`、`WindowConsumer` 和 `UnifiedWindowRH` 核验这条条件推论，`PinnedMesh` 核验另一条固定特征标的窗口判据。[固定环境中的条件推论与复现源码](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059461340)
+
 **怎样让同一个判别式在几个素数处都分裂？** 对奇素数 $p$，记 $J(-d,p)=\bigl(\frac{-d}{p}\bigr)$。值为 $1$ 的意思是 $t^2\equiv-d\pmod p$ 有非零解。取 $B=3$，要检查的小奇素数只有 $3$。素数 $d=23$ 满足 $d\equiv7\pmod{16}$ 及 $-23\equiv1\pmod3$。再取素数 $q=59\equiv3\pmod8$，有 $-23\equiv36=6^2\pmod{59}$。这一对满足所需的两个分裂条件。下面的构造用特定剩余类一次保证所有有限条件，这些剩余类只占可用素数的一部分。
 
 ::: {.theorem #thm-ch31-split-prime-host-series title="满足局部分裂条件的辅助素数的加权级数" lean="D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series"}
@@ -695,6 +697,31 @@ $$
 
 在同一归一化下，实部小于 $\beta$ 的零点项趋于零。零点系数的绝对可和性给出支配界，允许任意接近最右线的低实部零点。最右线上的零点项构成一致连续的函数。素数幂修正的归一化量也趋于零，因为 $\beta>1/2$。因此，足够晚的正峰可延伸为一段固定的右向对数宽度，在整个区间内仍有 $Q_\vartheta>0$。指数换元将找到下一处正峰所需的固定对数距离变成倍数 $K$，并将正号区间的固定宽度变成比例 $\kappa_0$。 完整证明由 Lean 内核检查。
 :::
+
+::: {.theorem #thm-ch31-prime-mass-no-finite-limit title="最大实部取到时的固定比例质量无有限极限" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeAttainedMassNonconvergence.prime_tail_mass_no_finite_limit_of_attained_zero"}
+假设某个非平凡零点 $\rho$ 取到最大实部 $\beta=\operatorname{Re}\rho>1/2$。对任意固定的实数 $\kappa>1$，设
+
+$$
+M_\kappa(B)=\frac{N(B/\kappa,B)}{B^{\beta-1/2}}.
+$$
+
+当实数 $B\to+\infty$ 时，$M_\kappa(B)$ 没有有限极限。
+:::
+
+::: proof
+取 $p=\beta-1/2$ 及 $1<\lambda\le\min(\kappa,\kappa_0)$。把同一窗口 $[B/(\lambda\kappa),B]$ 分别在 $B/\lambda$ 和 $B/\kappa$ 处分割，得到
+
+$$
+M_\lambda(B)-\kappa^{-p}M_\lambda(B/\kappa)
+=M_\kappa(B)-\lambda^{-p}M_\kappa(B/\lambda).
+$$
+
+若 $M_\kappa$ 趋于有限值 $L$，则 $0\le M_\lambda\le M_\kappa$ 给出晚期有界性。上式右边趋于 $(1-\lambda^{-p})L$，而 $0<\kappa^{-p}<1$，所以递推迫使 $M_\lambda$ 趋于 $(1-\lambda^{-p})L/(1-\kappa^{-p})$。将候选极限从递推两边扣除。固定迭代次数 $n$ 后，初始误差乘以 $\kappa^{-np}$，其余项由趋于零的误差和收敛的几何级数控制。任意晚的零质量短窗使这个极限为零，从而 $L=0$。
+
+取一个固定整数 $m$，使 $\kappa^m$ 至少达到固定比例幂下界所要求的比例。将 $[B/\kappa^m,B]$ 划分为 $m$ 个比例为 $\kappa$ 的相邻窗口。归一化总质量是 $m$ 项带有固定权重的 $M_\kappa$ 之和，因此也趋于零。这与该较大窗口在同一指数 $p$ 下的正下界矛盾。 完整证明由 Lean 内核检查。
+:::
+
+Bingham 和 Gashi 在离散对数移动平均中也使用几何展开，将延迟平均与累积平均相联。[Bingham–Gashi，式（2.3）–（2.4）](https://arxiv.org/abs/1408.1301)
 
 ::: {.theorem #thm-positive-average-prime-window title="正平均序列给出每个充分晚的窗口下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.eventual_prime_window_lower_of_log_frequency"}
 沿用完全曼戈尔特余项 $U$ 和素数负部质量 $N$，对实数 $v$ 记 $H(v)=\int_{v-\ln 2}^v U(e^t)\,dt$。给定实序列 $u_n\to+\infty$，满足 $u_{n+1}/u_n\to1$，并且对某些 $c>0$、$\beta>1/2$ 和 $M\in\mathbb R$，充分大的 $n$ 都满足 $H(u_n)\ge c e^{\beta u_n}/u_n^M$。那么对每个 $\varepsilon>0$，充分大的 $Y$ 都有
