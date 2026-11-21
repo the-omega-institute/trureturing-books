@@ -51,7 +51,7 @@
 2. **第二层：文献结果与书面证明（紫色，不计入 Lean 验证）**
    数学或物理学界已有严格纸面证明、但尚无匹配冻结声明的结论，可在 `remark` 或 `example` 中明确标注：`文献结果，未在本书形式化` / `Literature result, not formalized in this book`。需要定理类环境时，必须先检索冻结库，使用 `status="written-proof" proof="<proof-id>"` 且不带 `lean`，每版关联完整证明，并提供支持同一陈述的 DOI 或源论文仓库、原文定位与已登记的 `trureturing-requests` issue；遵守根级守则及 `docs/FORMALIZATION-REQUESTS.md`。紫色书面证明由作者与评审负责，不能声称内核验证。
 3. **第三层：开放问题与猜想（红色 `OPEN`）**  
-   凡尚未解决的数学或物理猜想（如黎曼猜想、复杂度等于体积猜想等），一律使用 `conjecture` 或 `problem` 环境，严禁附加 `lean` 属性。
+   凡尚未解决的数学或物理猜想（如扩展黎曼猜想 ERH、$\mathrm{P}\neq\mathrm{NP}$、复杂度等于体积猜想等），一律使用 `conjecture` 或 `problem` 环境，严禁附加 `lean` 属性。已获外部形式化证明但尚未在 `trureturing@dev` 冻结的结果按第 14 节处理，不再标作开放猜想。
 
 ## 5. 数学排版与零模型标识铁律
 
@@ -158,3 +158,16 @@ PR 在实际合并树上按相对第一父提交的文件变化选择任务；�
 4. **原文有误或言过其实时直接更正。** 改为能证明的最强正确表述；不保留已知为假的句子，也不把它弱化成空洞为真的说法。改动尽量小：保留作者的行文、标题、图与论证次序；诠释（`MODEL`）不因其是诠释而删除，只需标明身份、不写成推导。两句相互矛盾时改正确的一侧；凭正文与所引来源判断不了哪一侧正确时不猜，保留原文并在 PR 中说明。无法离线核实的经验数值不改，列入后续事项。
 5. **需要新定理时先上游、后回写。** 最强的正确陈述尚无冻结声明时，先在 `trureturing` 按其规则形式化并冻结（[theorem-formalize](skills/theorem-formalize/SKILL.md)），再回写本书；在此之前正文按现有证据标注，不提前升级标签。上游判定只是已有结果的改写、不新增声明的，正文保持 `手工推导` 或直接引用已有冻结声明。
 6. **逐条交代。** 每处实质更正在 PR 描述中按“原文 → 改后 → 为何为真 → 依据”列出，补引用与改标签分列；中文先改，英文同位置对齐，环境序列不变。可视化与静态图的图注随其页面一并修改，口径与正文一致。
+
+## 14. 已知外部形式化事实：黎曼猜想（RH）与狄利克雷广义黎曼猜想（GRH）
+
+本书库将**经典黎曼猜想（RH）**与**全体狄利克雷 $L$ 函数的广义黎曼猜想（Dirichlet GRH）**登记为**已确立的外部形式化数学事实**，供全库写作与后续数学推理直接作为已知前提使用，不再将二者表述为“尚未解决的开放猜想”：
+
+1. **权威出处与终端声明**：Levent Alpöge 于 2026 年 11 月 20 日在 [`alpo.ge/remark.pdf`](https://alpo.ge/remark.pdf) 公布覆盖 RH 与狄利克雷 GRH 的 Lean 4（`v4.33.1` + 固定官方 Mathlib）形式化证明（175,187 个模块）；本组织字节级镜像仓库为 [`the-omega-institute/riemann-hypothesis`](https://github.com/the-omega-institute/riemann-hypothesis)（提交 `d3f850de1d27926949b13d1de8420b3b57a8770e`），其 [`src/Main.lean`](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean) 与 [`src/Statements.lean`](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Statements.lean) 导出五条终端定理：`riemannHypothesis : RiemannHypothesis`、`riemannZeta_eq_zero_re : RiemannZetaZerosOnLine`、`LFunction_ne_zero_of_half_lt_re : DirichletLNonvanishingRightOfHalf`、`LFunction_eq_zero_re : DirichletLZerosOnLine` 与 `LFunction_eq_zero_re_of_isPrimitive : PrimitiveDirichletLZerosOnLine`。
+2. **独立内核重放与公理审计**：Andrew Sutherland 在 [`math.mit.edu/~drew/grh/`](https://math.mit.edu/~drew/grh/) 完成了全库编译、公理审计与 `con-leche` 挑战命题比对；另一份公开独立的 Rust 外部内核 `nanoda` 重放记录（[`Infatoshi/rh-verification-receipts`](https://github.com/Infatoshi/rh-verification-receipts/blob/ac99f18cef21952de094234fab95db342ed16638/VERIFICATION_RESULT.txt)）在标准 Lean 4.33.1 导出物上通过了全部五条终端定理的依赖闭包（`1,484,729` 条声明零错误），静态扫描无 `sorry`、`admit`、`opaque`、`native_decide` 或自定义 `axiom`，公理闭包仅含标准三大公理 `{propext, Classical.choice, Quot.sound}`。
+3. **本书库的证据分级与写作口径**：
+   - 因该外部证明尚未合入并冻结在 `the-omega-institute/trureturing@dev`，RH 与狄利克雷 GRH **不**使用本书库的绿色 `LEAN ✓`（`lean=`）徽章，也不以未展开的二十五万页自然语言稿冒充 `status="written-proof"`；正文将其作为**外部已核验形式化事实**（`remark` 或普通段落）明确引述上述永久链接与核验回执。由其结合本书冻结定理或经典分析推得的后续命题，按第 4 节与第 13 节据实标注 `手工推导`、`文献结果` 或 `NUM`。
+   - 正式出版物（`books/**`）严格遵守第 5 节的零模型标识铁律：只署名作者 Levent Alpöge、镜像仓库与独立内核重放证据，不写入任何语言模型或智能体名称。
+4. **严格范围边界（仍保持 `OPEN` 或 `MODEL` 的事项）**：上述证明只覆盖有理数域 $\mathbb{Q}$ 上的黎曼 $\zeta$ 函数与全部模 $N \ge 1$ 的狄利克雷 $L$ 函数。以下命题**不由** RH 与狄利克雷 GRH 推出，在本书库中继续严格保持各自身份：
+   - **仍为数学开放问题（`OPEN`）**：一般代数数域戴德金 $\zeta_K$ 函数的扩展黎曼猜想（ERH）、高阶自守 $L$ 函数的全广义黎曼猜想（Grand RH）、零点单重性猜想（$\zeta'(\rho) \neq 0$）、蒙哥马利 GUE 对关联猜想与希尔伯特—波利亚自伴算子构造、梅滕斯无余量界 $M(x) = O(\sqrt{x})$、乘性子树移位纠缠面积律（`prob-ch34-arithmetic-pivot-area-law`），以及不依赖上述外部证明而独立给出乘性舒尔枢轴修饰证明的方法论问题。
+   - **仍为物理假说或诠释模型（`MODEL` / `OPEN`）**：玻恩规则、连续统自旋-$2$ 引力动力学（`prob-ch34-gravity-dynamics-and-coupling`）、宇宙学常数 $\Lambda \sim 10^{-122}$ 与过去假设（`prob-ch34-past-hypothesis-and-cosmological-constant`）、标准模型手征反常抵消与规范耦合统一阈值（`prob-ch34-sm-generations-and-couplings`、`prob-ch39-af-gut-threshold-and-proton-stability`），以及三元数场网络的大规模实证性质（`prob-ch39-tft-scale-and-seams`）。不得把纯数论定理越级包装为对这些物理假说的证明。

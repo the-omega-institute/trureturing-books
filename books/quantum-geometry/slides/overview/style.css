@@ -1,0 +1,12 @@
+/* The card text identifies the external proof and its relation to the pinned commit. */
+.tr-thm[data-cite="conj-riemann-hypothesis"] {
+  --c: var(--tr-sem-theory);
+}
+
+.tr-thm[data-cite="conj-riemann-hypothesis"] .tr-thm-label {
+  color: var(--tr-sem-theory);
+}
+
+.tr-thm[data-cite="conj-riemann-hypothesis"] :is(.tr-badge, .tr-thm-decl) {
+  display: none;
+}
