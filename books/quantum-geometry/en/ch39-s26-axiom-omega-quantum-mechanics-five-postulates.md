@@ -226,7 +226,7 @@ P(x,y)>0\quad\Longrightarrow\quad y\in Y^{N\cap G_x}
 $$
 Here $G_x$ is the stabilizer of $x$, and $Y^{N\cap G_x}$ consists of the outputs fixed by every element of $N\cap G_x$.
 
-If the $H$-fixed mass is one, positivity forces $H$ to fix every seed. The kernel of the seed action is normal, so it contains $N$. Every positive-probability output is the readout of some seed. An element of $N$ fixing the input also fixes that seed, so covariance forces it to fix the output. For an empty input set, one seed of weight one fixed by all of G suffices. For nonempty input, the row support condition gives mass one on $Y^{N\cap G_x}$ for every row. The maximum fixed mass formula for normal subgroups supplies a calibration with full $N$-fixed mass. Since $H\le N$, the same calibration has full $H$-fixed mass.
+If the $H$-fixed mass is one, positivity forces $H$ to fix every seed. The kernel of the seed action is normal, so it contains $N$. Every positive-probability output is the readout of some seed. An element of $N$ fixing the input also fixes that seed, so covariance forces it to fix the output. For an empty input set, one seed of weight one fixed by all of G suffices. For nonempty input, the row support condition gives mass one on $Y^{N\cap G_x}$ for every row. The [maximum fixed mass formula for normal subgroups](lean:D5/S3/ConceptDynamics/Attribution/NormalSubgroupFixedMass.maximal_normal_subgroup_fixed_seed_mass) supplies a calibration with full $N$-fixed mass. Since $H\le N$, the same calibration has full $H$-fixed mass.
 
 ## 39.3.3 Formal Anchor Theorem, Literature & Appendix E Scope, Quantitative Audit, and Bridge to the Exteriorless Ternion Ontology {#sec-ch39-26-3}
 
