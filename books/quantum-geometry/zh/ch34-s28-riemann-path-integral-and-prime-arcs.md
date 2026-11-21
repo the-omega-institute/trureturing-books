@@ -257,6 +257,24 @@ $$
 
 这个判据把独立的算术任务落在素数幂的计数上。对 $x\ge2$，切比雪夫误差核可积，其尾积分等于 $-U(x)/x$。在 $x=n^4$ 处，所需的采样假设因而等价于对每个充分大的自然数 $n$ 证明严格下界 $\int_{n^4}^{\infty}(\psi(t)-t)t^{-2}\,dt>-1/n^2$（`手工推导`）。 [`complete_chebyshev_tail_identity`](lean:D5/S3/Weil/Mertens/CompleteChebyshevTailIdentity.complete_chebyshev_tail_identity) · [`chebyshev_error_kernel_integrable`](lean:D5/S3/Weil/Mertens/WeightedPrimeLimit.chebyshev_error_kernel_integrable)
 
+任意晚的幂窗也只需检验有限个实点。给定 $2\le Y\le Z$，记
+
+$$
+S(Y,Z)=\{Y,Z\}\cup\{n^4:n\in\mathbb N,\ Y\le n^4\le Z\}.
+$$
+
+把窗的两个端点列入，即使它们都不是四次幂，边缘两个不完整的小区间仍有可用的端点界。
+
+::: {.theorem #thm-ch31-quartic-power-windows title="在任意晚的幂窗内只检验两端与四次幂" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampling.rh_iff_quartic_power_windows"}
+固定实数 $b>1$。黎曼假设成立，当且仅当对每个 $\kappa>0$ 和每个实数 $R$，存在 $Y\ge\max\{R,2\}$，使同一个窗的每个 $t\in S(Y,Y^b)$ 满足 $U(t)\le t^{1/2+\kappa}$。
+:::
+
+::: proof
+在 RH 下，[@thm-ch31-mangoldt-pointwise-power-window] 给出整窗上界，取其中的采样点即可。反向给定损失 $\kappa>0$，先在样点处使用 $\delta=\min\{\kappa/2,1/2\}$，并记 $p=1/2+\delta\le1$。对 $x\in[Y,Z]$，取一个包含 $x$ 的相邻四次幂区间 $[n^4,(n+1)^4]$（$n\ge1$），再与 $[Y,Z]$ 取交，得到 $[a,z]$。两端都在 $S(Y,Z)$ 内。斜坡的弦界和对数项的切线估计给出的误差至多为 $(z-a)^2/a\le225n^2$，因为 $a\ge n^4$ 且 $z-a\le15n^3$。两个端点的 $p$ 次幂都至多为 $16x^p$，而 $n^2\le x^p$，故 $U(x)\le241x^p$。选取足够晚的采样窗使 $x^{\kappa-\delta}\ge241$ 在整个窗上成立，就得到 [@thm-ch31-mangoldt-pointwise-power-window] 所需的逐点上界。完整证明由 Lean 内核检查。
+:::
+
+参考库与本书共同使用的外部 Lean 环境还给出了同一宿主的有限检验。在 `samples Y Z` 中，依次枚举 $0\le n\le\lfloor\sqrt{\sqrt Z}\rfloor$，保留窗内的 $n^4$ 并加入两端，得到上述有限集。固定 $b>1$，对每个 $\kappa>0$，先选 $\varepsilon>0$ 及实常数 $e_D,e_L,K,c_{HH},e_K$，满足 $(e_D+e_L+7)\varepsilon\le\kappa$。此后对任意起点下界取一个更晚的窗。窗中每个采样点 $t$ 可选自己的框架、宿主 $H$ 和有限集 $T$，要求该点的 `EAtH`（模一特征标，系数 $4$）与 `CoreAtH` 使用同一个 $H,T$。`of_unit_family` 从 `FamilyClassConnected ((GChi PChar.one).cls b)` 导出这些数据，`rh_of_finite_hosts` 由它们推出 RH。每个窗的检验点有限；给定每一组固定损失后，算术假设仍须提供任意晚的窗口及其见证。[同一宿主的逐点比较](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061455789) · [有限采样与宿主推论的内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061515678)
+
 **单调性本身对负部窗口给出什么限制？**
 
 ::: {.theorem #thm-ch31-monotone-window-sharpness title="单调计数的二次深度与三次窗口质量" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MonotoneTailSharpness.monotone_tail_quadratic_depth_cubic_mass"}

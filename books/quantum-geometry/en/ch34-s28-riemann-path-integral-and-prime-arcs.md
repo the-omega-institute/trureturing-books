@@ -257,6 +257,24 @@ Here $(n+1)^2\le4n^2$ and $b-a\le15n^3$. Consecutive sample intervals cover the 
 
 The arithmetic input can be stated in terms of the prime-power counting function. For $x\ge2$ the Chebyshev error kernel is integrable and its tail integral equals $-U(x)/x$. At $x=n^4$, the sample hypothesis therefore amounts to proving the strict lower bound $\int_{n^4}^{\infty}(\psi(t)-t)t^{-2}\,dt>-1/n^2$ for every sufficiently large natural number $n$ (`manual derivation`). [`complete_chebyshev_tail_identity`](lean:D5/S3/Weil/Mertens/CompleteChebyshevTailIdentity.complete_chebyshev_tail_identity) · [`chebyshev_error_kernel_integrable`](lean:D5/S3/Weil/Mertens/WeightedPrimeLimit.chebyshev_error_kernel_integrable)
 
+Arbitrarily late power windows also admit a finite set of tests. For $2\le Y\le Z$, write
+
+$$
+S(Y,Z)=\{Y,Z\}\cup\{n^4:n\in\mathbb N,\ Y\le n^4\le Z\}.
+$$
+
+Including both endpoints provides bounds at the edges of the window even when neither endpoint is a fourth power.
+
+::: {.theorem #thm-ch31-quartic-power-windows title="Testing the endpoints and fourth powers in arbitrarily late power windows" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampling.rh_iff_quartic_power_windows"}
+Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\kappa>0$ and every real $R$ there exists $Y\ge\max\{R,2\}$ such that $U(t)\le t^{1/2+\kappa}$ at every $t\in S(Y,Y^b)$ in that same window.
+:::
+
+::: proof
+Under RH, [@thm-ch31-mangoldt-pointwise-power-window] supplies the bound throughout the window and hence at the samples. Conversely, given a loss $\kappa>0$, use $\delta=\min\{\kappa/2,1/2\}$ at the samples and put $p=1/2+\delta\le1$. For $x\in[Y,Z]$, bracket $x$ between consecutive fourth powers $n^4,(n+1)^4$ with $n\ge1$ and intersect this bracket with $[Y,Z]$ to get $[a,z]$. Both endpoints lie in $S(Y,Z)$. The chord bound for the ramps and the tangent estimate for the logarithmic term give an error at most $(z-a)^2/a\le225n^2$, since $a\ge n^4$ and $z-a\le15n^3$. Each endpoint raised to the power $p$ is at most $16x^p$, and $n^2\le x^p$, so $U(x)\le241x^p$. Choose a sufficiently late sample window to ensure $x^{\kappa-\delta}\ge241$ throughout it. This gives the pointwise bound of [@thm-ch31-mangoldt-pointwise-power-window]. The full proof is checked by the Lean kernel.
+:::
+
+The joint external Lean environment also checks a finite set of same-host tests. The set `samples Y Z` enumerates $0\le n\le\lfloor\sqrt{\sqrt Z}\rfloor$, keeps the fourth powers inside the window, and includes both endpoints. Fix $b>1$. For each $\kappa>0$ first choose $\varepsilon>0$ and real constants $e_D,e_L,K,c_{HH},e_K$ with $(e_D+e_L+7)\varepsilon\le\kappa$. Beyond any starting bound, choose a window. Each sampled $t$ may have its own frame, host $H$ and finite set $T$. At that point `EAtH` for the unit character with coefficient $4$ and `CoreAtH` must use the same $H,T$. The reference consumer `of_unit_family` extracts these data from `FamilyClassConnected ((GChi PChar.one).cls b)`, and `rh_of_finite_hosts` deduces RH from them. There are finitely many tests on each window. For every fixed loss the arithmetic hypothesis must still supply windows arbitrarily far out and the witnesses on them. [Pointwise comparison on a common host](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061455789) · [Kernel replay for finite samples and the host implication](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061515678)
+
 **What does monotonicity alone tell us about negative mass in a window?**
 
 ::: {.theorem #thm-ch31-monotone-window-sharpness title="A monotone count with quadratic depth and cubic window mass" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MonotoneTailSharpness.monotone_tail_quadratic_depth_cubic_mass"}
