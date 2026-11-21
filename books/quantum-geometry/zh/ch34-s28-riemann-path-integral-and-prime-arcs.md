@@ -524,7 +524,7 @@ $$
 
 在原点右侧，显式公式给出 $d(h)/h\to+\infty$。在远端取 $h=e^{-y/2}$。各个 Mangoldt 斜坡的带权中点不等式与归一化余项的显式公式误差一起，将右端从上方控制为 $O(h)$。除以 $h$，得到 $d(y)/h\to+\infty$。由于 $|e^{-y/2}U(e^y)-F(y)|=O(e^{-y/2})$，换回 $x=e^y$ 后，可加差额与 $d(y)/h$ 只差一个有界量。
 
-反过来，差额趋于正无穷蕴含 $U(x)\le M\sqrt{x}$ 在整个尾部成立。对任意 $\kappa>0$，充分大时 $M\le x^\kappa$，从而满足 [@thm-ch31-mangoldt-pointwise-power-window] 的逐点幂窗条件。完整定理由 Lean 内核检查。
+反过来，差额趋于正无穷蕴含 $U(x)\le M\sqrt{x}$ 在整个尾部成立。对任意 $\kappa>0$，充分大时 $M\le x^\kappa$，从而满足 [@thm-ch31-mangoldt-pointwise-power-window] 的逐点幂窗条件。完整证明由 Lean 内核检查。
 :::
 
 **手工推导。** 固定 $b>1$。对每个实数 $R$ 都存在 $Y\ge\max\{R,2\}$，使同一个 $[Y,Y^b]$ 上每一点都满足 $U(x)\le M\sqrt{x}$，这一条件等价于 RH。在 RH 下取上一定理中的 $D=0$，每个充分晚的窗口都成立。反向只假设任意晚存在这样的窗口。给定 $\kappa>0$，把起点下界提到 $x^\kappa\ge M$ 的阈值以上，再取这样一个窗口，应用 [@thm-ch31-mangoldt-pointwise-power-window] 即可。

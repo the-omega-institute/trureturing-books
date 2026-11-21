@@ -524,7 +524,7 @@ $$
 
 The explicit formula to the right of zero gives $d(h)/h\to+\infty$ as $h\downarrow0$. At large $y$ choose $h=e^{-y/2}$. The weighted midpoint inequality for the Mangoldt ramps, together with the explicit-formula error for the normalized remainder, bounds the right-hand side above by $O(h)$. Dividing by $h$ gives $d(y)/h\to+\infty$. Since $|e^{-y/2}U(e^y)-F(y)|=O(e^{-y/2})$, the additive gap at $x=e^y$ differs from $d(y)/h$ by a bounded amount.
 
-Conversely, divergence of the gap gives $U(x)\le M\sqrt{x}$ on the entire tail. For each $\kappa>0$ we eventually have $M\le x^\kappa$, so the pointwise power-window condition of [@thm-ch31-mangoldt-pointwise-power-window] holds. The full theorem is checked by the Lean kernel.
+Conversely, divergence of the gap gives $U(x)\le M\sqrt{x}$ on the entire tail. For each $\kappa>0$ we eventually have $M\le x^\kappa$, so the pointwise power-window condition of [@thm-ch31-mangoldt-pointwise-power-window] holds. The full proof is checked by the Lean kernel.
 :::
 
 **Hand derivation.** Fix $b>1$. RH is equivalent to the following window condition. For every real $R$ there exists $Y\ge\max\{R,2\}$ such that every point of the same interval $[Y,Y^b]$ satisfies $U(x)\le M\sqrt{x}$. Under RH take $D=0$ in the preceding theorem. Every sufficiently late window then works. For the converse assume such windows exist arbitrarily late. Given $\kappa>0$, increase the starting bound until $x^\kappa\ge M$ throughout the tail, choose one of the windows there, and apply [@thm-ch31-mangoldt-pointwise-power-window].
