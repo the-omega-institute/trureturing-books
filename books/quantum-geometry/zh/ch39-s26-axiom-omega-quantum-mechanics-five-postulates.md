@@ -298,6 +298,8 @@ Lean 证明去掉首位，把两个奇偶类都对应到同一组二进制尾串
 $$
 \alpha_n(N)=\frac12-\frac4N\left\lceil\frac{N}{8n}\right\rceil.
 $$
+最优固定种子计数见 [Lean 定理](lean:D5/S3/ConceptDynamics/Attribution/ParitySeedOptimization.best_fixed_seed_count)。
+
 例如 $\alpha_2(8)=0$，$\alpha_3(48)=1/3$。恰在 $N$ 为 $\operatorname{lcm}(2^{n+1},8n)$ 的正倍数时，它达到不限制种子数的最优值 $(n-1)/(2n)$。
 
 上界来自整数计数。将每个有序轮廓对的合并颜色计数除以四，得到一个非负整数矩阵，每行每列的和都是 $k=N/2^{n+1}$。对每个坐标，两侧边缘中位值为 $1$ 的归一化计数都为 $M$。若两位均为 $1$ 的计数是 $M-a_i$，则两种不匹配方向的计数各为 $a_i$。每对轮廓奇偶相反，至少有一位不同，因此 $2\sum_i a_i\ge N/4$。于是某个 $a_i$ 至少为 $\lceil M/n\rceil$。被 $H_i$ 固定的种子在两个输出的第 $i$ 位都必须是 $1$，故该坐标最多固定 $4(M-a_i)$ 颗种子。

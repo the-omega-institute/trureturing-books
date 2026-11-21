@@ -298,6 +298,8 @@ Conversely, flip a single fixed coordinate to match the two parity classes. Take
 $$
 \alpha_n(N)=\frac12-\frac4N\left\lceil\frac{N}{8n}\right\rceil.
 $$
+The sharp count is formalized in [the fixed-seed optimum](lean:D5/S3/ConceptDynamics/Attribution/ParitySeedOptimization.best_fixed_seed_count).
+
 In particular, $\alpha_2(8)=0$ and $\alpha_3(48)=1/3$. The value reaches the unrestricted optimum $(n-1)/(2n)$ exactly when $N$ is a positive multiple of $\operatorname{lcm}(2^{n+1},8n)$.
 
 To see the upper bound, divide each pooled profile-pair count by four. This gives a nonnegative integer matrix on the two parity classes with every row and column sum equal to $k=N/2^{n+1}$. Each coordinate has normalized mass $M$ at bit $1$ in each marginal. Write $M-a_i$ for the normalized mass where both bits are $1$. Then the two mismatch orientations each have mass $a_i$. Every used pair has opposite parity, so it differs in at least one coordinate and $2\sum_i a_i\ge N/4$. Some $a_i$ is therefore at least $\lceil M/n\rceil$. A seed fixed by $H_i$ must have both output bits equal to $1$ at $i$, so at most $4(M-a_i)$ seeds are fixed there.
