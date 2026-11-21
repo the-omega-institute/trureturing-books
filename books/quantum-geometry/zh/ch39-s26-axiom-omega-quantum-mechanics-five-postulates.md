@@ -297,6 +297,8 @@ $$
 
 取整数向量 $u$ 满足 $M_Ju=hw$。令 $b=B/h$，取 $k_0=1+\sum_{j\in J}|u_j|$，再令 $r=k_0b$。向量 $k_0p$ 与 $u+k_0p$ 均非负，分别实现 $mhr$ 与 $mh(r+1)$ 颗种子。原向量 $p$ 已实现 $mhb$ 颗种子。因为 $b$ 整除 $r$，归一化计数 $b$ 与 $r+1$ 互素。由两生成元的 Frobenius 界，对每个满足 $t\ge(b-1)r$ 的正整数 $t$，都能实现 $mht$ 颗种子。特别地，[整数纤维的周期与截断定理](lean:D5/S3/Combinatorics/NumericalSemigroup/IntegerFiberDegrees.eventual_counts)给出在严格正整数见证下的整除性和上述充分截断。 若 $b=1$，则 $mh$ 的每个正倍数均可实现。低于充分阈值时仍由原来的非负整数方程判断可行性。空输入只有一张空表，此时每个正种子数都可行。仿射半群的一般导子定理见 [Bruns、Gubeladze 与 Trung，引理 4.2.1](https://arxiv.org/abs/math/0101116)。
 
+对于包含归一化、核边缘和最优固定质量的这组事件，统一的预算定理从实数解构造正整数见证，并给出同一个正预算等价式、周期整除条件和充分截断值。 [正预算的判据、周期与截断值](lean:D5/S3/ConceptDynamics/Attribution/ActiveOrbitBudget.eventual_uniform_event_budgets)
+
 **用两个整数见证收紧截断界。** 沿用归一化次数 $b$ 的正向量 $p$ 和次数 $1$ 的有符号向量 $u$。把非负整数 $t$ 写成 $bq+r$，其中 $0\le r<b$。$p,u$ 的整数张成中存在次数为 $t$ 的非负向量，当且仅当
 $$
 qp+ru,\qquad (q+1)p+(r-b)u
