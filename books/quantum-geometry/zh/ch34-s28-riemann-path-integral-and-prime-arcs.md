@@ -341,6 +341,8 @@ RH 成立，当且仅当对每个实数 $\eta>0$ 和每个自然数 $A$，都存
 
 Alpöge 原证明的声明是 `riemannHypothesis : RiemannHypothesis`，其右端为 Mathlib 的定义。Sutherland 公布的审计日志列出该声明的三个公理 `propext`、`Classical.choice`、`Quot.sound`。本节参考算术模块所钉的 `ddf1d5f8` 与登记公开核验的 `6977b88c` 有相同的 `src` 源码树、Lean 工具链与 Lake 锁文件。[原证明公理审计](https://math.mit.edu/~drew/grh/audit.log) · [公开核验文件](https://math.mit.edu/~drew/grh/)
 
+2026 年 11 月 21 日，Lean 与 Mathlib 社群发表了由 Lean FRO 和 Mathlib Initiative 背书的联合声明，认证 Alpöge 对经典黎曼假设的命题与证明均正确。两种独立工具 `comparator` 和 `con-leche --compare` 均确认库中所证命题与仅导入 Mathlib 时陈述的 `RiemannHypothesis` 完全一致。[Lean 与 Mathlib 社群联合声明](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/)
+
 整数块路线的局部模块 `DesignIntegerBlocks` 和 `RawDesignIntegerBlocks` 各有定向重放。在 Lean 4.35.0 中，`BookNativeDesign.rh_of_unit_design` 以平滑扭曲设计的存在性、两个族类包含关系和九项闭合估计为输入。模一特征标的族类给出 `HypV`。`topDesWin` 的构造保留给定的 $e_D,e_L$。给定目标损失 $\kappa>0$，先取充分小的 $\varepsilon>0$ 使 $(e_D+e_L+7)\varepsilon\le\kappa$，再取 $k$ 达到比较估计 `core_gm` 的起点。于是块内每个 $n^4\ge k$ 都处于估计范围内，[@thm-ch31-quartic-integer-blocks] 即给出 RH。[设计条件与冻结整数块判据的内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7064767463)
 
 在同一 Lean 4.35.0 环境中，设 `C` 为族类。算术构造把有理矩阵有限群的 Minkowski 整除界 `minkowski_bound_rat` 代入 `MinkDiv → DesignChoices C 3 cT`，得到所需的族选择。薄尺度估计 `GlobalTheory.ThinScaleLiterature.litThin` 给出 `chosenThin_closed`。若另有两个在 `C` 上闭合的条件，即每个族 `Fm` 的尺寸估计 `cT ε Fm.CYL ≤ Fm.CTu → TuSize Fm` 和特征标条件 `ChosenProviso Fm 3`，则 `designExists_of_choices` 给出 `DesignExists C 3`。
