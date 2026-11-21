@@ -352,6 +352,18 @@ Levent Alpöge’s proposed proof constructs these windows at modulus one from e
 
 The preceding link between the two arguments has also undergone a conditional external Lean kernel check. In the reference repository’s pinned Lean 4.33.1 environment, `rh_of_family_and_unit_host` derives the Riemann hypothesis from the family input `TopG` and the modulus-one host input `HostExW (3/2) (GChi PChar.one).req`. For each $\kappa>0$ the two inputs produce arbitrarily late windows $[Y,Y^{3/2}]$ on which the same family gives $\mathrm{Gz}(x)\le x^{1/2+\kappa}$ at every real $x$. Here $\mathrm{Gz}(x)=U(x)$ is the book’s complete Mangoldt remainder, so the prime-only window criterion applies. This kernel replay takes the two inputs as hypotheses. The reference constructions that supply them lie outside its scope. The reproduction record includes the compatibility patch and successful kernel replay. `PinnedTop`, `WindowConsumer`, and `UnifiedWindowRH` check this conditional implication. `PinnedMesh` checks a separate fixed-character window criterion. [Conditional implication and reproducible source](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059461340)
 
+The reference mean-square theorem `QH.pairEx` supplies a single prime pair for the entire inner window. Take modulus one, $0<\varepsilon<1/52$, and $A\ge1$. For every sufficiently large $Y$ there are primes $q,d$ satisfying `PairGood 1 ε Y (Y^A) q d`, with the size, congruence and splitting conditions of `WinPair` evaluated at the fixed scale $Y$. For the three twist indices $(i,j)=(1,0),(0,1),(1,1)$, each primitive character $\chi$ inducing the corresponding quadratic twist satisfies both $|g_\chi(y)|\le y^{1/2+\varepsilon/2}$ and $|D_\chi|\le4\log y$ for every $Y\le y\le Y^A$. For real primitive base characters of conductor dividing $8$, the definition also imposes zero-free rectangles on the primitive characters inducing those three twists. This choice of $q,d$ uses the mean-square theorem already checked in the reference environment. [Fixed prime pair and outer-window quantifiers](https://github.com/the-omega-institute/trureturing/issues/32627#issuecomment-7059642097)
+
+Passing from the inner window to the modulus-one host also uses the cohomological input `VWinAt PChar.one`. Write $C$ for its cutoff exponent. For each such $\varepsilon$ and every rank schedule $e\colon\mathbb R\to\mathbb N$ satisfying $x^{2+8\varepsilon}\le2^{e(x)}\le2x^{2+8\varepsilon}$ for $x\ge1$, this input supplies $J\ge1$ and a threshold. For every $X$ beyond the threshold and every prime pair satisfying `WinPair ε (X^(1/J)) q d`, it gives a common subwindow $[W,W^2]\subseteq[X^{1/J},X]$. At each $x$ in that subwindow the estimate applies to every number field matching the character and $e(x),q,d$ under `IsChiField`. Fix such a field, any algebraic closure, and any family of local coefficient data indexed by the primes $\ell$, and put $t=\lfloor x^C\rfloor$. For each prime $\ell$ and $1\le j<t$, the cohomological length $\operatorname{shaLen}(\ell,j)$ is finite. Every finite set $S$ of primes satisfies
+
+$$
+\sum_{\ell\in S}\log\ell\sum_{1\le j<t}\operatorname{shaLen}(\ell,j)\le\sqrt{\exp(x^\varepsilon)}.
+$$
+
+At $C=401$, the common-window construction chooses $Y,q,d$ before quantifying over the real points of the outer interval $[Z,Z^{3/2}]$. The reference theorem `supplyChi` yields the modulus-one host used above. The same external Lean environment thus checks `TopG → VWinAt PChar.one 401 → RiemannHypothesis`. [Conditional cohomological-window implication](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059734329)
+
+The modulus-one character $\chi$ generates a group of order one. The field construction gives $1\le c\le|\langle\chi\rangle|$, so the order $c2^e$ in the host construction equals $2^e$ and satisfies the rank estimate above directly. This lowers the cutoff exponent from $401$ to $400$ at modulus one, with the sum running over $1\le j<\lfloor x^{400}\rfloor$. Under the exponent-$400$ window hypothesis, `fixed_of_400` supplies for each such $\varepsilon$ a $J\ge1$ such that, beyond any prescribed starting point, one can find an outer window $[Z,Z^{3/2}]$ and a single $Y,q,d$ with $Y\le Z\le Z^{3/2}\le Y^J$. The pair satisfies `PairGood` throughout $[Y,Y^J]$, and each $x$ in the outer window admits its matching $e(x)$ and the stated length bound. The same external environment checks `TopG → VWinAt PChar.one 400 → RiemannHypothesis`, with the family input and this weaker modulus-one window as hypotheses. [Source and kernel replay for exponent 400](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059864808)
+
 **How can one discriminant split at several primes?** For an odd prime $p$, write $J(-d,p)=\bigl(\frac{-d}{p}\bigr)$. A value of $1$ means that $t^2\equiv-d\pmod p$ has a nonzero solution. With $B=3$, the only small odd prime to test is $3$. The prime $d=23$ satisfies $d\equiv7\pmod{16}$ and $-23\equiv1\pmod3$. Take the prime $q=59\equiv3\pmod8$. Since $-23\equiv36=6^2\pmod{59}$, this pair passes both splitting tests. The construction below enforces all the finite conditions through particular residue classes. Those classes account for only some of the eligible primes.
 
 ::: {.theorem #thm-ch31-split-prime-host-series title="Weighted series for auxiliary primes with prescribed splitting" lean="D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series"}
@@ -606,6 +618,45 @@ Put $A(u)=\sum_{1\le n\le u}\chi(n)$. A complete period sums to zero, so a prefi
 :::
 
 **Hand derivation.** The coefficient $ej_qj_d$ has primitive conductor $8qd>1$, whereas a principal character has conductor $1$. It therefore satisfies the nonprincipal hypothesis, and we may set $h=8qd$ in the estimate. Bounding $L'/L$ further requires control of the zeros of $L$ in the specified region.
+
+**Controlling $L'/L$ at the same real endpoint.** Take a positive integer modulus $h$ and a nonprincipal complex Dirichlet character $\chi$ modulo $h$. Write $D_\chi=L'(1,\chi)/L(1,\chi)$. At a real $x>0$, define the ramp sum and the smoothed, centered character sum on the nonprincipal branch by
+
+$$
+R_\chi(x)=\sum_{1\le n\le\lfloor x\rfloor}\Lambda(n)\max(x/n-1,0)\chi(n),
+\qquad g_\chi(x)=R_\chi(x)+xD_\chi .
+$$
+
+The sum includes prime powers. When $x$ is an integer the entering term has weight zero. Write $I(x)=\int_x^\infty(\psi(u)-u)u^{-2}\,du$, where $\psi(u)=\sum_{n\le u}\Lambda(n)$, and let $\gamma$ denote Euler’s constant.
+
+::: {.theorem #thm-ch31-log-derivative-ramp-tail title="The character ramp and signed tail at a common endpoint" lean="D5/S3/CharacterSums/DirichletRampEndpoint.logDerivative_le_ramp_tail"}
+For every positive integer modulus $h$, every nonprincipal complex Dirichlet character $\chi$ modulo $h$, and every real $x>0$,
+
+$$
+|D_\chi|\le\frac{|g_\chi(x)|}{x}+\log x-1-\gamma-I(x).
+$$
+
+:::
+
+::: proof
+Apply the triangle inequality to $xD_\chi=g_\chi(x)-R_\chi(x)$. Since $|\chi(n)|\le1$, the normalized ramp $|R_\chi(x)|/x$ is bounded by $\sum_{n\le x}\Lambda(n)/n-\psi(x)/x$. For $x\ge2$ the complete Chebyshev tail identity expresses this as $\log x-1-\gamma-I(x)$, preserving the sign of the tail. For $0<x<2$ the ramp vanishes. The integrand in $I(x)$ is $-1/u$ on $(x,2)$, giving the same formula by integration back from $2$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-uniform-log-derivative-ramp title="Uniform logarithmic derivative bound from a square-root-scale ramp" lean="D5/S3/CharacterSums/DirichletRampEndpoint.uniform_logDerivative_of_ramp"}
+For all real $\varepsilon<1/2$ and $\eta>0$ there exists $X\ge2$ such that for every $x\ge X$, every positive integer modulus $h$, and every nonprincipal complex Dirichlet character $\chi$ modulo $h$,
+
+$$
+|g_\chi(x)|\le x^{1/2+\varepsilon}
+\quad\Longrightarrow\quad
+|D_\chi|\le\log x-1-\gamma+\eta .
+$$
+
+:::
+
+::: proof
+Dividing the bound on the centered sum $|g_\chi(x)|$ by $x$ gives $|g_\chi(x)|/x\le x^{\varepsilon-1/2}\to0$. The Chebyshev error kernel is absolutely integrable on the tail, so $I(x)\to0$. Choose $X$ so that each error has magnitude less than $\eta/2$ and apply the preceding endpoint inequality. Both errors are controlled by functions of the real endpoint and loss parameters alone, so one threshold works for all moduli and characters. The full proof is checked by the Lean kernel.
+:::
+
+**Hand derivation.** On the nonprincipal branch, the reference’s smoothed, centered sum `An.gChi` used above agrees with $g_\chi$ by definition. For each bounded host character and each nonprincipal primitive character $\chi$ inducing it, the host condition `EAtH.bdG` gives $|g_\chi(x)|\le x^{1/2+\varepsilon}$ at the same endpoint $x$. If $\varepsilon<1/2$, take $\eta=1$. Then $|D_\chi|\le\log x-\gamma\le4\log x$ for every sufficiently large $x$. This is the inequality required by `EAtH.bdL` with coefficient $4$ for that $\chi$. The principal character has a separate branch. [Definitions of the centered sum and logarithmic derivative](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Analytic.lean#L9-L27) · [The two pointwise host conditions](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ExplicitFormulaErrorOfHostConditions.lean#L144-L151)
 
 **How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
 

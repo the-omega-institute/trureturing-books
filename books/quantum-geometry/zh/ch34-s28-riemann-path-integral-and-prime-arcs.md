@@ -352,6 +352,18 @@ Levent Alpöge 提出的证明在模 $1$ 使用外部算术输入构造这族整
 
 针对上述手工衔接，已有一次条件性的外部 Lean 内核复核。固定在参考库的 Lean 4.33.1 环境中，`rh_of_family_and_unit_host` 从族输入 `TopG` 和模一特征标的宿主输入 `HostExW (3/2) (GChi PChar.one).req` 推出黎曼猜想。对每个 $\kappa>0$，两个输入共同给出任意远的 $[Y,Y^{3/2}]$，使同一族在窗内每个实数 $x$ 处都有 $\mathrm{Gz}(x)\le x^{1/2+\kappa}$。这里 $\mathrm{Gz}(x)=U(x)$ 正是本书的完整 Mangoldt 余项，故可应用上文的素数窗口判据。此次内核重放以这两个输入为假设，参考库中提供它们的构造在重放范围之外。复现记录给出兼容补丁及成功的内核重放，其中 `PinnedTop`、`WindowConsumer` 和 `UnifiedWindowRH` 核验这条条件推论，`PinnedMesh` 核验另一条固定特征标的窗口判据。[固定环境中的条件推论与复现源码](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059461340)
 
+外部参考库的均方定理 `QH.pairEx` 给出了同时覆盖内窗的素数对。取模数 $1$、$0<\varepsilon<1/52$ 与 $A\ge1$。对每个充分大的 $Y$，存在一对素数 $q,d$ 满足 `PairGood 1 ε Y (Y^A) q d`，其中 `WinPair` 的大小、同余与分裂条件都在固定尺度 $Y$ 处计算。对三组扭转指标 $(i,j)=(1,0),(0,1),(1,1)$，诱导相应二次扭转的每个本原特征标 $\chi$ 在整个 $Y\le y\le Y^A$ 上同时满足 $|g_\chi(y)|\le y^{1/2+\varepsilon/2}$ 与 $|D_\chi|\le4\log y$；对于导子整除 $8$ 的实本原基特征标，定义还要求这三组扭转的本原诱导特征标在指定矩形内无零点。这里选择 $q,d$ 只用参考库已核验的均方定理。[固定素数对与外窗的量词](https://github.com/the-omega-institute/trureturing/issues/32627#issuecomment-7059642097)
+
+从内窗到模一宿主另用上同调输入 `VWinAt PChar.one`，记其截断指数为 $C$。对每个上述 $\varepsilon$ 以及每个在 $x\ge1$ 满足 $x^{2+8\varepsilon}\le2^{e(x)}\le2x^{2+8\varepsilon}$ 的秩指数函数 $e\colon\mathbb R\to\mathbb N$，该输入给出 $J\ge1$ 与起点。对于起点以后的每个 $X$ 以及每对满足 `WinPair ε (X^(1/J)) q d` 的素数，它给出共同子窗 $[W,W^2]\subseteq[X^{1/J},X]$。子窗内每个 $x$ 的估计适用于匹配该特征标、$e(x),q,d$ 的每个数域（`IsChiField`）。固定这样的数域、任意代数闭包，以及一族按素数 $\ell$ 编号的局部系数数据，令 $t=\lfloor x^C\rfloor$。对于每个素数 $\ell$ 与 $1\le j<t$，上同调长度 $\operatorname{shaLen}(\ell,j)$ 都有限，且对每个有限素数集 $S$ 有
+
+$$
+\sum_{\ell\in S}\log\ell\sum_{1\le j<t}\operatorname{shaLen}(\ell,j)\le\sqrt{\exp(x^\varepsilon)}.
+$$
+
+取 $C=401$ 时，共同子窗的构造先选好 $Y,q,d$，再量化外窗 $[Z,Z^{3/2}]$ 内的实点。`supplyChi` 给出上段所需的模一宿主。同一外部 Lean 环境由此核验了 `TopG → VWinAt PChar.one 401 → RiemannHypothesis`。[上同调窗口的条件推论](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059734329)
+
+模一特征标 $\chi$ 生成的群只有一个元素。数域构造给出 $1\le c\le|\langle\chi\rangle|$，所以宿主构造中的阶 $c2^e$ 等于 $2^e$，直接满足上述秩估计。这使模一情形的截断指数可以从 $401$ 降到 $400$，求和只用 $1\le j<\lfloor x^{400}\rfloor$。在指数 $400$ 的窗口假设下，`fixed_of_400` 对每个上述 $\varepsilon$ 给出 $J\ge1$，使得超过任意给定起点都能找到外窗 $[Z,Z^{3/2}]$ 与一组共同的 $Y,q,d$，其中 $Y\le Z\le Z^{3/2}\le Y^J$。这对素数在 $[Y,Y^J]$ 上满足 `PairGood`，外窗内每个 $x$ 又有与之匹配的 $e(x)$ 和上述长度界。同一外部环境核验了 `TopG → VWinAt PChar.one 400 → RiemannHypothesis`。族输入与这个较弱的模一窗口输入都是该推论的假设。[指数 400 的源码与内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059864808)
+
 **怎样让同一个判别式在几个素数处都分裂？** 对奇素数 $p$，记 $J(-d,p)=\bigl(\frac{-d}{p}\bigr)$。值为 $1$ 的意思是 $t^2\equiv-d\pmod p$ 有非零解。取 $B=3$，要检查的小奇素数只有 $3$。素数 $d=23$ 满足 $d\equiv7\pmod{16}$ 及 $-23\equiv1\pmod3$。再取素数 $q=59\equiv3\pmod8$，有 $-23\equiv36=6^2\pmod{59}$。这一对满足所需的两个分裂条件。下面的构造用特定剩余类一次保证所有有限条件，这些剩余类只占可用素数的一部分。
 
 ::: {.theorem #thm-ch31-split-prime-host-series title="满足局部分裂条件的辅助素数的加权级数" lean="D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series"}
@@ -606,6 +618,45 @@ $$
 :::
 
 **手工推导。** 系数 $ej_qj_d$ 的本原导子为 $8qd>1$，而主特征标的导子为 $1$，因此它满足非主条件，可以在上式中代入 $h=8qd$。要进一步估计 $L'/L$，仍需在所指定的区域控制 $L$ 的零点。
+
+**从同一实端点控制 $L'/L$。** 取正整数模数 $h$、模 $h$ 的非主复 Dirichlet 特征标 $\chi$，记 $D_\chi=L'(1,\chi)/L(1,\chi)$。在正实数 $x$ 处定义斜坡和及非主分支的平滑中心化和
+
+$$
+R_\chi(x)=\sum_{1\le n\le\lfloor x\rfloor}\Lambda(n)\max(x/n-1,0)\chi(n),
+\qquad g_\chi(x)=R_\chi(x)+xD_\chi .
+$$
+
+这里的和包含素数幂；当 $x$ 本身是整数时，新进入的一项权重为零。记 $I(x)=\int_x^\infty(\psi(u)-u)u^{-2}\,du$，其中 $\psi(u)=\sum_{n\le u}\Lambda(n)$，$\gamma$ 为欧拉常数。
+
+::: {.theorem #thm-ch31-log-derivative-ramp-tail title="同一端点的斜坡和与带符号尾积分" lean="D5/S3/CharacterSums/DirichletRampEndpoint.logDerivative_le_ramp_tail"}
+对每个正整数 $h$、每个模 $h$ 的非主复 Dirichlet 特征标 $\chi$ 和每个实数 $x>0$，有
+
+$$
+|D_\chi|\le\frac{|g_\chi(x)|}{x}+\log x-1-\gamma-I(x).
+$$
+
+:::
+
+::: proof
+在 $xD_\chi=g_\chi(x)-R_\chi(x)$ 中用三角不等式。由于 $|\chi(n)|\le1$，$|R_\chi(x)|/x$ 至多为 $\sum_{n\le x}\Lambda(n)/n-\psi(x)/x$。对 $x\ge2$，完整的 Chebyshev 尾积分恒等式把后一式写成 $\log x-1-\gamma-I(x)$，保留了尾项的符号。对 $0<x<2$，斜坡和为零；在 $(x,2)$ 上尾积分的被积函数为 $-1/u$，从端点 $2$ 积回 $x$ 给出同一公式。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-uniform-log-derivative-ramp title="平方根尺度斜坡界给出的统一对数导数估计" lean="D5/S3/CharacterSums/DirichletRampEndpoint.uniform_logDerivative_of_ramp"}
+对所有实数 $\varepsilon<1/2$、$\eta>0$，存在 $X\ge2$，使得对每个 $x\ge X$、每个正整数 $h$ 及每个模 $h$ 的非主复 Dirichlet 特征标 $\chi$，都有
+
+$$
+|g_\chi(x)|\le x^{1/2+\varepsilon}
+\quad\Longrightarrow\quad
+|D_\chi|\le\log x-1-\gamma+\eta .
+$$
+
+:::
+
+::: proof
+用中心化和 $|g_\chi(x)|$ 的界除以 $x$，得 $|g_\chi(x)|/x\le x^{\varepsilon-1/2}\to0$。Chebyshev 误差核绝对可积，故 $I(x)\to0$。取 $X$ 使这两项的误差各小于 $\eta/2$，代入上一条端点界即可。二者只依赖实端点和误差参数，所以同一个起点适用于所有模数与特征标。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 非主分支上，前文使用的参考库平滑中心化和 `An.gChi` 与上式的 $g_\chi$ 定义一致。对宿主有界集合中的每个特征标及诱导它的每个非主本原特征标 $\chi$，宿主条件 `EAtH.bdG` 在同一端点 $x$ 给出 $|g_\chi(x)|\le x^{1/2+\varepsilon}$。若 $\varepsilon<1/2$，取 $\eta=1$，则每个充分大的 $x$ 都有 $|D_\chi|\le\log x-\gamma\le4\log x$。这给出 `EAtH.bdL` 对该 $\chi$ 要求的系数 $4$ 的不等式。主特征标有单独的分支。[中心化和与对数导数的定义](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Analytic.lean#L9-L27) · [宿主的两个逐点条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ExplicitFormulaErrorOfHostConditions.lean#L144-L151)
 
 **窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
 
