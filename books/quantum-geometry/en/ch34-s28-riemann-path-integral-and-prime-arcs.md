@@ -318,6 +318,16 @@ Choose the left side if $\vartheta(x)\le x$ and the right side otherwise. On the
 
 A window budget strictly below $r^3\sqrt{x}$ therefore rules out a dip of depth $4r^2$ at that interior point. The margins on both sides determine which $r$ can be used. The arbitrarily late windows with small budgets required by the Landau argument still require a separate arithmetic estimate.
 
+**How do frequent positive averages force a lower bound in every late window?** Use the complete Mangoldt remainder $U$ and the prime-only negative mass $N$ defined above. For real $v$ put $H(v)=\int_{v-\ln 2}^v U(e^t)\,dt$. Suppose a real sequence $u_n\to+\infty$ satisfies $u_{n+1}/u_n\to1$. Suppose also that $H(u_n)\ge c e^{\beta u_n}/u_n^M$ for all sufficiently large $n$, for some $c>0$, $\beta>1/2$, and $M\in\mathbb R$. Then for every $\varepsilon>0$ and every sufficiently large $Y$,
+
+$$
+N(Y,Y^{3/2})\ge Y^{(3/2)(\beta-1/2)-\varepsilon}.
+$$
+
+Write $y=\ln Y$ and fix $1<k<3/2$. Starting past a sufficiently late index, take the first $n$ with $u_n\ge ky$. The preceding term is below $ky$, and successive ratios are eventually below $3/(2k)$, so $ky\le u_n\le3y/2$. Once $(k-1)y\ge\ln 2$, the entire interval $[e^{u_n}/2,e^{u_n}]$ lies within $[Y,Y^{3/2}]$. Substituting $x=e^t$ and using $U(x)=-xQ(x)$ gives $H(u_n)=-\int_{e^{u_n}/2}^{e^{u_n}}Q(x)\,dx$. The prime-power correction gives $Q_\vartheta\le Q$, and $\sqrt x\le e^{u_n/2}$ on the shorter interval. Thus $H(u_n)\le e^{u_n/2}N(Y,Y^{3/2})$. Taking $k$ close to $3/2$ leaves an arbitrarily small exponent loss to absorb $c$ and $u_n^M$.
+
+Connecting this estimate to zeta zeros also requires analytic hypotheses. Radziejewski's logarithmic-frequency oscillation theorem supplies an alternating sequence with $\ln x_{n+1}/\ln x_n\to1$ and a lower bound on the amplitude with a logarithmic loss. To obtain the required positive averages from a zero with $\operatorname{Re}(\rho)>1/2$, one must verify the weak boundedness and real-axis main-term conditions for the Mellin transform of this actual average. [Radziejewski, Theorem 3.2](https://doi.org/10.4064/aa163-2-7)
+
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 
   $$
