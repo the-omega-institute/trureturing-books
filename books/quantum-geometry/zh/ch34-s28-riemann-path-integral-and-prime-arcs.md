@@ -356,8 +356,10 @@ Levent Alpöge 提出的证明在模 $1$ 使用外部算术输入构造这族整
 给定自然数 $B$，令 $D_B$ 为所有满足 $d\equiv7\pmod{16}$ 且对每个奇素数 $p\le B$ 有 $J(-d,p)=1$ 的素数 $d$ 所成的集合。对 $d\in D_B$，令 $Q_d$ 为所有满足 $q\equiv3\pmod8$ 且 $J(-d,q)=1$ 的素数 $q$ 所成的集合。则
 
 $$
-\lim_{X\to\infty}\sum_{\substack{d\in D_B\\d<X}}\frac{\ln d}{d}=+\infty,\qquad
-\lim_{X\to\infty}\sum_{\substack{q\in Q_d\\q<X}}\frac{\ln q}{q}=+\infty\quad(d\in D_B).
+\begin{aligned}
+\lim_{X\to\infty}\sum_{\substack{d\in D_B\\d<X}}\frac{\ln d}{d}&=+\infty,\\
+\lim_{X\to\infty}\sum_{\substack{q\in Q_d\\q<X}}\frac{\ln q}{q}&=+\infty\quad(d\in D_B).
+\end{aligned}
 $$
 
 这里 $X$ 取自然数。对每个自然数 $N$，存在 $d\in D_B$ 使 $d>N$。对每个 $d\in D_B$ 和每个自然数 $Q$，存在 $q\in Q_d$ 使 $q>Q$。反过来，若先给素数 $q\equiv3\pmod8$，令 $S_{B,q}=\{d\in D_B:q\in Q_d\}$，则 $\sum_{d\in S_{B,q},\,d<X}(\ln d)/d\to+\infty$，且对每个自然数 $N$ 都有 $d\in S_{B,q}$ 满足 $d>N$。
@@ -369,7 +371,7 @@ $$
 
 若先指定一个满足 $q\equiv3\pmod8$ 的素数，则把小素数的截点提高到 $\max(B,q)$。此时 $q$ 自己就是必须分裂的小奇素数之一，所以在 $D_{\max(B,q)}$ 中任取 $d$，都有 $d\in D_B$ 且 $J(-d,q)=1$。删去任意有限前缀仍保留发散性，两种选取顺序都允许最后选定的素数超过任给下限。外库的初等构造先选 $d$、再选 $q$，陈述的是超过给定下限的素数存在性。上面的加权发散刻画了两次选择各自有多少素数可用。[外库的两次素数选择](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/PrimeDiscriminants/ExistsHost.lean#L39-L97)
 
-整窗估计还要在给定尺度上同时选好这一对素数。外库的定量命题在其解析假设下，固定 $0<\varepsilon<1/52$，对每个充分大的实数 $x$ 先选 $q$ 再为它选 $d$，使同一对素数满足 $\sqrt{X_1}<q\le X_1$、$\sqrt{X_2}<d\le X_2$，其中 $X_1,X_2$ 由 $x,\varepsilon$ 决定。`QDq` 控制 $x$ 处的三个二次角色（对应 $q$、$d$ 及两者的乘积），`Boxq` 对六个角色或其扭曲给出零点区域条件。对所有整数 $1\le n\le2x^{2+8\varepsilon}$，同一对素数还须满足 `Rowq` 的分裂及 $\ln(4nqd)$ 上界。这些条件对每个 $x$ 选一对素数。令 $t=\varepsilon/5$，由 $X_1=\exp(x^t)$ 得 $x^t/2<\ln q\le x^t$。若 $Y$ 和 $Y^b$ 两端沿用同一个 $q$，就有 $Y^{bt}/2<\ln q\le Y^t$，从而 $Y^{(b-1)t}<2$。固定 $b>1$ 后，充分远窗口的两个端点必须换用不同的 $q$（`手工推导`）。从逐尺度选择到上文的整窗误差界，还需外库的角色估计及算术构造。[先选 $q$ 再选 $d$ 的定量构造](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBounds.lean) · [定量选取的假设与量词](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBoundsStatement.lean#L17) · [角色与范围条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/InertJacobiLevels/AsmIface.lean#L166-L185)
+整窗估计还要在给定尺度上同时选好这一对素数。外库的定量命题在其解析假设下，固定 $0<\varepsilon<1/52$ 后，先给出 $x_0$ 和一个常数 $C>0$，再对每个实数 $x\ge x_0$ 先选 $q$ 再为它选 $d$，使同一对素数满足 $\sqrt{X_1}<q\le X_1$、$\sqrt{X_2}<d\le X_2$，其中 $X_1,X_2$ 由 $x,\varepsilon$ 决定。`QDq` 以同一常数 $C$ 控制三个二次特征标在尺度 $x$ 的估计（对应 $q$、$d$ 及两者的乘积），`Boxq` 对特征标及其扭曲给出六个无零点区域条件。对所有整数 $1\le n\le2x^{2+8\varepsilon}$，同一对素数还须满足 `Rowq` 的分裂及 $\ln(4nqd)$ 上界。这些条件对每个 $x$ 选一对素数。令 $t=\varepsilon/5$，由 $X_1=\exp(x^t)$ 得 $x^t/2<\ln q\le x^t$。若 $Y$ 和 $Y^b$ 两端沿用同一个 $q$，就有 $Y^{bt}/2<\ln q\le Y^t$，从而 $Y^{(b-1)t}<2$。固定 $b>1$ 后，要在充分远窗口的两个端点都满足 `Rowq` 的大小限制，必须换用不同的 $q$（`手工推导`）。从逐尺度选择到上文的整窗误差界，还需外库的特征标估计及算术构造。[先选 $q$ 再选 $d$ 的定量构造](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBounds.lean) · [定量选取的假设与量词](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBoundsStatement.lean#L17) · [特征标与范围条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/InertJacobiLevels/AsmIface.lean#L166-L185)
 
 对任一固定的实数 $b>1$，记
 
