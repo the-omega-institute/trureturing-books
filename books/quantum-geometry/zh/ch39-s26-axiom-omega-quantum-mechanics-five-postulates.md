@@ -337,6 +337,8 @@ $$
 
 若剩余倍率为奇数，至少一个 $t_i$ 为正。把一个计数为 $(4,0)$ 或 $(0,4)$、倍率为 $1$ 的边界块换成计数相同、倍率为 $2$ 的块。以 $(4,0)$ 为例，取轮廓匹配 $11\leftrightarrow10$ 与 $00\leftrightarrow01$。在第二个轮廓对上取四种颜色组合构成的轨道的两个副本。在第一个轮廓对上，左颜色为 $0$ 时取两点颜色轨道的两个副本，左颜色为 $1$ 时取一个四点正则轨道，投影到两种右颜色。此时每个着色边缘纤维都有四颗种子。恰好左颜色为 $0$ 的两个副本中的四颗种子被第一坐标生成元固定。交换两个坐标即得另一种块。剩余倍率成为偶数，再用零计数实现补足。
 
+Lean 已形式化[四倍整除性](lean:D5/S3/ConceptDynamics/Attribution/ParitySeedCountSpectrum.coordinate_fixed_count_four_dvd)、[零向量判据](lean:D5/S3/ConceptDynamics/Attribution/ParitySeedCountSpectrum.zero_coordinate_counts_iff)与[二维完整固定计数谱](lean:D5/S3/ConceptDynamics/Attribution/ParitySeedCountSpectrum.exact_two_coordinate_counts)。
+
 **有理边缘的等权最优校准。** 设 $G$ 作用于有限输入集 $X$ 与有限输出集 $Y$，$P$ 是 $G$-协变概率核，$H$ 是任意子群。若存在正整数 $m$ 使所有 $mP(x,y)$ 为整数，则某个等权种子律达到 $H$ 固定质量的最大值。种子数可取 $m|\det B|$，其中 $B$ 是下述整数矩阵在某个最优解正支撑上的可逆方形子式。
 
 把每张确定性读出表 $t:X\to Y$ 在其 $G$-轨道 $O$ 内的权重统一记为 $q_O$。令 $A$ 的归一化行在列 $O$ 处取 $|O|$，单元格 $(x,y)$ 对应的行取 $|\{t\in O:t(x)=y\}|$，并令 $b$ 的相应条目为 $1$ 和 $P(x,y)$。再令 $c_O$ 为 $O$ 内被 $H$ 固定的表的个数。等变地把种子映到整张读出表会保留边缘，且每颗 $H$ 固定的种子都落到 $H$ 固定的表。反过来，可用正权重的表与求值读出实现任一可行表律。因此最大固定质量是 $Aq=b$、$q\ge0$ 下 $\sum_O c_Oq_O$ 的最优值。逐行独立抽样给出不变表律，归一化行使可行集有界。可行集闭合，所以最优值取得。
