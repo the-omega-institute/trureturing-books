@@ -331,6 +331,26 @@ Write $\ell=\log(\mu/M_Z)$ and $a_i(\ell)=\alpha_i^{-1}(M_Z e^\ell)$, in the ord
 - **Shortest-chord directions.** The two scalar multiplets have a common mass $M_D=m_0/\sqrt2$. At $\log(M_D/M_Z)=5.72$ and $5.88$, the crossing residual is negative and positive, respectively. By the intermediate value theorem some mass in $27.80<M_D/\mathrm{TeV}<32.63$ gives a three-coupling intersection at $4.20\times10^{14}<\mu/\mathrm{GeV}<4.47\times10^{14}$. [Running equations and interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/808#issuecomment-7068707149)
 - **All nine endpoint directions.** Two light modes and one heavy mode give $M_{\mathrm{heavy}}/M_{\mathrm{light}}=\sqrt{11/3}$. The light multiplets turn on together and the heavy multiplet at a second threshold. At $\log(M_{\mathrm{light}}/M_Z)=13.19$ and $13.32$, the crossing residual is negative and positive, respectively. Hence some mass in $4.8784\times10^7<M_{\mathrm{light}}/\mathrm{GeV}<5.5557\times10^7$ gives a three-coupling intersection at $4.1905\times10^{14}<\mu/\mathrm{GeV}<4.4417\times10^{14}$. The mode selection changes the light-mass window. Both examples calibrate $m_0$ against low-energy gauge data. The representation, the mass operator and the dynamics that would realize these thresholds in the particle spectrum require independent physical input. [Nine-point density matrix and two-threshold certificate](https://github.com/the-omega-institute/trureturing-books/issues/808#issuecomment-7068775268)
 
+**Which propagators can reproduce this response? (Scalar exchange model.)** Let $s=q_E^2>0$ be the squared Euclidean momentum and introduce a free mass scale $M>0$. Set $b_\gamma=M^2\gamma^2$ and retain the weights $p_\gamma=m_\gamma/(S\gamma^2)$. The dimensionless response $A(s)=F(s/M^2)=\sum_\gamma p_\gamma b_\gamma/(s+b_\gamma)$ decreases strictly from $1$ to $0$. If a scalar diagonal propagator without contact terms has a positive spectral representation $D(s)=\int_{[0,\infty)}(s+b)^{-1}\,d\rho(b)$, then $sD(s)$ is nondecreasing because each $s/(s+b)$ is nondecreasing. This excludes $A(s)/s$ as such an autocorrelation propagator. The partial fractions locate the obstruction:
+$$
+\frac{A(s)}s=\frac1s-\sum_\gamma\frac{p_\gamma}{s+b_\gamma}.
+$$
+
+Take two distinguishable real scalar sources. Describe the spectral weight at each mass by a positive semidefinite matrix, with total weight normalized to the identity $I$. Put the matrix $Z$ at zero mass and $p_\gamma(I-Z)$ at squared mass $b_\gamma$, where
+$$
+ Z=\begin{pmatrix}1/2&r\\r&1/2\end{pmatrix},\qquad
+ D(s)=\frac{Z}{s}+(I-Z)\sum_\gamma\frac{p_\gamma}{s+b_\gamma}.
+$$
+Both $Z$ and $I-Z$ have eigenvalues $1/2\pm r$. Thus all these weights are positive semidefinite exactly when $|r|\le1/2$. The mixed response is $sD_{12}(s)=rA(s)$, while the two diagonal responses obey $sD_{11}(s)=sD_{22}(s)=1-A(s)/2$. For $r\ne0$, division by the massless mixed residue $r=\lim_{s\downarrow0}sD_{12}(s)$ recovers the preceding half-value prediction. Doubling the momentum magnitude multiplies $s$ by $4$.
+
+The same bound on the mixed residue holds for any two-source model with total spectral weight $I$. Its zero-mass spectral matrix $Z_0$ satisfies $0\preceq Z_0\preceq I$. Its expectations on the unit vectors $e_\pm=(1,\pm1)/\sqrt2$ both lie in $[0,1]$, and their difference is $2(Z_0)_{12}$. If $|(Z_0)_{12}|=1/2$, the two expectations must be $0$ and $1$ in some order. A vector on which a positive semidefinite quadratic form vanishes belongs to the kernel of its matrix. Applying this to $Z_0$ and $I-Z_0$ shows that $e_\pm$ are eigendirections and both diagonal entries must equal $1/2$.
+
+At the endpoint $r=1/2$ of the construction above, the symmetric combination of sources couples only to the massless mode, and the antisymmetric combination couples only to the gapped spectrum. For static point sources at separation $R>0$ in three spatial dimensions, the Green function for each mass $M\gamma$ is $e^{-M\gamma R}/(4\pi R)$. Summing with the mixed spectral residues gives the exchange kernel
+$$
+\frac{r}{4\pi R}\left(1-\sum_\gamma p_\gamma e^{-M\gamma R}\right).
+$$
+The potential energy also includes the source couplings and their signs. This construction specifies spin zero, a positive spectrum, two sources and a normalization. Identifying a physical interaction requires independent information about the sources, their couplings and the mass scale $M$.
+
 ## 39.2.3 Tier 5: Heap-Geodesic Intelligence and Apophatic Self-Transparency of AXIOM-Ω {#sec-ch39-25-3}
 
 At Tier 5, the cascade turns from physical cosmos to intelligent mind, and finally reflects $\mathrm{AXIOM}\text{-}\Omega$ upon itself:
