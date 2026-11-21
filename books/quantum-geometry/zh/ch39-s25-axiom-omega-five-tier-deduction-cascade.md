@@ -380,6 +380,49 @@ $$
 - **取最短弦方向。** 两份标量的共同质量为 $M_D=m_0/\sqrt2$。在 $\log(M_D/M_Z)=5.72$ 与 $5.88$ 处，交点残差分别为负与正。由介值定理，能在 $27.80<M_D/\mathrm{TeV}<32.63$ 内选到一个质量，使三支规范耦合在 $4.20\times10^{14}<\mu/\mathrm{GeV}<4.47\times10^{14}$ 相交。[逐质量跑动方程与区间证书](https://github.com/the-omega-institute/trureturing-books/issues/808#issuecomment-7068707149)
 - **取全部九个端点方向。** 两个轻模式与一个重模式的质量比为 $M_{\mathrm{heavy}}/M_{\mathrm{light}}=\sqrt{11/3}$。两个轻多重态同时开启，重多重态在第二个阈值开启。在 $\log(M_{\mathrm{light}}/M_Z)=13.19$ 与 $13.32$ 处，交点残差分别为负与正。因此可选 $4.8784\times10^7<M_{\mathrm{light}}/\mathrm{GeV}<5.5557\times10^7$，使三支耦合在 $4.1905\times10^{14}<\mu/\mathrm{GeV}<4.4417\times10^{14}$ 相交。轻质量窗口随模式选择而变。两种算例的 $m_0$ 均由低能规范数据校准。表示、质量算子以及在真实粒子谱中实现这些阈值的动力学仍须独立给出。[九点密度矩阵与双阈值证书](https://github.com/the-omega-institute/trureturing-books/issues/808#issuecomment-7068775268)
 
+**这条响应曲线可以由哪些传播子读出？（标量交换模型）** 取欧氏动量平方 $s=q_E^2>0$，引入自由质量尺度 $M>0$。令 $b_\gamma=M^2\gamma^2$，沿用 $p_\gamma=m_\gamma/(S\gamma^2)$。无量纲响应 $A(s)=F(s/M^2)=\sum_\gamma p_\gamma b_\gamma/(s+b_\gamma)$ 从 $1$ 严格递减到 $0$。没有接触项的标量对角传播子若有正谱表示 $D(s)=\int_{[0,\infty)}(s+b)^{-1}\,d\rho(b)$，则 $sD(s)$ 非减，因为每个 $s/(s+b)$ 都非减。因此 $A(s)/s$ 不能作为这种自相关传播子。分式分解还指出阻碍出现在哪里：
+
+$$
+\frac{A(s)}s=\frac1s-\sum_\gamma\frac{p_\gamma}{s+b_\gamma}.
+$$
+
+改取两个可区分的实标量外源，以正半定矩阵描述各质量处的谱权重，并把总权重归一为单位阵 $I$。在零质量处放矩阵 $Z$，在质量平方 $b_\gamma$ 处放 $p_\gamma(I-Z)$，其中
+
+$$
+ Z=\begin{pmatrix}1/2&r\\r&1/2\end{pmatrix},\qquad
+ D(s)=\frac{Z}{s}+(I-Z)\sum_\gamma\frac{p_\gamma}{s+b_\gamma}.
+$$
+
+$Z$ 与 $I-Z$ 的特征值都是 $1/2\pm r$。所以这组谱权重均为正半定当且仅当 $|r|\le1/2$。混合响应为 $sD_{12}(s)=rA(s)$，两条对角自响应均为 $sD_{11}(s)=sD_{22}(s)=1-A(s)/2$。若 $r\ne0$，用无质量混合留数 $r=\lim_{s\downarrow0}sD_{12}(s)$ 归一，即恢复前段的半值预测。动量大小加倍对应 $s$ 乘以 $4$。
+
+::: {.theorem #thm-ch39-two-source-massless-residue title="归一化两源的混合留数" lean="D5/S3/Quantum/TwoSource/MasslessResidue.sharp_mixed_residue"}
+给定 $r\in\mathbb R$。存在实 $2\times2$ 矩阵 $Z_0$，满足 $0\preceq Z_0\preceq I$ 且 $(Z_0)_{12}=r$，当且仅当 $|r|\le1/2$。若 $|r|=1/2$，每个实现的两条对角都为 $1/2$，两个非对角元都为 $r$。
+:::
+
+::: proof
+任取总谱为 $I$ 的两源模型。设它的无质量谱矩阵为 $Z_0$，则 $0\preceq Z_0\preceq I$。在单位向量 $e_\pm=(1,\pm1)/\sqrt2$ 上的两个期望值都属于 $[0,1]$，它们的差为 $2(Z_0)_{12}$。若 $|(Z_0)_{12}|=1/2$，两个期望值中一个为 $0$，另一个为 $1$。正半定矩阵的零二次型向量在其核内，分别用于 $Z_0$ 和 $I-Z_0$，可知 $e_\pm$ 是两个本征方向，且两条对角必均为 $1/2$。反过来，上段构造的 $Z$ 实现了区间内的每个 $r$。完整证明由 Lean 内核检查。
+:::
+
+正谱还能约束两源对重模态的耦合。令 $v,w$ 为两个源的方向，选取符号使 $r>0$，写 $H(s)=D(s)-Z_0/s$ 为有质量谱贡献的正半定双线性型。若混合响应满足 $sD(v,w)=rA(s)$ 且 $Z_0(v,w)=r$，则
+
+$$
+ H(v-w,v-w)=H(v+w,v+w)+\frac{4r[1-A(s)]}{s}.
+$$
+
+右端第二项对每个 $s>0$ 严格为正。因此两种源的耦合必须在有质量谱上有所区别。在上述 $r=1/2$ 的构造中，对称组合没有有质量分量，等号给出最小的差异，系数 $4$ 达到锐界。
+
+可用树级电弱中性传播子作一次单极点对照。对于守恒源，只取横向传播，规范基 $B,W^3$ 由无质量光子与$Z$ 玻色子（质量 $m_Z$）正交混合。将 $sD_{BW^3}(s)$ 除以无质量混合留数 $\sin\theta_W\cos\theta_W$，两极点留下 $A_Z(s)=m_Z^2/(s+m_Z^2)$。它在 $s=m_Z^2$ 处等于 $1/2$，动量大小加倍后给出 $A_Z(4m_Z^2)=1/5$。算术谱在同一半值校准下预言约 $0.330835577358412$。对于给定的一对守恒流，设两端的光子和 $Z$ 耦合乘积分别为 $C_{\mathrm{ph}}$ 与 $C_Z$。当 $C_{\mathrm{ph}}\ne0$ 时，归一化读数为 $1+(C_Z/C_{\mathrm{ph}})s/(s+m_Z^2)$。上述单极点形状要求 $C_Z=-C_{\mathrm{ph}}$，由外源对两极点的耦合决定。[PDG 2024，式 (10.3a)、(10.3c)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-standard-model.pdf)
+
+在上述构造的端点 $r=1/2$，源的对称组合只耦合无质量模式，反对称组合只耦合有隙谱。三个空间维中的静态点源在间距 $R>0$ 处，每个质量 $M\gamma$ 的格林函数为 $e^{-M\gamma R}/(4\pi R)$。按混合谱留数相加，得到交换核
+
+$$
+\frac{r}{4\pi R}\left(1-\sum_\gamma p_\gamma e^{-M\gamma R}\right).
+$$
+
+短距离时，许多高质量模式也参与交换。令 $x=MR$、$h(x)=1-\sum_\gamma p_\gamma e^{-x\gamma}$、$T=1/x$。对 $\gamma\le T$，以 $x\gamma$ 代替 $1-e^{-x\gamma}$ 的总误差为 $O(x^2N(T)/S)$；其余各项之和为 $O(x\log(1/x)/S)$。按重数计的黎曼–冯·曼戈尔特公式 $N(T)\sim T\log T/(2\pi)$ 经分部求和给出 $\sum_{\gamma\le T}m_\gamma/\gamma\sim(\log T)^2/(4\pi)$。因此 $h(x)\sim x[\log(1/x)]^2/(4\pi S)$。交换核的短距首项是 $rM[\log(1/(MR))]^2/(16\pi^2S)$。
+
+记此静态核为 $G_{12}(R)$。若静态能量中的线性源项取 $-\langle J,\phi\rangle$，消去标量场后，两点源的相互作用能为 $-g_1g_2G_{12}(R)$，其中 $g_1,g_2$ 是带符号的耦合。这个构造指定了自旋零、正谱、两个外源和归一化。要与某种实际相互作用联系，还须独立给出两种源、它们的耦合及质量尺度 $M$ 的物理依据。
+
 ## 39.2.3 第五阶推导：流群测地智能与母公理自身的遮诠透明化 {#sec-ch39-25-3}
 
 在第五阶顶点，演绎链从自然宇宙折返智能心智，并最终回照 $\mathrm{AXIOM}\text{-}\Omega$ 自身：
