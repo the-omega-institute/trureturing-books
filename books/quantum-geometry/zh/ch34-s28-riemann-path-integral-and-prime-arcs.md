@@ -277,7 +277,7 @@ $$
 
 在参考库取 $b=3/2$ 的设计中，常数为 $C_{\mathrm{abs}}=2$、$C_0=3$，所得模一族满足 $e_D=2$、$e_L=0$。给定这样的族，有 $\varepsilon_1>0$，使每个 $0<\varepsilon<\varepsilon_1$ 都能先固定 $K,c_{HH},e_K$，再对每个自然数下界 $A$ 找到 $k\ge\max\{A,2\}$。对整数块 $k^3\le n\le k^4$ 中的每个 $n$，在 $x=n^4$ 取同一宿主和有限集上的 `EAtH` 与 `CoreAtH`。比较的幂指数为 $1/2+(2+0+7)\varepsilon=1/2+9\varepsilon$。给定目标损失 $\kappa>0$，选取足够小的 $\varepsilon$ 使 $9\varepsilon\le\kappa$，这些任意晚的整数块就给出通向 RH 的条件推论。[整数块、设计输入与指数的定向核验](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061662378)
 
-Alpöge 原证明的声明是 `riemannHypothesis : RiemannHypothesis`，其右端为 Mathlib 的定义。Sutherland 公布的审计日志列出该声明的三个公理 `propext`、`Classical.choice`、`Quot.sound`。本节参考算术模块所钉的 `ddf1d5f8` 与登记公开核验的 `6977b88c` 有相同的 `src` 源码树、Lean 工具链与 Lake 锁文件。本节整数块路线的两个局部模块 `DesignIntegerBlocks` 与 `RawDesignIntegerBlocks` 均已分别通过定向内核重放。从原始伽罗瓦输入经全部闭合估计接到这两个模块的完整拼接已按源码核对。[原证明公理审计](https://math.mit.edu/~drew/grh/audit.log) · [公开核验文件](https://math.mit.edu/~drew/grh/)
+Alpöge 原证明的声明是 `riemannHypothesis : RiemannHypothesis`，其右端为 Mathlib 的定义。Sutherland 公布的审计日志列出该声明的三个公理 `propext`、`Classical.choice`、`Quot.sound`。本节参考算术模块所钉的 `ddf1d5f8` 与登记公开核验的 `6977b88c` 有相同的 `src` 源码树、Lean 工具链与 Lake 锁文件。本节整数块路线的两个局部模块 `DesignIntegerBlocks` 与 `RawDesignIntegerBlocks` 均已分别通过定向内核重放。局部的设计到算术族这一步以九项闭合估计为输入。另一路线从原始伽罗瓦行出发，经 `BookIntegerHostBlocks.of_reference` 取得整数块，再推出 RH；该完整拼接已按源码核对。[原证明公理审计](https://math.mit.edu/~drew/grh/audit.log) · [公开核验文件](https://math.mit.edu/~drew/grh/)
 
 **单调性本身对负部窗口给出什么限制？**
 
