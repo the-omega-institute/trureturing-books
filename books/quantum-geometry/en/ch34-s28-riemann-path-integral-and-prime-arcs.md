@@ -407,6 +407,33 @@ Conversely, suppose $\zeta(\rho)=0$ with $\beta=\operatorname{Re}\rho>1/2$. For 
 Take $\varepsilon=\eta=b(\beta-1/2)/3$. The lower bound becomes $Y^{2\eta}$, in contradiction with $A_{\vartheta,b}(Y)\le Y^\eta$ on arbitrarily late windows. This excludes zeros to the right of the critical line. Reflection of the nontrivial zeros across that line gives RH. The full proof is checked by the Lean kernel.
 :::
 
+**At which scales can one choose a prime with a small character sum?** Fix $\varepsilon>0$. For each integer $k\ge1$ take the prime upper bound $X_k=2^k$ and the height $x_k=(k\ln2)^{5/\varepsilon}$, so $\exp(x_k^{\varepsilon/5})=X_k$. The block contains the primes $X_k/2\le q<X_k$ congruent to $3$ modulo $8$. Consecutive blocks are disjoint. For sufficiently large $k$ the lower endpoint exceeds $\sqrt{X_k}$, so the whole block fits the size band for $q$ in the reference.
+
+For each such prime let $N_k=\lfloor x_k^{400}\rfloor$ and put
+
+$$
+T_k(q)=\sum_{n=1}^{N_k}\Lambda(n)\min\{1,x_k/n\}\left(\frac{n}{q}\right).
+$$
+
+Here $\Lambda(p^j)=\ln p$ for primes $p$ and integers $j\ge1$. All other positive integers have weight zero. Terms up to $x_k$ retain their full weight, while larger terms receive a factor $x_k/n$. If $|T_k(q)|\le x_k^{1/2+\varepsilon}/2$, add $(\ln q)/q$ to $G_k$. Otherwise add it to $B_k$. Equality is included in $G_k$.
+
+::: {.theorem #thm-ch31-dyadic-mangoldt-prime-supply title="Good primes for the truncated Mangoldt sum at dyadic scales" lean="D5/S3/CharacterSums/DyadicMangoldtPrimeSupply.dyadic_quadratic_mangoldt_supply"}
+For each fixed real $\varepsilon>0$, the exceptional primes have finite total weight, and the partial sums of the good weight tend to positive infinity:
+
+$$
+\begin{aligned}
+\sum_{k=1}^{\infty} B_k&<\infty,\\
+\lim_{K\to\infty}\sum_{k=1}^K G_k&=+\infty.
+\end{aligned}
+$$
+:::
+
+::: proof
+Sum $|T_k|^2$ over every integer in the block congruent to $3$ modulo $8$. These nonnegative terms include the contribution of the exceptional primes. The total truncated weight of higher prime powers is $O(\sqrt{x_k})$. For the cross terms at distinct odd primes, quadratic reciprocity turns the varying denominator into a periodic sum. Complete periods cancel, leaving endpoint remainders. Every exceptional prime contributes more than $x_k^{1+2\varepsilon}/4$ to the second moment. Using $(\ln q)/q\le 2\ln(X_k)/X_k$ throughout the block gives $B_k=O_\varepsilon(k^{-4})$ for all sufficiently large $k$. The exceptional weight is therefore summable. On the other hand the sum of $(\ln q)/q$ over primes congruent to $3$ modulo $8$ diverges. Summing over the disjoint blocks and subtracting the finite exceptional weight gives the divergence of the good weight. The full proof is checked by the Lean kernel.
+:::
+
+Thus for every starting block $K_0$ there exist a $k\ge K_0$ and a prime $q$ in that block meeting the bound. Divergence allows individual blocks to contain no good prime. The estimate concerns the finite sum for the first selection of $q$ in the reference, with the extra twist $\kappa=1$. Approximating the character function by that sum requires control of the truncation error. In the subsequent choice of $d$, the twists and modulus vary with $q,x$. The logarithmic derivative estimates and zero-free boxes at the same scale also require separate arguments. [Finite sum in the reference](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/SmoothedRemainderRealIntegralFormula.lean#L139-L147) · [Conditions in the first prime selection](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean)
+
 **How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
 
 $$

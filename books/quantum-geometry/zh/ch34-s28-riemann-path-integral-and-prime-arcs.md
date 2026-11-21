@@ -407,6 +407,33 @@ $$
 取 $\varepsilon=\eta=b(\beta-1/2)/3$，下界就成为 $Y^{2\eta}$，与任意远处仍有 $A_{\vartheta,b}(Y)\le Y^\eta$ 矛盾。因此临界线右侧无零点，再用非平凡零点关于临界线的对称性即得 RH。完整证明由 Lean 内核检查。
 :::
 
+**在哪些尺度上能选到特征标和小的素数？** 固定 $\varepsilon>0$。对整数 $k\ge1$，把素数的上界定为 $X_k=2^k$，再选 $x_k=(k\ln2)^{5/\varepsilon}$，于是 $\exp(x_k^{\varepsilon/5})=X_k$。这一块只用 $X_k/2\le q<X_k$ 中模 $8$ 余 $3$ 的素数。第 $k$ 块与第 $k+1$ 块互不相交。对足够大的 $k$，块的下端已超过 $\sqrt{X_k}$，所以它整个落在外库为 $q$ 指定的大小范围内。
+
+对这样的素数，取 $N_k=\lfloor x_k^{400}\rfloor$，记
+
+$$
+T_k(q)=\sum_{n=1}^{N_k}\Lambda(n)\min\{1,x_k/n\}\left(\frac{n}{q}\right).
+$$
+
+其中 $p$ 为素数，整数 $j\ge1$ 时 $\Lambda(p^j)=\ln p$，其余正整数的权重为零。小于等于 $x_k$ 的项保留原权重，较大的项乘以 $x_k/n$。若 $|T_k(q)|\le x_k^{1/2+\varepsilon}/2$，把 $(\ln q)/q$ 计入 $G_k$，否则计入 $B_k$。等号属于 $G_k$。
+
+::: {.theorem #thm-ch31-dyadic-mangoldt-prime-supply title="二进尺度上截断 Mangoldt 和的好素数" lean="D5/S3/CharacterSums/DyadicMangoldtPrimeSupply.dyadic_quadratic_mangoldt_supply"}
+对每个固定的实数 $\varepsilon>0$，坏素数的总权重有限，而好素数的部分和趋于正无穷：
+
+$$
+\begin{aligned}
+\sum_{k=1}^{\infty} B_k&<\infty,\\
+\lim_{K\to\infty}\sum_{k=1}^K G_k&=+\infty.
+\end{aligned}
+$$
+:::
+
+::: proof
+为估计坏素数，先把 $|T_k|^2$ 在块内所有模 $8$ 余 $3$ 的整数上求和。这些非负项包含了所需的素数项。高次素数幂的截断权重总量为 $O(\sqrt{x_k})$。对不同奇素数的交叉项，二次互反律把分母的变化转成一个周期和，完整周期相消，只剩两端的余项。每个坏素数的平方贡献都超过 $x_k^{1+2\varepsilon}/4$。再用块内 $(\ln q)/q\le 2\ln(X_k)/X_k$，得到对所有充分大的 $k$ 有 $B_k=O_\varepsilon(k^{-4})$，故坏素数的总权重有限。另一方面，模 $8$ 余 $3$ 的素数上 $(\ln q)/q$ 的总和发散。把它按这些不相交的块相加，再扣除有限的坏权重，就得到好权重的发散。完整证明由 Lean 内核检查。
+:::
+
+因此每个起始块 $K_0$ 之后，都有某个 $k\ge K_0$ 和该块的一个素数 $q$ 达到上述界。发散允许部分块内没有好素数。这里估计的是外库在第一次选 $q$ 时使用的有限和，对应附加扭曲 $\kappa=1$。把它变成特征标函数的近似，还需处理截断误差。随后选 $d$ 时的扭曲和模数会随 $q,x$ 变化，同一尺度上的对数导数估计与无零点盒条件也有各自的证明。[参考库的有限和](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/SmoothedRemainderRealIntegralFormula.lean#L139-L147) · [第一次选素数的条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean)
+
 **窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
 
 $$
