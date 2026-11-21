@@ -289,6 +289,52 @@ Under RH, [@thm-ch31-mangoldt-quartic-sampling] gives $U(n^4)<n^2$ for every suf
 Conversely, given a loss $\kappa>0$ and any real starting bound $R$, take a natural number $A\ge R$ and choose $k$ from the block condition. Set $Y=k^{12}$. Then $Y\ge R$ and $Y^{4/3}=k^{16}$. The endpoints are $(k^3)^4$ and $(k^4)^4$. Since fourth powers are strictly increasing on the natural numbers, the endpoints and all fourth powers between them are precisely the values $n^4$ in this integer block. Applying [@thm-ch31-quartic-power-windows] with $b=4/3$ gives RH. The full proof is checked by the Lean kernel.
 :::
 
+The pointwise test also admits a formulation with one weighted sum. Taking the positive part of $U(n^4)$ prevents negative samples from cancelling large positive samples in the same block. For positive integers $n$ and $1\le a\le b$, write
+
+$$
+s_n=\frac{\max\{U(n^4),0\}}{n^3},\qquad
+M(a,b)=\sum_{n=a}^{b}s_n.
+$$
+
+Let $Q_\vartheta(x)=\int_x^\infty(\vartheta(t)-t)t^{-2}\,dt$, where $\vartheta(t)=\sum_{p\le t}\ln p$ sums over primes.
+
+::: {.theorem #thm-ch31-quartic-prime-mass title="Weighted samples control the negative part of the prime tail" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.prime_mass_le_samples"}
+There is a real constant $C\ge0$ such that for all natural numbers $2\le a\le b$,
+
+$$
+\int_{a^4}^{b^4}\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx+15s_b
+\le 135M(a,b)+C(\ln b-\ln a).
+$$
+:::
+
+::: proof
+On each interval between successive fourth powers, the positive parts at the endpoints and the chord error bound the positive part of $U$. Integrating and adding over the cells gives coefficient $135$ at interior samples and $120$ at the final sample, leaving $15s_b$ on the left. The Chebyshev bound for the contribution of higher prime powers transfers the estimate from the complete tail to the prime tail by increasing the uniform coefficient of the logarithmic error. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-quartic-mass-log title="A logarithmic bound for the weighted sample sum under RH" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.eventual_logarithmic_bound"}
+Assume RH. For every sufficiently large natural number $a$ and every natural number $b\ge a$, one has $M(a,b)<1/a+\ln b-\ln a$.
+:::
+
+::: proof
+Under RH, $U(n^4)<n^2$ for all sufficiently large $n$, so $s_n<1/n$. Keep the first term $1/a$ and bound the remaining harmonic sum by $\int_a^b dt/t$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-quartic-mass-zero title="A zero right of the critical line forces power growth of the sample sum" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.off_line_zero_forces_sample_mass"}
+Let $z\in\mathbb C$ satisfy $\zeta(z)=0$ with $\beta=\operatorname{Re}z>1/2$. For every real $\varepsilon>0$ and all sufficiently large natural numbers $k$, one has $k^{16(\beta-1/2)-\varepsilon}\le M(k^3,k^4)$.
+:::
+
+::: proof
+Take $Y=k^{12}$ and apply the prime-tail mass lower bound forced by the zero on $[Y,Y^{4/3}]=[k^{12},k^{16}]$. The comparison in [@thm-ch31-quartic-prime-mass] transfers that bound to $M(k^3,k^4)$. Use a smaller exponent loss in the window bound and absorb the constants and logarithmic error with the remaining loss. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-quartic-mass-rh title="A weighted sample criterion on arbitrarily late integer blocks" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampleMass.rh_iff_subpower_sample_mass"}
+RH holds if and only if, for every real $\eta>0$ and every natural number $A$, there is a natural number $k\ge\max\{A,2\}$ with $M(k^3,k^4)\le k^\eta$.
+:::
+
+::: proof
+Under RH, [@thm-ch31-quartic-mass-log] gives $M(k^3,k^4)<k^{-3}+\ln k$ for large $k$, which is eventually bounded by $k^\eta$. Conversely, if a zero has real part $\beta>1/2$, take $\eta=4(\beta-1/2)$. With $\varepsilon=\eta$, [@thm-ch31-quartic-mass-zero] gives the eventual lower bound $k^{3\eta}$, contradicting the upper bound on arbitrarily late blocks. Reflection in the critical strip then gives RH. The full proof is checked by the Lean kernel.
+:::
+
 The joint external Lean environment also checks a finite set of same-host tests. The set `samples Y Z` enumerates $0\le n\le\lfloor\sqrt{\sqrt Z}\rfloor$, keeps the fourth powers inside the window, and includes both endpoints. Fix $b>1$. For each $\kappa>0$ first choose $\varepsilon>0$ and real constants $e_D,e_L,K,c_{HH},e_K$ with $(e_D+e_L+7)\varepsilon\le\kappa$. Beyond any starting bound, choose a window. Each sampled $t$ may have its own frame, host $H$ and finite set $T$. At that point `EAtH` for the unit character with coefficient $4$ and `CoreAtH` must use the same $H,T$. The reference consumer `of_unit_family` extracts these data from `FamilyClassConnected ((GChi PChar.one).cls b)`, and `rh_of_finite_hosts` deduces RH from them. There are finitely many tests on each window. For every fixed loss the arithmetic hypothesis must still supply windows arbitrarily far out and the witnesses on them. [Pointwise comparison on a common host](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061455789) · [Kernel replay for finite samples and the host implication](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061515678)
 
 At $b=3/2$ the original modulus-one design takes $C_{\mathrm{abs}}=2$ and $C_0=3$ and specifies $e_D=2$, $e_L=0$. The `TopG` interface records only the existence of the two exponents. The Lean 4.33.1 proof starts from the original Galois row and uses `BookDesignIntegerBlocks.of_design` at the design step to retain the specified values. This gives the closed declaration `BookFixedReference.unit_family`. Its consequence `BookFixedReference.fixed_integer_blocks` gives some $\varepsilon_1>0$. For each $0<\varepsilon<\varepsilon_1$ it first fixes $K,c_{HH},e_K$ and then, for every natural lower bound $A$, supplies $k\ge\max\{A,2\}$. For every natural $n$ with $k^3\le n\le k^4$, `EAtH` and `CoreAtH` use the same host and finite set at $x=n^4$. The power exponent in the comparison is $1/2+(2+0+7)\varepsilon=1/2+9\varepsilon$. Given $\kappa>0$, choosing $\varepsilon$ small enough that $9\varepsilon\le\kappa$ gives the condition of [@thm-ch31-quartic-integer-blocks]. [Original design with fixed exponents](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7061662378) · [Kernel replay of fixed-exponent blocks from the Galois row](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7064831569)
@@ -339,7 +385,7 @@ $$
 U(x)\le x^{1/2+\eta}\quad (k^{12}\le x\le k^{16}).
 $$
 
-The sum ranges over the integers in the block. The second bound holds for every real $x$ in the closed interval, including both endpoints. Taking $\kappa=\min\{\eta/32,1/2\}$, the proof bounds the weighted samples by a harmonic sum after division by $n^3$ and interpolates between fourth powers on the same block to cover the real window. A single $k$ can meet the thresholds for both estimates. [Both bounds from the reference arithmetic on one block](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067180276)
+The sum ranges over the integers in the block. The second bound holds for every real $x$ in the closed interval, including both endpoints. Taking $\kappa=\min\{\eta/32,1/2\}$, the proof bounds the weighted samples by a harmonic sum after division by $n^3$ and interpolates between fourth powers on the same block to cover the real window. A single $k$ can meet the thresholds for both estimates. The weighted sum here is $M(k^3,k^4)$ in [@thm-ch31-quartic-mass-rh]. [Both bounds from the reference arithmetic on one block](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7067180276)
 
 **What does monotonicity alone tell us about negative mass in a window?**
 
