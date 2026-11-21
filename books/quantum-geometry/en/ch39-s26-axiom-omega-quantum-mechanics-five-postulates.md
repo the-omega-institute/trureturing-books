@@ -235,7 +235,7 @@ $$
 
 The choice $d=1$ always applies. A larger value requires the overlap to cover every positive-weight seed moved by $N$ with the stated multiplicity.
 
-Under the same multiplicity lower bound, the count gives an exact gap. Write $L_K=1-\alpha_K$. Seeds fixed by $N$ lie outside every failure event, so
+For the exact gap, let $d$ be any nonnegative integer such that every positive-weight seed moved by $N$ lies in at least $d$ distinct events. Write $L_K=1-\alpha_K$. Seeds fixed by $N$ lie outside every failure event, so
 $$
 rL_H-dL_N=\sum_{s\in S\setminus S^N} a(s)\,(\ell(s)-d).
 $$
