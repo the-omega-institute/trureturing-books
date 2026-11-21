@@ -549,6 +549,8 @@ $$
 若任意晚都有一个整窗满足 $U(x)\le C\sqrt{x}$，同一批窗口也满足较大的系数 $M+1$ 的上界。由 [@thm-ch31-mangoldt-pointwise-sqrt-window] 得到 RH。取 $\delta=M-C>0$，在 [@thm-ch31-mangoldt-bounded-gap-peak] 中从 $n=\lceil\ln Y\rceil$ 出发。充分大的 $Y$ 满足 $(b-1)\ln Y\ge L+1$，故 $n+k\in[\ln Y,b\ln Y]$。取 $x=e^{n+k}$，便在同一窗内得到 $U(x)/\sqrt{x}>M-\delta=C$，与假设矛盾。完整证明由 Lean 内核检查。
 :::
 
+**手工推导。** 令 $P_b(Y)=\max_{Y\le x\le Y^b}U(x)/\sqrt{x}$。对 $Y\ge2$，归一化余项连续，故闭窗上能取到最大值。对任意 $a<M$，上一条定理给出充分大 $Y$ 处的 $P_b(Y)>a$。在 RH 下，绝对包络对每个 $c>M$ 又给出充分大的 $Y$ 处 $P_b(Y)<c$，所以 $P_b(Y)\to M$。若 RH 不成立，给定任意实数 $T$，取 $C=\max\{T,M+1\}$，则 [@thm-ch31-mangoldt-pointwise-sqrt-window] 的逆否命题给出充分大的 $Y$ 处 $P_b(Y)>C\ge T$。此时 $P_b(Y)\to+\infty$。[整窗最大值的外部内核重放](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7060137372)
+
 ::: {.theorem #thm-ch31-wide-prime-window title="宽窗口质量的下界与 RH 失败时的一致发散" lean="D5/S3/Weil/Mertens/IntegratedExplicit/WidePrimeWindowMass.prime_tail_wide_window_mass"}
 对于实际素数尾项，记实端点 $2\le A\le B$ 的窗口质量为
 

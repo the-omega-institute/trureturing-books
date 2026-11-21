@@ -549,6 +549,8 @@ Fix real numbers $b>1$ and $C<M$. Unconditionally, there exists a real $R$ such 
 Suppose arbitrarily late windows satisfy $U(x)\le C\sqrt{x}$ throughout. The same windows satisfy the upper bound with the larger coefficient $M+1$, so [@thm-ch31-mangoldt-pointwise-sqrt-window] gives RH. Take $\delta=M-C>0$ and apply [@thm-ch31-mangoldt-bounded-gap-peak] starting at $n=\lceil\ln Y\rceil$. For large $Y$ we have $(b-1)\ln Y\ge L+1$, so $n+k\in[\ln Y,b\ln Y]$. The point $x=e^{n+k}$ in that very window then satisfies $U(x)/\sqrt{x}>M-\delta=C$, contradicting the assumed bound. The full proof is checked by the Lean kernel.
 :::
 
+**Hand derivation.** Let $P_b(Y)=\max_{Y\le x\le Y^b}U(x)/\sqrt{x}$. For $Y\ge2$ the normalized remainder is continuous and attains its maximum on the closed window. For every $a<M$, the preceding theorem gives $P_b(Y)>a$ for all sufficiently large $Y$. Under RH the absolute envelope gives $P_b(Y)<c$ eventually for every $c>M$, so $P_b(Y)\to M$. If RH fails, fix any real $T$ and take $C=\max\{T,M+1\}$. The contrapositive of [@thm-ch31-mangoldt-pointwise-sqrt-window] then gives $P_b(Y)>C\ge T$ for all sufficiently large $Y$. Thus $P_b(Y)\to+\infty$. [External kernel replay for the window maximum](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7060137372)
+
 ::: {.theorem #thm-ch31-wide-prime-window title="A lower mass bound on wide windows and uniform divergence if RH fails" lean="D5/S3/Weil/Mertens/IntegratedExplicit/WidePrimeWindowMass.prime_tail_wide_window_mass"}
 For the actual prime-only tail, write the mass at real endpoints $2\le A\le B$ as
 
