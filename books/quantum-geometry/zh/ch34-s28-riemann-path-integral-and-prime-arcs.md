@@ -442,6 +442,71 @@ $$
 取 $\varepsilon=\eta=b(\beta-1/2)/3$，下界就成为 $Y^{2\eta}$，与任意远处仍有 $A_{\vartheta,b}(Y)\le Y^\eta$ 矛盾。因此临界线右侧无零点，再用非平凡零点关于临界线的对称性即得 RH。完整证明由 Lean 内核检查。
 :::
 
+::: {.theorem #thm-ch31-wide-prime-window title="宽窗口质量的下界与 RH 失败时的一致发散" lean="D5/S3/Weil/Mertens/IntegratedExplicit/WidePrimeWindowMass.prime_tail_wide_window_mass"}
+对于实际素数尾项，记实端点 $2\le A\le B$ 的窗口质量为
+
+$$
+N(A,B)=\int_A^B \frac{\max\{-Q_\vartheta(x),0\}}{\sqrt x}\,dx .
+$$
+
+固定 $b>1$。在 $2\le A$、$A^b\le B$ 的范围内，存在一个只依赖于 $b$ 的常数 $C_b\ge0$，使 $N(A,B)\ge 2\ln(B/A)-C_b$。如果 RH 不成立，对每个实数 $K$，存在一个右端点阈值 $S$，对所有 $B\ge S$ 及所有满足上述条件的 $A$，都有 $N(A,B)-2\ln(B/A)\ge K$。
+:::
+
+::: proof
+为看出阈值为何与 $A$ 无关，从右端点取 $Y=B^{1/b}$。条件 $A^b\le B$ 保证 $[Y,B]=[Y,Y^b]\subseteq[A,B]$，同一非负被积函数使大窗的质量至少等于子窗的质量。RH 若失败，对称性给出实部 $\beta>1/2$ 的零点。固定幂窗口的下界允许任意正的指数损失，所以可取损失 $b(\beta-1/2)/2$，对所有充分大的 $B$ 及所有允许的 $A$ 给出 $N(A,B)\ge B^{(\beta-1/2)/2}$。当 $B$ 增大时，此幂超过 $2\ln B$ 加任意固定常数。用 $2\ln(B/A)\le2\ln B$ 即得一致发散。在阈值以下，对数项有界且质量非负，故可补齐下界。RH 成立时，所有 $2\le A\le B$ 上的有界余项直接给出所需下界。 完整证明由 Lean 内核检查。
+:::
+
+这里需要预先固定 $b>1$。在对数坐标下，$B\ge A^b$ 仍要求随尺度增大而加宽窗口。对于固定比率 $B/A$ 的窗口，当前推导的子窗包含关系未提供相同结论。
+
+**在哪些尺度上能选到特征标和小的素数？** 固定 $\varepsilon>0$。对整数 $k\ge1$，把素数的上界定为 $X_k=2^k$，再选 $x_k=(k\ln2)^{5/\varepsilon}$，于是 $\exp(x_k^{\varepsilon/5})=X_k$。这一块只用 $X_k/2\le q<X_k$ 中模 $8$ 余 $3$ 的素数。第 $k$ 块与第 $k+1$ 块互不相交。对足够大的 $k$，块的下端已超过 $\sqrt{X_k}$，所以它整个落在外库为 $q$ 指定的大小范围内。
+
+为计算二次矩，对块内每个正奇整数 $q$ 都用 Jacobi 符号定义这个和。取 $N_k=\lfloor x_k^{400}\rfloor$，记
+
+$$
+T_k(q)=\sum_{n=1}^{N_k}\Lambda(n)\min\{1,x_k/n\}\left(\frac{n}{q}\right).
+$$
+
+其中 $p$ 为素数，整数 $j\ge1$ 时 $\Lambda(p^j)=\ln p$，其余正整数的权重为零。小于等于 $x_k$ 的项保留原权重，较大的项乘以 $x_k/n$。仅对块内模 $8$ 余 $3$ 的素数 $q$ 计权。若 $|T_k(q)|\le x_k^{1/2+\varepsilon}/2$，把 $(\ln q)/q$ 计入 $G_k$，否则计入 $B_k$。等号属于 $G_k$。
+
+::: {.theorem #thm-ch31-dyadic-mangoldt-prime-supply title="二进尺度上截断 Mangoldt 和的好素数" lean="D5/S3/CharacterSums/DyadicMangoldtPrimeSupply.dyadic_quadratic_mangoldt_supply"}
+对每个固定的实数 $\varepsilon>0$，坏素数的总权重有限，而好素数的部分和趋于正无穷：
+
+$$
+\begin{aligned}
+\sum_{k=1}^{\infty} B_k&<\infty,\\
+\lim_{K\to\infty}\sum_{k=1}^K G_k&=+\infty.
+\end{aligned}
+$$
+:::
+
+::: proof
+为估计坏素数，先把 $|T_k|^2$ 在块内所有模 $8$ 余 $3$ 的整数上求和。这些非负项包含了所需的素数项。高次素数幂的截断权重总量为 $O(\sqrt{x_k})$。对不同奇素数的交叉项，二次互反律把分母的变化转成一个周期和，完整周期相消，只剩两端的余项。对固定 $\varepsilon$，充分大块的二次矩至多为 $(X_k/2)x_k^{1+\varepsilon}$。每个坏素数的平方贡献都超过 $x_k^{1+2\varepsilon}/4$。再用块内 $(\ln q)/q\le 2\ln(X_k)/X_k$，并代入 $x_k^\varepsilon=(k\ln 2)^5$，得到对所有充分大的 $k$ 有 $B_k\le 4/(k\ln 2)^4$，故坏素数的总权重有限。另一方面，模 $8$ 余 $3$ 的素数上 $(\ln q)/q$ 的总和发散。把它按这些不相交的块相加，再扣除有限的坏权重，就得到好权重的发散。完整证明由 Lean 内核检查。
+:::
+
+因此每个起始块 $K_0$ 之后，都有某个 $k\ge K_0$ 和该块的一个素数 $q$ 达到上述界。发散允许部分块内没有好素数。这里估计的是外库在第一次选 $q$ 时使用的有限和，对应附加扭曲 $\kappa=1$。在外库规定的解析、大小与无零点条件下，对应特征标的平滑中心化和 $g_\chi(x_k)$ 满足 $|g_\chi(x_k)+T_k(q)|\le x_k^\varepsilon$，近似项的符号为负。第一次选 $q$ 时还须同时满足两个无零点条件。随后选 $d$ 时的扭曲和模数随 $q,x$ 变化，相应的对数导数估计与无零点盒条件仍需分别论证。[参考库的有限和](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/SmoothedRemainderRealIntegralFormula.lean#L139-L147) · [平滑和的近似](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/GChiApproximationSumStatement.lean#L14) · [第一次选素数的条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean)
+
+**如果先指定实高度，仍然能选出素数吗？** 现在先给定实数 $x$，令 $T=x^{\varepsilon/5}$。把前面的截断和写成 $T_x(q)$，即在同一个 $x$ 上取权重 $\Lambda(n)\min\{1,x/n\}$，乘上雅可比符号 $(n/q)$，一直加到 $\lfloor x^{400}\rfloor$。选素数的区间随 $x$ 移动。为给随后要避开的整数留出余地，再给定一个有限集 $E\subset\mathbb N$。记 $S_x(E)$ 为满足下列条件的素数之集：
+
+$$
+e^{T/2}<q\le e^T,\qquad q\equiv3\pmod8,\qquad
+q\notin E,\qquad |T_x(q)|\le \tfrac12 x^{1/2+\varepsilon}.
+$$
+
+::: {.theorem #thm-ch31-real-scale-mangoldt-prime-supply title="每个充分大实高度的好素数权重" lean="D5/S3/CharacterSums/DyadicMangoldtPrimeSupply.real_scale_quadratic_mangoldt_supply"}
+对每个固定的 $\varepsilon>0$，存在 $x_0(\varepsilon)$，使得对每个实数 $x\ge x_0(\varepsilon)$ 和每个满足 $|E|\le e^{T/3}$ 的有限集 $E\subset\mathbb N$，都有
+
+$$
+\sum_{q\in S_x(E)}\frac{\ln q}{q}\ \ge\ \frac{T}{173065984000}.
+$$
+
+:::
+
+::: proof
+令 $D=86532992000$。在上述区间内，所有模 $8$ 余 $3$ 的素数的总权重最终至少为 $T/D$。按二进块估计二次矩，在每块中都保持同一个实高度 $x$ 和截点 $\lfloor x^{400}\rfloor$。超过阈值的素数的总权重最终至多为 $36T^2/x^\varepsilon$，除以 $T$ 后趋于零。上述区间内每个素数的权重至多为 $Te^{-T/2}$，删去至多 $e^{T/3}$ 项所损失的权重至多为 $Te^{-T/6}$。当 $x$ 充分大时，两项损失各不超过 $T/(4D)$，余下至少 $T/(2D)$。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 下界为正，故每个这样的 $x$ 都有合格素数；所选的 $q$ 可以随 $x$ 与 $E$ 改变。由每个素数的权重上界 $Te^{-T/2}$ 还可得 $|S_x(E)|\ge e^{T/2}/173065984000$。若能把违反参考库两个无零点条件中任一项的候选素数全部装入这样的 $E$，定理就会给出同时满足两项的素数。把这些素数装入规定大小的集合，还需要独立的估计。
+
 **窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
 
 $$
@@ -463,6 +528,25 @@ $Q_{\vartheta}(z)-Q_{\vartheta}(x)\le\ln(z/x)+\vartheta(x)(1/z-1/x)$。
 :::
 
 因此，只要已知窗口预算严格小于 $r^3\sqrt{x}$，就可以排除该内点的深度 $4r^2$。两侧余量决定可用的 $r$。这个局部估计以窗口预算为前提。在上文列出的外库算术输入下，模 $1$ 构造给出任意远的小预算窗口。
+
+::: {.theorem #thm-ch31-prime-fixed-ratio-mass title="偏线零点给出的固定比例窗口质量下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeFixedRatioWindowMass.prime_tail_fixed_ratio_mass_of_zero"}
+设 $\rho$ 是非平凡零点，且 $\beta=\operatorname{Re}\rho>1/2$。存在实数 $\kappa>1$、$c>0$ 和 $S$，使每个 $B\ge S$、$A\ge2$ 且 $B\ge\kappa A$ 的实窗口都满足
+
+$$
+N(A,B)\ge cB^{\beta-1/2}.
+$$
+:::
+
+::: proof
+
+取 $\rho$ 与其共轭中虚部为正的一项。选实部在 $1/2$ 与 $\beta$ 之间的截线，以紧支撑的概率测度保留这对零点，并消去截线右侧的其余零点。令 $Q$ 为以 $\psi$ 定义的完全余项。在对数坐标 $t=\ln x$ 中，$-Q(e^t)$ 的平移平均以尺度 $e^{(\beta-1)t}$ 的余弦为主项。截线给出的严格指数差使误差最终小于余弦振幅的四分之一。
+
+取一段固定长度的子窗，使余弦至少为 $1/2$。交换对子窗和概率测度的积分后，每个平移后的子窗都落在由滤波支撑加宽后的同一大窗内。每个有符号积分都由大窗中 $-Q(e^t)$ 的正部积分控制。在大窗 $[T,T+W]$ 上，换元 $x=e^t$ 带来至少 $e^{T/2}$ 的权重，且 $Q_\vartheta\le Q$。于是素数尾积分的下界具有尺度 $e^{(\beta-1/2)T}$。取 $T=\ln B-W$ 和 $\kappa=e^W$，子窗就成为 $[B/\kappa,B]$，包含在每个允许的 $[A,B]$ 内。
+
+完整证明由 Lean 内核检查。
+:::
+
+比例、系数和阈值都可随给定零点改变。论证适用于任一符合前提的偏线零点，且所给幂指数没有损失。任意预先指定的 $\kappa>1$ 是否可用，需要进一步控制滤波支撑和振荡周期。
 
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 

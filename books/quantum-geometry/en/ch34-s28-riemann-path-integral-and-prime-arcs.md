@@ -442,6 +442,71 @@ Conversely, suppose $\zeta(\rho)=0$ with $\beta=\operatorname{Re}\rho>1/2$. For 
 Take $\varepsilon=\eta=b(\beta-1/2)/3$. The lower bound becomes $Y^{2\eta}$, in contradiction with $A_{\vartheta,b}(Y)\le Y^\eta$ on arbitrarily late windows. This excludes zeros to the right of the critical line. Reflection of the nontrivial zeros across that line gives RH. The full proof is checked by the Lean kernel.
 :::
 
+::: {.theorem #thm-ch31-wide-prime-window title="A lower mass bound on wide windows and uniform divergence if RH fails" lean="D5/S3/Weil/Mertens/IntegratedExplicit/WidePrimeWindowMass.prime_tail_wide_window_mass"}
+For the actual prime-only tail, write the mass at real endpoints $2\le A\le B$ as
+
+$$
+N(A,B)=\int_A^B \frac{\max\{-Q_\vartheta(x),0\}}{\sqrt x}\,dx .
+$$
+
+Fix $b>1$. There is a constant $C_b\ge0$ such that $N(A,B)\ge 2\ln(B/A)-C_b$ whenever $2\le A$ and $A^b\le B$. If RH fails, for each real $K$ a single right-endpoint threshold $S$ gives $N(A,B)-2\ln(B/A)\ge K$ for every $B\ge S$ and every admissible $A$.
+:::
+
+::: proof
+The threshold can be chosen independently of $A$ by setting $Y=B^{1/b}$. Since $A^b\le B$, the interval $[Y,B]=[Y,Y^b]$ lies inside $[A,B]$. Integrating the same nonnegative function over the larger interval can only increase the mass. If RH fails, symmetry supplies a zero with real part $\beta>1/2$. The fixed-power estimate allows any positive exponent loss, so choosing $b(\beta-1/2)/2$ gives $N(A,B)\ge B^{(\beta-1/2)/2}$ for every sufficiently large $B$, uniformly in admissible $A$. This power eventually exceeds $2\ln B$ plus any fixed constant. Since $2\ln(B/A)\le2\ln B$, the discrepancy diverges uniformly. Below the right-endpoint threshold the logarithmic term is bounded and the mass is nonnegative, which extends the lower bound to the whole domain. If RH holds, the bounded remainder for all $2\le A\le B$ gives the same lower bound directly. The full proof is checked by the Lean kernel.
+:::
+
+The exponent $b>1$ is fixed in advance. In logarithmic coordinates the condition $B\ge A^b$ requires the window to widen with the scale. At fixed ratio $B/A$, the inclusion used above gives no corresponding bound.
+
+**At which scales can one choose a prime with a small character sum?** Fix $\varepsilon>0$. For each integer $k\ge1$ take the prime upper bound $X_k=2^k$ and the height $x_k=(k\ln2)^{5/\varepsilon}$, so $\exp(x_k^{\varepsilon/5})=X_k$. The block contains the primes $X_k/2\le q<X_k$ congruent to $3$ modulo $8$. Consecutive blocks are disjoint. For sufficiently large $k$ the lower endpoint exceeds $\sqrt{X_k}$, so the whole block fits the size band for $q$ in the reference.
+
+For the second moment, define the sum for every positive odd integer $q$ in the block using the Jacobi symbol. Let $N_k=\lfloor x_k^{400}\rfloor$ and put
+
+$$
+T_k(q)=\sum_{n=1}^{N_k}\Lambda(n)\min\{1,x_k/n\}\left(\frac{n}{q}\right).
+$$
+
+Here $\Lambda(p^j)=\ln p$ for primes $p$ and integers $j\ge1$. All other positive integers have weight zero. Terms up to $x_k$ retain their full weight, while larger terms receive a factor $x_k/n$. Only primes $q$ congruent to $3$ modulo $8$ in the block receive weight. If $|T_k(q)|\le x_k^{1/2+\varepsilon}/2$, add $(\ln q)/q$ to $G_k$. Otherwise add it to $B_k$. Equality is included in $G_k$.
+
+::: {.theorem #thm-ch31-dyadic-mangoldt-prime-supply title="Good primes for the truncated Mangoldt sum at dyadic scales" lean="D5/S3/CharacterSums/DyadicMangoldtPrimeSupply.dyadic_quadratic_mangoldt_supply"}
+For each fixed real $\varepsilon>0$, the exceptional primes have finite total weight, and the partial sums of the good weight tend to positive infinity:
+
+$$
+\begin{aligned}
+\sum_{k=1}^{\infty} B_k&<\infty,\\
+\lim_{K\to\infty}\sum_{k=1}^K G_k&=+\infty.
+\end{aligned}
+$$
+:::
+
+::: proof
+Sum $|T_k|^2$ over every integer in the block congruent to $3$ modulo $8$. These nonnegative terms include the contribution of the exceptional primes. The total truncated weight of higher prime powers is $O(\sqrt{x_k})$. For the cross terms at distinct odd primes, quadratic reciprocity turns the varying denominator into a periodic sum. Complete periods cancel, leaving endpoint remainders. For fixed $\varepsilon$ the full second moment is at most $(X_k/2)x_k^{1+\varepsilon}$ on sufficiently late blocks. Every exceptional prime contributes more than $x_k^{1+2\varepsilon}/4$ to the second moment. Using $(\ln q)/q\le 2\ln(X_k)/X_k$ throughout the block and substituting $x_k^\varepsilon=(k\ln 2)^5$ gives $B_k\le4/(k\ln 2)^4$ for all sufficiently large $k$. The exceptional weight is therefore summable. On the other hand the sum of $(\ln q)/q$ over primes congruent to $3$ modulo $8$ diverges. Summing over the disjoint blocks and subtracting the finite exceptional weight gives the divergence of the good weight. The full proof is checked by the Lean kernel.
+:::
+
+Thus for every starting block $K_0$ there exist a $k\ge K_0$ and a prime $q$ in that block meeting the bound. Divergence allows individual blocks to contain no good prime. The estimate concerns the finite sum for the first selection of $q$ in the reference, with the extra twist $\kappa=1$. Under the analytic, size and zero-free hypotheses in the reference, the corresponding smoothed, centered character sum satisfies $|g_\chi(x_k)+T_k(q)|\le x_k^\varepsilon$, so the approximating term is $-T_k(q)$. The first choice of $q$ must also satisfy two zero-free conditions simultaneously. In the subsequent choice of $d$, the twists and modulus vary with $q,x$. The logarithmic derivative estimates and zero-free boxes require separate arguments. [Finite sum in the reference](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/SmoothedRemainderRealIntegralFormula.lean#L139-L147) · [Approximation for the smoothed sum](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/GChiApproximationSumStatement.lean#L14) · [Conditions in the first prime selection](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean)
+
+**Can the height be prescribed before choosing the prime?** Fix a real height $x$ and put $T=x^{\varepsilon/5}$. Write $T_x(q)$ for the same truncated sum evaluated at this $x$. Each term is $\Lambda(n)\min\{1,x/n\}$ times the Jacobi symbol $(n/q)$, and the sum ends at $\lfloor x^{400}\rfloor$. As the interval for $q$ moves with $x$, we allow a finite set $E\subset\mathbb N$ of integers to be avoided. Let $S_x(E)$ consist of the primes satisfying
+
+$$
+e^{T/2}<q\le e^T,\qquad q\equiv3\pmod8,\qquad
+q\notin E,\qquad |T_x(q)|\le \tfrac12 x^{1/2+\varepsilon}.
+$$
+
+::: {.theorem #thm-ch31-real-scale-mangoldt-prime-supply title="Good prime weight at every sufficiently large real height" lean="D5/S3/CharacterSums/DyadicMangoldtPrimeSupply.real_scale_quadratic_mangoldt_supply"}
+For every fixed $\varepsilon>0$ there exists $x_0(\varepsilon)$ such that for every real $x\ge x_0(\varepsilon)$ and every finite set $E\subset\mathbb N$ with $|E|\le e^{T/3}$,
+
+$$
+\sum_{q\in S_x(E)}\frac{\ln q}{q}\ \ge\ \frac{T}{173065984000}.
+$$
+
+:::
+
+::: proof
+Put $D=86532992000$. The primes congruent to $3$ modulo $8$ in the full interval eventually have total weight at least $T/D$. The second-moment estimate uses dyadic blocks, each at the same real height $x$ and cutoff $\lfloor x^{400}\rfloor$. The primes exceeding the threshold eventually have total weight at most $36T^2/x^\varepsilon$, which tends to zero after division by $T$. Each prime in the interval has weight at most $Te^{-T/2}$, so deleting at most $e^{T/3}$ integers costs at most $Te^{-T/6}$. For sufficiently large $x$ each loss is at most $T/(4D)$, leaving at least $T/(2D)$. The full proof is checked by the Lean kernel.
+:::
+
+**Hand derivation.** The positive lower bound supplies a prime at every such $x$. The choice of $q$ may vary with $x$ and $E$. The single-prime weight bound $Te^{-T/2}$ also gives $|S_x(E)|\ge e^{T/2}/173065984000$. If a set $E$ of the allowed size contains every candidate failing either zero-free condition in the reference, the theorem supplies a prime meeting both conditions. Bounding that exceptional set requires an independent estimate.
+
 **How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
 
 $$
@@ -463,6 +528,25 @@ Choose the left side if $\vartheta(x)\le x$ and the right side otherwise. On the
 :::
 
 A window budget strictly below $r^3\sqrt{x}$ therefore rules out a dip of depth $4r^2$ at that interior point. The margins on both sides determine which $r$ can be used. This local estimate takes a window budget as input. Under the external arithmetic inputs specified above, the modulus-one construction gives arbitrarily late windows with a small budget.
+
+::: {.theorem #thm-ch31-prime-fixed-ratio-mass title="A fixed-ratio window bound from an off-line zero" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeFixedRatioWindowMass.prime_tail_fixed_ratio_mass_of_zero"}
+Let $\rho$ be a nontrivial zero with $\beta=\operatorname{Re}\rho>1/2$. There are real constants $\kappa>1$, $c>0$, and $S$ such that every real window with $B\ge S$, $A\ge2$, and $B\ge\kappa A$ satisfies
+
+$$
+N(A,B)\ge cB^{\beta-1/2}.
+$$
+:::
+
+::: proof
+
+Use the member of the conjugate pair with positive imaginary part. Choose a line strictly between $1/2$ and $\beta$. A compactly supported probability average retains the pair and cancels the other zeros to the right of that line. Write $Q$ for the complete tail defined using $\psi$. In the coordinate $t=\ln x$, the shifted average of $-Q(e^t)$ has a leading cosine at scale $e^{(\beta-1)t}$. The error has a strictly smaller exponent, so it eventually falls below one quarter of the leading amplitude.
+
+Choose a subinterval of fixed length where the cosine is at least $1/2$. When the probability and interval integrations are exchanged, each translated subinterval lies in the same window enlarged by the support of the filter. The signed integral over each translate is bounded by the integral of the positive part of $-Q(e^t)$ over that enlarged window. On $[T,T+W]$, the substitution $x=e^t$ contributes a weight of at least $e^{T/2}$, and $Q_\vartheta\le Q$. The resulting prime-only mass is bounded below at scale $e^{(\beta-1/2)T}$. With $T=\ln B-W$ and $\kappa=e^W$, the subwindow is $[B/\kappa,B]$ and lies inside every admissible $[A,B]$.
+
+The full proof is checked by the Lean kernel.
+:::
+
+The ratio, coefficient, and threshold may depend on the supplied zero. The bound retains its full exponent for every zero satisfying the hypothesis. Allowing every prescribed $\kappa>1$ would require further control of the filter support and oscillation period.
 
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 
