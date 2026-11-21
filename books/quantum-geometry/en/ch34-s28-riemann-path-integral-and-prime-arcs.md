@@ -478,9 +478,11 @@ $$
 
 ::: {.theorem #thm-ch31-real-scale-mangoldt-prime-supply title="Good prime weight at every sufficiently large real height" lean="D5/S3/CharacterSums/DyadicMangoldtPrimeSupply.real_scale_quadratic_mangoldt_supply"}
 For every fixed $\varepsilon>0$ there exists $x_0(\varepsilon)$ such that for every real $x\ge x_0(\varepsilon)$ and every finite set $E\subset\mathbb N$ with $|E|\le e^{T/3}$,
+
 $$
 \sum_{q\in S_x(E)}\frac{\ln q}{q}\ \ge\ \frac{T}{173065984000}.
 $$
+
 :::
 
 ::: proof

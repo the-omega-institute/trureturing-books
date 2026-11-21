@@ -478,9 +478,11 @@ $$
 
 ::: {.theorem #thm-ch31-real-scale-mangoldt-prime-supply title="每个充分大实高度的好素数权重" lean="D5/S3/CharacterSums/DyadicMangoldtPrimeSupply.real_scale_quadratic_mangoldt_supply"}
 对每个固定的 $\varepsilon>0$，存在 $x_0(\varepsilon)$，使得对每个实数 $x\ge x_0(\varepsilon)$ 和每个满足 $|E|\le e^{T/3}$ 的有限集 $E\subset\mathbb N$，都有
+
 $$
 \sum_{q\in S_x(E)}\frac{\ln q}{q}\ \ge\ \frac{T}{173065984000}.
 $$
+
 :::
 
 ::: proof
