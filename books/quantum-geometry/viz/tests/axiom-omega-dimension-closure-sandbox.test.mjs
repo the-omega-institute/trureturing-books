@@ -41,6 +41,8 @@ const GIDS = [
   'D5/S3/Quantum/Algebra/InvariantMetric/LowDimensionInvariantMetric.isLieAbelian_of_finrank_le_two',
   'D5/S3/Quantum/Algebra/InvariantMetric/LowDimensionInvariantMetric.exists_basis_bracket_eq_smul_cross',
   'D5/S3/FiniteGroups/GroupAlgebra/CharacterKernelRank.finrank_span_sum_character_kernel',
+  'D5/S3/Quantum/Analysis/CompactGroups/UnitaryRepresentationKernel.exists_unitaryRep_ker_subset',
+  'D5/S3/Quantum/Analysis/CompactGroups/ContinuousKernelCompact.exists_isCompactOperator_kernel',
   'D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel',
   'D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization',
   'D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight',
@@ -53,6 +55,18 @@ const GIDS = [
   'D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact',
   'D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness'
 ];
+/* frozen theorems the text of §39.1 links inline but cites by no theorem environment: neutral FROZEN boxes, not in
+   the registry's lean list; they follow the compact-group box in the evidence panel */
+const FROZEN = [
+  'D5/S3/Quantum/Analysis/CompactGroups/MatrixCoefficientDensity.dense_span_unitary_coefficients',
+  'D5/S3/Quantum/Analysis/CompactGroups/SchurOrthogonality.integral_dual_mul_dual_inv_eq_zero',
+  'D5/S3/Quantum/Analysis/CompactGroups/SchurOrthogonality.integral_dual_mul_dual_inv_self',
+  'D5/S3/FiniteGroups/GroupAlgebra/PositiveDefiniteClassFunction.exists_sum_character_of_finiteDimensional',
+  'D5/S3/FiniteGroups/GroupAlgebra/UnitaryCharacterKernel.posSemidef_sum_character_kernel_iff',
+  'D5/S3/FiniteGroups/GroupAlgebra/UnitaryCharacterKernel.posSemidef_sum_character_kernel_of_nonneg'
+];
+const FROZEN_AFTER = GIDS.indexOf('D5/S3/Quantum/Analysis/CompactGroups/ContinuousKernelCompact.exists_isCompactOperator_kernel') + 1;
+const CITED = [...GIDS.slice(0, FROZEN_AFTER), ...FROZEN, ...GIDS.slice(FROZEN_AFTER)];
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const near = (a, b, tol = 1e-9) => Number.isFinite(a) && Number.isFinite(b) && Math.abs(a - b) <= tol;
 const f4 = (v) => (Math.abs(v) < 5e-5 ? 0 : v).toFixed(4);
@@ -305,7 +319,12 @@ check(
 const lock = readLock();
 check('every cited GID is a frozen theorem of the lock', GIDS.every((g) => lock.declarations[g] && lock.declarations[g].kind === 'theorem'));
 const chapterText = ['zh', 'en'].map((l) => fs.readFileSync(path.join(ROOT, 'books', BOOK, l, THEORY.split('#')[0].replace(/\.html$/, '.md')), 'utf8'));
-check('every green GID is cited by a theorem environment of §39.1 (zh, en)', GIDS.every((g) => chapterText.every((t) => new RegExp('lean="[^"]*' + g.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[,"]').test(t))));
+const reEsc = (g) => g.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+check('every green GID is cited by a theorem environment of §39.1 (zh, en)', GIDS.every((g) => chapterText.every((t) => new RegExp('lean="[^"]*' + reEsc(g) + '[,"]').test(t))));
+check('every FROZEN GID is a frozen theorem of the lock', FROZEN.every((g) => lock.declarations[g] && lock.declarations[g].kind === 'theorem'));
+check('every FROZEN GID is linked inline by §39.1 and cited by none of its theorem environments (zh, en)',
+  FROZEN.every((g) => chapterText.every((t) => t.includes('](lean:' + g + ')') && !new RegExp('lean="[^"]*' + reEsc(g) + '[,"]').test(t))));
+check('the FROZEN GIDs are not in the registry entry', !!entry && FROZEN.every((g) => !entry.lean.some((x) => x.gid === g)));
 check('the evidence panel has argued, model and numerical boxes', ['lean argued', 'lean model', 'lean num'].every((c) => sources['index.html'].includes(`class="${c}"`)));
 check('the probe exposes state, calc and presets', /window\.AXIOM_OMEGA_DEBUG = Object\.freeze\(\{[\s\S]*get state\(\)[\s\S]*calc,[\s\S]*presets:/.test(sources['main.js']));
 
@@ -581,7 +600,10 @@ for (const lang of ['zh', 'en']) {
   await settle(page);
   const links = await page.locator('#drawer .refs a').evaluateAll((els) => els.filter((el) => getComputedStyle(el.parentElement).display !== 'none').map((el) => el.getAttribute('href')));
   check(lang + ' theory link', links.includes('../../' + lang + '/' + THEORY));
-  check(lang + ' cited declarations in order', same(await page.locator('#evidence a[data-lean-gid]').evaluateAll((els) => els.map((el) => el.dataset.leanGid)), GIDS));
+  check(lang + ' cited declarations in order', same(await page.locator('#evidence a[data-lean-gid]').evaluateAll((els) => els.map((el) => el.dataset.leanGid)), CITED));
+  check(lang + ' green boxes carry the green GIDs and FROZEN boxes the frozen ones',
+    same(await page.locator('#evidence .lean:not(.frozen) a[data-lean-gid]').evaluateAll((els) => els.map((el) => el.dataset.leanGid)), GIDS) &&
+      same(await page.locator('#evidence .lean.frozen a[data-lean-gid]').evaluateAll((els) => els.map((el) => el.dataset.leanGid)), FROZEN));
   const boxText = async (selector) => (await page.locator('#evidence ' + selector + ' .' + lang).allTextContents()).join(' ').replace(/\s+/g, '');
   const numeric = await boxText('.lean.num'),
     gramBox = await boxText('[class="lean"]:has([data-lean-gid$=".three_anchor_gram_det_formula"])'),

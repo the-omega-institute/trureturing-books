@@ -8163,6 +8163,12 @@
           "gid": "D5/S3/FiniteGroups/GroupAlgebra/CharacterKernelRank.finrank_span_sum_character_kernel"
         },
         {
+          "gid": "D5/S3/Quantum/Analysis/CompactGroups/UnitaryRepresentationKernel.exists_unitaryRep_ker_subset"
+        },
+        {
+          "gid": "D5/S3/Quantum/Analysis/CompactGroups/ContinuousKernelCompact.exists_isCompactOperator_kernel"
+        },
+        {
           "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
         },
         {
