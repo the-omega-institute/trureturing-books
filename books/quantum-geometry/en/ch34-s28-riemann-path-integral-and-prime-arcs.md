@@ -741,16 +741,22 @@ Use the meromorphic continuation on $\operatorname{Re}(s)>-3/4$ and take $\sigma
 
 For a nontrivial zero of real part $\beta>1/2$, Radziejewski's theorem gives alternating oscillations of magnitude at least a constant times $x^\beta/(\ln x)^M$. The bounded main term is absorbed by this lower bound. Taking the even subsequence gives positive averages, and the product of two consecutive logarithmic ratios still tends to $1$. The same lower bound on window mass now follows from [@thm-positive-average-prime-window]. This step uses the published oscillation theorem. The Lean result covers the transfer from positive averages to window mass. The existence of arbitrarily late windows with small budgets remains an arithmetic problem. [Radziejewski, Theorem 3.2, DOI 10.4064/aa163-2-7](https://www.impan.pl/shop/en/publication/transaction/download/product/82009?download.pdf#page=8)
 
-**The critical width for normalized negative mass.** Suppose a nontrivial zero attains the largest real part $\beta>1/2$, and put $p=\beta-1/2$. For each fixed logarithmic width $W\ge0$, set
+::: {.theorem #thm-ch31-prime-attained-critical-width title="The critical width for normalized negative mass" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeAttainedCriticalWidth.prime_tail_zero_liminf_iff_le_critical_width"}
+Suppose a nontrivial zero attains the largest real part $\beta>1/2$, and put $p=\beta-1/2$. For each fixed logarithmic width $W\ge0$, set
 
 $$
 a(W)=\liminf_{B\to+\infty}\frac{N(Be^{-W},B)}{B^p}.
 $$
 There is a unique real $W_*>0$ such that, for every $W\ge0$, $a(W)=0$ if and only if $W\le W_*$.
+:::
 
+::: proof
 Increasing $W$ extends the integration interval to the left, so $a$ is nonnegative and nondecreasing. The zero coefficients on the rightmost line are absolutely summable, and the normalized prime-power correction tends to zero. Far enough out, the mass density is therefore at most $Cx^{p-1}$. Increasing the width from $U$ to $W$ adds only the mass on $[Be^{-W},Be^{-U}]$. At the normalized scale the addition is at most $(C/p)(e^{-pU}-e^{-pW})$. Taking lower limits in the right endpoint gives continuity.
 
-The recurring short windows with zero mass put a positive width in the zero set. A uniform lower bound at the exact power on wider windows makes that zero set bounded. Continuity includes its supremum. At the critical width, windows with arbitrarily small normalized mass occur arbitrarily late. Above it, a strictly positive lower bound holds for every sufficiently late window and may depend on its width.
+The recurring short windows with zero mass put a positive width in the zero set. A uniform lower bound at the exact power on wider windows makes that zero set bounded. Continuity puts its supremum in the zero set.
+:::
+
+At the critical width, windows with arbitrarily small normalized mass occur arbitrarily late. Above it, a strictly positive lower bound holds for every sufficiently late window and may depend on its width. Determining $W_*$ and deciding whether exact zero-mass windows recur at $W_*$ remain open here.
 
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 

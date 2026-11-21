@@ -741,16 +741,22 @@ $$
 
 给定实部为 $\beta>1/2$ 的非平凡零点，Radziejewski 的定理给出交替振荡，幅度下界为常数乘 $x^\beta/(\ln x)^M$。有界主项可被吸收，偶数子序列给出正平均，两个相邻对数比的乘积仍趋于 $1$。因此由 [@thm-positive-average-prime-window] 得到同一窗口下界。这一步使用文献中的振荡定理，Lean 定理的范围是从正平均序列到窗口质量。任意远处的小预算窗口仍需算术证明。[Radziejewski，定理 3.2，DOI 10.4064/aa163-2-7](https://www.impan.pl/shop/en/publication/transaction/download/product/82009?download.pdf#page=8)
 
-**归一化负部质量的临界宽度。** 设某个非平凡零点取到最大实部 $\beta>1/2$，令 $p=\beta-1/2$。对每个固定对数宽度 $W\ge0$，定义
+::: {.theorem #thm-ch31-prime-attained-critical-width title="归一化负部质量的临界宽度" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeAttainedCriticalWidth.prime_tail_zero_liminf_iff_le_critical_width"}
+设某个非平凡零点取到最大实部 $\beta>1/2$，令 $p=\beta-1/2$。对每个固定对数宽度 $W\ge0$，定义
 
 $$
 a(W)=\liminf_{B\to+\infty}\frac{N(Be^{-W},B)}{B^p}.
 $$
 存在唯一的实数 $W_*>0$，使得对每个 $W\ge0$，$a(W)=0$ 当且仅当 $W\le W_*$。
+:::
 
+::: proof
 增大 $W$ 只会向左扩展积分区间，因此 $a$ 非负且非减。最右线零点级数的系数绝对可和，并且归一化后的素数幂修正趋于零，所以质量密度在充分远处至多为 $Cx^{p-1}$。将宽度从 $U$ 增至 $W$，归一化后只增加区间 $[Be^{-W},Be^{-U}]$ 的质量，其上界为 $(C/p)(e^{-pU}-e^{-pW})$。对右端点取下极限得到连续性。
 
-反复出现的零质量短窗使零点集包含一段正宽度。较宽的窗口具有精确幂次的统一正下界，因此零点集有界。连续性使零点集包含自己的上确界。临界宽度处，任意晚都能找到归一化质量任意小的窗口。超过临界宽度后，每个足够晚的窗口都有同一严格正下界，该下界可以依赖宽度。
+反复出现的零质量短窗使零点集包含一段正宽度。较宽的窗口具有精确幂次的统一正下界，因此零点集有界。连续性使零点集包含自己的上确界。
+:::
+
+临界宽度处，任意晚都能找到归一化质量任意小的窗口。超过临界宽度后，每个足够晚的窗口都有同一严格正下界，该下界可以依赖宽度。确定 $W_*$ 的值以及宽度恰为 $W_*$ 的零质量窗口是否反复出现，仍是这里的开放问题。
 
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 
