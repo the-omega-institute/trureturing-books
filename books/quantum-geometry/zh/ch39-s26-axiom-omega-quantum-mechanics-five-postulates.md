@@ -40,7 +40,9 @@
 
 **结论（`手工推导`）。** 实张量积 $V_1 \otimes_{\mathbb{R}} \cdots \otimes_{\mathbb{R}} V_N$ 分解为 $2^{N-1}$ 个特征标互异的分量，每个分量都是一个复张量积。若出现两个分量，就有两个大小不同的极大正交族（两个比特、各因子的左迁移也等变时，大小分别为 $8$ 与 $4$）；对称且归一的权重在两族上双重计数，得 $\sum_{a \in A}\sum_{b \in B} w(a, b) = \lvert A\rvert = \lvert B\rvert$，矛盾，所以这样的权重不存在。于是只剩一个分量：一个时钟、复张量积（左迁移也等变时）、权重 $\lvert\langle u, v\rangle\rvert^2$，乘积上的权重相乘；各因子时钟在这个分量上取哪一个定向，仍是输入。
 
-**被排除的情形与定位。** 被排除的是带两个超选择扇区的复量子力学：在两分量复合空间上，超选择权重 $\operatorname{Tr}(\rho_u\Pi_x)$ 是归一的，但不对称（一个方向取 $1$，反方向取 $\frac{1}{2}$）。所以这一结果在数学上是把“无超选择且纯态跃迁概率对称”改用“哪些量不可观测”来表述；在这一类复合系统上，这些输入与局域层析选出同一个复合系统（局域层析见 L. Hardy, [arXiv:quant-ph/0101012](https://arxiv.org/abs/quant-ph/0101012), 2001；J. Barrett, *Phys. Rev. A* **75**, 032304, 2007；Ll. Masanes & M. P. Müller, *New J. Phys.* **13**, 063001, 2011，`文献结果`）。
+**两扇区例子排除了哪种读法？** 在有限维可观测代数 $B(H_1)\oplus B(H_2)$ 中，每个纯态都由单一扇区内的一条射线给出。同扇区的纯态跃迁权重是玻恩重叠 $|\langle a,b\rangle|^2$，异扇区为零。这个权重对称，在两个扇区的正交归一基合成的每个完整检验上总和为一。[@thm-rank-one-born-pairing]
+
+现在把跨扇区单位向量也当作纯构型，用它在块对角代数上的限制态 $\rho_x$ 的支持投影 $\Pi_x$ 作检验。取分属两个扇区的单位向量 $a,b$，令 $u=(a+b)/\sqrt{2}$，记 $P_a,P_b$ 为相应射线的投影。于是 $\rho_u=(P_a+P_b)/2$、$\Pi_u=P_a+P_b$，而 $\rho_a=\Pi_a=P_a$。直接计算得 $\operatorname{Tr}(\rho_u\Pi_a)=1/2$、$\operatorname{Tr}(\rho_a\Pi_u)=1$。对称性条件 (4) 排除的正是这种读法。关于复合系统的局域层析，见 L. Hardy, [arXiv:quant-ph/0101012](https://arxiv.org/abs/quant-ph/0101012), 2001；J. Barrett, *Phys. Rev. A* **75**, 032304, 2007；Ll. Masanes & M. P. Müller, *New J. Phys.* **13**, 063001, 2011（`文献结果`）。
 
 **只有乘积构型时（`手工推导`）。** 两个系统时，只用乘积构型分辨不了两个分量：只含乘积的两分量模型满足除 (5) 以外的全部输入（$2 \otimes n$ 中不存在不可扩展乘积基，D. P. DiVincenzo, T. Mor, P. W. Shor, J. A. Smolin & B. M. Terhal, *Commun. Math. Phys.* **238**, 379–410, 2003）。三个系统时，只用乘积构型连归一性都不满足：C. H. Bennett, D. P. DiVincenzo, T. Mor, P. W. Shor, J. A. Smolin & B. M. Terhal（*Phys. Rev. Lett.* **82**, 5385–5388, 1999）的不可扩展乘积基 $\{\lvert 0, 1, {+}\rangle, \lvert 1, {+}, 0\rangle, \lvert {+}, 0, 1\rangle, \lvert {-}, {-}, {-}\rangle\}$ 是极大正交族，$\lvert 000\rangle$ 对它的权重之和为 $\frac{1}{8}$。
 :::
