@@ -135,6 +135,18 @@ $$
 
 Choosing $D$ and then $Q$ makes the bound smaller than $\eta$. Positive definiteness gives $H_{jk}<1$, so the $A_j$ are distinct. The Tier 1 half-angle readings have half this error. The shell excludes nonconstant three-term arithmetic progressions exactly at every finite scale. Its dimension and radius may grow with the number of nodes and the requested precision.
 
+**Which shell angles occur exactly between two real spectral nodes?** Fix any real node $s>1/2$ and let a second real node $t$ move to the right from $s$. Write $x(t)$ for its normalized spectral vector and $h(s,t)$ for its inner product with $x(s)$. The kernel formula gives continuity and $h(s,s)=1$. For $t>s$, the coordinates from each conjugate pair are positive and the two-node Gram matrix is positive definite, so $0<h(s,t)<1$. We can also determine the limit of this inner product as $t\to\infty$.
+
+Put $v=t-1/2$. In the coordinate formula above, cancel the common factor $\xi(t)$ and multiply every coordinate by $v$. Before normalization, the sum of their squares is
+
+$$
+S(v)=\sum_{\gamma>0}m_\gamma\,\frac{v^2}{v^2+\gamma^2}.
+$$
+
+Each summand increases to $m_\gamma$. There are infinitely many positive ordinates, so $S(v)\to\infty$. After normalization, the two coordinates of any fixed conjugate pair have squared norm at most $m_\gamma/S(v)\to0$. Hence the inner product of any finite truncation of $x(s)$ with $x(t)$ tends to zero. The remaining contribution is bounded in absolute value by the norm of the tail of $x(s)$, since $\|x(t)\|=1$. That tail can be made arbitrarily small, proving $h(s,t)\to0$.
+
+By the intermediate value theorem, for fixed $s$ the range as $t>s$ varies is exactly $(0,1)$. Every acute angle therefore occurs between a pair of real spectral nodes. With $s=1$, the shortest arc above has target inner product $16/17$ and the companion book's example has target $11/17$, giving half-angle readings $33/34$ and $14/17$, respectively. Numerical solutions using the kernel formula of §31.3 give one node at approximately $t=10.964391$ for the first target and $t=62.587918$ for the second. The full nine-point shell imposes a further rank constraint. Its points lie in $\mathbb R^3$, so their normalized Gram matrix has rank at most three. Nine distinct real spectral nodes give rank nine, ruling out an exact simultaneous match for all the shell's inner products.
+
 **Two nodes give a Tier 2 state.** Take any two-by-two principal block of $H$ and denote its off-diagonal entry by $h$. Positive definiteness gives $|h|<1$. Dividing the block by its trace $2$ gives a full-rank qubit state $B$ with Bloch vector $(h,0,0)$. Its hyperbolic distance from the center $I_2/2$ satisfies $\cosh d(B,I_2/2)=1/\sqrt{1-h^2}$. Regard the two normalized spectral vectors as unit vectors in the underlying real inner-product space, with the real part of the complex inner product. Their inner product is $h$, so the squared norm of their chord midpoint is $(1+h)/2$. Thus $h$ gives the Tier 2 distance in state space and obeys the same half-angle identity used on the Tier 1 Behrend shell. Interpreting that distance as a physical velocity or clock reading requires a corresponding measurement procedure. [@rem-ch39-axiom-omega-tier2-velocity-and-de-sitter]
 
 **What can the same spectrum tell us about the Tier 3 couplings?** Use the [one-loop inputs of §33.9](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-11-2), with $A_i=\alpha_i^{-1}(M_Z)$ and $b=(41/10,-19/6,-7)$. For sector thresholds $\Delta_i$, matching at a common scale $\mu$ requires $A_i=a+t b_i+\Delta_i$, where $a=\alpha_U^{-1}$ and $t=\log(\mu/M_Z)/(2\pi)$. Eliminating $a,t$ gives
