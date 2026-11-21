@@ -149,24 +149,32 @@ $$
 
 把平方读数看作 $u=y^2$ 的函数。其亚纯延拓是 $\sum_{\gamma>0}m_\gamma/[L(0)(u+\gamma^2)]$。离开极点的紧集上级数一致收敛，因为尾项可由 $2m_\gamma/[L(0)\gamma^2]$ 控制。任一正实开区间上的**精确曲线**由恒等定理唯一确定这个延拓。每个极点 $u=-\gamma^2$ 给出一个正纵坐标，留数 $m_\gamma/L(0)$ 的比给出相对重数。若把每个重数都乘同一正整数，归一化曲线保持不变。对于黎曼零点，黎曼–冯·曼戈尔特公式给出按重数计的正零点数 $N(T)\sim T\log T/(2\pi)$，其首项固定了整体比例。[@rem-ch34-li-toeplitz-superexponential-collapse]
 
-**有限次读数怎样围住第一个正零点？（手工推导）** 令 $F(u)=L(\sqrt u)/S$，其中 $S=L(0)$。最小正纵坐标记作 $\gamma_1$，写 $a=\gamma_1^2$。令 $p_\gamma=m_\gamma/(S\gamma^2)$，则 $\sum p_\gamma=1$，而 $F(u)=\sum p_\gamma\gamma^2/(\gamma^2+u)$。取步长 $h>0$。只读一次 $F(h)$ 时，由 $F(0)=1$ 可算得 $(1-F(h))/h=\sum p_\gamma/(\gamma^2+h)$。每个分母都至少为 $a+h$，而最小纵坐标自身至少占有权重 $1/(Sa)$。这分别给出了此读数差的上界和下界。
+**有限次读数怎样围住第一个正零点？（手工推导）** 令 $F(u)=L(\sqrt u)/S$，其中 $S=L(0)$。最小正纵坐标记作 $\gamma_1$，写 $a=\gamma_1^2$。令 $p_\gamma=m_\gamma/(S\gamma^2)$，则 $\sum p_\gamma=1$，而 $F(u)=\sum p_\gamma\gamma^2/(\gamma^2+u)$。取步长 $\delta>0$。只读一次 $F(\delta)$ 时，由 $F(0)=1$ 可算得 $(1-F(\delta))/\delta=\sum p_\gamma/(\gamma^2+\delta)$。每个分母都至少为 $a+\delta$，而最小纵坐标自身至少占有权重 $1/(Sa)$。这分别给出了此读数差的上界和下界。
 
-对整数 $k\ge1$，令 $\Delta_h f(u)=f(u+h)-f(u)$、$P(x)=\prod_{j=1}^k(x+jh)$。逐次取差，每次引入一个新的分母。用上一段的两种估计得
+对整数 $k\ge1$，令 $\Delta_\delta f(u)=f(u+\delta)-f(u)$、$P_k(x)=\prod_{j=1}^k(x+j\delta)$。逐次取差，每次引入一个新的分母。用上一段的两种估计得
 
 $$
-D=\frac{(-1)^k\Delta_h^k F(0)}{k!h^k}
-  =\sum_{\gamma>0}\frac{p_\gamma}{P(\gamma^2)},
+D_k=\frac{(-1)^k\Delta_\delta^k F(0)}{k!\delta^k}
+  =\sum_{\gamma>0}\frac{p_\gamma}{P_k(\gamma^2)},
 \qquad
-\frac{1}{SaP(a)}\le D\le\frac{1}{P(a)}.
+\frac{1}{SaP_k(a)}\le D_k\le\frac{1}{P_k(a)}.
 $$
 
-设归一化读数 $F(0)=1$ 精确，其余各 $F(jh)$ 的绝对误差至多为 $\varepsilon$，并以这些读数计算 $\widehat D$。差分的二项式系数中，带误差各项的绝对值之和为 $2^k-1$，故 $|\widehat D-D|\le\eta=(2^k-1)\varepsilon/(k!h^k)$。取已认证的 $S_+\ge S$。只要数据与上述误差相容且 $\widehat D>\eta$，就可求两个正根
+设归一化读数 $F(0)=1$ 精确，其余各 $F(j\delta)$ 的绝对误差至多为 $\varepsilon$，并以这些读数计算 $\widehat D_k$。差分的二项式系数中，带误差各项的绝对值之和为 $2^k-1$，故 $|\widehat D_k-D_k|\le\eta_k=(2^k-1)\varepsilon/(k!\delta^k)$。取已认证的 $S_+\ge S$。只要数据与上述误差相容且 $\widehat D_k>\eta_k$，就可求两个正根
 
 $$
-S_+\ell P(\ell)(\widehat D+\eta)=1,\qquad P(r)(\widehat D-\eta)=1.
+S_+\ell P_k(\ell)(\widehat D_k+\eta_k)=1,\qquad P_k(r)(\widehat D_k-\eta_k)=1.
 $$
 
-因为 $xP(x)$ 与 $P(x)$ 都在正半轴上严格递增，两式给出 $\ell\le a\le r$，即 $\sqrt{\ell}\le\gamma_1\le\sqrt r$。若 $\widehat D\le\eta$，上面的差分仍可给出下界，求有限上界则需要更精确的读数。
+因为 $xP_k(x)$ 与 $P_k(x)$ 都在正半轴上严格递增，两式给出 $\ell\le a\le r$，即 $\sqrt{\ell}\le\gamma_1\le\sqrt r$。若 $\widehat D_k\le\eta_k$，上面的差分仍可给出下界，求有限上界则需要更精确的读数。
+
+还可利用相邻两阶差分收紧右端点。取 $D_0=1$、$\eta_0=0$，则 $D_{k-1}-(a+k\delta)D_k=\sum p_\gamma(\gamma^2-a)/P_k(\gamma^2)\ge0$，所以当 $\widehat D_k>\eta_k$ 时，
+
+$$
+a\le\frac{\widehat D_{k-1}+\eta_{k-1}}{\widehat D_k-\eta_k}-k\delta.
+$$
+
+取 $\delta=16$、$k=10$。从 $\xi$ 在实轴的函数值与导数可直接算出十个 $F(j\delta)$。在中心用对称性得到 $S=\xi''(1/2)/(2\xi(1/2))<0.023105$。用区间运算把每个正节点的绝对误差认证到 $\varepsilon=10^{-15}$ 以内。对左端使用 $S_+=0.023105$，对右端使用相邻差分商。用有理数代入两端的不等式，得到 $14.1338<\gamma_1<14.1432$。这十个数都来自实轴函数计算。[读数与可重放的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068457253)
 
 **哪些球壳夹角可以由两个实谱节点精确取到？** 固定任一实节点 $s>1/2$，让第二个实节点 $t$ 从 $s$ 向右移动。记归一化谱向量为 $x(t)$，内积为 $h(s,t)$。由核公式，$h$ 连续且 $h(s,s)=1$。当 $t>s$ 时，共轭对坐标严格为正，二节点格拉姆矩阵严格正定，故 $0<h(s,t)<1$。下面证明 $t\to\infty$ 时 $h(s,t)\to0$。
 

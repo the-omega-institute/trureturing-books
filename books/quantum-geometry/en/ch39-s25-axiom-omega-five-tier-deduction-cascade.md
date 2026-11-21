@@ -149,24 +149,32 @@ The zero-counting estimate for positive ordinates gives $0<L(0)=\sum_{\gamma>0}m
 
 Regard the squared reading as a function of $u=y^2$. Its meromorphic continuation is $\sum_{\gamma>0}m_\gamma/[L(0)(u+\gamma^2)]$. The series converges uniformly on compact sets away from its poles since its tail terms are bounded in modulus by $2m_\gamma/[L(0)\gamma^2]$. By the identity theorem, the **exact curve** on any open interval of the positive real axis determines this continuation uniquely. Each pole $u=-\gamma^2$ gives a positive ordinate, and ratios of the residues $m_\gamma/L(0)$ give the relative multiplicities. Multiplying every multiplicity by the same positive integer preserves the normalized curve. For the Riemann zeros, the Riemann–von Mangoldt formula gives $N(T)\sim T\log T/(2\pi)$ for the number of positive ordinates counted with multiplicity. Its leading coefficient fixes the overall factor. [@rem-ch34-li-toeplitz-superexponential-collapse]
 
-**How do finitely many readings bracket the first positive zero ordinate? (Manual derivation.)** Put $F(u)=L(\sqrt u)/S$ with $S=L(0)$. Denote the smallest positive ordinate by $\gamma_1$ and write $a=\gamma_1^2$. The weights $p_\gamma=m_\gamma/(S\gamma^2)$ satisfy $\sum p_\gamma=1$, and $F(u)=\sum p_\gamma\gamma^2/(\gamma^2+u)$. Take a spacing $h>0$. With just one reading $F(h)$, the identity $F(0)=1$ gives $(1-F(h))/h=\sum p_\gamma/(\gamma^2+h)$. Every denominator is at least $a+h$, and the smallest ordinate itself carries weight at least $1/(Sa)$. These observations give upper and lower bounds, respectively, on the first difference with its sign reversed.
+**How do finitely many readings bracket the first positive zero ordinate? (Manual derivation.)** Put $F(u)=L(\sqrt u)/S$ with $S=L(0)$. Denote the smallest positive ordinate by $\gamma_1$ and write $a=\gamma_1^2$. The weights $p_\gamma=m_\gamma/(S\gamma^2)$ satisfy $\sum p_\gamma=1$, and $F(u)=\sum p_\gamma\gamma^2/(\gamma^2+u)$. Take a spacing $\delta>0$. With just one reading $F(\delta)$, the identity $F(0)=1$ gives $(1-F(\delta))/\delta=\sum p_\gamma/(\gamma^2+\delta)$. Every denominator is at least $a+\delta$, and the smallest ordinate itself carries weight at least $1/(Sa)$. These observations give upper and lower bounds, respectively, on the first difference with its sign reversed.
 
-For an integer $k\ge1$, put $\Delta_h f(u)=f(u+h)-f(u)$ and $P(x)=\prod_{j=1}^k(x+jh)$. Each successive difference introduces another denominator. The same two bounds give
+For an integer $k\ge1$, put $\Delta_\delta f(u)=f(u+\delta)-f(u)$ and $P_k(x)=\prod_{j=1}^k(x+j\delta)$. Each successive difference introduces another denominator. The same two bounds give
 
 $$
-D=\frac{(-1)^k\Delta_h^k F(0)}{k!h^k}
-  =\sum_{\gamma>0}\frac{p_\gamma}{P(\gamma^2)},
+D_k=\frac{(-1)^k\Delta_\delta^k F(0)}{k!\delta^k}
+  =\sum_{\gamma>0}\frac{p_\gamma}{P_k(\gamma^2)},
 \qquad
-\frac{1}{SaP(a)}\le D\le\frac{1}{P(a)}.
+\frac{1}{SaP_k(a)}\le D_k\le\frac{1}{P_k(a)}.
 $$
 
-Suppose the normalized reading $F(0)=1$ is exact and the absolute error in each remaining $F(jh)$ is at most $\varepsilon$. Compute $\widehat D$ from these readings. The absolute binomial coefficients on the terms carrying error sum to $2^k-1$, giving $|\widehat D-D|\le\eta=(2^k-1)\varepsilon/(k!h^k)$. Take a certified upper bound $S_+\ge S$. If the readings are compatible with the error bound and $\widehat D>\eta$, solve for the two positive roots
+Suppose the normalized reading $F(0)=1$ is exact and the absolute error in each remaining $F(j\delta)$ is at most $\varepsilon$. Compute $\widehat D_k$ from these readings. The absolute binomial coefficients on the terms carrying error sum to $2^k-1$, giving $|\widehat D_k-D_k|\le\eta_k=(2^k-1)\varepsilon/(k!\delta^k)$. Take a certified upper bound $S_+\ge S$. If the readings are compatible with the error bound and $\widehat D_k>\eta_k$, solve for the two positive roots
 
 $$
-S_+\ell P(\ell)(\widehat D+\eta)=1,\qquad P(r)(\widehat D-\eta)=1.
+S_+\ell P_k(\ell)(\widehat D_k+\eta_k)=1,\qquad P_k(r)(\widehat D_k-\eta_k)=1.
 $$
 
-Both $xP(x)$ and $P(x)$ are strictly increasing on the positive half-line. It follows that $\ell\le a\le r$, so $\sqrt{\ell}\le\gamma_1\le\sqrt r$. When $\widehat D\le\eta$, the difference can still supply a lower bound. A finite upper bound from this difference then requires more accurate readings.
+Both $xP_k(x)$ and $P_k(x)$ are strictly increasing on the positive half-line. It follows that $\ell\le a\le r$, so $\sqrt{\ell}\le\gamma_1\le\sqrt r$. When $\widehat D_k\le\eta_k$, the difference can still supply a lower bound. A finite upper bound from this difference then requires more accurate readings.
+
+Two successive differences can tighten the upper endpoint. Put $D_0=1$ and $\eta_0=0$. Then $D_{k-1}-(a+k\delta)D_k=\sum p_\gamma(\gamma^2-a)/P_k(\gamma^2)\ge0$, so for $\widehat D_k>\eta_k$,
+
+$$
+a\le\frac{\widehat D_{k-1}+\eta_{k-1}}{\widehat D_k-\eta_k}-k\delta.
+$$
+
+Take $\delta=16$ and $k=10$. Values of $\xi$ and its derivative on the real axis directly give the ten readings $F(j\delta)$. At the centre, symmetry gives $S=\xi''(1/2)/(2\xi(1/2))<0.023105$. Interval arithmetic certifies an absolute error of at most $\varepsilon=10^{-15}$ at each positive node. Use $S_+=0.023105$ for the lower endpoint and the successive-difference ratio for the upper endpoint. Rational substitution into the two inequalities gives $14.1338<\gamma_1<14.1432$. All ten readings come from real-axis function evaluations. [Readings and reproducible interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068457253)
 
 **Which shell angles occur exactly between two real spectral nodes?** Fix any real node $s>1/2$ and let a second real node $t$ move to the right from $s$. Write $x(t)$ for its normalized spectral vector and $h(s,t)$ for its inner product with $x(s)$. The kernel formula gives continuity and $h(s,s)=1$. For $t>s$, the coordinates from each conjugate pair are positive and the two-node Gram matrix is positive definite, so $0<h(s,t)<1$. We can also determine the limit of this inner product as $t\to\infty$.
 
