@@ -100,9 +100,9 @@ $$
 :::
 
 ::: {.remark #rem-ch39-neutral-current-pole-test title="用中微子–电子散射检验按 Z 极点标定的中性流谱塔"}
-在 $Z$ 共振峰测得的弱轴向耦合，可以同低能 $\nu_\mu e$ 和 $\bar\nu_\mu e$ 散射作对照。LEP/SLD 的极点拟合给出 $g_A^\nu=g_V^\nu=0.5003\pm0.0012$、$g_A^e=-0.50111\pm0.00035$，二者相关系数为 $-0.75$。提取中微子耦合时，拟合假定全部不可见宽度来自三个等耦合的轻左手中微子味。在以缪子衰变测得的 $G_F/\sqrt{2}$ 归一化、电子流写作 $\bar e\gamma_\mu(g_V-g_A\gamma_5)e$ 的约定下，左手中微子流 $\bar\nu\gamma^\mu(1-\gamma_5)\nu$ 给出单极点树级轴向系数 $g_{A,1}^{\nu_\mu e}=2g_A^\nu g_A^e=-0.501410666$。CHARM II 从两种低能散射的绝对事例率提取了 $g_A^{\nu_\mu e}=-0.503\pm0.017$（实验输入）。[LEP/SLD 表 7.7 及拟合假设](https://arxiv.org/pdf/hep-ex/0509008#page=180) · [CHARM II 原论文](https://doi.org/10.1016/0370-2693(94)91421-4)
+从 $Z$ 共振峰线形和衰变数据拟合出的有效弱耦合，可以同低能 $\nu_\mu e$ 和 $\bar\nu_\mu e$ 散射作对照。LEP/SLD 的极点拟合给出 $g_A^\nu=g_V^\nu=0.5003\pm0.0012$、$g_A^e=-0.50111\pm0.00035$，二者相关系数为 $-0.75$。这些参数已吸收电弱形状因子，拟合采用单共振线形并扣除量子电动力学辐射效应。不可见宽度给出中微子耦合的绝对值，表中采用 $g_A^\nu>0$ 的约定。拟合假定全部不可见宽度来自三个等耦合的轻左手中微子味。在以缪子衰变测得的 $G_F/\sqrt{2}$ 归一化、电子流写作 $\bar e\gamma_\mu(g_V-g_A\gamma_5)e$ 的约定下，左手中微子流 $\bar\nu\gamma^\mu(1-\gamma_5)\nu$ 给出单极点树级轴向系数 $g_{A,1}^{\nu_\mu e}=2g_A^\nu g_A^e=-0.501410666$。CHARM II 用两种低能散射的绝对事例率拟合有效耦合，报告的负轴向耦合解为 $g_A^{\nu_\mu e}=-0.503\pm0.017$（实验输入）。[LEP/SLD 表 7.7 及拟合假设](https://arxiv.org/pdf/hep-ex/0509008#page=180) · [CHARM II 原论文](https://doi.org/10.1016/0370-2693(94)91421-4)
 
-现在给算术谱一个具体的物理解释（`MODEL`）。假设两个外源的横向谱测度为正、总权重为单位矩阵，光子留数为秩一正交投影。其余正留数只能沿正交的一个中性流方向。设该方向完全由窄极点组成，两个流耦合到每一级时都带相同的源因子。用正零点纵坐标 $\gamma$ 及其重数 $m_\gamma$ 指定各级留数 $p_\gamma=m_\gamma/(S\gamma^2)$，其中 $S=\sum_{\gamma>0}m_\gamma/\gamma^2$。将最低极点的质量和耦合乘积标定为实测 $Z$ 极点的值，并取 $M_\gamma=M_Z\gamma/\gamma_1$。消去光子后，重极点在零动量的每一项都按质量平方的倒数加权。全塔与最低极点的系数之比为
+现在给算术谱一个具体的物理解释（`MODEL`）。假设两个外源的横向谱测度为正、总权重为单位矩阵，光子留数为秩一正交投影。其余正留数只能沿正交的一个中性流方向。设该方向完全由窄极点组成，中微子流与电子轴向流的源因子分别为 $c_\nu$ 和 $c_{e,A}$，各自在所有极点上恒定。用正零点纵坐标 $\gamma$ 及其重数 $m_\gamma$ 指定各级留数 $p_\gamma=m_\gamma/(S\gamma^2)$，其中 $S=\sum_{\gamma>0}m_\gamma/\gamma^2$。每个混合流留数均为 $c_\nu c_{e,A}p_\gamma$。模型将最低极点的质量与耦合乘积按上述 $Z$ 极点有效参数及同一 $G_F$ 标定，并取 $M_\gamma=M_Z\gamma/\gamma_1$。消去光子后，重极点在零动量的每一项都按质量平方的倒数加权。全塔与最低极点的系数之比为
 
 $$
 R=\frac{\sum_{\gamma>0}p_\gamma/M_\gamma^2}{p_{\gamma_1}/M_Z^2}
@@ -110,7 +110,7 @@ R=\frac{\sum_{\gamma>0}p_\gamma/M_\gamma^2}{p_{\gamma_1}/M_Z^2}
  S_2=\sum_{\gamma>0}\frac{m_\gamma}{\gamma^4}.
 $$
 
-黎曼猜想给出零点位置。在 $\xi(1/2+x)/\xi(1/2)=\prod_{\gamma>0}(1+x^2/\gamma^2)^{m_\gamma}$ 中比较二次与四次项，得到 $S=\xi''/(2\xi)$、$S_2=S^2-\xi^{(4)}/(12\xi)$，右端在 $1/2$ 取值（`手工推导`）。在首个零点验证 $\lvert\zeta'(\rho_1)\rvert>0$ 可得 $m_{\gamma_1}=1$。仅前两个极点就给出 $R\ge 1+(\gamma_1/\gamma_2)^4>1.20438$。256 位球算术给出 $R=1.4837898682\ldots$（`NUM`），故全塔预言 $g_A^{\nu_\mu e}=R\,g_{A,1}^{\nu_\mu e}=-0.743988\ldots$，与 CHARM II 的中心值相差约 $0.241$。这项检验针对上述极点标定和树级低能外推，取独立接触项为零并忽略辐射修正。若高极点改变顶角或共振峰拟合，比较需要重新从两组数据提取耦合。[谱矩与数值区间的可复算记录](https://github.com/the-omega-institute/trureturing-books/issues/863#issuecomment-7069663537)
+黎曼猜想给出零点位置。在 $\xi(1/2+x)/\xi(1/2)=\prod_{\gamma>0}(1+x^2/\gamma^2)^{m_\gamma}$ 中比较二次与四次项，得到 $S=\xi''/(2\xi)$、$S_2=S^2-\xi^{(4)}/(12\xi)$，右端在 $1/2$ 取值（`手工推导`）。在首个零点验证 $\lvert\zeta'(\rho_1)\rvert>0$ 可得 $m_{\gamma_1}=1$。仅前两个极点就给出 $R\ge 1+(\gamma_1/\gamma_2)^4>1.20438$。256 位球算术给出 $R=1.4837898682\ldots$（`NUM`），故全塔预言 $g_A^{\nu_\mu e}=R\,g_{A,1}^{\nu_\mu e}=-0.743988\ldots$，与 CHARM II 的中心值相差约 $0.241$。这项检验针对上述极点标定和树级低能外推，取独立接触项为零，并忽略从极点到低能的额外辐射修正。若高极点改变顶角、共振线形或非共振背景，比较需要重新从两组数据提取耦合。[谱矩与数值区间的可复算记录](https://github.com/the-omega-institute/trureturing-books/issues/863#issuecomment-7069663537)
 :::
 
 2. **第四阶推导：算术谱半密度矢高相变与舒尔正定脊线（Tier 4，呼应 [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md)–[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md)）**：
