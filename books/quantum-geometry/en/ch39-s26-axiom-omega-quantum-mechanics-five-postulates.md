@@ -393,7 +393,18 @@ For sufficiency at multiplier $1$, the even-word cuts reduce to three triangle i
 | $(1,2,3,0)$ | $(2,0,3,1)$ | $(0,0,0,2)$ |
 | $(1,0,3,2)$ | $(1,0,3,2)$ | $(0,2,0,0)$ |
 
-Adding the matchings gives the normalized cell counts. The per-point multiplicity of an ordinary cell is its cell count. For the second colour, the per-point multiplicity is twice the cell count minus the first colour's multiplicity. Choosing parity-compatible fixed counts for each orbit, multiplying by orbit size, and summing covers all 28 sorted triples within the bounds.
+Adding the matchings gives the normalized cell counts. The per-point multiplicity of an ordinary cell is its cell count. For the second colour, the per-point multiplicity is twice the cell count minus the first colour's multiplicity. An odd per-point multiplicity forces one fixed seed per point. At multiplicity two, changing the per-point fixed count from zero to two adds two to $u_i$ in an ordinary orbit and one in a two-point orbit. At each coordinate these additions can be chosen independently. From top to bottom, the table gives the following products of choices for the normalized entries.
+
+$$
+\begin{aligned}
+&[0,1]\times[0,3]\times[2,4],\\
+&\{0,2\}\times[0,2]\times[0,4],\\
+&[1,2]\times[1,3]\times[0,3],\\
+&\{0\}\times[0,4]\times[0,4].
+\end{aligned}
+$$
+
+The intervals here contain integers. For a sorted triple $x\le y\le z$, the total bound gives $x\le2$. Use the fourth row when $x=0$. When $x=1$, use the third row for $z\le3$ and the first row for $z=4$, where $x+y+z\le8$ gives $y\le3$. When $x=2$ and $y=2$, use the second row. When $x=2$ and $y\ge3$, the total bound forces $y=z=3$, so use the third row.
 
 For $k=2m$, repeatedly take a block at multiplier $2$. Choose each entry of the block between $\max(0,u_i-4(m-1))$ and $\min(4,u_i)$, with a total between $\max(0,\sum_i u_i-8(m-1))$ and $8$. The coordinate and total bounds ensure there is an integer choice in these intervals, leaving a vector within the bounds at multiplier $2(m-1)$. For odd $k\ge3$, sort the entries as $x\le y\le z$ and take one block at multiplier $1$. Take $(0,2,2)$ if $y\ge2$, $(1,1,2)$ if $y<2$, $x\ge1$ and $z\ge2$, or $(0,1,1)$ if $y<2$, $x=0$ and $z>2(k-1)$. In the last case the odd-budget cut forces $y=1$. Take the zero block in the remaining cases. The residual vector obeys the bounds at the even multiplier $k-1$. Disjoint union adds the budgets and the fixed counts and preserves both uniform marginals.
 
