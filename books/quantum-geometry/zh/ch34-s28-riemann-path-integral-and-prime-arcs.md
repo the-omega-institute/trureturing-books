@@ -743,6 +743,22 @@ $$
 
 在十阶展开中，第八、九次幂系数为零。十次主项为 $-(25/9)D_{2/5}(a,B)$，与五次根谱同阶。保留两项后，剩余的误差界指数为 $9/22$。结论对每个有限截断阶数给出统一估计。当截断阶数随端点变化时，余项仍由同一对常数控制，其大小还取决于右边的端点幂差。 [Möbius 反演，DLMF 27.5.6](https://dlmf.nist.gov/27.5.E6) · [Suzuki，式 (36)](https://arxiv.org/html/2411.07436v3#S2.E36) · [Zhao 的式 (14) 与引理 7](https://arxiv.org/html/2411.18903v2)
 
+::: {.theorem #thm-ch31-prime-window-mobius-single-log title="任意截断阶数的单对数余项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/RHMobiusSingleLog.prime_window_mobius_one_log_of_rh"}
+假设 RH。仍以 [@thm-ch31-prime-window-mobius] 左端绝对值内的量为有符号余项 $E_m(a,B)$。存在常数 $a_0\ge2$ 与 $K>0$，使任意整数 $m\ge2$ 和任意实数截点 $B\ge a\ge a_0$ 都满足
+$$
+|E_m(a,B)|\le K m(1+\ln m)\bigl(a^{-s_m}-B^{-s_m}\bigr),
+\qquad s_m=\tfrac12-\tfrac1{m+1}.
+$$
+:::
+
+::: proof
+固定对数坐标 $u=\ln x$，令 $q=m+1$、$\lambda=u/q$。对同一个未纳入谱展开的中心化根尾项，实际零点系数给出 $(1+\ln n)^2$ 量级的因子，RH 下的 Chebyshev 误差经尾项积分则给出 $(1+u/n)^2$ 量级。后一个估计在根变量接近一时使用 $\psi$ 的全局线性界。因为未纳入的次数满足 $2n\ge q$，可用 $\min\{(1+2\lambda)^2,(1+\ln m)^2\}$。
+
+提出目标衰减因子后，每项仍带权重 $\exp[-u(1/q-1/(2n))]$。从第一个未纳入次数 $\lceil q/2\rceil$ 开始，这些权重受一个几何级数控制。总和至多为 $m$，当 $\lambda>0$ 时也至多为 $1+q/\lambda$。两种因子相乘，在 $\lambda\le1$、$1<\lambda\le1+\ln m$ 和 $\lambda>1+\ln m$ 三个范围内都由常数乘 $m(1+\ln m)$ 控制。已保留谱项的平凡零点误差也符合该界。最后在原来的对数窗口上积分。因 $s_m\ge1/6$，积分因子至多为六。完整证明由 Lean 内核检查。
+:::
+
+这条界对 $B=a$ 也成立，两边均为零。对同一余项，是否可以统一取 $K m$ 的因子仍是开放问题。
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::
