@@ -133,7 +133,7 @@
    上式的 $\det\mathbf{G}_3 > 0$ 只表明三点的特征向量线性无关，单凭它区分不了弯曲与平直：平直实线上的高斯核 $e^{-(t-s)^2}$ 对任意三个不同点同样给出 $\det\mathbf{G}_3 > 0$。平直零曲率线段的淘汰与基本连接为正曲率**极小圆弧**，来自第一步已锁定的单位球面 $S^3(1)$（截面曲率 $K = 1$）；在这条圆弧上，单次比较内禀伴生二阶弦弧矢高 $v_\epsilon(x, y) = 1 - \cos d_{S^3}(x, y) = 2\bigl(1 - \kappa_{S^3}(x, y)\bigr) \ge 0$。
 
 ::: {.viz src="axiom-omega-dimension-closure-sandbox" preset="peter-weyl-rank-five-kernel" height="500"}
-彼得—外尔秩五母核卡：合并 $j = 0$（秩 $1$）与 $j = \frac{1}{2}$（秩 $4$）锁定最低忠实非负母核 $\kappa_{S^3} = \cos^2(d_{S^3}/2)$（秩 $5$），等步三点在 $\epsilon = 60^\circ$ 撑开严格正定格拉姆体积锁 $\det\mathbf{G}_3 = \frac{3}{32}$（特征标展开标 `ARGUED`；秩的计数 `finrank_span_sum_character_kernel`、特征秩下界五 `five_le_of_hasFeatureRank`、三锚行列式公式与正定判据标 `LEAN ✓`；有理核验标 `NUM`）。
+彼得—外尔秩五母核卡：合并 $j = 0$（秩 $1$）与 $j = \frac{1}{2}$（秩 $4$）锁定最低忠实非负母核 $\kappa_{S^3} = \cos^2(d_{S^3}/2)$（秩 $5$），等步三点在 $\epsilon = 60^\circ$ 撑开严格正定格拉姆体积锁 $\det\mathbf{G}_3 = \frac{3}{32}$（截面张成有限维时正定类函数的特征标展开 `exists_sum_character_of_finiteDimensional` 标 `FROZEN`；秩的计数 `finrank_span_sum_character_kernel`、特征秩下界五 `five_le_of_hasFeatureRank`、三锚行列式公式与正定判据标 `LEAN ✓`；有理核验标 `NUM`）。
 :::
 
 3. **第三步导出“连续场”：嘉当体积三形式闭合（$d\eta \equiv 0$）与无边界拓扑自持（$\partial\mathcal{M} = \emptyset$）**。

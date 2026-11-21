@@ -743,8 +743,134 @@ $$
 
 :::
 
-::: {.problem #prob-ch22-truncated-explicit-remainder-resolution title="交互展品的实时证书接入与大区间高阶光滑核门槛压缩（开放问题）"}
-[@rem-ch22-integrated-explicit-certificate] 已在 $[2, 10]$ 上完成了数学层面的双轨可计算精度证书：借助冻结积分显式公式的三点中心差分，平滑窗误差降为恒等零，$K = 10$ 即可给出 $U_{10}(x)$ 的严格一致包络；全部九个整数 $n \in \{2, \dots, 10\}$ 的单级素数幂与非素数幂分类在逐节点区间检验下已于 $K = 137$（RH 轨）与 $K = 778$（完全独立于 [@conj-riemann-hypothesis] 的无条件轨）处完成严格认证，而满足一致半隙条件 $B < \frac{1}{2}\log 2$ 的最小截断分别为 $K = 382$ 与 $K = 2060$。由此，原问题的剩余开放工程与分析任务进一步收窄为两项明确目标：第一，本页交互展品 `zeta-spectrum-lab` 的 `powers` 视图目前绘制精确素数幂阶梯与可选 $K = 0, \dots, 10$ 的未平滑截断曲线（其满截断曲线即上文对照的 $\psi^{(10)}(x)$），尚未接入上述实时可计算误差带与积分差分视图，将其安全、可审计地集成到交互界面尚待工程实现；第二，上述三点差分仅利用 $\lvert\rho(1-\rho)\rvert^{-1} = O(\gamma^{-2})$ 的衰减，在 $h = 1$ 且目标区间 $[x_{\min}, x_{\max}]$ 远大于 $10$ 时，$B_{\mathrm{RH}}$ 与 $B_{\mathrm{uncond}}$ 分别按 $4n^{3/2}R_K$ 与 $4n^2 C_K R_K$ 增长，仍需设计兼具极小支撑（或可计算平滑窗误差界）与更快高频衰减（如高阶 B 样条或带紧支撑的光滑梅林核）的联合最优证书，以显著压低大区间上实现无条件或 RH 条件下单级素数幂认证所需的零点对数 $K$。
+::: {.remark #rem-ch22-higher-order-bspline-certificate title="任意偶阶 $2q$ 零平滑误差基数 B 样条证书族与大区间 $\Theta(N\log^2 N)$ 压缩律（手工推导与高精度数值，未在本书形式化）"}
+**手工推导与 350 比特 FLINT/Arb 区间算术核验（`NUM`，未在本书形式化），沿用 [@rem-ch22-integrated-explicit-certificate] 中的同一组四个冻结 Lean 声明。** [@rem-ch22-integrated-explicit-certificate] 的三点差分相当于 $q = 1$ 阶中心基数 B 样条，仅利用了 $\lvert\rho(1-\rho)\rvert^{-1} = O(\gamma^{-2})$ 的零点衰减，因此在区间 $[2, N]$ 上满足一致半隙条件的所需零点对数按 $N^{3/2}\log^2 N$（RH 轨）与 $N^2\log^2 N$（无条件轨）增长。将冻结积分显式公式连续不定积分 $2q - 2$ 次并施以 $2q$ 阶中心差分，可在**保持平滑窗误差恒为零、且不引入任何无穷平凡零点级数**的前提下，把尾项衰减加速至 $O(\gamma^{-2q})$，从而在大区间上把两轨截断数同时压缩为拟线性阶 $\Theta(N\log^2 N)$（下文仍以 $\log$ 表自然对数）：
+
+1. **统一初等闭式光滑势 $A_q(x)$ 与任意偶阶 $2q$ 精确提取恒等式**：设整数 $q \ge 1$，记 $m := 2q - 1$，$H_m := \sum_{\ell=1}^{m} 1/\ell$（并约定 $H_0 := 0$）。在 $x > 1$ 上把 [@rem-ch22-integrated-explicit-certificate] 中的平凡零点闭式展开（利用 $\log(1 - x^{-2}) = \log(x - 1) + \log(x + 1) - 2\log x$），得到
+
+   $$
+   x\log x - T(x) \;=\; (x - 1)\log x \;+\; \frac{x + 1}{2}\log(x + 1) \;-\; \frac{x - 1}{2}\log(x - 1) \;-\; 1.
+   $$
+
+   对任意 $q \ge 1$ 与 $x > 1$，定义不含任何无穷级数的初等光滑势
+
+   $$
+   A_q(x) \;:=\; \frac{1}{m!}\!\left[\bigl(x^m - m x^{m-1}\bigr)\log x \;+\; \frac{(x+1)^m}{2}\log(x+1) \;-\; \frac{(x-1)^m}{2}\log(x-1)\right].
+   $$
+
+   将逐次求导公式 $\frac{d^{m-1}}{dx^{m-1}}\!\left(\frac{u^m\log u}{m!}\right) = u(\log u + H_m - 1)$ 与 $\frac{d^{m-1}}{dx^{m-1}}\!\left(\frac{u^{m-1}\log u}{(m-1)!}\right) = \log u + H_{m-1}$ 分别代入 $u \in \{x,\ x + 1,\ x - 1\}$，直接验证得 $A_q^{(m-1)}(x) = x\log x - T(x) + (H_m - 1)x + \frac{1}{m}$，故 $A_q(x)$ 与 $x\log x - T(x)$ 的任意 $(m - 1)$ 次不定积分仅差一个次数不超过 $m = 2q - 1$ 的多项式。定义 $2q$ 阶中心差分算子 $\Delta_\eta^{2q} f(n) := \sum_{j=-q}^{q}(-1)^{q-j}\binom{2q}{q+j}f(n + j\eta)$（它恒等消去一切次数不超过 $2q - 1$ 的多项式），并定义中心基数 B 样条峰值常数
+
+   $$
+   c_q \;:=\; \frac{1}{m!}\sum_{j=1}^{q}(-1)^{q-j}\binom{2q}{q+j}\,j^m \;=\; \frac{2}{\pi}\int_0^\infty \left(\frac{\sin t}{t}\right)^{2q}\,dt,
+   $$
+
+   其中右端积分经傅里叶反演给出 $[-1/2, 1/2]$ 上均匀密度 $2q$ 重卷积在原点处的值，而将该样条密度写成截断幂的中心差分即证其与左端有限和相等（前六个精确有理值为 $c_1 = 1$、$c_2 = \frac{2}{3}$、$c_3 = \frac{11}{20}$、$c_4 = \frac{151}{315}$、$c_5 = \frac{15619}{36288}$、$c_6 = \frac{655177}{1663200}$）。对任意整数 $n \ge 2$ 及满足 $0 < q\eta \le 1$ 且 $n - q\eta > 1$ 的步长 $\eta$（使全部 $2q + 1$ 个节点 $x_j := n + j\eta$ 均严格落在 $(1, \infty)$ 内），将冻结算术表示 $U(x) + x\log x = (1 + \gamma)x + \sum_{k=1}^{\infty}\frac{\Lambda(k)}{k}(x - k)_+$（来自 [`U`](lean:D5/S3/Arith/Robin/CompleteMertensPeak.U)）连续积分 $m - 1$ 次得 $\sum_{k=1}^{\infty}\frac{\Lambda(k)}{k}\frac{(x-k)_+^m}{m!}$（模次数不超过 $m$ 的多项式）。因 $q\eta \le 1$，对任意异于 $n$ 的整数 $k$，截断幂 $(x - k)_+^m$ 在全部 $2q + 1$ 个节点上要么恒为零（$k \ge n + 1$），要么与单一 $m$ 次多项式 $(x - k)^m$ 重合（$k \le n - 1$），因而在 $\Delta_\eta^{2q}$ 下严格为零；仅在 $k = n$ 处由 $j > 0$ 项给出 $\Delta_\eta^{2q}\!\left[\frac{(x-k)_+^m}{m!}\right]_{x=n} = c_q\,\eta^m\,\delta_{k,n}$。在谱侧，冻结定理 [`actual_integrated_explicit_formula`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/WholeFormula.actual_integrated_explicit_formula) 的零点级数由 [`actual_complex_pairWeight_hasSum`](lean:D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_complex_pairWeight_hasSum) 与 [`actual_height_gt_ten`](lean:D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_height_gt_ten) 保证在 $(1, \infty)$ 上绝对且局部一致收敛（且 $\operatorname{Re}(\rho + \ell) > \ell \ge 1 > 0$），允许逐项积分 $m - 1$ 次；积分多项式、常数 $\log(2\pi)$ 与 $A_q^{(m-1)}$ 的仿射修正均被 $\Delta_\eta^{2q}$ 精确消去，从而对一切 $q \ge 1$ 与容许 $(n, \eta)$ 得到**平滑窗误差恒为零的任意偶阶精确提取恒等式**：
+
+   $$
+   \Lambda(n) \;=\; \frac{n}{c_q\,\eta^{2q-1}}\,\Delta_\eta^{2q}\!\left[\,A_q(x) \;+\; \sum_{\rho}\frac{x^{\rho + 2q - 2}}{\rho(1-\rho)\prod_{\ell=1}^{2q-2}(\rho + \ell)}\,\right]_{x=n}
+   $$
+
+   （$q = 1$ 时空乘积取 $1$，即退化为 [@rem-ch22-integrated-explicit-certificate] 的三点差分恒等式）。符号验算与 350 比特 Arb 区间算术在 $q = 1, \dots, 4$、$n = 2, \dots, 10$ 以及下述三种 $n = 2$ 步长方案（共 $108$ 组情形，通过精确算术原函数代换无穷零点和）上直接核对上述恒等式，全部残差区间均含零且绝对上界低于 $5.48 \times 10^{-93}$。
+
+2. **一般对称高度截断重构与双轨可计算尾项证书**：对任意截断高度 $T > 0$，保留临界带内满足 $0 < \lvert\operatorname{Im}\rho\rvert \le T$ 的全体非平凡零点（按重数计入，且在无条件框架下不预设其必在临界线上或单重），定义 $2q$ 阶高度截断重构与精确尾项实部质量
+
+   $$
+   \Lambda^{(q)}(n,\eta;T) \;:=\; \frac{n}{c_q\,\eta^{2q-1}}\,\Delta_\eta^{2q}\!\left[\,A_q(x) \;+\; \sum_{0 < \lvert\operatorname{Im}\rho\rvert \le T}\frac{x^{\rho + 2q - 2}}{\rho(1-\rho)\prod_{\ell=1}^{2q-2}(\rho + \ell)}\,\right]_{x=n},
+   \qquad
+   R(T) \;:=\; \sum_{\lvert\operatorname{Im}\rho\rvert > T}\operatorname{Re}\!\left(\frac{1}{\rho(1-\rho)}\right) \;=\; 2\lambda_1 \;-\; \sum_{0 < \lvert\operatorname{Im}\rho\rvert \le T}\operatorname{Re}\!\left(\frac{1}{\rho(1-\rho)}\right).
+   $$
+
+   特别地，若 $T = T_K := \gamma_K$ 处的前 $K$ 个正虚部零点 $\rho_j = \frac{1}{2} + i\gamma_j$（$0 < \gamma_1 < \dots < \gamma_K$）经有限验证均为临界线单零点且穷尽 $0 < \operatorname{Im}\rho \le T_K$ 内全体非平凡零点（此时共轭对满足 $\rho_j(1 - \rho_j) = \frac{1}{4} + \gamma_j^2 > 0$），则 $R(T_K)$ 即 [@rem-ch22-integrated-explicit-certificate] 中的 $R_K = 2\lambda_1 - 2\sum_{j=1}^{K}(\frac{1}{4} + \gamma_j^2)^{-1}$，上述截断重构化简为显式实部和
+
+   $$
+   \Lambda_K^{(q)}(n;\eta) \;:=\; \Lambda^{(q)}(n,\eta;T_K) \;=\; \frac{n}{c_q\,\eta^{2q-1}}\,\Delta_\eta^{2q}\!\left[\,A_q(x) \;+\; \sum_{j=1}^{K} 2\,\operatorname{Re}\!\left(\frac{x^{2q - 3/2 + i\gamma_j}}{\bigl(\frac{1}{4} + \gamma_j^2\bigr)\prod_{\ell=1}^{2q-2}\bigl(\ell + \frac{1}{2} + i\gamma_j\bigr)}\right)\,\right]_{x=n}.
+   $$
+
+   记 $C(T) := \sqrt{1 + T^{-2}}$（在 $T = T_K$ 处即 $C_K$）与二项加权节点幂和 $S_p(n,\eta;q) := \sum_{j=-q}^{q}\binom{2q}{q+j}(n + j\eta)^p$（对整数幂 $m = 2q - 1$，$S_m = \left.\frac{d^m}{dz^m}\bigl[e^{nz}(2\cosh(\eta z/2))^{2q}\bigr]\right|_{z=0}$ 是关于 $(n, \eta^2)$ 的整系数多项式，因而在本文全部有理步长 $\eta \in \mathbb{Q}$ 下为精确有理数，且恒满足 $4^q n^m \le S_m < 4^q (n + 1)^m$）。对每一颗被截去的零点 $\rho = \beta + i\gamma$（$0 < \beta < 1$，$\lvert\gamma\rvert > T$）应用三角不等式，立得两条适用于任意高度 $T > 0$ 的严格可计算余项证书：
+   - **RH 轨（调用 [@conj-riemann-hypothesis] 所登记的外部终端声明 `riemannZeta_eq_zero_re : RiemannZetaZerosOnLine`，从而 $\beta = \frac{1}{2}$、$\lvert x_j^{\rho+m-1}\rvert = x_j^{m-1/2}$ 且 $\lvert\rho + \ell\rvert = \sqrt{(\ell + \frac{1}{2})^2 + \gamma^2} > \sqrt{T^2 + (\ell + \frac{1}{2})^2}$）**：
+
+     $$
+     \lvert\Lambda(n) - \Lambda^{(q)}(n,\eta;T)\rvert \;\le\; B_{\mathrm{RH}}^{(q)}(n,\eta;T) \;:=\; \frac{n\,R(T)}{c_q\,\eta^{2q-1}}\,S_{2q-3/2}(n,\eta;q)\,\prod_{\ell=1}^{2q-2}\!\bigl(T^2 + (\ell + \tfrac{1}{2})^2\bigr)^{-1/2}.
+     $$
+
+   - **完全无条件轨（完全独立于 [@conj-riemann-hypothesis]，仅利用 $\lvert x_j^{\rho+m-1}\rvert < x_j^{m}$、$\lvert\rho(1-\rho)\rvert^{-1} < C(T)\operatorname{Re}((\rho(1-\rho))^{-1})$ 与 $\lvert\rho + \ell\rvert > \sqrt{T^2 + \ell^2}$）**：
+
+     $$
+     \lvert\Lambda(n) - \Lambda^{(q)}(n,\eta;T)\rvert \;\le\; B_{\mathrm{uncond}}^{(q)}(n,\eta;T) \;:=\; \frac{n\,C(T)\,R(T)}{c_q\,\eta^{2q-1}}\,S_{2q-1}(n,\eta;q)\,\prod_{\ell=1}^{2q-2}\!\bigl(T^2 + \ell^2\bigr)^{-1/2}.
+     $$
+
+   因全部节点满足 $x_j > 1$，上述两界恒有严格序 $B_{\mathrm{RH}}^{(q)} < B_{\mathrm{uncond}}^{(q)}$（且在 $q \ge 2$ 时第一个不等号亦严格成立）。在覆盖 $q = 1, \dots, 6$、$n = 2, \dots, 100$、$K = 1, \dots, 4672$ 以及下方三种 $n = 2$ 步长方案的全部 $2{,}831{,}232$ 组 350 比特 Arb 实测比较中（记 $B_{\mathrm{RH}}^{(q)}(n,\eta;K) := B_{\mathrm{RH}}^{(q)}(n,\eta;T_K)$ 等），均严格验证了 $\lvert\Lambda(n) - \Lambda_K^{(q)}(n;\eta)\rvert < B_{\mathrm{RH}}^{(q)} < B_{\mathrm{uncond}}^{(q)}$。
+
+3. **$[2, 10]$ 与 $[2, 100]$ 上的 350 比特 Arb 门槛压缩表及 $K = 10$ 展品对照（`NUM`）**：对一切 $n \ge 3$ 取最大容许步长 $\eta = 1/q$（支撑半宽 $q\eta = 1$）；在边界节点 $n = 2$ 处取 $\eta_2 = h_2/q$ 并对比 $h_2 \in \{\frac{1}{2}, \frac{4}{5}, \frac{9}{10}\}$ 三种支撑半宽（均保持 $2 - h_2 > 1$）。三套步长方案在下述两张表中给出**完全相同**的全部截断整数，因为区间右端点（$n = 10$ 或 $n = 100$）始终是两轨一致界的唯一最紧节点（而在 $n = 2$ 局部，增大 $h_2$ 会显著收紧该节点自身误差界，例如在 $q = 5,\ K = 10$ 时 $B_{\mathrm{RH}}^{(5)}$ 在 $n = 2$ 处由 $h_2 = \frac{1}{2}$ 的 $1.007828$ 降至 $h_2 = \frac{4}{5}$ 的 $0.019161$）。对下表每一个决定性截断 $K$ 及其前驱 $K - 1$（含 $K = 10$ 与 $K = 3000$，直至最大截断 $K = 4672,\ T_{4672} \approx 5142.447908$），该范围远在 D. Platt & T. Trudgian（2021，定理 1 与 §2，[10.1112/blms.12460](https://doi.org/10.1112/blms.12460)）的 $3 \times 10^{12}$ 界限之内，且本节核验另调用 FLINT/Arb 的 `acb_dirichlet_zeta_zeros` 与 `acb_dirichlet_zeta_nzeros`（接口规范见 [FLINT `acb_dirichlet` 文档](https://flintlib.org/doc/acb_dirichlet.html)，完整核验摘要见书库 [Issue #873](https://github.com/the-omega-institute/trureturing-books/issues/873#issuecomment-7070334594)）独立复核了 $57$ 次索引零点隔离与 Hardy $Z$ 变号以及 $80$ 次分离高度上的精确全临界带零点计数。表中已达到有限截断的各行括号内给出 $K - 1 \to K$ 处最紧节点界（四舍五入至小数点后六位），恰好跨越半隙 $\frac{1}{2}\log 2 \approx 0.346574$（唯一例外是 $[2, 100]$ 表的 $q = 1$ 行，括号内仅报告 $K = 3000$ 处仍高于半隙的下界测试值）；逐节点分类门槛则枚举了此前全部正整数 $K$ 以防振荡早过：
+
+   | 阶数 $q$ | $c_q$ | $[2,10]$ 一致半隙 RH 轨 | $[2,10]$ 一致半隙无条件轨 | $[2,10]$ 逐节点 RH 轨 | $[2,10]$ 逐节点无条件轨 |
+   | :---: | :---: | :---: | :---: | :---: | :---: |
+   | $1$ | $1$ | **$382$** ($0.346915 \to 0.346327$) | **$2060$** ($0.346593 \to 0.346472$) | **$137$** | **$778$** |
+   | $2$ | $2/3$ | **$44$** ($0.357818 \to 0.345499$) | **$80$** ($0.350669 \to 0.337080$) | **$31$** | **$56$** |
+   | $3$ | $11/20$ | **$42$** ($0.383079 \to 0.341197$) | **$60$** ($0.355012 \to 0.336184$) | **$34$** | **$49$** |
+   | $4$ | $151/315$ | **$49$** ($0.352584 \to 0.328722$) | **$62$** ($0.356983 \to 0.333463$) | **$42$** | **$54$** |
+   | $5$ | $15619/36288$ | **$57$** ($0.366927 \to 0.337006$) | **$69$** ($0.361672 \to 0.334966$) | **$51$** | **$62$** |
+
+   在 $[2, 10]$ 上，升至 $q = 3$ 即将一致半隙截断从 $382 \to 42$（RH 轨，压缩逾 $9$ 倍）与 $2060 \to 60$（无条件轨，压缩逾 $34$ 倍）；逐节点分类则低至 $K = 31$（RH 轨，$q = 2$）与 $K = 49$（无条件轨，$q = 3$）。回到展品自带的 $K = 10$ 截断（对全部三种 $h_2$ 结果相同）：对 $q = 1, 2, 3$，RH 轨可单独认证的素数幂集合分别为 $\{2, 3, 4, 5, 7\}$、$\{2, 3, 4, 5, 7\}$ 与 $\{2, 3, 4, 5\}$，无条件轨则由 $\{2, 3\}$（$q = 1$）扩大至 $\{2, 3, 4, 5\}$（$q = 2, 3$），即升至 $q = 2$ 即可在 $K = 10$ 处额外无条件认证 $4 = 2^2$ 与 $5$ 为素数幂，但非素数幂合数 $6, 10$ 在上述各阶的 $K = 10$ 下仍无法分离。
+
+   将区间右端点扩大十倍至 $[2, 100]$（共 $99$ 个整数节点）后，高阶加速的优势更为悬殊：
+
+   | 阶数 $q$ | $c_q$ | $[2,100]$ 一致半隙 RH 轨 | $[2,100]$ 一致半隙无条件轨 |
+   | :---: | :---: | :---: | :---: |
+   | $1$ | $1$ | $> 3000$（$B(3000) \approx 2.641721$） | $> 3000$（$B(3000) \approx 26.417376$） |
+   | $2$ | $2/3$ | **$1797$** ($0.346699 \to 0.346179$) | **$4672$** ($0.346645 \to 0.346408$) |
+   | $3$ | $11/20$ | **$1307$** ($0.347110 \to 0.345655$) | **$2313$** ($0.346895 \to 0.346396$) |
+   | $4$ | $151/315$ | **$1305$** ($0.346977 \to 0.345839$) | **$1957$** ($0.346980 \to 0.346479$) |
+   | $5$ | $15619/36288$ | **$1404$** ($0.346725 \to 0.345952$) | **$1920$** ($0.348061 \to 0.346395$) |
+   | $6$ | $655177/1663200$ | **$1541$** ($0.347510 \to 0.344974$) | **$1989$** ($0.347149 \to 0.345885$) |
+
+   对 $q = 1$ 的 $[2, 100]$ 基准，Arb 严格证得 $K > 3000$（将下文尾项主项式解出的估算高度代入含 $\frac{7}{8}$ 常数项的光滑黎曼–冯·曼戈尔特计数 $\frac{T}{2\pi}\log\frac{T}{2\pi e} + \frac{7}{8}$，得估算值约 $43{,}030.08$ 与 $724{,}059.31$，而 Arb 在对应估算高度上的精确零点计数为 $43{,}030$ 与 $724{,}060$，越过无条件估算高度的首个序号为 $724{,}061$）；而取 $q = 4$（RH 轨）仅需 **$K = 1305$** 对零点，取 $q = 5$（无条件轨）仅需 **$K = 1920$** 对零点——**完全不依赖 [@conj-riemann-hypothesis] 地认证整个 $[2, 100]$ 上九十九个整数所需的零点对数，甚至少于 $q = 1$ 在 $[2, 10]$ 上所需的 $2060$ 对**。
+
+4. **本证书族内精确最优渐近压缩律 $\Theta(N\log^2 N)$（匹配上下界）**：记整数右端点为 $N \ge 3$（使 $\eta = 1/q$ 对节点 $N$ 容许）并令 $N \to \infty$，以 $s = \frac{3}{2}$ 表 RH 轨、$s = 2$ 表无条件轨，采用第 2 条对任意截断高度 $T > 0$ 定义的一般对称高度重构 $\Lambda^{(q)}(n,\eta;T)$ 与计数 $K(T) := N(T)$（按重数计入 $0 < \operatorname{Im}\rho \le T$ 内全部非平凡零点；在无条件轨上允许保留项含一般临界带零点，在 RH 轨上则由 `riemannZeta_eq_zero_re` 落在临界线上，但均不依赖高高度处的单零点假设）。按经典黎曼–冯·曼戈尔特计数公式（E. C. Titchmarsh, *The Theory of the Riemann Zeta-Function*, second edition, revised by D. R. Heath-Brown, Chapter 9, §9.3–9.4，给出 $N(T) = \frac{T}{2\pi}\log\frac{T}{2\pi e} + O(\log T)$，从而任一目标高度 $X_N \to \infty$ 的 $O(1)$ 邻域内均存在零点纵坐标）与分部求和，连同 $0 < \beta < 1$ 上一致成立的 $\operatorname{Re}((\rho(1-\rho))^{-1}) = \gamma^{-2} + O(\gamma^{-4})$，尾项实部质量满足
+
+   $$
+   R(T) \;=\; \frac{\log\bigl(T/(2\pi)\bigr) + 1}{\pi T} \;+\; O\!\left(\frac{\log T}{T^2}\right).
+   $$
+
+   对峰值常数 $c_q$，在 $[0, \pi/2]$ 上有 $\log(\frac{\sin t}{t}) = -\frac{t^2}{6} + O(t^4) \le -\frac{t^2}{6}$，将积分变量缩放为 $t = u/\sqrt{q}$ 即获可积高斯控制函数 $e^{-u^2/3}$，而尾段满足 $\int_{\pi/2}^{\infty}(\frac{\sin t}{t})^{2q}\,dt \le \int_{\pi/2}^{\infty} t^{-2q}\,dt = \frac{1}{2q-1}(\frac{2}{\pi})^{2q-1}$ 随 $q$ 指数衰减，由控制收敛定理得 $c_q \sim \sqrt{\frac{3}{\pi q}}$；而对一切 $q \ge 1$，限制积分于 $0 \le t \le \sqrt{3/q}$ 并结合 $\frac{\sin t}{t} \ge 1 - \frac{t^2}{6}$ 与伯努利不等式 $(\frac{\sin t}{t})^{2q} \ge 1 - \frac{qt^2}{3}$，直接得到全 $q$ 初等双边界
+
+   $$
+   1 \;\ge\; c_q \;\ge\; \frac{2}{\pi}\int_0^{\sqrt{3/q}}\!\left(1 - \frac{q t^2}{3}\right)dt \;=\; \frac{4\sqrt{3}}{3\pi\sqrt{q}} \;>\; \frac{1}{\sqrt{\pi q}}
+   $$
+
+   （上界 $c_q \le c_1 = 1$ 来自 $(\frac{\sin t}{t})^{2q} \le (\frac{\sin t}{t})^2$）。取 $\eta = 1/q$（$n \ge 3$）并利用精确组合恒等式 $4^q q^{2q-1} = 4q(2q)^{2q-2}$，在 $q = O(\log N)$ 与 $T \asymp N\log N$ 区域内有 $S_p(N, 1/q; q) = 4^q N^p\bigl(1 + O(q/N)\bigr)$ 与分母乘积 $T^{-(2q-2)}\bigl(1 + O(q^3/T^2)\bigr)$，从而右端点 $N$ 上的主项在两条轨道上统一写作
+
+   $$
+   B^{(q)}(N, 1/q; T) \;\sim\; \frac{4q}{c_q}\,N^s\!\left(\frac{2qN}{T}\right)^{2q-2} R(T).
+   $$
+
+   关于全区间 $[2, N]$ 的右端点支配性：对 $n \ge 3$，固定步长 $\eta = 1/q$ 下的节点因子 $n S_p(n, 1/q; q)$ 随 $n$ 严格递增；对比 $n = 2$（$\eta_2 = h_2/q$，$h_2 \in (0, 1)$ 固定）与 $n = N$，当 $q \ge 2$ 时由 $S_p(2, h_2/q; q) < 4^q(2 + h_2)^p$ 与延森不等式 $S_p(N, 1/q; q) \ge 4^q N^p$（$p = 2q - 2 + s - 1 > 1$）得
+
+   $$
+   \frac{B^{(q)}(2, h_2/q; T)}{B^{(q)}(N, 1/q; T)} \;<\; \frac{2}{N h_2}\!\left(\frac{2 + h_2}{N}\right)^{s-1}\!\left(\frac{2 + h_2}{N h_2}\right)^{2q-2},
+   $$
+
+   只要 $N > (2 + h_2)/h_2$（如 $h_2 = \frac{1}{2}$ 时 $N \ge 6$，$h_2 \in \{\frac{4}{5}, \frac{9}{10}\}$ 时 $N \ge 4$），右端全部三个因子均严格小于 $1$；而 $q = 1$ 时无条件轨比值为 $\frac{4}{h_2 N^2} < 1$，RH 轨虽为凹幂 $x^{1/2}$，但逐节点比较直接给出 $S_{1/2}(2, h_2; 1) < S_{1/2}(N, 1; 1)$ 且前因子 $\frac{2}{N h_2} < 1$，故右端点 $N$ 对一切 $q \ge 1$ 与两轨均严格支配整个 $[2, N]$。
+   - **上界构造**：令 $T \sim b N\log N$（亦可在其 $O(1)$ 邻域内取零点纵坐标 $T_K$）并选取随尺度缓慢增长的样条阶数 $q = \bigl\lfloor\frac{b}{2e}\log N\bigr\rfloor$，则 $R(T) \sim \frac{1}{\pi b N}$ 且 $\log B^{(q)}(N, 1/q; T) = \bigl(s - 1 - \frac{b}{e} + o(1)\bigr)\log N$。因此任意 $b > e(s - 1)$ 均使大 $N$ 时 $B^{(q)}(N, 1/q; T) \to 0 < \frac{1}{2}\log 2$。
+   - **本证书族内的匹配下界**：对任意整数 $N \ge 3$、$q \ge 2$ 与高度 $T > 0$，由 $x \mapsto x^p$（$p \ge 5/2$）的凸性与延森不等式得 $S_p(N, 1/q; q) \ge 4^q N^p$，又 $c_q \le 1$、$C(T) > 1$ 且对 $1 \le \ell \le 2q - 2$ 有 $\sqrt{T^2 + (\ell + \frac{1}{2})^2} < T + 2q$，故两条轨道均满足
+
+     $$
+     B^{(q)}(N, 1/q; T) \;\ge\; 4q\,N^s\,R(T)\!\left(\frac{2qN}{T + 2q}\right)^{2q-2}.
+     $$
+
+     若括号内比值小于 $1$，则 $T > 2q(N - 1)$，代数上等价于 $\frac{2qN}{T + 2q} > \frac{2q(N - 1)}{T} =: u \in (0, 1)$，由 $u\log u \ge -1/e$ 得该次幂严格大于 $u^{2q} = \exp\!\bigl(\frac{T}{N-1}u\log u\bigr) \ge \exp\!\bigl(-\frac{T}{e(N-1)}\bigr)$；比值不小于 $1$ 时同一指数下界显然亦成立。于是对任意 $q \ge 2$ 与 $T > 0$ 一致有 $B^{(q)}(N, 1/q; T) > 8\,N^s\,R(T)\exp\!\bigl(-\frac{T}{e(N-1)}\bigr)$。任取 $\varepsilon \in (0, e(s - 1))$ 并记 $X_N := \bigl(e(s - 1) - \varepsilon\bigr)N\log N$；因正函数 $R(T)$ 随 $T$ 单调不增（在相邻零点纵坐标间取常值）且 $\exp\!\bigl(-\frac{T}{e(N-1)}\bigr)$ 随 $T$ 严格递减，对一切 $0 < T \le X_N$ 一致成立 $B^{(q)}(N, 1/q; T) > 8\,N^s\,R(X_N)\exp\!\bigl(-\frac{X_N}{e(N-1)}\bigr) = N^{\varepsilon/e - o(1)} \to \infty$，从而在 $N$ 充分大时一致排除全部 $T \le X_N$ 与全部 $q \ge 2$。结合 $K(T) \sim \frac{T}{2\pi}\log T$，在 $B_{\mathrm{RH}}^{(q)}$ 与 $B_{\mathrm{uncond}}^{(q)}$ 这组一致半隙证书内，按实高度 $T > 0$ 取下确界所得截断高度 $T_{\inf}(N)$（以及在零点纵坐标集上取最小值所得高度，二者相差 $O(1)$ 从而共享同一渐近式）与最小零点计数 $K_{\min}(N)$（按重数计）的精确渐近律为
+
+     $$
+     T_{\inf}(N) \;=\; \begin{cases}\bigl(\tfrac{e}{2} + o(1)\bigr)N\log N & \text{（RH 轨），} \\ (e + o(1))N\log N & \text{（无条件轨），}\end{cases}
+     \qquad
+     K_{\min}(N) \;=\; \begin{cases}\bigl(\tfrac{e}{4\pi} + o(1)\bigr)N\log^2 N & \text{（RH 轨），} \\ \bigl(\tfrac{e}{2\pi} + o(1)\bigr)N\log^2 N & \text{（无条件轨）。}\end{cases}
+     $$
+
+     相比之下，固定 $q = 1$ 时按同一对称高度截断求解 $4N^s R(T) \sim \frac{1}{2}\log 2$ 仅给出 $K_{\min}^{(1)}(N) \sim \frac{4s^2}{\pi^2\log 2}N^s\log^2 N$；沿 $q \sim c\log N$ 优化样条阶数，在 RH 轨上严格省去 $N^{1/2}$ 阶因子，在完全无条件轨上严格省去整整一个 $N$ 阶因子。
+:::
+
+::: {.problem #prob-ch22-truncated-explicit-remainder-resolution title="交互展品的实时证书接入与超越 B 样条逐节点界的常数优化（开放问题）"}
+[@rem-ch22-integrated-explicit-certificate] 与 [@rem-ch22-higher-order-bspline-certificate] 已从分析上完整解决了基于冻结积分显式公式的零平滑误差证书构造与大区间高阶压缩问题：通过统一初等闭式势 $A_q(x)$ 与任意偶阶 $2q$ 基数 B 样条差分，$[2, 10]$ 上的一致半隙截断已压缩至 $K = 42$（RH 轨）与 $K = 60$（完全独立于 [@conj-riemann-hypothesis] 的无条件轨），逐节点分类压缩至 $K = 31$ 与 $K = 49$；将区间右端点扩大十倍至 $[2, 100]$（$99$ 个整数节点）后，一致半隙截断压缩至 $K = 1305$（$q = 4$，RH 轨）与 $K = 1920$（$q = 5$，无条件轨）；在 $N \to \infty$ 时沿 $q \asymp \log N$ 优化样条阶数把 $B_{\mathrm{RH}}^{(q)}$ 与 $B_{\mathrm{uncond}}^{(q)}$ 证书族内的两轨最小零点计数同步压降至精确的 $\Theta(N\log^2 N)$（首项常数分别为 $\frac{e}{4\pi}$ 与 $\frac{e}{2\pi}$）。由此，剩余的开放工程与分析问题进一步收窄为两项明确目标：第一，本页交互展品 `zeta-spectrum-lab` 的 `powers` 视图目前仍绘制精确素数幂阶梯与可选 $K = 0, \dots, 10$ 的未平滑截断曲线（其满截断曲线即上文对照的 $\psi^{(10)}(x)$），尚未接入上述实时可计算误差带与可选阶数 $q$ 的积分差分视图，将其安全、可审计地集成到交互界面仍待工程实现；第二，[@rem-ch22-higher-order-bspline-certificate] 第 4 条的匹配下界仅针对上述两条先对各节点 $x_j$ 分别取模再求和的显式界 $B_{\mathrm{RH}}^{(q)}$、$B_{\mathrm{uncond}}^{(q)}$ 成立，能否通过先对单颗零点的整体差分 $\Delta_\eta^{2q}(x^{\rho+2q-2})$ 直接定界再求和、改用紧支撑光滑 Gevrey 类梅林核或频域紧支撑的带限 Beurling–Selberg 型极值优函数（以可计算的空间尾项界换取更优频域截断），抑或借助相位感知的部分和相消机制，在保持严格可计算平滑窗误差界的同时进一步压低 $\Theta(N\log^2 N)$ 的首项常数，乃至在 $K = 10$ 附近实现对 $[2, 10]$ 其余节点 $\{6, 8, 9, 10\}$ 的严格分离，仍属开放的分析优化问题。
 :::
 
 下方完整频谱实验室在三维主舞台内整合部分和折线、合成离线四元组对照与素数幂三维曲线，供读者核对有限截断与延拓零点谱的边界：

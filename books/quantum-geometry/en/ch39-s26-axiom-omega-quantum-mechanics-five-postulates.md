@@ -357,6 +357,17 @@ The joint readout is therefore injective. Equivariance and injectivity make a se
 
 The [exact fixed-count spectrum at the least seed budget](lean:D5/S3/ConceptDynamics/Attribution/ParityMinimumSeedSpectrum.exact_minimal_budget_fixed_counts) gives this criterion.
 
+**Counting orbit by orbit at any budget.** Let $G=(\mathbb Z/2)^n$ act on a finite output set $T$, with generator $g_i$ for coordinate $i$. Prescribe $m_O$ preimages for every point of an output orbit $O$. For each $g_i$ that fixes the points of $O$, prescribe a count $b_{O,i}$ of fixed seeds in each fibre over $O$. One equivariant readout realizes these counts simultaneously exactly when
+$$
+0\le b_{O,i}\le m_O,\qquad b_{O,i}\equiv m_O\pmod 2.
+$$
+
+Equivariance transports fibres bijectively along their orbit. The generators commute with that transport, so the fixed counts are also constant along the orbit. When $g_i$ fixes an output point, it acts on the fibre as an involution and pairs up the seeds it moves. When it moves an output point, it fixes no seed over that point.
+
+For the converse, use the same set of labels over each point of an orbit. Take $\lfloor m_O/2\rfloor$ pairs of labels and add one singleton label if $m_O$ is odd. A generator $g_i$ that fixes the orbit swaps exactly $(m_O-b_{O,i})/2$ label pairs. Let the other generators preserve the labels. The permutations commute and square to the identity because they act within the prescribed pairs. Acting on both the output and the labels gives the required seed action. For the two coloured parity readouts, the seed count for one marginal output is the sum of preimage counts over all joint outputs containing it. A coordinate's total fixed count is the sum of its fixed contributions over the orbits.
+
+[Transport of counts along an orbit](lean:D5/S3/ConceptDynamics/Attribution/CoordinateFibreCounts.orbit_fixed_fibre_counts) · [Exact simultaneous realization](lean:D5/S3/ConceptDynamics/Attribution/CoordinateFibreCounts.exact_orbit_fibre_counts)
+
 **An optimal uniform calibration for rational marginals.** Let $G$ act on finite input and output sets $X$ and $Y$, let $P$ be a $G$-covariant probability kernel, and let $H$ be any subgroup. If a positive integer $m$ makes every $mP(x,y)$ integral, a uniform seed law attains the maximum $H$-fixed mass. One sufficient seed count is $m|\det B|$, where $B$ is an invertible square submatrix of the integer constraint matrix below, using the positive support of a suitable optimizer as its columns.
 
 Write $q_O$ for the weight of each deterministic readout table $t:X\to Y$ in its $G$-orbit $O$. The normalization row of $A$ has entry $|O|$ in column $O$. The row for cell $(x,y)$ has entry $|\{t\in O:t(x)=y\}|$. The corresponding entries of $b$ are $1$ and $P(x,y)$. Let $c_O$ count the tables in $O$ that are fixed by $H$. Sending seeds equivariantly to their complete readout tables preserves the marginals and sends every $H$-fixed seed to an $H$-fixed table. Conversely, using the positive-weight tables as seeds and evaluating them realizes any feasible table law. The maximum fixed mass is therefore the maximum of $\sum_O c_Oq_O$ subject to $Aq=b$ and $q\ge0$. Independent draws from the rows give an invariant table law. The normalization row makes the feasible set bounded, and its closedness ensures the maximum is attained.
