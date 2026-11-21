@@ -596,6 +596,21 @@ The substitution $x=e^t$ and the comparison $Q_\vartheta\le Q$ transfer the boun
 
 The constant and threshold can depend on the prescribed ratio and exponent. The statement applies to $\sigma<\Theta$ when the supremum is unattained.
 
+::: {.theorem #thm-ch31-prime-attained-short-windows title="Short zero-mass windows when the supremum is attained" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeAttainedShortWindows.prime_tail_positive_short_windows_of_attained_zero"}
+Suppose a nontrivial zero $\rho$ has $\beta=\operatorname{Re}\rho>1/2$, and every nontrivial zero has real part at most $\beta$. There are real constants $\kappa_0>1$, $K\ge1$, and $X_0\ge2$ such that every $X\ge X_0$ admits an $A\in[X,KX]$ with
+
+$$
+Q_\vartheta(x)>0\quad(A\le x\le\kappa_0 A),
+\qquad N(A,\kappa A)=0\quad(1\le\kappa\le\kappa_0).
+$$
+:::
+
+::: proof
+In logarithmic coordinates, a compactly supported positive filter retains a conjugate pair on the rightmost line. A positive peak of the filtered signal forces a positive value of the unfiltered complete tail somewhere in every sufficiently late logarithmic window of one fixed width. After multiplication by $e^{(1-\beta)t}$, these peaks have a common positive lower bound.
+
+Under the same normalization, the terms from zeros with real part below $\beta$ tend to zero. Absolute summability of the zero coefficients supplies the dominating bound, allowing zeros arbitrarily close to the rightmost line. The terms on that line form a uniformly continuous function. The normalized prime-power correction also tends to zero because $\beta>1/2$. Each sufficiently late peak therefore extends to its right across a fixed logarithmic width on which $Q_\vartheta>0$. Exponentiation converts the distance to the next peak into the factor $K$ and the width of the positive interval into the ratio $\kappa_0$. The full proof is checked by the Lean kernel.
+:::
+
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 
   $$

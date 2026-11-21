@@ -596,6 +596,21 @@ $$
 
 比例和目标指数先给定，系数和阈值可依赖二者。该陈述的范围是 $\sigma<\Theta$ 且上确界未取到。
 
+::: {.theorem #thm-ch31-prime-attained-short-windows title="上确界取到时的零质量短窗口" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeAttainedShortWindows.prime_tail_positive_short_windows_of_attained_zero"}
+设有非平凡零点 $\rho$，其 $\beta=\operatorname{Re}\rho>1/2$，且所有非平凡零点的实部都不超过 $\beta$。存在实数 $\kappa_0>1$、$K\ge1$ 和 $X_0\ge2$，使每个 $X\ge X_0$ 都有 $A\in[X,KX]$，满足
+
+$$
+Q_\vartheta(x)>0\quad(A\le x\le\kappa_0 A),
+\qquad N(A,\kappa A)=0\quad(1\le\kappa\le\kappa_0).
+$$
+:::
+
+::: proof
+在对数坐标中，紧支撑正滤波器保留一对达到最右实部的共轭零点。平滑信号的正峰迫使未平滑的完全尾项在每个充分晚、某个固定宽度的对数窗口内达到正值，且用 $e^{(1-\beta)t}$ 归一化后，峰高有统一的正下界。
+
+在同一归一化下，实部小于 $\beta$ 的零点项趋于零。零点系数的绝对可和性给出支配界，允许任意接近最右线的低实部零点。最右线上的零点项构成一致连续的函数。素数幂修正的归一化量也趋于零，因为 $\beta>1/2$。因此，足够晚的正峰可延伸为一段固定的右向对数宽度，在整个区间内仍有 $Q_\vartheta>0$。指数换元将找到下一处正峰所需的固定对数距离变成倍数 $K$，并将正号区间的固定宽度变成比例 $\kappa_0$。 完整证明由 Lean 内核检查。
+:::
+
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 
   $$

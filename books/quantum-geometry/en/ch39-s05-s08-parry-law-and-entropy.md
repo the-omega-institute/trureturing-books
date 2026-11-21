@@ -1057,6 +1057,15 @@ For empty $H$, this probability is $1$ for $d=0$ and zero for $d=1$. Two nonempt
 
 In the example above with $C=(1\ \ 1)$, the basis bit is zero precisely when the free bit is $1$, which has probability $3/8$. The basis-bit coefficient is $2/3$, so $S_J=1/4$ and the improved bound $(3/32)(1+1/4)=15/128$ equals the actual decrease.
 
+**When two parity events are independent (written derivation).** Let $H$ and $K$ be the supports of events $E_a$ and $E_b$, with right-hand sides $d_a$ and $d_b$. Set $\epsilon_a=(-1)^{d_a}$ and $\epsilon_b=(-1)^{d_b}$, and write $M(S)=\prod_{j\in S}(1-2t_j)$. Expand the product of the two indicator functions and take its expectation. In the product of the two parity signs, each shared bit contributes its sign squared. Only the signs on the symmetric difference $H\triangle K$ remain. Subtract the product of the individual probabilities and use $M(H)M(K)=M(H\triangle K)M(H\cap K)^2$ to get
+
+$$
+4\bigl(\Pr(E_a\cap E_b)-\Pr(E_a)\Pr(E_b)\bigr)=
+\epsilon_a\epsilon_b\,M(H\triangle K)\bigl(1-M(H\cap K)^2\bigr).
+$$
+
+The free bits have $0<t_j\le 1/2$, so every bias factor lies in $[0,1)$. The right side vanishes exactly when the supports are disjoint or a fair bit belongs to exactly one support. A fair bit on one side can therefore give independence even when the events share biased bits. For example, if $Y_2$ is fair, the events $Y_1=0$ and $Y_1+Y_2=0$ are independent.
+
 **Choosing a column basis (worked example).** Take retained pairs $(1,5)$ and $(6,10)$ and discarded pairs $(0,2)$, $(7,11)$, and $(3,8)$, in that order. Their later-endpoint probabilities are $(1/4,1/2)$ and $(1/8,1/4,1/4)$ respectively. When balancing the first retained orbital,
 
 $$
@@ -1069,6 +1078,31 @@ C=\begin{pmatrix}
 $$
 
 The two solutions of $Cw=e$ are $(1,0,0)$ and $(0,1,1)$. Add their probabilities and multiply by $b_1=1/4$ to obtain the actual drop of $25/512$. Columns $2,3$ give the largest original bound, $9/256$. Whenever the free bit $w_1=1$, both basis bits are zero and each contributes a relative excess of $2/3$. The first-order bound keeps the two linear terms and gives $(9/256)(1+2(7/32)(2/3))=93/2048$. Columns $1,2$ give an original bound of $21/1024$. Exactly one basis bit is zero at either solution, so the first-order bound reaches $25/512$.
+
+**The quadratic correction and the degree required for equality (written derivation).** Let $\mathcal A$ index the basis-bit factors and the other biased retained factors. Write the relative excess in each factor as $g_a(Y)=\gamma_a\,\mathbf 1_{E_a}(Y)$ with $\gamma_a\ge 0$. For an integer $d\ge0$, define
+
+$$
+B_J^{(d)}=
+B_J\sum_{\substack{S\subseteq\mathcal A\\|S|\le d}}
+\left(\prod_{a\in S}\gamma_a\right)
+\Pr\!\left[\bigcap_{a\in S}E_a\right].
+$$
+
+The empty set contributes $1$ to the sum. Expanding $\prod_{a\in\mathcal A}(1+g_a(Y))$ and taking its expectation gives $\Delta$ after multiplication by $B_J$. All terms are nonnegative, so $B_J^{(d)}$ increases weakly with $d$ and stays below or equal to $\Delta$. Every free-bit assignment has positive probability. If an assignment makes at least $d+1$ factors exceed their lower bounds in $B_J$, any $d+1$ of them give a strictly positive omitted term. Conversely, if at most $d$ factors exceed those lower bounds at each assignment, every omitted term vanishes. The smallest degree that recovers $\Delta$ is therefore the maximum number of simultaneous positive excesses.
+
+The quadratic correction uses joint probabilities. Write $E_a=\{\sum_{j\in H_a}Y_j=d_a\}$, let $\epsilon_a=(-1)^{d_a}$, and put $M(H)=\prod_{j\in H}(1-2t_j)$. In the product of the two indicator functions, the signs from shared bits square to $1$. Taking expectations gives
+
+$$
+\begin{aligned}
+4\Pr(E_a\cap E_b)
+={}&1+\epsilon_a M(H_a)+\epsilon_b M(H_b)\\
+ &+\epsilon_a\epsilon_b M(H_a\mathbin{\triangle}H_b).
+\end{aligned}
+$$
+
+The symbol $\triangle$ denotes symmetric difference. A free bit shared by the two supports drops out of the last term. In the example above with columns $2,3$, both events are $\{w_1=1\}$. The quadratic term $(9/256)(2/3)^2(7/32)=7/2048$ fills the gap between the first-order bound and the actual decrease.
+
+Linear systems give a second way to test exactness. For each set $S$ of $d+1$ indices with $\gamma_a>0$, form the matrix $R_S$ of coefficient rows for their events and the column $v_S$ of right-hand sides. The events can occur together exactly when $v_S$ lies in the column space of $R_S$. Thus $B_J^{(d)}=\Delta$ if and only if $\operatorname{rank}[R_S\mid v_S]>\operatorname{rank}R_S$ for every such $S$. For example, the three events $Y_1=0$, $Y_2=0$, and $Y_1+Y_2=1$ on two free bits are compatible in pairs. Taken together the equations have no solution. For these three events with positive coefficients, degree two is exact and degree one has a strict gap.
 
 For example, suppose both retained pairs alternate with the sole discarded pair and its endpoint probability satisfies $0<q<1$. Both restricted rows are $(1)$. When the first retained orbital is already balanced, balancing the second leaves purity unchanged. When all three later-endpoint probabilities start at $1/4$, balancing just the second retained orbital lowers purity from $83/128$ to $5/8$.
 
@@ -1112,6 +1146,47 @@ Each original point over $(c,v)$ receives $Q(c,v)/|H|$ under the product law. Th
 
 For example, use $Y_1,Y_2,Y_1+Y_2+B$ and $B$ as four outputs. The coset of the first three is determined by their binary sum $B$. The reduced joint law has output $(B,B)$, while the reduced product law replaces the first coordinate by an independent fair bit. For each value of the second coordinate, the two conditional laws of the first have total variation $1/2$. Hence the four-output total variation is $1/2$.
 
+**Which laws can independent bits generate? (Written derivation)** For a random binary vector $Y$, let $m_\lambda=\mathbb E[(-1)^{\lambda(Y)}]$ be the sign moment of a linear functional $\lambda$. Consider two functionals $\lambda,\nu$. A single input bit with factor $q=1-2t$ and column $c$ contributes either $1$ or $q$ to each of $m_\lambda$ and $m_\nu$, according to the value of the corresponding functional on $c$. If both functionals give $1$, their sum gives $0$, so this column contributes $|q|^2$ on the left and $1$ on the right. In the other three cases the contributions agree. Independence therefore gives
+
+$$
+|m_\lambda|\,|m_\nu|\le |m_{\lambda+\nu}|.
+$$
+
+The affine offset affects only the signs, so the constraint also covers negative biases and fair bits. On $\mathbb F_2^2$, take masses $(17,1,7,7)/32$ in the order $00,10,01,11$. The sign moments for the first coordinate, the second coordinate, and their sum are $1/2,1/8,1/2$, respectively. For the first coordinate and the sum, the left side is $1/4$ and the right side is $1/8$. Thus no finite collection of independent input bits with an affine offset generates this law.
+
+The same law has no convolution root of any order $n\ge 2$. Such a root is a probability law whose $n$-fold convolution with itself gives the stated law. If one exists, let $r^n=1/2$ with $r\ge 0$. The three nontrivial moments of the root have magnitudes $r,r^3,r$ in the same order. The first coordinate and the sum are linearly independent functionals, so at some point both moments give negative contributions to the inversion formula. The mass at that point is at most
+
+$$
+\frac{1-2r+r^3}{4}
+=\frac{(r-1)(r^2+r-1)}{4}<0,
+$$
+
+since $1/\sqrt{2}\le r<1$. This contradicts nonnegative mass.
+
+**Exact distance to affine independent-bit laws on four points (written derivation).** Order the three nontrivial sign moments by absolute value. Choose the two characters with the larger moments as coordinates, and translate the law so that their moments are $0\le a\le c$. The remaining character is their product. Write $b$ for its signed moment, so $|b|\le a$ and $c\le1$. In sign coordinates $u,v\in\{-1,1\}$, the mass at $(u,v)$ is $(1+au+cv+buv)/4$. Coordinate changes and translations preserve total variation and the class of affine independent-bit laws. The minimum distance to that class is
+
+$$
+d_*=\frac{\max(0,ac-b)}{2(1+c)}.
+$$
+
+If $b\ge ac$ and $b>0$, use three independent input bits with bias factors $\sqrt{ac/b}$, $\sqrt{ab/c}$, and $\sqrt{bc/a}$. In the two character coordinates, assign them columns $(1,1)$, $(1,0)$, and $(0,1)$, respectively. All three factors are in $[0,1]$, since $ac\le b$, $ab\le c$, and $bc\le a$. The three products of factors give $a,c,b$, which determine the law. If $b=0$ and $b\ge ac$, then $a=0$ and the product of independent sign laws with moments $0,c$ realizes the law.
+
+Now suppose $b<ac$. Consider a competing affine law with moments $a',c',b'$ at total variation distance $d$. Each atom changes by at most $d$ and each moment by at most $2d$. The signs of three nonzero moments of an affine law multiply to $+1$. A single column contributes a signed bias in exactly two characters or in none, and the offsets give a product of $+1$. If $b'<0$, then at least one of $a',c'$ is nonpositive. Thus $d\ge a/2\ge d_*$, using $b\ge-a$ in the last inequality.
+
+For $b'\ge0$, put $x=\max(0,a-a')$, $y=\max(0,c-c')$, and $z=b'-b$. Each is bounded above by $2d$, and $x+y+z\le4d$. If $x$ or $y$ is zero, use the individual bounds. Otherwise the sum equals four times the mass increase at the sign pair $(-,-)$. Put $\alpha=\min(a,|a'|)$ and $\gamma=\min(c,|c'|)$. Then $a-\alpha\le x$ and $c-\gamma\le y$. Writing $ac-\alpha\gamma=c(a-\alpha)+\alpha(c-\gamma)$ and using the moment constraint $|a'||c'|\le b'$ gives
+
+$$
+ac-b\le c(x+y)+z=c(x+y+z)+(1-c)z\le2(1+c)d.
+$$
+
+To attain the bound, transfer mass $d_*$ from $(+,-)$ to $(-,-)$. The source atom can supply it because
+
+$$
+P(+,-)-d_*=\frac{(1-c)(1+c+a+b)}{4(1+c)}\ge0.
+$$
+
+The resulting moments are $a-2d_*,c,b+2d_*$. The last is the product of the first two, so Fourier inversion gives the product of the two marginal sign laws. The inverse coordinate map realizes this product using two independent bits. The transfer changes total variation by exactly $d_*$. For the example with masses $(17,1,7,7)/32$ the minimum distance is $1/24$.
+
 **Recovering biases from the coset law (written derivation).** Let the biased input bits $X_j$ be independent, with $\Pr(X_j=1)=t_j\in(0,1/2)$. Write $c_j\in C$ for the image of the column of input $j$ in the quotient. The coset output is $Y=s+\sum_j c_jX_j$, with the projected affine offset $s$. For each nonzero $c\in C$, define $q_c=\prod_{j:c_j=c}(1-2t_j)$, with empty product $1$.
 
 For a linear functional $\lambda\in C^*$, write $\chi_\lambda(c)=(-1)^{\lambda(c)}$ and let $m_\lambda=\mathbb E[\chi_\lambda(Y)]$. Independence of the inputs gives
@@ -1132,6 +1207,52 @@ $$
 $$
 
 The coset law thus determines the product of the bias factors for each nonzero column. With the offset fixed, those products in turn determine all sign moments, which determine the law. A zero column has no effect on the output. Repeated nonzero columns enter only through their product. For example, factors $(3/4,1/3)$ on one column and $(1/2,1/2)$ on the same column both give $1/4$. Every bias can be recovered individually exactly when the projected columns are nonzero and pairwise distinct.
+
+**An error bound for bias recovery (written derivation).** Let $P,Q$ be two coset laws with the same projected columns and possibly different affine offsets. Suppose that all absolute sign moments of both laws are at least $\varepsilon>0$. Write $q_a(P),q_a(Q)$ for their bias products on a nonzero column $a$. Then
+
+$$
+\left|\log q_a(P)-\log q_a(Q)\right|
+  \le \frac{2}{\varepsilon}\operatorname{TV}(P,Q).
+$$
+
+For each $\lambda$, let $m_P,m_Q$ be the two sign moments. Write $\log|m_P|-\log|m_Q|=w_\lambda(m_P-m_Q)$, taking $w_\lambda=0$ when the moments agree. The mean value theorem on the positive absolute moments bounds the log difference by $\big||m_P|-|m_Q|\big|/\varepsilon$. The reverse triangle inequality gives $|w_\lambda|\le 1/\varepsilon$ even when the two moments have opposite signs. Substitution into the recovery formula gives
+
+$$
+\begin{aligned}
+\log q_a(P)-\log q_a(Q)&=\sum_{x\in C}K_a(x)(P(x)-Q(x)),\\
+K_a(x)&=-\frac{2}{|C|}\sum_{\lambda\in C^*}
+    \chi_\lambda(a)\,w_\lambda\,\chi_\lambda(x).
+\end{aligned}
+$$
+
+For $x\ne y$, exactly half of the characters distinguish $x$ from $y$. Each such sign difference has absolute value $2$, so $|K_a(x)-K_a(y)|\le 2/\varepsilon$. Subtract the midpoint of the maximum and minimum of $K_a$. The displayed sum stays the same because $\sum_x(P(x)-Q(x))=0$, and the shifted function has absolute value at most $1/\varepsilon$. The claimed estimate follows.
+
+A one-bit quotient already approaches the constant $2$. Fix $0<\varepsilon<1$ and take bias factors $\varepsilon$ and $\varepsilon+h$ with $0<h<1-\varepsilon$. The total variation is $h/2$, and the log difference is $\log(1+h/\varepsilon)$. Its ratio to $\operatorname{TV}(P,Q)/\varepsilon$ tends to $2$ as $h\downarrow0$.
+
+**The finite-distance bound and its equality condition (written derivation).** Write $N=|C|\ge 2$, $\beta=1-1/N$, and $\delta=\operatorname{TV}(P,Q)$. With the same moment floor as above, the tighter bound is
+
+$$
+\left|\log q_a(P)-\log q_a(Q)\right|
+  \le 2\beta\log\!\left(1+\frac{\delta}{\beta\varepsilon}\right).
+$$
+
+Let $u_\lambda=|m_P(\lambda)-m_Q(\lambda)|$. Choose $r_\lambda\in\{-1,1\}$ so that $r_\lambda(m_P(\lambda)-m_Q(\lambda))=u_\lambda$. Then $\sum_\lambda u_\lambda$ is the difference of the expectations of $\sum_\lambda r_\lambda\chi_\lambda(x)$ under the two laws. This function has oscillation at most $N$, since each pair of distinct points has sign difference $2$ at exactly $N/2$ characters. Centering the function at the midpoint of its range gives $\sum_\lambda u_\lambda\le N\delta$. The trivial character contributes zero to this sum.
+
+The absolute log difference at a character is the logarithm of the larger absolute moment divided by the smaller one. It is at most $\log(1+u_\lambda/\varepsilon)$ by the moment floor and the reverse triangle inequality. Concavity of $\log$ bounds the sum over the $N-1$ nontrivial characters by $(N-1)\log(1+N\delta/((N-1)\varepsilon))$. Multiplying by $2/N$ in the recovery formula gives the claimed bound.
+
+For $\delta>0$, let $h=\log(1+\delta/(\beta\varepsilon))$ and $B=\log\varepsilon$. Equality in the last bound requires the mean of the $u_\lambda$ over nontrivial $\lambda$ to be $\delta/\beta$. Strict concavity forces each of them to equal that positive mean. At each nontrivial character, equality in the scalar bound then forces the moments to have the same sign, with one absolute moment equal to $\varepsilon$ and the other to $\varepsilon e^h$. The moment signs determine the offset because the factors are positive and the characters separate points. The triangle inequality in the recovery formula is an equality only if the signed log differences align. After interchanging the laws if needed, the nontrivial characters with $\chi_\lambda(a)=1$ have log magnitudes $B+h$ in $P$ and $B$ in $Q$. Those with $\chi_\lambda(a)=-1$ have the reversed values. The recovery formula therefore gives $\log q_a(Q)=2B/N+h$. If the target column $a$ is present with factors strictly below $1$, this log product is negative, so $\varepsilon e^{Nh/2}<1$.
+
+Conversely, suppose $\varepsilon e^{Nh/2}<1$. Use offset zero and one input bit for each nonzero $c\in C$. Assign their log factors by
+
+$$
+\log q_c(P)=\frac{2(B+h)}{N}-h\,\mathbf 1_{\{c=a\}},
+\qquad
+\log q_c(Q)=\frac{2B}{N}+h\,\mathbf 1_{\{c=a\}}.
+$$
+
+All these log factors are negative. Each nontrivial character multiplies the factors of exactly $N/2$ columns, so these choices give exactly the two log magnitude profiles above. Their moment difference is $\varepsilon(e^h-1)\chi_\lambda(a)$ on nontrivial characters and zero at the trivial one. Fourier inversion gives $P(x)-Q(x)=\varepsilon(e^h-1)(\mathbf 1_{\{x=a\}}-1/N)$, which has total variation $\delta$. The log gap on $a$ is $2\beta h$, so this family attains the bound. Thus, with freedom to choose the common columns and with $a$ present, the strict condition on $\varepsilon e^{Nh/2}$ is both necessary and sufficient.
+
+For example, take a two-dimensional quotient with the nonzero columns ordered as $a,b,a+b$ and both offsets zero. Use bias factors $(1/32,1/8,1/8)$ for $P$ and $(1/4,1/16,1/16)$ for $Q$. At every nontrivial character, one sign moment is $1/256$ and the other is $1/64$. Taking $\varepsilon=1/256$, the inversion formula above gives $\delta=(3/4)(1/64-1/256)=9/1024$. The target bias products have ratio $8$, whose logarithm equals the bound $(3/2)\log 4$.
 
 **Why pairwise moment inequalities stop deciding representability on eight points (written derivation).** The factorization above gives a necessary inequality for every pair of characters of an affine independent-bit law, $|m_\lambda|\,|m_\nu|\le |m_{\lambda+\nu}|$. A column selected by both characters contributes a squared absolute bias, at most $1$, on the left and cancels on the right. Each remaining factor agrees on the two sides. An affine offset affects only the signs.
 
