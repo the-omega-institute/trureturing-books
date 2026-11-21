@@ -352,6 +352,8 @@ Levent Alpöge’s proposed proof constructs these windows at modulus one from e
 
 The preceding link between the two arguments has also undergone a conditional external Lean kernel check. In the reference repository’s pinned Lean 4.33.1 environment, `rh_of_family_and_unit_host` derives the Riemann hypothesis from the family input `TopG` and the modulus-one host input `HostExW (3/2) (GChi PChar.one).req`. For each $\kappa>0$ the two inputs produce arbitrarily late windows $[Y,Y^{3/2}]$ on which the same family gives $\mathrm{Gz}(x)\le x^{1/2+\kappa}$ at every real $x$. Here $\mathrm{Gz}(x)=U(x)$ is the book’s complete Mangoldt remainder, so the prime-only window criterion applies. This kernel replay takes the two inputs as hypotheses. The reference constructions that supply them lie outside its scope. The reproduction record includes the compatibility patch and successful kernel replay. `PinnedTop`, `WindowConsumer`, and `UnifiedWindowRH` check this conditional implication. `PinnedMesh` checks a separate fixed-character window criterion. [Conditional implication and reproducible source](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059461340)
 
+A further external kernel check refines the host input. For $0<\varepsilon<1/52$, $A\ge1$, and every sufficiently large $Y$, the modulus-one case of the mean-square result `QH.pairEx` supplies one pair $q,d$ meeting the tests throughout $[Y,Y^A]$. The outer-window construction also uses a cohomological window input. It fixes $Y,q,d$ before quantifying over the real points of the outer window. For the modulus-one character, `supplyChi` turns `VWinAt PChar.one 401` into the host required above. The same environment thus checks `TopG → VWinAt PChar.one 401 → RiemannHypothesis`. This cohomological window requires finiteness of the relevant Galois-cohomological lengths for the same field and rank, together with the prescribed bound on their $\log\ell$-weighted sum for every finite set of primes. [Fixed prime pair and outer-window quantifiers](https://github.com/the-omega-institute/trureturing/issues/32627#issuecomment-7059642097) · [Conditional cohomological-window implication](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059734329)
+
 **How can one discriminant split at several primes?** For an odd prime $p$, write $J(-d,p)=\bigl(\frac{-d}{p}\bigr)$. A value of $1$ means that $t^2\equiv-d\pmod p$ has a nonzero solution. With $B=3$, the only small odd prime to test is $3$. The prime $d=23$ satisfies $d\equiv7\pmod{16}$ and $-23\equiv1\pmod3$. Take the prime $q=59\equiv3\pmod8$. Since $-23\equiv36=6^2\pmod{59}$, this pair passes both splitting tests. The construction below enforces all the finite conditions through particular residue classes. Those classes account for only some of the eligible primes.
 
 ::: {.theorem #thm-ch31-split-prime-host-series title="Weighted series for auxiliary primes with prescribed splitting" lean="D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series"}
@@ -608,6 +610,45 @@ Put $A(u)=\sum_{1\le n\le u}\chi(n)$. A complete period sums to zero, so a prefi
 :::
 
 **Hand derivation.** The coefficient $ej_qj_d$ has primitive conductor $8qd>1$, whereas a principal character has conductor $1$. It therefore satisfies the nonprincipal hypothesis, and we may set $h=8qd$ in the estimate. Bounding $L'/L$ further requires control of the zeros of $L$ in the specified region.
+
+**Controlling $L'/L$ at the same real endpoint.** Take a positive modulus $h$ and a nonprincipal complex Dirichlet character $\chi$ modulo $h$. Write $D_\chi=L'(1,\chi)/L(1,\chi)$. At a real $x>0$, define the ramp sum and the nonprincipal readout by
+
+$$
+R_\chi(x)=\sum_{1\le n\le\lfloor x\rfloor}\Lambda(n)\max(x/n-1,0)\chi(n),
+\qquad g_\chi(x)=R_\chi(x)+xD_\chi .
+$$
+
+The sum includes prime powers. When $x$ is an integer the entering term has weight zero. Write $I(x)=\int_x^\infty(\psi(u)-u)u^{-2}\,du$, where $\psi(u)=\sum_{n\le u}\Lambda(n)$, and let $\gamma$ denote Euler’s constant.
+
+::: {.theorem #thm-ch31-log-derivative-ramp-tail title="The character ramp and signed tail at a common endpoint" lean="D5/S3/CharacterSums/DirichletRampEndpoint.logDerivative_le_ramp_tail"}
+For every positive modulus $h$, every nonprincipal complex Dirichlet character $\chi$ modulo $h$, and every real $x>0$,
+
+$$
+|D_\chi|\le\frac{|g_\chi(x)|}{x}+\log x-1-\gamma-I(x).
+$$
+
+:::
+
+::: proof
+Apply the triangle inequality to $xD_\chi=g_\chi(x)-R_\chi(x)$. Since $|\chi(n)|\le1$, the normalized ramp $|R_\chi(x)|/x$ is bounded by $\sum_{n\le x}\Lambda(n)/n-\psi(x)/x$. For $x\ge2$ the complete Chebyshev tail identity expresses this as $\log x-1-\gamma-I(x)$, preserving the sign of the tail. For $0<x<2$ the ramp vanishes. The integrand in $I(x)$ is $-1/u$ on $(x,2)$, giving the same formula by integration back from $2$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-uniform-log-derivative-ramp title="Uniform logarithmic derivative bound from a square-root-scale ramp" lean="D5/S3/CharacterSums/DirichletRampEndpoint.uniform_logDerivative_of_ramp"}
+For all real $\varepsilon<1/2$ and $\eta>0$ there exists $X\ge2$ such that for every $x\ge X$, every positive modulus $h$, and every nonprincipal complex Dirichlet character $\chi$ modulo $h$,
+
+$$
+|g_\chi(x)|\le x^{1/2+\varepsilon}
+\quad\Longrightarrow\quad
+|D_\chi|\le\log x-1-\gamma+\eta .
+$$
+
+:::
+
+::: proof
+Dividing the ramp bound by $x$ gives $|g_\chi(x)|/x\le x^{\varepsilon-1/2}\to0$. The Chebyshev error kernel is absolutely integrable on the tail, so $I(x)\to0$. Choose $X$ so that each error has magnitude less than $\eta/2$ and apply the preceding endpoint inequality. Both errors are controlled by functions of the real endpoint and loss parameters alone, so one threshold works for all moduli and characters. The full proof is checked by the Lean kernel.
+:::
+
+**Hand derivation.** Taking $\eta=1$ gives $|D_\chi|\le\log x-\gamma\le4\log x$ for sufficiently large $x$. On the nonprincipal branch, the bound on $g_\chi$ for that same character thus supplies the coefficient $4$ in the reference’s host condition. The principal-character branch has a separate definition.
 
 **How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
 

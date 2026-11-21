@@ -352,6 +352,8 @@ Levent Alpöge 提出的证明在模 $1$ 使用外部算术输入构造这族整
 
 针对上述手工衔接，已有一次条件性的外部 Lean 内核复核。固定在参考库的 Lean 4.33.1 环境中，`rh_of_family_and_unit_host` 从族输入 `TopG` 和模一特征标的宿主输入 `HostExW (3/2) (GChi PChar.one).req` 推出黎曼猜想。对每个 $\kappa>0$，两个输入共同给出任意远的 $[Y,Y^{3/2}]$，使同一族在窗内每个实数 $x$ 处都有 $\mathrm{Gz}(x)\le x^{1/2+\kappa}$。这里 $\mathrm{Gz}(x)=U(x)$ 正是本书的完整 Mangoldt 余项，故可应用上文的素数窗口判据。此次内核重放以这两个输入为假设，参考库中提供它们的构造在重放范围之外。复现记录给出兼容补丁及成功的内核重放，其中 `PinnedTop`、`WindowConsumer` 和 `UnifiedWindowRH` 核验这条条件推论，`PinnedMesh` 核验另一条固定特征标的窗口判据。[固定环境中的条件推论与复现源码](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059461340)
 
+后续的外部内核复核细化了宿主输入。对 $0<\varepsilon<1/52$、$A\ge1$ 和每个充分大的 $Y$，模一的均方估计 `QH.pairEx` 给出在整个 $[Y,Y^A]$ 上满足测试的同一对 $q,d$。外窗的构造还使用上同调窗口输入；此时先固定 $Y,q,d$，然后再量化外窗内的实点。特别地，在模一特征标处，`supplyChi` 把 `VWinAt PChar.one 401` 送入上段的宿主条件。由此在同一环境核验了 `TopG → VWinAt PChar.one 401 → RiemannHypothesis`。这个上同调窗口要求同一数域、同一秩下相应的 Galois 上同调长度有限，并且它们对每个有限素数集以 $\log\ell$ 加权的和满足规定上界。[固定素数对与外窗的量词](https://github.com/the-omega-institute/trureturing/issues/32627#issuecomment-7059642097) · [上同调窗口的条件推论](https://github.com/the-omega-institute/trureturing/issues/32551#issuecomment-7059734329)
+
 **怎样让同一个判别式在几个素数处都分裂？** 对奇素数 $p$，记 $J(-d,p)=\bigl(\frac{-d}{p}\bigr)$。值为 $1$ 的意思是 $t^2\equiv-d\pmod p$ 有非零解。取 $B=3$，要检查的小奇素数只有 $3$。素数 $d=23$ 满足 $d\equiv7\pmod{16}$ 及 $-23\equiv1\pmod3$。再取素数 $q=59\equiv3\pmod8$，有 $-23\equiv36=6^2\pmod{59}$。这一对满足所需的两个分裂条件。下面的构造用特定剩余类一次保证所有有限条件，这些剩余类只占可用素数的一部分。
 
 ::: {.theorem #thm-ch31-split-prime-host-series title="满足局部分裂条件的辅助素数的加权级数" lean="D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series"}
@@ -608,6 +610,45 @@ $$
 :::
 
 **手工推导。** 系数 $ej_qj_d$ 的本原导子为 $8qd>1$，而主特征标的导子为 $1$，因此它满足非主条件，可以在上式中代入 $h=8qd$。要进一步估计 $L'/L$，仍需在所指定的区域控制 $L$ 的零点。
+
+**从同一实端点控制 $L'/L$。** 取正整数模数 $h$、模 $h$ 的非主复 Dirichlet 特征标 $\chi$，记 $D_\chi=L'(1,\chi)/L(1,\chi)$。在正实数 $x$ 处定义斜坡和及非主分支的读数
+
+$$
+R_\chi(x)=\sum_{1\le n\le\lfloor x\rfloor}\Lambda(n)\max(x/n-1,0)\chi(n),
+\qquad g_\chi(x)=R_\chi(x)+xD_\chi .
+$$
+
+这里的和包含素数幂；当 $x$ 本身是整数时，新进入的一项权重为零。记 $I(x)=\int_x^\infty(\psi(u)-u)u^{-2}\,du$，其中 $\psi(u)=\sum_{n\le u}\Lambda(n)$，$\gamma$ 为欧拉常数。
+
+::: {.theorem #thm-ch31-log-derivative-ramp-tail title="同一端点的斜坡和与带符号尾积分" lean="D5/S3/CharacterSums/DirichletRampEndpoint.logDerivative_le_ramp_tail"}
+对每个正整数 $h$、每个模 $h$ 的非主复 Dirichlet 特征标 $\chi$ 和每个实数 $x>0$，有
+
+$$
+|D_\chi|\le\frac{|g_\chi(x)|}{x}+\log x-1-\gamma-I(x).
+$$
+
+:::
+
+::: proof
+在 $xD_\chi=g_\chi(x)-R_\chi(x)$ 中用三角不等式。由于 $|\chi(n)|\le1$，$|R_\chi(x)|/x$ 至多为 $\sum_{n\le x}\Lambda(n)/n-\psi(x)/x$。对 $x\ge2$，完整的 Chebyshev 尾积分恒等式把后一式写成 $\log x-1-\gamma-I(x)$，保留了尾项的符号。对 $0<x<2$，斜坡和为零；在 $(x,2)$ 上尾积分的被积函数为 $-1/u$，从端点 $2$ 积回 $x$ 给出同一公式。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-uniform-log-derivative-ramp title="平方根尺度斜坡界给出的统一对数导数估计" lean="D5/S3/CharacterSums/DirichletRampEndpoint.uniform_logDerivative_of_ramp"}
+对所有实数 $\varepsilon<1/2$、$\eta>0$，存在 $X\ge2$，使得对每个 $x\ge X$、每个正整数 $h$ 及每个模 $h$ 的非主复 Dirichlet 特征标 $\chi$，都有
+
+$$
+|g_\chi(x)|\le x^{1/2+\varepsilon}
+\quad\Longrightarrow\quad
+|D_\chi|\le\log x-1-\gamma+\eta .
+$$
+
+:::
+
+::: proof
+用斜坡界除以 $x$，得 $|g_\chi(x)|/x\le x^{\varepsilon-1/2}\to0$。Chebyshev 误差核绝对可积，故 $I(x)\to0$。取 $X$ 使这两项的误差各小于 $\eta/2$，代入上一条端点界即可。二者只依赖实端点和误差参数，所以同一个起点适用于所有模数与特征标。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 固定 $\eta=1$，就得到充分大 $x$ 处的 $|D_\chi|\le\log x-\gamma\le4\log x$。在非主分支上，同一特征标的 $g_\chi$ 界由此给出参考库宿主条件中要求的系数 $4$。主特征标的分支有单独的定义。
 
 **窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
 
