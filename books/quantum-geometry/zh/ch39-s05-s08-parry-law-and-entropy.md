@@ -1400,7 +1400,9 @@ $$
 z_B(Q)=\epsilon_B\,\partial[C]\wedge z_D(Q/C),
 $$
 
-其中 $\epsilon_B\in\{-1,1\}$ 由 $B$ 处的系数为 $1$ 确定。每个基 $T$ 在 $z_D(Q/C)$ 中的非零系数都产生恰好 $|C|$ 个非零坐标，对应从 $C$ 删去一个元素再并上 $T$。从所得的基与 $C$ 的交集可以读出所删元素，从差集可以读出 $T$。因此这些坐标互不重叠，支撑大小在这一步乘以 $|C|$。
+其中 $\epsilon_B\in\{-1,1\}$ 由 $B$ 处的系数为 $1$ 确定。由于 $e$ 是 $C$ 的首元素，$\epsilon_B$ 就是把 $C\setminus\{e\}$ 与 $D$ 拼接后重排的符号。每个基 $T$ 在 $z_D(Q/C)$ 中的非零系数都产生恰好 $|C|$ 个非零坐标，对应从 $C$ 删去一个元素再并上 $T$。从所得的基与 $C$ 的交集可以读出所删元素，从差集可以读出 $T$。因此这些坐标互不重叠，支撑大小在这一步乘以 $|C|$。 [有序拟阵的分解定理](lean:D5/S3/Combinatorics/Matroids/OrderedCycleFactorization.normalized_factorization)
+
+对于有限 $\mathbb F_2$ 向量空间中的列族，带符号特化直接使用本章的增广边界矩阵。逐项系数和支撑计数均按方向复形的面读取。 [带符号特化](lean:D5/S3/TotalVariation/FairBiasCycleFactorization.signed_cycle_factorization)
 
 任取 $c\in C$。回路删去 $c$ 后得到 $C$ 的一个基，所以 $\left(C\setminus\{c\}\right)\cup T$ 是 $Q$ 的基。边界在拼接上满足带符号的乘积法则。因此 $\partial^2[C]=0$ 与 $\partial z_D(Q/C)=0$ 保证拼接是循环。若 $c\ne e$，所得基含 $e$，所以它无法成为全被动基。若 $c=e$，$C\setminus\{e\}$ 的每个元素都可换成 $e$。对 $T$ 中的元素，换入 $C$ 中的元素无法产生新基，因为 $C$ 已在 $C\setminus\{e\}$ 的闭包中。换入 $C$ 外的元素恰好对应收缩拟阵中的交换。这也证明 $D$ 是收缩拟阵的全被动基，并且拼接的唯一非零全被动坐标是 $B$ 处的 $\pm1$。
 
