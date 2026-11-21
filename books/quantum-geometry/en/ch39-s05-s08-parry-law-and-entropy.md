@@ -1420,6 +1420,25 @@ The choice of least nonloop controls the normalization. Two equal nonzero binary
 
 Björner's classical construction gives homology bases of matroids supported on joins of simplex boundaries. [Chari, *Two decompositions in topological combinatorics with applications to matroid complexes* (1997), §1, p. 3927](https://doi.org/10.1090/S0002-9947-97-01921-1)
 
+**Decomposition of top integral cycles at any nonloop.** Let $Q$ be a finite ordered matroid and write $Z(Q)$ for its top augmented integral cycle group. Choose any nonloop $e$, let $\mathcal C_e$ be the set of circuits through $e$, and for $C\in\mathcal C_e$ write $A_C=C\setminus\{e\}$. Put $s_D(x)=(-1)^{|\{y\in D:y<x\}|}$ for the insertion sign and let $\sigma(A,T)$ be the sign of putting the concatenated ordered lists of $A$ and $T$ into increasing order. The following integral linear maps are inverses.
+
+$$
+Z(Q)\ \cong\ \bigoplus_{C\in\mathcal C_e}Z(Q/C),\qquad
+z\longmapsto (w_C)_C,\qquad
+(w_C)_C\longmapsto \sum_{C\in\mathcal C_e}\partial[C]\wedge w_C.
+$$
+
+The chain $w_C$ on $Q/C$ has coefficient at each basis $T$ given by
+$w_C(T)=s_{A_C}(e)\,\sigma(A_C,T)\,z(A_C\cup T)$, with zero coefficients at other faces. If $Q/C$ has rank zero, $T$ is the empty face. If $e$ is a coloop, every basis contains $e$, $\mathcal C_e$ is empty, and the cycle group is zero.
+
+To verify the cycle condition on $w_C$, take a ridge $D$ in the contraction and put $R=A_C\cup D$. For $x\notin C\cup D$ we have
+$s_D(x)\sigma(A_C,D\cup\{x\})=(-1)^{|A_C|}\sigma(A_C,D)s_R(x)$.
+The elements of $A_C$ before and after $x$ account for the exponent $|A_C|$. The basis condition in the contraction is equivalent to that obtained by adjoining $A_C$ and testing for a basis of $Q$. Inserting $e$ produces a dependent set containing $C$, so its chain coefficient vanishes. Thus the coefficient of $\partial w_C$ at $D$ is the coefficient of $\partial z$ at $R$ times one common sign, and hence is zero. Conversely the signed product rule gives a cycle $\partial[C]\wedge w_C$ for each summand.
+
+A basis omitting $e$, say $F$, uniquely determines its summand. Its extension $F\cup\{e\}$ has fundamental circuit $C$, so $F=A_C\cup(F\setminus C)$. Reading the coefficient and forming the join each contribute the same sign on that face, giving a product of one. For a basis containing $e$, the zero boundary equation on the ridge obtained by deleting $e$ uniquely recovers its coefficient from those at bases omitting $e$. The maps are therefore inverses on the entire cycle group.
+
+This gives the support overlap for normalized cycles by a short derivation. When their first fundamental circuits at the least nonloop differ, every basis in their common support contains $e$. When both first circuits are $C$, each contracted basis $T$ contributes $|C|$ joined coordinates, and the reordering sign squares to one in the coefficient product. The integral coefficient inner product over all bases is therefore the contracted inner product times $|C|\epsilon_B\epsilon_{B'}$. Distinct circuits can still contribute an inner product through coordinates containing $e$. In the rank-one matroid on three nonloops, $[2]-[1]$ and $[3]-[1]$ belong to distinct circuits at $e=1$ and have inner product $1$.
+
 **Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 If there are no nonempty facets, the original realization is empty and its reduced integral homology vanishes in every nonnegative degree. When facets exist and $d=1$, the wedge is a discrete space with $m+1$ points and reduced degree-zero generators $[p_B]-[p_0]$, where $p_B$ is the point contributed by $B$ and $p_0$ is the common basepoint. When facets exist and $m=0$, the wedge is a point and every reduced group vanishes. For a nonempty family of facets, the reduced Euler characteristic is $(-1)^{d-1}m$, so the earlier Tutte evaluation gives $m=2^d T_M(1,1/2)$.
