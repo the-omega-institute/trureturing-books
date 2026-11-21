@@ -762,7 +762,7 @@ After factoring out the target decay, each term carries the weight $\exp[-u(1/q-
 The bound includes $B=a$, where both sides vanish.
 
 ::: {.problem #prob-ch31-prime-window-linear-remainder title="A prime-window remainder linear in the truncation order"}
-Under RH, can the same residual satisfy $|E_m(a,B)|\le K m D_{s_m}(a,B)$ uniformly over the stated orders and real endpoints? [Formalization research](https://github.com/the-omega-institute/trureturing/issues/32976)
+Under RH, do constants $a_0\ge2$ and $K>0$ exist such that the same residual satisfies $|E_m(a,B)|\le K m D_{s_m}(a,B)$ for every integer $m\ge2$ and all real cutoffs $B\ge a\ge a_0$, including $B=a$? [Formalization research](https://github.com/the-omega-institute/trureturing/issues/32976)
 :::
 
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}

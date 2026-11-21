@@ -762,7 +762,7 @@ $$
 这条界对 $B=a$ 也成立，两边均为零。
 
 ::: {.problem #prob-ch31-prime-window-linear-remainder title="素数尾窗的线性阶数余项"}
-在 RH 下，同一余项能否在所述全部阶数和实数端点上统一满足 $|E_m(a,B)|\le K m D_{s_m}(a,B)$？ [形式化研究](https://github.com/the-omega-institute/trureturing/issues/32976)
+假设 RH。是否存在常数 $a_0\ge2$ 和 $K>0$，使同一余项对每个整数 $m\ge2$ 和所有实数截点 $B\ge a\ge a_0$（包括 $B=a$）都满足 $|E_m(a,B)|\le K m D_{s_m}(a,B)$？ [形式化研究](https://github.com/the-omega-institute/trureturing/issues/32976)
 :::
 
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
