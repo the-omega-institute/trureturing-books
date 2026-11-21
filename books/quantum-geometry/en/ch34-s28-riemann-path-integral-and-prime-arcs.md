@@ -602,10 +602,10 @@ $$
 :::
 
 ::: proof
-Put $A(u)=\sum_{1\le n\le u}\chi(n)$. A complete period sums to zero, so a prefix in one period and its complementary suffix have opposite sums. They contain a total of $\varphi(h)$ units, and the smaller unit count bounds $|A(u)|$ by $\varphi(h)/2$. Partial summation gives $L(s,\chi)=s\int_1^\infty A(u)u^{-s-1}\,du$. For $h<u<h+1$, the sum $A(u)$ consists of exactly one full period and vanishes. The majorant $\varphi(h)u^{-\sigma-1}/2$ is positive on that interval. This gives strict inequality after integration. The full proof is checked by the Lean kernel.
+Put $A(u)=\sum_{1\le n\le u}\chi(n)$. A complete period sums to zero, so a prefix in one period and its complementary suffix have opposite sums. They contain a total of $\varphi(h)$ units, and the smaller unit count bounds $|A(u)|$ by $\varphi(h)/2$. For $\sigma>1$, partial summation gives $L(s,\chi)=s\int_1^\infty A(u)u^{-s-1}\,du$. Since $A$ is bounded, the integral converges locally uniformly and defines a holomorphic function on $\sigma>0$. The identity theorem extends the equality with the nonprincipal $L$-function throughout that half-plane. For $h<u<h+1$, the sum $A(u)$ consists of exactly one full period and vanishes. The majorant $\varphi(h)u^{-\sigma-1}/2$ is positive on that interval. Thus the integral of the modulus is strictly smaller than the integral of the majorant. The triangle inequality for the complex integral, followed by multiplication by $|s|$, gives the claimed strict bound. The full proof is checked by the Lean kernel.
 :::
 
-For example, the coefficient $ej_qj_d$ has primitive modulus $8qd$, so one may set $h=8qd$ in the estimate. Bounding $L'/L$ further requires control of the zeros of $L$ in the specified region.
+**Hand derivation.** The coefficient $ej_qj_d$ has primitive conductor $8qd>1$, whereas a principal character has conductor $1$. It therefore satisfies the nonprincipal hypothesis, and we may set $h=8qd$ in the estimate. Bounding $L'/L$ further requires control of the zeros of $L$ in the specified region.
 
 **How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
 
