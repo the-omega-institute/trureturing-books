@@ -135,6 +135,20 @@ $$
 
 Choosing $D$ and then $Q$ makes the bound smaller than $\eta$. Positive definiteness gives $H_{jk}<1$, so the $A_j$ are distinct. The Tier 1 half-angle readings have half this error. The shell excludes nonconstant three-term arithmetic progressions exactly at every finite scale. Its dimension and radius may grow with the number of nodes and the requested precision.
 
+**What can one central reference point reveal about the zeros? (Manual derivation.)** Fix the reference at $s=1/2$ and move only the other real node. Write $s=1/2+x$ and $t=1/2+y$, initially with $x,y>0$. Cancel the common factor $\xi$ at each node in the paired coordinates above. At offset $y$ the squared norm is $L(y)=\sum_{\gamma>0}m_\gamma/(\gamma^2+y^2)$. A partial fraction identity gives the dot product term by term. Writing $h(s,t)$ for the normalized inner product gives
+
+$$
+\begin{aligned}
+\frac{xy+\gamma^2}{(x^2+\gamma^2)(y^2+\gamma^2)}
+&=\frac{1}{x+y}\left(\frac{x}{x^2+\gamma^2}+\frac{y}{y^2+\gamma^2}\right),\\
+h(s,t)&=\frac{xL(x)+yL(y)}{(x+y)\sqrt{L(x)L(y)}}.
+\end{aligned}
+$$
+
+The zero-counting estimate for positive ordinates gives $0<L(0)=\sum_{\gamma>0}m_\gamma/\gamma^2<\infty$. By [@prop-zeta-real-axis-sign] and [@prop-xi-zeros-strip-zeros], $\xi(1/2)\ne0$, so the central vector also admits normalization. Each term is bounded by $m_\gamma/\gamma^2$, so taking $x\downarrow0$ gives $h(1/2,1/2+y)^2=L(y)/L(0)$. Under RH, pairing the factors in the Hadamard product of $\xi$ gives factors $1+y^2/\gamma^2$. Logarithmic differentiation then yields $2yL(y)=\xi'(1/2+y)/\xi(1/2+y)$. [Paired product and zero expansion in §31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-31-3)
+
+Regard the squared reading as a function of $u=y^2$. Its meromorphic continuation is $\sum_{\gamma>0}m_\gamma/[L(0)(u+\gamma^2)]$. The series converges uniformly on compact sets away from its poles since its tail terms are bounded in modulus by $2m_\gamma/[L(0)\gamma^2]$. By the identity theorem, the **exact curve** on any open interval of the positive real axis determines this continuation uniquely. Each pole $u=-\gamma^2$ gives a positive ordinate, and ratios of the residues $m_\gamma/L(0)$ give the relative multiplicities. Multiplying every multiplicity by the same positive integer preserves the normalized curve. For the Riemann zeros, the Riemann–von Mangoldt formula gives $N(T)\sim T\log T/(2\pi)$ for the number of positive ordinates counted with multiplicity. Its leading coefficient fixes the overall factor. [@rem-ch34-li-toeplitz-superexponential-collapse]
+
 **Which shell angles occur exactly between two real spectral nodes?** Fix any real node $s>1/2$ and let a second real node $t$ move to the right from $s$. Write $x(t)$ for its normalized spectral vector and $h(s,t)$ for its inner product with $x(s)$. The kernel formula gives continuity and $h(s,s)=1$. For $t>s$, the coordinates from each conjugate pair are positive and the two-node Gram matrix is positive definite, so $0<h(s,t)<1$. We can also determine the limit of this inner product as $t\to\infty$.
 
 Put $v=t-1/2$. In the coordinate formula above, cancel the common factor $\xi(t)$ and multiply every coordinate by $v$. Before normalization, the sum of their squares is

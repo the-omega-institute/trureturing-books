@@ -558,6 +558,33 @@ $$
 零点虚部有远离零的一致下界，因而逐项积分后的系数仍绝对可和。对数坐标下，积分的两个端点给出同一个 $P$ 的差。剩下的误差绝对可积，所以其在任何 $[\ln a,\ln B]$ 上的绝对积分都受整个左端尾积分控制。对固定 $a$，剩余积分趋于常数。实际轨道在任意晚的时刻逼近闭包中的每个相位，因而实现所给区间的每个簇值。相位闭包紧且连通，而沿轨道的原函数在零时刻有严格正的斜率，因此区间两端不同。结论只用实际联合相位关系。 完整证明由 Lean 内核检查。
 :::
 
+**素数立方项与平方截断的半相位。** 沿用 $E(a,B)=N(a,B)-2\ln(B/a)$。对全部实际非平凡零点 $\rho_k$ 按重数编号，取 $\gamma_k=\operatorname{Im}\rho_k$ 和 $c_k=1/[\rho_k(1-\rho_k)]$，用前一定理中的级数定义 $P$，并令 $\phi(u)_k=e^{i\gamma_k u}$。对 $x>0$，定义
+
+$$
+A_2(x)=4\operatorname{Re}\sum_\rho
+\frac{x^{(\rho-1)/2}}{\rho(1-\rho)(2-\rho)}.
+$$
+
+::: {.theorem #thm-ch31-prime-window-cube-square title="素数尾窗的立方项、平方谱与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/RHRootCorrection.rh_iff_prime_window_cube_and_square"}
+黎曼猜想成立，当且仅当存在 $a_0\ge2$ 和 $K>0$，使所有实数 $B\ge a\ge a_0$ 满足
+
+$$
+\begin{aligned}
+\bigl|E(a,B)&-P(\phi(\ln B))+P(\phi(\ln a))\\
+ &-9(a^{-1/6}-B^{-1/6})-A_2(B)+A_2(a)\bigr|
+ \le K(a^{-3/10}-B^{-3/10}).
+\end{aligned}
+$$
+:::
+
+::: proof
+在 RH 下，Costa Pereira 的夹逼从 $\psi-\vartheta$ 中分出平方根和立方根处的 $\psi$，余项至多为 $\psi(x^{1/5})$。积分并归一化后，立方主项贡献 $(3/2)x^{-1/6}$。再作一次对数窗口积分，得到系数 $9$。平方截断取 $y=\sqrt{x}$ 后，中心化修正为 $2Q(y)-2y\int_y^\infty Q(s)s^{-2}\,ds$。代入完整尾项的积分显式公式，得到逐零系数 $-2/[\rho(2-\rho)]$。积分这些模式便得到 $A_2(B)-A_2(a)$。
+
+平方截断项使用相位 $e^{i\gamma_\rho\ln(x)/2}$，其平方是同一零点在 $\phi(\ln x)$ 中的相位。剩余对数密度受常数倍的 $x^{-3/10}$ 控制。在实际窗口上积分保留两端，误差界因而随窗口收缩而消失。[Costa Pereira 夹逼的复述](https://arxiv.org/html/2002.11068v2#S3.E16)
+
+这条估计也反推 RH。利用绝对收敛和已知的临界带界，两个端点原函数在截止点至少为 $1$ 时一致有界。立方项与幂次余项也都一致有界。如果这条估计对所有右端点成立，固定一个满足条件的 $a$ 后，$E(a,B)$ 随 $B$ 增长始终有界。若 RH 不成立，取 $B\ge a^2$，宽窗定理给出超出 $2\ln(B/a)$ 任意多的实际窗口质量。完整证明由 Lean 内核检查。
+:::
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::

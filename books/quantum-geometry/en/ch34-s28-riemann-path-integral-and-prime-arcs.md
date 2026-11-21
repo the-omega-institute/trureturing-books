@@ -558,6 +558,33 @@ $$
 The zero ordinates are bounded away from zero, so the coefficients remain absolutely summable after termwise integration. In logarithmic coordinates the two endpoints give the difference of values of the same function $P$. The residual is absolutely integrable, so its absolute integral on any $[\ln a,\ln B]$ is bounded by the entire tail from $\ln a$. At fixed $a$ the residual integral converges to a constant. The actual orbit approaches each point of the closure at arbitrarily late times and hence realizes every cluster value in the interval. The closure is compact and connected, and the primitive along the orbit has strictly positive derivative at time zero, so the interval has distinct endpoints. The result uses the actual joint phase relations. The full proof is checked by the Lean kernel.
 :::
 
+**The cube term and half phase of the square cutoff.** Keep $E(a,B)=N(a,B)-2\ln(B/a)$. Enumerate all actual nontrivial zeros $\rho_k$ with multiplicity, put $\gamma_k=\operatorname{Im}\rho_k$ and $c_k=1/[\rho_k(1-\rho_k)]$, use the preceding series to define $P$, and set $\phi(u)_k=e^{i\gamma_k u}$. For $x>0$, define
+
+$$
+A_2(x)=4\operatorname{Re}\sum_\rho
+\frac{x^{(\rho-1)/2}}{\rho(1-\rho)(2-\rho)}.
+$$
+
+::: {.theorem #thm-ch31-prime-window-cube-square title="The cube term, square spectrum, and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/RHRootCorrection.rh_iff_prime_window_cube_and_square"}
+The Riemann hypothesis holds if and only if there exist $a_0\ge2$ and $K>0$ such that every real pair $B\ge a\ge a_0$ satisfies
+
+$$
+\begin{aligned}
+\bigl|E(a,B)&-P(\phi(\ln B))+P(\phi(\ln a))\\
+ &-9(a^{-1/6}-B^{-1/6})-A_2(B)+A_2(a)\bigr|
+ \le K(a^{-3/10}-B^{-3/10}).
+\end{aligned}
+$$
+:::
+
+::: proof
+Under RH, Costa Pereira's inequalities isolate the square-root and cube-root cutoffs of $\psi$ in $\psi-\vartheta$, leaving a remainder bounded by $\psi(x^{1/5})$. After integration and normalization, the cube main term contributes $(3/2)x^{-1/6}$ to the density. Integration over the log window gives the coefficient $9$. Writing $y=\sqrt{x}$ gives the centered square-cutoff correction $2Q(y)-2y\int_y^\infty Q(s)s^{-2}\,ds$. Substituting the integrated explicit formula for the complete tail gives the coefficient $-2/[\rho(2-\rho)]$ at each zero. Integrating the modes gives $A_2(B)-A_2(a)$.
+
+The square-cutoff term uses phase $e^{i\gamma_\rho\ln(x)/2}$, whose square is the phase of the same zero in $\phi(\ln x)$. The remaining log density is bounded by a constant times $x^{-3/10}$. Integrating over the actual window keeps both endpoints, so the error bound also vanishes as the window shrinks. [Restatement of Costa Pereira's inequalities](https://arxiv.org/html/2002.11068v2#S3.E16)
+
+The same estimate also implies RH. Both endpoint primitives are uniformly bounded for positive cutoffs at least one by absolute convergence and the known critical-strip bounds. The cube term and the power error are bounded as well. If the estimate holds uniformly, then $E(a,B)$ stays bounded at a fixed admissible $a$ as $B$ grows. If RH fails, the wide-window theorem gives arbitrarily large excess over $2\ln(B/a)$ for sufficiently large $B\ge a^2$. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::
