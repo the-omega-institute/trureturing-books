@@ -559,6 +559,8 @@ Costa Pereira's inequalities isolate the square-root and cube-root cutoffs of $\
 
 The square-cutoff term uses phase $e^{i\gamma_\rho\ln(x)/2}$, whose square is the phase of the same zero in $\phi(\ln x)$. The remaining log density is bounded by a constant times $x^{-3/10}$. Integrating over the actual window keeps both endpoints, so the error bound also vanishes as the window shrinks. [Restatement of Costa Pereira's inequalities](https://arxiv.org/html/2002.11068v2#S3.E16)
 
+The same estimate also implies RH. Both endpoint primitives are uniformly bounded for positive cutoffs at least one by absolute convergence and the known critical-strip bounds. The cube term and the power error are bounded as well. If the estimate holds uniformly, then $E(a,B)$ stays bounded at a fixed admissible $a$ as $B$ grows. The wide-window theorem gives arbitrarily large excess over $2\ln(B/a)$ on those windows if RH fails.
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::

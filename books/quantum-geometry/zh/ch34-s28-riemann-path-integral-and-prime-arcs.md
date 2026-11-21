@@ -559,6 +559,8 @@ Costa Pereira 的夹逼从 $\psi-\vartheta$ 中分出平方根和立方根处的
 
 平方截断项使用相位 $e^{i\gamma_\rho\ln(x)/2}$，其平方是同一零点在 $\phi(\ln x)$ 中的相位。剩余对数密度受常数倍的 $x^{-3/10}$ 控制。在实际窗口上积分保留两端，误差界因而随窗口收缩而消失。[Costa Pereira 夹逼的复述](https://arxiv.org/html/2002.11068v2#S3.E16)
 
+这条估计也反推 RH。利用绝对收敛和已知的临界带界，两个端点原函数在截止点至少为 $1$ 时一致有界。立方项与幂次余项也都一致有界。如果这条估计对所有右端点成立，固定一个满足条件的 $a$ 后，$E(a,B)$ 随 $B$ 增长始终有界。若 RH 不成立，宽窗定理给出超出 $2\ln(B/a)$ 任意多的实际窗口质量。
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::
