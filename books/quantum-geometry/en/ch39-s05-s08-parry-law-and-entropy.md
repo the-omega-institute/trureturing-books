@@ -1478,7 +1478,7 @@ Choose the common orientation factor so that the coefficient on $K\setminus\{y\}
 
 It follows that $A_Kz=\sum_{i=1}^m |P_i|\,p_i$, where the common integer potential $p_i$ on each class is arbitrary. Bézout's identity gives exactly the multiples of the greatest common divisor. For example, when $|K|=4$, two classes of size two give $2\mathbb Z$ and four singleton classes give $\mathbb Z$. The two contractions have the same ground and rank. [Integral image for a one-element extension](lean:D5/S3/Combinatorics/Matroids/CircuitRestrictionImage.exists_topCycle_signedRestriction_iff)
 
-**The integral image for any spanning circuit.** The same greatest-common-divisor formula holds for every spanning circuit $K$. Set $X=E\setminus K$. The contraction by $K$ still has the empty face as its only basis. Write the signed readout at each $a\in K$ as $c_a=\partial[K](K\setminus\{a\})z(K\setminus\{a\})$, so $A_Kz=\sum_{a\in K}c_a$.
+**The integral image for any spanning circuit.** The same greatest-common-divisor formula holds for every spanning circuit $K$. Set $X=E\setminus K$. The contraction by $K$ still has the empty face as its only basis. Write the signed readout at each $a\in K$ as $c_a=\partial[K]\bigl(K\setminus\{a\}\bigr)\,z\bigl(K\setminus\{a\}\bigr)$, so $A_Kz=\sum_{a\in K}c_a$.
 
 For distinct $a,b\in K$ that are parallel in the dual, take the zero boundary equation at $K\setminus\{a,b\}$. Inserting any vertex from $X$ leaves both $a,b$ in the dual complement, so its coefficient vanishes. Only the insertions of $a$ and $b$ can contribute. Applying the same boundary equation to $\partial[K]$ fixes the relative sign of these two terms. Thus $c_a=c_b$, and each class contributes a multiple of its size to $A_Kz$.
 
