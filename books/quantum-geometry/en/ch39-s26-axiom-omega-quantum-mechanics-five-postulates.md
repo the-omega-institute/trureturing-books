@@ -228,6 +228,23 @@ Here $G_x$ is the stabilizer of $x$, and $Y^{N\cap G_x}$ consists of the outputs
 
 If the $H$-fixed mass is one, positivity forces $H$ to fix every seed. The kernel of the seed action is normal, so it contains $N$. Every positive-probability output is the readout of some seed. An element of $N$ fixing the input also fixes that seed, so covariance forces it to fix the output. For an empty input set, one seed of weight one fixed by all of G suffices. For nonempty input, the row support condition gives mass one on $Y^{N\cap G_x}$ for every row. The [maximum fixed mass formula for normal subgroups](lean:D5/S3/ConceptDynamics/Attribution/NormalSubgroupFixedMass.maximal_normal_subgroup_fixed_seed_mass) supplies a calibration with full $N$-fixed mass. Since $H\le N$, the same calibration has full $H$-fixed mass.
 
+**An exact linear program for any subgroup.** Let $G$ act on a nonempty finite input set $X$ and a finite output set $Y$, and let $P$ be a $G$-covariant probability kernel. Fix a subgroup $H\le G$ and use finite shared seed laws with positive $G$-invariant weights and pointwise $G$-covariant readouts. Let $T=Y^X$ be the set of deterministic readout tables, with action $(g\cdot t)(x)=g\cdot t(g^{-1}\cdot x)$. Write $T^H$ for the tables fixed by $H$. For each $G$-orbit $O\subseteq T$ define
+$$
+a_O(x,y)=\frac{|\{t\in O:t(x)=y\}|}{|O|},
+\qquad
+b_O=\frac{|O\cap T^H|}{|O|}.
+$$
+The maximum total weight of $H$-fixed seeds is the attained optimum of
+$$
+\max_{(z_O)} \sum_O z_O b_O,
+\qquad
+z_O\ge 0,\quad \sum_O z_O=1,\quad
+\sum_O z_O a_O(x,y)=P(x,y)\quad(x\in X,\ y\in Y).
+$$
+Send each seed to its table of outputs across all rows. The table distribution is invariant and has marginals $P$. Every $H$-fixed seed maps to an $H$-fixed table, so the fixed mass can only increase. An invariant table distribution assigns equal weight to all tables within each orbit. Its orbit totals $z_O$ therefore obey the displayed constraints, and its fixed mass is the displayed objective.
+
+Conversely, for any feasible vector give each table in $O$ weight $z_O/|O|$. Use the positive-weight tables as the seeds, with evaluation at $x$ as the readout. This realizes the kernel and attains the objective exactly. Independent row draws give an invariant table distribution, so the constraints are feasible. They define a closed subset of the finite-dimensional probability simplex, and the linear objective attains a maximum there. [Exact maximum for an arbitrary subgroup](lean:D5/S3/ConceptDynamics/Attribution/TableOrbitWeights.maximal_table_fixed_mass).
+
 **An optimal uniform calibration for rational marginals.** Let $G$ act on finite input and output sets $X$ and $Y$, let $P$ be a $G$-covariant probability kernel, and let $H$ be any subgroup. If a positive integer $m$ makes every $mP(x,y)$ integral, a uniform seed law attains the maximum $H$-fixed mass. One sufficient seed count is $m|\det B|$, where $B$ is an invertible square submatrix of the integer constraint matrix below, using the positive support of a suitable optimizer as its columns.
 
 Write $q_O$ for the weight of each deterministic readout table $t:X\to Y$ in its $G$-orbit $O$. The normalization row of $A$ has entry $|O|$ in column $O$. The row for cell $(x,y)$ has entry $|\{t\in O:t(x)=y\}|$. The corresponding entries of $b$ are $1$ and $P(x,y)$. Let $c_O$ count the tables in $O$ that are fixed by $H$. Sending seeds equivariantly to their complete readout tables preserves the marginals and sends every $H$-fixed seed to an $H$-fixed table. Conversely, using the positive-weight tables as seeds and evaluating them realizes any feasible table law. The maximum fixed mass is therefore the maximum of $\sum_O c_Oq_O$ subject to $Aq=b$ and $q\ge0$. Independent draws from the rows give an invariant table law. The normalization row makes the feasible set bounded, and its closedness ensures the maximum is attained.
