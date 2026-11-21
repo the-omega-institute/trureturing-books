@@ -704,7 +704,13 @@ $$
 :::
 
 ::: proof
-有限 Chebyshev 分解在第六、七次幂给出系数 $-1$ 与 $+1$，第八次幂抵消。RH 下 $\vartheta(y)-y=O(\sqrt y\ln^2 y)$，因此这两个 Chebyshev 项可以用各自的幂函数主项积分。归一化后的密度分别为 $-(6/5)x^{-1/3}$ 与 $(7/6)x^{-5/14}$，在对数坐标积分给出窗口系数 $-18/5$ 与 $49/15$。中心化立方根尾项的零点系数为 $-3/[\rho(3-\rho)]$，相位为 $e^{i\gamma_\rho\ln(x)/3}$，实幂为 $x^{-1/3}$，因此立方根谱与六次主项同阶。绝对可和性允许在实际对数窗口逐项积分，得到原函数 $A_3$。中心化五次根尾项为 $x^{-2/5}$ 阶，纳入 $O(x^{-3/8})$ 的余量密度界。积分保留两个端点，包括 $B=a$ 的情形。 [Johnston，引理 2.7](https://arxiv.org/html/2201.06184v2#S2.Thmtheorem7) · [参考仓库的窗口限制](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Window.lean#L37-L44)
+有限 Chebyshev 分解给第六、七次幂赋予系数 $-1$ 与 $+1$，第八次幂抵消。从第九次幂起，余项绝对值至多为 $4\ln(t)t^{1/9}$。在 RH 下，把前两项中的 $\vartheta(t^{1/n})$ 换成 $t^{1/n}$，与这段余项合并后，所得误差为 $O(t^{1/8})$。对尾积分归一化后，六、七次幂的主密度分别为 $-(6/5)x^{-1/3}$ 和 $(7/6)x^{-5/14}$，算术误差密度为 $O(x^{-3/8})$。 [六、七次幂的归一化估计](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SeventhCutoff.sixth_seventh_normalized)
+
+立方根谱的模态系数为 $-3/[\rho(3-\rho)]$，相位为 $e^{i\gamma_\rho\ln(x)/3}$，其幂衰减为 $x^{-1/3}$，与六次幂主密度同阶。平方根和立方根中心化尾项各自与对应谱密度相差 $O(x^{-1/2})$，完整尾项的显式公式误差也为 $O(x^{-1/2})$。五次根中心化尾项为 $O(x^{-2/5})$。取共同起点足够大，使整个窗口上的 $-Q_\vartheta(x)$ 为正，负部质量便可写成对数坐标下的有符号积分。对谱逐项积分得到 $A_3(B)-A_3(a)$，对六、七次幂的主密度积分得到系数 $-18/5$ 与 $49/15$。在同一个区间 $[\ln a,\ln B]$ 上积分误差密度，所得界为常数乘 $D_{3/8}(a,B)$，涵盖 $B=a$。
+
+参考仓库的 `FormBAt.mono` 在同一窗口中通过指数的单调性限制幂次。这里沿用在原窗口内比较的思路。 [参考仓库的窗口限制](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Window.lean#L37-L44)
+
+完整证明由 Lean 内核检查。
 :::
 
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
