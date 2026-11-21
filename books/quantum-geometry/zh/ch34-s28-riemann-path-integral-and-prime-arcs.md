@@ -503,6 +503,32 @@ $$
 在 RH 下，对归一化余项 $U(x)/\sqrt{x}$ 的绝对包络取正损失 $C-M$，即得充分大 $x$ 处的上界 $C\sqrt{x}$。反过来，对任意 $\kappa>0$，起点取得足够大时，整个窗口上都有 $C\le x^\kappa$。同一窗口因此满足逐点幂界，由 [@thm-ch31-mangoldt-pointwise-power-window] 得到 RH。完整证明由 Lean 内核检查。
 :::
 
+临界系数 $C=M$ 涉及原始余项与曲线 $M\sqrt{x}$ 的**可加差额**。将其除以 $\sqrt{x}$ 会掩去固定尺度的节省。
+
+::: {.theorem #thm-ch31-mangoldt-critical-gap title="临界包络下的可加差额趋于正无穷" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtCriticalGap.rh_iff_critical_gap_tendsto_atTop"}
+令 $M=2+\gamma_{\mathrm{EM}}-\ln(4\pi)$。黎曼假设成立，当且仅当沿实数 $x\to+\infty$ 有
+
+$$
+M\sqrt{x}-U(x)\longrightarrow+\infty.
+$$
+
+换言之，对每个固定实数 $D$，存在 $X$，使所有实数 $x\ge X$ 都满足 $U(x)\le M\sqrt{x}-D$。
+:::
+
+::: proof
+令 $y=\ln x$。在 RH 下，归一化零点和的实部可写成 $F(y)=\sum_k a_k\cos(\gamma_k y)$，其中 $a_k\ge0$ 且 $\sum_k a_k=M$。记 $d(y)=M-F(y)$。利用 $(1-\cos(\gamma_k y))(1+\cos(\gamma_k h))\ge0$ 并逐项求和，得到
+
+$$
+2d(h)-4d(y)\le2F(y)-F(y+h)-F(y-h).
+$$
+
+在原点右侧，显式公式给出 $d(h)/h\to+\infty$。在远端取 $h=e^{-y/2}$。各个 Mangoldt 斜坡的带权中点不等式与归一化余项的显式公式误差一起，将右端从上方控制为 $O(h)$。除以 $h$，得到 $d(y)/h\to+\infty$。由于 $|e^{-y/2}U(e^y)-F(y)|=O(e^{-y/2})$，换回 $x=e^y$ 后，可加差额与 $d(y)/h$ 只差一个有界量。
+
+反过来，差额趋于正无穷蕴含 $U(x)\le M\sqrt{x}$ 在整个尾部成立。对任意 $\kappa>0$，充分大时 $M\le x^\kappa$，从而满足 [@thm-ch31-mangoldt-pointwise-power-window] 的逐点幂窗条件。完整定理由 Lean 内核检查。
+:::
+
+**手工推导。** 固定 $b>1$。对每个实数 $R$ 都存在 $Y\ge\max\{R,2\}$，使同一个 $[Y,Y^b]$ 上每一点都满足 $U(x)\le M\sqrt{x}$，这一条件等价于 RH。在 RH 下取上一定理中的 $D=0$，每个充分晚的窗口都成立。反向只假设任意晚存在这样的窗口。给定 $\kappa>0$，把起点下界提到 $x^\kappa\ge M$ 的阈值以上，再取这样一个窗口，应用 [@thm-ch31-mangoldt-pointwise-power-window] 即可。
+
 ::: {.theorem #thm-ch31-wide-prime-window title="宽窗口质量的下界与 RH 失败时的一致发散" lean="D5/S3/Weil/Mertens/IntegratedExplicit/WidePrimeWindowMass.prime_tail_wide_window_mass"}
 对于实际素数尾项，记实端点 $2\le A\le B$ 的窗口质量为
 

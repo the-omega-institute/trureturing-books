@@ -503,6 +503,32 @@ $$
 Under RH, taking the positive margin $C-M$ in the absolute envelope for $U(x)/\sqrt{x}$ gives the upper bound $C\sqrt{x}$ at all sufficiently large $x$. Conversely, for each $\kappa>0$, moving the starting bound sufficiently far out ensures $C\le x^\kappa$ throughout the window. The same window then satisfies the pointwise power bound, and [@thm-ch31-mangoldt-pointwise-power-window] gives RH. The full proof is checked by the Lean kernel.
 :::
 
+At the critical coefficient $C=M$, the distance from $U(x)$ to $M\sqrt{x}$ can be measured on the original additive scale. Dividing this distance by $\sqrt{x}$ can hide a saving of any fixed size.
+
+::: {.theorem #thm-ch31-mangoldt-critical-gap title="Divergence of the additive gap below the critical envelope" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtCriticalGap.rh_iff_critical_gap_tendsto_atTop"}
+Let $M=2+\gamma_{\mathrm{EM}}-\ln(4\pi)$. The Riemann hypothesis holds if and only if, along the real axis as $x\to+\infty$,
+
+$$
+M\sqrt{x}-U(x)\longrightarrow+\infty.
+$$
+
+Equivalently, for each fixed real $D$ there is an $X$ such that every real $x\ge X$ satisfies $U(x)\le M\sqrt{x}-D$.
+:::
+
+::: proof
+Put $y=\ln x$. Under RH the real part of the normalized zero sum has the form $F(y)=\sum_k a_k\cos(\gamma_k y)$, where $a_k\ge0$ and $\sum_k a_k=M$. Put $d(y)=M-F(y)$. Summing the inequalities $(1-\cos(\gamma_k y))(1+\cos(\gamma_k h))\ge0$ with weights $a_k$ gives
+
+$$
+2d(h)-4d(y)\le2F(y)-F(y+h)-F(y-h).
+$$
+
+The explicit formula to the right of zero gives $d(h)/h\to+\infty$ as $h\downarrow0$. At large $y$ choose $h=e^{-y/2}$. The weighted midpoint inequality for the Mangoldt ramps, together with the explicit-formula error for the normalized remainder, bounds the right-hand side above by $O(h)$. Dividing by $h$ gives $d(y)/h\to+\infty$. Since $|e^{-y/2}U(e^y)-F(y)|=O(e^{-y/2})$, the additive gap at $x=e^y$ differs from $d(y)/h$ by a bounded amount.
+
+Conversely, divergence of the gap gives $U(x)\le M\sqrt{x}$ on the entire tail. For each $\kappa>0$ we eventually have $M\le x^\kappa$, so the pointwise power-window condition of [@thm-ch31-mangoldt-pointwise-power-window] holds. The full theorem is checked by the Lean kernel.
+:::
+
+**Hand derivation.** Fix $b>1$. RH is equivalent to the following window condition. For every real $R$ there exists $Y\ge\max\{R,2\}$ such that every point of the same interval $[Y,Y^b]$ satisfies $U(x)\le M\sqrt{x}$. Under RH take $D=0$ in the preceding theorem. Every sufficiently late window then works. For the converse assume such windows exist arbitrarily late. Given $\kappa>0$, increase the starting bound until $x^\kappa\ge M$ throughout the tail, choose one of the windows there, and apply [@thm-ch31-mangoldt-pointwise-power-window].
+
 ::: {.theorem #thm-ch31-wide-prime-window title="A lower mass bound on wide windows and uniform divergence if RH fails" lean="D5/S3/Weil/Mertens/IntegratedExplicit/WidePrimeWindowMass.prime_tail_wide_window_mass"}
 For the actual prime-only tail, write the mass at real endpoints $2\le A\le B$ as
 
