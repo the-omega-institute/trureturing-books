@@ -320,6 +320,8 @@ Every vector in this formula is attained by one equivariant seed action. Every f
 
 For any implementation, pool each profile-pair count and divide by four as above. Let $b_i$ be the normalized mismatch count in the orientation $(1,0)$ at coordinate $i$. Fairness gives the same count in orientation $(0,1)$. Each pair differs somewhere, so $\sum_i b_i\ge M$. Equivariance gives $z_i\le 4(M-b_i)$. Choose integers $0\le a_i\le b_i$ totaling $M$. The perfect-matching construction above works for these prescribed $a_i$, since its batches only require that their doubled entries be even and sum to $2^{n-1}$. The colour-copy lift then has exactly $4(M-a_i)$ fixed seeds in every coordinate. These attained vectors all have the same coordinate sum $4(n-1)M$, so two distinct vectors on this boundary cannot dominate one another.
 
+The classification is formalized in [the maximal fixed-count theorem](lean:D5/S3/ConceptDynamics/Attribution/ParitySeedOptimization.maximal_coordinate_fixed_vectors).
+
 For $n=3$ and $N=48$, choosing $(a_1,a_2,a_3)=(2,2,2)$ gives the balanced vector $(16,16,16)$. Choosing $(6,0,0)$ gives $(0,24,24)$ and attains the individual upper bound $N/2$ simultaneously in the last two coordinates.
 
 **An optimal uniform calibration for rational marginals.** Let $G$ act on finite input and output sets $X$ and $Y$, let $P$ be a $G$-covariant probability kernel, and let $H$ be any subgroup. If a positive integer $m$ makes every $mP(x,y)$ integral, a uniform seed law attains the maximum $H$-fixed mass. One sufficient seed count is $m|\det B|$, where $B$ is an invertible square submatrix of the integer constraint matrix below, using the positive support of a suitable optimizer as its columns.
