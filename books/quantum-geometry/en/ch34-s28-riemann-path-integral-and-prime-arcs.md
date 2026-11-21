@@ -352,7 +352,7 @@ Levent Alpöge’s proposed proof constructs these windows at modulus one from e
 
 **How can one discriminant split at several primes?** For an odd prime $p$, write $J(-d,p)=\bigl(\frac{-d}{p}\bigr)$. A value of $1$ means that $t^2\equiv-d\pmod p$ has a nonzero solution. With $B=3$, the only small odd prime to test is $3$. The prime $d=23$ satisfies $d\equiv7\pmod{16}$ and $-23\equiv1\pmod3$. Take the prime $q=59\equiv3\pmod8$. Since $-23\equiv36=6^2\pmod{59}$, this pair passes both splitting tests. The construction below enforces all the finite conditions through particular residue classes. Those classes account for only some of the eligible primes.
 
-::: {.theorem #thm-ch31-split-prime-host-series title="Weighted series for auxiliary primes with prescribed splitting" lean="D5/S3/Arith/SplitPrimeHostSeries.split_prime_host_series"}
+::: {.theorem #thm-ch31-split-prime-host-series title="Weighted series for auxiliary primes with prescribed splitting" lean="D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series"}
 For a natural number $B$, let $D_B$ consist of the primes $d\equiv7\pmod{16}$ for which $J(-d,p)=1$ at every odd prime $p\le B$. For $d\in D_B$, let $Q_d$ consist of the primes $q\equiv3\pmod8$ for which $J(-d,q)=1$. Then
 
 $$

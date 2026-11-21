@@ -352,7 +352,7 @@ Levent Alpöge 提出的证明在模 $1$ 使用外部算术输入构造这族整
 
 **怎样让同一个判别式在几个素数处都分裂？** 对奇素数 $p$，记 $J(-d,p)=\bigl(\frac{-d}{p}\bigr)$。值为 $1$ 的意思是 $t^2\equiv-d\pmod p$ 有非零解。取 $B=3$，要检查的小奇素数只有 $3$。素数 $d=23$ 满足 $d\equiv7\pmod{16}$ 及 $-23\equiv1\pmod3$。再取素数 $q=59\equiv3\pmod8$，有 $-23\equiv36=6^2\pmod{59}$。这一对满足所需的两个分裂条件。下面的构造用特定剩余类一次保证所有有限条件，这些剩余类只占可用素数的一部分。
 
-::: {.theorem #thm-ch31-split-prime-host-series title="满足局部分裂条件的辅助素数的加权级数" lean="D5/S3/Arith/SplitPrimeHostSeries.split_prime_host_series"}
+::: {.theorem #thm-ch31-split-prime-host-series title="满足局部分裂条件的辅助素数的加权级数" lean="D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series"}
 给定自然数 $B$，令 $D_B$ 为所有满足 $d\equiv7\pmod{16}$ 且对每个奇素数 $p\le B$ 有 $J(-d,p)=1$ 的素数 $d$ 所成的集合。对 $d\in D_B$，令 $Q_d$ 为所有满足 $q\equiv3\pmod8$ 且 $J(-d,q)=1$ 的素数 $q$ 所成的集合。则
 
 $$
