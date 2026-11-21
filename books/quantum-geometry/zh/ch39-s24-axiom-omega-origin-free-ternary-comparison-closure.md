@@ -198,6 +198,26 @@ $$
 第 1 款即 §39.1.3 第一步的三行改写；$x \mapsto [x, o', o]$ 是基点切换的逆映射；基点群若交换，则 $x y^{-1} z = z y^{-1} x$ 处处成立。第 2 款经读数的再生核希尔伯特空间，取至多 $r$ 个线性无关核函数张成空间的标准正交坐标并补零；反向由格拉姆矩阵是 $r \times n$ 坐标矩阵的转置乘自身。第 3 款取特征映射 $q \mapsto \frac{1}{\sqrt{2}}(1, q_0, q_1, q_2, q_3)$，以 $i \cdot 1^{-1} \cdot j = k \neq -k = j \cdot 1^{-1} \cdot i$、$\kappa(1, -1) = 0$ 与单位三维球面的连通性分别见证非交换、触零与链连通。第 4–5 款的骨架即本定理之前“内核验证路线”一段所述，最后取 $u$ 为 $q$ 的共轭，把反序乘法变回 $u(x)u(y)^{-1}u(z)$。第 6 款对 $n$ 归纳，再用左侧迁移不变性把点对 $(x_m, x_{m+n})$ 平移成 $(a, x_n)$。第 7 款前半取两特征映射的张量积；后半若乘积读数可在 $\mathbb{R}^5$ 中实现，第 5 款的单射 $u$ 经基点归一化为 $p \mapsto u(1, 1)^{-1}u(p)$ 后，会把基点群单位元 $(1, 1)$ 的两个不同的非平凡平方根 $(-1, 1)$ 与 $(1, -1)$ 都送到 $-1$，与单射矛盾。完整证明由 Lean 内核检查。
 :::
 
+第 7 款给出了乘积读数的特征秩上界。对独立取值的单位四元数，每个因子取五个样本点就能算出精确的维数。
+
+::: {.theorem #thm-ch39-quaternion-product-feature-rank title="单位四元数乘积读数的最小实特征维数" lean="D5/S3/Quantum/AURICOmega/Products/QuaternionProductFeatureRank.least_feature_rank"}
+设 $N\in\mathbb N$，在 $(S^3)^N$ 上定义
+
+$$
+K_N(q,p)=\prod_{a=1}^N\frac{1+\langle q_a,p_a\rangle}{2}.
+$$
+
+使 $K_N(q,p)=\langle\Phi(q),\Phi(p)\rangle$ 对所有 $q,p$ 成立的映射 $\Phi:(S^3)^N\to\mathbb R^r$ 所需的最小 $r\in\mathbb N$ 为 $5^N$。
+:::
+
+::: proof
+先看一个因子。记 $f(q)=(1,q)/\sqrt{2}\in\mathbb R^5$，则 $\langle f(q),f(p)\rangle=K_1(q,p)$。取五个方向 $Q=(1,-1,i,j,k)$。以 $(1,q)$ 为行，按 $Q$ 的顺序排列，前两行在前两列给出 $\bigl(\begin{smallmatrix}1&1\\1&-1\end{smallmatrix}\bigr)$，右下三阶块为单位阵，右上块为零。因此未缩放的行列式为 $-2$，这五个 $f(q)$ 的格拉姆矩阵 $G$ 满足 $\det G=(-2)^2/2^5=1/8$。
+
+对 $N$ 个因子，取特征向量 $f(q_1)\otimes\cdots\otimes f(q_N)$，其内积就是 $K_N$，在 $5^N$ 个实坐标中即可实现。另一方面，取五点集的全部 $N$ 重组合 $Q^N$，所得格拉姆矩阵为可逆的克罗内克幂 $G^{\otimes N}$。在 $\mathbb R^r$ 中实现相同读数必须容纳这 $5^N$ 个线性无关向量，故最小的 $r$ 恰为 $5^N$。四元数的零重乘积只有一个构型，读数为 $1$，特征维数为 $1$。完整证明由 Lean 内核检查。
+:::
+
+例如，两个独立旋子的构型有 $3+3=6$ 个连续自由度，而精确实现它们的乘积读数需要 $25$ 个实内积坐标。在[§32.3.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md#sec-ch39-20-3) 的多场诠释中，$3N$ 计量构型流形的维数，$5^N$ 计量这里指定的比较核的特征秩。这里比较的是旋子。例如 $K_1(1,-1)=0$，而 $1$ 与 $-1$ 作用于同一个参考自旋量会给出同一条射线，按 [@thm-ch39-axiom-omega-ray-kernel-born-weight] 的射线读数得 $1$。将具体的物理系统表示成这些因子，仍需给出该系统的自由度及其联合读数。
+
 第 5 款只给出单射，原因在于结构可以只占单位四元数的一部分：有理单位四元数组成的可数子群满足第 5 款的全部假设，却不可能与 $\mathrm{Sp}(1)$ 一一对应（`手工推导`）。补上读数完备，单射就成为双射：
 
 ::: {.theorem #thm-ch39-axiom-omega-complete-rank-five-isomorphism title="读数完备的秩五三元比较结构同构于单位四元数" lean="D5/S3/Quantum/AURICOmega/UnitQuaternionClosedSubgroup.eq_top_of_isClosed_of_chainConnected,D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"}
