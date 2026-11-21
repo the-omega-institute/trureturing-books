@@ -341,7 +341,7 @@ Two rows can be done by hand. $C_5$ with $k = 2$: suppose every edge has exactly
 
 ## 26.2.3 Hairy-Ball Curl ($\nabla \wedge \mathbf{F}$) as a Geometric Analogy for $P \neq NP$: Why One Line Cannot Hold Up a Field {#3-hairy-ball-curl-f-as-a-geometric-analogy-for-pnp-why-one-line-cannot-hold-up-a-field}
 
-Why is it so difficult to construct such a polynomial-time guiding field for $\mathrm{NP}$-complete problems like 3-SAT? Expressed as a continuous differential-geometric analogy (`MODEL`, intended as geometric intuition rather than a formal proof of [@conj-p-neq-np]):
+A guiding field turns blind search into flow only if its flow reaches the global minimum from every start, and a conservative gradient alone does not ensure this: for $V(x)=(x^2-1)^2$ the gradient flow from $x=0$ stays at the stationary value $1$, while $V(\pm1)=0$ (`manual derivation`). Why is it so difficult to construct such a polynomial-time guiding field for $\mathrm{NP}$-complete problems like 3-SAT? Expressed as a continuous differential-geometric analogy (`MODEL`, intended as geometric intuition rather than a formal proof of [@conj-p-neq-np]):
 
 - A conservative gradient field $\mathbf{F} = -\nabla V$ that slides without frustration to a global minimum satisfies the vanishing exterior-curl condition:
 

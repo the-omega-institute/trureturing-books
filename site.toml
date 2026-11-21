@@ -37,3 +37,7 @@ order = ["quantum-geometry"]
 # template's example books without deleting them, so that merging template changes with git never conflicts
 # over them.
 hide = ["example-*"]
+
+[release]
+# 有尚未预览的 dev 提交时，每天最多发布一次 GitHub 预览版。
+daily_dev_preview = true

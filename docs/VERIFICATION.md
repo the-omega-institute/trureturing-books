@@ -1,14 +1,32 @@
 # 验证模型 · Verification model
 
-本书库区分三种状态：**Lean 内核验证、源文书面证明、开放问题。** 只有 `LEAN ✓` 结果承诺对应 trureturing 中已被 Lean 内核验证并冻结的声明，且固定在一个确切的提交上。`status="written-proof"` 表示有书面证明但没有陈述同一结果的冻结声明，不声称内核验证。 本文说明这条承诺如何被检查、检查到什么程度，以及什么仍需人工负责。
+本书库区分三种状态：**Lean 内核验证、源文书面证明、开放问题。** 在默认的 `frozen-state` 模式中，`LEAN ✓` 结果对应 trureturing 中已被 Lean 内核验证并冻结的声明，链接固定在一个确切的提交上。`status="written-proof"` 表示有书面证明但没有陈述同一结果的冻结声明，不声称内核验证。
+
+## 标准 Lean 仓库
+
+书库也可以在 `site.toml` 中选择 `lean-source` 模式，从所钉提交的 `.lean` 文件解析声明。
+
+```toml
+[trureturing]
+repo = "owner/lean-project"
+branch = "main"
+mode = "lean-source"
+source_root = "src"
+```
+
+`source_root` 是相对于仓库根目录的路径，默认为空字符串。路径末尾的 `/` 会被去掉，路径开头的 `/`、反斜杠及 `..` 路径分量均会报错。GID 的模块路径相对于该目录书写。上例中，`Main.riemannHypothesis` 在 `src/Main.lean` 中查找声明，`Riemann/Divisors₂.NatFacts.divisors₂` 在 `src/Riemann/Divisors₂.lean` 中查找声明。
+
+运行 `./tbook pin` 或 `./tbook pin --follow` 写入对应的锁文件。两种锁文件都记录所选模式及非空的源码目录，钉版与校验仍核对提交所属的分支。源码中的完整声明名或名称分量后缀须唯一匹配。`theorem` 与 `lemma` 可用于定理框，源码检查拒绝声明中直接出现的 `sorry` 或 `admit`。账本保存声明签名的摘要，引用及摘要均链接到所钉源码的声明位置。
+
+源码检查通过文本扫描定位声明并检查其内容。它的验证范围限于当前声明，内核校验和传递公理闭包由 Lean 项目及 `./tbook lean-project` 生成的深度验证执行（见下文）。
 
 ## 分支锁
 
-运行 `./tbook pin --follow` 可切换到分支锁，锁文件记录 `schema`、`repo` 和 `branch`。仓库与分支须与 `site.toml` 一致。校验和构建从分支取得完整 SHA，并从该提交解析当前书稿与媒体引用。产物中的源码链接和站点清单使用该 SHA。分支锁需要在线解析。需要提交一份可离线使用的锁文件时，可用 `./tbook pin <完整 SHA>` 固定提交。
+运行 `./tbook pin --follow` 可切换到分支锁，锁文件至少记录 `schema`、`repo` 和 `branch`。仓库、分支和源码设置须与 `site.toml` 一致。校验和构建从分支取得完整 SHA，并从该提交解析当前书稿与媒体引用。产物中的源码链接和站点清单使用该 SHA。分支锁需要在线解析。需要提交一份可离线使用的锁文件时，可用 `./tbook pin <完整 SHA>` 固定提交。
 
 下文的声明索引在固定 SHA 模式中提交到仓库，在分支模式中于运行时生成。工作流各作业共享计划确定的 SHA，标签发行的深度验证也使用这个 SHA。Pages 每天 05:17 UTC 检查上游变化，并用已通过 CI 的书稿发布新快照。
 
-## 1. 一条定理的身份链
+## 1. 冻结状态模式下一条定理的身份链
 
 ```
 书中环境  ::: {.theorem #thm-x lean="D5/S1/Deficit/DeficitThreeValued.deficit_three_valued"}
@@ -67,7 +85,7 @@ trureturing 的冻结律（其 `CLAUDE.md` §1.3）规定：**模块的状态片
 - `lean-verify.yml` 的 pip 缓存与 Lake 工作区缓存（`build/lean-verify/.lake`，公理检查读的正是其中已构建的 `.olean`）按同样的规则处理：PR 事件中既不恢复也不保存，其他事件用 `actions/cache/restore` + `actions/cache/save`，恢复未精确命中时才保存，Lake 工作区还要等构建成功。本仓库只在定时、手动运行与 `release.yml`（tag）中运行它，但它可以经 `workflow_call` 被调用，书库若从自己的 PR 工作流调用它，这条规则同样生效。
 - 构建缓存（`.cache/artifacts`，组合动作 `.github/actions/build-cache`；`docs/PUBLISHING.md` §5）的条目直接替代构建，其中的 HTML、PDF、EPUB、幻灯片与视频原样进入站点和 Release，所以只有默认分支自己的代码能写入：只在默认分支上的 `push`、`workflow_dispatch` 与 `schedule` 事件中保存（Pages 构建，以及确认全部计划作业成功的 CI 聚合）。条件按事件名而不只按 ref 写：`pull_request_target` 的 ref 是目标分支，它的运行若保存，就会写进默认分支的作用域。恢复在 PR 事件之外照常进行，先找本次运行所在 ref 的作用域（只有该 ref 自己的代码写得进去），再找默认分支的；PR 事件中既不恢复也不保存 Actions 缓存，理由与上面相同。
 - 按格式导出的 CI 通过成功的默认分支 CI 或 Pages 运行取得独立静帧库存，影片作业同样可取得独立影片库存。完整构建与汇总可恢复 `tbook-build-store` 工件。`tools/ci/trusted_cache.py` 从 `ci.yml` 与 `pages.yml` 的 workflow 端点枚举成功运行，再核对 workflow ID、`head_repository.full_name`、默认分支、事件（`push` / `workflow_dispatch`，CI 另允许 `schedule`）、`status=completed` 与 `conclusion=success`；从新到旧选择仍有工件的运行，按该工件 ID 下载，绝不按跨运行的同名工件或 PR 的 run ID 恢复。即使以前的 PR 曾上传同名工件也不会入选。CI 仅在默认分支记录新增条目的分片；全部计划检查通过后，由 Check 将分片分别下载，逐个核对完整 entry 的位置、元数据与文件摘要，再原子合并并发布，不将不同编码的同键条目逐文件混合。损坏条目、链接和未验证文件不会进入聚合存储。Check 不按其缺少出版字体的环境重新计算 PDF 键，只保留每单元最新两个有效键。此处的信任级别是已合入默认分支并成功运行的 CI/Pages 代码，与现有默认分支 Actions 缓存相同。下载需要 `actions: read`；不可用时为缓存未命中。恢复后仍按当前单元输入键与文件摘要检查，Lean 冻结状态缓存不在工件内。
-- 从 Release 恢复（`TBOOK_CACHE_REMOTE=1`）在 PR 中也允许。Release 只能由有 `contents: write` 的令牌或有写权限的人创建：本仓库只有 tag 触发的 `release.yml` 与 `template-release.yml` 的发布作业这样做（构建作业只有读权限）；fork 发起的 PR 拿到的是只读令牌，PR 存进自己缓存作用域的东西也到不了 Release。工具只读已发布（非草稿）的 Release，每个 tar 都核对 `build-cache.json` 记录的 SHA-256 和 GitHub 报告的摘要，解包时拒绝绝对路径、`..` 与链接，再逐个文件核对条目自带的摘要。因此 Release 的信任级别就是仓库写权限：能发布 Release 的人本来也能推送 tag、运行 `release.yml`。若默认分支要求评审而写权限者不受此限，应当用 tag 规则集限制谁能创建 tag，并留意新发布的 Release。
+- 从 Release 恢复（`TBOOK_CACHE_REMOTE=1`）在 PR 中也允许。Release 只能由有 `contents: write` 的令牌或有写权限的人创建：`release.yml` 与 `template-release.yml` 只有发布作业有该权限（构建作业只有读权限）。书库启用每日预览后，构建在 `dev` 自己的 Actions 缓存作用域运行；fork 发起的 PR 拿到的是只读令牌，PR 存进自己缓存作用域的东西也到不了 Release。工具只读已发布（非草稿）的 Release，每个 tar 都核对 `build-cache.json` 记录的 SHA-256 和 GitHub 报告的摘要，解包时拒绝绝对路径、`..` 与链接，再逐个文件核对条目自带的摘要。因此 Release 的信任级别就是仓库写权限：能发布 Release 的人本来也能推送 tag、运行 `release.yml`。若默认分支要求评审而写权限者不受此限，应当用 tag 规则集限制谁能创建 tag，并留意新发布的 Release。
 - 建议启用不可变 Release（immutable releases）：发布之后附件不能再替换或删除，tag 也不能移动，已发布的缓存条目不会被事后掉包（包括被泄露的令牌）。工作流先把 Release 建为草稿、传完全部附件再发布，与之兼容；工具不读草稿。
 - npm 缓存（setup-node 的 `cache: npm`）在 PR 中照常恢复和保存，这是安全的：`npm ci` 只按 `package-lock.json` 为每个包记录的 sha512 完整性值从缓存取 tarball，字节对不上就丢弃并重新下载，植入的条目只会被忽略，不会被安装。单元测试检查锁文件中每个包都带有这个值，且安装用的是 `npm ci`；也检查可能在 PR 事件中运行的工作流（由 PR 事件触发的、被它们调用的，以及所有可经 `workflow_call` 调用的；目前是 `ci.yml` 与 `lean-verify.yml`）和它们用到的组合动作（`setup`、`build-cache`，输入取任何值）没有别的步骤在 PR 中恢复或保存缓存：`actions/cache`、`actions/cache/restore` 与 `actions/cache/save` 步骤在 PR 事件中都被跳过，`setup-*` 动作除 npm 外不启用缓存；构建缓存只在默认分支的 `push`、`workflow_dispatch` 与 `schedule` 中保存。
 

@@ -8139,6 +8139,30 @@
       ],
       "lean": [
         {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.baseChange_bijective"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.noncommutative_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonRankFive.five_le_of_hasFeatureRank"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionComparisonModel.quaternionModel_hasFeatureRank_five"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/InvariantMetric/LowDimensionInvariantMetric.isLieAbelian_of_finrank_le_two"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/InvariantMetric/LowDimensionInvariantMetric.exists_basis_bracket_eq_smul_cross"
+        },
+        {
+          "gid": "D5/S3/FiniteGroups/GroupAlgebra/CharacterKernelRank.finrank_span_sum_character_kernel"
+        },
+        {
           "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
         },
         {
@@ -8360,6 +8384,21 @@
           "gid": "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem"
         },
         {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_hopf"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_mul_phase_left"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_mul_phase_right"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_one_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
           "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum"
         },
         {
@@ -8504,6 +8543,21 @@
         },
         {
           "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.reflectionSeq_eq_pow"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.kappa_reflectionSeq_add"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionTwoPointHomogeneity.kappa_mul_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionTwoPointHomogeneity.exists_mul_mul_eq_of_kappa_eq"
         }
       ],
       "capture_lock": "links"

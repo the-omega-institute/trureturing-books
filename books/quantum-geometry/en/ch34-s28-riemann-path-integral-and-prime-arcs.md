@@ -103,7 +103,7 @@ It is never an empty void, but the arithmetic culmination of *"reversal as the m
 
 **First Mechanism — Round-Trip Double-Projection Square Law and Half-Density Unitarity: Sieve Density $p^{-1}$ Locks One-Way Amplitude to $p^{-1/2}$.** Recall the measurement law established in [§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) via [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight) ([@thm-ch34-roundtrip-born-and-imaginary-blindspot], `LEAN ✓`): macroscopic counting probabilities read out along the observer's real axis `I` are **round-trip Born modulus squares $\lvert\psi\rvert^2 = \cos^2\theta$** closed by projecting target-to-observer and observer-back-to-target, whereas coherent path integrals superpose **unsquared one-way spinor amplitudes $\psi$**.
 
-In natural-number sieving and multiplicative ergodic measure, the asymptotic fraction of positive integers divisible by prime $p$—the macroscopic classical probability weight of crossing $\Delta\mathcal{T}_p$—equals $w_p = \frac{1}{p} = p^{-1}$; along continuous scale $n > 0$, the logarithmic action element $d(\ln n) = \frac{dn}{n}$ likewise assigns multiplicative Haar density $n^{-1}$ per unit scale. Demanding scale-covariant unitary probability conservation—so that $\psi_n(s) = n^{-\sigma - \hat{\mathbf{i}}t}$ transforms as a Kostant–Souriau **half-density ($\frac{1}{2}$-density)** satisfying $\lvert\psi_n\rvert^2\,dn = d(\ln n) = \frac{dn}{n}$ (`MODEL` + `manual derivation`)—uniquely locks the one-way path modulus to the principal square root of the counting density:
+In natural-number sieving and multiplicative ergodic measure, the asymptotic fraction of positive integers divisible by prime $p$—the macroscopic classical probability weight of crossing $\Delta\mathcal{T}_p$—equals $w_p = \frac{1}{p} = p^{-1}$; along continuous scale $n > 0$, the logarithmic action element $d(\ln n) = \frac{dn}{n}$ likewise assigns multiplicative Haar density $n^{-1}$ per unit scale. Demanding scale-covariant unitary probability conservation—so that $\psi_n(s) = n^{-\sigma - \hat{\mathbf{i}}t}$ transforms as a Kostant–Souriau **half-density ($\frac{1}{2}$-density)** satisfying $\lvert\psi_n\rvert^2\,dn = d(\ln n) = \frac{dn}{n}$ (`MODEL` + `manual derivation`; this is a pointwise half-density condition, and these squared moduli form no normalized probability, since $\sum_n n^{-1}$ and $\sum_p p^{-1}$ both diverge, `manual derivation`)—uniquely locks the one-way path modulus to the principal square root of the counting density:
 
 $$
 \lvert\psi_n\rvert^2 \;=\; \bigl\lvert n^{-\sigma - \hat{\mathbf{i}}\,t}\bigr\rvert^2 \;=\; n^{-2\sigma} \;=\; n^{-1} \quad \Longleftrightarrow \quad 2\sigma = 1 \quad \Longleftrightarrow \quad \sigma = \frac{1}{2}.
@@ -207,6 +207,395 @@ Placing the Riemann $\zeta$ path-integral system inside the `1—3—3—1` (Poi
 Bridging the base of this four-grade tower (Grade-0 prime cells $\Lambda^0$) and its crown (Grade-3 spectral standing waves $\Lambda^3 \equiv \Lambda^0_{\mathrm{spec}}$) stands the crown jewel of analytic number theory—the **Explicit Formula**, proving that the prime-power staircase and the Riemann zero spectrum are exact Fourier–Mellin duals of each other:
 
 - **Kernel-verified unconditional integrated explicit formula (Clause 6 of [@thm-ch34-riemann-prime-arc-bridge], `LEAN ✓`)**: Without assuming the Riemann Hypothesis, at every strictly positive logarithmic action point `0 < y` ($y = \ln x > 0$, i.e., scale $x = e^y > 1$), the weighted Laplace sum $\operatorname{actualH}(y) = \sum_{k \in \mathbb{N}} \frac{e^{y\rho_k}}{\rho_k(1 - \rho_k)}$ over all actual nontrivial zeros counted with multiplicity equals the arithmetic Mertens–Chebyshev discrepancy $U(e^y) - \ln(2\pi) + \operatorname{trivialT}(y)$ unconditionally!
+
+- **The remainder modulo $1$ and a window bound under RH.** The Dirichlet character modulo $1$ is identically $1$. For $x\ge 1$ both sums run over $I_x=\{1,\ldots,\lfloor x\rfloor\}$, including the right endpoint when $x$ is an integer. Expanding each summand and using $\psi(x)=\sum_{n\in I_x}\Lambda(n)$ gives
+
+  $$
+  \sum_{n\in I_x}\Lambda(n)\left(\frac{x}{n}-1\right)
+  =x\sum_{n\in I_x}\frac{\Lambda(n)}{n}-\psi(x).
+  $$
+
+  Adding $-x\ln x+(1+\gamma_{\mathrm{EM}})x$ to both sides gives $G_z(x)=U(x)$ (`manual derivation`), where $G_z$ is the modulus-one remainder and $U$ is the function of [@def-divisor-ratio-mertens-error]. [External definition `Formalism.Gz`](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/StatementOC.lean#L9-L13) · [`U_eq_complete_ramps`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtLaplace.U_eq_complete_ramps)
+
+  Assume the Riemann hypothesis. Set $G(y)=e^{-y/2}U(e^y)$ and $M=2+\gamma_{\mathrm{EM}}-\ln(4\pi)$. The first conclusion of `actual_G_control` says that for each $\varepsilon>0$, all sufficiently large real $y$ satisfy $\lvert G(y)\rvert<M+\varepsilon$. [Lean declaration](lean:D5/S3/Weil/Mertens/IntegratedExplicit/RHSharpActualEnvelope.actual_G_control)
+
+  Since $M<1$, take $\varepsilon=1-M>0$ to get $\lvert G(y)\rvert<1$ for all sufficiently large $y$. Substituting $y=\ln x$ gives a threshold $Y_0>1$ such that $\lvert U(x)\rvert<\sqrt{x}$ for all $x\ge Y_0$. The same threshold works for every $\theta\ge 1/2$. For every $Y\ge Y_0$ and every $x\in[Y,Y^{3/2}]$, we have $U(x)\le\lvert U(x)\rvert<\sqrt{x}\le x^\theta$ (`manual derivation`). [Constant bound `firstLiMass_lt_one`](lean:D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.firstLiMass_lt_one)
+
+  The external argument starts from an arithmetic estimate. Modulo $1$, the cyclic group generated by the trivial character contains only $1$. The set of characters retained by `Level.cyc` is therefore $\{1\}$. Removing that character leaves an empty sum, so the remainder reduces to $G_m(x)=G_z(x)=U(x)$ (`manual derivation`). [Cyclic character set](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ExplicitFormulaErrorOfHostConditions.lean#L105-L125) · [Definition of the remainder](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ExplicitFormulaErrorOfHostConditions.lean#L32-L38)
+
+  Fix $1/2<\theta<1$. Under its Chebyshev-type inequality and window hypotheses, the arithmetic argument gives a one-sided bound. For every threshold $R$, there is some $Y\ge R$ such that $U(x)\le x^\theta$ throughout $[Y,Y^{3/2}]$. Landau's criterion then shows that $\zeta$ has no zeros in $\operatorname{Re}(s)>\theta$. The bound derived from RH covers every sufficiently large $Y$. [Arithmetic step](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean#L68-L81) · [Window exponent](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean#L8-L11) · [Landau criterion](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ZeroFreeOfRpowWindow.lean#L11-L14)
+
+::: {.theorem #thm-ch31-mangoldt-power-threshold title="The critical power exponent for the complete Mangoldt remainder" lean="D5/S3/Weil/Mertens/IntegratedExplicit/RHPowerThreshold.u_div_rpow_tendsto_zero_iff"}
+Assume the Riemann hypothesis. For every real $\theta$, with $x$ tending to $+\infty$ through real values,
+
+$$
+\lim_{x\to+\infty}\frac{U(x)}{x^\theta}=0
+\quad\Longleftrightarrow\quad \theta>\frac12.
+$$
+:::
+
+::: proof
+Write $x=e^y$. Then $U(x)/x^\theta=G(y)e^{(1/2-\theta)y}$. If $\theta>1/2$, $G$ is bounded on a real tail and the exponential factor tends to zero. Conversely, suppose $\theta\le1/2$. The constant $M$ above is strictly positive. By recurrence of $G$, beyond every threshold there is a natural number $n$ with $G(n)>M/2$. Since $e^{(1/2-\theta)n}\ge1$, the quotient exceeds $M/2$ at arbitrarily large $x=e^n$, including when $\theta=1/2$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-mangoldt-quartic-sampling title="A fourth-power sampling criterion for the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampling.rh_iff_eventually_quartic_samples"}
+The Riemann hypothesis holds if and only if there exists $N\in\mathbb N$ such that $U(n^4)<n^2$ for every $n\in\mathbb N$ with $n\ge N$.
+:::
+
+::: proof
+Under RH, every sufficiently large $x$ satisfies $\lvert U(x)\rvert<\sqrt{x}$. Setting $x=n^4$ gives the strict sample bound.
+
+Conversely, assume the sample bound. For sufficiently large $n\ge1$ put $a=n^4$ and $b=(n+1)^4$. Each Mangoldt weight is nonnegative, so multiplying the convex ramp $\max(x/j-1,0)$ by the weight preserves convexity. The sum of the ramps lies below its endpoint chord on $[a,b]$. The remainder $U$ also contains $-x\ln x$ and a linear term. Subtract the tangent to $x\ln x$ at $a$ from $x\ln x$. The difference is nonnegative, and $\ln(b/a)\le b/a-1$ bounds its value at $b$ by $(b-a)^2/a$. Thus for $a\le x\le b$,
+
+$$
+U(x)\le\max\{U(a),U(b)\}+\frac{(b-a)^2}{a}
+\le 4n^2+225n^2=229n^2.
+$$
+
+Here $(n+1)^2\le4n^2$ and $b-a\le15n^3$. Consecutive sample intervals cover the whole tail, and $n^2\le\sqrt{x}$. Apply the bound to the normalized arithmetic kernel of the integrated explicit formula with $x=e^t$. The trivial-zero correction satisfies $\operatorname{trivialT}(t)\le1-\ln2$, so $e^{-t/2}[U(e^t)-\ln(2\pi)+\operatorname{trivialT}(t)]\le229+e^{-t/2}\le230$ for all sufficiently large $t$. The affine upper-bound criterion for the arithmetic kernel now gives RH. The full proof is checked by the Lean kernel.
+:::
+
+The arithmetic input can be stated in terms of the prime-power counting function. For $x\ge2$ the Chebyshev error kernel is integrable and its tail integral equals $-U(x)/x$. At $x=n^4$, the sample hypothesis therefore amounts to proving the strict lower bound $\int_{n^4}^{\infty}(\psi(t)-t)t^{-2}\,dt>-1/n^2$ for every sufficiently large natural number $n$ (`manual derivation`). [`complete_chebyshev_tail_identity`](lean:D5/S3/Weil/Mertens/CompleteChebyshevTailIdentity.complete_chebyshev_tail_identity) · [`chebyshev_error_kernel_integrable`](lean:D5/S3/Weil/Mertens/WeightedPrimeLimit.chebyshev_error_kernel_integrable)
+
+**What does monotonicity alone tell us about negative mass in a window?**
+
+::: {.theorem #thm-ch31-monotone-window-sharpness title="A monotone count with quadratic depth and cubic window mass" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MonotoneTailSharpness.monotone_tail_quadratic_depth_cubic_mass"}
+For every real $0<s\le1/2$, there is a nondecreasing $A_s\colon\mathbb R\to\mathbb R$, nonnegative for $t\ge1$ and equal to $t$ outside $[2-s,2+s]$, such that $(A_s(t)-t)/t^2$ is integrable on the real line. Its tail $Q_s(z)=\int_z^\infty(A_s(t)-t)t^{-2}\,dt$ satisfies
+
+$$
+-Q_s(2)=\frac{s^2}{32},
+\qquad
+\int_1^3\frac{\max\{-Q_s(z),0\}}{\sqrt z}\,dz\le\frac{s^3}{16}.
+$$
+:::
+
+::: proof
+Take $0<s\le1/2$. Put $A_s(t)=t-t^2(t-2)/16$ for $2-s<t\le2+s$ and $A_s(t)=t$ elsewhere. The polynomial is increasing on $[3/2,5/2]$. Its values at the left and right cutoffs are at least $2-s$ and at most $2+s$, respectively. Joining the polynomial to the linear pieces therefore gives a nondecreasing function on the real line, nonnegative for $t\ge1$.
+
+Let $Q_s(z)=\int_z^\infty(A_s(t)-t)t^{-2}\,dt$. The integrand is $(2-t)/16$ on the chosen interval and zero elsewhere. Its integral over that interval is zero, so the tail vanishes outside the closed interval and equals $((z-2)^2-s^2)/32$ inside it.
+
+The integral bound uses the length $2s$, the maximum negative part $s^2/32$, and the weight $1/\sqrt z\le1$ on the interval. The full proof is checked by the Lean kernel.
+:::
+
+As $s\to0^+$, this family violates every uniform upper bound on the depth of the form a constant times the window mass to the power $\alpha$ when $\alpha>2/3$. A stronger bound for the actual prime count would require information beyond monotonicity.
+
+**How does the modulus-one Mellin transform detect a zero?** Consider the remainder $U$ in Clause 6 of [@thm-ch34-riemann-prime-arc-bridge]. For every $s\in\mathbb C$ with $\operatorname{Re}(s)>1$, the function $y\mapsto e^{-sy}U(e^y)$ is absolutely integrable on $(0,\infty)$, and its Laplace integral can be evaluated unconditionally. Setting $x=e^y$ gives $e^{-sy}\,dy=x^{-s-1}\,dx$, so this is the Mellin integral on the left below. [Half-plane transform of the complete remainder](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtHalfPlane.u_laplace_half_plane)
+
+Each prime power $n$ contributes a ramp $\max(x/n-1,0)$ with weight $\Lambda(n)$. The ramp starts at $x=n$ and its Mellin integral is $n^{-s}/[s(s-1)]$. Summing with the weights $\Lambda(n)$ gives the logarithmic derivative $-\zeta'(s)/\zeta(s)$ in the numerator. The two elementary correction terms in $U$ contribute $-1/(s-1)^2$ and $(1+\gamma_{\mathrm{EM}})/(s-1)$. Putting the three terms over a common denominator gives the external modulus-one formula
+
+$$
+\Phi(s)=\int_1^\infty U(x)x^{-s-1}\,dx
+=-\frac{\zeta'(s)/\zeta(s)+(s-1)^{-1}+1-(1+\gamma_{\mathrm{EM}})s}{s(s-1)}.
+$$
+
+The right-hand side gives the meromorphic continuation of the integral. Let $\rho$ be any zero of $\zeta$, including a negative even integer, and let $m$ be its analytic multiplicity. Writing $\zeta(s)=(s-\rho)^m h(s)$ with $h(\rho)\ne0$ isolates the term $m/(s-\rho)$ in the logarithmic derivative. On some punctured neighborhood of $\rho$, the explicit function $\Phi$ satisfies
+
+$$
+\Phi(s)=\frac{c}{s-\rho}+H(s),\qquad c=\frac{m}{\rho(1-\rho)}\ne0,
+$$
+
+where $m\ge1$ and $H$ is analytic at $\rho$. Thus the pole of $\Phi$ is simple for every multiplicity. For a nontrivial zero, $c$ is the coefficient in the integrated explicit formula when the occurrences of the same zero are counted together. [Local expansion at a zeta zero](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtLaurent.transform_integral_and_zero_germs) · [Modulus-one Mellin identity](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/mellinGchiModOne.lean#L115-L121) · [Residue calculation](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/poleData.lean#L63-L83)
+
+**Why can a one-sided window bound rule out a pole?** Fix $1/2<\theta<1$. Under its bounds on group sizes, character weights, and errors, the external arithmetic argument uses the scale constraint $m\le x^{1/2+\varepsilon/2}$ to obtain $G_{m,A}(x)\le x^{1/2+(C+3)\varepsilon}+\Sigma_A(x)$ for a character sum, with $\Sigma_A$ still to be controlled. It then rewrites the left-hand side as the target remainder using `gmA_eq` and bounds $\Sigma_A$ with `sigA_le`. For sufficiently large $x$, the remaining constant factor is absorbed into $x^\varepsilon$, giving the Chebyshev-type window bound $x^{1/2+(e_D+e_L+7)\varepsilon}$. The loss exponents $e_D,e_L$ are fixed first. One then takes $\varepsilon>0$ small enough that $(e_D+e_L+7)\varepsilon\le\theta-1/2$. Under the window hypotheses this supplies arbitrarily large $Y$ for which the modulus-one remainder satisfies $U(x)\le x^\theta$ throughout $[Y,Y^{3/2}]$. [Character-sum hypotheses](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean#L343-L351) · [Bounding the remainder and absorbing the constant](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/PrimitiveCosets/CoreGm.lean#L55-L74) · [Order of exponent choices](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean#L68-L81)
+
+To continue across $s=1$, remove the pole of $\zeta$ by setting $h(s)=(s-1)\zeta(s)$ away from $1$ and $h(1)=1$. Write $B=h'/h$, so that $B(1)=\gamma$. On a punctured neighborhood of $1$, rearranging the transform gives $\Phi(s)=(1+\gamma)/s-(B(s)-\gamma)/(s(s-1))$. The difference quotient gives the unique continuous value $\Phi_*(1)=1+\gamma-B'(1)$. With this value the transform is analytic at every $s\ne0$ with $\zeta(s)\ne0$. [Analytic continuation at one](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtAtOne.completed_disk_cauchy)
+
+Put $u=\ln x$ and $g(u)=U(e^u)$. For each nonnegative integer $k$ and each $\operatorname{Re}(z)>1$, $\Phi^{(k)}(z)$ is the absolutely convergent integral of $(-u)^k e^{-zu}g(u)$ over the positive half-line. Each derivative contributes one factor of $-u$, so $D_k(z)=(-1)^k\Phi^{(k)}(z)/k!$ integrates $g$ against $u^k e^{-zu}/k!$. For fixed $\sigma>2$ and $k>0$, the magnitude of the kernel is largest at $u=k/\sigma$, so the choice of $k$ helps control the integral outside the window. Write $a=\ln Y$. Inside the window, $g\le e^{\theta u}$ gives $\lvert g\rvert+g\le 2e^{\theta u}$. This explains the derivative at the real center in the source estimate. There are fixed constants $\sigma>2$ and $C$. For every $\eta>0$ one can choose arbitrarily late windows and orders $k\ge a$ such that $\lvert D_k(\sigma+it)\rvert+\operatorname{Re}D_k(\sigma)\le C e^{\eta a}/(\sigma-\theta)^k$ for every real $t$. [Derivative integral](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/LandauCoeff.lean#L10-L18) · [Window estimate](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean#L40-L56) [All derivatives of the complete transform](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtMoments.iterated_derivative_moment)
+
+::: {.theorem #thm-signed-mangoldt-window title="Paired derivatives bound either sign on the window" lean="D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtSignedWindow.signed_window_moment_bound"}
+Use the analytic value of $\Phi_*$ at $1$ and put $D_k(s)=(-1)^k\Phi_*^{(k)}(s)/k!$. For a nonnegative integer $k$ and a complex point $p$, write $\sigma=\operatorname{Re}(p)>1$ and $K_k(u)=u^ke^{-\sigma u}/k!$. For each $0<a\le b$, $\alpha<\sigma$, and $e\in\{-1,1\}$,
+
+$$
+|D_k(p)|+e\operatorname{Re}D_k(\sigma)
+\le \frac{2}{(\sigma-\alpha)^k}\int_a^b\max\{eg(u),0\}e^{-\alpha u}\,du
++2\int_{(0,\infty)\setminus[a,b]}|g(u)|K_k(u)\,du.
+$$
+:::
+
+::: proof
+Taking the modulus at the complex point bounds it by $\int |g|K_k$. At the real point the signed term is $e\int gK_k$, so the sum is bounded by $2\int\max\{eg,0\}K_k$. On the window, the exponential series gives $K_k(u)\le(\sigma-\alpha)^{-k}e^{-\alpha u}$. On its complement, use $|g|$. The full proof is checked by the Lean kernel.
+:::
+
+The choice $e=1$ gives the positive part used in the pole argument above. The choice $e=-1$ uses the same kernel for the negative part. The integral outside the window calls for its own decay estimate.
+
+Suppose a pole lies in $\operatorname{Re}(s)>\theta$. The source proof selects a center $z=\sigma+it$ and a nearest pole $\rho$ with $d=|z-\rho|<r\le\sigma-\theta$ such that the disk of radius $r$ contains only this pole. Its contribution to $D_k(z)$ is $c/(z-\rho)^{k+1}$. Take the inner radius $r'=(d+r)/2$. After subtraction of the pole term, the analytic function is bounded on that circle, so the Cauchy estimate gives an error $O((r')^{-k})$. When the proof chooses a nonreal center, the closed disk of radius $r'$ about $\sigma$ is free of poles. Cauchy's estimate gives $\operatorname{Re}D_k(\sigma)\ge-M'(r')^{-k}$ with $M'$ independent of $k$. For an isolated real pole, take $z=\sigma$. Its residue $c$ is positive, so the leading term of $\operatorname{Re}D_k(\sigma)$ is $c/d^{k+1}>0$, and the window estimate bounds $\lvert D_k(\sigma)\rvert+\operatorname{Re}D_k(\sigma)$. Compare with the window estimate and multiply by $d^k$. The pole contributes a constant $|c|/d>0$ and the analytic error is $O((d/r')^k)$. Choose $\eta>0$ so small that $e^\eta d/(\sigma-\theta)<1$. The window term then also tends to zero as $k\ge a\to\infty$, a contradiction. [Pole and Cauchy estimates](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean#L83-L166) For a zeta zero, this error bound also follows directly for $\Phi_*$. Suppose that the closed disk of radius $r'>0$ about $p\ne\rho$ avoids $0$ and that every zeta zero in the disk equals $\rho$. There is a $B\ge0$, independent of $k$, such that $|D_k(p)-c/(p-\rho)^{k+1}|\le B/(r')^k$, with $D_k$ formed from the completed transform. Removing the principal part gives an analytic remainder even if the disk crosses $1$. [Disk bound for the complete transform](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtAtOne.completed_disk_cauchy)
+
+The external repository's full argument also constructs Galois representations by theta lifting and uses Artin reciprocity to determine the Artin map in its local Langlands parameters. Its final step deduces RH from the zero-free result for all Dirichlet characters. [Theta lift](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/RowSrc.lean#L1-L6) · [Artin reciprocity](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/ArtEx.lean#L7-L15) · [Final declarations in the external repository](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean#L7-L14)
+
+**The window tests only the negative part of the Chebyshev tail.** For $x\ge2$ put $Q(x)=\int_x^\infty(\psi(t)-t)t^{-2}\,dt=-U(x)/x$ and $Q^-(x)=\max\{-Q(x),0\}$. The reverse implication below uses the external Landau criterion (`manual derivation`). Define
+
+$$
+A(Y)=\int_Y^{Y^{3/2}}\frac{Q^-(x)}{\sqrt{x}}\,dx .
+$$
+
+RH holds if and only if for every $\eta>0$ and every $Y_0\ge2$ there is a $Y\ge Y_0$ with $A(Y)\le Y^\eta$. Under RH, the bound above gives $Q^-(x)\le x^{-1/2}$ for all sufficiently large $x$. Consequently $A(Y)\le\tfrac12\ln Y\le Y^\eta$ for all sufficiently large $Y$.
+
+Conversely, put $g(u)=U(e^u)$ in logarithmic coordinates $u=\ln x$. The external window hypothesis asks for a nonnegative majorant $R\ge g$ with suitably small integral $\int R(u)e^{-\theta u}\,du$. The least such majorant is $R(u)=\max\{g(u),0\}$, which is continuous on compact windows because $U$ there is a finite sum of continuous ramps and elementary corrections. Since $U(x)=-xQ(x)$, the substitution gives the least integral as $I_\theta(Y)=\int_Y^{Y^{3/2}}Q^-(x)x^{-\theta}\,dx$. At $\theta=1/2$ it equals $A(Y)$. Apply the external pole data for the modulus-one character family and its window criterion with $\delta=1/2$. Every zeta zero of positive real part then satisfies $\operatorname{Re}(\rho)\le1/2$. Reflection across the critical line gives RH. [Window hypothesis](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauZeroFreeCriterion.lean#L25-L29) · [Pole data for the modulus-one specialization](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/poleData.lean#L248-L261) · [Landau criterion](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean#L83-L90)
+
+The critical window gives a derivative bound with explicit constants (`manual derivation`). Take $a=\ln Y\ge1$, $\sigma=512$, and $k=\lfloor640a\rfloor$, so $k\ge a$. The inequalities $\Lambda(n)/n\le1$ and $x\ln x\le x^2$ for $x\ge1$ give $|g(u)|\le M e^{2u}$ from the finite sum for $U$, with $M=2+|1+\gamma|$. For each real $t$, the triangle inequality bounds $|D_k(512+it)|+\operatorname{Re}D_k(512)$ by twice the integral of $\max(g,0)$ against the real kernel. Inside the window, $u^k e^{-(512-1/2)u}/k!\le(512-1/2)^{-k}$. Outside it, a Gamma integral estimate applies to $|g|$. Adding the two contributions gives
+
+$$
+|D_k(512+it)|+\operatorname{Re}D_k(512)
+\le \frac{2A(Y)}{(512-1/2)^k}
+ +\frac{2M}{512^k}\left(\frac{1}{542}+\frac{1}{478}\right).
+$$
+
+The constants $1/542$ and $1/478$ come from the left and right tails, respectively. This controls the error outside the window. The remaining term $A(Y)$ is the quantity that requires arithmetic control. [Two-tail estimate for the Gamma kernel](lean:D5/S3/Analytic/Laplace/CriticalGammaWindow.critical_window_off_mass)
+
+For $1/2<\theta<1$ the same windows satisfy $I_\theta(Y)\le Y^{1/2-\theta} A(Y)$. Conversely, $A(Y)\le Y^{(3/2)(\theta-1/2)} I_\theta(Y)$, so bounds $I_\theta(Y)\le Y^{\eta'}$ on arbitrarily late windows for every $1/2<\theta<1$ and every $\eta'>0$ give the critical condition by taking $(3/2)(\theta-1/2)+\eta'\le\eta$.
+
+The criterion can also be stated using primes alone. Put $\vartheta(t)=\sum_{p\le t}\ln p$ and use it in place of $\psi$ to define $Q_\vartheta$ and $A_\vartheta$. The prime-power correction to the tail satisfies $\sqrt{x}(Q(x)-Q_\vartheta(x))\to2$. Choose $C$ so that $\psi(t)-\vartheta(t)\le C\sqrt{t}$ for all $t\ge1$. Such a $C$ exists unconditionally. The negative part is nonincreasing, and the window theorem gives $0\le A_\vartheta(Y)-A(Y)\le 2C\ln(Y^{3/2}/Y)=C\ln Y$. Thus the critical condition is equivalent to $A_\vartheta(Y)\le Y^\eta$ on arbitrarily late windows for every $\eta>0$. For the implication from $A$, use its bound with exponent $\eta/2$, then take $Y$ large enough that $Y^{\eta/2}+C\ln Y\le Y^\eta$. The independent arithmetic task is to establish this bound on the integral of the negative part from the distribution of the primes. [Window bound for the prime-power correction](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.prime_power_window_correction)
+
+A pointwise bound from the external arithmetic argument transfers directly to the prime-only condition (`manual derivation`). Suppose $U(x)\le x^{1/2+\varepsilon}$ throughout $[Y,Y^{3/2}]$. On that same window, $Q^-(x)/\sqrt{x}=\max(U(x),0)/x^{3/2}\le x^{\varepsilon-1}$. Thus $A(Y)\le \tfrac12 Y^{3\varepsilon/2}\ln Y$. Adding the prime-power correction costs at most $C\ln Y$. Given $\eta>0$, take $\varepsilon=\min(\eta/3,1/4)$. The sum is at most $Y^\eta$ on every sufficiently large window satisfying the pointwise bound. The arithmetic input is the existence of such whole windows arbitrarily far out.
+
+Levent Alpöge’s proposed proof constructs these windows at modulus one from external arithmetic inputs. The construction uses theta lifts, Galois representations, a covolume bound, and local matching to construct `HypsAlt` and then obtain `TopG`. For $\lambda=3/2$ the construction fixes $e_D=2$ and $e_L=0$. For every sufficiently small $\varepsilon>0$, one family supplies arbitrarily late whole windows, a uniform error bound, and the `ChainTied` condition. Raising the starting threshold gives $U(x)\le x^{1/2+9\varepsilon}$ throughout each such window, before the external argument invokes its zero-free criterion. Choose $9\varepsilon\le\min(\eta/3,1/4)$. The preceding integral estimate gives $A_\vartheta(Y)\le Y^\eta$ on these same windows (`manual derivation`). The resulting existence of these windows depends on the external arithmetic inputs. [The source repository’s account of the proposed proof](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/README.md#L1-L5) · [Arithmetic inputs to HypsAlt](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean#L44-L68) · [From HypsAlt to TopG](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean#L12-L15) · [Loss exponents](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopShape.lean#L48-L54) · [Three conditions on the same family](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/ZeroFreeAllOfTopG.lean#L19-L33) · [Arithmetic bound on the windows](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/PrimitiveCosets/LevelGmLeOnFamilyScales.lean#L28-L30)
+
+**How can one discriminant split at several primes?** For an odd prime $p$, write $J(-d,p)=\bigl(\frac{-d}{p}\bigr)$. A value of $1$ means that $t^2\equiv-d\pmod p$ has a nonzero solution. With $B=3$, the only small odd prime to test is $3$. The prime $d=23$ satisfies $d\equiv7\pmod{16}$ and $-23\equiv1\pmod3$. Take the prime $q=59\equiv3\pmod8$. Since $-23\equiv36=6^2\pmod{59}$, this pair passes both splitting tests. The construction below enforces all the finite conditions through particular residue classes. Those classes account for only some of the eligible primes.
+
+::: {.theorem #thm-ch31-split-prime-host-series title="Weighted series for auxiliary primes with prescribed splitting" lean="D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series"}
+For a natural number $B$, let $D_B$ consist of the primes $d\equiv7\pmod{16}$ for which $J(-d,p)=1$ at every odd prime $p\le B$. For $d\in D_B$, let $Q_d$ consist of the primes $q\equiv3\pmod8$ for which $J(-d,q)=1$. Then
+
+$$
+\begin{aligned}
+\lim_{X\to\infty}\sum_{\substack{d\in D_B\\d<X}}\frac{\ln d}{d}&=+\infty,\\
+\lim_{X\to\infty}\sum_{\substack{q\in Q_d\\q<X}}\frac{\ln q}{q}&=+\infty\quad(d\in D_B).
+\end{aligned}
+$$
+
+Here $X$ runs through the natural numbers. For every natural number $N$ there exists $d\in D_B$ with $d>N$. For every $d\in D_B$ and every natural number $Q$ there exists $q\in Q_d$ with $q>Q$. Conversely, prescribe a prime $q\equiv3\pmod8$ and put $S_{B,q}=\{d\in D_B:q\in Q_d\}$. Then $\sum_{d\in S_{B,q},\,d<X}(\ln d)/d\to+\infty$, and for every natural number $N$ there is a $d\in S_{B,q}$ with $d>N$.
+:::
+
+::: proof
+Choose $d$ first. In the reference construction, put $P=\prod_{i=0}^{B-1}(2i+1)$, with empty product $1$. The product is odd, and every odd prime $p\le B$ occurs as a factor. The residue $8P-1\pmod{16P}$ is coprime to its modulus. Each prime $d$ in this class satisfies $d\equiv7\pmod{16}$ and $-d\equiv1\pmod p$ at every such $p$. With $d$ fixed, choose a prime $q$ in the reduced residue class $1+6d\pmod{8d}$. Then $q\equiv3\pmod8$ and $q\equiv1\pmod d$. Both $d$ and $q$ are $3$ modulo $4$, so the minus sign from quadratic reciprocity cancels $\bigl(\frac{-1}{q}\bigr)=-1$. Hence $J(-d,q)=\bigl(\frac{q}{d}\bigr)=1$. The proof in this library takes the product of the small odd primes themselves and combines the congruences by the Chinese remainder theorem. In each reduced residue class the sum of $\ln p/p$ over primes diverges. Its nonnegative terms contribute to the corresponding sums over $D_B$ and $Q_d$. The full proof is checked by the Lean kernel.
+:::
+
+One can also start with a prescribed prime $q\equiv3\pmod8$. Increase the cutoff for small primes to $\max(B,q)$. Then $q$ itself is one of the odd primes required to split, so every $d\in D_{\max(B,q)}$ belongs to $D_B$ and satisfies $J(-d,q)=1$. Removing any finite initial segment preserves divergence, so in either order the last prime can exceed any prescribed lower bound. The elementary construction in the reference chooses $d$ first and $q$ second and proves existence above given thresholds. The weighted series here quantify the supply of primes at each step. [The two prime choices in the reference](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/PrimeDiscriminants/ExistsHost.lean#L39-L97)
+
+The whole-window estimate also requires the two primes to fit the same prescribed scale. Under its analytic hypotheses, the quantitative result in the reference fixes $0<\varepsilon<1/52$ and supplies $x_0$ and a constant $C>0$. For every real $x\ge x_0$ it then chooses $q$ and then $d$ for that $q$, with the same pair satisfying $\sqrt{X_1}<q\le X_1$ and $\sqrt{X_2}<d\le X_2$, where $X_1,X_2$ depend on $x,\varepsilon$. Its `QDq` condition uses the same $C$ in the estimates at scale $x$ for three quadratic characters, those attached to $q$, to $d$, and their product. The `Boxq` condition imposes six zero-free region conditions on characters and their twists. For every integer $1\le n\le2x^{2+8\varepsilon}$ the same pair must also meet the splitting requirements and the bound on $\ln(4nqd)$ in `Rowq`. These conditions select a pair for each $x$. Put $t=\varepsilon/5$. Since $X_1=\exp(x^t)$, the size condition gives $x^t/2<\ln q\le x^t$. Reusing one $q$ at the endpoints $Y$ and $Y^b$ would give $Y^{bt}/2<\ln q\le Y^t$, hence $Y^{(b-1)t}<2$. For fixed $b>1$, satisfying the `Rowq` size bound at the two endpoints of a sufficiently distant window therefore requires different primes $q$ (`manual derivation`). Passing from the choice at each scale to the error bound on the whole window uses the character estimates and arithmetic construction in the reference. [Quantitative construction choosing $q$ before $d$](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBounds.lean) · [Hypotheses and quantifiers for the quantitative choice](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBoundsStatement.lean#L17) · [Character and size conditions](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/InertJacobiLevels/AsmIface.lean#L166-L185)
+
+**When can one pair of auxiliary primes serve an entire window?** Fix a prime $q\equiv3\pmod8$, put $L=\ln q>1$, and fix a real $b>1$. For a window starting at $Y\ge e^5$, take a loss $\varepsilon>0$ that stays fixed on the window. Write $u=x^{\varepsilon/5}$ for each real $x\in[Y,Y^b]$. The external `Rowq` condition constrains $q,d$ at a given $x,n$. Here we require a single prime $d\equiv7\pmod{16}$ to satisfy the inequalities throughout the window.
+
+$$
+u/2<L\le u,\qquad u(\ln x)^2/2<\ln d\le u(\ln x)^2 .
+$$
+
+It also requires $(-d/q)=1$, the splitting condition $(-d/p)=1$ for each odd prime $p\le u$, and $-d\equiv1\pmod8$ at $2$. For each integer $1\le n\le2x^{2+8\varepsilon}$, the conductor bound is $\ln(4nqd)\le2u(\ln x)^2$. [Pointwise arithmetic conditions in the external source](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/InertJacobiLevels/AsmIface.lean#L179-L185)
+
+::: {.theorem #thm-ch31-fixed-prime-row-width title="Window widths admitting one fixed pair of auxiliary primes" lean="D5/S3/CharacterSums/MovingPrimeRowWidth.prime_pair_power_window_iff"}
+Fix $q,b$ as above. The following are equivalent.
+
+1. For every real $R$ and every $\eta>0$ there exist $Y\ge\max(R,e^5)$, a loss $0<\varepsilon<\min(\eta,1/52)$, and a prime $d$ satisfying all the conditions above for every real $x\in[Y,Y^b]$.
+2. The width satisfies $b^2L^{b-1}<2$.
+:::
+
+::: proof
+First compare the endpoints. Put $u_0=Y^{\varepsilon/5}$, so $L\le u_0$ and the value of $u$ at the right endpoint is $u_0^b$. The strict lower bound there and the upper bound at the left endpoint give $b^2u_0^b(\ln Y)^2/2<\ln d\le u_0(\ln Y)^2$. Hence $b^2L^{b-1}<2$. At equality, the strict lower bound at the right already reaches the largest value allowed at the left.
+
+Conversely, put $B=\lceil L^b\rceil$. With $q$ fixed first, there are arbitrarily large $d$ for which $q$ and every odd prime $p\le B$ split. [Prime supply with $q$ fixed first](lean:D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series)
+
+Set $a=\sqrt{\ln d/L}$, $Y=e^a$, and $\varepsilon=5\ln L/a$. As $d$ grows, $Y$ tends to infinity and $\varepsilon$ tends to zero. Write each point of the window as $x=e^{sa}$ with $1\le s\le b$. Then
+
+$$
+u=L^s,\qquad \frac{u(\ln x)^2}{\ln d}=s^2L^{s-1}\in[1,b^2L^{b-1}].
+$$
+
+This gives both size bounds for $d$. The inequalities $u\le L^b<2L$ and $L\le u$ give the bounds for $q$. Finally, put $t=\ln x\ge5$. For the specified $n$, use $L\le u$, $\ln 8<4$, and $2+8\varepsilon<3$ to obtain $\ln(4nq)\le4+3t+u\le ut^2$. The last inequality follows from $u\ge1$ and $t^2-1\ge4+3t$. Adding $\ln d\le ut^2$ gives the conductor bound. The full proof is checked by the Lean kernel.
+:::
+
+Take the prime $q=60083\equiv3\pmod8$ and $b=9/8$. Since $11<L<12$ and $12<(3/2)^8$, we have $b^2L^{b-1}<(81/64)(3/2)=243/128<2$. This yields windows on which $u\ge L>11$ at every point.
+
+The external analytic proof that selects $q$ also requires $(\ln Y)^2\ln(8)/4\le Y^{\varepsilon/5}$ at the starting point. Our construction has $Y^{\varepsilon/5}=L$, while the left side tends to infinity with $Y$. If the selector’s threshold holds, the ratio of the endpoint values of $u$ is $(Y^{\varepsilon/5})^{b-1}\ge((\ln Y)^2\ln(8)/4)^{b-1}$. For every natural $k$, this lower bound eventually exceeds $2^k$. Choose $k+1$ points along the window where $u$ doubles successively. Their half-open intervals $(u/2,u]$ are disjoint, so covering the window requires at least $k+1$ distinct values of $q$, even when $\varepsilon$ varies between windows. Given its analytic inputs, the external source fixes $0<\varepsilon<1/52$ and obtains a threshold $x_0$ and a constant $C$. It selects a pair $q,d$ for each $x\ge x_0$, then uses that pair for every admissible $n$. [Scale condition in the external selector](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean#L83-L92) · [The external theorem selecting a pair at each point](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBoundsStatement.lean#L17) · [Uses of the condition](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean#L131-L156)
+
+Here $\varepsilon$ changes with the window. Bounding $U$ pointwise on these windows would also require the external `QDq` and `Boxq` character estimates for the same pair $q,d$, and control of how the comparison threshold depends on $\varepsilon$. [Character estimates and pointwise arithmetic conditions in the external source](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/InertJacobiLevels/AsmIface.lean#L166-L192)
+
+For any fixed real $b>1$, write
+
+$$
+A_{\vartheta,b}(Y)=\int_Y^{Y^b}\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx,\qquad Y\ge2.
+$$
+
+The quantity $A_\vartheta$ above is $A_{\vartheta,3/2}$.
+
+::: {.theorem #thm-ch31-prime-window-mean title="The logarithmic main term of the window mass under RH" lean="D5/S3/Weil/Mertens/IntegratedExplicit/RHPrimeWindowMean.prime_tail_logarithmic_mass_of_rh"}
+Assume the Riemann hypothesis. There is a constant $C\ge0$ such that every pair of real cutoffs $B\ge A\ge2$ satisfies
+
+$$
+\left|\int_A^B\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx-2\ln(B/A)\right|\le C.
+$$
+:::
+
+::: proof
+In the prime-power layers, higher powers bound the difference between $\psi(x)-\vartheta(x)$ and $\psi(\sqrt{x})$. Apply Schoenfeld's bound at $\sqrt{x}$ and integrate to obtain $\sqrt{x}(Q(x)-Q_\vartheta(x))=2+O(x^{-1/12})$. This error is absolutely integrable on the tail after setting $y=\ln x$. The normalized complete remainder consists of the zero series and an exponentially decaying term. Under RH the series has absolutely summable coefficients, modulus less than $2$, and frequencies of absolute value greater than $10$. Integrating each mode divides its coefficient by the frequency, giving a common bound for integrals of the zero series over every interval. Adding $2$ to the real part of this series gives a nonnegative approximation to $\max\{-\sqrt{x}Q_\vartheta(x),0\}$. Taking positive parts preserves the bound on the integrable error. Continuity bounds the error over the finite initial interval. Integrating the constant $2$ gives the logarithmic main term, and the other contributions are bounded uniformly in both endpoints. The full proof is checked by the Lean kernel.
+:::
+
+In particular, $A_{\vartheta,b}(Y)=2(b-1)\ln Y+O(1)$ with the same error bound even when $b>1$ varies. Zhao's equation (14) expresses this $Q_\vartheta$ in terms of the cumulative first Mertens error and an endpoint correction. The main term here results from a further weighted window integral and uses RH. [Zhao, equation (14)](https://arxiv.org/html/2411.18903v2#S2.E14)
+
+::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
+Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
+:::
+
+::: proof
+Under RH, $|U(x)|/\sqrt{x}$ is bounded for all sufficiently large $x$. Integrating this bound and the prime-power correction over $[Y,Y^b]$ gives $A_{\vartheta,b}(Y)\le C_b\ln Y$. Thus every sufficiently large $Y$ satisfies the required power bound.
+
+Conversely, suppose $\zeta(\rho)=0$ with $\beta=\operatorname{Re}\rho>1/2$. For every $\varepsilon>0$, all sufficiently large $Y$ satisfy $A_{\vartheta,b}(Y)\ge Y^{b(\beta-1/2)-\varepsilon}$. Fix $1<h<b$ and a small $0<\delta<\beta-1/2$, then choose $\sigma$ large enough to make both Gamma tail decay rates positive. Two disks of the same radius separate the pole contribution from the error. The complex center $p$ lies at distance $d<\sigma-\beta+\delta$ from the isolated pole, where $\sigma=\operatorname{Re}p$. This pole can come from a different zero. The zero-free disk at the real center gives a Cauchy error bound. Taking the derivative order $k=\lfloor\sigma h\ln Y\rfloor$ puts the peak of the Gamma kernel near $h\ln Y$. After normalization by $d^k$, the contribution from outside the window is $O((d/\sigma)^k)$ and tends to zero as $k$ grows. The growth rate left inside is $h\sigma\ln((\sigma-1/2)/d)>h(\beta-1/2-\delta)$. Taking $h$ close enough to $b$ and $\delta$ small enough keeps the exponent loss below $\varepsilon$. [Window mass forced by an off-line zero](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.off_line_zero_forces_window_mass)
+
+Take $\varepsilon=\eta=b(\beta-1/2)/3$. The lower bound becomes $Y^{2\eta}$, in contradiction with $A_{\vartheta,b}(Y)\le Y^\eta$ on arbitrarily late windows. This excludes zeros to the right of the critical line. Reflection of the nontrivial zeros across that line gives RH. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-wide-prime-window title="A lower mass bound on wide windows and uniform divergence if RH fails" lean="D5/S3/Weil/Mertens/IntegratedExplicit/WidePrimeWindowMass.prime_tail_wide_window_mass"}
+For the actual prime-only tail, write the mass at real endpoints $2\le A\le B$ as
+
+$$
+N(A,B)=\int_A^B \frac{\max\{-Q_\vartheta(x),0\}}{\sqrt x}\,dx .
+$$
+
+Fix $b>1$. There is a constant $C_b\ge0$ such that $N(A,B)\ge 2\ln(B/A)-C_b$ whenever $2\le A$ and $A^b\le B$. If RH fails, for each real $K$ a single right-endpoint threshold $S$ gives $N(A,B)-2\ln(B/A)\ge K$ for every $B\ge S$ and every admissible $A$.
+:::
+
+::: proof
+The threshold can be chosen independently of $A$ by setting $Y=B^{1/b}$. Since $A^b\le B$, the interval $[Y,B]=[Y,Y^b]$ lies inside $[A,B]$. Integrating the same nonnegative function over the larger interval can only increase the mass. If RH fails, symmetry supplies a zero with real part $\beta>1/2$. The fixed-power estimate allows any positive exponent loss, so choosing $b(\beta-1/2)/2$ gives $N(A,B)\ge B^{(\beta-1/2)/2}$ for every sufficiently large $B$, uniformly in admissible $A$. This power eventually exceeds $2\ln B$ plus any fixed constant. Since $2\ln(B/A)\le2\ln B$, the discrepancy diverges uniformly. Below the right-endpoint threshold the logarithmic term is bounded and the mass is nonnegative, which extends the lower bound to the whole domain. If RH holds, the bounded remainder for all $2\le A\le B$ gives the same lower bound directly. The full proof is checked by the Lean kernel.
+:::
+
+The exponent $b>1$ is fixed in advance. In logarithmic coordinates the condition $B\ge A^b$ requires the window to widen with the scale. At fixed ratio $B/A$, the inclusion used above gives no corresponding bound.
+
+**At which scales can one choose a prime with a small character sum?** Fix $\varepsilon>0$. For each integer $k\ge1$ take the prime upper bound $X_k=2^k$ and the height $x_k=(k\ln2)^{5/\varepsilon}$, so $\exp(x_k^{\varepsilon/5})=X_k$. The block contains the primes $X_k/2\le q<X_k$ congruent to $3$ modulo $8$. Consecutive blocks are disjoint. For sufficiently large $k$ the lower endpoint exceeds $\sqrt{X_k}$, so the whole block fits the size band for $q$ in the reference.
+
+For the second moment, define the sum for every positive odd integer $q$ in the block using the Jacobi symbol. Let $N_k=\lfloor x_k^{400}\rfloor$ and put
+
+$$
+T_k(q)=\sum_{n=1}^{N_k}\Lambda(n)\min\{1,x_k/n\}\left(\frac{n}{q}\right).
+$$
+
+Here $\Lambda(p^j)=\ln p$ for primes $p$ and integers $j\ge1$. All other positive integers have weight zero. Terms up to $x_k$ retain their full weight, while larger terms receive a factor $x_k/n$. Only primes $q$ congruent to $3$ modulo $8$ in the block receive weight. If $|T_k(q)|\le x_k^{1/2+\varepsilon}/2$, add $(\ln q)/q$ to $G_k$. Otherwise add it to $B_k$. Equality is included in $G_k$.
+
+::: {.theorem #thm-ch31-dyadic-mangoldt-prime-supply title="Good primes for the truncated Mangoldt sum at dyadic scales" lean="D5/S3/CharacterSums/DyadicMangoldtPrimeSupply.dyadic_quadratic_mangoldt_supply"}
+For each fixed real $\varepsilon>0$, the exceptional primes have finite total weight, and the partial sums of the good weight tend to positive infinity:
+
+$$
+\begin{aligned}
+\sum_{k=1}^{\infty} B_k&<\infty,\\
+\lim_{K\to\infty}\sum_{k=1}^K G_k&=+\infty.
+\end{aligned}
+$$
+:::
+
+::: proof
+Sum $|T_k|^2$ over every integer in the block congruent to $3$ modulo $8$. These nonnegative terms include the contribution of the exceptional primes. The total truncated weight of higher prime powers is $O(\sqrt{x_k})$. For the cross terms at distinct odd primes, quadratic reciprocity turns the varying denominator into a periodic sum. Complete periods cancel, leaving endpoint remainders. For fixed $\varepsilon$ the full second moment is at most $(X_k/2)x_k^{1+\varepsilon}$ on sufficiently late blocks. Every exceptional prime contributes more than $x_k^{1+2\varepsilon}/4$ to the second moment. Using $(\ln q)/q\le 2\ln(X_k)/X_k$ throughout the block and substituting $x_k^\varepsilon=(k\ln 2)^5$ gives $B_k\le4/(k\ln 2)^4$ for all sufficiently large $k$. The exceptional weight is therefore summable. On the other hand the sum of $(\ln q)/q$ over primes congruent to $3$ modulo $8$ diverges. Summing over the disjoint blocks and subtracting the finite exceptional weight gives the divergence of the good weight. The full proof is checked by the Lean kernel.
+:::
+
+Thus for every starting block $K_0$ there exist a $k\ge K_0$ and a prime $q$ in that block meeting the bound. Divergence allows individual blocks to contain no good prime. The estimate concerns the finite sum for the first selection of $q$ in the reference, with the extra twist $\kappa=1$. Under the analytic, size and zero-free hypotheses in the reference, the corresponding smoothed, centered character sum satisfies $|g_\chi(x_k)+T_k(q)|\le x_k^\varepsilon$, so the approximating term is $-T_k(q)$. The first choice of $q$ must also satisfy two zero-free conditions simultaneously. In the subsequent choice of $d$, the twists and modulus vary with $q,x$. The logarithmic derivative estimates and zero-free boxes require separate arguments. [Finite sum in the reference](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/SmoothedRemainderRealIntegralFormula.lean#L139-L147) · [Approximation for the smoothed sum](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/GChiApproximationSumStatement.lean#L14) · [Conditions in the first prime selection](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean)
+
+**Can the height be prescribed before choosing the prime?** Fix a real height $x$ and put $T=x^{\varepsilon/5}$. Write $T_x(q)$ for the same truncated sum evaluated at this $x$. Each term is $\Lambda(n)\min\{1,x/n\}$ times the Jacobi symbol $(n/q)$, and the sum ends at $\lfloor x^{400}\rfloor$. As the interval for $q$ moves with $x$, we allow a finite set $E\subset\mathbb N$ of integers to be avoided. Let $S_x(E)$ consist of the primes satisfying
+
+$$
+e^{T/2}<q\le e^T,\qquad q\equiv3\pmod8,\qquad
+q\notin E,\qquad |T_x(q)|\le \tfrac12 x^{1/2+\varepsilon}.
+$$
+
+::: {.theorem #thm-ch31-real-scale-mangoldt-prime-supply title="Good prime weight at every sufficiently large real height" lean="D5/S3/CharacterSums/DyadicMangoldtPrimeSupply.real_scale_quadratic_mangoldt_supply"}
+For every fixed $\varepsilon>0$ there exists $x_0(\varepsilon)$ such that for every real $x\ge x_0(\varepsilon)$ and every finite set $E\subset\mathbb N$ with $|E|\le e^{T/3}$,
+
+$$
+\sum_{q\in S_x(E)}\frac{\ln q}{q}\ \ge\ \frac{T}{173065984000}.
+$$
+
+:::
+
+::: proof
+Put $D=86532992000$. The primes congruent to $3$ modulo $8$ in the full interval eventually have total weight at least $T/D$. The second-moment estimate uses dyadic blocks, each at the same real height $x$ and cutoff $\lfloor x^{400}\rfloor$. The primes exceeding the threshold eventually have total weight at most $36T^2/x^\varepsilon$, which tends to zero after division by $T$. Each prime in the interval has weight at most $Te^{-T/2}$, so deleting at most $e^{T/3}$ integers costs at most $Te^{-T/6}$. For sufficiently large $x$ each loss is at most $T/(4D)$, leaving at least $T/(2D)$. The full proof is checked by the Lean kernel.
+:::
+
+**Hand derivation.** The positive lower bound supplies a prime at every such $x$. The choice of $q$ may vary with $x$ and $E$. The single-prime weight bound $Te^{-T/2}$ also gives $|S_x(E)|\ge e^{T/2}/173065984000$. If a set $E$ of the allowed size contains every candidate failing either zero-free condition in the reference, the theorem supplies a prime meeting both conditions. Bounding that exceptional set requires an independent estimate.
+
+**The second prime belongs to a moving residue class.** Once $q$ is chosen, the modulus $m$ for selecting $d$ can grow with the height. To discard the integers that fail a test in $(D/2,D]$, we first need a count of the actual primes in the prescribed class. An asymptotic for fixed $m$ may start at a height that depends on $m$. Here the starting condition must work for all $m$.
+
+Fix an integer $m\ge3$ and a unit $a$ modulo $m$. In the cyclotomic field $\mathbb Q(\zeta_m)$ write $\sigma_a(\zeta_m)=\zeta_m^a$. Let $\Pi_a(t)$ count the rational primes up to $t$ that are unramified in this extension and have Frobenius $\sigma_a$. Let $Q$ be the maximum of the primitive conductors of the characters of its Galois group. Write $\operatorname{Li}(t)=\int_2^t du/\log u$.
+
+::: {.theorem #thm-ch31-cyclotomic-tz title="Cyclotomic prime counting with an exceptional zero term" status="written-proof" proof="pf-ch31-cyclotomic-tz" doi="10.2140/ant.2019.13.1039" source="Theorems 1.4 and 3.3, pp. 1042 and 1052" request="https://github.com/the-omega-institute/trureturing-requests/issues/455"}
+There exist absolute effective constants $A,c_2,c_3,s>0$. Here an exceptional zero is a real zero of the primitive Dirichlet $L$-function associated with a real character in the range $0<\lambda<1/8$, $\beta=1-\lambda/\log Q$. In the absence of an exceptional zero, put $F(t)=\operatorname{Li}(t)$. If one exists, its real character $\chi$ is unique and the zero is $\beta=1-\lambda/\log Q$ with $sQ^{-2}\le\lambda<1/8$. In this case put $F(t)=\operatorname{Li}(t)-\chi(a)\operatorname{Li}(t^\beta)$. For every $m,a$ as above and every $t\ge Q^{c_2}$,
+
+$$
+\left|\varphi(m)\Pi_a(t)-F(t)\right|
+\le A\left(e^{-c_3\log t/\log Q}+e^{-\sqrt{c_3\log t}}\right)F(t).
+$$
+
+:::
+
+::: {.proof #pf-ch31-cyclotomic-tz}
+Apply Theorem 1.4 of Thorner and Zaman to $L=\mathbb Q(\zeta_m)$ over $\mathbb Q$, with the entire group $G=(\mathbb Z/m\mathbb Z)^\times$ as the abelian subgroup and $\{\sigma_a\}$ as the conjugacy class. The fixed field is $\mathbb Q$, of discriminant and degree $1$. Both conductor parameters in (1–11) and (3–1) reduce to $Q$, and the density factor is $1/\varphi(m)$. Each primitive conductor divides $m$. For $m\ge3$ the group has a nontrivial character, whose primitive conductor is at least $3$, so $3\le Q\le m$. Theorem 1.4 gives the relative error and exceptional term above, and Theorem 3.3 gives $\lambda\ge sQ^{-2}$. Both sets of constants are absolute and effective. Jesse Thorner and Asif Zaman, “A unified and improved Chebotarev density theorem,” *Algebra & Number Theory* **13**(5) (2019), 1039–1068. [DOI](https://doi.org/10.2140/ant.2019.13.1039) · [Published Theorem 1.4](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=5) · [Published Theorem 3.3](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=15)
+:::
+
+**Hand derivation.** There exist absolute effective constants $c,K,D_0>0$ such that for every $m\ge3$, every unit $a$ and every $D\ge\max\{D_0,(4m)^K\}$,
+
+$$
+\#\{Y<p\le2Y:p\text{ prime},\ p\equiv a\pmod m\}
+\ \ge\ c\,m^{-3}\frac{Y}{\log Y},\qquad Y=D/2.
+$$
+
+First choose $K\ge2$ sufficiently large, then choose $D_0$ sufficiently large. Since $\log Y/\log Q\ge K-1$ and $Y\ge D_0/2$, these choices ensure $Y>m$, $Y\ge Q^{c_2}$ and relative errors at most $1/100$ at both $Y$ and $2Y$. Every prime in the interval is unramified since $p>m$, and its Frobenius takes $\zeta_m$ to $\zeta_m^p$. The difference of the two endpoint counts is therefore the desired prime count.
+
+If the exceptional zero exists and $\chi(a)=1$, put $\delta=1-\beta$ and $W=1-Y^{-\delta}$. In every other case put $W=1$. On $[Y,2Y]$ we have $F'(t)\ge W/\log(2Y)$, giving $F(2Y)-F(Y)\ge WY/(2\log Y)$. In the cancellation case $\beta>1/2$, so integrating from $t^\beta$ to $t$ gives $0\le F(t)\le2t(1-t^{-\delta})/\log t$. Since $1-(2Y)^{-\delta}\le1-Y^{-2\delta}\le2W$, the sum of the two endpoints is at most $10WY/\log Y$. In the other cases $0\le F(t)\le2\operatorname{Li}(t)\le6t/\log t$ for large $t$. Hence $F(Y)+F(2Y)\le18WY/\log Y$ in every case. Subtracting the two endpoint errors leaves $\varphi(m)(\Pi_a(2Y)-\Pi_a(Y))\ge WY/(4\log Y)$.
+
+In the cancellation case $\delta\log Y\ge s/m^2$, so $1-e^{-u}\ge(1-e^{-1})\min\{u,1\}$ gives $W\ge (1-e^{-1})\min\{s,1\}m^{-2}$. This bound also holds for $W=1$. Dividing by $\varphi(m)\le m$ proves the claim. For the second-prime parameters $y=x^{\varepsilon/5}$, $m\le e^{4y}$ and $D=e^{y(\log x)^2}$, we have $\log D/\log(4m)\ge y(\log x)^2/(\log4+4y)\to\infty$. The same threshold therefore applies at every sufficiently large $x$. If the number of integers in the class failing either test is smaller than this prime lower bound, at least one prime passes both tests. [The counting hypothesis in the reference](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Definitions/GlobalTwisting/GeneralHyps.lean#L113-L118)
+
+**How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
+
+$$
+Q_{\vartheta}(x)=\int_x^\infty\frac{\vartheta(t)-t}{t^2}\,dt,
+\qquad N(a,b)=\int_a^b\frac{\max\{-Q_{\vartheta}(z),0\}}{\sqrt z}\,dz.
+$$
+
+::: {.theorem #thm-ch31-prime-tail-negative-window title="Window mass forced by an interior negative value" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.prime_tail_negative_window_lower"}
+Let $a,b,x,r$ be real with $0<r\le 1/2$, $1\le a\le(1-r)x$, and $(1+r)x\le b$. If $Q_{\vartheta}(x)\le-4r^2$, then $N(a,b)\ge r^3\sqrt{x}$.
+:::
+
+::: proof
+The estimate holds at real cutoffs, including prime jumps.
+
+Monotonicity lets us compare $\vartheta(t)$ to $\vartheta(x)$ inside the local integral. It gives
+$Q_{\vartheta}(z)-Q_{\vartheta}(x)\le\ln(z/x)+\vartheta(x)(1/z-1/x)$.
+Choose the left side if $\vartheta(x)\le x$ and the right side otherwise. On the chosen side the upper bound is at most $\ln(z/x)+x/z-1$. The inequality $\ln t\le t-1$ reduces this to $(z-x)^2/(zx)\le 2r^2$. Throughout that interval of length $rx$ we have $-Q_{\vartheta}(z)\ge 2r^2$ and $\sqrt{z}\le2\sqrt{x}$. Integration gives the lower bound. The full proof is checked by the Lean kernel.
+
+:::
+
+A window budget strictly below $r^3\sqrt{x}$ therefore rules out a dip of depth $4r^2$ at that interior point. The margins on both sides determine which $r$ can be used. This local estimate takes a window budget as input. Under the external arithmetic inputs specified above, the modulus-one construction gives arbitrarily late windows with a small budget.
+
+::: {.theorem #thm-ch31-prime-fixed-ratio-mass title="A fixed-ratio window bound from an off-line zero" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeFixedRatioWindowMass.prime_tail_fixed_ratio_mass_of_zero"}
+Let $\rho$ be a nontrivial zero with $\beta=\operatorname{Re}\rho>1/2$. There are real constants $\kappa>1$, $c>0$, and $S$ such that every real window with $B\ge S$, $A\ge2$, and $B\ge\kappa A$ satisfies
+
+$$
+N(A,B)\ge cB^{\beta-1/2}.
+$$
+:::
+
+::: proof
+
+Use the member of the conjugate pair with positive imaginary part. Choose a line strictly between $1/2$ and $\beta$. A compactly supported probability average retains the pair and cancels the other zeros to the right of that line. Write $Q$ for the complete tail defined using $\psi$. In the coordinate $t=\ln x$, the shifted average of $-Q(e^t)$ has a leading cosine at scale $e^{(\beta-1)t}$. The error has a strictly smaller exponent, so it eventually falls below one quarter of the leading amplitude.
+
+Choose a subinterval of fixed length where the cosine is at least $1/2$. When the probability and interval integrations are exchanged, each translated subinterval lies in the same window enlarged by the support of the filter. The signed integral over each translate is bounded by the integral of the positive part of $-Q(e^t)$ over that enlarged window. On $[T,T+W]$, the substitution $x=e^t$ contributes a weight of at least $e^{T/2}$, and $Q_\vartheta\le Q$. The resulting prime-only mass is bounded below at scale $e^{(\beta-1/2)T}$. With $T=\ln B-W$ and $\kappa=e^W$, the subwindow is $[B/\kappa,B]$ and lies inside every admissible $[A,B]$.
+
+The full proof is checked by the Lean kernel.
+:::
+
+The ratio, coefficient, and threshold may depend on the supplied zero. The bound retains its full exponent for every zero satisfying the hypothesis. Allowing every prescribed $\kappa>1$ would require further control of the filter support and oscillation period.
+
+::: {.theorem #thm-ch31-prime-prescribed-ratio-mass title="A prescribed-ratio mass bound when the supremum is unattained" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePrescribedRatioWindowMass.prime_tail_prescribed_ratio_mass_of_unattained"}
+Let $\Theta$ be the supremum of the real parts of nontrivial zeros of the Riemann zeta function, and suppose every nontrivial zero has real part strictly below $\Theta$. Fix any real $\kappa>1$ and $1/2<\sigma<\Theta$. There are constants $c>0$ and $S$ such that every pair of real endpoints with $B\ge S$, $A\ge2$, and $\kappa A\le B$ satisfies
+
+$$
+N(A,B)\ge cB^{\sigma-1/2}.
+$$
+:::
+
+::: proof
+
+For logarithmic width $W=\ln\kappa$, reserve width $W/2$ for the support of the probability filter. When the supremum is unattained, the zeros with ordinates in any bounded range can be kept to the left of a cutoff strictly below $\Theta$. A retained conjugate pair can then have real part $\beta>\sigma$ and an ordinate large enough that two cosine periods and the filter support fit inside width $W$. The averaged cosine dominates the error throughout a subinterval of fixed length. Exchanging the probability average with integration over that subinterval gives a lower bound on the unaveraged negative mass within the same window.
+
+The substitution $x=e^t$ and the comparison $Q_\vartheta\le Q$ transfer the bound from $[\ln B-W,\ln B]$ to $[B/\kappa,B]$, with exponent $\beta-1/2$. This subwindow lies in every admissible $[A,B]$, and for sufficiently large $B$ the same constant gives the bound with exponent $\sigma-1/2$. The full proof is checked by the Lean kernel.
+:::
+
+The constant and threshold can depend on the prescribed ratio and exponent. The statement applies to $\sigma<\Theta$ when the supremum is unattained.
+
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 
   $$

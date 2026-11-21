@@ -280,6 +280,10 @@ By the pairwise disjointness hypotheses $\operatorname{Disjoint} A\,B$, $\operat
 
 Two epistemic boundaries govern [@thm-sorkin-quadratic-cancellation]: first, it is a ring-valued algebraic identity over an arbitrary commutative star ring $R$, whose signature assumes neither real nonnegativity, probability normalization, nor absence of physical boundary cross-talk between experimental slits; second, it proves the forward implication that quadratic weights on pairwise disjoint branch sets force $I_3 = 0$, and **cannot** be inverted by itself to deduce uniqueness of the Born rule from $I_3 = 0$ alone.
 
+::: {.film src="three-slits-pairwise"}
+**Three slits, only pairs interfere (2 min 30 s).** At one point of the screen each open slit sends an arrow, and the weight is the squared length of their sum; multiplying the sum by its own conjugate gives nine tiles: three on the diagonal, each belonging to one slit, and six that mix two slits, with no tile holding all three. The seven-term combination counts each diagonal tile $1 - 2 + 1$ and each mixed tile $1 - 1$: with arrows $60^\circ$ apart, $4 - 3 - 1 - 3 + 1 + 1 + 1 = 0$; with all three arrows equal to $1$, $9 - 4 - 4 - 4 + 1 + 1 + 1 = 0$; and as the detector slides across the whole screen, the third-order term stays at zero. The square comes from the modulus-square reduction for a pure state on a one-line shutter ([@thm-born-modulus-square]), and the seven-term cancellation is [@thm-sorkin-quadratic-cancellation]; a fourth power would leave $81 - 48 + 3 = 36$, while $I_3 = 0$ alone does not single out the Born rule. The slits are a schematic far-field model with arrows of equal length, and every number in the film is computed on screen.
+:::
+
 Let us now combine [@prop-qubit-bloch-core] and [@thm-rank-one-born-pairing] to fulfill the promise made at the end of Chapter 1 and resolve the factor-of-two relation between the Bloch sphere angle $\theta$ and the Hilbert-space half-angle $\theta/2$.
 
 ::: {.figure src="ch02-half-angle"}

@@ -1,0 +1,45 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen"},
+  "music": {"bpm": 76, "progression": "a-minor"},
+  "scenes": [
+    {"id": "ball", "name": "THE BALL", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["A qubit is a point in a ball. Pure states sit on its skin, mixed states inside.", "一个量子比特是球里的一个点：纯态在球皮上，混合态在球里面。"],
+      ["Noise is the environment touching it, and each noise moves the whole ball at once.", "噪声是环境碰了它一下；每一种噪声都一次挪动整颗球。"],
+      ["So watch the ball. Can noise ever pull two states further apart?", "所以盯着球看：噪声能不能把两个态拉得更远？"]
+    ], "cues": [{"line": 2, "at": 2.0, "kind": "glitch"}]},
+    {"id": "pinch", "name": "SQUEEZE TO THE AXIS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.0, 0.2], "lines": [
+      ["Write the state as a matrix. Pinching keeps the diagonal and erases the rest.", "把态写成矩阵：捏合保留对角元，抹掉其余两个。"],
+      ["On the ball, every point slides sideways onto the vertical axis.", "在球上，每个点都横着滑到竖轴上。"],
+      ["Here the squared size is one: zero point eight two kept, zero point one eight thrown away.", "这里的平方大小是 1：留下 0.82，丢掉 0.18。"],
+      ["Lean checks this split for every two by two matrix: what is thrown away is the off-diagonal mass.", "Lean 内核检验：任何 2×2 矩阵都这样一分为二，丢掉的正是非对角元的模平方和。"],
+      ["Real dephasing goes step by step, multiplying the off-diagonal by c. The ball slims into a cigar.", "真实的相位阻尼一步一步来，每步把非对角元乘以 c；球瘦成一根雪茄。"]
+    ], "cues": [{"line": 2, "at": 3.2, "kind": "chime"}, {"line": 3, "at": 0.8, "kind": "stamp"}]},
+    {"id": "drift", "name": "SHRINK AND RISE", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["Energy loss is different: the qubit falls toward the ground state at the north pole.", "能量耗散不一样：比特往北极的基态跌落。"],
+      ["At gamma zero point three six, heights are scaled by zero point six four and raised by zero point three six; widths shrink to zero point eight.", "取 γ = 0.36：高度乘 0.64 再加 0.36，宽度缩到 0.8 倍。"],
+      ["The south pole climbs to minus zero point two eight. The north pole stays put.", "南极爬到 −0.28；北极纹丝不动。"]
+    ], "cues": [{"line": 2, "at": 2.6, "kind": "chime"}]},
+    {"id": "wide", "name": "HOW WIDE", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Fix the north pole and the height rule. How wide may the image be?", "北极不动，高度规则也不变：像最多能有多宽？"],
+      ["Follow one point. Width zero point eight keeps it inside; width zero point nine pushes it out.", "盯住一个点：宽度因子 0.8，它还在球里；0.9，就刺出了球皮。"],
+      ["Lean checks the exact rule: the whole ball stays inside if and only if the width squared is at most the height factor.", "Lean 内核检验：整颗球不出界，当且仅当宽度因子的平方不超过高度因子。"],
+      ["Zero point eight squared is zero point six four: energy loss sits exactly on the edge.", "0.8² = 0.64：能量耗散恰好压在边界上。"]
+    ], "cues": [{"line": 1, "at": 4.4, "kind": "impact"}, {"line": 2, "at": 4.6, "kind": "stamp"}]},
+    {"id": "closer", "name": "NEVER FARTHER", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.3, 0.3], "lines": [
+      ["How far apart are two states? Half the straight distance between their points.", "两个态相距多远？量两点之间直线距离的一半。"],
+      ["This pair starts zero point eight apart. Pinching leaves it at zero point eight.", "这一对起初相距 0.8；捏合之后还是 0.8。"],
+      ["Energy loss brings it to zero point five one two.", "经过能量耗散，只剩 0.512。"],
+      ["Lean checks that every quantum channel does this: distance never grows.", "Lean 内核检验：任何量子信道都是这样，距离从不变大。"]
+    ], "cues": [{"line": 3, "at": 2.4, "kind": "stamp"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Never grows is not always shrinks: a rotation keeps every distance.", "“从不变大”不等于“一定变小”：转动一下，所有距离都不变。"],
+      ["Staying inside the ball is one test; a quantum channel must pass more.", "留在球里只是一道检验；量子信道还得过更多关。"],
+      ["And the ball pictures of the named noises are textbook results, not formalized in this book.", "各种噪声在球上的样子是教科书结果，本书没有形式化。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter four.", "《量子计算的几何直觉》· 第四章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

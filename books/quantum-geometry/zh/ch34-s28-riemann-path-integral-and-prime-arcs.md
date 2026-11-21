@@ -103,7 +103,7 @@ $$
 
 **第一重机制——往返双投影平方律与半密度幺正性：筛法计数密度是 $p^{-1}$，单程波幅唯一锁向 $p^{-1/2}$。** 回望 [§29.4](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) 由秩一玻恩配对权重定理 [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)（[@thm-ch34-roundtrip-born-and-imaginary-blindspot]，`LEAN ✓`）锁定的测量铁律：观察者在宏观实轴 `I` 上清点的经典概率密度，是经过“被测态投向我、我再投回被测态”**往返两次投影闭合后的玻恩模平方 $\lvert\psi\rvert^2 = \cos^2\theta$**；而真正进入费曼路径积分参与相干相位叠加的，则是尚未平方的**单程旋量振幅 $\psi$**。
 
-在自然数筛法与乘性遍历测度中，素数 $p$ 整除随机正整数的渐近命中占比（跨过该素数圆弧体的宏观经典概率权重）严格等于 $w_p = \frac{1}{p} = p^{-1}$；推广到连续尺度坐标 $n > 0$ 上，对数路径作用量微元 $d(\ln n) = \frac{dn}{n}$ 赋予单位尺度区间的天然哈尔（Haar）测度密度同样是 $n^{-1}$。若要求单条算术路径振幅 $\psi_n(s) = n^{-\sigma - \hat{\mathbf{i}}t}$ 在尺度重整化下保持**幺正概率预算守恒**——即构成微分几何与几何量子化中的 Kostant–Souriau **半密度（$\frac{1}{2}$-density）**，使模平方密度乘以线性微元精确匹配乘性作用量微元 $\lvert\psi_n\rvert^2\,dn = d(\ln n) = \frac{dn}{n}$（`MODEL` + `手工推导`）——则单程路径振幅模长必须唯一取宏观计数密度的算术平方根：
+在自然数筛法与乘性遍历测度中，素数 $p$ 整除随机正整数的渐近命中占比（跨过该素数圆弧体的宏观经典概率权重）严格等于 $w_p = \frac{1}{p} = p^{-1}$；推广到连续尺度坐标 $n > 0$ 上，对数路径作用量微元 $d(\ln n) = \frac{dn}{n}$ 赋予单位尺度区间的天然哈尔（Haar）测度密度同样是 $n^{-1}$。若要求单条算术路径振幅 $\psi_n(s) = n^{-\sigma - \hat{\mathbf{i}}t}$ 在尺度重整化下保持**幺正概率预算守恒**——即构成微分几何与几何量子化中的 Kostant–Souriau **半密度（$\frac{1}{2}$-density）**，使模平方密度乘以线性微元精确匹配乘性作用量微元 $\lvert\psi_n\rvert^2\,dn = d(\ln n) = \frac{dn}{n}$（`MODEL` + `手工推导`；这是逐点的半密度条件，这些模平方并不构成归一化概率，因为 $\sum_n n^{-1}$ 与 $\sum_p p^{-1}$ 都发散，`手工推导`）——则单程路径振幅模长必须唯一取宏观计数密度的算术平方根：
 
 $$
 \lvert\psi_n\rvert^2 \;=\; \bigl\lvert n^{-\sigma - \hat{\mathbf{i}}\,t}\bigr\rvert^2 \;=\; n^{-2\sigma} \;=\; n^{-1} \quad \Longleftrightarrow \quad 2\sigma = 1 \quad \Longleftrightarrow \quad \sigma = \frac{1}{2}.
@@ -207,6 +207,395 @@ $$
 连接这座四阶概念塔底座（0 阶素数原胞 $\Lambda^0$）与塔顶（3 阶零点谱驻波 $\Lambda^3 \equiv \Lambda^0_{\mathrm{spec}}$）的数学桥梁，正是解析数论中最壮丽的**显式对偶公式（Explicit Formula）**——它从正反傅里叶—梅林互换两端证明了“素数幂阶梯”与“黎曼零点谱”互为对偶谱变换：
 
 - **内核已验证的无条件积分显式公式（[@thm-ch34-riemann-prime-arc-bridge] 第 6 款，`LEAN ✓`）**：无需预先假定黎曼猜想，在对数作用量坐标 $y = \ln x > 0$（即尺度 $x = e^y > 1$）的每一个严格正实点 `0 < y` 上，按解析重数遍历全体实际非平凡零点的加权拉普拉斯谱和 $\operatorname{actualH}(y) = \sum_{k \in \mathbb{N}} \frac{e^{y\rho_k}}{\rho_k(1 - \rho_k)}$ 都无条件精确等于算术端的梅尔滕斯—切比雪夫余项 $U(e^y) - \ln(2\pi) + \operatorname{trivialT}(y)$！
+
+- **模 $1$ 的余项与 RH 下的窗口上界。** 模 $1$ 的狄利克雷特征恒等于 $1$。对 $x\ge 1$，两种求和都取 $I_x=\{1,\ldots,\lfloor x\rfloor\}$，在 $x$ 为整数时包含右端点。逐项展开，利用 $\psi(x)=\sum_{n\in I_x}\Lambda(n)$，便有
+
+  $$
+  \sum_{n\in I_x}\Lambda(n)\left(\frac{x}{n}-1\right)
+  =x\sum_{n\in I_x}\frac{\Lambda(n)}{n}-\psi(x).
+  $$
+
+  两边都加上 $-x\ln x+(1+\gamma_{\mathrm{EM}})x$，即得 $G_z(x)=U(x)$（`手工推导`）。其中 $G_z$ 是模 $1$ 的余项，$U$ 见 [@def-divisor-ratio-mertens-error]。[外部定义 `Formalism.Gz`](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/StatementOC.lean#L9-L13) · [`U_eq_complete_ramps`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtLaplace.U_eq_complete_ramps)
+
+  假设黎曼猜想。令 $G(y)=e^{-y/2}U(e^y)$，$M=2+\gamma_{\mathrm{EM}}-\ln(4\pi)$。由 `actual_G_control` 的第一项，对任意 $\varepsilon>0$，所有充分大的实数 $y$ 都满足 $\lvert G(y)\rvert<M+\varepsilon$。[Lean 声明](lean:D5/S3/Weil/Mertens/IntegratedExplicit/RHSharpActualEnvelope.actual_G_control)
+
+  因为 $M<1$，可取 $\varepsilon=1-M>0$，于是对所有充分大的 $y$ 都有 $\lvert G(y)\rvert<1$。代入 $y=\ln x$，得到一个 $Y_0>1$，使所有 $x\ge Y_0$ 都满足 $\lvert U(x)\rvert<\sqrt{x}$。同一个阈值适用于每个 $\theta\ge 1/2$。只要 $Y\ge Y_0$，每个 $x\in[Y,Y^{3/2}]$ 都满足 $U(x)\le\lvert U(x)\rvert<\sqrt{x}\le x^\theta$（`手工推导`）。[常数界 `firstLiMass_lt_one`](lean:D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.firstLiMass_lt_one)
+
+  外部路线的出发点是算术估计。模 $1$ 时，由平凡特征生成的循环群只含 $1$。因此 `Level.cyc` 保留的特征集为 $\{1\}$，去掉它后求和集为空，余项便化为 $G_m(x)=G_z(x)=U(x)$（`手工推导`）。[循环特征集](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ExplicitFormulaErrorOfHostConditions.lean#L105-L125) · [余项的定义](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/ExplicitFormulaErrorOfHostConditions.lean#L32-L38)
+
+  对 $1/2<\theta<1$，外部算术步骤在其切比雪夫型不等式和窗口假设下给出单侧界。对每个起点阈值 $R$，都存在 $Y\ge R$，使 $U(x)\le x^\theta$ 在整个 $[Y,Y^{3/2}]$ 上成立。Landau 判据由此推出 $\zeta$ 在 $\operatorname{Re}(s)>\theta$ 无零点。从 RH 出发的上界则覆盖每个充分大的 $Y$。[算术步骤](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean#L68-L81) · [窗口指数](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean#L8-L11) · [Landau 判据](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ZeroFreeOfRpowWindow.lean#L11-L14)
+
+::: {.theorem #thm-ch31-mangoldt-power-threshold title="完全曼戈尔特余项的临界幂指数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/RHPowerThreshold.u_div_rpow_tendsto_zero_iff"}
+假设黎曼猜想。对任意实数 $\theta$，沿实变量 $x\to+\infty$ 有
+
+$$
+\lim_{x\to+\infty}\frac{U(x)}{x^\theta}=0
+\quad\Longleftrightarrow\quad \theta>\frac12.
+$$
+:::
+
+::: proof
+写 $x=e^y$，则 $U(x)/x^\theta=G(y)e^{(1/2-\theta)y}$。当 $\theta>1/2$ 时，$G$ 在充分大的实数 $y$ 上有界，指数因子趋于零。反过来，设 $\theta\le1/2$。上面的常数 $M$ 严格为正。由 $G$ 的回归性，越过任何阈值都有自然数 $n$ 使 $G(n)>M/2$。此时 $e^{(1/2-\theta)n}\ge1$，所以在任意远的点 $x=e^n$ 商仍大于 $M/2$，包括 $\theta=1/2$。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-mangoldt-quartic-sampling title="第四次幂采样的黎曼猜想判据" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampling.rh_iff_eventually_quartic_samples"}
+黎曼猜想成立，当且仅当存在 $N\in\mathbb N$，使每个 $n\in\mathbb N$ 在 $n\ge N$ 时都满足 $U(n^4)<n^2$。
+:::
+
+::: proof
+在 RH 下，充分大的 $x$ 都满足 $\lvert U(x)\rvert<\sqrt{x}$，取 $x=n^4$ 即得所需的严格上界。
+
+反过来，设采样上界成立。取充分大的 $n\ge1$，令 $a=n^4$、$b=(n+1)^4$。每个曼戈尔特权重非负，乘以凸折线 $\max(x/j-1,0)$ 后仍是凸函数，因此折线之和在 $[a,b]$ 上不超过端点的弦。余项 $U$ 还含有 $-x\ln x$ 和线性项。把 $x\ln x$ 在 $a$ 的切线减去，留下非负函数，其在 $b$ 的值由 $\ln(b/a)\le b/a-1$ 控制在 $(b-a)^2/a$ 以内。于是对于 $a\le x\le b$，
+
+$$
+U(x)\le\max\{U(a),U(b)\}+\frac{(b-a)^2}{a}
+\le 4n^2+225n^2=229n^2.
+$$
+
+这里用了 $(n+1)^2\le4n^2$ 和 $b-a\le15n^3$。相邻采样区间覆盖整个尾部，且 $n^2\le\sqrt{x}$。将界代入积分显式公式的归一化算术核，取 $x=e^t$，平凡零点修正满足 $\operatorname{trivialT}(t)\le1-\ln2$。所以在充分大的 $t$ 上，$e^{-t/2}[U(e^t)-\ln(2\pi)+\operatorname{trivialT}(t)]\le229+e^{-t/2}\le230$。算术核的仿射上界判据遂给出 RH。完整证明由 Lean 内核检查。
+:::
+
+这个判据把独立的算术任务落在素数幂的计数上。对 $x\ge2$，切比雪夫误差核可积，其尾积分等于 $-U(x)/x$。在 $x=n^4$ 处，所需的采样假设因而等价于对每个充分大的自然数 $n$ 证明严格下界 $\int_{n^4}^{\infty}(\psi(t)-t)t^{-2}\,dt>-1/n^2$（`手工推导`）。 [`complete_chebyshev_tail_identity`](lean:D5/S3/Weil/Mertens/CompleteChebyshevTailIdentity.complete_chebyshev_tail_identity) · [`chebyshev_error_kernel_integrable`](lean:D5/S3/Weil/Mertens/WeightedPrimeLimit.chebyshev_error_kernel_integrable)
+
+**单调性本身对负部窗口给出什么限制？**
+
+::: {.theorem #thm-ch31-monotone-window-sharpness title="单调计数的二次深度与三次窗口质量" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MonotoneTailSharpness.monotone_tail_quadratic_depth_cubic_mass"}
+对每个实数 $0<s\le1/2$，存在单调不减的实函数 $A_s$，在 $t\ge1$ 时非负，在 $[2-s,2+s]$ 外等于 $t$，且 $(A_s(t)-t)/t^2$ 在实轴上可积。令 $Q_s(z)=\int_z^\infty (A_s(t)-t)t^{-2}\,dt$，则
+
+$$
+-Q_s(2)=\frac{s^2}{32},
+\qquad
+\int_1^3\frac{\max\{-Q_s(z),0\}}{\sqrt z}\,dz\le\frac{s^3}{16}.
+$$
+:::
+
+::: proof
+取 $0<s\le 1/2$。在 $2-s<t\le 2+s$ 令 $A_s(t)=t-t^2(t-2)/16$，其余地方令 $A_s(t)=t$。区间内的多项式在 $[3/2,5/2]$ 上单调递增。在左端代入多项式得到不小于 $2-s$ 的值，在右端得到不大于 $2+s$ 的值。因此接上两边的直线后，$A_s$ 在实轴上单调不减，在 $t\ge1$ 时非负。
+
+令 $Q_s(z)=\int_z^\infty(A_s(t)-t)t^{-2}\,dt$。被积函数在选定区间内为 $(2-t)/16$，其余地方为零。全区间的积分为零，所以 $Q_s$ 在闭区间外恒为零，区间内等于 $((z-2)^2-s^2)/32$。
+
+积分界来自长度 $2s$、最大负部 $s^2/32$ 和区间上的权重 $1/\sqrt z\le1$。 完整证明由 Lean 内核检查。
+:::
+
+令 $s\to0^+$，任何形如“深度不超过常数乘窗口质量的 $\alpha$ 次幂”的统一界，在 $\alpha>2/3$ 时都会被这一族违反。实际素数计数如果允许更强的估计，就需要使用超出单调性的信息。
+
+**模 $1$ 的 Mellin 变换怎样看见零点？** 令 $U$ 为 [@thm-ch34-riemann-prime-arc-bridge] 第 6 款的余项。对每个满足 $\operatorname{Re}(s)>1$ 的 $s\in\mathbb C$，$y\mapsto e^{-sy}U(e^y)$ 在 $(0,\infty)$ 上绝对可积，其 Laplace 积分可无条件求出。换元 $x=e^y$ 后，$e^{-sy}\,dy=x^{-s-1}\,dx$，便得到下式左端的 Mellin 积分。[完全余项的半平面变换](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtHalfPlane.u_laplace_half_plane)
+
+每个素数幂 $n$ 的权重 $\Lambda(n)$ 乘以折线 $\max(x/n-1,0)$，在 $x=n$ 处起步。折线的 Mellin 积分是 $n^{-s}/[s(s-1)]$。按 $\Lambda(n)$ 求和，分子成为对数导数 $-\zeta'(s)/\zeta(s)$。$U$ 中两个初等修正项的积分分别为 $-1/(s-1)^2$ 和 $(1+\gamma_{\mathrm{EM}})/(s-1)$。将三项通分，就得到外部模 $1$ 公式的写法
+
+$$
+\Phi(s)=\int_1^\infty U(x)x^{-s-1}\,dx
+=-\frac{\zeta'(s)/\zeta(s)+(s-1)^{-1}+1-(1+\gamma_{\mathrm{EM}})s}{s(s-1)}.
+$$
+
+上式右端给出积分的亚纯延拓。对 $\zeta$ 的每一个零点 $\rho$，包括负偶整数，记 $m$ 为该点的解析重数。写 $\zeta(s)=(s-\rho)^m h(s)$，其中 $h(\rho)\ne0$，便从对数导数中取出 $m/(s-\rho)$。显式函数 $\Phi$ 在 $\rho$ 的某个去心邻域满足
+
+$$
+\Phi(s)=\frac{c}{s-\rho}+H(s),\qquad c=\frac{m}{\rho(1-\rho)}\ne0,
+$$
+
+其中 $m\ge1$，$H$ 在 $\rho$ 处解析。因此无论重数多大，$\Phi$ 在该点都有一阶极点。对非平凡零点，$c$ 正是积分显式公式中同一零点按重数相加的系数。[零点的局部展开](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtLaurent.transform_integral_and_zero_germs) · [模 $1$ 的 Mellin 恒等式](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/mellinGchiModOne.lean#L115-L121) · [留数计算](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/poleData.lean#L63-L83)
+
+**单侧窗口上界为何能排除极点？** 固定 $1/2<\theta<1$。外部算术论证在群的大小、特征权重和误差的假设下，利用尺度约束 $m\le x^{1/2+\varepsilon/2}$ 得到特征和的估计 $G_{m,A}(x)\le x^{1/2+(C+3)\varepsilon}+\Sigma_A(x)$，其中 $\Sigma_A$ 是仍须控制的余项。再用 `gmA_eq` 将左端写成目标余项，用 `sigA_le` 控制 $\Sigma_A$。当 $x$ 充分大时，剩下的常数因子可吸收到 $x^\varepsilon$ 中，窗口上的切比雪夫型上界便是 $x^{1/2+(e_D+e_L+7)\varepsilon}$。损失指数 $e_D,e_L$ 先固定，随后选充分小的 $\varepsilon>0$ 使 $(e_D+e_L+7)\varepsilon\le\theta-1/2$。若满足该论证的窗口假设，便能对任意远的阈值找到 $Y$，使模 $1$ 的余项在整个 $[Y,Y^{3/2}]$ 上满足 $U(x)\le x^\theta$。[特征和估计的假设](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ChCore.lean#L343-L351) · [余项与常数的控制](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/PrimitiveCosets/CoreGm.lean#L55-L74) · [选取指数的次序](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean#L68-L81)
+
+在 $s=1$ 附近，把 $\zeta$ 的极点提出，写成 $h(s)=(s-1)\zeta(s)$，并补 $h(1)=1$。令 $B=h'/h$，于是 $B(1)=\gamma$。通分后，$\Phi(s)=(1+\gamma)/s-(B(s)-\gamma)/(s(s-1))$ 在 $1$ 的去心邻域成立。差商给出唯一的连续补值 $\Phi_*(1)=1+\gamma-B'(1)$。补值后的函数在每个 $s\ne0$ 且 $\zeta(s)\ne0$ 的点解析。 [变换在一处的解析延拓](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtAtOne.completed_disk_cauchy)
+
+换元 $u=\ln x$，令 $g(u)=U(e^u)$。对每个非负整数 $k$ 和每个 $\operatorname{Re}(z)>1$，$\Phi^{(k)}(z)$ 等于 $(-u)^k e^{-zu}g(u)$ 在正半轴上的绝对收敛积分。一次求导带出一个 $-u$，故 $D_k(z)=(-1)^k\Phi^{(k)}(z)/k!$ 的积分核是 $u^k e^{-zu}/k!$。固定实部 $\sigma>2$ 且 $k>0$ 时，核的模在 $u=k/\sigma$ 取得最大值，可以调节 $k$ 来控制窗口外的积分。设 $a=\ln Y$。在窗口内，$g\le e^{\theta u}$ 给出 $\lvert g\rvert+g\le 2e^{\theta u}$。这解释了源证明为何同时保留实中心的导数项。存在固定的 $\sigma>2$ 和常数 $C$。对每个 $\eta>0$，可以选到任意远的窗口及相应的阶数 $k\ge a$，使所有实数 $t$ 都满足 $\lvert D_k(\sigma+it)\rvert+\operatorname{Re}D_k(\sigma)\le C e^{\eta a}/(\sigma-\theta)^k$。[导数积分](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/LandauCoeff.lean#L10-L18) · [窗口估计](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean#L40-L56) [完整变换的各阶导数](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtMoments.iterated_derivative_moment)
+
+::: {.theorem #thm-signed-mangoldt-window title="实轴导数与复导数给出指定符号的窗口上界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtSignedWindow.signed_window_moment_bound"}
+用在 $1$ 处解析补值的 $\Phi_*$ 定义 $D_k(s)=(-1)^k\Phi_*^{(k)}(s)/k!$。给定非负整数 $k$ 和复数 $p$，设 $\sigma=\operatorname{Re}(p)>1$、$K_k(u)=u^ke^{-\sigma u}/k!$。对任意 $0<a\le b$、$\alpha<\sigma$ 和 $e\in\{-1,1\}$，
+
+$$
+|D_k(p)|+e\operatorname{Re}D_k(\sigma)
+\le \frac{2}{(\sigma-\alpha)^k}\int_a^b\max\{eg(u),0\}e^{-\alpha u}\,du
++2\int_{(0,\infty)\setminus[a,b]}|g(u)|K_k(u)\,du.
+$$
+:::
+
+::: proof
+在复点取模给出 $\int |g|K_k$ 的上界项。在实点保留符号项 $e\int gK_k$，将两项合并成 $2\int\max\{eg,0\}K_k$。窗内由指数级数得到 $K_k(u)\le(\sigma-\alpha)^{-k}e^{-\alpha u}$，窗外用 $|g|$ 控制。 完整证明由 Lean 内核检查。
+:::
+
+$e=1$ 给出上面极点论证所需的正部估计，$e=-1$ 时可用同一个核控制负部。窗外项仍需独立的衰减估计。
+
+若有极点在 $\operatorname{Re}(s)>\theta$，源证明选取中心 $z=\sigma+it$ 及其最近极点 $\rho$，使 $d=|z-\rho|<r\le\sigma-\theta$，半径 $r$ 内只有这一个极点。它给 $D_k(z)$ 贡献 $c/(z-\rho)^{k+1}$。取内圈半径 $r'=(d+r)/2$，减去极点项后的解析函数在这条圆周上有界，因此 Cauchy 估计给出误差 $O((r')^{-k})$。在选取非实中心的情形，以 $\sigma$ 为中心、半径 $r'$ 的闭圆盘内无极点，Cauchy 估计给出 $\operatorname{Re}D_k(\sigma)\ge-M'(r')^{-k}$，其中 $M'$ 与 $k$ 无关。若隔离出实极点，则取 $z=\sigma$。其留数 $c>0$，故 $\operatorname{Re}D_k(\sigma)$ 的主项为 $c/d^{k+1}>0$，出现在窗口所控制的 $\lvert D_k(\sigma)\rvert+\operatorname{Re}D_k(\sigma)$ 中。将窗口上界与之比较，再乘以 $d^k$，极点项留下常数 $|c|/d>0$，解析误差为 $O((d/r')^k)$。取 $\eta>0$ 足够小，使 $e^\eta d/(\sigma-\theta)<1$，则窗口项也随 $k\ge a\to\infty$ 趋于零，矛盾。 [极点与 Cauchy 估计](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean#L83-L166) 对于 $\zeta$ 的零点，这个误差估计也可直接应用于 $\Phi_*$。设以 $p\ne\rho$ 为中心、半径 $r'>0$ 的闭圆盘避开 $0$，盘中的每个 $\zeta$ 零点都等于 $\rho$。则存在与 $k$ 无关的 $B\ge0$，满足 $|D_k(p)-c/(p-\rho)^{k+1}|\le B/(r')^k$，这里 $D_k$ 由补值后的变换定义。即使圆盘经过 $1$，减去极点主部后的函数仍在盘上解析。 [完整变换的圆盘估计](lean:D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtAtOne.completed_disk_cauchy)
+
+外部仓库的完整路线还用 $\theta$ 提升构造伽罗瓦表示，并用 Artin 互反律确定局部 Langlands 参数中所用的 Artin 映射，最终从全体狄利克雷特征的无零点结论推出 RH。[$\theta$ 提升](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/RowSrc.lean#L1-L6) · [Artin 互反律](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/ArtEx.lean#L7-L15) · [外部仓库的最终声明](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean#L7-L14)
+
+**窗口内只需控制切比雪夫误差尾积分的负部。** 对 $x\ge2$，记 $Q(x)=\int_x^\infty(\psi(t)-t)t^{-2}\,dt=-U(x)/x$，$Q^-(x)=\max\{-Q(x),0\}$。以下等价条件的逆向推导用到外部 Landau 判据（`手工推导`）。令
+
+$$
+A(Y)=\int_Y^{Y^{3/2}}\frac{Q^-(x)}{\sqrt{x}}\,dx .
+$$
+
+黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个 $Y_0\ge2$，都存在 $Y\ge Y_0$ 使 $A(Y)\le Y^\eta$。在 RH 下，先前的上界给出 $Q^-(x)\le x^{-1/2}$ 对所有充分大的 $x$ 成立，于是 $A(Y)\le\tfrac12\ln Y\le Y^\eta$ 对每个充分大的 $Y$ 成立。
+
+反过来，在 $u=\ln x$ 坐标写 $g(u)=U(e^u)$。外部窗口条件要求存在非负函数 $R\ge g$ 使 $\int R(u)e^{-\theta u}\,du$ 足够小。最小可取 $R(u)=\max\{g(u),0\}$，它在紧窗口上连续，因为 $U$ 在有界区间上是有限个连续折线与初等修正项之和。因 $U(x)=-xQ(x)$，换元后的最小积分就是 $I_\theta(Y)=\int_Y^{Y^{3/2}} Q^-(x)x^{-\theta}\,dx$。在 $\theta=1/2$ 处它等于 $A(Y)$。应用外部模 $1$ 特征族的极点数据和窗口判据 $\delta=1/2$，所有实部为正的 $\zeta$ 零点均满足 $\operatorname{Re}(\rho)\le1/2$。零点关于临界线的对称性遂给出 RH。 [窗口假设](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauZeroFreeCriterion.lean#L25-L29) · [模一族所用的极点数据](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/poleData.lean#L248-L261) · [Landau 判据](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean#L83-L90)
+
+临界窗口的导数上界还可以写出常数（`手工推导`）。取 $a=\ln Y\ge1$、$\sigma=512$、$k=\lfloor640a\rfloor$，这时 $k\ge a$。从 $\Lambda(n)/n\le1$ 和 $x\ln x\le x^2$（$x\ge1$）可在 $U$ 的有限和中逐项估计，得 $|g(u)|\le M e^{2u}$，可取 $M=2+|1+\gamma|$。对每个实数 $t$，三角不等式把 $|D_k(512+it)|+\operatorname{Re}D_k(512)$ 控制为 $\max(g,0)$ 对实核积分的两倍。窗口内 $u^k e^{-(512-1/2)u}/k!\le(512-1/2)^{-k}$。窗口外，对 $|g|$ 使用带显式常数的 Gamma 积分估计。两部分相加得到
+
+$$
+|D_k(512+it)|+\operatorname{Re}D_k(512)
+\le \frac{2A(Y)}{(512-1/2)^k}
+ +\frac{2M}{512^k}\left(\frac{1}{542}+\frac{1}{478}\right).
+$$
+
+左尾和右尾分别贡献 $1/542$ 与 $1/478$。这一步给出了窗口外的误差。右端的 $A(Y)$ 正是上文留给素数分布的量。 [Gamma 核的双尾积分估计](lean:D5/S3/Analytic/Laplace/CriticalGammaWindow.critical_window_off_mass)
+
+当 $1/2<\theta<1$ 时，同一窗口上有 $I_\theta(Y)\le Y^{1/2-\theta}A(Y)$。反过来，$A(Y)\le Y^{(3/2)(\theta-1/2)}I_\theta(Y)$，所以若每个这样的 $\theta$ 和每个 $\eta'>0$ 都有任意远的窗口满足 $I_\theta(Y)\le Y^{\eta'}$，取 $(3/2)(\theta-1/2)+\eta'\le\eta$ 就得到临界条件。
+
+还可以只数素数。记 $\vartheta(t)=\sum_{p\le t}\ln p$，用它替换 $\psi$ 来定义 $Q_\vartheta$ 和 $A_\vartheta$。素数幂给尾积分带来的修正满足 $\sqrt{x}(Q(x)-Q_\vartheta(x))\to2$。取一个常数 $C$ 使 $\psi(t)-\vartheta(t)\le C\sqrt{t}$ 对所有 $t\ge1$ 成立，这样的 $C$ 无条件存在。负部随尾积分递减，窗口定理给出 $0\le A_\vartheta(Y)-A(Y)\le 2C\ln(Y^{3/2}/Y)=C\ln Y$。于是临界条件也可写成对每个 $\eta>0$ 都有任意远的窗口满足 $A_\vartheta(Y)\le Y^\eta$。从 $A$ 的条件取指数 $\eta/2$，再用 $Y^{\eta/2}+C\ln Y\le Y^\eta$ 对充分大的 $Y$ 成立即可。独立的算术任务是从素数分布证明这个负部积分界。 [素数幂修正的窗口估计](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.prime_power_window_correction)
+
+外部算术窗口若已给出 $U(x)\le x^{1/2+\varepsilon}$，可以直接把它传给只计素数的条件（`手工推导`）。在同一个 $[Y,Y^{3/2}]$ 上，$Q^-(x)/\sqrt{x}=\max(U(x),0)/x^{3/2}\le x^{\varepsilon-1}$，故 $A(Y)\le \tfrac12 Y^{3\varepsilon/2}\ln Y$。再加素数幂修正 $C\ln Y$。给定 $\eta>0$，取 $\varepsilon=\min(\eta/3,1/4)$，则和式在充分大的此类窗口上至多为 $Y^\eta$。这里用的算术输入是在任意远处都有一整个窗口满足点态界。
+
+Levent Alpöge 提出的证明在模 $1$ 使用外部算术输入构造这族整窗。在该路线中，外库用 $\theta$ 提升、伽罗瓦表示、余体积界与局部匹配构造 `HypsAlt`，再取得 `TopG`。取 $\lambda=3/2$，构造中固定的损失为 $e_D=2,e_L=0$。每个充分小的 $\varepsilon>0$ 都在同一族中给出任意远的整窗、统一误差界和 `ChainTied` 条件。提高起点下限后，模 $1$ 的算术估计在整窗上给出 $U(x)\le x^{1/2+9\varepsilon}$。这一步发生在应用无零点判据之前。取 $9\varepsilon\le\min(\eta/3,1/4)$，上段的积分便在这族窗口上给出 $A_\vartheta(Y)\le Y^\eta$（`手工推导`）。据此得到的窗口存在性以外库的这些算术输入为前提。[外库对证明的说明](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/README.md#L1-L5) · [构造 HypsAlt 的算术输入](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean#L44-L68) · [从 HypsAlt 到 TopG](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean#L12-L15) · [损失参数](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopShape.lean#L48-L54) · [同一族的三个条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/ZeroFreeAllOfTopG.lean#L19-L33) · [窗内的算术估计](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/PrimitiveCosets/LevelGmLeOnFamilyScales.lean#L28-L30)
+
+**怎样让同一个判别式在几个素数处都分裂？** 对奇素数 $p$，记 $J(-d,p)=\bigl(\frac{-d}{p}\bigr)$。值为 $1$ 的意思是 $t^2\equiv-d\pmod p$ 有非零解。取 $B=3$，要检查的小奇素数只有 $3$。素数 $d=23$ 满足 $d\equiv7\pmod{16}$ 及 $-23\equiv1\pmod3$。再取素数 $q=59\equiv3\pmod8$，有 $-23\equiv36=6^2\pmod{59}$。这一对满足所需的两个分裂条件。下面的构造用特定剩余类一次保证所有有限条件，这些剩余类只占可用素数的一部分。
+
+::: {.theorem #thm-ch31-split-prime-host-series title="满足局部分裂条件的辅助素数的加权级数" lean="D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series"}
+给定自然数 $B$，令 $D_B$ 为所有满足 $d\equiv7\pmod{16}$ 且对每个奇素数 $p\le B$ 有 $J(-d,p)=1$ 的素数 $d$ 所成的集合。对 $d\in D_B$，令 $Q_d$ 为所有满足 $q\equiv3\pmod8$ 且 $J(-d,q)=1$ 的素数 $q$ 所成的集合。则
+
+$$
+\begin{aligned}
+\lim_{X\to\infty}\sum_{\substack{d\in D_B\\d<X}}\frac{\ln d}{d}&=+\infty,\\
+\lim_{X\to\infty}\sum_{\substack{q\in Q_d\\q<X}}\frac{\ln q}{q}&=+\infty\quad(d\in D_B).
+\end{aligned}
+$$
+
+这里 $X$ 取自然数。对每个自然数 $N$，存在 $d\in D_B$ 使 $d>N$。对每个 $d\in D_B$ 和每个自然数 $Q$，存在 $q\in Q_d$ 使 $q>Q$。反过来，若先给素数 $q\equiv3\pmod8$，令 $S_{B,q}=\{d\in D_B:q\in Q_d\}$，则 $\sum_{d\in S_{B,q},\,d<X}(\ln d)/d\to+\infty$，且对每个自然数 $N$ 都有 $d\in S_{B,q}$ 满足 $d>N$。
+:::
+
+::: proof
+先选 $d$。在参考库的构造中，令 $P=\prod_{i=0}^{B-1}(2i+1)$，空积取 $1$。$P$ 是奇数，每个奇素数 $p\le B$ 都是其中一项。剩余类 $8P-1\pmod{16P}$ 与模数互素。其中的素数 $d$ 满足 $d\equiv7\pmod{16}$，并且对每个这样的 $p$ 都有 $-d\equiv1\pmod p$。固定这个 $d$ 后，再在与模数互素的类 $1+6d\pmod{8d}$ 中选素数 $q$。于是 $q\equiv3\pmod8$，且 $q\equiv1\pmod d$。由于 $d,q$ 都模 $4$ 余 $3$，二次互反律的负号与 $\bigl(\frac{-1}{q}\bigr)=-1$ 抵消，给出 $J(-d,q)=\bigl(\frac{q}{d}\bigr)=1$。本库证明取小奇素数本身的乘积，用中国剩余定理合并同余条件。在每个既约剩余类中，素数的 $\ln p/p$ 之和发散。把这些非负项分别计入 $D_B$ 和 $Q_d$ 即得两式。完整证明由 Lean 内核检查。
+:::
+
+若先指定一个满足 $q\equiv3\pmod8$ 的素数，则把小素数的截点提高到 $\max(B,q)$。此时 $q$ 自己就是必须分裂的小奇素数之一，所以在 $D_{\max(B,q)}$ 中任取 $d$，都有 $d\in D_B$ 且 $J(-d,q)=1$。删去任意有限前缀仍保留发散性，两种选取顺序都允许最后选定的素数超过任给下限。外库的初等构造先选 $d$、再选 $q$，陈述的是超过给定下限的素数存在性。上面的加权发散刻画了两次选择各自有多少素数可用。[外库的两次素数选择](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/PrimeDiscriminants/ExistsHost.lean#L39-L97)
+
+整窗估计还要在给定尺度上同时选好这一对素数。外库的定量命题在其解析假设下，固定 $0<\varepsilon<1/52$ 后，先给出 $x_0$ 和一个常数 $C>0$，再对每个实数 $x\ge x_0$ 先选 $q$ 再为它选 $d$，使同一对素数满足 $\sqrt{X_1}<q\le X_1$、$\sqrt{X_2}<d\le X_2$，其中 $X_1,X_2$ 由 $x,\varepsilon$ 决定。`QDq` 以同一常数 $C$ 控制三个二次特征标在尺度 $x$ 的估计（对应 $q$、$d$ 及两者的乘积），`Boxq` 对特征标及其扭曲给出六个无零点区域条件。对所有整数 $1\le n\le2x^{2+8\varepsilon}$，同一对素数还须满足 `Rowq` 的分裂及 $\ln(4nqd)$ 上界。这些条件对每个 $x$ 选一对素数。令 $t=\varepsilon/5$，由 $X_1=\exp(x^t)$ 得 $x^t/2<\ln q\le x^t$。若 $Y$ 和 $Y^b$ 两端沿用同一个 $q$，就有 $Y^{bt}/2<\ln q\le Y^t$，从而 $Y^{(b-1)t}<2$。固定 $b>1$ 后，要在充分远窗口的两个端点都满足 `Rowq` 的大小限制，必须换用不同的 $q$（`手工推导`）。从逐尺度选择到上文的整窗误差界，还需外库的特征标估计及算术构造。[先选 $q$ 再选 $d$ 的定量构造](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBounds.lean) · [定量选取的假设与量词](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBoundsStatement.lean#L17) · [特征标与范围条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/InertJacobiLevels/AsmIface.lean#L166-L185)
+
+**怎样在整个窗口内沿用同一对辅助素数？** 固定素数 $q\equiv3\pmod8$，记 $L=\ln q>1$，固定实数 $b>1$。给定窗口起点 $Y\ge e^5$，取在窗内固定的损失 $\varepsilon>0$。对每个实数 $x\in[Y,Y^b]$ 记 $u=x^{\varepsilon/5}$。外库的 `Rowq` 在给定 $x,n$ 处对 $q,d$ 施加条件。下面要求一个素数 $d\equiv7\pmod{16}$ 在整窗上满足
+
+$$
+u/2<L\le u,\qquad u(\ln x)^2/2<\ln d\le u(\ln x)^2 .
+$$
+
+还要求 $(-d/q)=1$，每个奇素数 $p\le u$ 都有 $(-d/p)=1$，在 $2$ 处有 $-d\equiv1\pmod8$。当 $1\le n\le2x^{2+8\varepsilon}$ 为整数时，还要验证 $\ln(4nqd)\le2u(\ln x)^2$。[外库的逐点算术条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/InertJacobiLevels/AsmIface.lean#L179-L185)
+
+::: {.theorem #thm-ch31-fixed-prime-row-width title="整窗沿用同一对辅助素数的宽度" lean="D5/S3/CharacterSums/MovingPrimeRowWidth.prime_pair_power_window_iff"}
+固定上述 $q,b$。以下两条等价。
+
+1. 对任意实数 $R$ 和任意 $\eta>0$，存在 $Y\ge\max(R,e^5)$、损失 $0<\varepsilon<\min(\eta,1/52)$ 及素数 $d$，使上述条件对每个实数 $x\in[Y,Y^b]$ 成立。
+2. 窗宽满足 $b^2L^{b-1}<2$。
+:::
+
+::: proof
+先看两端。令 $u_0=Y^{\varepsilon/5}$，于是 $L\le u_0$，右端的 $u$ 为 $u_0^b$。把右端的严格下界和左端的上界合起来，有 $b^2u_0^b(\ln Y)^2/2<\ln d\le u_0(\ln Y)^2$，故 $b^2L^{b-1}<2$。等号处，右端所需的严格下界已经达到左端容许的最大值。
+
+反过来，取 $B=\lceil L^b\rceil$，先固定 $q$，可选到任意大的 $d$，使 $q$ 和所有奇素数 $p\le B$ 均分裂。[先固定 $q$ 的素数供给](lean:D5/S3/CharacterSums/SplitPrimeHostSeries.split_prime_host_series)
+
+置 $a=\sqrt{\ln d/L}$、$Y=e^a$、$\varepsilon=5\ln L/a$。增大 $d$ 同时使 $Y$ 趋于无穷、$\varepsilon$ 趋于零。把整窗上的 $x$ 写成 $e^{sa}$，其中 $1\le s\le b$。于是
+
+$$
+u=L^s,\qquad \frac{u(\ln x)^2}{\ln d}=s^2L^{s-1}\in[1,b^2L^{b-1}].
+$$
+
+这给出 $d$ 的两个尺寸界，且 $u\le L^b<2L$ 给出 $q$ 的严格下界。由于 $u\ge L$，另一个界 $L\le u$ 也成立。最后令 $t=\ln x\ge5$。对给定范围的 $n$，由 $L\le u$、$\ln 8<4$、$2+8\varepsilon<3$ 得 $\ln(4nq)\le4+3t+u\le ut^2$。最后一个不等式利用 $u\ge1$ 和 $t^2-1\ge4+3t$。再加上 $\ln d\le ut^2$ 即得导子估计。完整证明由 Lean 内核检查。
+:::
+
+取素数 $q=60083\equiv3\pmod8$ 和 $b=9/8$。因 $11<L<12$ 且 $12<(3/2)^8$，有 $b^2L^{b-1}<(81/64)(3/2)=243/128<2$。这给出一族整窗，在每一点都有 $u\ge L>11$。
+
+外库选取 $q$ 的解析证明还在起点要求 $(\ln Y)^2\ln(8)/4\le Y^{\varepsilon/5}$。这里的构造有 $Y^{\varepsilon/5}=L$，而左端随 $Y$ 趋于无穷。若要求满足这个解析门槛，窗口两端的 $u$ 之比 $(Y^{\varepsilon/5})^{b-1}$ 至少为 $((\ln Y)^2\ln(8)/4)^{b-1}$。对任意自然数 $k$，后者最终超过 $2^k$。沿窗取 $u$ 依次加倍的 $k+1$ 个点，相应的半开区间 $(u/2,u]$ 两两不交。因此覆盖整窗至少需要 $k+1$ 个不同的 $q$，即使 $\varepsilon$ 可按窗选取。外库使用其解析输入，先固定 $0<\varepsilon<1/52$ 并取得门槛 $x_0$ 和常数 $C$，对每个 $x\ge x_0$ 选择 $q,d$，再使这对素数适用于给定范围的所有 $n$。 [外库筛选的尺度条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean#L83-L92) · [外库逐点选对的定理](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimePairBoxBoundsStatement.lean#L17) · [该条件的两次调用](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean#L131-L156)
+
+这里 $\varepsilon$ 随所选窗口而变。要从这些窗口取得余项 $U$ 的点态界，仍须在同一对 $q,d$ 上证明外库的 `QDq` 与 `Boxq` 特征标估计，并控制比较门槛对 $\varepsilon$ 的依赖。[外库的特征标估计与逐点算术条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/InertJacobiLevels/AsmIface.lean#L166-L192)
+
+对任一固定的实数 $b>1$，记
+
+$$
+A_{\vartheta,b}(Y)=\int_Y^{Y^b}\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx,\qquad Y\ge2.
+$$
+
+上文的 $A_\vartheta$ 即 $A_{\vartheta,3/2}$。
+
+::: {.theorem #thm-ch31-prime-window-mean title="RH 下窗口质量的对数主项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/RHPrimeWindowMean.prime_tail_logarithmic_mass_of_rh"}
+假设黎曼猜想成立。存在一个常数 $C\ge0$，对所有实数端点 $B\ge A\ge2$ 同时有
+
+$$
+\left|\int_A^B\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx-2\ln(B/A)\right|\le C.
+$$
+:::
+
+::: proof
+在素数幂层中，$\psi(x)-\vartheta(x)$ 与 $\psi(\sqrt{x})$ 的差由较高幂控制。对 $\sqrt{x}$ 应用 Schoenfeld 界，再积分得 $\sqrt{x}(Q(x)-Q_\vartheta(x))=2+O(x^{-1/12})$。取 $y=\ln x$ 后，这个误差在正向尾部绝对可积。归一化的完全余项由零点级数和一个指数衰减项组成。在 RH 下，零点级数的总系数绝对可和，其模小于 $2$，每个频率的绝对值大于 $10$。对每一项积分，将系数除以对应的频率，故零点级数在任意区间上的积分有同一个界。归一化素数尾项的负部 $\max\{-\sqrt{x}Q_\vartheta(x),0\}$ 可用 $2$ 加上零点级数的实部近似，因为该近似非负，且取正部保留可积误差的界。在有限的起始区间上用连续性控制误差。这样，$2$ 的积分给出对数主项，其余贡献对两端点一致有界。 完整证明由 Lean 内核检查。
+:::
+
+特别地，$A_{\vartheta,b}(Y)=2(b-1)\ln Y+O(1)$。同一个常数也适用于变动的 $b>1$。Zhao 的式 (14) 把这里的 $Q_\vartheta$ 写成第一 Mertens 误差的累积积分及端点项。这里的主项来自对该尾项作一次带权窗口积分，并以 RH 为前提。[Zhao，式 (14)](https://arxiv.org/html/2411.18903v2#S2.E14)
+
+::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
+固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
+:::
+
+::: proof
+在 RH 下，$|U(x)|/\sqrt{x}$ 对充分大的 $x$ 有界。将这个界与素数幂修正在 $[Y,Y^b]$ 上积分，得到 $A_{\vartheta,b}(Y)\le C_b\ln Y$，故每个充分大的 $Y$ 都满足所需的幂次上界。
+
+反过来，设 $\zeta(\rho)=0$，$\beta=\operatorname{Re}\rho>1/2$。对每个 $\varepsilon>0$，所有充分大的 $Y$ 都满足 $A_{\vartheta,b}(Y)\ge Y^{b(\beta-1/2)-\varepsilon}$。固定 $1<h<b$ 及小量 $0<\delta<\beta-1/2$，再选 $\sigma$ 足够大，使两侧 Gamma 尾的衰减率均为正。半径相同的两个圆盘把极点贡献与误差分开。复中心 $p$ 到所隔离极点的距离 $d<\sigma-\beta+\delta$，其中 $\sigma=\operatorname{Re}p$。这个极点可以对应另一个零点。实中心的无零点圆盘给出 Cauchy 误差界。取导数阶数 $k=\lfloor\sigma h\ln Y\rfloor$，Gamma 核的峰便在 $h\ln Y$ 附近。用 $d^k$ 归一化后，窗外贡献为 $O((d/\sigma)^k)$，随 $k$ 增大而消失。窗内留下的增长率满足 $h\sigma\ln((\sigma-1/2)/d)>h(\beta-1/2-\delta)$。取 $h$ 足够接近 $b$、$\delta$ 足够小，指数损失便小于 $\varepsilon$。[偏线零点迫使窗口积分增长](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.off_line_zero_forces_window_mass)
+
+取 $\varepsilon=\eta=b(\beta-1/2)/3$，下界就成为 $Y^{2\eta}$，与任意远处仍有 $A_{\vartheta,b}(Y)\le Y^\eta$ 矛盾。因此临界线右侧无零点，再用非平凡零点关于临界线的对称性即得 RH。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-wide-prime-window title="宽窗口质量的下界与 RH 失败时的一致发散" lean="D5/S3/Weil/Mertens/IntegratedExplicit/WidePrimeWindowMass.prime_tail_wide_window_mass"}
+对于实际素数尾项，记实端点 $2\le A\le B$ 的窗口质量为
+
+$$
+N(A,B)=\int_A^B \frac{\max\{-Q_\vartheta(x),0\}}{\sqrt x}\,dx .
+$$
+
+固定 $b>1$。在 $2\le A$、$A^b\le B$ 的范围内，存在一个只依赖于 $b$ 的常数 $C_b\ge0$，使 $N(A,B)\ge 2\ln(B/A)-C_b$。如果 RH 不成立，对每个实数 $K$，存在一个右端点阈值 $S$，对所有 $B\ge S$ 及所有满足上述条件的 $A$，都有 $N(A,B)-2\ln(B/A)\ge K$。
+:::
+
+::: proof
+为看出阈值为何与 $A$ 无关，从右端点取 $Y=B^{1/b}$。条件 $A^b\le B$ 保证 $[Y,B]=[Y,Y^b]\subseteq[A,B]$，同一非负被积函数使大窗的质量至少等于子窗的质量。RH 若失败，对称性给出实部 $\beta>1/2$ 的零点。固定幂窗口的下界允许任意正的指数损失，所以可取损失 $b(\beta-1/2)/2$，对所有充分大的 $B$ 及所有允许的 $A$ 给出 $N(A,B)\ge B^{(\beta-1/2)/2}$。当 $B$ 增大时，此幂超过 $2\ln B$ 加任意固定常数。用 $2\ln(B/A)\le2\ln B$ 即得一致发散。在阈值以下，对数项有界且质量非负，故可补齐下界。RH 成立时，所有 $2\le A\le B$ 上的有界余项直接给出所需下界。 完整证明由 Lean 内核检查。
+:::
+
+这里需要预先固定 $b>1$。在对数坐标下，$B\ge A^b$ 仍要求随尺度增大而加宽窗口。对于固定比率 $B/A$ 的窗口，当前推导的子窗包含关系未提供相同结论。
+
+**在哪些尺度上能选到特征标和小的素数？** 固定 $\varepsilon>0$。对整数 $k\ge1$，把素数的上界定为 $X_k=2^k$，再选 $x_k=(k\ln2)^{5/\varepsilon}$，于是 $\exp(x_k^{\varepsilon/5})=X_k$。这一块只用 $X_k/2\le q<X_k$ 中模 $8$ 余 $3$ 的素数。第 $k$ 块与第 $k+1$ 块互不相交。对足够大的 $k$，块的下端已超过 $\sqrt{X_k}$，所以它整个落在外库为 $q$ 指定的大小范围内。
+
+为计算二次矩，对块内每个正奇整数 $q$ 都用 Jacobi 符号定义这个和。取 $N_k=\lfloor x_k^{400}\rfloor$，记
+
+$$
+T_k(q)=\sum_{n=1}^{N_k}\Lambda(n)\min\{1,x_k/n\}\left(\frac{n}{q}\right).
+$$
+
+其中 $p$ 为素数，整数 $j\ge1$ 时 $\Lambda(p^j)=\ln p$，其余正整数的权重为零。小于等于 $x_k$ 的项保留原权重，较大的项乘以 $x_k/n$。仅对块内模 $8$ 余 $3$ 的素数 $q$ 计权。若 $|T_k(q)|\le x_k^{1/2+\varepsilon}/2$，把 $(\ln q)/q$ 计入 $G_k$，否则计入 $B_k$。等号属于 $G_k$。
+
+::: {.theorem #thm-ch31-dyadic-mangoldt-prime-supply title="二进尺度上截断 Mangoldt 和的好素数" lean="D5/S3/CharacterSums/DyadicMangoldtPrimeSupply.dyadic_quadratic_mangoldt_supply"}
+对每个固定的实数 $\varepsilon>0$，坏素数的总权重有限，而好素数的部分和趋于正无穷：
+
+$$
+\begin{aligned}
+\sum_{k=1}^{\infty} B_k&<\infty,\\
+\lim_{K\to\infty}\sum_{k=1}^K G_k&=+\infty.
+\end{aligned}
+$$
+:::
+
+::: proof
+为估计坏素数，先把 $|T_k|^2$ 在块内所有模 $8$ 余 $3$ 的整数上求和。这些非负项包含了所需的素数项。高次素数幂的截断权重总量为 $O(\sqrt{x_k})$。对不同奇素数的交叉项，二次互反律把分母的变化转成一个周期和，完整周期相消，只剩两端的余项。对固定 $\varepsilon$，充分大块的二次矩至多为 $(X_k/2)x_k^{1+\varepsilon}$。每个坏素数的平方贡献都超过 $x_k^{1+2\varepsilon}/4$。再用块内 $(\ln q)/q\le 2\ln(X_k)/X_k$，并代入 $x_k^\varepsilon=(k\ln 2)^5$，得到对所有充分大的 $k$ 有 $B_k\le 4/(k\ln 2)^4$，故坏素数的总权重有限。另一方面，模 $8$ 余 $3$ 的素数上 $(\ln q)/q$ 的总和发散。把它按这些不相交的块相加，再扣除有限的坏权重，就得到好权重的发散。完整证明由 Lean 内核检查。
+:::
+
+因此每个起始块 $K_0$ 之后，都有某个 $k\ge K_0$ 和该块的一个素数 $q$ 达到上述界。发散允许部分块内没有好素数。这里估计的是外库在第一次选 $q$ 时使用的有限和，对应附加扭曲 $\kappa=1$。在外库规定的解析、大小与无零点条件下，对应特征标的平滑中心化和 $g_\chi(x_k)$ 满足 $|g_\chi(x_k)+T_k(q)|\le x_k^\varepsilon$，近似项的符号为负。第一次选 $q$ 时还须同时满足两个无零点条件。随后选 $d$ 时的扭曲和模数随 $q,x$ 变化，相应的对数导数估计与无零点盒条件仍需分别论证。[参考库的有限和](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/SmoothedRemainderRealIntegralFormula.lean#L139-L147) · [平滑和的近似](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/GChiApproximationSumStatement.lean#L14) · [第一次选素数的条件](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/ExistsPrimeThreeModEightGood.lean)
+
+**如果先指定实高度，仍然能选出素数吗？** 现在先给定实数 $x$，令 $T=x^{\varepsilon/5}$。把前面的截断和写成 $T_x(q)$，即在同一个 $x$ 上取权重 $\Lambda(n)\min\{1,x/n\}$，乘上雅可比符号 $(n/q)$，一直加到 $\lfloor x^{400}\rfloor$。选素数的区间随 $x$ 移动。为给随后要避开的整数留出余地，再给定一个有限集 $E\subset\mathbb N$。记 $S_x(E)$ 为满足下列条件的素数之集：
+
+$$
+e^{T/2}<q\le e^T,\qquad q\equiv3\pmod8,\qquad
+q\notin E,\qquad |T_x(q)|\le \tfrac12 x^{1/2+\varepsilon}.
+$$
+
+::: {.theorem #thm-ch31-real-scale-mangoldt-prime-supply title="每个充分大实高度的好素数权重" lean="D5/S3/CharacterSums/DyadicMangoldtPrimeSupply.real_scale_quadratic_mangoldt_supply"}
+对每个固定的 $\varepsilon>0$，存在 $x_0(\varepsilon)$，使得对每个实数 $x\ge x_0(\varepsilon)$ 和每个满足 $|E|\le e^{T/3}$ 的有限集 $E\subset\mathbb N$，都有
+
+$$
+\sum_{q\in S_x(E)}\frac{\ln q}{q}\ \ge\ \frac{T}{173065984000}.
+$$
+
+:::
+
+::: proof
+令 $D=86532992000$。在上述区间内，所有模 $8$ 余 $3$ 的素数的总权重最终至少为 $T/D$。按二进块估计二次矩，在每块中都保持同一个实高度 $x$ 和截点 $\lfloor x^{400}\rfloor$。超过阈值的素数的总权重最终至多为 $36T^2/x^\varepsilon$，除以 $T$ 后趋于零。上述区间内每个素数的权重至多为 $Te^{-T/2}$，删去至多 $e^{T/3}$ 项所损失的权重至多为 $Te^{-T/6}$。当 $x$ 充分大时，两项损失各不超过 $T/(4D)$，余下至少 $T/(2D)$。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 下界为正，故每个这样的 $x$ 都有合格素数；所选的 $q$ 可以随 $x$ 与 $E$ 改变。由每个素数的权重上界 $Te^{-T/2}$ 还可得 $|S_x(E)|\ge e^{T/2}/173065984000$。若能把违反参考库两个无零点条件中任一项的候选素数全部装入这样的 $E$，定理就会给出同时满足两项的素数。把这些素数装入规定大小的集合，还需要独立的估计。
+
+**第二枚素数落在移动的同余类里。** 先选 $q$ 后，选 $d$ 的模数 $m$ 可以随高度增大。要从区间 $(D/2,D]$ 中删去未通过测试的整数，需要先知道指定同余类里实际有多少素数。对固定 $m$ 的渐近式，其起算点可能依赖 $m$。这里需要对所有 $m$ 同时有效的起算条件。
+
+取整数 $m\ge3$ 及模 $m$ 的可逆剩余类 $a$。在分圆域 $\mathbb Q(\zeta_m)$ 中，记 $\sigma_a(\zeta_m)=\zeta_m^a$，$\Pi_a(t)$ 为不超过 $t$、在此扩张中非分歧且 Frobenius 为 $\sigma_a$ 的有理素数个数。令 $Q$ 为此 Galois 群所有特征标的原始导子的最大值。记 $\operatorname{Li}(t)=\int_2^t du/\log u$。
+
+::: {.theorem #thm-ch31-cyclotomic-tz title="带例外零点项的分圆素数计数" status="written-proof" proof="pf-ch31-cyclotomic-tz" doi="10.2140/ant.2019.13.1039" source="Theorems 1.4 and 3.3, pp. 1042 and 1052" request="https://github.com/the-omega-institute/trureturing-requests/issues/455"}
+存在绝对有效常数 $A,c_2,c_3,s>0$。这里的例外零点是某个实特征标对应的原始 Dirichlet $L$ 函数在 $0<\lambda<1/8$、$\beta=1-\lambda/\log Q$ 范围内的实零点。若无例外零点，取 $F(t)=\operatorname{Li}(t)$。若有，例外实特征标唯一，记为 $\chi$，其例外零点为 $\beta=1-\lambda/\log Q$，其中 $sQ^{-2}\le\lambda<1/8$。此时取 $F(t)=\operatorname{Li}(t)-\chi(a)\operatorname{Li}(t^\beta)$。对每个 $m,a$ 和每个 $t\ge Q^{c_2}$ 都有
+
+$$
+\left|\varphi(m)\Pi_a(t)-F(t)\right|
+\le A\left(e^{-c_3\log t/\log Q}+e^{-\sqrt{c_3\log t}}\right)F(t).
+$$
+
+:::
+
+::: {.proof #pf-ch31-cyclotomic-tz}
+在 Thorner 与 Zaman 的定理 1.4 中取 $L=\mathbb Q(\zeta_m)$，基域为 $\mathbb Q$，阿贝尔子群取 $H=G=(\mathbb Z/m\mathbb Z)^\times$，共轭类取 $\{\sigma_a\}$。于是固定域为 $\mathbb Q$，其判别式和次数均为 $1$。原文式 (1–11)、(3–1) 中的两个导子参数都化为这里的 $Q$，密度系数为 $1/\varphi(m)$。每个原始导子整除 $m$，而 $m\ge3$ 时群有非平凡特征标，其原始导子至少为 $3$，所以 $3\le Q\le m$。定理 1.4 给出所写相对误差和例外项，定理 3.3 给出 $\lambda\ge sQ^{-2}$。两者的常数均绝对有效。Jesse Thorner and Asif Zaman, “A unified and improved Chebotarev density theorem,” *Algebra & Number Theory* **13**(5) (2019), 1039–1068. [DOI](https://doi.org/10.2140/ant.2019.13.1039) · [原刊定理 1.4](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=5) · [原刊定理 3.3](https://msp.org/ant/2019/13-5/ant-v13-n5-p02-s.pdf#page=15)
+:::
+
+**手工推导。** 存在绝对有效常数 $c,K,D_0>0$，使每个 $m\ge3$、每个可逆类 $a$ 和每个 $D\ge\max\{D_0,(4m)^K\}$ 都满足下界
+
+$$
+\#\{Y<p\le2Y:p\text{ 为素数},\ p\equiv a\pmod m\}
+\ \ge\ c\,m^{-3}\frac{Y}{\log Y},\qquad Y=D/2.
+$$
+
+先取充分大的 $K\ge2$，再取充分大的 $D_0$。由 $\log Y/\log Q\ge K-1$ 和 $Y\ge D_0/2$，可使 $Y>m$、$Y\ge Q^{c_2}$，且定理在 $Y,2Y$ 处的相对误差均不超过 $1/100$。区间中的素数 $p>m$ 非分歧，其 Frobenius 把 $\zeta_m$ 送到 $\zeta_m^p$。故两端计数之差正是所求素数个数。
+
+若例外零点存在且 $\chi(a)=1$，置 $\delta=1-\beta$，$W=1-Y^{-\delta}$；其余情形置 $W=1$。在 $[Y,2Y]$ 上有 $F'(t)\ge W/\log(2Y)$，故 $F(2Y)-F(Y)\ge WY/(2\log Y)$。在发生抵消的情形，$\beta>1/2$，从 $t^\beta$ 到 $t$ 积分得 $0\le F(t)\le2t(1-t^{-\delta})/\log t$。又因 $1-(2Y)^{-\delta}\le1-Y^{-2\delta}\le2W$，两端之和至多为 $10WY/\log Y$。其余情形有 $0\le F(t)\le2\operatorname{Li}(t)\le6t/\log t$（$t$ 充分大），故各情形都满足 $F(Y)+F(2Y)\le18WY/\log Y$。减去两端误差后，$\varphi(m)(\Pi_a(2Y)-\Pi_a(Y))\ge WY/(4\log Y)$。
+
+在发生抵消的情形，$\delta\log Y\ge s/m^2$。由 $1-e^{-u}\ge(1-e^{-1})\min\{u,1\}$ 得 $W\ge (1-e^{-1})\min\{s,1\}m^{-2}$；$W=1$ 时也成立。再除以 $\varphi(m)\le m$ 即得下界。对选 $d$ 所用的 $y=x^{\varepsilon/5}$、$m\le e^{4y}$ 和 $D=e^{y(\log x)^2}$，有 $\log D/\log(4m)\ge y(\log x)^2/(\log4+4y)\to\infty$，因此同一门槛适用于每个充分大的 $x$。若该类里未通过任一测试的整数数目小于这个素数下界，就至少留下一枚同时通过两项测试的素数。[参考库中的计数假设](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AbelianVarietyTheory/Definitions/GlobalTwisting/GeneralHyps.lean#L113-L118)
+
+**窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
+
+$$
+Q_{\vartheta}(x)=\int_x^\infty\frac{\vartheta(t)-t}{t^2}\,dt,
+\qquad N(a,b)=\int_a^b\frac{\max\{-Q_{\vartheta}(z),0\}}{\sqrt z}\,dz.
+$$
+
+::: {.theorem #thm-ch31-prime-tail-negative-window title="内点负值给出的窗口积分下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.prime_tail_negative_window_lower"}
+设 $a,b,x,r$ 为实数，满足 $0<r\le 1/2$、$1\le a\le(1-r)x$ 和 $(1+r)x\le b$。若 $Q_{\vartheta}(x)\le-4r^2$，则 $N(a,b)\ge r^3\sqrt{x}$。
+:::
+
+::: proof
+这个估计适用于实数截点，包括素数处的跃迁。
+
+由 $\vartheta$ 的单调性，将局部积分中的 $\vartheta(t)$ 与 $\vartheta(x)$ 比较，得到
+$Q_{\vartheta}(z)-Q_{\vartheta}(x)\le\ln(z/x)+\vartheta(x)(1/z-1/x)$。
+当 $\vartheta(x)\le x$ 时取左侧，反之取右侧。在所选方向上，右端由 $\ln(z/x)+x/z-1$ 控制，而 $\ln t\le t-1$ 将它进一步控制在 $(z-x)^2/(zx)\le 2r^2$ 以内。于是长度为 $rx$ 的那一侧都有 $-Q_{\vartheta}(z)\ge 2r^2$，且 $\sqrt{z}\le2\sqrt{x}$。积分即得下界。 完整证明由 Lean 内核检查。
+
+:::
+
+因此，只要已知窗口预算严格小于 $r^3\sqrt{x}$，就可以排除该内点的深度 $4r^2$。两侧余量决定可用的 $r$。这个局部估计以窗口预算为前提。在上文列出的外库算术输入下，模 $1$ 构造给出任意远的小预算窗口。
+
+::: {.theorem #thm-ch31-prime-fixed-ratio-mass title="偏线零点给出的固定比例窗口质量下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeFixedRatioWindowMass.prime_tail_fixed_ratio_mass_of_zero"}
+设 $\rho$ 是非平凡零点，且 $\beta=\operatorname{Re}\rho>1/2$。存在实数 $\kappa>1$、$c>0$ 和 $S$，使每个 $B\ge S$、$A\ge2$ 且 $B\ge\kappa A$ 的实窗口都满足
+
+$$
+N(A,B)\ge cB^{\beta-1/2}.
+$$
+:::
+
+::: proof
+
+取 $\rho$ 与其共轭中虚部为正的一项。选实部在 $1/2$ 与 $\beta$ 之间的截线，以紧支撑的概率测度保留这对零点，并消去截线右侧的其余零点。令 $Q$ 为以 $\psi$ 定义的完全余项。在对数坐标 $t=\ln x$ 中，$-Q(e^t)$ 的平移平均以尺度 $e^{(\beta-1)t}$ 的余弦为主项。截线给出的严格指数差使误差最终小于余弦振幅的四分之一。
+
+取一段固定长度的子窗，使余弦至少为 $1/2$。交换对子窗和概率测度的积分后，每个平移后的子窗都落在由滤波支撑加宽后的同一大窗内。每个有符号积分都由大窗中 $-Q(e^t)$ 的正部积分控制。在大窗 $[T,T+W]$ 上，换元 $x=e^t$ 带来至少 $e^{T/2}$ 的权重，且 $Q_\vartheta\le Q$。于是素数尾积分的下界具有尺度 $e^{(\beta-1/2)T}$。取 $T=\ln B-W$ 和 $\kappa=e^W$，子窗就成为 $[B/\kappa,B]$，包含在每个允许的 $[A,B]$ 内。
+
+完整证明由 Lean 内核检查。
+:::
+
+比例、系数和阈值都可随给定零点改变。论证适用于任一符合前提的偏线零点，且所给幂指数没有损失。任意预先指定的 $\kappa>1$ 是否可用，需要进一步控制滤波支撑和振荡周期。
+
+::: {.theorem #thm-ch31-prime-prescribed-ratio-mass title="上确界未取到时的预定比例质量下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePrescribedRatioWindowMass.prime_tail_prescribed_ratio_mass_of_unattained"}
+记 $\Theta$ 为黎曼 ζ 函数非平凡零点实部的上确界，并设每个非平凡零点的实部都严格小于 $\Theta$。任取实数 $\kappa>1$ 与 $1/2<\sigma<\Theta$。存在常数 $c>0$ 和 $S$，使每对满足 $B\ge S$、$A\ge2$、$\kappa A\le B$ 的实端点都有
+
+$$
+N(A,B)\ge cB^{\sigma-1/2}.
+$$
+:::
+
+::: proof
+
+给定对数宽度 $W=\ln\kappa$，为概率滤波器预留 $W/2$ 的支撑宽度。上确界未取到时，可把任意有限高度范围内的零点留在一条低于 $\Theta$ 的截线左侧，再选择截线右侧的共轭零点对。所留零点的实部 $\beta$ 大于 $\sigma$，虚部足够大，使两个余弦周期与滤波器支撑合在一起仍能放入宽度 $W$。平滑后的余弦在一个固定长度的子区间内压过误差。交换概率平均与子区间积分，把下界传给原始尾项在同一窗口内的负部质量。
+
+经 $x=e^t$ 换元，并使用 $Q_\vartheta\le Q$，区间 $[\ln B-W,\ln B]$ 给出 $[B/\kappa,B]$ 上的下界，幂指数为 $\beta-1/2$。这个子窗包含于每个允许的 $[A,B]$，且对充分大的 $B$，相同常数也适用于较低的幂指数 $\sigma-1/2$。完整证明由 Lean 内核检查。
+:::
+
+比例和目标指数先给定，系数和阈值可依赖二者。该陈述的范围是 $\sigma<\Theta$ 且上确界未取到。
+
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 
   $$

@@ -1057,6 +1057,15 @@ For empty $H$, this probability is $1$ for $d=0$ and zero for $d=1$. Two nonempt
 
 In the example above with $C=(1\ \ 1)$, the basis bit is zero precisely when the free bit is $1$, which has probability $3/8$. The basis-bit coefficient is $2/3$, so $S_J=1/4$ and the improved bound $(3/32)(1+1/4)=15/128$ equals the actual decrease.
 
+**When two parity events are independent (written derivation).** Let $H$ and $K$ be the supports of events $E_a$ and $E_b$, with right-hand sides $d_a$ and $d_b$. Set $\epsilon_a=(-1)^{d_a}$ and $\epsilon_b=(-1)^{d_b}$, and write $M(S)=\prod_{j\in S}(1-2t_j)$. Expand the product of the two indicator functions and take its expectation. In the product of the two parity signs, each shared bit contributes its sign squared. Only the signs on the symmetric difference $H\triangle K$ remain. Subtract the product of the individual probabilities and use $M(H)M(K)=M(H\triangle K)M(H\cap K)^2$ to get
+
+$$
+4\bigl(\Pr(E_a\cap E_b)-\Pr(E_a)\Pr(E_b)\bigr)=
+\epsilon_a\epsilon_b\,M(H\triangle K)\bigl(1-M(H\cap K)^2\bigr).
+$$
+
+The free bits have $0<t_j\le 1/2$, so every bias factor lies in $[0,1)$. The right side vanishes exactly when the supports are disjoint or a fair bit belongs to exactly one support. A fair bit on one side can therefore give independence even when the events share biased bits. For example, if $Y_2$ is fair, the events $Y_1=0$ and $Y_1+Y_2=0$ are independent.
+
 **Choosing a column basis (worked example).** Take retained pairs $(1,5)$ and $(6,10)$ and discarded pairs $(0,2)$, $(7,11)$, and $(3,8)$, in that order. Their later-endpoint probabilities are $(1/4,1/2)$ and $(1/8,1/4,1/4)$ respectively. When balancing the first retained orbital,
 
 $$
@@ -1069,6 +1078,31 @@ C=\begin{pmatrix}
 $$
 
 The two solutions of $Cw=e$ are $(1,0,0)$ and $(0,1,1)$. Add their probabilities and multiply by $b_1=1/4$ to obtain the actual drop of $25/512$. Columns $2,3$ give the largest original bound, $9/256$. Whenever the free bit $w_1=1$, both basis bits are zero and each contributes a relative excess of $2/3$. The first-order bound keeps the two linear terms and gives $(9/256)(1+2(7/32)(2/3))=93/2048$. Columns $1,2$ give an original bound of $21/1024$. Exactly one basis bit is zero at either solution, so the first-order bound reaches $25/512$.
+
+**The quadratic correction and the degree required for equality (written derivation).** Let $\mathcal A$ index the basis-bit factors and the other biased retained factors. Write the relative excess in each factor as $g_a(Y)=\gamma_a\,\mathbf 1_{E_a}(Y)$ with $\gamma_a\ge 0$. For an integer $d\ge0$, define
+
+$$
+B_J^{(d)}=
+B_J\sum_{\substack{S\subseteq\mathcal A\\|S|\le d}}
+\left(\prod_{a\in S}\gamma_a\right)
+\Pr\!\left[\bigcap_{a\in S}E_a\right].
+$$
+
+The empty set contributes $1$ to the sum. Expanding $\prod_{a\in\mathcal A}(1+g_a(Y))$ and taking its expectation gives $\Delta$ after multiplication by $B_J$. All terms are nonnegative, so $B_J^{(d)}$ increases weakly with $d$ and stays below or equal to $\Delta$. Every free-bit assignment has positive probability. If an assignment makes at least $d+1$ factors exceed their lower bounds in $B_J$, any $d+1$ of them give a strictly positive omitted term. Conversely, if at most $d$ factors exceed those lower bounds at each assignment, every omitted term vanishes. The smallest degree that recovers $\Delta$ is therefore the maximum number of simultaneous positive excesses.
+
+The quadratic correction uses joint probabilities. Write $E_a=\{\sum_{j\in H_a}Y_j=d_a\}$, let $\epsilon_a=(-1)^{d_a}$, and put $M(H)=\prod_{j\in H}(1-2t_j)$. In the product of the two indicator functions, the signs from shared bits square to $1$. Taking expectations gives
+
+$$
+\begin{aligned}
+4\Pr(E_a\cap E_b)
+={}&1+\epsilon_a M(H_a)+\epsilon_b M(H_b)\\
+ &+\epsilon_a\epsilon_b M(H_a\mathbin{\triangle}H_b).
+\end{aligned}
+$$
+
+The symbol $\triangle$ denotes symmetric difference. A free bit shared by the two supports drops out of the last term. In the example above with columns $2,3$, both events are $\{w_1=1\}$. The quadratic term $(9/256)(2/3)^2(7/32)=7/2048$ fills the gap between the first-order bound and the actual decrease.
+
+Linear systems give a second way to test exactness. For each set $S$ of $d+1$ indices with $\gamma_a>0$, form the matrix $R_S$ of coefficient rows for their events and the column $v_S$ of right-hand sides. The events can occur together exactly when $v_S$ lies in the column space of $R_S$. Thus $B_J^{(d)}=\Delta$ if and only if $\operatorname{rank}[R_S\mid v_S]>\operatorname{rank}R_S$ for every such $S$. For example, the three events $Y_1=0$, $Y_2=0$, and $Y_1+Y_2=1$ on two free bits are compatible in pairs. Taken together the equations have no solution. For these three events with positive coefficients, degree two is exact and degree one has a strict gap.
 
 For example, suppose both retained pairs alternate with the sole discarded pair and its endpoint probability satisfies $0<q<1$. Both restricted rows are $(1)$. When the first retained orbital is already balanced, balancing the second leaves purity unchanged. When all three later-endpoint probabilities start at $1/4$, balancing just the second retained orbital lowers purity from $83/128$ to $5/8$.
 
@@ -1111,6 +1145,47 @@ $$
 Each original point over $(c,v)$ receives $Q(c,v)/|H|$ under the product law. The sum of the absolute mass differences over these $|H|$ points is exactly $|P(c,v)-Q(c,v)|$. Summing over all reduced outputs and dividing by two recovers the original total variation. When $L$ is empty, the coset alone suffices.
 
 For example, use $Y_1,Y_2,Y_1+Y_2+B$ and $B$ as four outputs. The coset of the first three is determined by their binary sum $B$. The reduced joint law has output $(B,B)$, while the reduced product law replaces the first coordinate by an independent fair bit. For each value of the second coordinate, the two conditional laws of the first have total variation $1/2$. Hence the four-output total variation is $1/2$.
+
+**Which laws can independent bits generate? (Written derivation)** For a random binary vector $Y$, let $m_\lambda=\mathbb E[(-1)^{\lambda(Y)}]$ be the sign moment of a linear functional $\lambda$. Consider two functionals $\lambda,\nu$. A single input bit with factor $q=1-2t$ and column $c$ contributes either $1$ or $q$ to each of $m_\lambda$ and $m_\nu$, according to the value of the corresponding functional on $c$. If both functionals give $1$, their sum gives $0$, so this column contributes $|q|^2$ on the left and $1$ on the right. In the other three cases the contributions agree. Independence therefore gives
+
+$$
+|m_\lambda|\,|m_\nu|\le |m_{\lambda+\nu}|.
+$$
+
+The affine offset affects only the signs, so the constraint also covers negative biases and fair bits. On $\mathbb F_2^2$, take masses $(17,1,7,7)/32$ in the order $00,10,01,11$. The sign moments for the first coordinate, the second coordinate, and their sum are $1/2,1/8,1/2$, respectively. For the first coordinate and the sum, the left side is $1/4$ and the right side is $1/8$. Thus no finite collection of independent input bits with an affine offset generates this law.
+
+The same law has no convolution root of any order $n\ge 2$. Such a root is a probability law whose $n$-fold convolution with itself gives the stated law. If one exists, let $r^n=1/2$ with $r\ge 0$. The three nontrivial moments of the root have magnitudes $r,r^3,r$ in the same order. The first coordinate and the sum are linearly independent functionals, so at some point both moments give negative contributions to the inversion formula. The mass at that point is at most
+
+$$
+\frac{1-2r+r^3}{4}
+=\frac{(r-1)(r^2+r-1)}{4}<0,
+$$
+
+since $1/\sqrt{2}\le r<1$. This contradicts nonnegative mass.
+
+**Exact distance to affine independent-bit laws on four points (written derivation).** Order the three nontrivial sign moments by absolute value. Choose the two characters with the larger moments as coordinates, and translate the law so that their moments are $0\le a\le c$. The remaining character is their product. Write $b$ for its signed moment, so $|b|\le a$ and $c\le1$. In sign coordinates $u,v\in\{-1,1\}$, the mass at $(u,v)$ is $(1+au+cv+buv)/4$. Coordinate changes and translations preserve total variation and the class of affine independent-bit laws. The minimum distance to that class is
+
+$$
+d_*=\frac{\max(0,ac-b)}{2(1+c)}.
+$$
+
+If $b\ge ac$ and $b>0$, use three independent input bits with bias factors $\sqrt{ac/b}$, $\sqrt{ab/c}$, and $\sqrt{bc/a}$. In the two character coordinates, assign them columns $(1,1)$, $(1,0)$, and $(0,1)$, respectively. All three factors are in $[0,1]$, since $ac\le b$, $ab\le c$, and $bc\le a$. The three products of factors give $a,c,b$, which determine the law. If $b=0$ and $b\ge ac$, then $a=0$ and the product of independent sign laws with moments $0,c$ realizes the law.
+
+Now suppose $b<ac$. Consider a competing affine law with moments $a',c',b'$ at total variation distance $d$. Each atom changes by at most $d$ and each moment by at most $2d$. The signs of three nonzero moments of an affine law multiply to $+1$. A single column contributes a signed bias in exactly two characters or in none, and the offsets give a product of $+1$. If $b'<0$, then at least one of $a',c'$ is nonpositive. Thus $d\ge a/2\ge d_*$, using $b\ge-a$ in the last inequality.
+
+For $b'\ge0$, put $x=\max(0,a-a')$, $y=\max(0,c-c')$, and $z=b'-b$. Each is bounded above by $2d$, and $x+y+z\le4d$. If $x$ or $y$ is zero, use the individual bounds. Otherwise the sum equals four times the mass increase at the sign pair $(-,-)$. Put $\alpha=\min(a,|a'|)$ and $\gamma=\min(c,|c'|)$. Then $a-\alpha\le x$ and $c-\gamma\le y$. Writing $ac-\alpha\gamma=c(a-\alpha)+\alpha(c-\gamma)$ and using the moment constraint $|a'||c'|\le b'$ gives
+
+$$
+ac-b\le c(x+y)+z=c(x+y+z)+(1-c)z\le2(1+c)d.
+$$
+
+To attain the bound, transfer mass $d_*$ from $(+,-)$ to $(-,-)$. The source atom can supply it because
+
+$$
+P(+,-)-d_*=\frac{(1-c)(1+c+a+b)}{4(1+c)}\ge0.
+$$
+
+The resulting moments are $a-2d_*,c,b+2d_*$. The last is the product of the first two, so Fourier inversion gives the product of the two marginal sign laws. The inverse coordinate map realizes this product using two independent bits. The transfer changes total variation by exactly $d_*$. For the example with masses $(17,1,7,7)/32$ the minimum distance is $1/24$.
 
 **Recovering biases from the coset law (written derivation).** Let the biased input bits $X_j$ be independent, with $\Pr(X_j=1)=t_j\in(0,1/2)$. Write $c_j\in C$ for the image of the column of input $j$ in the quotient. The coset output is $Y=s+\sum_j c_jX_j$, with the projected affine offset $s$. For each nonzero $c\in C$, define $q_c=\prod_{j:c_j=c}(1-2t_j)$, with empty product $1$.
 
@@ -1179,7 +1254,115 @@ All these log factors are negative. Each nontrivial character multiplies the fac
 
 For example, take a two-dimensional quotient with the nonzero columns ordered as $a,b,a+b$ and both offsets zero. Use bias factors $(1/32,1/8,1/8)$ for $P$ and $(1/4,1/16,1/16)$ for $Q$. At every nontrivial character, one sign moment is $1/256$ and the other is $1/64$. Taking $\varepsilon=1/256$, the inversion formula above gives $\delta=(3/4)(1/64-1/256)=9/1024$. The target bias products have ratio $8$, whose logarithm equals the bound $(3/2)\log 4$.
 
-For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
+**Why pairwise moment inequalities stop deciding representability on eight points (written derivation).** The factorization above gives a necessary inequality for every pair of characters of an affine independent-bit law, $|m_\lambda|\,|m_\nu|\le |m_{\lambda+\nu}|$. A column selected by both characters contributes a squared absolute bias, at most $1$, on the left and cancels on the right. Each remaining factor agrees on the two sides. An affine offset affects only the signs.
+
+On $\mathbb F_2^3$, fix $u\ne0$. Assign probabilities $99/512$ at $0$, $35/512$ at $u$, and $63/512$ at each of the six other points. The probabilities sum to $1$ and are all strictly positive. This is a constant mass $63/512$ plus corrections of $36/512$ at $0$ and $-28/512$ at $u$. Each nontrivial character sums to zero over the group, so its moment equals $1/8$ if $\chi_\lambda(u)=-1$ and $1/64$ otherwise. If both characters in the pairwise inequality are nontrivial, its left side is at most $1/64$ and its right side at least $1/64$. If either character is trivial, there is equality.
+
+For a law generated by independent bits, let $g_v$ be the absolute grouped bias factor at column $v$. Each absolute moment is the product of $g_v$ over the columns for which $\chi_\lambda(v)=-1$. Compare the product over the four characters with $\chi_\lambda(u)=-1$ to the product over the four with $\chi_\lambda(u)=1$. Column $u$ occurs four times in the first product and zero times in the second. Each other nonzero column occurs twice in each product, since $u$ and that column are linearly independent over $\mathbb F_2$. The first product therefore equals $g_u^4$ times the second, and $0\le g_u\le1$. The eight-point law above instead gives the first product $(1/8)^4$ and the second $(1/64)^3$, so it cannot be generated by independent bits and an affine offset. The equality of grouped products also applies when some moments vanish, without any division by a moment.
+
+**A complete criterion for positive sign moments (literature result and application).** A probability law on a finite binary vector space with all sign moments strictly positive is an affine independent-bit law exactly when every nonzero $u$ satisfies
+
+$$
+\prod_{\lambda:\,\chi_\lambda(u)=-1}m_\lambda
+\le
+\prod_{\lambda:\,\chi_\lambda(u)=1}m_\lambda.
+$$
+
+This is the elementary binary case of Ardiyansyah, Kosta, and Kubjas's criterion for model embeddability of symmetric group-based Markov matrices, Theorem 4.1. The transition matrix of a law $P$ has entries $P(y-x)$ and its eigenvalues are the sign moments $m_\lambda$. With separate labels for all group elements, the theorem requires the inverse Fourier transform of $\log m_\lambda$ to have nonnegative entries away from zero. For a translation $T_u$ by a nonzero $u$, $T_u^2=I$, so the rate term $r_u(T_u-I)$ exponentiates to the two-point law with bias $\exp(-2r_u)$. These translations commute, and multiplying their exponentials realizes the law as an independent sum of binary inputs.
+
+Conversely, a negative bias can be made positive by complementing that input bit and adding its column to the affine offset. Strict positivity of the moments excludes a fair bit on any nonzero column. After these replacements the offset evaluates to $+1$ under every character, so it is zero. The remaining positive bias factors therefore give nonnegative rates $-\tfrac12\log q_u$. The eight-point case appears explicitly in §5.1 of the same article. [Ardiyansyah, Kosta, and Kubjas](https://doi.org/10.1007/s00285-021-01656-5)
+
+**What changes when a sign moment vanishes (written derivation).** Let $C$ be a finite binary vector space. A probability law on $C$ is an affine independent-bit law exactly when there are a subspace $H\le C$ and an offset $s\in C$ with the following properties.
+
+1. Every character that is nontrivial on $H$ has zero moment.
+2. For a character $\bar\chi$ of $C/H$, let $\chi$ be its pullback to $C$. The adjusted moments $\chi(s)m_\chi$ are all strictly positive and satisfy the product inequalities on $C/H$.
+
+For necessity, take $H$ to be the span of the columns of the fair bits. Each such bit makes the moment of any character that reads it vanish. The characters trivial on $H$ read only nonzero bias factors. Complement the bits with negative bias and absorb their columns into $s$. The surviving moments, after multiplying by $\chi(s)$, are then the positive moments of the quotient law.
+
+Conversely, the product inequalities realize the adjusted quotient moments by independent bits with positive biases. Lift their columns from $C/H$ to $C$ and add independent fair bits along a basis of $H$, then translate by $s$. The fair bits make the moments outside the annihilator of $H$ vanish. They leave the other moments unchanged before translation. The resulting law has the specified moments at every character, so Fourier inversion identifies it with the original law.
+
+**The minimum number of input bits (written derivation).** For a law generated by affine independent bits, the span $H$ of the fair-bit columns is determined by the law. It consists exactly of the points at which every character with a nonzero moment evaluates to $+1$. If $x\notin H$, a character of $C/H$ can be chosen to evaluate to $-1$ at $x+H$. Its pullback has nonzero moment, so $x$ lies outside the common annihilator. The adjusted affine offset in $C/H$ is also unique because two offsets giving the same signs differ by an element of $H$.
+
+For each nonzero coset $u\in C/H$, let $q_u\in(0,1]$ be the product of the absolute bias factors of the columns in that coset. The logarithmic inversion above recovers these products from the quotient moments. The minimum number of input bits in any affine independent-bit realization is
+
+$$
+\dim_{\mathbb F_2}H+\bigl|\{u\in C/H:\ u\ne0,\ q_u<1\}\bigr|.
+$$
+
+In every realization the fair-bit columns span $H$, requiring at least $\dim_{\mathbb F_2}H$ fair bits. Each nonzero coset with $q_u<1$ needs at least one input whose column lies in that coset and whose absolute bias is strictly between $0$ and $1$. The fair bits project to the zero coset, and distinct nonzero cosets need distinct input bits. To attain the bound, take one fair bit along each vector of a basis of $H$, then take one bit with bias $q_u$ on any representative of each nonzero coset with $q_u<1$. Applying the adjusted affine offset recovers the original law.
+
+A constant output has $H=\{0\}$ and all $q_u=1$. It uses zero bits, with the affine offset equal to the constant. For a uniform law on a coset $s+H$, the quotient output is constant and every $q_u=1$, so the minimum is $\dim_{\mathbb F_2}H$. In particular, a uniform output on all of $C$ takes exactly $\dim_{\mathbb F_2}C$ fair bits.
+
+**Counting realizations with the minimum number of inputs (written derivation).** Fix a realizable law. Let $h=\dim_{\mathbb F_2}H$, let $b$ count the nonzero cosets with $q_u<1$, and label the minimum $n=h+b$ input positions. A realization specifies the signed bias factors, the columns in the original space, and the affine offset. The number of realizations is
+
+$$
+\frac{n!}{h!}\left(\prod_{j=0}^{h-1}(2^h-2^j)\right)|H|^{b+1}2^b.
+$$
+
+The empty product is $1$.
+
+At the minimum, the lower bounds for the numbers of fair and nonfair bits both hold with equality. The $h$ fair columns span $H$ and hence form a basis. Each nonzero coset with $q_u<1$ needs one nonfair input. There are exactly $b$ positions available, so each such coset gets exactly one bit. Its absolute bias equals the recovered factor $q_u$.
+
+Choose the $h$ fair positions first, and fill them with a basis in the order of the chosen positions. After choosing $j$ basis vectors, their span has $2^j$ elements, leaving $2^h-2^j$ choices for the next vector. The remaining positions can be matched to the $b$ nonzero cosets in $b!$ ways. Each such coset has $|H|$ choices for its column representative and two choices for the bias sign. The law fixes the adjusted offset coset. Choose one of its representatives and subtract the sum of the negative-bias columns to recover the raw offset.
+
+Every choice produces the prescribed law. The fair columns give $H$, the absolute biases give the grouped products on the quotient, and the adjusted offset recovers the signs of the nonzero moments. The fair bits make the other moments vanish. Each realization also determines these choices uniquely. The choices of fair positions and their complement therefore contribute $\binom{n}{h}b!=n!/h!$.
+
+**The bias space with fixed columns and offset (written derivation).** Even with more than the minimum number of inputs, we can fix the columns $c_i$ and the raw offset $s$ and vary the signed biases $q_i$ in $[-1,1]$. Choose a reference realization $q^{(0)}$ and let $F$ be the set of bias vectors that produce the same law, with the usual Euclidean topology. Write $H$ for the fair subgroup, $\bar c_i=c_i+H$, and $J=\{i:\bar c_i\ne 0\}$. If the projected columns for $i\in J$ span a space of dimension $r$, then $F$ has exactly $2^{|J|-r}$ connected components, each contractible.
+
+The law determines $H$, so all biases on $J$ stay nonzero throughout $F$. Let $\varepsilon_i$ be $1$ when $q_i<0$ and $0$ otherwise. Since the raw offset is fixed, the condition on the adjusted offset coset is the binary linear equation
+
+$$
+\sum_{i\in J}\varepsilon_i\bar c_i
+=\sum_{i\in J}\varepsilon_i^{(0)}\bar c_i.
+$$
+
+The solutions form a coset of the kernel and give $2^{|J|-r}$ sign patterns. Each sign region is both open and closed in $F$, since changing any of its signs requires passing through zero. Every solution can be realized with the reference magnitudes. Give the biases on $J$ the chosen signs and retain the reference biases at the other labels. This preserves the fair subgroup, the grouped absolute products on the quotient, and the adjusted offset coset, so it preserves all moments and the mass at every point.
+
+Fix an allowed sign pattern. For $i\in J$, use the continuous coordinate $x_i=-\log|q_i|$, with inverse $\pm e^{-x_i}$ in the fixed sign. Each nonzero projected column $u$ that occurs gives a block of constraints $x_i\ge 0$ and $\sum_{\bar c_i=u}x_i=-\log q_u$, where $q_u$ is the grouped absolute bias recovered from the law. This block is a scaled simplex, reduced to one point when its right-hand side is zero. Outside $J$, the only condition is that the columns with zero bias still span $H$. Multiply these coordinates by $1-t$ together, for $0\le t\le 1$. For $t<1$ their zero set is preserved. At $t=1$ every one of those columns is fair and they still span $H$. At the same time, move the log coordinates on $J$ along straight lines to fixed points of their simplices. Both moves are continuous and preserve the law. Together they contract the sign region to a point, so each region is a connected component.
+
+For example, suppose $J$ consists of two labels whose columns project to the same nonzero class with grouped absolute bias $\rho\in(0,1)$. If the adjusted offset requires an even number of negative signs on those two inputs, there are two components, one with both signs positive and one with both negative. In the log coordinates of either component, the magnitudes vary along the segment $x_1+x_2=-\log\rho$.
+
+**Local directions among the fair-subgroup columns (written derivation).** Within one sign component, fix the biases on $J$ and examine how the remaining coordinates can leave their common zero point. Write $x_i$ for these coordinates and take the section $\sum_i |x_i|=1$. A direction is feasible exactly when the columns at its zero coordinates still span $H$. For example, suppose exactly two columns lie in the fair subgroup and both equal the same nonzero generator of $H$. Then either bias can move while the other stays fair. The section has four points, the positive and negative directions of each of the two coordinates.
+
+In general, give each label $i$ two signed vertices $i^+$ and $i^-$. A simplex face uses at most one sign of each label and leaves a family of unselected columns spanning $H$. Every nonempty subface satisfies the same conditions. The section is homeomorphic to the realization of this simplicial complex. Its barycentric coordinates are $\lambda_{i^+}=\max(x_i,0)$ and $\lambda_{i^-}=\max(-x_i,0)$, and they sum to $1$. The inverse is $x_i=\lambda_{i^+}-\lambda_{i^-}$. At most one weight at a label is nonzero, so this difference involves no cancellation. Both maps are continuous and preserve the nonzero coordinates and their signs. If the fair-subgroup columns already form a basis, every one must stay fair and the section is empty.
+
+**Face counts and Euler characteristic of the local directions (written derivation).** Suppose the fair subgroup contains $n$ labelled columns of rank $h$. Let $a_k$ count the $k$-element label sets whose complements still span $H$. Each such set allows $2^k$ independent sign assignments, so there are $2^k a_k$ faces of dimension $k-1$ for $k\ge 1$. The complement of the empty set is the full label set, so $a_0=1$. The empty face contributes $-1$, giving the reduced Euler characteristic $\widetilde\chi=-\sum_{k=0}^n(-2)^k a_k$.
+
+Write $E$ for the label set, $r(B)$ for the rank of the columns at $B\subseteq E$, and $M$ for the column matroid. Its Tutte polynomial is the rank-subset sum $T_M(x,y)=\sum_{B\subseteq E}(x-1)^{h-r(B)}(y-1)^{|B|-r(B)}$. At $x=1$, only spanning sets $B$ contribute. Their complementary supports have size $n-|B|$, and $(-2)^{n-|B|}=(-2)^{n-h}(-1/2)^{|B|-h}$. Thus $\widetilde\chi=-(-2)^{n-h}T_M(1,1/2)$. For a basis the section is empty and the formula gives $-1$. For two copies of a nonzero generator the section has four points and the formula gives $3$.
+
+**Facet dimension and shelling order (written derivation).** The label sets whose complements still span $H$ are the independent sets of the dual column matroid. Pull this matroid back along the map that forgets signs. A set of signed labels is independent exactly when its projected labels are independent and it uses at most one sign per label. The nonempty faces of the direction complex are therefore precisely the nonempty independent sets of the resulting matroid. Each facet is a basis with $n-h$ vertices. When $n=h$, there are no nonempty faces.
+
+Fix any linear order on the signed labels. Compare two facets by placing first the one containing the least label of their symmetric difference. This gives a shelling order. If $A$ precedes $B$, let $x\in A\setminus B$ be that least label. The independent set $(A\cap B)\cup\{x\}$ extends to a basis $C$ inside $B\cup\{x\}$. Since $B$ and $C$ have the same size, $C$ replaces exactly one vertex of $B$ with $x$. The removed vertex lies outside $A\cap B$ and follows $x$ in the label order. Thus $C$ precedes $B$, and $C\cap B$ is a codimension-one face containing $A\cap B$. This gives the required intersection condition for a shelling.
+
+**The new faces introduced by each facet (written derivation).** For a facet $B$ in the shelling, let $R(B)$ consist of the vertices $v$ such that $B\setminus\{v\}$ is contained in an earlier facet. A subface $S\subseteq B$ appears for the first time at $B$ exactly when $R(B)\subseteq S$. If $S$ omits a vertex $v$ of $R(B)$, it already appears with $B\setminus\{v\}$. Conversely, if an earlier facet $A$ contains $S$, the shelling criterion gives an earlier facet $C$ containing $A\cap B$ and omitting exactly one vertex of $B$. This vertex belongs to $R(B)$ and is outside $S$.
+
+Let $d=n-h$. Each face introduced at $B$ consists of $R(B)$ together with an arbitrary subset of $B\setminus R(B)$. Weighting a face $S$ by $t^{|S|}$ gives the face enumerator $\sum_B t^{|R(B)|}(1+t)^{d-|R(B)|}$ when there are nonempty facets. This sum counts the empty face at its first containing facet. If there are no nonempty facets, the empty face alone contributes the constant $1$.
+
+**Elementary collapses at a shelling step (written derivation).** Suppose the restriction face $R(B)$ is nonempty and proper in $B$. Fix $v\in B\setminus R(B)$. Pair every new subface $S$ avoiding $v$ with $S\cup\{v\}$, and delete the pairs in decreasing order of $|S|$, breaking ties arbitrarily. Every new subface belongs to exactly one pair. An earlier subface cannot contain $S$, since that would make $S$ earlier as well. Any new strict coface of $S$ other than $S\cup\{v\}$ still strictly contains $S$ after removing $v$, so its pair has already been deleted. At the turn of $S$, its sole strict coface is $S\cup\{v\}$, and deleting the pair is an elementary collapse. The sequence leaves the subcomplex from before the addition of $B$.
+
+If $R(B)=B$, the only new face is $B$ and its entire boundary is in the preceding subcomplex. The first facet gives the initial simplex, starting from the empty realization.
+
+**After retaining the boundaries, the remaining subcomplex collapses to the first simplex (written derivation).** Remove every facet $B$ with $R(B)=B$ from the direction complex, keeping all proper subfaces. The first facet has empty restriction face, so its simplex is retained in full. Process the later facets in reverse shelling order. When $R(B)=B$, the two successive prefixes become equal after the deletion. At every other step the previous pairing still applies. Both members of a pair lie in $B$. If either equaled a removed maximal face, maximality would force it to equal $B$, and this step retains $B$. Removing other facets also cannot create a new strict coface. The elementary collapses therefore concatenate to a collapse of the retained subcomplex onto the first simplex. This conclusion assumes at least one nonempty facet.
+
+**The quotient by the retained subcomplex (written derivation).** Suppose there is at least one nonempty facet. Collapse the realization of the retained subcomplex to a point. Each simplex with $R(B)=B$ meets the retained part in its entire boundary. A point of that simplex is in the intersection exactly when at least one coordinate on $B$ is zero. Distinct such simplices meet only in the retained part. The quotient therefore comes from the disjoint sum of these simplices and a basepoint, with all the boundary points identified with the basepoint. The finitely many closed simplices and the retained part cover the realization, so the quotient maps on those pieces induce a homeomorphism. A one-vertex facet has empty boundary and contributes one isolated point alongside the basepoint. If no facet has full restriction face, the quotient is a point.
+
+**The homotopy type is a wedge of spheres (written derivation).** Let $X$ be the realization of the direction complex and $C$ the realization of its retained subcomplex. The collapse to the first simplex makes $C$ contractible. A subcomplex inclusion has the homotopy extension property, so a contraction of $C$ extends to a homotopy of $X$ starting at the identity. Its endpoint is constant on $C$ and factors through $q:X\to X/C$ to define $s:X/C\to X$. The extension gives $s q\simeq\mathrm{id}_X$. Each stage carries $C$ into $C$, so it also descends to the quotient and gives $q s\simeq\mathrm{id}_{X/C}$. Thus the quotient map itself is a homotopy equivalence.
+
+Every facet has $d=n-h$ vertices. If $d\ge 2$, collapsing the boundary of a $(d-1)$-simplex gives $S^{d-1}$, with the boundary class as its basepoint. If $d=1$, the simplex point together with the added basepoint gives $S^0$. The attachment description identifies precisely these factor basepoints with the common quotient point. Hence $X/C$ is homeomorphic, with its basepoint, to the finite wedge of one $S^{n-h-1}$ for each facet with $R(B)=B$. The empty wedge is a point.
+
+**An acyclic matching of nonempty faces (written derivation).** Assume there is a nonempty facet and keep the fixed linear order of signed labels. For each interval $[R(B),B]$ with $R(B)\ne B$, choose a vertex $v_B\in B\setminus R(B)$. Pair each face with the face obtained by toggling $v_B$. The toggle preserves the restriction face and all other vertices, so the pair stays in the same interval. When $R(B)=B$, the interval consists of the unmatched facet $B$. The first facet $B_0$ has empty restriction face. Removing the empty face and its matching edge therefore leaves $\{v_{B_0}\}$ as the only additional unmatched face.
+
+Orient matched covers from the smaller face to the larger face and all other covers downward. A downward edge can only preserve the first containing facet or move to an earlier one, since the facet containing its source also contains its target. An upward edge preserves the interval. For a face $F$ whose first containing facet is $B$, let $k(B)$ count the earlier facets and assign the rank
+$$
+k(B)(2n+3)+|F|+2\,\mathbf 1_{\{R(B)\ne B,\, v_B\notin F\}} .
+$$
+When an edge changes intervals, the decrease in the first term exceeds any increase in the other terms. Within an interval, an upward edge adds $v_B$, increasing the size by one and removing the penalty of two. A downward edge removes one vertex and cannot remove $v_B$, because that edge is oriented upward. The rank strictly decreases along every directed edge, ruling out a directed cycle. The unmatched faces consist of one vertex and all facets with $R(B)=B$, giving the critical-cell count in Forman's Theorem 6.3. [Forman, *A User's Guide to Discrete Morse Theory*, §6](https://www.mat.univie.ac.at/~slc/wpapers/s48forman.pdf)
+
+**Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
+
+If there are no nonempty facets, the original realization is empty and its reduced integral homology vanishes in every nonnegative degree. When facets exist and $d=1$, the wedge is a discrete space with $m+1$ points and reduced degree-zero generators $[p_B]-[p_0]$, where $p_B$ is the point contributed by $B$ and $p_0$ is the common basepoint. When facets exist and $m=0$, the wedge is a point and every reduced group vanishes. For a nonempty family of facets, the reduced Euler characteristic is $(-1)^{d-1}m$, so the earlier Tutte evaluation gives $m=2^d T_M(1,1/2)$.
+
+For the Tribonacci word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
 \begin{aligned}
