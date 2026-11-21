@@ -897,6 +897,18 @@ The product of unit circles is compact. The integer-time phases return arbitrari
 
 The cluster set is a compact interval because the real phase orbit has connected closure and the window functional is continuous. If no zero has real part $\beta$, or if $W=0$, the interval is the singleton $\{0\}$. When a nontrivial zero attains the maximum $\beta>1/2$ and $W>0$, the lower endpoint is the lower limit in the critical-width theorem. A zero cluster value allows the normalized mass to approach zero along arbitrarily late windows.
 
+**Joint contacts of two spectral lines at the critical width.** Suppose a nontrivial zero attains the largest real part $\beta>1/2$. Let $1/2<\gamma<\beta$ bound the real parts of all nontrivial zeros strictly to the left of $\beta$. Write $F_{\alpha,h}(u)$ for the profile obtained by cutting the coefficients in the phase series to the line with real part $\alpha$. Both profiles use the same $h\in H$. Subtracting the entire $\beta$-line sum before normalizing on the $\gamma$ scale gives
+$$
+e^{(1-\gamma)u}Q_\vartheta(e^u)=
+e^{(\beta-\gamma)u}F_{\beta,\phi(u)}(0)
+ +F_{\gamma,\phi(u)}(0)+o(1).
+$$
+The error tends to zero uniformly over every late window of a fixed width. After subtraction, each term with real part below $\gamma$ tends to zero, and summability of the coefficient norms controls their sum. The square-root prime-power correction vanishes at the $\gamma$ scale.
+
+A contact at the critical width $W_*$ is a pair $h\in H$ and $s\in[0,W_*]$ with $F_{\beta,h}(-s)=0$ and $F_{\beta,h}(-v)\ge0$ for all $v\in[0,W_*]$. If $F_{\gamma,h}(-s)<0$ at every such contact, then there is a $c>0$ such that for every sufficiently large $t$ some $u\in[t-W_*,t]$ satisfies $e^{(1-\gamma)u}Q_\vartheta(e^u)\le-c$. Continuity then gives strictly positive negative-part mass on the actual window.
+
+The minimum of the top profile in the window is nonpositive for every phase. A positive minimum would allow an extension at the left endpoint, producing a zero cluster value at a wider width. All pairs of phases and corresponding minimizing lags form a compact set. At every pair, at least one profile is strictly negative, so the maximum of their pointwise minimum is strictly negative. When the top profile supplies this negative margin, its growing factor dominates the bounded second profile. When the second profile supplies the margin, the top profile remains nonpositive. This produces the required negative point in the window at the actual shared phase. If exact zero-mass critical windows occur arbitrarily late, there must be a joint contact with $F_\gamma\ge0$. The real-part bounds and the sign at joint contacts remain hypotheses.
+
 - **Classical pointwise von Mangoldt–Weil midpoint explicit formula (`Literature result, not formalized in this book`: von Mangoldt, 1895; Weil, 1952)**: Writing $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$ for Chebyshev's prime-power staircase and $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$ for its Gibbs midpoint normalization (subtracting the half-jump $\frac{1}{2}\ln p$ when $x \in \mathbb{N}_{\ge 2}$ is a prime power $p^m$, while $\psi_0(x) = \psi(x)$ at non-prime-power composites where $\Lambda(x) = 0$), symmetric truncation gives for every $x > 1$:
 
   $$
