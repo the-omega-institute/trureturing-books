@@ -149,6 +149,39 @@ The zero-counting estimate for positive ordinates gives $0<L(0)=\sum_{\gamma>0}m
 
 Regard the squared reading as a function of $u=y^2$. Its meromorphic continuation is $\sum_{\gamma>0}m_\gamma/[L(0)(u+\gamma^2)]$. The series converges uniformly on compact sets away from its poles since its tail terms are bounded in modulus by $2m_\gamma/[L(0)\gamma^2]$. By the identity theorem, the **exact curve** on any open interval of the positive real axis determines this continuation uniquely. Each pole $u=-\gamma^2$ gives a positive ordinate, and ratios of the residues $m_\gamma/L(0)$ give the relative multiplicities. Multiplying every multiplicity by the same positive integer preserves the normalized curve. For the Riemann zeros, the Riemann–von Mangoldt formula gives $N(T)\sim T\log T/(2\pi)$ for the number of positive ordinates counted with multiplicity. Its leading coefficient fixes the overall factor. [@rem-ch34-li-toeplitz-superexponential-collapse]
 
+**How do finitely many readings bracket the first positive zero ordinate?** Put $F(u)=L(\sqrt u)/S$ with $S=L(0)$. Denote the smallest positive ordinate by $\gamma_1$ and write $a=\gamma_1^2$. The weights $p_\gamma=m_\gamma/(S\gamma^2)$ satisfy $\sum p_\gamma=1$, and $F(u)=\sum p_\gamma\gamma^2/(\gamma^2+u)$. Take a spacing $\delta>0$. With just one reading $F(\delta)$, the identity $F(0)=1$ gives $(1-F(\delta))/\delta=\sum p_\gamma/(\gamma^2+\delta)$. Every denominator is at least $a+\delta$, and the smallest ordinate itself carries weight at least $1/(Sa)$. These observations give upper and lower bounds, respectively, on the first difference with its sign reversed.
+
+For an integer $k\ge1$, put $\Delta_\delta f(u)=f(u+\delta)-f(u)$ and $P_k(x)=\prod_{j=1}^k(x+j\delta)$. Each successive difference introduces another denominator. The same two bounds give
+
+$$
+D_k=\frac{(-1)^k\Delta_\delta^k F(0)}{k!\delta^k}
+  =\sum_{\gamma>0}\frac{p_\gamma}{P_k(\gamma^2)},
+\qquad
+\frac{1}{SaP_k(a)}\le D_k\le\frac{1}{P_k(a)}.
+$$
+
+Suppose the normalized reading $F(0)=1$ is exact and the absolute error in each remaining $F(j\delta)$ is at most $\varepsilon$. Compute $\widehat D_k$ from these readings. The absolute binomial coefficients on the terms carrying error sum to $2^k-1$, giving $|\widehat D_k-D_k|\le\eta_k=(2^k-1)\varepsilon/(k!\delta^k)$. For this normalized positive spectrum the noisy readings satisfy $1\le SaP_k(a)(\widehat D_k+\eta_k)$ and $P_k(a)(\widehat D_k-\eta_k)\le1$. The same bounds hold for nonnegative discrete weights summing to one when the origin reading is exact and the first-atom weight satisfies $Sa p_0\ge1$. Here $Sa p_0=m_{\gamma_1}\ge1$. See [`noisy_first_atom_enclosure`](lean:D5/S3/Analytic/Stieltjes/NoisyFirstAtom.noisy_first_atom_enclosure).
+
+To compute the endpoints by hand, take a certified upper bound $S_+\ge S$. If the readings are compatible with the error bound and $\widehat D_k>\eta_k$, solve for the two positive roots
+
+$$
+S_+\ell P_k(\ell)(\widehat D_k+\eta_k)=1,\qquad P_k(r)(\widehat D_k-\eta_k)=1.
+$$
+
+Both $xP_k(x)$ and $P_k(x)$ are strictly increasing on the positive half-line. It follows that $\ell\le a\le r$, so $\sqrt{\ell}\le\gamma_1\le\sqrt r$. When $\widehat D_k\le\eta_k$, the difference can still supply a lower bound. This order of difference and its error bound alone then give no finite upper bound.
+
+Two successive differences can tighten the upper endpoint. Put $D_0=1$ and $\eta_0=0$. Then $D_{k-1}-(a+k\delta)D_k=\sum p_\gamma(\gamma^2-a)/P_k(\gamma^2)\ge0$, so for $\widehat D_k>\eta_k$,
+
+$$
+a\le\frac{\widehat D_{k-1}+\eta_{k-1}}{\widehat D_k-\eta_k}-k\delta.
+$$
+
+Take $\delta=16$ and $k=10$. Values of $\xi$ and its derivative on the real axis directly give the ten readings $F(j\delta)$. At the centre, symmetry gives $S=\xi''(1/2)/(2\xi(1/2))$. Interval arithmetic bounds $S<0.023105$ and certifies an absolute error of at most $\varepsilon=10^{-15}$ at each positive node. Use $S_+=0.023105$ for the lower endpoint and the successive-difference ratio for the upper endpoint. Rational substitution into the two inequalities gives $14.1338<\gamma_1<14.1432$. The ten inputs come directly from real-axis evaluations, without requiring a table of zero ordinates. [Readings and reproducible interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068457253)
+
+The real-axis Euler product also gives the unnormalized readings directly. Take $u_j=196+16j$ for $0\le j\le40$, so each $s_j=1/2+\sqrt{u_j}$ exceeds $1$. Use the Euler factors for the first $25$ primes ($p\le97$) to evaluate $\zeta'/\zeta$. The omitted terms have total magnitude at most $\int_{97}^\infty(\log x)x^{-s_j}\,dx$. The remaining factors of $\xi$ then give an enclosure for $G(u_j)=L(\sqrt{u_j})$. Write $d_k=(-1)^k\Delta_{16}^kG(196)/(k!\,16^k)$. Each ordinate contributes $m_\gamma/\prod_{j=0}^k(\gamma^2+u_j)$ to this difference. The multiplicity of the first ordinate gives $d_k\prod_{j=0}^k(a+u_j)\ge1$, and two successive differences give $(a+u_k)d_k\le d_{k-1}$. Checking both endpoints by interval arithmetic at $k=40$ yields $14.134723<\gamma_1<14.134756$. [Independent Euler-product and tail certificate](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068568073)
+
+Even finitely many exact readings allow different positive discrete spectra. With the readings at $K$ fixed nodes including the origin and $S$ held fixed, one copy of each of $K+1$ distinct spectral points can move jointly. [Deformations preserving the sampled readings](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068509921)
+
 **Which shell angles occur exactly between two real spectral nodes?** Fix any real node $s>1/2$ and let a second real node $t$ move to the right from $s$. Write $x(t)$ for its normalized spectral vector and $h(s,t)$ for its inner product with $x(s)$. The kernel formula gives continuity and $h(s,s)=1$. For $t>s$, the coordinates from each conjugate pair are positive and the two-node Gram matrix is positive definite, so $0<h(s,t)<1$. We can also determine the limit of this inner product as $t\to\infty$.
 
 Put $v=t-1/2$. In the coordinate formula above, cancel the common factor $\xi(t)$ and multiply every coordinate by $v$. Before normalization, the sum of their squares is
@@ -160,6 +193,31 @@ $$
 Each summand increases to $m_\gamma$. There are infinitely many positive ordinates, so $S(v)\to\infty$. After normalization, the two coordinates of any fixed conjugate pair have squared norm at most $m_\gamma/S(v)\to0$. Hence the inner product of any finite truncation of $x(s)$ with $x(t)$ tends to zero. The remaining contribution is bounded in absolute value by the norm of the tail of $x(s)$, since $\|x(t)\|=1$. That tail can be made arbitrarily small, proving $h(s,t)\to0$.
 
 By the intermediate value theorem, for fixed $s$ the range as $t>s$ varies is exactly $(0,1)$. Every acute angle therefore occurs between a pair of real spectral nodes. With $s=1$, the shortest arc above has target inner product $16/17$ and the companion book's example has target $11/17$, giving half-angle readings $33/34$ and $14/17$, respectively. Numerical solutions using the kernel formula of §31.3 give one node at approximately $t=10.964391$ for the first target and $t=62.587918$ for the second. Matching all nine points in the companion book imposes a further rank constraint. The three cyclic permutations of $(0,1,4)$ form a matrix whose determinant has absolute value $65$. The normalized Gram matrix of the nine three-dimensional vectors thus has rank three. Nine distinct real spectral nodes give rank nine, ruling out an exact simultaneous match for all nine points.
+
+**Reading the central curve with unit-quaternion rotors (manual derivation).** Write $S=L(0)$ and $F(y^2)=L(y)/S$. Under RH the nontrivial zeros form conjugate pairs $1/2\pm i\gamma$. Assign probability $p_\gamma=m_\gamma/(S\gamma^2)$ to each distinct positive ordinate, where $m_\gamma$ is its multiplicity. Draw $\gamma$ with these probabilities, then draw an angular frequency $W\ge 0$ with conditional density $\gamma e^{-\gamma w}$ for $w>0$. Fix a unit imaginary quaternion $i$ and take the rotor $q_W(y)=\cos(Wy)+i\sin(Wy)$ in $S^3$. The model reading in [@thm-ch39-axiom-omega-rank-five-unit-quaternion-embedding] gives $2\kappa(1,q_W(y))-1=\cos(Wy)$. Integration gives, for every real $y$,
+
+$$
+\mathbb E[2\kappa(1,q_W(y))-1]
+=\sum_{\gamma>0}p_\gamma\int_0^\infty\gamma e^{-\gamma w}\cos(wy)\,dw
+=\sum_{\gamma>0}p_\gamma\frac{\gamma^2}{\gamma^2+y^2}=F(y^2).
+$$
+
+The exact curve determines the probability law on nonnegative frequencies uniquely. Assign $W$ an independent fair sign. The resulting symmetric distribution has the cosine average above as its characteristic function. A characteristic function determines its distribution, and taking the absolute value recovers $W$. Its density on $w>0$ is $\sum_{\gamma>0}p_\gamma\gamma e^{-\gamma w}$. The arithmetic spectrum specifies the mixing weights and rates. Each individual reading uses a single fixed-axis circle in $S^3$. Interpreting the sampling law and the scale of $y$ as a physical field evolution requires independent physical input.
+
+Two offsets suffice to test the single-frequency double-angle law. Write $A(y)=F(y^2)$. The identity $\cos(2x)=2\cos^2 x-1$ gives $A(2y)-2A(y)^2+1=2\operatorname{Var}(\cos(Wy))$. A single frequency gives zero on the right. The mixture density above is positive for $w>0$, so the variance is strictly positive for $y\ne0$. At $y=4$, interval evaluation on the real axis gives $F(16)=0.975746642870670$ and $F(64)=0.916843302283509$, each within $10^{-15}$. Substitution yields $0.01268<F(64)-2F(16)^2+1<0.01269$. [Interval certificate for the readings](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068457253)
+
+For a finite set of frequencies $w_j\ge0$ with probability weights $\alpha_j$, the uniform error on the whole half-line is at least $1$. Indeed, the phase vectors $(e^{i2^n w_j})_j$ have a convergent subsequence in the compact torus. The differences $y_\ell$ between successive times along that subsequence tend to infinity, and all $e^{iy_\ell w_j}$ tend to $1$. Thus $\sum_j\alpha_j\cos(w_jy_\ell)\to1$, whereas dominated convergence gives $F(y_\ell^2)\to0$.
+
+There is also a finite-dimensional obstruction for the full two-node reading $h(s,t)$. Since $h(s,t)\to0$ for each fixed $s>1/2$, choose $s_j>s_{j-1}$ recursively so that $0<h(s_i,s_j)<1/j$ for every $i<j$. Map the nodes in any way to a fixed finite-dimensional real unit sphere. Their images have a convergent subsequence. Inner products of consecutive images along that subsequence approach $1$, while the corresponding values of $h$ approach $0$. Thus the uniform absolute error over all node pairs is at least $1$. By [@thm-ch39-quaternion-product-feature-rank], the product reading of any fixed number $N$ of rotors has such a unit feature representation, so the bound also holds for every nonlinear assignment of rotors to nodes. [Shared random rotors for two nodes and finite-sample error](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068672243)
+
+For a finite observation window $0\le y\le Y$, choose a cutoff $T>0$ and move the probability mass of $W>T$ to $T$. Take a grid on $[0,T]$ that includes both endpoints and has maximum spacing $\Delta$. Distribute the mass at each interior frequency between its two surrounding grid points using the weights of linear interpolation. The cosine average $C(y)$ of this finite probability distribution satisfies
+
+$$
+\sup_{0\le y\le Y}|F(y^2)-C(y)|\le 2e^{-aT}+\frac{Y^2\Delta^2}{8}
+\qquad (0<a\le\gamma_1).
+$$
+
+Here $\gamma_1$ is the least positive ordinate. The first term follows from $\Pr(W>T)=\sum_\gamma p_\gamma e^{-\gamma T}\le e^{-aT}$ and the bound $2$ on the difference of two cosine values. The second follows from the linear interpolation remainder for $w\mapsto\cos(wy)$, whose second derivative has absolute value at most $Y^2$.
 
 **Reading the whole shell from one set of zeros (derivation and interval computation).** Choose a finite spectral measure for which all nine shell points share four phase functions. Index the positive ordinates $\gamma_j$ of the nontrivial zeros of the Riemann zeta function in increasing order. At ordinate $\gamma$, a positive integer $n$ supplies the phase $e_n(\gamma)=\exp(i\gamma\log n)$. Use the labels $n=1,2,3,6$. For $j=4,5,8,12,15$, give the two ordinates $\pm\gamma_j$ a combined weight $w_j$, split equally between them. The weighted inner product of $e_m$ and $e_n$ is then $\sum_j w_j\cos(\gamma_j\log(n/m))$. Since $6=2\cdot3$, there are just four distinct absolute nonzero log differences, $\log 2,\log 3,\log(3/2),\log 6$. Set the four cosine sums to zero and the sum of the weights to one. Interval arithmetic verifies that this five-by-five system is invertible and that all five weights are strictly positive. In the order given above, they are approximately $(0.105512,0.122932,0.215694,0.451373,0.104488)$. With the exact solution as weights, the four phase functions are orthonormal. Interval enclosures of these five low zero pairs suffice to construct this finite measure. RH puts every nontrivial zero on the critical line. [Linear system and reproducible interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7064296242)
 
@@ -245,6 +303,16 @@ $$
 $$
 
 For example, doubling $c$ multiplies $\mu$ by $2^{-1/67}$ and $k$ by $2^{44/67}$, and increases $a'$ by $(23/134)\log 2$. Both parameter choices give the same three inverse couplings whenever they lie in the domain of this one-loop matching model. An independent determination of $M_D/M_C$ from the heavy spectrum would remove this freedom because $\delta\log(k/c)=-23z/67$. Inferring Newton's constant $G$ also requires a relation between gravity and the matching scale. For example, if an independent calibration fixes the dimensionless product $G\mu^2$ in natural units, doubling $c$ multiplies $G$ by $2^{2/67}$. [@prob-ch34-gravity-dynamics-and-coupling]
+
+**How could a further probe distinguish these two scales? (Model assumption.)** Suppose the probe energy $E$ is independently calibrated and its dimensionless response is $Q(E)=F((E/\mu)^2)$. For the two parameter choices above, $\mu_B=2^{-1/67}\mu_A$. At the same probe energy $E=14\mu_A$, their arguments are $u=196$ and $v=196\cdot2^{2/67}$. Keep just one copy of the smallest ordinate in the positive spectral sum for $F(u)-F(v)$. The bounds $B=14.1432^2$ and $S_+=0.023105$ above give
+
+$$
+F(u)-F(v)\ge\frac{v-u}{S_+(B+u)(B+v)}>0.00111.
+$$
+
+If each predicted reading allows an error of $0.00055$, the two allowed intervals are disjoint. Direct real-axis evaluation gives a difference of approximately $0.00242931$. Using this comparison to determine a physical matching scale requires an independent relation between the energy and the spectral argument. If the response is $F((\kappa E/\mu)^2)$ with an adjustable conversion factor $\kappa>0$, rescaling $\kappa,\mu$ together preserves all readings. The probe then determines only $\mu/\kappa$. [Common-energy comparison and interval check](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068528778)
+
+With both $\kappa$ and $\mu$ unknown, the model still predicts a reading that depends only on an energy ratio. Adjust the probe until $Q(E_*)=1/2$ and double the energy exactly. Then $Q(2E_*)=F(4F^{-1}(1/2))\approx0.330835577358412$. If the true reading at calibration is within $\epsilon$ of one half, the second true reading is within $4\epsilon$ of the exact prediction. Indeed, for $u>0$, differentiating the positive spectral sum term by term gives $4F'(4u)/F'(u)\le4$. [Half-value calibration, interval and error bound](https://github.com/the-omega-institute/trureturing-books/issues/786#issuecomment-7068618897)
 
 ## 39.2.3 Tier 5: Heap-Geodesic Intelligence and Apophatic Self-Transparency of AXIOM-Ω {#sec-ch39-25-3}
 

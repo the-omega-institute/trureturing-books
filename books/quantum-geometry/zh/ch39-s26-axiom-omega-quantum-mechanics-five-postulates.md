@@ -126,7 +126,7 @@
 :::
 
 ::: {.remark #rem-ch39-axiom-omega-composites-round-trip title="复合系统中的往返律：纠缠被迫出现，仪器来自辅助系统，单次结果不由结构给出"}
-**往返律延续到复合系统时纠缠被迫出现（`手工推导`）。** 以下三条都是 `MODEL` 假设：复合系统有一个只带单一时钟的核空间；选定相容的复时钟定向，并假设乘积构型的复振幅相乘，从而独立射线检验的概率相乘；复合系统也满足干涉律，即态集合含全体乘积单位向量，且对任意两态 $x, w$ 都有一个态 $s_x(w)$ 对一切乘积检验态 $y$ 满足 §39.1 的干涉律 $c(y, s_x w) + c(y, w) = 2c(w, x)\,c(y, x)$，这相当于一条受限的叠加原理。则 $s_x(w) = 2c(x, w)\,x - w$，全部单位向量都是态，纯态构成 $\mathbb{CP}^{2^N - 1}$，这些反射生成 $\mathrm{O}(V_N)$，其中与复合时钟对易者构成 $\mathrm{U}(2^N)$：每个幺正变换都是往返反射的乘积。例：$N = 2$、$x = \lvert 00\rangle$、$w = \lvert{+}{+}\rangle$ 时 $s_x(w) = \frac{1}{2}(\lvert 00\rangle - \lvert 01\rangle - \lvert 10\rangle - \lvert 11\rangle)$，共生度为 $1$，即最大纠缠；逐分量反射给出乘积态 $\lvert{-}{-}\rangle$，而 $\kappa_2(w, \lvert{-}{-}\rangle) = \frac{1}{2} \ne \frac{1}{4} = c_2(w, x)^2$，违反往返律。
+**往返律延续到复合系统时纠缠被迫出现（`手工推导`）。** 以下三条都是 `MODEL` 假设：复合系统有一个只带单一时钟的核空间；选定相容的复时钟定向，并假设乘积构型的复振幅相乘，从而独立射线检验的概率相乘；复合系统也满足干涉律，即态集合含全体乘积单位向量，且对任意两态 $x, w$ 都有一个态 $s_x(w)$ 对一切乘积检验态 $y$ 满足 §39.1 的干涉律 $c(y, s_x w) + c(y, w) = 2c(w, x)\,c(y, x)$，这相当于一条受限的叠加原理。则 $s_x(w) = 2c(x, w)\,x - w$，全部单位向量都是态，纯态构成 $\mathbb{CP}^{2^N - 1}$，这些反射生成 $\mathrm{O}(V_N)$（$s_x$ 是关于直线 $\mathbb{R}x$ 的反射；有限维实内积空间中，一个线性等距属于全体直线反射 $w \mapsto 2\langle\hat{v}, w\rangle\hat{v} - w$ 生成的群，当且仅当维数为偶数或它的行列式为一，[`mem_closure_lineReflections_iff`](lean:D5/S3/Quantum/Algebra/Comparison/LineReflectionGeneration.mem_closure_lineReflections_iff)，`LEAN ✓`；$V_N \cong \mathbb{C}^{2^N}$ 的实维数 $2^{N+1}$ 是偶数，所以生成的群是整个 $\mathrm{O}(V_N)$，这一步特化是 `手工推导`），其中与复合时钟对易者构成 $\mathrm{U}(2^N)$：每个幺正变换都是往返反射的乘积。例：$N = 2$、$x = \lvert 00\rangle$、$w = \lvert{+}{+}\rangle$ 时 $s_x(w) = \frac{1}{2}(\lvert 00\rangle - \lvert 01\rangle - \lvert 10\rangle - \lvert 11\rangle)$，共生度为 $1$，即最大纠缠；逐分量反射给出乘积态 $\lvert{-}{-}\rangle$，而 $\kappa_2(w, \lvert{-}{-}\rangle) = \frac{1}{2} \ne \frac{1}{4} = c_2(w, x)^2$，违反往返律。
 
 **效应、仪器与完全正性来自辅助系统（`手工推导`）。** 把系统与处于态 $\alpha_0$ 的辅助系统联合，施加幺正 $U$，再对辅助系统做完备检验 $(a)$，令 $K_a\psi := (U(\psi \otimes \alpha_0))_a$（相对态）。则 $\sum_a K_a^\dagger K_a = \mathbf{1}$，结果 $a$ 的玻恩权重为 $\langle\psi, K_a^\dagger K_a\psi\rangle$，给定 $a$ 后的条件态为 $K_a\psi / \lVert K_a\psi\rVert$，$\rho \mapsto \sum_{a \in e} K_a\rho K_a^\dagger$ 完全正；反过来每个克劳斯族都可如此实现，于是所得效应恰为全体 $0 \le E \le \mathbf{1}$。玻恩权重的唯一性（`文献结果`）：在 $\beta$ 的非负函数之中，借助格里森型定理（A. M. Gleason, *J. Math. Mech.* **6**, 885–893, 1957）并要求权重在添加辅助系统后不变，玻恩权重唯一；只对单个系统要求“依赖于射线对、完备检验上和为一、自身射线取一”时，$f(x) = 3x^2 - 2x^3$ 满足 $f(x) + f(1 - x) = 1$，同样合格，所以辅助系统不可少。
 
@@ -300,6 +300,18 @@ Lean 证明去掉首位，把两个奇偶类都对应到同一组二进制尾串
 
 反过来，翻转一个固定坐标来匹配两个奇偶类。对每条匹配边取全部四种颜色组合，并把每种带色配对重复 $N/2^{n+1}$ 次。群作用移动带色配对，并保留副本编号。这样就实现了两条均匀边缘。例如在三维，两边各有八个带色输出，最小的正种子数却是十六。
 
+**给定种子数时的最优固定质量。** 沿用两条均匀带色奇偶律与坐标着色作用。对可行的正种子数 $N$，记 $M=N/8$，并令 $H_i$ 只作用于第 $i$ 个坐标。在恰用 $N$ 颗等权种子的所有等变实现中，$\min_i |S^{H_i}|/N$ 的最大值为
+$$
+\alpha_n(N)=\frac12-\frac4N\left\lceil\frac{N}{8n}\right\rceil.
+$$
+最优固定种子计数见 [Lean 定理](lean:D5/S3/ConceptDynamics/Attribution/ParitySeedOptimization.best_fixed_seed_count)。
+
+例如 $\alpha_2(8)=0$，$\alpha_3(48)=1/3$。恰在 $N$ 为 $\operatorname{lcm}(2^{n+1},8n)$ 的正倍数时，它达到不限制种子数的最优值 $(n-1)/(2n)$。
+
+上界来自整数计数。将每个有序轮廓对的合并颜色计数除以四，得到一个非负整数矩阵，每行每列的和都是 $k=N/2^{n+1}$。对每个坐标，两侧边缘中位值为 $1$ 的归一化计数都为 $M$。若两位均为 $1$ 的计数是 $M-a_i$，则两种不匹配方向的计数各为 $a_i$。每对轮廓奇偶相反，至少有一位不同，因此 $2\sum_i a_i\ge N/4$。于是某个 $a_i$ 至少为 $\lceil M/n\rceil$。被 $H_i$ 固定的种子在两个输出的第 $i$ 位都必须是 $1$，故该坐标最多固定 $4(M-a_i)$ 颗种子。
+
+为达到上界，选取和为 $M$ 的非负整数 $a_i$，使最大值为 $\lceil M/n\rceil$。把这些计数分成 $k$ 批，每批总数为 $2^{n-2}$。将各批的计数翻倍后，每批总数为 $2^{n-1}$，且各方向计数均为偶数，故可用指定方向计数的定理为每批选择一个完美匹配。把这些匹配的边计数相加，就得到所需的轮廓矩阵。对每个边副本取全部四种颜色组合，得到恰好 $N$ 颗种子，群作用保留副本编号。此时种子被 $H_i$ 固定恰当且仅当两个输出的第 $i$ 位都是 $1$，因此达到上界。上取整恰在 $8n$ 整除 $N$ 时等于 $N/(8n)$，可行性还要求 $2^{n+1}$ 整除 $N$。
+
 **有理边缘的等权最优校准。** 设 $G$ 作用于有限输入集 $X$ 与有限输出集 $Y$，$P$ 是 $G$-协变概率核，$H$ 是任意子群。若存在正整数 $m$ 使所有 $mP(x,y)$ 为整数，则某个等权种子律达到 $H$ 固定质量的最大值。种子数可取 $m|\det B|$，其中 $B$ 是下述整数矩阵在某个最优解正支撑上的可逆方形子式。
 
 把每张确定性读出表 $t:X\to Y$ 在其 $G$-轨道 $O$ 内的权重统一记为 $q_O$。令 $A$ 的归一化行在列 $O$ 处取 $|O|$，单元格 $(x,y)$ 对应的行取 $|\{t\in O:t(x)=y\}|$，并令 $b$ 的相应条目为 $1$ 和 $P(x,y)$。再令 $c_O$ 为 $O$ 内被 $H$ 固定的表的个数。等变地把种子映到整张读出表会保留边缘，且每颗 $H$ 固定的种子都落到 $H$ 固定的表。反过来，可用正权重的表与求值读出实现任一可行表律。因此最大固定质量是 $Aq=b$、$q\ge0$ 下 $\sum_O c_Oq_O$ 的最优值。逐行独立抽样给出不变表律，归一化行使可行集有界。可行集闭合，所以最优值取得。
@@ -421,7 +433,7 @@ $$
 \bigl\lvert\langle\phi\mid\psi\rangle\bigr\rvert^2 \;=\; \max_{\chi}\bigl(2\kappa_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) - 1\bigr)^2 \;=\; 2\cdot\frac{1}{2\pi}\int_0^{2\pi}\bigl(2\kappa_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) - 1\bigr)^2\,d\chi .
 $$
 
-玻恩概率是 $(2\kappa_{S^3} - 1)^2$ 沿盲区纤维的最大值，也是其纤维平均的两倍。由 [@rem-ch39-axiom-omega-round-trip-closing-law] 的往返律，$(2\kappa(w, x) - 1)^2 = \kappa\bigl(w, [x, w, x]\bigr)$，所以玻恩概率又等于沿盲区纤维取最大的往返读数 $\max_\chi \kappa\bigl(\phi, [e^{\hat{\mathbf{i}}\chi}\psi, \phi, e^{\hat{\mathbf{i}}\chi}\psi]\bigr)$；§39.3.2 所说“往返双投影”在母核上的精确含义即此。玻恩权重因而是母核在时钟（盲区相位）作用下的领头不变量，这一恒等式是 `手工推导`；把它读作概率是一项约定，把纯态读作时钟轨道（盲区纤维）是单个系统层面的一项选择，二者都标为 `MODEL`。
+玻恩概率是 $(2\kappa_{S^3} - 1)^2$ 沿盲区纤维的最大值，也是其纤维平均的两倍。由 [@rem-ch39-axiom-omega-round-trip-closing-law] 的往返律，$(2\kappa(w, x) - 1)^2 = \kappa\bigl(w, [x, w, x]\bigr)$，所以玻恩概率又等于沿盲区纤维取最大的往返读数 $\max_\chi \kappa\bigl(\phi, [e^{\hat{\mathbf{i}}\chi}\psi, \phi, e^{\hat{\mathbf{i}}\chi}\psi]\bigr)$；§39.3.2 所说“往返双投影”在母核上的精确含义即此。玻恩权重因而是母核在时钟（盲区相位）作用下的领头不变量。这三个等式在单位四元数模型上由内核检查（[@thm-ch39-axiom-omega-ray-kernel-born-weight] 的记号，纤维取右相位陪集 $x c$，$c = c_0 + c_1 i$ 为相位）：对一切 $x, y \in \mathrm{Sp}(1)$，射线核 $R(x, y)$ 是 $\bigl(2\kappa(x c, y) - 1\bigr)^2$ 在相位 $c$ 上的最大值，也是往返读数 $\kappa\bigl(y, [x c, y, x c]\bigr)$ 在相位 $c$ 上的最大值，且 $\int_0^{2\pi}\langle x(\cos\chi + i\sin\chi), y\rangle^2\,d\chi = \pi R(x, y)$，被积函数即 $\bigl(2\kappa(x(\cos\chi + i\sin\chi), y) - 1\bigr)^2$（[`rayKernel_isGreatest_and_integral`](lean:D5/S3/Quantum/AURICOmega/RayKernelFibreExtremum.rayKernel_isGreatest_and_integral)，`LEAN ✓`）。由 $s$ 的实线性与 $s(q\,i) = \hat{\mathbf{i}}\,s(q)$ 得 $s(x c) = (c_0 + c_1\hat{\mathbf{i}})\,s(x)$；$s$ 保持实内积，又 $R(x, y) = \lvert\langle s(x) \mid s(y)\rangle\rvert^2$（同一定理第 4 款）；所以取 $\psi = s(x)$、$\phi = s(y)$ 时，四元数纤维 $x c$ 就是旋量相位轨道 $e^{\hat{\mathbf{i}}\chi}\psi$，上面三个等式由此得到，这一传递是 `手工推导`。上文的 $\cos^2 d_{\mathbb{CP}^1} = \lvert\langle\phi\mid\psi\rangle\rvert^2$（$d_{\mathbb{CP}^1}$ 取纤维间最小距离）由第一个最大值经单调性得到：$\cos d_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) = 2\kappa_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) - 1$，纤维在乘 $-1$ 下不变，余弦在 $[0, \pi]$ 上递减，故 $\cos d_{\mathbb{CP}^1} = \max_\chi \cos d_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) = \lvert\langle\phi\mid\psi\rangle\rvert$（`手工推导`）。把玻恩权重读作概率是一项约定，把纯态读作时钟轨道（盲区纤维）是单个系统层面的一项选择，二者都标为 `MODEL`。
 :::
 
 上一条注记中的恒等式在单位四元数模型上有内核验证的版本：在纤维上相隔四分之一圈的两点各取一次读数，平方后相加，所得的两项和只依赖霍普夫像，对相位不变，经旋量坐标等于玻恩权重。定理只陈述这些恒等式；把射线读作态、把这个量读作概率，仍是上一条注记所说的 `MODEL`。
