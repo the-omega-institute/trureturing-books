@@ -263,7 +263,7 @@ $$
 S(Y,Z)=\{Y,Z\}\cup\{n^4:n\in\mathbb N,\ Y\le n^4\le Z\}.
 $$
 
-把窗的两个端点列入，即使它们都不是四次幂，边缘两个不完整的小区间仍有可用的端点界。
+把窗的两个端点列入，即使它们都不是四次幂，窗边经过裁剪的小区间也有可用的端点界。
 
 ::: {.theorem #thm-ch31-quartic-power-windows title="在任意晚的幂窗内只检验两端与四次幂" lean="D5/S3/Weil/Mertens/IntegratedExplicit/QuarticSampling.rh_iff_quartic_power_windows"}
 固定实数 $b>1$。黎曼假设成立，当且仅当对每个 $\kappa>0$ 和每个实数 $R$，存在 $Y\ge\max\{R,2\}$，使同一个窗的每个 $t\in S(Y,Y^b)$ 满足 $U(t)\le t^{1/2+\kappa}$。
