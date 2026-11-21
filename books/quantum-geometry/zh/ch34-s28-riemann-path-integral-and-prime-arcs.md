@@ -358,6 +358,20 @@ $$
 
 上文的 $A_\vartheta$ 即 $A_{\vartheta,3/2}$。
 
+::: {.theorem #thm-ch31-prime-window-mean title="RH 下窗口质量的对数主项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/RHPrimeWindowMean.prime_tail_logarithmic_mass_of_rh"}
+假设黎曼猜想成立。存在一个常数 $C\ge0$，对所有实数端点 $B\ge A\ge2$ 同时有
+
+$$
+\left|\int_A^B\frac{\max\{-Q_\vartheta(x),0\}}{\sqrt{x}}\,dx-2\ln(B/A)\right|\le C.
+$$
+:::
+
+::: proof
+在素数幂层中，$\psi(x)-\vartheta(x)$ 与 $\psi(\sqrt{x})$ 的差由较高幂控制。对 $\sqrt{x}$ 应用 Schoenfeld 界，再积分得 $\sqrt{x}(Q(x)-Q_\vartheta(x))=2+O(x^{-1/12})$。取 $y=\ln x$ 后，这个误差在正向尾部绝对可积。归一化的完全余项由零点级数和一个指数衰减项组成。在 RH 下，零点级数的总系数绝对可和，其模小于 $2$，每个频率的绝对值大于 $10$。对每一项积分，将系数除以对应的频率，故零点级数在任意区间上的积分有同一个界。归一化素数尾项的负部 $\max\{-\sqrt{x}Q_\vartheta(x),0\}$ 可用 $2$ 加上零点级数的实部近似，因为该近似非负，且取正部保留可积误差的界。在有限的起始区间上用连续性控制误差。这样，$2$ 的积分给出对数主项，其余贡献对两端点一致有界。 完整证明由 Lean 内核检查。
+:::
+
+特别地，$A_{\vartheta,b}(Y)=2(b-1)\ln Y+O(1)$。同一个常数也适用于变动的 $b>1$。Zhao 的式 (14) 把这里的 $Q_\vartheta$ 写成第一 Mertens 误差的累积积分及端点项。这里的主项来自对该尾项作一次带权窗口积分，并以 RH 为前提。[Zhao，式 (14)](https://arxiv.org/html/2411.18903v2#S2.E14)
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::
