@@ -296,6 +296,28 @@ $$
 
 还可以只数素数。记 $\vartheta(t)=\sum_{p\le t}\ln p$，用它替换 $\psi$ 来定义 $Q_\vartheta$ 和 $A_\vartheta$。素数幂给尾积分带来的修正满足 $\sqrt{x}(Q(x)-Q_\vartheta(x))\to2$。取一个常数 $C$ 使 $\psi(t)-\vartheta(t)\le C\sqrt{t}$ 对所有 $t\ge1$ 成立，这样的 $C$ 无条件存在。负部随尾积分递减，窗口定理给出 $0\le A_\vartheta(Y)-A(Y)\le 2C\ln(Y^{3/2}/Y)=C\ln Y$。于是临界条件也可写成对每个 $\eta>0$ 都有任意远的窗口满足 $A_\vartheta(Y)\le Y^\eta$。从 $A$ 的条件取指数 $\eta/2$，再用 $Y^{\eta/2}+C\ln Y\le Y^\eta$ 对充分大的 $Y$ 成立即可。独立的算术任务是从素数分布证明这个负部积分界。 [素数幂修正的窗口估计](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.prime_power_window_correction)
 
+**窗口预算怎样限制内点的负值？** 沿用上文的素数尾项，记
+
+$$
+Q_{\vartheta}(x)=\int_x^\infty\frac{\vartheta(t)-t}{t^2}\,dt,
+\qquad N(a,b)=\int_a^b\frac{\max\{-Q_{\vartheta}(z),0\}}{\sqrt z}\,dz.
+$$
+
+::: {.theorem #thm-ch31-prime-tail-negative-window title="内点负值给出的窗口积分下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeOnlyTailCorrection.prime_tail_negative_window_lower"}
+设 $a,b,x,r$ 为实数，满足 $0<r\le 1/2$、$1\le a\le(1-r)x$ 和 $(1+r)x\le b$。若 $Q_{\vartheta}(x)\le-4r^2$，则 $N(a,b)\ge r^3\sqrt{x}$。
+:::
+
+::: proof
+这个估计适用于实数截点，包括素数处的跃迁。
+
+由 $\vartheta$ 的单调性，将局部积分中的 $\vartheta(t)$ 与 $\vartheta(x)$ 比较，得到
+$Q_{\vartheta}(z)-Q_{\vartheta}(x)\le\ln(z/x)+\vartheta(x)(1/z-1/x)$。
+当 $\vartheta(x)\le x$ 时取左侧，反之取右侧。在所选方向上，右端由 $\ln(z/x)+x/z-1$ 控制，而 $\ln t\le t-1$ 将它进一步控制在 $(z-x)^2/(zx)\le 2r^2$ 以内。于是长度为 $rx$ 的那一侧都有 $-Q_{\vartheta}(z)\ge 2r^2$，且 $\sqrt{z}\le2\sqrt{x}$。积分即得下界。 完整证明由 Lean 内核检查。
+
+:::
+
+因此，只要已知窗口预算严格小于 $r^3\sqrt{x}$，就可以排除该内点的深度 $4r^2$。两侧余量决定可用的 $r$。Landau 论证所需的任意远小预算窗口仍需独立的算术估计。
+
 - **经典的 von Mangoldt–Weil 点态中点显式公式（`文献结果，未在本书形式化`：von Mangoldt, 1895；Weil, 1952）**：记切比雪夫素数幂阶梯函数为 $\psi(x) := \sum_{n \le x}\Lambda(n) = \sum_{p^m \le x}\ln p = \ln\operatorname{lcm}(1, 2, \dots, \lfloor x\rfloor)$，并在整数跃迁点处取左右极限算术平均定义吉布斯（Gibbs）中点阶梯 $\psi_0(x) := \frac{1}{2}\bigl(\psi(x^+) + \psi(x^-)\bigr) = \psi(x) - \frac{1}{2}\Lambda(x)$（当 $x \in \mathbb{N}_{\ge 2}$ 为素数幂 $p^m$ 时减去半阶跃 $\frac{1}{2}\ln p$，为无素数幂合数时 $\Lambda(x) = 0$ 故 $\psi_0(x) = \psi(x)$），则对一切 $x > 1$，对称截断极限给出：
 
   $$
