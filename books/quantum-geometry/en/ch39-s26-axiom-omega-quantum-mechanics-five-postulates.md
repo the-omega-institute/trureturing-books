@@ -235,11 +235,11 @@ $$
 
 The choice $d=1$ always applies. A larger value requires the overlap to cover every positive-weight seed moved by $N$ with the stated multiplicity.
 
-The same count gives an exact gap. Write $L_K=1-\alpha_K$. Seeds fixed by $N$ lie outside every failure event, so
+Under the same multiplicity lower bound, the count gives an exact gap. Write $L_K=1-\alpha_K$. Seeds fixed by $N$ lie outside every failure event, so
 $$
 rL_H-dL_N=\sum_{s\in S\setminus S^N} a(s)\,(\ell(s)-d).
 $$
-Under the multiplicity lower bound, every summand is nonnegative. Thus $dL_N=rL_H$ exactly when each positive-weight seed moved by $N$ lies in precisely $d$ distinct events.
+Every summand is nonnegative. Thus $dL_N=rL_H$ exactly when each positive-weight seed moved by $N$ lies in precisely $d$ distinct events.
 
 Counting by event multiplicity also gives the probability identity for a finite union of events. [Kuai, Alajaji and Takahara, Lemma 1](https://fady-alajaji.github.io/Journal/d_math00.pdf)
 
