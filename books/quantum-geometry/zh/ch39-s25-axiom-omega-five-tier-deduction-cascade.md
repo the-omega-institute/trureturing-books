@@ -67,7 +67,7 @@ $$
 既然母公理已将单座概念场锁定为单位四元数模型，即三维 $\mathbb{T}_3 \cong S^3(1)$（[@thm-ch39-axiom-omega-rank-five-unit-quaternion-embedding]、[@thm-ch39-axiom-omega-complete-rank-five-isomorphism]，`LEAN ✓`；例如六维紧半单代数 $\mathfrak{so}(4) \cong \mathfrak{su}(2)_L \oplus \mathfrak{su}(2)_R$（经典同构，`文献结果`）亦自然劈裂为两座独立 $\mathbb{T}_3$ 因子），本模型（`MODEL`，呼应 [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md)）不假定单块高维大统一单群，而是以平行并置的三维三元数概念场丛 $(\mathbb{T}_3)^K$ 承载新增量子数：
 
 1. **第三阶推导：平行概念场丛、温伯格角 $\frac{3}{8}$ 与胞间过约束引力（Tier 3，呼应 [§33.8](ch39-s09-unified-arc-forces-and-planck-convergence.md)–[§33.9](ch39-s11-af-gut-arc-field-grand-unification.md)）**：
-   - **胞内规范三力与手性外尔账本温伯格角 $\frac{3}{8}$（`MODEL` / `手工推导`）**：在四重并置概念场丛上，对无量纲总矢高与角盈/角亏作用量 $\mathcal{S}_\Omega$ 求驻相极值 $\delta\mathcal{S}_\Omega = 0$，胞内 `1D` 超荷圆周联络（`MODEL`；相邻经内核检查的是有限连通图上锚定阿贝尔规范商同构于环面，[`anchored_phase_classification`](lean:D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification)，`LEAN ✓`）、`2D` 双覆盖手征旋折（`MODEL`；相邻经内核检查的是圆周平方映射的路径唯一提升与整圈换叶，[`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift)，`LEAN ✓`；两条声明都不陈述超荷或手征）与 `3D` 保单态体积色棱重排显影为电弱—强规范群 $\mathrm{U}(1)_Y \times \mathrm{SU}(2)_L \times \mathrm{SU}(3)_C$（其电弱扇区再经色单态跨概念场希格斯颤动桥 $\Phi_H$ 破缺至电磁 $\mathrm{U}(1)_{\mathrm{em}}$，保留完整未破缺规范群 $\mathrm{U}(1)_{\mathrm{em}} \times \mathrm{SU}(3)_C$）。无需假定高维 $\mathrm{SU}(5)$ 大矩阵，在单胞统一能标 $\mu_{\mathrm{arc}}$ 的共享手性外尔账本上施加普适圆弧迹刚度公设（`MODEL`，单代含 $1$ 个轻子通道与 $N_c = 3$ 个三维色通道；弱同位旋 $T_3$ 仅作用于左手二重态，而矢量电荷 $Q = T_3 + Y$ 同时作用于左右双翼手征态故带双翼因子 `2`，与 [§33.9](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification) 一致），裸温伯格角精确给出：
+   - **胞内规范三力与手性外尔账本温伯格角 $\frac{3}{8}$（`MODEL` / `手工推导`）**：在四重并置概念场丛上，对无量纲总矢高与角盈/角亏作用量 $\mathcal{S}_\Omega$ 求驻相极值 $\delta\mathcal{S}_\Omega = 0$，胞内 `1D` 超荷圆周联络（`MODEL`；相邻经内核检查的是有限连通图上锚定阿贝尔规范商同构于环面，[`anchored_phase_classification`](lean:D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification)，`LEAN ✓`）、`2D` 双覆盖手征旋折（`MODEL`；相邻经内核检查的是圆周平方映射的路径唯一提升与整圈换叶，[`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift)，`LEAN ✓`；两条声明都不陈述超荷或手征）与 `3D` 保单态体积色棱重排显影为电弱—强规范群 $\mathrm{U}(1)_Y \times \mathrm{SU}(2)_L \times \mathrm{SU}(3)_C$（此处及下文破缺后的直积均为覆盖群表述）（其电弱扇区再经色单态跨概念场希格斯颤动桥 $\Phi_H$ 破缺至电磁 $\mathrm{U}(1)_{\mathrm{em}}$，保留完整未破缺规范群 $\mathrm{U}(1)_{\mathrm{em}} \times \mathrm{SU}(3)_C$）。无需假定高维 $\mathrm{SU}(5)$ 大矩阵，在单胞统一能标 $\mu_{\mathrm{arc}}$ 的共享手性外尔账本上施加普适圆弧迹刚度公设（`MODEL`，单代含 $1$ 个轻子通道与 $N_c = 3$ 个三维色通道；弱同位旋 $T_3$ 仅作用于左手二重态，而矢量电荷 $Q = T_3 + Y$ 同时作用于左右双翼手征态故带双翼因子 `2`，与 [§33.9](ch39-s11-af-gut-arc-field-grand-unification.md#sec-ch39-af-gut-arc-field-grand-unification) 一致），裸温伯格角精确给出：
 
      $$
      \sin^2\theta_W(\mu_{\mathrm{arc}}) \;=\; \frac{\operatorname{Tr}_{\mathrm{Weyl}}(T_3^2)}{\operatorname{Tr}_{\mathrm{Weyl}}(Q^2)} \;=\; \frac{\frac{1}{2}(1 + 3)}{2\!\left(1 + 3 \times \frac{5}{9}\right)} \;=\; \frac{2}{\frac{16}{3}} \;=\; \frac{3}{8} \;=\; 0.375,
@@ -87,6 +87,29 @@ $$
 
 **三个结构（`MODEL`）。** 以下每一项都是假设：规范群为 $\mathrm{SU}(V_2) \times \mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$（后两个因子是第三个结构的左、右迁移），物质多重态为 $(4, 2, 1)$ 与 $(4, 1, 2)$，破缺构型为 $\Xi = \omega \otimes v$（$v$ 为第三个结构上的一点）。则 $\Xi$ 的稳定子的李代数为 $\mathfrak{su}(3) \oplus \mathfrak{su}(2)_L \oplus \mathfrak{u}(1)_Y$，其中 $Y = T_{3R} + \frac{1}{2}(B - L)$，忠实作用的整体形式为 $(\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1))/\mathbb{Z}_6$。$Y$ 在左手多重态上取 $-\frac{1}{2}$（轻子）与 $\frac{1}{6}$（夸克），在右手多重态上取 $0, -1$（轻子）与 $\frac{2}{3}, -\frac{1}{3}$（夸克），正是含右手中微子的一代费米子的超荷，轻子沿 $\omega$、夸克沿 $\mathrm{Sym}^2 V$。再假设以单一迹形式归一且三个因子耦合相等（同属 `MODEL` 假设），得 $\sin^2\theta_W = \operatorname{Tr}T_{3L}^2 / \operatorname{Tr}Q^2 = \frac{3}{8}$；若超荷就是单个结构的时钟生成元 $T_{3R}$，同一归一给出 $\frac{1}{2}$。按标准模型一圈跑动（不计阈值），$\sin^2\theta_W$ 约在 $1.0 \times 10^{13}\;\mathrm{GeV}$ 达到 $\frac{3}{8}$、约在 $5.4 \times 10^{20}\;\mathrm{GeV}$ 达到 $\frac{1}{2}$；但以标准模型的物质内容，一圈下没有任何能标实现三个耦合相等：在 $1.0 \times 10^{13}\;\mathrm{GeV}$ 处 $\alpha_3^{-1} = 36.8$，而 $\alpha_2^{-1} = 42.4$。所以 $\frac{3}{8}$ 与 $\frac{1}{2}$ 只是群论边界值，不是对低能值的预言。以上就是 Pati–Salam 嵌入（J. C. Pati & A. Salam, *Phys. Rev. D* **10**, 275–289, 1974）与 Georgi–Quinn–Weinberg（1974）的取值，`文献结果`；新增的只是把各要素对应到比较结构的对象上。规范群的这条假设由母公理之外给出；代的数目、能标与耦合常数保持 `OPEN`（[@prob-ch39-af-gut-threshold-and-proton-stability]、[@prob-ch34-sm-generations-and-couplings]）。
 :::
+
+**从有向弧得到内部群（手工推导）。** 在上文的九点贝伦德球壳上，给六条最短弦的每个方向配一个正交复基矢 $|p,q\rangle$。例如 $(0,1,4)\to(1,0,4)$ 的坐标置换给出六个有向标签。$(3,2,2)\to(2,3,2)$ 的置换给出另外六个。保持第一个有向点对须固定三个不同坐标，保持第二个须固定两个 $3$ 所在的位置，两个稳定子都平凡。因此十二维标签空间 $H$ 承载两份 $S_3$ 正则表示。用 $V$ 表示二维标准表示，分解为
+
+$$
+H=(\mathbf1\otimes M_+)\oplus(\mathrm{sgn}\otimes M_-)
+  \oplus(V\otimes M_0),\qquad
+(\dim M_+,\dim M_-,\dim M_0)=(2,2,4).
+$$
+
+与坐标置换对易的酉变换可在每个重数空间上独立作用。将连通的半单部分选作物理内部群（`MODEL`）。取这个酉群的交换子群，按 $M_0,M_+,M_-$ 的顺序就是 $G=SU(4)\times SU(2)_L\times SU(2)_R$。选取从前两个等型分量到标准分量的有向跃迁作为物质空间（模型选择）。左块是 $V\otimes M_0\otimes M_+^*$，给出两份 $(4,2,1)$。右块给出两份 $(4,1,2)$，两块的公共核由 $(-I_4,-I_2,-I_2)$ 生成。这里的重数二来自 $\dim V$。从实际零点谱构造这些对象，使用终端声明 `riemannZeta_eq_zero_re` 对非平凡零点的定位，还需制备方向态并相干区分有向弧。[相干标签的制备与表示分解](https://github.com/the-omega-institute/trureturing-books/issues/859#issuecomment-7069222700)
+
+**在何处记录相消，决定剩余的相位。** 设 $d_p$ 是起点 $p$ 的出度，把相同起点的振幅用 $B|p,q\rangle=|p\rangle/\sqrt{d_p}$ 合并。由于 $BB^*=I_9$，$K=I-B^*B$ 投影到相消分量。六个出度为一的起点没有这种分量。在其余三个起点，每处只有一条相消射线，由 $(|p,q\rangle-|p,r\rangle)/\sqrt2$ 张成。规定读出方式（`MODEL`）：测量在这三条射线上分别登记起点，在 $I-K$ 上给出同一个结果。九维起点空间承载一份正则表示及一份三点置换表示。两者的和从 $H$ 中扣除，留下 $\ker B\simeq\mathrm{sgn}\oplus V$，故相消分量在 $M_-$ 和 $M_0$ 中各选出一条直线。保持三个射线结果的内部变换在每条射线上乘以一个相位。坐标置换传递地交换三条射线，且与内部变换对易，三个相位必须相等。若测量仅区分 $K$ 与 $I-K$，两条重数直线上的相位可独立变化。
+
+记这个共同相位为 $w^{-3}$。群 $G$ 中保持上述读出的元素恰有以下形式，其中 $U_3\in SU(3)$、$U_2\in SU(2)$、$|w|=1$。
+
+$$
+g_4=\operatorname{diag}(wU_3,w^{-3}),\qquad
+g_L=U_2,\qquad g_R=\operatorname{diag}(w^{-3},w^3).
+$$
+
+在跃迁上，目标的整数权减去源的整数权。按 $6Y$ 计，四维目标的权是 $(1,1,1,-3)$，左源为 $(0,0)$，右源为 $(-3,3)$。于是左色三重态和轻子双态的超荷为 $1/6,-1/2$，右色三重态的两荷为 $2/3,-1/3$，右轻子的两荷为 $0,-1$。覆盖参数在原弧标签上的核是 $\mathbb Z_3$。在两块跃迁上的核由 $(e^{2\pi i/3}I_3,-I_2,e^{i\pi/3})$ 生成，忠实群为 $(SU(3)\times SU(2)\times U(1))/\mathbb Z_6$。[起点读出与全局群的证明](https://github.com/the-omega-institute/trureturing-books/issues/859#issuecomment-7069250348)
+
+若用同一系数乘生成元的平方迹来规定匹配尺度的规范动能（`MODEL`），还须选取取迹空间。以基本表示的平方迹 $1/2$ 归一化，在弧标签上的三个指数 $(I_4,I_L,I_R)$ 为 $(1,1/2,1/2)$，在全部左右跃迁上等权取迹为 $(4,4,4)$。上式的超荷嵌入给出 $\sin^2\theta_W=I_L/(I_L+I_R+2I_4/3)$，两种取迹分别得到 $3/10$ 与 $3/8$。本构造给出了条件性的内部表示及电荷。给出局域规范动力学、把跃迁实现为时空中的手征粒子、解释观测到的三代并确定匹配能标与质量，仍需独立的动力学。
 
 ::: {.remark #rem-ch39-axiom-omega-field-hypotheses-and-limits title="场论假设及其界限"}
 本注记中各项假设标 `MODEL`，在这些假设下推出的结论标 `手工推导`；场论部分整体是假设性的。
