@@ -393,7 +393,7 @@ For sufficiency at multiplier $1$, the even-word cuts reduce to three triangle i
 | $(1,2,3,0)$ | $(2,0,3,1)$ | $(0,0,0,2)$ |
 | $(1,0,3,2)$ | $(1,0,3,2)$ | $(0,2,0,0)$ |
 
-Adding the matchings gives the normalized cell counts. The per-point multiplicity of an ordinary cell is its cell count. For the second colour, the per-point multiplicity is twice the cell count minus the first colour's multiplicity. A coordinate contributes fixed seeds only from orbits on which its generator fixes every output point. On those orbits, an odd per-point multiplicity forces at least one fixed seed per point. At multiplicity two, changing the per-point fixed count from zero to two adds two to $u_i$ in an ordinary orbit and one in a two-point orbit. At each coordinate these additions can be chosen independently. From top to bottom, the table gives the following products of choices for the normalized entries.
+Adding the matchings gives the normalized cell counts. The per-point multiplicity of an ordinary cell is its cell count. For the second colour, the per-point multiplicity is twice the cell count minus the first colour's multiplicity. A coordinate contributes fixed seeds only from orbits on which its generator fixes every output point. On those orbits, an odd per-point multiplicity forces at least one fixed seed per point. When the generator fixes the output points and the multiplicity is two, changing the per-point fixed count from zero to two adds two to $u_i$ in an ordinary orbit and one in a two-point orbit. At each coordinate these additions can be chosen independently. From top to bottom, the table gives the following products of choices for the normalized entries.
 
 $$
 \begin{aligned}
