@@ -803,14 +803,25 @@ $$
 先由素数尾项的最终符号固定 $a_0$，再选精度。在 $[\ln a,\ln B]$ 上积分，并用 $s_m\ge1/6$，保留原有的两端幂差。完整证明由 Lean 内核检查。
 :::
 
-::: {.problem #prob-ch31-prime-window-quantitative-sublinear-remainder title="给次线性余项一个定量速率"}
-在 RH 下，是否存在常数 $a_0\ge2$ 和 $C>0$，使所有整数 $m\ge2$ 和实数截点 $B\ge a\ge a_0$ 都满足
+<a id="prob-ch31-prime-window-quantitative-sublinear-remainder"></a>
+
+::: {.theorem #thm-ch31-prime-window-quantitative-sublinear-remainder title="素数尾窗余项的显式次线性速率" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusRate.prime_window_mobius_quantitative_of_rh"}
+假设 RH。存在实数 $a_0\ge2$ 和 $C>0$，使每个整数 $m\ge2$ 与所有实数截点 $B\ge a\ge a_0$ 都满足
 
 $$
 |E_m(a,B)|\le \frac{C m}{\sqrt{1+\ln\ln(m+1)}}D_{s_m}(a,B).
 $$
 
-[定量余项问题](https://github.com/the-omega-institute/trureturing/issues/33041)
+这里 $E_m(a,B)$ 是 [@thm-ch31-prime-window-mobius] 中的有符号余项，且 $s_m=\tfrac12-\tfrac1{m+1}$。允许 $B=a$。
+
+:::
+
+::: proof
+令 $q=m+1$，$u=\ln x$。在 Möbius 的带符号卷积式中，把取整与 Chebyshev 项相减，并将商变量的截点取为 $\ln(m)$ 的五分之四次幂。两段误差配平后，$m$ 以内每个 Möbius 前缀和乘以 $\ln m$ 都由常数乘 $m/(\ln m)^{1/5}$ 控制。Abel 求和把这个估计传给平凡零点的加权响应。
+
+对充分大的 $m$，取 $L=(1+\ln\ln(m+1))/8$。若 $u\le Lq$，对两列随次数递减的根权重作带符号求和。提取目标指数衰减后，代价至多为常数乘 $e^{2L}m/\ln m$。若 $u\ge Lq$，在高度 $\lceil L^2\rceil$ 分割带解析重数的单位频率箱。低频质量至多按高度的四分之一次幂增长，由几何权重总和 $1+q^2/u$ 控制其贡献。高频箱的平方质量之和至多按高度的负二分之一次幂衰减，取平方根后通过局部高斯采样得到所需的界。两部分都至多按 $m/\sqrt L$ 增长。
+
+把密度估计在原窗口上积分，保留两端幂差。有限个较小阶数由 [@thm-ch31-prime-window-linear-remainder] 的线性界吸收到同一常数中。完整证明由 Lean 内核检查。
 :::
 
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
