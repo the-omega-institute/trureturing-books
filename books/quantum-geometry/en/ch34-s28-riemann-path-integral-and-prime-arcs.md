@@ -1042,7 +1042,7 @@ Increasing the order to $q$ adds exactly the arithmetic term of degree $q$. The 
 :::
 
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
-Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ and every logarithmic width $L>0$, there is a constant $C>0$. For all $U\ge U_0$ and $T>0$ the function
+Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 
 $$
 F(u)=\frac{E_m(e^u,e^{u+L})}{D_{s_m}(e^u,e^{u+L})}
@@ -1056,10 +1056,10 @@ $$
 :::
 
 ::: proof
-The denominator is $e^{-s_m u}(1-e^{-s_m L})>0$. Under RH the normalized increment of the degree-$r$ primitive is an absolutely summable series with frequencies $\operatorname{Im}(\rho)/r$. The endpoint terms use the same zero, with a factor determined by the fixed width. The verified lower bound on zero heights bounds every exponential integral by a common constant. Termwise integration gives a spectral integral bound independent of $U,T$. The normalized $E_q$ decays as $e^{-\delta_m u}$ and has an integral bound independent of $U,T$ as well. Dividing the two bounds by $T$ leaves the arithmetic constant $-\mu(q)q/((q-1)s_m)$.
+The denominator is $e^{-s_m u}(1-e^{-s_m L})>0$. Under RH the normalized increment of the degree-$r$ primitive is an absolutely summable series with frequencies $\operatorname{Im}(\rho)/r$. The endpoint terms use the same zero, with a factor determined by the fixed width. The verified lower bound on zero heights bounds every exponential integral by a common constant. Termwise integration gives a bounded primitive. Subtracting the shifted integrals leaves two boundary intervals of length $L$. The bound $e^{-s_m L}L/(1-e^{-s_m L})\le 1/s_m$ gives a spectral integral bound independent of $U,T,L$. The normalized $E_q$ decays as $e^{-\delta_m u}$ and has an integral bound independent of $U,T$ as well. Dividing the two bounds by $T$ leaves the arithmetic constant $-\mu(q)q/((q-1)s_m)$.
 :::
 
-For squareful $q$ the arithmetic mean vanishes. The degree-$r$ spectral term depends on $\mu(r)$ and can still contribute at individual windows. The error constant can depend on $m,L$. Recovering individual nonzero-frequency coefficients and their multiplicities remains open.
+For squareful $q$ the arithmetic mean vanishes. The degree-$r$ spectral term depends on $\mu(r)$ and can still contribute at individual windows. The error constant can depend on the order $m$. Recovering individual nonzero-frequency coefficients and their multiplicities remains open.
 
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.

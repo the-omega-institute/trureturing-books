@@ -1042,7 +1042,7 @@ $$
 :::
 
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
-假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 及每个对数窗宽 $L>0$ 都有常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
+假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 
 $$
 F(u)=\frac{E_m(e^u,e^{u+L})}{D_{s_m}(e^u,e^{u+L})}
@@ -1056,10 +1056,10 @@ $$
 :::
 
 ::: proof
-分母为 $e^{-s_m u}(1-e^{-s_m L})>0$。在 RH 下，归一化的次数 $r$ 根原始量增量由频率 $\operatorname{Im}(\rho)/r$ 的可绝对求和级数给出。两个端点对应同一个零点，仅相差固定窗宽的因子。零点高度下界使每个频率的指数积分由同一个常数控制，从而可以逐项积分并得到独立于 $U,T$ 的根谱积分界。归一化后的 $E_q$ 按 $e^{-\delta_m u}$ 衰减，也有独立于 $U,T$ 的积分界。将两项的积分界除以 $T$，留下常数 $-\mu(q)q/((q-1)s_m)$。
+分母为 $e^{-s_m u}(1-e^{-s_m L})>0$。在 RH 下，归一化的次数 $r$ 根原始量增量由频率 $\operatorname{Im}(\rho)/r$ 的可绝对求和级数给出。两个端点对应同一个零点，仅相差固定窗宽的因子。零点高度下界使每个频率的指数积分由同一个常数控制，从而得到有界的谱原始量。两个平移积分相减后只剩两段长度为 $L$ 的边界区间。结合 $e^{-s_m L}L/(1-e^{-s_m L})\le 1/s_m$，得到独立于 $U,T,L$ 的根谱积分界。归一化后的 $E_q$ 按 $e^{-\delta_m u}$ 衰减，也有独立于 $U,T$ 的积分界。将两项的积分界除以 $T$，留下常数 $-\mu(q)q/((q-1)s_m)$。
 :::
 
-若 $q$ 含平方因子，算术平均为零。次数 $r$ 的根谱项仍由 $\mu(r)$ 决定，端点展开允许它在个别窗口中出现。这里的误差常数可依赖于 $m,L$。各个非零频率的系数和重数恢复是另外的待证问题。
+若 $q$ 含平方因子，算术平均为零。次数 $r$ 的根谱项仍由 $\mu(r)$ 决定，端点展开允许它在个别窗口中出现。误差常数可以依赖于阶数 $m$。各个非零频率的系数和重数恢复是另外的待证问题。
 
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
