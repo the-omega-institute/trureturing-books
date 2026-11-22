@@ -414,7 +414,7 @@ For $k=2m$, repeatedly take a block at multiplier $2$. Choose each entry of the 
 $$
 k\text{ is even}\qquad\text{or}\qquad 2k\ge n+2.
 $$
-In dimension four this means $k\ge2$. In dimensions six and eight the least odd multiplier is five, and in dimensions ten and twelve it is seven.
+In dimension four this means $k\ge2$. [Four-dimensional single-coordinate budget criterion](lean:D5/S3/ConceptDynamics/Attribution/ParityFourSparseCounts.exact_four_sparse) In dimensions six and eight the least odd multiplier is five, and in dimensions ten and twelve it is seven.
 
 Write the even and odd profiles as subsets $p,q$ of the coordinates. Every cell has a four-point colour orbit except those in the all-ones even row, denoted $p_\star$. Each cell in that row has two two-point orbits indexed by the left colour. An ordinary cell of per-point multiplicity $m$ contributes $m$ to each of its profile's normalized marginal counts. A special cell with per-point multiplicities $m^0,m^1$ contributes $(m^0+m^1)/2$. The normalized profile marginals are all $k$, and in the special row each individual colour has a sum of per-point multiplicities equal to $k$.
 
