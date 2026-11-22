@@ -698,6 +698,35 @@ $$
 对于零场值有限的正谱，五个实外场也给出有限精度的检验。在 $h=0,4,8,12,16$ 依次给归一化读数赋权 $w_i=a_i/\sum_j|a_j|$，其中整数 $a_i$ 依次为 $8544921875$、$-16976003576$、$14684762428$、$-8445320648$、$2194079281$。这个线性组合对每个正谱都给出非负值，而上述纯纵向预测为 $-0.00002712547$。即使五个归一化读数各有 $0.000027$ 的绝对误差，总和仍为负。[五点权重、证明及区间数值证书](https://github.com/the-omega-institute/trureturing-books/issues/943#issuecomment-7076689640)
 :::
 
+::: {.remark #rem-ch39-equal-time-variance title="一个有限方差探针能否读出全部频率？"}
+**等时读数（手工推导）。** 上一段使同一系综在不同静态背景上给出 $F$。现在固定一个平衡态和一个中心化的厄米探针，把目标规定为零空间动量的连通欧氏**时间**关联函数，并取零频弹性项和接触项为零，所有频率共用同一标定 $D_0>0$ 和尺度 $M>0$。按本节的零点展开，
+
+$$
+D(\omega^2)=D_0 F(\omega^2/M^2)=\frac{D_0M^2}{S}\sum_{\gamma>0}\frac{m_\gamma}{\omega^2+M^2\gamma^2}.
+$$
+
+零温时，在傅里叶测度 $d\omega/(2\pi)$ 下，对全部实频率积分给出等时方差。只保留 $\gamma\le H$ 的谱项并沿用全塔归一化，用 $\int_{\mathbb R}d\omega/[2\pi(\omega^2+E^2)]=1/(2E)$ 得
+
+$$
+V_H=\frac{D_0M}{2S}\sum_{0<\gamma\le H}\frac{m_\gamma}{\gamma}
+=\frac{D_0M}{8\pi S}\log^2(H/(2\pi))+O(1)\qquad(H\to\infty).
+$$
+
+这里 $N(H)$ 按重数计正纵坐标。对 $\int_{0^+}^H t^{-1}dN(t)$ 分部积分，代入黎曼–冯·曼戈尔特计数律 $N(t)=t\log(t/(2\pi e))/(2\pi)+O(\log t)$，即得所示系数。计数律本身无条件。黎曼猜想在本节中用于将算术响应识别为正极点和。单个正质量振子的正频半轴积分见 [`oscillator_integral`](lean:D5/S3/Quantum/StaticExchange/OscillatorInverseMass.oscillator_integral)。任意可数振子塔，若质量 $E_n>0$、留数 $a_n\ge0$，其正频半轴积分有限当且仅当 $\sum_n a_n/E_n$ 收敛，见 [`tower_integral_criterion`](lean:D5/S3/Quantum/StaticExchange/OscillatorInverseMass.tower_integral_criterion)。各项非负，故单调收敛给出全塔的无穷方差。在逆温 $\beta>0$ 下，取玻色 Matsubara 频率 $\omega_n=2\pi n/\beta$。等时值 $\beta^{-1}\sum_{n\in\mathbb Z}D(\omega_n^2)$ 中每一谱项的零温贡献都乘以 $\coth(\beta M\gamma/2)\ge1$。因此有限等时方差的同一探针也无法在某个固定正温下重现全部离散频率。
+
+有限频率也可给出必要条件。零温基态中，设探针的正能量跃迁测度为 $\mu$，总质量不超过测得的等时方差 $V$。用谱表示 $D(\omega^2)=\int 2E/(\omega^2+E^2)\,d\mu(E)$ 和 $2|\omega|E\le\omega^2+E^2$，得 $|\omega|D(\omega^2)\le V$。例如在 $|\omega|/M=16$，匹配目标要求 $V/(D_0M)\ge16F(256)\approx12.4852241$。实验须在同一态上独立标定方差与响应。有限带宽只检验其覆盖的频率。上一段的零背景分量方差为 $2S$，因而也受同一限制。[等时求和、有限频率界与区间数值](https://github.com/the-omega-institute/trureturing-books/issues/967#issuecomment-7078068828)
+
+**有时间分辨率的探针（模型）。** 保留各极点而衰减高能留数，可得到有限方差的正例。取无量纲参数 $L>0$ 和 $u=\omega^2/M^2$，在每个谱留数上乘以 $w_L(\gamma)=L^2/(\gamma^2+L^2)$。逐项分式分解给出
+
+$$
+K_L(u)=\frac{L^2[F(u)-F(L^2)]}{L^2-u},\qquad K_L(L^2)=-L^2F'(L^2).
+$$
+
+按零频值归一，$L=16$ 时 $K_L(256)/K_L(0)\approx0.575087$，而 $F(256)\approx0.780327$。带权的逆质量和 $\sum_\gamma m_\gamma w_L(\gamma)/\gamma$ 收敛。要保留上一段三分量的完整等时联合分布，坐标方差已固定为 $2S$。因此给定 $M,L$ 后，零频增益必须满足 $D_0M=4S^2K_L(0)/(\sum_\gamma m_\gamma w_L(\gamma)/\gamma)$。在该分布的 $L^2$ 空间里以常函数为真空、坐标乘法为探针，选取旋转不变的正哈密顿量，使坐标激发在能量 $M\gamma$ 上的权重与 $m_\gamma w_L(\gamma)/\gamma$ 成正比，就得到上述归一化频率响应。另一种实现从未滤波的理想质量塔出发，对其探针做指数时间平均。若测得衰减率为 $\Lambda$，则跃迁幅度获得模平方权重 $\Lambda^2/(\Lambda^2+E^2)$，对应 $L=\Lambda/M$。滤波、频率刻度及增益均可独立标定。[正能量实现与滤波预测](https://github.com/the-omega-institute/trureturing-books/issues/967#issuecomment-7078075499) · [探针时间常数的标定](https://github.com/the-omega-institute/trureturing-books/issues/967#issuecomment-7078108994)
+
+若进一步规定单个三维内部空间、无流基态和由其密度反定的平直 Schrödinger 算子，坐标探针可见的径向能级不足以给出完整算术频率。其平方根色散也有相应的计数障碍。[两种色散的径向计数](https://github.com/the-omega-institute/trureturing-books/issues/967#issuecomment-7078151889)
+:::
+
 **这条响应曲线可以由哪些传播子读出？（标量交换模型）** 取欧氏动量平方 $s=q_E^2>0$，引入自由质量尺度 $M>0$。令 $b_\gamma=M^2\gamma^2$，沿用 $p_\gamma=m_\gamma/(S\gamma^2)$。无量纲响应 $A(s)=F(s/M^2)=\sum_\gamma p_\gamma b_\gamma/(s+b_\gamma)$ 从 $1$ 严格递减到 $0$。没有接触项的标量对角传播子若有正谱表示 $D(s)=\int_{[0,\infty)}(s+b)^{-1}\,d\rho(b)$，则 $sD(s)$ 非减，因为每个 $s/(s+b)$ 都非减。因此 $A(s)/s$ 不能作为这种自相关传播子。分式分解还指出阻碍出现在哪里：
 
 $$
