@@ -761,8 +761,30 @@ After factoring out the target decay, each term carries the weight $\exp[-u(1/q-
 
 The bound includes $B=a$, where both sides vanish.
 
-::: {.problem #prob-ch31-prime-window-linear-remainder title="A prime-window remainder linear in the truncation order"}
-Under RH, do constants $a_0\ge2$ and $K>0$ exist such that the same residual satisfies $|E_m(a,B)|\le K m D_{s_m}(a,B)$ for every integer $m\ge2$ and all real cutoffs $B\ge a\ge a_0$, including $B=a$? [Formalization research](https://github.com/the-omega-institute/trureturing/issues/32976)
+<a id="prob-ch31-prime-window-linear-remainder"></a>
+
+::: {.theorem #thm-ch31-prime-window-linear-remainder title="A linear remainder in the truncation order" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/LinearOrder/RHMobiusLinear.prime_window_mobius_linear_of_rh"}
+Assume RH. There exist constants $a_0\ge2$ and $K>0$ such that for every integer $m\ge2$ and all real cutoffs $B\ge a\ge a_0$, the signed residual $E_m(a,B)$ from [@thm-ch31-prime-window-mobius] satisfies
+
+$$
+|E_m(a,B)|\le K m D_{s_m}(a,B),\qquad
+s_m=\tfrac12-\tfrac1{m+1},\qquad D_s(a,B)=a^{-s}-B^{-s}.
+$$
+
+:::
+
+::: proof
+The signed Möbius weights control the trivial-zero contribution. The identity $\mu(n)\ln n=-(\mu*\Lambda)(n)$, the Chebyshev error under RH, and the bounded reciprocal Möbius sum give a logarithmic saving in the partial sums of $\mu$. At fixed $u=\ln x\ge0$, the positive trivial-zero response increases with the degree and is at most $(1+\ln n)/2$. Abel summation combines this growth with the partial-sum saving and bounds the signed response through degree $m$ by a constant times $m$ after the factor $e^{-u/2}$ is extracted.
+
+Put $q=m+1$. If $u\le q$, each omitted centered root term has the required decay bound because $u/n\le2$. If $u\ge q$, the log-root samples $u/n$ are separated by at least $1/q$. Partition the omitted degrees into unit bands of $2u/q-u/n$. On each band, use the local Gaussian mean-square bound for the finite zero sums and their log-coordinate derivatives. The squared bin masses are summable by the signed unit-window zero count, with analytic multiplicity. Adjacent-degree differences control the variation in the coefficients. Each band contributes at most a constant times $q$ before its weight $\exp[-(2u/q-u/n)/2]$ is applied. The geometric sum includes the band where that weight can equal one. Absolute convergence at each sample gives the same bound for the full value series.
+
+The Möbius truncation error and the error from the complete Mangoldt tail satisfy the same decay bound. The eventual sign of the prime-only tail fixes a common left threshold. Integrate the resulting density estimate over $[\ln a,\ln B]$. Since $s_m\ge1/6$, the integration factor is uniformly bounded. Both sides vanish at $B=a$. The full proof is checked by the Lean kernel.
+:::
+
+The estimate holds for every finite order and permits the choice of order to depend on the cutoffs. The exponent, endpoint gap and retained root spectra are the same as in the previous bounds. [Weighted mean-square method, Coppola and Laporta, §1](https://arxiv.org/abs/1411.1739v1)
+
+::: {.problem #prob-ch31-prime-window-sublinear-remainder title="A uniformly sublinear prime-window remainder"}
+Assume RH. Does there exist a real $a_0\ge2$ such that for every $\varepsilon>0$ there is an integer $m_0\ge2$ for which the same residual satisfies $|E_m(a,B)|\le\varepsilon m D_{s_m}(a,B)$ for all integers $m\ge m_0$ and all real cutoffs $B\ge a\ge a_0$, including $B=a$? [Formalization research](https://github.com/the-omega-institute/trureturing/issues/33004)
 :::
 
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
