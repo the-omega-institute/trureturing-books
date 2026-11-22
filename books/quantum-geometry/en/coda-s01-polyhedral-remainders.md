@@ -26,6 +26,41 @@ Why can finite constructive approximations—whether finite-facet piecewise-flat
 **However finely the polyhedron is cut, its angular defects still add up to $720^\circ$.** The rows are the icosahedron ($\nu = 1$) and the geodesic domes made by cutting every face into $\nu^2$ triangles and pushing the vertices out to the sphere ($\nu = 2, 4$). Each magenta bar is cut into one piece per vertex, as long as that vertex's defect. The vertices grow from $12$ to $42$ and $162$, and the largest defect shrinks from $60^\circ$ to about $18^\circ$ and $5^\circ$, yet the three bars are equally long. Literature result, not formalized in this book (item 1 of [@rem-coda-polyhedral-topology-literature]).
 :::
 
+**The maximum angle defect of radial icosahedral refinements (`manual derivation`).** Subdivide each regular icosahedral face into $\nu^2$ small triangles on the integer barycentric grid, for $\nu\ge1$. Project the vertices radially to the unit sphere and join them by chords to form planar triangular faces. The maximum vertex defect is $\mathcal D_\nu=\max_v\bigl(2\pi-\sum_{f\ni v}\angle_f(v)\bigr)$, where $\angle_f(v)$ is the angle of the planar triangular face $f$ at $v$. Set $h=1/\nu$, $\varphi=(1+\sqrt5)/2$, and $c=\varphi/(\varphi+2)=1/\sqrt5$, the inner product of adjacent original vertices. Write $F(X)=X/\|X\|$. For consecutive grid directions $e,f$ in one face, put $v=DF_Xe,w=DF_Xf$, $A=\|v\|^2,B=\|w\|^2,C=\langle v,w\rangle$. Let $\alpha_h$ be the angle between the spherical tangents, $\omega_h$ the angle between the unit chords, and $s,t$ the spherical distances to the neighboring vertices. Then
+
+$$
+\begin{aligned}
+\cos\omega_h&=\frac{\cos\alpha_h+\tan(s/2)\tan(t/2)}
+{\sqrt{(1+\tan^2(s/2))(1+\tan^2(t/2))}},\\
+\alpha_h-\omega_h&=\frac{h^2}{8}\frac{2AB-C(A+B)}{\sqrt{AB-C^2}}+O(h^3).
+\end{aligned}
+$$
+
+The first identity resolves the chords into tangential and normal components. The second follows by expanding with $s=h\sqrt A+O(h^2)$ and $t=h\sqrt B+O(h^2)$. The face planes avoid the origin, the radial differential is nonsingular, and there are finitely many wedge directions, so the remainder is uniform. The tangent angles sum to $2\pi$ and the wedge differences sum to the defect.
+
+For the half-stencil $v,w,w-v,-v$, the three denominators equal $\sqrt{AB-C^2}$ and the numerators sum to $4(AB-C^2)$. At a face-interior vertex the other half gives the same contribution. At an open-edge vertex the other incident face gives it by reflection in the plane through the edge and the sphere center. The $h^2$ coefficient for both strata is the area Jacobian
+
+$$
+J(X)=\sqrt3(1-c)\frac{d}{\|X\|^3},
+\qquad d=\sqrt{\frac{1+2c}{3}} .
+$$
+
+The radial differential contributes two factors of $\|X\|^{-1}$ and tangent-plane projection contributes $d/\|X\|$. The face center maximizes $J$, and the edge maximum at the midpoint is strictly smaller. At the $12$ original five-valent vertices the tangent angles are $2\pi/5$ and tangent lengths are $\sqrt{1-c^2}$, so the coefficient is $\frac54(1-c^2)\tan(\pi/5)=\tan(\pi/5)<1$. Their defects also decay as $\nu^{-2}$. The face-center coefficient exceeds $1$, and interior grid points approach the center. The uniform remainders therefore give
+
+$$
+\lim_{\nu\to\infty}\nu^2\mathcal D_\nu
+=\frac{6\sqrt3}{3\varphi+2}=\frac{3\sqrt3(1-c)}{1+2c}\approx1.51621684 .
+$$
+
+For sufficiently large $\nu$, the maximizers are exactly the interior points whose three integer barycentric weights differ by at most $1$. Near the center the six-direction defect divided by $h^2$ is $J+O(h^2)$ in $C^2$, since changing the sign of $h$ swaps opposite grid directions. Symmetry makes the center stationary and the Hessian there is a negative scalar matrix, so maximizing grid points lie within $O(h)$ of the center. The quadratic term orders these points by squared distance. The least larger squared distance exceeds the minimum by at least $(1-c)h^2$, which dominates the $O(h^3)$ error. Moving a unit from a largest weight to a smallest decreases the squared distance until the weights are balanced. The table uses chord angles with defects in radians, rounded to $8$ decimal places. See Paper I's *Maximum defect of icosahedral refinements*.
+
+| $\nu$ | $\nu^2\mathcal D_\nu$ |
+| --- | --- |
+| $2$ | $1.23736533$ |
+| $4$ | $1.34363338$ |
+| $16$ | $1.50381474$ |
+| $64$ | $1.51543424$ |
+
 Alongside the topological obstructions in [@rem-coda-polyhedral-topology-literature], before entering the cross-disciplinary synthesis of Part VII, the nonzero seam left when a finite polyhedral process approximates a smooth sphere already recurred across Parts I–VI and Forge and Sanctuary in five precise mathematical forms:
 
 - **Taylor Polynomial Truncation Remainder**: In Part VI (Chapter 24), the finite alternating polynomial $\sum_{k=0}^{N-1} (-1)^k \theta^{2k}/(2k)!$ is a piecewise-algebraic approximation to the cosine curve whose truncation tail measures the gap between finite algebraic operations and smooth circular cosine readings (cf. [@rem-banach-dottie-hairy-ball-literature]);
