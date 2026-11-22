@@ -6,6 +6,18 @@ $$
 \tau(x) + \iota(y) < K.
 $$
 
+::: {.example #ex-ch39-fib-pyramid title="The three-site pyramid and joint endpoint occupancy"}
+Take $K=2$ and consider three sites. When the middle site is empty, the four endpoint assignments `000`, `100`, `001`, and `101` form the corners of a square. An occupied middle site forces both endpoints to be empty and gives the apex `010`. A probability law on these words gives three mean occupancies $(\mu_1,\mu_2,\mu_3)$. Their possible values fill the convex hull of the five vertices, specified by nonnegativity and the two inequalities $\mu_1+\mu_2\le1$ and $\mu_2+\mu_3\le1$. [Three-site occupancy pyramid](lean:D5/S1/Words/AdmissibleWords/PathStableSetPolytope.convexHull_three_pyramid)
+
+Write $q=\Pr(101)$. In word order `000`, `100`, `010`, `001`, `101`, the probabilities are $1-\mu_1-\mu_2-\mu_3+q$, $\mu_1-q$, $\mu_2$, $\mu_3-q$, and $q$. Requiring all five entries to be nonnegative gives
+
+$$
+\max(0,\mu_1+\mu_2+\mu_3-1)\le q\le\min(\mu_1,\mu_3).
+$$
+
+For example, keep the middle site empty and start with probability $1/4$ on each of the four base words. Switch to probability $1/2$ each on `000` and `101`. Each endpoint still has occupancy $1/2$, but the joint occupancy rises from $1/4$ to $1/2$. The switch adds $1/4$ to each diagonal entry and subtracts $1/4$ from each off-diagonal entry, preserving the row and column sums. The fixed-seed construction in [§39.3](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md) uses the same four-cell move. Even with all word probabilities in the computational basis specified, the relative phases between words can vary, as in [@ex-ch39-p2e-phase-counterexample]. [FIB atom source, §§2–4](https://github.com/the-omega-institute/trureturing-source-theories/blob/2a39da5107abbfa3a72cc883486dbc15a15994a1/docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md#L178-L216)
+:::
+
 In the `trureturing` direct-encoder model, fix integers $N \ge 2$ and $K \ge 2$, and partition $\{0, 1, \dots, N\}$ by primality into the nonprime logical page ($b = \mathrm{false}$, dimension $M_0 > 0$) and the prime logical page ($b = \mathrm{true}$, dimension $M_1 > 0$). Let $C_{m, b}$ denote the set of length-$m$ admissible $1^K$-free words with first bit $b$, of cardinality $c_{m, b} = |C_{m, b}|$; for each threshold $0 \le s < K$, define the cumulative low-tail left row count and compatible right neighborhood count on page $1$ by
 
 $$

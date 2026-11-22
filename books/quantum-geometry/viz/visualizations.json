@@ -8674,6 +8674,235 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "constant-free-rational-axiom-omega-sandbox",
+      "code": "OMEGA//RATIONAL",
+      "title": "无常数母公理与有理真球：π·e·φ 平直近似残差对比有理保真闭合",
+      "title_en": "Constant-Free AXIOM-Ω & Rational Sphere: π · e · φ Flat Residuals vs. Rational Fidelity Closure",
+      "summary": "在同一座三维球面舞台上对照平直多面体与正 N 边形的弦弧矢高及 720° 顶点角亏（π）、θ ≠ 0 时欧拉切线步 (1+iθ/N)ᴺ 的球外模方膨胀与一步有理凯莱驻球（e）、N≤4 有理正四面体 κ=1/3 封顶对 N=5 五重过约束吐出 φ，以及纯有理切比雪夫倍增 κ₂=(2κ₁−1)² 与无常数真球本相。",
+      "summary_en": "Contrasts on one 3D spherical stage flat polyhedral/polygonal sagitta gaps and 720° vertex angle defects (π), Euler tangent-step radial escape |(1+iθ/N)ᴺ|² > 1 (θ ≠ 0) versus single-step rational Cayley residence (e), N≤4 rational tetrahedral closure κ=1/3 versus N=5 fivefold φ emergence, and integer-coefficient Chebyshev doubling κ₂=(2κ₁−1)² on the constant-free sphere.",
+      "path": "constant-free-rational-axiom-omega-sandbox/",
+      "thumbnail": "constant-free-rational-axiom-omega-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-22",
+      "chapter": 39,
+      "section": "39.6",
+      "presets": [
+        "pi-polyhedral-crease-residual",
+        "euler-tangent-escape-vs-cayley",
+        "chebyshev-rational-arc-doubling",
+        "tetrahedral-rational-cap-vs-phi",
+        "pure-axiom-omega-constant-free-sphere"
+      ],
+      "preset_titles": {
+        "pi-polyhedral-crease-residual": {
+          "zh": "π：拉直的弦与平面总留一道缝",
+          "en": "π: flat chords and faces leave a gap"
+        },
+        "euler-tangent-escape-vs-cayley": {
+          "zh": "e：切线步逃出球外，凯莱一步驻球",
+          "en": "e: tangent steps escape, Cayley stays"
+        },
+        "chebyshev-rational-arc-doubling": {
+          "zh": "整系数倍增：不用 sin、cos、π",
+          "en": "Integer doubling without sin, cos or π"
+        },
+        "tetrahedral-rational-cap-vs-phi": {
+          "zh": "φ：四点有理封顶，五步闭合要 φ",
+          "en": "φ: four close rationally, five need φ"
+        },
+        "pure-axiom-omega-constant-free-sphere": {
+          "zh": "无常数真球：有理点恰好落在球上",
+          "en": "Constant-free sphere of rational points"
+        }
+      },
+      "tags": [
+        "无常数",
+        "有理点",
+        "凯莱映射",
+        "切比雪夫倍增",
+        "平直残差"
+      ],
+      "tags_en": [
+        "Constant-free",
+        "Rational points",
+        "Cayley map",
+        "Chebyshev doubling",
+        "Flat residuals"
+      ],
+      "theory": [
+        {
+          "label": "§39.6 · 拔除笛卡尔线性钉子与无常数有理重构",
+          "label_en": "§39.6 · Pulling the Last Cartesian Nail and Constant-Free Rational Reconstruction",
+          "href": "../zh/ch39-s29-constant-free-rational-axiom-omega.html#sec-ch39-constant-free-rational-axiom-omega",
+          "href_en": "../en/ch39-s29-constant-free-rational-axiom-omega.html#sec-ch39-constant-free-rational-axiom-omega"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonCompletion.subgroupModel_readingComplete_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonCompletion.exists_subgroupModel_not_readingComplete"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/RoundTripPeriodMetric.comparison_classification_of_continuous_rays"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        },
+        {
+          "gid": "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_bounds"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/ExponentialTail.exp_remainder_le"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique"
+        },
+        {
+          "gid": "D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm"
+        },
+        {
+          "gid": "D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "causal-jet-rational-triad-sandbox",
+      "code": "OMEGA//TRIAD",
+      "title": "0 · 1/2 · 1 因果微分母核沙盘：三元数球面射流阶梯与中点自对偶验证仪",
+      "title_en": "0 · 1/2 · 1 Causal-Differential Mother Triad: Spherical Jet Ladder & Midpoint Self-Duality Verifier",
+      "summary": "在纯有理三元数单位球上构建连接 0（过去·零阶停机锚）、1/2（现在·一阶中点自对偶切面）与 1（未来·二阶曲率闭合体）的极小圆弧射流阶梯：对照 α=0 伊藤左切脱壳与 α=1/2 斯特拉托诺维奇—凯莱中点精确驻球、1/2+1/2=1 半密度曲率合拢、三阶比安基/奥氏封顶，以及 1↦0 主频因果心跳循环。",
+      "summary_en": "Builds on the pure rational ternion sphere the minimal-arc jet ladder linking 0 (Past · 0-jet halted anchor), 1/2 (Present · 1-jet midpoint self-dual slice), and 1 (Future · 2-jet curvature closure): contrasting α=0 Itô left-tangent escape against α=1/2 Stratonovich–Cayley exact sphere residence, 1/2+1/2=1 half-density curvature closure, the 3rd-order Bianchi/Ostrogradsky cap, and the 1↦0 cosmic heartbeat.",
+      "path": "causal-jet-rational-triad-sandbox/",
+      "thumbnail": "causal-jet-rational-triad-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-22",
+      "chapter": 39,
+      "section": "39.7",
+      "presets": [
+        "past-zero-jet-halting-anchor",
+        "present-half-midpoint-self-duality",
+        "future-one-curvature-closure",
+        "third-order-bianchi-ostrogradsky-cap",
+        "one-to-zero-cosmic-heartbeat-loop"
+      ],
+      "preset_titles": {
+        "past-zero-jet-halting-anchor": {
+          "zh": "过去：停住的 0",
+          "en": "Past: the halted 0"
+        },
+        "present-half-midpoint-self-duality": {
+          "zh": "现在：只有 1/2 落在球面上",
+          "en": "Present: only 1/2 lands on the sphere"
+        },
+        "future-one-curvature-closure": {
+          "zh": "未来：两个半拍合成一拍",
+          "en": "Future: two half-beats make one beat"
+        },
+        "third-order-bianchi-ostrogradsky-cap": {
+          "zh": "没有第四列（MODEL）：δF = 0",
+          "en": "No fourth column (MODEL): δF = 0"
+        },
+        "one-to-zero-cosmic-heartbeat-loop": {
+          "zh": "心跳（MODEL）：落下的 1 就是下一拍的 0",
+          "en": "Heartbeat (MODEL): the landed 1 is the next 0"
+        }
+      },
+      "tags": [
+        "三元数",
+        "因果射流",
+        "中点自对偶",
+        "半密度曲率",
+        "比安基恒等式"
+      ],
+      "tags_en": [
+        "Ternion",
+        "Causal jet",
+        "Midpoint self-duality",
+        "Half-density curvature",
+        "Bianchi identity"
+      ],
+      "theory": [
+        {
+          "label": "§39.7 · 过去现在未来与 0·1/2·1 纯有理因果射流母矩阵",
+          "label_en": "§39.7 · Past, Present, Future and the 0 · 1/2 · 1 Pure Rational Causal-Jet Matrix",
+          "href": "../zh/ch39-s30-past-present-future-rational-jet-triad.html#sec-ch39-past-present-future-rational-jet-triad",
+          "href_en": "../en/ch39-s30-past-present-future-rational-jet-triad.html#sec-ch39-past-present-future-rational-jet-triad"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_phases"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_eq_completed_zeta"
+        },
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_reflection"
+        },
+        {
+          "gid": "D5/S3/Zeros/Endpoints/XiEndpointValues.xi_reading_endpoint_values"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
