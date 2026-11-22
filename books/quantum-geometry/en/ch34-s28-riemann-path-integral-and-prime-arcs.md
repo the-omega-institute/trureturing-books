@@ -882,6 +882,20 @@ $$
 Given $c<1/48$, choose one finite $N$ with $c<C_N$ before taking the real tail. For $N=3$ we have $C_3=1/54>1/64$, so the new bound includes the endpoint $c=1/64$ of the one-step estimate. For the converse, every $c<1/64$ also satisfies $c<1/48$. The stronger tail bound therefore supplies the one-step criterion in [@thm-ch31-mangoldt-log-squared-gap], which gives RH. The full proof is checked by the Lean kernel.
 :::
 
+::: {.theorem #thm-ch31-mangoldt-uniform-fejer-gap title="A Fejér gap with a logarithmic correction on one real tail" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtUniformFejerGap.rh_iff_eventually_uniform_fejer_gap"}
+Write $y=\ln x$ and let $M$ be the first Li mass. The classical Riemann hypothesis holds if and only if there are a constant $C\ge0$ and a real $X>e$ such that every real $x\ge X$ satisfies
+
+$$
+U(x)\le M\sqrt{x}-\frac{y^2}{48}+\frac{y\ln y}{12}+Cy.
+$$
+:::
+
+::: proof
+This estimate gives a single envelope with an explicit correction on the whole real tail. Set $q=e^{-y/2}$ and $t=byq$. Once $y$ is large enough, $yt\le1$ for every $b\in[0,1/2]$. This common threshold gives simultaneous control of the quadratic remainder at the origin and the error in the midpoint bound. For $N$ equally spaced phases put $b_{jk}=|j-k|/(2N)$. Over all ordered pairs, the averages of $b_{jk}/2-b_{jk}^2$ and $b_{jk}$ are $(1-N^{-2})/24$ and $(1-N^{-2})/6$, respectively. The spectral midpoint comparison supplies a further factor of $1/2$, giving coefficients $(1-N^{-2})/48$ for $y^2$ and $(1-N^{-2})/12$ for $y\ln y$.
+
+Fix any $y$ beyond the common threshold and let $N\to\infty$ at that point. A term $Cy$ absorbs the linear and constant errors. Conversely, $(y\ln y/12+Cy)/y^2\to0$. For each $c<1/48$ the correction is therefore eventually at most $(1/48-c)y^2$, and [@thm-ch31-mangoldt-fejer-gap] gives RH. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.theorem #thm-ch31-mangoldt-bounded-gap-peak title="Bounded gaps between returns of the normalized remainder near the critical mass" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtWindowPhase.bounded_gap_actual_G_peak"}
 Assume RH and set $G(y)=e^{-y/2}U(e^y)$. For every $\delta>0$ there is a natural number $L$ such that for every natural number $n$ some natural number $k\le L$ satisfies
 
