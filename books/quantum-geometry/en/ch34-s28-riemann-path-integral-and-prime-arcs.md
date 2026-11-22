@@ -1041,6 +1041,61 @@ $$
 Increasing the order to $q$ adds exactly the arithmetic term of degree $q$. The strict spectral rule changes from $2n<q$ to $2n<q+1$, admitting degree $r$. The corrected residual in the displayed formula is $E_q$ at the same endpoints. The all-order estimate gives the faster decay rate $s_m+\delta_m$. Comparing the two exponential integrals in logarithmic coordinates gives the second inequality, including $B=a$.
 :::
 
+::: {.theorem #thm-ch31-prime-window-shrinking-width title="The root spectrum on shrinking logarithmic windows" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffShrinkingWidth.signed_window_even_cutoff_shrinking_width"}
+
+Assume RH. As in [@thm-ch31-prime-window-even-cutoff], put $q=m+1=2r$ with $m\ge2$, $s=1/2-1/q$, $\delta_m=1/q-1/(q+1)$, and $c_m=\mu(q)q/(ms)$. Define
+
+$$
+ F_L(u)=\frac{E_m(e^u,e^{u+L})}{D_s(e^u,e^{u+L})},
+ \qquad
+ S_r(u)=\frac{1}{s}\operatorname{Re}\sum_k
+ a_{r,k}\exp\!\left(\frac{\rho_k-1/2}{r}u\right),
+ \qquad a_{r,k}=\frac{-r}{\rho_k(r-\rho_k)}.
+$$
+
+The sum includes all actual nontrivial zeros with analytic multiplicity. For every real $u$ and every $L>0$, the normalized root increment is exactly a weighted average of $S_r$:
+
+$$
+ \frac{P_r(e^{u+L})-P_r(e^u)}{D_s(e^u,e^{u+L})}
+ =\frac{\int_0^L e^{-st}S_r(u+t)\,dt}{\int_0^L e^{-st}\,dt}.
+$$
+
+There is a common threshold $U_0>0$. For each admissible cutoff there is a $K_m>0$ such that for every $\varepsilon>0$ one can choose $L_0>0$ with
+
+$$
+ \left|F_L(u)+c_m+\mu(r)S_r(u)\right|
+ \le \varepsilon+K_m e^{-\delta_m u}
+ \qquad (u\ge U_0,\quad 0<L<L_0).
+$$
+:::
+
+::: proof
+In logarithmic coordinates, the root primitive integrates the root density $s e^{-su}S_r(u)$. Write the increment as this integral over $[u,u+L]$ and use $D_s=e^{-su}(1-e^{-sL})$. The normalized mass identity follows from $1-e^{-sL}=s\int_0^L e^{-st}\,dt$.
+
+Under RH, each centered zero mode is uniformly continuous because its exponent is purely imaginary. The coefficient norms are summable, so the finite sums converge uniformly on the real line. This is the same uniform tail control used in the comparison repository's extraction of exponential coefficients. Uniform continuity of $S_r$ makes the weighted average close to $S_r(u)$ with a width threshold independent of $u$. Dividing the even-cutoff expansion by $D_s$ bounds the remaining error by $K_m e^{-\delta_m u}$. [Comparison proof](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L124-L143)
+:::
+
+For each fixed admissible cutoff, the approximation error tends uniformly to zero as the width tends to zero and the lower bound on the starting point tends to infinity. The term $K_m e^{-\delta_m u}$ still contributes at a fixed starting point.
+
+::: {.theorem #thm-ch31-prime-window-shrinking-rate title="An explicit width error for the centered spectrum" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffShrinkingRate.signed_window_even_cutoff_shrinking_rate"}
+
+Assume RH and use $F_L$, $c_m$, $\delta_m$, and $S_r$ from [@thm-ch31-prime-window-shrinking-width]. There is a common threshold $U_0>0$. For each admissible cutoff $q=m+1=2r$ with $m\ge2$, there are $C_m,K_m>0$ such that
+
+$$
+ \left| F_L(u)+c_m+\mu(r)S_r(u) \right|
+ \le C_m L\bigl(1+\log(1/L)\bigr)^2 + K_m e^{-\delta_m u}
+ \qquad (u\ge U_0,\quad 0<L\le 1/4).
+$$
+:::
+
+::: proof
+A shift of size at most $L$ changes the phase of an occurrence with ordinate $\gamma$ by a factor whose distance from one is at most $\min(2,|\gamma|L/r)$. For $|\gamma|\le1/L$, the factor $|\gamma|$ cancels one denominator factor in the root coefficient estimate, leaving $L/|\rho|$. Its truncated sum is bounded by a constant times $L(1+\log(1/L))^2$. Above $1/L$, the distance bound of two and the inverse-square tail give a bound proportional to $L(1+\log(1/L))$. These counts include multiplicity and both signs of the ordinate.
+
+The weighted mean value theorem for interval integrals identifies the normalized root increment with $S_r(u+t)$ for some $0\le t\le L$. Apply the same phase estimates to this shift and use the even-cutoff remainder bound. [Pinned weighted mean value theorem](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/MeasureTheory/Integral/IntervalIntegral/MeanValue.lean#L101) · [Zero-count source, Corollary 1.2](https://arxiv.org/pdf/2107.06506v1)
+:::
+
+The inequality supplies an explicit upper rate. The optimal width dependence for the signed series remains open.
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 
