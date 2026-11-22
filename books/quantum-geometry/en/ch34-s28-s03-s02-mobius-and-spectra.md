@@ -645,7 +645,7 @@ At $T=2r/L$ use $D(T)\ge\varepsilon$ in the moving-coefficient formula and pass 
 Whether the actual zeta zeros admit a family giving this positive lower bound remains open. A fixed incompatible relation supported at finite height gives a lower bound that tends to zero as $W(T)$ grows.
 
 ::: {.theorem #thm-ch31-phase-relation-lattice title="The complete relation lattice controls the phase deficit" lean="D5/S3/Fourier/WeightedPhaseRelationLattice.weighted_phase_deficit_bounds"}
-Take finitely many real frequencies $\gamma_j$ and positive weights $w_j$ with total weight $W=\sum_j w_j>0$. Define the deficit $D$ as in [@thm-ch31-weighted-phase-limsup]. Let the rows of an integer matrix $K$ be linearly independent over the reals and generate over the integers every vector $k$ satisfying $\sum_j k_j\gamma_j=0$. Write $M=\operatorname{diag}(w_j)$ and $G=KM^{-1}K^{\mathsf{T}}$. For each integer vector $z$, put $b(z)=2\pi z-(\pi/2)K\mathbf{1}$, where $\mathbf{1}$ is the all-ones vector. Define
+Take finitely many real frequencies $\gamma_j$ and positive weights $w_j$ with total weight $W=\sum_j w_j>0$. Define the deficit $D$ as in [@thm-ch31-weighted-phase-limsup]. Let $K$ be an integer matrix with real-linearly independent rows whose integer span equals the lattice of vectors $k$ satisfying $\sum_j k_j\gamma_j=0$. Write $M=\operatorname{diag}(w_j)$ and $G=KM^{-1}K^{\mathsf{T}}$. For each integer vector $z$, put $b(z)=2\pi z-(\pi/2)K\mathbf{1}$, where $\mathbf{1}$ is the all-ones vector. Define
 
 $$
 E=\inf_z b(z)^{\mathsf{T}}G^{-1}b(z).

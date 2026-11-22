@@ -645,7 +645,7 @@ $$
 实际 ζ 零点是否有满足这一正下界的关系族仍是开放问题。单个不相容关系若固定在有限高度，其下界随 $W(T)$ 增长而趋于零。
 
 ::: {.theorem #thm-ch31-phase-relation-lattice title="完整整数关系的格点距离控制相位亏损" lean="D5/S3/Fourier/WeightedPhaseRelationLattice.weighted_phase_deficit_bounds"}
-取有限实频率 $\gamma_j$ 与正权重 $w_j$，总权重 $W=\sum_j w_j>0$，亏损 $D$ 按 [@thm-ch31-weighted-phase-limsup] 定义。设整数矩阵 $K$ 的行在实数域上线性无关，并在整数上生成所有满足 $\sum_j k_j\gamma_j=0$ 的整数向量 $k$。记 $M=\operatorname{diag}(w_j)$，$G=KM^{-1}K^{\mathsf{T}}$。对每个整数向量 $z$，令 $b(z)=2\pi z-(\pi/2)K\mathbf{1}$，其中 $\mathbf{1}$ 是全一向量。定义
+取有限实频率 $\gamma_j$ 与正权重 $w_j$，总权重 $W=\sum_j w_j>0$，亏损 $D$ 按 [@thm-ch31-weighted-phase-limsup] 定义。设整数矩阵 $K$ 的行在实数域上线性无关，且这些行的整数线性张成恰为所有满足 $\sum_j k_j\gamma_j=0$ 的整数向量 $k$ 所组成的格。记 $M=\operatorname{diag}(w_j)$，$G=KM^{-1}K^{\mathsf{T}}$。对每个整数向量 $z$，令 $b(z)=2\pi z-(\pi/2)K\mathbf{1}$，其中 $\mathbf{1}$ 是全一向量。定义
 
 $$
 E=\inf_z b(z)^{\mathsf{T}}G^{-1}b(z).
