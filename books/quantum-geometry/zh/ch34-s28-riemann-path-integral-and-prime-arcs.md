@@ -892,6 +892,28 @@ $$
 对整个 $u\ge q$ 区间取 $H=\lfloor q^{2/9}\rfloor$，两项均由 $O(q^{8/9+2\eta})$ 控制。近区、平凡零点修正和算术尾项使用同一前缀界，至多多出 $1+\ln q$，可吸收到指数差中。把统一的密度界在 $\ln a$ 至 $\ln B$ 积分，就得到原端点幂差。完整证明由 Lean 内核检查。
 :::
 
+::: {.theorem #thm-ch31-prime-window-power-prefix title="由 Möbius 前缀指数控制有符号素数窗" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/PowerPrefixWindow.prime_window_mobius_of_power_prefix"}
+假设黎曼猜想成立。给定 $0\le\beta<1$、$P>0$ 与 $\varepsilon>0$，并设对每个整数 $N\ge1$ 有
+$$
+\left|\sum_{1\le n\le N}\mu(n)\right|\le P N^\beta.
+$$
+存在实数 $a_0\ge2$ 和 $C>0$，使每个整数 $m\ge2$ 与所有实数 $B\ge a\ge a_0$ 都满足
+$$
+|E_m(a,B)|\le C m^{(2+\beta)/3+\varepsilon}D_{s_m}(a,B),\qquad
+s_m=\tfrac12-\tfrac1{m+1}.
+$$
+这里 $E_m$ 使用上文的两项带符号修正。谱和按零点的解析重数计数，保留项仍严格满足 $2n<m+1$。
+:::
+
+::: proof
+记 $q=m+1$、$u=\ln x$。当 $u\ge q$ 时，整数频率截点 $H$ 两侧的代价分别为 $O(Pq^\beta(H+1)^{1+\eta})$ 与 $O(qH^{\eta-1/2})$，其中 $0<\eta<1/2$。令 $\gamma=2(1-\beta)/3$ 并取 $H=\lfloor q^\gamma\rfloor$。用 $H+1\le2q^\gamma$ 控制低频，用 $H\ge q^\gamma/2$ 控制带负指数的高频项。两侧的 $q$ 指数都化为 $(2+\beta)/3+\gamma\eta$。截点与 $u$ 无关，所以同一估计适用于整个远区。
+
+近区和算术尾项由同一前缀界控制。平凡零点项多出的 $1+\ln q$ 可吸收到 $\beta$ 和 $(2+\beta)/3$ 之间的正差内。选取足够小的 $\eta$，再对密度界积分，就得到原端点幂差。$B=a$ 时两边都为零。完整证明由 Lean 内核检查。
+:::
+
+在 RH 下，逐点 Möbius 前缀估计允许取 $\beta=1/2+\delta$，其中 $0<\delta<1/2$ 可任意小。给定最终余量 $\varepsilon>0$，取 $\delta=\min(\varepsilon,1/4)$，把 $\varepsilon-\delta/3$ 留给窗估计，便得到 $|E_m(a,B)|\le C m^{5/6+\varepsilon}D_{s_m}(a,B)$。该上界对所有允许的端点统一成立。余项是否达到这一阶仍是开放的。
+
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::

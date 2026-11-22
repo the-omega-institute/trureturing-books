@@ -892,6 +892,28 @@ The right-hand side telescopes over the omitted degrees. Together with the adjac
 The single choice $H=\lfloor q^{2/9}\rfloor$ gives $O(q^{8/9+2\eta})$ throughout $u\ge q$. The same prefix bound controls the near range, trivial-zero correction, and arithmetic tail. The extra factor $1+\ln q$ in the trivial-zero term is absorbed by the gap between exponents. Integrating the uniform density bound between $\ln a$ and $\ln B$ yields the original endpoint power difference. The full proof is checked by the Lean kernel.
 :::
 
+::: {.theorem #thm-ch31-prime-window-power-prefix title="A signed prime-window bound from a Möbius prefix exponent" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/PowerPrefixWindow.prime_window_mobius_of_power_prefix"}
+Assume the Riemann hypothesis. Fix $0\le\beta<1$, $P>0$, and $\varepsilon>0$, and suppose every integer $N\ge1$ satisfies
+$$
+\left|\sum_{1\le n\le N}\mu(n)\right|\le P N^\beta.
+$$
+There are real constants $a_0\ge2$ and $C>0$ such that every integer $m\ge2$ and all real $B\ge a\ge a_0$ satisfy
+$$
+|E_m(a,B)|\le C m^{(2+\beta)/3+\varepsilon}D_{s_m}(a,B),\qquad
+s_m=\tfrac12-\tfrac1{m+1}.
+$$
+Here $E_m$ uses the two signed corrections above. The spectral sums count zeros with analytic multiplicity, and the retained terms satisfy the strict inequality $2n<m+1$.
+:::
+
+::: proof
+Put $q=m+1$ and $u=\ln x$. For $u\ge q$, the two sides of the integer frequency cutoff $H$ cost $O(Pq^\beta(H+1)^{1+\eta})$ and $O(qH^{\eta-1/2})$, with $0<\eta<1/2$. Set $\gamma=2(1-\beta)/3$ and take $H=\lfloor q^\gamma\rfloor$. Use $H+1\le2q^\gamma$ in the low bins and $H\ge q^\gamma/2$ in the high bins, where the exponent of $H$ is negative. Both powers of $q$ become $(2+\beta)/3+\gamma\eta$. The same cutoff works throughout the far range because it is independent of $u$.
+
+The same prefix estimate controls the near range and the arithmetic tail. The positive gap between $\beta$ and $(2+\beta)/3$ absorbs the factor $1+\ln q$ from the trivial zeros. Choose $\eta$ small enough for the prescribed slack and integrate the density to recover the original endpoint gap. Both sides vanish at $B=a$. The full proof is checked by the Lean kernel.
+:::
+
+Under RH the pointwise Möbius prefix estimate permits $\beta=1/2+\delta$ for arbitrarily small $0<\delta<1/2$. For a prescribed final slack $\varepsilon>0$, take $\delta=\min(\varepsilon,1/4)$ and leave $\varepsilon-\delta/3$ for the window estimate. This yields $|E_m(a,B)|\le C m^{5/6+\varepsilon}D_{s_m}(a,B)$ uniformly over the allowed endpoints. Whether the residual attains this order remains open.
+
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::
