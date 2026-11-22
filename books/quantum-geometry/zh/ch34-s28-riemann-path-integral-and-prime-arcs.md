@@ -886,6 +886,26 @@ $$
 有符号的平凡零点项代价为 $O(q^{3/4}(1+\ln q))$。对算术尾项，截点 $q+j$ 与 $q-1$ 的 Möbius 前缀之差为 $O(q^{-1/4}(q+j))$。对递减的 Chebyshev 权重作 Abel 求和，将归一化后的算术尾项控制在 $O(q^{3/4})$。最后在 $\ln a$ 和 $\ln B$ 间积分，得到陈述中的端点幂差。当 $B=a$ 时该差为零。
 :::
 
+::: {.theorem #thm-ch31-prime-window-three-quarters title="有符号素数窗的四分之三指数界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusThreeQuarters.prime_window_mobius_three_quarters_of_rh"}
+假设黎曼猜想成立。对每个 $\varepsilon>0$，存在实数 $a_0\ge2$ 和 $C>0$，使每个整数 $m\ge2$ 和所有实数 $B\ge a\ge a_0$ 都满足
+$$
+|E_m(a,B)|\le C m^{3/4+\varepsilon}D_{s_m}(a,B),\qquad
+s_m=\tfrac12-\tfrac1{m+1}.
+$$
+余项 $E_m$ 使用原来的两项带符号修正。谱和按零点的解析重数计数，保留的根原始量严格满足 $2n<m+1$。
+:::
+
+::: proof
+记 $q=m+1$、$u=\ln x$。对每个遗漏次数 $n$，令 $v_n=u/n-2u/q\le0$。把实际根系数拆成 $-1/\rho-1/(n-\rho)$。写 $\rho=\tfrac12+i\gamma$，提出模为一的公共相位 $\exp(2i\gamma u/q)$。第一项的倒数 $\rho^{-1}$ 来自积分 $\int_{-\infty}^{v_n}e^{\rho t}\,dt$。把次数和移进积分，得到一个带符号的 Möbius 前缀，乘以 $e^{t/2}$ 和低频相位和。由于 $v_n$ 随 $n$ 递减，截到 $t\le v_n$ 所得的次数区间正好是两个普通前缀之差。
+
+将 $t\le0$ 分成单位区间。局部谱积分由频率箱质量的平方和控制，指数权重使各区间的贡献可作几何求和。对低频箱使用实际零点计数后，首项代价为 $O(q^{1/2+\eta}(H+1)^{1/2+\eta})$。第二项的每个系数至多为 $3/q$，总代价为 $O((H+1)^{1+\eta})$。高频尾仍由平方箱质量控制，代价为 $O(qH^{\eta-1/2})$。
+
+取 $H=\lfloor\sqrt q\rfloor$，三项都由 $O(q^{3/4+2\eta})$ 控制。近区和算术修正使用逐点 Möbius 前缀界。取足够小的 $\eta>0$，在 $\ln a$ 和 $\ln B$ 之间积分得到原端点差。$a=B$ 时两边均为零。完整证明由 Lean 内核检查。
+:::
+
+这一结论给出 RH 下的统一上界。原带符号余项的最优阶仍有待确定。
+
+
 ::: {.theorem #thm-ch31-prime-window-eight-ninths title="有符号素数窗的九分之八阶界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEightNinths.prime_window_mobius_eight_ninths_of_rh"}
 假设 RH。对任意实数 $\varepsilon>0$，存在 $a_0\ge2$ 和 $C>0$，使每个整数 $m\ge2$ 和每对实端点 $B\ge a\ge a_0$ 都满足
 
