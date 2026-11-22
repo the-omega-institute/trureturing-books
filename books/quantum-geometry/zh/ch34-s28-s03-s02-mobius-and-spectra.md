@@ -606,6 +606,44 @@ $$
 
 仅在 RH 下，实际零点是否满足 $D(T)\to0$ 仍是开放问题。在每个截断范围内，$D(T)$ 是对共同时刻 $v$ 取下确界得到的 $1-\sin(\gamma v)$ 加权平均。
 
+::: {.theorem #thm-ch31-relation-phase-deficit title="整数关系给出的加权相位亏损下界" lean="D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit_disjoint"}
+设有限指标集 $J$ 上有实频率 $\gamma_j$ 与正权重 $w_j$，令 $W=\sum_{j\in J}w_j>0$，并以 [@thm-ch31-weighted-phase-limsup] 的方式定义有限正弦和的亏损 $D$。设 $A$ 是一族有限的整数关系，每行满足 $\sum_{j\in J}k_{aj}\gamma_j=0$。记 $\delta_a=|1-i^{\sum_{j\in J}k_{aj}}|$。取非负乘子 $\lambda_a$，在分母为正时有
+
+$$
+D\ge
+\frac{(\sum_{a\in A}\lambda_a\delta_a)^2}
+{2W\sum_{j\in J}(\sum_{a\in A}\lambda_a|k_{aj}|)^2/w_j}.
+$$
+
+若各行非零且支撑两两不交，则有
+
+$$
+D\ge \frac{1}{2W}\sum_{a\in A}
+\frac{\delta_a^2}{\sum_{j\in J}k_{aj}^2/w_j}.
+$$
+:::
+
+::: proof
+对任意共同时间 $v$，一行整数关系对应的单位复数乘积为 $1$，而把每个相位换成 $i$ 后，该乘积为 $i^{\sum_j k_{aj}}$。把两乘积逐因子作差，并用 $|z^k-i^k|\le |k|\,|z-i|$，得 $\delta_a\le\sum_j |k_{aj}|\,|e^{i\gamma_jv}-i|$。以 $\lambda_a$ 加权求和，再用带权柯西–施瓦茨不等式和 $|e^{i\gamma_jv}-i|^2=2(1-\sin(\gamma_jv))$，最后对 $v$ 取上确界。支撑不交时，各列的平方没有交叉项。此时可取 $\lambda_a=\delta_a/(\sum_j k_{aj}^2/w_j)$。若各 $\delta_a$ 均为零，则第二个下界由 $D\ge0$ 给出。
+:::
+
+::: {.corollary #cor-ch31-relation-left-limsup title="正比例的相位亏损降低左端点首项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHWeightedRelationLimsup.signed_window_limsup_le_of_eventually_disjoint_relations"}
+沿用 [@thm-ch31-weighted-phase-limsup] 的 RH 假设与实际零点权重，并设 $\mu(r)\ne0$。若存在 $\varepsilon>0$，使每个充分大的 $T$ 都有一族支撑不交的非零整数关系，令 [@thm-ch31-relation-phase-deficit] 的第二个下界至少为 $\varepsilon$，则
+
+$$
+\limsup_{L\downarrow0}
+\frac{Q_m^{\mathrm{left}}(L)}{L\log^2(1/L)}
+\le \frac{|\mu(r)|}{4\pi s}(1-\varepsilon)
+< \frac{|\mu(r)|}{4\pi s}.
+$$
+:::
+
+::: proof
+在 $T=2r/L$ 代入 $D(T)\ge\varepsilon$，再用移动系数公式中趋于零的余项。
+:::
+
+实际 ζ 零点是否有满足这一正下界的关系族仍是开放问题。单个不相容关系若固定在有限高度，其下界随 $W(T)$ 增长而趋于零。
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 

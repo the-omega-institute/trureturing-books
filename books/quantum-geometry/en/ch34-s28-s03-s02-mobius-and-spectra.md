@@ -606,6 +606,44 @@ Set $h=L/2$. Subtracting $\mu(r)(S_r(u+h)-S_r(u))$ from the signed midpoint erro
 
 The remaining question under RH alone is whether the actual zeros satisfy $D(T)\to0$. At each cutoff, $D(T)$ is the smallest weighted mean of $1-\sin(\gamma v)$ attainable to arbitrary accuracy with one common time $v$.
 
+::: {.theorem #thm-ch31-relation-phase-deficit title="Integer relations bound the weighted phase deficit from below" lean="D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit_disjoint"}
+Take a finite set $J$ of real frequencies $\gamma_j$ with positive weights $w_j$. Put $W=\sum_{j\in J}w_j>0$ and define the deficit $D$ for this finite sine sum as in [@thm-ch31-weighted-phase-limsup]. Let $A$ index a finite family of integer relations, with $\sum_{j\in J}k_{aj}\gamma_j=0$ for each row. Write $\delta_a=|1-i^{\sum_{j\in J}k_{aj}}|$. For any nonnegative multipliers $\lambda_a$ with positive denominator,
+
+$$
+D\ge
+\frac{(\sum_{a\in A}\lambda_a\delta_a)^2}
+{2W\sum_{j\in J}(\sum_{a\in A}\lambda_a|k_{aj}|)^2/w_j}.
+$$
+
+For nonzero rows with pairwise disjoint supports,
+
+$$
+D\ge \frac{1}{2W}\sum_{a\in A}
+\frac{\delta_a^2}{\sum_{j\in J}k_{aj}^2/w_j}.
+$$
+:::
+
+::: proof
+At any common time $v$, the product of unit phases specified by an integer relation equals $1$. Replacing every phase by $i$ gives $i^{\sum_j k_{aj}}$. Telescoping the difference of products and using $|z^k-i^k|\le |k|\,|z-i|$ gives $\delta_a\le\sum_j |k_{aj}|\,|e^{i\gamma_jv}-i|$. Sum with the multipliers $\lambda_a$, then apply weighted Cauchy–Schwarz and $|e^{i\gamma_jv}-i|^2=2(1-\sin(\gamma_jv))$. Take the supremum in $v$. For disjoint supports each column square has no cross terms. Choose $\lambda_a=\delta_a/(\sum_j k_{aj}^2/w_j)$. If all $\delta_a$ vanish, the second bound follows from $D\ge0$.
+:::
+
+::: {.corollary #cor-ch31-relation-left-limsup title="A positive phase deficit lowers the left-endpoint coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHWeightedRelationLimsup.signed_window_limsup_le_of_eventually_disjoint_relations"}
+Use the RH hypothesis and actual zero weights of [@thm-ch31-weighted-phase-limsup], and suppose $\mu(r)\ne0$. If there exists $\varepsilon>0$ such that, for every sufficiently large $T$, there is a family of nonzero integer relations with disjoint supports for which the second bound in [@thm-ch31-relation-phase-deficit] is at least $\varepsilon$, then
+
+$$
+\limsup_{L\downarrow0}
+\frac{Q_m^{\mathrm{left}}(L)}{L\log^2(1/L)}
+\le \frac{|\mu(r)|}{4\pi s}(1-\varepsilon)
+< \frac{|\mu(r)|}{4\pi s}.
+$$
+:::
+
+::: proof
+At $T=2r/L$ use $D(T)\ge\varepsilon$ in the moving-coefficient formula and pass to the upper limit as its remainder tends to zero.
+:::
+
+Whether the actual zeta zeros admit a family giving this positive lower bound remains open. A fixed incompatible relation supported at finite height gives a lower bound that tends to zero as $W(T)$ grows.
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 
