@@ -549,6 +549,21 @@ Pair points at equal distances on either side of the logarithmic midpoint in the
 
 When $\mu(r)=0$, the limsup is zero. For $\mu(r)\ne0$, the late worst-case error has leading order $L\log(1/L)$ with the midpoint correction. The sharp upper bound for the left-endpoint correction remains open.
 
+::: {.theorem #thm-ch31-signed-quadratic-midpoint title="A quadratic remainder for logarithmic midpoint correction" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffQuadraticMidpoint.signed_window_even_cutoff_midpoint_limsup_quadratic"}
+Assume RH. Take natural numbers $m,r$ with $m\ge2$ and $m+1=2r$. Use the original signed prime window, the midpoint correction and the quantities $Q_m(L)$ and $G_r(L)$ from [@thm-ch31-signed-midpoint-limsup]. The absolute error is bounded on a sufficiently late tail. There is a constant $C_m>0$ such that for every $0<L\le1/4$,
+
+$$
+\left| Q_m(L)-|\mu(r)|G_r(L)\right|
+\le |\mu(r)|C_mL^2 .
+$$
+:::
+
+::: proof
+For each frequency $\omega$, pair the modes at distance $h$ on either side of the midpoint. Put $q=1-\cos(\omega h)$. After subtracting the midpoint value, the half-pair multiplier is $-\cosh(sh)q-i\sinh(sh)\sin(\omega h)$. Its squared norm is $q^2+2q\sinh^2(sh)$, so its norm is at most $q+\sinh^2(sh)$. Absolute summability of the full zero coefficients keeps the extra term quadratic after summation. At center zero, the linear bound on the odd difference controls the odd part of the exponential weight. A common phase return transports the lower comparison to arbitrarily late starts, where the normalized arithmetic remainder vanishes in the limsup. The full proof is checked by the Lean kernel.
+:::
+
+The quadratic remainder applies to the original exponential weight and includes $\mu(r)=0$. Correction at the left endpoint still depends on a uniform bound for first differences.
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 

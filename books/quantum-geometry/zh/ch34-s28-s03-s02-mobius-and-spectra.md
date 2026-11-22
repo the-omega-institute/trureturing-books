@@ -549,6 +549,21 @@ $$
 
 当 $\mu(r)=0$ 时，上极限为零。若 $\mu(r)\ne0$，中点校正的晚期最坏误差具有 $L\log(1/L)$ 的首项。左端点校正的最优上界仍是开放问题。
 
+::: {.theorem #thm-ch31-signed-quadratic-midpoint title="对数中点校正的二次余项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffQuadraticMidpoint.signed_window_even_cutoff_midpoint_limsup_quadratic"}
+假设 RH。取自然数 $m,r$，满足 $m\ge2$ 且 $m+1=2r$。沿用 [@thm-ch31-signed-midpoint-limsup] 的原始带符号素数窗口、对数中点校正以及 $Q_m(L)$ 与 $G_r(L)$。绝对误差在充分晚的尾区间上有界。存在常数 $C_m>0$，对每个 $0<L\le1/4$ 都有
+
+$$
+\left| Q_m(L)-|\mu(r)|G_r(L)\right|
+\le |\mu(r)|C_mL^2 .
+$$
+:::
+
+::: proof
+对每个频率 $\omega$，先配对中点两侧距离为 $h$ 的模态。令 $q=1-\cos(\omega h)$。扣除中点值后，半对模态的乘子为 $-\cosh(sh)q-i\sinh(sh)\sin(\omega h)$。其模的平方等于 $q^2+2q\sinh^2(sh)$，故模至多为 $q+\sinh^2(sh)$。全零点系数的绝对可和性让附加项在求和后仍为二次量。中心为零时，用奇差的线性界控制指数权的奇部。再将中心为零的下界通过相位复现送到任意晚的起点，归一化算术余项在所取的上极限中消失。完整证明由 Lean 内核检查。
+:::
+
+这里的二次余项适用于原窗口的指数权，且允许 $\mu(r)=0$。左端点校正仍涉及一阶谱差的一致上界。
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 
