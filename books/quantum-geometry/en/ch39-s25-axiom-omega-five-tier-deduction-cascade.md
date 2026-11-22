@@ -238,6 +238,8 @@ With the $B$–$C$ amplitude fixed at $+1$, equal-weight samples at $\pm t$, ret
 
 A controlled winding compares a path that loops once around the triangle with a reference path. For the known pair of zeros $101$ and $242$, the shorter phase arc spans $\delta\approx1.94469634\,\mathrm{rad}$ (`NUM`). One winding confines the output overlap to a chord that misses zero. With two windings, the smallest arc covering $1,e^{i\delta},e^{2i\delta}$ exceeds a semicircle, so their convex hull contains zero and common path weights can give orthogonal outputs (`manual derivation`). Given only the two energy-window arcs, a fixed two-winding test identifies orientation with minimax error about $0.022665\%$ (`NUM`). Both tests use only the shell's phase information and assume coherent path control and access to a reference path. [Winding derivation and interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7072615725)
 
+Squared chord cutoff $14$ first admits two independent continuous loop phases for an $S_3$-invariant scalar connection (`manual derivation`). At zeta ordinate $\gamma$, assign outer-to-inner transports $1,z,w$ to squared lengths $6,12,14$, with $z=e^{i\gamma\log(3/2)}$ and $w=e^{-i\gamma\log 2}$. The loops read prime $2$ via $1/w$ and prime $3$ via $z/w$. All bonds, including the six new ones, have unit hopping magnitude, and three noninteracting spinless fermions fill the lowest modes (`MODEL`). The minimum is $-(3+9\sqrt3)/2$, with positive outer matching, $z=w$, and $\operatorname{Re}z=-7/16$ or $-11/16$ for inner sign $+$ or $-$, respectively (`manual derivation`). At each minimum, $z=w$ gives $A,B$ identical inner hoppings. Positive matching puts their decoupled antisymmetric state at energy $+1$, above the occupied modes. Thus $F|A\rangle=F|B\rangle$ and the three-source mass-squared matrix $RC_fR^*$ has rank at most two for any $C_f$ (`manual derivation`). Energy alone selects the first positive zero within $10^{-4}$ of the minimum, number $20113$ (`NUM`). The Schur calculation returns to cutoff $12$. [Derivation and numerical certificate](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7072954327)
+
 Compression takes the visible block of each spectral function. Schur elimination minimizes the quadratic form over hidden amplitudes at fixed visible amplitudes.
 
 Matching the central data in the wound frame requires a nonzero up-sector coupling across $AC$, beyond the chord cutoff. Hidden amplitudes at shell vertices mediate coupling in the mass quadratic form along actual edges, each with its magnetic phase times a signed real amplitude (`MODEL`). The original magnetic Hamiltonian supplies the occupied modes. With one shared hidden vertex, only $U=(2,2,3)$ and $V=(2,3,2)$ reach both endpoints. The path through $U$ produces a real coupling and the nonzero target carries phase $z$. With $V$ there is no edge to $B$. The available and required phase lines for $AB$ and $BC$ meet only at zero, leaving the single pair excluded by the angle test (`manual derivation` / `NUM`). [Endpoint bound](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7071286134) · [Single-pair exclusion](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7071050952)
@@ -252,6 +254,27 @@ e+tf&=b/d,\qquad te+f=-c.
 $$
 
 Since $|t|<1/2$, the real amplitudes $e,f$ are uniquely determined. Set the direct $AB,BC$ entries to $2a\operatorname{Re}z,2bz\operatorname{Re}z$. The subtraction gives $a\bar z,bz^2,cz$ in the three positions, as required by $Q C_f Q^*$. Adjust the diagonal entries to match the target. The positive hidden block and positive Schur complement make the full form positive definite. Each sector gets its microscopic amplitudes by solving backwards from the target. [Local two-vertex elimination](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7071311166)
+
+The parameter $t$ controls mixing between the two hidden sites. Let the first row vary so that the three rows are $(a,bz),(d,0),(e,f)$. Resolve each bond along the two real directions $1,z$. The direct bonds can supply the real component of $AB$ and the $z$ component of $BC$. The four remaining components must come from the hidden sites. Their scalar equations determine exactly which components can vanish together.
+
+::: {.theorem #thm-ch39-two-hidden-scalar-response title="Exact image of the two-hidden-site scalar response" lean="D5/S3/Quantum/Matrix/Schur/TwoHiddenScalarResponse.response_iff"}
+Let $K$ be a field and let $T\subseteq K$ satisfy $t^2\ne1$ for every $t\in T$. Given $u,v,p,q\in K$, there exist $t\in T$ and $a,b,d,e,f\in K$ such that
+
+$$
+ u=-bdt,\qquad v=-d(e+tf),\qquad p=-a(e+tf),\qquad q=-b(te+f)
+$$
+
+if and only if at least one of the following holds.
+
+1. $0\in T$ and $u=0$.
+2. $T$ contains a nonzero element and $(u\ne0\lor v=0\lor q=0)\land(v\ne0\lor u=0\lor p=0)$.
+:::
+
+::: proof
+Set $h=e+tf$ and $k=te+f$. The change of variables has determinant $1-t^2$, so $h,k$ determine $e,f$. When $t\ne0$, the four components are scaled products of adjacent weights along the path $k,b,d,h,a$. If an interior product vanishes, its two neighbors cannot both be nonzero. Conversely, for $u\ne0$ take $d=1,b=-u/t,h=-v$ and solve for $k$ using $b$. If $h\ne0$, solve for $a$ using $h$. If $h=0$, the conditions give $p=0$. When $u=v=0$, take $d=0,b=h=1$. When $u=0$ and $v\ne0$, the conditions give $q=0$, and $b=0,h=1,d=-v$ suffice. At $t=0$ only $u=0$ is required. Taking $e=b=1$ leaves the other three components free. The full proof is checked by the Lean kernel.
+:::
+
+For a positive definite hidden block, $K=\mathbb R$ and $T=(-1,1)$. This interval contains both $0$ and $1/2$, so the criterion reduces to $v\ne0$ or $u=0$ or $p=0$. In this network, prescribing a nonzero $z$ component on $AB$ and a nonzero real component on $AC$ forces a nonzero real component on $BC$.
 
 Dropping the effective reality condition of the wound frame permits any nondegenerate masses and CKM data at every nonreal $z$ in the window, even with the internal mixing of the two hidden vertices fixed (`manual derivation`). The zero filter therefore depends on the common phase constraint on the effective matrices. [Construction with unrestricted effective coefficients](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7071396424)
 
