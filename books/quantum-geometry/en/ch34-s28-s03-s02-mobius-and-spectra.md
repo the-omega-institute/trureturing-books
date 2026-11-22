@@ -661,7 +661,7 @@ When $K$ has no rows, $E=0$. Also, $D=0$ if and only if some integer vector $z$ 
 :::
 
 ::: proof
-The closure of the common-time orbit is exactly the set of phases on which every integer relation has character value $1$. Restricting to nonnegative times gives the same closure. Write each angle as $\pi/2+x_j$. The resulting phase belongs to that closure exactly when $Kx=b(z)$ for some integer vector $z$. On each such affine set, $x_0=M^{-1}K^{\mathsf{T}}G^{-1}b(z)$ attains the minimum $b(z)^{\mathsf{T}}G^{-1}b(z)$ of the weighted square $x^{\mathsf{T}}Mx$. Since $K(x-x_0)=0$, the cross term in that square vanishes.
+The closure of the common-time orbit is exactly the set of phases on which every integer relation has character value $1$. For any real $a$, the times $t\ge a$ and the times $t>a$ each give the same closure. Write each angle as $\pi/2+x_j$. The resulting phase belongs to that closure exactly when $Kx=b(z)$ for some integer vector $z$. On each such affine set, $x_0=M^{-1}K^{\mathsf{T}}G^{-1}b(z)$ attains the minimum $b(z)^{\mathsf{T}}G^{-1}b(z)$ of the weighted square $x^{\mathsf{T}}Mx$. Since $K(x-x_0)=0$, the cross term in that square vanishes.
 
 The weighted phase cost is $\sum_j w_j(1-\cos x_j)$. Applying $1-\cos x\le x^2/2$ to each minimizing lift $x_0$ and taking the infimum over $z$ gives the upper bound. Every admissible phase also has angle offsets satisfying $|x_j|\le\pi$. On these offsets $1-\cos x_j\ge 2x_j^2/\pi^2$, and the weighted square is at least $E$. This gives the lower bound. By continuity the phase cost has the same infimum on the orbit and its closure.
 
