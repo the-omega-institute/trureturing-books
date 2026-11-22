@@ -588,6 +588,23 @@ The zero budgets outside $i$ force the marked column to be the singleton $\{i\}$
 
 **Restricting ordinary edges to adjacent ranks.** In the full inclusion graph, one may restrict ordinary edges to $A=B$ or $A\subsetneq B$ with $|B|=|A|+1$. The exceptional row $T$ keeps its allowed outgoing edges and both degree choices remain available. The minimum budget in this restricted graph bounds the full inclusion minimum from above.
 
+::: {.theorem #thm-omega-rank-cut-diagonal-parity lean="D5/S3/Combinatorics/Graph/RankCuts/RankedBipartiteDiagonalParity.diagonal_parity" title="Diagonal parity from a bipartite rank cut"}
+Take two copies of a finite vertex set with a natural-number rank $\rho$ and a nonnegative integer edge weight $e(A,B)$ for each ordered pair. Fix an exceptional row $T$ and a rank $r<\rho(T)$. Outside row $T$, every positive edge satisfies $A=B$ or $\rho(A)<\rho(B)$. Suppose that at every vertex of rank at most $r$, both its row and its column have odd total edge weight. Then
+$$
+\sum_{\rho(A)=r} e(A,A)
+\equiv
+|\{A:\rho(A)=r\}|+\sum_{\rho(B)\le r} e(T,B)
++\sum_{\rho(A)<r<\rho(B)} e(A,B)
+\pmod 2.
+$$
+:::
+
+::: {.proof}
+Sum the row totals through rank $r$ and do the same for the column totals. Both prefixes contain the same number of odd-degree vertices, so the sums have equal parity. Cancel the edges internal to both prefixes. The outgoing and incoming weights across the cut therefore have equal parity. All incoming weight comes from $T$. Outgoing weight splits into edges starting at rank $r$ and edges strictly bypassing it. In the rank-$r$ rows, the total weight consists of diagonal weight and outgoing weight, and its parity equals the size of the layer. Substitution gives the formula.
+:::
+
+In the one-coordinate Boolean lattice, put $\rho(A)=|A|$ and give each selected edge weight one and all other edges weight zero. At each odd rank below $T$, the formula constrains the parity of the number of charged diagonal edges. If ordinary edges are restricted to covers and diagonals, the bypass term is zero and the other terms are the layer size and the number of edges entering the prefix from the exceptional row. Under full inclusion, an ordinary edge contributes once at each rank strictly between its endpoints, even when the edge itself has zero cost.
+
 **An optimal uniform calibration for rational marginals.** Let $G$ act on finite input and output sets $X$ and $Y$, let $P$ be a $G$-covariant probability kernel, and let $H$ be any subgroup. If a positive integer $m$ makes every $mP(x,y)$ integral, a uniform seed law attains the maximum $H$-fixed mass. One sufficient seed count is $m|\det B|$, where $B$ is an invertible square submatrix of the integer constraint matrix below, using the positive support of a suitable optimizer as its columns.
 
 Write $q_O$ for the weight of each deterministic readout table $t:X\to Y$ in its $G$-orbit $O$. The normalization row of $A$ has entry $|O|$ in column $O$. The row for cell $(x,y)$ has entry $|\{t\in O:t(x)=y\}|$. The corresponding entries of $b$ are $1$ and $P(x,y)$. Let $c_O$ count the tables in $O$ that are fixed by $H$. Sending seeds equivariantly to their complete readout tables preserves the marginals and sends every $H$-fixed seed to an $H$-fixed table. Conversely, using the positive-weight tables as seeds and evaluating them realizes any feasible table law. The maximum fixed mass is therefore the maximum of $\sum_O c_Oq_O$ subject to $Aq=b$ and $q\ge0$. Independent draws from the rows give an invariant table law. The normalization row makes the feasible set bounded, and its closedness ensures the maximum is attained.
