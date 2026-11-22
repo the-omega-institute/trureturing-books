@@ -469,6 +469,24 @@ At short distances many high-mass modes contribute to the exchange. Put $x=MR$, 
 
 Write $G_{12}(R)$ for this static kernel. With the linear source term $-\langle J,\phi\rangle$ in the static energy, eliminating the scalar field gives the interaction energy $-g_1g_2G_{12}(R)$ for point sources with signed couplings $g_1,g_2$. This construction specifies spin zero, a positive spectrum, two sources and a normalization. Identifying a physical interaction requires independent information about the sources, their couplings and the mass scale $M$.
 
+**Can a compact internal space produce the complete arithmetic mass tower? (Literature results and manual derivation, not formalized in this book.)** Work in units of the mass scale $M$. Suppose the internal space is a smooth closed Riemannian manifold of dimension $d\ge1$, the internal field has fixed finite rank $r>0$, and the squared masses comprise the entire spectrum of a nonnegative self-adjoint operator of Laplace type. Let $N_{\mathrm{int}}(T)$ count its positive eigenfrequencies up to $T$, including the dimension of each eigenspace. Weyl's law gives $N_{\mathrm{int}}(T)\sim C T^d$ with $C>0$. The Riemann–von Mangoldt formula counts all positive ordinates in the critical strip with multiplicity and gives $N_\zeta(T)=\frac{T}{2\pi}\log\frac{T}{2\pi}-\frac{T}{2\pi}+O(\log T)$. This counting formula is independent of RH. The chapter uses RH to locate the zeros on the critical line. The ratio $N_\zeta(T)/T^d$ tends to infinity for $d=1$ and to zero for $d\ge2$. Hence the full spectrum of this compact model is incompatible with the arithmetic tower. If a source misses entire eigendirections, its readings describe only the visible part. The comparison of complete counts then requires additional information about the omitted modes. [Hörmander's elliptic spectral asymptotics](https://doi.org/10.1007/BF02391913)
+
+A noncompact space gives an explicit local comparison. On the half-line $x\ge0$ take the Dirichlet condition $f(0)=0$ and the positive operator
+
+$$
+H=-\frac{d^2}{dx^2}+(4\pi)^2 e^{4x}.
+$$
+
+The confining potential makes the frequencies $T=\sqrt{\lambda}$ discrete. Putting $z=2\pi e^{2x}$ reduces the eigenvalue equation to the modified Bessel equation. Its square-integrable solution at infinity is proportional to $K_{iT/2}(z)$. The boundary condition becomes $K_{iT/2}(2\pi)=0$. With $u=2x+\log(4\pi)$, the operator $H/4$ becomes $-d^2/du^2+e^{2u}/4$ with left endpoint $u_0=\log(4\pi)$. Substitution of the energy $(T/2)^2$ into Theorem 3.2 of Lagarias gives
+
+$$
+N_H(T)=\frac{T}{2\pi}\log\frac{T}{2\pi}-\frac{T}{2\pi}+O(1).
+$$
+
+The one-dimensional model thus reproduces the coefficients of both $T\log T$ and the linear term, with a rigorous bounded remainder for its own count. This accuracy leaves the constant term, individual zero ordinates and their source weights undetermined. [Lagarias, Theorem 3.2 and Eq. (3.2)](https://doi.org/10.4310/CNTP.2009.v3.n2.a3)
+
+The lowest mode tests the fit. Split the half-line at $x=1/4$ and relax both sides there to Neumann conditions to obtain a lower bound on the operator. On the right the potential is at least $16\pi^2e>400$. On the left replace the potential by the constant $16\pi^2$. The second eigenvalue of this Dirichlet–Neumann interval is $52\pi^2>400$. Thus the full operator has at most one eigenfrequency with $T<20$. Interval arithmetic gives a positive value of $K_{iT/2}(2\pi)$ at $T=19.53754016$ and a negative value at $T=19.53754018$. The root in this interval is therefore the first eigenfrequency. Earlier in this section we obtained $14.134723<\gamma_1<14.134756$. At the common scale the two leading counting terms agree, while the lowest frequency distinguishes the spectra.
+
 ## 39.2.3 Tier 5: Heap-Geodesic Intelligence and Apophatic Self-Transparency of AXIOM-Ω {#sec-ch39-25-3}
 
 At Tier 5, the cascade turns from physical cosmos to intelligent mind, and finally reflects $\mathrm{AXIOM}\text{-}\Omega$ upon itself:
