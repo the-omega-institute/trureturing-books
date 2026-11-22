@@ -1096,6 +1096,29 @@ $$
 
 若 $\mu(r)\ne0$，非零测试频率的系数非零当且仅当 $1/2+ir\omega$ 是实际零点。此时除以 $-\mu(r)b_{r,L}(1/2+ir\omega)$，便得到该零点的解析重数。若 $r$ 含平方因子，所有非零频率的系数均为零。这里的误差常数允许依赖测试频率与固定窗宽；零频处对所有正窗宽统一的估计见 [@thm-ch31-prime-window-even-cesaro]。
 
+::: {.theorem #thm-ch31-prime-window-fourier-uniform-width title="傅里叶恢复对所有正窗宽统一" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffUniformWidth.signed_window_even_cutoff_fourier_uniform_width"}
+假设 RH。沿用 [@thm-ch31-prime-window-even-fourier] 中的偶数截断、归一化余项 $F$ 与依赖窗宽的目标系数 $A$。存在共同起点阈值 $U_0>0$。对每个允许的阶数 $m$ 与每个实测试频率 $\omega$，存在 $C>0$，使得对所有 $L>0$、$U\ge U_0$ 与 $T>0$，调制后的余项在 $[U,U+T]$ 上 Lebesgue 可积，且
+
+$$
+\left|\frac{1}{T}\int_U^{U+T}F(u)e^{-i\omega u}\,du-A(\omega)\right|
+\le \frac{C}{T}.
+$$
+
+在每个正窗宽，零频系数等于 $-\mu(q)q/((q-1)s)$。每个实际非平凡零点 $\rho$ 在 $\omega_\rho$ 处的系数等于 $-\mu(r)n_\rho b_{r,L}(\rho)$，其中 $b_{r,L}(\rho)\ne0$。
+:::
+
+::: proof
+对频率 $\lambda$，记 $t=e^{-sL}$。将 $te^{i\lambda L}-1$ 写成 $t(e^{i\lambda L}-1)-(1-t)$。由 $|e^{i\lambda L}-1|\le|\lambda|L$ 与 $tL/(1-t)\le 1/s$，得到
+
+$$
+\left|\frac{e^{(-s+i\lambda)L}-1}{1-e^{-sL}}\right|\le 1+\frac{|\lambda|}{s}.
+$$
+
+根原函数将每项系数除以其复指数。对于零点项 $\rho_k$，$\lambda=\operatorname{Im}(\rho_k)/r$ 是该指数的虚部，故 $|\lambda|$ 不超过该指数的模。估计系数范数时，新增的 $|\lambda|$ 因子被逆指数吸收。所得系数上界可和，且与 $L$ 无关。傅里叶误差用这些范数之和乘上其余频率的间隔倒数控制。算术项与余项的估计已经覆盖所有正窗宽。系数的恒等式见 [@thm-ch31-prime-window-even-fourier]。
+:::
+
+误差常数可以依赖 $\omega$。在非零频率处，要恢复的系数仍依赖窗宽。
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::
