@@ -631,6 +631,10 @@ For dimension $16$ and multiplier $3$, the one-coordinate Boolean lattice has $1
 
 The four capacity deficits depend on the layer sizes of the remaining fifteen coordinates. The full-inclusion lower bound is therefore $2036$ when fixed seeds are allowed at any one designated coordinate. The attaining construction below uses coordinate $0$. [Lower bound at an arbitrary marked coordinate](lean:D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteenCovers.full_budget_ge)
 
+**Counting jumps from cut parities.** At a cut of rank $r$, count ordinary edges from a rank strictly below $r$ to a rank strictly above $r$. Each such edge is a jump over at least one rank. Take the parity of this count along any nondecreasing list of sampled ranks and add a zero at each end. Each jump crosses a contiguous block of samples, so a change in parity requires a jump to enter or leave the count there. Each jump provides at most two such boundaries. The number of parity changes is therefore at most twice the number of jumps. [Lean proof of the parity bound](lean:D5/S3/Combinatorics/Graph/RankCuts/RankedIntervalParity.changes_le_twice_jumps)
+
+The pattern $1,0,1$ becomes $0,1,0,1,0$ and forces at least two jumps. The pattern $1,1,1$ becomes $0,1,1,1,0$ and forces at least one. To attain either bound, a factor must place the jump endpoints on allowed inclusion edges and satisfy its degree and budget constraints.
+
 ::: {.theorem #thm-omega-sixteen-full-budget lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteen.full_budget_iff" title="The exact budget for full inclusion in dimension sixteen"}
 Take dimension $16$ and multiplier $3$, with a nonzero fixed-seed budget allowed only at coordinate $0$. For every nonnegative integer $b$, the full inclusion graph admits a factor within budget $b$ if and only if $b\ge2036$. A feasible factor satisfies the degree, support and charge conditions above.
 :::
