@@ -839,6 +839,22 @@ $$
 
 在 RH 下取 $\theta=1/2$、$\alpha=1/4$。所得 $N^{3/4}$ 界为素数尾窗证明的近区提供消去。逆对数尾窗界还需远区谱估计及其到两个实数端点的转移。 [逆对数尾窗问题](https://github.com/the-omega-institute/trureturing/issues/33096)
 
+::: {.theorem #thm-ch31-mobius-short-average title="无零半平面给出的逐点 Möbius 前缀界" lean="D5/S3/Weil/ZetaPntBounds/MobiusShortAverage.ordinary_mobius_prefix_of_zero_free"}
+设实数 $\tfrac12\le\theta<1$，并假定在每个满足 $\operatorname{Re}z>\theta$ 且 $z\ne1$ 的点上有 $\zeta(z)\ne0$。对每个 $\varepsilon>0$，存在 $C>0$，使所有整数 $N\ge1$ 都满足
+
+$$
+\left|\sum_{1\le n\le N}\mu(n)\right|\le C N^{\theta+\varepsilon}.
+$$
+
+在 RH 下可取 $\theta=1/2$。这是 Littlewood 的经典前缀界，见 [Soundararajan，第 1 页，式 (1)](https://arxiv.org/pdf/0705.0723v2)。
+:::
+
+::: proof
+令 $x=N$、$h=\sqrt{x}$，记 $R(y)=\sum_{n\le y}\mu(n)(y-n)$。在短平均 $(R(x+h)-R(x))/h$ 中，$n\le N$ 的项恰好给出普通前缀。其余项的权重落在 $[0,1]$，且其中至多有 $\lfloor h\rfloor$ 个整数，所以与普通前缀的差至多为 $h$。
+
+使用第一阶 Riesz 和的 Perron 积分，在分子中对两个端点作差。借助正实轴上的复幂导数可得到带一个垂直分母的界，直接估计两个端点则保留两个垂直分母。若 $w=1+|\operatorname{Im}s|$，这两条界和倒数 zeta 的次幂增长联合起来，给出与 $w^{-1-\delta}$ 成比例的可积上界。由此可以把积分线移到 $\operatorname{Re}s=\theta+\delta$。短平均的系数由 $O(x^{\theta+2\delta})$ 控制，其中 $\delta=\min(\varepsilon/3,1/4)$。加回误差 $h$ 即得所述前缀界。完整证明由 Lean 内核检查。
+:::
+
 ::: {.theorem #thm-ch31-prime-window-inverse-log title="素数尾窗的逆对数界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusInverseLog.prime_window_mobius_inverse_log_of_rh"}
 假设黎曼猜想成立。存在实常数 $a_0\ge2$ 与 $C>0$，使每个整数 $m\ge2$ 和所有实数 $B\ge a\ge a_0$ 都满足
 $$

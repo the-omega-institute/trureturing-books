@@ -839,6 +839,22 @@ For the reciprocal-weighted prefix $S(x)=\sum_{1\le n\le x}\mu(n)/n$, the zero-f
 
 Under RH, take $\theta=1/2$ and $\alpha=1/4$. The resulting $N^{3/4}$ bound supplies cancellation in the near range of the prime-window proof. The inverse-logarithmic window bound also requires a far-range spectral estimate and the transfer to the two real endpoints. [Inverse-logarithmic window question](https://github.com/the-omega-institute/trureturing/issues/33096)
 
+::: {.theorem #thm-ch31-mobius-short-average title="Pointwise Möbius prefixes from a zero-free half-plane" lean="D5/S3/Weil/ZetaPntBounds/MobiusShortAverage.ordinary_mobius_prefix_of_zero_free"}
+Let $\tfrac12\le\theta<1$ and suppose $\zeta(z)\ne0$ whenever $\operatorname{Re}z>\theta$ and $z\ne1$. For every $\varepsilon>0$ there is $C>0$ such that every integer $N\ge1$ satisfies
+
+$$
+\left|\sum_{1\le n\le N}\mu(n)\right|\le C N^{\theta+\varepsilon}.
+$$
+
+Under RH one can take $\theta=1/2$, giving Littlewood’s classical prefix bound. [Soundararajan, p. 1, equation (1)](https://arxiv.org/pdf/0705.0723v2)
+:::
+
+::: proof
+Set $x=N$ and $h=\sqrt{x}$. Write $R(y)=\sum_{n\le y}\mu(n)(y-n)$. In the short average $(R(x+h)-R(x))/h$, the terms with $n\le N$ give the ordinary prefix. Each remaining weight lies in $[0,1]$, and at most $\lfloor h\rfloor$ integers contribute. The error is therefore at most $h$.
+
+Take the difference of the two first-order Riesz kernels in the Perron integral. Differentiating the complex power along the positive real axis gives a bound with a single vertical denominator. Estimating the two endpoints separately gives a bound with a quadratic denominator. Together with subpower growth of reciprocal zeta, these bounds give an integrable majorant proportional to $(1+|\operatorname{Im}s|)^{-1-\delta}$ and permit shifting to $\operatorname{Re}s=\theta+\delta$. The short average is $O(x^{\theta+2\delta})$ for $\delta=\min(\varepsilon/3,1/4)$. Adding the error $h$ gives the ordinary prefix estimate. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.theorem #thm-ch31-prime-window-inverse-log title="Inverse-logarithmic prime-window bound" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusInverseLog.prime_window_mobius_inverse_log_of_rh"}
 Assume the Riemann hypothesis. There are real constants $a_0\ge2$ and $C>0$ such that every integer $m\ge2$ and all real $B\ge a\ge a_0$ satisfy
 $$
