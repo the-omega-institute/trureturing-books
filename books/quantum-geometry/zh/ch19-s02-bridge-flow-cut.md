@@ -147,12 +147,13 @@ $$
 先看这些切片如何搬动一列。对输入指标 $(j,k)$，定义输出路由
 
 $$
-\rho(j,k)=
-\begin{cases}
+\begin{aligned}
+\rho(j,k)&=\begin{cases}
 (j,k),&j<a,\\
 \bigl(2(j-a),\,2q+k\bigr),&j\ge a,\ k<q,\\
 \bigl(2(j-a)+1,\,q+k\bigr),&j\ge a,\ q\le k.
 \end{cases}
+\end{aligned}
 $$
 
 这个输出确实落在规定范围内。第一分支中 $j<a$ 且 $k<2q<3q$。后两分支中令 $t=j-a$；由 $j+1\le b$ 和 $2b\le3a$ 得
@@ -212,7 +213,7 @@ $$
 
 补齐六个输出基向量。[@thm-bridge-native-saturation-iff] 因而是该置换例子在 $c=2q$、$d=3q$ 这一族中的全参数延伸；一般情形只需占据不同的输出坐标，不要求铺满全部输出。
 
-在 $a<b$ 且 $2b\le3a$ 的区间，这族构造有 $3c=6q=2d$。这一等号直接来自所取的 $c=2q$、$d=3q$。定理确定的是这一固定右侧维数族中原始矩阵三元组的存在性，恒等列 Gram 由上述因子的坐标路由直接给出。这一构造本身没有证明：对于任意 $c,d$，$a<b$ 与正标量列 Gram 条件 $F^*F=\lambda I_{bc}$（$\lambda>0$）必然推出 $3c\le2d$。后文 [@thm-bridge-native-rectangular-bound] 的必要界 $2c\le d$ 使用严格阈值 $3a<2b$，其假设与这里的 $2b\le3a$ 分处阈值两侧。
+在 $a<b$ 且 $2b\le3a$ 的区间，这族构造取到 $3c=6q=2d$，其中 $c=2q$、$d=3q$。后文的 [@thm-bridge-native-three-rectangular-bound] 将证明 $3c\le2d$ 对任何左侧缩维的三项正标量列 Gram 都是必要的。
 
 右侧的两段其实不必等长。把 $c$ 个输入坐标分成长度为 $\lfloor c/2\rfloor$ 与 $\lceil c/2\rceil$ 的两段，让它们分别使用左侧的偶数槽与奇数槽，就能沿用同一套路由。因此，$c$ 为偶数、$d$ 恰好等于 $3c/2$ 都不是这一存在性构造所必需的限制；右侧只需容纳原来的 $c$ 行和长度为 $\lceil c/2\rceil$ 的余带。
 
@@ -283,12 +284,13 @@ $$
 差 $j-a$、$k-q$ 分别只在 $j\ge a$、$k\ge q$ 时起作用，均为非负整数差。对 $G=\sum_{r=0}^2L_r\otimes N_r$，这些因子给出的路由是
 
 $$
-\rho(j,k)=
-\begin{cases}
+\begin{aligned}
+\rho(j,k)&=\begin{cases}
 (j,k),&j<a,\\
 \bigl(2(j-a),\,c+k\bigr),&j\ge a,\ k<q,\\
 \bigl(2(j-a)+1,\,c+(k-q)\bigr),&j\ge a,\ q\le k.
 \end{cases}
+\end{aligned}
 $$
 
 逐一检查坐标范围。若 $j\ge a$，令 $t=j-a$；由 $j+1\le b$ 和 $2b\le3a$ 得
@@ -385,7 +387,66 @@ $$
 九个输出坐标互异，只有输出坐标 $(0,4)$ 未被占据。因此每列范数平方为 $2$，任意两列内积为零，直接得到 $F^*F=2I_9$。这说明右侧两段不等长时，原始三项因子仍能给出精确的标量列 Gram。
 :::
 
-[@thm-bridge-native-scalar-gram-exists] 把存在性构造延伸到满足 $3c\le2d$ 的任意自然数右侧维数，但仍保留左侧前提 $2b\le3a$。它是充分条件，不把 $3c\le2d$ 宣称为任意原始因子的普遍必要条件，也没有给出全维数的充要分类。后文的必要界分别在 $3a<2b$ 下给出 $2c\le d$（[@thm-bridge-native-rectangular-bound]），在更强的 $2a<b$ 下给出 $3c\le d$（[@thm-bridge-scalar-gram-obstruction]）。这些是有限维原生矩阵模型中的精确 Gram 结论。下面对一族矩形阻碍给出近似平坦谱的一致误差下界。物理实现或连续统 RT 公式的推导仍不在此给出。
+上面的三项坐标路由在 $2b\le3a$ 与 $3c\le2d$ 时给出所需的列 Gram。对于具有正标量列 Gram 的任意三对因子，只要左侧缩维，右侧就必须满足这条界。
+
+::: {.theorem #thm-bridge-native-three-rectangular-bound title="宽度三桥接的矩形维数界" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeThreeRectangularBound.native_three_rectangular_bound"}
+设 $a,b,c,d\in\mathbb N$，取任意复矩阵 $M_r\in M_{a\times b}(\mathbb C)$、$N_r\in M_{d\times c}(\mathbb C)$（$r=0,1,2$），令 $F=\sum_{r=0}^{2} M_r\otimes N_r$。若 $\lambda>0$ 为实数，且 $F^*F=\lambda I_{bc}$、$a<b$，则 $3c\le2d$。
+:::
+
+::: {.proof #pf-bridge-native-three-rectangular-bound}
+若 $c=0$，结论立即成立。否则 $a<b$ 保证 $b>0$，列 Gram 恒等式又要求 $F$ 单射，故 $a$ 和 $d$ 都为正。将 $F$ 除以 $\sqrt{\lambda}$ 得到等距映射 $\widehat F$，取它的最短张量和表示 $\widehat F=\sum_r X_r\otimes Y_r$，记项数为 $m\le3$。任一侧若有线性关系，就可吸收一个乘积项，故两组因子都线性无关。对右因子按内积 $c^{-1}\operatorname{Tr}(Y_r^*Y_s)$ 正交归一化，同时对左因子施加逆转置变换，保持张量和不变。此时对 $\widehat F^*\widehat F=I_{bc}$ 取归一化右偏迹，得到 $\sum_r X_r^*X_r=I_b$。
+
+把左因子叠成等距映射 $Sx=(X_rx)_r$，则 $b\le ma$，排除了 $m\le1$。对系数矩阵 $T$，定义压缩 $\Phi(T)=S^*(T\otimes I_a)S$。将右因子并列成矩阵 $W=[Y_r]_r$，记 $P=W^*W$。展开 $\widehat F^*\widehat F$ 可知，对每对右输入坐标 $(\ell,j)$，残差系数矩阵 $R_{\ell j}$ 的 $(r,s)$ 元为 $(Y_r^*Y_s)_{\ell j}-\delta_{rs}\delta_{\ell j}$，且 $\Phi(R_{\ell j})=0$。压缩保持伴随，因而 $R_{\ell j}$ 的两个厄米部分都在厄米压缩核中。
+
+非零半定系数矩阵若在核中，将它作谱分解，压缩为零就迫使某个非零系数组合 $\sum_r u_r X_r$ 为零，与线性无关矛盾。另一方面，可逆的不定厄米矩阵在 $m=2$ 或 $m=3$ 时，正、负惯性指标中较小者为 $1$。故 $T\otimes I_a$ 的任一中性子空间至多为 $a$ 维，因为它向较小的符号子空间的投影是单射。若 $\Phi(T)=0$，$S$ 的 $b$ 维像便是这样的中性子空间，与 $a<b$ 矛盾。
+
+当 $m=2$ 时，每个非零不定厄米矩阵都可逆，故厄米压缩核为零，进而 $R_{\ell j}=0$。并列矩阵 $W$ 的 Gram 等于 $I_{2c}$，所以 $2c\le d$。当 $m=3$ 时，厄米压缩核由奇异矩阵组成。[系数核几何定理](lean:D5/S3/Quantum/Algebra/CompressionKernel/NativeThreeKernelGeometry.native_three_compression_kernel_geometry) 对这里线性无关的左因子和单射叠矩阵给出两种可能。
+
+- 若核中的每个厄米矩阵都消去同一个单位向量 $v$，则 $R_{\ell j}v=0$。于是 $Z=\sum_s v_sY_s$ 满足 $Y_r^*Z=v_r I_c$，从而 $Z^*Z=I_c$。取 $v_i\ne0$，令 $W_r=Y_r-\overline{v_r/v_i}\,Y_i$（$r\ne i$），则两组 $W_r$ 的像都落在 $Z$ 的像的正交补中。若它们同时消去某个非零 $y$，右因子在 $y$ 上便都满足 $Y_r y=\overline{v_r/v_i}\,Y_i y$。左侧组合 $\sum_r\overline{v_r/v_i}\,X_r$ 从 $b$ 维映到 $a$ 维，必有非零核向量 $x$，于是 $\widehat F(x\otimes y)=0$，与等距性矛盾。因此两组 $W_r$ 叠起来单射，给出 $c\le2(d-c)$，即 $3c\le2d$。
+- 若存在共同的二维中性平面 $L$，则对 $u,v\in L$ 有 $u^*R_{\ell j}v=0$。取 $L$ 的标准正交基作为矩阵 $V$ 的列，令 $C=V\otimes I_c$。逐个右输入坐标应用配对等式，就有 $C^*(P-I_{3c})C=0$，于是 $(WC)^*(WC)=I_{2c}$，给出 $2c\le d$，也推出 $3c\le2d$。
+
+完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-bridge-native-scalar-gram-iff title="宽度三正标量列 Gram 的全维数充要分类" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeScalarGramClassification.native_scalar_gram_iff"}
+对任意 $a,b,c,d\in\mathbb N$ 和实数 $\lambda>0$，存在复矩阵 $M_r\in M_{a\times b}(\mathbb C)$、$N_r\in M_{d\times c}(\mathbb C)$（$r=0,1,2$），使 $F=\sum_{r=0}^{2} M_r\otimes N_r$ 满足 $F^*F=\lambda I_{bc}$，当且仅当下列至少一项成立。
+
+1. $b=0$ 或 $c=0$。
+2. $b\le a$ 且 $c\le d$。
+3. $a<b$，且下列三行中至少一行的全部不等式成立。
+
+   $$
+   \begin{aligned}
+   2b &\le 3a, & 3c &\le 2d,\\
+   3a &< 2b,\quad b\le2a, & 2c &\le d,\\
+   2a &< b\le3a, & 3c &\le d.
+   \end{aligned}
+   $$
+
+4. $d<c$，且下列三行中至少一行的全部不等式成立。
+
+   $$
+   \begin{aligned}
+   2c &\le 3d, & 3b &\le 2a,\\
+   3d &< 2c,\quad c\le2d, & 2b &\le a,\\
+   2d &< c\le3d, & 3b &\le a.
+   \end{aligned}
+   $$
+
+在 $0<b$ 且 $0<c$ 时，$a=0$ 或 $d=0$ 均排除实现。此时 $b>3a$ 或 $c>3d$ 也排除实现。
+:::
+
+::: {.proof #pf-bridge-native-scalar-gram-iff}
+若 $b=0$ 或 $c=0$，Gram 等式两边都是唯一的空方阵，取全零因子即可。以下设 $b,c>0$。由于 $\lambda>0$，列 Gram 恒等式要求 $F$ 单射，所以 $a,d$ 必为正。若两侧均能各自嵌入输出空间，即 $b\le a$ 且 $c\le d$，维数已满足第二项。
+
+若 $a<b$，叠映射 $x\mapsto(M_0x,M_1x,M_2x)$ 必须单射，否则其任一非零核向量与任一非零右输入向量的张量积也会落入 $F$ 的核，故 $b\le3a$。在 $2b\le3a$ 的区间，用 [@thm-bridge-native-three-rectangular-bound] 得到 $3c\le2d$。在 $3a<2b$ 且 $b\le2a$ 时，用 [@thm-bridge-native-rectangular-bound] 得到 $2c\le d$。在 $2a<b\le3a$ 时，用 [@thm-bridge-scalar-gram-obstruction] 得到 $3c\le d$。三个区间依次覆盖左侧缩维时的所有可能。
+
+交换输入与输出各自的两个张量因子，把 $F$ 改为 $\sum_r N_r\otimes M_r$，维数改记为 $(d,c,b,a)$。输入和输出的交换都是酉置换，所以新的列 Gram 是原列 Gram 按输入置换作酉共轭。标量恒等式因此在交换前后等价。当 $d<c$，将左侧必要界应用于交换后的维数，就得到第四项。
+
+反过来，左侧缩维的第一个区间由 [@thm-bridge-native-scalar-gram-exists] 给出构造。其余情况只需一个分块坐标嵌入。给定 $k\le3$、$b\le ka$ 和 $kc\le d$，把左输入坐标分入 $k$ 个大小至多为 $a$ 的块，每个块经自己的左矩阵嵌入同一组左输出坐标。与这个块配对的右矩阵把全部 $c$ 个输入坐标嵌入专属的 $c$ 个输出坐标。各块使用的右输出坐标互不相交，所以各输入基向量恰好映到一个输出基向量，且像两两不同。补足零项，再把左矩阵乘以 $\sqrt{\lambda}$，所得列 Gram 就是 $\lambda I_{bc}$。双侧均可嵌入时取 $k=1$，左侧缩维的后两个区间分别取 $k=2$ 和 $k=3$。右侧缩维时先按交换后的条件构造，再交换回来。完整证明由 Lean 内核检查。
+:::
+
+对 $k\ge1$，族 $(2k,5k,2k,5k)$ 落在左侧缩维的第三区间，但 $3c=6k>d=5k$，故精确平坦谱无法达到。对这族维数，归一化列 Gram 的熵与最大值之间还有一个与 $k$ 无关的下界。
 
 **宽度三桥接的一致平坦谱熵隙（手工推导）。** 设 $k\ge1$ 为整数，$(a,b,c,d)=(2k,5k,2k,5k)$，$D=bc=10k^2$，$F=\sum_{r=1}^3 M_r\otimes N_r\ne0$。归一化 $\rho_{BC}=F^*F/\operatorname{Tr}(F^*F)$，记 $G=D\rho_{BC}$ 与 $\eta=\|G-I_D\|_1/D$，其中 $\|\cdot\|_1$ 是迹范数。若至多用 $2$ 项，则 $\operatorname{rank}F\le 2ac=8k^2$，故 $G-I_D$ 的负部迹至少为 $2k^2$。由于该矩阵无迹，$\eta\ge 2/5$。
 
@@ -394,15 +455,16 @@ $$
 对每个单位向量 $z\in\mathbb C^3$，$W(E)\cap(z\otimes\mathbb C^a)$ 的维数至少为 $\dim E-2a\ge k(1-5\eta)$。限制到该交空间的原像，上述算子是重复块 $I\otimes Q(z)$，其中 $Q(z)=\sum_{r,s}\bar z_rz_s T_{rs}$。令 $\widetilde F=F\rvert_{E\otimes\mathbb C^c}(J\otimes I_c)$，则限制到上述原像之前的算子为 $\widetilde F^*\widetilde F-I_E\otimes I_c$。当 $Wx=z\otimes u$ 时，$\widetilde F(x\otimes y)=u\otimes\sum_r z_rN_ry$，得到该重复块。因此 $\|Q(z)\|_1\le L=4D\eta/[k(1-5\eta)]$。取 $z=e_r$ 给出对角块界 $L$。取 $(e_r\pm e_s)/\sqrt2$ 与 $(e_r\pm i e_s)/\sqrt2$，分别相减并合并，给出非对角块界 $2L$。三块对角加六块非对角，得到
 
 $$
-2k\le\|T\|_1\le15L=\frac{600k\eta}{1-5\eta},
-\qquad \eta\ge\frac1{305}.
+\begin{aligned}
+2k &\le\|T\|_1\le15L=\frac{600k\eta}{1-5\eta},\\
+\eta &\ge\frac1{305}.
+\end{aligned}
 $$
 
 对 $\rho_{BC}$ 的本征值与均匀分布应用 Pinsker 不等式，以自然对数计，有 $\log D-S(\rho_{BC})\ge\eta^2/2\ge 1/186050$。在 $(2k,5k,2k,5k)$ 上，两个方形 Gram 矩阵 $F^*F$ 与 $FF^*$ 同为 $D$ 阶，非零谱相同，故两侧归一化态均有此熵隙。见论文二附录 *Tensor-network results used for cap entropies* 中的 *Uniform entropy gap for width-three bridges*。一般维数下，若宽度三的流 $F\ne0$ 且 $q=\operatorname{QMinCut}(a,b,c,d)<D=bc$，则 $1\le R=\operatorname{rank}F\le q$。设 $p_i$ 为 $\rho_{BC}$ 的非零本征值，由 Cauchy–Schwarz 不等式得 $\sum_i p_i^2\ge1/R\ge1/q$，故
 
 $$
-\lVert D\rho_{BC}-I_D\rVert_{\mathrm F}^2
-=D^2\sum_i p_i^2-D\ge\frac{D(D-q)}{q}.
+\lVert D\rho_{BC}-I_D\rVert_{\mathrm F}^2 =D^2\sum_i p_i^2-D\ge\frac{D(D-q)}{q}.
 $$
 
-支撑上的均匀分布使熵最大，故 $\log D-S(\rho_{BC})\ge\log(D/q)$。两条只依赖秩的界均在 $R=q$ 且非零谱均匀时取等。其余矩形阻碍的范围见上述两条精确 Gram 必要界。
+支撑上的均匀分布使熵最大，故 $\log D-S(\rho_{BC})\ge\log(D/q)$。两条只依赖秩的界均在 $R=q$ 且非零谱均匀时取等。
