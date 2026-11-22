@@ -1134,6 +1134,21 @@ The origin cusp gives a positive lower bound of order $h\log(1/h)$ for the symme
 
 The start can depend on the shift and the prescribed threshold. This controls the worst forward increment on every late tail. The matching upper rate for those increments remains open.
 
+::: {.theorem #thm-ch31-root-symmetric-tail-modulus title="The symmetric root-spectrum modulus on each tail" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHRootTailModulus.root_signal_symmetric_tail_modulus"}
+Assume RH and use $S_r$, $s$ and $c$ from [@thm-ch31-centered-root-log-cusp]. Fix any real $r>1$. For real $U$ and $0<h\le r/2$, the set of values of $|S_r(u+h)+S_r(u-h)-2S_r(u)|$ for $u\ge U$ is nonempty and bounded above. Write $M_r(U,h)$ for its supremum. There is a $C_r>0$ that works for every such $U,h$ and satisfies
+
+$$
+\left|M_r(U,h)-\frac{h}{s}\bigl(\log(1/h)+\log r-2c\bigr)\right|
+ \le C_r h^2.
+$$
+:::
+
+::: proof
+The symmetric difference multiplies the mode with ordinate $\gamma$ by $2(\cos(\gamma h/r)-1)$. Take the absolute value of each term. Its root coefficient has norm at most $r/(1/4+\gamma^2)$. The sum of these majorants equals $2r(K(0)-K(h/r))/s$ and bounds every starting point. For the lower bound, recurrence places values arbitrarily close to the signed symmetric difference at zero in each tail. The supremum therefore lies above that origin value. The two bounding expressions have the same logarithmic and linear coefficients, with quadratic errors.
+:::
+
+This determines the two terms of the symmetric modulus uniformly over tails. The corresponding sharp upper rate for forward increments remains open.
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 
