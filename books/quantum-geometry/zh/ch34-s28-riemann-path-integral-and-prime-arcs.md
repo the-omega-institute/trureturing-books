@@ -826,6 +826,19 @@ $$
 把密度估计在原窗口上积分，保留两端幂差。有限个较小阶数由 [@thm-ch31-prime-window-linear-remainder] 的线性界吸收到同一常数中。完整证明由 Lean 内核检查。
 :::
 
+::: {.lemma #lem-ch31-mobius-energy-prefix title="从加权能量得到普通 Möbius 前缀界" lean="D5/S3/Weil/ZetaPntBounds/MobiusEnergyPointwise.unweighted_mobius_prefix_power_bound"}
+令 $1/2\le\theta<1$、$2\theta-1<\alpha<1$。假设对所有满足 $\operatorname{Re}z>\theta$ 且 $z\ne1$ 的复数都有 $\zeta(z)\ne0$。存在实数 $C>0$，使每个整数 $N\ge1$ 都满足
+$$
+\left|\sum_{1\le n\le N}\mu(n)\right| \le C N^{(2+\alpha)/3}.
+$$
+:::
+
+::: proof
+令按倒数加权的前缀为 $S(x)=\sum_{1\le n\le x}\mu(n)/n$。无零点条件保证能量 $\int_1^\infty S(x)^2 x^{-\alpha}\,dx$ 有限。在整数 $N\ge2$ 取 $H=|S(N)|$。此后每次跳变的大小至多为 $1/N$，所以在实区间 $N<x\le N+HN/2$ 上有 $|S(x)|\ge H/2$。该区间上的能量控制 $H^3N^{1-\alpha}$。分部求和把所得逐点界传给普通前缀，而 $N=1$ 可吸收到常数中。
+:::
+
+在 RH 下取 $\theta=1/2$、$\alpha=1/4$。所得 $N^{3/4}$ 界为素数尾窗证明的近区提供消去。逆对数尾窗界还需远区谱估计及其到两个实数端点的转移。 [逆对数尾窗问题](https://github.com/the-omega-institute/trureturing/issues/33096)
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::

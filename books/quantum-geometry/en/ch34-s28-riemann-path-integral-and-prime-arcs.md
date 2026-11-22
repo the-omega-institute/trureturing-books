@@ -826,6 +826,19 @@ For $u\ge Lq$, distinct coordinates $u/n$ are at least $u/q^2$ apart. The local 
 Integrate the density estimate on the original window to keep the endpoint power difference. The linear bound in [@thm-ch31-prime-window-linear-remainder] absorbs the finitely many smaller orders into the same constant. The full proof is checked by the Lean kernel.
 :::
 
+::: {.lemma #lem-ch31-mobius-energy-prefix title="Ordinary Möbius prefixes from weighted energy" lean="D5/S3/Weil/ZetaPntBounds/MobiusEnergyPointwise.unweighted_mobius_prefix_power_bound"}
+Let $1/2\le\theta<1$ and $2\theta-1<\alpha<1$. Suppose $\zeta(z)\ne0$ whenever $\operatorname{Re}z>\theta$ and $z\ne1$. There is a real $C>0$ such that, for each integer $N\ge1$,
+$$
+\left|\sum_{1\le n\le N}\mu(n)\right| \le C N^{(2+\alpha)/3}.
+$$
+:::
+
+::: proof
+For the reciprocal-weighted prefix $S(x)=\sum_{1\le n\le x}\mu(n)/n$, the zero-free hypothesis gives finite energy $\int_1^\infty S(x)^2 x^{-\alpha}\,dx$. Put $H=|S(N)|$ at an integer $N\ge2$. Each subsequent step changes $S$ by at most $1/N$, so $|S(x)|\ge H/2$ on the real interval $N<x\le N+HN/2$. The energy on this interval controls $H^3N^{1-\alpha}$. Partial summation carries the resulting pointwise bound to the ordinary prefix. The case $N=1$ is absorbed into the constant.
+:::
+
+Under RH, take $\theta=1/2$ and $\alpha=1/4$. The resulting $N^{3/4}$ bound supplies cancellation in the near range of the prime-window proof. The inverse-logarithmic window bound also requires a far-range spectral estimate and the transfer to the two real endpoints. [Inverse-logarithmic window question](https://github.com/the-omega-institute/trureturing/issues/33096)
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::
