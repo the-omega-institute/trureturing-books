@@ -44,7 +44,7 @@
    对全体正整数整除偏序取射影逆向极限，即得一维紧致、连通、无边界的**阿代尔螺线管层叠空间（Adelic Solenoid / 1D Solenoidal Lamination）**
 
    $$
-   \mathcal{S}_{\mathbb{A}} \;:=\; \varprojlim_{(N,\,\mid)} S^1_{(N)} \;\cong\; (\mathbb{R} \times \widehat{\mathbb{Z}})/\mathbb{Z} \;\cong\; \mathbb{A}_{\mathbb{Q}}^1 / \mathbb{Q} \qquad \Bigl(\widehat{\mathbb{Z}} \cong \prod_{p \in \mathbb{P}} \mathbb{Z}_p\Bigr).
+   \mathcal{S}_{\mathbb{A}} \;:=\; \lim_{\longleftarrow\,(N,\,\mid)} S^1_{(N)} \;\cong\; (\mathbb{R} \times \widehat{\mathbb{Z}})/\mathbb{Z} \;\cong\; \mathbb{A}_{\mathbb{Q}}^1 / \mathbb{Q} \qquad \Bigl(\widehat{\mathbb{Z}} \cong \prod_{p \in \mathbb{P}} \mathbb{Z}_p\Bigr).
    $$
 
    在拓扑结构上，$\mathcal{S}_{\mathbb{A}}$ 并非局部同胚于 $\mathbb{R}^1$ 的传统流形，而是**叶向实解析（leafwise $C^\omega$）的紧致连通螺线管流形（pro-Lie 群）**（Vietoris 1927；van Dantzig 1930；Smale 1967，`文献结果`）：其横截子午截面虽同胚于全不连通的射有限康托尔群 $\widehat{\mathbb{Z}} = \prod_p \mathbb{Z}_p$，但阿基米德实流叶 $\mathbb{R} \hookrightarrow \mathcal{S}_{\mathbb{A}}$ 沿每一匝无断点地稠密穿行于全体 $p$-进陪集之间，将散碎的康托尔纤维整体编织成**连通紧致且沿流叶处处 $C^\omega$ 可微**的丝滑纤维束，并在几何上经迭代缆索实心环（nested cable tori）无自交地光滑嵌入三维三元数球 $\mathbb{T}_3 \cong S^3$ 内部，共同组成我们的全息圆弧—螺线管流形 $\mathcal{M}_\Omega$（`MODEL`）。

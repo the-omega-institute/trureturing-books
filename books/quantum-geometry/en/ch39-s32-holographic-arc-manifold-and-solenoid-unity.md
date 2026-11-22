@@ -44,7 +44,7 @@ Building the **Holographic Circular-Arc Manifold $\mathcal{M}_\Omega$** upgrades
    Taking the projective limit over divisibility yields the compact, connected, boundaryless **1D Adelic Solenoid (solenoidal lamination / pro-Lie group)**
 
    $$
-   \mathcal{S}_{\mathbb{A}} \;:=\; \varprojlim_{(N,\,\mid)} S^1_{(N)} \;\cong\; (\mathbb{R} \times \widehat{\mathbb{Z}})/\mathbb{Z} \;\cong\; \mathbb{A}_{\mathbb{Q}}^1 / \mathbb{Q} \qquad \Bigl(\widehat{\mathbb{Z}} \cong \prod_{p \in \mathbb{P}} \mathbb{Z}_p\Bigr).
+   \mathcal{S}_{\mathbb{A}} \;:=\; \lim_{\longleftarrow\,(N,\,\mid)} S^1_{(N)} \;\cong\; (\mathbb{R} \times \widehat{\mathbb{Z}})/\mathbb{Z} \;\cong\; \mathbb{A}_{\mathbb{Q}}^1 / \mathbb{Q} \qquad \Bigl(\widehat{\mathbb{Z}} \cong \prod_{p \in \mathbb{P}} \mathbb{Z}_p\Bigr).
    $$
 
    Topologically, $\mathcal{S}_{\mathbb{A}}$ is a **leafwise real-analytic ($C^\omega$) solenoidal lamination** rather than a locally Euclidean manifold (Vietoris 1927; van Dantzig 1930; Smale 1967, `Literature`): although a transverse meridional slice meets the profinite Cantor group $\widehat{\mathbb{Z}} = \prod_p \mathbb{Z}_p$, the Archimedean leaf $\mathbb{R} \hookrightarrow \mathcal{S}_{\mathbb{A}}$ winds densely and $C^\omega$-smoothly through every $p$-adic coset, binding Cantor dust into a **compact, connected** fibered continuum whose finite stages embed without self-intersection as nested cable tori inside $\mathbb{T}_3 \cong S^3$ (`MODEL`).
