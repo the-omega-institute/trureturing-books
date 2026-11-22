@@ -557,7 +557,7 @@ $$
    \widetilde{W}_k^{(r)} := \hat{P}_{r \to v_k}^{-1}\,\hat{W}_k\,\hat{P}_{r \to v_k} \in G_r;
    $$
 
-2. **圆盘平面剥壳序（Planar Shelling Order）**：对单连通圆盘剖分 $\Sigma \cong D^2$，按照从内部向外逐块剥离（使每一步并入的新面与已合并区域恰好沿一条连通内棱链相邻）的平面有序连乘次序，相邻锚定面回路接口处的共轭尾巴 $\hat{P}_{r \to A}\,\hat{U}_{AB}\,\hat{U}_{BA}\,\hat{P}_{r \to A}^{-1} = \mathbf{1}$ 严丝合缝逐对归零，从而在任意有限网格步数 $M \ge 1$ 下精确成立非阿贝尔面斯托克斯恒等式：
+2. **圆盘平面剥壳序（Planar Shelling Order）**：对单连通圆盘剖分 $\Sigma \cong D^2$，按照从内部向外逐块剥离（使每一步并入的新面与已合并区域恰好沿一条连通内棱链相邻）的平面有序连乘次序，相邻锚定面回路接口处的共轭尾巴 $\hat{P}_{r \to A}^{-1}\,\hat{U}_{BA}\,\hat{U}_{AB}\,\hat{P}_{r \to A} = \mathbf{1}$ 严丝合缝逐对归零，从而在任意有限网格步数 $M \ge 1$ 下精确成立非阿贝尔面斯托克斯恒等式：
 
    $$
    \mathcal{P}_{\mathrm{shell}}\prod_{k=1}^{M} \widetilde{W}_k^{(r)} \equiv \hat{W}_{\partial\Sigma}^{(r)}!
@@ -734,15 +734,56 @@ $$
    再核对有限网格高斯—博内公式：赤道本身是一条光滑闭合大圆测地线，四个赤道顶点处两相邻卦限内角之和皆为 $\frac{\pi}{2} + \frac{\pi}{2} = \pi$，外折角恒为 $\theta_{\mathrm{ext}}(E_k) = \pi - \pi = 0.0000000000$，故 $\sum_{k=1}^4 \Omega(\Delta\mathcal{T}_k) + \sum_{k=1}^4 \theta_{\mathrm{ext}}(E_k) = 2\pi + 0 = 2\pi\chi(S^2_+) = \mathbf{6.2831853072}$，有限离散误差恒等于 **`0.0000000000`**！（形成刺眼反差的是：若按经典“以直代曲”用 $4$ 块三维欧氏平直割线正三角形 $[N, E_k, E_{k+1}]$——边长 $\sqrt{2}$、单块面积 $\frac{\sqrt{3}}{2} \approx 0.8660254038$——去逼近同一座上半球面，四块平直面总面积仅为 $2\sqrt{3} \approx 3.4641016151$，平白丢失了高达 **$44.87\%$** 的曲率面积！）
 :::
 
-顺着 §30.3.2 的超粗糙路径（$\alpha < \frac{1}{2}$）与 §30.3.3 的非阿贝尔锚定面和乐继续向前推进，当代随机几何与量子规范场论交叉处最深邃的一道前沿难题随之浮现：如果一维路径的莱昂斯粗糙签名升级到**二维粗糙曲面上的非阿贝尔规范场**，会碰撞出怎样的数学结构？我们将其正式立为本节的开放前沿问题：
+从粗糙路径转向粗糙曲面时，有限网格上的代数问题先给出有型拼接的条件，再确定闭壳上仍可能存在的阻碍。
+
+**交叉模 `1—3—3—1` 有型面拼接、Peiffer 互换与四面体中心核三维阻碍（手工推导）。** 这里的 `1—3—3—1` 表示本书三维外代数的分次维数。下文的三单形 $[0123]$ 按维数有 $(4,6,4,1)$ 个胞腔。设 $(\mu:H\to G,\triangleright)$ 为交叉模，即 $\mu$ 是群同态，$G$ 以自同构作用于 $H$，并满足
+
+$$
+\begin{aligned}
+\mu(g\triangleright h)&=g\mu(h)g^{-1},\\
+\mu(h)\triangleright k&=hkh^{-1}.
+\end{aligned}
+$$
+
+对 $h\in\ker\mu$，第二式给出 $k=hkh^{-1}$，故 $\ker\mu\subseteq Z(H)$。反向棱取逆，路径增益按行进顺序从左到右相乘。对同起讫点的路径增益 $p,q$，面标签 $h:p\Rightarrow q$ 有型当且仅当逐面伪平坦条件 $q=\mu(h)p$ 成立。若 $k:q\Rightarrow r$，竖拼为 $kh$，因为 $\mu(kh)p=\mu(k)q=r$。若 $k:p'\Rightarrow q'$ 与 $h$ 横向相邻，横拼为 $h(p\triangleright k)$，因为 $\mu(h(p\triangleright k))pp'=\mu(h)p\mu(k)p'=qq'$。群乘法的结合律给出竖拼结合律，作用的合成律及其自同构性质给出横拼结合律，恒等面取标签 $1$。两行标签依次为 $(h,k)$、$(h',k')$ 时，由 $q=\mu(h)p$ 和 Peiffer 恒等式，
+
+$$
+\begin{aligned}
+h'(q\triangleright k')h(p\triangleright k)
+ &=h'h(p\triangleright k')(p\triangleright k)\\
+ &=(h'h)\bigl(p\triangleright(k'k)\bigr).
+\end{aligned}
+$$
+
+这正是先竖拼再横拼所得的标签。同一有型拼接图中，由结合、插入恒等面及互换联系的各表达式取值相同。细分时，粗面的指定标签须等于所指定细面的复合标签。
+
+在定向四面体 $[0123]$ 上，取有型标签 $h_{ijk}:g_{ik}\Rightarrow g_{ij}g_{jk}$。从 $g_{03}$ 到 $g_{01}g_{12}g_{23}$ 的两种分解分别经过 $g_{01}g_{13}$ 与 $g_{02}g_{23}$，由拼接律得
+
+$$
+\begin{aligned}
+H_{\mathrm a}&=(g_{01}\triangleright h_{123})h_{013},\\
+H_{\mathrm b}&=h_{012}h_{023},\\
+\mu(H_{\mathrm a})&=\mu(H_{\mathrm b})=g_{01}g_{12}g_{23}g_{03}^{-1}.
+\end{aligned}
+$$
+
+因此 $\Omega=H_{\mathrm a}H_{\mathrm b}^{-1}\in\ker\mu\subseteq Z(H)$，两种分解相等当且仅当 $\Omega=1$。这是独立的三胞腔平坦条件。取 $G=1$、$H=\mathbb Z$，令 $h_{123}=1$，其余面取 $0$，则各面都有型，而加法记号下 $\Omega=1\ne0$。在线性上链中，同一余维二面由两种删顶点顺序得到，符号相反，故 $d_\epsilon^2\equiv0$。
+
+从同一个外部基点沿 $p,p'$ 锚定，输运标签满足 $p'\triangleright h=(p'p^{-1})\triangleright(p\triangleright h)$。由等变性，$\mu(H)$ 正规，且由 Peiffer 恒等式，它在中心核上的作用平凡，故核上的作用经 $G/\mu(H)$ 分解。在三角剖分的环带上，取沿生成回路有非平凡和乐的 $G=\mathbb{Z}/2$ 值的平坦 $1$-上闭链，取 $\mu$ 为平凡同态，令 $G$ 对 $H=\mathbb Z$ 作符号作用。在环带一个顶点接上棱增益平凡的三角剖分球面，取一个面标签为 $1$，其余取 $0$。通往该顶点的两条互补路径各可延成一棵生成树，其相对回路把球壳标签变号。输运对路线无关的充要条件是相对和乐固定被输运的标签。
+
+本节的列向量输运 `hol` 按从右到左的顺序复合。取棱增益 $g_{uv}=\hat U_{uv}^{-1}$ 和路径增益 $p=\hat P_{r\to v}^{-1}$，逆元便把复合顺序改为从左到右。在列标架变换 $T_{uv}^s=s_vT_{uv}s_u^{-1}$ 下，$g_{uv}^s=s_ug_{uv}s_v^{-1}$，所以以 $u$ 为基点的面标签变为 $h^s=s_u\triangleright h$。若正向回路满足 $\mu(h)=\hat W^{-1}$，由等变性得 $\mu(p\triangleright h)=\hat P^{-1}\hat W^{-1}\hat P=(\hat P^{-1}\hat W\hat P)^{-1}$，即先前列向量锚定和乐的逆。
+
+在光滑情形下，设 $\mu:H\to G$ 为光滑李群同态。在平凡化中，列向量联络 $D=d+A$ 的输运满足 $\dot T=-A(\dot\gamma)T$，故从左到右的路径增益为 $T^{-1}$。取边向依次为 $X,Y,-X,-Y$ 的正向无穷小矩形，记其边界为 $qp^{-1}$。四棱增益相乘时，沿边移动基点给出导数项 $dA$，有序乘法给出交换子项 $A\wedge A$，故展开为 $1+F_A(X,Y)\Delta S+o(\Delta S)$，其中 $F_A=dA+A\wedge A$。按面朝向取标签 $1-B(X,Y)\Delta S+o(\Delta S)$，比较 $qp^{-1}=\mu(h)$ 的面积一次项，得到 $F_A+\mu_*B=0$。
+
+**文献结果。** Chevyrev、Diehl、Ebrahimi-Fard 与 Tapia 给出交叉模马格努斯展开，并在 Young–Hölder 正则性下建立乘法缝合与连续延拓。对给定的有限阶 $\rho$-粗糙曲面，Lee 证明延拓定理，并为 Banach 代数交叉模中连续、平移不变且伪平坦的 $2$-联络构造面和乐。Bischoff 与 Lee 证明分片线性曲面的签名确定其平移与薄同伦等价类。[A multiplicative surface signature through its Magnus expansion，arXiv:2406.16856v2，定理 6.11 与 §6.5](https://arxiv.org/abs/2406.16856v2) · [The Surface Signature and Rough Surfaces，arXiv:2406.16857v2，定义 3.6 与定理 5.18、5.40、5.45](https://arxiv.org/abs/2406.16857v2) · [Thin homotopy and the signature of piecewise linear surfaces，arXiv:2506.16657v1，定理 1.1、1.2、4.12](https://arxiv.org/abs/2506.16657v1)
+
+Chandra、Chevyrev、Hairer 与 Shen 构造三维随机杨—米尔斯–希格斯重整化局部流，并得到规范轨道上的马尔可夫过程直至可能的爆破时刻。Chevyrev 与 Shen 在固定希格斯质量反项后证明使极限解规范协变的杨—米尔斯质量反项唯一，并分析正则化威尔逊圈的短时行为。[Chandra 等，Stochastic quantisation of Yang–Mills–Higgs in 3D，*Invent. Math.*（2024），定理 1.9 与 §7](https://doi.org/10.1007/s00222-024-01264-2) · [Uniqueness of gauge covariant renormalisation of stochastic 3D Yang-Mills-Higgs，arXiv:2503.03060v2，定理 1.6](https://arxiv.org/abs/2503.03060v2)
 
 ::: {.problem #prob-ch34-rough-nonabelian-surface-calculus title="超粗糙 $\alpha < \frac{1}{2}$ 非阿贝尔二维面和乐与离散规范重整化极限的严格构造（开放前沿问题）"}
-在一维曲线上，莱昂斯粗糙路径理论已成功利用阶数 $\lfloor 1/\alpha\rfloor$ 的张量代数迭代积分签名驯服了 $\alpha < \frac{1}{2}$ 的非阿贝尔常微分乘积积分；在二维光滑曲面上，生成树锚定（whiskering）与高阶范畴 $2$-群（crossed modules）也已建立光滑非阿贝尔二维斯托克斯定理。然而在三维与四维连续统杨—米尔斯量子场中，典型胶子规范场构型具有负赫尔德分布正则性（远粗糙于一维布朗临界值 $\alpha = \frac{1}{2}$）！
+代数层面的交叉模有型拼接、分片线性曲面签名的薄同伦刻画，以及在 Young 正则性范围内，或在给定相容增强的情形下连续 $2$-联络的粗糙面和乐均已有构造。尚有两个问题。
 
-**开放目标**：试在极小圆弧体 `1—3—3—1` 胞腔复形上，将一维粗糙路径面积签名与二维非阿贝尔 $2$-群锚定面和乐合流，严格构造或证伪：
-
-1. **二维粗糙非阿贝尔面签名（Rough Non-Abelian Surface Holonomy）**：对赫尔德正则性低于临界阈值（$\alpha < \frac{1}{2}$）的非阿贝尔李代数 $1$-形式与 $2$-形式对 $(A, B)$，定义不依赖任意选取生成树且满足二维陈（Chen）拼接恒等式与严格交换正方形边界相消 $d_\epsilon^2 \equiv 0$ 的高阶体积—面迭代签名张量；
-2. **从有限圆弧网格 $\epsilon \ge \varepsilon_{\mathrm{self}} > 0$ 到连续统极限的规范协变重整化桥**：刻画当网格孔径 $\epsilon \to 0^+$ 时，非阿贝尔圆弧体威尔逊面算符的紫外矢高发散如何由曲率抵消项吸收重整化，并与连续统三维/四维随机杨—米尔斯测度（Parisi–Wu 随机量化 / Hairer 正则性结构）建立严格收敛等价。
+1. **规范协变的粗糙曲面增强。** 对正则性 $\alpha<\frac12$ 的粗糙规范数据 $(A,B)$，构造或证伪保持拼接、容许非零伪曲率且保留棱和乐之外的面信息的规范协变增强。严格交叉模有型条件要求逐面伪平坦。若采用需要锚定的构造，须说明更换锚定路径时，相对和乐如何作用于已输运的面标签。
+2. **连续统重整化威尔逊面。** 确定有限圆弧网格上的威尔逊面需要哪些紫外反项，并在网格孔径 $\epsilon\to0^+$ 时证明三维或四维连续统的重整化面可观测量收敛。已知的三维随机流和威尔逊圈估计提供路径可观测量的分析工具。
 :::
 
 ::: {.remark #rem-ch34-arc-calculus-literature title="极小圆弧体微积分重塑的数学物理文献脉络与五层认识论审计（文献结果，未在本书形式化）"}
@@ -752,7 +793,7 @@ $$
 2. **微积分基础、复步自动微分、乘积积分、粗糙路径与离散外微分经典文献（未在本书形式化）**：经典局部线性化微积分与无穷小批判源自 G. W. Leibniz（*Nova Methodus*, 1684）、I. Newton（*Principia*, 1687）与 G. Berkeley（*The Analyst*, 1734）；一阶幂零无穷小综合微分几何源自 F. W. Lawvere（1967 芝加哥讲座）与 A. Kock（*Synthetic Differential Geometry*, Cambridge Univ. Press, 1981），前向二元数自动微分源自 R. E. Wengert（*Commun. ACM* **7**(8), 463–464, 1964）。无相减复步导数思想滥觞于 J. N. Lyness & C. B. Moler（*SIAM J. Numer. Anal.* **4**(2), 202–210, 1967），由 W. Squire & G. Trapp（*SIAM Rev.* **40**(1), 110–112, 1998）确立显式 $O(\epsilon^2)$ 复步一阶求导公式，并由 G. Lantoine, R. P. Russell & T. Dargent（*ACM Trans. Math. Softw.* **38**(3), Art. 16, 2012）推广至消除高阶导数载体相减的双复数/多复数算法。矩阵与李群乘积积分源自 V. Volterra（1887；参见 J. D. Dollard & C. N. Friedman, *Product Integration*, 1979）、H. F. Trotter（*Proc. Amer. Math. Soc.* **10**, 545–551, 1959）与 W. Magnus（*Commun. Pure Appl. Math.* **7**, 649–673, 1954）。四相区路径积分与随机/粗糙分析源自 L. C. Young（*Acta Math.* **67**, 251–282, 1936，$\alpha > \frac{1}{2}$ 无漂移积分）、K. Itô（*Proc. Imp. Acad. Tokyo* **20**, 519–524, 1944）、R. L. Stratonovich（*SIAM J. Control* **4**, 362–371, 1966，保链式法则中点随机积分）、R. P. Feynman（*Rev. Mod. Phys.* **20**, 367–387, 1948）、M. Kac（1949）、R. H. Cameron（1960）以及 T. J. Lyons（*Rev. Mat. Iberoam.* **14**(2), 215–310, 1998，粗糙路径理论）。球面与离散流形外微分源自 A. Girard（1629）、T. Regge（*Nuovo Cimento* **19**, 558–571, 1961）、A. N. Hirani（加州理工博士论文, 2003）与 M. Desbrun, A. N. Hirani, M. Leok & J. E. Marsden（[arXiv:math/0508341](https://arxiv.org/abs/math/0508341), 2005，离散外微分 DEC），上链与连续微分形式之间的 Whitney 映射见 H. Whitney（*Geometric Integration Theory*, Princeton Univ. Press, 1957）；李群积分子与马格努斯方法的系统综述见 A. Iserles, H. Z. Munthe-Kaas, S. P. Nørsett & A. Zanna（*Acta Numerica* **9**, 215–365, 2000）；格点规范理论中的 Wilson 回路见 K. G. Wilson（*Phys. Rev. D* **10**, 2445, 1974）；非阿贝尔二维斯托克斯定理与高阶规范面和乐源自 L. Schlesinger（*Math. Ann.* **99**, 413–434, 1928）、B. Broda（1992）及 U. Schreiber & K. Waldorf（*J. Homotopy Relat. Struct.* **4**, 187–244, 2009）。
 3. **精确代数推导与双精度/十位小数基准算例（`手工推导` / `NUM`）**：单步弦—矢高恒等式 $(1-v_\epsilon)^2 + c_\epsilon^2 \equiv 1$、半角正矢数值保真律 $v_\epsilon = 2\sin^2(\kappa\epsilon/2)$、累计矢高四相区展开、三行组合高斯—博内恒等式，以及 [@ex-ch34-complex-step-and-ito-sagitta-benchmark] 与 [@ex-ch34-coarse-octant-stokes-exactness] 中的全部级数系数、双精度误差对照表和 $M = 4$ 卦限十位小数收支表，均为精确代数恒等式或可直接复现的数值计算（`NUM`）。
 4. **极小圆弧体微积分统一重塑框架（`MODEL`）**：以有限自指停机孔径 $\epsilon \ge \varepsilon_{\mathrm{self}} > 0$ 上的比较旋子、有序乘积积分与 `1—3—3—1` 上链复形统一替代经典切线微积分（[@def-ch34-arc-body-calculus-primitives]），并将幂零环 $D_1$ 诠释为模去矢高 $v_\epsilon$ 的商影、将伊藤修正与费曼动能诠释为 $\alpha = \frac{1}{2}$ 矢高共振，属于本书建立的统一几何模型（`MODEL`）。
-5. **未解前沿数学物理问题（`OPEN`）**：超粗糙 $\alpha < \frac{1}{2}$ 非阿贝尔二维面和乐签名及其与连续统量子杨—米尔斯场重整化极限的严格对接（[@prob-ch34-rough-nonabelian-surface-calculus]；参见[附录 C](appendix-c.md#sec-appendix-c-open-register) 与[附录 E](appendix-e.md) 桥接假设 `H8`/`H9`），属于当代随机偏微分方程与构造性规范场论尚未完全解决的开放前沿（`OPEN`）。
+5. **未解前沿数学物理问题（`OPEN`）。** 已有交叉模面拼接、分片线性曲面签名的薄同伦刻画，以及在 Young 正则性范围内，或在给定相容增强的情形下构造的粗糙面和乐。仍待构造的是 $\alpha<\frac12$ 时保有独立面数据的规范协变增强，以及三维与四维连续统中重整化威尔逊面的收敛（[@prob-ch34-rough-nonabelian-surface-calculus]，另见[附录 C](appendix-c.md#sec-appendix-c-open-register)和[附录 E](appendix-e.md) 的 `H8`/`H9`）。
 :::
 
 把三百四十年来分裂的三套微积分体系并排摆上同一张总账台，极小圆弧体微积分如何一举消除历史补丁的全景便豁然贯通：
