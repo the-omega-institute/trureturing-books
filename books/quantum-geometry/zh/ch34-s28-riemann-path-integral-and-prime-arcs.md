@@ -969,11 +969,11 @@ $$
 
 
 ::: {.theorem #thm-ch31-prime-window-odd-cutoff title="奇数截断的首个遗漏项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusOddCutoff.signed_window_odd_cutoff_expansion"}
-假设 RH 成立。固定整数 $m\ge2$，令 $q=m+1$ 为奇数，并记 $s_m=1/2-1/q$ 及 $\delta_m=1/q-1/(q+1)$。存在依赖于 $m$ 的实数 $a_0\ge2$ 和 $C>0$，使所有 $B\ge a\ge a_0$ 满足
+假设 RH 成立。存在实数 $a_0\ge2$ 和 $K>0$，使每个满足 $m\ge2$ 且 $q=m+1$ 为奇数的整数 $m$ 及所有 $B\ge a\ge a_0$ 都满足下式。记 $s_m=1/2-1/q$、$\delta_m=1/q-1/(q+1)$，并设 $W_m=Kq(1+\ln q)^2$。
 
 $$
 \left|E_m(a,B)+\frac{\mu(q)q}{(q-1)s_m}D_{s_m}(a,B)\right|
-\le C a^{-\delta_m}D_{s_m}(a,B).
+\le W_m D_{s_m+\delta_m}(a,B)\le W_m\frac{s_m+\delta_m}{s_m}a^{-\delta_m}D_{s_m}(a,B).
 $$
 
 这里 $D_s(a,B)=a^{-s}-B^{-s}$，$E_m$ 沿用 [@thm-ch31-prime-window-mobius] 的两项带符号修正。零点按解析重数计数，根谱的保留条件为 $2n<m+1$。
@@ -993,15 +993,15 @@ $$
 :::
 
 ::: {.theorem #thm-ch31-prime-window-no-negative-order title="任意晚窗中的阶数指数下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusOddCutoff.signed_window_no_negative_order_exponent"}
-假设 RH 成立。给定任意实数 $\gamma,K,L>0$、任意起点下界函数 $A:\mathbb N\to\mathbb R$ 和任意自然数 $N$，存在整数 $m\ge\max(2,N)$ 和实数 $a\ge\max(2,A(m))$，使 $B=a e^L$ 时
+假设 RH 成立。给定任意 $\gamma>0$、任意实数 $K$、任意起点下界函数 $A:\mathbb N\to\mathbb R$ 和任意自然数 $N$，存在整数 $M\ge\max(2,N)$。对每个 $m\ge M$ 且 $m+1$ 为素数的阶数，存在阈值 $S\ge\max(2,A(m))$，使所有 $B>a\ge S$ 都满足
 
 $$
-|E_m(a,B)|>K m^{-\gamma}D_{s_m}(a,B).
+E_m(a,B)>K m^{-\gamma}D_{s_m}(a,B).
 $$
 :::
 
 ::: proof
-先取足够大的奇素数 $q=m+1$，使 $m\ge\max(2,N)$ 且 $K m^{-\gamma}<1$。此时 $\mu(q)=-1$，而 $q/((q-1)s_m)=2q^2/((q-1)(q-2))>2$。固定该阶数，再把 $a$ 取得足够大，使其超过所规定的下界、且 $C a^{-\delta_m}<1$。因为 $L>0$，$D_{s_m}(a,a e^L)>0$。奇数截断展开和三角不等式给出 $|E_m|>D_{s_m}$。
+取 $M\ge\max(2,N)$，使所有 $m\ge M$ 都满足 $K m^{-\gamma}<1$。若 $q=m+1$ 为素数，则 $\mu(q)=-1$，且 $q/((q-1)s_m)=2q^2/((q-1)(q-2))>2$。固定该阶数后，提高起点阈值，使归一化展开误差小于 $1$。对每个 $B>a$，幂差都严格为正，故有符号余项 $E_m$ 大于该幂差。素数无上界，所以这也排除了任意固定正对数窗宽下的统一负指数界。
 :::
 
 若奇数 $q$ 含平方因子，首项系数因 $\mu(q)=0$ 消失，原式仍给出带额外衰减的界 $O_m(a^{-\delta_m}D_{s_m})$。若 $q$ 为偶数，增阶时还会加入次数 $n=q/2$ 的零点项，其衰减率与次数 $q$ 的算术项相同。偶数情形的首项需要同时处理这两部分。
