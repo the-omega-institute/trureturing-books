@@ -89,7 +89,7 @@ $$
 
 因此，前面实际正等幅态的有限切口熵与固定 $K$ 双侧极限，也是这个专门设计模型的基态纠缠结果。这不把它识别为真实里德堡阵列、黄金链、Tribonacci 跃迁链或 Rauzy 几何所选出的态，也不解决分形边界与纠缠标度的开放问题。
 
-来源与对应：本书[当前所钉源码](trureturing:) 中的理论卷 `docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md` §15.9、定义 15.22 与命题 15.23 已给出 $K=2$、正活动 $a_i$ 的合法空间局域父及逐位删除证明；这里取 $a_i=1$，把控制投影写成所有包含中心的禁窗口，并补入全空间罚项。该卷命题 15.25 明确指出不加罚项时全空间唯一性失败。[Lesanovsky 的三体模型](https://arxiv.org/abs/1010.2349v2)式 (3)–(5) 提供相关物理背景，符号、正尺度及边界对应见该卷数学引文 15.24；这里的任意 $K$ 构造由上述能量恒等式承担，不将其归为该文已证明的实验实现。
+[FIB 原子理论卷 §15.9](https://github.com/the-omega-institute/trureturing-source-theories/blob/2a39da5107abbfa3a72cc883486dbc15a15994a1/docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md#L1679) 的定义 15.22 与命题 15.23 已给出 $K=2$、正活动 $a_i$ 的合法空间局域父及逐位删除证明；这里取 $a_i=1$，把控制投影写成所有包含中心的禁窗口，并补入全空间罚项。该卷命题 15.25 明确指出不加罚项时全空间唯一性失败。[Lesanovsky 的三体模型](https://arxiv.org/abs/1010.2349v2)式 (3)–(5) 提供相关物理背景，符号、正尺度及边界对应见该卷数学引文 15.24；这里的任意 $K$ 构造由上述能量恒等式承担，不将其归为该文已证明的实验实现。
 :::
 
 ::: {.example #ex-ch39-p2e-heatbath-scale title="纸面推导（未经 Lean 验证）：每站速率一的热浴链与完整空间谱隙"}
