@@ -1077,6 +1077,25 @@ Under RH, each centered zero mode is uniformly continuous because its exponent i
 
 For each fixed admissible cutoff, the approximation error tends uniformly to zero as the width tends to zero and the lower bound on the starting point tends to infinity. The term $K_m e^{-\delta_m u}$ still contributes at a fixed starting point.
 
+::: {.theorem #thm-ch31-prime-window-shrinking-rate title="An explicit width error for the centered spectrum" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffShrinkingRate.signed_window_even_cutoff_shrinking_rate"}
+
+Assume RH and use $F_L$, $c_m$, $\delta_m$, and $S_r$ from [@thm-ch31-prime-window-shrinking-width]. There is a common threshold $U_0>0$. For each admissible cutoff $q=m+1=2r$ with $m\ge2$, there are $C_m,K_m>0$ such that
+
+$$
+ \left| F_L(u)+c_m+\mu(r)S_r(u) \right|
+ \le C_m L\bigl(1+\log(1/L)\bigr)^2 + K_m e^{-\delta_m u}
+ \qquad (u\ge U_0,\quad 0<L\le 1/4).
+$$
+:::
+
+::: proof
+A shift of size at most $L$ changes the phase of an occurrence with ordinate $\gamma$ by a factor whose distance from one is at most $\min(2,|\gamma|L/r)$. For $|\gamma|\le1/L$, the factor $|\gamma|$ cancels one denominator factor in the root coefficient estimate, leaving $L/|\rho|$. Its truncated sum is bounded by a constant times $L(1+\log(1/L))^2$. Above $1/L$, the distance bound of two and the inverse-square tail give a bound proportional to $L(1+\log(1/L))$. These counts include multiplicity and both signs of the ordinate.
+
+The weighted mean value theorem for interval integrals identifies the normalized root increment with $S_r(u+t)$ for some $0\le t\le L$. Apply the same phase estimates to this shift and use the even-cutoff remainder bound. [Pinned weighted mean value theorem](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/MeasureTheory/Integral/IntervalIntegral/MeanValue.lean#L101) · [Zero-count source, Corollary 1.2](https://arxiv.org/pdf/2107.06506v1)
+:::
+
+The inequality supplies an explicit upper rate. The optimal width dependence for the signed series remains open.
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 
