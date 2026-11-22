@@ -716,6 +716,19 @@ $$
 \frac{r}{4\pi R}\left(1-\sum_\gamma p_\gamma e^{-M\gamma R}\right).
 $$
 
+::: {.remark #rem-ch39-dipole-source-identification title="How many separations identify the derivative coupling of a spin dipole source?"}
+Apply the static exchange kernel above to two spin dipole sources separated by $R>0$. Give both ports the same source operator $\nabla(1+c\Delta/M^2)$, with real coefficient $c$ and spatial Laplacian $\Delta$. Away from the source, a Yukawa kernel of mass $M\gamma$ satisfies $\Delta G_\gamma=M^2\gamma^2 G_\gamma$. The two ports therefore multiply the mode weight by $(1+c\gamma^2)^2$. The massless kernel is harmonic in this region. The radial Hessian has anisotropic coefficient $G''-G'/R$ along the line joining the sources. Keep the triplet magnetic labels fixed and measure the **signed** energy difference between the parallel states and the state with magnetic quantum number zero. Multiply the splitting by $R^3$ and divide by an independently calibrated nonzero long-distance normalization. This gives
+
+$$
+F_c(x)=1-\sum_\gamma p_\gamma(1+c\gamma^2)^2q(x\gamma),\qquad
+q(s)=(1+s+s^2/3)e^{-s},\qquad x=MR .
+$$
+
+The mass scale $M>0$ must also be independently calibrated. The choice $c=0$ gives a pure gradient point source. RH identifies the zero ordinates used here. The three-dimensional static exchange, source operator and signed readout are model inputs. [Radial Hessian and the splitting of a two-spin triplet](https://github.com/the-omega-institute/trureturing-books/issues/904#issuecomment-7073579437)
+
+Put $U(x)=\sum_\gamma p_\gamma\gamma^2q(x\gamma)$ and $V(x)=\sum_\gamma p_\gamma\gamma^4q(x\gamma)$. For $x>0$ exponential damping gives finite, strictly positive sums. One reading obeys $F_0-F_c=2cU+c^2V$. Its second root is $-2U/V-c$, coinciding with $c$ at the vertex of the parabola. Distinct candidates $c,c'$ giving identical exact readings at two positive separations would therefore require $c+c'=-2U/V$ at both. But $U/V$ increases strictly in $x$. It is the average of $\gamma^{-2}$ with normalized positive weights proportional to $p_\gamma\gamma^4q(x\gamma)$. The logarithmic derivative $x\partial_x\log q(x\gamma)=-s^2(s+1)/(s^2+3s+3)$ for $s=x\gamma$ decreases strictly in $\gamma$. Its covariance with $\gamma^{-2}$ is strictly positive because the spectrum has at least two distinct ordinates. Thus exact signed readings at two distinct positive separations determine the real coefficient $c$. [Source identification at finite separations](https://github.com/the-omega-institute/trureturing-books/issues/914)
+:::
+
 At short distances many high-mass modes contribute to the exchange. Put $x=MR$, $h(x)=1-\sum_\gamma p_\gamma e^{-x\gamma}$ and $T=1/x$. For $\gamma\le T$, using $x\gamma$ in place of $1-e^{-x\gamma}$ incurs total error $O(x^2N(T)/S)$. The remaining terms sum to $O(x\log(1/x)/S)$. Partial summation with the Riemann–von Mangoldt count including multiplicity, $N(T)\sim T\log T/(2\pi)$, gives $\sum_{\gamma\le T}m_\gamma/\gamma\sim(\log T)^2/(4\pi)$. Hence $h(x)\sim x[\log(1/x)]^2/(4\pi S)$. The leading short-distance term of the exchange kernel is $rM[\log(1/(MR))]^2/(16\pi^2S)$.
 
 Write $G_{12}(R)$ for this static kernel. With the linear source term $-\langle J,\phi\rangle$ in the static energy, eliminating the scalar field gives the interaction energy $-g_1g_2G_{12}(R)$ for point sources with signed couplings $g_1,g_2$. This construction specifies spin zero, a positive spectrum, two sources and a normalization. Identifying a physical interaction requires independent information about the sources, their couplings and the mass scale $M$.

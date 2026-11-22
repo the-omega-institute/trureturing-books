@@ -716,6 +716,19 @@ $$
 \frac{r}{4\pi R}\left(1-\sum_\gamma p_\gamma e^{-M\gamma R}\right).
 $$
 
+::: {.remark #rem-ch39-dipole-source-identification title="几个距离能识别自旋偶极源的导数耦合？"}
+把上述静态交换核用于两个相距 $R>0$ 的自旋偶极源。设两个端口都有相同的源算子 $\nabla(1+c\Delta/M^2)$，$c$ 是实数，$\Delta$ 是空间拉普拉斯算子。在源点之外，质量 $M\gamma$ 的 Yukawa 核满足 $\Delta G_\gamma=M^2\gamma^2G_\gamma$，所以两个端口给该模的权重乘上 $(1+c\gamma^2)^2$。无质量核在此区域调和。对径向核取 Hessian，平行于两源连线的各向异性系数为 $G''-G'/R$。固定三重态的磁量子数标签，测量平行态与零磁量子数态的**带符号**能差。将其乘以 $R^3$，再除以独立标定的非零远距离归一化，得到
+
+$$
+F_c(x)=1-\sum_\gamma p_\gamma(1+c\gamma^2)^2q(x\gamma),\qquad
+q(s)=(1+s+s^2/3)e^{-s},\qquad x=MR .
+$$
+
+这里 $M>0$ 也须独立标定。取 $c=0$ 即为纯梯度点源。RH 用来确定书中的零点纵坐标，三维静态交换、源算子及带符号读出均是模型输入。[径向 Hessian 与两自旋三重态分裂](https://github.com/the-omega-institute/trureturing-books/issues/904#issuecomment-7073579437)
+
+令 $U(x)=\sum_\gamma p_\gamma\gamma^2q(x\gamma)$、$V(x)=\sum_\gamma p_\gamma\gamma^4q(x\gamma)$。当 $x>0$ 时，指数衰减保证这些和收敛且严格为正。一次读数满足 $F_0-F_c=2cU+c^2V$，因此与 $c$ 对应的另一根是 $-2U/V-c$；二者在抛物线顶点相同。若在两个不同的正距离都取得相同的精确读数，两个不同候选 $c,c'$ 就须在两处都满足 $c+c'=-2U/V$。然而 $U/V$ 随 $x$ 严格增加。事实上它是 $\gamma^{-2}$ 在正权 $p_\gamma\gamma^4q(x\gamma)$ 归一化后的均值，而 $x\partial_x\log q(x\gamma)=-s^2(s+1)/(s^2+3s+3)$（$s=x\gamma$）随 $\gamma$ 严格下降。两者的协方差严格为正，因为谱中有至少两个不同纵坐标。因此两个精确的带符号读数确定整个实系数 $c$。[有限距离的源识别](https://github.com/the-omega-institute/trureturing-books/issues/914)
+:::
+
 短距离时，许多高质量模式也参与交换。令 $x=MR$、$h(x)=1-\sum_\gamma p_\gamma e^{-x\gamma}$、$T=1/x$。对 $\gamma\le T$，以 $x\gamma$ 代替 $1-e^{-x\gamma}$ 的总误差为 $O(x^2N(T)/S)$；其余各项之和为 $O(x\log(1/x)/S)$。按重数计的黎曼–冯·曼戈尔特公式 $N(T)\sim T\log T/(2\pi)$ 经分部求和给出 $\sum_{\gamma\le T}m_\gamma/\gamma\sim(\log T)^2/(4\pi)$。因此 $h(x)\sim x[\log(1/x)]^2/(4\pi S)$。交换核的短距首项是 $rM[\log(1/(MR))]^2/(16\pi^2S)$。
 
 记此静态核为 $G_{12}(R)$。若静态能量中的线性源项取 $-\langle J,\phi\rangle$，消去标量场后，两点源的相互作用能为 $-g_1g_2G_{12}(R)$，其中 $g_1,g_2$ 是带符号的耦合。这个构造指定了自旋零、正谱、两个外源和归一化。要与某种实际相互作用联系，还须独立给出两种源、它们的耦合及质量尺度 $M$ 的物理依据。
