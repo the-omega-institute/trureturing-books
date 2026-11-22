@@ -1041,6 +1041,61 @@ $$
 阶数增至 $q$ 时，新增一个次数 $q$ 的算术项。根谱规则由 $2n<q$ 改为 $2n<q+1$，恰增加次数 $r$。这两个带符号修正移到余项一侧，得到同一对端点上的 $E_q$。全阶数估计给出较快的衰减率 $s_m+\delta_m$。在对数区间上比较两个指数积分，得到第二个不等式，并覆盖 $B=a$。
 :::
 
+::: {.theorem #thm-ch31-prime-window-shrinking-width title="收缩对数窗宽下的根谱" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffShrinkingWidth.signed_window_even_cutoff_shrinking_width"}
+
+假设 RH。沿用 [@thm-ch31-prime-window-even-cutoff]，令 $q=m+1=2r$，其中 $m\ge2$，并记 $s=1/2-1/q$、$\delta_m=1/q-1/(q+1)$、$c_m=\mu(q)q/(ms)$。定义
+
+$$
+ F_L(u)=\frac{E_m(e^u,e^{u+L})}{D_s(e^u,e^{u+L})},
+ \qquad
+ S_r(u)=\frac{1}{s}\operatorname{Re}\sum_k
+ a_{r,k}\exp\!\left(\frac{\rho_k-1/2}{r}u\right),
+ \qquad a_{r,k}=\frac{-r}{\rho_k(r-\rho_k)}.
+$$
+
+求和包含所有实际非平凡零点，按解析重数计数。对每个实数 $u$ 和每个 $L>0$，归一化根原函数增量恰好是 $S_r$ 的加权平均：
+
+$$
+ \frac{P_r(e^{u+L})-P_r(e^u)}{D_s(e^u,e^{u+L})}
+ =\frac{\int_0^L e^{-st}S_r(u+t)\,dt}{\int_0^L e^{-st}\,dt}.
+$$
+
+存在共同起点阈值 $U_0>0$。对每个允许的截断阶数都存在 $K_m>0$，使得对每个 $\varepsilon>0$ 都可选取 $L_0>0$，满足
+
+$$
+ \left|F_L(u)+c_m+\mu(r)S_r(u)\right|
+ \le \varepsilon+K_m e^{-\delta_m u}
+ \qquad (u\ge U_0,\quad 0<L<L_0).
+$$
+:::
+
+::: proof
+在对数坐标中，根原函数是根密度 $s e^{-su}S_r(u)$ 的积分。把增量写成区间 $[u,u+L]$ 上的积分，并用 $D_s=e^{-su}(1-e^{-sL})$。由 $1-e^{-sL}=s\int_0^L e^{-st}\,dt$ 得到归一化加权平均。
+
+在 RH 下，每个居中后的零点模态具有纯虚指数，因而一致连续。系数的模可和，所以有限部分和在整条实线上一致收敛。对照仓库也用同样的绝对可和尾项控制来提取指数级数的系数。由 $S_r$ 的一致连续性，加权平均逼近 $S_r(u)$ 所需的窗宽阈值与 $u$ 无关。将偶数截断展开除以 $D_s$，其余误差由 $K_m e^{-\delta_m u}$ 控制。 [对照证明](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L124-L143)
+:::
+
+固定一个允许的截断阶数。窗宽趋于零且起点下界趋于无穷时，逼近误差一致趋于零。若固定起点，误差界中仍含 $K_m e^{-\delta_m u}$。
+
+::: {.theorem #thm-ch31-prime-window-shrinking-rate title="居中根谱的显式窗宽误差" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffShrinkingRate.signed_window_even_cutoff_shrinking_rate"}
+
+假设 RH。沿用 [@thm-ch31-prime-window-shrinking-width] 的 $F_L$、$c_m$、$\delta_m$ 和 $S_r$。存在共同起点阈值 $U_0>0$。对于每个满足 $m\ge2$ 和 $q=m+1=2r$ 的截断阶数，都存在 $C_m,K_m>0$，使得
+
+$$
+ \left| F_L(u)+c_m+\mu(r)S_r(u) \right|
+ \le C_m L\bigl(1+\log(1/L)\bigr)^2 + K_m e^{-\delta_m u}
+ \qquad (u\ge U_0,\quad 0<L\le 1/4).
+$$
+:::
+
+::: proof
+平移不超过 $L$ 时，虚部为 $\gamma$ 的零点项所乘的相位因子与一之差，模长至多为 $\min(2,|\gamma|L/r)$。在 $|\gamma|\le1/L$ 的范围内，$|\gamma|$ 抵消根系数分母中的一个因子，留下 $L/|\rho|$。截断和由常数乘 $L(1+\log(1/L))^2$ 控制。超过 $1/L$ 后，用相位差的上界二与倒平方尾和，得到常数乘 $L(1+\log(1/L))$ 的界。这些计数涵盖解析重数与虚部的两个符号。
+
+由加权积分中值定理，归一化根原函数增量等于某个 $0\le t\le L$ 处的 $S_r(u+t)$。对这段平移应用同样的相位估计，并保留偶数截断的余项界。 [钉版加权积分中值定理](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/MeasureTheory/Integral/IntervalIntegral/MeanValue.lean#L101) · [零点计数原文推论 1.2](https://arxiv.org/pdf/2107.06506v1)
+:::
+
+这个不等式给出显式上界。带符号级数对窗宽的最优依赖仍待确定。
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 
@@ -1118,6 +1173,23 @@ $$
 :::
 
 误差常数可以依赖 $\omega$。在非零频率处，要恢复的系数仍依赖窗宽。
+
+::: {.theorem #thm-ch31-prime-window-detuned-fourier title="测试频率附近的有限时长响应" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffFourierResolution.signed_window_even_cutoff_detuned_fourier"}
+假设 RH。沿用 [@thm-ch31-prime-window-fourier-uniform-width] 的偶数截断、归一化带符号余项 $F_L$ 与系数 $A_L(\omega)$，下标表示窗宽。记 $K(v)=\int_0^1 e^{-ivt}\,dt$。存在共同起点阈值 $U_0>0$。对每个允许的截断阶数 $m$ 和实参考频率 $\omega$，存在 $C>0$，使得对所有 $L>0$、$U\ge U_0$、$T>0$、$R\ge0$ 及满足 $|v|\le R$ 的实数 $v$，下式中的被积函数 Lebesgue 可积，且
+
+$$
+\left|\frac{1}{T}\int_U^{U+T}F_L(u)e^{-i\omega u}e^{-iv(u-U)/T}\,du
+-A_L(\omega)K(v)\right|\le\frac{C(1+R)}{T}.
+$$
+
+对每个正窗宽，$A_L(0)=-\mu(q)q/((q-1)s)$。若非平凡零点 $\rho$ 的解析重数为 $n_\rho$，则 $A_L(\omega_\rho)=-\mu(r)n_\rho b_{r,L}(\rho)$，其中 $b_{r,L}(\rho)\ne0$。
+:::
+
+::: proof
+窗宽一致估计用同一常数控制平均区间每段前缀上的原函数 $\int_U^x(F_L(u)e^{-i\omega u}-A_L(\omega))\,du$。把复数乘积展开成实部和虚部的各项，再对附加相位分部积分。该相位的模为一，导数的模为 $|v|/T$，故端点项的界与 $T$ 无关，导数项至多为常数乘 $|v|$。最后除以 $T$。对常数系数项作代换 $u=U+Tt$，便得到响应 $K(v)$，即单频检验使用的指数平均。 [指数平均](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
+:::
+
+附加相位对应频率 $\omega+v/T$，相位校正 $e^{ivU/T}$ 将偏移相位的原点放在左端点。若 $v\ne0$，则 $K(v)=e^{-iv/2}\sin(v/2)/(v/2)$，而 $K(0)=1$。该界给出对有界偏移 $v$、所有正窗宽及足够晚起点的一致收敛，极限为 $A_L(\omega)K(v)$。常数可以依赖参考频率。
 
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
