@@ -1120,6 +1120,20 @@ The bound $2|1-\cos x|\le x^2$ controls the correction series by a constant time
 
 The symmetric difference at the origin has leading scale $h\log(1/h)$. First differences at arbitrarily late starts and their optimal uniform modulus require further estimates.
 
+::: {.theorem #thm-ch31-late-root-log-increments title="A lower scale for arbitrarily late forward increments" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHRootLateIncrement.root_signal_late_increment_lower"}
+Assume RH. For every real $r>1$ and the full centered spectrum $S_r$ of [@thm-ch31-centered-root-log-cusp], there are constants $d_r>0$ and $0<H_r<1$. For every $0<h<H_r$ and every real $U$, there exists a real $u\ge U$ such that
+
+$$
+|S_r(u+h)-S_r(u)|\ge d_r h\log(1/h).
+$$
+:::
+
+::: proof
+The origin cusp gives a positive lower bound of order $h\log(1/h)$ for the symmetric difference. For fixed shifts, the full series is a continuous function of the coordinate phases because the root coefficients have summable absolute values. The actual phase orbit returns arbitrarily late to neighborhoods of its initial phase vector, so the symmetric difference retains a positive fraction of the origin bound at some time $t\ge U+h$. Write that difference as the forward increment from $t$ minus the forward increment from $t-h$. At least one increment has magnitude at least half the transported bound. Both starts are at least $U$. [Actual-phase recurrence](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePhaseCluster.phaseOrbit_cluster_iff)
+:::
+
+The start can depend on the shift and the prescribed threshold. This controls the worst forward increment on every late tail. The matching upper rate for those increments remains open.
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 
