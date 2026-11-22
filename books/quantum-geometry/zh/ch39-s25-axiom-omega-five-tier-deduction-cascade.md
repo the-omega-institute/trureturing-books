@@ -716,6 +716,41 @@ $$
 \frac{r}{4\pi R}\left(1-\sum_\gamma p_\gamma e^{-M\gamma R}\right).
 $$
 
+::: {.remark #rem-ch39-dipole-source-identification title="几个距离能识别自旋偶极源的导数耦合？"}
+把上述静态交换核用于两个相距 $R>0$ 的自旋偶极源。设两个端口都有相同的源算子 $\nabla(1+c\Delta/M^2)$，$c$ 是实数，$\Delta$ 是空间拉普拉斯算子。在源点之外，质量 $M\gamma$ 的 Yukawa 核满足 $\Delta G_\gamma=M^2\gamma^2G_\gamma$，所以两个端口给该模的权重乘上 $(1+c\gamma^2)^2$。无质量核在此区域调和。对径向核取 Hessian，平行于两源连线的各向异性系数为 $G''-G'/R$。沿两源连线取自旋量子化轴，固定三重态的磁量子数标签，测量平行态与零磁量子数态的**带符号**能差。将其乘以 $R^3$，再除以独立标定的非零远距离归一化，得到
+
+$$
+F_c(x)=1-\sum_\gamma p_\gamma(1+c\gamma^2)^2q(x\gamma),\qquad
+q(s)=(1+s+s^2/3)e^{-s},\qquad x=MR .
+$$
+
+这里 $M>0$ 也须独立标定。取 $c=0$ 即为纯梯度点源。RH 将非平凡零点定位为 $1/2\pm i\gamma$，其中正纵坐标 $\gamma$ 和重数来自书中的零点谱；三维静态交换、源算子及带符号读出均是模型输入。[径向 Hessian 与两自旋三重态分裂](https://github.com/the-omega-institute/trureturing-books/issues/904#issuecomment-7073579437)
+
+令 $U(x)=\sum_\gamma p_\gamma\gamma^2q(x\gamma)$、$V(x)=\sum_\gamma p_\gamma\gamma^4q(x\gamma)$。当 $x>0$ 时，指数衰减保证这些和收敛且严格为正。一次读数满足 $F_0-F_c=2cU+c^2V$，因此与 $c$ 对应的另一根是 $-2U/V-c$；二者在抛物线顶点相同。若在两个不同的正距离都取得相同的精确读数，两个不同候选 $c,c'$ 就须在两处都满足 $c+c'=-2U/V$。然而 $U/V$ 随 $x$ 严格增加。事实上它是 $\gamma^{-2}$ 在正权 $p_\gamma\gamma^4q(x\gamma)$ 归一化后的均值，而 $x\partial_x\log q(x\gamma)=-s^2(s+1)/(s^2+3s+3)$（$s=x\gamma$）随 $\gamma$ 严格下降。逐项求导给出 $x\frac{d}{dx}(U/V)$ 等于这两个递减函数的协方差。其双重和中，每对不同纵坐标贡献同号，至少有一项严格为正。因此两个精确的带符号读数确定整个实系数 $c$。[有限距离的源识别](https://github.com/the-omega-institute/trureturing-books/issues/914)
+
+有限谱的核不等式及两个独立线性系数的可识别性见 [@thm-ch39-dipole-two-distance]。上文用收敛的协方差推导处理实际无限谱。区间计算（`NUM`）在实际算术谱上取 $x_1=0.05,x_2=0.10$，$c=0$ 与反射系数 $c_*\simeq-0.00047844240844$ 的第一处读数都是 $0.49352296$，第二处则分别为 $0.70031383$ 和 $0.80312728$（四舍五入）。以 $r_i=U(x_i)/V(x_i)$、$S_i=F_c(x_i)-F_0(x_i)$ 表示两处数据，系数由 $c=[S_1/V(x_1)-S_2/V(x_2)]/[2(r_2-r_1)]$ 直接给出。当两处已归一读数的绝对误差都至多为 $\epsilon>0$，其余标定量精确时，此估计的系数误差小于 $0.00507370\,\epsilon$。[512 个零点及全谱尾部的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/914#issuecomment-7074547538)
+
+以下为手工推导。把两个端口的源都推广为 $\nabla P(\Delta/M^2)$，取同一个实多项式 $P$，其中 $P(0)=1$、次数至多为已知的 $d\ge1$，只须把上式中的 $(1+c\gamma^2)^2$ 换成 $P(\gamma^2)^2$。在本章的无限正谱上，**任意 $2d$ 个不同正距离**的精确带符号读数足以恢复 $P$。设 $P(t)^2-1=\sum_{k=1}^{2d}b_k t^k$，减去基线得到关于 $b_k$ 的线性系统，其矩阵为 $A_{ik}=\sum_\gamma p_\gamma q(x_i\gamma)\gamma^{2k}$。对有序的正距离与谱点，核行列式 $\det[q(x_i\gamma_j)]$ 的符号为 $(-1)^{n(n-1)/2}$。指数核具有这个严格符号，依次用 $\gamma^2\int_x^\infty t\,{\cdot}\,dt$ 和 $(\gamma^2/3)\int_x^\infty t\,{\cdot}\,dt$ 作用得 $q$；相邻两行相减，把行列式化为有序区间上同号行列式的积分。Cauchy–Binet 展开中，每个核行列式再乘以正的 Vandermonde 因子。因此截断至 $2d$ 个或更多谱点时各项同号，取全谱极限仍有 $\det A\ne0$。恢复 $P^2$ 后，$P(0)=1$ 确定唯一的多项式平方根。
+
+少一个距离时确有歧义。在任意 $2d-1$ 个不同正距离，矩阵有非零零向量，给出常数项为零、次数至多为 $2d$ 的多项式 $D$。上述核行列式的严格符号迫使 $D(\gamma^2)$ 至少变号 $2d-1$ 次。删去零项后，若只有 $s<2d-1$ 次变号，在每个变号间隙取一个分隔点。用所测距离中的 $s+1$ 行、这些分隔点的核列和一个可变列形成行列式，即得到在所有非零谱项上与 $D$ 同号的核行线性组合，矛盾于 $D$ 的各加权读数为零。于是 $D$ 有零根和 $2d-1$ 个不同正根。分成两个 $d$ 次因子 $D=BC$，取 $B(0)=0,C(0)=2$。两个不同源 $(C+B)/2$ 与 $(C-B)/2$ 均已归一，平方差为 $D$，所以读数完全相同。若另有物理校准保证各谱点的振幅 $P(\gamma^2)\ge0$，两候选的平方差与原差在非零处同号，且原差已有零根，故 $d$ 个不同正距离足够。反之，任给少于 $d$ 个距离，固定 $C(t)=2(1+t)^d$。在 $B(0)=0$、次数至多为 $d$ 的多项式空间中，可取非零 $B$ 使 $CB$ 在这些距离的所有加权读数为零。将 $B$ 缩小，使 $(C\pm B)/2$ 的各项系数均为正，就得到满足振幅约束的一对不同源。因此 $d$ 也是这一类的最少数。[严格符号、识别下界与非负振幅条件](https://github.com/the-omega-institute/trureturing-books/issues/914#issuecomment-7074529631)
+
+次数上界需要独立给定。若允许任意高阶源，即便任意有限组精确读数恰好等于 $P=1$ 的基线，也有在整个非负轴严格为正的高阶源通过相同检验。[无次数上界时的构造](https://github.com/the-omega-institute/trureturing-books/issues/914#issuecomment-7074583205)
+:::
+
+::: {.theorem #thm-ch39-dipole-two-distance title="偶极核的二阶行列式与有限谱的两个距离" lean="D5/S3/Quantum/StaticExchange/DipoleTwoDistance.profile_minor,D5/S3/Quantum/StaticExchange/DipoleTwoDistance.finite_spectral_separation"}
+取 $q(s)=(1+s+s^2/3)e^{-s}$。若 $0<x<y$、$0<a<b$，则 $q(xa)q(yb)<q(xb)q(ya)$。设有限个尺度 $g_i>0$ 带非负权重 $p_i$，且至少两个不同尺度有正权重。记 $U(t)=\sum_i p_i g_i^2 q(tg_i)$、$V(t)=\sum_i p_i g_i^4 q(tg_i)$。对 $0<x<y$，有 $U(x)V(y)<V(x)U(y)$，且映射
+
+$$
+(h,k)\longmapsto\big(hU(x)+kV(x),\,hU(y)+kV(y)\big)
+$$
+
+在 $\mathbb R^2$ 上为单射。
+:::
+
+::: proof
+在正半轴对比值 $q(tb)/q(ta)$ 求导。分母为正，分子是 $-(b-a)$ 乘上一组正因子，故比值严格下降。将两个有限矩的交叉乘积展开，按尺度对配项。相等的尺度或零权重给零，两个正权重的不等尺度按上述核不等式贡献同号；假设保证至少一对贡献严格。故两行系数矩阵的行列式非零，相同读数的两组系数必相等。完整证明由 Lean 内核检查。
+:::
+
 短距离时，许多高质量模式也参与交换。令 $x=MR$、$h(x)=1-\sum_\gamma p_\gamma e^{-x\gamma}$、$T=1/x$。对 $\gamma\le T$，以 $x\gamma$ 代替 $1-e^{-x\gamma}$ 的总误差为 $O(x^2N(T)/S)$；其余各项之和为 $O(x\log(1/x)/S)$。按重数计的黎曼–冯·曼戈尔特公式 $N(T)\sim T\log T/(2\pi)$ 经分部求和给出 $\sum_{\gamma\le T}m_\gamma/\gamma\sim(\log T)^2/(4\pi)$。因此 $h(x)\sim x[\log(1/x)]^2/(4\pi S)$。交换核的短距首项是 $rM[\log(1/(MR))]^2/(16\pi^2S)$。
 
 记此静态核为 $G_{12}(R)$。若静态能量中的线性源项取 $-\langle J,\phi\rangle$，消去标量场后，两点源的相互作用能为 $-g_1g_2G_{12}(R)$，其中 $g_1,g_2$ 是带符号的耦合。这个构造指定了自旋零、正谱、两个外源和归一化。要与某种实际相互作用联系，还须独立给出两种源、它们的耦合及质量尺度 $M$ 的物理依据。
