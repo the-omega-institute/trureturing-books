@@ -803,14 +803,25 @@ Choose a finite set of unit frequency bins so that the sum of squared masses in 
 The eventual sign of the prime-only tail fixes $a_0$ before the choice of accuracy. Integration over $[\ln a,\ln B]$ leaves the original power gap because $s_m\ge1/6$. The full proof is checked by the Lean kernel.
 :::
 
-::: {.problem #prob-ch31-prime-window-quantitative-sublinear-remainder title="A quantitative rate for the sublinear remainder"}
-Under RH, do there exist constants $a_0\ge2$ and $C>0$ such that for every integer $m\ge2$ and all real cutoffs $B\ge a\ge a_0$,
+<a id="prob-ch31-prime-window-quantitative-sublinear-remainder"></a>
+
+::: {.theorem #thm-ch31-prime-window-quantitative-sublinear-remainder title="An explicit sublinear rate for the prime-window remainder" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusRate.prime_window_mobius_quantitative_of_rh"}
+Assume RH. There are real constants $a_0\ge2$ and $C>0$ such that for every integer $m\ge2$ and all real cutoffs $B\ge a\ge a_0$,
 
 $$
-|E_m(a,B)|\le \frac{C m}{\sqrt{1+\ln\ln(m+1)}}D_{s_m}(a,B)?
+|E_m(a,B)|\le \frac{C m}{\sqrt{1+\ln\ln(m+1)}}D_{s_m}(a,B).
 $$
 
-[Quantitative remainder problem](https://github.com/the-omega-institute/trureturing/issues/33041)
+Here $E_m(a,B)$ is the signed residual in [@thm-ch31-prime-window-mobius], with $s_m=\tfrac12-\tfrac1{m+1}$. The bound includes $B=a$.
+
+:::
+
+::: proof
+Write $q=m+1$ and $u=\ln x$. In the signed Möbius convolution, subtract the Chebyshev term from the floor term and choose the quotient cutoff as the four-fifths power of $\ln m$. Balancing the two errors bounds every Möbius prefix through $m$, multiplied by $\ln m$, by a constant times $m/(\ln m)^{1/5}$. Abel summation carries this estimate to the weighted trivial-zero response.
+
+For sufficiently large $m$, take $L=(1+\ln\ln(m+1))/8$. When $u\le Lq$, apply signed summation to the two sequences of decreasing root weights. After factoring out the target exponential decay, the cost is at most a constant times $e^{2L}m/\ln m$. When $u\ge Lq$, split the unit frequency bins at height $\lceil L^2\rceil$, with analytic multiplicities. The low-bin mass grows at most as the fourth root of the height and is multiplied by the geometric weight sum $1+q^2/u$. The squared high-bin masses sum to at most a constant times the inverse square root of the height. The local Gaussian sampling bound uses the square root of that sum. Both contributions are bounded by a constant times $m/\sqrt L$.
+
+Integrate the density estimate on the original window to keep the endpoint power difference. The linear bound in [@thm-ch31-prime-window-linear-remainder] absorbs the finitely many smaller orders into the same constant. The full proof is checked by the Lean kernel.
 :::
 
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
