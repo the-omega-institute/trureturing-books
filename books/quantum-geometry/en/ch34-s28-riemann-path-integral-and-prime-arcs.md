@@ -870,6 +870,28 @@ For $q\le u\le q^{29/28}$, split the unit bins of the actual zero ordinates at $
 The signed trivial-root term costs $O(q^{3/4}(1+\ln q))$. For the arithmetic tail, the difference of the Möbius prefixes at $q+j$ and $q-1$ is $O(q^{-1/4}(q+j))$. Abel summation against the decreasing Chebyshev weights bounds that tail by $O(q^{3/4})$ after normalization. Integrate the resulting density bound between $\ln a$ and $\ln B$ to obtain the power difference in the statement. It vanishes at $B=a$.
 :::
 
+::: {.theorem #thm-ch31-prime-window-eight-ninths title="An eight-ninths order bound for the signed prime window" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEightNinths.prime_window_mobius_eight_ninths_of_rh"}
+Assume RH. For each real $\varepsilon>0$ there are constants $a_0\ge2$ and $C>0$ such that every integer $m\ge2$ and every pair of real endpoints $B\ge a\ge a_0$ satisfy
+
+$$
+|E_m(a,B)|\le C m^{8/9+\varepsilon}D_{s_m}(a,B),\qquad s_m=\tfrac12-\tfrac1{m+1}.
+$$
+
+This is the signed residual of [@thm-ch31-prime-window-mobius], with the original arithmetic signs and exactly the retained degrees $2n<m+1$. The zero sums count analytic multiplicities. Both sides vanish at coincident endpoints.
+:::
+
+::: proof
+Put $q=m+1$, $u=\ln x$, $v_n=u/n$, and $W(v)=e^{-u/q+v/2}$. In the difference of adjacent modes, the phase increment carries the factor $W(v_{n+1})$. The inequality $e^t-1\ge t$ gives
+
+$$
+W(v_{n+1})(v_n-v_{n+1})\le 2\bigl(W(v_n)-W(v_{n+1})\bigr).
+$$
+
+The right-hand side telescopes over the omitted degrees. Together with the adjacent root-coefficient bound, it controls the total variation of each zero's mode by $O((1+|\operatorname{Im}\rho|)/|\rho|)$ uniformly in $u$. For the low-frequency zeros, complex Abel summation takes the signed degree sum before adding the zero occurrences. Use $0<\eta\le\min(\varepsilon/2,1/36)$ and the ordinary Möbius prefix bound $O(q^{2/3+\eta})$. The normalized low-frequency contribution is $O(q^{2/3+\eta}(H+1)^{1+\eta})$. The local zero count bounds the squared inverse-root bin masses above height $H$ by $O(H^{2\eta-1})$ in total. Separated sampling of the degrees therefore costs $O(qH^{\eta-1/2})$.
+
+The single choice $H=\lfloor q^{2/9}\rfloor$ gives $O(q^{8/9+2\eta})$ throughout $u\ge q$. The same prefix bound controls the near range, trivial-zero correction, and arithmetic tail. The extra factor $1+\ln q$ in the trivial-zero term is absorbed by the gap between exponents. Integrating the uniform density bound between $\ln a$ and $\ln B$ yields the original endpoint power difference. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::
