@@ -666,7 +666,7 @@ $$
 相位代价的加权和为 $\sum_j w_j(1-\cos x_j)$。用 $1-\cos x\le x^2/2$ 估计每个 $x_0$ 的代价，再对 $z$ 取下确界，得到上界。反过来，每个可行相位都可以取 $|x_j|\le\pi$ 的偏移角。此时 $1-\cos x_j\ge 2x_j^2/\pi^2$，相应的加权平方误差至少为 $E$，从而得到下界。连续性保证轨道闭包与实际轨道的代价下确界相同。
 :::
 
-对 [@thm-ch31-weighted-phase-limsup] 的实际零点截断，以解析重数权重计算 $E(T)$，并使用满足定理假设的完整关系矩阵。两个常数与截断无关，所以 $D(T)\to0$ 等价于 $E(T)/W(T)\to0$。实际 ζ 零点的这一归一化格点距离是否趋零仍开放。
+假设 RH。对 [@thm-ch31-weighted-phase-limsup] 的实际零点截断，以解析重数权重计算 $E(T)$，并使用满足定理假设的完整关系矩阵。两个常数与截断无关，所以 $D(T)\to0$ 等价于 $E(T)/W(T)\to0$。实际 ζ 零点的这一归一化格点距离是否趋零仍开放。
 
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数

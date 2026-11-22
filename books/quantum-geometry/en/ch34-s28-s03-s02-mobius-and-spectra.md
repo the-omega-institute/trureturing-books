@@ -666,7 +666,7 @@ The closure of the common-time orbit is exactly the set of phases on which every
 The weighted phase cost is $\sum_j w_j(1-\cos x_j)$. Applying $1-\cos x\le x^2/2$ to each minimizing lift $x_0$ and taking the infimum over $z$ gives the upper bound. Every admissible phase also has angle offsets satisfying $|x_j|\le\pi$. On these offsets $1-\cos x_j\ge 2x_j^2/\pi^2$, and the weighted square is at least $E$. This gives the lower bound. By continuity the phase cost has the same infimum on the orbit and its closure.
 :::
 
-For the actual zero cutoffs in [@thm-ch31-weighted-phase-limsup], compute $E(T)$ with the analytic multiplicity weights and a full relation matrix satisfying the theorem's hypotheses. The two constants are uniform across cutoffs, so $D(T)\to0$ is equivalent to $E(T)/W(T)\to0$. Whether this normalized lattice distance tends to zero for the actual zeta zeros remains open.
+Assume RH. For the actual zero cutoffs in [@thm-ch31-weighted-phase-limsup], compute $E(T)$ with the analytic multiplicity weights and a full relation matrix satisfying the theorem's hypotheses. The two constants are uniform across cutoffs, so $D(T)\to0$ is equivalent to $E(T)/W(T)\to0$. Whether this normalized lattice distance tends to zero for the actual zeta zeros remains open.
 
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
