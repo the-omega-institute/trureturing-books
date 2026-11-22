@@ -761,6 +761,8 @@ $$
 
 这条界对 $B=a$ 也成立，两边均为零。
 
+<a id="prob-ch31-prime-window-linear-remainder"></a>
+
 ::: {.theorem #thm-ch31-prime-window-linear-remainder title="截断阶数的线性余项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/LinearOrder/RHMobiusLinear.prime_window_mobius_linear_of_rh"}
 假设 RH。存在常数 $a_0\ge2$ 和 $K>0$，使每个整数 $m\ge2$ 与所有实数截点 $B\ge a\ge a_0$ 都满足以下界，其中 $E_m(a,B)$ 为 [@thm-ch31-prime-window-mobius] 中的有符号余项。
 
@@ -776,7 +778,7 @@ $$
 
 令 $q=m+1$。若 $u\le q$，未纳入谱的根项满足 $u/n\le2$，逐项使用中心化 Chebyshev 估计即可保持目标衰减。若 $u\ge q$，对数根坐标 $u/n$ 的间距至少为 $1/q$。按 $2u/q-u/n$ 的单位带分组。在每个带内对有限零点和及其对数坐标导数使用局部高斯均方界。有符号的单位窗零点计数保留解析重数，使频率箱质量的平方可和。相邻次数之差控制系数变化。每个带在乘权重 $\exp[-(2u/q-u/n)/2]$ 前的贡献至多为常数乘 $q$。几何求和包含权重可能等于一的首带。各采样点上的值级数绝对收敛，完整级数继承该界。
 
-在原有区间 $[\ln a,\ln B]$ 上积分。由 $s_m\ge1/6$，积分因子一致有界。$B=a$ 时两边均为零。完整证明由 Lean 内核检查。
+Möbius 截断误差与完整 Mangoldt 尾项的误差也满足相同的衰减界。由素数尾项的最终符号固定共同的左端阈值，再在原有区间 $[\ln a,\ln B]$ 上对所得密度估计积分。由 $s_m\ge1/6$，积分因子一致有界。$B=a$ 时两边均为零。完整证明由 Lean 内核检查。
 :::
 
 估计适用于每个有限阶数，阶数可以随端点选取。衰减指数、两端幂差和保留的根频谱沿用前述展开。 [加权均方方法，Coppola 与 Laporta，第 1 节](https://arxiv.org/abs/1411.1739v1)
