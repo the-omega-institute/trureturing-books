@@ -631,6 +631,10 @@ $$
 
 四个容量缺口只用到其余十五个坐标的秩层大小。因此，只允许任意指定的一个坐标有固定种子时，完整包含图的预算下界仍为 $2036$。下面的取等构造用坐标 $0$。[任意标记坐标的下界](lean:D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteenCovers.full_budget_ge)
 
+**由秩切口的奇偶性估计跨秩边数。** 在秩 $r$ 处，计算起点秩严格低于 $r$、终点秩严格高于 $r$ 的普通边数。每条这样的边至少跨过一层秩。按秩从小到大取样，对每个样本只保留边数的奇偶，并在序列两端各补一个零。一条跨秩边穿过的样本连成一段。每次奇偶改变都至少有一条边在该处开始或停止计数，而一条边至多有两个这样的边界。所以奇偶改变次数至多是跨秩边数的两倍。[奇偶变化上界的 Lean 证明](lean:D5/S3/Combinatorics/Graph/RankCuts/RankedIntervalParity.changes_le_twice_jumps)
+
+$1,0,1$ 补零得到 $0,1,0,1,0$，要求至少两条跨秩边。$1,1,1$ 补零得到 $0,1,1,1,0$，要求至少一条。若要达到任一下界，还须把跨秩边的端点放在允许的包含边上，并同时满足因子的度数和预算约束。
+
 ::: {.theorem #thm-omega-sixteen-full-budget lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteen.full_budget_iff" title="十六维完整包含图的精确预算"}
 取维数 $16$、倍率 $3$，只允许坐标 $0$ 有非零固定种子预算。对任意非负整数 $b$，完整包含图中的因子满足预算 $b$ 当且仅当 $b\ge2036$。这里的可行性指存在满足前述度数、支撑和计费条件的因子。
 :::
