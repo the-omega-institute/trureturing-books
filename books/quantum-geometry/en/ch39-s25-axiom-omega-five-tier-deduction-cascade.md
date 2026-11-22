@@ -218,6 +218,30 @@ $$
 
 Choosing $D$ and then $Q$ makes the bound smaller than $\eta$. Positive definiteness gives $H_{jk}<1$, so the $A_j$ are distinct. The Tier 1 half-angle readings have half this error. The shell excludes nonconstant three-term arithmetic progressions exactly at every finite scale. Its dimension and radius may grow with the number of nodes and the requested precision.
 
+**Can scale inversion select the mode weights on a rotor circle? (Model condition and hand calculation.)** Choose a circle in a three-dimensional rotor. Mode $n\in\mathbb Z$ winds $n$ times as the phase completes one turn. Prescribe quadratic heat damping and allow detector weights $w_n=w_{-n}\ge0$, with the zero mode calibrated by $w_0=1$. Assume the reading $\Theta_w(t)=\sum_{n\in\mathbb Z}w_n e^{-\pi t n^2}$ is finite for each $t>0$. Impose the following additional condition on measurable readings.
+
+$$
+\Theta_w(t)=t^{-1/2}\Theta_w(1/t)\qquad(t>0).
+$$
+
+This condition selects $w_n=1$ uniquely. To see how readings at one position can determine the weights, introduce two solutions of the heat equation at position $x$.
+
+$$
+U(t,x)=\frac{1}{\sqrt t}\sum_n w_n e^{-\pi(x-n)^2/t},\qquad
+V(t,x)=\sum_n w_n e^{-\pi t n^2}\cos(2\pi n x).
+$$
+
+Both solve the heat equation $\partial_x^2 u=4\pi\partial_t u$. At the origin, scale inversion gives $U(t,0)=V(t,0)$. Successive time derivatives determine all even spatial derivatives there, and evenness makes the odd spatial derivatives vanish. At fixed $t>0$ both functions are entire in $x$. A Gaussian series with slightly slower decay bounds the terms and the required derivatives on compact sets. It follows that $U=V$ everywhere. The integer frequencies make $V$ periodic with period one, so $U(t,k)=U(t,0)$ at every integer $k$. Multiply by $\sqrt t$ and let $t\downarrow0$. The Gaussian sum centered at $k$ tends to $w_k$ and the right side tends to $w_0$. Conversely, Poisson summation gives scale inversion for unit weights. [Jacobi transformation formula](https://dlmf.nist.gov/20.7.E32)
+
+If the condition is tested at only $m$ scales, perturb the weights of $m+1$ pairs of nonzero modes. Preserving the $m$ equalities places $m$ homogeneous linear constraints on the changes. A nonzero solution always exists and can be scaled to preserve strict positivity. Thus the full range of scales matters for identification. For the full-scale solution, termwise integration at $\operatorname{Re}s>1$ gives
+
+$$
+\frac12\int_0^\infty (\Theta_w(t)-1)t^{s/2-1}\,dt
+=\pi^{-s/2}\Gamma(s/2)\zeta(s).
+$$
+
+Multiplying by $s(s-1)/2$ and continuing analytically gives the $\xi(s)$ used below. The integer circle modes thus supply arithmetic input for the center response without specifying any zero ordinates in advance. Choosing the circle, its quadratic heat damping and scale inversion imposes additional model conditions. Identifying the normalized logarithmic derivative of this completed Mellin transform with a physical source response requires an independent coupling law. [Computing the first diagonal and neighbor coupling from the circle heat kernel](https://github.com/the-omega-institute/trureturing-books/issues/884#issuecomment-7071323177)
+
 **What can one central reference point reveal about the zeros? (Manual derivation.)** Fix the reference at $s=1/2$ and move only the other real node. Write $s=1/2+x$ and $t=1/2+y$, initially with $x,y>0$. Cancel the common factor $\xi$ at each node in the paired coordinates above. At offset $y$ the squared norm is $L(y)=\sum_{\gamma>0}m_\gamma/(\gamma^2+y^2)$. A partial fraction identity gives the dot product term by term. Writing $h(s,t)$ for the normalized inner product gives
 
 $$
