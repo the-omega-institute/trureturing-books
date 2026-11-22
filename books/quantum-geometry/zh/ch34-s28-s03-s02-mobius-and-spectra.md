@@ -565,7 +565,7 @@ $$
 将平坦平均写成关于对数中点的左右配对，得到对称二阶差在 $[0,L/2]$ 上的积分，再除以 $L$。对任意中心使用 [@thm-ch31-root-symmetric-tail-modulus] 的上界，中心为零时使用带符号的尖点下界。积分 $h\log(1/h)$ 给出主项和线性项。换回归一化指数权时，两种权的总质量相同。先减去中点谱值，再用一阶差的显式模量控制密度之差。所有零点模态的绝对可和性使整窗积分成为同一相位向量的连续读数。一次共同的晚期相位复现恢复下界，归一化算术余项趋于零。完整证明由 Lean 内核检查。
 :::
 
-当 $\mu(r)=0$ 时，上极限为零。若 $\mu(r)\ne0$，中点校正的晚期最坏误差具有 $L\log(1/L)$ 的首项。仅假设 RH 时，左端点误差的精确渐近仍是开放问题。
+当 $\mu(r)=0$ 时，上极限为零。若 $\mu(r)\ne0$，中点校正的晚期最坏误差具有 $L\log(1/L)$ 的首项。左端点能否取得完整首项系数取决于 [@thm-ch31-weighted-phase-limsup] 中的加权相位亏损。
 
 ::: {.theorem #thm-ch31-signed-quadratic-midpoint title="对数中点校正的二次余项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffQuadraticMidpoint.signed_window_even_cutoff_midpoint_limsup_quadratic"}
 假设 RH。取自然数 $m,r$，满足 $m\ge2$ 且 $m+1=2r$。沿用 [@thm-ch31-signed-midpoint-limsup] 的原始带符号素数窗口、对数中点校正以及 $Q_m(L)$ 与 $G_r(L)$。绝对误差在充分晚的尾区间上有界。存在常数 $C_m>0$，对每个 $0<L\le1/4$ 都有
@@ -581,6 +581,30 @@ $$
 :::
 
 这里的二次余项适用于原窗口的指数权，且允许 $\mu(r)=0$。左端点校正仍涉及一阶谱差的一致上界。
+
+::: {.theorem #thm-ch31-weighted-phase-limsup title="左端点误差的加权相位判据" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHWeightedPhaseLimsup.signed_window_even_cutoff_weighted_phase"}
+假设 RH。对 ζ 函数每个不同的正零点纵坐标 $\gamma$，记其解析重数为 $m_\gamma$。对充分大的 $T$，定义
+$$
+w_\gamma=\frac{m_\gamma\gamma}{1/4+\gamma^2},\qquad
+W(T)=\sum_{0<\gamma\le T}w_\gamma,\qquad
+D(T)=1-\frac{\displaystyle\sup_{v\in\mathbb R}\sum_{0<\gamma\le T}w_\gamma\sin(\gamma v)}{W(T)}.
+$$
+
+取自然数 $m,r$，满足 $m\ge2$ 且 $m+1=2r$，并沿用 [@thm-ch31-prime-window-shrinking-width] 的 $s,F_L,c_m,S_r$。对每个充分小的 $L>0$，绝对误差 $|F_L(u)+c_m+\mu(r)S_r(u)|$ 在充分晚的尾区间上有界。记它在 $u\to+\infty$ 时的上极限为 $Q_m^{\mathrm{left}}(L)$。于是
+$$
+\frac{Q_m^{\mathrm{left}}(L)}{L\log^2(1/L)}
+-\frac{|\mu(r)|}{4\pi s}\bigl(1-D(2r/L)\bigr)\longrightarrow 0
+\qquad (L\downarrow0).
+$$
+
+当 $\mu(r)\ne0$ 时，归一化上极限趋于 $|\mu(r)|/(4\pi s)$ 当且仅当 $T\to+\infty$ 时 $D(T)\to0$。
+:::
+
+::: proof
+令 $h=L/2$。从中点校正的带符号误差中减去 $\mu(r)(S_r(u+h)-S_r(u))$，便得到左端点校正的带符号误差。对 $\gamma\le r/h$ 的根谱模态作线性近似，再估计剩余的高频尾部，得到根谱增量的近似式 $(2h/s)\sum_{0<\gamma\le r/h}w_\gamma\sin(\gamma u/r)$，其误差对所有 $u$ 一致由常数乘 $h\log(1/h)$ 控制。正弦多项式的奇性使它的实上确界等于绝对值的上确界。共同相位复现使任意接近该上确界的取值在任意晚的起点出现。中点误差属于较低阶，而 $W(T)/\log^2 T\to1/(4\pi)$。代入 $T=2r/L$ 即得公式与等价条件。当 $\mu(r)=0$ 时，两种校正相同，充分小窗宽的晚期上极限为零。
+:::
+
+仅在 RH 下，实际零点是否满足 $D(T)\to0$ 仍是开放问题。在每个截断范围内，$D(T)$ 是对共同时刻 $v$ 取下确界得到的 $1-\sin(\gamma v)$ 加权平均。
 
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
