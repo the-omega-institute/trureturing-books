@@ -1557,7 +1557,7 @@ $$
 
 直和的回路完全落在一个分量中，收缩它只改变该分量。左侧回路的读数直接分解成左侧的限制与右侧的坐标读数。右侧回路多出一个符号，来自将回路的余维一面移过左侧的面。这个符号是整数单位。于是直和的转置关系由两类关系张量生成，每一类取一个分量的回路关系，并让另一分量的坐标读数任意变化。
 
-::: {.theorem #thm-joint-circuit-rank-one-gcd title="两个秩一分量的整系数提升障碍" lean="D5/S3/Combinatorics/Matroids/DirectSumCircuitTorsion.rank_one_sum_joint_lifting_obstruction"}
+::: {.theorem #thm-joint-circuit-rank-one-gcd title="两个秩一分量的整系数提升障碍" lean="D5/S3/Combinatorics/Matroids/JointCircuitLiftingObstruction.rank_one_sum_joint_lifting_obstruction"}
 在上述有序直和中，若两个分量的基恰好是各自地集的单点集，地集大小分别为 $m,n$，则联合限制像的饱和格模去联合限制像，得到阶为 $\gcd(m,n)$ 的循环群。饱和格包含那些有非零整数倍落在联合限制像中的目标元。
 :::
 
