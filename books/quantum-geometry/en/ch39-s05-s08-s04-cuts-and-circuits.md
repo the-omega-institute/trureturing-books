@@ -855,11 +855,15 @@ Partition the difference coordinates by the complete list of petals containing e
 
 For example, in rank four on nine classes omit $\{0,1,2,3\}$, $\{0,1,4,5\}$ and $\{0,6,7,8\}$. The first two meet in two elements, and each meets the third in one. With class sizes $1,1,1,3,3,3,3,3,3$, the total size is $21$ and $g=1$. Only the first omission contributes a nontrivial factor $q_T=3$. The obstruction is $(\mathbb Z/21\mathbb Z)^{32}\oplus\mathbb Z/3\mathbb Z$.
 
+::: {.theorem #thm-joint-circuit-membership-omissions title="Cyclic factors from petal membership" lean="D5/S3/Combinatorics/Matroids/MembershipCircuitInvariantFactors.membership_lifting_obstruction_invariant_factors"}
 For a larger class of overlaps, again assume $3\le r<k$ and that the omitted bases contain a common element $e$. Partition the other $k-1$ indices by their membership in the petals $T\setminus\{e\}$. Suppose that for any two different petals, some class of size at least two lies in one petal and is disjoint from the other. Then the same cyclic factor formula holds, with both binomial coefficients at least $t$.
+:::
 
+::: proof
 Within each membership class, an integral change of basis concentrates the weights at one index and preserves every petal span. Each class of size at least two therefore supplies a zero-weight coordinate. A class on which two petals differ distinguishes their coefficient groups, and its two indices still have equal membership after restricting to any subfamily. Also, the petal containing the distinguishing class has at least two indices absent from the other petal. The petals have equal size, so their intersection has size at most $r-3$. Thus the circuit equations and the induction by sector exchange remain applicable.
 
 To count omissions, fix an index $x$ other than $e$. In each petal delete $x$ if it is present and otherwise delete any of its indices. The resulting $(r-2)$-element sets all avoid $e$ and $x$. They are distinct because two petals yielding the same set would share at least $r-2$ indices. This gives $t\le \binom{k-2}{r-2}$. The complements of the petals in the set of indices other than $e$ also differ on at least two indices in each direction. Applying the same deletion count to them, and using binomial symmetry, gives $t\le \binom{k-2}{r-1}$.
+:::
 
 For instance, take rank five on nine classes and omit $\{0,1,2,3,4\}$, $\{0,1,2,5,6\}$ and $\{0,3,4,5,6\}$. Each of the pairs $\{1,2\}$, $\{3,4\}$ and $\{5,6\}$ occurs in exactly two petals. For class sizes $1,1,1,3,3,3,3,3,3$, the total size is $21$ and $g=1$. The three $q_T$ are $3,3,1$, and the obstruction is $(\mathbb Z/21\mathbb Z)^{32}\oplus(\mathbb Z/3\mathbb Z)^2$.
 
