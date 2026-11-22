@@ -950,6 +950,24 @@ $$
 在 RH 下，逐点 Möbius 前缀估计允许取 $\beta=1/2+\delta$，其中 $0<\delta<1/2$ 可任意小。给定最终余量 $\varepsilon>0$，取 $\delta=\min(\varepsilon,1/4)$，把 $\varepsilon-\delta/3$ 留给窗估计，便得到 $|E_m(a,B)|\le C m^{5/6+\varepsilon}D_{s_m}(a,B)$。该上界对所有允许的端点统一成立。余项是否达到这一阶仍是开放的。
 
 
+::: {.theorem #thm-ch31-prime-window-very-late title="更晚起点处的带符号素数窗余项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusVeryLate.prime_window_mobius_very_late_of_rh"}
+假设 RH 成立。对每个 $1/2\le d\le1$ 与 $\varepsilon>0$，存在常数 $a_0\ge2$ 和 $C>0$，使所有整数 $m\ge2$ 及满足 $\ln a\ge(m+1)^{1+d}$ 的实端点 $B\ge a\ge a_0$ 满足
+$$
+|E_m(a,B)|\le C m^{1-d+\varepsilon}D_{s_m}(a,B),
+\qquad s_m=\tfrac12-\tfrac1{m+1}.
+$$
+两项修正及其原有符号均保留。零点按解析重数计数，根原始量的保留条件为 $2n<m+1$。
+:::
+
+::: proof
+记 $q=m+1$。在每个对数坐标 $u\ge q^{3/2}$，算术尾项分为次数 $q$ 到 $2q-1$ 的有限和，以及截到 $2q-1$ 后的余项。有限和的几何权重之和为 $O(1+q^2/u)$。在后一段，已有截断界相对于端点衰减率多出因子 $e^{-u/(2q)}$。由 $q e^{-u/(2q)}\le8$，归一化的算术尾项同样受 $O(1+q^2/u)$ 控制。
+
+每个遗漏次数的实际零点系数代价为 $O((1+\ln q)^2)$，指数阻尼权重之和至多为 $1+q^2/u$。归一化后的平凡零点项还有一因子 $e^{-u/q}$。因此，对数密度总代价为 $O((1+\ln q)^2(1+q^2/u))$。给定窗口上有 $1+q^2/u\le2q^{1-d}$。用 $\varepsilon$ 吸收对数因子，再对 $[\ln a,\ln B]$ 积分。当 $B=a$ 时，两边均为零。
+:::
+
+当 $\ln a\ge(m+1)^2$ 时，定理对所有 $\varepsilon>0$ 给出因子 $m^\varepsilon$。余项的首项系数，以及统一指数能否取负，仍有待确定。
+
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::

@@ -950,6 +950,24 @@ The same prefix estimate controls the near range and the arithmetic tail. The po
 Under RH the pointwise Möbius prefix estimate permits $\beta=1/2+\delta$ for arbitrarily small $0<\delta<1/2$. For a prescribed final slack $\varepsilon>0$, take $\delta=\min(\varepsilon,1/4)$ and leave $\varepsilon-\delta/3$ for the window estimate. This yields $|E_m(a,B)|\le C m^{5/6+\varepsilon}D_{s_m}(a,B)$ uniformly over the allowed endpoints. Whether the residual attains this order remains open.
 
 
+::: {.theorem #thm-ch31-prime-window-very-late title="The signed residual at very late starting points" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusVeryLate.prime_window_mobius_very_late_of_rh"}
+Assume RH. For each $1/2\le d\le1$ and $\varepsilon>0$, there are constants $a_0\ge2$ and $C>0$ such that every integer $m\ge2$ and all real $B\ge a\ge a_0$ with $\ln a\ge(m+1)^{1+d}$ satisfy
+$$
+|E_m(a,B)|\le C m^{1-d+\varepsilon}D_{s_m}(a,B),
+\qquad s_m=\tfrac12-\tfrac1{m+1}.
+$$
+The original signed corrections and actual zero multiplicities are retained. The root primitives use exactly the degrees $2n<m+1$.
+:::
+
+::: proof
+Put $q=m+1$. At each logarithmic coordinate $u\ge q^{3/2}$, the arithmetic tail separates into degrees $q$ through $2q-1$ and the remainder after degree $2q-1$. The first range has geometric weight sum $O(1+q^2/u)$. In the remainder, the existing truncation bound gains the factor $e^{-u/(2q)}$ relative to the endpoint rate. Since $q e^{-u/(2q)}\le8$, the normalized arithmetic tail has the same $O(1+q^2/u)$ bound.
+
+The actual root coefficients cost $O((1+\ln q)^2)$ at each omitted degree. Their exponentially damped weights also sum to at most $1+q^2/u$. The trivial roots have an additional factor $e^{-u/q}$ after normalization. Consequently the total log-density cost is $O((1+\ln q)^2(1+q^2/u))$. Over the given window, $1+q^2/u\le2q^{1-d}$. Absorb the logarithms in $\varepsilon$ and integrate over $[\ln a,\ln B]$. Both sides vanish at $B=a$.
+:::
+
+At $\ln a\ge(m+1)^2$, the factor in the theorem is $m^\varepsilon$ for every $\varepsilon>0$. The leading coefficient and the possibility of a uniform negative order exponent remain open.
+
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::
