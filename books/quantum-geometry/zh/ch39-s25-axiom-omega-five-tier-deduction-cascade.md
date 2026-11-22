@@ -722,7 +722,7 @@ $$
 K_L(u)=\frac{L^2[F(u)-F(L^2)]}{L^2-u},\qquad K_L(L^2)=-L^2F'(L^2).
 $$
 
-按零频值归一，$L=16$ 时 $K_L(256)/K_L(0)\approx0.575087$，而 $F(256)\approx0.780327$。带权的逆质量和 $\sum_\gamma m_\gamma w_L(\gamma)/\gamma$ 收敛。要保留上一段三分量的完整等时联合分布，坐标方差已固定为 $2S$。因此给定 $M,L$ 后，零频增益必须满足 $D_0M=4S^2K_L(0)/(\sum_\gamma m_\gamma w_L(\gamma)/\gamma)$。在该分布的 $L^2$ 空间里以常函数为真空、坐标乘法为探针，选取旋转不变的正哈密顿量，使坐标激发在能量 $M\gamma$ 上的权重与 $m_\gamma w_L(\gamma)/\gamma$ 成正比，就得到上述归一化频率响应。一种仪器实现对探针做指数时间平均，若测得衰减率为 $\Lambda$，则跃迁幅度获得模平方权重 $\Lambda^2/(\Lambda^2+E^2)$，对应 $L=\Lambda/M$。滤波、频率刻度及增益均可独立标定。[正能量实现与滤波预测](https://github.com/the-omega-institute/trureturing-books/issues/967#issuecomment-7078075499) · [探针时间常数的标定](https://github.com/the-omega-institute/trureturing-books/issues/967#issuecomment-7078108994)
+按零频值归一，$L=16$ 时 $K_L(256)/K_L(0)\approx0.575087$，而 $F(256)\approx0.780327$。带权的逆质量和 $\sum_\gamma m_\gamma w_L(\gamma)/\gamma$ 收敛。要保留上一段三分量的完整等时联合分布，坐标方差已固定为 $2S$。因此给定 $M,L$ 后，零频增益必须满足 $D_0M=4S^2K_L(0)/(\sum_\gamma m_\gamma w_L(\gamma)/\gamma)$。在该分布的 $L^2$ 空间里以常函数为真空、坐标乘法为探针，选取旋转不变的正哈密顿量，使坐标激发在能量 $M\gamma$ 上的权重与 $m_\gamma w_L(\gamma)/\gamma$ 成正比，就得到上述归一化频率响应。另一种实现从未滤波的理想质量塔出发，对其探针做指数时间平均。若测得衰减率为 $\Lambda$，则跃迁幅度获得模平方权重 $\Lambda^2/(\Lambda^2+E^2)$，对应 $L=\Lambda/M$。滤波、频率刻度及增益均可独立标定。[正能量实现与滤波预测](https://github.com/the-omega-institute/trureturing-books/issues/967#issuecomment-7078075499) · [探针时间常数的标定](https://github.com/the-omega-institute/trureturing-books/issues/967#issuecomment-7078108994)
 
 若进一步规定单个三维内部空间、无流基态和由其密度反定的平直 Schrödinger 算子，坐标探针可见的径向能级不足以给出完整算术频率。其平方根色散也有相应的计数障碍。[两种色散的径向计数](https://github.com/the-omega-institute/trureturing-books/issues/967#issuecomment-7078151889)
 :::
