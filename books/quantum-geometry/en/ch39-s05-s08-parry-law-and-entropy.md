@@ -1588,7 +1588,7 @@ A circuit of a rank-one factor is a pair of vertices, and its readout is the dif
 Joint restriction is injective on a nonempty ground. In Smith bases, its image is spanned by integer multiples of target basis vectors. Saturating the image keeps those coordinates and allows arbitrary integer coefficients. The cyclic factors of the quotient by the original image are exactly those given by the diagonal entries of the transpose. For two rank-one factors the tensor generator is killed by both $m$ and $n$. Bézout's identity and multiplication of the reductions modulo $\gcd(m,n)$ give its exact order. For ground sizes $2,3$, every rationally compatible integral readout has an integral lift. For sizes $2,2$, the obstruction group is $\mathbb Z/2\mathbb Z$.
 
 ::: {.theorem #thm-joint-circuit-rank-two-factors title="Cyclic factors of joint circuit restriction in rank two" lean="D5/S3/Combinatorics/Matroids/RankTwoCircuitInvariantFactors.rank_two_lifting_obstruction_invariant_factors"}
-Let a matroid on a finite ordered ground have $k+2$ nonempty parallel classes, with bases exactly the pairs from distinct classes. Let $n$ be the ground size and $g$ the greatest common divisor of the class sizes. The saturation of the joint circuit restriction image modulo that image is isomorphic to
+Let a loopless matroid on a finite ordered ground have $k+2$ nonempty parallel classes that partition the ground. Its bases are exactly the pairs from distinct classes. Let $n$ be the ground size and $g$ the greatest common divisor of the class sizes. The saturation of the joint circuit restriction image modulo that image is isomorphic to
 $$
 \mathbb Z/g\mathbb Z \;\oplus\; (\mathbb Z/n\mathbb Z)^k .
 $$

@@ -1588,7 +1588,7 @@ $$
 非空地集上的联合限制是单射。在 Smith 基下，它的像由整数倍的目标基向量张成。饱和格保留这些坐标，去掉整数倍的限制。模去原联合限制像后，留下的循环因子正好对应转置余核的对角系数。取两个秩一分量的张量积，生成元同时被 $m,n$ 消去，Bézout 等式与模 $\gcd(m,n)$ 的乘积读数给出其准确阶数。比如地集大小为 $2,3$ 时，每个有理相容的整系数读数都有整系数提升。大小均为 $2$ 时，障碍群为 $\mathbb Z/2\mathbb Z$。
 
 ::: {.theorem #thm-joint-circuit-rank-two-factors title="秩二拟阵联合回路限制的循环因子" lean="D5/S3/Combinatorics/Matroids/RankTwoCircuitInvariantFactors.rank_two_lifting_obstruction_invariant_factors"}
-设有限有序地集上的拟阵有 $k+2$ 个非空平行类，且其基恰好是来自不同类的二元集。记地集大小为 $n$，各类大小的最大公约数为 $g$。联合回路限制像的饱和格模去原像，得到的群同构于
+设拟阵的地集有限且有序，拟阵无自环，地集由 $k+2$ 个非空平行类划分。其基恰好是来自不同类的二元集。记地集大小为 $n$，各类大小的最大公约数为 $g$。联合回路限制像的饱和格模去原像，得到的群同构于
 $$
 \mathbb Z/g\mathbb Z \;\oplus\; (\mathbb Z/n\mathbb Z)^k .
 $$
