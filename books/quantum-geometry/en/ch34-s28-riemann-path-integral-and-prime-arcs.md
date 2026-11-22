@@ -983,7 +983,7 @@ Put $q=m+1$. At each logarithmic coordinate $u\ge q^{3/2}$, the arithmetic tail 
 The actual root coefficients cost $O((1+\ln q)^2)$ at each omitted degree. Their exponentially damped weights also sum to at most $1+q^2/u$. The trivial roots have an additional factor $e^{-u/q}$ after normalization. Consequently the total log-density cost is $O((1+\ln q)^2(1+q^2/u))$. Over the given window, $1+q^2/u\le2q^{1-d}$. Absorb the logarithms in $\varepsilon$ and integrate over $[\ln a,\ln B]$. Both sides vanish at $B=a$.
 :::
 
-At $\ln a\ge(m+1)^2$, the factor in the theorem is $m^\varepsilon$ for every $\varepsilon>0$. The leading coefficient and the possibility of a uniform negative order exponent remain open.
+At $\ln a\ge(m+1)^2$, the factor in the theorem is $m^\varepsilon$ for every $\varepsilon>0$. The odd-cutoff leading term and the lower bound on a uniform exponent are given below.
 
 
 ::: {.theorem #thm-ch31-prime-window-odd-cutoff title="The first omitted term at an odd cutoff" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusOddCutoff.signed_window_odd_cutoff_expansion"}
