@@ -529,9 +529,9 @@ $$
 
 取自然数 $m,r$，满足 $m\ge2$ 且 $m+1=2r$。沿用 [@thm-ch31-prime-window-shrinking-width] 的 $s,F_L,c_m,S_r$。对每个充分小的 $L>0$，下式定义上极限所用的绝对误差在充分晚的尾区间上有界。其首项系数为
 $$
-Q_m^{\rm left}(L)=\limsup_{u\to+\infty}|F_L(u)+c_m+\mu(r)S_r(u)|,
+Q_m^{\mathrm{left}}(L)=\limsup_{u\to+\infty}|F_L(u)+c_m+\mu(r)S_r(u)|,
 \qquad
-\lim_{L\downarrow0}\frac{Q_m^{\rm left}(L)}{L\log^2(1/L)}
+\lim_{L\downarrow0}\frac{Q_m^{\mathrm{left}}(L)}{L\log^2(1/L)}
 =\frac{|\mu(r)|}{4\pi s}.
 $$
 :::

@@ -529,9 +529,9 @@ Assume RH. Assume also that the constant phase $i$ on the distinct positive zeta
 
 Take natural numbers $m,r$ with $m\ge2$ and $m+1=2r$. Use $s,F_L,c_m,S_r$ from [@thm-ch31-prime-window-shrinking-width]. For every sufficiently small $L>0$, the absolute discrepancy defining the following limsup is bounded on a late tail. The limiting coefficient is
 $$
-Q_m^{\rm left}(L)=\limsup_{u\to+\infty}|F_L(u)+c_m+\mu(r)S_r(u)|,
+Q_m^{\mathrm{left}}(L)=\limsup_{u\to+\infty}|F_L(u)+c_m+\mu(r)S_r(u)|,
 \qquad
-\lim_{L\downarrow0}\frac{Q_m^{\rm left}(L)}{L\log^2(1/L)}
+\lim_{L\downarrow0}\frac{Q_m^{\mathrm{left}}(L)}{L\log^2(1/L)}
 =\frac{|\mu(r)|}{4\pi s}.
 $$
 :::
