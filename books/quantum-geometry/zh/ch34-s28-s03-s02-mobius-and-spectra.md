@@ -524,6 +524,24 @@ $$
 
 因为 $\mu(r)\in\{-1,1\}$，上述不等式同时确定了误差的符号及其绝对值下界。起点可随窗宽和阈值变化。对同一带符号窗口，[@thm-ch31-prime-window-shrinking-rate] 的上界和这里的下界在窗宽尺度上仍差一个对数因子。
 
+::: {.theorem #thm-ch31-signed-left-limsup title="四分之一周相位复现下的精确左端点误差" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffLeftLimsup.signed_window_even_cutoff_left_limsup"}
+假设 RH，并假设在不同正纵坐标的 ζ 零点上，常值相位 $i$ 属于实数 $t$ 所生成的相位向量 $(e^{i\gamma t})_{\gamma>0}$ 的乘积拓扑闭包。这意味着对任意指定的有限纵坐标列表，可以用同一个时刻使各相位任意接近 $i$。
+
+取自然数 $m,r$，满足 $m\ge2$ 且 $m+1=2r$。沿用 [@thm-ch31-prime-window-shrinking-width] 的 $s,F_L,c_m,S_r$。对每个充分小的 $L>0$，下式定义上极限所用的绝对误差在充分晚的尾区间上有界。其首项系数为
+$$
+Q_m^{\mathrm{left}}(L)=\limsup_{u\to+\infty}|F_L(u)+c_m+\mu(r)S_r(u)|,
+\qquad
+\lim_{L\downarrow0}\frac{Q_m^{\mathrm{left}}(L)}{L\log^2(1/L)}
+=\frac{|\mu(r)|}{4\pi s}.
+$$
+:::
+
+::: proof
+将校正位置由中点移到左端点，相当于减去 $\mu(r)$ 乘以步长 $L/2$ 的前向根谱增量。[@thm-ch31-signed-midpoint-limsup] 中的中点误差属于较低阶。在根谱增量中，将纵坐标为 $\gamma$ 的系数换成 $-r/(\tfrac14+\gamma^2)$，引起的误差对所有起始相位都由常数乘 $L$ 控制。在指定相位下，共轭零点的带符号正弦项相同。按不同正零点重新求和时保留每个零点的解析重数，主和式因此等于尺度为 $L/(2r)$ 的正纵坐标相位斜率乘 $r$。谱归一化给出该斜率的 $r/s$ 倍。斜率在 $t$ 处的首项是 $t\log^2(1/t)/(2\pi)$，代入 $t=L/(2r)$ 得到 $L\log^2(2r/L)/(4\pi s)$。对各模态的一致上界和任意晚的指定相位复现给出上极限的两侧估计。若 $\mu(r)=0$，两个取样位置的校正相同，晚期上极限为零。
+:::
+
+相位条件对每个有限纵坐标列表要求一个共同的时刻。证明通过该相位属于实际轨道闭包来控制整个绝对可和级数。仅假设 RH 是否足以推出同一左端点渐近，仍是开放问题。
+
 ::: {.theorem #thm-ch31-signed-midpoint-limsup title="对数中点校正后的素数窄窗误差" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffMidpoint.signed_window_even_cutoff_midpoint_limsup"}
 假设 RH。取自然数 $m,r$，满足 $m\ge2$ 且 $m+1=2r$。沿用 [@thm-ch31-prime-window-shrinking-width] 的 $s,F_L,c_m,S_r$，并沿用 [@thm-ch31-centered-root-log-cusp] 的 $c$。对每个 $0<L\le1/4$，定义
 
@@ -547,7 +565,7 @@ $$
 将平坦平均写成关于对数中点的左右配对，得到对称二阶差在 $[0,L/2]$ 上的积分，再除以 $L$。对任意中心使用 [@thm-ch31-root-symmetric-tail-modulus] 的上界，中心为零时使用带符号的尖点下界。积分 $h\log(1/h)$ 给出主项和线性项。换回归一化指数权时，两种权的总质量相同。先减去中点谱值，再用一阶差的显式模量控制密度之差。所有零点模态的绝对可和性使整窗积分成为同一相位向量的连续读数。一次共同的晚期相位复现恢复下界，归一化算术余项趋于零。完整证明由 Lean 内核检查。
 :::
 
-当 $\mu(r)=0$ 时，上极限为零。若 $\mu(r)\ne0$，中点校正的晚期最坏误差具有 $L\log(1/L)$ 的首项。左端点校正的最优上界仍是开放问题。
+当 $\mu(r)=0$ 时，上极限为零。若 $\mu(r)\ne0$，中点校正的晚期最坏误差具有 $L\log(1/L)$ 的首项。仅假设 RH 时，左端点误差的精确渐近仍是开放问题。
 
 ::: {.theorem #thm-ch31-signed-quadratic-midpoint title="对数中点校正的二次余项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffQuadraticMidpoint.signed_window_even_cutoff_midpoint_limsup_quadratic"}
 假设 RH。取自然数 $m,r$，满足 $m\ge2$ 且 $m+1=2r$。沿用 [@thm-ch31-signed-midpoint-limsup] 的原始带符号素数窗口、对数中点校正以及 $Q_m(L)$ 与 $G_r(L)$。绝对误差在充分晚的尾区间上有界。存在常数 $C_m>0$，对每个 $0<L\le1/4$ 都有
