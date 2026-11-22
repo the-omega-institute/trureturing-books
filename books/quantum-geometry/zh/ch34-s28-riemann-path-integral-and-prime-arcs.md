@@ -1149,6 +1149,20 @@ $$
 
 对称模量的前两项对所有尾区间一致成立。前向增量的最优一致上界仍是开放问题。
 
+::: {.theorem #thm-ch31-signed-shrinking-lower title="任意晚起点上的带符号窄窗误差下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSignedShrinkingLower.signed_window_even_cutoff_shrinking_lower"}
+假设 RH。取自然数 $m,r$，满足 $m\ge2$、$m+1=2r$ 和 $\mu(r)\ne0$，沿用 [@thm-ch31-prime-window-shrinking-width] 的 $F_L$、$c_m$ 与 $S_r$。存在 $0<H_m<1$，使得对每个 $0<d<e^{-s}/(8s)$、每个 $0<L<H_m$ 和每个实数 $U$，都存在实数 $u\ge U$ 满足
+
+$$
+-\mu(r)\bigl(F_L(u)+c_m+\mu(r)S_r(u)\bigr)\ge dL\log(1/L).
+$$
+:::
+
+::: proof
+根系数的虚部多衰减一个纵坐标因子。因此，原点两侧的根谱值之差由常数乘偏移量控制。将这项估计与 [@thm-ch31-centered-root-log-cusp] 的对称尖点结合，得到单侧的对数下界。用原窗口的正指数权作平均，下界仍有 $L\log(1/L)$ 的尺度。固定窗宽后，绝对可和的系数让加权平均和端点谱值都成为实际相位的连续函数。记 $C=e^{-s}/(8s)$ 与 $T=L\log(1/L)$，原点的平均谱差至少为 $CT$。对于每个 $d<C$，相位复现在任意晚的起点使谱差超过 $(C+d)T/2$。取起点足够晚，使归一化算术余项小于 $(C-d)T/2$，相减即得带符号下界。完整证明由 Lean 内核检查。
+:::
+
+因为 $\mu(r)\in\{-1,1\}$，上述不等式同时确定了误差的符号及其绝对值下界。起点可随窗宽和阈值变化。对同一带符号窗口，[@thm-ch31-prime-window-shrinking-rate] 的上界和这里的下界在窗宽尺度上仍差一个对数因子。
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 
