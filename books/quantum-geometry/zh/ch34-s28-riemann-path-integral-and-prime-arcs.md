@@ -1022,7 +1022,44 @@ $$
 取 $M\ge\max(2,N)$，使所有 $m\ge M$ 都满足 $K m^{-\gamma}<1$。若 $q=m+1$ 为素数，则 $\mu(q)=-1$，且 $q/((q-1)s_m)=2q^2/((q-1)(q-2))>2$。固定该阶数后，提高起点阈值，使归一化展开误差小于 $1$。对每个 $B>a$，幂差都严格为正，故有符号余项 $E_m$ 大于该幂差。素数无上界，所以这也排除了任意固定正对数窗宽下的统一负指数界。
 :::
 
-若奇数 $q$ 含平方因子，首项系数因 $\mu(q)=0$ 消失，原式仍给出带额外衰减的界 $O_m(a^{-\delta_m}D_{s_m})$。若 $q$ 为偶数，增阶时还会加入次数 $n=q/2$ 的零点项，其衰减率与次数 $q$ 的算术项相同。偶数情形的首项需要同时处理这两部分。
+若奇数 $q$ 含平方因子，首项系数因 $\mu(q)=0$ 消失，原式仍给出带额外衰减的界 $O_m(a^{-\delta_m}D_{s_m})$。若 $q$ 为偶数，增阶时还会加入次数 $n=q/2$ 的零点项，其衰减率与次数 $q$ 的算术项相同。下面的展开同时给出这两项。
+
+::: {.theorem #thm-ch31-prime-window-even-cutoff title="偶数截断的算术项与零点项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_expansion"}
+假设 RH 成立。存在共同的 $a_0\ge2$ 和 $K>0$，使下列估计对所有整数 $m\ge2$、$q=m+1=2r$ 及所有 $B\ge a\ge a_0$ 成立。记 $s_m=1/2-1/q$、$\delta_m=1/q-1/(q+1)$ 和 $W_m=Kq(1+\ln q)^2$。沿用上文的余项 $E_m$ 与幂差 $D_s$，记 $P_r$ 为按实际 ζ 零点的解析重数求和的次数 $r$ 根原始量。则
+
+$$
+\begin{aligned}
+&\left| E_m(a,B)+\frac{\mu(q)q}{(q-1)s_m}D_{s_m}(a,B)
+          +\mu(r)\bigl(P_r(B)-P_r(a)\bigr)\right|\\
+&\quad\le W_m D_{s_m+\delta_m}(a,B)
+ \le W_m\frac{s_m+\delta_m}{s_m}a^{-\delta_m}D_{s_m}(a,B).
+\end{aligned}
+$$
+:::
+
+::: proof
+阶数增至 $q$ 时，新增一个次数 $q$ 的算术项。根谱规则由 $2n<q$ 改为 $2n<q+1$，恰增加次数 $r$。这两个带符号修正移到余项一侧，得到同一对端点上的 $E_q$。全阶数估计给出较快的衰减率 $s_m+\delta_m$。在对数区间上比较两个指数积分，得到第二个不等式，并覆盖 $B=a$。
+:::
+
+::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
+假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 及每个对数窗宽 $L>0$ 都有常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
+
+$$
+F(u)=\frac{E_m(e^u,e^{u+L})}{D_{s_m}(e^u,e^{u+L})}
+$$
+
+在 $[U,U+T]$ 上 Lebesgue 可积，并满足
+
+$$
+\left|\frac1T\int_U^{U+T}F(u)\,du+\frac{\mu(q)q}{(q-1)s_m}\right|\le\frac{C}{T}.
+$$
+:::
+
+::: proof
+分母为 $e^{-s_m u}(1-e^{-s_m L})>0$。在 RH 下，归一化的次数 $r$ 根原始量增量由频率 $\operatorname{Im}(\rho)/r$ 的可绝对求和级数给出。两个端点对应同一个零点，仅相差固定窗宽的因子。零点高度下界使每个频率的指数积分由同一个常数控制，从而可以逐项积分并得到独立于 $U,T$ 的根谱积分界。归一化后的 $E_q$ 按 $e^{-\delta_m u}$ 衰减，也有独立于 $U,T$ 的积分界。将两项的积分界除以 $T$，留下常数 $-\mu(q)q/((q-1)s_m)$。
+:::
+
+若 $q$ 含平方因子，算术平均为零。次数 $r$ 的根谱项仍由 $\mu(r)$ 决定，端点展开允许它在个别窗口中出现。这里的误差常数可依赖于 $m,L$。各个非零频率的系数和重数恢复是另外的待证问题。
 
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
