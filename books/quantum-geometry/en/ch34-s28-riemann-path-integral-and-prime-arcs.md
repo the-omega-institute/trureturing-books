@@ -930,6 +930,24 @@ The same prefix estimate controls the near range and the arithmetic tail. The po
 Under RH the pointwise Möbius prefix estimate permits $\beta=1/2+\delta$ for arbitrarily small $0<\delta<1/2$. For a prescribed final slack $\varepsilon>0$, take $\delta=\min(\varepsilon,1/4)$ and leave $\varepsilon-\delta/3$ for the window estimate. This yields $|E_m(a,B)|\le C m^{5/6+\varepsilon}D_{s_m}(a,B)$ uniformly over the allowed endpoints. Whether the residual attains this order remains open.
 
 
+::: {.theorem #thm-ch31-prime-window-late-spacing title="A smaller exponent on late signed prime windows" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusLateSpacing.prime_window_mobius_late_spacing_of_rh"}
+Assume RH and fix $0\le d\le1/2$ and $\varepsilon>0$. There are constants $a_0\ge2$ and $C>0$ such that for all integers $m\ge2$ and all real $B\ge a\ge a_0$ with $\ln a\ge(m+1)^{1+d}$,
+$$
+|E_m(a,B)|\le C m^{3/4-d/2+\varepsilon}D_{s_m}(a,B),\qquad
+s_m=\tfrac12-\tfrac1{m+1}.
+$$
+The two signed corrections retain their signs. The zero sums count analytic multiplicity, with root primitives retained exactly when $2n<m+1$.
+:::
+
+::: proof
+Write $q=m+1$ and $u=\ln x$. For omitted degrees, the samples $u/n$ are separated by at least $u/q^2$. The factor $e^{-u/q+u/(2n)}$ allows the estimates on unit intervals to be summed geometrically. The local integral of the high-frequency mode contributes $O_\eta(H^{\eta-1/2})$. The phase derivative has bin envelope $O_\eta(\min(q,1+|k|)(1+|k|)^{\eta-1})$, for $0<\eta<1/2$. The square sum of the envelope is $O_\eta(q^{1+2\eta})$, by splitting at $1+|k|=q$. The local sampling estimate therefore gives high-frequency cost $O_\eta((1+q^2/u)H^{\eta-1/2}+q^{1/2+\eta})$.
+
+The signed Möbius prefix gives low-frequency cost $O_\eta(q^{1/2+\eta}(H+1)^{1/2+\eta}+(H+1)^{1+\eta})$. Throughout the integration interval $u\ge q^{1+d}$. Taking $H=\lfloor q^{1/2-d}\rfloor$ bounds both frequency costs by $O_\eta(q^{3/4-d/2+2\eta})$. The arithmetic and trivial-root terms also fit this bound. Integrating on $[\ln a,\ln B]$ supplies $D_{s_m}(a,B)$ and includes $B=a$, when both sides vanish.
+:::
+
+At $d=1/2$, the starting condition is $\ln a\ge(m+1)^{3/2}$ and the exponent is $1/2+\varepsilon$. This estimate applies throughout that later range. The least exponent attainable uniformly as the starting point varies remains open.
+
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::
