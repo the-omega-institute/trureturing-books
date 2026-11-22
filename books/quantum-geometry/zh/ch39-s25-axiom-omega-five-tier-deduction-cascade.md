@@ -699,7 +699,7 @@ $$
 :::
 
 ::: {.remark #rem-ch39-equal-time-variance title="一个有限方差探针能否读出全部频率？"}
-上一段使同一系综在不同静态背景上给出 $F$。现在固定一个平衡态和一个中心化的厄米探针，把目标规定为零空间动量的连通欧氏**时间**关联函数，并取零频弹性项和接触项为零，所有频率共用同一标定 $D_0>0$ 和尺度 $M>0$。按本节的零点展开，
+**等时读数（手工推导）。** 上一段使同一系综在不同静态背景上给出 $F$。现在固定一个平衡态和一个中心化的厄米探针，把目标规定为零空间动量的连通欧氏**时间**关联函数，并取零频弹性项和接触项为零，所有频率共用同一标定 $D_0>0$ 和尺度 $M>0$。按本节的零点展开，
 
 $$
 D(\omega^2)=D_0 F(\omega^2/M^2)=\frac{D_0M^2}{S}\sum_{\gamma>0}\frac{m_\gamma}{\omega^2+M^2\gamma^2}.
@@ -716,13 +716,13 @@ $$
 
 有限频率也可给出必要条件。零温基态中，设探针的正能量跃迁测度为 $\mu$，总质量不超过测得的等时方差 $V$。用谱表示 $D(\omega^2)=\int 2E/(\omega^2+E^2)\,d\mu(E)$ 和 $2|\omega|E\le\omega^2+E^2$，得 $|\omega|D(\omega^2)\le V$。例如在 $|\omega|/M=16$，匹配目标要求 $V/(D_0M)\ge16F(256)\approx12.4852241$。实验须在同一态上独立标定方差与响应。有限带宽只检验其覆盖的频率。上一段的零背景分量方差为 $2S$，因而也受同一限制。[等时求和、有限频率界与区间数值](https://github.com/the-omega-institute/trureturing-books/issues/967#issuecomment-7078068828)
 
-保留各极点而衰减高能留数，可得到有限方差的正例。取无量纲参数 $L>0$ 和 $u=\omega^2/M^2$，在每个谱留数上乘以 $w_L(\gamma)=L^2/(\gamma^2+L^2)$。逐项分式分解给出
+**有时间分辨率的探针（模型）。** 保留各极点而衰减高能留数，可得到有限方差的正例。取无量纲参数 $L>0$ 和 $u=\omega^2/M^2$，在每个谱留数上乘以 $w_L(\gamma)=L^2/(\gamma^2+L^2)$。逐项分式分解给出
 
 $$
 K_L(u)=\frac{L^2[F(u)-F(L^2)]}{L^2-u},\qquad K_L(L^2)=-L^2F'(L^2).
 $$
 
-按零频值归一，$L=16$ 时 $K_L(256)/K_L(0)\approx0.575087$，而 $F(256)\approx0.780327$。带权的逆质量和 $\sum_\gamma m_\gamma w_L(\gamma)/\gamma$ 收敛。把总增益定为使等时方差等于 $2S$，则可以保留上一段三分量的完整等时联合分布。在该分布的 $L^2$ 空间里以常函数为真空、坐标乘法为探针，选取旋转不变的正哈密顿量，使坐标激发在能量 $M\gamma$ 上的权重与 $m_\gamma w_L(\gamma)/\gamma$ 成正比，就得到上述归一化频率响应。选取留数权重、频率刻度并校准增益是这一动力学模型的物理输入。[正能量实现与滤波预测](https://github.com/the-omega-institute/trureturing-books/issues/967#issuecomment-7078075499)
+按零频值归一，$L=16$ 时 $K_L(256)/K_L(0)\approx0.575087$，而 $F(256)\approx0.780327$。带权的逆质量和 $\sum_\gamma m_\gamma w_L(\gamma)/\gamma$ 收敛。要保留上一段三分量的完整等时联合分布，坐标方差已固定为 $2S$。因此给定 $M,L$ 后，零频增益必须满足 $D_0M=4S^2K_L(0)/(\sum_\gamma m_\gamma w_L(\gamma)/\gamma)$。在该分布的 $L^2$ 空间里以常函数为真空、坐标乘法为探针，选取旋转不变的正哈密顿量，使坐标激发在能量 $M\gamma$ 上的权重与 $m_\gamma w_L(\gamma)/\gamma$ 成正比，就得到上述归一化频率响应。一种仪器实现对探针做指数时间平均，若测得衰减率为 $\Lambda$，则跃迁幅度获得模平方权重 $\Lambda^2/(\Lambda^2+E^2)$，对应 $L=\Lambda/M$。滤波、频率刻度及增益均可独立标定。[正能量实现与滤波预测](https://github.com/the-omega-institute/trureturing-books/issues/967#issuecomment-7078075499) · [探针时间常数的标定](https://github.com/the-omega-institute/trureturing-books/issues/967#issuecomment-7078108994)
 :::
 
 **这条响应曲线可以由哪些传播子读出？（标量交换模型）** 取欧氏动量平方 $s=q_E^2>0$，引入自由质量尺度 $M>0$。令 $b_\gamma=M^2\gamma^2$，沿用 $p_\gamma=m_\gamma/(S\gamma^2)$。无量纲响应 $A(s)=F(s/M^2)=\sum_\gamma p_\gamma b_\gamma/(s+b_\gamma)$ 从 $1$ 严格递减到 $0$。没有接触项的标量对角传播子若有正谱表示 $D(s)=\int_{[0,\infty)}(s+b)^{-1}\,d\rho(b)$，则 $sD(s)$ 非减，因为每个 $s/(s+b)$ 都非减。因此 $A(s)/s$ 不能作为这种自相关传播子。分式分解还指出阻碍出现在哪里：
