@@ -1610,7 +1610,7 @@ $$
    &&\text{for every circuit }C\text{ and basis }T\text{ of }S/C.
 \end{aligned}
 $$
-Here $\varepsilon(C,i,T)$ is the sign of deleting $i$ from the ordered circuit, multiplied by the shuffle sign of the remaining circuit face and $T$.
+Here $\varepsilon(C,i,T)$ is the sign of deleting $i$ from the ordered circuit, multiplied by the shuffle sign of the remaining circuit face and $T$. Under this isomorphism the class of a saturated readout goes to the residues of its rational top-cycle lift. Pulling the core coefficients back recovers those residues on every face of $M$.
 :::
 
 Reduce the coefficients of a rational top cycle with integral circuit readouts modulo the integers. A pair circuit within a fiber has a readout equal, up to sign, to the difference between the two coefficients obtained by exchanging its representatives. Any two transversals of a basis are joined by such exchanges, so they have one common residue. At a transverse face, inserting any of the $m_i$ vertices of class $i$ gives the same sign and the same residue, yielding the first equation. A circuit meeting each class at most once projects to a circuit of $S$. Its ordered deletion and shuffle signs agree with those downstairs, yielding the second equation.
