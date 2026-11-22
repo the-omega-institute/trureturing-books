@@ -565,7 +565,7 @@ $$
 Pair points at equal distances on either side of the logarithmic midpoint in the flat average. This gives the integral of the symmetric second difference over $[0,L/2]$, divided by $L$. The upper estimate from [@thm-ch31-root-symmetric-tail-modulus] holds at every center. The signed cusp gives the matching lower comparison at center zero. Integrating $h\log(1/h)$ gives the logarithmic and linear terms. The two normalized weights have equal mass, so subtract the midpoint value before applying the first-difference bound to the density perturbation. Absolute summability of the zero modes makes the whole window a continuous readout of the same phase vector. One common late return restores the lower comparison and the normalized arithmetic remainder tends to zero. The full proof is checked by the Lean kernel.
 :::
 
-When $\mu(r)=0$, the limsup is zero. For $\mu(r)\ne0$, the late worst-case error has leading order $L\log(1/L)$ with the midpoint correction. The exact left-endpoint asymptotic under RH alone remains open.
+When $\mu(r)=0$, the limsup is zero. For $\mu(r)\ne0$, the late worst-case error has leading order $L\log(1/L)$ with the midpoint correction. Whether the left-endpoint error attains its full leading coefficient is governed by the weighted phase deficit in [@thm-ch31-weighted-phase-limsup].
 
 ::: {.theorem #thm-ch31-signed-quadratic-midpoint title="A quadratic remainder for logarithmic midpoint correction" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffQuadraticMidpoint.signed_window_even_cutoff_midpoint_limsup_quadratic"}
 Assume RH. Take natural numbers $m,r$ with $m\ge2$ and $m+1=2r$. Use the original signed prime window, the midpoint correction and the quantities $Q_m(L)$ and $G_r(L)$ from [@thm-ch31-signed-midpoint-limsup]. The absolute error is bounded on a sufficiently late tail. There is a constant $C_m>0$ such that for every $0<L\le1/4$,
@@ -581,6 +581,30 @@ For each frequency $\omega$, pair the modes at distance $h$ on either side of th
 :::
 
 The quadratic remainder applies to the original exponential weight and includes $\mu(r)=0$. Correction at the left endpoint still depends on a uniform bound for first differences.
+
+::: {.theorem #thm-ch31-weighted-phase-limsup title="A weighted phase criterion for the left-endpoint error" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHWeightedPhaseLimsup.signed_window_even_cutoff_weighted_phase"}
+Assume RH. For each distinct positive zeta zero ordinate $\gamma$, let $m_\gamma$ be its analytic multiplicity. For $T$ sufficiently large, put
+$$
+w_\gamma=\frac{m_\gamma\gamma}{1/4+\gamma^2},\qquad
+W(T)=\sum_{0<\gamma\le T}w_\gamma,\qquad
+D(T)=1-\frac{\displaystyle\sup_{v\in\mathbb R}\sum_{0<\gamma\le T}w_\gamma\sin(\gamma v)}{W(T)}.
+$$
+
+Take natural numbers $m,r$ with $m\ge2$ and $m+1=2r$, and use $s,F_L,c_m,S_r$ from [@thm-ch31-prime-window-shrinking-width]. For every sufficiently small $L>0$ the absolute error $|F_L(u)+c_m+\mu(r)S_r(u)|$ is bounded on a late tail. Write $Q_m^{\mathrm{left}}(L)$ for its limsup as $u\to+\infty$. Then
+$$
+\frac{Q_m^{\mathrm{left}}(L)}{L\log^2(1/L)}
+-\frac{|\mu(r)|}{4\pi s}\bigl(1-D(2r/L)\bigr)\longrightarrow 0
+\qquad (L\downarrow0).
+$$
+
+For $\mu(r)\ne0$, the normalized limsup tends to $|\mu(r)|/(4\pi s)$ exactly when $D(T)\to0$ as $T\to+\infty$.
+:::
+
+::: proof
+Set $h=L/2$. Subtracting $\mu(r)(S_r(u+h)-S_r(u))$ from the signed midpoint error gives the signed left-endpoint error. Linearizing the root modes up to $\gamma\le r/h$ and bounding their remaining tail approximates the root increment by $(2h/s)\sum_{0<\gamma\le r/h}w_\gamma\sin(\gamma u/r)$ with an error of order $h\log(1/h)$ uniform in $u$. Oddness makes the supremum of the sine polynomial equal to the supremum of its absolute value. A common phase return recovers values arbitrarily close to that supremum at arbitrarily late starts. The midpoint error has lower order, and $W(T)/\log^2 T\to1/(4\pi)$. Substitution of $T=2r/L$ gives the formula and the equivalence. When $\mu(r)=0$, the two corrections agree and the late limsup is zero for small widths.
+:::
+
+The remaining question under RH alone is whether the actual zeros satisfy $D(T)\to0$. At each cutoff, $D(T)$ is the smallest weighted mean of $1-\sin(\gamma v)$ attainable to arbitrary accuracy with one common time $v$.
 
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
