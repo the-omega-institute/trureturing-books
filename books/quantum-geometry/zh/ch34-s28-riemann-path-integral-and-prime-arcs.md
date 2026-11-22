@@ -783,8 +783,34 @@ Möbius 截断误差与完整 Mangoldt 尾项的误差也满足相同的衰减�
 
 估计适用于每个有限阶数，阶数可以随端点选取。衰减指数、两端幂差和保留的根频谱沿用前述展开。 [加权均方方法，Coppola 与 Laporta，第 1 节](https://arxiv.org/abs/1411.1739v1)
 
-::: {.problem #prob-ch31-prime-window-sublinear-remainder title="素数尾窗的一致次线性阶数余项"}
-假设 RH，是否存在一个实数 $a_0\ge2$，使得对每个 $\varepsilon>0$，都存在整数 $m_0\ge2$，从而对所有整数 $m\ge m_0$ 和所有实数截点 $B\ge a\ge a_0$，同一余项满足 $|E_m(a,B)|\le\varepsilon m D_{s_m}(a,B)$？这里也允许 $B=a$。 [形式化研究](https://github.com/the-omega-institute/trureturing/issues/33004)
+<a id="prob-ch31-prime-window-sublinear-remainder"></a>
+
+::: {.theorem #thm-ch31-prime-window-sublinear-remainder title="素数尾窗的一致次线性余项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusSublinear.prime_window_mobius_sublinear_of_rh"}
+假设 RH。存在实数阈值 $a_0\ge2$，使得对每个 $\varepsilon>0$，都存在整数 $m_0\ge2$，从而对所有整数 $m\ge m_0$ 及所有实数截点 $B\ge a\ge a_0$（包括 $B=a$）有
+
+$$
+|E_m(a,B)|\le\varepsilon m D_{s_m}(a,B).
+$$
+
+这里 $E_m(a,B)$ 仍为 [@thm-ch31-prime-window-mobius] 中的有符号余项，且 $s_m=\tfrac12-\tfrac1{m+1}$。
+:::
+
+::: proof
+记 $u=\ln x$、$q=m+1$。Chebyshev 函数与 Möbius 权重的卷积恒等式，结合取整项的精确抵消，给出阶数 $m$ 以内所有 Möbius 前缀和乘以 $\ln m$ 后的一致 $o(m)$ 界。对平凡零点响应应用 Abel 求和即可利用这一节省。对递减的 Chebyshev 根权重作有符号 Abel 求和，截断尾项还能得到对数节省。
+
+取有限个单位频率箱，使其余箱的质量平方和任意小。若 $u\ge Lq$，省略阶数的几何权重总和至多为 $1+q^2/u$。有限箱内的振幅有界，先取大 $L$，再取大 $m$，其贡献除以 $m$ 后即可任意小。其余箱由局部高斯估计控制，界正比于质量平方和的平方根。所有实际零点均按解析重数计入。若 $u\le Lq$，把省略的中心化根项写成 Chebyshev 积分项与幂项之差。两列权重各自随阶数递减，在固定 $L$ 后，有符号 Abel 求和给出所需的节省。
+
+先由素数尾项的最终符号固定 $a_0$，再选精度。在 $[\ln a,\ln B]$ 上积分，并用 $s_m\ge1/6$，保留原有的两端幂差。完整证明由 Lean 内核检查。
+:::
+
+::: {.problem #prob-ch31-prime-window-quantitative-sublinear-remainder title="给次线性余项一个定量速率"}
+在 RH 下，是否存在常数 $a_0\ge2$ 和 $C>0$，使所有整数 $m\ge2$ 和实数截点 $B\ge a\ge a_0$ 都满足
+
+$$
+|E_m(a,B)|\le \frac{C m}{\sqrt{1+\ln\ln(m+1)}}D_{s_m}(a,B).
+$$
+
+[定量余项问题](https://github.com/the-omega-institute/trureturing/issues/33041)
 :::
 
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
