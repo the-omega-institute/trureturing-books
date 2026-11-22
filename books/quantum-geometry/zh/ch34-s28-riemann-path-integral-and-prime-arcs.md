@@ -1151,6 +1151,46 @@ $$
 
 若 $\mu(r)\ne0$，非零测试频率的系数非零当且仅当 $1/2+ir\omega$ 是实际零点。此时除以 $-\mu(r)b_{r,L}(1/2+ir\omega)$，便得到该零点的解析重数。若 $r$ 含平方因子，所有非零频率的系数均为零。这里的误差常数允许依赖测试频率与固定窗宽；零频处对所有正窗宽统一的估计见 [@thm-ch31-prime-window-even-cesaro]。
 
+::: {.theorem #thm-ch31-prime-window-fourier-uniform-width title="傅里叶恢复对所有正窗宽统一" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffUniformWidth.signed_window_even_cutoff_fourier_uniform_width"}
+假设 RH。沿用 [@thm-ch31-prime-window-even-fourier] 中的偶数截断、归一化余项 $F$ 与依赖窗宽的目标系数 $A$。存在共同起点阈值 $U_0>0$。对每个允许的阶数 $m$ 与每个实测试频率 $\omega$，存在 $C>0$，使得对所有 $L>0$、$U\ge U_0$ 与 $T>0$，调制后的余项在 $[U,U+T]$ 上 Lebesgue 可积，且
+
+$$
+\left|\frac{1}{T}\int_U^{U+T}F(u)e^{-i\omega u}\,du-A(\omega)\right|
+\le \frac{C}{T}.
+$$
+
+在每个正窗宽，零频系数等于 $-\mu(q)q/((q-1)s)$。每个实际非平凡零点 $\rho$ 在 $\omega_\rho$ 处的系数等于 $-\mu(r)n_\rho b_{r,L}(\rho)$，其中 $b_{r,L}(\rho)\ne0$。
+:::
+
+::: proof
+对频率 $\lambda$，记 $t=e^{-sL}$。将 $te^{i\lambda L}-1$ 写成 $t(e^{i\lambda L}-1)-(1-t)$。由 $|e^{i\lambda L}-1|\le|\lambda|L$ 与 $tL/(1-t)\le 1/s$，得到
+
+$$
+\left|\frac{e^{(-s+i\lambda)L}-1}{1-e^{-sL}}\right|\le 1+\frac{|\lambda|}{s}.
+$$
+
+根原函数将每项系数除以其复指数。对于零点项 $\rho_k$，$\lambda=\operatorname{Im}(\rho_k)/r$ 是该指数的虚部，故 $|\lambda|$ 不超过该指数的模。估计系数范数时，新增的 $|\lambda|$ 因子被逆指数吸收。所得系数上界可和，且与 $L$ 无关。傅里叶误差用这些范数之和乘上其余频率的间隔倒数控制。算术项与余项的估计已经覆盖所有正窗宽。系数的恒等式见 [@thm-ch31-prime-window-even-fourier]。
+:::
+
+误差常数可以依赖 $\omega$。在非零频率处，要恢复的系数仍依赖窗宽。
+
+::: {.theorem #thm-ch31-prime-window-detuned-fourier title="测试频率附近的有限时长响应" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffFourierResolution.signed_window_even_cutoff_detuned_fourier"}
+假设 RH。沿用 [@thm-ch31-prime-window-fourier-uniform-width] 的偶数截断、归一化带符号余项 $F_L$ 与系数 $A_L(\omega)$，下标表示窗宽。记 $K(v)=\int_0^1 e^{-ivt}\,dt$。存在共同起点阈值 $U_0>0$。对每个允许的截断阶数 $m$ 和实参考频率 $\omega$，存在 $C>0$，使得对所有 $L>0$、$U\ge U_0$、$T>0$、$R\ge0$ 及满足 $|v|\le R$ 的实数 $v$，下式中的被积函数 Lebesgue 可积，且
+
+$$
+\left|\frac{1}{T}\int_U^{U+T}F_L(u)e^{-i\omega u}e^{-iv(u-U)/T}\,du
+-A_L(\omega)K(v)\right|\le\frac{C(1+R)}{T}.
+$$
+
+对每个正窗宽，$A_L(0)=-\mu(q)q/((q-1)s)$。若非平凡零点 $\rho$ 的解析重数为 $n_\rho$，则 $A_L(\omega_\rho)=-\mu(r)n_\rho b_{r,L}(\rho)$，其中 $b_{r,L}(\rho)\ne0$。
+:::
+
+::: proof
+窗宽一致估计用同一常数控制平均区间每段前缀上的原函数 $\int_U^x(F_L(u)e^{-i\omega u}-A_L(\omega))\,du$。把复数乘积展开成实部和虚部的各项，再对附加相位分部积分。该相位的模为一，导数的模为 $|v|/T$，故端点项的界与 $T$ 无关，导数项至多为常数乘 $|v|$。最后除以 $T$。对常数系数项作代换 $u=U+Tt$，便得到响应 $K(v)$，即单频检验使用的指数平均。 [指数平均](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
+:::
+
+附加相位对应频率 $\omega+v/T$，相位校正 $e^{ivU/T}$ 将偏移相位的原点放在左端点。若 $v\ne0$，则 $K(v)=e^{-iv/2}\sin(v/2)/(v/2)$，而 $K(0)=1$。该界给出对有界偏移 $v$、所有正窗宽及足够晚起点的一致收敛，极限为 $A_L(\omega)K(v)$。常数可以依赖参考频率。
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::

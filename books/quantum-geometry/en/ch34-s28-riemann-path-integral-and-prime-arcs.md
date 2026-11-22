@@ -1151,6 +1151,46 @@ Under RH, a given ordinate identifies a single point on the critical line. The m
 
 If $\mu(r)\ne0$, a nonzero tested frequency has a nonzero coefficient exactly when $1/2+ir\omega$ is an actual zero. In that case division by $-\mu(r)b_{r,L}(1/2+ir\omega)$ gives its analytic multiplicity. For squareful $r$, all nonzero-frequency coefficients vanish. The error estimate allows dependence on the tested frequency and the fixed width. The bound uniform over all positive widths at frequency zero is [@thm-ch31-prime-window-even-cesaro].
 
+::: {.theorem #thm-ch31-prime-window-fourier-uniform-width title="Fourier recovery is uniform over positive window widths" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffUniformWidth.signed_window_even_cutoff_fourier_uniform_width"}
+Assume RH. Use the same even cutoff, normalized residual $F$, and width-dependent target $A$ as in [@thm-ch31-prime-window-even-fourier]. There is a common threshold $U_0>0$. For each admissible order $m$ and each real tested frequency $\omega$, there is a $C>0$ such that for every $L>0$, $U\ge U_0$ and $T>0$, the modulated residual is Lebesgue integrable on $[U,U+T]$ and
+
+$$
+\left|\frac{1}{T}\int_U^{U+T}F(u)e^{-i\omega u}\,du-A(\omega)\right|
+\le \frac{C}{T}.
+$$
+
+At every positive width the zero-frequency coefficient equals $-\mu(q)q/((q-1)s)$. For each actual nontrivial zero $\rho$ the coefficient at $\omega_\rho$ equals $-\mu(r)n_\rho b_{r,L}(\rho)$, with $b_{r,L}(\rho)\ne0$.
+:::
+
+::: proof
+For a mode $\lambda$, put $t=e^{-sL}$. Split $te^{i\lambda L}-1$ into $t(e^{i\lambda L}-1)-(1-t)$. The estimate $|e^{i\lambda L}-1|\le|\lambda|L$ and $tL/(1-t)\le 1/s$ give
+
+$$
+\left|\frac{e^{(-s+i\lambda)L}-1}{1-e^{-sL}}\right|\le 1+\frac{|\lambda|}{s}.
+$$
+
+The root primitive divides each coefficient by its complex exponent. For an occurrence $\rho_k$, $\lambda=\operatorname{Im}(\rho_k)/r$ is the imaginary part of that exponent, so $|\lambda|$ is bounded by the exponent's modulus. The new factor of $|\lambda|$ cancels against the inverse exponent in the norm estimate. The resulting coefficient majorant is summable and independent of $L$. The Fourier error uses the sum of these norms multiplied by the reciprocal of the separation from the other frequencies. The arithmetic and remainder bounds already allow every positive $L$. The identities for the coefficients follow from [@thm-ch31-prime-window-even-fourier].
+:::
+
+The error constant can depend on $\omega$. The coefficient being recovered still depends on the width at nonzero frequencies.
+
+::: {.theorem #thm-ch31-prime-window-detuned-fourier title="The finite-time response near a tested frequency" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffFourierResolution.signed_window_even_cutoff_detuned_fourier"}
+Assume RH. Use the even cutoff, normalized signed residual $F_L$, and coefficient $A_L(\omega)$ from [@thm-ch31-prime-window-fourier-uniform-width], with the subscript recording the width. Write $K(v)=\int_0^1 e^{-ivt}\,dt$. There is a common threshold $U_0>0$. For each admissible cutoff $m$ and real reference frequency $\omega$, there is $C>0$ such that for every $L>0$, $U\ge U_0$, $T>0$, $R\ge0$, and real $|v|\le R$, the integrand below is Lebesgue integrable and
+
+$$
+\left|\frac{1}{T}\int_U^{U+T}F_L(u)e^{-i\omega u}e^{-iv(u-U)/T}\,du
+-A_L(\omega)K(v)\right|\le\frac{C(1+R)}{T}.
+$$
+
+For each positive width, $A_L(0)=-\mu(q)q/((q-1)s)$. At a nontrivial zero $\rho$ of analytic multiplicity $n_\rho$, $A_L(\omega_\rho)=-\mu(r)n_\rho b_{r,L}(\rho)$, with $b_{r,L}(\rho)\ne0$.
+:::
+
+::: proof
+The uniform-width estimate bounds the primitive $\int_U^x(F_L(u)e^{-i\omega u}-A_L(\omega))\,du$ by the same constant on every prefix of the averaging interval. Apply integration by parts to the real and imaginary coordinate products against the extra phase. Its modulus is one and its derivative has modulus $|v|/T$, so the endpoint contribution is bounded independently of $T$, and the derivative contributes at most a constant times $|v|$. Divide by $T$. The substitution $u=U+Tt$ gives the response $K(v)$ for the constant coefficient, the same exponential average used in the single-frequency test. [Exponential average](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
+:::
+
+The extra phase corresponds to the frequency $\omega+v/T$, with the phase correction $e^{ivU/T}$ referencing the offset to the left endpoint. For $v\ne0$, $K(v)=e^{-iv/2}\sin(v/2)/(v/2)$, with $K(0)=1$. The bound gives convergence to $A_L(\omega)K(v)$ uniformly in bounded offsets $v$, positive widths, and late starts. The constant can depend on the reference frequency.
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::
