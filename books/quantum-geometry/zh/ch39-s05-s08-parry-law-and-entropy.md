@@ -1,6 +1,6 @@
 # 35.6.8 帕里平稳律、逃逸对计数与分形视界熵问题 {#sec-ch39-p2e-entropy}
 
-在讨论“熵”之前，先区分三个层次：有限状态的马尔可夫定律、整数时间轴上完整路径的可测坐标重建，以及对所有不变概率测度的熵比较。路径律、度量熵上界及其达到性、拓扑熵公式已有对应的 Lean 核验。最大熵测度的唯一性也有 Lean 定理，下文给出推导并讨论诱导回归熵。分形纠缠标度仍是开放问题。
+在讨论“熵”之前，先区分三个层次：有限状态的马尔可夫定律、整数时间轴上完整路径的可测坐标重建，以及对所有不变概率测度的熵比较。路径律、度量熵上界及其达到性、拓扑熵公式已有对应的 Lean 核验。最大熵测度的唯一性也有 Lean 定理，下文给出推导并讨论诱导回归熵。下文手工推导长度为 $R_n$ 的一维区间的 $O(R_n)$ 熵上界，并在有限 Tribonacci 平面斑块的子瓦片切口上用贝尔对实现 $S(\rho_{A_n})=\Theta(R_n^{D_F})$。采用平移不变或全格统一局域规则的有隙实现、实际 Tribonacci 跃迁链的 Slater 态空间纠缠、一般 $K\ge4$ 非各向同性皮索窗，以及余维一面积律失效的谱隙与局域性充要判据仍是开放问题。
 
 在马尔可夫链侧，对任意阶数 $k \ge 2$，令互反帕里参数为 $p = \operatorname{parryParameter}(k) = \beta_k^{-1}$。在带绝对符号位与当前连续 `1` 游程长度的有向状态空间 $\operatorname{State}(k) = \mathrm{Bool} \times \operatorname{Fin} k$ 上，定义后缀权重 $w_j = \operatorname{suffixWeight}(k, p, j) = \sum_{a=0}^{k-j-1} p^{a+1}$、归一化常数 $Z_k = \sum_{j=0}^{k-1} p^j w_j$、符号翻转对合 $\operatorname{flip}(b, j) = (!b, j)$，以及重置转移核 $P_k = \operatorname{kernel}(k, p)$：从状态 $s = (b, j)$ 出发，以概率 $p / w_j$ 翻转符号并重置游程至 $(!b, 0)$，当 $j + 1 < k$ 时以概率 $p\, w_{j+1} / w_j$ 保持符号并推进游程至 $(b, j + 1)$，其余转移概率为 $0$。对应状态分布定义为
 
@@ -622,10 +622,32 @@ $$
 最后，展开平稳后缀权重。对每个 $d$，$p^d$ 在归一化和中出现 $d$ 次，因此 $\sum_{d=1}^K d\,p^d=\operatorname{normalizer}(K)=1/\mu(A)$。把 $\log(p^d)=d\log p$ 代回即得第二个等号。完整证明由 Lean 内核检查。
 :::
 
-至于横向内部空间的劳齐分形边界维数 $D_F = \dim_H(\partial\mathcal{R}_K)$ 是否会在量子多体切投态中诱导出反常的分形边界纠缠标度，在严格数学物理中仍是一道悬而未决的开放问题：
+**劳齐分形边界维数的有向图导出、一维线性上界与平面稳定子构造（手工推导，用到文献结果）。** 令 $\beta_3>1$ 满足 $\beta_3^3=\beta_3^2+\beta_3+1$，$\alpha$ 为其一个非实共轭根，$r=|\alpha|=\beta_3^{-1/2}$，最后一个等号来自三根之积。写 $\mathcal R=\mathcal R_3$ 表示整块 Tribonacci 劳齐瓦片，用 $U_1=\alpha\mathcal R$、$U_2=1+\alpha^2\mathcal R$、$U_3=1+\alpha+\alpha^3\mathcal R$ 表示三块子瓦片。合法地址禁止连续 $3$ 个 $1$。设 $K_i$ 为已连续读过 $i$ 个 $1$ 时容许的尾和集。对 $K_i\cap(K_j+\delta)$，同时读两边的合法数位 $u,v$，将进位 $\delta$ 更新为 $(\delta+v-u)/\alpha$。每条边的相似比为 $r$。合法尾差的模小于 $4$，所以只保留模不超过 $4$ 的进位，再删去无法无限延伸的状态。内部接缝 $J=U_1\cap(U_2\cup U_3)$ 的初始数位为 $0,1$，初始尾差为 $1/\alpha$。外边界来自与平移格 $\mathbb Z(\alpha-2)+\mathbb Z(\alpha^2-\alpha-2)$ 的非零邻瓦接触。
+
+论文一的 Tribonacci contacts 引理列出了合并两地址互换后的有限图。循环强连通部分的全部简单有向环都经过同一顶点，长度是 $3,3,4$，故该部分是本原的，佩龙根 $\rho$ 满足 $\rho^{-3}+\rho^{-3}+\rho^{-4}=1$，亦即 $\rho^4-2\rho-1=0$。内外接触种子都到达这一部分，深度 $m$ 的路径数为 $\Theta(\rho^m)$。外边界维数的文献结果见 Ito–Kimura（1991）和 Messaoudi（2000）。沿用 Mauldin–Williams（1988）的图导向维数框架。在维数公式 $\rho r^{D_F}=1$ 中，所需的覆盖与下界也可直接由论文一的分离估计得到。不同合法长度 $m$ 前缀的实嵌入互异，最高不同位决定实数大小。其差是非零代数整数，实嵌入的模至多 $\beta_3^m/(\beta_3-1)$，取域范数得到复投影的间距至少 $\sqrt{\beta_3-1}\,r^m>\frac{9}{10}r^m$。每条深度 $m$ 路径给出一个半径至多 $4r^m$ 的柱集；半径 $r^m$ 的球只遇到有界多个有序前缀对，因为两边的前缀中心各自分离，从给定的定向种子出发，路径由按该种子方向记录的有序前缀对确定。按正佩龙权重 $w$ 给每条 $i\to j$ 边分配概率 $w_j/(\rho w_i)$，每个柱集的路径质量至多为常数乘 $\rho^{-m}$。质量分布原理给出豪斯多夫下界，柱集覆盖给出盒维数上界。因此外边界、$\partial U_1$ 与接缝 $J$ 的豪斯多夫维数、上盒维数和下盒维数相同，且
+
+$$
+D_F=\dim_H(\partial\mathcal R)=\dim_B(\partial\mathcal R)
+=\frac{2\log\rho}{\log\beta_3}\approx 1.09336416,\qquad \rho\approx 1.39533699.
+$$
+
+**一维切投区间的上界（手工推导）。** 若点集的最小间距为 $a>0$，长度为 $R$ 的区间至多含 $1+R/a$ 个站点。每点的希尔伯特空间维数至多为 $d_{\mathrm{loc}}<\infty$ 时，区间约化态的熵至多为 $(1+R/a)\log d_{\mathrm{loc}}=O(R)$。由于 $D_F>1$，一维区间上无法实现 $R^{D_F}$ 的双侧熵标度。
+
+**平面切投斑块上的局域贝尔对（手工推导）。** 令 $W_n$ 为长度 $n\ge1$ 的合法字，并取
+
+$$
+\begin{aligned}
+R_n&=r^{-n},\qquad X_n=\left\{\alpha^{-n}\sum_{j=0}^{n-1}d_j\alpha^j:d\in W_n\right\},\\
+A_n&=X_n\cap\alpha^{-n}U_1,\qquad B_n=X_n\setminus A_n .
+\end{aligned}
+$$
+
+把 $\mathbb Z[\beta_3]$ 中实嵌入在 $[0,1)$ 的元素投到复嵌入平面，得到包含这些斑块的切投点集。斑块间距至少 $\frac{9}{10}$，截断无限地址表明，尺度化瓦片内任一点到 $X_n$ 的距离至多为 $4$。合法字计数从 $1,2,4$ 开始，满足 Tribonacci 递推，故 $\beta_3^n\le |X_n|\le 2\beta_3^n$。在论文一的接触图中，把合并的地址互换展开为两个方向，并用每条边记录的互换跟踪原始地址的顺序。只保留第一个定向数位为 $0$ 的边，反复删除无后继的顶点，便删尽整个定向图。交换地址后，第二个定向数位也满足同样的结论。因此末尾补零的有限前缀不在接缝上，$A_n$ 恰是首位为 $0$ 的点。连接 $A_n,B_n$ 中距离至多 $8$ 的点。从定向接缝种子出发，沿深度 $n-1$ 的路径按种子方向保留有序前缀对，得到 $\Theta(\rho^{n-1})$ 个不同的跨切口前缀对，两端各距同一个接触点至多 $4$。均匀间距将图的度数限制在常数 $\Delta$ 内，每条极大匹配的边至多覆盖 $2\Delta-1$ 条相邻边，所以极大匹配的大小 $m_n$ 有同阶下界。反过来，跨边的 $A_n$ 端点在距离 $8$ 以内必遇到 $\alpha^{-n}\partial U_1$；该边界可用 $O(\rho^{n-1})$ 个半径 $4$ 的球覆盖，把半径扩大到 $12$ 后每球仍只含有界多个站点。这给出 $m_n=O(\rho^{n-1})$。
+
+每点放一个量子比特，每条匹配边放一个态 $\Phi=(\lvert00\rangle+\lvert11\rangle)/\sqrt2$，未配对点放 $\lvert0\rangle$。在匹配边上取 $I-\lvert\Phi\rangle\langle\Phi\rvert$，在未配对点取 $I-\lvert0\rangle\langle0\rvert$。这些投影项的支撑互不相交，因而对易。所得哈密顿量具有唯一的张量积稳定子基态、精确谱隙 $1$ 与相互作用距离上界 $8$。每条跨边贝尔对贡献 $\log 2$，故存在与 $n$ 无关的正数 $c_-,c_+$，使 $c_-R_n^{D_F}\le S(\rho_{A_n})=m_n\log 2\le c_+R_n^{D_F}$，因为 $\rho^n=R_n^{D_F}$。此处的区域是尺度化子瓦片，直径与 $R_n$ 同阶。几何接触与匹配计数见论文一的 *Tribonacci contacts* 与 *A planar local Bell-pair construction*，投影哈密顿量由这组互不相交的贝尔对直接给出。
 
 ::: {.problem #prob-ch39-p2e-fractal-horizon title="开放问题：皮索切投量子多体系统的劳齐分形视界纠缠标度"}
-设阶数 $K \ge 3$ 的皮索切投点集或局域受约束多体哈密顿量，其内部接受窗 $\mathcal{R}_K$ 具有豪斯多夫维数严格大于整数余维的拓扑分形边界（例如 $K = 3$ 时文献结果给出 $D_F = \dim_H(\partial\mathcal{R}_3) \approx 1.09336 > 1$）。是否存在严格构造的一族局域有能隙基态或切投编码量子态，当区域特征尺度 $R \to \infty$ 时，其跨边界双体纠缠熵 $S_{\mathrm{ent}}(R)$ 严格服从由内部劳齐边界维数 $D_F$ 支配的反常标度律（如主项 $S_{\mathrm{ent}}(R) \asymp R^{D_F}$ 或精确锁定系数的对数/次主导分形修正项），并能给出标准余维一面积律失效或保持的充要谱间隙与局域性判据？在本书框架内，任何诸如 $S_{\mathrm{ent}} \propto R^{D_F}$ 的“分形视界面积律”表述均作为待证开放问题（`OPEN`）与启发性物理构想（`MODEL`）列出，绝不作为已证形式定理或引力面积律定理宣称。
+**仍待解决（`OPEN`）。** 上文给出一维区间的 $O(R_n)$ 上界，并在有限 Tribonacci 平面斑块的子瓦片切口上用局域对易投影哈密顿量实现 $S(\rho_{A_n})=\Theta(R_n^{D_F})$。逐站点旋转可产生同样的纠缠与谱隙，并使基态超出稳定子态类。加入湮灭基态的非对易局域正项也可保留基态与正谱隙。对于平移不变或全格统一的局域有隙哈密顿量，若相互作用规则独立于指定切口及其匹配，何时会出现 $R_n^{D_F}$ 的主项或分形次主项？实际 Tribonacci 跃迁链在指定填充下的 Slater 态有怎样的空间纠缠标度？一般的 $K\ge4$ 非各向同性皮索接受窗能否产生这类标度？在指定空间切口后，哪些谱隙与局域性条件是余维一面积律失效的充要判据？
 :::
 
 ::: {.remark #rem-ch39-p2e-physical-tribonacci-interface title="物理 Tribonacci 文献模型与有限 Slater 前缀应用"}
@@ -772,7 +794,7 @@ $$
 
 Peschel，[*Calculation of reduced density matrices from correlation functions*](https://arxiv.org/pdf/cond-mat/0212631v1)，式 (8)–(11)，给出约化自由费米密度矩阵的模式描述。Klich，[*Lower entropy bounds and particle number fluctuations in a Fermi sea*](https://arxiv.org/pdf/quant-ph/0406068v2)，式 (4)、(7) 及其后的 $\operatorname{diag}(1-d_i,d_i)$ 因子与式 (11)，给出对应的投影模式分解、乘积谱与熵公式；这里 $d_i=\nu_i$，而 $\ell$ 是空间区域的格点数。Klich 的式 (7) 使用适当的费米张量积；上面的前缀推导另外明确了自然格点次序与字面张量部分迹之间的对应。
 
-**同一 Slater 态的二点函数。** 仍取上述实际向量，记 $\psi_V(x)=\langle x\mid\Psi_V\rangle$、$\rho_V=\lvert\Psi_V\rangle\langle\Psi_V\rvert$，并使用原格点顺序下的 [`JordanWigner.fullC`](lean:D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC) 作为 $c_i$。其[占据基矩阵元](lean:D5/S3/Quantum/SpinChains/SupersymmetricFermion/HardCoreCompression.fullC_entry) 在且仅在输入占据 $i$、输出将该位清空时非零，系数为 $(-1)^{n_S(i)}$，其中 $n_S(i)=|\{a\in S:a<i\}|$。由这些原始算符与行列式振幅可直接得到
+**同一 Slater 态的二点函数。** 仍取上述实际向量，记 $\psi_V(x)=\langle x\mid\Psi_V\rangle$、$\rho_V=\lvert\Psi_V\rangle\langle\Psi_V\rvert$，并使用原格点顺序下的 [`JordanWigner.fullC`](https://github.com/the-omega-institute/trureturing/blob/1691f49c1d5198ff7cf7354f5f318d08184c6436/D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.lean#L57) 作为 $c_i$。其[占据基矩阵元](lean:D5/S3/Quantum/SpinChains/SupersymmetricFermion/HardCoreCompression.fullC_entry) 在且仅在输入占据 $i$、输出将该位清空时非零，系数为 $(-1)^{n_S(i)}$，其中 $n_S(i)=|\{a\in S:a<i\}|$。由这些原始算符与行列式振幅可直接得到
 
 $$
 \begin{aligned}
@@ -836,7 +858,7 @@ $$
 
 Dereziński 的 [§7.1–§7.2、式 (7.51)–(7.54)](https://www.fuw.edu.pl/~derezins/clifford.pdf) 给出占据基与 Slater 约定；其定理 8.1，特别是式 (8.103) 的 $\omega_\pi(d\Gamma(h))=\Tr(\pi h)$，给出对应的一体期望公式。Peschel 的式 (7)、(9)–(10) 使用 $C$；其式 (12) 中的转置对复模式不能略去。Peschel 还指出，对非 Slater 态，按同一二点函数重建的自由费米密度矩阵一般不能复现其他期望值，故关联矩阵相合不能确定一般密度矩阵。更一般的粒子数规范不变高斯密度矩阵也有上述谱配方，但须另给高斯性假设；这与从指定行列式振幅出发的推导范围不同。含 $0$ 或 $1$ 时，不能直接套用 Peschel 式 (12) 的矩阵对数。任意非前缀格点子集还涉及 Jordan–Wigner 字符串与费米子系统选择，须另行建立对应；地址数位切口也仍不能充当物理空间切口。
 
-Moustaj–Krebbekx–Morais Smith 的 *Anomalous Polarization in One-dimensional Aperiodic Insulators*（[10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003)，§IV–V、§V.C 与附录 B）讨论含在位项的泵浦族及指定填充，其关联矩阵方法依赖所选 Slater／高斯态与子系统，不能直接移用于任意编码态。$\delta_{\rho,j}$ 只是单粒子能量到零的距离；多体激发隙还需填充、粒子数扇区与间隙约定。上述极限只处理这一单粒子谱前提：物理长度 $R$ 与内部窗坐标的对应、空间切口与劳齐边界的联系及熵标度，仍需另外建立；[@prob-ch39-p2e-fractal-horizon] 的完整问题仍然保留。
+Moustaj–Krebbekx–Morais Smith 的 *Anomalous Polarization in One-dimensional Aperiodic Insulators*（[10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003)，§IV–V、§V.C 与附录 B）讨论含在位项的泵浦族及指定填充，其关联矩阵方法依赖所选 Slater／高斯态与子系统，不能直接移用于任意编码态。$\delta_{\rho,j}$ 只是单粒子能量到零的距离；多体激发隙还需填充、粒子数扇区与间隙约定。该单粒子极限与上面的平面贝尔对构造分别适用于不同的切口。指定填充下，实际链的空间切口与内部窗几何之间的关系仍须另行建立。该链 Slater 态的空间纠缠是 [@prob-ch39-p2e-fractal-horizon] 中的开放问题。
 :::
 
 **不连续格点的手算例。** 在按 $0,1,2,3$ 排列的四个格点上取正交归一轨道 $u=(e_0+e_2)/\sqrt{2}$ 和 $v=(e_1+e_3)/\sqrt{2}$，保留 $I=\{0,2\}$。按递增格点顺序取两行的行列式，得到
@@ -1546,6 +1568,25 @@ $$
 
 按内部被动基归一化的循环构成整系数基。它们的 Gram 矩阵在有理数上可逆，因为任何非零系数组合都在某个内部被动基坐标上非零，自内积是正的平方和。第二项保证由伴随矩阵求出的唯一系数向量是整系数。第一项保证所得源循环在每个收缩中与指定读数配对相同。两者的差是收缩循环，在收缩的一组基上配对均为零，因此差为零。判据把联合相容性与同一个源循环的整数性放在同一组有限计算中。
 
+以 $A_M$ 记拟阵 $M$ 的联合回路限制。它的源格 $L_M$ 由整系数增广顶循环组成，目标格 $T_M$ 是各回路收缩循环格的直和。记 $C(M)=L_M^\vee/\operatorname{im} A_M^\vee$，其中 $\vee$ 取到 $\mathbb Z$ 的线性对偶。
+
+::: {.theorem #thm-joint-circuit-direct-sum-tensor title="联合回路限制的转置余核在直和下的张量公式" lean="D5/S3/Combinatorics/Matroids/DirectSumCircuitTorsion.joint_circuit_transpose_cokernel_tensor"}
+设有限有序拟阵 $M,N$ 的地集互不相交，且 $M$ 的每个顶点先于 $N$ 的每个顶点。按此顺序连接增广顶循环，得到 $L_M\otimes_{\mathbb Z}L_N\cong L_{M\oplus N}$。相应的对偶识别把纯张量 $f\otimes g$ 作用在连接循环 $u*v$ 上的值给为 $f(u)g(v)$。通过这个识别，把 $[f]\otimes[g]$ 送到 $[f\otimes g]$，得到
+$$
+C(M)\otimes_{\mathbb Z} C(N)\cong C(M\oplus N).
+$$
+:::
+
+直和的回路完全落在一个分量中，收缩它只改变该分量。左侧回路的读数直接分解成左侧的限制与右侧的坐标读数。右侧回路多出一个符号，来自将回路的余维一面移过左侧的面。这个符号是整数单位。于是直和的转置关系由两类关系张量生成，每一类取一个分量的回路关系，并让另一分量的坐标读数任意变化。
+
+::: {.theorem #thm-joint-circuit-rank-one-gcd title="两个秩一分量的整系数提升障碍" lean="D5/S3/Combinatorics/Matroids/JointCircuitLiftingObstruction.rank_one_sum_joint_lifting_obstruction"}
+在上述有序直和中，若两个分量的基恰好是各自地集的单点集，地集大小分别为 $m,n$，则联合限制像的饱和格模去联合限制像，得到阶为 $\gcd(m,n)$ 的循环群。饱和格包含那些有非零整数倍落在联合限制像中的目标元。
+:::
+
+每个秩一分量的回路都是一对顶点，回路读数给出两个单点系数之差。因此单点求值在转置余核中代表同一生成元。增广边界给出它们的和为零。若地集大小为 $m$，取一个循环，使各单点系数为 $1$，并在选定顶点把系数改为 $1-m$。在该循环上求值再模 $m$，就把余核生成元送到 $1$，故其阶恰为 $m$。
+
+非空地集上的联合限制是单射。在 Smith 基下，它的像由整数倍的目标基向量张成。饱和格保留这些坐标，去掉整数倍的限制。模去原联合限制像后，留下的循环因子正好对应转置余核的对角系数。取两个秩一分量的张量积，生成元同时被 $m,n$ 消去，Bézout 等式与模 $\gcd(m,n)$ 的乘积读数给出其准确阶数。比如地集大小为 $2,3$ 时，每个有理相容的整系数读数都有整系数提升。大小均为 $2$ 时，障碍群为 $\mathbb Z/2\mathbb Z$。
+
 **方向复形的约化整数同调（书面推导）。** 设至少有一个非空极大面，记 $d=n-h$，令 $m$ 为满足 $R(B)=B$ 的极大面数。上面的商映射是同伦等价，因此把 $X$ 的约化整数同调与楔和的约化整数同调相识别。每个球面都有以基点为子复形的 CW 结构，因此相应球面在有限楔和的约化同调中给出一个直和项。每个 $S^{d-1}$ 在 $d-1$ 次贡献一个 $\mathbb Z$，在其余非负次数均为零。因此 $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$，而 $k\ne d-1$ 时 $\widetilde H_k(X;\mathbb Z)=0$。[Hatcher，《Algebraic Topology》，推论 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 若没有非空极大面，原实现为空，所有非负次数的约化整数同调都为零。若有极大面且 $d=1$，楔和是有 $m+1$ 个点的离散空间，约化零次同调的生成元为 $[p_B]-[p_0]$，其中 $p_B$ 是极大面 $B$ 贡献的点，$p_0$ 是公共基点。若有极大面且 $m=0$，楔和为一点，所有约化同调群均为零。在极大面族非空时，约化欧拉示性数为 $(-1)^{d-1}m$。与前面的 Tutte 取值相比较，得到 $m=2^d T_M(1,1/2)$。
@@ -1888,7 +1929,7 @@ Adamczewski，*Symbolic discrepancy and self-similar dynamics*（[10.5802/aif.20
 
 Hermisson 对多字母替代的边缘重整化特征值与无穷动力学指数的讨论（[10.1088/0305-4470/33/1/304](https://doi.org/10.1088/0305-4470/33/1/304)，[arXiv:cond-mat/9808238](https://arxiv.org/abs/cond-mat/9808238)，第 11 页）没有在该处给出本字的特定标度。Hida 的 Fibonacci XXZ 分析（[10.1143/JPSJ.73.2296](https://doi.org/10.1143/JPSJ.73.2296)，[arXiv:cond-mat/0404606v2](https://arxiv.org/abs/cond-mat/0404606v2)）中，式 (38) 的 $\Delta E\sim\exp[-\kappa(\log N)^2]$ 属于强弱耦合分离下的相互作用各向同性模型的微扰重整化；式 (28) 的自由 XY 情形给出的是有限指数幂律 $\Delta E\sim N^{-z}$。这些结论不替代对本链实际有限矩阵、端点、奇偶截断与所求谱量的核对。
 
-[@thm-ch39-p2e-tribonacci-prefix-log-refutation] 排除了把该统一对数区段界当作逆矩阵估计前提的路线。[@thm-ch39-p2e-tribonacci-uniform-log-squared] 提供的是实际词上、对起点一致的交替电荷控制；结合前面的有限乘积恒等式，它可作为分析跃迁比值的组合输入。它本身没有给出完整逆矩阵的范数或质量估计，也没有反驳某个多项式谱隙界。[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 另用具体正电荷前缀和一个完整逆矩阵元素证明 $\delta_{\rho,j}\to0$；下文 [@ex-ch39-p2e-tribonacci-prefix-rate] 已按同一组实际跃迁、奇数重复窗口与完整逆矩阵质量估计的前提，完成更强的 $73728/N_j$ 纸面应用，并给出参数一致收敛；它不由交替电荷界单独推出。沿前述 Slater 态路线讨论空间纠缠时，还须构造实际占据投影并分析空间压缩；物理态、空间切口与劳齐边界的对应及 [@prob-ch39-p2e-fractal-horizon] 的熵标度仍需独立建立。
+[@thm-ch39-p2e-tribonacci-prefix-log-refutation] 排除了把该统一对数区段界当作逆矩阵估计前提的路线。[@thm-ch39-p2e-tribonacci-uniform-log-squared] 提供的是实际词上、对起点一致的交替电荷控制；结合前面的有限乘积恒等式，它可作为分析跃迁比值的组合输入。它本身没有给出完整逆矩阵的范数或质量估计，也没有反驳某个多项式谱隙界。[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 另用具体正电荷前缀和一个完整逆矩阵元素证明 $\delta_{\rho,j}\to0$；下文 [@ex-ch39-p2e-tribonacci-prefix-rate] 已按同一组实际跃迁、奇数重复窗口与完整逆矩阵质量估计的前提，完成更强的 $73728/N_j$ 纸面应用，并给出参数一致收敛；它不由交替电荷界单独推出。沿 Slater 态路线还须构造占据投影并分析其空间压缩。该链的空间切口与内部窗的关系仍须建立。该链 Slater 态的空间纠缠标度见 [@prob-ch39-p2e-fractal-horizon]。
 :::
 
 ::: {.remark #rem-ch39-p2e-tridiagonal-localization title="保留两端残差的三对角算子下范数局部化"}
@@ -1932,7 +1973,7 @@ $$
 
 这一标量复 Hilbert 空间应用对应 Chandler-Wilde、Chonchaiya 与 Lindner 的局部化估计（§5.1，命题 5.1、推论 5.2，第 765–766 页，第 767 页取正弦窗）。谱包含关系及误差常数的最优性各需另证。[文献原文，*J. Spectr. Theory* **14**, 719–804](https://doi.org/10.4171/JST/514)
 
-若要沿此路线推出 Tribonacci 有限开链的谱隙界，仍须证明 $0$ 属于相应整轴模型的谱，把实际词区段连同两侧各一层邻接站点转植进指定的有限开前缀，并核对长度比例及小尺度情形。[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 直接在有限矩阵上证明。物理态、空间切口与劳齐边界的对应，以及 [@prob-ch39-p2e-fractal-horizon] 的纠缠熵标度，仍是独立问题。
+若要沿此路线推出 Tribonacci 有限开链的谱隙界，仍须证明 $0$ 属于相应整轴模型的谱，把实际词区段连同两侧各一层邻接站点转植进指定的有限开前缀，并核对长度比例及小尺度情形。[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 直接在有限矩阵上证明。实际链的空间切口与内部窗几何之间的关系仍需建立。该链 Slater 态的空间纠缠标度见 [@prob-ch39-p2e-fractal-horizon]。
 :::
 
 另一条有限矩阵路线利用奇数长度的重复：奇数平移把偶数键与奇数键互换，前代入中的两串跃迁比值因而可以配对。下面的下界把这一抵消机制写成实际逆矩阵的定量结论。
@@ -2176,7 +2217,7 @@ $$
 这是所列窗口构造、完整逆矩阵质量估计与有限维谱转换的纸面应用推导，不带独立 Lean 验证徽章；其参数对应与形式化来源见[形式化接口](https://github.com/the-omega-institute/trureturing/issues/30166)。有限开链的这一谱界不构造多体基态，也不确定空间切口的纠缠熵或劳齐边界的维数。
 :::
 
-上例给出指定偶数开前缀的纸面 $1/N_j$ 界与趋零结论。分形熵标度仍需独立的物理态与空间切口论证；[@prob-ch39-p2e-fractal-horizon] 的这些部分保持开放。
+上例给出指定偶数开前缀的纸面 $1/N_j$ 界与趋零结论。平面子瓦片上的贝尔对给出了局域有隙实现。采用平移不变或全格统一规则、无须按指定切口预设匹配的局域有隙模型能否实现相应标度，见 [@prob-ch39-p2e-fractal-horizon]。
 
 前面的定量纸面应用已经给出更强的速率。另一个独立论证只需 [@thm-ch39-p2e-tribonacci-prefix-log-refutation] 中构造的实际前缀：奇数层的正电荷无界，因而可使完整逆矩阵的一个条目充分大。
 
@@ -2277,10 +2318,10 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
-这条单独的收敛定理只陈述每个固定正 $\rho$ 的全序列极限；它的单个逆矩阵条目论证不提供 $1/N_j$ 速率。前面的 [@ex-ch39-p2e-tribonacci-prefix-rate] 已用实际重复窗口与完整逆矩阵质量估计给出更强的 $73728/N_j$ 纸面界及参数一致收敛。两条论证的证据范围须分别保留；物理态、空间切口与分形熵标度仍需另外建立。
+这条单独的收敛定理只陈述每个固定正 $\rho$ 的全序列极限；它的单个逆矩阵条目论证不提供 $1/N_j$ 速率。前面的 [@ex-ch39-p2e-tribonacci-prefix-rate] 已用实际重复窗口与完整逆矩阵质量估计给出更强的 $73728/N_j$ 纸面界及参数一致收敛。两条论证的证据范围须分别保留。这条开链的切口与内部窗几何之间的关系仍须建立。下面的实验卡并列展示帕里平稳权重、有限逃逸对和诱导回归熵读数。
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
-**帕里平稳权重、有限逃逸对与回归熵对照卡（`entropy`）**：分栏呈现有向重置链的青色帕里平稳分布权重 $\pi_K$、有限观测竞技场中被品红标出的未区分逃逸对 $E(S)$，以及单独标注依据等级的移位熵 $\log_2\beta_K$ 与诱导回归熵读数；琥珀色标出当前选定的阶数 $K$，红色标签标示分形视界标度开放问题（[@prob-ch39-p2e-fractal-horizon]）。平稳律与逃逸对计数属 `LEAN ✓`；卡片的拓扑熵识别与阿布拉莫夫公式属 `文献结果`，实际无符号律的度量熵比较见 [@rem-ch39-p2e-abramov-literature] 的应用推导；分形面积律属 `OPEN`。
+**帕里平稳权重、有限逃逸对与诱导回归熵。** 青色表示重置链的帕里平稳权重 $\pi_K$，品红色表示有限观测场中未区分的逃逸对 $E(S)$，琥珀色标出当前阶数 $K$。卡片还给出拓扑熵 $\log_2\beta_K$ 与诱导回归熵读数，将拓扑熵识别与阿布拉莫夫公式标为文献结果，将一般分形视界律 $S_{\mathrm{ent}}\propto R^{D_F}$ 标为 `MODEL`。正文以手工推导证明有限平面子瓦片切口的贝尔对标度。平移不变或全格统一的局域有隙实现与一般 $K\ge4$ 非各向同性皮索窗仍是开放问题，参见 [@prob-ch39-p2e-fractal-horizon]。
 :::
 
 至此，我们可以把本节审视的全部八项概念汇总在一张无折行认识论总表之中，使每一环的形式内核、文献依托与诠释边界清晰对齐：
@@ -2294,7 +2335,7 @@ $$
 | **5. 克利福德线—面分解** | 三次闵可夫斯基实线性坐标嵌入 $E_\parallel^1 \oplus E_\perp^2$ 与内部复平面缩放旋子 $\beta_3^{-1/2}(\cos\vartheta + B_\perp\sin\vartheta)$ | `MODEL`（需显式声明基与度规，观察者线—面词典见 [@rem-ch39-p2e-unification-model]） |
 | **6. 自指收缩尺度对照** | 正实轴余弦端点 $\cos\theta^* = \theta^*$ [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint) 与三阶共轭范数 $|\alpha| = \beta_3^{-1/2}$ [`tribonacci_secondary_root_mul_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate) | `LEAN ✓`（各自端点与恒等式）+ `文献结果`（$\theta^*$ 超越性）+ `NUM`（$\approx 0.234\%$ 数值邻近，严格不等）+ `MODEL`（$\psi=\psi(\psi)$ 母题，[@ex-ch39-p2e-pisot-dottie-numerics]） |
 | **7. 跨切口编码纠缠秩** | 跨切口条件 $\tau(x)+\iota(y)<K$ 下的可达页秩充要矩形 $1 \le r_b \le R_b$ 与最大页熵 $\ln R_b$ [`complete_original_direct_rank_entropy`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy)（[@thm-ch39-p2e-direct-encoder-ranks]）及谱阻塞 [`actual_encoder_spectral_obstruction`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction) | `LEAN ✓`（秩等于 $K$ 仅在 $K \le R_b$ 时条件可达，非普适恒等）+ `NUM`（如 $R_0=6, R_1=5$）+ `文献结果`（黄金链与里德堡实验，[@rem-ch39-p2e-rydberg-anyon-literature]） |
-| **8. 平稳核、逃逸对与熵** | 有向重置链帕里平稳律 [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law)（[@thm-ch39-p2e-parry-escape-laws]）、实际双向律与柱集（[@thm-ch39-p2e-native-bilateral-parry-law]）、边界柱集不等式 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound) 与有限逃逸对判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | `LEAN ✓`（所引概率律与计数）+ [@thm-ch39-p2e-parry-ks-entropy]（同一无符号律的 KS 上界与达到性）+ [@thm-ch39-p2e-parry-ks-maximizer]（最大熵测度唯一性）+ `文献结果`（拓扑熵识别与首次回归阿布拉莫夫公式，[@rem-ch39-p2e-abramov-literature]）+ `OPEN`（分形视界纠缠标度，[@prob-ch39-p2e-fractal-horizon]） |
+| **8. 平稳核、逃逸对与熵** | 有向重置链帕里平稳律 [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law)（[@thm-ch39-p2e-parry-escape-laws]）、实际双向律与柱集（[@thm-ch39-p2e-native-bilateral-parry-law]）、边界柱集不等式 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound) 与有限逃逸对判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | 所引的概率律与计数+ [@thm-ch39-p2e-parry-ks-entropy]（同一无符号律的 KS 上界与达到性）+ [@thm-ch39-p2e-parry-ks-maximizer]（最大熵测度唯一性）+ `文献结果`（拓扑熵识别与首次回归阿布拉莫夫公式，[@rem-ch39-p2e-abramov-literature]）+ `手工推导`（一维熵上界与平面贝尔对）+ `OPEN`（平移不变或全格统一的局域有隙模型、实际 Tribonacci 跃迁链的 Slater 态空间纠缠、一般 $K\ge4$ 非各向同性皮索窗，以及余维一面积律失效的谱隙与局域性充要判据，[@prob-ch39-p2e-fractal-horizon]） |
 
 当我们在下面的综合实验室中把阶数从 $K = 2$ 拨向 $K = 3$ 再继续上推时，自指扩表语法的多切面几何结构便清清楚楚地浮现出来：$K = 2$ 时内部收缩空间还只是一条实轴线段；跨入 $K = 3$ 的瞬间，复共轭根在二维正交平面上旋出三支精确自覆盖、平面边界零测的劳齐分形内窗；而在每一个阶数上，已被 Lean 内核锁定的离散计数、多项式根圆盘、细化超度量、可达纠缠秩矩形与帕里平稳核构成了坚硬的绿色骨架，支撑起周围明确标界的经典文献、数值实验与跨学科几何诠释。穿越这座离散自指沙盘之后，让我们步入本章收官节 [§35.7 `trureturing` 的“黄金切投”形式原语与灵魂—遗迹吸引子的几何诠释](coda-s03-golden-cut-observers.md)，在闵可夫斯基切投模型集与有界间隙环面回归中完成第三十五章的合拢，随后迈入[第三十六章](ch38-observer-memory-pointer-and-ontological-qram.md)的梦境量子擦除与本体 QRAM 架构。
 

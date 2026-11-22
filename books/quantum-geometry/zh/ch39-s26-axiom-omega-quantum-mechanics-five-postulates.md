@@ -54,6 +54,16 @@
 
 **用布洛赫方向表示高维纯态（文献结果）。** 令 $d\ge2$、$n=d-1$，选定酉同构 $\mathbb C^d\simeq\operatorname{Sym}^n(\mathbb C^2)$。在这个对称张量空间中，一条射线可用一个非零的 $n$ 次二元齐次多项式表示，整体非零因子无关。这样的多项式在复数上唯一分解为 $n$ 个线性因子，次序和各因子的非零倍数无关。每个因子给出复射影直线上的一点，也就是一个布洛赫方向。用根表示时重根须计重，射影直线也包含无穷远点。于是 $n$ 个无序方向恰好确定原来的射线。例如 $d=3$ 时，两因子对应的张量为 $(u\otimes v+v\otimes u)/2$，交换两方向得到同一条射线。集体 $\mathrm{SU}(2)$ 同时刚性旋转所有方向。对于 $d>2$，一般的 $\mathrm{U}(d)$ 演化还能改变方向间的夹角。要把这些方向解释为可独立操控的物理部分，还须给出相应的制备、控制和读出。[Majorana 表示](https://doi.org/10.1007/s11128-011-0280-8)
 
+**用两个未知量子比特制备三能级纯态（手工推导）。** 两路输入各提供一份未知纯态，单位向量分别为 $u,v$。对两比特做一次投影测量，记录它们落在对称扇区还是反对称扇区。令 $S$ 交换两路，$P=(I+S)/2$ 是对称投影。采用 Lüders 仪器，成功分支将输入密度矩阵 $\rho$ 映为未归一的 $P\rho P$。对称结果标记成功，此时输出为 $P(u\otimes v)/\sqrt p$，即上段两方向所表示的三能级纯态。一次成功的概率为
+
+$$
+p=\|P(u\otimes v)\|^2=\frac{1+\lvert\langle u,v\rangle\rvert^2}{2}.
+$$
+
+两态正交时成功率为 $1/2$，表示同一条射线时为 $1$。仪器对所有方向使用同一测量。若另给两个方向的经典描述，就可以据此直接制备目标态。[Barnett、Chefles 与 Jex，*Comparison of two unknown pure quantum states*（2003），式 (1)–(2)](https://doi.org/10.1016/S0375-9601(02)01602-X)
+
+为什么一个固定量子信道无法让每组未知输入都确定性成功？取 $\lvert01\rangle$ 和 $\lvert+\rangle\otimes\lvert-\rangle$，其中 $\lvert\pm\rangle=(\lvert0\rangle\pm\lvert1\rangle)/\sqrt2$。这两组输入的内积绝对值为 $1/2$，而目标态分别为 $(\lvert01\rangle+\lvert10\rangle)/\sqrt2$ 和 $(\lvert00\rangle-\lvert11\rangle)/\sqrt2$，彼此正交。若这样的信道存在，测量输出就能完美区分这两个非正交输入。对所有输入都要求成功时精确输出目标的仪器，上式也给出每组输入可达到的最大成功率。[成功概率的最优性证明](https://github.com/the-omega-institute/trureturing-books/issues/928#issuecomment-7075691266)
+
 **把子结构称作系统（`MODEL`）。** 把这样的子结构当作一个系统（只在其中制备构型，完备检验是其中的极大正交族，操作是宿主中保持该子空间的操作），是另加的输入 [Sub]。重构文献中有对应的子空间公理：L. Hardy 的公理 3（[arXiv:quant-ph/0101012](https://arxiv.org/abs/quant-ph/0101012), 2001）、Ll. Masanes & M. P. Müller 的要求 3（*New J. Phys.* **13**, 063001, 2011）、B. Dakić & Č. Brukner 的公理 1（in *Deep Beauty*, ed. H. Halvorson, Cambridge Univ. Press, 2011, pp. 365–392）（`文献结果`）。那些公理断言一个限制与另一个独立给定的系统等价；[Sub] 没有可比较的独立系统，直接把限制宣布为系统。母公理自身的模型仍然只有 $S^1$ 与 $S^3$。
 :::
 
@@ -96,6 +106,8 @@
 ::: {.viz src="axiom-omega-five-qm-postulates-sandbox" preset="postulate3-roundtrip-born-gleason-busch" height="500"}
 往返读数、三叉戟与三次假设卡：$60^\circ$ 纯态沿对径 $Z$ 基给出往返玻恩概率 $\frac{3}{4} + \frac{1}{4} = 1$，而在经线三叉戟效应测量上迹公式总和恒为 $1$，直接排除冲到 $\frac{5}{4}$ 的奇三次反例（`rank_one_born_pairing_weight`、`gleason_representation` 与 `effect_density_representation` 为 `LEAN ✓`，三叉戟算例标 `NUM`）。
 :::
+
+**单次反射的二次律给出玻恩配对权重（手工推导）。** 在布洛赫球 $S^2$ 上，若 $f\ge0$ 且 $f(u)+f(-u)=1$，则 $0\le f\le1$，但仅凭这两条仍容许 $3x^2-2x^3$，其中 $x=(1+\langle v,u\rangle)/2$、$v$ 是固定纯态的布洛赫向量。论文二的 *Born weight from one reflection* 还要求固定方向的二次平行四边形律。具体地，选单位向量 $\phi\in\mathbb C^2$ 代表 $v$，以 $u_\psi$ 表示非零 $\psi$ 的射线读数坐标，取 $g(\psi)=\|\psi\|^2 f(u_\psi)$、$g(0)=0$。约定复内积对第二个变量线性。要求 $f(v)=1$，$g$ 在 $s_\phi(\psi)=2\langle\phi,\psi\rangle\phi-\psi$ 下不变，且对 $w\perp\phi$ 有 $g(\phi+w)+g(\phi-w)=2g(\phi)+2g(w)$。对跖归一化给出 $g(w)=0$。写 $\psi=z\phi+w$，若 $z\ne0$，对 $w/z$ 应用上式，用反射不变性令左边两项相等，再用齐次性乘 $|z|^2$，得到 $g(\psi)=|z|^2$。若 $z=0$，结论已由 $g(w)=0$ 给出。因此 $2f(u)-1=\langle v,u\rangle$，径向延拓是 $\mathbb R^3$ 上的有界实线性泛函，因而连续。一般地，若加性映射 $A:\mathbb R^3\to\mathbb R$ 在 $S^2$ 上等于 $2f-1$，范数至多为 $2$ 的向量都可写成两个单位向量之和，故 $|A|\le2$ 在该球上成立。对正整数 $m$，若 $\|x\|\le 2/m$，则 $|A(x)|=|A(mx)|/m\le 2/m$，所以 $A$ 在原点连续。由加性先得有理齐次性，再由连续性得实齐次性，因此 $A$ 实线性。
 
 2. **公理四（演化与坍缩统一律）：停机前流群测地流与停机刻幂等捏合加盲区偏迹消解测量悖论**：
    教科书最尖锐的裂痕横亘在连续可逆的薛定谔幺正演化与瞬间不可逆的投影坍缩之间。在 $\mathrm{AXIOM}\text{-}\Omega$ 的内部观察者模型（`MODEL`）下，观察者与仪器并非游离于量子律之外的外部经典裁判，而是网络中同构的另一座三元数概念场 $\mathbb{T}_3^{(\mathrm{obs})}$——“幺正演化”与“测量坍缩”只是同一条流群轨迹在**停机前**与**停机刻**的内外双重视角：
@@ -150,7 +162,18 @@
 ::: {.remark #rem-ch39-axiom-omega-composites-round-trip title="复合系统中的往返律：纠缠被迫出现，仪器来自辅助系统，单次结果不由结构给出"}
 **往返律延续到复合系统时纠缠被迫出现（`手工推导`）。** 以下三条都是 `MODEL` 假设：复合系统有一个只带单一时钟的核空间；选定相容的复时钟定向，并假设乘积构型的复振幅相乘，从而独立射线检验的概率相乘；复合系统也满足干涉律，即态集合含全体乘积单位向量，且对任意两态 $x, w$ 都有一个态 $s_x(w)$ 对一切乘积检验态 $y$ 满足 §39.1 的干涉律 $c(y, s_x w) + c(y, w) = 2c(w, x)\,c(y, x)$，这相当于一条受限的叠加原理。则 $s_x(w) = 2c(x, w)\,x - w$，全部单位向量都是态，纯态构成 $\mathbb{CP}^{2^N - 1}$，这些反射生成 $\mathrm{O}(V_N)$（$s_x$ 是关于直线 $\mathbb{R}x$ 的反射；有限维实内积空间中，一个线性等距属于全体直线反射 $w \mapsto 2\langle\hat{v}, w\rangle\hat{v} - w$ 生成的群，当且仅当维数为偶数或它的行列式为一，[`mem_closure_lineReflections_iff`](lean:D5/S3/Quantum/Algebra/Comparison/LineReflectionGeneration.mem_closure_lineReflections_iff)，`LEAN ✓`；$V_N \cong \mathbb{C}^{2^N}$ 的实维数 $2^{N+1}$ 是偶数，所以生成的群是整个 $\mathrm{O}(V_N)$，这一步特化是 `手工推导`），其中与复合时钟对易者构成 $\mathrm{U}(2^N)$：每个幺正变换都是往返反射的乘积。例：$N = 2$、$x = \lvert 00\rangle$、$w = \lvert{+}{+}\rangle$ 时 $s_x(w) = \frac{1}{2}(\lvert 00\rangle - \lvert 01\rangle - \lvert 10\rangle - \lvert 11\rangle)$，共生度为 $1$，即最大纠缠；逐分量反射给出乘积态 $\lvert{-}{-}\rangle$，而 $\kappa_2(w, \lvert{-}{-}\rangle) = \frac{1}{2} \ne \frac{1}{4} = c_2(w, x)^2$，违反往返律。
 
-**效应、仪器与完全正性来自辅助系统（`手工推导`）。** 把系统与处于态 $\alpha_0$ 的辅助系统联合，施加幺正 $U$，再对辅助系统做完备检验 $(a)$，令 $K_a\psi := (U(\psi \otimes \alpha_0))_a$（相对态）。则 $\sum_a K_a^\dagger K_a = \mathbf{1}$，结果 $a$ 的玻恩权重为 $\langle\psi, K_a^\dagger K_a\psi\rangle$，给定 $a$ 后的条件态为 $K_a\psi / \lVert K_a\psi\rVert$，$\rho \mapsto \sum_{a \in e} K_a\rho K_a^\dagger$ 完全正；反过来每个克劳斯族都可如此实现，于是所得效应恰为全体 $0 \le E \le \mathbf{1}$。玻恩权重的唯一性（`文献结果`）：在 $\beta$ 的非负函数之中，借助格里森型定理（A. M. Gleason, *J. Math. Mech.* **6**, 885–893, 1957）并要求权重在添加辅助系统后不变，玻恩权重唯一；只对单个系统要求“依赖于射线对、完备检验上和为一、自身射线取一”时，$f(x) = 3x^2 - 2x^3$ 满足 $f(x) + f(1 - x) = 1$，同样合格，所以辅助系统不可少。
+**全锥保正的交叠成对读回锁定时钟定向。** 冻结声明 [`align_bits`](lean:D5/S3/Quantum/Foundation/TripleMatrixOrientation.PositiveMarginalMatrixComposition.TripleOrientation.align_bits) 取 $n\ge2$，以 $H_m$ 表示 $m\times m$ 厄米矩阵实向量空间。两个实双线性制备 $M:H_n\times H_n\to H_{n^2}$ 与 $L:H_{n^2}\times H_n\to H_{n^3}$ 各有 `TensorNormalForm`，即对输入按各自布尔位转置、作张量积，再作固定的幺正共轭。内层位为 $(\varepsilon,\delta)$，外层位为 $(\alpha,\beta)$，并要求各自的乘积输出张成其整个目标空间。两个实线性读回 $p_{13},p_{23}:H_{n^3}\to H_{n^2}$ 保持整个半正定锥，且对所有 $x,y,z\in H_n$ 有
+
+$$
+\begin{aligned}
+p_{13}(L(M(x,y),z))&=\operatorname{tr}(y)M(x,z),\\
+p_{23}(L(M(x,y),z))&=\operatorname{tr}(x)M(y,z).
+\end{aligned}
+$$
+
+记 $t_1=\alpha\oplus\varepsilon$、$t_2=\alpha\oplus\delta$、$t_3=\beta$，其中 $\oplus$ 为布尔异或。声明给出三对 $t_i\oplus t_j$ 均等于 $\varepsilon\oplus\delta$，并推出 $\varepsilon\oplus\delta=0$、$t_1=t_3$、$t_2=t_3$。在论文二的单扇区复合模型中，若 $N\ge3$、每个因子复维数至少为 $2$，且连通的成对读回图上每条边都使用相容的零相对转置校准并在全锥保正，就能沿边传播该一致性（`手工推导`）。因为乘积厄米矩阵张成全空间，读回由乘积校准唯一决定。边的两端若异向，读回便含单侧转置，而它将贝尔投影送到交换算子的一半，在反对称向量上为负。同向可沿任意路径传递，只剩全局同时共轭的选择。见论文二的 *Common orientation from overlapping pair readbacks*。
+
+**效应、仪器与完全正性来自辅助系统（`手工推导`）。** 把系统与处于态 $\alpha_0$ 的辅助系统联合，施加幺正 $U$，再对辅助系统做完备检验 $(a)$，令 $K_a\psi := (U(\psi \otimes \alpha_0))_a$（相对态）。则 $\sum_a K_a^\dagger K_a = \mathbf{1}$，结果 $a$ 的玻恩配对权重为 $\langle\psi, K_a^\dagger K_a\psi\rangle$，给定 $a$ 后的条件态为 $K_a\psi / \lVert K_a\psi\rVert$，$\rho \mapsto \sum_{a \in e} K_a\rho K_a^\dagger$ 完全正；反过来每个克劳斯族都可如此实现，于是所得效应恰为全体 $0 \le E \le \mathbf{1}$。玻恩配对权重的唯一性（`文献结果`）：在 $\beta$ 的非负函数之中，借助格里森型定理（A. M. Gleason, *J. Math. Mech.* **6**, 885–893, 1957）并要求权重在添加辅助系统后不变，玻恩配对权重唯一。只对单个系统要求“依赖于射线对、完备投影检验上和为一、自身射线取一”时，$f(x) = 3x^2 - 2x^3$ 满足 $f(x) + f(1 - x) = 1$，也满足这三条条件。该反例说明三条条件本身不足以确定玻恩配对权重。本节用辅助系统扩张来实现可加的效应检验。对单个系统，上文的固定方向反射二次律给出另一条充分条件。
 
 **单次结果与二元选择（`手工推导` + `OPEN`）。** 取制备射线 $q$ 为 $(\lvert 0\rangle+\lvert 1\rangle)/\sqrt{2}$，以 $\lvert 0\rangle,\lvert 1\rangle$ 为检验。按本节的射线核与玻恩权重等式，两个结果的权重各为 $1/2$。泡利 $X$ 固定制备射线，并交换检验的两条射线。若规则的输入是制备射线与无序的检验射线集合，此变换固定整个输入。确定性协变规则选出的射线必须在交换下固定，但两个候选都被交换。这正是 [`no_equivariant_selector_of_common_fixed_symmetry`](lean:D5/S3/ConceptDynamics/Attribution/FixedSymmetrySelectorObstruction.no_equivariant_selector_of_common_fixed_symmetry) 的固定态障碍。
 

@@ -216,7 +216,33 @@ $$
 对 $N$ 个因子，取特征向量 $f(q_1)\otimes\cdots\otimes f(q_N)$，其内积就是 $K_N$，在 $5^N$ 个实坐标中即可实现。另一方面，取五点集的全部 $N$ 重组合 $Q^N$，所得格拉姆矩阵为可逆的克罗内克幂 $G^{\otimes N}$。在 $\mathbb R^r$ 中实现相同读数必须容纳这 $5^N$ 个线性无关向量，故最小的 $r$ 恰为 $5^N$。四元数的零重乘积只有一个构型，读数为 $1$，特征维数为 $1$。完整证明由 Lean 内核检查。
 :::
 
-例如，两个独立旋子的构型有 $3+3=6$ 个连续自由度，而精确实现它们的乘积读数需要 $25$ 个实内积坐标。在[§32.3.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md#sec-ch39-20-3) 的多场诠释中，$3N$ 计量构型流形的维数，$5^N$ 计量这里指定的比较核的特征秩。这里比较的是旋子。例如 $K_1(1,-1)=0$，而 $1$ 与 $-1$ 作用于同一个参考自旋量会给出同一条射线，按 [@thm-ch39-axiom-omega-ray-kernel-born-weight] 的射线读数得 $1$。将具体的物理系统表示成这些因子，仍需给出该系统的自由度及其联合读数。
+::: {.remark #rem-ch39-two-rotor-energy-scale title="两个旋子的比较读数能确定激发能级吗？"}
+取两个可独立取值、有标记的单位旋子。比较将 $q$ 和 $-q$ 区分开，故每个状态取在双覆盖 $\mathrm{Spin}(3)$ 上。共同内部构型为 $S^3\times S^3$。两个三维流形的乘积有六个实构型自由度。即使两个旋子位于普通三维空间的同一处，记录它们的两个取向仍需这六个自由度。[@thm-ch39-quaternion-product-feature-rank] 给出 $K_2$ 的最小实内积特征维数为 $25$。这个结论依赖两个因子各自的比较读数以及将读数相乘的组合规则。该秩超过 Ω 第三律选定的最小值五。单旋子的唯一零伴性质也随组合而消失。对给定 $(q_1,q_2)$，只要 $p_1=-q_1$，任意 $p_2\in S^3$ 都给出 $K_2(q,p)=0$。
+
+**选择动能（模型与手工推导）。** 在 $L^2(S^3\times S^3)$ 上考虑作用于标量波函数的局域二阶动能，算子与每个因子的独立左右平移对易。取算子自伴、主符号正定、常数态能量为零。在乘积群单位元处，主符号对 $\mathrm{SO}(3)\times\mathrm{SO}(3)$ 的独立伴随转动不变。每个三维切空间上的不变对称型只能是圆度量的常数倍，混合项在只转动一个因子时只能为零。独立转动也没有不变的一阶方向。于是用单位圆球上的拉普拉斯算子 $\Delta_1,\Delta_2$ 可以写成 $H=a(-\Delta_1)+b(-\Delta_2)$，其中 $a,b>0$ 可以独立取值。
+
+单位球面 $S^3$ 上次数为 $\ell$ 的标量球谐函数是负拉普拉斯算子的特征函数，特征值为 $\ell(\ell+2)$，重数 $(\ell+1)^2$。相乘得到模式 $E_{\ell m}=a\ell(\ell+2)+bm(m+2)$，重数为 $(\ell+1)^2(m+1)^2$；同能模式的重数相加。按不同能值排序，令 $0<a\le b$。[@thm-ch39-rotor-product-levels] 给出这个模式公式的两个最低正能值。对 $b,c\ge a$，它还刻画何时两组参数给出同一第二能值。若 $a<b$，第一个正能值为 $3a$，第二个是 $\min(3b,8a)$。前者来自 $(1,0)$，后者的候选来自 $(0,1)$ 和 $(2,0)$。同时激发两因子至少需要 $3a+3b$。在 $b=8a/3$ 时两候选合并，重数为 $4+9=13$。当 $b>8a/3$ 时，前两个正能值固定在 $3a,8a$，重数分别为四、九。这两级的能值和重数都无法区分该区间内的 $b$。取 $a=1$，$b=3/2$ 或 $b=2$，两个系统具有完全相同的 $K_2$，前两个不同正能值之比分别为 $3/2$ 和 $2$。
+
+**交换对称如何进入预言？** $K_2$ 在交换两个因子时保持不变。若进一步要求交换也保持 $H$，则 $a=b$。此时 $(1,0)$ 与 $(0,1)$ 合并为重数八的首个正能值 $3a$，第二个正能值为 $6a$，来自 $(1,1)$，重数十六。另一种选取方式用 $K_2$ 在对角线附近定义度量：在两因子的测地距离为 $d_1,d_2$ 时，$1-K_2=(d_1^2+d_2^2)/4+O((d_1^2+d_2^2)^2)$。规定标量动能为这一定尺度乘积度量的负拉普拉斯算子的共同正倍数，也给出 $a=b$。等尺度模型与 $b=2a$ 的模型都给出比值 $2$，但两者首级的重数分别为八和四。用能谱检验这些假设还要求辨认不同能量和相应的简并度。[双旋子的低能谱与动力学条件](https://github.com/the-omega-institute/trureturing-books/issues/925)
+
+也可以规定一套产生扩散的比较操作（模型与手工推导）。对每个旋子，从均匀 Haar 概率测度独立提议新的取向。给定两个提议，各因子分别重复比较 $m$ 次，每次成功概率为该因子的 $K_1(q_i,p_i)$，全部 $2m$ 次试验条件独立。仅在全部成功时接受，否则重新提议。以接受步数计时，单因子的一步转移密度是 $K_1(q,p)^m/Z_m$，其中 $Z_m$ 是与当前状态无关的 Haar 归一化，第一阶球谐乘子为 $m/(m+3)$。对固定次数 $j$，当 $m\ge j$ 时，一步乘子为 $\prod_{k=0}^{j-1}(m-k)/(m+k+3)$。对任意固定 $t>0$，当 $m\to\infty$ 时，其 $\lfloor mt\rfloor$ 次幂趋于 $e^{-tj(j+2)}$。球谐有限和稠密，各转移算子和极限热算子的范数均至多为一，故乘积算子在 $L^2$ 上的强极限为 $\exp[t(\Delta_1+\Delta_2)]$。仅把第二因子每个提议的比较次数改为 $\lfloor rm\rfloor$（$r>0$），同一时钟下其相对扩散率就变为 $1/r$。这一实验给出热扩散的时间律。将 $-(\Delta_1+r^{-1}\Delta_2)$ 作为物理量子哈密顿量，还需指定动力学和时间单位。[球面均值](https://doi.org/10.1007/BF03322314) · [球谐乘子与极限推导](https://github.com/the-omega-institute/trureturing-books/issues/925#issuecomment-7075628219)
+
+对相对取向 $p^{-1}q\ne\pm1$，改在与它可交换的旋子圆周上做同一实验，读出经过 $\lfloor\pi mt\rfloor$ 个接受步后在起点的返回密度。在 $m\to\infty$ 的极限中，每个整数傅里叶模 $k$ 以单位权给出 $e^{-\pi t k^2}$。它们的和满足泊松求和给出的尺度互易，接上 [§39.2 的圆周热谱](ch39-s25-axiom-omega-five-tier-deduction-cascade.md#sec-ch39-25-2)。[圆周比较与返回密度的推导](https://github.com/the-omega-institute/trureturing-books/issues/925#issuecomment-7075769017)
+
+可以在保持两个单旋子转移规律的同时改变联合更新。为两旋子的右增量选定共同的坐标轴，每个接受步独立决定是否共用增量。以概率 $c\in[0,1]$ 从上述单旋子增量律抽一次供两者共用，以概率 $1-c$ 从同一分布独立抽取两次。设初始两姿态相同，读出相对姿态 $D(q,p)=q\cdot p$。共用右增量逐步保持 $D$，独立增量使条件均值乘以 $[m/(m+3)]^2$。在扩散极限，单旋子一阶均值降至初值的一半时，$c=0$ 与 $c=1/2$ 的相对姿态均值分别为 $1/4$ 与 $1/2$。这项经典相关更新选用了共同右轴。当 $c>0$ 时，转移律在两个因子同步右转动下保持不变，一般的独立右转动会改变联合转移律。[有限步的相对姿态均值](https://github.com/the-omega-institute/trureturing-books/issues/925#issuecomment-7075637035)
+:::
+
+::: {.theorem #thm-ch39-rotor-product-levels title="双旋子模式的前两个不同正能值" lean="D5/S3/Quantum/Rotors/ProductBranchLevels.first_two_positive_levels,D5/S3/Quantum/Rotors/ProductBranchLevels.second_level_fiber"}
+对 $\ell,m\in\mathbb N$ 取 $E_{\ell m}=a\ell(\ell+2)+bm(m+2)$。定义 $S_a(b)$ 在 $b=a$ 时为 $6a$，其余情形为 $\min(3b,8a)$。若 $0<a\le b$，集合 $\{E_{\ell m}\}$ 中最小的正值为 $3a$，严格大于 $3a$ 的最小值为 $S_a(b)$。
+
+对任意 $a>0$ 及实数 $b,c$，$S_a(b)=S_a(c)$ 当且仅当以下三种情形至少发生一种：$b=c$，$\{b,c\}=\{a,2a\}$，或同时满足 $3b\ge8a$ 与 $3c\ge8a$。
+:::
+
+::: proof
+自然数 $n$ 给出的 $n(n+2)$ 为零、三或至少八。在 $a\le b$ 时，先区分零指标、一次激发及更高次激发。$(1,0)$ 取到 $3a$。若 $a=b$，$(1,1)$ 取到 $6a$；若 $a<b$，$(0,1)$ 与 $(2,0)$ 的较低值取到 $S_a(b)$。其余模式不能给出介于这两个相邻能级之间的值。按 $b=a$ 及最小值的两个分支展开 $S_a$，即可得相同输出的全部条件。完整证明由 Lean 内核检查。
+:::
+
+对 $N$ 个可独立取值的旋子，在[§32.3.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md#sec-ch39-20-3) 的多场诠释中，$3N$ 计量构型流形的维数，$5^N$ 计量这里指定的比较核的特征秩。这里比较的是旋子。例如 $K_1(1,-1)=0$，而 $1$ 与 $-1$ 作用于同一个参考自旋量会给出同一条射线，按 [@thm-ch39-axiom-omega-ray-kernel-born-weight] 的射线读数得 $1$。将具体的物理系统表示成这些因子，仍需给出该系统的自由度及其联合读数。
 
 第 5 款只给出单射，原因在于结构可以只占单位四元数的一部分：有理单位四元数组成的可数子群满足第 5 款的全部假设，却不可能与 $\mathrm{Sp}(1)$ 一一对应（`手工推导`；满足这些假设而不读数完备的可数稠密子群存在，由 [`exists_subgroupModel_not_readingComplete`](lean:D5/S3/Quantum/AURICOmega/TernaryComparisonCompletion.exists_subgroupModel_not_readingComplete) 内核检查，`LEAN ✓`），不过所占的部分总在 $\mathrm{Sp}(1)$ 中稠密（[`denseRange_iff`](lean:D5/S3/Quantum/AURICOmega/TernaryComparisonCompletion.denseRange_iff)，`LEAN ✓`；把它用于第 5 款的单射是 `手工推导`，见 §39.1.2）。补上读数完备，单射就成为双射：
 
@@ -346,6 +372,14 @@ $$
 6. **流形表述 $\Rightarrow$ 母公理。** 满足流形表述的结构，由第 1 条满足共有条款，由第 3 条链连通，由第 4 条（完备化取弦距时）读数完备，由第 5 条特征秩为 $5$，而 $5$ 正是母公理法则 (III) 所求的最小值（第 4 款与第 3 款，`LEAN ✓`），所以它满足母公理，从而由 [@thm-ch39-axiom-omega-complete-rank-five-isomorphism] 第 2 款同构于单位四元数模型。这一方向的分层取决于第 3–5 条中最弱的一环，即 `文献结果` 加 `手工推导`。
 7. **母公理 $\Rightarrow$ 流形表述。** 满足母公理的结构经 [@thm-ch39-axiom-omega-complete-rank-five-isomorphism] 第 2 款的双射同构于单位四元数模型（`LEAN ✓`）。单位四元数模型满足流形表述的各条款：$S^3(1)$ 是连通单连通的三维流形（`手工推导`），迁移 $x y^{-1} z$ 连续（[`continuous_tri_quaternionModel`](lean:D5/S3/Quantum/AURICOmega/DimensionRankRealization.continuous_tri_quaternionModel)，`LEAN ✓`），$\kappa = \frac{1 + \langle x, y\rangle}{2}$ 光滑且单槽二阶海森为 $-\frac{1}{2}$ 倍单位形式，严格负定非退化，$S^3$ 紧致故在弦距下完备（`手工推导`）；其中“$(\dim\mathcal{M}, \operatorname{rank}\mathcal{H}_\kappa) = (3, 5)$ 字典序极小”同样依赖第 5 条的 $d_{\min} = 3$（`文献结果` 加 `手工推导`）。经双射把这些结构搬到 $\mathcal{M}$ 上是 `手工推导`；由于双射保持读数，搬来的拓扑就是弦距 $d_\kappa$ 的度量拓扑。双射在相差左、右乘的意义下唯一：记该双射为 $u$，保持迁移与读数的映射 $\mathcal{M} \to \mathrm{Sp}(1)$ 恰为 $x \mapsto p\,u(x)\,q$（[`preserves_iff_exists_mul_mul`](lean:D5/S3/Quantum/AURICOmega/QuaternionModelAutomorphism.preserves_iff_exists_mul_mul)，`LEAN ✓`），且 $(p, q)$ 只差一个公共符号（[`mul_mul_eq_mul_mul_iff`](lean:D5/S3/Quantum/AURICOmega/QuaternionModelAutomorphism.mul_mul_eq_mul_mul_iff)，`LEAN ✓`，连同由 $u$ 满射过渡的一步 `手工推导`；见 §39.1.2）。
 8. **不再作为假设的条款。** 有限维流形、单连通、$C^2$ 正则性、单槽二阶海森非退化与迁移的连续性，都不出现在 [@thm-ch39-axiom-omega-rank-five-unit-quaternion-embedding] 与 [@thm-ch39-axiom-omega-complete-rank-five-isomorphism] 的假设中，也不出现在母公理中；在母公理之下它们是第 7 条所述的推论。
+
+**连续点反射与往返比较的光滑化和分类（手工推导，用到文献结果）。** 设 $M$ 是连通无边的拓扑 $n$ 流形，$n\ge1$。设 $(x,w)\mapsto s_xw$ 联合连续，$s_xx=x$，$s_x^2=\mathrm{id}$。另有连续、对称的忠实比较 $\kappa:M^2\to[0,1]$，即 $\kappa(x,y)=1$ 当且仅当 $x=y$，且每个 $s_x$ 保持 $\kappa$。要求往返律 $\kappa(w,s_xw)=(2\kappa(w,x)-1)^2$。由此，$s_x$ 的不动点满足 $\kappa(w,x)\in\{0,1\}$，在 $\kappa(w,x)>1/2$ 的邻域里就只有 $x$。
+
+在以 $o$ 为原点的坐标中，$s_o(z)-z$ 的局部模 $2$ 度数为 $1$。具体说，取小的 $s_o$ 不变邻域 $U$，令阶 $2$ 群在 $U$ 上按 $s_o$ 作用，在 $\mathbb R^n$ 上按变号作用；差映射在去心空间对上等变。两空间对的模 $2$ Borel 相对谱序列由切除只有第 $n$ 行。去心部分的作用自由，其 Borel 上同调等于商流形的上同调。紧支撑庞加莱对偶与域上的泛系数定理给出这些商在度数 $>n$ 的上同调为零。目标空间对在这些度数的相对类因而可限制到群分类空间上的非零类，由不动原点的截面检测。若局部度数为零，相对上同调的拉回为零，与该限制的自然性矛盾。小球里 $z\mapsto s_{tz}((t-1)z)-(t-1)z$（$0\le t\le1$）仅在原点为零，所以 $z\mapsto s_z o$ 同样有局部模 $2$ 度数 $1$。位移群 $G=\langle s_xs_y:x,y\in M\rangle$ 的作用满足 $s_xs_o(o)=s_xo$，所以 $o$ 的 $G$ 轨道包含 $o$ 的一个邻域。对每个基点重复此论证，得到每条 $G$ 轨道都是开集。由连通性，$G$ 传递。
+
+令 $H$ 为保持 $\kappa$ 的全体同胚，取紧开拓扑。用 $1-\kappa$ 的路径直径下确界来控制小邻域：小坐标球内可取小直径路径，走出球则须跨过比较亏损有正下界的球边界。取在 $o$ 唯一达到最大值的紧支撑函数 $f$，以 $\sup_{g\in H}|f(gx)-f(gy)|$ 定义相容不变度量。传递性和路径控制给出一致紧小球。对把 $o$ 移到紧小球内的同胚及其逆取对角收敛子列，得到 $H$ 局部紧、稳定子 $H_o$ 紧。$x\mapsto s_xs_o$ 联合连续且在 $o$ 的取值覆盖其邻域，故轨道映射开放，$H/H_o\cong M$。Hofmann–Kramer 定理适用于这个忠实作用与连通、局部可缩的商（文献结果）。商有相容光滑结构，在 $H_o$ 上取平均 得不变黎曼度量。此时 $s_x$ 是对合等距映射，孤立不动点在指数坐标中给出导数 $-I$。等距映射由一点的值和导数决定，因此 $g s_xg^{-1}=s_{gx}$，用商映射的光滑局部截面即得联合光滑性。
+
+最后，沿任一从 $o$ 出发的单位速测地线 $\gamma$，角读数 $u(t)=\arccos(2\kappa(o,\gamma(t))-1)$ 满足 $u(2t)=\min(2u(t),2\pi-2u(t))$。固定小正时刻后，初值在单位切向球上有一致正下界。倍增与介值定理给出一致有界的 $\tau$，使 $u(\tau)=\pi/2$，继而 $u(4\tau)=0$，即 $\gamma(4\tau)=o$。这些测地线是对称空间中单参数等距群的轨道，故回归给出周期。完备性和 Hopf–Rinow 由一致周期界推出紧致性。若有两个独立的可交换切向生成元，它们的回归格是离散的，却须与每条过原点的直线非平凡相交，矛盾。因此秩为一。Loos 的对称空间结构与 Cartan 的紧秩一分类给出圆球、实／复／四元数射影空间和凯莱平面（文献结果）。各向同性给出共同的最小正周期 $L$。在一周内，$u$ 的零点恰在周期端点，因而 $u(L/2)=\pi$。由倍增律，$u(t)=\pi/2$ 恰发生在 $t=L/4,3L/4$。所以 $u(t)$ 与 $u_0(t)=2\pi\operatorname{dist}(t/L,\mathbb Z)$ 始终处于倍增律的同一分支，误差在每次倍增时加倍而仍以 $\pi$ 为界，故 $u=u_0$。沿最短测地线取 $0\le t\le L/2$ 并将距离乘 $\pi/L$，即得 $\kappa(x,y)=\cos^2 d(x,y)$、$\operatorname{diam}(M,d)=\pi/2$。在与标准度量模型的等距同构下，$s_x$ 对应于像点处的测地对称，射影直线的情形已包含在圆球中。模 $2$ 对偶用于局部度数，紧致性来自往返律强制的测地回归。详见论文一的 *Local degree of an isolated involution*、*classification with continuous reflections* 及其所引的光滑分类。
 :::
 
 ::: {.remark #rem-ch39-axiom-omega-round-trip-closing-law title="法则 (III) 的单结构形式：往返律与达朗贝尔函数方程"}

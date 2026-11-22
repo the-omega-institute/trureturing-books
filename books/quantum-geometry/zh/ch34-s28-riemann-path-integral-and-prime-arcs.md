@@ -886,6 +886,28 @@ $$
 有符号的平凡零点项代价为 $O(q^{3/4}(1+\ln q))$。对算术尾项，截点 $q+j$ 与 $q-1$ 的 Möbius 前缀之差为 $O(q^{-1/4}(q+j))$。对递减的 Chebyshev 权重作 Abel 求和，将归一化后的算术尾项控制在 $O(q^{3/4})$。最后在 $\ln a$ 和 $\ln B$ 间积分，得到陈述中的端点幂差。当 $B=a$ 时该差为零。
 :::
 
+::: {.theorem #thm-ch31-prime-window-eight-ninths title="有符号素数窗的九分之八阶界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEightNinths.prime_window_mobius_eight_ninths_of_rh"}
+假设 RH。对任意实数 $\varepsilon>0$，存在 $a_0\ge2$ 和 $C>0$，使每个整数 $m\ge2$ 和每对实端点 $B\ge a\ge a_0$ 都满足
+
+$$
+|E_m(a,B)|\le C m^{8/9+\varepsilon}D_{s_m}(a,B),\qquad s_m=\tfrac12-\tfrac1{m+1}.
+$$
+
+这里沿用 [@thm-ch31-prime-window-mobius] 的有符号余项，算术修正保留其符号，只保留 $2n<m+1$ 的根谱项，并按解析重数计零点。端点重合时两边均为零。
+:::
+
+::: proof
+令 $q=m+1$、$u=\ln x$，在被省略的次数中写 $v_n=u/n$ 和 $W(v)=e^{-u/q+v/2}$。相邻相位作差时，把相位增量乘以 $W(v_{n+1})$。由 $e^t-1\ge t$，
+
+$$
+W(v_{n+1})(v_n-v_{n+1})\le 2\bigl(W(v_n)-W(v_{n+1})\bigr).
+$$
+
+右侧在次数上望远镜相消。连同根系数的相邻差估计，单个零点的次数总变差由 $O((1+|\operatorname{Im}\rho|)/|\rho|)$ 控制，该常数对 $u$ 一致。用复 Abel 求和先对低频零点的次数求和，再在单位频率箱中累加零点。取 $0<\eta\le\min(\varepsilon/2,1/36)$，普通 Möbius 前缀界为 $O(q^{2/3+\eta})$，低频部分的归一化系数至多为 $O(q^{2/3+\eta}(H+1)^{1+\eta})$。单位频率箱中的零点计数给出高频逆根模长质量的平方和上界 $O(H^{2\eta-1})$，所以对间隔分离的次数样本，高频系数至多为 $O(qH^{\eta-1/2})$。
+
+对整个 $u\ge q$ 区间取 $H=\lfloor q^{2/9}\rfloor$，两项均由 $O(q^{8/9+2\eta})$ 控制。近区、平凡零点修正和算术尾项使用同一前缀界，至多多出 $1+\ln q$，可吸收到指数差中。把统一的密度界在 $\ln a$ 至 $\ln B$ 积分，就得到原端点幂差。完整证明由 Lean 内核检查。
+:::
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::
