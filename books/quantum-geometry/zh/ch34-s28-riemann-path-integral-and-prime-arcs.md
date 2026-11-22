@@ -1134,6 +1134,21 @@ $$
 
 起点可以依赖偏移量和给定的下限。结论给出每条晚起点尾区间上最坏前向增量的下界。达到同一尺度的一致上界仍是开放问题。
 
+::: {.theorem #thm-ch31-root-symmetric-tail-modulus title="每个尾区间上的根谱对称模量" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHRootTailModulus.root_signal_symmetric_tail_modulus"}
+假设 RH，沿用 [@thm-ch31-centered-root-log-cusp] 的 $S_r$、$s$ 与 $c$。固定任意实数 $r>1$。对任意实数 $U$ 及 $0<h\le r/2$，当 $u\ge U$ 时，$|S_r(u+h)+S_r(u-h)-2S_r(u)|$ 的取值集合非空且有上界。记其上确界为 $M_r(U,h)$。存在对所有这些 $U,h$ 通用的 $C_r>0$，使得
+
+$$
+\left|M_r(U,h)-\frac{h}{s}\bigl(\log(1/h)+\log r-2c\bigr)\right|
+ \le C_r h^2.
+$$
+:::
+
+::: proof
+对称差把纵坐标为 $\gamma$ 的模态乘以 $2(\cos(\gamma h/r)-1)$。逐项取绝对值，根系数的模至多为 $r/(1/4+\gamma^2)$。所得逐项上界之和等于 $2r(K(0)-K(h/r))/s$，对每个起点均可使用。下界来自相位复现。每条尾区间都含有任意接近原点带符号对称差的取值，所以上确界至少达到原点的这个值。夹住上确界的两个量具有相同的对数项、线性项和二阶余量界。
+:::
+
+对称模量的前两项对所有尾区间一致成立。前向增量的最优一致上界仍是开放问题。
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 
