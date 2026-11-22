@@ -950,6 +950,24 @@ $$
 在 RH 下，逐点 Möbius 前缀估计允许取 $\beta=1/2+\delta$，其中 $0<\delta<1/2$ 可任意小。给定最终余量 $\varepsilon>0$，取 $\delta=\min(\varepsilon,1/4)$，把 $\varepsilon-\delta/3$ 留给窗估计，便得到 $|E_m(a,B)|\le C m^{5/6+\varepsilon}D_{s_m}(a,B)$。该上界对所有允许的端点统一成立。余项是否达到这一阶仍是开放的。
 
 
+::: {.theorem #thm-ch31-prime-window-late-spacing title="晚起点带符号素数窗的指数改进" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusLateSpacing.prime_window_mobius_late_spacing_of_rh"}
+假设 RH 成立，固定 $0\le d\le1/2$ 与 $\varepsilon>0$。存在常数 $a_0\ge2$ 和 $C>0$，使所有整数 $m\ge2$ 及满足 $\ln a\ge(m+1)^{1+d}$ 的实端点 $B\ge a\ge a_0$ 满足
+$$
+|E_m(a,B)|\le C m^{3/4-d/2+\varepsilon}D_{s_m}(a,B),\qquad
+s_m=\tfrac12-\tfrac1{m+1}.
+$$
+两项修正保留原来的符号。零点按解析重数计数，根原始量的保留条件为严格不等式 $2n<m+1$。
+:::
+
+::: proof
+记 $q=m+1$、$u=\ln x$。遗漏次数对应的采样点 $u/n$ 至少相隔 $u/q^2$。阻尼因子 $e^{-u/q+u/(2n)}$ 使各单位区间的估计可以按几何级数求和。高频模式的局部积分给出 $O_\eta(H^{\eta-1/2})$。在 $0<\eta<1/2$ 时，相位导数在频率箱 $k$ 中的质量由 $O_\eta(\min(q,1+|k|)(1+|k|)^{\eta-1})$ 控制。按 $1+|k|=q$ 分段后，箱质量的平方和为 $O_\eta(q^{1+2\eta})$。局部采样估计据此将高频代价控制在 $O_\eta((1+q^2/u)H^{\eta-1/2}+q^{1/2+\eta})$。
+
+带符号的 Möbius 前缀将低频代价控制在 $O_\eta(q^{1/2+\eta}(H+1)^{1/2+\eta}+(H+1)^{1+\eta})$。整个积分区间都有 $u\ge q^{1+d}$。取 $H=\lfloor q^{1/2-d}\rfloor$，两部分都受 $O_\eta(q^{3/4-d/2+2\eta})$ 控制。算术项和平凡零点项也满足这个界。在 $[\ln a,\ln B]$ 上积分得到 $D_{s_m}(a,B)$。当 $B=a$ 时，两边均为零。
+:::
+
+取 $d=1/2$ 时，起点条件为 $\ln a\ge(m+1)^{3/2}$，指数为 $1/2+\varepsilon$。该界适用于这一整段较晚的范围。允许起点变化时的最优统一指数仍有待确定。
+
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::
