@@ -147,6 +147,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `dyad-relation-future-field-sandbox` | 两支不共线切方向借 90° 换位撑开第三维闭合成三元数体（2+1=3）；把过去→现在一阶角拉回 0° 动量清零，拉开后对照流群自平行接力 [x<sub>t</sub>, x<sub>t−1</sub>, x<sub>t</sub>]、条件于语境态的非对易换序片与李三元 π³/36 折射推未来，以及四面体面相位上边缘 δF 归零与奥氏高阶动量无界跌落 | `dyad-orthogonal-relation-span` `first-order-zeno-vs-transport` `second-order-free-heap-geodesic` `curvature-lie-triple-refraction` `bianchi-jacobi-second-order-cap` |
 | `constant-free-rational-axiom-omega-sandbox` | 紫色光滑真球内接平直多面体，有限剖分永留弦弧矢高与总和 4π 的角亏锥；对照脱出球外的平直欧拉切线折线与一步驻球的有理凯莱点 Q(σ)、整系数切比雪夫圆弧倍增 (2κ−1)²、N=4 正四面体 κ=1/3 有理封顶对 N=5 黄金比分裂，以及五枚精确有理保真地标 {1, 1/2, 1/3, 1/4, 0} | `pi-polyhedral-crease-residual` `euler-tangent-escape-vs-cayley` `chebyshev-rational-arc-doubling` `tetrahedral-rational-cap-vs-phi` `pure-axiom-omega-constant-free-sphere` |
 | `causal-jet-rational-triad-sandbox` | 纯有理三元数球面上串联 0（过去·零阶停机锚）、1/2（现在·一阶中点自对偶切面）与 1（未来·二阶曲率体）：拨动 α 对照 α=0 伊藤左切脱壳与 α=1/2 斯特拉托诺维奇—凯莱中点精确驻球、两段 1/2 合拢为 1 的曲率片、四面体 δF=0 二阶封顶，以及 1↦0 主频因果心跳循环 | `past-zero-jet-halting-anchor` `present-half-midpoint-self-duality` `future-one-curvature-closure` `third-order-bianchi-ostrogradsky-cap` `one-to-zero-cosmic-heartbeat-loop` |
+| `real-error-prime-adelic-sandbox` | 紧致三元数球立在底部切平面上，有限对径角被球极切线按 1+x²=1/κ 放大成射向 ∞ 的实数轴；对照平直加乘脱轨与吉布斯—罗德里格斯弯曲合成、+1 步进在旧周期盲区处点亮青色素数超度量环守住 \|N\|_∞∏_p\|N\|_p=1、富勒烯 12 枚五边形位错配正交素数环面，以及素数对数无公度遍历破除周期死循环 | `real-tangent-error-magnifier` `linear-add-mul-vs-curved-rodrigues` `adelic-prime-curvature-reclaim` `prime-orthogonal-torus-and-rivets` `incommensurable-ergodic-anti-deadlock` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -390,6 +391,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 σ = 1 时 α = 0, 1/2, 1 的 ‖x₁‖² = 2.0000, 1.0000, 0.5000、ξ(0) = ξ(1) = 0.5000 与 ξ(1/2) 四舍五入为 0.4971、τ = 1/2 时月牙面积与折射角分别四舍五入为 0.9273 和 65.55° 及四面体 256 个有序四元组 δF = 0.0000 实算标 `NUM`。
 
 3×3 `过去·现在·未来 ↔ J⁰·J¹·J² ↔ {0, 1/2, 1}` 母矩阵、道蒂 θ* 弧度影子对比、五领域对位表、玩具拉格朗日量 L = q̈²/2 与 `1 ↦ 0` 四拍心跳标 `MODEL`。
+
+`real-error-prime-adelic-sandbox`（`OMEGA//ADELIC`）承接第三十九章 §39.8 `#sec-ch39-real-error-axis-and-prime-adelic-closure`：紫色给紧致三元数球体 T₃ ≅ S³(1)、合数既有谐波回声环与三价富勒烯六边形平直格网，青色给球面有界测地圆弧、精确吉布斯—罗德里格斯弯曲合成 (x₁ + x₂ + x₁×x₂)/(1 − x₁·x₂) 与有界切比雪夫缠绕 T_n、新开辟的本原素数 p-进超度量回收环（|N|_p = p^{-v_p(N)}，守住 |N|_∞∏_p|N|_p = 1.0000）、正交素数对数相位轴与无公度遍历轨道，品红给底部射向 ∞ 的平直实数误差放大轴 x = √(s/(1−s)) = tan(θ/2)（放大率 A_err = 1 + x² = 1/κ）、漏失分母与叉乘的平直向量和 x₁ + x₂（共轴滞后 53.13°、异轴倾轴 35.26°）与径向爆炸 n·x、未回收的实数位膨胀 |N|_∞ = N、富勒烯恒定 12 枚五边形曲率位错（F_5 = 12）以及有理公度死循环，琥珀严格只给舞台当前失准度 s 或整数步 N 拖动手柄与激活控件（无开放问题，不用红色，亦不将素数环染成琥珀色）。绿色依据严格限于正文定理盒 `thm-ch39-real-error-axis-and-prime-adelic-anchors` 以 `lean=` 引用的十五条冻结声明（`exists_unitQuaternion_equiv`、`kappa_eq_one_sub_dist_sq`、`normSq_and_chebyshev`、`complete_consequences`、`lagrange_gram_identity`、`rational_absolute_value_classification`、`rational_padic_product_formula`、`observation_distance_eq_padic_valuation`、`refinementDistance_ultrametric`、`prime_axis_escape`、`riemann_zeta_dirichlet_sum_eq_euler_product`、`prime_log_rational_independence`、`TorusOrbitClosure.result`、`TorusOrbitEquidistribution.result`、`face_cycle_exact`）；阿廷—惠普尔斯一般数域乘积公式、玻尔几乎周期环面正交性、素数定理对数密度及休伯—塞尔伯格双曲素测地线定理（严格区分非紧 SL₂(ℤ)\ℍ² 与紧致 S³(1)、𝕋^∞）标 `ARGUED`；切线放大率 1+x²、共轴/异轴合成误差、富勒烯 F_5 = 12 与 N = 1…30 阿代尔乘积对账标 `NUM`；实数误差放大轴诊断、富勒烯位错类比与素数四重本体论职能标 `MODEL`。
 
 `prelude-dimensions` 是序曲的几何入门页，默认卡 `shadow` 同步显示俯视木桩与侧视影子，`compare` 比较 90° 与 270° 的同位反向。圆盘侧视是固定线段，木桩投影是移动点；该经典正交投影模型不推出量子测量规则。其余卡分别演示射线投影、纬圈、二维到三维的等半径赤道嵌入、三对对跖方向的等权混合与从 1 弧度出发的余弦迭代。几何计算标 `NUM`，理想化观看与混合过程标 `MODEL`，余弦收敛及其边界沿用序曲的文献分层，不使用绿色 Lean 标记。
 
@@ -1091,7 +1094,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十九章 | §39.7.1.3 末（`1/2 + 1/2 = 1` 二阶曲率闭合段之后、§39.7.2 之前） | `causal-jet-rational-triad-sandbox` · `future-one-curvature-closure` |
 | 第三十九章 | §39.7.2 第 1 条比安基归零与奥氏封顶段之后、第 2 条之前 | `causal-jet-rational-triad-sandbox` · `third-order-bianchi-ostrogradsky-cap` |
 | 第三十九章 | §39.7.4 末（定量核验例题 `ex-ch39-rational-jet-triad-quantitative-audit` 之后） | `causal-jet-rational-triad-sandbox` · `one-to-zero-cosmic-heartbeat-loop` |
-| 第三十九章 | §39.7 末（全书三十九章正文收官结语段之后） | `causal-jet-rational-triad-sandbox` 完整实验室 |
+| 第三十九章 | §39.7 末（转入 §39.8 过渡段之后） | `causal-jet-rational-triad-sandbox` 完整实验室 |
+| 第三十九章 | §39.8.1 第 1 条实数刻度除零透视比值段之后、第 2 条之前 | `real-error-prime-adelic-sandbox` · `real-tangent-error-magnifier` |
+| 第三十九章 | §39.8.1 末（第 3 条有界切比雪夫缠绕对比径向爆炸段之后） | `real-error-prime-adelic-sandbox` · `linear-add-mul-vs-curved-rodrigues` |
+| 第三十九章 | §39.8.2.1 末（`+1` 步进盲区逃逸与阿代尔归 1 段之后） | `real-error-prime-adelic-sandbox` · `adelic-prime-curvature-reclaim` |
+| 第三十九章 | §39.8.2.3 末（富勒烯 $F_5 \equiv 12$ 拓扑位错铆钉段之后） | `real-error-prime-adelic-sandbox` · `prime-orthogonal-torus-and-rivets` |
+| 第三十九章 | §39.8.2.4 末（紧致环面素数对数无公度遍历防死锁段之后） | `real-error-prime-adelic-sandbox` · `incommensurable-ergodic-anti-deadlock` |
+| 第三十九章 | §39.8 末（全书三十九章正文收官结语段之后） | `real-error-prime-adelic-sandbox` 完整实验室 |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget` |
 | 终章 | 空间吸引子 · 二 “回到洛伦兹”一段中“吸引子的体积为零”一句之后 | `spatial-attractor-deja-vu` · `shrink` |
