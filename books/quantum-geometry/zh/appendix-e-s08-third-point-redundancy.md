@@ -151,13 +151,29 @@ $$
 
 $C^*$-代数的酉群配上算子范数距离满足定理的等距条件，所以近似平坦的比较可由上述线性上界控制。广度优先分层进一步给出与点数无关的估计。
 
-**弦图势重构的广度优先 $4\varepsilon$ 一致界（手工推导）。** 沿用 [@thm-appe-chordal-gain-potential-stability] 的增益记号，写 $g_{uv}=g(u,v)$，设 $d$ 为双不变度量。每个连通分支独立处理。长为 $\ell$ 的简单回路遇弦可写成 $(pc^{-1})(cq)$，其中 $p,q$ 为两段路径增益，$c$ 为弦增益。两条短回路的长度和是 $\ell+2$，由三角形起归纳，闭路增益距 $1$ 至多 $(\ell-2)\varepsilon$。一般闭游走删去折返并在重复顶点处分解，同样得到 $(\ell-2)_+\varepsilon$，因为各段的正部系数之和不超过原系数。空路径增益为 $1$，故此界也比较同端点路径。森林沿树路径积累增益即可精确拟合，$\varepsilon=0$ 时闭路界给出精确路径无关性。
+::: {.theorem #thm-appe-chordal-uniform-gain-potential title="有限弦图上增益势的统一 $4\varepsilon$ 界" lean="D5/S3/Combinatorics/Graph/Chordal/UniformGainPotential.SimpleGraph.IsChordal.exists_uniform_approximate_gain_potential"}
+设 $V$ 为有限顶点集，$G$ 为 $V$ 上的简单弦图。设群 $H$ 带有伪度量 $d$，且对一切 $a,x,y\in H$，有 $d(ax,ay)=d(x,y)=d(xa,ya)$。给定实数 $\varepsilon\ge0$ 和映射 $g:V\times V\to H$，假设每条有向棱 $(i,j)$ 都满足 $g(j,i)=g(i,j)^{-1}$，每组两两相邻的顶点 $i,j,k$ 都满足 $d(g(i,j)g(j,k),g(i,k))\le\varepsilon$。
 
-固定根 $o$，令 $L_i$ 为广度优先分层。对层数至少 $i\ge1$ 的诱导子图中的连通分支 $C$，记 $N(C)$ 为 $C$ 的外部邻点集，定义其影子为紧邻上一层的邻点集 $S_C=N(C)\cap L_{i-1}$。沿根的最短路可见 $S_C$ 非空。若其中两点不邻接，分别取内部在 $C$ 中和内部在层数至多 $i-2$ 的最短连接路。两条路径都无弦，内部顶点的层数相差至少 $2$，因此也无交叉棱，其并会是诱导长回路。故 $S_C$ 是团，$i=1$ 时只含根。令 $P$ 是包含 $C$ 的上一层分支。对 $i\ge2$，各 $u\in S_C$ 的前驱邻域 $N^-(u)=N(u)\cap L_{i-2}$ 是 $S_P$ 的非空子集。若 $x$ 只在 $N^-(u)$ 中，$y$ 只在 $N^-(w)$ 中，则 $x,u,w,y$ 形成无对角棱的诱导四环。故这些邻域按包含关系嵌套，可从最小者中取与全体 $S_C$ 相邻的锚 $a_C\in S_P$。
+则存在 $\varphi:V\to H$，使所有有向棱 $(i,j)$ 同时满足
 
-取根势 $\phi_o=1$。在深度 $1$ 令 $a_C=o$、$Q_C=1$，深度 $i\ge2$ 令 $Q_C=Q_P g_{a_Pa_C}$。所用棱由父锚性质保证，重合时取 $g_{oo}=1$。对 $v\in C\cap L_i$ 选前驱 $b_v\in S_C$，置 $\phi_v=Q_C g_{a_Cb_v}g_{b_vv}$。深度 $1$ 取 $b_v=o$，根棱精确拟合。同层棱 $uv$ 的误差 $d(\phi_u g_{uv},\phi_v)$ 是闭游走 $a_C,b_u,u,v,b_v,a_C$ 的缺陷，因双不变性可去掉共同前缀。至多 $5$ 步给出 $3\varepsilon$。对跨层棱 $uv$，设 $u\in L_{i-1}$、$v\in L_i$，在 $i\ge2$ 时用 $\widetilde\phi_u=Q_Cg_{a_Cu}$ 作桥。比较 $\phi_u$ 与 $\widetilde\phi_u$ 时用路径 $a_P,b_u,u$ 和 $a_P,a_C,u$，再比较 $\widetilde\phi_u g_{uv}$ 与 $\phi_v$ 时用 $a_C,u,v$ 和 $a_C,b_v,v$。每次比较的闭游走均至多 $4$ 步，合得 $4\varepsilon$。重合路段直接略去，所有棱都已覆盖。
+$$
+d\bigl(g(i,j),\varphi(i)^{-1}\varphi(j)\bigr)\le 4\varepsilon.
+$$
+:::
 
-对图 $(V,E)$ 和双不变度量群 $H$ 中的增益，定义重构误差为 $\inf_{\phi:V\to H}\max_{uv\in E}d(g_{uv},\phi_u^{-1}\phi_v)$。一般度量群中的下确界未必可取到。约定空棱集或空回路集上的最大值为 $0$。记 $C(n)$ 为所有 $n$ 点弦图、双不变度量群及三角缺陷至多为 $\varepsilon>0$ 的增益实例上，重构误差与 $\varepsilon$ 之比的上确界。以下团树论证给出小阶结果。团树的节点是极大团，包含任一点的团连成子树。由单纯顶点消去归纳可构造这样的树。重插顶点时，其邻团若为极大团就将它扩张，否则将新团接到包含邻团的团上。以团中一点 $a$ 为锚，用 $\phi_x=\phi_a g_{ax}$ 可在该团内达到 $\varepsilon$。向子团延拓时，任选分隔团中的锚，新点之间仍在 $\varepsilon$ 内，分隔团到新点的误差至多在旧界上增加 $\varepsilon$。分隔团只有一点时旧界不增加。分隔团为 $\{a,b\}$ 时取 $\phi_x=\phi_b g_{ba}g_{ax}$。此时 $ax$ 的误差等于旧棱 $ab$ 的误差，$bx$ 和新点之间的误差由三角条件控制在 $\varepsilon$ 内。
+::: {.proof #pf-appe-chordal-uniform-gain-potential}
+分别在各连通分支取根 $o$ 并按到根的距离分层。对层数至少为 $i\ge1$ 的诱导子图中的连通分支 $C$，记 $S_C$ 为第 $i-1$ 层与 $C$ 相邻的顶点集，称为 $C$ 的影子。沿最短路向根走可知 $S_C$ 非空。若影子中两点不相邻，在 $C$ 内部和较低各层各取一条最短连接路。两条路各自无弦，内部顶点的层数相差至少 $2$，因而也无交叉棱。两条路合成的无弦回路与弦性矛盾，故 $S_C$ 是团。$i=1$ 时影子只有根。
+
+当 $i\ge2$，令 $P$ 为上一层尾部诱导子图中包含 $C$ 的分支。$S_C$ 中各点在第 $i-2$ 层的前驱邻域都是 $S_P$ 的非空子集。若两个邻域互不包含，各取一个仅属于其中之一的前驱。这两个前驱和影子中的相应两点构成无弦四环。因此前驱邻域按包含关系嵌套，从最小者中取一点 $a_C$，它与整个 $S_C$ 相邻。
+
+在同一点上令 $\gamma(v,v)=1$，在棱上令 $\gamma(u,v)=g(u,v)$。反向取逆保证有重合顶点的三角比较误差为 $0$。取 $\varphi(o)=1$。深度 $1$ 的分支置 $a_C=o$、$Q_C=1$，其余分支沿父锚递推 $Q_C=Q_P\gamma(a_P,a_C)$。对第 $i$ 层的 $v\in C$ 选前驱 $b_v\in S_C$，置 $\varphi(v)=Q_C\gamma(a_C,b_v)\gamma(b_v,v)$。
+
+根棱精确拟合。同层相邻点 $u,v$ 属于同一分支，故可约去公共前缀 $Q_C$。若 $b_u=b_v$，只需比较一个三角形。否则 $b_u,u,v,b_v$ 构成四环，弦 $b_uv$ 或 $ub_v$ 使两条增益路径可用至多三个三角比较，故误差至多 $3\varepsilon$。对从第 $i-1$ 层到第 $i$ 层的棱 $uv$（$i\ge2$），以 $Q_C\gamma(a_C,u)$ 为中间值。先在父影子一侧比较经 $b_u$ 与经 $a_C$ 到 $u$ 的两条路径，再比较从 $a_C$ 经 $u$ 与经 $b_v$ 到 $v$ 的两条路径。每侧用两个三角比较，左右乘的等距性保留各步误差，合计至多 $4\varepsilon$。相邻顶点的层数至多差 $1$，取逆又保距，故所有有向棱都在此界内。完整证明由 Lean 内核检查。
+:::
+
+**闭路缺陷（手工推导）。** 沿用 $g_{uv}=g(u,v)$ 的简记。以下计算采用双不变度量。长为 $\ell$ 的简单回路遇弦可写成 $(pc^{-1})(cq)$，其中 $p,q$ 为两段路径增益，$c$ 为弦增益。两条短回路的长度和是 $\ell+2$，由三角形起归纳，闭路增益距 $1$ 至多 $(\ell-2)\varepsilon$。一般闭游走删去折返并在重复顶点处分解，同样得到 $(\ell-2)_+\varepsilon$，因为各段的正部系数之和不超过原系数。空路径增益为 $1$，故此界也比较同端点路径。森林沿树路径积累增益即可精确拟合，$\varepsilon=0$ 时闭路界给出精确路径无关性。
+
+**小阶常数与反例（手工推导）。** 对图 $(V,E)$ 和双不变度量群 $H$ 中的增益，定义重构误差为 $\inf_{\phi:V\to H}\max_{uv\in E}d(g_{uv},\phi_u^{-1}\phi_v)$。一般度量群中的下确界未必可取到。约定空棱集或空回路集上的最大值为 $0$。记 $C(n)$ 为所有 $n$ 点弦图、双不变度量群及三角缺陷至多为 $\varepsilon>0$ 的增益实例上，重构误差与 $\varepsilon$ 之比的上确界。以下团树论证给出小阶结果。团树的节点是极大团，包含任一点的团连成子树。由单纯顶点消去归纳可构造这样的树。重插顶点时，其邻团若为极大团就将它扩张，否则将新团接到包含邻团的团上。以团中一点 $a$ 为锚，用 $\phi_x=\phi_a g_{ax}$ 可在该团内达到 $\varepsilon$。向子团延拓时，任选分隔团中的锚，新点之间仍在 $\varepsilon$ 内，分隔团到新点的误差至多在旧界上增加 $\varepsilon$。分隔团只有一点时旧界不增加。分隔团为 $\{a,b\}$ 时取 $\phi_x=\phi_b g_{ba}g_{ax}$。此时 $ax$ 的误差等于旧棱 $ab$ 的误差，$bx$ 和新点之间的误差由三角条件控制在 $\varepsilon$ 内。
 
 收缩团交集至多有 $2$ 点的团树棱，记收缩树直径为 $D$。从中央节点的一团或中央棱两端共享一锚的两团起步，所得误差至多 $(1+\lfloor D/2\rfloor)\varepsilon$。当 $D>0$，把直径路径提回原树，首团至少有 $4$ 点，每过一棱增加至少一个新点，故 $n\ge4+D$。若取等号，则所有团构成一条路径，各团有 $4$ 点，相邻团交于三点。若 $D\ge2$ 为偶数，中央两组三点交集有公共点，可用同一锚覆盖中央三团。若 $D\ge3$ 为奇数，中央交集中的三点在两侧交集中各至多失去一点，可覆盖中央四团。这两种起步都少跨一条未收缩棱。连同 $D=0,1$，得到 $\max\{1,\lfloor(n-3)/2\rfloor\}$ 上界。$n=7$ 时余下的情形为 $D=2$。若中央收缩节点中有两个不同的团向外伸出未收缩棱，两团各至少有 $4$ 点、交集至多有 $2$ 点，再加各分支的新点，至少需 $8$ 点。因此所有未收缩棱都从同一团 $K$ 出发。若只有两条，$|K|\le5$，两组三点以上的交集必有公共锚。若有三条，$|K|=4$，各交集至多删去一点，仍有公共锚。延拓经过的余棱都已收缩，故这一阶的上界也是 $1$。
 
@@ -1197,7 +1213,7 @@ $$
 | `H7` 局域层析与交换统计 | `T2` + `T3` | 参数计数 $K_d(ab)-K_d(a)K_d(b)=\frac{d(2-d)}4a(a-1)b(b-1)$；交换是矢高取 $0$ 与 $2$ 的公平对合，条款 I 去掉标签而不选扇区；一族给定对象在保留格拉姆阵到相位为止的意义下是否需要复数振幅：可比三角形填满每个圈时，当且仅当某个三点巴格曼乘积不是实数（有一个对象与其余每个对象都不正交时，这一判定已冻结），单比特上当且仅当布洛赫向量不共一个过球心的平面；在 $M_n(\mathbb{R})$、$M_n(\mathbb{C})$、$M_n(\mathbb{H})$ 的有限直和中，中心复结构等价于协变的生成元—读数词典（求异部分到求同部分的、与公平元换架对易的实线性双射），它不由条款 I–IV 与正性条件推出；$d\ge3$ 时交换回路只容许 $\pm1$ 两个特征标，平坦的比较不选其一，施温格输运基把符号写成 $4S$ 个直角旋子之积，而同类构造也给出相反符号；中心复结构与扇区选择仍是输入 | [@rem-appe-tomography-count]、[@rem-appe-swap-sagitta]、[@rem-appe-real-realizability-return-phase]、[@prop-appe-real-rephasing-star]、[@rem-appe-generator-reading-dictionary]、[@rem-appe-dictionary-independence]、[@rem-appe-exchange-configuration-space]、[@ex-appe-berry-robbins-transport]、[@rem-appe-spin-statistics-inputs] |
 | `H9` 连续路径积分与平稳作用量 | `T4` 输入 | 二次作用量下 $N$ 步切片乘积在每个有限 $N$ 上精确等于驻相路径的贡献（含前因子与马斯洛夫相位），谐振子的误差是显式的 $O(N^{-2})$，时间步须落在矢高表的椭圆行；一般作用量只剩一维的显式抵消界；固定 $\hbar$ 时，连续极限在算子层面由特罗特—纳尔逊定理给出，不需要路径测度（有界变差的这种复测度不存在）；非二次势的时间切片收敛与大维数驻相是文献结果；相互作用场论仍为 `OPEN` | [@rem-appe-oscillator-time-slicing]、[@ex-appe-time-step-trichotomy]、[@rem-appe-oscillatory-cancellation-bounds]、[@rem-appe-path-integral-remaining-inputs] |
 
-新增的两条输入是条款 IV（[@def-appe-third-point-redundancy]）与正性条件（[@rem-appe-involution-positivity]）；读数由态给出且至少有一个态时，后者等价于没有非零的零平方元素，而这一部分对态的一切读数不可见（[@rem-appe-positivity-invisible-part]）；求同读数不是实标量时，读数表的半正定另需一个正泛函。条款 IV 不必对一切三点成立：可比三角形填满每个圈就够了，而且对一切群而言这是恰好够的条件（[@rem-appe-triangle-simple-connectivity]）。条款 IV 排除一切全比较的和乐，它刻画的是第 1 层的平坦骨架；带真实曲率的第 2 层联络必须放弃它，那时 [@thm-appe-chordal-gain-potential-stability] 与 [@rem-appe-near-flat-gram-bound] 给出偏离的代价。
+新增的两条输入是条款 IV（[@def-appe-third-point-redundancy]）与正性条件（[@rem-appe-involution-positivity]）；读数由态给出且至少有一个态时，后者等价于没有非零的零平方元素，而这一部分对态的一切读数不可见（[@rem-appe-positivity-invisible-part]）；求同读数不是实标量时，读数表的半正定另需一个正泛函。条款 IV 不必对一切三点成立：可比三角形填满每个圈就够了，而且对一切群而言这是恰好够的条件（[@rem-appe-triangle-simple-connectivity]）。条款 IV 排除一切全比较的和乐，它刻画的是第 1 层的平坦骨架；带真实曲率的第 2 层联络必须放弃它，那时 [@thm-appe-chordal-gain-potential-stability]、[@thm-appe-chordal-uniform-gain-potential] 与 [@rem-appe-near-flat-gram-bound] 给出偏离的代价。
 
 E.8.6 与 E.8.7 不增加新的条款：`H6` 的可逆与连续两项各有一个只谈对象与读数的充分条件（过去完备、矢高读数在零点连续），条件化换成一条最优化原理，`H7` 有了一行计数公式；这些条件仍是输入。
 
