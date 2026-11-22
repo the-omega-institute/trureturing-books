@@ -533,6 +533,24 @@ $$
 在给定动量范围内还可以控制整条近似曲线。记 $F_n(u)=[(I+uJ_n)^{-1}]_{00}$、$T=\gamma_1^{-2}$，取 $0\le u\le U$。令 $H_n(t)=\det(tI-J_n)$。当 $u>0$，多项式 $[H_n(-1/u)^2-H_n(t)^2]/(1+ut)$ 的次数至多为 $2n-1$，且 $H_n$ 在截断谱上为零。对两条测度积分并利用矩相等，得到 $F-F_n=H_n(-1/u)^{-2}\int H_n(t)^2/(1+ut)\,d\mu>0$。再将 $(1+ut)^{-1}$ 以 $t=T/2$ 为中心作 $2n-1$ 次几何级数逼近，余项绝对值至多为 $[UT/(2+UT)]^{2n}$。两条概率测度各贡献不超过这个余项的积分误差，故 $0\le F(u)-F_n(u)\le 2[UT/(2+UT)]^{2n}$。在 $u=0$ 两条曲线均为一。[有限动量区间误差的推导](https://github.com/the-omega-institute/trureturing-books/issues/884#issuecomment-7071301055)
 :::
 
+::: {.remark #rem-ch39-fifteen-arithmetic-probes title="十五个比较设置怎样检验三维场的组合"}
+在 [@rem-ch39-jacobi-field-chain] 的同一算术链上，只激发前五个位置。零欧氏动量处的无量纲传播子为 $I$，所以实源 $x,y$ 的交叉响应是 $x\cdot y$。取五个单位基向量 $e_i$，再取十个等强同相的双站源 $v_{ij}=(e_i+e_j)/\sqrt2$（$1\le i<j\le5$）。双站源的归一化交叉响应为 $e_i\cdot v_{ij}=1/\sqrt2$。若探测器将两个单位源的响应读为相同结果概率 $\kappa(x,y)=(1+x\cdot y)/2$，则两个正交单站源给 $1/2$，而 $e_i$ 与 $v_{ij}$ 给 $(1+1/\sqrt2)/2$。相干相加、归一化及上述概率读出均是探测器的操作假设。五维记录的是独立源方向，所有位置共用三维空间。
+
+**算术链需要几个位置？** 在 $L^2(\mu)$ 中，$P_0,\ldots,P_4$ 是正交归一的前五个多项式，$P_{i-1}(J)e_0$ 恰为第 $i$ 个站点的单位源。它们及其成对相干和实现了这十五个设置。凡支撑紧且有无穷多点的正谱测度都给出同一单位基读数，谱的算术数据进入多项式的系数。若还要求每个源有有限的正则总留数，上文的条件 $P(0)=0$ 把四次以下多项式限制在四维。此时六个位置恰好足够：在 $t^2d\mu$ 下将 $1,t,\ldots,t^4$ 正交归一化得 $Q_0,\ldots,Q_4$，则 $tQ_i$ 在 $d\mu$ 下正交归一，并都满足端点消失条件。
+
+**固定权重的单旋子混合能达到怎样的精度？** 在每个单场内，为各设置选取单位四元数 $q_i,q_{ij}\in S^3\subset\mathbb R^4$，并用实点积给出概率 $(1+q\cdot q')/2$。不同场可用任意与设置无关的共同概率权重混合。令 $s_{ij}=q_i\cdot q_j$，五个 $q_i$ 的格拉姆矩阵 $G$ 的迹为五、秩至多为四，故 $\operatorname{Tr}G^2\ge25/4$，即 $\sum_{i<j}s_{ij}^2\ge5/8$。反三角不等式给出
+
+$$
+D=\sum_{i<j}\|q_i+q_j-\sqrt2\,q_{ij}\|^2
+ \ge\sum_{i<j}\frac{2s_{ij}^2}{(1+\sqrt{1+s_{ij}})^2}
+ \ge\frac{5}{4(1+\sqrt2)^2}.
+$$
+
+展开每项得到 $4+2s_{ij}-2\sqrt2(q_i\cdot q_{ij}+q_j\cdot q_{ij})$。这个表达式对三十个点积读数是仿射的，因此对单场取平均仍服从同一下界。目标表逐项给 $D=0$。令 $\delta$ 为这三十个概率中最大的绝对误差。由点积 $2\kappa-1$ 可知 $D$ 的偏差至多为 $20(2+4\sqrt2)\delta$。故任何这种固定混合都有 $\delta\ge 5/[80(1+\sqrt2)^2(2+4\sqrt2)]>0.00140048$。此论证也适用于连续概率混合。
+
+**允许两个量子比特接受联合测量时，全部读数可以精确实现。** 取 Pauli 矩阵 $X,Y,Z$ 及单位阵 $I$，在 $\mathbb C^2\otimes\mathbb C^2$ 上令 $\Gamma=(X\otimes I,Y\otimes I,Z\otimes X,Z\otimes Y,Z\otimes Z)$。这五个无迹厄米矩阵两两反对易且平方为单位阵。设置 $x$ 对应二值可观测量 $A_x=\sum_i x_i\Gamma_i$，其结果 $a=\pm1$ 的投影为 $\Pi_a^x=(I_4+aA_x)/2$。从 $I_4/4$ 出发，用 Lüders 规则先测 $A_x$ 再测 $A_y$。利用 $\operatorname{Tr}(A_xA_y)=4x\cdot y$，联合概率为 $\operatorname{Tr}(\Pi_b^y\Pi_a^x)/4=(1+ab\,x\cdot y)/4$。相同结果的概率恰为 $\kappa(x,y)$。这给出了使用联合可观测量、顺序读出和张量积的物理实现条件。[十五设置的误差界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/884#issuecomment-7071912175)
+:::
+
 **这条响应曲线可以由哪些传播子读出？（标量交换模型）** 取欧氏动量平方 $s=q_E^2>0$，引入自由质量尺度 $M>0$。令 $b_\gamma=M^2\gamma^2$，沿用 $p_\gamma=m_\gamma/(S\gamma^2)$。无量纲响应 $A(s)=F(s/M^2)=\sum_\gamma p_\gamma b_\gamma/(s+b_\gamma)$ 从 $1$ 严格递减到 $0$。没有接触项的标量对角传播子若有正谱表示 $D(s)=\int_{[0,\infty)}(s+b)^{-1}\,d\rho(b)$，则 $sD(s)$ 非减，因为每个 $s/(s+b)$ 都非减。因此 $A(s)/s$ 不能作为这种自相关传播子。分式分解还指出阻碍出现在哪里：
 
 $$
