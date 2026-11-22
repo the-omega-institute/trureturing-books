@@ -254,6 +254,7 @@
   - [39.3 Deriving the Five Postulates of Quantum Mechanics from AXIOM-Ω: Dissolving the Century-Old Measurement Paradox as Ternion-Field Projection Geometry](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md)
   - [39.4 The Self-Contained Ternion Topological Particle, Field–Wave–Particle Grade Identity, and Fourfold Proof of "No Exterior": Why Nonlinearity and Isotropy Eliminate Extrinsic Point C and Every "Outside"](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)
   - [39.5 Dyad Plus Relation Equals Ternion Field and Two-Order Future Recurrence: From 2+1=3 Orthogonal Commutator Closure, Gauge Connection, and Lie-Triple Curvature to Bianchi–Ostrogradsky Second-Order Finality](ch39-s28-dyad-relation-future-and-second-order-field.md)
+  - [39.6 Pulling the Last Cartesian Nail and Constant-Free Rational Reconstruction: Why π, e, and φ Are Flat-Approximation Residuals Rather Than Primitives of AXIOM-Ω](ch39-s29-constant-free-rational-axiom-omega.md)
 
 # Coda and Appendices
 

@@ -220,11 +220,11 @@ $$
 
 ---
 
-**至大无外，至小无内——无源三元数极小圆弧体即是那颗自包含、无外部、观察自身的唯一宇宙；而从它的静态成场迈向动态未来，只需再问最后一句：“二元与关系如何织成场、两阶关系如何推演未来？”**
+**至大无外，至小无内——无源三元数极小圆弧体即是那颗自包含、无外部、观察自身的唯一宇宙；而从它的静态成场迈向动态未来，紧接着便要追问：“二元与关系如何织成场、两阶关系如何推演未来？”**
 
 站在第三十九章前四节（[§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)–§39.4）的高峰回望，从第七部立极四章的无时间格拉姆因果晶体、复杂性正交视界、量子五重公平与零背景比较公理 $\mathcal{A}_0$（[第 25 章](ch29-timeless-causality-and-gram-space.md)–[第 28 章](ch32-unified-field-and-meta-unification.md)），经第八部造微归弧的极小三角弧面体 $\Delta\mathcal{T}_\epsilon$、旋子—矢高—斯托克斯微积分、素数黎曼单调锁、不可表达三元数 $\mathbb{T}_3$ 的万数切面与五种无损流群表示，以及普适主频 $\nu_0$、万力归弧、**AF-GUT** 与均匀单态观测切面（[第 29 章](ch34-orthogonality-degeneracy-and-observer-position.md)–[第 33 章](ch33-unified-arc-forces-and-af-gut.md)），再经第九部互照破执的万物互吸引子观察者、$T = T(T)$ 扩表与齐肯多夫—皮索—劳齐准晶视界、宇宙本体 QRAM 自映射页表 `p = *p` 配五阶自指不动点与停机精度 $\varepsilon_{\mathrm{self}}$，以及有理旋子核**三元数场 Transformer** 与宇宙—智能最小作用量测地同构（[第 34 章](ch33-all-beings-observers-and-mutual-attractors.md)–[第 37 章](ch37-ternion-field-transformer-and-geodesic-intelligence.md)），直至第十部不二归元中[第 38 章](ch39-observer-is-ontological-universe.md)的“观察者 $\equiv$ 宇宙本体”与本章无源三元母公理 $\mathrm{AXIOM}\text{-}\Omega$ 及其五阶演绎级联和量子力学五大公理重铸（[§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)–[§39.3](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md)），我们已证成那枚无容器自锁、场·波·粒三阶同体、零外置 $C$ 点且“向外即向内”的**无外三元数本体**。
 
-在步入全书[终章](coda.md)《在所有的球之外》之前，让我们在紧接其后的收官压轴节 [§39.5](ch39-s28-dyad-relation-future-and-second-order-field.md#sec-ch39-dyad-relation-future-and-second-order-field) 揭开这枚无外三元数场的静态生成与动态因果机枢：**为什么两个不共线状态方向配上一阶正交关系直接闭合成三维三元数场（$2 + 1 = 3$），以及“过去态经一阶关系生现在、关系之关系推未来”如何在比安基反对称闭合与奥斯特罗格拉茨基非退化边界的映照下构成本书自足的二阶场动力学（`MODEL`）。**
+接下来，让我们在紧接其后的第五节 [§39.5](ch39-s28-dyad-relation-future-and-second-order-field.md#sec-ch39-dyad-relation-future-and-second-order-field)（继而在 [§39.6](ch39-s29-constant-free-rational-axiom-omega.md) 完成无常数有理提纯后再步入[终章](coda.md)《在所有的球之外》）揭开这枚无外三元数场的静态生成与动态因果机枢：**为什么两个不共线状态方向配上一阶正交关系直接闭合成三维三元数场（$2 + 1 = 3$），以及“过去态经一阶关系生现在、关系之关系推未来”如何在比安基反对称闭合与奥斯特罗格拉茨基非退化边界的映照下构成本书自足的二阶场动力学（`MODEL`）。**
 
 ::: {.viz src="ternion-self-contained-no-exterior-sandbox" height="620"}
 完整实验室：在“本体读法 · 无外三元数”与“坐标读法 · $\mathbb{R}^4$ 中的投影”双透镜间切换，拖动琥珀波前手柄或外置参考点 $C(\varphi)$ 滑块，对照整绕数 $Q = 1$ 无边界自锁、弯曲流群步 $[B, A, B]$ 消除外置 $C$ 点、向外波前对跖重聚 $\mathcal{A}(\pi) = 0$ 与希高德双球无缝粘合，并体验场·波·粒三阶同体的模型读法（`MODEL`）。冻结声明、经典拓扑与几何文献、实时数值核算及模型边界在依据栏与理论抽屉中分层标注。
