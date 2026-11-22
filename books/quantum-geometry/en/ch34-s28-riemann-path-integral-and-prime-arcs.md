@@ -886,6 +886,26 @@ For $q\le u\le q^{29/28}$, split the unit bins of the actual zero ordinates at $
 The signed trivial-root term costs $O(q^{3/4}(1+\ln q))$. For the arithmetic tail, the difference of the Möbius prefixes at $q+j$ and $q-1$ is $O(q^{-1/4}(q+j))$. Abel summation against the decreasing Chebyshev weights bounds that tail by $O(q^{3/4})$ after normalization. Integrate the resulting density bound between $\ln a$ and $\ln B$ to obtain the power difference in the statement. It vanishes at $B=a$.
 :::
 
+::: {.theorem #thm-ch31-prime-window-three-quarters title="A three-quarter exponent for the signed prime window" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusThreeQuarters.prime_window_mobius_three_quarters_of_rh"}
+Assume the Riemann hypothesis. For each $\varepsilon>0$ there are real constants $a_0\ge2$ and $C>0$ such that every integer $m\ge2$ and all real $B\ge a\ge a_0$ satisfy
+$$
+|E_m(a,B)|\le C m^{3/4+\varepsilon}D_{s_m}(a,B),\qquad
+s_m=\tfrac12-\tfrac1{m+1}.
+$$
+The residual $E_m$ uses the original signed corrections. The spectral series count zeros with analytic multiplicity, and the retained root primitives satisfy the strict inequality $2n<m+1$.
+:::
+
+::: proof
+Put $q=m+1$ and $u=\ln x$. For each omitted degree set $v_n=u/n-2u/q\le0$. Split the actual root coefficient as $-1/\rho-1/(n-\rho)$. Write $\rho=\tfrac12+i\gamma$ and extract the common unit phase $\exp(2i\gamma u/q)$. The reciprocal $\rho^{-1}$ in the first term comes from integrating $e^{\rho t}$ up to $v_n$. Moving the degree sum inside the integral gives a signed Möbius prefix multiplied by $e^{t/2}$ and a low-frequency phase sum. Since $v_n$ decreases with $n$, the degrees satisfying $t\le v_n$ form an interval whose sum is a difference of two ordinary prefixes.
+
+Partition $t\le0$ into unit intervals. The local spectral integral is controlled by the square mass of the frequency bins, and the exponential weight makes the interval bounds sum geometrically. Counting the actual low-bin occurrences gives a cost of $O(q^{1/2+\eta}(H+1)^{1/2+\eta})$ for the first term. The second term costs $O((H+1)^{1+\eta})$ because each coefficient is at most $3/q$ in modulus. The high-bin square mass gives the tail cost $O(qH^{\eta-1/2})$.
+
+At $H=\lfloor\sqrt q\rfloor$ all three costs are $O(q^{3/4+2\eta})$. The pointwise Möbius prefix controls the near range and the arithmetic corrections. Choose $\eta>0$ small enough and integrate from $\ln a$ to $\ln B$ to recover the original power difference. Both sides vanish at $a=B$. The full proof is checked by the Lean kernel.
+:::
+
+This gives a uniform upper bound under RH. The optimal order of the signed residual remains open.
+
+
 ::: {.theorem #thm-ch31-prime-window-eight-ninths title="An eight-ninths order bound for the signed prime window" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEightNinths.prime_window_mobius_eight_ninths_of_rh"}
 Assume RH. For each real $\varepsilon>0$ there are constants $a_0\ge2$ and $C>0$ such that every integer $m\ge2$ and every pair of real endpoints $B\ge a\ge a_0$ satisfy
 
