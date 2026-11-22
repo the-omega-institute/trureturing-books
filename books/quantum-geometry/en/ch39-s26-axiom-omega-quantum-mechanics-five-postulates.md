@@ -440,6 +440,27 @@ In the first star all $k_0+1$ vertices require odd degree, an even number. The o
 
 The [connected-graph degree parity criterion](lean:D5/S3/Combinatorics/Graph/Walks/PrescribedDegreeParities.exact_parity_subgraph) supplies the edge selection in each tree.
 
+**A lower bound on the total fixed count at odd multipliers.** In even dimension $n\ge6$ with odd multiplier $k$, the two high-weight layers give
+$$
+\begin{aligned}
+\frac14\sum_i z_i \ge 1
+&+\max(0,n+1-2k)\\
+&+\max\left(0,\binom{n}{2}+1-nk\right).
+\end{aligned}
+$$
+
+Use the normalized profile matrix from the single-coordinate calculation. In the all-ones row, the two per-point multiplicities have equal parity in each column, since their sum and the contribution from the ordinary rows together give an even coloured column sum. Denote their mean by $b(q)$, and write $S$ for the sum of $|q|$ over columns where both multiplicities are odd. Those columns contribute at least $S$ units of four fixed seeds. Since each special colour sums to $k$, at least one such column exists. Let $\ell$ be the sum of $b(q)$ outside the weight-$(n-1)$ columns, and let $s$ be its sum over singleton columns.
+
+Among the $n$ columns of weight $n-1$, the all-zero and all-ones rows together contribute at most $2k-\ell$ units. Each column reached by neither row needs an odd ordinary entry in a nonzero row, whose profile intersects that column. This accounts for at least $\max(0,n-2k+\ell)$ units of fixed count. Among the $\binom{n}{2}$ rows of weight $n-2$, each needs an odd ordinary entry. Singleton columns have at most $nk-s$ units available for those entries. Each remaining row needs an odd entry in a column of weight at least three and gives at least one fixed-count unit. An entry selected by both arguments lies in a row of weight $n-2$ and a column of weight $n-1$, so its intersection has at least $n-3$ coordinates and can account for both contributions.
+
+Let $A$ be the mass from the zero and full rows in columns of weight $n-1$, and let $B$ be the mass from rows of weight $n-2$ in singleton columns. Keeping those masses gives the lower bound $S+\max(0,n-A)+\max(0,\binom{n}{2}-B)$ in units of four fixed seeds. The inequalities $A\le2k-\ell$ and $B\le nk-s$ give the two deficits above. [Matrix bound using the exact exceptional masses](lean:D5/S3/ConceptDynamics/Attribution/ParityOddRankBounds.weighted_rank_deficits_le_intersections)
+
+Add the two deficits and $S$. An odd special singleton makes $S$, $\ell$ and $s$ each at least one. Any odd special column of greater weight gives $S\ge3$, which covers the extra unit in each positive-part term. This yields the displayed bound. [Matrix bound in terms of dimension and multiplier](lean:D5/S3/ConceptDynamics/Attribution/ParityOddRankBounds.fixed_from_odd_margins)
+
+At $k=1$ in even dimension $n$, the exact spectrum at the least budget gives a stronger result. Apply its even-word inequality to the all-ones word to get $\sum_i(M-a_i)\ge M$, where $M=2^{n-2}$. Since $z_i=4(M-a_i)$, this gives $\sum_i z_i\ge 2^n$. To attain the bound at a prescribed coordinate $j$, set $a_j=0$ and set all other $a_i=M$. The only word for which every summand of the inequality vanishes has ones everywhere except at $j$, so its weight is odd. Every even-word inequality therefore has a summand equal to $M$. This realizes $z_j=2^n$ with zero fixed counts at the other coordinates.
+
+At $k=3$, the bounds for dimensions six and eight are respectively eight and thirty-six fixed seeds in total. Integer orbit tables attain these totals. They give fixed-count vectors $(0,8,0,0,0,0)$ and $(16,0,0,8,4,0,0,8)$ in the tested coordinate orders.
+
 **An optimal uniform calibration for rational marginals.** Let $G$ act on finite input and output sets $X$ and $Y$, let $P$ be a $G$-covariant probability kernel, and let $H$ be any subgroup. If a positive integer $m$ makes every $mP(x,y)$ integral, a uniform seed law attains the maximum $H$-fixed mass. One sufficient seed count is $m|\det B|$, where $B$ is an invertible square submatrix of the integer constraint matrix below, using the positive support of a suitable optimizer as its columns.
 
 Write $q_O$ for the weight of each deterministic readout table $t:X\to Y$ in its $G$-orbit $O$. The normalization row of $A$ has entry $|O|$ in column $O$. The row for cell $(x,y)$ has entry $|\{t\in O:t(x)=y\}|$. The corresponding entries of $b$ are $1$ and $P(x,y)$. Let $c_O$ count the tables in $O$ that are fixed by $H$. Sending seeds equivariantly to their complete readout tables preserves the marginals and sends every $H$-fixed seed to an $H$-fixed table. Conversely, using the positive-weight tables as seeds and evaluating them realizes any feasible table law. The maximum fixed mass is therefore the maximum of $\sum_O c_Oq_O$ subject to $Aq=b$ and $q\ge0$. Independent draws from the rows give an invariant table law. The normalization row makes the feasible set bounded, and its closedness ensures the maximum is attained.
