@@ -1149,6 +1149,20 @@ The symmetric difference multiplies the mode with ordinate $\gamma$ by $2(\cos(\
 
 This determines the two terms of the symmetric modulus uniformly over tails. The corresponding sharp upper rate for forward increments remains open.
 
+::: {.theorem #thm-ch31-signed-shrinking-lower title="A lower error scale for arbitrarily late signed shrinking windows" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSignedShrinkingLower.signed_window_even_cutoff_shrinking_lower"}
+Assume RH. Take natural numbers $m,r$ with $m\ge2$, $m+1=2r$, and $\mu(r)\ne0$. Use $F_L$, $c_m$, and $S_r$ from [@thm-ch31-prime-window-shrinking-width]. There are constants $d_m>0$ and $0<H_m<1$ such that for every $0<L<H_m$ and every real $U$ there is a real $u\ge U$ satisfying
+
+$$
+\left|F_L(u)+c_m+\mu(r)S_r(u)\right|\ge d_m L\log(1/L).
+$$
+:::
+
+::: proof
+The imaginary parts of the root coefficients decay by an extra power of the ordinate. Consequently the root-spectrum values on opposite sides of the origin differ by at most a constant times the shift. Combine this estimate with the symmetric cusp in [@thm-ch31-centered-root-log-cusp] to obtain a one-sided logarithmic lower bound. Averaging with the original positive exponential weight preserves the scale $L\log(1/L)$. At a fixed width, absolute summability makes the weighted average and the endpoint value continuous functions of the actual phases. Phase recurrence transfers the lower bound at the origin to arbitrarily late starts, where the arithmetic remainder is smaller than a fixed fraction of the spectral bound. The full proof is checked by the Lean kernel.
+:::
+
+The starting point may depend on both the width and the prescribed threshold. The upper bound in [@thm-ch31-prime-window-shrinking-rate] and this lower bound for the same signed window still differ by a logarithmic factor in the width.
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 
