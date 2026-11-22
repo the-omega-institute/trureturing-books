@@ -495,6 +495,35 @@ The origin cusp gives a positive lower bound of order $h\log(1/h)$ for the symme
 
 The start can depend on the shift and the prescribed threshold. This controls the worst forward increment on every late tail. The matching upper rate for those increments remains open.
 
+::: {.theorem #thm-ch31-root-symmetric-tail-modulus title="The symmetric root-spectrum modulus on each tail" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHRootTailModulus.root_signal_symmetric_tail_modulus"}
+Assume RH and use $S_r$, $s$ and $c$ from [@thm-ch31-centered-root-log-cusp]. Fix any real $r>1$. For real $U$ and $0<h\le r/2$, the set of values of $|S_r(u+h)+S_r(u-h)-2S_r(u)|$ for $u\ge U$ is nonempty and bounded above. Write $M_r(U,h)$ for its supremum. There is a $C_r>0$ that works for every such $U,h$ and satisfies
+
+$$
+\left|M_r(U,h)-\frac{h}{s}\bigl(\log(1/h)+\log r-2c\bigr)\right|
+ \le C_r h^2.
+$$
+:::
+
+::: proof
+The symmetric difference multiplies the mode with ordinate $\gamma$ by $2(\cos(\gamma h/r)-1)$. Take the absolute value of each term. Its root coefficient has norm at most $r/(1/4+\gamma^2)$. The sum of these majorants equals $2r(K(0)-K(h/r))/s$ and bounds every starting point. For the lower bound, recurrence places values arbitrarily close to the signed symmetric difference at zero in each tail. The supremum therefore lies above that origin value. The two bounding expressions have the same logarithmic and linear coefficients, with quadratic errors.
+:::
+
+This determines the two terms of the symmetric modulus uniformly over tails. The corresponding sharp upper rate for forward increments remains open.
+
+::: {.theorem #thm-ch31-signed-shrinking-lower title="A lower error scale for arbitrarily late signed shrinking windows" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSignedShrinkingLower.signed_window_even_cutoff_shrinking_lower"}
+Assume RH. Take natural numbers $m,r$ with $m\ge2$, $m+1=2r$, and $\mu(r)\ne0$. Use $F_L$, $c_m$, and $S_r$ from [@thm-ch31-prime-window-shrinking-width]. There is a width threshold $0<H_m<1$ such that for every $0<d<e^{-s}/(8s)$, every $0<L<H_m$, and every real $U$, there is a real $u\ge U$ satisfying
+
+$$
+-\mu(r)\bigl(F_L(u)+c_m+\mu(r)S_r(u)\bigr)\ge dL\log(1/L).
+$$
+:::
+
+::: proof
+The imaginary parts of the root coefficients decay by an extra power of the ordinate. Consequently the root-spectrum values on opposite sides of the origin differ by at most a constant times the shift. Combine this estimate with the symmetric cusp in [@thm-ch31-centered-root-log-cusp] to obtain a one-sided logarithmic lower bound. Averaging with the original positive exponential weight preserves the scale $L\log(1/L)$. At a fixed width, absolute summability makes the weighted average and the endpoint value continuous functions of the actual phases. Put $C=e^{-s}/(8s)$ and $T=L\log(1/L)$. The averaged spectral gap at the origin is at least $CT$. For each $d<C$, phase recurrence transfers a level above $(C+d)T/2$ to an arbitrarily late start. Choose the start past the threshold where the normalized arithmetic remainder is smaller than $(C-d)T/2$. Their difference gives the stated signed bound. The full proof is checked by the Lean kernel.
+:::
+
+Since $\mu(r)\in\{-1,1\}$, the inequality gives both the sign of the discrepancy and a lower bound for its magnitude. The starting point may depend on both the width and the prescribed threshold. The upper bound in [@thm-ch31-prime-window-shrinking-rate] and this lower bound for the same signed window still differ by a logarithmic factor in the width.
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 
