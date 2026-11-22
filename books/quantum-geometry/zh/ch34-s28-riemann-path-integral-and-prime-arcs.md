@@ -1096,6 +1096,30 @@ $$
 
 这个不等式给出显式上界。带符号级数对窗宽的最优依赖仍待确定。
 
+::: {.theorem #thm-ch31-centered-root-log-cusp title="居中根谱在原点的对数尖点" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHRootSignalCusp.root_signal_symmetric_cusp"}
+假设 RH。对每个实数 $r>1$，令 $s=1/2-1/(2r)$，并用 [@thm-ch31-prime-window-shrinking-width] 中的级数定义 $S_r$。这里 $r$ 可取任意实数，级数仍按解析重数计入每个非平凡零点。设 $c=(\gamma_{\mathrm{EM}}-1+\log(2\pi))/2$，其中 $\gamma_{\mathrm{EM}}$ 是欧拉常数。存在 $C_r>0$，使得对每个 $0<h\le r/2$，
+
+$$
+\begin{aligned}
+ \biggl|S_r(h)+S_r(-h)-2S_r(0)
+ &-\frac{h}{s}\bigl(\log(1/h)+\log r-2c\bigr)\biggr|
+ \le C_r h^2.
+\end{aligned}
+$$
+:::
+
+::: proof
+写 $\gamma=\operatorname{Im}\rho$，$w_\rho=(1/4+\gamma^2)^{-1}$。对称差消去每项的正弦分量，余弦分量的乘子为 $2(\cos(\gamma h/r)-1)$。根系数的实部和参考系数 $-rw_\rho$ 相差
+
+$$
+\frac{r(r-1)(r-1/2)w_\rho}{(r-1/2)^2+\gamma^2}.
+$$
+
+用 $2|1-\cos x|\le x^2$，修正级数的绝对值由 $h^2$ 乘以一个常数控制，因为 $\sum_\rho w_\rho$ 有限。参考系数给出的部分为 $-2r(K(h/r)-K(0))/s$，其中 $K$ 是实际零点的加权余弦核。代入 $K$ 在原点的展开即得两个系数。这里借用了指数模逐项处理及绝对可和尾项控制的方法。 [指数级数方法](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L109-L143) · [实际余弦核的余项估计](lean:D5/S3/Weil/Mertens/IntegratedExplicit/ActualKernelCusp.cusp_remainder_bound)
+:::
+
+原点处的对称差以 $h\log(1/h)$ 为首阶。任意晚起点上的一阶增量及其最优一致模量需要另外的估计。
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 
