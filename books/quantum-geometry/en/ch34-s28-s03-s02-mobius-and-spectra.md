@@ -564,6 +564,30 @@ For each frequency $\omega$, pair the modes at distance $h$ on either side of th
 
 The quadratic remainder applies to the original exponential weight and includes $\mu(r)=0$. Correction at the left endpoint still depends on a uniform bound for first differences.
 
+::: {.theorem #thm-ch31-weighted-phase-limsup title="A weighted phase criterion for the left-endpoint error" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHWeightedPhaseLimsup.signed_window_even_cutoff_weighted_phase"}
+Assume RH. For each distinct positive zeta zero ordinate $\gamma$, let $m_\gamma$ be its analytic multiplicity. For $T$ sufficiently large, put
+$$
+w_\gamma=\frac{m_\gamma\gamma}{1/4+\gamma^2},\qquad
+W(T)=\sum_{0<\gamma\le T}w_\gamma,\qquad
+D(T)=1-\frac{\displaystyle\sup_{v\in\mathbb R}\sum_{0<\gamma\le T}w_\gamma\sin(\gamma v)}{W(T)}.
+$$
+
+Take natural numbers $m,r$ with $m\ge2$ and $m+1=2r$, and use $s,F_L,c_m,S_r$ from [@thm-ch31-prime-window-shrinking-width]. For every sufficiently small $L>0$ the absolute error $|F_L(u)+c_m+\mu(r)S_r(u)|$ is bounded on a late tail. Write $Q_m^{\rm left}(L)$ for its limsup as $u\to+\infty$. Then
+$$
+\frac{Q_m^{\rm left}(L)}{L\log^2(1/L)}
+-\frac{|\mu(r)|}{4\pi s}\bigl(1-D(2r/L)\bigr)\longrightarrow 0
+\qquad (L\downarrow0).
+$$
+
+For $\mu(r)\ne0$, the normalized limsup tends to $|\mu(r)|/(4\pi s)$ exactly when $D(T)\to0$ as $T\to+\infty$.
+:::
+
+::: proof
+With $h=L/2$, the left correction differs from the midpoint correction by the signed forward root increment of length $h$. Linearizing the root modes up to $\gamma\le r/h$ and bounding their remaining tail approximates this increment by $(2h/s)\sum_{0<\gamma\le r/h}w_\gamma\sin(\gamma u/r)$ with a uniform error of order $h\log(1/h)$. Oddness makes the real supremum of the sine polynomial equal to its absolute supremum. One common phase return carries a value arbitrarily close to that supremum to arbitrarily late starts. The midpoint error has lower order, and $W(T)/\log^2 T\to1/(4\pi)$. Substitution of $T=2r/L$ gives the formula and the equivalence. When $\mu(r)=0$, the late limsup is zero for small widths.
+:::
+
+The remaining question under RH alone is whether the actual zeros satisfy $D(T)\to0$. This condition measures the total weight of the phases that can be brought close to a quarter turn by one common time, with progressively larger cutoffs.
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 

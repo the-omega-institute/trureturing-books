@@ -564,6 +564,30 @@ $$
 
 这里的二次余项适用于原窗口的指数权，且允许 $\mu(r)=0$。左端点校正仍涉及一阶谱差的一致上界。
 
+::: {.theorem #thm-ch31-weighted-phase-limsup title="左端点误差的加权相位判据" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHWeightedPhaseLimsup.signed_window_even_cutoff_weighted_phase"}
+假设 RH。对 ζ 函数每个不同的正零点纵坐标 $\gamma$，记其解析重数为 $m_\gamma$。对充分大的 $T$，定义
+$$
+w_\gamma=\frac{m_\gamma\gamma}{1/4+\gamma^2},\qquad
+W(T)=\sum_{0<\gamma\le T}w_\gamma,\qquad
+D(T)=1-\frac{\displaystyle\sup_{v\in\mathbb R}\sum_{0<\gamma\le T}w_\gamma\sin(\gamma v)}{W(T)}.
+$$
+
+取自然数 $m,r$，满足 $m\ge2$ 且 $m+1=2r$，并沿用 [@thm-ch31-prime-window-shrinking-width] 的 $s,F_L,c_m,S_r$。对每个充分小的 $L>0$，绝对误差 $|F_L(u)+c_m+\mu(r)S_r(u)|$ 在充分晚的尾区间上有界。记它在 $u\to+\infty$ 时的上极限为 $Q_m^{\rm left}(L)$。于是
+$$
+\frac{Q_m^{\rm left}(L)}{L\log^2(1/L)}
+-\frac{|\mu(r)|}{4\pi s}\bigl(1-D(2r/L)\bigr)\longrightarrow 0
+\qquad (L\downarrow0).
+$$
+
+当 $\mu(r)\ne0$ 时，归一化上极限趋于 $|\mu(r)|/(4\pi s)$ 当且仅当 $T\to+\infty$ 时 $D(T)\to0$。
+:::
+
+::: proof
+令 $h=L/2$。左端点校正与中点校正之差是步长为 $h$ 的带符号前向根谱增量。对 $\gamma\le r/h$ 的根谱模态作线性近似，再估计剩余的高频尾部，便得到近似式 $(2h/s)\sum_{0<\gamma\le r/h}w_\gamma\sin(\gamma u/r)$，其误差对所有 $u$ 一致为 $h\log(1/h)$ 量级。正弦多项式的奇性使它的实上确界等于绝对值的上确界。一次共同的相位复现把任意接近该上确界的取值送到任意晚的起点。中点误差属于较低阶，而 $W(T)/\log^2 T\to1/(4\pi)$。代入 $T=2r/L$ 即得公式与等价条件。当 $\mu(r)=0$ 时，充分小窗宽的晚期上极限为零。
+:::
+
+仅在 RH 下，实际零点是否满足 $D(T)\to0$ 仍是开放问题。这个条件衡量在逐步增大的截断范围内，共同时刻能使多大权重的相位接近四分之一周。
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 
