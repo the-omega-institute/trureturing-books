@@ -791,6 +791,30 @@ Choose the pivot $x=e_j$ for some $j\in H$. As in the uniform calculation, write
 
 Index the coefficients of $h$ by $s$-subsets of this basis. A coefficient using neither $z$ nor $w$ is killed by $n$. One using both is killed by $n,u,v$, hence by $g=\gcd(n,u,v)$, since the pivot weight is $n-\sum_{i\ne j}m_i$. For each $(s-1)$-subset $J$ avoiding both, the two coefficients $X=h(z,J)$ and $Y=h(w,J)$ satisfy $uX+vY=0$ and are killed by $n$. An integral Bézout change of the pair makes this equation multiplication by $\gcd(u,v)$ on a single coordinate, so the pair contributes one factor of order $g$ and one of order $n$. These are all the equations from insertion of $u z+v w$, obtained by evaluating on $(s-1)$-subsets. The single condition from $H$ sets $X=0$ in the pair whose $J$ consists of the remaining first-summand basis vectors. That pair contributes only the factor of order $\gcd(n,v)=q$. Counting the other coordinates by whether their subset uses $z$ or $w$ gives the two binomial multiplicities in the displayed formula.
 
+::: {.theorem #thm-joint-circuit-two-omitted-uniform-bases title="Cyclic factors with two omitted uniform bases" lean="D5/S3/Combinatorics/Matroids/TwoOmittedCircuitInvariantFactors.two_omitted_lifting_obstruction_invariant_factors"}
+Let $r\ge 3$. Suppose the core matroid has every $r$-element subset as a basis except $H$ and $J$, with $|H\cap J|\le r-2$. Then the number of classes satisfies $k\ge r+2$. For the block-ordered parallel expansion, put $q_T=\gcd(n,\gcd_{i\notin T}m_i)$ for $T\in\{H,J\}$. The joint lifting obstruction has a cyclic decomposition
+
+$$
+\begin{aligned}
+&(\mathbb Z/g\mathbb Z)^{\binom{k-2}{r-2}-2}
+\;\oplus\;
+(\mathbb Z/n\mathbb Z)^{\binom{k-2}{r-1}-2}\\
+&\qquad{}\oplus\;\mathbb Z/q_H\mathbb Z
+\;\oplus\;\mathbb Z/q_J\mathbb Z .
+\end{aligned}
+$$
+:::
+
+::: proof
+Since $|H\cup J|\ge r+2$, an $(r+1)$-element set contains at most one omitted basis. The sign comparison from the single-omission calculation therefore applies row by row. The two added conditions are $f(H)=0$ and $f(J)=0$. With the pivot decomposition $f=a\wedge h$, these become vanishing conditions on the top coefficient of $h$ in each of two difference lattices. If $H$ and $J$ meet, use a common representative in the intersection. If they are disjoint, choose one representative in each set and take differences within that set.
+
+Write $F,G$ for the index sets of the two coefficients. Partition the indices by membership in $F$, membership in $G$, and equality to the pivot. Within each block, Bézout's identity puts the weight vector on a single coordinate. The basis change preserves the two difference lattices. Since $F\setminus G$ has at least two indices, at least one of them acquires zero weight. Decompose the alternating coefficients according to the intersection of their index set with the zero-weight indices. Insertion of the weighted vector uses only nonzero weights, so the boundary equation preserves each component. The equations at $F$ and $G$ act in different components.
+
+Let $L_{\varnothing},L_H,L_J,L_{HJ}$ be the obstruction groups with neither omission, with only $H$ omitted, with only $J$ omitted, and with both omitted. Reordering the components gives $L_{\varnothing}\oplus L_{HJ}\cong L_H\oplus L_J$. Substitute the two single-omission formulas and cancel a copy of the uniform obstruction by direct-sum cancellation for finite $\mathbb Z$-modules. The full proof is checked by the Lean kernel.
+:::
+
+The two exceptional orders both divide $n$ and can be incomparable under divisibility. For example, take $r=3$, $H=\{1,2,3\}$, $J=\{3,4,5\}$ and class sizes $3,3,2,2,2$ in order. Then $n=12$, $g=1$, $q_H=2$, and $q_J=3$. The cyclic decomposition gives three nontrivial factors of orders $12,2,3$. Combining the coprime factors puts the group in invariant-factor form with orders $6,12$.
+
 **Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 If there are no nonempty facets, the original realization is empty and its reduced integral homology vanishes in every nonnegative degree. When facets exist and $d=1$, the wedge is a discrete space with $m+1$ points and reduced degree-zero generators $[p_B]-[p_0]$, where $p_B$ is the point contributed by $B$ and $p_0$ is the common basepoint. When facets exist and $m=0$, the wedge is a point and every reduced group vanishes. For a nonempty family of facets, the reduced Euler characteristic is $(-1)^{d-1}m$, so the earlier Tutte evaluation gives $m=2^d T_M(1,1/2)$.
