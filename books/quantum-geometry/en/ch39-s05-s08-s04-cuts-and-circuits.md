@@ -827,6 +827,24 @@ For a three-element face containing a complete pair, only the two extensions usi
 Reading off a basis with complete pair $A$ and another with complete pair $B$ recovers $u,v$, so the four choices yield distinct obstruction classes. Here $n=6$, $g=1$, and all three $q_T$ equal one. Independent replacement leaves $\binom{4}{3}-3=1$ factor of order six. Exactly two elements of $\mathbb Z/6\mathbb Z$ are killed by two. The full proof is checked by the Lean kernel.
 :::
 
+::: {.theorem #thm-joint-circuit-sunflower-omissions title="Cyclic factors for omissions with a common element" lean="D5/S3/Combinatorics/Matroids/SunflowerCircuitInvariantFactors.sunflower_lifting_obstruction_invariant_factors"}
+Let $3\le r<k$, and let the omitted $r$-element sets be $T_1,\ldots,T_t$. Suppose they contain a common element $e$ and the petals $T_i\setminus\{e\}$ are pairwise disjoint. The other $r$-element sets are precisely the bases of the core. For a block-ordered parallel expansion, set $q_T=\gcd(n,\gcd_{i\notin T}m_i)$. If both $\binom{k-2}{r-2}$ and $\binom{k-2}{r-1}$ are at least $t$, the joint lifting obstruction is isomorphic to
+$$
+\begin{aligned}
+&(\mathbb Z/g\mathbb Z)^{\binom{k-2}{r-2}-t}
+\;\oplus\;
+(\mathbb Z/n\mathbb Z)^{\binom{k-2}{r-1}-t}\\
+&\qquad{}\oplus\bigoplus_{j=1}^{t}\mathbb Z/q_{T_j}\mathbb Z .
+\end{aligned}
+$$
+:::
+
+::: proof
+Use $e$ as the pivot for every omission. In difference coordinates, each omission imposes one condition on the coefficient of its petal. An integral change of basis within each petal concentrates its weights on a single coordinate. Each petal contains at least two coordinates, so each has a zero-weight coordinate of its own.
+
+Group the coefficients by their intersection with the zero-weight indices. Inserting the pivot or the weighted vector preserves this grouping. To add $T$ to an omitted family $S$, keep the coefficient group of the petal of $T$ in place and exchange all other groups between a pair of forms. This is an involution. It gives $L_\varnothing\oplus L_{S\cup\{T\}}\cong L_S\oplus L_{\{T\}}$, where $L_A$ denotes the obstruction for the omissions in $A$. Substitute the single-omission formula and cancel the finite uniform module. Induction gives the displayed cyclic factors. The full proof is checked by the Lean kernel.
+:::
+
 **Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 If there are no nonempty facets, the original realization is empty and its reduced integral homology vanishes in every nonnegative degree. When facets exist and $d=1$, the wedge is a discrete space with $m+1$ points and reduced degree-zero generators $[p_B]-[p_0]$, where $p_B$ is the point contributed by $B$ and $p_0$ is the common basepoint. When facets exist and $m=0$, the wedge is a point and every reduced group vanishes. For a nonempty family of facets, the reduced Euler characteristic is $(-1)^{d-1}m$, so the earlier Tutte evaluation gives $m=2^d T_M(1,1/2)$.
