@@ -1150,10 +1150,10 @@ The symmetric difference multiplies the mode with ordinate $\gamma$ by $2(\cos(\
 This determines the two terms of the symmetric modulus uniformly over tails. The corresponding sharp upper rate for forward increments remains open.
 
 ::: {.theorem #thm-ch31-signed-shrinking-lower title="A lower error scale for arbitrarily late signed shrinking windows" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSignedShrinkingLower.signed_window_even_cutoff_shrinking_lower"}
-Assume RH. Take natural numbers $m,r$ with $m\ge2$, $m+1=2r$, and $\mu(r)\ne0$. Use $F_L$, $c_m$, and $S_r$ from [@thm-ch31-prime-window-shrinking-width]. There are constants $d_m>0$ and $0<H_m<1$ such that for every $0<L<H_m$ and every real $U$ there is a real $u\ge U$ satisfying
+Assume RH. Take natural numbers $m,r$ with $m\ge2$, $m+1=2r$, and $\mu(r)\ne0$. Use $F_L$, $c_m$, and $S_r$ from [@thm-ch31-prime-window-shrinking-width]. There is a width threshold $0<H_m<1$ such that for every $0<d<e^{-s}/(8s)$, every $0<L<H_m$, and every real $U$, there is a real $u\ge U$ satisfying
 
 $$
--\mu(r)\bigl(F_L(u)+c_m+\mu(r)S_r(u)\bigr)\ge d_m L\log(1/L).
+-\mu(r)\bigl(F_L(u)+c_m+\mu(r)S_r(u)\bigr)\ge dL\log(1/L).
 $$
 :::
 

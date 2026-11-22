@@ -1150,10 +1150,10 @@ $$
 对称模量的前两项对所有尾区间一致成立。前向增量的最优一致上界仍是开放问题。
 
 ::: {.theorem #thm-ch31-signed-shrinking-lower title="任意晚起点上的带符号窄窗误差下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSignedShrinkingLower.signed_window_even_cutoff_shrinking_lower"}
-假设 RH。取自然数 $m,r$，满足 $m\ge2$、$m+1=2r$ 和 $\mu(r)\ne0$，沿用 [@thm-ch31-prime-window-shrinking-width] 的 $F_L$、$c_m$ 与 $S_r$。存在 $d_m>0$ 和 $0<H_m<1$，使得对每个 $0<L<H_m$ 和每个实数 $U$，都存在实数 $u\ge U$ 满足
+假设 RH。取自然数 $m,r$，满足 $m\ge2$、$m+1=2r$ 和 $\mu(r)\ne0$，沿用 [@thm-ch31-prime-window-shrinking-width] 的 $F_L$、$c_m$ 与 $S_r$。存在 $0<H_m<1$，使得对每个 $0<d<e^{-s}/(8s)$、每个 $0<L<H_m$ 和每个实数 $U$，都存在实数 $u\ge U$ 满足
 
 $$
--\mu(r)\bigl(F_L(u)+c_m+\mu(r)S_r(u)\bigr)\ge d_m L\log(1/L).
+-\mu(r)\bigl(F_L(u)+c_m+\mu(r)S_r(u)\bigr)\ge dL\log(1/L).
 $$
 :::
 
