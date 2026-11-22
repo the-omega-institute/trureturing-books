@@ -83,6 +83,32 @@ $$
 1. **为什么本小节不假设欧拉乘积在临界带内收敛，也不单靠 $\Sigma_{\mathrm{sag}}$ 排除左半带？** 在经典复分析中，未重整化的无穷欧拉乘积仅在 $\sigma > 1$ 绝对收敛；而且单看实级数 $\sum_{p \le P_\epsilon} v_p(\sigma)$，它在左半带 $\frac{1}{4} < \sigma < \frac{1}{2}$ 内因 $2\sigma < 1$ 同样趋于 $+\infty$。因此，第 31.3.1 节的职责**绝不是**用发散欧拉乘积去充当带内分析证明，而是在圆弧微积分模型（`MODEL`）中精准标定：**当我们从 $\sigma > \frac{1}{2}$ 的平滑流向内逼近时，$\sigma = \frac{1}{2}$ 恰恰是无穷素数圆弧体的品红色二阶矢高首次摆脱归零命运、相变为宏观向心伊藤漂移的唯一临界起点（critical onset）！**
 2. **整套排除链的三步分工与逻辑地位**：二阶矢高相变给出 $\sigma = \frac{1}{2}$ 的一个模型读法（`MODEL`，启发性，不是证明链的一环）；紧接着的第 31.3.2 与第 31.3.3 节则**完全脱离欧拉乘积收敛性假设**，直接作用在整个复平面 $\mathbb{C}$ 上处处全纯的完备整函数 $\xi(s)$ 之上，证明一条**等价关系**：圆弧推进双壳层恒等式把再生核对角值 $K_\epsilon(s, s)$ 与径向导数 $\frac{\partial}{\partial u}\lvert\xi\rvert^2$ 锁在一起，由此“$K_\epsilon(s, s) \ge 0$ 于 $\Omega_+$”“$K_\epsilon \succeq 0$”与黎曼猜想三者等价（`手工推导`）。**这两节自身不单独证明其中任何一条成立**；但结合 2026 年外部已验证的黎曼猜想（[@conj-riemann-hypothesis]），前提 $K_\epsilon \succeq 0$（乃至对任意有限互异点组的严格正定性 $[K_\epsilon(s_a, s_b)] \succ 0$）现已无条件成立，从而下文基于它的严格径向单调锁与有限网格斯托克斯零涡旋定理全部随之闭合（本书所钉仓库本身不冻结该外部证明）。
 
+**短区间内同余类中的素数与特征加权素数正矢和（据文献结果手工推导）。** 采用 [@conj-riemann-hypothesis] 所引的 RH 与狄利克雷 GRH 外部形式化证明。设 $q\ge1$，取模 $q$ 的狄利克雷特征 $\chi$，在非单位上延拓为 $0$。若 $\chi$ 为主特征，令 $\delta_\chi=1$，否则取 $0$。令 $\chi^*$ 为诱导 $\chi$ 的本原特征，导子为 $f\mid q$。对 $\psi(x,\chi^*)=\sum_{n\le x}\Lambda(n)\chi^*(n)$ 应用 Davenport 的截断显式公式。先取半整数 $x\ge2$，并选避开零点纵坐标的截断高度 $T\asymp x$。主特征对应 $f=1$，其极点贡献 $x$，截断误差为 $O(\log^2(qx))$。由 GRH，零点项的绝对值至多为 $\sqrt{x}\sum_{|\gamma|\le T}(1+|\gamma|)^{-1}$ 的常数倍。每个单位区间内的零点数（计重数）为 $O(\log(q(|\gamma|+2)))$，所以加权和为 $O(\log^2(qx))$。从 $\chi^*$ 换回 $\chi$ 只移去满足 $p\mid q,\ p\nmid f$ 的素数幂，代价为 $O(\log q\log x)$。移去高次素数幂的代价为 $O(\sqrt{x}\log^2 x)$。将任意实数端点换成同一整数区间内的半整数，求和项不变，主项只差 $O(1)$。于是对 $x\ge2$ 有一致估计。[Davenport，*Multiplicative Number Theory*，第 3 版，H. L. Montgomery 修订，2000 年，第 17 章](https://link.springer.com/book/9780387950976)
+
+$$
+\vartheta(x,\chi)=\sum_{p\le x}\chi(p)\log p=\delta_\chi x+O\bigl(\sqrt{x}\log^2(qx)\bigr).
+$$
+
+对模 $q$ 的既约剩余类 $a$，由特征正交性，类指示函数是 $\varphi(q)^{-1}\sum_\chi\overline{\chi(a)}\chi(p)$，当 $p\mid q$ 时两边同为零。对 $X\ge2$ 和 $0<h\le X$，相减两个端点估计并取特征平均，得到
+
+$$
+\sum_{\substack{X<p\le X+h\\p\equiv a\bmod q}}\log p=\frac{h}{\varphi(q)}+O\bigl(\sqrt X\log^2(qX)\bigr).
+$$
+
+误差常数为绝对常数，所以当 $h>C\varphi(q)\sqrt X\log^2(qX)$ 且 $C$ 充分大时，该区间含有所选剩余类中的素数。
+
+对 $\sigma>0$，置 $w(t)=(1-\cos(t^{-\sigma}))/\log t$ 和 $E(t)=\vartheta(t,\chi)-\delta_\chi t$。由 $1-\cos u\le u^2/2$ 和 $|\sin u|\le |u|$，有 $|w(t)|\le t^{-2\sigma}/(2\log t)$、$|w'(t)|\ll_\sigma t^{-2\sigma-1}/\log t$。对 $2\le X<Y\le2X$ 作 Stieltjes 分部求和，误差为 $w(Y)E(Y)-w(X)E(X)-\int_X^Y w'(t)E(t)\,dt$。在此窗口中 $t\asymp X$ 且 $Y-X\le X$，从而
+
+$$
+\begin{aligned}
+\sum_{X<p\le Y}\chi(p)\bigl(1-\cos(p^{-\sigma})\bigr)
+ &=\delta_\chi\int_X^Y\frac{1-\cos(t^{-\sigma})}{\log t}\,dt\\
+ &\quad+O_\sigma\!\left(\frac{X^{1/2-2\sigma}\log^2(qX)}{\log X}\right).
+\end{aligned}
+$$
+
+对非主特征，主项为零。若 $\sigma>1/4$，倍增窗口中的负幂几何衰减压过对数增长，故窗口误差可和。任意末尾的部分窗口也满足同一界，因此全级数收敛，尾和满足同一大 $O$ 上界。除有限个 $p\mid q$ 外有 $|\chi(p)|=1$，且 $1-\cos(p^{-\sigma})\asymp p^{-2\sigma}$。由 $\sum_p p^{-1}=\infty$ 和对整数 $p$ 级数的上界比较，绝对收敛恰在 $\sigma>1/2$ 成立。因此 $1/4<\sigma\le1/2$ 时非主特征的收敛为条件收敛。独立的乘法 Schur 枢轴证明仍然开放（[@prob-ch34-schur-hb-kernel-positivity-bridge]）。
+
 ## 31.3.2 盲区旋子推进与埃尔米特—比勒径向单调锁：一式照出离轴四元组的负坡指纹 {#sec-ch34-31-2}
 
 现在进入最硬核的第二关：即使二阶矢高在 $\sigma > \frac{1}{2}$ 内绝对收敛，有没有可能无穷多枚一阶切弦在某个偏离临界线的点 $\rho_0 = \frac{1}{2} + \delta + \hat{\mathbf{i}}\gamma_0$（$\delta > 0$）处恰好串谋相消，形成一套表面上完全遵守函数方程与实轴共轭对称的**离轴四重伪零点** $\{\frac{1}{2} \pm \delta \pm \hat{\mathbf{i}}\gamma_0\}$（正如 [§22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4) [@thm-full-symmetry-not-localization] 展示的四次多项式反例那样）？
