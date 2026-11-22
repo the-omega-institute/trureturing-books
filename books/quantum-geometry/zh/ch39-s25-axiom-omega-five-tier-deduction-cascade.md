@@ -498,6 +498,41 @@ $$
 - **取最短弦方向。** 两份标量的共同质量为 $M_D=m_0/\sqrt2$。在 $\log(M_D/M_Z)=5.72$ 与 $5.88$ 处，交点残差分别为负与正。由介值定理，能在 $27.80<M_D/\mathrm{TeV}<32.63$ 内选到一个质量，使三支规范耦合在 $4.20\times10^{14}<\mu/\mathrm{GeV}<4.47\times10^{14}$ 相交。[逐质量跑动方程与区间证书](https://github.com/the-omega-institute/trureturing-books/issues/808#issuecomment-7068707149)
 - **取全部九个端点方向。** 两个轻模式与一个重模式的质量比为 $M_{\mathrm{heavy}}/M_{\mathrm{light}}=\sqrt{11/3}$。两个轻多重态同时开启，重多重态在第二个阈值开启。在 $\log(M_{\mathrm{light}}/M_Z)=13.19$ 与 $13.32$ 处，交点残差分别为负与正。因此可选 $4.8784\times10^7<M_{\mathrm{light}}/\mathrm{GeV}<5.5557\times10^7$，使三支耦合在 $4.1905\times10^{14}<\mu/\mathrm{GeV}<4.4417\times10^{14}$ 相交。轻质量窗口随模式选择而变。两种算例的 $m_0$ 均由低能规范数据校准。表示、质量算子以及在真实粒子谱中实现这些阈值的动力学仍须独立给出。[九点密度矩阵与双阈值证书](https://github.com/the-omega-institute/trureturing-books/issues/808#issuecomment-7068775268)
 
+::: {.remark #rem-ch39-jacobi-field-chain title="三维空间上的近邻场链如何重现整条算术响应"}
+在同一个三维空间的每一点放一列实标量场 $\phi_0,\phi_1,\ldots$，只用一个外源推动 $\phi_0$。要指定的局部系数是每个场的动能和相邻两场的导数耦合。先保留一个场，取无量纲欧氏变量 $u=s/M^2$，其中 $s=q_E^2$、$M>0$。单位质量项和动能系数 $a_0$ 给出端点响应 $1/(1+a_0u)$。要使斜率等于上文 $F'(0)$，必须取 $a_0=-F'(0)$。第二个场通过边耦合 $b_1$ 进入，二阶系数变为 $a_0^2+b_1^2$。因而曲率已经测得第一条边的强度 $b_1^2=F''(0)/2-a_0^2$。
+
+**从谱到近邻系数（手工推导）。** 对每个互异的正零点纵坐标记 $t_\gamma=\gamma^{-2}$，令 $\mu=\sum_\gamma p_\gamma\delta_{t_\gamma}$，其中 $p_\gamma=m_\gamma/(S\gamma^2)$，$S=\sum_\gamma m_\gamma/\gamma^2$。这是一条支撑在 $[0,t_{\gamma_1}]$ 上的概率测度。其矩 $\mu_k=\int t^k\,d\mu=(-1)^kF^{(k)}(0)/k!$。按正首项系数将 $1,t,t^2,\ldots$ 正交归一化，记所得多项式为 $P_n$，约定 $P_{-1}=0$、$P_0=1$。支撑紧且有无穷多个点，多项式在 $L^2(\mu)$ 中稠密，每步归一化的范数都为正。乘法算子 $T:f(t)\mapsto tf(t)$ 自伴，且 $tP_n$ 与各个次数低于 $n-1$ 的多项式正交，于是得到三对角 Jacobi 矩阵 $J$，其递推为
+
+$$
+tP_n=b_{n+1}P_{n+1}+a_nP_n+b_nP_{n-1},\qquad b_0=0,\quad b_{n+1}>0 .
+$$
+
+此约定下 $\mu$ 唯一确定整条链，改变基向量符号可改变相邻边的符号。它刻画的是端点循环生成的部分，额外的正交场可对端点不可见。$J$ 为正、单射且为迹类，因为互异非零本征值正是 $t_\gamma$，各在循环空间出现一次，$\operatorname{Tr}J=\sum_\gamma t_\gamma\le S$。谱中的聚点 $0$ 没有本征向量，因为 $\mu(\{0\})=0$。[正交多项式三项递推，DLMF §18.2](https://dlmf.nist.gov/18.2)
+
+**场的归一化（自由场模型）。** 对欧氏四动量，取无量纲逆传播子 $I+(s/M^2)J$。单位矩阵给出质量项，动能矩阵 $J$ 在场序号上只连近邻。对谱本征值 $t_\gamma$ 将场重标度，使其动能系数为一，所得质量平方为 $B_\gamma=M^2/t_\gamma$。由 $e_0\leftrightarrow 1$，端点响应和归一化传播子分别是
+
+$$
+[(I+uJ)^{-1}]_{00}=\int\frac{d\mu(t)}{1+ut}=F(u),\qquad
+D(s)=\frac{F(s/M^2)}{M^2}=\sum_\gamma\frac{p_\gamma B_\gamma/M^2}{s+B_\gamma}.
+$$
+
+因此 $F(s/M^2)$ 的极点留数为 $p_\gamma B_\gamma$。归一化端点场 $\phi_0/M$ 的传播子为 $D$，其留数为 $m_\gamma/S$。在循环链内，每个互异纵坐标对应一个规范归一的模式 $\psi_\gamma$，与端点源的耦合为 $\sqrt{m_\gamma/S}$。等价地，可扩大场空间，对每个重数副本取独立自由场 $\varphi_{\gamma,j}$，并令 $\psi_\gamma=m_\gamma^{-1/2}\sum_{j=1}^{m_\gamma}\varphi_{\gamma,j}$。端点源此时耦合到 $S^{-1/2}\sum_{\gamma,j}\varphi_{\gamma,j}$，与对称组合正交的模式对这个源不可见。其二点函数有正谱，类空间隔处对易子为零。零点计数的多项式增长使这组和在时空涂抹后定义广义自由场。总留数 $\sum_\gamma m_\gamma/S$ 发散，因此按这个源归一，形式上的等时正则对易系数发散。模型使用一列生活在同一三维空间的场，序号记录内部模式。它以整条零点谱和尺度 $M$ 为输入，基本作用量是否选择这些系数仍待物理推导。
+
+**把每个位置换成三维旋子场。** 取 $J$ 的前 $n$ 行列主块 $J_n$。在同一四维欧氏时空（一个时间、三个空间坐标）上，将每个场写为相对于共同参考旋子的单位四元数 $U_i=q_*^{-1}q_i\in\mathrm{SU}(2)$，设 $A_{i\mu}=U_i^{-1}\partial_\mu U_i$、$h_i=1-\operatorname{Re}U_i=2[1-\kappa(q_*,q_i)]$。给虚四元数配标准点积，选择欧氏作用量密度 $\mathcal L_E=(2M^2)^{-1}\sum_{i,j,\mu}(J_n)_{ij}\langle A_{i\mu},A_{j\mu}\rangle+\sum_i(h_i+\lambda h_i^2)$，其中 $\lambda\ge0$。在重合构型令 $U_i=\exp v_i$，最低阶有 $A_i=dv_i$、$h_i=|v_i|^2/2$。于是平方动量 $s$ 处的 Hessian 为 $(I_n+sJ_n/M^2)\otimes I_3$，沿任一单位内部方向测得的端点线性响应为 $F_n(s/M^2)=[(I_n+sJ_n/M^2)^{-1}]_{00}$。每个位置有三个内部切向自由度。沿经过重合点的单位速率大圆 $U=\exp(\theta e)$（$e$ 为单位虚四元数），单站静势为 $V(\theta)=1-\cos\theta+\lambda(1-\cos\theta)^2$，故 $V^{(4)}(0)/V''(0)=6\lambda-1$。$\lambda=0$ 与 $\lambda=1/6$ 给出同一小振动谱，四阶导数比分别为 $-1$ 与 $0$。作用量的选择是这个有限链实现的额外物理输入。[§32.1 的三维场组合](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) · [旋子作用量与非线性检验](https://github.com/the-omega-institute/trureturing-books/issues/884#issuecomment-7071502845)
+
+对此单站势，一项可检验的附加条件足以选定其形状。设各向同性势 $E_a(q)=f(a\cdot q)$ 连续且非常数。若开角固定为 $2\alpha$（$0<\alpha<\pi/2$）的两个等强源，在所有 $q$ 上的势能之和都等于中点处同形单源的正倍数加常数，则 $f$ 为仿射函数，强度倍数为 $2\cos\alpha$。在重合处令能量为零并规定刚度 $k>0$，得 $V(\theta)=k(1-\cos\theta)$。若相对中点等角的两个方向给出不同的双源能量，即可反驳此条件。仿射结论使用全部方向上的等式。[双源条件与单站势的推导](https://github.com/the-omega-institute/trureturing-books/issues/884#issuecomment-7071521335)
+
+取相隔四维欧氏距离 $r>0$ 的两点。令 $K_1$ 为第二类修正贝塞尔函数，$k(v)=vK_1(v)$。时空二点函数为 $C(r)=(4\pi^2Sr^2)^{-1}\sum_\gamma m_\gamma k(Mr\gamma)$。用最低质量选取距离 $M\gamma_1 r=1$，本模型给出 $C(2r)/C(r)=0.05293078803893837\ldots$。单取同一最低极点则为 $K_1(2)/(2K_1(1))=0.11618558043462179\ldots$。源的整体归一在比值中消去（区间计算）。[时空涂抹、512 个零点的区间与全尾上界](https://github.com/the-omega-institute/trureturing-books/issues/884#issuecomment-7071271301)
+
+**探针耦合到几个相邻位置时，中性流读数如何改变？** 令 $x_\gamma=t_\gamma/t_{\gamma_1}$，并把两个物理流的内部耦合取为同一实向量 $P(J/t_{\gamma_1})e_0$ 的常数倍，$P(1)=1$ 保留最低极点标定。若 $P$ 次数至多为 $d$，源只作用在前 $d+1$ 个场。反过来，因每条边权非零，$e_0,J e_0,\ldots,J^d e_0$ 张成这 $d+1$ 个位置。各个规范模式的留数正比于 $m_\gamma P(x_\gamma)^2$。因 $x_\gamma\to0$，总留数有限当且仅当 $P(0)=0$。此时 $P(x)=O(x)$，而 $\sum m_\gamma x_\gamma^2$ 收敛。在 [@rem-ch39-neutral-current-pole-test] 的树级横向中性流解释下，最低零点单重，零动量系数相对于最低极点的比为 $R(P)=\sum_\gamma m_\gamma x_\gamma P(x_\gamma)^2$。
+
+前两个位置只允许 $P(x)=x$，给出 $R=1.1497699341\ldots$、$g_A^{\nu_\mu e}\approx-0.576507$。对前三个位置，写 $P(x)=x[1+c(x-1)]$。最小化 $R(P)=\sum_\gamma m_\gamma x_\gamma^3[1+c(x_\gamma-1)]^2$ 得 $c\approx1.557449841$、$R_{\min}=1.00436924195\ldots$。同一极点标定给出 $g_A^{\nu_\mu e}\approx-0.50360145$，落在 CHARM II 报告的 $-0.503\pm0.017$ 区间内。同一选择还预言，质量为最低极点的 $1.4873$ 倍时，第二极点的耦合乘积与第一极点之比约为 $0.00439603$。该读数与实验截面的联系还需要宽度和干涉信息。对比使用轻费米子横向近似、零独立接触项与树级外推。共同源、有限总留数及最小化准则均是物理模型的附加条件。原端点场仍给出上文的 $F$。 [三位置探针的误差区间与重放计算](https://github.com/the-omega-institute/trureturing-books/issues/884#issuecomment-7071449529)
+
+**截断后保留哪些读数？** 取前 $n\ge1$ 个场的主子矩阵 $J_n$。$(J^k)_{00}$ 是从端点出发并返回的 $k$ 步路径权重和。要触及被删去的站点 $n$ 并返回，至少需要 $2n$ 步，恰好 $2n$ 步时只有一路向前再原路返回的路径。因此前 $2n-1$ 阶及零阶矩全部保留，第 $2n$ 阶首次少了 $(b_1\cdots b_n)^2$。该端点递推恒等式适用于任意实对角、实边权，编号 $j$ 的 Lean 边权对应本节的 $b_{j+1}$（[`first_omitted_moment`](lean:D5/S3/Quantum/Jacobi/EndpointMomentTruncation.first_omitted_moment)）。若 $n\ge1$ 且前 $n-1$ 条边权平方的乘积 $Q$ 已知并且非零，第 $2n$ 阶的实测差额 $\Delta$ 给出 $|b_n|=\sqrt{\Delta/Q}$。反过来，精确矩 $\mu_0,\ldots,\mu_{2n-1}$ 足以算出 $J_n$，因为对角项 $a_j=\int t P_j(t)^2\,d\mu$ 只用到 $2j+1$ 阶，而相邻边可由正交化范数求得。一个场由 $\mu_1$ 定出，连接第二个场还需 $\mu_2$。数值为 $a_0=\mu_1=0.00160885567459714\ldots$、$b_1=\sqrt{\mu_2-\mu_1^2}=0.00191089779208802\ldots$（256 位球算术）。[首个场与邻边的区间计算](https://github.com/the-omega-institute/trureturing-books/issues/884#issuecomment-7071254121)
+
+在给定动量范围内还可以控制整条近似曲线。记 $F_n(u)=[(I+uJ_n)^{-1}]_{00}$、$T=\gamma_1^{-2}$，取 $0\le u\le U$。令 $H_n(t)=\det(tI-J_n)$。当 $u>0$，多项式 $[H_n(-1/u)^2-H_n(t)^2]/(1+ut)$ 的次数至多为 $2n-1$，且 $H_n$ 在截断谱上为零。对两条测度积分并利用矩相等，得到 $F-F_n=H_n(-1/u)^{-2}\int H_n(t)^2/(1+ut)\,d\mu>0$。再将 $(1+ut)^{-1}$ 以 $t=T/2$ 为中心作 $2n-1$ 次几何级数逼近，余项绝对值至多为 $[UT/(2+UT)]^{2n}$。两条概率测度各贡献不超过这个余项的积分误差，故 $0\le F(u)-F_n(u)\le 2[UT/(2+UT)]^{2n}$。在 $u=0$ 两条曲线均为一。[有限动量区间误差的推导](https://github.com/the-omega-institute/trureturing-books/issues/884#issuecomment-7071301055)
+:::
+
 **这条响应曲线可以由哪些传播子读出？（标量交换模型）** 取欧氏动量平方 $s=q_E^2>0$，引入自由质量尺度 $M>0$。令 $b_\gamma=M^2\gamma^2$，沿用 $p_\gamma=m_\gamma/(S\gamma^2)$。无量纲响应 $A(s)=F(s/M^2)=\sum_\gamma p_\gamma b_\gamma/(s+b_\gamma)$ 从 $1$ 严格递减到 $0$。没有接触项的标量对角传播子若有正谱表示 $D(s)=\int_{[0,\infty)}(s+b)^{-1}\,d\rho(b)$，则 $sD(s)$ 非减，因为每个 $s/(s+b)$ 都非减。因此 $A(s)/s$ 不能作为这种自相关传播子。分式分解还指出阻碍出现在哪里：
 
 $$
