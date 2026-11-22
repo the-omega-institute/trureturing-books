@@ -112,6 +112,14 @@
 全局保范，局部停机捏合卡：联合等距扩张保持总纯度 $1$，而局部停机捏合将对角留存范数平方 $\frac{5}{8}$ 与折入盲区尾流的副对角相干质量 $\frac{3}{8}$ 勾股对齐为 $1$（`energy_eigenstate_stationary`、`channel_kraus_stinespring`、`finite_record_pinching_idempotent` 与 `pinching_hilbert_schmidt_pythagorean` 为 `LEAN ✓`，停机诠释标 `MODEL`，单次选支实现标 `OPEN`）。
 :::
 
+::: {.remark #rem-ch39-luders-ray-calibration title="怎样校准简并测量的吕德斯更新？"}
+同一测量接连两次都读出相同结果，只能检验结果标签是否保留。第三次换一个测量时，读数还取决于前一次测量是否保留了简并子空间内部的相干。设仪器每次都使用同一组有限维完全正分支 $\mathcal I_a(\rho)=\sum_rK_{ar}\rho K_{ar}^\dagger$，输入与输出为同一系统。假定其效应已经独立标定为正交投影 $P_a=\sum_rK_{ar}^\dagger K_{ar}$，且 $\sum_aP_a=I$。分支迹 $\operatorname{Tr}\mathcal I_a(\rho)=\operatorname{Tr}(P_a\rho)$ 是已有的[有限 Kraus 仪器边缘定理](lean:D5/S3/Quantum/Measurement/FiniteKrausInstrumentBornMarginal.finite_kraus_instrument_born_marginal)。下面的校准另行检验输出态。
+
+对每个非零投影 $P_a$，选其像空间的一组正交归一基 $e_1,\ldots,e_d$，逐个制备这些基态，并另行制备 $\phi=d^{-1/2}\sum_i e_i$。对每个输入单位向量 $v$，分支 $a$ 必然发生；随后用独立校准的投影 $|v\rangle\langle v|$ 检验输出，要求通过概率为一。对 $\operatorname{ker}P_a$ 中任一向量 $w$，$\sum_r\|K_{ar}w\|^2=\langle w,P_aw\rangle=0$，故所有 $K_{ar}$ 均在该核上消失。基态检验给出 $\sum_r\|(I-|e_i\rangle\langle e_i|)K_{ar}e_i\|^2=0$，所以 $K_{ar}e_i=c_{ri}e_i$。对 $\phi$ 的检验同样迫使 $K_{ar}\phi=c_r\phi$。逐项比较所有非零坐标，得到 $c_{ri}=c_r$。因而 $K_{ar}=c_rP_a$ 且 $\sum_r|c_r|^2=1$，每个结果的未归一化更新正是 $\mathcal I_a(\rho)=P_a\rho P_a$。概率为 $\operatorname{Tr}(P_a\rho)>0$ 的分支除以其概率，得到条件态。一维块只需一个基态检验。
+
+漏掉叠加态检验的后果可直接读出。令 $E_i=|e_i\rangle\langle e_i|$，把该分支改为 $\rho\mapsto\sum_i E_i\rho E_i$。它具有同一效应 $P_a$，保留每个基态，也能以概率一重复读出原标签。对输入 $\phi$，其输出为 $P_a/d$，原射线存活概率降为 $1/d$。这些制备与读出给 [@rem-ch39-fifteen-arithmetic-probes] 中采用的吕德斯顺序测量提供了可操作的校准条件。[校准推导与重复测量](https://github.com/the-omega-institute/trureturing-books/issues/904)
+:::
+
 3. **公理五（复合系统张量积公设）：半双线性振幅乘积再生核与复局域层析生成张量空间，共享极小圆弧单态直抵齐雷尔松界 $2\sqrt{2}$**：
    教科书第五公设规定：可区分复合系统 $A + B$ 的态空间是复张量积 $\mathcal{H}_A \otimes_{\mathbb{C}} \mathcal{H}_B$ 而非直和（不可区分全同玻色/费米置换统计另循[附录 E §E.5](appendix-e-s05-quantum-postulates.md#sec-appe-quantum) 第 5 条的 `T3` 对称化桥梁）。在 $\mathrm{AXIOM}\text{-}\Omega$ 下，这正是多座三元数场并置再投影（[§32.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)）的代数推论：
    - **乘积再生核与复局域层析完备性**：在 `T3` 选定相容复结构后，两座三元数场的复振幅内积核乘积 $K_{\mathrm{amp}}\bigl((\psi_A, \psi_B), (\phi_A, \phi_B)\bigr) = \langle\phi_A\mid\psi_A\rangle\langle\phi_B\mid\psi_B\rangle$ 由阿隆沙因再生核希尔伯特空间乘积定理（Aronszajn 1950，`文献结果`）等距生成复张量积 $\mathcal{H}_A \otimes_{\mathbb{C}} \mathcal{H}_B$；下沉至盲区相位不变的可观测层，联合射线保真度相乘 $\kappa_{\mathrm{ray}}^{(AB)}\bigl(([\psi_A], [\psi_B]), ([\phi_A], [\phi_B])\bigr) = \lvert\langle\phi_A\mid\psi_A\rangle\rvert^2 \lvert\langle\phi_B\mid\psi_B\rangle\rvert^2 = \operatorname{Tr}\bigl((\hat{\rho}_A\otimes\hat{\rho}_B)(\hat{\sigma}_A\otimes\hat{\sigma}_B)\bigr)$ 的厄米算符张成实维数恰好满足平方乘法恒等式 $d_A^2 \cdot d_B^2 = (d_A d_B)^2$（对比实双比特 $3 \times 3 = 9 < 10$ 的局域层析破缺，见[附录 E](appendix-e.md) [@ex-appe-qubit-cubic-and-tomography]），配合 `H7`（`T2`）复局域层析极小性唯一锁死平直展开账本为 $\mathcal{H}_A \otimes_{\mathbb{C}} \mathcal{H}_B$（局域层析重构，`文献结果`）！
