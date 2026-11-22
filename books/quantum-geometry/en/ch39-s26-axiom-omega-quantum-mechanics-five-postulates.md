@@ -368,6 +368,48 @@ For the converse, use the same set of labels over each point of an orbit. Take $
 
 [Transport of counts along an orbit](lean:D5/S3/ConceptDynamics/Attribution/CoordinateFibreCounts.orbit_fixed_fibre_counts) · [Exact simultaneous realization](lean:D5/S3/ConceptDynamics/Attribution/CoordinateFibreCounts.exact_orbit_fibre_counts)
 
+**The complete three-dimensional fixed-count spectrum.** Keep the two uniform coloured parity readouts and the coordinate colour action, with seed budget $N=16k$ for a positive integer $k$. A vector $z$ is attainable exactly when there are nonnegative integers $u_i$ with $z_i=4u_i$ and
+$$
+u_i\le 2k,\qquad \sum_i u_i\le4k,
+$$
+and, for odd $k$, the additional inequality at every coordinate
+$$
+2u_i\le \sum_j u_j+2(k-1).
+$$
+For example, at $k=3$ the vector $(24,0,0)$ satisfies the coordinate and total bounds, but the odd-budget inequality excludes it. The vector $(24,4,4)$ is attainable at the same budget.
+
+Order the even words as $000,011,101,110$ and the complementary odd words as $111,100,010,001$. Each ordinary cell has one four-point colour orbit. The colour of $111$ is fixed by the action, so every cell in that column has two two-point orbits. The per-point multiplicity and fixed count of each orbit obey the size and parity conditions above. Each coloured marginal output has exactly $2k$ seeds, which also gives row and column sums $k$ in the normalized profile matrix.
+
+The Pareto boundary gives the coordinate and total bounds. To prove the additional odd-budget inequality it suffices by symmetry to consider the first coordinate. If $u_1=2k$, there are no mismatches in the first coordinate. For each colour of $111$, the per-point multiplicities of its two-point orbits sum to the odd number $k$. One of those orbits therefore contributes fixed seeds at one of the other two coordinates. The two colours contribute at least four fixed seeds between them. The normalized row for $011$ also sums to the odd number $k$, so its ordinary cells contribute at least four more fixed seeds at the other coordinates. Thus $u_2+u_3\ge2$.
+
+If $u_1=2k-1$ and the other fixed counts vanish, the per-point multiplicities over both colours of $111$ must be even at the nonzero even words. Their sums are odd for each colour, so both multiplicities at $000$ must be odd. This forces one normalized unit of mismatch in the first coordinate. The ordinary cells $(011,010)$ and $(011,001)$ must also have even multiplicity. The odd row sum at $011$ forces another unit of mismatch in that row, toward an odd word whose first bit is $1$. Two units of mismatch imply $u_1\le2k-2$, a contradiction. For smaller $u_1$ the additional inequality already holds.
+
+For sufficiency at multiplier $1$, the even-word cuts reduce to three triangle inequalities and the total bound. At multiplier $2$, four integer couplings cover the sorted triples satisfying the bounds. Numbering the rows and columns from $0$ in the order above, each row of the table gives two matchings and the four per-point multiplicities for the first colour of $111$.
+
+| First matching | Second matching | First colour |
+|---|---|---|
+| $(1,0,3,2)$ | $(1,3,0,2)$ | $(0,0,2,0)$ |
+| $(2,0,3,1)$ | $(2,0,3,1)$ | $(0,2,0,0)$ |
+| $(1,2,3,0)$ | $(2,0,3,1)$ | $(0,0,0,2)$ |
+| $(1,0,3,2)$ | $(1,0,3,2)$ | $(0,2,0,0)$ |
+
+Adding the matchings gives the normalized cell counts. The per-point multiplicity of an ordinary cell is its cell count. For the second colour, the per-point multiplicity is twice the cell count minus the first colour's multiplicity. A coordinate contributes fixed seeds only from orbits on which its generator fixes every output point. On those orbits, an odd per-point multiplicity forces at least one fixed seed per point. When the generator fixes the output points and the multiplicity is two, changing the per-point fixed count from zero to two adds two to $u_i$ in an ordinary orbit and one in a two-point orbit. At each coordinate these additions can be chosen independently. From top to bottom, the table gives the following products of choices for the normalized entries.
+
+$$
+\begin{aligned}
+&[0,1]\times[0,3]\times[2,4],\\
+&\{0,2\}\times[0,2]\times[0,4],\\
+&[1,2]\times[1,3]\times[0,3],\\
+&\{0\}\times[0,4]\times[0,4].
+\end{aligned}
+$$
+
+The intervals here contain integers. For a sorted triple $x\le y\le z$, the total bound gives $x\le2$. Use the fourth row when $x=0$. When $x=1$, use the third row for $z\le3$ and the first row for $z=4$, where $x+y+z\le8$ gives $y\le3$. When $x=2$ and $y=2$, use the second row. When $x=2$ and $y\ge3$, the total bound forces $y=z=3$, so use the third row.
+
+For $k=2m$, repeatedly take a block at multiplier $2$. Choose each entry of the block between $\max(0,u_i-4(m-1))$ and $\min(4,u_i)$, with a total between $\max(0,\sum_i u_i-8(m-1))$ and $8$. The coordinate and total bounds ensure there is an integer choice in these intervals, leaving a vector within the bounds at multiplier $2(m-1)$. For odd $k\ge3$, sort the entries as $x\le y\le z$ and take one block at multiplier $1$. Take $(0,2,2)$ if $y\ge2$, $(1,1,2)$ if $y<2$, $x\ge1$ and $z\ge2$, or $(0,1,1)$ if $y<2$, $x=0$ and $z>2(k-1)$. In the last case the odd-budget cut forces $y=1$. Take the zero block in the remaining cases. The residual vector obeys the bounds at the even multiplier $k-1$. Disjoint union adds the budgets and the fixed counts and preserves both uniform marginals.
+
+[Exact three-dimensional fixed-count spectrum](lean:D5/S3/ConceptDynamics/Attribution/ParityThreeCoordinateCounts.exact_three_coordinate_counts)
+
 **An optimal uniform calibration for rational marginals.** Let $G$ act on finite input and output sets $X$ and $Y$, let $P$ be a $G$-covariant probability kernel, and let $H$ be any subgroup. If a positive integer $m$ makes every $mP(x,y)$ integral, a uniform seed law attains the maximum $H$-fixed mass. One sufficient seed count is $m|\det B|$, where $B$ is an invertible square submatrix of the integer constraint matrix below, using the positive support of a suitable optimizer as its columns.
 
 Write $q_O$ for the weight of each deterministic readout table $t:X\to Y$ in its $G$-orbit $O$. The normalization row of $A$ has entry $|O|$ in column $O$. The row for cell $(x,y)$ has entry $|\{t\in O:t(x)=y\}|$. The corresponding entries of $b$ are $1$ and $P(x,y)$. Let $c_O$ count the tables in $O$ that are fixed by $H$. Sending seeds equivariantly to their complete readout tables preserves the marginals and sends every $H$-fixed seed to an $H$-fixed table. Conversely, using the positive-weight tables as seeds and evaluating them realizes any feasible table law. The maximum fixed mass is therefore the maximum of $\sum_O c_Oq_O$ subject to $Aq=b$ and $q\ge0$. Independent draws from the rows give an invariant table law. The normalization row makes the feasible set bounded, and its closedness ensures the maximum is attained.
