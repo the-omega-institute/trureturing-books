@@ -118,6 +118,10 @@
 对每个非零投影 $P_a$，选其像空间的一组正交归一基 $e_1,\ldots,e_d$，逐个制备这些基态，并另行制备 $\phi=d^{-1/2}\sum_i e_i$。对每个输入单位向量 $v$，分支 $a$ 必然发生；随后用独立校准的投影 $|v\rangle\langle v|$ 检验输出，要求通过概率为一。对 $\operatorname{ker}P_a$ 中任一向量 $w$，$\sum_r\|K_{ar}w\|^2=\langle w,P_aw\rangle=0$，故所有 $K_{ar}$ 均在该核上消失。基态检验给出 $\sum_r\|(I-|e_i\rangle\langle e_i|)K_{ar}e_i\|^2=0$，所以 $K_{ar}e_i=c_{ri}e_i$。对 $\phi$ 的检验同样迫使 $K_{ar}\phi=c_r\phi$。逐项比较所有非零坐标，得到 $c_{ri}=c_r$。因而 $K_{ar}=c_rP_a$ 且 $\sum_r|c_r|^2=1$，每个结果的未归一化更新正是 $\mathcal I_a(\rho)=P_a\rho P_a$。概率为 $\operatorname{Tr}(P_a\rho)>0$ 的分支除以其概率，得到条件态。一维块只需一个基态检验。
 
 漏掉叠加态检验的后果可直接读出。令 $E_i=|e_i\rangle\langle e_i|$，把该分支改为 $\rho\mapsto\sum_i E_i\rho E_i$。它具有同一效应 $P_a$，保留每个基态，也能以概率一重复读出原标签。对输入 $\phi$，其输出为 $P_a/d$，原射线存活概率降为 $1/d$。这些制备与读出给 [@rem-ch39-fifteen-arithmetic-probes] 中采用的吕德斯顺序测量提供了可操作的校准条件。[校准推导与重复测量](https://github.com/the-omega-institute/trureturing-books/issues/904)
+
+若可自由选择探针，$d\ge2$ 维块只需 $d$ 条射线。例如取 $e_1$ 及 $(e_1+e_j)/\sqrt2$（$2\le j\le d$）。把原射线存活率为一写在分支等距扩张 $V$ 中，即 $Vv_i=v_i\otimes a_i$，其中 $a_i$ 为环境单位向量。等距性给 $\langle v_i,v_j\rangle=\langle v_i,v_j\rangle\langle a_i,a_j\rangle$，故每对非正交探针都使用相同的环境向量。只要探针张满该块，且以非零内积连边所得的图连通，恒等更新就在整个块上成立。少于 $d$ 条探针时，未测的正交方向可获得任意相对相位。若图有多个连通分量，在各分量张成的正交子空间上也可分别施加相位。两种改变都能通过所有指定的射线检验。[最少校准射线数](https://github.com/the-omega-institute/trureturing-books/issues/904#issuecomment-7073479700)
+
+以第 39.2 节的五个实际算术节点为例，分别保留四种符号组合的转移概率 $p(b\mid i,a;j)=(1+abH_{ij})/2$，首测无偏，允许立即重复测量。若所有持续记忆均由被测系统承载，仪器固定、测量设置可自由选择，准确再现这些读数所需的最小复维数随效应的假设而变。效应若均为投影，立即重复确定就要求至少四个能级。四维 Clifford 投影实现这些读数，在块内另外去相干也产生同样的逐次记录。若允许一般正算子值效应，三能级的可重复测量—制备仪器已能再现任意长度的完整记录。块内的射线校准可进一步检验实际采用的更新。这一维数比较使用逐符号读数。[锐效应的维数证明及三能级构造](https://github.com/the-omega-institute/trureturing-books/issues/904#issuecomment-7073482605)
 :::
 
 3. **公理五（复合系统张量积公设）：半双线性振幅乘积再生核与复局域层析生成张量空间，共享极小圆弧单态直抵齐雷尔松界 $2\sqrt{2}$**：
