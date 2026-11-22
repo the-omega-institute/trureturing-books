@@ -455,6 +455,8 @@ Among the $n$ columns of weight $n-1$, the all-zero and all-ones rows together c
 
 Add the two deficits and $S$. An odd special singleton makes $S$, $\ell$ and $s$ each at least one. Any odd special column of greater weight gives $S\ge3$, which covers the extra unit in each positive-part term. This yields the displayed bound.
 
+At $k=1$ in even dimension $n$, the exact spectrum at the least budget gives a stronger result. Apply its even-word inequality to the all-ones word to get $\sum_i(M-a_i)\ge M$, where $M=2^{n-2}$. Since $z_i=4(M-a_i)$, this gives $\sum_i z_i\ge 2^n$. To attain the bound at a prescribed coordinate $j$, set $a_j=0$ and set all other $a_i=M$. The only word for which every summand of the inequality vanishes has ones everywhere except at $j$, so its weight is odd. Every even-word inequality therefore has a summand equal to $M$. This realizes $z_j=2^n$ with zero fixed counts at the other coordinates.
+
 At $k=3$, the bounds for dimensions six and eight are respectively eight and thirty-six fixed seeds in total. Integer orbit tables attain these totals. They give fixed-count vectors $(0,8,0,0,0,0)$ and $(16,0,0,8,4,0,0,8)$ in the tested coordinate orders.
 
 **An optimal uniform calibration for rational marginals.** Let $G$ act on finite input and output sets $X$ and $Y$, let $P$ be a $G$-covariant probability kernel, and let $H$ be any subgroup. If a positive integer $m$ makes every $mP(x,y)$ integral, a uniform seed law attains the maximum $H$-fixed mass. One sufficient seed count is $m|\det B|$, where $B$ is an invertible square submatrix of the integer constraint matrix below, using the positive support of a suitable optimizer as its columns.
