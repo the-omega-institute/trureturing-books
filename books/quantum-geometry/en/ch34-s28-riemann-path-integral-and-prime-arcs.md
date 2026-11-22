@@ -1132,6 +1132,29 @@ Under RH, a given ordinate identifies a single point on the critical line. The m
 
 If $\mu(r)\ne0$, a nonzero tested frequency has a nonzero coefficient exactly when $1/2+ir\omega$ is an actual zero. In that case division by $-\mu(r)b_{r,L}(1/2+ir\omega)$ gives its analytic multiplicity. For squareful $r$, all nonzero-frequency coefficients vanish. The error estimate allows dependence on the tested frequency and the fixed width. The bound uniform over all positive widths at frequency zero is [@thm-ch31-prime-window-even-cesaro].
 
+::: {.theorem #thm-ch31-prime-window-fourier-uniform-width title="Fourier recovery is uniform over positive window widths" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffUniformWidth.signed_window_even_cutoff_fourier_uniform_width"}
+Assume RH. Use the same even cutoff, normalized residual $F$, and width-dependent target $A$ as in [@thm-ch31-prime-window-even-fourier]. There is a common threshold $U_0>0$. For each admissible order $m$ and each real tested frequency $\omega$, there is a $C>0$ such that for every $L>0$, $U\ge U_0$ and $T>0$, the modulated residual is Lebesgue integrable on $[U,U+T]$ and
+
+$$
+\left|\frac{1}{T}\int_U^{U+T}F(u)e^{-i\omega u}\,du-A(\omega)\right|
+\le \frac{C}{T}.
+$$
+
+At every positive width the zero-frequency coefficient equals $-\mu(q)q/((q-1)s)$. For each actual nontrivial zero $\rho$ the coefficient at $\omega_\rho$ equals $-\mu(r)n_\rho b_{r,L}(\rho)$, with $b_{r,L}(\rho)\ne0$.
+:::
+
+::: proof
+For a mode $\lambda$, put $t=e^{-sL}$. Split $te^{i\lambda L}-1$ into $t(e^{i\lambda L}-1)-(1-t)$. The estimate $|e^{i\lambda L}-1|\le|\lambda|L$ and $tL/(1-t)\le 1/s$ give
+
+$$
+\left|\frac{e^{(-s+i\lambda)L}-1}{1-e^{-sL}}\right|\le 1+\frac{|\lambda|}{s}.
+$$
+
+The root primitive divides each coefficient by its complex exponent. For an occurrence $\rho_k$, $\lambda=\operatorname{Im}(\rho_k)/r$ is the imaginary part of that exponent, so $|\lambda|$ is bounded by the exponent's modulus. The new factor of $|\lambda|$ cancels against the inverse exponent in the norm estimate. The resulting coefficient majorant is summable and independent of $L$. The Fourier error uses the sum of these norms multiplied by the reciprocal of the separation from the other frequencies. The arithmetic and remainder bounds already allow every positive $L$. The identities for the coefficients follow from [@thm-ch31-prime-window-even-fourier].
+:::
+
+The error constant can depend on $\omega$. The coefficient being recovered still depends on the width at nonzero frequencies.
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::

@@ -1619,6 +1619,22 @@ Conversely, assign the core coefficient to every transverse basis. The weighted 
 
 Thus computing the obstruction requires one variable per basis of $S$. For a fixed core, the weighted equations still depend on the individual class sizes. This reduction applies in arbitrary rank, while the explicit cyclic factors above use the rank-two core.
 
+::: {.theorem #thm-joint-circuit-uniform-expansion title="Cyclic factors for a uniform core" lean="D5/S3/Combinatorics/Matroids/UniformCircuitInvariantFactors.uniform_lifting_obstruction_invariant_factors"}
+Let $S$ be the uniform matroid of rank $r$ on $k$ ordered elements, with $2\le r\le k$. In its block-ordered parallel expansion, let $m_1,\ldots,m_k$ be the positive class sizes, $n=\sum_i m_i$, and $g=\gcd_i m_i$. The saturation of the simultaneous integral circuit restriction image modulo the image is isomorphic to
+$$
+(\mathbb Z/g\mathbb Z)^{\binom{k-2}{r-2}}
+\;\oplus\;
+(\mathbb Z/n\mathbb Z)^{\binom{k-2}{r-1}}.
+$$
+A binomial coefficient outside its range is zero, and a factor of order one is trivial.
+:::
+
+Use the residue equations of the preceding theorem. On the uniform core every $r$-element subset is a basis and every circuit has size $r+1$ and contracts to rank zero. Regard the coefficients on the ordered bases as an alternating $r$-form $f$ taking values in $\mathbb Q/\mathbb Z$. The circuit equations say that $a\wedge f=0$, where $a$ is the covector taking value one on every basis vector. The weighted boundary says that inserting $y=\sum_i m_i e_i$ into $f$ gives zero.
+
+Take the first original coordinate vector as the pivot $x=e_1$, so $a(x)=1$. The equation $a\wedge f=0$ lets us write $f=a\wedge h$, where $h$ is the insertion of $x$ into $f$. Inserting $y$ then gives $n h=a\wedge\iota_y h$. Since inserting both $x$ and $y$ into $f$ gives zero when the weighted boundary vanishes, the two requirements reduce to $n h=0$ and $\iota_y h=0$, with $\iota_x h=0$ by alternation. Conversely these conditions on $h$ make both residue equations hold for $a\wedge h$.
+
+An integral change of coordinates makes $y=n x+d z$, where $z$ is the second basis vector and $d=\gcd(m_2,\ldots,m_k)$. Coefficients of $h$ containing $x$ vanish. Those containing $z$ are killed by both $n$ and $d$, hence by $\gcd(n,d)=g$. Each remaining coefficient is killed by $n$. After excluding $x$ and $z$, the choices of indexing subset have sizes $r-2$ and $r-1$, respectively. For $r=2$ this recovers the earlier rank-two formula. For the free core $r=k$, only the factor of order $g$ remains.
+
 **Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 If there are no nonempty facets, the original realization is empty and its reduced integral homology vanishes in every nonnegative degree. When facets exist and $d=1$, the wedge is a discrete space with $m+1$ points and reduced degree-zero generators $[p_B]-[p_0]$, where $p_B$ is the point contributed by $B$ and $p_0$ is the common basepoint. When facets exist and $m=0$, the wedge is a point and every reduced group vanishes. For a nonempty family of facets, the reduced Euler characteristic is $(-1)^{d-1}m$, so the earlier Tutte evaluation gives $m=2^d T_M(1,1/2)$.
