@@ -115,15 +115,23 @@
 ::: {.remark #rem-ch39-luders-ray-calibration title="怎样校准简并测量的吕德斯更新？"}
 同一测量接连两次都读出相同结果，只能检验结果标签是否保留。随后可另选对简并子空间内部相干敏感的测量，检验前一次测量是否保留了这些相干。设仪器每次都使用同一组有限维完全正分支 $\mathcal I_a(\rho)=\sum_rK_{ar}\rho K_{ar}^\dagger$，输入与输出为同一系统。假定其效应已经独立标定为正交投影 $P_a=\sum_rK_{ar}^\dagger K_{ar}$，且 $\sum_aP_a=I$。分支迹 $\operatorname{Tr}\mathcal I_a(\rho)=\operatorname{Tr}(P_a\rho)$ 是已有的[有限 Kraus 仪器边缘定理](lean:D5/S3/Quantum/Measurement/FiniteKrausInstrumentBornMarginal.finite_kraus_instrument_born_marginal)。下面的校准另行检验输出态。
 
-对每个非零投影 $P_a$，选其像空间的一组正交归一基 $e_1,\ldots,e_d$，逐个制备这些基态，并另行制备 $\phi=d^{-1/2}\sum_i e_i$。对每个输入单位向量 $v$，分支 $a$ 必然发生；随后用独立校准的投影 $|v\rangle\langle v|$ 检验输出，要求通过概率为一。对 $\operatorname{ker}P_a$ 中任一向量 $w$，$\sum_r\|K_{ar}w\|^2=\langle w,P_aw\rangle=0$，故所有 $K_{ar}$ 均在该核上消失。基态检验给出 $\sum_r\|(I-|e_i\rangle\langle e_i|)K_{ar}e_i\|^2=0$，所以 $K_{ar}e_i=c_{ri}e_i$。对 $\phi$ 的检验同样迫使 $K_{ar}\phi=c_r\phi$。逐项比较所有非零坐标，得到 $c_{ri}=c_r$。因而 $K_{ar}=c_rP_a$ 且 $\sum_r|c_r|^2=1$，每个结果的未归一化更新正是 $\mathcal I_a(\rho)=P_a\rho P_a$。概率为 $\operatorname{Tr}(P_a\rho)>0$ 的分支除以其概率，得到条件态。一维块只需一个基态检验。
+对每个非零投影 $P_a$，选其像空间的一组正交归一基 $e_1,\ldots,e_d$，逐个制备这些基态，并另行制备 $\phi=d^{-1/2}\sum_i e_i$。对每个输入单位向量 $v$，分支 $a$ 必然发生；随后用独立校准的投影 $|v\rangle\langle v|$ 检验输出，要求通过概率为一。对 $\operatorname{ker}P_a$ 中任一向量 $w$，$\sum_r\|K_{ar}w\|^2=\langle w,P_aw\rangle=0$，故所有 $K_{ar}$ 均在该核上消失。基态检验给出 $\sum_r\|(I-|e_i\rangle\langle e_i|)K_{ar}e_i\|^2=0$，所以 $K_{ar}e_i=c_{ri}e_i$。对 $\phi$ 的检验同样迫使 $K_{ar}\phi=c_r\phi$。把 [@thm-ch39-full-support-ray-calibration] 中的 $J$ 取为该块在系统空间中的包含映射，$T$ 取为 $K_{ar}$ 在块上的限制。由于 $\phi$ 的每个坐标非零，故 $c_{ri}=c_r$。因而 $K_{ar}=c_rP_a$ 且 $\sum_r|c_r|^2=1$，每个结果的未归一化更新正是 $\mathcal I_a(\rho)=P_a\rho P_a$。概率为 $\operatorname{Tr}(P_a\rho)>0$ 的分支除以其概率，得到条件态。一维块只需一个基态检验。
 
 在 $d\ge2$ 的块中，漏掉叠加态检验的后果可直接读出。令 $E_i=|e_i\rangle\langle e_i|$，把该分支改为 $\rho\mapsto\sum_i E_i\rho E_i$。它具有同一效应 $P_a$，保留每个基态，也能以概率一重复读出原标签。对输入 $\phi$，其输出为 $P_a/d$，原射线存活概率降为 $1/d$。这些制备与读出给 [@rem-ch39-fifteen-arithmetic-probes] 中采用的吕德斯顺序测量提供了可操作的校准条件。[校准推导与重复测量](https://github.com/the-omega-institute/trureturing-books/issues/904)
 
 若可自由选择探针，$d\ge2$ 维块只需 $d$ 条射线。例如取 $e_1$ 及 $(e_1+e_j)/\sqrt2$（$2\le j\le d$）。以 $H_P$ 表示该块、$H$ 表示整个输入输出空间。把原射线存活率为一写在分支等距扩张 $V:H_P\to H\otimes E$ 中，即 $Vv_i=v_i\otimes a_i$，其中 $a_i$ 为环境单位向量。等距性给 $\langle v_i,v_j\rangle=\langle v_i,v_j\rangle\langle a_i,a_j\rangle$，故每对非正交探针都使用相同的环境向量。只要探针张满该块，且以非零内积连边所得的图连通，恒等更新就在整个块上成立。少于 $d$ 条探针时，未测的正交方向可获得任意相对相位。若图有多个连通分量，在各分量张成的正交子空间上也可分别施加相位。两种改变都能通过所有指定的射线检验。[最少校准射线数](https://github.com/the-omega-institute/trureturing-books/issues/904#issuecomment-7073479700)
 
-对于第 39.2 节的五个四能级 Clifford 设置，各结果块的秩都是二。若投影效应已精确标定，每个块内两个基态和等权叠加的真实存活概率都至少为 $1-10^{-5}$，则任何三次测量的完整记录事件与理想吕德斯模型的概率差小于 $0.02337253$。这一界由每个块上的等距扩张误差逐步累加得到，实验应用还须估计校准概率的不确定度。[从存活概率到三次记录的误差界](https://github.com/the-omega-institute/trureturing-books/issues/904#issuecomment-7073509050)
+对于第 39.2 节的五个四能级 Clifford 设置，各结果块的秩都是二。比较实际仪器与理想仪器时使用同一初态和同一组精确标定的 Clifford 投影效应。若每个块内两个基态和等权叠加的真实存活概率都至少为 $1-10^{-5}$，则任何三次测量的完整记录事件与理想吕德斯模型的概率差小于 $0.02337253$。这一界由每个块上的等距扩张误差逐步累加得到，实验应用还须估计校准概率的不确定度。[从存活概率到三次记录的误差界](https://github.com/the-omega-institute/trureturing-books/issues/904#issuecomment-7073509050)
 
-以第 39.2 节的五个实际算术节点为例，分别保留四种符号组合的转移概率 $p(b\mid i,a;j)=(1+abH_{ij})/2$，首测无偏，允许立即重复测量。若所有持续记忆均由被测系统承载，仪器固定、测量设置可自由选择，准确再现这些读数所需的最小复维数随效应的假设而变。效应若均为投影，立即重复确定就要求复维数至少为四。取四维最大混态、Clifford 投影和吕德斯更新，可精确实现这些读数。在各结果块内另外去相干仍产生相同的五设置逐符号记录。若允许一般正算子值效应，复维数为三的可重复测量—制备仪器已能再现任意长度的完整记录。块内的射线校准可进一步检验实际采用的更新。这一维数比较使用逐符号读数。[锐效应的维数证明及三能级构造](https://github.com/the-omega-institute/trureturing-books/issues/904#issuecomment-7073482605)
+以第 39.2 节的五个实际算术节点为例，分别保留四种符号组合的转移概率 $p(b\mid i,a;j)=(1+abH_{ij})/2$，首测无偏，允许立即重复测量。若所有持续记忆均由被测系统承载，仪器固定、测量设置可自由选择，准确再现这些读数所需的最小复维数随效应的假设而变。效应若均为投影，立即重复确定就要求复维数至少为四。取四维最大混态、Clifford 投影和吕德斯更新，可精确实现这些读数。在各结果块内另外去相干仍产生相同的五设置逐符号记录。若允许一般正算子值效应，复维数为三的可重复测量—制备仪器已能再现任意长度的完整记录。二维中，两种结果均出现且能确定重复，迫使每个二值效应同时有零和一这两个特征值，从而成为投影；上述锐效应下界排除了二维。因此三为一般效应下的最小复维数。块内的射线校准可进一步检验实际采用的更新。这一维数比较使用逐符号读数。[锐效应的维数证明及三能级构造](https://github.com/the-omega-institute/trureturing-books/issues/904#issuecomment-7073482605) · [两个自旋的三重态实现](https://github.com/the-omega-institute/trureturing-books/issues/904#issuecomment-7073538503)
+:::
+
+::: {.theorem #thm-ch39-full-support-ray-calibration title="全支撑输入如何确定线性映射" lean="D5/S3/Quantum/Instruments/FullSupportRayCalibration.support_calibration"}
+设 $V,W$ 是同一域上的线性空间，$(b_i)$ 是 $V$ 的一组有限基，$J,T:V\to W$ 都是线性映射且 $J$ 单射。若每个 $i$ 满足 $Tb_i=a_iJb_i$，则对任意 $u=\sum_i u_i b_i$ 及标量 $c$，$Tu=cJu$ 当且仅当对所有 $u_i\ne0$ 都有 $a_i=c$。若所有 $u_i$ 非零，则 $Tu=cJu$ 当且仅当 $T=cJ$。
+:::
+
+::: proof
+按基展开 $u$，用 $J$ 的单射性约去两边的 $J$，剩下的坐标等式为 $u_i a_i=c u_i$。在 $u_i\ne0$ 的坐标上可消去 $u_i$；在零坐标上等式自动成立。全支撑时所有 $a_i$ 都等于 $c$，两个线性映射在基上一致，因而处处一致。完整证明由 Lean 内核检查。
 :::
 
 3. **公理五（复合系统张量积公设）：半双线性振幅乘积再生核与复局域层析生成张量空间，共享极小圆弧单态直抵齐雷尔松界 $2\sqrt{2}$**：

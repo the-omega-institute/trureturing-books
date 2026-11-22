@@ -673,6 +673,10 @@ Assign unit vectors $q_i\in\mathbb R^4$ to five settings and unit vectors $q_{ij
 Take a finite collection of such assignments. For each pair of settings, average the half-angle probabilities $(1+q\cdot q')/2$ with the same nonnegative weights summing to one. For every $i<j$, suppose the probability for the two basis settings differs from $1/2$ by at most $\delta$, and the probability for either endpoint with the pair setting differs from $(1+1/\sqrt2)/2$ by at most $\delta$. Then $\delta\ge5/[80(1+\sqrt2)^2(2+4\sqrt2)]$.
 :::
 
+::: proof
+Write the five vectors as the rows of a matrix with four columns. Its column Gram matrix has trace five. Cauchy–Schwarz on the four diagonal entries and cyclicity of trace give the bound $5/8$ for the ten squared inner products of the rows. The reverse triangle inequality at each pair setting then bounds the sum of squared norms. Expanding each square gives an affine function of three inner products, so the common weights preserve the bound on averaging. Converting the inner products to half-angle probabilities bounds the total change from the thirty comparisons by $20(2+4\sqrt2)\delta$. The full proof is checked by the Lean kernel.
+:::
+
 **Which propagators can reproduce this response? (Scalar exchange model.)** Let $s=q_E^2>0$ be the squared Euclidean momentum and introduce a free mass scale $M>0$. Set $b_\gamma=M^2\gamma^2$ and retain the weights $p_\gamma=m_\gamma/(S\gamma^2)$. The dimensionless response $A(s)=F(s/M^2)=\sum_\gamma p_\gamma b_\gamma/(s+b_\gamma)$ decreases strictly from $1$ to $0$. If a scalar diagonal propagator without contact terms has a positive spectral representation $D(s)=\int_{[0,\infty)}(s+b)^{-1}\,d\rho(b)$, then $sD(s)$ is nondecreasing because each $s/(s+b)$ is nondecreasing. This excludes $A(s)/s$ as such an autocorrelation propagator. The partial fractions locate the obstruction:
 
 $$
