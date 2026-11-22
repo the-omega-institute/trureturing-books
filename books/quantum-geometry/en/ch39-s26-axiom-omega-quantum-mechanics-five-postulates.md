@@ -629,6 +629,32 @@ Every column of rank at most $r$ needs at least one unit of edge weight. Rows be
 
 For dimension $16$ and multiplier $3$, the one-coordinate Boolean lattice has $15$ free coordinates and layer sizes $\binom{15}{r}$. With the marked edge selected in the original table, both copies of $T$ have degree at most $2$. Each sum involving $T$ in the two formulas is at most $2$. The lower-side deficits at $r=1,3$ are at least $11$ and $211$, respectively. The upper-side deficits at $r=11,13$ are at least $213$ and $73$, respectively. Any realization with zero fixed-seed budgets at all other coordinates therefore needs at least $4(1+11+211+213+73)=2036$ fixed seeds at the chosen coordinate. The $1$ comes from the marked column. With the marked edge absent from the original table, both copies of $T$ have degree at most $1$. The lower bound for each of the same four deficits increases by one and the lower bound in this case is $4(1+512)=2052$.
 
+The four capacity deficits depend on the layer sizes of the remaining fifteen coordinates. The full-inclusion lower bound is therefore $2036$ when fixed seeds are allowed at any one designated coordinate. The attaining construction below uses coordinate $0$. [Lower bound at an arbitrary marked coordinate](lean:D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteenCovers.full_budget_ge)
+
+::: {.theorem #thm-omega-sixteen-full-budget lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteen.full_budget_iff" title="The exact budget for full inclusion in dimension sixteen"}
+Take dimension $16$ and multiplier $3$, with a nonzero fixed-seed budget allowed only at coordinate $0$. For every nonnegative integer $b$, the full inclusion graph admits a factor within budget $b$ if and only if $b\ge2036$. A feasible factor satisfies the degree, support and charge conditions above.
+:::
+
+::: {.proof}
+The four capacity deficits above give necessity. The attaining construction specifies a binary edge table on the $2^{15}$ subsets on each side. Its certificate checks the allowed edges, the degrees on both sides and the charge block by block. It has $508$ charged edges. Exactly one ordinary edge spans more than one rank, from the subset of the first four free coordinates to the subset of the first ten. The same factor works for every $b\ge2036$.
+:::
+
+::: {.theorem #thm-omega-sixteen-cover-budget-lower lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteenCovers.cover_budget_ge" title="A lower bound for adjacent ranks in dimension sixteen"}
+Use the same dimension, multiplier and coordinate. Restrict ordinary edges to the diagonal and to inclusions that add exactly one element. Keep the outgoing edge rule for $T$ and both degree choices above. Every feasible budget $b$ satisfies $b\ge2044$.
+:::
+
+::: {.proof}
+If at most one edge from $T$ enters ranks $0$ through $3$, the lower-side deficit increases by at least one at each of ranks $1$ and $3$. If two edges enter, the degree cap at $T$ makes the exceptional inflow exactly two into each prefix ending at ranks $5$, $7$ and $9$. Each of these layers has odd size and no ordinary edge bypasses it. The diagonal parity formula therefore forces at least one charged diagonal edge in each layer. Both cases require at least $510$ charged edges, so the budget is at least $4(1+510)=2044$.
+:::
+
+::: {.theorem #thm-omega-sixteen-cover-refutation lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteen.result" title="The adjacent-rank restriction excludes feasibility at budget 2036"}
+In the same sixteen-dimensional model, feasibility at budget $2036$ in the full inclusion graph fails to imply feasibility in the adjacent-rank graph.
+:::
+
+::: {.proof}
+The full inclusion graph is feasible at $2036$, while the adjacent-rank lower bound is $2044$.
+:::
+
 **An optimal uniform calibration for rational marginals.** Let $G$ act on finite input and output sets $X$ and $Y$, let $P$ be a $G$-covariant probability kernel, and let $H$ be any subgroup. If a positive integer $m$ makes every $mP(x,y)$ integral, a uniform seed law attains the maximum $H$-fixed mass. One sufficient seed count is $m|\det B|$, where $B$ is an invertible square submatrix of the integer constraint matrix below, using the positive support of a suitable optimizer as its columns.
 
 Write $q_O$ for the weight of each deterministic readout table $t:X\to Y$ in its $G$-orbit $O$. The normalization row of $A$ has entry $|O|$ in column $O$. The row for cell $(x,y)$ has entry $|\{t\in O:t(x)=y\}|$. The corresponding entries of $b$ are $1$ and $P(x,y)$. Let $c_O$ count the tables in $O$ that are fixed by $H$. Sending seeds equivariantly to their complete readout tables preserves the marginals and sends every $H$-fixed seed to an $H$-fixed table. Conversely, using the positive-weight tables as seeds and evaluating them realizes any feasible table law. The maximum fixed mass is therefore the maximum of $\sum_O c_Oq_O$ subject to $Aq=b$ and $q\ge0$. Independent draws from the rows give an invariant table law. The normalization row makes the feasible set bounded, and its closedness ensures the maximum is attained.
