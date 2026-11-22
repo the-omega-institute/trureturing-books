@@ -388,6 +388,12 @@ $N_c = 3$、不提希格斯粒子时反常相消（含混合引力反常）给�
 
 :::
 
+**用九点贝伦德球壳检验第一问（模型计算，区间核算）。** 取平方半径为 $17$ 的九个格点，即 $(0,1,4)$ 和 $(2,2,3)$ 的坐标排列。内积为 $j$ 的两点在球心张开角 $\theta_j=\arccos(j/17)$。经典黎曼猜想给出非平凡零点的形式 $1/2+i\gamma$。选第 $21284$ 枚正纵坐标 $\gamma=19056.31599055\ldots$，用它乘两条实际圆心角之差。所得 $\gamma(\theta_{11}-\theta_{14})$ 与 $\gamma(\theta_{10}-\theta_{14})$ 模 $2\pi$ 分别为 $2.116515\ldots$、$2.114523\ldots$。在平方弦长至多为 $14$ 的边上作最短自旋平行输运，给平方弦长为 $12,14$ 的边分别乘上这两道相位因子，内层三角形取负号。度矩阵减去带相位的邻接矩阵，得到磁图拉普拉斯 $L$。其最低两个本征值约为 $1.764446$ 和 $1.889188$，给出了可单独选取的最低质量模式。[算术输入与球壳几何](ch39-s25-axiom-omega-five-tier-deduction-cascade.md) · [质量谱的区间计算](https://github.com/the-omega-institute/trureturing-books/issues/932#issuecomment-7076032103)
+
+把本征值 $l_j$ 读作质量平方 $M_*^2l_j$，每个模式配一个有色弱双重态和一个无色弱双重态，超荷分别为 $1/6$ 和 $-1/2$。假设这些重场没有新的费米子汤川耦合。用 $1\,\mathrm{TeV}$ 处的三支规范耦合标定共同单位 $M_*$，逐个开启九个质量阈值，两圈规范跑动给出交汇尺度 $(4.6242,4.6353)\times10^{14}\,\mathrm{GeV}$。再让最低模式的无色双重态与希格斯额外耦合，可以选取一组四次耦合，使树级势在所有非零场方向为正，并使二体标量接触散射的全部归一化本征值在匹配点到交汇点之间的绝对值都小于 $8\pi$。这组参数使用了低能希格斯读数来匹配一圈有限阈值。[规范标定](https://github.com/the-omega-institute/trureturing-books/issues/927#issuecomment-7075672697) · [标量势与散射检验](https://github.com/the-omega-institute/trureturing-books/issues/932#issuecomment-7076032103)
+
+希格斯质量给这条路线增加了一个独立检验。若某个实重分量的质量平方随 $H^\dagger H$ 从 $x$ 变为 $x+kH^\dagger H$，它对一圈有限质量阈值的贡献为 $xk[\log(x/\mu^2)-1]/(32\pi^2)$，对高侧运行质量平方的加性斜率则贡献 $xk/(16\pi^2)$。两种加权不同。在九个质量的几何平均尺度 $\bar M$ 令高侧二次项为零，允许九个无色模式通过任意厄米矩阵与希格斯耦合。若含色模式共享一个耦合，上述匹配、稳定和幺正条件要求这枚零点上 $d m_H^2/d\log\mu<-3.51\times10^{21}\,\mathrm{GeV}^2$。以曲率系数为 $3$ 的自旋算子前三大本征值之和给三个占据态打分。在距最高分 $10^{-4}$ 以内的整个能窗中另选零点，斜率仍小于 $-1.25\times10^{20}\,\mathrm{GeV}^2$。这里的斜率描述匹配点的运行参数。若允许含色门户也是厄米矩阵，要将斜率绝对值压到 $10486\,\mathrm{GeV}^2$ 以内，其最大与最小本征值之差在该能窗中须超过 $0.001$，在所选零点须超过 $0.0073$。从圆弧配分函数导出这样的相互作用和共同质量单位，仍是第一问所需的动力学。[质量斜率的推导](https://github.com/the-omega-institute/trureturing-books/issues/934#issuecomment-7076158502) · [能窗覆盖](https://github.com/the-omega-institute/trureturing-books/issues/937#issuecomment-7076235762) · [含色谱宽检验](https://github.com/the-omega-institute/trureturing-books/issues/938#issuecomment-7076270994)
+
 最后，我们将 **AF-GUT（极小圆弧场大统一）** 与二十世纪两大传统统一范式——**$\mathrm{SU}(5)/\mathrm{SO}(10)$ 巨型单群矩阵大统一**及 **$10\mathrm{D}/11\mathrm{D}$ 超弦／卡鲁扎—克莱因额外空间维统一**——放在同一张可证伪判据总表上正面交锋：
 
 | 核心物理与认识论维度 | 传统单群矩阵 GUT（$\mathrm{SU}(5) / \mathrm{SO}(10)$） | 额外空间维统一（$5\mathrm{D}$ KK / $10\text{–}11\mathrm{D}$ 弦论） | **极小圆弧场大统一（AF-GUT，本书 `MODEL`）** |
