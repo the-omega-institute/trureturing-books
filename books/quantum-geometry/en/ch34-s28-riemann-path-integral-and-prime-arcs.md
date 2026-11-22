@@ -837,6 +837,21 @@ For the reciprocal-weighted prefix $S(x)=\sum_{1\le n\le x}\mu(n)/n$, the zero-f
 
 Under RH, take $\theta=1/2$ and $\alpha=1/4$. The resulting $N^{3/4}$ bound supplies cancellation in the near range of the prime-window proof. The inverse-logarithmic window bound also requires a far-range spectral estimate and the transfer to the two real endpoints. [Inverse-logarithmic window question](https://github.com/the-omega-institute/trureturing/issues/33096)
 
+::: {.theorem #thm-ch31-prime-window-inverse-log title="Inverse-logarithmic prime-window bound" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusInverseLog.prime_window_mobius_inverse_log_of_rh"}
+Assume the Riemann hypothesis. There are real constants $a_0\ge2$ and $C>0$ such that every integer $m\ge2$ and all real $B\ge a\ge a_0$ satisfy
+$$
+|E_m(a,B)|\le \frac{Cm}{\ln(m+1)}D_{s_m}(a,B),
+\qquad s_m=\tfrac12-\tfrac1{m+1}.
+$$
+The residual $E_m$ is the one in [@thm-ch31-prime-window-mobius], with its signed arithmetic corrections and root modes selected by $2n<m+1$ and counted with analytic multiplicity.
+:::
+
+::: proof
+Put $q=m+1$, $u=\ln x$ and $L=1+\ln q/16$. For $u\le Lq$, apply finite Abel summation to the omitted degree weights. The $m^{3/4}$ prefix bound from [@lem-ch31-mobius-energy-prefix] gives a coefficient of order $e^{2L}m^{3/4}$. Since $e^{2L}=e^2 q^{1/8}$, this is bounded by a constant times $m/\ln q$. The same prefix estimate bounds the trivial-zero response by a constant times $m^{3/4}(1+\ln m)$.
+
+For $u\ge Lq$, the actual coordinates $u/n$ have spacing at least $u/q^2$. The separated sampling bound for the omitted spectrum costs $1+q^2/u+q^{7/8}$, which is at most a constant times $m/\ln q$ in this range. The signed arithmetic tail obeys the same bound. Each estimate uses the density factor $e^{-s_m u}$. Integration between $\ln a$ and $\ln B$ yields the endpoint difference $D_{s_m}(a,B)$, which vanishes at $B=a$. The threshold and constant are uniform in the truncation order.
+:::
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::

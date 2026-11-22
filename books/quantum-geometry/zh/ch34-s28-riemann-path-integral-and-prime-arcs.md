@@ -837,6 +837,21 @@ $$
 
 在 RH 下取 $\theta=1/2$、$\alpha=1/4$。所得 $N^{3/4}$ 界为素数尾窗证明的近区提供消去。逆对数尾窗界还需远区谱估计及其到两个实数端点的转移。 [逆对数尾窗问题](https://github.com/the-omega-institute/trureturing/issues/33096)
 
+::: {.theorem #thm-ch31-prime-window-inverse-log title="素数尾窗的逆对数界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusInverseLog.prime_window_mobius_inverse_log_of_rh"}
+假设黎曼猜想成立。存在实常数 $a_0\ge2$ 与 $C>0$，使每个整数 $m\ge2$ 和所有实数 $B\ge a\ge a_0$ 都满足
+$$
+|E_m(a,B)|\le \frac{Cm}{\ln(m+1)}D_{s_m}(a,B),
+\qquad s_m=\tfrac12-\tfrac1{m+1}.
+$$
+余项 $E_m$ 见 [@thm-ch31-prime-window-mobius]，含有符号的算术修正项及按 $2n<m+1$ 保留的根模式，零点按解析重数计入。
+:::
+
+::: proof
+记 $q=m+1$、$u=\ln x$、$L=1+\ln q/16$。在 $u\le Lq$ 时，对被略去的次数权重作有限 Abel 求和。用 [@lem-ch31-mobius-energy-prefix] 的 $m^{3/4}$ 前缀界，所得系数至多为常数乘 $e^{2L}m^{3/4}$。由于 $e^{2L}=e^2 q^{1/8}$，这个量至多为常数乘 $m/\ln q$。同一前缀界将平凡零点响应控制在常数乘 $m^{3/4}(1+\ln m)$ 以内。
+
+在 $u\ge Lq$ 时，实际坐标 $u/n$ 的间距至少为 $u/q^2$。对略去的谱作分离采样，代价为 $1+q^2/u+q^{7/8}$，在此范围内至多为常数乘 $m/\ln q$。有符号的算术尾项也满足这一界。各项密度估计都带因子 $e^{-s_m u}$。在 $\ln a$ 与 $\ln B$ 之间积分得到端点差 $D_{s_m}(a,B)$，当 $B=a$ 时为零。阈值和常数对全部截断阶统一。
+:::
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::
