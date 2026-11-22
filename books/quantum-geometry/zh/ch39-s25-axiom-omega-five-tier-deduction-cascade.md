@@ -533,6 +533,42 @@ $$
 在给定动量范围内还可以控制整条近似曲线。记 $F_n(u)=[(I+uJ_n)^{-1}]_{00}$、$T=\gamma_1^{-2}$，取 $0\le u\le U$。令 $H_n(t)=\det(tI-J_n)$。当 $u>0$，多项式 $[H_n(-1/u)^2-H_n(t)^2]/(1+ut)$ 的次数至多为 $2n-1$，且 $H_n$ 在截断谱上为零。对两条测度积分并利用矩相等，得到 $F-F_n=H_n(-1/u)^{-2}\int H_n(t)^2/(1+ut)\,d\mu>0$。再将 $(1+ut)^{-1}$ 以 $t=T/2$ 为中心作 $2n-1$ 次几何级数逼近，余项绝对值至多为 $[UT/(2+UT)]^{2n}$。两条概率测度各贡献不超过这个余项的积分误差，故 $0\le F(u)-F_n(u)\le 2[UT/(2+UT)]^{2n}$。在 $u=0$ 两条曲线均为一。[有限动量区间误差的推导](https://github.com/the-omega-institute/trureturing-books/issues/884#issuecomment-7071301055)
 :::
 
+::: {.remark #rem-ch39-fifteen-arithmetic-probes title="十五个比较设置怎样检验三维场的组合"}
+在 [@rem-ch39-jacobi-field-chain] 的同一算术链上，只激发前五个位置，每个位置使用一个实源系数。零欧氏动量处的无量纲传播子为 $I$，所以实源 $x,y$ 的交叉响应是 $x\cdot y$。取五个单位基向量 $e_i$，再取十个等强同相的双站源 $v_{ij}=(e_i+e_j)/\sqrt2$（$1\le i<j\le5$）。双站源的归一化交叉响应为 $e_i\cdot v_{ij}=1/\sqrt2$。若探测器将两个单位源的响应读为相同结果概率 $\kappa(x,y)=(1+x\cdot y)/2$，则两个正交单站源给 $1/2$，而 $e_i$ 与 $v_{ij}$ 给 $(1+1/\sqrt2)/2$。相干相加、归一化及上述概率读出均是探测器的操作假设。五维记录的是独立源方向，所有位置共用三维空间。
+
+**算术链需要几个位置？** 在 $L^2(\mu)$ 中，$P_0,\ldots,P_4$ 是正交归一的前五个多项式，$P_{i-1}(J)e_0$ 恰为第 $i$ 个站点的单位源。它们及其成对相干和实现了这十五个设置。凡支撑紧且有无穷多点的正谱测度都给出同一单位基读数，谱的算术数据进入多项式的系数。对于本章的算术测度，若还要求每个源有有限的正则总留数，上文的条件 $P(0)=0$ 使次数至多为四的允许多项式构成四维空间。此时六个位置恰好足够：在 $t^2d\mu$ 下将 $1,t,\ldots,t^4$ 正交归一化得 $Q_0,\ldots,Q_4$，则 $tQ_i$ 在 $d\mu$ 下正交归一，并都在谱变量 $t=0$ 处为零。
+
+**固定权重的单旋子混合能达到怎样的精度？** 在每个单场内，为各设置选取单位四元数 $q_i,q_{ij}\in S^3\subset\mathbb R^4$，并用实点积给出概率 $(1+q\cdot q')/2$。不同场可用任意与设置无关的共同概率权重混合。令 $s_{ij}=q_i\cdot q_j$，五个 $q_i$ 的格拉姆矩阵 $G$ 的迹为五、秩至多为四，故 $\operatorname{Tr}G^2\ge25/4$，即 $\sum_{i<j}s_{ij}^2\ge5/8$。反三角不等式给出
+
+$$
+D=\sum_{i<j}\|q_i+q_j-\sqrt2\,q_{ij}\|^2
+ \ge\sum_{i<j}\frac{2s_{ij}^2}{(1+\sqrt{1+s_{ij}})^2}
+ \ge\frac{5}{4(1+\sqrt2)^2}.
+$$
+
+展开每项得到 $4+2s_{ij}-2\sqrt2(q_i\cdot q_{ij}+q_j\cdot q_{ij})$。这个表达式对三十个点积读数是仿射的，因此对单场取平均仍服从同一下界。目标表逐项给 $D=0$。令 $\delta$ 为这三十个概率中最大的绝对误差。由点积 $2\kappa-1$ 可知 $D$ 的偏差至多为 $20(2+4\sqrt2)\delta$。故任何这种固定混合都有 $\delta\ge 5/[80(1+\sqrt2)^2(2+4\sqrt2)]>0.00140048$。[@thm-ch39-fifteen-setting-gap] 给出单场与有限混合的两条界。对共同分布积分，得到连续混合的结论。
+
+**换成五个实际的算术节点会怎样？** 取相对临界线的无量纲偏移 $x_i=0,10^3,10^6,10^9,10^{12}$，以 $u_i$ 表示上文相应的归一化零点特征向量。由 RH 的零点配对式，$H_{ij}=u_i\cdot u_j=[x_iL(x_i)+x_jL(x_j)]/[(x_i+x_j)\sqrt{L(x_i)L(x_j)}]$（$i<j$）。256 位区间计算给出各 $H_{ij}>0$，且 $\sum_{i<j}H_{ij}=0.448710272053079\ldots$。仅用这五个设置时有一个显式的单旋子混合。在 $\epsilon\in\{-1,1\}^5$ 上取权重 $2^{-5}(1+\sum_{i<j}H_{ij}\epsilon_i\epsilon_j)$，给第 $i$ 个设置赋实四元数 $\epsilon_i$。权重为正，在符号立方体上求和给出总重一及 $\mathbb E(\epsilon_i\epsilon_j)=H_{ij}$。
+
+这一点推广到整条实轴（手工推导）。给定 $\gamma_j,m_j>0$，$\sum_jm_j/\gamma_j^2<\infty$，取 $f_j(x)=\sqrt{m_j}/(ix-\gamma_j)$。以 $h_{\gamma,m}(x,y)$ 表示这些向量归一内积的实部，它在 $x+y=0$ 时也定义良好。取实际黎曼零点的正纵坐标及重数时，它就是上文的 $h(1/2+x,1/2+y)$。存在一个随机相位函数 $U:\mathbb R\to S^1$，其概率分布对所有节点对相同，使 $h_{\gamma,m}(x,y)=\operatorname{Re}\mathbb E[U(x)\overline{U(y)}]$ 同时对所有实 $x,y$ 成立。证明先截取 $n$ 个频率，置 $Q(z)=\prod_j(z-\gamma_j)$。把 $\operatorname{diag}(\gamma_j^2)$ 压缩到向量 $(\sqrt{m_j})_j$ 的正交补，记所得特征值为 $\lambda_k^2$。Cauchy–Binet 公式及主子式展开给出一组符号 $\sigma_k=\pm1$ 的共同概率，使多项式 $P_\sigma(z)=\prod_{k=1}^{n-1}(z-\sigma_k\lambda_k)$ 的乘积平均等于截断特征核乘以两个 $Q$ 因子后再除以 $\sum_jm_j$。因为 $|P_\sigma(ix)|^2=\prod_k(x^2+\lambda_k^2)$ 与符号无关，设 $U_\sigma(x)$ 是 $P_\sigma(ix)/Q(ix)$ 的相位，则截断实核等于 $\operatorname{Re}\sum_\sigma p_\sigma U_\sigma(x)\overline{U_\sigma(y)}$，其中 $p_\sigma$ 为符号的概率。全谱极限中，概率测度在紧积空间 $(S^1)^{\mathbb R}$ 上有弱星聚点，每一对节点的相关都是连续柱函数，所以一个聚点给出整条实轴的共同分布。对于 $k$ 个固定节点，实格拉姆表仅有 $k(k-1)/2$ 个非对角条目，Carathéodory 定理给出至多 $1+k(k-1)/2$ 组相位赋值。制备两个原始源的相干和需要额外的物理操作。[行列式构造与全谱极限](https://github.com/the-omega-institute/trureturing-books/issues/897#issuecomment-7072433341)；[实插值的独立推导](https://github.com/the-omega-institute/trureturing-books/issues/897#issuecomment-7072426337)
+
+现在额外制备十个同相和源 $z_{ij}=(u_i+u_j)/\sqrt{2+2H_{ij}}$，仍以 $\sqrt2$ 为比较系数。每对贡献 $\|u_i+u_j-\sqrt2\,z_{ij}\|^2=(\sqrt{2+2H_{ij}}-\sqrt2)^2$。十项总和为 $D_\xi=0.031033094894010\ldots$，低于单旋子混合下界 $B=5/[4(1+\sqrt2)^2]$。由上述三十对概率的误差界，$\delta\ge(B-D_\xi)/[20(2+4\sqrt2)]>0.00119783525450$。这个差值下界针对单旋子混合对目标表的拟合。把两种预言用于实验，要求装置能制备并校准十个相干和源，且按半角规则读数。[实际节点的区间计算与复现代码](https://github.com/the-omega-institute/trureturing-books/issues/897#issuecomment-7072394125)
+
+在这类两两实点积比较中，十五也是可以排除固定权重单旋子混合的最少设置数。至多十四个单位向量的任意格拉姆表都可写成秩至多四的单位对角格拉姆表的凸组合。[降秩分解与设置数下界](https://github.com/the-omega-institute/trureturing-books/issues/897#issuecomment-7072463348)
+
+**两个量子比特怎样复现全部读数？** 算术节点及其十个和源都在五个向量的实张成空间中。取一组正交归一基，便可对两组十五设置使用同一读出。 取 Pauli 矩阵 $X,Y,Z$ 及单位阵 $I$，在 $\mathbb C^2\otimes\mathbb C^2$ 上令 $\Gamma=(X\otimes I,Y\otimes I,Z\otimes X,Z\otimes Y,Z\otimes Z)$。这五个无迹厄米矩阵两两反对易且平方为单位阵。设置 $x$ 对应二值可观测量 $A_x=\sum_i x_i\Gamma_i$，其结果 $a=\pm1$ 的投影为 $\Pi_a^x=(I_4+aA_x)/2$。从 $I_4/4$ 出发，用 Lüders 规则先测 $A_x$ 再测 $A_y$。利用 $\operatorname{Tr}(A_xA_y)=4x\cdot y$，联合概率为 $\operatorname{Tr}(\Pi_b^y\Pi_a^x)/4=(1+ab\,x\cdot y)/4$。相同结果的概率恰为 $\kappa(x,y)$。这给出了使用联合可观测量、顺序读出和张量积的物理实现条件。[十五设置的误差界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/884#issuecomment-7071912175)
+
+在固定二值投影及顺序 Lüders 测量下，精确再现这些相同结果概率所需的复维数还取决于初态。满秩初态要求维数为四的倍数，固定纯态可在三维复空间中再现同一张相同结果概率表。[初态秩与所需能级](https://github.com/the-omega-institute/trureturing-books/issues/897#issuecomment-7072466186)
+
+只用五个原始设置也能检验测量更新。每轮用同一初态复用仪器，依次测 $i,j,i$。在单场混合模型中，再要求该轮的旋子样本固定，给定样本和上一个结果 $a$ 后，下一个结果 $b$ 的概率为 $(1+ab\,s_{ij})/2$，与更早的结果无关。首末结果相同的概率于是为 $(1+\mathbb E s_{ij}^2)/2$，上述 Clifford 可观测量的 Lüders 更新则给 $(1+H_{ij}^2)/2$。从逐样本界 $\sum_{i<j}s_{ij}^2\ge5/8$ 减去算术值 $\sum_{i<j}H_{ij}^2=0.068102456972095\ldots$，再对十对取平均，至少一对的同结果概率超出量子预测 $(5/8-\sum_{i<j}H_{ij}^2)/20>0.02784487$。若两点概率已经校准，超出量恰为 $\operatorname{Var}(s_{ij})/2$。每一步独立重抽样本会把 $\mathbb E s_{ij}^2$ 改为 $(\mathbb E s_{ij})^2$，所以单轮内保持同一样本是这项检验的物理条件。[重复测量规则与区间误差界](https://github.com/the-omega-institute/trureturing-books/issues/897#issuecomment-7072525491)
+:::
+
+::: {.theorem #thm-ch39-fifteen-setting-gap title="五个单位四维向量与十五设置的误差界" lean="D5/S3/Quantum/Rotors/FifteenSettingGap.fifteen_setting_gap,D5/S3/Quantum/Rotors/FifteenSettingGap.fixed_mixture_probability_gap"}
+给五个设置赋单位向量 $q_i\in\mathbb R^4$，给十个配对设置赋单位向量 $q_{ij}\in\mathbb R^4$（$i<j$）。则 $\sum_{i<j}(q_i\cdot q_j)^2\ge5/8$，且 $\sum_{i<j}\|q_i+q_j-\sqrt2\,q_{ij}\|^2\ge5/[4(1+\sqrt2)^2]$。
+
+设有有限多组这样的赋值。对每一对设置，按同一组非负权重（总和为一）对半角概率 $(1+q\cdot q')/2$ 取平均。若每对 $i<j$ 的基设置概率与 $1/2$ 的偏差，以及每个端点与配对设置的概率同 $(1+1/\sqrt2)/2$ 的偏差，绝对值均至多为 $\delta$，则 $\delta\ge5/[80(1+\sqrt2)^2(2+4\sqrt2)]$。
+:::
+
 **这条响应曲线可以由哪些传播子读出？（标量交换模型）** 取欧氏动量平方 $s=q_E^2>0$，引入自由质量尺度 $M>0$。令 $b_\gamma=M^2\gamma^2$，沿用 $p_\gamma=m_\gamma/(S\gamma^2)$。无量纲响应 $A(s)=F(s/M^2)=\sum_\gamma p_\gamma b_\gamma/(s+b_\gamma)$ 从 $1$ 严格递减到 $0$。没有接触项的标量对角传播子若有正谱表示 $D(s)=\int_{[0,\infty)}(s+b)^{-1}\,d\rho(b)$，则 $sD(s)$ 非减，因为每个 $s/(s+b)$ 都非减。因此 $A(s)/s$ 不能作为这种自相关传播子。分式分解还指出阻碍出现在哪里：
 
 $$
