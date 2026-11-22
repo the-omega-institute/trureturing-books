@@ -565,7 +565,7 @@ $$
 将平坦平均写成关于对数中点的左右配对，得到对称二阶差在 $[0,L/2]$ 上的积分，再除以 $L$。对任意中心使用 [@thm-ch31-root-symmetric-tail-modulus] 的上界，中心为零时使用带符号的尖点下界。积分 $h\log(1/h)$ 给出主项和线性项。换回归一化指数权时，两种权的总质量相同。先减去中点谱值，再用一阶差的显式模量控制密度之差。所有零点模态的绝对可和性使整窗积分成为同一相位向量的连续读数。一次共同的晚期相位复现恢复下界，归一化算术余项趋于零。完整证明由 Lean 内核检查。
 :::
 
-当 $\mu(r)=0$ 时，上极限为零。若 $\mu(r)\ne0$，中点校正的晚期最坏误差具有 $L\log(1/L)$ 的首项。仅假设 RH 时，左端点误差的精确渐近仍是开放问题。
+当 $\mu(r)=0$ 时，上极限为零。若 $\mu(r)\ne0$，中点校正的晚期最坏误差具有 $L\log(1/L)$ 的首项。左端点能否取得完整首项系数取决于 [@thm-ch31-weighted-phase-limsup] 中的加权相位亏损。
 
 ::: {.theorem #thm-ch31-signed-quadratic-midpoint title="对数中点校正的二次余项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffQuadraticMidpoint.signed_window_even_cutoff_midpoint_limsup_quadratic"}
 假设 RH。取自然数 $m,r$，满足 $m\ge2$ 且 $m+1=2r$。沿用 [@thm-ch31-signed-midpoint-limsup] 的原始带符号素数窗口、对数中点校正以及 $Q_m(L)$ 与 $G_r(L)$。绝对误差在充分晚的尾区间上有界。存在常数 $C_m>0$，对每个 $0<L\le1/4$ 都有
