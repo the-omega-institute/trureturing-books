@@ -9016,6 +9016,119 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "holographic-arc-manifold-sandbox",
+      "code": "OMEGA//MANIFOLD",
+      "title": "全息圆弧流形（M_Ω）沙盘：超越黎曼切板，同流形光滑统一加法、乘法、ln 与素数螺线环",
+      "title_en": "Holographic Circular-Arc Manifold (M_Ω): Beyond Flat Tangent Plates, Unifying +, ×, ln & Prime Solenoid Loops",
+      "summary": "对比拼满平直切空间鳞片 T_pM 的伪光滑黎曼流形与无切板三元闭合的全息圆弧流形：将 0·1·∞ 缝入同一紧致闭环 κ∈{1,1/2,0}，展示零奇点实解析流场 V_+=2κ∂_φ、V_÷=2(1−κ)∂_φ、V_×=sinφ∂_φ（满足 ½(V_++V_÷)=∂_φ 与 [V_+,V_÷]=2V_×）、乘法流内禀对数弧长 τ_×=ln x，以及螺线管内周长为 ln p 的光滑素数环与平直横截阶梯伪影。",
+      "summary_en": "Contrasts flat tangent-plate Riemannian manifolds against the chart-free Holographic Circular-Arc Manifold: compactifying 0·1·∞ onto one closed meridian κ∈{1,1/2,0}, unifying singularity-free real-analytic vector fields V_+=2κ∂_φ, V_÷=2(1−κ)∂_φ, and V_×=sinφ∂_φ (with ½(V_++V_÷)=∂_φ and [V_+,V_÷]=2V_×), intrinsic logarithmic arc-length τ_×=ln x, and smooth prime solenoid loops of length ln p whose flat cross-sections yield Chebyshev's staircase.",
+      "path": "holographic-arc-manifold-sandbox/",
+      "thumbnail": "holographic-arc-manifold-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-22",
+      "chapter": 39,
+      "section": "39.9",
+      "presets": [
+        "tangent-scales-vs-chartfree-arc",
+        "meridian-zero-one-infinity-closure",
+        "add-mul-lie-spinor-flows",
+        "logarithmic-arclength-pole-deceleration",
+        "prime-solenoid-vs-flat-sawtooth"
+      ],
+      "preset_titles": {
+        "tangent-scales-vs-chartfree-arc": {
+          "zh": "切板总有折痕，三点圆弧自己合成整圈",
+          "en": "Flat plates crease, three points close the circle"
+        },
+        "meridian-zero-one-infinity-closure": {
+          "zh": "0 · 1 · ∞ 在同一条光滑闭环上",
+          "en": "0 · 1 · ∞ on one smooth closed loop"
+        },
+        "add-mul-lie-spinor-flows": {
+          "zh": "加与除合成匀速转动，乘在两极停住",
+          "en": "Adding and dividing make uniform rotation"
+        },
+        "logarithmic-arclength-pole-deceleration": {
+          "zh": "0 与 ∞ 处钟走慢，圆没有断口",
+          "en": "The clock slows at 0 and ∞, nothing tears"
+        },
+        "prime-solenoid-vs-flat-sawtooth": {
+          "zh": "素数环光滑，平直切刀读出锯齿",
+          "en": "Smooth prime loops, sawtooth on the flat blade"
+        }
+      },
+      "tags": [
+        "全息圆弧流形",
+        "投影直线",
+        "李代数流",
+        "对数弧长",
+        "素数螺线环"
+      ],
+      "tags_en": [
+        "Holographic arc manifold",
+        "Projective line",
+        "Lie algebra flows",
+        "Logarithmic arc length",
+        "Prime solenoid loops"
+      ],
+      "theory": [
+        {
+          "label": "§39.9 · 全息圆弧流形与阿代尔螺线管同体",
+          "label_en": "§39.9 · The Holographic Circular-Arc Manifold and Adelic Solenoid Unity",
+          "href": "../zh/ch39-s32-holographic-arc-manifold-and-solenoid-unity.html#sec-ch39-holographic-arc-manifold-and-solenoid-unity",
+          "href_en": "../en/ch39-s32-holographic-arc-manifold-and-solenoid-unity.html#sec-ch39-holographic-arc-manifold-and-solenoid-unity"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/InvariantMetric/LowDimensionInvariantMetric.exists_basis_bracket_eq_smul_cross"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum"
+        },
+        {
+          "gid": "D5/S1/Solenoid/ComplexPowerSolenoidDecomposition.logarithmic_charge_conservation"
+        },
+        {
+          "gid": "D5/S1/Solenoid/ComplexPowerSolenoidDecomposition.logarithmicCharge_eq_zero_iff"
+        },
+        {
+          "gid": "D5/S1/Solenoid/ThroatTransitionCocycle.three_lift_difference_cocycle"
+        },
+        {
+          "gid": "D5/S3/Arith/AbsoluteValues/OstrowskiClassification.rational_absolute_value_classification"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula"
+        },
+        {
+          "gid": "D5/S3/Arith/Congruence/PadicBallFiberCorrespondence.congruenceFiber_eq_closedBall_inter_range"
+        },
+        {
+          "gid": "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product"
+        },
+        {
+          "gid": "D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence"
+        },
+        {
+          "gid": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }

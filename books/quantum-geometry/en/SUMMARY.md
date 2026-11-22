@@ -257,6 +257,7 @@
   - [39.6 Pulling the Last Cartesian Nail and Constant-Free Rational Reconstruction: Why π, e, and φ Are Flat-Approximation Residuals Rather Than Primitives of AXIOM-Ω](ch39-s29-constant-free-rational-axiom-omega.md)
   - [39.7 Past, Present, Future and the 0 · 1/2 · 1 Pure Rational Causal-Jet Matrix: Spherical Jet Ladder, Midpoint Self-Duality, and the 1 ↦ 0 Cosmic Heartbeat](ch39-s30-past-present-future-rational-jet-triad.md)
   - [39.8 The Real Error-Magnification Axis and Prime Adelic Closure: From Tangent Linear Distortion and Gibbs–Rodrigues Curved Synthesis to the Incommensurable Prime Anti-Deadlock Engine](ch39-s31-real-error-axis-and-prime-adelic-closure.md)
+  - [39.9 The Holographic Circular-Arc Manifold and Adelic Solenoid Unity: Beyond Riemannian Tangent Plates, Smoothly Unifying Addition, Multiplication, Logarithm, and Prime Loops](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md)
 
 # Coda and Appendices
 
