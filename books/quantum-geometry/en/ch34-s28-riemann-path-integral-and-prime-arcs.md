@@ -968,6 +968,44 @@ The signed Möbius prefix gives low-frequency cost $O_\eta(q^{1/2+\eta}(H+1)^{1/
 At $d=1/2$, the starting condition is $\ln a\ge(m+1)^{3/2}$ and the exponent is $1/2+\varepsilon$. This estimate applies throughout that later range. The least exponent attainable uniformly as the starting point varies remains open.
 
 
+::: {.theorem #thm-ch31-prime-window-odd-cutoff title="The first omitted term at an odd cutoff" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusOddCutoff.signed_window_odd_cutoff_expansion"}
+Assume RH. Fix an integer $m\ge2$ with $q=m+1$ odd, and set $s_m=1/2-1/q$ and $\delta_m=1/q-1/(q+1)$. There are real constants $a_0\ge2$ and $C>0$, depending on $m$, such that for all $B\ge a\ge a_0$,
+
+$$
+\left|E_m(a,B)+\frac{\mu(q)q}{(q-1)s_m}D_{s_m}(a,B)\right|
+\le C a^{-\delta_m}D_{s_m}(a,B).
+$$
+
+Here $D_s(a,B)=a^{-s}-B^{-s}$, and $E_m$ uses the two signed corrections in [@thm-ch31-prime-window-mobius]. The spectral sums count zeros with their analytic multiplicities and retain root degrees satisfying $2n<m+1$.
+:::
+
+::: proof
+When the truncation order increases from $m$ to $q$, the root selection can change only at $2n=q$. Since $q$ is odd, the root terms agree at both orders. The only new arithmetic term has degree $q$ and coefficient $-\mu(q)q/((q-1)s_m)$. Removing that term leaves exactly $E_q(a,B)$.
+
+Apply the all-order estimate to $E_q$. Its endpoint power difference has rate $s_m+\delta_m$. Over the logarithmic interval $[\ln a,\ln B]$ we have $e^{-\delta_m u}\le a^{-\delta_m}$. Using the integral representations of the two power differences gives
+
+$$
+D_{s_m+\delta_m}(a,B)\le
+\frac{s_m+\delta_m}{s_m}a^{-\delta_m}D_{s_m}(a,B).
+$$
+
+The comparison includes $B=a$, when both power differences vanish.
+:::
+
+::: {.theorem #thm-ch31-prime-window-no-negative-order title="A lower bound for the order exponent in arbitrarily late windows" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusOddCutoff.signed_window_no_negative_order_exponent"}
+Assume RH. For every $\gamma,K,L>0$, every start threshold $A:\mathbb N\to\mathbb R$, and every natural number $N$, there exist an integer $m\ge\max(2,N)$ and a real number $a\ge\max(2,A(m))$ such that with $B=a e^L$,
+
+$$
+|E_m(a,B)|>K m^{-\gamma}D_{s_m}(a,B).
+$$
+:::
+
+::: proof
+Choose an odd prime $q=m+1$ large enough that $m\ge\max(2,N)$ and $K m^{-\gamma}<1$. Then $\mu(q)=-1$ and $q/((q-1)s_m)=2q^2/((q-1)(q-2))>2$. Fix this order and take $a$ large enough to satisfy the prescribed threshold and $C a^{-\delta_m}<1$. The positive logarithmic width gives $D_{s_m}(a,a e^L)>0$. The odd-cutoff expansion and the triangle inequality give $|E_m|>D_{s_m}$.
+:::
+
+When odd $q$ has a square divisor greater than one, $\mu(q)=0$ and the estimate gives the faster bound $O_m(a^{-\delta_m}D_{s_m})$. For even $q$, increasing the order also admits the spectral term of degree $n=q/2$, which has the same decay rate as the degree-$q$ arithmetic term. The leading behavior for even cutoffs requires controlling both contributions.
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::

@@ -968,6 +968,44 @@ $$
 取 $d=1/2$ 时，起点条件为 $\ln a\ge(m+1)^{3/2}$，指数为 $1/2+\varepsilon$。该界适用于这一整段较晚的范围。允许起点变化时的最优统一指数仍有待确定。
 
 
+::: {.theorem #thm-ch31-prime-window-odd-cutoff title="奇数截断的首个遗漏项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusOddCutoff.signed_window_odd_cutoff_expansion"}
+假设 RH 成立。固定整数 $m\ge2$，令 $q=m+1$ 为奇数，并记 $s_m=1/2-1/q$ 及 $\delta_m=1/q-1/(q+1)$。存在依赖于 $m$ 的实数 $a_0\ge2$ 和 $C>0$，使所有 $B\ge a\ge a_0$ 满足
+
+$$
+\left|E_m(a,B)+\frac{\mu(q)q}{(q-1)s_m}D_{s_m}(a,B)\right|
+\le C a^{-\delta_m}D_{s_m}(a,B).
+$$
+
+这里 $D_s(a,B)=a^{-s}-B^{-s}$，$E_m$ 沿用 [@thm-ch31-prime-window-mobius] 的两项带符号修正。零点按解析重数计数，根谱的保留条件为 $2n<m+1$。
+:::
+
+::: proof
+把截断阶数从 $m$ 增到 $q$ 时，根谱条件只可能在 $2n=q$ 处改变。$q$ 为奇数，故根谱项完全相同。新保留的算术项恰是次数 $q$，其系数为 $-\mu(q)q/((q-1)s_m)$。扣除这项后，余项恰为 $E_q(a,B)$。
+
+对 $E_q$ 使用全阶数估计。它的幂差衰减率是 $s_m+\delta_m$。在对数区间 $[\ln a,\ln B]$ 上有 $e^{-\delta_m u}\le a^{-\delta_m}$。把这一不等式用于两个幂差的积分表示，得到
+
+$$
+D_{s_m+\delta_m}(a,B)\le
+\frac{s_m+\delta_m}{s_m}a^{-\delta_m}D_{s_m}(a,B).
+$$
+
+同一个比较覆盖 $B=a$，此时两个幂差都为零。
+:::
+
+::: {.theorem #thm-ch31-prime-window-no-negative-order title="任意晚窗中的阶数指数下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusOddCutoff.signed_window_no_negative_order_exponent"}
+假设 RH 成立。给定任意实数 $\gamma,K,L>0$、任意起点下界函数 $A:\mathbb N\to\mathbb R$ 和任意自然数 $N$，存在整数 $m\ge\max(2,N)$ 和实数 $a\ge\max(2,A(m))$，使 $B=a e^L$ 时
+
+$$
+|E_m(a,B)|>K m^{-\gamma}D_{s_m}(a,B).
+$$
+:::
+
+::: proof
+先取足够大的奇素数 $q=m+1$，使 $m\ge\max(2,N)$ 且 $K m^{-\gamma}<1$。此时 $\mu(q)=-1$，而 $q/((q-1)s_m)=2q^2/((q-1)(q-2))>2$。固定该阶数，再把 $a$ 取得足够大，使其超过所规定的下界、且 $C a^{-\delta_m}<1$。因为 $L>0$，$D_{s_m}(a,a e^L)>0$。奇数截断展开和三角不等式给出 $|E_m|>D_{s_m}$。
+:::
+
+若奇数 $q$ 含平方因子，首项系数因 $\mu(q)=0$ 消失，原式仍给出多衰减一阶的界 $O_m(a^{-\delta_m}D_{s_m})$。若 $q$ 为偶数，增阶时还会加入次数 $n=q/2$ 的零点项，其衰减率与次数 $q$ 的算术项相同。偶数情形的首项需要同时处理这两部分。
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::
