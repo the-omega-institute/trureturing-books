@@ -677,6 +677,21 @@ Take a finite collection of such assignments. For each pair of settings, average
 Write the five vectors as the rows of a matrix with four columns. Its column Gram matrix has trace five. Cauchy–Schwarz on the four diagonal entries and cyclicity of trace give the bound $5/8$ for the ten squared inner products of the rows. The reverse triangle inequality at each pair setting then bounds the sum of squared norms. Expanding each square gives an affine function of three inner products, so the common weights preserve the bound on averaging. Converting the inner products to half-angle probabilities bounds the total change from the thirty comparisons by $20(2+4\sqrt2)\delta$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.remark #rem-ch39-isotropic-scale-response title="Measuring transverse and longitudinal static response in one three-dimensional ensemble"}
+Take a rotation-invariant random vector $X\in\mathbb R^3$ in equilibrium at zero field. The model specifies the scale density $f(u)=W(u)/\xi(1/2)$ for its component along any unit axis. The density constructed from the circle heat trace is smooth, even and strictly decreasing on the positive half-line. Its moment-generating function is $\int_{\mathbb R}e^{hu}f(u)\,du=\xi(1/2+h)/\xi(1/2)$. [Derivation of the scale density and its integral representation of the completed function](https://github.com/the-omega-institute/trureturing-books/issues/925#issuecomment-7075783754)
+
+This specification determines the law of the radius $R=|X|$ uniquely. Conditional on $R=r>0$, a uniformly distributed direction gives an axial component uniform on $[-r,r]$. A radial density $g$ thus gives $f(u)=\int_{|u|}^\infty g(r)/(2r)\,dr$. Inverting the relation yields $g(r)=-2rf'(r)$. It is nonnegative, and integration by parts gives $\int_0^\infty g(r)\,dr=2\int_0^\infty f(r)\,dr=1$. For a general radius law the same tail integral determines the measure on the positive half-line, and any atom at the origin would give an atom in the marginal. Sampling this radius and an independent uniform direction constructs the ensemble.
+
+Apply a dimensionless static source $\mathbf h$ by multiplying the weight by $e^{\mathbf h\cdot X}$ and normalizing. Rotation symmetry makes the partition function depend only on $h=|\mathbf h|$. With the background fixed, apply a small source increment first perpendicular and then parallel to it. In each case measure the slope of the mean component in the direction of the increment. This slope equals the variance of that component in the tilted ensemble. Write $m(h)=\partial_h\log\xi(1/2+h)$ and let $\chi_0=2L(0)$ be the zero-field variance of one component. The Hessian of the radial function $\log Z$ gives
+
+$$
+\frac{\chi_\perp(h)}{\chi_0}=\frac{m(h)}{h\chi_0}=F(h^2),\qquad
+\frac{\chi_\parallel(h)}{\chi_0}=\frac{m'(h)}{\chi_0}=F(h^2)+2h^2F'(h^2).
+$$
+
+Both expressions extend continuously to $1$ at zero field. At positive real $s=h^2$ both readings are positive. Locating the zeros by the Riemann hypothesis and using the positive spectral expansion above, the transverse reading has a simple pole at each $s=-\gamma^2$ and the longitudinal reading has a double pole there. A Stieltjes transform of a positive measure cannot have this longitudinal response. Here the static source calibrates $h$. Identifying $h^2$ with squared Euclidean momentum in dimensionless units and interpreting the poles as particle masses require an independent source coupling and scale.
+:::
+
 **Which propagators can reproduce this response? (Scalar exchange model.)** Let $s=q_E^2>0$ be the squared Euclidean momentum and introduce a free mass scale $M>0$. Set $b_\gamma=M^2\gamma^2$ and retain the weights $p_\gamma=m_\gamma/(S\gamma^2)$. The dimensionless response $A(s)=F(s/M^2)=\sum_\gamma p_\gamma b_\gamma/(s+b_\gamma)$ decreases strictly from $1$ to $0$. If a scalar diagonal propagator without contact terms has a positive spectral representation $D(s)=\int_{[0,\infty)}(s+b)^{-1}\,d\rho(b)$, then $sD(s)$ is nondecreasing because each $s/(s+b)$ is nondecreasing. This excludes $A(s)/s$ as such an autocorrelation propagator. The partial fractions locate the obstruction:
 
 $$
