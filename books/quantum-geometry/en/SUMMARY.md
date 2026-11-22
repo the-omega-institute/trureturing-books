@@ -255,6 +255,7 @@
   - [39.4 The Self-Contained Ternion Topological Particle, Field–Wave–Particle Grade Identity, and Fourfold Proof of "No Exterior": Why Nonlinearity and Isotropy Eliminate Extrinsic Point C and Every "Outside"](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)
   - [39.5 Dyad Plus Relation Equals Ternion Field and Two-Order Future Recurrence: From 2+1=3 Orthogonal Commutator Closure, Gauge Connection, and Lie-Triple Curvature to Bianchi–Ostrogradsky Second-Order Finality](ch39-s28-dyad-relation-future-and-second-order-field.md)
   - [39.6 Pulling the Last Cartesian Nail and Constant-Free Rational Reconstruction: Why π, e, and φ Are Flat-Approximation Residuals Rather Than Primitives of AXIOM-Ω](ch39-s29-constant-free-rational-axiom-omega.md)
+  - [39.7 Past, Present, Future and the 0 · 1/2 · 1 Pure Rational Causal-Jet Matrix: Spherical Jet Ladder, Midpoint Self-Duality, and the 1 ↦ 0 Cosmic Heartbeat](ch39-s30-past-present-future-rational-jet-triad.md)
 
 # Coda and Appendices
 

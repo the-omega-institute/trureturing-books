@@ -8787,6 +8787,122 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "causal-jet-rational-triad-sandbox",
+      "code": "OMEGA//TRIAD",
+      "title": "0 · 1/2 · 1 因果微分母核沙盘：三元数球面射流阶梯与中点自对偶验证仪",
+      "title_en": "0 · 1/2 · 1 Causal-Differential Mother Triad: Spherical Jet Ladder & Midpoint Self-Duality Verifier",
+      "summary": "在纯有理三元数单位球上构建连接 0（过去·零阶停机锚）、1/2（现在·一阶中点自对偶切面）与 1（未来·二阶曲率闭合体）的极小圆弧射流阶梯：对照 α=0 伊藤左切脱壳与 α=1/2 斯特拉托诺维奇—凯莱中点精确驻球、1/2+1/2=1 半密度曲率合拢、三阶比安基/奥氏封顶，以及 1↦0 主频因果心跳循环。",
+      "summary_en": "Builds on the pure rational ternion sphere the minimal-arc jet ladder linking 0 (Past · 0-jet halted anchor), 1/2 (Present · 1-jet midpoint self-dual slice), and 1 (Future · 2-jet curvature closure): contrasting α=0 Itô left-tangent escape against α=1/2 Stratonovich–Cayley exact sphere residence, 1/2+1/2=1 half-density curvature closure, the 3rd-order Bianchi/Ostrogradsky cap, and the 1↦0 cosmic heartbeat.",
+      "path": "causal-jet-rational-triad-sandbox/",
+      "thumbnail": "causal-jet-rational-triad-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-22",
+      "chapter": 39,
+      "section": "39.7",
+      "presets": [
+        "past-zero-jet-halting-anchor",
+        "present-half-midpoint-self-duality",
+        "future-one-curvature-closure",
+        "third-order-bianchi-ostrogradsky-cap",
+        "one-to-zero-cosmic-heartbeat-loop"
+      ],
+      "preset_titles": {
+        "past-zero-jet-halting-anchor": {
+          "zh": "过去：停住的 0",
+          "en": "Past: the halted 0"
+        },
+        "present-half-midpoint-self-duality": {
+          "zh": "现在：只有 1/2 落在球面上",
+          "en": "Present: only 1/2 lands on the sphere"
+        },
+        "future-one-curvature-closure": {
+          "zh": "未来：两个半拍合成一拍",
+          "en": "Future: two half-beats make one beat"
+        },
+        "third-order-bianchi-ostrogradsky-cap": {
+          "zh": "没有第四列（MODEL）：δF = 0",
+          "en": "No fourth column (MODEL): δF = 0"
+        },
+        "one-to-zero-cosmic-heartbeat-loop": {
+          "zh": "心跳（MODEL）：落下的 1 就是下一拍的 0",
+          "en": "Heartbeat (MODEL): the landed 1 is the next 0"
+        }
+      },
+      "tags": [
+        "三元数",
+        "因果射流",
+        "中点自对偶",
+        "半密度曲率",
+        "比安基恒等式"
+      ],
+      "tags_en": [
+        "Ternion",
+        "Causal jet",
+        "Midpoint self-duality",
+        "Half-density curvature",
+        "Bianchi identity"
+      ],
+      "theory": [
+        {
+          "label": "§39.7 · 过去现在未来与 0·1/2·1 纯有理因果射流母矩阵",
+          "label_en": "§39.7 · Past, Present, Future and the 0 · 1/2 · 1 Pure Rational Causal-Jet Matrix",
+          "href": "../zh/ch39-s30-past-present-future-rational-jet-triad.html#sec-ch39-past-present-future-rational-jet-triad",
+          "href_en": "../en/ch39-s30-past-present-future-rational-jet-triad.html#sec-ch39-past-present-future-rational-jet-triad"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_phases"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_eq_completed_zeta"
+        },
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_reflection"
+        },
+        {
+          "gid": "D5/S3/Zeros/Endpoints/XiEndpointValues.xi_reading_endpoint_values"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
