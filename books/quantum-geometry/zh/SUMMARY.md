@@ -257,6 +257,7 @@
   - [39.6 拔除笛卡尔线性钉子与无常数有理重构：为什么 π、e、φ 只是平直近似欠条而非 AXIOM-Ω 的原生基元](ch39-s29-constant-free-rational-axiom-omega.md)
   - [39.7 过去·现在·未来与 0 · 1/2 · 1 纯有理因果射流母矩阵：三元数球面射流阶梯、中点自对偶律与 1 ↦ 0 宇宙心跳](ch39-s30-past-present-future-rational-jet-triad.md)
   - [39.8 实数误差放大轴与素数阿代尔归元闭合：从切空间线性失真、吉布斯—罗德里格斯弯曲合成到素数无公度防死锁引擎](ch39-s31-real-error-axis-and-prime-adelic-closure.md)
+  - [39.9 全息圆弧流形与阿代尔螺线管同体：超越黎曼切板近似，在同一光滑流形上统一加法、乘法、对数与素数闭合环](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md)
 
 # 终章与附录
 

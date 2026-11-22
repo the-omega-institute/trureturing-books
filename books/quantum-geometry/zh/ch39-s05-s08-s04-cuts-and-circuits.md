@@ -827,6 +827,24 @@ $$
 读出两个分别含完整组 $A$ 和 $B$ 的基即可恢复 $u,v$，从而得到四个不同的障碍类。这里 $n=6$、$g=1$，三个 $q_T$ 都等于一，按独立替换只剩 $\binom{4}{3}-3=1$ 个阶六因子。$\mathbb Z/6\mathbb Z$ 中只有两个元素被二消灭。完整证明由 Lean 内核检查。
 :::
 
+::: {.theorem #thm-joint-circuit-sunflower-omissions title="具有公共元素的遗漏基的循环因子" lean="D5/S3/Combinatorics/Matroids/SunflowerCircuitInvariantFactors.sunflower_lifting_obstruction_invariant_factors"}
+设 $3\le r<k$，遗漏的 $r$ 元集合为 $T_1,\ldots,T_t$。它们都含公共元素 $e$，且花瓣 $T_i\setminus\{e\}$ 两两不交。其余 $r$ 元集合恰为核心拟阵的基。对按块排序的平行扩张，记 $q_T=\gcd(n,\gcd_{i\notin T}m_i)$。若 $\binom{k-2}{r-2}$ 和 $\binom{k-2}{r-1}$ 都至少为 $t$，则联合提升障碍同构于
+$$
+\begin{aligned}
+&(\mathbb Z/g\mathbb Z)^{\binom{k-2}{r-2}-t}
+\;\oplus\;
+(\mathbb Z/n\mathbb Z)^{\binom{k-2}{r-1}-t}\\
+&\qquad{}\oplus\bigoplus_{j=1}^{t}\mathbb Z/q_{T_j}\mathbb Z .
+\end{aligned}
+$$
+:::
+
+::: proof
+取 $e$ 为所有遗漏基的共同枢轴。在差坐标中，每个遗漏基要求其花瓣对应的系数为零。在各花瓣内作整数换基，将该花瓣的权重集中在一个坐标上。每个花瓣至少含两个坐标，因而都有自己独有的零权重坐标。
+
+按系数的指标集与零权重指标集的交集分组。插入枢轴或加权向量均保持此分组。向遗漏族 $S$ 加入 $T$ 时，对一对交替形式保留 $T$ 的花瓣所在组，再交换其余各组。此操作是一个对合，给出 $L_\varnothing\oplus L_{S\cup\{T\}}\cong L_S\oplus L_{\{T\}}$，其中 $L_A$ 表示遗漏族为 $A$ 的障碍。代入单遗漏公式并消去有限的均匀模，再作归纳即得所示循环因子。完整证明由 Lean 内核检查。
+:::
+
 **方向复形的约化整数同调（书面推导）。** 设至少有一个非空极大面，记 $d=n-h$，令 $m$ 为满足 $R(B)=B$ 的极大面数。上面的商映射是同伦等价，因此把 $X$ 的约化整数同调与楔和的约化整数同调相识别。每个球面都有以基点为子复形的 CW 结构，因此相应球面在有限楔和的约化同调中给出一个直和项。每个 $S^{d-1}$ 在 $d-1$ 次贡献一个 $\mathbb Z$，在其余非负次数均为零。因此 $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$，而 $k\ne d-1$ 时 $\widetilde H_k(X;\mathbb Z)=0$。[Hatcher，《Algebraic Topology》，推论 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 若没有非空极大面，原实现为空，所有非负次数的约化整数同调都为零。若有极大面且 $d=1$，楔和是有 $m+1$ 个点的离散空间，约化零次同调的生成元为 $[p_B]-[p_0]$，其中 $p_B$ 是极大面 $B$ 贡献的点，$p_0$ 是公共基点。若有极大面且 $m=0$，楔和为一点，所有约化同调群均为零。在极大面族非空时，约化欧拉示性数为 $(-1)^{d-1}m$。与前面的 Tutte 取值相比较，得到 $m=2^d T_M(1,1/2)$。
