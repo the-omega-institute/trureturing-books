@@ -783,8 +783,34 @@ The Möbius truncation error and the error from the complete Mangoldt tail satis
 
 The estimate holds for every finite order and permits the choice of order to depend on the cutoffs. The exponent, endpoint gap and retained root spectra are the same as in the previous bounds. [Weighted mean-square method, Coppola and Laporta, §1](https://arxiv.org/abs/1411.1739v1)
 
-::: {.problem #prob-ch31-prime-window-sublinear-remainder title="A uniformly sublinear prime-window remainder"}
-Assume RH. Does there exist a real $a_0\ge2$ such that for every $\varepsilon>0$ there is an integer $m_0\ge2$ for which the same residual satisfies $|E_m(a,B)|\le\varepsilon m D_{s_m}(a,B)$ for all integers $m\ge m_0$ and all real cutoffs $B\ge a\ge a_0$, including $B=a$? [Formalization research](https://github.com/the-omega-institute/trureturing/issues/33004)
+<a id="prob-ch31-prime-window-sublinear-remainder"></a>
+
+::: {.theorem #thm-ch31-prime-window-sublinear-remainder title="A uniformly sublinear prime-window remainder" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusSublinear.prime_window_mobius_sublinear_of_rh"}
+Assume RH. There is a real cutoff $a_0\ge2$ such that for every $\varepsilon>0$ there is an integer $m_0\ge2$ for which
+
+$$
+|E_m(a,B)|\le\varepsilon m D_{s_m}(a,B)
+$$
+
+for all integers $m\ge m_0$ and real cutoffs $B\ge a\ge a_0$, including $B=a$. Here $E_m(a,B)$ is the same signed residual as in [@thm-ch31-prime-window-mobius], with $s_m=\tfrac12-\tfrac1{m+1}$.
+:::
+
+::: proof
+Write $u=\ln x$ and $q=m+1$. The convolution of the Chebyshev function with the Möbius weights, combined with the exact floor cancellation, makes the Möbius prefix sum times $\ln m$ uniformly $o(m)$ for all prefixes through $m$. Abel summation uses this bound for the signed trivial-zero response. A separate signed Abel estimate on the decreasing Chebyshev root weights gives a logarithmic saving for the truncation tail.
+
+Choose a finite set of unit frequency bins so that the sum of squared masses in the complementary bins is as small as desired. For $u\ge Lq$, the sum of geometric weights of the omitted degrees is at most $1+q^2/u$. The finite bins have bounded amplitudes and thus contribute arbitrarily little after division by $m$ when $L$ and then $m$ are large. The local Gaussian estimate bounds the complementary bins by their small square mass after taking its square root. This estimate counts each actual zero with its analytic multiplicity. For $u\le Lq$, write each omitted centered root term as the difference of an integrated Chebyshev term and a power term. The two sequences are decreasing in the degree, so signed Abel summation gives the required saving at this fixed $L$.
+
+The eventual sign of the prime-only tail fixes $a_0$ before the choice of accuracy. Integration over $[\ln a,\ln B]$ leaves the original power gap because $s_m\ge1/6$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.problem #prob-ch31-prime-window-quantitative-sublinear-remainder title="A quantitative rate for the sublinear remainder"}
+Under RH, do there exist constants $a_0\ge2$ and $C>0$ such that for every integer $m\ge2$ and all real cutoffs $B\ge a\ge a_0$,
+
+$$
+|E_m(a,B)|\le \frac{C m}{\sqrt{1+\ln\ln(m+1)}}D_{s_m}(a,B)?
+$$
+
+[Quantitative remainder problem](https://github.com/the-omega-institute/trureturing/issues/33041)
 :::
 
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
