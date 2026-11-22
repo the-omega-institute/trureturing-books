@@ -572,9 +572,9 @@ W(T)=\sum_{0<\gamma\le T}w_\gamma,\qquad
 D(T)=1-\frac{\displaystyle\sup_{v\in\mathbb R}\sum_{0<\gamma\le T}w_\gamma\sin(\gamma v)}{W(T)}.
 $$
 
-Take natural numbers $m,r$ with $m\ge2$ and $m+1=2r$, and use $s,F_L,c_m,S_r$ from [@thm-ch31-prime-window-shrinking-width]. For every sufficiently small $L>0$ the absolute error $|F_L(u)+c_m+\mu(r)S_r(u)|$ is bounded on a late tail. Write $Q_m^{\rm left}(L)$ for its limsup as $u\to+\infty$. Then
+Take natural numbers $m,r$ with $m\ge2$ and $m+1=2r$, and use $s,F_L,c_m,S_r$ from [@thm-ch31-prime-window-shrinking-width]. For every sufficiently small $L>0$ the absolute error $|F_L(u)+c_m+\mu(r)S_r(u)|$ is bounded on a late tail. Write $Q_m^{\mathrm{left}}(L)$ for its limsup as $u\to+\infty$. Then
 $$
-\frac{Q_m^{\rm left}(L)}{L\log^2(1/L)}
+\frac{Q_m^{\mathrm{left}}(L)}{L\log^2(1/L)}
 -\frac{|\mu(r)|}{4\pi s}\bigl(1-D(2r/L)\bigr)\longrightarrow 0
 \qquad (L\downarrow0).
 $$

@@ -572,9 +572,9 @@ W(T)=\sum_{0<\gamma\le T}w_\gamma,\qquad
 D(T)=1-\frac{\displaystyle\sup_{v\in\mathbb R}\sum_{0<\gamma\le T}w_\gamma\sin(\gamma v)}{W(T)}.
 $$
 
-取自然数 $m,r$，满足 $m\ge2$ 且 $m+1=2r$，并沿用 [@thm-ch31-prime-window-shrinking-width] 的 $s,F_L,c_m,S_r$。对每个充分小的 $L>0$，绝对误差 $|F_L(u)+c_m+\mu(r)S_r(u)|$ 在充分晚的尾区间上有界。记它在 $u\to+\infty$ 时的上极限为 $Q_m^{\rm left}(L)$。于是
+取自然数 $m,r$，满足 $m\ge2$ 且 $m+1=2r$，并沿用 [@thm-ch31-prime-window-shrinking-width] 的 $s,F_L,c_m,S_r$。对每个充分小的 $L>0$，绝对误差 $|F_L(u)+c_m+\mu(r)S_r(u)|$ 在充分晚的尾区间上有界。记它在 $u\to+\infty$ 时的上极限为 $Q_m^{\mathrm{left}}(L)$。于是
 $$
-\frac{Q_m^{\rm left}(L)}{L\log^2(1/L)}
+\frac{Q_m^{\mathrm{left}}(L)}{L\log^2(1/L)}
 -\frac{|\mu(r)|}{4\pi s}\bigl(1-D(2r/L)\bigr)\longrightarrow 0
 \qquad (L\downarrow0).
 $$
