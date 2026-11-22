@@ -524,6 +524,24 @@ The imaginary parts of the root coefficients decay by an extra power of the ordi
 
 Since $\mu(r)\in\{-1,1\}$, the inequality gives both the sign of the discrepancy and a lower bound for its magnitude. The starting point may depend on both the width and the prescribed threshold. The upper bound in [@thm-ch31-prime-window-shrinking-rate] and this lower bound for the same signed window still differ by a logarithmic factor in the width.
 
+::: {.theorem #thm-ch31-signed-left-limsup title="The sharp left-endpoint error under quarter-phase recurrence" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffLeftLimsup.signed_window_even_cutoff_left_limsup"}
+Assume RH. Assume also that the constant phase $i$ on the distinct positive zeta zero ordinates belongs to the product-topology closure of the vectors $(e^{i\gamma t})_{\gamma>0}$ for real $t$. This means that one common time can bring all phases in any prescribed finite list as close to $i$ as desired.
+
+Take natural numbers $m,r$ with $m\ge2$ and $m+1=2r$. Use $s,F_L,c_m,S_r$ from [@thm-ch31-prime-window-shrinking-width]. For every sufficiently small $L>0$, the absolute discrepancy defining the following limsup is bounded on a late tail. The limiting coefficient is
+$$
+Q_m^{\rm left}(L)=\limsup_{u\to+\infty}|F_L(u)+c_m+\mu(r)S_r(u)|,
+\qquad
+\lim_{L\downarrow0}\frac{Q_m^{\rm left}(L)}{L\log^2(1/L)}
+=\frac{|\mu(r)|}{4\pi s}.
+$$
+:::
+
+::: proof
+The change from midpoint to left-endpoint correction subtracts $\mu(r)$ times the forward root increment of length $L/2$. The midpoint discrepancy from [@thm-ch31-signed-midpoint-limsup] has lower order. In the root increment, replacing the coefficient at ordinate $\gamma$ by $-r/(\tfrac14+\gamma^2)$ costs a quantity bounded by a constant times $L$, uniformly over starting phases. At the prescribed phase, conjugate zeros then contribute the same signed sine term. Regrouping the occurrences retains the analytic multiplicity of every zero and identifies the leading sum with the positive-ordinate phase slope at displacement $L/(2r)$. Its leading coefficient gives the displayed constant after restoring the root normalization by $s$. A uniform modal upper bound and a cofinal return to the prescribed phase give the two limsup bounds. If $\mu(r)=0$, the corrections at the two sample locations coincide and the late limsup vanishes.
+:::
+
+The phase condition applies to a common time on each finite list of ordinates. The proof uses its membership in the closure of the actual orbit to control the full absolutely summable series. Whether RH alone suffices for the same left-endpoint asymptotic remains open.
+
 ::: {.theorem #thm-ch31-signed-midpoint-limsup title="The prime-window error with logarithmic midpoint correction" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffMidpoint.signed_window_even_cutoff_midpoint_limsup"}
 Assume RH. Take natural numbers $m,r$ with $m\ge2$ and $m+1=2r$. Use $s,F_L,c_m,S_r$ from [@thm-ch31-prime-window-shrinking-width] and $c$ from [@thm-ch31-centered-root-log-cusp]. For each $0<L\le1/4$, define
 
@@ -547,7 +565,7 @@ $$
 Pair points at equal distances on either side of the logarithmic midpoint in the flat average. This gives the integral of the symmetric second difference over $[0,L/2]$, divided by $L$. The upper estimate from [@thm-ch31-root-symmetric-tail-modulus] holds at every center. The signed cusp gives the matching lower comparison at center zero. Integrating $h\log(1/h)$ gives the logarithmic and linear terms. The two normalized weights have equal mass, so subtract the midpoint value before applying the first-difference bound to the density perturbation. Absolute summability of the zero modes makes the whole window a continuous readout of the same phase vector. One common late return restores the lower comparison and the normalized arithmetic remainder tends to zero. The full proof is checked by the Lean kernel.
 :::
 
-When $\mu(r)=0$, the limsup is zero. For $\mu(r)\ne0$, the late worst-case error has leading order $L\log(1/L)$ with the midpoint correction. The sharp upper bound for the left-endpoint correction remains open.
+When $\mu(r)=0$, the limsup is zero. For $\mu(r)\ne0$, the late worst-case error has leading order $L\log(1/L)$ with the midpoint correction. The exact left-endpoint asymptotic under RH alone remains open.
 
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
