@@ -394,6 +394,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `real-error-prime-adelic-sandbox`（`OMEGA//ADELIC`）承接第三十九章 §39.8 `#sec-ch39-real-error-axis-and-prime-adelic-closure`：紫色给紧致三元数球体 T₃ ≅ S³(1)、合数既有谐波回声环与三价富勒烯六边形平直格网，青色给球面有界测地圆弧、精确吉布斯—罗德里格斯弯曲合成 (x₁ + x₂ + x₁×x₂)/(1 − x₁·x₂) 与有界切比雪夫缠绕 T_n、新开辟的本原素数 p-进超度量回收环（|N|_p = p^{-v_p(N)}，守住 |N|_∞∏_p|N|_p = 1.0000）、正交素数对数相位轴与无公度遍历轨道，品红给底部射向 ∞ 的平直实数误差放大轴 x = √(s/(1−s)) = tan(θ/2)（放大率 A_err = 1 + x² = 1/κ）、漏失分母与叉乘的平直向量和 x₁ + x₂（共轴滞后 53.13°、异轴倾轴 35.26°）与径向爆炸 n·x、未回收的实数位膨胀 |N|_∞ = N、富勒烯恒定 12 枚五边形曲率位错（F_5 = 12）以及有理公度死循环，琥珀严格只给舞台当前失准度 s 或整数步 N 拖动手柄与激活控件（无开放问题，不用红色，亦不将素数环染成琥珀色）。绿色依据严格限于正文定理盒 `thm-ch39-real-error-axis-and-prime-adelic-anchors` 以 `lean=` 引用的十五条冻结声明（`exists_unitQuaternion_equiv`、`kappa_eq_one_sub_dist_sq`、`normSq_and_chebyshev`、`complete_consequences`、`lagrange_gram_identity`、`rational_absolute_value_classification`、`rational_padic_product_formula`、`observation_distance_eq_padic_valuation`、`refinementDistance_ultrametric`、`prime_axis_escape`、`riemann_zeta_dirichlet_sum_eq_euler_product`、`prime_log_rational_independence`、`TorusOrbitClosure.result`、`TorusOrbitEquidistribution.result`、`face_cycle_exact`）；阿廷—惠普尔斯一般数域乘积公式、玻尔几乎周期环面正交性、素数定理对数密度及休伯—塞尔伯格双曲素测地线定理（严格区分非紧 SL₂(ℤ)\ℍ² 与紧致 S³(1)、𝕋^∞）标 `ARGUED`；切线放大率 1+x²、共轴/异轴合成误差、富勒烯 F_5 = 12 与 N = 1…30 阿代尔乘积对账标 `NUM`；实数误差放大轴诊断、富勒烯位错类比与素数四重本体论职能标 `MODEL`。
 
+`holographic-arc-manifold-sandbox`（`OMEGA//MANIFOLD`）承接第三十九章 §39.9 `#sec-ch39-holographic-arc-manifold-and-solenoid-unity`：紫色给三元球体 T₃ ≅ S³(1) 截面与对偶除法流 V_÷ = 1 − cos φ，青色给三点定下的无折痕闭合大圆 `[x₁, x₀, x₁]`、竖直闭合经线 `0 · 1 · ∞ · −1`、乘法流 V_× = sin φ 与匀速转动 ½(V_+ + V_÷) = 1、翻倍等步 Δτ = ln 2 对数钟卷线及无折角素数闭合环 γ_p（周长正比于 ln p）与多匝缆线，品红给互不相连的平直切板鳞片、360°/N 接缝折痕、C^∞ 非解析鼓包、单侧正向加法流 V_+ = 1 + cos φ 以及横截素数环读出切比雪夫阶梯 ψ(X) 的平直刀片 Σ_X，琥珀严格只给舞台当前点手柄与激活控件（无开放问题，不用红色）。绿色依据严格限于正文定理盒 `thm-ch39-holographic-arc-manifold-anchors` 以 `lean=` 引用的十五条冻结声明（`exists_unitQuaternion_equiv`、`kappa_eq_one_sub_dist_sq`、`tri_eq_mul_inv_mul`、`normSq_and_chebyshev`、`exists_basis_bracket_eq_smul_cross`、`crossProduct_is_skewAdjoint_of_balanced_sum`、`logarithmic_charge_conservation`、`logarithmicCharge_eq_zero_iff`、`three_lift_difference_cocycle`、`rational_absolute_value_classification`、`rational_padic_product_formula`、`congruenceFiber_eq_closedBall_inter_range`、`riemann_zeta_dirichlet_sum_eq_euler_product`、`prime_log_rational_independence`、`TorusOrbitEquidistribution.result`）；实解析恒等定理对比 C^∞ 隆起函数、𝔰𝔩(2, ℝ) 复化紧实形酉技巧、维托里斯—范丹齐格—斯梅尔紧螺线管层状体与素数定理标 `ARGUED`；360°/N 折痕、括号残差、ln 2 等步与经线读数 9/10, 81/85, 1089/1105 及 ψ(X) 跳变实算标 `NUM`；有限切板对照读法、全息圆弧—螺线管流形 M_Ω 几何拼合与平直刀片 Σ_X 锯齿诠释标 `MODEL`。
+
 `prelude-dimensions` 是序曲的几何入门页，默认卡 `shadow` 同步显示俯视木桩与侧视影子，`compare` 比较 90° 与 270° 的同位反向。圆盘侧视是固定线段，木桩投影是移动点；该经典正交投影模型不推出量子测量规则。其余卡分别演示射线投影、纬圈、二维到三维的等半径赤道嵌入、三对对跖方向的等权混合与从 1 弧度出发的余弦迭代。几何计算标 `NUM`，理想化观看与混合过程标 `MODEL`，余弦收敛及其边界沿用序曲的文献分层，不使用绿色 Lean 标记。
 
 
@@ -1100,7 +1102,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十九章 | §39.8.2.1 末（`+1` 步进盲区逃逸与阿代尔归 1 段之后） | `real-error-prime-adelic-sandbox` · `adelic-prime-curvature-reclaim` |
 | 第三十九章 | §39.8.2.3 末（富勒烯 $F_5 \equiv 12$ 拓扑位错铆钉段之后） | `real-error-prime-adelic-sandbox` · `prime-orthogonal-torus-and-rivets` |
 | 第三十九章 | §39.8.2.4 末（紧致环面素数对数无公度遍历防死锁段之后） | `real-error-prime-adelic-sandbox` · `incommensurable-ergodic-anti-deadlock` |
-| 第三十九章 | §39.8 末（全书三十九章正文收官结语段之后） | `real-error-prime-adelic-sandbox` 完整实验室 |
+| 第三十九章 | §39.8 末（转入 §39.9 过渡段之后） | `real-error-prime-adelic-sandbox` 完整实验室 |
+| 第三十九章 | §39.9.1 末（算术四原语撕裂段之后、§39.9.2 之前） | `holographic-arc-manifold-sandbox` · `tangent-scales-vs-chartfree-arc` |
+| 第三十九章 | §39.9.2 末（阿代尔螺线管叶向编织段之后、§39.9.3 之前） | `holographic-arc-manifold-sandbox` · `meridian-zero-one-infinity-closure` |
+| 第三十九章 | §39.9.3.1 末（加·乘三维李代数旋量闭环段之后） | `holographic-arc-manifold-sandbox` · `add-mul-lie-spinor-flows` |
+| 第三十九章 | §39.9.3.2 末（二进等距平移与相对凯莱步段之后） | `holographic-arc-manifold-sandbox` · `logarithmic-arclength-pole-deceleration` |
+| 第三十九章 | §39.9.3.3 末（平直横截刀切比雪夫锯齿伪影段之后） | `holographic-arc-manifold-sandbox` · `prime-solenoid-vs-flat-sawtooth` |
+| 第三十九章 | §39.9 末（全书三十九章正文收官结语段之后） | `holographic-arc-manifold-sandbox` 完整实验室 |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget` |
 | 终章 | 空间吸引子 · 二 “回到洛伦兹”一段中“吸引子的体积为零”一句之后 | `spatial-attractor-deja-vu` · `shrink` |
