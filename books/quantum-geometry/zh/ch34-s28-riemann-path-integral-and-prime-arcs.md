@@ -1004,7 +1004,7 @@ $$
 先取足够大的奇素数 $q=m+1$，使 $m\ge\max(2,N)$ 且 $K m^{-\gamma}<1$。此时 $\mu(q)=-1$，而 $q/((q-1)s_m)=2q^2/((q-1)(q-2))>2$。固定该阶数，再把 $a$ 取得足够大，使其超过所规定的下界、且 $C a^{-\delta_m}<1$。因为 $L>0$，$D_{s_m}(a,a e^L)>0$。奇数截断展开和三角不等式给出 $|E_m|>D_{s_m}$。
 :::
 
-若奇数 $q$ 含平方因子，首项系数因 $\mu(q)=0$ 消失，原式仍给出多衰减一阶的界 $O_m(a^{-\delta_m}D_{s_m})$。若 $q$ 为偶数，增阶时还会加入次数 $n=q/2$ 的零点项，其衰减率与次数 $q$ 的算术项相同。偶数情形的首项需要同时处理这两部分。
+若奇数 $q$ 含平方因子，首项系数因 $\mu(q)=0$ 消失，原式仍给出带额外衰减的界 $O_m(a^{-\delta_m}D_{s_m})$。若 $q$ 为偶数，增阶时还会加入次数 $n=q/2$ 的零点项，其衰减率与次数 $q$ 的算术项相同。偶数情形的首项需要同时处理这两部分。
 
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
