@@ -1635,13 +1635,15 @@ $$
 
 通过整数换基，可使 $y=n x+d z$，其中 $z$ 是第二个基向量，$d=\gcd(m_2,\ldots,m_k)$。$h$ 中含有 $x$ 的坐标全为零。含有 $z$ 的坐标同时被 $n$ 和 $d$ 消去，因而被 $\gcd(n,d)=g$ 消去。其余坐标只受 $n$ 的约束。排除 $x$ 和 $z$ 后，两类坐标分别还需选 $r-2$ 和 $r-1$ 个元素。$r=2$ 时得到前面的秩二公式。自由核心 $r=k$ 时只剩阶为 $g$ 的因子。
 
-**从均匀核心删去一个基（书面推导）。** 设 $2\le r<k$，除一个集合 $H$ 外，所有 $r$ 元子集都是基。记 $q=\gcd(n,\gcd_{i\notin H}m_i)$。联合提升障碍的循环分解为
+::: {.theorem #thm-joint-circuit-omitted-uniform-basis title="删去一个均匀基后的循环因子" lean="D5/S3/Combinatorics/Matroids/PuncturedCircuitInvariantFactors.punctured_lifting_obstruction_invariant_factors"}
+设 $2\le r<k$，除一个集合 $H$ 外，所有 $r$ 元子集都是基。记 $q=\gcd(n,\gcd_{i\notin H}m_i)$。对于按块排序的平行扩张，联合提升障碍的循环分解为
 $$
 (\mathbb Z/g\mathbb Z)^{\binom{k-2}{r-2}-1}
 \;\oplus\;
 (\mathbb Z/n\mathbb Z)^{\binom{k-2}{r-1}-1}
 \;\oplus\;\mathbb Z/q\mathbb Z.
 $$
+:::
 
 任何大小小于 $r$ 的子集都能扩充为允许的基。如果扩充得到 $H$，就从 $H$ 中选一个不在原子集中的元素，用 $H$ 外的元素替换。于是回路恰好是 $H$ 和所有不含 $H$ 的 $(r+1)$ 元子集。后者张成核心，收缩后秩为零。收缩 $H$ 后，每个 $t\notin H$ 都构成一个单点基，因为用 $t$ 替换 $H$ 中任意元素都得到允许的基。对于 $H$ 和 $\{t\}$ 的读数行，删去 $i\in H$ 的项与 $H\cup\{t\}$ 的删除行中对应项的符号相差 $(-1)^{|\{j\in H:t<j\}|}$，与 $i$ 无关。删去 $t$ 的额外项的系数为 $f(H)=0$。因此，只需在均匀情形的方程上加上 $f(H)=0$。
 

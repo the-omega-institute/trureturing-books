@@ -1635,13 +1635,15 @@ Take the first original coordinate vector as the pivot $x=e_1$, so $a(x)=1$. The
 
 An integral change of coordinates makes $y=n x+d z$, where $z$ is the second basis vector and $d=\gcd(m_2,\ldots,m_k)$. Coefficients of $h$ containing $x$ vanish. Those containing $z$ are killed by both $n$ and $d$, hence by $\gcd(n,d)=g$. Each remaining coefficient is killed by $n$. After excluding $x$ and $z$, the choices of indexing subset have sizes $r-2$ and $r-1$, respectively. For $r=2$ this recovers the earlier rank-two formula. For the free core $r=k$, only the factor of order $g$ remains.
 
-**Omitting one uniform basis (written derivation).** Suppose $2\le r<k$ and the bases are all $r$-subsets except for one set $H$. Put $q=\gcd(n,\gcd_{i\notin H}m_i)$. The joint lifting obstruction has cyclic decomposition
+::: {.theorem #thm-joint-circuit-omitted-uniform-basis title="Cyclic factors with one omitted uniform basis" lean="D5/S3/Combinatorics/Matroids/PuncturedCircuitInvariantFactors.punctured_lifting_obstruction_invariant_factors"}
+Suppose $2\le r<k$ and the bases are all $r$-subsets except for one set $H$. Put $q=\gcd(n,\gcd_{i\notin H}m_i)$. For the block-ordered parallel expansion, the joint lifting obstruction has cyclic decomposition
 $$
 (\mathbb Z/g\mathbb Z)^{\binom{k-2}{r-2}-1}
 \;\oplus\;
 (\mathbb Z/n\mathbb Z)^{\binom{k-2}{r-1}-1}
 \;\oplus\;\mathbb Z/q\mathbb Z.
 $$
+:::
 
 Every subset of size less than $r$ extends to an allowed basis. If an extension is $H$, exchange an element outside the subset for an element outside $H$. The circuits are then $H$ and the $(r+1)$-subsets that do not contain $H$. The latter span the core and contract to rank zero. Contracting $H$ leaves a rank-one matroid in which each element $t\notin H$ is a singleton basis, since replacing any element of $H$ by $t$ gives an allowed basis. In the row for $H$ and $\{t\}$, the sign on the term deleting $i\in H$ differs from its sign in the deletion row for $H\cup\{t\}$ by $(-1)^{|\{j\in H:t<j\}|}$, independently of $i$. The extra term deleting $t$ has coefficient $f(H)=0$. Thus the residue equations impose the uniform equations together with $f(H)=0$.
 
