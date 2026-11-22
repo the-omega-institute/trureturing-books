@@ -1096,6 +1096,44 @@ The weighted mean value theorem for interval integrals identifies the normalized
 
 The inequality supplies an explicit upper rate. The optimal width dependence for the signed series remains open.
 
+::: {.theorem #thm-ch31-centered-root-log-cusp title="The logarithmic cusp of the centered root spectrum" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHRootSignalCusp.root_signal_symmetric_cusp"}
+Assume RH. For each real $r>1$, put $s=1/2-1/(2r)$ and define $S_r$ by the series in [@thm-ch31-prime-window-shrinking-width]. Here $r$ can be any real number in the stated range, and the series includes every nontrivial zero according to its analytic multiplicity. With Euler's constant $\gamma_{\mathrm{EM}}$, let $c=(\gamma_{\mathrm{EM}}-1+\log(2\pi))/2$. There is a $C_r>0$ such that for every $0<h\le r/2$,
+
+$$
+\begin{aligned}
+ \biggl|S_r(h)+S_r(-h)-2S_r(0)
+ &-\frac{h}{s}\bigl(\log(1/h)+\log r-2c\bigr)\biggr|
+ \le C_r h^2.
+\end{aligned}
+$$
+:::
+
+::: proof
+Write $\gamma=\operatorname{Im}\rho$ and $w_\rho=(1/4+\gamma^2)^{-1}$. The symmetric difference cancels the sine component of each term and multiplies its cosine coefficient by $2(\cos(\gamma h/r)-1)$. The real part of the root coefficient differs from the reference coefficient $-rw_\rho$ by
+
+$$
+\frac{r(r-1)(r-1/2)w_\rho}{(r-1/2)^2+\gamma^2}.
+$$
+
+The bound $2|1-\cos x|\le x^2$ controls the correction series by a constant times $h^2$, since $\sum_\rho w_\rho$ is finite. The reference coefficients contribute $-2r(K(h/r)-K(0))/s$, where $K$ is the weighted cosine kernel of the actual zeros. Substituting the expansion of $K$ at the origin gives both coefficients. The argument uses termwise control of exponential modes and their absolutely summable tails. [Exponential-series method](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L109-L143) · [Remainder estimate for the actual cosine kernel](lean:D5/S3/Weil/Mertens/IntegratedExplicit/ActualKernelCusp.cusp_remainder_bound)
+:::
+
+The symmetric difference at the origin has leading scale $h\log(1/h)$. First differences at arbitrarily late starts and their optimal uniform modulus require further estimates.
+
+::: {.theorem #thm-ch31-late-root-log-increments title="A lower scale for arbitrarily late forward increments" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHRootLateIncrement.root_signal_late_increment_lower"}
+Assume RH. For every real $r>1$ and the full centered spectrum $S_r$ of [@thm-ch31-centered-root-log-cusp], there are constants $d_r>0$ and $0<H_r<1$. For every $0<h<H_r$ and every real $U$, there exists a real $u\ge U$ such that
+
+$$
+|S_r(u+h)-S_r(u)|\ge d_r h\log(1/h).
+$$
+:::
+
+::: proof
+The origin cusp gives a positive lower bound of order $h\log(1/h)$ for the symmetric difference. For fixed shifts, the full series is a continuous function of the coordinate phases because the root coefficients have summable absolute values. The actual phase orbit returns arbitrarily late to neighborhoods of its initial phase vector, so the symmetric difference retains a positive fraction of the origin bound at some time $t\ge U+h$. Write that difference as the forward increment from $t$ minus the forward increment from $t-h$. At least one increment has magnitude at least half the transported bound. Both starts are at least $U$. [Actual-phase recurrence](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePhaseCluster.phaseOrbit_cluster_iff)
+:::
+
+The start can depend on the shift and the prescribed threshold. This controls the worst forward increment on every late tail. The matching upper rate for those increments remains open.
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 
