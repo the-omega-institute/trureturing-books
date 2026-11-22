@@ -657,13 +657,15 @@ $$
 \frac{2E}{\pi^2W}\le D\le\frac{E}{2W}.
 $$
 
-When $K$ has no rows, $E=0$ and therefore $D=0$.
+When $K$ has no rows, $E=0$. Also, $D=0$ if and only if some integer vector $z$ satisfies $b(z)=0$, or equivalently, every row sum of $K$ is divisible by $4$.
 :::
 
 ::: proof
-The closure of the common-time orbit is exactly the set of phases on which every integer relation has character value $1$. Write each angle as $\pi/2+x_j$. The resulting phase belongs to that closure exactly when $Kx=b(z)$ for some integer vector $z$. On each such affine set, $x_0=M^{-1}K^{\mathsf{T}}G^{-1}b(z)$ attains the minimum $b(z)^{\mathsf{T}}G^{-1}b(z)$ of the weighted square $x^{\mathsf{T}}Mx$. Since $K(x-x_0)=0$, the cross term in that square vanishes.
+The closure of the common-time orbit is exactly the set of phases on which every integer relation has character value $1$. Restricting to nonnegative times gives the same closure. Write each angle as $\pi/2+x_j$. The resulting phase belongs to that closure exactly when $Kx=b(z)$ for some integer vector $z$. On each such affine set, $x_0=M^{-1}K^{\mathsf{T}}G^{-1}b(z)$ attains the minimum $b(z)^{\mathsf{T}}G^{-1}b(z)$ of the weighted square $x^{\mathsf{T}}Mx$. Since $K(x-x_0)=0$, the cross term in that square vanishes.
 
 The weighted phase cost is $\sum_j w_j(1-\cos x_j)$. Applying $1-\cos x\le x^2/2$ to each minimizing lift $x_0$ and taking the infimum over $z$ gives the upper bound. Every admissible phase also has angle offsets satisfying $|x_j|\le\pi$. On these offsets $1-\cos x_j\ge 2x_j^2/\pi^2$, and the weighted square is at least $E$. This gives the lower bound. By continuity the phase cost has the same infimum on the orbit and its closure.
+
+The orbit closure is compact, so a phase of minimum cost exists. If $D=0$, the positive weights and the cosine lower bound force every angle offset of this phase to be zero. The congruence $Kx=b(z)$ gives $b(z)=0$. Conversely, $b(z)=0$ makes the zero offset feasible, giving a phase of zero cost.
 :::
 
 Assume RH. For the actual zero cutoffs in [@thm-ch31-weighted-phase-limsup], compute $E(T)$ with the analytic multiplicity weights and a full relation matrix satisfying the theorem's hypotheses. The two constants are uniform across cutoffs, so $D(T)\to0$ is equivalent to $E(T)/W(T)\to0$. Whether this normalized lattice distance tends to zero for the actual zeta zeros remains open.
