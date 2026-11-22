@@ -1089,7 +1089,7 @@ $$
 ::: proof
 将偶数截断展开除以幂差，得到算术常数、归一化的根原函数增量，以及由常数乘 $e^{-\delta_m u}$ 控制的余项。归一化增量有绝对可和的指数展开。实际零点项按共轭配对，故其和为实数。每个零点项的系数包含两个端点的变化，这给出 $b_{r,L}$ 中的窗宽因子。
 
-乘以 $e^{-i\omega u}$ 后，每一项的频率都减去 $\omega$。频率匹配的每个零点项贡献其系数乘 $T$。在 $\omega$ 附近的有界区间内，局部有限性使其余频率与 $\omega$ 保持正距离，区间外的频率本身已有正距离。每个不匹配的指数项积分的模至多为该间隔倒数的两倍，此界与 $U,T$ 无关。绝对可和性给出这些项的总积分界，指数衰减也给出余项的积分界。在零频处没有匹配的零点项，在非零频处算术常数的振荡积分有界。单频积分界与调制步骤沿用对照仓库中的频率检验。 [单频积分界](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62) · [系数提取](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L109-L143)
+乘以 $e^{-i\omega u}$ 后，每一项的频率都减去 $\omega$。频率匹配的每个零点项贡献其系数乘 $T$。ζ 零点集合是闭离散集。删去 $1/2+ir\omega$ 后仍得到闭集，它与被删点的距离为正。在 RH 下，这给出 $\omega$ 与所有不匹配频率的正间隔。每个不匹配的指数项积分的模至多为该间隔倒数的两倍，此界与 $U,T$ 无关。绝对可和性给出这些项的总积分界，指数衰减也给出余项的积分界。在零频处没有匹配的零点项，在非零频处算术常数的振荡积分有界。单频积分界与调制步骤沿用对照仓库中的频率检验。 [单频积分界](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62) · [系数提取](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L109-L143)
 
 在 RH 下，一个虚部确定临界线上的唯一点。匹配项的因子相同，恰好出现 $n_\rho$ 次。窗宽因子分子中的指数项模长为 $e^{-sL}<1$，各分母也均非零。
 :::
