@@ -40,9 +40,7 @@ $$
 仍按 19.1 节的原始分组，取 $M_r\in M_{a\times b}(\mathbb C)$、$N_r\in M_{d\times c}(\mathbb C)$，并令
 
 $$
-F=\sum_{r=0}^2 M_r\otimes N_r:
-\mathbb C^b\otimes\mathbb C^c\longrightarrow
-\mathbb C^a\otimes\mathbb C^d.
+F=\sum_{r=0}^2 M_r\otimes N_r: \mathbb C^b\otimes\mathbb C^c\longrightarrow \mathbb C^a\otimes\mathbb C^d.
 $$
 
 这里 $F^*$ 表示共轭转置。比秩可达更强的要求，是存在同一组矩阵族 $M,N$ 和同一个正实数 $\lambda$，使
@@ -133,8 +131,7 @@ $$
 令原始收缩（行指标为 $\operatorname{Fin}a\times\operatorname{Fin}d$，列指标为 $\operatorname{Fin}b\times\operatorname{Fin}c$）
 
 $$
-F=\sum_{r=0}^2M_r\otimes N_r:
-\mathbb C^b\otimes\mathbb C^c\longrightarrow\mathbb C^a\otimes\mathbb C^d.
+F=\sum_{r=0}^2M_r\otimes N_r: \mathbb C^b\otimes\mathbb C^c\longrightarrow\mathbb C^a\otimes\mathbb C^d.
 $$
 
 若 $\lambda\in\mathbb R$ 满足 $\lambda>0$，且
@@ -158,8 +155,7 @@ $$
 把同一个 $F$ 写成项数最少的精确张量和，记为 $\sum_{r<k}A_r^{(0)}\otimes D_r$，其中 $0\le k\le3$。若任一侧因子线性相关，从非零系数关系解出一个因子并把该项吸收到其余项，就可减少宽度。因此最小分解两侧各自复线性无关。令 $A_r=A_r^{(0)}/\sqrt\lambda$，得到
 
 $$
-\widehat F=\frac{F}{\sqrt\lambda}=\sum_{r<k}A_r\otimes D_r,\qquad
-\widehat F^*\widehat F=I_{bc}.
+\widehat F=\frac{F}{\sqrt\lambda}=\sum_{r<k}A_r\otimes D_r,\qquad \widehat F^*\widehat F=I_{bc}.
 $$
 
 这是对原始假设的推导，不是附加的独立性或归一化前提。
@@ -247,8 +243,7 @@ $$
 设 $a,b,c,d\in\mathbb N$，$c>0$、$b>2a$。对任意三个 $a\times b$ 复矩阵 $M_r$、三个 $d\times c$ 复矩阵 $N_r$ 及正实数 $\lambda$，若
 
 $$
-F=\sum_{r=0}^2M_r\otimes N_r,\qquad
-F^*F=\lambda I_{bc},
+F=\sum_{r=0}^2M_r\otimes N_r,\qquad F^*F=\lambda I_{bc},
 $$
 
 则 $d\ge3c$。不另要求 $a>0$，也不加顺序条件或二次锥条件。
@@ -258,8 +253,7 @@ $$
 先把三张 $M_r$ 竖直堆叠为辅助映射
 
 $$
-V:\mathbb C^b\longrightarrow\mathbb C^3\otimes\mathbb C^a,\qquad
-Vx=\sum_{r=0}^2e_r\otimes M_rx.
+V:\mathbb C^b\longrightarrow\mathbb C^3\otimes\mathbb C^a,\qquad Vx=\sum_{r=0}^2e_r\otimes M_rx.
 $$
 
 若 $Vx=0$，则所有 $M_rx=0$，故 $F(x\otimes y)=0$。取非零 $y\in\mathbb C^c$，由 $F^*F=\lambda I_{bc}$ 得 $\lambda\|x\|^2\|y\|^2=0$，所以 $x=0$。因此 $W=\operatorname{range}V$ 的维数为 $b$。
@@ -269,15 +263,13 @@ $$
 这使九个 $M_r^*M_s$ 线性无关。事实上，若复系数矩阵 $T=(t_{rs})$ 满足 $\sum_{r,s}t_{rs}M_r^*M_s=0$，用上面选出的 $x$ 在两侧配对便得
 
 $$
-0=\sum_{r,s}t_{rs}\langle M_rx,M_sx\rangle
-=\|u\|^2z^*Tz.
+0=\sum_{r,s}t_{rs}\langle M_rx,M_sx\rangle =\|u\|^2z^*Tz.
 $$
 
 因此 $z^*Tz=0$ 对所有 $z$ 成立（$z=0$ 时亦然）。分别代入 $e_r$，再对 $r\ne s$ 代入 $e_r+e_s$ 与 $e_r+i e_s$，得到
 
 $$
-t_{rr}=0,\qquad t_{rs}+t_{sr}=0,\qquad
-it_{rs}-it_{sr}=0.
+t_{rr}=0,\qquad t_{rs}+t_{sr}=0,\qquad it_{rs}-it_{sr}=0.
 $$
 
 故所有 $t_{rs}=0$。这里同时用了实、虚两个方向，不能只检验实向量 $z$。
@@ -285,8 +277,7 @@ $$
 接着展开原来的列 Gram 恒等式：
 
 $$
-\sum_{r,s}(M_r^*M_s)\otimes(N_r^*N_s)
-=\lambda I_b\otimes I_c.
+\sum_{r,s}(M_r^*M_s)\otimes(N_r^*N_s) =\lambda I_b\otimes I_c.
 $$
 
 由 $c>0$ 固定一个坐标 $k$，定义 $H_{rs}=(N_r^*N_s)_{kk}$，并记 $\delta_{ij}$ 为 Kronecker 符号。对任意 $i,j$，取上式在第二个张量因子上的 $(i,j)$ 矩阵元，再减去 $(k,k)$ 矩阵元对应等式的 $\delta_{ij}$ 倍，得到
@@ -304,8 +295,7 @@ $$
 因为 $\lambda>0$，右边的秩为 $b$；乘积的秩不超过中间因子的秩，所以
 
 $$
-b\le\operatorname{rank}(H\otimes I_a)
-=a\operatorname{rank}H.
+b\le\operatorname{rank}(H\otimes I_a) =a\operatorname{rank}H.
 $$
 
 $H$ 是 $3\times3$ 矩阵，秩至多为 $3$；若其秩至多为 $2$，就有 $b\le2a$，与假设矛盾。因此 $\operatorname{rank}H=3$。最后横向拼接
@@ -317,9 +307,7 @@ $$
 其 Gram 矩阵为 $C^*C=H\otimes I_c$，于是
 
 $$
-3c=c\operatorname{rank}H
-=\operatorname{rank}(C^*C)
-\le\operatorname{rank}C\le d.
+3c=c\operatorname{rank}H =\operatorname{rank}(C^*C) \le\operatorname{rank}C\le d.
 $$
 
 辅助堆叠与拼接只用于证明，原来的三项收缩及行列分组始终不变。完整证明由 Lean 内核检查。
@@ -350,9 +338,7 @@ $$
 对任意复矩阵三元组 $M_r\in M_{3\times5}(\mathbb C)$、$N_r\in M_{5\times3}(\mathbb C)$（$r=0,1,2$）以及任意实数 $\lambda>0$，令
 
 $$
-F=\sum_{r=0}^2M_r\otimes N_r:
-\mathbb C^5\otimes\mathbb C^3\longrightarrow
-\mathbb C^3\otimes\mathbb C^5.
+F=\sum_{r=0}^2M_r\otimes N_r: \mathbb C^5\otimes\mathbb C^3\longrightarrow \mathbb C^3\otimes\mathbb C^5.
 $$
 
 则 $F^*F\ne\lambda I_{15}$，其中 $I_{15}$ 的指标集为 $\operatorname{Fin}5\times\operatorname{Fin}3$。
@@ -382,11 +368,11 @@ $$
 原始全称主张要求同一组 $M,N$ 和同一个正 $\lambda$ 同时见证本节开头的两条条件 Gram 等式。此处 $ad=bc$ 使两条条件都生效，而列等式单独就与新定理矛盾。因此，即便补上 $b\le2a$、$d\le2c$，也不能把锥域中的秩可达性加强为精确平坦谱可达性。
 :::
 
-这一算例没有确定最小反例、最优比值阈值或完整的维数分类，也没有给出近似平坦谱的定量间隙。它仍只讨论既定行列二分下的有限维收缩，不建立物理实现或 RT 公式饱和。
+在正标量列 Gram 条件下，若 $a<b$，则 [@thm-bridge-native-three-rectangular-bound] 给出 $3c\le2d$。结合这一界，[@thm-bridge-native-scalar-gram-iff] 给出了各区间的精确阈值和全维数充要分类。在有序锥域内，$(3,4,3,4)$ 与 $(5,6,5,6)$ 都落在第一个缩维区间，但各自违反 $3c\le2d$，因而均无三项实现。$(2,3,2,3)$ 同时达到 $2b=3a$ 和 $3c=2d$，可以实现。下文的三十维算例讨论 $(5,6,5,6)$ 下是否存在四项酉实现。一般维数下近似平坦谱的定量间隙仍有待确定。
 
 ## 19.4.1 矩形分块与同一算子的精确分解宽度 {#sec-bridge-rectangular-partition}
 
-[@thm-bridge-native-scalar-gram-exists] 用坐标路由给出了三项张量和的充分构造，后面的障碍则限制了三项精确平坦谱。现在保留原始局部输入、输出空间，把项数从固定三项放宽为任意有限项：将整个坐标矩形分成两侧等势的分块，块内的双射就能同时给出一个酉算子及其最少乘积项数。
+现在保留原始局部输入、输出空间，允许任意有限项。将坐标矩形分成两侧等势的分块，块内的双射就能同时给出一个酉算子及其最少乘积项数。
 
 ::: {.theorem #thm-bridge-rectangular-partition title="矩形分块的酉路由与精确分解宽度" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/RectangularBlockPartition.unitary_exact_width"}
 设 $X,Y,T$ 为任意有限集。每个 $t\in T$ 给出子集 $I_t\subseteq X$、$J_t\subseteq Y$ 和双射 $\phi_t:J_t\to I_t$，且每个 $(x,y)\in X\times Y$ 恰属于一个矩形 $I_t\times J_t$。定义矩阵 $A_t\in M_{X\times Y}(\mathbb C)$：当 $j\in J_t$ 且 $i=\phi_t(j)$ 时 $(A_t)_{ij}=1$，其余为零。令
@@ -424,8 +410,7 @@ $$
 先展开张量和的坐标：
 
 $$
-U_{(i,k),(j,l)}=
-\sum_{u\in T}(A_u)_{ij}\overline{(A_u)_{lk}}.
+U_{(i,k),(j,l)}= \sum_{u\in T}(A_u)_{ij}\overline{(A_u)_{lk}}.
 $$
 
 给定输入标准基指标 $(j,l)\in Y\times X$，选取满足 $l\in I_t$、$j\in J_t$ 的唯一分块。若第 $u$ 项非零，两个因子的支撑分别要求 $j\in J_u$ 和 $l\in I_u$，唯一覆盖便迫使 $u=t$。剩下这一项恰在 $i=\phi_t(j)$、$k=\phi_t^{-1}(l)$ 时等于 $1$，其余为零。因此每个输入被送到

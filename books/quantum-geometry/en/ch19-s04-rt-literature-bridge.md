@@ -40,9 +40,7 @@ Respect the exact boundaries of [@thm-bridge-quantum-maxflow-mincut]:
 Keep the original grouping from Section 19.1: $M_r\in M_{a\times b}(\mathbb C)$, $N_r\in M_{d\times c}(\mathbb C)$, and
 
 $$
-F=\sum_{r=0}^2 M_r\otimes N_r:
-\mathbb C^b\otimes\mathbb C^c\longrightarrow
-\mathbb C^a\otimes\mathbb C^d.
+F=\sum_{r=0}^2 M_r\otimes N_r: \mathbb C^b\otimes\mathbb C^c\longrightarrow \mathbb C^a\otimes\mathbb C^d.
 $$
 
 Here $F^*$ denotes the conjugate transpose. A stronger requirement than rank attainment is the existence of a single choice of matrix families $M,N$ and a single positive real scalar $\lambda$ satisfying
@@ -133,8 +131,7 @@ $$
 Define the original contraction (rows indexed by $\operatorname{Fin}a\times\operatorname{Fin}d$ and columns by $\operatorname{Fin}b\times\operatorname{Fin}c$)
 
 $$
-F=\sum_{r=0}^2M_r\otimes N_r:
-\mathbb C^b\otimes\mathbb C^c\longrightarrow\mathbb C^a\otimes\mathbb C^d.
+F=\sum_{r=0}^2M_r\otimes N_r: \mathbb C^b\otimes\mathbb C^c\longrightarrow\mathbb C^a\otimes\mathbb C^d.
 $$
 
 If $\lambda\in\mathbb R$ satisfies $\lambda>0$ and
@@ -158,8 +155,7 @@ If $c=0$, the conclusion is $0\le d$. Assume $c>0$ below; the strict threshold g
 Express the same $F$ as an exact tensor sum with the fewest terms, $\sum_{r<k}A_r^{(0)}\otimes D_r$, where $0\le k\le3$. A dependence on either factor side lets us solve for one factor and absorb its term into the others, reducing the width. Both factor families in a minimal decomposition are therefore complex-linearly independent. Set $A_r=A_r^{(0)}/\sqrt\lambda$, obtaining
 
 $$
-\widehat F=\frac{F}{\sqrt\lambda}=\sum_{r<k}A_r\otimes D_r,\qquad
-\widehat F^*\widehat F=I_{bc}.
+\widehat F=\frac{F}{\sqrt\lambda}=\sum_{r<k}A_r\otimes D_r,\qquad \widehat F^*\widehat F=I_{bc}.
 $$
 
 Independence and normalization have been derived from the original premise.
@@ -247,8 +243,7 @@ For $c=1$, the two columns of $WC$ are orthogonal unit vectors; for general $c$,
 Let $a,b,c,d\in\mathbb N$ with $c>0$ and $b>2a$. For any three $a\times b$ complex matrices $M_r$, three $d\times c$ complex matrices $N_r$, and positive real scalar $\lambda$, if
 
 $$
-F=\sum_{r=0}^2M_r\otimes N_r,\qquad
-F^*F=\lambda I_{bc},
+F=\sum_{r=0}^2M_r\otimes N_r,\qquad F^*F=\lambda I_{bc},
 $$
 
 then $d\ge3c$. No additional assumption $a>0$, ordering condition, or quadratic cone condition is required.
@@ -258,8 +253,7 @@ then $d\ge3c$. No additional assumption $a>0$, ordering condition, or quadratic 
 Stack the three matrices $M_r$ vertically to form the auxiliary map
 
 $$
-V:\mathbb C^b\longrightarrow\mathbb C^3\otimes\mathbb C^a,\qquad
-Vx=\sum_{r=0}^2e_r\otimes M_rx.
+V:\mathbb C^b\longrightarrow\mathbb C^3\otimes\mathbb C^a,\qquad Vx=\sum_{r=0}^2e_r\otimes M_rx.
 $$
 
 If $Vx=0$, then every $M_rx=0$, so $F(x\otimes y)=0$. Choose nonzero $y\in\mathbb C^c$. The identity $F^*F=\lambda I_{bc}$ gives $\lambda\|x\|^2\|y\|^2=0$, hence $x=0$. Thus $W=\operatorname{range}V$ has dimension $b$.
@@ -269,15 +263,13 @@ Fix any nonzero coefficient direction $z=(z_0,z_1,z_2)\in\mathbb C^3$. The subsp
 This makes the nine matrices $M_r^*M_s$ linearly independent. Indeed, suppose a complex coefficient matrix $T=(t_{rs})$ satisfies $\sum_{r,s}t_{rs}M_r^*M_s=0$. Pairing with the chosen $x$ on both sides gives
 
 $$
-0=\sum_{r,s}t_{rs}\langle M_rx,M_sx\rangle
-=\|u\|^2z^*Tz.
+0=\sum_{r,s}t_{rs}\langle M_rx,M_sx\rangle =\|u\|^2z^*Tz.
 $$
 
 Thus $z^*Tz=0$ for every $z$, including $z=0$. Substituting $e_r$, then $e_r+e_s$ and $e_r+i e_s$ for $r\ne s$, yields
 
 $$
-t_{rr}=0,\qquad t_{rs}+t_{sr}=0,\qquad
-it_{rs}-it_{sr}=0.
+t_{rr}=0,\qquad t_{rs}+t_{sr}=0,\qquad it_{rs}-it_{sr}=0.
 $$
 
 Hence every $t_{rs}=0$. Both real and imaginary directions matter here; testing only real vectors $z$ would not suffice.
@@ -285,8 +277,7 @@ Hence every $t_{rs}=0$. Both real and imaginary directions matter here; testing 
 Next expand the original column Gram identity:
 
 $$
-\sum_{r,s}(M_r^*M_s)\otimes(N_r^*N_s)
-=\lambda I_b\otimes I_c.
+\sum_{r,s}(M_r^*M_s)\otimes(N_r^*N_s) =\lambda I_b\otimes I_c.
 $$
 
 Since $c>0$, fix a coordinate $k$ and define $H_{rs}=(N_r^*N_s)_{kk}$. Let $\delta_{ij}$ denote the Kronecker delta. For any $i,j$, take the $(i,j)$ matrix entry in the second tensor factor, then subtract $\delta_{ij}$ times the corresponding $(k,k)$ equation. This gives
@@ -304,8 +295,7 @@ $$
 Since $\lambda>0$, the right side has rank $b$. The rank of the product cannot exceed that of its middle factor, so
 
 $$
-b\le\operatorname{rank}(H\otimes I_a)
-=a\operatorname{rank}H.
+b\le\operatorname{rank}(H\otimes I_a) =a\operatorname{rank}H.
 $$
 
 The $3\times3$ matrix $H$ has rank at most $3$. Rank at most $2$ would imply $b\le2a$, contradicting the hypothesis. Therefore $\operatorname{rank}H=3$. Finally, concatenate horizontally:
@@ -317,9 +307,7 @@ $$
 Its Gram matrix is $C^*C=H\otimes I_c$, giving
 
 $$
-3c=c\operatorname{rank}H
-=\operatorname{rank}(C^*C)
-\le\operatorname{rank}C\le d.
+3c=c\operatorname{rank}H =\operatorname{rank}(C^*C) \le\operatorname{rank}C\le d.
 $$
 
 The auxiliary stack and concatenation serve only the proof; the original three summands and row–column grouping remain unchanged. The full proof is checked by the Lean kernel.
@@ -350,9 +338,7 @@ Does tightening the ratios to $b\le2a$ and $d\le2c$ guarantee an exactly flat sp
 For arbitrary triples of complex matrices $M_r\in M_{3\times5}(\mathbb C)$ and $N_r\in M_{5\times3}(\mathbb C)$ ($r=0,1,2$), and every real $\lambda>0$, let
 
 $$
-F=\sum_{r=0}^2M_r\otimes N_r:
-\mathbb C^5\otimes\mathbb C^3\longrightarrow
-\mathbb C^3\otimes\mathbb C^5.
+F=\sum_{r=0}^2M_r\otimes N_r: \mathbb C^5\otimes\mathbb C^3\longrightarrow \mathbb C^3\otimes\mathbb C^5.
 $$
 
 Then $F^*F\ne\lambda I_{15}$, where $I_{15}$ is indexed by $\operatorname{Fin}5\times\operatorname{Fin}3$.
@@ -382,11 +368,11 @@ Yet [@thm-bridge-three-five-flat-spectrum-obstruction] excludes $F^*F=\lambda I_
 The original universal claim requires the same $M,N$ and the same positive $\lambda$ to witness both conditional Gram equations at the start of this section. Here $ad=bc$ activates both conditions, and the column equation alone contradicts the new theorem. Even after imposing $b\le2a$ and $d\le2c$, rank attainability on the cone therefore cannot be strengthened to attainability of an exactly flat spectrum.
 :::
 
-This example establishes neither a smallest counterexample, an optimal ratio threshold, nor a complete dimension classification. It supplies no quantitative gap for approximately flat spectra. Its scope remains a finite-dimensional contraction in the fixed row/column bipartition, without a claim of physical realization or saturation of the RT formula.
+For a positive scalar column Gram with $a<b$, [@thm-bridge-native-three-rectangular-bound] requires $3c\le2d$. With this bound, [@thm-bridge-native-scalar-gram-iff] gives the exact thresholds in each interval and classifies all dimensions. In the ordered cone, $(3,4,3,4)$ and $(5,6,5,6)$ lie in the first shrinking interval and violate $3c\le2d$, ruling out a three-term realization of either. The dimensions $(2,3,2,3)$ attain both equalities $2b=3a$ and $3c=2d$ and admit a realization. The thirty-dimensional example below returns to the question of whether any unitary at $(5,6,5,6)$ admits four terms. The quantitative gap from a flat spectrum in general dimensions remains open.
 
 ## 19.4.1 Rectangle partitions and the exact decomposition width of a fixed operator {#sec-bridge-rectangular-partition}
 
-The coordinate routing in [@thm-bridge-native-scalar-gram-exists] gives a sufficient construction with three tensor terms; the subsequent obstructions limit exact spectral flatness with three terms. We now retain the original local input and output spaces while allowing an arbitrary finite number of terms. A partition of the coordinate rectangle into blocks with equally many row and column indices will specify both a unitary and its minimum number of product terms.
+Keep the original local input and output spaces and allow any finite number of terms. Partitioning the coordinate rectangle into blocks with equally many row and column indices gives a unitary and, for that unitary, its minimum number of product terms.
 
 ::: {.theorem #thm-bridge-rectangular-partition title="Unitary rectangle routing with exact decomposition width" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/RectangularBlockPartition.unitary_exact_width"}
 Let $X,Y,T$ be arbitrary finite sets. For each $t\in T$, let $I_t\subseteq X$, $J_t\subseteq Y$, and let $\phi_t:J_t\to I_t$ be a bijection. Suppose every $(x,y)\in X\times Y$ belongs to exactly one rectangle $I_t\times J_t$. Define $A_t\in M_{X\times Y}(\mathbb C)$ by $(A_t)_{ij}=1$ when $j\in J_t$ and $i=\phi_t(j)$, and zero otherwise. Put
@@ -424,8 +410,7 @@ Moreover, there are row and column maps $r:T_+\to X\times Y$ and $s:T_+\to Y\tim
 First expand the tensor sum in coordinates:
 
 $$
-U_{(i,k),(j,l)}=
-\sum_{u\in T}(A_u)_{ij}\overline{(A_u)_{lk}}.
+U_{(i,k),(j,l)}= \sum_{u\in T}(A_u)_{ij}\overline{(A_u)_{lk}}.
 $$
 
 For an input basis index $(j,l)\in Y\times X$, choose its unique block with $l\in I_t$ and $j\in J_t$. A nonzero $u$-summand requires $j\in J_u$ and $l\in I_u$ from the supports of its two factors, so unique coverage forces $u=t$. The remaining summand equals $1$ exactly when $i=\phi_t(j)$ and $k=\phi_t^{-1}(l)$, and vanishes otherwise. Thus each input is routed as
