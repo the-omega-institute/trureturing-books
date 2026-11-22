@@ -698,6 +698,25 @@ $$
 对于零场值有限的正谱，五个实外场也给出有限精度的检验。在 $h=0,4,8,12,16$ 依次给归一化读数赋权 $w_i=a_i/\sum_j|a_j|$，其中整数 $a_i$ 依次为 $8544921875$、$-16976003576$、$14684762428$、$-8445320648$、$2194079281$。这个线性组合对每个正谱都给出非负值，而上述纯纵向预测为 $-0.00002712547$。即使五个归一化读数各有 $0.000027$ 的绝对误差，总和仍为负。[五点权重、证明及区间数值证书](https://github.com/the-omega-institute/trureturing-books/issues/943#issuecomment-7076689640)
 :::
 
+::: {.remark #rem-ch39-equal-time-variance title="一个有限方差探针能否读出全部频率？"}
+上一段使同一系综在不同静态背景上给出 $F$。现在固定一个平衡态和一个中心化的厄米探针，把目标规定为零空间动量的连通欧氏**时间**关联函数，所有频率共用同一标定 $D_0>0$ 和尺度 $M>0$。按本节的零点展开，
+
+$$
+D(\omega^2)=D_0 F(\omega^2/M^2)=\frac{D_0M^2}{S}\sum_{\gamma>0}\frac{m_\gamma}{\omega^2+M^2\gamma^2}.
+$$
+
+零温时，在傅里叶测度 $d\omega/(2\pi)$ 下，对全部实频率积分给出等时方差。只保留 $\gamma\le H$ 的谱项，用 $\int_{\mathbb R}d\omega/[2\pi(\omega^2+E^2)]=1/(2E)$ 得
+
+$$
+V_H=\frac{D_0M}{2S}\sum_{0<\gamma\le H}\frac{m_\gamma}{\gamma}
+\sim\frac{D_0M}{8\pi S}(\log H)^2.
+$$
+
+这里 $N(H)$ 按重数计正纵坐标。对 $\int_{0^+}^H t^{-1}dN(t)$ 分部积分，代入黎曼–冯·曼戈尔特计数律 $N(t)\sim t\log t/(2\pi)$，即得所示系数。计数律本身无条件；黎曼猜想在本节中用于将算术响应识别为正极点和。各项非负，故单调收敛给出全塔的无穷方差。在逆温 $\beta>0$ 下，取玻色 Matsubara 频率 $\omega_n=2\pi n/\beta$。等时值 $\beta^{-1}\sum_{n\in\mathbb Z}D(\omega_n^2)$ 中每一谱项的零温贡献都乘以 $\coth(\beta M\gamma/2)\ge1$。因此有限等时方差的同一探针也无法在某个固定正温下重现全部离散频率。
+
+有限频率也可给出必要条件。零温基态中，设探针的正能量跃迁测度为 $\mu$，总质量不超过测得的等时方差 $V$。用谱表示 $D(\omega^2)=\int 2E/(\omega^2+E^2)\,d\mu(E)$ 和 $2|\omega|E\le\omega^2+E^2$，得 $|\omega|D(\omega^2)\le V$。例如在 $|\omega|/M=16$，匹配目标要求 $V/(D_0M)\ge16F(256)\approx12.4852241$。实验须在同一态上独立标定方差与响应。有限带宽只检验其覆盖的频率。[固定态的频率抽样与额外动力学输入](https://github.com/the-omega-institute/trureturing-books/issues/943#issuecomment-7076970605)
+:::
+
 **这条响应曲线可以由哪些传播子读出？（标量交换模型）** 取欧氏动量平方 $s=q_E^2>0$，引入自由质量尺度 $M>0$。令 $b_\gamma=M^2\gamma^2$，沿用 $p_\gamma=m_\gamma/(S\gamma^2)$。无量纲响应 $A(s)=F(s/M^2)=\sum_\gamma p_\gamma b_\gamma/(s+b_\gamma)$ 从 $1$ 严格递减到 $0$。没有接触项的标量对角传播子若有正谱表示 $D(s)=\int_{[0,\infty)}(s+b)^{-1}\,d\rho(b)$，则 $sD(s)$ 非减，因为每个 $s/(s+b)$ 都非减。因此 $A(s)/s$ 不能作为这种自相关传播子。分式分解还指出阻碍出现在哪里：
 
 $$

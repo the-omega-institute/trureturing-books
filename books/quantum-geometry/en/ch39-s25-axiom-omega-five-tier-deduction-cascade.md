@@ -698,6 +698,25 @@ Both expressions extend continuously to $1$ at zero field. At $h=16$, the predic
 For spectra with a finite zero-field reading, five real fields also give a finite-precision test. At $h=0,4,8,12,16$, weight the normalized readings by $w_i=a_i/\sum_j|a_j|$, using the ordered integers $a_i$ given by $8544921875$, $-16976003576$, $14684762428$, $-8445320648$ and $2194079281$. The linear combination gives a nonnegative result for every positive Stieltjes spectrum, while the purely longitudinal prediction is $-0.00002712547$. Even an absolute error of $0.000027$ in each normalized reading leaves the combination negative. [Five weights, proof and numerical interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/943#issuecomment-7076689640)
 :::
 
+::: {.remark #rem-ch39-equal-time-variance title="Can one finite-variance probe reproduce the full frequency response?"}
+The preceding ensemble gives $F$ at different static backgrounds. Now fix one equilibrium state and one centered Hermitian probe. Take its connected Euclidean **time** correlation function at zero spatial momentum as the target, with one calibration $D_0>0$ and scale $M>0$ for all frequencies. The zero expansion in this section gives
+
+$$
+D(\omega^2)=D_0 F(\omega^2/M^2)=\frac{D_0M^2}{S}\sum_{\gamma>0}\frac{m_\gamma}{\omega^2+M^2\gamma^2}.
+$$
+
+At zero temperature, integrating over all real frequencies with Fourier measure $d\omega/(2\pi)$ gives the equal-time variance. Keep only the spectral terms with $\gamma\le H$. Integrating each term using $\int_{\mathbb R}d\omega/[2\pi(\omega^2+E^2)]=1/(2E)$ gives
+
+$$
+V_H=\frac{D_0M}{2S}\sum_{0<\gamma\le H}\frac{m_\gamma}{\gamma}
+\sim\frac{D_0M}{8\pi S}(\log H)^2.
+$$
+
+Here $N(H)$ counts positive ordinates with multiplicity. Integration by parts in $\int_{0^+}^H t^{-1}dN(t)$ and the Riemann–von Mangoldt counting law $N(t)\sim t\log t/(2\pi)$ give the displayed coefficient. The counting law is unconditional. This section uses the Riemann hypothesis to identify the arithmetic response with the positive pole sum. All terms are nonnegative, so monotone convergence gives infinite variance for the full tower. At inverse temperature $\beta>0$, take bosonic Matsubara frequencies $\omega_n=2\pi n/\beta$. In the equal-time sum $\beta^{-1}\sum_{n\in\mathbb Z}D(\omega_n^2)$, each zero-temperature contribution acquires a factor $\coth(\beta M\gamma/2)\ge1$. A single probe with finite equal-time variance therefore also fails to match all discrete frequencies at any fixed positive temperature.
+
+A finite-frequency measurement gives a necessary condition. In a zero-temperature ground state, let $\mu$ be the probe's positive-energy transition measure, of total mass at most the measured equal-time variance $V$. Its spectral representation $D(\omega^2)=\int 2E/(\omega^2+E^2)\,d\mu(E)$ and $2|\omega|E\le\omega^2+E^2$ give $|\omega|D(\omega^2)\le V$. At $|\omega|/M=16$, for instance, matching the target requires $V/(D_0M)\ge16F(256)\approx12.4852241$. The variance and response require independent calibration in the same state. A finite bandwidth tests the frequencies it covers. [Frequency sampling in a fixed state and the dynamical assumptions](https://github.com/the-omega-institute/trureturing-books/issues/943#issuecomment-7076970605)
+:::
+
 **Which propagators can reproduce this response? (Scalar exchange model.)** Let $s=q_E^2>0$ be the squared Euclidean momentum and introduce a free mass scale $M>0$. Set $b_\gamma=M^2\gamma^2$ and retain the weights $p_\gamma=m_\gamma/(S\gamma^2)$. The dimensionless response $A(s)=F(s/M^2)=\sum_\gamma p_\gamma b_\gamma/(s+b_\gamma)$ decreases strictly from $1$ to $0$. If a scalar diagonal propagator without contact terms has a positive spectral representation $D(s)=\int_{[0,\infty)}(s+b)^{-1}\,d\rho(b)$, then $sD(s)$ is nondecreasing because each $s/(s+b)$ is nondecreasing. This excludes $A(s)/s$ as such an autocorrelation propagator. The partial fractions locate the obstruction:
 
 $$
