@@ -1059,7 +1059,42 @@ $$
 The denominator is $e^{-s_m u}(1-e^{-s_m L})>0$. Under RH the normalized increment of the degree-$r$ primitive is an absolutely summable series with frequencies $\operatorname{Im}(\rho)/r$. The endpoint terms use the same zero, with a factor determined by the fixed width. The verified lower bound on zero heights bounds every exponential integral by a common constant. Termwise integration gives a bounded primitive. Subtracting the shifted integrals leaves two boundary intervals of length $L$. The bound $e^{-s_m L}L/(1-e^{-s_m L})\le 1/s_m$ gives a spectral integral bound independent of $U,T,L$. The normalized $E_q$ decays as $e^{-\delta_m u}$ and has an integral bound independent of $U,T$ as well. Dividing the two bounds by $T$ leaves the arithmetic constant $-\mu(q)q/((q-1)s_m)$.
 :::
 
-For squareful $q$ the arithmetic mean vanishes. The degree-$r$ spectral term depends on $\mu(r)$ and can still contribute at individual windows. The error constant can depend on the order $m$. Recovering individual nonzero-frequency coefficients and their multiplicities remains open.
+For squareful $q$ the arithmetic mean vanishes. The degree-$r$ spectral term depends on $\mu(r)$ and can still contribute at individual windows. The error constant can depend on the order $m$.
+
+::: {.theorem #thm-ch31-prime-window-even-fourier title="Fourier coefficients recover the zero frequencies and multiplicities" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffFourier.signed_window_even_cutoff_fourier"}
+Assume RH. Use $q=m+1=2r$ with $m\ge2$ and fix a logarithmic width $L>0$. Use the same $s=s_m$ and normalized residual $F$ as in [@thm-ch31-prime-window-even-cesaro]. For a nontrivial zero $\rho$, put $\omega_\rho=\operatorname{Im}(\rho)/r$ and define
+
+$$
+b_{r,L}(\rho)=
+\frac{2r^2}{\rho(r-\rho)(r-2\rho)}
+\frac{e^{(-s+i\omega_\rho)L}-1}{1-e^{-sL}}.
+$$
+
+Let $A(0)=-\mu(q)q/((q-1)s)$. For $\omega\ne0$, define
+
+$$
+A(\omega)=-\mu(r)\sum_{k:\,\omega_{\rho_k}=\omega} b_{r,L}(\rho_k),
+$$
+
+where $\rho_k$ lists the actual nontrivial zeros with analytic multiplicity. There is a common $U_0>0$ and, for every fixed $m,L,\omega$, a constant $C>0$ such that for all $U\ge U_0$ and $T>0$, the modulated residual is Lebesgue integrable on $[U,U+T]$ and
+
+$$
+\left|\frac{1}{T}\int_U^{U+T} F(u)e^{-i\omega u}\,du-A(\omega)\right|
+\le \frac{C}{T}.
+$$
+
+For every nontrivial zero $\rho$ with analytic multiplicity $n_\rho$, we have $A(\omega_\rho)=-\mu(r)n_\rho b_{r,L}(\rho)$ and $b_{r,L}(\rho)\ne0$.
+:::
+
+::: proof
+In the even-cutoff expansion, dividing by the power gap gives an arithmetic constant, the normalized root-primitive increment, and a remainder bounded by a constant times $e^{-\delta_m u}$. The normalized increment has an absolutely summable exponential expansion. Conjugation pairs the actual zero occurrences, so this expansion is real. Its coefficient at each occurrence includes the change between the two endpoints, which gives the width factor in $b_{r,L}$.
+
+Multiplication by $e^{-i\omega u}$ shifts each frequency by $-\omega$. Each matching occurrence then contributes its coefficient times $T$. The zeta zero set is closed and discrete. Deleting the point $1/2+ir\omega$ leaves a closed set at positive distance from that point. Under RH this gives positive separation from all nonmatching frequencies. Thus each nonmatching exponential has an integral of modulus at most twice the reciprocal of the separation, uniformly in $U,T$. Absolute summability gives a uniform bound for their combined integral. The exponential remainder also has a bounded integral. At frequency zero no zero occurrence matches, and at a nonzero frequency the arithmetic constant has a bounded oscillatory integral. The single-frequency bound and modulation follow the frequency test in the comparison repository. [Frequency test](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62) · [Coefficient extraction](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L109-L143)
+
+Under RH, a given ordinate identifies a single point on the critical line. The matching occurrences contribute the same factor exactly $n_\rho$ times. The exponential in the numerator of the width factor has modulus $e^{-sL}<1$, and all denominators are nonzero.
+:::
+
+If $\mu(r)\ne0$, a nonzero tested frequency has a nonzero coefficient exactly when $1/2+ir\omega$ is an actual zero. In that case division by $-\mu(r)b_{r,L}(1/2+ir\omega)$ gives its analytic multiplicity. For squareful $r$, all nonzero-frequency coefficients vanish. The error estimate allows dependence on the tested frequency and the fixed width. The bound uniform over all positive widths at frequency zero is [@thm-ch31-prime-window-even-cesaro].
 
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
