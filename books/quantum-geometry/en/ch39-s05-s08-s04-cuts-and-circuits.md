@@ -815,6 +815,18 @@ Let $L_{\varnothing},L_H,L_J,L_{HJ}$ be the obstruction groups with neither omis
 
 The two exceptional orders both divide $n$ and can be incomparable under divisibility. For example, take $r=3$, $H=\{1,2,3\}$, $J=\{3,4,5\}$ and class sizes $3,3,2,2,2$ in order. Then $n=12$, $g=1$, $q_H=2$, and $q_J=3$. The cyclic decomposition gives three nontrivial factors of orders $12,2,3$. Combining the coprime factors puts the group in invariant-factor form with orders $6,12$.
 
+::: {.theorem #thm-joint-circuit-three-omission-counterexample title="Three omitted bases can impose dependent restrictions" lean="D5/S3/Combinatorics/Matroids/ThreeOmittedCircuitRefutation.result"}
+The cyclic-factor rule obtained by treating each of three omissions independently fails even when every two omitted bases intersect in at most the rank minus two elements. Partition six elements into pairs $A,B,C$ and omit $A\cup B$, $A\cup C$ and $B\cup C$ from the rank-four bases. Give every class size one. Independent replacement predicts $\mathbb Z/6\mathbb Z$, while the joint lifting obstruction has at least four elements killed by two.
+:::
+
+::: proof
+Each allowed basis contains one complete pair and one element from each of the other pairs. Assign its coefficient in $\mathbb F_2$ to be $u,v,u+v$ according as the complete pair is $A,B,C$, and set all other coefficients to zero. Map these coefficients into the elements of $\mathbb Q/\mathbb Z$ killed by two. The signs act identically on these two values.
+
+For a three-element face containing a complete pair, only the two extensions using the missing pair can contribute, and their coefficients agree. For a face meeting each pair once, the three possible coefficients sum to $u+v+(u+v)=0$. In a five-element set, the two deletions from either complete pair give equal coefficients. Deleting the singleton leaves an omitted basis. Hence the weighted boundaries and circuit deletion rows vanish.
+
+Reading off a basis with complete pair $A$ and another with complete pair $B$ recovers $u,v$, so the four choices yield distinct obstruction classes. Here $n=6$, $g=1$, and all three $q_T$ equal one. Independent replacement leaves $\binom{4}{3}-3=1$ factor of order six. Exactly two elements of $\mathbb Z/6\mathbb Z$ are killed by two. The full proof is checked by the Lean kernel.
+:::
+
 **Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 If there are no nonempty facets, the original realization is empty and its reduced integral homology vanishes in every nonnegative degree. When facets exist and $d=1$, the wedge is a discrete space with $m+1$ points and reduced degree-zero generators $[p_B]-[p_0]$, where $p_B$ is the point contributed by $B$ and $p_0$ is the common basepoint. When facets exist and $m=0$, the wedge is a point and every reduced group vanishes. For a nonempty family of facets, the reduced Euler characteristic is $(-1)^{d-1}m$, so the earlier Tutte evaluation gives $m=2^d T_M(1,1/2)$.
