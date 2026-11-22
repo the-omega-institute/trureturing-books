@@ -1022,7 +1022,44 @@ $$
 Choose $M\ge\max(2,N)$ so that $K m^{-\gamma}<1$ for all $m\ge M$. At a prime $q=m+1$, we have $\mu(q)=-1$ and $q/((q-1)s_m)=2q^2/((q-1)(q-2))>2$. Fix that order and raise the start threshold until the normalized expansion error is below $1$. The power difference is positive for every $B>a$, so the signed residual exceeds that power difference. Since primes are unbounded, the lower bound rules out every uniform negative order exponent even at a prescribed positive logarithmic width.
 :::
 
-When odd $q$ has a square divisor greater than one, $\mu(q)=0$ and the estimate gives the faster bound $O_m(a^{-\delta_m}D_{s_m})$. For even $q$, increasing the order also admits the spectral term of degree $n=q/2$, which has the same decay rate as the degree-$q$ arithmetic term. The leading behavior for even cutoffs requires controlling both contributions.
+When odd $q$ has a square divisor greater than one, $\mu(q)=0$ and the estimate gives the faster bound $O_m(a^{-\delta_m}D_{s_m})$. For even $q$, increasing the order also admits the spectral term of degree $n=q/2$, which has the same decay rate as the degree-$q$ arithmetic term. The following expansion keeps both contributions.
+
+::: {.theorem #thm-ch31-prime-window-even-cutoff title="Arithmetic and zero terms at an even cutoff" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_expansion"}
+Assume RH. There are common constants $a_0\ge2$ and $K>0$ such that the following estimate holds for every integer $m\ge2$ with $q=m+1=2r$ and all $B\ge a\ge a_0$. Set $s_m=1/2-1/q$, $\delta_m=1/q-1/(q+1)$, and $W_m=Kq(1+\ln q)^2$. Use the same signed residual $E_m$ and power difference $D_s$. Write $P_r$ for the degree-$r$ root primitive over actual zeta zeros counted with analytic multiplicity. Then
+
+$$
+\begin{aligned}
+&\left| E_m(a,B)+\frac{\mu(q)q}{(q-1)s_m}D_{s_m}(a,B)
+          +\mu(r)\bigl(P_r(B)-P_r(a)\bigr)\right|\\
+&\quad\le W_m D_{s_m+\delta_m}(a,B)
+ \le W_m\frac{s_m+\delta_m}{s_m}a^{-\delta_m}D_{s_m}(a,B).
+\end{aligned}
+$$
+:::
+
+::: proof
+Increasing the order to $q$ adds exactly the arithmetic term of degree $q$. The strict spectral rule changes from $2n<q$ to $2n<q+1$, admitting degree $r$. The corrected residual in the displayed formula is $E_q$ at the same endpoints. The all-order estimate gives the faster decay rate $s_m+\delta_m$. Comparing the two exponential integrals in logarithmic coordinates gives the second inequality, including $B=a$.
+:::
+
+::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
+Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
+
+$$
+F(u)=\frac{E_m(e^u,e^{u+L})}{D_{s_m}(e^u,e^{u+L})}
+$$
+
+is Lebesgue integrable on $[U,U+T]$ and satisfies
+
+$$
+\left|\frac1T\int_U^{U+T}F(u)\,du+\frac{\mu(q)q}{(q-1)s_m}\right|\le\frac{C}{T}.
+$$
+:::
+
+::: proof
+The denominator is $e^{-s_m u}(1-e^{-s_m L})>0$. Under RH the normalized increment of the degree-$r$ primitive is an absolutely summable series with frequencies $\operatorname{Im}(\rho)/r$. The endpoint terms use the same zero, with a factor determined by the fixed width. The verified lower bound on zero heights bounds every exponential integral by a common constant. Termwise integration gives a bounded primitive. Subtracting the shifted integrals leaves two boundary intervals of length $L$. The bound $e^{-s_m L}L/(1-e^{-s_m L})\le 1/s_m$ gives a spectral integral bound independent of $U,T,L$. The normalized $E_q$ decays as $e^{-\delta_m u}$ and has an integral bound independent of $U,T$ as well. Dividing the two bounds by $T$ leaves the arithmetic constant $-\mu(q)q/((q-1)s_m)$.
+:::
+
+For squareful $q$ the arithmetic mean vanishes. The degree-$r$ spectral term depends on $\mu(r)$ and can still contribute at individual windows. The error constant can depend on the order $m$. Recovering individual nonzero-frequency coefficients and their multiplicities remains open.
 
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
