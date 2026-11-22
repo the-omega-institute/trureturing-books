@@ -1523,6 +1523,29 @@ For $Q^*=U_{2,3}$, all three classes are singletons and each readout separately 
 
 The complementary-face orientation agrees with that used in combinatorial Alexander duality. On vertex potentials constant within classes, the readout formula is the negative complete-graph Laplacian. [Björner–Tancer, combinatorial Alexander duality](https://doi.org/10.1007/s00454-008-9102-x) · [Glass–Kaplan, graph Laplacians and critical groups](https://arxiv.org/abs/1908.04395)
 
+::: {.theorem #thm-joint-circuit-gram-certificate title="Gram certificate for the joint circuit restriction image" lean="D5/S3/Combinatorics/Matroids/JointCircuitGramCertificate.joint_circuit_gram_certificate"}
+Let $Q$ be a matroid on a finite linearly ordered carrier and choose a ground vertex $e$. Write $Z$ for its integral augmented top-cycle lattice and $Z_K$ for the corresponding lattice of $Q/K$ for a circuit $K$. Pair chains by summing products of face coordinates. Let $R_{K,a}$ be the signed restriction at the facet $K\setminus\{a\}$, let $A_K=\sum_{a\in K}R_{K,a}$, and let $L_K(w)$ be the signed join of the oriented simplex boundary $\partial[K]$ with $w$. For $z\in Z$ and $w\in Z_K$,
+
+$$
+  \langle A_Kz,w\rangle=\langle z,L_K(w)\rangle.
+$$
+
+Let $c_B$ be the normalized integral cycle at an internally passive basis $B$ of $Q$. Let $c_{K,T}$ be the corresponding cycle at an internally passive basis $T$ of $Q/K$. Set $G_{BD}=\langle c_B,c_D\rangle$. Its determinant is nonzero, with determinant $1$ for the empty matrix. Given $y_K\in Z_K$, set
+
+$$
+  b_B=\sum_{K\ni e}\langle y_K,R_{K,e}(c_B)\rangle.
+$$
+
+There is a unique $z\in Z$ satisfying $A_Kz=y_K$ for every $K$ exactly when both conditions hold.
+
+1. For every $K,T$, $\langle y_K,c_{K,T}\rangle=\sum_B b_B L_K(c_{K,T})(B)$.
+2. $\det G$ divides every coordinate of $\operatorname{adj}(G)b$.
+:::
+
+A source basis in a join term is determined by the omitted circuit vertex and the contraction basis. Reindexing the sum by this pair gives the same boundary and shuffle signs in the two pairings. The circuit decomposition through $e$ lifts the restrictions $R_{K,e}(c_B)$ and sums them back to $c_B$. Hence any common lift $z$ has $\langle z,c_B\rangle=b_B$.
+
+The normalized cycles at internally passive bases form an integral basis. Their Gram matrix is invertible over the rationals, since any nonzero combination has a nonzero internally passive coordinate and its self-pairing is a positive sum of squares. The second condition gives integral coefficients for the unique vector obtained from the adjugate. The first condition makes the readout of the resulting source cycle pair with every normalized contraction cycle in the same way as the prescribed readout. Their difference is a contraction cycle orthogonal to a basis of its lattice, so it vanishes. The two finite tests check compatibility and integrality of the same source cycle.
+
 **Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 If there are no nonempty facets, the original realization is empty and its reduced integral homology vanishes in every nonnegative degree. When facets exist and $d=1$, the wedge is a discrete space with $m+1$ points and reduced degree-zero generators $[p_B]-[p_0]$, where $p_B$ is the point contributed by $B$ and $p_0$ is the common basepoint. When facets exist and $m=0$, the wedge is a point and every reduced group vanishes. For a nonempty family of facets, the reduced Euler characteristic is $(-1)^{d-1}m$, so the earlier Tutte evaluation gives $m=2^d T_M(1,1/2)$.

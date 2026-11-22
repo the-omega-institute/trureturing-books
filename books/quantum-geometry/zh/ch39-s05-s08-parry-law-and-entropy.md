@@ -1523,6 +1523,29 @@ $$
 
 这里的补面取向与组合 Alexander 对偶中的取向一致。把势延拓到每个顶点，读出公式就是作用于类内常值势的负完全图拉普拉斯。 [Björner–Tancer，组合 Alexander 对偶](https://doi.org/10.1007/s00454-008-9102-x) · [Glass–Kaplan，图拉普拉斯与临界群](https://arxiv.org/abs/1908.04395)
 
+::: {.theorem #thm-joint-circuit-gram-certificate title="回路联合限制像的 Gram 判据" lean="D5/S3/Combinatorics/Matroids/JointCircuitGramCertificate.joint_circuit_gram_certificate"}
+设 $Q$ 是有限全序载体上的拟阵，选地集中的一点 $e$。记 $Z$ 为 $Q$ 的整系数增广顶次循环格，$Z_K$ 为回路收缩 $Q/K$ 的相应循环格。内积取各面坐标乘积之和。记 $R_{K,a}$ 为沿回路面 $K\setminus\{a\}$ 的带符号限制，$A_K=\sum_{a\in K}R_{K,a}$，$L_K(w)$ 为有向单形边界 $\partial[K]$ 与 $w$ 的带符号连接。对 $z\in Z$ 与 $w\in Z_K$，有
+
+$$
+  \langle A_Kz,w\rangle=\langle z,L_K(w)\rangle.
+$$
+
+记 $c_B$ 为 $Q$ 在内部被动基 $B$ 处的标准化整系数循环，$c_{K,T}$ 为 $Q/K$ 在内部被动基 $T$ 处的相应循环。令 $G_{BD}=\langle c_B,c_D\rangle$。$G$ 的行列式非零，空矩阵的行列式为 $1$。给定 $y_K\in Z_K$，令
+
+$$
+  b_B=\sum_{K\ni e}\langle y_K,R_{K,e}(c_B)\rangle.
+$$
+
+存在唯一的 $z\in Z$ 同时满足所有 $A_Kz=y_K$，当且仅当以下两项成立。
+
+1. 对每个 $K,T$，$\langle y_K,c_{K,T}\rangle=\sum_B b_B L_K(c_{K,T})(B)$。
+2. $\det G$ 整除 $\operatorname{adj}(G)b$ 的每个坐标。
+:::
+
+一个连接项所用的原拟阵基由被删的回路顶点和收缩基唯一决定。按这对指标重新求和时，两个内积的每一项都有相同的边界符号和洗牌符号。固定 $e$ 的回路分解把各 $R_{K,e}(c_B)$ 提升后加回 $c_B$，所以若 $z$ 实现了全部读数，就有 $\langle z,c_B\rangle=b_B$。
+
+按内部被动基归一化的循环构成整系数基。它们的 Gram 矩阵在有理数上可逆，因为任何非零系数组合都在某个内部被动基坐标上非零，自内积是正的平方和。第二项保证由伴随矩阵求出的唯一系数向量是整系数。第一项保证所得源循环在每个收缩中与指定读数配对相同。两者的差是收缩循环，在收缩的一组基上配对均为零，因此差为零。判据把联合相容性与同一个源循环的整数性放在同一组有限计算中。
+
 **方向复形的约化整数同调（书面推导）。** 设至少有一个非空极大面，记 $d=n-h$，令 $m$ 为满足 $R(B)=B$ 的极大面数。上面的商映射是同伦等价，因此把 $X$ 的约化整数同调与楔和的约化整数同调相识别。每个球面都有以基点为子复形的 CW 结构，因此相应球面在有限楔和的约化同调中给出一个直和项。每个 $S^{d-1}$ 在 $d-1$ 次贡献一个 $\mathbb Z$，在其余非负次数均为零。因此 $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$，而 $k\ne d-1$ 时 $\widetilde H_k(X;\mathbb Z)=0$。[Hatcher，《Algebraic Topology》，推论 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 若没有非空极大面，原实现为空，所有非负次数的约化整数同调都为零。若有极大面且 $d=1$，楔和是有 $m+1$ 个点的离散空间，约化零次同调的生成元为 $[p_B]-[p_0]$，其中 $p_B$ 是极大面 $B$ 贡献的点，$p_0$ 是公共基点。若有极大面且 $m=0$，楔和为一点，所有约化同调群均为零。在极大面族非空时，约化欧拉示性数为 $(-1)^{d-1}m$。与前面的 Tutte 取值相比较，得到 $m=2^d T_M(1,1/2)$。
