@@ -481,7 +481,18 @@ Let $A$ be the mass from the zero and full rows in columns of weight $n-1$, and 
 
 Add the two deficits and $S$. An odd special singleton makes $S$, $\ell$ and $s$ each at least one. Any odd special column of greater weight gives $S\ge3$, which covers the extra unit in each positive-part term. This yields the displayed bound. [Matrix bound in terms of dimension and multiplier](lean:D5/S3/ConceptDynamics/Attribution/ParityOddRankBounds.fixed_from_odd_margins)
 
+Several high even ranks can contribute on the same table. At threshold $r$, let $H_r$ count ordinary even rows of weight at least $r$, excluding the all-ones row. The $L_r$ odd columns of weight at most $n-r$ have room for at most $kL_r$ units of mass. An ordinary odd cell charged to this cut has $r$ in the interval $(n-|q|,|p|]$. The number of integers in the interval is at most $|p\cap q|$, so distinct thresholds can use distinct positions. The column cut at the highest odd rank uses position $2$. Choose one column in the all-ones row where both colours have odd mass. It provides a baseline unit and covers one unit for each cut whose available capacity does not include that column.
+
+For any finite set $R\subseteq\{4,\ldots,n-2\}$, the resulting lower bound on the table, in units of four fixed seeds, is
+$$
+1+(n+1-2k)_+ +\sum_{r\in R}(H_r+1-kL_r)_+ ,
+\qquad (x)_+=\max(0,x).
+$$
+For $n=16$ and $k=3$, $H_{12}=\binom{16}{12}+\binom{16}{14}=1940$ and $L_{12}=\binom{16}{1}+\binom{16}{3}=576$, while $H_{14}=120$ and $L_{14}=16$. The two row cuts contribute $213$ and $73$, and the highest odd rank contributes $11$. Thus $R=\{12,14\}$ gives $\sum_i z_i\ge4(1+11+213+73)=1192$. [Multiple rank cuts on one table](lean:D5/S3/ConceptDynamics/Attribution/ParityStackedRankBounds.stacked_fixed_from_odd_margins)
+
 At $k=1$ in even dimension $n$, the exact spectrum at the least budget gives a stronger result. Apply its even-word inequality to the all-ones word to get $\sum_i(M-a_i)\ge M$, where $M=2^{n-2}$. Since $z_i=4(M-a_i)$, this gives $\sum_i z_i\ge 2^n$. To attain the bound at a prescribed coordinate $j$, set $a_j=0$ and set all other $a_i=M$. The only word for which every summand of the inequality vanishes has ones everywhere except at $j$, so its weight is odd. Every even-word inequality therefore has a summand equal to $M$. This realizes $z_j=2^n$ with zero fixed counts at the other coordinates.
+
+**Seeds from a coloured table.** Let $n\ge2$ and let $k$ be the multiplier. Take a nonnegative integer weight $m(p,q,c)$ for each even profile $p$, odd profile $q$, and left colour $c$. Use the same weight for both right colours. The sum over $q$ is $k$ for each $(p,c)$, and the sum over $(p,c)$ is $2k$ for each $q$. Away from the all-ones even profile, the two left-colour weights agree for each $(p,q)$. Coordinate shifts preserve the profiles and also preserve the colour of the all-ones profile, so the weights are constant on output orbits. Each joint fibre has exactly the weight of its table entry. Taking the parity remainder of each point-fibre size realizes the least fixed counts at all coordinates on one equivariant seed space of size $2^{n+1}k$. For coordinate $i$, sum $2(m(p,q,c)\bmod 2)$ over cells with $i\in p\cap q$ and over both left colours. [Seed realization of a coloured parity table](lean:D5/S3/ConceptDynamics/Attribution/ParityColouredTableRealization.realize_coloured_table)
 
 At $k=3$, the bounds for dimensions six and eight are respectively eight and thirty-six fixed seeds in total. Integer orbit tables attain these totals. They give fixed-count vectors $(0,8,0,0,0,0)$ and $(16,0,0,8,4,0,0,8)$ in the tested coordinate orders.
 
