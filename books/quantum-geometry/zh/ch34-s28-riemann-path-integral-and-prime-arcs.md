@@ -1077,6 +1077,25 @@ $$
 
 固定一个允许的截断阶数。窗宽趋于零且起点下界趋于无穷时，逼近误差一致趋于零。若固定起点，误差界中仍含 $K_m e^{-\delta_m u}$。
 
+::: {.theorem #thm-ch31-prime-window-shrinking-rate title="居中根谱的显式窗宽误差" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffShrinkingRate.signed_window_even_cutoff_shrinking_rate"}
+
+假设 RH。沿用 [@thm-ch31-prime-window-shrinking-width] 的 $F_L$、$c_m$、$\delta_m$ 和 $S_r$。存在共同起点阈值 $U_0>0$。对于每个满足 $m\ge2$ 和 $q=m+1=2r$ 的截断阶数，都存在 $C_m,K_m>0$，使得
+
+$$
+ \left| F_L(u)+c_m+\mu(r)S_r(u) \right|
+ \le C_m L\bigl(1+\log(1/L)\bigr)^2 + K_m e^{-\delta_m u}
+ \qquad (u\ge U_0,\quad 0<L\le 1/4).
+$$
+:::
+
+::: proof
+平移不超过 $L$ 时，虚部为 $\gamma$ 的零点项所乘的相位因子与一之差，模长至多为 $\min(2,|\gamma|L/r)$。在 $|\gamma|\le1/L$ 的范围内，$|\gamma|$ 抵消根系数分母中的一个因子，留下 $L/|\rho|$。截断和由常数乘 $L(1+\log(1/L))^2$ 控制。超过 $1/L$ 后，用相位差的上界二与倒平方尾和，得到常数乘 $L(1+\log(1/L))$ 的界。这些计数涵盖解析重数与虚部的两个符号。
+
+由加权积分中值定理，归一化根原函数增量等于某个 $0\le t\le L$ 处的 $S_r(u+t)$。对这段平移应用同样的相位估计，并保留偶数截断的余项界。 [钉版加权积分中值定理](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/MeasureTheory/Integral/IntervalIntegral/MeanValue.lean#L101) · [零点计数原文推论 1.2](https://arxiv.org/pdf/2107.06506v1)
+:::
+
+这个不等式给出显式上界。带符号级数对窗宽的最优依赖仍待确定。
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 
