@@ -385,4 +385,24 @@ $$
 九个输出坐标互异，只有输出坐标 $(0,4)$ 未被占据。因此每列范数平方为 $2$，任意两列内积为零，直接得到 $F^*F=2I_9$。这说明右侧两段不等长时，原始三项因子仍能给出精确的标量列 Gram。
 :::
 
-[@thm-bridge-native-scalar-gram-exists] 把存在性构造延伸到满足 $3c\le2d$ 的任意自然数右侧维数，但仍保留左侧前提 $2b\le3a$。它是充分条件，不把 $3c\le2d$ 宣称为任意原始因子的普遍必要条件，也没有给出全维数的充要分类。后文的必要界分别在 $3a<2b$ 下给出 $2c\le d$（[@thm-bridge-native-rectangular-bound]），在更强的 $2a<b$ 下给出 $3c\le d$（[@thm-bridge-scalar-gram-obstruction]）。这里得到的只是精确有限维原生矩阵模型中的 Gram 恒等式；它不提供近似平坦谱的误差间隙、物理实现或 RT 公式的推导。
+[@thm-bridge-native-scalar-gram-exists] 把存在性构造延伸到满足 $3c\le2d$ 的任意自然数右侧维数，但仍保留左侧前提 $2b\le3a$。它是充分条件，不把 $3c\le2d$ 宣称为任意原始因子的普遍必要条件，也没有给出全维数的充要分类。后文的必要界分别在 $3a<2b$ 下给出 $2c\le d$（[@thm-bridge-native-rectangular-bound]），在更强的 $2a<b$ 下给出 $3c\le d$（[@thm-bridge-scalar-gram-obstruction]）。这些是有限维原生矩阵模型中的精确 Gram 结论。下面对一族矩形阻碍给出近似平坦谱的一致误差下界。物理实现或连续统 RT 公式的推导仍不在此给出。
+
+**宽度三桥接的一致平坦谱熵隙（手工推导）。** 设 $k\ge1$ 为整数，$(a,b,c,d)=(2k,5k,2k,5k)$，$D=bc=10k^2$，$F=\sum_{r=1}^3 M_r\otimes N_r\ne0$。归一化 $\rho_{BC}=F^*F/\operatorname{Tr}(F^*F)$，记 $G=D\rho_{BC}$ 与 $\eta=\|G-I_D\|_1/D$，其中 $\|\cdot\|_1$ 是迹范数。若至多用 $2$ 项，则 $\operatorname{rank}F\le 2ac=8k^2$，故 $G-I_D$ 的负部迹至少为 $2k^2$。由于该矩阵无迹，$\eta\ge 2/5$。
+
+否则取最短的三项表示。右因子线性无关，可改变基并把逆变换吸收到左因子，使 $\operatorname{Tr}(N_r^*N_s)=c\delta_{rs}$。缩放 $F$ 使 $G=F^*F$，设 $Sx=(M_rx)_{r=1}^3$、$B=S^*S=c^{-1}\operatorname{Tr}_C G$ 和 $T=(N_r^*N_s)_{r,s=1}^3-I_{3c}$。右因子拼接矩阵至多有 $d$ 个独立行，其 Gram 矩阵有迹 $3c$，因此 $\|T\|_1\ge2(3c-d)=2k$。偏迹对厄米矩阵收缩迹范数，因为其对偶 $X\mapsto X\otimes I_c$ 保持算子范数，所以 $\|B-I_b\|_1\le b\eta$。又 $\operatorname{Tr}B=b$，故 $B$ 小于 $1/2$ 的特征值至多有 $b\eta$ 个。记其余特征空间为 $E$。当 $\eta\ge1/5$ 时结论已成立。否则令 $J=(B|_E)^{-1/2}$ 与 $W=S|_EJ$，则 $W$ 等距且 $\|J\|\le\sqrt2$。用 $J\otimes I_c$ 压缩并共轭 $G-B\otimes I_c$，所得算子迹范数至多为 $2\|G-B\otimes I_c\|_1\le4D\eta$。
+
+对每个单位向量 $z\in\mathbb C^3$，$W(E)\cap(z\otimes\mathbb C^a)$ 的维数至少为 $\dim E-2a\ge k(1-5\eta)$。限制到该交空间的原像，上述算子是重复块 $I\otimes Q(z)$，其中 $Q(z)=\sum_{r,s}\bar z_rz_s T_{rs}$。令 $\widetilde F=F\rvert_{E\otimes\mathbb C^c}(J\otimes I_c)$，则限制到上述原像之前的算子为 $\widetilde F^*\widetilde F-I_E\otimes I_c$。当 $Wx=z\otimes u$ 时，$\widetilde F(x\otimes y)=u\otimes\sum_r z_rN_ry$，得到该重复块。因此 $\|Q(z)\|_1\le L=4D\eta/[k(1-5\eta)]$。取 $z=e_r$ 给出对角块界 $L$。取 $(e_r\pm e_s)/\sqrt2$ 与 $(e_r\pm i e_s)/\sqrt2$，分别相减并合并，给出非对角块界 $2L$。三块对角加六块非对角，得到
+
+$$
+2k\le\|T\|_1\le15L=\frac{600k\eta}{1-5\eta},
+\qquad \eta\ge\frac1{305}.
+$$
+
+对 $\rho_{BC}$ 的本征值与均匀分布应用 Pinsker 不等式，以自然对数计，有 $\log D-S(\rho_{BC})\ge\eta^2/2\ge 1/186050$。在 $(2k,5k,2k,5k)$ 上，两个方形 Gram 矩阵 $F^*F$ 与 $FF^*$ 同为 $D$ 阶，非零谱相同，故两侧归一化态均有此熵隙。见论文二附录 *Tensor-network results used for cap entropies* 中的 *Uniform entropy gap for width-three bridges*。一般维数下，若宽度三的流 $F\ne0$ 且 $q=\operatorname{QMinCut}(a,b,c,d)<D=bc$，则 $1\le R=\operatorname{rank}F\le q$。设 $p_i$ 为 $\rho_{BC}$ 的非零本征值，由 Cauchy–Schwarz 不等式得 $\sum_i p_i^2\ge1/R\ge1/q$，故
+
+$$
+\lVert D\rho_{BC}-I_D\rVert_{\mathrm F}^2
+=D^2\sum_i p_i^2-D\ge\frac{D(D-q)}{q}.
+$$
+
+支撑上的均匀分布使熵最大，故 $\log D-S(\rho_{BC})\ge\log(D/q)$。两条只依赖秩的界均在 $R=q$ 且非零谱均匀时取等。其余矩形阻碍的范围见上述两条精确 Gram 必要界。

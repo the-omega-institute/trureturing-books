@@ -172,3 +172,29 @@ $$
 :::
 
 **适用范围。** [@thm-central-defect-endpoint-average] 控制的是这一个加权路径矩阵、从 $0$ 出发、在 $[0,\tau]$ 均匀随机观测的端点概率，不给每个固定时刻的下界。时间条件中的分母是真实最小谱隙 $\delta_n$；将它换成较小的逆立方下界会要求更长的充分观测时间，不能冒充同一时间假设。$n=1$ 是矩阵结论的边界情形，不另作原图约简的断言。要解释成黏合树黑盒算法，仍须前述图到列子空间的约简、物理访问模型、哈密顿量的时间归一化与高效黑盒模拟，还须完整的 `EXIT` 识别、重复测量与成功概率论证；经典下界依赖另一套黑盒论证。上述书面证明不把这些环节升级为 Lean 验证，[@rem-qsvt-walks-literature] 中的完整算法分离保持其文献结果身份。
+
+**中央缺陷路径最小谱隙的精确三次渐近极限（手工推导）。** 令 $b=\sqrt2$。在 $H_\eta$（$\eta=\pm1$）中，边界条件为 $y_0=0$、$y_{n+1}=\eta b y_n$。对带内本征值 $2\cos\theta$，递推解为 $y_j\propto\sin(j\theta)$，故 $\sin((n+1)\theta)=\eta b\sin(n\theta)$。端点 $\pm2$ 要求 $b=(n+1)/n$，这里不成立。正带外解满足 $\sinh((n+1)t)/\sinh(nt)=b$，负解由交替变号得到。该双曲比值严格递增，大于 $e^t$，并在每个固定 $t>0$ 趋于 $e^t$，故当 $n\ge3$ 时存在的正根趋于 $\log b$。带外本征值与谱带的距离趋于 $b+b^{-1}-2>0$。
+
+令 $\alpha_+(\theta)=\arctan(\sin\theta/(b-\cos\theta))$、$\alpha_-(\theta)=-\arctan(\sin\theta/(b+\cos\theta))$。带内方程为 $n\theta=k\pi+\alpha_\eta(\theta)$。两相位在端点为零，导数绝对值至多为 $M=(b-1)^{-1}$。所以 $n>M$ 时，各扇区在每个 $1\le k\le n-1$ 恰有一根。记 $x=k\pi/n$，由 $|\alpha_\eta(\theta)|\le M\sin\theta$ 得 $|\theta_{k,\eta}-x|\le M\sin x/(n-M)$。两相位之差为 $d(x)=\arctan(2b\sin x/(b^2-1))$。反正切的凹性给出 $d(x)\ge d(\pi/2)\sin x$。将相位从实际根移到 $x$ 的误差至多为 $M^2\sin x/(n-M)$，再用余弦的中值定理，得到同一 $k$ 的能隙
+
+$$
+2\cos\theta_{k,-}-2\cos\theta_{k,+}
+=\frac{2\sin x\,d(x)}{n}\bigl(1+O(n^{-1})\bigr),
+$$
+
+其中误差对 $k$ 一致。不同 $k$ 的相邻根在角度上至少相隔 $(\pi-2a)/n$，其中 $a=\arctan M<\pi/2$。全部带内根离角端点至少为 $(\pi-a)/n$，故不同对之间的能隙至少为 $2(\pi-2a)\sin((\pi-a)/n)/n$，量级为 $n^{-2}$。同对能隙的主项随 $\sin x$ 严格增加，$k=2$ 对 $k=1$ 的主项比趋于 $4$。所以充分大的 $n$ 只在 $k=1,n-1$ 取得最小值，两对由谱的变号对称性给出相同间隙。代入 $x=\pi/n$ 得
+
+$$
+\lim_{n\to\infty}n^3\delta_n
+=\frac{4b\pi^2}{b^2-1}=4\sqrt2\,\pi^2\approx55.83091360 .
+$$
+
+这证明 [@thm-central-defect-spectral-gap] 的 $n^{-3}$ 指数最优。该定理的全尺度下界常数为 $2\sqrt2/(1+\sqrt2)^2\approx0.48528137$。直接对角化整个 $J_n$ 所得的有限尺度数值如下，取 $8$ 位小数。
+
+| $n$ | $n^3\delta_n$ |
+| --- | --- |
+| $10$ | $51.85649329$ |
+| $50$ | $58.59732412$ |
+| $200$ | $56.63877589$ |
+
+推导见论文一的 *Minimum gap of the central-defect path*。

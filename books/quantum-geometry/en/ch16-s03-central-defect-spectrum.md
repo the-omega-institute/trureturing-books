@@ -172,3 +172,29 @@ The strict step uses $aD>0$, so it also holds at $\tau=4n/(\varepsilon\delta_n)$
 :::
 
 **Applicability.** [@thm-central-defect-endpoint-average] controls this weighted-path matrix, starting at $0$ and observed at a uniformly random time in $[0,\tau]$; it gives no lower bound at every fixed time. Its time denominator is the actual minimum gap $\delta_n$. Substituting the smaller inverse-cubic lower bound demands a longer sufficient observation window and does not preserve the same time hypothesis. The matrix boundary case $n=1$ makes no additional graph-reduction claim. A glued-trees oracle algorithm still requires the graph-to-column reduction described above, a physical access model, Hamiltonian time normalization and efficient oracle simulation, together with the full `EXIT` identification, repetition, and success-probability argument. The classical lower bound requires a separate oracle argument. This written proof does not upgrade those steps to Lean verification; the complete algorithmic separation in [@rem-qsvt-walks-literature] retains its status as a literature result.
+
+**The exact cubic asymptotic for the central-defect gap (`manual derivation`).** Put $b=\sqrt2$. In $H_\eta$ ($\eta=\pm1$), the boundary conditions are $y_0=0$ and $y_{n+1}=\eta b y_n$. For an in-band eigenvalue $2\cos\theta$, the recurrence gives $y_j\propto\sin(j\theta)$ and $\sin((n+1)\theta)=\eta b\sin(n\theta)$. The endpoints $\pm2$ would require $b=(n+1)/n$, which never occurs here. The positive exterior root solves $\sinh((n+1)t)/\sinh(nt)=b$, and alternating signs give its negative counterpart. The hyperbolic ratio strictly increases, exceeds $e^t$, and tends to $e^t$ at fixed $t>0$. The positive root, which exists for $n\ge3$, therefore tends to $\log b$. The exterior eigenvalues have limiting distance $b+b^{-1}-2>0$ from the band.
+
+Put $\alpha_+(\theta)=\arctan(\sin\theta/(b-\cos\theta))$ and $\alpha_-(\theta)=-\arctan(\sin\theta/(b+\cos\theta))$. The band equation reads $n\theta=k\pi+\alpha_\eta(\theta)$. Both phases vanish at the endpoints and their derivatives have magnitude at most $M=(b-1)^{-1}$. For $n>M$ there is exactly one root in each sector for every $1\le k\le n-1$. With $x=k\pi/n$, the bound $|\alpha_\eta(\theta)|\le M\sin\theta$ gives $|\theta_{k,\eta}-x|\le M\sin x/(n-M)$. The phase difference is $d(x)=\arctan(2b\sin x/(b^2-1))$. Concavity of arctangent gives $d(x)\ge d(\pi/2)\sin x$. Moving each phase from its actual root to $x$ incurs error at most $M^2\sin x/(n-M)$. The mean value theorem for cosine then gives the same-$k$ gap
+
+$$
+2\cos\theta_{k,-}-2\cos\theta_{k,+}
+=\frac{2\sin x\,d(x)}{n}\bigl(1+O(n^{-1})\bigr),
+$$
+
+uniformly in $k$. Adjacent roots from different $k$ are separated in angle by at least $(\pi-2a)/n$, where $a=\arctan M<\pi/2$. All in-band roots are at least $(\pi-a)/n$ from the angular endpoints, so gaps between pairs are bounded below by $2(\pi-2a)\sin((\pi-a)/n)/n$, of order $n^{-2}$. The leading term within a pair strictly increases with $\sin x$, and its ratio at $k=2$ to that at $k=1$ tends to $4$. Thus for all sufficiently large $n$ only $k=1,n-1$ attain the minimum, with equal gaps by spectral sign symmetry. Inserting $x=\pi/n$ gives
+
+$$
+\lim_{n\to\infty}n^3\delta_n
+=\frac{4b\pi^2}{b^2-1}=4\sqrt2\,\pi^2\approx55.83091360 .
+$$
+
+This proves that the $n^{-3}$ exponent in [@thm-central-defect-spectral-gap] is optimal. Its all-scale lower-bound constant is $2\sqrt2/(1+\sqrt2)^2\approx0.48528137$. Direct diagonalization of the full $J_n$ gives the following finite-size values, rounded to $8$ decimal places.
+
+| $n$ | $n^3\delta_n$ |
+| --- | --- |
+| $10$ | $51.85649329$ |
+| $50$ | $58.59732412$ |
+| $200$ | $56.63877589$ |
+
+See Paper I's *Minimum gap of the central-defect path*.
