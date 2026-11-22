@@ -856,6 +856,32 @@ $$
 换回 $x=e^y$，左侧的比值就是 $(M\sqrt{x}-U(x))/(\ln x)^2$，故每个固定 $c<1/64$ 都给出所述尾部估计。反向只需取 $c=1/128$。此时差额最终至少为 $(\ln x)^2/128$，从而趋于正无穷，由 [@thm-ch31-mangoldt-critical-gap] 得到 RH。完整证明由 Lean 内核检查。
 :::
 
+::: {.theorem #thm-ch31-mangoldt-fejer-gap title="有限 Fejér 平均给出的临界差额" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtFejerGap.rh_iff_eventually_fejer_gap"}
+记 $M$ 为第一 Li 质量（`firstLiMass`）。经典黎曼假设成立，当且仅当对每个实数 $c<1/48$，都存在 $X_c>1$，使每个实数 $x\ge X_c$ 都满足
+
+$$
+U(x)\le M\sqrt{x}-c(\ln x)^2.
+$$
+:::
+
+::: proof
+在 RH 下，给谱中各个零点的余弦项赋予非负权重。固定 $N\ge2$，将 $N$ 个等距相位两两配对。对任意实数 $\theta$，有
+
+$$
+\sum_{j,k=0}^{N-1}\cos((j-k)\theta)
+=\left|\sum_{j=0}^{N-1}e^{ij\theta}\right|^2\ge0.
+$$
+
+因此各个步长的中点不等式可合并，共同控制中心处的谱亏量。令 $y=\ln x$、$q=e^{-y/2}$。对有序对 $(j,k)$ 取步长 $b_{jk}yq$，其中 $b_{jk}=|j-k|/(2N)$。按 $qy^2$ 归一化后，原点项趋于 $b_{jk}/2$，算术中点上界的主项趋于 $b_{jk}^2$，余项趋于零。对有限组有序对求和并除以 $2N^2$，得到系数
+
+$$
+C_N=\frac{1}{2N^2}\sum_{j,k=0}^{N-1}(b_{jk}/2-b_{jk}^2)
+=\frac{1-N^{-2}}{48}.
+$$
+
+先给定 $c<1/48$，再选取一个有限的 $N$ 使 $c<C_N$，即可在某个实数尾部取得所需不等式。取 $N=3$ 时 $C_3=1/54>1/64$，所以单步估计的端点 $c=1/64$ 也在本定理的范围内。反向使用 [@thm-ch31-mangoldt-log-squared-gap]。每个 $c<1/64$ 都满足 $c<1/48$，所以这里的尾部不等式蕴含单步判据，从而得到 RH。完整证明由 Lean 内核检查。
+:::
+
 ::: {.theorem #thm-ch31-mangoldt-bounded-gap-peak title="归一化余项在整数对数时间上有界间隔地回近临界质量" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtWindowPhase.bounded_gap_actual_G_peak"}
 设 RH 成立，记 $G(y)=e^{-y/2}U(e^y)$。对每个 $\delta>0$ 存在自然数 $L$，使每个自然数 $n$ 都有某个自然数 $k\le L$ 满足
 
