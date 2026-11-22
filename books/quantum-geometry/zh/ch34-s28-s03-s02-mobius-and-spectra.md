@@ -607,7 +607,7 @@ $$
 仅在 RH 下，实际零点是否满足 $D(T)\to0$ 仍是开放问题。在每个截断范围内，$D(T)$ 是对共同时刻 $v$ 取下确界得到的 $1-\sin(\gamma v)$ 加权平均。
 
 ::: {.theorem #thm-ch31-relation-phase-deficit title="整数关系给出的加权相位亏损下界" lean="D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit_disjoint"}
-设有限指标集 $J$ 上有实频率 $\gamma_j$ 与正权重 $w_j$，令 $W=\sum_{j\in J}w_j>0$，并以 [@thm-ch31-weighted-phase-limsup] 的方式定义有限正弦和的亏损 $D$。设 $A$ 是一族有限的整数关系，每行满足 $\sum_{j\in J}k_{aj}\gamma_j=0$。记 $\delta_a=|1-i^{\sum_{j\in J}k_{aj}}|$。取非负乘子 $\lambda_a$，在分母为正时有
+设有限指标集 $J$ 上有实频率 $\gamma_j$ 与正权重 $w_j$，令 $W=\sum_{j\in J}w_j$。当 $W>0$ 时，以 [@thm-ch31-weighted-phase-limsup] 的方式定义有限正弦和的亏损 $D$。设 $A$ 是一族有限的整数关系，每行满足 $\sum_{j\in J}k_{aj}\gamma_j=0$。记 $\delta_a=|1-i^{\sum_{j\in J}k_{aj}}|$。取非负乘子 $\lambda_a$。若 $\sum_{j\in J}(\sum_{a\in A}\lambda_a|k_{aj}|)^2/w_j>0$，则 $J$ 非空，因而 $W>0$，并有
 
 $$
 D\ge
@@ -615,7 +615,7 @@ D\ge
 {2W\sum_{j\in J}(\sum_{a\in A}\lambda_a|k_{aj}|)^2/w_j}.
 $$
 
-若各行非零且支撑两两不交，则有
+若 $W>0$，且各行非零并且支撑两两不交，则有
 
 $$
 D\ge \frac{1}{2W}\sum_{a\in A}

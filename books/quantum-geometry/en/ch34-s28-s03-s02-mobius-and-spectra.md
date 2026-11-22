@@ -607,7 +607,7 @@ Set $h=L/2$. Subtracting $\mu(r)(S_r(u+h)-S_r(u))$ from the signed midpoint erro
 The remaining question under RH alone is whether the actual zeros satisfy $D(T)\to0$. At each cutoff, $D(T)$ is the smallest weighted mean of $1-\sin(\gamma v)$ attainable to arbitrary accuracy with one common time $v$.
 
 ::: {.theorem #thm-ch31-relation-phase-deficit title="Integer relations bound the weighted phase deficit from below" lean="D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit_disjoint"}
-Take a finite set $J$ of real frequencies $\gamma_j$ with positive weights $w_j$. Put $W=\sum_{j\in J}w_j>0$ and define the deficit $D$ for this finite sine sum as in [@thm-ch31-weighted-phase-limsup]. Let $A$ index a finite family of integer relations, with $\sum_{j\in J}k_{aj}\gamma_j=0$ for each row. Write $\delta_a=|1-i^{\sum_{j\in J}k_{aj}}|$. For any nonnegative multipliers $\lambda_a$ with positive denominator,
+Take a finite set $J$ of real frequencies $\gamma_j$ with positive weights $w_j$. Put $W=\sum_{j\in J}w_j$. When $W>0$, define the deficit $D$ for this finite sine sum as in [@thm-ch31-weighted-phase-limsup]. Let $A$ index a finite family of integer relations, with $\sum_{j\in J}k_{aj}\gamma_j=0$ for each row. Write $\delta_a=|1-i^{\sum_{j\in J}k_{aj}}|$. For nonnegative multipliers $\lambda_a$, if $\sum_{j\in J}(\sum_{a\in A}\lambda_a|k_{aj}|)^2/w_j>0$, then $J$ is nonempty and $W>0$. In this case,
 
 $$
 D\ge
@@ -615,7 +615,7 @@ D\ge
 {2W\sum_{j\in J}(\sum_{a\in A}\lambda_a|k_{aj}|)^2/w_j}.
 $$
 
-For nonzero rows with pairwise disjoint supports,
+If $W>0$ and all rows are nonzero with pairwise disjoint supports,
 
 $$
 D\ge \frac{1}{2W}\sum_{a\in A}
