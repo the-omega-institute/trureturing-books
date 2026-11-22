@@ -524,6 +524,31 @@ $$
 
 因为 $\mu(r)\in\{-1,1\}$，上述不等式同时确定了误差的符号及其绝对值下界。起点可随窗宽和阈值变化。对同一带符号窗口，[@thm-ch31-prime-window-shrinking-rate] 的上界和这里的下界在窗宽尺度上仍差一个对数因子。
 
+::: {.theorem #thm-ch31-signed-midpoint-limsup title="对数中点校正后的素数窄窗误差" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffMidpoint.signed_window_even_cutoff_midpoint_limsup"}
+假设 RH。取自然数 $m,r$，满足 $m\ge2$ 且 $m+1=2r$。沿用 [@thm-ch31-prime-window-shrinking-width] 的 $s,F_L,c_m,S_r$，并沿用 [@thm-ch31-centered-root-log-cusp] 的 $c$。对每个 $0<L\le1/4$，定义
+
+$$
+Q_m(L)=\limsup_{u\to+\infty}
+\left| F_L(u)+c_m+\mu(r)S_r(u+L/2)\right|.
+$$
+
+绝对值内的误差取绝对值后在充分晚的尾区间上有界。存在对这些窗宽通用的常数 $C_m>0$，满足
+
+$$
+\begin{aligned}
+G_r(L)&=\frac{L}{8s}\bigl(\log(1/L)+\log(2r)-2c+\tfrac12\bigr),\\
+\left|Q_m(L)-|\mu(r)|G_r(L)\right|
+  &\le |\mu(r)|C_m L^2(1+\log(1/L))^2 .
+\end{aligned}
+$$
+:::
+
+::: proof
+将平坦平均写成关于对数中点的左右配对，得到对称二阶差在 $[0,L/2]$ 上的积分，再除以 $L$。对任意中心使用 [@thm-ch31-root-symmetric-tail-modulus] 的上界，中心为零时使用带符号的尖点下界。积分 $h\log(1/h)$ 给出主项和线性项。换回归一化指数权时，两种权的总质量相同。先减去中点谱值，再用一阶差的显式模量控制密度之差。所有零点模态的绝对可和性使整窗积分成为同一相位向量的连续读数。一次共同的晚期相位复现恢复下界，归一化算术余项趋于零。完整证明由 Lean 内核检查。
+:::
+
+当 $\mu(r)=0$ 时，上极限为零。若 $\mu(r)\ne0$，中点校正的晚期最坏误差具有 $L\log(1/L)$ 的首项。左端点校正的最优上界仍是开放问题。
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 

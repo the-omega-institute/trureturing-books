@@ -524,6 +524,31 @@ The imaginary parts of the root coefficients decay by an extra power of the ordi
 
 Since $\mu(r)\in\{-1,1\}$, the inequality gives both the sign of the discrepancy and a lower bound for its magnitude. The starting point may depend on both the width and the prescribed threshold. The upper bound in [@thm-ch31-prime-window-shrinking-rate] and this lower bound for the same signed window still differ by a logarithmic factor in the width.
 
+::: {.theorem #thm-ch31-signed-midpoint-limsup title="The prime-window error with logarithmic midpoint correction" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffMidpoint.signed_window_even_cutoff_midpoint_limsup"}
+Assume RH. Take natural numbers $m,r$ with $m\ge2$ and $m+1=2r$. Use $s,F_L,c_m,S_r$ from [@thm-ch31-prime-window-shrinking-width] and $c$ from [@thm-ch31-centered-root-log-cusp]. For each $0<L\le1/4$, define
+
+$$
+Q_m(L)=\limsup_{u\to+\infty}
+\left| F_L(u)+c_m+\mu(r)S_r(u+L/2)\right|.
+$$
+
+The absolute discrepancy is bounded on a sufficiently late tail. There is a constant $C_m>0$ that works for every such width and satisfies
+
+$$
+\begin{aligned}
+G_r(L)&=\frac{L}{8s}\bigl(\log(1/L)+\log(2r)-2c+\tfrac12\bigr),\\
+\left|Q_m(L)-|\mu(r)|G_r(L)\right|
+  &\le |\mu(r)|C_m L^2(1+\log(1/L))^2 .
+\end{aligned}
+$$
+:::
+
+::: proof
+Pair points at equal distances on either side of the logarithmic midpoint in the flat average. This gives the integral of the symmetric second difference over $[0,L/2]$, divided by $L$. The upper estimate from [@thm-ch31-root-symmetric-tail-modulus] holds at every center. The signed cusp gives the matching lower comparison at center zero. Integrating $h\log(1/h)$ gives the logarithmic and linear terms. The two normalized weights have equal mass, so subtract the midpoint value before applying the first-difference bound to the density perturbation. Absolute summability of the zero modes makes the whole window a continuous readout of the same phase vector. One common late return restores the lower comparison and the normalized arithmetic remainder tends to zero. The full proof is checked by the Lean kernel.
+:::
+
+When $\mu(r)=0$, the limsup is zero. For $\mu(r)\ne0$, the late worst-case error has leading order $L\log(1/L)$ with the midpoint correction. The sharp upper bound for the left-endpoint correction remains open.
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 
