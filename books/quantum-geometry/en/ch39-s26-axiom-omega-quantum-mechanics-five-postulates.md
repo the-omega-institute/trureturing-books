@@ -635,7 +635,7 @@ Take dimension $16$ and multiplier $3$, with a nonzero fixed-seed budget allowed
 The four capacity deficits above give necessity. The attaining construction specifies a binary edge table on the $2^{15}$ subsets on each side. Its certificate checks the allowed edges, the degrees on both sides and the charge block by block. It has $508$ charged edges. Exactly one ordinary edge spans more than one rank, from the subset of the first four free coordinates to the subset of the first ten. The same factor works for every $b\ge2036$.
 :::
 
-::: {.theorem #thm-omega-sixteen-cover-budget-lower lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteen.cover_budget_ge" title="A lower bound for adjacent ranks in dimension sixteen"}
+::: {.theorem #thm-omega-sixteen-cover-budget-lower lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteenCovers.cover_budget_ge" title="A lower bound for adjacent ranks in dimension sixteen"}
 Use the same dimension, multiplier and coordinate. Restrict ordinary edges to the diagonal and to inclusions that add exactly one element. Keep the outgoing edge rule for $T$ and both degree choices above. Every feasible budget $b$ satisfies $b\ge2044$.
 :::
 

@@ -635,7 +635,7 @@ $$
 上面的四个容量缺口给出必要性。取等构造在每侧的 $2^{15}$ 个子集上指定二值边表，逐块核对边的合法性、两侧度数和计费边数。它有 $508$ 条计费边。普通边中只有一条跨越多层秩，从前四个自由坐标组成的子集连到前十个自由坐标组成的子集。这个因子适用于每个 $b\ge2036$。
 :::
 
-::: {.theorem #thm-omega-sixteen-cover-budget-lower lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteen.cover_budget_ge" title="十六维相邻秩图的预算下界"}
+::: {.theorem #thm-omega-sixteen-cover-budget-lower lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteenCovers.cover_budget_ge" title="十六维相邻秩图的预算下界"}
 取同样的维数、倍率和坐标。若普通边仅允许对角边或恰好增加一个元素的包含边，且 $T$ 的出边及两种度数选择仍按前述规则，那么任何可行预算 $b$ 都满足 $b\ge2044$。
 :::
 
