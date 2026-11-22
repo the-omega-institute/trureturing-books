@@ -1120,6 +1120,20 @@ $$
 
 原点处的对称差以 $h\log(1/h)$ 为首阶。任意晚起点上的一阶增量及其最优一致模量需要另外的估计。
 
+::: {.theorem #thm-ch31-late-root-log-increments title="任意晚起点上的前向增量下界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHRootLateIncrement.root_signal_late_increment_lower"}
+假设 RH。对每个实数 $r>1$ 及 [@thm-ch31-centered-root-log-cusp] 中的完整居中根谱 $S_r$，存在常数 $d_r>0$ 和 $0<H_r<1$。对任意 $0<h<H_r$ 及实数 $U$，存在实数 $u\ge U$ 使得
+
+$$
+|S_r(u+h)-S_r(u)|\ge d_r h\log(1/h).
+$$
+:::
+
+::: proof
+原点尖点给出对称差的正下界，尺度为 $h\log(1/h)$。给定偏移后，根系数绝对可和，因而完整级数是各坐标相位的连续函数。实际相位轨道可在任意晚的时刻返回初始相位向量的邻域，于是某个 $t\ge U+h$ 处的对称差保留了原点下界的一个固定比例。把这个对称差写成从 $t$ 出发的前向增量减去从 $t-h$ 出发的前向增量，两者至少有一个的绝对值达到所得下界的一半。两个起点都不小于 $U$。 [实际相位轨道的复现](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePhaseCluster.phaseOrbit_cluster_iff)
+:::
+
+起点可以依赖偏移量和给定的下限。结论给出每条晚起点尾区间上最坏前向增量的下界。达到同一尺度的一致上界仍是开放问题。
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 
