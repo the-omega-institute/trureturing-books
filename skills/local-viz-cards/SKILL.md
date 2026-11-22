@@ -146,6 +146,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `ternion-self-contained-no-exterior-sandbox` | 把三元数的两个半球画成两只相切的紫色球：从 A 向外走，琥珀波前长到接缝后收拢，在对跖点 Ā 收成一点；比较仿射和 A + B − C 随 C 漂移，而堆步 [B, A, B] 留在壳上 | `skyrmion-winding-self-lock` `field-wave-particle-trinity` `origin-free-no-point-c` `wavefront-outward-is-inward` `heegaard-antipodal-no-exterior` |
 | `dyad-relation-future-field-sandbox` | 两支不共线切方向借 90° 换位撑开第三维闭合成三元数体（2+1=3）；把过去→现在一阶角拉回 0° 动量清零，拉开后对照流群自平行接力 [x<sub>t</sub>, x<sub>t−1</sub>, x<sub>t</sub>]、条件于语境态的非对易换序片与李三元 π³/36 折射推未来，以及四面体面相位上边缘 δF 归零与奥氏高阶动量无界跌落 | `dyad-orthogonal-relation-span` `first-order-zeno-vs-transport` `second-order-free-heap-geodesic` `curvature-lie-triple-refraction` `bianchi-jacobi-second-order-cap` |
 | `constant-free-rational-axiom-omega-sandbox` | 紫色光滑真球内接平直多面体，有限剖分永留弦弧矢高与总和 4π 的角亏锥；对照脱出球外的平直欧拉切线折线与一步驻球的有理凯莱点 Q(σ)、整系数切比雪夫圆弧倍增 (2κ−1)²、N=4 正四面体 κ=1/3 有理封顶对 N=5 黄金比分裂，以及五枚精确有理保真地标 {1, 1/2, 1/3, 1/4, 0} | `pi-polyhedral-crease-residual` `euler-tangent-escape-vs-cayley` `chebyshev-rational-arc-doubling` `tetrahedral-rational-cap-vs-phi` `pure-axiom-omega-constant-free-sphere` |
+| `causal-jet-rational-triad-sandbox` | 纯有理三元数球面上串联 0（过去·零阶停机锚）、1/2（现在·一阶中点自对偶切面）与 1（未来·二阶曲率体）：拨动 α 对照 α=0 伊藤左切脱壳与 α=1/2 斯特拉托诺维奇—凯莱中点精确驻球、两段 1/2 合拢为 1 的曲率片、四面体 δF=0 二阶封顶，以及 1↦0 主频因果心跳循环 | `past-zero-jet-halting-anchor` `present-half-midpoint-self-duality` `future-one-curvature-closure` `third-order-bianchi-ostrogradsky-cap` `one-to-zero-cosmic-heartbeat-loop` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -362,6 +363,33 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `dyad-relation-future-field-sandbox`（`OMEGA//RELATIONS`）承接第三十九章 §39.5 `#sec-ch39-dyad-relation-future-and-second-order-field`：以当下 x_t 为心用弦长方位图将 T₃ ≅ S³(1) 画成紫色实心球（半径 2 边界代表对跖点 −x_t）及方向球四顶点单纯形 Λ³，青色给一阶传输弧、纵向自恒等堆反射测地线 [x_t, x_{t−1}, x_t] 与有下界的二阶自由粒子动能（玩具模型 L = q̇²/2，E = p²/2 ≥ 0），品红给同一切空间内不共线方向下严格 90° 正交的半换位关系轴 E₃ = [E₁, E₂]（规范类比透镜显式带归一化因子 ½[A₁, A₂]，共线边界 ψ = 0° 时退化为零）、正向乘积 exp(sω₁)exp(uω_ctx) 实心换序片配反向乘积 exp(uω_ctx)exp(sω₁) 虚线远边（作为规范场强 F 的 `MODEL` 几何示意；ψ = 0° 共线或零角时退化为一维圆弧而不画二维面片，连续曲面片进入对跖点 5° 邻域即距 x_t 超过 175° 时自动改绘品红换序轮廓）、度量李三元组 Ω₂ = π³/36 折射弧（选定常值联络规范 A_t = ω₁, A_ctx = ω_ctx 普通换位子下 Ω₂ = ¼[F_{t,ctx}, A_t]）以及非退化高阶玩具 L = q̈²/2（四阶运动方程 q⁽⁴⁾ = 0）在截面 Q₂ = 1, P₂ = 0 上无下界的奥氏线性动量曲线 H = P₁Q₂，琥珀只给当下焦点、一阶关系角 θ₁ 拖动手柄与激活控件（不用红色）。第五卡顶栏显式标注“二阶选型（MODEL）”与规范透镜“单纯上边缘 · δF = 0.0000”。绿色依据严格限于页面引用的十三条冻结声明（`complete_consequences`、`crossProduct_is_skewAdjoint_of_balanced_sum`、`lagrange_gram_identity`、`tri_eq_mul_inv_mul`、`exists_eq_cos_arccos_add_sin_smul`、`policy_change_implies_memory_change`、`selected_tree_transport`、`reflectionSeq_eq_pow`、`kappa_reflectionSeq_add`、`anchored_phase_classification`［三顶点两两互异时闭环 c = 1］、`shortest_gate_triangle_holonomy`［单位本征旋量归一化投影返回相位］、`tetra_defects_incidence_repair_and_exactness`［四面体加法二上链上边缘 δF = 0］、`exists_unitQuaternion_equiv`）；杨—米尔斯非阿贝尔规范协变曲率、连续微分比安基恒等式 D_A F ≡ 0、嘉当—雅各布森李三元系、双范畴 0/1/2-胞腔与奥斯特罗格拉茨基非退化定理标 `ARGUED`；60° 正交模方 0.7500、π³/36 ≈ 0.8613 rad 李三元曲率折射（默认初值 κ = 0.8257、0.6629）、16 组抽样 SO(4) 变换零偏差与雅可比轮换和 Σ_{cyc}[[A,B],C] 及 256 个有序四元组四面体上边缘 δF 零残差实算标 `NUM`；弦长方位图造型、换序曲面与规范/2-范畴类比透镜、“二元配关系成三元场（2+1=3）”与条件于给定语境态 x_ctx 的单步二阶更新选型及条带第二图玩具拉格朗日量标 `MODEL`。
 
 `constant-free-rational-axiom-omega-sandbox`（`OMEGA//RATIONAL`）承接第三十九章 §39.6 `#sec-ch39-constant-free-rational-axiom-omega`：舞台取单位四元数在 span{1, i, j} 上的球面截面（银白标起点 x₀ = 1，紫色给真球体、凯莱投影射线、五角星对角弦 κ₂ = (2 − φ)/4、条带第一图的欧拉模方超出曲线 (1 + θ²/N²)ᴺ − 1 与条带第二图的三步曲线 κ₃ = κ₁(4κ₁ − 3)²），青色给内接平直测地多面体与正 N 边形弦、一步驻球的凯莱点 Q(σ)（‖Q(σ)‖² = 1，截面 k = 0 上画出两有理分量绝对值 ≤ 2、公分母 d ≤ 3 的 225 个有理切片点 σ = (a/d, b/d, 0)，而全空间有理图 Q(ℚ³) 并上对跖点 −1 构成群 S³(ℚ) = Q(ℚ³) ∪ {−1}）、有理纬圈 κ ∈ {1/2, 1/3, 1/4}、流群堆点 xₙ、正四面体六条有理等长圆弧 κ = 1/3、条带第一图的凯莱零误差基线 |‖Q‖² − 1| = 0 与条带第二图的倍增抛物线 κ₂ = (2κ₁ − 1)² 及有理点，品红给正 N 边形弦外弓形矢高 1 − cos(π/N)、和恒为 720.00° = 4π 的顶点角亏锥、螺旋出球外的 N 步平直切线折线 (1 + iθ/N)^k 以及五步堆轨道/缺口与五边形共轭无理根点对，琥珀严格只给当前选择、可拖舞台手柄与探针（无开放问题，不用红色；无常数 κ 透镜对有理地标/输入标精确有理读数，对非精确四位小数的量——含无理值与多于四位小数的有理值——统一用 ≈ 显示十进制近似，且仅在精确量确属无理数时标明 ∉ ℚ）。每个绿色 `.lean` 框严格仅陈述正文定理盒 `thm-ch39-constant-free-rational-axiom-omega-anchors` 以 `lean=` 引用的十五条冻结声明本身的数学假设与结论（`exists_unitQuaternion_equiv`、`kappa_eq_one_sub_dist_sq`、`subgroupModel_readingComplete_iff`、`exists_subgroupModel_not_readingComplete`、`normSq_and_chebyshev`、`three_anchor_gram_det_formula`、`comparison_classification_of_continuous_rays`［完整列出八条结论］、`rational_inverse_endpoint`、`accumulated_sagitta_bounds`、`exp_remainder_le`、`cayley_ratio_norm_one_iff_critical_line`、`golden_fixed_point_unique`、`fib_cassini_from_golden_norm`、`golden_hurwitz_bound`、`face_cycle_exact`；§39.6.2 行内顺带链接的 `exists_mul_mul_eq_of_kappa_eq` 不标绿色 `lean=` 徽章，页面实例计算与手工推导全部移入 `ARGUED` / `NUM` 框与理论抽屉）；阿基米德割圆夹逼、笛卡尔角亏守恒、施瓦茨灯笼反例与形状正则剖分收敛、厄米特—林德曼—魏尔斯特拉斯超越性、尼文有理余弦定理、有理点稠密性与 ℝ³ 不共线 N ≥ 3 点麦克斯韦过约束计数 ΔE(N) = (N − 3)(N − 4)/2 标 `ARGUED`；弓形 ≈ 0.1340、ν = 1…4 角亏总和 720.00° 与 ν²·最大角亏、|z₆|² > 1（值 ≈ 1.4885）与 (1 + 1/6)⁶ < e（值 ≈ 2.5216）、225 个有理点整数零余数与探针 Q(−1, 1) = (−1/3, −2/3, 2/3)、切比雪夫递推浮点偏差 < 10⁻¹⁴、道蒂有理级数部分和 ≈ 0.73908513（与迭代 cos 所得 θ* 相差 < 10⁻¹⁵）及正五边形 {(φ + 1)/4, (2 − φ)/4} 与正二十面体非对跖对 {(φ + 2)/5, (3 − φ)/5} 实算标 `NUM`；将 π, e, φ 读作平直近似闭合残差、沿 i 半圆切向原像 πi 的 exp₁(πi) = e^{iπ} = −1、span{1, i, j} 截面造型、双透镜命名与 λ 淡出画法标 `MODEL`。
+
+`causal-jet-rational-triad-sandbox`（`OMEGA//TRIAD`）承接第三十九章 §39.7 `#sec-ch39-past-present-future-rational-jet-triad`：舞台取单位四元数 S³(1) = T₃ 的大二球切片 {w + xj + yk}（紫色给球体、满拍闭合三体胞 Λ³、球面四面体面与条带第二图 4s(1 − s) 及 ξ(s) 对称曲线），青色给 0·1/2·1 球面圆弧链、冻结记录同心圆、κ = 1/2 自对偶平面、α = 1/2 斯特拉托诺维奇—凯莱中点驻球步（‖x₁‖² = 1.0000，弦垂直于中点）、条带第一图零漂移基线与条带第二图 1 − s = κ 及有下界二阶能量曲线 E₂ = P₁²/2 ≥ 0，品红给 α = 0 伊藤左端点冲出球外箭（‖x₁‖² = 2.0000 > 1）与 α = 1 右端点沉入球内虚箭（‖x₁‖² = 0.5000 < 1）、相差 θ_ctx 两航向之间的曲率月牙 F = [D₁, D₂] 与约 65.55° 的李三元折射弧、四面体六条大圆弧棱以及条带第一图范数漂移曲线 ‖x₁‖² − 1 = (1 − 2α)‖Δx‖² 与条带第二图四阶运动方程玩具截面 Q₂ = 1, P₂ = 0 上无下界的 H = P₁Q₂，琥珀严格只给当前探针 x(s) 或取样点 x₁(α) 手柄与激活控件（无开放问题，不用红色）。
+
+绿色 `.lean` 框逐条陈述以下十六项冻结定理的前提和结论，顺序与正文定理盒 `thm-ch39-past-present-future-rational-jet-triad-anchors` 的 `lean=` 属性一致。
+
+1. `D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv`
+2. `D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq`
+3. `D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent`
+4. `D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently`
+5. `D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum`
+6. `D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift`
+7. `D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_phases`
+8. `D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line`
+9. `D5/S3/Zeros/CompletedZeta.xi_reading_eq_completed_zeta`
+10. `D5/S3/Zeros/CompletedZeta.xi_reading_reflection`
+11. `D5/S3/Zeros/Endpoints/XiEndpointValues.xi_reading_endpoint_values`
+12. `D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor`
+13. `D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight`
+14. `D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev`
+15. `D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport`
+16. `D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness`
+
+狄拉克一阶算符与凯勒—狄拉克及弯曲 S³(1) 李希内罗维茨公式（R = 6 给出 3/2）、伊藤对比斯特拉托诺维奇流形中点微积分、霍奇星对偶 ★ : Λ³ → Λ⁰、微分比安基恒等式、非退化奥斯特罗格拉茨基定理、球面月牙高斯—博内和乐及经典黎曼假设与狄利克雷广义黎曼假设的外部形式化说明标 `ARGUED`。
+
+σ = 1 时 α = 0, 1/2, 1 的 ‖x₁‖² = 2.0000, 1.0000, 0.5000、ξ(0) = ξ(1) = 0.5000 与 ξ(1/2) 四舍五入为 0.4971、τ = 1/2 时月牙面积与折射角分别四舍五入为 0.9273 和 65.55° 及四面体 256 个有序四元组 δF = 0.0000 实算标 `NUM`。
+
+3×3 `过去·现在·未来 ↔ J⁰·J¹·J² ↔ {0, 1/2, 1}` 母矩阵、道蒂 θ* 弧度影子对比、五领域对位表、玩具拉格朗日量 L = q̈²/2 与 `1 ↦ 0` 四拍心跳标 `MODEL`。
 
 `prelude-dimensions` 是序曲的几何入门页，默认卡 `shadow` 同步显示俯视木桩与侧视影子，`compare` 比较 90° 与 270° 的同位反向。圆盘侧视是固定线段，木桩投影是移动点；该经典正交投影模型不推出量子测量规则。其余卡分别演示射线投影、纬圈、二维到三维的等半径赤道嵌入、三对对跖方向的等权混合与从 1 弧度出发的余弦迭代。几何计算标 `NUM`，理想化观看与混合过程标 `MODEL`，余弦收敛及其边界沿用序曲的文献分层，不使用绿色 Lean 标记。
 
@@ -1057,7 +1085,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十九章 | §39.6.3.2 末（第 2 条一步有理真球驻留与完备化边界段之后） | `constant-free-rational-axiom-omega-sandbox` · `chebyshev-rational-arc-doubling` |
 | 第三十九章 | §39.6.3.3 末（$N \le 4$ 有理封顶至 $N \ge 5$ 残差涌现临界相变表之后） | `constant-free-rational-axiom-omega-sandbox` · `tetrahedral-rational-cap-vs-phi` |
 | 第三十九章 | §39.6.4 末（定量核验例题 `ex-ch39-constant-free-rational-quantitative-audit` 之后） | `constant-free-rational-axiom-omega-sandbox` · `pure-axiom-omega-constant-free-sphere` |
-| 第三十九章 | §39.6 末（全书三十九章正文收官结语段之后） | `constant-free-rational-axiom-omega-sandbox` 完整实验室 |
+| 第三十九章 | §39.6 末（转入 §39.7 过渡段之后） | `constant-free-rational-axiom-omega-sandbox` 完整实验室 |
+| 第三十九章 | §39.7.1.1 末（零阶过去停机锚段之后、§39.7.1.2 之前） | `causal-jet-rational-triad-sandbox` · `past-zero-jet-halting-anchor` |
+| 第三十九章 | §39.7.1.2 末（五座 `1/2` 桥梁合流段之后、§39.7.1.3 之前） | `causal-jet-rational-triad-sandbox` · `present-half-midpoint-self-duality` |
+| 第三十九章 | §39.7.1.3 末（`1/2 + 1/2 = 1` 二阶曲率闭合段之后、§39.7.2 之前） | `causal-jet-rational-triad-sandbox` · `future-one-curvature-closure` |
+| 第三十九章 | §39.7.2 第 1 条比安基归零与奥氏封顶段之后、第 2 条之前 | `causal-jet-rational-triad-sandbox` · `third-order-bianchi-ostrogradsky-cap` |
+| 第三十九章 | §39.7.4 末（定量核验例题 `ex-ch39-rational-jet-triad-quantitative-audit` 之后） | `causal-jet-rational-triad-sandbox` · `one-to-zero-cosmic-heartbeat-loop` |
+| 第三十九章 | §39.7 末（全书三十九章正文收官结语段之后） | `causal-jet-rational-triad-sandbox` 完整实验室 |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget` |
 | 终章 | 空间吸引子 · 二 “回到洛伦兹”一段中“吸引子的体积为零”一句之后 | `spatial-attractor-deja-vu` · `shrink` |
