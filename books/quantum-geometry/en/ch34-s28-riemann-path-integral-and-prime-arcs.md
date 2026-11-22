@@ -983,8 +983,46 @@ Put $q=m+1$. At each logarithmic coordinate $u\ge q^{3/2}$, the arithmetic tail 
 The actual root coefficients cost $O((1+\ln q)^2)$ at each omitted degree. Their exponentially damped weights also sum to at most $1+q^2/u$. The trivial roots have an additional factor $e^{-u/q}$ after normalization. Consequently the total log-density cost is $O((1+\ln q)^2(1+q^2/u))$. Over the given window, $1+q^2/u\le2q^{1-d}$. Absorb the logarithms in $\varepsilon$ and integrate over $[\ln a,\ln B]$. Both sides vanish at $B=a$.
 :::
 
-At $\ln a\ge(m+1)^2$, the factor in the theorem is $m^\varepsilon$ for every $\varepsilon>0$. The leading coefficient and the possibility of a uniform negative order exponent remain open.
+At $\ln a\ge(m+1)^2$, the factor in the theorem is $m^\varepsilon$ for every $\varepsilon>0$. The odd-cutoff leading term and the lower bound on a uniform exponent are given below.
 
+
+::: {.theorem #thm-ch31-prime-window-odd-cutoff title="The first omitted term at an odd cutoff" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusOddCutoff.signed_window_odd_cutoff_expansion"}
+Assume RH. There are real constants $a_0\ge2$ and $K>0$ such that the following holds for every integer $m\ge2$ with $q=m+1$ odd and all $B\ge a\ge a_0$. Set $s_m=1/2-1/q$, $\delta_m=1/q-1/(q+1)$, and $W_m=Kq(1+\ln q)^2$.
+
+$$
+\left|E_m(a,B)+\frac{\mu(q)q}{(q-1)s_m}D_{s_m}(a,B)\right|
+\le W_m D_{s_m+\delta_m}(a,B)\le W_m\frac{s_m+\delta_m}{s_m}a^{-\delta_m}D_{s_m}(a,B).
+$$
+
+Here $D_s(a,B)=a^{-s}-B^{-s}$, and $E_m$ uses the two signed corrections in [@thm-ch31-prime-window-mobius]. The spectral sums count zeros with their analytic multiplicities and retain root degrees satisfying $2n<m+1$.
+:::
+
+::: proof
+When the truncation order increases from $m$ to $q$, the root selection can change only at $2n=q$. Since $q$ is odd, the root terms agree at both orders. The only new arithmetic term has degree $q$ and coefficient $-\mu(q)q/((q-1)s_m)$. Removing that term leaves exactly $E_q(a,B)$.
+
+Apply the all-order estimate to $E_q$. Its endpoint power difference has rate $s_m+\delta_m$. Over the logarithmic interval $[\ln a,\ln B]$ we have $e^{-\delta_m u}\le a^{-\delta_m}$. Using the integral representations of the two power differences gives
+
+$$
+D_{s_m+\delta_m}(a,B)\le
+\frac{s_m+\delta_m}{s_m}a^{-\delta_m}D_{s_m}(a,B).
+$$
+
+The comparison includes $B=a$, when both power differences vanish.
+:::
+
+::: {.theorem #thm-ch31-prime-window-no-negative-order title="A lower bound for the order exponent in arbitrarily late windows" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusOddCutoff.signed_window_no_negative_order_exponent"}
+Assume RH. For every $\gamma>0$, every real $K$, every start threshold $A:\mathbb N\to\mathbb R$, and every natural number $N$, there is an integer $M\ge\max(2,N)$. For each $m\ge M$ with $m+1$ prime there is a real $S\ge\max(2,A(m))$ such that for all $B>a\ge S$,
+
+$$
+E_m(a,B)>K m^{-\gamma}D_{s_m}(a,B).
+$$
+:::
+
+::: proof
+Choose $M\ge\max(2,N)$ so that $K m^{-\gamma}<1$ for all $m\ge M$. At a prime $q=m+1$, we have $\mu(q)=-1$ and $q/((q-1)s_m)=2q^2/((q-1)(q-2))>2$. Fix that order and raise the start threshold until the normalized expansion error is below $1$. The power difference is positive for every $B>a$, so the signed residual exceeds that power difference. Since primes are unbounded, the lower bound rules out every uniform negative order exponent even at a prescribed positive logarithmic width.
+:::
+
+When odd $q$ has a square divisor greater than one, $\mu(q)=0$ and the estimate gives the faster bound $O_m(a^{-\delta_m}D_{s_m})$. For even $q$, increasing the order also admits the spectral term of degree $n=q/2$, which has the same decay rate as the degree-$q$ arithmetic term. The leading behavior for even cutoffs requires controlling both contributions.
 
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
