@@ -586,7 +586,7 @@ For $\mu(r)\ne0$, the normalized limsup tends to $|\mu(r)|/(4\pi s)$ exactly whe
 With $h=L/2$, the left correction differs from the midpoint correction by the signed forward root increment of length $h$. Linearizing the root modes up to $\gamma\le r/h$ and bounding their remaining tail approximates this increment by $(2h/s)\sum_{0<\gamma\le r/h}w_\gamma\sin(\gamma u/r)$ with a uniform error of order $h\log(1/h)$. Oddness makes the real supremum of the sine polynomial equal to its absolute supremum. One common phase return carries a value arbitrarily close to that supremum to arbitrarily late starts. The midpoint error has lower order, and $W(T)/\log^2 T\to1/(4\pi)$. Substitution of $T=2r/L$ gives the formula and the equivalence. When $\mu(r)=0$, the late limsup is zero for small widths.
 :::
 
-The remaining question under RH alone is whether the actual zeros satisfy $D(T)\to0$. This condition measures the total weight of the phases that can be brought close to a quarter turn by one common time, with progressively larger cutoffs.
+The remaining question under RH alone is whether the actual zeros satisfy $D(T)\to0$. At each cutoff, $D(T)$ is the smallest weighted mean of $1-\sin(\gamma v)$ attainable to arbitrary accuracy with one common time $v$.
 
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
