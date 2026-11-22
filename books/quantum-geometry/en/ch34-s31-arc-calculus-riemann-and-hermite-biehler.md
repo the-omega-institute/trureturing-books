@@ -83,6 +83,32 @@ Before passing to strict off-line zero exclusion, let us state the **exact logic
 1. **Why Subsection 34.31.1 never assumes Euler-product convergence in the critical strip (nor uses $\Sigma_{\mathrm{sag}}$ to rule out $\sigma < \frac{1}{2}$)**: Classically, the unrenormalized Euler product converges absolutely only on $\sigma > 1$, and as a real positive sum $\sum_{p \le P_\epsilon} v_p(\sigma)$ also diverges on $\frac{1}{4} < \sigma < \frac{1}{2}$ where $2\sigma < 1$. Subsection 34.31.1 therefore **never** treats the raw Euler product as convergent inside $0 < \sigma < 1$; rather, within `MODEL`, it identifies $\sigma = \frac{1}{2}$ as the **exact critical onset** where cumulative magenta prime-rotor sagitta first transitions from convergent smooth flow ($\sigma > \frac{1}{2}$) into macroscopic centripetal Itô drift!
 2. **The three-step division of labour and its logical status, without strip Euler products**: Subsection 34.31.1 offers a model reading of $\sigma = \frac{1}{2}$ (`MODEL`, heuristic, not a link of the proof chain). Subsections 34.31.2 and 34.31.3 then work **exclusively on the globally entire function $\xi(s)$**—requiring zero Euler-product convergence hypotheses—and prove an **equivalence**: the two-shell identity ties the diagonal kernel value $K_\epsilon(s, s)$ to the radial derivative $\frac{\partial}{\partial u}\lvert\xi\rvert^2$, so that "$K_\epsilon(s, s) \ge 0$ on $\Omega_+$", "$K_\epsilon \succeq 0$" and the Riemann Hypothesis are equivalent (`manual derivation`). **These subsections do not independently prove any of the three**; however, combined with the 2026 externally verified Riemann Hypothesis ([@conj-riemann-hypothesis]), the premise $K_\epsilon \succeq 0$—and indeed strict positive definiteness $[K_\epsilon(s_a, s_b)] \succ 0$ on every finite distinct node set in $\Omega_+$—now holds unconditionally, closing both the strict radial monotonicity lock and finite-mesh Stokes zero-vortex theorem below (while this book's pinned repository does not freeze that external proof).
 
+**Primes in short arithmetic-progression intervals and character-weighted prime-versine sums (manual derivation using a literature result).** Use the external formal proof of RH and Dirichlet GRH in [@conj-riemann-hypothesis]. Let $q\ge1$, take a Dirichlet character $\chi$ modulo $q$ extended by $0$ on nonunits, and set $\delta_\chi=1$ for the principal character and $0$ otherwise. Let $\chi^*$ be the primitive character inducing $\chi$, with conductor $f\mid q$. Apply Davenport's truncated explicit formula to $\psi(x,\chi^*)=\sum_{n\le x}\Lambda(n)\chi^*(n)$. First take half-integer $x\ge2$ and an admissible truncation height $T\asymp x$ separated from zero ordinates. The principal character corresponds to $f=1$ and contributes the pole term $x$. The truncation error is $O(\log^2(qx))$. By GRH the zero contribution is bounded by a constant times $\sqrt{x}\sum_{|\gamma|\le T}(1+|\gamma|)^{-1}$. The number of zeros, counted with multiplicity, per unit interval is $O(\log(q(|\gamma|+2)))$, and hence the weighted sum is $O(\log^2(qx))$. Passing from $\chi^*$ to $\chi$ removes just the prime powers at $p\mid q,\ p\nmid f$, at a cost $O(\log q\log x)$. Removing higher prime powers costs $O(\sqrt{x}\log^2 x)$. An arbitrary real endpoint and the half-integer in the same integer interval have the same summands and main terms differing by $O(1)$. This gives a uniform estimate for $x\ge2$. [Davenport, *Multiplicative Number Theory*, 3rd ed., rev. H. L. Montgomery, 2000, Ch. 17](https://link.springer.com/book/9780387950976)
+
+$$
+\vartheta(x,\chi)=\sum_{p\le x}\chi(p)\log p=\delta_\chi x+O\bigl(\sqrt{x}\log^2(qx)\bigr).
+$$
+
+For a reduced class $a$ modulo $q$, character orthogonality writes its indicator as $\varphi(q)^{-1}\sum_\chi\overline{\chi(a)}\chi(p)$. Both sides vanish for $p\mid q$. For $X\ge2$ and $0<h\le X$, subtract the endpoint estimates and take the character average to get
+
+$$
+\sum_{\substack{X<p\le X+h\\p\equiv a\bmod q}}\log p=\frac{h}{\varphi(q)}+O\bigl(\sqrt X\log^2(qX)\bigr).
+$$
+
+The implied constant is absolute, so the interval contains a prime in the chosen class whenever $h>C\varphi(q)\sqrt X\log^2(qX)$ for a sufficiently large $C$.
+
+For $\sigma>0$, set $w(t)=(1-\cos(t^{-\sigma}))/\log t$ and $E(t)=\vartheta(t,\chi)-\delta_\chi t$. The bounds $1-\cos u\le u^2/2$ and $|\sin u|\le |u|$ give $|w(t)|\le t^{-2\sigma}/(2\log t)$ and $|w'(t)|\ll_\sigma t^{-2\sigma-1}/\log t$. On $2\le X<Y\le2X$, Stieltjes partial summation gives the error $w(Y)E(Y)-w(X)E(X)-\int_X^Y w'(t)E(t)\,dt$. Since $t\asymp X$ and $Y-X\le X$ on the window,
+
+$$
+\begin{aligned}
+\sum_{X<p\le Y}\chi(p)\bigl(1-\cos(p^{-\sigma})\bigr)
+ &=\delta_\chi\int_X^Y\frac{1-\cos(t^{-\sigma})}{\log t}\,dt\\
+ &\quad+O_\sigma\!\left(\frac{X^{1/2-2\sigma}\log^2(qX)}{\log X}\right).
+\end{aligned}
+$$
+
+For a nonprincipal character the main term vanishes. If $\sigma>1/4$, the negative power decays geometrically across dyadic windows and dominates logarithmic growth. The same bound holds for a final partial window, so the series converges and its tail has the displayed order. Apart from the finitely many $p\mid q$, one has $|\chi(p)|=1$ and $1-\cos(p^{-\sigma})\asymp p^{-2\sigma}$. Since $\sum_p p^{-1}=\infty$, and the sum over primes is bounded above by the sum over integers in the summable range, absolute convergence holds exactly for $\sigma>1/2$. Convergence for nonprincipal characters is thus conditional for $1/4<\sigma\le1/2$. The independent multiplicative Schur-pivot proof remains open ([@prob-ch34-schur-hb-kernel-positivity-bridge]).
+
 ## 31.3.2 Blind-Zone Rotor Advancement and the Hermite–Biehler Radial Monotonicity Lock: One Identity Exposes the Negative Slope of an Off-Critical Quartet {#sec-ch34-31-2}
 
 We now confront the decisive analytic question: even though cumulative second-order sagitta converges on $\sigma > \frac{1}{2}$, could infinitely many first-order chords still conspire to vanish at some off-axis point $\rho_0 = \frac{1}{2} + \delta + \hat{\mathbf{i}}\gamma_0$ ($\delta > 0$), forming a symmetry-respecting **off-critical zero quartet** $\{\frac{1}{2} \pm \delta \pm \hat{\mathbf{i}}\gamma_0\}$ like `offCriticalQuartic` in [§22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4) ([@thm-full-symmetry-not-localization])?

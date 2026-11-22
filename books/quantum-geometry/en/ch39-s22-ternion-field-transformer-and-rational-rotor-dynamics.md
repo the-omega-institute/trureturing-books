@@ -169,7 +169,26 @@ Item 1 expands $\operatorname{Tr}(\lvert\phi\rangle\langle\phi\rvert\psi\rangle\
 2. **Butterfly transforms, adaptive halting, Clifford networks, and Riemannian Adam**: Butterfly / Kaleidoscope / Monarch factorizations (T. Dao et al., *ICML* 2019, *ICLR* 2020, *ICML* 2022); Adaptive Computation Time and early exit (A. Graves, 2016; M. Elbayad et al., *ICLR* 2020; T. Schuster et al., `CALM`, *NeurIPS* 2022); Quaternion and Clifford equivariant networks (T. Parcollet et al., *ICLR* 2019; D. Ruhe, J. Brandstetter & P. Forré, *NeurIPS* 2023; J. Brehmer et al., `GATr`, *NeurIPS* 2023); and product-manifold Riemannian Adam (G. Bécigneul & O.-E. Ganea, *ICLR* 2019, [arXiv:1810.00760](https://arxiv.org/abs/1810.00760)).
 :::
 
-To maintain strict scientific candor, we record the empirical training, seam-conditioning, and hardware benchmarks of TFT as an explicit open problem:
+**How lower sagitta improves the intermediate answer in two-step relation tracing with fixed endpoints (`manual derivation`).** In an integer fact base, define $E_b(x,y)\iff y-x=b$ for $b=\pm1$. Given a starting item $x$ and the pair $(E_b,E_b)$, two lookups give the correct answers $x+b$ and $x+2b$. For a displacement state $m\in\mathbb Z$, read the answer as $x+m$ and the rotation as conjugation by $q(m)$, with $I$ a fixed unit imaginary quaternion,
+
+$$
+\begin{aligned}
+q(m)&=\cos(mt/2)+I\sin(mt/2),\\
+t&=\arccos(3/5)\in(0,\pi/3).
+\end{aligned}
+$$
+
+The readouts are fixed before the evaluation labels are supplied. The first step proposes either displacement $\pm1$, and the second enforces total displacement $2b$ from the input relation pair. The candidates $(0,b,2b)$ and $(0,-b,2b)$ have identical signed rotor endpoints and each takes two steps. Their principal rotation angles are $(t,t)$ and $(t,3t)$, since $3t<\pi$. Set the context potentials to zero and charge each step $1-\cos\alpha$, where $\alpha$ is its principal angle. The triple-angle formula $\cos(3t)=4(3/5)^3-3(3/5)=-117/125$ gives
+
+$$
+\begin{aligned}
+S_{\mathrm{low}}&=2(1-3/5)=4/5,\\
+S_{\mathrm{high}}&=(1-3/5)+(1-\cos(3t))=292/125,\\
+S_{\mathrm{high}}-S_{\mathrm{low}}&=192/125.
+\end{aligned}
+$$
+
+At each step of the Choi trial, prepare the normalized Choi state of the preceding candidate rotor and measure the rank-one projector onto the next candidate state. Denote projector acceptance at steps $1$ and $2$ by $A_1,A_2$. Run step $1$ first and proceed to step $2$ only on acceptance, and record a joint success only when both projectors accept. For rotors $Q,Q'$, the normalized maximally entangled state gives Choi overlap $\operatorname{tr}(Q^*Q')/2$. At relative angle $\alpha$, its squared modulus is $\cos^2(\alpha/2)=(1+\cos\alpha)/2$. The joint success probability $P(A_1\cap A_2)=P(A_1)P(A_2\mid A_1)$ is $16/25$ for the lower-sagitta path and $16/625$ for the higher-sagitta path. Under the deterministic two-lookup criterion, both paths give the correct final answer, and only the lower-sagitta path gives the intermediate answer $x+b$. Their intermediate factual accuracies are $1$ and $0$, respectively, on each task and hence under any distribution over tasks. Large-scale natural-language perplexity, seam training dynamics, and hardware throughput still require empirical tests ([@prob-ch39-tft-scale-and-seams]).
 
 ::: {.problem #prob-ch39-tft-scale-and-seams title="Empirical Scaling Perplexity, Equatorial Seam Training Dynamics, and Tensor-Core Hardware Benchmarks for TFT (Open Problem)"}
 Three empirical and systems questions remain open (`OPEN`):

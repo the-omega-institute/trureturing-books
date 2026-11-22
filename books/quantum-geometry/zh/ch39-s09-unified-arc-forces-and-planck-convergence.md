@@ -205,7 +205,7 @@ $$
 4. 若回路 $C$ 是 $R \times T$ 矩形网格的边界，从原点出发逆时针绕行，路径上的链变量按经过次序从左到右相乘。记 $h_{i,j}$、$w_{i,j}$ 为从 $(i, j)$ 到 $(i + 1, j)$、到 $(i, j + 1)$ 的链变量，$P_{i,j} = h_{i,j}w_{i+1,j}h_{i,j+1}^{-1}w_{i,j}^{-1}$ 为以左下角为基点、逆时针的小方格和乐，$b_i = h_{0,0}\cdots h_{i-1,0}$，$V_{i,J} = w_{i,0}\cdots w_{i,J-1}$，$\ell_{i,j} = (b_iV_{i,j})P_{i,j}(b_iV_{i,j})^{-1}$。对 $J$ 归纳得 $\ell_{i,0}\ell_{i,1}\cdots\ell_{i,J-1} = b_i\,h_{i,0}V_{i+1,J}h_{i,J}^{-1}V_{i,J}^{-1}\,b_i^{-1}$（每一步只有 $V_{i,J}^{-1}V_{i,J}$ 与 $h_{i,J}^{-1}h_{i,J}$ 相消）；记 $C_i$ 为 $J = T$ 时的这一乘积，由 $b_ih_{i,0} = b_{i+1}$，相邻两列之积 $C_iC_{i-1}$ 中间的 $V_{i,T}^{-1}b_i^{-1}b_iV_{i,T}$ 相消，逐列叠缩得 $W_C = C_{R-1}C_{R-2}\cdots C_0$：列从右到左，列内从下到上。这一分解在任意群中成立；次序是陈述的一部分，按列从左到右相乘一般得到别的元素。一般圆盘上 $W_C$ 同样是 $M$ 个面和乐经锚线共轭后按剥壳次序的乘积（[§30.3.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-30-3) 的非阿贝尔面斯托克斯恒等式，`文献结果`）。在两种情形下（矩形网格时 $M = RT$），$\lVert X\rVert_\varphi := \sqrt{\varphi(X^\dagger X)}$ 在酉元左右乘下不变，且 $ab - \mathbf{1} = (a - \mathbf{1})b + (b - \mathbf{1})$，故 $\lVert W_C - \mathbf{1}\rVert_\varphi \le \sum_p\lVert U_p - \mathbf{1}\rVert_\varphi$，即 $\sqrt{\varphi(v(W_C))} \le \sum_p\sqrt{\varphi(v(U_p))}$；再由柯西—施瓦茨不等式，$1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}W_C \le M\sum_p\bigl(1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U_p\bigr)$。每格通量相同的 $\mathrm{U}(1)$ 构型在小通量时使这两个不等式两端之比都趋于 $1$，所以因子 $M$ 不能去掉。
 5. 对光滑经典场，链变量取沿棱的路径有序指数或棱中点处的 $e^{iaA_\mu}$，取小方格中心展开，$1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U_p = \frac{a^4}{2N}\operatorname{Tr}F_{\mu\nu}^2 + O(a^6)$，$F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu + i[A_\mu, A_\nu]$（$\mu\nu$ 为该小方格所在平面，不求和）。
 
-对三角形面，第三点冗余（[@def-appe-third-point-redundancy]）成立当且仅当该面和乐为 $\mathbf{1}$，即矢高读数为零；把同一条件搬到小方格上（面和乐为 $\mathbf{1}$），$S_W/\beta$ 就是这一条件的偏差的矢高总和。这只是运动学上的改写：统计权重、测度、耦合常数的取值与量子连续极限都不由它给出（后者见 [@prob-ch34-rough-nonabelian-surface-calculus]）。
+对三角形面，第三点冗余（[@def-appe-third-point-redundancy]）成立当且仅当该面和乐为 $\mathbf{1}$，即矢高读数为零；把同一条件搬到小方格上（面和乐为 $\mathbf{1}$），$S_W/\beta$ 就是这一条件的偏差的矢高总和。这只是运动学上的改写：统计权重、测度、耦合常数的取值与量子连续极限都不由它给出（关于连续统杨—米尔斯理论见 [@prob-ch39-four-dimensional-area-law-and-mass-gap]，关于重整化威尔逊面见 [@prob-ch34-rough-nonabelian-surface-calculus]）。
 :::
 
 引力一侧读取和乐的方式不同：
@@ -695,7 +695,13 @@ $P$ 为空间片上的规范平均 $(P\psi)(X) = \int\psi(X^g)\,\mathrm{d}g$，$
 **文献结果。** J. Kogut 与 L. Susskind（*Phys. Rev. D* **11**, 395–408, 1975, DOI [10.1103/PhysRevD.11.395](https://doi.org/10.1103/PhysRevD.11.395)）；格点规范理论的转移矩阵另见 M. Creutz（*Phys. Rev. D* **15**, 1128–1136, 1977, DOI [10.1103/PhysRevD.15.1128](https://doi.org/10.1103/PhysRevD.15.1128)）。
 :::
 
-四维的情形仍未解决：
+四维全耦合（$\beta>0$）的情形仍未解决。
+
+**文献结果。** Cao、Park 与 Sheffield 用 Weingarten 权重给出有限体积、有限 $N$ 的 $\mathrm{U}(N)$ 格点理论的精确带符号曲面展开。由这一恒等式推出大圈的面积衰减，还需定量控制所得的带符号曲面和。[Random surfaces and lattice Yang–Mills，*Commun. Amer. Math. Soc.* 5 (2025), 774–896，定理 3.10](https://doi.org/10.1090/cams/59) Borga、Cao 与 Shogren-Knaak 在强耦合 $\mathrm{U}(N)$ 格点理论的大 $N$ 极限中利用平面曲面的剥离过程建立递推。[Surface sums for lattice Yang-Mills in the large-$N$ limit，arXiv:2411.11676v2，定理 3.4 与推论 5.5](https://arxiv.org/abs/2411.11676v2)
+
+Cao、Nissim 与 Sheffield 对有限区域内的 $\mathrm{U}(N)$ 矩形圈证明上界 $C_N^{|\ell|} C_{1,d} e^{-C_{2,d}\operatorname{area}(\ell)}$，其中 $d\ge2$、$N\ge1$、$0<\beta<\beta_0(d)$，阈值 $\beta_0(d)$ 与 $N$ 无关，$|\ell|$ 为周长。[Expanded regimes of area law for lattice Yang-Mills theories，arXiv:2505.16585v3，定理 1.2](https://arxiv.org/abs/2505.16585v3) 三位作者还用动力学方法证明有限 $N$、强耦合的 $\mathrm{SU}(N)$ 矩形面积界，适用于周期盒内各边不超过半个周期的矩形。[Dynamical approach to area law for lattice Yang-Mills，arXiv:2509.04688v2，定理 1.6](https://arxiv.org/abs/2509.04688v2)
+
+[@prob-ch39-four-dimensional-area-law-and-mass-gap] 所问的是对所有 $\beta>0$、在每个无限体积极限中成立的四维有限 $N$、$\mathrm{SU}(N)$ 矩形面积律，以及非平凡连续统理论的构造与正质量间隙。
 
 ::: {.problem #prob-ch39-four-dimensional-area-law-and-mass-gap title="四维非阿贝尔格点规范理论在一切耦合下的面积律与连续统质量间隙（开放问题）"}
 **`OPEN`。** 设 $G = \mathrm{SU}(N)$，$N \ge 2$，取四维超立方格点上的威尔逊作用量。
