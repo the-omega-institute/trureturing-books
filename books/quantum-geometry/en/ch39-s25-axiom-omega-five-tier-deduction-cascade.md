@@ -100,6 +100,24 @@ Unitaries commuting with the coordinate permutations act independently on the mu
 
 **Recording where amplitudes cancel fixes the residual phase.** Let $d_p$ be the outdegree of a source vertex $p$. Combine amplitudes at each source with $B|p,q\rangle=|p\rangle/\sqrt{d_p}$. Since $BB^*=I_9$, $K=I-B^*B$ projects onto the amplitudes that cancel. Each of the six vertices of outdegree one contributes zero to this space. Each remaining vertex contributes one ray spanned by $(|p,q\rangle-|p,r\rangle)/\sqrt2$. Choose a readout (`MODEL`) that reports the source on each of these three rays and a single outcome on $I-K$. The nine-dimensional source space carries a regular representation and a three-point permutation representation. Subtracting their multiplicities from those of $H$ leaves $\ker B\simeq\mathrm{sgn}\oplus V$. The cancellation space thus selects a line in each of $M_-$ and $M_0$. An internal transformation preserving the three ray outcomes acts by a phase on each. The coordinate permutations act transitively on the rays and commute with the transformation, so all three phases agree. A binary measurement of $K$ and $I-K$ alone allows independent phases on the two multiplicity lines.
 
+::: {.theorem #thm-ch39-rank-one-projection-commutator title="Norm of the commutator of a rank-one operator and an orthogonal projection" lean="D5/S3/HilbertOperators/RankOneProjectionCommutator.norm_rankOne_projection_commutator"}
+Let $H$ be any real or complex seminormed inner product space, and let $P:H\to H$ be a continuous linear idempotent symmetric for the inner product. For any $v\in H$, set $R_v x=\langle v,x\rangle v$, with the inner product linear in its second argument. Then
+
+$$
+\norm{R_vP-PR_v}=\norm{Pv}\,\norm{v-Pv}.
+$$
+
+The left side uses the operator norm and the right side uses the vector seminorm.
+:::
+
+::: proof
+Set $a=Pv$ and $b=v-Pv$. Symmetry and idempotence give the commutator on $x$ as $\langle a,x\rangle b-\langle b,x\rangle a$. The two terms are orthogonal, and the inner products depend only on $Px$ and $x-Px$, respectively. Applying Cauchy–Schwarz to each term and adding the squared seminorms by the Pythagorean identity gives the upper bound $\norm{a}\norm{b}$. If $\norm{a}>0$, testing on $a$ gives the output $\norm{a}^2 b$ and hence the lower bound. If $\norm{a}=0$, the upper bound gives equality. The full proof is checked by the Lean kernel.
+:::
+
+The three local cancellation rays are mutually orthogonal. Coordinate permutations act transitively on them and can only change the sign of a unit vector $s$ on the sign line, so $s$ has squared overlap $1/3$ with each ray. Let $P$ project orthogonally onto the span of $m$ selected rays. Then $\norm{Ps}^2=m/3$ and $\norm{s-Ps}^2=(3-m)/3$. On the cancellation space $\ker B$, take the unitary $U=zR_s+w(I-R_s)$ with $\lvert z\rvert=\lvert w\rvert=1$, where $z$ and $w$ are the phases on the sign line and the standard component, respectively.
+
+For a unit input $x\in\ker B$, the event probability changes by $\langle x,(U^*PU-P)x\rangle$. The self-adjoint variational principle gives $\norm{U^*PU-P}$ as the supremum of its absolute value over unit inputs. Left multiplication by a unitary preserves the norm, so $U^*PU-P=U^*(PU-UP)$ and $PU-UP=(z-w)(PR_s-R_sP)$ give a supremum of $\lvert z-w\rvert\sqrt{m(3-m)}/3$. The maximum over $m$ is $\frac{\sqrt{2}}{3}\lvert z-w\rvert$, attained at $m=1$ or $2$ (finite-dimensional manual derivation using [@thm-ch39-rank-one-projection-commutator]).
+
 Write the common phase as $w^{-3}$. The elements of $G$ preserving this readout have exactly the following form, with $U_3\in SU(3)$, $U_2\in SU(2)$ and $|w|=1$.
 
 $$
@@ -156,6 +174,32 @@ a&=1+E+L-X-Y,\qquad K^2=\frac{F}{q(Y-X)}.
 $$
 
 The interval calculation places the three CKM angles $\theta_{12},\theta_{23},\theta_{13}$ and the CP phase $\delta$ simultaneously within their respective one-sigma marginal intervals. This is an in-sample compatibility result conditional on the supplied masses. A physical derivation still has to select the mass dynamics, matching scale and zero independently. [Fit with supplied masses and interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070186249)
+
+Follow the loop $(0,1,4)\to(2,2,3)\to(2,3,2)\to(0,1,4)$. Its squared chord lengths are $6,2,12$. On the Behrend shell of squared radius $17$ in $\{0,\ldots,4\}^3$, the nine points are permutations of $(0,1,4)$ and $(2,2,3)$. Give each edge a $U(1)$ phase, conjugated in reverse. Vertex rephasings cancel in the loop product. At squared cutoff $2$, the graph consists of an inner triangle and three outer pairs. At $6$, both ends of each outer pair join the same inner vertex, adding three outer triangles. These triangles generate the cycle space. Each is reversed by a coordinate transposition, so full $S_3$ invariance of the connection class forces $h=h^{-1}$ and hence $h=\pm1$ for each loop product. The next squared chord length is $12$. Give those edges phase $e^{i\beta}$ from the outer vertices of coordinate sum $5$ to the inner ones of sum $7$, and set the other edges to $+1$. Permutations preserve the sums, so the assignment respects $S_3$. The opening loop product $e^{-i\beta}$ can differ from its conjugate for the first time at this cutoff. [Chord lengths and scalar connection classification](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070573753)
+
+At cutoff $12$, take equal hopping magnitudes and $H=-M$, the negative magnetic adjacency matrix, varying over all $S_3$-invariant scalar connection classes. Independently assume three noninteracting spinless fermions fill the lowest three one-particle modes. In units of one hopping magnitude, the ground-state energy $\mathcal E$ is the negative sum of the three largest adjacency eigenvalues. The proof splits the matrix by permutation symmetry and compares four sign sectors. The minimizing sector has $+1$ on the outer pairs, $-1$ on the inner triangle, $+1$ on the squared-length-$6$ edges, and $e^{i\beta}$ on the squared-length-$12$ edges oriented from sum $5$ to sum $7$. Here $x=\cos\beta$ and $s(x)$ is the largest eigenvalue of the standard representation block, giving
+
+$$
+-\mathcal E(\beta)=\frac{-1+\sqrt{25+16x}}{2}+2s(x).
+$$
+
+Strict concavity gives a unique maximum at $x=-0.55826996\ldots$, above the bounds for the other three sectors. The minima occur at $\beta=\pm2.1630954\ldots$ modulo $2\pi$. With the negative inner edge, the opening loop product is $-e^{-i\beta}$, with principal angles $\pm0.9784972\ldots$. The minimization uses no quark observations and leaves the two conjugate signs degenerate. [Three-fermion energy proof and certificate](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070661311)
+
+The model sets $\beta=\gamma\log(3/2)$. The proved classical Riemann hypothesis gives $\rho=\tfrac12+i\gamma$ for the nontrivial zeros. Since $(3/2)^{|m|}$ is nonintegral for each nonzero integer $m$, Landau's formula gives $\sum_{0<\gamma\le T}e^{im\beta}=O_m(\log T)$. Dividing by $N(T)\sim T\log T/(2\pi)$ and applying Weyl's criterion gives uniformity on the circle for positive ordinates counted with multiplicity. A fixed energy window thus captures its arc-length fraction of the circle. For $\mathcal E-\mathcal E_{\min}\le10^{-4}$, the two arcs cover $1.24808006\%$. Interval checks give the first qualifying indices as $101$ for $\sin\beta>0$ and $242$ for $\sin\beta<0$. [RH zero localization](https://github.com/the-omega-institute/riemann-hypothesis/blob/d3f850de1d27926949b13d1de8420b3b57a8770e/src/Main.lean#L6) · [Landau's formula](https://doi.org/10.1007/BF02418819) · [Energy window and zero certificate](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070727925)
+
+The earlier four-scale exclusion concerned the fixed three-draw, forty-eight-label model. A positive control retains the real arrowhead form and sets the visibility to $v=15/16$, giving $\xi_u=-v\cos\phi_2$ and $\xi_d=-v\cos\phi_3$, and doubles the relative singlet phase in the CKM readout to $2(\phi_3-\phi_2)$. The common $A$ includes a forty-eight-label acceptance factor. Randomized draw counts on the twelve arcs give sector-specific $\epsilon$ values.
+
+$$
+\begin{aligned}
+A&=\frac{8}{9\cdot48^2},\\
+\epsilon_u&=\frac{5/12^3+1/12^4}{6},\qquad
+\epsilon_d=\frac{1/12+26/12^2}{27}.
+\end{aligned}
+$$
+
+The recording probabilities were chosen after local fits at $1\,\mathrm{TeV}$. Normalize with the Table 2 heavy-flavor centers $y_t=0.8616$ and $y_b=0.01401$. At zero $20{,}564{,}893{,}302$, the four mass ratios yield light- and middle-quark Yukawas that, along with the three CKM angles and CP phase, fall within their respective one-sigma marginal intervals at that scale. [Randomized records and compatible zero certificate](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070525892) · [Antusch, Hinze and Saad, Table 2](https://arxiv.org/html/2510.01312v2#Sx1.T2)
+
+The joint test identifies the shell's $\beta$ with the undoubled $\phi_3-\phi_2$ and fixes these randomized recording rules. Every phase compatible with all six one-sigma marginal Yukawa intervals at $1\,\mathrm{TeV}$ requires $\mathcal E-\mathcal E_{\min}>0.002$. The certificate allows separate mass normalizations and freely varies the common plane weight $q\in[0,1]$. It uses the determinant and sum of second-order principal minors of the trace-normalized matrices. The exclusion covers continuous phases and hence both zeros $101$ and $242$. The gap applies to this joint model of equal hopping, three-particle filling, a shared phase and fixed readout rules. [All-phase mass exclusion certificate](https://github.com/the-omega-institute/trureturing-books/issues/860#issuecomment-7070727925)
 
 ::: {.remark #rem-ch39-axiom-omega-field-hypotheses-and-limits title="The Field Hypotheses and Their Limits"}
 In this remark the hypotheses are labelled `MODEL` and what is derived under them `manual derivation`; the field part as a whole is hypothetical.
