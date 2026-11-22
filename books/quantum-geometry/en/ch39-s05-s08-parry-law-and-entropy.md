@@ -1600,6 +1600,25 @@ Conversely, a single rational cycle realizes any potentials satisfying these equ
 
 With $t_0=0$, the other $k+1$ potentials lie in the $n$-torsion subgroup of $\mathbb Q/\mathbb Z$. Bézout's identity gives an invertible integral change of variables that reduces the weighted relation to multiplication of the first coordinate by $\gcd(m_1,\ldots,m_{k+1})$. That coordinate is also killed by $n$, so its allowed values form a cyclic group of order $g$. Each of the remaining $k$ coordinates contributes a cyclic group of order $n$. For example, three parallel classes of size $2$ give $\mathbb Z/2\mathbb Z\oplus\mathbb Z/6\mathbb Z$.
 
+::: {.theorem #thm-joint-circuit-parallel-expansion title="Joint circuit restriction under parallel expansion" lean="D5/S3/Combinatorics/Matroids/ParallelCircuitObstruction.parallel_lifting_obstruction"}
+Let $S$ be a loopless matroid on a nonempty finite ordered ground $I$, and let $p\colon V\to I$ be a surjection from a finite ground ordered in blocks according to $I$. The parallel expansion $M$ has as bases the transversals of bases of $S$. Write $m_i=|p^{-1}(i)|$. The saturation of the joint circuit restriction image of $M$ modulo that image is isomorphic to the group of coefficient functions $f$ with values in $\mathbb Q/\mathbb Z$, extended by zero off the bases of $S$, satisfying both families of equations
+$$
+\begin{aligned}
+0&=\sum_{i\in I\setminus R}(-1)^{|\{r\in R:r<i\}|}\,m_i\, f(R\cup\{i\})
+   &&\text{for every }R\subseteq I,\\
+0&=\sum_{i\in C}\varepsilon(C,i,T)\,f(T\cup(C\setminus\{i\}))
+   &&\text{for every circuit }C\text{ and basis }T\text{ of }S/C.
+\end{aligned}
+$$
+Here $\varepsilon(C,i,T)$ is the sign of deleting $i$ from the ordered circuit, multiplied by the shuffle sign of the remaining circuit face and $T$.
+:::
+
+Reduce the coefficients of a rational top cycle with integral circuit readouts modulo the integers. A pair circuit within a fiber has a readout equal, up to sign, to the difference between the two coefficients obtained by exchanging its representatives. Any two transversals of a basis are joined by such exchanges, so they have one common residue. At a transverse face, inserting any of the $m_i$ vertices of class $i$ gives the same sign and the same residue, yielding the first equation. A circuit meeting each class at most once projects to a circuit of $S$. Its ordered deletion and shuffle signs agree with those downstairs, yielding the second equation.
+
+Conversely, assign the core coefficient to every transverse basis. The weighted equations give zero boundary modulo integers, and any face with two representatives in a class contributes zero. Choose rational lifts of the coefficients at the internally passive bases and combine the integral cycles normalized on those bases. The difference between its residue and the prescribed chain has zero boundary and zero passive coordinates. If a nonzero difference remained, take its colexicographically largest basis. Since this basis is not internally passive, deleting an internally active element gives a boundary row in which all other possible basis terms are colexicographically larger. The surviving coefficient has sign $\pm1$, so the zero row forces it to vanish. This produces one rational top cycle with the prescribed residues. The pair equations and the core circuit equations make every readout integral. Zero residues correspond exactly to integral top cycles.
+
+Thus computing the obstruction requires one variable per basis of $S$. For a fixed simplification, the weighted equations still depend on the individual class sizes. This reduction applies in arbitrary rank, while the explicit cyclic factors above use the rank-two core.
+
 **Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 If there are no nonempty facets, the original realization is empty and its reduced integral homology vanishes in every nonnegative degree. When facets exist and $d=1$, the wedge is a discrete space with $m+1$ points and reduced degree-zero generators $[p_B]-[p_0]$, where $p_B$ is the point contributed by $B$ and $p_0$ is the common basepoint. When facets exist and $m=0$, the wedge is a point and every reduced group vanishes. For a nonempty family of facets, the reduced Euler characteristic is $(-1)^{d-1}m$, so the earlier Tutte evaluation gives $m=2^d T_M(1,1/2)$.
