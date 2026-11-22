@@ -605,6 +605,28 @@ Sum the row totals through rank $r$ and do the same for the column totals. Both 
 
 In the one-coordinate Boolean lattice, put $\rho(A)=|A|$ and give each selected edge weight one and all other edges weight zero. At each odd rank below $T$, the formula constrains the parity of the number of charged diagonal edges. If ordinary edges are restricted to covers and diagonals, the bypass term is zero and the other terms are the layer size and the number of edges entering the prefix from the exceptional row. Under full inclusion, an ordinary edge contributes once at each rank strictly between its endpoints, even when the edge itself has zero cost.
 
+::: {.theorem #thm-omega-rank-capacity lean="D5/S3/Combinatorics/Graph/RankCuts/RankedBipartiteCapacity.paid_edges_ge_rank_capacity" title="Odd-rank capacity deficits bound the charged weight"}
+Use two copies of the same finite vertex set with natural-number rank $\rho$ and nonnegative integer edge weight $e(A,B)$. Outside row $T$, each positive edge satisfies $A=B$ or $\rho(A)<\rho(B)$. Each ordinary row and column has total edge weight between $1$ and $k$. For any finite set $R$ of odd ranks below $\rho(T)$, put
+$$
+\begin{aligned}
+L_r &= |\{A:\rho(A)\le r\}|-k|\{A:\rho(A)<r\}|-\sum_{\rho(B)\le r}e(T,B),\\
+H_r &= |\{A\ne T:\rho(A)\ge r\}|-k|\{A\ne T:\rho(A)>r\}|-\sum_{A\ne T,\ \rho(A)\ge r}e(A,T) .
+\end{aligned}
+$$
+
+Then the total edge weight from ordinary odd-rank rows to odd-rank columns satisfies
+$$
+\sum_{\substack{A\ne T\\\rho(A),\,\rho(B)\ \mathrm{odd}}} e(A,B)
+\ \ge\ \sum_{r\in R}\max(0,L_r,H_r).
+$$
+:::
+
+::: {.proof}
+Every column of rank at most $r$ needs at least one unit of edge weight. Rows below $r$ and row $T$ can supply some of this weight. The only other edges that reach these columns are rank-$r$ diagonals. This gives $L_r$. In the other direction, every ordinary row of rank at least $r$ must send out at least one unit. Its options are ordinary columns above $r$, column $T$ with its separate capacity, and rank-$r$ diagonals. This gives $H_r$. The same nonnegative diagonal weight must satisfy both bounds. Different odd ranks give disjoint sets of charged diagonal edges, so their bounds add. The full proof is checked by the Lean kernel.
+:::
+
+For dimension $16$ and multiplier $3$, the one-coordinate Boolean lattice has $15$ free coordinates and layer sizes $\binom{15}{r}$. With the marked edge selected in the original table, both copies of $T$ have degree at most $2$. Each sum involving $T$ in the two formulas is at most $2$. The lower-side deficits at $r=1,3$ are at least $11$ and $211$, respectively. The upper-side deficits at $r=11,13$ are at least $213$ and $73$, respectively. Any realization with zero fixed-seed budgets at all other coordinates therefore needs at least $4(1+11+211+213+73)=2036$ fixed seeds at the chosen coordinate. The $1$ comes from the marked column. With the marked edge absent from the original table, both copies of $T$ have degree at most $1$. The lower bound for each of the same four deficits increases by one and the lower bound in this case is $4(1+512)=2052$.
+
 **An optimal uniform calibration for rational marginals.** Let $G$ act on finite input and output sets $X$ and $Y$, let $P$ be a $G$-covariant probability kernel, and let $H$ be any subgroup. If a positive integer $m$ makes every $mP(x,y)$ integral, a uniform seed law attains the maximum $H$-fixed mass. One sufficient seed count is $m|\det B|$, where $B$ is an invertible square submatrix of the integer constraint matrix below, using the positive support of a suitable optimizer as its columns.
 
 Write $q_O$ for the weight of each deterministic readout table $t:X\to Y$ in its $G$-orbit $O$. The normalization row of $A$ has entry $|O|$ in column $O$. The row for cell $(x,y)$ has entry $|\{t\in O:t(x)=y\}|$. The corresponding entries of $b$ are $1$ and $P(x,y)$. Let $c_O$ count the tables in $O$ that are fixed by $H$. Sending seeds equivariantly to their complete readout tables preserves the marginals and sends every $H$-fixed seed to an $H$-fixed table. Conversely, using the positive-weight tables as seeds and evaluating them realizes any feasible table law. The maximum fixed mass is therefore the maximum of $\sum_O c_Oq_O$ subject to $Aq=b$ and $q\ge0$. Independent draws from the rows give an invariant table law. The normalization row makes the feasible set bounded, and its closedness ensures the maximum is attained.
