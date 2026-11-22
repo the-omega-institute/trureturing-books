@@ -846,7 +846,7 @@ $$
 :::
 
 ::: {.theorem #thm-joint-circuit-private-pair-omissions title="各有两个独有元素的遗漏基的循环因子" lean="D5/S3/Combinatorics/Matroids/PrivatePairCircuitInvariantFactors.private_pair_lifting_obstruction_invariant_factors"}
-设 $3\le r<k$，核心拟阵的基恰为 $r$ 元集合中排除 $t$ 个遗漏集之后的全部集合。遗漏集均含公共元素 $e$，且每个遗漏集有两个元素不属于任何其他遗漏集。对上文同样按块排序的平行扩张，沿用 $n,g,q_T$ 的定义。若两个二项式重数都至少为 $t$，则[公共元素公式](#thm-joint-circuit-sunflower-omissions)中的循环分解仍然成立。
+设 $3\le r<k$，核心拟阵的基恰为 $r$ 元集合中排除 $t$ 个遗漏集之后的全部集合。遗漏集均含公共元素 $e$，且每个遗漏集有两个元素不属于任何其他遗漏集。对上文同样按块排序的平行扩张，沿用 $n,g,q_T$ 的定义，[公共元素公式](#thm-joint-circuit-sunflower-omissions)中的循环分解成立。两个二项式重数都至少为 $t$。
 :::
 
 ::: proof

@@ -846,7 +846,7 @@ Group the coefficients by their intersection with the zero-weight indices. Inser
 :::
 
 ::: {.theorem #thm-joint-circuit-private-pair-omissions title="Cyclic factors with private pairs" lean="D5/S3/Combinatorics/Matroids/PrivatePairCircuitInvariantFactors.private_pair_lifting_obstruction_invariant_factors"}
-Suppose $3\le r<k$ and the core bases are exactly the $r$-element subsets outside a family of $t$ omitted $r$-element subsets. All omissions contain a common element $e$ and each contains two elements belonging to no other omission. For the same block-ordered parallel expansion and the same $n,g,q_T$ as above, assume both binomial multiplicities are at least $t$. The cyclic decomposition in [the common-element formula](#thm-joint-circuit-sunflower-omissions) still holds.
+Suppose $3\le r<k$ and the core bases are exactly the $r$-element subsets outside a family of $t$ omitted $r$-element subsets. All omissions contain a common element $e$ and each contains two elements belonging to no other omission. For the same block-ordered parallel expansion and the same $n,g,q_T$ as above, the cyclic decomposition in [the common-element formula](#thm-joint-circuit-sunflower-omissions) holds. Both binomial multiplicities are at least $t$.
 :::
 
 ::: proof
