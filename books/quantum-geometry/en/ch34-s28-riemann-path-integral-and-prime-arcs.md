@@ -854,6 +854,22 @@ Put $q=m+1$, $u=\ln x$ and $L=1+\ln q/16$. For $u\le Lq$, apply finite Abel summ
 For $u\ge Lq$, the actual coordinates $u/n$ have spacing at least $u/q^2$. The separated sampling bound for the omitted spectrum costs $1+q^2/u+q^{7/8}$, which is at most a constant times $m/\ln q$ in this range. The signed arithmetic tail obeys the same bound. Each estimate uses the density factor $e^{-s_m u}$. Integration between $\ln a$ and $\ln B$ yields the endpoint difference $D_{s_m}(a,B)$, which vanishes at $B=a$. The threshold and constant are uniform in the truncation order.
 :::
 
+::: {.theorem #thm-ch31-prime-window-power title="Power saving in the prime-window truncation order" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusPower.prime_window_mobius_power_of_rh"}
+Assume RH. There are constants $a_0\ge2$ and $C>0$ such that for every integer $m\ge2$ and all real $B\ge a\ge a_0$,
+$$
+|E_m(a,B)|\le C m^{27/28}D_{s_m}(a,B),\qquad s_m=\tfrac12-\tfrac1{m+1}.
+$$
+The residual is the one in [@thm-ch31-prime-window-mobius]. It includes the signed arithmetic corrections and retains exactly the degrees $2n<m+1$, with zeros counted by analytic multiplicity.
+:::
+
+::: proof
+Put $q=m+1$ and $u=\ln x$. For $u\le q$, use the ordinary Möbius prefix bound of order $q^{3/4}$ from [@lem-ch31-mobius-energy-prefix]. On the omitted degrees $n\ge\lceil q/2\rceil$, finite Abel summation gives a normalized near-range coefficient of order $q^{3/4}$.
+
+For $q\le u\le q^{29/28}$, split the unit bins of the actual zero ordinates at $H=\lfloor q^{1/7}\rfloor$. In the low bins, the normalized degree weight of one zero $\rho$ has total variation bounded by a constant times $(1+|\operatorname{Im}\rho|u/q)/|\rho|$. Complex Abel summation applies the Möbius prefix bound to that variation. Summing over the low bins costs at most a constant times $q^{3/4}(H+1)^{1/4}(1+(H+1)u/q)$. The high-bin square mass is $O(H^{-1/2})$, so separated sampling costs $O(qH^{-1/4})$. Both are $O(q^{27/28})$. For $u\ge q^{29/28}$, use the whole-spectrum bound of order $1+q^2/u+q^{7/8}$.
+
+The signed trivial-root term costs $O(q^{3/4}(1+\ln q))$. For the arithmetic tail, the difference of the Möbius prefixes at $q+j$ and $q-1$ is $O(q^{-1/4}(q+j))$. Abel summation against the decreasing Chebyshev weights bounds that tail by $O(q^{3/4})$ after normalization. Integrate the resulting density bound between $\ln a$ and $\ln B$ to obtain the power difference in the statement. It vanishes at $B=a$.
+:::
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::

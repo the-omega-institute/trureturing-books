@@ -854,6 +854,22 @@ $$
 在 $u\ge Lq$ 时，实际坐标 $u/n$ 的间距至少为 $u/q^2$。对略去的谱作分离采样，代价为 $1+q^2/u+q^{7/8}$，在此范围内至多为常数乘 $m/\ln q$。有符号的算术尾项也满足这一界。各项密度估计都带因子 $e^{-s_m u}$。在 $\ln a$ 与 $\ln B$ 之间积分得到端点差 $D_{s_m}(a,B)$，当 $B=a$ 时为零。阈值和常数对全部截断阶统一。
 :::
 
+::: {.theorem #thm-ch31-prime-window-power title="素数尾窗截断阶的幂次节省" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusPower.prime_window_mobius_power_of_rh"}
+假设 RH。存在常数 $a_0\ge2$ 与 $C>0$，使每个整数 $m\ge2$ 和所有实数 $B\ge a\ge a_0$ 都满足
+$$
+|E_m(a,B)|\le C m^{27/28}D_{s_m}(a,B),\qquad s_m=\tfrac12-\tfrac1{m+1}.
+$$
+余项见 [@thm-ch31-prime-window-mobius]。它含有符号的算术修正，保留且仅保留 $2n<m+1$ 的次数，零点按解析重数计入。
+:::
+
+::: proof
+记 $q=m+1$、$u=\ln x$。当 $u\le q$ 时，使用 [@lem-ch31-mobius-energy-prefix] 给出的 $q^{3/4}$ 普通 Möbius 前缀界。在略去的次数 $n\ge\lceil q/2\rceil$ 上作有限 Abel 求和，归一化的近区系数为 $O(q^{3/4})$。
+
+当 $q\le u\le q^{29/28}$ 时，以 $H=\lfloor q^{1/7}\rfloor$ 为截点，分割实际零点虚部的单位频率箱。在低频箱，单个零点 $\rho$ 的归一化次数权重总变差至多为常数乘 $(1+|\operatorname{Im}\rho|u/q)/|\rho|$。复 Abel 求和把 Möbius 前缀界用在此总变差上。对低频箱求和后，所得上界为常数乘 $q^{3/4}(H+1)^{1/4}(1+(H+1)u/q)$。高频箱质量的平方和为 $O(H^{-1/2})$，故分离采样的代价为 $O(qH^{-1/4})$。两项都为 $O(q^{27/28})$。当 $u\ge q^{29/28}$ 时，使用代价为 $1+q^2/u+q^{7/8}$ 的全谱估计。
+
+有符号的平凡零点项代价为 $O(q^{3/4}(1+\ln q))$。对算术尾项，截点 $q+j$ 与 $q-1$ 的 Möbius 前缀之差为 $O(q^{-1/4}(q+j))$。对递减的 Chebyshev 权重作 Abel 求和，将归一化后的算术尾项控制在 $O(q^{3/4})$。最后在 $\ln a$ 和 $\ln B$ 间积分，得到陈述中的端点幂差。当 $B=a$ 时该差为零。
+:::
+
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。
 :::
