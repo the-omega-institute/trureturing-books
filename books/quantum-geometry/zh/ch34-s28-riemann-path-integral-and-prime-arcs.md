@@ -761,8 +761,28 @@ $$
 
 这条界对 $B=a$ 也成立，两边均为零。
 
-::: {.problem #prob-ch31-prime-window-linear-remainder title="素数尾窗的线性阶数余项"}
-假设 RH。是否存在常数 $a_0\ge2$ 和 $K>0$，使同一余项对每个整数 $m\ge2$ 和所有实数截点 $B\ge a\ge a_0$（包括 $B=a$）都满足 $|E_m(a,B)|\le K m D_{s_m}(a,B)$？ [形式化研究](https://github.com/the-omega-institute/trureturing/issues/32976)
+::: {.theorem #thm-ch31-prime-window-linear-remainder title="截断阶数的线性余项" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/LinearOrder/RHMobiusLinear.prime_window_mobius_linear_of_rh"}
+假设 RH。存在常数 $a_0\ge2$ 和 $K>0$，使每个整数 $m\ge2$ 与所有实数截点 $B\ge a\ge a_0$ 都满足以下界，其中 $E_m(a,B)$ 为 [@thm-ch31-prime-window-mobius] 中的有符号余项。
+
+$$
+|E_m(a,B)|\le K m D_{s_m}(a,B),\qquad
+s_m=\tfrac12-\tfrac1{m+1},\qquad D_s(a,B)=a^{-s}-B^{-s}.
+$$
+
+:::
+
+::: proof
+平凡零点项利用 Möbius 权重的符号。由恒等式 $\mu(n)\ln n=-(\mu*\Lambda)(n)$、RH 下的 Chebyshev 误差界和倒数加权的 Möbius 和有界性，可得 Möbius 部分和的对数节省。固定 $u=\ln x\ge0$，平凡零点级数的正响应随次数增加，且至多为 $(1+\ln n)/2$。Abel 求和将这个增长与部分和的节省结合。提出 $e^{-u/2}$ 后，直到次数 $m$ 的加权响应由常数乘 $m$ 控制。
+
+令 $q=m+1$。若 $u\le q$，未纳入谱的根项满足 $u/n\le2$，逐项使用中心化 Chebyshev 估计即可保持目标衰减。若 $u\ge q$，对数根坐标 $u/n$ 的间距至少为 $1/q$。按 $2u/q-u/n$ 的单位带分组。在每个带内对有限零点和及其对数坐标导数使用局部高斯均方界。有符号的单位窗零点计数保留解析重数，使频率箱质量的平方可和。相邻次数之差控制系数变化。每个带在乘权重 $\exp[-(2u/q-u/n)/2]$ 前的贡献至多为常数乘 $q$。几何求和包含权重可能等于一的首带。各采样点上的值级数绝对收敛，完整级数继承该界。
+
+在原有区间 $[\ln a,\ln B]$ 上积分。由 $s_m\ge1/6$，积分因子一致有界。$B=a$ 时两边均为零。完整证明由 Lean 内核检查。
+:::
+
+估计适用于每个有限阶数，阶数可以随端点选取。衰减指数、两端幂差和保留的根频谱沿用前述展开。 [加权均方方法，Coppola 与 Laporta，第 1 节](https://arxiv.org/abs/1411.1739v1)
+
+::: {.problem #prob-ch31-prime-window-sublinear-remainder title="素数尾窗的一致次线性阶数余项"}
+假设 RH，是否存在一个实数 $a_0\ge2$，使得对每个 $\varepsilon>0$，都存在整数 $m_0\ge2$，从而对所有整数 $m\ge m_0$ 和所有实数截点 $B\ge a\ge a_0$，同一余项满足 $|E_m(a,B)|\le\varepsilon m D_{s_m}(a,B)$？这里也允许 $B=a$。 [形式化研究](https://github.com/the-omega-institute/trureturing/issues/33004)
 :::
 
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
