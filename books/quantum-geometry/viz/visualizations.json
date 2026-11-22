@@ -8903,6 +8903,119 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "real-error-prime-adelic-sandbox",
+      "code": "OMEGA//ADELIC",
+      "title": "实数误差放大轴 vs 素数本原闭合与阿代尔归元沙盘",
+      "title_en": "Real Error-Magnification Axis vs. Prime Adelic Closure & Ergodic Anti-Deadlock",
+      "summary": "在同一座三维球面空间中对照球极切线如何把有限对径角按 A_err = 1 + x² = 1/κ 放大成射向 ∞ 的实数轴、平直加法与标量乘法如何漏掉曲率分母与叉乘而脱轨，以及素数如何经阿代尔乘积 |N|_∞ ∏_p |N|_p ≡ 1、正交对数相位轴与无公度遍历轨道收回发散误差并根除紧致死循环。",
+      "summary_en": "Contrasts in one 3D spherical space how tangent projection magnifies finite antipodal closure by A_err = 1 + x² = 1/κ toward ∞ along ℝ, how flat addition and scalar multiplication drop curvature denominators and cross products, and how primes reclaim divergence via |N|_∞ ∏_p |N|_p ≡ 1, orthogonal log-prime axes, and incommensurable ergodic orbits.",
+      "path": "real-error-prime-adelic-sandbox/",
+      "thumbnail": "real-error-prime-adelic-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-22",
+      "chapter": 39,
+      "section": "39.8",
+      "presets": [
+        "real-tangent-error-magnifier",
+        "linear-add-mul-vs-curved-rodrigues",
+        "adelic-prime-curvature-reclaim",
+        "prime-orthogonal-torus-and-rivets",
+        "incommensurable-ergodic-anti-deadlock"
+      ],
+      "preset_titles": {
+        "real-tangent-error-magnifier": {
+          "zh": "实数轴是切线放大镜：球有限，像射向 ∞",
+          "en": "The real axis magnifies: the sphere is finite, the image runs to ∞"
+        },
+        "linear-add-mul-vs-curved-rodrigues": {
+          "zh": "平直加法漏掉分母与叉乘：转角不足，转轴偏开",
+          "en": "Flat sums drop the denominator and the cross product: short turn, tilted axis"
+        },
+        "adelic-prime-curvature-reclaim": {
+          "zh": "素数收回：实长度 N 乘上各个 p 进长度恒为 1",
+          "en": "Primes take it back: the real size N times all p-adic sizes is 1"
+        },
+        "prime-orthogonal-torus-and-rivets": {
+          "zh": "十二枚五边形铆钉与三只正交的素数相位环",
+          "en": "Twelve pentagonal rivets and three orthogonal prime phase rings"
+        },
+        "incommensurable-ergodic-anti-deadlock": {
+          "zh": "有理节拍锁死成圈，素数对数从不重复",
+          "en": "A rational beat locks into a loop, prime logarithms never repeat"
+        }
+      },
+      "tags": [
+        "实数轴",
+        "切线放大",
+        "罗德里格斯合成",
+        "阿代尔乘积",
+        "素数对数"
+      ],
+      "tags_en": [
+        "Real axis",
+        "Tangent magnification",
+        "Rodrigues composition",
+        "Adelic product",
+        "Prime logarithms"
+      ],
+      "theory": [
+        {
+          "label": "§39.8 · 实数误差放大轴与素数阿代尔归元闭合",
+          "label_en": "§39.8 · The Real Error-Magnification Axis and Prime Adelic Closure",
+          "href": "../zh/ch39-s31-real-error-axis-and-prime-adelic-closure.html#sec-ch39-real-error-axis-and-prime-adelic-closure",
+          "href_en": "../en/ch39-s31-real-error-axis-and-prime-adelic-closure.html#sec-ch39-real-error-axis-and-prime-adelic-closure"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Arith/AbsoluteValues/OstrowskiClassification.rational_absolute_value_classification"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula"
+        },
+        {
+          "gid": "D5/S3/Arith/Congruence/PadicObservationDistance.observation_distance_eq_padic_valuation"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric.refinementDistance_ultrametric"
+        },
+        {
+          "gid": "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape"
+        },
+        {
+          "gid": "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product"
+        },
+        {
+          "gid": "D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence"
+        },
+        {
+          "gid": "D5/S3/Fourier/TorusOrbitClosure.result"
+        },
+        {
+          "gid": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }

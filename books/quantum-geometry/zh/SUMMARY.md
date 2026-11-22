@@ -256,6 +256,7 @@
   - [39.5 二元配关系成三元场与两阶关系推未来：从 2+1=3 换位正交闭环、规范联络与李三元曲率到比安基—奥斯特罗格拉茨基二阶封顶](ch39-s28-dyad-relation-future-and-second-order-field.md)
   - [39.6 拔除笛卡尔线性钉子与无常数有理重构：为什么 π、e、φ 只是平直近似欠条而非 AXIOM-Ω 的原生基元](ch39-s29-constant-free-rational-axiom-omega.md)
   - [39.7 过去·现在·未来与 0 · 1/2 · 1 纯有理因果射流母矩阵：三元数球面射流阶梯、中点自对偶律与 1 ↦ 0 宇宙心跳](ch39-s30-past-present-future-rational-jet-triad.md)
+  - [39.8 实数误差放大轴与素数阿代尔归元闭合：从切空间线性失真、吉布斯—罗德里格斯弯曲合成到素数无公度防死锁引擎](ch39-s31-real-error-axis-and-prime-adelic-closure.md)
 
 # 终章与附录
 
