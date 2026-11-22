@@ -1119,6 +1119,23 @@ The root primitive divides each coefficient by its complex exponent. For an occu
 
 The error constant can depend on $\omega$. The coefficient being recovered still depends on the width at nonzero frequencies.
 
+::: {.theorem #thm-ch31-prime-window-detuned-fourier title="The finite-time response near a tested frequency" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffFourierResolution.signed_window_even_cutoff_detuned_fourier"}
+Assume RH. Use the even cutoff, normalized signed residual $F_L$, and coefficient $A_L(\omega)$ from [@thm-ch31-prime-window-fourier-uniform-width], with the subscript recording the width. Write $K(v)=\int_0^1 e^{-ivt}\,dt$. There is a common threshold $U_0>0$. For each admissible cutoff $m$ and real reference frequency $\omega$, there is $C>0$ such that for every $L>0$, $U\ge U_0$, $T>0$, $R\ge0$, and real $|v|\le R$, the integrand below is Lebesgue integrable and
+
+$$
+\left|\frac{1}{T}\int_U^{U+T}F_L(u)e^{-i\omega u}e^{-iv(u-U)/T}\,du
+-A_L(\omega)K(v)\right|\le\frac{C(1+R)}{T}.
+$$
+
+For each positive width, $A_L(0)=-\mu(q)q/((q-1)s)$. At a nontrivial zero $\rho$ of analytic multiplicity $n_\rho$, $A_L(\omega_\rho)=-\mu(r)n_\rho b_{r,L}(\rho)$, with $b_{r,L}(\rho)\ne0$.
+:::
+
+::: proof
+The uniform-width estimate bounds the primitive $\int_U^x(F_L(u)e^{-i\omega u}-A_L(\omega))\,du$ by the same constant on every prefix of the averaging interval. Apply integration by parts to the real and imaginary coordinate products against the extra phase. Its modulus is one and its derivative has modulus $|v|/T$, so the endpoint contribution is bounded independently of $T$, and the derivative contributes at most a constant times $|v|$. Divide by $T$. The substitution $u=U+Tt$ gives the response $K(v)$ for the constant coefficient, the same exponential average used in the single-frequency test. [Exponential average](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
+:::
+
+The extra phase corresponds to the frequency $\omega+v/T$, with the phase correction $e^{ivU/T}$ referencing the offset to the left endpoint. For $v\ne0$, $K(v)=e^{-iv/2}\sin(v/2)/(v/2)$, with $K(0)=1$. The bound gives convergence to $A_L(\omega)K(v)$ uniformly in bounded offsets $v$, positive widths, and late starts. The constant can depend on the reference frequency.
+
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
 :::
