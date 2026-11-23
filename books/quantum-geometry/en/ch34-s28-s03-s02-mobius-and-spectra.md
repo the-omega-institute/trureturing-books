@@ -870,6 +870,22 @@ For the actual zeta zeros of [@thm-ch31-weighted-phase-limsup], assume RH and La
 
 With $\beta=1$, every interval of length $e^T$ contains a hit for each fixed $\varepsilon>0$ once $T$ is large enough. Thus $0\le D(T)<\varepsilon$ eventually. Under RH and Effective LI, if $\mu(r)\ne0$, the left-endpoint error in [@thm-ch31-weighted-phase-limsup] attains the full leading coefficient $|\mu(r)|/(4\pi s)$.
 
+::: {.theorem #thm-ch31-zeta-local-average title="Short averaging improves the power-cutoff loss bound" lean="D5/S3/Analytic/Oscillation/SpectrumThreeBandRecurrence.eventual_sine_three_band_recurrence"}
+Use the spectrum, nonnegative weights, and functions $W(T),S(T,v)$ of [@thm-ch31-zeta-cutoff-recurrence]. Fix $r,\beta>0$ and put $m=\min(\beta,1)$. Assume $W(T^p)/W(T)\to q(p)$ for every $0<p<1$, where $q$ is continuous at $m$. Also assume that for each $e>0$ and all sufficiently large $X$, $W(X)>0$ and every interval of length $\exp X$ contains a point $b$ with $1-S(X,b/r)/W(X)<e$.
+
+If $\varepsilon>1-q(m)$, then for all sufficiently large real $T$, $W(T)>0$ and every interval $[a,a+\exp(T^\beta)]$ contains a point $u$ with
+
+$$
+1-\frac{S(T,u/r)}{W(T)}<\varepsilon.
+$$
+:::
+
+::: proof
+Choose $0<\alpha<\kappa<\nu<m$ with $\alpha,\nu$ close to $m$, and take a small $e>0$. Find a low-frequency hit $b$ at $X=T^\alpha$. Average the full score on $[b,b+h]$, where $h=T^{-\kappa}$ and the second cutoff is $Y=T^\nu$. The score through $X$ loses at most $(hX/r)W(X)$ as its phases drift. The middle band contributes at least $-(W(Y)-W(X))$. Integrating each frequency above $Y$ gives average tail score at least $-(2r/(hY))(W(T)-W(Y))$. Continuity supplies a point that attains the average. After normalization, the low-frequency drift and averaged tail errors tend to zero. The upper bound on loss tends to $1+q(\nu)-2q(\alpha)+e\,q(\alpha)$, which can be made smaller than $\varepsilon$ by continuity at $m$. Eventually $\exp X+h\le\exp(T^\beta)$.
+:::
+
+For the actual zeta zeros under RH and Effective LI, [@thm-ch31-zeta-cutoff-recurrence] with exponent $1$ supplies the low-frequency hits. The harmonic mass gives $q(p)=p^2$. This lowers the sufficient threshold to $1-\min(\beta,1)^2$. The shortest uniform waiting scale and the equality case at this threshold remain open. [Finite exponential-average implementation](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 
