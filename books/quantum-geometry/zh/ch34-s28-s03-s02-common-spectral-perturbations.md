@@ -94,4 +94,70 @@ $$
 
 若每个 $c_j^2\le S/2$，则四次方和的条件成立。例如，$(c_1,c_2,c_3)=(3,2,2)$ 满足四次方和的条件，此时 $S=17$，最大平方为 $9$。当 $S>0$ 时，上界的积分是 $\pi\sqrt{15/S}$。要把它用作近碰撞预算，还需从特征函数过渡到短区间概率的估计。Rudelson 与 Vershynin 的密度定理对独立均匀扰动给出了更强的概率界。长度为 $2\eta$ 的区间，其概率至多为 $\min(1,\sqrt2\,\eta/\sqrt S)$。 [Rudelson 与 Vershynin，定理 1.2](https://arxiv.org/html/1402.4492#S1.Thmtheorem2)
 
-对比较谱还可[控制计数阈值穿越并处理重算后的权重](ch34-s28-s03-s02-spectral-count-perturbations.md)。实际 ζ 纵坐标的高阶频率差仍需算术估计。
+## 共用频谱扰动的逐对碰撞界
+
+将短区间概率界逐对代入共用扰动的预算，还可以先剔除无论如何扰动都进不了碰撞带的配对。
+
+沿用区间扰动的可数频率和检验、有限支撑及正超额预算。这里将半径记为 $r_j=\varepsilon_j>0$，暂以 $h$ 表示比较频谱。对该检验的次数向量，记 $G_m=\sum_jm_jg_j$ 和 $c_m=\binom{p_k}{m}\prod_jw_j^{m_j}$。记 $E_k(h)$ 为频谱 $h$ 在该分辨率下的加权碰撞量，$D_k=\sum_m c_m^2$ 为对角项。
+
+对检验 $k$ 的支撑上两个不同的次数向量 $m,n$，令 $a_j=m_j-n_j$，并设
+$$
+A=\sum_j|a_j|r_j,\qquad M=\max_j|a_j|r_j,\qquad S=\sum_j(a_jr_j)^2,\qquad C=e^{1/2}\sqrt{15\pi/2}.
+$$
+若 $|G_m-G_n|>\eta_k+A$，令 $q_k(m,n)=0$。其余情形取
+$$
+q_k(m,n)=\min\{1,\eta_k/M,C\eta_k/\sqrt S\}.
+$$
+不同向量给出两个正分母。令 $B_k=\sum_{m\ne n}c_mc_nq_k(m,n)$，求和遍历有序对。
+
+::: {.theorem #thm-ch31-localized-collision-budgets title="同一频谱满足逐对估计给出的碰撞预算" lean="D5/S3/Fourier/Concentration/LocalizedCollisionBudgets.exists_continuous_common_nearby_localized_bounds"}
+若 $\sum_k B_k/b_k\le1$，则存在同一个频谱 $h$，使每个 $j$ 满足 $|h_j-g_j|\le r_j$，并且
+$$
+\sum_k\frac{E_k(h)-D_k}{b_k}\le \sum_k\frac{B_k}{b_k},
+\qquad E_k(h)\le D_k+b_k\quad(k\in K).
+$$
+:::
+
+::: proof
+在同一个乘积概率空间中独立均匀地从 $[-r_j,r_j]$ 选取偏移 $x_j$。每一对的频率差变化为 $\sum_j a_jx_j$，绝对值至多为 $A$。初始距离超过 $\eta_k+A$ 的配对碰撞概率为零。对其余配对，最大坐标给出的区间概率界与欧氏尺度给出的仿射概率界都适用于同一个有限边缘分布。取两者和一的最小值得到逐对上界。
+
+减去对角项后得到有限个带非负权重的指示函数之和，其期望至多为 $B_k$。可数个归一化超额之和的期望至多为 $\sum_k B_k/b_k$。于是允许的区间内有一组偏移达到不超过此上界的值。每项归一化超额都至多为该总和。完整证明由 Lean 内核核验。
+:::
+
+两个相距四的频率若各有单位扰动半径，在分辨率一时，两个不同的一次向量发生碰撞的概率为零。距离为三时，端点处可以接触闭碰撞带，因此剔除条件使用严格不等式。构造控制的是选出的比较频谱。
+
+## 加权多项式计数向量的共同项
+
+逐对预算中含有欧氏尺度 $S$。它可以由两个次数向量中未匹配的项数来估计。以下先控制共同项较多的配对的总权重，再用未匹配项给出尺度下界。
+
+设 $J$ 有限，$w_j\ge0$，记 $W=\sum_jw_j$。对非负整数计数向量 $m$，记 $|m|=\sum_jm_j$ 和 $c_m=\binom{|m|}{m}\prod_jw_j^{m_j}$。令 $D_k=\sum_{|l|=k}c_l^2$。两个 $p$ 次向量的共同项数为 $H(m,n)=\sum_j\min(m_j,n_j)$。
+
+::: {.theorem #thm-ch31-weighted-overlap-diagonal title="低阶对角权重控制共同项较多的配对" lean="D5/S3/Fourier/Concentration/FiniteMultinomialOverlap.weighted_overlap_le_diagonal"}
+当 $0\le k\le p$ 时，
+$$
+\sum_{\substack{|m|=|n|=p\\ H(m,n)\ge k}}c_mc_n
+  \le \binom{p}{k}^{2}W^{2(p-k)}D_k .
+$$
+求和遍历有序对。
+:::
+
+::: proof
+若 $H(m,n)\ge k$，则存在 $k$ 次子向量 $l$，使每个 $j$ 满足 $l_j\le\min(m_j,n_j)$。如果枚举在两边各自选出这些共同项的所有方式，该配对至少被计一次。固定 $l$ 时，$c_m$ 乘以 $\prod_j\binom{m_j}{l_j}$。写成 $m=l+u$，逐坐标约去阶乘后，该乘积等于 $\binom pk c_lc_u$。对 $p-k$ 次的 $u$ 求和得到 $W^{p-k}$。分别求出两边的和，再对 $l$ 求和，得到所述上界。完整证明由 Lean 内核核验。
+:::
+
+当 $k=0$ 时，上界等于所有配对的总权重。当 $k=p$ 时，共同项条件强制 $m=n$，上界就是 $p$ 次对角权重。
+
+::: {.theorem #thm-ch31-overlap-euclidean-scale title="未匹配项给出欧氏尺度的下界" lean="D5/S3/Fourier/Concentration/FiniteMultinomialOverlap.weighted_count_difference_sq_ge"}
+设两个计数向量均为 $p$ 次，扰动半径满足 $r_j\ge\rho\ge0$，令 $S=\sum_j((m_j-n_j)r_j)^2$。则
+$$
+S\ge 2\rho^2(p-H(m,n)).
+$$
+:::
+
+::: proof
+逐坐标绝对差之和等于 $2(p-H(m,n))$。每个整数差的平方至少等于其绝对值。乘以共同半径下界的平方后求和，即得结果。完整证明由 Lean 内核核验。
+:::
+
+对独立扰动的比较频谱，共同项较少的配对可用欧氏尺度下界估计。其余配对的总权重由低阶对角权重控制。
+
+对比较谱还可[控制计数阈值穿越并处理重算后的权重](ch34-s28-s03-s02-spectral-count-perturbations.md)。固定 ζ 零点纵坐标在正分辨率下的加权高阶近碰撞上界仍是开放问题。
