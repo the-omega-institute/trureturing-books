@@ -99,6 +99,26 @@ For sufficiency, set $d_{HK}=2b$ and $d_{ST}=d_{WT}=\max(a,2b)$. The resulting d
 
 For $q=1/2,c=1/6$, the cycle checks admit the entire square $[0,1/6]^2$. The exact region of common laws also requires $a+b\le1/6$. In distance coordinates, this additional condition comes from adding the pentagonal cut inequality to the triangle inequality $d_{HT}\le d_{HK}+d_{KT}$ and eliminating the unspecified $d_{HK}$. [Avis, Imai and Ito, Definition 6 and Theorem 4](https://arxiv.org/abs/math/0601375)
 
+The same shared capacity applies when the five marginal probabilities differ. Each event difference has its own interval, and their sum is still limited by the mass of $K$ outside $S$.
+
+::: {.theorem #thm-ch39-fib-unequal-joint-range lean="D5/S1/Words/AdmissibleWords/FIBUnequalMarginals.joint_range" title="The exact joint range at five prescribed marginals"}
+Require measurable events $S,H,K,T,W$ in the half-open unit interval to have probabilities $s,h,k,t,w$, with $S,W\subseteq H\cap K$ and $T\subseteq K$. Prescribe $a=\Pr(W\setminus S)$ and $b=\Pr(T\setminus H)$. Such events exist if and only if
+
+$$
+\begin{aligned}
+&k\le1,\qquad t\le k,\\
+&\max(0,w-s)\le a\le\min(w,h-s),\\
+&\max(0,t-h)\le b\le\min(t,1-h),\qquad a+b\le k-s.
+\end{aligned}
+$$
+:::
+
+::: {.proof}
+The difference $W\setminus S$ lies in both $W$ and $H\setminus S$, while $T\setminus H$ lies in both $T$ and the complement of $H$. The lower bounds come from the maximum mass that can remain inside $S$ or $H$. The differences are disjoint subsets of $K\setminus S$, so their total probability is at most $k-s$.
+
+For attainment, take $K=[0,k)$ and put $H\cap K$ in an initial interval of length $r=\max(s+a,t-b,h+k-1)$. The assumptions give $r\le h$ and $r\le k-b$, and leave room after $K$ for the remaining mass $h-r$ of $H$. Fit $S,W$ into the initial interval with overlap of length $w-a$. Put mass $t-b$ of $T$ inside the initial interval and the remaining length $b$ immediately after it. The full proof is checked by the Lean kernel.
+:::
+
 In the `trureturing` direct-encoder model, fix integers $N \ge 2$ and $K \ge 2$, and partition $\{0, 1, \dots, N\}$ by primality into the nonprime logical page ($b = \mathrm{false}$, dimension $M_0 > 0$) and the prime logical page ($b = \mathrm{true}$, dimension $M_1 > 0$). Let $C_{m, b}$ denote the set of length-$m$ admissible $1^K$-free words with first bit $b$, of cardinality $c_{m, b} = |C_{m, b}|$; for each threshold $0 \le s < K$, define the cumulative low-tail left row count and compatible right neighborhood count on page $1$ by
 
 $$
