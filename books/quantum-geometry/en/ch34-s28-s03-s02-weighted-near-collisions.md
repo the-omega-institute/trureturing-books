@@ -78,6 +78,36 @@ For $p\ge1$ and $t>0$, a nearest lattice point at step $s=t/(4p)$ has error at m
 
 For actual ζ ordinates, use the tail above $X=e^{-D}T^\beta$ from the preceding section, with $\delta=\log T$ and $g_\gamma=\gamma/r$. For $H=\exp(cT^\beta\log T)$, take $N=\lfloor HT^2/r\rfloor_++1$ to keep the mesh error at most $rB/(2T^2)$. To bound the start, a finite $L=L(T)$ must satisfy the budget $KNE_p(2/L)<(\log T)^{2p}$. The target order $p$ grows on the scale of $T^\beta\log T$. For fixed finite tail and fixed $p$, $E_p(2/L)$ eventually equals the exact collision mass $E_p(0)$ as $L$ increases. Quantifying $L$ requires a weighted bound at positive resolution. Definition 7 in Tao, Trudgian, and Yang counts unweighted quadruples at unit scale, and Theorem 64 gives estimates for fixed $\sigma\ge7/10$. The growing-order weighted bound for the critical-line tail remains open. [Definition 7 and Theorem 64](https://arxiv.org/html/2501.16779v1) · [Research question](https://github.com/the-omega-institute/trureturing/issues/33519)
 
+### What low-order collision masses determine
+
+Move the last frequency in $(0,1,k)$ to $k+\sqrt 2$. Below degree $k$, the counts on the first two coordinates cannot offset a change in the last count. At degree $k$, exactly one additional pair of count vectors can cancel in the integer spectrum.
+
+::: {.theorem #thm-ch31-low-order-collision-agreement title="Equal low-order collision masses permit different high-order decay rates" lean="D5/S3/Fourier/Concentration/LowOrderCollisionAgreement.low_order_agreement_and_high_order_disparity"}
+Let $k\ge2$ be an integer. Write $E_p(t)$ and $F_p(t)$ for the ordered-pair collision masses of $(0,1,k)$ and $(0,1,k+\sqrt2)$, respectively, with weights $(1/4,1/4,1/2)$. For every $0\le t<1$,
+
+$$
+\begin{aligned}
+E_p(t)&=F_p(t) &&(0\le p<k,\ p\in\mathbb Z),\\
+E_k(t)&=F_k(t)+2k(1/4)^{k-1}(1/4)^k(1/2).
+\end{aligned}
+$$
+
+For every positive integer $p$, set $t_p=1/[2(k+3)p]$. Then
+
+$$
+E_p(t_p)\ge\frac{1}{16k\sqrt p},\qquad
+F_p(t_p)\le\frac4p.
+$$
+:::
+
+::: proof
+If the last counts differ at a degree below $k$, the gap in either spectrum is at least $1$. If they agree, a gap below $1$ forces all the counts to agree. At degree $k$, the integer spectrum gains the two ordered pairs between $(0,k,0)$ and $(k-1,0,1)$.
+
+Every nonnegative resolution below $1$ counts only exact collisions for the integer spectrum, so the variance bound at resolution $1/2$ applies. In the irrational spectrum, a gap $a+b\sqrt2$ between distinct count vectors has nonzero integer norm $a^2-2b^2$. Bounding the conjugate factor excludes all such pairs at $t_p$. The remaining mass is the sum of squared multinomial weights. Each weight factors as two fair binomial probabilities, and the central binomial bound together with monotonicity in the tail gives a pointwise bound of $4/p$. The full proof is checked by the Lean kernel. [Variance bound](ch34-s28-s03-s02-collision-variance.md#thm-ch31-variance-collision-lower)
+:::
+
+The count vector $(p,0,0)$ contributes $(1/4)^{2p}>0$ on the diagonal. At fixed $k$ the ratio of the two masses at $t_p$ is bounded below by $\sqrt p/(64k)$. These finite spectra limit the high-order bounds one can infer from low-order collision masses alone. A bound for the actual ζ ordinates needs arithmetic information about their frequencies.
+
 ### A finite frequency band forces close sums
 
 Let $J$ have $N$ elements, with all $g_j\in[a,b]$. Write $F(m)=\sum_jm_jg_j$. There are $M=\binom{N+p-1}{p}$ count vectors of degree $p$.

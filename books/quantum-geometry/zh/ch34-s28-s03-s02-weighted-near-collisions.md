@@ -78,6 +78,36 @@ $$
 
 对实际 ζ 纵坐标，可按前一节在 $X=e^{-D}T^\beta$ 以上截取尾段，并取 $\delta=\log T$、$g_\gamma=\gamma/r$。给定 $H=\exp(cT^\beta\log T)$，可取 $N=\lfloor HT^2/r\rfloor_++1$，使网格误差不超过 $rB/(2T^2)$。要得到有限的起点范围，还需在某个 $L=L(T)$ 上证明相应的严格预算 $KNE_p(2/L)<(\log T)^{2p}$。目标阶数 $p$ 随 $T^\beta\log T$ 增长。对固定的有限尾段和固定 $p$，随着 $L$ 增大，$E_p(2/L)$ 最终等于精确碰撞质量 $E_p(0)$。若要量化 $L$，仍须控制正分辨率下的加权近碰撞。Tao、Trudgian 与 Yang 的定义 7 计数的是单位尺度的无权四元组，定理 64 的估计适用于固定的 $\sigma\ge7/10$。临界线尾段的增长阶数加权界仍待证。 [定义 7 与定理 64](https://arxiv.org/html/2501.16779v1) · [研究问题](https://github.com/the-omega-institute/trureturing/issues/33519)
 
+### 低阶碰撞质量能确定什么
+
+把频率三元组 $(0,1,k)$ 中最后一项移到 $k+\sqrt 2$。当总次数低于 $k$ 时，其余两项的计数还不足以抵消最后一项的变动。到次数 $k$，第一组三元组里恰好有一种新的抵消方式。
+
+::: {.theorem #thm-ch31-low-order-collision-agreement title="低阶碰撞质量一致时，高阶衰减率仍可不同" lean="D5/S3/Fourier/Concentration/LowOrderCollisionAgreement.low_order_agreement_and_high_order_disparity"}
+设 $k\ge2$ 为整数，$E_p(t)$ 与 $F_p(t)$ 分别为 $(0,1,k)$ 和 $(0,1,k+\sqrt2)$ 在权重 $(1/4,1/4,1/2)$ 下的有序对碰撞质量。对于任意 $0\le t<1$，有
+
+$$
+\begin{aligned}
+E_p(t)&=F_p(t) &&(0\le p<k,\ p\text{ 为整数}),\\
+E_k(t)&=F_k(t)+2k(1/4)^{k-1}(1/4)^k(1/2).
+\end{aligned}
+$$
+
+对于每个正整数 $p$，取 $t_p=1/[2(k+3)p]$，则
+
+$$
+E_p(t_p)\ge\frac{1}{16k\sqrt p},\qquad
+F_p(t_p)\le\frac4p.
+$$
+:::
+
+::: proof
+若最后一个计数不同，次数低于 $k$ 时，两组频率中的和都至少相差 $1$。若最后一个计数相同，距离小于 $1$ 迫使全部计数相同。次数恰为 $k$ 时，整数谱多出 $(0,k,0)$ 与 $(k-1,0,1)$ 这对计数及其反序。
+
+整数谱在任何小于 $1$ 的非负分辨率上都只计入精确碰撞，可在分辨率 $1/2$ 处应用方差下界。对无理谱，把差写成 $a+b\sqrt2$。不同计数对应的整数范数 $a^2-2b^2$ 非零，因此可用共轭因子的大小给出间隔下界，在 $t_p$ 处排除所有不同计数。剩余质量是多项分布权重的平方和。每个权重分解成两个公平二项概率的乘积，中央二项式系数界和尾部单调性将此乘积控制在 $4/p$。完整证明由 Lean 内核检查。[方差下界](ch34-s28-s03-s02-collision-variance.md#thm-ch31-variance-collision-lower)
+:::
+
+计数向量 $(p,0,0)$ 自身贡献的质量为 $(1/4)^{2p}>0$。固定 $k$ 时，两组质量在 $t_p$ 处的比值至少为 $\sqrt p/(64k)$。这个有限谱例子限定了仅凭低阶碰撞质量外推高阶上界的范围。实际 ζ 纵坐标还需要利用其频率关系。
+
 ### 有限频带中的和必须接近
 
 设有限指标集 $J$ 有 $N$ 个元素，各频率 $g_j$ 落在 $[a,b]$。记 $F(m)=\sum_jm_jg_j$，次数为 $p$ 的向量共有 $M=\binom{N+p-1}{p}$ 个。
