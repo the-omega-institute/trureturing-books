@@ -1,6 +1,6 @@
 # 26.1 Global Static Time Field $P = NP$ vs. Finite Observer $P \neq NP$—The Orthogonal Horizon and the Firewall of the Living Journey {#sec-coda-global-p-eq-np-local-p-ne-np}
 
-> **Author's Epigraph**: *"In the global static time field $P = NP$, but for a finite observer $P \neq NP$."*（“全局静态时间场P=NP, 但有限观察者P!=NP”）
+> **Author's Epigraph**: *"In the global static time field $P = NP$, but for a finite observer $P \neq NP$."*
 
 The author places the timeless crystal alongside the finite point-picking observer to offer a dual perspective on **$\mathrm{P}$ vs. $\mathrm{NP}$** (`MODEL`). The "$P = NP$" and "$P \neq NP$" of the title and the closing aphorism are the author's names for these two perspectives, not equations between complexity classes. Three levels must be distinguished: a static solution set describes which assignments satisfy the constraints; the postselection and CTC complexity theorems require specified additional computational resources ([@rem-ch30-postselection-ctc-literature]); and black-box query and bounded-degree semidefinite lower bounds constrain their respective restricted models ([@rem-ch30-query-sos-literature]). In the standard uniform Turing-machine model, $\mathrm{P}\neq\mathrm{NP}$ remains open (Chapter 20, [@conj-p-neq-np], `OPEN`). Removing time from a description, or merely requiring finite observer resources, does not settle this asymptotic question.
 
@@ -72,7 +72,7 @@ Placing the global static field alongside the finite observer expresses the auth
 | **Global Static Time Field** | Static representation alone gives no complexity equality; extra resources give $\mathrm{PostBQP}=\mathrm{PP}$ and $\mathrm{P}_{\mathrm{CTC}}=\mathrm{BQP}_{\mathrm{CTC}}=\mathrm{PSPACE}$ ([@rem-ch30-postselection-ctc-literature]) | Subspace intersection $\mathbf{S}^*=\bigcap_jH_j$; a nonzero state does not supply a preparation or search algorithm | **Timeless Truth (author's interpretation)**: the satisfying relations viewed as a self-consistent whole |
 | **Finite Observer in the Field** | Query and SoS bounds have restricted scope; standard $P\neq NP$ remains `OPEN` ([@rem-ch30-query-sos-literature], [@conj-p-neq-np]) | Small initial overlap, rotation by a specified reflection product [`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation), and local Gram blind spots | **The Unfolded Journey (author's interpretation)**: successive choices and proof steps give the journey meaning |
 
-***"The $P = NP$ of the global static field endows the universe with self-consistent truth; the $P \neq NP$ of the finite observer uses the $\frac{\pi}{2}$ orthogonal horizon to shield life from spoilers, stretching static truth into a magnificent journey worth measuring, proving, and choosing step by step."*** (**“全局静态场的 $P = NP$，赋予了宇宙绝对自洽的‘真’；而有限观察者的 $P \neq NP$，则用那道 $\frac{\pi}{2}$ 的正交视界替生命挡住了剧透，把静态的真理拉长成了一场值得一步步去丈量、去证明、去选择的壮丽旅程。”**)
+***"The $P = NP$ of the global static field endows the universe with self-consistent truth; the $P \neq NP$ of the finite observer uses the $\frac{\pi}{2}$ orthogonal horizon to shield life from spoilers, stretching static truth into a magnificent journey worth measuring, proving, and choosing step by step."***
 
 ---
 

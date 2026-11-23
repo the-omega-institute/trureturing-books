@@ -260,7 +260,7 @@
     - [A.1.4 Arithmetic, unified fields, and ternions](appendix-a-s01-s04-arithmetic-and-fields.md)
   - [A.2 Ten-Part Geometric Translation Guide](appendix-a-s02-symbols-and-operators.md)
   - [A.3 Verbatim Propositions and Thematic Synthesis](appendix-a-s03-verbatim-ledger.md)
-  - [A.4 Bilingual Glossary of Core Geometric and Formal Concepts](coda-s05-bilingual-glossary.md)
+  - [A.4 Glossary of Core Geometric and Formal Concepts](coda-s05-bilingual-glossary.md)
 - [Appendix B Clifford Algebra Cheat Sheet](appendix-b.md)
 - [Appendix C Verification Sources and Open-Problem Boundaries](appendix-c.md)
 - [Appendix D Six Classical Open Quantum Puzzles and the Five-Interpretation Geometric Duel](appendix-d.md)
