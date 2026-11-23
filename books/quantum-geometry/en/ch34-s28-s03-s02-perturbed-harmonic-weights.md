@@ -8,7 +8,7 @@ $$
 v_j=\frac{g_j}{g_j-r_j}w(g_j).
 $$
 
-For a finite support $A$ and weights $z$ on it, write $E(A,z)$ for the degree-$p$ near-collision mass at resolution $\eta$ of the selected frequencies $h|_A$, with the weight of identical degree vectors subtracted.
+For a finite support $A$ and weights $z$ on it, write $E(A,z)$ for the degree-$p$ near-collision mass at resolution $\eta$ of the selected frequencies $h|_A$, with the sum of squared monomial weights over all degree-$p$ vectors subtracted. Distinct vectors with identical frequencies still contribute at resolution zero.
 
 ::: {.theorem #thm-ch31-perturbed-harmonic-weights title="Transfer to the realized cutoff" lean="D5/S3/Fourier/Concentration/PerturbedHarmonicWeights.collision_excess_le_on_perturbed_cutoff"}
 Every index with $X<h_j\le T$ lies in $V$. Let $U$ be the set of those indices and set $u_j=w(h_j)$ on $U$. For every natural degree $p$ and every resolution $\eta\ge0$,

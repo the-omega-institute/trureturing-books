@@ -8,7 +8,7 @@ $$
 v_j=\frac{g_j}{g_j-r_j}w(g_j).
 $$
 
-对有限支撑 $A$ 及其上的权重 $z$，记 $E(A,z)$ 为所选频率 $h|_A$ 在分辨率 $\eta$ 下的 $p$ 次近碰撞质量减去相同次数向量的权重。
+对有限支撑 $A$ 及其上的权重 $z$，记 $E(A,z)$ 为所选频率 $h|_A$ 在分辨率 $\eta$ 下的 $p$ 次近碰撞质量减去所有 $p$ 次向量的单项式权重平方和。向量相异而频率相同时，即使分辨率为零，这一对仍有贡献。
 
 ::: {.theorem #thm-ch31-perturbed-harmonic-weights title="把预算传到实际截断" lean="D5/S3/Fourier/Concentration/PerturbedHarmonicWeights.collision_excess_le_on_perturbed_cutoff"}
 所有满足 $X<h_j\le T$ 的指标都在 $V$ 内。记这些指标为 $U$，在 $U$ 上取 $u_j=w(h_j)$。对任意自然数阶数 $p$ 和分辨率 $\eta\ge0$，
