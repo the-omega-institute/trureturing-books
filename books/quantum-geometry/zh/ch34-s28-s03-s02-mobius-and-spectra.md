@@ -911,7 +911,7 @@ $$
 $$
 固定 $r>0$ 与 $0<\beta<1$。当 $T$ 充分大时，$W(T)>0$，且对每个 $A\in\mathbb R$，存在 $a>A$ 使
 $$
-S(T,u/r)<\beta^2W(T)\qquad\text{对每个 }u\in[a,a+\exp(T^\beta)]\text{ 成立}.
+S(T,u/r)<\beta^2W(T)-\log T\qquad\text{对每个 }u\in[a,a+\exp(T^\beta)]\text{ 成立}.
 $$
 :::
 
@@ -929,6 +929,6 @@ $$
 
 在 RH 下，对实际 ζ 零点，已有质量误差界给出 $a_0=1/(4\pi)$。尾段平方和的改进来自 $m_\gamma=o(\log\gamma)$，其中 $m_\gamma$ 是解析重数。固定 $\epsilon>0$，取 $s=e^{-4/\epsilon}/2$。对零点 $\rho=1/2+i\gamma$，取 $c=\rho+s/4$ 并令 $g(z)=\zeta(c+z/4)/\zeta(c)$。圆盘上的 ζ 增长界与圆心处的倒数界给出 $|g(z)|\le C\gamma^2$，其中 $|z|\le1/2$。对零点 $z=-s$ 用 Jensen 估计，当 $\gamma$ 充分大时，得到 $m_\gamma\le\log(C\gamma^2)/\log((1/2)/s)\le\epsilon\log\gamma$。Goldston 与 Gonek 给出了更强的 $O(\log\gamma/\log\log\gamma)$ 阶。 [Goldston 与 Gonek，推论 1](https://arxiv.org/pdf/math/0511092#page=2)
 
-将 $X$ 以上分成二进区间，由 $N(Y)=O(Y\log Y)$ 得到 $m_\gamma\log\gamma/\gamma^2$ 的尾和为 $O(\log^2 X/X)$。由 $w_\gamma^2\le m_\gamma^2/\gamma^2$ 和重数的次对数界，得出所需的统一小 $o$ 界。因此在 RH 和互异正纵坐标有理线性无关的假设下，当 $T$ 充分大时，任意晚都有长度为 $\exp(T^\beta)$ 的窗口，其全段亏损严格大于 $1-\beta^2$。再结合有效线性无关假设下的 [@thm-ch31-zeta-local-average]，等号处仍存在错过所求相位对齐的窗口。更细的等待尺度仍开放。 [等号情形研究](https://github.com/the-omega-institute/trureturing/issues/33482)
+将 $X$ 以上分成二进区间，由 $N(Y)=O(Y\log Y)$ 得到 $m_\gamma\log\gamma/\gamma^2$ 的尾和为 $O(\log^2 X/X)$。由 $w_\gamma^2\le m_\gamma^2/\gamma^2$ 和重数的次对数界，得出所需的统一小 $o$ 界。因此在 RH 和互异正纵坐标有理线性无关的假设下，当 $T$ 充分大时，任意晚都有长度为 $\exp(T^\beta)$ 的窗口，其全段亏损严格大于 $1-\beta^2+\log T/W(T)$。再结合有效线性无关假设下的 [@thm-ch31-zeta-local-average]，等号处仍存在错过所求相位对齐的窗口。更细的等待尺度仍开放。 [等号情形研究](https://github.com/the-omega-institute/trureturing/issues/33482)
 
 Fourier 恢复估计见 [§31.1.3.2.1](ch34-s28-s03-s02-fourier-recovery.md)。

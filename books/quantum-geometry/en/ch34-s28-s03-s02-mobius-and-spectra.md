@@ -911,7 +911,7 @@ $$
 $$
 Fix $r>0$ and $0<\beta<1$. For all sufficiently large $T$, $W(T)>0$ and for every $A\in\mathbb R$ there exists $a>A$ such that
 $$
-S(T,u/r)<\beta^2W(T)\qquad\text{for every }u\in[a,a+\exp(T^\beta)].
+S(T,u/r)<\beta^2W(T)-\log T\qquad\text{for every }u\in[a,a+\exp(T^\beta)].
 $$
 :::
 
@@ -929,6 +929,6 @@ Choose a countably infinite rationally independent family of real numbers. Resca
 
 For the actual ζ zeros under RH, the existing mass error has $a_0=1/(4\pi)$. To get the square-tail hypothesis, use $m_\gamma=o(\log\gamma)$, where $m_\gamma$ is the analytic multiplicity. Fix $\epsilon>0$ and let $s=e^{-4/\epsilon}/2$. For a zero $\rho=1/2+i\gamma$, set $c=\rho+s/4$. Normalize by $g(z)=\zeta(c+z/4)/\zeta(c)$. The polynomial growth bound for ζ in the disk and the reciprocal bound at $c$ give $|g(z)|\le C\gamma^2$ on $|z|\le1/2$. Jensen's bound at the zero $z=-s$ yields $m_\gamma\le\log(C\gamma^2)/\log((1/2)/s)\le\epsilon\log\gamma$ for sufficiently large $\gamma$. Goldston and Gonek give the stronger order $O(\log\gamma/\log\log\gamma)$. [Goldston and Gonek, Corollary 1](https://arxiv.org/pdf/math/0511092#page=2)
 
-On successive dyadic bands above $X$, $N(Y)=O(Y\log Y)$ bounds the sum of $m_\gamma\log\gamma/\gamma^2$ by $O(\log^2 X/X)$. As $w_\gamma^2\le m_\gamma^2/\gamma^2$, sublogarithmic multiplicities give the required uniform small-o bound. Thus under RH and rational independence of the distinct positive ordinates, the actual deficit exceeds $1-\beta^2$ throughout arbitrarily late intervals of length $\exp(T^\beta)$ for all sufficiently large $T$. Together with [@thm-ch31-zeta-local-average] under Effective LI, this places equality on the side where some windows miss the requested alignment. Finer waiting scales remain open. [Endpoint research](https://github.com/the-omega-institute/trureturing/issues/33482)
+On successive dyadic bands above $X$, $N(Y)=O(Y\log Y)$ bounds the sum of $m_\gamma\log\gamma/\gamma^2$ by $O(\log^2 X/X)$. As $w_\gamma^2\le m_\gamma^2/\gamma^2$, sublogarithmic multiplicities give the required uniform small-o bound. Thus under RH and rational independence of the distinct positive ordinates, the actual deficit exceeds $1-\beta^2+\log T/W(T)$ throughout arbitrarily late intervals of length $\exp(T^\beta)$ for all sufficiently large $T$. Together with [@thm-ch31-zeta-local-average] under Effective LI, this places equality on the side where some windows miss the requested alignment. Finer waiting scales remain open. [Endpoint research](https://github.com/the-omega-institute/trureturing/issues/33482)
 
 The Fourier recovery estimates follow in [§31.1.3.2.1](ch34-s28-s03-s02-fourier-recovery.md).
