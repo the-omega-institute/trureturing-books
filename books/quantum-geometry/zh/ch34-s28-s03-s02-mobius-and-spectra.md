@@ -870,6 +870,22 @@ $$
 
 取 $\beta=1$，对任意 $\varepsilon>0$ 都能在每个长度为 $e^T$ 的区间找到一次命中，因此 $0\le D(T)<\varepsilon$ 最终成立。在 RH 与有效线性无关猜想下，若 $\mu(r)\ne0$，[@thm-ch31-weighted-phase-limsup] 的左端点误差取得完整的首项系数 $|\mu(r)|/(4\pi s)$。
 
+::: {.theorem #thm-ch31-zeta-local-average title="短区间平均改进幂次截断的亏损界" lean="D5/S3/Analytic/Oscillation/SpectrumThreeBandRecurrence.eventual_sine_three_band_recurrence"}
+沿用 [@thm-ch31-zeta-cutoff-recurrence] 的频谱、非负权重和 $W(T),S(T,v)$。固定 $r,\beta>0$，令 $m=\min(\beta,1)$。假设存在在 $m$ 连续的函数 $q$，使得对每个 $0<p<1$，有 $W(T^p)/W(T)\to q(p)$。再假设对每个 $e>0$，当 $X$ 充分大时，$W(X)>0$，且每个长度为 $\exp X$ 的区间都有一个 $b$ 满足 $1-S(X,b/r)/W(X)<e$。
+
+若 $\varepsilon>1-q(m)$，则对所有充分大的实数 $T$，$W(T)>0$，且每个区间 $[a,a+\exp(T^\beta)]$ 都含有一个 $u$ 满足
+
+$$
+1-\frac{S(T,u/r)}{W(T)}<\varepsilon.
+$$
+:::
+
+::: proof
+取 $0<\alpha<\kappa<\nu<m$，使 $\alpha,\nu$ 足够接近 $m$，并取充分小的 $e>0$。先在 $X=T^\alpha$ 取得低频命中 $b$，再对 $[b,b+h]$ 上的全段得分作平均，其中 $h=T^{-\kappa}$，第二个截断为 $Y=T^\nu$。截至 $X$ 的相位漂移使得分至多降低 $(hX/r)W(X)$。中段得分至少为 $-(W(Y)-W(X))$。对高于 $Y$ 的频率逐项积分，得到尾段的平均得分至少为 $-(2r/(hY))(W(T)-W(Y))$。连续性给出一个达到平均值的时刻。归一化后，低频漂移与高频平均误差均趋零，亏损上界趋于 $1+q(\nu)-2q(\alpha)+e\,q(\alpha)$。由 $q$ 在 $m$ 连续，可使它小于 $\varepsilon$。最终有 $\exp X+h\le\exp(T^\beta)$。
+:::
+
+对实际的 ζ 零点，在 RH 和有效线性无关猜想下，[@thm-ch31-zeta-cutoff-recurrence] 取指数 $1$ 给出前提中的低频命中，实际调和质量比给出 $q(p)=p^2$。于是充分阈值降为 $1-\min(\beta,1)^2$。最短统一等待尺度及严格阈值处的边界仍开放。 [有限指数平均的参考实现](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 
