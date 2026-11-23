@@ -108,6 +108,20 @@ Every nonnegative resolution below $1$ counts only exact collisions for the inte
 
 The count vector $(p,0,0)$ contributes $(1/4)^{2p}>0$ on the diagonal. At fixed $k$ the ratio of the two masses at $t_p$ is bounded below by $\sqrt p/(64k)$. These finite spectra limit the high-order bounds one can infer from low-order collision masses alone. A bound for the actual ζ ordinates needs arithmetic information about their frequencies.
 
+#### Local statistics on a common lattice
+
+Assign each frequency $g_j$ an integer $m_j\ge0$ and round it down to $\widetilde g_j=2^{-m_j}\lfloor 2^{m_j}g_j\rfloor$, retaining its index and weight. Fix a tail with $N>0$ indices, frequencies in $[a,b]$, and $m_-\le m_j\le m_+$. Write $h=2^{-m_-}$. Each rounding error lies in $[0,h)$, so any difference of two frequencies changes by at most $h$ in absolute value. For $\ell\ge1$ distinct indices, take differences against the first frequency and multiply each by the same scale $\lambda\ge0$. A $K$-Lipschitz test in the maximum norm then changes by at most $K\lambda h$ per tuple. Summing over all ordered tuples and dividing by $N$ bounds the change in the statistic by $K\lambda h(N)_\ell/N$, where $(N)_\ell$ is the falling factorial.
+
+The same rounding puts every frequency on the grid with step $2^{-m_+}$. The coarsest grid is contained in every finer grid, so the integer labels on the finest grid lie in $[A,B]$, where
+
+$$
+A=2^{m_+-m_-}\lfloor 2^{m_-}a\rfloor,\qquad B=\lfloor 2^{m_+}b\rfloor.
+$$
+
+The degree-$p$ sums have at most $1+p(B-A)$ possible integer positions. Group the multinomial weights by position and apply Cauchy–Schwarz to the group masses. If the total weight is $W>0$, the exact collision mass of the rounded spectrum is at least $W^{2p}/[1+p(B-A)]$. Any pair that collides exactly after rounding had an original gap of at most $ph$, since each degree-$p$ sum has rounding error in $[0,ph]$. [Collision bound for grouped mass](lean:D5/S3/Fourier/Concentration/FiniteSincCollisionMoment.sum_bin_mass_sq_le_nearCollisionMass)
+
+For example, fix $m_j=\lceil(\log_2(2+g_j))^2\rceil$ once for each positive frequency. On shared tail indices with $cT^\alpha\le g_j\le T$, fixed $c,\alpha>0$, $N=O(T\log T)$, and at most polynomial growth of $\lambda$, the change in every such fixed-order statistic tends to zero. Fix $0<\beta<1$. At $p\asymp T^\beta\log T$, the denominator satisfies $\log[1+p(B-A)]=O((\log T)^2)$. If $W\asymp(\log T)^2$ and $\delta=\log T$, the missing-window moment budget requires normalized mass at most $\exp(-2p\log\log T+O(p))$ even with one time sample. The rounded spectrum's exact collision mass already exceeds that budget. The two local statistics use the same tail indices. Separate height cutoffs require accounting for entries that cross the endpoints. The transfer to the original spectrum gives a lower bound at resolution $ph$, and the upper bound at the finer target resolution remains open.
+
 ### A finite frequency band forces close sums
 
 Let $J$ have $N$ elements, with all $g_j\in[a,b]$. Write $F(m)=\sum_jm_jg_j$. There are $M=\binom{N+p-1}{p}$ count vectors of degree $p$.
