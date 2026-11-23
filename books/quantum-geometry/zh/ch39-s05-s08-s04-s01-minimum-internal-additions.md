@@ -7,13 +7,9 @@
 :::
 
 ::: proof
-原来的跨行三元组每个恰好覆盖六个跨行有序点对。每个这样的点对又恰好出现一次，所以原有三元组数为 $q(q-1)(3r)^2/6$。若点势空间增加到 $d+1$ 维，所有基点势的联合取值把 $3qr$ 个点分成 $3q$ 个等大的纤维，每个纤维有 $r$ 个点。跨纤维的有序点对各需出现一次，于是全部三元组数至少为 $3q(3q-1)r^2/6$。两数相差
+维数判据要求每个未覆盖的同行点对在模三约化后具有相同的余数。因此，同一行内余数不同的两个点必在一个新增三元组中。每行有六种有序的异余数类对，每类有 $r$ 个点，故这类有序点对共有 $6qr^2$ 个。
 
-$$
-\frac{3q(3q-1)r^2-q(q-1)(3r)^2}{6}=qr^2.
-$$
-
-完整证明由 Lean 内核检查。[@thm-joint-circuit-potential-fibers] [@thm-joint-circuit-minimum-omissions-bound]
+对每个有序点对，选定一个含有它的新增三元组，并记下这两个点所在的有序位置。由三元组及位置能恢复原点对，所以这是一个单射。每个新增三元组只有六对不同的有序位置，因而至少需要 $qr^2$ 个新增三元组。完整证明由 Lean 内核检查。[@thm-joint-circuit-internal-dimension]
 :::
 
 ::: {.theorem #thm-joint-circuit-minimum-internal-attained title="模三剩余类上的横截设计达到下界" lean="D5/S3/Combinatorics/Matroids/RankThreeMinimumInternalAdditions.exists_internal_additions_attaining"}

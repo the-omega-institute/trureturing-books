@@ -7,13 +7,9 @@ Under these conditions, if the normalized potential space grows to dimension $d+
 :::
 
 ::: proof
-Each original mixed triple covers six ordered pairs from different rows, and each such pair occurs once. The original triple count is therefore $q(q-1)(3r)^2/6$. If the potential space grows to dimension $d+1$, evaluating a basis of potentials partitions the $3qr$ points into $3q$ equal fibers of size $r$. Every ordered pair from distinct fibers must occur once, so the total triple count is at least $3q(3q-1)r^2/6$. The difference is
+The dimension criterion requires every uncovered pair within a row to have the same residue modulo three. Thus two points in the same row with different residues must occur together in an added triple. Each row has six ordered pairs of distinct residue classes, with $r$ points per class. Across all rows this gives $6qr^2$ ordered point pairs.
 
-$$
-\frac{3q(3q-1)r^2-q(q-1)(3r)^2}{6}=qr^2.
-$$
-
-The full proof is checked by the Lean kernel. [@thm-joint-circuit-potential-fibers] [@thm-joint-circuit-minimum-omissions-bound]
+For every such pair, choose a containing triple and record the ordered slots of the two points. The triple and slots recover the original pair, so the assignment is injective. Each added triple supplies only six ordered pairs of distinct slots, giving the lower bound $qr^2$. The full proof is checked by the Lean kernel. [@thm-joint-circuit-internal-dimension]
 :::
 
 ::: {.theorem #thm-joint-circuit-minimum-internal-attained title="A transversal design on the residue classes attains the bound" lean="D5/S3/Combinatorics/Matroids/RankThreeMinimumInternalAdditions.exists_internal_additions_attaining"}
