@@ -902,99 +902,33 @@ $$
 
 取 $\beta<\kappa<\alpha<\sqrt{1-\varepsilon}$，以 $X=T^\alpha$ 截取首段，并取 $c>0$ 使 $\alpha^2<1-\varepsilon-3c$。由 $W(X)/W(T)\to\alpha^2$，首段质量最终至多为 $(1-\varepsilon-3c)W(T)$。对 $(\gamma-1,\gamma]$ 的局部零点计数给出 $m_\gamma=O(\log(\gamma+2))$。因此存在 $C>0$，使每个尾段权重至多为 $CT^{-\kappa}$，从而 $V\le CT^{-\kappa}W(T)$。取 $\delta=cW(T)$ 与 $h=cr/T$，则网格点数最终至多为 $\exp(2T^\beta)$。若 $V>0$，因为 $\kappa>\beta$ 且最终 $W(T)\ge1$，Hoeffding 指数 $\delta^2/(2V)$ 最终超过 $2T^\beta$。网格点之间的误差至多为 $h(T/r)W(T)=cW(T)$。所以 $M<(1-\varepsilon)W(T)$，可取 $B=(1-\varepsilon)W(T)$ 应用有限定理。 [调和质量极限](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHRootWeightedSine.lean) · [局部计数](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Weil/ZeroData/ZetaSpectrumLocalCount.lean) · [相关有限集中估计，定理 3.1](https://doi.org/10.1007/s13398-022-01369-4)
 
-在 RH 和有效线性无关猜想下，若 $0<\beta<1$，统一命中的上界和缺失窗口从两侧确定阈值 $1-\beta^2$。有效线性无关蕴含普通线性无关，因为每个固定的整数关系最终都会进入它所控制的系数盒。等号处及更细的等待尺度在这里仍未解决。 [研究问题](https://github.com/the-omega-institute/trureturing/issues/33477)
+在 RH 和有效线性无关猜想下，若 $0<\beta<1$，统一命中的上界和缺失窗口从两侧确定阈值 $1-\beta^2$。有效线性无关蕴含普通线性无关，因为每个固定的整数关系最终都会进入它所控制的系数盒。[研究问题](https://github.com/the-omega-institute/trureturing/issues/33477)
 
-::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
-假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
-
+::: {.theorem #thm-ch31-critical-missing-window title="临界质量比例处的缺失窗口" lean="D5/S3/Analytic/Oscillation/SpectrumCriticalMissingWindow.eventual_critical_missing_window"}
+沿用 [@thm-ch31-zeta-cutoff-recurrence] 中包含端点的质量 $W(T)$ 和正弦得分 $S(T,v)$。假设频率在有理数上独立，且权重非负。假设 $W(Y)=a_0\log^2Y+O(1+\log Y)$，其中 $a_0>0$。再假设对每个 $\eta>0$，当 $X$ 充分大时，对所有 $T\ge X$ 都有
 $$
-F(u)=\frac{E_m(e^u,e^{u+L})}{D_{s_m}(e^u,e^{u+L})}
+\sum_{X<\gamma_j\le T}w_j^2\le\eta\frac{\log^2 X}{X}.
 $$
-
-在 $[U,U+T]$ 上 Lebesgue 可积，并满足
-
+固定 $r>0$ 与 $0<\beta<1$。当 $T$ 充分大时，$W(T)>0$，且对每个 $A\in\mathbb R$，存在 $a>A$ 使
 $$
-\left|\frac1T\int_U^{U+T}F(u)\,du+\frac{\mu(q)q}{(q-1)s_m}\right|\le\frac{C}{T}.
+S(T,u/r)<\beta^2W(T)\qquad\text{对每个 }u\in[a,a+\exp(T^\beta)]\text{ 成立}.
 $$
 :::
 
 ::: proof
-分母为 $e^{-s_m u}(1-e^{-s_m L})>0$。在 RH 下，归一化的次数 $r$ 根原始量增量由频率 $\operatorname{Im}(\rho)/r$ 的可绝对求和级数给出。两个端点对应同一个零点，仅相差固定窗宽的因子。零点高度下界使每个频率的指数积分由同一个常数控制，从而得到有界的谱原始量。两个平移积分相减后只剩两段长度为 $L$ 的边界区间。结合 $e^{-s_m L}L/(1-e^{-s_m L})\le 1/s_m$，得到独立于 $U,T,L$ 的根谱积分界。归一化后的 $E_q$ 按 $e^{-\delta_m u}$ 衰减，也有独立于 $U,T$ 的积分界。将两项的积分界除以 $T$，留下常数 $-\mu(q)q/((q-1)s_m)$。
+令 $L=\log T$、$X=e^{-K}T^\beta$。若质量误差至多为 $C(1+\log Y)$，取 $K=(C(\beta+\beta^2)+4)/(2a_0\beta)$。展开 $\log X=\beta L-K$ 可得最终 $\beta^2W(T)-W(X)>3L$。在时间变量 $v=u/r$ 中取网格间距 $1/T^2$、尾段阈值 $L$。尾段斜率至多为 $TW(T)$，所以插值误差最终小于 $L$。取 $\eta=e^{-K}/(8\beta^2)$，方差至多为 $L^2/(8T^\beta)$。方差为正时，Hoeffding 指数至少为 $4T^\beta$，而网格点数至多为 $\exp(2T^\beta)$。这些不等式给出 [@thm-ch31-finite-missing-window] 所需的网格预算和严格余量。将得分时间中的两个端点乘以 $r$ 即得所述区间。
 :::
 
-若 $q$ 含平方因子，算术平均为零。次数 $r$ 的根谱项仍由 $\mu(r)$ 决定，端点展开允许它在个别窗口中出现。误差常数可以依赖于阶数 $m$。
-
-::: {.theorem #thm-ch31-prime-window-even-fourier title="傅里叶系数恢复零点频率与重数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffFourier.signed_window_even_cutoff_fourier"}
-假设 RH。取 $q=m+1=2r$、$m\ge2$，固定对数窗宽 $L>0$。沿用 [@thm-ch31-prime-window-even-cesaro] 中的 $s=s_m$ 与归一化余项 $F$。对非平凡零点 $\rho$，令 $\omega_\rho=\operatorname{Im}(\rho)/r$，并定义
-
-$$
-b_{r,L}(\rho)=
-\frac{2r^2}{\rho(r-\rho)(r-2\rho)}
-\frac{e^{(-s+i\omega_\rho)L}-1}{1-e^{-sL}}.
-$$
-
-令 $A(0)=-\mu(q)q/((q-1)s)$。对 $\omega\ne0$，定义
-
-$$
-A(\omega)=-\mu(r)\sum_{k:\,\omega_{\rho_k}=\omega} b_{r,L}(\rho_k),
-$$
-
-其中 $\rho_k$ 按解析重数枚举实际非平凡零点。存在共同起点阈值 $U_0>0$。对每个固定的 $m,L,\omega$，存在常数 $C>0$，使得对所有 $U\ge U_0$ 与 $T>0$，调制后的余项在 $[U,U+T]$ 上 Lebesgue 可积，且
-
-$$
-\left|\frac{1}{T}\int_U^{U+T} F(u)e^{-i\omega u}\,du-A(\omega)\right|
-\le \frac{C}{T}.
-$$
-
-对每个解析重数为 $n_\rho$ 的非平凡零点 $\rho$，有 $A(\omega_\rho)=-\mu(r)n_\rho b_{r,L}(\rho)$，且 $b_{r,L}(\rho)\ne0$。
+::: {.theorem #thm-ch31-critical-missing-window-model title="满足临界窗口假设的无限频谱" lean="D5/S3/Analytic/Oscillation/SpectrumCriticalMissingWindowModel.exists_infinite_critical_model"}
+存在一个局部有限的正频谱，含有无限多个互异且有理线性无关的频率，权重全部严格为正，并满足 [@thm-ch31-critical-missing-window] 的质量与尾段平方和假设。
 :::
 
 ::: proof
-将偶数截断展开除以幂差，得到算术常数、归一化的根原函数增量，以及由常数乘 $e^{-\delta_m u}$ 控制的余项。归一化增量有绝对可和的指数展开。实际零点项按共轭配对，故其和为实数。每个零点项的系数包含两个端点的变化，这给出 $b_{r,L}$ 中的窗宽因子。
-
-乘以 $e^{-i\omega u}$ 后，每一项的频率都减去 $\omega$。频率匹配的每个零点项贡献其系数乘 $T$。ζ 零点集合是闭离散集。删去 $1/2+ir\omega$ 后仍得到闭集，它与被删点的距离为正。在 RH 下，这给出 $\omega$ 与所有不匹配频率的正间隔。每个不匹配的指数项积分的模至多为该间隔倒数的两倍，此界与 $U,T$ 无关。绝对可和性给出这些项的总积分界，指数衰减也给出余项的积分界。在零频处没有匹配的零点项，在非零频处算术常数的振荡积分有界。单频积分界与调制步骤沿用对照仓库中的频率检验。 [单频积分界](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62) · [系数提取](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L109-L143)
-
-在 RH 下，一个虚部确定临界线上的唯一点。匹配项的因子相同，恰好出现 $n_\rho$ 次。窗宽因子分子中的指数项模长为 $e^{-sL}<1$，各分母也均非零。
+取一族可数无限的有理线性无关实数。将每项乘以非零有理数，使第 $n$ 个频率位于 $(n+1)^{1/4}$ 与 $(n+2)^{1/4}$ 之间，其中 $n\ge0$。赋予该频率权重 $\log^2(n+2)-\log^2(n+1)$。完整频段的权重相消求和，给出质量系数 $16$ 和所需误差界。权重平方为 $O((n+1)^{-3/2})$，超过 $X$ 的频率从阶为 $X^4$ 的下标开始。平方和尾界为 $O(X^{-2})$，对上截断一致。
 :::
 
-若 $\mu(r)\ne0$，非零测试频率的系数非零当且仅当 $1/2+ir\omega$ 是实际零点。此时除以 $-\mu(r)b_{r,L}(1/2+ir\omega)$，便得到该零点的解析重数。若 $r$ 含平方因子，所有非零频率的系数均为零。这里的误差常数允许依赖测试频率与固定窗宽；零频处对所有正窗宽统一的估计见 [@thm-ch31-prime-window-even-cesaro]。
+在 RH 下，对实际 ζ 零点，已有质量误差界给出 $a_0=1/(4\pi)$。尾段平方和的改进来自 $m_\gamma=o(\log\gamma)$，其中 $m_\gamma$ 是解析重数。固定 $\epsilon>0$，取 $s=e^{-4/\epsilon}/2$。对零点 $\rho=1/2+i\gamma$，取 $c=\rho+s/4$ 并令 $g(z)=\zeta(c+z/4)/\zeta(c)$。圆盘上的 ζ 增长界与圆心处的倒数界给出 $|g(z)|\le C\gamma^2$，其中 $|z|\le1/2$。对零点 $z=-s$ 用 Jensen 估计，当 $\gamma$ 充分大时，得到 $m_\gamma\le\log(C\gamma^2)/\log((1/2)/s)\le\epsilon\log\gamma$。Goldston 与 Gonek 给出了更强的 $O(\log\gamma/\log\log\gamma)$ 阶。 [Goldston 与 Gonek，推论 1](https://arxiv.org/pdf/math/0511092#page=2)
 
-::: {.theorem #thm-ch31-prime-window-fourier-uniform-width title="傅里叶恢复对所有正窗宽统一" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffUniformWidth.signed_window_even_cutoff_fourier_uniform_width"}
-假设 RH。沿用 [@thm-ch31-prime-window-even-fourier] 中的偶数截断、归一化余项 $F$ 与依赖窗宽的目标系数 $A$。存在共同起点阈值 $U_0>0$。对每个允许的阶数 $m$ 与每个实测试频率 $\omega$，存在 $C>0$，使得对所有 $L>0$、$U\ge U_0$ 与 $T>0$，调制后的余项在 $[U,U+T]$ 上 Lebesgue 可积，且
+将 $X$ 以上分成二进区间，由 $N(Y)=O(Y\log Y)$ 得到 $m_\gamma\log\gamma/\gamma^2$ 的尾和为 $O(\log^2 X/X)$。由 $w_\gamma^2\le m_\gamma^2/\gamma^2$ 和重数的次对数界，得出所需的统一小 $o$ 界。因此在 RH 和互异正纵坐标有理线性无关的假设下，当 $T$ 充分大时，任意晚都有长度为 $\exp(T^\beta)$ 的窗口，其全段亏损严格大于 $1-\beta^2$。再结合有效线性无关假设下的 [@thm-ch31-zeta-local-average]，等号处仍存在错过所求相位对齐的窗口。更细的等待尺度仍开放。 [等号情形研究](https://github.com/the-omega-institute/trureturing/issues/33482)
 
-$$
-\left|\frac{1}{T}\int_U^{U+T}F(u)e^{-i\omega u}\,du-A(\omega)\right|
-\le \frac{C}{T}.
-$$
-
-在每个正窗宽，零频系数等于 $-\mu(q)q/((q-1)s)$。每个实际非平凡零点 $\rho$ 在 $\omega_\rho$ 处的系数等于 $-\mu(r)n_\rho b_{r,L}(\rho)$，其中 $b_{r,L}(\rho)\ne0$。
-:::
-
-::: proof
-对频率 $\lambda$，记 $t=e^{-sL}$。将 $te^{i\lambda L}-1$ 写成 $t(e^{i\lambda L}-1)-(1-t)$。由 $|e^{i\lambda L}-1|\le|\lambda|L$ 与 $tL/(1-t)\le 1/s$，得到
-
-$$
-\left|\frac{e^{(-s+i\lambda)L}-1}{1-e^{-sL}}\right|\le 1+\frac{|\lambda|}{s}.
-$$
-
-根原函数将每项系数除以其复指数。对于零点项 $\rho_k$，$\lambda=\operatorname{Im}(\rho_k)/r$ 是该指数的虚部，故 $|\lambda|$ 不超过该指数的模。估计系数范数时，新增的 $|\lambda|$ 因子被逆指数吸收。所得系数上界可和，且与 $L$ 无关。傅里叶误差用这些范数之和乘上其余频率的间隔倒数控制。算术项与余项的估计已经覆盖所有正窗宽。系数的恒等式见 [@thm-ch31-prime-window-even-fourier]。
-:::
-
-误差常数可以依赖 $\omega$。在非零频率处，要恢复的系数仍依赖窗宽。
-
-::: {.theorem #thm-ch31-prime-window-detuned-fourier title="测试频率附近的有限时长响应" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoffFourierResolution.signed_window_even_cutoff_detuned_fourier"}
-假设 RH。沿用 [@thm-ch31-prime-window-fourier-uniform-width] 的偶数截断、归一化带符号余项 $F_L$ 与系数 $A_L(\omega)$，下标表示窗宽。记 $K(v)=\int_0^1 e^{-ivt}\,dt$。存在共同起点阈值 $U_0>0$。对每个允许的截断阶数 $m$ 和实参考频率 $\omega$，存在 $C>0$，使得对所有 $L>0$、$U\ge U_0$、$T>0$、$R\ge0$ 及满足 $|v|\le R$ 的实数 $v$，下式中的被积函数 Lebesgue 可积，且
-
-$$
-\left|\frac{1}{T}\int_U^{U+T}F_L(u)e^{-i\omega u}e^{-iv(u-U)/T}\,du
--A_L(\omega)K(v)\right|\le\frac{C(1+R)}{T}.
-$$
-
-对每个正窗宽，$A_L(0)=-\mu(q)q/((q-1)s)$。若非平凡零点 $\rho$ 的解析重数为 $n_\rho$，则 $A_L(\omega_\rho)=-\mu(r)n_\rho b_{r,L}(\rho)$，其中 $b_{r,L}(\rho)\ne0$。
-:::
-
-::: proof
-窗宽一致估计用同一常数控制平均区间每段前缀上的原函数 $\int_U^x(F_L(u)e^{-i\omega u}-A_L(\omega))\,du$。把复数乘积展开成实部和虚部的各项，再对附加相位分部积分。该相位的模为一，导数的模为 $|v|/T$，故端点项的界与 $T$ 无关，导数项至多为常数乘 $|v|$。最后除以 $T$。对常数系数项作代换 $u=U+Tt$，便得到响应 $K(v)$，即单频检验使用的指数平均。 [指数平均](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
-:::
-
-附加相位对应频率 $\omega+v/T$，相位校正 $e^{ivU/T}$ 将偏移相位的原点放在左端点。若 $v\ne0$，则 $K(v)=e^{-iv/2}\sin(v/2)/(v/2)$，而 $K(0)=1$。该界给出对有界偏移 $v$、所有正窗宽及足够晚起点的一致收敛，极限为 $A_L(\omega)K(v)$。常数可以依赖参考频率。
+Fourier 恢复估计见 [§31.1.3.2.1](ch34-s28-s03-s02-fourier-recovery.md)。
