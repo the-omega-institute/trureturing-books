@@ -958,6 +958,6 @@ $$
 [@thm-ch31-critical-missing-window-model] 的四次根频段模型具有对上截断一致的 $O(X^{-2})$ 平方尾界，因而满足所需的对数平方尾界。
 :::
 
-在 RH 下，实际 ζ 纵坐标的权重为 $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$，其中 $m_\gamma$ 是解析重数。Baluyot、Goldston、Suriajaya 与 Turnage-Butterbaugh 的一致配对相关公式给出归一化 Montgomery 和对 $[0,1]$ 上权重 $2(1-\alpha)$ 的有界平均。在临界线上，平均后每个纵坐标差的贡献非负。三角权重的余弦变换在非零处为 $2(1-\cos z)/z^2$，在零处为 $1$。因此同纵坐标项的贡献恰为 $\sum_{\gamma\le Y}m_\gamma^2$，还原归一化后得到其 $O(Y\log Y)$ 上界。在 $X$ 以上逐个二进区间用 $w_\gamma^2\le m_\gamma^2/\gamma^2$ 再求几何级数，即得对 $T\ge X$ 一致的 $V(X,T)=O(\log X/X)$。互异正纵坐标有理线性无关时可应用上述频谱定理。解析配对相关公式来自文献。现有界仍留下最优等待尺度这一开放问题。 [配对相关公式，定理 1 与 §7](https://arxiv.org/abs/2306.04799)
+在 RH 下，实际 ζ 纵坐标的权重为 $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$，其中 $m_\gamma$ 是解析重数。Baluyot、Goldston、Suriajaya 与 Turnage-Butterbaugh 的一致配对相关公式给出归一化 Montgomery 和对 $[0,1]$ 上权重 $2(1-\alpha)$ 的有界平均。在临界线上，平均后每个纵坐标差的贡献非负。三角权重的余弦变换在非零处为 $2(1-\cos z)/z^2$，在零处为 $1$。因此同纵坐标项对归一化平均的贡献恰为 $2\pi\sum_{0<\gamma\le Y}m_\gamma^2/(Y\log Y)$。由平均有界得 $\sum_{0<\gamma\le Y}m_\gamma^2=O(Y\log Y)$。在 $X$ 以上逐个二进区间用 $w_\gamma^2\le m_\gamma^2/\gamma^2$ 再求几何级数，即得对 $T\ge X$ 一致的 $V(X,T)=O(\log X/X)$。互异正纵坐标有理线性无关时可应用上述频谱定理。解析配对相关公式来自文献。现有界仍留下最优等待尺度这一开放问题。 [配对相关公式，定理 1 与 §7](https://arxiv.org/abs/2306.04799)
 
 Fourier 恢复估计见 [§31.1.3.2.1](ch34-s28-s03-s02-fourier-recovery.md)。
