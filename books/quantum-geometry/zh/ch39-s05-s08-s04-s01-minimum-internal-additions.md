@@ -97,3 +97,38 @@ $$
 
 为取得中间任意一个数，先在每个余数类放入一个达到装填上界的三元组族。从这些同余数三元组的并集中任取 $N-3^d r^2$ 个。删去三元组会保留每个类内的点对唯一性。这些选择连同各行的拉丁方，由 [@thm-joint-circuit-steiner-realization] 给出所求扩充。完整证明由 Lean 内核检查。
 :::
+
+## 35.6.8.4.1.4 饱和扩充的大小
+
+仍固定跨行三元组，并要求点对唯一性及归一化点势空间维数 $d+1$。如果在这两个条件下无法再加入一个同行三元组，就称扩充为**饱和**。任何包含关系下的真扩充都允许先加入其中的任意一个新三元组，因此饱和也等价于按包含关系极大。 [@thm-joint-circuit-steiner-insert]
+
+::: {.theorem #thm-joint-circuit-steiner-insert title="可从较大的扩充中单独加入一个三元组" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalSizeSpectrum.internal_extension_insert"}
+若两个符合条件的同行三元组族满足 $G\subseteq H$，则从 $H$ 任选一个三元组加入 $G$，所得的族仍符合条件。
+:::
+
+::: proof
+$G$ 的每个拉丁方三元组在 $H$ 中仍是拉丁方三元组。它在余数 $0,1$ 两类中的点确定方格，在余数 $2$ 类中的点确定方格值。因此两族的拉丁方完全相同。若所选三元组尚未出现，它属于某个余数类。只把该块加到相应类里，所得装填仍是 $H$ 在该类中装填的子集。于是点对唯一性与额外维度同时保留。
+:::
+
+::: {.theorem #thm-joint-circuit-steiner-saturated title="饱和等价于每个余数类中的装填极大" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalSizeSpectrum.saturated_internal_extension_iff"}
+沿用实际余数类的编号。一个扩充饱和，当且仅当其分解中的每个部分斯坦纳三元系都按包含关系极大。
+:::
+
+::: proof
+若某一类的装填还能扩大，只扩大这一类便给出全局真扩充。反过来，全局真扩充固定全部拉丁方，因而至少扩大了一个余数类内的装填。
+:::
+
+::: {.theorem #thm-joint-circuit-steiner-six-saturated-sizes title="六标签时饱和大小隔一个整数取值" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalSizeSpectrum.saturated_six_size_spectrum"}
+当 $r=6$ 时，饱和扩充的新增三元组数恰为
+$$
+36\cdot 3^d+2\cdot 3^{d+1}+2k,\qquad 0\le k\le 3^{d+1},\quad k\in\mathbb Z.
+$$
+:::
+
+::: proof
+六标签装填的两个极大大小也可由经典的局部谱结论得出。 [Colbourn §§2.3.1–2.3.3](https://ajc.maths.uq.edu.au/pdf/4/ocr-ajc-v4-p143.pdf)
+
+在六个标签上，每个标签至多属于两个三元组，因为每块要为该标签使用两个不同搭档，总共只有五个搭档。因此至多有四块。零块与一块都能补充。若有三块，它们不能有一对互不相交，否则任何第三块都会重复其中一块的点对。因此三块两两相交于三个不同的点。每块还各有一个只属于自己的点，这三个点之间的点对都未使用，可以把它们组成第四块。
+
+两种极大大小都能取到。用简写 $abc=\{a,b,c\}$，两块的例子是 $012,345$，未使用的点对形成完全二部图，没有可补的三角形。四块的例子是 $012,034,135,245$，已达到上界。于是 $3^{d+1}$ 个实际余数类可独立选两块或四块。若恰有 $k$ 类选四块，加上每行 $36$ 块拉丁方三元组，即得所述数目。例如 $d=1$ 时，饱和大小恰为 $126,128,\ldots,144$。
+:::
