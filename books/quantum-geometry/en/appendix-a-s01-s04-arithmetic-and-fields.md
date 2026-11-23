@@ -47,7 +47,7 @@ $(1 - v_\epsilon)^2 + c_\epsilon^2 \equiv 1,\quad D_{\mathrm{cs}}[f]\!\bigl(x_0;
 **Minimal Circular-Arc Calculus Applied to the Riemann Hypothesis: Second-Order Sagitta Phase Transition, Hermite–Biehler Radial Monotonicity Lock & Finite-Precision Stokes Cancellation**（极小圆弧体微积分切入黎曼猜想：二阶弦弧矢高相变、埃尔米特—比勒径向单调锁与有限精度斯托克斯相消）
 
 **Geometric Intuition Term (本书几何直觉语言):**
-**Euler–Dirichlet product identity on $\operatorname{Re}(s) > 1$, Mertens' Third Theorem truncated Euler-product asymptotic $\prod_{p\le\lfloor x\rfloor}(1 - 1/p) \sim e^{-\gamma}/\ln x$, global complex differentiability, functional reflection $\xi(1-s)=\xi(s)$, reflection–conjugation covariance $\xi(1-\bar{s})=\overline{\xi(s)}$, and nontrivial-zero equivalence of $\xi(s) = \operatorname{xiReading}(s)$, the quartic off-critical zero-quartet symmetry counterexample `offCriticalQuartic`, right-half-strip $\frac{1}{2} < \operatorname{Re}(\rho) < 1$ reduction for `RiemannHypothesis`, general Abelian-group simplicial two-cochain repair and $d^2=0$ exactness, and the Hermitian block Schur-complement `IsLeast` variational minimum (`LEAN ✓`); paired on the $\sigma > \frac{1}{4}$ quartic-convergence domain with the critical $\sigma = \frac{1}{2}$ prime-rotor sagitta blowup $-\frac{1}{2}\ln\varepsilon_{\mathrm{self}} + C_{\mathrm{sag}} + \mathcal{O}(\varepsilon_{\mathrm{self}})$ ($C_{\mathrm{sag}} = \frac{M}{2} + \Delta C_{\mathrm{sag}} \approx 0.13074861 - 0.01860282 = +0.11214579$, five-prime rational partial sum $\Sigma_{\mathrm{sag}}(\frac{1}{2}; 11) \approx 0.61588148$ vs. bounded $\Sigma_{\mathrm{sag}}(1; 11) \approx 0.21171004$), the exact $\epsilon^2$-free two-shell advancement identity $\Delta_\epsilon^{\mathrm{HB}}(u,t) \equiv 2\epsilon\operatorname{Re}(\overline{\xi(s)}\xi'(s)) \equiv \epsilon\frac{\partial}{\partial u}\lvert\xi(\frac{1}{2}+u+\hat{\mathbf{i}}t)\rvert^2$, the holomorphic Hermite–Biehler involution $E_\epsilon^\#(s) = \overline{E_\epsilon(1-\bar{s})} = E_\epsilon(1-s)$ yielding the entire reproducing kernel $K_\epsilon(w,s) \equiv \frac{\xi'(s)\overline{\xi(w)}+\xi(s)\overline{\xi'(w)}}{2[(s-1/2)+(\bar{w}-1/2)]}$ with two-way equivalence $K_\epsilon \succeq 0 \iff \operatorname{RH}$ and Identity-Theorem exclusion of off-line zeros of arbitrary multiplicity $m \ge 1$, the exact four-zero rogue-quartet sum-of-squares negative derivative $\frac{\partial}{\partial u}F_{\mathrm{rogue},4}(u,\gamma_0) < 0$ ($-4.78267581\times 10^{-7} < 0$ vs. genuine $+3.99429305\times 10^{-4} > 0$ at $t = \gamma_1,\; \delta = 0.20,\; u = 0.10,\; \epsilon = 0.10$), and finite-mesh Stokes zero-vortex cancellation across $[10, 35]$ ($10\pi \approx 31.4159265359$ at $u_0 = -0.10$ vs. `0.0000000000` at $u_0 = +0.10$, separating continuous edge integrals from $\lvert\Delta_e\arg\xi\rvert < \pi$ vertex principal phase, `manual derivation` / `NUM`), together with Mertens' (1874) reciprocal-prime theorem, Davenport (2000) paired Hadamard products, Gonek–Hughes–Keating (2007) hybrid approximations, de Branges (1968, 1986, 1992, 1994) Hermite–Biehler Hilbert spaces, Lagarias (1999, 2006) kernel-positivity equivalence, Conrey & Li's (2000) 34th-zero refutation of bare unit-shift positivity, and Sondow & Dumitrescu's (2010) radial monotonicity theorem (`Literature`; the external proof of RH is cited in [@conj-riemann-hypothesis], while the multiplicative Schur-pivot modifier positivity bridge [@prob-ch34-schur-hb-kernel-positivity-bridge] remains open), sealing the overarching vault of Chapter 31 alongside interactive laboratory `arc-calculus-riemann-hermite-biehler-sandbox` (`RIEMANN//STOKES`, `MODEL`)**
+**Euler–Dirichlet product identity on $\operatorname{Re}(s) > 1$, Mertens' Third Theorem truncated Euler-product asymptotic $\prod_{p\le\lfloor x\rfloor}(1 - 1/p) \sim e^{-\gamma}/\ln x$, global complex differentiability, functional reflection $\xi(1-s)=\xi(s)$, reflection–conjugation covariance $\xi(1-\bar{s})=\overline{\xi(s)}$, and nontrivial-zero equivalence of $\xi(s) = \operatorname{xiReading}(s)$, the quartic off-critical zero-quartet symmetry counterexample `offCriticalQuartic`, right-half-strip $\frac{1}{2} < \operatorname{Re}(\rho) < 1$ reduction for `RiemannHypothesis`, general Abelian-group simplicial two-cochain repair and $d^2=0$ exactness, and the Hermitian block Schur-complement `IsLeast` variational minimum (`LEAN ✓`); paired on the $\sigma > \frac{1}{4}$ quartic-convergence domain with the critical $\sigma = \frac{1}{2}$ prime-rotor sagitta blowup $-\frac{1}{2}\ln\varepsilon_{\mathrm{self}} + C_{\mathrm{sag}} + \mathcal{O}(\varepsilon_{\mathrm{self}})$ ($C_{\mathrm{sag}} = \frac{M}{2} + \Delta C_{\mathrm{sag}} \approx 0.13074861 - 0.01860282 = +0.11214579$, five-prime rational partial sum $\Sigma_{\mathrm{sag}}(\frac{1}{2}; 11) \approx 0.61588148$ vs. bounded $\Sigma_{\mathrm{sag}}(1; 11) \approx 0.21171004$), the exact $\epsilon^2$-free two-shell advancement identity $\Delta_\epsilon^{\mathrm{HB}}(u,t) \equiv 2\epsilon\operatorname{Re}(\overline{\xi(s)}\xi'(s)) \equiv \epsilon\frac{\partial}{\partial u}\lvert\xi(\frac{1}{2}+u+\hat{\mathbf{i}}t)\rvert^2$, the holomorphic Hermite–Biehler involution $E_\epsilon^\#(s) = \overline{E_\epsilon(1-\bar{s})} = E_\epsilon(1-s)$ yielding the entire reproducing kernel $K_\epsilon(w,s) \equiv \frac{\xi'(s)\overline{\xi(w)}+\xi(s)\overline{\xi'(w)}}{2[(s-1/2)+(\bar{w}-1/2)]}$ with two-way equivalence $K_\epsilon \succeq 0 \iff \operatorname{RH}$ and Identity-Theorem exclusion of off-line zeros of arbitrary multiplicity $m \ge 1$, the exact four-zero rogue-quartet sum-of-squares negative derivative $\frac{\partial}{\partial u}F_{\mathrm{rogue},4}(u,\gamma_0) < 0$ ($-4.78267581\times 10^{-7} < 0$ vs. genuine $+3.99429305\times 10^{-4} > 0$ at $t = \gamma_1,\; \delta = 0.20,\; u = 0.10,\; \epsilon = 0.10$), and finite-mesh Stokes zero-vortex cancellation across $[10, 35]$ ($10\pi \approx 31.4159265359$ at $u_0 = -0.10$ vs. `0.0000000000` at $u_0 = +0.10$, separating continuous edge integrals from $\lvert\Delta_e\arg\xi\rvert < \pi$ vertex principal phase, `manual derivation` / `NUM`), together with Mertens' (1874) reciprocal-prime theorem, Davenport (2000) paired Hadamard products, Gonek–Hughes–Keating (2007) hybrid approximations, de Branges (1968, 1986, 1992, 1994) Hermite–Biehler Hilbert spaces, Lagarias (1999, 2006) kernel-positivity equivalence, Conrey & Li's (2000) 34th-zero refutation of bare unit-shift positivity, and Sondow & Dumitrescu's (2010) radial monotonicity theorem (`Literature`; the external proof of RH is cited in [@conj-riemann-hypothesis], while the multiplicative Schur-pivot modifier positivity bridge [@prob-ch34-schur-hb-kernel-positivity-bridge] remains open), sealing the critical-strip opening wing (§§31.1–31.3) of Chapter 31 alongside interactive laboratory `arc-calculus-riemann-hermite-biehler-sandbox` (`RIEMANN//STOKES`, `MODEL`)**
 
 **Lean-Facing Object / Locked GID:**
 [`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product), [`E₃.bound''`](lean:D5/S3/Weil/Mertens/Third.E₃.bound''), [`xi_reading_differentiable`](lean:D5/S3/Zeros/CompletedZeta.xi_reading_differentiable), [`xi_reading_reflection`](lean:D5/S3/Zeros/CompletedZeta.xi_reading_reflection), [`xi_reading_one_sub_conj`](lean:D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj), [`xiReading_eq_zero_iff_nontrivial`](lean:D5/S3/Analytic/ShiftedXiPoisson/ShiftedPoissonSemigroup.xiReading_eq_zero_iff_nontrivial), [`full_symmetry_not_fixed_line_localization`](lean:D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization), [`golden_right_half_strip_implies_rh`](lean:D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh), [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness), [`schur_quadratic_is_least`](lean:D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least)
@@ -392,7 +392,7 @@ Fifteen frozen kernel anchors spanning complete rank-five ternary unit-quaternio
 $\kappa\bigl(x,[y,x,y]\bigr)=\bigl(2\kappa(x,y)-1\bigr)^2,\quad \bigl\lVert Q(\boldsymbol{\sigma})\bigr\rVert^2\equiv 1\;(\boldsymbol{\sigma}\in\mathbb{Q}^3),\quad \mathcal{K}_{\mathbb{Q}}^{\star}=\bigl\{1,\tfrac{1}{2},\tfrac{1}{3},\tfrac{1}{4},0\bigr\}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§39.6](ch39-s29-constant-free-rational-axiom-omega.md#sec-ch39-constant-free-rational-axiom-omega))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§32.5](ch39-s29-constant-free-rational-axiom-omega.md#sec-ch39-constant-free-rational-axiom-omega))
 
 **Past, Present, Future & the 0 · 1/2 · 1 Pure Rational Causal-Jet Matrix: Spherical Midpoint Self-Duality & 1 ↦ 0 Heartbeat**
 
@@ -406,7 +406,7 @@ Sixteen frozen kernel anchors spanning complete rank-five ternary unit-quaternio
 $\lVert x_1\rVert^2-\lVert x_0\rVert^2=(1-2\alpha)\lVert x_1-x_0\rVert^2,\quad \xi(s)=\tfrac{1}{2}s(s-1)\Lambda(s),\quad 0\to\tfrac{1}{2}\to 1\equiv 0'$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§39.7](ch39-s30-past-present-future-rational-jet-triad.md#sec-ch39-past-present-future-rational-jet-triad))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§39.6](ch39-s30-past-present-future-rational-jet-triad.md#sec-ch39-past-present-future-rational-jet-triad))
 
 **The Real Error-Magnification Axis & Prime Adelic Closure: Tangent Magnifier 1+x² vs. Adelic Unity & Ergodic Anti-Deadlock**
 
@@ -420,7 +420,7 @@ Fifteen frozen kernel anchors spanning compact unit-quaternion isomorphism and b
 $A_{\mathrm{err}}(x)=1+x^2=\frac{1}{\kappa},\quad \lvert q\rvert_\infty\prod_{p\in\mathbb{P}}\lvert q\rvert_p\equiv 1,\quad \mathbf{x}_1\oplus_{\mathrm{Rod}}\mathbf{x}_2=\frac{\mathbf{x}_1+\mathbf{x}_2+\mathbf{x}_1\times\mathbf{x}_2}{1-\mathbf{x}_1\cdot\mathbf{x}_2}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§39.8](ch39-s31-real-error-axis-and-prime-adelic-closure.md#sec-ch39-real-error-axis-and-prime-adelic-closure))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§31.4](ch39-s31-real-error-axis-and-prime-adelic-closure.md#sec-ch39-real-error-axis-and-prime-adelic-closure))
 
 **The Holographic Circular-Arc Manifold & Adelic Solenoid Unity: 0 · 1 · ∞ Closure, Additive–Multiplicative Spinor Flows & Smooth Prime Loops**
 
@@ -434,7 +434,7 @@ Fifteen frozen kernel anchors spanning chart-free unit-quaternion isomorphism, c
 $\tfrac{1}{2}(V_++V_\div)\equiv\partial_\phi,\quad [V_+,V_\div]=2V_\times,\quad \operatorname{logarithmicCharge}(z)=0\iff\forall m,\lVert z_m\rVert=1$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§39.9](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md#sec-ch39-holographic-arc-manifold-and-solenoid-unity))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§31.5](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md#sec-ch39-holographic-arc-manifold-and-solenoid-unity))
 
 **Riemann's 1854 + 1859 Synthesis & Critical-Line Spectral Manifold Polishing: Osculating-Sphere Base Swap & Toeplitz Spectral Glue**
 
@@ -448,7 +448,7 @@ Fifteen frozen kernel anchors spanning rank-five unit-quaternion isomorphism, ch
 $\lVert(\rho-1)/\rho\rVert=1\iff\operatorname{Re}(\rho)=\tfrac{1}{2},\quad \mathbf{T}_N\succeq 0\iff\forall j,\lVert u_j\rVert=1,\quad U(x)/x^\theta\to 0\iff\theta>\tfrac{1}{2}$
 
 **Epistemic Status:**
-`LEAN ✓` / `external formalization fact` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§39.10](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md#sec-ch39-riemann-1854-1859-spectral-manifold-polishing))
+`LEAN ✓` / `external formalization fact` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§31.6](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md#sec-ch39-riemann-1854-1859-spectral-manifold-polishing))
 
 **Exact Structural Mathematics vs. Flat Metric Approximation: Pure-Integer (1,1,1) Three-Beat Closure, Dense Rational Constellation S³(ℚ), Complete Ternary Conservation & Prime Rigidity**
 
@@ -462,7 +462,7 @@ Fifteen frozen kernel anchors spanning unit-quaternion isomorphism, chord-distan
 $(1,1,1)\overset{\star}{\longrightarrow}(-1,-1,-1)\overset{\star}{\longrightarrow}(0,0,0),\quad \lVert Q(\boldsymbol{\sigma})\rVert^2\equiv 1,\quad \lvert N\rvert_\infty\prod_{p\in\mathbb{P}}\lvert N\rvert_p\equiv 1$
 
 **Epistemic Status:**
-`LEAN ✓` / `external formalization fact` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§39.11](ch39-s34-exact-structural-mathematics-vs-flat-approximation.md#sec-ch39-exact-structural-mathematics-vs-flat-approximation))
+`LEAN ✓` / `external formalization fact` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§32.6](ch39-s34-exact-structural-mathematics-vs-flat-approximation.md#sec-ch39-exact-structural-mathematics-vs-flat-approximation))
 
 **Infinity-Free & Transcendental-Free Finite Rational Mathematics Math_Ω: [1:0] Homogeneous Projective Closure, Rational Cayley Rotations & ℚ[η]/(η³) Limit-Free Jet Calculus**
 
@@ -476,7 +476,7 @@ Fifteen frozen kernel anchors spanning rank-five unit-quaternion isomorphism, ch
 $\kappa([P:Q])=\frac{Q^2}{P^2+Q^2},\quad \mathbf{R}(\boldsymbol{\sigma})=(\mathbf{I}-X)^{-1}(\mathbf{I}+X)\in\mathrm{SO}(3,\mathbb{Q}),\quad \kappa(1+\eta)\equiv\tfrac{1}{2}-\tfrac{1}{2}\eta+\tfrac{1}{4}\eta^2\pmod{\eta^3}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§39.12](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md#sec-ch39-infinity-free-transcendental-free-rational-mathematics))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§32.7](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md#sec-ch39-infinity-free-transcendental-free-rational-mathematics))
 
 **Zero-Axiom Lean 4 Formalization Architecture OmegaMath: Pure CIC Kernel, Canonical Integer Carrier ProjTernion & One-Way Shadow Functor Π_ℝ**
 
@@ -490,4 +490,4 @@ Fifteen frozen kernel anchors spanning unit-quaternion isomorphism, chord-distan
 $\kappa(p,q)=\frac{\langle p,q\rangle^2}{\lVert p\rVert^2\lVert q\rVert^2}\in\mathbb{Q},\quad \mathrm{Ad}(p)\mathbf{v}=\frac{p\mathbf{v}\bar{p}}{\lVert p\rVert^2}\in\mathrm{SO}(3,\mathbb{Q}),\quad cq<(dp)\cdot 4^{N+1}\Longrightarrow\left(\tfrac{1}{4}\right)^{N+1}C<\tfrac{p}{q}$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§39.13](ch39-s36-lean4-zero-axiom-omega-math-architecture.md#sec-ch39-lean4-zero-axiom-omega-math-architecture))
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([§32.8](ch39-s36-lean4-zero-axiom-omega-math-architecture.md#sec-ch39-lean4-zero-axiom-omega-math-architecture))

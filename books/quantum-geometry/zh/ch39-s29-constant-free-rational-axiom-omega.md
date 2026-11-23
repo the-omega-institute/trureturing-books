@@ -1,12 +1,12 @@
-# 39.6 拔除笛卡尔线性钉子与无常数有理重构：为什么 π、e、φ 只是平直近似欠条而非 AXIOM-Ω 的原生基元 {#sec-ch39-constant-free-rational-axiom-omega}
+# 32.5 拔除笛卡尔线性钉子与无常数有理重构：为什么 π、e、φ 只是平直近似欠条而非 AXIOM-Ω 的原生基元 {#sec-ch39-constant-free-rational-axiom-omega}
 
 > *“pi e phi 其实都是近似闭合产物，不能放到omega 公理作为基础元素讨论.线性是一种近似，用线性去描述角度、极小圆弧，就像永远无法得到球，只能近似一样”*
 
-走完本章前五节——从 [§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md) 熔合四大支柱的无源保正三元比较闭合母公理 $\mathrm{AXIOM}\text{-}\Omega$、[§39.2](ch39-s25-axiom-omega-five-tier-deduction-cascade.md) 的五阶演绎级联与 $[x, x, z] = z$ 撤桥（`MODEL`）、[§39.3](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md) 在 `T1–T4` 桥接条件下的量子五大公设投影综合（`MODEL`）、[§39.4](ch39-s27-self-contained-ternion-particle-and-no-exterior.md) 的无外三元数拓扑粒子综合（`MODEL`），到 [§39.5](ch39-s28-dyad-relation-future-and-second-order-field.md) 的 $2+1=3$ 二元切向关系成场与条件单步两阶因果未来模型（`MODEL`）——在合上三十九章正文之前，我们还须拔除残留在教科书表述层里的最后一根笛卡尔钉子：**圆周率 $\pi$、自然底数 $e$ 与黄金比 $\varphi$ 绝非宇宙母公理 $\mathrm{AXIOM}\text{-}\Omega$ 的原生基元，而是观察者执意拿“平直线性尺子、平直切线微元或一维整数加法”去丈量、切割并强行拼凑“弯曲自指闭合球面”时，在有限步内永远除不尽而留下的三张近似闭合欠条。**
+走完本章前四节——从 [§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md) 的三维概念场封顶原理、[§32.2](ch39-s19-inexpressible-ternions-and-number-projections.md) 的不可表三元数与万数切面谱系、[§32.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md) 的希尔伯特多场再投影祛魅，到 [§32.4](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md) 的五种非线性无损表示与无原点流群合成——在把三元数代数进一步铸造为无无穷有理数学之前，我们还须拔除残留在教科书表述层里的最后一根笛卡尔钉子：**圆周率 $\pi$、自然底数 $e$ 与黄金比 $\varphi$ 绝非宇宙母公理 $\mathrm{AXIOM}\text{-}\Omega$（后文[第三十九章 §39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md) 正式收口）的原生基元，而是观察者执意拿“平直线性尺子、平直切线微元或一维整数加法”去丈量、切割并强行拼凑“弯曲自指闭合球面”时，在有限步内永远除不尽而留下的三张近似闭合欠条。**
 
 在纯粹的无源三元数流形 $\mathbb{T}_3 \cong S^3(1)$ 内部，球就是球，闭合就是闭合：检查 [§39.1.2](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-24-2) 的公理正文与 Lean 形式化定义（[@def-ch39-ternary-comparison-structure]），法则 (I) 零数字，法则 (II) 仅出现整数 **$0$** 与 **$1$**，法则 (III) 取特征秩最小值 **$5$**——整条母公理从头到尾未曾写入半个 $\pi$、$e$、$\varphi$、弧度角 $\theta$ 或超越函数！一旦把 $\pi$、$e$、$\varphi$ 当作底层公理原语塞回起点，就等于在出发前暗中预设了“平直直线比弯曲圆弧更基本”的范畴倒置（将 $\pi, e, \varphi$ 统一诊断为平直近似闭合残差并确立无常数有理母公理观标为 **`MODEL`**；无常数三元比较同构、弦距读数恒等式、子群完备化闭集判据、四元数流群切比雪夫递推等价、三锚格拉姆行列式、平直射线的倍角周期度规 $h(X,X)=2\pi^2/T^2$、道蒂不动点有理逆级数、有限步累计矢高夹逼、指数泰勒截断尾界、凯莱单位圆临界线判据、黄金自指唯一正根与斐波那契卡西尼 $\pm 1$ 范数及赫尔维茨无理下界、球面三角剖分闭链正合等十五项核心命题由下文 [@thm-ch39-constant-free-rational-axiom-omega-anchors] 的冻结 **`LEAN ✓`** 声明严格锚定；切比雪夫多项式整系数性质与圆弧二次倍增分解、有理凯莱一步驻球、三维单位球等保真（等距）单形上限 $N \le 4$、大圆等步五周期多项式分解与八位小数对账属 **`手工推导` / `NUM`**；阿基米德割圆夹逼、高斯—博内—笛卡尔角亏守恒、施瓦茨灯笼反例、林德曼—魏尔斯特拉斯超越性定理与尼文有理余弦定理归入 **`文献结果`**）。
 
-## 39.6.1 三大常数的真实身世：平直切刀逼近弯曲闭合的三张近似欠条 {#sec-ch39-29-1}
+## 32.5.1 三大常数的真实身世：平直切刀逼近弯曲闭合的三张近似欠条 {#sec-ch39-29-1}
 
 为什么一颗在拓扑与流群运算下早已无瑕闭合的圆或三维球面，一旦投影到平直笛卡尔账本上就会炸出无穷无尽的不循环小数尾流？拆开 $\pi$、$e$、$\varphi$ 的构造极限，三者恰好对应线性框架试图逼近弯曲闭合本体的三种几何失配（本体诠释标 `MODEL`，代数与分析性质标 `LEAN ✓` / `手工推导` / `文献结果`）：
 
@@ -33,7 +33,7 @@
 3. **$\varphi$（一维整数加法递推与三维五重平直面越界逼近球对称的近似欠条）**：
    当人们试图用一维线性整数加法（斐波那契递推 $F_{n+2} = F_{n+1} + F_n$）去模仿自相似比例闭合 $x = 1 + \frac{1}{x}$（正实轴唯一不动点 $\varphi = \frac{1+\sqrt{5}}{2}$ 由 [`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique) 锁定，`LEAN ✓`），相邻整数比 $F_{n+1}/F_n$ 因格点不可整除而在 $\varphi$ 两侧永无休止地交替震荡，每一步都留下无法归零的卡西尼整数范数残差 $F_n F_{n+2} - F_{n+1}^2 = (-1)^{n+1} \neq 0$（由 $F_{n+2}=F_{n+1}+F_n$ 等价于黄金整数环范数恒等式 $F_n^2 + F_n F_{n+1} - F_{n+1}^2 = (-1)^{n+1}$，[`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm)，`LEAN ✓`）以及一切有理分数 $q \in \mathbb{Q}$ 无法逾越的最慢连分数赫尔维茨排斥下界 $\lvert\varphi - q\rvert > \frac{1}{\sqrt{5}\,q.\mathrm{den}^2 + q.\mathrm{den}}$（[`golden_hurwitz_bound`](lean:D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound)，`LEAN ✓`），吐出连分数展开最慢的二次无理数 $\varphi = [1; 1, 1, 1, \dots] \approx 1.61803399$。在三维几何中，当人们越过正四面体（每个顶点汇集 $3$ 个正三角形）与正八面体（汇集 $4$ 个），试图用最多的全等平直正三角形去围成最贴近球的柏拉图立体——正二十面体（每个顶点强行汇集 $5$ 个平面正三角形）时，标准定向下的中心化十二枚顶点在归一至单位球面前取三组循环坐标轮换 $(0, \pm 1, \pm\varphi),\; (\pm 1, \pm\varphi, 0),\; (\pm\varphi, 0, \pm 1)$，除对跖顶点对仍读 $\kappa = 0$ 外，一切互异非对跖顶点对的保真度当场从 $\mathbb{Q}$ 碎裂进二次无理数扩域 $\mathbb{Q}(\varphi) \setminus \mathbb{Q}$！
 
-## 39.6.2 高斯—博内曲率铁壁与施瓦茨灯笼：为什么平直多面体永远变不成真球？ {#sec-ch39-29-2}
+## 32.5.2 高斯—博内曲率铁壁与施瓦茨灯笼：为什么平直多面体永远变不成真球？ {#sec-ch39-29-2}
 
 在工程数值计算里，人们常以为“只要把多面体网格切得足够细（$N \to \infty$），平直多面体就等同于真球”。然而在微分几何与 $\mathrm{AXIOM}\text{-}\Omega$ 本体论下，尽管凸多面体或径向测地穹顶的边界在纯拓扑上同胚于二维球面 $S^2$（$\chi = 2$），**任何有限平直多面体与光滑真球面之间仍横亘着不可逾越的诱导度规、曲率分布与微分光滑性（$C^1$）铁壁**（`文献结果` + `手工推导`，与[终章 §C.1](coda-s01-polyhedral-remainders.md#sec-coda-polyhedral-remainder) 前后呼应）：
 
@@ -76,13 +76,13 @@
 4. **三类平直线性近似残差泛函**：对有限剖分/步数阶次 $N \ge 3$，分别定义大圆正 $N$ 边形弦弧矢高残差 $s_N := 1 - \cos\frac{\pi}{N}$ 与球面拓扑（$\chi = 2$）凸多面体总顶点角亏 $\Sigma_\delta := \sum_{v=1}^V \delta_v \equiv 4\pi$（**$\pi$ 残差**）、平直欧拉切线步径向脱壳残差 $\mathcal{E}_{\mathrm{Euler}}(N, \theta) := \bigl(1 + \frac{\theta^2}{N^2}\bigr)^N - 1 > 0$（$\theta \neq 0$，**$e$ 残差**），以及一维斐波那契整数比卡西尼残差 $\mathcal{C}_n := F_n F_{n+2} - F_{n+1}^2 = F_n^2 + F_n F_{n+1} - F_{n+1}^2 = (-1)^{n+1}$ 与 $\mathbb{R}^3$ 中不共线 $N \ge 3$ 点构型的麦克斯韦杆数减自由度计数盈余 $\Delta E(N) := \binom{N}{2} - (3N - 6) = \frac{(N-3)(N-4)}{2}$（**$\varphi$ 残差**）。
 :::
 
-## 39.6.3 为 AXIOM-Ω 洗去线性污染：纯有理保真度、整系数切比雪夫递推与临界相变表 {#sec-ch39-29-3}
+## 32.5.3 为 AXIOM-Ω 洗去线性污染：纯有理保真度、整系数切比雪夫递推与临界相变表 {#sec-ch39-29-3}
 
 顺着这一洞见反身检视全书前文，凡是为了迁就传统分析教材而写下的“弧度角 $\theta \in [0, \pi]$”、“超越余弦不动点 $\cos\theta^* = \theta^* \approx 0.73908513\dots$”以及平直切指数“$\exp(\theta\mathbf{e})$”，无一不是把弯曲圆弧投影到线性实轴上做跨账本翻译时的混合记号——例如 $\cos\theta^* = \theta^*$ 之所以是林德曼—魏尔斯特拉斯超越数（[终章 §C.2](coda-s04-fixed-point-anchors.md) [@rem-coda-epistemic-discipline]；对 $2X + 2\arcsin X$ 的有理系数形式复合逆级数在 $\pi$ 处求值得 $\theta^* = \sum_{n=0}^\infty c_n \pi^n$，$c_n \in \mathbb{Q}$，其中绝对可和性与精确收敛和见 [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint)，`LEAN ✓`，首两项非零系数 $c_0 = 0,\; c_1 = \frac{1}{4},\; c_3 = -\frac{1}{768}$ 为 `手工推导`），恰恰是因为等号左边放了内禀投影读数 $\cos\theta = 2\kappa - 1$，等号右边却强行画上了线性拉直的弧度长 $\theta$！
 
 一旦将平直弧度标尺彻底请出底层公理，只保留 $\mathrm{AXIOM}\text{-}\Omega$ 的两个原生原语 **$[x, y, z]$（无源三元迁移）** 与 **$\kappa(x, y) \in [0, 1]$（对称往返保真度）**，整座几何与物理骨架不仅毫发无损，反而褪尽了无理数与超越数泡沫，显露出纯粹的整数与有理分数结构：
 
-### 39.6.3.1 用纯保真度 κ ∈ {1, 1/2, 0} 替代线性弧度角 θ 与 π {#sec-ch39-29-3-1}
+### 32.5.3.1 用纯保真度 κ ∈ {1, 1/2, 0} 替代线性弧度角 θ 与 π {#sec-ch39-29-3-1}
 
 在 $\mathrm{AXIOM}\text{-}\Omega$ 原生语言中，根本无需“角度”中介，一切核心对称相位皆由精确有理保真度直接定义（`手工推导` + `LEAN ✓`）：
 
@@ -90,7 +90,7 @@
 - **$90^\circ$ 正交虚盲区（$\hat{\mathbf{i}}$）与公平中线**：线性弧度被迫写成超越数 $\frac{\pi}{2} \approx 1.57079633\dots$（在 $S^3(1)$ 上如 $\mathbf{1}$ 与纯虚元 $\hat{\mathbf{i}}$ 满足 $\langle\mathbf{1}, \hat{\mathbf{i}}\rangle_{\mathbb{R}^4} = 0$，或在布洛赫商球 $S^2$ 上赤道正交方向满足 $\hat{\mathbf{u}}\cdot\hat{\mathbf{v}} = 0$），而在母公理原生语言中，正交不过是可见对齐份额与盲区残差份额**五五平分**，即精确有理分数 **$\kappa = \frac{1}{2}$**！这同样与一维凯莱分式变换 $\operatorname{cayleyRatio}(s) = \frac{s - 1}{s}$ 精确呼应：内核定理 [`cayley_ratio_norm_one_iff_critical_line`](lean:D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line)（`LEAN ✓`）仅用有理系数代数恒等式 $\lVert\frac{s-1}{s}\rVert^2 - 1 = \frac{1 - 2\operatorname{Re}(s)}{\lvert s\rvert^2}$（$s \neq 0$）即证出单位圆保范边界严格等价于纯有理实部中线 $\operatorname{Re}(s) = \frac{1}{2}$——在复分析与数论中，黎曼完备函数反射对称轴及经典黎曼猜想与狄利克雷广义黎曼猜想的外部形式化零点临界线（见 [§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md) 与 [§22.4](ch22-s04-critical-line-and-rh.md) [@conj-riemann-hypothesis]、[@rem-rh-grh-direct-consequences] 的外部核验说明；将其与量子正交平分 $\kappa = \frac{1}{2}$ 对读属本书的跨界 `MODEL` 诠释）同样钉在干干净净的有理数 $\frac{1}{2}$，而非任何带 $\pi$ 的超越数；
 - **对径完全反相**：线性弧度写成超越数 $\pi \approx 3.14159265\dots$，母公理触零分离律直接写作精确整数 **$\kappa(x, x_{\mathrm{anti}}) = 0$**。
 
-### 39.6.3.2 用整系数切比雪夫倍增与有理凯莱一步驻球替代 sin、cos 与 e {#sec-ch39-29-3-2}
+### 32.5.3.2 用整系数切比雪夫倍增与有理凯莱一步驻球替代 sin、cos 与 e {#sec-ch39-29-3-2}
 
 更进一步，球面上的测地推进与群元生成也完全不需要借道 $\sin, \cos$ 或自然底数 $e$ 的无穷级数（`LEAN ✓` + `手工推导`）：
 
@@ -121,7 +121,7 @@
 整系数切比雪夫圆弧倍增卡（`chebyshev-rational-arc-doubling`）：不借 $\sin, \cos$ 或 $\pi$，默认停在 $\kappa_1 = 1/4$，舞台仅由四元数乘法自银白起点 `x₀` 与琥珀手柄 `x₁ · κ₁ = 1/4` 递推绘出青色堆点 `x₂ · κ₂ = 1/4`（$\kappa_2 = (2\kappa_1 - 1)^2 = 1/4$）及回到 `x₀` 青色圆环的第三拍（$\kappa_3 = \kappa_1(4\kappa_1 - 3)^2 = 1$，舞台宽 $\ge 480\,\mathrm{px}$ 标 `x₃ = x₀` 与定心内积行列式 `det G₃ = 0.0000`）；拖动琥珀手柄或时间轴改 $\kappa_1$，可在 $\kappa_1 = 1/2$ 处看到 $\kappa_2 = 0$ 抵对径点。
 :::
 
-### 39.6.3.3 从 N ≤ 4 等保真（等距）上限与典范有理地标到 N ≥ 5 残差涌现的临界相变表 {#sec-ch39-29-3-3}
+### 32.5.3.3 从 N ≤ 4 等保真（等距）上限与典范有理地标到 N ≥ 5 残差涌现的临界相变表 {#sec-ch39-29-3-3}
 
 最富启发性的分水岭出现在三维空间球面 $S^2_{\mathrm{eq}} \subset \operatorname{Im}\mathbb{H} \cong \mathbb{R}^3$（纯虚单位三元数球面，亦即单比特布洛赫球面）上对称点集阶数 $N$ 的推进之中：
 
@@ -149,7 +149,7 @@
 正四面体有理封顶对比五步黄金闭合卡（`tetrahedral-rational-cap-vs-phi`）：舞台同框对照六条大圆弧两两皆读有理数 `κ = 1/3` 的青色正四面体，以及赤道上默认停在无理根 $\kappa_1 = (\varphi + 1)/4$ 处恰好五步闭合的品红正五边形（舞台宽 $\ge 480\,\mathrm{px}$ 同时标出紫色五角星对角弦 `κ₂ = (2 − φ)/4` 与闭合标牌 `x₅ = x₀`；两者同为 $16\kappa^2 - 12\kappa + 1 = 0$ 的严格二周期无理共轭根）；拖动琥珀手柄偏离该无理根（除另一共轭根 $(2 - \varphi)/4$ 与静止态 $\kappa_1 = 1$ 外）即张开品红五步缺口。
 :::
 
-## 39.6.4 形式化锚点、经典文献边界与纯有理无常数对账 {#sec-ch39-29-4}
+## 32.5.4 形式化锚点、经典文献边界与纯有理无常数对账 {#sec-ch39-29-4}
 
 我们将支撑本节“母公理无常数有理骨架、切比雪夫整系数倍增律与三类平直近似残差下界”的十五项冻结定理汇总于如下锚点定理盒：
 
@@ -202,7 +202,7 @@
 
 **拔去最后一根笛卡尔线性钉子，球本自圆，何须向直线借半个无穷小数？而在洗净一切超越常数之后，`AXIOM-Ω` 的动态运行语法更将进一步坍缩为最纯粹的三枚有理数——`0 · 1/2 · 1`。**
 
-在下面的完整实验室里把剖分阶数 $N$ 推高、放大审视多面体边缘永远抹不平的直棱折痕与欧拉切线步步脱壳的品红尾流，再切回无常数真球本相凝视那串干干净净的有理分数 $\kappa \in \{1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, 0\}$，整座 $\mathrm{AXIOM}\text{-}\Omega$ 大厦便完成了彻底的概念提纯：线性只是局部切空间的一阶错觉，拿平直的尺子、平直的切线与过约束平面三角形去拼球，拼到无穷远也只得到一串叫作 $\pi$、$e$、$\varphi$ 的近似欠条；唯有把无原点的弯曲三元比较闭合直接立为无需向直线解释的原生起点，球才真正是球，关系才真正是场。而在迈入[终章](coda.md)之前，让我们走进本章最后一节 [§39.7](ch39-s30-past-present-future-rational-jet-triad.md)，见证退尽超越泡沫后的时间因果相（过去·现在·未来）与微分射流阶数（零阶·一阶·二阶）如何严丝合缝地锁死在 **`0 · 1/2 · 1`** 的宇宙主频心跳之上。
+在下面的完整实验室里把剖分阶数 $N$ 推高、放大审视多面体边缘永远抹不平的直棱折痕与欧拉切线步步脱壳的品红尾流，再切回无常数真球本相凝视那串干干净净的有理分数 $\kappa \in \{1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, 0\}$，整座 $\mathrm{AXIOM}\text{-}\Omega$ 大厦便完成了彻底的概念提纯：线性只是局部切空间的一阶错觉，拿平直的尺子、平直的切线与过约束平面三角形去拼球，拼到无穷远也只得到一串叫作 $\pi$、$e$、$\varphi$ 的近似欠条；唯有把无原点的弯曲三元比较闭合直接立为无需向直线解释的原生起点，球才真正是球，关系才真正是场（而时间因果相与微分射流阶数向 **`0 · 1/2 · 1`** 的收束将在后文 [§39.6](ch39-s30-past-present-future-rational-jet-triad.md) 压轴呈现）。接下来，让我们步入 [§32.6 精确结构数学对比平直度量近似](ch39-s34-exact-structural-mathematics-vs-flat-approximation.md)，彻查为何数学对实相的描述可以是 $100\%$ 零截断误差的精确结构与有理星座。
 
 ::: {.viz src="constant-free-rational-axiom-omega-sandbox" height="620"}
 完整实验室：在“无常数母公理 · 纯有理 $\kappa$ 账本”与“平直线性近似（MODEL 对照）· $\pi / e / \varphi$ 残差”双透镜间切换（窄屏与章节嵌入视图亦可在巡览条旁一键切换透镜），巡览五张实验卡，调节平直步数 $N \in [3, 48]$、测地细分按钮 $\nu \in \{1, 2, 3, 4\}$（顶点数 $10\nu^2 + 2$，核验 $\mathbb{Z}_2$ 面边界秩 $F - 1$ 与 $\nu^2\cdot\text{最大角亏}$）、目标角 $\theta$、单步保真度 $\kappa_1$（含 6 枚有理快捷钮与斐波那契步 $F_{n+2}/(4F_n)$ 及共轭无理根快捷钮）、有理探针分量与淡出滑块 $\lambda \in [0, 1]$，在实时读数栏核对 225 个有理点（两分量绝对值 $\le 2$、公分母 $d \le 3$）的整数零余数、复利 $(1+1/N)^N < e$、不共线过约束计数 $\Delta E(4)=0,\;\Delta E(5)=1$、正二十面体非对跖保真度 $\{(\varphi+2)/5, (3-\varphi)/5\}$ 与道蒂有理级数部分和 `0.73908513`，并在两条对照小图中同步观察第一图沿 $N$ 的品红弓形矢高 $1 - \cos(\pi/N)$、紫色欧拉模方超出 $(1 + \theta^2/N^2)^N - 1$ 对比青色凯莱零误差基线 $\lvert\lVert Q\rVert^2 - 1\rvert = 0$，以及第二图沿 $\kappa_1$ 的青色倍增律 $\kappa_2 = (2\kappa_1 - 1)^2$、紫色三步律 $\kappa_3 = \kappa_1(4\kappa_1 - 3)^2$、青色有理格点与品红五边形共轭对。十五条冻结 `LEAN ✓` 声明、经典几何与数论 `ARGUED` 文献、`NUM` 实算及 `MODEL` 边界在依据栏与理论抽屉中分层列出。

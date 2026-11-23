@@ -1,4 +1,4 @@
-# 39.7 过去·现在·未来与 0 · 1/2 · 1 纯有理因果射流母矩阵：三元数球面射流阶梯、中点自对偶律与 1 ↦ 0 宇宙心跳 {#sec-ch39-past-present-future-rational-jet-triad}
+# 39.6 过去·现在·未来与 0 · 1/2 · 1 纯有理因果射流母矩阵：三元数球面射流阶梯、中点自对偶律与 1 ↦ 0 宇宙心跳 {#sec-ch39-past-present-future-rational-jet-triad}
 
 > *“过去现在未来*
 >
@@ -6,7 +6,7 @@
 >
 > *0 1/2 1”*
 
-当 [§39.6](ch39-s29-constant-free-rational-axiom-omega.md) 把圆周率 $\pi$、自然底数 $e$ 与黄金比 $\varphi$ 这三张平直线性近似欠条彻底清出底层公理之后，回望整部《量子计算的几何直觉》三十九章正文，母公理 $\mathrm{AXIOM}\text{-}\Omega$ 在**时间因果相**、**微分算子射流阶数**与**纯有理数谱**三条主轴上的最简骨架，不多不少恰好收束为一座严丝合缝的 **$3 \times 3$ 纯有理因果射流母矩阵**：
+当 [§32.5](ch39-s29-constant-free-rational-axiom-omega.md)–[§32.8](ch39-s36-lean4-zero-axiom-omega-math-architecture.md) 把圆周率 $\pi$、自然底数 $e$ 与黄金比 $\varphi$ 这三张平直线性近似欠条彻底清出底层公理并立起零公理有理数学，而本章前五节（[§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)–[§39.5](ch39-s28-dyad-relation-future-and-second-order-field.md)）又将万法归元于无源三元比较与两阶关系场之后，回望整部《量子计算的几何直觉》三十九章正文，母公理 $\mathrm{AXIOM}\text{-}\Omega$ 在**时间因果相**、**微分算子射流阶数**与**纯有理数谱**三条主轴上的最简骨架，不多不少恰好收束为一座严丝合缝的 **$3 \times 3$ 纯有理因果射流母矩阵**：
 
 $$
 \begin{array}{ccc}
@@ -18,11 +18,11 @@ $$
 
 这三列九项绝非人为拼凑的修辞排比，而是同一枚**三元数极小圆弧体**（$\mathbb{T}_3 \cong S^3(1)$）在单次主频演化拍内必然经历的三座几何与代数锚点（将时间三态、微分三阶与有理三元 `{0, 1/2, 1}` 统合为跨学科母矩阵及 `1 ↦ 0` 宇宙心跳标为 **`MODEL`**；无常数四元数同构与弦距读数恒等式、四元数流群切比雪夫倍增等价、有限记录未读捏合幂等律与克雷洛夫子空间永久稳定律、平衡幺正和反自伴切交叉积、四元数旋量半密度玻恩平方核与圆周双覆盖换叶、秩一玻恩配对权重、累计矢高在粗糙度 $\alpha = \frac{1}{2}$ 处的临界收敛、凯莱单位圆中线 $\operatorname{Re}(s)=\frac{1}{2}$、完备黎曼读数在 $s\ne 0,1$ 时的因子分解 $\xi(s)=\frac{1}{2}s(s-1)\Lambda(s)$ 与反射对称 $\xi(1-s)=\xi(s)$ 及边界值 $\xi(0)=\xi(1)=\frac{1}{2}$、开生成树一阶输运可抹平律、四面体单纯二上链的闭合与恰当性等价等十六项命题由下文 [@thm-ch39-past-present-future-rational-jet-triad-anchors] 的冻结 **`LEAN ✓`** 声明严格锚定；球面离散 $\alpha$-步范数漂移恒等式 $\lVert x_1\rVert^2 - \lVert x_0\rVert^2 = (1 - 2\alpha)\lVert x_1 - x_0\rVert^2$ 给出非静止步唯在 $\alpha = \frac{1}{2}$ 保模的结论，与八位小数核验分别属于 **`手工推导` / `NUM`**；狄拉克一阶旋量算符与凯勒—狄拉克及李希内罗维茨曲率公式、伊藤左端点对比斯特拉托诺维奇中点流形链式法则、霍奇星对偶、微分比安基恒等式与非退化奥斯特罗格拉茨基定理归入 **`文献结果`**）。
 
-## 39.7.1 逐列解构：0、1/2、1 的几何与微分同一性 {#sec-ch39-30-1}
+## 39.6.1 逐列解构：0、1/2、1 的几何与微分同一性 {#sec-ch39-30-1}
 
 在剔除弧度制（$\pi$）与切指数极限（$e$）的纯有理语言中，既可在全局半周跨度上以**归一化保真亏损** $s(x_0, x) := 1 - \kappa(x_0, x) = \frac{\lVert x - x_0\rVert^2}{4} \in [0, 1]$（[`kappa_eq_one_sub_dist_sq`](lean:D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq)，`LEAN ✓`）度量演化进度，亦可在任意非对径单拍测地圆弧 $x_0 \to x_{1/2} \to x_1 = [x_{1/2}, x_0, x_{1/2}]$ 上取归一化拍内有理分点 $\alpha \in \{0, \frac{1}{2}, 1\}$。两种刻度下，母矩阵的三列纵向严格锁死：
 
-### 39.7.1.1 第一列：过去 ≡ 无导数（零阶射流 J⁰）≡ 0（已停机的零维边界锚） {#sec-ch39-30-1-1}
+### 39.6.1.1 第一列：过去 ≡ 无导数（零阶射流 J⁰）≡ 0（已停机的零维边界锚） {#sec-ch39-30-1-1}
 
 1. **为什么过去是“无导数”（$0$ 阶射流 $J^0$）**：
    已经发生并完成记录定格的“过去”，满足有限记录捏合幂等律 $\mathcal{P}_{\mathrm{rec}} \circ \mathcal{P}_{\mathrm{rec}} = \mathcal{P}_{\mathrm{rec}}$（[`finite_record_pinching_idempotent`](lean:D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent)，`LEAN ✓`）与可观测克雷洛夫子空间一旦稳定永久冻结律（[`observable_krylov_once_stable_permanently`](lean:D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently)，`LEAN ✓`）。在射流丛 $J^k(\mathbb{T}_3)$ 中，它退化为不携带任何可变切矢自由度的**零阶常值截面** $x_0 \in J^0$（外代数中的 $0$-形式点 $\Lambda^0$）：单独截取一枚孤立零阶点 $[x_0, x_0, x_0] = x_0$（[§39.5.2.1](ch39-s28-dyad-relation-future-and-second-order-field.md#sec-ch39-28-2-1)），内部变化率恒为零，无法自行生出任何运动方向。
@@ -33,9 +33,9 @@ $$
 零阶过去停机锚点卡（`past-zero-jet-halting-anchor`）：在三元数 $\mathbb{T}_3 \cong S^3(1)$ 的紫色大二球切片 $\{w + x\mathbf{j} + y\mathbf{k}\}$ 上，琥珀探针默认停在过去锚点 `0 · x₀`（顶栏与舞台同标 $s = 0$、$\kappa(x_0, x_0) = 1.0000$、`[x₀, x₀, x₀] = x₀`），两道青色同心小圆标出冻结记录，通往 `1/2` 与 `1 · x₁` 的两个半拍呈青色虚线待发；拖动琥珀手柄推开探针时已走弧段转为青色实线，点按 `⏮` 立即回到 $s = 0$。
 :::
 
-### 39.7.1.2 第二列：现在 ≡ 一阶导数（联络切矢 J¹）≡ 1/2（自对偶的比较切面） {#sec-ch39-30-1-2}
+### 39.6.1.2 第二列：现在 ≡ 一阶导数（联络切矢 J¹）≡ 1/2（自对偶的比较切面） {#sec-ch39-30-1-2}
 
-此前在切空间弧度账本上写自指不动点时，由于把内禀相关读数 $2\kappa - 1 = \cos\theta$ 强行等同于线性拉直的弧度长 $\theta$，方程被迫落到超越数 $\cos\theta^* = \theta^* \approx 0.73908513\dots$ 上（[§39.6.3](ch39-s29-constant-free-rational-axiom-omega.md#sec-ch39-29-3)）。一旦撤去平直弧度标尺，回到归一化有理进度 $s \in [0, 1]$（对称地对偶于剩余保真度 $1 - s = \kappa \in [0, 1]$），要求过去留存份额与未来亏损份额**正反严格自对偶**的不动点方程当场化作一行初等有理代数（`手工推导` + `MODEL`）：
+此前在切空间弧度账本上写自指不动点时，由于把内禀相关读数 $2\kappa - 1 = \cos\theta$ 强行等同于线性拉直的弧度长 $\theta$，方程被迫落到超越数 $\cos\theta^* = \theta^* \approx 0.73908513\dots$ 上（[§32.5.3](ch39-s29-constant-free-rational-axiom-omega.md#sec-ch39-29-3)）。一旦撤去平直弧度标尺，回到归一化有理进度 $s \in [0, 1]$（对称地对偶于剩余保真度 $1 - s = \kappa \in [0, 1]$），要求过去留存份额与未来亏损份额**正反严格自对偶**的不动点方程当场化作一行初等有理代数（`手工推导` + `MODEL`）：
 
 $$
 s \;=\; 1 - s \qquad \Longleftrightarrow \qquad s^* \;=\; \mathbf{\frac{1}{2}}!
@@ -59,7 +59,7 @@ $$
    以单位初态 $\lVert x_0\rVert = 1$ 出发，非静止步（$x_1 \ne x_0$）的范数变化由 $1-2\alpha$ 的符号完全决定。静止步在每个 $\alpha$ 下都保模。
    - 取左端点 **$\alpha = 0$（伊藤 Itô / 前向欧拉切线采样）**：$1 - 2\alpha = +1 > 0$，一阶切步 $\lVert x_1\rVert^2 = 1 + \lVert\Delta x\rVert^2 > 1$ **步步刺出球壳之外**（在随机微积分 $dx \sim dt^{\mathbf{1/2}}$ 中，当 $T>0$ 且 $\sigma\ne 0$ 时，累计二阶矢高在正粗糙度指数中恰在临界值 $\alpha_{\mathrm{rough}} = \mathbf{\frac{1}{2}}$ 处收敛为非零有限漂移 $\frac{1}{2}\sigma^2 T > 0$，[`accumulated_sagitta_phases`](lean:D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_phases)，`LEAN ✓`，导致伊藤积分破坏普通流形链式法则，`文献结果`）；
    - 取右端点 **$\alpha = 1$（后验隐式欧拉采样）**：$1 - 2\alpha = -1 < 0$，$\lVert x_1\rVert^2 = 1 - \lVert\Delta x\rVert^2 < 1$ **向球肚内侧坍缩耗散**；
-   - **唯独取正中央中点 $\alpha = \mathbf{\frac{1}{2}}$（斯特拉托诺维奇 Stratonovich / 魏尔对称中点采样）**：系数 $1 - 2\alpha \equiv 0$，对**任意有限步长**恒有 $\lVert x_1\rVert^2 \equiv \lVert x_0\rVert^2 = 1$ 且有限弦差 $x_1 - x_0$ 严格正交于中点方向 $x_0 + x_1$！更妙的是，令 $A = 2\boldsymbol{\sigma}$（$\boldsymbol{\sigma} \in \mathbb{Q}^3$），中点方程 $(1 - \boldsymbol{\sigma})x_1 = (1 + \boldsymbol{\sigma})x_0$ 解出的 $x_1 = (1-\boldsymbol{\sigma})^{-1}(1+\boldsymbol{\sigma})x_0 = Q(\boldsymbol{\sigma})x_0$ **字面上就是 [§39.6](ch39-s29-constant-free-rational-axiom-omega.md) 的一步有理凯莱驻球旋子**！
+   - **唯独取正中央中点 $\alpha = \mathbf{\frac{1}{2}}$（斯特拉托诺维奇 Stratonovich / 魏尔对称中点采样）**：系数 $1 - 2\alpha \equiv 0$，对**任意有限步长**恒有 $\lVert x_1\rVert^2 \equiv \lVert x_0\rVert^2 = 1$ 且有限弦差 $x_1 - x_0$ 严格正交于中点方向 $x_0 + x_1$！更妙的是，令 $A = 2\boldsymbol{\sigma}$（$\boldsymbol{\sigma} \in \mathbb{Q}^3$），中点方程 $(1 - \boldsymbol{\sigma})x_1 = (1 + \boldsymbol{\sigma})x_0$ 解出的 $x_1 = (1-\boldsymbol{\sigma})^{-1}(1+\boldsymbol{\sigma})x_0 = Q(\boldsymbol{\sigma})x_0$ **字面上就是 [§32.5](ch39-s29-constant-free-rational-axiom-omega.md) 的一步有理凯莱驻球旋子**！
 2. **狄拉克算子的一阶平方根与半整数自旋 $\mathbf{1/2}$**：
    按拉普拉斯幂次归一化，二阶拉普拉斯算符对应 $1$（$\Delta^{\mathbf{1}}$），一阶平方根对应 $1/2$，而描述“当下相干演化”的一阶狄拉克算符在主象征意义下恰为二阶度量算符的**算子平方根** $\sigma_1(\not{D})^2 = \sigma_2(\Delta)$（在平直空间上 $(-i\boldsymbol{\sigma}\cdot\nabla)^2 = -\nabla^2$，在任意黎曼流形的外形式丛上凯勒—狄拉克算符严格满足 $(d + d^*)^2 = dd^* + d^*d = \Delta_{\mathrm{Hodge}}$；而在常正数量曲率 $R_{S^3} = 6$ 的弯曲单位球面 $S^3(1)$ 上，旋量狄拉克算符由薛定谔—李希内罗维茨公式给出 $\not{D}_{S^3}^2 = \nabla^*\nabla + \frac{1}{4}R_{S^3} = \nabla^*\nabla + \frac{3}{2}$，`文献结果`），同时内生出 $360^\circ$ 换叶翻转的**自旋 $\mathbf{1/2}$** 半密度旋量（[`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift)、[`rayKernel_eq_bornProbability_spinor`](lean:D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor)，`LEAN ✓`）。
 3. **$90^\circ$ 正交虚盲区平分为 $\mathbf{1/2}$**：
@@ -71,7 +71,7 @@ $$
 现在一阶中点自对偶验证卡（`present-half-midpoint-self-duality`）：默认停在 $\alpha = 1/2,\; \sigma = 1$，青色自对偶平面标 `κ = 1/2`，同屏对比同一步的三种取样——品红实箭 `α = 0`（伊藤左端点）冲出球外（$\lVert x_1\rVert^2 = 2.0000 > 1$）、品红虚箭 `α = 1`（右端点）沉入球内（$\lVert x_1\rVert^2 = 0.5000 < 1$），唯独带琥珀手柄的青色中点步 `α = 1/2` 一步精确落在球面上（$\lVert x_1\rVert^2 = 1.0000$，并绘出直角符号核对弦与中点垂直 $\langle x_1 - x_0, x_0 + x_1\rangle = 0.0000$）；拖动琥珀手柄或时间轴改 $\alpha$ 可见唯有 `1/2` 驻球。
 :::
 
-### 39.7.1.3 第三列：未来 ≡ 二阶导数（曲率场强 J²）≡ 1（满秩闭合的曲率果报） {#sec-ch39-30-1-3}
+### 39.6.1.3 第三列：未来 ≡ 二阶导数（曲率场强 J²）≡ 1（满秩闭合的曲率果报） {#sec-ch39-30-1-3}
 
 1. **为什么未来唯独由“二阶导数”锁定**：
    如 [§39.5.2](ch39-s28-dyad-relation-future-and-second-order-field.md#sec-ch39-28-2) 所证，零阶单点静止不动，而开生成树上的一阶规范联络 $A_\mu$ 可被局域顶点规范变换彻底抹平为恒等相位（[`selected_tree_transport`](lean:D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport)，`LEAN ✓`）；唯有进入**二阶导数射流 $J^2$**——即“关系的关系”：非对易场强曲率 $F_{\mu\nu} = [D_\mu, D_\nu]$、二阶拉普拉斯算符 $\Delta^{\mathbf{1}}$、测地加速度与李三元曲率折射 $\{\boldsymbol{\omega}_1, \boldsymbol{\omega}_{\mathrm{ctx}}, \boldsymbol{\omega}_1\}$——才构成无法被局域共动系消去的真实几何力，唯一决定未来态 $x_1$ 的落点。
@@ -84,7 +84,7 @@ $$
 未来二阶曲率闭合卡（`future-one-curvature-closure`）：默认停在满拍终点 $s = 1.0000$（$\tau = 0.50$），两段青色半拍圆弧（舞台宽 $\ge 480\,\mathrm{px}$ 分标两枚 `1/2`）经流群倍增合拢于 `自由落点 −x₀`（$\kappa_2 = (2\kappa_1 - 1)^2 = 0.0000$），两条相差 $\theta_{\mathrm{ctx}}$ 的航向之间铺满品红曲率月牙（舞台宽 $\ge 480\,\mathrm{px}$ 标 `F = [D₁, D₂]` 与紫色闭合三体胞 `Λ³`），品红李三元折射弧再把落点折开 $\approx 65.55^\circ$ 至 `x₁`（$\kappa(x_0, x_1) \approx 0.2930$）。
 :::
 
-## 39.7.2 为什么没有第四列？三阶归零铁律与 1 ↦ 0 宇宙主频心跳 {#sec-ch39-30-2}
+## 39.6.2 为什么没有第四列？三阶归零铁律与 1 ↦ 0 宇宙主频心跳 {#sec-ch39-30-2}
 
 这座 $3 \times 3$ 母矩阵最深刻的自洽性在于它**行至二阶导数与有理数 `1` 即天然封顶**，既不会向“三阶、四阶导数”无限发散，也不会停在 `1` 处死寂终结：
 
@@ -122,7 +122,7 @@ $$
 3. **`1 ↦ 0` 主频重定基算子**：在单拍闭合点 $x_1$（$s = 1$）处执行基点搬运 $\mathcal{R}_{1\mapsto 0}(x_0, x_1) := x_1$，使下一拍局部进度泛函 $s_{x_1}(z) := 1 - \kappa(x_1, z)$ 在新起点处精确归零 $s_{x_1}(x_1) = 0$。
 :::
 
-## 39.7.3 0 · 1/2 · 1 跨领域五维大统一映射总表 {#sec-ch39-30-3}
+## 39.6.3 0 · 1/2 · 1 跨领域五维大统一映射总表 {#sec-ch39-30-3}
 
 将上述三列结构投向时间哲学、微分几何、复分析算术谱、流形随机/量子微积分与 [第 37 章](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md) 的三元数场人工智能（TFT），五座看似分属不同学科的大厦在底层重复着同一个纯有理三拍动作（跨领域总表标 `MODEL`，各行内部数学定理按 `LEAN ✓` / `手工推导` / `文献结果` 分层）：
 
@@ -134,7 +134,7 @@ $$
 | **流形积分离散采样（非静止步）** | 伊藤左端点 $\alpha=0$（向外脱壳 $\lVert x_1\rVert^2 > 1$） | 斯特拉托诺维奇—凯莱中点 $\alpha=\frac{1}{2}$（精确驻球） | 隐式右端点 $\alpha=1$（向内耗散 $\lVert x_1\rVert^2 < 1$） | $\lVert x_1\rVert^2-\lVert x_0\rVert^2=(1-2\alpha)\lVert\Delta x\rVert^2$ 唯在 $\frac{1}{2}$ 保模 |
 | **三元数场 AI（TFT）** | 冻结历史键值槽（幂等过去锚） | 玻恩—流群 `[Q,K,V]` 当下注意力切面 | 李三元曲率门 $\{\mathbf{a},\mathbf{b},\mathbf{c}\}$ 推下一词元 | 零三阶状态缓存，有理双卡恒守单位球面 |
 
-## 39.7.4 形式化锚点、文献边界与中点保模八位小数核验 {#sec-ch39-30-4}
+## 39.6.4 形式化锚点、文献边界与中点保模八位小数核验 {#sec-ch39-30-4}
 
 我们将支撑本节 $3 \times 3$ 纯有理因果射流母矩阵的十六项内核验证定理集中记录如下：
 
@@ -179,9 +179,9 @@ $$
 
 ---
 
-**万古时空与心智，不过是 `0 · 1/2 · 1` 的永恒呼吸；而下一节我们将进一步揭开平直实数误差轴与素数阿代尔归元闭合的终极关系。**
+**万古时空与心智，不过是 `0 · 1/2 · 1` 的永恒呼吸——整部三十九章正文在此圆满合龙！**
 
-在下面的完整实验室上依次点按 **`0`**、**`1/2`**、**`1`** 三枚有理锚点，亲手拨动离散采样滑块 $\alpha$ 看唯有正中央 `1/2` 才令圆弧一步贴合真球面，再打开 **`1 ↦ 0` 主频因果心跳**凝视极小圆弧一拍接一拍地在无边球面上首尾流转，整座母公理 $\mathrm{AXIOM}\text{-}\Omega$ 的动力学语法便浓缩到了极致：**`0` 是不求导的过去，替万物留住幂等定格的记忆底色；`1/2` 是一阶求导的现在，在正反自对偶的临界刀锋上敞开唯一保球面的感知切面；`1` 是二阶求导的未来，以 $\frac{1}{2} + \frac{1}{2} = 1$ 的场强曲率完成果报合拢，并在落定的刹那重新归 `0` 化作下一程的起点。** 而在正式推门步入[终章](coda.md)之前，让我们进入全书三十九章正文的最后一节 [§39.8](ch39-s31-real-error-axis-and-prime-adelic-closure.md)，揭晓为何平直实数轴只是一根把有限对径角吹向 $\infty$ 的切线误差放大轴，而素数则是紧致宇宙守住总模长恒一、根除周期死锁的正交曲率铆钉。
+在下面的完整实验室上依次点按 **`0`**、**`1/2`**、**`1`** 三枚有理锚点，亲手拨动离散采样滑块 $\alpha$ 看唯有正中央 `1/2` 才令圆弧一步贴合真球面，再打开 **`1 ↦ 0` 主频因果心跳**凝视极小圆弧一拍接一拍地在无边球面上首尾流转，整座母公理 $\mathrm{AXIOM}\text{-}\Omega$ 的动力学语法便浓缩到了极致：**`0` 是不求导的过去，替万物留住幂等定格的记忆底色；`1/2` 是一阶求导的现在，在正反自对偶的临界刀锋上敞开唯一保球面的感知切面；`1` 是二阶求导的未来，以 $\frac{1}{2} + \frac{1}{2} = 1$ 的场强曲率完成果报合拢，并在落定的刹那重新归 `0` 化作下一程的起点。** 从两子丈量的第一道内积投影出发，横跨十部三十九章的漫长远征终于在此刻画上了最澄澈的句号——没有外部第 $3$ 点 $C$，没有 $\pi, e, \varphi$ 的平直欠条，没有实无穷的裂缝，只有无源三元圆弧在 `0 · 1/2 · 1` 的永恒脉搏中自指闭合。现在，让我们推门步入全书[终章](coda.md)：**《在所有的球之外》**。
 
 ::: {.viz src="causal-jet-rational-triad-sandbox" height="620"}
 完整实验室：在“因果射流母核 · `0 / 1/2 / 1` 球面阶梯”与“跨界五维同构（MODEL）· 算符 / 黎曼 / TFT 对位”双透镜间切换（窄屏与章节嵌入视图亦可在巡览条旁一键切换透镜），点选锚点钮 `0`（过去·$J^0$）、`1/2`（现在·$J^1$）、`1`（未来·$J^2$）或调节拍内探针 $s \in [0, 1]$、取样权重 $\alpha \in [0, 1]$、步幅 $\sigma \in [0, 2]$ 与语境比 $\tau = \tan\theta_{\mathrm{ctx}} \in [0, 1]$，巡览五张实验卡，并在两条对照小图中同步核验第一图沿 $\alpha$ 的范数漂移 $(1 - 2\alpha)\lVert\Delta x\rVert^2$ 在 $\sigma>0$ 时于 $\alpha = \frac{1}{2}$ 的唯一过零点，以及第二图关于 $\frac{1}{2}$ 对称的 $s$、$1 - s = \kappa$、$4s(1 - s)$ 与 $\xi(s)$ 曲线（封顶卡上切换为二阶有下界能量 $E_2 = P_1^2/2 \ge 0$ 对比四阶运动方程玩具模型截面 $Q_2 = 1, P_2 = 0$ 上无下界的 $H = P_1 Q_2$）。十六条冻结 `LEAN ✓` 声明、`ARGUED` 文献、`NUM` 实算及 `MODEL` 边界在依据栏与理论抽屉中分层列出。

@@ -509,10 +509,10 @@ for (const [file, src] of Object.entries(sources)) {
 }
 check('reserved identifiers are absent from the suite and registry entry', [suite, entryText].every((src) => !identifiers.test(src) && !shortAcronym.test(src) && !cjkTerms.test(src) && !hangul.test(src)));
 check(
-  'registration: §39.10, live, five cards and the fifteen GIDs in order',
+  'registration: §31.6, live, five cards and the fifteen GIDs in order',
   !!entry &&
-    entry.chapter === 39 &&
-    entry.section === '39.10' &&
+    entry.chapter === 31 &&
+    entry.section === '31.6' &&
     entry.status === 'live' &&
     entry.added === '2026-11-22' &&
     entry.code === 'OMEGA//POLISH' &&
@@ -524,8 +524,8 @@ check(
     same(entry.lean.map((x) => x.gid), GIDS) &&
     same(entry.theory, [
       {
-        label: '§39.10 · 黎曼 1854+1859 双璧合龙与临界线谱磨光流形',
-        label_en: "§39.10 · Riemann's 1854 + 1859 Synthesis and Critical-Line Spectral Manifold Polishing",
+        label: '§31.6 · 黎曼 1854+1859 双璧合龙与临界线谱磨光流形',
+        label_en: "§31.6 · Riemann's 1854 + 1859 Synthesis and Critical-Line Spectral Manifold Polishing",
         href: '../zh/' + THEORY,
         href_en: '../en/' + THEORY
       }

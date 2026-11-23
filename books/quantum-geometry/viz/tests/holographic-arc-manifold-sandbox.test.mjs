@@ -325,14 +325,14 @@ for (const [file, src] of Object.entries(sources)) {
 }
 check('reserved identifiers are absent from the suite and the registry entry', [suite, entryText].every((src) => !identifiers.test(src) && !shortAcronym.test(src) && !cjkTerms.test(src) && !hangul.test(src)));
 check(
-  'registration: §39.9, live, added 2026-11-22, capture_lock links, the exact code and titles',
+  'registration: §31.5, live, added 2026-11-22, capture_lock links, the exact code and titles',
   !!entry &&
     entry.code === 'OMEGA//MANIFOLD' &&
     entry.status === 'live' &&
     entry.added === '2026-11-22' &&
     entry.capture_lock === 'links' &&
-    entry.chapter === 39 &&
-    entry.section === '39.9' &&
+    entry.chapter === 31 &&
+    entry.section === '31.5' &&
     entry.title === '全息圆弧流形（M_Ω）沙盘：超越黎曼切板，同流形光滑统一加法、乘法、ln 与素数螺线环' &&
     entry.title_en === 'Holographic Circular-Arc Manifold (M_Ω): Beyond Flat Tangent Plates, Unifying +, ×, ln & Prime Solenoid Loops' &&
     entry.summary.startsWith('对比拼满平直切空间鳞片 T_pM 的伪光滑黎曼流形与无切板三元闭合的全息圆弧流形') &&
@@ -342,14 +342,14 @@ check(
   entryText.slice(0, 200)
 );
 check(
-  'registration: five cards in order, the fifteen GIDs in order, the theory anchors of §39.9',
+  'registration: five cards in order, the fifteen GIDs in order, the theory anchors of §31.5',
   !!entry &&
     same(entry.presets, ORDER) &&
     same(Object.keys(entry.preset_titles), ORDER) &&
     same(entry.lean.map((x) => x.gid), GIDS) &&
     entry.theory.length === 1 &&
-    entry.theory[0].label === '§39.9 · 全息圆弧流形与阿代尔螺线管同体' &&
-    entry.theory[0].label_en === '§39.9 · The Holographic Circular-Arc Manifold and Adelic Solenoid Unity' &&
+    entry.theory[0].label === '§31.5 · 全息圆弧流形与阿代尔螺线管同体' &&
+    entry.theory[0].label_en === '§31.5 · The Holographic Circular-Arc Manifold and Adelic Solenoid Unity' &&
     entry.theory[0].href === '../zh/' + THEORY &&
     entry.theory[0].href_en === '../en/' + THEORY
 );
@@ -402,7 +402,7 @@ const citations = vizCitations(resolveBook(BOOK), ID);
 for (const lang of ['zh', 'en']) {
   const seq = citations.filter((c) => c.lang === lang).map((c) => [c.preset, c.height]);
   check(
-    `${lang}: §39.9 cites the five cards in order at height 500, then the whole lab at 620`,
+    `${lang}: §31.5 cites the five cards in order at height 500, then the whole lab at 620`,
     same(seq, [...ORDER.map((id) => [id, 500]), [null, 620]]),
     JSON.stringify(seq)
   );
@@ -419,7 +419,7 @@ const BOXES = [...sources['index.html'].matchAll(/<div class="lean( [a-z]+)?">(.
 }));
 const GREEN = BOXES.filter((b) => !b.kind);
 check(
-  'the panel holds fifteen green boxes in the order of the theorem box of §39.9, then ARGUED, MODEL and NUM',
+  'the panel holds fifteen green boxes in the order of the theorem box of §31.5, then ARGUED, MODEL and NUM',
   same(GREEN.map((b) => b.gid), GIDS) && GREEN.every((b) => b.badge === 'LEAN ✓') && same(BOXES.slice(15).map((b) => [b.kind, b.badge]), [['argued', 'ARGUED'], ['model', 'MODEL'], ['num', 'NUM']]) && BOXES.length === 18
 );
 // a green box says what the frozen theorem says: no instance of the page, no computed number, no rounding, no drift

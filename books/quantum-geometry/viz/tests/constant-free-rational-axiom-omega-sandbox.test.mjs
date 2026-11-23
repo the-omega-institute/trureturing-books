@@ -555,7 +555,7 @@ const EXACT = ['12 − 30 + 20', '−1/768', '−1/25', '8/5', '10⁻¹⁴', '10
   const text = sources['index.html'].replace(/<link[^>]*>/g, ''),
     decimals = [...plain(text).matchAll(/\d+\.\d+/g)].map((m) => m[0]),
     meta = (/<meta name="description" content="([^"]*)"/.exec(text) || ['', '1.0'])[1];
-  check('static: the only decimals of index.html are §39.6, the speed chip 0.5× and the output of λ; its description has none', decimals.length > 0 && decimals.every((x) => ['39.6', '0.5', '1.00'].includes(x)) && !/\d\.\d/.test(meta) && meta.length > 400, decimals.join(' '));
+  check('static: the only decimals of index.html are §32.5, the speed chip 0.5× and the output of λ; its description has none', decimals.length > 0 && decimals.every((x) => ['32.5', '0.5', '1.00'].includes(x)) && !/\d\.\d/.test(meta) && meta.length > 400, decimals.join(' '));
   check('static: the code of main.js holds none of them either, and no decimal of four digits or more after the point', code.length > 90000 && !inCode.length && !/\d\.\d{4}/.test(code), [...inCode, ...(code.match(/.{0,30}\d\.\d{4}/g) || [])].join(' | '));
   check(
     'static: the NUM box is an empty container, the numbers of the drawer are spans by name in both languages, and the script fills them before it copies the boxes into the drawer',
@@ -795,14 +795,14 @@ check(
 check('source: the English note of the sphere card names the cyan rings of rational fidelity', sources['main.js'].includes('the cyan rings of rational fidelity are κ(1, ·) = 1/2, 1/3, 1/4'));
 check('reserved identifiers are absent from the suite and the registry entry', [suite, entryText].every((src) => !identifiers.test(src) && !shortAcronym.test(src) && !cjkTerms.test(src) && !hangul.test(src)));
 check(
-  'registration: §39.6, live, added 2026-11-22, capture_lock links, the exact titles and summaries',
+  'registration: §32.5, live, added 2026-11-22, capture_lock links, the exact titles and summaries',
   !!entry &&
     entry.code === 'OMEGA//RATIONAL' &&
     entry.status === 'live' &&
     entry.added === '2026-11-22' &&
     entry.capture_lock === 'links' &&
-    entry.chapter === 39 &&
-    entry.section === '39.6' &&
+    entry.chapter === 32 &&
+    entry.section === '32.5' &&
     entry.title === '无常数母公理与有理真球：π·e·φ 平直近似残差对比有理保真闭合' &&
     entry.title_en === 'Constant-Free AXIOM-Ω & Rational Sphere: π · e · φ Flat Residuals vs. Rational Fidelity Closure' &&
     entry.summary.startsWith('在同一座三维球面舞台上对照平直多面体与正 N 边形的弦弧矢高及 720° 顶点角亏（π）') &&
@@ -812,14 +812,14 @@ check(
   entryText.slice(0, 200)
 );
 check(
-  'registration: five cards in order, the fifteen GIDs in order, the theory anchors of §39.6',
+  'registration: five cards in order, the fifteen GIDs in order, the theory anchors of §32.5',
   !!entry &&
     same(entry.presets, ORDER) &&
     same(Object.keys(entry.preset_titles), ORDER) &&
     same(entry.lean.map((x) => x.gid), GIDS) &&
     entry.theory.length === 1 &&
-    entry.theory[0].label === '§39.6 · 拔除笛卡尔线性钉子与无常数有理重构' &&
-    entry.theory[0].label_en === '§39.6 · Pulling the Last Cartesian Nail and Constant-Free Rational Reconstruction' &&
+    entry.theory[0].label === '§32.5 · 拔除笛卡尔线性钉子与无常数有理重构' &&
+    entry.theory[0].label_en === '§32.5 · Pulling the Last Cartesian Nail and Constant-Free Rational Reconstruction' &&
     entry.theory[0].href === '../zh/' + THEORY &&
     entry.theory[0].href_en === '../en/' + THEORY
 );
@@ -851,7 +851,7 @@ const citations = vizCitations(resolveBook(BOOK), ID);
 for (const lang of ['zh', 'en']) {
   const seq = citations.filter((c) => c.lang === lang).map((c) => [c.preset, c.height]);
   check(
-    `${lang}: §39.6 cites the five cards in order at height 500, then the whole lab at 620`,
+    `${lang}: §32.5 cites the five cards in order at height 500, then the whole lab at 620`,
     same(seq, [...ORDER.map((id) => [id, 500]), [null, 620]]),
     JSON.stringify(seq)
   );

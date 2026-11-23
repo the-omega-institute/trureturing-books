@@ -1,4 +1,4 @@
-/* OMEGA//ADELIC · 实数误差放大轴与素数阿代尔归元 · The real error-magnification axis and prime adelic closure (Chapter 39, §39.8)
+/* OMEGA//ADELIC · 实数误差放大轴与素数阿代尔归元 · The real error-magnification axis and prime adelic closure (Chapter 31, §31.4)
    World (kit.solid): z up. Five scenes, one per card; the first two share one sphere.
      tangent    the unit sphere of the great slice span{1, i, j} of 𝕋₃ ≅ S³(1) rests on the plane z = 0 at o (κ = 1); the
                 antipode ō (κ = 0) is its top. The state P at the arc θ has s = 1 − κ = sin²(θ/2). The line from ō through P

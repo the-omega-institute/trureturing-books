@@ -1,4 +1,4 @@
-/* OMEGA//RATIONAL · 无常数母公理与有理真球 · Constant-free AXIOM-Ω and the rational sphere (Chapter 39, §39.6)
+/* OMEGA//RATIONAL · 无常数母公理与有理真球 · Constant-free AXIOM-Ω and the rational sphere (Chapter 32, §32.5)
    World (kit.solid): z up. The stage is the unit sphere of the slice span{1, i, j} of the quaternions: world x is the
    real part (the unit 1 = x₀), world y the i part and world z the j part, so the equator z = 0 is the complex line
    ℂ = span{1, i}. Five scenes share the sphere, one per card:
