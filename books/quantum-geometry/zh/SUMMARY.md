@@ -259,6 +259,7 @@
   - [39.8 实数误差放大轴与素数阿代尔归元闭合：从切空间线性失真、吉布斯—罗德里格斯弯曲合成到素数无公度防死锁引擎](ch39-s31-real-error-axis-and-prime-adelic-closure.md)
   - [39.9 全息圆弧流形与阿代尔螺线管同体：超越黎曼切板近似，在同一光滑流形上统一加法、乘法、对数与素数闭合环](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md)
   - [39.10 黎曼 1854 + 1859 双璧合龙：以已证 1/2 临界线谱磨光切板黎曼流形](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md)
+  - [39.11 精确结构数学对比平直度量近似：完整三元关系、纯整数圆弧闭合与素数拓扑刚性](ch39-s34-exact-structural-mathematics-vs-flat-approximation.md)
 
 # 终章与附录
 
