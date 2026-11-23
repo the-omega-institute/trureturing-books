@@ -687,15 +687,19 @@ On a compatible subset of minimum omitted weight, the orbit closure contains the
 :::
 
 ::: {.theorem #thm-ch31-consecutive-phase-separation title="Consecutive integer frequencies give the inverse-square scale" lean="D5/S3/Fourier/ShortPhaseRelations.consecutive_pair_separation"}
-For any natural $n$, take frequencies $(n,n+1)$ with equal positive weights. If $\mathcal T$ contains an upper ray, then $P=1/2$. Every incompatible subset contains an incompatible relation of coefficient $\ell^1$ norm at most $H=2n+1$, and
+For any natural $n$, take frequencies $(n,n+1)$ with equal positive weights. Then $P=1/2$, and every incompatible subset contains an incompatible relation of coefficient $\ell^1$ norm at most $H=2n+1$. Every nonempty $\mathcal T$ satisfies $1/(H^2+1)\le D_{\mathcal T}$. If $\mathcal T$ contains an upper ray, then
 
 $$
-\frac{1}{2H^2}\le D_{\mathcal T}\le1-\cos\!\left(\frac{\pi}{2H}\right)\le\frac{\pi^2}{8H^2}.
+D_{\mathcal T}\le1-\cos\!\left(\frac{\pi}{2H}\right)\le\frac{\pi^2}{8H^2}.
 $$
+
+In the upper-ray case, $n=0$ gives $D_{\mathcal T}=1/2$ exactly.
 :::
 
 ::: proof
-For $n>0$, the relation $(n+1,-n)$ has coefficient sum $1$, and both singletons are compatible. For $n=0$, the zero frequency has an incompatible length-one relation and frequency $1$ can be retained. In both cases one coordinate must be omitted and one suffices. At time $\pi/H$, the two angles are $\pi/2\pm\pi/(2H)$. Adding integer multiples of $2\pi$ puts this time in any upper ray while preserving both sine values. The lower bound follows from [@thm-ch31-short-relation-deletion].
+For $n>0$, the relation $(n+1,-n)$ has coefficient sum $1$, and both singletons are compatible. For $n=0$, the zero frequency has an incompatible length-one relation and frequency $1$ can be retained. In both cases one coordinate must be omitted and one suffices. In the single-row bound of [@thm-ch31-relation-phase-deficit], the relation $(n+1,-n)$ gives the denominator $H^2+1=2((n+1)^2+n^2)$ after the equal weights cancel.
+
+At time $\pi/H$, the two angles are $\pi/2\pm\pi/(2H)$. Adding integer multiples of $2\pi$ puts this time in any upper ray while preserving both sine values. For $n=0$, the frequency-one term is the only nonzero sine term, and it reaches $1$ on every upper ray. The normalized score therefore has supremum $1/2$.
 :::
 
 For each fixed finite system there are finitely many subsets, so one can choose a witness per incompatible subset and bound their coefficient norms jointly. For the actual zeta ordinates, the open question is how this bound grows with the cutoff.
