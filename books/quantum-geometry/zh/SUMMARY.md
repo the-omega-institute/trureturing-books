@@ -150,6 +150,7 @@
     - [31.1.3 算术 1—3—3—1 概念塔与韦伊显式对偶：素数积出零点，零点雕出素数](ch34-s28-s03-explicit-duality.md)
       - [31.1.3.1 幂次采样、窗口质量与辅助素数](ch34-s28-s03-s01-sampling-windows.md)
       - [31.1.3.2 Möbius 截断与零点谱恢复](ch34-s28-s03-s02-mobius-and-spectra.md)
+        - [31.1.3.2.1 Möbius 窗口的 Fourier 恢复](ch34-s28-s03-s02-fourier-recovery.md)
       - [31.1.3.3 Mangoldt 临界差额与特征窗口](ch34-s28-s03-s03-mangoldt-and-characters.md)
       - [31.1.3.4 晚期窗口质量、簇值与谱误差](ch34-s28-s03-s04-late-window-clusters.md)
     - [31.1.4 文献脉络与认识论边界审计，及向 §31.2 算术枢轴隧穿的交棒](ch34-s28-s04-literature-boundaries.md)

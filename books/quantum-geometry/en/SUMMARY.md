@@ -150,6 +150,7 @@
     - [31.1.3 The Arithmetic 1—3—3—1 Concept Tower and Weil's Explicit Duality: Primes Carve Zeros, Zeros Sculpt Primes](ch34-s28-s03-explicit-duality.md)
       - [31.1.3.1 Power sampling, window mass, and auxiliary primes](ch34-s28-s03-s01-sampling-windows.md)
       - [31.1.3.2 Möbius truncation and zero-spectrum recovery](ch34-s28-s03-s02-mobius-and-spectra.md)
+        - [31.1.3.2.1 Fourier recovery from Möbius windows](ch34-s28-s03-s02-fourier-recovery.md)
       - [31.1.3.3 Critical Mangoldt gaps and character windows](ch34-s28-s03-s03-mangoldt-and-characters.md)
       - [31.1.3.4 Late-window mass, cluster values, and spectral errors](ch34-s28-s03-s04-late-window-clusters.md)
     - [31.1.4 Literature Lineage, Epistemic Boundary Audit, and Baton Handoff to §31.2 Arithmetic Pivot Tunneling](ch34-s28-s04-literature-boundaries.md)
