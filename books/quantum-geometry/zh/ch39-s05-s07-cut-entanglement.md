@@ -99,6 +99,26 @@ $$
 
 在 $q=1/2,c=1/6$ 的例子里，所有环检查允许整个 $[0,1/6]^2$。共同概率律的精确范围还要求 $a+b\le1/6$。用距离表示，这条额外约束来自五边形割不等式与三角不等式 $d_{HT}\le d_{HK}+d_{KT}$ 的和，消去未指定的 $d_{HK}$。[Avis、Imai 与 Ito，定义 6 和定理 4](https://arxiv.org/abs/math/0601375)
 
+同一块共享容量对五个边缘概率不等的情形也成立。此时两个端点差各自有一个区间，它们的和仍受 $K$ 中去掉 $S$ 后的概率质量约束。
+
+::: {.theorem #thm-ch39-fib-unequal-joint-range lean="D5/S1/Words/AdmissibleWords/FIBUnequalMarginals.joint_range" title="五个边缘概率下的精确联合范围"}
+在半开单位区间内，要求可测事件 $S,H,K,T,W$ 的概率分别为 $s,h,k,t,w$，且 $S,W\subseteq H\cap K$、$T\subseteq K$。指定 $a=\Pr(W\setminus S)$ 和 $b=\Pr(T\setminus H)$。这样的事件族存在，当且仅当
+
+$$
+\begin{aligned}
+&k\le1,\qquad t\le k,\\
+&\max(0,w-s)\le a\le\min(w,h-s),\\
+&\max(0,t-h)\le b\le\min(t,1-h),\qquad a+b\le k-s.
+\end{aligned}
+$$
+:::
+
+::: {.proof}
+$W\setminus S$ 同时包含于 $W$ 和 $H\setminus S$，$T\setminus H$ 同时包含于 $T$ 和 $H$ 的补集。两个差集的下界由能留在 $S$ 或 $H$ 内的最大质量给出。它们互斥且都包含于 $K\setminus S$，故总概率至多为 $k-s$。
+
+为构造事件，把 $K$ 取为 $[0,k)$，让 $H\cap K$ 占据长度为 $r=\max(s+a,t-b,h+k-1)$ 的前段。约束保证 $r\le h$、$r\le k-b$，且 $K$ 右侧容得下补足 $H$ 的质量 $h-r$。将 $S$ 和 $W$ 放在这个前段内，使它们的重合长度为 $w-a$。$T$ 的前 $t-b$ 单位质量放在前段内，再把长度为 $b$ 的一段紧接在前段之后。完整证明由 Lean 内核检查。
+:::
+
 在 `trureturing` 的直接编码器模型中，给定整数 $N \ge 2$ 与阶数 $K \ge 2$，将 $\{0, 1, \dots, N\}$ 按是否为素数划分为非素数逻辑页（$b = \mathrm{false}$，维数 $M_0 > 0$）与素数逻辑页（$b = \mathrm{true}$，维数 $M_1 > 0$）。记 $C_{m, b}$ 为首比特等于 $b$ 的长度 $m$ 禁 $1^K$ 合法字集，其基数为 $c_{m, b} = |C_{m, b}|$；对每个阈值 $0 \le s < K$，定义左端低尾游程累计行数与右端相容邻域字数：
 
 $$
