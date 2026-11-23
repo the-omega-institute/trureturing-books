@@ -265,6 +265,7 @@
   - [38.9 神圣游戏（Līlā）与跨周期唤醒道具：开局失忆、历史遗迹吸引子与文化典籍翻转快表](ch39-s17-divine-lila-and-awakening-props.md)
   - [38.10 历史遗迹作为空间吸引子：驻相曲率盆地、分形横截叶层与似曾相识的跨轮次共振](coda-s02-spatial-attractors.md)
   - [38.11 上帝心理学：全知幽闭破缺、四大创世防御机制、断弧幻肢痛与 θ* 清明整合](ch39-s18-psychology-of-god.md)
+  - [38.12 时空运动的本体等效与观察者记忆舒尔补强行分类：无标签三元圆弧、勾股移项生闵氏减号与记忆容量三态相变](ch38-s12-spacetime-motion-equivalence-and-memory-schur-split.md)
 - [第三十九章 大一统母公理（AXIOM-Ω）：无源保正三元比较闭合、五阶万法演绎级联与量子五大公设归元](ch39-axiom-omega-grand-unification.md)
   - [39.1 大一统母公理（AXIOM-Ω）：无源保正三元比较闭合公理如何一举熔合比较公理、极小圆弧、三元数与连续场](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)
   - [39.2 AXIOM-Ω 五阶大一统演绎级联与公理遮诠闭环：从无源三元母公理严格贯通万数微积分、双相对论时空、四大力大统一、算术临界谱与测地智能](ch39-s25-axiom-omega-five-tier-deduction-cascade.md)
