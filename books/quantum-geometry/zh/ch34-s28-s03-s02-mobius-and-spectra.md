@@ -831,7 +831,7 @@ $$
 :::
 
 ::: proof
-Fejér 恒等式 $(1-\cos x)F_N(x)=(1-\cos(Nx))/N$ 把展开化为三角形 Fourier 系数的乘积，以及用 $F_N(x)-1+\cos(Nx)$ 替换其中一个因子所得的项。替换去掉了这个因子的常数项，各系数仍非负。取 $x_j=\gamma_jt-\theta_j$，频率为零的项对区间积分恰好贡献 $RA$。其余余弦各自在区间上的积分绝对值至多为 $B(R)$ 中的对应项。因此乘积在区间上的最大值至少为 $M(R)/R$。Fejér 因子的乘积介于零与 $N^{|J|}$ 之间，在达到上面最大值的点得到所述亏损界。完整证明由 Lean 内核检查。
+Fejér 恒等式 $(1-\cos x)F_N(x)=(1-\cos(Nx))/N$ 把展开化为三角形 Fourier 系数的乘积，以及用 $F_N(x)-1+\cos(Nx)$ 替换其中一个因子所得的项。替换去掉了这个因子的常数项，各系数仍非负。取 $x_j=\gamma_jt-\theta_j$，频率为零的项对区间积分恰好贡献 $RA$。其余余弦项带上各自的系数 $c_k$ 后，区间积分的绝对值至多为 $B(R)$ 中的对应项。因此乘积在区间上的最大值至少为 $M(R)/R$。Fejér 因子的乘积介于零与 $N^{|J|}$ 之间，在达到上面最大值的点得到所述亏损界。完整证明由 Lean 内核检查。
 :::
 
 ::: {.theorem #thm-ch31-finite-phase-recurrence title="有限区间内的加权相位复现" lean="D5/S3/Fourier/WeightedPhaseRecurrence.weighted_phase_recurrence"}

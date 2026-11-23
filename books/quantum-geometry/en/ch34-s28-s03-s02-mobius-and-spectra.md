@@ -831,7 +831,7 @@ $$
 :::
 
 ::: proof
-The Fejér identity $(1-\cos x)F_N(x)=(1-\cos(Nx))/N$ reduces the expansion to the product of triangular Fourier coefficients and terms that replace one factor by $F_N(x)-1+\cos(Nx)$. The replacement removes its constant mode and has nonnegative coefficients. At $x_j=\gamma_jt-\theta_j$, the zero frequencies contribute exactly $RA$ to the integral. Integrating each other cosine over the window gives a term whose magnitude is bounded by its contribution to $B(R)$. Thus the maximum of the loss-weighted product on the interval is at least $M(R)/R$. The product of Fejér factors lies between zero and $N^{|J|}$, giving the stated loss at a maximizer. The full proof is checked by the Lean kernel.
+The Fejér identity $(1-\cos x)F_N(x)=(1-\cos(Nx))/N$ reduces the expansion to the product of triangular Fourier coefficients and terms that replace one factor by $F_N(x)-1+\cos(Nx)$. The replacement removes its constant mode and has nonnegative coefficients. At $x_j=\gamma_jt-\theta_j$, the zero frequencies contribute exactly $RA$ to the integral. The magnitude of the integral of each other cosine term, including its coefficient $c_k$, is at most its summand in $B(R)$. Thus the maximum of the loss-weighted product on the interval is at least $M(R)/R$. The product of Fejér factors lies between zero and $N^{|J|}$, giving the stated loss at a maximizer. The full proof is checked by the Lean kernel.
 :::
 
 ::: {.theorem #thm-ch31-finite-phase-recurrence title="Weighted phase recurrence within a finite interval" lean="D5/S3/Fourier/WeightedPhaseRecurrence.weighted_phase_recurrence"}
