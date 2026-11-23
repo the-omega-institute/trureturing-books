@@ -17,6 +17,8 @@ $$
 
 例如，中位恒为 $0$ 时，从四个底面字各占 $1/4$ 改为 `000`、`101` 各占 $1/2$，两端的占位仍各为 $1/2$，共同占位概率却从 $1/4$ 变成 $1/2$。这个改动给四格表的对角各加 $1/4$，给反对角各减 $1/4$，保持了行和与列和。[§39.3](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md) 的固定种子构造也用到这个四格变换。知道每个字的计算基概率后，字与字之间的相对相位仍可变化，见 [@ex-ch39-p2e-phase-counterexample]。[FIB 原子理论卷 §2–4](https://github.com/the-omega-institute/trureturing-source-theories/blob/2a39da5107abbfa3a72cc883486dbc15a15994a1/docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md#L178-L216)
 
+把四格按 `00`、`01`、`10`、`11` 排列。对非负整数 $a,b,c,d,s$，把计数 $(a,b+s,c+s,d)$ 改成 $(a+s,b,c,d+s)$。两张表的总数都为 $N=a+b+c+d+2s$，左右占位数分别为 $c+d+s$ 和 $b+d+s$，联合占位数却从 $d$ 变成 $d+s$。当 $N>0$ 时，联合占位率恰增加 $s/N$。OmegaMath 的比例等价用交叉相乘比较这些读数。上面的四样本例取 $(a,b,c,d,s)=(1,0,0,1,1)$。两个端点的读数 $2/4$ 都等于 $1/2$，也等于射影读数 $\kappa([1:1])$。联合读数由 $1/4$ 变成 $2/4$。[OmegaMath 的比例等价](https://github.com/the-omega-institute/omega-math/blob/6f701cf75d1feffe20cdfc751c4f8da995a0e3a3/src/OmegaInit/Data/Ratio.lean#L19-L39) · [射影读数公式](https://github.com/the-omega-institute/omega-math/blob/6f701cf75d1feffe20cdfc751c4f8da995a0e3a3/src/OmegaMath/Projective.lean#L11-L28)
+
 对等权样本，这个变换是任意长度禁邻字排序在三位时的特例。把第 $2,4,6,\ldots$ 位取反。此时每个占位的奇数位都要求相邻的偶数位也占位。于是两个变换后的支撑取交集和并集，所得支撑仍合法。再取反还原，就得到两个合法字，逐位合计的占位次数保持相等。金字塔底面的 `100` 和 `001` 先变成 `110` 和 `011`。两者的交、并分别为 `010` 和 `111`，还原后就是 `000` 和 `101`。
 
 反复作这样的交换，可以把变换后的支撑按包含关系排成一列。若共 $m$ 个样本，某一位在变换后的支撑中出现 $c$ 次，它就恰好出现在最后 $c$ 个支撑里。因此，原占位计数与 $m$ 决定排序后的多重集。样本数与逐位占位计数相同的两组样本可以经由这个共同的多重集，用一系列合法的二字交换连通。对有理概率律，把两个律写成同一分母后就能应用这一结论。[固定占位计数下的连通性](lean:D5/S1/Words/AdmissibleWords/UncrossingFiber.adm_phi_fiber_common_endpoint)
