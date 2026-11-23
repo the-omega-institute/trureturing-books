@@ -52,10 +52,10 @@ The permutation laws give unique completion for each pair of points with differe
 
 ## 35.6.8.4.1.2 All extensions with the extra dimension
 
-Keep the mixed family and the independent labellings fixed. A partial Steiner triple system is a family of three-element sets in which any two distinct labels occur together at most once.
+A minimum extension already covers every pair of different residues in a row. To add more triples while retaining the extra dimension, the dimension criterion allows additions inside individual residue classes. Keep the mixed family and the independent labellings fixed. A partial Steiner triple system is a family of three-element sets in which any two distinct labels occur together at most once.
 
 ::: {.theorem #thm-joint-circuit-steiner-decomposition title="The Latin squares and partial Steiner systems of an extension" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalSteinerDecomposition.forward_decomposition"}
-Suppose the added triples have three distinct points within one row and the combined family is pair-unique. If the potential space has dimension $d+1$, the unordered added family consists of the cell triples of one Latin square per row and the triples of a partial Steiner system in each actual residue class of each row.
+Suppose the added triples have three distinct points within one row and the combined family is pair-unique. If the normalized potential space has dimension $d+1$, the unordered added family consists of the cell triples of one Latin square per row and the triples of a partial Steiner system in each actual residue class of each row.
 :::
 
 ::: proof
@@ -77,3 +77,5 @@ For the fixed labellings, the unordered extension uniquely determines the square
 ::: proof
 The residue pattern identifies which triples come from the squares. Each remaining triple identifies its row and residue class, and the labels in that class recover the three-element set. The full proof is checked by the Lean kernel.
 :::
+
+For example, take $d=1$ and $r=3$. Each residue class contains exactly three points. Its unique triple can be added or left out, independently in each of the nine classes across the three rows. Thus the Latin squares supply $27$ triples, and any number from zero through nine can be added to them while keeping the normalized potential space two-dimensional.
