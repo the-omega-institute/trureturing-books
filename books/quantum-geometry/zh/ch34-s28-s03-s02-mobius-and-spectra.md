@@ -806,10 +806,56 @@ $$
 
 实际 ζ 零点的截断仍需要独立确定不相容关系及其支撑。
 
-::: {.theorem #thm-ch31-zeta-cutoff-recurrence title="有效线性无关下的零点截断复现" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHWeightedSineCutoff.eventual_weighted_sine_cutoff_tradeoff"}
-假设 RH 与 Lamzouri 的有效线性无关猜想成立。按该猜想，每个 $\eta>0$ 都对应一个常数 $C_\eta>0$。对 $X\ge2$，取截至 $X$ 的不同正零点纵坐标，任意非零整数系数向量若每个系数的绝对值至多为 $N(X)$，则其频率和的绝对值至少为 $C_\eta\exp(-X^{1+\eta})$。这里 $N(X)$ 按解析重数计数。
+::: {.theorem #thm-ch31-signed-phase-margin title="共振项的带符号贡献" lean="D5/S3/Fourier/WeightedPhaseRecurrence.weighted_phase_recurrence_of_margin"}
+取有限指标集 $J$、实频率 $\gamma_j$、目标相位角 $\theta_j$、总和为一的非负权重 $p_j$、正整数 $N$ 与 $\varepsilon>1/N$。对各坐标相位变量 $x_j$，令 $c_k$ 为下式的 Fourier 系数。
 
-沿用 [@thm-ch31-weighted-phase-limsup] 的 $w_\gamma$ 与 $W(T)$，记 $S(T,v)=\sum_{0<\gamma\le T}w_\gamma\sin(\gamma v)$。固定 $r>0$、$\beta>0$。若 $\varepsilon>2(1-\min(\beta,1)^2)$，则对所有充分大的 $T$，有 $W(T)>0$，且每个区间 $[a,a+\exp(T^\beta)]$ 内都有 $u$ 满足
+$$
+\left(\varepsilon-\sum_{j\in J}p_j(1-\cos x_j)\right)\prod_{j\in J}F_N(x_j),
+\qquad F_N(x)=\frac{1}{N}\left|\sum_{\ell=0}^{N-1}e^{i\ell x}\right|^2.
+$$
+
+这些系数非负，且支撑在 $|k_j|\le N$ 内。令 $\xi(k)=\sum_j k_j\gamma_j$、$b(k)=\sum_j k_j\theta_j$，并对 $R>0$ 定义
+
+$$
+\begin{aligned}
+A&=\sum_{\xi(k)=0} c_k\cos b(k),\\
+B(R)&=\sum_{\xi(k)\ne0}\frac{2c_k|\sin(R\xi(k)/2)|}{|\xi(k)|},\qquad M(R)=RA-B(R).
+\end{aligned}
+$$
+
+若 $M(R)>0$，则每个区间 $[a,a+R]$ 内都有时刻 $t$ 满足
+
+$$
+\sum_j p_j(1-\cos(\gamma_jt-\theta_j))\le\varepsilon-\frac{M(R)}{RN^{|J|}}.
+$$
+:::
+
+::: proof
+Fejér 恒等式 $(1-\cos x)F_N(x)=(1-\cos(Nx))/N$ 把展开化为三角形 Fourier 系数的乘积，以及用 $F_N(x)-1+\cos(Nx)$ 替换其中一个因子所得的项。替换去掉了这个因子的常数项，各系数仍非负。取 $x_j=\gamma_jt-\theta_j$，频率为零的项对区间积分恰好贡献 $RA$。其余余弦项带上各自的系数 $c_k$ 后，区间积分的绝对值至多为 $B(R)$ 中的对应项。因此乘积在区间上的最大值至少为 $M(R)/R$。Fejér 因子的乘积介于零与 $N^{|J|}$ 之间，在达到上面最大值的点得到所述亏损界。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-finite-phase-recurrence title="有限区间内的加权相位复现" lean="D5/S3/Fourier/WeightedPhaseRecurrence.weighted_phase_recurrence"}
+取有限指标集 $J$，实频率 $\gamma_j$，目标相位角 $\theta_j$，以及总和为一的非负权重 $p_j$。令 $\xi(k)=\sum_{j\in J}k_j\gamma_j$，$b(k)=\sum_{j\in J}k_j\theta_j$。固定正整数 $N$ 与 $\delta>0$。对每个满足 $|k_j|\le N$ 的整数向量，假定 $\xi(k)=0$ 时 $\cos b(k)=1$，而 $\xi(k)\ne0$ 时 $|\xi(k)|\ge\delta$。
+
+若 $\varepsilon>1/N$ 与 $R$ 满足
+
+$$
+R\delta(\varepsilon-1/N)>2\bigl(\varepsilon N^{|J|}-(\varepsilon-1/N)\bigr),
+$$
+
+则每个区间 $[a,a+R]$ 内都有时刻 $t$，使 $\sum_j p_j(1-\cos(\gamma_jt-\theta_j))<\varepsilon$。
+:::
+
+::: proof
+Fejér 核 $F_N(x)=|\sum_{r=0}^{N-1}e^{irx}|^2/N$ 的 Fourier 系数非负，总和为 $N$，常数系数为 $1$。利用恒等式 $(1-\cos x)F_N(x)=(1-\cos(Nx))/N$，将各坐标 Fejér 核的乘积乘上 $\varepsilon$ 与加权亏损的差，得到系数非负的余弦展开。系数总和为 $\varepsilon N^{|J|}$，零向量的系数为 $\varepsilon-1/N$。频率为零的项贡献非负，其余每项的余弦在整个区间上的积分绝对值至多为 $2/\delta$。区间长度条件保证乘积的积分为正。取乘积为正的一点，其亏损即小于 $\varepsilon$。 完整证明由 Lean 内核检查。
+:::
+
+四分之一周相位取 $\theta_j=\pi/2$。对调和总权重为正的实际 ζ 零点截断，可取 $p_j$ 与解析重数权重成正比，取 $\gamma_j$ 为缩放后的纵坐标。估计依赖该截断在有限系数范围内满足上述条件。非零频率的分离量与精确关系的相位同余是两项独立输入。 [Bohr–Jessen 的 Fejér 核方法](https://arxiv.org/html/2411.14221#S4) · [RH 仓中的有限指数平均](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
+
+::: {.theorem #thm-ch31-zeta-cutoff-recurrence title="幂次截断下的加权正弦复现" lean="D5/S3/Analytic/Oscillation/SpectrumPhaseCutoff.eventual_sine_cutoff_tradeoff"}
+取局部有限的正实频谱 $\gamma_j$，频率互异，权重 $w_j\ge0$。记 $J(T)=\{j:\gamma_j\le T\}$，$W(T)=\sum_{j\in J(T)}w_j$，$S(T,v)=\sum_{j\in J(T)}w_j\sin(\gamma_jv)$。假设 $W(T)$ 最终为正，$\lvert J(X)\rvert=O(X\log X)$，且每个 $0<\alpha<1$ 都有 $W(T^\alpha)/W(T)\to q_\alpha\ge\alpha^2$。再假设每个 $d>0$ 都有常数 $C_d>0$，使每个固定 $M\in\mathbb N$ 在充分大的 $X$ 上满足如下分离界。对任意非零整数向量 $(k_j)_{j\in J(X)}$，若 $|k_j|\le M$，则 $|\sum_j k_j\gamma_j|\ge C_d\exp(-X^{1+d})$。
+
+固定 $r,\beta>0$ 和 $\varepsilon>2(1-\min(\beta,1)^2)$。对于所有充分大的实数 $T$，有 $W(T)>0$，且每个区间 $[a,a+\exp(T^\beta)]$ 都含有一个 $u$ 满足
 
 $$
 1-\frac{S(T,u/r)}{W(T)}<\varepsilon.
@@ -817,14 +863,12 @@ $$
 :::
 
 ::: proof
-取 $0<\alpha<\min(\beta,1)$ 使 $2(1-\alpha^2)<\varepsilon$，先保留截至 $X=T^\alpha$ 的零点。由 $W(T)/\log^2 T\to1/(4\pi)$ 得 $W(X)/W(T)\to\alpha^2$。在任何共同时间，舍弃项对亏损的贡献至多为其权重占比的两倍。
-
-取固定的保留段亏损容许值 $\varepsilon_0>0$，使 $2(1-\alpha^2)+\alpha^2\varepsilon_0<\varepsilon$。固定满足 $1/N<\varepsilon_0$ 的 $N$，并取 $\eta>0$ 使 $\alpha(1+\eta)<\beta$。最终有 $N\le N(X)$。对保留频率 $\gamma/r$、目标 $\pi/2$ 应用 [@thm-ch31-finite-phase-recurrence]。有效线性无关给出分离量 $C_\eta\exp(-X^{1+\eta})/r$，而保留维数至多为 $N(X)=O(X\log X)$。取对数后，分离量和系数总和分别带来 $T^{\alpha(1+\eta)}$ 与 $O(T^\alpha\log T)$ 的开销，两者都比 $T^\beta$ 低阶。在同一个时刻合并保留段亏损和舍弃权重估计，即得结论。
+取 $0<\alpha<\min(\beta,1)$ 与 $0<\varepsilon_0\le1$，使 $2(1-\alpha^2)+\alpha^2\varepsilon_0<\varepsilon$。对截至 $X=T^\alpha$ 的频率应用 [@thm-ch31-finite-phase-recurrence]，取目标相位 $\pi/2$ 和整数 $M$ 使 $1/M<\varepsilon_0$。令 $d>0$ 满足 $\alpha(1+d)<\beta$。取对数后，分离量和有限展开的系数总量分别带来 $T^{\alpha(1+d)}$ 与 $O(T^\alpha\log T)$ 的开销，均比 $T^\beta$ 低阶。因此每个给定区间都含有一个点，使保留段的归一化亏损小于 $\varepsilon_0$。在该点，舍弃项的亏损至多为其权重的两倍。令 $q_T=W(X)/W(T)$，则全段亏损小于 $2(1-q_T)+q_T\varepsilon_0$。该式随 $q_T$ 递减，且极限小于 $\varepsilon$。
 :::
 
-定理给出以有效线性无关为条件的充分区间长度。该猜想允许 $C_\eta$ 取无效常数。Lamzouri 的大值定理在另一组系数假设下，对 $[2,X]$ 上截断至 $X^2$ 的和式取极值。 [Lamzouri 的猜想 1.1 与定理 1.5](https://arxiv.org/html/2311.04860v2#S1.SS3)
+对 [@thm-ch31-weighted-phase-limsup] 的实际 ζ 零点，假设 RH 和 Lamzouri 的有效线性无关猜想。猜想将系数上界取为按解析重数计的 $N(X)$。由于 $N(X)\to\infty$，它给出每个固定系数盒所需的分离量。不同纵坐标数至多为 $N(X)=O(X\log X)$。实际权重 $m_\gamma\gamma/(1/4+\gamma^2)$ 满足 $W(T)/\log^2 T\to1/(4\pi)$，因此 $W(T)>0$ 最终成立，且 $q_\alpha=\alpha^2$。通用结论于是给出该正弦和的统一等待尺度。猜想允许 $C_d$ 取无效常数。Lamzouri 的定理 1.5 则在其系数假设下对 $[2,X]$ 上截断至 $X^2$ 的和式取极值。 [Lamzouri 原文](https://arxiv.org/html/2311.04860v2)
 
-取 $\beta=1$，对任意 $\varepsilon>0$ 都能在每个长度为 $e^T$ 的区间找到一次命中。因此 $0\le D(T)<\varepsilon$ 最终成立。在 RH 与有效线性无关猜想下，若 $\mu(r)\ne0$，[@thm-ch31-weighted-phase-limsup] 的左端点误差取得完整的首项系数 $|\mu(r)|/(4\pi s)$。
+取 $\beta=1$，对任意 $\varepsilon>0$ 都能在每个长度为 $e^T$ 的区间找到一次命中，因此 $0\le D(T)<\varepsilon$ 最终成立。在 RH 与有效线性无关猜想下，若 $\mu(r)\ne0$，[@thm-ch31-weighted-phase-limsup] 的左端点误差取得完整的首项系数 $|\mu(r)|/(4\pi s)$。
 
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数

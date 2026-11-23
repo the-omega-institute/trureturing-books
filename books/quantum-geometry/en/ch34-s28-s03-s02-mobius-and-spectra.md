@@ -806,10 +806,56 @@ Every relation is an integer multiple of $(3,-1)$. The length-four relation has 
 
 For actual zeta cutoffs, the incompatible relations and their supports still require independent determination.
 
-::: {.theorem #thm-ch31-zeta-cutoff-recurrence title="Zeta cutoff recurrence under Effective LI" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHWeightedSineCutoff.eventual_weighted_sine_cutoff_tradeoff"}
-Assume RH and Lamzouri's Effective LI conjecture. It gives, for every $\eta>0$, a constant $C_\eta>0$ such that the absolute value of every nonzero coefficient vector's frequency sum on the distinct positive ordinates through $X\ge2$ is at least $C_\eta\exp(-X^{1+\eta})$ when the absolute value of each coefficient is at most $N(X)$. Here $N(X)$ counts zeros with analytic multiplicity.
+::: {.theorem #thm-ch31-signed-phase-margin title="The signed contribution of resonant modes" lean="D5/S3/Fourier/WeightedPhaseRecurrence.weighted_phase_recurrence_of_margin"}
+Let $J$ be finite. Take real frequencies $\gamma_j$, target angles $\theta_j$, nonnegative weights $p_j$ summing to one, an integer $N>0$, and $\varepsilon>1/N$. For independent phase variables $x_j$, denote by $c_k$ the Fourier coefficients of
 
-Use $w_\gamma$ and $W(T)$ from [@thm-ch31-weighted-phase-limsup] and write $S(T,v)=\sum_{0<\gamma\le T}w_\gamma\sin(\gamma v)$. Fix $r>0$ and $\beta>0$. For any $\varepsilon>2(1-\min(\beta,1)^2)$, for all sufficiently large $T$, $W(T)>0$ and every interval $[a,a+\exp(T^\beta)]$ contains $u$ with
+$$
+\left(\varepsilon-\sum_{j\in J}p_j(1-\cos x_j)\right)\prod_{j\in J}F_N(x_j),
+\qquad F_N(x)=\frac{1}{N}\left|\sum_{\ell=0}^{N-1}e^{i\ell x}\right|^2.
+$$
+
+The coefficients are nonnegative and supported on $|k_j|\le N$. Write $\xi(k)=\sum_j k_j\gamma_j$ and $b(k)=\sum_j k_j\theta_j$. For $R>0$ put
+
+$$
+\begin{aligned}
+A&=\sum_{\xi(k)=0} c_k\cos b(k),\\
+B(R)&=\sum_{\xi(k)\ne0}\frac{2c_k|\sin(R\xi(k)/2)|}{|\xi(k)|},\qquad M(R)=RA-B(R).
+\end{aligned}
+$$
+
+If $M(R)>0$, then every interval $[a,a+R]$ contains a time $t$ satisfying
+
+$$
+\sum_j p_j(1-\cos(\gamma_jt-\theta_j))\le\varepsilon-\frac{M(R)}{RN^{|J|}}.
+$$
+:::
+
+::: proof
+The Fejér identity $(1-\cos x)F_N(x)=(1-\cos(Nx))/N$ reduces the expansion to the product of triangular Fourier coefficients and terms that replace one factor by $F_N(x)-1+\cos(Nx)$. The replacement removes its constant mode and has nonnegative coefficients. At $x_j=\gamma_jt-\theta_j$, the zero frequencies contribute exactly $RA$ to the integral. The magnitude of the integral of each other cosine term, including its coefficient $c_k$, is at most its summand in $B(R)$. Thus the maximum of the loss-weighted product on the interval is at least $M(R)/R$. The product of Fejér factors lies between zero and $N^{|J|}$, giving the stated loss at a maximizer. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch31-finite-phase-recurrence title="Weighted phase recurrence within a finite interval" lean="D5/S3/Fourier/WeightedPhaseRecurrence.weighted_phase_recurrence"}
+Let $J$ be finite, with real frequencies $\gamma_j$, target angles $\theta_j$ and nonnegative weights $p_j$ summing to one. Put $\xi(k)=\sum_{j\in J}k_j\gamma_j$ and $b(k)=\sum_{j\in J}k_j\theta_j$. Fix a positive integer $N$ and a number $\delta>0$. For each integer vector satisfying $|k_j|\le N$, assume that $\cos b(k)=1$ if $\xi(k)=0$, and that $|\xi(k)|\ge\delta$ otherwise.
+
+If $\varepsilon>1/N$ and $R$ satisfy
+
+$$
+R\delta(\varepsilon-1/N)>2\bigl(\varepsilon N^{|J|}-(\varepsilon-1/N)\bigr),
+$$
+
+then every interval $[a,a+R]$ contains a time $t$ for which $\sum_j p_j(1-\cos(\gamma_jt-\theta_j))<\varepsilon$.
+:::
+
+::: proof
+The Fejér kernel $F_N(x)=|\sum_{r=0}^{N-1}e^{irx}|^2/N$ has nonnegative Fourier coefficients with total mass $N$. Its constant coefficient is $1$. The identity $(1-\cos x)F_N(x)=(1-\cos(Nx))/N$ yields a nonnegative-coefficient cosine expansion of the Fejér product multiplied by the difference between $\varepsilon$ and the weighted loss. Its total coefficient mass is $\varepsilon N^{|J|}$ and the coefficient at the zero vector is $\varepsilon-1/N$. Zero-frequency terms contribute nonnegatively, and each other cosine has integral of magnitude at most $2/\delta$ over the entire interval. The assumed inequality makes the integral of the product positive. At a point where the product is positive, the loss is below $\varepsilon$. The full proof is checked by the Lean kernel.
+:::
+
+For the quarter phase, set $\theta_j=\pi/2$. For an actual zeta cutoff with positive harmonic mass, take $p_j$ proportional to the analytic-multiplicity weights and $\gamma_j$ equal to the rescaled ordinates. The estimate is conditional on the finite-band assumptions for that cutoff. The nonzero frequency separation is a quantitative input distinct from the phase congruences for exact relations. [Bohr–Jessen's Fejér argument](https://arxiv.org/html/2411.14221#S4) · [Finite exponential averages in the RH repository](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
+
+::: {.theorem #thm-ch31-zeta-cutoff-recurrence title="Weighted sine recurrence at power cutoffs" lean="D5/S3/Analytic/Oscillation/SpectrumPhaseCutoff.eventual_sine_cutoff_tradeoff"}
+Take a locally finite spectrum of distinct positive real frequencies $\gamma_j$ and weights $w_j\ge0$. Write $J(T)=\{j:\gamma_j\le T\}$, $W(T)=\sum_{j\in J(T)}w_j$, and $S(T,v)=\sum_{j\in J(T)}w_j\sin(\gamma_jv)$. Assume $W(T)>0$ eventually, $\lvert J(X)\rvert=O(X\log X)$, and $W(T^\alpha)/W(T)\to q_\alpha\ge\alpha^2$ for every $0<\alpha<1$. Also assume that for each $d>0$ there is a $C_d>0$ such that for each fixed $M\in\mathbb N$ the following separation bound holds for all sufficiently large $X$. Every nonzero integer vector $(k_j)_{j\in J(X)}$ with $|k_j|\le M$ satisfies $|\sum_j k_j\gamma_j|\ge C_d\exp(-X^{1+d})$.
+
+Fix $r,\beta>0$ and $\varepsilon>2(1-\min(\beta,1)^2)$. For all sufficiently large real $T$, $W(T)>0$ and every interval $[a,a+\exp(T^\beta)]$ contains a point $u$ with
 
 $$
 1-\frac{S(T,u/r)}{W(T)}<\varepsilon.
@@ -817,14 +863,12 @@ $$
 :::
 
 ::: proof
-Choose $0<\alpha<\min(\beta,1)$ so that $2(1-\alpha^2)<\varepsilon$ and retain the ordinates through $X=T^\alpha$. The limit $W(T)/\log^2 T\to1/(4\pi)$ gives $W(X)/W(T)\to\alpha^2$. The omitted frequencies contribute at most twice their normalized weight to the loss at any time.
-
-Choose a fixed retained loss tolerance $\varepsilon_0>0$ with $2(1-\alpha^2)+\alpha^2\varepsilon_0<\varepsilon$. Fix $N$ with $1/N<\varepsilon_0$, and choose $\eta>0$ with $\alpha(1+\eta)<\beta$. Eventually $N\le N(X)$. Apply [@thm-ch31-finite-phase-recurrence] to the retained frequencies $\gamma/r$ and target $\pi/2$. Effective LI gives a gap $C_\eta\exp(-X^{1+\eta})/r$. The retained dimension is at most $N(X)=O(X\log X)$. On the logarithmic scale, the gap and the coefficient mass cost $T^{\alpha(1+\eta)}$ and $O(T^\alpha\log T)$, respectively. Both are lower order than $T^\beta$. Combining the retained loss with the omitted-mass estimate at the same time gives the result.
+Choose $0<\alpha<\min(\beta,1)$ and $0<\varepsilon_0\le1$ with $2(1-\alpha^2)+\alpha^2\varepsilon_0<\varepsilon$. Apply [@thm-ch31-finite-phase-recurrence] to the frequencies through $X=T^\alpha$ with target angle $\pi/2$ and integer $M$ satisfying $1/M<\varepsilon_0$. Choose $d>0$ with $\alpha(1+d)<\beta$. On the logarithmic scale the gap and the coefficient mass cost $T^{\alpha(1+d)}$ and $O(T^\alpha\log T)$, respectively. Both are lower order than $T^\beta$, so every specified interval contains a point with retained loss below $\varepsilon_0$. The omitted terms at that point contribute loss at most twice their weight. For $q_T=W(X)/W(T)$ the full normalized loss is below $2(1-q_T)+q_T\varepsilon_0$. This expression decreases with $q_T$, and its limit lies below $\varepsilon$.
 :::
 
-The theorem supplies a sufficient interval length conditional on Effective LI. The constant in Effective LI may be ineffective. Lamzouri's large-value theorem takes extrema on $[2,X]$ of sums truncated at $X^2$ under a separate set of coefficient assumptions. [Lamzouri, Conjecture 1.1 and Theorem 1.5](https://arxiv.org/html/2311.04860v2#S1.SS3)
+For the actual zeta zeros of [@thm-ch31-weighted-phase-limsup], assume RH and Lamzouri's Effective LI. The conjecture permits coefficients bounded by the analytic multiplicity count $N(X)$. Since $N(X)\to\infty$, it supplies the separation bound for every fixed coefficient box. The distinct ordinate count is at most $N(X)=O(X\log X)$. For the actual weights $m_\gamma\gamma/(1/4+\gamma^2)$, the limit $W(T)/\log^2 T\to1/(4\pi)$ gives eventual positive mass and $q_\alpha=\alpha^2$. The general result gives the stated uniform waiting scale for this score. The constant $C_d$ may be ineffective. Lamzouri's Theorem 1.5 takes extrema on $[2,X]$ of sums truncated at $X^2$ under its coefficient assumptions. [Lamzouri's paper](https://arxiv.org/html/2311.04860v2)
 
-With $\beta=1$, every interval of length $e^T$ contains a hit for each fixed $\varepsilon>0$ once $T$ is large enough. Hence $0\le D(T)<\varepsilon$ eventually. Under RH and Effective LI, if $\mu(r)\ne0$, the left-endpoint error in [@thm-ch31-weighted-phase-limsup] attains the full leading coefficient $|\mu(r)|/(4\pi s)$.
+With $\beta=1$, every interval of length $e^T$ contains a hit for each fixed $\varepsilon>0$ once $T$ is large enough. Thus $0\le D(T)<\varepsilon$ eventually. Under RH and Effective LI, if $\mu(r)\ne0$, the left-endpoint error in [@thm-ch31-weighted-phase-limsup] attains the full leading coefficient $|\mu(r)|/(4\pi s)$.
 
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
