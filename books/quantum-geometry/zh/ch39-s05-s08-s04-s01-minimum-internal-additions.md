@@ -159,7 +159,7 @@ $$
 偶数个标签时，可以从多一个点的完整斯坦纳三元系得到最大的部分装填。删去点 $p$ 和所有含 $p$ 的块。对每个剩余点 $a$，原来覆盖 $\{p,a\}$ 的块还含有一个剩余点 $m(a)$。所有未覆盖点对恰为 $\{a,m(a)\}$。因此每个点正好有一个未用的搭档。
 
 ::: {.theorem #thm-joint-circuit-steiner-point-deleted-switch title="删点装填的换块判据" lean="D5/S3/Combinatorics/Matroids/PointDeletedSteinerSwitch.point_deleted_switch"}
-从任意完整的斯坦纳三元系删去一点。取不同于 $a$ 和 $c=m(a)$ 的剩余点 $v$，令 $b,d$ 分别完成原装填中的 $av,cv$ 点对。删去 $abv,vdc$ 并加入 $avc$ 后，仍是部分斯坦纳三元系，块数恰少一。未覆盖点对由原匹配中的 $ac$ 换成路径 $a,b,v,d,c$。新装填按包含关系极大，当且仅当 $d\ne m(b)$。
+从任意有限完备的斯坦纳三元系删去一点。取不同于 $a$ 和 $c=m(a)$ 的剩余点 $v$，令 $b,d$ 分别完成原装填中的 $av,cv$ 点对。五个标签 $a,b,v,d,c$ 两两不同。删去 $abv,vdc$ 并加入 $avc$ 后，仍是部分斯坦纳三元系，块数恰少一。未覆盖点对由原匹配中的 $ac$ 换成路径 $a,b,v,d,c$。新装填按包含关系极大，当且仅当 $d\ne m(b)$。
 :::
 
 ::: proof
