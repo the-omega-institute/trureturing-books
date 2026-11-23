@@ -9813,6 +9813,122 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "omega-fractran-observer-isa-sandbox",
+      "code": "OMEGA//FRACTRAN",
+      "title": "OMEGA//FRACTRAN · 观察者原生有理指令集沙盘：素数正交晶格、分数门的 0 · 1/2 · 1 解剖与非阿贝尔 p = 5 旋子栈",
+      "title_en": "OMEGA//FRACTRAN · Observer-Native Rational ISA: the Orthogonal Prime Crystal, the 0 · 1/2 · 1 Fraction Gate & the Non-Abelian p = 5 Rotor Stack",
+      "summary": "沿正交素数晶格逐步执行康威 FRACTRAN 的分数指令，观察分母如何决定指令能否执行。先走过加法、18 拍乘法和 PRIMEGAME，再交换两条 p = 5 旋子指令，比较不同的积如何保留执行次序。最后在示意模型中并列比较三种指令集的执行记录。",
+      "summary_en": "Step through Conway’s FRACTRAN on an orthogonal prime lattice and see how denominators determine which fractions can run. Try addition, an 18-step multiplication and PRIMEGAME, then swap two p = 5 rotor instructions to see how their products preserve the order. A final model compares execution traces from three instruction sets.",
+      "path": "omega-fractran-observer-isa-sandbox/",
+      "thumbnail": "omega-fractran-observer-isa-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-24",
+      "chapter": 38,
+      "section": "38.14",
+      "presets": [
+        "prime-orthogonal-register-adder",
+        "conway-multiplier-18-beat-closure",
+        "primegame-self-crystallization-and-lemma-shortcut",
+        "nonabelian-p5-lps-word-order-stack",
+        "three-paradigm-isa-and-zero-tear-audit"
+      ],
+      "preset_titles": {
+        "prime-orthogonal-register-adder": {
+          "zh": "素数正交晶格上的加法器",
+          "en": "An adder on the orthogonal prime crystal"
+        },
+        "conway-multiplier-18-beat-closure": {
+          "zh": "六条分数做乘法，18 拍闭合",
+          "en": "Six fractions multiply, closed in 18 beats"
+        },
+        "primegame-self-crystallization-and-lemma-shortcut": {
+          "zh": "PRIMEGAME 结晶出素数，引理抄近路",
+          "en": "PRIMEGAME crystallizes primes, lemmas cut the way"
+        },
+        "nonabelian-p5-lps-word-order-stack": {
+          "zh": "p = 5 旋子栈记住次序",
+          "en": "The p = 5 rotor stack keeps the order"
+        },
+        "three-paradigm-isa-and-zero-tear-audit": {
+          "zh": "三种指令集，零撕裂审计（MODEL）",
+          "en": "Three ISAs, a zero-tear audit (MODEL)"
+        }
+      },
+      "tags": [
+        "FRACTRAN",
+        "素数赋值",
+        "整除",
+        "非交换旋子",
+        "观察者有理指令集"
+      ],
+      "tags_en": [
+        "FRACTRAN",
+        "Prime valuations",
+        "Divisibility",
+        "Noncommuting rotors",
+        "Observer rational instruction set"
+      ],
+      "theory": [
+        {
+          "label": "§38.14 · 康威 FRACTRAN 与三维非阿贝尔 Ω-FRACTRAN 观察者原生语言",
+          "label_en": "§38.14 · Conway’s FRACTRAN and the Three-Dimensional Non-Abelian Ω-FRACTRAN Observer Language",
+          "href": "../zh/ch38-s14-omega-fractran-observer-rational-isa.html#sec-ch38-omega-fractran-observer-rational-isa",
+          "href_en": "../en/ch38-s14-omega-fractran-observer-rational-isa.html#sec-ch38-omega-fractran-observer-rational-isa"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Factorization/PositiveRationalGroup.signed_prime_ledger_equiv_positive_rationals"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/PrimeLedgerGroupification.prime_ledger_direction_and_groupification"
+        },
+        {
+          "gid": "D5/S3/Factorization/FreeCommMonoid.pnat_free_comm_monoid_on_primes"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalValuationRecovery.rational_recovered_from_sign_and_finite_valuations"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula"
+        },
+        {
+          "gid": "D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence"
+        },
+        {
+          "gid": "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape"
+        },
+        {
+          "gid": "D5/S3/Factorization/Automata/ExactPrimeDivisionNoDFAO.no_finite_dfao_for_exact_prime_division"
+        },
+        {
+          "gid": "D5/S0/Computability/PhysicalDivider/Positive.divMachine_positive_correct"
+        },
+        {
+          "gid": "D5/S3/Factorization/Combinatorics/PrimeWordOccupationDescent.order_descent_criterion"
+        },
+        {
+          "gid": "D5/S3/Factorization/Combinatorics/PrimeWordOccupationDescent.no_prime_history_reconstruction"
+        },
+        {
+          "gid": "D5/S0/Computability/Coding/TwoWordCode.injective_iff_noncommuting"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionComparisonModel.quaternionModel_noncommutative"
+        },
+        {
+          "gid": "D5/S0/Computability/CodeFixedPoint.code_fixed_point"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
