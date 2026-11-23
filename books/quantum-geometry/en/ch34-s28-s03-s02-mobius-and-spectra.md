@@ -824,6 +824,8 @@ Choose a fixed retained loss tolerance $\varepsilon_0>0$ with $2(1-\alpha^2)+\al
 
 The theorem supplies a sufficient interval length conditional on Effective LI. The constant in Effective LI may be ineffective. Lamzouri's large-value theorem takes extrema on $[2,X]$ of sums truncated at $X^2$ under a separate set of coefficient assumptions. [Lamzouri, Conjecture 1.1 and Theorem 1.5](https://arxiv.org/html/2311.04860v2#S1.SS3)
 
+With $\beta=1$, every interval of length $e^T$ contains a hit for each fixed $\varepsilon>0$ once $T$ is large enough. Hence $0\le D(T)<\varepsilon$ eventually. Under RH and Effective LI, if $\mu(r)\ne0$, the left-endpoint error in [@thm-ch31-weighted-phase-limsup] attains the full leading coefficient $|\mu(r)|/(4\pi s)$.
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 

@@ -824,6 +824,8 @@ $$
 
 定理给出以有效线性无关为条件的充分区间长度。该猜想允许 $C_\eta$ 取无效常数。Lamzouri 的大值定理在另一组系数假设下，对 $[2,X]$ 上截断至 $X^2$ 的和式取极值。 [Lamzouri 的猜想 1.1 与定理 1.5](https://arxiv.org/html/2311.04860v2#S1.SS3)
 
+取 $\beta=1$，对任意 $\varepsilon>0$ 都能在每个长度为 $e^T$ 的区间找到一次命中。因此 $0\le D(T)<\varepsilon$ 最终成立。在 RH 与有效线性无关猜想下，若 $\mu(r)\ne0$，[@thm-ch31-weighted-phase-limsup] 的左端点误差取得完整的首项系数 $|\mu(r)|/(4\pi s)$。
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 
