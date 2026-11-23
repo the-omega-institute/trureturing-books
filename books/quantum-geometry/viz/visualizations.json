@@ -8686,8 +8686,8 @@
       "thumbnail": "constant-free-rational-axiom-omega-sandbox/thumb.jpg",
       "status": "live",
       "added": "2026-11-22",
-      "chapter": 39,
-      "section": "39.6",
+      "chapter": 32,
+      "section": "32.5",
       "presets": [
         "pi-polyhedral-crease-residual",
         "euler-tangent-escape-vs-cayley",
@@ -8733,8 +8733,8 @@
       ],
       "theory": [
         {
-          "label": "§39.6 · 拔除笛卡尔线性钉子与无常数有理重构",
-          "label_en": "§39.6 · Pulling the Last Cartesian Nail and Constant-Free Rational Reconstruction",
+          "label": "§32.5 · 拔除笛卡尔线性钉子与无常数有理重构",
+          "label_en": "§32.5 · Pulling the Last Cartesian Nail and Constant-Free Rational Reconstruction",
           "href": "../zh/ch39-s29-constant-free-rational-axiom-omega.html#sec-ch39-constant-free-rational-axiom-omega",
           "href_en": "../en/ch39-s29-constant-free-rational-axiom-omega.html#sec-ch39-constant-free-rational-axiom-omega"
         }
@@ -8800,7 +8800,7 @@
       "status": "live",
       "added": "2026-11-22",
       "chapter": 39,
-      "section": "39.7",
+      "section": "39.6",
       "presets": [
         "past-zero-jet-halting-anchor",
         "present-half-midpoint-self-duality",
@@ -8846,8 +8846,8 @@
       ],
       "theory": [
         {
-          "label": "§39.7 · 过去现在未来与 0·1/2·1 纯有理因果射流母矩阵",
-          "label_en": "§39.7 · Past, Present, Future and the 0 · 1/2 · 1 Pure Rational Causal-Jet Matrix",
+          "label": "§39.6 · 过去现在未来与 0·1/2·1 纯有理因果射流母矩阵",
+          "label_en": "§39.6 · Past, Present, Future and the 0 · 1/2 · 1 Pure Rational Causal-Jet Matrix",
           "href": "../zh/ch39-s30-past-present-future-rational-jet-triad.html#sec-ch39-past-present-future-rational-jet-triad",
           "href_en": "../en/ch39-s30-past-present-future-rational-jet-triad.html#sec-ch39-past-present-future-rational-jet-triad"
         }
@@ -8915,8 +8915,8 @@
       "thumbnail": "real-error-prime-adelic-sandbox/thumb.jpg",
       "status": "live",
       "added": "2026-11-22",
-      "chapter": 39,
-      "section": "39.8",
+      "chapter": 31,
+      "section": "31.4",
       "presets": [
         "real-tangent-error-magnifier",
         "linear-add-mul-vs-curved-rodrigues",
@@ -8962,8 +8962,8 @@
       ],
       "theory": [
         {
-          "label": "§39.8 · 实数误差放大轴与素数阿代尔归元闭合",
-          "label_en": "§39.8 · The Real Error-Magnification Axis and Prime Adelic Closure",
+          "label": "§31.4 · 实数误差放大轴与素数阿代尔归元闭合",
+          "label_en": "§31.4 · The Real Error-Magnification Axis and Prime Adelic Closure",
           "href": "../zh/ch39-s31-real-error-axis-and-prime-adelic-closure.html#sec-ch39-real-error-axis-and-prime-adelic-closure",
           "href_en": "../en/ch39-s31-real-error-axis-and-prime-adelic-closure.html#sec-ch39-real-error-axis-and-prime-adelic-closure"
         }
@@ -9028,8 +9028,8 @@
       "thumbnail": "holographic-arc-manifold-sandbox/thumb.jpg",
       "status": "live",
       "added": "2026-11-22",
-      "chapter": 39,
-      "section": "39.9",
+      "chapter": 31,
+      "section": "31.5",
       "presets": [
         "tangent-scales-vs-chartfree-arc",
         "meridian-zero-one-infinity-closure",
@@ -9075,8 +9075,8 @@
       ],
       "theory": [
         {
-          "label": "§39.9 · 全息圆弧流形与阿代尔螺线管同体",
-          "label_en": "§39.9 · The Holographic Circular-Arc Manifold and Adelic Solenoid Unity",
+          "label": "§31.5 · 全息圆弧流形与阿代尔螺线管同体",
+          "label_en": "§31.5 · The Holographic Circular-Arc Manifold and Adelic Solenoid Unity",
           "href": "../zh/ch39-s32-holographic-arc-manifold-and-solenoid-unity.html#sec-ch39-holographic-arc-manifold-and-solenoid-unity",
           "href_en": "../en/ch39-s32-holographic-arc-manifold-and-solenoid-unity.html#sec-ch39-holographic-arc-manifold-and-solenoid-unity"
         }
@@ -9141,8 +9141,8 @@
       "thumbnail": "riemann-spectral-manifold-polishing-sandbox/thumb.jpg",
       "status": "live",
       "added": "2026-11-22",
-      "chapter": 39,
-      "section": "39.10",
+      "chapter": 31,
+      "section": "31.6",
       "presets": [
         "riemann-1854-tangent-lantern-creases",
         "osculating-ternion-sphere-base-swap",
@@ -9188,8 +9188,8 @@
       ],
       "theory": [
         {
-          "label": "§39.10 · 黎曼 1854+1859 双璧合龙与临界线谱磨光流形",
-          "label_en": "§39.10 · Riemann's 1854 + 1859 Synthesis and Critical-Line Spectral Manifold Polishing",
+          "label": "§31.6 · 黎曼 1854+1859 双璧合龙与临界线谱磨光流形",
+          "label_en": "§31.6 · Riemann's 1854 + 1859 Synthesis and Critical-Line Spectral Manifold Polishing",
           "href": "../zh/ch39-s33-riemann-1854-1859-spectral-manifold-polishing.html#sec-ch39-riemann-1854-1859-spectral-manifold-polishing",
           "href_en": "../en/ch39-s33-riemann-1854-1859-spectral-manifold-polishing.html#sec-ch39-riemann-1854-1859-spectral-manifold-polishing"
         }
@@ -9254,8 +9254,8 @@
       "thumbnail": "exact-vs-approximate-mathematics-sandbox/thumb.jpg",
       "status": "live",
       "added": "2026-11-23",
-      "chapter": 39,
-      "section": "39.11",
+      "chapter": 32,
+      "section": "32.6",
       "presets": [
         "structural-topological-exactness-vs-flat-decimal",
         "pure-integer-111-three-beat-closure",
@@ -9301,8 +9301,8 @@
       ],
       "theory": [
         {
-          "label": "§39.11 · 精确结构数学对比平直度量近似",
-          "label_en": "§39.11 · Exact Structural Mathematics vs. Flat Metric Approximation",
+          "label": "§32.6 · 精确结构数学对比平直度量近似",
+          "label_en": "§32.6 · Exact Structural Mathematics vs. Flat Metric Approximation",
           "href": "../zh/ch39-s34-exact-structural-mathematics-vs-flat-approximation.html#sec-ch39-exact-structural-mathematics-vs-flat-approximation",
           "href_en": "../en/ch39-s34-exact-structural-mathematics-vs-flat-approximation.html#sec-ch39-exact-structural-mathematics-vs-flat-approximation"
         }
@@ -9367,8 +9367,8 @@
       "thumbnail": "infinity-free-rational-mathematics-sandbox/thumb.jpg",
       "status": "live",
       "added": "2026-11-23",
-      "chapter": 39,
-      "section": "39.12",
+      "chapter": 32,
+      "section": "32.7",
       "presets": [
         "homogeneous-projective-antipodal-closure",
         "lazy-prime-escape-and-decidable-horizon",
@@ -9414,8 +9414,8 @@
       ],
       "theory": [
         {
-          "label": "§39.12 · 无无穷·无超越数的有限有理数学",
-          "label_en": "§39.12 · Infinity-Free and Transcendental-Free Finite Rational Mathematics",
+          "label": "§32.7 · 无无穷·无超越数的有限有理数学",
+          "label_en": "§32.7 · Infinity-Free and Transcendental-Free Finite Rational Mathematics",
           "href": "../zh/ch39-s35-infinity-free-transcendental-free-rational-mathematics.html#sec-ch39-infinity-free-transcendental-free-rational-mathematics",
           "href_en": "../en/ch39-s35-infinity-free-transcendental-free-rational-mathematics.html#sec-ch39-infinity-free-transcendental-free-rational-mathematics"
         }
@@ -9480,8 +9480,8 @@
       "thumbnail": "lean4-zero-axiom-omega-math-sandbox/thumb.jpg",
       "status": "live",
       "added": "2026-11-23",
-      "chapter": 39,
-      "section": "39.13",
+      "chapter": 32,
+      "section": "32.8",
       "presets": [
         "cic-kernel-vs-axiom-and-real-tax",
         "canonical-proj-ternion-zero-quotient",
@@ -9527,8 +9527,8 @@
       ],
       "theory": [
         {
-          "label": "§39.13 · Lean 4 零公理形式化基座（OmegaMath）",
-          "label_en": "§39.13 · Zero-Axiom Lean 4 Formalization Architecture (OmegaMath)",
+          "label": "§32.8 · Lean 4 零公理形式化基座（OmegaMath）",
+          "label_en": "§32.8 · Zero-Axiom Lean 4 Formalization Architecture (OmegaMath)",
           "href": "../zh/ch39-s36-lean4-zero-axiom-omega-math-architecture.html#sec-ch39-lean4-zero-axiom-omega-math-architecture",
           "href_en": "../en/ch39-s36-lean4-zero-axiom-omega-math-architecture.html#sec-ch39-lean4-zero-axiom-omega-math-architecture"
         }

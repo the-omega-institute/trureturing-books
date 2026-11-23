@@ -1,4 +1,4 @@
-/* OMEGA//MANIFOLD · 全息圆弧流形 M_Ω · The holographic circular-arc manifold (Chapter 39, §39.9)
+/* OMEGA//MANIFOLD · 全息圆弧流形 M_Ω · The holographic circular-arc manifold (Chapter 31, §31.5)
    World (kit.solid): z up. The stage is the unit sphere of the slice span{1, i, j} of the quaternions, turned so that the
    past pole 1 (x = 0) is at the bottom, the future antipode −1 (x = ∞) at the top and i (x = 1) on the right: the world
    point of a quaternion q is (q_i, q_j, −q_1). The closed meridian is M(φ) = Q(x·i) with x = tan(φ/2), φ ∈ ℝ/2πℤ, so

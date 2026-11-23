@@ -21,7 +21,7 @@ const BOOK = 'quantum-geometry';
 const ID = 'causal-jet-rational-triad-sandbox';
 const DIR = path.join(ROOT, 'books', BOOK, 'viz', ID);
 const THEORY = 'ch39-s30-past-present-future-rational-jet-triad.html#sec-ch39-past-present-future-rational-jet-triad';
-const SECTION = '39.7';
+const SECTION = '39.6';
 const PI = Math.PI;
 const DEG = PI / 180;
 const T_CAP = Math.acos(1 - 2 * 0.8) / PI;
@@ -37,7 +37,7 @@ const IDS = Object.keys(CARDS);
 const [PAST, PRESENT, FUTURE, THIRD, LOOP] = IDS;
 const DEFAULT = PRESENT;
 const CAM_NAMES = ['panorama', 'face', 'under'];
-// the order of the theorem box of §39.7
+// the order of the theorem box of §39.6
 const GIDS = [
   'D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv',
   'D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq',
@@ -435,7 +435,7 @@ check(
   same([...sources['index.html'].matchAll(/<(?:script src|link rel="stylesheet" href)="([^"]+)"/g)].map((m) => m[1]).filter((u) => !u.startsWith('https://fonts.')), ['../assets/theme.css', 'style.css', '../assets/shell.js', '../assets/kit.js', 'main.js'])
 );
 check(
-  'registration: §39.7, live, five cards and the sixteen GIDs in order',
+  'registration: §39.6, live, five cards and the sixteen GIDs in order',
   !!entry &&
     entry.chapter === 39 &&
     entry.section === SECTION &&
@@ -449,8 +449,8 @@ check(
     same(Object.keys(entry.preset_titles), IDS) &&
     same(entry.lean.map((x) => x.gid), GIDS) &&
     entry.theory.length === 1 &&
-    entry.theory[0].label === '§39.7 · 过去现在未来与 0·1/2·1 纯有理因果射流母矩阵' &&
-    entry.theory[0].label_en === '§39.7 · Past, Present, Future and the 0 · 1/2 · 1 Pure Rational Causal-Jet Matrix' &&
+    entry.theory[0].label === '§39.6 · 过去现在未来与 0·1/2·1 纯有理因果射流母矩阵' &&
+    entry.theory[0].label_en === '§39.6 · Past, Present, Future and the 0 · 1/2 · 1 Pure Rational Causal-Jet Matrix' &&
     entry.theory[0].href === '../zh/' + THEORY &&
     entry.theory[0].href_en === '../en/' + THEORY
 );
@@ -849,7 +849,7 @@ check(
       !!q('#evidence > #readouts') &&
       !!q('#evidence > #basis') &&
       !!q('footer.rail .clock #now') &&
-      ['§39.7', '5', 'NUM', 'trureturing'].every((x) => asides.includes(x)) &&
+      ['§39.6', '5', 'NUM', 'trureturing'].every((x) => asides.includes(x)) &&
       [...document.querySelectorAll('.tagline > span')].every((el) => el.querySelector('em') && el.firstChild.nodeType === 3) &&
       !!q('link[href*="fonts.googleapis.com/css2?family=Chakra+Petch"]') &&
       [...document.querySelectorAll('#basis .lean')].every((el) => el.children.length === 2 && [...el.children].every((c) => c.tagName === 'SPAN')) &&

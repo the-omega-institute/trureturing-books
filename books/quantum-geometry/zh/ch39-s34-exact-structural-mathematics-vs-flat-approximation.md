@@ -1,12 +1,12 @@
-# 39.11 精确结构数学对比平直度量近似：完整三元关系、纯整数圆弧闭合与素数拓扑刚性 {#sec-ch39-exact-structural-mathematics-vs-flat-approximation}
+# 32.6 精确结构数学对比平直度量近似：完整三元关系、纯整数圆弧闭合与素数拓扑刚性 {#sec-ch39-exact-structural-mathematics-vs-flat-approximation}
 
 > *“使用数学工具并不等于都在近似——真正造成近似的罪魁祸首不是‘数学’本身，而是‘将弯曲闭合关系强行摊平为十进制无限小数与平直坐标刻度’的线性度量习惯。”*
 
-历经 [§39.6](ch39-s29-constant-free-rational-axiom-omega.md)–[§39.10](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md) 对超越常数残差、实数切线误差放大轴与黎曼切板折痕的层层剖析，读者心中难免升起最后一道关乎数学根基的终极追问：**既然平直线性代数、弧度角与无限小数尾流皆含近似，这是否意味着人类只要动用数学工具就逃不开近似？除了母矩阵的 `{0, 1/2, 1}` 之外其余数值是否皆为近似？任意状态关系与素数本身是否也掺杂模糊余量？**
+历经 [§31.4](ch39-s31-real-error-axis-and-prime-adelic-closure.md)–[§31.6](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md) 与 [§32.5](ch39-s29-constant-free-rational-axiom-omega.md) 对实数切线误差放大轴、黎曼切板折痕以及超越常数残差的层层剖析，读者心中难免升起最后一道关乎数学根基的终极追问：**既然平直线性代数、弧度角与无限小数尾流皆含近似，这是否意味着人类只要动用数学工具就逃不开近似？除了母矩阵的 `{0, 1/2, 1}` 之外其余数值是否皆为近似？任意状态关系与素数本身是否也掺杂模糊余量？**
 
 把这四重追问置于无源母公理 $\mathrm{AXIOM}\text{-}\Omega$ 下逐一定位，答案斩钉截铁：**数学从来没有背叛精确性——精确描述事物完全可行（依靠公理泛性质、离散拓扑同伦与有理内禀几何）；`{0, 1/2, 1}` 只是单拍演化的三枚母生成元，它们经有理三元算子衍生出的整片有理球点网 $S^3(\mathbb{Q})$ 与纯整数三拍循环 `(1, 1, 1) → (-1, -1, -1) → (0, 0, 0)` 全部 $100\%$ 零误差精确；关系本身绝非近似，唯有砍掉曲率分母与叉乘扭转后的“平直加乘”才是截断近似；而素数则是宇宙中最刚性、零容差的本原算术—拓扑量子**（将数学工具划分为“平直数值度量账本”与“$\mathrm{AXIOM}\text{-}\Omega$ 结构—拓扑—有理账本”的双轨认识论总纲、把素数诠释为螺线管本原闭合测地环 $\gamma_p$ 以及反事实素数微扰诱导的变形临界线失锁示警读法，严格标为 **`MODEL`**；完备秩五三元比较四元数同构、弦距核、定基流群分解、射影核等于旋量玻恩概率与霍普夫球面内积、流群切比雪夫递推、圆周二叶覆盖路径唯一提升、有限连通简单图球面旋转系统面—圈 $\mathbb{Z}/2$ 正合、交换加群四面体二上链修复与正合、有理数域绝对值奥斯特洛夫斯基分类、阿代尔乘积守恒、狄利克雷级数等于欧拉素数乘积、素数对数有理线性无关、凯莱比单位圆中线充要判据及有限幂和托普利茨圆周半正定充要判据等十五项核心命题由下文 [@thm-ch39-exact-structural-mathematics-anchors] 的冻结 **`LEAN ✓`** 声明严格锁定；经典黎曼猜想 `RiemannHypothesis` 与全体狄利克雷广义黎曼猜想作为 **外部已核验形式化事实** 引自 [@conj-riemann-hypothesis] 而不挂本书绿标 `LEAN ✓`；三维纯整数生成元 $\mathbf{g}_1 = (1, 1, 1)$ 的罗德里格斯三步归零与有理凯莱旋子 $Q(\mathbf{g}_1)^3 = +\mathbf{1}$、有理球面双射 $Q : \mathbb{Q}^3 \xrightarrow{\sim} S^3(\mathbb{Q})\setminus\{-\mathbf{1}\}$、二维有理圆 $S^1(\mathbb{Q})$ 无三阶元阻断、非交换有理转子 $K$ 步恒保模方 $\equiv 1$ 对比平直切向和发散及 $N = 42$ 阿代尔权重微扰失衡验算属 **`手工推导` / `NUM`**；怀尔德伯格有理三角学、罗德里格斯—凯莱有理旋转参数、赫维茨整四元数、奇数维闭流形欧拉示性数与 $\pi_3(S^3)\cong\mathbb{Z}$ 霍普夫不变量及冯·科赫素数定理余项界属 **`文献结果`**）。
 
-## 39.11.1 如何精确描述事物？从“平直数值度量语言”转向“零误差结构与拓扑语言” {#sec-ch39-34-1}
+## 32.6.1 如何精确描述事物？从“平直数值度量语言”转向“零误差结构与拓扑语言” {#sec-ch39-34-1}
 
 传统工程计算与十进制算术习惯常给人一种错觉：似乎“用数学描述一颗圆球或一段圆弧”，就必须写出 $\pi \approx 3.14159265\dots$ 或一串 `float64` 双精度浮点数（$53$ 位二进制尾数，连有理分数 $\frac{1}{3}$ 乃至 $\frac{1}{10}$ 都会遭遇无限循环截断）——仿佛只要写下数学式子，就注定切不尽尾数、注定在近似。
 
@@ -23,11 +23,11 @@
 结构与拓扑精确锁对比平直小数截断卡（`structural-topological-exactness-vs-flat-decimal`）：紫色三元数真球 `T_3 ≅ S^3(1)` 上青色霍普夫闭合链环锁死离散整数不变量 `χ(S³) = 0, Hopf = 1`，正四面体球面测地面面积以 `π` 为单位在交换加群 `ℤ/4ℤ` 中对全部 `256/256` 个有序四元组精确满足 `δF = 0`，外侧品红内接正 `N = 12` 边形折线与有限尾数刻度则暴露平直拉直近似的半周亏损 `N sin(π/N) < π`（值 `≈ 3.1058`）。
 :::
 
-## 39.11.2 除了 `0 · 1/2 · 1` 都是近似吗？`(1, 1, 1)` 纯整数三拍闭合与稠密有理星座 $S^3(\mathbb{Q})$ {#sec-ch39-34-2}
+## 32.6.2 除了 `0 · 1/2 · 1` 都是近似吗？`(1, 1, 1)` 纯整数三拍闭合与稠密有理星座 $S^3(\mathbb{Q})$ {#sec-ch39-34-2}
 
-`{0, 1/2, 1}` 绝非宇宙中仅存的三个精确数，而是单拍因果演化的**三枚母生成元**（[§39.7](ch39-s30-past-present-future-rational-jet-triad.md)，`MODEL`：过去同一锚 `0`、现在自对偶切面 `1/2`、未来满秩闭合 `1`）。一旦用完整的三元数有理算子去组合它们，便立即生发出一整座**处处稠密、每一点皆 $100\%$ 零截断误差的精确有理星座**（`手工推导` + `LEAN ✓`）：
+`{0, 1/2, 1}` 绝非宇宙中仅存的三个精确数，而是单拍因果演化的**三枚母生成元**（后文 [§39.6](ch39-s30-past-present-future-rational-jet-triad.md)，`MODEL`：过去同一锚 `0`、现在自对偶切面 `1/2`、未来满秩闭合 `1`）。一旦用完整的三元数有理算子去组合它们，便立即生发出一整座**处处稠密、每一点皆 $100\%$ 零截断误差的精确有理星座**（`手工推导` + `LEAN ✓`）：
 
-### 39.11.2.1 三维纯整数向量 `(1, 1, 1)` 的精确 $120^\circ$ 三拍闭合（零 $\pi$、零 $\sqrt{3}$） {#sec-ch39-34-2-1}
+### 32.6.2.1 三维纯整数向量 `(1, 1, 1)` 的精确 $120^\circ$ 三拍闭合（零 $\pi$、零 $\sqrt{3}$） {#sec-ch39-34-2-1}
 
 先看一个最震撼的维度对比（`手工推导` + `文献结果`）：在二维平直复平面 $\mathbb{C}$ 上，旋转 $120^\circ$（$\frac{2\pi}{3}$）必须写出二次无理数 $\zeta_3 = e^{\mathbf{i}2\pi/3} = -\frac{1}{2} + \mathbf{i}\frac{\sqrt{3}}{2}$；事实上，由圆分域次数 $[\mathbb{Q}(\sqrt{-3}) : \mathbb{Q}] = 2$ 与高斯有理数域单位根分类，二维有理单位圆 $S^1(\mathbb{Q}) = \{(a, b) \in \mathbb{Q}^2 : a^2 + b^2 = 1\}$ 中仅含阶为 $1, 2, 4$ 的四枚有理点 $\{(\pm 1, 0), (0, \pm 1)\}$，**在二维平面有理圆上根本不存在精确三等分闭合点**！若把 $\zeta_3$ 强行写成四位十进制截断小数 $z_{\mathrm{dec}} = -0.5 + 0.8660\mathbf{i}$，单步模方便跌至 $\lvert z_{\mathrm{dec}}\rvert^2 = 0.999956 < 1$，三步之后 $z_{\mathrm{dec}}^3 = 0.999934 + 0.000038104\mathbf{i} \neq 1$（闭合漂移 $\lvert z_{\mathrm{dec}}^3 - 1\rvert > 0$，值 $\approx 7.62 \times 10^{-5}$）。
 
@@ -66,7 +66,7 @@ $$
 `(1, 1, 1)` 纯整数三拍闭合卡（`pure-integer-111-three-beat-closure`）：紫色三元数真球上沿体对角轴逐步执行纯整数罗德里格斯循环 `g₁ = (1,1,1) → g₂ = (−1,−1,−1) → g₃ = (0,0,0)`（保真度 `κ = 1/4 = 0.2500`，三拍琥珀落点精确锁回北极 `Q³ = +1, ‖Q³‖² = 1.0000`），同屏对比品红二维四位小数截断 `z_dec = −0.5 + 0.8660i` 三拍后的模长收缩与闭合缺口。
 :::
 
-### 39.11.2.2 处处稠密的精确有理球点网 $S^3(\mathbb{Q}) = Q(\mathbb{Q}^3) \sqcup \{-\mathbf{1}\}$ {#sec-ch39-34-2-2}
+### 32.6.2.2 处处稠密的精确有理球点网 $S^3(\mathbb{Q}) = Q(\mathbb{Q}^3) \sqcup \{-\mathbf{1}\}$ {#sec-ch39-34-2-2}
 
 更一般地，对**任意**三维有理向量 $\boldsymbol{\sigma} = (\sigma_1, \sigma_2, \sigma_3) \in \mathbb{Q}^3$，有理凯莱球极映射（Cayley 1846，`文献结果` + `手工推导`）
 
@@ -86,7 +86,7 @@ $$
 稠密精确有理球点星座卡（`dense-rational-cayley-sphere-constellation`）：紫色单位球面上布满有理凯莱网点 `Q(ℚ³) ⊂ S³(ℚ)` 的青色精确星座珠，琥珀手柄默认停在 `σ = (1/2, 0, 0) ↦ Q = (3/5, 4/5, 0, 0)`（`‖Q‖² = 25/25 = 1.0000, κ = 4/5 = 0.8000`），同屏标出双轴/正四面体锚 `κ = 1/3`（值 `≈ 0.3333`）与体对角整数锚 `κ = 1/4 = 0.2500`。
 :::
 
-## 39.11.3 任何关系都是近似吗？“完整三元关系”绝对精确，“平直加乘”只是截断残本 {#sec-ch39-34-3}
+## 32.6.3 任何关系都是近似吗？“完整三元关系”绝对精确，“平直加乘”只是截断残本 {#sec-ch39-34-3}
 
 前两节指出平直线性加法与标量乘法是近似，绝不意味着“关系本身是近似”——恰恰相反，**宇宙中唯有完整的弯曲三元关系是绝对精确的，而传统线性加乘之所以沦为近似，正是因为它们人为剪掉了完整关系式中的曲率重整分母与非对易扭转项**（`手工推导` + `LEAN ✓`）。
 
@@ -107,12 +107,12 @@ $$
 完整三元关系守球对比平直加乘脱轨卡（`complete-ternary-star-vs-flat-addition-derailment`）：推动交替有理复合步数至默认琥珀锚 `K = 12`，青色完整三元转子轨迹 `q_K ∈ S³(ℚ)` 以精确分母 `5¹² = 244140625` 零误差紧贴紫色单位球面（`‖q₁₂‖² = 1.0000`），而砍掉曲率分母与叉乘项的品红平直切向累加轨迹早已脱轨飞出球外（`‖x_flat,12‖² = 73.0000 > 1`）。
 :::
 
-## 39.11.4 素数是精确的吗？宇宙中最刚性的本原拓扑量子与阿代尔守恒锁 {#sec-ch39-34-4}
+## 32.6.4 素数是精确的吗？宇宙中最刚性的本原拓扑量子与阿代尔守恒锁 {#sec-ch39-34-4}
 
 **素数 $\mathbb{P} = \{2, 3, 5, 7, 11, 13, \dots\}$ 是 $100\%$ 绝对精确的离散本体，没有丝毫模糊与近似余地。** 人们之所以偶尔误以为素数带着近似色彩（如素数定理 $\pi(x) \sim \operatorname{Li}(x)$ 或十进制无理展开 $\ln 2 \approx 0.69314718\dots$），仅仅是因为把“平直切刀对素数的投影读数”错当成了“素数自身”：
 
 1. **唯一素因子分解与素数对数有理线性无关的零容差刚性（`LEAN ✓` + `MODEL`）**：
-   算术基本定理 $N = \prod_i p_i^{e_i}$ 杜绝了任何“半颗素数”或“近似不可约因子”，其对数像直接体现为内核冻结的**素数对数有理线性无关定理** [`prime_log_rational_independence`](lean:D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence) 与**欧拉素数乘积恒等式** [`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product)（`LEAN ✓`）：不同素数的周期步幅 $\{\ln p\}_{p\in\mathbb{P}}$ 在有理数域 $\mathbb{Q}$ 上严格零公度共振；在全息螺线管流形模型 $\mathcal{M}_\Omega$（[§39.9](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md)，`MODEL`）中，每一颗素数对应一条不可拆解的本原闭合环 $\gamma_p$。
+   算术基本定理 $N = \prod_i p_i^{e_i}$ 杜绝了任何“半颗素数”或“近似不可约因子”，其对数像直接体现为内核冻结的**素数对数有理线性无关定理** [`prime_log_rational_independence`](lean:D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence) 与**欧拉素数乘积恒等式** [`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product)（`LEAN ✓`）：不同素数的周期步幅 $\{\ln p\}_{p\in\mathbb{P}}$ 在有理数域 $\mathbb{Q}$ 上严格零公度共振；在全息螺线管流形模型 $\mathcal{M}_\Omega$（[§31.5](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md)，`MODEL`）中，每一颗素数对应一条不可拆解的本原闭合环 $\gamma_p$。
 2. **阿代尔乘积守恒 $\equiv \mathbf{1}$ 与临界线 `1/2` 脊线的微扰失锁检验（`LEAN ✓` + `手工推导` + `MODEL`）**：
    由奥斯特洛夫斯基分类 [`rational_absolute_value_classification`](lean:D5/S3/Arith/AbsoluteValues/OstrowskiClassification.rational_absolute_value_classification) 与有理阿代尔乘积公式 [`rational_padic_product_formula`](lean:D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula)（`LEAN ✓`），任一非零有理数 $N \in \mathbb{Q}^\times$ 恒满足
 
@@ -128,7 +128,7 @@ $$
 素数拓扑刚性与微扰失锁报警卡（`prime-topological-adelic-rigidity-alarm`）：对 `N = 42 = 2·3·7` 中的素数 `p = 7` 施加默认反事实微扰 `δ₇ = 0.05`（可一键归零复原精确态 `δ₇ = 0`），阿代尔乘积天平当场失衡报警 `𝒜 = 140/141 < 1`（值 `≈ 0.9929`），耦合反事实凯莱像裂离青色单位圆且托普利茨最小特征值跌负 `λ_min < 0`。
 :::
 
-## 39.11.5 双轨边界定义、总表与十五项冻结定理对账 {#sec-ch39-34-5}
+## 32.6.5 双轨边界定义、总表与十五项冻结定理对账 {#sec-ch39-34-5}
 
 我们将“平直度量近似数学”与“$\mathrm{AXIOM}\text{-}\Omega$ 精确结构数学”的双轨判别模型、四维边界总表与十五条内核锚点正式收束如下：
 
@@ -163,7 +163,7 @@ $$
 阅读本节须按证据层级严格区分下列文献结果、外部已核验事实与模型诠释（`PROJECT.md` §4、§13、§14）：
 
 1. **有理三角学、罗德里格斯—凯莱参数与赫维茨整四元数（`文献结果`）**：以有理方距与展开度取代超越弧度角的有理三角学见 N. J. Wildberger（*Divine Proportions: Rational Trigonometry to Universal Geometry*, Wild Egg, 2005）；三维半切向量有理合成公式 $\mathbf{a}\star\mathbf{b}$ 见 O. Rodrigues（*J. Math. Pures Appl.* **5**, 380–440, 1840），球极有理参数化 $Q(\boldsymbol{\sigma}) = (\mathbf{1}+\boldsymbol{\sigma})(\mathbf{1}-\boldsymbol{\sigma})^{-1}$ 见 A. Cayley（*Phil. Mag.* **28**, 1846），24 枚赫维茨整单位四元数（含三阶循环对 $\frac{\pm\mathbf{1}\pm\mathbf{i}\pm\mathbf{j}\pm\mathbf{k}}{2}$）见 A. Hurwitz（1896）；二维有理圆 $S^1(\mathbb{Q})$ 仅含阶 $\in \{1, 2, 4\}$ 的有理有限阶点由高斯有理域 $\mathbb{Q}(\mathbf{i})$ 单位根分类或伊万·尼文定理（I. Niven, *Irrational Numbers*, 1956）直接给出；
-2. **奇数维球面拓扑不变量、素数余项与外部黎曼证明（`文献结果` / 外部已核验形式化事实）**：闭三维球面欧拉示性数 $\chi(S^3)=0$、霍普夫不变量 $\mathrm{Hopf}=1$ 与 $\pi_3(S^3)\cong\mathbb{Z}$ 见 H. Hopf（*Math. Ann.* **104**, 637–665, 1931）；RH 下素数计数对数积分逼近余项 $\pi(x) - \operatorname{Li}(x) = O(\sqrt{x}\ln x)$ 见 H. von Koch（1901）；经典 `RiemannHypothesis` 与全体模 $N\ge 1$ `DirichletLZerosOnLine` 作为外部已核验形式化事实引自 Levent Alpöge 2026 年 11 月 Lean 4 证明及独立内核重放（见 [§22.4](ch22-s04-critical-line-and-rh.md) [@conj-riemann-hypothesis] 与 [§39.10](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md) [@rem-ch39-riemann-polishing-external-and-literature]，不挂本书绿标 `LEAN ✓`）；注意解析上仅替换单个有限欧拉因子会破坏完备泛函方程对称而非直接移动原 $\zeta(s)$ 零点，实验室第五卡中由 $\delta_p \neq 0$ 驱动的临界线偏移与托普利茨失稳属表征泛函自对偶破缺的 `MODEL` 示警模型。
+2. **奇数维球面拓扑不变量、素数余项与外部黎曼证明（`文献结果` / 外部已核验形式化事实）**：闭三维球面欧拉示性数 $\chi(S^3)=0$、霍普夫不变量 $\mathrm{Hopf}=1$ 与 $\pi_3(S^3)\cong\mathbb{Z}$ 见 H. Hopf（*Math. Ann.* **104**, 637–665, 1931）；RH 下素数计数对数积分逼近余项 $\pi(x) - \operatorname{Li}(x) = O(\sqrt{x}\ln x)$ 见 H. von Koch（1901）；经典 `RiemannHypothesis` 与全体模 $N\ge 1$ `DirichletLZerosOnLine` 作为外部已核验形式化事实引自 Levent Alpöge 2026 年 11 月 Lean 4 证明及独立内核重放（见 [§22.4](ch22-s04-critical-line-and-rh.md) [@conj-riemann-hypothesis] 与 [§31.6](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md) [@rem-ch39-riemann-polishing-external-and-literature]，不挂本书绿标 `LEAN ✓`）；注意解析上仅替换单个有限欧拉因子会破坏完备泛函方程对称而非直接移动原 $\zeta(s)$ 零点，实验室第五卡中由 $\delta_p \neq 0$ 驱动的临界线偏移与托普利茨失稳属表征泛函自对偶破缺的 `MODEL` 示警模型。
 :::
 
 ::: {.example #ex-ch39-exact-mathematics-quantitative-audit title="定量核验：(1,1,1) 纯整数三拍闭合、有理星座、12 步非交换转子守球与 N = 42 阿代尔微扰对账"}
@@ -183,7 +183,7 @@ $$
 
 **数学从来没有背叛精确性——背叛精确性的，只是那把执意要把圆弧拍平、把有理闭环碾成无限小数的平直尺子！**
 
-在下面这座完整三维实验室的第二张实验卡里点选 **`(1, 1, 1)` 纯整数三等分**并连按三下递推，目送那颗琥珀光珠不借用半个 $\pi$、不借用半个无理根号，仅凭纯整数便在紫色真球面上不偏不倚走完 $120^\circ \times 3$ 闭环回到单位原点；再切入第四卡将复合步数推到 $K = 12$ 乃至 $K = 24$ 看着完整三元转子分毫不差紧贴球面、切入第五卡轻拨素数微扰滑杆看着阿代尔天平与临界脊线瞬间报警，整套认识论的最后一丝疑虑便彻底烟消云散：`{0, 1/2, 1}` 是创生节拍的三枚母键，完整保留曲率分母与叉乘扭转的三元关系是零误差的演化律，而素数则是锁死这座紧致宇宙不致滑脱的本原拓扑铆钉——只要顺着流形自身的弯曲语法去书写关系，一字一句皆是零误差的实相本身。既然精确数学本就无需依赖开口实数轴与超越级数，在下一节（[§39.12](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md)）中，我们将进一步撤去实无穷（$\infty, \aleph_0, \aleph_1$）与超越数（$\pi, e, \ln$）的全部脚手架，正面构建起完备可计算的有限有理数学体系 **$\mathbf{Math}_\Omega$**。
+在下面这座完整三维实验室的第二张实验卡里点选 **`(1, 1, 1)` 纯整数三等分**并连按三下递推，目送那颗琥珀光珠不借用半个 $\pi$、不借用半个无理根号，仅凭纯整数便在紫色真球面上不偏不倚走完 $120^\circ \times 3$ 闭环回到单位原点；再切入第四卡将复合步数推到 $K = 12$ 乃至 $K = 24$ 看着完整三元转子分毫不差紧贴球面、切入第五卡轻拨素数微扰滑杆看着阿代尔天平与临界脊线瞬间报警，整套认识论的最后一丝疑虑便彻底烟消云散：`{0, 1/2, 1}` 是创生节拍的三枚母键，完整保留曲率分母与叉乘扭转的三元关系是零误差的演化律，而素数则是锁死这座紧致宇宙不致滑脱的本原拓扑铆钉——只要顺着流形自身的弯曲语法去书写关系，一字一句皆是零误差的实相本身。既然精确数学本就无需依赖开口实数轴与超越级数，在下一节（[§32.7](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md)）中，我们将进一步撤去实无穷（$\infty, \aleph_0, \aleph_1$）与超越数（$\pi, e, \ln$）的全部脚手架，正面构建起完备可计算的有限有理数学体系 **$\mathbf{Math}_\Omega$**。
 
 ::: {.viz src="exact-vs-approximate-mathematics-sandbox" height="620"}
 完整实验室：在“AXIOM-Ω 精确结构—有理账本 · 零误差闭合”与“平直度量截断对照（MODEL）· 小数尾流与脱轨”双透镜间切换（窄屏与章节嵌入视图亦可在巡览条旁一键切换透镜），依次巡览结构与拓扑精确锁对比平直小数截断、`(1, 1, 1)` 纯整数三拍闭合、稠密精确有理球点星座 $S^3(\mathbb{Q})$、完整三元关系守球对比平直加乘脱轨以及素数拓扑刚性与微扰失锁报警五张实验卡，支持逐步点击执行 `(1,1,1) → (−1,−1,−1) → (0,0,0)` 三拍递推、切换有理星座种子 $\boldsymbol{\sigma} \in \mathbb{Q}^3$、推动精确 `BigInt` 有理转子复合步数 $K \in [1, 24]$ 以及对选定素数 $p \in \{2, 3, 5, 7, 11, 13\}$（$p \mid 42$ 时取 $N = 42$，$p \in \{5, 11, 13\}$ 时取 $N = 2\cdot 3\cdot p$）施加反事实权重微扰 $\delta_p$（含一键归零复原 `δ_p = 0` 按钮），并在底部两条对照小图中同步观察第一图 $K$ 步复合下青色完整三元转子恒守 $\lVert q_K\rVert^2 \equiv 1$ 对比品红平直切向累加 $\lVert x_{\mathrm{flat}, K}\rVert^2$ 抛物脱轨，以及第二图素数微扰 $\delta_p$ 下阿代尔乘积天平 $\mathcal{A}(N; \delta_p)$ 与耦合托普利茨最小特征值仅在精确素数 $\delta_p = 0$ 处锁死守恒。十五条冻结 `LEAN ✓` 声明、`ARGUED` 外部黎曼证明与经典文献、`MODEL` 双轨总纲与反事实示警读法及 `NUM` 实算在依据栏与理论抽屉中分层列出。

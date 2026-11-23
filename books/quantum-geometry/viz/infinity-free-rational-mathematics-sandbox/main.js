@@ -1,4 +1,4 @@
-/* OMEGA//FINITE · 无无穷·无超越数的有限有理数学 · infinity-free, transcendental-free rational mathematics (Chapter 39, §39.12)
+/* OMEGA//FINITE · 无无穷·无超越数的有限有理数学 · infinity-free, transcendental-free rational mathematics (Chapter 32, §32.7)
    World (kit.solid): x right, y away from the reader, z up. On the cards loop, escape, cheb and jet the ball is the great
    two-sphere slice {w + xi + yj} of the unit quaternions S³(1) = 𝕋₃ and w + xi + yj is drawn at (x, −y, −w): the lower pole is
    1 (κ = 1) and the upper pole −1 (κ = 0). On the card cayley the ball is the unit sphere of directions v ∈ ℝ³.
