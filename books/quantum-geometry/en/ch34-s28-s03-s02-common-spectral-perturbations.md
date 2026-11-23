@@ -160,4 +160,25 @@ The absolute count differences sum to $2(p-H(m,n))$. Each integer difference has
 
 For independently perturbed comparison frequencies, the scale bound is effective on pairs with few common occurrences. The lower-degree diagonal controls the remaining pair weight.
 
+### Low-degree separation after cancellation
+
+Information about low-degree gaps can reduce the pairwise budget. For degree-$p$ vectors $m,n$, subtract $l_j=\min(m_j,n_j)$ from both sides. The resulting vectors $u,v$ have disjoint supports and common degree $d=p-H(m,n)$. Their signed frequency gap is unchanged. Since $|m_j-n_j|=u_j+v_j$ coordinate by coordinate, the allowed drift is unchanged as well.
+
+::: {.theorem #thm-ch31-reduced-degree-collision-budget title="Separated low-degree residual pairs control the localized budget" lean="D5/S3/Fourier/Concentration/ReducedDegreeCollisionBudgets.localized_excess_le_of_reduced_separation"}
+Assume $w_j\ge0$, $r_j\ge\rho>0$, and that $k$ is a positive integer. If $\eta>0$, require that every disjoint pair $u,v$ of common degree $d$ with $0<d<k$ and $d\le p$ satisfy
+$$
+|G_u-G_v|>\eta+\sum_j(u_j+v_j)r_j .
+$$
+The localized excess budget $B$ is zero when $\eta\le0$ or $p<k$. In the other cases,
+$$
+B\le (W^{2p}-D_p)
+\min\!\left(1,\frac{\eta}{\rho},
+  \frac{e^{1/2}\sqrt{15\pi/2}\,\eta}{\rho\sqrt{2k}}\right).
+$$
+:::
+
+::: proof
+At positive resolution, each reachable distinct pair has $d\ge k$, so its Euclidean scale is at least $\rho\sqrt{2k}$. Some integer count difference has magnitude at least one, so the largest-coordinate scale is at least $\rho$. Intersect the two pairwise probability bounds with one. The ordered distinct pairs have total weight $W^{2p}-D_p$. At nonpositive resolution the nonnegative part of the largest-coordinate probability bound is zero.
+:::
+
 For a comparison spectrum, the next section [controls threshold crossings and handles recomputed weights](ch34-s28-s03-s02-spectral-count-perturbations.md). An upper bound for weighted high-order near-collisions of the fixed ζ zero ordinates at positive resolution remains open.
