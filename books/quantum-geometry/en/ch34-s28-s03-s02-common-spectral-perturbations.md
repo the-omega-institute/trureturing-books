@@ -94,4 +94,70 @@ Set $b_j=2(c_jt)^2/15$ and $U=\sum_j b_j$. The constant, linear and quadratic te
 
 The fourth-moment condition follows if every $c_j^2\le S/2$. For example, $(c_1,c_2,c_3)=(3,2,2)$ satisfies the fourth-moment condition with $S=17$ and largest square $9$. For $S>0$, the envelope has integral $\pi\sqrt{15/S}$. To turn the envelope into a collision budget, one needs a bound passing from the characteristic function to the probability of a short interval. Rudelson and Vershynin's density theorem gives the sharper probability estimate $\min(1,\sqrt2\,\eta/\sqrt S)$ for an interval of length $2\eta$ under independent uniform perturbations. [Rudelson and Vershynin, Theorem 1.2](https://arxiv.org/html/1402.4492#S1.Thmtheorem2)
 
+## Pairwise bounds for a common spectral perturbation
+
+The short-interval estimates can be used pair by pair in the common budget. First discard pairs that cannot reach the collision band anywhere in the allowed intervals.
+
+Use the countable frequencies and tests, finite supports, and positive excess budgets from the interval model. Write $r_j=\varepsilon_j>0$ for the radius and $h$ for the comparison spectrum. Write $G_m=\sum_j m_jg_j$ and $c_m=\binom{p_k}{m}\prod_jw_j^{m_j}$ for its degree vectors. Write $E_k(h)$ for the weighted collision mass of a spectrum $h$ at this resolution, and $D_k=\sum_m c_m^2$ for the diagonal.
+
+For distinct degree vectors $m,n$ on the support of test $k$, set $a_j=m_j-n_j$ and
+$$
+A=\sum_j|a_j|r_j,\qquad M=\max_j|a_j|r_j,\qquad S=\sum_j(a_jr_j)^2,\qquad C=e^{1/2}\sqrt{15\pi/2}.
+$$
+Let $q_k(m,n)=0$ if $|G_m-G_n|>\eta_k+A$. Otherwise let
+$$
+q_k(m,n)=\min\{1,\eta_k/M,C\eta_k/\sqrt S\}.
+$$
+Both denominators are positive for a distinct pair. Let $B_k=\sum_{m\ne n}c_mc_n q_k(m,n)$, with ordered pairs.
+
+::: {.theorem #thm-ch31-localized-collision-budgets title="One spectrum satisfies the pairwise collision budgets" lean="D5/S3/Fourier/Concentration/LocalizedCollisionBudgets.exists_continuous_common_nearby_localized_bounds"}
+If $\sum_k B_k/b_k\le1$, there exists a single spectrum $h$ such that $|h_j-g_j|\le r_j$ for every $j$, and
+$$
+\sum_k\frac{E_k(h)-D_k}{b_k}\le \sum_k\frac{B_k}{b_k},
+\qquad E_k(h)\le D_k+b_k\quad(k\in K).
+$$
+:::
+
+::: proof
+Choose independent uniform offsets $x_j\in[-r_j,r_j]$ with one product law. For each pair the change in frequency difference is $\sum_j a_jx_j$, with absolute value at most $A$. Thus a pair whose initial distance exceeds $\eta_k+A$ has collision probability zero. The largest-coordinate interval bound and the Euclidean-scale affine bound both apply to the other pairs under the same finite marginal law. Their minimum, capped at one, bounds the probability.
+
+Subtracting the diagonal leaves a finite sum of indicators with nonnegative weights. Its expectation is at most $B_k$. The expectation of the countable normalized sum is at most $\sum_k B_k/b_k$. Some assignment in the allowed intervals realizes a value at most this bound. Each individual normalized excess is bounded by that sum. The full proof is checked by the Lean kernel.
+:::
+
+For two ordinates at distance four, unit radii, and resolution one, the two distinct degree-one vectors have zero collision probability. At distance three the closed band can be reached at the endpoints, so the support test uses strict inequality.
+
+## Common counts of weighted multinomial vectors
+
+The pairwise budget depends on the Euclidean scale $S$, which can be estimated from the number of unmatched occurrences. First bound the weight of pairs with many common occurrences, then use the unmatched occurrences to bound the scale.
+
+Let $J$ be finite and $w_j\ge 0$. Write $W=\sum_j w_j$. For a nonnegative count vector $m$, let $|m|=\sum_jm_j$ and $c_m=\binom{|m|}{m}\prod_jw_j^{m_j}$. Put $D_k=\sum_{|l|=k}c_l^2$. Two vectors of degree $p$ have $H(m,n)=\sum_j\min(m_j,n_j)$ occurrences in common.
+
+::: {.theorem #thm-ch31-weighted-overlap-diagonal title="Large common counts are bounded by a lower-degree diagonal" lean="D5/S3/Fourier/Concentration/FiniteMultinomialOverlap.weighted_overlap_le_diagonal"}
+For $0\le k\le p$,
+$$
+\sum_{\substack{|m|=|n|=p\\ H(m,n)\ge k}} c_mc_n
+  \le \binom{p}{k}^{2} W^{2(p-k)}D_k .
+$$
+The sum counts ordered pairs.
+:::
+
+::: proof
+If $H(m,n)\ge k$, there is a subvector $l$ of degree $k$ with $l_j\le\min(m_j,n_j)$ for every $j$. The pair is then counted at least once if we count all ways to select the $l_j$ occurrences from each vector. For a fixed $l$, this multiplies $c_m$ by $\prod_j\binom{m_j}{l_j}$. Writing $m=l+u$ gives $\binom{p}{k}c_lc_u$; the factorials cancel coordinate by coordinate. The sum over $u$ of degree $p-k$ is $W^{p-k}$. Sum independently for the two vectors and then sum over $l$ to obtain the bound. The full proof is checked by the Lean kernel.
+:::
+
+At $k=0$ the bound equals the total weight of all pairs. At $k=p$ the overlap condition forces $m=n$, and the bound is the degree-$p$ diagonal itself.
+
+::: {.theorem #thm-ch31-overlap-euclidean-scale title="Unmatched counts give a lower bound on the Euclidean scale" lean="D5/S3/Fourier/Concentration/FiniteMultinomialOverlap.weighted_count_difference_sq_ge"}
+For two count vectors of degree $p$ and radii $r_j\ge\rho\ge0$, set $S=\sum_j((m_j-n_j)r_j)^2$. Then
+$$
+S\ge 2\rho^2(p-H(m,n)).
+$$
+:::
+
+::: proof
+The absolute count differences sum to $2(p-H(m,n))$. Each integer difference has square at least its absolute value. Multiply this bound by the square of the common lower radius and sum. The full proof is checked by the Lean kernel.
+:::
+
+For independently perturbed comparison frequencies, the scale bound is effective on pairs with few common occurrences. The lower-degree diagonal controls the remaining pair weight.
+
 For a comparison spectrum, the next section [controls threshold crossings and handles recomputed weights](ch34-s28-s03-s02-spectral-count-perturbations.md). The actual ζ ordinates still require estimates for their fixed high-order frequency differences.

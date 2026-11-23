@@ -156,7 +156,6 @@
         - [方差给出的近碰撞下界](ch34-s28-s03-s02-collision-variance.md)
         - [小扰动下的加权近碰撞](ch34-s28-s03-s02-spectral-perturbations.md)
         - [多组检验共用一次频谱扰动](ch34-s28-s03-s02-common-spectral-perturbations.md)
-        - [共用频谱扰动的逐对碰撞界](ch34-s28-s03-s02-localized-collision-budgets.md)
         - [保持计数律的频谱扰动](ch34-s28-s03-s02-spectral-count-perturbations.md)
         - [对数平方尾界与频繁的完全相位对齐](ch34-s28-s03-s02-commensurate-spectrum.md)
         - [独立均匀扰动下的短区间概率](ch34-s28-s03-s02-euclidean-uniform-perturbations.md)
