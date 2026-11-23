@@ -134,7 +134,7 @@ Both maximal sizes occur. Writing $abc=\{a,b,c\}$, the two-block example $012,34
 
 ### The gap below a complete packing
 
-When the $r$ labels support a complete Steiner triple system, the two largest saturated sizes again differ by two. A complete packing uses every unordered pair, so each class contains $r(r-1)/6$ blocks. To use two fewer blocks, choose three points that form no block and replace the blocks covering their three pairs.
+When $r\ge7$ and the labels support a complete Steiner triple system, the two largest saturated sizes again differ by two. A complete packing uses every unordered pair, so each class contains $r(r-1)/6$ blocks. To use two fewer blocks, choose three points that form no block and replace the blocks covering their three pairs.
 
 ::: {.theorem #thm-joint-circuit-steiner-saturated-top-gap title="The two largest saturated sizes from a complete Steiner system" lean="D5/S3/Combinatorics/Matroids/RankThreeSaturatedTopGap.saturated_top_gap"}
 Keep the cross-row triples, pair uniqueness, and normalization of this section. Let $d>0$ and $r\ge7$, and assume that the $r$ labels admit a Steiner triple system covering every unordered pair. Write
@@ -146,7 +146,7 @@ Every saturated extension has at most $N_{\max}$ added within-row triples. Both 
 :::
 
 ::: proof
-A complete packing in every residue class attains the upper bound. To lose two blocks, change one class. Choose $a,b,c$ that do not form a block and write $abx,bcy,caz$ for the blocks covering $ab,bc,ca$, respectively. Pair uniqueness makes $x,y,z$ distinct and places them outside $\{a,b,c\}$. Remove the three blocks and insert $abc$. The uncovered pairs form exactly the cycle $a,x,b,y,c,z,a$. This cycle has no triangle, so no block can be added.
+A complete packing in every residue class attains the upper bound. To lose two blocks, change one class. Choose $a,b,c$ that do not form a block and write $abx,bcy,caz$ for the blocks covering $ab,bc,ca$, respectively. Since $abc$ is not a block, $x,y,z$ all lie outside $\{a,b,c\}$. Pair uniqueness makes them distinct. Remove the three blocks and insert $abc$. The uncovered pairs form exactly the cycle $a,x,b,y,c,z,a$. This cycle has no triangle, so no block can be added.
 
 Every block through a point uses two of its partners. The complete packing covers all $r-1$ partners at each point, so $r$ is odd and every vertex has even degree in the uncovered graph of any partial packing. One missing block would leave three edges. The degree sum is six and each nonisolated vertex has degree at least two, so there are at most three nonisolated vertices. The three different edges therefore form a triangle that can be added. By the classwise saturation criterion, the global loss in block count is the sum of the local losses, and every positive term is at least two. The full proof is checked by the Lean kernel.
 :::
