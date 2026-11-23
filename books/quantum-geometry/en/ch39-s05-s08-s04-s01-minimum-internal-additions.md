@@ -170,7 +170,7 @@ Keep the cross-row triples and normalization of this section. Suppose the $r$ la
 $$
 N_{\max}=3^d r^2+3^{d+1}\frac{r(r-2)}{6}
 $$
-added within-row triples, and $N_{\max}-1$ also occurs.
+added within-row triples, and $N_{\max}-1$ also occurs. The bound $N_{\max}$ applies to every extension preserving the required normalized dimension.
 :::
 
 ::: proof
