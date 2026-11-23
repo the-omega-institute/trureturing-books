@@ -92,21 +92,23 @@ E_k(t)&=F_k(t)+2k(1/4)^{k-1}(1/4)^k(1/2).
 \end{aligned}
 $$
 
-For every positive integer $p$, set $t_p=1/[2(k+3)p]$. Then
+For every positive integer $p$,
 
 $$
-E_p(t_p)\ge\frac{1}{16k\sqrt p},\qquad
-F_p(t_p)\le\frac4p.
+\begin{aligned}
+E_p(t)&\ge\frac{1}{16k\sqrt p} &&(0\le t<1),\\
+F_p(t)&\le\frac2p &&\left(0\le t<\frac{1}{(k+1+\sqrt2)p}\right).
+\end{aligned}
 $$
 :::
 
 ::: proof
 If the last counts differ at a degree below $k$, the gap in either spectrum is at least $1$. If they agree, a gap below $1$ forces all the counts to agree. At degree $k$, the integer spectrum gains the two ordered pairs between $(0,k,0)$ and $(k-1,0,1)$.
 
-Every nonnegative resolution below $1$ counts only exact collisions for the integer spectrum, so the variance bound at resolution $1/2$ applies. In the irrational spectrum, a gap $a+b\sqrt2$ between distinct count vectors has nonzero integer norm $a^2-2b^2$. Bounding the conjugate factor excludes all such pairs at $t_p$. The remaining mass is the sum of squared multinomial weights. Each weight factors as two fair binomial probabilities, and the central binomial bound together with monotonicity in the tail gives a pointwise bound of $4/p$. The full proof is checked by the Lean kernel. [Variance bound](ch34-s28-s03-s02-collision-variance.md#thm-ch31-variance-collision-lower)
+Every nonnegative resolution below $1$ counts only exact collisions for the integer spectrum, so the variance bound at resolution $1/2$ applies. In the irrational spectrum, a gap $a+b\sqrt2$ between distinct count vectors has nonzero integer norm $a^2-2b^2$. Bounding the conjugate factor excludes all such pairs in the stated range of resolutions. The remaining mass is the sum of squared multinomial weights. Each weight factors as two fair binomial probabilities, and the central binomial bound together with symmetry and monotonicity gives a pointwise bound of $2/p$. The full proof is checked by the Lean kernel. [Variance bound](ch34-s28-s03-s02-collision-variance.md#thm-ch31-variance-collision-lower)
 :::
 
-The count vector $(p,0,0)$ contributes $(1/4)^{2p}>0$ on the diagonal. At fixed $k$ the ratio of the two masses at $t_p$ is bounded below by $\sqrt p/(64k)$. These finite spectra limit the high-order bounds one can infer from low-order collision masses alone. A bound for the actual ζ ordinates needs arithmetic information about their frequencies.
+The count vector $(p,0,0)$ contributes $(1/4)^{2p}>0$ on the diagonal. Take the common resolution $t_p=1/[2(k+3)p]$. At fixed $k$ the ratio of the two masses there is bounded below by $\sqrt p/(32k)$. These finite spectra limit the high-order bounds one can infer from low-order collision masses alone. A bound for the actual ζ ordinates needs arithmetic information about their frequencies.
 
 #### Local statistics on a common lattice
 
