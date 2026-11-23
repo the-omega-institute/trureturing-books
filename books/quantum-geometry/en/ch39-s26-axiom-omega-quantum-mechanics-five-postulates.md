@@ -635,6 +635,16 @@ The four capacity deficits depend on the layer sizes of the remaining fifteen co
 
 The pattern $1,0,1$ becomes $0,1,0,1,0$ and forces at least two jumps. The pattern $1,1,1$ becomes $0,1,1,1,0$ and forces at least one. To attain either bound, a factor must place the jump endpoints on allowed inclusion edges and satisfy its degree and budget constraints.
 
+::: {.theorem #thm-omega-fourteen-two-rank-jumps lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionFourteenJumps.two_jumps_at_640" title="At least two rank jumps within budget 640 in dimension fourteen"}
+Take dimension $14$, multiplier $3$, and any marked coordinate. Keep the full-inclusion support rule and both marked-edge degree modes. Every binary factor within budget $640$ has at least two ordinary edges with $|B|\ge |A|+2$.
+:::
+
+::: {.proof}
+The remaining $13$ coordinates have layers of size $\binom{13}{r}$. Let $I_1$ count the edges from the exceptional row $T$ into ranks $0$ and $1$. The lower-side capacity bound requires at least $11-I_1$ diagonals at rank $1$, so $I_1\le 2$ gives at least $9$. The lower-side deficit at rank $3$ is at least $378-3\cdot92-2=100$. The upper-side deficit at rank $11$ is at least $91-3\cdot13-2=50$.
+
+Budget $640$ permits at most $640/4-1=159$ charged ordinary edges, exactly the sum of the three lower bounds. Thus $I_1=2$, and there are no diagonals at ranks $5,7,9$. The exceptional row has degree at most two, so it sends exactly two edges into each of these three rank prefixes. Substituting into [@thm-omega-rank-cut-diagonal-parity] makes the ordinary crossing counts at ranks $5,7,9$ odd, even, and odd, respectively. Padding by zeros gives four parity changes, which require at least two rank jumps.
+:::
+
 ::: {.theorem #thm-omega-sixteen-full-budget lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteen.full_budget_iff" title="The exact budget for full inclusion in dimension sixteen"}
 Take dimension $16$ and multiplier $3$, with a nonzero fixed-seed budget allowed only at coordinate $0$. For every nonnegative integer $b$, the full inclusion graph admits a factor within budget $b$ if and only if $b\ge2036$. A feasible factor satisfies the degree, support and charge conditions above.
 :::
