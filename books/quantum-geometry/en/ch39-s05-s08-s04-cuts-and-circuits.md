@@ -957,6 +957,22 @@ Take the points $\mathbb F_3^d\times\mathbb Z/s\mathbb Z$ and list the triples w
 
 The lifted lines use the transversal designs on the lines of the ternary quotient. Leaving all same-row pairs uncovered permits every positive row size. [Jungnickel and Tonchev, Theorems 3.7–3.8](https://arxiv.org/abs/1709.06044)
 
+::: {.theorem #thm-joint-circuit-internal-potentials title="The shared cyclic term" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalTriplePotentials.potential_iff_separated"}
+Let $d\ge 1$ and $s\ge 1$. Keep all mixed triples of the lifted-line construction, and add any pair-unique family of triples within rows. Every normalized potential has the form $u(x,a)=\ell(x)+g(a)$, where $\ell$ is linear on $\mathbb F_3^d$ and $g$ is an additive map from $\mathbb Z/s\mathbb Z$ to $\mathbb F_3$. The map $g$ must vanish on the differences of uncovered pairs in each row and on the cyclic-coordinate sums of listed internal triples. Every such pair $(\ell,g)$ gives a potential.
+:::
+
+::: proof
+On a line of three distinct rows $x,y,z$, the mixed triples give $u(x,a)+u(y,b)+u(z,-a-b)=0$ for every $a,b$. Subtracting the equation at $a=b=0$ and then setting each variable to zero in turn shows that the first two rows have the same normalized dependence on the cyclic coordinate, and the equation with both variables free makes that dependence additive. Comparing every row with the zero row gives the common map $g$. The constants $u(x,0)$ sum to zero on ternary lines and vanish at the anchor. The line equation also holds for equal inputs by characteristic three, so these constants form a linear functional. The internal conditions follow by subtracting values on uncovered pairs and summing triples. In the reverse direction the combined map is additive on the product, so its total sum vanishes by pairing with negation in characteristic three.
+:::
+
+::: {.theorem #thm-joint-circuit-internal-dimension title="When internal triples add one dimension" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalTriplePotentials.potential_finrank_internal_triples"}
+In the same setting, the dimension is $d+1$ precisely when $3\mid s$ and both sets of internal observations vanish modulo three. In all other cases it is $d$.
+:::
+
+::: proof
+An additive map from the cyclic group is determined by its value at $1$. If $3$ divides $s$, all such maps are scalar multiples of reduction modulo three. A single uncovered pair with a nonzero reduced difference or a single internal triple with a nonzero reduced sum forces that scalar to vanish. The row functional and the allowed scalar are independent, as they can be recovered by evaluating at $(x,0)$ and $(0,1)$.
+:::
+
 **Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 If there are no nonempty facets, the original realization is empty and its reduced integral homology vanishes in every nonnegative degree. When facets exist and $d=1$, the wedge is a discrete space with $m+1$ points and reduced degree-zero generators $[p_B]-[p_0]$, where $p_B$ is the point contributed by $B$ and $p_0$ is the common basepoint. When facets exist and $m=0$, the wedge is a point and every reduced group vanishes. For a nonempty family of facets, the reduced Euler characteristic is $(-1)^{d-1}m$, so the earlier Tutte evaluation gives $m=2^d T_M(1,1/2)$.

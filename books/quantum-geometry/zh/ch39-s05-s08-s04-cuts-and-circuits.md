@@ -957,6 +957,22 @@ $$
 
 这个构造在三元商空间的每条直线上使用横截设计。同行点对均不覆盖，因此行的大小可取任意正整数。[Jungnickel 与 Tonchev，定理 3.7–3.8](https://arxiv.org/abs/1709.06044)
 
+::: {.theorem #thm-joint-circuit-internal-potentials title="各行共享的循环坐标项" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalTriplePotentials.potential_iff_separated"}
+设 $d\ge 1$ 且 $s\ge 1$。保留提升直线构造中的全部跨行三元组，再在每一行加入任意满足点对唯一性的三元组族。每个归一化点势都可写成 $u(x,a)=\ell(x)+g(a)$，其中 $\ell$ 是 $\mathbb F_3^d$ 上的线性泛函，$g$ 是从 $\mathbb Z/s\mathbb Z$ 到 $\mathbb F_3$ 的加法映射。$g$ 必须在同行未覆盖点对的循环坐标差及同行已列三元组的循环坐标和上取零。每对满足这些条件的 $(\ell,g)$ 都给出一个点势。
+:::
+
+::: proof
+对一条直线上的三个不同行 $x,y,z$，跨行三元组给出 $u(x,a)+u(y,b)+u(z,-a-b)=0$，对任意 $a,b$ 成立。减去 $a=b=0$ 时的等式，再依次令一个变量为零，可知前两行减去各自行常数后对循环坐标的依赖相同。两个变量均自由时的等式给出加法性。将每行与零行比较，就得到共同的 $g$。行常数 $u(x,0)$ 在三元直线上和为零，在锚点也为零。特征三使直线等式对相同输入仍成立，于是行常数构成线性泛函。对未覆盖点对取差、对同行三元组求和分别给出两个内部条件。反向构造在乘积群上可加，利用取负配对和特征三可知全体点势之和为零。
+:::
+
+::: {.theorem #thm-joint-circuit-internal-dimension title="同行三元组何时增加一个维度" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalTriplePotentials.potential_finrank_internal_triples"}
+在同样的条件下，点势空间维数为 $d+1$ 当且仅当 $3\mid s$ 且上述两类内部读数模三均为零。其余情形的维数为 $d$。
+:::
+
+::: proof
+循环群上的加法映射由 $1$ 的像决定。若 $3$ 整除 $s$，这些映射都是模三约化的标量倍数。只要有一个未覆盖点对的约化差非零，或有一个同行三元组的约化和非零，该标量就必须为零。分别在 $(x,0)$ 与 $(0,1)$ 处取值即可恢复行泛函与允许的标量，所以两者独立。
+:::
+
 **方向复形的约化整数同调（书面推导）。** 设至少有一个非空极大面，记 $d=n-h$，令 $m$ 为满足 $R(B)=B$ 的极大面数。上面的商映射是同伦等价，因此把 $X$ 的约化整数同调与楔和的约化整数同调相识别。每个球面都有以基点为子复形的 CW 结构，因此相应球面在有限楔和的约化同调中给出一个直和项。每个 $S^{d-1}$ 在 $d-1$ 次贡献一个 $\mathbb Z$，在其余非负次数均为零。因此 $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$，而 $k\ne d-1$ 时 $\widetilde H_k(X;\mathbb Z)=0$。[Hatcher，《Algebraic Topology》，推论 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 若没有非空极大面，原实现为空，所有非负次数的约化整数同调都为零。若有极大面且 $d=1$，楔和是有 $m+1$ 个点的离散空间，约化零次同调的生成元为 $[p_B]-[p_0]$，其中 $p_B$ 是极大面 $B$ 贡献的点，$p_0$ 是公共基点。若有极大面且 $m=0$，楔和为一点，所有约化同调群均为零。在极大面族非空时，约化欧拉示性数为 $(-1)^{d-1}m$。与前面的 Tutte 取值相比较，得到 $m=2^d T_M(1,1/2)$。
