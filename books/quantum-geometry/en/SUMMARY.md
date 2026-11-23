@@ -157,6 +157,7 @@
         - [One spectral perturbation for many tests](ch34-s28-s03-s02-common-spectral-perturbations.md)
         - [Spectral perturbations that preserve counting](ch34-s28-s03-s02-spectral-count-perturbations.md)
         - [Frequent full phase alignment with a logarithmic square tail](ch34-s28-s03-s02-commensurate-spectrum.md)
+        - [Short intervals under independent uniform perturbations](ch34-s28-s03-s02-euclidean-uniform-perturbations.md)
         - [Two-term counting and full phase alignment](ch34-s28-s03-s02-two-term-count-alignment.md)
       - [31.1.3.3 Critical Mangoldt gaps and character windows](ch34-s28-s03-s03-mangoldt-and-characters.md)
       - [31.1.3.4 Late-window mass, cluster values, and spectral errors](ch34-s28-s03-s04-late-window-clusters.md)

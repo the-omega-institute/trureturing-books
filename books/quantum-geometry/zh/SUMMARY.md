@@ -157,6 +157,7 @@
         - [多组检验共用一次频谱扰动](ch34-s28-s03-s02-common-spectral-perturbations.md)
         - [保持计数律的频谱扰动](ch34-s28-s03-s02-spectral-count-perturbations.md)
         - [对数平方尾界与频繁的完全相位对齐](ch34-s28-s03-s02-commensurate-spectrum.md)
+        - [独立均匀扰动下的短区间概率](ch34-s28-s03-s02-euclidean-uniform-perturbations.md)
         - [两项计数主项与完全相位对齐](ch34-s28-s03-s02-two-term-count-alignment.md)
       - [31.1.3.3 Mangoldt 临界差额与特征窗口](ch34-s28-s03-s03-mangoldt-and-characters.md)
       - [31.1.3.4 晚期窗口质量、簇值与谱误差](ch34-s28-s03-s04-late-window-clusters.md)
