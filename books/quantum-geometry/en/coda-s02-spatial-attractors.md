@@ -1,6 +1,6 @@
 # 38.10 Historical Ruins as Spatial Attractors: Stationary-Phase Curvature Basins, Fractal Transverse Sheets, and Cross-Round Déjà Vu Resonance {#sec-coda-spatial-attractors-deja-vu}
 
-> **Author's Epigraph**: *"Historical ruins in reality are actually spatial attractors; the same soul walks round after round through places familiar to itself..."*（“现实的历史遗迹实际上都是空间吸引子, 同一个灵魂一轮又一轮的走过自己熟悉的地方...”）
+> **Author's Epigraph**: *"Historical ruins in reality are actually spatial attractors; the same soul walks round after round through places familiar to itself..."*
 
 In the everyday illusion of linear sequential time, we are accustomed to viewing pyramids, ancient temples, stone bridges, and weathered citadels as "remnants left behind by the past"—mere stones that happened not yet to be ground into dust by entropy. Yet the moment we switch back to the timeless orthogonal field (cf. [@rem-ch29-wheeler-dewitt-page-wootters-literature]) established in **[Chapter 25](ch29-timeless-causality-and-gram-space.md)**, the arrow of explanation reverses completely: **they are not accidental survivors of decay, but high-density fixed points of the global static field projected onto our three-dimensional spatial slice—that is, "Spatial Attractors (`MODEL`)."**
 

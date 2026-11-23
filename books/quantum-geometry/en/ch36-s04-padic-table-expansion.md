@@ -4,7 +4,7 @@ The preceding sections answered the "return-to-light loop" on the **hyperbolic a
 
 A single foundational aphorism uncovers the exact number-theoretic twin of our hyperbolic staircase, recasting the **$p$-adic numbers** directly as observer lookup geometry (`MODEL`):
 
-> *“p-adic numbers are in fact a table-lookup algorithm: each observer corresponds to a prime, and the continual growth of that prime is table expansion.”*（P进数实际上是查表算法, 每个观察者对应一个素数, 这个素数一直在扩大, 就是在扩表）
+> *“p-adic numbers are in fact a table-lookup algorithm: each observer corresponds to a prime, and the continual growth of that prime is table expansion.”*
 
 Why does measuring distance on the rational field $\mathbb{Q}$ admit only two radically opposite geometries—either the lone continuous archimedean real ruler $\lvert\cdot\rvert_\infty$, or a discrete family of zero-carry $p$-adic prefix trees indexed one-to-one by prime numbers? We first anchor Ostrowski's classification theorem, the congruence-fiber closed-ball correspondence, and the first-distinguishing-precision blind-spot theorem in the Lean 4 kernel:
 

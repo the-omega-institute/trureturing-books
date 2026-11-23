@@ -24,6 +24,16 @@ Separating Lean 4 into its **underlying verification kernel (CIC)** and its **up
    - **Destroying consistency guarantees and failing independent kernel audits**: The Lean kernel trusts every `axiom` unconditionally. Omitting even a single boundary side-condition—for instance, asserting `axiom kappa_refl : ∀ x : ProjTernion, kappa x x = ⟨1, 1⟩` over raw quadruples without excluding the zero tuple $o_{\mathrm{zero}} = (0,0,0,0)$, where `kappa 0 0` evaluates to `⟨0, 1⟩`—derives `⟨0, 1⟩ = ⟨1, 1⟩` and hence `False` in three lines! Simultaneously, `#print axioms` and independent kernel checkers (`lean4lean`, `nanoda`, `con-leche`, `comparator`) flag every non-standard `axiom`;
    - **Freezing kernel $\iota$-reduction**: An `axiom` constant possesses no computation rule, turning every expression containing it into an irreducible neutral term and severing the Curry–Howard unity of proof and executable program.
 
+Changing the common unit for two integer coordinates should preserve their projective readout. This example illustrates the book’s “Axiom-free” label. It records an empty transitive axiom closure for the frozen declaration. Proofs using either the official libraries or OmegaMath can carry this label.
+
+::: {.theorem #thm-ch32-projective-overlap-positive-scaling title="Positive integer scaling preserves projective overlap" lean="D5/S3/Quantum/AURICOmega/ProjectiveOverlapScaling.kappa_scale"}
+Let $p,q,k$ be natural numbers and $s=k+1$. Write $\kappa(p,q)$ for the ratio with numerator $q^2$ and denominator $p^2+q^2$, taking the undefined value when the denominator is zero. Then $\kappa(ps,qs)$ and $\kappa(p,q)$ are equivalent under `Omega.Ratio.Equivalent`.
+:::
+
+::: {.proof}
+Scaling multiplies both numerator and denominator by $s^2$. When the denominator is positive, the two cross products are equal. When $p=q=0$, both readings are undefined and hence equivalent by definition. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.viz src="lean4-zero-axiom-omega-math-sandbox" preset="cic-kernel-vs-axiom-and-real-tax" height="500"}
 **Five-Stage Compilation Pipeline and Three-Route Axiom Audit**: A purple opaque `kit.solid` projective ternion sphere $\mathbb{QP}^3$ is coupled with a 3D five-stage formalization prism rail (`Syntax Carrier → Typecheck → ι-Reduce/decide → #print axioms Audit → Native #eval Code`); the amber focus sits on Stage 4 of the pure CIC $+$ `OmegaMath` route where the cyan reduction beam clears every stage with `#print axioms = ∅` and native C execution, contrasted against the magenta custom-`axiom` branch (stalled at `ι-Reduce` and collapsing to `False` on zero-tuple omission) and the `Mathlib.Real` branch (injecting `{propext, Classical.choice, Quot.sound}`, stalling `decide` and blocking `#eval` on `noncomputable` operations such as `(1 / 2 : ℝ)`, and spawning `Filter.Tendsto` derivative side-trees).
 :::

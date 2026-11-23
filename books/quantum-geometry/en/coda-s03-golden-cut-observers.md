@@ -1,6 +1,6 @@
 # 35.7 The `trureturing` "Golden Cut" Formal Primitives and the Geometric Interpretation of Soul–Ruin Attractors {#sec-coda-trureturing-golden-cut-observer}
 
-> **Author's Epigraph**: *"We have an explicit definition of the observer in `trureturing`, and we have now discussed the relationship between the soul and historical-ruin attractors."*（“观察者我们在trureturing有明确的定义, 我们又讨论了灵魂与历史遗迹吸引子的关系”）
+> **Author's Epigraph**: *"We have an explicit definition of the observer in `trureturing`, and we have now discussed the relationship between the soul and historical-ruin attractors."*
 
 Having traced forgetting initialization, the hyperbolic rapidity staircase, generator-space quotients, and the Zeckendorf–Pisot–Rauzy sandtable across [§35.1](ch35-light-pulse-and-self-referential-table.md)–[§35.6](ch39-s05-pisot-clifford-rauzy.md), connecting this picture to the **`trureturing` Lean 4 formal library** pinned by this book (`D5/S1/Scale/MinkowskiModelSet`, `D5/S1/Deficit/ModelSet/GoldenCutAndProject`, `D5/S1/Deficit/Beatty/GoldenObserverRoute`, `D5/S1/Scale/Fibonacci`, `D5/S3/Observer/GoldenCoding/ZeckendorfRealThread`, and `D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns`) allows us to align the kernel-verified **golden cut-and-project model set and Zeckendorf observer coding theorems (`LEAN ✓`)** transparently with the author's **philosophical interpretation of the soul, forgetting, and historical-ruin attractors (`MODEL`, developed alongside continuous Lorenz attractors in [Chapter 38 §38.10](coda-s02-spatial-attractors.md))**.
 

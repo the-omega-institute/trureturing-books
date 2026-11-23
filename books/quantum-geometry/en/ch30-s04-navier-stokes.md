@@ -1,7 +1,6 @@
 # 26.4 A Field Analogy Between Navier–Stokes and $P$ vs. $NP$ — Lamb Bivectors, 3D Vortex Stretching, and Arnold Geodesics {#sec-coda-navier-stokes-and-p-vs-np}
 
-> **Author's original words**: "When both the Navier–Stokes problem and the $P$/$NP$ problem are cast into field form, they look strikingly alike."
-> （“navier stokes与P/NP 问题, 都场化的话似乎很像”）
+> *"The Navier–Stokes problem and the P vs. NP problem look strikingly alike once both are formulated as fields."*
 
 Placing **Navier–Stokes (NS) existence and smoothness** alongside **$P$ vs. $NP$** lets us compare global states, local observations, and quadratic feedback (`MODEL`). No map from fluid solutions to Boolean instances is supplied, nor any proof that such a map preserves evolution, solvability, or computational cost. This comparison supplies no mathematical isomorphism. A slender fluid core and a line drawn to represent witness checking do not identify the two problems; neither fluid blow-up nor failure of projected closure implies $P\neq NP$.
 

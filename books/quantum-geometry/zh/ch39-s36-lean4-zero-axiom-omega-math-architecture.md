@@ -24,6 +24,16 @@
    - **炸穿无矛盾防线与外部审计**：Lean 内核无条件采信每一条 `axiom`。一旦手工公理漏掉某个非退化边界条件——例如在未排除零四元组 $o_{\mathrm{zero}} = (0,0,0,0)$ 的原始载体上草率声明 `axiom kappa_refl : ∀ x : ProjTernion, kappa x x = ⟨1, 1⟩`，代入 $x = (0,0,0,0)$ 便会与计算值 `kappa 0 0 = ⟨0, 1⟩` 碰撞，三行之内推出 `⟨0, 1⟩ = ⟨1, 1⟩` 进而证出 `False`（空真爆炸）！同时，`#print axioms` 以及 `lean4lean`、`nanoda`、`con-leche`、`comparator` 等独立内核检查器都会对一切非标准自定义 `axiom` 亮起最高级别审计红灯；
    - **彻底阻断内核 $\iota$-归约**：`axiom` 只是没有归约规则的僵死符号常量，任何包含它的项在内核求值时都会卡在未化简的中性项上，彻底丧失“证明即程序、归约即实验”的构造性威力。
 
+给整数坐标换一个共同的单位，射影读数应当保持原值。这个例子也说明书中“无公理”标记的含义：它取自冻结声明记录的传递公理闭包。用官方库或 OmegaMath 写出的证明都可以得到这个标记。
+
+::: {.theorem #thm-ch32-projective-overlap-positive-scaling title="正整数缩放保持射影读数" lean="D5/S3/Quantum/AURICOmega/ProjectiveOverlapScaling.kappa_scale"}
+设 $p,q,k$ 为自然数，$s=k+1$。以 $\kappa(p,q)$ 表示分子 $q^2$、分母 $p^2+q^2$ 的读数，分母为零时取未定义值。则 $\kappa(ps,qs)$ 与 $\kappa(p,q)$ 在 `Omega.Ratio.Equivalent` 下等价。
+:::
+
+::: {.proof}
+缩放使分子和分母同乘 $s^2$。分母为正时，两组分数交叉相乘相等；当 $p=q=0$ 时，缩放前后的读数都未定义，两者按定义等价。完整证明由 Lean 内核检查。
+:::
+
 ::: {.viz src="lean4-zero-axiom-omega-math-sandbox" preset="cic-kernel-vs-axiom-and-real-tax" height="500"}
 **五阶编译验证流水线与三路线公理审计对比**：中央紫色不透明实体三元数球面 $\mathbb{QP}^3$ 与上方三维五阶编译验证棱柱轨（`语法载体 → 类型检查 → ι-归约/decide → #print axioms 审计 → 原生 #eval 机器码`）同台联动；琥珀焦点停在纯 CIC $+$ `OmegaMath` 路线第 4 阶公理审计节点，青色归约束零阻碍贯通全轨并输出 `#print axioms = ∅` 与原生 C 可执行码，对比品红分叉标示的自定义 `axiom` 路线（在 `ι-归约` 处死锁并在零元漏检时塌缩至 `False`）与 `Mathlib.Real` 路线（注入 `{propext, Classical.choice, Quot.sound}`、阻断 `decide` 与 `(1 / 2 : ℝ)` 等 `noncomputable` 运算的 `#eval`，并在求导任务上长出 `Filter.Tendsto` 支线树）。
 :::
