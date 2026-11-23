@@ -887,7 +887,35 @@ There is a core on the nine points of $\mathrm{AG}(2,3)$ whose bases are all tri
 Any two omitted lines meet in at most one point, and the intersection of all twelve is empty. Here $n=9$, $g=1$, and $q_T=1$ for every omitted line. Independent replacement leaves $\binom{7}{2}-12=9$ factors of order nine, giving $3^9$ elements killed by three. The Lean proof constructs eleven coefficient vectors satisfying every signed deletion and extension equation modulo three. Evaluating at eleven basis coordinates gives the identity matrix. Mapping their linear combinations into the coefficients killed by three gives at least $3^{11}$ distinct obstruction elements killed by three. The full proof is checked by the Lean kernel.
 :::
 
-A separate finite computation uses all 72 basis coordinates, 36 deletion equations and 126 extension equations. The kernel modulo three has dimension 11, and its subspace that lifts to the kernel modulo nine has dimension 9. Since nine annihilates the obstruction, these dimensions give the exact decomposition $(\mathbb Z/9\mathbb Z)^9\oplus(\mathbb Z/3\mathbb Z)^2$. The Lean refutation above uses the lower bound on the elements killed by three. [Finite computation](https://github.com/the-omega-institute/trureturing/issues/33440#issuecomment-7088695650)
+::: {.theorem #thm-joint-circuit-rank-three-omission-factors title="Cyclic factors for rank-three omission families" lean="D5/S3/Combinatorics/Matroids/RankThreeOmissionPotentials.rank_three_lifting_obstruction_cyclic_factors"}
+Let the core have $n\ge 4$ points with singleton parallel classes. Its bases are all triples except for $m$ omitted triples, any two of which share at most one point. Choose any point as an anchor and put $b=\binom{n-2}{2}$.
+
+A point potential $u$ takes values in $\mathbb Z/\gcd(n,3)\mathbb Z$. It vanishes at the anchor, its total sum is zero, and every value is killed by three. Its values at two points agree whenever no omitted triple contains both points. Its three values on each omitted triple sum to zero. There are $3^d$ such potentials, and the joint lifting obstruction is isomorphic as an integer module to
+
+$$
+(\mathbb Z/n\mathbb Z)^{b-m}\oplus(\mathbb Z/3\mathbb Z)^d.
+$$
+
+When $3\mid n$, the exponent $d$ is the dimension of this potential space over the field of three elements. When $3\nmid n$, the only potential is zero and $d=0$.
+:::
+
+::: proof
+Choose a second point as a root. Eliminating the root and the sum of all point vectors from the alternating two-form leaves $b$ pair coordinates. Each omitted triple requires the form to vanish on two differences from its first point, giving one row of the reduced matrix. The original obstruction is the kernel of this matrix modulo $n$.
+
+A relation in the transpose kernel assigns signed coefficients to the oriented edges of the omitted triangles. These coefficients are differences of point potentials. The three oriented edge coefficients on a triangle agree, and their sum around the cycle vanishes. Hence three kills each coefficient. Restoring the edges at the root and fixing the constant at the anchor yields the potentials in the statement. For each $q\mid n$, a finite character pairing gives the primal kernel size modulo $q$ as $q^{b-m}$ times the number of potentials modulo $\gcd(q,3)$.
+
+The integral rows are linearly independent. In an integral relation, reduction modulo $n$ shows that three kills every reduced coefficient. The integer coefficients can therefore all be divided by $n/\gcd(n,3)>1$, and the relation still holds. Repeated division rules out a nonzero integral relation. Smith normal form splits off $b-m$ unconstrained coordinates modulo $n$. The counts at $q=n$ and $q=\gcd(n,3)$ show that three kills the remaining finite module and that its size is the potential count. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-joint-circuit-affine-plane-factors title="Exact factors for the affine-plane omissions" lean="D5/S3/Combinatorics/Matroids/RankThreeOmissionPotentials.affine_plane_lifting_obstruction_cyclic_factors"}
+Take a rank-three core on the nine points of $\mathrm{AG}(2,3)$ whose bases are all triples except its twelve lines. With singleton parallel classes, its joint lifting obstruction is isomorphic to $(\mathbb Z/9\mathbb Z)^9\oplus(\mathbb Z/3\mathbb Z)^2$.
+:::
+
+::: proof
+Every pair of points lies on an omitted line. Write a point as $(x,y)\in\mathbb F_3^2$ and take the origin as the anchor. The twelve zero-sum equations make each normalized potential a linear form $u(x,y)=ax+by$, with $a,b\in\mathbb F_3$ arbitrary. Thus $d=2$ and $\binom{7}{2}-12=9$. The two order-three factors come from the two slopes. The full proof is checked by the Lean kernel.
+:::
+
+A direct computation using 72 basis coordinates, 36 deletion equations and 126 extension equations gives the same counts. The kernel modulo three has dimension 11, and the subspace that lifts to the kernel modulo nine has dimension 9. [Finite computation](https://github.com/the-omega-institute/trureturing/issues/33440#issuecomment-7088695650)
 
 **Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
