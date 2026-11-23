@@ -79,3 +79,20 @@ The residue pattern identifies which triples come from the squares. Each remaini
 :::
 
 For example, take $d=1$ and $r=3$. Each residue class contains exactly three points. Its unique triple can be added or left out, independently in each of the nine classes across the three rows. Thus the Latin squares supply $27$ triples, and any number from zero through nine can be added to them while keeping the normalized potential space two-dimensional.
+
+## 35.6.8.4.1.3 Attainable numbers of internal triples
+
+In the preceding example, any number of same-residue triples can be removed while retaining the dimension. The same deletion property holds for arbitrary residue classes. Write $D(r,3,2)$ for the largest number of blocks in a partial Steiner triple system on $r$ labels.
+
+::: {.theorem #thm-joint-circuit-internal-size-spectrum title="The full interval of attainable sizes" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalSizeSpectrum.exact_size_spectrum"}
+Keep the mixed triples, pair uniqueness and normalization specified above. The possible numbers of added same-row triples that retain potential dimension $d+1$ are exactly the integers in
+$$
+3^d r^2 \le N \le 3^d r^2+3^{d+1}D(r,3,2).
+$$
+:::
+
+::: proof
+Each row contributes $r^2$ Latin-square triples. Those triples occupy distinct rows or distinct cells and have three different residues. Each remaining triple belongs to a partial Steiner system in a single residue class. There are $3^{d+1}$ such classes, each contributing at most $D(r,3,2)$ triples. This gives the two endpoints.
+
+To realize any integer between them, place a largest packing in each residue class. Choose any $N-3^d r^2$ triples from their union. Deleting triples preserves pair uniqueness within each class. These choices and the rowwise Latin squares give an extension by [@thm-joint-circuit-steiner-realization]. The full proof is checked by the Lean kernel.
+:::
