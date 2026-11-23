@@ -370,6 +370,8 @@ The original universal claim requires the same $M,N$ and the same positive $\lam
 
 For a positive scalar column Gram with $a<b$, [@thm-bridge-native-three-rectangular-bound] requires $3c\le2d$. With this bound, [@thm-bridge-native-scalar-gram-iff] gives the exact thresholds in each interval and classifies all dimensions. In the ordered cone, $(3,4,3,4)$ and $(5,6,5,6)$ lie in the first shrinking interval and violate $3c\le2d$, ruling out a three-term realization of either. The dimensions $(2,3,2,3)$ attain both equalities $2b=3a$ and $3c=2d$ and admit a realization. The thirty-dimensional example below returns to the question of whether any unitary at $(5,6,5,6)$ admits four terms. The quantitative gap from a flat spectrum in general dimensions remains open.
 
+[@thm-bridge-native-four-staircase] gives an exact minimum width of four at $(3,4,3,4)$ and classifies width-four attainment for $2a<b$ or $2d<c$ when the other input dimension is positive. The four-term unitary question at $(5,6,5,6)$ in [@ex-bridge-rectangular-partition-5-6] and the general necessary conditions in the small-ratio regime $a<b\le2a$ remain open.
+
 ## 19.4.1 Rectangle partitions and the exact decomposition width of a fixed operator {#sec-bridge-rectangular-partition}
 
 Keep the original local input and output spaces and allow any finite number of terms. Partitioning the coordinate rectangle into blocks with equally many row and column indices gives a unitary and, for that unitary, its minimum number of product terms.
