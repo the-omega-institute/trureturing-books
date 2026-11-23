@@ -99,6 +99,21 @@ Since $T_{n+1}=T_n+T_{n-1}+T_{n-2}$ and $T_{n-2}>0$, the sum $T_n+T_{n-1}$ is le
 
 The gap is exactly $2T_{n-2}$, which is positive for $n\ge 3$. At length two all four words are legal because there is no three-site window. Either site can carry any of the three pattern symbols, giving kernel dimension $3^2=9$, already greater than twice the legal word count.
 
+::: {.theorem #thm-ch39-fib-forbidden-four-recurrence lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionGrowth.kernelDimension_four_recurrence" title="The deletion-kernel recurrence with a ban on runs of four"}
+On an open chain of length $n$, forbid four consecutive ones. Let $d_n$ be the dimension of the complex matrices supported on legal words whose partial trace over any one site vanishes. For $n\ge4$,
+
+$$
+d_{n+6}+d_{n+1}+d_n
+=d_{n+5}+2d_{n+4}+2d_{n+3}+2d_{n+2}.
+$$
+:::
+
+::: {.proof}
+Every four-site window must contain both directions of disagreement. The first window determines the two distances from the current end and identifies the more recent direction. Each subsequent symbol determines a unique legal transition, and each transition path determines a unique pattern. For the six distance pairs below, the sum of the six-step, one-step, and identity operators equals the five-step operator plus two copies each of the four-step, three-step, and two-step operators. Summing over the first windows yields the recurrence. The full proof is checked by the Lean kernel.
+:::
+
+The initial values follow by counting first windows. For distances $a<b$, choose the more recent direction in two ways. Between the two occurrences, each site can carry the more recent direction or agreement. Earlier sites admit all three symbols. The six distance pairs give counts $18,12,8,6,4,2$. Summing along the transitions gives $d_4,\ldots,d_9$ as $50,122,290,674,1562,3658$.
+
 ::: {.theorem #thm-ch39-fib-forbidden-window-growth lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionGrowth.kernelDimension_lower" title="Growth of the deletion kernel for windows of length four or more"}
 On an open chain of length $n=k+2$, forbid $K\ge4$ consecutive ones. Let $d_{n,K}$ be the complex dimension of the supported matrices with zero partial trace over each site. Then
 
