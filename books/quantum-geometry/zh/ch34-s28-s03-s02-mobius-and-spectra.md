@@ -806,10 +806,38 @@ $$
 
 实际 ζ 零点的截断仍需要独立确定不相容关系及其支撑。
 
+::: {.theorem #thm-ch31-signed-phase-margin title="共振项的带符号贡献" lean="D5/S3/Fourier/WeightedPhaseRecurrence.weighted_phase_recurrence_of_margin"}
+取有限指标集 $J$、实频率 $\gamma_j$、目标相位角 $\theta_j$、总和为一的非负权重 $p_j$、正整数 $N$ 与 $\varepsilon>1/N$。对各坐标相位变量 $x_j$，令 $c_k$ 为下式的 Fourier 系数。
+
+$$
+\left(\varepsilon-\sum_{j\in J}p_j(1-\cos x_j)\right)\prod_{j\in J}F_N(x_j),
+\qquad F_N(x)=\frac{1}{N}\left|\sum_{\ell=0}^{N-1}e^{i\ell x}\right|^2.
+$$
+
+这些系数非负，且支撑在 $|k_j|\le N$ 内。令 $\xi(k)=\sum_j k_j\gamma_j$、$b(k)=\sum_j k_j\theta_j$，并对 $R>0$ 定义
+
+$$
+\begin{aligned}
+A&=\sum_{\xi(k)=0} c_k\cos b(k),\\
+B(R)&=\sum_{\xi(k)\ne0}\frac{2c_k|\sin(R\xi(k)/2)|}{|\xi(k)|},\qquad M(R)=RA-B(R).
+\end{aligned}
+$$
+
+若 $M(R)>0$，则每个区间 $[a,a+R]$ 内都有时刻 $t$ 满足
+
+$$
+\sum_j p_j(1-\cos(\gamma_jt-\theta_j))\le\varepsilon-\frac{M(R)}{RN^{|J|}}.
+$$
+:::
+
+::: proof
+Fejér 恒等式 $(1-\cos x)F_N(x)=(1-\cos(Nx))/N$ 把展开化为三角形 Fourier 系数的乘积，以及用 $F_N(x)-1+\cos(Nx)$ 替换其中一个因子所得的项。替换去掉了这个因子的常数项，各系数仍非负。取 $x_j=\gamma_jt-\theta_j$，频率为零的项对区间积分恰好贡献 $RA$。其余余弦各自在区间上的积分绝对值至多为 $B(R)$ 中的对应项。因此乘积在区间上的最大值至少为 $M(R)/R$。Fejér 因子的乘积介于零与 $N^{|J|}$ 之间，在达到上面最大值的点得到所述亏损界。完整证明由 Lean 内核检查。
+:::
+
 ::: {.theorem #thm-ch31-finite-phase-recurrence title="有限区间内的加权相位复现" lean="D5/S3/Fourier/WeightedPhaseRecurrence.weighted_phase_recurrence"}
 取有限指标集 $J$，实频率 $\gamma_j$，目标相位角 $\theta_j$，以及总和为一的非负权重 $p_j$。令 $\xi(k)=\sum_{j\in J}k_j\gamma_j$，$b(k)=\sum_{j\in J}k_j\theta_j$。固定正整数 $N$ 与 $\delta>0$。对每个满足 $|k_j|\le N$ 的整数向量，假定 $\xi(k)=0$ 时 $\cos b(k)=1$，而 $\xi(k)\ne0$ 时 $|\xi(k)|\ge\delta$。
 
-若 $\varepsilon>1/N$ 与 $R>0$ 满足
+若 $\varepsilon>1/N$ 与 $R$ 满足
 
 $$
 R\delta(\varepsilon-1/N)>2\bigl(\varepsilon N^{|J|}-(\varepsilon-1/N)\bigr),

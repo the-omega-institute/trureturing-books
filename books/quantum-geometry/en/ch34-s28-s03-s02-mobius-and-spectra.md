@@ -806,10 +806,38 @@ Every relation is an integer multiple of $(3,-1)$. The length-four relation has 
 
 For actual zeta cutoffs, the incompatible relations and their supports still require independent determination.
 
+::: {.theorem #thm-ch31-signed-phase-margin title="The signed contribution of resonant modes" lean="D5/S3/Fourier/WeightedPhaseRecurrence.weighted_phase_recurrence_of_margin"}
+Let $J$ be finite. Take real frequencies $\gamma_j$, target angles $\theta_j$, nonnegative weights $p_j$ summing to one, an integer $N>0$, and $\varepsilon>1/N$. For independent phase variables $x_j$, denote by $c_k$ the Fourier coefficients of
+
+$$
+\left(\varepsilon-\sum_{j\in J}p_j(1-\cos x_j)\right)\prod_{j\in J}F_N(x_j),
+\qquad F_N(x)=\frac{1}{N}\left|\sum_{\ell=0}^{N-1}e^{i\ell x}\right|^2.
+$$
+
+The coefficients are nonnegative and supported on $|k_j|\le N$. Write $\xi(k)=\sum_j k_j\gamma_j$ and $b(k)=\sum_j k_j\theta_j$. For $R>0$ put
+
+$$
+\begin{aligned}
+A&=\sum_{\xi(k)=0} c_k\cos b(k),\\
+B(R)&=\sum_{\xi(k)\ne0}\frac{2c_k|\sin(R\xi(k)/2)|}{|\xi(k)|},\qquad M(R)=RA-B(R).
+\end{aligned}
+$$
+
+If $M(R)>0$, then every interval $[a,a+R]$ contains a time $t$ satisfying
+
+$$
+\sum_j p_j(1-\cos(\gamma_jt-\theta_j))\le\varepsilon-\frac{M(R)}{RN^{|J|}}.
+$$
+:::
+
+::: proof
+The Fejér identity $(1-\cos x)F_N(x)=(1-\cos(Nx))/N$ reduces the expansion to the product of triangular Fourier coefficients and terms that replace one factor by $F_N(x)-1+\cos(Nx)$. The replacement removes its constant mode and has nonnegative coefficients. At $x_j=\gamma_jt-\theta_j$, the zero frequencies contribute exactly $RA$ to the integral. Integrating each other cosine over the window gives a term whose magnitude is bounded by its contribution to $B(R)$. Thus the maximum of the loss-weighted product on the interval is at least $M(R)/R$. The product of Fejér factors lies between zero and $N^{|J|}$, giving the stated loss at a maximizer. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.theorem #thm-ch31-finite-phase-recurrence title="Weighted phase recurrence within a finite interval" lean="D5/S3/Fourier/WeightedPhaseRecurrence.weighted_phase_recurrence"}
 Let $J$ be finite, with real frequencies $\gamma_j$, target angles $\theta_j$ and nonnegative weights $p_j$ summing to one. Put $\xi(k)=\sum_{j\in J}k_j\gamma_j$ and $b(k)=\sum_{j\in J}k_j\theta_j$. Fix a positive integer $N$ and a number $\delta>0$. For each integer vector satisfying $|k_j|\le N$, assume that $\cos b(k)=1$ if $\xi(k)=0$, and that $|\xi(k)|\ge\delta$ otherwise.
 
-If $\varepsilon>1/N$ and $R>0$ satisfy
+If $\varepsilon>1/N$ and $R$ satisfy
 
 $$
 R\delta(\varepsilon-1/N)>2\bigl(\varepsilon N^{|J|}-(\varepsilon-1/N)\bigr),
