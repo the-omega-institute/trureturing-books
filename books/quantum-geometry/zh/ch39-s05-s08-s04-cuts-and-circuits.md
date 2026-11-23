@@ -939,6 +939,24 @@ $$
 
 对完整的 Steiner 三元系，等纤维结论与其三元对偶码的均匀列重数一致。这里的覆盖条件来自遗漏三元组和未覆盖点对上的点势等式。[Jungnickel 与 Tonchev，定理 3.1](https://arxiv.org/abs/1709.06044)
 
+::: {.theorem #thm-joint-circuit-minimum-omissions-bound title="至少需要多少个遗漏三元组？" lean="D5/S3/Combinatorics/Matroids/RankThreeOmissionPairCount.potential_fiber_pair_count_le"}
+设遗漏三元组族中每对不同点至多出现一次，归一化三元点势空间的维数为 $d$。记 $q=3^d$，纤维的共同大小为 $s$，遗漏三元组数为 $m$，则 $6m\ge q(q-1)s^2$。
+:::
+
+::: proof
+来自不同纤维的有序点对共有 $q(q-1)s^2$ 个。每个这样的点对都属于一个遗漏三元组，而一个遗漏三元组只有六个由不同位置组成的有序对。
+:::
+
+::: {.theorem #thm-joint-circuit-minimum-omissions-attained title="提升仿射直线可达到下界" lean="D5/S3/Combinatorics/Matroids/RankThreeOmissionPairCount.exists_lifted_omission_family"}
+对任意 $d\ge 0$ 和 $s\ge 1$，在 $3^d s$ 个点上都存在点势维数为 $d$ 的遗漏三元组族，每对不同点至多出现一次，且三元组数恰为 $q(q-1)s^2/6$。因此在给定点数与维数下，最少需要 $s^2\binom{q}{2}/3$ 个三元组。
+:::
+
+::: proof
+取点集 $\mathbb F_3^d\times\mathbb Z/s\mathbb Z$，列出第一坐标互异、且在乘积群中和为零的三元组。来自不同行的一对点唯一决定第三点，其值是这对点之和的负元。同一行内的点对未被覆盖，所以每个点势在每一行上恒定。第一分量的坐标函数给出 $d$ 个线性无关的点势。另一方面，在基上求值经过这 $q$ 行，并满射到一个三元坐标空间，所以点势维数至多为 $d$。每个三元组恰好计入六个跨行有序点对，而每个这样的点对恰好出现一次。
+:::
+
+这个构造在三元商空间的每条直线上使用横截设计。同行点对均不覆盖，因此行的大小可取任意正整数。[Jungnickel 与 Tonchev，定理 3.7–3.8](https://arxiv.org/abs/1709.06044)
+
 **方向复形的约化整数同调（书面推导）。** 设至少有一个非空极大面，记 $d=n-h$，令 $m$ 为满足 $R(B)=B$ 的极大面数。上面的商映射是同伦等价，因此把 $X$ 的约化整数同调与楔和的约化整数同调相识别。每个球面都有以基点为子复形的 CW 结构，因此相应球面在有限楔和的约化同调中给出一个直和项。每个 $S^{d-1}$ 在 $d-1$ 次贡献一个 $\mathbb Z$，在其余非负次数均为零。因此 $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$，而 $k\ne d-1$ 时 $\widetilde H_k(X;\mathbb Z)=0$。[Hatcher，《Algebraic Topology》，推论 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 若没有非空极大面，原实现为空，所有非负次数的约化整数同调都为零。若有极大面且 $d=1$，楔和是有 $m+1$ 个点的离散空间，约化零次同调的生成元为 $[p_B]-[p_0]$，其中 $p_B$ 是极大面 $B$ 贡献的点，$p_0$ 是公共基点。若有极大面且 $m=0$，楔和为一点，所有约化同调群均为零。在极大面族非空时，约化欧拉示性数为 $(-1)^{d-1}m$。与前面的 Tutte 取值相比较，得到 $m=2^d T_M(1,1/2)$。
