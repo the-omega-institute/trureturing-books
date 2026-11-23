@@ -960,4 +960,20 @@ The fourth-root-bin model in [@thm-ch31-critical-missing-window-model] has a squ
 
 For actual ζ ordinates under RH, the weight is $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$ with analytic multiplicity $m_\gamma$. Baluyot, Goldston, Suriajaya and Turnage-Butterbaugh's uniform pair-correlation formula gives a bounded average of the normalized Montgomery sum against $2(1-\alpha)$ on $[0,1]$. On the critical line each ordinate difference has a nonnegative contribution after this averaging. Indeed, the cosine transform of the triangular weight is $2(1-\cos z)/z^2$ at nonzero $z$ and equals $1$ at zero. The equal-ordinate terms in the normalized average therefore contribute precisely $2\pi\sum_{0<\gamma\le Y}m_\gamma^2/(Y\log Y)$. The bounded average gives $\sum_{0<\gamma\le Y}m_\gamma^2=O(Y\log Y)$. On each dyadic band above $X$, use $w_\gamma^2\le m_\gamma^2/\gamma^2$ and sum the geometric bounds to obtain $V(X,T)=O(\log X/X)$ uniformly in $T\ge X$. The spectral theorem then applies under rational linear independence of the distinct positive ordinates. The analytic pair-correlation formula is a literature input. The available bounds leave the optimal waiting scale open. [Pair-correlation formula, Theorem 1 and §7](https://arxiv.org/abs/2306.04799)
 
+::: {.theorem #thm-ch31-finite-tail-moment-window title="Missing windows from finitely many tail moments" lean="D5/S3/Fourier/Concentration/FiniteTailMomentMissingWindow.exists_arbitrarily_late_tail_window"}
+Let $J$ be finite, with real frequencies $g_j$, nonnegative weights $w_j$, and a positive integer $p$. Assume that $\sum_j k_jg_j=0$ and $\sum_j|k_j|\le 2p$ imply $k=0$ for every integer vector $k$. For $h,\delta>0$ and real length $H$, write $V=\sum_j w_j^2$, $B=\sum_j w_j|g_j|$ and $N=\lfloor H/h\rfloor_++1$, using the natural-number floor. If $V=0$ or $N(2pV/\delta^2)^p<1$, then for each real $A$ there is $a>A$ such that
+
+$$
+\sum_{j\in J}w_j\sin(g_j u)<\delta+hB\qquad(u\in[a,a+H]).
+$$
+:::
+
+::: proof
+Expand $|Z|^{2p}$ for $Z(u)=\sum_jw_je^{ig_j u}$ using the multinomial theorem on $Z^p\overline Z^p$. The difference of any two degree-$p$ count vectors has length at most $2p$. The long-interval average of each nonzero character vanishes, leaving only equal count vectors. In each surviving term, bound one multinomial coefficient by $p!\le p^p$ and sum the remaining terms by the multinomial theorem. The resulting limiting average is at most $(pV)^p$, for each fixed grid offset. The argument uses the normalized character integral and Lamzouri's finite signed-frequency expansion. [Character integral](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L78) · [Lamzouri, Lemma 3.2](https://arxiv.org/html/2311.04860v2)
+
+Sum these moments over all grid offsets and average over candidate starts above $A$. The strict budget gives an average below $\delta^{2p}$ on a sufficiently long averaging interval. Some start has $|Z|<\delta$ at every grid point. The sine score is the imaginary part, and the floor grid extends the bound by the slope allowance $hB$. For $V=0$ the score vanishes.
+:::
+
+In [@thm-ch31-logarithmic-missing-window], the head can contribute at most $W(X)$ without a relation hypothesis. At $X=e^{-K}T^\beta$ the tail variance satisfies $V\le D\log T/T^\beta$. Set $\delta=\log T$, use mesh $r/T^2$ with rates $g_\gamma=\gamma/r$, and take $p=\lfloor T^\beta\log T/(4D)\rfloor$. Then $2pV/\delta^2\le1/2$. The floor-grid budget is eventually strict for $H=\exp(cT^\beta\log T)$ with $c=\log 2/(8D)$. The same signed margin follows if those tail frequencies satisfy the relation condition through order $2p$. Whether the distinct positive ζ ordinates in this tail meet that condition remains open.
+
 The Fourier recovery estimates follow in [§31.1.3.2.1](ch34-s28-s03-s02-fourier-recovery.md).
