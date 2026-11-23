@@ -46,12 +46,15 @@ $$
 ::: {.theorem #thm-ch31-degree-spectrum-packing title="有限频带中必有接近的同次频率和" lean="D5/S3/Fourier/Concentration/DegreeSpectrumPacking.exists_close_degree_vectors"}
 若 $M\ge2$，则存在两个不同的非负整数向量 $m,n$，各自次数为 $p$，且
 $$
-|F(m)-F(n)|\le \frac{p(b-a)}{M-1}.
+\begin{aligned}
+|F(m)-F(n)| &\le \frac{p(b-a)}{M-1},\\
+|F(m)-F(n)| &\le \frac{p(b-a)}{M} \qquad (N\ge3,\ p\ge2).
+\end{aligned}
 $$
 :::
 
 ::: proof
-若两个和相等，差即为零。否则将 $M$ 个和从小到大排列。它们都落在 $[pa,pb]$，所以最小的相邻差至多为 $p(b-a)/(M-1)$。只有两个频率且它们恰为 $a,b$ 时，这些和构成等差数列，上界可取到。
+若两个和相等，差即为零。否则用 $\delta$ 表示排序后最小的相邻差。把相邻差相加，得到 $(M-1)\delta\le p(b-a)$。若 $N\ge3$ 且 $p\ge2$，把互异的频率记为 $x_1<x_2<\cdots<x_N$。两端的相邻差分别为 $x_2-x_1$ 与 $x_N-x_{N-1}$。在 $(x_2,x_{N-1})$ 和 $(x_1,x_N)$ 两对频率中各添 $p-2$ 个 $x_1$，所得两个 $p$ 次和之差等于两端间距之差。对应的次数向量不同。因此至少有一个端部间距达到 $2\delta$，相加可得 $M\delta\le p(b-a)$。只取两端频率时，一般界可取到。对频谱 $(0,1,3)$ 取二次和，得到 $0,1,2,3,4,6$，加强界也可取到。
 :::
 
 取固定 $0<\beta<1$，并令 $X=e^{-D}T^\beta$。临界线上的简单零点比例有正的下界。黎曼–冯·曼戈尔特公式给出 $N(T)\asymp T\log T$，而 $X$ 以下的零点数为 $o(T\log T)$。因此该尾段至少有常数倍 $T\log T$ 个不同纵坐标。若 $p\asymp T^\beta\log T$，则

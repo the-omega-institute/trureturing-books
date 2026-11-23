@@ -46,12 +46,15 @@ Let $J$ have $N$ elements, with all $g_j\in[a,b]$. Write $F(m)=\sum_jm_jg_j$. Th
 ::: {.theorem #thm-ch31-degree-spectrum-packing title="A finite band contains two close equal-degree sums" lean="D5/S3/Fourier/Concentration/DegreeSpectrumPacking.exists_close_degree_vectors"}
 If $M\ge2$, there are distinct nonnegative integer vectors $m,n$ each of degree $p$ such that
 $$
-|F(m)-F(n)|\le \frac{p(b-a)}{M-1}.
+\begin{aligned}
+|F(m)-F(n)| &\le \frac{p(b-a)}{M-1},\\
+|F(m)-F(n)| &\le \frac{p(b-a)}{M} \qquad \text{if } N\ge3 \text{ and } p\ge2.
+\end{aligned}
 $$
 :::
 
 ::: proof
-A repeated sum gives a gap of zero. Otherwise order the $M$ sums in $[pa,pb]$. The smallest adjacent gap is at most $p(b-a)/(M-1)$. With two frequencies at the endpoints $a,b$, the sums form an arithmetic progression and attain the bound.
+A repeated sum gives a gap of zero. Otherwise let $\delta$ be the least adjacent gap among the ordered sums. Adding all adjacent gaps gives $(M-1)\delta\le p(b-a)$. For $N\ge3$ and $p\ge2$, write $x_1<x_2<\cdots<x_N$ for the distinct frequencies. The first and last gaps are $x_2-x_1$ and $x_N-x_{N-1}$. Their difference is the difference of two degree-$p$ sums obtained by appending $p-2$ copies of $x_1$ to the pairs $(x_2,x_{N-1})$ and $(x_1,x_N)$. These count vectors are distinct. Thus one of the two end gaps is at least $2\delta$, and adding all gaps gives $M\delta\le p(b-a)$. Two endpoint frequencies attain the general bound. At degree two the spectrum $(0,1,3)$ attains the strengthened bound, with six sums $0,1,2,3,4,6$.
 :::
 
 Fix $0<\beta<1$ and take $X=e^{-D}T^\beta$. A positive lower proportion of the zeros are simple and lie on the critical line. The Riemann–von Mangoldt formula gives $N(T)\asymp T\log T$, and the number of zeros below $X$ is $o(T\log T)$. Thus the tail contains at least a constant times $T\log T$ distinct ordinates. For $p\asymp T^\beta\log T$,
