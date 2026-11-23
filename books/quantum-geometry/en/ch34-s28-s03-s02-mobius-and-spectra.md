@@ -700,6 +700,46 @@ The orbit closure is compact, so a phase of minimum cost exists. If $D=0$, the p
 
 Assume RH. For the actual zero cutoffs in [@thm-ch31-weighted-phase-limsup], compute $E(T)$ with the analytic multiplicity weights and a full relation matrix satisfying the theorem's hypotheses. The two constants are uniform across cutoffs, so $D(T)\to0$ is equivalent to $E(T)/W(T)\to0$. Whether this normalized lattice distance tends to zero for the actual zeta zeros remains open.
 
+::: {.theorem #thm-ch31-aggregate-phase-obstructions title="Combining phase obstructions across coefficient lengths" lean="D5/S3/Fourier/PhaseObstructionLengths.omissionFraction_isLeast D5/S3/Fourier/PhaseObstructionLengths.simultaneous_bound D5/S3/Fourier/PhaseObstructionLengths.aggregate_bounds"}
+For finitely many real frequencies, let $P_h$ be the minimum fraction of weight omitted so that every integer relation on the retained coordinates with coefficient $\ell^1$ norm at most $h$ has coefficient sum divisible by $4$. Here $h$ is a nonnegative integer. A retained subset attains this minimum. For the phase estimates take nonnegative weights with total weight $W$. Write $A(v)$ for the weighted sine average at a common time $v$, with denominator $W$. When $W=0$, both the average and the omitted fraction are zero by convention. For a set of times $\mathcal T$, put $D_{\mathcal T}=1-\sup_{v\in\mathcal T}A(v)$, with $D_{\varnothing}=1$.
+
+Write
+
+$$
+S_N=\sum_{h=1}^{N}\left(\frac1{h^2}-\frac1{(h+1)^2}\right)P_h.
+$$
+
+For every common time $v$ and natural $N$, one has $S_N+P_{N+1}/(N+1)^2\le1-A(v)$. The limit $L=\lim_{N\to\infty}S_N$ exists and satisfies
+
+$$
+\sup_{h\ge1}\frac{P_h}{h^2}\le L\le D_{\mathcal T},
+\qquad
+\frac{P_{N+1}}{(N+1)^2}\le L-S_N\le\frac1{(N+1)^2}.
+$$
+:::
+
+::: proof
+Fix a common time $v$. Each incompatible relation of length at most $h$ forces some coordinate in its support to have loss $1-\sin(\gamma_jv)$ of at least $h^{-2}$. Thus the coordinates with loss at least $h^{-2}$ carry a fraction of weight at least $P_h$. For each coordinate, sum the increments for the thresholds at or below its loss. These increments telescope, and their sum with the final threshold term is at most the coordinate's loss. Summing over coordinates with their weights gives the estimate at the same time.
+
+The terms are nonnegative and the partial sums are bounded, so the limit exists. The fractions $P_h$ are nondecreasing and bounded above by $1$. The increments starting at $N+1$ sum to $(N+1)^{-2}$. Bounding that tail with the endpoint fractions gives the remainder estimates and the comparison with every single length.
+:::
+
+::: {.theorem #thm-ch31-aggregate-phase-example title="Combining lengths gives a strictly stronger bound for three frequencies" lean="D5/S3/Fourier/PhaseObstructionLengths.strict_three_frequency_example"}
+Take frequencies $(0,1,2)$ and weights $(1/2,1/4,1/4)$. Then $P_1=P_2=1/2$ and $P_h=3/4$ for every $h\ge3$. The strongest single-length bound is $1/2$, while $L=19/36$. For $N\ge2$,
+
+$$
+S_N=\frac{19}{36}-\frac{3}{4(N+1)^2}.
+$$
+
+The fifth partial sum $S_5=73/144$ is the first to exceed $1/2$.
+:::
+
+::: proof
+The length-one relation at frequency zero forces omission of that coordinate with weight $1/2$. Every relation on the remaining frequencies $1,2$ is an integer multiple of $(2,-1)$. At length three, one of the two remaining coordinates must also be omitted, adding $1/4$. Substitute these fractions and telescope to obtain the partial sums and the limit.
+:::
+
+Applying the estimate to actual zeta cutoffs still requires information about which integer relations hold and their supports.
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 

@@ -700,6 +700,46 @@ $$
 
 假设 RH。对 [@thm-ch31-weighted-phase-limsup] 的实际零点截断，以解析重数权重计算 $E(T)$，并使用满足定理假设的完整关系矩阵。两个常数与截断无关，所以 $D(T)\to0$ 等价于 $E(T)/W(T)\to0$。实际 ζ 零点的这一归一化格点距离是否趋零仍开放。
 
+::: {.theorem #thm-ch31-aggregate-phase-obstructions title="合并不同系数长度的相位障碍" lean="D5/S3/Fourier/PhaseObstructionLengths.omissionFraction_isLeast D5/S3/Fourier/PhaseObstructionLengths.simultaneous_bound D5/S3/Fourier/PhaseObstructionLengths.aggregate_bounds"}
+对一组有限实频率，记 $P_h$ 为最小的舍弃权重占比，使保留的坐标中每条 $\ell^1$ 范数至多为 $h$ 的整数关系，其系数和都能被 $4$ 整除。这里 $h$ 取非负整数。这个最小值由某个子集取得。以下相位估计取非负权重，总权重为 $W$。用 $A(v)$ 表示在共同时间 $v$ 的加权正弦平均，归一化的分母为 $W$。当 $W=0$ 时约定平均与舍弃占比均为零。对时间集合 $\mathcal T$，令 $D_{\mathcal T}=1-\sup_{v\in\mathcal T}A(v)$，并取 $D_{\varnothing}=1$。
+
+令
+
+$$
+S_N=\sum_{h=1}^{N}\left(\frac1{h^2}-\frac1{(h+1)^2}\right)P_h.
+$$
+
+对任意共同时间 $v$ 和自然数 $N$，有 $S_N+P_{N+1}/(N+1)^2\le1-A(v)$。令 $L=\lim_{N\to\infty}S_N$，则极限存在，且
+
+$$
+\sup_{h\ge1}\frac{P_h}{h^2}\le L\le D_{\mathcal T},
+\qquad
+\frac{P_{N+1}}{(N+1)^2}\le L-S_N\le\frac1{(N+1)^2}.
+$$
+:::
+
+::: proof
+固定共同时间 $v$。每个长度不超过 $h$ 的不相容关系都迫使其支撑中至少有一个坐标的损失 $1-\sin(\gamma_jv)$ 达到 $h^{-2}$。因此，损失至少为 $h^{-2}$ 的坐标所占权重至少为 $P_h$。对每个坐标，把低于其实际损失的阈值所对应的权重增量相加。这些增量望远镜相消，连同最后一个阈值的剩余项，总和至多为该坐标的损失。再对所有坐标按权重求和，即得同一时间上的不等式。
+
+各项非负，部分和有界，故极限存在。$P_h$ 随 $h$ 非减且不超过 $1$。从第 $N+1$ 项开始，增量之和为 $(N+1)^{-2}$，用两端的常数界估计这一尾和，即得余项界与单一长度的下界。
+:::
+
+::: {.theorem #thm-ch31-aggregate-phase-example title="三频例子中合并长度严格加强下界" lean="D5/S3/Fourier/PhaseObstructionLengths.strict_three_frequency_example"}
+取频率 $(0,1,2)$，权重 $(1/2,1/4,1/4)$。则 $P_1=P_2=1/2$，且 $P_h=3/4$ 对所有 $h\ge3$ 成立。单一长度给出的最强下界是 $1/2$，而 $L=19/36$。对 $N\ge2$，
+
+$$
+S_N=\frac{19}{36}-\frac{3}{4(N+1)^2}.
+$$
+
+第五个部分和 $S_5=73/144$ 是第一个严格超过 $1/2$ 的部分和。
+:::
+
+::: proof
+长度一的零频率关系迫使舍弃该坐标，损失权重 $1/2$。其余两个频率 $1,2$ 的关系都是 $(2,-1)$ 的整数倍。到长度三时至少还需舍弃一个坐标，增加 $1/4$。代入这个分段常数序列并相消，即得各个部分和与极限。
+:::
+
+应用到实际 ζ 零点的截断时，仍须确定哪些整数关系成立以及它们的支撑。
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 
