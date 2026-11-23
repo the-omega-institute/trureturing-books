@@ -372,10 +372,10 @@ await page.keyboard.press('Space');
 check('Space plays the rail', await until(page, () => { const d = window.ARITHMETIC_SCHUR_DEBUG.state; return d.playing && d.t > 0; }));
 await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 await page.click('#infoBtn');
-check('drawer: not a proof in both languages; Burnol and arXiv:1207.6583v3 linked; §34.7', await page.evaluate(() => {
+check('drawer: not a proof in both languages; Burnol and arXiv:1207.6583v3 and Appendix N linked', await page.evaluate(() => {
   const d = document.getElementById('drawer'), hrefs = [...d.querySelectorAll('a')].map((a) => a.getAttribute('href'));
   return !d.hidden && /不是证明/.test(d.textContent) && /not a proof/.test(d.textContent) && hrefs.includes('https://arxiv.org/abs/math/0103058v2') && hrefs.includes('https://arxiv.org/abs/1207.6583v3')
-    && hrefs.includes('../../zh/ch34-s18-gram-window-and-consensus.html#sec-ch34-18-5') && /liminf/.test(d.textContent);
+    && hrefs.includes('../../zh/appendix-n.html#sec-ch34-18-5') && /liminf/.test(d.textContent);
 }));
 await page.keyboard.press('Escape');
 

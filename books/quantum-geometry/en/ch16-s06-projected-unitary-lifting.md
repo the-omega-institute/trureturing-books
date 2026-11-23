@@ -1,4 +1,4 @@
-# 16.6 Lifting the Same Scalar Word to a Raw Projected Unitary {#sec-raw-projected-unitary-lifting}
+# L.5 Lifting the Same Scalar Word to a Raw Projected Unitary {#sec-raw-projected-unitary-lifting}
 
 How can a single entry of a two-dimensional matrix determine a block in a much larger space? Picture an input window $\Pi$, a raw unitary $U$, and an output window $\widetilde\Pi$. The windows may have different sizes; the output window may even be closed entirely. Amplitude outside a window remains in the space, and the next $U^*$ can bring it back. Tracking only the currently visible component cannot establish the action of an arbitrary alternating word.
 
@@ -50,7 +50,7 @@ The factors of $S(\Psi,x)=\operatorname{seqR}(\Psi,x)$ follow list order from le
 
 For example, $V_E([\alpha])=F_{\widetilde\Pi}(\alpha)U$, whereas $V_E([\alpha,\beta])=F_\Pi(\alpha)U^*F_{\widetilde\Pi}(\beta)U$. The recursion tests the length of the **tail**; replacing this with an informal phase-index convention can interchange $U$ and $U^*$. The operator $F_J$ multiplies $\operatorname{range}J$ by $e(\theta)$ and its orthogonal complement by $e(-\theta)$. When their dimensions differ, its determinant need not be $1$.
 
-## 16.6.1 Two Frames Keep Both the Visible and Complementary Amplitudes {#two-frames-keep-both-the-visible-and-complementary-amplitudes}
+## L.5.1 Two Frames Keep Both the Visible and Complementary Amplitudes {#two-frames-keep-both-the-visible-and-complementary-amplitudes}
 
 ::: {.definition #def-singular-pair-frames title="An arbitrary singular pair and its input and output frames" lean="D5/S3/ContinuousObservables/ProjectedUnitaryLifting.IsSingularPair D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvOf D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvtOf D5/S3/ContinuousObservables/ProjectedUnitaryLifting.rvpOf"}
 The predicate $\operatorname{IsSingularPair}(E,\psi,\sigma)$ means exactly
@@ -129,7 +129,7 @@ $$
 Keeping $b=M_{10}$ is essential: the next $00$ coefficient contains $s b$. A final projected readout does not justify removing the complementary component earlier. The endpoint action identities have already been established separately, and all formulas also cover $\psi=0$. This theorem concerns vectors satisfying the singular-pair predicate; it is not an unconditional assertion about every physical input state. The full proof is checked by the Lean kernel.
 :::
 
-## 16.6.2 From the Complete Input Gram Spectrum to the Compressed Operator {#from-the-complete-input-gram-spectrum-to-the-compressed-operator}
+## L.5.2 From the Complete Input Gram Spectrum to the Compressed Operator {#from-the-complete-input-gram-spectrum-to-the-compressed-operator}
 
 The operator $G=A^*A$ is a positive self-adjoint contraction with $\Pi G=G\Pi=G$. The source applies the pinned Mathlib finite-dimensional symmetric spectral theorem to its restriction to $\operatorname{range}\Pi$, obtaining a complete orthonormal eigenbasis $\{\psi_j\}_{j\in\mathrm{Fin}(\dim\operatorname{range}\Pi)}$ of that **input subspace**. This is not a thin decomposition listing only positive singular values, nor is this family asserted to be a basis of all $H$. Write $G\psi_j=\lambda_j\psi_j$. Positivity and $\|A\psi_j\|\le\|\psi_j\|$ give $\lambda_j\in[0,1]$; set $\sigma_j=\sqrt{\lambda_j}$. Every zero eigenvalue remains in the basis.
 

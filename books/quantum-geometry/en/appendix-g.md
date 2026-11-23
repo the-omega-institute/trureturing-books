@@ -52,7 +52,7 @@ Two strict scope boundaries govern [@thm-appg-majorana-fourteen-bound]:
 
 ## G.2 Equatorial-State Tensor Rules for Wigner Distance {#sec-appendix-g-2}
 
-Whereas stabilizer codes carve invariant subspaces, [Chapter 16, Section 16.8](ch16-s08-finite-gate-polytopes.md) showed that universal gate synthesis requires non-Clifford gates such as $T$ to break out of the Clifford polytope, because Clifford unitaries alone cannot generate non-stabilizer "magic." On one and two qubits, how can we measure the exact $\ell^1$ distance in discrete phase space from a quantum state to the stabilizer convex hull?
+Whereas stabilizer codes carve invariant subspaces, [Chapter 16, Section 16.3](ch16-s08-finite-gate-polytopes.md) showed that universal gate synthesis requires non-Clifford gates such as $T$ to break out of the Clifford polytope, because Clifford unitaries alone cannot generate non-stabilizer "magic." On one and two qubits, how can we measure the exact $\ell^1$ distance in discrete phase space from a quantum state to the stabilizer convex hull?
 
 We follow verbatim the definitions in `FiniteDimensional`, `PauliMatrix`, `BinaryStabilizerLocalInequivalence`, `DensitySpan`, `WignerDistanceMinimum`, and `QubitWignerDistanceTensorRules`:
 

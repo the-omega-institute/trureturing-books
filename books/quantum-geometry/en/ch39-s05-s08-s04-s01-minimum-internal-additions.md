@@ -1,4 +1,4 @@
-# 35.6.8.4.1 The minimum number of internal additions
+# O.2.4.1 The minimum number of internal additions {#356841-the-minimum-number-of-internal-additions}
 
 Fix $d,r\ge 1$ and put $q=3^d$. The points are $\mathbb F_3^d\times\mathbb Z/(3r)\mathbb Z$, with one row for each $x\in\mathbb F_3^d$. Keep all the mixed lifted triples, whose first coordinates are distinct and whose sum in the product group is zero. New triples may lie within a row. Every triple must have three distinct points, and any two distinct points may occur together at most once. [@thm-joint-circuit-internal-dimension]
 
@@ -22,7 +22,7 @@ In each row, divide the cyclic coordinates into their three residue classes modu
 Each row contributes $r^2$ new triples, and none shares a pair with a mixed triple. The labels need only give a bijection from each residue class to the set $\mathbb Z/r\mathbb Z$, so the construction also applies when $9\mid 3r$. For example, when $d=1$ and $r=2$, each row has classes $\{0,3\}$, $\{1,4\}$, and $\{2,5\}$. Label each class by $0,1$ in the order shown. This gives the four triples $\{0,1,2\}$, $\{0,4,5\}$, $\{3,1,5\}$, and $\{3,4,2\}$ in each row, for twelve additions across the three rows. The full proof is checked by the Lean kernel. [@thm-joint-circuit-internal-dimension]
 :::
 
-## 35.6.8.4.1.1 All extensions at the minimum
+## O.2.4.1.1 All extensions at the minimum {#3568411-all-extensions-at-the-minimum}
 
 The construction above uses a cyclic rule for the last label. The exact count also tells us how much freedom is left. In each row and each residue class, fix a labelling by $\{0,\ldots,r-1\}$, independently of the labellings in the other classes and rows.
 
@@ -50,7 +50,7 @@ Choose an order-$r$ Latin square independently in every row. Adding its cell tri
 The permutation laws give unique completion for each pair of points with different residues in a row. The internal triples never repeat a point and cover no same-residue pair. A mixed triple covers only pairs from different rows, so the new triples preserve pair uniqueness. Every internal residue sum is zero, and every uncovered same-row pair has residue difference zero. The dimension criterion then gives $d+1$. There are $r^2$ cells per row. The full proof is checked by the Lean kernel. [@thm-joint-circuit-internal-dimension]
 :::
 
-## 35.6.8.4.1.2 All extensions with the extra dimension
+## O.2.4.1.2 All extensions with the extra dimension {#3568412-all-extensions-with-the-extra-dimension}
 
 A minimum extension already covers every pair of different residues in a row. To add more triples while retaining the extra dimension, the dimension criterion allows additions inside individual residue classes. Keep the mixed family and the independent labellings fixed. A partial Steiner triple system is a family of three-element sets in which any two distinct labels occur together at most once.
 
@@ -80,7 +80,7 @@ The residue pattern identifies which triples come from the squares. Each remaini
 
 For example, take $d=1$ and $r=3$. Each residue class contains exactly three points. Its unique triple can be added or left out, independently in each of the nine classes across the three rows. Thus the Latin squares supply $27$ triples, and any number from zero through nine can be added to them while keeping the normalized potential space two-dimensional.
 
-## 35.6.8.4.1.3 Attainable numbers of internal triples
+## O.2.4.1.3 Attainable numbers of internal triples {#3568413-attainable-numbers-of-internal-triples}
 
 In the preceding example, any number of same-residue triples can be removed while retaining the dimension. The same deletion property holds for arbitrary residue classes. Write $D(r,3,2)$ for the largest number of blocks in a partial Steiner triple system on $r$ labels.
 
@@ -97,7 +97,7 @@ Each row contributes $r^2$ Latin-square triples. Those triples occupy distinct r
 To realize any integer between them, place a largest packing in each residue class. Choose any $N-3^d r^2$ triples from their union. Deleting triples preserves pair uniqueness within each class. These choices and the rowwise Latin squares give an extension by [@thm-joint-circuit-steiner-realization]. The full proof is checked by the Lean kernel.
 :::
 
-## 35.6.8.4.1.4 Sizes of saturated extensions
+## O.2.4.1.4 Sizes of saturated extensions {#3568414-sizes-of-saturated-extensions}
 
 Keep the mixed triples fixed and require pair uniqueness and normalized potential dimension $d+1$. An extension is **saturated** if one more same-row triple cannot be added under these conditions. Any proper compatible enlargement permits adding one of its new triples first, so saturation is equivalent to inclusion maximality. [@thm-joint-circuit-steiner-insert]
 

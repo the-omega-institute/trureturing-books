@@ -1,4 +1,4 @@
-# 16.9 Compilation Error, Query Counts, and Asymptotic Gate Length {#sec-compilation-error-and-count}
+# 16.4 Compilation Error, Query Counts, and Asymptotic Gate Length {#sec-compilation-error-and-count}
 
 When the initial success probability $p \in (0, 1]$ in amplitude amplification is known and we are allowed an auxiliary coin rotation `coinRotation q`, we can eliminate the integer-step overshoot of [Chapter 15](ch15-grover-qft-and-period-finding.md) completely and bound the exact number of source queries.
 

@@ -1,4 +1,4 @@
-# 16.3 The central-defect path: how an endpoint controls the spectrum {#sec-central-defect-gap}
+# L.2 The central-defect path: how an endpoint controls the spectrum {#sec-central-defect-gap}
 
 Equations (25)–(27) of the same Childs et al. version use tree depth $d\ge1$ and $2d+2$ columns, indexed by $j=0,\ldots,2d+1$, with sizes $N_j=2^{\min(j,2d+1-j)}$. With normalized column vectors $|q_j\rangle=N_j^{-1/2}\sum_{v\text{ in column }j}|v\rangle$ and the graph Hamiltonian equal to $\gamma$ times adjacency, $\gamma=1/\sqrt2$, the paper's column reduction gives ordinary weights $\sqrt2\gamma=1$ and central weight $2\gamma=\sqrt2$. Thus the path parameter here is $n=d+1$, and column $j$ is zero-based path coordinate $j$. This graph-to-path identification is a literature reduction; its complete column-count, rectangular-intertwining and matrix-exponential application has not been checked in Lean for this book. The theorems below act directly on the explicitly specified $J_n$.
 

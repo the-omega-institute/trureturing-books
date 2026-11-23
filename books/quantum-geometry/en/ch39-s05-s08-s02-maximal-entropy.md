@@ -1,4 +1,4 @@
-# 35.6.8.2 Maximal entropy, return durations, and the horizon problem {#sec-ch39-s05-s08-s02-maximal-entropy}
+# O.2.2 Maximal entropy, return durations, and the horizon problem {#sec-ch39-s05-s08-s02-maximal-entropy}
 
 ::: {.theorem #thm-ch39-p2e-parry-ks-entropy title="The Parry Law Attains the Bilateral Shift Entropy Bound" lean="D5/S3/TotalVariation/ParryKSEntropy.bilateral_parry_entropy"}
 Fix $K\ge2$, set $p=\operatorname{parryParameter}(K)$, and let $T$ be the left shift of the admissible bilateral relation paths $X_K$. There exist a bilateral coding $e$ and an invariant probability $\mu$ on $X_K$ with the stationary suffix cylinder formula of [@thm-ch39-p2e-native-bilateral-parry-law] at every integer origin. With that law,

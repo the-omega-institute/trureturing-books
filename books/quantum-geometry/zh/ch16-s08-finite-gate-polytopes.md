@@ -1,4 +1,4 @@
-# 16.8 有限门字与三维割圆多面体 {#sec-finite-gate-polytope}
+# 16.3 有限门字与三维割圆多面体 {#sec-finite-gate-polytope}
 
 在前两节和[第十五章](ch15-grover-qft-and-period-finding.md)里，我们一直在理想化的连续角度空间里自由取用任意旋转角 $\theta$ 或 $\phi_k$。然而，当你真正坐到一台容错量子计算机的控制台前（回想[第十四章](ch14-cloning-codes-and-braids.md)的稳定子纠错码），硬件为你提供的容错基本逻辑门并不是无穷无尽的连续旋钮，而仅仅是屈指可数的几个**离散生成元**——最典型的就是由 Hadamard 门 $H$ 与 $\pi/8$ 相位门 $T$ 组成的双门字母表 $\{H, T\}$！
 

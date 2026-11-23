@@ -1,4 +1,4 @@
-# 4.2.2 有限环境的历史实现与饱和障碍 {#sec-ch04-s02-s02-finite-environment-histories}
+# J.1 有限环境的历史实现与饱和障碍 {#sec-ch04-s02-s02-finite-environment-histories}
 
 
 > 漏出去的振幅不回来，不是因为它消失了，而是因为迎面来的环境永远是新的。

@@ -5840,10 +5840,10 @@
       ],
       "theory": [
         {
-          "label": "第 34 章 §34.7 · 格拉姆窗口、舒尔补可行走廊与多观察者共识",
-          "label_en": "Chapter 34 §34.7 · The Gram window, the Schur feasibility corridor and multi-observer consensus",
-          "href": "../zh/ch34-s18-gram-window-and-consensus.html#sec-ch34-18-5",
-          "href_en": "../en/ch34-s18-gram-window-and-consensus.html#sec-ch34-18-5"
+          "label": "附录 N · 算术消元的资源账本",
+          "label_en": "Appendix N · Resource Ledger of Arithmetic Elimination",
+          "href": "../zh/appendix-n.html#sec-ch34-18-5",
+          "href_en": "../en/appendix-n.html#sec-ch34-18-5"
         },
         {
           "label": "Burnol，arXiv:math/0103058v2（liminf 下界，不是有限 N 的等式）",

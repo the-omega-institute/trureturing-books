@@ -1,4 +1,4 @@
-# 4.2.3 Amplitude damping, relaxation, and trace distance {#sec-ch04-s02-s03-amplitude-and-distance}
+# 4.2.2 Amplitude damping, relaxation, and trace distance {#sec-ch04-s02-s03-amplitude-and-distance}
 
 Alongside energy-conserving $T_2$ dephasing stands energy-relaxing **amplitude damping** ($T_1$ spontaneous emission): an excited state at the south pole ($-1$) emits a quantum of energy into a cold bath and relaxes toward the ground state at the north pole ($+1$). Geometrically, the Bloch ball does not merely shrink around the origin — its center **drifts upward** along the vertical axis via the affine map [`dampedAxis`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.dampedAxis) $u \mapsto u' = (1 - \gamma)u + \gamma$ ($0 \le \gamma < 1$).
 

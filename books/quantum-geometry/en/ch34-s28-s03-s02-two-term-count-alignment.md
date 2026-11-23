@@ -1,4 +1,4 @@
-# Two-term counting and full phase alignment
+# M.2.10 Two-term counting and full phase alignment {#two-term-counting-and-full-phase-alignment}
 
 For a locally finite positive spectrum $(\gamma_j)$, write $N(T)=\#\{j:\gamma_j\le T\}$ for its inclusive count, $W(T)=\sum_{\gamma_j\le T}w_j$ for its total weight through $T$, and $S(T,u)=\sum_{\gamma_j\le T}w_j\sin(\gamma_j u)$ for its sine sum. The smooth two-term counting function for the actual ζ zeros is $F(T)=\frac{T}{2\pi}(\log(\frac{T}{2\pi})-1)$. The comparison spectrum below matches both terms with a bounded counting error. [Lagarias, Theorem 2.1](https://arxiv.org/html/math/0404394#S2.Thmtheorem1)
 

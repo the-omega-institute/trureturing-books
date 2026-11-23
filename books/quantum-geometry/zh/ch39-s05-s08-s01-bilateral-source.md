@@ -1,4 +1,4 @@
-# 35.6.8.1 双向帕里源、柱集律与混合性 {#sec-ch39-s05-s08-s01-bilateral-source}
+# O.2.1 双向帕里源、柱集律与混合性 {#sec-ch39-s05-s08-s01-bilateral-source}
 
 ::: {.theorem #thm-ch39-p2e-parry-escape-laws title="有向 K-Bonacci 重置链的帕里随机核、平稳分布与符号翻转对称律" lean="D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law"}
 对任意满足 $k \ge 2$ 的自然数阶，令 $p = \operatorname{parryParameter}(k) = \beta_k^{-1}$。则在上述状态空间 $\operatorname{State}(k) = \mathrm{Bool} \times \operatorname{Fin} k$ 上同时成立：

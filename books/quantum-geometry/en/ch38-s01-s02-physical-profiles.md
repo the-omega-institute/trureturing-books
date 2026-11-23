@@ -1,4 +1,4 @@
-# 36.2.2 Physical record profiles and fidelity minimizers {#sec-ch38-s01-s02-physical-profiles}
+# P.2 Physical record profiles and fidelity minimizers {#sec-ch38-s01-s02-physical-profiles}
 
 
 Start with a hand calculation at depth one in the Hann sequential spatial circuit above. The two addresses are $a_0=(\mathrm{false},())$ and $a_1=(\mathrm{true},())$, the input bus is $\mathrm{false}$, and each address has amplitude $1/\sqrt2$; the classical memory $D$ is arbitrary and fixed. After the complete load, the sole router has label $0$ or $1$, respectively. For $0\le q\le1$, use an orthonormal basis $e_*,e_W,e_0,e_1$ of a four-dimensional environment to store one local record:

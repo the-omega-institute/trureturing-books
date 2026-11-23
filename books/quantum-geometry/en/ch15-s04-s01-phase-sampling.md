@@ -1,4 +1,4 @@
-# 15.4.1 Actual counting distributions and phase sampling {#sec-ch15-s04-s01-phase-sampling}
+# K.1 Actual counting distributions and phase sampling {#sec-ch15-s04-s01-phase-sampling}
 
 ::: {.corollary #cor-finite-poisson-period title="Finite Poisson Summation over an Additive Subgroup of ZMod m" lean="D5/S3/Fourier/FinitePoisson.finite_poisson_summation"}
 Let $m \in \mathbb{N}$ with `[NeZero m]`, let $H : \mathrm{AddSubgroup}(\mathrm{ZMod}\,m)$ be an additive subgroup, and let $f : \mathrm{ZMod}\,m \to \mathbb{C}$ be any complex-valued function. Then
@@ -22,9 +22,6 @@ Since negation $k \mapsto -k$ is a bijection on the subgroup $\mathrm{annihilato
 
 In the example with $m = 32$ and period $r = 8$, the comb of positions $H = \{0, 8, 16, 24\}$ has only $4$ cells, while the annihilator $H^\perp = \{0, 4, 8, \dots, 28\}$ has $8$ frequencies, spaced $m/r = 4$ apart.
 
-::: {.viz src="phase-gears" preset="dual" height="500"}
-**The peaks are $Q/r$ apart, not $r$.** $Q = 32$ and period $r = 8$: the cyan comb $H = \{0, 8, 16, 24\}$ on the register has only $4$ cells, $8$ apart; after the sweep the spectrum keeps $8$ equal bars, each $\frac{1}{8}$, at $0, 4, 8, \dots, 28$, exactly the $8$ frequencies of $H^\perp$, spaced $Q/r = 4$ apart. At $k = 4$ the four cyan arrows all point right and the chain has length $4$; $\lvert H\rvert \cdot \lvert H^\perp\rvert = 4 \cdot 8 = 32$ ([@cor-finite-poisson-period]). In the example, $Q = 16$ and $r = 4$ happen to give $r = Q/r = 4$, so the two combs coincide.
-:::
 ::: {.remark #rem-shor-divisibility-boundary-literature title="Boundaries between finite Poisson summation, conditional candidates, and the full Shor algorithm"}
 **Scope.** To connect [@cor-finite-poisson-period] to Shor's algorithm, first distinguish two boundaries, then derive the counting-register distribution from the actual input when the period need not divide the register size. The exact marginal, normalization, and pointwise bound are stated next with their frozen declarations; the derivation below explains those statements, while the full algorithmic claims remain in [@rem-grover-qft-shor-literature].
 

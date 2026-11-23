@@ -1,4 +1,4 @@
-# 31.1.3.2 Möbius 截断与零点谱恢复 {#sec-ch34-s28-s03-s02-mobius-and-spectra}
+# M.2 Möbius 截断与零点谱恢复 {#sec-ch34-s28-s03-s02-mobius-and-spectra}
 
 
 **素数立方项与平方截断的半相位。** 沿用 $E(a,B)=N(a,B)-2\ln(B/a)$。对全部实际非平凡零点 $\rho_k$ 按重数编号，取 $\gamma_k=\operatorname{Im}\rho_k$ 和 $c_k=1/[\rho_k(1-\rho_k)]$，用前一定理中的级数定义 $P$，并令 $\phi(u)_k=e^{i\gamma_k u}$。对 $x>0$，定义
@@ -976,4 +976,4 @@ $$
 
 在 [@thm-ch31-logarithmic-missing-window] 中，无需约束首段频率之间的关系，首段的贡献至多为 $W(X)$。取 $X=e^{-K}T^\beta$ 时，尾段方差满足 $V\le D\log T/T^\beta$。对频率 $g_\gamma=\gamma/r$ 取网格间距 $r/T^2$，令 $\delta=\log T$、$p=\lfloor T^\beta\log T/(4D)\rfloor$，于是 $2pV/\delta^2\le1/2$。当 $c=\log 2/(8D)$ 时，长度 $H=\exp(cT^\beta\log T)$ 最终满足严格网格预算。若尾段频率直到 $2p$ 阶都满足上述整数关系条件，即可保留相同的带符号得分余量。实际 ζ 尾段互异正纵坐标能否满足这个条件仍是开放问题。
 
-Fourier 恢复估计见 [§31.1.3.2.1](ch34-s28-s03-s02-fourier-recovery.md)。
+Fourier 恢复估计见 [§M.2.1](ch34-s28-s03-s02-fourier-recovery.md)。

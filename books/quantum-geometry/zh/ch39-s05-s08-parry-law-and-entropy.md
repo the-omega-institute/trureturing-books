@@ -1,4 +1,4 @@
-# 35.6.8 帕里平稳律、逃逸对计数与分形视界熵问题 {#sec-ch39-p2e-entropy}
+# O.2 帕里平稳律、逃逸对计数与分形视界熵问题 {#sec-ch39-p2e-entropy}
 
 在讨论“熵”之前，先区分三个层次：有限状态的马尔可夫定律、整数时间轴上完整路径的可测坐标重建，以及对所有不变概率测度的熵比较。路径律、度量熵上界及其达到性、拓扑熵公式已有对应的 Lean 核验。最大熵测度的唯一性也有 Lean 定理，下文给出推导并讨论诱导回归熵。下文手工推导长度为 $R_n$ 的一维区间的 $O(R_n)$ 熵上界，并在有限 Tribonacci 平面斑块的子瓦片切口上用贝尔对实现 $S(\rho_{A_n})=\Theta(R_n^{D_F})$。采用平移不变或全格统一局域规则的有隙实现、实际 Tribonacci 跃迁链的 Slater 态空间纠缠、一般 $K\ge4$ 非各向同性皮索窗，以及余维一面积律失效的谱隙与局域性充要判据仍是开放问题。
 
@@ -10,9 +10,9 @@ $$
 
 这组有向重置核的随机性、归一化、平稳不变性与正负号对称性已由 Lean 内核完整验证：
 
-- [35.6.8.1 双向帕里源、柱集律与混合性](ch39-s05-s08-s01-bilateral-source.md)
-- [35.6.8.2 最大熵测度、回返时长与视界问题](ch39-s05-s08-s02-maximal-entropy.md)
-- [35.6.8.3 物理 Tribonacci 模型与 Slater 前缀](ch39-s05-s08-s03-slater-prefix.md)
-- [35.6.8.4 非连续切口、纯度与方向复形](ch39-s05-s08-s04-cuts-and-circuits.md)
-- [35.6.8.5 替代词交替偏差与对数平方界](ch39-s05-s08-s05-substitution-discrepancy.md)
-- [35.6.8.6 三对角局部化与开链谱距离](ch39-s05-s08-s06-open-chain-spectrum.md)
+- [O.2.1 双向帕里源、柱集律与混合性](ch39-s05-s08-s01-bilateral-source.md)
+- [O.2.2 最大熵测度、回返时长与视界问题](ch39-s05-s08-s02-maximal-entropy.md)
+- [O.2.3 物理 Tribonacci 模型与 Slater 前缀](ch39-s05-s08-s03-slater-prefix.md)
+- [O.2.4 非连续切口、纯度与方向复形](ch39-s05-s08-s04-cuts-and-circuits.md)
+- [O.2.5 替代词交替偏差与对数平方界](ch39-s05-s08-s05-substitution-discrepancy.md)
+- [O.2.6 三对角局部化与开链谱距离](ch39-s05-s08-s06-open-chain-spectrum.md)

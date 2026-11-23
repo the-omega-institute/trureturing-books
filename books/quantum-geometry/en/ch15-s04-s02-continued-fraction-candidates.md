@@ -1,4 +1,4 @@
-# 15.4.2 Continued-fraction candidates and observation events {#sec-ch15-s04-s02-continued-fraction-candidates}
+# K.2 Continued-fraction candidates and observation events {#sec-ch15-s04-s02-continued-fraction-candidates}
 
 
 Passing from the distribution to postprocessing requires a number-theoretic bridge. The earlier $N=7,Q=4,r=3$ example concerns only the marginal: $N^2=49>4$, so it cannot instantiate the recovery results below. Now impose the resolution condition $N^2\le Q$ and ask a deterministic question: given the measured integer, which finite list is guaranteed to contain the required fraction?
@@ -666,7 +666,3 @@ The mechanism is direct. Since $r\mid m$, write $m=rk$. If $k>1$, choose a prime
 The minimum-of-order-multiples idea appears explicitly in Ekerå, *On the success probability of quantum order finding*, [arXiv:2201.07791v2, §4.1.7](https://arxiv.org/html/2201.07791v2#S4.SS1.SSS7): when processed values are all positive multiples of the order and at least one is the order, their minimum is the order. The citation concerns this minimum argument. The paper's offset search and smoothness-based processing differ from the all-pairs menu here; their algorithms and performance estimates do not transfer with that argument.
 
 Finite lists and executable modular exponentiation specify a computation. The logarithmic length bound above counts convergents or Euclidean stages; it does not automatically cover every recursive list operation or the bit cost of rational arithmetic. This application supplies no end-to-end bit cost, quantum gate bound, efficient acquisition of complete factors, recursive factoring algorithm, or hardware-performance conclusion. Its exact-output event concerns counting observations for a fixed actual base, whereas the classical Good event below uses a separate unit-group sampling law. Combining their probabilities still requires an explicit common joint sampling construction.
-
-::: {.viz src="phase-gears" preset="leak" height="500"}
-**When the period does not divide, the peaks spread.** $Q = 64$ and period $6$: the magenta marks $sQ/r$ fall between integers at $10.67$, $21.33$ and so on, and each peak spreads over neighbouring cells — $k = 11$ has $0.115$, $k = 10$ only $0.026$, and the six cells nearest $sQ/r$ carry $0.80$ together; the continued fraction of the amber-framed $k = 11$ reads $\frac{1}{6}$. This card specifies no actual modulus and base with which to check $N^2\le Q$, so its concentration and reading remain a numerical teaching example. The conditional membership theorems above do not certify this card's last-convergent rule or identify its conditioned-comb peak heights with the actual marginal probabilities.
-:::

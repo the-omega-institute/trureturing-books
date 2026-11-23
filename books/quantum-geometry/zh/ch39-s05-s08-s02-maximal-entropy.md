@@ -1,4 +1,4 @@
-# 35.6.8.2 最大熵测度、回返时长与视界问题 {#sec-ch39-s05-s08-s02-maximal-entropy}
+# O.2.2 最大熵测度、回返时长与视界问题 {#sec-ch39-s05-s08-s02-maximal-entropy}
 
 ::: {.theorem #thm-ch39-p2e-parry-ks-entropy title="帕里律达到双向移位的熵上界" lean="D5/S3/TotalVariation/ParryKSEntropy.bilateral_parry_entropy"}
 固定 $K\ge2$，记 $p=\operatorname{parryParameter}(K)$，令 $T$ 为合法双向关系路径空间 $X_K$ 上的左移。存在双向编码 $e$ 及 $X_K$ 上的不变概率 $\mu$，使它在每个整数起点的后缀柱集都满足 [@thm-ch39-p2e-native-bilateral-parry-law] 的平稳公式。对这个概率律，

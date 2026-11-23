@@ -1,4 +1,4 @@
-# 31.1.3.3 Critical Mangoldt gaps and character windows {#sec-ch34-s28-s03-s03-mangoldt-and-characters}
+# M.3 Critical Mangoldt gaps and character windows {#sec-ch34-s28-s03-s03-mangoldt-and-characters}
 
 ::: {.theorem #thm-ch31-prime-window-rh title="Small prime-tail windows and the Riemann hypothesis" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 Fix a real $b>1$. The Riemann hypothesis holds if and only if for every $\eta>0$ and every real $R\ge2$ there exists a real $Y\ge R$ such that $A_{\vartheta,b}(Y)\le Y^\eta$.
