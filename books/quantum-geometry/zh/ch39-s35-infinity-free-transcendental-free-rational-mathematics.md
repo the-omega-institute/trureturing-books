@@ -1,4 +1,4 @@
-# 39.12 无无穷·无超越数的有限有理数学（$\mathbf{Math}_\Omega$）：齐次射影闭环、凯莱有理旋转与无极限二阶射流微积分 {#sec-ch39-infinity-free-transcendental-free-rational-mathematics}
+# 39.12 无无穷·无超越数的有限有理数学（Math_Ω）：齐次射影闭环、凯莱有理旋转与无极限二阶射流微积分 {#sec-ch39-infinity-free-transcendental-free-rational-mathematics}
 
 > *“那我们实际上可以建立一种没有无穷, 没有超越数的数学”*
 
@@ -51,7 +51,7 @@ $$
 
 由 $X^2 = \boldsymbol{\sigma}\boldsymbol{\sigma}^\top - \lVert\boldsymbol{\sigma}\rVert^2\mathbf{I}$ 与 $X\boldsymbol{\sigma} = \mathbf{0}$，纯多项式展开立证 $(\mathbf{I} - X)\bigl((1-\lVert\boldsymbol{\sigma}\rVert^2)\mathbf{I} + 2X + 2\boldsymbol{\sigma}\boldsymbol{\sigma}^\top\bigr) \equiv (1 + \lVert\boldsymbol{\sigma}\rVert^2)(\mathbf{I} + X)$（`手工推导`）：
 
-- **分母恒正、双卡全域覆盖**：对一切 $\boldsymbol{\sigma} \in \mathbb{Q}^3$，$\det(\mathbf{I} - X) = 1 + \lVert\boldsymbol{\sigma}\rVert^2 \ge 1 > 0$，正向有理求逆永远精确可解；逆变换在一切非半周旋转（$-1 \notin \operatorname{Spec}(\mathbf{R})$，即 $\det(\mathbf{R}+\mathbf{I}) \neq 0$）上精确恢复 $X \in \mathfrak{so}(3,\mathbb{Q})$，而 $180^\circ$ 对径半周旋转 $\mathbf{R}_\pi(\mathbf{n}) = \frac{2\mathbf{n}\mathbf{n}^\top}{\lVert\mathbf{n}\rVert^2} - \mathbf{I}$（$\mathbf{n}\in\mathbb{Z}^3\setminus\{\mathbf{0}\}$）则由对径阴影第二图卡或两次 $90^\circ$ 有理旋转乘积零奇点补齐（在球面开覆盖侧，内核定理 [`rational_six_axis_open_cover`](lean:D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover)，`LEAN ✓`，更仅用六根模方为 $5$ 的整向量 $(\pm 1, \pm 2, 0)$ 轮换轴与纯有理平方不等式 $2\langle x, \mathrm{axis}_i\rangle^2 > 5$ 即给出单位二球面的无正交开覆盖）；
+- **分母恒正、双卡全域覆盖**：对一切 $\boldsymbol{\sigma} \in \mathbb{Q}^3$，$\det(\mathbf{I} - X) = 1 + \lVert\boldsymbol{\sigma}\rVert^2 \ge 1 > 0$，正向有理求逆永远精确可解；逆变换在一切非半周旋转（$-1 \notin \operatorname{Spec}(\mathbf{R})$，即 $\det(\mathbf{R}+\mathbf{I}) \neq 0$）上精确恢复 $X \in \mathfrak{so}(3,\mathbb{Q})$，而 $180^\circ$ 对径半周旋转 $\mathbf{R}_\pi(\mathbf{n}) = \frac{2\mathbf{n}\mathbf{n}^\top}{\lVert\mathbf{n}\rVert^2} - \mathbf{I}$（$\mathbf{n}\in\mathbb{Z}^3\setminus\{\mathbf{0}\}$）则由对径阴影第二图卡或两步互补非半周有理凯莱旋转乘积 $\mathbf{R}(\mathbf{n})\,\mathbf{R}(\mathbf{n}/\lVert\mathbf{n}\rVert^2)$ 零奇点补齐（在球面开覆盖侧，内核定理 [`rational_six_axis_open_cover`](lean:D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover)，`LEAN ✓`，更仅用六根模方为 $5$ 的整向量 $(\pm 1, \pm 2, 0)$ 轮换轴与纯有理平方不等式 $2\langle x, \mathrm{axis}_i\rangle^2 > 5$ 即给出单位二球面的无正交开覆盖）；
 - **零超越数一步保正交**：全程仅有整数加减乘除，不含半个 $\pi, e, \ln$（对比传统自然对数对一切整数 $n \ge 2$ 必沦为无理数 $\ln n \notin \mathbb{Q}$，[`irrational_log_natCast`](lean:D5/S3/Constants/Irrationality/LogNaturalIrrationality.irrational_log_natCast)，`LEAN ✓`），却对任意输入与任意连续步数 $N$ 严格满足 $\mathbf{R}(\boldsymbol{\sigma})^\top \mathbf{R}(\boldsymbol{\sigma}) \equiv \mathbf{I}$ 与 $\det\mathbf{R}(\boldsymbol{\sigma}) \equiv \mathbf{1}$！
 
 ::: {.viz src="infinity-free-rational-mathematics-sandbox" preset="rational-cayley-rotor-vs-taylor-series" height="500"}
