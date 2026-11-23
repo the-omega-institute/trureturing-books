@@ -80,6 +80,45 @@ $W\setminus S$ 在 $H$ 内，$T\setminus H$ 在 $H$ 外。这两块都在 $K\set
 
 取 $q=1/2$、$c=1/6$，得到第一象限中 $a+b\le1/6$ 的整个三角形。两项分别都能达到 $1/6$。把 $H,K$ 的事件取补，就得到二分图的禁邻占位模型。三个位点的占位率为 $1/2$，另两个为 $1/3$。五条边上的占位率之和均为 $5/6$，两个起点仍争用同一块概率容量。
 
+图上的环也给出一组可以逐条检查的联合约束。加一个恒为零的参考位 $O$，用 $d_{uv}$ 表示两个位点读数不一致的概率。于是 $d_{Ov}$ 就是位点 $v$ 的边缘概率。沿一条闭合途径标记奇数条边，把标记边上的 $d_{uv}$ 换成 $1-d_{uv}$。各边的改写结果之和至少为一。每份二值样本都至少在一步违背这组奇偶要求，因此任意共同概率律都满足这条不等式。
+
+::: {.theorem #thm-ch39-fib-cycle-completion lean="D5/S1/Words/AdmissibleWords/FIBCycleRelaxation.cycle_completion_iff" title="环不等式给出的精确范围"}
+取 $q,c\ge0$ 且 $q+c\le1$。沿用五点图的记号，指定参考位到 $S,T,W$ 的距离为 $q$，到 $H,K$ 的距离为 $q+c$。指定五条包含边的距离均为 $c$，并指定 $d_{WS}=2a$、$d_{TH}=c+2b$。这些读数可以补齐为满足全部奇数标记环不等式的对称距离表，当且仅当
+
+$$
+0\le a\le\min(q,c),\qquad
+0\le b\le\min(q,c,1-q-c).
+$$
+:::
+
+::: {.proof}
+在环 $O\to W\to S\to O$ 上依次只标记最后一条边或只标记中间一条边，分别得到 $a\ge0$ 和 $a\le q$。用 $W\to H\to S\to W$ 并只标记返回边，得到 $a\le c$。同样从 $O\to T\to H\to O$ 得到 $b\ge0$ 与 $b\le q$，将这三条边全部标记则得到 $b\le1-q-c$。$T\to K\to S\to H\to T$ 只标记返回边给出 $b\le c$。
+
+反过来，取 $d_{HK}=2b$，并取 $d_{ST}=d_{WT}=\max(a,2b)$。所得距离满足三角不等式，每个三角形的周长至多为二。把每个位点复制到两个副本，同侧用 $d_{uv}$，异侧用 $1-d_{uv}$。三角不等式和周长界保证两个副本合在一起仍满足三角不等式。沿标记边切换副本，闭合途径会到达原位点的另一副本。两个副本相距一，所以每条这样的途径总长至少一。完整证明由 Lean 内核检查。
+:::
+
+在 $q=1/2,c=1/6$ 的例子里，所有环检查允许整个 $[0,1/6]^2$。共同概率律的精确范围还要求 $a+b\le1/6$。用距离表示，这条额外约束来自五边形割不等式与三角不等式 $d_{HT}\le d_{HK}+d_{KT}$ 的和，消去未指定的 $d_{HK}$。[Avis、Imai 与 Ito，定义 6 和定理 4](https://arxiv.org/abs/math/0601375)
+
+同一块共享容量对五个边缘概率不等的情形也成立。此时两个端点差各自有一个区间，它们的和仍受 $K$ 中去掉 $S$ 后的概率质量约束。
+
+::: {.theorem #thm-ch39-fib-unequal-joint-range lean="D5/S1/Words/AdmissibleWords/FIBUnequalMarginals.joint_range" title="五个边缘概率下的精确联合范围"}
+在半开单位区间内，要求可测事件 $S,H,K,T,W$ 的概率分别为 $s,h,k,t,w$，且 $S,W\subseteq H\cap K$、$T\subseteq K$。指定 $a=\Pr(W\setminus S)$ 和 $b=\Pr(T\setminus H)$。这样的事件族存在，当且仅当
+
+$$
+\begin{aligned}
+&k\le1,\qquad t\le k,\\
+&\max(0,w-s)\le a\le\min(w,h-s),\\
+&\max(0,t-h)\le b\le\min(t,1-h),\qquad a+b\le k-s.
+\end{aligned}
+$$
+:::
+
+::: {.proof}
+$W\setminus S$ 同时包含于 $W$ 和 $H\setminus S$，$T\setminus H$ 同时包含于 $T$ 和 $H$ 的补集。两个差集的下界由能留在 $S$ 或 $H$ 内的最大质量给出。它们互斥且都包含于 $K\setminus S$，故总概率至多为 $k-s$。
+
+为构造事件，把 $K$ 取为 $[0,k)$，让 $H\cap K$ 占据长度为 $r=\max(s+a,t-b,h+k-1)$ 的前段。约束保证 $r\le h$、$r\le k-b$，且 $K$ 右侧容得下补足 $H$ 的质量 $h-r$。将 $S$ 和 $W$ 放在这个前段内，使它们的重合长度为 $w-a$。$T$ 的前 $t-b$ 单位质量放在前段内，再把长度为 $b$ 的一段紧接在前段之后。完整证明由 Lean 内核检查。
+:::
+
 在 `trureturing` 的直接编码器模型中，给定整数 $N \ge 2$ 与阶数 $K \ge 2$，将 $\{0, 1, \dots, N\}$ 按是否为素数划分为非素数逻辑页（$b = \mathrm{false}$，维数 $M_0 > 0$）与素数逻辑页（$b = \mathrm{true}$，维数 $M_1 > 0$）。记 $C_{m, b}$ 为首比特等于 $b$ 的长度 $m$ 禁 $1^K$ 合法字集，其基数为 $c_{m, b} = |C_{m, b}|$；对每个阈值 $0 \le s < K$，定义左端低尾游程累计行数与右端相容邻域字数：
 
 $$
