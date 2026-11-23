@@ -100,6 +100,18 @@ The zero residue alone limits how small a cyclic certificate can be. Set $R=\{0\
 
 At the ζ-tail parameters of [the variance bound](ch34-s28-s03-s02-collision-variance.md), this requires $\log q\ge\log N+2p\log\log T-O(p)$ for a single modulus or for the harmonic mean in the average. Evaluating the character sum term by term uses $q$ terms for that modulus. An average needs at least one modulus as large as its harmonic mean. A method to bound the weighted mass at the target resolution with feasible asymptotic cost remains open.
 
+One can also test which Fourier moments can arise from the same initial weights. On $\mathbb Z/4\mathbb Z$, let $w=(a,b,c,d)$ be a probability weight, and let $u=|\widehat w(1)|^2$, $v=|\widehat w(2)|^2$. The discrete Fourier transform without the factor $1/4$ gives
+$$
+u=(a-c)^2+(b-d)^2,\qquad v=(a+c-b-d)^2.
+$$
+The pairs attained by a common $w$ are exactly those satisfying
+$$
+0\le v\le1,\qquad 0\le u\le(1+v)/2.
+$$
+Write $e,o$ for the total masses on the even and odd residues. The two differences $a-c,b-d$ range independently in $[-e,e]$ and $[-o,o]$. Consequently $u$ is at most $e^2+o^2=(1+v)/2$. Given $v$, take $e=(1+\sqrt v)/2$ and $o=(1-\sqrt v)/2$. Scaling both differences by the same fraction of their endpoint values fills the interval from zero to the maximum.
+
+For the difference of two independent $p$-fold sums, the Fourier coefficients at $1,2$ are $u^p,v^p$. If $v^p=0$ and $p\ge2$, the first coefficient has maximum $2^{-p}$. In the relaxation to symmetric probability laws with nonnegative Fourier coefficients and zero second coefficient, both parity masses are $1/2$. The first coefficient has maximum $1/2$, attained by $(1/2,1/4,0,1/4)$. The relaxed maximum is $2^{p-1}$ times the attainable one. The gap comes from requiring the two high moments to arise from common initial weights. Applying this idea to actual ζ ordinates requires quantitative constraints on the character moments of their common spectrum.
+
 For actual ζ ordinates, use the tail above $X=e^{-D}T^\beta$ from the preceding section, with $\delta=\log T$ and $g_\gamma=\gamma/r$. For $H=\exp(cT^\beta\log T)$, take $N=\lfloor HT^2/r\rfloor_++1$ to keep the mesh error at most $rB/(2T^2)$. To bound the start, a finite $L=L(T)$ must satisfy the budget $KNE_p(2/L)<(\log T)^{2p}$. The target order $p$ grows on the scale of $T^\beta\log T$. For fixed finite tail and fixed $p$, $E_p(2/L)$ eventually equals the exact collision mass $E_p(0)$ as $L$ increases. Quantifying $L$ requires a weighted bound at positive resolution. Definition 7 in Tao, Trudgian, and Yang counts unweighted quadruples at unit scale, and Theorem 64 gives estimates for fixed $\sigma\ge7/10$. The growing-order weighted bound for the critical-line tail remains open. [Definition 7 and Theorem 64](https://arxiv.org/html/2501.16779v1) · [Research question](https://github.com/the-omega-institute/trureturing/issues/33519)
 
 ## What low-order collision masses determine
