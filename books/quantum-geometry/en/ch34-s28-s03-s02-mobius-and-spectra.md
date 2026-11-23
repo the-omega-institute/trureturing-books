@@ -644,6 +644,32 @@ At $T=2r/L$ use $D(T)\ge\varepsilon$ in the moving-coefficient formula and pass 
 
 Whether the actual zeta zeros admit a family giving this positive lower bound remains open. A fixed incompatible relation supported at finite height gives a lower bound that tends to zero as $W(T)$ grows.
 
+::: {.theorem #thm-ch31-phase-relation-lattice title="The complete relation lattice controls the phase deficit" lean="D5/S3/Fourier/WeightedPhaseRelationLattice.weighted_phase_deficit_bounds"}
+Take finitely many real frequencies $\gamma_j$ and positive weights $w_j$ with total weight $W=\sum_j w_j>0$. Define the deficit $D$ as in [@thm-ch31-weighted-phase-limsup]. Let $K$ be an integer matrix with real-linearly independent rows whose integer span equals the lattice of vectors $k$ satisfying $\sum_j k_j\gamma_j=0$. Write $M=\operatorname{diag}(w_j)$ and $G=KM^{-1}K^{\mathsf{T}}$. For each integer vector $z$, put $b(z)=2\pi z-(\pi/2)K\mathbf{1}$, where $\mathbf{1}$ is the all-ones vector. Define
+
+$$
+E=\inf_z b(z)^{\mathsf{T}}G^{-1}b(z).
+$$
+
+Then
+
+$$
+\frac{2E}{\pi^2W}\le D\le\frac{E}{2W}.
+$$
+
+When $K$ has no rows, $E=0$. Also, $D=0$ if and only if some integer vector $z$ satisfies $b(z)=0$, or equivalently, every row sum of $K$ is divisible by $4$.
+:::
+
+::: proof
+The closure of the common-time orbit is exactly the set of phases on which every integer relation has character value $1$. For any real $a$, the times $t\ge a$ and the times $t>a$ each give the same closure. Write each angle as $\pi/2+x_j$. The resulting phase belongs to that closure exactly when $Kx=b(z)$ for some integer vector $z$. On each such affine set, $x_0=M^{-1}K^{\mathsf{T}}G^{-1}b(z)$ attains the minimum $b(z)^{\mathsf{T}}G^{-1}b(z)$ of the weighted square $x^{\mathsf{T}}Mx$. Since $K(x-x_0)=0$, the cross term in that square vanishes.
+
+The weighted phase cost is $\sum_j w_j(1-\cos x_j)$. Applying $1-\cos x\le x^2/2$ to each minimizing lift $x_0$ and taking the infimum over $z$ gives the upper bound. Every admissible phase also has angle offsets satisfying $|x_j|\le\pi$. On these offsets $1-\cos x_j\ge 2x_j^2/\pi^2$, and the weighted square is at least $E$. This gives the lower bound. By continuity the phase cost has the same infimum on the orbit and its closure.
+
+The orbit closure is compact, so a phase of minimum cost exists. If $D=0$, the positive weights and the cosine lower bound force every angle offset of this phase to be zero. The congruence $Kx=b(z)$ gives $b(z)=0$. Conversely, $b(z)=0$ makes the zero offset feasible, giving a phase of zero cost.
+:::
+
+Assume RH. For the actual zero cutoffs in [@thm-ch31-weighted-phase-limsup], compute $E(T)$ with the analytic multiplicity weights and a full relation matrix satisfying the theorem's hypotheses. The two constants are uniform across cutoffs, so $D(T)\to0$ is equivalent to $E(T)/W(T)\to0$. Whether this normalized lattice distance tends to zero for the actual zeta zeros remains open.
+
 ::: {.theorem #thm-ch31-short-relation-deletion title="Short integer relations control the weight omitted for phase compatibility" lean="D5/S3/Fourier/ShortPhaseRelations.weighted_deletion_bounds"}
 Take finitely many real frequencies $\gamma_j$ with nonnegative weights $w_j$ of total weight $W>0$. A subset is compatible if the coefficient sum of every integer relation among its frequencies is divisible by $4$. Let $P$ be the least fraction of total weight that must be omitted to leave a compatible subset. For a set of times $\mathcal T$, put
 

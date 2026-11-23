@@ -258,6 +258,7 @@
   - [39.7 Past, Present, Future and the 0 · 1/2 · 1 Pure Rational Causal-Jet Matrix: Spherical Jet Ladder, Midpoint Self-Duality, and the 1 ↦ 0 Cosmic Heartbeat](ch39-s30-past-present-future-rational-jet-triad.md)
   - [39.8 The Real Error-Magnification Axis and Prime Adelic Closure: From Tangent Linear Distortion and Gibbs–Rodrigues Curved Synthesis to the Incommensurable Prime Anti-Deadlock Engine](ch39-s31-real-error-axis-and-prime-adelic-closure.md)
   - [39.9 The Holographic Circular-Arc Manifold and Adelic Solenoid Unity: Beyond Riemannian Tangent Plates, Smoothly Unifying Addition, Multiplication, Logarithm, and Prime Loops](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md)
+  - [39.10 Riemann's 1854 + 1859 Synthesis: Polishing Tangent-Plate Manifolds via the Proven 1/2 Critical-Line Spectrum](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md)
 
 # Coda and Appendices
 

@@ -644,6 +644,32 @@ $$
 
 实际 ζ 零点是否有满足这一正下界的关系族仍是开放问题。单个不相容关系若固定在有限高度，其下界随 $W(T)$ 增长而趋于零。
 
+::: {.theorem #thm-ch31-phase-relation-lattice title="完整整数关系的格点距离控制相位亏损" lean="D5/S3/Fourier/WeightedPhaseRelationLattice.weighted_phase_deficit_bounds"}
+取有限实频率 $\gamma_j$ 与正权重 $w_j$，总权重 $W=\sum_j w_j>0$，亏损 $D$ 按 [@thm-ch31-weighted-phase-limsup] 定义。设整数矩阵 $K$ 的行在实数域上线性无关，且这些行的整数线性张成恰为所有满足 $\sum_j k_j\gamma_j=0$ 的整数向量 $k$ 所组成的格。记 $M=\operatorname{diag}(w_j)$，$G=KM^{-1}K^{\mathsf{T}}$。对每个整数向量 $z$，令 $b(z)=2\pi z-(\pi/2)K\mathbf{1}$，其中 $\mathbf{1}$ 是全一向量。定义
+
+$$
+E=\inf_z b(z)^{\mathsf{T}}G^{-1}b(z).
+$$
+
+则
+
+$$
+\frac{2E}{\pi^2W}\le D\le\frac{E}{2W}.
+$$
+
+当 $K$ 无行时，$E=0$。此外，$D=0$ 当且仅当存在整数向量 $z$ 使 $b(z)=0$，也就是 $K$ 的每一行之和都是 $4$ 的倍数。
+:::
+
+::: proof
+任意有限实频率的共同时间轨道闭包，恰由所有整数关系的特征值等于 $1$ 来刻画。对任意实数 $a$，仅取时间 $t\ge a$ 或 $t>a$ 也得到相同闭包。把目标相位写成 $\pi/2$，角偏移记为 $x$，则 $x+\pi\mathbf{1}/2$ 给出轨道闭包中的相位，当且仅当 $Kx=b(z)$ 对某个整数向量 $z$ 成立。在该仿射集合中，加权平方误差 $x^{\mathsf{T}}Mx$ 由 $x_0=M^{-1}K^{\mathsf{T}}G^{-1}b(z)$ 取得最小值 $b(z)^{\mathsf{T}}G^{-1}b(z)$。因为 $K(x-x_0)=0$，展开加权平方误差时交叉项为零。
+
+相位代价的加权和为 $\sum_j w_j(1-\cos x_j)$。用 $1-\cos x\le x^2/2$ 估计每个 $x_0$ 的代价，再对 $z$ 取下确界，得到上界。反过来，每个可行相位都可以取 $|x_j|\le\pi$ 的偏移角。此时 $1-\cos x_j\ge 2x_j^2/\pi^2$，相应的加权平方误差至少为 $E$，从而得到下界。连续性保证轨道闭包与实际轨道的代价下确界相同。
+
+紧致的轨道闭包上存在代价最小的相位。若 $D=0$，正权重和余弦下界迫使其所有偏移角为零，于是 $Kx=b(z)$ 给出 $b(z)=0$。反过来，$b(z)=0$ 时，零偏移给出代价为零的可行相位。
+:::
+
+假设 RH。对 [@thm-ch31-weighted-phase-limsup] 的实际零点截断，以解析重数权重计算 $E(T)$，并使用满足定理假设的完整关系矩阵。两个常数与截断无关，所以 $D(T)\to0$ 等价于 $E(T)/W(T)\to0$。实际 ζ 零点的这一归一化格点距离是否趋零仍开放。
+
 ::: {.theorem #thm-ch31-short-relation-deletion title="短整数关系控制实现相位相容所需的舍弃权重" lean="D5/S3/Fourier/ShortPhaseRelations.weighted_deletion_bounds"}
 取有限实频率 $\gamma_j$ 和非负权重 $w_j$，总权重 $W>0$。若一个子集上的所有整数关系都满足系数和被 $4$ 整除，则称该子集相容。令 $P$ 为使剩余子集相容所须舍弃的最小权重占比。对时间集合 $\mathcal T$，令
 

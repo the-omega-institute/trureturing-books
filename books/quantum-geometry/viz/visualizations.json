@@ -9129,6 +9129,119 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "riemann-spectral-manifold-polishing-sandbox",
+      "code": "OMEGA//POLISH",
+      "title": "黎曼 1854 + 1859 双璧合龙沙盘：以已证 1/2 临界线谱磨光切板黎曼流形",
+      "title_en": "Riemann 1854 + 1859 Synthesis: Polishing Tangent-Plate Manifolds via the Proven 1/2 Critical-Line Spectrum",
+      "summary": "连接黎曼 1854 流形几何遗问与 1859 临界线谱：以二阶三元吻合球取代一阶平直切板 T_pM，对比施瓦茨灯笼折角发散与 σ≡1/2 正定托普利茨/李曲率谱核、显式公式 O(X^{−1/2} ln² X) 相对残差退火、GRH 多特征各向同性均分，以及反事实离轴零点 σ=1/2+δ 引发的正定破缺与棱角失稳。",
+      "summary_en": "Bridges Riemann's 1854 manifold-geometry question and 1859 critical-line spectrum: replacing first-order flat tangent plates T_pM with second-order osculating ternion spheres, contrasting Schwarz-lantern normal oscillation against σ≡1/2 positive-semidefinite Toeplitz/Li spectral kernels, O(X^{−1/2} ln² X) relative explicit-formula annealing, GRH multi-character isotropy, and counterfactual off-line σ=1/2+δ positivity breakdown.",
+      "path": "riemann-spectral-manifold-polishing-sandbox/",
+      "thumbnail": "riemann-spectral-manifold-polishing-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-22",
+      "chapter": 39,
+      "section": "39.10",
+      "presets": [
+        "riemann-1854-tangent-lantern-creases",
+        "osculating-ternion-sphere-base-swap",
+        "critical-half-toeplitz-spectral-glue",
+        "counterfactual-offline-spike-breakdown",
+        "polished-isotropic-manifold-completion"
+      ],
+      "preset_titles": {
+        "riemann-1854-tangent-lantern-creases": {
+          "zh": "1854：切板与灯笼的折痕抹不平",
+          "en": "1854: plates and lantern keep their creases"
+        },
+        "osculating-ternion-sphere-base-swap": {
+          "zh": "换底：二阶吻合球换下一阶切板",
+          "en": "Base swap: osculating spheres for flat plates"
+        },
+        "critical-half-toeplitz-spectral-glue": {
+          "zh": "换胶：像在单位圆上，接缝熔平",
+          "en": "Glue swap: images on the circle, seams melt"
+        },
+        "counterfactual-offline-spike-breakdown": {
+          "zh": "反事实离轴：像裂开，棱角长出",
+          "en": "Off the line: images split, spikes erupt"
+        },
+        "polished-isotropic-manifold-completion": {
+          "zh": "合龙（MODEL）：磨光的各向同性流形",
+          "en": "Completion (MODEL): the polished isotropic manifold"
+        }
+      },
+      "tags": [
+        "黎曼流形",
+        "临界线",
+        "施瓦茨灯笼",
+        "吻合球",
+        "托普利茨正性"
+      ],
+      "tags_en": [
+        "Riemannian manifold",
+        "Critical line",
+        "Schwarz lantern",
+        "Osculating sphere",
+        "Toeplitz positivity"
+      ],
+      "theory": [
+        {
+          "label": "§39.10 · 黎曼 1854+1859 双璧合龙与临界线谱磨光流形",
+          "label_en": "§39.10 · Riemann's 1854 + 1859 Synthesis and Critical-Line Spectral Manifold Polishing",
+          "href": "../zh/ch39-s33-riemann-1854-1859-spectral-manifold-polishing.html#sec-ch39-riemann-1854-1859-spectral-manifold-polishing",
+          "href_en": "../en/ch39-s33-riemann-1854-1859-spectral-manifold-polishing.html#sec-ch39-riemann-1854-1859-spectral-manifold-polishing"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_bounds"
+        },
+        {
+          "gid": "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_phases"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion"
+        },
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_eq_completed_zeta"
+        },
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_reflection"
+        },
+        {
+          "gid": "D5/S3/Weil/Mertens/IntegratedExplicit/WholeFormula.actual_integrated_explicit_formula"
+        },
+        {
+          "gid": "D5/S3/Weil/Mertens/IntegratedExplicit/RHPowerThreshold.u_div_rpow_tendsto_zero_iff"
+        },
+        {
+          "gid": "D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree.not_rh_forces_canonical_curvature_failure"
+        },
+        {
+          "gid": "D5/S3/Weil/TestFunctions/FinitePowerSumToeplitzCircleCriterion.toeplitz_posSemidef_iff_norm_eq_one"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
