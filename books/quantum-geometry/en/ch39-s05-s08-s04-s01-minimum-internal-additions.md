@@ -152,3 +152,29 @@ Every block through a point uses two of its partners. The complete packing cover
 :::
 
 For example, the Fano plane on seven labels has seven blocks. With $d=1$, the Latin squares give $147$ blocks and the nine residue classes contribute up to $63$. The two largest saturated sizes are $210$ and $208$. For the local maximal-packing spectrum, see [Colbourn, Section 2.3.3](https://ajc.maths.uq.edu.au/pdf/4/ocr-ajc-v4-p143.pdf).
+
+### Matching leaves after deleting a point
+
+For an even number of labels, a complete Steiner triple system on one additional point gives a largest partial packing. Delete a point $p$ and every block containing it. For each remaining point $a$, the original block covering $\{p,a\}$ contains another remaining point $m(a)$. The uncovered pairs are exactly the pairs $\{a,m(a)\}$. Each label has one unused partner.
+
+::: {.theorem #thm-joint-circuit-steiner-point-deleted-switch title="The switch criterion for a point-deleted packing" lean="D5/S3/Combinatorics/Matroids/PointDeletedSteinerSwitch.point_deleted_switch"}
+Delete a point from any complete Steiner triple system. Choose a remaining $v$ distinct from $a$ and $c=m(a)$, and let $b,d$ complete the pairs $av,cv$ in the original packing. Removing $abv,vdc$ and inserting $avc$ gives a partial Steiner triple system with exactly one fewer block. Its uncovered pairs replace the original matching edge $ac$ by the path $a,b,v,d,c$. The switched packing is inclusion maximal exactly when $d\ne m(b)$.
+:::
+
+::: proof
+The matching edge $ac$ was unused. The new block also reuses the two edges $av,cv$ released by the old blocks, so no pair is repeated. The other four edges of the removed blocks form the stated path. The path has no triangle, and a vertex has at most one matching edge. Any triangle must use two consecutive path edges. The endpoints $a,c$ have lost their matching edge, leaving the triangle on $b,v,d$ as the only possibility. It closes exactly when $d=m(b)$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-joint-circuit-steiner-matching-first-deficit title="One switch realizes the largest size minus one" lean="D5/S3/Combinatorics/Matroids/PointDeletedSteinerSwitch.matching_switch_first_deficit"}
+Keep the cross-row triples and normalization of this section. Suppose the $r$ labels admit a packing whose uncovered pairs form a perfect matching, with a switch satisfying the maximality criterion above. The largest saturated extension has
+$$
+N_{\max}=3^d r^2+3^{d+1}\frac{r(r-2)}{6}
+$$
+added within-row triples, and $N_{\max}-1$ also occurs.
+:::
+
+::: proof
+Each block uses two partners at each of its three points. The matching leaves one partner at every point, so $r$ is even and every other packing must leave at least one partner at every point. Thus the matching packing attains the upper bound $r(r-2)/6$. The matching contains no triangle, so this packing is maximal in each class. Using it in every class attains the global bound. A switch in one class gives the maximal packing one block smaller and realizes $N_{\max}-1$. The full proof is checked by the Lean kernel.
+:::
+
+The switch criterion depends on the original Steiner system. For example, delete the origin from the affine plane on $\mathbb F_3^2$. Then $m(a)=-a$, while $b=-v-a$ and $d=-v+a$. Since $b+d=v\ne0$, the switch is maximal. With $r=8,d=1$, this gives saturated sizes $264$ and $263$. In the binary vector representation of the Fano plane, the two completion points satisfy $b+d=p$, and the same switch always leaves a triangle that can be added. [Local maximal-packing spectrum](https://doi.org/10.1007/BF01388482)
