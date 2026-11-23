@@ -806,6 +806,24 @@ $$
 
 实际 ζ 零点的截断仍需要独立确定不相容关系及其支撑。
 
+::: {.theorem #thm-ch31-zeta-cutoff-recurrence title="有效线性无关下的零点截断复现" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHWeightedSineCutoff.eventual_weighted_sine_cutoff_tradeoff"}
+假设 RH 与 Lamzouri 的有效线性无关猜想成立。按该猜想，每个 $\eta>0$ 都对应一个常数 $C_\eta>0$。对 $X\ge2$，取截至 $X$ 的不同正零点纵坐标，任意非零整数系数向量若每个系数的绝对值至多为 $N(X)$，则其频率和的绝对值至少为 $C_\eta\exp(-X^{1+\eta})$。这里 $N(X)$ 按解析重数计数。
+
+沿用 [@thm-ch31-weighted-phase-limsup] 的 $w_\gamma$ 与 $W(T)$，记 $S(T,v)=\sum_{0<\gamma\le T}w_\gamma\sin(\gamma v)$。固定 $r>0$、$\beta>0$。若 $\varepsilon>2(1-\min(\beta,1)^2)$，则对所有充分大的 $T$，有 $W(T)>0$，且每个区间 $[a,a+\exp(T^\beta)]$ 内都有 $u$ 满足
+
+$$
+1-\frac{S(T,u/r)}{W(T)}<\varepsilon.
+$$
+:::
+
+::: proof
+取 $0<\alpha<\min(\beta,1)$ 使 $2(1-\alpha^2)<\varepsilon$，先保留截至 $X=T^\alpha$ 的零点。由 $W(T)/\log^2 T\to1/(4\pi)$ 得 $W(X)/W(T)\to\alpha^2$。在任何共同时间，舍弃项对亏损的贡献至多为其权重占比的两倍。
+
+取固定的保留段亏损容许值 $\varepsilon_0>0$，使 $2(1-\alpha^2)+\alpha^2\varepsilon_0<\varepsilon$。固定满足 $1/N<\varepsilon_0$ 的 $N$，并取 $\eta>0$ 使 $\alpha(1+\eta)<\beta$。最终有 $N\le N(X)$。对保留频率 $\gamma/r$、目标 $\pi/2$ 应用 [@thm-ch31-finite-phase-recurrence]。有效线性无关给出分离量 $C_\eta\exp(-X^{1+\eta})/r$，而保留维数至多为 $N(X)=O(X\log X)$。取对数后，分离量和系数总和分别带来 $T^{\alpha(1+\eta)}$ 与 $O(T^\alpha\log T)$ 的开销，两者都比 $T^\beta$ 低阶。在同一个时刻合并保留段亏损和舍弃权重估计，即得结论。
+:::
+
+定理给出以有效线性无关为条件的充分区间长度。该猜想允许 $C_\eta$ 取无效常数。Lamzouri 的大值定理在另一组系数假设下，对 $[2,X]$ 上截断至 $X^2$ 的和式取极值。 [Lamzouri 的猜想 1.1 与定理 1.5](https://arxiv.org/html/2311.04860v2#S1.SS3)
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 

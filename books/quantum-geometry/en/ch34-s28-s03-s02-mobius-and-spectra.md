@@ -806,6 +806,24 @@ Every relation is an integer multiple of $(3,-1)$. The length-four relation has 
 
 For actual zeta cutoffs, the incompatible relations and their supports still require independent determination.
 
+::: {.theorem #thm-ch31-zeta-cutoff-recurrence title="Zeta cutoff recurrence under Effective LI" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHWeightedSineCutoff.eventual_weighted_sine_cutoff_tradeoff"}
+Assume RH and Lamzouri's Effective LI conjecture. It gives, for every $\eta>0$, a constant $C_\eta>0$ such that the absolute value of every nonzero coefficient vector's frequency sum on the distinct positive ordinates through $X\ge2$ is at least $C_\eta\exp(-X^{1+\eta})$ when the absolute value of each coefficient is at most $N(X)$. Here $N(X)$ counts zeros with analytic multiplicity.
+
+Use $w_\gamma$ and $W(T)$ from [@thm-ch31-weighted-phase-limsup] and write $S(T,v)=\sum_{0<\gamma\le T}w_\gamma\sin(\gamma v)$. Fix $r>0$ and $\beta>0$. For any $\varepsilon>2(1-\min(\beta,1)^2)$, for all sufficiently large $T$, $W(T)>0$ and every interval $[a,a+\exp(T^\beta)]$ contains $u$ with
+
+$$
+1-\frac{S(T,u/r)}{W(T)}<\varepsilon.
+$$
+:::
+
+::: proof
+Choose $0<\alpha<\min(\beta,1)$ so that $2(1-\alpha^2)<\varepsilon$ and retain the ordinates through $X=T^\alpha$. The limit $W(T)/\log^2 T\to1/(4\pi)$ gives $W(X)/W(T)\to\alpha^2$. The omitted frequencies contribute at most twice their normalized weight to the loss at any time.
+
+Choose a fixed retained loss tolerance $\varepsilon_0>0$ with $2(1-\alpha^2)+\alpha^2\varepsilon_0<\varepsilon$. Fix $N$ with $1/N<\varepsilon_0$, and choose $\eta>0$ with $\alpha(1+\eta)<\beta$. Eventually $N\le N(X)$. Apply [@thm-ch31-finite-phase-recurrence] to the retained frequencies $\gamma/r$ and target $\pi/2$. Effective LI gives a gap $C_\eta\exp(-X^{1+\eta})/r$. The retained dimension is at most $N(X)=O(X\log X)$. On the logarithmic scale, the gap and the coefficient mass cost $T^{\alpha(1+\eta)}$ and $O(T^\alpha\log T)$, respectively. Both are lower order than $T^\beta$. Combining the retained loss with the omitted-mass estimate at the same time gives the result.
+:::
+
+The theorem supplies a sufficient interval length conditional on Effective LI. The constant in Effective LI may be ineffective. Lamzouri's large-value theorem takes extrema on $[2,X]$ of sums truncated at $X^2$ under a separate set of coefficient assumptions. [Lamzouri, Conjecture 1.1 and Theorem 1.5](https://arxiv.org/html/2311.04860v2#S1.SS3)
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 
