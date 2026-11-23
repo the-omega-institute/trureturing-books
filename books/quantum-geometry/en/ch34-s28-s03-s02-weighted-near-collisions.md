@@ -37,7 +37,7 @@ $$
 Use two uniform offsets around $A+L$ to average the sum of moments at all $N$ grid points. The upper moment bound and the strict budget give an average below $\delta^{2p}$. A common start therefore has $|Z|<\delta$ at every grid point. The two offsets can both be taken in the open interval, giving $A<a<A+2L$. The absolute imaginary part is bounded by the complex modulus, and the slope pays for the distance to a grid point. When $H>0$, use the midpoints of $N$ equal subintervals. Every point of the closed window is within $H/(2N)$ of a midpoint. At $H=0$ each grid point equals the start. When $H<0$, the window is empty. The full proof is checked by the Lean kernel.
 :::
 
-### A cyclic certificate from interval enclosures
+## A cyclic certificate from interval enclosures
 
 Take integers $a_j$ and a step $s$ with certified errors $|g_j-sa_j|\le e$. For each degree-$p$ vector put $A_m=\sum_jm_ja_j$. With the same coefficients $c_m$ as in $E_p$, let $C_q(R)$ be the sum of $c_mc_n$ over ordered pairs with $A_m-A_n\bmod q\in R$. Write $R_q(H)$ for the image of the integer interval $[-H,H]$ modulo $q$. The image counts each residue once and is empty for $H<0$.
 
@@ -76,9 +76,33 @@ Expand $S(k)^p$ by degree vectors and multiply by its complex conjugate. Summing
 
 For $p\ge1$ and $t>0$, a nearest lattice point at step $s=t/(4p)$ has error at most $s/2$. With $e=s/2$ the band has $H=5p$. If the real frequencies lie in an interval of width $D$, the integer coordinates have spread $u-l\le D/s+1$, so $q>4p^2D/t+6p$ suffices. These choices give $E_p(t)\le C_q(R_q(5p))\le E_p(3t/2)$. For fixed ζ ordinates, the input needs certified coordinate enclosures and weights. Rigorous interval arithmetic is known for finite-height zero computations. The modulus above is a sufficient size for evaluating the whole character sum, and grows inversely with $t$ for fixed $p,D$. Obtaining the required bound at the growing degree and exponentially small resolution with a feasible computation remains open. [Platt and Trudgian, finite-height verification](https://arxiv.org/abs/2004.09765)
 
+### Controlling wraparound across prime moduli
+
+A smaller modulus can count a pair whose lattice gap lies outside the band. Averaging over distinct primes bounds this excess by the number of primes that can divide the shifted gaps of one pair.
+
+::: {.theorem #thm-ch31-prime-cyclic-excess title="Prime moduli bound the total excess collision mass" lean="D5/S3/Fourier/Concentration/PrimeCyclicCollisionBudgets.sum_cyclic_excess_le"}
+Let $H$ be a nonnegative integer and $L_H$ the weighted mass of pairs with $|A_m-A_n|\le H$. Use nonnegative weights with total $W=\sum_jw_j$. Suppose every degree-$p$ lattice gap has magnitude at most the natural number $D$. Let $P$ be a finite set of primes at least the natural number $Q\ge2$. If the nonnegative integer $B$ satisfies
+$$
+Q^{B+1}>\prod_{y=-H}^H|D-y|,
+$$
+then
+$$
+0\le \sum_{q\in P}\bigl(C_q(R_q(H))-L_H\bigr)
+\le \min(B,|P|)\bigl(W^{2p}-L_H\bigr).
+$$
+:::
+
+::: proof
+Every in-band pair contributes for every modulus. For a pair outside the band, put $d=A_m-A_n$. Each prime that counts it divides $\prod_{y=-H}^H(|d|-y)$, since the band is symmetric. The factors are positive. The product of the distinct primes divides that product and is at least $Q$ to the power of their number. Since $|d|\le D$, the strict bound forces that number to be at most $B$. Sum over the weighted pairs to obtain the result. Gallagher's larger sieve uses the same divisibility step for a single difference. [Gallagher, proof of Theorem 1](https://doi.org/10.4064/aa-18-1-77-81)
+:::
+
+The zero residue alone limits how small a cyclic certificate can be. Set $R=\{0\}$ in the character formula. Every term is a nonnegative moment and the term at $k=0$ is $W^{2p}$. Thus $C_q(R_q(H))\ge W^{2p}/q$ for $H\ge0$. To certify the missing-window budget with a single cyclic bound, one therefore needs $q>KN(W/\delta)^{2p}$. For an average over a nonempty set $P$, the same inequality holds with $q$ replaced by the harmonic mean of its moduli.
+
+At the ζ-tail parameters of [the variance bound](ch34-s28-s03-s02-collision-variance.md), this requires $\log q\ge\log N+2p\log\log T-O(p)$ for a single modulus or for the harmonic mean in the average. Evaluating the character sum term by term uses $q$ terms for that modulus. An average needs at least one modulus as large as its harmonic mean. A method to bound the weighted mass at the target resolution with feasible asymptotic cost remains open.
+
 For actual ζ ordinates, use the tail above $X=e^{-D}T^\beta$ from the preceding section, with $\delta=\log T$ and $g_\gamma=\gamma/r$. For $H=\exp(cT^\beta\log T)$, take $N=\lfloor HT^2/r\rfloor_++1$ to keep the mesh error at most $rB/(2T^2)$. To bound the start, a finite $L=L(T)$ must satisfy the budget $KNE_p(2/L)<(\log T)^{2p}$. The target order $p$ grows on the scale of $T^\beta\log T$. For fixed finite tail and fixed $p$, $E_p(2/L)$ eventually equals the exact collision mass $E_p(0)$ as $L$ increases. Quantifying $L$ requires a weighted bound at positive resolution. Definition 7 in Tao, Trudgian, and Yang counts unweighted quadruples at unit scale, and Theorem 64 gives estimates for fixed $\sigma\ge7/10$. The growing-order weighted bound for the critical-line tail remains open. [Definition 7 and Theorem 64](https://arxiv.org/html/2501.16779v1) · [Research question](https://github.com/the-omega-institute/trureturing/issues/33519)
 
-### What low-order collision masses determine
+## What low-order collision masses determine
 
 Move the last frequency in $(0,1,k)$ to $k+\sqrt 2$. Below degree $k$, the counts on the first two coordinates cannot offset a change in the last count. At degree $k$, exactly one additional pair of count vectors can cancel in the integer spectrum.
 
@@ -110,7 +134,7 @@ Every nonnegative resolution below $1$ counts only exact collisions for the inte
 
 The count vector $(p,0,0)$ contributes $(1/4)^{2p}>0$ on the diagonal. Take the common resolution $t_p=1/[2(k+3)p]$. At fixed $k$ the ratio of the two masses there is bounded below by $\sqrt p/(32k)$. These finite spectra limit the high-order bounds one can infer from low-order collision masses alone. A bound for the actual ζ ordinates needs arithmetic information about their frequencies.
 
-#### Local statistics on a common lattice
+### Local statistics on a common lattice
 
 Assign each frequency $g_j$ an integer $m_j\ge0$ and round it down to $\widetilde g_j=2^{-m_j}\lfloor 2^{m_j}g_j\rfloor$, retaining its index and weight. Fix a tail with $N>0$ indices, frequencies in $[a,b]$, and $m_-\le m_j\le m_+$. Write $h=2^{-m_-}$. Each rounding error lies in $[0,h)$, so any difference of two frequencies changes by at most $h$ in absolute value. For $\ell\ge1$ distinct indices, take differences against the first frequency and multiply each by the same scale $\lambda\ge0$. A $K$-Lipschitz test in the maximum norm then changes by at most $K\lambda h$ per tuple. Summing over all ordered tuples and dividing by $N$ bounds the change in the statistic by $K\lambda h(N)_\ell/N$, where $(N)_\ell$ is the falling factorial.
 
@@ -124,7 +148,7 @@ The degree-$p$ sums have at most $1+p(B-A)$ possible integer positions. Group th
 
 For example, fix $m_j=\lceil(\log_2(2+g_j))^2\rceil$ once for each positive frequency. On shared tail indices with $cT^\alpha\le g_j\le T$, fixed $c,\alpha>0$, $N=O(T\log T)$, and at most polynomial growth of $\lambda$, the change in every such fixed-order statistic tends to zero. Fix $0<\beta<1$. At $p\asymp T^\beta\log T$, the denominator satisfies $\log[1+p(B-A)]=O((\log T)^2)$. If $W\asymp(\log T)^2$ and $\delta=\log T$, the missing-window moment budget requires normalized mass at most $\exp(-2p\log\log T+O(p))$ even with one time sample. The rounded spectrum's exact collision mass already exceeds that budget. The two local statistics use the same tail indices. Separate height cutoffs require accounting for entries that cross the endpoints. The transfer to the original spectrum gives a lower bound at resolution $ph$, and the upper bound at the finer target resolution remains open.
 
-### A finite frequency band forces close sums
+## A finite frequency band forces close sums
 
 Let $J$ have $N$ elements, with all $g_j\in[a,b]$. Write $F(m)=\sum_jm_jg_j$. There are $M=\binom{N+p-1}{p}$ count vectors of degree $p$.
 
