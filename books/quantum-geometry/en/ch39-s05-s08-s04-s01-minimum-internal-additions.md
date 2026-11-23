@@ -155,7 +155,7 @@ For example, the Fano plane on seven labels has seven blocks. With $d=1$, the La
 
 ### Matching leaves after deleting a point
 
-For an even number of labels, a complete Steiner triple system on one additional point gives a largest partial packing. Delete a point $p$ and every block containing it. For each remaining point $a$, the original block covering $\{p,a\}$ contains another remaining point $m(a)$. The uncovered pairs are exactly the pairs $\{a,m(a)\}$. Each label has one unused partner.
+If a complete Steiner triple system exists on $r+1$ points for even $r$, it gives a largest partial packing on $r$ labels. Delete a point $p$ and every block containing it. For each remaining point $a$, the original block covering $\{p,a\}$ contains another remaining point $m(a)$. The uncovered pairs are exactly the pairs $\{a,m(a)\}$. Each label has one unused partner.
 
 ::: {.theorem #thm-joint-circuit-steiner-point-deleted-switch title="The switch criterion for a point-deleted packing" lean="D5/S3/Combinatorics/Matroids/PointDeletedSteinerSwitch.point_deleted_switch"}
 Delete a point from any finite complete Steiner triple system. Choose a remaining $v$ distinct from $a$ and $c=m(a)$, and let $b,d$ complete the pairs $av,cv$ in the original packing. The five labels $a,b,v,d,c$ are distinct. Removing $abv,vdc$ and inserting $avc$ gives a partial Steiner triple system with exactly one fewer block. Its uncovered pairs replace the original matching edge $ac$ by the path $a,b,v,d,c$. The switched packing is inclusion maximal exactly when $d\ne m(b)$.
