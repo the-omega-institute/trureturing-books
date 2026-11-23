@@ -42,6 +42,20 @@ $$
 Positivity requires a nonnegative determinant. Equality gives the circle. Its center is the separable mixture, and its boundary consists of pure states. Partial transpose across any nontrivial cut moves the two cross terms to another orthogonal pair of basis states, where they form a block with eigenvalues $\pm|c|$. The negativity across each cut is therefore $|c|$. The local readings determine $p$. Reading the real and imaginary parts of $c$ determines the full state and its negativity.
 :::
 
+::: {.theorem #thm-ch39-fib-local-marginal-rank lean="D5/S3/Quantum/Entanglement/Marginals/LocalMarginalRank.finrank_marginalMap" title="Covered word pairs give the rank of local marginals"}
+Let the legal words on a finite site set be downward closed, so every subset of the occupied sites of a legal word is legal. Index a matrix over a field by ordered pairs of legal words. Given any family of measured regions $\mathcal S$, take the partial trace over the complement of each $S\in\mathcal S$. The rank of the collected linear map equals the number of ordered legal pairs $(x,y)$ for which
+
+$$
+x\cup y\subseteq S\quad\text{for some }S\in\mathcal S.
+$$
+:::
+
+::: {.proof}
+Order word pairs by the size of their occupied union. At a pair $(x,y)$, keep both words fixed on $x\cup y$ and sum the matrix entries obtained by adding simultaneous occupancies elsewhere. This defines a triangular change of coordinates with ones on the diagonal. Take the partial trace for $S$ and then apply the same change of coordinates. When $x\cup y\subseteq S$, the two sums group terms by their restriction to the region and recover the original coordinate. When the union extends outside the region, the coordinate is zero. Downward closure keeps the restricted words legal. The collected traces thus have the same kernel and rank as projection onto all covered coordinates. The full proof is checked by the Lean kernel.
+:::
+
+The three-site pyramid has $25$ ordered legal pairs. The numbers with union sizes $0,1,2,3$ are $1,9,13,2$, respectively. Each adjacent pair of sites accounts for two ordered word pairs with that union, and the two endpoints account for nine. All single-site marginals have rank $10$, which includes the trace. All three two-site marginals have rank $23$. Measuring only the two adjacent pairs gives rank $14$, since neither region contains the union formed by the two endpoints.
+
 ::: {.example #ex-ch39-fib-forbidden-window-coherence title="Coherence with forbidden windows"}
 For the ban on $K$ consecutive ones, take a chain of length $n\ge K$. An entry between two words can differ between density matrices with the same one-site deletion traces exactly when every window of $K$ sites contains a position of type $(0,1)$ and a position of type $(1,0)$ in the ordered word pair. To see this, fix all differing bits and let each common bit vary. The two entries in a deletion sum are opposites, so a nonzero entry forces every simultaneous assignment of the common bits to stay in the legal support. Setting all common bits to one checks all assignments at once. Each forbidden window must still contain a zero in each word. [Exact support criterion for binary deletion](lean:D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionSupport.survives_iff)
 

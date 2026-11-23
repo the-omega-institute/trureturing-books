@@ -1,4 +1,4 @@
-/* OMEGA//TRIAD · 0 · 1/2 · 1 因果微分母核 · the 0 · 1/2 · 1 causal-differential triad (Chapter 39, §39.7)
+/* OMEGA//TRIAD · 0 · 1/2 · 1 因果微分母核 · the 0 · 1/2 · 1 causal-differential triad (Chapter 39, §39.6)
    World (kit.solid): z up. The stage is the great two-sphere slice {w + xj + yk} of the unit quaternions S³(1) = 𝕋₃: the
    quaternion w + xj + yk is drawn at the world point (x, y, w), so chords are to scale and κ = 1 − chord²/4. The fourth
    axis i is not drawn.

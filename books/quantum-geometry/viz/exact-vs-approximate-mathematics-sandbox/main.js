@@ -1,4 +1,4 @@
-/* OMEGA//EXACT · 精确结构数学对比平直近似 · exact structural mathematics vs. flat approximation (Chapter 39, §39.11)
+/* OMEGA//EXACT · 精确结构数学对比平直近似 · exact structural mathematics vs. flat approximation (Chapter 32, §32.6)
    World (kit.solid): z up. The ball is a great two-sphere slice of the unit quaternions S³(1) = 𝕋₃; a quaternion
    w + xi + yj + zk is drawn at (x, −ρ, w), ρ = y on the slice z = 0 and ρ = √(y² + z²) for a rotor outside it, which is
    first turned about the axis i into the front half of the slice. The turn keeps the squared norm, the height w = 2κ − 1

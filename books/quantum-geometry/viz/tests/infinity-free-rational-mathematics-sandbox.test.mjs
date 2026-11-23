@@ -22,7 +22,7 @@ const BOOK = 'quantum-geometry';
 const ID = 'infinity-free-rational-mathematics-sandbox';
 const DIR = path.join(ROOT, 'books', BOOK, 'viz', ID);
 const THEORY = 'ch39-s35-infinity-free-transcendental-free-rational-mathematics.html#sec-ch39-infinity-free-transcendental-free-rational-mathematics';
-const SECTION = '39.12';
+const SECTION = '32.7';
 const PI = Math.PI;
 // scene, view, the declared still (a value of the rail), the end of the rail and the regime of the still of every card
 const CARDS = {
@@ -36,7 +36,7 @@ const IDS = Object.keys(CARDS);
 const [LOOP, ESCAPE, CAYLEY, CHEB, JET] = IDS;
 const DEFAULT = LOOP;
 const CAM_NAMES = ['panorama', 'face', 'high'];
-// the order of the theorem box of §39.12
+// the order of the theorem box of §32.7
 const GIDS = [
   'D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv',
   'D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq',
@@ -456,9 +456,9 @@ check(
   same([...sources['index.html'].matchAll(/<(?:script src|link rel="stylesheet" href)="([^"]+)"/g)].map((m) => m[1]).filter((u) => !u.startsWith('https://fonts.')), ['../assets/theme.css', 'style.css', '../assets/shell.js', '../assets/kit.js', 'main.js'])
 );
 check(
-  'registration: §39.12, live, five cards in the order of the chapter and the fifteen GIDs in order',
+  'registration: §32.7, live, five cards in the order of the chapter and the fifteen GIDs in order',
   !!entry &&
-    entry.chapter === 39 &&
+    entry.chapter === 32 &&
     entry.section === SECTION &&
     entry.status === 'live' &&
     entry.added === '2026-11-23' &&
@@ -468,8 +468,8 @@ check(
     same(Object.keys(entry.preset_titles), IDS) &&
     same(entry.lean.map((x) => x.gid), GIDS) &&
     entry.theory.length === 1 &&
-    entry.theory[0].label === '§39.12 · 无无穷·无超越数的有限有理数学' &&
-    entry.theory[0].label_en === '§39.12 · Infinity-Free and Transcendental-Free Finite Rational Mathematics' &&
+    entry.theory[0].label === '§32.7 · 无无穷·无超越数的有限有理数学' &&
+    entry.theory[0].label_en === '§32.7 · Infinity-Free and Transcendental-Free Finite Rational Mathematics' &&
     entry.theory[0].href === '../zh/' + THEORY &&
     entry.theory[0].href_en === '../en/' + THEORY
 );
@@ -821,7 +821,7 @@ check(
       !!q('#evidence > #readouts') &&
       !!q('#evidence > #basis') &&
       !!q('footer.rail .clock #now') &&
-      ['§39.12', '5', 'NUM', 'trureturing'].every((x) => asides.includes(x)) &&
+      ['§32.7', '5', 'NUM', 'trureturing'].every((x) => asides.includes(x)) &&
       [...document.querySelectorAll('.tagline > span')].every((el) => el.querySelector('em') && el.firstChild.nodeType === 3) &&
       !!q('link[href*="fonts.googleapis.com/css2?family=Chakra+Petch"]') &&
       [...document.querySelectorAll('#basis .lean')].every((el) => el.children.length === 2 && [...el.children].every((c) => c.tagName === 'SPAN')) &&

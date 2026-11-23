@@ -1,4 +1,4 @@
-/* OMEGA//POLISH · 1854 + 1859 黎曼双璧合龙 · Riemann 1854 + 1859 (Chapter 39, §39.10)
+/* OMEGA//POLISH · 1854 + 1859 黎曼双璧合龙 · Riemann 1854 + 1859 (Chapter 31, §31.6)
    World (kit.solid): z up. One ball M stands for the manifold of 1854; a ring around it stands for the unit circle of the
    Cayley images u = (ρ − 1)/ρ of the zeros of 1859.
      plates    the 12 tangent planes T_pM at the vertices of a regular icosahedron bound a regular dodecahedron
