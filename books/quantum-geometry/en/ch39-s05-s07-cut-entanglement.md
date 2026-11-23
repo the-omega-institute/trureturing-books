@@ -43,6 +43,26 @@ For attainment, divide the unit interval at $q_i$. At site $j$, take initial int
 
 The fixed starting site matters. With five sites of occupancies $(1/2,0,1/2,0,1/2)$, taking equality for all three pairs of even sites would make three half-mass events pairwise disjoint up to null sets, exceeding the available unit mass.
 
+Close the hard-core chain into a four-cycle and call the two sides $s,t$ and $x,y$. Give $s,t,y$ occupancy $1/2$ and $x$ occupancy zero. Along $s,x,t$, the site $x$ is empty with probability one, so this path alone permits one endpoint to be occupied while the other is empty. Along $s,y,t$, both endpoint occupancy events lie inside the event that $y$ is empty. All three events have probability $1/2$, so they can differ only on a null set. The probability of $s$ occupied and $t$ empty is therefore zero.
+
+::: {.theorem #thm-ch39-fib-graph-oriented-difference lean="D5/S1/Words/AdmissibleWords/NestedEventGraphBounds.sharp_difference" title="A sharp bound on event differences on a graph"}
+Fix a vertex $s$ that can reach every vertex of a simple graph. Let $A_v$ be measurable events in the half-open unit interval with prescribed probabilities $q_v\in[0,1]$. Require the two events on each edge to be comparable by inclusion. Let $d(s,v)$ be the infimum over walks from $s$ to $v$ of the sum of decreases $(q_u-q_w)_+$ over the steps. Then
+
+$$
+\Pr(A_s\setminus A_v)\le \min(q_s,1-q_v,d(s,v)).
+$$
+
+One event family attains every bound simultaneously. In this family the event of smaller probability on an edge is contained in the event of larger probability. Events with equal probabilities on an edge coincide.
+:::
+
+::: {.proof}
+Along any finite walk, every sample in $A_s\setminus A_v$ must leave the current event at least once. Adjacent events are comparable by inclusion, so the probability of leaving at a step is precisely the decrease in probability. Taking the infimum over walks gives the third term. The first two come from the endpoint probabilities.
+
+For attainment, split the unit interval at $q_s$. Use an initial interval in each piece, with lengths $u_v$ and $q_v-u_v$, where $u_v=\max(0,q_s+q_v-1,q_s-d(s,v))$. For neighbors $a,b$ with $q_a\le q_b$, the step from $a$ to $b$ costs zero and the reverse step costs $q_b-q_a$. Both interval lengths are therefore nondecreasing from $a$ to $b$. The source event is exactly the first piece, so its mass outside $A_v$ is $q_s-u_v$. The full proof is checked by the Lean kernel.
+:::
+
+For a hard-core model on a bipartite graph, complement the occupancy events on one side. Disjoint neighbors then become nested neighbors. Complementing $x,y$ in the four-cycle gives probability profiles $(1/2,1,1/2)$ and $(1/2,1/2,1/2)$ along the two walks from $s$ to $t$. Their total decreases are $1/2$ and zero. The second walk forces the endpoint difference to have probability zero.
+
 In the `trureturing` direct-encoder model, fix integers $N \ge 2$ and $K \ge 2$, and partition $\{0, 1, \dots, N\}$ by primality into the nonprime logical page ($b = \mathrm{false}$, dimension $M_0 > 0$) and the prime logical page ($b = \mathrm{true}$, dimension $M_1 > 0$). Let $C_{m, b}$ denote the set of length-$m$ admissible $1^K$-free words with first bit $b$, of cardinality $c_{m, b} = |C_{m, b}|$; for each threshold $0 \le s < K$, define the cumulative low-tail left row count and compatible right neighborhood count on page $1$ by
 
 $$
