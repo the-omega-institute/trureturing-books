@@ -125,6 +125,8 @@ $$
 :::
 
 ::: proof
+The two local maximal sizes also follow from the classical packing spectrum surveyed by Colbourn. [Sections 2.3.1–2.3.3](https://ajc.maths.uq.edu.au/pdf/4/ocr-ajc-v4-p143.pdf)
+
 On six labels, each label lies in at most two triples. Each incident triple uses two of the label's five available partners. Counting incidences gives at most four blocks. An empty or one-block packing can be extended. In a three-block packing, no two blocks can be disjoint, since a third would then repeat a pair of one of them. The three pairwise intersections are distinct singletons. Each block also has one point belonging only to it. All three pairs among these private points are unused, so the three points form an addable fourth block.
 
 Both maximal sizes occur. Writing $abc=\{a,b,c\}$, the two-block example $012,345$ leaves a complete bipartite graph of unused pairs and hence no available triangle. The example $012,034,135,245$ attains the four-block upper bound. Each of the $3^{d+1}$ actual residue classes can independently take either size. Choosing four blocks in exactly $k$ classes and adding the $36$ Latin-square blocks per row gives the formula. For $d=1$, the saturated sizes are precisely $126,128,\ldots,144$.
