@@ -644,6 +644,36 @@ $$
 
 实际 ζ 零点是否有满足这一正下界的关系族仍是开放问题。单个不相容关系若固定在有限高度，其下界随 $W(T)$ 增长而趋于零。
 
+::: {.theorem #thm-ch31-short-relation-deletion title="短整数关系控制实现相位相容所需的舍弃权重" lean="D5/S3/Fourier/ShortPhaseRelations.weighted_deletion_bounds"}
+取有限实频率 $\gamma_j$ 和非负权重 $w_j$，总权重 $W>0$。若一个子集上的所有整数关系都满足系数和被 $4$ 整除，则称该子集相容。令 $P$ 为使剩余子集相容所须舍弃的最小权重占比。对时间集合 $\mathcal T$，令
+
+$$
+D_{\mathcal T}=1-\sup_{v\in\mathcal T}\frac{\sum_j w_j\sin(\gamma_jv)}{W}.
+$$
+
+若 $\mathcal T$ 非空、$H>0$，且每个不相容子集都含有 $\ell^1$ 系数范数至多为 $H$ 的不相容关系，则 $P/H^2\le D_{\mathcal T}$。若 $\mathcal T$ 含有一条向上延伸的实数射线，则 $D_{\mathcal T}\le2P$。
+:::
+
+::: proof
+固定一个共同时间。若关系 $\sum_j k_j\gamma_j=0$ 的系数和不被 $4$ 整除，则该关系的单位圆特征值在实际相位处为 $1$，在目标相位处为 $i^{\sum_j k_j}$。两者弦距的平方至少为 $2$。有限乘积的弦距至多为各坐标弦距按 $|k_j|$ 加权的和，而每个坐标弦距的平方为 $2(1-\sin(\gamma_jv))$。因此所有损失严格小于 $1/H^2$ 的坐标所构成的子集必相容。其补集的权重至少为 $PW$，每个被舍弃坐标的损失至少为 $1/H^2$。对共同时间取下确界得到下界。
+
+对最小舍弃权重所对应的相容子集，轨道闭包包含所有保留相位均为 $\pi/2$ 的点。含上方射线的时间集合可以任意逼近该点。每个舍弃坐标最多贡献其权重的两倍损失，给出上界。
+:::
+
+::: {.theorem #thm-ch31-consecutive-phase-separation title="相邻整数频率给出平方倒数尺度" lean="D5/S3/Fourier/ShortPhaseRelations.consecutive_pair_separation"}
+取任意自然数 $n$、等正权重和频率 $(n,n+1)$。若 $\mathcal T$ 含有一条向上延伸的实数射线，则 $P=1/2$。每个不相容子集都含有系数 $\ell^1$ 范数至多为 $H=2n+1$ 的不相容关系，且
+
+$$
+\frac{1}{2H^2}\le D_{\mathcal T}\le1-\cos\!\left(\frac{\pi}{2H}\right)\le\frac{\pi^2}{8H^2}.
+$$
+:::
+
+::: proof
+当 $n>0$ 时，关系 $(n+1,-n)$ 的系数和为 $1$，两个单坐标子集都相容。当 $n=0$ 时，零频率自身构成长度为 $1$ 的不相容关系，保留频率 $1$ 即可。两种情形下都恰须舍弃一个坐标。在时间 $\pi/H$，两个相位为 $\pi/2\pm\pi/(2H)$。加上 $2\pi$ 的整数倍可把该时间移到任意上方射线而保留正弦值。下界由 [@thm-ch31-short-relation-deletion] 给出。
+:::
+
+对每个固定的有限系统，只有有限个子集，因此可为所有不相容子集选取见证并统一其系数范数的上界。实际 ζ 零点的问题是能否控制这个上界随截断增长的速率。
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 
