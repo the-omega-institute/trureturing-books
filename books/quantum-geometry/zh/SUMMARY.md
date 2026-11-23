@@ -153,6 +153,7 @@
         - [31.1.3.2.1 Möbius 窗口的 Fourier 恢复](ch34-s28-s03-s02-fourier-recovery.md)
         - [加权近碰撞与缺失窗口的起点范围](ch34-s28-s03-s02-weighted-near-collisions.md)
         - [方差给出的近碰撞下界](ch34-s28-s03-s02-collision-variance.md)
+        - [sinc 乘积的欧氏尺度](ch34-s28-s03-s02-diffuse-sinc-products.md)
         - [小扰动下的加权近碰撞](ch34-s28-s03-s02-spectral-perturbations.md)
         - [多组检验共用一次频谱扰动](ch34-s28-s03-s02-common-spectral-perturbations.md)
         - [对数平方尾界与频繁的完全相位对齐](ch34-s28-s03-s02-commensurate-spectrum.md)
