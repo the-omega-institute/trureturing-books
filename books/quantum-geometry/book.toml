@@ -6,6 +6,7 @@ license = "CC-BY-4.0"
 editions = ["zh", "en"]
 # 含空行与代码的单页 Markdown 源码行数上限。
 max_page_lines = 1000
+max_chapters = 39
 code = "ORTHO//QUANTUM"
 date = "2026-11-20"
 # Zenodo 概念 DOI，供本书各版本共同使用。
