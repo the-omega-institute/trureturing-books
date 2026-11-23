@@ -31,6 +31,15 @@ The same five allowed words also give a quantum example. Compare the pure state
 $(|010\rangle+|101\rangle)/\sqrt2$ with the equal incoherent mixture of the same two basis states. The computational-basis law and every two-site reduced state agree. Tracing out any site kills the cross term because the two words differ at that site. Yet the mixture is a mixture of product states, while the pure state has Schmidt coefficients $(1/\sqrt2,1/\sqrt2)$ across every one-site cut. A joint measurement of $X\otimes X\otimes X$, with $X$ the bit flip, has expectation one on the pure state and zero on the mixture. [Auric FIB atom, §18.2–18.3](https://github.com/the-omega-institute/trureturing-source-theories/blob/2a39da5107abbfa3a72cc883486dbc15a15994a1/docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md#L4163-L4280)
 
 For an open chain of length at least two with no adjacent occupied sites, the only matrix entries that can differ at fixed single-site deletion traces are those between the two alternating words. To see this, let $D$ be the difference of the two density matrices, extended by zero on forbidden words. If two words agree at site $i$, the zero deletion trace relates the entries of $D$ with their common bit set to zero or one by a change of sign. If either word occupies a neighbor $j$, the entry with the common bit set to one is already zero. If both leave $j$ empty, first set the common bit at $i$ to one and use the deletion equation at $j$. Both endpoints occupied is forbidden, so that entry also vanishes. Thus any surviving pair differs at every site. Since both complementary words are legal, each edge must change the bit, leaving just the alternating pair. Conversely their cross terms vanish in every one-site deletion trace. In a Hermitian matrix difference the two entries are complex conjugates. [Exact deletion kernel on a finite graph](lean:D5/S3/Quantum/Entanglement/Marginals/IndependentWordMarginals.deletion_kernel_iff)
+
+Fix the weights of the two alternating words at $p,1-p$, with $0<p<1$. By the deletion-kernel criterion above, the states with the same two-site marginals as that mixture are exactly the matrices below on the span of `010` and `101`.
+
+$$
+\rho(c)=\begin{pmatrix}p&c\\ \bar c&1-p\end{pmatrix},
+\qquad |c|\le\sqrt{p(1-p)}.
+$$
+
+Positivity requires a nonnegative determinant. Equality gives the circle. Its center is the separable mixture, and its boundary consists of pure states. Partial transpose across any nontrivial cut moves the two cross terms to another orthogonal pair of basis states, where they form a block with eigenvalues $\pm|c|$. The negativity across each cut is therefore $|c|$. The local readings determine $p$. Reading the real and imaginary parts of $c$ determines the full state and its negativity.
 :::
 
 ::: {.example #ex-ch39-fib-forbidden-window-coherence title="Coherence with forbidden windows"}
@@ -38,6 +47,25 @@ For the ban on $K$ consecutive ones, take a chain of length $n\ge K$. An entry b
 
 Every surviving pattern gives a matrix with entries of opposite sign when a common bit is flipped. The differing positions contain both orientations, so the ordered pattern and its transpose have disjoint supports. Adding the adjoint produces a nonzero Hermitian matrix with zero deletion traces and zero trace. On the legal subspace add and subtract a sufficiently small multiple of this matrix from the normalized identity. The two resulting density matrices realize the difference. For $K=3$, the pairs $(010,100)$ and $(011,101)$ share one pattern. Their entries cancel when the common last bit is deleted, and deleting either of the differing bits gives zero in each summand.
 :::
+
+::: {.theorem #thm-ch39-omega-fib-integer-deletion lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionSignTensor.deleteSite, D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionSignTensor.actualEntry" title="An integer deletion witness for binary patterns"}
+At each site an ordered bit pattern records agreement, zero to one, or one to zero. An agreement has local coefficient $1$ at $00$ and $-1$ at $11$. A difference has local coefficient $1$ at its specified ordered pair. All other coefficients are zero. Multiply the local coefficients along any finite pattern. At a chosen site, take two words whose prefixes have the length prescribed by the split of the pattern. Reinserting zero into both words and then reinserting one gives two integer coefficients whose sum is zero. The representative with all common bits zero and the specified bits at disagreements has coefficient $1$.
+:::
+
+::: {.proof}
+At the deleted site, the local coefficients for the two insertions are opposites. Restoring each earlier site multiplies both by the same coefficient. On the indicated representative every site contributes $1$. The coefficient program and both declarations have empty axiom closures. The full proof is checked by the Lean kernel.
+:::
+
+On a three-site chain with no three consecutive ones, start with $(010,100)$. Setting the common final bit to one gives $(011,101)$. Put
+
+$$
+\begin{aligned}
+u_\pm&=|010\rangle\pm|100\rangle,\\
+v_\pm&=|011\rangle\mp|101\rangle.
+\end{aligned}
+$$
+
+The two matrices $(u_\pm u_\pm^\top+v_\pm v_\pm^\top)/4$ are positive semidefinite with trace one and a common integer denominator of $4$. Their diagonals and all single-site partial traces agree. The joint observable that swaps the first pair with sign $+1$, swaps the second pair with sign $-1$, and vanishes on the other words has expectations $+1$ and $-1$, respectively. See [@ex-ch39-fib-forbidden-window-coherence].
 
 ::: {.theorem #thm-ch39-fib-forbidden-triple-dimension lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionDimension.noTriple_finrank" title="Dimension of the deletion kernel with a ban on triples"}
 On an open chain of length $n\ge3$, allow only words with no three consecutive ones. Let $d_n$ be the complex dimension of the space of matrices supported on allowed words in both indices and with zero partial trace over each individual site. Then
