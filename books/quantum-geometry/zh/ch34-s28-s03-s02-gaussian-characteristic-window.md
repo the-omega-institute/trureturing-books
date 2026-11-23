@@ -1,6 +1,6 @@
 # 从特征函数到短区间界
 
-扰动后频率差的特征函数界可以控制近碰撞概率。以下估计适用于实直线上的任意有限测度 $\mu$。记 $\chi(t)=\int e^{itx}\,d\mu(x)$，并令 $W=[b-r,b+r]$，其中 $r>0$。
+扰动后频率差的特征函数界可以控制近碰撞概率。以下估计适用于实直线上的任意有限测度 $\mu$。记 $\chi(t)=\int e^{itx}\,d\mu(x)$，并对任意实数 $r$ 令 $W=\{x:|x-b|\le r\}$。
 
 ::: {.theorem #thm-ch31-gaussian-characteristic-window title="闭区间质量的高斯界" lean="D5/S3/Fourier/Concentration/GaussianCharacteristicWindow.measureReal_closedWindow_le_gaussian_charFun"}
 对任意平滑尺度 $s>0$，定义
@@ -21,7 +21,7 @@ $$
 :::
 
 ::: {.theorem #thm-ch31-quadratic-characteristic-window title="由二次倒数界得到线性区间界" lean="D5/S3/Fourier/Concentration/GaussianCharacteristicWindow.measureReal_closedWindow_le_of_quadratic_charFun"}
-若 $k>0$ 且每个 $t\in\mathbb R$ 都满足 $|\chi(t)|\le (1+kt^2)^{-1}$，则
+若 $r>0$、$k>0$ 且每个 $t\in\mathbb R$ 都满足 $|\chi(t)|\le (1+kt^2)^{-1}$，则
 
 $$
 \mu(W)\le \frac{e^{1/2}\sqrt\pi}{\sqrt2\sqrt k}\,r.

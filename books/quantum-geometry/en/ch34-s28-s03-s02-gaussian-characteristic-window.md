@@ -1,6 +1,6 @@
 # From a characteristic function to a short-interval bound
 
-A bound on the characteristic function of a perturbed frequency difference can control the probability of a near-collision. The following estimates apply to any finite measure $\mu$ on $\mathbb R$. Write $\chi(t)=\int e^{itx}\,d\mu(x)$ and $W=[b-r,b+r]$ for $r>0$.
+A bound on the characteristic function of a perturbed frequency difference can control the probability of a near-collision. The following estimates apply to any finite measure $\mu$ on $\mathbb R$. Write $\chi(t)=\int e^{itx}\,d\mu(x)$ and $W=\{x:|x-b|\le r\}$ for any real $r$.
 
 ::: {.theorem #thm-ch31-gaussian-characteristic-window title="Gaussian bound for a closed window" lean="D5/S3/Fourier/Concentration/GaussianCharacteristicWindow.measureReal_closedWindow_le_gaussian_charFun"}
 For any smoothing scale $s>0$, define
@@ -21,7 +21,7 @@ The function $\exp((r/s)^2)\exp(-((x-b)/s)^2)$ is at least one on $W$ and nonneg
 :::
 
 ::: {.theorem #thm-ch31-quadratic-characteristic-window title="Linear window bound from a reciprocal quadratic" lean="D5/S3/Fourier/Concentration/GaussianCharacteristicWindow.measureReal_closedWindow_le_of_quadratic_charFun"}
-If $k>0$ and $|\chi(t)|\le (1+kt^2)^{-1}$ for every $t\in\mathbb R$, then
+If $r>0$, $k>0$ and $|\chi(t)|\le (1+kt^2)^{-1}$ for every $t\in\mathbb R$, then
 
 $$
 \mu(W)\le \frac{e^{1/2}\sqrt\pi}{\sqrt2\sqrt k}\,r.
