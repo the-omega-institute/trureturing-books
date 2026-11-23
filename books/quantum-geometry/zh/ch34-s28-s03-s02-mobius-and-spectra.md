@@ -929,6 +929,35 @@ $$
 
 在 RH 下，对实际 ζ 零点，已有质量误差界给出 $a_0=1/(4\pi)$。尾段平方和的改进来自 $m_\gamma=o(\log\gamma)$，其中 $m_\gamma$ 是解析重数。固定 $\epsilon>0$，取 $s=e^{-4/\epsilon}/2$。对零点 $\rho=1/2+i\gamma$，取 $c=\rho+s/4$ 并令 $g(z)=\zeta(c+z/4)/\zeta(c)$。圆盘上的 ζ 增长界与圆心处的倒数界给出 $|g(z)|\le C\gamma^2$，其中 $|z|\le1/2$。对零点 $z=-s$ 用 Jensen 估计，当 $\gamma$ 充分大时，得到 $m_\gamma\le\log(C\gamma^2)/\log((1/2)/s)\le\epsilon\log\gamma$。Goldston 与 Gonek 给出了更强的 $O(\log\gamma/\log\log\gamma)$ 阶。 [Goldston 与 Gonek，推论 1](https://arxiv.org/pdf/math/0511092#page=2)
 
-将 $X$ 以上分成二进区间，由 $N(Y)=O(Y\log Y)$ 得到 $m_\gamma\log\gamma/\gamma^2$ 的尾和为 $O(\log^2 X/X)$。由 $w_\gamma^2\le m_\gamma^2/\gamma^2$ 和重数的次对数界，得出所需的统一小 $o$ 界。因此在 RH 和互异正纵坐标有理线性无关的假设下，当 $T$ 充分大时，任意晚都有长度为 $\exp(T^\beta)$ 的窗口，其全段亏损严格大于 $1-\beta^2+\log T/W(T)$。再结合有效线性无关假设下的 [@thm-ch31-zeta-local-average]，等号处仍存在错过所求相位对齐的窗口。更细的等待尺度仍开放。 [等号情形研究](https://github.com/the-omega-institute/trureturing/issues/33482)
+将 $X$ 以上分成二进区间，由 $N(Y)=O(Y\log Y)$ 得到 $m_\gamma\log\gamma/\gamma^2$ 的尾和为 $O(\log^2 X/X)$。由 $w_\gamma^2\le m_\gamma^2/\gamma^2$ 和重数的次对数界，得出所需的统一小 $o$ 界。因此在 RH 和互异正纵坐标有理线性无关的假设下，当 $T$ 充分大时，任意晚都有长度为 $\exp(T^\beta)$ 的窗口，其全段亏损严格大于 $1-\beta^2+\log T/W(T)$。再结合有效线性无关假设下的 [@thm-ch31-zeta-local-average]，等号处仍存在错过所求相位对齐的窗口。[等号情形研究](https://github.com/the-omega-institute/trureturing/issues/33482)
+
+::: {.theorem #thm-ch31-logarithmic-missing-window title="临界等待指数的对数增益" lean="D5/S3/Analytic/Oscillation/SpectrumLogarithmicMissingWindow.eventual_logarithmic_missing_window"}
+沿用 [@thm-ch31-critical-missing-window] 中正频谱、非负权重、有理线性无关性及质量假设。设有常数 $C>0$，使对每个充分大的 $X$ 和所有 $T\ge X$，
+
+$$
+V(X,T)=\sum_{X<\gamma\le T}w_\gamma^2\le C\frac{\log X}{X}.
+$$
+
+固定 $r>0$ 与 $0<\beta<1$。存在 $c>0$，使对每个充分大的 $T$ 都有 $W(T)>0$，并且对任意实数 $A$，存在 $a>A$ 满足
+
+$$
+S(T,u/r)<\beta^2W(T)-\log T
+\qquad \text{对所有 }u\in[a,a+\exp(cT^\beta\log T)] .
+$$
+:::
+
+::: proof
+令 $L=\log T$、$X=e^{-K}T^\beta$。同一质量估计保证最终 $W(X)+3L<\beta^2W(T)$。取 $D=C\beta e^K$，则 $V(X,T)\le DL/T^\beta$。方差为正时，阈值 $L$ 对应的 Hoeffding 指数至少为 $T^\beta L/(2D)$。令 $E=T^\beta L/(4D)$。在得分时间中，长度为 $e^E/r$、网格间距为 $1/T^2$ 的区间有至多 $e^E(1+1/r)T^2$ 个网格点，最终小于 $e^{2E}$。网格点数与尾概率上界的乘积由此严格小于一。有限缺失窗口定理也覆盖零方差情形。网格误差小于 $L$，最后换回时间变量即得所述闭区间。
+:::
+
+::: {.theorem #thm-ch31-logarithmic-missing-window-model title="实现对数增益假设的无限频谱" lean="D5/S3/Analytic/Oscillation/SpectrumLogarithmicMissingWindowModel.exists_infinite_logarithmic_model"}
+存在一个局部有限的无限正频谱，频率互异且有理线性无关，权重严格为正，并满足 [@thm-ch31-logarithmic-missing-window] 的质量与尾段平方和假设。
+:::
+
+::: proof
+[@thm-ch31-critical-missing-window-model] 的四次根频段模型具有对上截断一致的 $O(X^{-2})$ 平方尾界，因而满足所需的对数平方尾界。
+:::
+
+在 RH 下，实际 ζ 纵坐标的权重为 $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$，其中 $m_\gamma$ 是解析重数。Baluyot、Goldston、Suriajaya 与 Turnage-Butterbaugh 的一致配对相关公式给出归一化 Montgomery 和对 $[0,1]$ 上权重 $2(1-\alpha)$ 的有界平均。在临界线上，平均后每个纵坐标差的贡献非负。三角权重的余弦变换在非零处为 $2(1-\cos z)/z^2$，在零处为 $1$。因此同纵坐标项对归一化平均的贡献恰为 $2\pi\sum_{0<\gamma\le Y}m_\gamma^2/(Y\log Y)$。由平均有界得 $\sum_{0<\gamma\le Y}m_\gamma^2=O(Y\log Y)$。在 $X$ 以上逐个二进区间用 $w_\gamma^2\le m_\gamma^2/\gamma^2$ 再求几何级数，即得对 $T\ge X$ 一致的 $V(X,T)=O(\log X/X)$。互异正纵坐标有理线性无关时可应用上述频谱定理。解析配对相关公式来自文献。现有界仍留下最优等待尺度这一开放问题。 [配对相关公式，定理 1 与 §7](https://arxiv.org/abs/2306.04799)
 
 Fourier 恢复估计见 [§31.1.3.2.1](ch34-s28-s03-s02-fourier-recovery.md)。
