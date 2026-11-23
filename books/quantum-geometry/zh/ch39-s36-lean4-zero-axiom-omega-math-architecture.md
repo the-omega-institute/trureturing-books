@@ -73,6 +73,7 @@
 在第 1 层中，我们将母公理 $\mathrm{AXIOM}\text{-}\Omega$ 的三元比较算子 `triad` 与保真度核 `kappa` 及其六条核心恒等律定义为可计算类型类接口 `class OmegaSpace (M : Type)`，绝不使用 `axiom`。
 
 这里同样有一处必须按 `PROJECT.md` §13 写清的精确类型论边界（`手工推导`）：
+
 - 在未加约束的原始四元整数记录 `ProjTernion`（全体 $\mathbb{Z}^4$）上，`normalize` 虽然将全体输入总化（把 `(0,0,0,0)` 映为 `(1,0,0,0)`，把未约分的 `(2,0,0,0)` 约分为 `(1,0,0,0)`），但全称量化的 `OmegaSpace` 定律在两个退化边界上并不对原始未约分元组逐字成立——对零元组 $z_0 = (0,0,0,0)$ 有 `kappa z0 z0 = ⟨0, 1⟩ ≠ ⟨1, 1⟩` 且 `triad p0 p0 z0 = p0 ≠ z0`；对未约分元组 $z_2 = (2,0,0,0)$ 有 `triad p0 p0 z2 = p0 ≠ z2`；
 - 唯有将可判定规范谓词 `IsCanonical (p : ProjTernion) : p ≠ ⟨0,0,0,0⟩ ∧ normalize p = p` 捆绑为规范非零子类型 **`CanonProjTernion`**（因 `ProjTernion` 具零公理可判定相等性，按赫德伯格定理该子类型同样无需 `Quot.sound` 或 `Classical.choice` 即可具构造性可判定相等），由于四元数共轭满足 $u\bar{u} = \lVert u\rVert^2 \ge 1$（纯正整数标量缩放被 `normalize` 精确消去）且 $\langle x u \bar{v}, y u \bar{v}\rangle^2 = \lVert u\rVert^4\lVert v\rVert^4 \langle x, y\rangle^2$，**`OmegaSpace` 的全部六条公理（左右吸收幂等律、三元结合律、保真度自反律、对称律与双侧流群不变律）在 `CanonProjTernion` 上全称无条件成立**！
 
@@ -238,6 +239,7 @@ theorem omega_zero_axiom_master_check :
 ```
 
 落到具体的形式化工程演进路线图上，整套 `OmegaMath` 体系分三步梯次推进（`MODEL` 工程路线）：
+
 1. **第一步（零依赖可执行内核 `OmegaCore`）**：以数百行零导入 Lean 4 代码将 `QRat`、`ProjTernion` / `CanonProjTernion`、`Jet2Rat` 与 `OmegaSpace` 完整定型，确保核心几何与二阶微积分定理保持 `#print axioms` 为空且 $100\%$ 支持 `#eval` 原生编译；
 2. **第二步（有理格拉姆舒尔补与流群测地算法层）**：在 `OmegaCore` 之上实现精确有理 Cholesky / 舒尔补正定证书、连分数收敛子与有限素因子定阶算法，让自动化形式证明器直接用高速内核归约（`decide`）替代繁琐的极限滤子搜索；
 3. **第三步（单向阴影函子 $\Pi_{\mathbb{R}}$ 对接 `Mathlib`）**：通过有理旋转稠密性与整数预算传递引理（如 `rationalQuarterDepth_integer_sound` $\to$ `rationalQuarterDepth_real_sound`）单向导出经典实分析定理，实现“内核零公理可计算、外层全生态互通”。

@@ -73,6 +73,7 @@ Whereas two-chart Rodrigues parameters in [§39.9](ch39-s32-holographic-arc-mani
 At Layer 1, we formulate $\mathrm{AXIOM}\text{-}\Omega$—its ternary transport `triad`, rational fidelity `kappa`, and six equational laws—as a computable typeclass `class OmegaSpace (M : Type)`, never as raw `axiom` declarations.
 
 Following `PROJECT.md` §13, we state the exact domain invariant separating the raw tuple carrier from the universal `OmegaSpace` model (`hand derivation`):
+
 - On the unbundled raw record `ProjTernion` ($\mathbb{Z}^4$), although `normalize` totalizes all operations (sending `(0,0,0,0)` to `(1,0,0,0)` and scaling `(2,0,0,0)` to `(1,0,0,0)`), universally quantified `OmegaSpace` equations fail on two raw boundary classes: the zero tuple $z_0 = (0,0,0,0)$ (`kappa z0 z0 = ⟨0, 1⟩ ≠ ⟨1, 1⟩` and `triad p0 p0 z0 = p0 ≠ z0`) and non-reduced multiples $z_2 = (2,0,0,0)$ (`triad p0 p0 z2 = p0 ≠ z2`);
 - Bundling the decidable canonical predicate `IsCanonical (p : ProjTernion) : p ≠ ⟨0,0,0,0⟩ ∧ normalize p = p` into the canonical nonzero subtype **`CanonProjTernion`** (which inherits zero-axiom `DecidableEq` by Hedberg's theorem without `Quot.sound` or `propext`), quaternion conjugation $u\bar{u} = \lVert u\rVert^2 \ge 1$ (positive scalar factors cancelled by `normalize`) and bilateral norm scaling $\langle x u \bar{v}, y u \bar{v}\rangle^2 = \lVert u\rVert^4\lVert v\rVert^4 \langle x, y\rangle^2$ make **all six universal `OmegaSpace` laws (`idemp_left`, `idemp_right`, `assoc_triad`, `kappa_refl`, `kappa_symm`, `kappa_inv`) hold unconditionally across `CanonProjTernion`**!
 
@@ -238,6 +239,7 @@ theorem omega_zero_axiom_master_check :
 ```
 
 In concrete formalization engineering, the `OmegaMath` program advances in three disciplined steps (`MODEL` roadmap):
+
 1. **Step 1 (Zero-Import Executable Kernel `OmegaCore`)**: Establish `QRat`, `ProjTernion` / `CanonProjTernion`, `Jet2Rat`, and `OmegaSpace` in a few hundred zero-import lines of Lean 4, keeping `#print axioms` empty and $100\%$ native-code executable via `#eval`;
 2. **Step 2 (Rational Gram–Schur & Heap Geodesic Layer)**: Implement exact rational Cholesky / Schur-complement positivity certificates, continued-fraction convergents, and prime-factor order stripping atop `OmegaCore`, replacing limit-filter proof search with high-speed kernel reduction (`decide`);
 3. **Step 3 (One-Way Shadow Bridge $\Pi_{\mathbb{R}}$ into `Mathlib`)**: Export classical real-analysis corollaries at the outer boundary via rational rotation density and exact integer-to-real soundness theorems (`rationalQuarterDepth_integer_sound` $\to$ `rationalQuarterDepth_real_sound`).
