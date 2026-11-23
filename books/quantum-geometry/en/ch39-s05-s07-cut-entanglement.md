@@ -31,6 +31,25 @@ $(|010\rangle+|101\rangle)/\sqrt2$ with the equal incoherent mixture of the same
 For an open chain of length at least two with no adjacent occupied sites, the only matrix entries that can differ at fixed single-site deletion traces are those between the two alternating words. To see this, let $D$ be the difference of the two density matrices, extended by zero on forbidden words. If two words agree at site $i$, the zero deletion trace relates the entries of $D$ with their common bit set to zero or one by a change of sign. If either word occupies a neighbor $j$, the entry with the common bit set to one is already zero. If both leave $j$ empty, first set the common bit at $i$ to one and use the deletion equation at $j$. Both endpoints occupied is forbidden, so that entry also vanishes. Thus any surviving pair differs at every site. Since both complementary words are legal, each edge must change the bit, leaving just the alternating pair. Conversely their cross terms vanish in every one-site deletion trace. In a Hermitian matrix difference the two entries are complex conjugates. [Exact deletion kernel on a finite graph](lean:D5/S3/Quantum/Entanglement/Marginals/IndependentWordMarginals.deletion_kernel_iff)
 :::
 
+::: {.example #ex-ch39-fib-forbidden-window-coherence title="Coherence with forbidden windows"}
+For the ban on $K$ consecutive ones, take a chain of length $n\ge K$. An entry between two words can differ between density matrices with the same one-site deletion traces exactly when every window of $K$ sites contains a position of type $(0,1)$ and a position of type $(1,0)$ in the ordered word pair. To see this, fix all differing bits and let each common bit vary. The two entries in a deletion sum are opposites, so a nonzero entry forces every simultaneous assignment of the common bits to stay in the legal support. Setting all common bits to one checks all assignments at once. Each forbidden window must still contain a zero in each word. [Exact support criterion for binary deletion](lean:D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionSupport.survives_iff)
+
+Every surviving pattern gives a matrix with entries of opposite sign when a common bit is flipped. The differing positions contain both orientations, so the ordered pattern and its transpose have disjoint supports. Adding the adjoint produces a nonzero Hermitian matrix with zero deletion traces and zero trace. On the legal subspace add and subtract a sufficiently small multiple of this matrix from the normalized identity. The two resulting density matrices realize the difference. For $K=3$, the pairs $(010,100)$ and $(011,101)$ share one pattern. Their entries cancel when the common last bit is deleted, and deleting either of the differing bits gives zero in each summand.
+:::
+
+::: {.theorem #thm-ch39-fib-forbidden-triple-dimension lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionDimension.noTriple_finrank" title="Dimension of the deletion kernel with a ban on triples"}
+On an open chain of length $n\ge3$, allow only words with no three consecutive ones. Let $d_n$ be the complex dimension of the space of matrices supported on allowed words in both indices and with zero partial trace over each individual site. Then
+$$
+d_3=12,\quad d_4=24,\quad d_5=44,\qquad d_n=d_{n-1}+d_{n-2}+d_{n-3}\quad(n\ge6).
+$$
+:::
+
+::: {.proof}
+At each site, record whether the two bits agree, go from zero to one, or go from one to zero. Each allowed pattern has one complex coefficient, read at the word pair where every common bit is zero. Flipping a common bit multiplies the coefficient by $-1$. Distinct patterns have disjoint entry sets, so their coefficients can vary independently. [Dimension formula for any finite allowed word family](lean:D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionDimension.supportedKernel_finrank)
+
+For the ban on triples, every three consecutive symbols must contain both orientations. Let $A,B,C,D$ count patterns whose last two symbols are the same orientation, opposite orientations, an orientation followed by agreement, or agreement followed by an orientation, respectively. Appending one symbol sends these counts to $(B,A+B+D,B,C)$. At length two each count is two, and the pair of agreement symbols has no legal extension. At lengths three, four, and five the totals are $12,24,44$. Apply the update four times to see that the fourth vector is the sum of the first three updated vectors. Summing its coordinates gives the recurrence. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.theorem #thm-ch39-fib-oriented-difference lean="D5/S1/Words/AdmissibleWords/FIBPathPairBounds.sharp_hard_core_difference" title="The sharp endpoint difference from a fixed site"}
 Number sites from zero and let $X_k$ indicate occupancy in a word with no adjacent ones. Put $Y_k=X_k$ at even sites and $Y_k=1-X_k$ at odd sites, and write $q_k=\Pr(Y_k=1)$. Prescribe site occupancies in $[0,1]$ with adjacent sums at most one. For any fixed site $i$, the sharp bound at each $j\ge i$ is
 
