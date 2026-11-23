@@ -64,10 +64,10 @@ $$
 
 由内核冻结的**凯莱中线充要判据** [`cayley_ratio_norm_one_iff_critical_line`](lean:D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line) 与**凯莱径向零点判据** [`cayley_critical_line_zeta_criterion`](lean:D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion)（`LEAN ✓`），$\lVert u(\rho)\rVert = 1 \iff \operatorname{Re}(\rho) = \frac{1}{2}$，且 `RiemannHypothesis` 成立当且仅当全体非平凡零点的对数径向亏损 $\ln\lVert(\rho - 1)/\rho\rVert = 0$。结合 2026 年 11 月 Levent Alpöge 公布并经 `lean4lean`、`nanoda`、`con-leche` 独立内核重放确认的外部形式化终端定理 `riemannHypothesis : RiemannHypothesis`（[@conj-riemann-hypothesis]），一步 `手工推导` 立得：**现实数学宇宙中的每一颗非平凡零点都严格钉在 $\sigma_k = \frac{1}{2}$（离轴偏移 $\delta_k := \sigma_k - \frac{1}{2} \equiv 0$）上，其全部凯莱像 $\{u(\rho_k)\}$ 100% 落在青色单位圆 $S^1 = \{\lVert u\rVert = 1\}$ 上！**
 
-为什么“零点全在单位圆上（$\delta = 0$）”直接决定了流形过渡胶合核的正定平滑性，而哪怕一颗零点离轴（反事实 $\delta > 0$）就会让流形爆出尖刺？由完备函数反射对称 $\xi(1 - s) = \xi(s)$（[`xi_reading_eq_completed_zeta`](lean:D5/S3/Zeros/CompletedZeta.xi_reading_eq_completed_zeta)、[`xi_reading_reflection`](lean:D5/S3/Zeros/CompletedZeta.xi_reading_reflection)，`LEAN ✓`）与共轭协变，任取一对共轭纵坐标 $\pm\gamma_1$（如首对零点 $\gamma_1 \approx 14.13472514$）并引入反事实实部偏移 $\delta = \sigma - \frac{1}{2} \ge 0$，四元对称伙伴 $\{\frac{1}{2} \mp \delta \pm \mathbf{i}\gamma_1\}$ 的凯莱像构成在倒共轭对合 $z \mapsto 1/\bar{z}$ 下封闭的四元非零族
+为什么“零点的凯莱像全在单位圆上（$\delta = 0$）”直接决定了流形过渡胶合核的半正定平滑性，而哪怕一颗零点离轴（反事实 $\delta > 0$）就会让流形爆出尖刺？由完备函数反射对称 $\xi(1 - s) = \xi(s)$（[`xi_reading_eq_completed_zeta`](lean:D5/S3/Zeros/CompletedZeta.xi_reading_eq_completed_zeta)、[`xi_reading_reflection`](lean:D5/S3/Zeros/CompletedZeta.xi_reading_reflection)，`LEAN ✓`）与共轭协变，任取一对共轭纵坐标 $\pm\gamma_1$（如首对零点 $\gamma_1 \approx 14.13472514$）并引入反事实实部偏移 $\delta = \sigma - \frac{1}{2} \ge 0$，四元对称伙伴 $\bigl(\frac{1}{2} - \delta + \mathbf{i}\gamma_1,\; \frac{1}{2} + \delta + \mathbf{i}\gamma_1,\; \frac{1}{2} - \delta - \mathbf{i}\gamma_1,\; \frac{1}{2} + \delta - \mathbf{i}\gamma_1\bigr)$ 的凯莱像构成在倒共轭对合 $z \mapsto 1/\bar{z}$ 下封闭的四元非零族
 
 $$
-\mathcal{U}(\delta, \gamma_1) \;=\; \bigl\{u_+,\; \overline{u_+},\; u_-,\; \overline{u_-}\bigr\}, \qquad u_+ := \frac{-\frac{1}{2} - \delta + \mathbf{i}\gamma_1}{\frac{1}{2} - \delta + \mathbf{i}\gamma_1}, \qquad u_- := \frac{-\frac{1}{2} + \delta + \mathbf{i}\gamma_1}{\frac{1}{2} + \delta + \mathbf{i}\gamma_1} = \frac{1}{\overline{u_+}}.
+\mathcal{U}(\delta, \gamma_1) \;=\; \bigl(u_+,\; u_-,\; \overline{u_+},\; \overline{u_-}\bigr), \qquad u_+ := \frac{-\frac{1}{2} - \delta + \mathbf{i}\gamma_1}{\frac{1}{2} - \delta + \mathbf{i}\gamma_1}, \qquad u_- := \frac{-\frac{1}{2} + \delta + \mathbf{i}\gamma_1}{\frac{1}{2} + \delta + \mathbf{i}\gamma_1} = \frac{1}{\overline{u_+}}.
 $$
 
 调用内核冻结的**有限幂和托普利茨圆周半正定充要定理** [`toeplitz_posSemidef_iff_norm_eq_one`](lean:D5/S3/Weil/TestFunctions/FinitePowerSumToeplitzCircleCriterion.toeplitz_posSemidef_iff_norm_eq_one)（`LEAN ✓`）：对任意满足倒共轭置换对称 $u(\sigma(j)) = 1/\overline{u(j)}$ 的非零有限族 $u$ 及任意满足 $N + 1 \ge \lvert\operatorname{range}(u)\rvert$ 的阶数 $N$，以幂和 $p_n := \sum_j u_j^n$ 构造的 $(N+1)\times(N+1)$ 厄米托普利茨矩阵 $\mathbf{T}_N = [p_{j-k}]_{0 \le j,k \le N}$ **半正定（$\mathbf{T}_N \succeq 0$），当且仅当每一个像都满足 $\lVert u_j\rVert = 1$**（与此同时，在无穷全谱侧，内核定理 [`not_rh_forces_canonical_curvature_failure`](lean:D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree.not_rh_forces_canonical_curvature_failure)，`LEAN ✓`，亦从逆否方向锁定：若 `¬RiemannHypothesis`，则规范李曲率托普利茨矩阵必在某一有限阶失去半正定性）！在 $N = 95$（即 $96 \times 96$ 阶，$96 \ge 4$）上实算对比（`NUM`）：
@@ -117,7 +117,7 @@ $\sigma = 1/2$ 临界线托普利茨谱胶合卡（`critical-half-toeplitz-spect
 在三元数单位球面底座 $\mathbb{T}_3 \cong S^3(1)$ 上，定义**黎曼 1854 + 1859 谱磨光流形综合模型**（`MODEL`）$\widetilde{\mathcal{M}}_\Omega = (\{\mathbb{T}_3^{(p)}\}, \beta, \mathbf{T}_N(\mathcal{U}), \eta_K, X^{-1/2})$ 如下：
 
 1. **二阶吻合球换底（$\beta : 0 \to 1$）**：以局部二阶主曲率配平 $\frac{1}{2} + \frac{1}{2} = 1$ 的吻合三元球冠 $\mathbb{T}_3^{(p)}$ 经插值参数 $\beta \in [0, 1]$ 取代一阶平直切板 $T_p M$，在常曲率球面上于 $\beta = 1$ 处精确消除切板法向跳变与顶点雷杰亏角；
-2. **临界线凯莱单位圆与托普利茨正定谱胶（$\delta = \sigma - \frac{1}{2} = 0$）**：将非平凡零点对映射为凯莱旋子像 $u(\rho) = \frac{\rho - 1}{\rho}$，以倒共轭封闭有限族 $\mathcal{U}(\delta, \gamma_k)$ 的幂和托普利茨矩阵 $\mathbf{T}_N = [p_{j-k}]_{0 \le j,k \le N}$ 半正定条件 $\lambda_{\min}(\mathbf{T}_N) \ge 0 \iff \delta = 0$ 表征无负能量折皱的跨片谱胶合，并以显式公式权重残差 $\eta_K := 1 - \bigl(\sum_{k=1}^K \frac{1}{1/4+\gamma_k^2}\bigr) / \bigl(\sum_{k=1}^{K_{\max}} \frac{1}{1/4+\gamma_k^2}\bigr)$ 表征有限谱模截断接缝随 $K$ 增大之熔平；
+2. **临界线凯莱单位圆与托普利茨半正定谱胶（$\delta = \sigma - \frac{1}{2} = 0$）**：将非平凡零点对映射为凯莱旋子像 $u(\rho) = \frac{\rho - 1}{\rho}$，对四元倒共轭封闭族 $\mathcal{U}(\delta, \gamma_k)$ 与 $N \ge 2$，以幂和托普利茨矩阵 $\mathbf{T}_N = [p_{j-k}]_{0 \le j,k \le N}$ 的半正定条件 $\lambda_{\min}(\mathbf{T}_N) \ge 0 \iff \delta = 0$ 表征无负能量折皱的跨片谱胶合，并以显式公式权重残差 $\eta_K := 1 - \bigl(\sum_{k=1}^K \frac{1}{1/4+\gamma_k^2}\bigr) / \bigl(\sum_{k=1}^{K_{\max}} \frac{1}{1/4+\gamma_k^2}\bigr)$ 表征有限谱模截断接缝随 $K$ 增大之熔平；
 3. **全尺度与多特征各向同性退火（$\ln X \to \infty$）**：沿对数尺度 $\ln X$ 以平方根衰减率 $X^{-1/2}$（对比反事实离轴尖刺 $X^{\delta - 1/2}$）及模 $q$ 狄利克雷特征通道均分率表征流形在微观与算术各方向上的渐近磨光。
 :::
 
@@ -146,7 +146,7 @@ $\sigma = 1/2$ 临界线托普利茨谱胶合卡（`critical-half-toeplitz-spect
 
 1. **外部已核验形式化事实（不挂本书绿标 `LEAN ✓`，一步手工推导衔接）**：经典黎曼猜想 `riemannHypothesis : RiemannHypothesis` 与全体模 $N \ge 1$ 狄利克雷广义黎曼猜想 `DirichletLZerosOnLine` 由 Levent Alpöge 于 2026 年 11 月 20 日公布的 Lean 4 证明确立（[`alpo.ge/remark.pdf`](https://alpo.ge/remark.pdf)；可复现分片构建与重放表见 [`the-omega-institute/riemann-hypothesis`](https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/README.md#public-kernel-replay-results)，命题与终端定理见 [`Statements.lean`](https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Statements.lean) 与 [`Main.lean`](https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean)，2026 年 11 月 21 日 [Lean 与 Mathlib 社群联合声明](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/)认证，MIT `lean4lean`、`nanoda`、`con-leche` 独立重放与三公理 `{propext, Classical.choice, Quot.sound}` 审计见 [`math.mit.edu/~drew/grh/`](https://math.mit.edu/~drew/grh/) 及 [`audit.log`](https://math.mit.edu/~drew/grh/audit.log)，参见 [§22.4](ch22-s04-critical-line-and-rh.md) [@conj-riemann-hypothesis]）。将其与 [@thm-ch39-riemann-spectral-polishing-anchors] 第 3、4 组冻结定理结合，消去 `hRH` 得到无条件 $U(x)/x^\theta \to 0 \iff \theta > \frac{1}{2}$ 以及全体非平凡零点 $\ln\lVert(\rho-1)/\rho\rVert = 0$ 各属一步 `手工推导`；
 2. **经典微分几何与解析数论文献结果（未在本书形式化）**：流形曲率二阶展开与微观度规之问见 B. Riemann（1854 就职演说，1868 刊行），$\zeta(s)$ 零点与素数分布见 B. Riemann（1859）；内接柱面平直三角网面积发散反例见 H. A. Schwarz（1880）；分片平直余维二铰亏角曲率见 T. Regge（*Nuovo Cimento* **19**, 558–571, 1961）；RH 下 $\psi(x) - x = O(\sqrt{x}\ln^2 x)$ 见 H. von Koch（*Acta Math.* **24**, 159–182, 1901），狄利克雷 GRH 下 $\pi(x; q, a) - \operatorname{Li}(x)/\varphi(q) = O(\sqrt{x}\ln(qx))$ 见 H. Davenport（*Multiplicative Number Theory*, Ch. 20），李系数正性判据见 X.-J. Li（1997）与 E. Bombieri & J. C. Lagarias（1999）；一般黎曼流形二阶曲率张量的标量曲率、无迹里奇张量与外尔张量正交分解说明单只常曲率吻合球仅在各向同性点完全匹配全部二阶曲率；
-3. **仍保持开放的数学与物理问题（`OPEN`）**：上述外部形式化证明**不推出**希尔伯特—波利亚自伴算子谱实现、一般代数数域戴德金 $\zeta_K$ 函数的扩展黎曼猜想（ERH）、自守 $L$ 函数的全广义黎曼猜想（Grand RH）、零点单重性猜想、连续统自旋-$2$ 引力动力学与爱因斯坦耦合（[@prob-ch34-gravity-dynamics-and-coupling]），亦不推出三元数场网络在大规模实证与对抗扰动下的表现（[@prob-ch39-tft-scale-and-seams]）。
+3. **仍保持开放的数学与物理问题（`OPEN`）**：上述外部形式化证明**不推出**希尔伯特—波利亚自伴算子谱实现、一般代数数域戴德金 $\zeta_K$ 函数的扩展黎曼猜想（ERH）、自守 $L$ 函数的全广义黎曼猜想（Grand RH）、零点单重性猜想、相关原初狄利克雷 $L$ 函数非负零点纵坐标（按重数计，含中心点不消失）在 $\mathbb{Q}$ 上的线性无关假设（LI）及以其为条件的精确 Rubinstein–Sarnak 对数密度素数竞赛偏置（见下文 [@rem-ch39-anisotropic-obstruction-toeplitz-inertia-and-grh-channels] 第 3 款）、连续统自旋-$2$ 引力动力学与爱因斯坦耦合（[@prob-ch34-gravity-dynamics-and-coupling]），亦不推出三元数场网络在大规模实证与对抗扰动下的表现（[@prob-ch39-tft-scale-and-seams]）。
 :::
 
 ::: {.example #ex-ch39-riemann-polishing-quantitative-audit title="定量核验：十二切板亏角、施瓦茨灯笼极限、96×96 托普利茨特征值与模 7 素数退火对账"}
@@ -158,6 +158,101 @@ $\sigma = 1/2$ 临界线托普利茨谱胶合卡（`critical-half-toeplitz-spect
    在已证临界线 $\delta = 0$ 上，$\lVert u_\pm\rVert = \mathbf{1.0000}$，$\lambda_{\min}(\mathbf{T}_{95}) = \mathbf{0.0000}$；在反事实 $\delta = 0.25$ 上，$\lVert u_+\rVert = \sqrt{\frac{0.75^2 + \gamma_1^2}{0.25^2 + \gamma_1^2}} > 1 > \lVert u_-\rVert$（值分别 $\approx \mathbf{1.0013}$ 与 $\approx \mathbf{0.9988}$），$\lambda_{\min}(\mathbf{T}_{95}) < 0$（值 $\approx \mathbf{-0.2932}$；$\delta = 0.40$ 时 $\approx \mathbf{-0.7502}$）；
 3. **显式公式与模 $7$ 六余数类素数份额退火**：
    对数尺度从 $\ln X = 1$ 推至 $\ln X = 10$，平方根基准残差 $X^{-1/2}$ 由 $\mathbf{0.6065}$ 降至 $\mathbf{0.0067}$（对比 $\ln X = 7$ 处 $\delta = 0$ 的 $\mathbf{0.0302}$ 与反事实 $\delta = 0.25$ 的 $X^{-1/4} \approx \mathbf{0.1738}$）；在 $\ln X = 10$ 处，模 $7$ 六条互素通道 $\{1,\dots,6\} \pmod 7$ 的素数份额最大相对偏离仅为 **$\mathbf{1.42\%}$**，$\max_a \lvert\pi(X;7,a) - \operatorname{Li}(X)/6\rvert / X \approx \mathbf{0.0005}$。
+:::
+
+::: {.remark #rem-ch39-anisotropic-obstruction-toeplitz-inertia-and-grh-channels title="各向异性曲率阻断、四元凯莱托普利茨精确闭式谱与狄利克雷 GRH 通道偏置（手工推导、经典文献与 256/320 位 Arb 认证）"}
+为将本节上述两步磨光图景背后的精确几何界限、有限谱矩阵力学与算术通道细结构一次钉实，我们将三组独立推导收束如下（第 1 款、第 2 款的四元凯莱模型结果及第 3 款的帕塞瓦尔与特征傅里叶恒等式均属**无条件 `手工推导`**，完全不依赖 RH/GRH，而第 2 款末关于全谱 Li 矩阵的对比引用 [@rem-ch34-li-toeplitz-superexponential-collapse] 在 RH 下的结论；第 3 款的 $X^{-1/4}\ln^2 X$ 幂律余项界与 $O(X\ln^4(qX))$ 方向能量界依赖 [@conj-riemann-hypothesis] 登记的外部 `DirichletLZerosOnLine` 与经典算术级数显式公式；下文全部新算数值以及 [@ex-ch39-riemann-polishing-quantitative-audit] 中的十二面体/施瓦茨灯笼几何基准、四元托普利茨特征值与模 $7$（$X = e^{10}$）素数份额和通道误差均由 256 位与 320 位双精度 FLINT/Arb 区间算术认证，`NUM`；其余引用基准由对应注记或初等指数直接给出）：
+
+1. **无条件各向异性曲率与二阶度规射流阻断（不依赖 RH/GRH）**：
+   设 $(M^n, g)$（$n \ge 2$）为光滑正定黎曼流形，在点 $p \in M$ 的规范正交标架下采用标准截面曲率符号约定 $R^{(K)}_{ijkl} := K(\delta_{ik}\delta_{jl} - \delta_{il}\delta_{jk})$、$\mathrm{Ric}_{ik} := \sum_{j=1}^n R_{ijkj}$、$\mathrm{Scal} := \sum_{i=1}^n \mathrm{Ric}_{ii}$、无迹里奇张量 $\mathring{\mathrm{Ric}}_{ij} := \mathrm{Ric}_{ij} - \frac{\mathrm{Scal}}{n}\delta_{ij}$，并以无权有序指标平方和 $\lVert T\rVert^2 := \sum_{i,j,k,l=1}^n T_{ijkl}^2$ 度量曲率残差。依据代数曲率张量的正交分解（`文献结果`，见 I. M. Singer & J. A. Thorpe, 1969, [DOI 10.1515/9781400871230-021](https://api.crossref.org/works/10.1515/9781400871230-021); A. L. Besse, *Einstein Manifolds*, 1987, Ch. 1G, [DOI 10.1007/978-3-540-74311-8](https://api.crossref.org/works/10.1007/978-3-540-74311-8)；已在 $n = 2, 3, 4, 5$ 上分别针对维数为 $1, 6, 20, 50$ 的完整有理代数曲率基做精确格拉姆矩阵核验），当 $n \ge 3$ 时，$R = R_{\mathrm{Scal}} + R_{\mathring{\mathrm{Ric}}} + W$ 两两正交，其中 $R_{\mathrm{Scal}} := R^{(K_*)}$、$K_* := \frac{\mathrm{Scal}}{n(n-1)}$、$(R_{\mathring{\mathrm{Ric}}})_{ijkl} := \frac{1}{n-2}(\mathring{\mathrm{Ric}}_{ik}\delta_{jl} + \delta_{ik}\mathring{\mathrm{Ric}}_{jl} - \mathring{\mathrm{Ric}}_{il}\delta_{jk} - \delta_{il}\mathring{\mathrm{Ric}}_{jk})$，从而对任意截面曲率为 $K \in \mathbb{R}$ 的常曲率比较空间形式（$K > 0$ 为球面、$K = 0$ 为欧氏空间、$K < 0$ 为双曲空间）精确成立
+
+   $$
+   \lVert R - R^{(K)}\rVert^2 \;=\; \lVert W\rVert^2 \;+\; \frac{4}{n - 2}\lVert\mathring{\mathrm{Ric}}\rVert^2 \;+\; \frac{2}{n(n - 1)}\bigl(\mathrm{Scal} - n(n - 1)K\bigr)^2 \qquad (n \ge 3),
+   $$
+
+   且 $n = 2$ 时退化为 $\lVert R - R^{(K)}\rVert^2 = 4(K_G - K)^2$。因此单只常曲率比较空间形式的唯一弗罗贝尼乌斯最优常曲率为 $K_* = \frac{\mathrm{Scal}}{n(n-1)}$；当 $n \ge 3$ 且 $p$ 点截面曲率非恒定时，不可约各向异性下界 $\lVert W\rVert^2 + \frac{4}{n-2}\lVert\mathring{\mathrm{Ric}}\rVert^2$ 必严格为正。进一步，在黎曼法坐标下有 $g_{ij}(x) - g^{(K)}_{ij}(x) = (J_{ijkl} - J^{(K)}_{ijkl})x^k x^l + O(\lvert x\rvert^3)$，其中对称化二阶度规射流系数为 $J_{ijkl} := -\frac{1}{6}(R_{ikjl} + R_{iljk})$。记 $A_{ijkl} := R_{ikjl}$ 与 $B_{ijkl} := R_{iljk}$：第一比安基恒等式给出 $A - B = R$，而指标置换保持范数 $\lVert A\rVert = \lVert B\rVert = \lVert R\rVert$；代入平行四边形恒等式 $\lVert A + B\rVert^2 + \lVert A - B\rVert^2 = 2\lVert A\rVert^2 + 2\lVert B\rVert^2$ 即得 $\lVert\frac{1}{2}(A + B)\rVert^2 = \frac{3}{4}\lVert R\rVert^2$，从而对曲率差精确成立
+
+   $$
+   \lVert J - J^{(K)}\rVert^2 \;=\; \frac{1}{12}\lVert R - R^{(K)}\rVert^2.
+   $$
+
+   下表以嘉当结构方程显式隔离出三个正定黎曼算例（记伯杰球拉伸因子 $\lambda > 0$ 与 $a := \lambda^2 > 0$，史瓦西潮汐尺度 $b := \frac{m}{r^3}$，$r > 2m > 0$）：（a）沿霍普夫纤维拉伸的三维伯杰球 $(S^3, g_\lambda)$（$g_\lambda = \lambda^2\sigma_1^2 + \sigma_2^2 + \sigma_3^2$，$d\sigma_1 = -2\sigma_2\wedge\sigma_3$ 循环）直接形变单位三元球 $\mathbb{T}_3 \cong S^3(1)$，其最优常曲率 $K_* = \frac{4 - a}{3}$ 在 $\lambda > 2$ 时转为负值（最优比较空间形式转为双曲空间），最小阻断仅当 $\lambda = 1$ 归零；（b）三维史瓦西空间切片 $g = (1 - \frac{2m}{r})^{-1}dr^2 + r^2(d\theta^2 + \sin^2\theta\,d\phi^2)$ 标量平坦（$\mathrm{Scal} \equiv 0 \implies K_* = 0$，最优比较空间形式退化为平直 $\mathbb{R}^3$）而无迹里奇非零；（c）四维欧氏史瓦西瞬子 $g = (1 - \frac{2m}{r})d\tau^2 + (1 - \frac{2m}{r})^{-1}dr^2 + r^2(d\theta^2 + \sin^2\theta\,d\phi^2)$ 严格正定且里奇平坦（$\mathrm{Ric} \equiv 0 \implies K_* = 0$），留下纯外尔潮汐阻断。
+
+   | 正定黎曼算例 | 字典序标架对截面曲率 | 最优常曲率 $K_*$ | 最小曲率阻断 $\lVert R - R^{(K_*)}\rVert$ | 最小射流阻断 $\lVert J - J^{(K_*)}\rVert$ |
+   | :--- | :--- | :---: | :---: | :---: |
+   | 三维伯杰球 $(S^3, g_\lambda)$ | $(a,\; a,\; 4 - 3a)$ | $\frac{4 - a}{3}$ | $8\sqrt{\frac{2}{3}}\,\lvert a - 1\rvert$ | $\frac{4\sqrt{2}}{3}\,\lvert a - 1\rvert$ |
+   | 三维史瓦西切片 $(r,\theta,\phi)$ | $b(-1,\; -1,\; 2)$ | $0$ | $2\sqrt{6}\,b$ | $\sqrt{2}\,b$ |
+   | 四维欧氏史瓦西 $(\tau,r,\theta,\phi)$ | $b(2,\; -1,\; -1,\; -1,\; -1,\; 2)$ | $0$ | $4\sqrt{3}\,b$ | $2\,b$ |
+
+   在外蕴曲面侧，在任意 $C^2$ 曲面 $\Sigma \subset \mathbb{R}^3$ 上，设主曲率满足 $\kappa_1 \ge \kappa_2$（平均曲率 $H := \frac{\kappa_1 + \kappa_2}{2}$、主曲率差 $d := \kappa_1 - \kappa_2 \ge 0$），欧拉公式 $\kappa_n(\theta) = H + \frac{d}{2}\cos(2\theta)$ 表明任一有符号曲率 $k \in \mathbb{R}$ 的相切比较球（$k = 0$ 时退化为切平面）均满足精确一致与均方根缺陷
+
+   $$
+   D_\infty(k) := \sup_{\theta \in [0, 2\pi)} \lvert\kappa_n(\theta) - k\rvert = \lvert k - H\rvert + \frac{d}{2} \ge \frac{d}{2}, \qquad D_2(k) := \left(\frac{1}{2\pi}\int_0^{2\pi}\bigl(\kappa_n(\theta) - k\bigr)^2\,d\theta\right)^{1/2} = \sqrt{(H - k)^2 + \frac{d^2}{8}} \ge \frac{d}{2\sqrt{2}}.
+   $$
+
+   两类误差同时在 $k = H$ 处唯一取极小值 $D_\infty(H) = \frac{d}{2}$ 与 $D_2(H) = \frac{d}{2\sqrt{2}}$（$H = 0$ 时极小比较面为切平面），该极小缺陷归零当且仅当该点为脐点（$d = 0$），而对一般 $k \in \mathbb{R}$，任一缺陷归零当且仅当同时满足 $d = 0$ 且 $k = H$。落到施瓦茨灯笼的单位圆柱面（$\kappa_1 = 1,\; \kappa_2 = 0$）：若匹配内蕴高斯曲率 $K_G = 0$，则被迫退回平直切板（$k = 0,\; D_\infty(0) = 1$）；若匹配圆截面 $k = 1$，则轴向仍留 $D_\infty(1) = 1$；即便采用最优半径 $R_* = 2$（$k = H = \frac{1}{2}$）的吻合球，仍无法抹除不可约外蕴缺陷 $D_\infty(\frac{1}{2}) = \frac{1}{2}$ 与 $D_2(\frac{1}{2}) = \frac{1}{2\sqrt{2}} \approx 0.3536$。
+
+2. **四元凯莱幂和托普利茨矩阵 $\mathbf{T}_N(\mathcal{U}(\delta, \gamma))$ 的精确中心对称闭式谱、惯性 $(2, 2, N - 3)$ 与双标度律（四元模型无条件，不依赖 RH）**：
+   对任意 $\gamma > 0$ 与 $0 \le \delta < \frac{1}{2}$，记 $A := \gamma^2 + \delta^2 + \frac{1}{4}$；将 $u_\pm = 1 - (\frac{1}{2} \mp \delta + i\gamma)^{-1} = \frac{(A - \frac{1}{2}) + i\gamma}{A \mp \delta}$ 分母有理化后，分子具有完全相同的实部与虚部 $(A - \frac{1}{2},\; \gamma)$，故外像 $u_+$ 与内像 $u_-$ 共享精确同一辐角 $\theta(\delta, \gamma) = \operatorname{Arg}((A - \frac{1}{2}) + i\gamma) \in (0, \pi)$，而对数模长互为相反数 $\pm\alpha(\delta, \gamma)$，其中 $\alpha(\delta, \gamma) := \ln\lvert u_+\rvert = \operatorname{artanh}(\frac{\delta}{A}) \ge 0$，即 $u_\pm = e^{\pm\alpha + i\theta}$。将 $\mathcal{U}(\delta, \gamma) := (u_+, u_-, \overline{u_+}, \overline{u_-})$ 视作按指标计重的四元族（在 $\delta = 0$ 处每个单位圆根保留重数 $2$，而非去重为两元集合以免幂和减半），其幂和矩阵 $\mathbf{T}_N = [4\cosh((j - k)\alpha)\cos((j - k)\theta)]_{0 \le j,k \le N}$ 为实对称中心对称托普利茨矩阵（与反转对合 $P_N$ 对易）。设范德蒙德矩阵 $V := [v(u_+),\; v(u_-),\; v(\overline{u_+}),\; v(\overline{u_-})] \in \mathbb{C}^{(N+1)\times 4}$（$v(z)_j = z^j$）及双对换符号阵 $J_4 := \operatorname{diag}(\sigma_x, \sigma_x)$（特征值 $+1, +1, -1, -1$），则精确成立 $\mathbf{T}_N = V J_4 V^*$：当 $\delta = 0$ 时，$u_+ = u_- = e^{i\theta_0} \neq e^{-i\theta_0}$，故对一切 $N \ge 1$ 秩恒为 $2$、惯性为 $(2, 0, N - 1)$；当 $0 < \delta < \frac{1}{2}$ 且 $N \ge 3$ 时，四像两两互异，故 $\operatorname{rank}(V) = 4$，由西尔维斯特惯性定理直接锁死**精确惯性 $(n_+, n_-, n_0) = (2, 2, N - 3)$**。
+
+   进一步，令 $L := N + 1$、中心指标 $m := j - \frac{N}{2}$，利用 $\cosh(\alpha(m - m'))\cos(\theta(m - m'))$ 的和差展开，将 $\mathbf{T}_N$ 正交分解为 $P_N$-偶（$\sigma = +1$）与 $P_N$-奇（$\sigma = -1$）两块秩至多为 $2$ 的实对称块 $4(u_\sigma u_\sigma^\top - w_\sigma w_\sigma^\top)$，其中 $u_{\mathrm{e}}(m) = \cosh(\alpha m)\cos(\theta m)$、$w_{\mathrm{e}}(m) = \sinh(\alpha m)\sin(\theta m)$、$u_{\mathrm{o}}(m) = \cosh(\alpha m)\sin(\theta m)$、$w_{\mathrm{o}}(m) = \sinh(\alpha m)\cos(\theta m)$。定义基本双曲—三角几何和 $S_h := \frac{\sinh(L\alpha)}{\sinh\alpha}$（$\alpha = 0$ 时取 $L$）、$S_c := \frac{\sin(L\theta)}{\sin\theta}$ 与 $C + iS := \frac{\sinh(L(\alpha + i\theta))}{\sinh(\alpha + i\theta)}$，两块 $2\times 2$ 约化矩阵立即给出全部四个非零特征值的**精确闭式公式**（对一切 $N \ge 3$ 与 $0 < \delta < \frac{1}{2}$）：
+
+   $$
+   \lambda_{\sigma, \pm}(N; \delta, \gamma) \;=\; (L + \sigma C) \;\pm\; \sqrt{(S_h + \sigma S_c)^2 - S^2} \qquad (\sigma \in \{+1, -1\}),
+   $$
+
+   且在 $\delta = 0$ 处精确退化为两个正特征值 $\lambda_{\sigma, +} = 2(L + \sigma S_c) > 0$ 与 $\lambda_{\sigma, -} = 0$。上述公式同时澄清了低阶门槛、渐近标度与全谱病态性三项细节：
+
+   - **低阶门槛与一般四像定理的锐性**：记 $t_d := 4\cosh(d\alpha)\cos(d\theta)$。在 $(\gamma_1, \delta = 0.25)$ 上，$2\times 2$ 阵 $\mathbf{T}_1$ 仍严格正定（$\lambda_{\min}(\mathbf{T}_1) = 4 - \lvert t_1\rvert \approx 0.0099886 > 0$）；而对一切离圆凯莱四元组（$0 < \delta < \frac{1}{2},\; \gamma > 0$），在 $N = 2$（$3\times 3$ 阵）处偶扇区向量 $u_{\mathrm{e}}, w_{\mathrm{e}} \in \mathbb{R}^3$ 已因中心分量 $u_{\mathrm{e}}(0) = 1$、$w_{\mathrm{e}}(0) = 0$ 与非零外端分量 $w_{\mathrm{e}}(\pm 1) = \sinh\alpha\sin\theta \neq 0$ 而线性无关，迫使偶扇区当场出现严格负特征值 $\lambda_{\mathrm{e}, -}(\mathbf{T}_2) = 4 + \frac{1}{2}(t_2 - \sqrt{t_2^2 + 8t_1^2}) < 0$（在 $(\gamma_1, 0.25)$ 处为 $\approx -2.0838\times 10^{-8}$），同时奇扇区单特征值为 $\lambda_{\mathrm{o}}(\mathbf{T}_2) = 4 - t_2$（当小 $\gamma$ 满足 $t_2 > 4$ 时可已转负），而 $N = 3$ 则是对一切 $(\delta, \gamma)$ **一致保证**双负模式（惯性 $(2, 2, 0)$）的最低阶数。不过对冻结定理 `toeplitz_posSemidef_iff_norm_eq_one` 面向的**一般**四互异倒共轭族，一致门槛 $N \ge 3$（$N + 1 \ge 4$）依然严格锐利：例如离圆倒共轭四元组 $\{2, \frac{1}{2}, i, -i\}$ 满足 $\mathbf{T}_2 \succ 0$，其三个精确特征值为 $\frac{41 - \sqrt{881}}{8} \approx 1.4148$、$\frac{7}{4}$ 与 $\frac{41 + \sqrt{881}}{8}$。
+   - **弱漂移三次标度区与指数失控区**：固定 $N \ge 3$ 与内点辐角 $\theta \in (0, \pi)$ 令 $\alpha \to 0^+$，有 $\lambda_{\sigma, -} = -c_\sigma(N, \theta)\alpha^2 + O(\alpha^4)$，其中 $c_\sigma = 4\bigl(\lVert z_\sigma\rVert^2 - \frac{\langle u_\sigma(0), z_\sigma\rangle^2}{\lVert u_\sigma(0)\rVert^2}\bigr)$（$u_\sigma(0)$ 表示 $\alpha = 0$ 处的 $u_\sigma$，$z_{\mathrm{e}} = m\sin(\theta m)$、$z_{\mathrm{o}} = m\cos(\theta m)$）且随阶数满足 $c_\sigma = \frac{1}{6}N^3 + O_\theta(N^2)$。因而在弱漂移窗口 $(\sin\theta)^{-1} \ll N \ll \alpha^{-1}$ 内成立 $-\lambda_{\min}(\mathbf{T}_N) \sim \frac{1}{6}\alpha^2 N^3$（小 $\delta$ 时 $\alpha \sim \frac{\delta}{\gamma^2 + 1/4}$，故 $-\lambda_{\min} \sim \frac{\delta^2 N^3}{6(\gamma^2 + 1/4)^2}$）——令负模式在该窗口内达到 $\Theta(1)$ 量级需 $N \asymp \alpha^{-2/3} \sim \bigl((\gamma^2 + \frac{1}{4})/\delta\bigr)^{2/3}$（大 $\gamma$ 下简化为 $(\gamma^2/\delta)^{2/3}$；在 $\gamma_1,\; \delta = 10^{-3}$ 下，比值 $-\lambda_{\min}/(\frac{1}{6}\alpha^2 N^3)$ 沿 $N = 200, 500, 1000, 2000$ 依次舍入为 $1.2240, 1.0733, 1.0452, 1.0045$）；而在 $N = 95,\; \gamma_1$ 处，$\lambda_{\min}(\mathbf{T}_{95})$ 在 $\delta = 0.25$ 与 $0.40$ 下均落于奇扇区（$\sigma = -1$），认证值分别舍入为 $-0.29317011$ 与 $-0.75017762$，精确印证 [@ex-ch39-riemann-polishing-quantitative-audit]。跨入大阶指数失控区 $N\alpha \gg 1$（门槛 $N_{\mathrm{exp}} := \alpha^{-1} \sim \frac{\gamma^2 + 1/4}{\delta}$，在 $(\gamma_1, 0.25)$ 处为 $\approx 800.41$），记 $\phi := \operatorname{Arg}\sinh(\alpha + i\theta)$、$\psi_N := L\theta - \phi$、$k := \frac{\sinh\alpha}{\sqrt{\sinh^2\alpha + \sin^2\theta}} \in (0, 1)$ 与 $H_N := \frac{e^{L\alpha}}{2\sinh\alpha}$，精确闭式导出
+
+     $$
+     -\frac{\lambda_{\sigma, -}}{H_N} \;=\; \sqrt{1 - k^2\sin^2\psi_N} \;-\; \sigma k\cos\psi_N \;+\; O_{\alpha,\theta}\bigl(L e^{-L\alpha}\bigr),
+     $$
+
+     主振幅严格落于 $[1 - k, 1 + k]$（在 $(\gamma_1, 0.25)$ 上，偶/奇扇区精确值与主项之比在 $N = 2048$ 时舍入为 $0.5965, 0.5998$，在 $N = 4096$ 时舍入为 $0.9382, 0.9392$，此时 $\lambda_{\min}(\mathbf{T}_{4096}) \approx -63461.72$）。
+   - **与全谱规范 Li 曲率托普利茨病态性的结构分野**：本节孤立四像模型在 $\delta = 0$（$N \ge 1$）时秩恒为 $2$、在 $\delta > 0$（$N \ge 3$）时惯性恒为 $(2, 2, N - 3)$；与之相对，[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#rem-ch34-li-toeplitz-superexponential-collapse) [@rem-ch34-li-toeplitz-superexponential-collapse] 证明的真全谱 Li 托普利茨矩阵 $T_N(c^{\mathrm{Li}})$ 因承载凯莱像向 $u = 1$ 聚拢的无穷多颗临界线零点，在 RH 下虽对一切 $N \ge 1$ 严格正定，却承受超指数舒尔主元坍缩 $\ln\lambda_{\min}(T_{N+1}) \le \ln\pi_N \le -2N\ln N + 2N\ln\ln N + O(N)$（如 $\pi_{100} \approx 4.45\times 10^{-406}$、$\lambda_{\min}(T_{101}) \approx 4.96\times 10^{-465}$）。可见有限四像矩阵精确示范了 `toeplitz_posSemidef_iff_norm_eq_one` 的半正定/破缺符号判据，而并不等同于全谱算术矩阵的数值条件数行为。
+
+3. **字符帕塞瓦尔径向—方向分解、实二次特征傅里叶投射与 $X^{1/2}$ / $X^{1/3}$ 素数幂偏置（无条件恒等式 + 外部狄利克雷 GRH，无需 LI）**：
+   设模 $q \ge 3$、$G := (\mathbb{Z}/q\mathbb{Z})^\times$、$\varphi := \varphi(q)$。对任一余数类计数函数 $F_a = F(X; q, a)$、其字符变换 $\widehat{F}(\chi) := \sum_{a \in G} F_a \overline{\chi(a)}$ 与公共径向基准 $M(X)$（对 $\theta, \psi$ 取 $X$，对 $\pi$ 取 $\operatorname{Li}(X) := \operatorname{li}(X) - \operatorname{li}(2)$），字符正交性无条件给出勾股能量分解
+
+   $$
+   E_{\mathrm{tot}}^F(X) := \sum_{a \in G}\left(F_a - \frac{M(X)}{\varphi}\right)^2 \;=\; \underbrace{\frac{1}{\varphi}\bigl\lvert\widehat{F}(\chi_0) - M(X)\bigr\rvert^2}_{E_{\mathrm{rad}}^F(X)} \;+\; \underbrace{\frac{1}{\varphi}\sum_{\chi \neq \chi_0}\bigl\lvert\widehat{F}(\chi)\bigr\rvert^2}_{E_{\mathrm{dir}}^F(X)}.
+   $$
+
+   对上述素数计数函数 $F \in \{\theta, \psi, \pi\}$ 及其对应径向基准 $M(X)$，径向项 $E_{\mathrm{rad}}^F$ 由经典 RH（除有限个 $p \mid q$ 外）支配，而方向各向异性项 $E_{\mathrm{dir}}^F$ 直接由非主特征的狄利克雷 GRH（`DirichletLZerosOnLine`，[@conj-riemann-hypothesis]）支配：对 $F = \psi$ 给出对 $q \le X$ 一致成立的方向能量界 $E_{\mathrm{dir}}^\psi(X) = O(X\ln^4(qX))$（帕塞瓦尔公式对 $\varphi - 1$ 条非主特征求和再除以 $\varphi$，给出因子 $\frac{\varphi - 1}{\varphi} < 1$）。
+
+   然而，一旦从宏观相对尺度 $O(X^{-1/2}\ln(qX))$ 下潜至精细平方根尺度 $\sqrt{X}$，素数与素数幂之间的确定性偏置立即显形。定义黎曼素数幂计数函数 $\Pi(X; q, a) := \sum_{p^k \le X,\, p^k \equiv a \pmod q} \frac{1}{k}$ 与 $k$ 次剩余根重数 $c_k(q; a) := \#\{b \in G : b^k \equiv a \pmod q\}$（$k = 2, 3$）。拆出素数平方（$k = 2$）、素数立方（$k = 3$）与 $k \ge 4$ 高次幂后，虽说首项极限 $c_2(q; a)/\varphi$ 本身已由算术级数素数定理无条件成立，但外部狄利克雷 GRH（固定 $q$，经 Davenport 第 20 章）不仅将素数幂零点涨落 $(\psi(X; q, a) - X/\varphi)/\sqrt{X}$ 锁在 $O(\ln^2(qX))$ 量级，而且将两项展开后的剩余误差同时收紧至显式幂律速率（其中 $\Pi - \pi$ 归一化因 $\operatorname{Li}(\sqrt{X})$ 在 $X = 4$ 处为零而取域 $X \ge 8$；同时揭示：只要 $c_3(q; a) > 0$，忽略 $k = 3$ 立方项会留下 $\Theta_q(X^{-1/6})$ 误差，远大于 GRH 的 $O_q(X^{-1/4}\ln^2 X)$ 级波动）：
+
+   $$
+   R_3^{\psi-\theta}(X; q, a) := \frac{\psi(X; q, a) - \theta(X; q, a)}{\sqrt{X}} - \frac{c_2(q; a)}{\varphi} - \frac{c_3(q; a)}{\varphi} X^{-1/6} \;=\; O_q\!\bigl(X^{-1/4}\ln^2 X\bigr) \qquad (X \ge 2),
+   $$
+
+   $$
+   R_3^{\Pi-\pi}(X; q, a) := \frac{\Pi(X; q, a) - \pi(X; q, a)}{\operatorname{Li}(\sqrt{X})/2} - \frac{c_2(q; a)}{\varphi} - \frac{c_3(q; a)}{\varphi}\cdot\frac{2\,\operatorname{Li}(X^{1/3})}{3\,\operatorname{Li}(\sqrt{X})} \;=\; O_q\!\bigl(X^{-1/4}\ln^2 X\bigr) \qquad (X \ge 8).
+   $$
+
+   当 $3 \nmid \varphi(q)$（如 $q \in \{3, 4, 5, 8, 12\}$）时，立方映射置换 $G$ 故 $c_3(q; a) \equiv 1$，从而任意二次剩余与非剩余通道相减时 $X^{-1/6}$ 项精确抵消；反之对本节所选 $q = 7$（$\varphi(7) = 6$），二次剩余 $\{1, 2, 4\}$ 具 $c_2 = 2$（非剩余 $\{3, 5, 6\}$ 为 $0$），而立方剩余 $\{1, 6\}$ 具 $c_3 = 3$（其余四类为 $0$），在 $X = \lfloor e^{14}\rfloor = 1{,}202{,}604$ 处产生肉眼可见的 $\frac{3}{6}X^{-1/6} \approx 0.048486$ 立方劈裂（见下表）。更进一步，经 $a = b^2$ 重排求和，无条件成立特征傅里叶恒等式
+
+   $$
+   \widehat{c_2}(\chi) := \sum_{a \in G}\overline{\chi(a)}\, c_2(q; a) \;=\; \sum_{b \in G}\overline{\chi^2(b)} \;=\; \varphi\,\mathbf{1}_{\chi^2 = \chi_0}.
+   $$
+
+   由此确定性平方根偏置 $-\frac{c_2(q; a)}{\varphi}\sqrt{X}$ 百分之百局域在主特征 $\chi_0$ 与全部 $r_2(q) := \#\{\chi \neq \chi_0 : \chi^2 = \chi_0\} = c_2(q; 1) - 1$ 条非主实二次特征所张子空间内（在一切复特征 $\chi^2 \neq \chi_0$ 上恒为零），自带精确方向偏置能量基线 $\frac{r_2(q)}{\varphi(q)} X$（对 $q = 3, 4, 5, 7$ 有 $r_2 = 1$；对 $q = 8, 12$ 有 $r_2 = 3$）。这同时刻画了最锐利的认识论边界：外部狄利克雷 GRH **无需任何零点线性无关假设**即可锁死宏观 $O(X^{-1/2}\ln(qX))$ 各向同性以及在 $\sqrt{X}$ 尺度上二次剩余相对素数幂通道的确定性偏移 $-\frac{c_2(q; a)}{\varphi}$；相比之下，切比雪夫素数竞赛中诸如 $3 \pmod 4$ 领先 $1 \pmod 4$ 的精确对数密度偏置取值（`文献结果`，见 M. Rubinstein & P. Sarnak, *Exp. Math.* **3**, 173–197, 1994, [DOI 10.1080/10586458.1994.10504289](https://api.crossref.org/works/10.1080/10586458.1994.10504289); A. Granville & G. Martin, *Amer. Math. Monthly* **113**, 1–33, 2006, [arXiv:math/0408319](https://arxiv.org/abs/math/0408319)）仍以尚未证明的相关原初狄利克雷 $L$ 函数非负零点纵坐标（按重数计，含中心点不消失）在 $\mathbb{Q}$ 上的**线性无关假设（LI）**为条件，严格保持 **`OPEN`**。
+
+4. **256/320 位 FLINT/Arb 双精度区间认证与可复现归档（`NUM`）**：
+   上述三组结论对应的有限代数核验与数值算例均以 `python-flint 0.9.0`（FLINT/Arb 3.6.0）在 256 位与 320 位两档工作精度下独立重放：合计 **316** 条精确记录（曲率套件 9 条，含 $n = 2, 3, 4, 5$ 曲率格拉姆恒等式与嘉当算例；四元凯莱托普利茨套件 59 条；素数通道套件 248 条，含特征表、剩余根重数与有理素数幂计数）两档完全一致；全部 **6,503** 组区间球对（曲率套件 470 组、四元凯莱托普利茨套件 1,454 组、素数通道与显式公式套件 4,579 组，其中包括 88 组球对，来自全部 22 条跨越 $q \in \{3, 4, 5, 7, 8, 12\}$ 的特征 $\widehat{c_2}(\chi)$ 傅里叶核验，每条特征 4 组：系数实部/虚部及其包络零的残差实部/虚部）全部重叠且每一只 320 位球均包含于对应 256 位球内（其中 5,646 组严格收窄）。该套件同步复核了 [@ex-ch39-riemann-polishing-quantitative-audit] 中的十二面体/施瓦茨灯笼几何基准、四元托普利茨特征值与模 $7$ 素数通道基准：在 $q = 7,\; X = e^{10}$ 处六类素数计数为 $(407, 405, 413, 415, 412, 413)$，最大相对份额偏离精确等于 $\frac{700}{493}\% \approx 1.419878\%$（舍入为 $1.42\%$），归一化通道误差在 $\operatorname{Li}$ 约定下舍入为 $0.0004630$、在 $\operatorname{li}$ 约定下舍入为 $0.0004709$（均进一步舍入为 $0.0005$）；在 $y = 7$ 处，24 对零点谱和、筛端、有符号差值与尾界的认证区间分别四舍五入为 $-0.094435$、$-0.114481$、$+0.020046$ 与 $0.434601$（其中尾界认证上端点低于 $0.434602$）。下表列出 $q = 7,\; y = 14$（$X = 1{,}202{,}604$；在 $a \in \{1, 6\}$ 处 $\psi - \theta$ 立方偏置项舍入为 $0.048486$、$\Pi - \pi$ 立方偏置项舍入为 $0.053291$，其余四类均为 $0$）扣除立方项前后的认证残差：
+
+   | 余数类 $a \pmod 7$ | $c_2(7; a)$ | $c_3(7; a)$ | 仅扣平方残差 $\frac{\psi - \theta}{\sqrt{X}} - \frac{c_2}{6}$ | 两项残差 $R_3^{\psi-\theta}$ | 两项残差 $R_3^{\Pi-\pi}$ |
+   | :---: | :---: | :---: | :---: | :---: | :---: |
+   | $1$ | $2$ | $3$ | $+0.046748$ | $-0.001738$ | $-0.011391$ |
+   | $2$ | $2$ | $0$ | $-0.003742$ | $-0.003742$ | $+0.000175$ |
+   | $3$ | $0$ | $0$ | $+0.002469$ | $+0.002469$ | $+0.003600$ |
+   | $4$ | $2$ | $0$ | $-0.005671$ | $-0.005671$ | $+0.000818$ |
+   | $5$ | $0$ | $0$ | $+0.003471$ | $+0.003471$ | $+0.004555$ |
+   | $6$ | $0$ | $3$ | $+0.055554$ | $+0.007068$ | $+0.005981$ |
+
+   完整复现脚本、双精度证书表、分析报告与清单归档于不可变公开 Gist 修订 [`f932fcd015412f8e14fd39fa0ed174b7a5e04f00`](https://gist.github.com/loning/518f40cb465e7e1e4e91915e9d92ef11/f932fcd015412f8e14fd39fa0ed174b7a5e04f00)（固定原始校验清单 [`SHA256SUMS`](https://gist.githubusercontent.com/loning/518f40cb465e7e1e4e91915e9d92ef11/raw/f932fcd015412f8e14fd39fa0ed174b7a5e04f00/SHA256SUMS)，其自身 SHA-256 为 `b7a3b56c05413e9d06cb7a0474ee46e39a6b5fe98f149ead9fa21f6ee691b6f4`；独立核验记录见 [Issue #1050 评论](https://github.com/the-omega-institute/trureturing-books/issues/1050#issuecomment-7092135313)）。
 :::
 
 ---
