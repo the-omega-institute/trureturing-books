@@ -774,6 +774,38 @@ $$
 
 应用到实际 ζ 零点的截断时，仍须确定哪些整数关系成立以及它们的支撑。
 
+::: {.theorem #thm-ch31-exact-fourth-root-gaps title="四次单位根的弦距给出相位亏损下界" lean="D5/S3/Fourier/ExactFourthRootGaps.supportMaximum_zero_or_attained D5/S3/Fourier/ExactFourthRootGaps.breakpoint_partition D5/S3/Fourier/ExactFourthRootGaps.finite_step_integral D5/S3/Fourier/ExactFourthRootGaps.integrated_Q_le_deficit D5/S3/Fourier/ExactFourthRootGaps.length_series_le_integral"}
+对有限实频率，若整数关系 $k$ 的系数和不被 $4$ 整除，称其不相容。定义
+
+$$
+\tau(k)=\frac{|1-i^{\sum_j k_j}|^2}{2\left(\sum_j|k_j|\right)^2}.
+$$
+
+对 $u>0$，令 $Q(u)$ 为至少击中每个满足 $\tau(k)\ge u$ 的不相容关系支撑所须舍弃的最小权重占比。对每个支撑，若存在不相容关系，则 $\tau$ 在所有具有该支撑的不相容关系上取得正的最大值。无此类关系的支撑取最大值为零。以这些最大值、$0$、$2$ 为分点，将 $(0,2]$ 分成有限个右闭区间 $(a,b]$。在每个这样的区间上，$Q$ 等于 $Q(b)$，因此积分是有限和 $\sum_{(a,b]}(b-a)Q(b)$。
+
+取非负权重。若总权重为零，归一化平均与舍弃占比均为零。对任意时间集合 $\mathcal T$，系数长度级数 $L$ 与相位亏损满足
+
+$$
+L\le\int_0^2 Q(u)\,du\le D_{\mathcal T}.
+$$
+:::
+
+::: proof
+固定支撑和系数和的模 $4$ 余类，分子只取决于这个余类。每个非空余类都有长度最小的关系，选取这些最短关系中阈值最大的一个即可。支撑只有有限种，故改变阈值时，是否须击中某个支撑只会在有限个分点变化。等号处仍须击中该支撑，因此用右闭区间。
+
+固定共同时间 $v$。字符乘积的弦距估计保证，每条不相容关系的支撑上至少有一个坐标的损失 $1-\sin(\gamma_jv)$ 不小于 $\tau(k)$。损失至少为 $u$ 的坐标集因而给出一个合法舍弃方案。对阈值积分便将 $Q$ 的积分控制在该时间的平均损失以内。长度至多为 $h$ 的不相容关系有 $\tau(k)\ge h^{-2}$，所以在 $(1/(h+1)^2,1/h^2]$ 上有 $Q(u)\ge P_h$。分区积分并取极限得到左侧比较。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch31-exact-fourth-root-pair title="等权频率一与三的精确弦距改进" lean="D5/S3/Fourier/ExactFourthRootGaps.pair_exact_Q D5/S3/Fourier/ExactFourthRootGaps.pair_strict"}
+取频率 $(1,3)$ 和等正权重。若 $0<u\le1/8$，则 $Q(u)=1/2$。若 $u>1/8$，则 $Q(u)=0$。因此积分等于 $1/16$，大于系数长度级数的值 $1/32$。
+:::
+
+::: proof
+两频率的关系都是 $(3,-1)$ 的整数倍。长度为 $4$ 的代表关系系数和为 $2$，对应的弦距平方为 $4$，所以阈值是 $1/8$。所有不相容关系都用到两个坐标，长度至少为 $4$，阈值至多为 $1/8$。舍弃任何一个坐标都足够。系数长度法从 $h=4$ 起的舍弃占比为 $1/2$，尾和给出 $(1/2)/4^2=1/32$。完整证明由 Lean 内核检查。
+:::
+
+实际 ζ 零点的截断仍需要独立确定不相容关系及其支撑。
+
 ::: {.theorem #thm-ch31-finite-phase-recurrence title="有限区间内的加权相位复现" lean="D5/S3/Fourier/WeightedPhaseRecurrence.weighted_phase_recurrence"}
 取有限指标集 $J$，实频率 $\gamma_j$，目标相位角 $\theta_j$，以及总和为一的非负权重 $p_j$。令 $\xi(k)=\sum_{j\in J}k_j\gamma_j$，$b(k)=\sum_{j\in J}k_j\theta_j$。固定正整数 $N$ 与 $\delta>0$。对每个满足 $|k_j|\le N$ 的整数向量，假定 $\xi(k)=0$ 时 $\cos b(k)=1$，而 $\xi(k)\ne0$ 时 $|\xi(k)|\ge\delta$。
 
