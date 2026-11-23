@@ -887,7 +887,35 @@ $$
 任意两条遗漏直线至多交于一点，十二条直线的公共交集为空。这里 $n=9$、$g=1$，且每条遗漏直线的 $q_T=1$。独立替换保留 $\binom{7}{2}-12=9$ 个九阶因子，所得群有 $3^9$ 个被三消去的元素。Lean 证明构造了十一个系数向量，均满足模三的带符号删点方程和扩张方程。在十一处基坐标求值给出单位矩阵，所以这些向量的线性组合经三阶挠系数嵌入得到至少 $3^{11}$ 个不同的障碍元素，且都被三消去。完整证明由 Lean 内核检查。
 :::
 
-另一个有限计算用全部 72 个基坐标、36 条删点方程和 126 条扩张方程求得模三核的维数为 11，其中可提升到模九核的子空间维数为 9。由于障碍被九消去，这两个维数给出精确分解 $(\mathbb Z/9\mathbb Z)^9\oplus(\mathbb Z/3\mathbb Z)^2$。上面的 Lean 反驳使用的是三阶挠元的下界。[有限计算](https://github.com/the-omega-institute/trureturing/issues/33440#issuecomment-7088695650)
+::: {.theorem #thm-joint-circuit-rank-three-omission-factors title="秩三遗漏族的循环因子" lean="D5/S3/Combinatorics/Matroids/RankThreeOmissionPotentials.rank_three_lifting_obstruction_cyclic_factors"}
+设核心有 $n\ge 4$ 个点，各平行类大小为一。基为除 $m$ 个遗漏三元组外的所有三元组，任意两个遗漏三元组至多相交于一点。任选一个点作锚，记 $b=\binom{n-2}{2}$。
+
+令点势 $u$ 取值于 $\mathbb Z/\gcd(n,3)\mathbb Z$。要求锚点的势为零，所有点的势之和为零，且每个势值被三消去。若一对点不在任何遗漏三元组内，则两点势值相等。每个遗漏三元组上的三个势值之和为零。这样的点势共有 $3^d$ 个，联合提升障碍作为整数模同构于
+
+$$
+(\mathbb Z/n\mathbb Z)^{b-m}\oplus(\mathbb Z/3\mathbb Z)^d.
+$$
+
+当 $3\mid n$ 时，$d$ 是这个三元域点势空间的维数。当 $3\nmid n$ 时，点势只能为零，故 $d=0$。
+:::
+
+::: proof
+另取一个点作根。在交替二形式中消去根点与全体点的和，留下 $b$ 个由点对标记的坐标。每个遗漏三元组要求二形式在从其第一个点出发的两条差向量上取零，给出矩阵的一行。原始障碍就是该矩阵模 $n$ 的核。
+
+转置矩阵的一条核关系由各遗漏三角形的定向边系数表示。在相容关系中，这些系数是点势之差。三角形的三个定向边系数相等，沿环求和便得每个边系数被三消去。恢复根点的边后，可以用锚点固定常数，从而得到盒中所述点势。对 $n$ 的每个正因子 $q$，由有限字符配对可知，原矩阵模 $q$ 的核大小为 $q^{b-m}$ 乘以模 $\gcd(q,3)$ 的点势数。
+
+若存在整系数关系，模 $n$ 化约后每个系数被三消去，于是每个整数系数都可除以 $n/\gcd(n,3)>1$，并仍满足同一组关系。反复约去该因子排除了任何非零整系数关系。整数约化矩阵的 $m$ 行线性无关，故 $m\le b$。Smith 标准形把 $b-m$ 个自由模 $n$ 坐标与余下的有限模分开。取 $q=n$ 与 $q=\gcd(n,3)$，所得计数表明余下的模全被三消去，且大小就是点势数。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-joint-circuit-affine-plane-factors title="仿射平面遗漏族的精确分解" lean="D5/S3/Combinatorics/Matroids/RankThreeOmissionPotentials.affine_plane_lifting_obstruction_cyclic_factors"}
+设秩三核心的基恰为 $\mathrm{AG}(2,3)$ 的九个点上除十二条直线外的全部三元组，且每个平行类的大小为一。其联合提升障碍同构于 $(\mathbb Z/9\mathbb Z)^9\oplus(\mathbb Z/3\mathbb Z)^2$。
+:::
+
+::: proof
+每对点都在一条遗漏直线上。将点写为 $(x,y)\in\mathbb F_3^2$，锚取原点。十二条线的零和方程使每个归一化点势恰为 $u(x,y)=ax+by$，其中 $a,b\in\mathbb F_3$ 任取。于是 $d=2$，而 $\binom{7}{2}-12=9$。两个三阶因子来自这两个斜率。完整证明由 Lean 内核检查。
+:::
+
+直接使用 72 个基坐标、36 条删点方程和 126 条扩张方程，也得到相同的两个读数。模三核的维数为 11，其中可提升到模九核的子空间维数为 9。[有限计算](https://github.com/the-omega-institute/trureturing/issues/33440#issuecomment-7088695650)
 
 **方向复形的约化整数同调（书面推导）。** 设至少有一个非空极大面，记 $d=n-h$，令 $m$ 为满足 $R(B)=B$ 的极大面数。上面的商映射是同伦等价，因此把 $X$ 的约化整数同调与楔和的约化整数同调相识别。每个球面都有以基点为子复形的 CW 结构，因此相应球面在有限楔和的约化同调中给出一个直和项。每个 $S^{d-1}$ 在 $d-1$ 次贡献一个 $\mathbb Z$，在其余非负次数均为零。因此 $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$，而 $k\ne d-1$ 时 $\widetilde H_k(X;\mathbb Z)=0$。[Hatcher，《Algebraic Topology》，推论 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
