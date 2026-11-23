@@ -11,7 +11,7 @@ At each real $T$, either all cutoff memberships agree and $N'(T)=N(T)$, or exact
 ::: proof
 For each $j$ take one third of the minimum of $1$, $\gamma_j$, and the gaps $|\gamma_i-\gamma_j|$ for $i\ne j$ with $\gamma_i\le\gamma_j+1$. This is a positive radius. The other gaps exceed $1$. Each radius is therefore at most a third of any gap incident to that coordinate, so the two radii adjacent to a pair sum to less than the gap. A uniform radius bound also ensures local finiteness after choosing the perturbed ordinates.
 
-When cutoff membership changes at a coordinate, the threshold lies at or above the interval's left endpoint and strictly below its right endpoint. Only one interval can contain the threshold in this way. All other coordinates contribute equally to both counts. Lean verifies the construction and the exact count discrepancy.
+When cutoff membership changes at a coordinate, the threshold lies at or above the interval's left endpoint and strictly below its right endpoint. Only one interval can contain the threshold in this way. All other coordinates contribute equally to both counts. The full proof is checked by the Lean kernel.
 :::
 
 With unit multiplicities, $|N'(T)-N(T)|\le1$ for all $T$. Thus the bounded error in the two-term comparison example stays bounded for any choice within these radii. An interval perturbation satisfying a given collision budget still requires checking that budget for the chosen radii. If the weights are recomputed from the new ordinates, estimates involving those weights need a separate argument. [Two-term comparison example](https://github.com/the-omega-institute/trureturing-books/pull/1083)
