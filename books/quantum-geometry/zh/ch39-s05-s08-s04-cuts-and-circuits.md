@@ -879,6 +879,16 @@ $$
 
 例如，在八类的秩四核心中取公共元素 $0$，并以 $1,\ldots,7$ 上的七条法诺直线为花瓣。每个归属类都只有一个指标。类大小依次取 $3,3,3,3,6,6,6,6$ 时，障碍为 $(\mathbb Z/36\mathbb Z)^{13}\oplus\mathbb Z/6\mathbb Z\oplus(\mathbb Z/3\mathbb Z)^{14}$。
 
+::: {.theorem #thm-joint-circuit-affine-plane-omissions title="秩三仿射平面的反例" lean="D5/S3/Combinatorics/Matroids/AffinePlaneOmissionRefutation.result"}
+在仿射平面 $\mathrm{AG}(2,3)$ 的九个点上，取十二条仿射直线之外的所有三元组为基，每个平行类的大小均为一。独立替换规则给出 $(\mathbb Z/9\mathbb Z)^9$，而此核心的联合提升障碍与该群不同构。任意两条遗漏直线至多交于一点，十二条直线的公共交集为空。
+:::
+
+::: proof
+这里 $n=9$、$g=1$，且每条遗漏直线的 $q_T=1$。独立替换保留 $\binom{7}{2}-12=9$ 个九阶因子，所得群有 $3^9$ 个被三消去的元素。Lean 证明构造了十一个系数向量，均满足模三的带符号删点方程和扩张方程。在十一处基坐标求值给出单位矩阵，所以这些向量的线性组合经三阶挠系数嵌入得到至少 $3^{11}$ 个不同的障碍元素，且都被三消去。
+:::
+
+另一个有限计算用全部 72 个基坐标、36 条删点方程和 126 条扩张方程求得模三核的维数为 11，其中可提升到模九核的子空间维数为 9。由于障碍被九消去，这两个维数给出精确分解 $(\mathbb Z/9\mathbb Z)^9\oplus(\mathbb Z/3\mathbb Z)^2$。上面的 Lean 反驳使用的是三阶挠元的下界。[有限计算](https://github.com/the-omega-institute/trureturing/issues/33440#issuecomment-7088695650)
+
 **方向复形的约化整数同调（书面推导）。** 设至少有一个非空极大面，记 $d=n-h$，令 $m$ 为满足 $R(B)=B$ 的极大面数。上面的商映射是同伦等价，因此把 $X$ 的约化整数同调与楔和的约化整数同调相识别。每个球面都有以基点为子复形的 CW 结构，因此相应球面在有限楔和的约化同调中给出一个直和项。每个 $S^{d-1}$ 在 $d-1$ 次贡献一个 $\mathbb Z$，在其余非负次数均为零。因此 $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$，而 $k\ne d-1$ 时 $\widetilde H_k(X;\mathbb Z)=0$。[Hatcher，《Algebraic Topology》，推论 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 若没有非空极大面，原实现为空，所有非负次数的约化整数同调都为零。若有极大面且 $d=1$，楔和是有 $m+1$ 个点的离散空间，约化零次同调的生成元为 $[p_B]-[p_0]$，其中 $p_B$ 是极大面 $B$ 贡献的点，$p_0$ 是公共基点。若有极大面且 $m=0$，楔和为一点，所有约化同调群均为零。在极大面族非空时，约化欧拉示性数为 $(-1)^{d-1}m$。与前面的 Tutte 取值相比较，得到 $m=2^d T_M(1,1/2)$。
