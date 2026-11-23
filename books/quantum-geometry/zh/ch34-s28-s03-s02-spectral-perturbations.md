@@ -7,16 +7,16 @@
 
 $$
 E_{p,g'}(\eta)\le D+
-\frac{1+\eta(M+1)/\varepsilon}{M+2}\bigl(W^{2p}-D\bigr).
+\frac{\min\{M+2,\,1+\lfloor\eta(M+1)/\varepsilon\rfloor\}}{M+2}\bigl(W^{2p}-D\bigr).
 $$
 :::
 
 ::: proof
-让每个偏移在 $[-\varepsilon,\varepsilon]$ 的 $M+2$ 个等距点中独立选取。若 $m\ne n$，取一个满足 $m_j-n_j\ne0$ 的坐标。固定其余偏移后，两个频率和之差是该网格索引的仿射函数，斜率绝对值为 $2\varepsilon|m_j-n_j|/(M+1)$。满足闭距离条件的最大索引与最小索引之差至多为 $\eta(M+1)/(\varepsilon|m_j-n_j|)$，因此合格索引数至多为 $1+\eta(M+1)/\varepsilon$。
+让每个偏移在 $[-\varepsilon,\varepsilon]$ 的 $M+2$ 个等距点中独立选取。若 $m\ne n$，取一个满足 $m_j-n_j\ne0$ 的坐标。固定其余偏移后，两个频率和之差是该网格索引的仿射函数，斜率绝对值为 $2\varepsilon|m_j-n_j|/(M+1)$。若有索引满足闭距离条件，则最大索引与最小索引之差至多为 $\eta(M+1)/(\varepsilon|m_j-n_j|)$，因此合格索引数至多为 $1+\lfloor\eta(M+1)/\varepsilon\rfloor$，也至多为网格大小 $M+2$。
 
 对每个有序对先作这个计数，再对偏移的有限乘积空间平均。对角项始终贡献 $D$。由多项式展开，非对角项总权重为 $W^{2p}-D$。至少有一个偏移配置使总重不超过平均上界。完整证明由 Lean 内核检查。
 :::
 
-$\eta=0$ 时，非对角项的系数为 $1/(M+2)$。固定正分辨率并增大网格时，系数趋于 $\eta/\varepsilon$。每个存在性结论均允许按给定的 $p$ 和 $\eta$ 选择频率。连续独立扰动可用线性组合的密度估计作对照。[Rudelson 与 Vershynin，定理 1.2](https://arxiv.org/html/1402.4492#S1.Thmtheorem2)
+$\eta=0$ 时，非对角项的系数为 $1/(M+2)$。固定正分辨率并增大网格时，系数趋于 $\min\{1,\eta/\varepsilon\}$。每个存在性结论均允许按给定的 $p$ 和 $\eta$ 选择频率。连续独立扰动可用线性组合的密度估计作对照。[Rudelson 与 Vershynin，定理 1.2](https://arxiv.org/html/1402.4492#S1.Thmtheorem2)
 
 对选出的比较谱，可将这个上界代入有界起点的矩判据。实际 ζ 纵坐标是预先固定的频率。该判据在这些纵坐标上的高阶近碰撞估计仍待解决。[加权近碰撞与缺失窗口的起点范围](ch34-s28-s03-s02-weighted-near-collisions.md#thm-ch31-bounded-tail-window-start)
