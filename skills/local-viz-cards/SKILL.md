@@ -411,6 +411,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `spacetime-memory-schur-split-sandbox`（`OMEGA//SPACETIME`）承接第三十八章 §38.12 `#sec-ch38-spacetime-motion-equivalence-and-memory-schur-split`：紫色给无标签三元数球体 `𝕋₃ ≅ S³(1)`、固定客观圆弧 `Γ` 与切平面总比较位移箭 `d`，青色给过切点 `C` 的观察者记忆大圆窗口 `W_M`、窗内正交投影 `P_W d`（被认领为时间份额 `κ_time`）及其勾股正方形面积、双曲守恒曲线 `cosh² r − sinh² r = 1` 与纵向 `KV-Cache` 已留存槽位，品红给窗外正交舒尔补残差 `(I − P_W)d`（被外推为空间份额 `κ_space = 1 − κ_time`）及其勾股正方形面积、滑动窗口淘汰入 `W_M⊥` 的遗忘残差与视界负载量，琥珀严格只给泰勒斯半圆上的垂足拖动手柄与当前激活控件，红色严格只给右栏 `#evidence` 中离散记忆窗导出 3+1 维引力场方程与视界幺正性的开放边界（`prob-ch34-gravity-dynamics-and-coupling`、`prob-appendix-d-time-horizon`）。绿色依据严格限于正文定理盒 `thm-ch38-spacetime-memory-schur-anchors` 以 `lean=` 引用的十六条冻结声明（`exists_unitQuaternion_equiv`、`kappa_eq_one_sub_dist_sq`、`tri_eq_mul_inv_mul`、`normSq_and_chebyshev`、`reflectionSeq_eq_pow`、`kappa_reflectionSeq_add`、`orthogonal_complement_projection_identities`、`schur_quadratic_is_least`、`complementary_context_probability_pythagoras`、`pinching_hilbert_schmidt_pythagorean`、`pinching_discarded_coherence_mass`、`eq_smul_minkowski_of_null`、`bogoliubov_norm_conservation`、`record_time_lower_bound`、`surviving_copy_blocks_reversal`、`observable_krylov_once_stable_permanently`）；爱因斯坦—闵可夫斯基度规、丢番图—欧几里得勾股有理参数化、凯莱有理旋转与佩奇黑洞信息曲线连同泰勒斯半圆及移项推导标 `ARGUED`；大整数精确有理勾股分账与双观察者旋子读数标 `NUM`；记忆分类读法、三态容量相变与 `KV-Cache` 互换标 `MODEL`。
 
+`observer-is-universe-crystallization-sandbox`（`OMEGA//UNIVERSE`）承接第三十八章 §38.13 `#sec-ch38-self-contained-observer-definition-and-observer-is-universe`：紫色给无边界可接收状态全集球体 `𝒮`（`∂𝒮 = ∅`）与内部未结晶潜伏视界星点 `ℋ_{1/2} = 𝒮 \ V(𝒦₀)`，青色给 `0` 阶已结晶关系结构核 `𝒦₀`（Atlas DAG 顶点与三元闭合边）、有理舒尔正交基增量、多观察者共享不变定理主干 `⋂ ι_i^{-1}(𝒦_{0,i})` 与零导入 Lean 4 `QRat`/`ProjTernion` 归约束，品红给同义反复空转环（`[x,x,x]=x`，`Δτ = 0`）、开环外源环境假象对照与标准 `Rat`/`==` 归约阻滞路径，琥珀严格只给当前结晶步焦点手柄与激活控件（无开放问题，不用红色）。绿色依据严格限于正文定理盒 `thm-ch38-observer-is-universe-anchors` 以 `lean=` 引用的十六条冻结声明（`exists_unitQuaternion_equiv`、`kappa_eq_one_sub_dist_sq`、`tri_eq_mul_inv_mul`、`rayKernel_eq_bornProbability_spinor`、`schur_quadratic_is_least`、`orthogonal_complement_projection_identities`、`observable_krylov_strict_growth_bound`、`observable_krylov_once_stable_permanently`、`face_cycle_exact`、`tetra_defects_incidence_repair_and_exactness`、`anchored_phase_classification`、`partition_inseparable_iff_kernel`、`unit_gram_overlap_characterization`、`concept_fiber_decomposition`、`context_parameters_can_select_distinct_fixed_points`、`objective_claim_requires_invariant_common_factor`）；莱布尼茨单子论、米田嵌入、自创生闭合及佩奇—伍特斯/罗韦利内部关系时间连同舒尔—贝蒂手工推导标 `ARGUED`；大整数精确分数结构时间 `τ` 与 Lean `v4.35.0` 四拍轨迹 `0 → 0 → 3/4 → 3/2` 标 `NUM`；零外部端口五元组、`𝔒 ≅ 𝒰_Ω` 核内星空翻转与多单子共振跨度标 `MODEL`。
+
 `prelude-dimensions` 是序曲的几何入门页，默认卡 `shadow` 同步显示俯视木桩与侧视影子，`compare` 比较 90° 与 270° 的同位反向。圆盘侧视是固定线段，木桩投影是移动点；该经典正交投影模型不推出量子测量规则。其余卡分别演示射线投影、纬圈、二维到三维的等半径赤道嵌入、三对对跖方向的等权混合与从 1 弧度出发的余弦迭代。几何计算标 `NUM`，理想化观看与混合过程标 `MODEL`，余弦收敛及其边界沿用序曲的文献分层，不使用绿色 Lean 标记。
 
 
@@ -1045,7 +1047,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十八章 | §38.12.3 末（双观察者同时性错位与引力视界翻转段之后） | `spacetime-memory-schur-split-sandbox` · `dual-observer-simultaneity-rotor-tilt` |
 | 第三十八章 | §38.12.4 记忆容量 $M$ 三态相变对照表之后、推论引段之前 | `spacetime-memory-schur-split-sandbox` · `memory-capacity-three-regime-phase` |
 | 第三十八章 | §38.12.4 末（第 3 条序列时间与通道空间互换之后） | `spacetime-memory-schur-split-sandbox` · `forgetting-generates-space-and-kv-cache` |
-| 第三十八章 | §38.12 末（转入第三十九章的桥接段之后） | `spacetime-memory-schur-split-sandbox` 完整实验室 |
+| 第三十八章 | §38.12 末（转入 §38.13 过渡段之后） | `spacetime-memory-schur-split-sandbox` 完整实验室 |
+| 第三十八章 | §38.13.1 末（五元组第 5 条 `1 ↦ 0'` 结晶算子段之后） | `observer-is-universe-crystallization-sandbox` · `port-free-pentad-crystallization` |
+| 第三十八章 | §38.13.2.2 末（四条物理与认知铁律列表之后） | `observer-is-universe-crystallization-sandbox` · `rational-schur-betti-time-arrow` |
+| 第三十八章 | §38.13.3 第 3 步核内第一人称视角翻转段之后、单子共振范畴之前 | `observer-is-universe-crystallization-sandbox` · `core-inside-out-starry-sky-flip` |
+| 第三十八章 | §38.13.3 末（传统二元范式对比单子宇宙总表之后） | `observer-is-universe-crystallization-sandbox` · `trureturing-monad-resonant-span` |
+| 第三十八章 | §38.13.4 末（Lean 4 零导入 `ObserverUniverse` 代码块之后） | `observer-is-universe-crystallization-sandbox` · `lean4-observer-universe-decide-trace` |
+| 第三十八章 | §38.13 末（全章收官转入第三十九章过渡段之后） | `observer-is-universe-crystallization-sandbox` 完整实验室 |
 | 第三十九章 | §39.19.2 末（三元数内禀拓扑免疫结语段之后） | `ternion-number-projection-sandbox` · `flat-3d-zero-divisor-gimbal-deadlock` |
 | 第三十九章 | §39.19.3 模型定义 `def-ch39-ternion-and-number-projection-operators` 之后 | `ternion-number-projection-sandbox` · `hamilton-quaternion-w-shadow-tax` |
 | 第三十九章 | §39.19.3 末（布鲁厄姆桥四道切刀条目列表之后） | `ternion-number-projection-sandbox` · `complex-equatorial-hopf-slice` |
