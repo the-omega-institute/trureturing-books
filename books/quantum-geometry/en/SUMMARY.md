@@ -240,6 +240,7 @@
   - [39.5 Dyad Plus Relation Equals Ternion Field and Two-Order Future Recurrence: From 2+1=3 Orthogonal Commutator Closure, Gauge Connection, and Lie-Triple Curvature to Bianchi–Ostrogradsky Second-Order Finality](ch39-s28-dyad-relation-future-and-second-order-field.md)
   - [39.6 Past, Present, Future and the 0 · 1/2 · 1 Pure Rational Causal-Jet Matrix: Spherical Jet Ladder, Midpoint Self-Duality, and the 1 ↦ 0 Cosmic Heartbeat](ch39-s30-past-present-future-rational-jet-triad.md)
   - [39.7 The Spectral Identity of AXIOM-Ω — Ternion Spherical Rational Fourier Transform (ℱ_Ω): Peter–Weyl Half-Integer Spin Shells, Integer-Coefficient Chebyshev–Wigner Polynomial Kernels, the 0 · 1/2 · 1 Harmonic Base, and Heap Convolution Diagonalization](ch39-s37-spherical-fourier-transform-peter-weyl-synthesis.md)
+  - [39.8 OmegaMath Zero-Axiom De-Approximation Recompilation and Self-Referential Monograph Atlas Closure: Six-Pillar Rational Reduction, d⁸ Quadrupole Slicing, Hecke–Ramanujan Positivity, and Twelve-Node Fixed-Point Closure](ch39-s38-omega-math-recompilation-and-self-referential-atlas-closure.md)
 
 # Coda and Appendices
 

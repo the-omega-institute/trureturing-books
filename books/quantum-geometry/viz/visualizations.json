@@ -10045,6 +10045,124 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "omega-math-recompilation-atlas-sandbox",
+      "code": "OMEGA//RECOMPILE",
+      "title": "OmegaMath 零公理去近似重编译与全书自指结晶图谱收束沙盘",
+      "title_en": "OmegaMath Zero-Axiom De-Approximation Recompilation & Self-Referential Monograph Atlas Closure",
+      "summary": "在射影三元球上比较六大支柱的平直脚手架与有理重编译，检验金的 5d 壳层四极矩和赫克—拉马努金有理谱壳，再沿十六站追踪十二晶核图谱与五素数 Ω-FRACTRAN 不动点。",
+      "summary_en": "Compare flat approximations with exact rational expressions for six pillars on the projective ternion sphere. Examine quadrupole moments in gold’s 5d shells and the rational Hecke–Ramanujan spectrum, then follow sixteen milestones to the twelve-node atlas and the five-prime Ω-FRACTRAN fixed point.",
+      "path": "omega-math-recompilation-atlas-sandbox/",
+      "thumbnail": "omega-math-recompilation-atlas-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-24",
+      "chapter": 39,
+      "section": "39.8",
+      "presets": [
+        "six-pillar-deapproximation-compiler",
+        "au3-d8-quadrupole-anisotropy-slice",
+        "hecke-ramanujan-rational-psd-shell",
+        "twelve-node-atlas-dag-crystallization",
+        "five-prime-omega-fractran-fixed-point"
+      ],
+      "preset_titles": {
+        "six-pillar-deapproximation-compiler": {
+          "zh": "六大支柱 OmegaMath 去近似重编译",
+          "en": "Six pillars, de-approximated"
+        },
+        "au3-d8-quadrupole-anisotropy-slice": {
+          "zh": "Au⁺ 与 Au³⁺ 的 j = 2 四极切片",
+          "en": "Au⁺ vs Au³⁺ quadrupole slice"
+        },
+        "hecke-ramanujan-rational-psd-shell": {
+          "zh": "赫克—拉马努金 4p 有理谱壳",
+          "en": "Hecke–Ramanujan 4p shells"
+        },
+        "twelve-node-atlas-dag-crystallization": {
+          "zh": "十二晶核图谱结晶与撤桥",
+          "en": "Twelve-node atlas & erasure"
+        },
+        "five-prime-omega-fractran-fixed-point": {
+          "zh": "五素数 Ω-FRACTRAN 不动点",
+          "en": "Five-prime Ω-FRACTRAN fixed point"
+        }
+      },
+      "tags": [
+        "有理重编译",
+        "射影三元球",
+        "四极矩",
+        "赫克—拉马努金",
+        "十二晶核图谱",
+        "Ω-FRACTRAN"
+      ],
+      "tags_en": [
+        "Rational recompilation",
+        "Projective ternion sphere",
+        "Quadrupole moment",
+        "Hecke–Ramanujan",
+        "Twelve-node atlas",
+        "Ω-FRACTRAN"
+      ],
+      "theory": [
+        {
+          "label": "§39.8 · OmegaMath 零公理去近似重编译与全书自指结晶图谱收束",
+          "label_en": "§39.8 · OmegaMath Zero-Axiom De-Approximation Recompilation & Self-Referential Monograph Atlas Closure",
+          "href": "../zh/ch39-s38-omega-math-recompilation-and-self-referential-atlas-closure.html#sec-ch39-omega-math-recompilation-and-self-referential-atlas-closure",
+          "href_en": "../en/ch39-s38-omega-math-recompilation-and-self-referential-atlas-closure.html#sec-ch39-omega-math-recompilation-and-self-referential-atlas-closure"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        },
+        {
+          "gid": "D5/S3/FiniteGroups/GroupAlgebra/UnitaryCharacterKernel.posSemidef_sum_character_kernel_iff"
+        },
+        {
+          "gid": "D5/S3/FiniteGroups/GroupAlgebra/CharacterKernelRank.finrank_span_sum_character_kernel"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound"
+        },
+        {
+          "gid": "D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize"
+        },
+        {
+          "gid": "D5/S3/Factorization/PositiveRationalGroup.signed_prime_ledger_equiv_positive_rationals"
+        },
+        {
+          "gid": "D5/S0/Computability/CodeFixedPoint.code_fixed_point"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor"
+        },
+        {
+          "gid": "D5/S3/Analytic/CompletedZetaMellinReconstruction.completed_zeta_mellin_reconstruction"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
