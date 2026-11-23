@@ -26,7 +26,7 @@ $$
 :::
 
 ::: {.theorem #thm-ch31-bounded-tail-window-start title="缺失窗口的起点范围" lean="D5/S3/Fourier/Concentration/FiniteSincCollisionMoment.exists_bounded_tail_window"}
-给定上述有限数据、自然数 $p$、$L,h,\delta>0$ 及实数 $H,A$，记 $N=\lfloor H/h\rfloor_++1$、$B=\sum_j w_j|g_j|$，其中下取整取自然数。若 $7NE_p(2/L)<\delta^{2p}$，则存在 $a\in(A,A+2L)$，使得
+给定上述有限数据、自然数 $p$、$L,h>0$、$\delta\ge0$ 及实数 $H,A$，记 $N=\lfloor H/h\rfloor_++1$、$B=\sum_j w_j|g_j|$，其中下取整取自然数。若 $7NE_p(2/L)<\delta^{2p}$，则存在 $a\in(A,A+2L)$，使得
 
 $$
 \sum_j w_j\sin(g_jt)<\delta+hB\qquad(t\in[a,a+H]).

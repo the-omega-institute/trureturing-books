@@ -26,7 +26,7 @@ Group the $G_m$ into bins of width $2/L$, and write $b_k$ for the sum of coeffic
 :::
 
 ::: {.theorem #thm-ch31-bounded-tail-window-start title="A bounded range for the missing-window start" lean="D5/S3/Fourier/Concentration/FiniteSincCollisionMoment.exists_bounded_tail_window"}
-For the same finite data, a natural number $p$, $L,h,\delta>0$, and real $H,A$, put $N=\lfloor H/h\rfloor_++1$ and $B=\sum_j w_j|g_j|$, using the natural-number floor. If $7NE_p(2/L)<\delta^{2p}$, there is an $a\in(A,A+2L)$ such that
+For the same finite data, a natural number $p$, $L,h>0$, $\delta\ge0$, and real $H,A$, put $N=\lfloor H/h\rfloor_++1$ and $B=\sum_j w_j|g_j|$, using the natural-number floor. If $7NE_p(2/L)<\delta^{2p}$, there is an $a\in(A,A+2L)$ such that
 
 $$
 \sum_j w_j\sin(g_jt)<\delta+hB\qquad(t\in[a,a+H]).
