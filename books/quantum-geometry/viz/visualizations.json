@@ -8905,6 +8905,122 @@
       "capture_lock": "links"
     },
     {
+      "id": "spherical-fourier-peter-weyl-sandbox",
+      "code": "OMEGA//PETER-WEYL",
+      "title": "三元球面傅里叶变换与彼得—外尔合成沙盘：自旋壳层、克莱布什—戈尔丹三元基、正核磨光与无原点堆卷积",
+      "title_en": "Spherical Fourier Transform & Peter–Weyl Synthesis on S³: Spin Shells, the Clebsch–Gordan Triad, Positive Smoothing and Origin-Free Heap Convolution",
+      "summary": "紫色的 S³(1) = 𝕋₃ 指数坐标球切开一角，右边是彼得—外尔谱金字塔：每个自旋壳层 j 是一个 (2j + 1) × (2j + 1) 的矩阵块。κ = c² 是射线读数，χ_j = U_{2j}(c)：整数自旋是 κ 的整系数多项式（χ₁ = 4κ − 1 在绕 (1, 1, 1) 转 120° 处为零），半整数自旋带双覆叠符号 ±√κ。两个 j = 1/2 的张量积在克莱布什—戈尔丹基下分成 1 + 3；硬截断在平直直线上过冲趋于约 9%，在 S³ 上于 ±1 处不收敛，正核 (Σχ)²/M 不过冲；2T 与 Q₈ 上的无原点堆卷积在谱侧逐块变成 f̂ ĝ† ĥ，帕塞瓦尔两边是同一个有理数；带限寄存器与蝶形网络的读法是 MODEL。",
+      "summary_en": "The violet exponential ball of S³(1) = 𝕋₃ with one octant cut away, and the Peter–Weyl spectral pyramid on the right, one (2j + 1) × (2j + 1) block of matrix coefficients per spin shell j. κ = c² is the ray reading and χ_j = U_{2j}(c): integer spins are polynomials in κ with integer coefficients (χ₁ = 4κ − 1 vanishes at the turn by 120° about (1, 1, 1)), half-integer spins carry the double-cover sign ±√κ. Two shells j = 1/2 split into 1 + 3 in the Clebsch–Gordan basis; a hard cutoff overshoots by about 9% on the flat line and diverges at ±1 on S³, while the positive kernel (Σχ)²/M does not overshoot; the origin-free heap convolution on 2T and Q₈ becomes f̂ ĝ† ĥ block by block, with both sides of Parseval the same rational number; the band-limited register and the butterfly network are read as a MODEL.",
+      "path": "spherical-fourier-peter-weyl-sandbox/",
+      "thumbnail": "spherical-fourier-peter-weyl-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-24",
+      "chapter": 39,
+      "section": "39.7",
+      "presets": [
+        "spin-harmonic-shells-and-chebyshev-kernels",
+        "clebsch-gordan-causal-triad-base",
+        "gibbs-overshoot-vs-positive-spherical-smoothing",
+        "origin-free-heap-convolution-diagonalization",
+        "observer-bandlimit-and-tft-s3-fft"
+      ],
+      "preset_titles": {
+        "spin-harmonic-shells-and-chebyshev-kernels": {
+          "zh": "自旋壳层与整系数切比雪夫核",
+          "en": "Spin shells and integer Chebyshev kernels"
+        },
+        "clebsch-gordan-causal-triad-base": {
+          "zh": "克莱布什—戈尔丹：两个 j = 1/2 分成 0 ⊕ 1",
+          "en": "Clebsch–Gordan: two j = 1/2 split into 0 ⊕ 1"
+        },
+        "gibbs-overshoot-vs-positive-spherical-smoothing": {
+          "zh": "吉布斯过冲与正核球面磨光",
+          "en": "Gibbs overshoot and positive spherical smoothing"
+        },
+        "origin-free-heap-convolution-diagonalization": {
+          "zh": "无原点堆卷积在谱侧逐块对角化",
+          "en": "Origin-free heap convolution, block by block"
+        },
+        "observer-bandlimit-and-tft-s3-fft": {
+          "zh": "观察者的带限寄存器与蝶形网络（MODEL）",
+          "en": "The observer’s band-limited register and the butterflies (MODEL)"
+        }
+      },
+      "tags": [
+        "彼得—外尔",
+        "球面傅里叶",
+        "特征标",
+        "吉布斯",
+        "堆卷积"
+      ],
+      "tags_en": [
+        "Peter–Weyl",
+        "spherical Fourier",
+        "characters",
+        "Gibbs",
+        "heap convolution"
+      ],
+      "theory": [
+        {
+          "label": "§39.7 · 三元球面傅里叶变换与彼得—外尔合成",
+          "label_en": "§39.7 · The Spherical Fourier Transform and the Peter–Weyl Synthesis",
+          "href": "../zh/ch39-s37-spherical-fourier-transform-peter-weyl-synthesis.html",
+          "href_en": "../en/ch39-s37-spherical-fourier-transform-peter-weyl-synthesis.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Analysis/CompactGroups/MatrixCoefficientDensity.dense_span_unitary_coefficients"
+        },
+        {
+          "gid": "D5/S3/Quantum/Analysis/CompactGroups/UnitaryRepresentationKernel.exists_unitaryRep_ker_subset"
+        },
+        {
+          "gid": "D5/S3/Quantum/Analysis/CompactGroups/SchurOrthogonality.integral_dual_mul_dual_inv_self"
+        },
+        {
+          "gid": "D5/S3/Quantum/Analysis/CompactGroups/SchurOrthogonality.integral_dual_mul_dual_inv_eq_zero"
+        },
+        {
+          "gid": "D5/S3/FiniteGroups/GroupAlgebra/CharacterKernelRank.finrank_span_sum_character_kernel"
+        },
+        {
+          "gid": "D5/S3/FiniteGroups/GroupAlgebra/UnitaryCharacterKernel.posSemidef_sum_character_kernel_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
+          "gid": "D5/S3/Fourier/FullBispectrumStability.cyclic_parseval"
+        },
+        {
+          "gid": "D5/S3/Analytic/CompletedZetaMellinReconstruction.completed_zeta_mellin_reconstruction"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S3/Weil/TestFunctions/FinitePowerSumToeplitzCircleCriterion.toeplitz_posSemidef_iff_norm_eq_one"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
       "id": "real-error-prime-adelic-sandbox",
       "code": "OMEGA//ADELIC",
       "title": "实数误差放大轴 vs 素数本原闭合与阿代尔归元沙盘",
