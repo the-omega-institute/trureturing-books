@@ -929,6 +929,35 @@ Choose a countably infinite rationally independent family of real numbers. Resca
 
 For the actual ζ zeros under RH, the existing mass error has $a_0=1/(4\pi)$. To get the square-tail hypothesis, use $m_\gamma=o(\log\gamma)$, where $m_\gamma$ is the analytic multiplicity. Fix $\epsilon>0$ and let $s=e^{-4/\epsilon}/2$. For a zero $\rho=1/2+i\gamma$, set $c=\rho+s/4$. Normalize by $g(z)=\zeta(c+z/4)/\zeta(c)$. The polynomial growth bound for ζ in the disk and the reciprocal bound at $c$ give $|g(z)|\le C\gamma^2$ on $|z|\le1/2$. Jensen's bound at the zero $z=-s$ yields $m_\gamma\le\log(C\gamma^2)/\log((1/2)/s)\le\epsilon\log\gamma$ for sufficiently large $\gamma$. Goldston and Gonek give the stronger order $O(\log\gamma/\log\log\gamma)$. [Goldston and Gonek, Corollary 1](https://arxiv.org/pdf/math/0511092#page=2)
 
-On successive dyadic bands above $X$, $N(Y)=O(Y\log Y)$ bounds the sum of $m_\gamma\log\gamma/\gamma^2$ by $O(\log^2 X/X)$. As $w_\gamma^2\le m_\gamma^2/\gamma^2$, sublogarithmic multiplicities give the required uniform small-o bound. Thus under RH and rational independence of the distinct positive ordinates, the actual deficit exceeds $1-\beta^2+\log T/W(T)$ throughout arbitrarily late intervals of length $\exp(T^\beta)$ for all sufficiently large $T$. Together with [@thm-ch31-zeta-local-average] under Effective LI, this places equality on the side where some windows miss the requested alignment. Finer waiting scales remain open. [Endpoint research](https://github.com/the-omega-institute/trureturing/issues/33482)
+On successive dyadic bands above $X$, $N(Y)=O(Y\log Y)$ bounds the sum of $m_\gamma\log\gamma/\gamma^2$ by $O(\log^2 X/X)$. As $w_\gamma^2\le m_\gamma^2/\gamma^2$, sublogarithmic multiplicities give the required uniform small-o bound. Thus under RH and rational independence of the distinct positive ordinates, the actual deficit exceeds $1-\beta^2+\log T/W(T)$ throughout arbitrarily late intervals of length $\exp(T^\beta)$ for all sufficiently large $T$. Together with [@thm-ch31-zeta-local-average] under Effective LI, this places equality on the side where some windows miss the requested alignment. [Endpoint research](https://github.com/the-omega-institute/trureturing/issues/33482)
+
+::: {.theorem #thm-ch31-logarithmic-missing-window title="A logarithmic gain in the critical waiting exponent" lean="D5/S3/Analytic/Oscillation/SpectrumLogarithmicMissingWindow.eventual_logarithmic_missing_window"}
+Let the spectrum and weights satisfy the positive spectrum, nonnegative weight, rational independence and mass hypotheses of [@thm-ch31-critical-missing-window]. Suppose there is a fixed $C>0$ such that, for every sufficiently large $X$ and every $T\ge X$,
+
+$$
+V(X,T)=\sum_{X<\gamma\le T}w_\gamma^2\le C\frac{\log X}{X}.
+$$
+
+Fix $r>0$ and $0<\beta<1$. There is $c>0$ such that, for every sufficiently large $T$, $W(T)>0$ and for every real $A$ there is an $a>A$ with
+
+$$
+S(T,u/r)<\beta^2W(T)-\log T
+\qquad \text{for all }u\in[a,a+\exp(cT^\beta\log T)] .
+$$
+:::
+
+::: proof
+With $L=\log T$ and $X=e^{-K}T^\beta$, the same mass estimate gives $W(X)+3L<\beta^2W(T)$ eventually. Now $V(X,T)\le D L/T^\beta$ for $D=C\beta e^K$. When the variance is positive, the Hoeffding exponent at threshold $L$ is at least $T^\beta L/(2D)$. Take $E=T^\beta L/(4D)$. In score time, the window of length $e^E/r$ and mesh $1/T^2$ has at most $e^E(1+1/r)T^2$ grid points, eventually fewer than $e^{2E}$. The product of the grid count and the tail bound is then strictly below one. The finite missing-window theorem also covers zero variance. Its mesh error is below $L$, and the rescaling gives the claimed closed interval.
+:::
+
+::: {.theorem #thm-ch31-logarithmic-missing-window-model title="An infinite model for the logarithmic gain" lean="D5/S3/Analytic/Oscillation/SpectrumLogarithmicMissingWindowModel.exists_infinite_logarithmic_model"}
+There is a locally finite infinite spectrum of distinct, rationally independent positive ordinates with strictly positive weights satisfying the mass and square-tail hypotheses of [@thm-ch31-logarithmic-missing-window].
+:::
+
+::: proof
+The fourth-root-bin model in [@thm-ch31-critical-missing-window-model] has a square tail of order $X^{-2}$ uniformly in the upper cutoff. This supplies the logarithmic square-tail bound.
+:::
+
+For actual ζ ordinates under RH, the weight is $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$ with analytic multiplicity $m_\gamma$. Baluyot, Goldston, Suriajaya and Turnage-Butterbaugh's uniform pair-correlation formula gives a bounded average of the normalized Montgomery sum against $2(1-\alpha)$ on $[0,1]$. On the critical line each ordinate difference has a nonnegative contribution after this averaging. Indeed, the cosine transform of the triangular weight is $2(1-\cos z)/z^2$ at nonzero $z$ and equals $1$ at zero. Equal ordinates therefore contribute precisely $\sum_{\gamma\le Y}m_\gamma^2$, bounded by $O(Y\log Y)$ after undoing the normalization. On each dyadic band above $X$, use $w_\gamma^2\le m_\gamma^2/\gamma^2$ and sum the geometric bounds to obtain $V(X,T)=O(\log X/X)$ uniformly in $T\ge X$. The spectral theorem then applies under rational linear independence of the distinct positive ordinates. The analytic pair-correlation formula is a literature input. The available bounds leave the optimal waiting scale open. [Pair-correlation formula, Theorem 1 and §7](https://arxiv.org/abs/2306.04799)
 
 The Fourier recovery estimates follow in [§31.1.3.2.1](ch34-s28-s03-s02-fourier-recovery.md).
