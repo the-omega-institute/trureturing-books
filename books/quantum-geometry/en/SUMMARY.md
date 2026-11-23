@@ -260,6 +260,7 @@
   - [39.9 The Holographic Circular-Arc Manifold and Adelic Solenoid Unity: Beyond Riemannian Tangent Plates, Smoothly Unifying Addition, Multiplication, Logarithm, and Prime Loops](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md)
   - [39.10 Riemann's 1854 + 1859 Synthesis: Polishing Tangent-Plate Manifolds via the Proven 1/2 Critical-Line Spectrum](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md)
   - [39.11 Exact Structural Mathematics vs. Flat Metric Approximation: Complete Ternary Relations, Pure-Integer Arc Closure, and Prime Topological Rigidity](ch39-s34-exact-structural-mathematics-vs-flat-approximation.md)
+  - [39.12 Infinity-Free and Transcendental-Free Finite Rational Mathematics (Math_Ω): Homogeneous Projective Closure, Rational Cayley Rotations, and Limit-Free Second-Order Jet Calculus](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md)
 
 # Coda and Appendices
 

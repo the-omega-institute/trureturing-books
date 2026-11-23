@@ -260,6 +260,7 @@
   - [39.9 全息圆弧流形与阿代尔螺线管同体：超越黎曼切板近似，在同一光滑流形上统一加法、乘法、对数与素数闭合环](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md)
   - [39.10 黎曼 1854 + 1859 双璧合龙：以已证 1/2 临界线谱磨光切板黎曼流形](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md)
   - [39.11 精确结构数学对比平直度量近似：完整三元关系、纯整数圆弧闭合与素数拓扑刚性](ch39-s34-exact-structural-mathematics-vs-flat-approximation.md)
+  - [39.12 无无穷·无超越数的有限有理数学（Math_Ω）：齐次射影闭环、凯莱有理旋转与无极限二阶射流微积分](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md)
 
 # 终章与附录
 
