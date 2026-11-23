@@ -917,6 +917,28 @@ Every pair of points lies on an omitted line. Write a point as $(x,y)\in\mathbb 
 
 A direct computation using 72 basis coordinates, 36 deletion equations and 126 extension equations gives the same counts. The kernel modulo three has dimension 11, and the subspace that lifts to the kernel modulo nine has dimension 9. [Finite computation](https://github.com/the-omega-institute/trureturing/issues/33440#issuecomment-7088695650)
 
+::: {.theorem #thm-joint-circuit-ternary-divisibility title="A divisibility bound for the order-three factors" lean="D5/S3/Combinatorics/Matroids/RankThreeOmissionPotentialFibers.rank_three_lifting_obstruction_divisibility"}
+Take a rank-three core with $n>3$ points and singleton parallel classes. Its bases are all triples outside a family of $m$ omitted triples, with each pair of distinct points in at most one omitted triple. Its integral lifting obstruction is the direct sum of $\binom{n-2}{2}-m$ cyclic factors of order $n$ and $d$ cyclic factors of order three, where $3^d$ divides $n$.
+:::
+
+::: proof
+When $3\mid n$, the earlier decomposition identifies the number of additional order-three factors with the dimension of the normalized ternary potential space. The next theorem gives the same number of points for each of its $3^d$ evaluation vectors. When $3\nmid n$, the potentials in the earlier decomposition take only the zero value, so $d=0$.
+:::
+
+::: {.theorem #thm-joint-circuit-potential-fibers title="Equal point-potential fibers and affine lines in the equality case" lean="D5/S3/Combinatorics/Matroids/RankThreeOmissionPotentialFibers.point_potential_evaluations"}
+List triples of distinct points in a finite point set such that each pair of distinct points occurs at most once. Fix an anchor and let $d$ be the dimension of the normalized $\mathbb F_3$-valued potential space. A potential vanishes at the anchor, sums to zero over the whole point set and over every listed triple, and agrees on every uncovered pair.
+
+Evaluation in any basis of point potentials maps the points onto $\mathbb F_3^d$ with equally sized fibers. If two points have distinct vectors $x,y$, they belong to a unique listed triple, and its third point has vector $-x-y$. If there are $3^d$ points, evaluation is a bijection and the listed triples correspond exactly to the affine lines of $\mathbb F_3^d$.
+:::
+
+::: proof
+The anchor evaluates to zero. Distinct vectors $x,y$ come from a covered pair, whose third point has vector $-x-y$. In characteristic three the same operation gives $-x-x=x$, so the image is closed under negative sums and is a linear subspace. A nonzero linear functional vanishing on a proper image would give a nontrivial linear relation among the basis potentials. Every vector therefore occurs.
+
+Fix a point in the fiber over $-x-y$. The unique triple joining it to a point in the fiber over $x$ gives a third point in the fiber over $y$. Applying the same operation again returns the starting point, because a pair lies in at most one triple. This gives the fiber bijection. With $3^d$ points, every fiber is a singleton, and the distinct zero-sum triples of vectors are exactly the ternary affine lines.
+:::
+
+For complete Steiner triple systems, the equal-fiber conclusion agrees with the uniform column multiplicities of the ternary dual code. Here coverage follows from the omitted triples and equality of potentials on uncovered pairs. [Jungnickel and Tonchev, Theorem 3.1](https://arxiv.org/abs/1709.06044)
+
 **Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 If there are no nonempty facets, the original realization is empty and its reduced integral homology vanishes in every nonnegative degree. When facets exist and $d=1$, the wedge is a discrete space with $m+1$ points and reduced degree-zero generators $[p_B]-[p_0]$, where $p_B$ is the point contributed by $B$ and $p_0$ is the common basepoint. When facets exist and $m=0$, the wedge is a point and every reduced group vanishes. For a nonempty family of facets, the reduced Euler characteristic is $(-1)^{d-1}m$, so the earlier Tutte evaluation gives $m=2^d T_M(1,1/2)$.
