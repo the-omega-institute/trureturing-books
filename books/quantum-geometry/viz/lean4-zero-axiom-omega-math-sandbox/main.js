@@ -1029,13 +1029,14 @@
       }[r];
     }
     if (s === 'master') {
+      // [zh, en] and, where the English runs long, a shorter English for the two lines of a cited figure or a phone
       const c = m.master,
         what = [
           ['北极 p0 与自己比', 'the pole p0 with itself'],
           ['从 p0 到 pHalf 的弧停在 κ = 1/2 的纬圈上', 'the arc from p0 to pHalf ends on the circle κ = 1/2'],
           ['从 p0 到 pInf 的弧走到赤道，κ = 0', 'the arc from p0 to pInf ends on the equator, κ = 0'],
           ['从 p0 到 g120 的弧停在 κ = 1/4 的纬圈上', 'the arc from p0 to g120 ends on the circle κ = 1/4'],
-          ['三拍走完半个大圆，终点与 p0 对径，是同一个射影点', 'three beats run half a great circle; its end is the antipode of p0, the same projective point'],
+          ['三拍走完半个大圆，终点与 p0 对径，是同一个射影点', 'three beats run half a great circle; its end is the antipode of p0, the same projective point', 'three beats end at the antipode of p0, the same projective point'],
           ['pHalf 与自己抵消，g120 原样留下', 'pHalf cancels against itself and g120 is kept'],
           ['青色与品红两种次序落在两个不同的点', 'the cyan and the magenta order end in two different points'],
           ['右下紫色抛物线在 x₀ 处贴着青色的 κ = 1/(1 + x²)，它就是射流', 'the violet parabola touching the cyan κ = 1/(1 + x²) at x₀ is the jet']
@@ -1045,7 +1046,7 @@
           `球面上方八枚棱柱是八条断言，青色已归约到 true，琥珀是第 ${c.k + 1} 条：${what[0]}。右上的青环是守卫：${c.guard ? '两个品红原始四元组停在环外' : '守卫关上，两个品红原始四元组穿过环跑向 p0'}。`,
           `The eight prisms above the ball are the eight conjuncts, cyan once reduced to true, amber for number ${c.k + 1}: ${what[1]}. The cyan ring at the upper right is the guard: ${c.guard ? 'the two magenta raw tuples stop outside' : 'switched off, the two magenta raw tuples run through it to p0'}.`
         ],
-        fig: [`第 ${c.k + 1}/8 条：${what[0]}。`, `Conjunct ${c.k + 1} of 8: ${what[1]}.`]
+        fig: [`第 ${c.k + 1}/8 条：${what[0]}。`, `Conjunct ${c.k + 1} of 8: ${what[2] || what[1]}.`]
       };
     }
     const b = m.bridge;
