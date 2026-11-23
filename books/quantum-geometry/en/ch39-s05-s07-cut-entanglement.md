@@ -56,6 +56,18 @@ Order word pairs by the size of their occupied union. At a pair $(x,y)$, keep bo
 
 The three-site pyramid has $25$ ordered legal pairs. The numbers with union sizes $0,1,2,3$ are $1,9,13,2$, respectively. Each adjacent pair of sites accounts for two ordered word pairs with that union, and the two endpoints account for nine. All single-site marginals have rank $10$, which includes the trace. All three two-site marginals have rank $23$. Measuring only the two adjacent pairs gives rank $14$, since neither region contains the union formed by the two endpoints.
 
+The inverse question is whether two specified adjacent marginals come from one state. Let the sites be $A,B,C$ with occupancies $p_A,p_B,p_C$, using the same $p_B$ in both marginals. Assume each marginal has zero entries between its vacuum and one-particle sectors. Write $\alpha,\beta$ for the entries in the endpoint-occupied row and middle-occupied column of the respective marginals, and set $q_0=\max(0,p_A+p_B+p_C-1)$. They admit a common positive semidefinite trace-one extension exactly when
+
+$$
+p_B\ge0,\qquad p_A,p_C\ge q_0,\qquad
+|\alpha|^2\le p_B(p_A-q_0),\qquad
+|\beta|^2\le p_B(p_C-q_0).
+$$
+
+If $q$ is the probability of occupying both endpoints, the vacuum weight is $1-p_A-p_B-p_C+q$, so $q\ge q_0$. The global one-particle block has diagonal weights $p_A-q,p_B,p_C-q$. Its two adjacent principal minors give the coherence bounds. Conversely, take $q=q_0$. For $p_B>0$, the outer product of $(\alpha/\sqrt{p_B},\sqrt{p_B},\beta/\sqrt{p_B})$ realizes both coherences. A nonnegative diagonal term supplies the remaining endpoint weights. If $p_B=0$, both coherences must vanish and the one-particle block can be diagonal. [Exact criterion for a common positive extension](lean:D5/S3/Quantum/Entanglement/Marginals/FibMarginalExtension.extendible_iff)
+
+For example, take the pure state $(|10\rangle+|01\rangle)/\sqrt2$ on each edge. Both readouts give a maximally mixed middle site. Here $p_A=p_B=p_C=1/2$ and $q_0=1/2$, so both nonzero coherences exceed the common-extension bounds.
+
 For equal-width windows on an open chain of length $n$, the joint rank can be computed directly from the spacing. Forbid $K$ consecutive ones, let $a_\ell$ be the number of legal words of length $\ell$, and write $b_\ell=a_\ell^2$ with $b_0=1$. Choose $m\ge1$ windows of width $1\le k\le n$ with strictly increasing starts and successive gaps $g_1,\ldots,g_{m-1}$. The rank of their collected partial traces is
 
 $$
