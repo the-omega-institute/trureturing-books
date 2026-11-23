@@ -96,3 +96,36 @@ Each row contributes $r^2$ Latin-square triples. Those triples occupy distinct r
 
 To realize any integer between them, place a largest packing in each residue class. Choose any $N-3^d r^2$ triples from their union. Deleting triples preserves pair uniqueness within each class. These choices and the rowwise Latin squares give an extension by [@thm-joint-circuit-steiner-realization]. The full proof is checked by the Lean kernel.
 :::
+
+## 35.6.8.4.1.4 Sizes of saturated extensions
+
+Keep the mixed triples fixed and require pair uniqueness and normalized potential dimension $d+1$. An extension is **saturated** if one more same-row triple cannot be added under these conditions. Any proper compatible enlargement permits adding one of its new triples first, so saturation is equivalent to inclusion maximality. [@thm-joint-circuit-steiner-insert]
+
+::: {.theorem #thm-joint-circuit-steiner-insert title="Adding one triple from a larger extension" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalSizeSpectrum.internal_extension_insert"}
+If compatible families of same-row triples satisfy $G\subseteq H$, adjoining any triple of $H$ to $G$ gives a compatible family.
+:::
+
+::: proof
+Each Latin-square triple of $G$ remains a Latin-square triple in $H$. Its points of residues $0$ and $1$ determine the cell, and its point of residue $2$ determines the entry. Thus the squares agree. If the chosen triple is new, it belongs to a single residue class. Adjoining it leaves that class's packing inside the corresponding packing of $H$, preserving pair uniqueness and the extra dimension.
+:::
+
+::: {.theorem #thm-joint-circuit-steiner-saturated title="Saturation is maximality within each residue class" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalSizeSpectrum.saturated_internal_extension_iff"}
+Under the actual residue labellings, an extension is saturated exactly when every partial Steiner triple system in its decomposition is inclusion-maximal.
+:::
+
+::: proof
+A larger packing in one class gives a proper global enlargement by changing that class alone. Conversely, a proper global enlargement fixes the Latin squares and therefore enlarges the packing in at least one residue class.
+:::
+
+::: {.theorem #thm-joint-circuit-steiner-six-saturated-sizes title="Saturated sizes with six labels have step two" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalSizeSpectrum.saturated_six_size_spectrum"}
+For $r=6$, the attainable sizes of saturated extensions are exactly
+$$
+36\cdot 3^d+2\cdot 3^{d+1}+2k,\qquad 0\le k\le 3^{d+1},\quad k\in\mathbb Z.
+$$
+:::
+
+::: proof
+On six labels, each label lies in at most two triples. Each incident triple uses two of the label's five available partners. Counting incidences gives at most four blocks. An empty or one-block packing can be extended. In a three-block packing, no two blocks can be disjoint, since a third would then repeat a pair of one of them. The three pairwise intersections are distinct singletons. Each block also has one point belonging only to it. All three pairs among these private points are unused, so the three points form an addable fourth block.
+
+Both maximal sizes occur. Writing $abc=\{a,b,c\}$, the two-block example $012,345$ leaves a complete bipartite graph of unused pairs and hence no available triangle. The example $012,034,135,245$ attains the four-block upper bound. Each of the $3^{d+1}$ actual residue classes can independently take either size. Choosing four blocks in exactly $k$ classes and adding the $36$ Latin-square blocks per row gives the formula. For $d=1$, the saturated sizes are precisely $126,128,\ldots,144$.
+:::
