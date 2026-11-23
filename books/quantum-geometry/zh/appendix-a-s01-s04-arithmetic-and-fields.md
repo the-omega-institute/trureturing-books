@@ -47,7 +47,7 @@ $(1 - v_\epsilon)^2 + c_\epsilon^2 \equiv 1,\quad D_{\mathrm{cs}}[f]\!\bigl(x_0;
 **极小圆弧体微积分切入黎曼猜想：二阶弦弧矢高相变、埃尔米特—比勒径向单调锁与有限精度斯托克斯相消**（Minimal Circular-Arc Calculus Applied to the Riemann Hypothesis: Second-Order Sagitta Phase Transition, Hermite–Biehler Radial Monotonicity Lock & Finite-Precision Stokes Cancellation）
 
 **本书几何直觉语言 (Geometric Intuition Term)：**
-**右半平面 $\operatorname{Re}(s) > 1$ 欧拉—狄利克雷恒等式、梅滕斯第三定理截断欧拉乘积渐近式 $\prod_{p\le\lfloor x\rfloor}(1 - 1/p) \sim e^{-\gamma}/\ln x$、完备读数 $\xi(s) = \operatorname{xiReading}(s)$ 全平面复可微性、整函数反射对称 $\xi(1-s)=\xi(s)$、反射—复共轭协变 $\xi(1-\bar{s})=\overline{\xi(s)}$ 与临界带非平凡零点等价律、完全对称四次整函数离线四元组非局域化反例 `offCriticalQuartic`、右半临界带 $\frac{1}{2} < \operatorname{Re}(\rho) < 1$ 无零点对黎曼猜想的充分归约、任意交换群单纯形二上链修复与 $d^2=0$ 正合充要判据以及严格正定内部块下埃尔米特分块舒尔补二次型变分极小定理（`LEAN ✓`）；配对 $\sigma > \frac{1}{4}$ 四阶余项收敛域下素数比较旋子累计矢高在临界脊线 $\sigma = \frac{1}{2}$ 首次发散 $-\frac{1}{2}\ln\varepsilon_{\mathrm{self}} + C_{\mathrm{sag}} + \mathcal{O}(\varepsilon_{\mathrm{self}})$（精确常数 $C_{\mathrm{sag}} = \frac{M}{2} + \Delta C_{\mathrm{sag}} \approx 0.13074861 - 0.01860282 = +0.11214579$ 及前五素数有理部分和 $\Sigma_{\mathrm{sag}}(\frac{1}{2}; 11) \approx 0.61588148$ 对比欧拉区 $\Sigma_{\mathrm{sag}}(1; 11) \approx 0.21171004$）、任意有限孔径 $\epsilon$ 下零 $\epsilon^2$ 截断误差的正逆推进双壳恒等式 $\Delta_\epsilon^{\mathrm{HB}}(u,t) \equiv 2\epsilon\operatorname{Re}(\overline{\xi(s)}\xi'(s)) \equiv \epsilon\frac{\partial}{\partial u}\lvert\xi(\frac{1}{2}+u+\hat{\mathbf{i}}t)\rvert^2$、全纯埃尔米特—比勒对合 $E_\epsilon^\#(s) = \overline{E_\epsilon(1-\bar{s})} = E_\epsilon(1-s)$ 诱导的去奇点整函数再生核 $K_\epsilon(w,s) \equiv \frac{\xi'(s)\overline{\xi(w)}+\xi(s)\overline{\xi'(w)}}{2[(s-1/2)+(\bar{w}-1/2)]}$ 及其与 RH 的双向等价和任意重数 $m \ge 1$ 离轴零点唯一性定理排除、完整四重伪零点模方导数平方和分解 $\frac{\partial}{\partial u}F_{\mathrm{rogue},4}(u,\gamma_0) < 0$（$t = \gamma_1,\; \delta = 0.20,\; u = 0.10,\; \epsilon = 0.10$ 处 $-4.78267581\times 10^{-7} < 0$ 对比真零点对 $+3.99429305\times 10^{-4} > 0$）以及跨前五颗零点频带 $[10, 35]$ 的有限网格斯托克斯绕数对消（$u_0 = -0.10$ 捕获 $10\pi \approx 31.4159265359$ 对比 $u_0 = +0.10$ 零误差锁定 `0.0000000000`，区分连续棱积分上链与 $\lvert\Delta_e\arg\xi\rvert < \pi$ 顶点主值采样，`手工推导` / `NUM`），连同 Mertens（1874）素数倒数和第二定理、Davenport（2000）成对阿达马乘积、Gonek–Hughes–Keating（2007）混合逼近、de Branges（1968, 1986, 1992, 1994）整函数希尔伯特空间与移位纲领、Lagarias（1999, 2006）核半正定等价定理、Conrey & Li（2000）第 $34$ 颗零点 $\rho_{34}$ 对裸单位平移正定充分条件的反驳以及 Sondow & Dumitrescu（2010）径向严格单调等价定理（`文献结果`；黎曼猜想的外部证明见 [@conj-riemann-hypothesis]，乘性舒尔枢轴整函数修饰子核正定桥接引理 [@prob-ch34-schur-hb-kernel-positivity-bridge] 严格保持为 `OPEN`），统一收束整座第三十一章全景穹顶与交互实验室 `arc-calculus-riemann-hermite-biehler-sandbox`（`RIEMANN//STOKES`，`MODEL`）**
+**右半平面 $\operatorname{Re}(s) > 1$ 欧拉—狄利克雷恒等式、梅滕斯第三定理截断欧拉乘积渐近式 $\prod_{p\le\lfloor x\rfloor}(1 - 1/p) \sim e^{-\gamma}/\ln x$、完备读数 $\xi(s) = \operatorname{xiReading}(s)$ 全平面复可微性、整函数反射对称 $\xi(1-s)=\xi(s)$、反射—复共轭协变 $\xi(1-\bar{s})=\overline{\xi(s)}$ 与临界带非平凡零点等价律、完全对称四次整函数离线四元组非局域化反例 `offCriticalQuartic`、右半临界带 $\frac{1}{2} < \operatorname{Re}(\rho) < 1$ 无零点对黎曼猜想的充分归约、任意交换群单纯形二上链修复与 $d^2=0$ 正合充要判据以及严格正定内部块下埃尔米特分块舒尔补二次型变分极小定理（`LEAN ✓`）；配对 $\sigma > \frac{1}{4}$ 四阶余项收敛域下素数比较旋子累计矢高在临界脊线 $\sigma = \frac{1}{2}$ 首次发散 $-\frac{1}{2}\ln\varepsilon_{\mathrm{self}} + C_{\mathrm{sag}} + \mathcal{O}(\varepsilon_{\mathrm{self}})$（精确常数 $C_{\mathrm{sag}} = \frac{M}{2} + \Delta C_{\mathrm{sag}} \approx 0.13074861 - 0.01860282 = +0.11214579$ 及前五素数有理部分和 $\Sigma_{\mathrm{sag}}(\frac{1}{2}; 11) \approx 0.61588148$ 对比欧拉区 $\Sigma_{\mathrm{sag}}(1; 11) \approx 0.21171004$）、任意有限孔径 $\epsilon$ 下零 $\epsilon^2$ 截断误差的正逆推进双壳恒等式 $\Delta_\epsilon^{\mathrm{HB}}(u,t) \equiv 2\epsilon\operatorname{Re}(\overline{\xi(s)}\xi'(s)) \equiv \epsilon\frac{\partial}{\partial u}\lvert\xi(\frac{1}{2}+u+\hat{\mathbf{i}}t)\rvert^2$、全纯埃尔米特—比勒对合 $E_\epsilon^\#(s) = \overline{E_\epsilon(1-\bar{s})} = E_\epsilon(1-s)$ 诱导的去奇点整函数再生核 $K_\epsilon(w,s) \equiv \frac{\xi'(s)\overline{\xi(w)}+\xi(s)\overline{\xi'(w)}}{2[(s-1/2)+(\bar{w}-1/2)]}$ 及其与 RH 的双向等价和任意重数 $m \ge 1$ 离轴零点唯一性定理排除、完整四重伪零点模方导数平方和分解 $\frac{\partial}{\partial u}F_{\mathrm{rogue},4}(u,\gamma_0) < 0$（$t = \gamma_1,\; \delta = 0.20,\; u = 0.10,\; \epsilon = 0.10$ 处 $-4.78267581\times 10^{-7} < 0$ 对比真零点对 $+3.99429305\times 10^{-4} > 0$）以及跨前五颗零点频带 $[10, 35]$ 的有限网格斯托克斯绕数对消（$u_0 = -0.10$ 捕获 $10\pi \approx 31.4159265359$ 对比 $u_0 = +0.10$ 零误差锁定 `0.0000000000`，区分连续棱积分上链与 $\lvert\Delta_e\arg\xi\rvert < \pi$ 顶点主值采样，`手工推导` / `NUM`），连同 Mertens（1874）素数倒数和第二定理、Davenport（2000）成对阿达马乘积、Gonek–Hughes–Keating（2007）混合逼近、de Branges（1968, 1986, 1992, 1994）整函数希尔伯特空间与移位纲领、Lagarias（1999, 2006）核半正定等价定理、Conrey & Li（2000）第 $34$ 颗零点 $\rho_{34}$ 对裸单位平移正定充分条件的反驳以及 Sondow & Dumitrescu（2010）径向严格单调等价定理（`文献结果`；黎曼猜想的外部证明见 [@conj-riemann-hypothesis]，乘性舒尔枢轴整函数修饰子核正定桥接引理 [@prob-ch34-schur-hb-kernel-positivity-bridge] 严格保持为 `OPEN`），收束第三十一章临界带前半翼（§§31.1–31.3）与交互实验室 `arc-calculus-riemann-hermite-biehler-sandbox`（`RIEMANN//STOKES`，`MODEL`）**
 
 **Lean 4 形式对象 / 锁定声明 GID：**
 [`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product), [`E₃.bound''`](lean:D5/S3/Weil/Mertens/Third.E₃.bound''), [`xi_reading_differentiable`](lean:D5/S3/Zeros/CompletedZeta.xi_reading_differentiable), [`xi_reading_reflection`](lean:D5/S3/Zeros/CompletedZeta.xi_reading_reflection), [`xi_reading_one_sub_conj`](lean:D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj), [`xiReading_eq_zero_iff_nontrivial`](lean:D5/S3/Analytic/ShiftedXiPoisson/ShiftedPoissonSemigroup.xiReading_eq_zero_iff_nontrivial), [`full_symmetry_not_fixed_line_localization`](lean:D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization), [`golden_right_half_strip_implies_rh`](lean:D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh), [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness), [`schur_quadratic_is_least`](lean:D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least)
@@ -392,7 +392,7 @@ $\langle[\mathbf{X},\mathbf{Y}],\mathbf{X}\rangle=0,\quad x_{t+1}=[x_t,x_{t-1},x
 $\kappa\bigl(x,[y,x,y]\bigr)=\bigl(2\kappa(x,y)-1\bigr)^2,\quad \bigl\lVert Q(\boldsymbol{\sigma})\bigr\rVert^2\equiv 1\;(\boldsymbol{\sigma}\in\mathbb{Q}^3),\quad \mathcal{K}_{\mathbb{Q}}^{\star}=\bigl\{1,\tfrac{1}{2},\tfrac{1}{3},\tfrac{1}{4},0\bigr\}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.6](ch39-s29-constant-free-rational-axiom-omega.md#sec-ch39-constant-free-rational-axiom-omega))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§32.5](ch39-s29-constant-free-rational-axiom-omega.md#sec-ch39-constant-free-rational-axiom-omega))
 
 **过去·现在·未来与 0 · 1/2 · 1 纯有理因果射流母矩阵：球面中点自对偶律与 1 ↦ 0 宇宙心跳**（Past, Present, Future & the 0 · 1/2 · 1 Pure Rational Causal-Jet Matrix: Spherical Midpoint Self-Duality & 1 ↦ 0 Heartbeat）
 
@@ -406,7 +406,7 @@ $\kappa\bigl(x,[y,x,y]\bigr)=\bigl(2\kappa(x,y)-1\bigr)^2,\quad \bigl\lVert Q(\b
 $\lVert x_1\rVert^2-\lVert x_0\rVert^2=(1-2\alpha)\lVert x_1-x_0\rVert^2,\quad \xi(s)=\tfrac{1}{2}s(s-1)\Lambda(s),\quad 0\to\tfrac{1}{2}\to 1\equiv 0'$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.7](ch39-s30-past-present-future-rational-jet-triad.md#sec-ch39-past-present-future-rational-jet-triad))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.6](ch39-s30-past-present-future-rational-jet-triad.md#sec-ch39-past-present-future-rational-jet-triad))
 
 **实数误差放大轴与素数阿代尔归元闭合：切线放大率 1+x² 对比 |N|_∞ ∏_p |N|_p ≡ 1 与无公度遍历**（The Real Error-Magnification Axis & Prime Adelic Closure: Tangent Magnifier 1+x² vs. Adelic Unity & Ergodic Anti-Deadlock）
 
@@ -420,7 +420,7 @@ $\lVert x_1\rVert^2-\lVert x_0\rVert^2=(1-2\alpha)\lVert x_1-x_0\rVert^2,\quad \
 $A_{\mathrm{err}}(x)=1+x^2=\frac{1}{\kappa},\quad \lvert q\rvert_\infty\prod_{p\in\mathbb{P}}\lvert q\rvert_p\equiv 1,\quad \mathbf{x}_1\oplus_{\mathrm{Rod}}\mathbf{x}_2=\frac{\mathbf{x}_1+\mathbf{x}_2+\mathbf{x}_1\times\mathbf{x}_2}{1-\mathbf{x}_1\cdot\mathbf{x}_2}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.8](ch39-s31-real-error-axis-and-prime-adelic-closure.md#sec-ch39-real-error-axis-and-prime-adelic-closure))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§31.4](ch39-s31-real-error-axis-and-prime-adelic-closure.md#sec-ch39-real-error-axis-and-prime-adelic-closure))
 
 **全息圆弧流形与阿代尔螺线管同体：0·1·∞ 闭环、加乘三维旋量流与素数光滑环**（The Holographic Circular-Arc Manifold & Adelic Solenoid Unity: 0 · 1 · ∞ Closure, Additive–Multiplicative Spinor Flows & Smooth Prime Loops）
 
@@ -434,7 +434,7 @@ $A_{\mathrm{err}}(x)=1+x^2=\frac{1}{\kappa},\quad \lvert q\rvert_\infty\prod_{p\
 $\tfrac{1}{2}(V_++V_\div)\equiv\partial_\phi,\quad [V_+,V_\div]=2V_\times,\quad \operatorname{logarithmicCharge}(z)=0\iff\forall m,\lVert z_m\rVert=1$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.9](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md#sec-ch39-holographic-arc-manifold-and-solenoid-unity))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§31.5](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md#sec-ch39-holographic-arc-manifold-and-solenoid-unity))
 
 **黎曼 1854 + 1859 双璧合龙与临界线谱磨光流形：二阶吻合球换底与托普利茨正定谱胶**（Riemann's 1854 + 1859 Synthesis & Critical-Line Spectral Manifold Polishing: Osculating-Sphere Base Swap & Toeplitz Spectral Glue）
 
@@ -448,7 +448,7 @@ $\tfrac{1}{2}(V_++V_\div)\equiv\partial_\phi,\quad [V_+,V_\div]=2V_\times,\quad 
 $\lVert(\rho-1)/\rho\rVert=1\iff\operatorname{Re}(\rho)=\tfrac{1}{2},\quad \mathbf{T}_N\succeq 0\iff\forall j,\lVert u_j\rVert=1,\quad U(x)/x^\theta\to 0\iff\theta>\tfrac{1}{2}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `外部形式化事实` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§39.10](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md#sec-ch39-riemann-1854-1859-spectral-manifold-polishing))
+`LEAN ✓` / `外部形式化事实` / `文献结果` / `手工推导` / `NUM` / `MODEL` / `OPEN` ([§31.6](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md#sec-ch39-riemann-1854-1859-spectral-manifold-polishing))
 
 **精确结构数学对比平直度量近似：(1,1,1) 纯整数三拍闭合、有理星座 S³(ℚ)、完整三元守球与素数刚性**（Exact Structural Mathematics vs. Flat Metric Approximation: Pure-Integer (1,1,1) Three-Beat Closure, Dense Rational Constellation S³(ℚ), Complete Ternary Conservation & Prime Rigidity）
 
@@ -462,7 +462,7 @@ $\lVert(\rho-1)/\rho\rVert=1\iff\operatorname{Re}(\rho)=\tfrac{1}{2},\quad \math
 $(1,1,1)\overset{\star}{\longrightarrow}(-1,-1,-1)\overset{\star}{\longrightarrow}(0,0,0),\quad \lVert Q(\boldsymbol{\sigma})\rVert^2\equiv 1,\quad \lvert N\rvert_\infty\prod_{p\in\mathbb{P}}\lvert N\rvert_p\equiv 1$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `外部形式化事实` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.11](ch39-s34-exact-structural-mathematics-vs-flat-approximation.md#sec-ch39-exact-structural-mathematics-vs-flat-approximation))
+`LEAN ✓` / `外部形式化事实` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§32.6](ch39-s34-exact-structural-mathematics-vs-flat-approximation.md#sec-ch39-exact-structural-mathematics-vs-flat-approximation))
 
 **无无穷·无超越数的有限有理数学（Math_Ω）：[1:0] 齐次射影闭环、凯莱有理旋转与 ℚ[η]/(η³) 无极限射流微积分**（Infinity-Free & Transcendental-Free Finite Rational Mathematics Math_Ω: [1:0] Homogeneous Projective Closure, Rational Cayley Rotations & ℚ[η]/(η³) Limit-Free Jet Calculus）
 
@@ -476,7 +476,7 @@ $(1,1,1)\overset{\star}{\longrightarrow}(-1,-1,-1)\overset{\star}{\longrightarro
 $\kappa([P:Q])=\frac{Q^2}{P^2+Q^2},\quad \mathbf{R}(\boldsymbol{\sigma})=(\mathbf{I}-X)^{-1}(\mathbf{I}+X)\in\mathrm{SO}(3,\mathbb{Q}),\quad \kappa(1+\eta)\equiv\tfrac{1}{2}-\tfrac{1}{2}\eta+\tfrac{1}{4}\eta^2\pmod{\eta^3}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.12](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md#sec-ch39-infinity-free-transcendental-free-rational-mathematics))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§32.7](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md#sec-ch39-infinity-free-transcendental-free-rational-mathematics))
 
 **Lean 4 零公理形式化基座（OmegaMath）：纯 CIC 内核、规范整数三元载体 ProjTernion 与单向阴影函子 Π_ℝ**（Zero-Axiom Lean 4 Formalization Architecture OmegaMath: Pure CIC Kernel, Canonical Integer Carrier ProjTernion & One-Way Shadow Functor Π_ℝ）
 
@@ -490,4 +490,4 @@ $\kappa([P:Q])=\frac{Q^2}{P^2+Q^2},\quad \mathbf{R}(\boldsymbol{\sigma})=(\mathb
 $\kappa(p,q)=\frac{\langle p,q\rangle^2}{\lVert p\rVert^2\lVert q\rVert^2}\in\mathbb{Q},\quad \mathrm{Ad}(p)\mathbf{v}=\frac{p\mathbf{v}\bar{p}}{\lVert p\rVert^2}\in\mathrm{SO}(3,\mathbb{Q}),\quad cq<(dp)\cdot 4^{N+1}\Longrightarrow\left(\tfrac{1}{4}\right)^{N+1}C<\tfrac{p}{q}$
 
 **认识论状态 (Status)：**
-`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§39.13](ch39-s36-lean4-zero-axiom-omega-math-architecture.md#sec-ch39-lean4-zero-axiom-omega-math-architecture))
+`LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL` ([§32.8](ch39-s36-lean4-zero-axiom-omega-math-architecture.md#sec-ch39-lean4-zero-axiom-omega-math-architecture))

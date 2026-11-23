@@ -20,7 +20,7 @@ const BOOK = 'quantum-geometry';
 const ID = 'real-error-prime-adelic-sandbox';
 const DIR = path.join(ROOT, 'books', BOOK, 'viz', ID);
 const THEORY = 'ch39-s31-real-error-axis-and-prime-adelic-closure.html#sec-ch39-real-error-axis-and-prime-adelic-closure';
-const SECTION = '39.8';
+const SECTION = '31.4';
 const PI = Math.PI;
 const TAU = 2 * PI;
 const DEG = PI / 180;
@@ -292,9 +292,9 @@ for (const [file, src] of Object.entries(sources)) {
 }
 check('reserved identifiers are absent from the suite and registry entry', [suite, entryText].every((src) => !identifiers.test(src) && !shortAcronym.test(src) && !cjkTerms.test(src) && !hangul.test(src)));
 check(
-  'registration: §39.8, live, five cards and the fifteen GIDs in order',
+  'registration: §31.4, live, five cards and the fifteen GIDs in order',
   !!entry &&
-    entry.chapter === 39 &&
+    entry.chapter === 31 &&
     entry.section === SECTION &&
     entry.status === 'live' &&
     entry.added === '2026-11-22' &&
@@ -416,7 +416,7 @@ const PRINTED = ['126.87', '53.13', '109.47', '35.26', '180.00', '120.00', '4.89
   const text = sources['index.html'].replace(/<link[^>]*>/g, ''),
     decimals = [...plain(text).matchAll(/\d+\.\d+/g)].map((m) => m[0]),
     meta = (/<meta name="description" content="([^"]*)"/.exec(text) || ['', '1.0'])[1];
-  check('static: the only decimals of index.html are §39.8, the two chips of s and the speed chip; its description has none', decimals.length > 0 && decimals.every((x) => ['39.8', '0.5', '0.80', '0.96'].includes(x)) && !/\d\.\d/.test(meta) && meta.length > 600, decimals.join(' '));
+  check('static: the only decimals of index.html are §31.4, the two chips of s and the speed chip; its description has none', decimals.length > 0 && decimals.every((x) => ['31.4', '0.5', '0.80', '0.96'].includes(x)) && !/\d\.\d/.test(meta) && meta.length > 600, decimals.join(' '));
   check('static: the code of main.js holds none of those numbers, and no decimal of four digits or more after the point', code.length > 90000 && !inCode.length && !/\d\.\d{4}/.test(code), inCode.join(' | '));
   check('static: the registry entry holds no decimal of a computed number', !/\d\.\d{2}/.test(entryText.replace(/2026-11-22/g, '')), (entryText.match(/.{0,20}\d\.\d{2}.{0,10}/) || [''])[0]);
   check(

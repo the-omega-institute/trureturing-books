@@ -1,14 +1,14 @@
-# 39.13 Lean 4 零公理形式化基座（OmegaMath）：纯 CIC 内核、规范整数三元载体与单向阴影函子 {#sec-ch39-lean4-zero-axiom-omega-math-architecture}
+# 32.8 Lean 4 零公理形式化基座（OmegaMath）：纯 CIC 内核、规范整数三元载体与单向阴影函子 {#sec-ch39-lean4-zero-axiom-omega-math-architecture}
 
 > *“不需要修改 Lean 4 的底层内核，更绝对不能用 `axiom` 关键字硬塞自定义公理；真正应当构建的，是直接站在 Lean 4 原生无公理的归纳构造演算（CIC）内核之上，绕开 Mathlib 依赖选择公理与实无穷的经典实数（Real）分支，用可计算的类型类接口（class）配规范整数射影载体（structure）建立一套零公理依赖（Zero-Axiom）的 OmegaMath 基础层。”*
 
-在 [§39.12](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md) 确立了无无穷、无超越数的有限有理数学体系 $\mathbf{Math}_\Omega$ 之后，一个最锋利的工程与逻辑落地问题迎面而来：**要在现代交互式定理证明器 Lean 4 中把这座大厦真正建起来，我们究竟需要改动 Lean 4 的底层内核吗？还是直接用 `axiom` 关键字把母公理 $\mathrm{AXIOM}\text{-}\Omega$ 写进头文件？抑或在现有内核之上另辟一条零公理构造路径？**
+在 [§32.7](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md) 确立了无无穷、无超越数的有限有理数学体系 $\mathbf{Math}_\Omega$ 之后，一个最锋利的工程与逻辑落地问题迎面而来：**要在现代交互式定理证明器 Lean 4 中把这座大厦真正建起来，我们究竟需要改动 Lean 4 的底层内核吗？还是直接用 `axiom` 关键字把母公理 $\mathrm{AXIOM}\text{-}\Omega$ 写进头文件？抑或在现有内核之上另辟一条零公理构造路径？**
 
 本节给出终极架构裁决：**分毫不需要改动 Lean 4 坚不可摧的验证内核，更绝对禁止使用 `axiom` 关键字硬塞自定义公理**。真正与 $\mathbf{Math}_\Omega$ 天生同构的，恰恰是尚未导入 `Mathlib.Data.Real.Basic` 之前的 **Lean 4 原生归纳构造演算（Calculus of Inductive Constructions, CIC）裸内核**。只需绕开依赖选择公理与柯西商集的经典实数分支，用**纯整数规范射影结构（`structure`）**消除商公理、用**可计算类型类（`class`）**封装母公理并由实例证成相对无矛盾性、再配一层通往 `Mathlib` 的**单向阴影投影函子 $\Pi_{\mathbb{R}}$**，即可在零外部依赖下跑通 `#print axioms` 输出 **`does not depend on any axioms`** 的可执行 `OmegaMath` 内核（将三层 `OmegaMath` 工程路线图、证明有向无环图膨胀倍率对照与 `OmegaCore` 演进规划标为 **`MODEL`**；将十五条冻结核心定理——完备三元比较四元数同构、弦距读数恒等式、定基流群分解、射影核与旋量玻恩权重同一、四元数流群切比雪夫递推、拉格朗日—格拉姆恒等式、舒尔补二次型极小值可达定理、保格拉姆线性等距唯一延拓、有理六轴无正交开覆盖、既约分母最大公约数约化与连分数收敛子对数长度界、可判定单群素因子剥离定阶、二进制名称比较显式步数界，以及整数四分深度预算完备性与无极限实数上界传递定理——标为绿色 **`LEAN ✓`**；将 CIC 类型论文献、赫德伯格可判定相等性唯一性定理、独立内核审计记录与 Lean `v4.35.0` 编译器实测标为 **`ARGUED` / `NUM`**）。
 
 ---
 
-## 39.13.1 核心判据：为何 Lean 4 裸内核天生契合 $\mathbf{Math}_\Omega$，而污染源只在 `Mathlib.Real` 与自定义 `axiom`？ {#sec-ch39-lean4-cic-vs-mathlib-real-and-axiom-trap}
+## 32.8.1 核心判据：为何 Lean 4 裸内核天生契合 $\mathbf{Math}_\Omega$，而污染源只在 `Mathlib.Real` 与自定义 `axiom`？ {#sec-ch39-lean4-cic-vs-mathlib-real-and-axiom-trap}
 
 把 Lean 4 拆开审视，它的**底层验证内核（CIC）**与**上层标准分析库（`Mathlib.Real`）**遵循着两套截然不同的数学哲学：
 
@@ -30,7 +30,7 @@
 
 ---
 
-## 39.13.2 在 Lean 4 中构建 `OmegaMath` 的三层“零公理”架构 {#sec-ch39-omega-math-three-layer-zero-axiom-stack}
+## 32.8.2 在 Lean 4 中构建 `OmegaMath` 的三层“零公理”架构 {#sec-ch39-omega-math-three-layer-zero-axiom-stack}
 
 正确的形式化架构采用**“第 0 层规范整数结构造实例 $+$ 第 1 层类型类抽接口证相容 $+$ 第 2 层单向阴影函子接 `Mathlib`”**的三层无公理设计（`MODEL` 架构总表结合 `NUM` 编译器核验）：
 
@@ -42,9 +42,9 @@
 | **微积分与曲率实现** | 需手工公理化导数算子 | `Filter.Tendsto` 无穷小极限与多卡转移映射 | **二阶射流有理环 $\mathbb{Q}[\eta]/(\eta^3)$ 纯四则代数** |
 | **自动形式化证明搜索效率** | 缺乏计算归约，极易掉入假命题陷阱 | 需清偿连续性、可微性与可测性滤子支线子目标 | **核心有理几何、微积分与有限证书由 `decide` 一步归约** |
 
-### 39.13.2.1 第 0 层：免除商集公理（`Quot.sound`）的规范整数三元载体 `ProjTernion` {#sec-ch39-layer0-projternion-zero-quotient}
+### 32.8.2.1 第 0 层：免除商集公理（`Quot.sound`）的规范整数三元载体 `ProjTernion` {#sec-ch39-layer0-projternion-zero-quotient}
 
-在 [§39.9](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md) 与 [§39.12](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md) 的罗德里格斯切参数化中，跨越对径赤道仍需切换正逆双卡；而在 Lean 4 第 0 层中，直接采用四元整数模去非零有理缩放的**齐次射影空间 $\mathbb{QP}^3 \cong \mathrm{SO}(3, \mathbb{Q})$**，可以一步构造出连商类型公理 `Quot.sound` 都完全省去的**唯一规范整数代表元**（`手工推导`）：
+在 [§31.5](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md) 与 [§32.7](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md) 的罗德里格斯切参数化中，跨越对径赤道仍需切换正逆双卡；而在 Lean 4 第 0 层中，直接采用四元整数模去非零有理缩放的**齐次射影空间 $\mathbb{QP}^3 \cong \mathrm{SO}(3, \mathbb{Q})$**，可以一步构造出连商类型公理 `Quot.sound` 都完全省去的**唯一规范整数代表元**（`手工推导`）：
 
 - **严格 $3$ 自由度、唯一整数范式与全域零奇点**：对任意非零整数四元组 $(w, x, y, z) \in \mathbb{Z}^4 \setminus \{0\}$，令 $g = \gcd(\lvert w\rvert, \lvert x\rvert, \lvert y\rvert, \lvert z\rvert) \ge 1$，先整除约分得互素四元组 $(w', x', y', z') = (w/g, x/g, y/g, z/g)$，再乘以符号因子 $s \in \{\pm 1\}$ 锁定**首个非零分量为正整数**。于是，$\mathbb{QP}^3$ 上的每一条射影三元数射线都拥有**全宇宙唯一的四元整数身份证**（直接由 `deriving DecidableEq` 零公理判定相等，完全绕开 `Quotient` 与 `Quot.sound`）：
   - 过去停机锚（$s = 0, \kappa = 1$）即 `p0 = (1, 0, 0, 0)`；
@@ -68,7 +68,7 @@
 **第 0 层规范齐次整数三元载体 `ProjTernion`（免除 `Quot.sound` 与无理根号）**：紫色实体三元球面上，青色整数射线簇 `(2,2,0,0)`、`(-3,-3,0,0)` 经 `Nat.gcd` 约分与首非零正号锁定坍缩至唯一规范锚点 `pHalf = (1,1,0,0)`（模方 `‖p‖² = 2`，无需 `√2` 即给出精确 `κ = 1/2 = 0.5000` 与整系数旋转 `Ad(pHalf) ∈ SO(3, ℤ)`），同屏标出过去锚 `p0 = (1,0,0,0)`、对径闭合极点 `pInf = (0,1,0,0)`（`κ = 0/1 = 0.0000`，零除零奇点）与三拍闭合整旋子 `g120 = (1,1,1,1)`（`κ = 1/4 = 0.2500`）。
 :::
 
-### 39.13.2.2 第 1 层：以 `class OmegaSpace` 封装母公理并由规范子类型实例证成相对无矛盾性 {#sec-ch39-layer1-omegaspace-typeclass-consistency}
+### 32.8.2.2 第 1 层：以 `class OmegaSpace` 封装母公理并由规范子类型实例证成相对无矛盾性 {#sec-ch39-layer1-omegaspace-typeclass-consistency}
 
 在第 1 层中，我们将母公理 $\mathrm{AXIOM}\text{-}\Omega$ 的三元比较算子 `triad` 与保真度核 `kappa` 及其六条核心恒等律定义为可计算类型类接口 `class OmegaSpace (M : Type)`，绝不使用 `axiom`。
 
@@ -83,7 +83,7 @@
 **第 1 层 `OmegaSpace` 相对相容性核验与 `Jet2Rat` 一步 `decide` 反射**：紫色实体三元球面上实时步进 `omega_zero_axiom_master_check` 的八项合取断言——`{1, 1/2, 0, 1/4}` 有理保真度谱、`g120` 三拍归位 `gStep3 = p0`、左吸收幂等 `triad pHalf pHalf g120 = g120`、两枚整正交半转非对易合成 `(1,1,1,1) ≠ (1,1,1,-1)`，以及 `x₀ = 1` 处 `Jet2Rat.kappaJetAt` 输出精确 `{1/2, -1/2, +1/4}`，并支持切换查看 `CanonProjTernion` 规范子类型如何拦截原始 `(0,0,0,0)` 与 `(2,0,0,0)` 边界反例。
 :::
 
-### 39.13.2.3 第 2 层：面向 `Mathlib` 的单向阴影投影函子 $\Pi_{\mathbb{R}}$（不造封闭孤岛） {#sec-ch39-layer2-mathlib-shadow-functor}
+### 32.8.2.3 第 2 层：面向 `Mathlib` 的单向阴影投影函子 $\Pi_{\mathbb{R}}$（不造封闭孤岛） {#sec-ch39-layer2-mathlib-shadow-functor}
 
 构建零公理 `OmegaMath` 基础层，绝不意味着将自己封闭在与主流数学界隔绝的孤岛上。由于规范整数三元数诱导的有理正交群 $\mathrm{SO}(3, \mathbb{Q})$ 在实旋转群 $\mathrm{SO}(3, \mathbb{R})$ 中范数稠密（且凯莱有理点集 $Q(\mathbb{Q}^3) = S^3(\mathbb{Q}) \setminus \{-1\}$ 在单位四元数群 $S^3(\mathbb{R}) \cong \mathrm{SU}(2)$ 中处处稠密），我们只需在第 2 层架设一座极薄的**单向阴影投影函子**：
 
@@ -99,7 +99,7 @@ $$
 
 ---
 
-## 39.13.3 零外部依赖 Lean 4 可执行原型（`v4.35.0` 实机核验）与三步演进路线 {#sec-ch39-lean4-zero-axiom-executable-prototype}
+## 32.8.3 零外部依赖 Lean 4 可执行原型（`v4.35.0` 实机核验）与三步演进路线 {#sec-ch39-lean4-zero-axiom-executable-prototype}
 
 下面这段完整代码**不导入 `Mathlib` 的任何一行代码（零 `import` 语句）**，仅凭 Lean 4（`v4.35.0`）原生裸内核，从零实现了零公理既约有理数 `QRat`、规范齐次整数三元数 `ProjTernion`、二阶无极限微积分环 `Jet2Rat`（$\mathbb{Q}[\eta]/(\eta^3)$）以及 `OmegaSpace` 类型类契约，并用**单条内核反射指令 `by decide`** 一步核验 `{0, 1/2, 1}` 因果有理锚点、`(1,1,1,1)` 三拍精确闭合、两枚整正交旋子非对易合成以及 $x_0 = 1$ 处的二阶代数导数。将本段代码原样送入 `lean --stdin`（`v4.35.0`），编译器零警告通过，末尾 `#print axioms` 逐字输出 **`'omega_zero_axiom_master_check' does not depend on any axioms`**：
 
@@ -287,7 +287,7 @@ theorem omega_zero_axiom_master_check :
 
 **不动底层内核一分一毫，不借半条自定义公理——当数学褪去平直无穷的泡沫，证明本身就是全速运转的计算！**
 
-在下面这座完整三维实验室中，先在第一卡拨动三种架构路线，亲眼核对纯 CIC 内核上青色归约束如何零阻碍打出 **`does not depend on any axioms`**，再切入第二卡与第三卡拖动紫色齐次三元球面上的整数射线簇，看 `pHalf = (1, 1, 0, 0)` 与 `qHalf = (1, 0, 1, 0)` 不借半个根号与半个 $\pi$ 一步非对易合成为纯整数体对角旋子 **`(1, 1, 1, 1)`** 并在三拍后归位 **`(1, 0, 0, 0)`**，最后停在第四卡与第五卡检视有理舒尔补 $S = \frac{4}{3}$ 与整数四分深度 $70 < 128$ 如何经单向阴影函子 $\Pi_{\mathbb{R}}$ 无极限接通经典分析：从两子丈量的第一道内积投影出发，历经克利福德几何积、霍普夫旋量纤维、雷吉离散曲率、素数阿代尔闭合与无无穷有理数学 $\mathbf{Math}_\Omega$，直到落定为 Lean 4 纯 CIC 内核里一行 `by decide` 即可零公理归约的 `OmegaMath` 基座，整部三十九章在此圆满合龙——现在，让我们步入全书[终章](coda.md)：**《在所有的球之外》**。
+在下面这座完整三维实验室中，先在第一卡拨动三种架构路线，亲眼核对纯 CIC 内核上青色归约束如何零阻碍打出 **`does not depend on any axioms`**，再切入第二卡与第三卡拖动紫色齐次三元球面上的整数射线簇，看 `pHalf = (1, 1, 0, 0)` 与 `qHalf = (1, 0, 1, 0)` 不借半个根号与半个 $\pi$ 一步非对易合成为纯整数体对角旋子 **`(1, 1, 1, 1)`** 并在三拍后归位 **`(1, 0, 0, 0)`**，最后停在第四卡与第五卡检视有理舒尔补 $S = \frac{4}{3}$ 与整数四分深度 $70 < 128$ 如何经单向阴影函子 $\Pi_{\mathbb{R}}$ 无极限接通经典分析：从三维概念场封顶、不可表三元数与五种无损流群表示出发，历经无常数有理重构、精确结构数学与无无穷有理数学 $\mathbf{Math}_\Omega$，直到落定为 Lean 4 纯 CIC 内核里一行 `by decide` 即可零公理归约的 `OmegaMath` 基座，整座第三十二章在此圆满收口——现在，手握这门纯粹有理的三元数场语言，让我们翻开第八部压轴之卷 **[第三十三章 万力归弧与极小圆弧场大统一（AF-GUT）](ch33-unified-arc-forces-and-af-gut.md)**！
 
 ::: {.viz src="lean4-zero-axiom-omega-math-sandbox" height="620"}
 完整实验室：在“OmegaMath 零公理纯 CIC 构造栈 · 证明即计算”与“传统实无穷与自定义公理对照（MODEL）· 计算阻断与滤子膨胀”双透镜间切换（窄屏与章节嵌入视图亦可在巡览条旁一键切换透镜），依次巡览五阶编译流水线与三路线公理审计、免除 `Quot.sound` 的第 0 层规范整数三元载体 `ProjTernion`、第 1 层 `OmegaSpace` 相容性核验与 `Jet2Rat` 一步 `decide` 反射、第 2 层有理舒尔补证书与单向阴影函子 $\Pi_{\mathbb{R}}$，以及四类数学物理任务与 `OmegaCore` 三步路线基准五张实验卡，支持切换三种形式化架构路线、四类典型任务与五阶流水线节点，交互点选整数四元数射线观察 `Nat.gcd` 规范归约、三拍闭合与 `ℚ[η]/(η³)` 射流求逆，并在底部两条对照小图中同步观察第一图四类任务下零公理 `OmegaMath` 对比 `Mathlib.Real` 的证明节点规模与归约步数，以及第二图整数四分深度 $N$ 下精确分数预算 $(\frac{c}{d})/4^{N+1}$ 单向锁入目标阈值 $\frac{p}{q}$。十五条冻结 `LEAN ✓` 声明、`ARGUED` 类型论与多内核审计文献、`MODEL` 三层架构总表及 `NUM` 实机核验在依据栏与理论抽屉中分层列出。

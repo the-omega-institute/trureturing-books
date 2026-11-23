@@ -1,6 +1,6 @@
 # C.1 多面体近似与不可抹平的几何余项 {#sec-coda-polyhedral-remainder}
 
-为什么人类与计算机在有限分片网格、有限离散门字、有限素数截断或有限阶泰勒展开等有限构造逼近中（区别于精确代数水平集方程如 $x_0^2+x_1^2+x_2^2+x_3^2=1$ 与无常数有理凯莱骨架，见 [§39.4](ch39-s27-self-contained-ternion-particle-and-no-exterior.md) [@rem-ch39-no-exterior-topology-literature-and-coda-harmony] 及 [§39.6](ch39-s29-constant-free-rational-axiom-omega.md)），无法仅凭有限平直分片零误差地复现光滑球面曲率？整本书在多个不同数学侧面反复遭遇了同一个结构性现象——**有限截断或分片多面体近似与光滑球面曲率之间的拓扑及算术余项**。我们先将刻画多面体角亏、偶维毛球旋涡与平行化球面的三项经典离散几何与代数拓扑定理归入文献注记：
+为什么人类与计算机在有限分片网格、有限离散门字、有限素数截断或有限阶泰勒展开等有限构造逼近中（区别于精确代数水平集方程如 $x_0^2+x_1^2+x_2^2+x_3^2=1$ 与无常数有理凯莱骨架，见 [§39.4](ch39-s27-self-contained-ternion-particle-and-no-exterior.md) [@rem-ch39-no-exterior-topology-literature-and-coda-harmony] 及 [§32.5](ch39-s29-constant-free-rational-axiom-omega.md)），无法仅凭有限平直分片零误差地复现光滑球面曲率？整本书在多个不同数学侧面反复遭遇了同一个结构性现象——**有限截断或分片多面体近似与光滑球面曲率之间的拓扑及算术余项**。我们先将刻画多面体角亏、偶维毛球旋涡与平行化球面的三项经典离散几何与代数拓扑定理归入文献注记：
 
 ::: {.remark #rem-coda-polyhedral-topology-literature title="笛卡尔多面体角亏定理、毛球定理与平行化球面定理（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 以下三项关于凸多面体离散曲率与球面切丛拓扑的经典定理均属外部数学文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中（与第 21 章文献注记 [@rem-hairy-ball-adams-literature] 前后呼应）：
