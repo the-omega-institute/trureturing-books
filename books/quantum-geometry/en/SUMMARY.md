@@ -152,6 +152,7 @@
       - [31.1.3.2 Möbius truncation and zero-spectrum recovery](ch34-s28-s03-s02-mobius-and-spectra.md)
         - [31.1.3.2.1 Fourier recovery from Möbius windows](ch34-s28-s03-s02-fourier-recovery.md)
         - [Weighted near-collisions and the range of missing-window starts](ch34-s28-s03-s02-weighted-near-collisions.md)
+        - [From a characteristic function to a short-interval bound](ch34-s28-s03-s02-gaussian-characteristic-window.md)
         - [A variance lower bound for near-collisions](ch34-s28-s03-s02-collision-variance.md)
         - [Weighted near-collisions under small perturbations](ch34-s28-s03-s02-spectral-perturbations.md)
         - [One spectral perturbation for many tests](ch34-s28-s03-s02-common-spectral-perturbations.md)
