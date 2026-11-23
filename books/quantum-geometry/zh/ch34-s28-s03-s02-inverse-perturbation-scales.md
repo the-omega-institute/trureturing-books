@@ -1,20 +1,21 @@
 # 扰动尺度倒数的加权和
 
-设 $J$ 有限，$w_j\ge0$，$r_j\ge\rho>0$。记 $W=\sum_jw_j$。对 $p$ 次向量 $m$，记 $c_m=\binom{p}{m}\prod_jw_j^{m_j}$。记 $D_k$ 为 $k$ 次加权系数的平方和。对两个不同的 $p$ 次向量，令 $S(m,n)=\sum_j((m_j-n_j)r_j)^2$。
+设 $r_j\ge\rho>0$。对不同的 $p$ 次计数向量 $m,n$，取 $S(m,n)=\sum_j((m_j-n_j)r_j)^2$，并记 $I_p=\sum_{m\ne n} c_mc_n/\sqrt{S(m,n)}$，其中求和遍历有序的 $p$ 次向量对。令
+$$
+T=W^{2p},\qquad A_k=\binom pk^2 W^{2(p-k)}D_k,\qquad
+L=\rho\sqrt{2(p-k+1)},\qquad U=\rho\sqrt2.
+$$
 
 ::: {.theorem #thm-ch31-weighted-inverse-scale-budget title="低阶对角权重控制尺度倒数的加权和" lean="D5/S3/Fourier/Concentration/OverlapPerturbationBudget.weighted_inverse_scale_le_of_overlap"}
 当 $0\le k\le p$ 时，
 $$
-\sum_{\substack{|m|=|n|=p\\m\ne n}}\frac{c_mc_n}{\sqrt{S(m,n)}}
-\le
-\frac{W^{2p}}{\rho\sqrt{2(p-k+1)}}+
-\frac{\binom pk^2 W^{2(p-k)}D_k}{\rho\sqrt{2}} .
+I_p\le \frac{T-D_p}{L}+
+\bigl(\min(A_k,T)-D_p\bigr)\left(\frac1U-\frac1L\right).
 $$
-求和遍历有序对。
 :::
 
 ::: proof
-令 $H(m,n)=\sum_j\min(m_j,n_j)$。两个不同的同次向量有 $H<p$，因为等号强制两边每个坐标都等于逐坐标最小值。因此 $\sqrt S\ge\rho\sqrt2$。在 $H<k$ 时，尺度至少为 $\rho\sqrt{2(p-k+1)}$，这部分权重至多为总权重 $W^{2p}$。第二项的分子用低阶对角权重控制 $H\ge k$ 的配对。完整证明由 Lean 内核核验。
+不同的同次向量有 $H(m,n)<p$，所以 $\sqrt S\ge U$。在 $H(m,n)<k$ 时，$\sqrt S\ge L$。给每个不同配对按 $1/L$ 计费，只给 $H(m,n)\ge k$ 的配对补上差额 $1/U-1/L$。所有配对的总权重是 $T$。共同项较多的配对权重至多为 $\min(A_k,T)$。两处都要扣掉对角权重 $D_p$，因为每个对角项都有 $H(m,m)=p$。
 :::
 
-对有限个独立均匀偏移及闭分辨率 $\eta\ge0$，欧氏尺度区间界把每个不同配对的贡献限制在 $e^{1/2}\sqrt{15\pi/2}\,\eta\, c_mc_n/\sqrt S$ 以下。因此将右侧乘以 $e^{1/2}\sqrt{15\pi/2}\,\eta$ 即得加权概率预算的上界。若预算还剔除无法达到碰撞带的配对，并取欧氏尺度界与最大坐标界的最小值，该上界仍适用。固定 ζ 零点纵坐标在正分辨率下仍需算术估计。
+当 $k=0$ 时，每个不同配对都计入差额。当 $k=p$ 时，$L=U$。两端的上界都等于 $(T-D_p)/U$。对有限个独立均匀偏移，闭分辨率为 $\eta\ge0$ 时，欧氏区间界将相应的加权概率预算控制在右侧乘以 $e^{1/2}\sqrt{15\pi/2}\,\eta$ 的范围内。局部预算还可以利用频率差排除达不到碰撞带的配对。固定 $\zeta$ 零点纵坐标在正分辨率下仍需算术估计。
