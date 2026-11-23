@@ -606,6 +606,36 @@ Set $h=L/2$. Subtracting $\mu(r)(S_r(u+h)-S_r(u))$ from the signed midpoint erro
 
 The remaining question under RH alone is whether the actual zeros satisfy $D(T)\to0$. At each cutoff, $D(T)$ is the smallest weighted mean of $1-\sin(\gamma v)$ attainable to arbitrary accuracy with one common time $v$.
 
+::: {.theorem #thm-ch31-sparse-zero-phase title="Sparse omissions give the full left-endpoint coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.omittedMass_tendsto_zero D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.weightedPhaseDefect_le_omittedMass D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.weightedPhaseDefect_tendsto_zero D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.signed_window_even_cutoff_full_coefficient_of_sparse_count"}
+Assume RH and use the positive zero ordinates and weights of [@thm-ch31-weighted-phase-limsup]. For a set $S$ of ordinates, define the omitted count $B_S(T)$ and mass $W_{\mathrm{omit},S}(T)$ by summing over $0<\gamma\le T$.
+
+$$
+B_S(T)=\sum_{\gamma\notin S}m_\gamma,\qquad
+W_{\mathrm{omit},S}(T)=\sum_{\gamma\notin S}\frac{m_\gamma\gamma}{1/4+\gamma^2}.
+$$
+
+If $B_S(T)=o(T\log T)$, then $W_{\mathrm{omit},S}(T)=o(\log^2 T)$. The retained coordinates at a cutoff are compatible with the quarter phase when the coefficient sum of every integer relation among them is divisible by $4$. Every compatible cutoff with $W(T)>0$ satisfies
+
+$$
+0\le D(T)\le \min\!\left(1,\frac{2W_{\mathrm{omit},S}(T)}{W(T)}\right).
+$$
+
+If every sufficiently large cutoff is compatible and $W_{\mathrm{omit},S}(T)=o(\log^2 T)$, then $D(T)\to0$. Take $m\ge2$ with $m+1=2r$. Suppose $\mu(r)=0$ or that $S$ is linearly independent over $\mathbb Q$ and $B_S(T)=o(T\log T)$. Then the absolute left-endpoint error in the weighted phase criterion is bounded on a late $u$-tail for each sufficiently small fixed $L>0$, and
+
+$$
+\frac{Q_m^{\mathrm{left}}(L)}{L\log^2(1/L)}\longrightarrow\frac{|\mu(r)|}{4\pi s_m}
+\qquad (L\downarrow0).
+$$
+:::
+
+::: proof
+The weight per occurrence of a zero is at most $1/\gamma$. In a dyadic shell $2^k<\gamma\le 2^{k+1}$, the omitted mass is at most $2^{-k}B_S(2^{k+1})$. For any $\varepsilon>0$, all sufficiently late shells satisfy $B_S(2^{k+1})\le\varepsilon\,2^{k+1}\log(2^{k+1})$. After summation and division by $\log^2 T$, the late shells contribute at most a constant times $\varepsilon$. The fixed initial segment contributes a quantity tending to zero.
+
+Compatibility lets the common-time orbit approach the phase with every retained angle equal to $\pi/2$. Every omitted coordinate has sine at least $-1$, so it can cost at most twice its weight. The sine sum is zero at time zero and never exceeds $W(T)$, giving $0\le D(T)\le1$. Rational linear independence leaves only the zero relation and hence gives compatibility at every cutoff. Since $W(T)/\log^2 T\to1/(4\pi)$, the fraction of omitted mass tends to zero and the weighted phase criterion gives the coefficient. If $\mu(r)=0$, the same criterion gives a zero coefficient directly.
+:::
+
+Whether the actual zeta zeros contain a rationally independent set satisfying the omitted-count condition remains open.
+
 ::: {.theorem #thm-ch31-relation-phase-deficit title="Integer relations bound the weighted phase deficit from below" lean="D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit_disjoint"}
 Take a finite set $J$ of real frequencies $\gamma_j$ with positive weights $w_j$. Put $W=\sum_{j\in J}w_j$. When $W>0$, define the deficit $D$ for this finite sine sum as in [@thm-ch31-weighted-phase-limsup]. Let $A$ index a finite family of integer relations, with $\sum_{j\in J}k_{aj}\gamma_j=0$ for each row. Write $\delta_a=|1-i^{\sum_{j\in J}k_{aj}}|$. For nonnegative multipliers $\lambda_a$, if $\sum_{j\in J}(\sum_{a\in A}\lambda_a|k_{aj}|)^2/w_j>0$, then $J$ is nonempty and $W>0$. In this case,
 

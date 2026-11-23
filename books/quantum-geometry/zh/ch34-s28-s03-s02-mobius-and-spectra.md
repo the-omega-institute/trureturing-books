@@ -606,6 +606,36 @@ $$
 
 仅在 RH 下，实际零点是否满足 $D(T)\to0$ 仍是开放问题。在每个截断范围内，$D(T)$ 是对共同时刻 $v$ 取下确界得到的 $1-\sin(\gamma v)$ 加权平均。
 
+::: {.theorem #thm-ch31-sparse-zero-phase title="稀疏遗漏零点计数保证左端点取得完整首项系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.omittedMass_tendsto_zero D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.weightedPhaseDefect_le_omittedMass D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.weightedPhaseDefect_tendsto_zero D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.signed_window_even_cutoff_full_coefficient_of_sparse_count"}
+假设 RH，沿用 [@thm-ch31-weighted-phase-limsup] 的正零点纵坐标和权重。对一组纵坐标 $S$，定义遗漏计数 $B_S(T)$ 和遗漏质量 $W_{\mathrm{omit},S}(T)$，都在 $0<\gamma\le T$ 上求和。
+
+$$
+B_S(T)=\sum_{\gamma\notin S}m_\gamma,\qquad
+W_{\mathrm{omit},S}(T)=\sum_{\gamma\notin S}\frac{m_\gamma\gamma}{1/4+\gamma^2}.
+$$
+
+若 $B_S(T)=o(T\log T)$，则 $W_{\mathrm{omit},S}(T)=o(\log^2 T)$。称一个截断的保留坐标与四分之一周相位相容，如果保留坐标的每个整数关系的系数和都是 $4$ 的倍数。对每个 $W(T)>0$ 的相容截断，
+
+$$
+0\le D(T)\le \min\!\left(1,\frac{2W_{\mathrm{omit},S}(T)}{W(T)}\right).
+$$
+
+若充分大的截断都相容，且 $W_{\mathrm{omit},S}(T)=o(\log^2 T)$，则 $D(T)\to0$。取 $m\ge2$、$m+1=2r$。若 $\mu(r)=0$，或 $S$ 在 $\mathbb Q$ 上线性无关且 $B_S(T)=o(T\log T)$，则该判据中的左端点误差绝对值对充分小的固定 $L>0$ 在 $u$ 的尾部有界，且
+
+$$
+\frac{Q_m^{\mathrm{left}}(L)}{L\log^2(1/L)}\longrightarrow\frac{|\mu(r)|}{4\pi s_m}
+\qquad (L\downarrow0).
+$$
+:::
+
+::: proof
+每个零点的单位重数权重至多为 $1/\gamma$。对二进壳 $2^k<\gamma\le 2^{k+1}$，遗漏质量至多为 $2^{-k} B_S(2^{k+1})$。给定 $\varepsilon>0$，充分晚的壳上 $B_S(2^{k+1})\le\varepsilon\,2^{k+1}\log(2^{k+1})$。求和并除以 $\log^2 T$ 后，晚期壳的贡献至多为常数乘 $\varepsilon$，固定初段的贡献趋零。
+
+相容性使共同时间轨道可以任意接近所有保留相位都等于 $\pi/2$ 的相位。每个遗漏坐标的正弦至少为 $-1$，故最多损失其权重的两倍。正弦和在时间零点取值零，上确界又至多为 $W(T)$，所以 $D(T)$ 介于零和一之间。有理线性无关时只有零关系，因而每个截断都相容。由 $W(T)/\log^2 T\to1/(4\pi)$，遗漏质量占比趋于零，再应用加权相位判据。当 $\mu(r)=0$ 时，该判据直接给出系数零。
+:::
+
+实际 ζ 零点是否存在满足该遗漏计数条件的有理线性无关集，仍是开放问题。
+
 ::: {.theorem #thm-ch31-relation-phase-deficit title="整数关系给出的加权相位亏损下界" lean="D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit_disjoint"}
 设有限指标集 $J$ 上有实频率 $\gamma_j$ 与正权重 $w_j$，令 $W=\sum_{j\in J}w_j$。当 $W>0$ 时，以 [@thm-ch31-weighted-phase-limsup] 的方式定义有限正弦和的亏损 $D$。设 $A$ 是一族有限的整数关系，每行满足 $\sum_{j\in J}k_{aj}\gamma_j=0$。记 $\delta_a=|1-i^{\sum_{j\in J}k_{aj}}|$。取非负乘子 $\lambda_a$。若 $\sum_{j\in J}(\sum_{a\in A}\lambda_a|k_{aj}|)^2/w_j>0$，则 $J$ 非空，因而 $W>0$，并有
 
