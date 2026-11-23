@@ -774,6 +774,24 @@ $$
 
 应用到实际 ζ 零点的截断时，仍须确定哪些整数关系成立以及它们的支撑。
 
+::: {.theorem #thm-ch31-finite-phase-recurrence title="有限区间内的加权相位复现" lean="D5/S3/Fourier/WeightedPhaseRecurrence.weighted_phase_recurrence"}
+取有限指标集 $J$，实频率 $\gamma_j$，目标相位角 $\theta_j$，以及总和为一的非负权重 $p_j$。令 $\xi(k)=\sum_{j\in J}k_j\gamma_j$，$b(k)=\sum_{j\in J}k_j\theta_j$。固定正整数 $N$ 与 $\delta>0$。对每个满足 $|k_j|\le N$ 的整数向量，假定 $\xi(k)=0$ 时 $\cos b(k)=1$，而 $\xi(k)\ne0$ 时 $|\xi(k)|\ge\delta$。
+
+若 $\varepsilon>1/N$ 与 $R>0$ 满足
+
+$$
+R\delta(\varepsilon-1/N)>2\bigl(\varepsilon N^{|J|}-(\varepsilon-1/N)\bigr),
+$$
+
+则每个区间 $[a,a+R]$ 内都有时刻 $t$，使 $\sum_j p_j(1-\cos(\gamma_jt-\theta_j))<\varepsilon$。
+:::
+
+::: proof
+Fejér 核 $F_N(x)=|\sum_{r=0}^{N-1}e^{irx}|^2/N$ 的 Fourier 系数非负，总和为 $N$，常数系数为 $1$。利用恒等式 $(1-\cos x)F_N(x)=(1-\cos(Nx))/N$，将各坐标 Fejér 核的乘积乘上 $\varepsilon$ 与加权亏损的差，得到系数非负的余弦展开。系数总和为 $\varepsilon N^{|J|}$，零向量的系数为 $\varepsilon-1/N$。频率为零的项贡献非负，其余每项的余弦在整个区间上的积分绝对值至多为 $2/\delta$。区间长度条件保证乘积的积分为正。取乘积为正的一点，其亏损即小于 $\varepsilon$。 完整证明由 Lean 内核检查。
+:::
+
+四分之一周相位取 $\theta_j=\pi/2$。对调和总权重为正的实际 ζ 零点截断，可取 $p_j$ 与解析重数权重成正比，取 $\gamma_j$ 为缩放后的纵坐标。估计依赖该截断在有限系数范围内满足上述条件。非零频率的分离量与精确关系的相位同余是两项独立输入。 [Bohr–Jessen 的 Fejér 核方法](https://arxiv.org/html/2411.14221#S4) · [RH 仓中的有限指数平均](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 

@@ -774,6 +774,24 @@ The length-one relation at frequency zero forces omission of that coordinate wit
 
 Applying the estimate to actual zeta cutoffs still requires information about which integer relations hold and their supports.
 
+::: {.theorem #thm-ch31-finite-phase-recurrence title="Weighted phase recurrence within a finite interval" lean="D5/S3/Fourier/WeightedPhaseRecurrence.weighted_phase_recurrence"}
+Let $J$ be finite, with real frequencies $\gamma_j$, target angles $\theta_j$ and nonnegative weights $p_j$ summing to one. Put $\xi(k)=\sum_{j\in J}k_j\gamma_j$ and $b(k)=\sum_{j\in J}k_j\theta_j$. Fix a positive integer $N$ and a number $\delta>0$. For each integer vector satisfying $|k_j|\le N$, assume that $\cos b(k)=1$ if $\xi(k)=0$, and that $|\xi(k)|\ge\delta$ otherwise.
+
+If $\varepsilon>1/N$ and $R>0$ satisfy
+
+$$
+R\delta(\varepsilon-1/N)>2\bigl(\varepsilon N^{|J|}-(\varepsilon-1/N)\bigr),
+$$
+
+then every interval $[a,a+R]$ contains a time $t$ for which $\sum_j p_j(1-\cos(\gamma_jt-\theta_j))<\varepsilon$.
+:::
+
+::: proof
+The Fejér kernel $F_N(x)=|\sum_{r=0}^{N-1}e^{irx}|^2/N$ has nonnegative Fourier coefficients with total mass $N$. Its constant coefficient is $1$. The identity $(1-\cos x)F_N(x)=(1-\cos(Nx))/N$ yields a nonnegative-coefficient cosine expansion of the Fejér product multiplied by the difference between $\varepsilon$ and the weighted loss. Its total coefficient mass is $\varepsilon N^{|J|}$ and the coefficient at the zero vector is $\varepsilon-1/N$. Zero-frequency terms contribute nonnegatively, and each other cosine has integral of magnitude at most $2/\delta$ over the entire interval. The assumed inequality makes the integral of the product positive. At a point where the product is positive, the loss is below $\varepsilon$. The full proof is checked by the Lean kernel.
+:::
+
+For the quarter phase, set $\theta_j=\pi/2$. For an actual zeta cutoff with positive harmonic mass, take $p_j$ proportional to the analytic-multiplicity weights and $\gamma_j$ equal to the rescaled ordinates. The estimate is conditional on the finite-band assumptions for that cutoff. The nonzero frequency separation is a quantitative input distinct from the phase congruences for exact relations. [Bohr–Jessen's Fejér argument](https://arxiv.org/html/2411.14221#S4) · [Finite exponential averages in the RH repository](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 
