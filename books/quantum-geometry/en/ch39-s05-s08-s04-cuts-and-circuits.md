@@ -867,11 +867,15 @@ To count omissions, fix an index $x$ other than $e$. In each petal delete $x$ if
 
 For instance, take rank five on nine classes and omit $\{0,1,2,3,4\}$, $\{0,1,2,5,6\}$ and $\{0,3,4,5,6\}$. Each of the pairs $\{1,2\}$, $\{3,4\}$ and $\{5,6\}$ occurs in exactly two petals. For class sizes $1,1,1,3,3,3,3,3,3$, the total size is $21$ and $g=1$. The three $q_T$ are $3,3,1$, and the obstruction is $(\mathbb Z/21\mathbb Z)^{32}\oplus(\mathbb Z/3\mathbb Z)^2$.
 
+::: {.theorem #thm-joint-circuit-common-pivot-omissions title="Cyclic factors under the common-pivot intersection bound" lean="D5/S3/Combinatorics/Matroids/CommonPivotCircuitInvariantFactors.common_pivot_lifting_obstruction_invariant_factors"}
 In fact, a common element and the sparse-paving intersection bound suffice. Suppose $3\le r<k$, every omitted basis contains $e$, and any two omitted bases share at most $r-2$ elements. Then the same cyclic factor formula holds. The deletion and complement argument above still bounds both binomial multiplicities, since any two petals share at most $r-3$ indices.
+:::
 
+::: proof
 For a prime power $p^a$ dividing $n$, work with the part of the coefficient module killed by $p^a$. Divide the weights outside the pivot by their gcd. Some normalized weight is invertible modulo $p^a$. Choose that index $x$ and make an integral change of basis at $x$, keeping the other vectors fixed. Modulo $p^a$, the insertion vector is now supported at $x$, after its pivot component is dropped. The insertion equation then acts separately on each coefficient.
 
 An omitted petal avoiding $x$ still constrains one coefficient. An omitted petal containing $x$ can constrain that coefficient and those obtained by replacing $x$ with one index outside the petal. The affected sets for different omissions are disjoint. A replacement set equal to a petal avoiding $x$ would give two petals sharing $r-2$ indices. For two petals containing $x$, the union of their deletions of $x$ has at least $r$ elements and cannot fit in an $(r-1)$-element replacement set. This disjointness permits coefficient exchange on each primary component. Recombining the components and cancelling the finite uniform factors gives the formula.
+:::
 
 For example, on eight classes take rank four and common element $0$. Use the seven Fano lines on $1,\ldots,7$ as petals. Every membership class contains a single index. For class sizes $3,3,3,3,6,6,6,6$, the obstruction is $(\mathbb Z/36\mathbb Z)^{13}\oplus\mathbb Z/6\mathbb Z\oplus(\mathbb Z/3\mathbb Z)^{14}$.
 
