@@ -9697,6 +9697,122 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "observer-is-universe-crystallization-sandbox",
+      "code": "OMEGA//UNIVERSE",
+      "title": "观察者即宇宙沙盘：无端口五元组、有理结构时间、核内视角翻转与单子共振",
+      "title_en": "Observer Is Universe: Port-Free Pentad, Rational Structural Time, Inside-Core Flip & Monad Resonance",
+      "summary": "在无外部端口的观察者模型中，逐拍比较树枝、弦边与同义反复对结构时间的影响。用有理舒尔创新度与贝蒂环秩核对每次增量，转入结构核观察潜伏视界，再比较三个观察者的固有时及其共享图谱。最后查看 ObserverUniverse 的四步有理数归约，时间读数依次为 0、0、3/4、3/2。",
+      "summary_en": "In the port-free observer model, compare how sprouts, chords and tautologies affect structural time. Track each increment with rational Schur innovation and Betti cycle rank, move inside the structural core to view the latent horizon, and compare the proper times of three observers and their shared atlas. The four rational states of ObserverUniverse give time readings of 0, 0, 3/4 and 3/2.",
+      "path": "observer-is-universe-crystallization-sandbox/",
+      "thumbnail": "observer-is-universe-crystallization-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-23",
+      "chapter": 38,
+      "section": "38.13",
+      "presets": [
+        "port-free-pentad-crystallization",
+        "rational-schur-betti-time-arrow",
+        "core-inside-out-starry-sky-flip",
+        "trureturing-monad-resonant-span",
+        "lean4-observer-universe-decide-trace"
+      ],
+      "preset_titles": {
+        "port-free-pentad-crystallization": {
+          "zh": "无外部端口五元组与内禀结晶",
+          "en": "Port-free pentad & 1 ↦ 0′ crystal"
+        },
+        "rational-schur-betti-time-arrow": {
+          "zh": "有理舒尔创新度与贝蒂环秩时间箭",
+          "en": "Rational Schur + Betti time arrow"
+        },
+        "core-inside-out-starry-sky-flip": {
+          "zh": "核内第一人称视角翻转：内盲区显影星空",
+          "en": "Inside-core flip: horizon as starry sky"
+        },
+        "trureturing-monad-resonant-span": {
+          "zh": "trureturing 多观察者单子共振网",
+          "en": "Multi-observer monad resonant span"
+        },
+        "lean4-observer-universe-decide-trace": {
+          "zh": "Lean 4 零公理 ObserverUniverse 归约",
+          "en": "Lean 4 zero-axiom ObserverUniverse"
+        }
+      },
+      "tags": [
+        "自包含观察者",
+        "有理结构时间",
+        "有理舒尔创新度",
+        "贝蒂环秩",
+        "单子共振"
+      ],
+      "tags_en": [
+        "Self-contained observer",
+        "Rational structural time",
+        "Rational Schur innovation",
+        "Betti cycle rank",
+        "Monad resonance"
+      ],
+      "theory": [
+        {
+          "label": "§38.13 · 观察者的完整自包含公理化定义、结构信息时间与观察者即宇宙",
+          "label_en": "§38.13 · Complete Self-Contained Definition of the Observer, Structural-Information Time, and Observer Is Universe",
+          "href": "../zh/ch38-s13-self-contained-observer-definition-and-observer-is-universe.html#sec-ch38-self-contained-observer-definition-and-observer-is-universe",
+          "href_en": "../en/ch38-s13-self-contained-observer-definition-and-observer-is-universe.html#sec-ch38-self-contained-observer-definition-and-observer-is-universe"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        },
+        {
+          "gid": "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }

@@ -155,6 +155,7 @@
 | **第 37 章** | [@thm-ch39-tft-born-holonomy-krylov-and-schur-anchors] | `D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy` | 球面三方向典范最短旋子门闭合回路的球面三角和乐精确公式 |
 | **第 38 章**：观察者即宇宙本体 | [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] | `D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition` | 概念状态空间按可观测签名纤维的不相交并重构定理 |
 | **第 38 章** | [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] | `D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective` | 非负实数全尺度齐肯多夫编码线程严格单射定理 |
+| **第 38 章** | [@thm-ch38-observer-is-universe-anchors] | `D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound` | 有限维可观测克雷洛夫子空间严格扩张次数不超过余维数 $\dim V - \dim\operatorname{ran}(C)$：锚定自包含观察者宇宙的有理结构时间生长界 |
 | **第 39 章**：大一统母公理（AXIOM-Ω） | [@thm-ch39-axiom-omega-ternary-closure-anchors] | `D5/S3/QuantumBounds/GramRealizability.gram_realizability` | 完备复内积空间上正算子格拉姆伴随平方因式分解充要定理 $0 \le Q \iff \exists O,\; Q = O^\dagger O$ |
 | **第 39 章** | [@thm-ch39-axiom-omega-ternary-closure-anchors] | `D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum` | 平衡半范分量构成的幺正和算子迫使交叉乘积严格反自伴 $(AB^\dagger)^\dagger = -AB^\dagger$ |
 | **第 39 章** | [@thm-ch39-axiom-omega-rank-five-unit-quaternion-embedding] | `D5/S3/Quantum/AURICOmega/TernaryComparisonRankFive.exists_unitQuaternion_embedding` | 非交换、链连通、触零且读数可在 $\mathbb{R}^5$ 中实现的三元比较结构单射嵌入单位四元数，保持迁移与读数 |
