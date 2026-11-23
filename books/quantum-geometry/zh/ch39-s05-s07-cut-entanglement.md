@@ -17,6 +17,8 @@ $$
 
 例如，中位恒为 $0$ 时，从四个底面字各占 $1/4$ 改为 `000`、`101` 各占 $1/2$，两端的占位仍各为 $1/2$，共同占位概率却从 $1/4$ 变成 $1/2$。这个改动给四格表的对角各加 $1/4$，给反对角各减 $1/4$，保持了行和与列和。[§39.3](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md) 的固定种子构造也用到这个四格变换。知道每个字的计算基概率后，字与字之间的相对相位仍可变化，见 [@ex-ch39-p2e-phase-counterexample]。[FIB 原子理论卷 §2–4](https://github.com/the-omega-institute/trureturing-source-theories/blob/2a39da5107abbfa3a72cc883486dbc15a15994a1/docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md#L178-L216)
 
+把四格按 `00`、`01`、`10`、`11` 排列。对非负整数 $a,b,c,d,s$，把计数 $(a,b+s,c+s,d)$ 改成 $(a+s,b,c,d+s)$。两张表的总数都为 $N=a+b+c+d+2s$，左右占位数分别为 $c+d+s$ 和 $b+d+s$，联合占位数却从 $d$ 变成 $d+s$。当 $N>0$ 时，联合占位率恰增加 $s/N$。这些读数可用交叉相乘精确比较。上面的四样本例取 $(a,b,c,d,s)=(1,0,0,1,1)$。两个端点的读数 $2/4$ 都等于 $1/2$，也等于射影读数 $\kappa([1:1])=1^2/(1^2+1^2)$。联合读数由 $1/4$ 变成 $2/4$。[OmegaMath 的比例等价](https://github.com/the-omega-institute/omega-math/blob/6f701cf75d1feffe20cdfc751c4f8da995a0e3a3/src/OmegaInit/Data/Ratio.lean#L19-L39) · [§39.12](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md)
+
 对等权样本，这个变换是任意长度禁邻字排序在三位时的特例。把第 $2,4,6,\ldots$ 位取反。此时每个占位的奇数位都要求相邻的偶数位也占位。于是两个变换后的支撑取交集和并集，所得支撑仍合法。再取反还原，就得到两个合法字，逐位合计的占位次数保持相等。金字塔底面的 `100` 和 `001` 先变成 `110` 和 `011`。两者的交、并分别为 `010` 和 `111`，还原后就是 `000` 和 `101`。
 
 反复作这样的交换，可以把变换后的支撑按包含关系排成一列。若共 $m$ 个样本，某一位在变换后的支撑中出现 $c$ 次，它就恰好出现在最后 $c$ 个支撑里。因此，原占位计数与 $m$ 决定排序后的多重集。样本数与逐位占位计数相同的两组样本可以经由这个共同的多重集，用一系列合法的二字交换连通。对有理概率律，把两个律写成同一分母后就能应用这一结论。[固定占位计数下的连通性](lean:D5/S1/Words/AdmissibleWords/UncrossingFiber.adm_phi_fiber_common_endpoint)
@@ -28,6 +30,15 @@ $$
 同样的五个合法字也给出一个量子例子。比较纯态 $(|010\rangle+|101\rangle)/\sqrt2$ 与这两个基态的等权非相干混合态。两者的计算基概率律以及每个两位约化态都相同。因为两个字在每个位点都不同，迹去任一位都会消去交叉项。混合态是乘积态的混合，纯态在每个单点切口上都有两个施密特系数 $(1/\sqrt2,1/\sqrt2)$。用比特翻转算符 $X$ 作联合测量时，$X\otimes X\otimes X$ 在纯态上的期望值为一，在混合态上为零。[FIB 原子理论卷 §18.2–18.3](https://github.com/the-omega-institute/trureturing-source-theories/blob/2a39da5107abbfa3a72cc883486dbc15a15994a1/docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md#L4163-L4280)
 
 推广到长度至少为二的禁邻开链。固定迹去任一位所得的全部约化态后，密度矩阵只有两个交错字之间的条目还可能改变。设 $D$ 为两密度矩阵之差，在非法字的行列上补零。如果两个字在第 $i$ 位相同，迹去第 $i$ 位的等式给出共同取零、共同取一的两项互为相反数。若任一字占据相邻位 $j$，两字在第 $i$ 位共同取一的矩阵元必为零。若两字在 $j$ 都为空，先把 $i$ 的共同位设为一，再应用 $j$ 的偏迹等式。两端同时占位仍然非法，所以这个矩阵元也为零。因此有非零条目的两个字必须逐位相反。两个互补字都合法，便要求每条边的两端取值相反，只剩下两个交错字。反过来，迹去任一位都消去它们之间的两个交叉项。在厄米的矩阵差中，这两个条目互为复共轭。[有限图上偏迹的精确核](lean:D5/S3/Quantum/Entanglement/Marginals/IndependentWordMarginals.deletion_kernel_iff)
+
+固定两条交错字的权重为 $p,1-p$，其中 $0<p<1$。由上述偏迹核判据，所有与这份混合态有相同两位约化态的密度矩阵，在 `010`、`101` 张成的空间上恰为
+
+$$
+\rho(c)=\begin{pmatrix}p&c\\ \bar c&1-p\end{pmatrix},
+\qquad |c|\le\sqrt{p(1-p)}.
+$$
+
+正半定性等价于行列式非负，等号给出圆周。圆心是可分混合态，圆周是纯态。跨任一非平凡切口作部分转置，两个交叉项移到另一对正交基态上，组成特征值为 $\pm|c|$ 的块。因此任一切口的纠缠负性都是 $|c|$。局部读数确定 $p$，补测 $c$ 的实部和虚部即可确定全局态与纠缠负性。
 :::
 
 ::: {.example #ex-ch39-fib-forbidden-window-coherence title="禁戒窗口中的相干"}
@@ -35,6 +46,25 @@ $$
 
 对任何满足条件的模式，可以在每次翻转一个共同位时反转矩阵元的符号。不同的位点包含两种方向，所以有序模式与其转置的支撑互不相交。加上伴随便得到一个非零厄米矩阵，其单点偏迹和迹都为零。在合法子空间的归一化单位矩阵上加减这个矩阵的足够小倍数，就得到实现这种差异的两份密度矩阵。以 $K=3$ 为例，$(010,100)$ 和 $(011,101)$ 属于同一模式。迹去共同的末位时，两项相消。迹去任一不同的位点时，两项都为零。
 :::
+
+::: {.theorem #thm-ch39-omega-fib-integer-deletion lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionSignTensor.deleteSite, D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionSignTensor.actualEntry" title="二值位型的整数偏迹见证"}
+按位记录一对二值字是同值、从零到一，还是从一到零。同值位在 $00$ 上取系数 $1$，在 $11$ 上取 $-1$。不同位只在指定的有序取值上取系数 $1$。其余系数为零。对任意有限位型，把逐位系数相乘。固定删除位以外的两个字，并令两字的前缀长度均等于删除位之前的位型长度。给两字同时补零、再同时补一，所得两个整数系数之和为零。若取所有共同位均为零的代表，两字在不同位按位型取值，则系数为 $1$。
+:::
+
+::: {.proof}
+在删除位上，补零与补一得到的局部系数互为相反数。向前每恢复一位，就给两项乘同一个系数。系数 $1$ 的代表在每个位点都取局部系数 $1$。两条声明与系数程序的公理依赖均为空。完整证明由 Lean 内核检查。
+:::
+
+例如，对禁三连占位的三位链，取有序对 $(010,100)$，共同的末位也可同时取一，得到 $(011,101)$。令
+
+$$
+\begin{aligned}
+u_\pm&=|010\rangle\pm|100\rangle,\\
+v_\pm&=|011\rangle\mp|101\rangle.
+\end{aligned}
+$$
+
+矩阵 $(u_\pm u_\pm^\top+v_\pm v_\pm^\top)/4$ 各自是迹一的正半定矩阵，且共用整数分母 $4$。两者的对角线和全部单点偏迹相同。在这四个合法字上，以 $+1$ 交换前一对、以 $-1$ 交换后一对，并在其余字上取零，所得联合可观测量的期望分别为 $+1$ 与 $-1$。见 [@ex-ch39-fib-forbidden-window-coherence]。
 
 ::: {.theorem #thm-ch39-fib-forbidden-triple-dimension lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionDimension.noTriple_finrank" title="禁三连占位时偏迹核的维数"}
 在长度为 $n\ge3$ 的开链上，只允许不含连续三个 $1$ 的字。记 $d_n$ 为如下复矩阵空间的维数。矩阵的两个指标都必须是合法字，且迹去任一位均得到零矩阵。则
@@ -47,6 +77,51 @@ $$
 按位记录两个字是共同取值、从零到一，还是从一到零。每个合法位型以共同位全零的那一对字提供一个复系数。每次翻转一个共同位，就给系数乘以 $-1$。不同位型的矩阵元集合互不相交，所以这些系数可以各自任取。[任意有限合法字族的维数公式](lean:D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionDimension.supportedKernel_finrank)
 
 对禁三连占位的链，每组三个相邻符号都须出现两种不同方向。设 $A,B,C,D$ 分别计数末两位是同一方向、相反方向、方向后跟共同位、共同位后跟方向的位型。追加一个符号后，四项变为 $(B,A+B+D,B,C)$。长度二时四项各为二，另有一个双共同位无法继续延伸。从长度三起，这四项的总数依次为 $12,24,44$。将上述更新式连续代入四次，第四次的向量等于前三次所得向量之和，得到递推式。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch39-fib-triple-kernel-word-count lean="D5/S3/Quantum/Entanglement/Marginals/TripleDeletionCountComparison.triple_kernel_exact" title="禁三连占位时，偏迹核维数小于合法字数的两倍"}
+在长度为 $n\ge3$ 的禁三连占位开链上，记 $a_n$ 为合法字数，$d_n$ 为合法支撑上所有单点偏迹为零的复矩阵空间的维数。令 $T_j$ 是初值为 $0,1,1$ 的三项斐波那契数列。则
+
+$$
+a_n=T_{n+2},\qquad
+d_n=4(T_n+T_{n-1})<2a_n.
+$$
+
+也可写成 $d_n=4(a_{n-2}+a_{n-3})$。
+:::
+
+::: {.proof}
+合法字可按开头的 $0$、$10$、$110$ 分组。去掉开头后，剩余部分是缩短后的任意合法字。这给出合法字数的三项递推，长度为零、一、二时分别有 $1,2,4$ 个字，所以 $a_n=T_{n+2}$。将 $4(T_n+T_{n-1})$ 与 [@thm-ch39-fib-forbidden-triple-dimension] 的前三个维数比较，得到相同的 $12,24,44$。两者满足同一个三项递推，所以对所有 $n\ge3$ 相等。
+
+由 $T_{n+1}=T_n+T_{n-1}+T_{n-2}$ 得 $T_n+T_{n-1}<T_{n+1}$，因为 $T_{n-2}>0$。再代入 $a_n=T_{n+1}+T_n+T_{n-1}$，得到严格不等式。完整证明由 Lean 内核检查。
+:::
+
+两倍合法字数与核维数之差恰为 $2T_{n-2}$。这个差在 $n\ge3$ 时严格为正。长度二时，还没有三位禁戒窗口，四个字都合法。三种位型符号可在两位任意组合，因此核维数是 $3^2=9$，已超过合法字数的两倍。
+
+::: {.theorem #thm-ch39-fib-forbidden-window-growth lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionGrowth.kernelDimension_lower" title="禁戒窗口长度至少为四时的偏迹核增长"}
+在长度为 $n=k+2$ 的开链上禁止连续 $K\ge4$ 个 $1$。记 $d_{n,K}$ 为合法支撑上所有单点偏迹为零的复矩阵空间的维数。则
+
+$$
+d_{n,K}\ge (100/43)^k.
+$$
+:::
+
+::: {.proof}
+固定头两位为相反方向。每次追加符号时，要求最近四位仍含两种方向。按最近一次出现的先后，记录两种方向距末位的距离。六种可能的距离对依次为 $(0,1),(0,2),(0,3),(1,2),(1,3),(2,3)$，赋予权重 $100,75,43,58,32,18$。每一步可选共同位或两种方向之一。若某个方向的距离会达到四，就必须选这个方向。逐状态相加，所有合法后继的权重之和至少是当前权重的 $100/43$ 倍。
+
+起始权重和最大单个权重都是 $100$。追加 $k$ 位后，所有路径的末状态权重之和至少为 $100(100/43)^k$，所以至少有 $(100/43)^k$ 个不同位型。每个长度 $K\ge4$ 的窗口都含一个四位窗口，因此这些位型都计入 $d_{n,K}$。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch39-fib-forbidden-window-growth-relative lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionGrowth.kernelDimension_to_allowedCount" title="偏迹核维数相对合法字数的增长"}
+在同一条链上，记 $a_{n,K}$ 为合法字数，也就是合法希尔伯特空间的维数。则
+
+$$
+\frac{d_{n,K}}{a_{n,K}}\ge\frac{(50/43)^k}{4}.
+$$
+:::
+
+::: {.proof}
+合法字数至多为 $2^{k+2}$，且包含全零字。用上一定理的下界除以这个正分母的上界。完整证明由 Lean 内核检查。
 :::
 
 ::: {.theorem #thm-ch39-fib-oriented-difference lean="D5/S1/Words/AdmissibleWords/FIBPathPairBounds.sharp_hard_core_difference" title="从一个固定位点出发的端点差概率上界"}
