@@ -50,6 +50,32 @@ At each site, record whether the two bits agree, go from zero to one, or go from
 For the ban on triples, every three consecutive symbols must contain both orientations. Let $A,B,C,D$ count patterns whose last two symbols are the same orientation, opposite orientations, an orientation followed by agreement, or agreement followed by an orientation, respectively. Appending one symbol sends these counts to $(B,A+B+D,B,C)$. At length two each count is two, and the pair of agreement symbols has no legal extension. At lengths three, four, and five the totals are $12,24,44$. Apply the update four times to see that the fourth vector is the sum of the first three updated vectors. Summing its coordinates gives the recurrence. The full proof is checked by the Lean kernel.
 :::
 
+::: {.theorem #thm-ch39-fib-forbidden-window-growth lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionGrowth.kernelDimension_lower" title="Growth of the deletion kernel for windows of length four or more"}
+On an open chain of length $n=k+2$, forbid $K\ge4$ consecutive ones. Let $d_{n,K}$ be the complex dimension of the supported matrices with zero partial trace over each site. Then
+
+$$
+d_{n,K}\ge (100/43)^k.
+$$
+:::
+
+::: {.proof}
+Start with two opposite orientations. Append symbols so that the last four sites still contain both orientations. Record how far back each orientation last appeared, with the more recent one first. The six possible age pairs are $(0,1),(0,2),(0,3),(1,2),(1,3),(2,3)$, with weights $100,75,43,58,32,18$. Each step appends agreement or one of the two orientations. If an orientation's age would reach four, that orientation must be appended. For each state, the weights of its allowed successors sum to at least $100/43$ times its own weight.
+
+The initial weight and maximum single weight are both $100$. After appending $k$ symbols the total weight of all paths is at least $100(100/43)^k$, so there are at least $(100/43)^k$ distinct patterns. Every window of length $K\ge4$ contains a four-site window, so all these patterns contribute to $d_{n,K}$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch39-fib-forbidden-window-growth-relative lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionGrowth.kernelDimension_to_allowedCount" title="Growth relative to the allowed word count"}
+On the same chain, write $a_{n,K}$ for the number of allowed words, which is the dimension of the allowed Hilbert space. Then
+
+$$
+\frac{d_{n,K}}{a_{n,K}}\ge\frac{(50/43)^k}{4}.
+$$
+:::
+
+::: {.proof}
+There are at most $2^{k+2}$ allowed words, including the all-zero word. Divide the previous lower bound by this upper bound on the positive denominator. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.theorem #thm-ch39-fib-oriented-difference lean="D5/S1/Words/AdmissibleWords/FIBPathPairBounds.sharp_hard_core_difference" title="The sharp endpoint difference from a fixed site"}
 Number sites from zero and let $X_k$ indicate occupancy in a word with no adjacent ones. Put $Y_k=X_k$ at even sites and $Y_k=1-X_k$ at odd sites, and write $q_k=\Pr(Y_k=1)$. Prescribe site occupancies in $[0,1]$ with adjacent sums at most one. For any fixed site $i$, the sharp bound at each $j\ge i$ is
 
