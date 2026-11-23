@@ -291,4 +291,4 @@ $$
 **格拉姆窗口 $\mathcal{W}_M$、舒尔补可行走廊与双观察者共识完整交互实验室（`GRAM//CONSENSUS`）。** 在统一三栏实验台中自由切换“舒尔补与双帽透镜走廊—三维黄金三角窗 $M=3$—过约束紧窗死锁 $M=9$—遗忘最旧记录重开—双观察者共识与共同遗忘”五张实验卡，连续调节窗口长度 $M \in \{1,\dots,10\}$、相干半角 $\alpha_{\mathrm{coh}}$ 与观察者 $B$ 转角 $\eta$ 并拖动球面上琥珀色候选态 $\mathbf{x}$，同屏检视青色单人相干走廊 $\Omega_M$ 与等相关舒尔补曲线、品红收紧边界弧与遗忘重开对数比 $q_M$、紫色双观察者共识走廊 $\Omega_A \cap \Omega_B$ 以及右侧交互格拉姆热图；十三枚绿色 `LEAN ✓` 徽章对应 [@thm-ch34-gram-window-schur-and-consensus] 的十二条冻结声明与 [§34.6](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics) 定理已引用的 `landauer_bound_of_balance`。
 :::
 
-若将上述舒尔补消元思想进一步放到有限整数整除网络上检验其填充、截断残差与带号轨道支撑预算（含独立交互实验室 ），完整展开收录于[附录 N](appendix-n.md)。正文则保持观察者认知闭环主线，直接进入[§34.8](ch34-s20-single-outcome-and-attractor-basins.md)考察从平方权重到单次记录的球面吸引盆与鞅抽样律。
+若将上述舒尔补消元思想进一步放到有限整数整除网络上检验其填充、截断残差与带号轨道支撑预算（含独立交互实验室 `ARITH//SCHUR`），完整展开收录于[附录 N](appendix-n.md)。正文则保持观察者认知闭环主线，直接进入[§34.8](ch34-s20-single-outcome-and-attractor-basins.md)考察从平方权重到单次记录的球面吸引盆与鞅抽样律。
