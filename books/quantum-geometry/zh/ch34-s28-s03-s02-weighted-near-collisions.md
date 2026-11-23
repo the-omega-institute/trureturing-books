@@ -102,6 +102,52 @@ $$
 
 对实际 ζ 纵坐标，可按前一节在 $X=e^{-D}T^\beta$ 以上截取尾段，并取 $\delta=\log T$、$g_\gamma=\gamma/r$。给定 $H=\exp(cT^\beta\log T)$，可取 $N=\lfloor HT^2/r\rfloor_++1$，使网格误差不超过 $rB/(2T^2)$。要得到有限的起点范围，还需在某个 $L=L(T)$ 上证明相应的严格预算 $KNE_p(2/L)<(\log T)^{2p}$。目标阶数 $p$ 随 $T^\beta\log T$ 增长。对固定的有限尾段和固定 $p$，随着 $L$ 增大，$E_p(2/L)$ 最终等于精确碰撞质量 $E_p(0)$。若要量化 $L$，仍须控制正分辨率下的加权近碰撞。Tao、Trudgian 与 Yang 的定义 7 计数的是单位尺度的无权四元组，定理 64 的估计适用于固定的 $\sigma\ge7/10$。临界线尾段的增长阶数加权界仍待证。 [定义 7 与定理 64](https://arxiv.org/html/2501.16779v1) · [研究问题](https://github.com/the-omega-institute/trureturing/issues/33519)
 
+## 低阶碰撞质量能确定什么
+
+把频率三元组 $(0,1,k)$ 中最后一项移到 $k+\sqrt 2$。当总次数低于 $k$ 时，其余两项的计数还不足以抵消最后一项的变动。到次数 $k$，第一组三元组里恰好有一种新的抵消方式。
+
+::: {.theorem #thm-ch31-low-order-collision-agreement title="低阶碰撞质量一致时，高阶衰减率仍可不同" lean="D5/S3/Fourier/Concentration/LowOrderCollisionAgreement.low_order_agreement_and_high_order_disparity"}
+设 $k\ge2$ 为整数，$E_p(t)$ 与 $F_p(t)$ 分别为 $(0,1,k)$ 和 $(0,1,k+\sqrt2)$ 在权重 $(1/4,1/4,1/2)$ 下的有序对碰撞质量。对于任意 $0\le t<1$，有
+
+$$
+\begin{aligned}
+E_p(t)&=F_p(t) &&(0\le p<k,\ p\text{ 为整数}),\\
+E_k(t)&=F_k(t)+2k(1/4)^{k-1}(1/4)^k(1/2).
+\end{aligned}
+$$
+
+对于每个正整数 $p$，有
+
+$$
+\begin{aligned}
+E_p(t)&\ge\frac{1}{16k\sqrt p} &&(0\le t<1),\\
+F_p(t)&\le\frac2p &&\left(0\le t<\frac{1}{(k+1+\sqrt2)p}\right).
+\end{aligned}
+$$
+:::
+
+::: proof
+若最后一个计数不同，次数低于 $k$ 时，两组频率中的和都至少相差 $1$。若最后一个计数相同，距离小于 $1$ 迫使全部计数相同。次数恰为 $k$ 时，整数谱多出 $(0,k,0)$ 与 $(k-1,0,1)$ 这对计数及其反序。
+
+整数谱在任何小于 $1$ 的非负分辨率上都只计入精确碰撞，可在分辨率 $1/2$ 处应用方差下界。对无理谱，把差写成 $a+b\sqrt2$。不同计数对应的整数范数 $a^2-2b^2$ 非零，因此可用共轭因子的大小给出间隔下界，在陈述的分辨率范围内排除所有不同计数。剩余质量是多项分布权重的平方和。每个权重分解成两个公平二项概率的乘积，中央二项式系数界及二项式系数的对称性和单调性将此乘积控制在 $2/p$。完整证明由 Lean 内核检查。[方差下界](ch34-s28-s03-s02-collision-variance.md#thm-ch31-variance-collision-lower)
+:::
+
+计数向量 $(p,0,0)$ 自身贡献的质量为 $(1/4)^{2p}>0$。取共用分辨率 $t_p=1/[2(k+3)p]$。固定 $k$ 时，两组质量在此处的比值至少为 $\sqrt p/(32k)$。这个有限谱例子限定了仅凭低阶碰撞质量外推高阶上界的范围。实际 ζ 纵坐标还需要利用其频率关系。
+
+### 局部统计与共同格点
+
+对每个频率 $g_j$ 选一个整数 $m_j\ge0$，将它向下舍入为 $\widetilde g_j=2^{-m_j}\lfloor 2^{m_j}g_j\rfloor$，保留索引与权重。固定一个有 $N>0$ 个索引的尾段，频率落在 $[a,b]$，且 $m_-\le m_j\le m_+$。记 $h=2^{-m_-}$。每个舍入误差在 $[0,h)$，所以任意两个频率之差的改变量绝对值至多为 $h$。对 $\ell\ge1$ 个不同索引，以第一个频率为基点，对其余 $\ell-1$ 个差值乘同一个尺度 $\lambda\ge0$。用最大范数下的 $K$-Lipschitz 函数作测试，各项改变量绝对值至多 $K\lambda h$。若把所有有序测试项的和除以 $N$，总改变量绝对值至多 $K\lambda h(N)_\ell/N$，其中 $(N)_\ell$ 为下降阶乘。
+
+同一舍入把频率送到步长 $2^{-m_+}$ 的格点上。最粗格点包含于每个更细的格点网格，所以在最细网格上读出的整数标签都落在 $[A,B]$，其中
+
+$$
+A=2^{m_+-m_-}\lfloor 2^{m_-}a\rfloor,\qquad B=\lfloor 2^{m_+}b\rfloor.
+$$
+
+次数 $p$ 的和至多有 $1+p(B-A)$ 个可能的整数位置。把多项分布权重按这些位置归组，再对组质量用柯西–施瓦茨不等式。若总权重为 $W>0$，舍入谱的精确碰撞质量至少为 $W^{2p}/[1+p(B-A)]$。任何在舍入谱中精确相等的两项，原来的差至多为 $ph$，因为每组次数 $p$ 的舍入误差都在 $[0,ph]$。 [按频率分箱的质量界](lean:D5/S3/Fourier/Concentration/FiniteSincCollisionMoment.sum_bin_mass_sq_le_nearCollisionMass)
+
+例如，固定取 $m_j=\lceil(\log_2(2+g_j))^2\rceil$。在共用索引的尾段 $cT^\alpha\le g_j\le T$ 上，若 $c,\alpha>0$ 固定，$N=O(T\log T)$，且 $\lambda$ 至多按 $T$ 的固定幂增长，则每个固定阶的上述统计改变量趋于零。另一方面，取固定 $0<\beta<1$。在 $p\asymp T^\beta\log T$ 时，$\log[1+p(B-A)]=O((\log T)^2)$。若 $W\asymp(\log T)^2$ 且 $\delta=\log T$，缺失窗口的矩预算即使只用一个时间采样点，也要求归一化质量至多为 $\exp(-2p\log\log T+O(p))$。舍入谱的精确碰撞质量已超过这一预算。两组统计使用共用的尾段索引。若分别按高度选取索引，越过端点的条目还需处理。对原谱的转移只给出分辨率 $ph$ 上的下界，目标的更细分辨率上界仍待证。
+
 ## 有限频带中的和必须接近
 
 设有限指标集 $J$ 有 $N$ 个元素，各频率 $g_j$ 落在 $[a,b]$。记 $F(m)=\sum_jm_jg_j$，次数为 $p$ 的向量共有 $M=\binom{N+p-1}{p}$ 个。
