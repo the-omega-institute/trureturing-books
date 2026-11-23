@@ -17,6 +17,8 @@ $$
 
 例如，中位恒为 $0$ 时，从四个底面字各占 $1/4$ 改为 `000`、`101` 各占 $1/2$，两端的占位仍各为 $1/2$，共同占位概率却从 $1/4$ 变成 $1/2$。这个改动给四格表的对角各加 $1/4$，给反对角各减 $1/4$，保持了行和与列和。[§39.3](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md) 的固定种子构造也用到这个四格变换。知道每个字的计算基概率后，字与字之间的相对相位仍可变化，见 [@ex-ch39-p2e-phase-counterexample]。[FIB 原子理论卷 §2–4](https://github.com/the-omega-institute/trureturing-source-theories/blob/2a39da5107abbfa3a72cc883486dbc15a15994a1/docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md#L178-L216)
 
+把四格按 `00`、`01`、`10`、`11` 排列。对非负整数 $a,b,c,d,s$，把计数 $(a,b+s,c+s,d)$ 改成 $(a+s,b,c,d+s)$。两张表的总数都为 $N=a+b+c+d+2s$，左右占位数分别为 $c+d+s$ 和 $b+d+s$，联合占位数却从 $d$ 变成 $d+s$。当 $N>0$ 时，联合占位率恰增加 $s/N$。这些读数可用交叉相乘精确比较。上面的四样本例取 $(a,b,c,d,s)=(1,0,0,1,1)$。两个端点的读数 $2/4$ 都等于 $1/2$，也等于射影读数 $\kappa([1:1])=1^2/(1^2+1^2)$。联合读数由 $1/4$ 变成 $2/4$。[OmegaMath 的比例等价](https://github.com/the-omega-institute/omega-math/blob/6f701cf75d1feffe20cdfc751c4f8da995a0e3a3/src/OmegaInit/Data/Ratio.lean#L19-L39) · [§39.12](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md)
+
 对等权样本，这个变换是任意长度禁邻字排序在三位时的特例。把第 $2,4,6,\ldots$ 位取反。此时每个占位的奇数位都要求相邻的偶数位也占位。于是两个变换后的支撑取交集和并集，所得支撑仍合法。再取反还原，就得到两个合法字，逐位合计的占位次数保持相等。金字塔底面的 `100` 和 `001` 先变成 `110` 和 `011`。两者的交、并分别为 `010` 和 `111`，还原后就是 `000` 和 `101`。
 
 反复作这样的交换，可以把变换后的支撑按包含关系排成一列。若共 $m$ 个样本，某一位在变换后的支撑中出现 $c$ 次，它就恰好出现在最后 $c$ 个支撑里。因此，原占位计数与 $m$ 决定排序后的多重集。样本数与逐位占位计数相同的两组样本可以经由这个共同的多重集，用一系列合法的二字交换连通。对有理概率律，把两个律写成同一分母后就能应用这一结论。[固定占位计数下的连通性](lean:D5/S1/Words/AdmissibleWords/UncrossingFiber.adm_phi_fiber_common_endpoint)
@@ -48,6 +50,25 @@ $$
 
 对禁三连占位的链，每组三个相邻符号都须出现两种不同方向。设 $A,B,C,D$ 分别计数末两位是同一方向、相反方向、方向后跟共同位、共同位后跟方向的位型。追加一个符号后，四项变为 $(B,A+B+D,B,C)$。长度二时四项各为二，另有一个双共同位无法继续延伸。从长度三起，这四项的总数依次为 $12,24,44$。将上述更新式连续代入四次，第四次的向量等于前三次所得向量之和，得到递推式。完整证明由 Lean 内核检查。
 :::
+
+::: {.theorem #thm-ch39-fib-triple-kernel-word-count lean="D5/S3/Quantum/Entanglement/Marginals/TripleDeletionCountComparison.triple_kernel_exact" title="禁三连占位时，偏迹核维数小于合法字数的两倍"}
+在长度为 $n\ge3$ 的禁三连占位开链上，记 $a_n$ 为合法字数，$d_n$ 为合法支撑上所有单点偏迹为零的复矩阵空间的维数。令 $T_j$ 是初值为 $0,1,1$ 的三项斐波那契数列。则
+
+$$
+a_n=T_{n+2},\qquad
+d_n=4(T_n+T_{n-1})<2a_n.
+$$
+
+也可写成 $d_n=4(a_{n-2}+a_{n-3})$。
+:::
+
+::: {.proof}
+合法字可按开头的 $0$、$10$、$110$ 分组。去掉开头后，剩余部分是缩短后的任意合法字。这给出合法字数的三项递推，长度为零、一、二时分别有 $1,2,4$ 个字，所以 $a_n=T_{n+2}$。将 $4(T_n+T_{n-1})$ 与 [@thm-ch39-fib-forbidden-triple-dimension] 的前三个维数比较，得到相同的 $12,24,44$。两者满足同一个三项递推，所以对所有 $n\ge3$ 相等。
+
+由 $T_{n+1}=T_n+T_{n-1}+T_{n-2}$ 得 $T_n+T_{n-1}<T_{n+1}$，因为 $T_{n-2}>0$。再代入 $a_n=T_{n+1}+T_n+T_{n-1}$，得到严格不等式。完整证明由 Lean 内核检查。
+:::
+
+两倍合法字数与核维数之差恰为 $2T_{n-2}$。这个差在 $n\ge3$ 时严格为正。长度二时，还没有三位禁戒窗口，四个字都合法。三种位型符号可在两位任意组合，因此核维数是 $3^2=9$，已超过合法字数的两倍。
 
 ::: {.theorem #thm-ch39-fib-forbidden-window-growth lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionGrowth.kernelDimension_lower" title="禁戒窗口长度至少为四时的偏迹核增长"}
 在长度为 $n=k+2$ 的开链上禁止连续 $K\ge4$ 个 $1$。记 $d_{n,K}$ 为合法支撑上所有单点偏迹为零的复矩阵空间的维数。则

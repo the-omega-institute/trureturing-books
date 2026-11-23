@@ -17,6 +17,8 @@ $$
 
 For example, keep the middle site empty and start with probability $1/4$ on each of the four base words. Switch to probability $1/2$ each on `000` and `101`. Each endpoint still has occupancy $1/2$, but the joint occupancy rises from $1/4$ to $1/2$. The switch adds $1/4$ to each diagonal entry and subtracts $1/4$ from each off-diagonal entry, preserving the row and column sums. The fixed-seed construction in [§39.3](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md) uses the same four-cell move. Even with all word probabilities in the computational basis specified, the relative phases between words can vary, as in [@ex-ch39-p2e-phase-counterexample]. [FIB atom source, §§2–4](https://github.com/the-omega-institute/trureturing-source-theories/blob/2a39da5107abbfa3a72cc883486dbc15a15994a1/docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md#L178-L216)
 
+Order the four cells as `00`, `01`, `10`, and `11`. For nonnegative integers $a,b,c,d,s$, change the counts from $(a,b+s,c+s,d)$ to $(a+s,b,c,d+s)$. Both tables have total $N=a+b+c+d+2s$ and left and right occupancy counts $c+d+s$ and $b+d+s$, respectively. The joint count changes from $d$ to $d+s$. For $N>0$, the joint occupancy probability increases by exactly $s/N$. Cross multiplication compares these ratios exactly. The four-sample example takes $(a,b,c,d,s)=(1,0,0,1,1)$. Both endpoint readings of $2/4$ equal $1/2$, which is also the projective reading $\kappa([1:1])=1^2/(1^2+1^2)$. The joint reading goes from $1/4$ to $2/4$. [§39.12](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md)
+
 For equal-weight samples, this move is the three-site case of a sorting procedure for words of any length with no adjacent ones. Complement the bits at positions $2,4,6,\ldots$. On each neighboring pair, legality now says that an occupied odd site forces its even neighbor to be occupied. Thus intersecting and taking the union of two transformed supports preserves legality. Undoing the complement gives two legal words with the same combined site counts. On the pyramid base, `100` and `001` become `110` and `011`. Intersection and union give `010` and `111`, which decode to `000` and `101`.
 
 Repeated exchanges can sort the transformed supports by inclusion. If a site occurs $c$ times after the complement, it lies in exactly the last $c$ supports of the sorted list. The original site counts and $m$ therefore determine the sorted multiset. Two samples with the same size and site counts can be joined through this common multiset by legal two-word exchanges. This applies to rational laws after writing both laws with a common denominator. [Connectivity at fixed occupancies](lean:D5/S1/Words/AdmissibleWords/UncrossingFiber.adm_phi_fiber_common_endpoint)
@@ -49,6 +51,25 @@ At each site, record whether the two bits agree, go from zero to one, or go from
 
 For the ban on triples, every three consecutive symbols must contain both orientations. Let $A,B,C,D$ count patterns whose last two symbols are the same orientation, opposite orientations, an orientation followed by agreement, or agreement followed by an orientation, respectively. Appending one symbol sends these counts to $(B,A+B+D,B,C)$. At length two each count is two, and the pair of agreement symbols has no legal extension. At lengths three, four, and five the totals are $12,24,44$. Apply the update four times to see that the fourth vector is the sum of the first three updated vectors. Summing its coordinates gives the recurrence. The full proof is checked by the Lean kernel.
 :::
+
+::: {.theorem #thm-ch39-fib-triple-kernel-word-count lean="D5/S3/Quantum/Entanglement/Marginals/TripleDeletionCountComparison.triple_kernel_exact" title="Under the ban on triples, the kernel dimension is less than twice the word count"}
+On an open chain of length $n\ge3$ with no three consecutive ones, let $a_n$ count the allowed words. Let $d_n$ be the complex dimension of the supported matrices with zero partial trace over each site. Write $T_j$ for the Tribonacci sequence starting with $0,1,1$. Then
+
+$$
+a_n=T_{n+2},\qquad
+d_n=4(T_n+T_{n-1})<2a_n.
+$$
+
+Equivalently, $d_n=4(a_{n-2}+a_{n-3})$.
+:::
+
+::: {.proof}
+Split the allowed words according to their initial block $0$, $10$, or $110$. Removing the block leaves an arbitrary allowed word of the shorter length. This gives the three-term recurrence. At lengths zero, one, and two the word counts are $1,2,4$, so $a_n=T_{n+2}$. The quantity $4(T_n+T_{n-1})$ takes the initial values $12,24,44$ at lengths three, four, and five. It satisfies the same recurrence as the dimensions in [@thm-ch39-fib-forbidden-triple-dimension], so the two sequences agree at every length $n\ge3$.
+
+Since $T_{n+1}=T_n+T_{n-1}+T_{n-2}$ and $T_{n-2}>0$, the sum $T_n+T_{n-1}$ is less than $T_{n+1}$. Substituting $a_n=T_{n+1}+T_n+T_{n-1}$ yields the strict inequality. The full proof is checked by the Lean kernel.
+:::
+
+The gap is exactly $2T_{n-2}$, which is positive for $n\ge 3$. At length two all four words are legal because there is no three-site window. Either site can carry any of the three pattern symbols, giving kernel dimension $3^2=9$, already greater than twice the legal word count.
 
 ::: {.theorem #thm-ch39-fib-forbidden-window-growth lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionGrowth.kernelDimension_lower" title="Growth of the deletion kernel for windows of length four or more"}
 On an open chain of length $n=k+2$, forbid $K\ge4$ consecutive ones. Let $d_{n,K}$ be the complex dimension of the supported matrices with zero partial trace over each site. Then
