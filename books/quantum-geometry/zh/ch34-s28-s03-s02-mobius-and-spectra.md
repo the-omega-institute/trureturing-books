@@ -884,7 +884,25 @@ $$
 取 $0<\alpha<\kappa<\nu<m$，使 $\alpha,\nu$ 足够接近 $m$，并取充分小的 $e>0$。先在 $X=T^\alpha$ 取得低频命中 $b$，再对 $[b,b+h]$ 上的全段得分作平均，其中 $h=T^{-\kappa}$，第二个截断为 $Y=T^\nu$。截至 $X$ 的相位漂移使得分至多降低 $(hX/r)W(X)$。中段得分至少为 $-(W(Y)-W(X))$。对高于 $Y$ 的频率逐项积分，得到尾段的平均得分至少为 $-(2r/(hY))(W(T)-W(Y))$。连续性给出一个达到平均值的时刻。归一化后，低频漂移与高频平均误差均趋零，亏损上界趋于 $1+q(\nu)-2q(\alpha)+e\,q(\alpha)$。由 $q$ 在 $m$ 连续，可使它小于 $\varepsilon$。最终有 $\exp X+h\le\exp(T^\beta)$。
 :::
 
-对实际的 ζ 零点，在 RH 和有效线性无关猜想下，[@thm-ch31-zeta-cutoff-recurrence] 取指数 $1$ 给出前提中的低频命中，实际调和质量比给出 $q(p)=p^2$。于是充分阈值降为 $1-\min(\beta,1)^2$。最短统一等待尺度及严格阈值处的边界仍开放。 [有限指数平均的参考实现](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
+对实际的 ζ 零点，在 RH 和有效线性无关猜想下，[@thm-ch31-zeta-cutoff-recurrence] 取指数 $1$ 给出前提中的低频命中，实际调和质量比给出 $q(p)=p^2$。于是充分阈值降为 $1-\min(\beta,1)^2$。[有限指数平均的参考实现](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
+
+::: {.theorem #thm-ch31-finite-missing-window title="任意晚出现的正弦得分受限窗口" lean="D5/S3/Fourier/Concentration/FiniteSineMissingWindow.exists_arbitrarily_late_missing_window"}
+设 $J$ 有限，$H\subseteq J$，$w_j\ge0$，实频率 $f_j$ 在 $\mathbb Q$ 上线性无关。取 $R,B\in\mathbb R$ 与 $h,\delta>0$。令 $V=\sum_{j\notin H}w_j^2$、$M=\sum_{j\in H}w_j+\delta+h\sum_{j\notin H}w_j|f_j|$。假设 $V=0$ 或
+$$
+\bigl(\lfloor R/h\rfloor_++1\bigr)\exp\!\left(-\frac{\delta^2}{2V}\right)<1,
+$$
+其中 $\lfloor x\rfloor_+=\max(0,\lfloor x\rfloor)$。若 $M<B$，则对每个 $A\in\mathbb R$，存在 $a>A$，使每个 $u\in[a,a+R]$ 都满足 $\sum_jw_j\sin(f_ju)<B$。
+:::
+
+::: proof
+给尾段各坐标独立加上初相位 $0$ 或 $\pi$，各以概率 $1/2$ 选取。每个网格点 $kh$ 的尾段得分是独立中心化变量的和，第 $j$ 项的绝对值至多为 $w_j$。Hoeffding 不等式将得分达到 $\delta$ 的概率控制在 $\exp(-\delta^2/(2V))$ 以下。对所有网格点取并集上界，就能选出一组在每个网格点都合格的相位。若 $V=0$，尾段恒为零。由 $|\sin x-\sin y|\le |x-y|$，从左侧网格点出发可将尾段界延伸到整个 $[0,R]$。首段得分至多等于其总权重。有理线性无关使有限相位轨道在任意起点之后仍稠密。用单位圆上的弦距离逼近所选相位。时间演化只给每条弦乘以单位复数，所以平移后的整个区间共用同一误差界。取误差小于 $(B-M)/(1+\sum_j w_j)$ 即可。
+:::
+
+对 RH 下的实际 ζ 零点，假设**互异的正纵坐标**在 $\mathbb Q$ 上线性无关。固定 $r>0$、$0<\beta<1$ 与 $0<\varepsilon<1-\beta^2$。沿用按解析重数计权和包含端点的截断。当 $T$ 充分大时，任意晚仍会出现长度为 $\exp(T^\beta)$ 的区间，在整个区间内都有 $1-S(T,u/r)/W(T)>\varepsilon$。
+
+取 $\beta<\kappa<\alpha<\sqrt{1-\varepsilon}$，以 $X=T^\alpha$ 截取首段，并取 $c>0$ 使 $\alpha^2<1-\varepsilon-3c$。由 $W(X)/W(T)\to\alpha^2$，首段质量最终至多为 $(1-\varepsilon-3c)W(T)$。对 $(\gamma-1,\gamma]$ 的局部零点计数给出 $m_\gamma=O(\log(\gamma+2))$。因此存在 $C>0$，使每个尾段权重至多为 $CT^{-\kappa}$，从而 $V\le CT^{-\kappa}W(T)$。取 $\delta=cW(T)$ 与 $h=cr/T$，则网格点数最终至多为 $\exp(2T^\beta)$。若 $V>0$，因为 $\kappa>\beta$ 且最终 $W(T)\ge1$，Hoeffding 指数 $\delta^2/(2V)$ 最终超过 $2T^\beta$。网格点之间的误差至多为 $h(T/r)W(T)=cW(T)$。所以 $M<(1-\varepsilon)W(T)$，可取 $B=(1-\varepsilon)W(T)$ 应用有限定理。 [调和质量极限](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHRootWeightedSine.lean) · [局部计数](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Weil/ZeroData/ZetaSpectrumLocalCount.lean) · [相关有限集中估计，定理 3.1](https://doi.org/10.1007/s13398-022-01369-4)
+
+在 RH 和有效线性无关猜想下，若 $0<\beta<1$，统一命中的上界和缺失窗口从两侧确定阈值 $1-\beta^2$。有效线性无关蕴含普通线性无关，因为每个固定的整数关系最终都会进入它所控制的系数盒。等号处及更细的等待尺度在这里仍未解决。 [研究问题](https://github.com/the-omega-institute/trureturing/issues/33477)
 
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
