@@ -24,6 +24,12 @@ $$
 同一阈值构造也适用于实数占位率。设 $\mu_i\in[0,1]$ 且 $\mu_i+\mu_{i+1}\le1$。只抽一次 $U$，使它在 $(0,1)$ 上均匀分布。奇数位在 $U<\mu_i$ 时占位，偶数位在 $U>1-\mu_i$ 时占位。相邻两位所用的区间不相交，所以每次得到的字都合法。每个位的占位概率是区间长度 $\mu_i$。对于同奇偶的两位，两个区间相互嵌套，共同占位概率为 $\min(\mu_i,\mu_j)$。对于异奇偶的两位，交集长度为 $\max(0,\mu_i+\mu_j-1)$。因此同一个字的随机生成规则可同时达到这些两位概率的极值。[实数边缘下的共同实现](lean:D5/S1/Words/AdmissibleWords/FIBThresholdPairExtrema.threshold_pair_extrema)
 :::
 
+::: {.example #ex-ch39-fib-deletion-coherence title="两个交错字之间的相干"}
+同样的五个合法字也给出一个量子例子。比较纯态 $(|010\rangle+|101\rangle)/\sqrt2$ 与这两个基态的等权非相干混合态。两者的计算基概率律以及每个两位约化态都相同。因为两个字在每个位点都不同，迹去任一位都会消去交叉项。混合态是乘积态的混合，纯态在每个单点切口上都有两个施密特系数 $(1/\sqrt2,1/\sqrt2)$。用比特翻转算符 $X$ 作联合测量时，$X\otimes X\otimes X$ 在纯态上的期望值为一，在混合态上为零。[FIB 原子理论卷 §18.2–18.3](https://github.com/the-omega-institute/trureturing-source-theories/blob/2a39da5107abbfa3a72cc883486dbc15a15994a1/docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md#L4163-L4280)
+
+推广到长度至少为二的禁邻开链。固定迹去任一位所得的全部约化态后，密度矩阵只有两个交错字之间的条目还可能改变。设 $D$ 为两密度矩阵之差，在非法字的行列上补零。如果两个字在第 $i$ 位相同，迹去第 $i$ 位的等式给出共同取零、共同取一的两项互为相反数。若任一字占据相邻位 $j$，两字在第 $i$ 位共同取一的矩阵元必为零。若两字在 $j$ 都为空，先把 $i$ 的共同位设为一，再应用 $j$ 的偏迹等式。两端同时占位仍然非法，所以这个矩阵元也为零。因此有非零条目的两个字必须逐位相反。两个互补字都合法，便要求每条边的两端取值相反，只剩下两个交错字。反过来，迹去任一位都消去它们之间的两个交叉项。在厄米的矩阵差中，这两个条目互为复共轭。[有限图上偏迹的精确核](lean:D5/S3/Quantum/Entanglement/Marginals/IndependentWordMarginals.deletion_kernel_iff)
+:::
+
 ::: {.theorem #thm-ch39-fib-oriented-difference lean="D5/S1/Words/AdmissibleWords/FIBPathPairBounds.sharp_hard_core_difference" title="从一个固定位点出发的端点差概率上界"}
 位点从零编号。对不含相邻两个 $1$ 的字，记 $X_k$ 为第 $k$ 位的占有指标。在偶数位取 $Y_k=X_k$，在奇数位取 $Y_k=1-X_k$，并记 $q_k=\Pr(Y_k=1)$。给定 $[0,1]$ 中的占有率，且任意相邻两项之和至多为一。对任一固定位点 $i$ 和每个 $j\ge i$ 都有精确上界
 
