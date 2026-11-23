@@ -261,6 +261,7 @@
   - [39.10 黎曼 1854 + 1859 双璧合龙：以已证 1/2 临界线谱磨光切板黎曼流形](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md)
   - [39.11 精确结构数学对比平直度量近似：完整三元关系、纯整数圆弧闭合与素数拓扑刚性](ch39-s34-exact-structural-mathematics-vs-flat-approximation.md)
   - [39.12 无无穷·无超越数的有限有理数学（Math_Ω）：齐次射影闭环、凯莱有理旋转与无极限二阶射流微积分](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md)
+  - [39.13 Lean 4 零公理形式化基座（OmegaMath）：纯 CIC 内核、规范整数三元载体与单向阴影函子](ch39-s36-lean4-zero-axiom-omega-math-architecture.md)
 
 # 终章与附录
 

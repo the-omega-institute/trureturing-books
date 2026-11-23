@@ -9468,6 +9468,119 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "lean4-zero-axiom-omega-math-sandbox",
+      "code": "OMEGA//LEAN4",
+      "title": "Lean 4 零公理形式化基座（OmegaMath）沙盘：五阶编译流水线、规范整数三元载体与单向阴影函子",
+      "title_en": "Zero-Axiom Lean 4 Foundation (OmegaMath): Five-Stage Pipeline, Canonical Integer Ternions & One-Way Shadow Functor",
+      "summary": "在紫色有理三元球面 ℚP³ ≅ SO(3, ℚ) 上走完 Lean 4 的五阶流水线：OmegaMath 路线从整数载体、类型检查、decide、公理审计到原生执行，公理为空；对照停在 Classical.choice 的 Mathlib.Real 路线与代入零四元组推出 False 的自定义 axiom 路线（MODEL）。整数射线经最大公约数与首项正号约成唯一规范代表，八条断言逐条归约，有理舒尔最小值 4/3 与整数证书 70 < 128 经单向桥送到实数侧，四项任务并列实测的声明闭包与现算的整数步数。",
+      "summary_en": "Runs the five stages of Lean 4 on the violet rational ternion sphere ℚP³ ≅ SO(3, ℚ): the OmegaMath route goes from an integer carrier through typecheck, decide and the axiom audit to native evaluation with no axiom, against the Mathlib.Real route that stops at Classical.choice and a custom axiom that yields False at the zero tuple (MODEL). Integer rays reduce to one canonical tuple by gcd and sign, eight conjuncts reduce one by one, the rational Schur minimum 4/3 and the integer certificate 70 < 128 cross a one-way bridge to the reals, and four tasks set the measured census of declarations beside the integer steps of the page.",
+      "path": "lean4-zero-axiom-omega-math-sandbox/",
+      "thumbnail": "lean4-zero-axiom-omega-math-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-23",
+      "chapter": 39,
+      "section": "39.13",
+      "presets": [
+        "cic-kernel-vs-axiom-and-real-tax",
+        "canonical-proj-ternion-zero-quotient",
+        "typeclass-consistency-and-jet2-decide",
+        "rational-schur-and-shadow-functor-bridge",
+        "three-step-omegacore-roadmap-benchmark"
+      ],
+      "preset_titles": {
+        "cic-kernel-vs-axiom-and-real-tax": {
+          "zh": "五阶流水线：哪条路跑到底",
+          "en": "Five stages: which route gets through"
+        },
+        "canonical-proj-ternion-zero-quotient": {
+          "zh": "整数射线约成唯一代表",
+          "en": "Integer rays, one canonical tuple"
+        },
+        "typeclass-consistency-and-jet2-decide": {
+          "zh": "八条断言，一次 decide",
+          "en": "Eight conjuncts, one decide"
+        },
+        "rational-schur-and-shadow-functor-bridge": {
+          "zh": "有理舒尔补，单向过桥",
+          "en": "Rational Schur, one-way bridge"
+        },
+        "three-step-omegacore-roadmap-benchmark": {
+          "zh": "四项任务、三条路线（MODEL）",
+          "en": "Four tasks, three routes (MODEL)"
+        }
+      },
+      "tags": [
+        "零公理",
+        "归纳构造演算",
+        "规范整数四元组",
+        "有理舒尔补",
+        "单向阴影函子"
+      ],
+      "tags_en": [
+        "Zero axioms",
+        "Calculus of inductive constructions",
+        "Canonical integer tuples",
+        "Rational Schur complement",
+        "One-way shadow functor"
+      ],
+      "theory": [
+        {
+          "label": "§39.13 · Lean 4 零公理形式化基座（OmegaMath）",
+          "label_en": "§39.13 · Zero-Axiom Lean 4 Formalization Architecture (OmegaMath)",
+          "href": "../zh/ch39-s36-lean4-zero-axiom-omega-math-architecture.html#sec-ch39-lean4-zero-axiom-omega-math-architecture",
+          "href_en": "../en/ch39-s36-lean4-zero-axiom-omega-math-architecture.html#sec-ch39-lean4-zero-axiom-omega-math-architecture"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/GramIsometryExtension.existsUnique_linearIsometryEquiv_of_gram_preserving"
+        },
+        {
+          "gid": "D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover"
+        },
+        {
+          "gid": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den"
+        },
+        {
+          "gid": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log"
+        },
+        {
+          "gid": "D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStripping.stripFactors_correct"
+        },
+        {
+          "gid": "D5/S0/Computability/BinaryNameComparison.name_compare_run"
+        },
+        {
+          "gid": "D5/S3/Weil/BurnolGram/BurnolRationalDepthBudget.rationalQuarterDepth_integer_sound"
+        },
+        {
+          "gid": "D5/S3/Weil/BurnolGram/BurnolRationalDepthBudget.rationalQuarterDepth_real_sound"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
