@@ -1,8 +1,8 @@
 # One spectral perturbation for many tests
 
-The [finite perturbation bound](ch34-s28-s03-s02-spectral-perturbations.md) chooses the grid offsets for a given moment test. A sequence of cutoffs in a single comparison spectrum needs a common choice. Let $g_j$ be the unperturbed frequencies, indexed by a set $J$. At coordinate $j$, choose the perturbation radius $\varepsilon_j>0$ and a grid of $M_j+2$ equally spaced offsets between $-\varepsilon_j$ and $\varepsilon_j$, with $M_j$ a nonnegative integer.
+The [finite perturbation bound](ch34-s28-s03-s02-spectral-perturbations.md) chooses the grid offsets for a given moment test. A sequence of cutoffs in a single comparison spectrum needs a common choice. Let $g_j$ be the unperturbed frequencies, indexed by a set $J$. Choose a radius $\varepsilon_j\ge0$ and $M_j+2$ indexed offsets evenly spaced between $-\varepsilon_j$ and $\varepsilon_j$. Here $M_j$ is a nonnegative integer, and radius zero keeps the coordinate fixed.
 
-Test $k$ specifies a finite support $J_k\subseteq J$, nonnegative weights on that support, a natural degree $p_k$ and a resolution $\eta_k\ge0$. Let $E_k(g')$ be the weighted near-collision mass of $g'$ on $J_k$. Write $D_k$ for the diagonal mass, $W_k$ for the weight sum and $B_k=W_k^{2p_k}-D_k$ for the full off-diagonal weight. Require $b_k>0$ when $B_k>0$. For tests with $B_k>0$ and $b_k<1$, take an upper bound $\rho_k$ on
+Test $k$ specifies a finite support $J_k\subseteq J$, nonnegative weights on that support, a natural degree $p_k$ and a resolution $\eta_k\ge0$. Let $E_k(g')$ be the weighted near-collision mass of $g'$ on $J_k$. Write $D_k$ for the diagonal mass, $W_k$ for the weight sum and $B_k=W_k^{2p_k}-D_k$ for the full off-diagonal weight. Require $b_k>0$ when $B_k>0$. For tests with $B_k>0$ and $b_k<1$, require $\varepsilon_j>0$ on $J_k$ and take an upper bound $\rho_k$ on
 
 $$
 \frac{\min\{M_j+2,\,1+\lfloor\eta_k(M_j+1)/\varepsilon_j\rfloor\}}{M_j+2}
@@ -22,7 +22,7 @@ It satisfies $|g'_j-g_j|\le\varepsilon_j$ at every coordinate and $E_k(g')\le D_
 :::
 
 ::: proof
-Take a finite set of tests and average over the product of the grids on the union of their supports. For each test, the restriction of this uniform distribution to its support is uniform. The finite grid count gives a mean excess $E_k-D_k$ of at most $\rho_k B_k$. Every excess lies between zero and $B_k$.
+Take a finite set of tests and average over the product of the grids on the union of their supports. For each test, the restriction of this uniform distribution to its support is uniform. Every excess lies between zero and $B_k$. For tests charged to the budget, the finite grid count bounds the mean excess by $\rho_k B_k$.
 
 For the tests charged to the budget, sum the excesses divided by $b_k B_k$. If an assignment violates any test, the sum strictly exceeds one. The mean of the sum is at most one, so an assignment satisfying the finite family exists even at budget one.
 
