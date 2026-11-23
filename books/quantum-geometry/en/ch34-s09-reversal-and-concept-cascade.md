@@ -69,7 +69,7 @@ Better still, what happens if the observer immediately appends the escaped path 
 
 ## 29.10.3 “Reversal Is the Movement of the Way”: The Bi-Infinite Orthogonal Cut Between Reachable and Unreachable Paths {#sec-ch34-9-3}
 
-If infinitely many arrival paths surge beneath every point, **what allows "this point" to stand forth as a determinate entity in a background-free sea of comparisons?** Chapter 40 of Laozi's *Dao De Jing*—***"Reversal is the movement of the Way"*** (*反者道之动*)—receives in our epigraph an exact Hilbert-space formulation: ***"The essence of a point's existence is that there are infinitely many paths reaching that point and infinitely many paths that cannot reach that point."***
+If infinitely many arrival paths surge beneath every point, **what allows "this point" to stand forth as a determinate entity in a background-free sea of comparisons?** Chapter 40 of Laozi's *Dao De Jing*—***"Reversal is the movement of the Way"*** (*fǎn zhě dào zhī dòng*)—receives in our epigraph an exact Hilbert-space formulation: ***"The essence of a point's existence is that there are infinitely many paths reaching that point and infinitely many paths that cannot reach that point."***
 
 At first glance one is tempted to credit existence solely to the positive paths that *reach* $x$, dismissing the paths that *cannot reach* $x$ as irrelevant debris. Two boundary thought experiments expose why removing either side destroys existence outright (manual derivation + `MODEL`):
 

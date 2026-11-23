@@ -1,6 +1,6 @@
 # 23.1 Pythagoras, "All Is Number," and the Four-Tier Escape of Number {#sec-coda-pythagoras-all-is-number}
 
-If we compress this monograph back into the foundational seed of mathematical civilization, we find that the entire architecture was already latent twenty-five centuries ago in the twin mottoes of the Pythagorean school: **the Pythagorean Theorem ($a^2 + b^2 = c^2$)** and **"All Is Number" ($\pi\alpha\nu\tau\alpha\ \dot{\alpha}\rho\iota\theta\mu\acute{o}\varsigma$ / 万物皆数)**. Viewed through Clifford geometric algebra and a formal proof kernel, these two ancient principles unfold as a three-act geometric drama.
+If we compress this monograph back into the foundational seed of mathematical civilization, we find that the entire architecture was already latent twenty-five centuries ago in the twin mottoes of the Pythagorean school: **the Pythagorean Theorem ($a^2 + b^2 = c^2$)** and **"All Is Number" ($\pi\alpha\nu\tau\alpha\ \dot{\alpha}\rho\iota\theta\mu\acute{o}\varsigma$ / *wànwù jiē shù*)**. Viewed through Clifford geometric algebra and a formal proof kernel, these two ancient principles unfold as a three-act geometric drama.
 
 ## 23.1.1 Act I: The True Face of the Pythagorean Theorem—1D Segments Cannot Add, 2D Areas Conserve {#sec-coda-pythagoras-act1}
 
@@ -150,10 +150,10 @@ The determinant $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$ of [@thm-ch29-silver-pell-
 
 If rational numbers cannot even hold the hypotenuse $\sqrt{2}$ of a unit square, was Pythagoras wrong to proclaim that "All Is Number"?
 
-Quite the opposite! Just as Chapter 1 revealed that the Chinese character **量** unites the verb **liáng** (the active operation of pairwise measurement) and the noun **liàng** (the truncated scalar reading), the character **数** in "万物皆数" unites two distinct dimensions:
+Quite the opposite! Just as Chapter 1 revealed that the classical Chinese term *liàng* / *liáng* unites the verb **liáng** (the active operation of pairwise measurement) and the noun **liàng** (the truncated scalar reading), the classical term *shù* / *shǔ* in *wànwù jiē shù* ("All Is Number") unites two distinct dimensions:
 
-- The 3rd-tone verb **数 (`shǔ`, to count / to compare / to iterate)**: the active operator of recursive counting, pairwise comparison, orthogonal squaring, cyclotomic halving, and self-referential feedback;
-- The 4th-tone noun **数 (`shù`, a number / a coordinate mark)**: the static coordinate notch left on a ruler after the operator is truncated at a fixed stage.
+- The 3rd-tone verb **`shǔ` (to count / to compare / to iterate)**: the active operator of recursive counting, pairwise comparison, orthogonal squaring, cyclotomic halving, and self-referential feedback;
+- The 4th-tone noun **`shù` (a number / a coordinate mark)**: the static coordinate notch left on a ruler after the operator is truncated at a fixed stage.
 
 When "number" is reduced to a static noun (`shù`), every number system is inevitably punctured by the next geometric operation; when "number" is restored to its generative verb (`shǔ`), each fracture of an old sphere becomes the engine that constructs the next enclosing sphere. From integers to the self-referential fixed point, the history of number is a **Four-Tier Escape of Enclosing Spheres**:
 
