@@ -209,6 +209,7 @@
       - [35.6.8.2 最大熵测度、回返时长与视界问题](ch39-s05-s08-s02-maximal-entropy.md)
       - [35.6.8.3 物理 Tribonacci 模型与 Slater 前缀](ch39-s05-s08-s03-slater-prefix.md)
       - [35.6.8.4 非连续切口、纯度与方向复形](ch39-s05-s08-s04-cuts-and-circuits.md)
+        - [35.6.8.4.1 新增同行三元组的最小数](ch39-s05-s08-s04-s01-minimum-internal-additions.md)
       - [35.6.8.5 替代词交替偏差与对数平方界](ch39-s05-s08-s05-substitution-discrepancy.md)
       - [35.6.8.6 三对角局部化与开链谱距离](ch39-s05-s08-s06-open-chain-spectrum.md)
   - [35.7 trureturing 的“黄金切投”形式原语与灵魂—遗迹吸引子的几何诠释](coda-s03-golden-cut-observers.md)
