@@ -153,6 +153,7 @@
         - [31.1.3.2.1 Fourier recovery from Möbius windows](ch34-s28-s03-s02-fourier-recovery.md)
         - [Weighted near-collisions and the range of missing-window starts](ch34-s28-s03-s02-weighted-near-collisions.md)
         - [A variance lower bound for near-collisions](ch34-s28-s03-s02-collision-variance.md)
+        - [Common counts of weighted multinomial vectors](ch34-s28-s03-s02-multinomial-overlap.md)
         - [Weighted near-collisions under small perturbations](ch34-s28-s03-s02-spectral-perturbations.md)
         - [One spectral perturbation for many tests](ch34-s28-s03-s02-common-spectral-perturbations.md)
         - [Spectral perturbations that preserve counting](ch34-s28-s03-s02-spectral-count-perturbations.md)
