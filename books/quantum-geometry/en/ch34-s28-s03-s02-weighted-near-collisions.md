@@ -168,3 +168,28 @@ $$
 \log M\ \ge\ p\log(N/p)\ \gtrsim\ T^\beta(\log T)^2,
 $$
 using $M\ge(N/p)^p$ from the product formula for the multiset coefficient. The frequencies $g_\gamma=\gamma/r$ lie in a band of width at most $T/r$. For each fixed $c>0$ and sufficiently large $T$, distinct degree-$p$ vectors must therefore collide within resolution $\exp(-cT^\beta\log T)$. The needed arithmetic estimate must control the total weight of those pairs and allow individual near-collisions. [Proportion of simple zeros, §§1.1 and 8](https://arxiv.org/html/1802.10521)
+
+## Changing the height cutoff in a local statistic
+
+Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
+
+::: {.theorem #thm-ch31-local-statistic-cutoff title="Local tuple statistics under a change of cutoff" lean="D5/S3/Fourier/Concentration/LocalStatisticCutoffs.local_statistic_cutoff"}
+Let $S$ and $T$ be nonempty subsets of a finite index set with real frequencies $g_j$. Put $s=|S|$, $t=|T|$ and $b=|S\triangle T|$. Fix a natural number $k$ and a real score on each ordered tuple of $k+1$ distinct indices, with magnitude at most $M\ge0$. Whenever a score is nonzero, every frequency in the tuple lies within distance $R$ of the first. Suppose each index in $S\cup T$ has at most $D$ indices of $S\cup T$ within distance $2R$ of its frequency, where $D$ is a natural number. Let $A(U)$ be the sum of the scores of tuples contained in $U$. Put $L=M(\max(D-1,0))_k$, where the subscript denotes a falling factorial. Then
+
+$$
+\left|\frac{A(S)}{s}-\frac{A(T)}{t}\right|
+\le \min\left\{\frac{L\bigl((k+1)b+|s-t|\bigr)}{\max(s,t)},\,2L\right\}.
+$$
+:::
+
+::: proof
+Only tuples with an index in $S\triangle T$ can change the unnormalized sum. Mark such an index and its slot. All the other frequencies of a contributing tuple lie within distance $2R$ of the marked one. Fill the $k$ remaining slots with distinct indices from that neighborhood after erasing the marked index. Summing over the $k+1$ slots and the $b$ changed indices bounds $|A(S)-A(T)|$ by $L(k+1)b$.
+
+To bound either sum separately, mark only the first slot. Thus $|A(U)|\le |U|L$ for $U=S,T$. Subtract the two unnormalized sums over the larger denominator and use the separate bound for the adjustment of the smaller sum. Each normalized sum has magnitude at most $L$, so their difference also has magnitude at most $2L$. The full proof is checked by the Lean kernel.
+:::
+
+For a compactly supported test of $k$ scaled differences against the first frequency, take its support in $[-R_0,R_0]^k$ and use the radius $R=R_0/\lambda$ at scale $\lambda>0$. Consider the indexed positive ζ ordinates, keeping multiplicities or taking a subset with at least a constant times $T\log T$ retained indices. Write the upper height as $T$, the lower height as $X=cT^\alpha$ for fixed $c>0$ and $0<\alpha<1$, and round each $g_j$ downward to the dyadic mesh $2^{-\lceil(\log_2(2+g_j))^2\rceil}$. Select each set of tail indices independently in $(X,T]$, using the original and rounded heights respectively.
+
+All indices in the union have original height above $X$. With $h=2^{-\lceil(\log_2(2+X))^2\rceil}$, the symmetric difference therefore comes from the strips $(X,X+h]$ and $(T,T+h]$. The Riemann–von Mangoldt estimate gives $O(\log T)$ ordinates, counted with multiplicity, in any fixed-width interval in this tail range. If $\lambda$ is bounded below by a positive constant, the rounded neighborhoods at radius $2R_0/\lambda$ also have $D=O(\log T)$, since their original heights lie in neighborhoods enlarged by at most $h$. After normalization, the change from the independent cutoffs is $O((\log T)^k/T)$ for fixed $k$ and test. [Hasanalizade–Shen–Wong, Theorem 1.1](https://arxiv.org/abs/2107.06506)
+
+On the common choice of indices, a Lipschitz test has at most $K\lambda h$ error per tuple. Thus the two statistics have the same limit whenever it exists, for fixed compactly supported Lipschitz tests and $\lambda$ between a positive constant and a fixed power of $T$. The rounded spectrum can still have large exact high-order collision mass. The upper bound at finer resolution for the original ordinates remains open.
