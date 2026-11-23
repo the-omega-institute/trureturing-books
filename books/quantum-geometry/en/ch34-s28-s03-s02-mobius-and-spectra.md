@@ -707,9 +707,9 @@ $$
 \tau(k)=\frac{|1-i^{\sum_j k_j}|^2}{2\left(\sum_j|k_j|\right)^2}.
 $$
 
-For $0<u\le2$, let $Q(u)$ be the least fraction of weight that must be omitted to meet the support of every incompatible relation with $\tau(k)\ge u$. On each support with an incompatible relation, $\tau$ attains its maximum. Assign maximum zero to the other supports. The support maxima together with $0$ and $2$ give a finite partition into intervals $(a,b]$ with $Q=Q(b)$ on each interval. The integral is the finite sum $\sum_{(a,b]}(b-a)Q(b)$.
+For $u>0$, let $Q(u)$ be the least fraction of weight that must be omitted to meet the support of every incompatible relation with $\tau(k)\ge u$. On each support with an incompatible relation, $\tau$ attains a positive maximum over all incompatible relations with that support. Assign maximum zero to the other supports. The support maxima together with $0$ and $2$ give a finite partition of $(0,2]$ into intervals $(a,b]$ with $Q=Q(b)$ on each interval. The integral is the finite sum $\sum_{(a,b]}(b-a)Q(b)$.
 
-Use nonnegative weights and the same normalization when the total weight vanishes. For any time set $\mathcal T$, the coefficient-length series $L$ and phase deficit satisfy
+Use nonnegative weights. When their total is zero, the normalized averages and omitted fractions are zero. For any time set $\mathcal T$, the coefficient-length series $L$ and phase deficit satisfy
 
 $$
 L\le\int_0^2 Q(u)\,du\le D_{\mathcal T}.
@@ -719,7 +719,7 @@ $$
 ::: proof
 On a fixed support and within a residue class of the coefficient sum modulo $4$, the numerator is constant. Choose a relation of least length for each occupied residue class, then take the largest threshold among these choices. There are finitely many supports, so the constraints on the omitted subset change only at finitely many breakpoints. The constraint at the breakpoint still applies, giving right-closed intervals.
 
-Fix a common time $v$. The character-product chord estimate forces a coordinate loss $1-\sin(\gamma_jv)$ of at least $\tau(k)$ on the support of each incompatible relation. The coordinates of loss at least $u$ therefore give an admissible omitted set. Integrating its weight fraction bounds the integral of $Q$ by the average loss at that time. Every incompatible relation of length at most $h$ has $\tau(k)\ge h^{-2}$, so $Q(u)\ge P_h$ on $(1/(h+1)^2,1/h^2]$. Integrating over these intervals and passing to the limit gives the other inequality.
+Fix a common time $v$. The character-product chord estimate forces a coordinate loss $1-\sin(\gamma_jv)$ of at least $\tau(k)$ on the support of each incompatible relation. The coordinates of loss at least $u$ therefore give an admissible omitted set. Integrating its weight fraction bounds the integral of $Q$ by the average loss at that time. Every incompatible relation of length at most $h$ has $\tau(k)\ge h^{-2}$, so $Q(u)\ge P_h$ on $(1/(h+1)^2,1/h^2]$. Integrating over these intervals and passing to the limit gives the other inequality. The full proof is checked by the Lean kernel.
 :::
 
 ::: {.theorem #thm-ch31-exact-fourth-root-pair title="The exact chord improves the bound for frequencies one and three" lean="D5/S3/Fourier/ExactFourthRootGaps.pair_exact_Q D5/S3/Fourier/ExactFourthRootGaps.pair_strict"}
@@ -727,7 +727,7 @@ Take frequencies $(1,3)$ and equal positive weights. Then $Q(u)=1/2$ for $0<u\le
 :::
 
 ::: proof
-Every relation is an integer multiple of $(3,-1)$. The length-four relation has coefficient sum $2$, squared chord distance $4$, and threshold $1/8$. Every incompatible relation uses both coordinates, has length at least $4$, and has threshold at most $1/8$. Omitting either coordinate suffices. The length-only omission fraction is $1/2$ from $h=4$ onwards, giving the tail sum $(1/2)/4^2=1/32$.
+Every relation is an integer multiple of $(3,-1)$. The length-four relation has coefficient sum $2$, squared chord distance $4$, and threshold $1/8$. Every incompatible relation uses both coordinates, has length at least $4$, and has threshold at most $1/8$. Omitting either coordinate suffices. The length-only omission fraction is $1/2$ from $h=4$ onwards, giving the tail sum $(1/2)/4^2=1/32$. The full proof is checked by the Lean kernel.
 :::
 
 For actual zeta cutoffs, the incompatible relations and their supports still require independent determination.
