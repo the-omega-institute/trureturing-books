@@ -645,6 +645,16 @@ $1,0,1$ 补零得到 $0,1,0,1,0$，要求至少两条跨秩边。$1,1,1$ 补零�
 预算 $640$ 至多容许 $640/4-1=159$ 条普通计费边，恰好等于这三层下界之和。因此 $I_1=2$，秩 $5,7,9$ 的对角边数均为零。例外行度数至多为二，故进入这三个秩前缀的例外边数也均为二。将这些读数代入 [@thm-omega-rank-cut-diagonal-parity]，跨越秩 $5,7,9$ 的普通边数分别为奇、偶、奇。补零后的四次奇偶变化要求至少两条跨秩边。
 :::
 
+::: {.theorem #thm-omega-fourteen-two-rank-jumps-attainment lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionFourteenAttainment.result" title="十四维中两条跨秩边已经足够"}
+取维数 $14$、倍率 $3$ 和标记坐标 $0$。在完整包含图上，存在满足度数与支撑条件的二值因子，计费预算至多为 $640$，且恰有两条普通跨秩边。
+:::
+
+::: {.proof}
+构造用二进制掩码表示 $13$ 个自由坐标的子集。行列表与列列表描述同一张二值边表。证书逐块核验度数和支撑条件，并数出 $159$ 条普通计费边。加上标记列的贡献，预算为 $4(1+159)=640$。
+
+普通行中的跨秩边只有两个候选，掩码 $15\to63$ 和 $255\to1023$。第一条由前四个自由坐标组成的子集连到前六个，第二条由前八个连到前十个。其余普通边至多增加一个自由坐标。[@thm-omega-fourteen-two-rank-jumps] 的下界迫使两条候选边都被选中，分别跨过秩 $5$ 和 $9$。完整证明由 Lean 内核检查。
+:::
+
 ::: {.theorem #thm-omega-sixteen-full-budget lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteen.full_budget_iff" title="十六维完整包含图的精确预算"}
 取维数 $16$、倍率 $3$，只允许坐标 $0$ 有非零固定种子预算。对任意非负整数 $b$，完整包含图中的因子满足预算 $b$ 当且仅当 $b\ge2036$。这里的可行性指存在满足前述度数、支撑和计费条件的因子。
 :::
