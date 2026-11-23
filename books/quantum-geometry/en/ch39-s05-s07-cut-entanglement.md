@@ -63,6 +63,23 @@ For attainment, split the unit interval at $q_s$. Use an initial interval in eac
 
 For a hard-core model on a bipartite graph, complement the occupancy events on one side. Disjoint neighbors then become nested neighbors. Complementing $x,y$ in the four-cycle gives probability profiles $(1/2,1,1/2)$ and $(1/2,1/2,1/2)$ along the two walks from $s$ to $t$. Their total decreases are $1/2$ and zero. The second walk forces the endpoint difference to have probability zero.
 
+With two sources, the individual upper bounds can be coupled. The following five-vertex graph gives the full joint range of two event differences.
+
+::: {.theorem #thm-ch39-fib-two-source-capacity lean="D5/S1/Words/AdmissibleWords/FIBTwoSourceObstruction.five_vertex_range" title="The joint range of two event differences"}
+Let $q,c,a,b$ be real. There exist five measurable events $S,H,K,T,W$ in the half-open unit interval with probabilities $q,q+c,q+c,q,q$, inclusions $S,W\subseteq H\cap K$ and $T\subseteq K$, and differences $\Pr(W\setminus S)=a$ and $\Pr(T\setminus H)=b$ if and only if
+$$
+0\le a\le q,\qquad 0\le b\le\min(q,1-q-c),\qquad a+b\le c.
+$$
+:::
+
+::: {.proof}
+The difference $W\setminus S$ lies inside $H$. The difference $T\setminus H$ lies outside $H$. Both lie in $K\setminus S$, so their total mass is at most $c$. The first difference is also bounded by the mass of $W$, and the second by both the mass of $T$ and the mass outside $H$.
+
+The inequalities also give $q,c\ge0$ and $q+c\le1$. To attain $(a,b)$, take $S=[0,q)$ and $K=[0,q+c)$. Reserve the last interval of length $b$ in $K$ for $T\setminus H$, and use an interval of the same length just to the right of $K$ to complete $H$. The rest of $T$ is the initial interval of length $q-b$ in $S$. For $W$, take the initial interval of length $q-a$ in $S$ and the interval of length $a$ immediately after $S$. The inequality $a+b\le c$ puts the latter interval inside both $H$ and $K$. The full proof is checked by the Lean kernel.
+:::
+
+With $q=1/2$ and $c=1/6$, the entire feasible region is the first-quadrant triangle $a+b\le1/6$. Each coordinate can attain $1/6$ on its own. Complement the events at $H,K$ to obtain the hard-core occupancy model on the bipartite graph. Three sites have occupancy $1/2$ and two have occupancy $1/3$. The endpoint occupancies sum to $5/6$ on each edge, and the two sources still draw on the same probability budget.
+
 In the `trureturing` direct-encoder model, fix integers $N \ge 2$ and $K \ge 2$, and partition $\{0, 1, \dots, N\}$ by primality into the nonprime logical page ($b = \mathrm{false}$, dimension $M_0 > 0$) and the prime logical page ($b = \mathrm{true}$, dimension $M_1 > 0$). Let $C_{m, b}$ denote the set of length-$m$ admissible $1^K$-free words with first bit $b$, of cardinality $c_{m, b} = |C_{m, b}|$; for each threshold $0 \le s < K$, define the cumulative low-tail left row count and compatible right neighborhood count on page $1$ by
 
 $$
