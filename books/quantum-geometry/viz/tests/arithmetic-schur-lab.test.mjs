@@ -223,8 +223,9 @@ check('source: the budget evidence links the exact source blob, the unmerged PR 
 check('source: only the shared runtime and the page script', JSON.stringify([...sources['index.html'].matchAll(/<script src="([^"]+)"/g)].map((m) => m[1])) === '["../assets/shell.js","../assets/kit.js","main.js"]');
 check('source: no green Lean box', !/class="lean"|class="lean frozen"|data-lean-gid/.test(sources['index.html']));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID) || {};
-check('registry: live entry, no Lean list, theory link to §34.7', entry.status === 'live' && Array.isArray(entry.lean) && entry.lean.length === 0 && entry.code === 'ARITH//SCHUR'
-  && (entry.theory || []).some((t) => /ch34-s18-gram-window-and-consensus\.html#sec-ch34-18-5$/.test(t.href)));
+check('registry: live entry, no Lean list, bilingual theory links to Appendix N', entry.status === 'live' && Array.isArray(entry.lean) && entry.lean.length === 0 && entry.code === 'ARITH//SCHUR'
+  && (entry.theory || []).some((t) => t.href === '../zh/appendix-n.html#sec-ch34-18-5'
+    && t.href_en === '../en/appendix-n.html#sec-ch34-18-5'));
 check('registry: the budget card is listed and its source is linked at the exact blob', (entry.presets || []).includes('budget') && (entry.theory || []).some((t) => t.href === BLOB));
 
 /* ---------- opening and the cards ---------- */
