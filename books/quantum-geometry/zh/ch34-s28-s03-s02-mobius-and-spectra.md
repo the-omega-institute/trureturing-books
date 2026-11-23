@@ -969,9 +969,9 @@ $$
 :::
 
 ::: proof
-令 $Z(u)=\sum_jw_je^{ig_j u}$，用多项式定理展开 $Z^p\overline Z^p=|Z|^{2p}$。任意两个总次数为 $p$ 的计数向量之差长度至多为 $2p$。非零频率的特征函数在长区间上的平均趋于零，故只留下计数向量相等的项。每个保留项的一个多项式系数至多为 $p!\le p^p$，其余因子再用多项式定理求和。每个固定网格偏移的极限平均因此至多为 $(pV)^p$。这里使用归一化特征函数积分和 Lamzouri 的有限带符号频率展开。 [特征函数积分](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L78) · [Lamzouri，引理 3.2](https://arxiv.org/html/2311.04860v2)
+令 $Z(u)=\sum_jw_je^{ig_j u}$，用多项式定理展开 $Z^p\overline Z^p=|Z|^{2p}$。任意两个总次数为 $p$ 的计数向量之差长度至多为 $2p$。非零频率的特征函数在长区间上的平均趋于零，故只留下计数向量相等的项。每个保留项的一个多项式系数至多为 $p!\le p^p$，其余因子再用多项式定理求和。每个固定网格偏移的极限平均因此至多为 $(pV)^p$。这里使用归一化特征函数积分和 Lamzouri 的有限带符号频率展开。 [特征函数积分](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L78) · [Lamzouri，引理 3.2](https://arxiv.org/html/2311.04860v2#S3.Thmthm2)
 
-对所有网格偏移的矩求和，再对 $A$ 之后的候选起点取平均。由严格预算，充分长的平均区间上该平均小于 $\delta^{2p}$。因此有起点使每个网格点都满足 $|Z|<\delta$。正弦得分是虚部，网格间再计入斜率误差 $hB$。当 $V=0$ 时，得分恒为零。
+对所有网格偏移的矩求和，再对 $A$ 之后的候选起点取平均。由严格预算，充分长的平均区间上该平均小于 $\delta^{2p}$。因此有起点使每个网格点都满足 $|Z|<\delta$。正弦得分是虚部，网格间再计入斜率误差 $hB$。当 $V=0$ 时，得分恒为零。 完整证明由 Lean 内核检查。
 :::
 
 在 [@thm-ch31-logarithmic-missing-window] 中，无需约束首段频率之间的关系，首段的贡献至多为 $W(X)$。取 $X=e^{-K}T^\beta$ 时，尾段方差满足 $V\le D\log T/T^\beta$。对频率 $g_\gamma=\gamma/r$ 取网格间距 $r/T^2$，令 $\delta=\log T$、$p=\lfloor T^\beta\log T/(4D)\rfloor$，于是 $2pV/\delta^2\le1/2$。当 $c=\log 2/(8D)$ 时，长度 $H=\exp(cT^\beta\log T)$ 最终满足严格网格预算。若尾段频率直到 $2p$ 阶都满足上述整数关系条件，即可保留相同的带符号得分余量。实际 ζ 尾段互异正纵坐标能否满足这个条件仍是开放问题。
