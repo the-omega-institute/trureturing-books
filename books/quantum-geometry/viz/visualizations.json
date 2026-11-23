@@ -10045,6 +10045,122 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "prime-zero-duality-uniformity-sandbox",
+      "code": "OMEGA//PRIME-ZERO",
+      "title": "素数寄存器与黎曼零点的全息对偶与双内禀均匀",
+      "title_en": "Holographic Duality Between Prime Registers and Riemann Zeros and Dual Intrinsic Uniformity",
+      "summary": "在对偶腔模型中比较素数寄存器与黎曼零点，沿梅滕斯熵标尺追踪素数，并把零点展开为去 π 的整圈绕相。再用朗道探针辨认素数幂峰值，比较三元球上的整数旋子和模 q 的素数份额。",
+      "summary_en": "Compare prime registers and Riemann zeros in a model of the dual cavity. Follow primes on the Mertens entropy ruler, unfold zeros into π-free turns, and identify prime-power peaks with the Landau probe. Compare the integer rotors on the ternion sphere and the distribution of primes modulo q.",
+      "path": "prime-zero-duality-uniformity-sandbox/",
+      "thumbnail": "prime-zero-duality-uniformity-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-24",
+      "chapter": 31,
+      "section": "31.7",
+      "presets": [
+        "prime-zero-dark-state-cavity",
+        "mertens-entropy-and-s3-haar-primes",
+        "unfolded-zero-turns-and-gue-fluid",
+        "landau-fujii-fractran-gate-probe",
+        "modular-totient-and-duality-ledger"
+      ],
+      "preset_titles": {
+        "prime-zero-dark-state-cavity": {
+          "zh": "素数寄存器与零点暗态对偶腔",
+          "en": "Prime registers & zero dark-state cavity"
+        },
+        "mertens-entropy-and-s3-haar-primes": {
+          "zh": "素数的梅滕斯熵标尺与 S³ 哈尔均匀",
+          "en": "Mertens entropy ruler & S³ Haar prime uniformity"
+        },
+        "unfolded-zero-turns-and-gue-fluid": {
+          "zh": "去 π 整圈绕相坐标与超均匀零点对比",
+          "en": "π-free turn unfolding & hyperuniform zero comparison"
+        },
+        "landau-fujii-fractran-gate-probe": {
+          "zh": "FRACTRAN 指令韦伊等分布与素数幂锁相尖峰",
+          "en": "FRACTRAN gate Weyl equidistribution & prime-power lock-in"
+        },
+        "modular-totient-and-duality-ledger": {
+          "zh": "模 q 互素通道等权均分与双均匀总账",
+          "en": "Modulo-q totient equipartition & dual-uniformity ledger"
+        }
+      },
+      "tags": [
+        "素数寄存器",
+        "黎曼零点",
+        "梅滕斯熵",
+        "朗道探针",
+        "哈尔测度"
+      ],
+      "tags_en": [
+        "Prime registers",
+        "Riemann zeros",
+        "Mertens entropy",
+        "Landau probe",
+        "Haar measure"
+      ],
+      "theory": [
+        {
+          "label": "§31.7 · 素数寄存器与黎曼零点的全息对偶及双内禀均匀律：观察者算术暗态谐振模、梅滕斯熵与三元球哈尔均匀、去 π 绕相圈数与超均匀谱边界",
+          "label_en": "§31.7 · Holographic Duality Between Prime Registers and Riemann Zeros and Dual Intrinsic Uniformity: Observer Arithmetic Dark-State Eigenmodes, Mertens Entropy & Ternion Haar Uniformity, and π-Free Turn Unfolding",
+          "href": "../zh/ch31-s07-prime-register-riemann-zero-duality-and-dual-uniformity.html#sec-ch31-prime-register-riemann-zero-duality-and-dual-uniformity",
+          "href_en": "../en/ch31-s07-prime-register-riemann-zero-duality-and-dual-uniformity.html#sec-ch31-prime-register-riemann-zero-duality-and-dual-uniformity"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Analytic/CompletedZetaMellinReconstruction.completed_zeta_mellin_reconstruction"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S3/Weil/TestFunctions/FinitePowerSumToeplitzCircleCriterion.toeplitz_posSemidef_iff_norm_eq_one"
+        },
+        {
+          "gid": "D5/S3/Weil/Mertens/IntegratedExplicit/WholeFormula.actual_integrated_explicit_formula"
+        },
+        {
+          "gid": "D5/S3/Factorization/FreeCommMonoid.pnat_free_comm_monoid_on_primes"
+        },
+        {
+          "gid": "D5/S3/Factorization/PositiveRationalGroup.signed_prime_ledger_equiv_positive_rationals"
+        },
+        {
+          "gid": "D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence"
+        },
+        {
+          "gid": "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Quantum/Analysis/CompactGroups/SchurOrthogonality.integral_dual_mul_dual_inv_eq_zero"
+        },
+        {
+          "gid": "D5/S3/Fourier/FullBispectrumStability.cyclic_parseval"
+        },
+        {
+          "gid": "D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar"
+        },
+        {
+          "gid": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"
+        },
+        {
+          "gid": "D5/S3/Fourier/TorusOrbitClosure.result"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
