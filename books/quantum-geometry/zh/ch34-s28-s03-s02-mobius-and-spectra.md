@@ -852,6 +852,24 @@ Fejér 核 $F_N(x)=|\sum_{r=0}^{N-1}e^{irx}|^2/N$ 的 Fourier 系数非负，总
 
 四分之一周相位取 $\theta_j=\pi/2$。对调和总权重为正的实际 ζ 零点截断，可取 $p_j$ 与解析重数权重成正比，取 $\gamma_j$ 为缩放后的纵坐标。估计依赖该截断在有限系数范围内满足上述条件。非零频率的分离量与精确关系的相位同余是两项独立输入。 [Bohr–Jessen 的 Fejér 核方法](https://arxiv.org/html/2411.14221#S4) · [RH 仓中的有限指数平均](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
 
+::: {.theorem #thm-ch31-zeta-cutoff-recurrence title="幂次截断下的加权正弦复现" lean="D5/S3/Analytic/Oscillation/SpectrumPhaseCutoff.eventual_sine_cutoff_tradeoff"}
+取局部有限的正实频谱 $\gamma_j$，频率互异，权重 $w_j\ge0$。记 $J(T)=\{j:\gamma_j\le T\}$，$W(T)=\sum_{j\in J(T)}w_j$，$S(T,v)=\sum_{j\in J(T)}w_j\sin(\gamma_jv)$。假设 $W(T)$ 最终为正，$\lvert J(X)\rvert=O(X\log X)$，且每个 $0<\alpha<1$ 都有 $W(T^\alpha)/W(T)\to q_\alpha\ge\alpha^2$。再假设每个 $d>0$ 都有常数 $C_d>0$，使每个固定 $M\in\mathbb N$ 在充分大的 $X$ 上满足如下分离界。对任意非零整数向量 $(k_j)_{j\in J(X)}$，若 $|k_j|\le M$，则 $|\sum_j k_j\gamma_j|\ge C_d\exp(-X^{1+d})$。
+
+固定 $r,\beta>0$ 和 $\varepsilon>2(1-\min(\beta,1)^2)$。对于所有充分大的实数 $T$，有 $W(T)>0$，且每个区间 $[a,a+\exp(T^\beta)]$ 都含有一个 $u$ 满足
+
+$$
+1-\frac{S(T,u/r)}{W(T)}<\varepsilon.
+$$
+:::
+
+::: proof
+取 $0<\alpha<\min(\beta,1)$ 与 $0<\varepsilon_0\le1$，使 $2(1-\alpha^2)+\alpha^2\varepsilon_0<\varepsilon$。对截至 $X=T^\alpha$ 的频率应用 [@thm-ch31-finite-phase-recurrence]，取目标相位 $\pi/2$ 和整数 $M$ 使 $1/M<\varepsilon_0$。令 $d>0$ 满足 $\alpha(1+d)<\beta$。取对数后，分离量和有限展开的系数总量分别带来 $T^{\alpha(1+d)}$ 与 $O(T^\alpha\log T)$ 的开销，均比 $T^\beta$ 低阶。因此每个给定区间都含有一个点，使保留段的归一化亏损小于 $\varepsilon_0$。在该点，舍弃项的亏损至多为其权重的两倍。令 $q_T=W(X)/W(T)$，则全段亏损小于 $2(1-q_T)+q_T\varepsilon_0$。该式随 $q_T$ 递减，且极限小于 $\varepsilon$。
+:::
+
+对 [@thm-ch31-weighted-phase-limsup] 的实际 ζ 零点，假设 RH 和 Lamzouri 的有效线性无关猜想。猜想将系数上界取为按解析重数计的 $N(X)$。由于 $N(X)\to\infty$，它给出每个固定系数盒所需的分离量。不同纵坐标数至多为 $N(X)=O(X\log X)$。实际权重 $m_\gamma\gamma/(1/4+\gamma^2)$ 满足 $W(T)/\log^2 T\to1/(4\pi)$，因此 $W(T)>0$ 最终成立，且 $q_\alpha=\alpha^2$。通用结论于是给出该正弦和的统一等待尺度。猜想允许 $C_d$ 取无效常数。Lamzouri 的定理 1.5 则在其系数假设下对 $[2,X]$ 上截断至 $X^2$ 的和式取极值。 [Lamzouri 原文](https://arxiv.org/html/2311.04860v2)
+
+取 $\beta=1$，对任意 $\varepsilon>0$ 都能在每个长度为 $e^T$ 的区间找到一次命中，因此 $0\le D(T)<\varepsilon$ 最终成立。在 RH 与有效线性无关猜想下，若 $\mu(r)\ne0$，[@thm-ch31-weighted-phase-limsup] 的左端点误差取得完整的首项系数 $|\mu(r)|/(4\pi s)$。
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数
 

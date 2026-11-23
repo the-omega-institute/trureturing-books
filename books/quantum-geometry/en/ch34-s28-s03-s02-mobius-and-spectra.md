@@ -852,6 +852,24 @@ The Fejér kernel $F_N(x)=|\sum_{r=0}^{N-1}e^{irx}|^2/N$ has nonnegative Fourier
 
 For the quarter phase, set $\theta_j=\pi/2$. For an actual zeta cutoff with positive harmonic mass, take $p_j$ proportional to the analytic-multiplicity weights and $\gamma_j$ equal to the rescaled ordinates. The estimate is conditional on the finite-band assumptions for that cutoff. The nonzero frequency separation is a quantitative input distinct from the phase congruences for exact relations. [Bohr–Jessen's Fejér argument](https://arxiv.org/html/2411.14221#S4) · [Finite exponential averages in the RH repository](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L62)
 
+::: {.theorem #thm-ch31-zeta-cutoff-recurrence title="Weighted sine recurrence at power cutoffs" lean="D5/S3/Analytic/Oscillation/SpectrumPhaseCutoff.eventual_sine_cutoff_tradeoff"}
+Take a locally finite spectrum of distinct positive real frequencies $\gamma_j$ and weights $w_j\ge0$. Write $J(T)=\{j:\gamma_j\le T\}$, $W(T)=\sum_{j\in J(T)}w_j$, and $S(T,v)=\sum_{j\in J(T)}w_j\sin(\gamma_jv)$. Assume $W(T)>0$ eventually, $\lvert J(X)\rvert=O(X\log X)$, and $W(T^\alpha)/W(T)\to q_\alpha\ge\alpha^2$ for every $0<\alpha<1$. Also assume that for each $d>0$ there is a $C_d>0$ such that for each fixed $M\in\mathbb N$ the following separation bound holds for all sufficiently large $X$. Every nonzero integer vector $(k_j)_{j\in J(X)}$ with $|k_j|\le M$ satisfies $|\sum_j k_j\gamma_j|\ge C_d\exp(-X^{1+d})$.
+
+Fix $r,\beta>0$ and $\varepsilon>2(1-\min(\beta,1)^2)$. For all sufficiently large real $T$, $W(T)>0$ and every interval $[a,a+\exp(T^\beta)]$ contains a point $u$ with
+
+$$
+1-\frac{S(T,u/r)}{W(T)}<\varepsilon.
+$$
+:::
+
+::: proof
+Choose $0<\alpha<\min(\beta,1)$ and $0<\varepsilon_0\le1$ with $2(1-\alpha^2)+\alpha^2\varepsilon_0<\varepsilon$. Apply [@thm-ch31-finite-phase-recurrence] to the frequencies through $X=T^\alpha$ with target angle $\pi/2$ and integer $M$ satisfying $1/M<\varepsilon_0$. Choose $d>0$ with $\alpha(1+d)<\beta$. On the logarithmic scale the gap and the coefficient mass cost $T^{\alpha(1+d)}$ and $O(T^\alpha\log T)$, respectively. Both are lower order than $T^\beta$, so every specified interval contains a point with retained loss below $\varepsilon_0$. The omitted terms at that point contribute loss at most twice their weight. For $q_T=W(X)/W(T)$ the full normalized loss is below $2(1-q_T)+q_T\varepsilon_0$. This expression decreases with $q_T$, and its limit lies below $\varepsilon$.
+:::
+
+For the actual zeta zeros of [@thm-ch31-weighted-phase-limsup], assume RH and Lamzouri's Effective LI. The conjecture permits coefficients bounded by the analytic multiplicity count $N(X)$. Since $N(X)\to\infty$, it supplies the separation bound for every fixed coefficient box. The distinct ordinate count is at most $N(X)=O(X\log X)$. For the actual weights $m_\gamma\gamma/(1/4+\gamma^2)$, the limit $W(T)/\log^2 T\to1/(4\pi)$ gives eventual positive mass and $q_\alpha=\alpha^2$. The general result gives the stated uniform waiting scale for this score. The constant $C_d$ may be ineffective. Lamzouri's Theorem 1.5 takes extrema on $[2,X]$ of sums truncated at $X^2$ under its coefficient assumptions. [Lamzouri's paper](https://arxiv.org/html/2311.04860v2)
+
+With $\beta=1$, every interval of length $e^T$ contains a hit for each fixed $\varepsilon>0$ once $T$ is large enough. Thus $0\le D(T)<\varepsilon$ eventually. Under RH and Effective LI, if $\mu(r)\ne0$, the left-endpoint error in [@thm-ch31-weighted-phase-limsup] attains the full leading coefficient $|\mu(r)|/(4\pi s)$.
+
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
 
