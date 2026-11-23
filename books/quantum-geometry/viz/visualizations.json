@@ -9581,6 +9581,122 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "spacetime-memory-schur-split-sandbox",
+      "code": "OMEGA//SPACETIME",
+      "title": "时空运动的本体等效与观察者记忆舒尔补强行分类沙盘：无标签圆弧、勾股账本与闵氏减号",
+      "title_en": "Ontological Equivalence of Spatial and Temporal Motion & Observer-Memory Schur Classification: Unlabeled Arc, Pythagorean Ledger & Minkowski Minus",
+      "summary": "转动记忆窗，看同一条三元球面圆弧分成窗内和窗外两个分量。两者平方和恒为 1，勾股账本移项给出闵可夫斯基减号。其余三张卡展示容量从 0 到 8 的三个记忆区间、两个观察者的窗口错位，以及先进先出窗口如何在序列槽与通道槽之间分配固定容量（MODEL）。",
+      "summary_en": "Tilt a memory window and watch it split one arc on the ternion sphere into components inside and outside the window. Their squares add to 1, and rearranging the Pythagorean identity gives the Minkowski minus sign. Three more cards show the memory regimes from capacity 0 to 8, two observers with tilted windows, and a first-in, first-out window that divides a fixed budget between sequence and channel slots (MODEL).",
+      "path": "spacetime-memory-schur-split-sandbox/",
+      "thumbnail": "spacetime-memory-schur-split-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-23",
+      "chapter": 38,
+      "section": "38.12",
+      "presets": [
+        "isotropic-arc-memory-schur-split",
+        "minkowski-minus-from-pythagorean-budget",
+        "memory-capacity-three-regime-phase",
+        "dual-observer-simultaneity-rotor-tilt",
+        "forgetting-generates-space-and-kv-cache"
+      ],
+      "preset_titles": {
+        "isotropic-arc-memory-schur-split": {
+          "zh": "无标签圆弧与记忆窗舒尔二分",
+          "en": "Unlabeled arc & memory Schur split"
+        },
+        "minkowski-minus-from-pythagorean-budget": {
+          "zh": "勾股正定账本移项生闵氏减号",
+          "en": "Pythagorean budget transposed to −"
+        },
+        "memory-capacity-three-regime-phase": {
+          "zh": "记忆容量三态相变与静质量税",
+          "en": "Three memory regimes & rest-mass tax"
+        },
+        "dual-observer-simultaneity-rotor-tilt": {
+          "zh": "双观察者旋子错位与同时性相对性",
+          "en": "Dual memory frames & simultaneity"
+        },
+        "forgetting-generates-space-and-kv-cache": {
+          "zh": "遗忘生空与序列时间↔通道空间互换",
+          "en": "Forgetting makes space & KV-Cache swap"
+        }
+      },
+      "tags": [
+        "三元球面",
+        "记忆窗",
+        "舒尔补",
+        "闵可夫斯基度规",
+        "同时性"
+      ],
+      "tags_en": [
+        "Ternion sphere",
+        "Memory window",
+        "Schur complement",
+        "Minkowski metric",
+        "Simultaneity"
+      ],
+      "theory": [
+        {
+          "label": "§38.12 · 时空运动的本体等效与观察者记忆舒尔补强行分类",
+          "label_en": "§38.12 · Ontological Equivalence of Spatial and Temporal Motion and Observer-Memory Schur Classification",
+          "href": "../zh/ch38-s12-spacetime-motion-equivalence-and-memory-schur-split.html#sec-ch38-spacetime-motion-equivalence-and-memory-schur-split",
+          "href_en": "../en/ch38-s12-spacetime-motion-equivalence-and-memory-schur-split.html#sec-ch38-spacetime-motion-equivalence-and-memory-schur-split"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.reflectionSeq_eq_pow"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.kappa_reflectionSeq_add"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }

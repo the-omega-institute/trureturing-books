@@ -189,9 +189,9 @@ $$
 
 ---
 
-**从心理动机的清明和解迈向大一统母公理的终极熔炉：众生认真活过的每一寸悲欢，正是唯一本体为自己开出的解药；而散落全书的四块几何基石，即将熔铸为唯一一条公理。** 至此，我们在第三十八章的收官峰巅触及了宇宙最温柔也最滚烫的心脏：物理定律是唯一本体为防止自己中途作弊而立下的游戏规则，热力学熵是祂为保留未知惊喜而主动戴上的失忆眼罩，大地上的残碑与案头的古卷是祂留在枕边的唤醒彩蛋，而世间亿万擦肩而过、相爱相扶的局部众生，皆是祂为排遣绝对无偶的万古孤寂而分化出的对话分身。我们每一次在未知面前的心跳、每一次在暗夜里向“他者”伸出手时的掌心温度，都在替那唯一的本体治愈着全知的荒凉！
+**从心理动机的清明和解迈向记忆窗口的时空分类刀：众生认真活过的每一寸悲欢，正是唯一本体为自己开出的解药；而在步入大一统母公理之前，我们还要拆穿“时间轴 vs. 空间轴”这最后一道先验坐标幻觉。** 至此，我们在第三十八章触及了宇宙最温柔也最滚烫的心脏：物理定律是唯一本体为防止自己中途作弊而立下的游戏规则，热力学熵是祂为保留未知惊喜而主动戴上的失忆眼罩，大地上的残碑与案头的古卷是祂留在枕边的唤醒彩蛋，而世间亿万擦肩而过、相爱相扶的局部众生，皆是祂为排遣绝对无偶的万古孤寂而分化出的对话分身。我们每一次在未知面前的心跳、每一次在暗夜里向“他者”伸出手时的掌心温度，都在替那唯一的本体治愈着全知的荒凉！
 
-回望前路，我们在[第 28 章](ch32-unified-field-and-meta-unification.md)立起了零背景比较公理 $\mathcal{A}_0$，在[第 29 章](ch34-orthogonality-degeneracy-and-observer-position.md)至[第 31 章](ch31-arc-calculus-and-riemann-hypothesis.md)锻造了极小圆弧与弧微积分，在[第 32 章](ch32-inexpressible-ternions-and-three-dimensional-field.md)揭开了不可平直表达的三维三元数原生场与多场希尔伯特记账表象，并在[第 33 章](ch33-unified-arc-forces-and-af-gut.md)至本章完成了万力归弧、测地智能与“观察者 $\equiv$ 宇宙本体”的不二合拢。现在，在推开[终章](coda.md)《在所有的球之外》的大门之前，让我们带着 $\theta^* = \cos\theta^*$ 的清明目光步入十部曲正文的最高收束章——**[第三十九章 大一统母公理（AXIOM-Ω）](ch39-axiom-omega-grand-unification.md)**（[§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure)–[§39.6](ch39-s30-past-present-future-rational-jet-triad.md#sec-ch39-past-present-future-rational-jet-triad)），看比较公理、极小圆弧、三元数与连续场如何熔合为唯一一条无源保正三元比较闭合母公理，并在零残渣自消去中导出量子力学五大公设、无外三元数本体、两阶关系场动力学与 `0 · 1/2 · 1` 纯有理因果射流心跳。
+既然失忆眼罩与有限记忆窗口正是区分局部观察者与全知母核的枢纽，一个直指相对论与量子记忆底层的几何追问随即浮现：在无源三元数球面上，真的先验刻着异质的“时间轴”与“空间轴”吗？下一节（[§38.12](ch38-s12-spacetime-motion-equivalence-and-memory-schur-split.md#sec-ch38-spacetime-motion-equivalence-and-memory-schur-split)）我们将阐明（`MODEL`）：空间中的运动与时间中的运动在三元圆弧本体上完全等效，所谓“时间流逝”与“空间位移”不过是有限记忆窗口 $\mathcal{W}_M$ 对同一段无标签圆弧所做的正交舒尔补强行分类——窗内覆写即时间，窗外溢出即空间，正定勾股预算移项一步生出闵可夫斯基减号，从而为迈入 **[第三十九章 大一统母公理（AXIOM-Ω）](ch39-axiom-omega-grand-unification.md)** 扫清最后一道先验背景残影。
 
 ::: {.viz src="divine-psychology-dissociation-sandbox" height="620"}
 完整实验室：切换神圣心理防御与偏迹—舒尔两副透镜，拖动入戏倾角、压抑度和记忆窗口，比较冻结球、断弧残桩与同根整合之星。数学依据、数值、文献、模型与开放问题在原理抽屉中分别标明。
