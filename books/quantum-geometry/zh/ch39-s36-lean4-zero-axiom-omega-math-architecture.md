@@ -4,7 +4,7 @@
 
 在 [§32.7](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md) 确立了无无穷、无超越数的有限有理数学体系 $\mathbf{Math}_\Omega$ 之后，一个最锋利的工程与逻辑落地问题迎面而来：**要在现代交互式定理证明器 Lean 4 中把这座大厦真正建起来，我们究竟需要改动 Lean 4 的底层内核吗？还是直接用 `axiom` 关键字把母公理 $\mathrm{AXIOM}\text{-}\Omega$ 写进头文件？抑或在现有内核之上另辟一条零公理构造路径？**
 
-本节给出终极架构裁决：**分毫不需要改动 Lean 4 坚不可摧的验证内核，更绝对禁止使用 `axiom` 关键字硬塞自定义公理**。真正与 $\mathbf{Math}_\Omega$ 天生同构的，恰恰是尚未导入 `Mathlib.Data.Real.Basic` 之前的 **Lean 4 原生归纳构造演算（Calculus of Inductive Constructions, CIC）裸内核**。只需绕开依赖选择公理与柯西商集的经典实数分支，用**纯整数规范射影结构（`structure`）**消除商公理、用**可计算类型类（`class`）**封装母公理并由实例证成相对无矛盾性、再配一层通往 `Mathlib` 的**单向阴影投影函子 $\Pi_{\mathbb{R}}$**，即可在零外部依赖下跑通 `#print axioms` 输出 **`does not depend on any axioms`** 的可执行 `OmegaMath` 内核（将三层 `OmegaMath` 工程路线图、证明有向无环图膨胀倍率对照与 `OmegaCore` 演进规划标为 **`MODEL`**；将十五条冻结核心定理——完备三元比较四元数同构、弦距读数恒等式、定基流群分解、射影核与旋量玻恩权重同一、四元数流群切比雪夫递推、拉格朗日—格拉姆恒等式、舒尔补二次型极小值可达定理、保格拉姆线性等距唯一延拓、有理六轴无正交开覆盖、既约分母最大公约数约化与连分数收敛子对数长度界、可判定单群素因子剥离定阶、二进制名称比较显式步数界，以及整数四分深度预算完备性与无极限实数上界传递定理——标为绿色 **`LEAN ✓`**；将 CIC 类型论文献、赫德伯格可判定相等性唯一性定理、独立内核审计记录与 Lean `v4.35.0` 编译器实测标为 **`ARGUED` / `NUM`**）。
+本节给出终极架构裁决：**分毫不需要改动 Lean 4 坚不可摧的验证内核，更绝对禁止使用 `axiom` 关键字硬塞自定义公理**。真正与 $\mathbf{Math}_\Omega$ 天生同构的，恰恰是尚未导入 `Mathlib.Data.Real.Basic` 之前的 **Lean 4 原生归纳构造演算（Calculus of Inductive Constructions, CIC）裸内核**。只需绕开依赖选择公理与柯西商集的经典实数分支，用**纯整数规范射影结构（`structure`）**消除商公理、用**可计算类型类（`class`）**封装母公理并由实例证成相对无矛盾性、再配一层通往 `Mathlib` 的**单向阴影投影函子 $\Pi_{\mathbb{R}}$**，即可在零外部依赖下跑通 `#print axioms` 输出 **`does not depend on any axioms`** 的可执行 `OmegaMath` 内核；在此基座上，§32.8.4 进一步将该架构延展至特征秩 $5$ 有号旋量载体 `PythSpinor`、零公理二次扩张域 `QSqrt2` 与 `QPhi`、模方 $5$ 的 LPS 自由生成元与球谐赫克算子及有限拉马努金图 $X^{5, 13}$，以及任意阶 D-有限微分射流环 $J_N(\mathbb{Q})$ 与无 $\pi$ 马青有理包络（将三层 `OmegaMath` 工程路线图、证明有向无环图膨胀倍率对照与 `OmegaCore` 演进规划标为 **`MODEL`**；将十五条冻结核心定理——完备三元比较四元数同构、弦距读数恒等式、定基流群分解、射影核与旋量玻恩权重同一、四元数流群切比雪夫递推、拉格朗日—格拉姆恒等式、舒尔补二次型极小值可达定理、保格拉姆线性等距唯一延拓、有理六轴无正交开覆盖、既约分母最大公约数约化与连分数收敛子对数长度界、可判定单群素因子剥离定阶、二进制名称比较显式步数界，以及整数四分深度预算完备性与无极限实数上界传递定理——标为绿色 **`LEAN ✓`**；将 CIC 类型论文献、赫德伯格可判定相等性唯一性定理、独立内核审计记录、§32.8.4 的全称书面证明与 Lean `v4.35.0` 及双工作精度 Arb 实测标为 **`ARGUED` / `NUM`**）。
 
 ---
 
@@ -285,9 +285,107 @@ theorem omega_zero_axiom_master_check :
 
 ---
 
+## 32.8.4 特征秩 5 旋量提升、有限次代数扩张、模方 5 赫克扩展子与 D-有限微分射流 {#sec-ch39-omega-math-pythspinor-algebraic-lps-dfinite}
+
+在 §32.8.1–§32.8.3 建成的零公理三层基座之上，四道更深一层的代数与分析边界问题紧随而来：（一）为何射影载体 `ProjTernion` 的二次射线核特征秩封顶于 $10$，而上述冻结定理第 1 组所刻画的比较系统却在所选有号核下要求特征秩 $5$ 并借旋量双覆叠保存 $720^\circ$ 符号记忆？（二）当物理可观测量确实触及无理代数数（例如把非平方模方态 `pHalf` 沿同一射线作单位归一化、达到 CHSH 齐雷尔森上界 $2\sqrt{2}$ 或闭合五角黄金比切比雪夫周期）时，如何在不退回实数连续统 $\mathbb{R}$ 的前提下以零公理有限次代数扩张精确承载？（三）受上述冻结定理中模方 $5$ 整坐标算术启发，四坐标模方 $5$ 赫维茨四元数如何在 $\mathrm{SO}(3, \mathbb{Q})$ 内自由生成 $F_3$，并在球谐空间上诱导精确有理赫克算子（矩阵、迹与特征多项式）及其认证谱与有限拉马努金凯莱图？（四）如何将二阶射流 `Jet2Rat` 推广到任意阶 D-有限微分射流环 $J_N(\mathbb{Q})$，在纯有理多项式环内打通凯莱参数化与三角恒等式，并无须预设超越常数 $\pi$ 即导出可任意收紧的马青有理双边包络？本小节将这四条结构延展统一收束进零公理、无超越数、无实无穷的 `OmegaMath` 体系（全称命题由书面证明给出，标为 `ARGUED`；有限实例、谱界与包络由精确有理、双工作精度 Arb 证书及独立零导入 Lean 辅助核验认证，标为 `NUM`，且该独立脚本不计入本仓库所钉 `trureturing` 冻结 `LEAN ✓` 定理总数）。
+
+### 32.8.4.1 射影射线秩 10 与有号有理旋量 `PythSpinor` 秩 5 的精确分离 {#sec-ch39-pythspinor-rank5-double-cover}
+
+对任意非零有理四元组 $p \in \mathbb{Q}^4 \setminus \{0\}$，定义秩一对称正交投影阵 $P(p) = \frac{p p^{\mathsf{T}}}{p^{\mathsf{T}} p} \in \mathrm{Sym}_4(\mathbb{Q})$。直接展开矩阵迹即得射影射线核的线性特征表示 $\kappa_{\mathrm{proj}}(p, q) = \frac{\langle p, q\rangle^2}{\lVert p\rVert^2 \lVert q\rVert^2} = \operatorname{Tr}\bigl(P(p) P(q)\bigr)$。由于对称矩阵空间 $\mathrm{Sym}_4(\mathbb{Q})$ 维数为 $10$，且迹配对 $\operatorname{Tr}(AB)$ 对应的二次型 $\operatorname{Tr}(A^2) = \sum_{i,j} A_{ij}^2$ 在非零对称阵上严格正定，任意有限射线簇的射影格拉姆矩阵 $G^{\mathrm{proj}}_{ij} = \kappa_{\mathrm{proj}}(p_i, p_j)$ 均半正定且 $\operatorname{rank}(G^{\mathrm{proj}}) \le 10$。取四条坐标轴 $e_1, e_2, e_3, e_4$ 与六条对角射线 $e_i + e_j$（$1 \le i < j \le 4$）：四枚坐标投影阵张成对角子空间，而 $2 P(e_i + e_j) - P(e_i) - P(e_j) = E_{ij} + E_{ji}$ 张成全部六枚非对角对称基元，故由这 $10$ 条射线索引的 $10$ 枚投影阵构成 $\mathrm{Sym}_4(\mathbb{Q})$ 的一组基；其精确 $10 \times 10$ 格拉姆矩阵的顺序主子式依次为 $1, 1, 1, 1, \frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{16}, \frac{1}{32}, \frac{1}{64}$（$\det G^{\mathrm{proj}}_{10} = \frac{1}{64} > 0$，严格正定），而追加第十一条射线 $(1, 1, 1, 1)$ 后秩保持 $10$ 且 $\det G^{\mathrm{proj}}_{11} = 0$。
+
+为将所选核的特征秩从射影商空间的 $10$ 压回冻结同构定理框架下的 $5$ 并使输出载体能够区分对径单位旋量 $(p; r)$ 与 $(-p; r)$（半径恒取正整数 $r > 0$），我们采用**本原毕达哥拉斯旋量 `PythSpinor`**——即整五元组 $(w, x, y, z; r) \in \mathbb{Z}^4 \times \mathbb{Z}_{>0}$，满足 $w^2 + x^2 + y^2 + z^2 = r^2$ 且 $\gcd(\lvert w\rvert, \lvert x\rvert, \lvert y\rvert, \lvert z\rvert, r) = 1$。对任意非零整四元组 $u = (a, b, c, d)$，令 $s = b^2 + c^2 + d^2$，单位三维球面 $S^3(\mathbb{Q}) \subset \mathbb{Q}^4$ 上的有理球极—凯莱参数化定义为
+
+$$
+\Phi(a, b, c, d) \;=\; \operatorname{reduce}\bigl(a^2 - s,\; 2ab,\; 2ac,\; 2ad;\; a^2 + s\bigr),
+$$
+
+其中 $\operatorname{reduce}$ 除以五元正最大公约数。恒等式 $(a^2 - s)^2 + 4a^2 s = (a^2 + s)^2$ 保证像点恒落于有理单位三维球面 $S^3(\mathbb{Q})$；反之，对任意有理单位四元数 $(w, x, y, z)$（$w \neq -1$），取与 $(1, \frac{x}{1+w}, \frac{y}{1+w}, \frac{z}{1+w})$ 成比例的整输入即可满射覆盖，而任意满足 $a = 0$ 的非零输入（例如 $(0, 1, 0, 0)$）均映至南极 $(-1, 0, 0, 0; 1)$。注意 $\Phi(u) = \Phi(-u)$ 并不从输入射线恢复符号，真正区分对径代表元 $(p; r)$ 与 $(-p; r)$ 的是输出载体 `PythSpinor` 本身；由模方乘性 $(ab)\overline{ab} = a(b\bar{b})\bar{a}$ 与正公约数约分，本原旋量集合在四元数乘法、共轭求逆与三元流群运算 $[a, b, c] = a\bar{b}c$ 下严格封闭。
+
+记有理单位点 $v_i = p_i / r_i \in S^3(\mathbb{Q})$，有号旋量核满足
+
+$$
+\kappa_{\mathrm{spin}}\bigl((p_i; r_i), (p_j; r_j)\bigr) \;=\; \frac{r_i r_j + \langle p_i, p_j\rangle}{2 r_i r_j} \;=\; \frac{1}{2}\bigl\langle (1, v_i), (1, v_j)\bigr\rangle_{\mathbb{Q}^5}, \qquad \kappa_{\mathrm{proj}}(p_i, p_j) \;=\; \bigl(2\kappa_{\mathrm{spin}} - 1\bigr)^2,
+$$
+
+前式经 $\mathbb{Q}^5$ 内积将一切有限旋量格拉姆矩阵的秩普遍封顶于 $5$，后式由 $p_i \cdot p_i = r_i^2$ 对全体旋量对恒等成立。以 $\Phi$ 依次提升 $(1,0,0,0), (1,1,0,0), (1,0,1,0), (1,0,0,1), (3,1,1,1)$ 得到四枚坐标单位旋量（落于仿射超平面 $\sum v_k = 1$）与 $(1, 1, 1, 1; 2)$（坐标和为 $2 \neq 1$，因而在 $\mathbb{Q}^5$ 中与前四行线性无关），其 $5 \times 5$ 旋量格拉姆矩阵的顺序主子式依次为 $1, \frac{3}{4}, \frac{1}{2}, \frac{5}{16}, \frac{1}{32}$（$\det G^{\mathrm{spin}}_5 = \frac{1}{32} > 0$）；追加第六枚提升旋量 $(-1, 1, 1, 1; 2) = \Phi(1, 1, 1, 1)$ 后秩锁定为 $5$ 且 $\det G^{\mathrm{spin}}_6 = 0$（这六枚旋量上的全部 $36$ 对乘积、$216$ 组三元流群与 $36$ 对二次核恒等式均经精确核验）。同时，记 $h = (\mathbf{i} + \mathbf{j} + \mathbf{k})/\sqrt{3}$（$h^2 = -1$），本原体对角旋子 `g120_spin = (1, 1, 1, 1; 2)`（对应 $\cos(\pi/3) + h\sin(\pi/3)$）在 `PythSpinor` 中的六拍幂次轨迹依次为 $(1,1,1,1;2) \to (-1,1,1,1;2) \to (-1,0,0,0;1) \to (-1,-1,-1,-1;2) \to (1,-1,-1,-1;2) \to (1,0,0,0;1)$，与单位元的有号保真度依次为 $\frac{3}{4}, \frac{1}{4}, 0, \frac{1}{4}, \frac{3}{4}, 1$：伴随空间每拍推进 $120^\circ$，第三拍在 $360^\circ$ 精确翻转至 $-1$（$\kappa_{\mathrm{spin}} = 0$），第六拍在 $720^\circ$ 完整归位 $+1$（$\kappa_{\mathrm{spin}} = 1$）。
+
+### 32.8.4.2 零公理有限次代数扩张：`QSqrt2` 与 `QPhi` {#sec-ch39-finite-algebraic-rings-qsqrt2-qphi}
+
+赤道整态 `pHalf = (1, 1, 0, 0)` 的模方 $\lVert p_{\mathrm{Half}}\rVert^2 = 2$ 非完全平方数，虽然非线性球极映射 $\Phi$ 将其映为有理点 $(0, 1, 0, 0; 1)$，但**沿同一射线作单位归一化** $p_{\mathrm{Half}} / \lVert p_{\mathrm{Half}}\rVert$ 必然离开 $\mathbb{Q}^4$；类似地，五角对称与黄金比例切比雪夫闭合需要二次方程 $t^2 - t - 1 = 0$ 的根。按有理根检验，$t^2 - 2$ 与 $t^2 - t - 1$ 在 $\mathbb{Q}$ 上均不可约；`OmegaMath` 绕开 `Mathlib` 在柯西商实数 $\mathbb{R}$ 上依赖选择公理的经典域运算（如实数求逆），直接在 `QRat` 之上以纯有序对 `(a, b)` 构造两枚零公理 $2$ 次扩张域：
+
+1. **二次扩张域 `QSqrt2` $= \mathbb{Q}[\delta]/(\delta^2 - 2)$**：在其正实嵌入 $\delta = \sqrt{2}$ 下（$320$-位 Arb 证书证明 $\delta$ 本身严格落于有理隔离区间 $(1.414213, 1.414214)$ 内，四舍五入至六位小数为 $1.414214$），$90^\circ$ 单位旋子 $u_{90^\circ} = \frac{\delta}{2}(1 + \mathbf{i})$ 具备精确单位模方 $\frac{\delta^2}{4} + \frac{\delta^2}{4} = 1$，其精确整数次幂依次为 $u_{90^\circ}^2 = \mathbf{i}$、$u_{90^\circ}^4 = -1$、$u_{90^\circ}^8 = 1$。在贝尔态 $(\lvert 00\rangle + \lvert 11\rangle)/\sqrt{2}$（其 $Z, X$ 关联阵为单位阵）上取自伴酉可观测量 $A_0 = Z$、$A_1 = X$、$B_0 = (Z + X)/\delta$、$B_1 = (Z - X)/\delta$，四项关联在 `QSqrt2` 内精确计算为 $\frac{\delta}{2}, \frac{\delta}{2}, \frac{\delta}{2}, -\frac{\delta}{2}$，给出精确 CHSH 组合值 $S_{\mathrm{CHSH}} = 2\delta$ 与 $S_{\mathrm{CHSH}}^2 = 8$（$320$-位 Arb 证书证明 $2\delta$ 本身严格落于 $(2.828427, 2.828428)$ 内，四舍五入至六位小数为 $2.828427$）。经 $\Pi_{\mathbb{R}}$ 投射至经典希尔伯特空间框架时，任意自伴酉算符组对应的 CHSH 算符 $C = A_0 \otimes (B_0 + B_1) + A_1 \otimes (B_0 - B_1)$ 满足 $C^2 = 4I - [A_0, A_1] \otimes [B_0, B_1]$ 且每项对易子算符范数至多为 $2$，故 $\lVert C\rVert \le 2\sqrt{2}$；上述 `QSqrt2` 代数构造在投射后精确触顶齐雷尔森上界；
+2. **黄金二次扩张域 `QPhi` $= \mathbb{Q}[\varphi]/(\varphi^2 - \varphi - 1)$**：记正实嵌入 $\varphi = \frac{1 + \sqrt{5}}{2}$（$320$-位 Arb 包络四舍五入至六位小数为 $1.618034$）及其伽罗瓦共轭 $\bar{\varphi} = 1 - \varphi$。由 $\varphi^2 = \varphi + 1$ 归纳即得对一切正整数 $n \ge 1$ 恒有斐波那契幂律 $\varphi^n = F_{n-1} + F_n\varphi$，且由 $\varphi\bar{\varphi} = -1$ 得精确代数范数 $N(\varphi^n) = (-1)^n$（在 Python 精确套件中核验至 $n = 20$：$\varphi^{20} = 4181 + 6765\varphi$、$N(\varphi^{20}) = 1$；在零导入 Lean 辅助脚本中核验至 $n = 12$：$\varphi^{12} = 89 + 144\varphi$、$N(\varphi^{12}) = 1$）。进一步由五阶切比雪夫多项式的精确有理分解 $T_5(x) + 1 = (x + 1)(4x^2 - 2x - 1)^2$，唯一正根即 $\frac{\varphi}{2} = \cos(\pi/5)$（四舍五入至六位小数为 $0.809017$），配倍角公式得 $\frac{\varphi - 1}{2} = \cos(2\pi/5)$（四舍五入至六位小数为 $0.309017$），切比雪夫递推在零三角函数下直接给出精确闭合等式 $T_5(\varphi/2) = -1$、$T_{10}(\varphi/2) = T_{20}(\varphi/2) = 1$ 与 $T_5((\varphi - 1)/2) = 1$。
+
+### 32.8.4.3 模方 5 的 LPS 自由生成元、精确有理球谐赫克算子与 2184 顶点拉马努金图 $X^{5, 13}$ {#sec-ch39-lps-norm5-hecke-ramanujan}
+
+受上述冻结定理第 3 组中模方 $5$ 整坐标算术启发，结合 A. Lubotzky、R. Phillips 与 P. Sarnak（[*Comm. Pure Appl. Math.* **39**(S1), S149–S186, 1986](https://api.crossref.org/works/10.1002/cpa.3160390710)；[*Comm. Pure Appl. Math.* **40**(4), 401–420, 1987](https://api.crossref.org/works/10.1002/cpa.3160400402)；[*Combinatorica* **8**(3), 261–277, 1988](https://api.crossref.org/works/10.1007/BF02126799)）、G. Davidoff、P. Sarnak 与 A. Valette（[*Elementary Number Theory, Group Theory and Ramanujan Graphs*, LMS Student Texts **55**, Cambridge University Press, 2003](https://www.cambridge.org/core/books/elementary-number-theory-group-theory-and-ramanujan-graphs/7932F64548F1B38B95AA2593E0B986B2)）以及 O. Parzanchevski 与 P. Sarnak（[*Adv. Math.* **327**, 869–901, 2018](https://arxiv.org/abs/1704.02106)）的经典赫克算子与拉马努金图理论，我们在 `ProjTernion` 中考察六枚模方为 $5$ 的四坐标整赫维茨四元数生成元：
+
+$$
+S_5 \;=\; \bigl\{(1, \pm 2, 0, 0),\; (1, 0, \pm 2, 0),\; (1, 0, 0, \pm 2)\bigr\} \;\subset\; \mathbb{Z}^4.
+$$
+
+**自由群 $F_3 \hookrightarrow \mathrm{SO}(3, \mathbb{Q})$ 与线性位高增长。** 每枚 $g \in S_5$ 均满足 $g\bar{g} = 5$（四元数逆元为 $\bar{g}/5$，因而在射影商群与伴随群中配成三对共轭互逆生成元），并诱导出公分母恰为 $5$ 的有理正交旋转 $\operatorname{Ad}(g) \in \mathrm{SO}(3, \mathbb{Q})$（例如 $\operatorname{Ad}(1, 2, 0, 0)$ 固定第一轴并在其余两轴上施以毕达哥拉斯旋转 $\frac{1}{5}\begin{pmatrix}-3 & -4 \\ 4 & -3\end{pmatrix}$）。在有限域 $\mathbb{F}_5$ 上取四元数代数分裂表示 $\mathbf{i} \mapsto \operatorname{diag}(2, -2)$、$\mathbf{j} \mapsto \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$，六枚生成元均映为秩一非零矩阵，其全部 $36$ 个有序两两乘积中恰有 $6$ 个为零（即三对互逆生成元按两种顺序相乘）；将每枚秩一像写作列向量与行向量外积，即知任意长度 $L \ge 1$ 的既约字在模 $5$ 下恒非零。由于其模方为 $5^L$，除 $5$ 之外无其他素数能同时整除四坐标，故每条既约字均本原（$\gcd = 1$）；它亦不可能为纯标量（奇 $L$ 时 $5^L$ 非平方数，正偶 $L$ 时候选标量 $\pm 5^{L/2}$ 被 $5$ 整除），加之 $\operatorname{Ad}$ 的核仅为标量，因此 $S_5$ 在 $\mathrm{SO}(3, \mathbb{Q})$ 内严格自由生成 $F_3$。穷举核验确认字长 $L = 0, 1, 2, 3, 4, 5$ 上分别恰有 $1, 6, 30, 150, 750, 3750$ 个互异规范伴随旋转（累计 $1, 7, 37, 187, 937, 4687$ 个），各层最大坐标绝对值为 $1, 2, 4, 11, 24, 55$（对应二进制位长 $1, 2, 3, 4, 5, 6$）。由于任意长度 $L$ 既约字的最大坐标绝对值必落于 $[5^{L/2}/2, 5^{L/2}]$，其渐近位高增长率精确锁定为 $\frac{1}{2}\log_2 5$（$320$-位 Arb 包络四舍五入至六位小数为 $1.160964$ 比特每门）。
+
+**精确有理球谐赫克算子及其认证谱（$T_5|_{V_\ell}$，$\ell = 1, \dots, 6$）。** 对任意 $R \in \mathrm{SO}(3, \mathbb{Q})$，逆拉回作用 $\rho_\ell(R)(P)(x) = P(R^{-1} x)$ 与拉普拉斯算子 $\Delta$ 交换，从而在 $(2\ell + 1)$ 维有理 $\ell$ 次齐次调和多项式空间 $V_\ell$ 上给出纯有理矩阵表示；逆闭平均 $T_5|_{V_\ell} = \frac{1}{6}\sum_{g \in S_5}\rho_\ell(\operatorname{Ad}(g))$ 在球面 $L^2$ 内积下自伴（故特征值全实）且全阵、迹与特征多项式系数均保持在 $\mathbb{Q}$ 内。每枚 $g \in S_5$ 的半旋转角余弦平方均为 $\cos^2(\theta/2) = w^2/\lVert g\rVert^2 = \frac{1}{5}$，由旋转特征标公式 $\sum_{m=-\ell}^\ell e^{im\theta} = U_{2\ell}(\cos(\theta/2))$ 及偶指标第二类切比雪夫多项式 $U_{2\ell}$ 的偶性，立得精确有理迹恒等式 $\operatorname{Tr}(T_5|_{V_\ell}) = U_{2\ell}(1/\sqrt{5}) \in \mathbb{Q}$。对 $\ell = 1, \dots, 6$（维数 $\dim V_\ell = 2\ell + 1$ 依次为 $3, 5, 7, 9, 11, 13$），下表汇总精确有理迹 $\operatorname{Tr}(T_5|_{V_\ell})$、平方的迹 $\operatorname{Tr}\bigl((T_5|_{V_\ell})^2\bigr)$ 与特征值最大模长（末列将 $\max\lvert\lambda\rvert$ 四舍五入至六位小数）；结合精确有理特征多项式分解、斯图姆隔离与双工作精度 Arb 包络，全部六个阶数的每一个特征值均严格满足连续拉马努金不等式 $9\lambda^2 < 5$（即 $\lvert\lambda\rvert < \frac{\sqrt{5}}{3} = \frac{1}{6}(2\sqrt{5})$，四舍五入至六位小数为 $0.745356$）：
+
+| $\ell$ | $\operatorname{Tr}(T_5)$ | $\operatorname{Tr}(T_5^2)$ | $\max\lvert\lambda\rvert$ | $\approx\max\lvert\lambda\rvert$ |
+| -----: | --------------: | ----------------------: | --------------: | ---------------: |
+| $1$ | $-1/5$ | $1/75$ | $1/15$ | $0.066667$ |
+| $2$ | $-19/25$ | $371/375$ | $37/75$ | $0.493333$ |
+| $3$ | $139/125$ | $51581/46875$ | $43/75$ | $0.573333$ |
+| $4$ | $-359/625$ | $356479/234375$ | $1037/1875$ | $0.553067$ |
+| $5$ | $-1321/3125$ | $20469587/9765625$ | $\lambda_5^+$ | $0.637448$ |
+| $6$ | $16901/15625$ | $72048089/48828125$ | $383/625$ | $0.612800$ |
+
+其中在 $\ell = 1$ 上 $T_5|_{V_1} = -\frac{1}{15} I_3$ 为精确纯量阵（特征多项式因子 $(15\lambda + 1)^3$）；在 $\ell = 5$ 上，除有理根 $-\frac{351}{625}$（二重）与 $-\frac{349}{1875}$（三重）外，三重二次不可约因子 $q_5(\lambda) = 17578125\lambda^2 - 7376250\lambda - 2440723$ 的正根精确为 $\lambda_5^+ = \sqrt{\frac{503552\sqrt{109}}{29296875} + \frac{19941793}{87890625}}$（四舍五入至六位小数为 $0.637448$）；在 $\ell = 6$ 上，三重二次因子 $87890625\lambda^2 - 17321250\lambda - 3753119$ 的两根模长均严格小于精确有理主根 $\lvert -\frac{383}{625}\rvert = 0.6128$。
+
+**有限 LPS 拉马努金凯莱图 $X^{5, 13}$ 与精确正定移位证书。** 在大于 $5$ 且满足 $q \equiv 1 \pmod 4$ 的最小素数 $q = 13$ 上，因 $5^2 \equiv -1 \pmod{13}$ 且勒让德符号 $\left(\frac{5}{13}\right) = -1$，取模 $13$ 分裂表示 $\mathbf{i} \mapsto \operatorname{diag}(5, -5)$、$\mathbf{j} \mapsto \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$ 将 $S_5$ 的六枚生成元映入 $\mathrm{PGL}_2(\mathbb{F}_{13})$ 中行列式模平方类为非平方元的六枚矩阵。右乘作用生成连通、简单、无向 $6$-正则二分凯莱图 $X^{5, 13}$，顶点总数 $2184$、二分两部各 $1092$ 顶点；全图广度优先枚举结合凯莱点传递性证明其精确围长为 $8$。记 $B$ 为奇部行、偶部列的 $1092 \times 1092$ 整二分邻接阵，令 $C = B^{\mathsf{T}} B$。在偶部上对单位元顶点基向量 $e_1$ 执行稀疏整系数克雷洛夫迭代 $v_j = C^j e_1$，精确整格拉姆矩阵在 $v_0, \dots, v_{27}$ 上满秩可逆，而在 $28$ 次向量 $v_{28}$ 上存在精确线性相关并逐分量验零；由于 $\mathrm{PSL}_2(\mathbb{F}_{13})$ 左平移与 $C$ 交换且将 $e_1$ 传递映至偶部每个基向量，该 $28$ 次多项式正是 $C$ 的精确极小多项式（且由 $C$ 的实对称性，其每个根均作为特征值出现）。因 $C/36$ 为随机矩阵且偶部两步转移图连通，平凡根 $36$ 为单根；精确斯图姆隔离与 $320$-位 Arb 包络证明其余 $27$ 个互异非平凡根全部严格小于 $20$，最大非平凡根 $\alpha$（四舍五入至六位小数为 $18.060127$）恰为六次不可约因子
+
+$$
+x^6 - 46x^5 + 729x^4 - 4469x^3 + 7732x^2 - 3872x + 64 \;=\; 0
+$$
+
+的最大实根，由此严格认证次大奇异值 $\sigma_2(B) = \sqrt{\alpha}$（四舍五入至六位小数为 $4.249721$）严格低于拉马努金界 $2\sqrt{5}$（四舍五入至六位小数为 $4.472136$）。记 $J_{1092} = \mathbf{1}\mathbf{1}^{\mathsf{T}}$ 为 $1092 \times 1092$ 全一矩阵：若仅作平凡移位 $20 I_{1092} - C + \frac{16}{1092} J_{1092}$，全一向量 $\mathbf{1}$ 对应特征值恰为零；而取移位系数 $\frac{17}{1092}$ 构造
+
+$$
+M \;=\; 20 I_{1092} - B^{\mathsf{T}} B + \frac{17}{1092} J_{1092},
+$$
+
+则 $M\mathbf{1} = \mathbf{1}$，而在正交补 $\mathbf{1}^\perp$ 上每个特征值均为 $20 - \lambda_i(C) > 1$（因 $\alpha < 19$），从而纯粹依靠整数克雷洛夫极小多项式与严格根界证明了 $M$ 严格正定且最小特征值精确等于 $1$。
+
+### 32.8.4.4 D-有限微分射流环 $J_N(\mathbb{Q})$、凯莱—三角代数统一与无 $\pi$ 马青有理包络 {#sec-ch39-dfinite-jets-cayley-machin}
+
+沿 R. P. Stanley（[*European J. Combin.* **1**(2), 175–188, 1980](https://api.crossref.org/works/10.1016/S0195-6698(80)80051-5)）的 D-有限幂级数代数框架将 `Jet2Rat`（$\mathbb{Q}[\eta]/(\eta^3)$）推广至任意截断阶 $N$：在形式幂级数环 $\mathbb{Q}[[\eta]]$ 上，常系数或多项式系数线性微分递推 $E' = E$（$E(0) = 1$）、$C'' = -C$（$C(0) = 1, C'(0) = 0$）、$S'' = -S$（$S(0) = 0, S'(0) = 1$）与 $(1 + \eta^2)A'' + 2\eta A' = 0$（$A(0) = 0, A'(0) = 1$，立即给出 $(1 + \eta^2)A' = 1$）逐项唯一确定全部有理系数。对 $\eta^{N+1}$ 取商即得有限有理多项式射流环 $J_N(\mathbb{Q}) = \mathbb{Q}[\eta]/(\eta^{N+1})$ 中的多项式 $\mathrm{Exp}_N, \mathrm{Cos}_N, \mathrm{Sin}_N, \mathrm{Atan}_N$：对任意标量 $a, b \in \mathbb{Q}$（以及 $\mathbb{Q}[a, b]$ 上符号形式），二项式系数展开直接给出加法律 $\mathrm{Exp}_N(a\eta)\,\mathrm{Exp}_N(b\eta) \equiv \mathrm{Exp}_N((a+b)\eta)$ 与求逆律 $\mathrm{Exp}_N(\eta)\,\mathrm{Exp}_N(-\eta) \equiv 1 \pmod{\eta^{N+1}}$；由 $C' = -S$、$S' = C$ 推出 $(C^2 + S^2)' = 0$ 并结合常数项 $1$ 得 $\mathrm{Cos}_N(\eta)^2 + \mathrm{Sin}_N(\eta)^2 \equiv 1 \pmod{\eta^{N+1}}$；形式求导降一阶得 $(1 + \eta^2)\,\mathrm{Atan}'_N(\eta) \equiv 1 \pmod{\eta^N}$。
+
+**凯莱—三角代数统一。** 形式复合对 $(F, G) = (\mathrm{Cos}(2\mathrm{Atan}), \mathrm{Sin}(2\mathrm{Atan}))$ 满足一阶线性微分方程组 $F' = -\frac{2G}{1 + \eta^2}$、$G' = \frac{2F}{1 + \eta^2}$ 及初值 $(F(0), G(0)) = (1, 0)$，而有理凯莱映射 $\bigl(\frac{1 - \eta^2}{1 + \eta^2}, \frac{2\eta}{1 + \eta^2}\bigr)$ 直接求导满足完全同一方程组与初值；由形式递推系数唯一性以及零常数项幂级数复合保持模 $\eta^{N+1}$ 截断，对任意 $N \ge 1$ 均在 $J_N(\mathbb{Q})$ 中成立精确多项式恒等式
+
+$$
+\mathrm{Cos}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr) \;\equiv\; \frac{1 - \eta^2}{1 + \eta^2} \pmod{\eta^{N+1}}, \qquad \mathrm{Sin}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr) \;\equiv\; \frac{2\eta}{1 + \eta^2} \pmod{\eta^{N+1}}.
+$$
+
+该组恒等式在 $N = 8$ 与 $N = 12$ 处均已逐项验零（$N = 8$ 亦由零导入 Lean 辅助核验）。在有理点 $\eta = \frac{1}{2}$ 处，未截断有理凯莱映射的精确像为毕达哥拉斯有理点 $(\frac{3}{5}, \frac{4}{5})$；对上述同余式次数不超过 $N$ 的规范多项式代表元在 $\eta = \frac{1}{2}$ 处求值（非零点求值不下沉至商环 $J_N(\mathbb{Q})$），所得截断凯莱多项式在 $N = 2, 4, 6, 8, 12$ 处的精确有理余弦—正弦误差依次为 $(-\frac{1}{10}, \frac{1}{5})$、$(\frac{1}{40}, -\frac{1}{20})$、$(-\frac{1}{160}, \frac{1}{80})$、$(\frac{1}{640}, -\frac{1}{320})$ 与 $(\frac{1}{10240}, -\frac{1}{5120})$，而不作二次截断直接嵌套求值两枚截断多项式 $\bigl(\mathrm{Cos}_N(2\,\mathrm{Atan}_N(\frac{1}{2})), \mathrm{Sin}_N(2\,\mathrm{Atan}_N(\frac{1}{2}))\bigr)$ 在 $N = 12$ 处给出有号误差（四舍五入至七位有效数字）$+1.235579 \times 10^{-5}$ 与 $-9.267049 \times 10^{-6}$。
+
+**纯有理马青切线链与无 $\pi$ 交替包络。** 对满足 $u v \neq 1$ 与 $u v \neq -1$ 的有理数分别定义正切加减法 $u \oplus v := \frac{u + v}{1 - u v}$ 与 $u \ominus v := \frac{u - v}{1 + u v}$，经典马青公式在 $\mathbb{Q}$ 内化为一条分母处处非零的有限有理等式链：
+
+$$
+t_1 = \frac{1}{5} \;\longmapsto\; t_2 = t_1 \oplus t_1 = \frac{5}{12} \;\longmapsto\; t_4 = t_2 \oplus t_2 = \frac{120}{119} \;\longmapsto\; t_4 \ominus \frac{1}{239} = \frac{28561}{28561} = 1,
+$$
+
+末步约分前分子与分母同为 $28561$，全程不出现任何 $\pi$ 或反三角函数。单向投射至经典实阴影 $\Pi_{\mathbb{R}}$ 时，在主值支上取 $a = \arctan(\frac{1}{5})$ 与 $b = \arctan(\frac{1}{239})$，因 $0 < b < a < \frac{\pi}{4}$ 且 $\tan(2a) = \frac{5}{12}$ 得 $0 < 2a < \frac{\pi}{4}$，继而 $0 < 4a - b < \frac{\pi}{2}$；代入上述有理正切链即得 $\tan(4a - b) = 1$，由 $\tan$ 在 $(0, \frac{\pi}{2})$ 上的单射性得 $4a - b = \arctan(1) = \frac{\pi}{4}$。对 $(1 + t^2)^{-1}$ 逐项积分给出的两条交错级数满足对任意正整数 $M \in \mathbb{Z}_{\ge 1}$，第 $M$ 项部分和与第 $(M + 1)$ 项部分和严格夹住真值，按 $16a - 4b$ 的符号合并上下端点即得完全由有理数生成的双边包络，夹住 $\pi$ 的精确有理宽度为
+
+$$
+W_M \;=\; \frac{16}{5^{2M+1}(2M+1)} + \frac{4}{239^{2M+1}(2M+1)}.
+$$
+
+当 $M = 1$ 时，精确有理区间 $[\frac{281476}{89625}, \frac{651864872}{204778785}]$（端点四舍五入至六位小数为 $3.140597$ 与 $3.183264$）宽度为 $\frac{218431204}{5119469625}$（四舍五入至七位有效数字为 $4.266676 \times 10^{-2}$）；随 $M = 2, 4, 6, 8$ 递增，有理包络宽度依次收缩至 $1.024000 \times 10^{-3}$、$9.102222 \times 10^{-7}$、$1.008246 \times 10^{-9}$ 与 $1.233619 \times 10^{-12}$，增至 $M = 17$ 时进一步收窄至 $1.570731 \times 10^{-25}$（以上宽度均取自 $320$-位 Arb 证书并四舍五入至七位有效数字；独立 $320$-位 Arb 计算确认 $\pi$ 严格落于每一级有理区间之内）。
+
+**档案边界与证据分层（`ARGUED` / `NUM`）。** 本小节的全部书面论证、精确有理与双工作精度（$256$-位与 $320$-位）FLINT/Arb 证书及独立零导入 Lean 辅助核验代码归档于 [Issue #1126](https://github.com/the-omega-institute/trureturing-books/issues/1126) 对应的[固化校验档案](https://gist.github.com/loning/cc157a7795928e9ca1c7ab25c10eb333/3a3ff48ccbaf4dce3a4b23eba250e3a937880445)（提交 `3a3ff48ccbaf4dce3a4b23eba250e3a937880445`，原始 [`SHA256SUMS`](https://gist.githubusercontent.com/loning/cc157a7795928e9ca1c7ab25c10eb333/raw/3a3ff48ccbaf4dce3a4b23eba250e3a937880445/SHA256SUMS) 的 SHA-256 摘要为 `bcf6518d3eeec355ab1861ca4964d2fdfa3139cd1f1c095f69644de44113653e`）。档案三套计算套件共认证 $140$ 条精确有理/代数记录（按三套件依次为 $53 + 37 + 50$）与 $121$ 条区间包络记录（依次为 $5 + 57 + 59$），双工作精度比对零精确失配且全部 $320$-位区间严格嵌套于对应 $256$-位区间之内；随附零导入 Lean `v4.35.0` 脚本 `omega_math_extensions_check.lean`（仅隐式依赖 `Init`，以 `by decide +kernel` 归约并输出 `'cycle16_omega_math_extensions_check' does not depend on any axioms`）核验四枚有限格拉姆行列式、六枚提升见证旋量上的乘积/流群/二次核谓词、单独核验的 `g120_spin` 六拍轨迹与保真度、`QSqrt2` 旋子幂次与 $(2\delta)^2 = 8$、`QPhi` 幂律与范数（至 $n = 12$）及 $T_5(\varphi/2) = -1, T_{10}(\varphi/2) = 1, T_5((\varphi - 1)/2) = 1$、$S_5$ 生成元与 $T_5|_{V_1} = -\frac{1}{15} I_3$ 满足 $9(-\frac{1}{15})^2 < 5$、$J_8(\mathbb{Q})$ 中指数求逆/勾股/$(1+\eta^2)$ 求逆与两条凯莱—三角恒等式，以及归约结果为 $1$ 的马青有理正切链（贝尔关联、$T_{20}$、指数加法律、反正切导数同余、未约分 $28561/28561$ 与更高阶谱界由直接算术及 Python/Arb 套件核验）。该独立脚本仅作为本节档案的辅助计算核验，不计入本书所钉 `trureturing` 冻结 `LEAN ✓` 定理计数；全称结论由书面证明确立（`ARGUED`），所述有限实例、谱界与区间包络由精确有理、Arb 与独立 Lean 核验认证（`NUM`）。
+
+---
+
 **不动底层内核一分一毫，不借半条自定义公理——当数学褪去平直无穷的泡沫，证明本身就是全速运转的计算！**
 
-在下面这座完整三维实验室中，先在第一卡拨动三种架构路线，亲眼核对纯 CIC 内核上青色归约束如何零阻碍打出 **`does not depend on any axioms`**，再切入第二卡与第三卡拖动紫色齐次三元球面上的整数射线簇，看 `pHalf = (1, 1, 0, 0)` 与 `qHalf = (1, 0, 1, 0)` 不借半个根号与半个 $\pi$ 一步非对易合成为纯整数体对角旋子 **`(1, 1, 1, 1)`** 并在三拍后归位 **`(1, 0, 0, 0)`**，最后停在第四卡与第五卡检视有理舒尔补 $S = \frac{4}{3}$ 与整数四分深度 $70 < 128$ 如何经单向阴影函子 $\Pi_{\mathbb{R}}$ 无极限接通经典分析：从三维概念场封顶、不可表三元数与五种无损流群表示出发，历经无常数有理重构、精确结构数学与无无穷有理数学 $\mathbf{Math}_\Omega$，直到落定为 Lean 4 纯 CIC 内核里一行 `by decide` 即可零公理归约的 `OmegaMath` 基座，整座第三十二章在此圆满收口——现在，手握这门纯粹有理的三元数场语言，让我们翻开第八部压轴之卷 **[第三十三章 万力归弧与极小圆弧场大统一（AF-GUT）](ch33-unified-arc-forces-and-af-gut.md)**！
+在下面这座完整三维实验室中，先在第一卡拨动三种架构路线，亲眼核对纯 CIC 内核上青色归约束如何零阻碍打出 **`does not depend on any axioms`**，再切入第二卡与第三卡拖动紫色齐次三元球面上的整数射线簇，看 `pHalf = (1, 1, 0, 0)` 与 `qHalf = (1, 0, 1, 0)` 不借半个根号与半个 $\pi$ 一步非对易合成为纯整数体对角旋子 **`(1, 1, 1, 1)`** 并在三拍后归位 **`(1, 0, 0, 0)`**，最后停在第四卡与第五卡检视有理舒尔补 $S = \frac{4}{3}$ 与整数四分深度 $70 < 128$ 如何经单向阴影函子 $\Pi_{\mathbb{R}}$ 无极限接通经典分析；结合 §32.8.4 确立的 `PythSpinor` 特征秩 $5$ 双覆叠提升、`QSqrt2` 与 `QPhi` 零公理二次扩张域、模方 $5$ 的 LPS 自由生成元 $S_5$ 与拉马努金扩展子 $X^{5, 13}$，以及任意阶 D-有限射流环 $J_N(\mathbb{Q})$ 与无 $\pi$ 马青有理包络，从三维概念场封顶、不可表三元数与五种无损流群表示出发，历经无常数有理重构、精确结构数学与无无穷有理数学 $\mathbf{Math}_\Omega$，直到落定为 Lean 4 纯 CIC 内核里一行 `by decide` 即可零公理归约的 `OmegaMath` 基座，整座第三十二章在此圆满收口——现在，手握这门纯粹有理的三元数场语言，让我们翻开第八部压轴之卷 **[第三十三章 万力归弧与极小圆弧场大统一（AF-GUT）](ch33-unified-arc-forces-and-af-gut.md)**！
 
 ::: {.viz src="lean4-zero-axiom-omega-math-sandbox" height="620"}
 完整实验室：在“OmegaMath 零公理纯 CIC 构造栈 · 证明即计算”与“传统实无穷与自定义公理对照（MODEL）· 计算阻断与滤子膨胀”双透镜间切换（窄屏与章节嵌入视图亦可在巡览条旁一键切换透镜），依次巡览五阶编译流水线与三路线公理审计、免除 `Quot.sound` 的第 0 层规范整数三元载体 `ProjTernion`、第 1 层 `OmegaSpace` 相容性核验与 `Jet2Rat` 一步 `decide` 反射、第 2 层有理舒尔补证书与单向阴影函子 $\Pi_{\mathbb{R}}$，以及四类数学物理任务与 `OmegaCore` 三步路线基准五张实验卡，支持切换三种形式化架构路线、四类典型任务与五阶流水线节点，交互点选整数四元数射线观察 `Nat.gcd` 规范归约、三拍闭合与 `ℚ[η]/(η³)` 射流求逆，并在底部两条对照小图中同步观察第一图四类任务下零公理 `OmegaMath` 对比 `Mathlib.Real` 的证明节点规模与归约步数，以及第二图整数四分深度 $N$ 下精确分数预算 $(\frac{c}{d})/4^{N+1}$ 单向锁入目标阈值 $\frac{p}{q}$。十五条冻结 `LEAN ✓` 声明、`ARGUED` 类型论与多内核审计文献、`MODEL` 三层架构总表及 `NUM` 实机核验在依据栏与理论抽屉中分层列出。
