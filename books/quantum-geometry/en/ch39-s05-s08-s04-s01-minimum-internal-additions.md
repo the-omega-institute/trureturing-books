@@ -49,3 +49,33 @@ Choose an order-$r$ Latin square independently in every row. Adding its cell tri
 ::: proof
 The permutation laws give unique completion for each pair of points with different residues in a row. The internal triples never repeat a point and cover no same-residue pair. A mixed triple covers only pairs from different rows, so the new triples preserve pair uniqueness. Every internal residue sum is zero, and every uncovered same-row pair has residue difference zero. The dimension criterion then gives $d+1$. There are $r^2$ cells per row. The full proof is checked by the Lean kernel. [@thm-joint-circuit-internal-dimension]
 :::
+
+## 35.6.8.4.1.2 All extensions with the extra dimension
+
+A minimum extension already covers every pair of different residues in a row. To add more triples while retaining the extra dimension, the dimension criterion allows additions inside individual residue classes. Keep the mixed family and the independent labellings fixed. A partial Steiner triple system is a family of three-element sets in which any two distinct labels occur together at most once.
+
+::: {.theorem #thm-joint-circuit-steiner-decomposition title="The Latin squares and partial Steiner systems of an extension" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalSteinerDecomposition.forward_decomposition"}
+Suppose the added triples have three distinct points within one row and the combined family is pair-unique. If the normalized potential space has dimension $d+1$, the unordered added family consists of the cell triples of one Latin square per row and the triples of a partial Steiner system in each actual residue class of each row.
+:::
+
+::: proof
+The residue sum of every internal triple is zero, so its residues are all equal or all distinct. Every same-row pair with different residues needs a triple. The pairs in classes $0,1$ count each different-residue triple once, giving exactly $3^d r^2$. Deleting the same-residue triples retains all different-residue pairs and the extra dimension. Thus the minimum-family classification applies to the retained triples. The remaining triples inherit pair uniqueness within each residue class. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-joint-circuit-steiner-realization title="The square and packing choices are independent" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalSteinerDecomposition.realize_decomposition"}
+Any rowwise assignment of order-$r$ Latin squares and any assignment of partial Steiner systems on the $r$ labels of each residue class gives a pair-unique extension of the mixed family with normalized potential dimension $d+1$.
+:::
+
+::: proof
+Mixed triples use pairs from different rows. Latin triples use pairs of different residues in one row. The partial systems use pairs within a single residue class. These pair types are disjoint. The added same-residue triples have residue sum zero and can only remove uncovered pairs, so the condition for the extra dimension survives. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-joint-circuit-steiner-unique title="The unordered family determines all the choices" lean="D5/S3/Combinatorics/Matroids/RankThreeInternalSteinerDecomposition.decomposition_unique"}
+For the fixed labellings, the unordered extension uniquely determines the square in each row and the partial Steiner system in each row and residue class.
+:::
+
+::: proof
+The residue pattern identifies which triples come from the squares. Each remaining triple identifies its row and residue class, and the labels in that class recover the three-element set. The full proof is checked by the Lean kernel.
+:::
+
+For example, take $d=1$ and $r=3$. Each residue class contains exactly three points. Its unique triple can be added or left out, independently in each of the nine classes across the three rows. Thus the Latin squares supply $27$ triples, and any number from zero through nine can be added to them while keeping the normalized potential space two-dimensional.
