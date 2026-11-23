@@ -606,6 +606,36 @@ $$
 
 仅在 RH 下，实际零点是否满足 $D(T)\to0$ 仍是开放问题。在每个截断范围内，$D(T)$ 是对共同时刻 $v$ 取下确界得到的 $1-\sin(\gamma v)$ 加权平均。
 
+::: {.theorem #thm-ch31-sparse-zero-phase title="稀疏遗漏零点计数保证左端点取得完整首项系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.omittedMass_tendsto_zero D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.weightedPhaseDefect_le_omittedMass D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.weightedPhaseDefect_tendsto_zero D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.signed_window_even_cutoff_full_coefficient_of_sparse_count"}
+假设 RH，沿用 [@thm-ch31-weighted-phase-limsup] 的正零点纵坐标和权重。对一组纵坐标 $S$，定义遗漏计数 $B_S(T)$ 和遗漏质量 $W_{\mathrm{omit},S}(T)$，都在 $0<\gamma\le T$ 上求和。
+
+$$
+B_S(T)=\sum_{\gamma\notin S}m_\gamma,\qquad
+W_{\mathrm{omit},S}(T)=\sum_{\gamma\notin S}\frac{m_\gamma\gamma}{1/4+\gamma^2}.
+$$
+
+若 $B_S(T)=o(T\log T)$，则 $W_{\mathrm{omit},S}(T)=o(\log^2 T)$。称一个截断的保留坐标与四分之一周相位相容，如果保留坐标的每个整数关系的系数和都是 $4$ 的倍数。对每个 $W(T)>0$ 的相容截断，
+
+$$
+0\le D(T)\le \min\!\left(1,\frac{2W_{\mathrm{omit},S}(T)}{W(T)}\right).
+$$
+
+若充分大的截断都相容，且 $W_{\mathrm{omit},S}(T)=o(\log^2 T)$，则 $D(T)\to0$。取 $m\ge2$、$m+1=2r$。若 $\mu(r)=0$，或 $S$ 在 $\mathbb Q$ 上线性无关且 $B_S(T)=o(T\log T)$，则该判据中的左端点误差绝对值对充分小的固定 $L>0$ 在 $u$ 的尾部有界，且
+
+$$
+\frac{Q_m^{\mathrm{left}}(L)}{L\log^2(1/L)}\longrightarrow\frac{|\mu(r)|}{4\pi s_m}
+\qquad (L\downarrow0).
+$$
+:::
+
+::: proof
+每个零点的单位重数权重至多为 $1/\gamma$。对二进壳 $2^k<\gamma\le 2^{k+1}$，遗漏质量至多为 $2^{-k} B_S(2^{k+1})$。给定 $\varepsilon>0$，充分晚的壳上 $B_S(2^{k+1})\le\varepsilon\,2^{k+1}\log(2^{k+1})$。求和并除以 $\log^2 T$ 后，晚期壳的贡献至多为常数乘 $\varepsilon$，固定初段的贡献趋零。
+
+相容性使共同时间轨道可以任意接近所有保留相位都等于 $\pi/2$ 的相位。每个遗漏坐标的正弦至少为 $-1$，故最多损失其权重的两倍。正弦和在时间零点取值零，上确界又至多为 $W(T)$，所以 $D(T)$ 介于零和一之间。有理线性无关时只有零关系，因而每个截断都相容。由 $W(T)/\log^2 T\to1/(4\pi)$，遗漏质量占比趋于零，再应用加权相位判据。当 $\mu(r)=0$ 时，该判据直接给出系数零。
+:::
+
+实际 ζ 零点是否存在满足该遗漏计数条件的有理线性无关集，仍是开放问题。
+
 ::: {.theorem #thm-ch31-relation-phase-deficit title="整数关系给出的加权相位亏损下界" lean="D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit_disjoint"}
 设有限指标集 $J$ 上有实频率 $\gamma_j$ 与正权重 $w_j$，令 $W=\sum_{j\in J}w_j$。当 $W>0$ 时，以 [@thm-ch31-weighted-phase-limsup] 的方式定义有限正弦和的亏损 $D$。设 $A$ 是一族有限的整数关系，每行满足 $\sum_{j\in J}k_{aj}\gamma_j=0$。记 $\delta_a=|1-i^{\sum_{j\in J}k_{aj}}|$。取非负乘子 $\lambda_a$。若 $\sum_{j\in J}(\sum_{a\in A}\lambda_a|k_{aj}|)^2/w_j>0$，则 $J$ 非空，因而 $W>0$，并有
 
@@ -669,6 +699,80 @@ $$
 :::
 
 假设 RH。对 [@thm-ch31-weighted-phase-limsup] 的实际零点截断，以解析重数权重计算 $E(T)$，并使用满足定理假设的完整关系矩阵。两个常数与截断无关，所以 $D(T)\to0$ 等价于 $E(T)/W(T)\to0$。实际 ζ 零点的这一归一化格点距离是否趋零仍开放。
+
+::: {.theorem #thm-ch31-short-relation-deletion title="短整数关系控制实现相位相容所需的舍弃权重" lean="D5/S3/Fourier/ShortPhaseRelations.weighted_deletion_bounds"}
+取有限实频率 $\gamma_j$ 和非负权重 $w_j$，总权重 $W>0$。若一个子集上的所有整数关系都满足系数和被 $4$ 整除，则称该子集相容。令 $P$ 为使剩余子集相容所须舍弃的最小权重占比。对时间集合 $\mathcal T$，令
+
+$$
+D_{\mathcal T}=1-\sup_{v\in\mathcal T}\frac{\sum_j w_j\sin(\gamma_jv)}{W}.
+$$
+
+若 $\mathcal T$ 非空、$H>0$，且每个不相容子集都含有 $\ell^1$ 系数范数至多为 $H$ 的不相容关系，则 $P/H^2\le D_{\mathcal T}$。若 $\mathcal T$ 含有一条向上延伸的实数射线，则 $D_{\mathcal T}\le2P$。
+:::
+
+::: proof
+固定一个共同时间。若关系 $\sum_j k_j\gamma_j=0$ 的系数和不被 $4$ 整除，则该关系的单位圆特征值在实际相位处为 $1$，在目标相位处为 $i^{\sum_j k_j}$。两者弦距的平方至少为 $2$。有限乘积的弦距至多为各坐标弦距按 $|k_j|$ 加权的和，而每个坐标弦距的平方为 $2(1-\sin(\gamma_jv))$。因此所有损失严格小于 $1/H^2$ 的坐标所构成的子集必相容。其补集的权重至少为 $PW$，每个被舍弃坐标的损失至少为 $1/H^2$。对共同时间取下确界得到下界。
+
+对最小舍弃权重所对应的相容子集，轨道闭包包含所有保留相位均为 $\pi/2$ 的点。含上方射线的时间集合可以任意逼近该点。每个舍弃坐标最多贡献其权重的两倍损失，给出上界。
+:::
+
+::: {.theorem #thm-ch31-consecutive-phase-separation title="相邻整数频率给出平方倒数尺度" lean="D5/S3/Fourier/ShortPhaseRelations.consecutive_pair_separation"}
+取任意自然数 $n$、等正权重和频率 $(n,n+1)$。此时 $P=1/2$。每个不相容子集都含有系数 $\ell^1$ 范数至多为 $H=2n+1$ 的不相容关系。对任意非空 $\mathcal T$，有 $1/(H^2+1)\le D_{\mathcal T}$。若 $\mathcal T$ 含有一条向上延伸的实数射线，则
+
+$$
+D_{\mathcal T}\le1-\cos\!\left(\frac{\pi}{2H}\right)\le\frac{\pi^2}{8H^2}.
+$$
+
+在后一情形下，$n=0$ 时恰有 $D_{\mathcal T}=1/2$。
+:::
+
+::: proof
+当 $n>0$ 时，关系 $(n+1,-n)$ 的系数和为 $1$，两个单坐标子集都相容。当 $n=0$ 时，零频率自身构成长度为 $1$ 的不相容关系，保留频率 $1$ 即可。两种情形下都恰须舍弃一个坐标。将关系 $(n+1,-n)$ 代入 [@thm-ch31-relation-phase-deficit] 的单行下界，等权重约去，得到分母 $H^2+1=2((n+1)^2+n^2)$。
+
+在时间 $\pi/H$，两个相位为 $\pi/2\pm\pi/(2H)$。加上 $2\pi$ 的整数倍可把该时间移到任意上方射线而保留正弦值。$n=0$ 时，只有频率 $1$ 的正弦项能取非零值，并且在每条上方射线上都能达到 $1$，所以归一化分数的上确界为 $1/2$。
+:::
+
+对每个固定的有限系统，只有有限个子集，因此可为所有不相容子集选取见证并统一其系数范数的上界。实际 ζ 零点的问题是能否控制这个上界随截断增长的速率。
+
+::: {.theorem #thm-ch31-aggregate-phase-obstructions title="合并不同系数长度的相位障碍" lean="D5/S3/Fourier/PhaseObstructionLengths.omissionFraction_isLeast D5/S3/Fourier/PhaseObstructionLengths.simultaneous_bound D5/S3/Fourier/PhaseObstructionLengths.aggregate_bounds"}
+对一组有限实频率，记 $P_h$ 为最小的舍弃权重占比，使保留的坐标中每条 $\ell^1$ 范数至多为 $h$ 的整数关系，其系数和都能被 $4$ 整除。这里 $h$ 取非负整数。这个最小值由某个子集取得。以下相位估计取非负权重，总权重为 $W$。用 $A(v)$ 表示在共同时间 $v$ 的加权正弦平均，归一化的分母为 $W$。当 $W=0$ 时约定平均与舍弃占比均为零。对时间集合 $\mathcal T$，令 $D_{\mathcal T}=1-\sup_{v\in\mathcal T}A(v)$，并取 $D_{\varnothing}=1$。
+
+令
+
+$$
+S_N=\sum_{h=1}^{N}\left(\frac1{h^2}-\frac1{(h+1)^2}\right)P_h.
+$$
+
+对任意共同时间 $v$ 和自然数 $N$，有 $S_N+P_{N+1}/(N+1)^2\le1-A(v)$。令 $L=\lim_{N\to\infty}S_N$，则极限存在，且
+
+$$
+\sup_{h\ge1}\frac{P_h}{h^2}\le L\le D_{\mathcal T},
+\qquad
+\frac{P_{N+1}}{(N+1)^2}\le L-S_N\le\frac1{(N+1)^2}.
+$$
+:::
+
+::: proof
+固定共同时间 $v$。每个长度不超过 $h$ 的不相容关系都迫使其支撑中至少有一个坐标的损失 $1-\sin(\gamma_jv)$ 达到 $h^{-2}$。因此，损失至少为 $h^{-2}$ 的坐标所占权重至少为 $P_h$。对每个坐标，把不超过其实际损失的阈值所对应的增量相加。这些增量望远镜相消，连同最后一个阈值的剩余项，总和至多为该坐标的损失。再对所有坐标按权重求和，即得同一时间上的不等式。
+
+各项非负，部分和有界，故极限存在。$P_h$ 随 $h$ 非减且不超过 $1$。从第 $N+1$ 项开始，增量之和为 $(N+1)^{-2}$，用两端的常数界估计这一尾和，即得余项界与单一长度的下界。
+:::
+
+::: {.theorem #thm-ch31-aggregate-phase-example title="三频例子中合并长度严格加强下界" lean="D5/S3/Fourier/PhaseObstructionLengths.strict_three_frequency_example"}
+取频率 $(0,1,2)$，权重 $(1/2,1/4,1/4)$。则 $P_1=P_2=1/2$，且 $P_h=3/4$ 对所有 $h\ge3$ 成立。单一长度给出的最强下界是 $1/2$，而 $L=19/36$。对 $N\ge2$，
+
+$$
+S_N=\frac{19}{36}-\frac{3}{4(N+1)^2}.
+$$
+
+第五个部分和 $S_5=73/144$ 是第一个严格超过 $1/2$ 的部分和。
+:::
+
+::: proof
+长度一的零频率关系迫使舍弃该坐标，损失权重 $1/2$。其余两个频率 $1,2$ 的关系都是 $(2,-1)$ 的整数倍。到长度三时至少还需舍弃一个坐标，增加 $1/4$。代入这个分段常数序列并相消，即得各个部分和与极限。
+:::
+
+应用到实际 ζ 零点的截断时，仍须确定哪些整数关系成立以及它们的支撑。
 
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="固定窗宽的对数平均恢复算术系数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 假设 RH 成立。存在共同的 $U_0>0$，使每个整数 $m\ge2$、$q=m+1=2r$ 都有一个适用于所有对数窗宽 $L>0$ 的常数 $C>0$。对任意 $U\ge U_0$ 与 $T>0$，函数

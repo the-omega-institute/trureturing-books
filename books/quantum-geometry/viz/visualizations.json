@@ -9242,6 +9242,232 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "exact-vs-approximate-mathematics-sandbox",
+      "code": "OMEGA//EXACT",
+      "title": "精确结构数学对比平直近似沙盘：纯整数三拍闭合、有理转子守球与素数刚性",
+      "title_en": "Exact Structural Mathematics vs. Flat Approximation: Three-Beat Integer Closure, Rational Rotors & Prime Rigidity",
+      "summary": "在同一座三维三元数真球舞台上对照两本账：χ(S³) = 0、霍普夫环绕数与四面体上边缘的整数锁对比内接正 N 边形的弦长亏损；(1, 1, 1) 纯整数三拍归零对比四位小数的闭合缺口；处处稠密、点点精确的有理球点星座；BigInt 精确的交替有理转子守球对比平直切向和脱轨；素数阿代尔权重微扰与耦合反事实凯莱像失锁（MODEL）。",
+      "summary_en": "Contrasts two ledgers on one 3D ternion-sphere stage: integer locks (χ(S³) = 0, Hopf linking, tetrahedral coboundary) against the chord shortfall of an inscribed N-gon; the pure-integer three-beat return of (1, 1, 1) against the closure gap of four decimals; the dense, pointwise exact rational constellation; exact BigInt alternating rational rotors on the sphere against the derailing flat tangent sum; and a nudged adelic prime weight with the coupled counterfactual Cayley images unlocking (MODEL).",
+      "path": "exact-vs-approximate-mathematics-sandbox/",
+      "thumbnail": "exact-vs-approximate-mathematics-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-23",
+      "chapter": 39,
+      "section": "39.11",
+      "presets": [
+        "structural-topological-exactness-vs-flat-decimal",
+        "pure-integer-111-three-beat-closure",
+        "dense-rational-cayley-sphere-constellation",
+        "complete-ternary-star-vs-flat-addition-derailment",
+        "prime-topological-adelic-rigidity-alarm"
+      ],
+      "preset_titles": {
+        "structural-topological-exactness-vs-flat-decimal": {
+          "zh": "整数锁得住，弦拉不直",
+          "en": "Integers lock, chords fall short"
+        },
+        "pure-integer-111-three-beat-closure": {
+          "zh": "(1, 1, 1)：纯整数三拍归零",
+          "en": "(1, 1, 1): three integer beats to 0"
+        },
+        "dense-rational-cayley-sphere-constellation": {
+          "zh": "有理球点：处处稠密，点点精确",
+          "en": "Rational points: dense and exact"
+        },
+        "complete-ternary-star-vs-flat-addition-derailment": {
+          "zh": "完整关系守球，平直相加脱轨",
+          "en": "Full relation stays, flat sum derails"
+        },
+        "prime-topological-adelic-rigidity-alarm": {
+          "zh": "素数一动就报警（MODEL）",
+          "en": "Nudge a prime: alarm (MODEL)"
+        }
+      },
+      "tags": [
+        "精确结构",
+        "有理球点",
+        "纯整数三拍",
+        "平直截断",
+        "素数刚性"
+      ],
+      "tags_en": [
+        "Exact structure",
+        "Rational sphere points",
+        "Integer three-beat closure",
+        "Flat truncation",
+        "Prime rigidity"
+      ],
+      "theory": [
+        {
+          "label": "§39.11 · 精确结构数学对比平直度量近似",
+          "label_en": "§39.11 · Exact Structural Mathematics vs. Flat Metric Approximation",
+          "href": "../zh/ch39-s34-exact-structural-mathematics-vs-flat-approximation.html#sec-ch39-exact-structural-mathematics-vs-flat-approximation",
+          "href_en": "../en/ch39-s34-exact-structural-mathematics-vs-flat-approximation.html#sec-ch39-exact-structural-mathematics-vs-flat-approximation"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_hopf"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S3/Arith/AbsoluteValues/OstrowskiClassification.rational_absolute_value_classification"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula"
+        },
+        {
+          "gid": "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product"
+        },
+        {
+          "gid": "D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S3/Weil/TestFunctions/FinitePowerSumToeplitzCircleCriterion.toeplitz_posSemidef_iff_norm_eq_one"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "infinity-free-rational-mathematics-sandbox",
+      "code": "OMEGA//FINITE",
+      "title": "无无穷·无超越数的有限有理数学沙盘：射影闭环、凯莱旋转与零极限射流",
+      "title_en": "Infinity-Free & Transcendental-Free Rational Mathematics: Projective Closure, Cayley Rotations & Limit-Free Jets",
+      "summary": "在同一座三维三元数真球舞台上，只用整数分数把五件事算到底：射影对 [P : Q] 滑过 [1 : 0] 而没有一个分母变成零，对照两端裂开的平直直线；视界 M 内有限的球面格点、有限终止的连分数与按需逃逸的新素数；BigInt 精确的凯莱旋转以分母 3 的 N 次方守在球面上，对照二阶泰勒截断脱轨；由 3/5 敲出的切比雪夫有理谐波对照显式欧拉步；ℚ[η]/(η³) 里不取极限的二阶射流对照有限差商割线，并附粗链对消与粗四面体 δF = 0。",
+      "summary_en": "Computes five things to the end in fractions of whole numbers on one 3D ternion-sphere stage: the projective pair [P : Q] slides across [1 : 0] with no denominator becoming zero, against a flat line that tears at both ends; finitely many lattice points within the horizon M, terminating continued fractions and primes escaping on demand; exact BigInt Cayley rotations that keep the sphere with denominator 3 to the N, against a derailing second-order Taylor truncation; a rational Chebyshev harmonic struck from 3/5, against explicit Euler steps; and limit-free second-order jets in ℚ[η]/(η³) against finite-difference secants, with the telescoping of a coarse chain and δF = 0 on a coarse tetrahedron.",
+      "path": "infinity-free-rational-mathematics-sandbox/",
+      "thumbnail": "infinity-free-rational-mathematics-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-23",
+      "chapter": 39,
+      "section": "39.12",
+      "presets": [
+        "homogeneous-projective-antipodal-closure",
+        "lazy-prime-escape-and-decidable-horizon",
+        "rational-cayley-rotor-vs-taylor-series",
+        "chebyshev-rational-harmonic-oscillator",
+        "limit-free-jet-ring-and-telescoping-stokes"
+      ],
+      "preset_titles": {
+        "homogeneous-projective-antipodal-closure": {
+          "zh": "没有 ∞：[1 : 0] 只是圆上的一点",
+          "en": "No ∞: [1 : 0] is a point of the circle"
+        },
+        "lazy-prime-escape-and-decidable-horizon": {
+          "zh": "有限视界，素数按需逃逸",
+          "en": "A finite horizon, primes on demand"
+        },
+        "rational-cayley-rotor-vs-taylor-series": {
+          "zh": "凯莱旋转守球，泰勒截断脱轨",
+          "en": "Cayley keeps the sphere, Taylor leaves"
+        },
+        "chebyshev-rational-harmonic-oscillator": {
+          "zh": "由 3/5 敲出的有理谐波",
+          "en": "A rational harmonic struck from 3/5"
+        },
+        "limit-free-jet-ring-and-telescoping-stokes": {
+          "zh": "不取极限的导数与粗剖分对消",
+          "en": "Derivatives without limits, coarse Stokes"
+        }
+      },
+      "tags": [
+        "有限有理数学",
+        "射影闭合",
+        "凯莱旋转",
+        "切比雪夫谐波",
+        "幂零射流"
+      ],
+      "tags_en": [
+        "Finite rational mathematics",
+        "Projective closure",
+        "Cayley rotation",
+        "Chebyshev harmonic",
+        "Nilpotent jets"
+      ],
+      "theory": [
+        {
+          "label": "§39.12 · 无无穷·无超越数的有限有理数学",
+          "label_en": "§39.12 · Infinity-Free and Transcendental-Free Finite Rational Mathematics",
+          "href": "../zh/ch39-s35-infinity-free-transcendental-free-rational-mathematics.html#sec-ch39-infinity-free-transcendental-free-rational-mathematics",
+          "href_en": "../en/ch39-s35-infinity-free-transcendental-free-rational-mathematics.html#sec-ch39-infinity-free-transcendental-free-rational-mathematics"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/ExponentialTail.exp_remainder_le"
+        },
+        {
+          "gid": "D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover"
+        },
+        {
+          "gid": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den"
+        },
+        {
+          "gid": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log"
+        },
+        {
+          "gid": "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape"
+        },
+        {
+          "gid": "D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStripping.stripFactors_correct"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula"
+        },
+        {
+          "gid": "D5/S3/Constants/Irrationality/LogNaturalIrrationality.irrational_log_natCast"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S0/Computability/BinaryNameComparison.name_compare_run"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }

@@ -606,6 +606,36 @@ Set $h=L/2$. Subtracting $\mu(r)(S_r(u+h)-S_r(u))$ from the signed midpoint erro
 
 The remaining question under RH alone is whether the actual zeros satisfy $D(T)\to0$. At each cutoff, $D(T)$ is the smallest weighted mean of $1-\sin(\gamma v)$ attainable to arbitrary accuracy with one common time $v$.
 
+::: {.theorem #thm-ch31-sparse-zero-phase title="Sparse omissions give the full left-endpoint coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.omittedMass_tendsto_zero D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.weightedPhaseDefect_le_omittedMass D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.weightedPhaseDefect_tendsto_zero D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHSparseZeroPhaseAlignment.signed_window_even_cutoff_full_coefficient_of_sparse_count"}
+Assume RH and use the positive zero ordinates and weights of [@thm-ch31-weighted-phase-limsup]. For a set $S$ of ordinates, define the omitted count $B_S(T)$ and mass $W_{\mathrm{omit},S}(T)$ by summing over $0<\gamma\le T$.
+
+$$
+B_S(T)=\sum_{\gamma\notin S}m_\gamma,\qquad
+W_{\mathrm{omit},S}(T)=\sum_{\gamma\notin S}\frac{m_\gamma\gamma}{1/4+\gamma^2}.
+$$
+
+If $B_S(T)=o(T\log T)$, then $W_{\mathrm{omit},S}(T)=o(\log^2 T)$. The retained coordinates at a cutoff are compatible with the quarter phase when the coefficient sum of every integer relation among them is divisible by $4$. Every compatible cutoff with $W(T)>0$ satisfies
+
+$$
+0\le D(T)\le \min\!\left(1,\frac{2W_{\mathrm{omit},S}(T)}{W(T)}\right).
+$$
+
+If every sufficiently large cutoff is compatible and $W_{\mathrm{omit},S}(T)=o(\log^2 T)$, then $D(T)\to0$. Take $m\ge2$ with $m+1=2r$. Suppose $\mu(r)=0$ or that $S$ is linearly independent over $\mathbb Q$ and $B_S(T)=o(T\log T)$. Then the absolute left-endpoint error in the weighted phase criterion is bounded on a late $u$-tail for each sufficiently small fixed $L>0$, and
+
+$$
+\frac{Q_m^{\mathrm{left}}(L)}{L\log^2(1/L)}\longrightarrow\frac{|\mu(r)|}{4\pi s_m}
+\qquad (L\downarrow0).
+$$
+:::
+
+::: proof
+The weight per occurrence of a zero is at most $1/\gamma$. In a dyadic shell $2^k<\gamma\le 2^{k+1}$, the omitted mass is at most $2^{-k}B_S(2^{k+1})$. For any $\varepsilon>0$, all sufficiently late shells satisfy $B_S(2^{k+1})\le\varepsilon\,2^{k+1}\log(2^{k+1})$. After summation and division by $\log^2 T$, the late shells contribute at most a constant times $\varepsilon$. The fixed initial segment contributes a quantity tending to zero.
+
+Compatibility lets the common-time orbit approach the phase with every retained angle equal to $\pi/2$. Every omitted coordinate has sine at least $-1$, so it can cost at most twice its weight. The sine sum is zero at time zero and never exceeds $W(T)$, giving $0\le D(T)\le1$. Rational linear independence leaves only the zero relation and hence gives compatibility at every cutoff. Since $W(T)/\log^2 T\to1/(4\pi)$, the fraction of omitted mass tends to zero and the weighted phase criterion gives the coefficient. If $\mu(r)=0$, the same criterion gives a zero coefficient directly.
+:::
+
+Whether the actual zeta zeros contain a rationally independent set satisfying the omitted-count condition remains open.
+
 ::: {.theorem #thm-ch31-relation-phase-deficit title="Integer relations bound the weighted phase deficit from below" lean="D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit D5/S3/Fourier/WeightedIntegerRelations.weighted_phase_deficit_disjoint"}
 Take a finite set $J$ of real frequencies $\gamma_j$ with positive weights $w_j$. Put $W=\sum_{j\in J}w_j$. When $W>0$, define the deficit $D$ for this finite sine sum as in [@thm-ch31-weighted-phase-limsup]. Let $A$ index a finite family of integer relations, with $\sum_{j\in J}k_{aj}\gamma_j=0$ for each row. Write $\delta_a=|1-i^{\sum_{j\in J}k_{aj}}|$. For nonnegative multipliers $\lambda_a$, if $\sum_{j\in J}(\sum_{a\in A}\lambda_a|k_{aj}|)^2/w_j>0$, then $J$ is nonempty and $W>0$. In this case,
 
@@ -669,6 +699,80 @@ The orbit closure is compact, so a phase of minimum cost exists. If $D=0$, the p
 :::
 
 Assume RH. For the actual zero cutoffs in [@thm-ch31-weighted-phase-limsup], compute $E(T)$ with the analytic multiplicity weights and a full relation matrix satisfying the theorem's hypotheses. The two constants are uniform across cutoffs, so $D(T)\to0$ is equivalent to $E(T)/W(T)\to0$. Whether this normalized lattice distance tends to zero for the actual zeta zeros remains open.
+
+::: {.theorem #thm-ch31-short-relation-deletion title="Short integer relations control the weight omitted for phase compatibility" lean="D5/S3/Fourier/ShortPhaseRelations.weighted_deletion_bounds"}
+Take finitely many real frequencies $\gamma_j$ with nonnegative weights $w_j$ of total weight $W>0$. A subset is compatible if the coefficient sum of every integer relation among its frequencies is divisible by $4$. Let $P$ be the least fraction of total weight that must be omitted to leave a compatible subset. For a set of times $\mathcal T$, put
+
+$$
+D_{\mathcal T}=1-\sup_{v\in\mathcal T}\frac{\sum_j w_j\sin(\gamma_jv)}{W}.
+$$
+
+Suppose $\mathcal T$ is nonempty, $H>0$, and every incompatible subset contains an incompatible integer relation with coefficient $\ell^1$ norm at most $H$. Then $P/H^2\le D_{\mathcal T}$. If $\mathcal T$ contains an upper ray, then $D_{\mathcal T}\le2P$.
+:::
+
+::: proof
+Fix a common time. If a relation $\sum_j k_j\gamma_j=0$ has coefficient sum nonzero modulo $4$, its unit-circle character is $1$ at the actual phases and $i^{\sum_j k_j}$ at the quarter phase. The squared chord distance between these values is at least $2$. A finite product changes by at most the sum of the coordinate chord distances weighted by $|k_j|$, and each squared coordinate distance equals $2(1-\sin(\gamma_jv))$. Thus the coordinates of loss strictly below $1/H^2$ form a compatible subset. Its complement weighs at least $PW$, and every omitted coordinate has loss at least $1/H^2$. Taking the infimum over common times gives the lower bound.
+
+On a compatible subset of minimum omitted weight, the orbit closure contains the point with retained phases all equal to $\pi/2$. A time set containing an upper ray allows arbitrarily close approaches to that point. Each omitted coordinate costs at most twice its weight, giving the upper bound.
+:::
+
+::: {.theorem #thm-ch31-consecutive-phase-separation title="Consecutive integer frequencies give the inverse-square scale" lean="D5/S3/Fourier/ShortPhaseRelations.consecutive_pair_separation"}
+For any natural $n$, take frequencies $(n,n+1)$ with equal positive weights. Then $P=1/2$, and every incompatible subset contains an incompatible relation of coefficient $\ell^1$ norm at most $H=2n+1$. Every nonempty $\mathcal T$ satisfies $1/(H^2+1)\le D_{\mathcal T}$. If $\mathcal T$ contains an upper ray, then
+
+$$
+D_{\mathcal T}\le1-\cos\!\left(\frac{\pi}{2H}\right)\le\frac{\pi^2}{8H^2}.
+$$
+
+In the upper-ray case, $n=0$ gives $D_{\mathcal T}=1/2$ exactly.
+:::
+
+::: proof
+For $n>0$, the relation $(n+1,-n)$ has coefficient sum $1$, and both singletons are compatible. For $n=0$, the zero frequency has an incompatible length-one relation and frequency $1$ can be retained. In both cases one coordinate must be omitted and one suffices. In the single-row bound of [@thm-ch31-relation-phase-deficit], the relation $(n+1,-n)$ gives the denominator $H^2+1=2((n+1)^2+n^2)$ after the equal weights cancel.
+
+At time $\pi/H$, the two angles are $\pi/2\pm\pi/(2H)$. Adding integer multiples of $2\pi$ puts this time in any upper ray while preserving both sine values. For $n=0$, the frequency-one term is the only nonzero sine term, and it reaches $1$ on every upper ray. The normalized score therefore has supremum $1/2$.
+:::
+
+For each fixed finite system there are finitely many subsets, so one can choose a witness per incompatible subset and bound their coefficient norms jointly. For the actual zeta ordinates, the open question is how this bound grows with the cutoff.
+
+::: {.theorem #thm-ch31-aggregate-phase-obstructions title="Combining phase obstructions across coefficient lengths" lean="D5/S3/Fourier/PhaseObstructionLengths.omissionFraction_isLeast D5/S3/Fourier/PhaseObstructionLengths.simultaneous_bound D5/S3/Fourier/PhaseObstructionLengths.aggregate_bounds"}
+For finitely many real frequencies, let $P_h$ be the minimum fraction of weight omitted so that every integer relation on the retained coordinates with coefficient $\ell^1$ norm at most $h$ has coefficient sum divisible by $4$. Here $h$ is a nonnegative integer. A retained subset attains this minimum. For the phase estimates take nonnegative weights with total weight $W$. Write $A(v)$ for the weighted sine average at a common time $v$, with denominator $W$. When $W=0$, both the average and the omitted fraction are zero by convention. For a set of times $\mathcal T$, put $D_{\mathcal T}=1-\sup_{v\in\mathcal T}A(v)$, with $D_{\varnothing}=1$.
+
+Write
+
+$$
+S_N=\sum_{h=1}^{N}\left(\frac1{h^2}-\frac1{(h+1)^2}\right)P_h.
+$$
+
+For every common time $v$ and natural $N$, one has $S_N+P_{N+1}/(N+1)^2\le1-A(v)$. The limit $L=\lim_{N\to\infty}S_N$ exists and satisfies
+
+$$
+\sup_{h\ge1}\frac{P_h}{h^2}\le L\le D_{\mathcal T},
+\qquad
+\frac{P_{N+1}}{(N+1)^2}\le L-S_N\le\frac1{(N+1)^2}.
+$$
+:::
+
+::: proof
+Fix a common time $v$. Each incompatible relation of length at most $h$ forces some coordinate in its support to have loss $1-\sin(\gamma_jv)$ of at least $h^{-2}$. Thus the coordinates with loss at least $h^{-2}$ carry a fraction of weight at least $P_h$. For each coordinate, sum the increments for the thresholds at or below its loss. These increments telescope, and their sum with the final threshold term is at most the coordinate's loss. Summing over coordinates with their weights gives the estimate at the same time.
+
+The terms are nonnegative and the partial sums are bounded, so the limit exists. The fractions $P_h$ are nondecreasing and bounded above by $1$. The increments starting at $N+1$ sum to $(N+1)^{-2}$. Bounding that tail with the endpoint fractions gives the remainder estimates and the comparison with every single length.
+:::
+
+::: {.theorem #thm-ch31-aggregate-phase-example title="Combining lengths gives a strictly stronger bound for three frequencies" lean="D5/S3/Fourier/PhaseObstructionLengths.strict_three_frequency_example"}
+Take frequencies $(0,1,2)$ and weights $(1/2,1/4,1/4)$. Then $P_1=P_2=1/2$ and $P_h=3/4$ for every $h\ge3$. The strongest single-length bound is $1/2$, while $L=19/36$. For $N\ge2$,
+
+$$
+S_N=\frac{19}{36}-\frac{3}{4(N+1)^2}.
+$$
+
+The fifth partial sum $S_5=73/144$ is the first to exceed $1/2$.
+:::
+
+::: proof
+The length-one relation at frequency zero forces omission of that coordinate with weight $1/2$. Every relation on the remaining frequencies $1,2$ is an integer multiple of $(2,-1)$. At length three, one of the two remaining coordinates must also be omitted, adding $1/4$. Substitute these fractions and telescope to obtain the partial sums and the limit.
+:::
+
+Applying the estimate to actual zeta cutoffs still requires information about which integer relations hold and their supports.
 
 ::: {.theorem #thm-ch31-prime-window-even-cesaro title="Fixed-width logarithmic averages recover the arithmetic coefficient" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEvenCutoff.signed_window_even_cutoff_cesaro"}
 Assume RH. There is a common $U_0>0$ such that for every integer $m\ge2$ with $q=m+1=2r$ there is a constant $C>0$ that works for every logarithmic width $L>0$. For all $U\ge U_0$ and $T>0$ the function
