@@ -2,9 +2,9 @@
 
 The evidence labels follow the [dictionary note](appendix-a-s01-master-dictionary.md#rem-appendix-a-master-dictionary).
 
-**Measurement / Physical Quantity**<br/>(测量 / 物理量)
+**Measurement / Physical Quantity**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Verb `liáng` (to measure) vs. Noun `liàng` (reading)**: pairwise ruler comparison operator vs. truncated scalar readout
 
 **Lean-Facing Object / Locked GID:**
@@ -16,9 +16,9 @@ $\rho \succeq 0,\ \operatorname{Tr}\rho = 1 \implies \operatorname{bornProbabili
 **Epistemic Status:**
 `LEAN ✓` (Ch 1–2)
 
-**Pure Quantum State $|\psi\rangle$**<br/>(量子纯态)
+**Pure Quantum State $|\psi\rangle$**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Oriented unit ray on the sphere** uniquely addressed by pairwise cosine projections
 
 **Lean-Facing Object / Locked GID:**
@@ -30,9 +30,9 @@ $\operatorname{Tr}M = 1,\ M^2 = M \implies x^2 + y^2 + z^2 = 1$ ($M$ a $2\times 
 **Epistemic Status:**
 `LEAN ✓` (Ch 1–3, Forge and Sanctuary · Single-Qubit Rotor Compilation)
 
-**Observable & Projector $P$**<br/>(可观测量与投影算符)
+**Observable & Projector $P$**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Geometric ruler & idempotent orthogonal projection axis** ($P^2 = P = P^\dagger$)
 
 **Lean-Facing Object / Locked GID:**
@@ -44,9 +44,9 @@ $\mathcal{P}(\mathcal{P}(\rho)) = \mathcal{P}(\rho),\quad P_\psi^2 = P_\psi$
 **Epistemic Status:**
 `LEAN ✓` (Ch 1, 3, Forge and Sanctuary · Inside the Lean 4 Axiom Sanctuary (Part I))
 
-**Born Probability Rule $P = |\langle\phi|\psi\rangle|^2$**<br/>(玻恩概率法则)
+**Born Probability Rule $P = |\langle\phi|\psi\rangle|^2$**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Squared inner-product projection & rank-one trace pairing** (Pythagorean area share along the ruler axis)
 
 **Lean-Facing Object / Locked GID:**
@@ -58,9 +58,9 @@ $\rho = \lvert\psi\rangle\langle\psi\rvert,\ P_k = \lvert\phi\rangle\langle\phi\
 **Epistemic Status:**
 `LEAN ✓` (Ch 2, Forge and Sanctuary · Inside the Lean 4 Axiom Sanctuary (Part II))
 
-**Orthogonal Decomposition**<br/>(正交态分解与完备性)
+**Orthogonal Decomposition**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Inner-product parallelogram & Pythagorean theorem**: 1D orthogonal segments cannot add, 2D squared areas conserve norm
 
 **Lean-Facing Object / Locked GID:**
@@ -72,9 +72,9 @@ $\|u + v\|^2 + \|u - v\|^2 = 2(\|u\|^2 + \|v\|^2)$
 **Epistemic Status:**
 `LEAN ✓` (parallelogram identity only) (Ch 1, Forge and Sanctuary · Inside the Lean 4 Axiom Sanctuary (Part I), Coda)
 
-**Global Phase $e^{i\alpha}|\psi\rangle$**<br/>(全局相位与射线等价)
+**Global Phase $e^{i\alpha}|\psi\rangle$**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Gauge spin around the state's own axis** (unitary phase rigidity under connected ray tests)
 
 **Lean-Facing Object / Locked GID:**
@@ -86,9 +86,9 @@ $A$ unitary, preserving coordinate rays and a connected ray family $\implies A =
 **Epistemic Status:**
 `LEAN ✓` (Ch 1, Forge and Sanctuary · Inside the Lean 4 Axiom Sanctuary (Part I))
 
-**Density Matrix $\rho$ & Mixed State**<br/>(密度矩阵与混合态)
+**Density Matrix $\rho$ & Mixed State**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Interior barycenter vector $\mathbf{r} \in B^3$ of the Bloch ball** (purity deficit measures discarded phase area)
 
 **Lean-Facing Object / Locked GID:**
@@ -100,9 +100,9 @@ $\|\mathbf{r}\| \le \operatorname{Tr}(\rho),\quad \operatorname{Tr}(\rho(\mathbf
 **Epistemic Status:**
 `LEAN ✓` (Ch 3, Forge and Sanctuary · Single-Qubit Rotor Compilation)
 
-**Decoherence & Quantum Channel $\Phi(\rho)$**<br/>(退相干与量子信道)
+**Decoherence & Quantum Channel $\Phi(\rho)$**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Orthogonal pinching projection onto the measurement axis**: transverse circular coherence collapses onto the longitudinal diameter
 
 **Lean-Facing Object / Locked GID:**
@@ -114,9 +114,9 @@ $\|\rho\|_{\mathrm{HS}}^2 = \|\mathcal{P}(\rho)\|_{\mathrm{HS}}^2 + \|\rho - \ma
 **Epistemic Status:**
 `LEAN ✓` (Ch 4, 6)
 
-**No-Cloning Theorem**<br/>(量子不可克隆原理)
+**No-Cloning Theorem**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Unitary inner-product rigidity**: an inner-product-preserving map cannot duplicate neither-orthogonal-nor-collinear rays
 
 **Lean-Facing Object / Locked GID:**
@@ -128,9 +128,9 @@ $s = s^2 \implies s = 0 \lor s = 1$
 **Epistemic Status:**
 `LEAN ✓` (Ch 14)
 
-**Operator Commutator $[A, B] = AB - BA$**<br/>(算符对易子)
+**Operator Commutator $[A, B] = AB - BA$**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Clifford exterior bivector area $2(\mathbf{a}\wedge\mathbf{b})$** measuring the oriented rotation plane spanned by order reversal
 
 **Lean-Facing Object / Locked GID:**
@@ -142,9 +142,9 @@ $\begin{aligned}&\mathbf{u}\wedge\mathbf{v}=-\mathbf{v}\wedge\mathbf{u},\\&A=A^\
 **Epistemic Status:**
 `LEAN ✓` (balanced mixed product) / `Literature` (commutator identity, Ch 5–6)
 
-**Imaginary Unit $i$ & Pauli Matrices $\sigma_x, \sigma_y, \sigma_z$**<br/>(虚数单位与泡利矩阵)
+**Imaginary Unit $i$ & Pauli Matrices $\sigma_x, \sigma_y, \sigma_z$**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **3D orthonormal basis vectors $e_1, e_2, e_3$ & skew-adjoint unitary complex structure $\hat{\mathbf{I}}^2 = -1$**
 
 **Lean-Facing Object / Locked GID:**
@@ -156,9 +156,9 @@ $\hat{\mathbf{I}}^2 = -1,\quad ZX = -XZ$
 **Epistemic Status:**
 `LEAN ✓` (Ch 5, Forge and Sanctuary · Reducing Matrices to XOR)
 
-**Single-Qubit Unitary Gate $U \in \mathrm{SU}(2)$**<br/>(单比特幺正门)
+**Single-Qubit Unitary Gate $U \in \mathrm{SU}(2)$**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Bivector exponential rotor $R = \cos(\theta/2) - \hat{B}\sin(\theta/2)$** in a calibrated unitary evolution group
 
 **Lean-Facing Object / Locked GID:**
@@ -170,9 +170,9 @@ $U(0) = 1,\ U(s+t) = U(s)U(t),\ U^*U = 1,\ U$ differentiable at $0 \implies U(t)
 **Epistemic Status:**
 `LEAN ✓` (Ch 7, Forge and Sanctuary · Single-Qubit Rotor Compilation)
 
-**Two-Qubit Entanglement & Concurrence**<br/>(双比特纠缠与并发度)
+**Two-Qubit Entanglement & Concurrence**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Exterior wedge area in $\mathbb{C}^4$ & maximally mixed marginal blind spot of Bell states**
 
 **Lean-Facing Object / Locked GID:**
@@ -184,9 +184,9 @@ Bell state: $\rho_A = \frac{1}{2}I_2,\ \rho_A^2 \neq \rho_A$; the concurrence cr
 **Epistemic Status:**
 `LEAN ✓` (Bell-state marginal) / `Literature` (concurrence criterion) (Ch 8, 13)
 
-**Quantum State Tomography**<br/>(量子态层析)
+**Quantum State Tomography**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Three-axis orthogonal addressing & rational six-axis open cover**
 
 **Lean-Facing Object / Locked GID:**
@@ -198,9 +198,9 @@ six open sets $C_1, \dots, C_6$ cover $S^2$, and no $C_i$ contains an orthogonal
 **Epistemic Status:**
 `LEAN ✓` (rational six-axis open cover) (Ch 9)
 
-**Order Dependence vs. Pancharatnam–Berry Phase**<br/>(顺序依赖与贝里相位)
+**Order Dependence vs. Pancharatnam–Berry Phase**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **"Pairwise comparison is always consistent and order-independent"**: unit-vector overlap equals $1$ iff vectors coincide (`LEAN ✓`; general ray equality up to phase $e^{i\theta}$) vs. spherical solid angle $\Omega/2$ (`Literature`)
 
 **Lean-Facing Object / Locked GID:**
@@ -212,9 +212,9 @@ $\|u\|=\|v\|=1 \implies (\langle u,v\rangle = 1 \iff u = v);\; \gamma_{\mathrm{B
 **Epistemic Status:**
 `LEAN ✓` / `Literature` (Ch 10)
 
-**Microwave Rabi Pulse & Virtual-$Z$ Gate**<br/>(微波脉冲与虚拟 $Z$ 门)
+**Microwave Rabi Pulse & Virtual-$Z$ Gate**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Ordered three-pulse real trace bound & observer pullback trace identity in the rotating frame**
 
 **Lean-Facing Object / Locked GID:**
@@ -226,9 +226,9 @@ $\begin{aligned}&R_z(\phi)R_{\text{xy}}(\theta,0)\\&\quad\cdot R_z(-\phi)\\&=R_{
 **Epistemic Status:**
 `LEAN ✓` (three-pulse trace bound) / `Literature` (virtual-$Z$ identity, Ch 11)
 
-**Spinor $4\pi$ Periodicity & Gimbal Lock**<br/>(旋量 $4\pi$ 周期与万向节死锁)
+**Spinor $4\pi$ Periodicity & Gimbal Lock**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **$S^3 \to \mathrm{SO}(3)$ double cover & Hairy Ball $\chi(S^2) = 2$**: 2-sphere vortices require lifting to parallelizable $S^3$ ($\chi(S^3)=0$)
 
 **Lean-Facing Object / Locked GID:**
@@ -240,9 +240,9 @@ $R(2\pi) = -1 \in S^3,\quad R(4\pi) = +1$ (what is formalized is the squaring co
 **Epistemic Status:**
 `LEAN ✓` (circle double cover) / `Literature` ($S^3 \to \mathrm{SO}(3)$ double cover, Hairy Ball theorem and gimbal lock) (Ch 5, 10)
 
-**Bell–CHSH Inequality & Tsirelson Bound**<br/>(贝尔不等式与齐雷尔森界)
+**Bell–CHSH Inequality & Tsirelson Bound**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Classical $\ell_1$ octahedron polytope ($\le 2$) vs. quantum $\ell_2$ Pythagorean sphere ($2\sqrt{2}$)**
 
 **Lean-Facing Object / Locked GID:**
@@ -254,9 +254,9 @@ $\begin{aligned}\mathcal S_{\text{classical}}&\le2,\\\mathcal S_{\text{quantum}}
 **Epistemic Status:**
 `LEAN ✓` (Ch 13)
 
-**Stabilizer Codes & Clifford Braiding**<br/>(稳定子码与克利福德编织)
+**Stabilizer Codes & Clifford Braiding**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Pauli word multiplication over $\mathbb{F}_2^{2n}$ & Yang–Baxter self-distributive rack braiding**
 
 **Lean-Facing Object / Locked GID:**
@@ -268,9 +268,9 @@ $P_1 P_2 = P_2 P_1 \iff x_1 z_2 \oplus z_1 x_2 = 0$
 **Epistemic Status:**
 `LEAN ✓` (Ch 14, Forge and Sanctuary · Reducing Matrices to XOR)
 
-**Grover / QFT / QSVT / Szegedy Walk**<br/>(量子搜索、傅里叶与奇异值变换)
+**Grover / QFT / QSVT / Szegedy Walk**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Uniform operator rotation in a 2D plane, finite Poisson summation & Chebyshev spectral polynomials**
 
 **Lean-Facing Object / Locked GID:**
@@ -282,9 +282,9 @@ $R_{\psi}\,R_{\perp} = \operatorname{Rot}(2\theta),\quad T_n(\cos\theta) = \cos(
 **Epistemic Status:**
 `LEAN ✓` (uniform operator rotation in a 2D subspace, finite Poisson summation) / `Literature` (Chebyshev identity, QSVT and Szegedy walks) (Ch 15–16)
 
-**Solovay–Kitaev Compilation Theorem**<br/>(Solovay–Kitaev 门编译)
+**Solovay–Kitaev Compilation Theorem**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Two-axis finite rotation words, norm-one trace recurrence & group-commutator helix $ABA^{-1}B^{-1}$**
 
 **Lean-Facing Object / Locked GID:**
@@ -296,9 +296,9 @@ $\operatorname{Tr}(U^{n+1}) = \operatorname{Tr}(U)\operatorname{Tr}(U^n) - \oper
 **Epistemic Status:**
 `LEAN ✓` / `Literature` (Ch 16)
 
-**Lorentz Boost & Bogoliubov Transform**<br/>(洛伦兹助推与博戈留波夫变换)
+**Lorentz Boost & Bogoliubov Transform**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Minkowski hyperbolic rotor ($\cosh\eta - \gamma_0\gamma_1\sinh\eta$) & null lightcone rigidity**
 
 **Lean-Facing Object / Locked GID:**
@@ -310,9 +310,9 @@ $\cosh^2\eta-\sinh^2\eta=1$; for a real quadratic form $Q$ on $\mathbb{R}\times\
 **Epistemic Status:**
 `LEAN ✓` (Ch 17)
 
-**Dirac Spinor & Abelian Gauge Connection**<br/>(狄拉克旋量与规范联络)
+**Dirac Spinor & Abelian Gauge Connection**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Chiral Weyl Zitterbewegung coupling & spanning-tree chord holonomy classification**
 
 **Lean-Facing Object / Locked GID:**
@@ -324,9 +324,9 @@ $A(E) / \mathcal{G}_R \cong (U(1))^{|E \setminus T|} \times (U(1))^{|R| - 1}$
 **Epistemic Status:**
 `LEAN ✓` (Ch 18)
 
-**Holographic Entanglement & MERA Networks**<br/>(全息纠缠熵与张量网络)
+**Holographic Entanglement & MERA Networks**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Discrete bridge-graph quantum max-flow min-cut theorem & polyhedral capacity cones**
 
 **Lean-Facing Object / Locked GID:**
@@ -338,9 +338,9 @@ For $\begin{aligned}&a,b,c,d\in\mathbb N,\\&0<a\le b,\ 0<c\le d,\\&a^2+b^2\le3ab
 **Epistemic Status:**
 `LEAN ✓` / `Literature` (Ch 19)
 
-**Circuit Complexity, CV & ER=EPR**<br/>(电路复杂度、复杂度=体积与 ER=EPR)
+**Circuit Complexity, CV & ER=EPR**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Segmented integrable circuit min-depth $\lfloor N/(\kappa+1)\rfloor + 1$, CNOT parity lower bound & wormhole volume conjecture**
 
 **Lean-Facing Object / Locked GID:**
@@ -352,9 +352,9 @@ For $\begin{aligned}&N,\kappa\in\mathbb N,\\&1\le\kappa,\ 2\kappa\le N:\\&\opera
 **Epistemic Status:**
 `LEAN ✓` / `OPEN` (Ch 20)
 
-**Cantor Diagonal, Halting & Gödel Incompleteness**<br/>(康托尔对角线、停机与不完备性)
+**Cantor Diagonal, Halting & Gödel Incompleteness**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Complete semantic diagonal topological escape: nonempty separation deficit, discontinuity & strict topology refinement**
 
 **Lean-Facing Object / Locked GID:**
@@ -366,9 +366,9 @@ $\operatorname{separationDeficit} \neq \emptyset,\quad \tau_0 \subsetneq \tau_{\
 **Epistemic Status:**
 `LEAN ✓` (Ch 21)
 
-**Riemann $\zeta(s)$, Euler Product & Critical Line**<br/>(黎曼 $\zeta$、欧拉乘积与临界线)
+**Riemann $\zeta(s)$, Euler Product & Critical Line**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Infinite-dimensional prime orthogonal lattice $\bigoplus_p \mathbb{Z}\mathbf{e}_p$, Dirichlet-to-Euler product identity & symmetry axis $\sigma = 1/2$**
 
 **Lean-Facing Object / Locked GID:**
@@ -380,9 +380,9 @@ $\sum_{n=1}^\infty n^{-s} = \prod_p (1 - p^{-s})^{-1}\quad (\operatorname{Re}(s)
 **Epistemic Status:**
 `LEAN ✓` / `OPEN` (Ch 22)
 
-**Hilbert's 10th over $\mathbb{Q}$ & Quaternion Norms**<br/>(有理数希尔伯特第十问题与四元数范数)
+**Hilbert's 10th over $\mathbb{Q}$ & Quaternion Norms**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Eisenstein crossing quadratic norm forms $Q_t$, golden-integer Pell identity & quaternion norm multiplicativity**
 
 **Lean-Facing Object / Locked GID:**
@@ -394,9 +394,9 @@ $(2a+b)^2 - 5b^2 = 4(a^2 + ab - b^2)$
 **Epistemic Status:**
 `LEAN ✓` / `Literature` / `OPEN` ($H_{10}(\mathbb{Q})$) (Ch 23)
 
-**Fixed-Point Theorems & Self-Reference $\psi = \psi(\psi)$**<br/>(不动点定理与自指映射)
+**Fixed-Point Theorems & Self-Reference $\psi = \psi(\psi)$**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Finite monotone contraction stabilization, golden ratio $\varphi$, Dottie root $\cos\theta^* = \theta^*$, and context bifurcation**
 
 **Lean-Facing Object / Locked GID:**
@@ -408,9 +408,9 @@ $\exists N \le |S_0|,\; \forall n \ge N,\; S_n = S_N$
 **Epistemic Status:**
 `LEAN ✓` / `Literature` / `OPEN` (Ch 24)
 
-**3D Clifford Geometric Algebra $\mathcal{Cl}_{3,0}(\mathbb{R})$**<br/>(三维克利福德几何代数)
+**3D Clifford Geometric Algebra $\mathcal{Cl}_{3,0}(\mathbb{R})$**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **8D blade engine `Cl3` driven by 3-bit mask XOR, inversion signs, and single-qubit Weyl star algebra**
 
 **Lean-Facing Object / Locked GID:**
@@ -422,9 +422,9 @@ $ZX = -XZ,\quad e_a e_b = (-1)^{\operatorname{inv}(a,b)} e_{a \oplus b}$
 **Epistemic Status:**
 `LEAN ✓` (Weyl star algebra and Bloch expansion) / `Literature`, reference computation (XOR blade engine, Forge and Sanctuary · Reducing Matrices to XOR, App B)
 
-**ZYZ Euler Decomposition & Rotor Cascade**<br/>(ZYZ 欧拉分解与旋量级联)
+**ZYZ Euler Decomposition & Rotor Cascade**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Three-factor single-qubit rotor $R_z(\alpha)R_y(\beta)R_z(\gamma)$ & two-axis finite rotation word synthesis**
 
 **Lean-Facing Object / Locked GID:**
@@ -436,9 +436,9 @@ $R_z(\alpha)R_y(0)R_z(\gamma) = R_z(\alpha + \gamma)$
 **Epistemic Status:**
 `LEAN ✓` (two-axis finite rotation words) / `Literature`, reference computation (ZYZ identities and compilation, Ch 9, 16, Forge and Sanctuary · Single-Qubit Rotor Compilation, App B)
 
-**Lüders State Update & Finite-Record Obstruction**<br/>(吕德斯态更新与有限记录阻碍)
+**Lüders State Update & Finite-Record Obstruction**
 
-**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric Intuition Term:**
 **Valid quantum state preservation under record conditioning & unread-state fixed-point criterion**
 
 **Lean-Facing Object / Locked GID:**
