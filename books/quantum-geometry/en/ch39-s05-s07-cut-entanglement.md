@@ -50,6 +50,25 @@ At each site, record whether the two bits agree, go from zero to one, or go from
 For the ban on triples, every three consecutive symbols must contain both orientations. Let $A,B,C,D$ count patterns whose last two symbols are the same orientation, opposite orientations, an orientation followed by agreement, or agreement followed by an orientation, respectively. Appending one symbol sends these counts to $(B,A+B+D,B,C)$. At length two each count is two, and the pair of agreement symbols has no legal extension. At lengths three, four, and five the totals are $12,24,44$. Apply the update four times to see that the fourth vector is the sum of the first three updated vectors. Summing its coordinates gives the recurrence. The full proof is checked by the Lean kernel.
 :::
 
+::: {.theorem #thm-ch39-fib-triple-kernel-word-count lean="D5/S3/Quantum/Entanglement/Marginals/TripleDeletionCountComparison.triple_kernel_exact" title="Under the ban on triples, the kernel dimension is less than twice the word count"}
+On an open chain of length $n\ge3$ with no three consecutive ones, let $a_n$ count the allowed words. Let $d_n$ be the complex dimension of the supported matrices with zero partial trace over each site. Write $T_j$ for the Tribonacci sequence starting with $0,1,1$. Then
+
+$$
+a_n=T_{n+2},\qquad
+d_n=4(T_n+T_{n-1})<2a_n.
+$$
+
+Equivalently, $d_n=4(a_{n-2}+a_{n-3})$.
+:::
+
+::: {.proof}
+Split the allowed words according to their initial block $0$, $10$, or $110$. Removing the block leaves an arbitrary allowed word of the shorter length. This gives the three-term recurrence. At lengths zero, one, and two the word counts are $1,2,4$, so $a_n=T_{n+2}$. The quantity $4(T_n+T_{n-1})$ takes the initial values $12,24,44$ at lengths three, four, and five. It satisfies the same recurrence as the dimensions in [@thm-ch39-fib-forbidden-triple-dimension], so the two sequences agree at every length $n\ge3$.
+
+Since $T_{n+1}=T_n+T_{n-1}+T_{n-2}$ and $T_{n-2}>0$, the sum $T_n+T_{n-1}$ is less than $T_{n+1}$. Substituting $a_n=T_{n+1}+T_n+T_{n-1}$ yields the strict inequality. The full proof is checked by the Lean kernel.
+:::
+
+The gap is exactly $2T_{n-2}$, which is positive for $n\ge 3$. At length two all four words are legal because there is no three-site window. Either site can carry any of the three pattern symbols, giving kernel dimension $3^2=9$, already greater than twice the legal word count.
+
 ::: {.theorem #thm-ch39-fib-forbidden-window-growth lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionGrowth.kernelDimension_lower" title="Growth of the deletion kernel for windows of length four or more"}
 On an open chain of length $n=k+2$, forbid $K\ge4$ consecutive ones. Let $d_{n,K}$ be the complex dimension of the supported matrices with zero partial trace over each site. Then
 
