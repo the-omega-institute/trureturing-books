@@ -700,6 +700,40 @@ The orbit closure is compact, so a phase of minimum cost exists. If $D=0$, the p
 
 Assume RH. For the actual zero cutoffs in [@thm-ch31-weighted-phase-limsup], compute $E(T)$ with the analytic multiplicity weights and a full relation matrix satisfying the theorem's hypotheses. The two constants are uniform across cutoffs, so $D(T)\to0$ is equivalent to $E(T)/W(T)\to0$. Whether this normalized lattice distance tends to zero for the actual zeta zeros remains open.
 
+::: {.theorem #thm-ch31-short-relation-deletion title="Short integer relations control the weight omitted for phase compatibility" lean="D5/S3/Fourier/ShortPhaseRelations.weighted_deletion_bounds"}
+Take finitely many real frequencies $\gamma_j$ with nonnegative weights $w_j$ of total weight $W>0$. A subset is compatible if the coefficient sum of every integer relation among its frequencies is divisible by $4$. Let $P$ be the least fraction of total weight that must be omitted to leave a compatible subset. For a set of times $\mathcal T$, put
+
+$$
+D_{\mathcal T}=1-\sup_{v\in\mathcal T}\frac{\sum_j w_j\sin(\gamma_jv)}{W}.
+$$
+
+Suppose $\mathcal T$ is nonempty, $H>0$, and every incompatible subset contains an incompatible integer relation with coefficient $\ell^1$ norm at most $H$. Then $P/H^2\le D_{\mathcal T}$. If $\mathcal T$ contains an upper ray, then $D_{\mathcal T}\le2P$.
+:::
+
+::: proof
+Fix a common time. If a relation $\sum_j k_j\gamma_j=0$ has coefficient sum nonzero modulo $4$, its unit-circle character is $1$ at the actual phases and $i^{\sum_j k_j}$ at the quarter phase. The squared chord distance between these values is at least $2$. A finite product changes by at most the sum of the coordinate chord distances weighted by $|k_j|$, and each squared coordinate distance equals $2(1-\sin(\gamma_jv))$. Thus the coordinates of loss strictly below $1/H^2$ form a compatible subset. Its complement weighs at least $PW$, and every omitted coordinate has loss at least $1/H^2$. Taking the infimum over common times gives the lower bound.
+
+On a compatible subset of minimum omitted weight, the orbit closure contains the point with retained phases all equal to $\pi/2$. A time set containing an upper ray allows arbitrarily close approaches to that point. Each omitted coordinate costs at most twice its weight, giving the upper bound.
+:::
+
+::: {.theorem #thm-ch31-consecutive-phase-separation title="Consecutive integer frequencies give the inverse-square scale" lean="D5/S3/Fourier/ShortPhaseRelations.consecutive_pair_separation"}
+For any natural $n$, take frequencies $(n,n+1)$ with equal positive weights. Then $P=1/2$, and every incompatible subset contains an incompatible relation of coefficient $\ell^1$ norm at most $H=2n+1$. Every nonempty $\mathcal T$ satisfies $1/(H^2+1)\le D_{\mathcal T}$. If $\mathcal T$ contains an upper ray, then
+
+$$
+D_{\mathcal T}\le1-\cos\!\left(\frac{\pi}{2H}\right)\le\frac{\pi^2}{8H^2}.
+$$
+
+In the upper-ray case, $n=0$ gives $D_{\mathcal T}=1/2$ exactly.
+:::
+
+::: proof
+For $n>0$, the relation $(n+1,-n)$ has coefficient sum $1$, and both singletons are compatible. For $n=0$, the zero frequency has an incompatible length-one relation and frequency $1$ can be retained. In both cases one coordinate must be omitted and one suffices. In the single-row bound of [@thm-ch31-relation-phase-deficit], the relation $(n+1,-n)$ gives the denominator $H^2+1=2((n+1)^2+n^2)$ after the equal weights cancel.
+
+At time $\pi/H$, the two angles are $\pi/2\pm\pi/(2H)$. Adding integer multiples of $2\pi$ puts this time in any upper ray while preserving both sine values. For $n=0$, the frequency-one term is the only nonzero sine term, and it reaches $1$ on every upper ray. The normalized score therefore has supremum $1/2$.
+:::
+
+For each fixed finite system there are finitely many subsets, so one can choose a witness per incompatible subset and bound their coefficient norms jointly. For the actual zeta ordinates, the open question is how this bound grows with the cutoff.
+
 ::: {.theorem #thm-ch31-aggregate-phase-obstructions title="Combining phase obstructions across coefficient lengths" lean="D5/S3/Fourier/PhaseObstructionLengths.omissionFraction_isLeast D5/S3/Fourier/PhaseObstructionLengths.simultaneous_bound D5/S3/Fourier/PhaseObstructionLengths.aggregate_bounds"}
 For finitely many real frequencies, let $P_h$ be the minimum fraction of weight omitted so that every integer relation on the retained coordinates with coefficient $\ell^1$ norm at most $h$ has coefficient sum divisible by $4$. Here $h$ is a nonnegative integer. A retained subset attains this minimum. For the phase estimates take nonnegative weights with total weight $W$. Write $A(v)$ for the weighted sine average at a common time $v$, with denominator $W$. When $W=0$, both the average and the omitted fraction are zero by convention. For a set of times $\mathcal T$, put $D_{\mathcal T}=1-\sup_{v\in\mathcal T}A(v)$, with $D_{\varnothing}=1$.
 
