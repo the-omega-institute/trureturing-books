@@ -24,6 +24,25 @@ Repeated exchanges can sort the transformed supports by inclusion. If a site occ
 The same threshold construction works for real occupancy probabilities. Suppose $\mu_i\in[0,1]$ and $\mu_i+\mu_{i+1}\le1$. Draw one uniform $U$ on $(0,1)$. Occupy an odd-numbered site if $U<\mu_i$ and an even-numbered site if $U>1-\mu_i$. Adjacent sites have disjoint intervals, so every sampled word is legal. Each site is occupied with probability $\mu_i$, the length of its interval. Sites of the same parity have nested intervals and joint occupancy $\min(\mu_i,\mu_j)$. Sites of opposite parity have intersection length $\max(0,\mu_i+\mu_j-1)$. This one sampling rule attains all these pairwise extremes simultaneously. [Shared realization at real marginals](lean:D5/S1/Words/AdmissibleWords/FIBThresholdPairExtrema.threshold_pair_extrema)
 :::
 
+::: {.theorem #thm-ch39-fib-oriented-difference lean="D5/S1/Words/AdmissibleWords/FIBPathPairBounds.sharp_hard_core_difference" title="The sharp endpoint difference from a fixed site"}
+Number sites from zero and let $X_k$ indicate occupancy in a word with no adjacent ones. Put $Y_k=X_k$ at even sites and $Y_k=1-X_k$ at odd sites, and write $q_k=\Pr(Y_k=1)$. Prescribe site occupancies in $[0,1]$ with adjacent sums at most one. For any fixed site $i$, the sharp bound at each $j\ge i$ is
+
+$$
+\Pr(Y_i=1,\ Y_j=0)\ \le\
+\min\!\left(q_i,\ 1-q_j,\ \sum_{k=i}^{j-1}(q_k-q_{k+1})_+\right).
+$$
+
+One law on legal words attains all these bounds from $i$ at once. [Finite-word construction](lean:D5/S1/Words/AdmissibleWords/FIBPathPairBounds.word_attainment)
+:::
+
+::: {.proof}
+Represent any law on the finite set of legal words by partitioning $[0,1)$ into intervals of the corresponding word probabilities. Let $A_k$ be the event $Y_k=1$. Each neighboring pair of events is nested because neighboring occupied sites are disjoint. Hence $\Pr(A_k\setminus A_{k+1})=(q_k-q_{k+1})_+$. Every sample in $A_i\setminus A_j$ exits the events somewhere between $i$ and $j$. The union bound gives the sum in the displayed formula, and the two endpoint probabilities give the other bounds.
+
+For attainment, divide the unit interval at $q_i$. At site $j$, take initial intervals in the two parts with lengths $u_j$ and $q_j-u_j$. For $j\ge i$, set $u_j=\max(0,q_i+q_j-1,q_i-\sum_{k=i}^{j-1}(q_k-q_{k+1})_+)$. Before $i$, use $u_j=\min(q_i,q_j)$. Both lengths increase when $q_j$ increases and decrease when it decreases, in the weak sense. Thus the resulting $A_j$ nest in the required direction at every adjacent pair. At site $i$ the first interval has length $q_i$ and the second is empty, so $\Pr(A_i\setminus A_j)=q_i-u_j$.
+:::
+
+The fixed starting site matters. With five sites of occupancies $(1/2,0,1/2,0,1/2)$, taking equality for all three pairs of even sites would make three half-mass events pairwise disjoint up to null sets, exceeding the available unit mass.
+
 In the `trureturing` direct-encoder model, fix integers $N \ge 2$ and $K \ge 2$, and partition $\{0, 1, \dots, N\}$ by primality into the nonprime logical page ($b = \mathrm{false}$, dimension $M_0 > 0$) and the prime logical page ($b = \mathrm{true}$, dimension $M_1 > 0$). Let $C_{m, b}$ denote the set of length-$m$ admissible $1^K$-free words with first bit $b$, of cardinality $c_{m, b} = |C_{m, b}|$; for each threshold $0 \le s < K$, define the cumulative low-tail left row count and compatible right neighborhood count on page $1$ by
 
 $$
