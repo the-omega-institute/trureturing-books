@@ -155,7 +155,6 @@
         - [A variance lower bound for near-collisions](ch34-s28-s03-s02-collision-variance.md)
         - [Weighted near-collisions under small perturbations](ch34-s28-s03-s02-spectral-perturbations.md)
         - [One spectral perturbation for many tests](ch34-s28-s03-s02-common-spectral-perturbations.md)
-        - [Common spectral perturbations on intervals](ch34-s28-s03-s02-continuous-spectral-perturbations.md)
         - [Spectral perturbations that preserve counting](ch34-s28-s03-s02-spectral-count-perturbations.md)
         - [Frequent full phase alignment with a logarithmic square tail](ch34-s28-s03-s02-commensurate-spectrum.md)
         - [Two-term counting and full phase alignment](ch34-s28-s03-s02-two-term-count-alignment.md)
