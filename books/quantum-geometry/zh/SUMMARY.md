@@ -157,7 +157,6 @@
         - [小扰动下的加权近碰撞](ch34-s28-s03-s02-spectral-perturbations.md)
         - [多组检验共用一次频谱扰动](ch34-s28-s03-s02-common-spectral-perturbations.md)
         - [保持计数律的频谱扰动](ch34-s28-s03-s02-spectral-count-perturbations.md)
-        - [扰动尺度倒数的加权和](ch34-s28-s03-s02-inverse-perturbation-scales.md)
         - [对数平方尾界与频繁的完全相位对齐](ch34-s28-s03-s02-commensurate-spectrum.md)
         - [独立均匀扰动下的短区间概率](ch34-s28-s03-s02-euclidean-uniform-perturbations.md)
         - [两项计数主项与完全相位对齐](ch34-s28-s03-s02-two-term-count-alignment.md)
