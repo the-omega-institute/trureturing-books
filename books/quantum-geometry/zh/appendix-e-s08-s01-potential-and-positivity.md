@@ -205,27 +205,61 @@ $$
 
 **四顶点图上的 $\mathrm{SU}(2)$ 圆度量反例。** 四点弦图若无三角形便是森林。若只有一个三角形，可规范化两条辐棱，把余棱写成 $\exp X$，再取势 $1,\exp(-X/3),\exp(X/3)$，三棱误差各为 $|X|/3\le\varepsilon/3$。附着的树棱可精确拟合。剩下的非完全图是两三角形共一棱的菱形图。把一个度数为 $3$ 的顶点取作中心，将辐棱规范化为 $1$。在外缘路径的中间顶点取势 $1$，两端各在 $1$ 与精确拟合相应外缘棱的值之间取最短测地线中点，误差至多 $\varepsilon/2$。
 
-在 $K_4$ 上，令 $g_{0j}=1$，有向外缘 $1\to2\to3\to1$ 的增益均为单位虚四元数 $I$。含中心的三角增益为 $I$ 或其逆，外缘为 $I^3=-I$，均有角缺陷 $\varepsilon=\pi/2$。归一 $\phi_0=1$，写 $q_j=\phi_j$。若拟合半径 $r<\pi/2$，置 $u=\cos r$ 和 $m=(q_1+q_2+q_3)/3$。辐棱内积界给出 $\operatorname{Re}m\ge u$，外缘内积 $\langle q_j I,q_{j+1}\rangle$ 各至少为 $u$。置 $e=(q_2-q_1)/\sqrt2$，$f=(2q_3-q_1-q_2)/\sqrt6$。右乘 $I$ 是斜对称等距变换，故展开循环和得 $\sum_j\langle q_jI,q_{j+1}\rangle=\sqrt3\langle eI,f\rangle$。又 $|e|^2+|f|^2=3(1-|m|^2)$，所以
+在完全图 $K_4$ 上，所有棱须同时由同一组顶点势拟合。圆度量的几何结构给出以下统一界，循环四分之一转则给出一个精确的最坏棱误差。
+
+::: {.theorem #thm-appe-round-quaternion-k4-bounds title="$K_4$ 上圆度量单位四元数增益的重构界" lean="D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionK4Bounds.reconstruction_bound, D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionK4Bounds.quarter_turn_sharp, D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionK4Bounds.not_subcritical_claim"}
+在单位四元数群 $S^3\cong\mathrm{SU}(2)$ 上取圆距离 $d_{\mathrm{round}}(p,q)=\arccos\langle p,q\rangle_{\mathbb R}$，内积取自实四维四元数空间。以 $\mathrm{Fin}(4)=\{0,1,2,3\}$ 为顶点集。
+
+1. **统一上界。** 设 $0\le\varepsilon\le\pi$，且增益 $g:\mathrm{Fin}(4)\times\mathrm{Fin}(4)\to S^3$ 满足 $g_{ii}=1$、$g_{ji}=g_{ij}^{-1}$，以及对每个两两不同的有序三元组 $(i,j,k)$ 有 $d_{\mathrm{round}}(g_{ij}g_{jk},g_{ik})\le\varepsilon$。则存在势 $\varphi:\mathrm{Fin}(4)\to S^3$，对每条有向棱 $i\ne j$ 都有
+
+   $$
+   d_{\mathrm{round}}(g_{ij},\varphi_i^{-1}\varphi_j)\le \frac45\varepsilon.
+   $$
+
+2. **循环四分之一转的锐界。** 令 $Q$ 的对角增益和以 $0$ 为中心的辐棱增益均为 $1$，有向外缘 $12,23,31$ 的增益均为 $I$（沿第一虚轴的单位四元数），反向外缘取 $I^{-1}$。所有由两两不同的顶点组成的有序三角形，其缺陷都至多为 $\pi/2$，且有一组两两不同的顶点达到 $\pi/2$。对任意势 $\varphi$，至少有一条有向棱的误差不小于 $r_0=\arccos(1/\sqrt3)$。存在一个势，使每条有向棱的误差恰为 $r_0$。因此该实例的最优误差与最大缺陷之比为 $c_*=2\arccos(1/\sqrt3)/\pi>3/5$。
+
+3. **排除较小的统一系数。** 不存在实数 $k<c_*$，使第 1 款的每个 $g$ 和 $\varepsilon$ 都有一个势，其每条有向棱的误差至多为 $k\varepsilon$。特别地，$1/2$ 不成立。
+:::
+
+::: {.proof #pf-appe-round-quaternion-k4-bounds}
+**大缺陷。** 若 $\varepsilon\ge5\pi/8$，从 $\varphi_0=1$ 出发，依次选取 $\varphi_j$，使它与所有先前顶点沿棱输运来的 $\varphi_i g_{ij}$ 正交。每一步至多有 $3$ 个正交条件，实四维空间中的正交补含有单位向量。棱误差均为 $\pi/2\le4\varepsilon/5$，反向棱由取逆保距得到同样的误差。
+
+**中点与小缺陷。** 当 $\varepsilon<5\pi/8$，置 $a_i=g_{0i}$，以 $g'_{ij}=a_i g_{ij}a_j^{-1}$ 将辐棱规范化为 $1$。左右乘保距，三角缺陷保持不变。记规范化后的外缘 $12,23,31$ 的增益依次为 $A,B,C$，令势为 $(1,1,yB^{-1},z)$。棱 $01$ 精确拟合，其余五条棱要求 $y$ 靠近 $B,AB$，$z$ 靠近 $1,C^{-1}$，且 $y,z$ 彼此也在拟合半径内。两对中心各自的距离，以及对应距离 $d_{\mathrm{round}}(B,1)$ 和 $d_{\mathrm{round}}(AB,C^{-1})$，都由三角条件控制在 $\varepsilon$ 内。
+
+取两对中心的归一化和 $m,n$，分别记和的长度为 $L,M$。每个中点距本对中心至多 $\varepsilon/2$，且 $L,M\ge2\cos(\varepsilon/2)$。对应中心的弦长至多 $2\sin(\varepsilon/2)$，所以 $\|Lm-Mn\|\le4\sin(\varepsilon/2)$。展开平方得 $\|Lm-Mn\|^2=(L-M)^2+LM\|m-n\|^2$，于是中点间距 $D=d_{\mathrm{round}}(m,n)$ 满足 $\sin(D/2)\le\tan(\varepsilon/2)$。当 $\varepsilon\le77\pi/180$，用 $\arcsin(\tan x)$ 在 $[0,77\pi/360]$ 上的凸性及端点估计 $\arcsin(\tan(77\pi/360))\le(7/5)(77\pi/360)$，得 $D\le7\varepsilon/5$。只要满足这个距离界，就沿最短弧将两中点各向对方移动 $\max\{0,(D-4\varepsilon/5)/2\}$，至多移动 $3\varepsilon/10$。新点间距至多 $4\varepsilon/5$，到各自中心的距离至多 $\varepsilon/2+3\varepsilon/10$。
+
+**中间区间。** 若中点更远，即 $D>7\varepsilon/5$，则 $77\pi/180<\varepsilon<5\pi/8$。取单位向量 $v$ 正交于第一对中心及第二对中心之差，选其符号使 $\langle n,v\rangle_{\mathbb R}\ge0$。把这个公共方向正交投影到 $n^\perp$ 并归一化为 $w$，则 $w$ 正交于第二对中心。令 $y=\sqrt S\,m+\sqrt{1-S}\,v$、$z=\sqrt S\,n+\sqrt{1-S}\,w$。以度数计，区间 $[77,79]$、$[79,81]$、$[81,84]$、$[84,87]$、$[87,90]$、$[90,225/2]$ 的六份有理泰勒证书各给出一个 $S\in[0,1]$，以及 $T=-\langle m,n\rangle_{\mathbb R}$ 的界 $0<T_0\le T\le T_1$，满足
 
 $$
-3u\le\sqrt3\langle eI,f\rangle\le\frac{3\sqrt3}{2}(1-|m|^2)\le\frac{3\sqrt3}{2}(1-u^2).
+\begin{aligned}
+\cos(4\varepsilon/5)&\le\sqrt S\cos(\varepsilon/2),\\
+(1-T_0)(1-S)&\le S(1+T_0)^3,\\
+\cos(4\varepsilon/5)&\le1-(1+T_1)S.
+\end{aligned}
 $$
 
-在 $u\ge0$ 上解此不等式得 $u\le1/\sqrt3$，而 $r\ge\pi/2$ 时半径下界自动成立。取 $u=1/\sqrt3$、$q_j=u+\sqrt{1-u^2}v_j$，其中 $v_j$ 是与 $1,I$ 正交的平面内的单位向量，并令 $v_{j+1}=-v_j/2+(\sqrt3/2)v_jI$。相继三次旋转回到起点，辐棱余弦为 $u$，外缘余弦为 $(1-u^2)\sqrt3/2=u$。于是准确的极小极大误差为 $r=\arccos(1/\sqrt3)$，比值
+这些证书用余弦泰勒级数的前 $8$ 项与前 $9$ 项分别作下界和上界，以 $3.14159\le\pi\le3.14160$ 把端点估计化成有理不等式。第一式给出四个中心内积所需的余弦下界。对 $y,z$ 的内积，置 $\zeta=\langle n,v\rangle_{\mathbb R}$、$h=\sqrt{1-\zeta^2}\ge T$。展开得 $-ST+(1-S)h+\sqrt{S(1-S)}\,\zeta(1+T/h)$。第二式保证混合项至少为 $(1-S)(1-h)$，故第三式给出所需下界。两个构造都给出五条棱的界，最后将规范化的势逐点右乘 $a_i$ 即可还原原增益的拟合。
+
+**四分之一转。** 含中心的三角形和外缘三角形的闭路增益均为 $I$ 或 $I^{-1}$，所以缺陷为 $\pi/2$。将势左乘 $\varphi_0^{-1}$，使中心势为 $1$，记外缘势为 $q_1,q_2,q_3$。若一致误差半径 $r<\pi/2$，置 $u=\cos r$。三条辐棱给出 $\|m\|\ge\operatorname{Re}m\ge u$，其中 $m=(q_1+q_2+q_3)/3$。置 $e=(q_2-q_1)/\sqrt2$、$f=(2q_3-q_1-q_2)/\sqrt6$。右乘 $I$ 是斜对称等距变换，故外缘三项内积之和为 $\sqrt3\langle eI,f\rangle_{\mathbb R}$。由 $\|e\|^2+\|f\|^2=3(1-\|m\|^2)$ 和柯西–施瓦茨不等式，
 
 $$
-c_*=\frac{r}{\varepsilon}=\frac{2\arccos(1/\sqrt3)}{\pi}\approx0.60817345.
+3u\le\sqrt3\langle eI,f\rangle_{\mathbb R}\le\frac{3\sqrt3}{2}(1-\|m\|^2)\le\frac{3\sqrt3}{2}(1-u^2).
 $$
 
-这个值也是循环族（辐棱增益为 $1$，外缘统一取 $\cos\theta+I\sin\theta$，$0<\theta\le\pi$）的最优比值。为核对最优性，记 $r(\theta)$ 为最小拟合半径，$r_0=\arccos(1/\sqrt3)$。当 $0<\theta\le\pi/3$，恒等势和外缘三角的闭路下界给出 $r(\theta)=\theta$，比值为 $1/3$。当 $\pi/3\le\theta\le\pi/2$，最大缺陷为 $2\pi-3\theta$。设 $\delta=\pi/2-\theta$，各外缘增益只改变距离 $\delta$，故 $r(\theta)\le r_0+\delta$，并由 $3c_*>1$ 得 $\delta>0$ 时比值严格低于 $c_*$。
+解 $u\le(\sqrt3/2)(1-u^2)$ 得 $u\le1/\sqrt3$，所以 $r\ge r_0$。当 $r\ge\pi/2$，同一下界直接成立。取 $t=1/\sqrt3$，在垂直于 $1,I$ 的平面内取 $v_1=J$（沿第二虚轴的单位四元数），再按 $v_{j+1}=-v_j/2+(\sqrt3/2)v_j I$ 循环旋转。势 $q_j=t+\sqrt{1-t^2}\,v_j$ 的辐棱余弦为 $t$，外缘余弦为 $(1-t^2)\sqrt3/2=t$。又 $\cos(3\pi/10)=\sin(\pi/5)$，其平方为 $(5-\sqrt5)/8>1/3$，故 $r_0>3\pi/10$。若统一系数 $k<c_*$，在 $Q$ 上取 $\varepsilon=\pi/2$ 就会要求半径 $k\pi/2<r_0$，与下界矛盾。完整证明由 Lean 内核检查。
+:::
 
-当 $\pi/2\le\theta\le\pi$，最大缺陷为 $\theta$。置 $a=\cos\theta$、$k=\cos(\theta-2\pi/3)$，最优半径为 $\arccos u_\theta$，其中 $u_\theta$ 是 $F_\theta(u)=k+(a-k)u^2-u$ 在 $(0,1)$ 内的唯一零点。事实上，设拟合的最小余弦为 $u>0$。外缘内积均值的对称部分为 $a(3|m|^2-1)/2$，反对称部分至多为 $(\sqrt3/2)\sin\theta(1-|m|^2)$，故 $u\le k+(a-k)|m|^2\le k+(a-k)u^2$。上文的平面向量构造用 $u_\theta$ 为实部，可使每棱余弦恰为 $u_\theta$。在 $\pi/2\le\theta\le2\pi/3$ 上，$F_\theta(1/\sqrt3)=(\sin\theta-1)/\sqrt3\le0$，故 $u_\theta\le1/\sqrt3$。隐式求导时，$r'(\theta)$ 的分子 $\sin\theta\,u_\theta^2+\sin(\theta-2\pi/3)(1-u_\theta^2)$ 至多为 $u_\theta^2$，分母 $(1+2(k-a)u_\theta)\sqrt{1-u_\theta^2}$ 至少为 $\sqrt{1-u_\theta^2}$，故 $r'(\theta)\le1/\sqrt6<c_*$。在 $2\pi/3\le\theta\le\pi$ 上，$9F_\theta(1/3)=-3\cos\theta+4\sqrt3\sin\theta-3\ge0$，因为该式在此区间凹且端点非负。因此 $r(\theta)\le\arccos(1/3)<4r_0/3$。最后一个不等式可比较 $3\arccos(1/3)$ 与 $4r_0$ 的余弦 $-23/27$ 与 $-7/9$，两角均在 $(\pi,2\pi)$。这些界给出 $\theta>\pi/2$ 时严格较小的比值。
+**循环单参数族（手工推导）。** $c_*$ 也是循环族（辐棱增益为 $1$，外缘统一取 $\cos\theta+I\sin\theta$，$0<\theta\le\pi$）的最优比值。为核对最优性，记 $r(\theta)$ 为最小拟合半径，$r_0=\arccos(1/\sqrt3)$。当 $0<\theta\le\pi/3$，恒等势和外缘三角的闭路下界给出 $r(\theta)=\theta$，比值为 $1/3$。当 $\pi/3\le\theta\le\pi/2$，最大缺陷为 $2\pi-3\theta$。设 $\delta=\pi/2-\theta$，各外缘增益只改变距离 $\delta$，故 $r(\theta)\le r_0+\delta$，并由 $3c_*>1$ 得 $\delta>0$ 时比值严格低于 $c_*$。
 
-对 $K_4$ 上任意圆度量增益，记 $C_{\mathrm{SU}(2)}(K_4)$ 为重构误差与正三角缺陷之比的上确界。上面的例子给出下界 $c_*$。为得严格上界，将辐棱规范化为 $1$，记三条循环外缘增益为 $A,B,C$，实际缺陷 $\varepsilon$ 是 $A,B,C,ABC$ 到 $1$ 的最大圆距离。若 $0<\varepsilon<\pi/2$，令 $q_0=q_1=1$，令 $q_2,q_3$ 分别是 $(1,A)$、$(1,C^{-1})$ 的最短弧中点。棱 $23$ 之外的误差至多为 $\varepsilon/2$。$q_2B,q_3$ 是两对向量 $(B,AB)$、$(1,C^{-1})$ 的归一化和。对应向量的圆距离至多为 $\varepsilon$，且每个和的欧氏长度至少为 $2\cos(\varepsilon/2)$。用 $|x-y|^2=(|x|-|y|)^2+|x||y||x/|x|-y/|y||^2$ 比较归一化前后的弦长，得棱 $23$ 的误差 $D\le2\arcsin(\tan(\varepsilon/2))<2\varepsilon$。若 $D>\varepsilon/2$，沿最短弧将 $q_2B,q_3$ 各向对方移动 $(D-\varepsilon/2)/3$，并将前者右乘 $B^{-1}$ 更新 $q_2$，于是所有误差至多为 $(D+\varepsilon)/3<\varepsilon$。
+当 $\pi/2\le\theta\le\pi$，最大缺陷为 $\theta$。置 $a=\cos\theta$、$k=\cos(\theta-2\pi/3)$，最优半径为 $\arccos u_\theta$，其中 $u_\theta$ 是 $F_\theta(u)=k+(a-k)u^2-u$ 在 $(0,1)$ 内的唯一零点。事实上，设拟合的最小余弦为 $u>0$。外缘内积均值的对称部分为 $a(3|m|^2-1)/2$，反对称部分至多为 $(\sqrt3/2)\sin\theta(1-|m|^2)$，故 $u\le k+(a-k)|m|^2\le k+(a-k)u^2$。在定理证明的平面向量构造中取实部 $u_\theta$、虚部长度 $\sqrt{1-u_\theta^2}$，每条辐棱的余弦为 $u_\theta$，每条外缘棱的余弦为 $k+(a-k)u_\theta^2=u_\theta$。在 $\pi/2\le\theta\le2\pi/3$ 上，$F_\theta(1/\sqrt3)=(\sin\theta-1)/\sqrt3\le0$，故 $u_\theta\le1/\sqrt3$。隐式求导时，$r'(\theta)$ 的分子 $\sin\theta\,u_\theta^2+\sin(\theta-2\pi/3)(1-u_\theta^2)$ 至多为 $u_\theta^2$，分母 $(1+2(k-a)u_\theta)\sqrt{1-u_\theta^2}$ 至少为 $\sqrt{1-u_\theta^2}$，故 $r'(\theta)\le1/\sqrt6<c_*$。在 $2\pi/3\le\theta\le\pi$ 上，$9F_\theta(1/3)=-3\cos\theta+4\sqrt3\sin\theta-3\ge0$，因为该式在此区间凹且端点非负。因此 $r(\theta)\le\arccos(1/3)<4r_0/3$。最后一个不等式可比较 $3\arccos(1/3)$ 与 $4r_0$ 的余弦 $-23/27$ 与 $-7/9$，两角均在 $(\pi,2\pi)$。这些界给出 $\theta>\pi/2$ 时严格较小的比值。
 
-若 $\varepsilon=\pi/2$，保持 $q_0=q_1=1$，在与 $1,A$ 都成锐角的开集中选 $q_2$，使 $q_2B$ 不在 $1,C^{-1}$ 的实线性张成空间内。将 $1+C^{-1}$ 加上 $q_2B$ 在该空间正交补上投影的充分大的正倍数，再归一化为 $q_3$，三组内积都为正，故误差均小于 $\pi/2$。若 $\varepsilon>\pi/2$，依次选与此前至多 $3$ 个已输运势正交的单位四元数，误差至多为 $\pi/2$。
+::: {.problem #prob-appe-round-quaternion-k4-optimal-constant title="$K_4$ 上圆度量单位四元数增益的最优统一系数"}
+记 $C_{\mathrm{SU}(2)}(K_4)$ 为 $K_4$ 上所有正三角缺陷的圆度量单位四元数增益实例中，最小拟合半径与最大三角缺陷之比的上确界。由 [@thm-appe-round-quaternion-k4-bounds] 的统一上界和四分之一转实例得到 $c_*\le C_{\mathrm{SU}(2)}(K_4)\le4/5$。任意增益下的精确上确界仍是开放问题。
+:::
 
-最后，缺陷趋零时，在辐棱规范下取切空间对数 $z_{ij}=\log g_{ij}$。三角乘积取对数的一阶项为三个对数之和，故加法三角缺陷至多为 $\varepsilon+O(\varepsilon^2)$。平均 $4$ 个加法星形势得棱误差至多为 $\varepsilon/2+O(\varepsilon^2)$，将势取指数时的二阶误差仍为 $O(\varepsilon^2)$。最小拟合半径和三角缺陷都是连续函数。由于 $c_*>1/2$，上确界在远离零缺陷的紧集上取到，结合逐实例严格界得 $c_*\le C_{\mathrm{SU}(2)}(K_4)<1$。任意增益下的精确值仍开放。此反例在 $n=4,5$ 都超过实标量界 $(n-2)/n$，其中 $n=5$ 时加一个孤立点即可保持原误差。
+**小缺陷与上确界取到（手工推导）。** 缺陷 $\varepsilon$ 趋零时，将辐棱规范化为 $1$，再取切空间对数 $z_{ij}=\log g_{ij}$。每条外缘增益都距 $1$ 至多 $\varepsilon$，所以各对数的范数至多为 $\varepsilon$。三角乘积取对数的一阶项为三个对数之和，故加法三角缺陷至多为 $\varepsilon+O(\varepsilon^2)$。平均 $4$ 个加法星形势得到范数为 $O(\varepsilon)$ 的势，棱误差至多为 $\varepsilon/2+O(\varepsilon^2)$。将势取指数时的二阶误差仍为 $O(\varepsilon^2)$，因此重构误差与缺陷之比至多为 $1/2+O(\varepsilon)$。最小拟合半径是紧致势空间上连续误差函数的最小值，因而随增益连续。最大三角缺陷也是连续的。由于 $c_*>1/2$，充分小的正缺陷给出的比值都小于 $c_*$，故上确界在远离零缺陷的紧集上取到。
+
+**添加孤立点（手工推导）。** 在四分之一转实例上加一个孤立点，最大三角缺陷和最小拟合半径均保持不变。因此 $n=4,5$ 时此例的比值都超过实标量系数 $(n-2)/n$，因为 $c_*>3/5$ 且 $1/2<3/5$。
 
 ::: {.remark #rem-appe-anchoring-consequences title="锚定表示的五条推论（手工推导）"}
 **手工推导。** 设条款 II、III、IV 对一切点对与三点成立，$X$ 非空（可以无限）。
