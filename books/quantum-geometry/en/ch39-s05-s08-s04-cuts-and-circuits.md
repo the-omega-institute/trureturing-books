@@ -939,6 +939,24 @@ Fix a point in the fiber over $-x-y$. The unique triple joining it to a point in
 
 For complete Steiner triple systems, the equal-fiber conclusion agrees with the uniform column multiplicities of the ternary dual code. Here coverage follows from the omitted triples and equality of potentials on uncovered pairs. [Jungnickel and Tonchev, Theorem 3.1](https://arxiv.org/abs/1709.06044)
 
+::: {.theorem #thm-joint-circuit-minimum-omissions-bound title="How many omitted triples are needed?" lean="D5/S3/Combinatorics/Matroids/RankThreeOmissionPairCount.potential_fiber_pair_count_le"}
+For a pair-unique family of omitted triples with normalized ternary potential dimension $d$, write $q=3^d$ and let $s$ be the common fiber size. If $m$ is the number of omitted triples, then $6m\ge q(q-1)s^2$.
+:::
+
+::: proof
+There are $q(q-1)s^2$ ordered pairs of points from distinct fibers. Every such pair belongs to an omitted triple, and each omitted triple has six ordered pairs of distinct positions.
+:::
+
+::: {.theorem #thm-joint-circuit-minimum-omissions-attained title="Lifted affine lines attain the bound" lean="D5/S3/Combinatorics/Matroids/RankThreeOmissionPairCount.exists_lifted_omission_family"}
+For each $d\ge 0$ and $s\ge 1$, a pair-unique family on $3^d s$ points has potential dimension $d$ and exactly $q(q-1)s^2/6$ triples. Thus the smallest possible size at this point count and dimension is $s^2\binom{q}{2}/3$.
+:::
+
+::: proof
+Take the points $\mathbb F_3^d\times\mathbb Z/s\mathbb Z$ and list the triples with distinct first coordinates whose sum in the product is zero. A pair from different rows uniquely determines the third point by negating its sum. A pair in the same row is uncovered, so every potential is constant on each row. The coordinate functions of the first component give $d$ independent potentials. Conversely, evaluation in a basis factors through the $q$ rows and surjects onto a ternary coordinate space, so the dimension is at most $d$. Each triple accounts for six mixed ordered pairs and every mixed pair occurs exactly once.
+:::
+
+The lifted lines use the transversal designs on the lines of the ternary quotient. Leaving all same-row pairs uncovered permits every positive row size. [Jungnickel and Tonchev, Theorems 3.7–3.8](https://arxiv.org/abs/1709.06044)
+
 **Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 
 If there are no nonempty facets, the original realization is empty and its reduced integral homology vanishes in every nonnegative degree. When facets exist and $d=1$, the wedge is a discrete space with $m+1$ points and reduced degree-zero generators $[p_B]-[p_0]$, where $p_B$ is the point contributed by $B$ and $p_0$ is the common basepoint. When facets exist and $m=0$, the wedge is a point and every reduced group vanishes. For a nonempty family of facets, the reduced Euler characteristic is $(-1)^{d-1}m$, so the earlier Tutte evaluation gives $m=2^d T_M(1,1/2)$.
