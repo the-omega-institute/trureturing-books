@@ -228,8 +228,6 @@ $$
 最后，映射 $i\mapsto\min(i,11)$ 不增大编号之差，故把棱送到原图的棱或重合端点，把三角形送到原图的三角形或缺陷为零的退化比较。前 $12$ 个顶点逐点固定，将任意势限制到它们便保留误差下界 $2$。块首树在 $\varepsilon=1$ 时给出达到这一界的势。若普适系数 $C<2$，在弦图 $P_{12}^3$ 上取整数增益和 $\varepsilon=1$ 即得矛盾。完整证明由 Lean 内核检查。
 :::
 
-**手工推导。** 由本定理和 [@thm-appe-chordal-uniform-gain-potential] 得到最优普适重构系数 $2\le C_{\mathrm{chordal}}\le4$，由上文的整数性论证知其精确值在 $\{2,3,4\}$ 中仍待确定。
-
 逐棱的增益重构界能否由一棵低拉伸生成树解释？从一个三角形出发，每轮在上一轮新生的每条棱上再接一个三角形，最优生成树拉伸便逐轮增加，而增益重构的误差仍由局部三角比较控制。
 
 ::: {.theorem #thm-appe-two-tree-stretch-separation title="递归 $2$-树的生成树拉伸与增益重构分离" lean="D5/S3/Combinatorics/Graph/Chordal/TwoTreeStretchSeparation.twoTree_isChordal, D5/S3/Combinatorics/Graph/Chordal/TwoTreeStretchSeparation.twoTree_edge_count, D5/S3/Combinatorics/Graph/Chordal/TwoTreeStretchSeparation.twoTree_min_spanning_tree_stretch_eq, D5/S3/Combinatorics/Graph/Chordal/TwoTreeStretchSeparation.twoTree_exists_one_approximate_gain_potential, D5/S3/Combinatorics/Graph/Chordal/TwoTreeStretchSeparation.twoTree_integer_lower_bound_one, D5/S3/Combinatorics/Graph/Chordal/TwoTreeStretchSeparation.twoTree_banach_exact_constant"}
@@ -258,6 +256,47 @@ $$
 
 最后，在核心上将定向三角缺陷均分到三条棱上。减去每棱分得的缺陷后，棱增益的定向和为零，沿棱累加便得到势，从而 $a_0=1/3$。若旧势的误差至多为 $a_i\varepsilon$，在新顶点取 $\varphi(a)+g_{aw}$ 与 $\varphi(b)+g_{bw}$ 的中点。两候选值之差是三角缺陷与带符号的母棱残差之和，范数至多为 $(a_i+1)\varepsilon$。新棱误差至多为此距离的一半，给出 $a_{i+1}=(a_i+1)/2$。由于 $a_i\le a_{i+1}$，旧棱也满足新界。解得 $a_d=1-\frac{2}{3\cdot2^d}$。将此上界用于典范坐标增益，再经三角基换回循环，便得到达到填充范数下界的势。完整证明由 Lean 内核检查。
 :::
+
+递归 $2$-树的精确系数说明，生成树拉伸可以很大，增益仍能拟合得很准 [@thm-appe-two-tree-stretch-separation]。对路径幂，增大宽度能把实 Banach 目标上的重构系数推到多高？固定宽度 $k$ 时，最优系数随顶点数增长趋于 $2-2/k$。因此，宽度与顶点数都可选时，实 Banach 目标上的统一下界从上面的 $49/48$ 提高到 $2$。
+
+::: {.theorem #thm-appe-chordal-banach-limit-two title="路径幂的实 Banach 重构极限与弦图下界" lean="D5/S3/Combinatorics/Graph/Chordal/ChordalBanachLimitTwo.pathPower_banach_upper_bound, D5/S3/Combinatorics/Graph/Chordal/ChordalBanachLimitTwo.pathPower_banach_lower_bound, D5/S3/Combinatorics/Graph/Chordal/ChordalBanachLimitTwo.pathPower_banach_limit_tendsto, D5/S3/Combinatorics/Graph/Chordal/ChordalBanachLimitTwo.not_subtwo_banach_chordal"}
+设 $G$ 为顶点集 $V$ 上的简单图。称加性增益 $g:V\times V\to E$ 反对称，是指对所有顶点对均有 $g_{ji}=-g_{ij}$。三角缺陷至多为 $\varepsilon$，是指每个有向三角形 $(i,j,\ell)$ 都满足 $\|g_{ij}+g_{j\ell}-g_{i\ell}\|\le\varepsilon$。势 $\varphi:V\to E$ 在有向棱 $(i,j)$ 上的误差为 $\|g_{ij}-(\varphi(j)-\varphi(i))\|$。
+
+1. **平移分块上界。** 对任意 $k\ge1$、$n\in\mathbb N$、实半范数线性空间 $E$ 和 $\varepsilon\ge0$，若 $P_n^k$ 上的反对称增益 $g$ 的三角缺陷至多为 $\varepsilon$，则存在势使每条有向棱的误差至多为 $(2-2/k)\varepsilon$。
+2. **有限维 Banach 下界。** 若 $k\ge1$ 且 $n\ge k+1$，则存在有限维实 Banach 空间 $E$ 和 $P_n^k$ 上取值于 $E$ 的反对称增益，其三角缺陷至多为 $1$，且对任意势，至少有一条有向棱的误差不小于 $\frac{n-k}{n+k-2}(2-2/k)$。
+3. **固定宽度的精确极限。** 记 $C_{\mathrm{Ban}}(P_n^k)$ 为所有可行的非负系数 $C$ 的下确界。这里可行指对每个实 Banach 空间和其中每个三角缺陷至多为 $1$ 的反对称增益，都存在势使 $P_n^k$ 的每条有向棱误差至多为 $C$。对每个固定的 $k\ge1$，$C_{\mathrm{Ban}}(P_n^k)$ 在 $n\to\infty$ 时趋于 $2-2/k$。
+4. **实 Banach 目标的弦图反例。** 不存在实数 $C<2$，使得对每个有限简单弦图、每个实 Banach 空间、每个 $\varepsilon\ge0$ 以及每个三角缺陷至多为 $\varepsilon$ 的反对称增益，都存在势使每条有向棱的误差至多为 $C\varepsilon$。
+:::
+
+::: {.proof #pf-appe-chordal-banach-limit-two}
+取偏移 $s=0,\ldots,k-1$，按 $\lfloor(v+s)/k\rfloor$ 将顶点 $v$ 分块。非空块的首点是 $k\lfloor(v+s)/k\rfloor-s$ 与 $0$ 的较大者，也就是将可能为负的首块起点截到 $0$。把相邻块的首点依次相连，再把块内其余顶点接到各自的首点。所得生成树的棱长都至多为 $k$，沿树从 $0$ 累加增益便得到一个势。$n=0$ 时直接取空势。
+
+对升序棱 $(u,v)$，两端或在同一块，或在相邻两块。同块时，势差通过共同首点，只需一个三角比较。若 $u$ 是首点，误差为零。跨块时，记两端所在块的首点为 $x,y$，则 $x\le u<y\le v$，且 $y-x\le k$、$v-u\le k$。经过 $y$ 比较，误差由 $(x,u,y)$ 和 $(u,y,v)$ 的缺陷之和控制。若 $x=u$ 或 $y=v$，相应的一项为零。由此，每个端点 $a$ 都恰有一个偏移满足 $(a+s)\bmod k=0$，这次它就是首点，省去一个三角缺陷的上界。首块截到 $0$ 只会让更多比较退化为零。对 $k$ 个树势取平均，由三角不等式，每条棱的误差至多为 $2(k-1)\varepsilon/k$。反向棱的残差只改变符号。
+
+下界用坐标 $w\in[k,n)$ 记录长度为 $k$ 的棱的右端点。令 $W_u=[u,u+k)\cap[k,n)$（区间只取整数），并取实向量空间 $E$ 为所有满足 $\sum_{w\in W_u}x_w=0$（当 $k\le u$ 且 $u+k\le n$）的坐标向量 $x$。在 $E$ 上用有限最大值范数
+
+$$
+\|x\|=\max\left\{\max_{k\le w<n}|x_w|,\ \max_{0\le u<n}\left|\sum_{w\in W_u}x_w\right|\right\}.
+$$
+
+单个坐标保证范数的正定性，有限维保证完备性。令 $c_a(w)=\mathbf 1_{w\equiv a\bmod k}-1/k$。对升序棱 $i<j$，当 $j-i=k$ 时取 $g_{ij}=2c_j$，当 $j-i<k$ 时取 $g_{ij}=-\sum_{i<a<j}c_a$。反向取负，重合点对及非相邻点对可取零。每个 $c_a$ 在任意完整周期上的和为零，所以增益落在 $E$ 中。对升序三角形 $i<j<\ell$，若 $\ell-i<k$，拆开内部指标的和即得缺陷向量 $c_j$。若 $\ell-i=k$，所有内部指标的标记和为 $-c_\ell$，所以缺陷向量为 $c_j-c_\ell$。单点集和每个窗口 $W_u$ 内的指标模 $k$ 互异，故中心化标记之和是命中数 $0$ 或 $1$ 减去集合大小除以 $k$，其绝对值至多为 $1$。两标记之差的和只剩两个命中数之差，也在此界内。反对称性使三角形换序只可能改变缺陷向量的符号。
+
+给定势，记 $R_{ij}=g_{ij}-(\varphi(j)-\varphi(i))$，其最大棱范数为 $M$。相邻点间的增益为零（$k=1$ 时 $c_a=0$），而 $g_{v-k,v}$ 在坐标 $v$ 上等于 $2-2/k$。在该坐标上，沿相邻点从 $v-k$ 到 $v$ 的势差与长棱的势差相同，故
+
+$$
+R_{v-k,v}(v)-\sum_{u=v-k+1}^{v}R_{u-1,u}(v)=2-2/k.
+$$
+
+对 $k\le v<n$ 求和。交换第二项的求和次序后，每个 $u$ 的贡献是 $R_{u-1,u}$ 在 $W_u$ 上的坐标和。完整窗口的和为零，剩下的截断窗口在 $1\le u<k$ 或 $n-k<u<n$，合计至多 $2(k-1)$ 项。每项的绝对值由范数控制在 $M$ 内，$n-k$ 个长棱坐标也各至多为 $M$，因而
+
+$$
+(n-k)(2-2/k)\le \bigl(n-k+2(k-1)\bigr)M=(n+k-2)M.
+$$
+
+由于 $n\ge k+1$，分母为正，证得下界。它约束每个可行系数，而平均势给出可行上界。固定 $k$ 时，$(n-k)/(n+k-2)\to1$，两界夹出所述极限。任给 $C<2$，先选 $k$ 使 $C<2-2/k$，再取充分大的 $n\ge k+1$ 使有限下界超过 $C$。长度至少为 $4$ 的简单回路中，最小顶点的两个回路邻点都在它右侧且距它至多 $k$，故它们相连，给出一条弦。因此 $P_n^k$ 是弦图，在三角缺陷至多为 $1$ 时已能否定所提统一界。完整证明由 Lean 内核检查。
+:::
+
+实 Banach 空间的加法群以范数差为双不变度量，故 [@thm-appe-chordal-uniform-gain-potential] 的系数 $4$ 也适用。实 Banach 目标的最优弦图系数 $C_{\mathrm{Ban,chordal}}$ 的精确值在 $[2,4]$ 内仍待确定。对任意双不变伪度量群的最优系数 $C_{\mathrm{chordal}}$ 也在 $[2,4]$ 内，由上文的整数性论证知其精确值仍待在 $\{2,3,4\}$ 中确定。固定目标群后，可以进一步问一个给定弦图上的最优系数。
 
 **四顶点图上的 $\mathrm{SU}(2)$ 圆度量反例。** 四点弦图若无三角形便是森林。若只有一个三角形，可规范化两条辐棱，把余棱写成 $\exp X$，再取势 $1,\exp(-X/3),\exp(X/3)$，三棱误差各为 $|X|/3\le\varepsilon/3$。附着的树棱可精确拟合。剩下的非完全图是两三角形共一棱的菱形图。把一个度数为 $3$ 的顶点取作中心，将辐棱规范化为 $1$。在外缘路径的中间顶点取势 $1$，两端各在 $1$ 与精确拟合相应外缘棱的值之间取最短测地线中点，误差至多 $\varepsilon/2$。
 
