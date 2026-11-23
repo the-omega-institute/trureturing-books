@@ -156,6 +156,7 @@
         - [小扰动下的加权近碰撞](ch34-s28-s03-s02-spectral-perturbations.md)
         - [多组检验共用一次频谱扰动](ch34-s28-s03-s02-common-spectral-perturbations.md)
         - [区间上的共同频谱扰动](ch34-s28-s03-s02-continuous-spectral-perturbations.md)
+        - [保持计数律的频谱扰动](ch34-s28-s03-s02-spectral-count-perturbations.md)
         - [对数平方尾界与频繁的完全相位对齐](ch34-s28-s03-s02-commensurate-spectrum.md)
         - [两项计数主项与完全相位对齐](ch34-s28-s03-s02-two-term-count-alignment.md)
       - [31.1.3.3 Mangoldt 临界差额与特征窗口](ch34-s28-s03-s03-mangoldt-and-characters.md)
