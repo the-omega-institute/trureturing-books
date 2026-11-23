@@ -1,4 +1,4 @@
-# One spectral perturbation for many tests
+# M.2.6 One spectral perturbation for many tests {#one-spectral-perturbation-for-many-tests}
 
 ## One choice on finite grids
 
@@ -158,6 +158,45 @@ $$
 The absolute count differences sum to $2(p-H(m,n))$. Each integer difference has square at least its absolute value. Multiply this bound by the square of the common lower radius and sum. The full proof is checked by the Lean kernel.
 :::
 
-For independently perturbed comparison frequencies, the scale bound is effective on pairs with few common occurrences. The lower-degree diagonal controls the remaining pair weight.
+Assume $|r_j|\ge\rho>0$. For distinct degree-$p$ vectors put $S(m,n)=\sum_j((m_j-n_j)r_j)^2$. Let $I_p$ be the sum of $c_mc_n/\sqrt{S(m,n)}$ over these ordered pairs. Define
+$$
+T=W^{2p},\qquad A_i=\binom pi^2W^{2(p-i)}D_i,\qquad
+B_h=\min_{0\le i\le h}\min(A_i,T)-D_p.
+$$
+For $0\le h<p$, put $Q_h=1/(\rho\sqrt{2(p-h)})$. For $h\ge p$ set $Q_h=0$.
+
+::: {.theorem #thm-ch31-weighted-inverse-scale-budget title="Lower-degree diagonals bound the sum of inverse scales" lean="D5/S3/Fourier/Concentration/OverlapPerturbationBudget.weighted_inverse_scale_le_of_overlap"}
+$$
+I_p\le (T-D_p)Q_0+\sum_{0\le h<p-1}B_{h+1}(Q_{h+1}-Q_h).
+$$
+The correction sum is empty for $p\le1$.
+:::
+
+::: proof
+Write $H=\sum_j\min(m_j,n_j)$ for the common count. A distinct pair has $H<p$, and its reciprocal scale is at most $Q_H$. Split this charge into $Q_0$ and its nonnegative increments through $H$. The increment from $h$ to $h+1$ applies precisely when $H\ge h+1$. Each tail bound for a threshold $i\le h+1$ applies to these pairs. Taking their minimum and subtracting the diagonal gives $B_{h+1}$.
+:::
+
+For finitely many independent uniform offsets with positive radii and closed resolution $\eta\ge0$, the Euclidean interval bound controls the weighted probability budget by the right side multiplied by $e^{1/2}\sqrt{15\pi/2}\,\eta$. The localized budget can also use the base frequency gap to discard unreachable pairs.
+
+### Low-degree separation after cancellation
+
+Information about low-degree gaps can reduce the pairwise budget. For degree-$p$ vectors $m,n$, subtract $l_j=\min(m_j,n_j)$ from both sides. The resulting vectors $u,v$ have disjoint supports and common degree $d=p-H(m,n)$. Their signed frequency gap is unchanged. Since $|m_j-n_j|=u_j+v_j$ coordinate by coordinate, the allowed drift is unchanged as well.
+
+::: {.theorem #thm-ch31-reduced-degree-collision-budget title="Separated low-degree residual pairs control the localized budget" lean="D5/S3/Fourier/Concentration/ReducedDegreeCollisionBudgets.localized_excess_le_of_reduced_separation"}
+Assume $w_j\ge0$, $r_j\ge\rho>0$, and that $k$ is a positive integer. If $\eta>0$, require that every disjoint pair $u,v$ of common degree $d$ with $0<d<k$ and $d\le p$ satisfy
+$$
+|G_u-G_v|>\eta+\sum_j(u_j+v_j)r_j .
+$$
+The localized excess budget $B$ is zero when $\eta\le0$ or $p<k$. In the other cases,
+$$
+B\le (W^{2p}-D_p)
+\min\!\left(1,\frac{\eta}{\rho},
+  \frac{e^{1/2}\sqrt{15\pi/2}\,\eta}{\rho\sqrt{2k}}\right).
+$$
+:::
+
+::: proof
+At positive resolution, each reachable distinct pair has $d\ge k$, so its Euclidean scale is at least $\rho\sqrt{2k}$. Some integer count difference has magnitude at least one, so the largest-coordinate scale is at least $\rho$. Intersect the two pairwise probability bounds with one. The ordered distinct pairs have total weight $W^{2p}-D_p$. At nonpositive resolution the nonnegative part of the largest-coordinate probability bound is zero.
+:::
 
 For a comparison spectrum, the next section [controls threshold crossings and handles recomputed weights](ch34-s28-s03-s02-spectral-count-perturbations.md). An upper bound for weighted high-order near-collisions of the fixed ζ zero ordinates at positive resolution remains open.

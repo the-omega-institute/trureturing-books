@@ -1,6 +1,6 @@
-# 35.6.7.1 Direct-encoder ranks and entanglement entropy {#sec-ch39-s05-s07-s01-rank-and-entropy}
+# O.1.1 Direct-encoder ranks and entanglement entropy {#sec-ch39-s05-s07-s01-rank-and-entropy}
 
-See [§35.6.7](ch39-s05-s07-cut-entanglement.md#sec-ch39-p2e-entanglement) for the page-rank caps $R_0, R_1$ and the direct-encoder contract (`directContract`).
+See [§O.1](ch39-s05-s07-cut-entanglement.md#sec-ch39-p2e-entanglement) for the page-rank caps $R_0, R_1$ and the direct-encoder contract (`directContract`).
 
 ::: {.theorem #thm-ch39-p2e-direct-encoder-ranks title="Attainable Page-Rank Rectangle and von Neumann Entanglement Entropy Maxima for K-Bonacci Direct Encoders" lean="D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy"}
 For all integers $N \ge 2$, $K \ge 2$, and block lengths $m_X, m_Y \ge 1$, both logical page dimensions are strictly positive ($M_0 > 0,\; M_1 > 0$). Writing $r_b = \operatorname{rank}(\sigma_b)$ ($b \in \{0, 1\}$) and defining $R_0, R_1$ as above:

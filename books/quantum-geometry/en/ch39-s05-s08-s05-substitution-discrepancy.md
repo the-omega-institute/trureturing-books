@@ -1,4 +1,4 @@
-# 35.6.8.5 Alternating substitution discrepancy and log-squared bounds {#sec-ch39-s05-s08-s05-substitution-discrepancy}
+# O.2.5 Alternating substitution discrepancy and log-squared bounds {#sec-ch39-s05-s08-s05-substitution-discrepancy}
 
 For the Tribonacci word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 

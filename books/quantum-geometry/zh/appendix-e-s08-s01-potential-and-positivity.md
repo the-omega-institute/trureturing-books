@@ -296,7 +296,35 @@ $$
 由于 $n\ge k+1$，分母为正，证得下界。它约束每个可行系数，而平均势给出可行上界。固定 $k$ 时，$(n-k)/(n+k-2)\to1$，两界夹出所述极限。任给 $C<2$，先选 $k$ 使 $C<2-2/k$，再取充分大的 $n\ge k+1$ 使有限下界超过 $C$。长度至少为 $4$ 的简单回路中，最小顶点的两个回路邻点都在它右侧且距它至多 $k$，故它们相连，给出一条弦。因此 $P_n^k$ 是弦图，在三角缺陷至多为 $1$ 时已能否定所提统一界。完整证明由 Lean 内核检查。
 :::
 
-实 Banach 空间的加法群以范数差为双不变度量，故 [@thm-appe-chordal-uniform-gain-potential] 的系数 $4$ 也适用。实 Banach 目标的最优弦图系数 $C_{\mathrm{Ban,chordal}}$ 的精确值在 $[2,4]$ 内仍待确定。对任意双不变伪度量群的最优系数 $C_{\mathrm{chordal}}$ 也在 $[2,4]$ 内，由上文的整数性论证知其精确值仍待在 $\{2,3,4\}$ 中确定。固定目标群后，可以进一步问一个给定弦图上的最优系数。
+在实半范数线性空间中，可以把 [@thm-appe-chordal-uniform-gain-potential] 的单条前驱路径换成所有前驱路径的平均。团的大小控制了每次平均的项数，因而控制了误差为零的项所占的比重。
+
+::: {.theorem #thm-appe-clique-bounded-banach-potential title="有界团数弦图上的平均增益重构" lean="D5/S3/Combinatorics/Graph/Chordal/CliqueBoundedBanachPotential.SimpleGraph.IsChordal.exists_clique_bounded_banach_gain_potential"}
+设 $V$ 为有限顶点集，$G$ 为 $V$ 上的简单弦图。设 $k\in\mathbb N$，$2\le k$，且 $G$ 的每个团至多有 $k+1$ 个顶点。给定实半范数线性空间 $E$、映射 $g:V\times V\to E$ 和实数 $\varepsilon\ge0$，假设对每个有序顶点对 $(i,j)$ 都有 $g(j,i)=-g(i,j)$，且对每个满足 $i$ 与 $j$、$j$ 与 $\ell$、$i$ 与 $\ell$ 均相邻的有序三元组 $(i,j,\ell)$，都有 $\|g(i,j)+g(j,\ell)-g(i,\ell)\|\le\varepsilon$。
+
+则存在一个势 $\varphi:V\to E$，使下式对每个满足 $u$ 与 $v$ 相邻的有序对 $(u,v)$ 同时成立。
+
+$$
+\|g(u,v)-(\varphi(v)-\varphi(u))\|\le\left(4-\frac{4}{k}\right)\varepsilon.
+$$
+:::
+
+::: {.proof #pf-appe-clique-bounded-banach-potential}
+各连通分支的诱导子图继承弦性、团大小界与增益条件，棱的两端属于同一分支，故分别构造势再合并即可。沿用 [@thm-appe-chordal-uniform-gain-potential] 证明中的根 $o$、距离分层、影子 $S_C$ 和公共锚 $a_C$。对第 $i\ge1$ 层的点 $x$，令 $C$ 为层数至少为 $i$ 的诱导子图中包含 $x$ 的分支，记 $N^-(x)$ 为 $x$ 在上一层的邻点集。最短路保证 $N^-(x)$ 非空，且 $N^-(x)\subseteq S_C$。当 $i\ge2$ 时，$a_C$ 位于第 $i-2$ 层，它与影子中的所有点相邻，所以 $S_C\cup\{a_C\}$ 是多一个顶点的团，给出 $|N^-(x)|\le |S_C|\le k$。第一层则有 $N^-(x)=S_C=\{o\}$。
+
+令 $\varphi(o)=0$。第一层分支取 $a_C=o$、$Q_C=0$，其余分支沿上一层尾部子图中包含 $C$ 的父分支 $D$ 递推 $Q_C=Q_D+g(a_D,a_C)$。在非根顶点取 $\varphi(x)=\bar\phi_x$，其中
+
+$$
+\bar\phi_x=Q_C+\frac{1}{|N^-(x)|}\sum_{b\in N^-(x)}\bigl(g(a_C,b)+g(b,x)\bigr).
+$$
+
+反对称性给出 $g(o,o)=0$，故根棱精确拟合。若两条路径从同一锚 $a$ 分别经同一影子中的 $b,d$ 到同一终点 $z$，路径和之差就是 $(a,b,d)$ 与 $(b,d,z)$ 的缺陷之差，范数至多为 $2\varepsilon$。有顶点重合时，相应的三角缺陷由反对称性消为零。
+
+对从前一层到第 $i\ge2$ 层的棱 $(x,y)$，令 $C$ 为 $y$ 所在的尾部分支。因 $x\in S_C$，$x$ 位于 $C$ 的父分支，且 $a_C\in N^-(x)$、$x\in N^-(y)$。在 $\varphi(x)$ 的平均中，经过 $a_C$ 的项恰为 $Q_C+g(a_C,x)$。在 $\varphi(y)$ 的平均中，经过 $x$ 的项恰比它多 $g(x,y)$。两侧的其余项各用上述两次三角比较估计。每侧至少有一个误差为零的项，故 $m\le k$ 项的平均误差至多为 $2(1-1/m)\varepsilon\le(2-2/k)\varepsilon$，相加得到 $(4-4/k)\varepsilon$。
+
+同层相邻点 $x,y$ 共享分支、影子和锚。若两个前驱集互不包含，从各自的差集中取一个前驱，它们在同一影子中相邻，并与 $x,y$ 构成无弦四环，违反弦性。因此可定向使 $N^-(x)\subseteq N^-(y)$。固定 $b\in N^-(x)$，将经 $b$ 到 $x$ 再走 $xy$ 的路径和与 $y$ 的各条前驱路径比较。经 $b$ 到 $y$ 的配对项只用三角形 $(b,x,y)$，误差至多为 $\varepsilon$。每个其他项再用两次三角比较，误差至多为 $3\varepsilon$。公共项 $Q_C$ 抵消。先对 $N^-(y)$ 取平均，其 $m$ 项中至少一项的误差至多为 $\varepsilon$，故平均误差至多为 $(3-2/m)\varepsilon\le(3-2/k)\varepsilon$。再对 $N^-(x)$ 取平均，仍有此界。由 $k\ge2$，它至多为 $(4-4/k)\varepsilon$。相邻点的层数至多差 $1$，反向只改变残差的符号，所以同一个势满足所有有向棱的界。完整证明由 Lean 内核检查。
+:::
+
+代入 $k=3$ 或 $k=4$，团大小至多为 $4$ 或 $5$ 的弦图分别得到 $\frac{8}{3}\varepsilon$ 或 $3\varepsilon$ 的上界，特别适用于 $3$-树和 $4$-树。每个有限的 $k$ 都给出严格小于 $4$ 的系数，但当 $k$ 无界时，该系数趋于 $4$。实 Banach 目标的最优弦图系数 $C_{\mathrm{Ban,chordal}}$ 的精确值在 $[2,4]$ 内仍待确定。由上文的整数性论证，任意双不变伪度量群的统一系数 $C_{\mathrm{chordal}}$ 仍待在 $\{2,3,4\}$ 中确定。固定目标群后，还可以问一个给定弦图上的最优系数。
 
 **四顶点图上的 $\mathrm{SU}(2)$ 圆度量反例。** 四点弦图若无三角形便是森林。若只有一个三角形，可规范化两条辐棱，把余棱写成 $\exp X$，再取势 $1,\exp(-X/3),\exp(X/3)$，三棱误差各为 $|X|/3\le\varepsilon/3$。附着的树棱可精确拟合。剩下的非完全图是两三角形共一棱的菱形图。把一个度数为 $3$ 的顶点取作中心，将辐棱规范化为 $1$。在外缘路径的中间顶点取势 $1$，两端各在 $1$ 与精确拟合相应外缘棱的值之间取最短测地线中点，误差至多 $\varepsilon/2$。
 

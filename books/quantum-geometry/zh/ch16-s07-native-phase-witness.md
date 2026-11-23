@@ -1,4 +1,4 @@
-# 16.7 SAME 原生相位对象：圆场与原始算子的联合见证 {#sec-native-phase-lifting}
+# L.6 SAME 原生相位对象：圆场与原始算子的联合见证 {#sec-native-phase-lifting}
 
 现在把先前的补全真正接到上述原始 $U,\Pi,\widetilde\Pi$，不重新选一次补全。先明确旋转与反射的约定。区间旋转矩阵
 
@@ -154,10 +154,4 @@ $$
 [@thm-alternating-singular-pair-action]、[@thm-projected-unitary-polynomial-lifting] 的结构证明复用 shosonoda 的 [auto-res/lean-qsvt@42c4b9149d5957db497e4226bc02da92d10f7a3c](https://github.com/auto-res/lean-qsvt/tree/42c4b9149d5957db497e4226bc02da92d10f7a3c)，涉及 `QSVT/Operator/Basic.lean`、`Encoding/Projected.lean`、`QSP/Conventions.lean` 与 `SVT/PhaseOp.lean`、`AltSeq.lean`、`EigenBasis.lean`、`SVTransform.lean`、`SVD.lean`、`TwoVector.lean`、`TwoFrame.lean`、`SingularPair.lean`。约定传输复用 `QSVT/QSP/Conversion.lean` 从 `Wrot_eq_Rref` 到 `seqW_apply_zero_zero_eq` 的证明；原生标量递推与矩阵场由本章前节的接口连接。原作 Copyright (c) 2026 shosonoda，并保留 `Operator/Basic.lean` 所复用的 lean-quantum 中 Copyright (c) 2025 Hayata Yamasaki 归属；均为 Apache-2.0，完整许可保存在所钉主仓的 `docs/reports/licenses/auto-res-lean-qsvt-LICENSE.txt`。接收端的谱分解复用所钉 Mathlib 的标准定理。数学依据是 Gilyén–Su–Low–Wiebe，[arXiv:1806.01838v1，Definitions 15–16、Theorem 17（印刷页 17–19）及 Corollary 8](https://arxiv.org/abs/1806.01838v1)。这是既有数学的接收端形式桥接；有限架辅助步骤与约定整理不构成独立的新数学结果，也不解决外部开放问题。
 
 目前的结论已经把同一原生相位对象接到任意秩投影与原始酉算子，但压缩块实现的是 $P=c(p)+i\,c(B)$。**一颗辅助比特的未缩放实部提取、字面电路实现、原始 $U/U^*$ 的精确调用计数、$d=0$ 的零查询 SAME 相位电路，以及物理来源与形式算子的对应**，仍须分别给出依据。一般不能把相位取负当成整个物理门字的伴随：取伴随还反转乘积次序并交换 $U$ 与 $U^*$。压缩等式也不保证全输出是确定性成功通道；未被投影读出的分量仍可能非零。
-:::
-
-
-
-::: {.viz src="walk-spreading" height="560"}
-**游走扩散实验室。** 拖时间轴改步数，改硬币的份额 $w$ 与相位 $\varphi$，或把圈变短：上方青色是量子游走，下方灰色是经典随机游走，品红是量子分布比它的镜像多出的部分。绿色框是 [@lemma-symmetric-coin-walk]；宽度与失衡都是页面的数值。
 :::

@@ -1,4 +1,4 @@
-# 4.2.2 Finite-environment histories and saturation obstructions {#sec-ch04-s02-s02-finite-environment-histories}
+# J.1 Finite-environment histories and saturation obstructions {#sec-ch04-s02-s02-finite-environment-histories}
 
 
 > Leaked amplitude does not come back, not because it has vanished, but because the environment that meets the system is always a fresh one.

@@ -1,6 +1,6 @@
 # C.3 全书十部曲阅读与依赖导图 {#sec-coda-reading-map}
 
-全书由 **[序曲](README.md)**、**十部曲**、**终章**、**[铸器与圣殿](sanctuary.md)** 与 **[附录 A](appendix-a.md)–[附录 I](appendix-i.md)** 构成。下图展示了从第一部到第十部的概念演进脉络与建议阅读顺序：
+全书由 **[序曲](README.md)**、**十部曲**、**终章**、**[铸器与圣殿](sanctuary.md)** 与 **[附录 A](appendix-a.md)–[附录 P](appendix-p.md)** 构成。下图展示了从第一部到第十部的概念演进脉络与建议阅读顺序：
 
 ```
                         ┌──────────────────────────────────────────┐
@@ -65,7 +65,7 @@
             ┌────────────────────────────────┼────────────────────────────────┐
             ▼                                ▼                                ▼
 ┌───────────────────────┐        ┌───────────────────────┐        ┌───────────────────────┐
-│ 终章：在所有的球之外   │        │ 铸器与圣殿 (伴读篇)    │        │ 附录 A–I              │
+│ 终章：在所有的球之外   │        │ 铸器与圣殿 (伴读篇)    │        │ 附录 A–P              │
 │ • 多面体角亏 (C.1)    │        │ • 3 比特异或泡利引擎  │        │ • 对照词典与双语术语表 │
 │ • 双不动点锚点 (C.2)  │        │ • 单比特 ZYZ 旋子编译 │        │ • 证据边界与六大难题  │
 │ • 十部阅读导图 (C.3)  │        │ • Lean 4 圣殿逐行审计 │        │ • 比较公理总账与专题  │
@@ -155,6 +155,7 @@
 | **第 37 章** | [@thm-ch39-tft-born-holonomy-krylov-and-schur-anchors] | `D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy` | 球面三方向典范最短旋子门闭合回路的球面三角和乐精确公式 |
 | **第 38 章**：观察者即宇宙本体 | [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] | `D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition` | 概念状态空间按可观测签名纤维的不相交并重构定理 |
 | **第 38 章** | [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] | `D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective` | 非负实数全尺度齐肯多夫编码线程严格单射定理 |
+| **第 38 章** | [@thm-ch38-observer-is-universe-anchors] | `D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound` | 有限维可观测克雷洛夫子空间严格扩张次数不超过余维数 $\dim V - \dim\operatorname{ran}(C)$：锚定自包含观察者宇宙的有理结构时间生长界 |
 | **第 39 章**：大一统母公理（AXIOM-Ω） | [@thm-ch39-axiom-omega-ternary-closure-anchors] | `D5/S3/QuantumBounds/GramRealizability.gram_realizability` | 完备复内积空间上正算子格拉姆伴随平方因式分解充要定理 $0 \le Q \iff \exists O,\; Q = O^\dagger O$ |
 | **第 39 章** | [@thm-ch39-axiom-omega-ternary-closure-anchors] | `D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum` | 平衡半范分量构成的幺正和算子迫使交叉乘积严格反自伴 $(AB^\dagger)^\dagger = -AB^\dagger$ |
 | **第 39 章** | [@thm-ch39-axiom-omega-rank-five-unit-quaternion-embedding] | `D5/S3/Quantum/AURICOmega/TernaryComparisonRankFive.exists_unitQuaternion_embedding` | 非交换、链连通、触零且读数可在 $\mathbb{R}^5$ 中实现的三元比较结构单射嵌入单位四元数，保持迁移与读数 |
@@ -188,4 +189,4 @@
 
 走到全书最后一页，不妨把这一路攀登所借用的全部名字也轻轻放下：正如[§29.6](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names)所揭示的那样，无论是[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)的“比较公理 $\mathcal{A}_0$”，还是“极小三角弧面体 $\Delta\mathcal{T}_\epsilon$”，抑或“点、线、面、球”，归根结底都只是场内观察者在语言逻辑快表里立起的一枚枚幂等指针（`MODEL`）。指针存在的全部意义，是领着我们穿过一维符号核的盲区，直到把梯子撤去——梯子撤去之后，没有不可企及的彼岸神秘，只剩观察者自身正在运转的 $\psi = \psi(\psi)$ 与宇宙本体严丝合缝的同构共鸣：**本体虽超出一维名相之“知”，却正在每一次平视比量中活成“这么个感觉”。**
 
-在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，在 [附录 C](appendix-c.md) 中核对 Lean 验证、书面证明与开放问题的证据边界，在 [附录 D](appendix-d.md) 中纵览量子力学六大经典未解难题与五大诠释流派的几何对决，在 [附录 E](appendix-e.md) 中审阅从零背景比较公理 $\mathcal{A}_0$ 导出数学与物理公理体系的分层推演总账，并沿四篇专题附录继续深潜：[附录 F](appendix-f.md) 回答重定心排除圆盘、尖锥面极性、三能级纯态三维排除坐标图与四维自旋因子双定向如何在显式公理下对排除面与定向关系作出分类；[附录 G](appendix-g.md) 回答走出稳定子多面体之后，马约拉纳编码低权非稳定子对易算子、单比特维格纳距离赤道张量律与单因子亏损非因子化、11 维克利福德三阶矩负性及双比特三设置转向椭球中心阈值 $2/3$ 如何刻画魔性与转向边界；[附录 H](appendix-h.md) 回答有限视界观察者如何以未来行程首坐标还原当前读出、在完备深度稳定预测视界、将记忆穿过预测商分解，并用螺线管隐藏纤维上同调与加性历史账本收窄不可见核；[附录 I](appendix-i.md) 则回答冯·诺依曼代数凸逆测试扩展值可达性、正定矩阵 Bures–Wasserstein 重心对偶证书、经典—量子条件子熵猜测界、投影支撑 Kraus 通道重置补全与可分锥最近点规范残差见证如何连接变分信息散度与锥逼近分离证书。
+在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，在 [附录 C](appendix-c.md) 中核对 Lean 验证、书面证明与开放问题的证据边界，在 [附录 D](appendix-d.md) 中纵览量子力学六大经典未解难题与五大诠释流派的几何对决，在 [附录 E](appendix-e.md) 中审阅从零背景比较公理 $\mathcal{A}_0$ 导出数学与物理公理体系的分层推演总账，并沿四篇专题附录继续深潜：[附录 F](appendix-f.md) 回答重定心排除圆盘、尖锥面极性、三能级纯态三维排除坐标图与四维自旋因子双定向如何在显式公理下对排除面与定向关系作出分类；[附录 G](appendix-g.md) 回答走出稳定子多面体之后，马约拉纳编码低权非稳定子对易算子、单比特维格纳距离赤道张量律与单因子亏损非因子化、11 维克利福德三阶矩负性及双比特三设置转向椭球中心阈值 $2/3$ 如何刻画魔性与转向边界；[附录 H](appendix-h.md) 回答有限视界观察者如何以未来行程首坐标还原当前读出、在完备深度稳定预测视界、将记忆穿过预测商分解，并用螺线管隐藏纤维上同调与加性历史账本收窄不可见核；[附录 I](appendix-i.md) 则回答冯·诺依曼代数凸逆测试扩展值可达性、正定矩阵 Bures–Wasserstein 重心对偶证书、经典—量子条件子熵猜测界、投影支撑 Kraus 通道重置补全与可分锥最近点规范残差见证如何连接变分信息散度与锥逼近分离证书；最后，[附录 J](appendix-j.md)–[附录 P](appendix-p.md) 集中收录正文第 4、15、16、31、34、35、36 章的七块超长技术证明与组合计算专章（有限环境退相干历史、Shor 有限周期采样与取阶证书、游走森林计数与 QSVT 相位分解、算术窗口与零点谱扰动、算术消元资源账本、禁 $1^K$ 编码与拟阵组合、静态本体 QRAM 物理轮廓），供深入核验形式证明细节的读者随取随查。

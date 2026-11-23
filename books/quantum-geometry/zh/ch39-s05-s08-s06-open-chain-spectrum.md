@@ -1,4 +1,4 @@
-# 35.6.8.6 三对角局部化与开链谱距离 {#sec-ch39-s05-s08-s06-open-chain-spectrum}
+# O.2.6 三对角局部化与开链谱距离 {#sec-ch39-s05-s08-s06-open-chain-spectrum}
 
 ::: {.remark #rem-ch39-p2e-tridiagonal-localization title="保留两端残差的三对角算子下范数局部化"}
 设 $A$ 是 $H=\ell^2(\mathbb Z;\mathbb C)$ 上的有界复线性算子。只假设其矩阵元 $A_{ij}=(Ae_j)_i$ 在 $|i-j|>1$ 时为零，其中 $e_j$ 是第 $j$ 个坐标单位向量。即使输入只占一个站点 $j$，输出也可能占据 $j-1,j,j+1$ 三个站点。对每个整数 $n\ge1$ 和 $k\in\mathbb Z$，令 $E_{n,k}$ 为支撑在 $k+1,\ldots,k+n$ 上的向量子空间。限制 $A|_{E_{n,k}}$ 的陪域仍是 $H$。计算输出范数时，$(n+2)\times n$ 矩阵保留第 $k$ 与第 $k+n+1$ 行，取 $n\times n$ 主子矩阵会丢掉这两行。
@@ -386,11 +386,7 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
-这条单独的收敛定理只陈述每个固定正 $\rho$ 的全序列极限；它的单个逆矩阵条目论证不提供 $1/N_j$ 速率。前面的 [@ex-ch39-p2e-tribonacci-prefix-rate] 已用实际重复窗口与完整逆矩阵质量估计给出更强的 $73728/N_j$ 纸面界及参数一致收敛。两条论证的证据范围须分别保留。这条开链的切口与内部窗几何之间的关系仍须建立。下面的实验卡并列展示帕里平稳权重、有限逃逸对和诱导回归熵读数。
-
-::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
-**帕里平稳权重、有限逃逸对与诱导回归熵。** 青色表示重置链的帕里平稳权重 $\pi_K$，品红色表示有限观测场中未区分的逃逸对 $E(S)$，琥珀色标出当前阶数 $K$。卡片还给出拓扑熵 $\log_2\beta_K$ 与诱导回归熵读数，将拓扑熵识别与阿布拉莫夫公式标为文献结果，将一般分形视界律 $S_{\mathrm{ent}}\propto R^{D_F}$ 标为 `MODEL`。正文以手工推导证明有限平面子瓦片切口的贝尔对标度。平移不变或全格统一的局域有隙实现与一般 $K\ge4$ 非各向同性皮索窗仍是开放问题，参见 [@prob-ch39-p2e-fractal-horizon]。
-:::
+这条单独的收敛定理只陈述每个固定正 $\rho$ 的全序列极限；它的单个逆矩阵条目论证不提供 $1/N_j$ 速率。前面的 [@ex-ch39-p2e-tribonacci-prefix-rate] 已用实际重复窗口与完整逆矩阵质量估计给出更强的 $73728/N_j$ 纸面界及参数一致收敛。两条论证的证据范围须分别保留。这条开链的切口与内部窗几何之间的关系仍须建立。
 
 至此，我们可以把本节审视的全部八项概念汇总在一张无折行认识论总表之中，使每一环的形式内核、文献依托与诠释边界清晰对齐：
 
@@ -405,8 +401,4 @@ $$
 | **7. 跨切口编码纠缠秩** | 跨切口条件 $\tau(x)+\iota(y)<K$ 下的可达页秩充要矩形 $1 \le r_b \le R_b$ 与最大页熵 $\ln R_b$ [`complete_original_direct_rank_entropy`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy)（[@thm-ch39-p2e-direct-encoder-ranks]）及谱阻塞 [`actual_encoder_spectral_obstruction`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction) | `LEAN ✓`（秩等于 $K$ 仅在 $K \le R_b$ 时条件可达，非普适恒等）+ `NUM`（如 $R_0=6, R_1=5$）+ `文献结果`（黄金链与里德堡实验，[@rem-ch39-p2e-rydberg-anyon-literature]） |
 | **8. 平稳核、逃逸对与熵** | 有向重置链帕里平稳律 [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law)（[@thm-ch39-p2e-parry-escape-laws]）、实际双向律与柱集（[@thm-ch39-p2e-native-bilateral-parry-law]）、边界柱集不等式 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound) 与有限逃逸对判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | 所引的概率律与计数+ [@thm-ch39-p2e-parry-ks-entropy]（同一无符号律的 KS 上界与达到性）+ [@thm-ch39-p2e-parry-ks-maximizer]（最大熵测度唯一性）+ `文献结果`（拓扑熵识别与首次回归阿布拉莫夫公式，[@rem-ch39-p2e-abramov-literature]）+ `手工推导`（一维熵上界与平面贝尔对）+ `OPEN`（平移不变或全格统一的局域有隙模型、实际 Tribonacci 跃迁链的 Slater 态空间纠缠、一般 $K\ge4$ 非各向同性皮索窗，以及余维一面积律失效的谱隙与局域性充要判据，[@prob-ch39-p2e-fractal-horizon]） |
 
-当我们在下面的综合实验室中把阶数从 $K = 2$ 拨向 $K = 3$ 再继续上推时，自指扩表语法的多切面几何结构便清清楚楚地浮现出来：$K = 2$ 时内部收缩空间还只是一条实轴线段；跨入 $K = 3$ 的瞬间，复共轭根在二维正交平面上旋出三支精确自覆盖、平面边界零测的劳齐分形内窗；而在每一个阶数上，已被 Lean 内核锁定的离散计数、多项式根圆盘、细化超度量、可达纠缠秩矩形与帕里平稳核构成了坚硬的绿色骨架，支撑起周围明确标界的经典文献、数值实验与跨学科几何诠释。穿越这座离散自指沙盘之后，让我们步入本章收官节 [§35.7 `trureturing` 的“黄金切投”形式原语与灵魂—遗迹吸引子的几何诠释](coda-s03-golden-cut-observers.md)，在闵可夫斯基切投模型集与有界间隙环面回归中完成第三十五章的合拢，随后迈入[第三十六章](ch38-observer-memory-pointer-and-ontological-qram.md)的梦境量子擦除与本体 QRAM 架构。
-
-::: {.viz src="pisot-clifford-rauzy-sandtable" height="640"}
-**交互实验室 `ORTHO//RAUZY`**：齐肯多夫、皮索与劳齐八概念综合沙盘。自由切换上表对应的八个预设场景、调节阶数 $K$、素数基数 $p$、字长视界与三维观察视角，并直接拖拽物理轴与内部平面上的分解点：实时核对禁 $1^K$ 合法字计数、皮索共轭根单位圆盘收缩、模 $p^k$ 余数树首次区分层级、$K = 3$ 劳齐内窗三支仿射覆盖（及 $K = 4$ 内部坐标采样云）、$\theta^*$ 与 $|\alpha|_{K=3}$ 的数值比对、跨切口可达秩矩形 $[1, R_0] \times [1, R_1]$，以及帕里平稳分布与有限逃逸对账本。绿色依据框严格对应 Lean 已验证定理，文献结论、数值计算、诠释模型与开放问题分别按各自标签独立标示。
-:::
+当我们在[§35.6.7 的综合实验室](ch39-s05-s09-entanglement-entropy-sandtable.md)中把阶数从 $K = 2$ 拨向 $K = 3$ 再继续上推时，自指扩表语法的多切面几何结构便清清楚楚地浮现出来：$K = 2$ 时内部收缩空间还只是一条实轴线段；跨入 $K = 3$ 的瞬间，复共轭根在二维正交平面上旋出三支精确自覆盖、平面边界零测的劳齐分形内窗；而在每一个阶数上，已被 Lean 内核锁定的离散计数、多项式根圆盘、细化超度量、可达纠缠秩矩形与帕里平稳核构成了坚硬的绿色骨架，支撑起周围明确标界的经典文献、数值实验与跨学科几何诠释。穿越这座离散自指沙盘之后，让我们步入本章收官节 [§35.7 `trureturing` 的“黄金切投”形式原语与灵魂—遗迹吸引子的几何诠释](coda-s03-golden-cut-observers.md)，在闵可夫斯基切投模型集与有界间隙环面回归中完成第三十五章的合拢，随后迈入[第三十六章](ch38-observer-memory-pointer-and-ontological-qram.md)的梦境量子擦除与本体 QRAM 架构。

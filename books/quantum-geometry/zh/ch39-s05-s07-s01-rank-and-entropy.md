@@ -1,6 +1,6 @@
-# 35.6.7.1 直接编码器的秩与纠缠熵 {#sec-ch39-s05-s07-s01-rank-and-entropy}
+# O.1.1 直接编码器的秩与纠缠熵 {#sec-ch39-s05-s07-s01-rank-and-entropy}
 
-页秩上界 $R_0, R_1$ 与直接编码契约（`directContract`）见 [§35.6.7](ch39-s05-s07-cut-entanglement.md#sec-ch39-p2e-entanglement)。
+页秩上界 $R_0, R_1$ 与直接编码契约（`directContract`）见 [§O.1](ch39-s05-s07-cut-entanglement.md#sec-ch39-p2e-entanglement)。
 
 ::: {.theorem #thm-ch39-p2e-direct-encoder-ranks title="K-Bonacci 直接编码器的可达页秩矩形与冯·诺依曼纠缠熵极值定理" lean="D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy"}
 对任意整数 $N \ge 2$、$K \ge 2$ 与块长 $m_X, m_Y \ge 1$，非素数与素数逻辑页维数均严格为正（$M_0 > 0,\; M_1 > 0$）。记页秩 $r_b = \operatorname{rank}(\sigma_b)$（$b \in \{0, 1\}$），$R_0, R_1$ 如上式所定义，则：

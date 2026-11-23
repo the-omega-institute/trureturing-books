@@ -1,4 +1,4 @@
-# 35.6.7 Cross-Cut $1^K$ Prohibition and Attainable Schmidt Ranks of Direct Encoders {#sec-ch39-p2e-entanglement}
+# O.1 Cross-Cut $1^K$ Prohibition and Attainable Schmidt Ranks of Direct Encoders {#sec-ch39-p2e-entanglement}
 
 Partition a binary physical register of length $m_X + m_Y$ ($m_X, m_Y \ge 1$) across a cut into a left block $X$ of length $m_X$ and a right block $Y$ of length $m_Y$. Even when $x \in \{0, 1\}^{m_X}$ and $y \in \{0, 1\}^{m_Y}$ are individually $1^K$-free, their concatenation $xy$ can still assemble $K$ consecutive `1`s across the junction: writing $\tau(x)$ for the terminal run of `1`s in $x$ and $\iota(y)$ for the initial run of `1`s in $y$, the concatenated word $xy$ is admissible if and only if
 
@@ -55,6 +55,18 @@ Order word pairs by the size of their occupied union. At a pair $(x,y)$, keep bo
 :::
 
 The three-site pyramid has $25$ ordered legal pairs. The numbers with union sizes $0,1,2,3$ are $1,9,13,2$, respectively. Each adjacent pair of sites accounts for two ordered word pairs with that union, and the two endpoints account for nine. All single-site marginals have rank $10$, which includes the trace. All three two-site marginals have rank $23$. Measuring only the two adjacent pairs gives rank $14$, since neither region contains the union formed by the two endpoints.
+
+The inverse question is whether two specified adjacent marginals come from one state. Let the sites be $A,B,C$ with occupancies $p_A,p_B,p_C$, using the same $p_B$ in both marginals. Assume each marginal has zero entries between its vacuum and one-particle sectors. Write $\alpha,\beta$ for the entries in the endpoint-occupied row and middle-occupied column of the respective marginals, and set $q_0=\max(0,p_A+p_B+p_C-1)$. They admit a common positive semidefinite trace-one extension exactly when
+
+$$
+p_B\ge0,\qquad p_A,p_C\ge q_0,\qquad
+|\alpha|^2\le p_B(p_A-q_0),\qquad
+|\beta|^2\le p_B(p_C-q_0).
+$$
+
+If $q$ is the probability of occupying both endpoints, the vacuum weight is $1-p_A-p_B-p_C+q$, so $q\ge q_0$. The global one-particle block has diagonal weights $p_A-q,p_B,p_C-q$. Its two adjacent principal minors give the coherence bounds. Conversely, take $q=q_0$. For $p_B>0$, the outer product of $(\alpha/\sqrt{p_B},\sqrt{p_B},\beta/\sqrt{p_B})$ realizes both coherences. A nonnegative diagonal term supplies the remaining endpoint weights. If $p_B=0$, both coherences must vanish and the one-particle block can be diagonal. [Exact criterion for a common positive extension](lean:D5/S3/Quantum/Entanglement/Marginals/FibMarginalExtension.extendible_iff)
+
+For example, take the pure state $(|10\rangle+|01\rangle)/\sqrt2$ on each edge. Both readouts give a maximally mixed middle site. Here $p_A=p_B=p_C=1/2$ and $q_0=1/2$, so both nonzero coherences exceed the common-extension bounds.
 
 For equal-width windows on an open chain of length $n$, the joint rank can be computed directly from the spacing. Forbid $K$ consecutive ones, let $a_\ell$ be the number of legal words of length $\ell$, and write $b_\ell=a_\ell^2$ with $b_0=1$. Choose $m\ge1$ windows of width $1\le k\le n$ with strictly increasing starts and successive gaps $g_1,\ldots,g_{m-1}$. The rank of their collected partial traces is
 
@@ -273,6 +285,6 @@ $$
 
 An isometric encoding matrix $J : \mathbb{C}^{\mathrm{Logical}(N)} \to \mathbb{C}^{\{0,1\}^{m_X} \times \{0,1\}^{m_Y}}$ paired with left-register page density states $\sigma_0, \sigma_1$ satisfies `directContract` if: (i) $J^* J = I$; (ii) physical first-bit page projectors on both $X$ and $Y$ intertwine the logical page projectors $\Pi_b$, with $\sigma_b$ supported in $C_{m_X, b}$; (iii) for **every** logical operator $A$, $\operatorname{Tr}_Y(J A J^*) = \sum_{b \in \{0,1\}} \operatorname{Tr}(\Pi_b A)\,\sigma_b$; and (iv) every concatenated pair $(x, y)$ violating the $1^K$-free law has zero encoded amplitude $(J\psi)(x, y) = 0$ for every logical input $\psi$. Under this contract, the attainable Schmidt ranks and von Neumann entropies are characterized completely:
 
-- [35.6.7.1 Direct-encoder ranks and entanglement entropy](ch39-s05-s07-s01-rank-and-entropy.md)
-- [35.6.7.2 Local parent Hamiltonians and heat-bath chains](ch39-s05-s07-s02-parent-and-heatbath.md)
-- [35.6.7.3 A uniform gap at fixed forbidden-word length](ch39-s05-s07-s03-uniform-gap.md)
+- [O.1.1 Direct-encoder ranks and entanglement entropy](ch39-s05-s07-s01-rank-and-entropy.md)
+- [O.1.2 Local parent Hamiltonians and heat-bath chains](ch39-s05-s07-s02-parent-and-heatbath.md)
+- [O.1.3 A uniform gap at fixed forbidden-word length](ch39-s05-s07-s03-uniform-gap.md)

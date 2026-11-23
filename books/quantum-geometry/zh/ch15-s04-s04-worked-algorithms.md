@@ -1,4 +1,4 @@
-# 15.4.4 Grover、QFT 与 Shor 的完整手算 {#sec-ch15-s04-s04-worked-algorithms}
+# 15.4.1 Grover、QFT 与 Shor 的完整手算 {#sec-ch15-s04-s04-worked-algorithms}
 
 下面，让我们通过一个四步完整手算算例，把 $N=4$ 与 $N=8$ 的 Grover 搜索、$3$ 比特 QFT 的二进制相位齿轮、$N=15$ 的 Shor 周期寻找以及 $\mathrm{ZMod}\,16$ 上的字符和与泊松公式逐一验算到底。
 

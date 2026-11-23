@@ -1,0 +1,6 @@
+# Appendix O Forbidden-$1^K$ Encoders, Parry Stationary Laws, and Ternary Matroid Proofs {#sec-appendix-o}
+
+In [Section 35.6](ch39-s05-pisot-clifford-rauzy.md), we moved through the Zeckendorf forbidden-adjacency language, $K$-Bonacci Pisot contraction, $p$-adic residue trees, the $K = 3$ Rauzy internal window, the Clifford line–plane split, and self-referential scale comparisons, closing the eight-concept sandtable in [§35.6.7](ch39-s05-s09-entanglement-entropy-sandtable.md) with the main cross-cut entanglement and Parry horizon-entropy takeaways. The full multi-section technical proofs supporting those final two rings—spanning direct-encoder Schmidt ranks, local parent Hamiltonians and uniform spectral gaps, bilateral Parry sources, direction complexes, ternary matroid extensions, substitution discrepancy, and open-chain spectral distance—are gathered here so [Chapter 35](ch36-hyperbolic-steps-and-quotienting-reincarnation.md) flows cleanly into the golden-cut primitives of [§35.7](coda-s03-golden-cut-observers.md):
+
+- [O.1 Cross-Cut $1^K$ Prohibition and Attainable Schmidt Ranks of Direct Encoders](ch39-s05-s07-cut-entanglement.md)
+- [O.2 Parry Stationary Law, Escape-Pair Counting, and the Fractal Horizon Entropy Problem](ch39-s05-s08-parry-law-and-entropy.md)

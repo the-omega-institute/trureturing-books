@@ -1,4 +1,4 @@
-# 31.1.3.1 Power sampling, window mass, and auxiliary primes {#sec-ch34-s28-s03-s01-sampling-windows}
+# M.1 Power sampling, window mass, and auxiliary primes {#sec-ch34-s28-s03-s01-sampling-windows}
 
 ::: {.theorem #thm-ch31-mangoldt-power-threshold title="The critical power exponent for the complete Mangoldt remainder" lean="D5/S3/Weil/Mertens/IntegratedExplicit/RHPowerThreshold.u_div_rpow_tendsto_zero_iff"}
 Assume the Riemann hypothesis. For every real $\theta$, with $x$ tending to $+\infty$ through real values,

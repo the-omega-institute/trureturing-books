@@ -1,4 +1,4 @@
-# 35.6.8.4 Noncontiguous cuts, purity, and direction complexes {#sec-ch39-s05-s08-s04-cuts-and-circuits}
+# O.2.4 Noncontiguous cuts, purity, and direction complexes {#sec-ch39-s05-s08-s04-cuts-and-circuits}
 
 
 **A calculation for disjoint sites.** On four sites ordered $0,1,2,3$, take the orthonormal orbitals $u=(e_0+e_2)/\sqrt{2}$ and $v=(e_1+e_3)/\sqrt{2}$ and keep $I=\{0,2\}$. The two-row determinants in increasing site order give
@@ -973,7 +973,7 @@ In the same setting, the dimension is $d+1$ precisely when $3\mid s$ and both se
 An additive map from the cyclic group is determined by its value at $1$. If $3$ divides $s$, all such maps are scalar multiples of reduction modulo three. A single uncovered pair with a nonzero reduced difference or a single internal triple with a nonzero reduced sum forces that scalar to vanish. The row functional and the allowed scalar are independent, as they can be recovered by evaluating at $(x,0)$ and $(0,1)$.
 :::
 
-The next section gives the minimum number of internal triples needed to gain one potential dimension with the mixed family fixed. [35.6.8.4.1 The minimum number of internal additions](ch39-s05-s08-s04-s01-minimum-internal-additions.md)
+The next section gives the minimum number of internal triples needed to gain one potential dimension with the mixed family fixed. [O.2.4.1 The minimum number of internal additions](ch39-s05-s08-s04-s01-minimum-internal-additions.md)
 
 **Reduced integral homology of the direction complex (written derivation).** Suppose there is at least one nonempty facet. Write $d=n-h$ and let $m$ be the number of facets with $R(B)=B$. The quotient map above is a homotopy equivalence, so it identifies the reduced integral homology of $X$ with that of the wedge. Each sphere has its basepoint as a subcomplex of a CW structure, so its inclusion into the finite wedge contributes a direct summand in reduced homology. Each $S^{d-1}$ contributes a copy of $\mathbb Z$ in degree $d-1$ and zero in all other nonnegative degrees. Thus $\widetilde H_{d-1}(X;\mathbb Z)\cong\mathbb Z^m$, and $\widetilde H_k(X;\mathbb Z)=0$ for $k\ne d-1$. [Hatcher, *Algebraic Topology*, Corollary 2.25](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
 

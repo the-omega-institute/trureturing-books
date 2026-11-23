@@ -1,4 +1,4 @@
-# 16.7 The SAME Native Phase Object: Joint Witnesses for the Circle Field and Raw Operator {#sec-native-phase-lifting}
+# L.6 The SAME Native Phase Object: Joint Witnesses for the Circle Field and Raw Operator {#sec-native-phase-lifting}
 
 We can now connect the earlier completion to the raw $U,\Pi,\widetilde\Pi$ without choosing a second completion. First fix the rotation and reflection conventions. The interval rotation matrix
 
@@ -154,10 +154,4 @@ Here $\Psi=[\pi/3,0]$, $S=D(\pi/3)$, and $V_E=F_\Pi(\pi/3)$. The even root is th
 The structural proofs behind [@thm-alternating-singular-pair-action] and [@thm-projected-unitary-polynomial-lifting] reuse shosonoda's [auto-res/lean-qsvt@42c4b9149d5957db497e4226bc02da92d10f7a3c](https://github.com/auto-res/lean-qsvt/tree/42c4b9149d5957db497e4226bc02da92d10f7a3c): `QSVT/Operator/Basic.lean`, `Encoding/Projected.lean`, `QSP/Conventions.lean`, and `SVT/PhaseOp.lean`, `AltSeq.lean`, `EigenBasis.lean`, `SVTransform.lean`, `SVD.lean`, `TwoVector.lean`, `TwoFrame.lean`, and `SingularPair.lean`. Convention transport reuses the proofs from `Wrot_eq_Rref` through `seqW_apply_zero_zero_eq` in `QSVT/QSP/Conversion.lean`; the earlier native interfaces connect the scalar recursion and matrix field. Copyright (c) 2026 shosonoda is retained, together with the Copyright (c) 2025 Hayata Yamasaki attribution inherited from lean-quantum in `Operator/Basic.lean`. Both are under Apache-2.0; the full license is retained in the pinned source repository at `docs/reports/licenses/auto-res-lean-qsvt-LICENSE.txt`. The receiving spectral decomposition reuses standard results from pinned Mathlib. The mathematical references are Gilyén–Su–Low–Wiebe, [arXiv:1806.01838v1, Definitions 15–16, Theorem 17 (printed pp. 17–19), and Corollary 8](https://arxiv.org/abs/1806.01838v1). This is a receiving formal bridge for established mathematics. Finite-frame helpers and convention normalization are supporting steps, not independent new mathematical results or resolutions of external open problems.
 
 The same native phase object now acts on arbitrary-rank projections and the raw unitary, but the compressed block implements $P=c(p)+i\,c(B)$. **Unscaled real-part extraction with one ancilla, literal circuit realization, exact accounting of calls to the original $U/U^*$, a zero-query SAME-phase circuit for $d=0$, and correspondence between physical sources and the formal operators** each still require their own justification. Negating phases generally does not take the adjoint of the entire physical word: an adjoint also reverses product order and exchanges $U$ with $U^*$. A compressed identity does not guarantee a deterministic successful whole-output channel; the unread complementary component can remain nonzero.
-:::
-
-
-
-::: {.viz src="walk-spreading" height="560"}
-**The walk-spreading lab.** Drag the rail to change the steps, change the coin's share $w$ and phase $\varphi$, or shorten the cycle: cyan above is the quantum walk, grey below the classical random walk, and magenta what the quantum distribution has beyond its mirror image. The green box is [@lemma-symmetric-coin-walk]; the widths and the lopsidedness are the page's numbers.
 :::

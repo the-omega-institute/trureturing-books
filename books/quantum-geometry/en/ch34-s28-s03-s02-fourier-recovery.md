@@ -1,4 +1,4 @@
-# 31.1.3.2.1 Fourier recovery from Möbius windows {#sec-ch34-s28-s03-s02-fourier-recovery}
+# M.2.1 Fourier recovery from Möbius windows {#sec-ch34-s28-s03-s02-fourier-recovery}
 
 Logarithmic averages of the signed residual recover the arithmetic constant and the ζ zero spectrum.
 

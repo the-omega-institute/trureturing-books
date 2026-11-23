@@ -1,4 +1,4 @@
-# 15.4.1 实际计数分布与相位采样 {#sec-ch15-s04-s01-phase-sampling}
+# K.1 实际计数分布与相位采样 {#sec-ch15-s04-s01-phase-sampling}
 
 ::: {.corollary #cor-finite-poisson-period title="ZMod m 子群与零化子上的有限泊松求和推论" lean="D5/S3/Fourier/FinitePoisson.finite_poisson_summation"}
 设 $m \in \mathbb{N}$ 且满足 `[NeZero m]`，$H : \mathrm{AddSubgroup}(\mathrm{ZMod}\,m)$ 为 $\mathrm{ZMod}\,m$ 的加法子群，$f : \mathrm{ZMod}\,m \to \mathbb{C}$ 为任意复值函数。则 $f$ 在子群 $H$ 上的和恒等于其离散傅里叶变换 $\mathrm{ZMod.dft}\,f$ 在零化子 $\mathrm{annihilator}(H)$ 上的缩放和：
@@ -28,9 +28,6 @@ $$
 
 在 $m = 32$、周期 $r = 8$ 的例子里，位置梳子 $H = \{0, 8, 16, 24\}$ 只有 $4$ 格，零化子 $H^\perp = \{0, 4, 8, \dots, 28\}$ 却有 $8$ 个频率，间距是 $m/r = 4$。
 
-::: {.viz src="phase-gears" preset="dual" height="500"}
-**峰距是 $Q/r$，不是 $r$。** $Q = 32$、周期 $r = 8$：寄存器上青色的梳子 $H = \{0, 8, 16, 24\}$ 只有 $4$ 格，间距 $8$；扫完之后谱上留下 $8$ 根等高的柱子，每根 $\frac{1}{8}$，落在 $0, 4, 8, \dots, 28$，正是 $H^\perp$ 的 $8$ 个频率，间距 $Q/r = 4$。看 $k = 4$ 时四支青色箭头全部朝右，链长 $4$；$\lvert H\rvert \cdot \lvert H^\perp\rvert = 4 \cdot 8 = 32$（[@cor-finite-poisson-period]）。例中的 $Q = 16$、$r = 4$ 恰好 $r = Q/r = 4$，两把梳子重合。
-:::
 ::: {.remark #rem-shor-divisibility-boundary-literature title="有限泊松求和、条件候选与完整 Shor 算法的边界"}
 **范围说明。** 在将 [@cor-finite-poisson-period] 与 Shor 大数分解算法对接时，先分清两条边界，再从实际输入推导非整除情形的计数寄存器分布。下面紧随冻结声明给出精确边缘分布；后面的推导解释这些陈述，完整算法的结论仍见 [@rem-grover-qft-shor-literature]。
 

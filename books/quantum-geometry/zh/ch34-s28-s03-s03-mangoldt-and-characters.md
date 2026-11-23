@@ -1,4 +1,4 @@
-# 31.1.3.3 Mangoldt 临界差额与特征窗口 {#sec-ch34-s28-s03-s03-mangoldt-and-characters}
+# M.3 Mangoldt 临界差额与特征窗口 {#sec-ch34-s28-s03-s03-mangoldt-and-characters}
 
 ::: {.theorem #thm-ch31-prime-window-rh title="素数尾的小窗口与黎曼猜想" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimeWindowPoleGrowth.rh_iff_frequently_small_prime_windows"}
 固定实数 $b>1$。黎曼猜想成立，当且仅当对每个 $\eta>0$ 和每个实数 $R\ge2$，都存在实数 $Y\ge R$ 使 $A_{\vartheta,b}(Y)\le Y^\eta$。

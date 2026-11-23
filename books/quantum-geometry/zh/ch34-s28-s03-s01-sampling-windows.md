@@ -1,4 +1,4 @@
-# 31.1.3.1 幂次采样、窗口质量与辅助素数 {#sec-ch34-s28-s03-s01-sampling-windows}
+# M.1 幂次采样、窗口质量与辅助素数 {#sec-ch34-s28-s03-s01-sampling-windows}
 
 ::: {.theorem #thm-ch31-mangoldt-power-threshold title="完全曼戈尔特余项的临界幂指数" lean="D5/S3/Weil/Mertens/IntegratedExplicit/RHPowerThreshold.u_div_rpow_tendsto_zero_iff"}
 假设黎曼猜想。对任意实数 $\theta$，沿实变量 $x\to+\infty$ 有

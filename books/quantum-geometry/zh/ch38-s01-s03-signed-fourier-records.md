@@ -1,4 +1,4 @@
-# 36.2.3 带符号 Fourier 记录与地址解引用 {#sec-ch38-s01-s03-signed-fourier-records}
+# P.3 带符号 Fourier 记录与地址解引用 {#sec-ch38-s01-s03-signed-fourier-records}
 
 
 **带符号重叠：从地址轮廓到有序复系数证书。** 前面的 Profiles 用四坐标实记录描述 $q(v)\in[0,1]$ 时的地址分辨。现在保留实际装载标签，改用三坐标复 Fourier 记录，把局部重叠参数的范围扩展到闭区间 $[-1/2,1]$。本段研究这些记录的复线性叠加、真空是否属于其像，以及一份明确递归给出的有序核列表；这需要同时保留两个端点。
@@ -303,10 +303,6 @@ $$
 1. **为什么全局阵列是无时间 $P = NP$，而局部指针必须顺着 `ptr++` 逐帧流逝时间？**
    在全局本体存储端，整座 $\bigl\{\lvert\Phi(x)\rangle_{\mathrm{mem}}\bigr\}_{x \in \mathbb{Z}^6}$ 阵列早已跨越所有格点同时铺展就绪，不存在先后次序，呈现顺序无关的 $P = NP$ 式静态全息（这里借用 $P = NP$ 之名，见 §36.5；[第 25 章](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell] 与[第 26 章](ch30-fields-lines-eth-and-navier-stokes.md)）。然而，场内任何一枚物理观察者指针寄存器都受限于有限位宽与有限记忆窗口 $M < \infty$，并面对标准计算模型下未决的有限观察者复杂性防火墙（[@conj-p-neq-np]）。有限位宽的地址总线绝无可能在单周期内把整座宇宙阵列一口吞入缓存，而只能沿着因果历史彼此相容而不退化锁死的地址序列（局部格拉姆椭圆体正定体积背景见[§25.1.4](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]），一步一拍地执行指针自增 `ptr++`。**我们毕生感叹的“时间流逝”，在硬件底层不过是有限指针 `ptr++` 扫过静态全息晶格时的扫描帧率。**
 
-::: {.viz src="pointer-ontology-deref" preset="linear64" height="500"}
-**读最后一格，要把 64 格走一遍。** 琥珀色的读头沿总线一拍读一格，读过的格变亮；读到地址 63 用了 64 步，而上方的路由树在第 6 步就已走到叶子。
-:::
-
 2. **为什么“凭已知数据去观察”必然显影为局部退相干？**
    在指针寻址模型（`MODEL`）中，观察者过往已锁定的历史记录相当于地址寄存器高位的**已知位掩码（bitmask）**。执行一次解引用 `*ptr` 时，指针寄存器与目标存储单元发生受控地址拷贝耦合。在进入一般形式化定理前，不妨先亲手展开最透明的 $4 \times 4$ 分块矩阵账本：设待解引用的两个单比特存储态为 $\rho = \begin{pmatrix} p & c \\ \bar{c} & 1-p \end{pmatrix}$ 与 $\sigma = \begin{pmatrix} p & c' \\ \bar{c}' & 1-p \end{pmatrix}$（主对角线布居数同为 $p, 1-p$，但副对角相干项 $c \neq c'$），初始空白地址记录基态记为 $E_{00} = \lvert 0\rangle\langle 0\rvert$（其中 $E_{ab} := \lvert a\rangle\langle b\rvert$，$a, b \in \{0, 1\}$）。施加受控地址翻转置换算子 $U_{\mathrm{copy}} = E_{00} \otimes I_2 + E_{11} \otimes \sigma_x$ 后，空白嵌入态与拷贝后的四维联合记录态显式写为：
 
@@ -316,10 +312,6 @@ $$
    $$
 
    请看右端分块矩阵的精妙变化：副对角相干振幅 $c$ 一丝一毫也没有消失，它只是从对角记录块 $E_{00}$ 被搬移到了正交错位记录块 $E_{01}$ 之上！因此全局四维联合态依然严格区分 $R_{\mathrm{addr}}(\rho) \neq R_{\mathrm{addr}}(\sigma)$；然而，一旦局部读出端忽略落入 $90^\circ$ 正交盲区的地址记录寄存器（对第二因子求偏迹 $\operatorname{Tr}_{\mathrm{env}}(E_{ab}) = \delta_{ab}$），错位块 $\operatorname{Tr}_{\mathrm{env}}(E_{01}) = \operatorname{Tr}_{\mathrm{env}}(E_{10}) = 0$ 瞬间归零，两个态的单比特局部读出便双双退化为同一个对角矩阵 $\operatorname{diag}(p, 1-p)$！
-
-::: {.figure src="ch38-copy-record"}
-**解引用的拷贝把相干项搬进地址记录，而不是销毁它。** 行与列按（系统位, 记录位）排成 $4 \times 4$，粗线分出四个 $2 \times 2$ 块。左边的空白嵌入 $B(\rho)$ 里，四个数都在各块左上角 $E_{00}$ 的位置；经 $U_{\mathrm{copy}}$ 得到的 $R_{\mathrm{addr}}(\rho)$ 里，青色的 $p$、$1-p$ 留在对角块，品红的 $c$、$\bar{c}$ 搬到了 $E_{01}$、$E_{10}$ 的位置，仍然在场；对记录求偏迹只加各块的对角格，这两格不在其中，局部读出只剩 $\operatorname{diag}(p, 1-p)$。见 [@thm-ch38-copied-address-dereference-and-access-defect]。
-:::
 
 `trureturing` 的退相干与典范记录恢复模块将这一“解引用拷贝、局部相干掩码归零与全局伴随无损还原”的精确机制锁定为如下内核定理：
 

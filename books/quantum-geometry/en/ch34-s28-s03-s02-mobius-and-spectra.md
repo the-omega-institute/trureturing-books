@@ -1,4 +1,4 @@
-# 31.1.3.2 Möbius truncation and zero-spectrum recovery {#sec-ch34-s28-s03-s02-mobius-and-spectra}
+# M.2 Möbius truncation and zero-spectrum recovery {#sec-ch34-s28-s03-s02-mobius-and-spectra}
 
 
 **The cube term and half phase of the square cutoff.** Keep $E(a,B)=N(a,B)-2\ln(B/a)$. Enumerate all actual nontrivial zeros $\rho_k$ with multiplicity, put $\gamma_k=\operatorname{Im}\rho_k$ and $c_k=1/[\rho_k(1-\rho_k)]$, use the preceding series to define $P$, and set $\phi(u)_k=e^{i\gamma_k u}$. For $x>0$, define
@@ -976,4 +976,4 @@ Sum these moments over all grid offsets and average over candidate starts above 
 
 In [@thm-ch31-logarithmic-missing-window], the head can contribute at most $W(X)$ without a relation hypothesis. At $X=e^{-K}T^\beta$ the tail variance satisfies $V\le D\log T/T^\beta$. Set $\delta=\log T$, use mesh $r/T^2$ with rates $g_\gamma=\gamma/r$, and take $p=\lfloor T^\beta\log T/(4D)\rfloor$. Then $2pV/\delta^2\le1/2$. The floor-grid budget is eventually strict for $H=\exp(cT^\beta\log T)$ with $c=\log 2/(8D)$. The same signed margin follows if those tail frequencies satisfy the relation condition through order $2p$. Whether the distinct positive ζ ordinates in this tail meet that condition remains open.
 
-The Fourier recovery estimates follow in [§31.1.3.2.1](ch34-s28-s03-s02-fourier-recovery.md).
+The Fourier recovery estimates follow in [§M.2.1](ch34-s28-s03-s02-fourier-recovery.md).

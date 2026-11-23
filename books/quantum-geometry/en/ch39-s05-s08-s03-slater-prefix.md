@@ -1,4 +1,4 @@
-# 35.6.8.3 Physical Tribonacci models and Slater prefixes {#sec-ch39-s05-s08-s03-slater-prefix}
+# O.2.3 Physical Tribonacci models and Slater prefixes {#sec-ch39-s05-s08-s03-slater-prefix}
 
 ::: {.remark #rem-ch39-p2e-physical-tribonacci-interface title="The Physical Tribonacci Literature Model and a Finite Slater Prefix Application"}
 **Literature model and boundary conventions.** A concrete physical object to investigate is a nearest-neighbor hopping chain with zero on-site potential. Following Kolehmainen–Lado–Moustaj, *One-dimensional quasicrystals with tensor-network finite-state automata* ([arXiv:2609.06040v1](https://arxiv.org/pdf/2609.06040v1), §III, Eqs. (2)–(3), and Appendix B.2), take the substitution $\sigma(A)=AB$, $\sigma(B)=AC$, $\sigma(C)=A$ and its infinite fixed word starting from $A$, $W=\lim_{j\to\infty}\sigma^j(A)$, indexed from $W_0$. Fix $0<\rho<1$ and use $t_C=1$ as the energy unit, setting $t_A=\rho^2$, $t_B=\rho$, so $t_A/t_B=t_B/t_C=\rho$. For every integer $N\ge2$, define on the single-particle site space $\mathbb{C}^N$, with basis $\{\lvert i\rangle:0\le i<N\}$,
@@ -7,7 +7,7 @@ $$
 h_N=\sum_{i=0}^{N-2}t_{W_i}\bigl(\lvert i\rangle\langle i+1\rvert+\lvert i+1\rangle\langle i\rvert\bigr).
 $$
 
-We use $W$'s first $N-1$ letters to label bonds; sites $0$ and $N-1$ are not joined. The paper's digit tensors encode this single-particle site index. Cutting binary or Tribonacci address indices does not specify a real-space many-body bipartition. This also limits the analogy with the direct-encoder entanglement ranks in §35.6.7: it does not identify a uniform superposition of legal words with a Slater ground state of this hopping chain.
+We use $W$'s first $N-1$ letters to label bonds; sites $0$ and $N-1$ are not joined. The paper's digit tensors encode this single-particle site index. Cutting binary or Tribonacci address indices does not specify a real-space many-body bipartition. This also limits the analogy with the direct-encoder entanglement ranks in [§O.1](ch39-s05-s07-cut-entanglement.md): it does not identify a uniform superposition of legal words with a Slater ground state of this hopping chain.
 
 **Spectral distance for the specified even open prefixes.** Set
 

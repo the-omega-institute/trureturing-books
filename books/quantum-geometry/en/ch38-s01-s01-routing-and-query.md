@@ -1,4 +1,4 @@
-# 36.2.1 Reversible routing and clean queries {#sec-ch38-s01-s01-routing-and-query}
+# P.1 Reversible routing and clean queries {#sec-ch38-s01-s01-routing-and-query}
 
 ::: {.remark #rem-ch38-qram-page-wootters-literature title="Timeless Clock-System Entanglement and Bucket-Brigade QRAM Routing Trees (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Two foundational theoretical-physics and quantum-computer-architecture models compared alongside our ontological memory-pointer `MODEL` belong to external classical literature and are not formalized as standalone declarations in `trureturing@dev`:
@@ -178,8 +178,4 @@ Induct first over the number of injections. Local full SWAPs send the next addre
 Finally, the actual query permutation's complex matrix satisfies both adjoint identities on the entire basis space. On initialized support, its inverse permutation pulls back arbitrary joint address–bus amplitudes; XOR's self-inverse property yields Clause 4. The full proof is checked by the Lean kernel.
 :::
 
-The theorem [@thm-ch38-spatial-qutrit-qram-correctness] verifies this **ideal spatial qutrit circuit with fixed classical data and sequential loading**. It does not identify its dirty-configuration permutation with Appendix A's pipelined Figure 10 schedule, or the earlier architecture's fiducial qubit $f$ with $W$. It gives no microscopic Hamiltonian, hardware realization, noise, resource, depth, or global superposition activation bound, and does not copy unknown quantum states. The separate Boolean network with general additive-group readout, the Page–Wootters literature mechanism, the 2008 architecture's per-branch path count, and the observer–universe `MODEL` retain their respective boundaries. The following figure remains a path illustration of that architectural literature.
-
-::: {.viz src="pointer-ontology-deref" preset="qram_tree" height="500"}
-**One address sets only the 6 switches on one path.** Address 41 = 101001₂ enters at the root and each tick sets one level by one bit: after six ticks the cyan path reaches cell 42, and only these 6 of the 63 switches light up; at the same moment the amber scan head at the bottom has read just 6 cells. The depth and the switch count follow the bucket-brigade QRAM of [@rem-ch38-qram-page-wootters-literature] (literature result, not formalized in this book).
-:::
+The theorem [@thm-ch38-spatial-qutrit-qram-correctness] verifies this **ideal spatial qutrit circuit with fixed classical data and sequential loading**. It does not identify its dirty-configuration permutation with Appendix A's pipelined Figure 10 schedule, or the earlier architecture's fiducial qubit $f$ with $W$. It gives no microscopic Hamiltonian, hardware realization, noise, resource, depth, or global superposition activation bound, and does not copy unknown quantum states. The separate Boolean network with general additive-group readout, the Page–Wootters literature mechanism, the 2008 architecture's per-branch path count, and the observer–universe `MODEL` retain their respective boundaries.

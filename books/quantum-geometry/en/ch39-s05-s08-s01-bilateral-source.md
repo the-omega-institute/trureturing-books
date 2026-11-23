@@ -1,4 +1,4 @@
-# 35.6.8.1 The bilateral Parry source, cylinder laws, and mixing {#sec-ch39-s05-s08-s01-bilateral-source}
+# O.2.1 The bilateral Parry source, cylinder laws, and mixing {#sec-ch39-s05-s08-s01-bilateral-source}
 
 ::: {.theorem #thm-ch39-p2e-parry-escape-laws title="Parry Stochastic Kernel, Stationary Distribution, and Sign-Flip Symmetry on the Signed K-Bonacci Reset Chain" lean="D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law"}
 For every natural order $k \ge 2$, set $p = \operatorname{parryParameter}(k) = \beta_k^{-1}$. On $\operatorname{State}(k) = \mathrm{Bool} \times \operatorname{Fin} k$:

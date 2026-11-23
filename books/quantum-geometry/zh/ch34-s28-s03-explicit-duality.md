@@ -30,8 +30,10 @@
 
   对 $1/2<\theta<1$，外部算术步骤在其切比雪夫型不等式和窗口假设下给出单侧界。对每个起点阈值 $R$，都存在 $Y\ge R$，使 $U(x)\le x^\theta$ 在整个 $[Y,Y^{3/2}]$ 上成立。Landau 判据由此推出 $\zeta$ 在 $\operatorname{Re}(s)>\theta$ 无零点。从 RH 出发的上界则覆盖每个充分大的 $Y$。[算术步骤](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean#L68-L81) · [窗口指数](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean#L8-L11) · [Landau 判据](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ZeroFreeOfRpowWindow.lean#L11-L14)
 
+下面的实验卡将上述双向对偶（[@ex-ch34-weil-prime-staircase-reconstruction]）搬上交互舞台，让你亲手滑动零点对截断数 $K$，目睹平滑的临界线谐波如何一步步咬合耸立为锐利的切比雪夫素数阶梯：
 
-- [31.1.3.1 幂次采样、窗口质量与辅助素数](ch34-s28-s03-s01-sampling-windows.md)
-- [31.1.3.2 Möbius 截断与零点谱恢复](ch34-s28-s03-s02-mobius-and-spectra.md)
-- [31.1.3.3 Mangoldt 临界差额与特征窗口](ch34-s28-s03-s03-mangoldt-and-characters.md)
-- [31.1.3.4 晚期窗口质量、簇值与谱误差](ch34-s28-s03-s04-late-window-clusters.md)
+::: {.viz src="riemann-prime-arc-path-integral-sandbox" preset="weil-explicit-prime-staircase" height="520"}
+**韦伊显式对偶：临界线零点驻波曲面雕刻切比雪夫素数阶梯实验卡（`weil-explicit-prime-staircase`）。** 推进谱截止频率 $t$ 或调节零点对上限 $K \in [5, 50]$（预设停在 $t = 145 > \gamma_{50}$ 叠满 $50$ 对零点，点按播放可从 $t = 0$ 重演逐层生长；琥珀色标出最前排当前重构剖面 $K(t)$ 与可拖动读数点手柄 $x^*$）：后缘主项斜坡逐行累加驻波谐波 $-2\operatorname{Re}(x^{\rho_k}/\rho_k)$ 铺成紫色三维部分和曲面，最前排琥珀色剖面在 $x = 6, 10, 12$ 等合数处异相抵消压平，而在 $x = 2, 3, 4, 5, 7, 8, 9, 11, 13$ 处陡升紧贴青色精确中点阶梯 $\psi_0(x)$，前方地面上品红色零点驻波残差同步逼近青色锯齿，条带小图逐整数对比青色精确阶跃 $\Lambda(n)$ 与紫色重建升高（绿色 `LEAN ✓` 标出 `actual_integrated_explicit_formula`）。
+:::
+
+围绕显式对偶进一步展开的幂次采样与辅助素数窗口、Möbius 截断与 Fourier 谱恢复、加权近碰撞与频谱扰动估计、Mangoldt 临界差额以及晚期窗口簇值等十四节形式化解析数论技术证明，已完整收录于[附录 M](appendix-m.md)（[§M.1](ch34-s28-s03-s01-sampling-windows.md)–[§M.4](ch34-s28-s03-s04-late-window-clusters.md)）。正文则直接进入[§31.1.4](ch34-s28-s04-literature-boundaries.md)，集中审视文献脉络与认识论边界，并向[§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md)的算术枢轴重整交棒。

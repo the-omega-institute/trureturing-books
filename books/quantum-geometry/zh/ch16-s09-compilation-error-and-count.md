@@ -1,4 +1,4 @@
-# 16.9 编译误差、查询计数与渐近门长 {#sec-compilation-error-and-count}
+# 16.4 编译误差、查询计数与渐近门长 {#sec-compilation-error-and-count}
 
 既然离散门编译不可避免地受制于有限字长与误差权衡，那么在包含黑盒源算子 $C$ 的振幅放大算法中，我们能否至少在**已知初始成功概率 $p \in (0, 1]$** 且允许调节一枚连续辅助硬币旋转门 `coinRotation q` 的前提下，把[第十五章](ch15-grover-qft-and-period-finding.md)遗留的整数步过冲残差彻底削成**精确的零**，并给出严格的源算子查询次数上界？
 
