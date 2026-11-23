@@ -49,6 +49,32 @@ $$
 对禁三连占位的链，每组三个相邻符号都须出现两种不同方向。设 $A,B,C,D$ 分别计数末两位是同一方向、相反方向、方向后跟共同位、共同位后跟方向的位型。追加一个符号后，四项变为 $(B,A+B+D,B,C)$。长度二时四项各为二，另有一个双共同位无法继续延伸。从长度三起，这四项的总数依次为 $12,24,44$。将上述更新式连续代入四次，第四次的向量等于前三次所得向量之和，得到递推式。完整证明由 Lean 内核检查。
 :::
 
+::: {.theorem #thm-ch39-fib-forbidden-window-growth lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionGrowth.kernelDimension_lower" title="禁戒窗口长度至少为四时的偏迹核增长"}
+在长度为 $n=k+2$ 的开链上禁止连续 $K\ge4$ 个 $1$。记 $d_{n,K}$ 为合法支撑上所有单点偏迹为零的复矩阵空间的维数。则
+
+$$
+d_{n,K}\ge (100/43)^k.
+$$
+:::
+
+::: {.proof}
+固定头两位为相反方向。每次追加符号时，要求最近四位仍含两种方向。按最近一次出现的先后，记录两种方向距末位的距离。六种可能的距离对依次为 $(0,1),(0,2),(0,3),(1,2),(1,3),(2,3)$，赋予权重 $100,75,43,58,32,18$。每一步可选共同位或两种方向之一。若某个方向的距离会达到四，就必须选这个方向。逐状态相加，所有合法后继的权重之和至少是当前权重的 $100/43$ 倍。
+
+起始权重和最大单个权重都是 $100$。追加 $k$ 位后，所有路径的末状态权重之和至少为 $100(100/43)^k$，所以至少有 $(100/43)^k$ 个不同位型。每个长度 $K\ge4$ 的窗口都含一个四位窗口，因此这些位型都计入 $d_{n,K}$。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch39-fib-forbidden-window-growth-relative lean="D5/S3/Quantum/Entanglement/Marginals/BinaryDeletionGrowth.kernelDimension_to_allowedCount" title="偏迹核维数相对合法字数的增长"}
+在同一条链上，记 $a_{n,K}$ 为合法字数，也就是合法希尔伯特空间的维数。则
+
+$$
+\frac{d_{n,K}}{a_{n,K}}\ge\frac{(50/43)^k}{4}.
+$$
+:::
+
+::: {.proof}
+合法字数至多为 $2^{k+2}$，且包含全零字。用上一定理的下界除以这个正分母的上界。完整证明由 Lean 内核检查。
+:::
+
 ::: {.theorem #thm-ch39-fib-oriented-difference lean="D5/S1/Words/AdmissibleWords/FIBPathPairBounds.sharp_hard_core_difference" title="从一个固定位点出发的端点差概率上界"}
 位点从零编号。对不含相邻两个 $1$ 的字，记 $X_k$ 为第 $k$ 位的占有指标。在偶数位取 $Y_k=X_k$，在奇数位取 $Y_k=1-X_k$，并记 $q_k=\Pr(Y_k=1)$。给定 $[0,1]$ 中的占有率，且任意相邻两项之和至多为一。对任一固定位点 $i$ 和每个 $j\ge i$ 都有精确上界
 
