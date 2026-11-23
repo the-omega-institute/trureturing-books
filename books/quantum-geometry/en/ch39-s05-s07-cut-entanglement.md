@@ -80,6 +80,25 @@ The inequalities also give $q,c\ge0$ and $q+c\le1$. To attain $(a,b)$, take $S=[
 
 With $q=1/2$ and $c=1/6$, the entire feasible region is the first-quadrant triangle $a+b\le1/6$. Each coordinate can attain $1/6$ on its own. Complement the events at $H,K$ to obtain the hard-core occupancy model on the bipartite graph. Three sites have occupancy $1/2$ and two have occupancy $1/3$. The endpoint occupancies sum to $5/6$ on each edge, and the two sources still draw on the same probability budget.
 
+Cycles give another family of joint constraints on a graph. Add a reference bit $O$ fixed at zero and write $d_{uv}$ for the probability that two sites disagree. Then $d_{Ov}$ equals the marginal at $v$. Mark an odd number of edges on a closed walk and replace $d_{uv}$ by $1-d_{uv}$ on those edges. The resulting sum is at least one. Every binary outcome violates at least one of the parity requirements along the walk, so every common law satisfies this inequality.
+
+::: {.theorem #thm-ch39-fib-cycle-completion lean="D5/S1/Words/AdmissibleWords/FIBCycleRelaxation.cycle_completion_iff" title="The exact range allowed by cycle inequalities"}
+Let $q,c\ge0$ and $q+c\le1$. In the five-vertex notation, prescribe distances $q$ from the reference to $S,T,W$ and $q+c$ to $H,K$. Give the five inclusion edges distance $c$, and prescribe $d_{WS}=2a$ and $d_{TH}=c+2b$. These readings can be completed to a symmetric distance table satisfying every odd-subset cycle inequality exactly when
+
+$$
+0\le a\le\min(q,c),\qquad
+0\le b\le\min(q,c,1-q-c).
+$$
+:::
+
+::: {.proof}
+On $O\to W\to S\to O$, marking only the last edge or only the middle edge gives $a\ge0$ or $a\le q$, respectively. Marking only the return edge of $W\to H\to S\to W$ gives $a\le c$. The same choices on $O\to T\to H\to O$ give $b\ge0$ and $b\le q$, and marking all three edges gives $b\le1-q-c$. Marking just the return edge of $T\to K\to S\to H\to T$ gives $b\le c$.
+
+For sufficiency, set $d_{HK}=2b$ and $d_{ST}=d_{WT}=\max(a,2b)$. The resulting distances satisfy the triangle inequalities and each triangle has perimeter at most two. Use two copies of every vertex, with distance $d_{uv}$ within a copy and $1-d_{uv}$ across copies. The triangle and perimeter bounds give the triangle inequalities on the two copies together. Switching copies at the marked edges brings the walk to the other copy of its starting vertex. The copies are at distance one, so every such walk costs at least one. The full proof is checked by the Lean kernel.
+:::
+
+For $q=1/2,c=1/6$, the cycle checks admit the entire square $[0,1/6]^2$. The exact region of common laws also requires $a+b\le1/6$. In distance coordinates, this additional condition comes from adding the pentagonal cut inequality to the triangle inequality $d_{HT}\le d_{HK}+d_{KT}$ and eliminating the unspecified $d_{HK}$. [Avis, Imai and Ito, Definition 6 and Theorem 4](https://arxiv.org/abs/math/0601375)
+
 In the `trureturing` direct-encoder model, fix integers $N \ge 2$ and $K \ge 2$, and partition $\{0, 1, \dots, N\}$ by primality into the nonprime logical page ($b = \mathrm{false}$, dimension $M_0 > 0$) and the prime logical page ($b = \mathrm{true}$, dimension $M_1 > 0$). Let $C_{m, b}$ denote the set of length-$m$ admissible $1^K$-free words with first bit $b$, of cardinality $c_{m, b} = |C_{m, b}|$; for each threshold $0 \le s < K$, define the cumulative low-tail left row count and compatible right neighborhood count on page $1$ by
 
 $$
