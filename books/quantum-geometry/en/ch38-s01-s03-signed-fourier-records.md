@@ -1,4 +1,4 @@
-# 36.2.3 Signed Fourier records and address dereferencing {#sec-ch38-s01-s03-signed-fourier-records}
+# P.3 Signed Fourier records and address dereferencing {#sec-ch38-s01-s03-signed-fourier-records}
 
 
 **Signed overlaps: from address profiles to ordered complex coefficient certificates.** The preceding Profiles discussion used four real coordinates to describe address distinguishability for $q(v)\in[0,1]$. We now retain the actual loaded labels and use three complex Fourier coordinates, extending the local overlap parameter to the closed interval $[-1/2,1]$. We study complex superpositions of these records, membership of the vacuum in their synthesis range, and an ordered kernel list given by a specified recursion. Both endpoints are essential.
@@ -303,10 +303,6 @@ Viewed alongside [@rem-ch38-qram-page-wootters-literature], separating the dynam
 1. **Why the Global Memory Array Is Timelessly $P = NP$ While Any Finite Pointer Must Step Sequentially via `ptr++`**:
    On the ontological memory side, the entire array $\bigl\{\lvert\Phi(x)\rangle_{\mathrm{mem}}\bigr\}_{x \in \mathbb{Z}^6}$ is already laid out simultaneously across every lattice address in an order-independent, $P = NP$-like static crystal (the name $P = NP$ is borrowed here; see §36.5; [Chapter 25](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell] and [Chapter 26](ch30-fields-lines-eth-and-navier-stokes.md)). Yet every physical observer pointer inside the crystal is bounded by a finite register bit-width and a finite memory window $M < \infty$, facing the open finite-observer complexity firewall under standard computation ([@conj-p-neq-np]). Unable to ingest the entire cosmic array in a single bus cycle, the pointer must advance step by step via `ptr++` along causally compatible addresses without degenerate lockup (local Gram elliptope volume conditions are recorded in [§25.1.4](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]). **What mortals experience as "the passage of time" is simply the scan frame rate of `ptr++` stepping across an unmoving crystal.**
 
-::: {.viz src="pointer-ontology-deref" preset="linear64" height="500"}
-**Reading the last cell means walking all 64.** The amber head reads one cell per tick along the bus, and the cells it has read light up; reaching address 63 takes 64 steps, while the routing tree above reached its leaf at step 6.
-:::
-
 2. **Why "Observation via Known Data" Manifests Locally as Decoherence**:
    In pointer architecture (`MODEL`), an observer's already-committed historical data acts as a locked high-order virtual-address **bitmask**. Executing a dereference `*ptr` couples the address register reversibly to the target memory cell via a controlled address-copy unitary $U_{\mathrm{copy}}$. Before stating the general kernel theorem, expand the explicit $4 \times 4$ block matrix ledger by hand: take two single-qubit target states $\rho = \begin{pmatrix} p & c \\ \bar{c} & 1-p \end{pmatrix}$ and $\sigma = \begin{pmatrix} p & c' \\ \bar{c}' & 1-p \end{pmatrix}$ sharing identical diagonal populations $p, 1-p$ but distinct off-diagonal coherence $c \neq c'$, paired with the blank address-record projector $E_{00} = \lvert 0\rangle\langle 0\rvert$ (where $E_{ab} := \lvert a\rangle\langle b\rvert$ for $a, b \in \{0, 1\}$). Under the controlled address-flip permutation $U_{\mathrm{copy}} = E_{00} \otimes I_2 + E_{11} \otimes \sigma_x$, the blank embedding and the address-tagged joint state read explicitly:
 
@@ -316,10 +312,6 @@ Viewed alongside [@rem-ch38-qram-page-wootters-literature], separating the dynam
    $$
 
    Inspect the block matrix on the right: not a shred of the off-diagonal coherence amplitude $c$ has vanished—it has merely shifted from the diagonal record block $E_{00}$ onto the off-diagonal cross-block $E_{01}$! Globally, $R_{\mathrm{addr}}(\rho) \neq R_{\mathrm{addr}}(\sigma)$ remain strictly distinct; yet the moment the local readout ignores the address-record register in its $90^\circ$ orthogonal blind zone (tracing over the second factor via $\operatorname{Tr}_{\mathrm{env}}(E_{ab}) = \delta_{ab}$), the cross-blocks $\operatorname{Tr}_{\mathrm{env}}(E_{01}) = \operatorname{Tr}_{\mathrm{env}}(E_{10}) = 0$ drop out and both local readouts collapse to the identical diagonal matrix $\operatorname{diag}(p, 1-p)$!
-
-::: {.figure src="ch38-copy-record"}
-**The dereferencing copy moves the coherence into the address record instead of destroying it.** Rows and columns are ordered (system bit, record bit) into a $4 \times 4$ grid, and the heavy lines cut it into four $2 \times 2$ blocks. In the blank embedding $B(\rho)$ on the left, all four entries sit in the top-left $E_{00}$ corner of their blocks; in $R_{\mathrm{addr}}(\rho)$, after $U_{\mathrm{copy}}$, the cyan $p$ and $1-p$ stay on the diagonal blocks while the magenta $c$ and $\bar{c}$ have moved to the $E_{01}$ and $E_{10}$ positions, still present. The partial trace over the record adds only the diagonal cells of each block, which these two are not, so the local readout is just $\operatorname{diag}(p, 1-p)$. See [@thm-ch38-copied-address-dereference-and-access-defect].
-:::
 
 `trureturing`'s decoherence and canonical-record-recovery modules lock this exact mechanism—reversible address-tag writing, reduced marginal coincidence, impossibility of local decoding, and lossless global adjoint reversal—into the formal theorem below:
 

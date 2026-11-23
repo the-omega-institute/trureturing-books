@@ -8,6 +8,7 @@ Start with complete transverse dephasing — **standard-basis pinching** $\mathc
 **Squashed onto the axis.** One step of complete dephasing: the cyan ball is squashed into a vertical line, and the violet dashes mark the whole axis as fixed. $\rho$ and $\sigma$ have the same height and differ only sideways, so they land on the same point of the axis and the white line shrinks to nothing; the two magenta segments are the sideways parts of the two starting points that are squashed away, and they carry the coherence mass, which the top left reads off for $\rho$ as it drops from $0.375$ to $0$ ([@thm-pinching-pythagorean]).
 :::
 
+Below we follow the two main geometric channels—phase damping and amplitude damping—directly; the full finite-dimensional environment history realizations and saturation obstructions are collected in [Appendix J](appendix-j.md).
+
 - [4.2.1 Phase damping, repeated records, and retained environments](ch04-s02-s01-phase-and-environment.md)
-- [4.2.2 Finite-environment histories and saturation obstructions](ch04-s02-s02-finite-environment-histories.md)
-- [4.2.3 Amplitude damping, relaxation, and trace distance](ch04-s02-s03-amplitude-and-distance.md)
+- [4.2.2 Amplitude damping, relaxation, and trace distance](ch04-s02-s03-amplitude-and-distance.md)

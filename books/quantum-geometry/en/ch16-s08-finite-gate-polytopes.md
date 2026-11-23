@@ -1,4 +1,4 @@
-# 16.8 Finite Gate Words and Three-Dimensional Polytope Approximation {#sec-finite-gate-polytope}
+# 16.3 Finite Gate Words and Three-Dimensional Polytope Approximation {#sec-finite-gate-polytope}
 
 So far we have treated rotation angles $\theta$ and $\phi_k$ as continuous real parameters. In fault-tolerant quantum architectures ([Chapter 14](ch14-cloning-codes-and-braids.md)), however, hardware provides only a **finite discrete gate alphabet** — typically the Clifford+$T$ pair $\{H, T\}$.
 

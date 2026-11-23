@@ -1,4 +1,4 @@
-# 31.1.3.2.1 Möbius 窗口的 Fourier 恢复 {#sec-ch34-s28-s03-s02-fourier-recovery}
+# M.2.1 Möbius 窗口的 Fourier 恢复 {#sec-ch34-s28-s03-s02-fourier-recovery}
 
 对带符号余项取对数平均，可以恢复算术常数和 ζ 零点谱。
 

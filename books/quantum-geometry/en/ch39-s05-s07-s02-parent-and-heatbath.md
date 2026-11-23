@@ -1,4 +1,4 @@
-# 35.6.7.2 Local parent Hamiltonians and heat-bath chains {#sec-ch39-s05-s07-s02-parent-and-heatbath}
+# O.1.2 Local parent Hamiltonians and heat-bath chains {#sec-ch39-s05-s07-s02-parent-and-heatbath}
 
 ::: {.example #ex-ch39-p2e-local-parent title="Paper derivation (not Lean-verified): a local parent Hamiltonian for the positive equal-amplitude legal-word state"}
 The preceding entropy calculations specify a state. Can a local energy select it as its unique ground state? Start with two sites and the forbidden word `11`. In the basis $00,01,10,11$, take

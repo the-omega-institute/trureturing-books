@@ -1,4 +1,4 @@
-# 35.6.8.5 替代词交替偏差与对数平方界 {#sec-ch39-s05-s08-s05-substitution-discrepancy}
+# O.2.5 替代词交替偏差与对数平方界 {#sec-ch39-s05-s08-s05-substitution-discrepancy}
 
 对于 Tribonacci 词，普通字母计数的平衡性与按位置奇偶加权的和是不同的量。沿用 $A=0$、$B=1$、$C=2$ 的字母编码，取整数权重
 

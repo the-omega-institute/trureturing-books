@@ -1,4 +1,4 @@
-# 35.6.7.3 A uniform gap at fixed forbidden-word length {#sec-ch39-s05-s07-s03-uniform-gap}
+# O.1.3 A uniform gap at fixed forbidden-word length {#sec-ch39-s05-s07-s03-uniform-gap}
 
 ::: {.example #ex-ch39-p2e-uniform-parent-gap title="Paper derivation (not Lean-verified): a uniform gap at fixed forbidden-run length"}
 A single refresh changes only one bit, but a zero interrupts every all-ones constraint crossing it. Refreshing several adjacent bits together lets a disagreement in the boundary conditions stop propagating at the first common zero. We turn this mechanism into an explicit bound independent of chain length. This is a paper derivation and adds no Lean verification.
@@ -551,10 +551,6 @@ This explicitly applies the derived gap, uniform in chain length at fixed $K$, t
 
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="Literature Result: The Fibonacci Anyon Golden Chain and Rydberg Blockade Simulators (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** In condensed-matter and atomic-physics literature, the order-$K = 2$ `NoAdjacentOnes` Hilbert space arises in two celebrated many-body settings: first, the topological Fibonacci-anyon "golden chain" of A. E. Feiguin et al. (*Phys. Rev. Lett.* **98**, 2007, 160409), where the fusion rule $\tau \times \tau = \mathbf{1} + \tau$ makes fusion-space dimensions grow as Fibonacci numbers; second, van der Waals $1/r^6$ Rydberg blockade arrays (modeled theoretically by I. Lesanovsky, *Phys. Rev. Lett.* **106**, 2011, 025301, and probed experimentally on a 51-atom quantum simulator by H. Bernien et al., *Nature* **551**, 2017, 579–584). Two scope boundaries apply whenever citing these physical realizations: first, nearest-neighbor pairwise Rydberg blockade forbids adjacent excitations $|11\rangle$ ($K = 2$, the PXP subspace), whereas simply extending pairwise blockade range forbids *all* pairs within distance $R_b$ (eliminating `101` along with `111`) and **does not** by itself enforce the $K > 2$ "no $K$ consecutive ones" constraint—realizing a $K > 2$ $K$-Bonacci subspace requires a dedicated multi-body $K$-local interaction; second, neither the anyon fusion chain nor a finite-blockade Rydberg Hamiltonian is formally identical to the exact zero-amplitude isometric `directContract` encoder of [@thm-ch39-p2e-direct-encoder-ranks].
-:::
-
-::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entanglement" height="500"}
-**Cross-Cut Prohibition and Attainable Rank Rectangle Card (`entanglement`)**: On the left, tests junction legality $\tau(x) + \iota(y) < K$ (cyan for legal concatenations, magenta for blocked $1^K$ collisions); on the right, plots the feasible page-rank rectangle $[1, R_0] \times [1, R_1]$ and entropy ceiling $\ln R_b$, with amber marking the selected parameters and rank pair. The rank rectangle and entropy bounds carry status `LEAN ✓`, concrete parameter counts carry status `NUM`, and anyon/Rydberg context carries status `Literature`.
 :::
 
 Finally, when finite admissible words extend to long trajectories, uncertainty and distinguishability register along three distinct mathematical tracks: a Markov stationary reset law, boundary cylinder bounds, and finite observation escape pairs.

@@ -1,4 +1,4 @@
-# 15.4.3 Executable order recovery and factor certificates {#sec-ch15-s04-s03-executable-order}
+# K.3 Executable order recovery and factor certificates {#sec-ch15-s04-s03-executable-order}
 
 **Application: halve repeatedly while preserving the same base's half-order power.** The exponent $12$ above passed the modular-power test but turned the half-order power into $1$. We can ask a smaller question: after halving the current exponent, does the same base still return to $1$? If it does, halve and ask again; otherwise stop. This step needs neither prior knowledge of the true order nor a complete prime factorization of the exponent. It removes excess factors of $2$ from a returning exponent. The odd multiple left behind can still exceed the true order.
 

@@ -1,6 +1,6 @@
 # 附录 G 稳定子多面体之外：马约拉纳编码、克利福德魔性与转向 {#sec-appendix-g}
 
-在正文的几何脉络中，我们已经从五条彼此呼应的路径触及了有限维量子结构的代数骨架：[第十章](ch10-gram-geometry-and-order.md)剖析了对易顺序、相容格拉姆几何与双比特泡利花边图（doily）的语境奇偶约束；[第十三章](ch13-entanglement-and-chsh.md)揭示了双量子比特余弦圆弧如何突破贝尔（CHSH）折线上界，并把远端条件态塑造成转向椭球；[第十四章](ch14-cloning-codes-and-braids.md)与[14.2 节](ch14-s02-pauli-syndromes.md)建立了广义泡利字综合征与稳定子纠错码的辛正交判据；[第十六章](ch16-qsvt-walks-and-compilation.md)与[16.8 节](ch16-s08-finite-gate-polytopes.md)展示了离散门集如何在三维球面上张成有限割圆多面体；[附录 B](appendix-b.md)则系统汇总了克利福德几何代数 $\mathrm{Cl}_{3,0}(\mathbb{R})$ 的分级基片、异或乘法表与二元辛相空间字典。
+在正文的几何脉络中，我们已经从五条彼此呼应的路径触及了有限维量子结构的代数骨架：[第十章](ch10-gram-geometry-and-order.md)剖析了对易顺序、相容格拉姆几何与双比特泡利花边图（doily）的语境奇偶约束；[第十三章](ch13-entanglement-and-chsh.md)揭示了双量子比特余弦圆弧如何突破贝尔（CHSH）折线上界，并把远端条件态塑造成转向椭球；[第十四章](ch14-cloning-codes-and-braids.md)与[14.2 节](ch14-s02-pauli-syndromes.md)建立了广义泡利字综合征与稳定子纠错码的辛正交判据；[第十六章](ch16-qsvt-walks-and-compilation.md)与[16.3 节](ch16-s08-finite-gate-polytopes.md)展示了离散门集如何在三维球面上张成有限割圆多面体；[附录 B](appendix-b.md)则系统汇总了克利福德几何代数 $\mathrm{Cl}_{3,0}(\mathbb{R})$ 的分级基片、异或乘法表与二元辛相空间字典。
 
 一旦把目光投向**稳定子多面体与局域隐态模型的边界之外**，五个紧咬有限维可计算表征的核心数学问题便接踵而至：
 
@@ -52,7 +52,7 @@ $$
 
 ## G.2 赤道态的 Wigner 距离张量规则 {#sec-appendix-g-2}
 
-编码子空间刻画的是稳定子群的不变投影面；而在[第十六章 16.8 节](ch16-s08-finite-gate-polytopes.md)中，通用量子门之所以必须借助 $T$ 门冲出克利福德多面体，是因为纯克利福德演化无法凭空制造非稳定子“魔性（magic）”。在单量子比特与双量子比特层面上，如何用离散相空间上的 $\ell^1$ 几何精确度量一个量子态偏离稳定子凸包的距离？
+编码子空间刻画的是稳定子群的不变投影面；而在[第十六章 16.3 节](ch16-s08-finite-gate-polytopes.md)中，通用量子门之所以必须借助 $T$ 门冲出克利福德多面体，是因为纯克利福德演化无法凭空制造非稳定子“魔性（magic）”。在单量子比特与双量子比特层面上，如何用离散相空间上的 $\ell^1$ 几何精确度量一个量子态偏离稳定子凸包的距离？
 
 我们严格对齐源码模块 `FiniteDimensional`、`PauliMatrix`、`BinaryStabilizerLocalInequivalence`、`DensitySpan`、`WignerDistanceMinimum` 与 `QubitWignerDistanceTensorRules` 中的对象定义：
 

@@ -1,4 +1,4 @@
-# 31.1.3.4 Late-window mass, cluster values, and spectral errors {#sec-ch34-s28-s03-s04-late-window-clusters}
+# M.4 Late-window mass, cluster values, and spectral errors {#sec-ch34-s28-s03-s04-late-window-clusters}
 
 
 **How does a window budget bound an interior negative excursion?** Use the prime-only tail from above and write
@@ -298,10 +298,4 @@ Three Fourier-geometric signatures stand out immediately across these eleven ben
 1. **Gibbs midpoint phase locking at primes and prime powers**: At primes ($x = 2, 3, 5, 7, 11, 13$) and higher prime powers ($x = 4 = 2^2,\; 8 = 2^3,\; 9 = 3^2$), the spectral sum targets not the upper step $\psi(x)$ but the exact Dirichlet–Fourier jump midpoint $\psi_0(x) = \psi(x) - \frac{1}{2}\ln p$—already at $K = 50$ pairs, $\psi_{0,50}(5) \approx 3.289860$ matches $\psi_0(5) = \ln 60 - \frac{1}{2}\ln 5 \approx 3.289626$ to within $2.35\times 10^{-4}$, while $x = 7$ and $x = 13$ converge to within $3.88\times 10^{-3}$ and $1.15\times 10^{-2}$!
 2. **Destructive flattening across multi-prime composites**: At $x = 6 = 2\times 3$ and $x = 10 = 2\times 5$, the von Mangoldt weight vanishes ($\Lambda(6) = \Lambda(10) = 0$) because composite paths spanning distinct prime axes add no single-axis jump, so $\psi(x) = \psi_0(x)$ and the zero harmonics cancel out of phase to hold the plateaus $\ln 60 \approx 4.094345$ and $\ln 2520 \approx 7.832014$.
 3. **Two-way arithmetic–spectral genesis**: Composite paths over prime minimal arc-trihedra integrate out the Riemann zero spectrum, and the zero standing waves interfere back to sculpt every prime and prime power along the continuum!
-:::
-
-The fourth experiment card below brings [@ex-ch34-weil-prime-staircase-reconstruction] to life, letting you sweep the conjugate zero-pair count $K$ and watch smooth logarithmic waves lock into sharp prime risers:
-
-::: {.viz src="riemann-prime-arc-path-integral-sandbox" preset="weil-explicit-prime-staircase" height="520"}
-**Weil's Explicit Duality: Zero-Wave Sheet Sculpting Chebyshev's Prime Staircase (`weil-explicit-prime-staircase`).** Sweeping the spectral cutoff $t$ or zero-pair cap $K \in [5, 50]$ (parked at $t = 145 > \gamma_{50}$ with all $50$ zero pairs stacked, and replayable from $t = 0$; amber highlights the frontmost active profile $K(t)$ and draggable reading handle $x^*$): starting from the back-edge main ramp, each critical-line pair adds a standing-wave row $-2\operatorname{Re}(x^{\rho_k}/\rho_k)$ across the violet 3D partial-sum sheet until the front amber profile flattens across composites $x = 6, 10, 12$ and rises steeply against the exact cyan midpoint staircase $\psi_0(x)$ at $x = 2, 3, 4, 5, 7, 8, 9, 11, 13$, while on the front floor the magenta zero-wave residual approaches the cyan sawtooth and the strip plot compares cyan $\Lambda(n)$ bars against violet rebuilt rises (green `LEAN ✓` badge marks `actual_integrated_explicit_formula`).
 :::

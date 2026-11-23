@@ -1,4 +1,4 @@
-# 15.4.4 Worked calculations for Grover, QFT, and Shor {#sec-ch15-s04-s04-worked-algorithms}
+# 15.4.1 Worked calculations for Grover, QFT, and Shor {#sec-ch15-s04-s04-worked-algorithms}
 
 Let us now work through the four-part calculation covering Grover search at $N = 4$ and $N = 8$, the $3$-qubit QFT phase gears at $x = 5$, Shor order finding for $N = 15$, and the finite Poisson cross-check on $\mathrm{ZMod}\,16$.
 
