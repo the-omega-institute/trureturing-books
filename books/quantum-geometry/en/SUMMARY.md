@@ -209,6 +209,7 @@
       - [35.6.8.2 Maximal entropy, return durations, and the horizon problem](ch39-s05-s08-s02-maximal-entropy.md)
       - [35.6.8.3 Physical Tribonacci models and Slater prefixes](ch39-s05-s08-s03-slater-prefix.md)
       - [35.6.8.4 Noncontiguous cuts, purity, and direction complexes](ch39-s05-s08-s04-cuts-and-circuits.md)
+        - [35.6.8.4.1 The minimum number of internal additions](ch39-s05-s08-s04-s01-minimum-internal-additions.md)
       - [35.6.8.5 Alternating substitution discrepancy and log-squared bounds](ch39-s05-s08-s05-substitution-discrepancy.md)
       - [35.6.8.6 Tridiagonal localization and open-chain spectral distance](ch39-s05-s08-s06-open-chain-spectrum.md)
   - [35.7 The `trureturing` "Golden Cut" Formal Primitives and the Geometric Interpretation of Soul–Ruin Attractors](coda-s03-golden-cut-observers.md)
