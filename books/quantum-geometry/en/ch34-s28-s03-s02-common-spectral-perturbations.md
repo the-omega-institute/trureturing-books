@@ -160,4 +160,4 @@ The absolute count differences sum to $2(p-H(m,n))$. Each integer difference has
 
 For independently perturbed comparison frequencies, the scale bound is effective on pairs with few common occurrences. The lower-degree diagonal controls the remaining pair weight.
 
-For a comparison spectrum, the next section [controls threshold crossings and handles recomputed weights](ch34-s28-s03-s02-spectral-count-perturbations.md). The actual ζ ordinates still require estimates for their fixed high-order frequency differences.
+For a comparison spectrum, the next section [controls threshold crossings and handles recomputed weights](ch34-s28-s03-s02-spectral-count-perturbations.md). An upper bound for weighted high-order near-collisions of the fixed ζ zero ordinates at positive resolution remains open.
