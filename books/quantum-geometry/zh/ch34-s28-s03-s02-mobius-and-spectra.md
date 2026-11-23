@@ -960,4 +960,20 @@ $$
 
 在 RH 下，实际 ζ 纵坐标的权重为 $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$，其中 $m_\gamma$ 是解析重数。Baluyot、Goldston、Suriajaya 与 Turnage-Butterbaugh 的一致配对相关公式给出归一化 Montgomery 和对 $[0,1]$ 上权重 $2(1-\alpha)$ 的有界平均。在临界线上，平均后每个纵坐标差的贡献非负。三角权重的余弦变换在非零处为 $2(1-\cos z)/z^2$，在零处为 $1$。因此同纵坐标项对归一化平均的贡献恰为 $2\pi\sum_{0<\gamma\le Y}m_\gamma^2/(Y\log Y)$。由平均有界得 $\sum_{0<\gamma\le Y}m_\gamma^2=O(Y\log Y)$。在 $X$ 以上逐个二进区间用 $w_\gamma^2\le m_\gamma^2/\gamma^2$ 再求几何级数，即得对 $T\ge X$ 一致的 $V(X,T)=O(\log X/X)$。互异正纵坐标有理线性无关时可应用上述频谱定理。解析配对相关公式来自文献。现有界仍留下最优等待尺度这一开放问题。 [配对相关公式，定理 1 与 §7](https://arxiv.org/abs/2306.04799)
 
+::: {.theorem #thm-ch31-finite-tail-moment-window title="由有限阶尾段矩得到的缺失窗口" lean="D5/S3/Fourier/Concentration/FiniteTailMomentMissingWindow.exists_arbitrarily_late_tail_window"}
+设 $J$ 有限，频率 $g_j$ 为实数，权重 $w_j$ 非负，$p$ 为正整数。假设对每个整数向量 $k$，若 $\sum_j k_jg_j=0$ 且 $\sum_j|k_j|\le2p$，则 $k=0$。给定 $h,\delta>0$ 和实数长度 $H$，记 $V=\sum_jw_j^2$、$B=\sum_jw_j|g_j|$、$N=\lfloor H/h\rfloor_++1$，其中下取整取自然数。若 $V=0$ 或 $N(2pV/\delta^2)^p<1$，则对任意实数 $A$，存在 $a>A$ 使
+
+$$
+\sum_{j\in J}w_j\sin(g_j u)<\delta+hB\qquad(u\in[a,a+H]).
+$$
+:::
+
+::: proof
+令 $Z(u)=\sum_jw_je^{ig_j u}$，用多项式定理展开 $Z^p\overline Z^p=|Z|^{2p}$。任意两个总次数为 $p$ 的计数向量之差长度至多为 $2p$。非零频率的特征函数在长区间上的平均趋于零，故只留下计数向量相等的项。每个保留项的一个多项式系数至多为 $p!\le p^p$，其余因子再用多项式定理求和。每个固定网格偏移的极限平均因此至多为 $(pV)^p$。这里使用归一化特征函数积分和 Lamzouri 的有限带符号频率展开。 [特征函数积分](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L78) · [Lamzouri，引理 3.2](https://arxiv.org/html/2311.04860v2#S3.Thmthm2)
+
+对所有网格偏移的矩求和，再对 $A$ 之后的候选起点取平均。由严格预算，充分长的平均区间上该平均小于 $\delta^{2p}$。因此有起点使每个网格点都满足 $|Z|<\delta$。正弦得分是虚部，网格间再计入斜率误差 $hB$。当 $V=0$ 时，得分恒为零。 完整证明由 Lean 内核检查。
+:::
+
+在 [@thm-ch31-logarithmic-missing-window] 中，无需约束首段频率之间的关系，首段的贡献至多为 $W(X)$。取 $X=e^{-K}T^\beta$ 时，尾段方差满足 $V\le D\log T/T^\beta$。对频率 $g_\gamma=\gamma/r$ 取网格间距 $r/T^2$，令 $\delta=\log T$、$p=\lfloor T^\beta\log T/(4D)\rfloor$，于是 $2pV/\delta^2\le1/2$。当 $c=\log 2/(8D)$ 时，长度 $H=\exp(cT^\beta\log T)$ 最终满足严格网格预算。若尾段频率直到 $2p$ 阶都满足上述整数关系条件，即可保留相同的带符号得分余量。实际 ζ 尾段互异正纵坐标能否满足这个条件仍是开放问题。
+
 Fourier 恢复估计见 [§31.1.3.2.1](ch34-s28-s03-s02-fourier-recovery.md)。
