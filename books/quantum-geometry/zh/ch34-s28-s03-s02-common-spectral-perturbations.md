@@ -178,4 +178,25 @@ $$
 
 对有限个半径为正的独立均匀偏移，闭分辨率为 $\eta\ge0$ 时，欧氏区间界将相应的加权概率预算控制在右侧乘以 $e^{1/2}\sqrt{15\pi/2}\,\eta$ 的范围内。局部预算还可以利用频率差排除达不到碰撞带的配对。
 
+### 消去共同项后的低次分离
+
+若已知少量低次的频率差，可以进一步缩小逐对预算。对同为 $p$ 次的 $m,n$，在两边都减去 $l_j=\min(m_j,n_j)$，得到支撑不相交的 $u,v$，两者的次数都是 $d=p-H(m,n)$。这一消去保持频率差，且逐坐标有 $|m_j-n_j|=u_j+v_j$，因此扰动所容许的频率漂移也保持不变。
+
+::: {.theorem #thm-ch31-reduced-degree-collision-budget title="低次剩余对的分离控制局部预算" lean="D5/S3/Fourier/Concentration/ReducedDegreeCollisionBudgets.localized_excess_le_of_reduced_separation"}
+设 $w_j\ge0$，$r_j\ge\rho>0$，且 $k$ 为正整数。若 $\eta>0$，对每个支撑不相交、次数同为 $d$ 的 $u,v$，在 $0<d<k$ 且 $d\le p$ 时要求
+$$
+|G_u-G_v|>\eta+\sum_j(u_j+v_j)r_j .
+$$
+若 $\eta\le0$ 或 $p<k$，局部超额预算 $B$ 为零。其他情况下，
+$$
+B\le (W^{2p}-D_p)
+\min\!\left(1,\frac{\eta}{\rho},
+  \frac{e^{1/2}\sqrt{15\pi/2}\,\eta}{\rho\sqrt{2k}}\right).
+$$
+:::
+
+::: proof
+在正分辨率下，可到达碰撞带的不同配对满足 $d\ge k$。欧氏尺度下界是 $\rho\sqrt{2k}$。至少一个整数计数差的绝对值不小于一，所以最大坐标尺度也不小于 $\rho$。将两个逐对概率上界和一取最小值，再乘以有序不同配对的总权重 $W^{2p}-D_p$。在非正分辨率下，概率上界中的最大坐标项取非负部分后为零。
+:::
+
 对比较谱还可[控制计数阈值穿越并处理重算后的权重](ch34-s28-s03-s02-spectral-count-perturbations.md)。固定 ζ 零点纵坐标在正分辨率下的加权高阶近碰撞上界仍是开放问题。
