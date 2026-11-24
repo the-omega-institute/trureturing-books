@@ -354,7 +354,7 @@ $$
 \sum_{(i,j)}w_iw_j\le \frac{4C(\log X+1)}{X}.
 $$
 
-对较大纵坐标为 $h$ 的一对，较小纵坐标至少为 $h-\delta\ge h/2$。于是其权重至多为 $2m_i m_j/h^2$。把 $1/h^2$ 写成 $1/T^2+\int_h^T 2y^{-3}\,dy$，交换有限和与积分，得到总权重至多为 $2B(T)/T^2+4\int_X^T B(y)y^{-3}\,dy$。代入累计上界并积分即得结论。
+对较大纵坐标为 $h$ 的一对，较小纵坐标至少为 $h-\delta\ge h/2$。于是其权重至多为 $2m_i m_j/h^2$。把 $1/h^2$ 写成 $1/T^2+\int_h^T 2y^{-3}\,dy$，交换有限和与积分，得到总权重至多为 $2B(T)/T^2+4\int_X^T B(y)y^{-3}\,dy$。代入累计上界并积分即得结论。 [有限加权上界的 Lean 证明](lean:D5/S3/Fourier/Concentration/WeightedClosePairTail.weighted_close_pairs_le)
 
 在 RH 下，对不同正纵坐标合并重数并令 $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$。本章的频率为 $g_\gamma=\gamma/r$，其中 $r>0$，所以频率差上限 $\eta$ 对应纵坐标差上限 $\delta=r\eta$。取 $0\le\eta\le1/(4r\log T)$。将高度 $y$ 的 Montgomery 函数在 $[0,1]$ 上按 $2(1-\alpha)$ 平均。文献中一致的展开式给出 $O(1)$ 的平均。平均后的每对都带因子 $2(1-\cos u)/u^2$，其中 $u=(\gamma_i-\gamma_j)\log y$，零点取连续值一。因此所有贡献非负。纵坐标差至多为 $\delta$ 的配对满足 $|u|\le1/4$，这个因子及 Montgomery 的因子 $4/[4+(\gamma_i-\gamma_j)^2]$ 都有正的绝对下界。去掉其他配对并乘回归一化因子，得到 $B(y)\ll y\log y$，对充分大的 $X$ 一致成立。 [Baluyot、Goldston、Suriajaya 与 Turnage-Butterbaugh，定理 1](https://arxiv.org/abs/2306.04799)
 
