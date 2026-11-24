@@ -721,6 +721,22 @@ Then $b<a_{\mathrm{crit}}<1$. Whenever $a_{\mathrm{crit}}\le a\le1$, the interpo
 
 For $b<a<a_{\mathrm{crit}}$, all three supporting levels still have positive weights. A negative moment coefficient allows a small change within the support that increases the associated moment and preserves the other. A positive interpolant at an intermediate level allows a small amount of weight there, with a change on the three supporting levels that preserves both moments and the total mass. Either change gives a feasible weight with strictly smaller squared mass. At $a=b$, the candidate gives zero mass to residue zero. Mixing in a sufficiently small point mass there preserves feasibility and lowers squared mass because the two supports are disjoint. For any strict energy improvement, a further small mixture with the point mass at zero keeps the energy strictly lower and makes both moments strictly exceed $a$. The general optimizer below the cutoff and the arithmetic estimate for exceptional frequencies of the actual high-order ζ-zero harmonics remain open.
 
+The first intermediate level to meet the interpolant can be identified for large $q$. Put $v_*=\cos(4\pi/q)$, $h=1-u$, $d=1-\ell$, $A=p/2$ and $C=(1-p)/n_\ell$. The upper level has exactly two residues. Write $S_\gamma$ for the slope of $\gamma_r$ and $S(x)$ for the slope of the certificate inequality at the intermediate level $x$. The Lagrange formula gives
+$$
+S_\gamma=1+\frac{Ad-Ch}{u-\ell},\qquad
+S(x)=S_\gamma+\frac{hd}{u-\ell}\left(\frac{A}{u-x}+\frac{C}{x-\ell}\right).
+$$
+For large $q$, $A\ge C$, and the slope of $\beta_r$ is at most $S_\gamma$. To compare the intermediate levels, fold the angles into $[0,\pi]$. Every intermediate level has $x\le v_*$ and $x-\ell\ge h$. For the second bound, write the angle at $\ell$ as $\pi-y$, with $0\le y\le\pi/q$. The nearest interior angle is one grid step $t=2\pi/q$ away. The gap is $2\sin(y+t/2)\sin(t/2)\ge 1-\cos t=h$, for either parity of $q$. For $x<v_*$, the sign of $S(v_*)-S(x)$ is the sign of
+$$
+A(v_*-\ell)(x-\ell)-C(u-v_*)(u-x).
+$$
+Here $v_*-\ell\ge1$ and $A>6C$ for large $q$, while $u-v_*=h(2u+1)\le3h$ and $u-x\le2$. Thus the incoming level is uniquely $v_*$ among the distinct intermediate levels. At the cutoff the two moment coefficients remain positive and the interpolant vanishes at $v_*$.
+
+The quantities $u,\ell,p$ tend to $1,-1,1$ respectively. Since $1-p=h(2u+1)/(g(u)-g(\ell))$, one obtains $(1-b)/h\to4$. The term $h/(u-v_*)=1/(2u+1)$ retains a nonzero contribution in the slope. Substitution gives $B=S(v_*)\to5/3$. Using $q^2h\to 2\pi^2$, the high-threshold interval has width
+$$
+q^2(1-a_{\mathrm{crit}}(q))\longrightarrow\frac{24\pi^2}{5}.
+$$
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
