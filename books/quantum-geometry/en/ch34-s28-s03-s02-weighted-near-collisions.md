@@ -96,11 +96,157 @@ $$
 Every in-band pair contributes for every modulus. For a pair outside the band, put $d=A_m-A_n$. Each prime that counts it divides $\prod_{y=-H}^H(|d|-y)$, since the band is symmetric. The factors are positive. The product of the distinct primes divides that product and is at least $Q$ to the power of their number. Since $|d|\le D$, the strict bound forces that number to be at most $B$. Sum over the weighted pairs to obtain the result. Gallagher's larger sieve uses the same divisibility step for a single difference. [Gallagher, proof of Theorem 1](https://doi.org/10.4064/aa-18-1-77-81)
 :::
 
-The zero residue alone limits how small a cyclic certificate can be. Set $R=\{0\}$ in the character formula. Every term is a nonnegative moment and the term at $k=0$ is $W^{2p}$. Thus $C_q(R_q(H))\ge W^{2p}/q$ for $H\ge0$. To certify the missing-window budget with a single cyclic bound, one therefore needs $q>KN(W/\delta)^{2p}$. For an average over a nonempty set $P$, the same inequality holds with $q$ replaced by the harmonic mean of its moduli.
+Multiplying primes from $P$ requires a pair to use a single band shift across every factor. For example, let $H=1$ and $d=6$. Modulo $3$ the shift can be $0$, and modulo $5$ it can be $1$. Modulo $15$, the residue of $6$ matches none of $-1$, $0$, or $1$.
+
+::: {.theorem #thm-ch31-prime-product-excess title="Collision excess across products of primes" lean="D5/S3/Fourier/Concentration/PrimeProductCollisionBudgets.sum_prime_product_cyclic_excess_le"}
+Let $r,B_0$ be nonnegative integers with $D+H<Q^{B_0+1}$, using the same $P,Q,H,D,L_H,W$ and nonnegative weights as above. For each $r$-element subset $S\subseteq P$, write $q_S=\prod_{q\in S}q$. The total excess mass for these product moduli satisfies
+
+$$
+\begin{aligned}
+0 &\le \sum_{\substack{S\subseteq P\\|S|=r}}\bigl(C_{q_S}(R_{q_S}(H))-L_H\bigr)\\
+  &\le \min\!\left\{\binom{|P|}{r},(2H+1)\binom{\min(B_0,|P|)}{r}\right\}
+    (W^{2p}-L_H).
+\end{aligned}
+$$
+:::
+
+::: proof
+For an off-band gap $d$, fix $y\in[-H,H]\cap\mathbb Z$. Whenever a subset $S$ uses $y$ as its common shift, every prime in $S$ divides the same nonzero integer $d-y$. Because $|d-y|\le D+H$, at most $B_0$ primes from $P$ can divide it. Counting subsets for each shift and taking the union over the $2H+1$ shifts bounds the multiplicity of an off-band pair. Summing with the pair weights gives the bound. If $r>B_0$, every selected product modulus gives exactly the lattice band mass $L_H$.
+
+The full proof is checked by the Lean kernel.
+:::
+
+The zero residue alone limits how small a cyclic certificate can be. Set $R=\{0\}$ in the character formula. Every term is a nonnegative moment and the term at $k=0$ is $W^{2p}$. Thus $C_q(R_q(H))\ge W^{2p}/q$ for $H\ge0$. To certify the missing-window budget with a single cyclic bound, one therefore needs $q>KN(W/\delta)^{2p}$. For an average over a nonempty set $P$, the same inequality holds with $q$ replaced by the harmonic mean of its moduli. This restriction also applies to the product moduli.
 
 At the ζ-tail parameters of [the variance bound](ch34-s28-s03-s02-collision-variance.md), this requires $\log q\ge\log N+2p\log\log T-O(p)$ for a single modulus or for the harmonic mean in the average. Evaluating the character sum term by term uses $q$ terms for that modulus. An average needs at least one modulus as large as its harmonic mean. A method to bound the weighted mass at the target resolution with feasible asymptotic cost remains open.
 
+The collision masses for two separate moduli do not determine their joint mass, even when the complete marginal laws are known. Modulo six, take $P$ with weights $1/2,1/4,1/4$ at residues $0,3,4$, and $Q$ with weights $3/4,1/4$ at $0,1$. Both reduce to $(3/4,1/4)$ modulo two and $(3/4,1/4,0)$ modulo three. Let $A_p$ be the product of the two marginal collision masses for independent $p$-fold sums, and let $E_p(P),E_p(Q)$ be their respective collision masses modulo six. For $p\ge1$,
+
+$$
+\begin{aligned}
+E_p(P)-A_p&=\frac{(1/16)^p-(7/64)^p}{3}<0,\\
+E_p(Q)-A_p&=\frac{(13/16)^p-(7/64)^p}{3}>0.
+\end{aligned}
+$$
+
+By [@thm-ch31-cyclic-collision-fourier], the collision mass at residue zero averages the $p$th powers of the six squared character magnitudes. Set $\omega=e^{2\pi i/6}$. At mixed frequency $1$, the amplitude for $P$ is $1/2+\omega^3/4+\omega^4/4=(1+\omega^4)/4$, and the amplitude for $Q$ is $(3+\omega)/4$. Their squared magnitudes are $1/16$ and $13/16$. Frequency $5$ gives the conjugate of each amplitude. The nontrivial squared magnitudes of the marginals are $1/4$ and $7/16$, so their product assigns $7/64$ to each mixed frequency. The two laws have identical marginals at every positive convolution order. A probability law of collision mass $E$ has order-two Rényi entropy $-\log E$. [Linden, Mosonyi, and Winter, §V](https://arxiv.org/html/1212.0248#S5)
+
+A smaller modulus reduces the number of character terms. One can also keep the modulus $q$ and majorize the band indicator pointwise by a kernel $K$ with few Fourier modes. For a positive integer $q$, put $G=\mathbb Z/q\mathbb Z$ and let $R\subseteq G$ be the residues to be counted. Suppose $K:G\to\mathbb R$ is nonnegative everywhere and at least $1$ on $R$. Let $S$ contain the support of the discrete Fourier transform of $K$, and write $m=|S|$ and $M=\sum_{x\in G}K(x)$.
+
+**Hand derivation.** Fourier inversion at zero gives the exact identity
+
+$$
+mM-qK(0)=\sum_{k\in S}\sum_{x\in G}K(x)\bigl(1-\Re\chi_k(-x)\bigr).
+$$
+
+::: {.theorem #thm-ch31-sparse-majorant-gap title="Phase lower bound for a sparse Fourier majorant" lean="D5/S3/Fourier/Concentration/SparseCyclicMajorants.sparse_dft_majorant_gap"}
+Under the assumptions on $q,K,S,R,m,M$ above,
+
+$$
+mM-qK(0)\ \ge\ \sum_{k\in S}\sum_{x\in R}\bigl(1-\Re\chi_k(-x)\bigr).
+$$
+:::
+
+Each term is nonnegative, so retain only the terms in $R$.
+
+In the character expansion, the normalized zero-frequency coefficient is $M/q$. If $0\in R$, this coefficient is at least $1/m$. If $1\in R$ and $S$ contains a nonzero frequency, the right side is strictly positive.
+
+::: {.theorem #thm-ch31-sparse-majorant-equality title="Equality in the sparse mean bound" lean="D5/S3/Fourier/Concentration/SparseCyclicMajorants.sparse_dft_floor_eq_iff"}
+Suppose $K$ is nonnegative and $S$ contains the support of its Fourier transform. For $K(0)>0$, equality $mM=qK(0)$ holds exactly when $K=K(0)\mathbf 1_U$ for an additive subgroup $U$ of $G$ and $S$ is the annihilator of $U$.
+:::
+
+Equality forces every selected character to be one wherever $K>0$. Inversion makes $K$ constant at $K(0)$ on the subgroup where all these characters are one. Every frequency in its annihilator has coefficient $M>0$ and therefore belongs to $S$. Conversely, a scaled subgroup indicator and its annihilator make the right side of the identity zero. Subgroup indicators also give equality in the finite-group Fourier support uncertainty principle. [Tao, §1](https://arxiv.org/pdf/math/0308286v6)
+
+For a collision bound using $K$, the zero-frequency term is $(M/q)W^{2p}$. If $0\in R$ and the real parts of the remaining coefficients are all nonnegative, the full bound is at least $W^{2p}/m$. With coefficients of both signs, the mean inequality controls the zero-frequency term, while the other terms depend on high moments from a common set of weights.
+
+**Example modulo four (hand derivation).** Test which Fourier moments can arise from the same initial weights. On $\mathbb Z/4\mathbb Z$, let $w=(a,b,c,d)$ be a probability weight, and let $u=|\widehat w(1)|^2$, $v=|\widehat w(2)|^2$. The discrete Fourier transform without the factor $1/4$ gives
+
+$$
+u=(a-c)^2+(b-d)^2,\qquad v=(a+c-b-d)^2.
+$$
+
+The pairs attained by a common $w$ are exactly those satisfying
+
+$$
+0\le v\le1,\qquad 0\le u\le(1+v)/2.
+$$
+
+Write $e,o$ for the total masses on the even and odd residues. The two differences $a-c,b-d$ range independently in $[-e,e]$ and $[-o,o]$. Consequently $u$ is at most $e^2+o^2=(1+v)/2$. Given $v$, take $e=(1+\sqrt v)/2$ and $o=(1-\sqrt v)/2$. Scaling both differences by the same fraction of their endpoint values fills the interval from zero to the maximum. [Exact joint moment region modulo four](lean:D5/S3/Fourier/Concentration/FourthRootMomentRegion.dft_four_squared_region)
+
+For the difference of two independent sums of $p$ draws from $w$, the Fourier coefficients at $1,2$ are $u^p,v^p$. If $v^p=0$ and $p\ge2$, the first coefficient has maximum $2^{-p}$. In the relaxation to symmetric probability laws with nonnegative Fourier coefficients and zero second coefficient, both parity masses are $1/2$. The first coefficient is the difference between the two even-residue masses and has maximum $1/2$, attained by $(1/2,1/4,0,1/4)$. The relaxed maximum is $2^{p-1}$ times the attainable one. The gap comes from requiring the two high moments to arise from common initial weights. Applying this idea to actual ζ ordinates requires quantitative constraints on the character moments of their common spectrum. [Both maxima for the common-weight and relaxed laws](lean:D5/S3/Fourier/Concentration/FourthRootMomentRegion.four_first_moment_maxima)
+
+The equality condition for the one-half bound holds for every positive modulus. Let one probability weight $w$ on $\mathbb Z/q\mathbb Z$ satisfy $\widehat w(2)=0$. Put $m=\widehat w(1)$, $c=|m|^2$ and $Z_j=\overline m\exp(-2\pi i j/q)$. The weighted mean of $Z_j$ is $c$, its weighted second moment vanishes, and $|Z_j|^2=c$. The variance of the real part is therefore
+
+$$
+\sum_j w_j(\Re Z_j-c)^2=\frac{c}{2}-c^2\ge0.
+$$
+
+Thus $c\le 1/2$. At equality, the real part is $1/2$ at every positive weight and the imaginary part is either $1/2$ or $-1/2$. The imaginary mean is zero, so each side has mass one half. Each phase identifies a unique residue. The equality cases are exactly two residues of mass one half each whose difference has additive order four. Conversely, the two phases of such a law are perpendicular, giving squared first magnitude $1/2$, while their squares cancel. These residues exist exactly when $4\mid q$, with $0$ and $q/4$ as a choice. [Exact equality condition](lean:D5/S3/Fourier/Concentration/CyclicHarmonicEquality.zmod_first_mode_le_half_of_second_zero) · [Moduli attaining equality](lean:D5/S3/Fourier/Concentration/CyclicHarmonicEquality.zmod_exists_first_mode_half_of_second_zero)
+
+To compare modes $k$ and $2k$ of a common weighted lattice spectrum, combine weights at coordinates $a_j$ that share the residue $ka_j\bmod q$. Modes one and two of the resulting probability weight recover modes $k$ and $2k$ of the original normalized spectrum. When mode $2k$ vanishes, the normalized $2p$-th power at $k$ in the collision formula is at most $2^{-p}$.
+
+When the second coefficient is close to zero, the same variance measures stability near the two-point configuration. Let a finite family of unit phases $z_j$ carry nonnegative weights $w_j$ summing to one. Write $m=\sum_j w_jz_j$, $b=\sum_j w_jz_j^2$ and $c=|m|^2$. For $0<c<1$, put $X_j=\overline m z_j$ and $t=\sqrt{c(1-c)}$. Set $\eta_j=1$ when $\Im X_j\ge0$ and $\eta_j=-1$ otherwise. The variance of the real part controls the squared error to two candidate points and the difference between their assigned masses. Put
+
+$$
+D=\frac c2-c^2+\frac12\Re(\overline m^{\,2}b).
+$$
+
+Then
+
+$$
+\begin{aligned}
+\sum_j w_j\lvert X_j-c-i\eta_jt\rvert^2 &\le (1+4/t^2)D,\\
+\left(\sum_j w_j\eta_j\right)^2 &\le 4D/t^4.
+\end{aligned}
+$$
+
+[Stability bounds from two moments](lean:D5/S3/Fourier/Concentration/CyclicMomentStability.first_two_moment_stability)
+
+Write $x=\Re X_j$ and $y=\Im X_j$. The identity $x^2+y^2=c$ gives $(|y|-t)(|y|+t)=c^2-x^2$. Use $|x+c|\le2$ and $|y|+t\ge t$ to control the imaginary error by the real error. The imaginary mean vanishes, so weighted Cauchy–Schwarz bounds the mass difference. Both errors vanish when $b=0$ and $c=1/2$. A quantitative gap on a discrete grid also requires the angular separation of the available phases.
+
+The phase separation can be compared with the observed variance. Take finitely many unit phases $z_j$ with nonnegative weights $w_j$ summing to one. Let $m=\sum_j w_jz_j$, $b=\sum_jw_jz_j^2$, $c=|m|^2$, $s=c(1-c)$ and $D=c/2-c^2+\Re(\overline m^{\,2}b)/2$. Suppose $\lvert\Re(z_j\overline{z_k})\rvert\ge\delta$ for every pair of positive-weight indices, including diagonal pairs. Put $d=\max\{0,\delta-|2c-1|\}$. When $d>0$,
+
+$$
+c d^2\le 4\left(1+\frac4s+\frac{c d^2}{s^2}\right)D.
+$$
+
+Positive $d$ puts $c$ strictly between zero and one. The two-moment comparison phases have real inner product $c(2c-1)$ in the rotated coordinates. Average the squared perturbation of this product over pairs from opposite sign classes. Their mass product equals one quarter of one minus the squared mass difference. The two stability bounds then give the displayed inequality.
+
+When $4\nmid q$, reduce $4k-q$ to a centered residue modulo $2q$ for each integer difference $k$. The result is nonzero, and it is even when $q$ is even. For $z_j=\exp(-2\pi i j/q)$, we may take $\delta=\sin(\pi/(2q))$ for odd $q$ and $\delta=\sin(\pi/q)$ for even $q$. Here $m=\widehat w(1)$ and $b=\widehat w(2)$. If $|b|\le\delta/3$, a consequence is $c\le(1+|b|)/2-\delta^2/225$. Raising that bound to the $p$th power controls the first Fourier coefficient of the difference of two independent sums of $p$ draws.
+
+[Variance bound for separated phases](lean:D5/S3/Fourier/Concentration/CyclicGridMomentGap.phase_separation_variance_bound) · [Fourier moment bound on a cyclic grid](lean:D5/S3/Fourier/Concentration/CyclicGridMomentGap.cyclic_grid_fourier_gap)
+
 For actual ζ ordinates, use the tail above $X=e^{-D}T^\beta$ from the preceding section, with $\delta=\log T$ and $g_\gamma=\gamma/r$. For $H=\exp(cT^\beta\log T)$, take $N=\lfloor HT^2/r\rfloor_++1$ to keep the mesh error at most $rB/(2T^2)$. To bound the start, a finite $L=L(T)$ must satisfy the budget $KNE_p(2/L)<(\log T)^{2p}$. The target order $p$ grows on the scale of $T^\beta\log T$. For fixed finite tail and fixed $p$, $E_p(2/L)$ eventually equals the exact collision mass $E_p(0)$ as $L$ increases. Quantifying $L$ requires a weighted bound at positive resolution. Definition 7 in Tao, Trudgian, and Yang counts unweighted quadruples at unit scale, and Theorem 64 gives estimates for fixed $\sigma\ge7/10$. The growing-order weighted bound for the critical-line tail remains open. [Definition 7 and Theorem 64](https://arxiv.org/html/2501.16779v1) · [Research question](https://github.com/the-omega-institute/trureturing/issues/33519)
+
+The second and fourth harmonics give a sharp bound even when the phases range over the whole circle. Write $m_h=\sum_jw_jz_j^h$ for the moments of one probability weight on unit phases. Given caps $0\le e,k\le1$ on $|m_2|,|m_4|$, put $b=\min(e,\sqrt{(1+k)/2})$ and $r=(1+b)/2$. If $b=1$, the largest $|m_1|$ is $1$. If $b<1$, put
+
+$$
+a=\min\left(\sqrt r,\sqrt{\frac{1+k}{4(1-b)}}\right),\qquad B=\frac{a+r}{1+a}.
+$$
+
+The largest $|m_1|$ is $B$. Rotate the phase family so that $m_1$ is nonnegative real, and write $x=\Re z$ for the real projection of a phase sampled under the weight. The identities $2x^2=1+\Re z^2$ and $8(x^2-x^4)=1-\Re z^4$ relate the two caps to real moments. The nonnegative variance of $\Re z^2$ gives $(\Re m_2)^2\le(1+\Re m_4)/2\le(1+k)/2$. Together with $\Re m_2\le |m_2|\le e$ and $2\mathbb E x^2=1+\Re m_2$, this yields $\mathbb E x^2\le r$. If $a=\sqrt r$, Cauchy–Schwarz gives $\mathbb E x\le a=B$. In the other branch, expand the nonnegative polynomial $(1-x)(x-a)^2(x+1+2a)$ for $x\in[-1,1]$. Its mean is
+$$
+\mathbb E[(1-x^2)(x^2-a^2)]-2a(1+a)\left[(1+a)(\mathbb E x-1)+1-\mathbb E x^2\right].
+$$
+The first term is nonpositive by the fourth cap and $\mathbb E x^2\le r$, so the bracket is nonpositive. This yields the stated bound. The real moment calculation is related to the upper principal representation of a measure on an interval. [Dette and Schorning, Lemma 2.1](https://arxiv.org/pdf/1306.4872)
+
+For $b<1$, take weight $(r-a^2)/(1-a^2)$ at $1$ and divide the rest equally between $a+i\sqrt{1-a^2}$ and its conjugate. The moments are real and equal to $B$, $b$, and $1-8(1-r)a^2$ at orders $1,2,4$. The choice of $a$ gives $|m_4|\le k$. A point mass attains the branch $b=1$. With $e=k=0$, the three phases are $1,e^{i\pi/3},e^{-i\pi/3}$ with equal weights, and $|m_1|=2/3$. Every moment at order $2^j$ for $j\ge1$ vanishes in this example because $2^j$ is congruent to $2$ or $4$ modulo six. Even these simultaneous vanishings allow a first coefficient of fixed positive size. A growing-degree bound on actual ζ ordinates needs further arithmetic information about the weighted frequency sums.
+
+[Lean proof of the sharp harmonic bound](lean:D5/S3/Fourier/Concentration/SecondFourthHarmonicBound.sharp_second_fourth_harmonic_bound)
+
+For a full consecutive block of even orders, let $N\ge1$ and suppose $m_{2k}=0$ for $1\le k<N$. The largest first magnitude is
+
+$$
+B_N=\frac{1}{N\sin(\pi/(2N))}.
+$$
+
+It is attained by equal weights at $z_j=\exp\bigl(i\pi(j-(N-1)/2)/N\bigr)$ for $0\le j<N$. The squared phases are equally spaced, so the prescribed harmonics vanish by the finite character sum. The first magnitude follows from the sum of cosines on this arc. Multiplying each cosine by $2\sin(\pi/(2N))$ makes it a difference of sines at the adjacent endpoints, and the sum telescopes from $-1$ to $1$.
+
+To compare an arbitrary admissible law with this equal-weight law, rotate its first moment onto the nonnegative real axis and set $y=(\Re z)^2$. Then $2y-1=\Re z^2$, and $T_k(2y-1)=\Re z^{2k}$ for the Chebyshev polynomial $T_k$. The two laws have the same means for polynomials in $y$ of degree below $N$. The polynomial $R(y)=1+(-1)^N T_N(2y-1)$ is nonnegative on $[0,1]$, vanishes at the attaining projections, and is positive at negative arguments. For $s>0$, the expression $(y+sR(y)/R(-s))/(y+s)$ is a polynomial of degree below $N$ because its numerator vanishes at $-s$. It dominates $y/(y+s)$ and agrees with it on the attaining support. Compare the two means with this polynomial, then integrate at $s=t^2$ using $\int_{\mathbb R}y/(y+t^2)\,dt=\pi\sqrt y$ for $y\ge0$. This bounds the mean of $\sqrt y$, which bounds the first magnitude after rotation. [Gauss–Chebyshev formula](https://dlmf.nist.gov/3.5#v) · [Principal representations, Lemma 2.1](https://arxiv.org/pdf/1306.4872)
+
+The cases $N=2,3$ give $1/\sqrt2$ and $2/3$. As $N\to\infty$, $B_N\to 2/\pi$ by the sine limit at zero. Thus a growing block of vanishing even orders still allows a first magnitude bounded away from zero in this class of laws. The near-collision budget for actual ζ ordinates needs information that constrains the weighted sums along their time orbit.
+
+[Lean proof of the sharp bound for a consecutive even block](lean:D5/S3/Fourier/Concentration/EvenHarmonicFirstMoment.sharp_first_harmonic_even_block)
 
 ## What low-order collision masses determine
 
@@ -147,6 +293,88 @@ $$
 The degree-$p$ sums have at most $1+p(B-A)$ possible integer positions. Group the multinomial weights by position and apply Cauchy–Schwarz to the group masses. If the total weight is $W>0$, the exact collision mass of the rounded spectrum is at least $W^{2p}/[1+p(B-A)]$. Any pair that collides exactly after rounding had an original gap of at most $ph$, since each degree-$p$ sum has rounding error in $[0,ph]$. [Collision bound for grouped mass](lean:D5/S3/Fourier/Concentration/FiniteSincCollisionMoment.sum_bin_mass_sq_le_nearCollisionMass)
 
 For example, fix $m_j=\lceil(\log_2(2+g_j))^2\rceil$ once for each positive frequency. On shared tail indices with $cT^\alpha\le g_j\le T$, fixed $c,\alpha>0$, $N=O(T\log T)$, and at most polynomial growth of $\lambda$, the change in every such fixed-order statistic tends to zero. Fix $0<\beta<1$. At $p\asymp T^\beta\log T$, the denominator satisfies $\log[1+p(B-A)]=O((\log T)^2)$. If $W\asymp(\log T)^2$ and $\delta=\log T$, the missing-window moment budget requires normalized mass at most $\exp(-2p\log\log T+O(p))$ even with one time sample. The rounded spectrum's exact collision mass already exceeds that budget. The two local statistics use the same tail indices. Separate height cutoffs require accounting for entries that cross the endpoints. The transfer to the original spectrum gives a lower bound at resolution $ph$, and the upper bound at the finer target resolution remains open.
+
+## Equal count vectors in the moment expansion {#weighted-occupation-diagonal}
+
+Let $J$ be finite, with real weights $w_j$ and integer degree $p\ge0$. Write $D_p=\sum_{|m|=p}c_m^2$, where $c_m=p!\prod_j(w_j^{m_j}/m_j!)$. For nonnegative weights, the weighted near-collision mass includes this diagonal at every nonnegative resolution. For each $s\ge0$,
+
+$$
+s^pD_p\le (p!)^2\prod_{j\in J}(2e^{s w_j^2/2}-1).
+$$
+
+Dividing the left side by $(p!)^2$ gives the sum of the degree-$p$ terms in $\prod_j\sum_{n=0}^p x_j^n/(n!)^2$, with $x_j=sw_j^2$. Including every term gives an upper bound by nonnegativity. For $n\ge1$, the inequality $n!\ge2^{n-1}$ bounds each positive-degree term by twice its counterpart in $e^{x_j/2}$. The constant coefficient is one, so the factor is at most $2e^{x_j/2}-1$. The full series is $I_0(2\sqrt{x_j})$. [Lean proof of the finite product bound](lean:D5/S3/Fourier/Concentration/WeightedOccupationDiagonal.scaled_diagonal_le_product) · [Lamzouri's independent-phase product, §3](https://arxiv.org/html/2311.04860v2#S3) · [DLMF, equation 10.25.2](https://dlmf.nist.gov/10.25.E2)
+
+For $p\ge1$ and $V=\sum_jw_j^2>0$, put $s=p/V$. The identity $2e^{x/2}-1=e^x[1-(1-e^{-x/2})^2]$ gives
+
+$$
+\frac{D_p}{p!\,V^p}\le
+\frac{p!e^p}{p^p}\prod_{j\in J}
+\left[1-\left(1-e^{-p w_j^2/(2V)}\right)^2\right].
+$$
+
+Stirling's formula gives a prefactor of order $\sqrt p$. If at least $\kappa p$ coordinates have $p w_j^2/V\ge a$ for constants $\kappa,a>0$, the product is at most $[1-(1-e^{-a/2})^2]^{\kappa p}$.
+
+Under RH, take $X=e^{-K}T^\beta$ with fixed $K$ and $0<\beta<1$, and $p\asymp X\log X$. Group multiplicity by distinct ordinate and use $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$. The [multiplicity estimate for the logarithmic tail](ch34-s28-s03-s02-mobius-and-spectra.md#thm-ch31-logarithmic-missing-window) is $\sum_{0<\gamma\le Y}m_\gamma^2=O(Y\log Y)$. For each fixed $C\ge2$, the Riemann–von Mangoldt formula gives $\sum_{X<\gamma\le CX}m_\gamma\sim(C-1)X\log X/(2\pi)$. Cauchy–Schwarz gives at least $M\gg CX\log X$ distinct ordinates in the band, with an absolute lower-bound constant for fixed $C$ and sufficiently large $X$. Choose a fixed $C$ large enough that $M\ge2p$. Then $CX\le T$ eventually, and each of these weights is at least $1/(2CX)$. Since $V=O(\log X/X)$, these coordinates supply the exponential factor in the upper bound. For the lower bound, keep the vectors that occupy exactly $p$ distinct coordinates in the band. They give
+
+$$
+D_p\ge (p!)^2\binom{M}{p}(2CX)^{-2p}
+   \ge p!\,(M/(8C^2X^2))^p .
+$$
+
+Thus there are constants $0<c_1\le c_2$ with $e^{-c_2p}\le D_p/(p!V^p)\le e^{-c_1p}$ for all sufficiently large $T$. With tail weight $W\asymp(\log T)^2$, this gives $\log(D_p/W^{2p})=-2p\log\log T+O(p)$. The ζ asymptotics use the cited analytic inputs. The weight of near-collisions between two distinct count vectors still requires an arithmetic estimate. [Multiplicity input, Theorem 1 and §7](https://arxiv.org/abs/2306.04799)
+
+## Mass at a fixed count difference
+
+For degree-$p$ count vectors $m,n$, put $\ell_j=\min(m_j,n_j)$, $a=m-\ell$ and $b=n-\ell$. The residual vectors have disjoint supports and common degree $d=p-|\ell|$. For fixed $a,b$, every pair with $m-n=a-b$ is of the form $(\ell+a,\ell+b)$ with $|\ell|=p-d$. The frequency gap $\sum_j(a_j-b_j)g_j$ is independent of $\ell$.
+
+Use the preceding coefficient $c_p(m)=p!\prod_j(w_j^{m_j}/m_j!)$. The total weight $M_p(a-b)$ at this difference is
+
+$$
+M_p(a-b)=
+(p!)^2\left(\prod_j w_j^{a_j+b_j}\right)
+\sum_{|\ell|=p-d}\prod_j
+\frac{(w_j^2)^{\ell_j}}{\ell_j!\,(\ell_j+a_j+b_j)!}.
+$$
+
+The identity allows real weights. At each coordinate at most one residual count is positive, so the two factorials are $\ell_j!$ and $(\ell_j+a_j+b_j)!$. For nonnegative weights, $(\ell_j+a_j)!\ge \ell_j!a_j!$ gives $c_p(\ell+a)\le\binom pd\,c_{p-d}(\ell)c_d(a)$. Applying the same bound to $\ell+b$ and summing over $\ell$ gives
+
+$$
+M_p(a-b)\le \binom pd^{\!2}D_{p-d}\,c_d(a)c_d(b).
+$$
+
+The Lean proof gives the exact fixed-difference mass and the diagonal bound. [Lean proof](lean:D5/S3/Fourier/Concentration/FixedDifferenceOccupationMass.fixed_difference_mass)
+
+Write $R_d(\eta)$ for the sum of $c_d(a)c_d(b)$ over ordered degree-$d$ pairs with disjoint supports and $|\sum_j(a_j-b_j)g_j|\le\eta$. Summing the last bound over these pairs bounds the full mass at residual degree $d$ by $\binom pd^2 D_{p-d}R_d(\eta)$. At $d=0$ this recovers the diagonal. At $d=1$ the required input counts weighted pairs of distinct indices. These index pairs have distinct ordinates in the ζ tail when multiplicities are grouped by ordinate. For the actual ζ tail, $d$ can grow with $p$, and the required bound for $R_d(\eta)$ in that regime remains open. [Shifted factorials in the Bessel series, DLMF 10.25.2](https://dlmf.nist.gov/10.25.E2)
+
+## Weighted near-pairs at residual degree one
+
+Take a finite set of ordered pairs with both ordinates in $[X,T]$, where $2\le X\le T$, and gaps at most $\delta\le X/2$. Give each index a nonnegative multiplicity $m_j$ and weight $0\le w_j\le m_j/\gamma_j$. Let $B(y)$ sum $m_i m_j$ over the supplied pairs whose larger ordinate is at most $y$. If $B(y)\le Cy\log y$ for every $y\in[X,T]$, with $C\ge0$, then
+
+$$
+\sum_{(i,j)} w_iw_j\le \frac{4C(\log X+1)}{X}.
+$$
+
+If the larger ordinate is $h$, the smaller one is at least $h-\delta\ge h/2$. Their weight product is at most $2m_i m_j/h^2$. Write $1/h^2$ as $1/T^2+\int_h^T 2y^{-3}\,dy$ and exchange the finite sum with the integral. The weighted total is at most $2B(T)/T^2+4\int_X^T B(y)y^{-3}\,dy$. Substitution of the cumulative bound and integration give the stated estimate. [Lean proof of the finite weighted bound](lean:D5/S3/Fourier/Concentration/WeightedClosePairTail.weighted_close_pairs_le)
+
+Under RH, group multiplicities by distinct positive ordinate and use $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$. The chapter uses frequencies $g_\gamma=\gamma/r$ with $r>0$, so the frequency resolution $\eta$ corresponds to the ordinate resolution $\delta=r\eta$. Take $0\le\eta\le1/(4r\log T)$. Average the Montgomery function at height $y$ against $2(1-\alpha)$ on $[0,1]$. The published uniform expansion gives a bounded average. Each pair contributes with the factor $2(1-\cos u)/u^2$, where $u=(\gamma_i-\gamma_j)\log y$, with value one at zero. Every contribution is nonnegative. A pair at ordinate gap at most $\delta$ has $|u|\le1/4$, so this factor and the Montgomery factor $4/[4+(\gamma_i-\gamma_j)^2]$ both have positive absolute lower bounds. Retaining these pairs and restoring the normalization gives $B(y)\ll y\log y$ uniformly for sufficiently large $X$. [Baluyot, Goldston, Suriajaya and Turnage-Butterbaugh, Theorem 1](https://arxiv.org/abs/2306.04799)
+
+Hence $R_1(\eta)\ll(\log X+1)/X$. The fixed-difference bound gives at most $p^2D_{p-1}R_1(\eta)$ for the part of $E_p(\eta)$ at residual degree exactly one. With the same cutoff $X=e^{-K}T^\beta$ for fixed $K$ and $0<\beta<1$, and with $p\asymp X\log X$, the diagonal estimate gives an exponential saving relative to $p!V^p$, since $V\asymp\log X/X$ and the extra factor of order $p$ can be absorbed. Growing residual degrees still require an arithmetic estimate.
+
+## Higher residual degrees with pointwise matchings {#matched-residual-occupations}
+
+After removing shared occurrences coordinate by coordinate, each side has $d$ frequencies left. If they can be paired with every discrepancy at most $\eta$, the weight of such residuals can be estimated from the weight of single close pairs. Words with the same occurrence counts represent the same count vector.
+
+Let $E$ be a relation on a finite index set $J$, put $R(E)=\sum_{(i,j)\in E}w_iw_j$, and assume $w_j\ge0$. Let $S$ be a set of ordered count-vector pairs $(a,b)$ each represented by two length-$d$ words whose corresponding letters are related by $E$. Then
+$$
+\sum_{(a,b)\in S} c_d(a)c_d(b)\le d!R(E)^d.
+$$
+Any two words with the specified count vectors can be rearranged to give a matching. Summing over position permutations counts each matchable word pair at least once. For a fixed permutation, the $d$ positions independently select an edge, giving total weight $R(E)^d$. Summing the weights of all words with the same count vector gives $c_d$.
+
+For $E=\{(i,j):i\ne j,\ |g_i-g_j|\le\eta\}$, the edge mass is $R_1(\eta)$. Take the pairs in $E_p(\eta)$ whose residuals can be matched along $E$, together with the diagonal. Their total weight is at most
+$$
+\sum_{d=0}^p \binom pd^2D_{p-d}\,d!R_1(\eta)^d\le p!\bigl(V+R_1(\eta)\bigr)^p.
+$$
+The first bound applies the diagonal estimate for each fixed count difference and sums over the matchable residual vectors. The second uses $D_k\le k!V^k$, from the multinomial theorem and the bound $k!$ on each multinomial coefficient. The estimate covers this particular subset of pairs. For example, $1+4=2+3$, and every cross-pair discrepancy is at least $1$, so a pointwise matching fails for $0<\eta<1$. For actual ζ zeros, the weight of higher-degree residuals with cancellation and no pointwise close matching remains to be bounded.
 
 ## A finite frequency band forces close sums
 

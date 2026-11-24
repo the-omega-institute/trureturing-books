@@ -96,11 +96,157 @@ $$
 每个带内配对在所有模数下都计入。对带外配对记 $d=A_m-A_n$。因带关于零对称，每个计入该配对的素数都整除 $\prod_{y=-H}^H(|d|-y)$，其中各因子均为正。这些互异素数的乘积整除该乘积，并且至少为 $Q$ 的素数个数次幂。由 $|d|\le D$ 和严格不等式可知，这一素数个数至多为 $B$。再对配对加权求和。Gallagher 的大筛法对单个差值使用了同样的整除步骤。 [Gallagher，定理 1 的证明](https://doi.org/10.4064/aa-18-1-77-81)
 :::
 
-零剩余类本身限制了循环群证书能有多小。在特征标公式中取 $R=\{0\}$。各项均为非负矩，$k=0$ 的项为 $W^{2p}$。因此只要 $H\ge0$，就有 $C_q(R_q(H))\ge W^{2p}/q$。若用单个循环群证书验证缺失窗口的预算，必须满足 $q>KN(W/\delta)^{2p}$。若对非空素数集 $P$ 取平均，同一不等式中的 $q$ 换为各模数的调和平均。
+若把 $P$ 中若干素数相乘，一个配对要计入乘积模数，就必须有同一个带内位移适用于所有因子。例如，取 $H=1$、$d=6$。模 $3$ 时可用位移 $0$，模 $5$ 时可用位移 $1$，而 $6$ 模 $15$ 不等于 $-1$、$0$ 或 $1$ 中任何一个的余数。
+
+::: {.theorem #thm-ch31-prime-product-excess title="素数乘积模数下的碰撞额外质量" lean="D5/S3/Fourier/Concentration/PrimeProductCollisionBudgets.sum_prime_product_cyclic_excess_le"}
+设 $r,B_0$ 为非负整数，且 $D+H<Q^{B_0+1}$，沿用上面的 $P,Q,H,D,L_H,W$ 和非负权重。对每个 $r$ 元子集 $S\subseteq P$，记 $q_S=\prod_{q\in S}q$。这些乘积模数的额外质量满足
+
+$$
+\begin{aligned}
+0 &\le \sum_{\substack{S\subseteq P\\|S|=r}}\bigl(C_{q_S}(R_{q_S}(H))-L_H\bigr)\\
+  &\le \min\!\left\{\binom{|P|}{r},(2H+1)\binom{\min(B_0,|P|)}{r}\right\}
+    (W^{2p}-L_H).
+\end{aligned}
+$$
+:::
+
+::: proof
+对一个带外格点差 $d$，固定 $y\in[-H,H]\cap\mathbb Z$。每个子集 $S$ 若以 $y$ 为共同位移，其中所有素数都整除同一个非零整数 $d-y$。由于 $|d-y|\le D+H$，满足这一条件的 $P$ 中的素数至多有 $B_0$ 个。对每个位移计数，再对 $2H+1$ 个位移取并集，得到每个带外配对最多被计入的子集数。最后以配对权重求和。当 $r>B_0$ 时，所有选出的乘积模数都给出精确的格点带内质量 $L_H$。
+
+完整证明由 Lean 内核检查。
+:::
+
+零剩余类本身限制了循环群证书能有多小。在特征标公式中取 $R=\{0\}$。各项均为非负矩，$k=0$ 的项为 $W^{2p}$。因此只要 $H\ge0$，就有 $C_q(R_q(H))\ge W^{2p}/q$。若用单个循环群证书验证缺失窗口的预算，必须满足 $q>KN(W/\delta)^{2p}$。若对非空素数集 $P$ 取平均，同一不等式中的 $q$ 换为各模数的调和平均。 这个限制也适用于乘积模数。
 
 采用[方差界](ch34-s28-s03-s02-collision-variance.md)中的 ζ 尾段参数，单个模数或平均中的调和平均必须满足 $\log q\ge\log N+2p\log\log T-O(p)$。逐项计算特征标和时，模数 $q$ 对应 $q$ 项。取平均时，至少一个模数不小于调和平均。能否在目标分辨率下以可行的渐近成本界定加权质量，仍待解决。
 
+即使知道两个模数上完整的边缘分布，也无法由各自的碰撞质量确定联合碰撞质量。模六下，令 $P$ 在剩余类 $0,3,4$ 上分别取权重 $1/2,1/4,1/4$，令 $Q$ 在 $0,1$ 上分别取权重 $3/4,1/4$。两者模二都化为 $(3/4,1/4)$，模三都化为 $(3/4,1/4,0)$。记独立 $p$ 次抽样和的两个边缘碰撞质量之积为 $A_p$，模六的碰撞质量分别为 $E_p(P),E_p(Q)$。对 $p\ge1$，
+
+$
+\begin{aligned}
+E_p(P)-A_p&=\frac{(1/16)^p-(7/64)^p}{3}<0,\\
+E_p(Q)-A_p&=\frac{(13/16)^p-(7/64)^p}{3}>0.
+\end{aligned}
+$
+
+由 [@thm-ch31-cyclic-collision-fourier]，零剩余类的碰撞质量是六个特征标平方模的 $p$ 次幂的平均。令 $\omega=e^{2\pi i/6}$。在混合频率 $1$ 上，$P$ 的振幅为 $1/2+\omega^3/4+\omega^4/4=(1+\omega^4)/4$，$Q$ 的振幅为 $(3+\omega)/4$，平方模分别为 $1/16$ 和 $13/16$。频率 $5$ 给出各自的共轭。两个边缘的非平凡平方模为 $1/4$ 和 $7/16$，所以边缘乘积对每个混合频率使用的数值为 $7/64$。在每一个正阶卷积幂下，两组分布的两个边缘分别相同。碰撞质量为 $E$ 的概率律，其二阶 Rényi 熵为 $-\log E$。 [Linden、Mosonyi 与 Winter，第 V 节](https://arxiv.org/html/1212.0248#S5)
+
+缩小模数是一种减少特征标项数的办法。另一种是保留模数 $q$，用只含少量频率的核 $K$ 在每个剩余类上从上方控制带的指示函数。对正整数 $q$，取 $G=\mathbb Z/q\mathbb Z$，令 $R\subseteq G$ 为需要计入的剩余类。设 $K:G\to\mathbb R$ 处处非负，且在 $R$ 上至少为 $1$。令 $S$ 包含 $K$ 的离散傅里叶变换的支集，记 $m=|S|$，$M=\sum_{x\in G}K(x)$。
+
+**手工推导。** 傅里叶反演在零点给出精确恒等式
+
+$$
+mM-qK(0)=\sum_{k\in S}\sum_{x\in G}K(x)\bigl(1-\Re\chi_k(-x)\bigr).
+$$
+
+::: {.theorem #thm-ch31-sparse-majorant-gap title="稀疏傅里叶上包络的相位下界" lean="D5/S3/Fourier/Concentration/SparseCyclicMajorants.sparse_dft_majorant_gap"}
+沿用上述 $q,K,S,R,m,M$，有
+
+$$
+mM-qK(0)\ \ge\ \sum_{k\in S}\sum_{x\in R}\bigl(1-\Re\chi_k(-x)\bigr).
+$$
+:::
+
+每一项均非负，因而只保留 $R$ 中的项即可。
+
+按特征标展开的归一化，零频系数为 $M/q$。若 $0\in R$，该系数至少为 $1/m$。若 $1\in R$ 且 $S$ 含有非零频率，右边严格为正。
+
+::: {.theorem #thm-ch31-sparse-majorant-equality title="稀疏均值下界的等号条件" lean="D5/S3/Fourier/Concentration/SparseCyclicMajorants.sparse_dft_floor_eq_iff"}
+设 $K$ 处处非负，$S$ 包含其傅里叶变换的支集。在 $K(0)>0$ 时，$mM=qK(0)$ 当且仅当 $K$ 等于 $K(0)\mathbf 1_U$，其中 $U$ 是 $G$ 的一个加法子群，并且 $S$ 是 $U$ 的零化子。
+:::
+
+等号迫使所有选中的特征标在 $K>0$ 的地方取值 $1$。傅里叶反演使 $K$ 在这些特征标共同为 $1$ 的子群上恒等于 $K(0)$。该子群的零化子中每个频率的系数为 $M>0$，因此都必须属于 $S$。反过来，子群指示函数与其零化子使恒等式右端为零。有限群的傅里叶支集不确定性原理同样以子群指示函数给出取等构形。 [Tao，第 1 节](https://arxiv.org/pdf/math/0308286v6)
+
+把 $K$ 用于碰撞质量时，其零频项为 $(M/q)W^{2p}$。若 $0\in R$ 且其他系数的实部都非负，则整个上界至少为 $W^{2p}/m$。系数有正有负时，均值估计约束零频项，其余各项由同一组权重产生的高阶矩共同决定。
+
+**模四算例（手工推导）。** 直接检验各频率的矩能否由同一组权重给出。在 $\mathbb Z/4\mathbb Z$ 上，令 $w=(a,b,c,d)$ 为总和为 $1$ 的非负权重，令 $u=|\widehat w(1)|^2$、$v=|\widehat w(2)|^2$。使用不含 $1/4$ 因子的离散傅里叶变换，有
+
+$$
+u=(a-c)^2+(b-d)^2,\qquad v=(a+c-b-d)^2.
+$$
+
+通过同一个 $w$ 能实现的二元组恰好满足
+
+$$
+0\le v\le1,\qquad 0\le u\le(1+v)/2.
+$$
+
+记偶、奇剩余类的总权重分别为 $e,o$。两个差 $a-c,b-d$ 分别在 $[-e,e]$ 和 $[-o,o]$ 内独立变化。所以 $u$ 的最大值为 $e^2+o^2=(1+v)/2$。给定 $v$ 可取 $e=(1+\sqrt v)/2$、$o=(1-\sqrt v)/2$，然后按同一个比例缩放两个差的端点值，得到从零到最大值的整个区间。 [模四联合矩的精确可行域](lean:D5/S3/Fourier/Concentration/FourthRootMomentRegion.dft_four_squared_region)
+
+从 $w$ 独立抽取 $p$ 次求和，再取两个独立和的差，频率 $1,2$ 的傅里叶系数分别是 $u^p,v^p$。若 $v^p=0$，在 $p\ge2$ 时，第一个系数的最大值为 $2^{-p}$。若只要求差的分布对称且傅里叶系数非负，第二个系数为零时偶、奇质量都等于 $1/2$。第一个系数是两个偶剩余类的质量之差，最大值为 $1/2$，由 $(1/2,1/4,0,1/4)$ 取到。两项最大值之比为 $2^{p-1}$。这一差距来自两个高阶矩须由同一组初始权重实现。用于实际 ζ 纵坐标时，仍需对同一零点谱的特征标矩建立定量约束。 [同源与放松分布的两个最优值](lean:D5/S3/Fourier/Concentration/FourthRootMomentRegion.four_first_moment_maxima)
+
+一半上界的等号条件适用于任意正模数。 设同一个概率权重 $w$ 在 $\mathbb Z/q\mathbb Z$ 上满足 $\widehat w(2)=0$。记 $m=\widehat w(1)$、$c=|m|^2$，并置 $Z_j=\overline m\exp(-2\pi i j/q)$。$Z_j$ 的加权均值为 $c$，加权二次矩为零，且 $|Z_j|^2=c$。因此实部的加权方差是
+
+$$
+\sum_j w_j(\Re Z_j-c)^2=\frac{c}{2}-c^2\ge0.
+$$
+
+故 $c\le 1/2$。取等时，每个正权重处的实部等于 $1/2$，虚部等于 $1/2$ 或 $-1/2$。虚部的均值为零，两侧质量各为一半。每个相位只对应一个剩余类，因此等号情形恰为两个各承载一半质量的剩余类，且其差的加法阶为四。反过来，这两个相位互相垂直，一阶系数的平方模就是 $1/2$，二阶系数相消。这样的剩余类存在当且仅当 $4\mid q$。可取 $0$ 与 $q/4$。 [等号的充要条件](lean:D5/S3/Fourier/Concentration/CyclicHarmonicEquality.zmod_first_mode_le_half_of_second_zero) · [可取等的模数](lean:D5/S3/Fourier/Concentration/CyclicHarmonicEquality.zmod_exists_first_mode_half_of_second_zero)
+
+若要比较同一加权格点谱在 $k$ 与 $2k$ 的系数，把坐标 $a_j$ 上的权重汇入剩余类 $ka_j\bmod q$。这样得到的同一概率权重的一、二阶系数分别等于原谱在 $k$、$2k$ 的系数。所以当 $2k$ 处的系数为零时，归一化后 $k$ 处进入碰撞公式的 $2p$ 次幂至多为 $2^{-p}$。
+
+若第二系数接近零，可以量化上述两点构形的稳定性。设有限组单位相位 $z_j$ 带有同一组总和为 $1$ 的非负权重 $w_j$，记 $m=\sum_j w_jz_j$、$b=\sum_j w_jz_j^2$、$c=|m|^2$。对 $0<c<1$，置 $X_j=\overline m z_j$、$t=\sqrt{c(1-c)}$。当 $\Im X_j\ge0$ 时取 $\eta_j=1$，其余取 $\eta_j=-1$。实部方差同时控制相位到两个候选点的平方误差与两侧的质量差。具体地，令
+
+$$
+D=\frac c2-c^2+\frac12\Re(\overline m^{\,2}b).
+$$
+
+则有
+
+$$
+\begin{aligned}
+\sum_j w_j\lvert X_j-c-i\eta_jt\rvert^2 &\le (1+4/t^2)D,\\
+\left(\sum_j w_j\eta_j\right)^2 &\le 4D/t^4.
+\end{aligned}
+$$
+
+[两矩稳定性界](lean:D5/S3/Fourier/Concentration/CyclicMomentStability.first_two_moment_stability)
+
+写 $x=\Re X_j$、$y=\Im X_j$。由 $x^2+y^2=c$，有 $(|y|-t)(|y|+t)=c^2-x^2$。使用 $|x+c|\le2$ 和 $|y|+t\ge t$，就能用实部误差控制虚部误差。虚部均值为零，再用加权柯西–施瓦茨不等式得到质量差的界。当 $b=0$ 且 $c=1/2$ 时，两项误差都为零。要从这一估计得到离散格点上的定量缺口，还须结合允许相位之间的角距离。
+
+相位与直角的距离可以用实测方差控制。设有限单位相位 $z_j$ 带有总和为一的非负权重 $w_j$。记 $m=\sum_j w_jz_j$、$b=\sum_jw_jz_j^2$、$c=|m|^2$、$s=c(1-c)$、$D=c/2-c^2+\Re(\overline m^{\,2}b)/2$。设任意两个正权重指标（允许取同一指标）满足 $\lvert\Re(z_j\overline{z_k})\rvert\ge\delta$。令 $d=\max\{0,\delta-|2c-1|\}$。若 $d>0$，则
+
+$$
+c d^2\le 4\left(1+\frac4s+\frac{c d^2}{s^2}\right)D.
+$$
+
+$d>0$ 时，$c$ 严格介于零与一之间。两矩稳定性给出的两个理想相位在旋转后的坐标中有实内积 $c(2c-1)$。对符号相反的相位对求加权平均，可用两个理想相位的平方误差控制实内积偏差。两侧质量的乘积等于一减去质量差平方再除以四，代入两条稳定性估计即得上式。
+
+当 $4\nmid q$ 时，将整数差 $k$ 对应的 $4k-q$ 化为模 $2q$ 的中心剩余类。所得整数非零，在 $q$ 为偶数时仍为偶数。循环相位 $z_j=\exp(-2\pi i j/q)$ 因此可取 $\delta=\sin(\pi/(2q))$（$q$ 为奇数）或 $\delta=\sin(\pi/q)$（$q$ 为偶数）。此时 $m=\widehat w(1)$、$b=\widehat w(2)$。若 $|b|\le\delta/3$，可得 $c\le(1+|b|)/2-\delta^2/225$。对上界取 $p$ 次幂，就得到两个独立的 $p$ 次抽样和之差的第一个傅里叶系数的上界。
+
+[相位间隔的方差界](lean:D5/S3/Fourier/Concentration/CyclicGridMomentGap.phase_separation_variance_bound) · [循环网格上的傅里叶矩界](lean:D5/S3/Fourier/Concentration/CyclicGridMomentGap.cyclic_grid_fourier_gap)
+
 对实际 ζ 纵坐标，可按前一节在 $X=e^{-D}T^\beta$ 以上截取尾段，并取 $\delta=\log T$、$g_\gamma=\gamma/r$。给定 $H=\exp(cT^\beta\log T)$，可取 $N=\lfloor HT^2/r\rfloor_++1$，使网格误差不超过 $rB/(2T^2)$。要得到有限的起点范围，还需在某个 $L=L(T)$ 上证明相应的严格预算 $KNE_p(2/L)<(\log T)^{2p}$。目标阶数 $p$ 随 $T^\beta\log T$ 增长。对固定的有限尾段和固定 $p$，随着 $L$ 增大，$E_p(2/L)$ 最终等于精确碰撞质量 $E_p(0)$。若要量化 $L$，仍须控制正分辨率下的加权近碰撞。Tao、Trudgian 与 Yang 的定义 7 计数的是单位尺度的无权四元组，定理 64 的估计适用于固定的 $\sigma\ge7/10$。临界线尾段的增长阶数加权界仍待证。 [定义 7 与定理 64](https://arxiv.org/html/2501.16779v1) · [研究问题](https://github.com/the-omega-institute/trureturing/issues/33519)
+
+即使相位可在整个圆周上取值，第二和第四谐波也能给出尖锐的界。对单位相位的一组概率权重，记 $m_h=\sum_j w_j z_j^h$。令 $0\le e,k\le1$ 分别为 $|m_2|,|m_4|$ 的上限，记 $b=\min(e,\sqrt{(1+k)/2})$、$r=(1+b)/2$。若 $b=1$，则 $|m_1|$ 的最大值为 $1$。若 $b<1$，令
+
+$$
+a=\min\left(\sqrt r,\sqrt{\frac{1+k}{4(1-b)}}\right),\qquad B=\frac{a+r}{1+a}.
+$$
+
+此时 $|m_1|$ 的最大值为 $B$。把相位整体旋转，使 $m_1$ 为非负实数，并记按给定权重抽样的相位实投影为 $x=\Re z$。恒等式 $2x^2=1+\Re z^2$ 与 $8(x^2-x^4)=1-\Re z^4$ 把两个上限转为实矩约束。由 $\Re z^2$ 的方差非负可得 $(\Re m_2)^2\le(1+\Re m_4)/2\le(1+k)/2$。再用 $\Re m_2\le |m_2|\le e$ 和 $2\mathbb E x^2=1+\Re m_2$，得到 $\mathbb E x^2\le r$。若 $a=\sqrt r$，柯西–施瓦茨不等式给出 $\mathbb E x\le a=B$。另一分支中，将 $x\in[-1,1]$ 上的非负多项式 $(1-x)(x-a)^2(x+1+2a)$ 展开并求平均，得到
+$$
+\mathbb E[(1-x^2)(x^2-a^2)]-2a(1+a)\left[(1+a)(\mathbb E x-1)+1-\mathbb E x^2\right].
+$$
+由第四谐波的上限和 $\mathbb E x^2\le r$，第一项非正，方括号内也就非正，从而给出所述上界。实矩计算与区间上测度的上主表示有关。 [Dette 与 Schorning，引理 2.1](https://arxiv.org/pdf/1306.4872)
+
+当 $b<1$ 时，在相位 $1$ 上取权重 $(r-a^2)/(1-a^2)$，其余权重平分给 $a+i\sqrt{1-a^2}$ 及其共轭。第一、第二和第四矩均为实数，分别为 $B$、$b$ 和 $1-8(1-r)a^2$。按 $a$ 的取法有 $|m_4|\le k$。当 $b=1$ 时，点质量取等。若 $e=k=0$，取 $1,e^{i\pi/3},e^{-i\pi/3}$ 三个相位等权，得到 $|m_1|=2/3$。由于 $2^j$ 在模六下为 $2$ 或 $4$，所有 $j\ge1$ 的 $2^j$ 阶矩都为零。即使这些系数同时为零，第一系数也可以保持在固定的正值。实际 ζ 纵坐标在增长阶数下的界仍需加权频率和的算术信息。
+
+[尖锐谐波界的 Lean 证明](lean:D5/S3/Fourier/Concentration/SecondFourthHarmonicBound.sharp_second_fourth_harmonic_bound)
+
+对连续的偶数阶，设 $N\ge1$ 且 $1\le k<N$ 时 $m_{2k}=0$。第一系数幅值的最大值为
+
+$$
+B_N=\frac{1}{N\sin(\pi/(2N))}.
+$$
+
+等权分布在 $z_j=\exp\bigl(i\pi(j-(N-1)/2)/N\bigr)$（$0\le j<N$）上时取等。相位的平方等距分布，规定的谐波因有限特征标求和而消失。第一系数由圆弧上的余弦和给出。每项乘以 $2\sin(\pi/(2N))$，即为相邻两个端点的正弦之差。从 $-1$ 到 $1$ 逐项相消得到所需的和。
+
+比较任一满足条件的分布与上述等权分布时，将前者的第一矩旋转到非负实轴，并记 $y=(\Re z)^2$。此时 $2y-1=\Re z^2$，且切比雪夫多项式满足 $T_k(2y-1)=\Re z^{2k}$。两组分布在 $y$ 上次数低于 $N$ 的多项式有相同的均值。多项式 $R(y)=1+(-1)^N T_N(2y-1)$ 在 $[0,1]$ 上非负，在取等分布的投影上为零，在负实数处为正。对 $s>0$，表达式 $(y+sR(y)/R(-s))/(y+s)$ 的分子在 $-s$ 消失，因此它是次数低于 $N$ 的多项式。它从上方控制 $y/(y+s)$ 并在取等支集上与其相等。用该多项式比较两组均值，再取 $s=t^2$ 并使用 $y\ge0$ 时的积分恒等式 $\int_{\mathbb R}y/(y+t^2)\,dt=\pi\sqrt y$，便得到平方根均值的上界，从而控制旋转后的第一系数。 [高斯–切比雪夫求积公式](https://dlmf.nist.gov/3.5#v) · [主表示，引理 2.1](https://arxiv.org/pdf/1306.4872)
+
+$N=2,3$ 时分别得到 $1/\sqrt2$ 和 $2/3$。由正弦函数在零点的极限，$N\to\infty$ 时有 $B_N\to 2/\pi$。所以，在这类分布中，即使消失的偶次谐波连续范围不断增大，第一系数幅值仍可远离零。实际 ζ 纵坐标的近碰撞预算需要约束时间轨道上加权和的信息。
+
+[连续偶次谐波消失时尖锐界的 Lean 证明](lean:D5/S3/Fourier/Concentration/EvenHarmonicFirstMoment.sharp_first_harmonic_even_block)
 
 ## 低阶碰撞质量能确定什么
 
@@ -147,6 +293,88 @@ $$
 次数 $p$ 的和至多有 $1+p(B-A)$ 个可能的整数位置。把多项分布权重按这些位置归组，再对组质量用柯西–施瓦茨不等式。若总权重为 $W>0$，舍入谱的精确碰撞质量至少为 $W^{2p}/[1+p(B-A)]$。任何在舍入谱中精确相等的两项，原来的差至多为 $ph$，因为每组次数 $p$ 的舍入误差都在 $[0,ph]$。 [按频率分箱的质量界](lean:D5/S3/Fourier/Concentration/FiniteSincCollisionMoment.sum_bin_mass_sq_le_nearCollisionMass)
 
 例如，固定取 $m_j=\lceil(\log_2(2+g_j))^2\rceil$。在共用索引的尾段 $cT^\alpha\le g_j\le T$ 上，若 $c,\alpha>0$ 固定，$N=O(T\log T)$，且 $\lambda$ 至多按 $T$ 的固定幂增长，则每个固定阶的上述统计改变量趋于零。另一方面，取固定 $0<\beta<1$。在 $p\asymp T^\beta\log T$ 时，$\log[1+p(B-A)]=O((\log T)^2)$。若 $W\asymp(\log T)^2$ 且 $\delta=\log T$，缺失窗口的矩预算即使只用一个时间采样点，也要求归一化质量至多为 $\exp(-2p\log\log T+O(p))$。舍入谱的精确碰撞质量已超过这一预算。两组统计使用共用的尾段索引。若分别按高度选取索引，越过端点的条目还需处理。对原谱的转移只给出分辨率 $ph$ 上的下界，目标的更细分辨率上界仍待证。
+
+## 计数向量相同的对角项 {#weighted-occupation-diagonal}
+
+取有限指标集 $J$、实权重 $w_j$ 和整数 $p\ge0$。令 $D_p=\sum_{|m|=p}c_m^2$，其中 $c_m=p!\prod_j(w_j^{m_j}/m_j!)$。当权重非负时，加权近碰撞质量在每个非负分辨率下都包含这部分。对每个 $s\ge0$，
+
+$$
+s^pD_p\le (p!)^2\prod_{j\in J}(2e^{s w_j^2/2}-1).
+$$
+
+把左边除以 $(p!)^2$，得到 $\prod_j\sum_{n=0}^p x_j^n/(n!)^2$ 中总次数恰为 $p$ 的项之和，其中 $x_j=sw_j^2$。保留所有非负项可取上界。当 $n\ge1$ 时，$n!\ge2^{n-1}$，所以每个正次项至多是 $e^{x_j/2}$ 中相应项的两倍。常数项为一，故每个因子至多为 $2e^{x_j/2}-1$。无穷级数等于 $I_0(2\sqrt{x_j})$。 [有限乘积估计的 Lean 证明](lean:D5/S3/Fourier/Concentration/WeightedOccupationDiagonal.scaled_diagonal_le_product) · [Lamzouri，§3 的独立相位乘积](https://arxiv.org/html/2311.04860v2#S3) · [DLMF，式 10.25.2](https://dlmf.nist.gov/10.25.E2)
+
+设 $p\ge1$、$V=\sum_jw_j^2>0$，取 $s=p/V$。恒等式 $2e^{x/2}-1=e^x[1-(1-e^{-x/2})^2]$ 给出
+
+$$
+\frac{D_p}{p!\,V^p}\le
+\frac{p!e^p}{p^p}\prod_{j\in J}
+\left[1-\left(1-e^{-p w_j^2/(2V)}\right)^2\right].
+$$
+
+Stirling 公式给出前因子 $O(\sqrt p)$。如果至少 $\kappa p$ 个指标满足 $p w_j^2/V\ge a$，其中 $\kappa,a>0$ 与 $p$ 无关，那么乘积至多为 $[1-(1-e^{-a/2})^2]^{\kappa p}$。
+
+在 RH 下，取 $X=e^{-K}T^\beta$，固定 $K$ 和 $0<\beta<1$，取 $p\asymp X\log X$，按不同纵坐标合并重数，令 $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$。用[对数尺度尾段的重数平方和上界](ch34-s28-s03-s02-mobius-and-spectra.md#thm-ch31-logarithmic-missing-window) $\sum_{0<\gamma\le Y}m_\gamma^2=O(Y\log Y)$。Riemann–von Mangoldt 公式对每个固定 $C\ge2$ 给出 $\sum_{X<\gamma\le CX}m_\gamma\sim(C-1)X\log X/(2\pi)$。Cauchy–Schwarz 因而给出此带中互异纵坐标数 $M\gg CX\log X$，隐含下界常数可取为与 $C$ 无关，取定 $C$ 后让 $X$ 充分大。可选固定 $C$ 使 $M\ge2p$，且最终 $CX\le T$。每个带内权重至少为 $1/(2CX)$。由 $V=O(\log X/X)$，这些指标满足上式的折减条件。另一方面，对角和中恰好选取 $p$ 个不同带内指标的项给出
+
+$$
+D_p\ge (p!)^2\binom{M}{p}(2CX)^{-2p}
+   \ge p!\,(M/(8C^2X^2))^p .
+$$
+
+因此存在常数 $0<c_1\le c_2$，使得充分大 $T$ 时 $e^{-c_2p}\le D_p/(p!V^p)\le e^{-c_1p}$。用尾段总权重 $W\asymp(\log T)^2$ 归一化，可得 $\log(D_p/W^{2p})=-2p\log\log T+O(p)$。这里的 ζ 渐近估计使用上述文献输入。两个不同向量产生近频率和的总权重仍需单独的算术估计。 [重数平方和的文献输入，定理 1 与 §7](https://arxiv.org/abs/2306.04799)
+
+## 固定计数差的权重
+
+给定总次数均为 $p$ 的计数向量 $m,n$，记 $\ell_j=\min(m_j,n_j)$、$a=m-\ell$、$b=n-\ell$。两个剩余向量的支撑互不相交，总次数同为 $d=p-|\ell|$。对给定的 $a,b$，满足 $m-n=a-b$ 的全部配对恰为 $(\ell+a,\ell+b)$，其中 $|\ell|=p-d$。频率和之差为 $\sum_j(a_j-b_j)g_j$，与 $\ell$ 无关。
+
+用上节的 $c_p(m)=p!\prod_j(w_j^{m_j}/m_j!)$。固定差的总权重 $M_p(a-b)$ 为
+
+$$
+M_p(a-b)=
+(p!)^2\left(\prod_j w_j^{a_j+b_j}\right)
+\sum_{|\ell|=p-d}\prod_j
+\frac{(w_j^2)^{\ell_j}}{\ell_j!\,(\ell_j+a_j+b_j)!}.
+$$
+
+这个等式允许实权重。因为每个坐标至多有一边的剩余计数为正，原来的两个阶乘恰为 $\ell_j!$ 与 $(\ell_j+a_j+b_j)!$。在非负权重下，$(\ell_j+a_j)!\ge \ell_j!a_j!$ 给出 $c_p(\ell+a)\le\binom pd\,c_{p-d}(\ell)c_d(a)$。同样估计 $\ell+b$ 并对 $\ell$ 求和，得到
+
+$$
+M_p(a-b)\le \binom pd^{\!2} D_{p-d}\,c_d(a)c_d(b).
+$$
+
+固定计数差的精确式与对角界见 Lean 证明。 [Lean 证明](lean:D5/S3/Fourier/Concentration/FixedDifferenceOccupationMass.fixed_difference_mass)
+
+记 $R_d(\eta)$ 为支撑互不相交、总次数均为 $d$ 且 $|\sum_j(a_j-b_j)g_j|\le\eta$ 的有序对权重 $c_d(a)c_d(b)$ 之和。把上式在这样的 $a,b$ 上求和，便得到剩余次数为 $d$ 的配对总权重上界 $\binom pd^2 D_{p-d}R_d(\eta)$。$d=0$ 给出原对角项。$d=1$ 只需要带权的不同指标对。对按不同纵坐标合并重数的 ζ 尾段，这就是不同纵坐标对。对实际 ζ 尾段，$d$ 可随 $p$ 增长，这时 $R_d(\eta)$ 的所需上界仍是开放问题。 [贝塞尔级数中的移位阶乘，DLMF 10.25.2](https://dlmf.nist.gov/10.25.E2)
+
+## 残余次数一的加权近配对
+
+取有限的有序指标对，设两个纵坐标均在 $[X,T]$ 内，$2\le X\le T$，且每对的间距至多为 $\delta\le X/2$。每个指标有非负重数 $m_j$，权重满足 $0\le w_j\le m_j/\gamma_j$。令 $B(y)$ 为这批配对中较大纵坐标至多为 $y$ 的重数乘积 $m_i m_j$ 之和。若对每个 $X\le y\le T$ 都有 $B(y)\le Cy\log y$，其中 $C\ge0$，则
+
+$$
+\sum_{(i,j)}w_iw_j\le \frac{4C(\log X+1)}{X}.
+$$
+
+对较大纵坐标为 $h$ 的一对，较小纵坐标至少为 $h-\delta\ge h/2$。于是其权重至多为 $2m_i m_j/h^2$。把 $1/h^2$ 写成 $1/T^2+\int_h^T 2y^{-3}\,dy$，交换有限和与积分，得到总权重至多为 $2B(T)/T^2+4\int_X^T B(y)y^{-3}\,dy$。代入累计上界并积分即得结论。 [有限加权上界的 Lean 证明](lean:D5/S3/Fourier/Concentration/WeightedClosePairTail.weighted_close_pairs_le)
+
+在 RH 下，对不同正纵坐标合并重数并令 $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$。本章的频率为 $g_\gamma=\gamma/r$，其中 $r>0$，所以频率差上限 $\eta$ 对应纵坐标差上限 $\delta=r\eta$。取 $0\le\eta\le1/(4r\log T)$。将高度 $y$ 的 Montgomery 函数在 $[0,1]$ 上按 $2(1-\alpha)$ 平均。文献中一致的展开式给出 $O(1)$ 的平均。平均后的每对都带因子 $2(1-\cos u)/u^2$，其中 $u=(\gamma_i-\gamma_j)\log y$，零点取连续值一。因此所有贡献非负。纵坐标差至多为 $\delta$ 的配对满足 $|u|\le1/4$，这个因子及 Montgomery 的因子 $4/[4+(\gamma_i-\gamma_j)^2]$ 都有正的绝对下界。去掉其他配对并乘回归一化因子，得到 $B(y)\ll y\log y$，对充分大的 $X$ 一致成立。 [Baluyot、Goldston、Suriajaya 与 Turnage-Butterbaugh，定理 1](https://arxiv.org/abs/2306.04799)
+
+这给出 $R_1(\eta)\ll(\log X+1)/X$。由固定计数差的上界，加权近碰撞质量 $E_p(\eta)$ 中残余次数恰为一的部分至多为 $p^2 D_{p-1}R_1(\eta)$。沿用固定 $K$ 和 $0<\beta<1$ 的截点 $X=e^{-K}T^\beta$，并取 $p\asymp X\log X$ 时，对角估计使这部分相对 $p!V^p$ 保留指数折减，因为 $V\asymp\log X/X$ 且 $p$ 倍的多项式因子可被吸收。残余次数随 $p$ 增长时，仍需额外的算术输入。
+
+## 可逐点匹配的高阶残余项 {#matched-residual-occupations}
+
+逐坐标抵消共同出现的频率后，两边各剩 $d$ 个频率。若能把它们配成 $d$ 对，每对的频率差都在阈值 $\eta$ 内，残余权重就可以用一次近配对的权重来估计。这里把出现次数相同的词视为同一个计数向量。
+
+设 $E$ 是有限索引集 $J$ 上的关系，$R(E)=\sum_{(i,j)\in E}w_iw_j$，且 $w_j\ge0$。若有序计数向量对的集合 $S$ 中，每一对 $(a,b)$ 都可由长度为 $d$ 的两个词实现，并逐位置沿 $E$ 匹配，则
+$$
+\sum_{(a,b)\in S} c_d(a)c_d(b)\le d!R(E)^d.
+$$
+任意给定这两个计数向量的词都可以重排成合格的匹配。将所有位置置换相加，每一对可匹配的词至少被计入一次。固定一个置换后，配对后的 $d$ 个位置可各自选择一条边，总权重为 $R(E)^d$。同一计数向量的各个词的权重相加正好是 $c_d$。
+
+在 $E=\{(i,j):i\ne j,\ |g_i-g_j|\le\eta\}$ 时，$R(E)=R_1(\eta)$。从 $E_p(\eta)$ 中取出共同坐标抵消后可沿 $E$ 匹配的配对，加上对角项，其总权重至多
+$$
+\sum_{d=0}^p \binom pd^2D_{p-d}\,d!R_1(\eta)^d\le p!\bigl(V+R_1(\eta)\bigr)^p.
+$$
+第一步对每个固定计数差使用对角界，再对可匹配的残余向量求和。第二步用 $D_k\le k!V^k$，它由每个多项式系数至多为 $k!$ 和多项式定理得到。此估计适用于指定的配对子集。比如 $1+4=2+3$，而当 $0<\eta<1$ 时，左边任一项离右边任一项都至少为 $1$。实际 ζ 零点中，由这种抵消产生且无法逐点配成近邻的高阶残余权重仍待估计。
 
 ## 有限频带中的和必须接近
 

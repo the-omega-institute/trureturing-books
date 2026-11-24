@@ -145,6 +145,7 @@
   - [31.4 The Real Error-Magnification Axis and Prime Adelic Closure: From Tangent Linear Distortion and Gibbs–Rodrigues Curved Synthesis to the Incommensurable Prime Anti-Deadlock Engine](ch39-s31-real-error-axis-and-prime-adelic-closure.md)
   - [31.5 The Holographic Circular-Arc Manifold and Adelic Solenoid Unity: Beyond Riemannian Tangent Plates, Smoothly Unifying Addition, Multiplication, Logarithm, and Prime Loops](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md)
   - [31.6 Riemann's 1854 + 1859 Synthesis: Polishing Tangent-Plate Manifolds via the Proven 1/2 Critical-Line Spectrum](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md)
+  - [31.7 Holographic Duality Between Prime Registers and Riemann Zeros and Dual Intrinsic Uniformity: Observer Arithmetic Dark-State Eigenmodes, Mertens Entropy & Ternion Haar Uniformity, and π-Free Turn Unfolding](ch31-s07-prime-register-riemann-zero-duality-and-dual-uniformity.md)
 - [Chapter 32 Inexpressible Ternions and the Three-Dimensional Concept-Field Cap: All Numbers from One Arc, Hilbert Multi-Field Reprojection, and Origin-Free Torsor Synthesis](ch32-inexpressible-ternions-and-three-dimensional-field.md)
   - [32.1 The Three-Dimensional Concept-Field Cap and the Hilbert Multi-Concept Ledger: Why "Above Three Dimensions" Is Only a Joint Projection of 3D Fields](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)
   - [32.2 Inexpressible Ternions and All Numbers from One Arc: The Frobenius Gap, Hamilton's Thirteen-Year Deadlock, and the Number-System Projection Genealogy](ch39-s19-inexpressible-ternions-and-number-projections.md)
@@ -232,6 +233,7 @@
   - [38.12 Ontological Equivalence of Spatial and Temporal Motion and Observer-Memory Schur Classification: Unlabeled Ternion Arcs, Transposing Pythagoras into the Minkowski Minus Sign, and Three Memory-Capacity Regimes](ch38-s12-spacetime-motion-equivalence-and-memory-schur-split.md)
   - [38.13 Complete Self-Contained Definition of the Observer, Structural-Information Time, and Observer Is Universe: Port-Free Pentad, Rational Schur–Betti Growth, Monad Resonant Category, and Zero-Axiom ObserverUniverse Kernel](ch38-s13-self-contained-observer-definition-and-observer-is-universe.md)
   - [38.14 Conway's FRACTRAN and the Three-Dimensional Non-Abelian Ω-FRACTRAN Observer Language: Prime Orthogonal Registers, 0 · 1/2 · 1 Fraction Gates, p = 5 Ramanujan Spinor Stacks, and Zero-Tear Anti-Hallucination Automata](ch38-s14-omega-fractran-observer-rational-isa.md)
+  - [38.15 Static Canvas and the Legless Sphere Observer: Unified Spacetime Gradient, Tilted Horizon Cone, and Breaking the Flowing-Time Illusion](ch38-s15-static-canvas-and-legless-sphere-observer.md)
 - [Chapter 39 The Grand Unified Mother Axiom (AXIOM-Ω): Origin-Free PSD Ternary Comparison Closure, the Five-Tier Deduction Cascade, and Deriving the Five Postulates of Quantum Mechanics](ch39-axiom-omega-grand-unification.md)
   - [39.1 The Grand Unified Mother Axiom (AXIOM-Ω): How Origin-Free PSD Ternary Comparison Closure Melts the Axiom of Comparison, Minimal Circular Arcs, Ternions, and Continuous Fields into One](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)
   - [39.2 The Five-Tier Deduction Cascade of AXIOM-Ω and Apophatic Self-Transparency: Uniting Number Systems & Calculus, Dual Relativity, Four-Force Unification, Arithmetic Critical Spectra, and Geodesic Intelligence from One Origin-Free Axiom](ch39-s25-axiom-omega-five-tier-deduction-cascade.md)
@@ -240,6 +242,7 @@
   - [39.5 Dyad Plus Relation Equals Ternion Field and Two-Order Future Recurrence: From 2+1=3 Orthogonal Commutator Closure, Gauge Connection, and Lie-Triple Curvature to Bianchi–Ostrogradsky Second-Order Finality](ch39-s28-dyad-relation-future-and-second-order-field.md)
   - [39.6 Past, Present, Future and the 0 · 1/2 · 1 Pure Rational Causal-Jet Matrix: Spherical Jet Ladder, Midpoint Self-Duality, and the 1 ↦ 0 Cosmic Heartbeat](ch39-s30-past-present-future-rational-jet-triad.md)
   - [39.7 The Spectral Identity of AXIOM-Ω — Ternion Spherical Rational Fourier Transform (ℱ_Ω): Peter–Weyl Half-Integer Spin Shells, Integer-Coefficient Chebyshev–Wigner Polynomial Kernels, the 0 · 1/2 · 1 Harmonic Base, and Heap Convolution Diagonalization](ch39-s37-spherical-fourier-transform-peter-weyl-synthesis.md)
+  - [39.8 OmegaMath Zero-Axiom De-Approximation Recompilation and Self-Referential Monograph Atlas Closure: Six-Pillar Rational Reduction, d⁸ Quadrupole Slicing, Hecke–Ramanujan Positivity, and Twelve-Node Fixed-Point Closure](ch39-s38-omega-math-recompilation-and-self-referential-atlas-closure.md)
 
 # Coda and Appendices
 

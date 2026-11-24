@@ -976,4 +976,6 @@ Sum these moments over all grid offsets and average over candidate starts above 
 
 In [@thm-ch31-logarithmic-missing-window], the head can contribute at most $W(X)$ without a relation hypothesis. At $X=e^{-K}T^\beta$ the tail variance satisfies $V\le D\log T/T^\beta$. Set $\delta=\log T$, use mesh $r/T^2$ with rates $g_\gamma=\gamma/r$, and take $p=\lfloor T^\beta\log T/(4D)\rfloor$. Then $2pV/\delta^2\le1/2$. The floor-grid budget is eventually strict for $H=\exp(cT^\beta\log T)$ with $c=\log 2/(8D)$. The same signed margin follows if those tail frequencies satisfy the relation condition through order $2p$. Whether the distinct positive ζ ordinates in this tail meet that condition remains open.
 
+The [diagonal estimate for high moments](ch34-s28-s03-s02-weighted-near-collisions.md#weighted-occupation-diagonal) retains the individual ordinate weights.
+
 The Fourier recovery estimates follow in [§M.2.1](ch34-s28-s03-s02-fourier-recovery.md).
