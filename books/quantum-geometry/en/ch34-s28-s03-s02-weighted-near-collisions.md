@@ -358,6 +358,22 @@ Under RH, group multiplicities by distinct positive ordinate and use $w_\gamma=m
 
 Hence $R_1(\eta)\ll(\log X+1)/X$. The fixed-difference bound gives at most $p^2D_{p-1}R_1(\eta)$ for the part of $E_p(\eta)$ at residual degree exactly one. With the same cutoff $X=e^{-K}T^\beta$ for fixed $K$ and $0<\beta<1$, and with $p\asymp X\log X$, the diagonal estimate gives an exponential saving relative to $p!V^p$, since $V\asymp\log X/X$ and the extra factor of order $p$ can be absorbed. Growing residual degrees still require an arithmetic estimate.
 
+## Higher residual degrees with pointwise matchings {#matched-residual-occupations}
+
+After removing shared occurrences coordinate by coordinate, each side has $d$ frequencies left. If they can be paired with every discrepancy at most $\eta$, the weight of such residuals can be estimated from the weight of single close pairs. Words with the same occurrence counts represent the same count vector.
+
+Let $E$ be a relation on a finite index set $J$, put $R(E)=\sum_{(i,j)\in E}w_iw_j$, and assume $w_j\ge0$. Let $S$ be a set of ordered count-vector pairs $(a,b)$ each represented by two length-$d$ words whose corresponding letters are related by $E$. Then
+$$
+\sum_{(a,b)\in S} c_d(a)c_d(b)\le d!R(E)^d.
+$$
+Any two words with the specified count vectors can be rearranged to give a matching. Summing over position permutations counts each matchable word pair at least once. For a fixed permutation, the $d$ positions independently select an edge, giving total weight $R(E)^d$. Summing the weights of all words with the same count vector gives $c_d$.
+
+For $E=\{(i,j):i\ne j,\ |g_i-g_j|\le\eta\}$, the edge mass is $R_1(\eta)$. Take the pairs in $E_p(\eta)$ whose residuals can be matched along $E$, together with the diagonal. Their total weight is at most
+$$
+\sum_{d=0}^p \binom pd^2D_{p-d}\,d!R_1(\eta)^d\le p!\bigl(V+R_1(\eta)\bigr)^p.
+$$
+The first bound applies the diagonal estimate for each fixed count difference and sums over the matchable residual vectors. The second uses $D_k\le k!V^k$, from the multinomial theorem and the bound $k!$ on each multinomial coefficient. The estimate covers this particular subset of pairs. For example, $1+4=2+3$, and every cross-pair discrepancy is at least $1$, so a pointwise matching fails for $0<\eta<1$. For actual ζ zeros, the weight of higher-degree residuals with cancellation and no pointwise close matching remains to be bounded.
+
 ## A finite frequency band forces close sums
 
 Let $J$ have $N$ elements, with all $g_j\in[a,b]$. Write $F(m)=\sum_jm_jg_j$. There are $M=\binom{N+p-1}{p}$ count vectors of degree $p$.
