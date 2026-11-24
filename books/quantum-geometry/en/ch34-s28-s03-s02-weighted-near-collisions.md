@@ -387,6 +387,12 @@ Expand each degree-two count vector into its ordered words. The difference of th
 
 [Lean proof of the endpoint correction](lean:D5/S3/Fourier/Concentration/DegreeTwoResidualDifferenceEnergy.degree_two_residual)
 
+Take two five-point spectra with unit weights, $A=(0,1,5,6,13)$ and $B=(0,2,3,7,13)$. Both have endpoints $0,13$, sum $25$, and sum of squares $231$, giving mean $5$ and variance $106/5$. At every resolution $0\le\eta<1$, the degree-one near-pairs consist of five diagonal terms, so both masses are $5$.
+
+Each spectrum has twenty directed edges. In $A$ the positive gaps $1$ and $5$ each occur twice, and the other six occur once. In $B$ the ten positive gaps are distinct. The negative gaps mirror the positive gaps, giving directed-gap collision masses of $28$ and $20$. The endpoint correction subtracts $40$ and adds back $20$ in each case, yielding $R_2(A)=8$ and $R_2(B)=0$. The eight terms in $A$ come from exchanging the sides of $0+6=1+5$ and ordering the two terms on each side.
+
+The endpoints, mean, variance, and degree-one mass over the entire range $0\le\eta<1$ therefore allow different degree-two masses. This finite example identifies a limit of those statistics. The weighted frequency-band bound for zeta zeros posed below remains open.
+
 For the actual ζ ordinates, the degree-one estimate controls the mass of gaps near zero. The quantity $A(\eta)$ also compares gaps far from zero that are close to each other. Bounding the contribution to $E_p(\eta)$ still requires control of that correlation after removing the shared endpoints.
 
 ## A product bound for disjoint residual supports
