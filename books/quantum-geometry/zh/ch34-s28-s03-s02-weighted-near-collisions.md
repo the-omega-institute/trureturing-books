@@ -406,6 +406,21 @@ $$
 $$
 由 Stirling 公式，前因子渐近于 $2\pi d$。在 RH 下沿用上文合并重数的 ζ 尾段权重，并取 $d\asymp p\asymp X\log X$。在固定区间 $(X,CX]$ 内，至少有常数倍 $X\log X$ 个不同纵坐标，且各自满足 $w_j\ge1/(2CX)$。这些指标满足 $d w_j/W\gg1/\log T$，因此折减项之和至少为常数倍 $d/(\log T)^2$。另一方面，由 $x\ge0$ 时 $1-e^{-x}\le x$，该和至多为 $d^2 V/W^2=O(d/(\log T)^2)$。在 $d=p$ 时，归一化上界的量级为 $p\exp(-\Theta(p/(\log T)^2))$。而缺失窗口的矩预算即使只取一个网格点，也要求归一化质量至多为 $\exp(-2p\log\log T+O(p))$。仍需估计互斥对中满足频率条件的权重比例。 [Stirling 展开，DLMF §5.11(i)](https://dlmf.nist.gov/5.11.E1)
 
+## 互斥占用系数的特征标投影
+
+取正整数 $q$ 和模 $q$ 的剩余类 $a_j$，记 $\chi_k(r)=e^{2\pi i kr/q}$。设 $M_R$ 是有序、支撑互斥的 $d$ 次向量对的权重 $c_d(m)c_d(n)$ 之和，只计 $\sum_j (m_j-n_j)a_j$ 属于剩余类集合 $R$ 的配对。定义
+$$
+Q_k(x,y)=\prod_j\left(1+\sum_{h=1}^d\frac{w_j^h}{h!}
+  \bigl[x^h\chi_k(-h a_j)+y^h\chi_k(h a_j)\bigr]\right).
+$$
+每个因子的两条坐标轴保证支撑互斥，混合系数固定两侧次数。所选各项的特征标相乘，对应其带符号间距相加。由正交性可得
+$$
+qM_R=(d!)^2\sum_{k\bmod q}[x^dy^d]Q_k(x,y)\sum_{r\in R}\chi_k(r).
+$$
+这里借鉴了相关有限指数和证明中用平均分离频率的做法，以有限循环群上的精确正交性代替区间平均。 [相关黎曼猜想形式化中的特征标平均](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L78)
+
+若权重非负，剩余类的质量非负，而其傅里叶系数可以为负。设两个不同指标权重均为一，模 $2$ 的剩余类分别为 $0,1$。任一正次数的互斥配对都须在两侧各用一个指标。若 $d$ 为奇数，两种有序配对的差都属于剩余类 $1$。因此剩余类质量在 $k=1$ 处的傅里叶系数为 $-2$，对 $R=\{0\}$ 恰好抵消零特征标的贡献。ζ 尾段在目标分辨率和增长次数下的非零特征标贡献仍待估计。
+
 ## 有限频带中的和必须接近
 
 设有限指标集 $J$ 有 $N$ 个元素，各频率 $g_j$ 落在 $[a,b]$。记 $F(m)=\sum_jm_jg_j$，次数为 $p$ 的向量共有 $M=\binom{N+p-1}{p}$ 个。

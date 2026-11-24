@@ -406,6 +406,21 @@ $$
 $$
 Stirling's formula gives a prefactor asymptotic to $2\pi d$. Under RH and with the grouped ζ-tail weights above, take $d\asymp p\asymp X\log X$. The fixed band $(X,CX]$ has $\gg X\log X$ distinct ordinates with $w_j\ge1/(2CX)$. For each of them $d w_j/W\gg1/\log T$, so the penalty sum is $\gg d/(\log T)^2$. Conversely, $1-e^{-x}\le x$ for $x\ge0$ bounds that sum by $d^2 V/W^2=O(d/(\log T)^2)$. At $d=p$ the resulting normalized upper bound is of order $p\exp(-\Theta(p/(\log T)^2))$. The missing-window budget requires $\exp(-2p\log\log T+O(p))$ or smaller even with one mesh point. Bounding the fraction of disjoint pairs meeting the frequency condition remains an arithmetic problem. [Stirling expansion, DLMF §5.11(i)](https://dlmf.nist.gov/5.11.E1)
 
+## Character projection of disjoint occupation coefficients
+
+Take residues $a_j$ modulo a positive integer $q$ and put $\chi_k(r)=e^{2\pi i kr/q}$. Let $M_R$ be the sum of $c_d(m)c_d(n)$ over disjoint ordered degree-$d$ pairs with $\sum_j (m_j-n_j)a_j$ in the residue set $R$. Define the product
+$$
+Q_k(x,y)=\prod_j\left(1+\sum_{h=1}^d\frac{w_j^h}{h!}
+  \bigl[x^h\chi_k(-h a_j)+y^h\chi_k(h a_j)\bigr]\right).
+$$
+The two axes of each factor enforce disjoint support and the mixed coefficient enforces the two degrees. Character multiplication adds the signed gaps of the chosen terms. Hence orthogonality gives
+$$
+qM_R=(d!)^2\sum_{k\bmod q}[x^dy^d]Q_k(x,y)\sum_{r\in R}\chi_k(r).
+$$
+Averaging to isolate a frequency follows the same principle as in the related proof for finite exponential sums. Here the interval average is replaced by exact orthogonality on a finite cyclic group. [Character averaging in the related Riemann hypothesis development](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L78)
+
+For nonnegative weights the residue masses are nonnegative, while their Fourier coefficients can be negative. With two distinct indices of unit weight at residues $0,1$ modulo $2$, a disjoint pair of positive degree must use one index on each side. If $d$ is odd, both ordered pairs have residue $1$. The Fourier coefficient at $k=1$ of the residue masses is $-2$ and cancels the zero character for $R=\{0\}$. Estimating the contribution of nonzero characters at the ζ-tail resolution, with growing degree, remains open.
+
 ## A finite frequency band forces close sums
 
 Let $J$ have $N$ elements, with all $g_j\in[a,b]$. Write $F(m)=\sum_jm_jg_j$. There are $M=\binom{N+p-1}{p}$ count vectors of degree $p$.
