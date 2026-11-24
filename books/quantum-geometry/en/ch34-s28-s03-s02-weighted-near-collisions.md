@@ -344,6 +344,20 @@ $$
 
 Write $R_d(\eta)$ for the sum of $c_d(a)c_d(b)$ over ordered degree-$d$ pairs with disjoint supports and $|\sum_j(a_j-b_j)g_j|\le\eta$. Summing the last bound over these pairs bounds the full mass at residual degree $d$ by $\binom pd^2 D_{p-d}R_d(\eta)$. At $d=0$ this recovers the diagonal. At $d=1$ the required input counts weighted pairs of distinct indices. These index pairs have distinct ordinates in the ζ tail when multiplicities are grouped by ordinate. For the actual ζ tail, $d$ can grow with $p$, and the required bound for $R_d(\eta)$ in that regime remains open. [Shifted factorials in the Bessel series, DLMF 10.25.2](https://dlmf.nist.gov/10.25.E2)
 
+## Weighted near-pairs at residual degree one
+
+Take a finite set of ordered pairs with both ordinates in $[X,T]$, where $2\le X\le T$, and gaps at most $\eta\le X/2$. Give each index a nonnegative multiplicity $m_j$ and weight $0\le w_j\le m_j/g_j$. Let $B(y)$ sum $m_i m_j$ over the supplied pairs whose larger ordinate is at most $y$. If $B(y)\le Cy\log y$ for every $y\in[X,T]$, with $C\ge0$, then
+
+$$
+\sum_{(i,j)} w_iw_j\le \frac{4C(\log X+1)}{X}.
+$$
+
+If the larger ordinate is $h$, the smaller one is at least $h-\eta\ge h/2$. Their weight product is at most $2m_i m_j/h^2$. Write $1/h^2$ as $1/T^2+\int_h^T 2y^{-3}\,dy$ and exchange the finite sum with the integral. The weighted total is at most $2B(T)/T^2+4\int_X^T B(y)y^{-3}\,dy$. Substitution of the cumulative bound and integration give the stated estimate.
+
+Under RH, group multiplicities by distinct positive ordinate and use $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$. Take $0\le\eta\le1/(4\log T)$. Average the Montgomery function at height $y$ against $2(1-\alpha)$ on $[0,1]$. The published uniform expansion gives a bounded average. Each pair contributes with the factor $2(1-\cos u)/u^2$, where $u=(\gamma_i-\gamma_j)\log y$, with value one at zero. Every contribution is nonnegative. A pair at gap at most $\eta$ has $|u|\le1/4$, so this factor and the Montgomery factor $4/[4+(\gamma_i-\gamma_j)^2]$ both have positive absolute lower bounds. Retaining these pairs and restoring the normalization gives $B(y)\ll y\log y$ uniformly for sufficiently large $X$. [Baluyot, Goldston, Suriajaya and Turnage-Butterbaugh, Theorem 1](https://arxiv.org/abs/2306.04799)
+
+Hence $R_1(\eta)\ll(\log X+1)/X$. The fixed-difference bound makes the contribution to the high-order moment at residual degree exactly one at most $p^2 D_{p-1}R_1(\eta)$. When $p\asymp X\log X$, the diagonal estimate gives an exponential saving relative to $p!V^p$, since $V\asymp\log X/X$ and the extra factor of order $p$ can be absorbed. Growing residual degrees still require an arithmetic estimate.
+
 ## A finite frequency band forces close sums
 
 Let $J$ have $N$ elements, with all $g_j\in[a,b]$. Write $F(m)=\sum_jm_jg_j$. There are $M=\binom{N+p-1}{p}$ count vectors of degree $p$.
