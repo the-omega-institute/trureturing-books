@@ -816,6 +816,14 @@ one root is exactly $C$. The other root $\rho_q$ has $(1-\rho_q)/h^2\to t/2$. Fa
 
 The certificate bounds the energy of every feasible weight by completing the square. To attain that bound to order $h^2$, adjust the mass at zero and its nearest neighbors and add mass at the closest antipodal level, imposing both moment equalities. The front corrections are $O(h^2)$ and the added mass is asymptotic to $3mh^2/4$. For a fixed positive budget the three adjusted front sites have positive limiting weights, so the construction is feasible for all sufficiently large moduli, including at activation endpoints. The statement concerns the finite cycle at fixed budget. The weighted high-order arithmetic estimate for the actual ζ ordinates remains open. [Derivation and hypotheses](https://github.com/the-omega-institute/trureturing/issues/33993#issuecomment-7146572104)
 
+### Which sites carry positive mass
+
+For each fixed $\lambda>0$ and every sufficiently large modulus, the cyclic minimizer has positive mass exactly at the front sites $j^2\le t$ and at the closest antipodal sites. There is one closest antipodal site on an even cycle and two on an odd cycle. At a lattice activation boundary $t=N^2$, the limiting lattice weights at $\pm N$ are zero, but the two finite-cycle weights are positive and of order $q^{-2}$.
+
+To obtain an exact certificate, fit the weight as a linear combination of $1$, $1-c$, and $(1-c^2)/h^2$ on those sites, where $c=\cos(jh)$ and $h=2\pi/q$. Solve the three equations for the mass and the two deficits. The feature vectors at the center, a front neighbor, and an antipodal site are independent in the limit. At a square boundary, the first variation of the weight at $\pm N$ has a positive contribution from the change in the second moment on the front window. It also has a nonnegative contribution from the monic quadratic orthogonal to $1$ and $j^2$ there. The quadratic certificate is negative at the first omitted cosine on either side. Convexity then excludes the intervening residues, and completing the square certifies the unique minimum on the whole cycle.
+
+The bound on how large $q$ must be depends on the fixed budget. The support statement concerns the two prescribed cosine constraints. [Exact certificate and boundary calculation](https://github.com/the-omega-institute/trureturing/issues/34004#issuecomment-7147550923)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
