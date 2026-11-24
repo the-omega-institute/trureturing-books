@@ -232,7 +232,7 @@ The first term is nonpositive by the fourth cap and $\mathbb E x^2\le r$, so the
 
 For $b<1$, take weight $(r-a^2)/(1-a^2)$ at $1$ and divide the rest equally between $a+i\sqrt{1-a^2}$ and its conjugate. The moments are real and equal to $B$, $b$, and $1-8(1-r)a^2$ at orders $1,2,4$. The choice of $a$ gives $|m_4|\le k$. A point mass attains the branch $b=1$. With $e=k=0$, the three phases are $1,e^{i\pi/3},e^{-i\pi/3}$ with equal weights, and $|m_1|=2/3$. Every moment at order $2^j$ for $j\ge1$ vanishes in this example because $2^j$ is congruent to $2$ or $4$ modulo six. Even these simultaneous vanishings allow a first coefficient of fixed positive size. A growing-degree bound on actual ζ ordinates needs further arithmetic information about the weighted frequency sums.
 
-[Lean proof and Blueprint for the sharp harmonic bound](https://github.com/the-omega-institute/trureturing/pull/33771)
+[Lean proof and Blueprint for the sharp harmonic bound](lean:D5/S3/Fourier/Concentration/SecondFourthHarmonicBound.sharp_second_fourth_harmonic_bound)
 
 ## What low-order collision masses determine
 

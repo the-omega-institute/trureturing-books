@@ -232,7 +232,7 @@ $$
 
 当 $b<1$ 时，在相位 $1$ 上取权重 $(r-a^2)/(1-a^2)$，其余权重平分给 $a+i\sqrt{1-a^2}$ 及其共轭。第一、第二和第四矩均为实数，分别为 $B$、$b$ 和 $1-8(1-r)a^2$。按 $a$ 的取法有 $|m_4|\le k$。当 $b=1$ 时，点质量取等。若 $e=k=0$，取 $1,e^{i\pi/3},e^{-i\pi/3}$ 三个相位等权，得到 $|m_1|=2/3$。由于 $2^j$ 在模六下为 $2$ 或 $4$，所有 $j\ge1$ 的 $2^j$ 阶矩都为零。即使这些系数同时为零，第一系数也可以保持在固定的正值。实际 ζ 纵坐标在增长阶数下的界仍需加权频率和的算术信息。
 
-[尖锐谐波界的 Lean 证明与 Blueprint](https://github.com/the-omega-institute/trureturing/pull/33771)
+[尖锐谐波界的 Lean 证明与 Blueprint](lean:D5/S3/Fourier/Concentration/SecondFourthHarmonicBound.sharp_second_fourth_harmonic_bound)
 
 ## 低阶碰撞质量能确定什么
 
