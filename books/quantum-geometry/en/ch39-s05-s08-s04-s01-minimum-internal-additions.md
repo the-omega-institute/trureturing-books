@@ -177,4 +177,16 @@ added within-row triples, and $N_{\max}-1$ also occurs. The bound $N_{\max}$ app
 Each block uses two partners at each of its three points. The matching leaves one partner at every point, so $r$ is even and every other packing must leave at least one partner at every point. Thus the matching packing attains the upper bound $r(r-2)/6$. The matching contains no triangle, so this packing is maximal in each class. Using it in every class attains the global bound. A switch in one class gives the maximal packing one block smaller and realizes $N_{\max}-1$. The full proof is checked by the Lean kernel.
 :::
 
-The switch criterion depends on the original Steiner system. For example, delete the origin from the affine plane on $\mathbb F_3^2$. Then $m(a)=-a$, while $b=-v-a$ and $d=-v+a$. Since $b+d=v\ne0$, the switch is maximal. With $r=8,d=1$, this gives saturated sizes $264$ and $263$. In the binary vector representation of the Fano plane, the two completion points satisfy $b+d=p$, and the same switch always leaves a triangle that can be added. [Local maximal-packing spectrum](https://doi.org/10.1007/BF01388482)
+To determine which starts work for a fixed remaining point $v$, adjoin a point $\ast$ to the original Steiner system. For each original point $x$, pair $\ast$ with $x$ and pair the remaining points that lie together in a block through $x$. Draw both matchings, one for the deleted point $p$ and one for $v$. Each vertex meets one edge from each matching, so the connected components are alternating even cycles.
+
+::: {.theorem #thm-joint-circuit-steiner-alternating-starts title="Alternating components identify all successful starts" lean="D5/S3/Combinatorics/Matroids/SteinerAlternatingSwitches.point_deleted_successful_starts"}
+Delete a point $p$ from a finite complete Steiner triple system on $r+1$ points. Fix any retained point $v$. The vertices in components of size at least six in the union of the two matchings are exactly the retained starts for which the switch in [@thm-joint-circuit-steiner-point-deleted-switch] gives a maximal packing. If $4\mid r$, every $v$ has at least six such starts.
+:::
+
+::: proof
+The square through $\ast$ visits $p$, $m(v)$, and $v$ in that order. Each vertex outside it is eligible as a start $a$. Taking one step in each matching in the two possible orders leads to $d$ and $m(b)$. These endpoints agree exactly when $a$ lies on a square. If four divides $r$, the total vertex count $r+2$ leaves remainder two on division by four, so some component has at least six vertices. The full proof is checked by the Lean kernel.
+:::
+
+Thus a complete Steiner triple system on $r+1$ points with $4\mid r$ always supplies a switch for one residue class. For positive integers $d,r$, with the cross-row conditions of this section, the two largest saturated sizes are $N_{\max}$ and $N_{\max}-1$ from [@thm-joint-circuit-steiner-matching-first-deficit]. [Lean proof for the point-deleted case](lean:D5/S3/Combinatorics/Matroids/SteinerAlternatingSwitches.point_deleted_first_deficit_of_four_dvd)
+
+For example, delete the origin from the affine plane on $\mathbb F_3^2$. Then $m(a)=-a$, while $b=-v-a$ and $d=-v+a$. Since $b+d=v\ne0$, the switch is maximal. With $r=8,d=1$, this gives saturated sizes $264$ and $263$. In the binary vector representation of the Fano plane, the two completion points satisfy $b+d=p$, and the same switch always leaves a triangle that can be added. [Local maximal-packing spectrum](https://doi.org/10.1007/BF01388482)
