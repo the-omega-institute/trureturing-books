@@ -78,6 +78,10 @@ For two nonempty disks with centers $p,q$ and squared radii $r,s$, let $d=|q-p|^
 
 The unobserved entry affects positivity. For example, take $b=1/5$ and $v_{00}=v_{10}=v_{01}=1/5$ with every entry of $L,R$ equal to $2/5$. Choosing $z=1/5$ makes both residuals zero and gives the equal-amplitude pure state on the five legal words. Choosing $z=0$ gives the left residual determinant $-1/25$, so this choice cannot produce a positive global state.
 
+Requiring a pure extension adds a norm equation. Suppose both marginals are $\operatorname{diag}(0,b,1-b)$ with rational $b$. The zero vacuum readings force a pure state to be supported on $|010\rangle,|101\rangle$. Their weights are $b,1-b$, so the coupling $z$ must satisfy $|z|^2=b(1-b)$. Conversely, for $b>0$, the amplitudes $\sqrt b,\bar z/\sqrt b$ give the required pure state. For $b=0$, take $|101\rangle$. For prescribed $b,z$, a pure extension with rational real and imaginary parts in every density matrix entry exists exactly when $b$ and both coordinates of $z$ are rational and satisfy this norm equation. For rational $b$, existence is thus equivalent to writing $b(1-b)$ as a sum of two rational squares. [Criterion for a rational pure extension](lean:D5/S3/Quantum/Entanglement/Marginals/FibRationalPureExtension.rational_pure_coupling_iff)
+
+For instance, when $b=1/4$, the coupling $z=\sqrt 3/4$ gives a pure state. Rational coordinates for $z$ would express three as a sum of two rational squares after scaling by four. Clearing denominators would equate a sum of two integer squares to three times a square, where the exponent of three is odd. This is impossible. The diagonal mixture of $|010\rangle,|101\rangle$ with weights $1/4,3/4$ gives a rational common extension.
+
 For equal-width windows on an open chain of length $n$, the joint rank can be computed directly from the spacing. Forbid $K$ consecutive ones, let $a_\ell$ be the number of legal words of length $\ell$, and write $b_\ell=a_\ell^2$ with $b_0=1$. Choose $m\ge1$ windows of width $1\le k\le n$ with strictly increasing starts and successive gaps $g_1,\ldots,g_{m-1}$. The rank of their collected partial traces is
 
 $$
