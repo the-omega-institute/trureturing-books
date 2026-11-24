@@ -4,7 +4,7 @@
 
 Having established origin-free heaps, Lie triple curvature, and the signed spinor double cover in [Chapter 4](ch04-heaps-and-lie-triple-curvature.md), we now turn to spatial rotations and discrete harmonic dynamics: **how do we map skew-symmetric generators $X \in \mathfrak{so}(3, \mathbb{Q})$ into the rational rotation group $\mathrm{SO}(3, \mathbb{Q})$, invert the map cleanly, and run discrete oscillations inside $\mathbb{Q}$ with exact norm conservation?**
 
-Classical textbooks reach at once for the matrix exponential $\exp(X) = \sum_{k=0}^\infty \frac{1}{k!} X^k$, the matrix logarithm $\ln\mathbf{R}$, and the trigonometric functions $\cos\theta$ and $\sin\theta$. Yet every finite Taylor truncation immediately leaves the orthogonal group, injecting projection drift at every step. This chapter replaces that entire transcendental scaffold with four purely rational constructions while cleanly separating the strict zero-axiom layer from its classical real shadow: the closure identity, exact orthogonality, unit determinant, and iterated norm preservation of the **rational Cayley bridge**, the inner-product invariance, scale invariance, and homomorphism of the **square-root-free adjoint action** $\operatorname{Ad}(p)$, and unit squared-norm conservation of the signed `PythSpinor` **heap recurrence** are all proved directly inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`); alongside the **singularity-free dual-chart multiplication** obeying $\max(D_+, D_-) \ge \frac{1}{2}$, we contrast them with the classical real-shadow **heap Chebyshev closed forms**, the **continuous-ray classification theorem**, and the **six-axis rational cover of $S^2$** to pinpoint exactly where $\pi$ enters classical physics.
+Classical textbooks reach at once for the matrix exponential $\exp(X) = \sum_{k=0}^\infty \frac{1}{k!} X^k$, the matrix logarithm $\ln\mathbf{R}$, and the trigonometric functions $\cos\theta$ and $\sin\theta$. Yet every finite Taylor truncation immediately leaves the orthogonal group, injecting projection drift at every step. This chapter replaces that entire transcendental scaffold with four purely rational constructions while cleanly separating the strict zero-axiom layer from its classical real shadow: the closure identity, exact orthogonality, unit determinant, and iterated norm preservation of the **rational Cayley bridge**, the normalized denominator sum, constructive $\frac{1}{2}$ floor, expanded MRP forms, and closed unit-ball lock of the **singularity-free dual-chart MRP atlas**, the inner-product invariance, scale invariance, and homomorphism of the **square-root-free adjoint action** $\operatorname{Ad}(p)$, and unit squared-norm conservation of the signed `PythSpinor` **heap recurrence** are all proved directly inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`); we then contrast them with the classical real-shadow **heap Chebyshev closed forms**, the **continuous-ray classification theorem**, and the **six-axis rational cover of $S^2$** to pinpoint exactly where $\pi$ enters classical physics.
 
 ## 5.1 Replacing Exponential Maps: The Rational Cayley Bridge
 
@@ -124,38 +124,65 @@ $$
 
 :::
 
-Because the stereographic spinor map $Q(\boldsymbol{\sigma}) = \frac{(1 - \lVert\boldsymbol{\sigma}\rVert^2)\mathbf{1} + 2\boldsymbol{\sigma}}{1 + \lVert\boldsymbol{\sigma}\rVert^2} \in S^3(\mathbb{Q})$ satisfies $Q(-\boldsymbol{\sigma}/\lVert\boldsymbol{\sigma}\rVert^2) = -Q(\boldsymbol{\sigma})$, both branches encode the exact same three-dimensional rotation (while flipping one discrete sheet bit whenever the $D_-$ branch fires tracks the full spinor double cover). Setting $a := \lVert\boldsymbol{\sigma}_A\rVert^2$, $b := \lVert\boldsymbol{\sigma}_B\rVert^2$, and $c := \boldsymbol{\sigma}_A \cdot \boldsymbol{\sigma}_B$, two exact polynomial identities across all of $\mathbb{Q}^3 \times \mathbb{Q}^3$ banish every singularity (manual derivation):
+Because the stereographic spinor map $Q(\boldsymbol{\sigma}) = \frac{(1 - \lVert\boldsymbol{\sigma}\rVert^2)\mathbf{1} + 2\boldsymbol{\sigma}}{1 + \lVert\boldsymbol{\sigma}\rVert^2} \in S^3(\mathbb{Q})$ satisfies $Q(-\boldsymbol{\sigma}/\lVert\boldsymbol{\sigma}\rVert^2) = -Q(\boldsymbol{\sigma})$, both branches encode the exact same three-dimensional rotation (while flipping one discrete sheet bit whenever the $D_-$ branch fires tracks the full spinor double cover).
 
-1. **Denominator sum identity and lower bound $\frac{1}{2}$**: the $\mp 2c$ cross terms cancel identically in $D_+ + D_-$, giving
+Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), the entire dual-chart atlas locks directly in `PythSpinor` and `RatVec3` without real numbers or classical choice. Given two rational three-vectors `u, v : RatVec3` written $\mathbf{u} = \mathbf{x}/d$ and $\mathbf{v} = \mathbf{y}/e$ (integer numerators $\mathbf{x}, \mathbf{y} \in \mathbb{Z}^3$ and strictly positive denominators $d, e \ge 1$), form the stereographic lifts `lift u` $:= ((d^2 - \lVert\mathbf{x}\rVert^2,\, 2d\mathbf{x});\; d^2 + \lVert\mathbf{x}\rVert^2) : \mathrm{PythSpinor}$ and their quaternion product $p := \operatorname{product}(\mathbf{u}, \mathbf{v}) := (\operatorname{lift}\mathbf{u})\cdot(\operatorname{lift}\mathbf{v})$, with scalar entry $w_p := p.\mathrm{num}.w$, imaginary vector $\mathbf{v}_p := \operatorname{Vec3.imaginary}(p.\mathrm{num})$, and strictly positive radius $r_p := p.\mathrm{radius} = (d^2 + \lVert\mathbf{x}\rVert^2)(e^2 + \lVert\mathbf{y}\rVert^2) > 0$. Define the **normalized chart denominators**
 
-   $$
-   D_+ + D_- = 1 + ab - 2c + a + b + 2c = (1 + a)(1 + b) \ge 1.
-   $$
+$$
+\operatorname{denomPlus}(\mathbf{u}, \mathbf{v}) := \frac{r_p + w_p}{2 r_p}, \qquad \operatorname{denomMinus}(\mathbf{u}, \mathbf{v}) := \frac{r_p - w_p}{2 r_p} \;\in\; \mathrm{IntRatio},
+$$
 
-   Since both denominators are nonnegative ($D_+ = (1 - c)^2 + \lVert\boldsymbol{\sigma}_A \times \boldsymbol{\sigma}_B\rVert^2 \ge 0$ and $D_- = \lVert\boldsymbol{\sigma}_A + \boldsymbol{\sigma}_B\rVert^2 \ge 0$), their maximum obeys the **uniform lower bound**
+the cleared-denominator **expanded MRP numerators**
 
-   $$
-   \max(D_+, D_-) \ge \frac{D_+ + D_-}{2} = \frac{\bigl(1 + \lVert\boldsymbol{\sigma}_A\rVert^2\bigr)\bigl(1 + \lVert\boldsymbol{\sigma}_B\rVert^2\bigr)}{2} \ge \frac{1}{2}.
-   $$
+$$
+\operatorname{mrpPlusNum}(\mathbf{u}, \mathbf{v}) := d^2 e^2 + \lVert\mathbf{x}\rVert^2\lVert\mathbf{y}\rVert^2 - 2de(\mathbf{x}\cdot\mathbf{y}), \qquad \operatorname{mrpMinusNum}(\mathbf{u}, \mathbf{v}) := \lVert\mathbf{x}\rVert^2 e^2 + d^2\lVert\mathbf{y}\rVert^2 + 2de(\mathbf{x}\cdot\mathbf{y}),
+$$
 
-2. **Numerator factorization and automatic ball containment**: using $\boldsymbol{\sigma}_A \times \boldsymbol{\sigma}_B \perp \boldsymbol{\sigma}_A, \boldsymbol{\sigma}_B$ and $\lVert\boldsymbol{\sigma}_A \times \boldsymbol{\sigma}_B\rVert^2 = ab - c^2$,
+and the selected dual-chart output `output u v` $:= \operatorname{orientNumerator}(w_p, \mathbf{v}_p) / (r_p + \lvert w_p\rvert) : \mathrm{RatVec3}$, where `orientNumerator` preserves the sign of $\mathbf{v}_p$ when $w_p \ge 0$ and negates it when $w_p < 0$. The next zero-axiom theorem locks the MRP denominator identities, unit normalization, constructive $\frac{1}{2}$ floor, and closed unit-ball containment simultaneously.
 
-   $$
-   \begin{aligned}
-   \lVert\mathbf{N}\rVert^2
-   &= (1 - a)^2 b + (1 - b)^2 a + 2(1 - a)(1 - b)c + 4(ab - c^2) \\
-   &= (a + b)(1 + ab) + 2c(1 + ab - a - b) - 4c^2 \\
-   &= (1 + ab - 2c)(a + b + 2c) = D_+ D_-.
-   \end{aligned}
-   $$
+::: {.theorem #thm-ch05-dual-chart-singularity-free title="Normalized Dual-Chart MRP Denominators, Constructive Half Floor, and Unit-Ball Containment (Zero-Axiom Kernel Theorem)" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_mrp_denominators D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_sum_one D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_ge_half D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_ball_containment"}
+Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), for all rational three-vectors `u, v : RatVec3`, put $r_p := (\operatorname{product}(\mathbf{u}, \mathbf{v})).\mathrm{radius}$ and $r := (\operatorname{product}(\mathbf{u}, \mathbf{v})).\mathrm{radiusPred}$ (so $r + 1 = r_p$). Then all four statements hold unconditionally:
 
-   Consequently, the squared norm of the composed output is always
+1. **Expanded MRP forms of the normalized denominators** ([`dual_chart_mrp_denominators`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_mrp_denominators)): under `Omega.IntRatio.Equivalent`,
 
    $$
-   \lVert\boldsymbol{\sigma}_A \star_{\mathcal{S}} \boldsymbol{\sigma}_B\rVert^2 = \frac{D_+ D_-}{\max(D_+, D_-)^2} = \frac{\min(D_+, D_-)}{\max(D_+, D_-)} \le 1.
+   \operatorname{denomPlus}(\mathbf{u}, \mathbf{v}) \;\equiv\; \frac{\operatorname{mrpPlusNum}(\mathbf{u}, \mathbf{v})}{r_p}
+   \qquad \text{and} \qquad
+   \operatorname{denomMinus}(\mathbf{u}, \mathbf{v}) \;\equiv\; \frac{\operatorname{mrpMinusNum}(\mathbf{u}, \mathbf{v})}{r_p}.
    $$
 
-Every division therefore stays uniformly bounded away from zero by at least $\frac{1}{2}$, and every composed state remains automatically trapped inside the closed rational unit ball $\overline{B}_1(\mathbb{Q}^3)$ with no renormalization required.
+2. **Unit sum of normalized denominators** ([`dual_chart_denom_sum_one`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_sum_one)): under `Omega.IntRatio.Equivalent`,
+
+   $$
+   \operatorname{denomPlus}(\mathbf{u}, \mathbf{v}) + \operatorname{denomMinus}(\mathbf{u}, \mathbf{v}) \;\equiv\; 1.
+   $$
+
+3. **Constructive half-floor disjunction without classical choice** ([`dual_chart_denom_ge_half`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_ge_half)): in the rational order `Omega.IntRatio.Le`, the constructive disjunction holds with zero `Classical.choice`,
+
+   $$
+   \frac{1}{2} \le \operatorname{denomPlus}(\mathbf{u}, \mathbf{v})
+   \quad \lor \quad
+   \frac{1}{2} \le \operatorname{denomMinus}(\mathbf{u}, \mathbf{v}).
+   $$
+
+4. **Closed unit-ball containment of the selected output** ([`dual_chart_ball_containment`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_ball_containment)): under `Omega.IntRatio.Le`,
+
+   $$
+   \bigl\langle\operatorname{output}(\mathbf{u}, \mathbf{v}),\, \operatorname{output}(\mathbf{u}, \mathbf{v})\bigr\rangle \;\le\; 1.
+   $$
+:::
+
+::: {.proof}
+For part 1, expanding the product radius $r_p = (d^2 + \lVert\mathbf{x}\rVert^2)(e^2 + \lVert\mathbf{y}\rVert^2)$ and scalar component $w_p = (d^2 - \lVert\mathbf{x}\rVert^2)(e^2 - \lVert\mathbf{y}\rVert^2) - 4de(\mathbf{x}\cdot\mathbf{y})$ yields the exact integer identities $r_p + w_p = 2\,\operatorname{mrpPlusNum}(\mathbf{u}, \mathbf{v})$ and $r_p - w_p = 2\,\operatorname{mrpMinusNum}(\mathbf{u}, \mathbf{v})$; canceling the factor of $2$ establishes both equivalences in `Omega.IntRatio.Equivalent`. For part 2, summing the numerators gives $(r_p + w_p) + (r_p - w_p) = 2r_p$ over the strictly positive denominator $2r_p$, reducing identically to $1$. For part 3, integer recursion (`Int.rec`) splits directly on the sign of $w_p$: if $w_p = a \ge 0$, then $2(r_p + a) - 2r_p = 2a \ge 0$ constructs `Or.inl` ($\frac{1}{2} \le \operatorname{denomPlus}$); if $w_p = -(a + 1) < 0$, then $r_p - w_p = r_p + a + 1$ gives gap $2(a + 1) \ge 0$ and constructs `Or.inr` ($\frac{1}{2} \le \operatorname{denomMinus}$), with zero `Classical.choice`. For part 4, put $a := \lvert w_p\rvert$ and $s := \lVert\mathbf{v}_p\rVert^2$; sign orientation preserves $s$, and substituting the Pythagorean certificate $a^2 + s = r_p^2$ into $(r_p + a)^2 - s = (r_p^2 - (a^2 + s)) + 2a(r_p + a)$ leaves the nonnegative slack $2a(r_p + a) \ge 0$, certifying $\lVert\operatorname{output}(\mathbf{u}, \mathbf{v})\rVert^2 = s / (r_p + a)^2 \le 1$. This declaration depends solely on `OmegaInit` and `OmegaMath` with empty transitive axiom closure. The full proof is checked by the Lean kernel.
+:::
+
+Reconciling [@thm-ch05-dual-chart-singularity-free] with the unnormalized MRP denominators $D_+, D_-$ of [@def-ch05-dual-chart-star] is immediate (manual derivation): dividing numerator and denominator by $d^2 e^2$ gives $\operatorname{mrpPlusNum}(\mathbf{u}, \mathbf{v}) = d^2 e^2 D_+(\mathbf{u}, \mathbf{v})$, $\operatorname{mrpMinusNum}(\mathbf{u}, \mathbf{v}) = d^2 e^2 D_-(\mathbf{u}, \mathbf{v})$, and $r_p = d^2 e^2(1 + \lVert\mathbf{u}\rVert^2)(1 + \lVert\mathbf{v}\rVert^2) = d^2 e^2(D_+ + D_-)$. Thus the normalized chart denominators are precisely the fractional shares $\operatorname{denomPlus} \equiv \frac{D_+}{D_+ + D_-}$ and $\operatorname{denomMinus} \equiv \frac{D_-}{D_+ + D_-}$, while $\mathbf{v}_p = 2d^2 e^2 \mathbf{N}(\mathbf{u}, \mathbf{v})$ and $w_p \ge 0 \iff D_+ \ge D_-$ identify `output u v` entrywise with $\mathbf{u} \star_{\mathcal{S}} \mathbf{v}$. Because $D_+ + D_- = (1 + \lVert\mathbf{u}\rVert^2)(1 + \lVert\mathbf{v}\rVert^2) \ge 1$, part 3 immediately implies the unnormalized floor $\max(D_+, D_-) = (D_+ + D_-)\max(\operatorname{denomPlus}, \operatorname{denomMinus}) \ge \frac{1}{2}(1 + \lVert\mathbf{u}\rVert^2)(1 + \lVert\mathbf{v}\rVert^2) \ge \frac{1}{2}$, and the numerator factorization $\lVert\mathbf{N}\rVert^2 = D_+ D_-$ mirrors part 4's closed-ball bound $\lVert\mathbf{u} \star_{\mathcal{S}} \mathbf{v}\rVert^2 = \frac{\min(D_+, D_-)}{\max(D_+, D_-)} \le 1$. Every division therefore stays uniformly bounded away from zero, and every composed state remains trapped inside $\overline{B}_1(\mathbb{Q}^3)$ with no renormalization required.
+
+The figure below pairs the two geometric mechanisms of Sections 5.1 and 5.2 side by side: exact spherical preservation of the rational Cayley transform ([@thm-ch05-rational-cayley-core]) versus outward drift of finite Taylor truncation, alongside the dual-chart switch certified by [@thm-ch05-dual-chart-singularity-free] that locks every composition inside the closed unit ball.
+
+::: {.figure src="ch05-cayley-dual-chart"}
+**Exact spherical locking of rational Cayley iteration versus Taylor truncation drift, paired with the dual-chart denominator floor $\max(D_+, D_-) \ge \frac{1}{2}$.** The figure contrasts exact unit-norm conservation along $\mathbf{R}(\boldsymbol{\sigma})^n \mathbf{v}_0$ against the outward radial inflation of second-order Taylor truncation $T_2(X)$, and illustrates how switching between the primary denominator $D_+$ and shadow denominator $D_-$ under $D_+ + D_- = (1 + \lVert\boldsymbol{\sigma}_A\rVert^2)(1 + \lVert\boldsymbol{\sigma}_B\rVert^2) \ge 1$ enforces both $\max(D_+, D_-) \ge \frac{1}{2}$ and automatic ball containment; see [@thm-ch05-rational-cayley-core], [@def-ch05-dual-chart-star], and [@ex-ch05-cayley-vs-taylor].
+:::
 
 ## 5.3 Square-Root-Free Adjoint Rotations from Non-Square Norms
 
@@ -301,6 +328,12 @@ The following two kernel-verified theorems govern continuous tangent rays and sq
 For part 1, fix nonzero $X \in L$ and put $p(t) := 2\varphi(\exp tX) - 1$. Faithfulness, local injectivity of $\exp$, and $p(2t) = 2p(t)^2 - 1$ produce a minimal positive period $T > 0$ and $p(t) = \cos(2\pi t/T)$. Complexifying the left-multiplication trace form $B(X, Y) = -\operatorname{Re}\operatorname{tr}(\rho(X)\rho(Y))$ locks a uniform normalized period $T_0$ across the punctured tangent space, so $h := 2(\pi/T_0)^2 B$ gives the $\operatorname{ad}$-invariant metric, one-dimensional centralizers, and $\dim_{\mathbb{R}} L \in \{0, 1, 3\}$. For part 2, strict quadratic inequalities define relatively open caps; if $x \perp y$ on $S^2$, Bessel's inequality gives $\langle x, \mathrm{axis}_i\rangle^2 + \langle y, \mathrm{axis}_i\rangle^2 \le \lVert\mathrm{axis}_i\rVert^2 = 5$, preventing both $2\langle x, \mathrm{axis}_i\rangle^2$ and $2\langle y, \mathrm{axis}_i\rangle^2$ from exceeding $5$; choosing constructive signs in the three cyclic axis pairs ensures at least one axis satisfies $2\langle x, \mathrm{axis}_i\rangle^2 > 5$ for every $x \in S^2$. The full proof is checked by the Lean kernel.
 :::
 
+Before moving on to Chapter 6, compare all three transcendental-free rotation mechanisms side by side in the interactive card below: tune the rational generator $\boldsymbol{\sigma}$ and iteration count to watch exact $\mathbf{R}(\boldsymbol{\sigma})$ and the square-root-free integer adjoint action $\operatorname{Ad}(p_{\mathrm{Half}})$ hold unit squared norm $1/1$ at every step while the second-order Taylor truncation $T_2(X)$ spirals outward off the sphere, and inspect the dual-chart composition floor $\max(D_+, D_-) \ge \frac{1}{2}$ keeping every rational product singularity-free inside the closed unit ball.
+
+::: {.viz src="ternion-cayley-lab" preset="cayley3d-vs-taylor-drift" height="520"}
+**Interactive comparison of exact rational Cayley $\mathbf{R}(\boldsymbol{\sigma})$ and $\operatorname{Ad}(p_{\mathrm{Half}})$ against Taylor drift, with dual-chart $\max(D_+, D_-) \ge \frac{1}{2}$ inspection.** Step through iterated rotations to contrast exact rational unit-norm locking with second-order Taylor inflation $T_2(X)$, inspect the integer $90^\circ$ adjoint matrix of non-square-norm `pHalf = (1, 1, 0, 0)`, and watch dual-chart switching enforce $\max(D_+, D_-) \ge \frac{1}{2}$ everywhere; zero-axiom proofs are in [@thm-ch05-rational-cayley-core] and [@thm-ch05-rational-adjoint-action], with dual-chart bounds and worked examples in [@def-ch05-dual-chart-star], [@ex-ch05-cayley-vs-taylor], and [@ex-ch05-phalf-integer-rotation].
+:::
+
 ::: {.remark #rem-ch05-where-pi-enters title="Where Pi Actually Enters, and Transition to Rational Spherical Trigonometry"}
-Part 1 of [@thm-ch05-continuous-ray-and-six-axis] delivers the sharpest possible diagnostic for transcendental-free mathematics: neither the duplication law $\varphi(g^2) = (2\varphi(g) - 1)^2$, nor the rational Cayley and adjoint rotations ([@thm-ch05-rational-cayley-core], [@thm-ch05-rational-adjoint-action]), nor the signed spinor heap recurrence ([@thm-ch05-spinor-heap-norm-preserved]) contains $\pi$; the constant $\pi$ enters only when one abandons the native heap and stretches a curved circle onto a flat real tangent line $t \mapsto \exp(tX)$, forcing the period normalization $h(X, X) = 2\pi^2/T^2$. Meanwhile, part 2 shows that even global spherical open covers require nothing beyond the integer inequality $2\langle x, \mathrm{axis}_i\rangle^2 > 5$ on six norm-$5$ axes. Continuing this complete elimination of transcendental trigonometry, [Chapter 6](ch06-bargmann-gram-spherical-trigonometry.md) establishes the capstone law of Volume II: **the Fundamental Theorem of Rational Spherical Trigonometry (the Bargmann–Gram Closure Law)**.
+Part 1 of [@thm-ch05-continuous-ray-and-six-axis] delivers the sharpest possible diagnostic for transcendental-free mathematics: neither the duplication law $\varphi(g^2) = (2\varphi(g) - 1)^2$, nor the rational Cayley and singularity-free dual-chart rotations ([@thm-ch05-rational-cayley-core], [@thm-ch05-dual-chart-singularity-free]), nor the square-root-free adjoint action ([@thm-ch05-rational-adjoint-action]), nor the signed spinor heap recurrence ([@thm-ch05-spinor-heap-norm-preserved]) contains $\pi$; the constant $\pi$ enters only when one abandons the native heap and stretches a curved circle onto a flat real tangent line $t \mapsto \exp(tX)$, forcing the period normalization $h(X, X) = 2\pi^2/T^2$. Meanwhile, part 2 shows that even global spherical open covers require nothing beyond the integer inequality $2\langle x, \mathrm{axis}_i\rangle^2 > 5$ on six norm-$5$ axes. Continuing this complete elimination of transcendental trigonometry, [Chapter 6](ch06-bargmann-gram-spherical-trigonometry.md) establishes the capstone law of Volume II: **the Fundamental Theorem of Rational Spherical Trigonometry (the Bargmann–Gram Closure Law)**.
 :::

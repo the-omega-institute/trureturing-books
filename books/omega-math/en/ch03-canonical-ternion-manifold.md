@@ -7,7 +7,7 @@
 1. **Why is the minimal non-Abelian manifold forced onto three degrees of freedom?** Why do dimensions $1$ and $2$ collapse into commutative dead planes, why are noncompact three-dimensional candidates eliminated, and why do only the cross product and unit-quaternion three-sphere survive?
 2. **How do we build this three-dimensional manifold over pure integers with zero axioms, zero square roots, and zero quotient postulates?** We construct the canonical homogeneous integer ternion manifold $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$ and draw the exact completion line separating it from its classical real shadow.
 
-Throughout this chapter we keep our epistemic boundary razor-sharp: the **four classical shadow anchor theorems** in Sections 3.1 and 3.4 live on the `Mathlib` real/complex side (relying on `{propext, Classical.choice, Quot.sound}`) and provide external rigidity benchmarks, whereas the **seven zero-axiom kernel theorems** in Section 3.2 (packaged into two green theorem boxes depending solely on `OmegaInit` and `OmegaMath` with empty transitive axiom closure) directly lock down Euler–Lagrange four-square multiplicativity, the projective heap laws, the four-dimensional Lagrange identity, the unit bound $\kappa \le 1$, and heap-translation invariance of projective fidelity over pure integers; canonical GCD reduction, the feature-rank split, and the five-anchor hand calculations in Section 3.3 remain explicitly marked at their respective tiers (`ARGUED` / `NUM`).
+Throughout this chapter we keep our epistemic boundary razor-sharp: the **four classical shadow anchor theorems** in Sections 3.1 and 3.4 live on the `Mathlib` real/complex side (relying on `{propext, Classical.choice, Quot.sound}`) and provide external rigidity benchmarks, whereas the **eight zero-axiom kernel theorems** in Sections 3.2 and 3.3 (packaged into three green theorem boxes depending solely on `OmegaInit` and `OmegaMath` with empty transitive axiom closure) directly lock down Euler–Lagrange four-square multiplicativity, the projective heap laws, the four-dimensional Lagrange identity, the unit bound $\kappa \le 1$, heap-translation invariance of projective fidelity, and the explicit projective ternary noncommutativity witness for orthogonal half-turns over pure integers; canonical GCD reduction, the feature-rank split, and the remaining five-anchor hand calculations in Section 3.3 remain explicitly marked at their respective tiers (`ARGUED` / `NUM`).
 
 ## 3.1 Low-Dimensional Collapse and the Three-Dimensional Lock: Classical Shadow Anchors {#sec-ch03-dimension-lock}
 
@@ -59,6 +59,12 @@ Equip the four-dimensional real spin-factor carrier $E = \mathbb{R} \times \math
 
 ::: {.proof}
 Directed two-label Gram positivity `P2 D` forces skew-symmetry, proportional vanishing, and zero rows without any assumed regularity. Combining `P2 D` with phase-square balance `PB D` fixes a single global orientation $\varepsilon \in \{\mathrm{plus}, \mathrm{minus}\}$ on pure vectors and extends it across all scalar-plus-vector inputs. Realizing the two orientations by standard and opposite $2 \times 2$ Pauli matrix products then certifies every finite Gram table and matrix interface at once. This declaration lives on the classical `Mathlib` shadow side; the full proof is checked by the Lean kernel.
+:::
+
+The figure below gathers this dimensional selection ladder into a single geometric contrast, tracing how dimensions $1$ and $2$ collapse to commutative dead ends under invariant forms while dimension $3$ locks directly onto noncommutative rotation and the canonical ternion manifold $\mathbb{T}_3(\mathbb{Q})$.
+
+::: {.figure src="ch03-ternion-3d-lock"}
+**Low-dimensional Abelian collapse versus three-dimensional self-locked noncommutativity on $\mathbb{T}_3(\mathbb{Q})$.** The diagram contrasts commutative gliding on the one-dimensional circle and two-dimensional collapse under a nondegenerate invariant form against the unique three-dimensional oriented cross product and canonical integer ternion lock; classical-shadow rigidity benchmarks are proved in [@thm-ch03-dim3-cross-bracket] and [@thm-ch03-spinfactor-cross-lock].
 :::
 
 ## 3.2 The Canonical Homogeneous Integer Ternion Manifold $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$: Free of Quotients and Radicals {#sec-ch03-canonical-ternions}
@@ -237,6 +243,20 @@ Compute every observable directly in integers:
    They split explicitly in the fourth coordinate ($+1 \neq -1$), with mutual fidelity $\frac{(1 + 1 + 1 - 1)^2}{4 \cdot 4} = \frac{1}{4}$. With zero reals, zero radicals, and zero axioms, three lines of integer multiplication certify that `AXIOM-Ω` is non-Abelian, nontrivial, and relatively consistent inside bare CIC!
 :::
 
+Item 4 above is not merely a hand check (`NUM`): without GCD reduction or `Quot.sound`, the next zero-axiom theorem frozen in `OmegaInit` and `OmegaMath` certifies noncommutativity directly on the projective ray equivalence `Ternion.RayEquiv`:
+
+::: {.theorem #thm-ch03-phalf-qhalf-noncommutative title="Projective Ternary Noncommutativity Witness for Orthogonal Half-Turns (Zero-Axiom Kernel Theorem)" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative"}
+Inside the zero-axiom library `OmegaMath` (relying solely on `OmegaInit` and `OmegaMath`, with zero axioms), let $p_0 := (1, 0, 0, 0)$, $p_{\mathrm{Half}} := (1, 1, 0, 0)$, and $q_{\mathrm{Half}} := (1, 0, 1, 0)$ in `Quaternion`, with ternary representative $\operatorname{triad}(\mathbf{a}, \mathbf{b}, \mathbf{c}) := (\mathbf{a}\bar{\mathbf{b}})\mathbf{c}$ and projective ray equivalence $\sim_{\mathrm{ray}}$ (`Ternion.RayEquiv`) as in [@thm-ch03-quaternion-norm-and-heap-laws]. Then the two reversed ternary products are not ray-equivalent:
+
+$$
+\neg\Bigl(\operatorname{triad}(p_{\mathrm{Half}},\, p_0,\, q_{\mathrm{Half}}) \;\sim_{\mathrm{ray}}\; \operatorname{triad}(q_{\mathrm{Half}},\, p_0,\, p_{\mathrm{Half}})\Bigr).
+$$
+:::
+
+::: {.proof}
+Direct integer quaternion multiplication evaluates $\operatorname{triad}(p_{\mathrm{Half}}, p_0, q_{\mathrm{Half}}) = (1, 1, 1, 1)$ and $\operatorname{triad}(q_{\mathrm{Half}}, p_0, p_{\mathrm{Half}}) = (1, 1, 1, -1)$. Assume for contradiction that `Ternion.RayEquiv` holds, yielding nonzero integers $k, l \in \mathbb{Z} \setminus \{0\}$ such that $k(1, 1, 1, 1) = l(1, 1, 1, -1)$. Comparing the $w$-coordinates gives $k = l$, while comparing the $z$-coordinates gives $k = -l$, hence $l = -l$. Over `Omega.Int` this forces $l = 0$, contradicting $l \neq 0$. Thus the two ternary products lie on distinct projective rays, certifying Law III noncommutativity of `AXIOM-Ω` on $\mathbb{T}_3(\mathbb{Q})$ directly in bare CIC. This declaration depends solely on `OmegaInit` and `OmegaMath` with empty transitive axiom closure. The full proof is checked by the Lean kernel.
+:::
+
 ## 3.4 The Real-Shadow Completion Boundary: From Rank-Five Embedding to Unit-Quaternion Isomorphism {#sec-ch03-real-shadow-completion}
 
 Before closing Volume I, one final check ties our rational universe to classical geometry: **when our three-dimensional rational ternion skeleton is viewed inside the classical real-analytic shadow, how exactly does it meet the coordinate-free classification of `AXIOM-Ω`?**
@@ -271,6 +291,12 @@ Take the embedding of [@thm-ch03-rank-five-embedding] and left-multiply by $u(o)
 
 ::: {.remark #rem-ch03-shadow-boundary title="The Exact Division Between Rational Skeleton and Real Shadow (MODEL)"}
 The single postulate separating [@thm-ch03-rank-five-embedding] from [@thm-ch03-rank-five-isomorphism]—`ReadingComplete`—marks the exact fault line between **zero-axiom rational mathematics** and its **classical real shadow**. Without it, arithmetic lives inside the countable, decidable, axiom-free rational ternion skeleton; adding Cauchy completion projects that exact skeleton onto the classical continuum $\mathrm{Sp}(1) = S^3(1)$. Our rational construction is thus no eccentric detour—it is the computable skeleton whose real completion is classical three-sphere geometry, with every classical axiom quarantined cleanly outside the core.
+:::
+
+Before closing Volume I, test canonical integer ternion normalization and noncommutativity firsthand in the closing interactive experiment card below: vary the integer quadruple inputs to watch `gcd` reduction together with first-nonzero positive sign locking assign every ray a unique canonical representative without `Quot.sound`, and compare the reversed ternary transports $[p_{\mathrm{Half}}, p_0, q_{\mathrm{Half}}] = (1, 1, 1, 1) \neq (1, 1, 1, -1) = [q_{\mathrm{Half}}, p_0, p_{\mathrm{Half}}]$ splitting cleanly in the fourth coordinate ([@thm-ch03-phalf-qhalf-noncommutative]) with exact rational fidelity readouts.
+
+::: {.viz src="ternion-cayley-lab" preset="canonical-ternion-noncomm" height="520"}
+**Interactive canonical integer ternion normalization and noncommutativity witness.** Explore `gcd` reduction and leading-positive sign normalization (`norm`), inspect the order-sensitive split $[p_{\mathrm{Half}}, p_0, q_{\mathrm{Half}}] = (1, 1, 1, 1) \neq (1, 1, 1, -1) = [q_{\mathrm{Half}}, p_0, p_{\mathrm{Half}}]$, step through the three-beat projective closure of $g_{120} = (1, 1, 1, 1)$, and read exact rational fidelities $\kappa_{\mathrm{proj}}$; zero-axiom proofs are in [@thm-ch03-quaternion-norm-and-heap-laws] and [@thm-ch03-lagrange-and-kappa-invariance], with hand calculations in [@ex-ch03-five-anchors-and-closure].
 :::
 
 Volume I is now complete: bare CIC, the observer precision contract $\varepsilon_{\mathrm{self}} = 1/M$, the computable typeclass `class OmegaSpace`, the zero-axiom projective circle $\mathbb{QP}^1$, and the canonical integer ternion manifold $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$ are all in place. In Volume II, starting with [Chapter 4](ch04-heaps-and-lie-triple-curvature.md), we dissect origin-free heaps, Lie triple curvature, and the signed spinor double cover—bringing the rank-$5$ signed spinor geometry itself directly into zero-axiom integer arithmetic.

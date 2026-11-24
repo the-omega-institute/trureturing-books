@@ -4,7 +4,7 @@
 
 Across Volumes I–V, starting from the bare Calculus of Inductive Constructions (CIC) and homogeneous projective closure, we constructed canonical three-dimensional ternions, origin-free heaps, limit-free jet calculus, $\pi$-free spherical harmonic analysis, Adelic product closure, and the norm-$5$ rational Hecke–Ramanujan spectral gap without once borrowing from the real continuum $\mathbb{R}$ or transcendental constants. Opening Volume VI, a sharp foundational question follows: **inside an all-rational, background-free geometric universe, what is the native instruction set architecture (ISA) of computation itself?**
 
-This chapter develops the answer in three steps. Section 16.1 introduces John H. Conway's scalar rational machine FRACTRAN, anchors its orthogonal prime registers, explicit step-bounded computability, and the zero-axiom scalar FRACTRAN exact semantics, determinism, positivity, and halting stability (`axioms: []`, `OmegaInit` $+$ `OmegaMath`) in frozen **`LEAN ✓`** theorems, and traces by hand the complete 16-state halting run of the four-gate program $P_\Omega$ from $2^{17} = 131{,}072$ to $22$. Section 16.2 diagnoses the Abelian word-order tax of commutative multiplication, lifts the state carrier to the integer quaternion spinor lattice $\mathbb{Z}^4 \subset \mathcal{H}(\mathbb{Z})$ to formulate the non-Abelian $\Omega$-FRACTRAN machine with exact divisibility gates enforcing `Output(1) ≡ Input(0')` (**`MODEL`**), verifies coordinate by coordinate how `psiXY` and `psiYX` separate modulo $5$, and anchors both general transition determinism and this modulo-$5$ word-order separation in a zero-axiom frozen **`LEAN ✓`** theorem (`axioms: []`, `OmegaInit` $+$ `OmegaMath`). Section 16.3 constructs the zero-axiom $2\times 2$ integer matrix ring `Mat2`, derives four core matrix polynomial identities by hand (including determinant multiplicativity as a **`hand derivation`**), and anchors trace cyclicity, bilateral adjugate identities, and the universal Cayley–Hamilton identity $A^2 - \operatorname{tr}(A)A + \det(A)I = 0$ in a zero-axiom frozen **`LEAN ✓`** theorem (`axioms: []`), bridging spinor execution directly to matrix algebra.
+This chapter develops the answer in three steps. Section 16.1 introduces John H. Conway's scalar rational machine FRACTRAN, anchors its orthogonal prime registers, explicit step-bounded computability, and the zero-axiom scalar FRACTRAN exact semantics, determinism, positivity, halting stability, and exact 15-transition trace of the four-gate program $P_\Omega$ from $2^{17} = 131{,}072$ first halting at $22$ (`axioms: []`, `OmegaInit` $+$ `OmegaMath`) in frozen **`LEAN ✓`** theorems (accompanied by a hand-checked five-prime exponent table). Section 16.2 diagnoses the Abelian word-order tax of commutative multiplication, lifts the state carrier to the integer quaternion spinor lattice $\mathbb{Z}^4 \subset \mathcal{H}(\mathbb{Z})$ to formulate the non-Abelian $\Omega$-FRACTRAN machine with exact divisibility gates enforcing `Output(1) ≡ Input(0')` (**`MODEL`**), verifies coordinate by coordinate how `psiXY` and `psiYX` separate modulo $5$, and anchors both general transition determinism and this modulo-$5$ word-order separation in a zero-axiom frozen **`LEAN ✓`** theorem (`axioms: []`, `OmegaInit` $+$ `OmegaMath`). Section 16.3 constructs the zero-axiom $2\times 2$ integer matrix ring `Mat2`, first exhibits all four core matrix polynomial identities explicitly, and then anchors all four—trace cyclicity, determinant multiplicativity $\det(AB) = \det(A)\det(B)$, bilateral adjugate identities, and the universal Cayley–Hamilton identity $A^2 - \operatorname{tr}(A)A + \det(A)I = 0$—in a zero-axiom frozen **`LEAN ✓`** theorem (`axioms: []`), bridging spinor execution directly to matrix algebra.
 
 ## 16.1 Classical Scalar FRACTRAN, Orthogonal Prime Registers, and a 16-State Halting Trace {#sec-om-ch16-scalar-fractran}
 
@@ -49,10 +49,10 @@ In the `Omega.Fractran` module of the zero-axiom library `OmegaInit` and `OmegaM
 The first claim proceeds by structural induction on `prog`: using the exact specification of `exactQuotient` (returning `.some q` iff `denominator * q = n` and `.none` iff `¬ Divides rule n`), each list branch aligns the executable scan `step` with the relational `fire` and `skip` cases in both directions. The second claim sends both relational derivations through the first claim into `.some m₁ = step prog n = .some m₂`, whence injectivity of `Result.some` yields `m₁ = m₂`. The third claim inducts on `k`: a halted step leaves the positive state unchanged, while a fired rule with `denominator * q = s > 0` forces `q > 0` and multiplies by `numerator = numeratorPred.succ > 0` to yield `q * numerator > 0`. The fourth claim rewrites `run prog (k + extra) n = run prog extra (run prog k n)` by induction on `extra`; since `halts_iff` gives `step = .none` and therefore `advance s = s`, iterating `extra` additional steps leaves the halted state fixed. Every step lives strictly in `OmegaInit` and `OmegaMath`. The full proof is checked by the Lean kernel.
 :::
 
-We now verify this exact divisibility and idempotent halting mechanism step by step on a concrete four-gate program.
+We first lay out the five-prime register ledger of a concrete four-gate program step by step, and then lock its full 15-transition trace and first-halting property inside a zero-axiom kernel-verified theorem.
 
 ::: {.example #ex-om-ch16-sixteen-state-fractran-trace title="Complete 16-State Trace of $P_\Omega$ from $2^{17}$ Halting at $22$"}
-Consider the four-gate rational program acting on the five orthogonal prime registers $\{2, 3, 5, 7, 11\}$ (`hand derivation`):
+Consider the four-gate rational program acting on the five orthogonal prime registers $\{2, 3, 5, 7, 11\}$ (the five-prime exponent column below is a `hand derivation` ledger; the exact 15-transition trace and first halting at $22$ are formally certified in [@thm-ch16-p-omega-halts-at-22] below):
 
 $$
 P_\Omega \;=\; \left[\frac{11}{49},\; \frac{7}{25},\; \frac{5}{9},\; \frac{3}{4}\right] \;=\; \left[\frac{11}{7^2},\; \frac{7}{5^2},\; \frac{5}{3^2},\; \frac{3}{2^2}\right].
@@ -81,6 +81,27 @@ Starting from the single power-of-two seed $N_0 = 2^{17} = 131{,}072$ with expon
 | $16$ (Halt check) | None ($49, 25, 9, 4 \nmid 22$) | $22$ | $(1, 0, 0, 0, 1)$ |
 
 Because $17 = 1 + 2^4$, exactly sixteen factors of $2$ cascade upward into one factor of $11$, leaving one irreducible factor of $2$ and locking at $22 = 2 \cdot 11$.
+:::
+
+The full 15-transition trace tabulated above—together with the exact assertion that step $15$ is the first time the program reaches a halting state at $22$—is no longer merely a hand calculation, but a zero-axiom frozen witness theorem certified directly by the Lean kernel inside `OmegaInit` and `OmegaMath` (`axioms: []`):
+
+::: {.theorem #thm-ch16-p-omega-halts-at-22 title="Zero-Axiom Exact 15-Transition Trace of $P_\Omega$ from $2^{17}$ First Halting at $22$" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.p_omega_halts_at_22"}
+In the `Omega.Fractran` module of the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), let `pOmega` $= [\frac{11}{49}, \frac{7}{25}, \frac{5}{9}, \frac{3}{4}]$ be the ordered four-gate program, `pOmegaStart` $= 131{,}072$ ($= 2^{17}$) the decimal-encoded initial state, `pOmegaFinal` $= 22$ the terminal state, and `pOmegaTrace` $= [98{,}304,\, 73{,}728,\, 40{,}960,\, 30{,}720,\, 23{,}040,\, 12{,}800,\, 3{,}584,\, 2{,}688,\, 2{,}016,\, 1{,}120,\, 840,\, 630,\, 350,\, 98,\, 22]$ the list of fifteen successor states from steps $1$–$15$ of [@ex-om-ch16-sixteen-state-fractran-trace]. Writing `Follows` for the inductive chain predicate asserting that every consecutive pair satisfies the first-enabled-rule relation `Fractran.Step`, the following fourfold conjunction holds:
+
+$$
+\begin{aligned}
+&\mathrm{Follows}\;\mathrm{pOmega}\;\mathrm{pOmegaTrace}\;\mathrm{pOmegaStart} \\
+&\land\; \mathrm{run}\;\mathrm{pOmega}\;15\;\mathrm{pOmegaStart} = \mathrm{pOmegaFinal} \\
+&\land\; \mathrm{Halts}\;\mathrm{pOmega}\;\mathrm{pOmegaFinal} \\
+&\land\; \forall k < 15,\; \neg\,\mathrm{Halts}\;\mathrm{pOmega}\;(\mathrm{run}\;\mathrm{pOmega}\;k\;\mathrm{pOmegaStart}).
+\end{aligned}
+$$
+
+That is, starting from $131{,}072$, `pOmega` executes the exact 15-transition trace `pOmegaTrace`, reaches the halting state $22$ at step $15$, and never halts at any earlier step $k < 15$.
+:::
+
+::: {.proof}
+Large natural numbers are encoded as least-significant-digit-first decimal lists (`decimalValue`), paired with a digit-by-digit Euclidean division routine `divideDigits` satisfying `d * quotient + remainder = decimalValue digits` (`divideDigits_sound`). Whenever a rule's denominator leaves remainder $0$ and the target state yields the same exact quotient upon division by its numerator, `fire_decimal` builds the relational `Step` firing witness; whenever a nonzero remainder satisfies $0 < r < d$, uniqueness of Euclidean remainders (`skip_decimal`) refutes divisibility and certifies skipping that rule. Composing the fifteen step witnesses establishes `Follows pOmega pOmegaTrace pOmegaStart`; induction along the `Follows` chain (`run_follows`) via `Step.sound` proves `run pOmega 15 pOmegaStart = pOmegaFinal`; applying `skip_decimal` to all four denominators ($49, 25, 9, 4$) at `d22` proves `Halts pOmega pOmegaFinal`. Finally, induction along any valid trace (`running_before_trace_end`) shows that every iterate $k < 15$ admits an active outgoing `Step`, so by `Step.sound` and `halts_iff` ([@thm-ch16-scalar-fractran-semantics]) `step` returns `.some` rather than `.none`, yielding `¬ Halts pOmega (run pOmega k pOmegaStart)`. Every step stays strictly within `OmegaInit` and `OmegaMath`. The full proof is checked by the Lean kernel.
 :::
 
 ## 16.2 Non-Abelian $\Omega$-FRACTRAN Spinor Machines and Exact Divisibility Gates {#sec-om-ch16-omega-fractran-spinor-gate}
@@ -180,7 +201,7 @@ $$
 A \;=\; \begin{pmatrix} a & b \\ c & d \end{pmatrix}, \qquad B \;=\; \begin{pmatrix} e & f \\ g & h \end{pmatrix} \;\in\; \mathrm{Mat}_2(\mathbb{Z}),
 $$
 
-define the trace $\operatorname{tr}(A) := a + d$, determinant $\det(A) := ad - bc$, identity $I := \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$, and adjugate $\operatorname{adj}(A) := \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$. Without appealing to eigenvalues, algebraic closure, or basis selection, pure polynomial expansion establishes four universal identities over $\mathbb{Z}$ (and indeed over any commutative ring, `hand derivation`):
+define the trace $\operatorname{tr}(A) := a + d$, determinant $\det(A) := ad - bc$, identity $I := \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$, and adjugate $\operatorname{adj}(A) := \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$. Without appealing to eigenvalues, algebraic closure, or basis selection, pure integer polynomial expansion exhibits four universal identities over $\mathbb{Z}$:
 
 1. **Trace cyclicity**:
 
@@ -211,10 +232,10 @@ define the trace $\operatorname{tr}(A) := a + d$, determinant $\det(A) := ad - b
 
 This two-line polynomial identity connects integer quaternion spinors directly to matrix computation. First, any integer quaternion $q = w + x\mathbf{i} + y\mathbf{j} + z\mathbf{k}$ and its conjugate $\bar{q} = w - x\mathbf{i} - y\mathbf{j} - z\mathbf{k}$ obey $q + \bar{q} = 2w$ and $q\bar{q} = \|q\|^2$, satisfying the exact mirror characteristic equation $q^2 - 2w\,q + \|q\|^2 = 0$: the matrix adjugate $\operatorname{adj}(A)$ is the exact $2\times 2$ twin of quaternion conjugation $\bar{q}$. Second, as formally frozen modulo $5$ in [@thm-ch14-hurwitz-mod5-splitting] of Chapter 14 (where $2^2 \equiv -1 \pmod 5$), the splitting map $\mathbf{i} \mapsto \begin{pmatrix} 2 & 0 \\ 0 & -2 \end{pmatrix}$, $\mathbf{j} \mapsto \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$ sends integer quaternions homomorphically into $\mathrm{Mat}_2(\mathbb{F}_5)$, matching squared norm with determinant and $2w$ with trace, and translating the modulo-$5$ divisibility gate on `psiXY` versus `psiYX` directly into a $2\times 2$ zero-matrix test.
 
-Of the four laws above, trace cyclicity, the bilateral adjugate identities, and the universal Cayley–Hamilton identity are formally frozen inside the zero-axiom bare-CIC library `OmegaInit` and `OmegaMath` (`axioms: []`), while determinant multiplicativity $\det(AB) = \det(A)\det(B)$ remains an explicit polynomial **`hand derivation`** in this chapter:
+All four $2\times 2$ integer matrix laws above—trace cyclicity, determinant multiplicativity, the bilateral adjugate identities, and the universal Cayley–Hamilton identity—are formally frozen inside the zero-axiom bare-CIC library `OmegaInit` and `OmegaMath` (`axioms: []`):
 
-::: {.theorem #thm-ch16-mat2-cayley-hamilton title="Zero-Axiom Trace Cyclicity, Adjugate Identities, and Cayley–Hamilton for 2×2 Integer Matrices" lean="D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.trace_mul_comm D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.adjugate_identities D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.cayley_hamilton"}
-Over the $2\times 2$ integer matrix structure `Omega.Mat2` in the zero-axiom library `OmegaInit` and `OmegaMath` (`axioms: []`), with product `A.mul B`, scalar multiplication `Mat2.scale`, identity `Mat2.one`, zero matrix `Mat2.zero`, trace `A.trace := a + d`, determinant `A.det := ad - bc`, and adjugate `A.adj := ⟨d, -b, -c, a⟩`, all three identities hold universally for all `A, B : Mat2`:
+::: {.theorem #thm-ch16-mat2-cayley-hamilton title="Zero-Axiom Trace Cyclicity, Determinant Multiplicativity, Adjugate Identities, and Cayley–Hamilton for 2×2 Integer Matrices" lean="D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.trace_mul_comm D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.mat2_det_mul D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.adjugate_identities D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.cayley_hamilton"}
+Over the $2\times 2$ integer matrix structure `Omega.Mat2` in the zero-axiom library `OmegaInit` and `OmegaMath` (`axioms: []`), with product `A.mul B`, scalar multiplication `Mat2.scale`, identity `Mat2.one`, zero matrix `Mat2.zero`, trace `A.trace := a + d`, determinant `A.det := ad - bc`, and adjugate `A.adj := ⟨d, -b, -c, a⟩`, all four identities hold universally for all `A, B : Mat2`:
 
 1. **Trace cyclicity** (`trace_mul_comm`):
 
@@ -222,7 +243,13 @@ Over the $2\times 2$ integer matrix structure `Omega.Mat2` in the zero-axiom lib
    (A.\mathrm{mul}\;B).\mathrm{trace} = (B.\mathrm{mul}\;A).\mathrm{trace};
    $$
 
-2. **Bilateral adjugate identities** (`adjugate_identities`):
+2. **Determinant multiplicativity** (`mat2_det_mul`):
+
+   $$
+   (A.\mathrm{mul}\;B).\mathrm{det} = A.\mathrm{det}.\mathrm{mul}\;B.\mathrm{det};
+   $$
+
+3. **Bilateral adjugate identities** (`adjugate_identities`):
 
    $$
    A.\mathrm{mul}\;A.\mathrm{adj} = \mathrm{Mat2.scale}\;A.\mathrm{det}\;\mathrm{Mat2.one}
@@ -230,7 +257,7 @@ Over the $2\times 2$ integer matrix structure `Omega.Mat2` in the zero-axiom lib
    A.\mathrm{adj}.\mathrm{mul}\;A = \mathrm{Mat2.scale}\;A.\mathrm{det}\;\mathrm{Mat2.one};
    $$
 
-3. **Universal Cayley–Hamilton identity** (`cayley_hamilton`):
+4. **Universal Cayley–Hamilton identity** (`cayley_hamilton`):
 
    $$
    \bigl((A.\mathrm{mul}\;A).\mathrm{sub}\;(\mathrm{Mat2.scale}\;A.\mathrm{trace}\;A)\bigr).\mathrm{add}\;(\mathrm{Mat2.scale}\;A.\mathrm{det}\;\mathrm{Mat2.one}) = \mathrm{Mat2.zero}.
@@ -239,7 +266,7 @@ Over the $2\times 2$ integer matrix structure `Omega.Mat2` in the zero-axiom lib
 :::
 
 ::: {.proof}
-For the first identity, expanding both traces to $(ae + bg) + (cf + dh)$ and $(ea + fc) + (gb + hd)$ matches immediately by integer commutativity and associativity (`Int.add_add_add_comm` and `Int.mul_comm`). For the second identity, matrix extensionality `Mat2.ext` checks all four coordinates of both $A\operatorname{adj}(A)$ and $\operatorname{adj}(A)A$: off-diagonal entries cancel by additive inverses to $0 = \det(A)\cdot 0$, and diagonal entries reduce to $ad - bc = \det(A)\cdot 1$. For the third identity, `Mat2.ext` reduces the off-diagonal coordinates via $(ab + bd) - (a + d)b + \det(A)\cdot 0 = 0$ and the diagonal coordinates via $((a^2 + bc) - (a + d)a) + (ad - bc) = 0$ (and symmetrically with $a, d$ swapped) using only integer distributivity and additive inverses in `OmegaInit` and `OmegaMath`. The full proof is checked by the Lean kernel.
+For the first identity, expanding both traces to $(ae + bg) + (cf + dh)$ and $(ea + fc) + (gb + hd)$ matches immediately by integer commutativity and associativity (`Int.add_add_add_comm` and `Int.mul_comm`). For the second identity, expanding both $(ae + bg)(cf + dh)$ and $(af + bh)(ce + dg)$ via the four-term distributive lemma `expand`, cancelling the shared cross term $(ac)(ef) + (bd)(gh)$ via `sub_common_left`, and factoring the remaining four terms $(ad)(eh) + (bc)(fg) - \bigl((ad)(fg) + (bc)(eh)\bigr)$ into $(ad - bc)(eh - fg) = A.\mathrm{det}\cdot B.\mathrm{det}$ completes the proof purely in integer ring arithmetic. For the third identity, matrix extensionality `Mat2.ext` checks all four coordinates of both $A\operatorname{adj}(A)$ and $\operatorname{adj}(A)A$: off-diagonal entries cancel by additive inverses to $0 = \det(A)\cdot 0$, and diagonal entries reduce to $ad - bc = \det(A)\cdot 1$. For the fourth identity, `Mat2.ext` reduces the off-diagonal coordinates via $(ab + bd) - (a + d)b + \det(A)\cdot 0 = 0$ and the diagonal coordinates via $((a^2 + bc) - (a + d)a) + (ad - bc) = 0$ (and symmetrically with $a, d$ swapped) using only integer distributivity and additive inverses in `OmegaInit` and `OmegaMath`. The full proof is checked by the Lean kernel.
 :::
 
 ::: {.example #ex-om-ch16-mat2-numeric-audit title="Explicit Integer Check of the Four Mat2 Ring Laws"}
@@ -251,7 +278,13 @@ Take $A = \begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$ and $B = \begin{pmatrix}
 :::
 
 ::: {.remark #rem-om-ch16-literature-boundaries title="Literature Results and Epistemic Boundaries"}
-**Literature results, not formalized in this book.** Classical scalar FRACTRAN and its Turing completeness via two-counter machines are due to J. H. Conway ("FRACTRAN: A Simple Universal Programming Language for Arithmetic," in *Open Problems in Communication and Computation*, Springer, 1987, pp. 4–26) and M. L. Minsky (*Ann. of Math.* **74**, 437–455, 1961); arithmetic factorization in the maximal Hurwitz order $\mathcal{H}(\mathbb{Z})$ originates with A. Hurwitz (*Nachr. Ges. Wiss. Göttingen*, 313–340, 1896). Within this chapter, [@thm-om-ch16-signed-prime-ledger] and [@thm-om-ch16-binary-name-compare] are frozen **`LEAN ✓`** declarations on `trureturing@dev`, while [@thm-ch16-scalar-fractran-semantics], [@thm-ch16-quaternion-fractran-gate], and [@thm-ch16-mat2-cayley-hamilton] anchor scalar FRACTRAN exact semantics and halting stability, non-Abelian quaternion gate determinism and modulo-$5$ `psiXY`/`psiYX` word-order separation, and `Mat2` trace cyclicity, bilateral adjugate identities, and Cayley–Hamilton as zero-axiom frozen **`LEAN ✓`** declarations in `OmegaInit` $+$ `OmegaMath` (`axioms: []`); the 16-state trace of $P_\Omega$, the coordinatewise expansion and companion `gateUnwindX` check in [@ex-om-ch16-nonabelian-stack-proof], and determinant multiplicativity $\det(AB) = \det(A)\det(B)$ together with the numerical check [@ex-om-ch16-mat2-numeric-audit] are exact integer **`hand derivations`**; and interpreting non-Abelian $\Omega$-FRACTRAN as the observer's native ISA is marked **`MODEL`**.
+**Literature results, not formalized in this book.** Classical scalar FRACTRAN and its Turing completeness via two-counter machines are due to J. H. Conway ("FRACTRAN: A Simple Universal Programming Language for Arithmetic," in *Open Problems in Communication and Computation*, Springer, 1987, pp. 4–26) and M. L. Minsky (*Ann. of Math.* **74**, 437–455, 1961); arithmetic factorization in the maximal Hurwitz order $\mathcal{H}(\mathbb{Z})$ originates with A. Hurwitz (*Nachr. Ges. Wiss. Göttingen*, 313–340, 1896). Within this chapter, [@thm-om-ch16-signed-prime-ledger] and [@thm-om-ch16-binary-name-compare] are frozen **`LEAN ✓`** declarations on `trureturing@dev`, while [@thm-ch16-scalar-fractran-semantics], [@thm-ch16-p-omega-halts-at-22], [@thm-ch16-quaternion-fractran-gate], and [@thm-ch16-mat2-cayley-hamilton] anchor scalar FRACTRAN exact semantics and halting stability, the exact 15-transition trace of $P_\Omega$ from $2^{17}$ first halting at $22$, non-Abelian quaternion gate determinism and modulo-$5$ `psiXY`/`psiYX` word-order separation, and all four `Mat2` laws (trace cyclicity, determinant multiplicativity, bilateral adjugate identities, and Cayley–Hamilton) as zero-axiom frozen **`LEAN ✓`** declarations in `OmegaInit` $+$ `OmegaMath` (`axioms: []`); the five-prime exponent decomposition in [@ex-om-ch16-sixteen-state-fractran-trace], the coordinatewise expansion and companion `gateUnwindX` check in [@ex-om-ch16-nonabelian-stack-proof], and the concrete numerical check [@ex-om-ch16-mat2-numeric-audit] are exact integer **`hand derivations`**; and interpreting non-Abelian $\Omega$-FRACTRAN as the observer's native ISA is marked **`MODEL`**.
+:::
+
+Test the chapter's scalar rational execution and $2\times 2$ integer matrix algebra side by side in the interactive lab card below: step through all $15$ active divisibility transitions of Conway's four-gate program $P_\Omega$ from $2^{17} = 131{,}072$ to its halting state $22$, and edit integer entries of $A, B \in \mathrm{Mat}_2(\mathbb{Z})$ live to verify trace cyclicity, determinant multiplicativity, bilateral adjugate identities, and universal Cayley–Hamilton cancellation $A^2 - \operatorname{tr}(A)A + \det(A)I = 0$.
+
+::: {.viz src="adelic-arithmetic-observer-lab" preset="scalar-fractran-and-mat2" height="520"}
+**Scalar FRACTRAN trace and `Mat2` Cayley–Hamilton lab card (`scalar-fractran-and-mat2`).** Step beat by beat through the $15$ active divisibility transitions of $P_\Omega = [\frac{11}{49}, \frac{7}{25}, \frac{5}{9}, \frac{3}{4}]$ carrying $131{,}072 = 2^{17}$ to its first idempotent halting state $22 = 2 \cdot 11$ across the five prime registers ([@thm-ch16-scalar-fractran-semantics], [@thm-ch16-p-omega-halts-at-22], [@ex-om-ch16-sixteen-state-fractran-trace]), and adjust integer entries of $A, B \in \mathrm{Mat}_2(\mathbb{Z})$ live to verify trace cyclicity $\operatorname{tr}(AB) = \operatorname{tr}(BA)$, determinant multiplicativity $\det(AB) = \det(A)\det(B)$, bilateral adjugate identities $A\operatorname{adj}(A) = \det(A)I$, and the zero-axiom Cayley–Hamilton identity $A^2 - \operatorname{tr}(A)A + \det(A)I = \mathbf{0}$ ([@thm-ch16-mat2-cayley-hamilton], [@ex-om-ch16-mat2-numeric-audit]).
 :::
 
 Equipped with a native computational language that fuses orthogonal prime registers with a non-Abelian spinor stack, we now step from the instruction set to the self-contained observer as a whole: when every receivable signal lies inside a boundaryless totality, time, space, gravitational gradients, and inference emerge from a single rational fidelity gradient.

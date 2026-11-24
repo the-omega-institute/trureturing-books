@@ -162,4 +162,10 @@ The architectural contrast across the three formalization routes is stark:
 | **Geometric Singularities** | Uncoordinated symbols; boundary omission breaks soundness | Managed via smooth charts, limit filters, and quotients | Homogeneous canonical integer carriers keep denominators strictly positive everywhere |
 :::
 
+The diagram below maps these three formalization routes alongside the three Mother Laws of `AXIOM-Ω`, showing at a glance how the zero-axiom bare CIC floor separates cleanly from both the classical three-axiom stack and the unchecked custom `axiom` trap.
+
+::: {.figure src="ch01-axiom-omega-cic"}
+**Logical hierarchy contrasting the three formalization routes with the three Mother Laws of `AXIOM-Ω`.** The figure contrasts the bare CIC plus `OmegaMath` zero-axiom stack (empty axiom closure $\varnothing$, natively executable), the classical `Mathlib.Real` stack (relying on `{propext, Classical.choice, Quot.sound}`), and the unchecked custom `axiom` trap (where an unguarded zero boundary collapses to `False`), while charting how the computable typeclass `class OmegaSpace` packages Law I (origin-free cancellation and ternary associativity), Law II (bilateral invariance and rational Gram positivity), and Law III (minimal noncommutativity self-lock); see [@def-ch01-zero-axiom-core], [@def-ch01-axiom-omega], and [@rem-ch01-three-route-comparison].
+:::
+
 Our logical floor and typeclass contract are now fixed. Rather than leaping straight into three-dimensional non-Abelian geometry, let us build our first zero-axiom geometric carrier in one dimension—abolishing the open real line $\mathbb{R}$ and bending homogeneous integer pairs $\mathbb{QP}^1$ into a seamless rational circle with no tear at $\infty$.

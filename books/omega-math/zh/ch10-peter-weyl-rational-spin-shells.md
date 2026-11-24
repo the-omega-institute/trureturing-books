@@ -4,7 +4,7 @@
 
 第三卷（[第七章](ch07-second-order-jet-calculus.md)–[第九章](ch09-telescoping-stokes-and-arc-manifold.md)）已经清除了微积分中的极限幽灵：在二阶幂零射流环与流群望远镜求和下，微分与积分都归约为有限步有理代数。从本章开始，第四卷进入调和分析的核心战场——**在无无穷、无超越数的三维三元数流群 $\mathbb{T}_3(\mathbb{Q})$ 上重建傅里叶变换**。
 
-经典教材把傅里叶变换奉为分析学的万用钥匙，却鲜少追问一个谱系学问题：为什么我们在展开周期或局域波场时，要默认站在一条两端无限敞开的平直实数轴上，去吞咽 $\pi$、$e$、连续无界频率与截断振铃？答案与第一卷的诊断如出一辙——平直傅里叶变换只是把弯曲闭合的三元球面强行摊平后的切线近似。一旦把函数空间放回母公理 `AXIOM-Ω` 锁定的紧致无外三维球面 $\mathbb{T}_3 \cong S^3(1)$，彼得—魏尔（Peter–Weyl）分解立刻将频谱量子化为离散的半整数自旋壳层，而所有整数自旋的球面特征标都直接坍缩为关于有理保真度 $\kappa$ 的整系数切比雪夫多项式；其中的佩尔律、倍阶律、全谱偶奇壳消根号恒等式、自旋 $j = 2$ 二次特征标以及 $5d^{10}/5d^8$ 轨道角向四极平衡，均已在严格零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成。
+经典教材把傅里叶变换奉为分析学的万用钥匙，却鲜少追问一个谱系学问题：为什么我们在展开周期或局域波场时，要默认站在一条两端无限敞开的平直实数轴上，去吞咽 $\pi$、$e$、连续无界频率与截断振铃？答案与第一卷的诊断如出一辙——平直傅里叶变换只是把弯曲闭合的三元球面强行摊平后的切线近似。一旦把函数空间放回母公理 `AXIOM-Ω` 锁定的紧致无外三维球面 $\mathbb{T}_3 \cong S^3(1)$，彼得—魏尔（Peter–Weyl）分解立刻将频谱量子化为离散的半整数自旋壳层，而所有整数自旋的球面特征标都直接坍缩为关于有理保真度 $\kappa$ 的整系数切比雪夫多项式；其中的佩尔律、倍阶律、全谱偶奇壳消根号恒等式、自旋 $j = 2$ 二次特征标、全阶整数自旋克莱布施—高登乘积律以及 $5d^{10}/5d^8$ 轨道角向四极平衡，均已在严格零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成。
 
 ---
 
@@ -180,17 +180,9 @@ $$
 
 由归纳假设，右端正是 $(4c^2 - 2)\,E_n(c^2) - E_{n-1}(c^2) = E_{n+1}(c^2)$。归纳完成！这意味着**全套整数自旋壳层 $j = 0, 1, 2, 3, \dots$ 的球面特征标 $\chi_j(\kappa) = E_j(\kappa)$ 统统是纯整系数有理多项式，平方根 $\sqrt{\kappa}$ 在全谱范围内恒等消去**。
 
-顺带还能用同样的三行归纳证得**整数自旋克莱布施—高登乘积律**：对一切 $m, n \in \mathbb{N}$，
-
-$$
-E_m(\kappa)\,E_n(\kappa) \;=\; \sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa).
-$$
-
-验证只需先看 $m = 1$：因 $E_1(\kappa) = 4\kappa - 1 = (4\kappa - 2) + 1$，由递推立得 $E_1 E_n = (4\kappa - 2)E_n + E_n = E_{n+1} + E_n + E_{n-1}$（$n \ge 1$），而 $n = 0$ 时 $E_1 E_0 = E_1$，正是从 $\lvert n - 1\rvert$ 到 $n + 1$ 的和；一般情形由 $E_{m+1} E_n = (E_1 - 1)E_m E_n - E_{m-1} E_n$ 的望远镜消去一步归纳即成。下一章我们将看到，这条纯多项式乘积律正是无 $\pi$ 哈尔正交性的总开关。
-
 至于半整数自旋壳 $j = n + \frac{1}{2}$：单个特征标 $\chi_{n+1/2}(q) = U_{2n+1}(c)$ 虽含一个整体因子 $c$（以忠实记录双覆叠 $q \mapsto -q$ 的正负号），但其平方核 $\chi_{n+1/2}^2(\kappa) = U_{2n+1}(\sqrt{\kappa})^2 \in \mathbb{Z}[\kappa]$ 仍是纯整系数多项式；而且在齐次整数三元数 $p \in \mathbb{Z}^4 \setminus \{0\}$ 上，任何整数或半整数自旋的双侧彼得—魏尔壳投影核 $\bigl(D^j(p) \otimes D^j(p)^\dagger\bigr) / \lVert p\rVert^{4j}$ 的分母永远是模方的偶次幂 $\lVert p\rVert^{4j} \in \mathbb{Z}_{\ge 1}$，全程零开方、零超越数。
 
-上述切比雪夫母引擎的五条核心恒等式——有号佩尔关系、第一类倍阶律、全体整数自旋壳的普遍消根号律、全体半整数自旋壳的有号因子分解，以及有理自旋 $j = 2$ 特征标公式——均已在严格零公理库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成：
+上述切比雪夫母引擎的五条单壳核心恒等式——有号佩尔关系、第一类倍阶律、全体整数自旋壳的普遍消根号律、全体半整数自旋壳的有号因子分解，以及有理自旋 $j = 2$ 特征标公式——均已在严格零公理库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成：
 
 ::: {.theorem #thm-ch10-zero-axiom-chebyshev-shells title="零公理切比雪夫佩尔律、倍阶律、偶奇自旋壳消根号与自旋二特征标" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.pell_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.chebyshev_doubling D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.even_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.odd_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.spin_two_character"}
 在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，记整数环上的第一、二类切比雪夫多项式为 $T_n(x), U_n(x)$，偶次壳多项式为 $E_n(k)$，奇次壳因子多项式为 $\operatorname{oddFactor}_n(k)$，则以下五条定理严格成立：
@@ -231,8 +223,24 @@ $$
 五条命题均在 `module` $+$ `prelude` 隔离环境中直接由抽象交换环上的切比雪夫三项递推归约证毕，并分别实例化至整数环 `intRing` 与有限有理环 `rationalRing`。第 1 款借关系 $T_{n+1}(x) = U_{n+1}(x) - x U_n(x)$ 将左端改写为二阶递推不变量 $U_{n+1}(x)^2 - 2x U_{n+1}(x) U_n(x) + U_n(x)^2$，对 $n$ 归纳立得其恒等于初值 $1$；第 2 款由和差复合律与第 1 款归纳锁死 $T_{2n}(x) = 2 T_n(x)^2 - 1$；第 3 款按前文两步递推消去奇下标项归纳证得 $E_n(x^2) = U_{2n}(x)$；第 4 款由 $U_{2n+1}(x) = 2x U_{2n}(x) - U_{2n-1}(x)$ 配合第 3 款归纳抽出公因子 $x$；第 5 款在 `rationalRing` 中直接展开 $E_2(k) = (4k - 2)(4k - 1) - 1$ 并在 `Omega.FiniteRatio.Equivalent` 下化为 $16k^2 - 12k + 1$。完整证明由 Lean 内核检查。
 :::
 
+更进一步，不止单座自旋壳的内部结构，任意两座整数自旋壳之间的**全阶克莱布施—高登（Clebsch–Gordan）特征标融合律**——也就是 §10.2 低阶倍频融合律在全部整数自旋 $(m, n) \in \mathbb{N}^2$ 上的普遍推广——同样已作为纯有理系数表恒等式在零公理库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成。
+
+::: {.theorem #thm-ch10-even-char-product-sum title="零公理全阶整数自旋特征标乘积律" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.evenChar_product_sum"}
+在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，将 [@def-ch10-even-chebyshev] 递推生成的第 $r$ 阶偶次切比雪夫特征多项式 $E_r(\kappa)$ 按 $\kappa$ 的升幂表为有理系数表 `evenCharPoly r : CoefficientList`（对应 $2r$ 次切比雪夫特征标 $U_{2r}(\sqrt{\kappa})$），并记 `evenCharProductSum m n` 为闭区间和 $\sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa)$ 的有理系数表（起点为 `gap m n` $= \lvert m - n\rvert$，跨度为 `span m n` $= 2\min(m, n)$，终点 $\lvert m - n\rvert + 2\min(m, n) = m + n$）。则对一切自然数 $m, n \in \mathbb{N}$，多项式卷积乘积与该有限特征标和在逐次幂系数等价关系 `Poly.RatioSame`（缺省高次项视作 $0$，每阶系数满足 `Omega.IntRatio.Equivalent`）下严格相等：
+
+$$
+E_m(\kappa)\,E_n(\kappa) \;\equiv\; \sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa).
+$$
+:::
+
+::: {.proof}
+先在整系数多项式列表 `Poly` 上处理有序情形 $n = d + m$（此时 $\lvert m - n\rvert = d$ 且 $m + n = d + 2m$），对 $m$ 施以相邻双阶归纳。基步 $m = 0$ 为平凡乘积 $E_0 E_d = E_d$；基步 $m = 1$ 将 $E_1(\kappa) = 4\kappa - 1$ 改写为 $(4\kappa - 2) + 1$，由定义递推立得 $E_1 E_{d+1} = E_{d+2} + E_{d+1} + E_d$。归纳步将 $E_{m+2} = (4\kappa - 2)E_{m+1} - E_m$ 乘以 $E_n$：由线性递推算子对连续和的作用规律，$(4\kappa - 2)\sum_{r = d+1}^{d+2m+1} E_r = \sum_{r = d+2}^{d+2m+2} E_r + \sum_{r = d}^{d+2m} E_r$，再减去下阶归纳假设 $\sum_{r = d+2}^{d+2m} E_r$，重叠中段望远镜式抵消，恰余 $\sum_{r = d}^{d+2m+2} E_r$。对一般 $m, n \in \mathbb{N}$，由自然数差值二分法必有 $n = d + m$ 或 $m = d + n$，借多项式乘法交换律与两端点 $\lvert m - n\rvert, m + n$ 的对称性化归至有序情形；最后借 `Poly.ratios_mul` 将整系数逐项相等 `Poly.Same` 提升为 `CoefficientList` 上的 `Poly.RatioSame`。完整证明由 Lean 内核检查。
+:::
+
+在[第十一章](ch11-pi-free-haar-integration.md)中，这条零公理全阶多项式乘积律将直接充当总开关，一步锁死全体整数自旋壳层上的无 $\pi$ 彼得—魏尔正交归一性。
+
 ::: {.example #ex-ch10-spin-character-table title="低阶自旋特征核在典范有理地标上的精确求值表"}
-由 [@def-ch10-even-chebyshev] 与 [@thm-ch10-zero-axiom-chebyshev-shells] 逐项展开前四阶整数自旋核与前两阶半整数平方核：
+由 [@def-ch10-even-chebyshev]、[@thm-ch10-zero-axiom-chebyshev-shells] 与 [@thm-ch10-even-char-product-sum] 逐项展开前四阶整数自旋核与前两阶半整数平方核：
 
 - $E_0(\kappa) = 1$，$E_1(\kappa) = 4\kappa - 1$，
 - $E_2(\kappa) = (4\kappa - 2)(4\kappa - 1) - 1 = 16\kappa^2 - 12\kappa + 1$，
@@ -307,6 +315,12 @@ $j = 0, \frac{1}{2}, 1$ 之后的第一座高阶整数自旋壳就是五维四�
 按七分之一分母对五条实 $d$ 轨道对角元直接执行精确整数求和：沿 $x$ 轴分子和为 $(-2) + 2 + (-4) + 2 + 2 = 0$，沿 $y$ 轴为 $(-2) + (-4) + 2 + 2 + 2 = 0$，沿 $z$ 轴为 $4 + 2 + 2 + (-4) + (-4) = 0$，遂在 `Omega.IntRatio.Equivalent` 下逐轴证毕 `full_orbital_quadrupole`，并由双占据加倍立得 `closedShell a` $\equiv 0$。从零闭壳中减去双占据轨道对角贡献 $(+\frac{4}{7}, +\frac{4}{7}, -\frac{8}{7})$，即得精确三元组 $(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7})$，且分子和 $(-4) + (-4) + 8 = 0$ 验证无迹性。完整证明由 Lean 内核检查。
 :::
 
+下图把本章两条主线合绘于同一视野：左侧呈现偶次切比雪夫整数自旋特征壳 $E_0(\kappa), E_1(\kappa), E_2(\kappa), E_3(\kappa)$ 在 $[0, 1]$ 上的无根号有理曲线与典范节点，右侧直观对照五维 $j = 2$ 壳层中 $5d^{10}$ 闭壳各轴归零与 $5d^8$ 无迹四极对角张量 $\bigl(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7}\bigr)$ 的精确有理平衡。
+
+::: {.figure src="ch10-chebyshev-spin-shells"}
+**偶次切比雪夫整数自旋壳与 $5d^{10}/5d^8$ 四极张量平衡。** 左侧在保真度区间 $\kappa \in [0, 1]$ 上绘出纯整系数偶次切比雪夫特征标 $E_n(\kappa) = U_{2n}(\sqrt{\kappa})$（[@def-ch10-even-chebyshev]、[@thm-ch10-zero-axiom-chebyshev-shells]），标明单位锚 $\kappa = 1$ 处的维数阶梯 $1, 3, 5, 7$ 与三拍节点 $\kappa = \frac{1}{4}$ 处的 $E_1(\frac{1}{4}) = 0$；右侧对照五条实 $d$ 轨道在满壳 $5d^{10}$ 中的三轴精确归零与抽去双占据 $d_{x^2-y^2}$ 轨道后残留的 $5d^8$ 无迹有理四极对角元 $\bigl(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7}\bigr)$（[@thm-ch10-zero-axiom-orbital-quadrupole]）。
+:::
+
 ::: {.example #ex-ch10-d10-d8-quadrupole-ledger title="五维 $j = 2$ 壳层角向四极期望账本：$d^{10}$ 归零与 $d^8$ 精确平衡"}
 在笛卡尔方向余弦 $(n_x, n_y, n_z)$ 上，五条归一化实 $d$ 谐波关于角向四极算符 $\widehat{Q}_{ab} = 3n_a n_b - \delta_{ab}$ 的非对角元全为 $0$（手算推导），其对角元 $(\langle \widehat{Q}_{xx}\rangle, \langle \widehat{Q}_{yy}\rangle, \langle \widehat{Q}_{zz}\rangle)$ 精确构成下述支撑 [@thm-ch10-zero-axiom-orbital-quadrupole] 的纯有理账本：
 
@@ -329,6 +343,12 @@ $j = 0, \frac{1}{2}, 1$ 之后的第一座高阶整数自旋壳就是五维四�
    $$
 
 单个 $5d^8$ 配位中心具有本征强平面各向异性；唯有对无择优取向的多晶粉末在旋转群 $\mathbb{T}_3$ 上执行全域哈尔平均，无迹 $j = 2$ 壳层才正反相消归零 $\langle\mathbf{Q}_{\mathrm{phys}}(5d^8)\rangle_{\mathrm{Haar}} = \mathbf{0}_{3\times 3}$，在宏观上恢复统计各向同性。
+:::
+
+在下面的交互实验卡中，读者可以在有理保真度区间 $\kappa \in [0, 1]$ 上滑动或点选典范地标，实时检验消根号恒等式 $E_n(\kappa) = U_{2n}(\sqrt{\kappa})$ 与全阶整数自旋克莱布施—高登融合展开 $E_m(\kappa)E_n(\kappa) = \sum_{r=\lvert m-n\rvert}^{m+n} E_r(\kappa)$（[@thm-ch10-zero-axiom-chebyshev-shells]、[@thm-ch10-even-char-product-sum]），并在 $j = 2$ 四极面板中切换轨道占据态，亲手核对 $5d^{10}$ 闭壳归零与 $5d^8$ 无迹对角三元组 $\bigl(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7}\bigr)$（[@thm-ch10-zero-axiom-orbital-quadrupole]）。
+
+::: {.viz src="dfinite-algebraic-schur-lab" preset="peter-weyl-even-chebyshev" height="520"}
+**彼得—魏尔偶次切比雪夫自旋壳与四极平衡实验卡（`peter-weyl-even-chebyshev`）。** 沿有理保真度 $\kappa$ 扫过偶次切比雪夫核 $E_n(\kappa) = U_{2n}(\sqrt{\kappa})$ 的曲线与典范有理节点（[@ex-ch10-spin-character-table]），任选两座整数自旋壳 $(m, n)$ 实时展开融合乘积 $\sum_{r=\lvert m-n\rvert}^{m+n} E_r(\kappa)$，并在五维 $j = 2$ 轨道账本中比对 $5d^{10}$ 全轴归零与 $5d^8$ 无迹四极对角元 $\bigl(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7}\bigr)$（[@thm-ch10-zero-axiom-orbital-quadrupole]、[@ex-ch10-d10-d8-quadrupole-ledger]）。
 :::
 
 至此，一个悬而未决的核心难题浮上水面：无论是验证彼得—魏尔特征标正交性 $\langle \chi_j, \chi_{j'}\rangle = \delta_{jj'}$，计算三元流群卷积期望 $\mathbb{E}_{\mathbf{x},\mathbf{y}}[\cdots]$，还是证明 $5d^8$ 四极张量的球面旋转平均严格为零，我们都在反复调用**三维球面 $\mathbb{T}_3$ 上的全局哈尔期望 $\mathbb{E}_{\mathbb{T}_3}[\cdot]$**。按传统教科书的做法，求球面平均非得写出含 $\pi$ 的球面积分 $\frac{1}{2\pi^2}\int_{S^3}\cdots\,d\sigma$ 与无穷黎曼和极限不可。果真如此吗？下一章将揭晓三维球面最惊人的算术奇迹：在维度 $3$ 上，$\pi^2$ 在分子与分母之间百分之百精确抵消，整个三维球面哈尔积分彻底化为一条有限整数阶乘公式。

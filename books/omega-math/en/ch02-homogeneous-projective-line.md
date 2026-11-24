@@ -199,6 +199,12 @@ This single identity turns transcendental angle addition into mental integer ari
 3. **Finite Farey horizon counts**: coupling $\mathbb{QP}^1$ with the precision contract $\varepsilon_{\mathrm{self}} = 1/M$ from [Chapter 1](ch01-axiom-omega-and-cic.md), the horizon $M = 1$ contains exactly the $4$ cardinal anchors $\{[0:1], [1:1], [1:0], [-1:1]\}$, while $M = 2$ contains exactly $8$ coprime points $\{[0:1], [1:2], [1:1], [2:1], [1:0], [-2:1], [-1:1], [-1:2]\}$. In general, writing $\Phi(M) = \sum_{j=1}^M \varphi(j)$ for the totient summatory function, $\mathbb{QP}^1_{\le M}$ contains exactly $4\Phi(M)$ rational points—exactly $184$ points at $M = 12$ (`ARGUED`).
 :::
 
+Try testing this singularity-free circle arithmetic live in the interactive card below: drag the integer sliders for the homogeneous pair $[P : Q]$ across the Past anchor $[0 : 1]$, the Pythagorean pair $[1 : 2]$, the Present self-dual anchor $[1 : 1]$, and straight through the Future antipodal pole $[1 : 0]$ where affine slope would crash, and watch complementary conservation $\kappa + s = 1$ together with the rational Cayley identity $X^2 + Y^2 = 1/1$ hold identically at every nonzero integer pair.
+
+::: {.viz src="ternion-cayley-lab" preset="qp1-antipodal-circle" height="520"}
+**Interactive rational circle closure on $\mathbb{QP}^1$.** Drag the integer sliders for $[P : Q]$ through $[0 : 1]$, $[1 : 1]$, and the antipodal pole $[1 : 0]$ to watch exact fraction arithmetic hold $\kappa(P, Q) + s(P, Q) = 1$ and $X^2 + Y^2 = 1/1$ identically (with $X = \operatorname{cayleyX}(P, Q)$ and $Y = \operatorname{cayleyY}(P, Q)$), with zero division by zero and no square roots; formal zero-axiom proofs are established in [@thm-ch02-kappa-add-spread], [@thm-ch02-cayley-unit], and [@thm-ch02-antipodal-closure].
+:::
+
 The homogeneous projective circle is already remarkably complete: zero actual infinity, zero transcendentals, zero division by zero, and six zero-axiom theorems locked in the bare kernel. Could we stop here and build all of mathematics and physics on the one-dimensional ring $\mathbb{QP}^1$?
 
 The answer is **no**. Look once more at the formula for `projectiveMul`:
