@@ -32,11 +32,11 @@
 | **概念模型与架构纲领（`MODEL`）** | 认识论框架、物理观察者诠释与跨领域结构对应 | 明确标识为建构纲领或诠释模型，不与纯数学定理混淆 |
 | **精确算术与数值核验（`NUM`）** | 手算整分数轨迹、有限可判定计算与对照数值表 | 读者可逐行徒手复算或直接交由整数算术核对 |
 
-此外，凡尚未解决的数学或物理猜想一律置入开放问题环境，绝不附加机器验证引用。本书刻意将**零公理 `OmegaInit` / `OmegaMath` 定理**与**经典 `Mathlib` 阴影锚点**清楚分开：前者构筑无公理、可计算、无实无穷的原生骨架，目前已在 `trureturing@dev` 完成全六卷冻结（覆盖 **11 个零公理 D5 模块、96 条 `axioms: []` 冻结定理**，配套 **11 条第 2 层 `OmegaShadowBridge` 单向桥接定理**）；后者则像放在实验室旁的经典刻度尺，用来精确核对我们的有理骨架经柯西完备化投影到经典实分析世界时，是否严丝合缝地落回单位四元数球面与三维叉乘代数。概念诠释（`MODEL`）、历史文献评述（`ARGUED`）与精确算术算例（`NUM`）则继续各安其位，保持透明的认识论边界。
+此外，凡尚未解决的数学或物理猜想一律置入开放问题环境，绝不附加机器验证引用。本书刻意将**零公理 `OmegaInit` / `OmegaMath` 定理**与**经典 `Mathlib` 阴影锚点**清楚分开：前者构筑无公理、可计算、无实无穷的原生骨架，现已在 `trureturing@dev` 完成全六卷冻结（覆盖 **14 个零公理 D5 模块、127 条 `axioms: []` 冻结定理**，配套 **11 条第 2 层 `OmegaShadowBridge` 单向桥接定理**；动态实时全书统计由构建系统在 [附录 B](appendix-b.md) 自动生成）；后者则像放在实验室旁的经典刻度尺，用来精确核对我们的有理骨架经柯西完备化投影到经典实分析世界时，是否严丝合缝地落回单位四元数球面与三维叉乘代数。概念诠释（`MODEL`）、历史文献评述（`ARGUED`）与精确算术算例（`NUM`）则继续各安其位，保持透明的认识论边界。
 
 ## 0.3 六卷全景导览 {#sec-om-prelude-six-volumes}
 
-全书共分六卷十八章，外加终章与零公理模块冻结索引附录，由 **11 个零公理模块共 96 条 `OmegaInit` $+$ `OmegaMath` 冻结定理**、**11 条第 2 层 `OmegaShadowBridge` 桥接定理**、**7 幅语义静态图**与四模式三维交互工作台 **`OMEGA//LAB`** 共同支撑，沿着“逻辑地基 $\to$ 球面代数 $\to$ 射流微积分 $\to$ 调和分析 $\to$ 阿代尔谱论 $\to$ 计算与内核审计”六级阶梯逐层展开。下图先给出整部专著的六卷全景路线。
+全书共分六卷十八章，外加终章与两篇速查附录（[附录 A](appendix-a.md) 零公理模块冻结索引与 [附录 B](appendix-b.md) 对照词典、六层证据总账与编译实时统计），由 **14 个零公理 D5 模块共 127 条 `OmegaInit` $+$ `OmegaMath` 冻结定理**、**11 条第 2 层 `OmegaShadowBridge` 桥接定理**、**19 幅双语定制静态图**、四座三维交互实验室（**`OMEGA//SPIN`**、**`OMEGA//LAB`**、**`OMEGA//JET`**、**`OMEGA//ARC`**，合计 16 张独立实验卡）以及双语概览演示文稿 **`overview`** 共同支撑，沿着“逻辑地基 $\to$ 球面代数 $\to$ 射流微积分 $\to$ 调和分析 $\to$ 阿代尔谱论 $\to$ 计算与内核审计”六级阶梯逐层展开。下图先给出整部专著的六卷全景路线。
 
 ::: {.figure src="om-six-volumes"}
 **从地基到内核审计的六卷路线。** 青色箭头自上而下从纯 CIC 与 AXIOM-Ω 出发，依次连起齐次有理几何、流群与球面三角、射流与斯托克斯公式、无 π 哈尔积分、阿代尔算术与赫克谱，最后到 Ω-FRACTRAN、观察者宇宙、空内核审计与实数阴影。
@@ -44,11 +44,11 @@
 
 读者既可按卷顺序通读，也可按关注领域快速定位各卷主线：
 
-- **第一卷：公理地基与齐次有理数系**（[第一章](ch01-axiom-omega-and-cic.md)–[第三章](ch03-canonical-ternion-manifold.md)）。先剥离 `Mathlib` 经典公理，在裸 CIC 上以可计算类型类写下母公理 `AXIOM-Ω` 与观察者精度契约 $\varepsilon_{\mathrm{self}} = 1/M$；再以齐次整数对 $\mathbb{QP}^1$ 驯服 $\infty$ 并用零公理内核证明六条圆周闭合定理；最后锁定三维非阿贝尔流形，构造既免 `Quot.sound` 又免根号的规范整三元数载体 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$。
-- **第二卷：无原点非线性代数与球面有理几何**（[第四章](ch04-heaps-and-lie-triple-curvature.md)–[第六章](ch06-bargmann-gram-spherical-trigonometry.md)）。把无原点流群、李三元曲率与本原毕达哥拉斯有号旋量双覆叠展开到底，建立零超越数的三维有理凯莱旋转、整系数切比雪夫谐波与球面有理巴格曼—格拉姆三角闭合律。
-- **第三卷：无极限射流微积分与全息圆弧流形**（[第七章](ch07-second-order-jet-calculus.md)–[第九章](ch09-telescoping-stokes-and-arc-manifold.md)）。以二阶幂零射流环 $\mathbb{Q}[\eta]/(\eta^3)$ 和任意阶 D-有限微分射流取代 $\lim_{h \to 0}$，并借流群中继消去与单纯形上边缘恒等式在粗剖分下完成精确积分。
-- **第四卷：三维球面有理调和分析**（[第十章](ch10-peter-weyl-rational-spin-shells.md)–[第十二章](ch12-algebraic-extensions-and-schur-positivity.md)）。在三维球面上用纯整数切比雪夫核与无 $\pi$ 阶乘哈尔积分重铸彼得—魏尔展开，并以零公理二次扩张域与有理舒尔补正定性承载不可约代数边界。
-- **第五卷：阿代尔算术与纯有理赫克—黎曼谱论**（[第十三章](ch13-computable-arithmetic-horizon.md)–[第十五章](ch15-rational-hecke-ramanujan-spectrum.md)）。以欧几里得素数逃逸、有限连分数和整数四分深度预算取代静态素数无穷集，进而联通有理阿代尔乘积守恒、模方 $5$ 赫维茨素旋子自由群 $F_3$ 与无复数赫克—拉马努金谱隙。
-- **第六卷：Ω-FRACTRAN 计算论、观察者宇宙与零公理内核**（[第十六章](ch16-omega-fractran-and-nonabelian-stack.md)–[第十八章](ch18-zero-axiom-kernel-and-shadow-bridge.md)）。构造原生非阿贝尔旋子指令集，阐发观察者自包含时间与记忆切分模型，最终用空内核公理审计与单向阴影投影函子 $\Pi_{\mathbb{R}}$ 连接整个经典分析生态；全书以[终章](coda.md)全景对照与[附录 A](appendix-a.md)的模块冻结索引收尾。
+- **第一卷：公理地基与齐次有理数系**（[第一章](ch01-axiom-omega-and-cic.md)–[第三章](ch03-canonical-ternion-manifold.md)）。先剥离 `Mathlib` 经典公理，在裸 CIC 上以可计算类型类写下母公理 `AXIOM-Ω` 与观察者精度契约 $\varepsilon_{\mathrm{self}} = 1/M$；再以齐次整数对 $\mathbb{QP}^1$ 驯服 $\infty$ 并用零公理内核证明六条圆周闭合定理；最后锁定三维非阿贝尔流形，构造既免 `Quot.sound` 又免根号的规范整三元数载体 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$ 与正交非交换见证。
+- **第二卷：无原点非线性代数与球面有理几何**（[第四章](ch04-heaps-and-lie-triple-curvature.md)–[第六章](ch06-bargmann-gram-spherical-trigonometry.md)）。把无原点流群、利雅三元恒常单位曲率 $K \equiv +1$ 与本原毕达哥拉斯有号旋量六拍双覆叠展开到底，建立双卡无奇点三维有理凯莱旋转、整系数切比雪夫谐波以及球面巴格曼—格拉姆闭合律与有理正弦／勾股定理。
+- **第三卷：无极限射流微积分与全息圆弧流形**（[第七章](ch07-second-order-jet-calculus.md)–[第九章](ch09-telescoping-stokes-and-arc-manifold.md)）。以二阶幂零射流环 $\mathbb{Q}[\eta]/(\eta^3)$、对称中点凯莱驻球守恒和任意阶 D-有限微分射流复合链式法则及凯莱—三角大一统取代 $\lim_{h \to 0}$，并借流群中继消去与单纯形锥同伦在粗剖分下完成精确积分。
+- **第四卷：三维球面有理调和分析**（[第十章](ch10-peter-weyl-rational-spin-shells.md)–[第十二章](ch12-algebraic-extensions-and-schur-positivity.md)）。在三维球面上用纯整数偶次切比雪夫特征标乘积律与无 $\pi$ 阶乘哈尔积分重铸全阶彼得—魏尔正交归一展开，并以零公理二次扩张域与有理舒尔补正定性承载不可约代数边界。
+- **第五卷：阿代尔算术与纯有理赫克—黎曼谱论**（[第十三章](ch13-computable-arithmetic-horizon.md)–[第十五章](ch15-rational-hecke-ramanujan-spectrum.md)）。以欧几里得素数逃逸、有限连分数和整数四分深度预算取代静态素数无穷集，进而联通有理阿代尔乘积守恒、模方 $5$ 赫维茨素旋子自由群 $F_3 \hookrightarrow \mathrm{SO}(3,\mathbb{Q})$ 伴随单射与无复数赫克—拉马努金谱隙。
+- **第六卷：Ω-FRACTRAN 计算论、观察者宇宙与零公理内核**（[第十六章](ch16-omega-fractran-and-nonabelian-stack.md)–[第十八章](ch18-zero-axiom-kernel-and-shadow-bridge.md)）。构造原生非阿贝尔旋子指令集与二维整数矩阵环，阐发观察者自包含时间与记忆切分模型，最终用空内核公理审计与单向阴影投影函子 $\Pi_{\mathbb{R}}$ 连接整个经典分析生态；全书以[终章](coda.md)全景对照与双语演示文稿、[附录 A](appendix-a.md) 模块冻结索引及[附录 B](appendix-b.md) 词典、证据总账与动态统计收尾。
 
 现在，让我们关闭一切暗中加载实数与选择公理的开关，踏上第一卷的第一块基石：纯粹的归纳构造演算裸内核。

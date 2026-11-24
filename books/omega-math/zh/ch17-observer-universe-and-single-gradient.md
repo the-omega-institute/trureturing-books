@@ -38,9 +38,11 @@ $$
 设 $V, Y$ 为域 $\mathbb{k} \in \{\mathbb{R}, \mathbb{C}\}$ 上的有限维内积空间，$T : V \to_{\mathbb{k}} V$ 与 $C : V \to_{\mathbb{k}} Y$ 为线性映射，记第 $m$ 阶可观测克雷洛夫子空间为 $\mathcal{K}_m := \operatorname{observableKrylov}(T, C, m)$。则：
 
 1. **严格扩张次数上界**：严格真包含步数的基数满足
+
    $$
    \operatorname{encard}\bigl\{m \in \mathbb{N} \;\big\vert\; \mathcal{K}_m < \mathcal{K}_{m+1}\bigr\} \;\le\; \dim_{\mathbb{k}} V - \dim_{\mathbb{k}} \operatorname{ran}(C);
    $$
+
 2. **一旦稳定即永久稳定**：若存在某阶 $m \in \mathbb{N}$ 使 $\mathcal{K}_m = \mathcal{K}_{m+1}$，则对一切 $r \in \mathbb{N}$ 恒有 $\mathcal{K}_{m+r} = \mathcal{K}_m$。
 :::
 
@@ -92,6 +94,12 @@ $$
 
 沿记忆槽位容量 $M = \dim\mathcal{W}_M$ 扫描三个边界相态（`MODEL`）：$M = 0$ 对应无质量光子极限（$\kappa_{\mathrm{time}} = 0, \kappa_{\mathrm{space}} = 1$，固有时冻结）；$1 \le M < M_\Omega$ 对应有质量有限观察者（时空并立，且原地静止仍需把全部预算投入自刷新而显影为静止能量）；$M = M_\Omega$ 对应全载体自包含本体（$\mathcal{W}_{M_\Omega}^\perp = \{0\}$，$\kappa_{\mathrm{time}} = 1, \kappa_{\mathrm{space}} = 0$，外部空间归零）。
 
+下面的静态图汇总了上述静止画布与记忆窗口切分的几何结构：无外部边界的静止全集经可逆零改写路由读取（[@thm-om-ch17-reversible-qram]），并在有限记忆窗 $\mathcal{W}_M$ 与正交补 $\mathcal{W}_M^\perp$ 之间把单拍比较预算精确正交切分为 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$，由此沿 $u \in \mathbb{Q} \cap [0, 1)$ 同步生成有理圆周切分与双曲洛伦兹因子。
+
+::: {.figure src="ch17-observer-memory-split"}
+**静止全息画布上的有限记忆窗正交切分与有理时空移项。** 图中展示零外部边界画布在记忆子空间 $\mathcal{W}_M$ 与正交补 $\mathcal{W}_M^\perp$ 上的零损耗正交分解 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$（正定勾股关系 $\Delta\tau^2 + \Delta x^2 = \Delta t^2$ 移项立得闵可夫斯基负号 $\Delta\tau^2 = \Delta t^2 - \Delta x^2$），并对照 $u = \frac{1}{3}$ 处 $\kappa_{\mathrm{time}} = \frac{16}{25}$、$\kappa_{\mathrm{space}} = \frac{9}{25}$ 与双曲对 $(\gamma, \gamma v) = (\frac{5}{4}, \frac{3}{4})$ 的精确有理化（`手工推导`），以及记忆容量 $M = 0$、$1 \le M < M_\Omega$ 与 $M = M_\Omega$ 三种边界相态（`MODEL`；底层静态数组零改写读取由 [@thm-om-ch17-reversible-qram] 锚定）。
+:::
+
 ## 17.3 单一有理失准度梯度下的物理与智能统一图景 {#sec-om-ch17-single-gradient-unification}
 
 在纯有理三元球面几何中，经典弧度作用量 $1 - \cos\Delta\theta$ 借半角保真度 $\kappa = \frac{1 + \cos\Delta\theta}{2}$ 与有理失准度 $s := 1 - \kappa \in \mathbb{Q}\cap[0,1]$ 恒等化为无三角函数的累计有理失准度泛函：
@@ -104,13 +112,17 @@ $$
 
 1. **测地自由落体与引力同源**：在固定总转角下，凸性迫使无外力惯性轨迹满足等步保真度 $\kappa_1 = \dots = \kappa_N$ 并沿无原点流群递推 $x_{t+1} = [x_t, x_{t-1}, x_t]$ 前行；在静态史瓦西外解中，空间自由落体加速度 $\frac{d^2 x^i}{d\tau^2} = \frac{1}{2}g^{ij}\partial_j g_{00}(c\,dt/d\tau)^2$ 恰为时间预算因子 $g_{00}$ 的空间梯度，对应同一梯度 $\nabla\kappa$ 在记忆窗外 $\mathcal{W}_M^\perp$ 的投影。
 2. **有理温伯格迹比 $3/8$**：在一代完整手性外尔费米子账本 $\mathcal{H}_{\mathrm{Weyl}}$ 上，采用全账本酉不变的等权圆弧迹刚度公设（`MODEL`；具体比值依赖完整费米子代表示与统一迹权），对色数 $N_c = 3$ 与实测电荷 $(Q_u, Q_d) = (+\frac{2}{3}, -\frac{1}{3})$ 逐项手算得 $\operatorname{Tr}_{\mathrm{Weyl}}(T_3^2) = 2$ 与左右双翼总电磁迹 $\operatorname{Tr}_{\mathrm{Weyl}}(Q^2) = 2\bigl(1 + 3(\frac{4}{9} + \frac{1}{9})\bigr) = \frac{16}{3}$（`手工推导`），比值当场锁死精确有理数
+
    $$
    \sin^2\theta_W(\mu_{\mathrm{arc}}) \;=\; \frac{\operatorname{Tr}_{\mathrm{Weyl}}(T_3^2)}{\operatorname{Tr}_{\mathrm{Weyl}}(Q^2)} \;=\; \frac{2}{16/3} \;=\; \frac{3}{8}.
    $$
+
 3. **$N \ge 5$ 过约束张力与引力几何起源**：在三维空间中，$N \ge 3$ 个点的成对刚性距离有 $\binom{N}{2}$ 个独立条件，而欧氏刚体商掉旋转平移后仅有 $3N - 6$ 个自由度，两者之差给出精确组合过约束盈余（`手工推导`）：
+
    $$
    \Delta E(N) \;=\; \binom{N}{2} - (3N - 6) \;=\; \frac{(N - 3)(N - 4)}{2}.
    $$
+
    当 $N \le 4$（单座四面体）时 $\Delta E(N) = 0$，可零张力平直闭合；一旦节点增至 $N \ge 5$，过约束盈余 $\Delta E(5) = 1, \Delta E(6) = 3, \dots > 0$ 必然产生不可消去的几何残余张力，成为涌现度规曲率的结构种子（`MODEL`）。
 4. **量子力学五大公设的有理射影还原**：纯态对应齐次射影三元射线 $\mathbb{QP}^3$（配 `PythSpinor` 双覆叠保 $720^\circ$ 符号）；玻恩配对权重即零根号有理核 $\kappa(p, q) = \frac{\langle p, q\rangle^2}{\|p\|^2\|q\|^2} \in \mathbb{Q}\cap[0,1]$；幺正演化为保模整旋子乘法；复合系统由多座三元场张量并置而成；记录定格对应局部残差落入有理阈值 $1 - \kappa \le \varepsilon_{\mathrm{self}}$ 时的幂等捏合。
 5. **无归一化三元数场 Transformer（TFT）**：将传统神经网络依赖浮点指数的 `Softmax` 与开方 `LayerNorm` 替换为齐次射影保真度打分 $\kappa(q_i, k_j) \in \mathbb{Q}\cap[0,1]$ 与保模有理凯莱旋子输运。纵向序列 `KV-Cache` 槽位与横向三元旋子通道权重正受同一条记忆切分律 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$ 调配，推理前向即在球面上沿最小累计失准度 $\mathcal{S}_\Omega$ 测地滑行。
@@ -125,6 +137,12 @@ $$
 
 ::: {.remark #rem-om-ch17-epistemic-and-open-boundaries title="认识论分层与开放问题边界"}
 本章严守三层证据契约：[@thm-om-ch17-krylov-growth-and-stability] 与 [@thm-om-ch17-reversible-qram] 对应所钉 `trureturing` 冻结 **`LEAN ✓`** 定理；正交移项代数、有理洛伦兹参数化、过约束计数 $\Delta E(N)$ 与一代费米子迹比 $\frac{3}{8}$ 为精确 **`手工推导`**；自包含观察者五元组 $\mathfrak{O} \equiv \mathcal{U}_\Omega$、静止全息画布（对接惠勒—德维特方程 $\hat{\mathcal{H}}\lvert\mathbf{\Psi}\rangle = 0$，B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967；D. N. Page & W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983）、温伯格等权刚度公设及三元数场网络 TFT 均标为 **`MODEL`**。从离散三元比较与有限记忆切分完整导出 $3+1$ 维洛伦兹爱因斯坦场方程及黑洞视界幺正性，仍属显式未决的开放问题（**`OPEN`**）。
+:::
+
+读者可在下方的交互实验卡中同步拨动本章的四组核心有理量：滑动有理半切参数 $u$ 观察正交记忆切分 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$ 与双曲恒等式 $\gamma^2 - (\gamma v)^2 \equiv 1$，核对一代手性费米子的精确温伯格迹比 $\frac{3}{8}$，沿节点数 $N$ 追踪 $N \ge 5$ 的组合过约束盈余 $\Delta E(N) = \frac{(N-3)(N-4)}{2}$，并逐步走完三拍结构时间 $\tau$ 的单调有理增长轨迹。
+
+::: {.viz src="adelic-arithmetic-observer-lab" preset="static-canvas-memory-split" height="520"}
+**静止画布记忆切分与单一梯度统一实验卡（`static-canvas-memory-split`）。** 交互调节有理半切参数 $u \in \mathbb{Q} \cap [0, 1)$ 实时核验记忆窗正交切分 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$ 与无根号洛伦兹恒等式 $\gamma^2 - (\gamma v)^2 \equiv 1$，同步检视一代手性费米子迹比 $\sin^2\theta_W = \frac{3}{8}$、三维点集过约束盈余 $\Delta E(N) = \frac{(N-3)(N-4)}{2}$（在 $N = 5$ 处首次跃升为 $1$）以及观察者三拍结构时间 $\tau = 0 \to \frac{3}{4} \to \frac{3}{2}$ 的单调增长（[@def-om-ch17-observer-pentad]、[@ex-om-ch17-quantitative-audit]；其中正交代数与计数为精确 `手工推导`，物理与观察者综合框架标为 `MODEL`，底层克雷洛夫封顶与零改写查询由 [@thm-om-ch17-krylov-growth-and-stability]、[@thm-om-ch17-reversible-qram] 锚定）。
 :::
 
 至此，六卷的数学对象、计算语言与观察者模型已全部合拢。最后一章将把整座六卷大厦交回最冷酷、也最诚实的裁判——Lean 4 空内核公理审计器与四模式三维全息工作台。

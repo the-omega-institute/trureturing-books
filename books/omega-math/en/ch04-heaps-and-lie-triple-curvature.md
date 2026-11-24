@@ -4,7 +4,7 @@
 
 In Volume I ([Chapter 1](ch01-axiom-omega-and-cic.md) through [Chapter 3](ch03-canonical-ternion-manifold.md)), we built a zero-axiom, infinity-free, transcendental-free arithmetic from bare CIC using homogeneous projective pairs and canonical integer quaternions. Yet the moment one tries to do algebra directly on this curved three-dimensional carrier, two habits inherited from flat linear algebra break down. First, vector addition $\mathbf{a} + \mathbf{b}$ silently presupposes a privileged origin $\mathbf{0}$ and flat tangent superposition: adding two points on the unit sphere immediately pierces the shell. Second, normalizing nonzero integer quadruples by making the first nonzero entry positive produces the projective carrier `ProjTernion`, which identifies $p \sim -p$ and collapses the $720^\circ$ double-cover spinor group $S^3(\mathbb{Q})$ onto $\mathrm{SO}(3, \mathbb{Q})$.
 
-This chapter resolves both obstructions and lays the nonlinear rational foundation of Volume II. We abolish origin-dependent flat addition in favor of origin-free heaps and their anchored group decompositions; we pass from first-order commutators to the second-order "relation of relations"—the Lie triple system bracket—extracting Riemannian curvature directly without Christoffel symbols or charts; we establish the exact algebraic separation between projective ray feature rank $10$ and signed primitive Pythagorean spinor (`PythSpinor`) feature rank $5$, certifying the Pythagorean norm closure of the stereographic Cayley lift and the universal quadratic kernel bridge as zero-axiom `OmegaInit` and `OmegaMath` kernel theorems alongside the six-beat $720^\circ$ orbit; and we close by anchoring the spinor ray kernel, Hopf projection, and bilateral two-point homogeneity to frozen classical-shadow kernel theorems.
+This chapter resolves both obstructions and lays the nonlinear rational foundation of Volume II. We abolish origin-dependent flat addition in favor of origin-free heaps and their anchored group decompositions; we pass from first-order commutators to the second-order "relation of relations"—the Lie triple system bracket—locking its three algebraic axioms (antisymmetry, Jacobi/Bianchi, and ternary derivation) and constant unit sectional curvature $K \equiv +1$ via zero-axiom kernel theorems in `OmegaInit` and `OmegaMath` without Christoffel symbols or charts; we establish the exact algebraic separation between projective ray feature rank $10$ and signed primitive Pythagorean spinor (`PythSpinor`) feature rank $5$, certifying the Pythagorean norm closure of the stereographic Cayley lift, the universal quadratic kernel bridge, and the six-beat $720^\circ$ double-cover orbit witness of `g120_spin` as zero-axiom kernel theorems; and we close by anchoring the spinor ray kernel, Hopf projection, and bilateral two-point homogeneity to frozen classical-shadow kernel theorems.
 
 ## 4.1 Abolishing Flat Addition: Origin-Free Heaps and Anchored Groups
 
@@ -94,41 +94,72 @@ $$
 $$
 :::
 
-Why does this purely polynomial ternary bracket yield the exact Riemannian curvature tensor of the unit three-sphere $S^3$ without ever introducing local coordinate charts or Christoffel symbols $\Gamma^k_{ij}$? Four elementary algebraic checks expose the entire mechanism:
+Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), pure imaginary tangent directions are represented by integer three-vectors `Vec3` ($\mathbb{Z}^3$), with the first-order commutator written `commutator u v` $= 2(\mathbf{u} \times \mathbf{v})$ and the Lie triple bracket defined purely polynomially by `lieTriple u v w` $:= \langle\mathbf{u}, \mathbf{w}\rangle\mathbf{v} - \langle\mathbf{v}, \mathbf{w}\rangle\mathbf{u}$. Without a single analytic or real-number axiom, all three Cartan–Jacobson axioms defining a Lie triple system close directly in bare CIC.
 
-1. **Closure of the three Lie triple axioms**: antisymmetry in the first two slots, $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\} = -\{\mathbf{v}, \mathbf{u}, \mathbf{w}\}$, is immediate; cyclic summation yields the algebraic Bianchi identity
+::: {.theorem #thm-ch04-lie-triple-axioms title="Zero-Axiom Lie Triple System Axioms for the Curvature Bracket" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_antisymm D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_jacobi D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_derivation"}
+Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), write $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\} := \operatorname{lieTriple}(\mathbf{u}, \mathbf{v}, \mathbf{w}) = \langle\mathbf{u}, \mathbf{w}\rangle\,\mathbf{v} - \langle\mathbf{v}, \mathbf{w}\rangle\,\mathbf{u}$ on the integer three-vector carrier `Vec3`. Then for all $\mathbf{x}, \mathbf{y}, \mathbf{u}, \mathbf{v}, \mathbf{w} : \mathrm{Vec3}$, three exact identities hold unconditionally:
 
-   $$
-   \{\mathbf{u}, \mathbf{v}, \mathbf{w}\} + \{\mathbf{v}, \mathbf{w}, \mathbf{u}\} + \{\mathbf{w}, \mathbf{u}, \mathbf{v}\} = \mathbf{0};
-   $$
-
-   moreover, for fixed $(\mathbf{u}, \mathbf{v})$, the linear map $D_{\mathbf{u}, \mathbf{v}}(\mathbf{w}) := \{\mathbf{u}, \mathbf{v}, \mathbf{w}\}$ is skew-symmetric with respect to $\langle\cdot, \cdot\rangle$:
+1. **Antisymmetry in the first two slots** ([`lieTriple_antisymm`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_antisymm)):
 
    $$
-   \bigl\langle D_{\mathbf{u}, \mathbf{v}}(\mathbf{a}),\, \mathbf{b}\bigr\rangle = \langle\mathbf{u}, \mathbf{a}\rangle\langle\mathbf{v}, \mathbf{b}\rangle - \langle\mathbf{v}, \mathbf{a}\rangle\langle\mathbf{u}, \mathbf{b}\rangle = -\bigl\langle\mathbf{a},\, D_{\mathbf{u}, \mathbf{v}}(\mathbf{b})\bigr\rangle.
+   \{\mathbf{u}, \mathbf{v}, \mathbf{w}\} = -\{\mathbf{v}, \mathbf{u}, \mathbf{w}\}.
    $$
 
-   Because $D_{\mathbf{u}, \mathbf{v}} \in \mathfrak{so}(3, \mathbb{Q})$ preserves the inner product infinitesimally ($\langle D\mathbf{a}, \mathbf{c}\rangle + \langle\mathbf{a}, D\mathbf{c}\rangle = 0$), applying it to the bracket immediately proves the **ternary derivation law**:
+2. **Cyclic Jacobi–Bianchi identity** ([`lieTriple_jacobi`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_jacobi)):
 
    $$
-   D_{\mathbf{u}, \mathbf{v}}\{\mathbf{a}, \mathbf{b}, \mathbf{c}\} = \{D_{\mathbf{u}, \mathbf{v}}\mathbf{a}, \mathbf{b}, \mathbf{c}\} + \{\mathbf{a}, D_{\mathbf{u}, \mathbf{v}}\mathbf{b}, \mathbf{c}\} + \{\mathbf{a}, \mathbf{b}, D_{\mathbf{u}, \mathbf{v}}\mathbf{c}\}.
+   \{\mathbf{u}, \mathbf{v}, \mathbf{w}\} + \{\mathbf{v}, \mathbf{w}, \mathbf{u}\} + \{\mathbf{w}, \mathbf{u}, \mathbf{v}\} = \mathbf{0}.
    $$
 
-2. **Direct identity with the bi-invariant Riemann curvature tensor**: on the unit three-sphere $S^3 \cong \mathrm{SU}(2)$, the bi-invariant Levi-Civita connection on left-invariant vector fields is $\nabla_X Y = \frac{1}{2}[X, Y]$. Under the convention $R(X, Y)Z := \nabla_{[X, Y]}Z - [\nabla_X, \nabla_Y]Z$, expanding and applying the Jacobi identity $-[X, [Y, Z]] + [Y, [X, Z]] = -[[X, Y], Z]$ gives
+3. **Ternary derivation law** ([`lieTriple_derivation`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_derivation)):
 
    $$
-   R(X, Y)Z = \frac{1}{2}\bigl[[X, Y], Z\bigr] - \frac{1}{4}\bigl[X, [Y, Z]\bigr] + \frac{1}{4}\bigl[Y, [X, Z]\bigr] = \frac{1}{4}\bigl[[X, Y], Z\bigr] = \{X, Y, Z\}.
+   \bigl\{\mathbf{x}, \mathbf{y}, \{\mathbf{u}, \mathbf{v}, \mathbf{w}\}\bigr\}
+   = \bigl\{\{\mathbf{x}, \mathbf{y}, \mathbf{u}\}, \mathbf{v}, \mathbf{w}\bigr\}
+   + \bigl\{\mathbf{u}, \{\mathbf{x}, \mathbf{y}, \mathbf{v}\}, \mathbf{w}\bigr\}
+   + \bigl\{\mathbf{u}, \mathbf{v}, \{\mathbf{x}, \mathbf{y}, \mathbf{w}\}\bigr\}.
+   $$
+:::
+
+::: {.proof}
+Geometrically, fixing $(\mathbf{x}, \mathbf{y})$ defines the linear endomorphism $D_{\mathbf{x}, \mathbf{y}}(\mathbf{w}) := \{\mathbf{x}, \mathbf{y}, \mathbf{w}\}$, which is skew-symmetric with respect to the inner product because $\langle D_{\mathbf{x}, \mathbf{y}}\mathbf{a}, \mathbf{b}\rangle = \langle\mathbf{x}, \mathbf{a}\rangle\langle\mathbf{y}, \mathbf{b}\rangle - \langle\mathbf{y}, \mathbf{a}\rangle\langle\mathbf{x}, \mathbf{b}\rangle = -\langle\mathbf{a}, D_{\mathbf{x}, \mathbf{y}}\mathbf{b}\rangle$; hence $D_{\mathbf{x}, \mathbf{y}} \in \mathfrak{so}(3)$ preserves the inner product infinitesimally and acts as a derivation on every bracket built from it. Inside the zero-axiom `OmegaMath` kernel, all three identities are certified componentwise by multivariate integer polynomial normalization (`PolyVec` and `Expr.sound`) reducing to `Eq.refl`, with empty transitive axiom closure. The full proof is checked by the Lean kernel.
+:::
+
+This purely polynomial bracket reproduces the bi-invariant Riemannian curvature tensor of the unit three-sphere verbatim (manual derivation): on $S^3 \cong \mathrm{SU}(2)$, the bi-invariant Levi-Civita connection on left-invariant vector fields is $\nabla_X Y = \frac{1}{2}[X, Y]$. Under the convention $R(X, Y)Z := \nabla_{[X, Y]}Z - [\nabla_X, \nabla_Y]Z$, expanding and applying the Jacobi identity $-[X, [Y, Z]] + [Y, [X, Z]] = -[[X, Y], Z]$ gives
+
+$$
+R(X, Y)Z = \frac{1}{2}\bigl[[X, Y], Z\bigr] - \frac{1}{4}\bigl[X, [Y, Z]\bigr] + \frac{1}{4}\bigl[Y, [X, Z]\bigr] = \frac{1}{4}\bigl[[X, Y], Z\bigr] = \{X, Y, Z\}.
+$$
+
+Under the opposite sign convention also common in differential geometry, $R_{\mathrm{alt}}(X, Y)Z := [\nabla_X, \nabla_Y]Z - \nabla_{[X, Y]}Z = -\{X, Y, Z\}$, the sectional curvature numerator swaps the last two arguments and reverses sign: $\langle R_{\mathrm{alt}}(X, Y)Y, X\rangle = -\langle\{X, Y, Y\}, X\rangle = \langle\{X, Y, X\}, Y\rangle$. The next zero-axiom theorem locks both contraction signs on `Vec3` and certifies exact unit sectional curvature $K \equiv +1$ on every nondegenerate rational two-plane in `RatVec3` without charts or Christoffel symbols.
+
+::: {.theorem #thm-ch04-lie-triple-sectional-curvature title="Constant Unit Sectional Curvature and Reversed-Slot Sign Law (Zero-Axiom Kernel Theorem)" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_unit_sectional_curvature D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_sectional_curvature_reversed D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_sectional_ratio"}
+Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), define the integer squared Gram area $\operatorname{gramAreaSq}(\mathbf{u}, \mathbf{v}) := \langle\mathbf{u}, \mathbf{u}\rangle\langle\mathbf{v}, \mathbf{v}\rangle - \langle\mathbf{u}, \mathbf{v}\rangle^2 \in \mathbb{Z}$ for $\mathbf{u}, \mathbf{v} : \mathrm{Vec3}$. For rational three-vectors `u, v : RatVec3` with integer numerators `u.num, v.num : Vec3` and strictly positive denominators `u.den, v.den`, define in `Omega.IntRatio` the squared Gram area $\operatorname{rationalGramAreaSq}(\mathbf{u}, \mathbf{v})$ and curvature numerator $\operatorname{rationalCurvatureNumerator}(\mathbf{u}, \mathbf{v}) := \langle\{\mathbf{u}.\mathrm{num}, \mathbf{v}.\mathrm{num}, \mathbf{u}.\mathrm{num}\}, \mathbf{v}.\mathrm{num}\rangle / (u.\mathrm{den}\cdot v.\mathrm{den})^2$ over the shared denominator $(u.\mathrm{den}\cdot v.\mathrm{den})^2$. Then three exact laws hold unconditionally:
+
+1. **Positive unit sectional curvature contraction** ([`lieTriple_unit_sectional_curvature`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_unit_sectional_curvature)): for all $\mathbf{u}, \mathbf{v} : \mathrm{Vec3}$,
+
+   $$
+   \bigl\langle\{\mathbf{u}, \mathbf{v}, \mathbf{u}\},\, \mathbf{v}\bigr\rangle = \operatorname{gramAreaSq}(\mathbf{u}, \mathbf{v}).
    $$
 
-   (Under the opposite sign convention $R_{\mathrm{alt}}(X, Y)Z := [\nabla_X, \nabla_Y]Z - \nabla_{[X, Y]}Z = -\{X, Y, Z\}$, sectional curvature uses $\langle R_{\mathrm{alt}}(X, Y)Y, X\rangle = \langle\{X, Y, X\}, Y\rangle$, yielding the exact same value.)
-3. **Purely rational sectional curvature $K \equiv +1$**: for any two linearly independent rational tangent vectors $\mathbf{u}, \mathbf{v} \in \mathbb{Q}^3$,
+2. **Reversed-slot sign negation** ([`lieTriple_sectional_curvature_reversed`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_sectional_curvature_reversed)): for all $\mathbf{u}, \mathbf{v} : \mathrm{Vec3}$,
 
    $$
-   \bigl\langle\{\mathbf{u}, \mathbf{v}, \mathbf{u}\},\, \mathbf{v}\bigr\rangle = \lVert\mathbf{u}\rVert^2\lVert\mathbf{v}\rVert^2 - \langle\mathbf{u}, \mathbf{v}\rangle^2 = \lVert\mathbf{u} \times \mathbf{v}\rVert^2 > 0.
+   \bigl\langle\{\mathbf{u}, \mathbf{v}, \mathbf{v}\},\, \mathbf{u}\bigr\rangle = -\operatorname{gramAreaSq}(\mathbf{u}, \mathbf{v}).
    $$
 
-   Dividing by the squared parallelogram area $\lVert\mathbf{u}\rVert^2\lVert\mathbf{v}\rVert^2 - \langle\mathbf{u}, \mathbf{v}\rangle^2$ yields exact unit sectional curvature $K(\mathbf{u}, \mathbf{v}) \equiv +1$ on every two-plane.
-4. **Transverse refraction and collinear filtering**: setting $\mathbf{w} = \mathbf{u}$ gives $\{\mathbf{u}, \mathbf{v}, \mathbf{u}\} = \lVert\mathbf{u}\rVert^2\mathbf{v} - \langle\mathbf{u}, \mathbf{v}\rangle\mathbf{u}$, automatically projecting out the component parallel to $\mathbf{u}$ and isolating the pure transverse geodesic deflection.
+3. **Constant unit sectional curvature on every nondegenerate rational plane** ([`lieTriple_sectional_ratio`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_sectional_ratio)): for all `u, v : RatVec3` satisfying $\operatorname{gramAreaSq}(u.\mathrm{num}, v.\mathrm{num}) \neq 0$, under `Omega.IntRatio.Equivalent`,
+
+   $$
+   \operatorname{rationalCurvatureNumerator}(\mathbf{u}, \mathbf{v}) \cdot \bigl(\operatorname{rationalGramAreaSq}(\mathbf{u}, \mathbf{v})\bigr)^{-1} \;\equiv\; 1.
+   $$
+:::
+
+::: {.proof}
+Expanding the bracket directly gives $\langle\{\mathbf{u}, \mathbf{v}, \mathbf{u}\}, \mathbf{v}\rangle = \langle\langle\mathbf{u}, \mathbf{u}\rangle\mathbf{v} - \langle\mathbf{v}, \mathbf{u}\rangle\mathbf{u},\, \mathbf{v}\rangle = \langle\mathbf{u}, \mathbf{u}\rangle\langle\mathbf{v}, \mathbf{v}\rangle - \langle\mathbf{u}, \mathbf{v}\rangle^2 = \operatorname{gramAreaSq}(\mathbf{u}, \mathbf{v})$, while swapping the last two slots gives $\langle\{\mathbf{u}, \mathbf{v}, \mathbf{v}\}, \mathbf{u}\rangle = \langle\mathbf{u}, \mathbf{v}\rangle^2 - \langle\mathbf{v}, \mathbf{v}\rangle\langle\mathbf{u}, \mathbf{u}\rangle = -\operatorname{gramAreaSq}(\mathbf{u}, \mathbf{v})$; both integer identities close in one step by multivariate polynomial normalization (`PolyVec.sound` and `Eq.refl`). For part 3, both the curvature contraction and the squared Gram area are quadratic in each input and share the strictly positive denominator $(u.\mathrm{den}\cdot v.\mathrm{den})^2$; substituting part 1 identifies the numerator of `rationalCurvatureNumerator u v` with `gramAreaSq u.num v.num`, and the nondegeneracy hypothesis $\operatorname{gramAreaSq}(u.\mathrm{num}, v.\mathrm{num}) \neq 0$ triggers `IntRatio.mul_inv_cancel` to conclude equivalence with $1$ in `Omega.IntRatio.Equivalent` with zero axioms. The full proof is checked by the Lean kernel.
+:::
+
+Geometrically, setting $\mathbf{w} = \mathbf{u}$ produces $\{\mathbf{u}, \mathbf{v}, \mathbf{u}\} = \lVert\mathbf{u}\rVert^2\mathbf{v} - \langle\mathbf{u}, \mathbf{v}\rangle\mathbf{u}$, projecting out the component collinear with $\mathbf{u}$ to isolate the pure transverse geodesic deflection; the next example audits [@thm-ch04-lie-triple-axioms] and [@thm-ch04-lie-triple-sectional-curvature] explicitly on two non-orthogonal integer vectors.
 
 ::: {.example #ex-ch04-lie-triple-sectional-curvature title="Purely Rational Hand Check of the Lie Triple Bracket and K = +1"}
 Take two non-orthogonal integer tangent vectors $\mathbf{u} = (1, 1, 0)$ and $\mathbf{v} = (1, 0, 2)$ in $\mathbb{Q}^3$, together with a test vector $\mathbf{w} = (0, 1, 1)$:
@@ -281,6 +312,37 @@ Exact integer arithmetic verifies both the rank-$5$ ceiling of `PythSpinor` and 
 At beat $3$ (a full $360^\circ$ spatial rotation), the projective kernel already reads $\kappa_{\mathrm{proj}} = 1$, whereas `PythSpinor` lands at the antipode $(-1, 0, 0, 0;\, 1)$ with $\kappa_{\mathrm{spin}} = 0$. Only at beat $6$ ($720^\circ$) does the signed spinor orbit close back onto $+1$, tracing the exact rational sequence $\frac{3}{4}, \frac{1}{4}, 0, \frac{1}{4}, \frac{3}{4}, 1$.
 :::
 
+Moreover, all six signed homogeneous spinor beats of `g120_spin = (1, 1, 1, 1; 2)` in item 2 above, together with the antipodal zero readout $\kappa_{\mathrm{spin}}(e, g^3) \equiv 0$ at beat $3$ and exact closure $\kappa_{\mathrm{spin}}(e, g^6) \equiv 1$ at beat $6$, are certified verbatim as the zero-axiom witness `PythSpinor.SixBeatOrbit` frozen in `OmegaInit` and `OmegaMath`:
+
+::: {.theorem #thm-ch04-g120-spin-six-beat-orbit title="Six-Beat Signed Spinor Double-Cover Orbit Witness (Zero-Axiom Kernel Theorem)" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.g120_spin_six_beat_orbit"}
+Inside the zero-axiom library `OmegaMath` (relying solely on `OmegaInit` and `OmegaMath`, with zero axioms), write $p \sim_{\mathrm{spin}} q$ for the signed homogeneous equivalence `PythSpinor.Equivalent` ($r_q\,\mathbf{p} = r_p\,\mathbf{q}$, which keeps $+p$ and $-p$ strictly distinct because $r_p, r_q > 0$). Let $e := (1, 0, 0, 0;\, 1)$ (`one`), $-e := (-1, 0, 0, 0;\, 1)$ (`antipode`), and $g := (1, 1, 1, 1;\, 2)$ (`g120_spin`), with recursive powers $g^0 := e$ and $g^{n+1} := g^n \cdot g$ (`g120_spin.pow n`). Then all eight conjuncts of `PythSpinor.SixBeatOrbit` hold simultaneously:
+
+1. the six signed homogeneous spinor powers satisfy
+
+   $$
+   \begin{aligned}
+   g^1 &\sim_{\mathrm{spin}} (1, 1, 1, 1;\, 2), & g^2 &\sim_{\mathrm{spin}} (-1, 1, 1, 1;\, 2), & g^3 &\sim_{\mathrm{spin}} (-1, 0, 0, 0;\, 1), \\
+   g^4 &\sim_{\mathrm{spin}} (-1, -1, -1, -1;\, 2), & g^5 &\sim_{\mathrm{spin}} (1, -1, -1, -1;\, 2), & g^6 &\sim_{\mathrm{spin}} (1, 0, 0, 0;\, 1);
+   \end{aligned}
+   $$
+
+2. the signed spinor kernel readouts at beat $3$ ($360^\circ$ antipode) and beat $6$ ($720^\circ$ closure) satisfy, in `Omega.IntRatio.Equivalent`,
+
+   $$
+   \kappa_{\mathrm{spin}}(e, g^3) \;\equiv\; 0, \qquad \kappa_{\mathrm{spin}}(e, g^6) \;\equiv\; 1.
+   $$
+:::
+
+::: {.proof}
+Iterating unreduced `PythSpinor.mul` yields the six exact representatives $(1, 1, 1, 1;\, 2)$, $(-2, 2, 2, 2;\, 4)$, $(-8, 0, 0, 0;\, 8)$, $(-8, -8, -8, -8;\, 16)$, $(16, -16, -16, -16;\, 32)$, and $(64, 0, 0, 0;\, 64)$. Cross-multiplying by the positive radii reduces all six `PythSpinor.Equivalent` equations definitionally by `Eq.refl`. Evaluating $\kappa_{\mathrm{spin}}(e, p) = \operatorname{IntRatio.value}(r_p + w_p,\, 2 r_p)$ gives $\frac{8 + (-8)}{16} = \frac{0}{16} \equiv 0$ at beat $3$ and $\frac{64 + 64}{128} = \frac{128}{128} \equiv 1$ at beat $6$; since both denominators are strictly positive, both equivalences hold in `Omega.IntRatio.Equivalent` with zero axioms. This declaration depends solely on `OmegaInit` and `OmegaMath` with empty transitive axiom closure. The full proof is checked by the Lean kernel.
+:::
+
+The static figure below contrasts the rank-$5$ linear spinor layer `PythSpinor` against the rank-$10$ projective ray quotient `ProjTernion`, plotting the full six-beat $720^\circ$ double-cover orbit of `g120_spin = (1, 1, 1, 1; 2)` alongside the quadratic kernel bridge.
+
+::: {.figure src="ch04-pythspinor-720-orbit"}
+**Signed rank-$5$ `PythSpinor` versus projective rank-$10$ ray quotients and the six-beat $720^\circ$ double-cover orbit.** The figure traces `g120_spin = (1, 1, 1, 1; 2)` across all six beats with $\kappa_{\mathrm{spin}} = \frac{3}{4}, \frac{1}{4}, 0, \frac{1}{4}, \frac{3}{4}, 1$, hitting the antipode $(-1, 0, 0, 0;\, 1)$ at beat $3$ ($360^\circ$) while the quadratic kernel bridge $\kappa_{\mathrm{proj}} = (2\kappa_{\mathrm{spin}} - 1)^2$ already collapses back to $1$; zero-axiom kernel proofs are in [@thm-ch04-pythspinor-lift-and-quadratic-bridge] and the exact arithmetic table in [@ex-ch04-rank10-rank5-and-720-orbit].
+:::
+
 ## 4.4 The Spinor Ray Kernel, Hopf Projection, and Bilateral Homogeneity
 
 Embedding `PythSpinor` into the continuous unit quaternion group $\mathrm{Sp}(1) = \{q \in \mathbb{H} : \lVert q\rVert = 1\}$ links these rational structures directly to complex two-component spinors, the Hopf map onto the Bloch sphere, and the full bilateral isometry group of $S^3$. The next frozen theorem locks all three bridges inside the kernel.
@@ -312,6 +374,12 @@ and the real-linear isometric bijection $s : \mathbb{H} \to \mathbb{C}^2$ by $s(
 Parts 1 and 2 follow from direct polynomial expansion in quaternion coordinates. Since $2\kappa(x, y) - 1 = \langle x, y\rangle$, we have $R(x, y) = \langle x, y\rangle^2 + \langle x, y\mathbf{i}\rangle^2$; checking components verifies $s(q\mathbf{i}) = \hat{\mathbf{i}}\,s(q)$, $\lvert\langle s(x), s(y)\rangle_{\mathbb{C}}\rvert^2 = \langle x, y\rangle^2 + \langle x, y\mathbf{i}\rangle^2 = \operatorname{Tr}(P_{s(y)} P_{s(x)})$, and the homogeneous identity $\langle x, y\rangle^2 + \langle x, y\mathbf{i}\rangle^2 = \frac{1}{2}(\lVert x\rVert^2\lVert y\rVert^2 + \langle x\mathbf{i}\bar{x}, y\mathbf{i}\bar{y}\rangle)$, which yields the Hopf formula on unit norm. For part 3, set $u := \bar{x}y$ and $u' := \bar{x}'y'$. Equal $\kappa$ gives $\operatorname{Re}(u) = \langle x, y\rangle = \langle x', y'\rangle = \operatorname{Re}(u')$, hence $\lVert\operatorname{Im}(u)\rVert = \lVert\operatorname{Im}(u')\rVert$. Transitivity of the adjoint rotation action on spheres in $\operatorname{Im}\mathbb{H}$ provides $c \in \mathrm{Sp}(1)$ with $c u \bar{c} = u'$; setting $p := x' c \bar{x}$ and $q := \bar{c}$ gives $p x q = x' c \bar{c} = x'$ and $p y q = x' c u \bar{c} = x' u' = y'$. The full proof is checked by the Lean kernel.
 :::
 
+Explore the stereographic Cayley lift $\Phi(a, b, c, d)$ and the full six-beat $720^\circ$ double-cover orbit of `g120_spin = (1, 1, 1, 1; 2)` ([@thm-ch04-g120-spin-six-beat-orbit]) live in the interactive card below: tune the integer inputs $(a, b, c, d)$ to watch every lifted spinor satisfy $w^2 + x^2 + y^2 + z^2 = r^2$ identically, then step beat by beat through $g^n$ to see $\kappa_{\mathrm{spin}}$ drop to $0$ at beat $3$ ($360^\circ$) even as the quadratic bridge $\kappa_{\mathrm{proj}} = (2\kappa_{\mathrm{spin}} - 1)^2$ snaps back to $1$, closing genuinely at beat $6$ ($720^\circ$).
+
+::: {.viz src="ternion-cayley-lab" preset="pythspinor-720-double-cover" height="520"}
+**Interactive stereographic Cayley lift $\Phi(a, b, c, d)$ and six-beat $720^\circ$ orbit of `g120_spin = (1, 1, 1, 1; 2)`.** Vary integer inputs $(a, b, c, d)$ to verify exact Pythagorean closure on $S^3(\mathbb{Q})$, and step along `g120_spin` to compare the signed spinor kernel sequence $\kappa_{\mathrm{spin}} = \frac{3}{4}, \frac{1}{4}, 0, \frac{1}{4}, \frac{3}{4}, 1$ against the quadratic projective bridge $\kappa_{\mathrm{proj}} = (2\kappa_{\mathrm{spin}} - 1)^2$; formal zero-axiom proofs are in [@thm-ch04-pythspinor-lift-and-quadratic-bridge] and the worked orbit table in [@ex-ch04-rank10-rank5-and-720-orbit].
+:::
+
 ::: {.remark #rem-ch04-double-cover-summary title="Three Nested Kernels and Bridge to Chapter 5"}
-The algebraic hierarchy built in this chapter organizes three nested comparison kernels cleanly: at the top sits `PythSpinor` with the linear rank-$5$ signed kernel $\kappa_{\mathrm{spin}} = \frac{1 + \langle v_1, v_2\rangle}{2}$, separating $+v$ from $-v$ with bilateral two-point homogeneity; descending via the quadratic bridge $\kappa_{\mathrm{proj}} = (2\kappa_{\mathrm{spin}} - 1)^2$ to the real projective rotation group $\mathbb{QP}^3 \cong \mathrm{SO}(3, \mathbb{Q})$ raises the feature rank to $10$; summing two phase-shifted squares collapses the phase circle $c = c_0 + c_1\mathbf{i}$ to yield the Hopf–Born ray kernel $R(x, y) = \frac{1 + \langle h(x), h(y)\rangle}{2}$ on $S^2$. None of the origin-free heap or Lie triple curvature formulas required a single transcendental function; in [Chapter 5](ch05-rational-cayley-rotations.md), we eliminate $e^X$, $\ln\mathbf{R}$, and trigonometric functions from three-dimensional rotations and harmonic motion as well.
+The algebraic hierarchy built in this chapter organizes three nested comparison kernels cleanly: at the top sits `PythSpinor` with the linear rank-$5$ signed kernel $\kappa_{\mathrm{spin}} = \frac{1 + \langle v_1, v_2\rangle}{2}$, separating $+v$ from $-v$ with bilateral two-point homogeneity; descending via the quadratic bridge $\kappa_{\mathrm{proj}} = (2\kappa_{\mathrm{spin}} - 1)^2$ to the real projective rotation group $\mathbb{QP}^3 \cong \mathrm{SO}(3, \mathbb{Q})$ raises the feature rank to $10$; summing two phase-shifted squares collapses the phase circle $c = c_0 + c_1\mathbf{i}$ to yield the Hopf–Born ray kernel $R(x, y) = \frac{1 + \langle h(x), h(y)\rangle}{2}$ on $S^2$. Neither origin-free heap transport nor the zero-axiom Lie triple curvature laws ([@thm-ch04-lie-triple-axioms], [@thm-ch04-lie-triple-sectional-curvature]) required a single transcendental function; in [Chapter 5](ch05-rational-cayley-rotations.md), we eliminate $e^X$, $\ln\mathbf{R}$, and trigonometric functions from three-dimensional rotations and harmonic motion as well.
 :::

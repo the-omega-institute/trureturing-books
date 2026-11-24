@@ -542,6 +542,30 @@ For $0\le r<q$, the only possible integer differences of prefix indices reducing
 
 For an exceptional set $E$, Cauchy–Schwarz gives $(\sum_{k\in E}\nu(k))^2\le |E|\sum_k\nu(k)^2$. If $E$ excludes frequency zero, subtract $\nu(0)^2=(N/q)^2$ from the sum of squares on the right. Arithmetic estimates must still determine which frequencies of the actual ζ-zero sum exceed a given threshold at the required order and how many there are.
 
+### Minimum squared mass for one spatial mode
+
+Take $q>1$ and $c_k=\cos(2\pi k/q)$. Character orthogonality gives these values mean zero, and their maximum is one. Among nonnegative probability weights $w(k)$ with $\sum_k w(k)c_k\ge a$ for $0\le a\le1$, the minimum squared mass is attained by weights of the form
+
+$$
+u_t(k)=\max\{0,1-t(1-c_k)\},\qquad
+v_t(k)=\frac{u_t(k)}{\sum_j u_t(j)},\qquad t\ge0.
+$$
+
+At $t=0$ the weights are uniform and the moment is zero. For sufficiently large $t$, all entries with $c_k<1$ are clipped to zero and the moment is one. The denominator is always at least one, so continuity yields a finite parameter attaining exactly $a$. For any feasible $w$, the raw affine weights have nonnegative inner product with $w-v_t$ by equal mass and the moment ordering. Clipping can only increase that inner product. Expanding the squares gives $\sum_k w(k)^2-\sum_k v_t(k)^2\ge\sum_k(w(k)-v_t(k))^2$, which proves uniqueness. [Simplex projection with a linear constraint, Zhou and Liu, equation (3.4)](https://arxiv.org/html/2310.10388v3#S3.E4X)
+
+Write $E(w)=\sum_k w(k)^2$, $M(w)=\sum_k w(k)c_k$, and $Z=\sum_k u_t(k)$. For any real weights $w$ of total mass one, expanding the squares gives the exact remainder
+$$
+E(w)-E(v_t)
+=\sum_k(w(k)-v_t(k))^2+
+\frac{2}{Z}\left[t(M(w)-M(v_t))
++\sum_k\bigl(t(1-c_k)-1\bigr)_+w(k)\right].
+$$
+The last term retains the clipped negative weights. One can take $t\le\max(\{0\}\cup\{(1-c_k)^{-1}:c_k<1\})$.
+
+[Lean proof of the one-moment optimum and exact remainder](lean:D5/S3/Fourier/Concentration/ClippedMomentWeights.exists_clipped_moment_minimizer)
+
+Modulo four, $c=(1,0,-1,0)$. For $0\le a\le1/2$, the optimizer is $(1+2a,1,1-2a,1)/4$ and the minimum squared mass is $(1+2a^2)/4$. For $1/2\le a\le1$, the optimizer is $(a,(1-a)/2,0,(1-a)/2)$ and the minimum is $a^2+(1-a)^2/2$. The formulas agree at $a=1/2$. This minimum gives a benchmark for the squared-mass coefficient in the exceptional-set bound under one spatial-mode constraint. A full spatial band imposes joint constraints, and the cardinality of the actual ζ-zero exceptional set needs an arithmetic estimate.
+
 ### Fourier weight in a short time range
 
 Let $F$ be a nonnegative real function modulo $q$ whose Fourier coefficients are nonnegative real, with $F(0)>0$. By inversion, $\nu(k)=\widehat F(k)/(qF(0))$ is a probability weight. Suppose $F(r\bmod q)\ge a\ge0$ for $|r|\le H$. For $2H<q$, $2K<q$, and $2HK\le q$,

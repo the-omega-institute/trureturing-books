@@ -4,7 +4,7 @@
 
 在[第四章](ch04-heaps-and-lie-triple-curvature.md)确立了无原点流群、利雅三元曲率与有号旋量双覆叠之后，我们将目光转向动力学与空间变换的核心操作：**如何把三维切空间里的反对称旋转生成元 $X \in \mathfrak{so}(3, \mathbb{Q})$ 送入三维正交旋转群 $\mathrm{SO}(3, \mathbb{Q})$，再无损反解回来，并让离散旋转与简谐振荡在纯有理数域内永远精准闭合？**
 
-传统教科书在此毫不动摇地祭出矩阵指数 $\exp(X) = \sum_{k=0}^\infty \frac{1}{k!} X^k$、矩阵对数 $\ln\mathbf{R}$ 以及三角函数 $\cos\theta, \sin\theta$。然而任何有限步长的泰勒截断多项式都会当场破坏正交性，迫使数值计算不断注入投影修补与舍入漂移。本章用四套零超越函数的纯有理算子彻底替代这套超越脚手架，并在认识论上清晰对照严格零公理层与经典实阴影层：三维**有理凯莱正逆桥**的闭合方程、恒等正交性、单位行列式与任意有限步迭代保范律，**无根号伴随旋转** $\operatorname{Ad}(p)$ 的保内积、缩放不变与乘法同态律，以及有号毕达哥拉斯旋量 `PythSpinor` 的**流群递推单位模方守恒律**，均已在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成；辅以全域分母下界 $\max(D_+, D_-) \ge \frac{1}{2}$ 的**无奇点双卡乘法**，并与经典实阴影侧的**流群切比雪夫谐波闭式**、**连续射线分类定理**及**有理六轴球面覆盖**并置，把离散谐波与超越常数 $\pi$ 的真实出处一次讲透。
+传统教科书在此毫不动摇地祭出矩阵指数 $\exp(X) = \sum_{k=0}^\infty \frac{1}{k!} X^k$、矩阵对数 $\ln\mathbf{R}$ 以及三角函数 $\cos\theta, \sin\theta$。然而任何有限步长的泰勒截断多项式都会当场破坏正交性，迫使数值计算不断注入投影修补与舍入漂移。本章用四套零超越函数的纯有理算子彻底替代这套超越脚手架，并在认识论上清晰对照严格零公理层与经典实阴影层：三维**有理凯莱正逆桥**的闭合方程、恒等正交性、单位行列式与任意有限步迭代保范律，**无奇点双卡 MRP 图册**的归一化分母和为一、构造性 $\frac{1}{2}$ 下界、展开 MRP 等同与闭单位球锁定，**无根号伴随旋转** $\operatorname{Ad}(p)$ 的保内积、缩放不变与乘法同态律，以及有号毕达哥拉斯旋量 `PythSpinor` 的**流群递推单位模方守恒律**，均已在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成；并与经典实阴影侧的**流群切比雪夫谐波闭式**、**连续射线分类定理**及**有理六轴球面覆盖**并置，把离散谐波与超越常数 $\pi$ 的真实出处一次讲透。
 
 ## 5.1 废除超越指数：三维有理凯莱正逆变换
 
@@ -124,38 +124,65 @@ $$
 
 :::
 
-其中 $Q(\boldsymbol{\sigma}) = \frac{(1 - \lVert\boldsymbol{\sigma}\rVert^2)\mathbf{1} + 2\boldsymbol{\sigma}}{1 + \lVert\boldsymbol{\sigma}\rVert^2} \in S^3(\mathbb{Q})$ 满足 $Q(-\boldsymbol{\sigma}/\lVert\boldsymbol{\sigma}\rVert^2) = -Q(\boldsymbol{\sigma})$，故两种分支代表同一个三维伴随旋转（若需追踪旋量叶符号，在取 $D_-$ 分支时翻转 $1$ 比特叶号即可）。记 $a := \lVert\boldsymbol{\sigma}_A\rVert^2$、$b := \lVert\boldsymbol{\sigma}_B\rVert^2$、$c := \boldsymbol{\sigma}_A \cdot \boldsymbol{\sigma}_B$，两条贯穿整个 $\mathbb{Q}^3 \times \mathbb{Q}^3$ 的精确多项式恒等式一举消除了所有零分母奇点（手工推导）：
+其中球极旋量提升 $Q(\boldsymbol{\sigma}) = \frac{(1 - \lVert\boldsymbol{\sigma}\rVert^2)\mathbf{1} + 2\boldsymbol{\sigma}}{1 + \lVert\boldsymbol{\sigma}\rVert^2} \in S^3(\mathbb{Q})$ 满足 $Q(-\boldsymbol{\sigma}/\lVert\boldsymbol{\sigma}\rVert^2) = -Q(\boldsymbol{\sigma})$，故两种分支代表同一个三维伴随旋转（若需追踪旋量叶符号，在取 $D_-$ 分支时翻转 $1$ 比特叶号即可）。
 
-1. **双分母和恒等式与下界 $\frac{1}{2}$**：展开 $D_+ + D_-$ 时交叉项 $\mp 2c$ 精确抵消，
+在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，整套双卡图册无需任何实数或经典选择公理即可直接用 `PythSpinor` 与 `RatVec3` 锁定。对两枚有理三维向量 `u, v : RatVec3`（分别记作 $\mathbf{u} = \mathbf{x}/d$ 与 $\mathbf{v} = \mathbf{y}/e$，整分子 $\mathbf{x}, \mathbf{y} \in \mathbb{Z}^3$，严格正分母 $d, e \ge 1$），先借球极提升 `lift u` $:= ((d^2 - \lVert\mathbf{x}\rVert^2,\, 2d\mathbf{x});\; d^2 + \lVert\mathbf{x}\rVert^2) : \mathrm{PythSpinor}$ 形成旋量乘积 $p := \operatorname{product}(\mathbf{u}, \mathbf{v}) := (\operatorname{lift}\mathbf{u})\cdot(\operatorname{lift}\mathbf{v})$，其标量部记为 $w_p := p.\mathrm{num}.w$、虚部记为 $\mathbf{v}_p := \operatorname{Vec3.imaginary}(p.\mathrm{num})$、严格正半径记为 $r_p := p.\mathrm{radius} = (d^2 + \lVert\mathbf{x}\rVert^2)(e^2 + \lVert\mathbf{y}\rVert^2) > 0$。定义一对**归一化双卡分母**
 
-   $$
-   D_+ + D_- = 1 + ab - 2c + a + b + 2c = (1 + a)(1 + b) \ge 1.
-   $$
+$$
+\operatorname{denomPlus}(\mathbf{u}, \mathbf{v}) := \frac{r_p + w_p}{2 r_p}, \qquad \operatorname{denomMinus}(\mathbf{u}, \mathbf{v}) := \frac{r_p - w_p}{2 r_p} \;\in\; \mathrm{IntRatio},
+$$
 
-   因此两枚非负分母（注意到 $D_+ = (1 - c)^2 + \lVert\boldsymbol{\sigma}_A \times \boldsymbol{\sigma}_B\rVert^2 \ge 0$ 且 $D_- = \lVert\boldsymbol{\sigma}_A + \boldsymbol{\sigma}_B\rVert^2 \ge 0$）的较大者恒满足**全局严格下界**
+以及去输入分母后的**展开 MRP 整分子**
 
-   $$
-   \max(D_+, D_-) \ge \frac{D_+ + D_-}{2} = \frac{\bigl(1 + \lVert\boldsymbol{\sigma}_A\rVert^2\bigr)\bigl(1 + \lVert\boldsymbol{\sigma}_B\rVert^2\bigr)}{2} \ge \frac{1}{2}!
-   $$
+$$
+\operatorname{mrpPlusNum}(\mathbf{u}, \mathbf{v}) := d^2 e^2 + \lVert\mathbf{x}\rVert^2\lVert\mathbf{y}\rVert^2 - 2de(\mathbf{x}\cdot\mathbf{y}), \qquad \operatorname{mrpMinusNum}(\mathbf{u}, \mathbf{v}) := \lVert\mathbf{x}\rVert^2 e^2 + d^2\lVert\mathbf{y}\rVert^2 + 2de(\mathbf{x}\cdot\mathbf{y}),
+$$
 
-2. **分子模方因式分解与自动锁球**：利用 $\boldsymbol{\sigma}_A \times \boldsymbol{\sigma}_B$ 正交于 $\boldsymbol{\sigma}_A, \boldsymbol{\sigma}_B$ 且 $\lVert\boldsymbol{\sigma}_A \times \boldsymbol{\sigma}_B\rVert^2 = ab - c^2$，展开得
+并按 $w_p \ge 0$ 取正号、$w_p < 0$ 取负号的构造性符号切换 `orientNumerator`，定义选定卡的球极输出 `output u v` $:= \operatorname{orientNumerator}(w_p, \mathbf{v}_p) / (r_p + \lvert w_p\rvert) : \mathrm{RatVec3}$。下面这条零公理内核定理一举确立归一化分母的 MRP 展开、精确归一和、零选择公理的 $\frac{1}{2}$ 构造下界以及输出闭球锁定。
 
-   $$
-   \begin{aligned}
-   \lVert\mathbf{N}\rVert^2
-   &= (1 - a)^2 b + (1 - b)^2 a + 2(1 - a)(1 - b)c + 4(ab - c^2) \\
-   &= (a + b)(1 + ab) + 2c(1 + ab - a - b) - 4c^2 \\
-   &= (1 + ab - 2c)(a + b + 2c) = D_+ D_-.
-   \end{aligned}
-   $$
+::: {.theorem #thm-ch05-dual-chart-singularity-free title="双卡修正罗德里格斯分母归一化、构造性半界与闭单位球锁定（零公理内核定理）" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_mrp_denominators D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_sum_one D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_ge_half D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_ball_containment"}
+在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，对任意两枚三维有理向量 `u, v : RatVec3`，记 $r_p := (\operatorname{product}(\mathbf{u}, \mathbf{v})).\mathrm{radius}$ 与分母前驱 $r := (\operatorname{product}(\mathbf{u}, \mathbf{v})).\mathrm{radiusPred}$（故 $r + 1 = r_p$）。则以下四条定理无条件成立：
 
-   于是双卡乘积的模方恒等于
+1. **归一化分母与展开 MRP 分式精确等同**（[`dual_chart_mrp_denominators`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_mrp_denominators)）：在 `Omega.IntRatio.Equivalent` 下同时成立
 
    $$
-   \lVert\boldsymbol{\sigma}_A \star_{\mathcal{S}} \boldsymbol{\sigma}_B\rVert^2 = \frac{D_+ D_-}{\max(D_+, D_-)^2} = \frac{\min(D_+, D_-)}{\max(D_+, D_-)} \le 1.
+   \operatorname{denomPlus}(\mathbf{u}, \mathbf{v}) \;\equiv\; \frac{\operatorname{mrpPlusNum}(\mathbf{u}, \mathbf{v})}{r_p}
+   \qquad \text{且} \qquad
+   \operatorname{denomMinus}(\mathbf{u}, \mathbf{v}) \;\equiv\; \frac{\operatorname{mrpMinusNum}(\mathbf{u}, \mathbf{v})}{r_p}.
    $$
 
-换言之，单次除法不仅永远安全远离零分母（分母恒 $\ge \frac{1}{2}$），而且输出向量自动锁死在三维有理单位闭球 $\overline{B}_1(\mathbb{Q}^3)$ 之内，彻底免除了坐标溢出与人工再归一化。
+2. **归一化双分母之和恒等于一**（[`dual_chart_denom_sum_one`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_sum_one)）：在 `Omega.IntRatio.Equivalent` 下成立
+
+   $$
+   \operatorname{denomPlus}(\mathbf{u}, \mathbf{v}) + \operatorname{denomMinus}(\mathbf{u}, \mathbf{v}) \;\equiv\; 1.
+   $$
+
+3. **无选择公理的构造性半界析取**（[`dual_chart_denom_ge_half`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_ge_half)）：在有理序 `Omega.IntRatio.Le` 下成立构造性析取（零 `Classical.choice`）
+
+   $$
+   \frac{1}{2} \le \operatorname{denomPlus}(\mathbf{u}, \mathbf{v})
+   \quad \lor \quad
+   \frac{1}{2} \le \operatorname{denomMinus}(\mathbf{u}, \mathbf{v}).
+   $$
+
+4. **双卡输出自动锁入三维闭单位球**（[`dual_chart_ball_containment`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_ball_containment)）：在 `Omega.IntRatio.Le` 下成立
+
+   $$
+   \bigl\langle\operatorname{output}(\mathbf{u}, \mathbf{v}),\, \operatorname{output}(\mathbf{u}, \mathbf{v})\bigr\rangle \;\le\; 1.
+   $$
+:::
+
+::: {.proof}
+对第 1 款，展开球极旋量积的半径 $r_p = (d^2 + \lVert\mathbf{x}\rVert^2)(e^2 + \lVert\mathbf{y}\rVert^2)$ 与标量部 $w_p = (d^2 - \lVert\mathbf{x}\rVert^2)(e^2 - \lVert\mathbf{y}\rVert^2) - 4de(\mathbf{x}\cdot\mathbf{y})$，直接整系数多项式合并即得 $r_p + w_p = 2\,\operatorname{mrpPlusNum}(\mathbf{u}, \mathbf{v})$ 与 $r_p - w_p = 2\,\operatorname{mrpMinusNum}(\mathbf{u}, \mathbf{v})$；在 `Omega.IntRatio.Equivalent` 下约去公因子 $2$ 即证毕两式。对第 2 款，分子相加得 $(r_p + w_p) + (r_p - w_p) = 2r_p$，与严格正公分母 $2r_p$ 约分归于 $1$。对第 3 款，直接对有号整数 $w_p$ 施行归纳分情形（`Int.rec`）：若 $w_p = a \ge 0$，则交叉差 $2(r_p + a) - 2r_p = 2a \ge 0$ 构造性给出左支 $\frac{1}{2} \le \operatorname{denomPlus}(\mathbf{u}, \mathbf{v})$；若 $w_p = -(a + 1) < 0$，则 $r_p - w_p = r_p + a + 1$ 对应交叉差 $2(a + 1) \ge 0$ 构造性给出右支 $\frac{1}{2} \le \operatorname{denomMinus}(\mathbf{u}, \mathbf{v})$，全程不碰 `Classical.choice`。对第 4 款，记 $a := \lvert w_p\rvert$ 与 $s := \lVert\mathbf{v}_p\rVert^2$；符号翻转 `orientNumerator` 保持平方和 $s$ 不变，结合旋量模方等式 $a^2 + s = r_p^2$ 代入多项式恒等式 $(r_p + a)^2 - s = (r_p^2 - (a^2 + s)) + 2a(r_p + a)$，得精确非负余量 $2a(r_p + a) \ge 0$，从而 $\lVert\operatorname{output}(\mathbf{u}, \mathbf{v})\rVert^2 = s / (r_p + a)^2 \le 1$。本声明仅依赖 `OmegaInit` 与 `OmegaMath`，传递公理闭包为空集。完整证明由 Lean 内核检查。
+:::
+
+把 [@thm-ch05-dual-chart-singularity-free] 与 [@def-ch05-dual-chart-star] 中的未归一化 MRP 分母 $D_+, D_-$ 精确对接（手工推导）：分子与分母同除 $d^2 e^2$ 可见 $\operatorname{mrpPlusNum}(\mathbf{u}, \mathbf{v}) = d^2 e^2 D_+(\mathbf{u}, \mathbf{v})$、$\operatorname{mrpMinusNum}(\mathbf{u}, \mathbf{v}) = d^2 e^2 D_-(\mathbf{u}, \mathbf{v})$，且 $r_p = d^2 e^2(1 + \lVert\mathbf{u}\rVert^2)(1 + \lVert\mathbf{v}\rVert^2) = d^2 e^2(D_+ + D_-)$。因此归一化分母正是比例份额 $\operatorname{denomPlus} \equiv \frac{D_+}{D_+ + D_-}$ 与 $\operatorname{denomMinus} \equiv \frac{D_-}{D_+ + D_-}$，而由虚部展开 $\mathbf{v}_p = 2d^2 e^2 \mathbf{N}(\mathbf{u}, \mathbf{v})$ 与 $w_p \ge 0 \iff D_+ \ge D_-$，选定卡输出 `output u v` 与 $\mathbf{u} \star_{\mathcal{S}} \mathbf{v}$ 逐位重合。因为 $D_+ + D_- = (1 + \lVert\mathbf{u}\rVert^2)(1 + \lVert\mathbf{v}\rVert^2) \ge 1$，第 3 款的归一化半界立时同步导出未归一化分母的全局下界 $\max(D_+, D_-) = (D_+ + D_-)\max(\operatorname{denomPlus}, \operatorname{denomMinus}) \ge \frac{1}{2}(1 + \lVert\mathbf{u}\rVert^2)(1 + \lVert\mathbf{v}\rVert^2) \ge \frac{1}{2}$；且分子模方分解 $\lVert\mathbf{N}\rVert^2 = D_+ D_-$ 从另一侧印证了第 4 款的闭球锁定 $\lVert\mathbf{u} \star_{\mathcal{S}} \mathbf{v}\rVert^2 = \frac{\min(D_+, D_-)}{\max(D_+, D_-)} \le 1$。单次除法既永不触零，又无需任何人工再归一化。
+
+下图把前两节的核心几何机制并置呈现：一边是精确驻留单位球面的有理凯莱变换（[@thm-ch05-rational-cayley-core]）对比向外膨胀脱轨的二阶泰勒截断，另一边则是以零公理半界与闭球锁定定理（[@thm-ch05-dual-chart-singularity-free]）将合成结果锁在单位闭球内的双卡切换结构。
+
+::: {.figure src="ch05-cayley-dual-chart"}
+**三维有理凯莱锁球轨道对比泰勒截断漂移，以及无奇点双卡切换下界 $\max(D_+, D_-) \ge \frac{1}{2}$。** 图中对照正向有理凯莱迭代 $\mathbf{R}(\boldsymbol{\sigma})^n \mathbf{v}_0$ 在每一步精确保持单位模方（反观二阶泰勒截断 $T_2(X)$ 沿径向逐步膨胀脱轨），并展示双卡乘法 $\boldsymbol{\sigma}_A \star_{\mathcal{S}} \boldsymbol{\sigma}_B$ 在主卡分母 $D_+$ 与阴影卡分母 $D_-$ 之间切换时如何借助 $D_+ + D_- = (1 + \lVert\boldsymbol{\sigma}_A\rVert^2)(1 + \lVert\boldsymbol{\sigma}_B\rVert^2) \ge 1$ 保证 $\max(D_+, D_-) \ge \frac{1}{2}$ 与自动锁球；零公理内核定理见 [@thm-ch05-rational-cayley-core]，双卡定义见 [@def-ch05-dual-chart-star]，十二步数值算例见 [@ex-ch05-cayley-vs-taylor]。
+:::
 
 ## 5.3 无根号伴随旋转：非平方模方也能生成整数正交阵
 
@@ -301,6 +328,12 @@ $$
 第 1 款先在固定非零方向 $X \in L$ 上令 $p(t) := 2\varphi(\exp tX) - 1$，由忠实性、指数局部单射与倍角方程 $p(2t) = 2p(t)^2 - 1$ 导出最小正周期 $T > 0$ 与 $p(t) = \cos(2\pi t/T)$；再由左乘表示复化迹型 $B(X, Y) = -\operatorname{Re}\operatorname{tr}(\rho(X)\rho(Y))$ 在去心连通切空间上锁定共同归一化周期 $T_0$，令 $h := 2(\pi/T_0)^2 B$ 得到共轭不变内积、中心化子一维性与维数锁定 $\{0, 1, 3\}$。第 2 款中，每个 $U_i$ 由严格二次不等式定义故为相对开集；若 $x, y \in S^2$ 正交，贝塞尔不等式给出 $\langle x, \mathrm{axis}_i\rangle^2 + \langle y, \mathrm{axis}_i\rangle^2 \le \lVert\mathrm{axis}_i\rVert^2 = 5$，故两者的 $2\langle\cdot, \mathrm{axis}_i\rangle^2$ 不可能同时严格大于 $5$，从而 $U_i$ 内无正交对；对任意 $x \in S^2$ 在三对轮换轴中各取同号支，总有一支满足 $2\langle x, \mathrm{axis}_i\rangle^2 > 5$，覆盖整个 $S^2$。完整证明由 Lean 内核检查。
 :::
 
+在进入第六章之前，不妨打开下面的交互实验卡，将本章的三套无超越数旋转机制放在同一座三维舞台上实时对照：调节有理生成元 $\boldsymbol{\sigma}$ 与迭代步数，直观比较精确锁球的 $\mathbf{R}(\boldsymbol{\sigma})$ 及无根号整系数伴随旋转 $\operatorname{Ad}(p_{\mathrm{Half}})$ 如何始终严守单位模方 $1/1$，而二阶泰勒截断 $T_2(X)$ 步步向外漂移；同时切换双卡乘法输入，实时检查分母下界 $\max(D_+, D_-) \ge \frac{1}{2}$ 如何永不触零并将结果锁在三维单位闭球之内。
+
+::: {.viz src="ternion-cayley-lab" preset="cayley3d-vs-taylor-drift" height="520"}
+**三维有理凯莱旋转 $\mathbf{R}(\boldsymbol{\sigma})$、无根号伴随旋转 $\operatorname{Ad}(p_{\mathrm{Half}})$ 对比泰勒漂移与双卡分母下界实验。** 实时迭代比较精确有理凯莱变换与二阶泰勒截断 $T_2(X)$ 的模方漂移，核验非平方模方锚点 `pHalf = (1, 1, 0, 0)` 的整系数 $90^\circ$ 伴随作用，并观测双卡乘法中 $\max(D_+, D_-) \ge \frac{1}{2}$ 的全域无奇点切换；零公理内核证明见 [@thm-ch05-rational-cayley-core] 与 [@thm-ch05-rational-adjoint-action]，双卡与数值对照见 [@def-ch05-dual-chart-star]、[@ex-ch05-cayley-vs-taylor] 与 [@ex-ch05-phalf-integer-rotation]。
+:::
+
 ::: {.remark #rem-ch05-where-pi-enters title="圆周率从何闯入，以及迈向球面有理三角学"}
-[@thm-ch05-continuous-ray-and-six-axis] 第 1 款给“无超越数数学”提供了最犀利的反向诊断：纯离散的倍角律 $\varphi(g^2) = (2\varphi(g) - 1)^2$、有理凯莱与伴随旋转（[@thm-ch05-rational-cayley-core]、[@thm-ch05-rational-adjoint-action]）以及有号旋量流群递推（[@thm-ch05-spinor-heap-norm-preserved]）里根本没有 $\pi$；圆周率 $\pi$ 仅仅在我们离开流群本体、强行用平直实数轴参数 $t \mapsto \exp(tX)$ 线性拉伸弯曲大圆时，才通过周期标度 $h(X, X) = 2\pi^2/T^2$ 渗入公式。而第 2 款中那六根模方为 $5$ 的整坐标轴则昭示：即使在二维球面的全局覆盖问题上，我们只需纯整数平方不等式 $2\langle x, \mathrm{axis}_i\rangle^2 > 5$，完全无需正弦、余弦与开方。顺着这条彻底消去三角函数的轨道前进，[第六章](ch06-bargmann-gram-spherical-trigonometry.md)将立起整个第二卷的收官支柱——**球面有理三角基本定理（巴格曼—格拉姆闭合律）**。
+[@thm-ch05-continuous-ray-and-six-axis] 第 1 款给“无超越数数学”提供了最犀利的反向诊断：纯离散的倍角律 $\varphi(g^2) = (2\varphi(g) - 1)^2$、有理凯莱与无奇点双卡乘法（[@thm-ch05-rational-cayley-core]、[@thm-ch05-dual-chart-singularity-free]）、无根号伴随旋转（[@thm-ch05-rational-adjoint-action]）以及有号旋量流群递推（[@thm-ch05-spinor-heap-norm-preserved]）里根本没有 $\pi$；圆周率 $\pi$ 仅仅在我们离开流群本体、强行用平直实数轴参数 $t \mapsto \exp(tX)$ 线性拉伸弯曲大圆时，才通过周期标度 $h(X, X) = 2\pi^2/T^2$ 渗入公式。而第 2 款中那六根模方为 $5$ 的整坐标轴则昭示：即使在二维球面的全局覆盖问题上，我们只需纯整数平方不等式 $2\langle x, \mathrm{axis}_i\rangle^2 > 5$，完全无需正弦、余弦与开方。顺着这条彻底消去三角函数的轨道前进，[第六章](ch06-bargmann-gram-spherical-trigonometry.md)将立起整个第二卷的收官支柱——**球面有理三角基本定理（巴格曼—格拉姆闭合律）**。
 :::

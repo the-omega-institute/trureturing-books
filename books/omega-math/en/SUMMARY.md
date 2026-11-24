@@ -42,3 +42,4 @@
 
 - [Coda Six-Volume Comparison and Sister-Monograph Map](coda.md)
 - [Appendix A Index of Zero-Axiom OmegaInit and OmegaMath Modules and Frozen Declarations](appendix-a.md)
+- [Appendix B Classical-to-OmegaMath Dictionary and Evidence Ledger](appendix-b.md)

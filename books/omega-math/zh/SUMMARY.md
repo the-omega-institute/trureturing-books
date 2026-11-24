@@ -42,3 +42,4 @@
 
 - [终章 六卷全景对照与姊妹卷导图](coda.md)
 - [附录 A OmegaInit 与 OmegaMath 零公理模块及冻结索引](appendix-a.md)
+- [附录 B 传统数学与 OMEGA MATH 对照词典与证据总账](appendix-b.md)
