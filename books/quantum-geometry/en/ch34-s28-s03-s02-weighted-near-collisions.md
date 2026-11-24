@@ -766,21 +766,21 @@ The last term is summable and nonnegative. When $s\le m$, the identity gives str
 
 ### The finite cyclic minimum converges to the lattice minimum
 
-Fix $\lambda\ge0$ and set $m=\lambda/(8\pi^2)$ and $a=1-\lambda/q^2$. Write $L(m)$ for the lattice minimum above and $E_q(a)$ for the minimum squared mass on the cycle with both cosine moments at least $a$. If $m$ belongs to the support interval indexed by $n$ and $q>2n$, the cyclic minimum is attained and
+Fix $\lambda\ge0$ and set $m=\lambda/(8\pi^2)$ and $a=1-\lambda/q^2$. Write $L(m)$ for the lattice minimum above and $E_q(a)$ for the minimum squared mass on the cycle with both cosine moments at least $a$. If $m$ belongs to the interval indexed by $n$, let $R$ be its support radius. At the lower endpoint $R=n-1$, and elsewhere $R=n$. When $q>2R$, the cyclic minimum is attained and
 $$
 0\le L(m)-E_q(a)\le \frac{2t}{Z}\frac{\lambda}{q^2}\le\frac{2\lambda}{q^2}.
 $$
-For any feasible cyclic weight $v$, let $\bar i$ be the centered integer representative of the residue $i$. With the same lattice minimizer $w$,
+For any nonnegative cyclic weight $v$ of mass one, let $\bar i$ be the centered integer representative of the residue $i$. Write $M_1(v),M_2(v)$ for its cosine moments and put $S_1=2t(M_1(v)-a)/Z$ and $S_2=(q/(2\pi))^2(M_2(v)-a)/Z$. With the same lattice minimizer $w$,
 $$
-\sum_i(v_i-w_{\bar i})^2
+\sum_i(v_i-w_{\bar i})^2+S_1+S_2
 \le\sum_i v_i^2-L(m)+\frac{2t}{Z}\frac{\lambda}{q^2}.
 $$
 
-When $q>2n$ the lattice support embeds in the cycle. The inequality $1-\cos x\le x^2/2$ bounds the two deficits of the embedded law by $\lambda/(4q^2)$ and $\lambda/q^2$, so the law is feasible. The reverse bound must account for weight near the antipode, where the second cosine also approaches $1$. Let $\theta=2\pi\bar i/q$. Throughout the centered range, $\theta^2\cos\theta\le\sin^2\theta$. This follows by sign when the cosine is nonpositive. Otherwise apply $\sin x\ge x\cos x$ to the positive half-angle and use $\cos^4(\theta/2)\ge\cos\theta$. Consequently the certificate
+When $q>2R$ the lattice support embeds in the cycle. The inequality $1-\cos x\le x^2/2$ bounds the two deficits of the embedded law by $\lambda/(4q^2)$ and $\lambda/q^2$, so the law is feasible. The reverse bound accounts for weight near the antipode, where the second cosine also approaches $1$. Let $\theta=2\pi\bar i/q$. Throughout the centered range, $\theta^2\cos\theta\le\sin^2\theta$. This follows by sign when the cosine is nonpositive. Otherwise apply $\sin x\ge x\cos x$ to the positive half-angle and use $\cos^4(\theta/2)\ge\cos\theta$. Consequently the certificate
 $$
 P_i=\frac{t\cos\theta-(q\sin\theta/(2\pi))^2}{Z}
 $$
-lies below $w_{\bar i}$ at every residue. The two moment bounds give $\sum_i v_iP_i\ge (t-m)/Z-t\lambda/(Zq^2)$, with $(t-m)/Z=L(m)$. Substitute this into the expansion of the squared distance to obtain the estimate. The zero site contributes $t$ to the normalizer $Z$, giving $t/Z\le1$.
+lies below $w_{\bar i}$ at every residue. Expressing $2\sum_i v_iP_i$ in terms of the two cosine moments gives the contributions $S_1,S_2$. Use $(t-m)/Z=L(m)$ in the expansion of the squared distance. Both contributions are nonnegative for feasible weights. The zero site contributes $t$ to the normalizer $Z$, giving $t/Z\le1$.
 
 Each fixed budget lies in an interval of finite support radius. Thus $E_q(1-\lambda/q^2)$ tends to $L(\lambda/(8\pi^2))$ through all integer moduli. The arithmetic estimate for high-order frequencies of the actual ζ zeros remains open.
 
