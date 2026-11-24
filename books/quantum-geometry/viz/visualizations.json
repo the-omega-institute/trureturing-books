@@ -10279,6 +10279,122 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "static-canvas-legless-sphere-sandbox",
+      "code": "OMEGA//CANVAS",
+      "title": "静止画布与无腿三元球观察者",
+      "title_en": "The Static Canvas and the Legless Ternion Sphere Observer",
+      "summary": "在静止画布上，把同一梯度分成记忆窗内外的两个正交分量。比较无腿三元球沿堆测地线的滚动与有腿行者的外推，观察古尔斯特兰德—潘勒韦光锥越过视界后的倾斜，并转动方向查看横向偏航分支。最后切换到球心透镜，比较同一组静态记忆读数在两个参考系下的呈现。",
+      "summary_en": "Split a single gradient into orthogonal components inside and outside a memory window. Compare a ternion sphere rolling along a heap geodesic with a walker that pushes against the ground. Follow the Gullstrand–Painlevé cone across the horizon and explore the branches created by transverse yaw. Then switch to the sphere-centered lens and compare the same static memory readings in both frames.",
+      "path": "static-canvas-legless-sphere-sandbox/",
+      "thumbnail": "static-canvas-legless-sphere-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-24",
+      "chapter": 38,
+      "section": "38.15",
+      "presets": [
+        "single-gradient-memory-spacetime-projection",
+        "portfree-legless-sphere-heap-geodesic",
+        "gullstrand-painleve-tilted-cone-supercritical",
+        "transverse-yaw-scenery-atlas-branching",
+        "wheeler-dewitt-static-canvas-frame-reversal"
+      ],
+      "preset_titles": {
+        "single-gradient-memory-spacetime-projection": {
+          "zh": "同一梯度的记忆窗正交投影",
+          "en": "One gradient split by a memory window"
+        },
+        "portfree-legless-sphere-heap-geodesic": {
+          "zh": "无端口无腿球沿堆测地滚落",
+          "en": "Port-free sphere on the heap geodesic"
+        },
+        "gullstrand-painleve-tilted-cone-supercritical": {
+          "zh": "古尔斯特兰德—潘勒韦斜光锥越过临界",
+          "en": "Gullstrand–Painlevé cone tips past 1"
+        },
+        "transverse-yaw-scenery-atlas-branching": {
+          "zh": "横向偏航与图册 DAG 分支",
+          "en": "Transverse yaw & Atlas DAG branches"
+        },
+        "wheeler-dewitt-static-canvas-frame-reversal": {
+          "zh": "惠勒—德威特静止画布与参考系翻转",
+          "en": "Wheeler–DeWitt canvas & frame reversal"
+        }
+      },
+      "tags": [
+        "静止画布",
+        "三元比较",
+        "记忆投影",
+        "光锥",
+        "参考系"
+      ],
+      "tags_en": [
+        "Static canvas",
+        "Ternary comparison",
+        "Memory projection",
+        "Light cones",
+        "Reference frames"
+      ],
+      "theory": [
+        {
+          "label": "§38.15 · 静止画布与无腿球观察者",
+          "label_en": "§38.15 · Static Canvas and the Legless Sphere Observer",
+          "href": "../zh/ch38-s15-static-canvas-and-legless-sphere-observer.html#sec-ch38-static-canvas-and-legless-sphere-observer",
+          "href_en": "../en/ch38-s15-static-canvas-and-legless-sphere-observer.html#sec-ch38-static-canvas-and-legless-sphere-observer"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.reflectionSeq_eq_pow"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.kappa_reflectionSeq_add"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound"
+        },
+        {
+          "gid": "D5/S3/Quantum/Routing/ReversibleQram.correctness"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
