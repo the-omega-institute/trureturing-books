@@ -246,7 +246,7 @@ To compare an arbitrary admissible law with this equal-weight law, rotate its fi
 
 The cases $N=2,3$ give $1/\sqrt2$ and $2/3$. As $N\to\infty$, $B_N\to 2/\pi$ by the sine limit at zero. Thus a growing block of vanishing even orders still allows a first magnitude bounded away from zero in this class of laws. The near-collision budget for actual ζ ordinates needs information that constrains the weighted sums along their time orbit.
 
-[Lean proof of the sharp bound for a consecutive even block](https://github.com/the-omega-institute/trureturing/blob/b97c4028659cb44b38c76231f26275b1cae35349/D5/S3/Fourier/Concentration/EvenHarmonicFirstMoment.lean#L464)
+[Lean proof of the sharp bound for a consecutive even block](lean:D5/S3/Fourier/Concentration/EvenHarmonicFirstMoment.sharp_first_harmonic_even_block)
 
 ## What low-order collision masses determine
 
@@ -302,7 +302,7 @@ $$
 s^pD_p\le (p!)^2\prod_{j\in J}(2e^{s w_j^2/2}-1).
 $$
 
-Dividing the left side by $(p!)^2$ gives the sum of the degree-$p$ terms in $\prod_j\sum_{n=0}^p x_j^n/(n!)^2$, with $x_j=sw_j^2$. Including every term gives an upper bound by nonnegativity. For $n\ge1$, the inequality $n!\ge2^{n-1}$ bounds each positive-degree term by twice its counterpart in $e^{x_j/2}$. The constant coefficient is one, so the factor is at most $2e^{x_j/2}-1$. The full series is $I_0(2\sqrt{x_j})$. [Lamzouri's independent-phase product, §3](https://arxiv.org/html/2311.04860v2#S3) · [DLMF, equation 10.25.2](https://dlmf.nist.gov/10.25.E2)
+Dividing the left side by $(p!)^2$ gives the sum of the degree-$p$ terms in $\prod_j\sum_{n=0}^p x_j^n/(n!)^2$, with $x_j=sw_j^2$. Including every term gives an upper bound by nonnegativity. For $n\ge1$, the inequality $n!\ge2^{n-1}$ bounds each positive-degree term by twice its counterpart in $e^{x_j/2}$. The constant coefficient is one, so the factor is at most $2e^{x_j/2}-1$. The full series is $I_0(2\sqrt{x_j})$. [Lean proof of the finite product bound](lean:D5/S3/Fourier/Concentration/WeightedOccupationDiagonal.scaled_diagonal_le_product) · [Lamzouri's independent-phase product, §3](https://arxiv.org/html/2311.04860v2#S3) · [DLMF, equation 10.25.2](https://dlmf.nist.gov/10.25.E2)
 
 For $p\ge1$ and $V=\sum_jw_j^2>0$, put $s=p/V$. The identity $2e^{x/2}-1=e^x[1-(1-e^{-x/2})^2]$ gives
 

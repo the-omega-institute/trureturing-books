@@ -246,7 +246,7 @@ $$
 
 $N=2,3$ 时分别得到 $1/\sqrt2$ 和 $2/3$。由正弦函数在零点的极限，$N\to\infty$ 时有 $B_N\to 2/\pi$。所以，在这类分布中，即使消失的偶次谐波连续范围不断增大，第一系数幅值仍可远离零。实际 ζ 纵坐标的近碰撞预算需要约束时间轨道上加权和的信息。
 
-[连续偶次谐波消失时尖锐界的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/b97c4028659cb44b38c76231f26275b1cae35349/D5/S3/Fourier/Concentration/EvenHarmonicFirstMoment.lean#L464)
+[连续偶次谐波消失时尖锐界的 Lean 证明](lean:D5/S3/Fourier/Concentration/EvenHarmonicFirstMoment.sharp_first_harmonic_even_block)
 
 ## 低阶碰撞质量能确定什么
 
@@ -302,7 +302,7 @@ $$
 s^pD_p\le (p!)^2\prod_{j\in J}(2e^{s w_j^2/2}-1).
 $$
 
-把左边除以 $(p!)^2$，得到 $\prod_j\sum_{n=0}^p x_j^n/(n!)^2$ 中总次数恰为 $p$ 的项之和，其中 $x_j=sw_j^2$。保留所有非负项可取上界。当 $n\ge1$ 时，$n!\ge2^{n-1}$，所以每个正次项至多是 $e^{x_j/2}$ 中相应项的两倍。常数项为一，故每个因子至多为 $2e^{x_j/2}-1$。无穷级数等于 $I_0(2\sqrt{x_j})$。 [Lamzouri，§3 的独立相位乘积](https://arxiv.org/html/2311.04860v2#S3) · [DLMF，式 10.25.2](https://dlmf.nist.gov/10.25.E2)
+把左边除以 $(p!)^2$，得到 $\prod_j\sum_{n=0}^p x_j^n/(n!)^2$ 中总次数恰为 $p$ 的项之和，其中 $x_j=sw_j^2$。保留所有非负项可取上界。当 $n\ge1$ 时，$n!\ge2^{n-1}$，所以每个正次项至多是 $e^{x_j/2}$ 中相应项的两倍。常数项为一，故每个因子至多为 $2e^{x_j/2}-1$。无穷级数等于 $I_0(2\sqrt{x_j})$。 [有限乘积估计的 Lean 证明](lean:D5/S3/Fourier/Concentration/WeightedOccupationDiagonal.scaled_diagonal_le_product) · [Lamzouri，§3 的独立相位乘积](https://arxiv.org/html/2311.04860v2#S3) · [DLMF，式 10.25.2](https://dlmf.nist.gov/10.25.E2)
 
 设 $p\ge1$、$V=\sum_jw_j^2>0$，取 $s=p/V$。恒等式 $2e^{x/2}-1=e^x[1-(1-e^{-x/2})^2]$ 给出
 
