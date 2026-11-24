@@ -449,6 +449,44 @@ Averaging to isolate a frequency follows the same principle as in the related pr
 
 For nonnegative weights the residue masses are nonnegative, while their Fourier coefficients can be negative. With two distinct indices of unit weight at residues $0,1$ modulo $2$, a disjoint pair of positive degree must use one index on each side. If $d$ is odd, both ordered pairs have residue $1$. The Fourier coefficient at $k=1$ of the residue masses is $-2$ and cancels the zero character for $R=\{0\}$. Estimating the contribution of nonzero characters at the ζ-tail resolution, with growing degree, remains open.
 
+### A coefficient bound that retains phase cancellation
+
+Fix the character in the preceding product. Let $A_j=w_j\chi_k(-a_j)$ be the complex weight of the left axis, with conjugate $\bar A_j$ on the right, and write $S=\sum_j A_j$. For every $\rho>0$,
+
+$$
+(d!)^2\left|[x^dy^d]Q_k\right|
+\le
+\frac{(d!)^2}{\rho^{2d}}
+e^{2\rho|S|}
+\prod_j\left(1+(e^{\rho w_j}-1)^2\right).
+$$
+
+Terms beyond degree $d$ on either axis do not affect the selected coefficient. In the full exponential series, each local factor has the identity
+
+$$
+e^{A_jx}+e^{\bar A_jy}-1
+=e^{A_jx+\bar A_jy}\left[1-(1-e^{-A_jx})(1-e^{-\bar A_jy})\right].
+$$
+
+The exponential factors multiply to $e^{Sx+\bar Sy}$, retaining cancellation between phases. On expanding the remaining product, each subset gives a product of two separate one-variable series. Sum the absolute coefficients of each series with weights $\rho^n$. The Cauchy product and the triangle inequality bound the resulting sum by the product of the individual sums. The exponential contributes $e^{\rho|S|}$ on each axis and each local factor with its constant term removed contributes $e^{\rho w_j}-1$. Sum over the subsets and multiply the two axis estimates to obtain the bound. The proof also allows independent complex weights and different degrees on the two axes.
+
+Each correction has positive degree on both axes. For the $(d,d)$ coefficient, only subsets of size at most $d$ contribute. The product in the bound can therefore be replaced by $\sum_{I\subseteq J,\,|I|\le d}\prod_{j\in I}(e^{\rho w_j}-1)^2$. The full product admits a simple estimate in terms of the squared weights.
+
+If every $\rho w_j\le1$, the product is at most $\exp(4\rho^2\sum_j w_j^2)$. The finite estimate reduces the band analysis to bounding $S$ over the characters with the weights supplied by inversion. For actual ζ zeros, controlling the corresponding weighted exponential sums and their exceptional frequencies at the required time scale remains open.
+
+### Bounding a cyclic band with nonnegative Fourier weights
+
+Let $R_H$ be the residues of the integers in $[-H,H]$. For a nonnegative residue mass $M(r)$, use the negative character in $\widehat M(k)=\sum_rM(r)\chi_k(-r)$ and put $B_N(k)=\sum_{j=0}^{N-1}\chi_k(j)$. For integers $N>H\ge0$,
+
+$$
+(N-H)\sum_{r\in R_H}M(r)+H M(0)
+\le \frac{1}{q}\sum_{k\bmod q}|B_N(k)|^2\operatorname{Re}\widehat M(k).
+$$
+
+For each representative $h$ in the band, start with the pairs $(j,j)$ for $0\le j<N-H$. Add $|h|$ to the first or second coordinate according to the sign of $h$. The resulting pairs have difference $h\bmod q$ and both coordinates lie in $[0,N-1]$. There are at least $N-H$ such pairs. Fourier inversion on the sum over all prefix pairs gives conjugate character sums for the two coordinates, hence the nonnegative weight $|B_N(k)|^2$. At zero, all $N$ diagonal pairs contribute, yielding the extra $HM(0)$. Taking real parts preserves cancellation across frequencies.
+
+When $N\le q$, the first $N$ natural numbers have distinct residues. Orthogonality then gives $\sum_k|B_N(k)|^2=qN$. If only magnitudes are available, drop $HM(0)$ and replace the real part with $|\widehat M(k)|$. The band mass is then bounded by a probability-weighted magnitude average times $N/(N-H)$. For $N=2H+1\le q$ the factor is below $2$. Inserting the disjoint coefficient estimate into that average leaves the weighted contribution of frequencies where the actual ζ-zero character sums are large. [Fejér kernel](https://dlmf.nist.gov/1.15#E15)
+
 ## Tracking the common occupation degree
 
 For the same residue data, keep the common part of the two degree-$p$ vectors by adding a variable $z$. Put $h=\sum_j\min(m_j,n_j)$, so the residual degree is $p-h$. Let $M_{h,R}$ be the mass with common degree $h$ and signed gap in $R$. Define
