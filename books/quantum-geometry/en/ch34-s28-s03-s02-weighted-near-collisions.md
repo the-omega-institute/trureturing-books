@@ -510,6 +510,8 @@ Adding the two contributions gives a tighter estimate. The full product admits a
 
 If every $\rho w_j\le1$, the product is at most $\exp(4\rho^2\sum_j w_j^2)$. The finite estimate reduces the band analysis to bounding $S$ over the characters with the weights supplied by inversion. For actual ζ zeros, controlling the corresponding weighted exponential sums and their exceptional frequencies at the required time scale remains open.
 
+[Lean proof of the disjoint coefficient bound](lean:D5/S3/Fourier/Concentration/DisjointCharacterEnvelope.coefficient_envelope)
+
 ### Bounding a cyclic band with nonnegative Fourier weights
 
 Let $R_H$ be the residues of the integers in $[-H,H]$. For a nonnegative residue mass $M(r)$, use the negative character in $\widehat M(k)=\sum_rM(r)\chi_k(-r)$ and put $B_N(k)=\sum_{j=0}^{N-1}\chi_k(j)$. For integers $N>H\ge0$,

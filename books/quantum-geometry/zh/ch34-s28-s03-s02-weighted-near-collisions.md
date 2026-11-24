@@ -510,6 +510,8 @@ $$
 
 当每个 $\rho w_j\le1$ 时，乘积至多为 $\exp(4\rho^2\sum_j w_j^2)$。这一有限估计把频带分析归结为控制各字符的 $S$，同时计入它们在频带反演中的权重。对实际 ζ 零点，在所需时间尺度上控制相应加权指数和及其异常频率，仍是开放的算术步骤。
 
+[互斥系数上界的 Lean 证明](lean:D5/S3/Fourier/Concentration/DisjointCharacterEnvelope.coefficient_envelope)
+
 ### 用非负傅里叶权重估计频带
 
 记 $R_H$ 为 $[-H,H]$ 中整数的模 $q$ 剩余类。对任意非负的剩余类质量 $M(r)$，定义 $B_N(k)=\sum_{j=0}^{N-1}\chi_k(j)$，并用负号特征标定义 $\widehat M(k)=\sum_rM(r)\chi_k(-r)$。当整数 $N>H\ge0$ 时，
