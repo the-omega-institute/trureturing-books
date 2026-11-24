@@ -376,6 +376,38 @@ $$
 $$
 第一步对每个固定计数差使用对角界，再对可匹配的残余向量求和。第二步用 $D_k\le k!V^k$，它由每个多项式系数至多为 $k!$ 和多项式定理得到。此估计适用于指定的配对子集。比如 $1+4=2+3$，而当 $0<\eta<1$ 时，左边任一项离右边任一项都至少为 $1$。实际 ζ 零点中，由这种抵消产生且无法逐点配成近邻的高阶残余权重仍待估计。
 
+## 残余次数二与有向间距 {#degree-two-directed-differences}
+
+权重可以为任意实数。当两边各余两项，和之差可以改写为两个有向间距之差。设 $i\ne j$ 的边 $(i,j)$ 有频率 $g_i-g_j$ 和权重 $w_iw_j$。令 $A(\eta)$ 为这批边在容差 $\eta\ge0$ 下的有序近碰撞权重。令 $C_i(\eta)$ 为删去原指标 $i$ 后、保留对角项的有序近碰撞权重。则
+$$
+R_2(\eta)=A(\eta)-2\sum_i w_i^2 C_i(\eta)+\sum_i\sum_{j\ne i}w_i^2w_j^2.
+$$
+
+把两个次数二向量各自展开为有序词。左词 $(i,k)$、右词 $(j,l)$ 的和之差等于边 $(i,j)$、$(l,k)$ 的频率差。边的定义已排除 $i=j$、$l=k$，还须排除 $i=l$、$j=k$ 才能使左右支撑互斥。固定任一种共享端点 $i$ 时，余下的近碰撞贡献为 $w_i^2 C_i(\eta)$。两种共享同时发生时，两条边相同，贡献恰为末项。因此可以直接从有向间距的相关和中扣除端点重叠。重复纵坐标可以属于不同指标，恒等式使用的是指标相等关系。
+
+[端点修正的 Lean 证明](lean:D5/S3/Fourier/Concentration/DegreeTwoResidualDifferenceEnergy.degree_two_residual)
+
+应用到实际 ζ 纵坐标时，次数一的估计只控制零附近的间距权重。这一恒等式中的 $A(\eta)$ 还比较远离零而彼此接近的间距。要约束这部分对 $E_p(\eta)$ 的贡献，仍需控制扣除共享端点后的相关和。
+
+## 互斥残余支撑的乘积界
+
+设权重非负。以 $U_d$ 记所有支撑互斥的有序 $d$ 次向量对的权重 $c_d(a)c_d(b)$ 之和。每个 $R_d(\eta)$ 都不超过 $U_d$。对 $s\ge0$ 和 $W=\sum_j w_j$，有
+$$
+s^{2d}U_d\le (d!)^2\prod_j(2e^{s w_j}-1)
+\le (d!)^2\exp\!\left(2sW-\sum_j(1-e^{-s w_j})^2\right).
+$$
+将 $s^{2d}c_d(a)c_d(b)/(d!)^2$ 写成坐标系数 $(s w_j)^{a_j+b_j}/(a_j!b_j!)$ 的乘积。放宽两个总次数约束后，每个坐标可取任意满足 $a_j=0$ 或 $b_j=0$ 的非负整数对。该坐标的指数级数和为 $2e^x-1$，其中 $x=s w_j$，而 $(0,0)$ 只计一次。由 $2e^x-1=e^{2x}[1-(1-e^{-x})^2]$ 和 $1-u\le e^{-u}$ 得到第二个界。 [Flajolet 与 Sedgewick 的二元生成函数，§III.1](https://algo.inria.fr/flajolet/Publications/book.pdf)
+
+若 $d\ge1$ 且 $W>0$，取 $s=d/W$ 并除以 $W^{2d}$，得到
+$$
+\frac{U_d}{W^{2d}}\le
+\left(\frac{d!e^d}{d^d}\right)^2
+\exp\!\left(-\sum_j(1-e^{-d w_j/W})^2\right).
+$$
+由 Stirling 公式，前因子渐近于 $2\pi d$。在 RH 下沿用上文合并重数的 ζ 尾段权重，并取 $d\asymp p\asymp X\log X$。在固定区间 $(X,CX]$ 内，至少有常数倍 $X\log X$ 个不同纵坐标，且各自满足 $w_j\ge1/(2CX)$。这些指标满足 $d w_j/W\gg1/\log T$，因此折减项之和至少为常数倍 $d/(\log T)^2$。另一方面，由 $x\ge0$ 时 $1-e^{-x}\le x$，该和至多为 $d^2 V/W^2=O(d/(\log T)^2)$。在 $d=p$ 时，归一化上界的量级为 $p\exp(-\Theta(p/(\log T)^2))$。而缺失窗口的矩预算即使只取一个网格点，也要求归一化质量至多为 $\exp(-2p\log\log T+O(p))$。仍需估计互斥对中满足频率条件的权重比例。 [Stirling 展开，DLMF §5.11(i)](https://dlmf.nist.gov/5.11.E1)
+[乘积界的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/cf603a81db0f09c9a1b1ff66187901be1a046829/D5/S3/Fourier/Concentration/DisjointSupportOccupationMass.lean#L92)
+
+
 ## 有限频带中的和必须接近
 
 设有限指标集 $J$ 有 $N$ 个元素，各频率 $g_j$ 落在 $[a,b]$。记 $F(m)=\sum_jm_jg_j$，次数为 $p$ 的向量共有 $M=\binom{N+p-1}{p}$ 个。

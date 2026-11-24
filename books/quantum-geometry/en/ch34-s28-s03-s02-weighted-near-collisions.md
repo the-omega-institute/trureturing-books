@@ -376,6 +376,38 @@ $$
 $$
 The first bound applies the diagonal estimate for each fixed count difference and sums over the matchable residual vectors. The second uses $D_k\le k!V^k$, from the multinomial theorem and the bound $k!$ on each multinomial coefficient. The estimate covers this particular subset of pairs. For example, $1+4=2+3$, and every cross-pair discrepancy is at least $1$, so a pointwise matching fails for $0<\eta<1$. For actual ζ zeros, the weight of higher-degree residuals with cancellation and no pointwise close matching remains to be bounded.
 
+## Residual degree two and directed gaps {#degree-two-directed-differences}
+
+For arbitrary real weights, when two terms remain on each side, their sum discrepancy is the difference of two directed gaps. For $i\ne j$, give the edge $(i,j)$ frequency $g_i-g_j$ and weight $w_iw_j$. Let $A(\eta)$ be the ordered near-collision mass on these edges at resolution $\eta\ge0$. Let $C_i(\eta)$ be the ordered near-collision mass of the original spectrum with index $i$ deleted, including the remaining diagonal. Then
+$$
+R_2(\eta)=A(\eta)-2\sum_i w_i^2 C_i(\eta)+\sum_i\sum_{j\ne i}w_i^2w_j^2.
+$$
+
+Expand each degree-two count vector into its ordered words. The difference of the sums for $(i,k)$ and $(j,l)$ is the frequency difference of the edges $(i,j)$ and $(l,k)$. Edges already exclude $i=j$ and $l=k$. Disjoint support also excludes $i=l$ and $j=k$. For either shared endpoint, fixing that endpoint at index $i$ leaves a contribution $w_i^2 C_i(\eta)$. Both shared-endpoint conditions together make the edges equal, giving the final term. Repeated ordinates can belong to different indices, and the correction uses index equality.
+
+[Lean proof of the endpoint correction](lean:D5/S3/Fourier/Concentration/DegreeTwoResidualDifferenceEnergy.degree_two_residual)
+
+For the actual ζ ordinates, the degree-one estimate controls the mass of gaps near zero. The quantity $A(\eta)$ also compares gaps far from zero that are close to each other. Bounding the contribution to $E_p(\eta)$ still requires control of that correlation after removing the shared endpoints.
+
+## A product bound for disjoint residual supports
+
+Assume the weights are nonnegative. Let $U_d$ sum $c_d(a)c_d(b)$ over all ordered degree-$d$ pairs with disjoint supports. Every $R_d(\eta)$ is at most $U_d$. For $s\ge0$ and $W=\sum_j w_j$,
+$$
+s^{2d}U_d\le (d!)^2\prod_j(2e^{s w_j}-1)
+\le (d!)^2\exp\!\left(2sW-\sum_j(1-e^{-s w_j})^2\right).
+$$
+Indeed, $s^{2d}c_d(a)c_d(b)/(d!)^2$ is the product of the coefficients $(s w_j)^{a_j+b_j}/(a_j!b_j!)$. Dropping both degree constraints allows every coordinate pair with $a_j=0$ or $b_j=0$. Its local exponential sum is $2e^x-1$ for $x=s w_j$, with $(0,0)$ counted once. The identity $2e^x-1=e^{2x}[1-(1-e^{-x})^2]$ and $1-u\le e^{-u}$ give the second bound. [Bivariate generating functions, Flajolet and Sedgewick, §III.1](https://algo.inria.fr/flajolet/Publications/book.pdf)
+
+With $d\ge1$, $W>0$ and $s=d/W$, division by $W^{2d}$ gives
+$$
+\frac{U_d}{W^{2d}}\le
+\left(\frac{d!e^d}{d^d}\right)^2
+\exp\!\left(-\sum_j(1-e^{-d w_j/W})^2\right).
+$$
+Stirling's formula gives a prefactor asymptotic to $2\pi d$. Under RH and with the grouped ζ-tail weights above, take $d\asymp p\asymp X\log X$. The fixed band $(X,CX]$ has $\gg X\log X$ distinct ordinates with $w_j\ge1/(2CX)$. For each of them $d w_j/W\gg1/\log T$, so the penalty sum is $\gg d/(\log T)^2$. Conversely, $1-e^{-x}\le x$ for $x\ge0$ bounds that sum by $d^2 V/W^2=O(d/(\log T)^2)$. At $d=p$ the resulting normalized upper bound is of order $p\exp(-\Theta(p/(\log T)^2))$. The missing-window budget requires $\exp(-2p\log\log T+O(p))$ or smaller even with one mesh point. Bounding the fraction of disjoint pairs meeting the frequency condition remains an arithmetic problem. [Stirling expansion, DLMF §5.11(i)](https://dlmf.nist.gov/5.11.E1)
+[Lean proof of the product bound](https://github.com/the-omega-institute/trureturing/blob/cf603a81db0f09c9a1b1ff66187901be1a046829/D5/S3/Fourier/Concentration/DisjointSupportOccupationMass.lean#L92)
+
+
 ## A finite frequency band forces close sums
 
 Let $J$ have $N$ elements, with all $g_j\in[a,b]$. Write $F(m)=\sum_jm_jg_j$. There are $M=\binom{N+p-1}{p}$ count vectors of degree $p$.
