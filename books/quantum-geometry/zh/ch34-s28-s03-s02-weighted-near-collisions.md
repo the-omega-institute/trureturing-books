@@ -346,15 +346,15 @@ $$
 
 ## 残余次数一的加权近配对
 
-取有限的有序指标对，设两个纵坐标均在 $[X,T]$ 内，$2\le X\le T$，且每对的间距至多为 $\eta\le X/2$。每个指标有非负重数 $m_j$，权重满足 $0\le w_j\le m_j/g_j$。令 $B(y)$ 为这批配对中较大纵坐标至多为 $y$ 的重数乘积 $m_i m_j$ 之和。若对每个 $X\le y\le T$ 都有 $B(y)\le Cy\log y$，其中 $C\ge0$，则
+取有限的有序指标对，设两个纵坐标均在 $[X,T]$ 内，$2\le X\le T$，且每对的间距至多为 $\delta\le X/2$。每个指标有非负重数 $m_j$，权重满足 $0\le w_j\le m_j/\gamma_j$。令 $B(y)$ 为这批配对中较大纵坐标至多为 $y$ 的重数乘积 $m_i m_j$ 之和。若对每个 $X\le y\le T$ 都有 $B(y)\le Cy\log y$，其中 $C\ge0$，则
 
 $$
 \sum_{(i,j)}w_iw_j\le \frac{4C(\log X+1)}{X}.
 $$
 
-对较大纵坐标为 $h$ 的一对，较小纵坐标至少为 $h-\eta\ge h/2$。于是其权重至多为 $2m_i m_j/h^2$。把 $1/h^2$ 写成 $1/T^2+\int_h^T 2y^{-3}\,dy$，交换有限和与积分，得到总权重至多为 $2B(T)/T^2+4\int_X^T B(y)y^{-3}\,dy$。代入累计上界并积分即得结论。
+对较大纵坐标为 $h$ 的一对，较小纵坐标至少为 $h-\delta\ge h/2$。于是其权重至多为 $2m_i m_j/h^2$。把 $1/h^2$ 写成 $1/T^2+\int_h^T 2y^{-3}\,dy$，交换有限和与积分，得到总权重至多为 $2B(T)/T^2+4\int_X^T B(y)y^{-3}\,dy$。代入累计上界并积分即得结论。
 
-在 RH 下，对不同正纵坐标合并重数并令 $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$。取 $0\le\eta\le1/(4\log T)$。将高度 $y$ 的 Montgomery 函数在 $[0,1]$ 上按 $2(1-\alpha)$ 平均。文献中一致的展开式给出 $O(1)$ 的平均。平均后的每对都带因子 $2(1-\cos u)/u^2$，其中 $u=(\gamma_i-\gamma_j)\log y$，零点取连续值一。因此所有贡献非负。间距至多为 $\eta$ 的配对满足 $|u|\le1/4$，这个因子及 Montgomery 的因子 $4/[4+(\gamma_i-\gamma_j)^2]$ 都有正的绝对下界。去掉其他配对并乘回归一化因子，得到 $B(y)\ll y\log y$，对充分大的 $X$ 一致成立。 [Baluyot、Goldston、Suriajaya 与 Turnage-Butterbaugh，定理 1](https://arxiv.org/abs/2306.04799)
+在 RH 下，对不同正纵坐标合并重数并令 $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$。本章的频率为 $g_\gamma=\gamma/r$，其中 $r>0$，所以频率差上限 $\eta$ 对应纵坐标差上限 $\delta=r\eta$。取 $0\le\eta\le1/(4r\log T)$。将高度 $y$ 的 Montgomery 函数在 $[0,1]$ 上按 $2(1-\alpha)$ 平均。文献中一致的展开式给出 $O(1)$ 的平均。平均后的每对都带因子 $2(1-\cos u)/u^2$，其中 $u=(\gamma_i-\gamma_j)\log y$，零点取连续值一。因此所有贡献非负。纵坐标差至多为 $\delta$ 的配对满足 $|u|\le1/4$，这个因子及 Montgomery 的因子 $4/[4+(\gamma_i-\gamma_j)^2]$ 都有正的绝对下界。去掉其他配对并乘回归一化因子，得到 $B(y)\ll y\log y$，对充分大的 $X$ 一致成立。 [Baluyot、Goldston、Suriajaya 与 Turnage-Butterbaugh，定理 1](https://arxiv.org/abs/2306.04799)
 
 这给出 $R_1(\eta)\ll(\log X+1)/X$。由固定计数差的上界，加权近碰撞质量 $E_p(\eta)$ 中残余次数恰为一的部分至多为 $p^2 D_{p-1}R_1(\eta)$。沿用固定 $K$ 和 $0<\beta<1$ 的截点 $X=e^{-K}T^\beta$，并取 $p\asymp X\log X$ 时，对角估计使这部分相对 $p!V^p$ 保留指数折减，因为 $V\asymp\log X/X$ 且 $p$ 倍的多项式因子可被吸收。残余次数随 $p$ 增长时，仍需额外的算术输入。
 
