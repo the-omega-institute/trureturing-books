@@ -98,6 +98,7 @@ Every in-band pair contributes for every modulus. For a pair outside the band, p
 
 Multiplying primes from $P$ requires a pair to use a single band shift across every factor. For example, let $H=1$ and $d=6$. Modulo $3$ the shift can be $0$, and modulo $5$ it can be $1$. Modulo $15$, the residue of $6$ matches none of $-1$, $0$, or $1$.
 
+::: {.theorem #thm-ch31-prime-product-excess title="Collision excess across products of primes" lean="D5/S3/Fourier/Concentration/PrimeProductCollisionBudgets.sum_prime_product_cyclic_excess_le"}
 Let $r,B_0$ be nonnegative integers with $D+H<Q^{B_0+1}$, using the same $P,Q,H,D,L_H,W$ and nonnegative weights as above. For each $r$-element subset $S\subseteq P$, write $q_S=\prod_{q\in S}q$. The total excess mass for these product moduli satisfies
 
 $$
@@ -107,8 +108,11 @@ $$
     (W^{2p}-L_H).
 \end{aligned}
 $$
+:::
 
+::: proof
 For an off-band gap $d$, fix $y\in[-H,H]\cap\mathbb Z$. Whenever a subset $S$ uses $y$ as its common shift, every prime in $S$ divides the same nonzero integer $d-y$. Because $|d-y|\le D+H$, at most $B_0$ primes can divide it. Counting subsets for each shift and taking the union over the $2H+1$ shifts bounds the multiplicity of an off-band pair. Summing with the pair weights gives the bound. If $r>B_0$, every selected product modulus gives exactly the lattice band mass $L_H$.
+:::
 
 The zero residue alone limits how small a cyclic certificate can be. Set $R=\{0\}$ in the character formula. Every term is a nonnegative moment and the term at $k=0$ is $W^{2p}$. Thus $C_q(R_q(H))\ge W^{2p}/q$ for $H\ge0$. To certify the missing-window budget with a single cyclic bound, one therefore needs $q>KN(W/\delta)^{2p}$. For an average over a nonempty set $P$, the same inequality holds with $q$ replaced by the harmonic mean of its moduli. This restriction also applies to the product moduli.
 
