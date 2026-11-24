@@ -216,6 +216,20 @@ When $4\nmid q$, reduce $4k-q$ to a centered residue modulo $2q$ for each intege
 
 For actual ζ ordinates, use the tail above $X=e^{-D}T^\beta$ from the preceding section, with $\delta=\log T$ and $g_\gamma=\gamma/r$. For $H=\exp(cT^\beta\log T)$, take $N=\lfloor HT^2/r\rfloor_++1$ to keep the mesh error at most $rB/(2T^2)$. To bound the start, a finite $L=L(T)$ must satisfy the budget $KNE_p(2/L)<(\log T)^{2p}$. The target order $p$ grows on the scale of $T^\beta\log T$. For fixed finite tail and fixed $p$, $E_p(2/L)$ eventually equals the exact collision mass $E_p(0)$ as $L$ increases. Quantifying $L$ requires a weighted bound at positive resolution. Definition 7 in Tao, Trudgian, and Yang counts unweighted quadruples at unit scale, and Theorem 64 gives estimates for fixed $\sigma\ge7/10$. The growing-order weighted bound for the critical-line tail remains open. [Definition 7 and Theorem 64](https://arxiv.org/html/2501.16779v1) · [Research question](https://github.com/the-omega-institute/trureturing/issues/33519)
 
+The second and fourth harmonics give a sharp bound even when the phases range over the whole circle. Write $m_h=\sum_jw_jz_j^h$ for the moments of one probability weight on unit phases. Given caps $0\le e,k\le1$ on $|m_2|,|m_4|$, put $b=\min(e,\sqrt{(1+k)/2})$ and $r=(1+b)/2$. If $b=1$, the largest $|m_1|$ is $1$. If $b<1$, put
+
+$$
+a=\min\left(\sqrt r,\sqrt{\frac{1+k}{4(1-b)}}\right),\qquad B=\frac{a+r}{1+a}.
+$$
+
+The largest $|m_1|$ is $B$. Rotate the phase family so that $m_1$ is nonnegative real, and write $x=\Re z$ for the real projection of a phase sampled under the weight. The identities $2x^2=1+\Re z^2$ and $8(x^2-x^4)=1-\Re z^4$ relate the two caps to real moments. The nonnegative variance of $\Re z^2$ gives $\mathbb E x^2\le r$. If $a=\sqrt r$, Cauchy–Schwarz gives $\mathbb E x\le a=B$. In the other branch, expand the nonnegative polynomial $(1-x)(x-a)^2(x+1+2a)$ for $x\in[-1,1]$. Its mean is
+$$
+\mathbb E[(1-x^2)(x^2-a^2)]-2a(1+a)\left[(1+a)(\mathbb E x-1)+1-\mathbb E x^2\right].
+$$
+The first term is nonpositive by the fourth cap and $\mathbb E x^2\le r$, so the bracket is nonpositive. This yields the stated bound. The real moment calculation is related to the upper principal representation of a measure on an interval. [Dette and Schorning, Lemma 2.1](https://arxiv.org/pdf/1306.4872)
+
+For $b<1$, take weight $(r-a^2)/(1-a^2)$ at $1$ and divide the rest equally between $a+i\sqrt{1-a^2}$ and its conjugate. The moments are real and equal to $B$, $b$, and $1-8(1-r)a^2$ at orders $1,2,4$. The choice of $a$ gives $|m_4|\le k$. A point mass attains the branch $b=1$. With $e=k=0$, the three phases are $1,e^{i\pi/3},e^{-i\pi/3}$ with equal weights, and $|m_1|=2/3$. Every moment at order $2^j$ for $j\ge1$ vanishes in this example because $2^j$ is congruent to $2$ or $4$ modulo six. Even these simultaneous vanishings allow a first coefficient of fixed positive size. A growing-degree bound on actual ζ ordinates needs further arithmetic information about the weighted frequency sums.
+
 ## What low-order collision masses determine
 
 Move the last frequency in $(0,1,k)$ to $k+\sqrt 2$. Below degree $k$, the counts on the first two coordinates cannot offset a change in the last count. At degree $k$, exactly one additional pair of count vectors can cancel in the integer spectrum.
