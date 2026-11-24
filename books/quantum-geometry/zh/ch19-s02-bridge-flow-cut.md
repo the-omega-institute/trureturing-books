@@ -520,6 +520,47 @@ $$
 在 $(3,4,3,4)$，$4/3$ 一级的两个上界都取等，所以四项可实现。三项必要界在此要求 $9\le8$，故不存在三项实现。完整证明由 Lean 内核检查。
 :::
 
+纯秩二只是压缩核的一种情形。还可以从整个核的矩阵结构，或从核内单个秩三矩阵，分别推出右侧维数的限制。
+
+::: {.theorem #thm-bridge-native-four-clifford-rank-three title="宽度四的 Pauli–Clifford 压缩核与秩三压缩核维数界" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourCliffordRankThree.clifford_kernel_four_bound, D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourRankThree.rank_three_small_defect_four_bound"}
+设 $a,b,c,d\in\mathbb N$ 且 $a<b$。任取 $X\colon\operatorname{Fin}4\to M_{a\times b}(\mathbb C)$、$Y\colon\operatorname{Fin}4\to M_{d\times c}(\mathbb C)$ 和实数 $\lambda>0$，使 $F=\sum_{i=0}^3 X_i\otimes Y_i$ 满足 $F^*F=\lambda I_{bc}$。对厄米矩阵 $T\in M_4(\mathbb C)$，记 $\operatorname{compression}(X,T)=\sum_{i,j=0}^3 T_{ij}X_i^*X_j$。
+
+1. **Pauli–Clifford 压缩核。** 若存在 $P\in\operatorname{GL}_4(\mathbb C)$，使每个满足 $\operatorname{compression}(X,T)=0$ 的厄米矩阵 $T$ 经合同变换所得的 $P^*TP$ 都属于
+
+   $$
+   \operatorname{span}_{\mathbb R}\{\sigma_x\otimes I_2,\ \sigma_y\otimes I_2,\ \sigma_z\otimes\sigma_x,\ \sigma_z\otimes\sigma_y,\ \sigma_z\otimes\sigma_z\},
+   $$
+
+   则 $4c\le3d$。这里 $\sigma_x,\sigma_y,\sigma_z$ 为 Pauli 矩阵，这五个张量积正是 [pauliClifford](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourCliffordRankThree.pauliClifford)。
+2. **秩三厄米压缩核元。** 若存在厄米矩阵 $T$，使 $\operatorname{compression}(X,T)=0$ 且 $\operatorname{rank}T=3$，则 $6c\le5d$。若还满足行亏量条件 $ad-bc<2c-d$，则 $4c\le3d$。这里的减法均为自然数减法，负差截为零。
+:::
+
+::: {.proof #pf-bridge-native-four-clifford-rank-three}
+当 $c=0$ 时，各界直接成立。若右因子线性相关，可以吸收一项，再由 [@thm-bridge-native-three-rectangular-bound] 得到 $3c\le2d$，足以推出各界。以下设 $c>0$ 且右因子线性无关。
+
+**第 1 项。** 把右 Gram 的每对输入坐标 $(\ell,m)$ 对应的系数矩阵记为 $G_{\ell m}=((Y_i^*Y_j)_{\ell m})_{ij}$，令 $H=c^{-1}\sum_\ell G_{\ell\ell}$。展开 $F^*F$ 可知 $G_{\ell m}-\delta_{\ell m}H$ 的压缩为零。把它分成两个厄米部分，再施加合同变换并重排基，所得偏差落在 Pauli–Clifford 张成空间的复化中。其两个 $2\times2$ 对角块是符号相反的标量块，两个非对角块的元素也成对相联。
+
+右因子线性无关使 $H$ 正定。分别用保留上述块关系的酉变换对角化合同变换后 $H$ 的两个对角块。新右因子 $A,B$ 与 $C,D$ 在各自的配对内像互相正交。记两对中较小的 Gram 矩阵为 $M,N$。相反的偏差抵消，故 $M+N$ 是单位阵的正倍数，从而 $\operatorname{rank}M+\operatorname{rank}N\ge c$。一对的对角系数若有严格差距，较大的 Gram 正定，该对的秩之和等于 $c$ 加上较小的秩。系数相等时，该对的秩之和是较小秩的两倍。两对的秩之和各自至多为 $d$。只要有一对存在严格差距，合并这两个界及 $\operatorname{rank}M+\operatorname{rank}N\ge c$ 即得 $4c\le3d$。
+
+若两对的差距都为零，且 $M$ 可逆，则第一对已给出 $2c\le d$。否则，取到共同核 $\ker M$ 的投影 $\Pi$。在非零核向量上检验非对角块的配对关系，消去其中的标量恒等项。于是 $C\Pi,D\Pi$ 的像均垂直于第一对的像。由于 $M+N$ 是单位阵的正倍数，第二对在 $\ker M$ 上单射，因此 $A+C\Pi$ 与 $B+D\Pi$ 都单射，且像互相正交，仍得 $2c\le d$。
+
+**第 2 项。** 先缩放使 $F^*F=I_{bc}$，再归一化左叠映射并对角化秩三核元。调换次序及整体符号后，压缩关系可写成 $rX_0^*X_0=sX_1^*X_1+tX_2^*X_2$，其中 $s,t>0$。因此 $\ker X_0\subseteq\ker X_1\cap\ker X_2$，而 $X_3$ 在 $\ker X_0$ 上单射。由于 $a<b$，$X_3(\ker X_0)$ 与 $\operatorname{im}X_0$ 有非零交。用这个交中的向量在左输入侧配对，Gram 恒等式给出右等距因子 $J=Y_3$ 以及前三个右因子的一个非平凡组合 $V$，满足 $J^*V=0$。所以 $\operatorname{rank}V\le d-c$。把 $V$ 选为一个右因子，再把右输入限制到 $E=\ker V$，其维数 $e\ge2c-d$。剩下至多三项，由宽度三的界得 $3e\le2d$，从而 $6c\le5d$。
+
+若 $4c>3d$，则 $d<2e$。宽度三的核几何在这里排除了中性平面情形，因为该情形要求 $2e\le d$。在共同核情形，$J|_E$ 与共同核给出的右等距方向若线性无关，便能正交化成两个等距方向，同样要求 $2e\le d$。因此另两个右因子在 $E$ 上与 $J|_E$ 的交叉 Gram 都是标量矩阵。把这两个标量分量吸收到与 $J$ 配对的左因子后，$E$ 上的两个剩余右因子的像均垂直于 $J(E)$，且彼此线性无关，因为 $a<b$ 时两项等距实现要求 $2e\le d$。
+
+记与 $J$ 配对的左因子为 $L$。在限制到 $E$ 后，两项余项的 Gram 为 $(I_b-L^*L)\otimes I_e$。两个右因子的任一线性组合的像都落在维数 $d-e<e$ 的空间中，故有非零核。对输入的乘积向量应用该 Gram 恒等式可知，两个剩余左因子的任一非平凡组合的核都包含在 $\ker(I_b-L^*L)$ 中。另一方面，$F$ 的等距性使交叉 Gram 的任一非零系数给出一个这样的左组合，其像垂直于 $L(\ker(I_b-L^*L))$。后者的维数等于 $\dim\ker(I_b-L^*L)$，由 $a<b$，两项维数要求矛盾。因此整个右输出切片 $J(E)$ 只接收与 $J$ 配对的项。
+
+在左输出与 $J(E)$ 的张量积上压缩行亏投影 $I_{ad}-FF^*$，得到 $(I_a-LL^*)\otimes I_e$。因为 $ad-bc<2c-d\le e$，只有 $LL^*=I_a$ 才能满足秩界。在 $\operatorname{im}L^*$ 上，另两个左因子因其右因子在 $E$ 上线性无关而消失。此时等距性及 $J^*V=0$ 也使与 $V$ 配对的项在该空间上消失。投影到右输出中 $\operatorname{im}J$ 的正交补后，余下三项各自的秩至多为 $(b-a)(d-c)$。投影后的列空间与压缩后的行亏投影的像共同张成该输出空间，故
+
+$$
+a(d-c)\le ad-bc+3(b-a)(d-c).
+$$
+
+整理并消去 $b-a>0$，得到 $c\le3(d-c)$，与 $4c>3d$ 矛盾。完整证明由 Lean 内核检查。
+:::
+
+在 $(4,5,4,5)$、$(5,6,4,5)$ 和 $(5,6,5,6)$，行亏量 $ad-bc$ 分别为 $0,1,0$，低于各自的阈值 $2c-d=3,3,4$，而三组尺寸都满足 $4c>3d$。因此第 2 项逐一排除了含秩三厄米矩阵的压缩核，第 1 项也排除了可合同嵌入 Pauli–Clifford 张成空间的压缩核。秩二与秩四混合的厄米压缩核、小比例区间 $a<b\le2a$ 的一般必要条件，以及这三组尺寸的四项实现问题仍然开放。
+
 对 $k\ge1$，族 $(2k,5k,2k,5k)$ 落在左侧缩维的第三区间，但 $3c=6k>d=5k$，故宽度三下的精确平坦谱无法达到。对这族维数，归一化列 Gram 的熵与最大值之间还有一个与 $k$ 无关的下界。
 
 **宽度三桥接的一致平坦谱熵隙（手工推导）。** 设 $k\ge1$ 为整数，$(a,b,c,d)=(2k,5k,2k,5k)$，$D=bc=10k^2$，$F=\sum_{r=1}^3 M_r\otimes N_r\ne0$。归一化 $\rho_{BC}=F^*F/\operatorname{Tr}(F^*F)$，记 $G=D\rho_{BC}$ 与 $\eta=\|G-I_D\|_1/D$，其中 $\|\cdot\|_1$ 是迹范数。若至多用 $2$ 项，则 $\operatorname{rank}F\le 2ac=8k^2$，故 $G-I_D$ 的负部迹至少为 $2k^2$。由于该矩阵无迹，$\eta\ge 2/5$。
