@@ -13,7 +13,7 @@
 
 ## C.1 Lean 验证结果 {#sec-appendix-c-theorems}
 
-`theorem`、`lemma`、`proposition` 与 `corollary` 的绿色徽章由构建根据锁文件生成。核对结果时，先读书中前提与结论，再打开其 Lean 源码链接，逐项比较类型、假设与结论。引用同一声明的不同章节不因此得到新的定理。
+构建根据锁文件为经过 Lean 验证的 `theorem`、`lemma`、`proposition` 与 `corollary` 环境生成徽章。核对结果时，先读书中前提与结论，再打开其 Lean 源码链接，逐项比较类型、假设与结论。引用同一声明的不同章节不因此得到新的定理。
 
 第 7.3 节的 [@prob-monitored-spectral-mean] 讨论有限维酉监测纯态；[@rem-monitored-unital-kac] 处理保实际相关空间恒等算子的有限维 CPTP 通道。一般量子仪器、无限维与物理时钟仍须另行论证。
 
