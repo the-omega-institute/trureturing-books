@@ -745,6 +745,8 @@ $$
 q^2(1-a_{\mathrm{crit}}(q))\longrightarrow\frac{24\pi^2}{5}.
 $$
 
+[首次接触与仿射过零的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_first_contact) · [模十二例外的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_twelve_no_contact) · [锐利宽度极限的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_criticalThreshold_limit)
+
 ## 整数格点上最小平方和的支撑阈值
 
 在大模数下，零点附近的二次余弦亏量把问题引向整数格点。先固定格点上的二阶矩预算 $m\ge0$。在满足 $\sum_j w_j=1$、$w_j\ge0$、$\sum_j j^2 w_j\le m$ 的权重中，最小化 $\sum_j w_j^2$。这里所有指标 $j$ 都在 $\mathbb Z$ 上，二阶矩要求可和。

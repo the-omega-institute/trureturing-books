@@ -745,6 +745,8 @@ $$
 q^2(1-a_{\mathrm{crit}}(q))\longrightarrow\frac{24\pi^2}{5}.
 $$
 
+[Lean proof of first contact and the affine crossing](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_first_contact) · [Lean proof of the modulus-twelve exception](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_twelve_no_contact) · [Lean proof of the sharp width limit](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_criticalThreshold_limit)
+
 ## Support thresholds for the integer-lattice minimum
 
 At large moduli the quadratic deficit of the second cosine near the origin leads to an integer-lattice problem. Fix a second-moment budget $m\ge0$ and minimize $\sum_j w_j^2$ subject to $\sum_j w_j=1$, $w_j\ge0$, and $\sum_j j^2 w_j\le m$. The indices range over $\mathbb Z$, with a convergent sum for the second moment.
