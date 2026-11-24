@@ -41,7 +41,7 @@
 
 ### 32.7.2.1 无 $\pi$、无 $e$、无根号的三维真球旋转（有理凯莱正逆桥） {#sec-ch39-35-2-1}
 
-在三维有理空间 $\mathbb{Q}^3$ 中任取有理生成元 $\boldsymbol{\sigma} = (\sigma_1, \sigma_2, \sigma_3)^\top \in \mathbb{Q}^3$，记其反对称叉乘矩阵为 $X = [\boldsymbol{\sigma}]_\times \in \mathfrak{so}(3, \mathbb{Q})$（满足 $X\mathbf{v} = \boldsymbol{\sigma} \times \mathbf{v}$，$X^\top = -X$）。传统数学用无穷超越级数 $\exp(X) = \sum_{k=0}^\infty \frac{1}{k!}X^k$ 连接李代数与旋转群——在任何有限阶截断 $n$ 下都残留非零截断尾项（上界由 [`exp_remainder_le`](lean:D5/S3/Quantum/AURICOmega/ExponentialTail.exp_remainder_le) 给出，`LEAN ✓`），一步即破坏正交性！
+在三维有理空间中任取有理生成元 $\boldsymbol{\sigma} = (\sigma_1, \sigma_2, \sigma_3)^\top \in \mathbb{Q}^3$，记其反对称叉乘矩阵为 $X = [\boldsymbol{\sigma}]_\times \in \mathfrak{so}(3, \mathbb{Q})$（满足 $X\mathbf{v} = \boldsymbol{\sigma} \times \mathbf{v}$，$X^\top = -X$）。传统数学用无穷超越级数 $\exp(X) = \sum_{k=0}^\infty \frac{1}{k!}X^k$ 将 $X$ 映入 $\mathrm{SO}(3)$；在欧氏算子范数 $\lVert\cdot\rVert_{\mathrm{op}}$ 下，其 $n$ 项截断在满足 $\lVert X\rVert_{\mathrm{op}} \le r < n + 1$（$r \ge 0$）时的余项由 [`exp_remainder_le`](lean:D5/S3/Quantum/AURICOmega/ExponentialTail.exp_remainder_le) 给出上界，而任一正次数截断（$n \ge 2$）在一般非零生成元上一步即破坏正交性（至多存在 $\lfloor(n - 2)/2\rfloor$ 个正值 $\lVert\boldsymbol{\sigma}\rVert^2$ 可保模，见 [§32.7.5.2](#sec-ch39-35-5-2-cayley-composition-taylor-barrier)）！
 
 $\mathbf{Math}_\Omega$ 直接以纯四则运算的**有理凯莱正逆变换**（Cayley 1846，`文献结果` + `手工推导`）取代 $\exp(X)$ 与 $\ln\mathbf{R}$：
 
@@ -161,8 +161,101 @@ $$
    $$
    作用于初值 $\mathbf{v}_0 = (0, 0, 1)^\top$ 连续走 $N = 12$ 步，$\mathbf{R}^{12}\mathbf{v}_0 \in \frac{1}{3^{12}}\mathbb{Z}^3$（精确分母 $3^{12} = \mathbf{531{,}441}$）严格守住单位模方 $\lVert\mathbf{R}^{12}\mathbf{v}_0\rVert^2 = \mathbf{1.0000}$；而共用同一反对称生成元 $X = [\boldsymbol{\sigma}]_\times$ 的二阶泰勒截断矩阵 $\exp_2(X) = \mathbf{I} + X + \frac{1}{2}X^2$（注：$\mathbf{R}(\boldsymbol{\sigma})$ 单步转角为 $2\arctan\lVert\boldsymbol{\sigma}\rVert$ 而精确 $\exp(X)$ 单步转角为 $\lVert\boldsymbol{\sigma}\rVert$，此处对比的是同一生成元下“严格保模方”与“级数截断脱球”的结构差异）在正交旋转平面上的单步模方放大因子精确为 $1 + \frac{1}{4}\lVert\boldsymbol{\sigma}\rVert^4 = 1 + \frac{1}{16} = \frac{17}{16} > 1$，$N = 12$ 步后模方膨胀至 $(\frac{17}{16})^{12} > 1$（值 $\approx \mathbf{2.0699}$，作用于 $\mathbf{v}_0 = (0,0,1)^\top$ 精确等于 $(\frac{17}{16})^{12} \approx \mathbf{2.0699}$；若取一阶欧拉 $\mathbf{I}+X$，模方更暴涨至 $(1 + \frac{1}{2})^{12} = (\frac{3}{2})^{12} \approx \mathbf{129.7463}$）；
 3. **无极限二阶射流 $\kappa(x + \eta) \in \mathbb{Q}[\eta]/(\eta^3)$ 对比有限差商割线**：
-   在 $x = 1$ 处，$\kappa(1 + \eta) \equiv \mathbf{\frac{1}{2}} - \mathbf{\frac{1}{2}}\eta + \mathbf{\frac{1}{4}}\eta^2 \pmod{\eta^3}$ 一步给出精确值 $\frac{1}{2} = \mathbf{0.5000}$、一阶导数 $-\frac{1}{2} = \mathbf{-0.5000}$ 与二阶曲率系数 $+\frac{1}{4} = \mathbf{+0.2500}$（$\kappa''(1) = +\frac{1}{2}$）；在 $x = \frac{1}{2}$ 处一步给出 $\frac{4}{5} - \frac{16}{25}\eta - \frac{16}{125}\eta^2$（即 $\{\mathbf{0.8000}, \mathbf{-0.6400}, \mathbf{-0.1280}\}$）；而有限步长 $h = \frac{1}{4}$ 在 $x = 1$ 处的差商割线斜率仅为 $-\frac{18}{41}$，偏离真导数 $-\frac{1}{2}$ 达精确分数 $\frac{5}{82} > 0$（值 $\approx \mathbf{0.0610}$；除开跨拐点偶合消去轨迹 $3x^2 + 2xh = 1$——如 $(x, h) = (\frac{1}{2}, \frac{1}{4})$——之外，有限差商普遍残留非零割线偏差）。
+   在 $x = 1$ 处，$\kappa(1 + \eta) \equiv \mathbf{\frac{1}{2}} - \mathbf{\frac{1}{2}}\eta + \mathbf{\frac{1}{4}}\eta^2 \pmod{\eta^3}$ 一步给出精确值 $\frac{1}{2} = \mathbf{0.5000}$、一阶导数 $-\frac{1}{2} = \mathbf{-0.5000}$ 与二次泰勒系数 $+\frac{1}{4} = \mathbf{+0.2500}$（$\kappa''(1) = +\frac{1}{2}$）；在 $x = \frac{1}{2}$ 处一步给出 $\frac{4}{5} - \frac{16}{25}\eta - \frac{16}{125}\eta^2$（即 $\{\mathbf{0.8000}, \mathbf{-0.6400}, \mathbf{-0.1280}\}$）；而有限步长在 $x = 1,\; h = \frac{1}{4}$ 处的差商割线斜率仅为 $-\frac{18}{41}$，偏离真导数 $-\frac{1}{2}$ 达精确分数 $\frac{5}{82} > 0$（值 $\approx \mathbf{0.0610}$；对任意 $h \neq 0$，除跨拐点偶合消去轨迹 $3x^2 + 2xh = 1$——例如落在该轨迹上的点 $(x, h) = (\frac{1}{2}, \frac{1}{4})$——之外，有限差商处处残留非零割线偏差）。
 :::
+
+## 32.7.5 有限射影法雷弦距、凯莱合成与泰勒谱障、高阶有理射流及单纯形锥同伦 {#sec-ch39-35-5-farey-cayley-jets-cone-homotopy}
+
+为将 [@ex-ch39-math-omega-quantitative-audit] 的三组定量算例与 [§32.7.3.2](#sec-ch39-35-3-2) 的粗剖分四面体正合性推进为普遍结构律，下文分四节补全代数框架。前两节研究有限射影圆 $C(\mathbb{QP}^1_{\le M})$ 的精确点数与相邻有理弦距平方极值，以及三维凯莱旋转合成、半周双步分解与正整数阶泰勒截断的谱障。后两节先导出任意阶有理射流的整系数多项式递推与有限差商零偏差双曲线，再在完全单纯形上对闭 $2$-上链给出粗粒度显式原势，并对一般 $2$-上链给出唯一顶点-$0$ 归一拆分。
+
+### 32.7.5.1 有限射影圆 $C(\mathbb{QP}^1_{\le M})$ 的精确点数、法雷弦距极值与 $\pi^2$ 的渐近阴影 {#sec-ch39-35-5-1-farey-projective-gaps}
+
+对任意正整数 $M \ge 1$，取本原整对 $(p, q)$ 中全部满足 $\max(\lvert p\rvert, \lvert q\rvert) \le M$ 且 $q > 0$ 者，并补入唯一对径代表 $(1, 0)$，即得有限视界射影线 $\mathbb{QP}^1_{\le M}$ 的规范代表集；记欧拉函数求和 $\Phi(M) = \sum_{j=1}^M \varphi(j)$（其中 $\varphi(1) = 1$）。有理圆周映射 $C([p : q]) = \bigl(\frac{q^2 - p^2}{p^2 + q^2},\, \frac{2pq}{p^2 + q^2}\bigr)$ 将 $[1 : 0]$ 映至 $(-1, 0)$，而在 $(-1, 0)$ 之外有精确逆映射 $[y : 1 + x]$，因而构成从有理射影线到有理单位圆的双射。对任意两非零整对记 $C_i = C([p_i : q_i])$ 与行列式 $\Delta = p_2 q_1 - p_1 q_2$，直接展开即得精确有理弦距平方与失准展开度恒等式：
+
+$$
+\begin{aligned}
+\lVert C_1 - C_2 \rVert^2 &= \frac{4\Delta^2}{(p_1^2 + q_1^2)(p_2^2 + q_2^2)}, \\
+s(C_1, C_2) &= \frac{1 - C_1 \cdot C_2}{2} = \frac{\Delta^2}{(p_1^2 + q_1^2)(p_2^2 + q_2^2)}.
+\end{aligned}
+$$
+
+在第一象限闭弧上，既约斜率构成 $M$ 阶法雷序列（落于 $[0, 1]$ 内），含 $\Phi(M) + 1$ 个点；经 $p \mapsto -p$ 与 $p \leftrightarrow q$ 得到仅在 $4$ 枚坐标轴交点相交的四条闭弧，故整圆点数精确为 $4(\Phi(M) + 1) - 4 = 4\Phi(M)$。对第一弧上任一既约分数 $p/q < 1$，因 $\gcd(p, q) = 1$ 且 $q \le M$，同余类 $pb \equiv -1 \pmod q$ 在 $\{1, \dots, M\}$ 中非空；取其中最大正整数 $b \le M$（对 $0/1$ 取 $b = M$），则 $a = (1 + pb)/q \le b$ 满足 $aq - pb = 1$（从而 $(a, b)$ 自动本原）且 $b + q > M$。对任一严格夹于两者之间的分数 $r/t$，正整数 $qr - pt \ge 1$ 与 $at - br \ge 1$ 满足 $t = b(qr - pt) + q(at - br) \ge b + q > M$，故整圆全部 $4\Phi(M)$ 条环向相邻边皆满足 $\lvert\Delta\rvert = 1$。
+
+在第一弧上，$(0/1, 1/M)$ 的 $(p^2 + q^2)(a^2 + b^2)$ 等于 $M^2 + 1$，而其余任意相邻边 $(p/q, a/b)$ 皆有正分子与 $qb \ge q + b - 1 \ge M$，从而 $(p^2 + q^2)(a^2 + b^2) \ge (q^2 + 1)(b^2 + 1) > M^2 + 1$，故对一切 $M \ge 1$ 最大相邻弦距平方恒为 $\frac{4}{M^2 + 1}$ 且重数为 $4$（于 $[0 : 1], [\pm 1 : M]$ 与 $[1 : 0], [\pm M : 1]$ 达到）。当 $M \ge 3$ 时，相邻两点分母不能同为 $M$（否则 $M \mid \Delta$）；分母等于 $M$ 者范数平方最大为 $A = 2M^2 - 2M + 1$（仅 $(M - 1)/M$ 取等），分母 $\le M - 1$ 者最大为 $B = 2M^2 - 6M + 5 < A$（仅 $(M - 2)/(M - 1)$ 取等，且 $1/1$ 满足 $2 < 5 \le B$），而两者分母皆 $\le M - 1$ 时乘积至多为 $B^2 < AB$；因 $(M - 2)/(M - 1)$ 与 $(M - 1)/M$ 满足 $(M - 1)^2 - M(M - 2) = 1$ 且分母和 $2M - 1 > M$，两者相邻并连同三条对称像以重数 $4$ 唯一取得最小相邻弦距平方（$M = 1$ 时四边皆为 $2$；$M = 2$ 时第一弧边 $(0/1, 1/2)$ 与 $(1/2, 1/1)$ 给出 $\frac{4}{5}$ 与 $\frac{2}{5}$，故最小值为 $\frac{2}{5}$ 且重数为 $4$）；以 $C_1 \sim C_2$ 记环向相邻点对，即有：
+
+$$
+\begin{aligned}
+\max_{C_1 \sim C_2} \lVert C_1 - C_2 \rVert^2 &= \frac{4}{M^2 + 1} \quad (M \ge 1), \\
+\min_{C_1 \sim C_2} \lVert C_1 - C_2 \rVert^2 &= \frac{4}{(2M^2 - 2M + 1)(2M^2 - 6M + 5)} \quad (M \ge 3).
+\end{aligned}
+$$
+
+据此，在第一张实验卡所绘 $M = 6$ 圆环与第二张实验卡默认视界 $M = 12$ 下，射影圆分别精确包含 $48$ 与 $184$ 个点；在 $M = 12$ 处，环向相邻最大与最小弦距平方精确为 $\frac{4}{145}$ 与 $\frac{4}{58565}$。规范代表落入 $[-M, M]^2$ 的精确有理密度为 $\frac{4\Phi(M)}{(2M + 1)^2}$（在 $M = 12$ 处为 $\frac{184}{625} = 0.2944$），它在 $M \to \infty$ 时由经典渐近式 $\Phi(M) \sim \frac{3M^2}{\pi^2}$（T. M. Apostol，*Introduction to Analytic Number Theory*，1976，Theorem 3.7，[10.1007/978-1-4757-5579-4](https://doi.org/10.1007/978-1-4757-5579-4)）收敛至 $\frac{3}{\pi^2}$（档案包络四舍五入为 $0.303964$）——$\pi^2$ 在此只作为有限互素计数的渐近阴影出现。
+
+在连分数终止侧，对斐波那契数列 $F_0 = 0, F_1 = 1$ 与一切 $k \ge 2$，由 $F_k / F_{k+1} \in (0, 1)$ 及 $F_{j+1}/F_j = 1 + F_{j-1}/F_j$（$j = k, \dots, 3$，终结于 $F_3/F_2 = 2$）立得标准展开 $[0; 1, \dots, 1, 2]$（含 $k - 2$ 个 $1$），精确拥有 $k$ 枚收敛子（起自 $0/1$、止于 $F_k / F_{k+1}$）；例如 $k = 12$ 处的 $144/233$ 长度为 $12$，而 [@thm-ch39-math-omega-finite-rational-anchors]（[`convergents_length_log`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log)）给出的上界为 $2\lfloor\log_2 233\rfloor + 1 = 15$，比值为 $\frac{4}{5}$。
+
+### 32.7.5.2 凯莱旋转精确合成律、半周双步分解与泰勒多项式脱球谱障 {#sec-ch39-35-5-2-cayley-composition-taylor-barrier}
+
+在 $\mathbb{R}^3$ 中取列向量与右手叉乘 $X\mathbf{v} = \boldsymbol{\sigma} \times \mathbf{v}$，记 $u = \lVert\boldsymbol{\sigma}\rVert^2$，并按四元数乘法 $(s_1, \mathbf{v}_1)(s_2, \mathbf{v}_2) = (s_1 s_2 - \mathbf{v}_1\cdot\mathbf{v}_2,\, s_1\mathbf{v}_2 + s_2\mathbf{v}_1 + \mathbf{v}_1\times\mathbf{v}_2)$ 计算。对任一非零实四元数 $q = (d, \mathbf{v}) \neq (0, \mathbf{0})$ 与纯向量 $x = (0, \mathbf{w})$，先有 $(d, \mathbf{v})(0, \mathbf{w}) = (-\mathbf{v}\cdot\mathbf{w},\, d\mathbf{w} + \mathbf{v}\times\mathbf{w})$，再右乘 $(d, -\mathbf{v})$ 时标量部消为 $-d(\mathbf{v}\cdot\mathbf{w}) + d(\mathbf{w}\cdot\mathbf{v}) = 0$、向量部化为 $d^2\mathbf{w} + 2d(\mathbf{v}\times\mathbf{w}) + (\mathbf{v}\cdot\mathbf{w})\mathbf{v} + \mathbf{v}\times(\mathbf{v}\times\mathbf{w})$；代入 $\mathbf{v}\times(\mathbf{v}\times\mathbf{w}) = (\mathbf{v}\cdot\mathbf{w})\mathbf{v} - \lVert\mathbf{v}\rVert^2\mathbf{w}$ 并除以 $d^2 + \lVert\mathbf{v}\rVert^2$，立得共轭作用 $x \mapsto q x q^{-1}$ 对应缩放不变矩阵 $\Psi(d, \mathbf{v}) = \frac{(d^2 - \lVert\mathbf{v}\rVert^2)\mathbf{I} + 2d[\mathbf{v}]_\times + 2\mathbf{v}\mathbf{v}^\top}{d^2 + \lVert\mathbf{v}\rVert^2}$，在 $d = 1$、$\mathbf{v} = \boldsymbol{\sigma}$ 时恰为 $\mathbf{R}(\boldsymbol{\sigma})$ 且满足 $\Psi(q_1 q_2) = \Psi(q_1)\Psi(q_2)$。将 $\Psi$ 作用于 $(1, \mathbf{a})(1, \mathbf{b}) = (1 - \mathbf{a}\cdot\mathbf{b},\, \mathbf{a} + \mathbf{b} + \mathbf{a}\times\mathbf{b})$：当 $1 - \mathbf{a}\cdot\mathbf{b} \neq 0$ 时按标量部归一即证得**罗德里格斯—凯莱有理合成律**（精确取 $+1$ 叉乘符号；J. Solà，*Quaternion kinematics for the error-state Kalman filter*，2017，Section 2.5，[arXiv:1711.02508v1](https://arxiv.org/abs/1711.02508v1)），而当乘积为纯虚四元数 $(0, \mathbf{v})$ 时直接求值 $\Psi(0, \mathbf{v})$ 便导出任意有理轴的**半周双步有理分解**：
+
+$$
+\begin{aligned}
+\mathbf{R}(\mathbf{a})\,\mathbf{R}(\mathbf{b}) &= \mathbf{R}\!\left(\frac{\mathbf{a} + \mathbf{b} + \mathbf{a} \times \mathbf{b}}{1 - \mathbf{a}\cdot\mathbf{b}}\right) \quad (1 - \mathbf{a}\cdot\mathbf{b} \neq 0), \\
+\mathbf{R}(\mathbf{n})\,\mathbf{R}\!\left(\frac{\mathbf{n}}{\lVert\mathbf{n}\rVert^2}\right) &= \frac{2\mathbf{n}\mathbf{n}^\top}{\lVert\mathbf{n}\rVert^2} - \mathbf{I} = \mathbf{R}_\pi(\mathbf{n}).
+\end{aligned}
+$$
+
+例如对应非对易旋转的两枚有理参数 $\mathbf{a} = (\frac{1}{2}, 0, 0)^\top$ 与 $\mathbf{b} = (0, \frac{1}{3}, 0)^\top$ 一次合成即得精确参数 $(\frac{1}{2}, \frac{1}{3}, \frac{1}{6})^\top$；而对任意非零轴 $\mathbf{n} \in \mathbb{Q}^3 \setminus \{\mathbf{0}\}$，乘积 $(1, \mathbf{n})(1, \mathbf{n}/\lVert\mathbf{n}\rVert^2) = \bigl(0,\, (1 + 1/\lVert\mathbf{n}\rVert^2)\mathbf{n}\bigr)$ 标量部恰为零，故所得半周矩阵满足 $\mathbf{R}_\pi(\mathbf{n})^\top = \mathbf{R}_\pi(\mathbf{n})$、$\mathbf{R}_\pi(\mathbf{n})^2 = \mathbf{I}$、$\det\mathbf{R}_\pi(\mathbf{n}) = 1$、$\operatorname{Tr}\mathbf{R}_\pi(\mathbf{n}) = -1$ 且 $\det(\mathbf{R}_\pi(\mathbf{n}) + \mathbf{I}) = 0$（如六轴球面覆盖中的模方 $5$ 整轴 $\mathbf{n} = (1, 2, 0)^\top$ 精确分解为 $\mathbf{R}(1, 2, 0)\,\mathbf{R}(\frac{1}{5}, \frac{2}{5}, 0)$）。
+
+反观指数级数的 $k$ 阶截断 $T_k(X) = \sum_{j=0}^k X^j / j!$（$k \ge 1$；N. J. Higham，*Functions of Matrices: Theory and Computation*，2008，Chapter 10，[10.1137/1.9780898717778](https://doi.org/10.1137/1.9780898717778)）：在 $\boldsymbol{\sigma} = \mathbf{0}$ 处显然有 $T_k(\mathbf{0}) = \mathbf{I}$，而对任意非零生成元（$u = \lVert\boldsymbol{\sigma}\rVert^2 > 0$），在二维正交不变平面 $\boldsymbol{\sigma}^\perp$ 上有 $X^2 = -u\mathbf{I}$，从而 $T_k(X)$ 化为 $A_k(u)\mathbf{I} + B_k(u)X$，其中 $A_k(u) = \sum_{2j \le k} \frac{(-u)^j}{(2j)!}$ 与 $B_k(u) = \sum_{2j+1 \le k} \frac{(-u)^j}{(2j+1)!}$。因 $X^\top = -X$，乘积 $T_k(X)^\top T_k(X)$ 的交叉项消去，将任意 $\mathbf{v} \perp \boldsymbol{\sigma}$ 的模方乘以精确有理多项式 $M_k(u) = A_k(u)^2 + u B_k(u)^2 = \bigl\lvert\sum_{j=0}^k \frac{(i\sqrt{u})^j}{j!}\bigr\rvert^2$（同时保持轴向 $\boldsymbol{\sigma}$ 不变）。记 $p_k(z) = \sum_{j=0}^k z^j / j!$，对任意 $1 \le m \le k$，$p_k(z)p_k(-z)$ 的 $z^m$ 项系数恰为 $\frac{(1 - 1)^m}{m!} = 0$；取 $z = i\sqrt{u}$ 知 $M_k(u) - 1 = p_k(i\sqrt{u})p_k(-i\sqrt{u}) - 1$ 被 $u^{\lfloor k/2 \rfloor + 1}$ 整除，且商多项式次数为 $\lfloor(k - 1)/2\rfloor$、首项系数为 $\frac{1}{(k!)^2} > 0$，故它在 $u > 0$ 上至多有 $\lfloor(k - 1)/2\rfloor$ 个零点——因而**任意正整数阶泰勒截断多项式都不可能在任意正生成元半径开区间上保持全体向量的欧氏模长**，与有理凯莱映射恒等满足 $\bigl\lvert\frac{1 + i\sqrt{u}}{1 - i\sqrt{u}}\bigr\rvert^2 \equiv 1$ 形成结构性分野。记 $\alpha_\pm = \frac{15 \pm \sqrt{65}}{2}$，下表列出 $k = 1, \dots, 6$ 的精确模方偏移多项式、正半轴穿越点及 $u = \frac{1}{2}$ 单步因子：
+
+| $k$ | $M_k(u) - 1$ | $\{u > 0 : M_k(u) = 1\}$ | $M_k(1/2)$ |
+| ------: | :---------------------------------- | :----------------------- | ------------------: |
+| $1$ | $u$ | $\emptyset$ | $3/2$ |
+| $2$ | $u^2 / 4$ | $\emptyset$ | $17/16$ |
+| $3$ | $u^2 (u - 3) / 36$ | $\{3\}$ | $283/288$ |
+| $4$ | $u^3 (u - 8) / 576$ | $\{8\}$ | $3067/3072$ |
+| $5$ | $u^3 (u^2 - 15u + 40) / 14400$ | $\{\alpha_-, \alpha_+\}$ | $460931/460800$ |
+| $6$ | $u^4 ((u - 12)^2 + 36) / 518400$ | $\emptyset$ | $33178273/33177600$ |
+
+表中各阶偏移多项式的符号并不保持单侧：在第三张实验卡基准生成元 $\boldsymbol{\sigma} = (\frac{1}{2}, \frac{1}{2}, 0)^\top$（$u = \frac{1}{2}$）处，一、二阶向外膨胀，三、四阶向内收缩，五、六阶再次向外膨胀。对应该基准，迭代算子 $T_k(X)^{12}$ 保持轴向 $\boldsymbol{\sigma}$ 不动，并将正交平面 $\boldsymbol{\sigma}^\perp$ 中任一单位向量的模方变为 $M_k(\frac{1}{2})^{12}$：二阶外胀至 $(\frac{17}{16})^{12}$（档案包络四舍五入为 $2.069890$），三阶内缩至 $(\frac{283}{288})^{12}$（$0.810452$），五阶再次外胀至 $M_5(\frac{1}{2})^{12}$（$1.003417$；全部六阶的 $12$ 步数据见配套档案）——而有理凯莱迭代 $\mathbf{R}(\boldsymbol{\sigma})^{12}$ 恒守精确模方 $1$。
+
+### 32.7.5.3 任意阶有理射流递推、赤道四步缩放律与有限差商偏差双曲线 {#sec-ch39-35-5-3-integer-jets-secant-locus}
+
+将二阶射流商环 $\mathbb{Q}[\eta]/(\eta^3)$ 推广至任意阶 $N \ge 0$ 的 $\mathbb{Q}(x)[\eta]/(\eta^{N+1})$ 后，对保真度函数 $\kappa(x) = \frac{1}{1 + x^2}$ 记 $a = 1 + x^2$，解有限求逆同余 $(a + 2x\eta + \eta^2)\sum_{m=0}^N c_m \eta^m \equiv 1 \pmod{\eta^{N+1}}$ 并写 $c_m = \frac{P_m(x)}{(1 + x^2)^{m+1}}$，逐次对比 $\eta^0, \dots, \eta^N$ 的系数便立即导出与 $N$ 无关的整系数多项式递推（$P_m \in \mathbb{Z}[x]$；代入任一 $x \in \mathbb{Q}$ 后，分式 $c_m = \frac{P_m(x)}{(1 + x^2)^{m+1}}$ 即给出 $\mathbb{Q}[\eta]/(\eta^{N+1})$ 中的精确有理泰勒系数）：
+
+$$
+\begin{aligned}
+P_0(x) &= 1, \\
+P_1(x) &= -2x, \\
+P_{m+1}(x) &= -2x\,P_m(x) - (1 + x^2) P_{m-1}(x) \quad (m \ge 1).
+\end{aligned}
+$$
+
+前数项依次为 $P_2(x) = 3x^2 - 1$、$P_3(x) = 4x(1 - x^2)$ 与 $P_4(x) = 5x^4 - 10x^2 + 1$，全程无需极限便给出任意阶有理泰勒系数。在现在赤道点 $x = 1$ 处，特征多项式 $T^2 + 2T + 2$ 整除 $T^4 + 4$（其两复根 $t = -1 + i$ 与 $\bar{t} = -1 - i$ 满足 $t^4 = -4$），从而对一切 $m \ge 0$ 精确满足四步缩放律 $P_{m+4}(1) = -4 P_m(1)$ 与 $c_{m+4}(1) = -\frac{1}{4} c_m(1)$；由初值 $P_0(1), P_1(1), P_2(1), P_3(1) = 1, -2, 2, 0$ 立即推出 $P_m(1) = 0$ 当且仅当 $m \equiv 3 \pmod 4$。另一方面，对任意 $x \in \mathbb{R}$ 与 $h \in \mathbb{R} \setminus \{0\}$，将前向差商减去精确一阶导数 $\kappa'(x) = -\frac{2x}{(1 + x^2)^2}$ 并通分，立得精确割线偏差公式：
+
+$$
+E(x, h) \;=\; \frac{\kappa(x + h) - \kappa(x)}{h} - \kappa'(x) \;=\; \frac{h\bigl(3x^2 + 2xh - 1\bigr)}{(1 + x^2)^2\bigl(1 + (x + h)^2\bigr)}.
+$$
+
+当 $x \neq 0$ 时令 $h_* = \frac{1 - 3x^2}{2x}$，则偏差符号恒为 $\operatorname{sgn}\bigl(hx(h - h_*)\bigr)$（在 $x = 0$ 处为 $-\operatorname{sgn}(h)$）。由此，只要同时满足 $x > 0$、$h > 0$ 且 $3x^2 \ge 1$，便恒有严格正偏差 $E(x, h) > 0$（这解释了前例正向偏差 $\frac{5}{82}$，见 [@ex-ch39-math-omega-quantitative-audit]，档案包络四舍五入为 $0.060976$；注意正半轴条件 $x > 0$ 不可省去，因负侧反例 $E(-1, 2) = -\frac{1}{2}$ 为负）。与之相对，沿双曲线 $3x^2 + 2xh = 1$（其中 $h \neq 0$，必有 $x \neq 0$），记同号拐点 $c = \operatorname{sgn}(x)/\sqrt{3}$（$3c^2 = 1$）并代入 $h = \frac{1 - 3x^2}{2x}$，直接因式分解立得 $(x - c)(x + h - c) = -\frac{(x - c)^2(x + 3c)}{2x} < 0$（因 $x \neq c$ 且 $c/x > 0$），从而双曲线两支上每一点均使 $x$ 与 $x + h$ 严格分居拐点 $c$ 两侧；除 $(\frac{1}{2}, \frac{1}{4})$（见 [@ex-ch39-math-omega-quantitative-audit]）外，正半支上的 $(\frac{1}{3}, 1)$ 同样在有限步长下精确给出 $E(x, h) = 0$。
+
+### 32.7.5.4 粗粒度单纯形顶点锥同伦与零阻碍精确势分解 {#sec-ch39-35-5-4-simplicial-cone-homotopy}
+
+最后检验完全单纯形上的闭 $2$-上链在粗粒度下为何无需加密网格即可显式求势：在完全单纯形 $K_n$（有序顶点集 $\{0, \dots, n - 1\}$）上考虑交错有理上链 $C^j(K_n; \mathbb{Q})$，其基由递增 $(j + 1)$-元组索引（C. A. Weibel，*An Introduction to Homological Algebra*，1994，Section 1.4，[10.1017/CBO9781139644136](https://doi.org/10.1017/CBO9781139644136)）。定义上边缘算子 $D_j : C^j \to C^{j+1}$ 为交错和 $(D_j \omega)(v_0, \dots, v_{j+1}) = \sum_{i=0}^{j+1} (-1)^i \omega(v_0, \dots, \widehat{v_i}, \dots, v_{j+1})$（成对顶点按相反顺序删去符号互反，故 $D_2 D_1 = 0$），并定义顶点 $0$ 处的锥同伦 $H_j : C^j \to C^{j-1}$（$j \ge 1$）：对不含 $0$ 的单形取 $(H_j \omega)(v_0, \dots, v_{j-1}) = \omega(0, v_0, \dots, v_{j-1})$，否则取 $0$。对 $n \le 2$ 并无三角形（$C^2 = 0$），对 $n = 3$ 则 $D_2 = 0$ 且唯一三角形 $(0, 1, 2)$ 直接满足 $F = D_1(H_2 F)$；对一般 $n \ge 4$，在三角形 $(a, b, c)$（不含 $0$）上展开得 $(D_1 H_2 F)(a, b, c) = F(0, b, c) - F(0, a, c) + F(0, a, b)$ 与 $(H_3 D_2 F)(a, b, c) = F(a, b, c) - F(0, b, c) + F(0, a, c) - F(0, a, b)$，而在含零三角形 $(0, b, c)$ 上前项等于 $F(0, b, c)$、后项为零——从而对一切 $n \ge 4$ 直接成立：
+
+$$
+\begin{aligned}
+D_1 H_2 + H_3 D_2 &= I, \\
+\operatorname{rank} D_1 &= \binom{n - 1}{2}, \\
+\operatorname{rank} D_2 &= \binom{n - 1}{3}, \\
+\beta_2(K_n) &= 0.
+\end{aligned}
+$$
+
+据此，任一闭 $2$-上链（$D_2 F = 0$）无须细分即以 $H_2 F$ 显式给出一条边势（$F = D_1(H_2 F)$）；任一一般 $2$-上链 $F$ 拆分为恰当部 $D_1 H_2 F$（在含 $0$ 三角形上与 $F$ 相同）与曲率锥部 $H_3 D_2 F$（在含 $0$ 三角形上恒零，且对拆分式施以 $D_2$ 并用 $D_2 D_1 = 0$ 即得其上边缘为 $D_2 F$）；该顶点-$0$ 归一拆分唯一，因为任何闭上链 $C$ 若在含 $0$ 三角形上为零，则必有 $H_2 C = 0$ 从而 $C = D_1 H_2 C + H_3 D_2 C = 0$。同时，将含 $0$ 三角形上任意取值延拓为 $G$ 后取 $D_1 H_2 G$ 即得保持该取值的闭上链，故限制到含 $0$ 三角形给出同构 $\ker D_2 = \operatorname{im} D_1 \cong \mathbb{Q}^{\binom{n - 1}{2}}$，由秩—零化度定理立得上述秩公式与 $\beta_2(K_n) = 0$。
+
+**证据边界与配套档案（`ARGUED` / `NUM`）。** 上述结构恒等式、分界律及单纯形秩与顶点-$0$ 归一拆分由本节书面论证（`ARGUED`）确立，渐近式与理论背景援引上列文献，有限连分数对数界与闭 $2$-上链恰当性分别援引 [@thm-ch39-math-omega-finite-rational-anchors] 中的 [`convergents_length_log`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log) 与 [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness)。配套有限检验、Arb 区间包络与无显式导入的独立 Lean 辅助声明 `cycle18_math_omega_finite_rational_check`（见 [`math_omega_finite_rational_check.lean`](https://gist.githubusercontent.com/loning/beaedee7a79bc9244b1bdebbbb30ad38/raw/f5bc28cdee6f9ee98d5c213b44a7fb2e6cf4c456/math_omega_finite_rational_check.lean)，不计入本书所钉 `trureturing` 账本的定理计数）均作为 `NUM` 证据由 `loning` 存于 [Issue #1170](https://github.com/the-omega-institute/trureturing-books/issues/1170) 的[固化校验档案](https://gist.github.com/loning/beaedee7a79bc9244b1bdebbbb30ad38/f5bc28cdee6f9ee98d5c213b44a7fb2e6cf4c456)（原始 [`SHA256SUMS`](https://gist.githubusercontent.com/loning/beaedee7a79bc9244b1bdebbbb30ad38/raw/f5bc28cdee6f9ee98d5c213b44a7fb2e6cf4c456/SHA256SUMS) 的 SHA-256 为 `8b61361193a255f4bad66c2a836a66dfbf1f6910e0a375767b27a9a75e13438b`）。
 
 ---
 
