@@ -245,7 +245,7 @@ $$
 \le
 \frac{2A\bigl(\log^2(2xX)+\log(2xX)+1\bigr)+B\bigl(2\log(2X)+1\bigr)}{X}.
 $$
-The sum counts multiplicities. The bound is uniform in $T$ and retains factors depending on $x$. At the required time scale $x=e^{s/r}$, the aggregate contribution of exceptional frequencies to the growing-order moment remains open.
+The sum counts multiplicities. The bound is uniform in $T$ and retains factors depending on $x$. At the required time scale $x=e^{s/r}$, the aggregate contribution of exceptional frequencies to the growing-order moment remains open. [Lean proof of the weighted error bound](lean:D5/S3/Fourier/Asymptotics/WeightedCumulativeRemainder.weighted_tail_error_le)
 
 The second and fourth harmonics give a sharp bound even when the phases range over the whole circle. Write $m_h=\sum_jw_jz_j^h$ for the moments of one probability weight on unit phases. Given caps $0\le e,k\le1$ on $|m_2|,|m_4|$, put $b=\min(e,\sqrt{(1+k)/2})$ and $r=(1+b)/2$. If $b=1$, the largest $|m_1|$ is $1$. If $b<1$, put
 

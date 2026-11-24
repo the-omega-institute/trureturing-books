@@ -245,7 +245,7 @@ $$
 \le
 \frac{2A\bigl(\log^2(2xX)+\log(2xX)+1\bigr)+B\bigl(2\log(2X)+1\bigr)}{X}.
 $$
-求和按重数计入。该界对 $T$ 一致，仍含依赖 $x$ 的因子。所需时间尺度上 $x=e^{s/r}$，仍须控制异常频率对增长阶数矩的总贡献。
+求和按重数计入。该界对 $T$ 一致，仍含依赖 $x$ 的因子。所需时间尺度上 $x=e^{s/r}$，仍须控制异常频率对增长阶数矩的总贡献。 [加权误差界的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/WeightedCumulativeRemainder.weighted_tail_error_le)
 
 即使相位可在整个圆周上取值，第二和第四谐波也能给出尖锐的界。对单位相位的一组概率权重，记 $m_h=\sum_j w_j z_j^h$。令 $0\le e,k\le1$ 分别为 $|m_2|,|m_4|$ 的上限，记 $b=\min(e,\sqrt{(1+k)/2})$、$r=(1+b)/2$。若 $b=1$，则 $|m_1|$ 的最大值为 $1$。若 $b<1$，令
 
