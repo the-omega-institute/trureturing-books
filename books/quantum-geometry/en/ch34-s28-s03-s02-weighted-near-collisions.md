@@ -218,6 +218,36 @@ When $4\nmid q$, reduce $4k-q$ to a centered residue modulo $2q$ for each intege
 
 For actual ζ ordinates, use the tail above $X=e^{-D}T^\beta$ from the preceding section, with $\delta=\log T$ and $g_\gamma=\gamma/r$. For $H=\exp(cT^\beta\log T)$, take $N=\lfloor HT^2/r\rfloor_++1$ to keep the mesh error at most $rB/(2T^2)$. To bound the start, a finite $L=L(T)$ must satisfy the budget $KNE_p(2/L)<(\log T)^{2p}$. The target order $p$ grows on the scale of $T^\beta\log T$. For fixed finite tail and fixed $p$, $E_p(2/L)$ eventually equals the exact collision mass $E_p(0)$ as $L$ increases. Quantifying $L$ requires a weighted bound at positive resolution. Definition 7 in Tao, Trudgian, and Yang counts unweighted quadruples at unit scale, and Theorem 64 gives estimates for fixed $\sigma\ge7/10$. The growing-order weighted bound for the critical-line tail remains open. [Definition 7 and Theorem 64](https://arxiv.org/html/2501.16779v1) · [Research question](https://github.com/the-omega-institute/trureturing/issues/33519)
 
+The second and fourth harmonics give a sharp bound even when the phases range over the whole circle. Write $m_h=\sum_jw_jz_j^h$ for the moments of one probability weight on unit phases. Given caps $0\le e,k\le1$ on $|m_2|,|m_4|$, put $b=\min(e,\sqrt{(1+k)/2})$ and $r=(1+b)/2$. If $b=1$, the largest $|m_1|$ is $1$. If $b<1$, put
+
+$$
+a=\min\left(\sqrt r,\sqrt{\frac{1+k}{4(1-b)}}\right),\qquad B=\frac{a+r}{1+a}.
+$$
+
+The largest $|m_1|$ is $B$. Rotate the phase family so that $m_1$ is nonnegative real, and write $x=\Re z$ for the real projection of a phase sampled under the weight. The identities $2x^2=1+\Re z^2$ and $8(x^2-x^4)=1-\Re z^4$ relate the two caps to real moments. The nonnegative variance of $\Re z^2$ gives $(\Re m_2)^2\le(1+\Re m_4)/2\le(1+k)/2$. Together with $\Re m_2\le |m_2|\le e$ and $2\mathbb E x^2=1+\Re m_2$, this yields $\mathbb E x^2\le r$. If $a=\sqrt r$, Cauchy–Schwarz gives $\mathbb E x\le a=B$. In the other branch, expand the nonnegative polynomial $(1-x)(x-a)^2(x+1+2a)$ for $x\in[-1,1]$. Its mean is
+$$
+\mathbb E[(1-x^2)(x^2-a^2)]-2a(1+a)\left[(1+a)(\mathbb E x-1)+1-\mathbb E x^2\right].
+$$
+The first term is nonpositive by the fourth cap and $\mathbb E x^2\le r$, so the bracket is nonpositive. This yields the stated bound. The real moment calculation is related to the upper principal representation of a measure on an interval. [Dette and Schorning, Lemma 2.1](https://arxiv.org/pdf/1306.4872)
+
+For $b<1$, take weight $(r-a^2)/(1-a^2)$ at $1$ and divide the rest equally between $a+i\sqrt{1-a^2}$ and its conjugate. The moments are real and equal to $B$, $b$, and $1-8(1-r)a^2$ at orders $1,2,4$. The choice of $a$ gives $|m_4|\le k$. A point mass attains the branch $b=1$. With $e=k=0$, the three phases are $1,e^{i\pi/3},e^{-i\pi/3}$ with equal weights, and $|m_1|=2/3$. Every moment at order $2^j$ for $j\ge1$ vanishes in this example because $2^j$ is congruent to $2$ or $4$ modulo six. Even these simultaneous vanishings allow a first coefficient of fixed positive size. A growing-degree bound on actual ζ ordinates needs further arithmetic information about the weighted frequency sums.
+
+[Lean proof of the sharp harmonic bound](lean:D5/S3/Fourier/Concentration/SecondFourthHarmonicBound.sharp_second_fourth_harmonic_bound)
+
+For a full consecutive block of even orders, let $N\ge1$ and suppose $m_{2k}=0$ for $1\le k<N$. The largest first magnitude is
+
+$$
+B_N=\frac{1}{N\sin(\pi/(2N))}.
+$$
+
+It is attained by equal weights at $z_j=\exp\bigl(i\pi(j-(N-1)/2)/N\bigr)$ for $0\le j<N$. The squared phases are equally spaced, so the prescribed harmonics vanish by the finite character sum. The first magnitude follows from the sum of cosines on this arc. Multiplying each cosine by $2\sin(\pi/(2N))$ makes it a difference of sines at the adjacent endpoints, and the sum telescopes from $-1$ to $1$.
+
+To compare an arbitrary admissible law with this equal-weight law, rotate its first moment onto the nonnegative real axis and set $y=(\Re z)^2$. Then $2y-1=\Re z^2$, and $T_k(2y-1)=\Re z^{2k}$ for the Chebyshev polynomial $T_k$. The two laws have the same means for polynomials in $y$ of degree below $N$. The polynomial $R(y)=1+(-1)^N T_N(2y-1)$ is nonnegative on $[0,1]$, vanishes at the attaining projections, and is positive at negative arguments. For $s>0$, the expression $(y+sR(y)/R(-s))/(y+s)$ is a polynomial of degree below $N$ because its numerator vanishes at $-s$. It dominates $y/(y+s)$ and agrees with it on the attaining support. Compare the two means with this polynomial, then integrate at $s=t^2$ using $\int_{\mathbb R}y/(y+t^2)\,dt=\pi\sqrt y$ for $y\ge0$. This bounds the mean of $\sqrt y$, which bounds the first magnitude after rotation. [Gauss–Chebyshev formula](https://dlmf.nist.gov/3.5#v) · [Principal representations, Lemma 2.1](https://arxiv.org/pdf/1306.4872)
+
+The cases $N=2,3$ give $1/\sqrt2$ and $2/3$. As $N\to\infty$, $B_N\to 2/\pi$ by the sine limit at zero. Thus a growing block of vanishing even orders still allows a first magnitude bounded away from zero in this class of laws. The near-collision budget for actual ζ ordinates needs information that constrains the weighted sums along their time orbit.
+
+[Lean proof of the sharp bound for a consecutive even block](lean:D5/S3/Fourier/Concentration/EvenHarmonicFirstMoment.sharp_first_harmonic_even_block)
+
 ## What low-order collision masses determine
 
 Move the last frequency in $(0,1,k)$ to $k+\sqrt 2$. Below degree $k$, the counts on the first two coordinates cannot offset a change in the last count. At degree $k$, exactly one additional pair of count vectors can cancel in the integer spectrum.
@@ -263,6 +293,35 @@ $$
 The degree-$p$ sums have at most $1+p(B-A)$ possible integer positions. Group the multinomial weights by position and apply Cauchy–Schwarz to the group masses. If the total weight is $W>0$, the exact collision mass of the rounded spectrum is at least $W^{2p}/[1+p(B-A)]$. Any pair that collides exactly after rounding had an original gap of at most $ph$, since each degree-$p$ sum has rounding error in $[0,ph]$. [Collision bound for grouped mass](lean:D5/S3/Fourier/Concentration/FiniteSincCollisionMoment.sum_bin_mass_sq_le_nearCollisionMass)
 
 For example, fix $m_j=\lceil(\log_2(2+g_j))^2\rceil$ once for each positive frequency. On shared tail indices with $cT^\alpha\le g_j\le T$, fixed $c,\alpha>0$, $N=O(T\log T)$, and at most polynomial growth of $\lambda$, the change in every such fixed-order statistic tends to zero. Fix $0<\beta<1$. At $p\asymp T^\beta\log T$, the denominator satisfies $\log[1+p(B-A)]=O((\log T)^2)$. If $W\asymp(\log T)^2$ and $\delta=\log T$, the missing-window moment budget requires normalized mass at most $\exp(-2p\log\log T+O(p))$ even with one time sample. The rounded spectrum's exact collision mass already exceeds that budget. The two local statistics use the same tail indices. Separate height cutoffs require accounting for entries that cross the endpoints. The transfer to the original spectrum gives a lower bound at resolution $ph$, and the upper bound at the finer target resolution remains open.
+
+## Equal count vectors in the moment expansion {#weighted-occupation-diagonal}
+
+Let $J$ be finite, with real weights $w_j$ and integer degree $p\ge0$. Write $D_p=\sum_{|m|=p}c_m^2$, where $c_m=p!\prod_j(w_j^{m_j}/m_j!)$. For nonnegative weights, the weighted near-collision mass includes this diagonal at every nonnegative resolution. For each $s\ge0$,
+
+$$
+s^pD_p\le (p!)^2\prod_{j\in J}(2e^{s w_j^2/2}-1).
+$$
+
+Dividing the left side by $(p!)^2$ gives the sum of the degree-$p$ terms in $\prod_j\sum_{n=0}^p x_j^n/(n!)^2$, with $x_j=sw_j^2$. Including every term gives an upper bound by nonnegativity. For $n\ge1$, the inequality $n!\ge2^{n-1}$ bounds each positive-degree term by twice its counterpart in $e^{x_j/2}$. The constant coefficient is one, so the factor is at most $2e^{x_j/2}-1$. The full series is $I_0(2\sqrt{x_j})$. [Lean proof of the finite product bound](lean:D5/S3/Fourier/Concentration/WeightedOccupationDiagonal.scaled_diagonal_le_product) · [Lamzouri's independent-phase product, §3](https://arxiv.org/html/2311.04860v2#S3) · [DLMF, equation 10.25.2](https://dlmf.nist.gov/10.25.E2)
+
+For $p\ge1$ and $V=\sum_jw_j^2>0$, put $s=p/V$. The identity $2e^{x/2}-1=e^x[1-(1-e^{-x/2})^2]$ gives
+
+$$
+\frac{D_p}{p!\,V^p}\le
+\frac{p!e^p}{p^p}\prod_{j\in J}
+\left[1-\left(1-e^{-p w_j^2/(2V)}\right)^2\right].
+$$
+
+Stirling's formula gives a prefactor of order $\sqrt p$. If at least $\kappa p$ coordinates have $p w_j^2/V\ge a$ for constants $\kappa,a>0$, the product is at most $[1-(1-e^{-a/2})^2]^{\kappa p}$.
+
+Under RH, take $X=e^{-K}T^\beta$ with fixed $K$ and $0<\beta<1$, and $p\asymp X\log X$. Group multiplicity by distinct ordinate and use $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$. The [multiplicity estimate for the logarithmic tail](ch34-s28-s03-s02-mobius-and-spectra.md#thm-ch31-logarithmic-missing-window) is $\sum_{0<\gamma\le Y}m_\gamma^2=O(Y\log Y)$. For each fixed $C\ge2$, the Riemann–von Mangoldt formula gives $\sum_{X<\gamma\le CX}m_\gamma\sim(C-1)X\log X/(2\pi)$. Cauchy–Schwarz gives at least $M\gg CX\log X$ distinct ordinates in the band, with an absolute lower-bound constant for fixed $C$ and sufficiently large $X$. Choose a fixed $C$ large enough that $M\ge2p$. Then $CX\le T$ eventually, and each of these weights is at least $1/(2CX)$. Since $V=O(\log X/X)$, these coordinates supply the exponential factor in the upper bound. For the lower bound, keep the vectors that occupy exactly $p$ distinct coordinates in the band. They give
+
+$$
+D_p\ge (p!)^2\binom{M}{p}(2CX)^{-2p}
+   \ge p!\,(M/(8C^2X^2))^p .
+$$
+
+Thus there are constants $0<c_1\le c_2$ with $e^{-c_2p}\le D_p/(p!V^p)\le e^{-c_1p}$ for all sufficiently large $T$. With tail weight $W\asymp(\log T)^2$, this gives $\log(D_p/W^{2p})=-2p\log\log T+O(p)$. The ζ asymptotics use the cited analytic inputs. The weight of near-collisions between two distinct count vectors still requires an arithmetic estimate. [Multiplicity input, Theorem 1 and §7](https://arxiv.org/abs/2306.04799)
 
 ## A finite frequency band forces close sums
 

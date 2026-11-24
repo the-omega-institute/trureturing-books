@@ -218,6 +218,36 @@ $d>0$ 时，$c$ 严格介于零与一之间。两矩稳定性给出的两个理�
 
 对实际 ζ 纵坐标，可按前一节在 $X=e^{-D}T^\beta$ 以上截取尾段，并取 $\delta=\log T$、$g_\gamma=\gamma/r$。给定 $H=\exp(cT^\beta\log T)$，可取 $N=\lfloor HT^2/r\rfloor_++1$，使网格误差不超过 $rB/(2T^2)$。要得到有限的起点范围，还需在某个 $L=L(T)$ 上证明相应的严格预算 $KNE_p(2/L)<(\log T)^{2p}$。目标阶数 $p$ 随 $T^\beta\log T$ 增长。对固定的有限尾段和固定 $p$，随着 $L$ 增大，$E_p(2/L)$ 最终等于精确碰撞质量 $E_p(0)$。若要量化 $L$，仍须控制正分辨率下的加权近碰撞。Tao、Trudgian 与 Yang 的定义 7 计数的是单位尺度的无权四元组，定理 64 的估计适用于固定的 $\sigma\ge7/10$。临界线尾段的增长阶数加权界仍待证。 [定义 7 与定理 64](https://arxiv.org/html/2501.16779v1) · [研究问题](https://github.com/the-omega-institute/trureturing/issues/33519)
 
+即使相位可在整个圆周上取值，第二和第四谐波也能给出尖锐的界。对单位相位的一组概率权重，记 $m_h=\sum_j w_j z_j^h$。令 $0\le e,k\le1$ 分别为 $|m_2|,|m_4|$ 的上限，记 $b=\min(e,\sqrt{(1+k)/2})$、$r=(1+b)/2$。若 $b=1$，则 $|m_1|$ 的最大值为 $1$。若 $b<1$，令
+
+$$
+a=\min\left(\sqrt r,\sqrt{\frac{1+k}{4(1-b)}}\right),\qquad B=\frac{a+r}{1+a}.
+$$
+
+此时 $|m_1|$ 的最大值为 $B$。把相位整体旋转，使 $m_1$ 为非负实数，并记按给定权重抽样的相位实投影为 $x=\Re z$。恒等式 $2x^2=1+\Re z^2$ 与 $8(x^2-x^4)=1-\Re z^4$ 把两个上限转为实矩约束。由 $\Re z^2$ 的方差非负可得 $(\Re m_2)^2\le(1+\Re m_4)/2\le(1+k)/2$。再用 $\Re m_2\le |m_2|\le e$ 和 $2\mathbb E x^2=1+\Re m_2$，得到 $\mathbb E x^2\le r$。若 $a=\sqrt r$，柯西–施瓦茨不等式给出 $\mathbb E x\le a=B$。另一分支中，将 $x\in[-1,1]$ 上的非负多项式 $(1-x)(x-a)^2(x+1+2a)$ 展开并求平均，得到
+$$
+\mathbb E[(1-x^2)(x^2-a^2)]-2a(1+a)\left[(1+a)(\mathbb E x-1)+1-\mathbb E x^2\right].
+$$
+由第四谐波的上限和 $\mathbb E x^2\le r$，第一项非正，方括号内也就非正，从而给出所述上界。实矩计算与区间上测度的上主表示有关。 [Dette 与 Schorning，引理 2.1](https://arxiv.org/pdf/1306.4872)
+
+当 $b<1$ 时，在相位 $1$ 上取权重 $(r-a^2)/(1-a^2)$，其余权重平分给 $a+i\sqrt{1-a^2}$ 及其共轭。第一、第二和第四矩均为实数，分别为 $B$、$b$ 和 $1-8(1-r)a^2$。按 $a$ 的取法有 $|m_4|\le k$。当 $b=1$ 时，点质量取等。若 $e=k=0$，取 $1,e^{i\pi/3},e^{-i\pi/3}$ 三个相位等权，得到 $|m_1|=2/3$。由于 $2^j$ 在模六下为 $2$ 或 $4$，所有 $j\ge1$ 的 $2^j$ 阶矩都为零。即使这些系数同时为零，第一系数也可以保持在固定的正值。实际 ζ 纵坐标在增长阶数下的界仍需加权频率和的算术信息。
+
+[尖锐谐波界的 Lean 证明](lean:D5/S3/Fourier/Concentration/SecondFourthHarmonicBound.sharp_second_fourth_harmonic_bound)
+
+对连续的偶数阶，设 $N\ge1$ 且 $1\le k<N$ 时 $m_{2k}=0$。第一系数幅值的最大值为
+
+$$
+B_N=\frac{1}{N\sin(\pi/(2N))}.
+$$
+
+等权分布在 $z_j=\exp\bigl(i\pi(j-(N-1)/2)/N\bigr)$（$0\le j<N$）上时取等。相位的平方等距分布，规定的谐波因有限特征标求和而消失。第一系数由圆弧上的余弦和给出。每项乘以 $2\sin(\pi/(2N))$，即为相邻两个端点的正弦之差。从 $-1$ 到 $1$ 逐项相消得到所需的和。
+
+比较任一满足条件的分布与上述等权分布时，将前者的第一矩旋转到非负实轴，并记 $y=(\Re z)^2$。此时 $2y-1=\Re z^2$，且切比雪夫多项式满足 $T_k(2y-1)=\Re z^{2k}$。两组分布在 $y$ 上次数低于 $N$ 的多项式有相同的均值。多项式 $R(y)=1+(-1)^N T_N(2y-1)$ 在 $[0,1]$ 上非负，在取等分布的投影上为零，在负实数处为正。对 $s>0$，表达式 $(y+sR(y)/R(-s))/(y+s)$ 的分子在 $-s$ 消失，因此它是次数低于 $N$ 的多项式。它从上方控制 $y/(y+s)$ 并在取等支集上与其相等。用该多项式比较两组均值，再取 $s=t^2$ 并使用 $y\ge0$ 时的积分恒等式 $\int_{\mathbb R}y/(y+t^2)\,dt=\pi\sqrt y$，便得到平方根均值的上界，从而控制旋转后的第一系数。 [高斯–切比雪夫求积公式](https://dlmf.nist.gov/3.5#v) · [主表示，引理 2.1](https://arxiv.org/pdf/1306.4872)
+
+$N=2,3$ 时分别得到 $1/\sqrt2$ 和 $2/3$。由正弦函数在零点的极限，$N\to\infty$ 时有 $B_N\to 2/\pi$。所以，在这类分布中，即使消失的偶次谐波连续范围不断增大，第一系数幅值仍可远离零。实际 ζ 纵坐标的近碰撞预算需要约束时间轨道上加权和的信息。
+
+[连续偶次谐波消失时尖锐界的 Lean 证明](lean:D5/S3/Fourier/Concentration/EvenHarmonicFirstMoment.sharp_first_harmonic_even_block)
+
 ## 低阶碰撞质量能确定什么
 
 把频率三元组 $(0,1,k)$ 中最后一项移到 $k+\sqrt 2$。当总次数低于 $k$ 时，其余两项的计数还不足以抵消最后一项的变动。到次数 $k$，第一组三元组里恰好有一种新的抵消方式。
@@ -263,6 +293,35 @@ $$
 次数 $p$ 的和至多有 $1+p(B-A)$ 个可能的整数位置。把多项分布权重按这些位置归组，再对组质量用柯西–施瓦茨不等式。若总权重为 $W>0$，舍入谱的精确碰撞质量至少为 $W^{2p}/[1+p(B-A)]$。任何在舍入谱中精确相等的两项，原来的差至多为 $ph$，因为每组次数 $p$ 的舍入误差都在 $[0,ph]$。 [按频率分箱的质量界](lean:D5/S3/Fourier/Concentration/FiniteSincCollisionMoment.sum_bin_mass_sq_le_nearCollisionMass)
 
 例如，固定取 $m_j=\lceil(\log_2(2+g_j))^2\rceil$。在共用索引的尾段 $cT^\alpha\le g_j\le T$ 上，若 $c,\alpha>0$ 固定，$N=O(T\log T)$，且 $\lambda$ 至多按 $T$ 的固定幂增长，则每个固定阶的上述统计改变量趋于零。另一方面，取固定 $0<\beta<1$。在 $p\asymp T^\beta\log T$ 时，$\log[1+p(B-A)]=O((\log T)^2)$。若 $W\asymp(\log T)^2$ 且 $\delta=\log T$，缺失窗口的矩预算即使只用一个时间采样点，也要求归一化质量至多为 $\exp(-2p\log\log T+O(p))$。舍入谱的精确碰撞质量已超过这一预算。两组统计使用共用的尾段索引。若分别按高度选取索引，越过端点的条目还需处理。对原谱的转移只给出分辨率 $ph$ 上的下界，目标的更细分辨率上界仍待证。
+
+## 计数向量相同的对角项 {#weighted-occupation-diagonal}
+
+取有限指标集 $J$、实权重 $w_j$ 和整数 $p\ge0$。令 $D_p=\sum_{|m|=p}c_m^2$，其中 $c_m=p!\prod_j(w_j^{m_j}/m_j!)$。当权重非负时，加权近碰撞质量在每个非负分辨率下都包含这部分。对每个 $s\ge0$，
+
+$$
+s^pD_p\le (p!)^2\prod_{j\in J}(2e^{s w_j^2/2}-1).
+$$
+
+把左边除以 $(p!)^2$，得到 $\prod_j\sum_{n=0}^p x_j^n/(n!)^2$ 中总次数恰为 $p$ 的项之和，其中 $x_j=sw_j^2$。保留所有非负项可取上界。当 $n\ge1$ 时，$n!\ge2^{n-1}$，所以每个正次项至多是 $e^{x_j/2}$ 中相应项的两倍。常数项为一，故每个因子至多为 $2e^{x_j/2}-1$。无穷级数等于 $I_0(2\sqrt{x_j})$。 [有限乘积估计的 Lean 证明](lean:D5/S3/Fourier/Concentration/WeightedOccupationDiagonal.scaled_diagonal_le_product) · [Lamzouri，§3 的独立相位乘积](https://arxiv.org/html/2311.04860v2#S3) · [DLMF，式 10.25.2](https://dlmf.nist.gov/10.25.E2)
+
+设 $p\ge1$、$V=\sum_jw_j^2>0$，取 $s=p/V$。恒等式 $2e^{x/2}-1=e^x[1-(1-e^{-x/2})^2]$ 给出
+
+$$
+\frac{D_p}{p!\,V^p}\le
+\frac{p!e^p}{p^p}\prod_{j\in J}
+\left[1-\left(1-e^{-p w_j^2/(2V)}\right)^2\right].
+$$
+
+Stirling 公式给出前因子 $O(\sqrt p)$。如果至少 $\kappa p$ 个指标满足 $p w_j^2/V\ge a$，其中 $\kappa,a>0$ 与 $p$ 无关，那么乘积至多为 $[1-(1-e^{-a/2})^2]^{\kappa p}$。
+
+在 RH 下，取 $X=e^{-K}T^\beta$，固定 $K$ 和 $0<\beta<1$，取 $p\asymp X\log X$，按不同纵坐标合并重数，令 $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$。用[对数尺度尾段的重数平方和上界](ch34-s28-s03-s02-mobius-and-spectra.md#thm-ch31-logarithmic-missing-window) $\sum_{0<\gamma\le Y}m_\gamma^2=O(Y\log Y)$。Riemann–von Mangoldt 公式对每个固定 $C\ge2$ 给出 $\sum_{X<\gamma\le CX}m_\gamma\sim(C-1)X\log X/(2\pi)$。Cauchy–Schwarz 因而给出此带中互异纵坐标数 $M\gg CX\log X$，隐含下界常数可取为与 $C$ 无关，取定 $C$ 后让 $X$ 充分大。可选固定 $C$ 使 $M\ge2p$，且最终 $CX\le T$。每个带内权重至少为 $1/(2CX)$。由 $V=O(\log X/X)$，这些指标满足上式的折减条件。另一方面，对角和中恰好选取 $p$ 个不同带内指标的项给出
+
+$$
+D_p\ge (p!)^2\binom{M}{p}(2CX)^{-2p}
+   \ge p!\,(M/(8C^2X^2))^p .
+$$
+
+因此存在常数 $0<c_1\le c_2$，使得充分大 $T$ 时 $e^{-c_2p}\le D_p/(p!V^p)\le e^{-c_1p}$。用尾段总权重 $W\asymp(\log T)^2$ 归一化，可得 $\log(D_p/W^{2p})=-2p\log\log T+O(p)$。这里的 ζ 渐近估计使用上述文献输入。两个不同向量产生近频率和的总权重仍需单独的算术估计。 [重数平方和的文献输入，定理 1 与 §7](https://arxiv.org/abs/2306.04799)
 
 ## 有限频带中的和必须接近
 
