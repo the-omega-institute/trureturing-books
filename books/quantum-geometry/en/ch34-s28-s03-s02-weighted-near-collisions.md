@@ -690,6 +690,16 @@ $$
 $$
 using $M\ge(N/p)^p$ from the product formula for the multiset coefficient. The frequencies $g_\gamma=\gamma/r$ lie in a band of width at most $T/r$. For each fixed $c>0$ and sufficiently large $T$, distinct degree-$p$ vectors must therefore collide within resolution $\exp(-cT^\beta\log T)$. The needed arithmetic estimate must control the total weight of those pairs and allow individual near-collisions. [Proportion of simple zeros, §§1.1 and 8](https://arxiv.org/html/1802.10521)
 
+## Both cosine bounds are tight at the joint optimum
+
+For $q\ge4$, set $c_k=\cos(2\pi k/q)$ and $d_k=\cos(4\pi k/q)$. Fix $0<a<1$. The probability weight minimizing $\sum_k w_k^2$ under either one of the bounds $\sum_k w_k c_k\ge a$ and $\sum_k w_k d_k\ge a$ attains its own bound and gives the other moment strictly less than $a$. Every least-squared-mass weight subject to both bounds therefore has both moments equal to $a$.
+
+For a single readout $b$, the optimizer is proportional to $f(b_k)$ with $f(x)=\max(0,1-t(1-x))$ for some $t>0$. Any coordinate at the largest readout below $1$ has positive clipped weight. If its weight vanished, all positive weight would be on readout $1$, so the moment would be $1$. In the first-mode problem, $c_1$ is that largest readout. The identity $c_k-d_k=(1-c_k)(2c_k+1)$ changes sign at $c_k=-1/2$. The two readouts have zero mean, so subtracting $f(-1/2)$ from each weight in the signed sum preserves the sum. The products $(c_k-d_k)(f(c_k)-f(-1/2))$ are nonnegative and the product at $k=1$ is positive.
+
+For the second-mode problem on an even cycle, a half-turn preserves $d$ and negates $c$, so the first moment is zero. On an odd cycle, multiplication by two permutes the residues. Thus the sums of $f(c_k)^2$ and $f(d_k)^2$ agree. The convex function $f^2$ has derivative $2tf$. Its tangent inequality at $d_k$, evaluated at $c_k$, is strict at $k=1$, where $d_1<c_1$ and $f(c_1)>0$. Upon summation this gives $\sum_k(d_k-c_k)f(d_k)>0$. The largest value below $1$ is the same for $d$ and $c$ in this case because doubling is a permutation.
+
+If a joint optimizer had slack in one bound, it could move a small distance toward the optimizer for the other bound. The resulting probability weight would retain both bounds and strictly decrease the squared mass. The two moment equalities hold even after support changes. Determining the support and the exact optimal value after clipping for general moduli remains open, as does the arithmetic estimate for exceptional frequencies of the actual high-order ζ-zero harmonics. [Lean proof of the two tight constraints](lean:D5/S3/Fourier/Concentration/ActiveCosineConstraints.active_cosine_constraints)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
