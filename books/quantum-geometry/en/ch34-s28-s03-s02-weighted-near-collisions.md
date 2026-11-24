@@ -378,12 +378,14 @@ The first bound applies the diagonal estimate for each fixed count difference an
 
 ## Residual degree two and directed gaps {#degree-two-directed-differences}
 
-When two terms remain on each side, their sum discrepancy is the difference of two directed gaps. For $i\ne j$, give the edge $(i,j)$ frequency $g_i-g_j$ and weight $w_iw_j$. Let $A(\eta)$ be the ordered near-collision mass on these edges at resolution $\eta\ge0$. Let $C_i(\eta)$ be the ordered near-collision mass of the original spectrum with index $i$ deleted, including the remaining diagonal. Then
+For arbitrary real weights, when two terms remain on each side, their sum discrepancy is the difference of two directed gaps. For $i\ne j$, give the edge $(i,j)$ frequency $g_i-g_j$ and weight $w_iw_j$. Let $A(\eta)$ be the ordered near-collision mass on these edges at resolution $\eta\ge0$. Let $C_i(\eta)$ be the ordered near-collision mass of the original spectrum with index $i$ deleted, including the remaining diagonal. Then
 $$
 R_2(\eta)=A(\eta)-2\sum_i w_i^2 C_i(\eta)+\sum_i\sum_{j\ne i}w_i^2w_j^2.
 $$
 
 Expand each degree-two count vector into its ordered words. The difference of the sums for $(i,k)$ and $(j,l)$ is the frequency difference of the edges $(i,j)$ and $(l,k)$. Edges already exclude $i=j$ and $l=k$. Disjoint support also excludes $i=l$ and $j=k$. For either shared endpoint, fixing that endpoint at index $i$ leaves a contribution $w_i^2 C_i(\eta)$. Both shared-endpoint conditions together make the edges equal, giving the final term. Repeated ordinates can belong to different indices, and the correction uses index equality.
+
+[Lean proof of the endpoint correction](https://github.com/the-omega-institute/trureturing/blob/7836eef6266bc4d994ccfd5486476651e60a3c9a/D5/S3/Fourier/Concentration/DegreeTwoResidualDifferenceEnergy.lean#L331-L343)
 
 For the actual ζ ordinates, the degree-one estimate controls the mass of gaps near zero. The quantity $A(\eta)$ also compares gaps far from zero that are close to each other. Bounding the contribution to $E_p(\eta)$ still requires control of that correlation after removing the shared endpoints.
 
