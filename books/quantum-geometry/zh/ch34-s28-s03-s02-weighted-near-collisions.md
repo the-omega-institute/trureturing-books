@@ -120,6 +120,17 @@ $$
 
 采用[方差界](ch34-s28-s03-s02-collision-variance.md)中的 ζ 尾段参数，单个模数或平均中的调和平均必须满足 $\log q\ge\log N+2p\log\log T-O(p)$。逐项计算特征标和时，模数 $q$ 对应 $q$ 项。取平均时，至少一个模数不小于调和平均。能否在目标分辨率下以可行的渐近成本界定加权质量，仍待解决。
 
+即使知道两个模数上完整的边缘分布，也无法由各自的碰撞质量确定联合碰撞质量。模六下，令 $P$ 在剩余类 $0,3,4$ 上分别取权重 $1/2,1/4,1/4$，令 $Q$ 在 $0,1$ 上分别取权重 $3/4,1/4$。两者模二都化为 $(3/4,1/4)$，模三都化为 $(3/4,1/4,0)$。记独立 $p$ 次抽样和的两个边缘碰撞质量之积为 $A_p$，模六的碰撞质量分别为 $E_p(P),E_p(Q)$。对 $p\ge1$，
+
+$
+\begin{aligned}
+E_p(P)-A_p&=\frac{(1/16)^p-(7/64)^p}{3}<0,\\
+E_p(Q)-A_p&=\frac{(13/16)^p-(7/64)^p}{3}>0.
+\end{aligned}
+$
+
+由 [@thm-ch31-cyclic-collision-fourier]，零剩余类的碰撞质量是六个特征标平方模的 $p$ 次幂的平均。令 $\omega=e^{2\pi i/6}$。在混合频率 $1$ 上，$P$ 的振幅为 $1/2+\omega^3/4+\omega^4/4=(1+\omega^4)/4$，$Q$ 的振幅为 $(3+\omega)/4$，平方模分别为 $1/16$ 和 $13/16$。频率 $5$ 给出各自的共轭。两个边缘的非平凡平方模为 $1/4$ 和 $7/16$，所以边缘乘积对每个混合频率使用的数值为 $7/64$。在每一个正阶卷积幂下，两组分布的两个边缘分别相同。碰撞质量为 $E$ 的概率律，其二阶 Rényi 熵为 $-\log E$。 [Linden、Mosonyi 与 Winter，第 V 节](https://arxiv.org/html/1212.0248#S5)
+
 缩小模数是一种减少特征标项数的办法。另一种是保留模数 $q$，用只含少量频率的核 $K$ 在每个剩余类上从上方控制带的指示函数。对正整数 $q$，取 $G=\mathbb Z/q\mathbb Z$，令 $R\subseteq G$ 为需要计入的剩余类。设 $K:G\to\mathbb R$ 处处非负，且在 $R$ 上至少为 $1$。令 $S$ 包含 $K$ 的离散傅里叶变换的支集，记 $m=|S|$，$M=\sum_{x\in G}K(x)$。
 
 **手工推导。** 傅里叶反演在零点给出精确恒等式
@@ -192,6 +203,18 @@ $$
 [两矩稳定性界](lean:D5/S3/Fourier/Concentration/CyclicMomentStability.first_two_moment_stability)
 
 写 $x=\Re X_j$、$y=\Im X_j$。由 $x^2+y^2=c$，有 $(|y|-t)(|y|+t)=c^2-x^2$。使用 $|x+c|\le2$ 和 $|y|+t\ge t$，就能用实部误差控制虚部误差。虚部均值为零，再用加权柯西–施瓦茨不等式得到质量差的界。当 $b=0$ 且 $c=1/2$ 时，两项误差都为零。要从这一估计得到离散格点上的定量缺口，还须结合允许相位之间的角距离。
+
+相位与直角的距离可以用实测方差控制。设有限单位相位 $z_j$ 带有总和为一的非负权重 $w_j$。记 $m=\sum_j w_jz_j$、$b=\sum_jw_jz_j^2$、$c=|m|^2$、$s=c(1-c)$、$D=c/2-c^2+\Re(\overline m^{\,2}b)/2$。设任意两个正权重指标（允许取同一指标）满足 $\lvert\Re(z_j\overline{z_k})\rvert\ge\delta$。令 $d=\max\{0,\delta-|2c-1|\}$。若 $d>0$，则
+
+$$
+c d^2\le 4\left(1+\frac4s+\frac{c d^2}{s^2}\right)D.
+$$
+
+$d>0$ 时，$c$ 严格介于零与一之间。两矩稳定性给出的两个理想相位在旋转后的坐标中有实内积 $c(2c-1)$。对符号相反的相位对求加权平均，可用两个理想相位的平方误差控制实内积偏差。两侧质量的乘积等于一减去质量差平方再除以四，代入两条稳定性估计即得上式。
+
+当 $4\nmid q$ 时，将整数差 $k$ 对应的 $4k-q$ 化为模 $2q$ 的中心剩余类。所得整数非零，在 $q$ 为偶数时仍为偶数。循环相位 $z_j=\exp(-2\pi i j/q)$ 因此可取 $\delta=\sin(\pi/(2q))$（$q$ 为奇数）或 $\delta=\sin(\pi/q)$（$q$ 为偶数）。此时 $m=\widehat w(1)$、$b=\widehat w(2)$。若 $|b|\le\delta/3$，可得 $c\le(1+|b|)/2-\delta^2/225$。对上界取 $p$ 次幂，就得到两个独立的 $p$ 次抽样和之差的第一个傅里叶系数的上界。
+
+[相位间隔的方差界](lean:D5/S3/Fourier/Concentration/CyclicGridMomentGap.phase_separation_variance_bound) · [循环网格上的傅里叶矩界](lean:D5/S3/Fourier/Concentration/CyclicGridMomentGap.cyclic_grid_fourier_gap)
 
 对实际 ζ 纵坐标，可按前一节在 $X=e^{-D}T^\beta$ 以上截取尾段，并取 $\delta=\log T$、$g_\gamma=\gamma/r$。给定 $H=\exp(cT^\beta\log T)$，可取 $N=\lfloor HT^2/r\rfloor_++1$，使网格误差不超过 $rB/(2T^2)$。要得到有限的起点范围，还需在某个 $L=L(T)$ 上证明相应的严格预算 $KNE_p(2/L)<(\log T)^{2p}$。目标阶数 $p$ 随 $T^\beta\log T$ 增长。对固定的有限尾段和固定 $p$，随着 $L$ 增大，$E_p(2/L)$ 最终等于精确碰撞质量 $E_p(0)$。若要量化 $L$，仍须控制正分辨率下的加权近碰撞。Tao、Trudgian 与 Yang 的定义 7 计数的是单位尺度的无权四元组，定理 64 的估计适用于固定的 $\sigma\ge7/10$。临界线尾段的增长阶数加权界仍待证。 [定义 7 与定理 64](https://arxiv.org/html/2501.16779v1) · [研究问题](https://github.com/the-omega-institute/trureturing/issues/33519)
 

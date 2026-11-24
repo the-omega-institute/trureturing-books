@@ -120,6 +120,17 @@ The zero residue alone limits how small a cyclic certificate can be. Set $R=\{0\
 
 At the ζ-tail parameters of [the variance bound](ch34-s28-s03-s02-collision-variance.md), this requires $\log q\ge\log N+2p\log\log T-O(p)$ for a single modulus or for the harmonic mean in the average. Evaluating the character sum term by term uses $q$ terms for that modulus. An average needs at least one modulus as large as its harmonic mean. A method to bound the weighted mass at the target resolution with feasible asymptotic cost remains open.
 
+The collision masses for two separate moduli do not determine their joint mass, even when the complete marginal laws are known. Modulo six, take $P$ with weights $1/2,1/4,1/4$ at residues $0,3,4$, and $Q$ with weights $3/4,1/4$ at $0,1$. Both reduce to $(3/4,1/4)$ modulo two and $(3/4,1/4,0)$ modulo three. Let $A_p$ be the product of the two marginal collision masses for independent $p$-fold sums, and let $E_p(P),E_p(Q)$ be their respective collision masses modulo six. For $p\ge1$,
+
+$$
+\begin{aligned}
+E_p(P)-A_p&=\frac{(1/16)^p-(7/64)^p}{3}<0,\\
+E_p(Q)-A_p&=\frac{(13/16)^p-(7/64)^p}{3}>0.
+\end{aligned}
+$$
+
+By [@thm-ch31-cyclic-collision-fourier], the collision mass at residue zero averages the $p$th powers of the six squared character magnitudes. Set $\omega=e^{2\pi i/6}$. At mixed frequency $1$, the amplitude for $P$ is $1/2+\omega^3/4+\omega^4/4=(1+\omega^4)/4$, and the amplitude for $Q$ is $(3+\omega)/4$. Their squared magnitudes are $1/16$ and $13/16$. Frequency $5$ gives the conjugate of each amplitude. The nontrivial squared magnitudes of the marginals are $1/4$ and $7/16$, so their product assigns $7/64$ to each mixed frequency. The two laws have identical marginals at every positive convolution order. A probability law of collision mass $E$ has order-two Rényi entropy $-\log E$. [Linden, Mosonyi, and Winter, §V](https://arxiv.org/html/1212.0248#S5)
+
 A smaller modulus reduces the number of character terms. One can also keep the modulus $q$ and majorize the band indicator pointwise by a kernel $K$ with few Fourier modes. For a positive integer $q$, put $G=\mathbb Z/q\mathbb Z$ and let $R\subseteq G$ be the residues to be counted. Suppose $K:G\to\mathbb R$ is nonnegative everywhere and at least $1$ on $R$. Let $S$ contain the support of the discrete Fourier transform of $K$, and write $m=|S|$ and $M=\sum_{x\in G}K(x)$.
 
 **Hand derivation.** Fourier inversion at zero gives the exact identity
@@ -192,6 +203,18 @@ $$
 [Stability bounds from two moments](lean:D5/S3/Fourier/Concentration/CyclicMomentStability.first_two_moment_stability)
 
 Write $x=\Re X_j$ and $y=\Im X_j$. The identity $x^2+y^2=c$ gives $(|y|-t)(|y|+t)=c^2-x^2$. Use $|x+c|\le2$ and $|y|+t\ge t$ to control the imaginary error by the real error. The imaginary mean vanishes, so weighted Cauchy–Schwarz bounds the mass difference. Both errors vanish when $b=0$ and $c=1/2$. A quantitative gap on a discrete grid also requires the angular separation of the available phases.
+
+The phase separation can be compared with the observed variance. Take finitely many unit phases $z_j$ with nonnegative weights $w_j$ summing to one. Let $m=\sum_j w_jz_j$, $b=\sum_jw_jz_j^2$, $c=|m|^2$, $s=c(1-c)$ and $D=c/2-c^2+\Re(\overline m^{\,2}b)/2$. Suppose $\lvert\Re(z_j\overline{z_k})\rvert\ge\delta$ for every pair of positive-weight indices, including diagonal pairs. Put $d=\max\{0,\delta-|2c-1|\}$. When $d>0$,
+
+$$
+c d^2\le 4\left(1+\frac4s+\frac{c d^2}{s^2}\right)D.
+$$
+
+Positive $d$ puts $c$ strictly between zero and one. The two-moment comparison phases have real inner product $c(2c-1)$ in the rotated coordinates. Average the squared perturbation of this product over pairs from opposite sign classes. Their mass product equals one quarter of one minus the squared mass difference. The two stability bounds then give the displayed inequality.
+
+When $4\nmid q$, reduce $4k-q$ to a centered residue modulo $2q$ for each integer difference $k$. The result is nonzero, and it is even when $q$ is even. For $z_j=\exp(-2\pi i j/q)$, we may take $\delta=\sin(\pi/(2q))$ for odd $q$ and $\delta=\sin(\pi/q)$ for even $q$. Here $m=\widehat w(1)$ and $b=\widehat w(2)$. If $|b|\le\delta/3$, a consequence is $c\le(1+|b|)/2-\delta^2/225$. Raising that bound to the $p$th power controls the first Fourier coefficient of the difference of two independent sums of $p$ draws.
+
+[Variance bound for separated phases](lean:D5/S3/Fourier/Concentration/CyclicGridMomentGap.phase_separation_variance_bound) · [Fourier moment bound on a cyclic grid](lean:D5/S3/Fourier/Concentration/CyclicGridMomentGap.cyclic_grid_fourier_gap)
 
 For actual ζ ordinates, use the tail above $X=e^{-D}T^\beta$ from the preceding section, with $\delta=\log T$ and $g_\gamma=\gamma/r$. For $H=\exp(cT^\beta\log T)$, take $N=\lfloor HT^2/r\rfloor_++1$ to keep the mesh error at most $rB/(2T^2)$. To bound the start, a finite $L=L(T)$ must satisfy the budget $KNE_p(2/L)<(\log T)^{2p}$. The target order $p$ grows on the scale of $T^\beta\log T$. For fixed finite tail and fixed $p$, $E_p(2/L)$ eventually equals the exact collision mass $E_p(0)$ as $L$ increases. Quantifying $L$ requires a weighted bound at positive resolution. Definition 7 in Tao, Trudgian, and Yang counts unweighted quadruples at unit scale, and Theorem 64 gives estimates for fixed $\sigma\ge7/10$. The growing-order weighted bound for the critical-line tail remains open. [Definition 7 and Theorem 64](https://arxiv.org/html/2501.16779v1) · [Research question](https://github.com/the-omega-institute/trureturing/issues/33519)
 
