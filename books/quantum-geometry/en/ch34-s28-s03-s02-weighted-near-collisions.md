@@ -700,6 +700,29 @@ For the second-mode problem on an even cycle, a half-turn preserves $d$ and nega
 
 If a joint optimizer had slack in one bound, it could move a small distance toward the optimizer for the other bound. The resulting probability weight would retain both bounds and strictly decrease the squared mass. The two moment equalities hold even after support changes. Determining the support and the exact optimal value after clipping for general moduli remains open, as does the arithmetic estimate for exceptional frequencies of the actual high-order ζ-zero harmonics. [Lean proof of the two tight constraints](lean:D5/S3/Fourier/Concentration/ActiveCosineConstraints.active_cosine_constraints)
 
+## The exact high-threshold interval for two cosine moments
+
+Fix an integer $q\ge4$. Write $c_k=\cos(2\pi k/q)$ and $d_k=2c_k^2-1$. The value $1$ occurs for $c$ only at zero. Among the other residues the largest value is $u=c_1$, and the smallest is $\ell=c_{\lfloor q/2\rfloor}$. Let $n_u,n_\ell$ be their multiplicities. Set
+$$
+g(x)=x-(2x^2-1),\qquad
+p=\frac{-g(\ell)}{g(u)-g(\ell)},\qquad
+b=pu+(1-p)\ell,\qquad r=\frac{1-a}{1-b}.
+$$
+The signs $g(\ell)<0<g(u)$ give $0<p<1$. Assign mass $1-r$ to zero, mass $rp$ uniformly to the residues of level $u$, and mass $r(1-p)$ uniformly to the residues of level $\ell$. This vector $v$ has both moments equal to $a$. Its squared mass is
+$$
+E(v)=(1-r)^2+r^2\left(\frac{p^2}{n_u}+\frac{(1-p)^2}{n_\ell}\right).
+$$
+
+To locate the exact interval of optimality, let $P_r(x)=\alpha_r+\beta_rx+\gamma_r(2x^2-1)$ interpolate the three per-residue weights at $1,u,\ell$. The coefficients and the values $P_r(x)$ are affine in $r$. At $r=0$ the polynomial is $(x-u)(x-\ell)/((1-u)(1-\ell))$. Since $u+\ell<0$, both moment coefficients are positive and $P_0(x)<0$ at every intermediate level. For each $f$ among $\beta_r,\gamma_r$ and $-P_r(x)$ at the intermediate levels, form the number $1-f(1)/f(0)$, with $f$ viewed as a function of $r$. Write $B$ for the maximum of these numbers and $1$, and set
+$$
+a_{\mathrm{crit}}=1-\frac{1-b}{B}.
+$$
+Then $b<a_{\mathrm{crit}}<1$. Whenever $a_{\mathrm{crit}}\le a\le1$, the interpolant has nonnegative moment coefficients and gives $v_k=\max(0,P_r(c_k))$. For every probability competitor $w$ with both moments at least $a$, expanding squares yields $E(w)-E(v)\ge\sum_k(w_k-v_k)^2$. Thus the candidate uniquely attains the displayed minimum throughout the closed interval.
+
+For $b<a<a_{\mathrm{crit}}$, all three supporting levels still have positive weights. A negative moment coefficient allows a small change within the support that increases the associated moment and preserves the other. A positive interpolant at an intermediate level allows a small amount of weight there, with a change on the three supporting levels that preserves both moments and the total mass. Either change gives a feasible weight with strictly smaller squared mass. At $a=b$, the candidate gives zero mass to residue zero. Mixing in a sufficiently small point mass there preserves feasibility and lowers squared mass because the two supports are disjoint. For any strict energy improvement, a further small mixture with the point mass at zero keeps the energy strictly lower and makes both moments strictly exceed $a$. The general optimizer below the cutoff and the arithmetic estimate for exceptional frequencies of the actual high-order ζ-zero harmonics remain open.
+
+[Lean proof of the exact interval and strict descent](lean:D5/S3/Fourier/Concentration/HighCosineThreshold.cyclic_high_threshold_certificate)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
