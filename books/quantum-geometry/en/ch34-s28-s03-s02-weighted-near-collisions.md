@@ -407,6 +407,8 @@ $$
 
 where $P_n(u)=u^3+(18-9n)u^2+(18n^2-63n+51)u-6n^3+27n^2-31n$. Summing the coefficients of $z^k$ over the integers $|k|\le\eta$ gives $R_3(\eta)$.
 
+[The ring identity in Lean](lean:D5/S3/Fourier/Concentration/DisjointTriplePhaseIdentity.disjoint_triple_phase_identity)
+
 Apply inclusion and exclusion to the nine equality conditions across the two triples. The selected equalities join the six positions into components. Each component independently chooses an index, so a component with $a$ left positions and $b$ right positions contributes $F(z^{a-b})$. Only a three-edge star can produce $a-b=\pm2$. Each orientation has three choices of center and a negative sign. The remaining components yield terms in $n$ and $U$.
 
 For spectra with identical directed differences, $P_n(U)$ cancels coefficient by coefficient. At resolution zero, the difference is $-6$ times the difference in counts of ordered relations $2g_i=g_j+g_k$, including the triples with all indices equal. The spectra $A$ and $B$ above have $25$ and $29$ such relations, respectively, giving $5976-5952=24$. At positive resolution use $|2g_i-g_j-g_k|\le\eta$. This decomposition applies at degree three with unit weights.
