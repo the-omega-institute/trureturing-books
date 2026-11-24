@@ -148,7 +148,7 @@ $$
 
 把 $K$ 用于碰撞质量时，其零频项为 $(M/q)W^{2p}$。若 $0\in R$ 且其他系数的实部都非负，则整个上界至少为 $W^{2p}/m$。系数有正有负时，均值估计约束零频项，其余各项由同一组权重产生的高阶矩共同决定。
 
-实测的第二系数也可以只接近零。**手工推导。** 把同一组归一化权重 $w_j$ 作用在单位相位 $z_j$ 上，记 $m=\sum_j w_jz_j$、$b=\sum_j w_jz_j^2$、$c=|m|^2$。对 $0<c<1$，置 $X_j=\overline m z_j$、$t=\sqrt{c(1-c)}$。当 $\Im X_j\ge0$ 时取 $\eta_j=1$，其余取 $\eta_j=-1$。实部方差同时控制相位到两个候选点的平方误差与两侧的质量差。具体地，令
+当第二个系数接近零时，实部方差给出相位约束。令
 
 $$
 D=\frac c2-c^2+\frac12\Re(\overline m^{\,2}b).
@@ -161,7 +161,7 @@ $$
 \sum_j w_j\lvert X_j-c-i\eta_jt\rvert^2 &\le (1+4/t^2)D,\\
 \left(\sum_j w_j\eta_j\right)^2 &\le 4D/t^4.
 \end{aligned}
-$$
+$$ [前两个矩的稳定性估计](lean:D5/S3/Fourier/Concentration/CyclicMomentStability.first_two_moment_stability)
 
 写 $x=\Re X_j$、$y=\Im X_j$。由 $x^2+y^2=c$，有 $(|y|-t)(|y|+t)=c^2-x^2$。使用 $|x+c|\le2$ 和 $|y|+t\ge t$，就能用实部误差控制虚部误差。虚部均值为零，再用加权柯西–施瓦茨不等式得到质量差的界。当 $b=0$ 且 $c=1/2$ 时，两项误差都为零。要从这一估计得到离散格点上的定量缺口，还须结合允许相位之间的角距离。
 
