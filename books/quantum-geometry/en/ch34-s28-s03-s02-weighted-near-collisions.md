@@ -118,6 +118,17 @@ The full proof is checked by the Lean kernel.
 
 The zero residue alone limits how small a cyclic certificate can be. Set $R=\{0\}$ in the character formula. Every term is a nonnegative moment and the term at $k=0$ is $W^{2p}$. Thus $C_q(R_q(H))\ge W^{2p}/q$ for $H\ge0$. To certify the missing-window budget with a single cyclic bound, one therefore needs $q>KN(W/\delta)^{2p}$. For an average over a nonempty set $P$, the same inequality holds with $q$ replaced by the harmonic mean of its moduli. This restriction also applies to the product moduli.
 
+The collision masses for two separate moduli do not determine their joint mass, even when the complete marginal laws are known. Modulo six, take $P$ with weights $1/2,1/4,1/4$ at residues $0,3,4$, and $Q$ with weights $3/4,1/4$ at $0,1$. Both reduce to $(3/4,1/4)$ modulo two and $(3/4,1/4,0)$ modulo three. Let $A_p$ be the product of the two marginal collision masses for independent $p$-fold sums, and let $E_p(P),E_p(Q)$ be their respective collision masses modulo six. For $p\ge1$,
+
+$$
+\begin{aligned}
+E_p(P)-A_p&=\frac{(1/16)^p-(7/64)^p}{3}<0,\\
+E_p(Q)-A_p&=\frac{(13/16)^p-(7/64)^p}{3}>0.
+\end{aligned}
+$$
+
+The character average gives the same contributions from the trivial character and the characters that depend on only one residue coordinate. Two characters depend on both coordinates. Their squared magnitudes are $1/16$ for $P$ and $13/16$ for $Q$, while multiplying the marginal masses assigns them the squared value $7/64$. The comparison applies at every positive order for these fixed weights. For a probability law with collision mass $E$, the order-two Rényi entropy is $-\log E$. At each positive convolution order, the two laws in this example have identical marginals. [Linden, Mosonyi, and Winter, §V](https://arxiv.org/html/1212.0248#S5)
+
 At the ζ-tail parameters of [the variance bound](ch34-s28-s03-s02-collision-variance.md), this requires $\log q\ge\log N+2p\log\log T-O(p)$ for a single modulus or for the harmonic mean in the average. Evaluating the character sum term by term uses $q$ terms for that modulus. An average needs at least one modulus as large as its harmonic mean. A method to bound the weighted mass at the target resolution with feasible asymptotic cost remains open.
 
 A smaller modulus reduces the number of character terms. One can also keep the modulus $q$ and majorize the band indicator pointwise by a kernel $K$ with few Fourier modes. For a positive integer $q$, put $G=\mathbb Z/q\mathbb Z$ and let $R\subseteq G$ be the residues to be counted. Suppose $K:G\to\mathbb R$ is nonnegative everywhere and at least $1$ on $R$. Let $S$ contain the support of the discrete Fourier transform of $K$, and write $m=|S|$ and $M=\sum_{x\in G}K(x)$.
