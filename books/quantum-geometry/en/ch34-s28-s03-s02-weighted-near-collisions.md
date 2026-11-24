@@ -224,7 +224,7 @@ $$
 a=\min\left(\sqrt r,\sqrt{\frac{1+k}{4(1-b)}}\right),\qquad B=\frac{a+r}{1+a}.
 $$
 
-The largest $|m_1|$ is $B$. Rotate the phase family so that $m_1$ is nonnegative real, and write $x=\Re z$ for the real projection of a phase sampled under the weight. The identities $2x^2=1+\Re z^2$ and $8(x^2-x^4)=1-\Re z^4$ relate the two caps to real moments. The nonnegative variance of $\Re z^2$ gives $\mathbb E x^2\le r$. If $a=\sqrt r$, Cauchy–Schwarz gives $\mathbb E x\le a=B$. In the other branch, expand the nonnegative polynomial $(1-x)(x-a)^2(x+1+2a)$ for $x\in[-1,1]$. Its mean is
+The largest $|m_1|$ is $B$. Rotate the phase family so that $m_1$ is nonnegative real, and write $x=\Re z$ for the real projection of a phase sampled under the weight. The identities $2x^2=1+\Re z^2$ and $8(x^2-x^4)=1-\Re z^4$ relate the two caps to real moments. The nonnegative variance of $\Re z^2$ gives $(\Re m_2)^2\le(1+\Re m_4)/2\le(1+k)/2$. Together with $\Re m_2\le |m_2|\le e$ and $2\mathbb E x^2=1+\Re m_2$, this yields $\mathbb E x^2\le r$. If $a=\sqrt r$, Cauchy–Schwarz gives $\mathbb E x\le a=B$. In the other branch, expand the nonnegative polynomial $(1-x)(x-a)^2(x+1+2a)$ for $x\in[-1,1]$. Its mean is
 $$
 \mathbb E[(1-x^2)(x^2-a^2)]-2a(1+a)\left[(1+a)(\mathbb E x-1)+1-\mathbb E x^2\right].
 $$
