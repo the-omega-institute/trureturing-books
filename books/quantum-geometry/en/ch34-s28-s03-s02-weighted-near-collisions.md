@@ -156,6 +156,16 @@ Write $e,o$ for the total masses on the even and odd residues. The two differenc
 
 For the difference of two independent sums of $p$ draws from $w$, the Fourier coefficients at $1,2$ are $u^p,v^p$. If $v^p=0$ and $p\ge2$, the first coefficient has maximum $2^{-p}$. In the relaxation to symmetric probability laws with nonnegative Fourier coefficients and zero second coefficient, both parity masses are $1/2$. The first coefficient is the difference between the two even-residue masses and has maximum $1/2$, attained by $(1/2,1/4,0,1/4)$. The relaxed maximum is $2^{p-1}$ times the attainable one. The gap comes from requiring the two high moments to arise from common initial weights. Applying this idea to actual ζ ordinates requires quantitative constraints on the character moments of their common spectrum.
 
+The equality condition for the one-half bound extends to every positive modulus. **Hand derivation.** Let one probability weight $w$ on $\mathbb Z/q\mathbb Z$ satisfy $\widehat w(2)=0$. Put $m=\widehat w(1)$, $c=|m|^2$ and $Z_j=\overline m\exp(-2\pi i j/q)$. The weighted mean of $Z_j$ is $c$, its weighted second moment vanishes, and $|Z_j|^2=c$. The variance of the real part is therefore
+
+$$
+\sum_j w_j(\Re Z_j-c)^2=\frac{c}{2}-c^2\ge0.
+$$
+
+Thus $c\le 1/2$. At equality, the real part is $1/2$ at every positive weight and the imaginary part is either $1/2$ or $-1/2$. The imaginary mean is zero, so each side has mass one half. Each phase identifies a unique residue. The equality cases are exactly two residues of mass one half each whose difference has additive order four. Conversely, the two phases of such a law are perpendicular, giving squared first magnitude $1/2$, while their squares cancel. These residues exist exactly when $4\mid q$, with $0$ and $q/4$ as a choice.
+
+To compare modes $k$ and $2k$ of a common weighted lattice spectrum, combine weights at coordinates $a_j$ that share the residue $ka_j\bmod q$. Modes one and two of the resulting probability weight recover modes $k$ and $2k$ of the original normalized spectrum. When mode $2k$ vanishes, the normalized $2p$-th power at $k$ in the collision formula is at most $2^{-p}$.
+
 For actual ζ ordinates, use the tail above $X=e^{-D}T^\beta$ from the preceding section, with $\delta=\log T$ and $g_\gamma=\gamma/r$. For $H=\exp(cT^\beta\log T)$, take $N=\lfloor HT^2/r\rfloor_++1$ to keep the mesh error at most $rB/(2T^2)$. To bound the start, a finite $L=L(T)$ must satisfy the budget $KNE_p(2/L)<(\log T)^{2p}$. The target order $p$ grows on the scale of $T^\beta\log T$. For fixed finite tail and fixed $p$, $E_p(2/L)$ eventually equals the exact collision mass $E_p(0)$ as $L$ increases. Quantifying $L$ requires a weighted bound at positive resolution. Definition 7 in Tao, Trudgian, and Yang counts unweighted quadruples at unit scale, and Theorem 64 gives estimates for fixed $\sigma\ge7/10$. The growing-order weighted bound for the critical-line tail remains open. [Definition 7 and Theorem 64](https://arxiv.org/html/2501.16779v1) · [Research question](https://github.com/the-omega-institute/trureturing/issues/33519)
 
 ## What low-order collision masses determine
