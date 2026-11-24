@@ -246,6 +246,8 @@ $$
 
 $N=2,3$ 时分别得到 $1/\sqrt2$ 和 $2/3$。由正弦函数在零点的极限，$N\to\infty$ 时有 $B_N\to 2/\pi$。所以，在这类分布中，即使消失的偶次谐波连续范围不断增大，第一系数幅值仍可远离零。实际 ζ 纵坐标的近碰撞预算需要约束时间轨道上加权和的信息。
 
+[连续偶次谐波消失时尖锐界的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/b97c4028659cb44b38c76231f26275b1cae35349/D5/S3/Fourier/Concentration/EvenHarmonicFirstMoment.lean#L464)
+
 ## 低阶碰撞质量能确定什么
 
 把频率三元组 $(0,1,k)$ 中最后一项移到 $k+\sqrt 2$。当总次数低于 $k$ 时，其余两项的计数还不足以抵消最后一项的变动。到次数 $k$，第一组三元组里恰好有一种新的抵消方式。

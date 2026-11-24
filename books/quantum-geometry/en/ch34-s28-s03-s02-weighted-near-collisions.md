@@ -246,6 +246,8 @@ To compare an arbitrary admissible law with this equal-weight law, rotate its fi
 
 The cases $N=2,3$ give $1/\sqrt2$ and $2/3$. As $N\to\infty$, $B_N\to 2/\pi$ by the sine limit at zero. Thus a growing block of vanishing even orders still allows a first magnitude bounded away from zero in this class of laws. The near-collision budget for actual ζ ordinates needs information that constrains the weighted sums along their time orbit.
 
+[Lean proof of the sharp bound for a consecutive even block](https://github.com/the-omega-institute/trureturing/blob/b97c4028659cb44b38c76231f26275b1cae35349/D5/S3/Fourier/Concentration/EvenHarmonicFirstMoment.lean#L464)
+
 ## What low-order collision masses determine
 
 Move the last frequency in $(0,1,k)$ to $k+\sqrt 2$. Below degree $k$, the counts on the first two coordinates cannot offset a change in the last count. At degree $k$, exactly one additional pair of count vectors can cancel in the integer spectrum.
