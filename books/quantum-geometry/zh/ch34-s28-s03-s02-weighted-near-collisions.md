@@ -160,9 +160,38 @@ $$
 0\le v\le1,\qquad 0\le u\le(1+v)/2.
 $$
 
-记偶、奇剩余类的总权重分别为 $e,o$。两个差 $a-c,b-d$ 分别在 $[-e,e]$ 和 $[-o,o]$ 内独立变化。所以 $u$ 的最大值为 $e^2+o^2=(1+v)/2$。给定 $v$ 可取 $e=(1+\sqrt v)/2$、$o=(1-\sqrt v)/2$，然后按同一个比例缩放两个差的端点值，得到从零到最大值的整个区间。
+记偶、奇剩余类的总权重分别为 $e,o$。两个差 $a-c,b-d$ 分别在 $[-e,e]$ 和 $[-o,o]$ 内独立变化。所以 $u$ 的最大值为 $e^2+o^2=(1+v)/2$。给定 $v$ 可取 $e=(1+\sqrt v)/2$、$o=(1-\sqrt v)/2$，然后按同一个比例缩放两个差的端点值，得到从零到最大值的整个区间。 [模四联合矩的精确可行域](lean:D5/S3/Fourier/Concentration/FourthRootMomentRegion.dft_four_squared_region)
 
-从 $w$ 独立抽取 $p$ 次求和，再取两个独立和的差，频率 $1,2$ 的傅里叶系数分别是 $u^p,v^p$。若 $v^p=0$，在 $p\ge2$ 时，第一个系数的最大值为 $2^{-p}$。若只要求差的分布对称且傅里叶系数非负，第二个系数为零时偶、奇质量都等于 $1/2$。第一个系数是两个偶剩余类的质量之差，最大值为 $1/2$，由 $(1/2,1/4,0,1/4)$ 取到。两项最大值之比为 $2^{p-1}$。这一差距来自两个高阶矩须由同一组初始权重实现。用于实际 ζ 纵坐标时，仍需对同一零点谱的特征标矩建立定量约束。
+从 $w$ 独立抽取 $p$ 次求和，再取两个独立和的差，频率 $1,2$ 的傅里叶系数分别是 $u^p,v^p$。若 $v^p=0$，在 $p\ge2$ 时，第一个系数的最大值为 $2^{-p}$。若只要求差的分布对称且傅里叶系数非负，第二个系数为零时偶、奇质量都等于 $1/2$。第一个系数是两个偶剩余类的质量之差，最大值为 $1/2$，由 $(1/2,1/4,0,1/4)$ 取到。两项最大值之比为 $2^{p-1}$。这一差距来自两个高阶矩须由同一组初始权重实现。用于实际 ζ 纵坐标时，仍需对同一零点谱的特征标矩建立定量约束。 [同源与放松分布的两个最优值](lean:D5/S3/Fourier/Concentration/FourthRootMomentRegion.four_first_moment_maxima)
+
+一半上界的等号条件适用于任意正模数。 设同一个概率权重 $w$ 在 $\mathbb Z/q\mathbb Z$ 上满足 $\widehat w(2)=0$。记 $m=\widehat w(1)$、$c=|m|^2$，并置 $Z_j=\overline m\exp(-2\pi i j/q)$。$Z_j$ 的加权均值为 $c$，加权二次矩为零，且 $|Z_j|^2=c$。因此实部的加权方差是
+
+$$
+\sum_j w_j(\Re Z_j-c)^2=\frac{c}{2}-c^2\ge0.
+$$
+
+故 $c\le 1/2$。取等时，每个正权重处的实部等于 $1/2$，虚部等于 $1/2$ 或 $-1/2$。虚部的均值为零，两侧质量各为一半。每个相位只对应一个剩余类，因此等号情形恰为两个各承载一半质量的剩余类，且其差的加法阶为四。反过来，这两个相位互相垂直，一阶系数的平方模就是 $1/2$，二阶系数相消。这样的剩余类存在当且仅当 $4\mid q$。可取 $0$ 与 $q/4$。 [等号的充要条件](lean:D5/S3/Fourier/Concentration/CyclicHarmonicEquality.zmod_first_mode_le_half_of_second_zero) · [可取等的模数](lean:D5/S3/Fourier/Concentration/CyclicHarmonicEquality.zmod_exists_first_mode_half_of_second_zero)
+
+若要比较同一加权格点谱在 $k$ 与 $2k$ 的系数，把坐标 $a_j$ 上的权重汇入剩余类 $ka_j\bmod q$。这样得到的同一概率权重的一、二阶系数分别等于原谱在 $k$、$2k$ 的系数。所以当 $2k$ 处的系数为零时，归一化后 $k$ 处进入碰撞公式的 $2p$ 次幂至多为 $2^{-p}$。
+
+若第二系数接近零，可以量化上述两点构形的稳定性。设有限组单位相位 $z_j$ 带有同一组总和为 $1$ 的非负权重 $w_j$，记 $m=\sum_j w_jz_j$、$b=\sum_j w_jz_j^2$、$c=|m|^2$。对 $0<c<1$，置 $X_j=\overline m z_j$、$t=\sqrt{c(1-c)}$。当 $\Im X_j\ge0$ 时取 $\eta_j=1$，其余取 $\eta_j=-1$。实部方差同时控制相位到两个候选点的平方误差与两侧的质量差。具体地，令
+
+$$
+D=\frac c2-c^2+\frac12\Re(\overline m^{\,2}b).
+$$
+
+则有
+
+$$
+\begin{aligned}
+\sum_j w_j\lvert X_j-c-i\eta_jt\rvert^2 &\le (1+4/t^2)D,\\
+\left(\sum_j w_j\eta_j\right)^2 &\le 4D/t^4.
+\end{aligned}
+$$
+
+[两矩稳定性界](lean:D5/S3/Fourier/Concentration/CyclicMomentStability.first_two_moment_stability)
+
+写 $x=\Re X_j$、$y=\Im X_j$。由 $x^2+y^2=c$，有 $(|y|-t)(|y|+t)=c^2-x^2$。使用 $|x+c|\le2$ 和 $|y|+t\ge t$，就能用实部误差控制虚部误差。虚部均值为零，再用加权柯西–施瓦茨不等式得到质量差的界。当 $b=0$ 且 $c=1/2$ 时，两项误差都为零。要从这一估计得到离散格点上的定量缺口，还须结合允许相位之间的角距离。
 
 相位与直角的距离可以用实测方差控制。设有限单位相位 $z_j$ 带有总和为一的非负权重 $w_j$。记 $m=\sum_j w_jz_j$、$b=\sum_jw_jz_j^2$、$c=|m|^2$、$s=c(1-c)$、$D=c/2-c^2+\Re(\overline m^{\,2}b)/2$。设任意两个正权重指标（允许取同一指标）满足 $\lvert\Re(z_j\overline{z_k})\rvert\ge\delta$。令 $d=\max\{0,\delta-|2c-1|\}$。若 $d>0$，则
 

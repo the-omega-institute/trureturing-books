@@ -10161,6 +10161,240 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "omega-math-recompilation-atlas-sandbox",
+      "code": "OMEGA//RECOMPILE",
+      "title": "OmegaMath 零公理去近似重编译与全书自指结晶图谱收束沙盘",
+      "title_en": "OmegaMath Zero-Axiom De-Approximation Recompilation & Self-Referential Monograph Atlas Closure",
+      "summary": "在射影三元球上比较六大支柱的平直脚手架与有理重编译，检验金的 5d 壳层四极矩和赫克—拉马努金有理谱壳，再沿十六站追踪十二晶核图谱与五素数 Ω-FRACTRAN 不动点。",
+      "summary_en": "Compare flat approximations with exact rational expressions for six pillars on the projective ternion sphere. Examine quadrupole moments in gold’s 5d shells and the rational Hecke–Ramanujan spectrum, then follow sixteen milestones to the twelve-node atlas and the five-prime Ω-FRACTRAN fixed point.",
+      "path": "omega-math-recompilation-atlas-sandbox/",
+      "thumbnail": "omega-math-recompilation-atlas-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-24",
+      "chapter": 39,
+      "section": "39.8",
+      "presets": [
+        "six-pillar-deapproximation-compiler",
+        "au3-d8-quadrupole-anisotropy-slice",
+        "hecke-ramanujan-rational-psd-shell",
+        "twelve-node-atlas-dag-crystallization",
+        "five-prime-omega-fractran-fixed-point"
+      ],
+      "preset_titles": {
+        "six-pillar-deapproximation-compiler": {
+          "zh": "六大支柱 OmegaMath 去近似重编译",
+          "en": "Six pillars, de-approximated"
+        },
+        "au3-d8-quadrupole-anisotropy-slice": {
+          "zh": "Au⁺ 与 Au³⁺ 的 j = 2 四极切片",
+          "en": "Au⁺ vs Au³⁺ quadrupole slice"
+        },
+        "hecke-ramanujan-rational-psd-shell": {
+          "zh": "赫克—拉马努金 4p 有理谱壳",
+          "en": "Hecke–Ramanujan 4p shells"
+        },
+        "twelve-node-atlas-dag-crystallization": {
+          "zh": "十二晶核图谱结晶与撤桥",
+          "en": "Twelve-node atlas & erasure"
+        },
+        "five-prime-omega-fractran-fixed-point": {
+          "zh": "五素数 Ω-FRACTRAN 不动点",
+          "en": "Five-prime Ω-FRACTRAN fixed point"
+        }
+      },
+      "tags": [
+        "有理重编译",
+        "射影三元球",
+        "四极矩",
+        "赫克—拉马努金",
+        "十二晶核图谱",
+        "Ω-FRACTRAN"
+      ],
+      "tags_en": [
+        "Rational recompilation",
+        "Projective ternion sphere",
+        "Quadrupole moment",
+        "Hecke–Ramanujan",
+        "Twelve-node atlas",
+        "Ω-FRACTRAN"
+      ],
+      "theory": [
+        {
+          "label": "§39.8 · OmegaMath 零公理去近似重编译与全书自指结晶图谱收束",
+          "label_en": "§39.8 · OmegaMath Zero-Axiom De-Approximation Recompilation & Self-Referential Monograph Atlas Closure",
+          "href": "../zh/ch39-s38-omega-math-recompilation-and-self-referential-atlas-closure.html#sec-ch39-omega-math-recompilation-and-self-referential-atlas-closure",
+          "href_en": "../en/ch39-s38-omega-math-recompilation-and-self-referential-atlas-closure.html#sec-ch39-omega-math-recompilation-and-self-referential-atlas-closure"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        },
+        {
+          "gid": "D5/S3/FiniteGroups/GroupAlgebra/UnitaryCharacterKernel.posSemidef_sum_character_kernel_iff"
+        },
+        {
+          "gid": "D5/S3/FiniteGroups/GroupAlgebra/CharacterKernelRank.finrank_span_sum_character_kernel"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound"
+        },
+        {
+          "gid": "D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize"
+        },
+        {
+          "gid": "D5/S3/Factorization/PositiveRationalGroup.signed_prime_ledger_equiv_positive_rationals"
+        },
+        {
+          "gid": "D5/S0/Computability/CodeFixedPoint.code_fixed_point"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor"
+        },
+        {
+          "gid": "D5/S3/Analytic/CompletedZetaMellinReconstruction.completed_zeta_mellin_reconstruction"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "static-canvas-legless-sphere-sandbox",
+      "code": "OMEGA//CANVAS",
+      "title": "静止画布与无腿三元球观察者",
+      "title_en": "The Static Canvas and the Legless Ternion Sphere Observer",
+      "summary": "在静止画布上，把同一梯度分成记忆窗内外的两个正交分量。比较无腿三元球沿堆测地线的滚动与有腿行者的外推，观察古尔斯特兰德—潘勒韦光锥越过视界后的倾斜，并转动方向查看横向偏航分支。最后切换到球心透镜，比较同一组静态记忆读数在两个参考系下的呈现。",
+      "summary_en": "Split a single gradient into orthogonal components inside and outside a memory window. Compare a ternion sphere rolling along a heap geodesic with a walker that pushes against the ground. Follow the Gullstrand–Painlevé cone across the horizon and explore the branches created by transverse yaw. Then switch to the sphere-centered lens and compare the same static memory readings in both frames.",
+      "path": "static-canvas-legless-sphere-sandbox/",
+      "thumbnail": "static-canvas-legless-sphere-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-24",
+      "chapter": 38,
+      "section": "38.15",
+      "presets": [
+        "single-gradient-memory-spacetime-projection",
+        "portfree-legless-sphere-heap-geodesic",
+        "gullstrand-painleve-tilted-cone-supercritical",
+        "transverse-yaw-scenery-atlas-branching",
+        "wheeler-dewitt-static-canvas-frame-reversal"
+      ],
+      "preset_titles": {
+        "single-gradient-memory-spacetime-projection": {
+          "zh": "同一梯度的记忆窗正交投影",
+          "en": "One gradient split by a memory window"
+        },
+        "portfree-legless-sphere-heap-geodesic": {
+          "zh": "无端口无腿球沿堆测地滚落",
+          "en": "Port-free sphere on the heap geodesic"
+        },
+        "gullstrand-painleve-tilted-cone-supercritical": {
+          "zh": "古尔斯特兰德—潘勒韦斜光锥越过临界",
+          "en": "Gullstrand–Painlevé cone tips past 1"
+        },
+        "transverse-yaw-scenery-atlas-branching": {
+          "zh": "横向偏航与图册 DAG 分支",
+          "en": "Transverse yaw & Atlas DAG branches"
+        },
+        "wheeler-dewitt-static-canvas-frame-reversal": {
+          "zh": "惠勒—德威特静止画布与参考系翻转",
+          "en": "Wheeler–DeWitt canvas & frame reversal"
+        }
+      },
+      "tags": [
+        "静止画布",
+        "三元比较",
+        "记忆投影",
+        "光锥",
+        "参考系"
+      ],
+      "tags_en": [
+        "Static canvas",
+        "Ternary comparison",
+        "Memory projection",
+        "Light cones",
+        "Reference frames"
+      ],
+      "theory": [
+        {
+          "label": "§38.15 · 静止画布与无腿球观察者",
+          "label_en": "§38.15 · Static Canvas and the Legless Sphere Observer",
+          "href": "../zh/ch38-s15-static-canvas-and-legless-sphere-observer.html#sec-ch38-static-canvas-and-legless-sphere-observer",
+          "href_en": "../en/ch38-s15-static-canvas-and-legless-sphere-observer.html#sec-ch38-static-canvas-and-legless-sphere-observer"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.reflectionSeq_eq_pow"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.kappa_reflectionSeq_add"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound"
+        },
+        {
+          "gid": "D5/S3/Quantum/Routing/ReversibleQram.correctness"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }

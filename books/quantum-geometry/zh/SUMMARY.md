@@ -233,6 +233,7 @@
   - [38.12 时空运动的本体等效与观察者记忆舒尔补强行分类：无标签三元圆弧、勾股移项生闵氏减号与记忆容量三态相变](ch38-s12-spacetime-motion-equivalence-and-memory-schur-split.md)
   - [38.13 观察者的完整自包含公理化定义、结构信息时间与观察者即宇宙：无外部端口五元组、有理舒尔—贝蒂生长律、单子共振范畴与零公理 ObserverUniverse 内核](ch38-s13-self-contained-observer-definition-and-observer-is-universe.md)
   - [38.14 康威 FRACTRAN 与三维非阿贝尔 Ω-FRACTRAN 观察者原生语言：算术基本定理正交素数寄存器、0·1/2·1 分数因果门、p = 5 拉马努金素旋子非对易栈与零裂口防幻觉自动机](ch38-s14-omega-fractran-observer-rational-isa.md)
+  - [38.15 静止画布与无腿球观察者：时空同一梯度、倾倒视界锥与破除时间流逝错觉](ch38-s15-static-canvas-and-legless-sphere-observer.md)
 - [第三十九章 大一统母公理（AXIOM-Ω）：无源保正三元比较闭合、五阶万法演绎级联与量子五大公设归元](ch39-axiom-omega-grand-unification.md)
   - [39.1 大一统母公理（AXIOM-Ω）：无源保正三元比较闭合公理如何一举熔合比较公理、极小圆弧、三元数与连续场](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)
   - [39.2 AXIOM-Ω 五阶大一统演绎级联与公理遮诠闭环：从无源三元母公理严格贯通万数微积分、双相对论时空、四大力大统一、算术临界谱与测地智能](ch39-s25-axiom-omega-five-tier-deduction-cascade.md)
@@ -241,6 +242,7 @@
   - [39.5 二元配关系成三元场与两阶关系推未来：从 2+1=3 换位正交闭环、规范联络与李三元曲率到比安基—奥斯特罗格拉茨基二阶封顶](ch39-s28-dyad-relation-future-and-second-order-field.md)
   - [39.6 过去·现在·未来与 0 · 1/2 · 1 纯有理因果射流母矩阵：三元数球面射流阶梯、中点自对偶律与 1 ↦ 0 宇宙心跳](ch39-s30-past-present-future-rational-jet-triad.md)
   - [39.7 大一统母公理的谱真身——三元球面有理傅里叶变换（ℱ_Ω）：彼得—魏尔半整数自旋壳层、整系数切比雪夫—维格纳多项式核、0·1/2·1 谐波底座与流群卷积对角化](ch39-s37-spherical-fourier-transform-peter-weyl-synthesis.md)
+  - [39.8 OmegaMath 零公理去近似重编译与全书自指结晶图谱收束：六大支柱纯有理还原、d⁸ 四极切片、赫克—拉马努金正定界与十二晶核不动点闭环](ch39-s38-omega-math-recompilation-and-self-referential-atlas-closure.md)
 
 # 终章与附录
 
