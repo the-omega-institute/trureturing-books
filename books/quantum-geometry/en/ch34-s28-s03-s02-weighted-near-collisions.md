@@ -578,6 +578,19 @@ qM_{h,R}=(p!)^2\sum_{k\bmod q}
 $$
 At $h=0$ this gives the disjoint formula. At $h=p$, equality of the two total counts forces $m=n$, giving the occupation diagonal if $0\in R$ and zero otherwise. For an intermediate example, with unit weights at residues $0,1$ modulo $11$, degree $p=2$ and $h=1$, the mass at residue $1$ is $4$. The two left and right count-vector pairs are $((1,1),(2,0))$ and $((0,2),(1,1))$, each of weight $2$. Keeping $h$ and the gap in one product permits estimates on their joint distribution. A bound at the target ζ resolution remains open. [Lean proof of the common-degree formula](lean:D5/S3/Fourier/Concentration/CommonResidualOccupationCoefficient.common_residual_band)
 
+## Failure of a shared cutoff for two modes
+
+Let $q\ge7$ and write $c_k=\cos(2\pi k/q)$, $d_k=\cos(4\pi k/q)$, $s_k=c_k+d_k$, and $x_+=\max(0,x)$. The squared readout and the zero cutoff give two signed sums:
+
+$$
+\sum_{k\bmod q}(c_k-d_k)s_k^2=\frac q4,\qquad
+\sum_{k\bmod q}(c_k-d_k)(s_k)_+>0.
+$$
+
+The double-angle identity gives $s_k=(2c_k-1)(c_k+1)$ and $c_k-d_k=(1-c_k)(2c_k+1)$. Where $s_k>0$, we have $c_k>1/2$, so every clipped term is nonnegative. At $k=1$, the angle lies in $(0,\pi/3)$, giving $1/2<c_1<1$ and a strictly positive term. Since $s_0=2$, the normalized weights $v_k=(s_k)_+/\sum_i(s_i)_+$ have a positive denominator. At a threshold equal to the average of their moments, the combined readout attains the required sum and the second mode falls below the threshold.
+
+Set $z_k=e^{2\pi i k/q}$ and expand $(c_k-d_k)s_k^2$ in powers of $z_k$, grouping terms by exponent. Both constant terms come from $c_k^2d_k$ and each has coefficient $1/8$. The other exponents have absolute value from $1$ to $6$, so character orthogonality cancels them when summing modulo $q\ge7$. If $c_k-d_k$ summed to zero on every level set of $s_k$, the weighted sum with $s_k^2$ would also vanish. Grouping by exponent and retaining the coefficients follows the step in Alpöge's exponential Dirichlet-series argument that organizes product terms by their summed exponent. The exact minimum for two separate constraints at general moduli and the exceptional-frequency estimate for actual high-order ζ-zero harmonics remain open. [Alpöge's exponential Dirichlet-series proof](https://github.com/the-omega-institute/riemann-hypothesis/blob/c7d25b3bfd7906388bb8eb0774e027a2b756a7b6/src/Development/AbelianVarietyTheory/Proofs/AdelicLatticeProofs/LandauSummableOfExpDirichletSeriesEntire.lean#L84)
+
 ## A finite frequency band forces close sums
 
 Let $J$ have $N$ elements, with all $g_j\in[a,b]$. Write $F(m)=\sum_jm_jg_j$. There are $M=\binom{N+p-1}{p}$ count vectors of degree $p$.

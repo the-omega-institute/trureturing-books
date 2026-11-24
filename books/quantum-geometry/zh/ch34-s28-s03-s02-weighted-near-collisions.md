@@ -578,6 +578,19 @@ qM_{h,R}=(p!)^2\sum_{k\bmod q}
 $$
 当 $h=0$ 时得到支撑互斥的公式。当 $h=p$ 时，两侧次数之和相等，且公共部分达到全部次数，故 $m=n$。若 $0\in R$，质量恰为对角质量，否则为零。例如，两个权重为一的指标的剩余类分别为模 $11$ 的 $0,1$。若 $p=2$、$h=1$，剩余类 $1$ 上的质量为 $4$，来自 $((1,1),(2,0))$ 和 $((0,2),(1,1))$ 两对，每对权重为 $2$。同一乘积同时记录公共次数和频率差，因而可以研究二者的联合分布。在 ζ 的目标分辨率下仍需建立相应的界。 [公共占用次数公式的 Lean 证明](lean:D5/S3/Fourier/Concentration/CommonResidualOccupationCoefficient.common_residual_band)
 
+## 合并两个模态的截断何时失效
+
+令 $q\ge7$，记 $c_k=\cos(2\pi k/q)$、$d_k=\cos(4\pi k/q)$、$s_k=c_k+d_k$，以及 $x_+=\max(0,x)$。这两个带符号的和分别检测平方读数和零截断的差异：
+
+$$
+\sum_{k\bmod q}(c_k-d_k)s_k^2=\frac q4,\qquad
+\sum_{k\bmod q}(c_k-d_k)(s_k)_+>0.
+$$
+
+倍角公式给出 $s_k=(2c_k-1)(c_k+1)$ 和 $c_k-d_k=(1-c_k)(2c_k+1)$。若 $s_k>0$，则 $c_k>1/2$，故截断后的每项非负。$k=1$ 的角度在 $(0,\pi/3)$ 内，故 $1/2<c_1<1$，其项严格为正。由于 $s_0=2$，归一化权重 $v_k=(s_k)_+/\sum_i(s_i)_+$ 的分母为正。取阈值为 $v$ 的两个矩的平均，合并读数达到所需总量，第二模态却低于该阈值。
+
+令 $z_k=e^{2\pi i k/q}$，把 $(c_k-d_k)s_k^2$ 展开成 $z_k$ 的幂并按指数分组。常数项的两项均来自 $c_k^2d_k$，各为 $1/8$。其余指数的绝对值介于 $1$ 与 $6$，在模 $q\ge7$ 求和时由特征标正交性消去。若每个 $s_k$ 等值集合上 $c_k-d_k$ 的和都为零，平方读数的加权和也会为零。按指数分组保留系数的做法对应 Alpöge 的指数狄利克雷级数证明中按指数和组织乘积项的步骤。一般模数下两个独立约束的精确最小平方和，以及实际 ζ 零点的高阶异常频率估计，仍待求解。 [Alpöge 的指数狄利克雷级数证明](https://github.com/the-omega-institute/riemann-hypothesis/blob/c7d25b3bfd7906388bb8eb0774e027a2b756a7b6/src/Development/AbelianVarietyTheory/Proofs/AdelicLatticeProofs/LandauSummableOfExpDirichletSeriesEntire.lean#L84)
+
 ## 有限频带中的和必须接近
 
 设有限指标集 $J$ 有 $N$ 个元素，各频率 $g_j$ 落在 $[a,b]$。记 $F(m)=\sum_jm_jg_j$，次数为 $p$ 的向量共有 $M=\binom{N+p-1}{p}$ 个。
