@@ -228,7 +228,24 @@ $$
 |\theta|\,|J_\theta(X,T)|\le 2w(X).
 $$
 
-The unit modulus of the phase gives the first bound, with equality at $\theta=0$. Integration by parts gives the second. The weight decreases on the interval, so the derivative term has modulus at most $w(X)-w(T)$, cancelling the $w(T)$ from the boundary term. Applying these bounds to the weighted zero sum also requires transferring the cumulative explicit-formula error by partial summation. The stated bound on that error grows with $x=e^{s/r}$ for large $x$, and the aggregate contribution of exceptional frequencies on the required long time scale remains open.
+The unit modulus of the phase gives the first bound, with equality at $\theta=0$. Integration by parts gives the second. The weight decreases on the interval, so the derivative term has modulus at most $w(X)-w(T)$, cancelling the $w(T)$ from the boundary term.
+
+The first bound also follows from Mathlib's rational-weight integral. For the second, the vector-valued second mean value theorem bounds $|J_\theta|$ by $w(X)$ times the modulus of an unweighted oscillatory integral over a prefix. When $\theta\ne0$, both exponential endpoints have unit modulus, giving $2w(X)/|\theta|$. [Rational-weight and complex exponential integrals](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/SpecialFunctions/Integrals/Basic.lean) · [Vector-valued second mean value theorem](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/MeasureTheory/Integral/IntervalIntegral/MeanValue.lean#L203)
+
+Partial summation can retain the variation of the cumulative error envelope with height. Write $R(t)$ for the normalized cumulative sum minus the normalized main term, and suppose $|R(t)|\le E(t)$. Use the tail $(X,T]$. The weighted error becomes
+$$
+w(T)R(T)-w(X)R(X)-\int_X^T w'(u)R(u)\,du.
+$$
+For a nonnegative decreasing weight, the triangle inequality and integration by parts for $wE$ give the bound $2w(X)E(X)+\int_X^T w(u)E'(u)\,du$. The term $w(T)E(T)$ cancels.
+
+For $T\ge X>1$ and $x>1$, under the Riemann hypothesis, Lemma 1 allows $E(u)=A\log^2(2xu)+B\log(2u)$, where $A=K\sqrt{x}$, $B=K/(\sqrt{x}\log x)$, and $K$ is the uniform explicit-formula error constant. Integrating the derivative of the envelope using $w(u)\le1/u$ gives
+$$
+\left|\sum_{X<\gamma\le T} w(\gamma)e^{i\gamma\log x}
+      +\frac{\Lambda(n_x)}{2\pi\sqrt{x}}J_\theta(X,T)\right|
+\le
+\frac{2A\bigl(\log^2(2xX)+\log(2xX)+1\bigr)+B\bigl(2\log(2X)+1\bigr)}{X}.
+$$
+The sum counts multiplicities. The bound is uniform in $T$ and retains factors depending on $x$. At the required time scale $x=e^{s/r}$, the aggregate contribution of exceptional frequencies to the growing-order moment remains open.
 
 The second and fourth harmonics give a sharp bound even when the phases range over the whole circle. Write $m_h=\sum_jw_jz_j^h$ for the moments of one probability weight on unit phases. Given caps $0\le e,k\le1$ on $|m_2|,|m_4|$, put $b=\min(e,\sqrt{(1+k)/2})$ and $r=(1+b)/2$. If $b=1$, the largest $|m_1|$ is $1$. If $b<1$, put
 

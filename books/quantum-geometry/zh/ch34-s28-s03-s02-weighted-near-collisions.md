@@ -228,7 +228,24 @@ $$
 |\theta|\,|J_\theta(X,T)|\le 2w(X).
 $$
 
-第一个界来自相位的单位模，且在 $\theta=0$ 时取等号。第二个界来自分部积分。$w$ 在该区间递减，因而导数项的模至多是 $w(X)-w(T)$，与边界项中的 $w(T)$ 相消。对实际零点加权和使用这两个界，还要通过分部求和传递显式公式中的累积误差。该误差的已知上界在 $x=e^{s/r}$ 很大时随 $x$ 增长，在所需的长时间尺度上仍缺少对异常频率总贡献的估计。
+第一个界来自相位的单位模，且在 $\theta=0$ 时取等号。第二个界来自分部积分。$w$ 在该区间递减，因而导数项的模至多是 $w(X)-w(T)$，与边界项中的 $w(T)$ 相消。
+
+第一个界也可直接由 Mathlib 的有理权重积分公式得到。对第二个界，向量值第二积分中值定理用左端权重乘以某个前缀上的无权振荡积分来控制 $|J_\theta|$。当 $\theta\ne0$ 时，前缀积分的两个指数端点各有单位模，因此得到 $2w(X)/|\theta|$。 [有理权重积分与复指数积分](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/SpecialFunctions/Integrals/Basic.lean) · [向量值第二积分中值定理](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/MeasureTheory/Integral/IntervalIntegral/MeanValue.lean#L203)
+
+累积误差通过分部求和传入尾段时，可以保留误差包络随高度的变化。设 $R(t)$ 是归一化累积和减去归一化主项，且 $|R(t)|\le E(t)$。零点尾段取 $(X,T]$。加权误差写成
+$$
+w(T)R(T)-w(X)R(X)-\int_X^T w'(u)R(u)\,du.
+$$
+若 $w\ge0$ 且递减，三角不等式与对 $wE$ 的分部积分把误差控制在 $2w(X)E(X)+\int_X^T w(u)E'(u)\,du$ 以内。右端的 $w(T)E(T)$ 正好相消。
+
+当 $T\ge X>1$、$x>1$ 且黎曼猜想成立时，引理 1 允许取 $E(u)=A\log^2(2xu)+B\log(2u)$，其中 $A=K\sqrt{x}$、$B=K/(\sqrt{x}\log x)$，$K$ 是原显式公式的统一误差常数。用 $w(u)\le1/u$ 积掉包络的导数，得到
+$$
+\left|\sum_{X<\gamma\le T} w(\gamma)e^{i\gamma\log x}
+      +\frac{\Lambda(n_x)}{2\pi\sqrt{x}}J_\theta(X,T)\right|
+\le
+\frac{2A\bigl(\log^2(2xX)+\log(2xX)+1\bigr)+B\bigl(2\log(2X)+1\bigr)}{X}.
+$$
+求和按重数计入。该界对 $T$ 一致，仍含依赖 $x$ 的因子。所需时间尺度上 $x=e^{s/r}$，仍须控制异常频率对增长阶数矩的总贡献。
 
 即使相位可在整个圆周上取值，第二和第四谐波也能给出尖锐的界。对单位相位的一组概率权重，记 $m_h=\sum_j w_j z_j^h$。令 $0\le e,k\le1$ 分别为 $|m_2|,|m_4|$ 的上限，记 $b=\min(e,\sqrt{(1+k)/2})$、$r=(1+b)/2$。若 $b=1$，则 $|m_1|$ 的最大值为 $1$。若 $b<1$，令
 
