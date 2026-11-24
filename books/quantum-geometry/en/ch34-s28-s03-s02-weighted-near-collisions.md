@@ -527,6 +527,19 @@ For each representative $h$ in the band, start with the pairs $(j,j)$ for $0\le 
 
 When $N\le q$, the first $N$ natural numbers have distinct residues. Orthogonality then gives $\sum_k|B_N(k)|^2=qN$. If only magnitudes are available, drop $HM(0)$ and replace the real part with $|\widehat M(k)|$. The band mass is then bounded by a probability-weighted magnitude average times $N/(N-H)$. For $N=2H+1\le q$ the factor is below $2$. Inserting the disjoint coefficient estimate into that average leaves the weighted contribution of frequencies where the actual ζ-zero character sums are large. [Fejér kernel](https://dlmf.nist.gov/1.15#E15)
 
+### Minimum squared mass for one spatial mode
+
+Take $q>1$ and $c_k=\cos(2\pi k/q)$. Character orthogonality gives these values mean zero, and their maximum is one. Among nonnegative probability weights $w(k)$ with $\sum_k w(k)c_k\ge a$ for $0\le a\le1$, the minimum squared mass is attained by weights of the form
+
+$$
+u_t(k)=\max\{0,1-t(1-c_k)\},\qquad
+v_t(k)=\frac{u_t(k)}{\sum_j u_t(j)},\qquad t\ge0.
+$$
+
+At $t=0$ the weights are uniform and the moment is zero. For sufficiently large $t$, all entries with $c_k<1$ are clipped to zero and the moment is one. The denominator is always at least one, so continuity yields a finite parameter attaining exactly $a$. For any feasible $w$, the raw affine weights have nonnegative inner product with $w-v_t$ by equal mass and the moment ordering. Clipping can only increase that inner product. Expanding the squares gives $\sum_k w(k)^2-\sum_k v_t(k)^2\ge\sum_k(w(k)-v_t(k))^2$, which proves uniqueness. [Thresholding on the simplex, Wang and Carreira-Perpiñán, §3](https://arxiv.org/html/1309.1541#S3)
+
+Modulo four, $c=(1,0,-1,0)$. For $0\le a\le1/2$, the optimizer is $(1+2a,1,1-2a,1)/4$ and the minimum squared mass is $(1+2a^2)/4$. For $1/2\le a\le1$, the optimizer is $(a,(1-a)/2,0,(1-a)/2)$ and the minimum is $a^2+(1-a)^2/2$. The formulas agree at $a=1/2$. This minimum gives a benchmark for the squared-mass coefficient in the exceptional-set bound under one spatial-mode constraint. A full spatial band imposes joint constraints, and the cardinality of the actual ζ-zero exceptional set needs an arithmetic estimate.
+
 ### Fourier weight in a short time range
 
 Let $F$ be a nonnegative real function modulo $q$ whose Fourier coefficients are nonnegative real, with $F(0)>0$. By inversion, $\nu(k)=\widehat F(k)/(qF(0))$ is a probability weight. Suppose $F(r\bmod q)\ge a\ge0$ for $|r|\le H$. For $2H<q$, $2K<q$, and $2HK\le q$,
