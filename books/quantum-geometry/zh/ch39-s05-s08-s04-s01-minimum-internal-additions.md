@@ -224,7 +224,7 @@ $$
 
 三元有限域上的仿射空间给出一族计数与三元组标签无关的例子。向 $\mathbb F_3^n$ 添加一个新的单位元 $e$。两个不同的仿射点相乘，得到它们所在直线上的第三点 $-x-y$，相同的点相乘则得到 $e$。对不同的仿射枢轴 $p,q$，映射 $x\mapsto p(qx)$ 在直线外是阶为三的平移 $q-p$。在该直线和 $e$ 上，它交换 $p$ 与 $q$，也交换 $e$ 与 $-p-q$。沿这两种两轮返回，略去涉及单位元或相同点的步骤后，同一个三元组各出现两次，所以二元返回行都为零。
 
-当 $n\ge2$，对任一仿射点 $p$，都可选另一枢轴 $q$ 以及两点连线外的一点 $x$。此时 $p(xq)=x+q-p$ 与 $(px)q=x+p-q$ 不同。因此中心只有 $e$。对有限二元向量空间 $A$ 的任意正规化扩张，恰有直线外 $3^n-3$ 个点上方的整个纤维提供成功起点。在对应的带标号三元系中，对任意有序的不同仿射枢轴对，删去提升 $(p,0)$ 并保留 $(q,0)$ 为枢轴，成功起点数都是 $(3^n-3)|A|$。仿射平面配平凡纤维时，恰有六个成功起点。 [仿射计数的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/babf3873de293980fd790d29d42be4b90ca0b1f6/D5/S3/Combinatorics/Matroids/SteinerAffineSwitchCount.lean#L421)
+当 $n\ge2$，对任一仿射点 $p$，都可选另一枢轴 $q$ 以及两点连线外的一点 $x$。此时 $p(xq)=x+q-p$ 与 $(px)q=x+p-q$ 不同。因此中心只有 $e$。对有限二元向量空间 $A$ 的任意正规化扩张，恰有直线外 $3^n-3$ 个点上方的整个纤维提供成功起点。在对应的带标号三元系中，对任意有序的不同仿射枢轴对，删去提升 $(p,0)$ 并保留 $(q,0)$ 为枢轴，成功起点数都是 $(3^n-3)|A|$。仿射平面配平凡纤维时，恰有六个成功起点。 [仿射计数的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/babf3873de293980fd790d29d42be4b90ca0b1f6/D5/S3/Combinatorics/Matroids/SteinerAffineSwitchCount.lean#L418)
 
 若 $4\mid r$，且存在一个 $r+1$ 点的完备斯坦纳三元系，就能在一个余数类中成功换块。对满足这两个条件的正整数 $r$，取正整数 $d$ 并沿用本节的跨行条件，则饱和扩充的两个最大大小为 [@thm-joint-circuit-steiner-matching-first-deficit] 中的 $N_{\max}$ 和 $N_{\max}-1$。[删点情形的 Lean 证明](lean:D5/S3/Combinatorics/Matroids/SteinerAlternatingSwitches.point_deleted_first_deficit_of_four_dvd)
 
