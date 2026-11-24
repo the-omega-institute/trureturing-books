@@ -323,6 +323,27 @@ $$
 
 Thus there are constants $0<c_1\le c_2$ with $e^{-c_2p}\le D_p/(p!V^p)\le e^{-c_1p}$ for all sufficiently large $T$. With tail weight $W\asymp(\log T)^2$, this gives $\log(D_p/W^{2p})=-2p\log\log T+O(p)$. The ζ asymptotics use the cited analytic inputs. The weight of near-collisions between two distinct count vectors still requires an arithmetic estimate. [Multiplicity input, Theorem 1 and §7](https://arxiv.org/abs/2306.04799)
 
+## Mass at a fixed count difference
+
+For degree-$p$ count vectors $m,n$, put $\ell_j=\min(m_j,n_j)$, $a=m-\ell$ and $b=n-\ell$. The residual vectors have disjoint supports and common degree $d=p-|\ell|$. For fixed $a,b$, every pair with $m-n=a-b$ is of the form $(\ell+a,\ell+b)$ with $|\ell|=p-d$. The frequency gap $\sum_j(a_j-b_j)g_j$ is independent of $\ell$.
+
+Use the preceding coefficient $c_p(m)=p!\prod_j(w_j^{m_j}/m_j!)$. The total weight $M_p(a-b)$ at this difference is
+
+$$
+M_p(a-b)=
+(p!)^2\left(\prod_j w_j^{a_j+b_j}\right)
+\sum_{|\ell|=p-d}\prod_j
+\frac{(w_j^2)^{\ell_j}}{\ell_j!\,(\ell_j+a_j+b_j)!}.
+$$
+
+The identity allows real weights. At each coordinate at most one residual count is positive, so the two factorials are $\ell_j!$ and $(\ell_j+a_j+b_j)!$. For nonnegative weights, $(\ell_j+a_j)!\ge \ell_j!a_j!$ gives $c_p(\ell+a)\le\binom pd\,c_{p-d}(\ell)c_d(a)$. Applying the same bound to $\ell+b$ and summing over $\ell$ gives
+
+$$
+M_p(a-b)\le \binom pd^{\!2}D_{p-d}\,c_d(a)c_d(b).
+$$
+
+Write $R_d(\eta)$ for the sum of $c_d(a)c_d(b)$ over ordered degree-$d$ pairs with disjoint supports and $|\sum_j(a_j-b_j)g_j|\le\eta$. Summing the last bound over these pairs bounds the full mass at residual degree $d$ by $\binom pd^2 D_{p-d}R_d(\eta)$. At $d=0$ this recovers the diagonal. At $d=1$ the required input counts only pairs of distinct ordinates with weights. For the actual ζ tail, $d$ can grow with $p$, and the required bound for $R_d(\eta)$ in that regime remains open. [Shifted factorials in the Bessel series, DLMF 10.25.2](https://dlmf.nist.gov/10.25.E2)
+
 ## A finite frequency band forces close sums
 
 Let $J$ have $N$ elements, with all $g_j\in[a,b]$. Write $F(m)=\sum_jm_jg_j$. There are $M=\binom{N+p-1}{p}$ count vectors of degree $p$.

@@ -323,6 +323,27 @@ $$
 
 因此存在常数 $0<c_1\le c_2$，使得充分大 $T$ 时 $e^{-c_2p}\le D_p/(p!V^p)\le e^{-c_1p}$。用尾段总权重 $W\asymp(\log T)^2$ 归一化，可得 $\log(D_p/W^{2p})=-2p\log\log T+O(p)$。这里的 ζ 渐近估计使用上述文献输入。两个不同向量产生近频率和的总权重仍需单独的算术估计。 [重数平方和的文献输入，定理 1 与 §7](https://arxiv.org/abs/2306.04799)
 
+## 固定计数差的权重
+
+给定总次数均为 $p$ 的计数向量 $m,n$，记 $\ell_j=\min(m_j,n_j)$、$a=m-\ell$、$b=n-\ell$。两个剩余向量的支撑互不相交，总次数同为 $d=p-|\ell|$。对给定的 $a,b$，满足 $m-n=a-b$ 的全部配对恰为 $(\ell+a,\ell+b)$，其中 $|\ell|=p-d$。频率和之差为 $\sum_j(a_j-b_j)g_j$，与 $\ell$ 无关。
+
+用上节的 $c_p(m)=p!\prod_j(w_j^{m_j}/m_j!)$。固定差的总权重 $M_p(a-b)$ 为
+
+$$
+M_p(a-b)=
+(p!)^2\left(\prod_j w_j^{a_j+b_j}\right)
+\sum_{|\ell|=p-d}\prod_j
+\frac{(w_j^2)^{\ell_j}}{\ell_j!\,(\ell_j+a_j+b_j)!}.
+$$
+
+这个等式允许实权重。因为每个坐标至多有一边的剩余计数为正，原来的两个阶乘恰为 $\ell_j!$ 与 $(\ell_j+a_j+b_j)!$。在非负权重下，$(\ell_j+a_j)!\ge \ell_j!a_j!$ 给出 $c_p(\ell+a)\le\binom pd\,c_{p-d}(\ell)c_d(a)$。同样估计 $\ell+b$ 并对 $\ell$ 求和，得到
+
+$$
+M_p(a-b)\le \binom pd^{\!2} D_{p-d}\,c_d(a)c_d(b).
+$$
+
+记 $R_d(\eta)$ 为支撑互不相交、总次数均为 $d$ 且 $|\sum_j(a_j-b_j)g_j|\le\eta$ 的有序对权重 $c_d(a)c_d(b)$ 之和。把上式在这样的 $a,b$ 上求和，便得到剩余次数为 $d$ 的配对总权重上界 $\binom pd^2 D_{p-d}R_d(\eta)$。$d=0$ 给出原对角项。$d=1$ 只需要带权的不同纵坐标对。对实际 ζ 尾段，$d$ 可随 $p$ 增长，这时 $R_d(\eta)$ 的所需上界仍是开放问题。 [贝塞尔级数中的移位阶乘，DLMF 10.25.2](https://dlmf.nist.gov/10.25.E2)
+
 ## 有限频带中的和必须接近
 
 设有限指标集 $J$ 有 $N$ 个元素，各频率 $g_j$ 落在 $[a,b]$。记 $F(m)=\sum_jm_jg_j$，次数为 $p$ 的向量共有 $M=\binom{N+p-1}{p}$ 个。
