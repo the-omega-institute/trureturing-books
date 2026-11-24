@@ -572,7 +572,7 @@ Take $q\ge5$ and write $c_k=\cos(2\pi k/q)$, $d_k=\cos(4\pi k/q)$, and $s_k=c_k+
 $$
 a_q=-\frac{1}{2m_q},\qquad v_k=\frac{1+2as_k}{q},\qquad L=\frac{1+4a^2}{q}.
 $$
-For every real $a$, the vector $v$ has mass one and both real moments equal $a$. For $a\ge0$, its entries are all nonnegative exactly when $a\le a_q$. Among nonnegative probability weights with both moments at least $a$, the squared mass equals $L$ exactly when the weight is $v$. Equality is attainable exactly for $a\le a_q$. For any real mass-one vector $w$, write $M_j(w)$ for its $j$th real moment. The exact remainder holds for every real $a$
+For every real $a$, the vector $v$ has mass one and both real moments equal $a$. For $a\ge0$, its entries are all nonnegative exactly when $a\le a_q$. For $a\ge0$, a nonnegative probability weight with both moments at least $a$ has squared mass $L$ exactly when it equals $v$. For these nonnegative thresholds, equality is attainable exactly for $a\le a_q$. For any real mass-one vector $w$, write $M_j(w)$ for its $j$th real moment. The exact remainder holds for every real $a$
 $$
 \sum_k w_k^2-L
 =\sum_k(w_k-v_k)^2+\frac{4a}{q}\bigl(M_1(w)+M_2(w)-2a\bigr).
