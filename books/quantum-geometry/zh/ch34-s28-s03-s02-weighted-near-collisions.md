@@ -566,6 +566,73 @@ $$
 
 模四时 $c=(1,0,-1,0)$。若 $0\le a\le 1/2$，最优权重为 $(1+2a,1,1-2a,1)/4$，平方和为 $(1+2a^2)/4$。当 $1/2\le a\le1$ 时，最优权重为 $(a,(1-a)/2,0,(1-a)/2)$，平方和为 $a^2+(1-a)^2/2$。两式在 $a=1/2$ 处相接。这个最小值给出了单个空间模式约束下，异常集合基数界中平方和系数的优化基准。整个频带的联合约束，以及实际 ζ 零点异常频率的基数，仍需要额外的估计。
 
+### 两个空间模态的首次截断阈值
+
+取 $q\ge5$，记 $c_k=\cos(2\pi k/q)$、$d_k=\cos(4\pi k/q)$、$s_k=c_k+d_k$。令 $m_q=\min_k s_k$，并设
+$$
+a_q=-\frac{1}{2m_q},\qquad v_k=\frac{1+2as_k}{q},\qquad L=\frac{1+4a^2}{q}.
+$$
+对任意实数 $a$，向量 $v$ 的总质量为一，两个实矩都等于 $a$。当 $a\ge0$ 时，所有仿射权重非负当且仅当 $a\le a_q$。当 $a\ge0$ 时，若概率权重非负且两矩至少为 $a$，其平方和等于 $L$ 当且仅当该权重等于 $v$。在这一非负阈值范围内，等号可取当且仅当 $a\le a_q$。记 $M_j(w)$ 为 $w$ 的第 $j$ 个实矩。对任意实数 $a$ 和总质量为一的任意实向量 $w$，有
+$$
+\sum_k w_k^2-L
+=\sum_k(w_k-v_k)^2+\frac{4a}{q}\bigl(M_1(w)+M_2(w)-2a\bigr).
+$$
+这来自两个余弦的正交性和平方差展开。若 $a>a_q$，至少一个 $v_k<0$。如果 $w$ 是同时满足两个矩下界的非负概率权重，矩余量一项非负。负坐标上的平方距离给出 $\sum_k w_k^2\ge L+\sum_k\max(0,-v_k)^2>L$。一般模数下，截断后的精确最优值仍待求解。
+
+倍角公式给出 $s_k=2(c_k+1/4)^2-9/8$。角度是 $\pi$ 的有理倍数，Niven 定理因此排除了 $c_k=-1/4$。于是 $m_q>-9/8$。将余弦等于 $-1/4$ 的角四舍五入到最近的格点，误差至多为 $\pi/q$，故 $m_q+9/8\le 2(\pi/q)^2$。另外，$s_k$ 的均值为零，平方均值为一，对 $(2-s_k)(s_k-m_q)\ge0$ 取均值得到 $m_q\le-1/2$。整理两端得到
+$$
+0<a_q-\frac49\le\frac{16\pi^2}{9q^2}.
+$$
+因此 $4/9$ 是跨模数统一适用的阈值下界。这个结论控制有限权重的平方和，实际 ζ 零点的高阶异常频率仍需算术估计。 [首次截断阈值的 Lean 证明](lean:D5/S3/Fourier/Concentration/FirstCosineClipping.first_cosine_clipping)
+
+### 模六时两个空间模态的最小平方和
+
+在六个剩余类上，令 $M_j(w)=\sum_{k=0}^5w_k\cos(j\pi k/3)$，$E(w)=\sum_{k=0}^5w_k^2$。取 $0\le a\le1$。同时要求非负概率权重满足 $M_1(w)\ge a$ 和 $M_2(w)\ge a$ 时，唯一的最优权重 $v$ 及其平方和为
+
+$$
+\begin{aligned}
+v&=
+\begin{cases}
+(1+4a,1,1-2a,1,1-2a,1)/6,& a\le1/2,\\
+(a,(1-a)/3,0,(1-a)/3,0,(1-a)/3),& a>1/2,
+\end{cases}\\
+E(v)&=
+\begin{cases}
+(1+4a^2)/6,& a\le1/2,\\
+a^2+(1-a)^2/3,& a>1/2.
+\end{cases}
+\end{aligned}
+$$
+
+记 $c_k=\cos(\pi k/3)$、$d_k=\cos(2\pi k/3)$。在 $c_k+d_k$ 的每个等值集合内，$c_k-d_k$ 之和为零。因此对合并读数 $c_k+d_k$ 用阈值 $2a$ 求最优权重，就得到 $M_1(v)=M_2(v)=a$。当阈值越过 $1/2$，剩余类 $2,4$ 的仿射权重被截为零。两段公式在交界处一致。 [模六最优值与单模比较的 Lean 证明](lean:D5/S3/Fourier/Concentration/SixResidueMomentOptimum.six_two_mode_optimum)
+
+对任意实权重 $w$，只要求 $\sum_k w_k=1$。记 $m=M_1(w)+M_2(w)-2a$，则精确余量为
+
+$$
+E(w)-E(v)-E(w-v)=
+\begin{cases}
+(2a/3)m,& a\le1/2,\\
+((4a-1)/3)m+(2a-1)(w_2+w_4),& a>1/2.
+\end{cases}
+$$
+
+对非负概率权重 $w$，若 $M_1(w)+M_2(w)\ge2a$，则有 $E(w)-E(v)\ge\sum_k(w_k-v_k)^2$，所以任何达到最小值的权重都等于 $v$。对 $0<a<1$，只约束 $M_1$ 的最优权重 $p$ 满足 $M_1(p)=a$，却有 $M_2(p)<a$。这是同时约束两个模态时必须计入的差异。
+
+这组 $v$ 也是模六非负空间核的归一化傅里叶权重。它关于 $k\mapsto-k$ 对称，第三个实矩 $M_3(v)$ 在第一段为零，在第二段为 $2a-1$。反演得到 $F(0)=1$、$F(\pm1)=F(\pm2)=a$、$F(3)=M_3(v)\ge0$。这个最优值给出模六频带的平方和系数。推广到其他模数需要核对合并读数的等值集合，实际 ζ 零点的异常频率仍需要算术估计。
+
+### 合并两个模态的截断何时失效
+
+令 $q\ge7$，记 $c_k=\cos(2\pi k/q)$、$d_k=\cos(4\pi k/q)$、$s_k=c_k+d_k$，以及 $x_+=\max(0,x)$。这两个带符号的和分别检测平方读数和零截断的差异：
+
+$$
+\sum_{k\bmod q}(c_k-d_k)s_k^2=\frac q4,\qquad
+\sum_{k\bmod q}(c_k-d_k)(s_k)_+>0.
+$$
+
+倍角公式给出 $s_k=(2c_k-1)(c_k+1)$ 和 $c_k-d_k=(1-c_k)(2c_k+1)$。若 $s_k>0$，则 $c_k>1/2$，故截断后的每项非负。$k=1$ 的角度在 $(0,\pi/3)$ 内，故 $1/2<c_1<1$，其项严格为正。由于 $s_0=2$，归一化权重 $v_k=(s_k)_+/\sum_i(s_i)_+$ 的分母为正。取阈值为 $v$ 的两个矩的平均，合并读数达到所需总量，第二模态却低于该阈值。
+
+令 $z_k=e^{2\pi i k/q}$，把 $(c_k-d_k)s_k^2$ 展开成 $z_k$ 的幂并按指数分组。常数项的两项均来自 $c_k^2d_k$，各为 $1/8$。其余指数的绝对值介于 $1$ 与 $6$，在模 $q\ge7$ 求和时由特征标正交性消去。若每个 $s_k$ 等值集合上 $c_k-d_k$ 的和都为零，平方读数的加权和也会为零。按指数分组保留系数的做法对应 Alpöge 的指数狄利克雷级数证明中按指数和组织乘积项的步骤。[Alpöge 的指数狄利克雷级数证明](https://github.com/the-omega-institute/riemann-hypothesis/blob/c7d25b3bfd7906388bb8eb0774e027a2b756a7b6/src/Development/AbelianVarietyTheory/Proofs/AdelicLatticeProofs/LandauSummableOfExpDirichletSeriesEntire.lean#L84) [Lean 核验两条余弦不平衡公式](lean:D5/S3/Fourier/Concentration/AggregateCosineBalance.aggregate_cosine_imbalance)
+
 ### 短时间范围内的傅里叶权重
 
 设 $F$ 是模 $q$ 的非负实函数，$\widehat F$ 的各项是非负实数，且 $F(0)>0$。由反演，$\nu(k)=\widehat F(k)/(qF(0))$ 是概率权重。设 $F(r\bmod q)\ge a\ge0$ 对所有 $|r|\le H$ 成立。对 $2H<q$、$2K<q$ 且 $2HK\le q$，有
