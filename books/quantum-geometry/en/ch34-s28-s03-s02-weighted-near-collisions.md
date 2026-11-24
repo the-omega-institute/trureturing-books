@@ -537,7 +537,7 @@ $$
  \left(\sum_{r=-H}^{H}r^2\right)
  \left(\sum_{k=-K}^{K}k^2\right).
 $$
-The zero coefficient minus the real part of the $k$th coefficient sums $F(r)(1-\cos(2\pi rk/q))$ over all residues. Each term is nonnegative, so retain the terms with $|r|\le H$. In the principal interval $[-\pi,\pi]$, the cosine deficit satisfies $1-\cos u\ge2u^2/\pi^2$. Applying it on the full set of integer pairs separates the two sums of squares. Equality holds at $K=0$. The deduction is strictly positive when $a>0$ and $H,K>0$.
+The zero coefficient minus the real part of the $k$th coefficient sums $F(r)(1-\cos(2\pi rk/q))$ over all residues. Each term is nonnegative, so retain the terms with $|r|\le H$. In the principal interval $[-\pi,\pi]$, the cosine deficit satisfies $1-\cos u\ge2u^2/\pi^2$. Applying it on the full set of integer pairs separates the two sums of squares. Equality holds at $K=0$. The deduction is strictly positive when $a>0$ and $H,K>0$. [Lean proof of the short-time weight bound](lean:D5/S3/Fourier/Concentration/CyclicShortTimeWeight.low_fourier_weight_deficit)
 
 For the preceding prefix-pair kernel, $F(r)$ counts pairs having residue difference $r$, so take $a=N-H$. When $N\le q$, $F(0)=N$ and $\nu(0)=N/q$. On a frequency grid of step $d$, mode $k$ corresponds to time $2\pi k/(qd)$. The time range controlled by the explicit formula covers only its corresponding integer modes. The upper bound limits the weight those modes can carry, leaving the rest to the arithmetic estimate.
 
