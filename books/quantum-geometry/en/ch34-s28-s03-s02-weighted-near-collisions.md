@@ -385,7 +385,7 @@ $$
 
 Expand each degree-two count vector into its ordered words. The difference of the sums for $(i,k)$ and $(j,l)$ is the frequency difference of the edges $(i,j)$ and $(l,k)$. Edges already exclude $i=j$ and $l=k$. Disjoint support also excludes $i=l$ and $j=k$. For either shared endpoint, fixing that endpoint at index $i$ leaves a contribution $w_i^2 C_i(\eta)$. Both shared-endpoint conditions together make the edges equal, giving the final term. Repeated ordinates can belong to different indices, and the correction uses index equality.
 
-[Lean proof of the endpoint correction](https://github.com/the-omega-institute/trureturing/blob/7836eef6266bc4d994ccfd5486476651e60a3c9a/D5/S3/Fourier/Concentration/DegreeTwoResidualDifferenceEnergy.lean#L331-L343)
+[Lean proof of the endpoint correction](lean:D5/S3/Fourier/Concentration/DegreeTwoResidualDifferenceEnergy.degree_two_residual)
 
 For the actual ζ ordinates, the degree-one estimate controls the mass of gaps near zero. The quantity $A(\eta)$ also compares gaps far from zero that are close to each other. Bounding the contribution to $E_p(\eta)$ still requires control of that correlation after removing the shared endpoints.
 

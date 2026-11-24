@@ -385,7 +385,7 @@ $$
 
 把两个次数二向量各自展开为有序词。左词 $(i,k)$、右词 $(j,l)$ 的和之差等于边 $(i,j)$、$(l,k)$ 的频率差。边的定义已排除 $i=j$、$l=k$，还须排除 $i=l$、$j=k$ 才能使左右支撑互斥。固定任一种共享端点 $i$ 时，余下的近碰撞贡献为 $w_i^2 C_i(\eta)$。两种共享同时发生时，两条边相同，贡献恰为末项。因此可以直接从有向间距的相关和中扣除端点重叠。重复纵坐标可以属于不同指标，恒等式使用的是指标相等关系。
 
-[端点修正的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/7836eef6266bc4d994ccfd5486476651e60a3c9a/D5/S3/Fourier/Concentration/DegreeTwoResidualDifferenceEnergy.lean#L331-L343)
+[端点修正的 Lean 证明](lean:D5/S3/Fourier/Concentration/DegreeTwoResidualDifferenceEnergy.degree_two_residual)
 
 应用到实际 ζ 纵坐标时，次数一的估计只控制零附近的间距权重。这一恒等式中的 $A(\eta)$ 还比较远离零而彼此接近的间距。要约束这部分对 $E_p(\eta)$ 的贡献，仍需控制扣除共享端点后的相关和。
 
