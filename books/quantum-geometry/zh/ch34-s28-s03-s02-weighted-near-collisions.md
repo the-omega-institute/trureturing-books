@@ -128,15 +128,23 @@ $$
 mM-qK(0)=\sum_{k\in S}\sum_{x\in G}K(x)\bigl(1-\Re\chi_k(-x)\bigr).
 $$
 
-每一项均非负，故
+::: {.theorem #thm-ch31-sparse-majorant-gap title="稀疏傅里叶上包络的相位下界" lean="D5/S3/Fourier/Concentration/SparseCyclicMajorants.sparse_dft_majorant_gap"}
+沿用上述 $q,K,S,R,m,M$，有
 
 $$
 mM-qK(0)\ \ge\ \sum_{k\in S}\sum_{x\in R}\bigl(1-\Re\chi_k(-x)\bigr).
 $$
+:::
+
+每一项均非负，因而只保留 $R$ 中的项即可。
 
 按特征标展开的归一化，零频系数为 $M/q$。若 $0\in R$，该系数至少为 $1/m$。若 $1\in R$ 且 $S$ 含有非零频率，右边严格为正。
 
-在 $K(0)>0$ 时，$mM=qK(0)$ 当且仅当 $K$ 等于 $K(0)\mathbf 1_U$，其中 $U$ 是 $G$ 的一个加法子群，并且 $S$ 是 $U$ 的零化子。等号迫使所有选中的特征标在 $K>0$ 的地方取值 $1$。傅里叶反演使 $K$ 在这些特征标共同为 $1$ 的子群上恒等于 $K(0)$。该子群的零化子中每个频率的系数为 $M>0$，因此都必须属于 $S$。反过来，子群指示函数与其零化子使恒等式右端为零。有限群的傅里叶支集不确定性原理同样以子群指示函数给出取等构形。 [Tao，第 1 节](https://arxiv.org/pdf/math/0308286v6)
+::: {.theorem #thm-ch31-sparse-majorant-equality title="稀疏均值下界的等号条件" lean="D5/S3/Fourier/Concentration/SparseCyclicMajorants.sparse_dft_floor_eq_iff"}
+设 $K$ 处处非负，$S$ 包含其傅里叶变换的支集。在 $K(0)>0$ 时，$mM=qK(0)$ 当且仅当 $K$ 等于 $K(0)\mathbf 1_U$，其中 $U$ 是 $G$ 的一个加法子群，并且 $S$ 是 $U$ 的零化子。
+:::
+
+等号迫使所有选中的特征标在 $K>0$ 的地方取值 $1$。傅里叶反演使 $K$ 在这些特征标共同为 $1$ 的子群上恒等于 $K(0)$。该子群的零化子中每个频率的系数为 $M>0$，因此都必须属于 $S$。反过来，子群指示函数与其零化子使恒等式右端为零。有限群的傅里叶支集不确定性原理同样以子群指示函数给出取等构形。 [Tao，第 1 节](https://arxiv.org/pdf/math/0308286v6)
 
 把 $K$ 用于碰撞质量时，其零频项为 $(M/q)W^{2p}$。若 $0\in R$ 且其他系数的实部都非负，则整个上界至少为 $W^{2p}/m$。系数有正有负时，均值估计约束零频项，其余各项由同一组权重产生的高阶矩共同决定。
 

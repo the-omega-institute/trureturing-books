@@ -128,15 +128,23 @@ $$
 mM-qK(0)=\sum_{k\in S}\sum_{x\in G}K(x)\bigl(1-\Re\chi_k(-x)\bigr).
 $$
 
-Every term is nonnegative, so
+::: {.theorem #thm-ch31-sparse-majorant-gap title="Phase lower bound for a sparse Fourier majorant" lean="D5/S3/Fourier/Concentration/SparseCyclicMajorants.sparse_dft_majorant_gap"}
+Under the assumptions on $q,K,S,R,m,M$ above,
 
 $$
 mM-qK(0)\ \ge\ \sum_{k\in S}\sum_{x\in R}\bigl(1-\Re\chi_k(-x)\bigr).
 $$
+:::
+
+Each term is nonnegative, so retain only the terms in $R$.
 
 In the character expansion, the normalized zero-frequency coefficient is $M/q$. If $0\in R$, this coefficient is at least $1/m$. If $1\in R$ and $S$ contains a nonzero frequency, the right side is strictly positive.
 
-For $K(0)>0$, equality $mM=qK(0)$ holds exactly when $K=K(0)\mathbf 1_U$ for an additive subgroup $U$ of $G$ and $S$ is the annihilator of $U$. Equality forces every selected character to be one wherever $K>0$. Inversion makes $K$ constant at $K(0)$ on the subgroup where all these characters are one. Every frequency in its annihilator has coefficient $M>0$ and therefore belongs to $S$. Conversely, a scaled subgroup indicator and its annihilator make the right side of the identity zero. Subgroup indicators also give equality in the finite-group Fourier support uncertainty principle. [Tao, §1](https://arxiv.org/pdf/math/0308286v6)
+::: {.theorem #thm-ch31-sparse-majorant-equality title="Equality in the sparse mean bound" lean="D5/S3/Fourier/Concentration/SparseCyclicMajorants.sparse_dft_floor_eq_iff"}
+Suppose $K$ is nonnegative and $S$ contains the support of its Fourier transform. For $K(0)>0$, equality $mM=qK(0)$ holds exactly when $K=K(0)\mathbf 1_U$ for an additive subgroup $U$ of $G$ and $S$ is the annihilator of $U$.
+:::
+
+Equality forces every selected character to be one wherever $K>0$. Inversion makes $K$ constant at $K(0)$ on the subgroup where all these characters are one. Every frequency in its annihilator has coefficient $M>0$ and therefore belongs to $S$. Conversely, a scaled subgroup indicator and its annihilator make the right side of the identity zero. Subgroup indicators also give equality in the finite-group Fourier support uncertainty principle. [Tao, §1](https://arxiv.org/pdf/math/0308286v6)
 
 For a collision bound using $K$, the zero-frequency term is $(M/q)W^{2p}$. If $0\in R$ and the real parts of the remaining coefficients are all nonnegative, the full bound is at least $W^{2p}/m$. With coefficients of both signs, the mean inequality controls the zero-frequency term, while the other terms depend on high moments from a common set of weights.
 
