@@ -1,0 +1,248 @@
+# Chapter 11 Pi-Free Factorial Haar Integration and Character Orthonormality
+
+> *"Habit insists that spherical averaging demands $\pi$ and infinite Riemann sums; yet on the three-sphere locked by `AXIOM-Ω`, $\pi^2$ cancels completely between the surface area and four half-integer Gamma factors, collapsing global Haar integration into a single finite integer-factorial ratio."*
+
+[Chapter 10](ch10-peter-weyl-rational-spin-shells.md) purified the Fourier kernel from the transcendental exponential $e^{-\hat{\mathbf{i}}2\pi\xi x}$ into integer-coefficient Chebyshev polynomials $E_n(\kappa)$, while leaving one final gate open: verifying that distinct spin shells are strictly orthonormal ($\langle\chi_j, \chi_{j'}\rangle = \delta_{jj'}$), evaluating origin-free ternary convolutions, or confirming the rotational average of the $5d^8$ quadrupole tensor all require the normalized global Haar expectation $\mathbb{E}_{\mathbb{T}_3}[\cdot]$ on $\mathbb{T}_3 \cong S^3(1)$.
+
+In classical calculus, the words "spherical integral" trigger an automatic reflex: reach for the hypersurface volume $2\pi^2$, introduce triple trigonometric angles $(\psi, \vartheta, \varphi)$, and invoke infinite Riemann-sum limits—as if $\pi$ were permanently branded onto curved geometry. This chapter dismantles that illusion. **Normalized polynomial Haar integration on the three-sphere contains no $\pi$ and no limits whatsoever.** Every homogeneous even monomial integrates to an exact finite ratio of integer factorials, the single-variable fidelity moments $\mathbb{E}_{\mathbb{T}_3}[\kappa^k]$ are literally Catalan numbers divided by $4^k$, and both the exact moment recurrence and the orthonormality of the first three even Peter–Weyl character kernels are proved with zero axioms inside `OmegaInit` and `OmegaMath` (`axioms: []`).
+
+---
+
+## 11.1 The $\pi$-Free Three-Sphere Miracle: Why $\pi^2$ Cancels Identically in Dimension $3$ {#sec-ch11-pi-cancellation-miracle}
+
+Let us first uncover the mechanism through the classical shadow of $\mathbb{R}^4$, and then rebuild the entire integration functional internally with zero axioms.
+
+Consider the four-dimensional Gaussian moment integral on $\mathbb{R}^4$ (whose unit sphere is the three-sphere $S^3 = \{q = (w, x, y, z) \in \mathbb{R}^4 \mid w^2 + x^2 + y^2 + z^2 = 1\}$), for any natural numbers $a, b, c, d \in \mathbb{N}$ with $m := a + b + c + d$:
+
+$$
+I(a, b, c, d) \;:=\; \int_{\mathbb{R}^4} w^{2a} x^{2b} y^{2c} z^{2d}\,e^{-(w^2 + x^2 + y^2 + z^2)}\,dw\,dx\,dy\,dz.
+$$
+
+Evaluate this same integral in two coordinate systems, and the cancellation strikes before our eyes.
+
+**Route 1: Cartesian separation of variables.** The integral factors into four independent one-dimensional even Gaussian integrals. For any $k \in \mathbb{N}$, substituting $u = t^2$ produces a half-integer Gamma value:
+
+$$
+\int_{-\infty}^{+\infty} t^{2k}\,e^{-t^2}\,dt \;=\; \Gamma\!\left(k + \frac{1}{2}\right) \;=\; \frac{(2k - 1)!!}{2^k}\,\Gamma\!\left(\frac{1}{2}\right) \;=\; \frac{(2k)!}{4^k\,k!}\,\sqrt{\pi}.
+$$
+
+Multiplying all four coordinate factors pairs the four copies of $\Gamma(\frac{1}{2}) = \sqrt{\pi}$ cleanly into an exact **integer square $\pi^2$**, leaving no square root behind:
+
+$$
+I(a, b, c, d) \;=\; \Gamma\!\left(\frac{1}{2}\right)^4 \cdot \frac{(2a)!\,(2b)!\,(2c)!\,(2d)!}{4^{a+b+c+d}\,a!\,b!\,c!\,d!} \;=\; \pi^2 \cdot \frac{(2a)!\,(2b)!\,(2c)!\,(2d)!}{4^m\,a!\,b!\,c!\,d!}.
+$$
+
+**Route 2: Four-dimensional spherical polar factorization.** Write $q = r\,\omega$ ($r > 0$, $\omega \in S^3$), so the volume element becomes $r^3\,dr\,d\sigma(\omega)$. Denote the surface area of $S^3$ by $\sigma(S^3) = \frac{2\pi^2}{\Gamma(2)} = 2\pi^2$ and the normalized Haar probability measure by $d\mu(\omega) = \frac{d\sigma(\omega)}{2\pi^2}$. Then
+
+$$
+I(a, b, c, d) \;=\; \left(\int_0^{\infty} r^{2m + 3}\,e^{-r^2}\,dr\right) \cdot \sigma(S^3) \cdot \mathbb{E}_{\mathbb{T}_3}\!\left[\frac{w^{2a} x^{2b} y^{2c} z^{2d}}{\lVert q\rVert^{2m}}\right].
+$$
+
+Setting $u = r^2$ ($r\,dr = \frac{1}{2}\,du$) turns the radial integral into a **pure integer factorial**:
+
+$$
+\int_0^{\infty} r^{2m + 3}\,e^{-r^2}\,dr \;=\; \frac{1}{2}\int_0^{\infty} u^{m + 1}\,e^{-u}\,du \;=\; \frac{1}{2}\,\Gamma(m + 2) \;=\; \frac{(m + 1)!}{2}.
+$$
+
+Multiplying by the surface area $\sigma(S^3) = 2\pi^2$ cancels the factors $2$ and $\frac{1}{2}$, leaving exactly $\pi^2\,(m + 1)!$. Equating the two evaluations gives
+
+$$
+\pi^2 \cdot \frac{(2a)!\,(2b)!\,(2c)!\,(2d)!}{4^m\,a!\,b!\,c!\,d!} \;=\; \pi^2\,(m + 1)! \cdot \mathbb{E}_{\mathbb{T}_3}\!\left[\frac{w^{2a} x^{2b} y^{2c} z^{2d}}{\lVert q\rVert^{2m}}\right].
+$$
+
+Strike $\pi^2$ from both sides—and the single most liberating formula of rational harmonic analysis stands bare:
+
+$$
+\mathbb{E}_{\mathbb{T}_3}\!\left[\frac{w^{2a} x^{2b} y^{2c} z^{2d}}{\lVert q\rVert^{2m}}\right] \;\equiv\; \frac{(2a)!\,(2b)!\,(2c)!\,(2d)!}{4^m\,a!\,b!\,c!\,d!\,(m + 1)!} \;\in\; \mathbb{Q}_+, \qquad m \;=\; a + b + c + d.
+$$
+
+Observe why dimension $3$ ($S^3 \subset \mathbb{R}^4$, locked by `AXIOM-Ω`) sits at a unique double sweet spot:
+
+- **Compared with the circle $S^1$ ($n = 2$)**: While $\sigma(S^1) = 2\pi$ cancels $\Gamma(\frac{1}{2})^2 = \pi$ and leaves $m!$, $S^1$ is abelian—every irreducible representation is one-dimensional, incapable of carrying non-commutative three-dimensional curvature or spinor double covers.
+- **Compared with the two-sphere $S^2$ ($n = 3$)**: Here $\Gamma(\frac{1}{2})^3 = \pi\sqrt{\pi}$ leaves an awkward half-integer radial denominator $\Gamma(m + \frac{3}{2})$; even more fundamentally, $\chi(S^2) = 2 \neq 0$ prevents $S^2$ from being a group at all, so neither a group-invariant Haar measure nor a Peter–Weyl character algebra exists on $S^2$.
+- **Uniquely on the three-sphere $S^3 \cong \mathrm{Sp}(1)$ ($n = 4$)**: It is the **only non-abelian compact Lie-group sphere**, and its four coordinates match $\Gamma(\frac{1}{2})^4 = \pi^2$ squarely against $\sigma(S^3) = 2\pi^2$ while turning $\Gamma(m + 2)/\Gamma(2)$ directly into the pure integer factorial $(m + 1)!$.
+
+::: {.remark #rem-ch11-shadow-vs-intrinsic title="Epistemic Division Between the Classical Gaussian Shadow and Intrinsic Zero-Axiom Definition (Literature Result and Algebraic Reconstruction)"}
+Evaluating polynomial integrals over spheres by equating Cartesian and polar Gaussian integrals is a classic analytic trick (see G. B. Folland, *Amer. Math. Monthly* **108**(5), 446–448, 2001; literature result). Within zero-axiom `OmegaMath`, that derivation serves solely as a **shadow alignment check**: it explains to readers trained in real analysis why $\pi$ had to vanish. Inside the zero-axiom core itself, we never construct $\mathbb{R}$, $\pi$, or Lebesgue measure; instead, we adopt the factorial ratio directly as our intrinsic rational linear functional and verify its projective homogeneity invariance, normalization, symmetry, and orthonormality by pure finite arithmetic.
+:::
+
+---
+
+## 11.2 Intrinsic Zero-Axiom Factorial Functional, Homogeneity Invariance, and Exact Moment Recurrence {#sec-ch11-intrinsic-functional-and-recurrence}
+
+Now kick away the ladder: forget $\mathbb{R}^4$, $e^{-r^2}$, and $\pi$, and define the $\pi$-free Haar expectation intrinsically on degree-zero homogeneous rational functions over `ProjTernion`.
+
+::: {.definition #def-ch11-pi-free-haar title="Pi-Free Factorial Haar Expectation Functional on the Three-Sphere"}
+For any tuple of natural numbers $(p, q, r, s) \in \mathbb{N}^4$ with total degree $p + q + r + s = 2m$, define the rational linear functional $\mathbb{E}_{\mathbb{T}_3}$ on degree-zero homogeneous monomials $w^p x^q y^r z^s / \lVert q\rVert^{p+q+r+s}$ as follows:
+
+1. If at least one exponent among $p, q, r, s$ is odd, define the expectation to be $0$ (reflecting independent sign-flip symmetry across all four coordinates);
+2. If all exponents are even, $(p, q, r, s) = (2a, 2b, 2c, 2d)$ with $m = a + b + c + d$, define
+
+   $$
+   H(a, b, c, d) \;:=\; \mathbb{E}_{\mathbb{T}_3}\!\left[\frac{w^{2a} x^{2b} y^{2c} z^{2d}}{\lVert q\rVert^{2m}}\right] \;:=\; \frac{(2a)!\,(2b)!\,(2c)!\,(2d)!}{4^m\,a!\,b!\,c!\,d!\,(m + 1)!} \;\in\; \mathbb{Q}_+,
+   $$
+
+   and extend by $\mathbb{Q}$-linearity to all homogeneous ratios with denominator $\lVert q\rVert^{2m}$.
+:::
+
+For this purely rational definition to be well-defined on projective rays, it must pass one sharp internal consistency test: rewriting a homogeneous ratio $P(q) / \lVert q\rVert^{2m}$ as $(w^2 + x^2 + y^2 + z^2)P(q) / \lVert q\rVert^{2m + 2}$ must leave the expectation strictly invariant.
+
+Three lines of integer-factorial cancellation settle this without a single integral or limit. For any $(a, b, c, d) \in \mathbb{N}^4$ with $m = a + b + c + d$, incrementing $a$ by $1$ yields the exact ratio
+
+$$
+\frac{H(a + 1, b, c, d)}{H(a, b, c, d)} \;=\; \frac{(2a + 2)(2a + 1)}{4\,(a + 1)\,(m + 2)} \;=\; \frac{2a + 1}{2\,(m + 2)}.
+$$
+
+By symmetry across all four coordinates, summing the four incremented numerators gives
+
+$$
+\frac{H(a + 1, b, c, d) + H(a, b + 1, c, d) + H(a, b, c + 1, d) + H(a, b, c, d + 1)}{H(a, b, c, d)} \;=\; \frac{(2a + 1) + (2b + 1) + (2c + 1) + (2d + 1)}{2\,(m + 2)} \;=\; \frac{2m + 4}{2\,(m + 2)} \;\equiv\; 1.
+$$
+
+That single line is a gem of zero-axiom algebra: **without surface elements or polar Jacobians, the elementary sum $(2a + 1) + (2b + 1) + (2c + 1) + (2d + 1) = 2(m + 2)$ proves that $H(a, b, c, d)$ respects the sphere relation $w^2 + x^2 + y^2 + z^2 = \lVert q\rVert^2$ identically and is normalized by $H(0, 0, 0, 0) = 1$**. As an immediate sanity check on $(w^2 + x^2 + y^2 + z^2)^2$: since $H(2, 0, 0, 0) = \frac{4!}{4^2 \cdot 2! \cdot 3!} = \frac{1}{8}$ and $H(1, 1, 0, 0) = \frac{2! \cdot 2!}{4^2 \cdot 1! \cdot 1! \cdot 3!} = \frac{1}{24}$, the four quartic terms and twelve cross terms sum cleanly to $4 \times \frac{1}{8} + 12 \times \frac{1}{24} = \frac{1}{2} + \frac{1}{2} = 1$.
+
+Specializing this step ratio to powers of the projective fidelity $\kappa = w^2 / \lVert q\rVert^2$ by setting $a = k$ and $b = c = d = 0$ ($m = k$), write $\mathbb{E}_{\mathbb{T}_3}[\kappa^k] = H(k, 0, 0, 0) = \frac{(2k)!}{4^k\,k!\,(k + 1)!}$ for the $k$-th $\pi$-free scalar moment (with base value $\mathbb{E}_{\mathbb{T}_3}[\kappa^0] = 1$ directly from the definition). The exact factorial ratio recurrence linking consecutive moments is proved for every $k \in \mathbb{N}$ inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`):
+
+::: {.theorem #thm-ch11-haar-kappa-moment-succ title="Zero-Axiom Factorial Recurrence for Pi-Free Three-Sphere Fidelity Moments" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.haarKappaMoment_succ"}
+Let `haarKappaMoment k` denote the $\pi$-free rational factorial moment $\mathbb{E}_{\mathbb{T}_3}[\kappa^k] = \frac{(2k)!}{4^k\,k!\,(k + 1)!}$ of the even scalar coordinate $\kappa^k = (w^2 / \lVert q\rVert^2)^k$ on $S^3$, valued in `Omega.IntRatio`. Then for every natural number $k \in \mathbb{N}$, under the zero-axiom equivalence `Omega.IntRatio.Equivalent`,
+
+$$
+\mathbb{E}_{\mathbb{T}_3}\!\left[\kappa^{k + 1}\right] \;\equiv\; \mathbb{E}_{\mathbb{T}_3}\!\left[\kappa^k\right] \cdot \frac{2k + 1}{2\,(k + 2)}.
+$$
+:::
+
+::: {.proof}
+Expanding the left-hand side by factorial recursion gives numerator $(2k + 2)! = 2(k + 1)(2k + 1)(2k)!$ over the strictly positive denominator $4^{k + 1}(k + 1)!(k + 2)! = 4(k + 1)(k + 2)\cdot 4^k\,k!\,(k + 1)!$. Multiplying the two fractions on the right-hand side yields numerator $(2k)!(2k + 1)$ over the strictly positive denominator $2(k + 2)\cdot 4^k\,k!\,(k + 1)!$. Since $4(k + 1)(k + 2) = 2(k + 1)\cdot 2(k + 2)$, cross-multiplication in `Omega.IntRatio.Equivalent` produces identical natural-number products on both sides with zero real numbers and zero axioms. The full proof is checked by the Lean kernel.
+:::
+
+Moreover, the closed form unveils an unexpected combinatorial jewel:
+
+$$
+\mathbb{E}_{\mathbb{T}_3}\!\left[\kappa^k\right] \;=\; H(k, 0, 0, 0) \;=\; \frac{(2k)!}{4^k\,k!\,(k + 1)!} \;=\; \frac{1}{4^k}\,\frac{1}{k + 1}\binom{2k}{k} \;=\; \frac{C_k}{4^k},
+$$
+
+where $C_k = 1, 1, 2, 5, 14, 42, \dots$ is the **$k$-th Catalan number**. Viewed from the classical shadow, this is no coincidence: the Weyl conjugacy-class weight on $\mathrm{SU}(2)$ is $\frac{2}{\pi}\sin^2\phi\,d\phi$, which pushes forward to $c = \cos\phi \in [-1, 1]$ as the Wigner semicircle law $\frac{2}{\pi}\sqrt{1 - c^2}\,dc$, whose even moments are famously $C_k / 4^k$. Inside `OmegaMath`, however, neither semicircles nor $\pi$ ever enter; multiplying repeatedly by $\frac{2k + 1}{2(k + 2)}$ generates the entire rational moment table:
+
+| Order $k$ | Catalan Number $C_k$ | Step Multiplier $\frac{2k - 1}{2(k + 1)}$ | Exact Rational Moment $\mathbb{E}_{\mathbb{T}_3}[\kappa^k] = C_k / 4^k$ |
+| ---: | ---: | ---: | ---: |
+| $0$ | $1$ | — | $1$ |
+| $1$ | $1$ | $1/4$ | $1/4$ |
+| $2$ | $2$ | $1/2$ | $1/8$ |
+| $3$ | $5$ | $5/8$ | $5/64$ |
+| $4$ | $14$ | $7/10$ | $7/128$ |
+| $5$ | $42$ | $3/4$ | $21/512$ |
+
+::: {.figure src="ch11-haar-shells"}
+**The π-free moments give Haar orthonormality.** The cyan markers on the left give the five exact fractions. The right panel plots the three characters and shows their Haar inner products.
+:::
+
+---
+
+## 11.3 Zero-Axiom Rational Orthonormality of Peter–Weyl Character Kernels {#sec-ch11-peter-weyl-orthonormality}
+
+With the five exact rational moments $\mathbb{E}[\kappa^0] = 1$ through $\mathbb{E}[\kappa^4] = \frac{7}{128}$ generated from $\mathbb{E}[\kappa^0] = 1$ and [@thm-ch11-haar-kappa-moment-succ], the payoff is immediate. Without trigonometric product-to-sum identities, integration by parts, or any approximation to $\pi$, define the $\pi$-free rational spherical inner product on polynomials in $\kappa$ by
+
+$$
+\langle f, g\rangle_{\mathbb{T}_3} \;:=\; \operatorname{haarInner}(f, g) \;:=\; \mathbb{E}_{\mathbb{T}_3}\!\bigl[f(\kappa)\,g(\kappa)\bigr].
+$$
+
+Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), the first three even (integer-spin) Peter–Weyl character polynomials from [Chapter 10](ch10-peter-weyl-rational-spin-shells.md)—$\chi_0(\kappa) = 1$, $\chi_1(\kappa) = 4\kappa - 1$, and $\chi_2(\kappa) = 16\kappa^2 - 12\kappa + 1$—are certified to form an exact orthonormal system:
+
+::: {.theorem #thm-ch11-peter-weyl-chi012-orthonormal title="Zero-Axiom Haar Orthonormality of the First Three Even Peter–Weyl Characters" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.peter_weyl_chi012_orthonormal"}
+Under the zero-axiom $\pi$-free rational Haar inner product `haarInner`, the first three even Peter–Weyl character polynomials $\chi_0(\kappa) = 1$, $\chi_1(\kappa) = 4\kappa - 1$, and $\chi_2(\kappa) = 16\kappa^2 - 12\kappa + 1$ simultaneously satisfy all six pairwise orthonormality relations under `Omega.IntRatio.Equivalent`:
+
+$$
+\begin{aligned}
+\langle \chi_0, \chi_0\rangle_{\mathbb{T}_3} &\equiv 1, & \langle \chi_0, \chi_1\rangle_{\mathbb{T}_3} &\equiv 0, & \langle \chi_0, \chi_2\rangle_{\mathbb{T}_3} &\equiv 0, \\
+\langle \chi_1, \chi_1\rangle_{\mathbb{T}_3} &\equiv 1, & \langle \chi_1, \chi_2\rangle_{\mathbb{T}_3} &\equiv 0, & \langle \chi_2, \chi_2\rangle_{\mathbb{T}_3} &\equiv 1.
+\end{aligned}
+$$
+:::
+
+::: {.proof}
+Expand each of the six polynomial products $\chi_i(\kappa)\chi_j(\kappa)$ ($0 \le i \le j \le 2$) into integer-coefficient monomials of degree at most $4$, and contract linearly via `haarInner` against the five exact moments $1, \frac{1}{4}, \frac{1}{8}, \frac{5}{64}, \frac{7}{128}$ generated from $\mathbb{E}[\kappa^0] = 1$ and [@thm-ch11-haar-kappa-moment-succ] (displayed line by line in [@ex-ch11-orthonormality-hand-ledger]). Direct integer cross-multiplication in `Omega.IntRatio.Equivalent` reduces all three diagonal entries to $1$ and all three off-diagonal entries to $0$, with zero $\pi$, zero real numbers, and zero axioms. The full proof is checked by the Lean kernel.
+:::
+
+The ledger below lays out all six polynomial contractions of [@thm-ch11-peter-weyl-chi012-orthonormal] term by term, together with the half-integer shell norms:
+
+::: {.example #ex-ch11-orthonormality-hand-ledger title="Hand-Verified Rational Orthonormality Ledger for $\chi_0, \chi_1, \chi_2$ and Half-Integer Norms"}
+Substituting $\mathbb{E}[\kappa^0] = 1,\; \mathbb{E}[\kappa^1] = \frac{1}{4},\; \mathbb{E}[\kappa^2] = \frac{1}{8},\; \mathbb{E}[\kappa^3] = \frac{5}{64},\; \mathbb{E}[\kappa^4] = \frac{7}{128}$ term by term:
+
+1. **Monopole shell norm $\langle \chi_0, \chi_0\rangle$**:
+
+   $$
+   \langle \chi_0, \chi_0\rangle \;=\; \mathbb{E}[1] \;=\; 1.
+   $$
+
+2. **Orthogonality of $j = 0$ and $j = 1$ ($\langle \chi_0, \chi_1\rangle$)**:
+
+   $$
+   \langle \chi_0, \chi_1\rangle \;=\; \mathbb{E}[4\kappa - 1] \;=\; 4 \cdot \frac{1}{4} - 1 \;=\; 1 - 1 \;=\; 0.
+   $$
+
+3. **Orthogonality of $j = 0$ and $j = 2$ ($\langle \chi_0, \chi_2\rangle$)**:
+
+   $$
+   \langle \chi_0, \chi_2\rangle \;=\; \mathbb{E}[16\kappa^2 - 12\kappa + 1] \;=\; 16 \cdot \frac{1}{8} - 12 \cdot \frac{1}{4} + 1 \;=\; 2 - 3 + 1 \;=\; 0.
+   $$
+
+4. **Adjoint shell norm $\langle \chi_1, \chi_1\rangle$**: expanding $(4\kappa - 1)^2 = 16\kappa^2 - 8\kappa + 1$ gives
+
+   $$
+   \langle \chi_1, \chi_1\rangle \;=\; 16 \cdot \frac{1}{8} - 8 \cdot \frac{1}{4} + 1 \;=\; 2 - 2 + 1 \;=\; 1.
+   $$
+
+5. **Orthogonality of $j = 1$ and $j = 2$ ($\langle \chi_1, \chi_2\rangle$)**: expanding $(4\kappa - 1)(16\kappa^2 - 12\kappa + 1) = 64\kappa^3 - 64\kappa^2 + 16\kappa - 1$ gives
+
+   $$
+   \langle \chi_1, \chi_2\rangle \;=\; 64 \cdot \frac{5}{64} - 64 \cdot \frac{1}{8} + 16 \cdot \frac{1}{4} - 1 \;=\; 5 - 8 + 4 - 1 \;=\; 0.
+   $$
+
+6. **Quadrupole shell norm $\langle \chi_2, \chi_2\rangle$**: expanding $(16\kappa^2 - 12\kappa + 1)^2 = 256\kappa^4 - 384\kappa^3 + 176\kappa^2 - 24\kappa + 1$ gives
+
+   $$
+   \langle \chi_2, \chi_2\rangle \;=\; 256 \cdot \frac{7}{128} - 384 \cdot \frac{5}{64} + 176 \cdot \frac{1}{8} - 24 \cdot \frac{1}{4} + 1 \;=\; 14 - 30 + 22 - 6 + 1 \;=\; 1.
+   $$
+
+Every denominator cancels cleanly into integers! The Gram matrix of the first three integer-spin characters is identically the $3 \times 3$ identity matrix:
+
+$$
+\bigl(\langle \chi_i, \chi_j\rangle_{\mathbb{T}_3}\bigr)_{i, j \in \{0, 1, 2\}} \;=\; \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} \;=\; I_3.
+$$
+
+Half-integer shell norms check out just as effortlessly: $\mathbb{E}[\chi_{1/2}^2] = \mathbb{E}[4\kappa] = 4 \cdot \frac{1}{4} = 1$, and $\mathbb{E}[\chi_{3/2}^2] = \mathbb{E}[64\kappa^3 - 64\kappa^2 + 16\kappa] = 5 - 8 + 4 = 1$. Because every odd-degree monomial has zero expectation, every integer-spin character is automatically orthogonal to every half-integer character as well.
+:::
+
+These integer cancellations are no coincidence of low degree: they extend across **every integer spin $j \in \mathbb{N}$** by a purely combinatorial identity (manual derivation). Combine the Clebsch–Gordan product rule $E_m(\kappa)\,E_n(\kappa) = \sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa)$ from [Chapter 10](ch10-peter-weyl-rational-spin-shells.md) with the zero-mean identity
+
+$$
+\mathbb{E}_{\mathbb{T}_3}\!\bigl[E_r(\kappa)\bigr] \;=\; \delta_{r, 0} \qquad (\forall r \in \mathbb{N}).
+$$
+
+Indeed, using the explicit binomial expansion $E_r(\kappa) = \sum_{k = 0}^{r} (-1)^{r - k} \binom{r + k}{2k} 4^k \kappa^k$ (check $r = 1$: $-1 + 4\kappa$; check $r = 2$: $1 - 12\kappa + 16\kappa^2$) and substituting $\mathbb{E}[\kappa^k] = \frac{1}{4^k(k + 1)}\binom{2k}{k}$ cancels $4^k$ against $4^{-k}$, leaving a pure alternating binomial sum:
+
+$$
+\mathbb{E}_{\mathbb{T}_3}\!\bigl[E_r(\kappa)\bigr] \;=\; \sum_{k = 0}^{r} (-1)^{r - k}\,\binom{r + k}{2k}\,\frac{1}{k + 1}\binom{2k}{k} \;=\; \frac{(-1)^r}{r + 1}\sum_{k = 0}^{r} (-1)^k \binom{r + 1}{k + 1}\binom{r + k}{r} \;=\; \delta_{r, 0}.
+$$
+
+For $r \ge 1$, the trailing sum is the $(r + 1)$-st forward finite difference of the degree-$r$ polynomial $\binom{r + x}{r}$ evaluated at $x = -1, 0, \dots, r$ (where the $x = -1$ term $\binom{r - 1}{r} = 0$ vanishes identically), hence is identically zero! Full-spectrum orthonormality drops out in one line:
+
+$$
+\langle E_m, E_n\rangle_{\mathbb{T}_3} \;=\; \sum_{r = \lvert m - n\rvert}^{m + n} \mathbb{E}_{\mathbb{T}_3}\!\bigl[E_r(\kappa)\bigr] \;=\; \sum_{r = \lvert m - n\rvert}^{m + n} \delta_{r, 0} \;=\; \delta_{m, n},
+$$
+
+since $r = 0$ falls in $[\lvert m - n\rvert, m + n]$ if and only if $m = n$. Returning to the $5d^8$ quadrupole tensor $\mathbf{Q}_{\mathrm{phys}}(5d^8) = \diag(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7})$ of [Chapter 10](ch10-peter-weyl-rational-spin-shells.md), rotating by $\operatorname{Ad}(q)\,\mathbf{Q}\,\operatorname{Ad}(q)^\top$ produces degree-four homogeneous polynomials divided by $\lVert q\rVert^4$; plugging in $H(2, 0, 0, 0) = \frac{1}{8}$, $H(1, 1, 0, 0) = \frac{1}{24}$, and vanishing odd monomials collapses the rotational average straight to $\frac{1}{3}(\Tr \mathbf{Q})\,I_3 = \mathbf{0}_{3\times 3}$, without ever touching $\pi$.
+
+---
+
+## 11.4 Interactive Laboratory and the Threshold of Algebraic Extensions {#sec-ch11-interactive-haar-lab}
+
+In the interactive workbench card below, slide the amber fidelity level $\kappa$ on the purple three-sphere, and open the drawer controls to vary monomial exponents $(a, b, c, d)$ and character pairs $(\chi_i, \chi_j)$, checking the $\pi$-free factorial ratio $H(a, b, c, d)$, the Catalan recurrence $\mathbb{E}[\kappa^{k + 1}] = \frac{2k + 1}{2(k + 2)}\mathbb{E}[\kappa^k]$ of [@thm-ch11-haar-kappa-moment-succ], and the $3 \times 3$ identity Gram table of [@thm-ch11-peter-weyl-chi012-orthonormal].
+
+::: {.viz src="omega-math-workbench" preset="pi-free-haar-peter-weyl" height="520"}
+**Pi-free factorial Haar integration and Peter–Weyl character orthonormality workbench card (`pi-free-haar-peter-weyl`).** Slide the amber $\kappa$-level ring across the purple three-sphere $\mathbb{T}_3$ to inspect the zonal nodal bands of the even Chebyshev characters $\chi_0 = 1,\;\chi_1 = 4\kappa - 1,\;\chi_2 = 16\kappa^2 - 12\kappa + 1$; open the drawer or full workbench to choose monomial powers $(a, b, c, d)$ and character pairs $(\chi_i, \chi_j)$, inspecting the cyan exact rational moments $\mathbb{E}[\kappa^k]$ ($1, \frac{1}{4}, \frac{1}{8}, \frac{5}{64}, \frac{7}{128}$) and the $3 \times 3$ identity Gram matrix $I_3$ produced with zero factors of $\pi$.
+:::
+
+Taking stock of the last two chapters, it may seem as if every irrational and transcendental has already been banished: $E_n(\kappa)$ eliminated $\sqrt{\kappa}$ from every integer spin shell, $H(a, b, c, d)$ eliminated $\pi$ and Riemann limits from spherical integration, and even the condensed-matter $5d^8$ quadrupole tensor turned out to be fractions over $7$. Yet an honest mathematician must confront one sharper boundary: **when a physical observable genuinely encounters a quadratic irrational—unit-normalizing the equatorial state `pHalf = (1, 1, 0, 0)` along its ray (requiring $\sqrt{2}$), saturating the CHSH Tsirelson ceiling $2\sqrt{2}$, or closing pentagonal golden Chebyshev cycles (requiring $\varphi = \frac{1 + \sqrt{5}}{2}$)—must we surrender and retreat to the classical continuum $\mathbb{R}$ and the axiom of choice?**
+
+[Chapter 12](ch12-algebraic-extensions-and-schur-positivity.md) delivers an emphatic no: building zero-axiom quadratic extensions directly as ordered pairs over `QRat`, and combining them with exact rational Lagrange–Gram and Schur complement positivity, lets us capture every such algebraic extremum and positivity certificate without importing a single continuum axiom.
