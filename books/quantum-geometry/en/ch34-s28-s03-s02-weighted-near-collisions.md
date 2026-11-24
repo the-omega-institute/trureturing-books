@@ -764,6 +764,26 @@ $$
 $$
 The last term is summable and nonnegative. When $s\le m$, the identity gives strict uniqueness, so adjacent intervals choose the same weights at their shared endpoint. The choice $n=\lfloor\sqrt{5m+1}\rfloor$ gives a single interval with $(n^2-1)/5\le m<n(n+2)/5$ for any $m\ge0$. On the first interval $0\le m\le3/5$, the three possible sites have weights $1-m$ at zero and $m/2$ at each neighbor. In the second-harmonic scale $\lambda=8\pi^2m$, the upper endpoint is exactly $24\pi^2/5$. A quantitative transfer of the lattice minimum back to the finite cycle has to account for the second cosine also approaching $1$ near the antipode.
 
+### The finite cyclic minimum converges to the lattice minimum
+
+Fix $\lambda\ge0$ and set $m=\lambda/(8\pi^2)$ and $a=1-\lambda/q^2$. Write $L(m)$ for the lattice minimum above and $E_q(a)$ for the minimum squared mass on the cycle with both cosine moments at least $a$. If $m$ belongs to the support interval indexed by $n$ and $q>2n$, the cyclic minimum is attained and
+$$
+0\le L(m)-E_q(a)\le \frac{2t}{Z}\frac{\lambda}{q^2}\le\frac{2\lambda}{q^2}.
+$$
+For any feasible cyclic weight $v$, let $\bar i$ be the centered integer representative of the residue $i$. With the same lattice minimizer $w$,
+$$
+\sum_i(v_i-w_{\bar i})^2
+\le\sum_i v_i^2-L(m)+\frac{2t}{Z}\frac{\lambda}{q^2}.
+$$
+
+When $q>2n$ the lattice support embeds in the cycle. The inequality $1-\cos x\le x^2/2$ bounds the two deficits of the embedded law by $\lambda/(4q^2)$ and $\lambda/q^2$, so the law is feasible. The reverse bound must account for weight near the antipode, where the second cosine also approaches $1$. Let $\theta=2\pi\bar i/q$. Throughout the centered range, $\theta^2\cos\theta\le\sin^2\theta$. This follows by sign when the cosine is nonpositive. Otherwise apply $\sin x\ge x\cos x$ to the positive half-angle and use $\cos^4(\theta/2)\ge\cos\theta$. Consequently the certificate
+$$
+P_i=\frac{t\cos\theta-(q\sin\theta/(2\pi))^2}{Z}
+$$
+lies below $w_{\bar i}$ at every residue. The two moment bounds give $\sum_i v_iP_i\ge (t-m)/Z-t\lambda/(Zq^2)$, with $(t-m)/Z=L(m)$. Substitute this into the expansion of the squared distance to obtain the estimate. The zero site contributes $t$ to the normalizer $Z$, giving $t/Z\le1$.
+
+Each fixed budget lies in an interval of finite support radius. Thus $E_q(1-\lambda/q^2)$ tends to $L(\lambda/(8\pi^2))$ through all integer moduli. The arithmetic estimate for high-order frequencies of the actual ζ zeros remains open.
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
