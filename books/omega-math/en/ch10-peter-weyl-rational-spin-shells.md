@@ -4,7 +4,7 @@
 
 Volume III ([Chapter 7](ch07-second-order-jet-calculus.md)–[Chapter 9](ch09-telescoping-stokes-and-arc-manifold.md)) evicted the ghost of limits from calculus: inside nilpotent jet rings and telescoping heap sums, differentiation and integration became finite rational algebra. With this chapter, Volume IV enters the heartland of harmonic analysis—**rebuilding the Fourier transform on the infinity-free, transcendental-free three-dimensional ternion heap $\mathbb{T}_3(\mathbb{Q})$**.
 
-Standard textbooks present the flat Fourier transform as a universal master key without asking a genealogical question: why should decomposing a periodic or localized wave force us onto an unbounded straight line, swallowing $\pi$, $e$, continuous ultraviolet frequencies, and truncation ringing? The answer mirrors the diagnosis of Volume I: flat Fourier analysis is merely the tangent-line approximation obtained by violently flattening a closed three-sphere. Once functions live directly on the compact, exterior-free three-sphere $\mathbb{T}_3 \cong S^3(1)$ locked by `AXIOM-Ω`, the Peter–Weyl decomposition immediately quantizes the spectrum into discrete half-integer spin shells, and every integer-spin spherical character collapses into an integer-coefficient Chebyshev polynomial in the rational fidelity $\kappa$; the Chebyshev Pell and doubling identities, universal even- and odd-shell square-root elimination, the spin-$2$ character formula, and the rational $5d^{10}/5d^8$ orbital quadrupole balance are all proved with zero axioms inside `OmegaInit` and `OmegaMath` (`axioms: []`).
+Standard textbooks present the flat Fourier transform as a universal master key without asking a genealogical question: why should decomposing a periodic or localized wave force us onto an unbounded straight line, swallowing $\pi$, $e$, continuous ultraviolet frequencies, and truncation ringing? The answer mirrors the diagnosis of Volume I: flat Fourier analysis is merely the tangent-line approximation obtained by violently flattening a closed three-sphere. Once functions live directly on the compact, exterior-free three-sphere $\mathbb{T}_3 \cong S^3(1)$ locked by `AXIOM-Ω`, the Peter–Weyl decomposition immediately quantizes the spectrum into discrete half-integer spin shells, and every integer-spin spherical character collapses into an integer-coefficient Chebyshev polynomial in the rational fidelity $\kappa$; the Chebyshev Pell and doubling identities, universal even- and odd-shell square-root elimination, the spin-$2$ character formula, the all-degree integer-spin Clebsch–Gordan character product law, and the rational $5d^{10}/5d^8$ orbital quadrupole balance are all proved with zero axioms inside `OmegaInit` and `OmegaMath` (`axioms: []`).
 
 ---
 
@@ -180,17 +180,9 @@ $$
 
 By the inductive hypothesis, the right-hand side equals $(4c^2 - 2)\,E_n(c^2) - E_{n-1}(c^2) = E_{n+1}(c^2)$, completing the induction. Consequently, **every integer-spin spherical character $\chi_j(\kappa) = E_j(\kappa)$ ($j = 0, 1, 2, 3, \dots$) is a pure integer polynomial in $\kappa$, banishing $\sqrt{\kappa}$ universally across all integer shells**.
 
-The same three-line induction immediately establishes the **integer-spin Clebsch–Gordan product rule**: for all $m, n \in \mathbb{N}$,
-
-$$
-E_m(\kappa)\,E_n(\kappa) \;=\; \sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa).
-$$
-
-Indeed, for $m = 1$ we have $E_1 = (4\kappa - 2) + 1$, so the defining recurrence gives $E_1 E_n = E_{n+1} + E_n + E_{n-1}$ for $n \ge 1$ (and $E_1 E_0 = E_1$); the general case follows by telescoping $E_{m+1} E_n = (E_1 - 1) E_m E_n - E_{m-1} E_n$. In Chapter 11, this purely polynomial product identity will serve as the algebraic master switch for $\pi$-free Haar orthonormality.
-
 What about half-integer spin shells $j = n + \frac{1}{2}$? While the signed character $\chi_{n+1/2}(q) = U_{2n+1}(c)$ retains a single factor of $c$ to track the double-cover sign $q \mapsto -q$, its squared kernel $\chi_{n+1/2}^2(\kappa) = U_{2n+1}(\sqrt{\kappa})^2 \in \mathbb{Z}[\kappa]$ is again an integer polynomial in $\kappa$. Better still, on any homogeneous integer ternion $p \in \mathbb{Z}^4 \setminus \{0\}$, the bilateral Peter–Weyl shell projector $\bigl(D^j(p) \otimes D^j(p)^\dagger\bigr) / \lVert p\rVert^{4j}$ carries an even power $\lVert p\rVert^{4j} \in \mathbb{Z}_{\ge 1}$ in its denominator for *all* integer and half-integer spins alike—requiring zero square roots and zero transcendentals.
 
-All five core algebraic laws of this Chebyshev shell engine—the signed Pell relation, first-kind index doubling, universal square-root elimination across all integer spin shells, signed factorization across all half-integer spin shells, and the rational spin-$2$ character formula—are proved with zero axioms inside `OmegaInit` and `OmegaMath` (`axioms: []`):
+All five single-shell algebraic laws of this Chebyshev engine—the signed Pell relation, first-kind index doubling, universal square-root elimination across all integer spin shells, signed factorization across all half-integer spin shells, and the rational spin-$2$ character formula—are proved with zero axioms inside `OmegaInit` and `OmegaMath` (`axioms: []`):
 
 ::: {.theorem #thm-ch10-zero-axiom-chebyshev-shells title="Zero-Axiom Chebyshev Pell, Doubling, Even-Odd Spin-Shell Elimination, and Spin-Two Character" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.pell_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.chebyshev_doubling D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.even_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.odd_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.spin_two_character"}
 Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), writing $T_n(x)$ and $U_n(x)$ for the first- and second-kind Chebyshev polynomials, $E_n(k)$ for the even-shell polynomial, and $\operatorname{oddFactor}_n(k)$ for the odd-shell factor polynomial, the following five theorems hold:
@@ -231,8 +223,24 @@ Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), writ
 All five statements are proved inside `module` + `prelude` files from the three-term Chebyshev recurrences over an abstract commutative ring and instantiated at `intRing` and `rationalRing`. Item 1 substitutes $T_{n+1}(x) = U_{n+1}(x) - x U_n(x)$ to rewrite the left-hand side as the recurrence invariant $U_{n+1}(x)^2 - 2x U_{n+1}(x) U_n(x) + U_n(x)^2$, which induction reduces to its base value $1$; Item 2 follows by induction from the Chebyshev composition recurrence and Item 1; Item 3 formalizes the two-step odd-index elimination induction above; Item 4 extracts the leading factor $x$ inductively via $U_{2n+1}(x) = 2x U_{2n}(x) - U_{2n-1}(x)$ and Item 3; Item 5 expands $E_2(k) = (4k - 2)(4k - 1) - 1$ directly inside `rationalRing` to $16k^2 - 12k + 1$ under `Omega.FiniteRatio.Equivalent`. The full proof is checked by the Lean kernel.
 :::
 
+Beyond single-shell identities, the **all-degree integer-spin Clebsch–Gordan character fusion law**—generalizing the low-degree doubling rule of §10.2 to every pair of integer spins $(m, n) \in \mathbb{N}^2$—is likewise proved coefficientwise with zero axioms inside `OmegaInit` and `OmegaMath` (`axioms: []`).
+
+::: {.theorem #thm-ch10-even-char-product-sum title="Zero-Axiom All-Degree Even-Character Clebsch–Gordan Product Law" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.evenChar_product_sum"}
+Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), represent the $r$-th even-degree character polynomial $E_r(\kappa)$ of [@def-ch10-even-chebyshev] (matching the degree-$2r$ Chebyshev character $U_{2r}(\sqrt{\kappa})$) in ascending powers of $\kappa$ as the rational coefficient list `evenCharPoly r : CoefficientList`, and let `evenCharProductSum m n` denote the coefficient list of the inclusive character sum $\sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa)$ (starting at `gap m n` $= \lvert m - n\rvert$ across `span m n` $= 2\min(m, n)$ steps up to $\lvert m - n\rvert + 2\min(m, n) = m + n$). Then for all natural numbers $m, n \in \mathbb{N}$, polynomial multiplication agrees coefficientwise with the inclusive sum under `Poly.RatioSame` (with omitted trailing entries interpreted as $0$, and each degree-$k$ entry related by `Omega.IntRatio.Equivalent`):
+
+$$
+E_m(\kappa)\,E_n(\kappa) \;\equiv\; \sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa).
+$$
+:::
+
+::: {.proof}
+Working first on integer coefficient lists `Poly`, handle the ordered case $n = d + m$ (where $\lvert m - n\rvert = d$ and $m + n = d + 2m$) by two-step induction on $m$. The base case $m = 0$ is $E_0 E_d = E_d$, and $m = 1$ rewrites $E_1(\kappa) = 4\kappa - 1 = (4\kappa - 2) + 1$ so the defining recurrence yields $E_1 E_{d+1} = E_{d+2} + E_{d+1} + E_d$. In the inductive step, multiplying $E_{m+2} = (4\kappa - 2)E_{m+1} - E_m$ by $E_n$ applies the linear recurrence operator $(4\kappa - 2)$ term-by-term to $\sum_{r = d+1}^{d+2m+1} E_r$, producing $\sum_{r = d+2}^{d+2m+2} E_r + \sum_{r = d}^{d+2m} E_r$; subtracting the lower inductive sum $\sum_{r = d+2}^{d+2m} E_r$ telescopes the interior overlap cleanly to $\sum_{r = d}^{d+2m+2} E_r$. For arbitrary $m, n \in \mathbb{N}$, order trichotomy writes either $n = d + m$ or $m = d + n$, and polynomial commutativity together with symmetry of the endpoints $\lvert m - n\rvert$ and $m + n$ reduces the second case to the first. Finally, `Poly.ratios_mul` lifts coefficientwise integer equality (`Poly.Same`) to `Poly.RatioSame` on `CoefficientList`. The full proof is checked by the Lean kernel.
+:::
+
+In [Chapter 11](ch11-pi-free-haar-integration.md), this zero-axiom all-degree polynomial fusion identity serves as the exact algebraic master switch locking $\pi$-free Peter–Weyl orthonormality across all integer spin shells.
+
 ::: {.example #ex-ch10-spin-character-table title="Exact Evaluation Ledger of Low-Spin Character Kernels at Canonical Rational Landmarks"}
-Expanding [@def-ch10-even-chebyshev] and [@thm-ch10-zero-axiom-chebyshev-shells] gives the first four integer-spin characters and the first two half-integer squared kernels:
+Expanding [@def-ch10-even-chebyshev], [@thm-ch10-zero-axiom-chebyshev-shells], and [@thm-ch10-even-char-product-sum] gives the first four integer-spin characters and the first two half-integer squared kernels:
 
 - $E_0(\kappa) = 1$, $E_1(\kappa) = 4\kappa - 1$,
 - $E_2(\kappa) = (4\kappa - 2)(4\kappa - 1) - 1 = 16\kappa^2 - 12\kappa + 1$,
@@ -307,6 +315,12 @@ Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), unde
 Over the common denominator $7$, exact integer addition of the five real $d$-orbital diagonal entries gives $(-2) + 2 + (-4) + 2 + 2 = 0$ along $x$, $(-2) + (-4) + 2 + 2 + 2 = 0$ along $y$, and $4 + 2 + 2 + (-4) + (-4) = 0$ along $z$, establishing `full_orbital_quadrupole` under `Omega.IntRatio.Equivalent`; doubling for double occupation gives `closedShell a` $\equiv 0$ on every axis. Subtracting the doubly occupied orbital diagonal $(+\frac{4}{7}, +\frac{4}{7}, -\frac{8}{7})$ yields $(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7})$, whose numerators sum to $(-4) + (-4) + 8 = 0$, certifying zero trace. The full proof is checked by the Lean kernel.
 :::
 
+The figure below brings both pillars of the chapter into a single view: on the left, the square-root-free integer-spin Chebyshev character shells $E_0(\kappa), E_1(\kappa), E_2(\kappa), E_3(\kappa)$ across $\kappa \in [0, 1]$ together with their canonical rational landmarks; on the right, the exact rational contrast inside the five-dimensional $j = 2$ shell between the isotropic $5d^{10}$ closed shell and the trace-free $5d^8$ quadrupole diagonal $\bigl(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7}\bigr)$.
+
+::: {.figure src="ch10-chebyshev-spin-shells"}
+**Even-Chebyshev integer spin shells and $5d^{10}$ versus $5d^8$ quadrupole balance.** The left panel plots the integer-coefficient even-Chebyshev character polynomials $E_n(\kappa) = U_{2n}(\sqrt{\kappa})$ over $\kappa \in [0, 1]$ ([@def-ch10-even-chebyshev], [@thm-ch10-zero-axiom-chebyshev-shells]), highlighting the shell-dimension ladder $1, 3, 5, 7$ at $\kappa = 1$ and the three-beat rational node $E_1(\frac{1}{4}) = 0$. The right panel contrasts the axis-by-axis cancellation of the closed $5d^{10}$ shell against the exact trace-free rational quadrupole diagonal $\bigl(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7}\bigr)$ left when $d_{x^2-y^2}$ is vacated in $5d^8$ ([@thm-ch10-zero-axiom-orbital-quadrupole]).
+:::
+
 ::: {.example #ex-ch10-d10-d8-quadrupole-ledger title="Exact Rational Angular Quadrupole Ledger of the Five-Dimensional $j = 2$ Shell"}
 In Cartesian direction cosines $(n_x, n_y, n_z)$, every off-diagonal entry $\langle \widehat{Q}_{ab}\rangle$ ($a \neq b$) vanishes on each real $d$ harmonic (hand derivation), while the diagonal entries $(\langle \widehat{Q}_{xx}\rangle, \langle \widehat{Q}_{yy}\rangle, \langle \widehat{Q}_{zz}\rangle)$ form the exact rational ledger supporting [@thm-ch10-zero-axiom-orbital-quadrupole]:
 
@@ -329,6 +343,12 @@ Two oxidation states now contrast with crystalline precision:
    $$
 
 A single $5d^8$ coordination center is therefore intrinsically strongly anisotropic; only when an unoriented polycrystalline powder is Haar-averaged over the full rotation heap $\mathbb{T}_3$ does the traceless $j = 2$ harmonic average identically to $\langle\mathbf{Q}_{\mathrm{phys}}(5d^8)\rangle_{\mathrm{Haar}} = \mathbf{0}_{3\times 3}$, restoring macroscopic statistical isotropy.
+:::
+
+In the interactive laboratory card below, sweep $\kappa \in [0, 1]$ or jump directly to the canonical rational landmarks to test square-root elimination $E_n(\kappa) = U_{2n}(\sqrt{\kappa})$ and the all-degree integer Clebsch–Gordan fusion product $E_m(\kappa)E_n(\kappa) = \sum_{r=\lvert m-n\rvert}^{m+n} E_r(\kappa)$ ([@thm-ch10-zero-axiom-chebyshev-shells], [@thm-ch10-even-char-product-sum]), then toggle orbital occupations in the $j = 2$ quadrupole panel to audit closed-$5d^{10}$ vanishing against the exact trace-free $5d^8$ diagonal $\bigl(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7}\bigr)$ ([@thm-ch10-zero-axiom-orbital-quadrupole]).
+
+::: {.viz src="dfinite-algebraic-schur-lab" preset="peter-weyl-even-chebyshev" height="520"}
+**Peter–Weyl even-Chebyshev spin shells and quadrupole balance card (`peter-weyl-even-chebyshev`).** Sweep the rational fidelity $\kappa$ across the even-Chebyshev character kernels $E_n(\kappa) = U_{2n}(\sqrt{\kappa})$ and their canonical rational landmarks ([@ex-ch10-spin-character-table]), select any spin pair $(m, n)$ to inspect the exact fusion expansion $\sum_{r=\lvert m-n\rvert}^{m+n} E_r(\kappa)$, and compare closed-$5d^{10}$ isotropy against the trace-free $5d^8$ quadrupole diagonal $\bigl(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7}\bigr)$ in the five-orbital $j = 2$ ledger ([@thm-ch10-zero-axiom-orbital-quadrupole], [@ex-ch10-d10-d8-quadrupole-ledger]).
 :::
 
 One decisive challenge now stares us in the face. Whether we check Peter–Weyl character orthonormality $\langle\chi_j, \chi_{j'}\rangle = \delta_{jj'}$, compute ternary heap convolutions $\mathbb{E}_{\mathbf{x},\mathbf{y}}[\cdots]$, or verify that the rotational Haar average of $\mathbf{Q}_{\mathrm{phys}}(5d^8)$ vanishes, we rely on the **global Haar expectation $\mathbb{E}_{\mathbb{T}_3}[\cdot]$ over the three-sphere**. Classical analysis insists that averaging over a curved sphere requires the $\pi$-laden surface integral $\frac{1}{2\pi^2}\int_{S^3}\cdots\,d\sigma$ and infinite Riemann-sum limits. Does it really? The next chapter reveals the arithmetic miracle of dimension $3$: $\pi^2$ cancels out completely between numerator and denominator, reducing global Haar integration on $S^3$ to a single finite integer-factorial formula.

@@ -297,6 +297,12 @@ $$
 3. **行列式与正定性同步核验**：$\det K = AC - B^2 = 2 \cdot \frac{3}{2} - 1^2 = 2 = \frac{3}{2} \cdot \frac{4}{3} = C \cdot S > 0$。整个正定证书与极小值归约不触碰任何特征值平方根 $\lambda_{\pm} = \frac{7 \pm \sqrt{17}}{4}$，纯以有理分式收官。
 :::
 
+下图将本章两大零公理有理工具并置呈现在同一版面上：左侧描绘黄金二次扩张 `QPhi` 中的斐波那契幂次、交替卡西尼范数 $N(\varphi^n) = (-1)^n$ 与五角切比雪夫闭合 $T_5(\varphi/2) = -1$，右侧描绘有理分块二次型 $2x^2 + 2xy + \frac{3}{2}y^2$ 沿内部变量 $y$ 形成的抛物谷地及其在 $y^* = -\frac{2}{3}x$ 处精确落定的有理舒尔极小值 $S = \frac{4}{3}$。
+
+::: {.figure src="ch12-quadext-schur-valley"}
+**零公理二次扩张 `QPhi` 与有理舒尔补极小值谷地。** 左侧呈现黄金扩张域 `QPhi` 中的有序对斐波那契幂律 $\varphi^{n+1} = F_n + F_{n+1}\varphi$、卡西尼交替范数 $N(\varphi^n) = (-1)^n$ 及无三角函数五角切比雪夫闭合 $T_5(\varphi/2) = -1$（[@thm-ch12-zero-axiom-qphi-fibonacci-pentagon]、[@ex-ch12-quadpoly-ledger]）；右侧呈现分块算例 $A = 2,\; B = 1,\; C = \frac{3}{2}$ 对应的二次型沿内部变量 $y$ 的抛物截面，直观标出唯一消元点 $y^* = -\frac{2}{3}x$ 与谷底舒尔补精确值 $S = \frac{4}{3}$（[@thm-ch12-zero-axiom-lagrange-schur]、[@ex-ch12-schur-worked]）。
+:::
+
 ---
 
 ## 12.4 格拉姆正定分解、等距刚性与迈向第五卷的桥梁 {#sec-ch12-gram-realizability-and-isometry}
@@ -334,6 +340,12 @@ $$
 
 ::: {.remark #rem-ch12-rational-sos-vs-real-shadow title="零公理有理正定代数与经典希尔伯特阴影的双向分工"}
 请特别留意本章七组冻结定理之间的精确层次分工：在零公理内核侧（`OmegaInit` 与 `OmegaMath`，`axioms: []`），[@thm-ch12-zero-axiom-quadpoly-qsqrt2]、[@thm-ch12-zero-axiom-qphi-fibonacci-pentagon] 与 [@thm-ch12-zero-axiom-lagrange-schur] 已经直接以纯有限有序对与 `Omega.FiniteRatio` 算术证成了二次范数乘性、精确求逆、`QSqrt2` 与 `QPhi` 的旋量/贝尔/斐波那契/五角切比雪夫闭合、拉格朗日—格拉姆恒等式、柯西—施瓦茨不等式以及标量舒尔补极小值，全程不触碰实数完备化或特征值求解；而在经典实复希尔伯特阴影侧，[@thm-ch12-lagrange-gram] 与 [@thm-ch12-schur-minimum] 提供对应的实求和与任意有限维复分块矩阵版本，[@thm-ch12-gram-realizability] 与 [@thm-ch12-gram-isometry-extension] 则进一步保证：一旦某套球面特征核或赫克算子的格拉姆正定性被有理证书锁定，它便无条件对应真实的算子平方分解 $Q = O^\dagger O$ 与全局刚性等距。
+:::
+
+在下面的交互实验卡中，读者可以在同一座实验室里切换并联动探索本章全部三组零公理引擎：在 `QSqrt2` 视图中逐拍步进单位 $90^\circ$ 旋量的八拍闭合 $u_{90}^8 = 1$ 并核对零浮点误差的 CHSH 齐雷尔森平方极值 $S_{\mathrm{CHSH}}^2 = 8$（[@thm-ch12-zero-axiom-quadpoly-qsqrt2]）；在 `QPhi` 视图中步进斐波那契幂次 $\varphi^{n+1} = F_n + F_{n+1}\varphi$ 与十拍切比雪夫轨道，见证无三角函数的 $T_5(\varphi/2) = -1$ 闭合（[@thm-ch12-zero-axiom-qphi-fibonacci-pentagon]）；再拖动内部变量 $y$ 与边界参数 $x$ 沿有理舒尔谷地滑动，亲手验证 $y^* = -\frac{2}{3}x$ 处的精确谷底极小值 $S = \frac{4}{3}$（[@thm-ch12-zero-axiom-lagrange-schur]、[@thm-ch12-schur-minimum]）。
+
+::: {.viz src="dfinite-algebraic-schur-lab" preset="quadratic-ext-and-schur" height="520"}
+**零公理二次扩张域与有理舒尔谷地实验卡（`quadratic-ext-and-schur`）。** 交互切换 `QSqrt2` 与 `QPhi` 有序对代数：检验单位 $90^\circ$ 旋量八拍闭合 $u_{90}^8 = 1$ 与 CHSH 平方极值 $S_{\mathrm{CHSH}}^2 = 8$（[@thm-ch12-zero-axiom-quadpoly-qsqrt2]），步进黄金斐波那契幂次与五角切比雪夫闭合 $T_5(\varphi/2) = -1$（[@thm-ch12-zero-axiom-qphi-fibonacci-pentagon]），并在分块二次型 $2x^2 + 2xy + \frac{3}{2}y^2$ 上沿内部变量 $y$ 拖动探针，实时锁定 $y^* = -\frac{2}{3}x$ 处的精确有理舒尔极小值 $S = \frac{4}{3}$（[@thm-ch12-zero-axiom-lagrange-schur]、[@ex-ch12-schur-worked]）。
 :::
 
 至此，第四卷“三维球面有理调和分析”圆满收官。从[第十章](ch10-peter-weyl-rational-spin-shells.md)的彼得—魏尔自旋壳与偶次切比雪夫多项式 $E_n(\kappa)$，到[第十一章](ch11-pi-free-haar-integration.md)彻底消去 $\pi$ 的阶乘哈尔积分与特征核正交归一，再到本章的零公理二次扩张域 `QuadPoly(b, c)` 与有理拉格朗日—舒尔正定证书，我们已经锻造齐全整套非阿贝尔球面谱分析的纯有理武器。在接下来的第五卷（[第十三章](ch13-computable-arithmetic-horizon.md)–[第十五章](ch15-rational-hecke-ramanujan-spectrum.md)）中，我们将把这套武器直指素数算术、赫维茨整四元数自由群 $F_3$ 与无复数赫克—拉马努金有理正定谱隙。

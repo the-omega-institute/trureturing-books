@@ -38,9 +38,11 @@ In finite-dimensional linear observation models, the strict cap on geometric inn
 Let $V$ and $Y$ be finite-dimensional inner-product spaces over $\mathbb{k} \in \{\mathbb{R}, \mathbb{C}\}$, let $T : V \to_{\mathbb{k}} V$ and $C : V \to_{\mathbb{k}} Y$ be linear maps, and write $\mathcal{K}_m := \operatorname{observableKrylov}(T, C, m)$ for the $m$-th observable Krylov subspace. Then:
 
 1. **Strict growth bound**: the cardinality of strict inclusion steps satisfies
+
    $$
    \operatorname{encard}\bigl\{m \in \mathbb{N} \;\big\vert\; \mathcal{K}_m < \mathcal{K}_{m+1}\bigr\} \;\le\; \dim_{\mathbb{k}} V - \dim_{\mathbb{k}} \operatorname{ran}(C);
    $$
+
 2. **Permanent stability**: if $\mathcal{K}_m = \mathcal{K}_{m+1}$ at some stage $m \in \mathbb{N}$, then $\mathcal{K}_{m+r} = \mathcal{K}_m$ for every $r \in \mathbb{N}$.
 :::
 
@@ -92,6 +94,12 @@ $$
 
 Scanning memory capacity $M = \dim\mathcal{W}_M$ across its three regimes (`MODEL`) separates: $M = 0$ (massless photon limit, $\kappa_{\mathrm{time}} = 0, \kappa_{\mathrm{space}} = 1$, proper time frozen), $1 \le M < M_\Omega$ (massive finite observers sharing time and space, where spatial rest spends the full budget refreshing internal identity as rest energy), and $M = M_\Omega$ (the full totality with $\mathcal{W}_{M_\Omega}^\perp = \{0\}$, $\kappa_{\mathrm{time}} = 1, \kappa_{\mathrm{space}} = 0$, leaving no exterior space).
 
+The static figure below summarizes this static-canvas and memory-window split: an immutable totality queried without background mutation ([@thm-om-ch17-reversible-qram]) splits each unit comparison step orthogonally across the finite memory window $\mathcal{W}_M$ and its complement $\mathcal{W}_M^\perp$ via $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$, simultaneously rationalizing circular splits and hyperbolic Lorentz factors along $u \in \mathbb{Q} \cap [0, 1)$.
+
+::: {.figure src="ch17-observer-memory-split"}
+**Finite memory-window orthogonal split and rational spacetime transposition on the static holographic canvas.** The diagram depicts the lossless orthogonal partition $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$ across the memory subspace $\mathcal{W}_M$ and its orthogonal complement $\mathcal{W}_M^\perp$ (transposing $\Delta\tau^2 + \Delta x^2 = \Delta t^2$ directly into the Minkowski minus sign $\Delta\tau^2 = \Delta t^2 - \Delta x^2$), highlights the exact rational benchmark at $u = \frac{1}{3}$ giving $\kappa_{\mathrm{time}} = \frac{16}{25}$, $\kappa_{\mathrm{space}} = \frac{9}{25}$, and $(\gamma, \gamma v) = (\frac{5}{4}, \frac{3}{4})$ (`hand derivation`), and contrasts the three capacity regimes $M = 0$, $1 \le M < M_\Omega$, and $M = M_\Omega$ (`MODEL`, with static zero-mutation query access anchored by [@thm-om-ch17-reversible-qram]).
+:::
+
 ## 17.3 Single-Gradient Unification of Physics and Geodesic Intelligence {#sec-om-ch17-single-gradient-unification}
 
 On the rational ternion sphere, substituting $\kappa = \frac{1 + \cos\Delta\theta}{2}$ and rational spread $s := 1 - \kappa \in \mathbb{Q}\cap[0,1]$ converts the trigonometric versine step action $1 - \cos\Delta\theta$ identically into the **cumulative rational spread action**:
@@ -104,13 +112,17 @@ Explicitly labeled as an integrative **`MODEL`** synthesis, minimizing $\mathcal
 
 1. **Geodesic fall and inertial motion**: convexity forces free steps across a fixed turn to take equal rational fidelities $\kappa_1 = \dots = \kappa_N$ following the origin-free heap recurrence $x_{t+1} = [x_t, x_{t-1}, x_t]$; in static Schwarzschild spacetime, radial gravitational acceleration $\frac{d^2 x^i}{d\tau^2} = \frac{1}{2}g^{ij}\partial_j g_{00}(c\,dt/d\tau)^2$ is literally the spatial gradient of the temporal metric budget $g_{00}$, matching the $\mathcal{W}_M^\perp$ projection of $\nabla\kappa$.
 2. **Rational Weinberg trace ratio $3/8$**: on one complete chiral Weyl fermion generation $\mathcal{H}_{\mathrm{Weyl}}$ under a uniform unitary-invariant arc-trace stiffness postulate (`MODEL`; the ratio depends on complete-generation content and equal trace weights), color count $N_c = 3$ with quark charges $(+\frac{2}{3}, -\frac{1}{3})$ yields exact rational traces $\operatorname{Tr}_{\mathrm{Weyl}}(T_3^2) = 2$ and $\operatorname{Tr}_{\mathrm{Weyl}}(Q^2) = 2\bigl(1 + 3(\frac{4}{9} + \frac{1}{9})\bigr) = \frac{16}{3}$ (`hand derivation`), locking the bare mixing ratio to
+
    $$
    \sin^2\theta_W(\mu_{\mathrm{arc}}) \;=\; \frac{\operatorname{Tr}_{\mathrm{Weyl}}(T_3^2)}{\operatorname{Tr}_{\mathrm{Weyl}}(Q^2)} \;=\; \frac{2}{16/3} \;=\; \frac{3}{8}.
    $$
+
 3. **$N \ge 5$ overconstraint tension and geometric gravity**: in three dimensions, $N \ge 3$ points carry $\binom{N}{2}$ pairwise constraints against $3N - 6$ rigid Euclidean degrees of freedom, yielding the exact combinatorial overconstraint excess (`hand derivation`):
+
    $$
    \Delta E(N) \;=\; \binom{N}{2} - (3N - 6) \;=\; \frac{(N - 3)(N - 4)}{2}.
    $$
+
    Up to a tetrahedron ($N \le 4$), $\Delta E(N) = 0$ closes flatly with zero tension; beginning at $N = 5$, $\Delta E(5) = 1$, $\Delta E(6) = 3, \dots > 0$ enforces irreducible geometric tension interpreted as the discrete seed of gravitational curvature (`MODEL`).
 4. **Quantum five postulates in rational projective coordinates**: pure states live on homogeneous projective ternion rays $\mathbb{QP}^3$ (lifted to `PythSpinor` for $720^\circ$ spinor sign memory), Born weights are radical-free ratios $\kappa(p, q) = \frac{\langle p, q\rangle^2}{\|p\|^2\|q\|^2} \in \mathbb{Q}\cap[0,1]$, unitary evolution is norm-preserving integer spinor multiplication, composite systems juxtapose multi-field tensor factors, and record stabilization corresponds to idempotent pinching once $1 - \kappa \le \varepsilon_{\mathrm{self}}$.
 5. **Normalization-free Ternion Field Transformer (TFT)**: replacing floating-point `Softmax` exponentials and square-root `LayerNorm` with exact rational fidelity scoring $\kappa(q_i, k_j) \in \mathbb{Q}\cap[0,1]$ and norm-preserving Cayley/heap rotor transport on $(\mathbb{QP}^3)^K$, where longitudinal `KV-Cache` slots and transverse rotor channels trade off along the exact memory split $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$ while forward inference follows minimal cumulative spread $\mathcal{S}_\Omega$.
@@ -125,6 +137,12 @@ We verify all three rational benchmark computations by hand (`hand derivation`):
 
 ::: {.remark #rem-om-ch17-epistemic-and-open-boundaries title="Epistemic Stratification and Open Problem Boundaries"}
 This chapter maintains strict separation across evidence tiers: [@thm-om-ch17-krylov-growth-and-stability] and [@thm-om-ch17-reversible-qram] are frozen **`LEAN ✓`** declarations on `trureturing@dev`; orthogonal transposition, rational Lorentz parametrization, $\Delta E(N)$, and the generation trace ratio $\frac{3}{8}$ are exact **`hand derivations`**; the port-free observer pentad $\mathfrak{O} \equiv \mathcal{U}_\Omega$, static-canvas gravity reading (connecting to the Wheeler–DeWitt constraint $\hat{\mathcal{H}}\lvert\mathbf{\Psi}\rangle = 0$, B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967; D. N. Page & W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983), uniform trace-stiffness postulate, and TFT architecture are **`MODEL`**. Deriving the full $3+1$-dimensional Lorentzian Einstein field equations and black-hole horizon unitarity from discrete ternary comparisons and finite memory splits remains explicitly **`OPEN`**.
+:::
+
+Explore all four rational quantities of the chapter together in the interactive lab card below: sweep the rational half-tangent parameter $u$ to track $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$ and $\gamma^2 - (\gamma v)^2 \equiv 1$, inspect the exact one-generation Weinberg trace ratio $\frac{3}{8}$, vary node count $N$ to watch the overconstraint excess $\Delta E(N) = \frac{(N-3)(N-4)}{2}$ ignite at $N = 5$, and step through the monotone rational growth of structural time $\tau$.
+
+::: {.viz src="adelic-arithmetic-observer-lab" preset="static-canvas-memory-split" height="520"}
+**Static-canvas memory split and single-gradient unification lab card (`static-canvas-memory-split`).** Sweep the rational half-tangent parameter $u \in \mathbb{Q} \cap [0, 1)$ to verify the orthogonal memory split $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$ and radical-free Lorentz identity $\gamma^2 - (\gamma v)^2 \equiv 1$ live, alongside the exact fermion trace ratio $\sin^2\theta_W = \frac{3}{8}$, the three-dimensional overconstraint excess $\Delta E(N) = \frac{(N-3)(N-4)}{2}$ jumping from $0$ to $1$ at $N = 5$, and the three-beat monotone trajectory of structural time $\tau = 0 \to \frac{3}{4} \to \frac{3}{2}$ ([@def-om-ch17-observer-pentad], [@ex-om-ch17-quantitative-audit]; orthogonal algebra and counts are exact `hand derivations`, the physical and observer synthesis is marked `MODEL`, and finite Krylov saturation plus zero-mutation routing are anchored by [@thm-om-ch17-krylov-growth-and-stability] and [@thm-om-ch17-reversible-qram]).
 :::
 
 With all six volumes' mathematical objects, computational language, and observer framework assembled, the final chapter submits the entire edifice to its strictest and most honest judge: the Lean 4 empty-kernel axiom auditor and the four-mode six-volume interactive workbench.

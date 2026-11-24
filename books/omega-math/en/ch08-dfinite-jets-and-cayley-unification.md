@@ -2,7 +2,7 @@
 
 [Chapter 7](ch07-second-order-jet-calculus.md) showed that inside the second-order nilpotent jet ring $\mathcal{J}_2(\mathbb{Q}) = \mathbb{Q}[\eta]/(\eta^3)$, the base state, connection derivative, and curvature of any rational function can be extracted exactly by finite rational arithmetic with no $\epsilon\text{-}\delta$ limits. Yet mathematics and physics abound with classical "transcendental functions"—exponential, sine, cosine, and arctangent—which textbooks routinely invoke to argue that the real continuum $\mathbb{R}$, infinite series, and constants such as $\pi$ and $e$ are indispensable.
 
-This chapter overturns that assumption. Following R. P. Stanley's algebraic framework for differentiably finite (D-finite) power series (1980), we generalize second-order jets to the arbitrary-order rational jet ring $J_N(\mathbb{Q}) = \mathbb{Q}[\eta]/(\eta^{N+1})$ and the unified rational coefficient stream `JetSeq`. At any requested finite order $N \in \mathbb{N}$, the exponential, trigonometric, and arctangent functions become finite rational polynomials uniquely determined by linear differential recurrences, whose universal Leibniz rule, exponential addition and inversion laws, Pythagorean identity, and arctangent ODE are all kernel-verified with zero axioms. Inside `OmegaInit` and `OmegaMath`, we further certify the **unit norm and coupled ODE uniqueness of the rational Cayley circle**—locking in **Cayley–trigonometry algebraic unification**—and certify a **purely rational Machin tangent chain** that pairs with $\pi$-free alternating brackets shrinking below $1.57 \times 10^{-25}$ without ever postulating $\pi$.
+This chapter overturns that assumption. Following R. P. Stanley's algebraic framework for differentiably finite (D-finite) power series (1980), we generalize second-order jets to the arbitrary-order rational jet ring $J_N(\mathbb{Q}) = \mathbb{Q}[\eta]/(\eta^{N+1})$ and the unified rational coefficient stream `JetSeq`. At any requested finite order $N \in \mathbb{N}$, the exponential, trigonometric, and arctangent functions become finite rational polynomials uniquely determined by linear differential recurrences, whose universal Leibniz rule, exponential addition and inversion laws, Pythagorean identity, and arctangent ODE are all kernel-verified with zero axioms. Inside `OmegaInit` and `OmegaMath`, we further certify the **unit norm and coupled ODE uniqueness of the rational Cayley circle**, the **universal formal composition chain rule**, and **Cayley–trigonometry algebraic unification** at every truncation order $N \in \mathbb{N}$, together with a **purely rational Machin tangent chain** that pairs with $\pi$-free alternating brackets shrinking below $1.57 \times 10^{-25}$ without ever postulating $\pi$.
 
 ## 8.1 Arbitrary-Order D-Finite Jet Rings and Fundamental Algebraic Laws {#sec-ch08-dfinite-jet-ring}
 
@@ -132,20 +132,37 @@ In `Omega.JetSeq`, let `CayleyCos` denote $1 + 2\sum_{k \ge 1}(-1)^k \eta^{2k}$ 
 The coupled ODEs are checked directly at each degree by alternating-sign cancellation when multiplying `D(CayleyCos)` and `D(CayleySin)` by $1 + \eta^2$. For uniqueness, strong induction on degree $k$ starts from $f_0 \equiv 1 = \mathrm{CayleyCos}_0$ and $g_0 \equiv 0 = \mathrm{CayleySin}_0$. Assuming agreement through degree $k$ ($k < N$), equating degree-$k$ coefficients gives $(k+1) f_{k+1} + (k-1) f_{k-1} \equiv -2 g_k$ and $(k+1) g_{k+1} + (k-1) g_{k-1} \equiv 2 f_k$ (with the $k-1$ term absent at $k = 0$). Since the lower-degree terms match `CayleyCos` and `CayleySin` and $k + 1 \ge 1$ is invertible in $\mathbb{Q}$, we obtain $f_{k+1} \equiv \mathrm{CayleyCos}_{k+1}$ and $g_{k+1} \equiv \mathrm{CayleySin}_{k+1}$, closing the induction at $N$. The full proof is checked by the Lean kernel.
 :::
 
-A single formal composition step (manual derivation) now combines [@thm-ch08-dfinite-calculus-laws] with [@thm-ch08-cayley-ode-uniqueness] to deduce **Cayley–trigonometry algebraic unification**. Because $2\,\mathrm{Atan}_N(\eta)$ has zero constant term, the compositions $F(\eta) := \mathrm{Cos}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr)$ and $G(\eta) := \mathrm{Sin}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr)$ are well-defined in $J_N(\mathbb{Q})$ with initial data $F(0) = 1$, $G(0) = 0$. Applying the formal chain rule together with the trigonometric derivatives and arctangent ODE $(1 + \eta^2)\mathrm{Atan}'_N \equiv 1 \pmod{\eta^N}$ of [@thm-ch08-dfinite-calculus-laws] yields, for every $k < N$,
+We now place formal series composition and the universal formal chain rule directly inside the zero-axiom `OmegaInit` and `OmegaMath` kernel (`axioms: []`): for any coefficientwise finite streams $f, g \in \mathrm{JetSeq}$ (every coefficient satisfying `IntRatio.Finite`) with vanishing inner constant term ($g_0 \equiv 0$), defining $(\mathrm{compose}\;f\;g)_n := \bigl(\sum_{k=0}^{n} f_k \cdot g^k\bigr)_n$ locks in both the universal formal chain rule and **Cayley–trigonometry algebraic unification** at every truncation degree $N \in \mathbb{N}$:
 
-$$
-(1 + \eta^2) F' \;\equiv\; -2\,\mathrm{Sin}_N\bigl(2\,\mathrm{Atan}_N\bigr)\,(1+\eta^2)\mathrm{Atan}'_N \;\equiv\; -2G, \qquad (1 + \eta^2) G' \;\equiv\; 2F \pmod{\eta^N}.
-$$
+::: {.theorem #thm-ch08-cayley-composition-unification title="Zero-axiom formal chain rule and arbitrary-order Cayley–trigonometry unification" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.deriv_compose_equivAt D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.cos_two_atan_eq_cayley D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.sin_two_atan_eq_cayley"}
+On the rational coefficient stream carrier `Omega.JetSeq` in the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), write $g^k := \mathrm{power}\;g\;k$ for the $k$-th Cauchy power and $(\mathrm{compose}\;f\;g)_n := \bigl(\sum_{k=0}^{n} f_k \cdot g^k\bigr)_n$ for formal series composition. The following three zero-axiom identities hold for **every truncation degree $N \in \mathbb{N}$**:
 
-Invoking [@thm-ch08-cayley-ode-uniqueness] immediately locks in **Cayley–trigonometry algebraic unification** for all $N \ge 1$:
+1. **Universal formal chain rule at every degree $N$** ([`deriv_compose_equivAt`](lean:D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.deriv_compose_equivAt)): for every $N \in \mathbb{N}$ and all coefficientwise finite streams $f, g \in \mathrm{JetSeq}$ (`Finite f`, `Finite g`) satisfying $g_0 \equiv 0$, coefficients agree through degree $N$ inclusive:
 
-$$
-\mathrm{Cos}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr) \;\equiv\; \frac{1 - \eta^2}{1 + \eta^2} \pmod{\eta^{N+1}}, \qquad
-\mathrm{Sin}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr) \;\equiv\; \frac{2\eta}{1 + \eta^2} \pmod{\eta^{N+1}}.
-$$
+   $$
+   D(\mathrm{compose}\;f\;g) \;\equiv_N\; \bigl(\mathrm{compose}\;(Df)\;g\bigr) \cdot Dg.
+   $$
 
-The classical hierarchy is thereby inverted: **rather than the Cayley map approximating transcendental trigonometry, infinite trigonometric series merely re-expand what was already a single closed-form rational Cayley quotient.** The next numerical audit illustrates the gap directly.
+2. **Cayley–cosine algebraic unification** ([`cos_two_atan_eq_cayley`](lean:D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.cos_two_atan_eq_cayley)): for every $N \in \mathbb{N}$, through degree $N$ inclusive,
+
+   $$
+   \mathrm{compose}\;\mathrm{Cos}\;(2\,\mathrm{Atan}) \;\equiv_N\; \mathrm{CayleyCos}.
+   $$
+
+3. **Cayley–sine algebraic unification** ([`sin_two_atan_eq_cayley`](lean:D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.sin_two_atan_eq_cayley)): for every $N \in \mathbb{N}$, through degree $N$ inclusive,
+
+   $$
+   \mathrm{compose}\;\mathrm{Sin}\;(2\,\mathrm{Atan}) \;\equiv_N\; \mathrm{CayleySin}.
+   $$
+:::
+
+::: {.proof}
+For the formal chain rule, because $g$ is coefficientwise finite with $g_0 \equiv 0$, induction on $k$ proves that every coefficient of $g^k$ below degree $k$ vanishes ($n < k \implies (g^k)_n \equiv 0$). Consequently, the finite partial substitution $\mathrm{partialCompose}\;f\;g\;m = \sum_{k=0}^{m-1} f_k \cdot g^k$ stabilizes at degree $n$ to $(\mathrm{compose}\;f\;g)_n$ for every cutoff $m > n$. Meanwhile, induction on $k$ via the Leibniz rule ([@thm-ch08-dfinite-calculus-laws]) yields the power derivative law $D(g^{k+1}) \equiv (k+1)\,g^k \cdot Dg$, and summing termwise gives $D(\mathrm{partialCompose}\;f\;g\;(m+1)) \equiv \mathrm{partialCompose}\;(Df)\;g\;m \cdot Dg$. Evaluating at any degree $n \le N$ and invoking cutoff stabilization establishes $(D(\mathrm{compose}\;f\;g))_n \equiv \bigl(\mathrm{compose}\;(Df)\;g \cdot Dg\bigr)_n$ for all $n \le N$.
+
+For Cayley–trigonometry unification, set $g := 2\,\mathrm{Atan}$. Then $g$ is coefficientwise finite with $g_0 \equiv 0$, and scaling the arctangent ODE of [@thm-ch08-dfinite-calculus-laws] by $2$ gives $(1 + \eta^2)\cdot Dg \equiv 2$. Applying the chain rule to any coefficientwise finite outer stream $f$ and multiplying by $1 + \eta^2$ yields $(1 + \eta^2)\cdot D(\mathrm{compose}\;f\;g) \equiv 2\cdot\mathrm{compose}\;(Df)\;g$. Instantiating $f = \mathrm{Cos}$ and $f = \mathrm{Sin}$ with $D(\mathrm{Cos}) \equiv -\mathrm{Sin}$, $D(\mathrm{Sin}) \equiv \mathrm{Cos}$, and constant terms $(\mathrm{compose}\;\mathrm{Cos}\;g)_0 \equiv 1$ and $(\mathrm{compose}\;\mathrm{Sin}\;g)_0 \equiv 0$ verifies every initial-value and coupled-ODE hypothesis of [@thm-ch08-cayley-ode-uniqueness]; invoking `cayley_unique_at` immediately proves both identities for all $N \in \mathbb{N}$. The full proof is checked by the Lean kernel.
+:::
+
+Written in $J_N(\mathbb{Q})$ as $\mathrm{Cos}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr) \equiv \frac{1 - \eta^2}{1 + \eta^2} \pmod{\eta^{N+1}}$ and $\mathrm{Sin}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr) \equiv \frac{2\eta}{1 + \eta^2} \pmod{\eta^{N+1}}$, this zero-axiom identity inverts the classical hierarchy: **rather than the Cayley map approximating transcendental trigonometry, infinite trigonometric series merely re-expand what was already a single closed-form rational Cayley quotient.** The next numerical audit illustrates the gap directly.
 
 ::: {.example #ex-ch08-cayley-half-truncation title="Truncation error table at $\eta = 1/2$ mapping to $(3/5, 4/5)$"}
 At $\eta = \frac{1}{2}$, the untruncated zero-axiom rational Cayley map ([@thm-ch08-cayley-circle-unit], $p = 1, q = 2$) lands directly on the exact Pythagorean rational point $\bigl(\frac{3}{5}, \frac{4}{5}\bigr)$ with zero error. Evaluating instead the canonical degree-$\le N$ polynomial representatives $U_N(\eta)$ and $V_N(\eta)$ of the $J_N(\mathbb{Q})$ congruence at the nonzero point $\eta = \frac{1}{2}$ (evaluation at a nonzero point does not factor through the quotient ideal) produces alternating geometric rational errors across $N = 2, 4, 6, 8, 12$ (manual derivation):
@@ -234,6 +251,12 @@ $$
 
 Purely inside $\mathbb{Q}$, these intervals form a strictly nested rational sequence $L_M < L_{M+1} < U_{M+1} < U_M$: for any observer tolerance $\varepsilon_{\mathrm{self}} = p/q > 0$, finitely many integer multiplications select an index $M$ satisfying $W_M < \varepsilon_{\mathrm{self}}$, **without ever assuming a completed real constant $\pi$**. Only when projecting through the one-way shadow functor $\Pi_{\mathbb{R}}$ into classical real analysis do $\tan(4\arctan\frac{1}{5} - \arctan\frac{1}{239}) = 1$ and $0 < 4\arctan\frac{1}{5} - \arctan\frac{1}{239} < \frac{\pi}{2}$ identify the nested intersection with classical $\pi$.
 
+The figure below juxtaposes both purely rational mechanisms: on the left, the canonical $J_N(\mathbb{Q})$ polynomials at $\eta = \frac{1}{2}$ converge geometrically with factor $-\frac{1}{4}$ toward the exact one-step Cayley point $(\frac{3}{5}, \frac{4}{5})$; on the right, the $\pi$-free rational Machin intervals $[L_M, U_M]$ contract steeply in exact width $W_M$.
+
+::: {.figure src="ch08-dfinite-machin-brackets"}
+**D-finite Cayley truncation convergence and $\pi$-free rational Machin bracket contraction.** The left panel contrasts the exact one-step rational Cayley circle point $(\frac{3}{5}, \frac{4}{5})$ ([@thm-ch08-cayley-circle-unit]) against the alternating geometric error decay with factor $-\frac{1}{4}$ of the canonical $J_N(\mathbb{Q})$ polynomials at $\eta = \frac{1}{2}$ for $N = 2, 4, 6, 8, 12$ ([@thm-ch08-cayley-ode-uniqueness], [@thm-ch08-cayley-composition-unification], [@ex-ch08-cayley-half-truncation]). The right panel tracks the nested rational intervals $[L_M, U_M]$ anchored by the purely rational Machin tangent chain ([@thm-ch08-machin-rational-chain]) and the geometric contraction of their exact width $W_M = \frac{16}{5^{2M+1}(2M+1)} + \frac{4}{239^{2M+1}(2M+1)}$ with order $M$.
+:::
+
 ::: {.example #ex-ch08-machin-width-table title="Exact contraction of the $\pi$-free Machin rational bracket width $W_M$"}
 At $M = 1$, exact fraction arithmetic yields the closed rational interval $[L_1, U_1] = \bigl[\frac{281476}{89625},\; \frac{651864872}{204778785}\bigr]$ (endpoints rounded to six decimal places: $3.140597$ and $3.183264$), with exact width $W_1 = \frac{218431204}{5119469625} \approx 4.266676 \times 10^{-2}$. As $M$ increases, $W_M$ contracts by roughly a factor of $25^{-1}$ per step, reaching $1.57 \times 10^{-25}$ at $M = 17$ (manual derivation and exact rational arithmetic):
 
@@ -253,5 +276,11 @@ Even at $M = 17$, every computation remains finite integer-numerator and integer
 ## 8.4 From Local Algebraic Jets to Global Subdivision-Free Integration {#sec-ch08-bridge-to-ch09}
 
 Across Chapters 7 and 8, the differential half of calculus has been rebuilt entirely over $\mathbb{Q}$: the second-order jet ring $\mathcal{J}_2(\mathbb{Q})$ locks the `{0 · 1/2 · 1}` synchronous readout of state, connection, and curvature, while the arbitrary-order D-finite ring $J_N(\mathbb{Q})$ reveals exponential, trigonometric, and arctangent series—and even $\pi$-brackets—as finite rational recurrences unified with the Cayley circle.
+
+In the interactive laboratory card below, step through truncation orders $N = 2, 4, \dots, 12$ and Machin bracket orders $M$ directly: watch the canonical polynomials $U_N(\frac{1}{2})$ and $V_N(\frac{1}{2})$ close in on the exact one-step rational Cayley target $\bigl(\frac{3}{5}, \frac{4}{5}\bigr)$ down to exact fractional errors $\bigl(+\frac{1}{10240}, -\frac{1}{5120}\bigr)$, trace the purely rational Machin tangent chain $\frac{1}{5} \mapsto \frac{5}{12} \mapsto \frac{120}{119} \mapsto \frac{28561}{28561} = 1$, and observe the $\pi$-free bracket width $W_M$ contract by roughly a factor of $25^{-1}$ per order.
+
+::: {.viz src="dfinite-algebraic-schur-lab" preset="dfinite-cayley-machin" height="520"}
+**D-finite Cayley unification and $\pi$-free Machin bracket card (`dfinite-cayley-machin`).** Sweep the truncation order $N = 2 \dots 12$ at $\eta = \frac{1}{2} \mapsto \bigl(\frac{3}{5}, \frac{4}{5}\bigr)$ to compare the exact one-step rational Cayley ratio against the $J_N(\mathbb{Q})$ truncation residuals ([@thm-ch08-dfinite-calculus-laws], [@thm-ch08-cayley-ode-uniqueness], [@thm-ch08-cayley-composition-unification]), and advance the Machin order $M$ to follow the rational tangent chain ([@thm-ch08-machin-rational-chain]) alongside the shrinking width $W_M = U_M - L_M$ of the nested brackets $[L_M, U_M]$.
+:::
 
 The global half remains. If local differentiation no longer leans on flat tangent lines, can **integration, Stokes' theorem, and smooth manifolds themselves** likewise shed infinite Riemann subdivisions, flat tangent plates $T_p M \cong \mathbb{R}^n$, and non-analytic $C^\infty$ bump functions? [Chapter 9](ch09-telescoping-stokes-and-arc-manifold.md) completes Volume III by answering affirmatively through telescoping heap integrals, Choice-free simplicial cone homotopy, and the second-order osculating ternion-sphere manifold $\mathcal{M}_\Omega$.

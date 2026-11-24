@@ -162,4 +162,10 @@ class OmegaSpace (M : Type) where
 | **几何奇点处理** | 抽象无坐标，边界稍疏即崩溃 | 依赖实流形图册、无穷极限滤子与商集 | 齐次规范整数载体全域分母恒正，零奇点 |
 :::
 
+下图将上述三条形式化路线的逻辑依赖与母公理 `AXIOM-Ω` 的三条法则合画在一张结构总览中，清晰标出裸 CIC 零公理地板与经典公理栈及自定义 `axiom` 陷阱之间的分界。
+
+::: {.figure src="ch01-axiom-omega-cic"}
+**三条形式化路线与母公理 `AXIOM-Ω` 三大法则的逻辑分层对照。** 图中并列呈现裸 CIC 加 `OmegaMath` 零公理构造栈（公理闭包 $\varnothing$，全原生可执行）、传统 `Mathlib.Real` 经典栈（依赖三大公理 `{propext, Classical.choice, Quot.sound}`）与硬写自定义 `axiom` 的逻辑爆炸陷阱（漏排零边界即可导出 `False`），并示意可计算类型类 `class OmegaSpace` 如何承载法则 I（无源求同消去与三元结合）、法则 II（双侧不变与有理格拉姆半正定）及法则 III（极小非对易自锁）；依据见 [@def-ch01-zero-axiom-core]、[@def-ch01-axiom-omega] 与 [@rem-ch01-three-route-comparison]。
+:::
+
 逻辑地板与类型类契约已经就位。要亲手造出第一枚满足这些法则的零公理整数载体，我们不必一步跳进三维非阿贝尔空间；让我们先在最透明的一维舞台上动手——废除开口的实数轴 $\mathbb{R}$，把齐次整数射影线 $\mathbb{QP}^1$ 弯成一个没有 $\infty$ 裂口的精确有理闭环。

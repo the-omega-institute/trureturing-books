@@ -188,6 +188,12 @@ $$
 每一项渐近分数都由 [@thm-ch13-cf-convergent-coprime] 自动保证互素。再核对 [@thm-ch13-convergents-length-log] 的对数长度界：因 $2^4 = 16 \le 21 < 32 = 2^5$，有 $\lfloor\log_2 21\rfloor = 4$，上界为 $2 \times 4 + 1 = 9$，确满足 $7 \le 9$；同时每两步的分母和清晰印证了折半机制：$8 + 13 = 21 \le 21$、$3 + 5 = 8 \le 8$。
 :::
 
+下面的静态图把本章的三根零公理算术支柱并置在同一幅视野之中：左侧展示从空表一路推进至 $30031 = 59 \times 509$ 的欧几里得素数逃逸链（[@thm-ch13-euclid-prime-escape]、[@ex-ch13-euclid-escape-chain]），中栏刻画斐波那契分数 $34/21$ 的欧拉—沃利斯交替行列式与既约夹逼（[@thm-ch13-cf-convergent-determinant]、[@thm-ch13-cf-convergent-coprime]、[@ex-ch13-fibonacci-convergents]），右侧则预告第 13.5 节的四分深度整数预算 $70 < 128$（[@thm-ch13-omega-quarter-depth-integer]、[@ex-ch13-quarter-depth-worked]）。
+
+::: {.figure src="ch13-euclid-cf-depth"}
+**零公理算术地平线的三根有限支柱：素数逃逸、有限连分数与四分深度预算。** 图中依次呈现有限素数表的欧几里得逃逸见证 $N_S = 1 + \prod S$ 及其在 $30031 = 59 \times 509$ 处的首次合数分裂（[@thm-ch13-euclid-prime-escape]）、有理数 $34/21$ 沿欧拉—沃利斯递推保持单位交替行列式 $p_{n+1}q_n - p_n q_{n+1} = (-1)^n$ 与自动互素性的七阶渐近链（[@thm-ch13-cf-convergent-determinant]、[@thm-ch13-cf-convergent-coprime]），以及主界 $7/2$ 与容差 $1/10$ 在深度 $N = 2$ 下锁死精确整数不等式 $70 < 2 \cdot 4^3 = 128$ 的无极限衰减门槛（[@thm-ch13-omega-quarter-depth-integer]）。
+:::
+
 ## 13.4 可判定幺半群中的可执行素因子剥离
 
 有限算术构造的威力远不止于有理数约分。当我们已知某个离散对称算子或旋转元素 $x$ 在可判定幺半群 $G$ 中满足回归关系 $x^m = 1$（$m > 0$），却想知道它的**精确最小周期（阶）** $\operatorname{orderOf}(x)$ 时，根本不需要穷举 $1, 2, \dots, m$ 全部指数——只要手头有一份涵盖 $m$ 全部素因子的有限列表 $P$，对列表中每个因子 $p$ 反复检验“删去一个 $p$ 后是否仍满足 $x^{n/p} = 1$”，便能在有限次幂检验后分毫不差地剥离出精确阶！
@@ -298,6 +304,12 @@ $$
 
 ::: {.remark #rem-ch13-zero-axiom-horizon title="零公理整数核心与经典实数影子的架构分层"}
 回头纵览本章全部十条冻结定理，一条极其清晰的公理边界跃然纸上：裴蜀恒等式（[@thm-ch13-bezout-identity]）、欧几里得素数逃逸（[@thm-ch13-euclid-prime-escape]）、欧拉—沃利斯渐近行列式（[@thm-ch13-cf-convergent-determinant]）、连分数渐近互素性（[@thm-ch13-cf-convergent-coprime]）以及四分深度预算的整数半部（[@thm-ch13-omega-quarter-depth-integer]），均已在严格隔离的 `OmegaInit` 与 `OmegaMath` 内核中以**字面零公理（`axioms: []`）**完成形式化冻结，全程不触碰经典选择公理、商类型公理或实数完备化。与此同时，[@thm-ch13-reduced-den]、[@thm-ch13-convergents-length-log]、[@thm-ch13-strip-factors-correct] 以及经典层的四分深度对偶（[@thm-ch13-quarter-depth-integer] 与 [@thm-ch13-quarter-depth-real]）构成了面向 `Mathlib` 与经典韦伊—布尔诺尔（Weil–Burnol）实分析的第二层单向阴影接口——这一“零公理有理内核驱动、经典连续统作单向影子”的分层模式，将在[第十八章](ch18-zero-axiom-kernel-and-shadow-bridge.md)升华为全书的终极审计架构。
+:::
+
+在迈入阿代尔乘积闭环之前，读者可直接在下方的交互实验卡中逐拍检验这三套有限整数构造：从任意前缀素数表触发 $30031 = 59 \times 509$ 的逃逸搜索，逐步展开 $34/21$ 的欧拉—沃利斯交替行列式，并即时调节有理主界与容差核验 $70 < 128$ 的四分深度门槛。
+
+::: {.viz src="adelic-arithmetic-observer-lab" preset="euclid-cf-quarter-depth" height="520"}
+**素数逃逸、有限连分数与四分深度预算实验卡（`euclid-cf-quarter-depth`）。** 交互步进检验有限素数表见证 $N_S = 1 + \prod S$ 及 $30031 = 59 \times 509$ 的有界最小素因子捕获（[@thm-ch13-euclid-prime-escape]）、有理数 $34/21$ 的欧拉—沃利斯渐近分数与交替单位行列式 $\pm 1$（[@thm-ch13-cf-convergent-determinant]、[@thm-ch13-cf-convergent-coprime]），以及主界 $c/d = 7/2$、容差 $p/q = 1/10$ 在深度 $N = 2$ 下满足 $c q = 70 < (d p)\cdot 4^{N+1} = 128$ 的零公理整数预算与无极限实数传递（[@thm-ch13-omega-quarter-depth-integer]、[@thm-ch13-quarter-depth-real]）。
 :::
 
 既然有限算术已经证明素数必在旧周期的共同盲区中源源不断地按需诞生，下一个核心追问自然浮现：**在有理数域的全体度量通道中，平直尺度上的膨胀与每一颗素数通道上的收缩如何精确闭合？而当素数走出标量整数、裂变为三维球面上的非对易整旋子时，又会编织出怎样一座自由群迷宫？** 这正是[第十四章](ch14-adelic-closure-and-hurwitz-primes.md)的主题。

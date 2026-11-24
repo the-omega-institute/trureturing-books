@@ -157,6 +157,12 @@ $$
 
 回到有限有序完全单纯形 $K_n = \{0, \dots, n-1\}$（$n \ge 4$）上的交错有理上链空间 $C^j(K_n; \mathbb{Q})$，由 [@thm-ch09-cone-homotopy-exactness] 的二阶拆分 $F = \delta_1(H_2 0\, F) + H_3 0\,(\delta_2 F)$ 还可直接读出精确秩与零第二贝蒂数（手工推导）：限制到含顶点 $0$ 的三角形诱导同构 $\ker\delta_2 = \operatorname{im}\delta_1 \cong \mathbb{Q}^{\binom{n-1}{2}}$，故 $\operatorname{rank}\delta_1 = \binom{n-1}{2}$、$\operatorname{rank}\delta_2 = \binom{n-1}{3}$ 且 $\beta_2(K_n) = 0$。
 
+下图直观并置了这两套无细分代数骨架：左侧展示四顶点双面元粗网格中共享内边正反相消（流群法则 I $[\mathbf{y}, \mathbf{x}, \mathbf{x}] = \mathbf{y}$）与锚定剥壳乘积，右侧展示由显式基点 $b$ 发起的顶点锥同伦算子 $e = H_2 b\, F$ 如何将任意闭 $2$-上链（$\delta_2 F = 0$）无选择公理地拉回为边势 $1$-上链。
+
+::: {.figure src="ch09-coarse-stokes-cone"}
+**粗网格内边伸缩相消与无选择公理顶点锥同伦。** 左侧呈现四顶点双面元圆盘（[@ex-ch09-coarse-two-plaquette-stokes]）上内部对角线 $(1, 3)$ 正反遍历相消与有限链端点伸缩（[@thm-ch09-chain-telescope-and-nilpotency]），使粗网格面和乐零余项闭合为外边界环流；右侧呈现以显式基点 $b$ 为锥顶的单纯形锥同伦算子 $e(x, y) = (H_2 b\, F)(x, y) = F(b, x, y)$（[@def-ch09-cone-homotopy]），直观展现闭 $2$-上链经 $\delta_1(H_2 b\, F) = F$ 构造性还原为精确边势（[@thm-ch09-cone-homotopy-exactness]）。
+:::
+
 而在不预先指定基点 $b$、仅假定有限非空顶点集 `[Fintype V]`、`[Nonempty V]` 的一般情形下，上述正合性判据及其面向**非闭合上链**的定量缺陷计数双侧界，已由所钉内核的另一条冻结定理严格验证：
 
 ::: {.theorem #thm-ch09-simplex-cochain-repair title="完全有序单纯形四面体缺陷计数、最优锚点界与边势正合充要判据" lean="D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"}
@@ -249,5 +255,11 @@ $$
 | **超越函数与 $\pi$** | 无穷收敛级数与先验实常数 $\pi, e$ | 任意阶 D-有限射流 $J_N(\mathbb{Q})$、凯莱统一与无 $\pi$ 马青包络 | 以有理递推与按需有理区间取代超越数 |
 | **积分与斯托克斯** | $h \to 0$ 细网格黎曼和与 $O(h^2)$ 离散余项 | 流群法则 I 伸缩折叠、剥壳面和乐与无选择公理锥同伦 | 任意粗有限网格零余项精确闭合 |
 | **流形基底与粘合** | 一阶平直切板 $T_p M \cong \mathbb{R}^n$ 与 $C^\infty$ 隆起补丁 | 二阶吻合三元球 $\mathbb{T}_3^{(p)}(\mathbb{Q})$、莫比乌斯缝合与零荷螺线管 | 消除常曲率联络补丁与非解析死区 |
+
+在下面的交互实验卡中，读者可以在粗粒度单纯形网格上亲手检验流群法则 I 内边消去 $[\mathbf{y}, \mathbf{x}, \mathbf{x}] = \mathbf{y}$ 与双面元剥壳乘积的零余项闭合，切换显式锥顶基点 `base` 与任意 $2$-上链赋值 $F$，实时构造无选择公理边势 `e = H2(base, F)` 并逐面核对同伦分解 $\delta_1(H_2 b\, F) + H_3 b\,(\delta_2 F) = F$（[@thm-ch09-chain-telescope-and-nilpotency]、[@thm-ch09-cone-homotopy-exactness]）。
+
+::: {.viz src="dfinite-algebraic-schur-lab" preset="simplicial-stokes-cone" height="520"}
+**无细分粗网格斯托克斯与单纯形锥同伦实验卡（`simplicial-stokes-cone`）。** 在粗网格面元与单纯形复形上交互核验流群内边消去 $[\mathbf{y}, \mathbf{x}, \mathbf{x}] = \mathbf{y}$ 及共享内边正反抵消（[@ex-ch09-coarse-two-plaquette-stokes]），并切换显式锥顶基点 `base` 实时生成构造性原势 `e = H2(base, F)`，对照闭 $2$-上链（$\delta_2 F = 0$）时的精确还原 $\delta_1 e = F$ 与非闭情形下的四面体缺陷项 $H_3 b\,(\delta_2 F)$（[@thm-ch09-cone-homotopy-exactness]）。
+:::
 
 既然微积分的局部导数、任意阶射流、粗网格积分与吻合球流形均已在有理三元球 $\mathbb{T}_3(\mathbb{Q}) \cong S^3(\mathbb{Q})$ 上全面落成，下一个自然而必然的问题随之浮现：**如何在这只紧致有理三维球面上展开全域函数与算子？不用复指数 $e^{i\omega t}$、不用 $\pi$、也不用勒贝格实测度，三维球面上的傅里叶分析与谱理论长什么模样？** 这正是第四卷（[第十章](ch10-peter-weyl-rational-spin-shells.md)至[第十二章](ch12-algebraic-extensions-and-schur-positivity.md)）将要展开的壮阔图景——彼得—魏尔有理自旋壳、无 $\pi$ 阶乘哈尔积分与零公理舒尔正定性。
