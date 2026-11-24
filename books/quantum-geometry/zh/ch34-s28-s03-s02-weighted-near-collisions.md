@@ -417,7 +417,7 @@ $$
 \exp\!\left(-\sum_j(1-e^{-d w_j/W})^2\right).
 $$
 由 Stirling 公式，前因子渐近于 $2\pi d$。在 RH 下沿用上文合并重数的 ζ 尾段权重，并取 $d\asymp p\asymp X\log X$。在固定区间 $(X,CX]$ 内，至少有常数倍 $X\log X$ 个不同纵坐标，且各自满足 $w_j\ge1/(2CX)$。这些指标满足 $d w_j/W\gg1/\log T$，因此折减项之和至少为常数倍 $d/(\log T)^2$。另一方面，由 $x\ge0$ 时 $1-e^{-x}\le x$，该和至多为 $d^2 V/W^2=O(d/(\log T)^2)$。在 $d=p$ 时，归一化上界的量级为 $p\exp(-\Theta(p/(\log T)^2))$。而缺失窗口的矩预算即使只取一个网格点，也要求归一化质量至多为 $\exp(-2p\log\log T+O(p))$。仍需估计互斥对中满足频率条件的权重比例。 [Stirling 展开，DLMF §5.11(i)](https://dlmf.nist.gov/5.11.E1)
-[乘积界的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/cf603a81db0f09c9a1b1ff66187901be1a046829/D5/S3/Fourier/Concentration/DisjointSupportOccupationMass.lean#L92)
+[乘积界的 Lean 证明](lean:D5/S3/Fourier/Concentration/DisjointSupportOccupationMass.scaled_disjoint_mass)
 
 
 ## 互斥占用系数的特征标投影
