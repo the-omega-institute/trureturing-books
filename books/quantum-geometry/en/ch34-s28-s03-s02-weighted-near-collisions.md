@@ -342,7 +342,7 @@ $$
 M_p(a-b)\le \binom pd^{\!2}D_{p-d}\,c_d(a)c_d(b).
 $$
 
-Write $R_d(\eta)$ for the sum of $c_d(a)c_d(b)$ over ordered degree-$d$ pairs with disjoint supports and $|\sum_j(a_j-b_j)g_j|\le\eta$. Summing the last bound over these pairs bounds the full mass at residual degree $d$ by $\binom pd^2 D_{p-d}R_d(\eta)$. At $d=0$ this recovers the diagonal. At $d=1$ the required input counts only pairs of distinct ordinates with weights. For the actual ζ tail, $d$ can grow with $p$, and the required bound for $R_d(\eta)$ in that regime remains open. [Shifted factorials in the Bessel series, DLMF 10.25.2](https://dlmf.nist.gov/10.25.E2)
+Write $R_d(\eta)$ for the sum of $c_d(a)c_d(b)$ over ordered degree-$d$ pairs with disjoint supports and $|\sum_j(a_j-b_j)g_j|\le\eta$. Summing the last bound over these pairs bounds the full mass at residual degree $d$ by $\binom pd^2 D_{p-d}R_d(\eta)$. At $d=0$ this recovers the diagonal. At $d=1$ the required input counts weighted pairs of distinct indices. These index pairs have distinct ordinates in the ζ tail when multiplicities are grouped by ordinate. For the actual ζ tail, $d$ can grow with $p$, and the required bound for $R_d(\eta)$ in that regime remains open. [Shifted factorials in the Bessel series, DLMF 10.25.2](https://dlmf.nist.gov/10.25.E2)
 
 ## A finite frequency band forces close sums
 
