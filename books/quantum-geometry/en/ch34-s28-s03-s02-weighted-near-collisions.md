@@ -566,26 +566,24 @@ The last term retains the clipped negative weights. One can take $t\le\max(\{0\}
 
 Modulo four, $c=(1,0,-1,0)$. For $0\le a\le1/2$, the optimizer is $(1+2a,1,1-2a,1)/4$ and the minimum squared mass is $(1+2a^2)/4$. For $1/2\le a\le1$, the optimizer is $(a,(1-a)/2,0,(1-a)/2)$ and the minimum is $a^2+(1-a)^2/2$. The formulas agree at $a=1/2$. This minimum gives a benchmark for the squared-mass coefficient in the exceptional-set bound under one spatial-mode constraint. A full spatial band imposes joint constraints, and the cardinality of the actual ζ-zero exceptional set needs an arithmetic estimate.
 
-### Fourier weight in a short time range
+### The first clipping threshold for two spatial modes
 
-Let $F$ be a nonnegative real function modulo $q$ whose Fourier coefficients are nonnegative real, with $F(0)>0$. By inversion, $\nu(k)=\widehat F(k)/(qF(0))$ is a probability weight. Suppose $F(r\bmod q)\ge a\ge0$ for $|r|\le H$. For $2H<q$, $2K<q$, and $2HK\le q$,
+Take $q\ge5$ and write $c_k=\cos(2\pi k/q)$, $d_k=\cos(4\pi k/q)$, and $s_k=c_k+d_k$. Let $m_q=\min_k s_k$ and set
 $$
-\sum_{|k|\le K}\nu(k\bmod q)
-\le (2K+1)\nu(0)
--\frac{8a}{q^3F(0)}
- \left(\sum_{r=-H}^{H}r^2\right)
- \left(\sum_{k=-K}^{K}k^2\right).
+a_q=-\frac{1}{2m_q},\qquad v_k=\frac{1+2as_k}{q},\qquad L=\frac{1+4a^2}{q}.
 $$
-The zero coefficient minus the real part of the $k$th coefficient sums $F(r)(1-\cos(2\pi rk/q))$ over all residues. Each term is nonnegative, so retain the terms with $|r|\le H$. In the principal interval $[-\pi,\pi]$, the cosine deficit satisfies $1-\cos u\ge2u^2/\pi^2$. Applying it on the full set of integer pairs separates the two sums of squares. Equality holds at $K=0$. The deduction is strictly positive when $a>0$ and $H,K>0$. [Lean proof of the short-time weight bound](lean:D5/S3/Fourier/Concentration/CyclicShortTimeWeight.low_fourier_weight_deficit)
+For $a\ge0$, the vector $v$ has mass one and both real moments equal $a$. Among nonnegative probability weights with both moments at least $a$, the squared mass equals $L$ exactly when the weight is $v$. Equality is attainable exactly for $a\le a_q$. For any real mass-one vector $w$, write $M_j$ for the $j$th real moment. The exact remainder is
+$$
+\sum_k w_k^2-L
+=\sum_k(w_k-v_k)^2+\frac{4a}{q}\bigl(M_1(w)+M_2(w)-2a\bigr).
+$$
+This follows from the orthogonality of the two cosines and expansion of the squares. If $a>a_q$, at least one $v_k<0$. The squared distance at those coordinates gives the positive additional lower bound $\sum_k\max(0,-v_k)^2$ for nonnegative weights. The exact optimum after clipping remains open for general moduli.
 
-For the preceding prefix-pair kernel, $F(r)$ counts pairs having residue difference $r$, so take $a=N-H$. When $N\le q$, $F(0)=N$ and $\nu(0)=N/q$. On a frequency grid of step $d$, mode $k$ corresponds to time $2\pi k/(qd)$. The time range controlled by the explicit formula covers only its corresponding integer modes. The upper bound limits the weight those modes can carry, leaving the rest to the arithmetic estimate.
-
-For a time cutoff $S\ge0$, put $K=\lfloor qdS/(2\pi)\rfloor$ and suppose $2K<q$. The simpler bound $|B_N(k)|\le N$ gives
+The double-angle formula gives $s_k=2(c_k+1/4)^2-9/8$. Since $2c_k$ is a sum of roots of unity, it is an algebraic integer and cannot equal the rational number $-1/2$. Hence $m_q>-9/8$. Round the angle with cosine $-1/4$ to the nearest grid point. The error is at most $\pi/q$, so $m_q+9/8\le 2(\pi/q)^2$. The values $s_k$ have mean zero and mean square one. Averaging $(2-s_k)(s_k-m_q)\ge0$ gives $m_q\le-1/2$. Combining the bounds gives
 $$
-\nu(\{|k|\le K\}\bmod q)\le (2K+1)N/q
-\le N/q+NdS/\pi.
+0<a_q-\frac49\le\frac{16\pi^2}{9q^2}.
 $$
-With $H=\lfloor\eta/d\rfloor$ and $N=2H+1\le q$, we have $Nd\le2\eta+d$. Thus controlling every mode up to time $S$ addresses a vanishing fraction of this weight whenever $N/q\to0$ and $(2\eta+d)S\to0$. For phases $g_\gamma=\gamma/r$, a bound on $\log x$ through a constant times $\log X$ reaches times only through a constant times $r\log X$. At finer resolution the arithmetic estimate must account for modes beyond this time range.
+Thus $4/9$ is a uniform lower bound for the threshold across moduli. The result controls the squared mass of finite weights. The exceptional frequencies for actual high-order ζ-zero harmonics still require an arithmetic estimate.
 
 ### Minimum squared mass for two spatial modes modulo six
 
@@ -622,6 +620,40 @@ For nonnegative probability weights $w$, the condition $M_1(w)+M_2(w)\ge2a$ impl
 
 The vector $v$ also occurs as the normalized Fourier weights of a nonnegative spatial kernel modulo six. The weights are invariant under $k\mapsto-k$. Their third real moment $M_3(v)$ equals zero in the first regime and $2a-1$ in the second. Fourier inversion gives $F(0)=1$, $F(\pm1)=F(\pm2)=a$, and $F(3)=M_3(v)\ge0$. This gives the optimal squared-mass coefficient for this band modulo six. Other moduli require checking the level sets of the combined readout, and the exceptional frequencies of the actual ζ zeros still require an arithmetic estimate.
 
+### Failure of a shared cutoff for two modes
+
+Let $q\ge7$ and write $c_k=\cos(2\pi k/q)$, $d_k=\cos(4\pi k/q)$, $s_k=c_k+d_k$, and $x_+=\max(0,x)$. The squared readout and the zero cutoff give two signed sums:
+
+$$
+\sum_{k\bmod q}(c_k-d_k)s_k^2=\frac q4,\qquad
+\sum_{k\bmod q}(c_k-d_k)(s_k)_+>0.
+$$
+
+The double-angle identity gives $s_k=(2c_k-1)(c_k+1)$ and $c_k-d_k=(1-c_k)(2c_k+1)$. Where $s_k>0$, we have $c_k>1/2$, so every clipped term is nonnegative. At $k=1$, the angle lies in $(0,\pi/3)$, giving $1/2<c_1<1$ and a strictly positive term. Since $s_0=2$, the normalized weights $v_k=(s_k)_+/\sum_i(s_i)_+$ have a positive denominator. At a threshold equal to the average of their moments, the combined readout attains the required sum and the second mode falls below the threshold.
+
+Set $z_k=e^{2\pi i k/q}$ and expand $(c_k-d_k)s_k^2$ in powers of $z_k$, grouping terms by exponent. Both constant terms come from $c_k^2d_k$ and each has coefficient $1/8$. The other exponents have absolute value from $1$ to $6$, so character orthogonality cancels them when summing modulo $q\ge7$. If $c_k-d_k$ summed to zero on every level set of $s_k$, the weighted sum with $s_k^2$ would also vanish. Grouping by exponent and retaining the coefficients follows the step in Alpöge's exponential Dirichlet-series argument that organizes product terms by their summed exponent. [Alpöge's exponential Dirichlet-series proof](https://github.com/the-omega-institute/riemann-hypothesis/blob/c7d25b3bfd7906388bb8eb0774e027a2b756a7b6/src/Development/AbelianVarietyTheory/Proofs/AdelicLatticeProofs/LandauSummableOfExpDirichletSeriesEntire.lean#L84) [Lean proof of the two imbalance formulas](lean:D5/S3/Fourier/Concentration/AggregateCosineBalance.aggregate_cosine_imbalance)
+
+### Fourier weight in a short time range
+
+Let $F$ be a nonnegative real function modulo $q$ whose Fourier coefficients are nonnegative real, with $F(0)>0$. By inversion, $\nu(k)=\widehat F(k)/(qF(0))$ is a probability weight. Suppose $F(r\bmod q)\ge a\ge0$ for $|r|\le H$. For $2H<q$, $2K<q$, and $2HK\le q$,
+$$
+\sum_{|k|\le K}\nu(k\bmod q)
+\le (2K+1)\nu(0)
+-\frac{8a}{q^3F(0)}
+ \left(\sum_{r=-H}^{H}r^2\right)
+ \left(\sum_{k=-K}^{K}k^2\right).
+$$
+The zero coefficient minus the real part of the $k$th coefficient sums $F(r)(1-\cos(2\pi rk/q))$ over all residues. Each term is nonnegative, so retain the terms with $|r|\le H$. In the principal interval $[-\pi,\pi]$, the cosine deficit satisfies $1-\cos u\ge2u^2/\pi^2$. Applying it on the full set of integer pairs separates the two sums of squares. Equality holds at $K=0$. The deduction is strictly positive when $a>0$ and $H,K>0$. [Lean proof of the short-time weight bound](lean:D5/S3/Fourier/Concentration/CyclicShortTimeWeight.low_fourier_weight_deficit)
+
+For the preceding prefix-pair kernel, $F(r)$ counts pairs having residue difference $r$, so take $a=N-H$. When $N\le q$, $F(0)=N$ and $\nu(0)=N/q$. On a frequency grid of step $d$, mode $k$ corresponds to time $2\pi k/(qd)$. The time range controlled by the explicit formula covers only its corresponding integer modes. The upper bound limits the weight those modes can carry, leaving the rest to the arithmetic estimate.
+
+For a time cutoff $S\ge0$, put $K=\lfloor qdS/(2\pi)\rfloor$ and suppose $2K<q$. The simpler bound $|B_N(k)|\le N$ gives
+$$
+\nu(\{|k|\le K\}\bmod q)\le (2K+1)N/q
+\le N/q+NdS/\pi.
+$$
+With $H=\lfloor\eta/d\rfloor$ and $N=2H+1\le q$, we have $Nd\le2\eta+d$. Thus controlling every mode up to time $S$ addresses a vanishing fraction of this weight whenever $N/q\to0$ and $(2\eta+d)S\to0$. For phases $g_\gamma=\gamma/r$, a bound on $\log x$ through a constant times $\log X$ reaches times only through a constant times $r\log X$. At finer resolution the arithmetic estimate must account for modes beyond this time range.
+
 ## Tracking the common occupation degree
 
 For the same residue data, keep the common part of the two degree-$p$ vectors by adding a variable $z$. Put $h=\sum_j\min(m_j,n_j)$, so the residual degree is $p-h$. Let $M_{h,R}$ be the mass with common degree $h$ and signed gap in $R$. Define
@@ -636,19 +668,6 @@ qM_{h,R}=(p!)^2\sum_{k\bmod q}
  [x^py^pz^h]Q_k(x,y,z)\sum_{r\in R}\chi_k(r).
 $$
 At $h=0$ this gives the disjoint formula. At $h=p$, equality of the two total counts forces $m=n$, giving the occupation diagonal if $0\in R$ and zero otherwise. For an intermediate example, with unit weights at residues $0,1$ modulo $11$, degree $p=2$ and $h=1$, the mass at residue $1$ is $4$. The two left and right count-vector pairs are $((1,1),(2,0))$ and $((0,2),(1,1))$, each of weight $2$. Keeping $h$ and the gap in one product permits estimates on their joint distribution. A bound at the target ζ resolution remains open. [Lean proof of the common-degree formula](lean:D5/S3/Fourier/Concentration/CommonResidualOccupationCoefficient.common_residual_band)
-
-## Failure of a shared cutoff for two modes
-
-Let $q\ge7$ and write $c_k=\cos(2\pi k/q)$, $d_k=\cos(4\pi k/q)$, $s_k=c_k+d_k$, and $x_+=\max(0,x)$. The squared readout and the zero cutoff give two signed sums:
-
-$$
-\sum_{k\bmod q}(c_k-d_k)s_k^2=\frac q4,\qquad
-\sum_{k\bmod q}(c_k-d_k)(s_k)_+>0.
-$$
-
-The double-angle identity gives $s_k=(2c_k-1)(c_k+1)$ and $c_k-d_k=(1-c_k)(2c_k+1)$. Where $s_k>0$, we have $c_k>1/2$, so every clipped term is nonnegative. At $k=1$, the angle lies in $(0,\pi/3)$, giving $1/2<c_1<1$ and a strictly positive term. Since $s_0=2$, the normalized weights $v_k=(s_k)_+/\sum_i(s_i)_+$ have a positive denominator. At a threshold equal to the average of their moments, the combined readout attains the required sum and the second mode falls below the threshold.
-
-Set $z_k=e^{2\pi i k/q}$ and expand $(c_k-d_k)s_k^2$ in powers of $z_k$, grouping terms by exponent. Both constant terms come from $c_k^2d_k$ and each has coefficient $1/8$. The other exponents have absolute value from $1$ to $6$, so character orthogonality cancels them when summing modulo $q\ge7$. If $c_k-d_k$ summed to zero on every level set of $s_k$, the weighted sum with $s_k^2$ would also vanish. Grouping by exponent and retaining the coefficients follows the step in Alpöge's exponential Dirichlet-series argument that organizes product terms by their summed exponent. The exact minimum for two separate constraints at general moduli and the exceptional-frequency estimate for actual high-order ζ-zero harmonics remain open. [Alpöge's exponential Dirichlet-series proof](https://github.com/the-omega-institute/riemann-hypothesis/blob/c7d25b3bfd7906388bb8eb0774e027a2b756a7b6/src/Development/AbelianVarietyTheory/Proofs/AdelicLatticeProofs/LandauSummableOfExpDirichletSeriesEntire.lean#L84)
 
 ## A finite frequency band forces close sums
 
@@ -670,25 +689,6 @@ $$
 \log M\ \ge\ p\log(N/p)\ \gtrsim\ T^\beta(\log T)^2,
 $$
 using $M\ge(N/p)^p$ from the product formula for the multiset coefficient. The frequencies $g_\gamma=\gamma/r$ lie in a band of width at most $T/r$. For each fixed $c>0$ and sufficiently large $T$, distinct degree-$p$ vectors must therefore collide within resolution $\exp(-cT^\beta\log T)$. The needed arithmetic estimate must control the total weight of those pairs and allow individual near-collisions. [Proportion of simple zeros, §§1.1 and 8](https://arxiv.org/html/1802.10521)
-
-## The first clipping threshold for two spatial modes
-
-Take $q\ge5$ and write $c_k=\cos(2\pi k/q)$, $d_k=\cos(4\pi k/q)$, and $s_k=c_k+d_k$. Let $m_q=\min_k s_k$ and set
-$$
-a_q=-\frac{1}{2m_q},\qquad v_k=\frac{1+2as_k}{q},\qquad L=\frac{1+4a^2}{q}.
-$$
-For $a\ge0$, the vector $v$ has mass one and both real moments equal $a$. Among nonnegative probability weights with both moments at least $a$, the squared mass equals $L$ exactly when the weight is $v$. Equality is attainable exactly for $a\le a_q$. For any real mass-one vector $w$, write $M_j$ for the $j$th real moment. The exact remainder is
-$$
-\sum_k w_k^2-L
-=\sum_k(w_k-v_k)^2+\frac{4a}{q}\bigl(M_1(w)+M_2(w)-2a\bigr).
-$$
-This follows from the orthogonality of the two cosines and expansion of the squares. If $a>a_q$, at least one $v_k<0$. The squared distance at those coordinates gives the positive additional lower bound $\sum_k\max(0,-v_k)^2$ for nonnegative weights. The exact optimum after clipping remains open for general moduli.
-
-The double-angle formula gives $s_k=2(c_k+1/4)^2-9/8$. Since $2c_k$ is a sum of roots of unity, it is an algebraic integer and cannot equal the rational number $-1/2$. Hence $m_q>-9/8$. Round the angle with cosine $-1/4$ to the nearest grid point. The error is at most $\pi/q$, so $m_q+9/8\le 2(\pi/q)^2$. The values $s_k$ have mean zero and mean square one. Averaging $(2-s_k)(s_k-m_q)\ge0$ gives $m_q\le-1/2$. Combining the bounds gives
-$$
-0<a_q-\frac49\le\frac{16\pi^2}{9q^2}.
-$$
-Thus $4/9$ is a uniform lower bound for the threshold across moduli. The result controls the squared mass of finite weights. The exceptional frequencies for actual high-order ζ-zero harmonics still require an arithmetic estimate.
 
 ## Changing the height cutoff in a local statistic
 
