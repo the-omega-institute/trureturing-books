@@ -356,7 +356,7 @@ $$
 
 在 RH 下，对不同正纵坐标合并重数并令 $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$。取 $0\le\eta\le1/(4\log T)$。将高度 $y$ 的 Montgomery 函数在 $[0,1]$ 上按 $2(1-\alpha)$ 平均。文献中一致的展开式给出 $O(1)$ 的平均。平均后的每对都带因子 $2(1-\cos u)/u^2$，其中 $u=(\gamma_i-\gamma_j)\log y$，零点取连续值一。因此所有贡献非负。间距至多为 $\eta$ 的配对满足 $|u|\le1/4$，这个因子及 Montgomery 的因子 $4/[4+(\gamma_i-\gamma_j)^2]$ 都有正的绝对下界。去掉其他配对并乘回归一化因子，得到 $B(y)\ll y\log y$，对充分大的 $X$ 一致成立。 [Baluyot、Goldston、Suriajaya 与 Turnage-Butterbaugh，定理 1](https://arxiv.org/abs/2306.04799)
 
-这给出 $R_1(\eta)\ll(\log X+1)/X$。由固定计数差的上界，高阶矩中残余次数恰为一的质量至多为 $p^2 D_{p-1}R_1(\eta)$。当 $p\asymp X\log X$，对角估计使这部分相对 $p!V^p$ 保留指数折减，因为 $V\asymp\log X/X$ 且 $p$ 倍的多项式因子可被吸收。残余次数随 $p$ 增长时，仍需额外的算术输入。
+这给出 $R_1(\eta)\ll(\log X+1)/X$。由固定计数差的上界，加权近碰撞质量 $E_p(\eta)$ 中残余次数恰为一的部分至多为 $p^2 D_{p-1}R_1(\eta)$。沿用固定 $K$ 和 $0<\beta<1$ 的截点 $X=e^{-K}T^\beta$，并取 $p\asymp X\log X$ 时，对角估计使这部分相对 $p!V^p$ 保留指数折减，因为 $V\asymp\log X/X$ 且 $p$ 倍的多项式因子可被吸收。残余次数随 $p$ 增长时，仍需额外的算术输入。
 
 ## 有限频带中的和必须接近
 
