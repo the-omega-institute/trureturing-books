@@ -762,7 +762,7 @@ $$
 = \sum_j(v_j-w_j)^2+\frac{2(m-s)}{Z}
   +\frac{2}{Z}\sum_j (j^2-t)_+v_j.
 $$
-The last term is summable and nonnegative. When $s\le m$, the identity gives strict uniqueness, so adjacent intervals choose the same weights at their shared endpoint. The choice $n=\lfloor\sqrt{5m+1}\rfloor$ gives a single interval with $(n^2-1)/5\le m<n(n+2)/5$ for any $m\ge0$. On the first interval $0\le m\le3/5$, the three possible sites have weights $1-m$ at zero and $m/2$ at each neighbor. In the second-harmonic scale $\lambda=8\pi^2m$, the upper endpoint is exactly $24\pi^2/5$. A quantitative transfer of the lattice minimum back to the finite cycle has to account for the second cosine also approaching $1$ near the antipode.
+The last term is summable and nonnegative. When $s\le m$, the identity gives strict uniqueness of the weights. Since $t\ge1$, their values $w_0=t/Z$ and $w_0-w_1=1/Z$ also determine $t$ and $Z$. The adjacent closed intervals give the same weights and parameters at their shared endpoint. The half-open condition $(n^2-1)/5\le m<n(n+2)/5$ selects the unique index $n=\lfloor\sqrt{5m+1}\rfloor$. On the first interval $0\le m\le3/5$, the three possible sites have weights $1-m$ at zero and $m/2$ at each neighbor. In the second-harmonic scale $\lambda=8\pi^2m$, the upper endpoint is exactly $24\pi^2/5$. A quantitative transfer of the lattice minimum back to the finite cycle has to account for the second cosine also approaching $1$ near the antipode.
 
 ## Changing the height cutoff in a local statistic
 
