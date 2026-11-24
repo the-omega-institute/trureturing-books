@@ -411,7 +411,7 @@ $$
 \exp\!\left(-\sum_j(1-e^{-d w_j/W})^2\right).
 $$
 Stirling's formula gives a prefactor asymptotic to $2\pi d$. Under RH and with the grouped ζ-tail weights above, take $d\asymp p\asymp X\log X$. The fixed band $(X,CX]$ has $\gg X\log X$ distinct ordinates with $w_j\ge1/(2CX)$. For each of them $d w_j/W\gg1/\log T$, so the penalty sum is $\gg d/(\log T)^2$. Conversely, $1-e^{-x}\le x$ for $x\ge0$ bounds that sum by $d^2 V/W^2=O(d/(\log T)^2)$. At $d=p$ the resulting normalized upper bound is of order $p\exp(-\Theta(p/(\log T)^2))$. The missing-window budget requires $\exp(-2p\log\log T+O(p))$ or smaller even with one mesh point. Bounding the fraction of disjoint pairs meeting the frequency condition remains an arithmetic problem. [Stirling expansion, DLMF §5.11(i)](https://dlmf.nist.gov/5.11.E1)
-[Lean proof of the product bound](https://github.com/the-omega-institute/trureturing/blob/cf603a81db0f09c9a1b1ff66187901be1a046829/D5/S3/Fourier/Concentration/DisjointSupportOccupationMass.lean#L92)
+[Lean proof of the product bound](lean:D5/S3/Fourier/Concentration/DisjointSupportOccupationMass.scaled_disjoint_mass)
 
 
 ## A finite frequency band forces close sums
