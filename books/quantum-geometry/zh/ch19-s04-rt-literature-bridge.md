@@ -371,6 +371,7 @@ $$
 在正标量列 Gram 条件下，若 $a<b$，则 [@thm-bridge-native-three-rectangular-bound] 给出 $3c\le2d$。结合这一界，[@thm-bridge-native-scalar-gram-iff] 给出了各区间的精确阈值和全维数充要分类。在有序锥域内，$(3,4,3,4)$ 与 $(5,6,5,6)$ 都落在第一个缩维区间，但各自违反 $3c\le2d$，因而均无三项实现。$(2,3,2,3)$ 同时达到 $2b=3a$ 和 $3c=2d$，可以实现。下文的三十维算例讨论 $(5,6,5,6)$ 下是否存在四项酉实现。一般维数下近似平坦谱的定量间隙仍有待确定。
 
 [@thm-bridge-native-four-staircase] 确定了 $(3,4,3,4)$ 的最小宽度恰为四，并给出 $2a<b$ 或 $2d<c$ 时的充要分类（另一侧输入非空）。[@ex-bridge-rectangular-partition-5-6] 中 $(5,6,5,6)$ 的四项酉实现，以及小比例区间 $a<b\le2a$ 的一般必要条件，仍是开放问题。
+[@thm-bridge-native-four-clifford-rank-three] 在 $(4,5,4,5)$、$(5,6,4,5)$ 和 $(5,6,5,6)$ 排除了可合同嵌入 Pauli–Clifford 张成空间或含秩三厄米矩阵的压缩核，而秩二与秩四混合的情形仍未解决，$(5,6,5,6)$ 的最小宽度仍有待在 $4$ 与 $5$ 之间确定。
 
 ## 19.4.1 矩形分块与同一算子的精确分解宽度 {#sec-bridge-rectangular-partition}
 
