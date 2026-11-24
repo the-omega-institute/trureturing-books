@@ -153,7 +153,7 @@ def fake_media(viz_items=None, slides_items=None, film_items=None, *, viz_build=
         "viz": SimpleNamespace(items=lambda book: list(viz_items or []), build=viz_build or default_viz_build),
         "slides": SimpleNamespace(items=lambda book: list(slides_items or []), publish=slides_publish or default_slides_publish,
                                   build=lambda *a: (_ for _ in ()).throw(AssertionError("slides.build must not be used"))),
-        "films": SimpleNamespace(items=lambda book: list(film_items or []), build=film_build or (lambda *a: None)),
+        "films": SimpleNamespace(items=lambda book, *, site: list(film_items or []), build=film_build or (lambda *a: None)),
     }
     return lambda part: mods[part]
 
@@ -172,7 +172,7 @@ class SiteCase(unittest.TestCase):
     def setUp(self):
         self.tmp = Path(tempfile.mkdtemp(prefix="tbook-site-"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
-        self.site = replace(config.load_site(), pdf_release_only=False)
+        self.site = replace(config.load_site(), pdf_release_only=False, film_release_only=False)
         self.build_root = self.tmp / "build"
         self.out = self.tmp / "out"
 
@@ -245,10 +245,12 @@ class SiteHelpersTest(unittest.TestCase):
 
 class SiteBuildTest(SiteCase):
     def test_empty_release_only_site_needs_no_github_access(self):
-        self.site = replace(self.site, pdf_release_only=True)
-        with mock.patch.object(releases, "pdf_assets") as fetch_assets:
+        self.site = replace(self.site, pdf_release_only=True, film_release_only=True)
+        with (mock.patch.object(releases, "pdf_assets") as fetch_assets,
+              mock.patch.object(releases, "film_assets") as fetch_films):
             out = self.run_build([])
         fetch_assets.assert_not_called()
+        fetch_films.assert_not_called()
         manifest = json.loads((out / "manifest.json").read_text())
         self.assertEqual(manifest["release_pdf_digest"], releases.pdf_digest({}))
 
