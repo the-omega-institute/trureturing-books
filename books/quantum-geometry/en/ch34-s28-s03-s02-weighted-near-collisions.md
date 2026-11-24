@@ -721,6 +721,8 @@ Then $b<a_{\mathrm{crit}}<1$. Whenever $a_{\mathrm{crit}}\le a\le1$, the interpo
 
 For $b<a<a_{\mathrm{crit}}$, all three supporting levels still have positive weights. A negative moment coefficient allows a small change within the support that increases the associated moment and preserves the other. A positive interpolant at an intermediate level allows a small amount of weight there, with a change on the three supporting levels that preserves both moments and the total mass. Either change gives a feasible weight with strictly smaller squared mass. At $a=b$, the candidate gives zero mass to residue zero. Mixing in a sufficiently small point mass there preserves feasibility and lowers squared mass because the two supports are disjoint. For any strict energy improvement, a further small mixture with the point mass at zero keeps the energy strictly lower and makes both moments strictly exceed $a$. The general optimizer below the cutoff and the arithmetic estimate for exceptional frequencies of the actual high-order ζ-zero harmonics remain open.
 
+[Lean proof of the exact interval and strict descent](lean:D5/S3/Fourier/Concentration/HighCosineThreshold.cyclic_high_threshold_certificate)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
