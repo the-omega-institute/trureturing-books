@@ -112,11 +112,41 @@ $$
 
 ::: proof
 For an off-band gap $d$, fix $y\in[-H,H]\cap\mathbb Z$. Whenever a subset $S$ uses $y$ as its common shift, every prime in $S$ divides the same nonzero integer $d-y$. Because $|d-y|\le D+H$, at most $B_0$ primes can divide it. Counting subsets for each shift and taking the union over the $2H+1$ shifts bounds the multiplicity of an off-band pair. Summing with the pair weights gives the bound. If $r>B_0$, every selected product modulus gives exactly the lattice band mass $L_H$.
+
+The full proof is checked by the Lean kernel.
 :::
 
 The zero residue alone limits how small a cyclic certificate can be. Set $R=\{0\}$ in the character formula. Every term is a nonnegative moment and the term at $k=0$ is $W^{2p}$. Thus $C_q(R_q(H))\ge W^{2p}/q$ for $H\ge0$. To certify the missing-window budget with a single cyclic bound, one therefore needs $q>KN(W/\delta)^{2p}$. For an average over a nonempty set $P$, the same inequality holds with $q$ replaced by the harmonic mean of its moduli. This restriction also applies to the product moduli.
 
 At the ζ-tail parameters of [the variance bound](ch34-s28-s03-s02-collision-variance.md), this requires $\log q\ge\log N+2p\log\log T-O(p)$ for a single modulus or for the harmonic mean in the average. Evaluating the character sum term by term uses $q$ terms for that modulus. An average needs at least one modulus as large as its harmonic mean. A method to bound the weighted mass at the target resolution with feasible asymptotic cost remains open.
+
+A smaller modulus reduces the number of character terms. One can also keep the modulus $q$ and majorize the band indicator pointwise by a kernel $K$ with few Fourier modes. Let $G=\mathbb Z/q\mathbb Z$ and let $R\subseteq G$ be the band of residues. Suppose $K:G\to\mathbb R$ is nonnegative everywhere and at least $1$ on $R$. Let $S$ contain the support of the discrete Fourier transform of $K$, and write $m=|S|$ and $M=\sum_{x\in G}K(x)$.
+
+Fourier inversion at zero gives the exact identity
+$$
+mM-qK(0)=\sum_{k\in S}\sum_{x\in G}K(x)\bigl(1-\Re\chi_k(-x)\bigr).
+$$
+Every term is nonnegative, so
+$$
+mM-qK(0)\ \ge\ \sum_{k\in S}\sum_{x\in R}\bigl(1-\Re\chi_k(-x)\bigr).
+$$
+If $0\in R$, the zero-frequency coefficient $M/q$ is at least $1/m$. If $1\in R$ and $S$ contains a nonzero frequency, the right side is strictly positive.
+
+For $K(0)>0$, equality $mM=qK(0)$ holds exactly when $K=K(0)\mathbf 1_U$ for an additive subgroup $U$ of $G$ and $S$ is the annihilator of $U$. Equality forces every selected character to be one wherever $K>0$. Inversion makes $K$ constant at $K(0)$ on the subgroup where all these characters are one. Every frequency in its annihilator has coefficient $M>0$ and therefore belongs to $S$. Conversely, a scaled subgroup indicator and its annihilator make the right side of the identity zero. Subgroup indicators also give equality in the finite-group Fourier support uncertainty principle. [Tao, §1](https://arxiv.org/pdf/math/0308286v6)
+
+For a collision bound using $K$, the zero-frequency term is $(M/q)W^{2p}$. If $0\in R$ and the real parts of the remaining coefficients are all nonnegative, the full bound is at least $W^{2p}/m$. With coefficients of both signs, the mean inequality controls the zero-frequency term, while the other terms depend on high moments from a common set of weights.
+
+One can also test which Fourier moments can arise from the same initial weights. On $\mathbb Z/4\mathbb Z$, let $w=(a,b,c,d)$ be a probability weight, and let $u=|\widehat w(1)|^2$, $v=|\widehat w(2)|^2$. The discrete Fourier transform without the factor $1/4$ gives
+$$
+u=(a-c)^2+(b-d)^2,\qquad v=(a+c-b-d)^2.
+$$
+The pairs attained by a common $w$ are exactly those satisfying
+$$
+0\le v\le1,\qquad 0\le u\le(1+v)/2.
+$$
+Write $e,o$ for the total masses on the even and odd residues. The two differences $a-c,b-d$ range independently in $[-e,e]$ and $[-o,o]$. Consequently $u$ is at most $e^2+o^2=(1+v)/2$. Given $v$, take $e=(1+\sqrt v)/2$ and $o=(1-\sqrt v)/2$. Scaling both differences by the same fraction of their endpoint values fills the interval from zero to the maximum.
+
+For the difference of two independent sums of $p$ draws from $w$, the Fourier coefficients at $1,2$ are $u^p,v^p$. If $v^p=0$ and $p\ge2$, the first coefficient has maximum $2^{-p}$. In the relaxation to symmetric probability laws with nonnegative Fourier coefficients and zero second coefficient, both parity masses are $1/2$. The first coefficient is the difference between the two even-residue masses and has maximum $1/2$, attained by $(1/2,1/4,0,1/4)$. The relaxed maximum is $2^{p-1}$ times the attainable one. The gap comes from requiring the two high moments to arise from common initial weights.
 
 For actual ζ ordinates, use the tail above $X=e^{-D}T^\beta$ from the preceding section, with $\delta=\log T$ and $g_\gamma=\gamma/r$. For $H=\exp(cT^\beta\log T)$, take $N=\lfloor HT^2/r\rfloor_++1$ to keep the mesh error at most $rB/(2T^2)$. To bound the start, a finite $L=L(T)$ must satisfy the budget $KNE_p(2/L)<(\log T)^{2p}$. The target order $p$ grows on the scale of $T^\beta\log T$. For fixed finite tail and fixed $p$, $E_p(2/L)$ eventually equals the exact collision mass $E_p(0)$ as $L$ increases. Quantifying $L$ requires a weighted bound at positive resolution. Definition 7 in Tao, Trudgian, and Yang counts unweighted quadruples at unit scale, and Theorem 64 gives estimates for fixed $\sigma\ge7/10$. The growing-order weighted bound for the critical-line tail remains open. [Definition 7 and Theorem 64](https://arxiv.org/html/2501.16779v1) · [Research question](https://github.com/the-omega-institute/trureturing/issues/33519)
 
