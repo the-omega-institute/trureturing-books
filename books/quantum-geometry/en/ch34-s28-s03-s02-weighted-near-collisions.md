@@ -391,7 +391,7 @@ For the actual ζ ordinates, the degree-one estimate controls the mass of gaps n
 
 ## A product bound for disjoint residual supports
 
-Let $U_d$ sum $c_d(a)c_d(b)$ over all ordered degree-$d$ pairs with disjoint supports. Every $R_d(\eta)$ is at most $U_d$. For $s\ge0$ and $W=\sum_j w_j$,
+Assume the weights are nonnegative. Let $U_d$ sum $c_d(a)c_d(b)$ over all ordered degree-$d$ pairs with disjoint supports. Every $R_d(\eta)$ is at most $U_d$. For $s\ge0$ and $W=\sum_j w_j$,
 $$
 s^{2d}U_d\le (d!)^2\prod_j(2e^{s w_j}-1)
 \le (d!)^2\exp\!\left(2sW-\sum_j(1-e^{-s w_j})^2\right).
@@ -405,6 +405,8 @@ $$
 \exp\!\left(-\sum_j(1-e^{-d w_j/W})^2\right).
 $$
 Stirling's formula gives a prefactor asymptotic to $2\pi d$. Under RH and with the grouped ζ-tail weights above, take $d\asymp p\asymp X\log X$. The fixed band $(X,CX]$ has $\gg X\log X$ distinct ordinates with $w_j\ge1/(2CX)$. For each of them $d w_j/W\gg1/\log T$, so the penalty sum is $\gg d/(\log T)^2$. Conversely, $1-e^{-x}\le x$ for $x\ge0$ bounds that sum by $d^2 V/W^2=O(d/(\log T)^2)$. At $d=p$ the resulting normalized upper bound is of order $p\exp(-\Theta(p/(\log T)^2))$. The missing-window budget requires $\exp(-2p\log\log T+O(p))$ or smaller even with one mesh point. Bounding the fraction of disjoint pairs meeting the frequency condition remains an arithmetic problem. [Stirling expansion, DLMF §5.11(i)](https://dlmf.nist.gov/5.11.E1)
+[Lean proof of the product bound](https://github.com/the-omega-institute/trureturing/blob/cf603a81db0f09c9a1b1ff66187901be1a046829/D5/S3/Fourier/Concentration/DisjointSupportOccupationMass.lean#L92)
+
 
 ## Character projection of disjoint occupation coefficients
 
