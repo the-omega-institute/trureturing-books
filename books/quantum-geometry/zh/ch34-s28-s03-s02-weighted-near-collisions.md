@@ -387,6 +387,18 @@ $$
 
 [端点修正的 Lean 证明](lean:D5/S3/Fourier/Concentration/DegreeTwoResidualDifferenceEnergy.degree_two_residual)
 
+取两个单位权重的五点谱 $A=(0,1,5,6,13)$ 和 $B=(0,2,3,7,13)$。它们的端点都是 $0,13$，点位之和都是 $25$，平方和都是 $231$，因此均值同为 $5$，方差同为 $106/5$。对每个 $0\le\eta<1$，次数一的近配对只有五个对角项，两组的质量都为 $5$。
+
+两组各有二十条有向边。在 $A$ 中，正间距 $1$ 和 $5$ 各出现两次，其余六个各出现一次。在 $B$ 中，十个正间距互异。负间距的计数与正间距相同，所以有向间距的碰撞质量分别是 $28$ 和 $20$。端点修正在两组都减去 $40$、加回 $20$，得到 $R_2(A)=8$ 和 $R_2(B)=0$。$A$ 中的八项来自 $0+6=1+5$ 的两侧互换以及两侧各自的排序。 [二次算例的 Lean 证明](lean:D5/S3/Fourier/Concentration/DegreeTwoMomentWitness.exists_equal_first_data_distinct_degree_two)
+
+因此，端点、均值、方差和整个区间 $0\le\eta<1$ 上的次数一质量仍允许不同的次数二质量。这个有限谱反例刻画了这些读数的适用边界。ζ 零点所需的加权频带上界是下文的开放问题。
+
+### 同度量谱与互斥三项和
+
+完整的有向间距分布是更强的输入。取 $U=\{0,1,3\}$ 和 $V=\{0,4,9\}$，令 $A=U+V$、$B=9+U-V$。两个集合各有九个点，每个点对应唯一的一对坐标。把 $A$ 中的一对 $(u,v),(u',v')$ 送到 $B$ 中的 $(u,v'),(u',v)$，有向间距 $(u-u')+(v-v')$ 保持相同。因此两个谱的每个有向间距都具有相同的重数，傅里叶模平方也逐点相同。这种自相关相等的集合称为同度量集。 [Grimm 与 Baake，第 1 节](https://arxiv.org/pdf/0808.0094v1)
+
+令两个谱中每个点的权重均为 $1$。分别枚举等和的有序三元组对，允许一个三元组内重复使用某个指标，两边支撑须互斥。两组计数分别为 $5976$ 和 $5952$。例如将左侧三元组按首项分组，$A$ 的前三个首项 $0,1,3$ 分别贡献 $604,654,684$，$B$ 的对应贡献为 $602,641,625$。整数和的间距意味着同一计数适用于每个 $0\le\eta<1$。完整的二点自相关因此仍允许不同的次数三互斥残余质量。 [三次反例的 Lean 证明](lean:D5/S3/Fourier/Concentration/HomometricTripleCollision.differences_do_not_determine_triple_mass)
+
 应用到实际 ζ 纵坐标时，次数一的估计只控制零附近的间距权重。这一恒等式中的 $A(\eta)$ 还比较远离零而彼此接近的间距。要约束这部分对 $E_p(\eta)$ 的贡献，仍需控制扣除共享端点后的相关和。
 
 ## 互斥残余支撑的乘积界
@@ -405,8 +417,38 @@ $$
 \exp\!\left(-\sum_j(1-e^{-d w_j/W})^2\right).
 $$
 由 Stirling 公式，前因子渐近于 $2\pi d$。在 RH 下沿用上文合并重数的 ζ 尾段权重，并取 $d\asymp p\asymp X\log X$。在固定区间 $(X,CX]$ 内，至少有常数倍 $X\log X$ 个不同纵坐标，且各自满足 $w_j\ge1/(2CX)$。这些指标满足 $d w_j/W\gg1/\log T$，因此折减项之和至少为常数倍 $d/(\log T)^2$。另一方面，由 $x\ge0$ 时 $1-e^{-x}\le x$，该和至多为 $d^2 V/W^2=O(d/(\log T)^2)$。在 $d=p$ 时，归一化上界的量级为 $p\exp(-\Theta(p/(\log T)^2))$。而缺失窗口的矩预算即使只取一个网格点，也要求归一化质量至多为 $\exp(-2p\log\log T+O(p))$。仍需估计互斥对中满足频率条件的权重比例。 [Stirling 展开，DLMF §5.11(i)](https://dlmf.nist.gov/5.11.E1)
-[乘积界的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/cf603a81db0f09c9a1b1ff66187901be1a046829/D5/S3/Fourier/Concentration/DisjointSupportOccupationMass.lean#L92)
+[乘积界的 Lean 证明](lean:D5/S3/Fourier/Concentration/DisjointSupportOccupationMass.scaled_disjoint_mass)
 
+
+## 互斥占用系数的特征标投影
+
+取正整数 $q$ 和模 $q$ 的剩余类 $a_j$，记 $\chi_k(r)=e^{2\pi i kr/q}$。设 $M_R$ 是有序、支撑互斥的 $d$ 次向量对的权重 $c_d(m)c_d(n)$ 之和，只计 $\sum_j (m_j-n_j)a_j$ 属于剩余类集合 $R$ 的配对。定义
+$$
+Q_k(x,y)=\prod_j\left(1+\sum_{h=1}^d\frac{w_j^h}{h!}
+  \bigl[x^h\chi_k(-h a_j)+y^h\chi_k(h a_j)\bigr]\right).
+$$
+每个因子的两条坐标轴保证支撑互斥，混合系数固定两侧次数。所选各项的特征标相乘，对应其带符号间距相加。由正交性可得
+$$
+qM_R=(d!)^2\sum_{k\bmod q}[x^dy^d]Q_k(x,y)\sum_{r\in R}\chi_k(r).
+$$
+这里借鉴了相关有限指数和证明中用平均分离频率的做法，以有限循环群上的精确正交性代替区间平均。 [相关黎曼猜想形式化中的特征标平均](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L78) [互斥系数公式的 Lean 证明](lean:D5/S3/Fourier/Concentration/CyclicDisjointOccupationCoefficient.cyclic_disjoint_band_product)
+
+若权重非负，剩余类的质量非负，而其傅里叶系数可以为负。设两个不同指标权重均为一，模 $2$ 的剩余类分别为 $0,1$。任一正次数的互斥配对都须在两侧各用一个指标。若 $d$ 为奇数，两种有序配对的差都属于剩余类 $1$。因此剩余类质量在 $k=1$ 处的傅里叶系数为 $-2$，对 $R=\{0\}$ 恰好抵消零特征标的贡献。ζ 尾段在目标分辨率和增长次数下的非零特征标贡献仍待估计。
+
+## 同时记录公共占用次数
+
+沿用上述剩余类，在二元乘积中加入变量 $z$ 记录两个 $p$ 次向量的公共部分。记 $h=\sum_j\min(m_j,n_j)$，则残余次数为 $p-h$。令 $M_{h,R}$ 为公共次数等于 $h$、带符号频率差属于 $R$ 的配对权重。定义
+$$
+Q_k(x,y,z)=\prod_j\sum_{u,v=0}^p
+ \frac{w_j^{u+v}}{u!\,v!}\,x^uy^vz^{\min(u,v)}
+ \chi_k(-(u-v)a_j).
+$$
+在每个坐标选择 $(u,v)$ 会给两侧次数分别增加 $u,v$，给公共次数增加 $\min(u,v)$。固定两侧次数为 $p$ 后，乘以 $(p!)^2$ 恢复多项式权重。各特征标因子相乘给出带符号频率差的特征标。因此
+$$
+qM_{h,R}=(p!)^2\sum_{k\bmod q}
+ [x^py^pz^h]Q_k(x,y,z)\sum_{r\in R}\chi_k(r).
+$$
+当 $h=0$ 时得到支撑互斥的公式。当 $h=p$ 时，两侧次数之和相等，且公共部分达到全部次数，故 $m=n$。若 $0\in R$，质量恰为对角质量，否则为零。例如，两个权重为一的指标的剩余类分别为模 $11$ 的 $0,1$。若 $p=2$、$h=1$，剩余类 $1$ 上的质量为 $4$，来自 $((1,1),(2,0))$ 和 $((0,2),(1,1))$ 两对，每对权重为 $2$。同一乘积同时记录公共次数和频率差，因而可以研究二者的联合分布。在 ζ 的目标分辨率下仍需建立相应的界。 [公共占用次数公式的 Lean 证明](lean:D5/S3/Fourier/Concentration/CommonResidualOccupationCoefficient.common_residual_band)
 
 ## 有限频带中的和必须接近
 

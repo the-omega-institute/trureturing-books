@@ -387,6 +387,18 @@ Expand each degree-two count vector into its ordered words. The difference of th
 
 [Lean proof of the endpoint correction](lean:D5/S3/Fourier/Concentration/DegreeTwoResidualDifferenceEnergy.degree_two_residual)
 
+Take two five-point spectra with unit weights, $A=(0,1,5,6,13)$ and $B=(0,2,3,7,13)$. Both have endpoints $0,13$, sum $25$, and sum of squares $231$, giving mean $5$ and variance $106/5$. At every resolution $0\le\eta<1$, the degree-one near-pairs consist of five diagonal terms, so both masses are $5$.
+
+Each spectrum has twenty directed edges. In $A$ the positive gaps $1$ and $5$ each occur twice, and the other six occur once. In $B$ the ten positive gaps are distinct. The negative gaps mirror the positive gaps, giving directed-gap collision masses of $28$ and $20$. The endpoint correction subtracts $40$ and adds back $20$ in each case, yielding $R_2(A)=8$ and $R_2(B)=0$. The eight terms in $A$ come from exchanging the sides of $0+6=1+5$ and ordering the two terms on each side. [Lean proof of the degree-two example](lean:D5/S3/Fourier/Concentration/DegreeTwoMomentWitness.exists_equal_first_data_distinct_degree_two)
+
+The endpoints, mean, variance, and degree-one mass over the entire range $0\le\eta<1$ therefore allow different degree-two masses. This finite example identifies a limit of those statistics. The weighted frequency-band bound for zeta zeros posed below remains open.
+
+### Homometric spectra and disjoint triple sums
+
+The full distribution of directed gaps gives stronger input. Take $U=\{0,1,3\}$ and $V=\{0,4,9\}$, and set $A=U+V$ and $B=9+U-V$. Each set has nine points, with a unique coordinate pair for each point. Send a pair $(u,v),(u',v')$ in $A$ to $(u,v'),(u',v)$ in $B$. The directed gap $(u-u')+(v-v')$ is preserved. The two spectra therefore have the same multiplicity at every gap and the same squared Fourier magnitude at every frequency. Sets with the same autocorrelation are called homometric. [Grimm and Baake, §1](https://arxiv.org/pdf/0808.0094v1)
+
+Give every point of both spectra weight $1$. Count ordered pairs of ordered triples with equal sums. A triple may repeat indices, and the two index supports must be disjoint. The counts are $5976$ and $5952$, respectively. For example, grouping the left triples by their first entry gives contributions of $604,654,684$ at $0,1,3$ for $A$, and $602,641,625$ at the same entries for $B$. Since the sums are integers, the counts apply at every resolution $0\le\eta<1$. The complete two-point autocorrelation thus allows different disjoint residual masses at degree three. [Lean proof of the degree-three obstruction](lean:D5/S3/Fourier/Concentration/HomometricTripleCollision.differences_do_not_determine_triple_mass)
+
 For the actual ζ ordinates, the degree-one estimate controls the mass of gaps near zero. The quantity $A(\eta)$ also compares gaps far from zero that are close to each other. Bounding the contribution to $E_p(\eta)$ still requires control of that correlation after removing the shared endpoints.
 
 ## A product bound for disjoint residual supports
@@ -405,8 +417,38 @@ $$
 \exp\!\left(-\sum_j(1-e^{-d w_j/W})^2\right).
 $$
 Stirling's formula gives a prefactor asymptotic to $2\pi d$. Under RH and with the grouped ζ-tail weights above, take $d\asymp p\asymp X\log X$. The fixed band $(X,CX]$ has $\gg X\log X$ distinct ordinates with $w_j\ge1/(2CX)$. For each of them $d w_j/W\gg1/\log T$, so the penalty sum is $\gg d/(\log T)^2$. Conversely, $1-e^{-x}\le x$ for $x\ge0$ bounds that sum by $d^2 V/W^2=O(d/(\log T)^2)$. At $d=p$ the resulting normalized upper bound is of order $p\exp(-\Theta(p/(\log T)^2))$. The missing-window budget requires $\exp(-2p\log\log T+O(p))$ or smaller even with one mesh point. Bounding the fraction of disjoint pairs meeting the frequency condition remains an arithmetic problem. [Stirling expansion, DLMF §5.11(i)](https://dlmf.nist.gov/5.11.E1)
-[Lean proof of the product bound](https://github.com/the-omega-institute/trureturing/blob/cf603a81db0f09c9a1b1ff66187901be1a046829/D5/S3/Fourier/Concentration/DisjointSupportOccupationMass.lean#L92)
+[Lean proof of the product bound](lean:D5/S3/Fourier/Concentration/DisjointSupportOccupationMass.scaled_disjoint_mass)
 
+
+## Character projection of disjoint occupation coefficients
+
+Take residues $a_j$ modulo a positive integer $q$ and put $\chi_k(r)=e^{2\pi i kr/q}$. Let $M_R$ be the sum of $c_d(m)c_d(n)$ over disjoint ordered degree-$d$ pairs with $\sum_j (m_j-n_j)a_j$ in the residue set $R$. Define the product
+$$
+Q_k(x,y)=\prod_j\left(1+\sum_{h=1}^d\frac{w_j^h}{h!}
+  \bigl[x^h\chi_k(-h a_j)+y^h\chi_k(h a_j)\bigr]\right).
+$$
+The two axes of each factor enforce disjoint support and the mixed coefficient enforces the two degrees. Character multiplication adds the signed gaps of the chosen terms. Hence orthogonality gives
+$$
+qM_R=(d!)^2\sum_{k\bmod q}[x^dy^d]Q_k(x,y)\sum_{r\in R}\chi_k(r).
+$$
+Averaging to isolate a frequency follows the same principle as in the related proof for finite exponential sums. Here the interval average is replaced by exact orthogonality on a finite cyclic group. [Character averaging in the related Riemann hypothesis development](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L78) [Lean proof of the disjoint coefficient formula](lean:D5/S3/Fourier/Concentration/CyclicDisjointOccupationCoefficient.cyclic_disjoint_band_product)
+
+For nonnegative weights the residue masses are nonnegative, while their Fourier coefficients can be negative. With two distinct indices of unit weight at residues $0,1$ modulo $2$, a disjoint pair of positive degree must use one index on each side. If $d$ is odd, both ordered pairs have residue $1$. The Fourier coefficient at $k=1$ of the residue masses is $-2$ and cancels the zero character for $R=\{0\}$. Estimating the contribution of nonzero characters at the ζ-tail resolution, with growing degree, remains open.
+
+## Tracking the common occupation degree
+
+For the same residue data, keep the common part of the two degree-$p$ vectors by adding a variable $z$. Put $h=\sum_j\min(m_j,n_j)$, so the residual degree is $p-h$. Let $M_{h,R}$ be the mass with common degree $h$ and signed gap in $R$. Define
+$$
+Q_k(x,y,z)=\prod_j\sum_{u,v=0}^p
+ \frac{w_j^{u+v}}{u!\,v!}\,x^uy^vz^{\min(u,v)}
+ \chi_k(-(u-v)a_j).
+$$
+The local choice $(u,v)$ adds $u$ and $v$ to the two degrees and $\min(u,v)$ to the common degree. Both count vectors have the same prescribed total, so the factorial scaling is $(p!)^2$. The character factors multiply to the character of their signed gap. Thus
+$$
+qM_{h,R}=(p!)^2\sum_{k\bmod q}
+ [x^py^pz^h]Q_k(x,y,z)\sum_{r\in R}\chi_k(r).
+$$
+At $h=0$ this gives the disjoint formula. At $h=p$, equality of the two total counts forces $m=n$, giving the occupation diagonal if $0\in R$ and zero otherwise. For an intermediate example, with unit weights at residues $0,1$ modulo $11$, degree $p=2$ and $h=1$, the mass at residue $1$ is $4$. The two left and right count-vector pairs are $((1,1),(2,0))$ and $((0,2),(1,1))$, each of weight $2$. Keeping $h$ and the gap in one product permits estimates on their joint distribution. A bound at the target ζ resolution remains open. [Lean proof of the common-degree formula](lean:D5/S3/Fourier/Concentration/CommonResidualOccupationCoefficient.common_residual_band)
 
 ## A finite frequency band forces close sums
 
