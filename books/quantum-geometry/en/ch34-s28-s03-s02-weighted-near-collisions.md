@@ -378,7 +378,7 @@ The first bound applies the diagonal estimate for each fixed count difference an
 
 ## Residual degree two and directed gaps {#degree-two-directed-differences}
 
-When two terms remain on each side, their sum discrepancy is the difference of two directed gaps. For $i\ne j$, give the edge $(i,j)$ frequency $g_i-g_j$ and weight $w_iw_j$. Let $A(\eta)$ be the ordered near-collision mass on these edges at resolution $\eta\ge0$. Let $C_i(\eta)$ be the ordered near-collision mass of the original spectrum with index $i$ deleted, including the remaining diagonal. Then
+For arbitrary real weights, when two terms remain on each side, their sum discrepancy is the difference of two directed gaps. For $i\ne j$, give the edge $(i,j)$ frequency $g_i-g_j$ and weight $w_iw_j$. Let $A(\eta)$ be the ordered near-collision mass on these edges at resolution $\eta\ge0$. Let $C_i(\eta)$ be the ordered near-collision mass of the original spectrum with index $i$ deleted, including the remaining diagonal. Then
 $$
 R_2(\eta)=A(\eta)-2\sum_i w_i^2 C_i(\eta)+\sum_i\sum_{j\ne i}w_i^2w_j^2.
 $$
