@@ -423,6 +423,21 @@ Averaging to isolate a frequency follows the same principle as in the related pr
 
 For nonnegative weights the residue masses are nonnegative, while their Fourier coefficients can be negative. With two distinct indices of unit weight at residues $0,1$ modulo $2$, a disjoint pair of positive degree must use one index on each side. If $d$ is odd, both ordered pairs have residue $1$. The Fourier coefficient at $k=1$ of the residue masses is $-2$ and cancels the zero character for $R=\{0\}$. Estimating the contribution of nonzero characters at the ζ-tail resolution, with growing degree, remains open.
 
+## Tracking the common occupation degree
+
+For the same residue data, keep the common part of the two degree-$p$ vectors by adding a variable $z$. Put $h=\sum_j\min(m_j,n_j)$, so the residual degree is $p-h$. Let $M_{h,R}$ be the mass with common degree $h$ and signed gap in $R$. Define
+$$
+Q_k(x,y,z)=\prod_j\sum_{u,v=0}^p
+ \frac{w_j^{u+v}}{u!\,v!}\,x^uy^vz^{\min(u,v)}
+ \chi_k(-(u-v)a_j).
+$$
+The local choice $(u,v)$ adds $u$ and $v$ to the two degrees and $\min(u,v)$ to the common degree. Both count vectors have the same prescribed total, so the factorial scaling is $(p!)^2$. The character factors multiply to the character of their signed gap. Thus
+$$
+qM_{h,R}=(p!)^2\sum_{k\bmod q}
+ [x^py^pz^h]Q_k(x,y,z)\sum_{r\in R}\chi_k(r).
+$$
+At $h=0$ this gives the disjoint formula. At $h=p$, equality of the two total counts forces $m=n$, giving the occupation diagonal if $0\in R$ and zero otherwise. For an intermediate example, with unit weights at residues $0,1$ modulo $11$, degree $p=2$ and $h=1$, the mass at residue $1$ is $4$. The two left and right count-vector pairs are $((1,1),(2,0))$ and $((0,2),(1,1))$, each of weight $2$. Keeping $h$ and the gap in one product permits estimates on their joint distribution. A bound at the target ζ resolution remains open.
+
 ## A finite frequency band forces close sums
 
 Let $J$ have $N$ elements, with all $g_j\in[a,b]$. Write $F(m)=\sum_jm_jg_j$. There are $M=\binom{N+p-1}{p}$ count vectors of degree $p$.
