@@ -399,6 +399,18 @@ The full distribution of directed gaps gives stronger input. Take $U=\{0,1,3\}$ 
 
 Give every point of both spectra weight $1$. Count ordered pairs of ordered triples with equal sums. A triple may repeat indices, and the two index supports must be disjoint. The counts are $5976$ and $5952$, respectively. For example, grouping the left triples by their first entry gives contributions of $604,654,684$ at $0,1,3$ for $A$, and $602,641,625$ at the same entries for $B$. Since the sums are integers, the counts apply at every resolution $0\le\eta<1$. The complete two-point autocorrelation thus allows different disjoint residual masses at degree three.
 
+For any unit-weight integer spectrum on $n$ indices, write $F(z)=\sum_j z^{g_j}$ and $U(z)=F(z)F(z^{-1})$. The Laurent polynomial for signed gaps between disjoint triples is
+
+$$
+P_n(U(z))-3\bigl(F(z^2)F(z^{-1})^2+F(z^{-2})F(z)^2\bigr),
+$$
+
+where $P_n(u)=u^3+(18-9n)u^2+(18n^2-63n+51)u-6n^3+27n^2-31n$. Summing the coefficients of $z^k$ over the integers $|k|\le\eta$ gives $R_3(\eta)$.
+
+Apply inclusion and exclusion to the nine equality conditions across the two triples. The selected equalities join the six positions into components. Each component independently chooses an index, so a component with $a$ left positions and $b$ right positions contributes $F(z^{a-b})$. Only a three-edge star can produce $a-b=\pm2$. Each orientation has three choices of center and a negative sign. The remaining components yield terms in $n$ and $U$.
+
+For spectra with identical directed differences, $P_n(U)$ cancels coefficient by coefficient. At resolution zero, the difference is $-6$ times the difference in counts of ordered relations $2g_i=g_j+g_k$, including the triples with all indices equal. The spectra $A$ and $B$ above have $25$ and $29$ such relations, respectively, giving $5976-5952=24$. At positive resolution use $|2g_i-g_j-g_k|\le\eta$. This decomposition applies at degree three with unit weights.
+
 For the actual ζ ordinates, the degree-one estimate controls the mass of gaps near zero. The quantity $A(\eta)$ also compares gaps far from zero that are close to each other. Bounding the contribution to $E_p(\eta)$ still requires control of that correlation after removing the shared endpoints.
 
 ## A product bound for disjoint residual supports
