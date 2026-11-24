@@ -723,6 +723,30 @@ For $b<a<a_{\mathrm{crit}}$, all three supporting levels still have positive wei
 
 [Lean proof of the exact interval and strict descent](lean:D5/S3/Fourier/Concentration/HighCosineThreshold.cyclic_high_threshold_certificate)
 
+For every $q\ge13$, the first intermediate level to meet the interpolant is $\cos(4\pi/q)$. Put $v_*=\cos(4\pi/q)$, $h=1-u$, $d=1-\ell$, $A=p/2$ and $C=(1-p)/n_\ell$. The upper level has exactly two residues. Write $S_\gamma$ for the slope of $\gamma_r$ and $S(x)$ for the slope of the certificate inequality at the intermediate level $x$. The Lagrange formula gives
+$$
+S_\gamma=1+\frac{Ad-Ch}{u-\ell},\qquad
+S(x)=S_\gamma+\frac{hd}{u-\ell}\left(\frac{A}{u-x}+\frac{C}{x-\ell}\right).
+$$
+When $A\ge C$, the slope of $\beta_r$ is at most $S_\gamma$. Reflect the grid angles into $[0,\pi]$. Every intermediate level then satisfies $x\le v_*$. For $x<v_*$, the sign of $S(v_*)-S(x)$ is the sign of
+$$
+A(v_*-\ell)(x-\ell)-C(u-v_*)(u-x).
+$$
+For even $q\ge14$, $\ell=-1$ and $x\ge-u$. Here $u>8/9$ gives $C/A\le g(u)<25/81$, while $(v_*-\ell)(x-\ell)/((u-v_*)(u-x))\ge u/(2u+1)>8/25$. For odd $q\ge13$, put $w=\cos(\pi/q)$. Then $\ell=-w$ and $x-\ell\ge2w(1-u)$. Using $\pi^2<10$ and $1-\cos t\le t^2/2$ gives $C/A<2/5$ and the same ratio exceeds $19/40$. Both comparisons make $v_*$ the unique contact level and leave both moment coefficients positive there.
+
+If $r_s=(1-s)/(1-b)$, the affine interpolation value satisfies
+$$
+P_{r_s}(v_*)=P_0(v_*)\frac{s-a_{\mathrm{crit}}}{1-a_{\mathrm{crit}}},\qquad P_0(v_*)<0.
+$$
+The sign becomes positive as $s$ decreases below the cutoff. The uniform onset at thirteen is sharp. At $q=12$ the lower intermediate level $-u$ has the larger slope, since $g(u)(2u+1)=1>u$ at $u=\sqrt{3}/2$. At that cutoff the interpolant is still negative at $v_*$.
+
+The quantities $u,\ell,p$ tend to $1,-1,1$ respectively. Since $1-p=h(2u+1)/(g(u)-g(\ell))$, one obtains $(1-b)/h\to4$. The term $h/(u-v_*)=1/(2u+1)$ retains a nonzero contribution in the slope. Substitution gives $B=S(v_*)\to5/3$. Using $q^2h\to 2\pi^2$, the high-threshold interval has width
+$$
+q^2(1-a_{\mathrm{crit}}(q))\longrightarrow\frac{24\pi^2}{5}.
+$$
+
+[Lean proof of first contact and the affine crossing](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_first_contact) · [Lean proof of the modulus-twelve exception](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_twelve_no_contact) · [Lean proof of the sharp width limit](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_criticalThreshold_limit)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.

@@ -723,6 +723,30 @@ $$
 
 [精确区间与严格下降的 Lean 证明](lean:D5/S3/Fourier/Concentration/HighCosineThreshold.cyclic_high_threshold_certificate)
 
+对每个 $q\ge13$，最先接触插值多项式零点的中间余弦层是 $\cos(4\pi/q)$。记 $v_*=\cos(4\pi/q)$、$h=1-u$、$d=1-\ell$、$A=p/2$、$C=(1-p)/n_\ell$。上端层恰有两个剩余类。令 $S_\gamma$ 为 $\gamma_r$ 的斜率读数，$S(x)$ 为中间层 $x$ 的证书不等式的斜率读数。拉格朗日插值给出
+$$
+S_\gamma=1+\frac{Ad-Ch}{u-\ell},\qquad
+S(x)=S_\gamma+\frac{hd}{u-\ell}\left(\frac{A}{u-x}+\frac{C}{x-\ell}\right).
+$$
+若 $A\ge C$，则 $\beta_r$ 的斜率读数不超过 $S_\gamma$。把网格角度折入 $[0,\pi]$ 后，每个中间层都满足 $x\le v_*$。对 $x<v_*$，$S(v_*)-S(x)$ 的符号由
+$$
+A(v_*-\ell)(x-\ell)-C(u-v_*)(u-x)
+$$
+决定。对偶数 $q\ge14$，有 $\ell=-1$ 和 $x\ge-u$。由 $u>8/9$ 得 $C/A\le g(u)<25/81$，而 $(v_*-\ell)(x-\ell)/((u-v_*)(u-x))\ge u/(2u+1)>8/25$。对奇数 $q\ge13$，令 $w=\cos(\pi/q)$，则 $\ell=-w$，且 $x-\ell\ge2w(1-u)$。用 $\pi^2<10$ 及 $1-\cos t\le t^2/2$ 可得 $C/A<2/5$，而同一个比值超过 $19/40$。由此只有 $v_*$ 接触零点，两个矩系数仍严格为正。
+
+令 $r_s=(1-s)/(1-b)$。插值在该层的值满足
+$$
+P_{r_s}(v_*)=P_0(v_*)\frac{s-a_{\mathrm{crit}}}{1-a_{\mathrm{crit}}},\qquad P_0(v_*)<0.
+$$
+当 $s$ 下降至临界值以下时，该值转正。十三是这个统一范围的最小起点。在 $q=12$ 时，$u=\sqrt{3}/2$，且 $g(u)(2u+1)=1>u$，使下方中间层 $-u$ 的斜率更大。此时在临界值处，$v_*$ 的插值仍为负。
+
+$u,\ell,p$ 的极限依次为 $1,-1,1$。由 $1-p=h(2u+1)/(g(u)-g(\ell))$ 得 $(1-b)/h\to4$。斜率中的比值 $h/(u-v_*)=1/(2u+1)$ 在极限中仍有贡献，代入得 $B=S(v_*)\to5/3$。结合 $q^2h\to2\pi^2$，高阈值区间的宽度满足
+$$
+q^2(1-a_{\mathrm{crit}}(q))\longrightarrow\frac{24\pi^2}{5}.
+$$
+
+[首次接触与仿射过零的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_first_contact) · [模十二例外的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_twelve_no_contact) · [锐利宽度极限的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_criticalThreshold_limit)
+
 ## 局部统计在截点变化下的误差
 
 频率向下舍入后，是否落在给定的高度区间内可能发生变化。局部测试只计入频率彼此接近的元组，所以改变截点的影响取决于每个变动索引附近还有多少索引。
