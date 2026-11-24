@@ -566,6 +566,73 @@ The last term retains the clipped negative weights. One can take $t\le\max(\{0\}
 
 Modulo four, $c=(1,0,-1,0)$. For $0\le a\le1/2$, the optimizer is $(1+2a,1,1-2a,1)/4$ and the minimum squared mass is $(1+2a^2)/4$. For $1/2\le a\le1$, the optimizer is $(a,(1-a)/2,0,(1-a)/2)$ and the minimum is $a^2+(1-a)^2/2$. The formulas agree at $a=1/2$. This minimum gives a benchmark for the squared-mass coefficient in the exceptional-set bound under one spatial-mode constraint. A full spatial band imposes joint constraints, and the cardinality of the actual ζ-zero exceptional set needs an arithmetic estimate.
 
+### The first clipping threshold for two spatial modes
+
+Take $q\ge5$ and write $c_k=\cos(2\pi k/q)$, $d_k=\cos(4\pi k/q)$, and $s_k=c_k+d_k$. Let $m_q=\min_k s_k$ and set
+$$
+a_q=-\frac{1}{2m_q},\qquad v_k=\frac{1+2as_k}{q},\qquad L=\frac{1+4a^2}{q}.
+$$
+For every real $a$, the vector $v$ has mass one and both real moments equal $a$. For $a\ge0$, its entries are all nonnegative exactly when $a\le a_q$. For $a\ge0$, a nonnegative probability weight with both moments at least $a$ has squared mass $L$ exactly when it equals $v$. For these nonnegative thresholds, equality is attainable exactly for $a\le a_q$. For any real mass-one vector $w$, write $M_j(w)$ for its $j$th real moment. The exact remainder holds for every real $a$
+$$
+\sum_k w_k^2-L
+=\sum_k(w_k-v_k)^2+\frac{4a}{q}\bigl(M_1(w)+M_2(w)-2a\bigr).
+$$
+This follows from the orthogonality of the two cosines and expansion of the squares. If $a>a_q$, at least one $v_k<0$. For a nonnegative probability weight $w$ satisfying both moment bounds, the moment term is nonnegative. The squared distance at the negative coordinates then gives $\sum_k w_k^2\ge L+\sum_k\max(0,-v_k)^2>L$. The exact optimum after clipping remains open for general moduli.
+
+The double-angle formula gives $s_k=2(c_k+1/4)^2-9/8$. Niven’s theorem excludes $c_k=-1/4$ because the angle is a rational multiple of $\pi$. Hence $m_q>-9/8$. Round the angle with cosine $-1/4$ to the nearest grid point. The error is at most $\pi/q$, so $m_q+9/8\le 2(\pi/q)^2$. The values $s_k$ have mean zero and mean square one. Averaging $(2-s_k)(s_k-m_q)\ge0$ gives $m_q\le-1/2$. Combining the bounds gives
+$$
+0<a_q-\frac49\le\frac{16\pi^2}{9q^2}.
+$$
+Thus $4/9$ is a uniform lower bound for the threshold across moduli. The result controls the squared mass of finite weights. The exceptional frequencies for actual high-order ζ-zero harmonics still require an arithmetic estimate. [Lean proof of the first clipping threshold](lean:D5/S3/Fourier/Concentration/FirstCosineClipping.first_cosine_clipping)
+
+### Minimum squared mass for two spatial modes modulo six
+
+On the six residue classes, write $M_j(w)=\sum_{k=0}^5w_k\cos(j\pi k/3)$ and $E(w)=\sum_{k=0}^5w_k^2$. Take $0\le a\le1$. Among nonnegative probability weights satisfying both $M_1(w)\ge a$ and $M_2(w)\ge a$, the unique minimizer $v$ and its squared mass are
+
+$$
+\begin{aligned}
+v&=
+\begin{cases}
+(1+4a,1,1-2a,1,1-2a,1)/6,& a\le1/2,\\
+(a,(1-a)/3,0,(1-a)/3,0,(1-a)/3),& a>1/2,
+\end{cases}\\
+E(v)&=
+\begin{cases}
+(1+4a^2)/6,& a\le1/2,\\
+a^2+(1-a)^2/3,& a>1/2.
+\end{cases}
+\end{aligned}
+$$
+
+Write $c_k=\cos(\pi k/3)$ and $d_k=\cos(2\pi k/3)$. On each set where $c_k+d_k$ is constant, the values of $c_k-d_k$ sum to zero. Minimizing squared mass for the combined readout $c_k+d_k$ at threshold $2a$ therefore gives $M_1(v)=M_2(v)=a$. The affine weights at residues $2,4$ are clipped to zero as the threshold passes $1/2$. Both formulas agree at that boundary. [Lean proof of the modulo-six optimum and one-mode comparison](lean:D5/S3/Fourier/Concentration/SixResidueMomentOptimum.six_two_mode_optimum)
+
+For any real weights $w$ of total mass one, set $m=M_1(w)+M_2(w)-2a$. The exact remainder is
+
+$$
+E(w)-E(v)-E(w-v)=
+\begin{cases}
+(2a/3)m,& a\le1/2,\\
+((4a-1)/3)m+(2a-1)(w_2+w_4),& a>1/2.
+\end{cases}
+$$
+
+For nonnegative probability weights $w$, the condition $M_1(w)+M_2(w)\ge2a$ implies $E(w)-E(v)\ge\sum_k(w_k-v_k)^2$, so every weight attaining the minimum is equal to $v$. For $0<a<1$, the optimizer $p$ under the first constraint alone has $M_1(p)=a$ and $M_2(p)<a$. The second constraint excludes this optimizer at every interior threshold.
+
+The vector $v$ also occurs as the normalized Fourier weights of a nonnegative spatial kernel modulo six. The weights are invariant under $k\mapsto-k$. Their third real moment $M_3(v)$ equals zero in the first regime and $2a-1$ in the second. Fourier inversion gives $F(0)=1$, $F(\pm1)=F(\pm2)=a$, and $F(3)=M_3(v)\ge0$. This gives the optimal squared-mass coefficient for this band modulo six. Other moduli require checking the level sets of the combined readout, and the exceptional frequencies of the actual ζ zeros still require an arithmetic estimate.
+
+### Failure of a shared cutoff for two modes
+
+Let $q\ge7$ and write $c_k=\cos(2\pi k/q)$, $d_k=\cos(4\pi k/q)$, $s_k=c_k+d_k$, and $x_+=\max(0,x)$. The squared readout and the zero cutoff give two signed sums:
+
+$$
+\sum_{k\bmod q}(c_k-d_k)s_k^2=\frac q4,\qquad
+\sum_{k\bmod q}(c_k-d_k)(s_k)_+>0.
+$$
+
+The double-angle identity gives $s_k=(2c_k-1)(c_k+1)$ and $c_k-d_k=(1-c_k)(2c_k+1)$. Where $s_k>0$, we have $c_k>1/2$, so every clipped term is nonnegative. At $k=1$, the angle lies in $(0,\pi/3)$, giving $1/2<c_1<1$ and a strictly positive term. Since $s_0=2$, the normalized weights $v_k=(s_k)_+/\sum_i(s_i)_+$ have a positive denominator. At a threshold equal to the average of their moments, the combined readout attains the required sum and the second mode falls below the threshold.
+
+Set $z_k=e^{2\pi i k/q}$ and expand $(c_k-d_k)s_k^2$ in powers of $z_k$, grouping terms by exponent. Both constant terms come from $c_k^2d_k$ and each has coefficient $1/8$. The other exponents have absolute value from $1$ to $6$, so character orthogonality cancels them when summing modulo $q\ge7$. If $c_k-d_k$ summed to zero on every level set of $s_k$, the weighted sum with $s_k^2$ would also vanish. Grouping by exponent and retaining the coefficients follows the step in Alpöge's exponential Dirichlet-series argument that organizes product terms by their summed exponent. [Alpöge's exponential Dirichlet-series proof](https://github.com/the-omega-institute/riemann-hypothesis/blob/c7d25b3bfd7906388bb8eb0774e027a2b756a7b6/src/Development/AbelianVarietyTheory/Proofs/AdelicLatticeProofs/LandauSummableOfExpDirichletSeriesEntire.lean#L84) [Lean proof of the two imbalance formulas](lean:D5/S3/Fourier/Concentration/AggregateCosineBalance.aggregate_cosine_imbalance)
+
 ### Fourier weight in a short time range
 
 Let $F$ be a nonnegative real function modulo $q$ whose Fourier coefficients are nonnegative real, with $F(0)>0$. By inversion, $\nu(k)=\widehat F(k)/(qF(0))$ is a probability weight. Suppose $F(r\bmod q)\ge a\ge0$ for $|r|\le H$. For $2H<q$, $2K<q$, and $2HK\le q$,
@@ -622,6 +689,16 @@ $$
 \log M\ \ge\ p\log(N/p)\ \gtrsim\ T^\beta(\log T)^2,
 $$
 using $M\ge(N/p)^p$ from the product formula for the multiset coefficient. The frequencies $g_\gamma=\gamma/r$ lie in a band of width at most $T/r$. For each fixed $c>0$ and sufficiently large $T$, distinct degree-$p$ vectors must therefore collide within resolution $\exp(-cT^\beta\log T)$. The needed arithmetic estimate must control the total weight of those pairs and allow individual near-collisions. [Proportion of simple zeros, §§1.1 and 8](https://arxiv.org/html/1802.10521)
+
+## Both cosine bounds are tight at the joint optimum
+
+For $q\ge4$, set $c_k=\cos(2\pi k/q)$ and $d_k=\cos(4\pi k/q)$. Fix $0<a<1$. The probability weight minimizing $\sum_k w_k^2$ under either one of the bounds $\sum_k w_k c_k\ge a$ and $\sum_k w_k d_k\ge a$ attains its own bound and gives the other moment strictly less than $a$. Every least-squared-mass weight subject to both bounds therefore has both moments equal to $a$.
+
+For a single readout $b$, the optimizer is proportional to $f(b_k)$ with $f(x)=\max(0,1-t(1-x))$ for some $t>0$. Any coordinate at the largest readout below $1$ has positive clipped weight. If its weight vanished, all positive weight would be on readout $1$, so the moment would be $1$. In the first-mode problem, $c_1$ is that largest readout. The identity $c_k-d_k=(1-c_k)(2c_k+1)$ changes sign at $c_k=-1/2$. The two readouts have zero mean, so subtracting $f(-1/2)$ from each weight in the signed sum preserves the sum. The products $(c_k-d_k)(f(c_k)-f(-1/2))$ are nonnegative and the product at $k=1$ is positive.
+
+For the second-mode problem on an even cycle, a half-turn preserves $d$ and negates $c$, so the first moment is zero. On an odd cycle, multiplication by two permutes the residues. Thus the sums of $f(c_k)^2$ and $f(d_k)^2$ agree. The convex function $f^2$ has derivative $2tf$. Its tangent inequality at $d_k$, evaluated at $c_k$, is strict at $k=1$, where $d_1<c_1$ and $f(c_1)>0$. Upon summation this gives $\sum_k(d_k-c_k)f(d_k)>0$. The largest value below $1$ is the same for $d$ and $c$ in this case because doubling is a permutation.
+
+If a joint optimizer had slack in one bound, it could move a small distance toward the optimizer for the other bound. The resulting probability weight would retain both bounds and strictly decrease the squared mass. The two moment equalities hold even after support changes. Determining the support and the exact optimal value after clipping for general moduli remains open, as does the arithmetic estimate for exceptional frequencies of the actual high-order ζ-zero harmonics. [Lean proof of the two tight constraints](lean:D5/S3/Fourier/Concentration/ActiveCosineConstraints.active_cosine_constraints)
 
 ## The exact high-threshold interval for two cosine moments
 
