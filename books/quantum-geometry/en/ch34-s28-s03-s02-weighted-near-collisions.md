@@ -631,7 +631,7 @@ For a single readout $b$, the optimizer is proportional to $f(b_k)$ with $f(x)=\
 
 For the second-mode problem on an even cycle, a half-turn preserves $d$ and negates $c$, so the first moment is zero. On an odd cycle, multiplication by two permutes the residues. Thus the sums of $f(c_k)^2$ and $f(d_k)^2$ agree. The convex function $f^2$ has derivative $2tf$. Its tangent inequality at $d_k$, evaluated at $c_k$, is strict at $k=1$, where $d_1<c_1$ and $f(c_1)>0$. Upon summation this gives $\sum_k(d_k-c_k)f(d_k)>0$. The largest value below $1$ is the same for $d$ and $c$ in this case because doubling is a permutation.
 
-If a joint optimizer had slack in one bound, it could move a small distance toward the optimizer for the other bound. The resulting probability weight would retain both bounds and strictly decrease the squared mass. The two moment equalities hold even after support changes. Determining the support and the exact optimal value after clipping for general moduli remains open, as does the arithmetic estimate for exceptional frequencies of the actual high-order ζ-zero harmonics.
+If a joint optimizer had slack in one bound, it could move a small distance toward the optimizer for the other bound. The resulting probability weight would retain both bounds and strictly decrease the squared mass. The two moment equalities hold even after support changes. Determining the support and the exact optimal value after clipping for general moduli remains open, as does the arithmetic estimate for exceptional frequencies of the actual high-order ζ-zero harmonics. [Lean proof of the two tight constraints](lean:D5/S3/Fourier/Concentration/ActiveCosineConstraints.active_cosine_constraints)
 
 ## Changing the height cutoff in a local statistic
 
