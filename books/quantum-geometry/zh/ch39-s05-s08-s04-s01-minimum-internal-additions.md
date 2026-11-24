@@ -208,7 +208,7 @@ $$
 
 给定一个有限、中心只含单位元的斯坦纳环 $Q$，固定两个互异的非单位元作为枢轴，再取一个有限交换群 $A$，使每个 $a\in A$ 都满足 $a+a=0$。可以构造一个商环为 $Q$、中心为 $A$ 的斯坦纳环，在同一个扩张中任意指定各交替分量的返回量。经过单位元的分量总返回零。构造在每一步加上当前三元组的标签。单位元分量以外，不同的匹配边使用不同的三元组，所以每个分量可用一条边的标签单独设定返回量。沿任一匹配走一步会反转返回，群中的元素都等于自己的相反元，因此同一分量的各个起点具有相同的返回量。 [独立指定返回量](lean:D5/S3/Combinatorics/Matroids/SteinerSchreierExtension.realizeSchreierReturns) · [Falcone、Figula 和 Galici 的扩张乘法，定理 3.1](https://arxiv.org/pdf/2406.12796)
 
-若 $|A|\ge2$，可任选不经过单位元的四圈使其返回量非零。每个选中的四圈贡献正好 $4|A|$ 个成功起点，其余四圈的贡献为零。设 $M$ 是商图中所有长度至少为六的分量的顶点总数，$s$ 是不经过单位元的四圈数。固定这对枢轴，所构造的扩张可实现的成功起点数恰为 $|A|(M+4j)$，其中 $j=0,1,\ldots,s$。这是因为长分量贡献全部原像，选中 $j$ 个四圈便给出额外的 $4j|A|$。要在三元系中读这个数，只需去掉扩张的单位元，以 $\{x,y,xy\}$ 为块，并给剩余点编号。斯坦纳环的乘法使每对不同点恰落在一个块里，沿枢轴乘法走一步就是沿相应匹配走一步。[有限编号下的逐点对应和计数](lean:D5/S3/Combinatorics/Matroids/SteinerSchreierSwitchCount.realizeLabelledSwitchCount)
+设 $M$ 为商图中长度至少为六的分量的顶点总数，$s$ 为不经过单位元的四圈数。固定这对枢轴，长分量总贡献 $M|A|$ 个成功起点，单位元所在的四圈贡献零。其余四圈中，恰有返回量非零的四圈各贡献 $4|A|$ 个起点。若 $|A|\ge2$，可任选四圈设为非零，因此所有可能的计数恰为 $|A|(M+4j)$，其中 $j=0,1,\ldots,s$。平凡纤维只能取 $j=0$。要在三元系中读这个数，去掉扩张的单位元，以 $\{x,y,xy\}$ 为块，并给剩余点编号。斯坦纳环的乘法使每对不同点恰落在一个块里，沿枢轴乘法走一步就是沿相应匹配走一步。[有限编号下的逐点对应和计数](lean:D5/S3/Combinatorics/Matroids/SteinerSchreierSwitchCount.realizeLabelledSwitchCount) · [固定枢轴对的精确计数范围](https://github.com/the-omega-institute/trureturing/blob/78440950a0373cbb5d31fc4c3eaa96f098f2aaba/D5/S3/Combinatorics/Matroids/SteinerFixedPivotCountRange.lean#L260)
 
 对有限个指定的分量，在每条交替回路上选一个起点。第 $i$ 项的向量 $v_i$ 以三元组为坐标，每个坐标记录该三元组被经过的次数模二。经过单位元或两点相同的步骤在归一化扩张中加零，因此略去。记 $u_i$ 为指定的返回量。存在共同标签当且仅当每个二元关系 $\sum_i c_i v_i=0$ 都满足 $\sum_i c_i u_i=0$。
 
@@ -222,11 +222,9 @@ $$
 
 同一个核也决定每对枢轴的成功起点数。在所有三元组的坐标空间里选一个核 $K$，其余维至多为 $\dim_{\mathbb F_2} A$。对第 $j$ 对枢轴，令 $g_j(x)=p_j(q_jx)$。商顶点 $x$ 的所有提升都成功，恰当且仅当 $g_j^2(x)\ne x$，或通过 $x$ 的返回行不属于 $K$。因为 $p_j\ne q_j$，$g_j$ 没有不动点。当 $g_j^2(x)=x$ 时，商图的第一次返回恰好在两轮后发生。提升在两轮后回到原点，恰当且仅当其返回行的像为零。因而每对枢轴的成功数等于选中的商顶点数乘以 $|A|$。任意满足余维条件的 $K$ 都给出一套共同标签，实现这一整组计数。枢轴都不等于单位元时，去掉同一个扩张的单位元并给其余点统一编号，就能在一套完备三元系中同时读出这些计数。扩张的中心恰是单位元上方的纤维。所得标签的线性映射以指定的 $K$ 为核，因此同一个三元系中的每一条返回行在 $K$ 中时返回零，在 $K$ 外时返回非零。 对给定商环，可以逐个计算满足余维条件的核所产生的计数组合，再将重复组合合并。四圈返回行之间的依赖约束哪些组合能同时实现。 [同时计数的证明](lean:D5/S3/Combinatorics/Matroids/SteinerSwitchSupport.commonSwitchCounts) · [统一编号的证明](lean:D5/S3/Combinatorics/Matroids/SteinerSwitchSupport.labelledCommonSwitchCounts)
 
-固定一对枢轴后，计数的范围可以写成一个等差数列。记 $b$ 为两轮后未返回的商顶点数，$s$ 为不含单位元的四点交替分量数。每个四点分量有一个共同的返回位移。若二元纤维 $A$ 非平凡，对这对枢轴，可任选这 $s$ 个分量中的一个子集并让其中的位移非零。每个非零位移产生四个完整纤维，因此可能的计数为 $|A|(b+4k)$，其中 $0\le k\le s$。纤维平凡时只能取 $k=0$。跨枢轴对同时指定计数，仍要满足共同的核条件。 [固定枢轴对计数范围的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/78440950a0373cbb5d31fc4c3eaa96f098f2aaba/D5/S3/Combinatorics/Matroids/SteinerFixedPivotCountRange.lean#L260)
-
 三元有限域上的仿射空间给出一族计数与三元组标签无关的例子。向 $\mathbb F_3^n$ 添加一个新的单位元 $e$。两个不同的仿射点相乘，得到它们所在直线上的第三点 $-x-y$，相同的点相乘则得到 $e$。对不同的仿射枢轴 $p,q$，映射 $x\mapsto p(qx)$ 在直线外是阶为三的平移 $q-p$。在该直线和 $e$ 上，它交换 $p$ 与 $q$，也交换 $e$ 与 $-p-q$。沿这两种两轮返回，略去涉及单位元或相同点的步骤后，同一个三元组各出现两次，所以二元返回行都为零。
 
-当 $n\ge2$，对任一仿射点 $p$，都可选另一枢轴 $q$ 以及两点连线外的一点 $x$。此时 $p(xq)=x+q-p$ 与 $(px)q=x+p-q$ 不同。因此中心只有 $e$。对有限二元向量空间 $A$ 的任意正规化扩张，恰有直线外 $3^n-3$ 个点上方的整个纤维提供成功起点。在对应的带标号三元系中，对任意有序的不同仿射枢轴对，删去提升 $(p,0)$ 并保留 $(q,0)$ 为枢轴，成功起点数都是 $(3^n-3)|A|$。仿射平面配平凡纤维时，恰有六个成功起点。 [仿射计数的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/8b62ebc884025c6806c385e14dcee3a1d1df2ade/D5/S3/Combinatorics/Matroids/SteinerAffineSwitchCount.lean#L384)
+当 $n\ge2$，对任一仿射点 $p$，都可选另一枢轴 $q$ 以及两点连线外的一点 $x$。此时 $p(xq)=x+q-p$ 与 $(px)q=x+p-q$ 不同。因此中心只有 $e$。对有限二元向量空间 $A$ 的任意正规化扩张，恰有直线外 $3^n-3$ 个点上方的整个纤维提供成功起点。在对应的带标号三元系中，对任意有序的不同仿射枢轴对，删去提升 $(p,0)$ 并保留 $(q,0)$ 为枢轴，成功起点数都是 $(3^n-3)|A|$。仿射平面配平凡纤维时，恰有六个成功起点。 [仿射计数的 Lean 证明](lean:D5/S3/Combinatorics/Matroids/SteinerAffineSwitchCount.labelledAffineSwitchCount)
 
 若 $4\mid r$，且存在一个 $r+1$ 点的完备斯坦纳三元系，就能在一个余数类中成功换块。对满足这两个条件的正整数 $r$，取正整数 $d$ 并沿用本节的跨行条件，则饱和扩充的两个最大大小为 [@thm-joint-circuit-steiner-matching-first-deficit] 中的 $N_{\max}$ 和 $N_{\max}-1$。[删点情形的 Lean 证明](lean:D5/S3/Combinatorics/Matroids/SteinerAlternatingSwitches.point_deleted_first_deficit_of_four_dvd)
 
