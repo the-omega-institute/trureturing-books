@@ -391,7 +391,7 @@ For the actual ζ ordinates, the degree-one estimate controls the mass of gaps n
 
 ## A product bound for disjoint residual supports
 
-Let $U_d$ sum $c_d(a)c_d(b)$ over all ordered degree-$d$ pairs with disjoint supports. Every $R_d(\eta)$ is at most $U_d$. For $s\ge0$ and $W=\sum_j w_j$,
+Assume the weights are nonnegative. Let $U_d$ sum $c_d(a)c_d(b)$ over all ordered degree-$d$ pairs with disjoint supports. Every $R_d(\eta)$ is at most $U_d$. For $s\ge0$ and $W=\sum_j w_j$,
 $$
 s^{2d}U_d\le (d!)^2\prod_j(2e^{s w_j}-1)
 \le (d!)^2\exp\!\left(2sW-\sum_j(1-e^{-s w_j})^2\right).
