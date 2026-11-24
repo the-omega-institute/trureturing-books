@@ -10395,6 +10395,122 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "constant-rate-cayley-gravity-sandbox",
+      "code": "OMEGA//BANDWIDTH",
+      "title": "恒定速率与凯莱引力沙盘",
+      "title_en": "Constant Rate and Cayley Gravity",
+      "summary": "沿静止波纹移动唱针，逐址读出数据并累加到寄存器。将恒定带宽分给质量、运动和内部时钟，对比各向同性坐标的有理钟速与面积坐标的根式。观察视界上的内部时钟停摆，以及波前两翼因速度不同而向质量一侧偏转。",
+      "summary_en": "Move the needle over still grooves and add each reading to the register. Split the constant bandwidth among mass, motion and the inner clock, then compare rational clock rates in isotropic coordinates with radicals in areal coordinates. Watch the inner clock stall at the horizon and the wavefront bend toward the mass as its flanks travel at different speeds.",
+      "path": "constant-rate-cayley-gravity-sandbox/",
+      "thumbnail": "constant-rate-cayley-gravity-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-24",
+      "chapter": 38,
+      "section": "38.16",
+      "presets": [
+        "phonograph-needle-static-wave-grooves",
+        "constant-bandwidth-cayley-clock-gear",
+        "isotropic-rational-landmarks-vs-radical",
+        "horizon-io-saturation-clock-stall",
+        "differential-decoding-wavefront-refraction"
+      ],
+      "preset_titles": {
+        "phonograph-needle-static-wave-grooves": {
+          "zh": "唱针滑过静止的波纹沟",
+          "en": "A needle over still wave grooves"
+        },
+        "constant-bandwidth-cayley-clock-gear": {
+          "zh": "恒定带宽与内部时钟齿轮",
+          "en": "Constant bandwidth & the inner clock gear"
+        },
+        "isotropic-rational-landmarks-vs-radical": {
+          "zh": "各向同性有理路标与根式",
+          "en": "Isotropic rational landmarks vs radicals"
+        },
+        "horizon-io-saturation-clock-stall": {
+          "zh": "视界处带宽饱和，时钟停摆",
+          "en": "Saturated at the horizon, the clock stalls"
+        },
+        "differential-decoding-wavefront-refraction": {
+          "zh": "差分解码：波前向质量折射",
+          "en": "Differential decoding: the front refracts"
+        }
+      },
+      "tags": [
+        "恒定带宽",
+        "静止波纹",
+        "有理凯莱引力",
+        "视界",
+        "波前折射"
+      ],
+      "tags_en": [
+        "Constant bandwidth",
+        "Still wave grooves",
+        "Rational Cayley gravity",
+        "Horizon",
+        "Wavefront refraction"
+      ],
+      "theory": [
+        {
+          "label": "§38.16 · 恒定信息速率观察者、唱针式静态波纹解码与零根号凯莱引力钟慢",
+          "label_en": "§38.16 · The Constant-Information-Rate Observer, Phonograph-Needle Decoding of Static Wave Grooves, and Radical-Free Rational Cayley Gravitational Dilation",
+          "href": "../zh/ch38-s16-constant-info-rate-observer-and-rational-cayley-gravity.html#sec-ch38-constant-info-rate-observer-and-rational-cayley-gravity",
+          "href_en": "../en/ch38-s16-constant-info-rate-observer-and-rational-cayley-gravity.html#sec-ch38-constant-info-rate-observer-and-rational-cayley-gravity"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_add_spread_eq_one"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_complete"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_min"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.quaternion_fractran_deterministic"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.heap_norm_preserved"
+        },
+        {
+          "gid": "D5/S3/Quantum/Routing/ReversibleQram.correctness"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
