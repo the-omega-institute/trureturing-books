@@ -342,6 +342,8 @@ $$
 M_p(a-b)\le \binom pd^{\!2} D_{p-d}\,c_d(a)c_d(b).
 $$
 
+固定计数差的精确式与对角界见 Lean 证明。 [Lean 证明](lean:D5/S3/Fourier/Concentration/FixedDifferenceOccupationMass.fixed_difference_mass)
+
 记 $R_d(\eta)$ 为支撑互不相交、总次数均为 $d$ 且 $|\sum_j(a_j-b_j)g_j|\le\eta$ 的有序对权重 $c_d(a)c_d(b)$ 之和。把上式在这样的 $a,b$ 上求和，便得到剩余次数为 $d$ 的配对总权重上界 $\binom pd^2 D_{p-d}R_d(\eta)$。$d=0$ 给出原对角项。$d=1$ 只需要带权的不同指标对。对按不同纵坐标合并重数的 ζ 尾段，这就是不同纵坐标对。对实际 ζ 尾段，$d$ 可随 $p$ 增长，这时 $R_d(\eta)$ 的所需上界仍是开放问题。 [贝塞尔级数中的移位阶乘，DLMF 10.25.2](https://dlmf.nist.gov/10.25.E2)
 
 ## 有限频带中的和必须接近
