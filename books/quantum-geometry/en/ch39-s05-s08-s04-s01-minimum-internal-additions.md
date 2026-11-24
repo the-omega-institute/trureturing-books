@@ -211,6 +211,14 @@ Let $M$ count the quotient vertices in components of length at least six, and le
 
 The blocks themselves determine when such a square exists. Take six distinct points $p,q,a,b,c,d$. If $\{q,a,b\},\{p,b,c\},\{q,c,d\},\{p,d,a\}$ are blocks, they form a Pasch configuration. The pivots $p,q$ are opposite in the configuration, so none of its four blocks contains both. Alternating the $q$ and $p$ steps around these four blocks gives a square that avoids the identity. Conversely, the four edges of any such square give the four blocks of a Pasch. For a fixed pivot pair and a nontrivial binary fibre, the successful-start count therefore varies with the labels exactly when the original triple system contains a Pasch with those pivots opposite. [Pasch configuration, Definition 2.5 and Figure 1](https://arxiv.org/html/2406.12796v2#S2.F1)
 
+Write $W(p,q)$ for the maximum successful-start count minus the minimum at the fixed pair. Under the assumptions above, with $A$ nontrivial, each Pasch with opposite points $p,q$ contributes $4|A|$ to $W(p,q)$. Each Pasch has three pairs of points that share none of its blocks. For example, with blocks $\{a,b,c\},\{a,d,e\},\{b,e,f\},\{c,d,f\}$, these pairs are $\{a,f\},\{b,d\},\{c,e\}$. Each pair has two orderings. If $P$ counts the Pasches of the original triple system as sets of four blocks, then
+
+$$
+\sum_{\substack{p,q\in Q\setminus\{1_Q\}\\p\ne q}} W(p,q)=24|A|P,
+$$
+
+where $1_Q$ is the identity of the quotient loop. Each width in the sum takes its extrema independently over the label tables for that pair. If $A$ is trivial, every width is zero. [Erskine and Griggs, page 2](https://arxiv.org/pdf/2405.07750v1#page=2)
+
 For a finite family of requested components, choose one starting point on each alternating circuit. For request $i$, let $v_i$ be the binary vector whose coordinate at a triple counts its traversals modulo two. Omit the steps involving the identity or a repeated point, which add zero in the normalized extension. Write $u_i$ for the requested return. A common labelling exists exactly when every binary relation $\sum_i c_i v_i=0$ also satisfies $\sum_i c_i u_i=0$.
 
 The return on a full circuit is the sum of its labels, so any common labelling respects these relations. For the converse, send $v_i$ to $u_i$. The relation condition makes this assignment a well-defined linear map on the span of the rows. Extend a basis of that span to a basis of the full vector space on triples and assign zero on the added vectors. Evaluating the extended map on the original triple coordinates supplies the labels. Each representative then has the requested return, and taking matching steps carries that return to all starts in its component. [Lean proof of the simultaneous return criterion](lean:D5/S3/Combinatorics/Matroids/SteinerReturnDependencies.realizesExactlyCompatibleReturns)
