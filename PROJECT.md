@@ -192,3 +192,7 @@ PR 在实际合并树上按相对第一父提交的文件变化选择任务；�
 4. **严格范围边界（仍保持 `OPEN` 或 `MODEL` 的事项）**：上述证明只覆盖有理数域 $\mathbb{Q}$ 上的黎曼 $\zeta$ 函数与全部模 $N \ge 1$ 的狄利克雷 $L$ 函数。以下命题**不由** RH 与狄利克雷 GRH 推出，在本书库中继续严格保持各自身份：
    - **仍为数学开放问题（`OPEN`）**：一般代数数域戴德金 $\zeta_K$ 函数的扩展黎曼猜想（ERH）、高阶自守 $L$ 函数的全广义黎曼猜想（Grand RH）、零点单重性猜想（$\zeta'(\rho) \neq 0$）、蒙哥马利 GUE 对关联猜想与希尔伯特—波利亚自伴算子构造、梅滕斯无余量界 $M(x) = O(\sqrt{x})$、乘性子树移位纠缠面积律（`prob-ch34-arithmetic-pivot-area-law`），以及不依赖上述外部证明而独立给出乘性舒尔枢轴修饰证明的方法论问题。
    - **仍为物理假说或诠释模型（`MODEL` / `OPEN`）**：玻恩规则、连续统自旋-$2$ 引力动力学（`prob-ch34-gravity-dynamics-and-coupling`）、宇宙学常数 $\Lambda \sim 10^{-122}$ 与过去假设（`prob-ch34-past-hypothesis-and-cosmological-constant`）、标准模型手征反常抵消与规范耦合统一阈值（`prob-ch34-sm-generations-and-couplings`、`prob-ch39-af-gut-threshold-and-proton-stability`），以及三元数场网络的大规模实证性质（`prob-ch39-tft-scale-and-seams`）。不得把纯数论定理越级包装为对这些物理假说的证明。
+
+## 15. 迁移到纯 Omega 数学
+
+trureturing `dev` 的 `OmegaInit` 与 `OmegaMath` 是不依赖 Mathlib、零公理的严格库。书中凡能用它陈述、且换过去数学内容不变的形式化结论，逐步改为引用冻结行 `libraries` 为 `{OmegaInit, OmegaMath}` 的非空子集、`axioms` 为 `[]` 的 D5 声明（“仅 Omega · 零公理”）。需要实数、复数、极限、测度、拓扑或赋范空间的结论不在此列；把它们改写成有理数版本是作者的写作决定，不算迁移。上游一律走 trureturing `CLAUDE.md` §3.2 的“OmegaMath 的 D5 出版引用”：通用结果进 `src/OmegaMath/`，书用结论放在只导入 Omega 模块的 `prelude` D5 模块，合入并冻结后再回书改引用。方法与盘点脚本见 [skills/local-omega-migration/SKILL.md](skills/local-omega-migration/SKILL.md)；批次、复核结论与进度只记在追踪 Issue [#1217](https://github.com/the-omega-institute/trureturing-books/issues/1217)，遵守第 11 节。
