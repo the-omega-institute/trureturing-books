@@ -508,6 +508,19 @@ For each representative $h$ in the band, start with the pairs $(j,j)$ for $0\le 
 
 When $N\le q$, the first $N$ natural numbers have distinct residues. Orthogonality then gives $\sum_k|B_N(k)|^2=qN$. If only magnitudes are available, drop $HM(0)$ and replace the real part with $|\widehat M(k)|$. The band mass is then bounded by a probability-weighted magnitude average times $N/(N-H)$. For $N=2H+1\le q$ the factor is below $2$. Inserting the disjoint coefficient estimate into that average leaves the weighted contribution of frequencies where the actual ζ-zero character sums are large. [Fejér kernel](https://dlmf.nist.gov/1.15#E15)
 
+### Prefix weight on exceptional frequencies
+
+For $1\le N\le q$, write $\nu(k)=|B_N(k)|^2/(qN)$ and $m=(2N-q-1)_+$, where $x_+=\max(x,0)$. The sum of squared weights is
+
+$$
+\sum_{k\bmod q}\nu(k)^2
+=\frac{N(2N^2+1)+m(m+1)(m+2)}{3qN^2}.
+$$
+
+For $0\le r<q$, the only possible integer differences of prefix indices reducing to $r$ are $r$ and $r-q$. The ordered pair count $c_r$ is therefore $(N-r)_++(N-(q-r))_+$. Character orthogonality gives $\sum_k|B_N(k)|^4=q\sum_r c_r^2$. When the square is expanded, both counts are positive on $q-N+1\le r<N$. The two lists of counts run in opposite orders there, giving the cross term $2\sum_{j=1}^m j(m+1-j)=m(m+1)(m+2)/3$. This term vanishes when $q\ge 2N-1$. When $N=q$, all the weight lies at frequency zero.
+
+For an exceptional set $E$, Cauchy–Schwarz gives $(\sum_{k\in E}\nu(k))^2\le |E|\sum_k\nu(k)^2$. If $E$ excludes frequency zero, subtract $\nu(0)^2=(N/q)^2$ from the sum of squares on the right. Arithmetic estimates must still determine which frequencies of the actual ζ-zero sum exceed a given threshold at the required order and how many there are.
+
 ## Tracking the common occupation degree
 
 For the same residue data, keep the common part of the two degree-$p$ vectors by adding a variable $z$. Put $h=\sum_j\min(m_j,n_j)$, so the residual degree is $p-h$. Let $M_{h,R}$ be the mass with common degree $h$ and signed gap in $R$. Define
