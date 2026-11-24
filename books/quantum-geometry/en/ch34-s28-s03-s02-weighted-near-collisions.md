@@ -148,6 +148,23 @@ Equality forces every selected character to be one wherever $K>0$. Inversion mak
 
 For a collision bound using $K$, the zero-frequency term is $(M/q)W^{2p}$. If $0\in R$ and the real parts of the remaining coefficients are all nonnegative, the full bound is at least $W^{2p}/m$. With coefficients of both signs, the mean inequality controls the zero-frequency term, while the other terms depend on high moments from a common set of weights.
 
+A measured second coefficient can be close to zero. **Hand derivation.** Let one probability weight $w_j$ act on unit phases $z_j$. Write $m=\sum_j w_jz_j$, $b=\sum_j w_jz_j^2$ and $c=|m|^2$. For $0<c<1$, put $X_j=\overline m z_j$ and $t=\sqrt{c(1-c)}$. Set $\eta_j=1$ when $\Im X_j\ge0$ and $\eta_j=-1$ otherwise. The variance of the real part controls the squared error to two candidate points and the difference between their assigned masses. Put
+
+$$
+D=\frac c2-c^2+\frac12\Re(\overline m^{\,2}b).
+$$
+
+Then
+
+$$
+\begin{aligned}
+\sum_j w_j\lvert X_j-c-i\eta_jt\rvert^2 &\le (1+4/t^2)D,\\
+\left(\sum_j w_j\eta_j\right)^2 &\le 4D/t^4.
+\end{aligned}
+$$
+
+Write $x=\Re X_j$ and $y=\Im X_j$. The identity $x^2+y^2=c$ gives $(|y|-t)(|y|+t)=c^2-x^2$. Use $|x+c|\le2$ and $|y|+t\ge t$ to control the imaginary error by the real error. The imaginary mean vanishes, so weighted Cauchy–Schwarz bounds the mass difference. Both errors vanish when $b=0$ and $c=1/2$. A quantitative gap on a discrete grid also requires the angular separation of the available phases.
+
 **Example modulo four (hand derivation).** Test which Fourier moments can arise from the same initial weights. On $\mathbb Z/4\mathbb Z$, let $w=(a,b,c,d)$ be a probability weight, and let $u=|\widehat w(1)|^2$, $v=|\widehat w(2)|^2$. The discrete Fourier transform without the factor $1/4$ gives
 
 $$
