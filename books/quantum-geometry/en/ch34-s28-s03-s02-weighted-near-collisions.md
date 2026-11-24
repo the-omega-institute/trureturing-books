@@ -754,12 +754,13 @@ Z=\sum_{|j|\le n}(t-j^2)>0.
 $$
 Their second moment is exactly $m$. The two budget endpoints correspond to $t=n^2$ and $t=(n+1)^2$. Only the sites $|j|\le n-1$ have positive weight at the lower endpoint. Above it the support expands to $|j|\le n$ and retains that radius through the upper endpoint. The closed intervals meet at their endpoints and cover all $m\ge0$. At $m=0$ the entire mass is at zero.
 
-The candidate's second moment is a ratio of finite sums. Substituting the two endpoints for $t$ and using the sums of squares and fourth powers gives the two budget endpoints. Continuity gives the intermediate budgets. For any feasible weight $v$ with second moment $s$, expand the difference of squared masses and use $(t-j^2)/Z\le w_j$, with equality wherever $w_j>0$. This gives
+The candidate's second moment is a ratio of finite sums. Substituting the two endpoints for $t$ and using the sums of squares and fourth powers gives the two budget endpoints. Continuity gives the intermediate budgets. For any nonnegative law $v$ of mass one with convergent second moment $s$, expand the difference of squared masses. Split the cross term into the contribution from $(t-j^2)/Z$ and the correction outside the support to obtain
 $$
 \sum_j v_j^2-\sum_j w_j^2
-\ge \sum_j(v_j-w_j)^2+\frac{2(m-s)}{Z}.
+= \sum_j(v_j-w_j)^2+\frac{2(m-s)}{Z}
+  +\frac{2}{Z}\sum_j (j^2-t)_+v_j.
 $$
-The inequality gives strict uniqueness, so adjacent intervals choose the same weights at their shared endpoint. On the first interval $0\le m\le3/5$, the three possible sites have weights $1-m$ at zero and $m/2$ at each neighbor. In the second-harmonic scale $\lambda=8\pi^2m$, the upper endpoint is exactly $24\pi^2/5$. A quantitative transfer of the lattice minimum back to the finite cycle has to account for the second cosine also approaching $1$ near the antipode.
+The last term is summable and nonnegative. When $s\le m$, the identity gives strict uniqueness, so adjacent intervals choose the same weights at their shared endpoint. The choice $n=\lfloor\sqrt{5m+1}\rfloor$ gives a single interval with $(n^2-1)/5\le m<n(n+2)/5$ for any $m\ge0$. On the first interval $0\le m\le3/5$, the three possible sites have weights $1-m$ at zero and $m/2$ at each neighbor. In the second-harmonic scale $\lambda=8\pi^2m$, the upper endpoint is exactly $24\pi^2/5$. A quantitative transfer of the lattice minimum back to the finite cycle has to account for the second cosine also approaching $1$ near the antipode.
 
 ## Changing the height cutoff in a local statistic
 
