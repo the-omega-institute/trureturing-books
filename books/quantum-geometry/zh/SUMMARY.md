@@ -241,6 +241,7 @@
   - [39.5 二元配关系成三元场与两阶关系推未来：从 2+1=3 换位正交闭环、规范联络与李三元曲率到比安基—奥斯特罗格拉茨基二阶封顶](ch39-s28-dyad-relation-future-and-second-order-field.md)
   - [39.6 过去·现在·未来与 0 · 1/2 · 1 纯有理因果射流母矩阵：三元数球面射流阶梯、中点自对偶律与 1 ↦ 0 宇宙心跳](ch39-s30-past-present-future-rational-jet-triad.md)
   - [39.7 大一统母公理的谱真身——三元球面有理傅里叶变换（ℱ_Ω）：彼得—魏尔半整数自旋壳层、整系数切比雪夫—维格纳多项式核、0·1/2·1 谐波底座与流群卷积对角化](ch39-s37-spherical-fourier-transform-peter-weyl-synthesis.md)
+  - [39.8 OmegaMath 零公理去近似重编译与全书自指结晶图谱收束：六大支柱纯有理还原、d⁸ 四极切片、赫克—拉马努金正定界与十二晶核不动点闭环](ch39-s38-omega-math-recompilation-and-self-referential-atlas-closure.md)
 
 # 终章与附录
 
