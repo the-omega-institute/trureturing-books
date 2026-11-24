@@ -4,6 +4,8 @@
 [site]
 # PDF 随 GitHub Release 发布，站点使用已发布的附件链接。
 pdf_release_only = true
+# 网页按音轨实时绘制影片，完整 MP4 随书籍 Release 提供下载。
+film_release_only = true
 # GitHub 仓库 owner/name。留空时 CI 用 GITHUB_REPOSITORY，本地用 git remote 推断。
 repo = ""
 # Pages 根地址（PDF/EPUB 中的外链用它拼绝对地址）。留空则由 repo 推断为 https://<owner>.github.io/<name>/。
