@@ -98,7 +98,7 @@
    \frac{d\tau}{dt} \;=\; \cos\theta_{\mathrm{grav}}(r) \;=\; \sqrt{1 - \eta_{\mathrm{info}}(r)} \;=\; \sqrt{1 - \frac{2GM}{r c^2}} \;=\; \sqrt{1 - \frac{r_s}{r}}.
    $$
 
-   例如在中子星表面典型强场半径 $r = 2.50\,r_s$ 处（静止悬停 $\beta = 0$），引力信息负载占去 $\eta_{\mathrm{info}} = 1/2.50 = 0.400$（$40.0\%$），结余平方带宽为 $0.600$，固有时帧率精确降为 $d\tau/dt = \sqrt{0.600} \approx 0.7746$。若该观察者在半径 $r$ 的局域静态正交标架下同时具有物理运动速度 $v_{\mathrm{loc}}$（$\beta_{\mathrm{loc}} := v_{\mathrm{loc}}/c$），引力背景分流与局域空间寻址作两级正交级联相乘，当场给出相对于远场史瓦西坐标时 $t$ 的完整双重复合钟慢因子（`手工推导`，且与史瓦西外部线元 $c^2 d\tau^2 = c^2(1-r_s/r)dt^2(1 - v_{\mathrm{loc}}^2/c^2)$ 严格恒等）：
+   （进一步在 [§38.16](ch38-s16-constant-info-rate-observer-and-rational-cayley-gravity.md#sec-ch38-constant-info-rate-observer-and-rational-cayley-gravity) 中，只要把面积半径 $r$ 换为外尔—爱丁顿各向同性有理负载 $\mu = \frac{r_s}{4R}$、$r = R(1+\mu)^2$，上式平方根便恒等消去为零根号凯莱有理钟慢率 $\frac{\Delta\tau}{\Delta t} = \frac{1-\mu}{1+\mu} \in \mathbb{Q}$，并将波动接收统一为恒定速率焦点在静态相位声槽上的就地扫描解码。）例如在中子星表面典型强场半径 $r = 2.50\,r_s$ 处（静止悬停 $\beta = 0$），引力信息负载占去 $\eta_{\mathrm{info}} = 1/2.50 = 0.400$（$40.0\%$），结余平方带宽为 $0.600$，固有时帧率精确降为 $d\tau/dt = \sqrt{0.600} \approx 0.7746$。若该观察者在半径 $r$ 的局域静态正交标架下同时具有物理运动速度 $v_{\mathrm{loc}}$（$\beta_{\mathrm{loc}} := v_{\mathrm{loc}}/c$），引力背景分流与局域空间寻址作两级正交级联相乘，当场给出相对于远场史瓦西坐标时 $t$ 的完整双重复合钟慢因子（`手工推导`，且与史瓦西外部线元 $c^2 d\tau^2 = c^2(1-r_s/r)dt^2(1 - v_{\mathrm{loc}}^2/c^2)$ 严格恒等）：
 
    $$
    \frac{d\tau}{dt} \;=\; \sqrt{\bigl(1 - \eta_{\mathrm{info}}(r)\bigr)\!\left(1 - \frac{v_{\mathrm{loc}}^2}{c^2}\right)} \;=\; \sqrt{\left(1 - \frac{2GM}{r c^2}\right)\!\left(1 - \frac{v_{\mathrm{loc}}^2}{c^2}\right)}.

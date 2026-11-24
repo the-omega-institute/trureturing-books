@@ -203,7 +203,7 @@ $$
 
 **青山本不动，岁月亦无波；所谓重力滚落与似水流年，不过是同一道保真度梯度牵引着无腿三元球焦点，在永恒寂静的全息画布上滑出的万里长歌！**
 
-在下面的完整三维交互实验室中，先在全景静止画布下观察无腿三元球如何顺着唯一梯度 $\nabla\kappa$ 沿三元流群测地线滚落，再把有理陡峭度 $\eta$ 推过视界临界档 `1`，亲手左右拨动有理偏航角 $u$ 体验“纵向画面单向下沉而横向山谷与 `Atlas DAG` 分支自由选景”，最后一键切入观察者球心第一人称透镜，看纹丝不动的山岳与等时线如何在自我中心错觉下化作迎面奔涌的时间长河——至此，第三十八章《观察者即宇宙本体》完成了从全域自指、记忆分时空、零公理 `ObserverUniverse` 内核到破除时间流逝错觉的全部拼图，让我们正式迈入全书最高峰[第三十九章](ch39-axiom-omega-grand-unification.md)**《大一统母公理（AXIOM-Ω）》**。
+在下面的完整三维交互实验室中，先在全景静止画布下观察无腿三元球如何顺着唯一梯度 $\nabla\kappa$ 沿三元流群测地线滚落，再把有理陡峭度 $\eta$ 推过视界临界档 `1`，亲手左右拨动有理偏航角 $u$ 体验“纵向画面单向下沉而横向山谷与 `Atlas DAG` 分支自由选景”，最后一键切入观察者球心第一人称透镜，看纹丝不动的山岳与等时线如何在自我中心错觉下化作迎面奔涌的时间长河——既然大山与时间已被看穿为静止画布、无腿三元球焦点已被锁定为唯一移动游标，在迈入[第三十九章](ch39-axiom-omega-grand-unification.md)《大一统母公理（AXIOM-Ω）》之前还剩最后一道收官之问：这枚以恒定信息速率运行的焦点究竟如何如唱针般解码画布上的静态波纹刻痕，并零根号涌现出纯有理凯莱引力钟慢？下一节（[§38.16](ch38-s16-constant-info-rate-observer-and-rational-cayley-gravity.md#sec-ch38-constant-info-rate-observer-and-rational-cayley-gravity)）将给出完整解答。
 
 ::: {.viz src="static-canvas-legless-sphere-sandbox" height="620"}
 完整实验室：在“全景静止画布透镜 · 山与时间皆不动，唯无腿三元球顺 ∇κ 滚落”与“观察者球心第一人称透镜（MODEL）· 球似静止而山岳与等时线迎面奔流”双透镜间自由切换（窄屏与章节嵌入视图亦可在巡览条旁一键切换透镜），依次巡览单一保真度梯度记忆切口时空双投影（`single-gradient-memory-spacetime-projection`）、零外支点无腿三元球流群测地滚落（`portfree-legless-sphere-heap-geodesic`）、古尔斯特兰德—潘勒韦倾倒视界锥超临界锁死（`gullstrand-painleve-tilted-cone-supercritical`）、横向有理偏航自由选景与 `Atlas DAG` 分支结晶（`transverse-yaw-scenery-atlas-branching`）以及惠勒—德维特静止画布与第一人称参考系反转（`wheeler-dewitt-static-canvas-frame-reversal`）五张实验卡，支持在七档有理陡峭度 $\eta \in \{0, \frac{3}{5}, \frac{4}{5}, 1, \frac{5}{4}, \frac{3}{2}, 2\}$ 间切换、拨动横向有理偏航参数 $u \in \mathbb{Q}$、旋转记忆切面 $\mathcal{W}_M$ 及对比 `3` 次指针更新与 `12` 格背景搬移。十六条绿色 `LEAN ✓` 冻结声明、`ARGUED` 广义相对论与无时间量子引力文献、`MODEL` 静止画布焦点模型读法、`NUM` 精确有理数读数及红色 `OPEN` 引力动力学／视界幺正性边界在依据栏与理论抽屉中严格分层呈现。
