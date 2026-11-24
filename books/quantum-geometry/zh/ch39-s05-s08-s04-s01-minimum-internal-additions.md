@@ -185,9 +185,9 @@ $$
 :::
 
 ::: proof
-包含 $\ast$ 的四圈依次经过 $p$、$m(v)$ 和 $v$。四圈以外的顶点都可用作起点 $a$。从 $a$ 分别按两种次序各走一次两套匹配的边，到达 $d$ 和 $m(b)$。两条路终点相同当且仅当 $a$ 在四圈上。若 $4\mid r$，总点数 $r+2$ 除以四余二，所以至少有一个分量的大小达到六。完整证明由 Lean 内核检查。
+包含 $\ast$ 的四圈依次经过 $p$、$m(v)$ 和 $v$。含 $\ast$ 的四圈以外的顶点都可用作起点 $a$。从 $a$ 分别按两种次序各走一次两套匹配的边，到达 $d$ 和 $m(b)$。两条路终点相同，当且仅当 $a$ 所在的分量是一个四圈。若 $4\mid r$，总点数 $r+2$ 除以四余二，所以至少有一个分量的大小达到六。完整证明由 Lean 内核检查。
 :::
 
-当 $4\mid r$ 且存在一个 $r+1$ 点的完备斯坦纳三元系时，因而总能在一个余数类中换块。取正整数 $d,r$ 并沿用本节的跨行条件，饱和扩充的两个最大大小为 [@thm-joint-circuit-steiner-matching-first-deficit] 中的 $N_{\max}$ 和 $N_{\max}-1$。[删点情形的 Lean 证明](lean:D5/S3/Combinatorics/Matroids/SteinerAlternatingSwitches.point_deleted_first_deficit_of_four_dvd)
+若 $4\mid r$，且存在一个 $r+1$ 点的完备斯坦纳三元系，就能在一个余数类中成功换块。对满足这两个条件的正整数 $r$，取正整数 $d$ 并沿用本节的跨行条件，则饱和扩充的两个最大大小为 [@thm-joint-circuit-steiner-matching-first-deficit] 中的 $N_{\max}$ 和 $N_{\max}-1$。[删点情形的 Lean 证明](lean:D5/S3/Combinatorics/Matroids/SteinerAlternatingSwitches.point_deleted_first_deficit_of_four_dvd)
 
-例如，例如在 $\mathbb F_3^2$ 的仿射平面中删去原点，$m(a)=-a$，且 $b=-v-a$、$d=-v+a$。此时 $b+d=v\ne0$，因此换块达到极大。取 $r=8,d=1$，得到 $264$ 和 $263$ 两种饱和大小。对于法诺平面的二元向量表示，剩余两点满足 $b+d=p$，相同换块总会留下可补的三角形。 [局部极大装填谱](https://doi.org/10.1007/BF01388482)
+例如在 $\mathbb F_3^2$ 的仿射平面中删去原点，$m(a)=-a$，且 $b=-v-a$、$d=-v+a$。此时 $b+d=v\ne0$，因此换块达到极大。取 $r=8,d=1$，得到 $264$ 和 $263$ 两种饱和大小。对于法诺平面的二元向量表示，剩余两点满足 $b+d=p$，相同换块总会留下可补的三角形。 [局部极大装填谱](https://doi.org/10.1007/BF01388482)
