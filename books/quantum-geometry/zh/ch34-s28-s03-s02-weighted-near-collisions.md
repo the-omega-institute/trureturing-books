@@ -218,6 +218,16 @@ $d>0$ 时，$c$ 严格介于零与一之间。两矩稳定性给出的两个理�
 
 对实际 ζ 纵坐标，可按前一节在 $X=e^{-D}T^\beta$ 以上截取尾段，并取 $\delta=\log T$、$g_\gamma=\gamma/r$。给定 $H=\exp(cT^\beta\log T)$，可取 $N=\lfloor HT^2/r\rfloor_++1$，使网格误差不超过 $rB/(2T^2)$。要得到有限的起点范围，还需在某个 $L=L(T)$ 上证明相应的严格预算 $KNE_p(2/L)<(\log T)^{2p}$。目标阶数 $p$ 随 $T^\beta\log T$ 增长。对固定的有限尾段和固定 $p$，随着 $L$ 增大，$E_p(2/L)$ 最终等于精确碰撞质量 $E_p(0)$。若要量化 $L$，仍须控制正分辨率下的加权近碰撞。Tao、Trudgian 与 Yang 的定义 7 计数的是单位尺度的无权四元组，定理 64 的估计适用于固定的 $\sigma\ge7/10$。临界线尾段的增长阶数加权界仍待证。 [定义 7 与定理 64](https://arxiv.org/html/2501.16779v1) · [研究问题](https://github.com/the-omega-institute/trureturing/issues/33519)
 
+设 $x=e^{s/r}>1$，则时间 $s$ 处的单频项是 $x^{i\gamma}$。Ford 与 Zaharescu 的显式公式先处理累积和 $\sum_{0<\gamma\le t}x^\rho$。令 $n_x$ 为最接近 $x$ 的素数幂，$\theta=\log(x/n_x)$。主项等于 $-\Lambda(n_x)/(2\pi)$ 乘以 $\int_0^t e^{i\theta u}\,du$。在黎曼猜想下，除以 $\sqrt{x}$ 后的累积和就是按重数计入的纵坐标相位和。 [Ford 与 Zaharescu，引理 1](https://arxiv.org/pdf/math/0405459)
+
+取权重 $w(u)=u/(u^2+1/4)$，记 $J_\theta(X,T)=\int_X^T w(u)e^{i\theta u}\,du$。对 $1/2\le X\le T$，
+$$
+|J_\theta(X,T)|\le\frac12\log\frac{T^2+1/4}{X^2+1/4},
+\qquad
+|\theta|\,|J_\theta(X,T)|\le 2w(X).
+$$
+第一个界来自相位的单位模，且在 $\theta=0$ 时取等号。第二个界来自分部积分。$w$ 在该区间递减，因而导数项的模至多是 $w(X)-w(T)$，与边界项中的 $w(T)$ 相消。对实际零点加权和使用这两个界，还要通过分部求和传递显式公式中的累积误差。误差随 $x=e^{s/r}$ 增长，在所需的长时间尺度上仍缺少对异常频率总贡献的估计。
+
 即使相位可在整个圆周上取值，第二和第四谐波也能给出尖锐的界。对单位相位的一组概率权重，记 $m_h=\sum_j w_j z_j^h$。令 $0\le e,k\le1$ 分别为 $|m_2|,|m_4|$ 的上限，记 $b=\min(e,\sqrt{(1+k)/2})$、$r=(1+b)/2$。若 $b=1$，则 $|m_1|$ 的最大值为 $1$。若 $b<1$，令
 
 $$

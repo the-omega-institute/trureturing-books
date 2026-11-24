@@ -218,6 +218,16 @@ When $4\nmid q$, reduce $4k-q$ to a centered residue modulo $2q$ for each intege
 
 For actual ζ ordinates, use the tail above $X=e^{-D}T^\beta$ from the preceding section, with $\delta=\log T$ and $g_\gamma=\gamma/r$. For $H=\exp(cT^\beta\log T)$, take $N=\lfloor HT^2/r\rfloor_++1$ to keep the mesh error at most $rB/(2T^2)$. To bound the start, a finite $L=L(T)$ must satisfy the budget $KNE_p(2/L)<(\log T)^{2p}$. The target order $p$ grows on the scale of $T^\beta\log T$. For fixed finite tail and fixed $p$, $E_p(2/L)$ eventually equals the exact collision mass $E_p(0)$ as $L$ increases. Quantifying $L$ requires a weighted bound at positive resolution. Definition 7 in Tao, Trudgian, and Yang counts unweighted quadruples at unit scale, and Theorem 64 gives estimates for fixed $\sigma\ge7/10$. The growing-order weighted bound for the critical-line tail remains open. [Definition 7 and Theorem 64](https://arxiv.org/html/2501.16779v1) · [Research question](https://github.com/the-omega-institute/trureturing/issues/33519)
 
+At time $s$, put $x=e^{s/r}>1$ so that an individual phase is $x^{i\gamma}$. The explicit formula of Ford and Zaharescu starts with the cumulative sum $\sum_{0<\gamma\le t}x^\rho$. Let $n_x$ be the nearest prime power to $x$ and set $\theta=\log(x/n_x)$. The main term is $-\Lambda(n_x)/(2\pi)$ times $\int_0^t e^{i\theta u}\,du$. Under the Riemann hypothesis, dividing the cumulative sum by $\sqrt{x}$ gives the ordinate phase sum with multiplicities. [Ford and Zaharescu, Lemma 1](https://arxiv.org/pdf/math/0405459)
+
+Use $w(u)=u/(u^2+1/4)$ and write $J_\theta(X,T)=\int_X^T w(u)e^{i\theta u}\,du$. For $1/2\le X\le T$,
+$$
+|J_\theta(X,T)|\le\frac12\log\frac{T^2+1/4}{X^2+1/4},
+\qquad
+|\theta|\,|J_\theta(X,T)|\le 2w(X).
+$$
+The unit modulus of the phase gives the first bound, with equality at $\theta=0$. Integration by parts gives the second. The weight decreases on the interval, so the derivative term has modulus at most $w(X)-w(T)$, cancelling the $w(T)$ from the boundary term. Applying these bounds to the weighted zero sum also requires transferring the cumulative explicit-formula error by partial summation. That error grows with $x=e^{s/r}$, and the aggregate contribution of exceptional frequencies on the required long time scale remains open.
+
 The second and fourth harmonics give a sharp bound even when the phases range over the whole circle. Write $m_h=\sum_jw_jz_j^h$ for the moments of one probability weight on unit phases. Given caps $0\le e,k\le1$ on $|m_2|,|m_4|$, put $b=\min(e,\sqrt{(1+k)/2})$ and $r=(1+b)/2$. If $b=1$, the largest $|m_1|$ is $1$. If $b<1$, put
 
 $$
