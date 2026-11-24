@@ -15,6 +15,8 @@
 7. **无无穷·无超越数的有限有理数学 $\mathbf{Math}_\Omega$（[§32.7](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md#sec-ch39-infinity-free-transcendental-free-rational-mathematics)）**：以齐次射影对 $[P : Q] \in \mathbb{QP}^1_{\le M}$（含对径北极 $[1 : 0]$）、双卡有理正逆凯莱旋转 $\mathbf{R}(\boldsymbol{\sigma}) \in \mathrm{SO}(3,\mathbb{Q})$、切比雪夫有理谐波与无极限二阶有理射流商环 $\mathbb{Q}[\eta]/(\eta^3)$ 构建全可判定的有限有理数学体系；
 8. **Lean 4 零公理形式化基座 `OmegaMath`（[§32.8](ch39-s36-lean4-zero-axiom-omega-math-architecture.md#sec-ch39-lean4-zero-axiom-omega-math-architecture)）**：不改 Lean 4 内核、不借半条自定义 `axiom`，直接在纯归纳构造演算（CIC）之上以免商规范整数三元载体 `ProjTernion`、`class OmegaSpace` 相容性核验与单向阴影函子 $\Pi_{\mathbb{R}}$ 落地零公理可执行形式化基座。
 
+[姊妹卷《OMEGA MATH》六卷目录](https://github.com/the-omega-institute/trureturing-books/blob/main/books/omega-math/zh/SUMMARY.md)
+
 ::: {.figure src="ch32-overview"}
 **图 32。三维旋度自闭合封顶、三元数四路数系切面与多场再投影流群搬运。** 第 I 栏，三张有向平面各自配对唯一法向轴，正维数中仅 $d = 3$ 满足旋度自闭合 $\binom{d}{2} = d$（绿色 `LEAN ✓` 叉乘分类，[§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)）；第 II 栏，实可除代数单位球阶梯 $S^0, S^1, S^3, S^7$ 与原生三元数 $T_3 \cong S^3$ 分出的四条切刀支路：四元数嵌入、复投影、实标量与整数绕数（[§32.2](ch39-s19-inexpressible-ternions-and-number-projections.md)）；第 III 栏，对比希尔伯特重投影的 $2^N$ 复维数税与原生 $3N$ 实参数账本（[§32.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)），下方圆弧示意无原点流群三元搬运 $[a, b, c] = a b^{-1} c$ 保持同一相对转角（[§32.4](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md)）。
 :::

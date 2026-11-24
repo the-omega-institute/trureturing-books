@@ -89,6 +89,10 @@
 4. **Lean 4 形式化验证与内核审计路径**：
    [序曲](README.md) §认识论契约 $\to$ [铸器与圣殿](sanctuary.md)（`Cl3`、`PauliSymplectic`、`ZYZ` 参考引擎及其冻结依据与 `FiniteRecordCosineObstruction` 的剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对所钉冻结声明、书面证明与开放问题的证据边界）$\to$ [附录 E](appendix-e.md)（核验从零背景比较公理 $\mathcal{A}_0$ 到数学与物理公理体系的分层推演与 `H1`–`H9` 桥接假设总账）$\to$ [附录 F](appendix-f.md)–[附录 I](appendix-i.md)（审阅排除面与定向关系分类、稳定子多面体之外的魔性与转向阈值、有限视界观察者与历史账本，以及量子信息散度、逆测试可达性、子熵与可分锥残差见证四组专题形式化核验）。
 
+::: {.remark #rem-coda-sister-monograph-omega-math title="姊妹专著导读：零公理有理数学 OMEGA MATH（OMEGA//MATH）"}
+凡希望沿纯数学演绎路线系统攻读无无穷、无超越数有理体系的读者，可直接转入独立姊妹专著 **[《OMEGA MATH》（`OMEGA//MATH`）六卷目录](https://github.com/the-omega-institute/trureturing-books/blob/main/books/omega-math/zh/SUMMARY.md)**：全书六卷十八章按齐次有理数系、流群球面几何、无极限射流微积分、三维球面无 $\pi$ 调和分析、阿代尔与赫克—拉马努金谱论及 $\Omega$-FRACTRAN 与空内核审计依次展开，并在终章配齐 **[六卷全景对照与四模式全息工作台导引](https://github.com/the-omega-institute/trureturing-books/blob/main/books/omega-math/zh/coda.md)**。
+:::
+
 ## 第六至第十部（第 21–39 章）及铸器与圣殿的冻结定理锚点 {#sec-coda-part6-part7-register}
 
 下表选列第六至第十部与铸器与圣殿的冻结声明。定理锚点链接到书中列出该声明的环境。

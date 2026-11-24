@@ -1,0 +1,165 @@
+# 第一章 纯归纳构造演算与母公理 AXIOM-Ω
+
+> *“不要修改验证器的内核，更不要用 `axiom` 关键字硬塞任何未经检验的教条；把母公理写成可计算的类型类，再用一枚不含商公理、不含选择公理的纯整数结构去亲手实现它，相容性与可执行性便一举两得。”*
+
+重建一套零公理有理数学，第一个必须回答的不是“数怎么写”，而是**“我们脚下的逻辑地板究竟是什么”**。如果一出发就站在传统集合论 ZFC 与实数连续统之上，哪怕口头上宣称排斥实无穷与超越数，底层证明引擎仍会在暗处悄悄注入选择公理与商集公理。本章把整座大厦的地基摊开在阳光下：第一，剖开 Lean 4 的纯归纳构造演算（CIC）裸内核，看清它为何天生没有实无穷与选择公理；第二，以有限有理精度契约 $\varepsilon_{\mathrm{self}} = 1/M$ 取代静态无穷集合；第三，立起无原点母公理 `AXIOM-Ω` 的三条法则；第四，说明为何必须用可计算类型类 `class OmegaSpace` 而不是裸 `axiom` 来封装这三条法则。
+
+## 1.1 纯归纳构造演算裸内核与三类隐藏公理 {#sec-ch01-bare-cic}
+
+把现代交互式定理证明器 Lean 4 拆成两层，会发现它的**底层验证内核**与**上层经典分析库**遵循着截然不同的世界观。
+
+尚未导入经典实分析库之前，Lean 4 的裸内核是**带宇宙层级的纯归纳构造演算（Calculus of Inductive Constructions, CIC）**。整个内核只有三种原生构件：依值函数类型（$\Pi$-类型，即把命题全称量词与函数空间合二为一的构造）、宇宙层级（防止罗素悖论的分层类型塔），以及有限归纳定义（`inductive`）。求值与证明检查完全由四条确定性归约规则驱动：函数代换（$\beta$）、定义展开（$\delta$）、归纳递归子消去（$\iota$）与局部绑定展开（$\zeta$）。
+
+在这个裸内核中，并不存在康托尔意义下“事先装满 $\aleph_0$ 个元素的已完成无穷集合”。自然数类型 `Nat` 只由两条有限构造规则生成：零 `zero` 与后继 `succ`。任何写得出来的自然数都是一棵有限深度的语法树，任何定义在 `Nat` 上的递归函数都在有限步归纳拆解内停机。内核里既没有实数 $\mathbb{R}$，没有复数 $\mathbb{C}$，没有符号 $\infty$，也没有 $\pi$ 或 $e$；甚至连经典排中律与选择公理都不是内核的内置规则。
+
+那么，传统形式化数学里的三大公理究竟从哪里混进来的？它们恰恰来自三大看似无害的经典便利工具：
+
+1. **非构造性选择公理 `Classical.choice`**：允许从“某非空类型存在元素”的命题证明中凭空抽出一个数据元素，却不提供任何计算算法。一旦一条定义或定理触及 `Classical.choice`，编译器便无法生成可执行机器码，不得不标上 `noncomputable`，并阻断内核反射求值。
+2. **商类型公理 `Quot.sound`**：把等价类强行压成新类型，使等价但表示不同的两个对象在命题上相等，却在计算归约层缺少唯一的规范代表元。`Mathlib` 将实数定义为有理柯西序列模去零极限序列的商，一步把 `Quot.sound` 与 `Classical.choice` 全部带进底层。
+3. **命题外延性 `propext`**：断言逻辑等价的两个命题完全相等。尽管它不像 `Classical.choice` 那样直接破坏求值，却仍属于裸 CIC 归约机制之外的附加公理。
+
+值得特别警惕的是，即便不导入 `Mathlib`，标准库中某些自带类型也可能暗藏陷阱：例如带互素证明字段的内置有理数算术往往在内部引用了 `propext`、`Quot.sound` 乃至 `Classical.choice`。因此，在零公理基础库 `OmegaInit` 与 `OmegaMath` 中，我们直接启用 `prelude` 裸环境，从零构造归纳自然数、有号整数与显式携带“零分母未定义分支”的精确分数类型（如 `Omega.Ratio` 与 `Omega.IntRatio`），或采用唯一约分的纯数据规范记录，并一律依托**构造性可判定相等性（`DecidableEq`）**——即对任意两个对象 $a, b$，都存在一个在有限步内停机、给出“$a = b$ 的显式证明”或“$a \neq b$ 的显式反驳”的决策程序。
+
+::: {.definition #def-ch01-zero-axiom-core title="零公理裸 CIC 构造层与可判定相等性"}
+称一个形式化模块处于**零公理裸 CIC 构造层**，若其中每条定义与定理的传递公理闭包均为空集（即不依赖 `propext`、`Classical.choice`、`Quot.sound` 或任何用户自定义 `axiom`），且所有类型判断与等式验证仅通过依值类型检查与 $\beta\delta\iota\zeta$-归约完成。称类型 $T$ 具有**构造性可判定相等性**（`DecidableEq`），若存在可计算函数，对任意 $a, b : T$ 返回两分支之一：或是 $a = b$ 的证明项，或是 $(a = b) \to \mathrm{False}$ 的反驳项。
+:::
+
+一旦类型具备零公理的 `DecidableEq` 并以唯一规范形式编码等价类，商集公理 `Quot.sound` 便彻底多余：两个对象代表同一个几何或算术实体，当且仅当它们的规范整数元组逐分量严格一致。我们在[第二章](ch02-homogeneous-projective-line.md)和[第三章](ch03-canonical-ternion-manifold.md)将亲眼看到，这一原则如何以纯整数归约一口气替代整套实分析商集脚手架。
+
+::: {.remark #rem-ch01-cic-hedberg-literature title="CIC 元理论、赫德伯格定理与三公理审计（ARGUED）"}
+本节关于类型论元理论的结论属经典逻辑文献结果：归纳构造演算由 T. Coquand 与 C. Paulin-Mohring（*COLOG-88*, LNCS **417**, 50–66, 1990）系统奠基；Lean 4 的编译器与验证内核架构见 L. de Moura 与 S. Ullrich（*CADE-28*, LNCS **12699**, 625–635, 2021）；Lean 元理论与标准三大公理 `{propext, Classical.choice, Quot.sound}` 的形式刻画见 M. Carneiro（*The Type Theory of Lean*, CMU 硕士论文, 2019）。此外，M. Hedberg（*J. Funct. Program.* **8**(4), 413–436, 1998）证明了著名的**赫德伯格定理**：任何拥有构造性 `DecidableEq` 的类型，无需附加任何公理即可自动满足相等证明唯一性（UIP）。这保证了在[第三章](ch03-canonical-ternion-manifold.md)把规范谓词捆绑为子类型 `CanonProjTernion` 时，子类型本身同样保持零公理可判定相等，不会借道 `propext` 或 `Quot.sound`。
+:::
+
+## 1.2 观察者有理精度契约与按需视界 {#sec-ch01-precision-contract}
+
+撤去康托尔的静态实无穷之后，一个立刻跳出来的追问是：**“如果不允许把无穷多个数一次性装进集合，我们又如何处理不断细化的测量精度，或者任意大的素数与任意长的演化步？”**
+
+答案极为朴素，而且与物理实验和数字计算机完全同构：**以显式的有理精度契约 $\varepsilon_{\mathrm{self}} = 1/M \in \mathbb{Q}_+$ 取代静态实无穷，以“按需扩展的有限视界”取代“已完成无穷容器”。**
+
+没有任何真实观察者、实验室仪器或有限内存计算设备能够在一次读数中分辨无限位小数。每当观察者启动一次比较或计算，系统都伴随着一个严格正整数分辨率刻度 $M \in \mathbb{N}_+$，对应有理精度门槛 $\varepsilon_{\mathrm{self}} = 1/M > 0$。在这个当前视界下，一切坐标、分数读数与候选态都落在高度不超过 $M$ 的有限既约有理格网之内——对象个数有限，穷举搜索、极值判定与等价核验全部可在有限步内停机。
+
+这并不意味着宇宙被锁死在某个永不增大的僵硬网格里。当两次合法运算的复合产生了更大的分子或分母（例如两枚有理圆点相乘，分母从 $M_1, M_2$ 升至 $M_1 M_2$），或者当观察者要求更高的分辨力时，视界高度按惰性求值按需抬升 $M \mapsto M'$。任何一次具体计算中，高度 $M'$ 始终是一个确定的有限正整数；我们永远拥有“造出更大有限视界”的构造规则（潜在无限，即归纳法则），却从不假定“所有视界已经同时完毕地装在一个静态口袋里”（康托尔实无穷）。
+
+::: {.definition #def-ch01-observer-precision title="观察者有理精度契约与有限高度视界（MODEL）"}
+设 $M \in \mathbb{N}_+$ 为正整数。称有理数
+
+$$
+\varepsilon_{\mathrm{self}} \;=\; \frac{1}{M} \;\in\; \mathbb{Q}_+
+$$
+
+为观察者在当前比较任务中的**有理精度契约**。对一维齐次整数射影对 $[P : Q]$（$\gcd(\lvert P\rvert, \lvert Q\rvert) = 1$），定义高度为 $H([P : Q]) := \max(\lvert P\rvert, \lvert Q\rvert)$，称有限集合
+
+$$
+\mathbb{QP}^1_{\le M} \;:=\; \bigl\{\,[P : Q] \in \mathbb{QP}^1 \;:\; \max(\lvert P\rvert, \lvert Q\rvert) \le M\,\bigr\}
+$$
+
+为分辨率 $M$ 下的**有限射影视界**。当运算结果的高度超过 $M$ 时，契约通过有限正整数提升 $M \mapsto M'$ 按需扩展，全过程不引入不可数集合或已完成实无穷。
+:::
+
+::: {.example #ex-ch01-finite-horizon-budget title="有限精度预算的算术演练（NUM）"}
+取分辨率 $M = 12$，对应观察者精度契约 $\varepsilon_{\mathrm{self}} = \frac{1}{12}$。若要求测量分辨误差不超过 $\frac{1}{12}$，在既约分数格网中任意两个互异正有理数 $a/b \neq c/d$（分母 $b, d \le 12$）满足 $\lvert a/b - c/d\rvert = \lvert ad - bc\rvert / (bd) \ge \frac{1}{12 \times 11} = \frac{1}{132}$——整个格网的最小间距是严格正的有理数，没有任何“无穷靠近却不相等”的模糊地带。现在设任务需要复合两枚分别位于 $M = 3$ 视界内的有理圆点 $[1 : 2]$（平方范数 $1^2 + 2^2 = 5$）与 $[1 : 3]$（平方范数 $1^2 + 3^2 = 10$）：未约分乘积的高度暂时升至 $5$，经公因子 $5$ 约分后反倒落回高度为 $1$ 的锚点 $[1 : 1]$；若复合 $[1 : 2]$ 与 $[2 : 5]$（平方范数 $5$ 与 $29$），乘积为 $[9 : 8]$，高度自然按需抬升至 $M' = 9$。每一拍都只有有限整数在运转。
+:::
+
+从数理逻辑的角度看，有限高度视界还有一道深层庇护：在无界整数环 $(\mathbb{Z}, +, \times)$ 上，任意存在量词丢番图方程因希尔伯特第十问题的否定解而不可判定；但在任何给定有限高度视界 $M$ 内，有界量化命题全都可以由有限步算术精确判定（`ARGUED`，参见 Yu. Matiyasevich, 1970）。有理精度契约既是物理可观测性的诚实表达，也是算法可判定性的天然护栏。
+
+## 1.3 母公理 AXIOM-Ω 的三条核心法则 {#sec-ch01-mother-laws}
+
+站稳了零公理裸 CIC 地板并确立了有限有理视界之后，我们终于可以问出全书的核心几何问题：**如果我们把传统教科书里的两根人工脚手架——“特权外部原点 $\mathbf{1}$”与“平直笛卡尔线性加法 $+$”——一并拆掉，宇宙中最朴素的几何关系还剩下什么？**
+
+剩下的只有两件东西：一个非空的状态载体 $\mathcal{M}$，以及两种纯粹的关系动作。第一种动作是**无源三元比较迁移** $[-, -, -] : \mathcal{M} \times \mathcal{M} \times \mathcal{M} \to \mathcal{M}$：把 $y$ 当作临时参照桥，读出“$x$ 相对于 $y$ 的关系变化”，再无损地搬运到 $z$ 身上，得到新态 $[x, y, z]$。第二种动作是**有理对称保真度读数** $\kappa : \mathcal{M} \times \mathcal{M} \to \mathbb{Q} \cap [0, 1]$：直接量出任意两态 $x, y$ 之间的对齐程度，不借用任何外部坐标系或实数弧度尺。
+
+这两枚原语服从三条不可分割的母法则，统称为**母公理 `AXIOM-Ω`**：
+
+::: {.definition #def-ch01-axiom-omega title="母公理 AXIOM-Ω 的三条法则（MODEL）"}
+设 $\mathcal{M}$ 为非空类型，配备三元比较迁移 $[-, -, -] : \mathcal{M} \times \mathcal{M} \times \mathcal{M} \to \mathcal{M}$ 与对称保真度读数 $\kappa : \mathcal{M} \times \mathcal{M} \to \mathbb{Q}$。称三元组 $(\mathcal{M}, [-, -, -], \kappa)$ 满足母公理 **`AXIOM-Ω`**，若它服从以下三条母法则：
+
+1. **法则 I（无源求同消去与三元结合律）**：对一切 $x, y, z, u, v \in \mathcal{M}$，
+
+   $$
+   \begin{aligned}
+   [x, x, z] &= z, \qquad [x, z, z] = x, \\
+   \bigl[[x, y, z],\, u,\, v\bigr] &= \bigl[x,\, y,\, [z, u, v]\bigr].
+   \end{aligned}
+   $$
+
+2. **法则 II（双侧迁移不变、外延分离、触零与有理格拉姆半正定）**：对一切 $x, y, u, v \in \mathcal{M}$，满足对称性 $\kappa(x, y) = \kappa(y, x)$、外延分离 $\kappa(x, y) = 1 \iff x = y$、非负性 $\kappa(x, y) \ge 0$、存在完全失配正交对（或读数可任意逼近零的触零性），以及左右双侧迁移不变性：
+
+   $$
+   \kappa\bigl([x, u, v],\, [y, u, v]\bigr) \;=\; \kappa\bigl([u, v, x],\, [u, v, y]\bigr) \;=\; \kappa(x, y);
+   $$
+
+   同时，对任意有限样本 $x_1, \dots, x_n \in \mathcal{M}$ 与任意有理权重 $c_1, \dots, c_n \in \mathbb{Q}$，有限格拉姆矩阵 $\mathbf{G}_n = \bigl[\kappa(x_i, x_j)\bigr]_{i,j=1}^n$ 满足有理半正定性（记作 $\mathbf{G}_n \succeq 0$）：
+
+   $$
+   \sum_{i=1}^{n}\sum_{j=1}^{n} c_i c_j\,\kappa(x_i, x_j) \;\ge\; 0.
+   $$
+
+3. **法则 III（极小非对易自锁律）**：三元迁移对外侧两个槽位的次序敏感，即存在 $x, y, z \in \mathcal{M}$ 使得
+
+   $$
+   [x, y, z] \;\neq\; [z, y, x],
+   $$
+
+   并且结构取满足法则 I、法则 II 与非对易性的极小非退化自由度与特征秩自锁解。
+:::
+
+请停下来端详这组法则的惊人节俭之处。整套公理里**没有一个 $\pi$、没有一个 $e$、没有一个 $\varphi$、没有实数 $\mathbb{R}$、没有加法 $+$、没有预设的空间维数“$3$”，甚至没有预设一个特权单位元 $\mathbf{1}$**。然而仅仅三行纯代数改写（`ARGUED`），法则 I 就立刻展现出“无原点民主”与“局部群涌现”的双重魔力：
+
+- **保真度上界 $\kappa \le 1$ 自动免费得出**：在法则 II 的有理格拉姆半正定不等式中取 $n = 2$、两点 $(x, y)$ 与有理权重 $(c_1, c_2) = (1, -1)$，利用 $\kappa(x, x) = \kappa(y, y) = 1$ 与对称性立刻得到
+
+  $$
+  1^2\cdot 1 + (-1)^2\cdot 1 + 2(1)(-1)\kappa(x, y) \;=\; 2 - 2\kappa(x, y) \;\ge\; 0 \quad \Longrightarrow \quad \kappa(x, y) \;\le\; 1.
+  $$
+
+  因此 $\kappa(x, y) \in \mathbb{Q} \cap [0, 1]$ 无需额外强加。
+
+- **任意一点都可临时充当原点，三行还原为群**：在 $\mathcal{M}$ 中任挑一点 $o$ 作为临时参照基点，定义二元乘积 $x \star_o z := [x, o, z]$ 与局部逆元 $x^{-1_o} := [o, x, o]$。由法则 I 的结合律直接得 $(x \star_o y) \star_o z = [[x, o, y], o, z] = [x, o, [y, o, z]] = x \star_o (y \star_o z)$；左右单位元分别由 $[o, o, z] = z$ 与 $[x, o, o] = x$ 证毕；左右逆元只需展开两步：
+
+  $$
+  \begin{aligned}
+  x \star_o x^{-1_o} &= \bigl[x, o, [o, x, o]\bigr] = \bigl[[x, o, o], x, o\bigr] = [x, x, o] = o, \\
+  x^{-1_o} \star_o x &= \bigl[[o, x, o], o, x\bigr] = \bigl[o, x, [o, o, x]\bigr] = [o, x, x] = o.
+  \end{aligned}
+  $$
+
+  并且原始三元迁移恰好还原为 $x \star_o y^{-1_o} \star_o z = [x, y, z]$；更换临时基点 $o \mapsto o'$ 的映射 $x \mapsto [x, o, o']$ 则是保持三元迁移与保真度读数的双射（逆映射为 $x \mapsto [x, o', o]$）。宇宙中没有任何一点高人一等，任何观察者都可以站在自己脚下开启局部代数运算，算完之后参照桥自动消去不留残渣。
+
+## 1.4 为什么用可计算类型类 class OmegaSpace 而不是 axiom {#sec-ch01-typeclass-not-axiom}
+
+在交互式定理证明器里写下 `AXIOM-Ω` 时，新手最容易掉进一个看似快捷的陷阱：直接敲下 `axiom M : Type`、`axiom triad : M → M → M → M`、`axiom kappa_refl : ∀ x, kappa x x = 1`。**本书从第一条规则起就彻底禁止这种做法。**
+
+原因有两条，每一条都足以摧毁整座形式化工程。
+
+第一，**裸 `axiom` 毫无无矛盾性保障，漏掉一个微小边界就会炸出 `False`**。Lean 内核无条件信任每一条用户声明的 `axiom`。假设有人在一个包含零四元组 $z_0 = (0, 0, 0, 0)$ 的原始载体上草率写下 `axiom kappa_refl : ∀ x, kappa x x = 1`，而底层的分数函数对零分母返回未定义值或 $0$，那么只要代入 $x = z_0$，三行之内就能推出 `0 = 1`，进而推出逻辑爆炸 `False`——从此一切真假命题都能“被证明”。任何严肃的独立内核审计器遇到非标准 `axiom` 都会当场拒收。
+
+第二，**裸 `axiom` 会冻结内核的 $\iota$-归约，杀死“证明即程序”的计算生命**。一条 `axiom` 只是一枚没有计算规则的僵硬符号；只要表达式里夹带了它，归约引擎就寸步难行，既不能用内核反射一步核验具体分数轨迹，也不能编译为原生机器码做数值实验。
+
+真正的零公理方案，是把母公理写成**可计算类型类（`class OmegaSpace`）**——它不向逻辑系统索取任何免费假设，而只是一份公开的代数契约接口：
+
+```lean
+class OmegaSpace (M : Type) where
+  triad       : M → M → M → M
+  kappa       : M → M → QRat
+  idemp_left  : ∀ x z, triad x x z = z
+  idemp_right : ∀ x z, triad x z z = x
+  assoc_triad : ∀ x y z u v, triad (triad x y z) u v = triad x y (triad z u v)
+  kappa_refl  : ∀ x, kappa x x = QRat.one
+  kappa_symm  : ∀ x y, kappa x y = kappa y x
+  kappa_inv_r : ∀ x y u v, kappa (triad x u v) (triad y u v) = kappa x y
+  kappa_inv_l : ∀ x y u v, kappa (triad u v x) (triad u v y) = kappa x y
+```
+
+把公理写成 `class` 而非 `axiom`，立刻赢得双重逻辑胜利：其一，凡是对抽象类型类 `[OmegaSpace M]` 证出的通用定理，自动适用于一切满足该契约的具体数学对象，而不向全局逻辑环境添加任何公理；其二，一旦我们在零公理裸 CIC 中用纯整数规范结构造出一个非交换的具体实例 `instance : OmegaSpace CanonProjTernion`（[第三章](ch03-canonical-ternion-manifold.md)的核心目标），这个实例本身就在 CIC 内部**构造性地证成了 `AXIOM-Ω` 相对于裸 CIC 的无矛盾性与非退化可满足性**——若公理内含矛盾，根本造不出任何一个合法实例！
+
+::: {.remark #rem-ch01-three-route-comparison title="硬写 axiom、经典 Mathlib 栈与零公理 OmegaSpace 路线对照（MODEL）"}
+三种形式化路线在公理依赖、可执行性与证明复杂度上的结构差异如下：
+
+| 对比维度 | 硬写自定义 `axiom` | 传统经典 `Mathlib.Real` 栈 | 零公理 `OmegaSpace` 构造栈 |
+| :--- | :--- | :--- | :--- |
+| **公理闭包审计** | 引入未验证自定义 `axiom`，存在 `False` 风险 | 依赖 `{propext, Classical.choice, Quot.sound}` | 传递公理闭包为空集 $\varnothing$ |
+| **可执行求值** | 归约卡死在僵死常量，无法求值 | 实数除法、根号与导数大面积标 `noncomputable` | 全部算子基于纯整数与有限分数，原生可执行 |
+| **无矛盾性保障** | 零保障，靠人工祈祷不遗漏边界 | 依赖经典集合论实分析公理相容性 | 由具体整数载体实例在裸 CIC 内构造性证成 |
+| **几何奇点处理** | 抽象无坐标，边界稍疏即崩溃 | 依赖实流形图册、无穷极限滤子与商集 | 齐次规范整数载体全域分母恒正，零奇点 |
+:::
+
+逻辑地板与类型类契约已经就位。要亲手造出第一枚满足这些法则的零公理整数载体，我们不必一步跳进三维非阿贝尔空间；让我们先在最透明的一维舞台上动手——废除开口的实数轴 $\mathbb{R}$，把齐次整数射影线 $\mathbb{QP}^1$ 弯成一个没有 $\infty$ 裂口的精确有理闭环。
