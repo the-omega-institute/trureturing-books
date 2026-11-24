@@ -264,6 +264,35 @@ The degree-$p$ sums have at most $1+p(B-A)$ possible integer positions. Group th
 
 For example, fix $m_j=\lceil(\log_2(2+g_j))^2\rceil$ once for each positive frequency. On shared tail indices with $cT^\alpha\le g_j\le T$, fixed $c,\alpha>0$, $N=O(T\log T)$, and at most polynomial growth of $\lambda$, the change in every such fixed-order statistic tends to zero. Fix $0<\beta<1$. At $p\asymp T^\beta\log T$, the denominator satisfies $\log[1+p(B-A)]=O((\log T)^2)$. If $W\asymp(\log T)^2$ and $\delta=\log T$, the missing-window moment budget requires normalized mass at most $\exp(-2p\log\log T+O(p))$ even with one time sample. The rounded spectrum's exact collision mass already exceeds that budget. The two local statistics use the same tail indices. Separate height cutoffs require accounting for entries that cross the endpoints. The transfer to the original spectrum gives a lower bound at resolution $ph$, and the upper bound at the finer target resolution remains open.
 
+## Equal count vectors in the moment expansion {#weighted-occupation-diagonal}
+
+Let $J$ be finite, with real weights $w_j$ and integer degree $p\ge0$. Write $D_p=\sum_{|m|=p}c_m^2$, where $c_m=p!\prod_j(w_j^{m_j}/m_j!)$. For nonnegative weights, the weighted near-collision mass includes this diagonal at every nonnegative resolution. For each $s\ge0$,
+
+$$
+s^pD_p\le (p!)^2\prod_{j\in J}(2e^{s w_j^2/2}-1).
+$$
+
+Dividing the left side by $(p!)^2$ gives the sum of the degree-$p$ terms in $\prod_j\sum_{n=0}^p x_j^n/(n!)^2$, with $x_j=sw_j^2$. Including every term gives an upper bound by nonnegativity. For $n\ge1$, the inequality $n!\ge2^{n-1}$ bounds each positive-degree term by twice its counterpart in $e^{x_j/2}$. The constant coefficient is one, so the factor is at most $2e^{x_j/2}-1$. The full series is $I_0(2\sqrt{x_j})$. [Lamzouri's independent-phase product, §3](https://arxiv.org/html/2311.04860v2#S3) · [DLMF, equation 10.25.2](https://dlmf.nist.gov/10.25.E2)
+
+For $p\ge1$ and $V=\sum_jw_j^2>0$, put $s=p/V$. The identity $2e^{x/2}-1=e^x[1-(1-e^{-x/2})^2]$ gives
+
+$$
+\frac{D_p}{p!\,V^p}\le
+\frac{p!e^p}{p^p}\prod_{j\in J}
+\left[1-\left(1-e^{-p w_j^2/(2V)}\right)^2\right].
+$$
+
+Stirling's formula gives a prefactor of order $\sqrt p$. If at least $\kappa p$ coordinates have $p w_j^2/V\ge a$ for constants $\kappa,a>0$, the product is at most $[1-(1-e^{-a/2})^2]^{\kappa p}$.
+
+Under RH, take $X=e^{-K}T^\beta$ with fixed $K$ and $0<\beta<1$, and $p\asymp X\log X$. Group multiplicity by distinct ordinate and use $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$. The [multiplicity estimate for the logarithmic tail](ch34-s28-s03-s02-mobius-and-spectra.md#thm-ch31-logarithmic-missing-window) is $\sum_{0<\gamma\le Y}m_\gamma^2=O(Y\log Y)$. For each fixed $C\ge2$, the Riemann–von Mangoldt formula gives $\sum_{X<\gamma\le CX}m_\gamma\sim(C-1)X\log X/(2\pi)$. Cauchy–Schwarz gives at least $M\gg CX\log X$ distinct ordinates in the band, with an absolute lower-bound constant for fixed $C$ and sufficiently large $X$. Choose a fixed $C$ large enough that $M\ge2p$. Then $CX\le T$ eventually, and each of these weights is at least $1/(2CX)$. Since $V=O(\log X/X)$, these coordinates supply the exponential factor in the upper bound. For the lower bound, keep the vectors that occupy exactly $p$ distinct coordinates in the band. They give
+
+$$
+D_p\ge (p!)^2\binom{M}{p}(2CX)^{-2p}
+   \ge p!\,(M/(8C^2X^2))^p .
+$$
+
+Thus there are constants $0<c_1\le c_2$ with $e^{-c_2p}\le D_p/(p!V^p)\le e^{-c_1p}$ for all sufficiently large $T$. With tail weight $W\asymp(\log T)^2$, this gives $\log(D_p/W^{2p})=-2p\log\log T+O(p)$. The ζ asymptotics use the cited analytic inputs. The weight of near-collisions between two distinct count vectors still requires an arithmetic estimate. [Multiplicity input, Theorem 1 and §7](https://arxiv.org/abs/2306.04799)
+
 ## A finite frequency band forces close sums
 
 Let $J$ have $N$ elements, with all $g_j\in[a,b]$. Write $F(m)=\sum_jm_jg_j$. There are $M=\binom{N+p-1}{p}$ count vectors of degree $p$.

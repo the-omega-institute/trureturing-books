@@ -976,33 +976,6 @@ $$
 
 在 [@thm-ch31-logarithmic-missing-window] 中，无需约束首段频率之间的关系，首段的贡献至多为 $W(X)$。取 $X=e^{-K}T^\beta$ 时，尾段方差满足 $V\le D\log T/T^\beta$。对频率 $g_\gamma=\gamma/r$ 取网格间距 $r/T^2$，令 $\delta=\log T$、$p=\lfloor T^\beta\log T/(4D)\rfloor$，于是 $2pV/\delta^2\le1/2$。当 $c=\log 2/(8D)$ 时，长度 $H=\exp(cT^\beta\log T)$ 最终满足严格网格预算。若尾段频率直到 $2p$ 阶都满足上述整数关系条件，即可保留相同的带符号得分余量。实际 ζ 尾段互异正纵坐标能否满足这个条件仍是开放问题。
 
-## 计数向量相同的对角项
-
-取有限指标集 $J$、实权重 $w_j$ 和整数 $p\ge0$。令 $D_p=\sum_{|m|=p}c_m^2$，其中 $c_m=p!\prod_j(w_j^{m_j}/m_j!)$。当权重非负时，[加权近碰撞质量](ch34-s28-s03-s02-weighted-near-collisions.md) 在每个非负分辨率下都包含这部分。对每个 $s\ge0$，
-
-$$
-s^pD_p\le (p!)^2\prod_{j\in J}(2e^{s w_j^2/2}-1).
-$$
-
-把左边除以 $(p!)^2$，得到 $\prod_j\sum_{n=0}^p x_j^n/(n!)^2$ 中总次数恰为 $p$ 的项之和，其中 $x_j=sw_j^2$。保留所有非负项可取上界。当 $n\ge1$ 时，$n!\ge2^{n-1}$，所以每个正次项至多是 $e^{x_j/2}$ 中相应项的两倍。常数项为一，故每个因子至多为 $2e^{x_j/2}-1$。无穷级数等于 $I_0(2\sqrt{x_j})$。 [Lamzouri，§3 的独立相位乘积](https://arxiv.org/html/2311.04860v2#S3) · [DLMF，式 10.25.2](https://dlmf.nist.gov/10.25.E2)
-
-设 $p\ge1$、$V=\sum_jw_j^2>0$，取 $s=p/V$。恒等式 $2e^{x/2}-1=e^x[1-(1-e^{-x/2})^2]$ 给出
-
-$$
-\frac{D_p}{p!\,V^p}\le
-\frac{p!e^p}{p^p}\prod_{j\in J}
-\left[1-\left(1-e^{-p w_j^2/(2V)}\right)^2\right].
-$$
-
-Stirling 公式给出前因子 $O(\sqrt p)$。如果至少 $\kappa p$ 个指标满足 $p w_j^2/V\ge a$，其中 $\kappa,a>0$ 与 $p$ 无关，那么乘积至多为 $[1-(1-e^{-a/2})^2]^{\kappa p}$。
-
-在 RH 下，取 $X=e^{-K}T^\beta$，固定 $K$ 和 $0<\beta<1$，取 $p\asymp X\log X$，按不同纵坐标合并重数，令 $w_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$。用上文的重数平方和上界 $\sum_{0<\gamma\le Y}m_\gamma^2=O(Y\log Y)$。Riemann–von Mangoldt 公式对每个固定 $C\ge2$ 给出 $\sum_{X<\gamma\le CX}m_\gamma\sim(C-1)X\log X/(2\pi)$。Cauchy–Schwarz 因而给出此带中互异纵坐标数 $M\gg CX\log X$，隐含下界常数可取为与 $C$ 无关，取定 $C$ 后让 $X$ 充分大。可选固定 $C$ 使 $M\ge2p$，且最终 $CX\le T$。每个带内权重至少为 $1/(2CX)$。由 $V=O(\log X/X)$，这些指标满足上式的折减条件。另一方面，对角和中恰好选取 $p$ 个不同带内指标的项给出
-
-$$
-D_p\ge (p!)^2\binom{M}{p}(2CX)^{-2p}
-   \ge p!\,(M/(8C^2X^2))^p .
-$$
-
-因此存在常数 $0<c_1\le c_2$，使得充分大 $T$ 时 $e^{-c_2p}\le D_p/(p!V^p)\le e^{-c_1p}$。用尾段总权重 $W\asymp(\log T)^2$ 归一化，可得 $\log(D_p/W^{2p})=-2p\log\log T+O(p)$。这里的 ζ 渐近估计使用上述文献输入。两个不同向量产生近频率和的总权重仍需单独的算术估计。 [重数平方和的文献输入，定理 1 与 §7](https://arxiv.org/abs/2306.04799)
+[高阶矩的对角估计](ch34-s28-s03-s02-weighted-near-collisions.md#weighted-occupation-diagonal)给出按纵坐标权重细化的界。
 
 Fourier 恢复估计见 [§M.2.1](ch34-s28-s03-s02-fourier-recovery.md)。
