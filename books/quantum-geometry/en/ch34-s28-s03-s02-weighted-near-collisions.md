@@ -478,13 +478,13 @@ If every $\rho w_j\le1$, the product is at most $\exp(4\rho^2\sum_j w_j^2)$. The
 Let $R_H$ be the residues of the integers in $[-H,H]$. For a nonnegative residue mass $M(r)$, use the negative character in $\widehat M(k)=\sum_rM(r)\chi_k(-r)$ and put $B_N(k)=\sum_{j=0}^{N-1}\chi_k(j)$. For integers $N>H\ge0$,
 
 $$
-\sum_{r\in R_H}M(r)
-\le \frac{1}{q(N-H)}\sum_{k\bmod q}|B_N(k)|^2|\widehat M(k)|.
+(N-H)\sum_{r\in R_H}M(r)+H M(0)
+\le \frac{1}{q}\sum_{k\bmod q}|B_N(k)|^2\operatorname{Re}\widehat M(k).
 $$
 
-For each representative $h$ in the band, start with the pairs $(j,j)$ for $0\le j<N-H$. Add $|h|$ to the first or second coordinate according to the sign of $h$. The resulting pairs have difference $h\bmod q$ and both coordinates lie in $[0,N-1]$. There are at least $N-H$ such pairs. Fourier inversion on the sum over all prefix pairs gives conjugate character sums for the two coordinates, hence the nonnegative weight $|B_N(k)|^2$. Taking the modulus of $\widehat M(k)$ yields the inequality.
+For each representative $h$ in the band, start with the pairs $(j,j)$ for $0\le j<N-H$. Add $|h|$ to the first or second coordinate according to the sign of $h$. The resulting pairs have difference $h\bmod q$ and both coordinates lie in $[0,N-1]$. There are at least $N-H$ such pairs. Fourier inversion on the sum over all prefix pairs gives conjugate character sums for the two coordinates, hence the nonnegative weight $|B_N(k)|^2$. At zero, all $N$ diagonal pairs contribute, yielding the extra $HM(0)$. Taking real parts preserves cancellation across frequencies.
 
-When $N\le q$, the first $N$ natural numbers have distinct residues. Orthogonality then gives $\sum_k|B_N(k)|^2=qN$. The right side is a probability-weighted average times $N/(N-H)$. For $N=2H+1\le q$ the factor is below $2$. Inserting the disjoint coefficient estimate into that average leaves the weighted contribution of frequencies where the actual ζ-zero character sums are large. [Fejér kernel](https://dlmf.nist.gov/1.15#E15)
+When $N\le q$, the first $N$ natural numbers have distinct residues. Orthogonality then gives $\sum_k|B_N(k)|^2=qN$. If only magnitudes are available, drop $HM(0)$ and replace the real part with $|\widehat M(k)|$. The band mass is then bounded by a probability-weighted magnitude average times $N/(N-H)$. For $N=2H+1\le q$ the factor is below $2$. Inserting the disjoint coefficient estimate into that average leaves the weighted contribution of frequencies where the actual ζ-zero character sums are large. [Fejér kernel](https://dlmf.nist.gov/1.15#E15)
 
 ## Tracking the common occupation degree
 
