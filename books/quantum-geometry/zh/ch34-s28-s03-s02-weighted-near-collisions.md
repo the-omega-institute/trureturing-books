@@ -527,6 +527,42 @@ $$
 
 当 $N\le q$ 时，前 $N$ 个自然数的剩余类互异，正交性给出 $\sum_k|B_N(k)|^2=qN$。若只掌握各频率的模长，可以略去 $HM(0)$ 并用 $|\widehat M(k)|$ 代替实部。带内质量于是至多为概率加权的模长平均乘以 $N/(N-H)$。取 $N=2H+1\le q$ 时，因子小于 $2$。对于互斥占用质量，把前面的系数上界代入这个平均，仍需控制实际 ζ 零点使字符和变大的频率及其权重。[Fejér 核](https://dlmf.nist.gov/1.15#E15)
 
+### 异常频率集合上的前缀权重
+
+当 $1\le N\le q$ 时，记 $\nu(k)=|B_N(k)|^2/(qN)$，$m=(2N-q-1)_+$，其中 $x_+=\max(x,0)$。这组权重的平方和为
+
+$$
+\sum_{k\bmod q}\nu(k)^2
+=\frac{N(2N^2+1)+m(m+1)(m+2)}{3qN^2}.
+$$
+
+[四次矩恒等式的 Lean 证明](lean:D5/S3/Fourier/Concentration/CyclicPrefixFourthMoment.sum_prefixCharacter_norm_four)
+
+对 $0\le r<q$，前缀指标的整数差若等于 $r\bmod q$，只能是 $r$ 或 $r-q$。有序对计数 $c_r$ 因而等于 $(N-r)_++(N-(q-r))_+$。特征标正交性给出 $\sum_k|B_N(k)|^4=q\sum_r c_r^2$。展开平方时，两项同时为正的区间是 $q-N+1\le r<N$。按相反次序排列两个计数，交叉项等于 $2\sum_{j=1}^m j(m+1-j)=m(m+1)(m+2)/3$。当 $q\ge 2N-1$ 时，这一项为零。当 $N=q$ 时，全部权重集中在零频。
+
+对任意异常频率集合 $E$，柯西–施瓦茨不等式给出 $(\sum_{k\in E}\nu(k))^2\le |E|\sum_k\nu(k)^2$。若 $E$ 排除零频，还可从右侧的平方和中扣除 $\nu(0)^2=(N/q)^2$。实际 ζ 零点的高阶字符和在哪些频率超过阈值、这些频率有多少，仍需算术估计。
+
+### 短时间范围内的傅里叶权重
+
+设 $F$ 是模 $q$ 的非负实函数，$\widehat F$ 的各项是非负实数，且 $F(0)>0$。由反演，$\nu(k)=\widehat F(k)/(qF(0))$ 是概率权重。设 $F(r\bmod q)\ge a\ge0$ 对所有 $|r|\le H$ 成立。对 $2H<q$、$2K<q$ 且 $2HK\le q$，有
+$$
+\sum_{|k|\le K}\nu(k\bmod q)
+\le (2K+1)\nu(0)
+-\frac{8a}{q^3F(0)}
+ \left(\sum_{r=-H}^{H}r^2\right)
+ \left(\sum_{k=-K}^{K}k^2\right).
+$$
+零频系数减去第 $k$ 项的实部，等于对所有 $r$ 求和的 $F(r)(1-\cos(2\pi rk/q))$。每项非负，故可保留 $|r|\le H$ 的项。相位落在 $[-\pi,\pi]$ 时，$1-\cos u\ge2u^2/\pi^2$。对整个整数对集合应用该界后，$r$ 和 $k$ 的平方和分离。$K=0$ 时取等号。若 $a>0$ 且 $H,K>0$，平方和项严格为正。 [短时间傅里叶权重界的 Lean 证明](lean:D5/S3/Fourier/Concentration/CyclicShortTimeWeight.low_fourier_weight_deficit)
+
+对于上节的前缀配对核，$F(r)$ 是差为 $r$ 的配对数，因而可取 $a=N-H$。当 $N\le q$ 时，$F(0)=N$，$\nu(0)=N/q$。在步长为 $d$ 的频率格上，第 $k$ 项对应时间 $2\pi k/(qd)$。显式公式可控的时间区间只覆盖相应的一段整数 $k$。上界给出该段至多获得多少权重，剩余权重仍需要算术估计。
+
+给定时间截止 $S\ge0$，令 $K=\lfloor qdS/(2\pi)\rfloor$ 并设 $2K<q$。由 $|B_N(k)|\le N$ 还有
+$$
+\nu(\{|k|\le K\}\bmod q)\le (2K+1)N/q
+\le N/q+NdS/\pi.
+$$
+取 $H=\lfloor\eta/d\rfloor$ 和 $N=2H+1\le q$，则 $Nd\le2\eta+d$。当 $N/q\to0$ 且 $(2\eta+d)S\to0$ 时，即使控制了截止 $S$ 内所有模式，覆盖的权重仍趋于零。对于 $g_\gamma=\gamma/r$，若 $\log x$ 的估计范围只到常数倍 $\log X$，时间范围也只到常数倍 $r\log X$。更细分辨率下的算术估计还须覆盖该时间范围之外的模式。
+
 ## 同时记录公共占用次数
 
 沿用上述剩余类，在二元乘积中加入变量 $z$ 记录两个 $p$ 次向量的公共部分。记 $h=\sum_j\min(m_j,n_j)$，则残余次数为 $p-h$。令 $M_{h,R}$ 为公共次数等于 $h$、带符号频率差属于 $R$ 的配对权重。定义
