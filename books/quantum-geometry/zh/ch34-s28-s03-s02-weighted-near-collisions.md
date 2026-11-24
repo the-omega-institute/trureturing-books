@@ -766,6 +766,8 @@ $$
 $$
 最后一项可和且非负。当 $s\le m$ 时，等式给出权重的严格唯一性。由于 $t\ge1$，由 $w_0=t/Z$ 和 $w_0-w_1=1/Z$ 还可唯一确定 $t$ 和 $Z$。相邻闭区间在公共端点给出同样的权重与参数。半开区间 $(n^2-1)/5\le m<n(n+2)/5$ 则给出唯一指标 $n=\lfloor\sqrt{5m+1}\rfloor$。第一段 $0\le m\le3/5$ 只有零点及其两个邻点，权重分别为 $1-m,m/2,m/2$。用第二谐波的尺度 $\lambda=8\pi^2m$ 表示，第一段上端恰为 $24\pi^2/5$。把格点最小值定量传回有限循环群，还须处理第二谐波在对径附近也接近 $1$ 的情形。
 
+[闭区间支撑与精确余项的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer_on_interval) · [全局半开区间分类的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer)
+
 ## 局部统计在截点变化下的误差
 
 频率向下舍入后，是否落在给定的高度区间内可能发生变化。局部测试只计入频率彼此接近的元组，所以改变截点的影响取决于每个变动索引附近还有多少索引。
