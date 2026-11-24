@@ -563,6 +563,31 @@ $$
 $$
 With $H=\lfloor\eta/d\rfloor$ and $N=2H+1\le q$, we have $Nd\le2\eta+d$. Thus controlling every mode up to time $S$ addresses a vanishing fraction of this weight whenever $N/q\to0$ and $(2\eta+d)S\to0$. For phases $g_\gamma=\gamma/r$, a bound on $\log x$ through a constant times $\log X$ reaches times only through a constant times $r\log X$. At finer resolution the arithmetic estimate must account for modes beyond this time range.
 
+### Minimum squared mass for two spatial modes modulo six
+
+On the six residue classes, write $M_j(w)=\sum_{k=0}^5w_k\cos(j\pi k/3)$ and $E(w)=\sum_{k=0}^5w_k^2$. Take $0\le a\le1$. Among nonnegative probability weights satisfying both $M_1(w)\ge a$ and $M_2(w)\ge a$, the unique minimizer $v$ and its squared mass are
+
+$$
+\begin{aligned}
+v&=
+\begin{cases}
+(1+4a,1,1-2a,1,1-2a,1)/6,& a\le1/2,\\
+(a,(1-a)/3,0,(1-a)/3,0,(1-a)/3),& a>1/2,
+\end{cases}\\
+E(v)&=
+\begin{cases}
+(1+4a^2)/6,& a\le1/2,\\
+a^2+(1-a)^2/3,& a>1/2.
+\end{cases}
+\end{aligned}
+$$
+
+Write $c_k=\cos(\pi k/3)$ and $d_k=\cos(2\pi k/3)$. On each set where $c_k+d_k$ is constant, the values of $c_k-d_k$ sum to zero. Minimizing squared mass for the combined readout $c_k+d_k$ at threshold $2a$ therefore gives $M_1(v)=M_2(v)=a$. The affine weights at residues $2,4$ are clipped to zero as the threshold passes $1/2$. Both formulas agree at that boundary.
+
+The condition $M_1(w)+M_2(w)\ge2a$ implies $E(w)-E(v)\ge\sum_k(w_k-v_k)^2$, so every weight attaining the minimum is equal to $v$. For $0<a<1$, the optimizer $p$ under the first constraint alone has $M_1(p)=a$ and $M_2(p)<a$. The second constraint excludes this optimizer at every interior threshold.
+
+The vector $v$ also occurs as the normalized Fourier weights of a nonnegative spatial kernel modulo six. The weights are invariant under $k\mapsto-k$. Their third real moment $M_3(v)$ equals zero in the first regime and $2a-1$ in the second. Fourier inversion gives $F(0)=1$, $F(\pm1)=F(\pm2)=a$, and $F(3)=M_3(v)\ge0$. This gives the optimal squared-mass coefficient for this band modulo six. Other moduli require checking the level sets of the combined readout, and the exceptional frequencies of the actual ζ zeros still require an arithmetic estimate.
+
 ## Tracking the common occupation degree
 
 For the same residue data, keep the common part of the two degree-$p$ vectors by adding a variable $z$. Put $h=\sum_j\min(m_j,n_j)$, so the residual degree is $p-h$. Let $M_{h,R}$ be the mass with common degree $h$ and signed gap in $R$. Define
