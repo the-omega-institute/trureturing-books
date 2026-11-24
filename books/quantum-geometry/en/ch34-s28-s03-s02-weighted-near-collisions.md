@@ -468,7 +468,7 @@ $$
 
 The exponential factors multiply to $e^{Sx+\bar Sy}$, retaining cancellation between phases. On expanding the remaining product, each subset gives a product of two separate one-variable series. Sum the absolute coefficients of each series with weights $\rho^n$. The Cauchy product and the triangle inequality bound the resulting sum by the product of the individual sums. The exponential contributes $e^{\rho|S|}$ on each axis and each local factor with its constant term removed contributes $e^{\rho w_j}-1$. Sum over the subsets and multiply the two axis estimates to obtain the bound. The proof also allows independent complex weights and different degrees on the two axes.
 
-Each correction has positive degree on both axes, so the $(d,d)$ coefficient only receives subsets of size at most $d$. The empty subset gives $e^{Sx+\bar Sy}$, whose coefficient has modulus $|S|^{2d}$ after multiplication by $(d!)^2$. The bound for the other terms is
+Each correction has positive degree on both axes, so the $(d,d)$ coefficient only receives subsets of size at most $d$. The empty subset gives $e^{Sx+\bar Sy}$, whose coefficient has modulus $|S|^{2d}$ after multiplication by $(d!)^2$. In the full product bound, the empty subset contributes $(d!)^2e^{2\rho|S|}/\rho^{2d}$. The bound for the other terms is
 $$
 \frac{(d!)^2}{\rho^{2d}}e^{2\rho|S|}
 \sum_{\substack{I\subseteq J\\0<|I|\le d}}\prod_{j\in I}(e^{\rho w_j}-1)^2.
