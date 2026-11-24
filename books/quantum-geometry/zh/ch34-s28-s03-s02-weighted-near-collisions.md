@@ -786,6 +786,18 @@ $$
 
 每个固定预算都落在一个有限的支撑区间中。因此 $E_q(1-\lambda/q^2)$ 沿所有整数模数趋于 $L(\lambda/(8\pi^2))$。对实际 ζ 零点高阶频率的算术估计仍有待解决。
 
+### 对径附近的质量
+
+循环群最优权重在每个固定的中心格点上趋于格点权重。两个取等的矩还决定了远离这些格点的一小部分质量。固定 $\lambda\ge0$，令 $v_q$ 为阈值 $1-\lambda/q^2$ 下任意一个循环群最优权重。记 $c_i=\cos(2\pi i/q)$、$A_q=\{i:c_i<0\}$。沿所有整数模数，
+$$
+q^2\sum_{i\in A_q}v_q(i)\longrightarrow \frac{3\lambda}{8},
+\qquad
+q^2\sum_{i\in A_q}(1+c_i)v_q(i)\longrightarrow 0.
+$$
+第二个极限表明，对任何固定的 $\varepsilon>0$，$A_q$ 中满足 $c_i\ge-1+\varepsilon$ 的部分，其质量乘以 $q^2$ 后趋于零。
+
+在格点权重的固定支撑上，第一、第二余弦亏量乘以 $q^2$ 后，加权和分别趋于 $\lambda/4$ 与 $\lambda$。两个约束均取等，所以全圆周上两个缩放后的亏量之和各为 $\lambda$。当 $\lambda=0$ 时，余弦逐点至多为一，可行性已使两个矩取等。第二亏量非负，因而其固定支撑外的部分趋于零。在 $c_i\ge0$ 处，第二亏量的一半控制 $1-c_i$。在 $c_i<0$ 处，同样的量控制 $1+c_i$。所以 $A_q$ 上的第一亏量趋于 $3\lambda/4$，它与二倍缩放质量之差趋于零。这里先取出有限和并控制余项，再取极限。相关特征标和证明也用这个方法比较有限狄利克雷多项式与对数导数。 [特征标和的余项界](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)
+
 ## 局部统计在截点变化下的误差
 
 频率向下舍入后，是否落在给定的高度区间内可能发生变化。局部测试只计入频率彼此接近的元组，所以改变截点的影响取决于每个变动索引附近还有多少索引。
