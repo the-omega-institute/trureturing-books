@@ -468,8 +468,7 @@ $$
 
 The exponential factors multiply to $e^{Sx+\bar Sy}$, retaining cancellation between phases. On expanding the remaining product, each subset gives a product of two separate one-variable series. Sum the absolute coefficients of each series with weights $\rho^n$. The Cauchy product and the triangle inequality bound the resulting sum by the product of the individual sums. The exponential contributes $e^{\rho|S|}$ on each axis and each local factor with its constant term removed contributes $e^{\rho w_j}-1$. Sum over the subsets and multiply the two axis estimates to obtain the bound. The proof also allows independent complex weights and different degrees on the two axes.
 
-Each correction has positive degree on both axes. For the $(d,d)$ coefficient, only subsets of size at most $d$ contribute. The product in the bound can therefore be replaced by $\sum_{I\subseteq J,\,|I|\le d}\prod_{j\in I}(e^{
-ho w_j}-1)^2$. The full product admits a simple estimate in terms of the squared weights.
+Each correction has positive degree on both axes. For the $(d,d)$ coefficient, only subsets of size at most $d$ contribute. The product in the bound can therefore be replaced by $\sum_{I\subseteq J,\,|I|\le d}\prod_{j\in I}(e^{\rho w_j}-1)^2$. The full product admits a simple estimate in terms of the squared weights.
 
 If every $\rho w_j\le1$, the product is at most $\exp(4\rho^2\sum_j w_j^2)$. The finite estimate reduces the band analysis to bounding $S$ over the characters with the weights supplied by inversion. For actual ζ zeros, controlling the corresponding weighted exponential sums and their exceptional frequencies at the required time scale remains open.
 
