@@ -572,14 +572,14 @@ Take $q\ge5$ and write $c_k=\cos(2\pi k/q)$, $d_k=\cos(4\pi k/q)$, and $s_k=c_k+
 $$
 a_q=-\frac{1}{2m_q},\qquad v_k=\frac{1+2as_k}{q},\qquad L=\frac{1+4a^2}{q}.
 $$
-For $a\ge0$, the vector $v$ has mass one and both real moments equal $a$. Among nonnegative probability weights with both moments at least $a$, the squared mass equals $L$ exactly when the weight is $v$. Equality is attainable exactly for $a\le a_q$. For any real mass-one vector $w$, write $M_j$ for the $j$th real moment. The exact remainder is
+For every real $a$, the vector $v$ has mass one and both real moments equal $a$. For $a\ge0$, its entries are all nonnegative exactly when $a\le a_q$. Among nonnegative probability weights with both moments at least $a$, the squared mass equals $L$ exactly when the weight is $v$. Equality is attainable exactly for $a\le a_q$. For any real mass-one vector $w$, write $M_j(w)$ for its $j$th real moment. The exact remainder holds for every real $a$
 $$
 \sum_k w_k^2-L
 =\sum_k(w_k-v_k)^2+\frac{4a}{q}\bigl(M_1(w)+M_2(w)-2a\bigr).
 $$
-This follows from the orthogonality of the two cosines and expansion of the squares. If $a>a_q$, at least one $v_k<0$. The squared distance at those coordinates gives the positive additional lower bound $\sum_k\max(0,-v_k)^2$ for nonnegative weights. The exact optimum after clipping remains open for general moduli.
+This follows from the orthogonality of the two cosines and expansion of the squares. If $a>a_q$, at least one $v_k<0$. For a nonnegative probability weight $w$ satisfying both moment bounds, the moment term is nonnegative. The squared distance at the negative coordinates then gives $\sum_k w_k^2\ge L+\sum_k\max(0,-v_k)^2>L$. The exact optimum after clipping remains open for general moduli.
 
-The double-angle formula gives $s_k=2(c_k+1/4)^2-9/8$. Since $2c_k$ is a sum of roots of unity, it is an algebraic integer and cannot equal the rational number $-1/2$. Hence $m_q>-9/8$. Round the angle with cosine $-1/4$ to the nearest grid point. The error is at most $\pi/q$, so $m_q+9/8\le 2(\pi/q)^2$. The values $s_k$ have mean zero and mean square one. Averaging $(2-s_k)(s_k-m_q)\ge0$ gives $m_q\le-1/2$. Combining the bounds gives
+The double-angle formula gives $s_k=2(c_k+1/4)^2-9/8$. Niven’s theorem excludes $c_k=-1/4$ because the angle is a rational multiple of $\pi$. Hence $m_q>-9/8$. Round the angle with cosine $-1/4$ to the nearest grid point. The error is at most $\pi/q$, so $m_q+9/8\le 2(\pi/q)^2$. The values $s_k$ have mean zero and mean square one. Averaging $(2-s_k)(s_k-m_q)\ge0$ gives $m_q\le-1/2$. Combining the bounds gives
 $$
 0<a_q-\frac49\le\frac{16\pi^2}{9q^2}.
 $$
