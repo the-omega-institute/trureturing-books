@@ -583,7 +583,7 @@ The double-angle formula gives $s_k=2(c_k+1/4)^2-9/8$. Niven’s theorem exclude
 $$
 0<a_q-\frac49\le\frac{16\pi^2}{9q^2}.
 $$
-Thus $4/9$ is a uniform lower bound for the threshold across moduli. The result controls the squared mass of finite weights. The exceptional frequencies for actual high-order ζ-zero harmonics still require an arithmetic estimate.
+Thus $4/9$ is a uniform lower bound for the threshold across moduli. The result controls the squared mass of finite weights. The exceptional frequencies for actual high-order ζ-zero harmonics still require an arithmetic estimate. [Lean proof of the first clipping threshold](lean:D5/S3/Fourier/Concentration/FirstCosineClipping.first_cosine_clipping)
 
 ### Minimum squared mass for two spatial modes modulo six
 
