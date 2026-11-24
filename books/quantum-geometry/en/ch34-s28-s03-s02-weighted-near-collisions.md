@@ -540,6 +540,27 @@ For $0\le r<q$, the only possible integer differences of prefix indices reducing
 
 For an exceptional set $E$, Cauchy–Schwarz gives $(\sum_{k\in E}\nu(k))^2\le |E|\sum_k\nu(k)^2$. If $E$ excludes frequency zero, subtract $\nu(0)^2=(N/q)^2$ from the sum of squares on the right. Arithmetic estimates must still determine which frequencies of the actual ζ-zero sum exceed a given threshold at the required order and how many there are.
 
+### Fourier weight in a short time range
+
+Let $F$ be a nonnegative real function modulo $q$ whose Fourier coefficients are nonnegative real, with $F(0)>0$. By inversion, $\nu(k)=\widehat F(k)/(qF(0))$ is a probability weight. Suppose $F(r\bmod q)\ge a\ge0$ for $|r|\le H$. For $2H<q$, $2K<q$, and $2HK\le q$,
+$$
+\sum_{|k|\le K}\nu(k\bmod q)
+\le (2K+1)\nu(0)
+-\frac{8a}{q^3F(0)}
+ \left(\sum_{r=-H}^{H}r^2\right)
+ \left(\sum_{k=-K}^{K}k^2\right).
+$$
+The zero coefficient minus the real part of the $k$th coefficient sums $F(r)(1-\cos(2\pi rk/q))$ over all residues. Each term is nonnegative, so retain the terms with $|r|\le H$. In the principal interval $[-\pi,\pi]$, the cosine deficit satisfies $1-\cos u\ge2u^2/\pi^2$. Applying it on the full set of integer pairs separates the two sums of squares. Equality holds at $K=0$. The deduction is strictly positive when $a>0$ and $H,K>0$. [Lean proof of the short-time weight bound](lean:D5/S3/Fourier/Concentration/CyclicShortTimeWeight.low_fourier_weight_deficit)
+
+For the preceding prefix-pair kernel, $F(r)$ counts pairs having residue difference $r$, so take $a=N-H$. When $N\le q$, $F(0)=N$ and $\nu(0)=N/q$. On a frequency grid of step $d$, mode $k$ corresponds to time $2\pi k/(qd)$. The time range controlled by the explicit formula covers only its corresponding integer modes. The upper bound limits the weight those modes can carry, leaving the rest to the arithmetic estimate.
+
+For a time cutoff $S\ge0$, put $K=\lfloor qdS/(2\pi)\rfloor$ and suppose $2K<q$. The simpler bound $|B_N(k)|\le N$ gives
+$$
+\nu(\{|k|\le K\}\bmod q)\le (2K+1)N/q
+\le N/q+NdS/\pi.
+$$
+With $H=\lfloor\eta/d\rfloor$ and $N=2H+1\le q$, we have $Nd\le2\eta+d$. Thus controlling every mode up to time $S$ addresses a vanishing fraction of this weight whenever $N/q\to0$ and $(2\eta+d)S\to0$. For phases $g_\gamma=\gamma/r$, a bound on $\log x$ through a constant times $\log X$ reaches times only through a constant times $r\log X$. At finer resolution the arithmetic estimate must account for modes beyond this time range.
+
 ## Tracking the common occupation degree
 
 For the same residue data, keep the common part of the two degree-$p$ vectors by adding a variable $z$. Put $h=\sum_j\min(m_j,n_j)$, so the residual degree is $p-h$. Let $M_{h,R}$ be the mass with common degree $h$ and signed gap in $R$. Define
