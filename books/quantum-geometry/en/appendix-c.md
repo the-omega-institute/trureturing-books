@@ -13,7 +13,7 @@ Open the generated declaration index
 
 ## C.1 Lean-Verified Results {#sec-appendix-c-theorems}
 
-The build generates green badges for `theorem`, `lemma`, `proposition` and `corollary` environments from the lock file. To check a result, read its hypotheses and conclusion, open its Lean source link, and compare the types, assumptions and conclusion. Citing the same declaration in different chapters does not produce new theorems.
+The build uses the lock file to generate badges for Lean-verified `theorem`, `lemma`, `proposition` and `corollary` environments. To check a result, read its hypotheses and conclusion, open its Lean source link, and compare the types, assumptions and conclusion. Citing the same declaration in different chapters does not produce new theorems.
 
 In Section 7.3, [@prob-monitored-spectral-mean] concerns finite-dimensional unitary monitoring of a pure state; [@rem-monitored-unital-kac] treats finite-dimensional CPTP channels that preserve the identity on the actual relevant space. General quantum instruments, infinite dimensions and physical clocks require separate arguments.
 

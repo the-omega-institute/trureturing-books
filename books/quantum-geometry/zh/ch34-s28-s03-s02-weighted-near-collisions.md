@@ -218,6 +218,18 @@ $d>0$ 时，$c$ 严格介于零与一之间。两矩稳定性给出的两个理�
 
 对实际 ζ 纵坐标，可按前一节在 $X=e^{-D}T^\beta$ 以上截取尾段，并取 $\delta=\log T$、$g_\gamma=\gamma/r$。给定 $H=\exp(cT^\beta\log T)$，可取 $N=\lfloor HT^2/r\rfloor_++1$，使网格误差不超过 $rB/(2T^2)$。要得到有限的起点范围，还需在某个 $L=L(T)$ 上证明相应的严格预算 $KNE_p(2/L)<(\log T)^{2p}$。目标阶数 $p$ 随 $T^\beta\log T$ 增长。对固定的有限尾段和固定 $p$，随着 $L$ 增大，$E_p(2/L)$ 最终等于精确碰撞质量 $E_p(0)$。若要量化 $L$，仍须控制正分辨率下的加权近碰撞。Tao、Trudgian 与 Yang 的定义 7 计数的是单位尺度的无权四元组，定理 64 的估计适用于固定的 $\sigma\ge7/10$。临界线尾段的增长阶数加权界仍待证。 [定义 7 与定理 64](https://arxiv.org/html/2501.16779v1) · [研究问题](https://github.com/the-omega-institute/trureturing/issues/33519)
 
+设 $x=e^{s/r}>1$，则时间 $s$ 处的单频项是 $x^{i\gamma}$。Ford 与 Zaharescu 的显式公式给出 $t>1$ 时的累积和 $\sum_{0<\gamma\le t}x^\rho$。令 $n_x$ 为最接近 $x$ 的素数幂，$\theta=\log(x/n_x)$。主项等于 $-\Lambda(n_x)/(2\pi)$ 乘以 $\int_0^t e^{i\theta u}\,du$。在黎曼猜想下，除以 $\sqrt{x}$ 后的累积和就是按重数计入的纵坐标相位和。 [Ford 与 Zaharescu，引理 1](https://arxiv.org/pdf/math/0405459)
+
+取权重 $w(u)=u/(u^2+1/4)$，记 $J_\theta(X,T)=\int_X^T w(u)e^{i\theta u}\,du$。对 $1/2\le X\le T$，
+
+$$
+|J_\theta(X,T)|\le\frac12\log\frac{T^2+1/4}{X^2+1/4},
+\qquad
+|\theta|\,|J_\theta(X,T)|\le 2w(X).
+$$
+
+第一个界来自相位的单位模，且在 $\theta=0$ 时取等号。第二个界来自分部积分。$w$ 在该区间递减，因而导数项的模至多是 $w(X)-w(T)$，与边界项中的 $w(T)$ 相消。对实际零点加权和使用这两个界，还要通过分部求和传递显式公式中的累积误差。该误差的已知上界在 $x=e^{s/r}$ 很大时随 $x$ 增长，在所需的长时间尺度上仍缺少对异常频率总贡献的估计。
+
 即使相位可在整个圆周上取值，第二和第四谐波也能给出尖锐的界。对单位相位的一组概率权重，记 $m_h=\sum_j w_j z_j^h$。令 $0\le e,k\le1$ 分别为 $|m_2|,|m_4|$ 的上限，记 $b=\min(e,\sqrt{(1+k)/2})$、$r=(1+b)/2$。若 $b=1$，则 $|m_1|$ 的最大值为 $1$。若 $b<1$，令
 
 $$
@@ -448,6 +460,53 @@ $$
 这里借鉴了相关有限指数和证明中用平均分离频率的做法，以有限循环群上的精确正交性代替区间平均。 [相关黎曼猜想形式化中的特征标平均](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L78) [互斥系数公式的 Lean 证明](lean:D5/S3/Fourier/Concentration/CyclicDisjointOccupationCoefficient.cyclic_disjoint_band_product)
 
 若权重非负，剩余类的质量非负，而其傅里叶系数可以为负。设两个不同指标权重均为一，模 $2$ 的剩余类分别为 $0,1$。任一正次数的互斥配对都须在两侧各用一个指标。若 $d$ 为奇数，两种有序配对的差都属于剩余类 $1$。因此剩余类质量在 $k=1$ 处的傅里叶系数为 $-2$，对 $R=\{0\}$ 恰好抵消零特征标的贡献。ζ 尾段在目标分辨率和增长次数下的非零特征标贡献仍待估计。
+
+### 字符和相消时的系数上界
+
+保留上一式中给定的特征标。记左轴的复相位权重为 $A_j=w_j\chi_k(-a_j)$，右轴的权重为其共轭 $\bar A_j$。令 $S=\sum_j A_j$。对任意 $\rho>0$，有
+
+$$
+(d!)^2\left|[x^dy^d]Q_k\right|
+\le
+\frac{(d!)^2}{\rho^{2d}}
+e^{2\rho|S|}
+\prod_j\left(1+(e^{\rho w_j}-1)^2\right).
+$$
+
+截断次数达到 $d$ 后，两轴上更高次项不会改变所取系数。于是可以用完整的指数级数，先把每个局部因子写成
+
+$$
+e^{A_jx}+e^{\bar A_jy}-1
+=e^{A_jx+\bar A_jy}\left[1-(1-e^{-A_jx})(1-e^{-\bar A_jy})\right].
+$$
+
+指数部分相乘后成为 $e^{Sx+\bar Sy}$，保留了不同相位的相消。展开其余乘积，每个子集产生两个相互分离的一元级数。取一元级数的系数绝对值并按 $\rho$ 加权求和，柯西乘积的三角不等式给出乘法上界。指数因子的总和是 $e^{\rho|S|}$，局部去常数因子的总和是 $e^{\rho w_j}-1$。乘上两轴的估计，再把子集求和合回乘积，得到上述不等式。该证明也适用于两轴独立的复权重及不相等的次数。
+
+每个修正项在两轴上的次数均至少为一。对所取的 $(d,d)$ 系数，只需累加基数不超过 $d$ 的子集。空集对应 $e^{Sx+\bar Sy}$，乘上 $(d!)^2$ 后，它的系数模长正好是 $|S|^{2d}$。全乘积界为空集分配的是 $(d!)^2e^{2\rho|S|}/\rho^{2d}$。其余项的上界为
+
+$$
+\frac{(d!)^2}{\rho^{2d}}e^{2\rho|S|}
+\sum_{\substack{I\subseteq J\\0<|I|\le d}}\prod_{j\in I}(e^{\rho w_j}-1)^2.
+$$
+
+两者相加给出更紧的估计。全乘积便于再用权重平方和估计。
+
+当每个 $\rho w_j\le1$ 时，乘积至多为 $\exp(4\rho^2\sum_j w_j^2)$。这一有限估计把频带分析归结为控制各字符的 $S$，同时计入它们在频带反演中的权重。对实际 ζ 零点，在所需时间尺度上控制相应加权指数和及其异常频率，仍是开放的算术步骤。
+
+### 用非负傅里叶权重估计频带
+
+记 $R_H$ 为 $[-H,H]$ 中整数的模 $q$ 剩余类。对任意非负的剩余类质量 $M(r)$，定义 $B_N(k)=\sum_{j=0}^{N-1}\chi_k(j)$，并用负号特征标定义 $\widehat M(k)=\sum_rM(r)\chi_k(-r)$。当整数 $N>H\ge0$ 时，
+
+$$
+(N-H)\sum_{r\in R_H}M(r)+H M(0)
+\le \frac{1}{q}\sum_{k\bmod q}|B_N(k)|^2\operatorname{Re}\widehat M(k).
+$$
+
+[循环频带上界的 Lean 证明](lean:D5/S3/Fourier/Concentration/CyclicFejerBand.band_le_positive_fourier)
+
+对任一带内代表元 $h$，从两坐标都等于 $j$ 的配对出发。令 $0\le j<N-H$，按 $h$ 的符号将第一或第二坐标增加 $|h|$。这给出至少 $N-H$ 个差为 $h\bmod q$ 的有序对，且两坐标都在 $[0,N-1]$。对全体配对应用傅里叶反演，两个坐标的字符和互为共轭，于是得到非负权重 $|B_N(k)|^2$。差为零时，$N$ 个对角配对都作贡献，因此左侧还有 $HM(0)$。右侧取实部后，字符贡献仍可相消。
+
+当 $N\le q$ 时，前 $N$ 个自然数的剩余类互异，正交性给出 $\sum_k|B_N(k)|^2=qN$。若只掌握各频率的模长，可以略去 $HM(0)$ 并用 $|\widehat M(k)|$ 代替实部。带内质量于是至多为概率加权的模长平均乘以 $N/(N-H)$。取 $N=2H+1\le q$ 时，因子小于 $2$。对于互斥占用质量，把前面的系数上界代入这个平均，仍需控制实际 ζ 零点使字符和变大的频率及其权重。[Fejér 核](https://dlmf.nist.gov/1.15#E15)
 
 ## 同时记录公共占用次数
 
