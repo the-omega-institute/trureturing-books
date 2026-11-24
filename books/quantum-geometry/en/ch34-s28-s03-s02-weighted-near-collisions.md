@@ -553,7 +553,7 @@ $$
 
 At $t=0$ the weights are uniform and the moment is zero. For sufficiently large $t$, all entries with $c_k<1$ are clipped to zero and the moment is one. The denominator is always at least one, so continuity yields a finite parameter attaining exactly $a$. For any feasible $w$, the raw affine weights have nonnegative inner product with $w-v_t$ by equal mass and the moment ordering. Clipping can only increase that inner product. Expanding the squares gives $\sum_k w(k)^2-\sum_k v_t(k)^2\ge\sum_k(w(k)-v_t(k))^2$, which proves uniqueness. [Simplex projection with a linear constraint, Zhou and Liu, equation (3.4)](https://arxiv.org/html/2310.10388v3#S3.E4X)
 
-Write $E(w)=\sum_k w(k)^2$, $M(w)=\sum_k w(k)c_k$, and $Z=\sum_k u_t(k)$. Expanding the squares gives the exact remainder
+Write $E(w)=\sum_k w(k)^2$, $M(w)=\sum_k w(k)c_k$, and $Z=\sum_k u_t(k)$. For any real weights $w$ of total mass one, expanding the squares gives the exact remainder
 $$
 E(w)-E(v_t)
 =\sum_k(w(k)-v_t(k))^2+
@@ -561,6 +561,8 @@ E(w)-E(v_t)
 +\sum_k\bigl(t(1-c_k)-1\bigr)_+w(k)\right].
 $$
 The last term retains the clipped negative weights. One can take $t\le\max(\{0\}\cup\{(1-c_k)^{-1}:c_k<1\})$.
+
+[Lean proof of the one-moment optimum and exact remainder](lean:D5/S3/Fourier/Concentration/ClippedMomentWeights.exists_clipped_moment_minimizer)
 
 Modulo four, $c=(1,0,-1,0)$. For $0\le a\le1/2$, the optimizer is $(1+2a,1,1-2a,1)/4$ and the minimum squared mass is $(1+2a^2)/4$. For $1/2\le a\le1$, the optimizer is $(a,(1-a)/2,0,(1-a)/2)$ and the minimum is $a^2+(1-a)^2/2$. The formulas agree at $a=1/2$. This minimum gives a benchmark for the squared-mass coefficient in the exceptional-set bound under one spatial-mode constraint. A full spatial band imposes joint constraints, and the cardinality of the actual ζ-zero exceptional set needs an arithmetic estimate.
 
