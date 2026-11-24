@@ -1,0 +1,7 @@
+# 构建输出；修改 figures/*.py 等源文件。
+/figures/*.svg
+/viz/*/thumb.jpg
+/viz/*/fig-*.jpg
+/viz/*/.stills.json
+/viz/*/data.generated.json
+/data/statistics.json

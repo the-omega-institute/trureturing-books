@@ -6,6 +6,10 @@
 
 本节给出终极架构裁决：**分毫不需要改动 Lean 4 坚不可摧的验证内核，更绝对禁止使用 `axiom` 关键字硬塞自定义公理**。真正与 $\mathbf{Math}_\Omega$ 天生同构的，恰恰是尚未导入 `Mathlib.Data.Real.Basic` 之前的 **Lean 4 原生归纳构造演算（Calculus of Inductive Constructions, CIC）裸内核**。只需绕开依赖选择公理与柯西商集的经典实数分支，用**纯整数规范射影结构（`structure`）**消除商公理、用**可计算类型类（`class`）**封装母公理并由实例证成相对无矛盾性、再配一层通往 `Mathlib` 的**单向阴影投影函子 $\Pi_{\mathbb{R}}$**，即可在零外部依赖下跑通 `#print axioms` 输出 **`does not depend on any axioms`** 的可执行 `OmegaMath` 内核；在此基座上，§32.8.4 进一步将该架构延展至特征秩 $5$ 有号旋量载体 `PythSpinor`、零公理二次扩张域 `QSqrt2` 与 `QPhi`、模方 $5$ 的 LPS 自由生成元与球谐赫克算子及有限拉马努金图 $X^{5, 13}$，以及任意阶 D-有限微分射流环 $J_N(\mathbb{Q})$ 与无 $\pi$ 马青有理包络（将三层 `OmegaMath` 工程路线图、证明有向无环图膨胀倍率对照与 `OmegaCore` 演进规划标为 **`MODEL`**；将十五条冻结核心定理——完备三元比较四元数同构、弦距读数恒等式、定基流群分解、射影核与旋量玻恩权重同一、四元数流群切比雪夫递推、拉格朗日—格拉姆恒等式、舒尔补二次型极小值可达定理、保格拉姆线性等距唯一延拓、有理六轴无正交开覆盖、既约分母最大公约数约化与连分数收敛子对数长度界、可判定单群素因子剥离定阶、二进制名称比较显式步数界，以及整数四分深度预算完备性与无极限实数上界传递定理——标为绿色 **`LEAN ✓`**；将 CIC 类型论文献、赫德伯格可判定相等性唯一性定理、独立内核审计记录、§32.8.4 的全称书面证明与 Lean `v4.35.0` 及双工作精度 Arb 实测标为 **`ARGUED` / `NUM`**）。
 
+::: {.remark #rem-ch39-sister-monograph-omega-math title="姊妹专著：OMEGA MATH（OMEGA//MATH）六卷全本与四模式工作台"}
+本节浓缩呈现 `OmegaMath` 零公理形式化架构与量子几何主线的衔接；独立六卷姊妹专著 **[《OMEGA MATH》（`OMEGA//MATH`）六卷目录](https://github.com/the-omega-institute/trureturing-books/blob/main/books/omega-math/zh/SUMMARY.md)** 现已完备收录全书 **18 章**、**11 个模块共 96 条 `OmegaInit` $+$ `OmegaMath` 零公理冻结定理**与第 2 层 **11 条 `OmegaShadowBridge` 单向阴影函子定理**、**7 幅语义静态图**以及四模式三维交互工作台 **`OMEGA//LAB`**，系统覆盖纯 CIC 与齐次射影闭环、无原点流群代数、无极限射流微积分、无 $\pi$ 球面调和分析、模方 $5$ 赫克—拉马努金有理谱论、$\Omega$-FRACTRAN 旋子机与空内核审计，并可直达收官 **[第十八章 空内核审计、单向阴影函子与六卷全息工作台](https://github.com/the-omega-institute/trureturing-books/blob/main/books/omega-math/zh/ch18-zero-axiom-kernel-and-shadow-bridge.md)**。
+:::
+
 ---
 
 ## 32.8.1 核心判据：为何 Lean 4 裸内核天生契合 $\mathbf{Math}_\Omega$，而污染源只在 `Mathlib.Real` 与自定义 `axiom`？ {#sec-ch39-lean4-cic-vs-mathlib-real-and-axiom-trap}
