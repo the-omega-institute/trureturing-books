@@ -214,6 +214,8 @@ $d>0$ 时，$c$ 严格介于零与一之间。两矩稳定性给出的两个理�
 
 当 $4\nmid q$ 时，将整数差 $k$ 对应的 $4k-q$ 化为模 $2q$ 的中心剩余类。所得整数非零，在 $q$ 为偶数时仍为偶数。循环相位 $z_j=\exp(-2\pi i j/q)$ 因此可取 $\delta=\sin(\pi/(2q))$（$q$ 为奇数）或 $\delta=\sin(\pi/q)$（$q$ 为偶数）。此时 $m=\widehat w(1)$、$b=\widehat w(2)$。若 $|b|\le\delta/3$，可得 $c\le(1+|b|)/2-\delta^2/225$。对上界取 $p$ 次幂，就得到两个独立的 $p$ 次抽样和之差的第一个傅里叶系数的上界。
 
+[相位间隔的方差界](lean:D5/S3/Fourier/Concentration/CyclicGridMomentGap.phase_separation_variance_bound) · [循环网格上的傅里叶矩界](lean:D5/S3/Fourier/Concentration/CyclicGridMomentGap.cyclic_grid_fourier_gap)
+
 对实际 ζ 纵坐标，可按前一节在 $X=e^{-D}T^\beta$ 以上截取尾段，并取 $\delta=\log T$、$g_\gamma=\gamma/r$。给定 $H=\exp(cT^\beta\log T)$，可取 $N=\lfloor HT^2/r\rfloor_++1$，使网格误差不超过 $rB/(2T^2)$。要得到有限的起点范围，还需在某个 $L=L(T)$ 上证明相应的严格预算 $KNE_p(2/L)<(\log T)^{2p}$。目标阶数 $p$ 随 $T^\beta\log T$ 增长。对固定的有限尾段和固定 $p$，随着 $L$ 增大，$E_p(2/L)$ 最终等于精确碰撞质量 $E_p(0)$。若要量化 $L$，仍须控制正分辨率下的加权近碰撞。Tao、Trudgian 与 Yang 的定义 7 计数的是单位尺度的无权四元组，定理 64 的估计适用于固定的 $\sigma\ge7/10$。临界线尾段的增长阶数加权界仍待证。 [定义 7 与定理 64](https://arxiv.org/html/2501.16779v1) · [研究问题](https://github.com/the-omega-institute/trureturing/issues/33519)
 
 即使相位可在整个圆周上取值，第二和第四谐波也能给出尖锐的界。对单位相位的一组概率权重，记 $m_h=\sum_j w_j z_j^h$。令 $0\le e,k\le1$ 分别为 $|m_2|,|m_4|$ 的上限，记 $b=\min(e,\sqrt{(1+k)/2})$、$r=(1+b)/2$。若 $b=1$，则 $|m_1|$ 的最大值为 $1$。若 $b<1$，令
