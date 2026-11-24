@@ -234,6 +234,20 @@ For $b<1$, take weight $(r-a^2)/(1-a^2)$ at $1$ and divide the rest equally betw
 
 [Lean proof and Blueprint for the sharp harmonic bound](lean:D5/S3/Fourier/Concentration/SecondFourthHarmonicBound.sharp_second_fourth_harmonic_bound)
 
+For a full consecutive block of even orders, let $N\ge1$ and suppose $m_{2k}=0$ for $1\le k<N$. The largest first magnitude is
+
+$$
+B_N=\frac{1}{N\sin(\pi/(2N))}.
+$$
+
+It is attained by equal weights at $z_j=\exp\bigl(i\pi(j-(N-1)/2)/N\bigr)$ for $0\le j<N$. The squared phases are equally spaced, so the prescribed harmonics vanish by the finite character sum. The first magnitude follows from the sum of cosines on this arc. Multiplying each cosine by $2\sin(\pi/(2N))$ makes it a difference of sines at the adjacent endpoints, and the sum telescopes from $-1$ to $1$.
+
+To compare an arbitrary admissible law with this equal-weight law, rotate its first moment onto the nonnegative real axis and set $y=(\Re z)^2$. Then $2y-1=\Re z^2$, and $T_k(2y-1)=\Re z^{2k}$ for the Chebyshev polynomial $T_k$. The two laws have the same means for polynomials in $y$ of degree below $N$. The polynomial $R(y)=1+(-1)^N T_N(2y-1)$ is nonnegative on $[0,1]$, vanishes at the attaining projections, and is positive at negative arguments. For $s>0$, the expression $(y+sR(y)/R(-s))/(y+s)$ is a polynomial of degree below $N$ because its numerator vanishes at $-s$. It dominates $y/(y+s)$ and agrees with it on the attaining support. Compare the two means with this polynomial, then integrate at $s=t^2$ using $\int_{\mathbb R}y/(y+t^2)\,dt=\pi\sqrt y$ for $y\ge0$. This bounds the mean of $\sqrt y$, which bounds the first magnitude after rotation. [Gauss–Chebyshev formula](https://dlmf.nist.gov/3.5#v) · [Principal representations, Lemma 2.1](https://arxiv.org/pdf/1306.4872)
+
+The cases $N=2,3$ give $1/\sqrt2$ and $2/3$. As $N\to\infty$, $B_N\to 2/\pi$ by the sine limit at zero. Thus a growing block of vanishing even orders still allows a first magnitude bounded away from zero in this class of laws. The near-collision budget for actual ζ ordinates needs information that constrains the weighted sums along their time orbit.
+
+[Lean proof of the sharp bound for a consecutive even block](https://github.com/the-omega-institute/trureturing/blob/b97c4028659cb44b38c76231f26275b1cae35349/D5/S3/Fourier/Concentration/EvenHarmonicFirstMoment.lean#L464)
+
 ## What low-order collision masses determine
 
 Move the last frequency in $(0,1,k)$ to $k+\sqrt 2$. Below degree $k$, the counts on the first two coordinates cannot offset a change in the last count. At degree $k$, exactly one additional pair of count vectors can cancel in the integer spectrum.
