@@ -536,6 +536,8 @@ $$
 =\frac{N(2N^2+1)+m(m+1)(m+2)}{3qN^2}.
 $$
 
+[四次矩恒等式的 Lean 证明](lean:D5/S3/Fourier/Concentration/CyclicPrefixFourthMoment.sum_prefixCharacter_norm_four)
+
 对 $0\le r<q$，前缀指标的整数差若等于 $r\bmod q$，只能是 $r$ 或 $r-q$。有序对计数 $c_r$ 因而等于 $(N-r)_++(N-(q-r))_+$。特征标正交性给出 $\sum_k|B_N(k)|^4=q\sum_r c_r^2$。展开平方时，两项同时为正的区间是 $q-N+1\le r<N$。按相反次序排列两个计数，交叉项等于 $2\sum_{j=1}^m j(m+1-j)=m(m+1)(m+2)/3$。当 $q\ge 2N-1$ 时，这一项为零。当 $N=q$ 时，全部权重集中在零频。
 
 对任意异常频率集合 $E$，柯西–施瓦茨不等式给出 $(\sum_{k\in E}\nu(k))^2\le |E|\sum_k\nu(k)^2$。若 $E$ 排除零频，还可从右侧的平方和中扣除 $\nu(0)^2=(N/q)^2$。实际 ζ 零点的高阶字符和在哪些频率超过阈值、这些频率有多少，仍需算术估计。

@@ -536,6 +536,8 @@ $$
 =\frac{N(2N^2+1)+m(m+1)(m+2)}{3qN^2}.
 $$
 
+[Lean proof of the fourth-moment identity](lean:D5/S3/Fourier/Concentration/CyclicPrefixFourthMoment.sum_prefixCharacter_norm_four)
+
 For $0\le r<q$, the only possible integer differences of prefix indices reducing to $r$ are $r$ and $r-q$. The ordered pair count $c_r$ is therefore $(N-r)_++(N-(q-r))_+$. Character orthogonality gives $\sum_k|B_N(k)|^4=q\sum_r c_r^2$. When the square is expanded, both counts are positive on $q-N+1\le r<N$. The two lists of counts run in opposite orders there, giving the cross term $2\sum_{j=1}^m j(m+1-j)=m(m+1)(m+2)/3$. This term vanishes when $q\ge 2N-1$. When $N=q$, all the weight lies at frequency zero.
 
 For an exceptional set $E$, Cauchy–Schwarz gives $(\sum_{k\in E}\nu(k))^2\le |E|\sum_k\nu(k)^2$. If $E$ excludes frequency zero, subtract $\nu(0)^2=(N/q)^2$ from the sum of squares on the right. Arithmetic estimates must still determine which frequencies of the actual ζ-zero sum exceed a given threshold at the required order and how many there are.
