@@ -1,0 +1,130 @@
+/* OMEGA//PETER-WEYL：版式与颜色由共享主题提供；这里只放本页自己的东西：舞台指针、琥珀手柄、双透镜开关、视角与壳层按钮、
+   巡览条里的时钟按钮与镜像透镜、右栏的理论按钮、读数与舞台标签的颜色角色、抽屉里克隆的依据框。
+   颜色只来自令牌（var(--cyan) …），不写色值。琥珀只留给当前选择：激活的卡片与按钮、透镜的激活半段、手柄与时间轴；
+   文字强调改用青色，舞台标题用 sigma，滑块读数用墨色。红色只出现在依据栏的 OPEN 徽章上。 */
+#stage { container-type: inline-size; }
+/* 只有活舞台接管指针；静态图（封面、引用图）让触摸直接滚过 */
+.stage:not(.still) #cv { cursor: grab; touch-action: none; }
+.stage:not(.still) #cv:active { cursor: grabbing; }
+.stage.still #cv { cursor: default; touch-action: auto; }
+
+.logo span { color: var(--cyan); font-weight: 700; }
+.tagline em, .sheet li b { color: var(--cyan); }
+.hud-tl .big { color: var(--sigma); }
+.field output { color: var(--ink); }
+.hud-tl .big, .hud-tl .sub, .strip .head h2, .strip .head span, .tau, .pill, .presets .code { text-transform: none; }
+.hud-tl .sub { line-height: 1.4; }
+/* 面包屑：章节一枚（按语言），实验室索引一枚 */
+.crumb-ch { text-transform: none; letter-spacing: 0.06em; }
+
+/* 右栏：理论按钮在最上面，然后是参数、读数与依据 */
+.side > #infoBtn { flex: none; align-self: stretch; text-align: center; padding: 7px 9px; }
+#ctlPanel .field { margin-bottom: 8px; }
+#ctlPanel .chips { flex-wrap: wrap; margin: 0 0 10px; gap: 4px; }
+#jChips .chip, #groupChips .chip { text-transform: none; }
+
+/* 双透镜开关：左段是彼得—外尔透镜，右段是平直与 S² 对照；当前选中的一段用琥珀 */
+.lens-toggle { display: flex; width: 100%; margin: 0; padding: 0; border: 1px solid var(--line-hot);
+  background: transparent; cursor: pointer; font: inherit; color: var(--ink); }
+.lens-toggle .seg { flex: 1 1 0; min-width: 0; padding: 8px 7px; font-size: 12px; line-height: 1.3; text-align: center; color: var(--dim); overflow-wrap: anywhere; }
+.lens-toggle .seg.on { border-left: 1px solid var(--line-hot); }
+.lens-toggle[aria-pressed="false"] .seg.off, .lens-toggle[aria-pressed="true"] .seg.on { background: var(--amber); color: var(--on-accent); font-weight: 600; }
+.lens-toggle:hover { border-color: var(--cyan); }
+.lens-toggle:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.scene-chips { margin: 0 0 10px; flex-wrap: wrap; }
+
+/* 舞台上的手柄：当前卡的参数，沿它的路径拖动；它是按钮，所以拖它不会转动相机 */
+.handle { position: absolute; z-index: 3; width: 30px; height: 30px; padding: 0; margin: 0; border: 2px solid var(--amber); border-radius: 50%;
+  background: color-mix(in srgb, var(--amber) 12%, transparent); transform: translate(-50%, -50%); cursor: grab; touch-action: none;
+  user-select: none; -webkit-user-select: none; box-shadow: 0 0 10px color-mix(in srgb, var(--amber) 55%, transparent); }
+.handle:active, .handle.dragging { cursor: grabbing; background: color-mix(in srgb, var(--amber) 28%, transparent); }
+.handle[hidden] { display: none; }
+.stage.still .handle { pointer-events: none; }
+:root[data-thumb-mode] .handle, :root[data-shot] .handle { display: none; }
+
+/* 巡览条：◀ 与（引用图里）⏮ ▷ 在左，卡名居中，▶ 在右。时钟按钮只在被引用的图里出现，那里时间轴不再重复它们 */
+.tour .tour-l { grid-column: 1; grid-row: 1; display: flex; gap: 4px; }
+.tour .tour-clock { display: none; }
+:root[data-embed][data-figure] .tour .tour-clock { display: inline-grid; }
+:root[data-embed][data-figure] footer.rail #rew, :root[data-embed][data-figure] footer.rail #play { display: none; }
+/* 手机与窄窗口的整页、以及正文里嵌入的完整实验室（?embed=1，不带 preset）：双透镜开关所在的左栏排在依据之后，
+   离舞台很远，所以巡览条里放一个镜像的透镜按钮。完整实验室的嵌入不论多宽都显示它。桌面整页、被引用的图
+   （[data-figure]）、封面与截图都不显示它 */
+.tour .tour-lens { display: none; }
+@media (max-width: 1080px) {
+  :root:not([data-figure]):not([data-thumb-mode]):not([data-shot]) .tour .tour-lens { display: inline-grid; place-items: center; padding: 0 8px; white-space: nowrap; }
+}
+:root[data-embed]:not([data-figure]):not([data-thumb-mode]):not([data-shot]) .tour .tour-lens { display: inline-grid; place-items: center; padding: 0 8px; white-space: nowrap; }
+/* 窄的引用图（手机上的正文）：卡名需要整行宽度，时钟按钮回到时间轴 */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .tour .tour-clock { display: none; }
+  :root[data-embed][data-figure] footer.rail #rew, :root[data-embed][data-figure] footer.rail #play { display: inline-grid; }
+}
+
+/* 时间轴右侧：一行提示、一行公式 */
+.keys #hint, .keys #formula { display: block; }
+.keys #formula { font-family: var(--font-data); color: var(--ink); font-size: 10.5px; margin-top: 2px; }
+
+/* 读数按角色着色：青 = 壳层、正核、堆卷积与梅林轴，品红 = 硬截断的过冲，紫 = 维数与脚手架；主读数用 sigma。
+   琥珀只给当前选择与可拖手柄，读数不用它 */
+dl.ro .v dd { color: var(--violet); }
+dl.ro .c dd { color: var(--cyan); }
+dl.ro .m dd { color: var(--magenta); }
+dl.ro .key dd output { color: var(--sigma); }
+dl.ro dd output { font: inherit; color: inherit; }
+dl.ro dd { overflow-wrap: anywhere; }
+
+/* 依据栏的 MODEL 框：共享主题给它的徽章与边框着琥珀色，本页的琥珀只留给当前选择，所以 MODEL 改用中性的墨色；
+   类名照旧是标准的 .lean.model。ARGUED 框里的出处链接换行排 */
+.lean.model { border-color: color-mix(in srgb, var(--ink) 32%, transparent); }
+.lean.model .ok { color: var(--ink); }
+.lean.argued a { overflow-wrap: anywhere; }
+
+/* 手机：徽章排在首行之前，陈述用满整行，长的定理陈述不被徽章挤成窄栏 */
+@media (max-width: 520px) {
+  #basis .lean { display: block; }
+  #basis .lean > .ok { float: left; margin-right: 8px; }
+}
+
+/* 抽屉：说明之后附上依据栏的全部依据框（启动时克隆） */
+.drawer-evidence { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; max-width: 68ch; }
+.drawer-evidence:empty { display: none; }
+
+/* 舞台标签保留大小写；颜色只用这几种角色 */
+.stage .tag.raw { text-transform: none; }
+.stage .tag.c-vi { color: var(--violet); }
+.stage .tag.c-cy { color: var(--cyan); }
+.stage .tag.c-mg { color: var(--magenta); }
+.stage .tag.c-ik { color: var(--ink); }
+
+@container (max-width: 620px) {
+  .hud-tl { left: 12px; max-width: calc(100% - 24px); }
+  .hud-tl .big { font-size: 12px; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.35; }
+  .hud-bl { left: 12px; right: 12px; bottom: 9px; gap: 2px 10px; font-size: 10px; }
+  .stage .tag.raw { font-size: 10.5px; }
+  .handle { width: 26px; height: 26px; }
+}
+
+/* 条带标题只在短语之间折行：每一段整段留在同一行 */
+#plotTitle, #plotTitleB { text-wrap: balance; }
+#plotTitle .nb, #plotTitleB .nb { font: inherit; color: inherit; letter-spacing: inherit; white-space: nowrap; }
+
+/* 正文里嵌入的完整实验室（?embed=1，不带 preset）：条带随内容长高，排在舞台与巡览条之后，第一屏不受影响 */
+:root[data-embed]:not([data-figure]) .lab .strip { height: auto; }
+
+/* 桌面整页与宽于 1080px 的完整实验室嵌入：条带随标题长高，每张小图的画布至少留 148px */
+@media (min-width: 1081px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .strip { height: auto; }
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .strip canvas,
+  :root[data-embed]:not([data-figure]) .lab .strip canvas { flex: 1 0 148px; min-height: 148px; }
+}
+
+/* 单栏的整页（窄窗口、短屏）：给舞台一个更高的高度，页面照常向下滚动 */
+@media (max-width: 1080px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(460px, 66vh)) auto auto; }
+}
+/* 手机：舞台仍至少 440px，巡览条（连同镜像的透镜按钮）在五张卡上都留在 390 × 844 的第一屏里 */
+@media (max-width: 520px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(440px, 56vh)) auto auto; }
+}

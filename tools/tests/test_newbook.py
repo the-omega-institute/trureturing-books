@@ -21,6 +21,7 @@ from pathlib import Path
 from unittest import mock
 
 from tbook import build, cli, config, newbook, paths
+from tbook.summary import parse_summary
 
 REAL_I18N = paths.THEME / "i18n"
 
@@ -65,7 +66,7 @@ class Repo:
                                 I18N_THEME=REAL_I18N).items():
             self.stack.enter_context(mock.patch.object(paths, name, value))
         self.stack.enter_context(mock.patch.dict(os.environ))
-        for key in ("TBOOK_REPO", "TBOOK_BASE_URL", "GITHUB_REPOSITORY", "TBOOK_ROOT"):
+        for key in ("TBOOK_REPO", "TBOOK_BASE_URL", "GITHUB_REPOSITORY", "GITHUB_ACTIONS", "TBOOK_ROOT"):
             os.environ.pop(key, None)
         config.load_site.cache_clear()
         config.i18n.cache_clear()
@@ -78,12 +79,15 @@ class Repo:
         self._tmp.cleanup()
 
     def book(self, slug: str = "demo", langs: tuple[str, ...] = ("zh", "en"), dirs: tuple[str, ...] | None = None,
-             summaries: dict[str, str] | None = None) -> config.Book:
+             summaries: dict[str, str] | None = None, *, max_chapters: str = "", max_chapter_depth: str = "",
+             numbering: str = "") -> config.Book:
         """A book whose editions are ``langs``; only the directories in ``dirs`` (default: all) exist."""
         bdir = self.root / "books" / slug
         titles = "\n".join(f'{lang} = "T-{lang}"' for lang in langs)
-        write(bdir / "book.toml", f'[book]\neditions = [{", ".join(repr(x) for x in langs)}]\n\n[book.title]\n{titles}\n'
-              .replace("'", '"'))
+        editions = ", ".join(f'"{lang}"' for lang in langs)
+        cap = f"max_chapters = {max_chapters}\n" if max_chapters else ""
+        depth_cap = f"max_chapter_depth = {max_chapter_depth}\n" if max_chapter_depth else ""
+        write(bdir / "book.toml", f"[book]\neditions = [{editions}]\n{cap}{depth_cap}\n[book.title]\n{titles}\n{numbering}")
         for lang in langs if dirs is None else dirs:
             write(bdir / lang / "SUMMARY.md", (summaries or {}).get(lang, "# Summary\n\n- [One](ch01.md)\n"))
             write(bdir / lang / "ch01.md", "# One\n")
@@ -98,8 +102,207 @@ class Repo:
 
 # --------------------------------------------------------------------------- new-chapter
 
+NESTED_SUMMARY = """\
+# Summary
+
+[Preface](README.md)
+
+- [One](ch01.md)
+  - [Section](section.md)
+    - [Detail](detail.md)
+  - [Next section](next-section.md)
+
+# Next part
+
+- [Two](ch02.md)
+  - [Other section](other-section.md)
+
+[Notes](notes.md)
+"""
+
+UNNUMBERED_TAIL = """\
+- [Coda](coda.md)
+  - [Coda detail](coda-detail.md)
+- [Appendix](appendix-a.md)
+"""
+
+TAIL_NUMBERING = """\
+[numbering.unnumbered]
+"coda.md" = "Coda"
+"appendix-a.md" = "Appendix"
+"""
+
 
 class NewChapterTests(unittest.TestCase):
+    def test_explicit_top_level_positions_keep_target_subtree_and_part(self):
+        for flag, target, previous, following in (
+            ("--before", "ch01.md", "README.md", "ch01.md"),
+            ("--after", "ch01", "next-section.md", "ch02.md"),
+        ):
+            with self.subTest(flag=flag), Repo() as repo:
+                book = repo.book(summaries={"zh": NESTED_SUMMARY, "en": NESTED_SUMMARY})
+                code, _, err = repo.run_cli("new-chapter", "demo", "new", flag, target,
+                                           "--title", "zh=新章", "--title", "en=New")
+                self.assertEqual((code, err), (0, ""))
+                for ed in book.editions:
+                    parsed = parse_summary(ed.summary)
+                    i = parsed.files().index("new.md")
+                    self.assertEqual(parsed.files()[i - 1:i + 2], [previous, "new.md", following])
+                    self.assertEqual(parsed.chapters[i].number, (1,) if flag == "--before" else (2,))
+                    self.assertEqual(parsed.chapters[i].part, "")
+                    self.assertEqual((ed.dir / "new.md").read_text(), "# 新章\n\n" if ed.lang == "zh" else "# New\n\n")
+
+    def test_explicit_child_positions_keep_target_subtree(self):
+        for flag, target, previous, following in (
+            ("--before", "section", "ch01.md", "section.md"),
+            ("--after", "section.md", "detail.md", "next-section.md"),
+        ):
+            with self.subTest(flag=flag), Repo() as repo:
+                book = repo.book(summaries={"zh": NESTED_SUMMARY, "en": NESTED_SUMMARY})
+                code, _, err = repo.run_cli("new-chapter", "demo", "new", "--parent", "ch01.md", flag, target,
+                                           "--title", "zh=新节", "--title", "en=New")
+                self.assertEqual((code, err), (0, ""))
+                for ed in book.editions:
+                    parsed = parse_summary(ed.summary)
+                    i = parsed.files().index("new.md")
+                    self.assertEqual(parsed.files()[i - 1:i + 2], [previous, "new.md", following])
+                    self.assertEqual(parsed.chapters[i].number, (1, 1) if flag == "--before" else (1, 2))
+                    self.assertEqual(parsed.chapters[i].depth, 1)
+
+    def test_position_flags_are_mutually_exclusive(self):
+        with Repo() as repo:
+            repo.book()
+            before = snapshot(repo.root / "books")
+            err = io.StringIO()
+            with redirect_stderr(err), self.assertRaises(SystemExit) as caught:
+                cli.main(["new-chapter", "demo", "new", "--before", "ch01", "--after", "ch01",
+                          "--title", "zh=新章", "--title", "en=New"])
+            self.assertEqual(caught.exception.code, 2)
+            self.assertIn("argument --after: not allowed with argument --before", err.getvalue())
+            with self.assertRaisesRegex(config.ConfigError, "mutually exclusive"):
+                newbook.new_chapter("demo", "new", {"*": "New"}, before="ch01", after="ch01")
+            self.assertEqual(snapshot(repo.root / "books"), before)
+
+    def test_position_rejects_missing_or_non_sibling_targets(self):
+        with Repo() as repo:
+            repo.book(summaries={"zh": NESTED_SUMMARY, "en": NESTED_SUMMARY})
+            before = snapshot(repo.root / "books")
+            for parent, invalid_targets, message in (
+                (None, ("missing", "README", "notes", "section"), "top-level list chapter"),
+                ("ch01", ("missing", "ch01", "ch02", "detail", "other-section"), "direct child of 'ch01.md'"),
+            ):
+                for target in invalid_targets:
+                    with self.subTest(parent=parent, target=target):
+                        with self.assertRaisesRegex(config.ConfigError, rf"--after target '{target}\.md'.*{message}"):
+                            newbook.new_chapter("demo", "new", {"*": "New"}, parent=parent, after=target)
+                        self.assertEqual(snapshot(repo.root / "books"), before)
+
+    def test_explicit_positions_require_matching_edition_hierarchies(self):
+        with Repo() as repo:
+            repo.book(summaries={"zh": NESTED_SUMMARY,
+                                 "en": NESTED_SUMMARY.replace("    - [Detail]", "  - [Detail]")})
+            before = snapshot(repo.root / "books")
+            for options in ({"before": "ch02"}, {"after": "ch02"}, {"parent": "ch01", "before": "section"}):
+                with self.subTest(options=options):
+                    with self.assertRaisesRegex(config.ConfigError, "books/demo/en/SUMMARY.md: edition chapter hierarchy differs"):
+                        newbook.new_chapter("demo", "new", {"*": "New"}, **options)
+                    self.assertEqual(snapshot(repo.root / "books"), before)
+
+    def test_default_top_level_insert_precedes_unnumbered_tail_and_suffix(self):
+        for suffix in ("", "\n[Notes](notes.md)\n"):
+            with self.subTest(suffix=suffix), Repo() as repo:
+                summary = ("[Preface](README.md)\n\n- [Earlier appendix](appendix-a.md)\n"
+                           "- [One](ch01.md)\n" + UNNUMBERED_TAIL.replace("appendix-a.md", "appendix-b.md") + suffix)
+                numbering = TAIL_NUMBERING + '"appendix-b.md" = "References"\n'
+                book = repo.book(summaries={"zh": summary, "en": summary}, numbering=numbering, max_chapters="2")
+                newbook.new_chapter("demo", "new", {"*": "New"})
+                expected = ["README.md", "appendix-a.md", "ch01.md", "new.md", "coda.md", "coda-detail.md", "appendix-b.md"]
+                if suffix:
+                    expected.append("notes.md")
+                for ed in book.editions:
+                    parsed = parse_summary(ed.summary, unnumbered=book.unnumbered)
+                    self.assertEqual(parsed.files(), expected)
+                    self.assertEqual(parsed.chapters[3].number, (2,))
+                    self.assertEqual(parsed.chapters[5].depth, 1)
+
+    def test_explicit_top_level_target_can_be_an_unnumbered_list_entry(self):
+        with Repo() as repo:
+            summary = "- [One](ch01.md)\n" + UNNUMBERED_TAIL
+            book = repo.book(summaries={"zh": summary, "en": summary}, numbering=TAIL_NUMBERING)
+            newbook.new_chapter("demo", "new", {"*": "New"}, after="coda")
+            for ed in book.editions:
+                parsed = parse_summary(ed.summary, unnumbered=book.unnumbered)
+                self.assertEqual(parsed.files(), ["ch01.md", "coda.md", "coda-detail.md", "new.md", "appendix-a.md"])
+                self.assertEqual(parsed.chapters[3].number, (2,))
+
+    def test_top_level_chapter_cap_refuses_creation_and_allows_child(self):
+        with Repo() as repo:
+            repo.book(max_chapters="1")
+            before = snapshot(repo.root / "books")
+            for options in ({}, {"before": "ch01"}, {"after": "ch01"}):
+                with self.subTest(options=options), self.assertRaisesRegex(
+                        config.ConfigError, r"books/demo/zh/SUMMARY.md:.*max_chapters = 1.*--parent.*existing section"):
+                    newbook.new_chapter("demo", "new", {"*": "New"}, **options)
+                self.assertEqual(snapshot(repo.root / "books"), before)
+            self.assertEqual(len(newbook.new_chapter("demo", "new", {"*": "New"}, parent="ch01")), 2)
+
+    def test_default_insertion_checks_the_cap_in_every_edition_before_writing(self):
+        with Repo() as repo:
+            repo.book(max_chapters="2", summaries={"en": "- [One](ch01.md)\n- [Two](ch02.md)\n"})
+            before = snapshot(repo.root / "books")
+            with self.assertRaisesRegex(config.ConfigError, r"books/demo/en/SUMMARY.md:.*max_chapters = 2"):
+                newbook.new_chapter("demo", "new", {"*": "New"})
+            self.assertEqual(snapshot(repo.root / "books"), before)
+
+    def test_numbered_chapter_creation_at_the_depth_limit(self):
+        for depth, options in ((0, {}), (1, {"parent": "ch01"})):
+            with self.subTest(depth=depth), Repo() as repo:
+                book = repo.book(max_chapter_depth=str(depth))
+                created = newbook.new_chapter("demo", "new", {"*": "New"}, **options)
+                self.assertEqual(created, [ed.dir / "new.md" for ed in book.editions])
+                for ed in book.editions:
+                    chapter = parse_summary(ed.summary).chapters[-1]
+                    self.assertEqual((chapter.path, chapter.depth, chapter.numbered), ("new.md", depth, True))
+
+    def test_numbered_chapter_creation_beyond_the_depth_limit_writes_nothing(self):
+        for limit, parent, flags in (
+            (0, "ch01", ()),
+            (1, "section", ("--before", "detail")),
+            (1, "section", ("--after", "detail")),
+        ):
+            with self.subTest(limit=limit, flags=flags), Repo() as repo:
+                summaries = {"zh": NESTED_SUMMARY, "en": NESTED_SUMMARY} if flags else None
+                book = repo.book(max_chapter_depth=str(limit), summaries=summaries)
+                if flags:
+                    for ed in book.editions:
+                        write(ed.dir / "section.md", "# Section\n")
+                        write(ed.dir / "detail.md", "# Detail\n")
+                before = snapshot(repo.root / "books")
+                code, _, err = repo.run_cli("new-chapter", "demo", "new", "--parent", parent, *flags,
+                                           "--title", "zh=新节", "--title", "en=New")
+                self.assertEqual(code, 2)
+                self.assertIn(f"books/demo/zh/SUMMARY.md: Numbered chapter '新节' has depth {limit + 1}, "
+                              f"exceeding book.max_chapter_depth = {limit}", err)
+                self.assertIn("unnumbered appendix configured in [numbering.unnumbered]", err)
+                self.assertEqual(snapshot(repo.root / "books"), before)
+
+    def test_chapter_creation_beyond_the_depth_limit_in_an_unnumbered_tree(self):
+        with Repo() as repo:
+            summary = "- [One](ch01.md)\n" + UNNUMBERED_TAIL
+            book = repo.book(max_chapter_depth="0", max_chapters="1", summaries=dict.fromkeys(("zh", "en"), summary),
+                             numbering=TAIL_NUMBERING)
+            for ed in book.editions:
+                write(ed.dir / "appendix-a.md", "# Appendix\n")
+            newbook.new_chapter("demo", "appendix-section", {"*": "Section"}, parent="appendix-a")
+            created = newbook.new_chapter("demo", "derivation", {"*": "Derivation"}, parent="appendix-section")
+            self.assertEqual(created, [ed.dir / "derivation.md" for ed in book.editions])
+            for ed in book.editions:
+                parsed = parse_summary(ed.summary, unnumbered=book.unnumbered)
+                appendix, section, derivation = parsed.chapters[-3:]
+                self.assertEqual(appendix.children, [section])
+                self.assertEqual(section.children, [derivation])
+                self.assertEqual((derivation.path, derivation.depth, derivation.numbered), ("derivation.md", 2, False))
+
     def test_split_keeps_environment_numbers_and_next_chapter_number(self):
         from tbook.model import load_edition
         with Repo() as repo:
@@ -119,7 +322,6 @@ class NewChapterTests(unittest.TestCase):
                 self.assertEqual(after, before + [("next", "2.1")])
 
     def test_parent_inserts_after_subtree_before_next_part_and_supports_grandchildren(self):
-        from tbook.summary import parse_summary
         with Repo() as repo:
             summary = ("# Summary\n\n- [One](ch01.md)\n  - [First](ch01-s01-first.md)\n"
                        "    - [Detail](ch01-s01-s01-detail.md)\n\n# Next part\n\n- [Two](ch02.md)\n")
@@ -149,7 +351,6 @@ class NewChapterTests(unittest.TestCase):
                 self.assertEqual(snapshot(repo.root / "books"), before)
 
     def test_new_top_level_chapter_precedes_suffix(self):
-        from tbook.summary import parse_summary
         with Repo() as repo:
             book = repo.book(summaries={lang: "# Summary\n\n- [One](ch01.md)\n\n[Appendix](appendix-a.md)\n"
                                         for lang in ("zh", "en")})
@@ -219,6 +420,88 @@ class NewChapterTests(unittest.TestCase):
                 with self.assertRaisesRegex(config.ConfigError, message):
                     newbook.new_chapter("demo", "ch02-x", {"zh": "二", "en": "Two"})
                 self.assertEqual(snapshot(repo.root / "books"), before)
+
+
+class ChapterCapTests(unittest.TestCase):
+    def test_config_accepts_an_optional_positive_integer(self):
+        with Repo() as repo:
+            self.assertIsNone(repo.book().max_chapters)
+            self.assertEqual(repo.book(max_chapters="39").max_chapters, 39)
+            for value in ("0", "-1", "true", "false", "1.0", '"2"', "[2]", "{ limit = 2 }"):
+                with self.subTest(value=value), self.assertRaisesRegex(
+                        config.ConfigError, r"books/demo/book.toml: book.max_chapters must be a positive integer"):
+                    repo.book(max_chapters=value)
+
+    def test_check_counts_numbered_top_level_entries_in_every_edition(self):
+        with Repo() as repo:
+            summary = ("[Preface](README.md)\n\n- [One](ch01.md)\n  - [Subsection](section.md)\n"
+                       "- [Two](ch02.md)\n" + UNNUMBERED_TAIL + "\n[Notes](notes.md)\n")
+            summaries = {"zh": summary, "en": summary}
+            book = repo.book(max_chapters="2", summaries=summaries, numbering=TAIL_NUMBERING)
+            for ed in book.editions:
+                for ch in parse_summary(ed.summary).chapters:
+                    write(ed.dir / ch.path, f"# {ch.title}\n")
+            code, out, _ = repo.run_cli("check", "--offline", "--book", "demo")
+            self.assertEqual(code, 0, out)
+
+            repo.book(max_chapters="1", summaries=summaries, numbering=TAIL_NUMBERING)
+            code, out, _ = repo.run_cli("check", "--offline", "--book", "demo")
+            self.assertEqual(code, 1)
+            for lang in ("zh", "en"):
+                self.assertIn(f"books/demo/{lang}/SUMMARY.md: 2 top-level numbered chapters exceed book.max_chapters = 1", out)
+            self.assertIn("(--parent) or reorganize within the cap", out)
+            self.assertIn("2 error(s)", out)
+
+
+class ChapterDepthTests(unittest.TestCase):
+    def test_config_accepts_an_optional_nonnegative_integer(self):
+        with Repo() as repo:
+            self.assertIsNone(repo.book().max_chapter_depth)
+            for value in (0, 2):
+                with self.subTest(value=value):
+                    self.assertEqual(repo.book(max_chapter_depth=str(value)).max_chapter_depth, value)
+            for value in ("-1", "true", "false", "1.0", '"2"', "[2]", "{ limit = 2 }"):
+                with self.subTest(value=value), self.assertRaisesRegex(
+                        config.ConfigError, r"books/demo/book.toml: book.max_chapter_depth must be a non-negative integer"):
+                    repo.book(max_chapter_depth=value)
+
+    def test_check_reports_each_numbered_violation_at_its_summary_line(self):
+        with Repo() as repo:
+            summary = (
+                "[Preface](README.md)\n"
+                "- [One](ch01.md)\n"
+                "  - [Section](section.md)\n"
+                "    - [Detail](detail.md)\n"
+                "      - [Example](example.md)\n"
+                "- [Appendix](appendix-a.md)\n"
+                "  - [Technical section](technical.md)\n"
+                "    - [Derivation](derivation.md)\n"
+                "      - [Step](step.md)\n"
+                "        - [Substep](substep.md)\n"
+                "[Notes](notes.md)\n"
+            )
+            summaries = {"zh": summary, "en": "# Summary\n\n" + summary}
+            numbering = '[numbering.unnumbered]\n"appendix-a.md" = "Appendix"\n'
+            book = repo.book(max_chapters="1", summaries=summaries, numbering=numbering)
+            for ed in book.editions:
+                for ch in parse_summary(ed.summary, unnumbered=book.unnumbered).chapters:
+                    write(ed.dir / ch.path, f"# {ch.title}\n")
+            numbered_sections = [(1, "Section"), (2, "Detail"), (3, "Example")]
+            for limit, violations in (("", []), ("3", []), ("1", numbered_sections[1:]), ("0", numbered_sections)):
+                with self.subTest(limit=limit):
+                    repo.book(max_chapter_depth=limit, max_chapters="1", summaries=summaries, numbering=numbering)
+                    code, out, err = repo.run_cli("check", "--offline", "--book", "demo")
+                    self.assertEqual(err, "")
+                    expected_errors = len(violations) * len(book.editions)
+                    self.assertEqual(code, 1 if violations else 0, out)
+                    self.assertIn(f"{expected_errors} error(s)", out)
+                    for lang, offset in (("zh", 0), ("en", 2)):
+                        for depth, title in violations:
+                            self.assertIn(f"books/demo/{lang}/SUMMARY.md:{depth + 2 + offset}: "
+                                          f"Numbered chapter {title!r} has depth {depth}, "
+                                          f"exceeding book.max_chapter_depth = {limit}", out)
+                    self.assertEqual(out.count("Keep main chapters fluent and shallow."), expected_errors)
+                    self.assertEqual(out.count("unnumbered appendix configured in [numbering.unnumbered]"), expected_errors)
 
 
 # --------------------------------------------------------------------------- new-book

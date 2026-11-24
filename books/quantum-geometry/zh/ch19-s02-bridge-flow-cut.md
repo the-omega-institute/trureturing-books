@@ -446,7 +446,81 @@ $$
 反过来，左侧缩维的第一个区间由 [@thm-bridge-native-scalar-gram-exists] 给出构造。其余情况只需一个分块坐标嵌入。给定 $k\le3$、$b\le ka$ 和 $kc\le d$，把左输入坐标分入 $k$ 个大小至多为 $a$ 的块，每个块经自己的左矩阵嵌入同一组左输出坐标。与这个块配对的右矩阵把全部 $c$ 个输入坐标嵌入专属的 $c$ 个输出坐标。各块使用的右输出坐标互不相交，所以各输入基向量恰好映到一个输出基向量，且像两两不同。补足零项，再把左矩阵乘以 $\sqrt{\lambda}$，所得列 Gram 就是 $\lambda I_{bc}$。双侧均可嵌入时取 $k=1$，左侧缩维的后两个区间分别取 $k=2$ 和 $k=3$。右侧缩维时先按交换后的条件构造，再交换回来。完整证明由 Lean 内核检查。
 :::
 
-对 $k\ge1$，族 $(2k,5k,2k,5k)$ 落在左侧缩维的第三区间，但 $3c=6k>d=5k$，故精确平坦谱无法达到。对这族维数，归一化列 Gram 的熵与最大值之间还有一个与 $k$ 无关的下界。
+::: {.theorem #thm-bridge-native-four-staircase title="宽度四正标量列 Gram 的阶梯构造与大比例充要分类" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourStaircase.staircase_sufficient, D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourStaircase.native_four_scalar_gram_iff, D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourStaircase.native_four_scalar_gram_swap_iff, D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourStaircase.pure_rank_two_kernel_bound, D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourStaircase.exact_width_four_at_three_four"}
+对任意 $a,b,c,d\in\mathbb N$ 和实数 $\lambda>0$，记 $G_4(a,b,c,d;\lambda)$ 为如下命题：存在 $X_r\in M_{a\times b}(\mathbb C)$、$Y_r\in M_{d\times c}(\mathbb C)$（$r=0,1,2,3$），使 $F=\sum_{r=0}^3 X_r\otimes Y_r$ 满足 $F^*F=\lambda I_{bc}$。
+
+**八级阶梯充分条件。** 记 $\mathcal S(a,b,c,d)$ 表示下列八行中至少一行的全部不等式成立。
+
+$$
+\begin{aligned}
+b &\le a, & c &\le d,\\
+a &< b,\quad 3b\le4a, & 4c &\le3d,\\
+4a &< 3b,\quad 2b\le3a, & 3c &\le2d,\\
+3a &< 2b,\quad 3b\le5a, & 5c &\le3d,\\
+5a &< 3b,\quad b\le2a, & 2c &\le d,\\
+2a &< b,\quad 2b\le5a, & 5c &\le2d,\\
+5a &< 2b,\quad b\le3a, & 3c &\le d,\\
+3a &< b,\quad b\le4a, & 4c &\le d.
+\end{aligned}
+$$
+
+若 $b=0$、$c=0$、$\mathcal S(a,b,c,d)$ 或 $\mathcal S(d,c,b,a)$ 中至少一项成立，则 $G_4(a,b,c,d;\lambda)$ 成立。
+
+**大比例充要分类。** 若 $0<c$ 且 $2a<b$，则 $G_4(a,b,c,d;\lambda)$ 成立当且仅当下列条件成立。
+
+$$
+\begin{aligned}
+&(2a<b\land 2b\le5a\land 5c\le2d)\\
+{}\lor{}&(5a<2b\land b\le3a\land 3c\le d)\\
+{}\lor{}&(3a<b\land b\le4a\land 4c\le d).
+\end{aligned}
+$$
+
+若 $0<b$ 且 $2d<c$，则 $G_4(a,b,c,d;\lambda)$ 成立当且仅当下列条件成立。
+
+$$
+\begin{aligned}
+&(2d<c\land 2c\le5d\land 5b\le2a)\\
+{}\lor{}&(5d<2c\land c\le3d\land 3b\le a)\\
+{}\lor{}&(3d<c\land c\le4d\land 4b\le a).
+\end{aligned}
+$$
+
+两条等价都允许 $a$ 或 $d$ 为零。
+
+**纯秩二核的必要界。** 对上述尺寸的任意四对因子，令 $Sx=(X_rx)_r$，并对 $T\in M_4(\mathbb C)$ 定义 $\Phi(T)=S^*(T\otimes I_a)S$。若 $a<b$、左因子线性无关、$F^*F=I_{bc}$、$\sum_r X_r^*X_r=I_b$，且每个满足 $\Phi(T)=0$ 的非零厄米矩阵 $T$ 的秩均为 $2$，则 $4c\le3d$。
+
+**精确最小宽度。** 在 $(3,4,3,4)$，对每个 $\lambda>0$，四项可实现 $F^*F=\lambda I_{bc}$，而三项不可实现。更短的和可补零成为三项和，故最小宽度为四。
+:::
+
+::: {.proof #pf-bridge-native-four-staircase}
+宽度四在小比例区间 $a<b\le2a$ 的一般必要条件仍有待确定。例如，$(4,5,4,5)$、$(5,6,4,5)$ 和 $(5,6,5,6)$ 是否能用四项实现正标量列 Gram，仍是开放问题。
+
+若 $b=0$ 或 $c=0$，取零因子即可。其余情形把输入坐标划分为至多四个矩形，分别沿两个坐标方向平移到输出网格内互不相交的矩形。每个平移由一项 Kronecker 积给出，因子在对应输入区间外为零。所得和把输入基向量送到互异的输出基向量，补零至四项，再把左因子乘以 $\sqrt{\lambda}$ 即得所需 Gram。交换两个 Kronecker 因子只置换输入、输出坐标，因而保持标量列 Gram，并把维数换成 $(d,c,b,a)$。
+
+- 在阶梯中满足 $b\le ka$、$kc\le d$ 的各行，取对应的 $k\in\{1,2,3,4\}$，每个至多含 $a$ 个左输入坐标的块独占一段长 $c$ 的右输出。
+- 在 $4/3$ 和 $3/2$ 两级，先放入一个 $a\times c$ 块。余下输入宽 $e=b-a$，按右输入坐标切成长度至多为 $s=d-c$ 的至多三段或两段，再沿左输出方向并排放入宽 $a$、高 $s$ 的空余矩形。两级的不等式分别保证 $3e\le a$、$c\le3s$ 或 $2e\le a$、$c\le2s$。
+- 在 $5/3$ 一级，若 $2c\le d$，用两个整块。否则，放入首个 $a\times c$ 块后，将余下输入的 $e\times s$ 矩形移入空余矩形。余下高度为 $c-s$ 的部分沿左输入方向切成宽至多 $a-e$ 的两片，再在空余矩形的剩余宽度内上下叠放。这里 $3e\le2a$ 且 $2(c-s)\le s$。
+- 在 $5/2$ 一级，先用两段长 $c$ 的右输出放入两个 $a\times c$ 块。剩余输入宽 $b-2a$，沿右输入方向切成至多两片，并排放入宽 $a$、高 $d-2c$ 的区域。条件 $2(b-2a)\le a$、$c\le2(d-2c)$ 保证两片都能放下。
+
+证明左侧大比例情形的必要性时，先将 $F$ 除以 $\sqrt{\lambda}$。因 $c>0$，左叠映射的非零核向量与任一非零右输入向量的张量积会落入 $F$ 的核，故左叠映射必须单射，且 $b\le4a$。若任一组因子线性相关，吸收一项后由 [@thm-bridge-scalar-gram-obstruction] 得 $3c\le d$，而三项左叠映射还给出 $b\le3a$。
+
+若两组因子都线性无关，按前面的归一化右偏迹论证正交归一化右因子，并对左因子作逆转置变换，使 $\sum_r X_r^*X_r=I_b$。展开 $F^*F=I_{bc}$，可知残差系数矩阵 $R_{\ell j}$（其 $(r,s)$ 元为 $(Y_r^*Y_s)_{\ell j}-\delta_{rs}\delta_{\ell j}$）满足 $\Phi(R_{\ell j})=0$。压缩保持伴随，因而可分别对 $R_{\ell j}$ 的两个厄米部分应用核的几何性质。对零压缩的厄米矩阵，其非正特征方向上的投影在 $S$ 的像上单射，因为投影为零的非零向量会有严格正的二次型值。对矩阵取负再应用同一论证，得到另一侧符号的界。所以 $2a<b$ 时至多各有一个正、负特征值，$3a<b$ 时核为零。见[厄米秩界](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourKernel.hermitian_rank_bound)。
+
+当厄米核的元素秩均至多为 $2$ 时，[系数核几何定理](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourKernel.coefficient_geometry) 给出以下三种可能。
+
+- 若厄米核为零，则 $R_{\ell j}=0$，四个右因子是像两两正交的等距嵌入，故 $4c\le d$。
+- 若有共同的三维中性子空间，取其标准正交基作系数来组合右因子。对每个 $R_{\ell j}$，在该子空间上的压缩为零，故三个组合也是像两两正交的等距嵌入，给出 $3c\le d$。
+- 若存在共同核单位向量 $v$，则 $R_{\ell j}v=0$，故 $Z=\sum_r v_rY_r$ 满足 $Y_r^*Z=v_r I_c$ 和 $Z^*Z=I_c$。写 $Y_r=\bar v_r Z+W_r$，则 $W_r$ 的像落在 $Z$ 的像的正交补，且 $\sum_r v_r W_r=0$。令 $U=\sum_r\bar v_r X_r$。将左输入限制在 $\ker U$，维数 $p\ge b-a$，则 $U\otimes Z$ 消失，余下的和由于右因子的线性关系可写成三项。用正交基表示该限制及右输出的正交补，得到维数 $(a,p,c,d-c)$ 上的等距映射。
+
+在共同核情形，$2a<b$ 保证 $a<p$，故 [@thm-bridge-native-three-rectangular-bound] 给出 $3c\le2(d-c)$，即 $5c\le2d$。若 $5a<2b$，则 $3a<2p$，由 [@thm-bridge-native-rectangular-bound] 得 $2c\le d-c$，即 $3c\le d$。其余情形已给出至少同样强的界，且 $3a<b$ 时核为零，必有 $4c\le d$。各上端点保留等号，充分性由阶梯的最后三行给出。交换因子得到右侧的大比例等价。
+
+在纯秩二核的假设下，可直接使用上述三种核情形。共同核情形只需 $a<b$，此时 $p>0$，交换因子后用三项叠映射的单射性得 $c\le3(d-c)$，即 $4c\le3d$。另两种情形的界也推出此不等式。
+
+在 $(3,4,3,4)$，$4/3$ 一级的两个上界都取等，所以四项可实现。三项必要界在此要求 $9\le8$，故不存在三项实现。完整证明由 Lean 内核检查。
+:::
+
+对 $k\ge1$，族 $(2k,5k,2k,5k)$ 落在左侧缩维的第三区间，但 $3c=6k>d=5k$，故宽度三下的精确平坦谱无法达到。对这族维数，归一化列 Gram 的熵与最大值之间还有一个与 $k$ 无关的下界。
 
 **宽度三桥接的一致平坦谱熵隙（手工推导）。** 设 $k\ge1$ 为整数，$(a,b,c,d)=(2k,5k,2k,5k)$，$D=bc=10k^2$，$F=\sum_{r=1}^3 M_r\otimes N_r\ne0$。归一化 $\rho_{BC}=F^*F/\operatorname{Tr}(F^*F)$，记 $G=D\rho_{BC}$ 与 $\eta=\|G-I_D\|_1/D$，其中 $\|\cdot\|_1$ 是迹范数。若至多用 $2$ 项，则 $\operatorname{rank}F\le 2ac=8k^2$，故 $G-I_D$ 的负部迹至少为 $2k^2$。由于该矩阵无迹，$\eta\ge 2/5$。
 

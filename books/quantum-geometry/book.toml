@@ -4,6 +4,10 @@ version = "0.1.0"
 authors = ["Auric"]
 license = "CC-BY-4.0"
 editions = ["zh", "en"]
+# 含空行与代码的单页 Markdown 源码行数上限。
+max_page_lines = 1000
+max_chapters = 39
+max_chapter_depth = 2
 code = "ORTHO//QUANTUM"
 date = "2026-11-20"
 # Zenodo 概念 DOI，供本书各版本共同使用。
@@ -26,6 +30,11 @@ html = true
 pdf = ["screen", "print", "academic"]
 epub = true
 
+[html.fold]
+# 侧栏保留各部与章名，进入子页时展开当前路径。
+enable = true
+level = 0
+
 [pdf]
 paper = "a4"
 academic_paper = "a4"
@@ -46,3 +55,10 @@ embed_fonts = false
 "appendix-g.md" = "G"
 "appendix-h.md" = "H"
 "appendix-i.md" = "I"
+"appendix-j.md" = "J"
+"appendix-k.md" = "K"
+"appendix-l.md" = "L"
+"appendix-m.md" = "M"
+"appendix-n.md" = "N"
+"appendix-o.md" = "O"
+"appendix-p.md" = "P"

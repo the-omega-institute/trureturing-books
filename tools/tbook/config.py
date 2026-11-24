@@ -64,6 +64,22 @@ def duplicates(items: list[str]) -> list[str]:
     return out
 
 
+def _positive_book_limit(value: Any, where: str, key: str) -> int | None:
+    if value is not None and (not isinstance(value, int) or isinstance(value, bool) or value <= 0):
+        raise ConfigError(f"{where}: book.{key} must be a positive integer")
+    return value
+
+
+def _nonnegative_book_limit(value: Any, where: str, key: str) -> int | None:
+    if value is not None and (not isinstance(value, int) or isinstance(value, bool) or value < 0):
+        raise ConfigError(f"{where}: book.{key} must be a non-negative integer")
+    return value
+
+
+def page_line_limit(value: Any, where: str) -> int | None:
+    return _positive_book_limit(value, where, "max_page_lines")
+
+
 def normalize_doi(value: Any, where: str = "book.doi") -> str:
     """Return a bare DOI, accepting the common DOI and Zenodo URL forms."""
     if value is None:
@@ -456,6 +472,11 @@ class Book:
     raw: dict[str, Any] = field(repr=False, default_factory=dict)
     editions: list[Edition] = field(default_factory=list)
     unnumbered: dict[str, str] = field(default_factory=dict)
+    max_page_lines: int | None = None
+    max_chapters: int | None = None
+    fold_enable: bool = True
+    fold_level: int = 1
+    max_chapter_depth: int | None = None
 
     def edition(self, lang: str) -> Edition:
         for ed in self.editions:
@@ -528,6 +549,18 @@ def load_book(slug_or_dir: str | Path) -> Book:
     title = localized(meta.get("title"), f"{where} book.title")
     if not title:
         raise ConfigError(f"{where}: book.title is required")
+    html = raw.get("html", {})
+    if not isinstance(html, dict):
+        raise ConfigError(f"{where}: html must be a table")
+    fold = html.get("fold", {})
+    if not isinstance(fold, dict):
+        raise ConfigError(f"{where}: html.fold must be a table")
+    fold_enable = fold.get("enable", True)
+    fold_level = fold.get("level", 1)
+    if type(fold_enable) is not bool:
+        raise ConfigError(f"{where}: html.fold.enable must be true or false")
+    if type(fold_level) is not int or not 0 <= fold_level <= 255:
+        raise ConfigError(f"{where}: html.fold.level must be an integer from 0 to 255")
     numbering = raw.get("numbering", {})
     if not isinstance(numbering, dict):
         raise ConfigError(f"{where}: numbering must be a table")
@@ -562,7 +595,12 @@ def load_book(slug_or_dir: str | Path) -> Book:
         pdf=dict(raw.get("pdf", {})),
         epub=dict(raw.get("epub", {})),
         raw=raw,
+        fold_enable=fold_enable,
+        fold_level=fold_level,
         unnumbered=dict(unnumbered),
+        max_page_lines=page_line_limit(meta.get("max_page_lines"), where),
+        max_chapters=_positive_book_limit(meta.get("max_chapters"), where, "max_chapters"),
+        max_chapter_depth=_nonnegative_book_limit(meta.get("max_chapter_depth"), where, "max_chapter_depth"),
     )
     book.editions = [Edition(book, lang) for lang in languages]
     return book

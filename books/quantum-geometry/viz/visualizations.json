@@ -5840,10 +5840,10 @@
       ],
       "theory": [
         {
-          "label": "第 34 章 §34.7 · 格拉姆窗口、舒尔补可行走廊与多观察者共识",
-          "label_en": "Chapter 34 §34.7 · The Gram window, the Schur feasibility corridor and multi-observer consensus",
-          "href": "../zh/ch34-s18-gram-window-and-consensus.html#sec-ch34-18-5",
-          "href_en": "../en/ch34-s18-gram-window-and-consensus.html#sec-ch34-18-5"
+          "label": "附录 N · 算术消元的资源账本",
+          "label_en": "Appendix N · Resource Ledger of Arithmetic Elimination",
+          "href": "../zh/appendix-n.html#sec-ch34-18-5",
+          "href_en": "../en/appendix-n.html#sec-ch34-18-5"
         },
         {
           "label": "Burnol，arXiv:math/0103058v2（liminf 下界，不是有限 N 的等式）",
@@ -8671,6 +8671,1377 @@
         },
         {
           "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "constant-free-rational-axiom-omega-sandbox",
+      "code": "OMEGA//RATIONAL",
+      "title": "无常数母公理与有理真球：π·e·φ 平直近似残差对比有理保真闭合",
+      "title_en": "Constant-Free AXIOM-Ω & Rational Sphere: π · e · φ Flat Residuals vs. Rational Fidelity Closure",
+      "summary": "在同一座三维球面舞台上对照平直多面体与正 N 边形的弦弧矢高及 720° 顶点角亏（π）、θ ≠ 0 时欧拉切线步 (1+iθ/N)ᴺ 的球外模方膨胀与一步有理凯莱驻球（e）、N≤4 有理正四面体 κ=1/3 封顶对 N=5 五重过约束吐出 φ，以及纯有理切比雪夫倍增 κ₂=(2κ₁−1)² 与无常数真球本相。",
+      "summary_en": "Contrasts on one 3D spherical stage flat polyhedral/polygonal sagitta gaps and 720° vertex angle defects (π), Euler tangent-step radial escape |(1+iθ/N)ᴺ|² > 1 (θ ≠ 0) versus single-step rational Cayley residence (e), N≤4 rational tetrahedral closure κ=1/3 versus N=5 fivefold φ emergence, and integer-coefficient Chebyshev doubling κ₂=(2κ₁−1)² on the constant-free sphere.",
+      "path": "constant-free-rational-axiom-omega-sandbox/",
+      "thumbnail": "constant-free-rational-axiom-omega-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-22",
+      "chapter": 32,
+      "section": "32.5",
+      "presets": [
+        "pi-polyhedral-crease-residual",
+        "euler-tangent-escape-vs-cayley",
+        "chebyshev-rational-arc-doubling",
+        "tetrahedral-rational-cap-vs-phi",
+        "pure-axiom-omega-constant-free-sphere"
+      ],
+      "preset_titles": {
+        "pi-polyhedral-crease-residual": {
+          "zh": "π：拉直的弦与平面总留一道缝",
+          "en": "π: flat chords and faces leave a gap"
+        },
+        "euler-tangent-escape-vs-cayley": {
+          "zh": "e：切线步逃出球外，凯莱一步驻球",
+          "en": "e: tangent steps escape, Cayley stays"
+        },
+        "chebyshev-rational-arc-doubling": {
+          "zh": "整系数倍增：不用 sin、cos、π",
+          "en": "Integer doubling without sin, cos or π"
+        },
+        "tetrahedral-rational-cap-vs-phi": {
+          "zh": "φ：四点有理封顶，五步闭合要 φ",
+          "en": "φ: four close rationally, five need φ"
+        },
+        "pure-axiom-omega-constant-free-sphere": {
+          "zh": "无常数真球：有理点恰好落在球上",
+          "en": "Constant-free sphere of rational points"
+        }
+      },
+      "tags": [
+        "无常数",
+        "有理点",
+        "凯莱映射",
+        "切比雪夫倍增",
+        "平直残差"
+      ],
+      "tags_en": [
+        "Constant-free",
+        "Rational points",
+        "Cayley map",
+        "Chebyshev doubling",
+        "Flat residuals"
+      ],
+      "theory": [
+        {
+          "label": "§32.5 · 拔除笛卡尔线性钉子与无常数有理重构",
+          "label_en": "§32.5 · Pulling the Last Cartesian Nail and Constant-Free Rational Reconstruction",
+          "href": "../zh/ch39-s29-constant-free-rational-axiom-omega.html#sec-ch39-constant-free-rational-axiom-omega",
+          "href_en": "../en/ch39-s29-constant-free-rational-axiom-omega.html#sec-ch39-constant-free-rational-axiom-omega"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonCompletion.subgroupModel_readingComplete_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonCompletion.exists_subgroupModel_not_readingComplete"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/RoundTripPeriodMetric.comparison_classification_of_continuous_rays"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        },
+        {
+          "gid": "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_bounds"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/ExponentialTail.exp_remainder_le"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique"
+        },
+        {
+          "gid": "D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm"
+        },
+        {
+          "gid": "D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "causal-jet-rational-triad-sandbox",
+      "code": "OMEGA//TRIAD",
+      "title": "0 · 1/2 · 1 因果微分母核沙盘：三元数球面射流阶梯与中点自对偶验证仪",
+      "title_en": "0 · 1/2 · 1 Causal-Differential Mother Triad: Spherical Jet Ladder & Midpoint Self-Duality Verifier",
+      "summary": "在纯有理三元数单位球上构建连接 0（过去·零阶停机锚）、1/2（现在·一阶中点自对偶切面）与 1（未来·二阶曲率闭合体）的极小圆弧射流阶梯：对照 α=0 伊藤左切脱壳与 α=1/2 斯特拉托诺维奇—凯莱中点精确驻球、1/2+1/2=1 半密度曲率合拢、三阶比安基/奥氏封顶，以及 1↦0 主频因果心跳循环。",
+      "summary_en": "Builds on the pure rational ternion sphere the minimal-arc jet ladder linking 0 (Past · 0-jet halted anchor), 1/2 (Present · 1-jet midpoint self-dual slice), and 1 (Future · 2-jet curvature closure): contrasting α=0 Itô left-tangent escape against α=1/2 Stratonovich–Cayley exact sphere residence, 1/2+1/2=1 half-density curvature closure, the 3rd-order Bianchi/Ostrogradsky cap, and the 1↦0 cosmic heartbeat.",
+      "path": "causal-jet-rational-triad-sandbox/",
+      "thumbnail": "causal-jet-rational-triad-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-22",
+      "chapter": 39,
+      "section": "39.6",
+      "presets": [
+        "past-zero-jet-halting-anchor",
+        "present-half-midpoint-self-duality",
+        "future-one-curvature-closure",
+        "third-order-bianchi-ostrogradsky-cap",
+        "one-to-zero-cosmic-heartbeat-loop"
+      ],
+      "preset_titles": {
+        "past-zero-jet-halting-anchor": {
+          "zh": "过去：停住的 0",
+          "en": "Past: the halted 0"
+        },
+        "present-half-midpoint-self-duality": {
+          "zh": "现在：只有 1/2 落在球面上",
+          "en": "Present: only 1/2 lands on the sphere"
+        },
+        "future-one-curvature-closure": {
+          "zh": "未来：两个半拍合成一拍",
+          "en": "Future: two half-beats make one beat"
+        },
+        "third-order-bianchi-ostrogradsky-cap": {
+          "zh": "没有第四列（MODEL）：δF = 0",
+          "en": "No fourth column (MODEL): δF = 0"
+        },
+        "one-to-zero-cosmic-heartbeat-loop": {
+          "zh": "心跳（MODEL）：落下的 1 就是下一拍的 0",
+          "en": "Heartbeat (MODEL): the landed 1 is the next 0"
+        }
+      },
+      "tags": [
+        "三元数",
+        "因果射流",
+        "中点自对偶",
+        "半密度曲率",
+        "比安基恒等式"
+      ],
+      "tags_en": [
+        "Ternion",
+        "Causal jet",
+        "Midpoint self-duality",
+        "Half-density curvature",
+        "Bianchi identity"
+      ],
+      "theory": [
+        {
+          "label": "§39.6 · 过去现在未来与 0·1/2·1 纯有理因果射流母矩阵",
+          "label_en": "§39.6 · Past, Present, Future and the 0 · 1/2 · 1 Pure Rational Causal-Jet Matrix",
+          "href": "../zh/ch39-s30-past-present-future-rational-jet-triad.html#sec-ch39-past-present-future-rational-jet-triad",
+          "href_en": "../en/ch39-s30-past-present-future-rational-jet-triad.html#sec-ch39-past-present-future-rational-jet-triad"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_phases"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_eq_completed_zeta"
+        },
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_reflection"
+        },
+        {
+          "gid": "D5/S3/Zeros/Endpoints/XiEndpointValues.xi_reading_endpoint_values"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "spherical-fourier-peter-weyl-sandbox",
+      "code": "OMEGA//PETER-WEYL",
+      "title": "三元球面傅里叶变换与彼得—外尔合成沙盘：自旋壳层、克莱布什—戈尔丹三元基、正核磨光与无原点堆卷积",
+      "title_en": "Spherical Fourier Transform & Peter–Weyl Synthesis on S³: Spin Shells, the Clebsch–Gordan Triad, Positive Smoothing and Origin-Free Heap Convolution",
+      "summary": "紫色的 S³(1) = 𝕋₃ 指数坐标球切开一角，右边是彼得—外尔谱金字塔：每个自旋壳层 j 是一个 (2j + 1) × (2j + 1) 的矩阵块。κ = c² 是射线读数，χ_j = U_{2j}(c)：整数自旋是 κ 的整系数多项式（χ₁ = 4κ − 1 在绕 (1, 1, 1) 转 120° 处为零），半整数自旋带双覆叠符号 ±√κ。两个 j = 1/2 的张量积在克莱布什—戈尔丹基下分成 1 + 3；硬截断在平直直线上过冲趋于约 9%，在 S³ 上于 ±1 处不收敛，正核 (Σχ)²/M 不过冲；2T 与 Q₈ 上的无原点堆卷积在谱侧逐块变成 f̂ ĝ† ĥ，帕塞瓦尔两边是同一个有理数；带限寄存器与蝶形网络的读法是 MODEL。",
+      "summary_en": "The violet exponential ball of S³(1) = 𝕋₃ with one octant cut away, and the Peter–Weyl spectral pyramid on the right, one (2j + 1) × (2j + 1) block of matrix coefficients per spin shell j. κ = c² is the ray reading and χ_j = U_{2j}(c): integer spins are polynomials in κ with integer coefficients (χ₁ = 4κ − 1 vanishes at the turn by 120° about (1, 1, 1)), half-integer spins carry the double-cover sign ±√κ. Two shells j = 1/2 split into 1 + 3 in the Clebsch–Gordan basis; a hard cutoff overshoots by about 9% on the flat line and diverges at ±1 on S³, while the positive kernel (Σχ)²/M does not overshoot; the origin-free heap convolution on 2T and Q₈ becomes f̂ ĝ† ĥ block by block, with both sides of Parseval the same rational number; the band-limited register and the butterfly network are read as a MODEL.",
+      "path": "spherical-fourier-peter-weyl-sandbox/",
+      "thumbnail": "spherical-fourier-peter-weyl-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-24",
+      "chapter": 39,
+      "section": "39.7",
+      "presets": [
+        "spin-harmonic-shells-and-chebyshev-kernels",
+        "clebsch-gordan-causal-triad-base",
+        "gibbs-overshoot-vs-positive-spherical-smoothing",
+        "origin-free-heap-convolution-diagonalization",
+        "observer-bandlimit-and-tft-s3-fft"
+      ],
+      "preset_titles": {
+        "spin-harmonic-shells-and-chebyshev-kernels": {
+          "zh": "自旋壳层与整系数切比雪夫核",
+          "en": "Spin shells and integer Chebyshev kernels"
+        },
+        "clebsch-gordan-causal-triad-base": {
+          "zh": "克莱布什—戈尔丹：两个 j = 1/2 分成 0 ⊕ 1",
+          "en": "Clebsch–Gordan: two j = 1/2 split into 0 ⊕ 1"
+        },
+        "gibbs-overshoot-vs-positive-spherical-smoothing": {
+          "zh": "吉布斯过冲与正核球面磨光",
+          "en": "Gibbs overshoot and positive spherical smoothing"
+        },
+        "origin-free-heap-convolution-diagonalization": {
+          "zh": "无原点堆卷积在谱侧逐块对角化",
+          "en": "Origin-free heap convolution, block by block"
+        },
+        "observer-bandlimit-and-tft-s3-fft": {
+          "zh": "观察者的带限寄存器与蝶形网络（MODEL）",
+          "en": "The observer’s band-limited register and the butterflies (MODEL)"
+        }
+      },
+      "tags": [
+        "彼得—外尔",
+        "球面傅里叶",
+        "特征标",
+        "吉布斯",
+        "堆卷积"
+      ],
+      "tags_en": [
+        "Peter–Weyl",
+        "spherical Fourier",
+        "characters",
+        "Gibbs",
+        "heap convolution"
+      ],
+      "theory": [
+        {
+          "label": "§39.7 · 三元球面傅里叶变换与彼得—外尔合成",
+          "label_en": "§39.7 · The Spherical Fourier Transform and the Peter–Weyl Synthesis",
+          "href": "../zh/ch39-s37-spherical-fourier-transform-peter-weyl-synthesis.html",
+          "href_en": "../en/ch39-s37-spherical-fourier-transform-peter-weyl-synthesis.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Analysis/CompactGroups/MatrixCoefficientDensity.dense_span_unitary_coefficients"
+        },
+        {
+          "gid": "D5/S3/Quantum/Analysis/CompactGroups/UnitaryRepresentationKernel.exists_unitaryRep_ker_subset"
+        },
+        {
+          "gid": "D5/S3/Quantum/Analysis/CompactGroups/SchurOrthogonality.integral_dual_mul_dual_inv_self"
+        },
+        {
+          "gid": "D5/S3/Quantum/Analysis/CompactGroups/SchurOrthogonality.integral_dual_mul_dual_inv_eq_zero"
+        },
+        {
+          "gid": "D5/S3/FiniteGroups/GroupAlgebra/CharacterKernelRank.finrank_span_sum_character_kernel"
+        },
+        {
+          "gid": "D5/S3/FiniteGroups/GroupAlgebra/UnitaryCharacterKernel.posSemidef_sum_character_kernel_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
+          "gid": "D5/S3/Fourier/FullBispectrumStability.cyclic_parseval"
+        },
+        {
+          "gid": "D5/S3/Analytic/CompletedZetaMellinReconstruction.completed_zeta_mellin_reconstruction"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S3/Weil/TestFunctions/FinitePowerSumToeplitzCircleCriterion.toeplitz_posSemidef_iff_norm_eq_one"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "real-error-prime-adelic-sandbox",
+      "code": "OMEGA//ADELIC",
+      "title": "实数误差放大轴 vs 素数本原闭合与阿代尔归元沙盘",
+      "title_en": "Real Error-Magnification Axis vs. Prime Adelic Closure & Ergodic Anti-Deadlock",
+      "summary": "在同一座三维球面空间中对照球极切线如何把有限对径角按 A_err = 1 + x² = 1/κ 放大成射向 ∞ 的实数轴、平直加法与标量乘法如何漏掉曲率分母与叉乘而脱轨，以及素数如何经阿代尔乘积 |N|_∞ ∏_p |N|_p ≡ 1、正交对数相位轴与无公度遍历轨道收回发散误差并根除紧致死循环。",
+      "summary_en": "Contrasts in one 3D spherical space how tangent projection magnifies finite antipodal closure by A_err = 1 + x² = 1/κ toward ∞ along ℝ, how flat addition and scalar multiplication drop curvature denominators and cross products, and how primes reclaim divergence via |N|_∞ ∏_p |N|_p ≡ 1, orthogonal log-prime axes, and incommensurable ergodic orbits.",
+      "path": "real-error-prime-adelic-sandbox/",
+      "thumbnail": "real-error-prime-adelic-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-22",
+      "chapter": 31,
+      "section": "31.4",
+      "presets": [
+        "real-tangent-error-magnifier",
+        "linear-add-mul-vs-curved-rodrigues",
+        "adelic-prime-curvature-reclaim",
+        "prime-orthogonal-torus-and-rivets",
+        "incommensurable-ergodic-anti-deadlock"
+      ],
+      "preset_titles": {
+        "real-tangent-error-magnifier": {
+          "zh": "实数轴是切线放大镜：球有限，像射向 ∞",
+          "en": "The real axis magnifies: the sphere is finite, the image runs to ∞"
+        },
+        "linear-add-mul-vs-curved-rodrigues": {
+          "zh": "平直加法漏掉分母与叉乘：转角不足，转轴偏开",
+          "en": "Flat sums drop the denominator and the cross product: short turn, tilted axis"
+        },
+        "adelic-prime-curvature-reclaim": {
+          "zh": "素数收回：实长度 N 乘上各个 p 进长度恒为 1",
+          "en": "Primes take it back: the real size N times all p-adic sizes is 1"
+        },
+        "prime-orthogonal-torus-and-rivets": {
+          "zh": "十二枚五边形铆钉与三只正交的素数相位环",
+          "en": "Twelve pentagonal rivets and three orthogonal prime phase rings"
+        },
+        "incommensurable-ergodic-anti-deadlock": {
+          "zh": "有理节拍锁死成圈，素数对数从不重复",
+          "en": "A rational beat locks into a loop, prime logarithms never repeat"
+        }
+      },
+      "tags": [
+        "实数轴",
+        "切线放大",
+        "罗德里格斯合成",
+        "阿代尔乘积",
+        "素数对数"
+      ],
+      "tags_en": [
+        "Real axis",
+        "Tangent magnification",
+        "Rodrigues composition",
+        "Adelic product",
+        "Prime logarithms"
+      ],
+      "theory": [
+        {
+          "label": "§31.4 · 实数误差放大轴与素数阿代尔归元闭合",
+          "label_en": "§31.4 · The Real Error-Magnification Axis and Prime Adelic Closure",
+          "href": "../zh/ch39-s31-real-error-axis-and-prime-adelic-closure.html#sec-ch39-real-error-axis-and-prime-adelic-closure",
+          "href_en": "../en/ch39-s31-real-error-axis-and-prime-adelic-closure.html#sec-ch39-real-error-axis-and-prime-adelic-closure"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Arith/AbsoluteValues/OstrowskiClassification.rational_absolute_value_classification"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula"
+        },
+        {
+          "gid": "D5/S3/Arith/Congruence/PadicObservationDistance.observation_distance_eq_padic_valuation"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric.refinementDistance_ultrametric"
+        },
+        {
+          "gid": "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape"
+        },
+        {
+          "gid": "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product"
+        },
+        {
+          "gid": "D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence"
+        },
+        {
+          "gid": "D5/S3/Fourier/TorusOrbitClosure.result"
+        },
+        {
+          "gid": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "holographic-arc-manifold-sandbox",
+      "code": "OMEGA//MANIFOLD",
+      "title": "全息圆弧流形（M_Ω）沙盘：超越黎曼切板，同流形光滑统一加法、乘法、ln 与素数螺线环",
+      "title_en": "Holographic Circular-Arc Manifold (M_Ω): Beyond Flat Tangent Plates, Unifying +, ×, ln & Prime Solenoid Loops",
+      "summary": "对比拼满平直切空间鳞片 T_pM 的伪光滑黎曼流形与无切板三元闭合的全息圆弧流形：将 0·1·∞ 缝入同一紧致闭环 κ∈{1,1/2,0}，展示零奇点实解析流场 V_+=2κ∂_φ、V_÷=2(1−κ)∂_φ、V_×=sinφ∂_φ（满足 ½(V_++V_÷)=∂_φ 与 [V_+,V_÷]=2V_×）、乘法流内禀对数弧长 τ_×=ln x，以及螺线管内周长为 ln p 的光滑素数环与平直横截阶梯伪影。",
+      "summary_en": "Contrasts flat tangent-plate Riemannian manifolds against the chart-free Holographic Circular-Arc Manifold: compactifying 0·1·∞ onto one closed meridian κ∈{1,1/2,0}, unifying singularity-free real-analytic vector fields V_+=2κ∂_φ, V_÷=2(1−κ)∂_φ, and V_×=sinφ∂_φ (with ½(V_++V_÷)=∂_φ and [V_+,V_÷]=2V_×), intrinsic logarithmic arc-length τ_×=ln x, and smooth prime solenoid loops of length ln p whose flat cross-sections yield Chebyshev's staircase.",
+      "path": "holographic-arc-manifold-sandbox/",
+      "thumbnail": "holographic-arc-manifold-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-22",
+      "chapter": 31,
+      "section": "31.5",
+      "presets": [
+        "tangent-scales-vs-chartfree-arc",
+        "meridian-zero-one-infinity-closure",
+        "add-mul-lie-spinor-flows",
+        "logarithmic-arclength-pole-deceleration",
+        "prime-solenoid-vs-flat-sawtooth"
+      ],
+      "preset_titles": {
+        "tangent-scales-vs-chartfree-arc": {
+          "zh": "切板总有折痕，三点圆弧自己合成整圈",
+          "en": "Flat plates crease, three points close the circle"
+        },
+        "meridian-zero-one-infinity-closure": {
+          "zh": "0 · 1 · ∞ 在同一条光滑闭环上",
+          "en": "0 · 1 · ∞ on one smooth closed loop"
+        },
+        "add-mul-lie-spinor-flows": {
+          "zh": "加与除合成匀速转动，乘在两极停住",
+          "en": "Adding and dividing make uniform rotation"
+        },
+        "logarithmic-arclength-pole-deceleration": {
+          "zh": "0 与 ∞ 处钟走慢，圆没有断口",
+          "en": "The clock slows at 0 and ∞, nothing tears"
+        },
+        "prime-solenoid-vs-flat-sawtooth": {
+          "zh": "素数环光滑，平直切刀读出锯齿",
+          "en": "Smooth prime loops, sawtooth on the flat blade"
+        }
+      },
+      "tags": [
+        "全息圆弧流形",
+        "投影直线",
+        "李代数流",
+        "对数弧长",
+        "素数螺线环"
+      ],
+      "tags_en": [
+        "Holographic arc manifold",
+        "Projective line",
+        "Lie algebra flows",
+        "Logarithmic arc length",
+        "Prime solenoid loops"
+      ],
+      "theory": [
+        {
+          "label": "§31.5 · 全息圆弧流形与阿代尔螺线管同体",
+          "label_en": "§31.5 · The Holographic Circular-Arc Manifold and Adelic Solenoid Unity",
+          "href": "../zh/ch39-s32-holographic-arc-manifold-and-solenoid-unity.html#sec-ch39-holographic-arc-manifold-and-solenoid-unity",
+          "href_en": "../en/ch39-s32-holographic-arc-manifold-and-solenoid-unity.html#sec-ch39-holographic-arc-manifold-and-solenoid-unity"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/InvariantMetric/LowDimensionInvariantMetric.exists_basis_bracket_eq_smul_cross"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum"
+        },
+        {
+          "gid": "D5/S1/Solenoid/ComplexPowerSolenoidDecomposition.logarithmic_charge_conservation"
+        },
+        {
+          "gid": "D5/S1/Solenoid/ComplexPowerSolenoidDecomposition.logarithmicCharge_eq_zero_iff"
+        },
+        {
+          "gid": "D5/S1/Solenoid/ThroatTransitionCocycle.three_lift_difference_cocycle"
+        },
+        {
+          "gid": "D5/S3/Arith/AbsoluteValues/OstrowskiClassification.rational_absolute_value_classification"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula"
+        },
+        {
+          "gid": "D5/S3/Arith/Congruence/PadicBallFiberCorrespondence.congruenceFiber_eq_closedBall_inter_range"
+        },
+        {
+          "gid": "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product"
+        },
+        {
+          "gid": "D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence"
+        },
+        {
+          "gid": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "riemann-spectral-manifold-polishing-sandbox",
+      "code": "OMEGA//POLISH",
+      "title": "黎曼 1854 + 1859 双璧合龙沙盘：以已证 1/2 临界线谱磨光切板黎曼流形",
+      "title_en": "Riemann 1854 + 1859 Synthesis: Polishing Tangent-Plate Manifolds via the Proven 1/2 Critical-Line Spectrum",
+      "summary": "连接黎曼 1854 流形几何遗问与 1859 临界线谱：以二阶三元吻合球取代一阶平直切板 T_pM，对比施瓦茨灯笼折角发散与 σ≡1/2 正定托普利茨/李曲率谱核、显式公式 O(X^{−1/2} ln² X) 相对残差退火、GRH 多特征各向同性均分，以及反事实离轴零点 σ=1/2+δ 引发的正定破缺与棱角失稳。",
+      "summary_en": "Bridges Riemann's 1854 manifold-geometry question and 1859 critical-line spectrum: replacing first-order flat tangent plates T_pM with second-order osculating ternion spheres, contrasting Schwarz-lantern normal oscillation against σ≡1/2 positive-semidefinite Toeplitz/Li spectral kernels, O(X^{−1/2} ln² X) relative explicit-formula annealing, GRH multi-character isotropy, and counterfactual off-line σ=1/2+δ positivity breakdown.",
+      "path": "riemann-spectral-manifold-polishing-sandbox/",
+      "thumbnail": "riemann-spectral-manifold-polishing-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-22",
+      "chapter": 31,
+      "section": "31.6",
+      "presets": [
+        "riemann-1854-tangent-lantern-creases",
+        "osculating-ternion-sphere-base-swap",
+        "critical-half-toeplitz-spectral-glue",
+        "counterfactual-offline-spike-breakdown",
+        "polished-isotropic-manifold-completion"
+      ],
+      "preset_titles": {
+        "riemann-1854-tangent-lantern-creases": {
+          "zh": "1854：切板与灯笼的折痕抹不平",
+          "en": "1854: plates and lantern keep their creases"
+        },
+        "osculating-ternion-sphere-base-swap": {
+          "zh": "换底：二阶吻合球换下一阶切板",
+          "en": "Base swap: osculating spheres for flat plates"
+        },
+        "critical-half-toeplitz-spectral-glue": {
+          "zh": "换胶：像在单位圆上，接缝熔平",
+          "en": "Glue swap: images on the circle, seams melt"
+        },
+        "counterfactual-offline-spike-breakdown": {
+          "zh": "反事实离轴：像裂开，棱角长出",
+          "en": "Off the line: images split, spikes erupt"
+        },
+        "polished-isotropic-manifold-completion": {
+          "zh": "合龙（MODEL）：磨光的各向同性流形",
+          "en": "Completion (MODEL): the polished isotropic manifold"
+        }
+      },
+      "tags": [
+        "黎曼流形",
+        "临界线",
+        "施瓦茨灯笼",
+        "吻合球",
+        "托普利茨正性"
+      ],
+      "tags_en": [
+        "Riemannian manifold",
+        "Critical line",
+        "Schwarz lantern",
+        "Osculating sphere",
+        "Toeplitz positivity"
+      ],
+      "theory": [
+        {
+          "label": "§31.6 · 黎曼 1854+1859 双璧合龙与临界线谱磨光流形",
+          "label_en": "§31.6 · Riemann's 1854 + 1859 Synthesis and Critical-Line Spectral Manifold Polishing",
+          "href": "../zh/ch39-s33-riemann-1854-1859-spectral-manifold-polishing.html#sec-ch39-riemann-1854-1859-spectral-manifold-polishing",
+          "href_en": "../en/ch39-s33-riemann-1854-1859-spectral-manifold-polishing.html#sec-ch39-riemann-1854-1859-spectral-manifold-polishing"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_bounds"
+        },
+        {
+          "gid": "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_phases"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion"
+        },
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_eq_completed_zeta"
+        },
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_reflection"
+        },
+        {
+          "gid": "D5/S3/Weil/Mertens/IntegratedExplicit/WholeFormula.actual_integrated_explicit_formula"
+        },
+        {
+          "gid": "D5/S3/Weil/Mertens/IntegratedExplicit/RHPowerThreshold.u_div_rpow_tendsto_zero_iff"
+        },
+        {
+          "gid": "D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree.not_rh_forces_canonical_curvature_failure"
+        },
+        {
+          "gid": "D5/S3/Weil/TestFunctions/FinitePowerSumToeplitzCircleCriterion.toeplitz_posSemidef_iff_norm_eq_one"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "exact-vs-approximate-mathematics-sandbox",
+      "code": "OMEGA//EXACT",
+      "title": "精确结构数学对比平直近似沙盘：纯整数三拍闭合、有理转子守球与素数刚性",
+      "title_en": "Exact Structural Mathematics vs. Flat Approximation: Three-Beat Integer Closure, Rational Rotors & Prime Rigidity",
+      "summary": "在同一座三维三元数真球舞台上对照两本账：χ(S³) = 0、霍普夫环绕数与四面体上边缘的整数锁对比内接正 N 边形的弦长亏损；(1, 1, 1) 纯整数三拍归零对比四位小数的闭合缺口；处处稠密、点点精确的有理球点星座；BigInt 精确的交替有理转子守球对比平直切向和脱轨；素数阿代尔权重微扰与耦合反事实凯莱像失锁（MODEL）。",
+      "summary_en": "Contrasts two ledgers on one 3D ternion-sphere stage: integer locks (χ(S³) = 0, Hopf linking, tetrahedral coboundary) against the chord shortfall of an inscribed N-gon; the pure-integer three-beat return of (1, 1, 1) against the closure gap of four decimals; the dense, pointwise exact rational constellation; exact BigInt alternating rational rotors on the sphere against the derailing flat tangent sum; and a nudged adelic prime weight with the coupled counterfactual Cayley images unlocking (MODEL).",
+      "path": "exact-vs-approximate-mathematics-sandbox/",
+      "thumbnail": "exact-vs-approximate-mathematics-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-23",
+      "chapter": 32,
+      "section": "32.6",
+      "presets": [
+        "structural-topological-exactness-vs-flat-decimal",
+        "pure-integer-111-three-beat-closure",
+        "dense-rational-cayley-sphere-constellation",
+        "complete-ternary-star-vs-flat-addition-derailment",
+        "prime-topological-adelic-rigidity-alarm"
+      ],
+      "preset_titles": {
+        "structural-topological-exactness-vs-flat-decimal": {
+          "zh": "整数锁得住，弦拉不直",
+          "en": "Integers lock, chords fall short"
+        },
+        "pure-integer-111-three-beat-closure": {
+          "zh": "(1, 1, 1)：纯整数三拍归零",
+          "en": "(1, 1, 1): three integer beats to 0"
+        },
+        "dense-rational-cayley-sphere-constellation": {
+          "zh": "有理球点：处处稠密，点点精确",
+          "en": "Rational points: dense and exact"
+        },
+        "complete-ternary-star-vs-flat-addition-derailment": {
+          "zh": "完整关系守球，平直相加脱轨",
+          "en": "Full relation stays, flat sum derails"
+        },
+        "prime-topological-adelic-rigidity-alarm": {
+          "zh": "素数一动就报警（MODEL）",
+          "en": "Nudge a prime: alarm (MODEL)"
+        }
+      },
+      "tags": [
+        "精确结构",
+        "有理球点",
+        "纯整数三拍",
+        "平直截断",
+        "素数刚性"
+      ],
+      "tags_en": [
+        "Exact structure",
+        "Rational sphere points",
+        "Integer three-beat closure",
+        "Flat truncation",
+        "Prime rigidity"
+      ],
+      "theory": [
+        {
+          "label": "§32.6 · 精确结构数学对比平直度量近似",
+          "label_en": "§32.6 · Exact Structural Mathematics vs. Flat Metric Approximation",
+          "href": "../zh/ch39-s34-exact-structural-mathematics-vs-flat-approximation.html#sec-ch39-exact-structural-mathematics-vs-flat-approximation",
+          "href_en": "../en/ch39-s34-exact-structural-mathematics-vs-flat-approximation.html#sec-ch39-exact-structural-mathematics-vs-flat-approximation"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_hopf"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S3/Arith/AbsoluteValues/OstrowskiClassification.rational_absolute_value_classification"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula"
+        },
+        {
+          "gid": "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product"
+        },
+        {
+          "gid": "D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S3/Weil/TestFunctions/FinitePowerSumToeplitzCircleCriterion.toeplitz_posSemidef_iff_norm_eq_one"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "infinity-free-rational-mathematics-sandbox",
+      "code": "OMEGA//FINITE",
+      "title": "无无穷·无超越数的有限有理数学沙盘：射影闭环、凯莱旋转与零极限射流",
+      "title_en": "Infinity-Free & Transcendental-Free Rational Mathematics: Projective Closure, Cayley Rotations & Limit-Free Jets",
+      "summary": "在同一座三维三元数真球舞台上，只用整数分数把五件事算到底：射影对 [P : Q] 滑过 [1 : 0] 而没有一个分母变成零，对照两端裂开的平直直线；视界 M 内有限的球面格点、有限终止的连分数与按需逃逸的新素数；BigInt 精确的凯莱旋转以分母 3 的 N 次方守在球面上，对照二阶泰勒截断脱轨；由 3/5 敲出的切比雪夫有理谐波对照显式欧拉步；ℚ[η]/(η³) 里不取极限的二阶射流对照有限差商割线，并附粗链对消与粗四面体 δF = 0。",
+      "summary_en": "Computes five things to the end in fractions of whole numbers on one 3D ternion-sphere stage: the projective pair [P : Q] slides across [1 : 0] with no denominator becoming zero, against a flat line that tears at both ends; finitely many lattice points within the horizon M, terminating continued fractions and primes escaping on demand; exact BigInt Cayley rotations that keep the sphere with denominator 3 to the N, against a derailing second-order Taylor truncation; a rational Chebyshev harmonic struck from 3/5, against explicit Euler steps; and limit-free second-order jets in ℚ[η]/(η³) against finite-difference secants, with the telescoping of a coarse chain and δF = 0 on a coarse tetrahedron.",
+      "path": "infinity-free-rational-mathematics-sandbox/",
+      "thumbnail": "infinity-free-rational-mathematics-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-23",
+      "chapter": 32,
+      "section": "32.7",
+      "presets": [
+        "homogeneous-projective-antipodal-closure",
+        "lazy-prime-escape-and-decidable-horizon",
+        "rational-cayley-rotor-vs-taylor-series",
+        "chebyshev-rational-harmonic-oscillator",
+        "limit-free-jet-ring-and-telescoping-stokes"
+      ],
+      "preset_titles": {
+        "homogeneous-projective-antipodal-closure": {
+          "zh": "没有 ∞：[1 : 0] 只是圆上的一点",
+          "en": "No ∞: [1 : 0] is a point of the circle"
+        },
+        "lazy-prime-escape-and-decidable-horizon": {
+          "zh": "有限视界，素数按需逃逸",
+          "en": "A finite horizon, primes on demand"
+        },
+        "rational-cayley-rotor-vs-taylor-series": {
+          "zh": "凯莱旋转守球，泰勒截断脱轨",
+          "en": "Cayley keeps the sphere, Taylor leaves"
+        },
+        "chebyshev-rational-harmonic-oscillator": {
+          "zh": "由 3/5 敲出的有理谐波",
+          "en": "A rational harmonic struck from 3/5"
+        },
+        "limit-free-jet-ring-and-telescoping-stokes": {
+          "zh": "不取极限的导数与粗剖分对消",
+          "en": "Derivatives without limits, coarse Stokes"
+        }
+      },
+      "tags": [
+        "有限有理数学",
+        "射影闭合",
+        "凯莱旋转",
+        "切比雪夫谐波",
+        "幂零射流"
+      ],
+      "tags_en": [
+        "Finite rational mathematics",
+        "Projective closure",
+        "Cayley rotation",
+        "Chebyshev harmonic",
+        "Nilpotent jets"
+      ],
+      "theory": [
+        {
+          "label": "§32.7 · 无无穷·无超越数的有限有理数学",
+          "label_en": "§32.7 · Infinity-Free and Transcendental-Free Finite Rational Mathematics",
+          "href": "../zh/ch39-s35-infinity-free-transcendental-free-rational-mathematics.html#sec-ch39-infinity-free-transcendental-free-rational-mathematics",
+          "href_en": "../en/ch39-s35-infinity-free-transcendental-free-rational-mathematics.html#sec-ch39-infinity-free-transcendental-free-rational-mathematics"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/ExponentialTail.exp_remainder_le"
+        },
+        {
+          "gid": "D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover"
+        },
+        {
+          "gid": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den"
+        },
+        {
+          "gid": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log"
+        },
+        {
+          "gid": "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape"
+        },
+        {
+          "gid": "D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStripping.stripFactors_correct"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula"
+        },
+        {
+          "gid": "D5/S3/Constants/Irrationality/LogNaturalIrrationality.irrational_log_natCast"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S0/Computability/BinaryNameComparison.name_compare_run"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "lean4-zero-axiom-omega-math-sandbox",
+      "code": "OMEGA//LEAN4",
+      "title": "Lean 4 零公理形式化基座（OmegaMath）沙盘：五阶编译流水线、规范整数三元载体与单向阴影函子",
+      "title_en": "Zero-Axiom Lean 4 Foundation (OmegaMath): Five-Stage Pipeline, Canonical Integer Ternions & One-Way Shadow Functor",
+      "summary": "在紫色有理三元球面 ℚP³ ≅ SO(3, ℚ) 上走完 Lean 4 的五阶流水线：OmegaMath 路线从整数载体、类型检查、decide、公理审计到原生执行，公理为空；对照停在 Classical.choice 的 Mathlib.Real 路线与代入零四元组推出 False 的自定义 axiom 路线（MODEL）。整数射线经最大公约数与首项正号约成唯一规范代表，八条断言逐条归约，有理舒尔最小值 4/3 与整数证书 70 < 128 经单向桥送到实数侧，四项任务并列实测的声明闭包与现算的整数步数。",
+      "summary_en": "Runs the five stages of Lean 4 on the violet rational ternion sphere ℚP³ ≅ SO(3, ℚ): the OmegaMath route goes from an integer carrier through typecheck, decide and the axiom audit to native evaluation with no axiom, against the Mathlib.Real route that stops at Classical.choice and a custom axiom that yields False at the zero tuple (MODEL). Integer rays reduce to one canonical tuple by gcd and sign, eight conjuncts reduce one by one, the rational Schur minimum 4/3 and the integer certificate 70 < 128 cross a one-way bridge to the reals, and four tasks set the measured census of declarations beside the integer steps of the page.",
+      "path": "lean4-zero-axiom-omega-math-sandbox/",
+      "thumbnail": "lean4-zero-axiom-omega-math-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-23",
+      "chapter": 32,
+      "section": "32.8",
+      "presets": [
+        "cic-kernel-vs-axiom-and-real-tax",
+        "canonical-proj-ternion-zero-quotient",
+        "typeclass-consistency-and-jet2-decide",
+        "rational-schur-and-shadow-functor-bridge",
+        "three-step-omegacore-roadmap-benchmark"
+      ],
+      "preset_titles": {
+        "cic-kernel-vs-axiom-and-real-tax": {
+          "zh": "五阶流水线：哪条路跑到底",
+          "en": "Five stages: which route gets through"
+        },
+        "canonical-proj-ternion-zero-quotient": {
+          "zh": "整数射线约成唯一代表",
+          "en": "Integer rays, one canonical tuple"
+        },
+        "typeclass-consistency-and-jet2-decide": {
+          "zh": "八条断言，一次 decide",
+          "en": "Eight conjuncts, one decide"
+        },
+        "rational-schur-and-shadow-functor-bridge": {
+          "zh": "有理舒尔补，单向过桥",
+          "en": "Rational Schur, one-way bridge"
+        },
+        "three-step-omegacore-roadmap-benchmark": {
+          "zh": "四项任务、三条路线（MODEL）",
+          "en": "Four tasks, three routes (MODEL)"
+        }
+      },
+      "tags": [
+        "零公理",
+        "归纳构造演算",
+        "规范整数四元组",
+        "有理舒尔补",
+        "单向阴影函子"
+      ],
+      "tags_en": [
+        "Zero axioms",
+        "Calculus of inductive constructions",
+        "Canonical integer tuples",
+        "Rational Schur complement",
+        "One-way shadow functor"
+      ],
+      "theory": [
+        {
+          "label": "§32.8 · Lean 4 零公理形式化基座（OmegaMath）",
+          "label_en": "§32.8 · Zero-Axiom Lean 4 Formalization Architecture (OmegaMath)",
+          "href": "../zh/ch39-s36-lean4-zero-axiom-omega-math-architecture.html#sec-ch39-lean4-zero-axiom-omega-math-architecture",
+          "href_en": "../en/ch39-s36-lean4-zero-axiom-omega-math-architecture.html#sec-ch39-lean4-zero-axiom-omega-math-architecture"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/GramIsometryExtension.existsUnique_linearIsometryEquiv_of_gram_preserving"
+        },
+        {
+          "gid": "D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover"
+        },
+        {
+          "gid": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den"
+        },
+        {
+          "gid": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log"
+        },
+        {
+          "gid": "D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStripping.stripFactors_correct"
+        },
+        {
+          "gid": "D5/S0/Computability/BinaryNameComparison.name_compare_run"
+        },
+        {
+          "gid": "D5/S3/Weil/BurnolGram/BurnolRationalDepthBudget.rationalQuarterDepth_integer_sound"
+        },
+        {
+          "gid": "D5/S3/Weil/BurnolGram/BurnolRationalDepthBudget.rationalQuarterDepth_real_sound"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "spacetime-memory-schur-split-sandbox",
+      "code": "OMEGA//SPACETIME",
+      "title": "时空运动的本体等效与观察者记忆舒尔补强行分类沙盘：无标签圆弧、勾股账本与闵氏减号",
+      "title_en": "Ontological Equivalence of Spatial and Temporal Motion & Observer-Memory Schur Classification: Unlabeled Arc, Pythagorean Ledger & Minkowski Minus",
+      "summary": "转动记忆窗，看同一条三元球面圆弧分成窗内和窗外两个分量。两者平方和恒为 1，勾股账本移项给出闵可夫斯基减号。其余三张卡展示容量从 0 到 8 的三个记忆区间、两个观察者的窗口错位，以及先进先出窗口如何在序列槽与通道槽之间分配固定容量（MODEL）。",
+      "summary_en": "Tilt a memory window and watch it split one arc on the ternion sphere into components inside and outside the window. Their squares add to 1, and rearranging the Pythagorean identity gives the Minkowski minus sign. Three more cards show the memory regimes from capacity 0 to 8, two observers with tilted windows, and a first-in, first-out window that divides a fixed budget between sequence and channel slots (MODEL).",
+      "path": "spacetime-memory-schur-split-sandbox/",
+      "thumbnail": "spacetime-memory-schur-split-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-23",
+      "chapter": 38,
+      "section": "38.12",
+      "presets": [
+        "isotropic-arc-memory-schur-split",
+        "minkowski-minus-from-pythagorean-budget",
+        "memory-capacity-three-regime-phase",
+        "dual-observer-simultaneity-rotor-tilt",
+        "forgetting-generates-space-and-kv-cache"
+      ],
+      "preset_titles": {
+        "isotropic-arc-memory-schur-split": {
+          "zh": "无标签圆弧与记忆窗舒尔二分",
+          "en": "Unlabeled arc & memory Schur split"
+        },
+        "minkowski-minus-from-pythagorean-budget": {
+          "zh": "勾股正定账本移项生闵氏减号",
+          "en": "Pythagorean budget transposed to −"
+        },
+        "memory-capacity-three-regime-phase": {
+          "zh": "记忆容量三态相变与静质量税",
+          "en": "Three memory regimes & rest-mass tax"
+        },
+        "dual-observer-simultaneity-rotor-tilt": {
+          "zh": "双观察者旋子错位与同时性相对性",
+          "en": "Dual memory frames & simultaneity"
+        },
+        "forgetting-generates-space-and-kv-cache": {
+          "zh": "遗忘生空与序列时间↔通道空间互换",
+          "en": "Forgetting makes space & KV-Cache swap"
+        }
+      },
+      "tags": [
+        "三元球面",
+        "记忆窗",
+        "舒尔补",
+        "闵可夫斯基度规",
+        "同时性"
+      ],
+      "tags_en": [
+        "Ternion sphere",
+        "Memory window",
+        "Schur complement",
+        "Minkowski metric",
+        "Simultaneity"
+      ],
+      "theory": [
+        {
+          "label": "§38.12 · 时空运动的本体等效与观察者记忆舒尔补强行分类",
+          "label_en": "§38.12 · Ontological Equivalence of Spatial and Temporal Motion and Observer-Memory Schur Classification",
+          "href": "../zh/ch38-s12-spacetime-motion-equivalence-and-memory-schur-split.html#sec-ch38-spacetime-motion-equivalence-and-memory-schur-split",
+          "href_en": "../en/ch38-s12-spacetime-motion-equivalence-and-memory-schur-split.html#sec-ch38-spacetime-motion-equivalence-and-memory-schur-split"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.reflectionSeq_eq_pow"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.kappa_reflectionSeq_add"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "observer-is-universe-crystallization-sandbox",
+      "code": "OMEGA//UNIVERSE",
+      "title": "观察者即宇宙沙盘：无端口五元组、有理结构时间、核内视角翻转与单子共振",
+      "title_en": "Observer Is Universe: Port-Free Pentad, Rational Structural Time, Inside-Core Flip & Monad Resonance",
+      "summary": "在无外部端口的观察者模型中，逐拍比较树枝、弦边与同义反复对结构时间的影响。用有理舒尔创新度与贝蒂环秩核对每次增量，转入结构核观察潜伏视界，再比较三个观察者的固有时及其共享图谱。最后查看 ObserverUniverse 的四步有理数归约，时间读数依次为 0、0、3/4、3/2。",
+      "summary_en": "In the port-free observer model, compare how sprouts, chords and tautologies affect structural time. Track each increment with rational Schur innovation and Betti cycle rank, move inside the structural core to view the latent horizon, and compare the proper times of three observers and their shared atlas. The four rational states of ObserverUniverse give time readings of 0, 0, 3/4 and 3/2.",
+      "path": "observer-is-universe-crystallization-sandbox/",
+      "thumbnail": "observer-is-universe-crystallization-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-23",
+      "chapter": 38,
+      "section": "38.13",
+      "presets": [
+        "port-free-pentad-crystallization",
+        "rational-schur-betti-time-arrow",
+        "core-inside-out-starry-sky-flip",
+        "trureturing-monad-resonant-span",
+        "lean4-observer-universe-decide-trace"
+      ],
+      "preset_titles": {
+        "port-free-pentad-crystallization": {
+          "zh": "无外部端口五元组与内禀结晶",
+          "en": "Port-free pentad & 1 ↦ 0′ crystal"
+        },
+        "rational-schur-betti-time-arrow": {
+          "zh": "有理舒尔创新度与贝蒂环秩时间箭",
+          "en": "Rational Schur + Betti time arrow"
+        },
+        "core-inside-out-starry-sky-flip": {
+          "zh": "核内第一人称视角翻转：内盲区显影星空",
+          "en": "Inside-core flip: horizon as starry sky"
+        },
+        "trureturing-monad-resonant-span": {
+          "zh": "trureturing 多观察者单子共振网",
+          "en": "Multi-observer monad resonant span"
+        },
+        "lean4-observer-universe-decide-trace": {
+          "zh": "Lean 4 零公理 ObserverUniverse 归约",
+          "en": "Lean 4 zero-axiom ObserverUniverse"
+        }
+      },
+      "tags": [
+        "自包含观察者",
+        "有理结构时间",
+        "有理舒尔创新度",
+        "贝蒂环秩",
+        "单子共振"
+      ],
+      "tags_en": [
+        "Self-contained observer",
+        "Rational structural time",
+        "Rational Schur innovation",
+        "Betti cycle rank",
+        "Monad resonance"
+      ],
+      "theory": [
+        {
+          "label": "§38.13 · 观察者的完整自包含公理化定义、结构信息时间与观察者即宇宙",
+          "label_en": "§38.13 · Complete Self-Contained Definition of the Observer, Structural-Information Time, and Observer Is Universe",
+          "href": "../zh/ch38-s13-self-contained-observer-definition-and-observer-is-universe.html#sec-ch38-self-contained-observer-definition-and-observer-is-universe",
+          "href_en": "../en/ch38-s13-self-contained-observer-definition-and-observer-is-universe.html#sec-ch38-self-contained-observer-definition-and-observer-is-universe"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        },
+        {
+          "gid": "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "omega-fractran-observer-isa-sandbox",
+      "code": "OMEGA//FRACTRAN",
+      "title": "OMEGA//FRACTRAN · 观察者原生有理指令集沙盘：素数正交晶格、分数门的 0 · 1/2 · 1 解剖与非阿贝尔 p = 5 旋子栈",
+      "title_en": "OMEGA//FRACTRAN · Observer-Native Rational ISA: the Orthogonal Prime Crystal, the 0 · 1/2 · 1 Fraction Gate & the Non-Abelian p = 5 Rotor Stack",
+      "summary": "沿正交素数晶格逐步执行康威 FRACTRAN 的分数指令，观察分母如何决定指令能否执行。先走过加法、18 拍乘法和 PRIMEGAME，再交换两条 p = 5 旋子指令，比较不同的积如何保留执行次序。最后在示意模型中并列比较三种指令集的执行记录。",
+      "summary_en": "Step through Conway’s FRACTRAN on an orthogonal prime lattice and see how denominators determine which fractions can run. Try addition, an 18-step multiplication and PRIMEGAME, then swap two p = 5 rotor instructions to see how their products preserve the order. A final model compares execution traces from three instruction sets.",
+      "path": "omega-fractran-observer-isa-sandbox/",
+      "thumbnail": "omega-fractran-observer-isa-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-24",
+      "chapter": 38,
+      "section": "38.14",
+      "presets": [
+        "prime-orthogonal-register-adder",
+        "conway-multiplier-18-beat-closure",
+        "primegame-self-crystallization-and-lemma-shortcut",
+        "nonabelian-p5-lps-word-order-stack",
+        "three-paradigm-isa-and-zero-tear-audit"
+      ],
+      "preset_titles": {
+        "prime-orthogonal-register-adder": {
+          "zh": "素数正交晶格上的加法器",
+          "en": "An adder on the orthogonal prime crystal"
+        },
+        "conway-multiplier-18-beat-closure": {
+          "zh": "六条分数做乘法，18 拍闭合",
+          "en": "Six fractions multiply, closed in 18 beats"
+        },
+        "primegame-self-crystallization-and-lemma-shortcut": {
+          "zh": "PRIMEGAME 结晶出素数，引理抄近路",
+          "en": "PRIMEGAME crystallizes primes, lemmas cut the way"
+        },
+        "nonabelian-p5-lps-word-order-stack": {
+          "zh": "p = 5 旋子栈记住次序",
+          "en": "The p = 5 rotor stack keeps the order"
+        },
+        "three-paradigm-isa-and-zero-tear-audit": {
+          "zh": "三种指令集，零撕裂审计（MODEL）",
+          "en": "Three ISAs, a zero-tear audit (MODEL)"
+        }
+      },
+      "tags": [
+        "FRACTRAN",
+        "素数赋值",
+        "整除",
+        "非交换旋子",
+        "观察者有理指令集"
+      ],
+      "tags_en": [
+        "FRACTRAN",
+        "Prime valuations",
+        "Divisibility",
+        "Noncommuting rotors",
+        "Observer rational instruction set"
+      ],
+      "theory": [
+        {
+          "label": "§38.14 · 康威 FRACTRAN 与三维非阿贝尔 Ω-FRACTRAN 观察者原生语言",
+          "label_en": "§38.14 · Conway’s FRACTRAN and the Three-Dimensional Non-Abelian Ω-FRACTRAN Observer Language",
+          "href": "../zh/ch38-s14-omega-fractran-observer-rational-isa.html#sec-ch38-omega-fractran-observer-rational-isa",
+          "href_en": "../en/ch38-s14-omega-fractran-observer-rational-isa.html#sec-ch38-omega-fractran-observer-rational-isa"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Factorization/PositiveRationalGroup.signed_prime_ledger_equiv_positive_rationals"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/PrimeLedgerGroupification.prime_ledger_direction_and_groupification"
+        },
+        {
+          "gid": "D5/S3/Factorization/FreeCommMonoid.pnat_free_comm_monoid_on_primes"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalValuationRecovery.rational_recovered_from_sign_and_finite_valuations"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula"
+        },
+        {
+          "gid": "D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence"
+        },
+        {
+          "gid": "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape"
+        },
+        {
+          "gid": "D5/S3/Factorization/Automata/ExactPrimeDivisionNoDFAO.no_finite_dfao_for_exact_prime_division"
+        },
+        {
+          "gid": "D5/S0/Computability/PhysicalDivider/Positive.divMachine_positive_correct"
+        },
+        {
+          "gid": "D5/S3/Factorization/Combinatorics/PrimeWordOccupationDescent.order_descent_criterion"
+        },
+        {
+          "gid": "D5/S3/Factorization/Combinatorics/PrimeWordOccupationDescent.no_prime_history_reconstruction"
+        },
+        {
+          "gid": "D5/S0/Computability/Coding/TwoWordCode.injective_iff_noncommuting"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/QuaternionComparisonModel.quaternionModel_noncommutative"
+        },
+        {
+          "gid": "D5/S0/Computability/CodeFixedPoint.code_fixed_point"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
         }
       ],
       "capture_lock": "links"

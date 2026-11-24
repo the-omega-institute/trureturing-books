@@ -413,13 +413,17 @@ $$
 
 3. **切萨罗均值为零、重数敏感的 Wiener 均方非衰减律与 Li 曲率无穷次变号（手工推导）**：尽管一切 $T_N(c^{\mathrm{Li}}) \succ 0$ 且一切 $\lambda_n > 0$，Li 曲率数列 $c^{\mathrm{Li}}_k$ 既**不趋于零**，也**不保持非负**——确切地：
    $$
-   \lim_{N\to\infty}\frac{1}{N}\sum_{k=0}^{N-1} c^{\mathrm{Li}}_k \;=\; 0, \qquad
-   W_{\mathrm{Li}} \;:=\; \lim_{N\to\infty}\frac{1}{N}\sum_{k=0}^{N-1} \bigl(c^{\mathrm{Li}}_k\bigr)^2 \;=\; \sum_{\rho\;\text{互异}} \left(\frac{m_\rho v_\rho}{\lambda_1}\right)^2 \;>\; 0,
+   \begin{aligned}
+   \lim_{N\to\infty}\frac{1}{N}\sum_{k=0}^{N-1} c^{\mathrm{Li}}_k &= 0,\\
+   W_{\mathrm{Li}} &:= \lim_{N\to\infty}\frac{1}{N}\sum_{k=0}^{N-1} \bigl(c^{\mathrm{Li}}_k\bigr)^2 \;=\; \sum_{\rho\;\text{互异}} \left(\frac{m_\rho v_\rho}{\lambda_1}\right)^2 \;>\; 0,
+   \end{aligned}
    $$
    并且
    $$
-   \limsup_{k\to\infty} c^{\mathrm{Li}}_k \;=\; 1, \qquad
-   \liminf_{k\to\infty} c^{\mathrm{Li}}_k \;\le\; -W_{\mathrm{Li}} \;<\; 0.
+   \begin{aligned}
+   \limsup_{k\to\infty} c^{\mathrm{Li}}_k &= 1,\\
+   \liminf_{k\to\infty} c^{\mathrm{Li}}_k &\le -W_{\mathrm{Li}} \;<\; 0.
+   \end{aligned}
    $$
    因而 $c^{\mathrm{Li}}_k$ 必有**无穷多个严格负项**（即离散二阶差分 $\lambda_{k+1} - 2\lambda_k + \lambda_{k-1} = 2\lambda_1 c^{\mathrm{Li}}_k$ 无穷次为负，数列 $(\lambda_n)$ 并非全局凸数列）。此外，与 [@rem-ch34-burnol-nbb-mollifier-literature] 的 Burnol 常数同理，Wiener 极限 $W_{\mathrm{Li}}$ 携带重数平方因子 $m_\rho^2$：对按重数计数的全体正纵坐标零点记 $a_j := v_j / \lambda_1$，则恒有 $W_{\mathrm{Li}} \ge 2\sum_{j=1}^\infty a_j^2$，等号成立当且仅当 $\zeta$ 的全部非平凡零点皆为单重零点。
 
@@ -736,7 +740,10 @@ $$
 
 从粗糙路径转向粗糙曲面时，有限网格上的代数问题先给出有型拼接的条件，再确定闭壳上仍可能存在的阻碍。
 
-**交叉模 `1—3—3—1` 有型面拼接、Peiffer 互换与四面体中心核三维阻碍（手工推导）。** 这里的 `1—3—3—1` 表示本书三维外代数的分次维数。下文的三单形 $[0123]$ 按维数有 $(4,6,4,1)$ 个胞腔。设 $(\mu:H\to G,\triangleright)$ 为交叉模，即 $\mu$ 是群同态，$G$ 以自同构作用于 $H$，并满足
+这里的 `1—3—3—1` 是本书三维外代数的分次维数。下文四面体 $[0123]$ 的各维胞腔数为 $(4,6,4,1)$。采用沿行进方向从左到右相乘的路径增益，反向棱取逆。
+
+::: {.theorem #thm-ch34-crossed-module-surface-pasting title="交叉模的有型面拼接、Peiffer 互换与四面体中心阻碍" lean="D5/S3/HomologicalAlgebra/CrossedModuleSurfacePasting.result D5/S3/HomologicalAlgebra/CrossedModuleSurfacePasting.CrossedModule.ker_le_center D5/S3/HomologicalAlgebra/CrossedModuleSurfacePasting.Face.fake_flat_iff D5/S3/HomologicalAlgebra/CrossedModuleSurfacePasting.Face.interchange D5/S3/HomologicalAlgebra/CrossedModuleSurfacePasting.Tetrahedron.obstruction_mem_ker D5/S3/HomologicalAlgebra/CrossedModuleSurfacePasting.Tetrahedron.obstruction_mem_center D5/S3/HomologicalAlgebra/CrossedModuleSurfacePasting.Tetrahedron.obstruction_eq_one_iff D5/S3/HomologicalAlgebra/CrossedModuleSurfacePasting.q8_tetrahedron_nontrivial"}
+设 $(\mu:H\to G,\triangleright)$ 为交叉模，其中 $\mu$ 为群同态，$G$ 以群自同构作用于 $H$，并满足
 
 $$
 \begin{aligned}
@@ -745,35 +752,45 @@ $$
 \end{aligned}
 $$
 
-对 $h\in\ker\mu$，第二式给出 $k=hkh^{-1}$，故 $\ker\mu\subseteq Z(H)$。反向棱取逆，路径增益按行进顺序从左到右相乘。对同起讫点的路径增益 $p,q$，面标签 $h:p\Rightarrow q$ 有型当且仅当逐面伪平坦条件 $q=\mu(h)p$ 成立。若 $k:q\Rightarrow r$，竖拼为 $kh$，因为 $\mu(kh)p=\mu(k)q=r$。若 $k:p'\Rightarrow q'$ 与 $h$ 横向相邻，横拼为 $h(p\triangleright k)$，因为 $\mu(h(p\triangleright k))pp'=\mu(h)p\mu(k)p'=qq'$。群乘法的结合律给出竖拼结合律，作用的合成律及其自同构性质给出横拼结合律，恒等面取标签 $1$。两行标签依次为 $(h,k)$、$(h',k')$ 时，由 $q=\mu(h)p$ 和 Peiffer 恒等式，
+则 $\ker\mu\subseteq Z(H)$。给定 $p,q\in G$ 和标签 $h\in H$，面 $h:p\Rightarrow q$ 的边界条件 $\mu(h)p=q$ 等价于逐面伪平坦条件 $\mu(h)=qp^{-1}$。恒等面在 $p$ 上取标签 $1$。记 $v(h,k)$ 为先 $h$ 后 $k$ 的竖拼，当 $h:p\Rightarrow q$、$k:q\Rightarrow r$ 时，其标签为 $kh$，类型为 $p\Rightarrow r$。记 $m(h,k)$ 为横拼，当 $h:p\Rightarrow q$、$k:p'\Rightarrow q'$ 时，其标签为 $h(p\triangleright k)$，类型为 $pp'\Rightarrow qq'$。再取有型面 $h':q\Rightarrow r$、$k':q'\Rightarrow r'$，则有型面满足 Peiffer 互换律
+
+$$
+v\bigl(m(h,k),m(h',k')\bigr)=m\bigl(v(h,h'),v(k,k')\bigr).
+$$
+
+对定向四面体 $[0123]$，给定六条棱的增益 $g_{ij}\in G$（$i<j$）及四个有型面 $h_{ijk}:g_{ik}\Rightarrow g_{ij}g_{jk}$（$i<j<k$）。从 $g_{03}$ 到 $g_{01}(g_{12}g_{23})$ 的两种拼接的标签分别为
 
 $$
 \begin{aligned}
-h'(q\triangleright k')h(p\triangleright k)
- &=h'h(p\triangleright k')(p\triangleright k)\\
- &=(h'h)\bigl(p\triangleright(k'k)\bigr).
+A&=(g_{01}\triangleright h_{123})h_{013},\\
+B&=h_{012}h_{023}.
 \end{aligned}
 $$
 
-这正是先竖拼再横拼所得的标签。同一有型拼接图中，由结合、插入恒等面及互换联系的各表达式取值相同。细分时，粗面的指定标签须等于所指定细面的复合标签。
+它们的比值 $\Omega=AB^{-1}$ 属于 $\ker\mu\subseteq Z(H)$，且 $\Omega=1$ 当且仅当 $A=B$。
 
-在定向四面体 $[0123]$ 上，取有型标签 $h_{ijk}:g_{ik}\Rightarrow g_{ij}g_{jk}$。从 $g_{03}$ 到 $g_{01}g_{12}g_{23}$ 的两种分解分别经过 $g_{01}g_{13}$ 与 $g_{02}g_{23}$，由拼接律得
+在非交换四元数群 $Q_8$ 中取生成元 $a,x$，满足 $a^4=1$、$x^2=a^2$ 和 $ax=xa^{-1}$。取投影 $\mu:Q_8\to V_4$，将 $a^i$ 和 $xa^i$ 分别送到 $(0,i\bmod 2)$ 与 $(1,i\bmod 2)$，并由提升元的共轭给出 $V_4$ 的作用。取 $g_{01}=\mu(a)$、$g_{12}=\mu(x)$，其余四条棱取单位元。面标签依次取 $h_{012}=xa$、$h_{013}=a$、$h_{023}=1$、$h_{123}=x$。这四个面都有型，所得 $\Omega=a^2=-1\ne1$。因此逐面伪平坦并不保证四元数壳的阻碍为单位元。
+:::
 
-$$
-\begin{aligned}
-H_{\mathrm a}&=(g_{01}\triangleright h_{123})h_{013},\\
-H_{\mathrm b}&=h_{012}h_{023},\\
-\mu(H_{\mathrm a})&=\mu(H_{\mathrm b})=g_{01}g_{12}g_{23}g_{03}^{-1}.
-\end{aligned}
-$$
+::: {.proof #pf-ch34-crossed-module-surface-pasting}
+若 $h\in\ker\mu$，Peiffer 恒等式给出 $k=hkh^{-1}$，故 $h$ 与任意 $k\in H$ 交换。对边界方程右乘 $p^{-1}$ 得到伪平坦等式，反向右乘 $p$ 即可恢复。竖拼依次用两个面的边界等式。横拼由等变性得 $\mu(h(p\triangleright k))pp'=\mu(h)p\mu(k)p'=qq'$。
 
-因此 $\Omega=H_{\mathrm a}H_{\mathrm b}^{-1}\in\ker\mu\subseteq Z(H)$，两种分解相等当且仅当 $\Omega=1$。这是独立的三胞腔平坦条件。取 $G=1$、$H=\mathbb Z$，令 $h_{123}=1$，其余面取 $0$，则各面都有型，而加法记号下 $\Omega=1\ne0$。在线性上链中，同一余维二面由两种删顶点顺序得到，符号相反，故 $d_\epsilon^2\equiv0$。
+用 $q=\mu(h)p$ 和 Peiffer 恒等式改写 $(q\triangleright k')h=h(p\triangleright k')$，再用 $p$ 的作用保持群乘法，便把先横后竖所得标签改写为 $(h'h)(p\triangleright(k'k))$。两个复合面的起讫增益相同，标签相等即给出有型面相等。
 
-从同一个外部基点沿 $p,p'$ 锚定，输运标签满足 $p'\triangleright h=(p'p^{-1})\triangleright(p\triangleright h)$。由等变性，$\mu(H)$ 正规，且由 Peiffer 恒等式，它在中心核上的作用平凡，故核上的作用经 $G/\mu(H)$ 分解。在三角剖分的环带上，取沿生成回路有非平凡和乐的 $G=\mathbb{Z}/2$ 值的平坦 $1$-上闭链，取 $\mu$ 为平凡同态，令 $G$ 对 $H=\mathbb Z$ 作符号作用。在环带一个顶点接上棱增益平凡的三角剖分球面，取一个面标签为 $1$，其余取 $0$。通往该顶点的两条互补路径各可延成一棵生成树，其相对回路把球壳标签变号。输运对路线无关的充要条件是相对和乐固定被输运的标签。
+四面体第一种拼接先用 $013$ 面，再在左侧保留 $01$ 棱拼入 $123$ 面。第二种先用 $023$ 面，再在右侧保留 $23$ 棱拼入 $012$ 面，并用结合律统一终点。两个边界方程约去共同的源 $g_{03}$ 后给出 $\mu(A)=\mu(B)$，故 $AB^{-1}$ 在中心核中。等式 $AB^{-1}=1$ 右乘 $B$ 就得到 $A=B$，反向由代入得证。
 
-本节的列向量输运 `hol` 按从右到左的顺序复合。取棱增益 $g_{uv}=\hat U_{uv}^{-1}$ 和路径增益 $p=\hat P_{r\to v}^{-1}$，逆元便把复合顺序改为从左到右。在列标架变换 $T_{uv}^s=s_vT_{uv}s_u^{-1}$ 下，$g_{uv}^s=s_ug_{uv}s_v^{-1}$，所以以 $u$ 为基点的面标签变为 $h^s=s_u\triangleright h$。若正向回路满足 $\mu(h)=\hat W^{-1}$，由等变性得 $\mu(p\triangleright h)=\hat P^{-1}\hat W^{-1}\hat P=(\hat P^{-1}\hat W\hat P)^{-1}$，即先前列向量锚定和乐的逆。
+在四元数例中，投影的核为 $\{1,a^2\}$，其中两元素都居中，故共轭作用可降到商群。代入面标签得 $A=(axa^{-1})a=xa^3$、$B=xa$，于是 $AB^{-1}=a^2\ne1$。完整证明由 Lean 内核检查。
+:::
 
-在光滑情形下，设 $\mu:H\to G$ 为光滑李群同态。在平凡化中，列向量联络 $D=d+A$ 的输运满足 $\dot T=-A(\dot\gamma)T$，故从左到右的路径增益为 $T^{-1}$。取边向依次为 $X,Y,-X,-Y$ 的正向无穷小矩形，记其边界为 $qp^{-1}$。四棱增益相乘时，沿边移动基点给出导数项 $dA$，有序乘法给出交换子项 $A\wedge A$，故展开为 $1+F_A(X,Y)\Delta S+o(\Delta S)$，其中 $F_A=dA+A\wedge A$。按面朝向取标签 $1-B(X,Y)\Delta S+o(\Delta S)$，比较 $qp^{-1}=\mu(h)$ 的面积一次项，得到 $F_A+\mu_*B=0$。
+**同一组棱增益上的平凡壳（手工推导）。** 将 $012$ 面的标签由 $xa$ 改为 $xa^3$。两者的指数模 $2$ 相同，故投影相同，四个面的边界等式仍成立。六条棱增益和 $A$ 保持原值，而 $B=xa^3=A$，所以 $\Omega=1$。
+
+**固定拼接图与加法对照（手工推导）。** 群结合律、作用律与 Peiffer 互换使同一有型图上由结合、插入恒等面及互换相连的表达式取值相同。细分时，粗面的指定标签须等于细面的复合标签。另取 $G=1$、$H=\mathbb Z$，令 $h_{123}=1$，其余面取 $0$，则各面都有型，而加法记号下 $\Omega=1\ne0$。在线性上链中，同一余维二面由两种删顶点顺序得到，符号相反，故 $d_\epsilon^2\equiv0$。
+
+**外部基点的锚定与环带（手工推导）。** 从同一个外部基点沿 $p,p'$ 锚定，输运标签满足 $p'\triangleright h=(p'p^{-1})\triangleright(p\triangleright h)$。由等变性，$\mu(H)$ 正规，且由 Peiffer 恒等式，它在中心核上的作用平凡，故核上的作用经 $G/\mu(H)$ 分解。在三角剖分的环带上，取沿生成回路有非平凡和乐的 $G=\mathbb{Z}/2$ 值的平坦 $1$-上闭链，取 $\mu$ 为平凡同态，令 $G$ 对 $H=\mathbb Z$ 作符号作用。在环带一个顶点接上棱增益平凡的三角剖分球面，取一个面标签为 $1$，其余取 $0$。通往该顶点的两条互补路径各可延成一棵生成树，其相对回路把球壳标签变号。输运对路线无关的充要条件是相对和乐固定被输运的标签。
+
+**列向量输运与交叉模增益的对应（手工推导）。** 本节的列向量输运 `hol` 按从右到左的顺序复合。取棱增益 $g_{uv}=\hat U_{uv}^{-1}$ 和路径增益 $p=\hat P_{r\to v}^{-1}$，逆元便把复合顺序改为从左到右。在列标架变换 $T_{uv}^s=s_vT_{uv}s_u^{-1}$ 下，$g_{uv}^s=s_ug_{uv}s_v^{-1}$，所以以 $u$ 为基点的面标签变为 $h^s=s_u\triangleright h$。若正向回路满足 $\mu(h)=\hat W^{-1}$，由等变性得 $\mu(p\triangleright h)=\hat P^{-1}\hat W^{-1}\hat P=(\hat P^{-1}\hat W\hat P)^{-1}$，即先前列向量锚定和乐的逆。
+
+**光滑李群的伪平坦展开（手工推导）。** 在光滑情形下，设 $\mu:H\to G$ 为光滑李群同态。在平凡化中，列向量联络 $D=d+A$ 的输运满足 $\dot T=-A(\dot\gamma)T$，故从左到右的路径增益为 $T^{-1}$。取边向依次为 $X,Y,-X,-Y$ 的正向无穷小矩形，记其边界为 $qp^{-1}$。四棱增益相乘时，沿边移动基点给出导数项 $dA$，有序乘法给出交换子项 $A\wedge A$，故展开为 $1+F_A(X,Y)\Delta S+o(\Delta S)$，其中 $F_A=dA+A\wedge A$。按面朝向取标签 $1-B(X,Y)\Delta S+o(\Delta S)$，比较 $qp^{-1}=\mu(h)$ 的面积一次项，得到 $F_A+\mu_*B=0$。
 
 **文献结果。** Chevyrev、Diehl、Ebrahimi-Fard 与 Tapia 给出交叉模马格努斯展开，并在 Young–Hölder 正则性下建立乘法缝合与连续延拓。对给定的有限阶 $\rho$-粗糙曲面，Lee 证明延拓定理，并为 Banach 代数交叉模中连续、平移不变且伪平坦的 $2$-联络构造面和乐。Bischoff 与 Lee 证明分片线性曲面的签名确定其平移与薄同伦等价类。[A multiplicative surface signature through its Magnus expansion，arXiv:2406.16856v2，定理 6.11 与 §6.5](https://arxiv.org/abs/2406.16856v2) · [The Surface Signature and Rough Surfaces，arXiv:2406.16857v2，定义 3.6 与定理 5.18、5.40、5.45](https://arxiv.org/abs/2406.16857v2) · [Thin homotopy and the signature of piecewise linear surfaces，arXiv:2506.16657v1，定理 1.1、1.2、4.12](https://arxiv.org/abs/2506.16657v1)
 
@@ -789,11 +806,11 @@ Chandra、Chevyrev、Hairer 与 Shen 构造三维随机杨—米尔斯–希格�
 ::: {.remark #rem-ch34-arc-calculus-literature title="极小圆弧体微积分重塑的数学物理文献脉络与五层认识论审计（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本节涉及的三百四十年微积分演进脉络、数值分析定理与形式化锚点严格区分以下五个认识论层级：
 
-1. **机器验证的 Lean 4 内核定理基座（`LEAN ✓`）**：[@thm-ch34-arc-rotor-calculus-and-finite-stokes] 汇集的全部十条 `trureturing` 冻结声明——`lagrange_gram_identity`、`square_eq_neg_one_of_skewAdjoint_unitary`、`relativeComplexStructure_square`、`covariant_commutator_formula`、`projection_probability_flow`、`exp_tail_le`、`trotter_product`、`face_cycle_exact`、`cycle_face_sides` 与 `tetra_defects_incidence_repair_and_exactness`（连同行内引用的生成树输运与和乐分类定理 `selected_tree_transport`、`anchored_phase_classification` 及三点巴格曼迹 `triple_bargmann_bloch`）——均已在所钉提交上经 Lean 4 内核零公理缺口验证通过（`LEAN ✓`）。请注意精确类型边界：`face_cycle_exact` 与 `cycle_face_sides` 建立在 $\mathbb{Z}/2\mathbb{Z}$（`ZMod 2`）系数球面旋转系统上，而任意交换群 `AddCommGroup A` 上的有向斯托克斯上边缘修补与 $d^2 = 0$ 充要判据由 `tetra_defects_incidence_repair_and_exactness` 独立提供。
+1. **机器验证的 Lean 4 内核定理基座**：[@thm-ch34-arc-rotor-calculus-and-finite-stokes] 汇集的全部十条 `trureturing` 冻结声明——`lagrange_gram_identity`、`square_eq_neg_one_of_skewAdjoint_unitary`、`relativeComplexStructure_square`、`covariant_commutator_formula`、`projection_probability_flow`、`exp_tail_le`、`trotter_product`、`face_cycle_exact`、`cycle_face_sides` 与 `tetra_defects_incidence_repair_and_exactness`（连同行内引用的生成树输运与和乐分类定理 `selected_tree_transport`、`anchored_phase_classification` 及三点巴格曼迹 `triple_bargmann_bloch`）——均已在所钉提交上经 Lean 4 内核零公理缺口验证通过。请注意精确类型边界：`face_cycle_exact` 与 `cycle_face_sides` 建立在 $\mathbb{Z}/2\mathbb{Z}$（`ZMod 2`）系数球面旋转系统上，而任意交换群 `AddCommGroup A` 上的有向斯托克斯上边缘修补与 $d^2 = 0$ 充要判据由 `tetra_defects_incidence_repair_and_exactness` 独立提供。
 2. **微积分基础、复步自动微分、乘积积分、粗糙路径与离散外微分经典文献（未在本书形式化）**：经典局部线性化微积分与无穷小批判源自 G. W. Leibniz（*Nova Methodus*, 1684）、I. Newton（*Principia*, 1687）与 G. Berkeley（*The Analyst*, 1734）；一阶幂零无穷小综合微分几何源自 F. W. Lawvere（1967 芝加哥讲座）与 A. Kock（*Synthetic Differential Geometry*, Cambridge Univ. Press, 1981），前向二元数自动微分源自 R. E. Wengert（*Commun. ACM* **7**(8), 463–464, 1964）。无相减复步导数思想滥觞于 J. N. Lyness & C. B. Moler（*SIAM J. Numer. Anal.* **4**(2), 202–210, 1967），由 W. Squire & G. Trapp（*SIAM Rev.* **40**(1), 110–112, 1998）确立显式 $O(\epsilon^2)$ 复步一阶求导公式，并由 G. Lantoine, R. P. Russell & T. Dargent（*ACM Trans. Math. Softw.* **38**(3), Art. 16, 2012）推广至消除高阶导数载体相减的双复数/多复数算法。矩阵与李群乘积积分源自 V. Volterra（1887；参见 J. D. Dollard & C. N. Friedman, *Product Integration*, 1979）、H. F. Trotter（*Proc. Amer. Math. Soc.* **10**, 545–551, 1959）与 W. Magnus（*Commun. Pure Appl. Math.* **7**, 649–673, 1954）。四相区路径积分与随机/粗糙分析源自 L. C. Young（*Acta Math.* **67**, 251–282, 1936，$\alpha > \frac{1}{2}$ 无漂移积分）、K. Itô（*Proc. Imp. Acad. Tokyo* **20**, 519–524, 1944）、R. L. Stratonovich（*SIAM J. Control* **4**, 362–371, 1966，保链式法则中点随机积分）、R. P. Feynman（*Rev. Mod. Phys.* **20**, 367–387, 1948）、M. Kac（1949）、R. H. Cameron（1960）以及 T. J. Lyons（*Rev. Mat. Iberoam.* **14**(2), 215–310, 1998，粗糙路径理论）。球面与离散流形外微分源自 A. Girard（1629）、T. Regge（*Nuovo Cimento* **19**, 558–571, 1961）、A. N. Hirani（加州理工博士论文, 2003）与 M. Desbrun, A. N. Hirani, M. Leok & J. E. Marsden（[arXiv:math/0508341](https://arxiv.org/abs/math/0508341), 2005，离散外微分 DEC），上链与连续微分形式之间的 Whitney 映射见 H. Whitney（*Geometric Integration Theory*, Princeton Univ. Press, 1957）；李群积分子与马格努斯方法的系统综述见 A. Iserles, H. Z. Munthe-Kaas, S. P. Nørsett & A. Zanna（*Acta Numerica* **9**, 215–365, 2000）；格点规范理论中的 Wilson 回路见 K. G. Wilson（*Phys. Rev. D* **10**, 2445, 1974）；非阿贝尔二维斯托克斯定理与高阶规范面和乐源自 L. Schlesinger（*Math. Ann.* **99**, 413–434, 1928）、B. Broda（1992）及 U. Schreiber & K. Waldorf（*J. Homotopy Relat. Struct.* **4**, 187–244, 2009）。
 3. **精确代数推导与双精度/十位小数基准算例（`手工推导` / `NUM`）**：单步弦—矢高恒等式 $(1-v_\epsilon)^2 + c_\epsilon^2 \equiv 1$、半角正矢数值保真律 $v_\epsilon = 2\sin^2(\kappa\epsilon/2)$、累计矢高四相区展开、三行组合高斯—博内恒等式，以及 [@ex-ch34-complex-step-and-ito-sagitta-benchmark] 与 [@ex-ch34-coarse-octant-stokes-exactness] 中的全部级数系数、双精度误差对照表和 $M = 4$ 卦限十位小数收支表，均为精确代数恒等式或可直接复现的数值计算（`NUM`）。
 4. **极小圆弧体微积分统一重塑框架（`MODEL`）**：以有限自指停机孔径 $\epsilon \ge \varepsilon_{\mathrm{self}} > 0$ 上的比较旋子、有序乘积积分与 `1—3—3—1` 上链复形统一替代经典切线微积分（[@def-ch34-arc-body-calculus-primitives]），并将幂零环 $D_1$ 诠释为模去矢高 $v_\epsilon$ 的商影、将伊藤修正与费曼动能诠释为 $\alpha = \frac{1}{2}$ 矢高共振，属于本书建立的统一几何模型（`MODEL`）。
-5. **未解前沿数学物理问题（`OPEN`）。** 已有交叉模面拼接、分片线性曲面签名的薄同伦刻画，以及在 Young 正则性范围内，或在给定相容增强的情形下构造的粗糙面和乐。仍待构造的是 $\alpha<\frac12$ 时保有独立面数据的规范协变增强，以及三维与四维连续统中重整化威尔逊面的收敛（[@prob-ch34-rough-nonabelian-surface-calculus]，另见[附录 C](appendix-c.md#sec-appendix-c-open-register)和[附录 E](appendix-e.md) 的 `H8`/`H9`）。
+5. **未解前沿数学物理问题（`OPEN`）。** 已有交叉模面拼接（[@thm-ch34-crossed-module-surface-pasting]）、分片线性曲面签名的薄同伦刻画，以及在 Young 正则性范围内，或在给定相容增强的情形下构造的粗糙面和乐。仍待构造的是 $\alpha<\frac12$ 时保有独立面数据的规范协变增强，以及三维与四维连续统中重整化威尔逊面的收敛（[@prob-ch34-rough-nonabelian-surface-calculus]，另见[附录 C](appendix-c.md#sec-appendix-c-open-register)和[附录 E](appendix-e.md) 的 `H8`/`H9`）。
 :::
 
 把三百四十年来分裂的三套微积分体系并排摆上同一张总账台，极小圆弧体微积分如何一举消除历史补丁的全景便豁然贯通：
@@ -807,9 +824,9 @@ Chandra、Chevyrev、Hairer 与 Shen 构造三维随机杨—米尔斯–希格�
 | **弯曲流形与幺正积分** | 显式欧拉步步脱离球面，模长持续漂移发散 | 伊藤脱离流形；斯特拉托诺维奇保链式法则但仍需极限 | **有序旋子连乘任意 $\epsilon > 0$ 零模长漂移（左端一阶、圆弧中点二阶、高阶配 Magnus 换位子）** |
 | **有限网格斯托克斯与形式化** | 有限网格存在 $\mathcal{O}(h^2)$ 截断误差；形式化深陷柯西滤子泥潭 | 随机格林—斯托克斯受可积性与适应性严苛限制 | **阿贝尔共棱反演与非阿贝尔生成树剥壳在任意 $M \ge 1$ 上链层面零离散误差（误差转移到逐棱求积）；有限核心零滤子构造性形式化** |
 
-至此，单步比较旋子微分、四相区累计矢高相变与 `1—3—3—1` 零离散误差有限网格斯托克斯这三根极小圆弧体微积分支柱已悉数铸成！那么，当我们携着这套全新铸就的圆弧体微积分原语迈入[第三十一章](ch31-arc-calculus-and-riemann-hypothesis.md)（[§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)–[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler)）的算术宇宙腹地，直接切入**黎曼猜想**的临界带战场时，会发生怎样的化学反应？
+至此，单步比较旋子微分、四相区累计矢高相变与 `1—3—3—1` 零离散误差有限网格斯托克斯这三根极小圆弧体微积分支柱已悉数铸成！那么，当我们携着这套全新铸就的圆弧体微积分原语迈入[第三十一章](ch31-arc-calculus-and-riemann-hypothesis.md)（[§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)–[§31.6](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md#sec-ch39-riemann-1854-1859-spectral-manifold-polishing)）的算术宇宙腹地，直接切入**黎曼猜想**的临界带与螺线管谱流形战场时，会发生怎样的化学反应？
 
-请先在下方完整交互实验室中亲手遍历五张圆弧微积分实验卡，随后翻开[第三十一章](ch31-arc-calculus-and-riemann-hypothesis.md)直至 [§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler) 的高潮——去见证素数极小圆弧路径积分、算术枢轴重整化以及有限停机精度 $\varepsilon_{\mathrm{self}} > 0$ 下的**素数旋子二阶弦弧矢高相变、全纯埃尔米特—比勒（Hermite–Biehler）径向单调锁与有限网格斯托克斯零涡旋相消**如何把黎曼猜想改写为一条与之等价的再生核正定条件，并将回到经典 ZFC 公理系统的最后一步精准锁定在唯一一条乘性舒尔枢轴核正定桥接引理之上！
+请先在下方完整交互实验室中亲手遍历五张圆弧微积分实验卡，随后翻开[第三十一章](ch31-arc-calculus-and-riemann-hypothesis.md)——先在前半翼 [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)–[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler) 见证素数极小圆弧路径积分、算术枢轴重整化以及有限停机精度 $\varepsilon_{\mathrm{self}} > 0$ 下的**素数旋子二阶弦弧矢高相变、全纯埃尔米特—比勒（Hermite–Biehler）径向单调锁与有限网格斯托克斯零涡旋相消**如何把黎曼猜想改写为一条与之等价的再生核正定条件，再沿后半翼 [§31.4](ch39-s31-real-error-axis-and-prime-adelic-closure.md)–[§31.6](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md) 直抵阿代尔素数归元闭合与黎曼 1854 + 1859 临界线谱磨光流形！
 
 ::: {.viz src="arc-body-calculus-sandbox" height="640"}
 **极小圆弧体微积分重塑：以旋代差、矢高相变与有限精度斯托克斯完整交互实验室（`arc-body-calculus-sandbox`）。** 在统一的三维圆弧体微积分实验室中切换“几何旋子原语 / 微积分与物理算符”双透镜，并自由遍历全部五张递进实验卡——“滑板坡上的密切旋子与切线斜率”、“向 $90^\circ$ 盲区迈一步的复步求导”、“路径序旋子管与矢高相变”、“半球上的有限网格斯托克斯”以及“闭合的极小圆弧壳 $d^2 = 0$”（青色绘制横向切弦 $c_\epsilon = \sin(\kappa\epsilon)$、复步导数 $\operatorname{Im}f(x_0 + \hat{\mathbf{i}}\epsilon)/\epsilon$ 与存活外圈边界 $\partial\Sigma$，品红色标示轴向矢高 $v_\epsilon = 2\sin^2(\kappa\epsilon/2)$、前向差分相减塌陷、累计矢高 $\Sigma_{\mathrm{sag}}$ 与伊藤纬圈 $(1 - v_\epsilon)^N$ 及球面角盈 $\Omega(\Delta\mathcal{T}_k)$，紫色绘制密切旋子圆盘 $\hat{\mathcal{D}}_\epsilon$、$90^\circ$ 盲面 $\operatorname{Im}f$、路径序旋子管与闭合圆弧壳，墨色绘制平直斜率 $\tan\theta$、实轴切片 $f(x)$ 与正反相消内棱 $\pm\Phi$，琥珀色严格标示激活控件与舞台交互手柄，红色严格专用于原理抽屉中的 `OPEN` 开放问题标记，绿色 `LEAN ✓` 徽章标注页面挂载的八条 `trureturing` 冻结定理实例）。

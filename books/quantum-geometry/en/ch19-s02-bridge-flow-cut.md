@@ -446,7 +446,81 @@ Swapping the tensor factors on both input and output replaces $F$ by $\sum_r N_r
 Conversely, [@thm-bridge-native-scalar-gram-exists] supplies the construction for the first left-shrinking interval. A single block construction covers the other cases on this side. Given $k\le3$, $b\le ka$, and $kc\le d$, split the left input coordinates into $k$ blocks of size at most $a$. Each block has its own left matrix embedding it into the same left output coordinates. The corresponding right matrix embeds all $c$ input coordinates into a dedicated block of $c$ output coordinates. The right output blocks are disjoint, so each input basis vector maps to exactly one output basis vector and all images are distinct. Pad with zero terms and multiply the left matrices by $\sqrt{\lambda}$ to obtain column Gram $\lambda I_{bc}$. Use $k=1$ when both factors fit, and $k=2$ and $k=3$ in the remaining two left-shrinking intervals, respectively. When the right factor shrinks, construct on the swapped dimensions and swap back. The full proof is checked by the Lean kernel.
 :::
 
-For $k\ge1$, the family $(2k,5k,2k,5k)$ lies in the third left-shrinking interval but has $3c=6k>d=5k$, ruling out an exactly flat spectrum. For this family the entropy of the normalized column Gram also stays below its maximum by an amount bounded uniformly in $k$.
+::: {.theorem #thm-bridge-native-four-staircase title="The staircase construction and exact large-ratio classification for width-four scalar column Grams" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourStaircase.staircase_sufficient, D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourStaircase.native_four_scalar_gram_iff, D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourStaircase.native_four_scalar_gram_swap_iff, D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourStaircase.pure_rank_two_kernel_bound, D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourStaircase.exact_width_four_at_three_four"}
+For any $a,b,c,d\in\mathbb N$ and real $\lambda>0$, write $G_4(a,b,c,d;\lambda)$ for the existence of $X_r\in M_{a\times b}(\mathbb C)$ and $Y_r\in M_{d\times c}(\mathbb C)$ ($r=0,1,2,3$) such that $F=\sum_{r=0}^3 X_r\otimes Y_r$ satisfies $F^*F=\lambda I_{bc}$.
+
+**Eight-step staircase sufficiency.** Write $\mathcal S(a,b,c,d)$ when all the inequalities in at least one of the following eight rows hold.
+
+$$
+\begin{aligned}
+b &\le a, & c &\le d,\\
+a &< b,\quad 3b\le4a, & 4c &\le3d,\\
+4a &< 3b,\quad 2b\le3a, & 3c &\le2d,\\
+3a &< 2b,\quad 3b\le5a, & 5c &\le3d,\\
+5a &< 3b,\quad b\le2a, & 2c &\le d,\\
+2a &< b,\quad 2b\le5a, & 5c &\le2d,\\
+5a &< 2b,\quad b\le3a, & 3c &\le d,\\
+3a &< b,\quad b\le4a, & 4c &\le d.
+\end{aligned}
+$$
+
+If at least one of $b=0$, $c=0$, $\mathcal S(a,b,c,d)$, or $\mathcal S(d,c,b,a)$ holds, then $G_4(a,b,c,d;\lambda)$ holds.
+
+**Exact classification for large ratios.** If $0<c$ and $2a<b$, then $G_4(a,b,c,d;\lambda)$ holds if and only if
+
+$$
+\begin{aligned}
+&(2a<b\land 2b\le5a\land 5c\le2d)\\
+{}\lor{}&(5a<2b\land b\le3a\land 3c\le d)\\
+{}\lor{}&(3a<b\land b\le4a\land 4c\le d).
+\end{aligned}
+$$
+
+If $0<b$ and $2d<c$, then $G_4(a,b,c,d;\lambda)$ holds if and only if
+
+$$
+\begin{aligned}
+&(2d<c\land 2c\le5d\land 5b\le2a)\\
+{}\lor{}&(5d<2c\land c\le3d\land 3b\le a)\\
+{}\lor{}&(3d<c\land c\le4d\land 4b\le a).
+\end{aligned}
+$$
+
+Both equivalences allow $a$ or $d$ to be zero.
+
+**Necessary bound for a pure rank-two kernel.** For any four pairs of factors of the stated sizes, let $Sx=(X_rx)_r$ and define $\Phi(T)=S^*(T\otimes I_a)S$ for $T\in M_4(\mathbb C)$. Suppose $a<b$, the left factors are linearly independent, $F^*F=I_{bc}$, and $\sum_r X_r^*X_r=I_b$. If every nonzero Hermitian matrix $T$ with $\Phi(T)=0$ has rank $2$, then $4c\le3d$.
+
+**Exact minimum width.** At $(3,4,3,4)$, four terms attain $F^*F=\lambda I_{bc}$ for each $\lambda>0$, and three terms are impossible. Since any shorter sum can be padded to three terms, the minimum width is four.
+:::
+
+::: {.proof #pf-bridge-native-four-staircase}
+The general necessary conditions at width four in the small-ratio regime $a<b\le2a$ remain open. In particular, four-term attainment of a positive scalar column Gram is open at $(4,5,4,5)$, $(5,6,4,5)$, and $(5,6,5,6)$.
+
+If $b=0$ or $c=0$, take zero factors. Otherwise, partition the input grid into at most four rectangles and translate them along the two coordinate axes into disjoint rectangles in the output grid. Each translation gives one Kronecker product whose factors vanish outside the corresponding input intervals. The sum sends each input basis vector to a distinct output basis vector. Pad to four terms with zeros and scale the left factors by $\sqrt{\lambda}$ to obtain the desired Gram. Exchanging the Kronecker factors permutes the input and output coordinates, preserving the scalar column Gram and changing the dimension tuple to $(d,c,b,a)$.
+
+- In the rows with $b\le ka$ and $kc\le d$, use the corresponding $k\in\{1,2,3,4\}$. Each block of at most $a$ left input coordinates gets its own interval of $c$ right output coordinates.
+- At the $4/3$ and $3/2$ steps, first place one $a\times c$ block. The remaining input has width $e=b-a$. Cut it along the right input axis into at most three or two pieces of height at most $s=d-c$ and place them side by side in the spare rectangle of width $a$ and height $s$. The two steps give $3e\le a$ and $c\le3s$, or $2e\le a$ and $c\le2s$, respectively.
+- At the $5/3$ step, use two full blocks if $2c\le d$. Otherwise, after placing the first $a\times c$ block, move an $e\times s$ rectangle from the remaining input into the spare rectangle. Split the part of height $c-s$ along the left input axis into two pieces of width at most $a-e$ and stack them within the spare rectangle's remaining width. Here $3e\le2a$ and $2(c-s)\le s$.
+- At the $5/2$ step, use two right output intervals of length $c$ for two $a\times c$ blocks. Cut the remaining input of width $b-2a$ along the right input axis into at most two pieces and put them side by side in the area of width $a$ and height $d-2c$. The inequalities $2(b-2a)\le a$ and $c\le2(d-2c)$ make both pieces fit.
+
+For necessity in the large-ratio regime on the left, first divide $F$ by $\sqrt{\lambda}$. Since $c>0$, tensoring a nonzero vector in the kernel of the left stack with any nonzero right input vector would give a nonzero vector in the kernel of $F$. The left stack is therefore injective and $b\le4a$. If either family of factors is linearly dependent, absorb one term and apply [@thm-bridge-scalar-gram-obstruction] to get $3c\le d$. The three-term left stack also gives $b\le3a$.
+
+If both families are linearly independent, use the normalized right partial trace argument above. Orthonormalize the right factors and apply the inverse transpose change to the left factors to obtain $\sum_r X_r^*X_r=I_b$. Expanding $F^*F=I_{bc}$ shows that the residual coefficient matrix $R_{\ell j}$, with $(r,s)$ entry $(Y_r^*Y_s)_{\ell j}-\delta_{rs}\delta_{\ell j}$, satisfies $\Phi(R_{\ell j})=0$. Compression preserves adjoints, so the kernel's geometry applies separately to the two Hermitian parts of $R_{\ell j}$. For a Hermitian matrix with zero compression, projection onto the nonpositive eigendirections is injective on the image of $S$, since a nonzero vector with zero projection would have strictly positive quadratic form. Negating the matrix gives the corresponding bound for the other sign. Thus $2a<b$ allows at most one eigenvalue of each sign, and $3a<b$ forces the kernel to vanish. See the [Hermitian rank bound](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourKernel.hermitian_rank_bound).
+
+When every element of the Hermitian kernel has rank at most $2$, the [coefficient kernel geometry theorem](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourKernel.coefficient_geometry) gives three possibilities.
+
+- If the Hermitian kernel is zero, then $R_{\ell j}=0$. The four right factors are isometric embeddings with mutually orthogonal ranges, so $4c\le d$.
+- If there is a common three-dimensional neutral subspace, take an orthonormal basis of that subspace as coefficients for combinations of the right factors. Each $R_{\ell j}$ compresses to zero on the subspace, so the three combinations are isometric embeddings with mutually orthogonal ranges, giving $3c\le d$.
+- If there is a common unit kernel vector $v$, then $R_{\ell j}v=0$, so $Z=\sum_r v_rY_r$ satisfies $Y_r^*Z=v_r I_c$ and $Z^*Z=I_c$. Write $Y_r=\bar v_r Z+W_r$. The ranges of the $W_r$ lie in the orthogonal complement of the range of $Z$, and $\sum_r v_r W_r=0$. Put $U=\sum_r\bar v_r X_r$. Restrict the left input to $\ker U$, of dimension $p\ge b-a$. The term $U\otimes Z$ vanishes and the linear relation among the remaining right factors reduces the sum to three terms. Using orthonormal bases for the restricted input and the right output complement gives an isometry on the dimension tuple $(a,p,c,d-c)$.
+
+In the common-kernel case, $2a<b$ ensures $a<p$, so [@thm-bridge-native-three-rectangular-bound] gives $3c\le2(d-c)$, or $5c\le2d$. If $5a<2b$, then $3a<2p$ and [@thm-bridge-native-rectangular-bound] gives $2c\le d-c$, or $3c\le d$. The other cases give bounds at least this strong, and $3a<b$ forces zero kernel and hence $4c\le d$. Each upper endpoint is included, and the last three staircase rows supply sufficiency. Swapping the factors yields the large-ratio equivalence on the right.
+
+Under the pure rank-two kernel hypotheses, the same three kernel cases apply directly. The common-kernel case requires only $a<b$, which gives $p>0$. Swap the factors and use injectivity of the three-term stack to obtain $c\le3(d-c)$, or $4c\le3d$. The bounds in the other two cases also imply this inequality.
+
+At $(3,4,3,4)$, both upper bounds at the $4/3$ step hold with equality and give a four-term realization. The necessary bound for three terms would require $9\le8$, which rules out a three-term realization. The full proof is checked by the Lean kernel.
+:::
+
+For $k\ge1$, the family $(2k,5k,2k,5k)$ lies in the third left-shrinking interval but has $3c=6k>d=5k$, ruling out an exactly flat spectrum at width three. For this family the entropy of the normalized column Gram also stays below its maximum by an amount bounded uniformly in $k$.
 
 **A uniform flat-spectrum entropy gap for width-three bridges (`manual derivation`).** Let $k\ge1$ be an integer, $(a,b,c,d)=(2k,5k,2k,5k)$, $D=bc=10k^2$, and $F=\sum_{r=1}^3 M_r\otimes N_r\ne0$. Normalize $\rho_{BC}=F^*F/\operatorname{Tr}(F^*F)$ and write $G=D\rho_{BC}$ and $\eta=\|G-I_D\|_1/D$, where $\|\cdot\|_1$ is the trace norm. With at most $2$ terms, $\operatorname{rank}F\le 2ac=8k^2$, so the negative part of $G-I_D$ has trace at least $2k^2$. Since this matrix is traceless, $\eta\ge 2/5$.
 

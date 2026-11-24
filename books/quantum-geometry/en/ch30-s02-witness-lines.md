@@ -1,10 +1,10 @@
 # 26.2 "$P$ Is a Field, $NP$ Is a Line"—The Witness Thread, the Guiding Field, and Hairy-Ball Curl {#sec-coda-p-is-field-np-is-line}
 
-> **Author's Epigraph**: *"P is a field; NP is a line."*（“P是场, NP是线”）
+> **Author's Epigraph**: *"P is a field; NP is a line."*
 
 Here a “line” stands for a checkable witness and a “field” for structure guiding efficient solution (`MODEL`). The standard classes satisfy $P\subseteq NP$: efficiently solvable problems also have polynomial-time verifiers, so the two are not disjoint geometric categories. “A line without a field” interprets the difficulty of finding efficient algorithms; it does not define every $NP$ problem.
 
-## 26.2.1 Why "$NP$ Is a Line" (`有线无场，横截面为零的见证丝`) {#1-why-np-is-a-line-有线无场横截面为零的见证丝}
+## 26.2.1 Why "$NP$ Is a Line" {#1-why-np-is-a-line}
 
 For a decision problem, the $NP$ condition is that an input $w$ is a yes-instance exactly when some witness $y$, of length bounded by a polynomial in the input encoding length, is accepted by a uniform deterministic verifier $V(w,y)$. Verification time must also be polynomially bounded in the input and witness encoding lengths (see [Cook's problem description, pp. 1–3](https://www.claymath.org/wp-content/uploads/2022/06/pvsnp.pdf)). Drawing this checking process as a polygonal thread is the geometric analogy (`MODEL`):
 
@@ -19,7 +19,7 @@ $$
 **One field: straight along the thread, circling off it.** The plane carries a single autonomous field $\mathbf{F} = g(\tilde y)\bigl(1, h'(x)\bigr) + \bigl(1 - g(\tilde y)\bigr)\mathbf{F}_{\mathrm{swirl}}$, with $\tilde y = y - h(x)$, $g(\tilde y) = e^{-\tilde y^2/\varepsilon^2}$, and $\mathbf{F}_{\mathrm{swirl}}$ vanishing on the thread. The probe that starts at $S_0$ exactly on the cyan witness thread $y = h(x)$ runs along it to $S^*$; three magenta probes that start only a little off it, but outside the channel $|\tilde y| < \varepsilon$, are caught by the first vortex under the same integrator and never reach the target. A schematic model of “a thread without a field” (`MODEL`), not a complexity lower bound.
 :::
 
-## 26.2.2 Why "$P$ Is a Field" (`弃线造场，局部切面处处对齐全局`) {#2-why-p-is-a-field-弃线造场局部切面处处对齐全局}
+## 26.2.2 Why "$P$ Is a Field" {#2-why-p-is-a-field}
 
 In our geometric interpretation (`MODEL`), geometric or algebraic structure used by some polynomial-time algorithms is pictured as a **guiding field**, such as a convex gradient flow $\mathbf{F}=-\nabla V$. This is neither the definition of $P$ nor a necessary condition for membership. Even a smooth or curl-free field requires an analysis showing that it can be computed efficiently, reaches the required precision, and terminates in polynomially many steps. The following classical algorithms offer concrete points of comparison:
 
@@ -350,14 +350,14 @@ A guiding field turns blind search into flow only if its flow reaches the global
   $$
 
 - The author uses three-body clauses $\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$ to evoke loop frustration. Clause width alone defines neither a continuous configuration manifold nor a vector field or its curl;
-- **A line can thread the seam, while a field must tear (`线能穿缝，场必撕裂`)**: this is the author's geometric aphorism about witnesses and guidance. The hairy ball theorem guarantees a zero of a tangent field on specified spheres, not exponentially many zeros or search traps; zero curl does not guarantee easy optimization either. These continuous geometric facts do not directly yield algorithmic lower bounds for 3-SAT.
+- **A line can thread the seam, while a field must tear**: this is the author's geometric aphorism about witnesses and guidance. The hairy ball theorem guarantees a zero of a tangent field on specified spheres, not exponentially many zeros or search traps; zero curl does not guarantee easy optimization either. These continuous geometric facts do not directly yield algorithmic lower bounds for 3-SAT.
 
 | Perspective | Core Maxim | Geometric Relation Between Line ($NP$) and Field ($P$) (`MODEL`) | Complexity & Proof-Theoretic Meaning |
 | :--- | :--- | :--- | :--- |
 | **Global Static Time Field** | **All lines coexisting *are* the field**<br/>(Author's aphorism; resource models in [@rem-ch30-postselection-ctc-literature]) | The satisfying subspace may be zero or contain multiple assignment witnesses; static coexistence does not select or prepare a witness | Describing satisfaction does not account for solution cost; extra resources need separate specification |
 | **Finite Observer in the Field** | **Having a line does not yield a field**<br/>(Author's aphorism; standard conjecture [@conj-p-neq-np] is `OPEN`) | Checking witnesses and finding them efficiently are different tasks, and $P\subseteq NP$; zero cross-section and curl are analogies | ***"Constructing the field is hard as scaling heaven; following the thread sees through in a single step"***: checking cost depends on encoding and verifier; formal proof checking has its own costs |
 
-This distills the book's philosophy of computation and formal proof into a single couplet: ***"Constructing the field is hard as scaling heaven; following the thread sees through in a single step."*** (**“求场难如登天，顺线一步看穿。”**)
+This distills the book's philosophy of computation and formal proof into a single couplet: ***"Constructing the field is hard as scaling heaven; following the thread sees through in a single step."***
 
 ::: {.viz src="timeless-causal-crystal" height="640"}
 **Interactive laboratory `ORTHO//CAUSAL`**: four scenes on one sphere. The window: two cosines fix the range of the third, and $\det G$ is the squared volume the three vectors span; the pages: on a finite clock all pages exist at once, and conditioning picks one; the field: a gradient flow has a slope everywhere except at the target and the opposite point, and the potential it loses equals the dissipation it pays; the thread: amplitude amplification turns only $2\theta$ per step and arrives after about $(\pi/4)\sqrt{N}$ steps. Reading these as “choice”, “pages”, “field” and “thread” is this book's interpretation (`MODEL`); whether $\mathrm{P} \neq \mathrm{NP}$ remains an open problem, and nothing drawn on the page settles it.

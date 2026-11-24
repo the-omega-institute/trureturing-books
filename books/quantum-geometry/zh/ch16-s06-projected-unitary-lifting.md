@@ -1,4 +1,4 @@
-# 16.6 把同一标量字提升到原始投影酉算子 {#sec-raw-projected-unitary-lifting}
+# L.5 把同一标量字提升到原始投影酉算子 {#sec-raw-projected-unitary-lifting}
 
 二维矩阵里的一个数，怎样决定大空间里的一个投影块？想象先用输入窗口 $\Pi$ 留住一束振幅，经过原始酉算子 $U$，再用输出窗口 $\widetilde\Pi$ 读出。窗口的大小可以不同；输出窗口甚至可以完全关闭。被挡住的振幅仍在空间里，下一次 $U^*$ 会把它带回来。因此只跟踪当前窗口里的分量，不能证明任意长的交替字。
 
@@ -50,7 +50,7 @@ $S(\Psi,x)=\operatorname{seqR}(\Psi,x)$ 的因子按列表从左到右排列，�
 
 例如 $V_E([\alpha])=F_{\widetilde\Pi}(\alpha)U$，而 $V_E([\alpha,\beta])=F_\Pi(\alpha)U^*F_{\widetilde\Pi}(\beta)U$。递归判断的是**尾列表**长度；不能按正在读到的相位下标擅自调换 $U$ 与 $U^*$。$F_J$ 在 $\operatorname{range}J$ 上乘 $e(\theta)$，在其正交补上乘 $e(-\theta)$；若两边维数不同，其行列式也不必为 $1$。
 
-## 16.6.1 两副架：把留在窗内与落在窗外的振幅一起带走 {#两副架把留在窗内与落在窗外的振幅一起带走}
+## L.5.1 两副架：把留在窗内与落在窗外的振幅一起带走 {#两副架把留在窗内与落在窗外的振幅一起带走}
 
 ::: {.definition #def-singular-pair-frames title="任意奇异对及其输入、输出两副架" lean="D5/S3/ContinuousObservables/ProjectedUnitaryLifting.IsSingularPair D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvOf D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvtOf D5/S3/ContinuousObservables/ProjectedUnitaryLifting.rvpOf"}
 $\operatorname{IsSingularPair}(E,\psi,\sigma)$ 表示恰好以下条件：
@@ -129,7 +129,7 @@ $$
 因此必须保留 $b=M_{10}$：下一步的 $00$ 系数含有 $s b$，即使最后只读投影块，也不能提前删除补分量。$\sigma=0,1$ 的作用式已经分别建立，$\psi=0$ 时各式也成立。该定理陈述的是满足奇异对条件的向量，尚不是对任意物理输入态的无条件断言。完整证明由 Lean 内核检查。
 :::
 
-## 16.6.2 从输入窗口的完整格拉姆谱到压缩算子 {#从输入窗口的完整格拉姆谱到压缩算子}
+## L.5.2 从输入窗口的完整格拉姆谱到压缩算子 {#从输入窗口的完整格拉姆谱到压缩算子}
 
 $G=A^*A$ 是正自伴收缩算子，并满足 $\Pi G=G\Pi=G$。源码对 $\operatorname{range}\Pi$ 上的限制算子使用所钉 Mathlib 的有限维对称谱定理，取该**输入子空间**的完整标准正交本征基 $\{\psi_j\}_{j\in\mathrm{Fin}(\dim\operatorname{range}\Pi)}$。它不是只列正奇异值的薄分解，也不是宣称这组向量是整个 $H$ 的基。设 $G\psi_j=\lambda_j\psi_j$；由正性与 $\|A\psi_j\|\le\|\psi_j\|$ 得 $\lambda_j\in[0,1]$，置 $\sigma_j=\sqrt{\lambda_j}$。所有零本征值保留在这组基中。
 

@@ -2,7 +2,7 @@
 
 > *"The traditional Dirac–von Neumann formalism forces complex Hilbert space, Hermitian operators, Born probabilities, Schrödinger unitary evolution, and measurement collapse into physics as five disconnected empirical postulates—planting the century-old measurement paradox of 'continuous unitary evolution versus instantaneous collapse.' Under the origin-free mother axiom $\mathrm{AXIOM}\text{-}\Omega$, none of these five postulates requires an ad hoc assumption: all five emerge in turn as pure geometric theorems when a bounded observer slice $o$ projects the curved minimal circular-arc ternion field ($\mathbb{T}_3 \cong S^3$) onto a flat linear ledger."*
 
-Having formulated the origin-free mother axiom $\mathrm{AXIOM}\text{-}\Omega$ and its five-tier deduction cascade in [§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure)–[§39.2](ch39-s25-axiom-omega-five-tier-deduction-cascade.md#sec-ch39-axiom-omega-five-tier-deduction-cascade), our thirty-nine-chapter main text arrives at its **third foundational summit** (followed in [§39.4](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)–[§39.5](ch39-s28-dyad-relation-future-and-second-order-field.md) by our final two peaks on the self-contained exteriorless ternion and two-order relational field dynamics): turning the lens of $\mathrm{AXIOM}\text{-}\Omega$ straight back onto the foundational bedrock of modern quantum mechanics itself—the **five Dirac–von Neumann textbook postulates**!
+Having formulated the origin-free mother axiom $\mathrm{AXIOM}\text{-}\Omega$ and its five-tier deduction cascade in [§39.1](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md#sec-ch39-axiom-omega-origin-free-ternary-comparison-closure)–[§39.2](ch39-s25-axiom-omega-five-tier-deduction-cascade.md#sec-ch39-axiom-omega-five-tier-deduction-cascade), our thirty-nine-chapter main text arrives at its **third foundational summit** (followed in [§39.4](ch39-s27-self-contained-ternion-particle-and-no-exterior.md)–[§39.6](ch39-s30-past-present-future-rational-jet-triad.md) by our subsequent peaks on the self-contained exteriorless ternion, two-order relational field dynamics, and the `0 · 1/2 · 1` pure rational causal-jet matrix): turning the lens of $\mathrm{AXIOM}\text{-}\Omega$ straight back onto the foundational bedrock of modern quantum mechanics itself—the **five Dirac–von Neumann textbook postulates**!
 
 Why did generations of physicists have to memorize complex Hilbert rays, self-adjoint observables, squared-modulus probabilities, continuous unitary evolution, and abrupt measurement collapse as five separate axioms—with the fourth and fifth locked in apparent contradiction? Because standard presentations skip over the curved, origin-free **minimal circular-arc ternion field** ($\mathbb{T}_3 \cong S^3(1)$) at the top, mistaking the **flat linear reprojection ledger pinned to a local observer slice** for physical reality itself! To be completely explicit about scope: while our opening epigraph states this overarching geometric reduction thesis (`MODEL`), rigorously passing from $\mathrm{AXIOM}\text{-}\Omega$ to all five textbook postulates requires the explicit analytical-completion and operational-measurement bridges `T1–T4` (`H1, H3, H5–H7`: our textbook numbering I state space, II observables, III Born rule, IV unified flow & collapse, V composite tensor maps directly onto [Appendix E §E.5](appendix-e-s05-quantum-postulates.md#sec-appe-quantum)'s Item I state space, Item II observables & Born `H5`, Items III–IV conditioning & unitary flow `H6`, and Item V composite tensor `H7`). Uniting the twenty-three frozen **`LEAN ✓`** kernel declarations of this section's two theorem boxes with that bridge ledger (the overarching ternion-slice projection ontology and unified $\varepsilon_{\mathrm{self}}$-halting collapse interpretation are marked **`MODEL`**; the Hopf quotient, $90^\circ$ tangent-generator flip, singlet cosine correlation, and Pythagorean audits are **`manual derivation` / `NUM`**; Hopf bundles, Stone's theorem, Aronszajn reproducing kernels, and local-tomography reconstructions are **`Literature`**; and single-shot outcome realization alongside relativistic horizon covariance remain **`OPEN`** in [@prob-ch34-single-outcome-realization] and [@prob-appendix-d-time-horizon]), we show how all five postulates emerge transparently under those explicit bridges as orthogonal slice projections of one ternion geometry.
 
@@ -467,6 +467,8 @@ Suppose $k$ is odd. Each special colour has an odd multiplicity at some column. 
 
 When $k$ is even, choose distinct coordinates $i,a,b$. Put unit multiplicity at each of the four cells joining the ordinary rows $\varnothing,\{i,a\}$ to the columns $\{i\},\{b\}$. Only the cell $(\{i,a\},\{i\})$ gives a fixed count, and it gives four at $i$. These rows and columns have normalized count two. The remaining marginal deficits are nonnegative even integers of equal total. Fill them by an even integer profile matrix, adding its entries equally to both special colours. This leaves the parity of every orbit's multiplicity unchanged. The orbit criterion realizes the minimum per-point fixed count at each fixed output, namely the parity of its multiplicity.
 
+In the same four cells and in the same row and column order, put multiplicity two on each diagonal entry and zero off the diagonal. The row and column sums are still two, so the very same even completion works. Every multiplicity is now even, and the orbitwise minimum is zero fixed seeds. Dividing each of the four entries by four recovers the move from the uniform law to the diagonal law on the base of the three-site pyramid. [@ex-ch39-fib-pyramid]
+
 For an odd multiplier it suffices to construct the realization at the least odd $k_0\ge(n+2)/2$. Higher odd multipliers follow by the same even-matrix completion. Consider the bipartite graph with even profiles on the left and odd profiles on the right. Allow an ordinary edge exactly when $p\cap q=\varnothing$, and allow edges from $p_\star$ to any odd profile. We seek a subgraph in which every vertex has odd degree except $p_\star$ and $\{i\}$, which have even degree. Bound the degrees by $k_0$, with bound $k_0-1$ at those two vertices.
 
 Such a subgraph supplies the required multiplicities. Use unit multiplicity on selected ordinary edges. In the special row put multiplicity one at $q=\{i\}$ in each colour. Divide the selected edges incident to $p_\star$ equally between the colours and add two to the assigned colour on each edge. This makes the two special colour sums equal. All normalized margins are now odd and at most $k_0$, so the remaining deficits are even and can be filled by an even matrix. Only the two odd special orbits contribute fixed seeds at the minimum counts, giving four at $i$.
@@ -586,6 +588,45 @@ On both sides the vertices are all subsets of the remaining $n-1$ coordinates. L
 The zero budgets outside $i$ force the marked column to be the singleton $\{i\}$. Every ordinary selected edge $(p,q)$ has empty intersection outside $i$. Put $A=p\setminus\{i\}$ and $B=q^{\mathrm c}\setminus\{i\}$, taking the complement in all $n$ coordinates. The intersection condition on ordinary edges becomes $A\subseteq B$. The original profile parities determine $p$ and $q$ uniquely from $A$ and $B$. Both contain $i$ exactly when $A$ and $B$ both have odd size. The all-ones row and the marked column each map to $T$. The mark contributes one unit in the all-ones row, whose other cells carry no cost. Relabelling edges preserves degrees, with the marked bit determining which degree requirements apply. Recovering $p,q$ then gives a seed realization by the parity factor criterion. The full proof is checked by the Lean kernel.
 :::
 
+**Restricting ordinary edges to adjacent ranks.** In the full inclusion graph, one may restrict ordinary edges to $A=B$ or $A\subsetneq B$ with $|B|=|A|+1$. The exceptional row $T$ keeps its allowed outgoing edges and both degree choices remain available. The minimum budget in this restricted graph bounds the full inclusion minimum from above.
+
+::: {.theorem #thm-omega-rank-cut-diagonal-parity lean="D5/S3/Combinatorics/Graph/RankCuts/RankedBipartiteDiagonalParity.diagonal_parity" title="Diagonal parity from a bipartite rank cut"}
+Take two copies of a finite vertex set with a natural-number rank $\rho$ and a nonnegative integer edge weight $e(A,B)$ for each ordered pair. Fix an exceptional row $T$ and a rank $r<\rho(T)$. Outside row $T$, every positive edge satisfies $A=B$ or $\rho(A)<\rho(B)$. Suppose that at every vertex of rank at most $r$, both its row and its column have odd total edge weight. Then
+$$
+\sum_{\rho(A)=r} e(A,A)
+\equiv
+|\{A:\rho(A)=r\}|+\sum_{\rho(B)\le r} e(T,B)
++\sum_{\rho(A)<r<\rho(B)} e(A,B)
+\pmod 2.
+$$
+:::
+
+::: {.proof}
+Sum the row totals through rank $r$ and do the same for the column totals. Both prefixes contain the same number of odd-degree vertices, so the sums have equal parity. Cancel the edges internal to both prefixes. The outgoing and incoming weights across the cut therefore have equal parity. All incoming weight comes from $T$. Outgoing weight splits into edges starting at rank $r$ and edges strictly bypassing it. In the rank-$r$ rows, the total weight consists of diagonal weight and outgoing weight, and its parity equals the size of the layer. Substitution gives the formula.
+:::
+
+In the one-coordinate Boolean lattice, put $\rho(A)=|A|$ and give each selected edge weight one and all other edges weight zero. At each odd rank below $T$, the formula constrains the parity of the number of charged diagonal edges. If ordinary edges are restricted to covers and diagonals, the bypass term is zero and the other terms are the layer size and the number of edges entering the prefix from the exceptional row. Under full inclusion, an ordinary edge contributes once at each rank strictly between its endpoints, even when the edge itself has zero cost.
+
+::: {.theorem #thm-omega-rank-capacity lean="D5/S3/Combinatorics/Graph/RankCuts/RankedBipartiteCapacity.paid_edges_ge_rank_capacity" title="Odd-rank capacity deficits bound the charged weight"}
+Use two copies of the same finite vertex set with natural-number rank $\rho$ and nonnegative integer edge weight $e(A,B)$. Outside row $T$, each positive edge satisfies $A=B$ or $\rho(A)<\rho(B)$. Each ordinary row and column has total edge weight between $1$ and $k$. For any finite set $R$ of odd ranks below $\rho(T)$, put
+$$
+\begin{aligned}
+L_r &= |\{A:\rho(A)\le r\}|-k|\{A:\rho(A)<r\}|-\sum_{\rho(B)\le r}e(T,B),\\
+H_r &= |\{A\ne T:\rho(A)\ge r\}|-k|\{A\ne T:\rho(A)>r\}|-\sum_{A\ne T,\ \rho(A)\ge r}e(A,T) .
+\end{aligned}
+$$
+
+Then the total edge weight from ordinary odd-rank rows to odd-rank columns satisfies
+$$
+\sum_{\substack{A\ne T\\\rho(A),\,\rho(B)\ \mathrm{odd}}} e(A,B)
+\ \ge\ \sum_{r\in R}\max(0,L_r,H_r).
+$$
+:::
+
+::: {.proof}
+Every column of rank at most $r$ needs at least one unit of edge weight. Rows below $r$ and row $T$ can supply some of this weight. The only other edges that reach these columns are rank-$r$ diagonals. This gives $L_r$. In the other direction, every ordinary row of rank at least $r$ must send out at least one unit. Its options are ordinary columns above $r$, column $T$ with its separate capacity, and rank-$r$ diagonals. This gives $H_r$. The same nonnegative diagonal weight must satisfy both bounds. Different odd ranks give disjoint sets of charged diagonal edges, so their bounds add. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.theorem #thm-omega-adjacent-rank-counterexample lean="D5/S3/ConceptDynamics/Attribution/ParitySeedAdjacentRanks.result" title="Restricting to adjacent ranks can raise a one-coordinate budget"}
 Take dimension eight, multiplier three and coordinate zero. The Boolean lattice above admits a factor costing at most $36$ fixed seeds on that coordinate, with zero on every other coordinate. If every ordinary edge $A\to B$ must instead satisfy $A=B$ or add exactly one element to $A$, every factor satisfying the original degree conditions costs at least $40$ fixed seeds. The allowed edges from the full-subset row and the two marked endpoint degree conditions are as in the original criterion.
 :::
@@ -594,6 +635,58 @@ Take dimension eight, multiplier three and coordinate zero. The Boolean lattice 
 An explicit factor on the full inclusion graph meets the $36$-seed budget, as checked edge by edge and vertex by vertex. In the restricted graph the ordinary paid edges are diagonal in odd ranks. Write $d_r$ for the number at rank $r$. The eight columns in ranks zero and one need at least one edge each. The empty-set row can supply at most three and the full-subset row at most two, so $d_1\ge3$. At most two edges from the seven rank-six rows can reach the rank-seven column, leaving at least five diagonal edges in rank six. The seven rank-six columns have total capacity at most twenty-one, leaving at most sixteen edges from rank five. The twenty-one rank-five rows therefore require $d_5\ge5$.
 
 With just eight ordinary paid edges, $d_1=3$, $d_5=5$ and $d_3=0$, and both edges from the full-subset row must enter ranks zero or one. The thirty-five rank-three rows all have odd degree and now send every edge to rank four, so an odd number of edges leave ranks zero through three. The rows and columns of ranks zero through three are indexed by the same subsets and have degree sums of the same parity. Subtract the internal edges from each sum. The number of outgoing edges then has the same parity as the number of incoming edges, which consists of the two edges from the full-subset row. This forces at least nine ordinary paid edges. The mark adds one unit, giving a cost of at least $4(1+9)=40$ fixed seeds.
+:::
+
+For dimension $16$ and multiplier $3$, the one-coordinate Boolean lattice has $15$ free coordinates and layer sizes $\binom{15}{r}$. With the marked edge selected in the original table, both copies of $T$ have degree at most $2$. Each sum involving $T$ in the two formulas is at most $2$. The lower-side deficits at $r=1,3$ are at least $11$ and $211$, respectively. The upper-side deficits at $r=11,13$ are at least $213$ and $73$, respectively. Any realization with zero fixed-seed budgets at all other coordinates therefore needs at least $4(1+11+211+213+73)=2036$ fixed seeds at the chosen coordinate. The $1$ comes from the marked column. With the marked edge absent from the original table, both copies of $T$ have degree at most $1$. The lower bound for each of the same four deficits increases by one and the lower bound in this case is $4(1+512)=2052$.
+
+The four capacity deficits depend on the layer sizes of the remaining fifteen coordinates. The full-inclusion lower bound is therefore $2036$ when fixed seeds are allowed at any one designated coordinate. The construction below attains this bound at coordinate $0$. Swapping the label of $0$ with that of the designated coordinate relabels both subset families and preserves inclusion, ranks, degrees, and charged edge counts. The minimum full-inclusion budget is therefore exactly $2036$ at every designated coordinate. [Budget equivalence under coordinate relabeling](lean:D5/S3/ConceptDynamics/Attribution/AxisBudgets/CoordinateRelabel.axis_feasibility_iff) [Lower bound at an arbitrary marked coordinate](lean:D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteenCovers.full_budget_ge)
+
+**Counting jumps from cut parities.** At a cut of rank $r$, count ordinary edges from a rank strictly below $r$ to a rank strictly above $r$. Each such edge is a jump over at least one rank. Take the parity of this count along any nondecreasing list of sampled ranks and add a zero at each end. Each jump crosses a contiguous block of samples, so a change in parity requires a jump to enter or leave the count there. Each jump provides at most two such boundaries. The number of parity changes is therefore at most twice the number of jumps. [Lean proof of the parity bound](lean:D5/S3/Combinatorics/Graph/RankCuts/RankedIntervalParity.changes_le_twice_jumps)
+
+The pattern $1,0,1$ becomes $0,1,0,1,0$ and forces at least two jumps. The pattern $1,1,1$ becomes $0,1,1,1,0$ and forces at least one. To attain either bound, a factor must place the jump endpoints on allowed inclusion edges and satisfy its degree and budget constraints.
+
+::: {.theorem #thm-omega-fourteen-two-rank-jumps lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionFourteenJumps.two_jumps_at_640" title="At least two rank jumps within budget 640 in dimension fourteen"}
+Take dimension $14$, multiplier $3$, and any marked coordinate. Keep the full-inclusion support rule and both marked-edge degree modes. Every binary factor within budget $640$ has at least two ordinary edges with $|B|\ge |A|+2$.
+:::
+
+::: {.proof}
+The remaining $13$ coordinates have layers of size $\binom{13}{r}$. Let $I_1$ count the edges from the exceptional row $T$ into ranks $0$ and $1$. The lower-side capacity bound requires at least $11-I_1$ diagonals at rank $1$, so $I_1\le 2$ gives at least $9$. The lower-side deficit at rank $3$ is at least $378-3\cdot92-2=100$. The upper-side deficit at rank $11$ is at least $91-3\cdot13-2=50$.
+
+Budget $640$ permits at most $640/4-1=159$ charged ordinary edges, exactly the sum of the three lower bounds. Thus $I_1=2$, and there are no diagonals at ranks $5,7,9$. The exceptional row has degree at most two, so it sends exactly two edges into each of these three rank prefixes. Substituting into [@thm-omega-rank-cut-diagonal-parity] makes the ordinary crossing counts at ranks $5,7,9$ odd, even, and odd, respectively. Padding by zeros gives four parity changes, which require at least two rank jumps.
+:::
+
+::: {.theorem #thm-omega-fourteen-two-rank-jumps-attainment lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionFourteenAttainment.result" title="Two rank jumps suffice in dimension fourteen"}
+At coordinate $0$, a dimension-$14$ factor at multiplier $3$ satisfies the full-inclusion degree and support conditions with budget at most $640$ and exactly two ordinary rank jumps.
+:::
+
+::: {.proof}
+The construction encodes the subsets of the $13$ free coordinates as binary masks. Its row and column lists specify the same binary table. The certificate checks the degree and support conditions and counts $159$ charged ordinary entries. Including the contribution of the marked column gives $4(1+159)=640$.
+
+The only candidate jumps in ordinary rows are $15\to63$ and $255\to1023$. The first goes from the first four free coordinates to the first six, and the second goes from the first eight to the first ten. Every other ordinary entry adds at most one free coordinate. The lower bound in [@thm-omega-fourteen-two-rank-jumps] forces both jumps, across ranks $5$ and $9$ respectively. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-omega-sixteen-full-budget lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteen.full_budget_iff" title="The exact budget for full inclusion in dimension sixteen"}
+Take dimension $16$ and multiplier $3$, with a nonzero fixed-seed budget allowed only at coordinate $0$. For every nonnegative integer $b$, the full inclusion graph admits a factor within budget $b$ if and only if $b\ge2036$. A feasible factor satisfies the degree, support and charge conditions above.
+:::
+
+::: {.proof}
+The four capacity deficits above give necessity. The attaining construction specifies a binary edge table on the $2^{15}$ subsets on each side. Its certificate checks the allowed edges, the degrees on both sides and the charge block by block. It has $508$ charged edges. Exactly one ordinary edge spans more than one rank, from the subset of the first four free coordinates to the subset of the first ten. The same factor works for every $b\ge2036$.
+:::
+
+::: {.theorem #thm-omega-sixteen-cover-budget-lower lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteenCovers.cover_budget_ge" title="A lower bound for adjacent ranks in dimension sixteen"}
+Use the same dimension, multiplier and coordinate. Restrict ordinary edges to the diagonal and to inclusions that add exactly one element. Keep the outgoing edge rule for $T$ and both degree choices above. Every feasible budget $b$ satisfies $b\ge2044$.
+:::
+
+::: {.proof}
+If at most one edge from $T$ enters ranks $0$ through $3$, the lower-side deficit increases by at least one at each of ranks $1$ and $3$. If two edges enter, the degree cap at $T$ makes the exceptional inflow exactly two into each prefix ending at ranks $5$, $7$ and $9$. Each of these layers has odd size and no ordinary edge bypasses it. The diagonal parity formula therefore forces at least one charged diagonal edge in each layer. Both cases require at least $510$ charged edges, so the budget is at least $4(1+510)=2044$.
+:::
+
+::: {.theorem #thm-omega-sixteen-cover-refutation lean="D5/S3/ConceptDynamics/Attribution/AxisBudgets/DimensionSixteen.result" title="The adjacent-rank restriction excludes feasibility at budget 2036"}
+In the same sixteen-dimensional model, feasibility at budget $2036$ in the full inclusion graph fails to imply feasibility in the adjacent-rank graph.
+:::
+
+::: {.proof}
+The full inclusion graph is feasible at $2036$, while the adjacent-rank lower bound is $2044$.
 :::
 
 **An optimal uniform calibration for rational marginals.** Let $G$ act on finite input and output sets $X$ and $Y$, let $P$ be a $G$-covariant probability kernel, and let $H$ be any subgroup. If a positive integer $m$ makes every $mP(x,y)$ integral, a uniform seed law attains the maximum $H$-fixed mass. One sufficient seed count is $m|\det B|$, where $B$ is an invertible square submatrix of the integer constraint matrix below, using the positive support of a suitable optimizer as its columns.
@@ -781,9 +874,9 @@ We synthesize the complete derivation of all five Dirac–von Neumann postulates
 
 ---
 
-**From the Five Quantum Postulates to the Final Two Sections of Chapter 39: Why the Ternion Itself Is an Exteriorless Self-Contained Topological Particle and Relational Field.** Under the explicit `T1–T4` bridges of [Appendix E §E.5](appendix-e-s05-quantum-postulates.md#sec-appe-quantum), our $\mathrm{AXIOM}\text{-}\Omega$ projection synthesis (`MODEL`) reduces all five empirical postulates of textbook quantum mechanics to orthogonal slice-projection theorems of ternion fields—complex numbers from the observer's $90^\circ$ blind zone, Hermitian operators from flipping spherical tangents onto the real axis, Born probabilities from calibrated round-trip ray kernels and additive trace uniqueness, tensor entanglement from multi-ternion product reprojection, and "wavefunction collapse" from an internal observer pressing the idempotent $\varepsilon_{\mathrm{self}}$ halting key while folding unread interference remainders into the river of future time.
+**From the Five Quantum Postulates to the Subsequent Sections of Chapter 39: Why the Ternion Itself Is an Exteriorless Self-Contained Topological Particle and Relational Field.** Under the explicit `T1–T4` bridges of [Appendix E §E.5](appendix-e-s05-quantum-postulates.md#sec-appe-quantum), our $\mathrm{AXIOM}\text{-}\Omega$ projection synthesis (`MODEL`) reduces all five empirical postulates of textbook quantum mechanics to orthogonal slice-projection theorems of ternion fields—complex numbers from the observer's $90^\circ$ blind zone, Hermitian operators from flipping spherical tangents onto the real axis, Born probabilities from calibrated round-trip ray kernels and additive trace uniqueness, tensor entanglement from multi-ternion product reprojection, and "wavefunction collapse" from an internal observer pressing the idempotent $\varepsilon_{\mathrm{self}}$ halting key while folding unread interference remainders into the river of future time.
 
-Next, we step into the chapter's fourth section, [§39.4 The Self-Contained Ternion Topological Particle, Field–Wave–Particle Grade Identity, and Fourfold Proof of "No Exterior"](ch39-s27-self-contained-ternion-particle-and-no-exterior.md) (before crowning Chapter 39 in [§39.5](ch39-s28-dyad-relation-future-and-second-order-field.md) on two-order relational field dynamics), to ask directly of $\mathbb{T}_3 \cong S^3(1)$ itself: **why is this closed manifold—refusing linear coordinates yet everywhere homogeneous and isotropic—simultaneously a field, a wave, and a self-contained particle, eradicating extrinsic Point $C$ and leaving zero "outside" in the cosmos?**
+Next, we step into the chapter's fourth section, [§39.4 The Self-Contained Ternion Topological Particle, Field–Wave–Particle Grade Identity, and Fourfold Proof of "No Exterior"](ch39-s27-self-contained-ternion-particle-and-no-exterior.md) (continuing onward into [§39.5](ch39-s28-dyad-relation-future-and-second-order-field.md)–[§39.6](ch39-s30-past-present-future-rational-jet-triad.md) on two-order relational field dynamics and the `0 · 1/2 · 1` pure rational causal-jet matrix), to ask directly of $\mathbb{T}_3 \cong S^3(1)$ itself: **why is this closed manifold—refusing linear coordinates yet everywhere homogeneous and isotropic—simultaneously a field, a wave, and a self-contained particle, eradicating extrinsic Point $C$ and leaving zero "outside" in the cosmos?**
 
 ::: {.viz src="axiom-omega-five-qm-postulates-sandbox" height="620"}
 Full laboratory: drag the amber spinor bead across the violet torus to vary blind-zone phase $\chi$ and meridian ray angle $\theta$, and adjust the postulate sliders (turn angle $\vartheta$, halting pinch strength $\lambda$, and Alice axis angle $\gamma$) across one spinor body, Bloch sphere, and ledger station to verify the Hopf blind-zone quotient, skew-adjoint tangent flip and Robertson uncertainty, Gleason–Busch quadratic trace rigidity, global Stinespring isometry paired with local Lüders pinching, and the shared-singlet Tsirelson bound $2\sqrt{2}$. Frozen statements, literature and `T1–T4` bridge scope, numerics, and open questions are labeled separately in the evidence panel and theory drawer.

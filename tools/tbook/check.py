@@ -20,7 +20,7 @@ from pathlib import Path
 from . import config, evidence, lean, mdscan, pandoc, paths, render, viz
 from .model import (DEFINITION, FORMAL, MEDIA, NUMBERED, OPEN, PROOF, WRITTEN_PROOF, EditionModel, Issue, load_book_models, kind_of,
                     media_cited_gids)
-from .summary import Chapter, Summary, chapter_prefix
+from .summary import Chapter, Summary, chapter_prefix, numbered_depth_message
 
 
 def _err(issues: list[Issue], path: Path | None, line: int, msg: str) -> None:
@@ -574,7 +574,11 @@ def check_lean(models_by_book: dict[str, dict[str, EditionModel]], lock: lean.Lo
             f"could not verify that pinned commit {lock.commit[:12]} is on {where}: {anc.detail}")
     for gid, uses in sorted(cited.items()):
         path, line, _ = uses[0]
-        res = lock.get(gid)
+        try:
+            res = lock.get(gid)
+        except lean.LeanError as exc:
+            _err(issues, paths.LOCK_FILE, 0, str(exc))
+            continue
         if res is None:
             _err(issues, path, line, f"{gid} is not in trureturing.lock.json; run ./tbook pin --refresh")
             continue
@@ -591,7 +595,7 @@ def check_lean(models_by_book: dict[str, dict[str, EditionModel]], lock: lean.Lo
             else:
                 _err(issues, path, line, str(exc))
             continue
-        for fld in ("name", "kind", "module", "statement_id"):
+        for fld in ("name", "kind", "module", "statement_id", "axioms"):
             if getattr(live, fld) != getattr(res, fld):
                 _err(issues, paths.LOCK_FILE, 0,
                      f"{gid}: lock says {fld}={getattr(res, fld)!r} but {lock.repo_name}@{lock.commit[:12]} says "
@@ -660,7 +664,10 @@ def run(books: list[config.Book], *, offline: bool = False) -> list[Issue]:
         lock = None
     models_by_book: dict[str, dict[str, EditionModel]] = {}
     for book in books:
-        from . import derived
+        from . import derived, page_lines
+
+        for path, actual, limit in page_lines.check_book(book):
+            _err(issues, path, limit + 1, page_lines.message(actual, limit))
 
         try:
             derived.refresh(book)
@@ -680,6 +687,16 @@ def run(books: list[config.Book], *, offline: bool = False) -> list[Issue]:
         models_by_book[book.slug] = models
         for model in models.values():
             issues.extend(model.issues)
+            if model.summary is not None:
+                if book.max_chapters is not None:
+                    actual = model.summary.numbered_chapter_count()
+                    if actual > book.max_chapters:
+                        _err(issues, model.summary.path, 0,
+                             f"{actual} top-level numbered chapters exceed book.max_chapters = {book.max_chapters}. "
+                             "Integrate content into an existing thematic chapter (--parent) or reorganize within the cap.")
+                if book.max_chapter_depth is not None:
+                    for ch in model.summary.exceeding_numbered_depth(book.max_chapter_depth):
+                        _err(issues, model.summary.path, ch.line, numbered_depth_message(ch, book.max_chapter_depth))
             check_env_policy(model, issues, mode=site.trureturing_mode)
             check_orphans(model, issues)
             check_headings(model, issues)

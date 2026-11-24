@@ -1,4 +1,4 @@
-# 16.4 From Interval Sums of Squares to Continuous Matrix Completion {#sec-interval-sos-completion}
+# L.3 From Interval Sums of Squares to Continuous Matrix Completion {#sec-interval-sos-completion}
 
 
 **What is missing at the endpoint?** Take $p(x)=x/2$. If the real target $p$ itself must occupy the diagonal, the condition $p(x)^2+(1-x^2)Q(x)^2=1$ gives the impossible equality $1/4=1$ at $x=1$. The missing weight can instead enter the imaginary part of the diagonal: choose

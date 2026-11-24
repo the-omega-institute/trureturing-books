@@ -394,14 +394,14 @@ section: "第五部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">命题17.4 · 定理19.11</p>
+  <p class="kicker">命题17.4 · 定理19.12</p>
   <h2 class="t">光锥决定度规；离散桥图上<em>最大流等于最小割</em></h2>
 <TheoremCard class="compact mt-s" label="命题17.4" title="零锥决定二次型" gid="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null" cite="prop-null-cone-rigidity">
 
 设 $S$ 是 $\operatorname{Space}(d)$ 上的实二次型。若 $\operatorname{minkowski}_d(v) = 0$ 总推出 $S(v) = 0$，则 $S = S(1, 0) \cdot \operatorname{minkowski}_d$。
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="定理19.11" title="离散桥图量子最大流最小割" gid="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result" cite="thm-bridge-quantum-maxflow-mincut">
+<TheoremCard class="compact mt-s" label="定理19.12" title="离散桥图量子最大流最小割" gid="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result" cite="thm-bridge-quantum-maxflow-mincut">
 
 对自然数 $0 < a \le b$、$0 < c \le d$，若 $a^2 + b^2 \le 3ab$ 且 $c^2 + d^2 \le 3cd$，则宽度三桥图上 $\operatorname{QMaxFlow} = \operatorname{QMinCut} = \min(ad, bc)$。
 
@@ -732,9 +732,9 @@ section: "第九部与第十部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">定理36.36 · 定理38.7</p>
+  <p class="kicker">定理36.15 · 定理38.7</p>
   <h2 class="t">非正交的态<em>不能深拷贝</em>；平方双覆叠<em>没有连续截面</em></h2>
-<TheoremCard class="compact mt-s" label="定理36.36" title="禁通用深拷贝的内积判据（第 2 款）" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
+<TheoremCard class="compact mt-s" label="定理36.15" title="禁通用深拷贝的内积判据（第 2 款）" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
 
 设 $U$ 是 $H \otimes H$ 上的复线性等距同构。若单位向量 $\psi, \phi$ 与同一个单位空白态满足 $U(\psi \otimes \mathrm{blank}) = \psi \otimes \psi$、$U(\phi \otimes \mathrm{blank}) = \phi \otimes \phi$，则 $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$，且 $\phi = \psi$ 或 $\langle\phi, \psi\rangle = 0$。
 

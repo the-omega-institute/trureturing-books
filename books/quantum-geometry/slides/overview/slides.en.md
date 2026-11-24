@@ -394,14 +394,14 @@ section: "Part V · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Proposition 17.4 · Theorem 19.11</p>
+  <p class="kicker">Proposition 17.4 · Theorem 19.12</p>
   <h2 class="t">The light cone fixes the metric; on the bridge graph <em>max-flow equals min-cut</em></h2>
 <TheoremCard class="compact mt-s" label="Proposition 17.4" title="Null-cone quadratic-form rigidity" gid="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null" cite="prop-null-cone-rigidity">
 
 Let $S$ be a real quadratic form on $\operatorname{Space}(d)$. If $\operatorname{minkowski}_d(v) = 0$ always implies $S(v) = 0$, then $S = S(1, 0) \cdot \operatorname{minkowski}_d$.
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="Theorem 19.11" title="Discrete bridge-graph quantum max-flow min-cut" gid="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result" cite="thm-bridge-quantum-maxflow-mincut">
+<TheoremCard class="compact mt-s" label="Theorem 19.12" title="Discrete bridge-graph quantum max-flow min-cut" gid="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result" cite="thm-bridge-quantum-maxflow-mincut">
 
 For natural numbers $0 < a \le b$, $0 < c \le d$ with $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$, the width-three bridge graph has $\operatorname{QMaxFlow} = \operatorname{QMinCut} = \min(ad, bc)$.
 
@@ -732,9 +732,9 @@ section: "Parts IX–X · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 36.36 · Theorem 38.7</p>
+  <p class="kicker">Theorem 36.15 · Theorem 38.7</p>
   <h2 class="t">Non-orthogonal states <em>cannot be deep-copied</em>; the double cover <em>has no section</em></h2>
-<TheoremCard class="compact mt-s" label="Theorem 36.36" title="No universal deep copy: the inner-product criterion (item 2)" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
+<TheoremCard class="compact mt-s" label="Theorem 36.15" title="No universal deep copy: the inner-product criterion (item 2)" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
 
 Let $U$ be a complex linear isometric equivalence of $H \otimes H$. If unit vectors $\psi, \phi$ and one unit blank state satisfy $U(\psi \otimes \mathrm{blank}) = \psi \otimes \psi$ and $U(\phi \otimes \mathrm{blank}) = \phi \otimes \phi$, then $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$, and $\phi = \psi$ or $\langle\phi, \psi\rangle = 0$.
 

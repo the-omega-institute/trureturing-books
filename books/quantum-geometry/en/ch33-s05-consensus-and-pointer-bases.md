@@ -1,6 +1,6 @@
 # 34.5 Multi-Observer Consensus Tensor, Emergent Pointer Basis, and No Observer-Independent Facts {#sec-ch33-consensus-decoherence-pointer}
 
-> “观察者的共识选择决定了去相干方向, 没有绝对客观存在” — "Observers' consensus choice determines the direction of decoherence; there is no absolute objective existence."
+> *"Observers' consensus choice determines the direction of decoherence; there is no absolute objective existence."*
 
 The preceding four sections dissolved the cliff between "living subjects" and "inanimate objects" and showed how two phase-resonant beings braid into a mutual-attractor double helix. Yet to uproot the hidden external referee $C$ once and for all, we must confront the central question of decoherence theory directly (verbatim ledger entry `A76` in [Appendix A](appendix-a-s03-verbatim-ledger.md#sec-appendix-a-verbatim-ledger)): **when a multitude of observers gather into a macroscopic environment, why does a quantum state decohere along one particular "classical pointer basis" rather than another? Stripped of a concrete population of observer axes, does nature pre-inscribe any privileged "absolutely objective" coordinate frame at all?**
 

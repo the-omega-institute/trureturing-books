@@ -1,4 +1,4 @@
-# 16.5 From the complete polynomial pair to phases on the whole signed circle {#sec-phase-synthesis}
+# L.4 From the complete polynomial pair to phases on the whole signed circle {#sec-phase-synthesis}
 
 The previous section supplies all four matrix entries. A separate question remains: can this **same matrix field** be written as a finite ordered product of signals and phases? We first remove the last step at the polynomial level, then restore each step as a matrix product on the circle, keeping the completion witnesses throughout.
 
