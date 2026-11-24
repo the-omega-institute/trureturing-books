@@ -604,7 +604,7 @@ a^2+(1-a)^2/3,& a>1/2.
 \end{aligned}
 $$
 
-记 $c_k=\cos(\pi k/3)$、$d_k=\cos(2\pi k/3)$。在 $c_k+d_k$ 的每个等值集合内，$c_k-d_k$ 之和为零。因此对合并读数 $c_k+d_k$ 用阈值 $2a$ 求最优权重，就得到 $M_1(v)=M_2(v)=a$。当阈值越过 $1/2$，剩余类 $2,4$ 的仿射权重被截为零。两段公式在交界处一致。
+记 $c_k=\cos(\pi k/3)$、$d_k=\cos(2\pi k/3)$。在 $c_k+d_k$ 的每个等值集合内，$c_k-d_k$ 之和为零。因此对合并读数 $c_k+d_k$ 用阈值 $2a$ 求最优权重，就得到 $M_1(v)=M_2(v)=a$。当阈值越过 $1/2$，剩余类 $2,4$ 的仿射权重被截为零。两段公式在交界处一致。 [模六最优值与单模比较的 Lean 证明](lean:D5/S3/Fourier/Concentration/SixResidueMomentOptimum.six_two_mode_optimum)
 
 对任意实权重 $w$，只要求 $\sum_k w_k=1$。记 $m=M_1(w)+M_2(w)-2a$，则精确余量为
 

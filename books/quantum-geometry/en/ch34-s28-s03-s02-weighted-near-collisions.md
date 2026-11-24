@@ -604,7 +604,7 @@ a^2+(1-a)^2/3,& a>1/2.
 \end{aligned}
 $$
 
-Write $c_k=\cos(\pi k/3)$ and $d_k=\cos(2\pi k/3)$. On each set where $c_k+d_k$ is constant, the values of $c_k-d_k$ sum to zero. Minimizing squared mass for the combined readout $c_k+d_k$ at threshold $2a$ therefore gives $M_1(v)=M_2(v)=a$. The affine weights at residues $2,4$ are clipped to zero as the threshold passes $1/2$. Both formulas agree at that boundary.
+Write $c_k=\cos(\pi k/3)$ and $d_k=\cos(2\pi k/3)$. On each set where $c_k+d_k$ is constant, the values of $c_k-d_k$ sum to zero. Minimizing squared mass for the combined readout $c_k+d_k$ at threshold $2a$ therefore gives $M_1(v)=M_2(v)=a$. The affine weights at residues $2,4$ are clipped to zero as the threshold passes $1/2$. Both formulas agree at that boundary. [Lean proof of the modulo-six optimum and one-mode comparison](lean:D5/S3/Fourier/Concentration/SixResidueMomentOptimum.six_two_mode_optimum)
 
 For any real weights $w$ of total mass one, set $m=M_1(w)+M_2(w)-2a$. The exact remainder is
 
