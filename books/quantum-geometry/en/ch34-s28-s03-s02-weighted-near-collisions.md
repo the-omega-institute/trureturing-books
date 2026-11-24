@@ -798,6 +798,24 @@ The second limit implies that for any fixed $\varepsilon>0$, the part of the res
 
 On the fixed support of the lattice law, the first and second cosine deficits, multiplied by $q^2$, have limiting weighted sums $\lambda/4$ and $\lambda$. Over the full cycle each rescaled deficit sums to $\lambda$ because both constraints are tight. For $\lambda=0$ the pointwise upper bound one forces both moment equalities as soon as the weight is feasible. Nonnegativity then makes the second deficit outside the fixed support tend to zero. On $c_i\ge0$ it bounds $1-c_i$ after division by two, and on $c_i<0$ it bounds $1+c_i$ after the same division. Thus the first deficit over $A_q$ tends to $3\lambda/4$, and its difference from twice the rescaled mass tends to zero. This argument splits off a finite sum and bounds its remainder before passing to the limit. The related proof for character sums uses this method to compare a finite Dirichlet polynomial with a logarithmic derivative. [Character-sum tail bound](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)
 
+### The energy gap on even and odd cycles
+
+At fixed $\lambda>0$, put $m=\lambda/(8\pi^2)$ and write $w_j=(t-j^2)_+/Z$ for the lattice law. Its fourth moment is $m_4=\sum_j j^4w_j$. Along either parity of modulus,
+$$
+\lim_{q\to\infty} q^2\bigl(L(m)-E_q(1-\lambda/q^2)\bigr)
+=\frac2Z\left[(t-d^2)\frac{3\lambda}{8}+\frac{4\pi^2}{3}m_4\right],
+$$
+where $d=0$ for even $q$ and $d=1/2$ for odd $q$. The closest sampled cosine to $-1$ sits a half step from the antipode on odd cycles. This makes the odd coefficient smaller by $3\lambda/(16Z)$. The fourth moment contributes the same term on both parities.
+
+Write $h=2\pi/q$ and $C=-\cos(dh)$. In the quadratic certificate
+$$
+p_q(c)=\frac{t-h^{-2}(1-c^2)-\beta_q(1-c)}{Z},
+\qquad \beta_q=\frac{t-h^{-2}(1-C^2)}{1-C},
+$$
+one root is exactly $C$. The other root $\rho_q$ has $(1-\rho_q)/h^2\to t/2$. Factoring shows that the positive part is supported in a fixed front window, so the fourth-order cosine expansion can be summed there. At an activation endpoint the undisplaced weight of the boundary site is zero. Its squared positive part after perturbation is $O(h^4)$, so it does not change the coefficient at order $h^2$. [Cosine series](https://dlmf.nist.gov/4.19.E2)
+
+The certificate bounds the energy of every feasible weight by completing the square. To attain that bound to order $h^2$, adjust the mass at zero and its nearest neighbors and add mass at the closest antipodal level, imposing both moment equalities. The front corrections are $O(h^2)$ and the added mass is asymptotic to $3mh^2/4$. For a fixed positive budget the three adjusted front sites have positive limiting weights, so the construction is feasible for all sufficiently large moduli, including at activation endpoints. The statement concerns the finite cycle at fixed budget. The weighted high-order arithmetic estimate for the actual ζ ordinates remains open. [Derivation and hypotheses](https://github.com/the-omega-institute/trureturing/issues/33993#issuecomment-7146572104)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
