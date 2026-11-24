@@ -188,6 +188,14 @@ $$
 包含 $\ast$ 的四圈依次经过 $p$、$m(v)$ 和 $v$。含 $\ast$ 的四圈以外的顶点都可用作起点 $a$。从 $a$ 分别按两种次序各走一次两套匹配的边，到达 $d$ 和 $m(b)$。两条路终点相同，当且仅当 $a$ 所在的分量是一个四圈。若 $4\mid r$，总点数 $r+2$ 除以四余二，所以至少有一个分量的大小达到六。完整证明由 Lean 内核检查。
 :::
 
+如果可以选择删去哪个点，就要看该点的配对何时与其余每套配对可交换。把 $\ast$ 作为单位元，令原点 $x$ 满足 $x\cdot x=\ast$，不同原点的乘积 $x\cdot y$ 取它们所在块的第三点。这给出斯坦纳环 $L$。沿 $x$ 的匹配走一步就是乘以 $x$。上面的四圈判据于是说，删去 $p$ 后，所有允许的换块都失败，当且仅当
+$$
+p\cdot(v\cdot a)=v\cdot(p\cdot a)
+$$
+对所有 $v,a\in L$ 成立。对原本不能用作起点的四圈顶点，等式由四圈本身给出。由于乘法可交换，这一等式恰要求 $p$ 与任意两点满足中心元素的结合律。
+
+因此，**删去 $p$ 后存在极大换块，当且仅当 $p$ 不在 $L$ 的中心**。单位元在中心，故在原来的 $r+1$ 个点中，允许成功换块的删点选择恰有 $r+2-|Z(L)|$ 个。在三元系的语言中，被排除的原点恰是 Veblen 点。它们要求每个保留块 $\{a,v,b\}$ 都能补成含 $\{m(a),v,m(b)\}$ 的 Pasch 构形，这正是换块失败时补全三角形的条件。 [中心判据](lean:D5/S3/Combinatorics/Matroids/SteinerSwitchCentre.admits_switch_iff_not_central) · [删点计数](lean:D5/S3/Combinatorics/Matroids/SteinerSwitchCentre.ncard_admits_switch) · [Veblen 点与环中心](https://doi.org/10.1002/jcd.21964)
+
 若 $4\mid r$，且存在一个 $r+1$ 点的完备斯坦纳三元系，就能在一个余数类中成功换块。对满足这两个条件的正整数 $r$，取正整数 $d$ 并沿用本节的跨行条件，则饱和扩充的两个最大大小为 [@thm-joint-circuit-steiner-matching-first-deficit] 中的 $N_{\max}$ 和 $N_{\max}-1$。[删点情形的 Lean 证明](lean:D5/S3/Combinatorics/Matroids/SteinerAlternatingSwitches.point_deleted_first_deficit_of_four_dvd)
 
 例如在 $\mathbb F_3^2$ 的仿射平面中删去原点，$m(a)=-a$，且 $b=-v-a$、$d=-v+a$。此时 $b+d=v\ne0$，因此换块达到极大。取 $r=8,d=1$，得到 $264$ 和 $263$ 两种饱和大小。对于法诺平面的二元向量表示，剩余两点满足 $b+d=p$，相同换块总会留下可补的三角形。 [局部极大装填谱](https://doi.org/10.1007/BF01388482)
