@@ -623,6 +623,25 @@ $$
 $$
 using $M\ge(N/p)^p$ from the product formula for the multiset coefficient. The frequencies $g_\gamma=\gamma/r$ lie in a band of width at most $T/r$. For each fixed $c>0$ and sufficiently large $T$, distinct degree-$p$ vectors must therefore collide within resolution $\exp(-cT^\beta\log T)$. The needed arithmetic estimate must control the total weight of those pairs and allow individual near-collisions. [Proportion of simple zeros, §§1.1 and 8](https://arxiv.org/html/1802.10521)
 
+## The first clipping threshold for two spatial modes
+
+Take $q\ge5$ and write $c_k=\cos(2\pi k/q)$, $d_k=\cos(4\pi k/q)$, and $s_k=c_k+d_k$. Let $m_q=\min_k s_k$ and set
+$$
+a_q=-\frac{1}{2m_q},\qquad v_k=\frac{1+2as_k}{q},\qquad L=\frac{1+4a^2}{q}.
+$$
+For $a\ge0$, the vector $v$ has mass one and both real moments equal $a$. Among nonnegative probability weights with both moments at least $a$, the squared mass equals $L$ exactly when the weight is $v$. Equality is attainable exactly for $a\le a_q$. For any real mass-one vector $w$, write $M_j$ for the $j$th real moment. The exact remainder is
+$$
+\sum_k w_k^2-L
+=\sum_k(w_k-v_k)^2+\frac{4a}{q}\bigl(M_1(w)+M_2(w)-2a\bigr).
+$$
+This follows from the orthogonality of the two cosines and expansion of the squares. If $a>a_q$, at least one $v_k<0$. The squared distance at those coordinates gives the positive additional lower bound $\sum_k\max(0,-v_k)^2$ for nonnegative weights. The exact optimum after clipping remains open for general moduli.
+
+The double-angle formula gives $s_k=2(c_k+1/4)^2-9/8$. Since $2c_k$ is a sum of roots of unity, it is an algebraic integer and cannot equal the rational number $-1/2$. Hence $m_q>-9/8$. Round the angle with cosine $-1/4$ to the nearest grid point. The error is at most $\pi/q$, so $m_q+9/8\le 2(\pi/q)^2$. The values $s_k$ have mean zero and mean square one. Averaging $(2-s_k)(s_k-m_q)\ge0$ gives $m_q\le-1/2$. Combining the bounds gives
+$$
+0<a_q-\frac49\le\frac{16\pi^2}{9q^2}.
+$$
+Thus $4/9$ is a uniform lower bound for the threshold across moduli. The result controls the squared mass of finite weights. The exceptional frequencies for actual high-order ζ-zero harmonics still require an arithmetic estimate.
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
