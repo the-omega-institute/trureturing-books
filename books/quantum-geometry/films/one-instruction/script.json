@@ -33,13 +33,13 @@
       ["Lean checks this bill too, for every dictionary and every query.", "这张账单 Lean 也检验过：任何字典、任何查询词。"],
       ["Per entry, twice the query length plus twelve; per tape cell, four; then three more.", "每个词条付“查询长度的两倍加 12”，纸带每格再付 4 步，最后加 3。"],
       ["Here that is one hundred eighty-seven. The run took one hundred four.", "这里合计 187 步；实际跑了 104 步。"],
-      ["A missing word costs more: one one one takes a hundred thirty-nine steps, and reports not found.", "查不到的词更贵：111 要走完四个词条，139 步，报告“没找到”。"]
+      ["Here, the missing word one one one takes a hundred thirty-nine steps, and reports not found.", "这里，查不到的 111 走完四个词条，用了 139 步，报告“没找到”。"]
     ], "cues": [{"line": 0, "at": 0.8, "kind": "stamp"}]},
     {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
       ["These are ceilings for these two machines, not the fastest way.", "这是这两台机器的天花板，不是最快的做法。"],
       ["A floor for every way of comparing would need its own cost model and proof.", "要说“任何比较方法都至少这么贵”，得另立成本模型、另作证明。"],
       ["And the one-instruction universe stays a model, not a theorem.", "至于把宇宙读成一条比较指令，那仍是模型，不是定理。"],
-      ["Even the simplest machine pays for every look.", "再简单的机器，每看一眼都要付账。"]
+      ["Even this simplest machine pays for every look.", "连这台最简单的机器，每看一眼都要付账。"]
     ]},
     {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
       ["Geometric Intuition of Quantum Computing, chapter twenty-eight.", "《量子计算的几何直觉》· 第二十八章"]

@@ -243,21 +243,22 @@ SCENES.hook = S => {
     const col = i % 5, row = Math.floor(i / 5);
     const x0 = 250 + col * 132, y0 = 250 + row * 64;
     const x = lerp(x0, cx, fold), y = lerp(y0, cy, fold);
-    const ta = a * clamp((u - lineAt(S, 0).s - 0.04 * i) / 0.4) * (1 - fold * 0.92);
+    const ta = a * clamp((u - lineAt(S, 0).s - 0.04 * i) / 0.4) * (1 - fold);
     chip(x, y, 116, 46, op, C.dim, ta, 20);
   });
   const oa = a * Q(S, 1, 'one well-chosen', 0.6, 1.0);
   if (oa > 0.003) {
+    txt('e.g. · 例如', cx, cy - 52, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.white, a: oa * 0.9 });
     chip(cx, cy, 250, 74, 'SUBLEQ', C.argued, oa, 36);
     txt('subtract, then jump if ≤ 0', cx, cy + 74, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.white, a: oa });
     txt('相减，非正则跳转', cx, cy + 108, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: oa * 0.9 });
-    txt('literature result · Mavaddat & Parhami 1988', cx, cy + 160, { size: 19, fam: F.mono, w: 700, align: 'center', c: C.argued, a: oa });
-    txt('文献结果 · 内存不设上限时即图灵完备', cx, cy + 190, { size: 19, fam: F.zh, w: 700, align: 'center', c: C.argued, a: oa });
+    txt('one instruction suffices: literature result · Mavaddat & Parhami 1988', cx, cy + 160, { size: 19, fam: F.mono, w: 700, align: 'center', c: C.argued, a: oa });
+    txt('单指令即可图灵完备（内存不设上限）：文献结果', cx, cy + 190, { size: 19, fam: F.zh, w: 700, align: 'center', c: C.argued, a: oa });
   }
   /* line 2: the book's reading, CMP(A, B) as a line plus an area */
   const ma = a * Q(S, 2, 'reads the universe', 0.7);
   if (ma > 0.003) {
-    panel(1060, 220, 740, 420, ma, C.argued, 'MODEL · 本书的读法');
+    panel(1060, 220, 660, 420, ma, C.argued, 'MODEL · 本书的读法');
     const O = [1180, 570], R = 220, th = 52 * Math.PI / 180;
     const B = [O[0] + R * Math.cos(th), O[1] - R * Math.sin(th)], A = [O[0] + R, O[1]], foot = [O[0] + R * Math.cos(th), O[1]];
     ctx.save(); ctx.globalAlpha = ma * 0.9; ctx.beginPath(); ctx.moveTo(O[0], O[1]); ctx.lineTo(A[0], A[1]); ctx.lineTo(A[0] + B[0] - O[0], B[1]); ctx.lineTo(B[0], B[1]); ctx.closePath();
@@ -269,11 +270,11 @@ SCENES.hook = S => {
     txt('B', B[0] - 34, B[1] + 6, { size: 30, fam: F.math, w: 700, c: C.white, a: ma });
     oiRich([['CMP(A, B) = ', C.white], ['A·B', C.cyan], [' + ', C.white], ['A∧B', C.mag]], 1090, 290, { size: 34, a: ma });
     oiRich([['line · 线', C.cyan], ['   +   ', C.white], ['area · 面积', C.mag]], 1090, 336, { size: 22, fam: F.zh, a: ma * 0.9 });
-    txt('one comparison, nothing else · 只此一条比较', 1520, 610, { size: 18, fam: F.zh, w: 700, align: 'center', c: C.argued, a: ma });
+    txt('one comparison, nothing else · 只此一条比较', 1390, 610, { size: 18, fam: F.zh, w: 700, align: 'center', c: C.argued, a: ma });
   }
   /* line 3: free? */
   const fa = a * at(S, 3, 0.5, 0.5);
-  stamp('FREE?', 1430, 760, fa, C.now, 60, -0.07);
+  stamp('FREE?', 1430, 760, fa, C.mag, 60, -0.07);
 };
 
 /* ======================================================================= */
@@ -326,30 +327,34 @@ SCENES.cards = S => {
     else if (p) oiCardDraw(p.x, p.y, p.b, a * (1 - f), { col: C.dim });
   }
   /* the verdict of each compared pair, beside the aside piles (compare phase) */
-  const st = T[i], pairs = i <= 5 ? cdPairs(st) : [];
+  const iv = Math.min(T.length - 1, Math.floor(k + 0.45));                 // the counter's step: cards have landed
+  const st = T[iv], pairs = iv <= 5 ? cdPairs(st) : [];
   const pa = a * (1 - clamp((k - 5) / 0.6));
   pairs.forEach(([x, y], j) => {
     const yy = CD_BOT - j * CD_GAP;                                         // pair j is the j-th card from the bottom
     const same = x === y;
     txt(same ? '=' : '≠', (CD_COL.savedLeft + CD_COL.savedRight) / 2, yy + 14, { size: 40, fam: F.math, w: 700, align: 'center', c: same ? C.cyan : C.mag, a: pa });
   });
+  const mo = a * at(S, 0, 0.6);
+  txt('standing in for CMP(A, B): the book\'s MODEL', 180, 236, { size: 20, fam: F.mono, w: 700, c: C.argued, a: mo });
+  txt('以比特机代表比较的成本：本书的模型', 180, 268, { size: 20, fam: F.zh, w: 700, c: C.argued, a: mo });
   /* the readout */
-  panel(1320, 200, 480, 500, a, C.cyan, 'THE MACHINE · 机器');
+  panel(1260, 200, 460, 500, a, C.cyan, 'THE MACHINE · 机器');
   const phase = st.L === 'compare' ? ['compare', '比对'] : st.L === 'restoreLeft' ? ['restore a', '复原 a'] : st.L === 'restoreRight' ? ['restore b', '复原 b'] : st.L === 'finish' ? ['write the bit', '写下结果'] : ['halted', '停机'];
-  txt('STEP · 步', 1350, 268, { size: 22, fam: F.zh, w: 700, c: C.dim, a });
-  txt(String(Math.min(T.length - 1, Math.floor(k + 0.45))), 1350, 360, { size: 88, fam: F.mono, w: 700, c: C.now, a });
-  txt(`${phase[0]} · ${phase[1]}`, 1350, 420, { size: 26, fam: F.zh, w: 700, c: C.white, a });
-  const eq = T[i].eq;
-  txt('equal so far · 目前相同', 1350, 486, { size: 20, fam: F.zh, w: 700, c: C.dim, a: a * at(S, 1, 0.6) });
-  txt(i <= 5 ? (eq ? 'yes · 是' : 'no · 否') : '—', 1350, 528, { size: 30, fam: F.zh, w: 700, c: i <= 5 ? (eq ? C.cyan : C.mag) : C.dim, a: a * at(S, 1, 0.6) });
+  txt('STEP · 步', 1290, 268, { size: 22, fam: F.zh, w: 700, c: C.dim, a });
+  txt(String(iv), 1290, 360, { size: 88, fam: F.mono, w: 700, c: C.now, a });
+  txt(`${phase[0]} · ${phase[1]}`, 1290, 420, { size: 26, fam: F.zh, w: 700, c: C.white, a });
+  const eq = T[iv].eq;
+  txt('equal so far · 目前相同', 1290, 486, { size: 20, fam: F.zh, w: 700, c: C.dim, a: a * at(S, 1, 0.6) });
+  txt(iv <= 5 ? (eq ? 'yes · 是' : 'no · 否') : '—', 1290, 528, { size: 30, fam: F.zh, w: 700, c: iv <= 5 ? (eq ? C.cyan : C.mag) : C.dim, a: a * at(S, 1, 0.6) });
   const ra = a * Q(S, 2, 'even after a mismatch', 0.5) * (1 - at(S, 3, 0.5));
-  txt('keeps reading to the bottom', 1350, 590, { size: 20, fam: F.mono, w: 700, c: C.white, a: ra });
-  txt('不提前收工', 1350, 620, { size: 20, fam: F.zh, w: 700, c: C.white, a: ra });
+  txt('keeps reading to the bottom', 1290, 590, { size: 20, fam: F.mono, w: 700, c: C.white, a: ra });
+  txt('不提前收工', 1290, 620, { size: 20, fam: F.zh, w: 700, c: C.white, a: ra });
   const ea = a * Q(S, 4, 'not equal', 0.5);
   if (ea > 0.003) {
-    txt('output 0 = not equal', 1350, 590, { size: 22, fam: F.mono, w: 700, c: C.now, a: ea });
-    txt('输出 0：不同 · 16 步', 1350, 624, { size: 22, fam: F.zh, w: 700, c: C.now, a: ea });
-    txt('step-by-step replay (computed)', 1350, 672, { size: 16, fam: F.mono, w: 700, c: C.cyan, a: ea * 0.9 });
+    txt('output 0 = not equal', 1290, 590, { size: 22, fam: F.mono, w: 700, c: C.now, a: ea });
+    txt('输出 0：不同 · 16 步', 1290, 624, { size: 22, fam: F.zh, w: 700, c: C.now, a: ea });
+    txt('step-by-step replay (computed)', 1290, 672, { size: 20, fam: F.mono, w: 700, c: C.cyan, a: ea * 0.9 });
   }
 };
 
@@ -372,19 +377,20 @@ SCENES.bill = S => {
   txt('a, b, frame restored · scratch empty · 原样复原，暂存清空', 172, 542, { size: 22, fam: F.zh, w: 700, c: C.white, a: ra });
   oiLean(172, 584, OI_LEAN.name_compare_run, a * Q(S, 0, 'Lean checks', 0.6), { size: 20 });
   /* the run against the ceiling */
-  panel(1200, 200, 600, 400, a * Q(S, 1, 'twice eight', 0.6), C.cyan, 'RUN VS CEILING · 实跑与上限');
+  panel(1180, 200, 540, 400, a * Q(S, 1, 'twice eight', 0.6), C.cyan, 'RUN VS CEILING · 实跑与上限');
   const bw = 300;
   OI_RUNS.forEach((r, j) => {
     const ja = a * (j === 0 ? Q(S, 1, 'twice eight', 0.6) : at(S, 3, 0.6, 1.2 + 0.6 * j));
     if (ja <= 0.003) return;
     const y = 262 + j * 112;
-    txt(`${r.a || 'ε'} vs ${r.b || 'ε'}`, 1228, y, { size: 22, fam: F.mono, w: 700, c: C.white, a: ja });
-    fillBox(1228, y + 14, bw * r.bound / 20, 34, C.dim, ja * 0.25); box(1228, y + 14, bw * r.bound / 20, 34, C.lean, ja, 1.5);
-    fillBox(1228, y + 14, bw * r.steps / 20, 34, C.cyan, ja * 0.6);
-    txt(`${r.steps} ≤ ${r.bound}`, 1228 + bw + 26, y + 41, { size: 26, fam: F.mono, w: 700, c: C.white, a: ja });
+    txt(`${r.a || 'ε'} vs ${r.b || 'ε'}`, 1208, y, { size: 22, fam: F.mono, w: 700, c: C.white, a: ja });
+    fillBox(1208, y + 14, bw * r.bound / 20, 34, C.dim, ja * 0.25); box(1208, y + 14, bw * r.bound / 20, 34, C.lean, ja, 1.5);
+    fillBox(1208, y + 14, bw * r.steps / 20, 34, C.cyan, ja * 0.6);
+    txt(`${r.steps} ≤ ${r.bound}`, 1208 + bw + 26, y + 41, { size: 26, fam: F.mono, w: 700, c: C.white, a: ja });
   });
   const la = a * at(S, 3, 0.6, 1.2);
-  txt('cyan: replay (computed) · green frame: Lean ceiling', 1228, 586, { size: 15, fam: F.mono, w: 700, c: C.dim, a: la });
+  txt('cyan bar: replay (computed)', 1208, 556, { size: 20, fam: F.mono, w: 700, c: C.cyan, a: la });
+  txt('green frame: Lean ceiling', 1208, 586, { size: 20, fam: F.mono, w: 700, c: C.lean, a: la });
   /* the aphorism */
   const ca = a * Q(S, 3, 'The bound is', 0.6);
   if (ca > 0.003) {
@@ -420,7 +426,7 @@ function dtTape(S, snap, a, opts = {}) {
     const isRead = j < head;
     fillBox(cx + 2, DT.y - 28, DT.cw - 4, DT.ch - 4, isRead ? C.cyan : C.white, a * (isRead ? 0.18 : 0.05));
     box(cx + 2, DT.y - 28, DT.cw - 4, DT.ch - 4, isRead ? C.cyan : C.dim, a * 0.8, 1.2);
-    txt(c.b ? '1' : '0', cx + DT.cw / 2, DT.y + 14, { size: isTag ? 22 : 30, fam: F.mono, w: 700, align: 'center', c: isTag ? C.dim : C.white, a });
+    txt(c.b ? '1' : '0', cx + DT.cw / 2, DT.y + 14, { size: isTag ? 24 : 30, fam: F.mono, w: 700, align: 'center', c: isTag ? C.dim : C.white, a });
   }
   /* the head */
   const hx = DT.x0 + Math.min(head, total) * DT.cw;
@@ -438,7 +444,7 @@ SCENES.dict = S => {
   const tallies = snap.S.index.length - (snap.L === 'halt' ? 1 : 0);
   const hit = i >= DT_REW ? 2 : -1;
   dtTape(S, snap, a, { hit, entry: e => (i >= DT_REW ? (e === 2 ? 1 : 0.55) : 1) });
-  txt('tape · 纸带：each name stored back to front, every bit after a marker 1, a 0 ends it', DT.x0, DT.y + 108, { size: 18, fam: F.zh, w: 700, c: C.dim, a: a * at(S, 0, 0.6) });
+  txt('tape · 纸带：each name stored back to front, every bit after a marker 1, a 0 ends it', DT.x0, DT.y + 108, { size: 20, fam: F.zh, w: 700, c: C.white, a: a * at(S, 0, 0.6) });
   /* query, candidate, tally */
   const qa = a * at(S, 1, 0.6);
   panel(232, 580, 980, 220, qa, C.cyan, 'QUERY · CANDIDATE · TALLY');
@@ -452,15 +458,15 @@ SCENES.dict = S => {
   if (snap.L === 'halt') chip(870 + tallies * 26 + 70, 694, 110, 46, 'found', C.cyan, qa, 22);
   const la = a * Q(S, 2, 'The answer', 0.6);
   if (la > 0.003) {
-    txt('index stack · 下标栈:  1 :: 1 1', 262, 772, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: la });
+    txt('at the end · 结束时:  1 :: 1 1', 262, 772, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: la });
     txt('found · then entry #2 in unary · 找到，第 2 号（一元计数）', 640, 772, { size: 20, fam: F.zh, w: 700, c: C.white, a: la });
   }
   /* the step counter */
-  panel(1300, 580, 500, 220, a, C.cyan, 'STEP · 步');
+  panel(1300, 580, 420, 220, a, C.cyan, 'STEP · 步');
   txt(String(i), 1330, 712, { size: 80, fam: F.mono, w: 700, c: C.now, a });
-  const ph = snap.L === 'rewind' || snap.L === 'finish' ? 'rewind · 倒卷' : snap.L === 'halt' ? 'halted · 停机' : snap.L.startsWith('C:') ? 'compare · 比对' : 'read · 读带';
-  txt(ph, 1560, 700, { size: 24, fam: F.zh, w: 700, c: C.white, a });
-  txt('replay (computed)', 1560, 740, { size: 16, fam: F.mono, w: 700, c: C.cyan, a: a * 0.9 });
+  const ph = i === DT_REW ? 'hit · 命中' : snap.L === 'rewind' || snap.L === 'finish' ? 'rewind · 倒卷' : snap.L === 'halt' ? 'halted · 停机' : snap.L.startsWith('C:') ? 'compare · 比对' : 'read · 读带';
+  txt(ph, 1480, 700, { size: 24, fam: F.zh, w: 700, c: C.white, a });
+  txt('replay (computed)', 1480, 740, { size: 20, fam: F.mono, w: 700, c: C.cyan, a: a * 0.9 });
 };
 
 /* ======================================================================= */
@@ -470,7 +476,7 @@ SCENES.dictbill = S => {
   const u = S.u, a = oiFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'lean'], [2, null, 'computed']]);
-  panel(140, 200, 1660, 300, a, C.lean, 'EVERY DICTIONARY, EVERY QUERY · 任何字典、任何查询词');
+  panel(140, 200, 1580, 300, a, C.lean, 'EVERY DICTIONARY, EVERY QUERY · 任何字典、任何查询词');
   const fa = a * Q(S, 1, 'Per entry', 0.6);
   oiRich([['steps ≤ ', C.white], ['(2|q| + 12)·|names|', C.white, Q(S, 1, 'Per entry', 0.5)], [' + ', C.white], ['4·|tape|', C.white, Q(S, 1, 'per tape cell', 0.5)], [' + 3', C.white, Q(S, 1, 'then three', 0.5)]], 172, 290, { size: 40, a: fa });
   txt('index ← (q ∈ names ? 1 : 0) :: one tally per entry before q · query, tape, frame restored', 172, 352, { size: 22, fam: F.mono, w: 700, c: C.white, a: a * at(S, 0, 0.6, 0.8) });
@@ -481,7 +487,7 @@ SCENES.dictbill = S => {
   oiRich([['(2·3 + 12)·4 + 4·28 + 3 = 72 + 112 + 3 = ', C.white], ['187', C.white]], 172, 580, { size: 32, a: ha });
   txt('|tape| = 4 names × 7 cells · 4 个名字 × 7 格', 172, 620, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ha });
   const bw = 900, full = 187, bx = 560;
-  const r1 = a * Q(S, 2, 'The run took', 0.6), r2 = a * Q(S, 3, 'A missing word', 0.6);
+  const r1 = a * Q(S, 2, 'The run took', 0.6), r2 = a * Q(S, 3, 'the missing word', 0.6);
   if (ha > 0.003) {
     txt('ceiling · 上限', 172, 690, { size: 22, fam: F.zh, w: 700, c: C.lean, a: ha });
     box(bx, 664, bw, 36, C.lean, ha, 1.5); txt('187', bx + bw + 16, 692, { size: 26, fam: F.mono, w: 700, c: C.lean, a: ha });
@@ -502,7 +508,7 @@ SCENES.edge = S => {
     { k: 0, col: C.lean, en: 'step ceilings for these two machines', zh: '这两台机器的步数上限', note: 'upper bounds, not the fastest way · 是上界，不是最快做法', lean: true },
     { k: 1, col: C.dim, en: 'a floor for every way of comparing', zh: '“任何比较方法都至少这么贵”', note: 'not claimed here: needs its own cost model and proof · 本片不主张，需另立成本模型与证明' },
     { k: 2, col: C.argued, en: 'one instruction suffices (OISC)', zh: '一条指令即图灵完备', note: 'literature result, given unbounded memory · 文献结果' },
-    { k: 2, col: C.argued, en: 'the universe runs CMP(A, B)', zh: '宇宙只跑一条比较指令', note: 'MODEL · 模型，不是定理' }
+    { k: 2, col: C.argued, en: 'the universe runs CMP(A, B)', zh: '宇宙只跑一条比较指令', note: 'MODEL, and so is reading these bit machines as its bill · 模型；以这两台比特机作 CMP 的账单，也是模型' }
   ];
   rows.forEach((rw, j) => {
     const ra = a * at(S, rw.k, 0.6, rw.k === 2 && j === 3 ? 0.8 : 0);
@@ -512,14 +518,14 @@ SCENES.edge = S => {
     txt(rw.en, 252, y + 50, { size: 30, fam: F.disp, w: 700, c: rw.col === C.dim ? C.white : rw.col, a: ra * foc });
     txt(rw.zh, 1000, y + 50, { size: 28, fam: F.zh, w: 700, c: C.white, a: ra * foc });
     txt(rw.note, 252, y + 98, { size: 20, fam: F.zh, w: 700, c: rw.col === C.dim ? C.dim : rw.col, a: ra * foc * 0.95 });
-    if (rw.lean) { oiLean(1390, y + 50, OI_LEAN.name_compare_run, ra * foc, { size: 16 }); oiLean(1390, y + 98, OI_LEAN.dictionary_lookup_run, ra * foc, { size: 16 }); }
+    if (rw.lean) { oiLean(1370, y + 50, OI_LEAN.name_compare_run, ra * foc, { size: 18 }); oiLean(1370, y + 98, OI_LEAN.dictionary_lookup_run, ra * foc, { size: 18 }); }
   });
   const ga = a * at(S, 3, 0.7);
   if (ga > 0.003) {
     fillBox(0, 180, W, 640, C.bg, ga * 0.82);
-    txt('Even the simplest machine', W / 2, 470, { size: 58, fam: F.disp, w: 700, align: 'center', c: C.white, a: ga });
+    txt('Even this simplest machine', W / 2, 470, { size: 58, fam: F.disp, w: 700, align: 'center', c: C.white, a: ga });
     txt('pays for every look.', W / 2, 550, { size: 58, fam: F.disp, w: 700, align: 'center', c: C.white, a: ga });
-    txt('再简单的机器，每看一眼都要付账。', W / 2, 640, { size: 40, fam: F.zh, w: 700, align: 'center', c: C.white, a: ga * 0.9 });
+    txt('连这台最简单的机器，每看一眼都要付账。', W / 2, 640, { size: 40, fam: F.zh, w: 700, align: 'center', c: C.white, a: ga * 0.9 });
   }
 };
 
