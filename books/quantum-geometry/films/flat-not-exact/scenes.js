@@ -266,7 +266,7 @@ SCENES.torus = S => {
   badgeQ(S, [[0, null, 'computed']]);
   const seamA = Q(S, 1, 'one means flip', 0.6);
   const sweep = Q(S, 2, 'Every small square', 2.4);
-  const walk = ease(Q(S, 2, 'walk once', 3.2));
+  const walk = ease(Q(S, 2, 'walk once', 1.8));
   const sh = solid('torus', { x: 160, y: 150, w: 1100, h: 700, yaw: -0.9, pitch: 0.62, zoom: 1.12 });
   trFace(sh, 0.03 - 0.01 * u);
   sh.begin();
@@ -312,7 +312,7 @@ const PA_Q = [[380, 300], [780, 300], [780, 700], [380, 700]];   // TL, TR, BR, 
 SCENES.paint = S => {
   const a = fnFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed']]);
+  badgeQ(S, [[0, null, 'computed'], [2, 'Around any square', 'argued']]);
   const pc = at(S, 0, 1.2, 1.2);
   const ea = at(S, 1, 0.8, 0.6);
   /* corners painted one after another */
@@ -341,9 +341,9 @@ SCENES.paint = S => {
   const d2 = a * at(S, 2, 0.6);
   panel(960, 400, 840, 170, d2, C.cyan, 'FLAT · 平坦');
   fnRich([['1 + 0 + 1 + 0 = ', C.white], ['0', C.cyan], ['  (mod 2)', C.dim]], 990, 482, { size: 32, a: d2 });
-  txt(`colour changes so far: ${changes}`, 990, 534, { size: 26, fam: F.mono, w: 700, c: C.now, a: d2 * clamp(wk * 3) });
+  txt(`color changes so far: ${changes}`, 990, 534, { size: 26, fam: F.mono, w: 700, c: C.now, a: d2 * clamp(wk * 3) });
   const d3 = a * Q(S, 2, 'That is flat', 0.6);
-  txt('every gradient is flat · 梯度一定平坦 ✓', 990, 610, { size: 28, fam: F.zh, w: 700, c: C.cyan, a: d3 });
+  txt('every gradient is flat · 梯度一定平坦（奇偶论证）', 990, 610, { size: 28, fam: F.zh, w: 700, c: C.argued, a: d3 });
   /* the question */
   const qa = a * at(S, 3, 0.6);
   if (qa > 0.003) {
@@ -398,8 +398,9 @@ SCENES.seam = S => {
   txt('three edges cross the glue line: 1', 1070, 280, { size: 28, fam: F.mono, w: 700, c: C.mag, a: r1 });
   txt('跨过粘合线的三条边写 1，其余为 0', 1070, 324, { size: 26, fam: F.zh, w: 700, c: C.white, a: r1 });
   const r2 = a * at(S, 2, 0.6);
-  panel(1040, 370, 760, 130, r2, C.cyan, 'EVERY SQUARE · 每个方格');
-  fnRich([['1 + 0 + 1 + 0 = ', C.white], ['0', C.cyan], ['   flat ✓ 平坦', C.cyan, F.zh]], 1070, 450, { size: 30, a: r2 });
+  panel(1040, 370, 760, 136, r2, C.cyan, 'THE SQUARES · 方格');
+  fnRich([['on the seam: 1 + 0 + 1 + 0 = ', C.white], ['0', C.cyan]], 1070, 430, { size: 26, a: r2 });
+  fnRich([['others: 0 + 0 + 0 + 0 = ', C.white], ['0', C.cyan], ['   all flat ✓ 每格都平', C.cyan, F.zh]], 1070, 480, { size: 26, a: r2 });
   const r3 = a * at(S, 3, 0.6);
   if (r3 > 0.003) {
     panel(1040, 520, 760, 150, r3, C.now, 'ROW 0 · 第 0 行');
@@ -499,7 +500,7 @@ SCENES.count = S => {
     txt('256', x + 230, yy + 110, { size: 44, fam: F.mono, w: 700, c: col, a: ka });
     txt(en, x + 230, yy + 156, { size: 22, fam: F.mono, w: 700, c: C.white, a: ka });
     txt(zh, x + 230, yy + 194, { size: 24, fam: F.zh, w: 700, c: C.white, a: ka });
-    txt(`row ${r} · col ${c}`, x + 230, yy + 232, { size: 20, fam: F.mono, w: 700, c: C.dim, a: ka });
+    txt(`行和 ${r} · 列和 ${c}`, x + 210, yy + 234, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ka });
   });
   stamp('1 / 4', 510, 785, Q(S, 2, 'one flat labeling in four', 0.5) * fl, C.cyan, 52, -0.06);
   /* Lean: the ratios for every grid */
@@ -555,8 +556,8 @@ SCENES.edge = S => {
   });
   /* the aphorism */
   const ma = a * at(S, 1, 0.8) * (1 - 0.35 * Q(S, 2, 'This is about bits', 0.6));
-  txt('flat in every piece ≠ flat all the way around', W / 2, 735, { size: 40, fam: F.disp, w: 700, align: 'center', c: C.white, a: ma, ab: 2 });
-  txt('每一块都平，不等于绕一圈也平', W / 2, 800, { size: 34, fam: F.zh, w: 700, align: 'center', c: C.white, a: ma * 0.9 });
+  txt('every square checks out; the loop still flips', W / 2, 735, { size: 40, fam: F.disp, w: 700, align: 'center', c: C.white, a: ma, ab: 2 });
+  txt('每格都对得上账，绕一圈照样翻', W / 2, 800, { size: 34, fam: F.zh, w: 700, align: 'center', c: C.white, a: ma * 0.9 });
 };
 
 /* ======================================================================= */

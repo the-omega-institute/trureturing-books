@@ -4,7 +4,7 @@
   "say": {"Lean": "Leen", "Yang–Mills": "Yang Mills"},
   "music": {"bpm": 78, "progression": "d-minor"},
   "scenes": [
-    {"id": "torus", "name": "THE DOUGHNUT", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+    {"id": "torus", "name": "THE DOUGHNUT", "lead": 1.9, "tail": 1.4, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
       ["Wrap a grid around a doughnut, so every row and column closes into a loop.", "把一张网格裹到甜甜圈上：每一行、每一列都首尾相接，绕成一个圈。"],
       ["On every edge, write one bit: zero means stay, one means flip.", "每条边上写一个比特：0 表示不变，1 表示翻转。"],
       ["Every small square checks out. Yet walk once around, and you come back flipped.", "每个小方格都对得上账；可绕着走一整圈，回来时却被翻了过来。"]
@@ -29,15 +29,15 @@
       ["And on every grid at least three by three, the seam is flat, its row adds to one, and no painting makes it.", "并且在每张至少 3×3 的网格上，这条缝平坦、行和为 1，任何涂色都造不出它。"]
     ], "cues": [{"line": 0, "at": 1.0, "kind": "stamp"}]},
     {"id": "count", "name": "ONE IN FOUR", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.6, 0.2, 0.3], "lines": [
-      ["On the three by three grid, eighteen edges give two hundred sixty-two thousand one hundred forty-four labelings.", "在 3×3 网格上数一数：18 条边，一共 262144 种标号。"],
+      ["On the three by three grid, eighteen edges give two to the eighteen labelings: over a quarter of a million.", "在 3×3 网格上数一数：18 条边，一共 2¹⁸ = 262144 种标号。"],
       ["Only one thousand twenty-four are flat. Just two hundred fifty-six come from paintings.", "其中平坦的只有 1024 种，来自涂色的只有 256 种。"],
       ["So one flat labeling in four is painted. The rest hide a seam: across, down, or both.", "所以平坦标号里恰好四分之一是涂出来的；其余的藏着一条缝：横向、纵向，或两条都有。"],
       ["Lean checks these ratios for every grid size.", "Lean 内核对任意大小的网格检验了这些比例。"],
-      ["And the squares obey exactly one rule: each edge borders two squares, so all of them add to zero.", "方格之间有且只有一条规矩：每条边都夹在两个方格之间，所以全部方格加起来是 0。"]
+      ["And the squares obey exactly one rule: here each edge borders two squares, so all of them add to zero.", "方格之间有且只有一条规矩：这里每条边都夹在两个方格之间，所以全部方格加起来是 0。"]
     ], "cues": [{"line": 3, "at": 0.6, "kind": "stamp"}]},
     {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
       ["In this chapter's lattice language: bits are links, flat is zero action, and a painting is pure gauge.", "换成本章的格点语言：比特是链变量，平坦就是零作用量，涂色就是纯规范。"],
-      ["So zero action need not be pure gauge. Flat in every piece is not flat all the way around.", "所以零作用量不一定是纯规范。每一块都平，不等于绕一圈也平。"],
+      ["So zero action need not be pure gauge. Every square checks out, yet the loop still flips.", "所以零作用量不一定是纯规范。每格都对得上账，绕一圈照样翻。"],
       ["This is about bits on a two-dimensional grid. Whether four-dimensional Yang–Mills has a mass gap is still open.", "这里讲的是二维网格上的比特。四维杨—米尔斯理论有没有质量间隙，仍是开放问题。"]
     ]},
     {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
