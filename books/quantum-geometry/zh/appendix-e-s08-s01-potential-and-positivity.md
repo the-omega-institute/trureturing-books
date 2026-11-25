@@ -187,7 +187,7 @@ $$
 
 非降的有界整数序列必趋于常值，此处终值属于 $\{2,3,4\}$。
 
-**实标量与 Banach 目标。** 对 $n\ge3$，实数增益下，最小一致误差等于定向简单回路的最大绝对增益均值。下界来自势差的消去。反过来，若这些均值至多为 $r$，给各有向棱权重 $g_{uv}+r$。反向也满足回路界，折返权重为 $2r$，故无负回路。从新增零权源点取最短路距离作势，最短路距离在棱的两个方向上均满足所需不等式，故误差至多 $r$。弦分解把长为 $\ell$ 的回路分成 $\ell-2$ 个三角形，故上界为 $(n-2)\varepsilon/n$。取零辐条的扇图，沿扇缘路径给每棱增益 $\varepsilon$，则长 $n$ 的外圈达到此界。把例子扩为 $K_n$ 可令所有从较小到较大的非辐条棱取相同增益。对 $K_n$ 上的任意实 Banach 目标，平均所有 $n$ 个星形势 $g_{av}$（$g_{aa}=0$）。每棱的两个端点星形势精确拟合它，其余各误差至多 $\varepsilon$，故平均仍给出尖锐常数 $(n-2)/n$。
+**实标量与 Banach 目标。** 对 $n\ge3$，实数增益下，最小一致误差等于定向简单回路的最大绝对增益均值。下界来自势差的消去。反过来，若这些均值至多为 $r$，给各有向棱权重 $g_{uv}+r$。反向也满足回路界，折返权重为 $2r$，故无负回路。从新增零权源点取最短路距离作势，最短路距离在棱的两个方向上均满足所需不等式，故误差至多 $r$。弦分解把长为 $\ell$ 的回路分成 $\ell-2$ 个三角形，故上界为 $(n-2)\varepsilon/n$。取零辐条的扇图，沿扇缘路径给每棱增益 $\varepsilon$，则长 $n$ 的外圈达到此界。把例子扩为 $K_n$ 可令所有从较小到较大的非辐条棱取相同增益。对任意实 Banach 目标，$K_n$ 的精确统一系数也是 $(n-2)/n$，见 [@thm-appe-complete-cliquesum-banach]。
 
 ::: {.theorem #thm-appe-chordal-path-power-two title="路径幂的 $2\varepsilon$ 重构界与弦图的普适下界 $2$" lean="D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_isChordal, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_exists_two_approximate_gain_potential, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_three_banach_and_integral_lower_bound, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_three_exact_two, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.not_subtwo_universal_chordal"}
 对 $n,k\in\mathbb N$，记 $P_n^k$ 为顶点集 $\mathrm{Fin}(n)=\{i\in\mathbb N:i<n\}$ 上的路径幂，其中 $i,j$ 相邻当且仅当 $i\ne j$ 且 $|i-j|\le k$。
@@ -350,7 +350,7 @@ $$
 
 **区间图。** 任一非空顶点子集内，右端点最小的区间的所有邻区间都含该端点。将此用于长至少为 $4$ 的环的顶点集，其两个环上邻点之间的棱就是一条弦。重构时，归纳要求根 $p$ 的左端点不大于当前集合中任何区间的右端点。取左端点最小的区间为初始根，令 $\varphi(p)=1$，并以 $\varphi(x)=g(p,x)$ 精确拟合其辐棱。在邻点中保留右端点最大的 $q$，其余递归顶点为 $p$ 的非邻点（去掉 $p$）。这些非邻区间的左端点都在 $r(p)$ 右侧。因此 $\ell(q)\le r(p)$ 保证新根 $q$ 的左端点仍不大于递归集合的任一右端点，正是本归纳所需的根条件。递归势以同一个群元素左乘来接合，使 $\varphi(q)=g(p,q)$，同时精确拟合 $q$ 的递归辐棱。若 $p$ 孤立，则将它删去，余图非空时从左端点最小的区间重新开始。
 
-同属 $p$ 邻域的两点之间，误差由经过 $p$ 的一个三角形控制。若棱 $xy$ 从 $p$ 的邻点 $x$ 跨到非邻点 $y$，则 $\ell(y)\le r(x)\le r(q)$ 且 $\ell(y)>r(p)$，故 $y$ 与 $q$ 相邻。若 $x\ne q$，则 $x,q$ 均含 $r(p)$，也彼此相邻。将 $g(p,x)g(x,y)$ 与 $\varphi(y)=g(p,q)g(q,y)$ 比较，先用三角形 $(x,q,y)$，再用 $(p,x,q)$，总误差至多为 $2\varepsilon$。若 $x=q$，这条棱已被精确拟合。余下的棱由归纳控制。由左平移不变性，棱的拟合误差等于 $d(arphi(x)g(x,y),arphi(y))$。再用逆增益右平移及 $d$ 的对称性，得到反向棱的误差相同。空图没有棱需要拟合。
+同属 $p$ 邻域的两点之间，误差由经过 $p$ 的一个三角形控制。若棱 $xy$ 从 $p$ 的邻点 $x$ 跨到非邻点 $y$，则 $\ell(y)\le r(x)\le r(q)$ 且 $\ell(y)>r(p)$，故 $y$ 与 $q$ 相邻。若 $x\ne q$，则 $x,q$ 均含 $r(p)$，也彼此相邻。将 $g(p,x)g(x,y)$ 与 $\varphi(y)=g(p,q)g(q,y)$ 比较，先用三角形 $(x,q,y)$，再用 $(p,x,q)$，总误差至多为 $2\varepsilon$。若 $x=q$，这条棱已被精确拟合。余下的棱由归纳控制。由左平移不变性，棱的拟合误差等于 $d(\varphi(x)g(x,y),\varphi(y))$。再用逆增益右平移及 $d$ 的对称性，得到反向棱的误差相同。空图没有棱需要拟合。
 
 **分裂图。** 每个非空诱导子图若含团外顶点，该点的邻点均在团内。若全部顶点都在团内，则任选一点也是单纯顶点。这再次保证每个长至少为 $4$ 的环有弦。团非空时取根 $o$，令 $\varphi(o)=1$，其余团内顶点取 $\varphi(x)=g(o,x)$。辐棱精确拟合，其他团内棱误差至多为 $\varepsilon$。对每个非孤立的团外顶点 $y$，选团内邻点 $a$，置 $\varphi(y)=\varphi(a)g(a,y)$。棱 $ay$ 精确拟合。对另一个团内邻点 $x$，先用三角形 $(x,a,y)$，再用团内棱 $xa$ 的误差估计，得到至多 $2\varepsilon$。团外没有内部棱，孤立顶点可任取势。团为空时全图无棱。
 
@@ -361,7 +361,100 @@ $$
 
 第 2 项对实 Banach 空间的加法群也适用，取 $d(a,b)=\|a-b\|$。第 4 项将 [@thm-appe-chordal-banach-limit-two] 的路径幂下界带入有限区间图类。先固定 $k$ 让 $n$ 趋于无穷，再增大 $k$，最优系数的下界可任意接近 $2$。因此有限区间图上的实 Banach 重构系数与双不变伪度量群的通用重构系数，上确界均恰为 $2$。
 
-将第 1 项与 [@thm-appe-clique-bounded-banach-potential] 合用，团大小至多为 $k+1$ 时误差至多为 $\min(k-1,\,4-4/k)\varepsilon$。对团大小无统一限制的弦图，实 Banach 系数 $C_{\mathrm{Ban,chordal}}$ 在 $[2,4]$ 内的精确值仍待确定，双不变伪度量群的通用系数 $C_{\mathrm{chordal}}$ 仍待在 $\{2,3,4\}$ 中确定。固定目标群后，还可以问一个给定弦图上的最优系数。
+将第 1 项与 [@thm-appe-clique-bounded-banach-potential] 合用，团大小至多为 $k+1$ 时误差至多为 $\min(k-1,\,4-4/k)\varepsilon$。
+
+完全图上，可以把所有星形势同时纳入平均，进一步把三角误差的系数压到 $1$ 以下。若较大的图由若干片沿树接合，还可以先逐片拟合，再在相接的团上取中点。
+
+::: {.theorem #thm-appe-complete-cliquesum-banach title="完全图的精确实 Banach 重构常数与分离团和的中点平均" lean="D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.completeGraph_banach_upper_bound, D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.completeGraph_banach_lower_bound, D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.separatedCliqueSum_banach_gain_potential"}
+1. **完全图上的实半赋范上界。** 设 $V$ 为有限顶点集，$|V|\ge2$，$E$ 为任意实半赋范向量空间，$\varepsilon\in\mathbb R$。设 $g:V\times V\to E$ 对任意 $i,j$ 满足 $g(j,i)=-g(i,j)$，且对每组两两不同的 $i,j,l$ 满足 $\|g(i,j)+g(j,l)-g(i,l)\|\le\varepsilon$。则存在势 $\varphi:V\to E$，使任意 $i\ne j$ 满足
+
+   $$
+   \|g(i,j)-(\varphi(j)-\varphi(i))\|\le\frac{|V|-2}{|V|}\varepsilon.
+   $$
+
+2. **完全图上的尖锐实 Banach 下界。** 对每个自然数 $m\ge2$，令 $\mathrm{ZeroDivSkew}(m)$ 为行和全为零的实反对称 $m\times m$ 矩阵空间，配以逐项上确界范数，成为有限维实 Banach 空间。存在 $g:\mathrm{Fin}(m)\times\mathrm{Fin}(m)\to\mathrm{ZeroDivSkew}(m)$，对任意 $i,j$ 满足 $g(j,i)=-g(i,j)$，且对两两不同的 $i,j,l$ 满足 $\|g(i,j)+g(j,l)-g(i,l)\|\le1$，使得对任意势 $\varphi:\mathrm{Fin}(m)\to\mathrm{ZeroDivSkew}(m)$，都存在 $i\ne j$ 满足
+
+   $$
+   \|g(i,j)-(\varphi(j)-\varphi(i))\|\ge\frac{m-2}{m}.
+   $$
+
+3. **分离团和上的中点平均。** 设 $T$ 是任意指标类型 $I$ 上的树，$G$ 是有限顶点集 $V$ 上的简单图，$P:I\to\mathcal P(V)$ 是一族片的顶点集，每个顶点属于至少一片，每条 $G$ 的棱的两个端点同属至少一片。给定自然数 $m\ge1$，对每条树棱 $ab$，交集 $S(a,b)=P(a)\cap P(b)$ 是非空的 $G$-团且 $|S(a,b)|\le m$。若树中不同的 $a,b$ 不相邻，则 $P(a)$ 与 $P(b)$ 不交。在每片 $P(a)$ 中，不同树邻点 $b,c$ 的附着集 $S(a,b),S(a,c)$ 两两不交，且两集之间没有 $G$ 的棱。
+
+   设 $E$ 为任意实半赋范向量空间，$g:V\times V\to E$ 为任意增益，$R\ge0$ 为实数，局部势族 $\varphi_a:V\to E$ 满足对每个 $a\in I$ 及每条端点均在 $P(a)$ 中的有向 $G$-棱 $(u,v)$，有 $\|g(u,v)-(\varphi_a(v)-\varphi_a(u))\|\le R$。则存在全局势 $\Phi:V\to E$，使每条有向 $G$-棱 $(u,v)$ 满足
+
+   $$
+   \|g(u,v)-(\Phi(v)-\Phi(u))\|\le(2-1/m)R.
+   $$
+:::
+
+::: {.proof #pf-appe-complete-cliquesum-banach}
+**星形势的平均。** 令 $n=|V|$，取 $\varphi(v)=\frac1n\sum_{w\in V}g(w,v)$。由反对称性 $g(i,i)=0$。棱 $(i,j)$ 的残差就是 $g(w,i)+g(i,j)-g(w,j)$ 对所有 $w$ 的平均，其中 $w=i,j$ 的两项为零，其余 $n-2$ 项的半范数至多为 $\varepsilon$。三角不等式给出所需上界。$n=2$ 时两项全为零，任意实数 $\varepsilon$ 都适用。
+
+**有向三角形见证。** 令 $A_{ab}$ 是从零矩阵出发，在坐标 $(a,b)$ 处加 $1$、在 $(b,a)$ 处减 $1$ 的矩阵，令 $T(a,b,c)=A_{ab}+A_{bc}+A_{ca}$。它反对称、各行之和为零，三个顶点不同则各坐标的绝对值至多为 $1$，有重复顶点时矩阵为零。固定 $0\in\mathrm{Fin}(m)$，取 $g(i,j)=T(0,i,j)$。交换 $i,j$ 使增益取负，且 $g(i,j)+g(j,l)-g(i,l)=T(i,j,l)$。若 $i\ne j$，则 $g(i,j)_{ij}$ 在两端都不同于 $0$ 时为 $1$，否则为 $0$，故这些坐标之和为 $(m-1)(m-2)$。任意势的每个矩阵同时具有零行和与零列和，后一性质来自反对称性。把势差的 $(i,j)$ 项按行、列分别求和，它们的总和为零（对角项也为零）。因此
+
+$$
+\sum_{i\ne j}\bigl(g(i,j)-(\varphi(j)-\varphi(i))\bigr)_{ij}=(m-1)(m-2).
+$$
+
+在 $m(m-1)$ 个有序异点对中，至少有一个残差坐标不小于平均值 $(m-2)/m$，其范数也不小于该值。
+
+**沿树接合。** 令 $d(a,b)$ 为 $\varphi_a-\varphi_b$ 在 $S(a,b)$ 上的平均。它随树棱反向取负。从树根出发沿唯一有限路径累加 $d$，取平移量 $c_a$，使 $c_b-c_a=d(a,b)$。于是 $\psi_a=\varphi_a+c_a$ 保持原有棱误差，且 $D(s)=\psi_b(s)-\psi_a(s)$ 在每个附着团 $S(a,b)$ 上的平均为零。记团大小为 $q$。对团内不同的 $s,t$，用同一有向棱 $(s,t)$ 上两片各自的残差相减，得 $\|D(s)-D(t)\|\le2R$。由零均值及自身项为零，
+
+$$
+\left\|\frac{D(s)}2\right\|\le\frac{q-1}{q}R\le(1-1/m)R.
+$$
+
+不相邻片不交、同片内不同附着集不交，保证每个共享顶点恰属两片。在共享顶点取两片平移后势的中点，独属一片的顶点保持该片的平移后势。每条棱都在某片内。若两端均共享，则分离条件保证它们位于同一附着团，棱残差是两片原残差的平均，半范数至多为 $R$。其余棱至多一个端点发生中点调整，增量至多为 $(1-1/m)R$，故总误差至多为 $(2-1/m)R$。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 合用前两项，$m$ 个顶点的完全图在所有实 Banach 目标上的最优统一系数恰为 $(m-2)/m$。第 3 项把已有局部拟合的误差传递到全图，在分离的附着团大小至多为 $m$ 时重构误差至多为局部误差的 $2-1/m$ 倍。
+
+回到团大小受限的一般弦图，跨层棱的两端若都有最多的前驱，就把较浅端点在较深端点的平均中加重。这一步改进了 [@thm-appe-clique-bounded-banach-potential] 的等权估计。
+
+::: {.theorem #thm-appe-biased-clique-banach-potential title="有界团数弦图上的偏置前驱平均重构界" lean="D5/S3/Combinatorics/Graph/Chordal/WeightedCliqueBanachPotential.SimpleGraph.IsChordal.exists_biased_clique_banach_gain_potential"}
+设 $G$ 是有限顶点集 $V$ 上的简单弦图，$k\in\mathbb N$ 且 $k\ge3$，并且 $G$ 的每个团至多有 $k+1$ 个顶点。设 $E$ 为实半赋范向量空间，$\varepsilon\ge0$ 为实数，$g:V\times V\to E$ 对任意 $i,j\in V$ 满足 $g(j,i)=-g(i,j)$。若对每个有序三角形 $(i,j,\ell)$（即 $i,j$、$j,\ell$、$i,\ell$ 均相邻）都有 $\|g(i,j)+g(j,\ell)-g(i,\ell)\|\le\varepsilon$，则存在势 $\varphi:V\to E$，使每个有序相邻顶点对 $(u,v)$ 都满足
+
+$$
+\begin{aligned}
+\bigl\|g(u,v)-(\varphi(v)-\varphi(u))\bigr\|
+&\le \left(4-\frac{4}{k}-\frac{2(k-2)^2}{k(k-1)^3}\right)\varepsilon .
+\end{aligned}
+$$
+:::
+
+::: {.proof #pf-appe-biased-clique-banach-potential}
+各连通分支的诱导子图继承全部假设，且每条棱都在一个分支内，故可分别构造势再合并。记所求系数为 $R_k$。在每个分支选根 $o$，按到根的距离分层，记 $P(x)$ 为 $x$ 在上一层的邻点集。对第 $i$ 层及以上诱导子图的连通分支 $C$（$i\ge1$），其影子 $S_C$ 是第 $i-1$ 层中与 $C$ 相邻的顶点所成的集合。若两个影子顶点不相邻，分别取内部经过 $C$ 和经过更低各层的最短连接路径。通往根的路径保证后一路存在。两路均无弦，且两路的内部顶点层号至少相差 $2$，合成无弦圈，与弦性矛盾。因此影子是团。
+
+非根顶点 $x$ 沿最短路走向根可找到一个前驱，且其前驱都在同一影子中。故 $P(x)\cup\{x\}$ 是团，$|P(x)|\le k$。同层相邻顶点 $x,y$ 的前驱集必有一个包含于另一个。否则从两个集合的差中各取一个前驱，它们在公共影子中相邻，与 $x,y$ 组成无弦四边形。称有 $k$ 个前驱的顶点为饱和顶点。若 $P(v)$ 中有两个饱和顶点，它们相邻，且由嵌套性有相同的前驱集。加上这两个顶点便得到一个有 $k+2$ 个顶点的团，矛盾。
+
+取 $\delta=\frac{k-2}{k(k-1)^2}$。若 $P(x)$ 有 $m\ge2$ 个顶点且含饱和顶点，则给唯一饱和顶点权重 $1/m+\delta$，其余各取 $1/m-\delta/(m-1)$。其他情形用等权平均。权重 $w_x(b)$ 之和为 $1$，且都至少为 $f(m)$，其中 $f(1)=1$，$f(m)=1/m-\delta/(m-1)$（$m\ge2$）。由 $0<\delta\le1/4$ 可见 $f(m)>0$。对整数 $2\le m\le n$，有 $(m-1)(n-1)\ge mn/4$，故 $f(m)-f(n)=(n-m)\bigl(1/(mn)-\delta/((m-1)(n-1))\bigr)\ge0$，而 $f(2)\le f(1)$。
+
+当 $i\ge2$ 时，令 $D$ 为把第 $i-1$ 层纳入后包含 $C$ 的父分支。沿最短路走向根可知影子 $S_C$ 非空。其各顶点都在 $D$ 中，其前驱集非空且两两嵌套，因而最小前驱集中的任一点 $a_C$ 都与整个 $S_C$ 相邻，并属于 $S_D$。令 $Q_C=Q_D+g(a_D,a_C)$。在第 $1$ 层取 $a_C=o$、$Q_C=0$，并令 $\varphi(o)=0$。对非根顶点 $x$，用其所在层及以上的分支 $C$ 定义
+
+$$
+\begin{aligned}
+\varphi(x)&=Q_C+\sum_{b\in P(x)}w_x(b)\bigl(g(a_C,b)+g(b,x)\bigr).
+\end{aligned}
+$$
+
+由反对称性，重复顶点的三角缺陷为零。根的邻点 $x$ 只有前驱 $o$，故 $\varphi(x)=g(o,x)$，根的关联棱精确拟合。记 $T(a,b,d)=g(a,b)+g(b,d)-g(a,d)$。从同一锚点 $a$ 经同一影子中的前驱 $b,d$ 到同一顶点 $z$，经 $b$ 与经 $d$ 的路径增益之差为 $T(a,b,d)-T(b,d,z)$，半范数至多为 $2\varepsilon$。
+
+对从较浅层的 $u$ 到较深层的 $v$ 的非根棱，取 $v$ 所在层对应的分支 $C$，记 $c=a_C$。由构造有 $c\in P(u)$、$u\in P(v)$。令 $M=Q_C+g(c,u)$，则 $M$ 是 $\varphi(u)$ 的平均中经 $c$ 的一项，$M+g(u,v)$ 是 $\varphi(v)$ 的平均中经 $u$ 的一项。各平均与其对应项的距离，只来自其他前驱路径，每项至多为 $2\varepsilon$。将两项距离相加，得棱残差的半范数至多为 $(4-2w_u(c)-2w_v(u))\varepsilon$。若两端都有 $k$ 个前驱，则 $u$ 在 $P(v)$ 中的权重上调，两权重之和至少为 $f(k)+1/k+\delta$。若至少一端至多有 $k-1$ 个前驱，则这两权重之和至少为 $f(k)+f(k-1)$。代入 $\delta$ 得
+
+$$
+\begin{aligned}
+f(k)+\frac{1}{k}+\delta
+&=f(k)+f(k-1)\\
+&=\frac{2}{k}+\frac{(k-2)^2}{k(k-1)^3}.
+\end{aligned}
+$$
+
+于是跨层残差的半范数至多为 $R_k\varepsilon$。对于同层棱，定向使 $P(u)\subseteq P(v)$。两端共用锚点与偏移 $Q_C$。固定 $b\in P(u)$，将经 $b$ 到 $u$ 再沿棱到 $v$ 的路径，与 $v$ 端的各条前驱路径比较。匹配的 $b$ 项只用三角形 $(b,u,v)$，误差至多为 $\varepsilon$，其余项的附加误差至多为 $2\varepsilon$。先对 $P(v)$ 加权，得到 $(3-2w_v(b))\varepsilon\le(3-2f(k))\varepsilon$，再对 $P(u)$ 加权，界不变。由于 $2\delta\le(k-2)/k$，有 $R_k-(3-2f(k))=1-2/k-2\delta\ge0$。相邻顶点的层号至多相差 $1$，反向只使残差变号，故所有有向棱均满足该界。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 取 $k=4$，每棵 $4$-树的团大小至多为 $5$，故系数至多为 $R_4=79/27<3$，严格改进了 [@thm-appe-clique-bounded-banach-potential] 的 $4-4/k=3$ 界和 [@thm-appe-simplicial-interval-split-potential] 第 1 项的规模无关界 $k-1=3$。对团大小无统一限制的弦图，实 Banach 系数 $C_{\mathrm{Ban,chordal}}$ 在 $[2,4]$ 内的精确值仍待确定，双不变伪度量群的通用系数 $C_{\mathrm{chordal}}$ 仍待在 $\{2,3,4\}$ 中确定。
+
+接下来固定非线性目标群，考察完全图上的最优系数。
 
 **四顶点图上的 $\mathrm{SU}(2)$ 圆度量反例。** 四点弦图若无三角形便是森林。若只有一个三角形，可规范化两条辐棱，把余棱写成 $\exp X$，再取势 $1,\exp(-X/3),\exp(X/3)$，三棱误差各为 $|X|/3\le\varepsilon/3$。附着的树棱可精确拟合。剩下的非完全图是两三角形共一棱的菱形图。把一个度数为 $3$ 的顶点取作中心，将辐棱规范化为 $1$。在外缘路径的中间顶点取势 $1$，两端各在 $1$ 与精确拟合相应外缘棱的值之间取最短测地线中点，误差至多 $\varepsilon/2$。
 
