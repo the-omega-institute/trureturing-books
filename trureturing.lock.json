@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "16dc821e19c688a0618f787e23b331a9ca36e769",
-  "pinned_at": "2026-11-25T15:09:51Z",
+  "commit": "4761719abe7cc3e016beea890f39f448fcd2f2fc",
+  "pinned_at": "2026-11-25T15:53:34Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -8177,6 +8177,14 @@
       "axioms": [
         "propext"
       ]
+    },
+    "D5/S3/Quantum/AURICOmega/RationalGramOddPrime.realizable_iff": {
+      "module": "D5/S3/Quantum/AURICOmega/RationalGramOddPrime",
+      "name": "D5.S3.Quantum.AURICOmega.RationalGramOddPrime.realizable_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:53d658d377e099f7d10c5931cdb46dc13bd35a39f2d80204cfe716536b53086d",
+      "line": 225,
+      "signature": "theorem realizable_iff (n : ℕ) : (∃ a b c d : Fin n → ℚ, hasUnitGram a b c d) ↔ 7 ≤ n"
     },
     "D5/S3/Quantum/AURICOmega/RationalUnitTripleGram.rationalFiveCoordinateUnitTriple": {
       "module": "D5/S3/Quantum/AURICOmega/RationalUnitTripleGram",
