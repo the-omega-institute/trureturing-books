@@ -4869,6 +4869,14 @@
       "line": 164,
       "signature": "theorem aggregate_cosine_imbalance {q : ℕ} [NeZero q] (hq : 7 ≤ q) : let c"
     },
+    "D5/S3/Fourier/Concentration/CenteredDisjointCharacterBound.centered_overlap_bound": {
+      "module": "D5/S3/Fourier/Concentration/CenteredDisjointCharacterBound",
+      "name": "D5.S3.Fourier.Concentration.CenteredDisjointCharacterBound.centered_overlap_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:701b678366ef4fec9201b9a4b01158ebb3493c9686c5fa73a1df2b7963b4459f",
+      "line": 146,
+      "signature": "theorem centered_overlap_bound {J : Type*} (t : Finset J) (c : ℂ) (a : J → ℂ) (d : ℕ) : let k"
+    },
     "D5/S3/Fourier/Concentration/ClippedMomentWeights.exists_clipped_moment_minimizer": {
       "module": "D5/S3/Fourier/Concentration/ClippedMomentWeights",
       "name": "D5.S3.Fourier.Concentration.ClippedMomentWeights.exists_clipped_moment_minimizer",
