@@ -18,7 +18,7 @@
     ], "cues": [{"line": 1, "at": 1.6, "kind": "chime"}]},
     {"id": "hand", "name": "TWO CELLS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.5, 0.1, 0.2], "lines": [
       ["The smallest pointer has two cells, a and b, with a squared plus b squared equal to one.", "最小的指针只有两格，a 和 b，满足 a² + b² = 1。"],
-      ["Shift it by one cell. Only b lands on a, so the overlap is a times b.", "平移一格：只有 b 落在 a 上，重叠就是 a 乘 b。"],
+      ["Shift it by one cell. Only one cell is shared, so the overlap is a times b.", "平移一格：只剩一格重合，重叠就是 a 乘 b。"],
       ["Turn the knob: the overlap peaks at one half, when a equals b.", "转动旋钮：a = b 时重叠最大，是 1/2。"],
       ["One half is the cosine of sixty degrees, a triangle's centre-to-side distance. Three cells reach only zero point seven oh seven: a square.", "1/2 = cos 60°，正是三角形的边心距；三格指针最多到 0.707，是正方形的边心距。"]
     ], "cues": [{"line": 2, "at": 2.6, "kind": "chime"}]},
@@ -37,7 +37,7 @@
     {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
       ["The floor is for the worst input: states along the labels pass untouched.", "下界说的是最坏的输入：沿着标签基底的对角态原样通过。"],
       ["A falling floor is not a falling error: a pointer with all its weight in one cell never changes, however long.", "下界变小，不等于误差变小：全部权重放在一格的指针，再长也纹丝不动。"],
-      ["And this is one way to record. That the cosine's tail never vanishes is a textbook result, not formalized here.", "而且这只是一种记录方式。余弦的尾巴从不为零，是教科书结果，本书没有形式化。"]
+      ["And this is one way to record. That the cosine's tail stays nonzero at small angles is a textbook result, not formalized here.", "而且这只是一种记录方式。小角度上余弦的尾巴不为零，是教科书结果，本书没有形式化。"]
     ]},
     {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
       ["Geometric Intuition of Quantum Computing, chapter twenty-one.", "《量子计算的几何直觉》· 第二十一章"]
