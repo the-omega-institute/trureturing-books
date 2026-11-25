@@ -219,7 +219,7 @@ SCENES.hook = S => {
   if (again > 0.01) arrow(HK_O[0], HK_O[1], HK_O[0] + HK_R * Math.cos(CB_TH), HK_O[1] - HK_R * Math.sin(CB_TH), C.white, a * 0.35 * again, 3);
   const ta = Math.min(ang, CB_TH) / 2;
   txt('θ', HK_O[0] + 112 * Math.cos(ta) + 4, HK_O[1] - 112 * Math.sin(ta) + 10, { size: 30, fam: F.math, w: 700, c: C.vio, a: a * clamp(turn * 3) });
-  if (ang > CB_TH + 0.2) txt('θ', HK_O[0] + 138 * Math.cos((CB_TH + ang) / 2), HK_O[1] - 138 * Math.sin((CB_TH + ang) / 2) + 10, { size: 30, fam: F.math, w: 700, align: 'center', c: C.vio, a: a * again });
+  if (ang > CB_TH + 0.2) txt('θ', HK_O[0] + 175 * Math.cos((CB_TH + ang) / 2) - 14, HK_O[1] - 175 * Math.sin((CB_TH + ang) / 2) + 10, { size: 30, fam: F.math, w: 700, align: 'center', c: C.vio, a: a * again });
   if (sh > 0.01) txt('x', HK_O[0] + HK_R * Math.cos(ang) / 2, HK_O[1] + 50, { size: 34, fam: F.math, w: 700, align: 'center', c: C.cyan, a: a * sh * clamp(Math.abs(Math.cos(ang)) * 4) });
   txt('−1', HK_O[0] - HK_R - 40, HK_O[1] + 40, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.dim, a: a * sh });
   txt('1', HK_O[0] + HK_R + 34, HK_O[1] + 40, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.dim, a: a * sh });
@@ -345,7 +345,7 @@ SCENES.hand = S => {
 /* ======================================================================= */
 /*                            scene 4 · WHY THE RULE HOLDS                   */
 /* ======================================================================= */
-const PR_O = [520, 520], PR_R = 230;
+const PR_O = [580, 520], PR_R = 200;
 SCENES.pair = S => {
   const u = S.u, a = cbFade(S);
   if (a <= 0) return;
