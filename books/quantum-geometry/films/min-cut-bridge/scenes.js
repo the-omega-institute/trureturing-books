@@ -248,7 +248,7 @@ SCENES.hourglass = S => {
     const narrow = n === 6 ? Q(S, 1, 'narrowest stretch', 0.6) : 0;
     chip(x, cy - half(x) - 60, 300, 48, s, n === 6 && narrow > 0.5 ? C.mag : C.cyan, ka, 22, F.zh);
   });
-  txt('analogy · 比方：车道 = 维数，并排的车 = 独立信号', W / 2, 820, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.argued, a: a * at(S, 1, 0.6, 1.2) });
+  txt('analogy · 比方：车道数 ≈ 维数（各腿维数相乘），并排的车 = 独立信号', W / 2, 820, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.argued, a: a * at(S, 1, 0.6, 1.2) });
   const na = a * at(S, 2, 0.6);
   if (na > 0.003) txt('tensor networks have necks too · 张量网络也有窄处', W / 2, 250, { size: 28, fam: F.zh, w: 700, align: 'center', c: C.white, a: na });
 };
@@ -288,16 +288,17 @@ function cuGeom(k) {
   const { mx, nx, cy, node, leg } = BG, h = node / 2;
   if (k === 0) return [[mx - 150, cy - h - leg / 2], [nx + 150, cy - h - leg / 2]];
   if (k === 1) return [[mx - 150, cy + h + leg / 2], [nx + 150, cy + h + leg / 2]];
-  return [[(mx + nx) / 2, cy - h - 90], [(mx + nx) / 2, cy + h + 4]];
+  /* slantwise: through leg a above M, the three bridges, and leg c below N (M on the input side, N on the output side) */
+  return [[mx - 120, cy - h - 110], [nx + 120, cy + h + 110]];
 }
 SCENES.cuts = S => {
   const a = mcFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [4, null, 'argued']]);
-  const ex = Q(S, 1, 'Cut the exits', 0.5), en = Q(S, 1, 'Cut the entrances', 0.5), br = Q(S, 2, 'Cut the three bridges', 0.5);
+  const ex = Q(S, 1, 'Cut the exits', 0.5), en = Q(S, 1, 'Cut the entrances', 0.5), br = Q(S, 2, 'Cut slantwise', 0.5);
   const cur = br > 0 ? 2 : en > 0 ? 1 : ex > 0 ? 0 : -1;
-  bgDraw(a * at(S, 0, 0.5), { hi: { a: cur === 0 ? 1 : 0, d: cur === 0 ? 1 : 0, b: cur === 1 ? 1 : 0, c: cur === 1 ? 1 : 0, bridges: cur === 2 ? 1 : 0 } });
-  const fin = at(S, 3, 0.6);
+  const fin = at(S, 3, 0.6), on = 1 - fin;
+  bgDraw(a * at(S, 0, 0.5), { hi: { a: (cur === 0 || cur === 2) ? on : 0, d: cur === 0 ? on : 0, b: cur === 1 ? on : 0, c: (cur === 1 || cur === 2) ? on : 0, bridges: cur === 2 ? on : 0 } });
   [ex, en, br].forEach((p, k) => {
     if (p <= 0.003) return;
     const [P0, P1] = cuGeom(k);
@@ -306,11 +307,11 @@ SCENES.cuts = S => {
     mcDash(P0[0], P0[1], lerp(P0[0], P1[0], ease(p)), lerp(P0[1], P1[1], ease(p)), col, a, 4);
   });
   /* the ledger of cuts */
-  panel(1180, 200, 640, 420, a, C.cyan, 'THE CUTS · 三道割');
+  panel(1180, 200, 640, 470, a, C.cyan, 'THE CUTS · 三道割');
   const rows = [
     [ex, 'exits · 出口', 'a·d = 2 × 3 = ', '6', true],
     [en, 'entrances · 入口', 'b·c = 3 × 2 = ', '6', true],
-    [br, 'bridges · 三座桥', '3·a·c = 3 × 2 × 2 = ', '12', false]
+    [br, 'leg a, bridges, leg c · 腿 a、三座桥、腿 c', '3·a·c = 3 × 2 × 2 = ', '12', false]
   ];
   rows.forEach(([p, nm, f, v, minimal], i) => {
     const ra = a * p;
@@ -325,12 +326,13 @@ SCENES.cuts = S => {
     line(1210, 562, 1790, 562, C.cyan, fa * 0.5, 1);
     mcRich([['QMinCut = min(12, 6, 6) = ', C.white], ['6', C.mag]], 1210, 604, { size: 30, a: fa });
   }
+  txt('dimensions multiply, not add: 2 × 3, not 2 + 3 · 维数相乘，不相加', 1210, 648, { size: 19, fam: F.zh, w: 700, c: C.cyan, a: a * ex });
   stamp('NECK = 6', 730, 270, Q(S, 3, 'narrowest cut', 0.5, 0.2) * (1 - at(S, 4, 0.5, 1.0)), C.mag, 40, -0.06);
   const ia = a * at(S, 4, 0.6);
   if (ia > 0.003) {
-    panel(1180, 660, 640, 130, ia, C.argued);
-    txt('the neck decides, not the middle', 1210, 712, { size: 30, fam: F.disp, w: 700, c: C.argued, a: ia });
-    txt('说了算的是腰，不是肚子', 1210, 760, { size: 26, fam: F.zh, w: 700, c: C.white, a: ia });
+    panel(1180, 690, 640, 120, ia, C.argued);
+    txt('the neck decides, not the middle', 1210, 738, { size: 30, fam: F.disp, w: 700, c: C.argued, a: ia });
+    txt('说了算的是腰，不是肚子', 1210, 786, { size: 26, fam: F.zh, w: 700, c: C.white, a: ia });
   }
 };
 
@@ -364,28 +366,27 @@ SCENES.bound = S => {
 /* ======================================================================= */
 /*                            scene 5 · FILLING THE NECK                     */
 /* ======================================================================= */
-const FL = { x0: 260, x1: 1060, yIn: 760, yOut: 280, yB: [470, 520, 570] };
+const FL = { x0: 260, x1: 1060, yIn: 760, yOut: 280, yChip: [470, 520, 570] };
+/* screen slots: bridge 0 runs straight up slots 0–3, bridges 1 and 2 straight up slots 4 and 5 */
+const FL_IN_SLOT = { '0,0': 0, '0,1': 1, '1,0': 2, '1,1': 3, '2,0': 4, '2,1': 5 };
+const FL_OUT_SLOT = { '0,0': 0, '0,1': 1, '1,0': 2, '1,1': 3, '0,2': 4, '1,2': 5 };
 /* inputs (j, l) in Fin 3 × Fin 2 along the bottom; outputs (i, k) in Fin 2 × Fin 3 along the top */
-const flIn = ([j, l]) => [FL.x0 + (j * 2 + l) * (FL.x1 - FL.x0) / 5, FL.yIn];
-const flOut = ([i, k]) => [FL.x0 + (i * 3 + k) * (FL.x1 - FL.x0) / 5, FL.yOut];
+const flIn = ([j, l]) => [FL.x0 + FL_IN_SLOT[`${j},${l}`] * (FL.x1 - FL.x0) / 5, FL.yIn];
+const flOut = ([i, k]) => [FL.x0 + FL_OUT_SLOT[`${i},${k}`] * (FL.x1 - FL.x0) / 5, FL.yOut];
 const FL_COL = r => (r === 0 ? C.cyan : C.white);
 function flPath(R, p) {
-  const P0 = flIn(R.inp), P2 = flOut(R.out), mid = [(P0[0] + P2[0]) / 2, FL.yB[R.r]];
+  const P0 = flIn(R.inp), P2 = flOut(R.out), mid = [(P0[0] + P2[0]) / 2, FL.yChip[R.r]];
   const q = p < 0.5 ? [lerp(P0[0], mid[0], p * 2), lerp(P0[1], mid[1], p * 2)] : [lerp(mid[0], P2[0], (p - 0.5) * 2), lerp(mid[1], P2[1], (p - 0.5) * 2)];
   return { P0, mid, P2, q };
 }
 SCENES.fill = S => {
   const a = mcFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean'], [6, null, 'computed']]);
+  badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean'], [6, null, 'computed'], [7, null, 'argued']]);
   /* the lower half of the scene: routing, fading back as the theorem enters */
-  const back = 1 - 0.65 * at(S, 3, 0.6) - 0.2 * at(S, 6, 0.6, 2.0);
+  const back = 1 - at(S, 3, 0.8);
   const ra = a * back, gone = 1 - at(S, 3, 0.5);
   /* bridge rails */
-  FL.yB.forEach((y, r) => {
-    mcDash(FL.x0 - 60, y, FL.x1 + 60, y, r === 0 ? C.cyan : C.white, ra * 0.35, 1.5, [4, 8]);
-    txt(`bridge ${r} · 桥 ${r}`, FL.x1 + 80, y + 8, { size: 20, fam: F.zh, w: 700, c: r === 0 ? C.cyan : C.white, a: ra * 0.9 * gone });
-  });
   for (const R of MC_ROUTES) {
     const P = flIn(R.inp); dot(P[0], P[1], 12, 'w', ra);
     txt(`(${R.inp[0]},${R.inp[1]})`, P[0], P[1] + 44, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.white, a: ra });
@@ -404,6 +405,7 @@ SCENES.fill = S => {
     if (e < 0.5) ctx.lineTo(G.q[0], G.q[1]); else { ctx.lineTo(G.mid[0], G.mid[1]); ctx.lineTo(G.q[0], G.q[1]); }
     ctx.stroke(); ctx.restore();
     dot(G.q[0], G.q[1], 9, live ? 'g' : (R.r === 0 ? 'c' : 'w'), ra);
+    if (e >= 0.5) chip(G.mid[0], G.mid[1], 92, 36, `r = ${R.r}`, FL_COL(R.r), ra, 20);
     if (p >= 1) outsHit.add(R.out.join());
   });
   for (let i = 0; i < 2; i++) for (let k = 0; k < 3; k++) {
@@ -414,6 +416,7 @@ SCENES.fill = S => {
   }
   txt('inputs (j, l) · 输入', FL.x0 - 40, FL.yIn + 90, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ra });
   txt('outputs (i, k) · 输出', FL.x0 - 40, FL.yOut - 70, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ra });
+  txt('r = the bridge it crosses · 经过的桥', FL.x0 + 380, FL.yIn + 90, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ra * at(S, 1, 0.6) });
   /* the counter */
   const ca = a * at(S, 0, 0.6);
   panel(1260, 200, 560, 230, ca * gone, C.cyan, 'RANK · 秩  (2, 3, 2, 3)');
@@ -424,7 +427,7 @@ SCENES.fill = S => {
   /* the theorem */
   const la = a * Q(S, 3, 'Lean checks', 0.6);
   if (la > 0.003) {
-    panel(1000, 200, 820, 540, la, C.lean, 'THE CONVERSE · 反方向');
+    panel(1000, 200, 820, 540, la, C.lean, 'EQUALITY IN THE CONE · 锥内取等');
     mcRich([['0 < a ≤ b,   0 < c ≤ d', C.white]], 1030, 280, { size: 30, a: la });
     const ca2 = la * Q(S, 4, 'sits in a cone', 0.5);
     mcRich([['a² + b² ≤ 3ab,   c² + d² ≤ 3cd', C.white]], 1030, 336, { size: 30, a: ca2 });
@@ -441,10 +444,10 @@ SCENES.fill = S => {
       txt('NUM · 屏幕上的计算', 1030, 714, { size: 18, fam: F.zh, w: 700, c: C.cyan, a: na * 0.9 });
     }
   }
-  const qa = a * Q(S, 6, 'A network carries', 0.6);
+  const qa = a * Q(S, 7, 'Inside the cone', 0.6);
   if (qa > 0.003) {
     panel(200, 760, 1420, 76, qa, C.argued);
-    txt('a network carries exactly what its narrowest waist allows · 网络能过多少，由最窄的腰说了算', 228, 808, { size: 26, fam: F.zh, w: 700, c: C.argued, a: qa });
+    txt('inside the cone, this graph carries what its narrowest waist allows · 在锥里，这张图能过多少由最窄的腰说了算', 228, 808, { size: 26, fam: F.zh, w: 700, c: C.argued, a: qa });
   }
 };
 
@@ -458,7 +461,7 @@ SCENES.edge = S => {
   const rows = [
     { k: 0, col: C.cyan, en: '(1, 5, 1, 5): cuts 5, 5, 3', zh: '出了锥（1 + 25 = 26 > 15），三座桥本身成了瓶颈', note: 'the theorem claims no equality here · 这里定理不说相等' },
     { k: 1, col: C.argued, en: 'rank ≠ even load', zh: '秩只数路数，不管分得是否均匀', note: 'flat entanglement needs more than rank (19.4) · 纠缠熵拉满要的更多' },
-    { k: 2, col: C.cyan, en: 'one graph, three bridges', zh: '一张三座桥的小图，不是整张张量网络', note: 'not MERA, not AdS/CFT · 不是 MERA，也不是 AdS/CFT' },
+    { k: 2, col: C.argued, en: 'general networks: flow < cut possible', zh: '一般张量网络：最大流可能小于最小割', note: 'literature result (19.1), not formalized here · 文献结果，本书未形式化' },
     { k: 3, col: C.argued, en: 'Ryu–Takayanagi: S(A) = Area(γ_A) / 4G_N', zh: '熵 = 极小曲面的面积', note: 'literature result, not derived here · 文献结果，本片未推出' }
   ];
   rows.forEach((rw, i) => {
@@ -493,7 +496,7 @@ FILM.poster = () => {
   txt(DATA.film.title_zh, 1440, 420, { size: 96, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('THE NARROWEST', 1440, 520, { size: 46, fam: F.orb, w: 900, align: 'center', c: C.cyan, ab: 3, ls: 5 });
   txt('WAIST', 1440, 582, { size: 46, fam: F.orb, w: 900, align: 'center', c: C.mag, ab: 2, ls: 5 });
-  mcRich([['max flow ', C.cyan], ['=', C.white], [' min cut', C.mag]], 1440, 680, { size: 44, align: 'center', ab: 1 });
+  mcRich([['max flow ', C.cyan], ['≤', C.white], [' min cut', C.mag]], 1440, 680, { size: 44, align: 'center', ab: 1 });
   bloom(0.6);
   txt(`${DATA.book.code} · FILM`, 1440, 760, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 8 });
   txt(`${DATA.book.title.zh} · ${DATA.book.title.en}`, W / 2, 1010, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: 0.9 });
