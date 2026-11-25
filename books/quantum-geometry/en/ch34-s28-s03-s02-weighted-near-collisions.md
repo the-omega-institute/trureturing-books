@@ -862,6 +862,31 @@ $$
 
 The scaled lattice weight $N(t-j^2)/Z$ has sign margins of order $N^{-1}$ at $j=N$ and $j=N+1$. Determining the full cyclic support still requires control of the antipodal equations and the boundary sign at an antipodal activation threshold. [Antipodal support problem](https://github.com/the-omega-institute/trureturing/issues/34029)
 
+### Joint fit at the front and antipodal windows
+
+Fix a nonempty finite set $S$ of signed real offsets from the antipode. With $c$ the sampled cosine, put $F=(1+c)/2$, $W=(1-c)/2$, and $X=(1-c^2)/(Nh)^2$. At mesh zero use their continuous extensions in the two windows. Fit the weight as $v=AF/N+CX/N+BW/N^3$ on the front and on $S$. The three moment equations have rows $\sum Fv$, $\sum Xv$, and $N^3\sum W^2v$. Their target for the common cosine floor $1-2mh^2$ is $(1-mh^2,m/N^2,3N^3mh^2/4)$, using $W^2=W-u^2X/4$.
+
+Let $M_N$ be the matrix of these three rows in coefficient order $(A,C,B)$. If $h\to0$, $Nh\to0$ and $N^3(Nh)^4\to0$, then
+
+$$
+M_N\longrightarrow
+\begin{pmatrix}
+2 & 2/3 & 0\\
+2/3 & 2/5 & 0\\
+0 & \sum_{r\in S}r^2 & |S|
+\end{pmatrix}.
+$$
+
+The front contribution to the last row is bounded by constants times $N^3u^4$ and $Nu^6$. At a fixed antipodal offset $r$, $W\to1$, $N^2X\to r^2$ and $N^2F\le r^2u^2/4$. These estimates give the displayed matrix without a limit that exchanges a growing sum and a merely pointwise estimate. Its determinant is $16|S|/45$, so every prescribed vector of three moments has a unique coefficient fit for sufficiently large $N$.
+
+When $q/N^{5/2}\to\gamma>0$, the target tends to $(1,1/5,3\pi^2/(5\gamma^2))$. The resulting limits are $A\to3/4$, $C\to-3/4$ and
+
+$$
+B\longrightarrow \frac{3\pi^2/(5\gamma^2)+(3/4)\sum_{r\in S}r^2}{|S|}.
+$$
+
+Thus at a fixed included rear site the fitted weight satisfies $N^3v(r)\to B_\infty-3r^2/4$. This calculation permits signed fitted weights. To verify the optimizer's support, the signs at both ends of the front window and at the rear activation levels must be controlled, including the levels with zero limiting score. [Coupled fit research](https://github.com/the-omega-institute/trureturing/issues/34029)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
