@@ -1,4 +1,4 @@
-# M.2.10 两项计数主项与完全相位对齐 {#两项计数主项与完全相位对齐}
+# M.2.11 两项计数主项与完全相位对齐 {#两项计数主项与完全相位对齐}
 
 对局部有限的正频率谱 $(\gamma_j)$，记闭截断计数为 $N(T)=\#\{j:\gamma_j\le T\}$，权重和为 $W(T)=\sum_{\gamma_j\le T}w_j$，正弦和为 $S(T,u)=\sum_{\gamma_j\le T}w_j\sin(\gamma_j u)$。实际 ζ 零点计数的两项平滑主函数为 $F(T)=\frac{T}{2\pi}(\log(\frac{T}{2\pi})-1)$。下面的比较谱保留这两项，且计数误差有界。[Lagarias，定理 2.1](https://arxiv.org/html/math/0404394#S2.Thmtheorem1)
 

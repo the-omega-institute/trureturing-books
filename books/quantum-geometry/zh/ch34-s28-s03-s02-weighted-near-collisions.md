@@ -873,72 +873,7 @@ $$
 $$
 阈值偏移系数是这个比值的相反数。对称有限和给出 $m_4=(N^2-1)(3N^2-5)/35$，代入即得上式的显式系数。渐近式固定 $N$，较小模数下其他对径层也能带有正权重。[切换与缩放偏移的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicActivationShift.cyclic_activation_shift) · [推导与有限核对](https://github.com/the-omega-institute/trureturing/issues/34016#issuecomment-7148575133)
 
-### 前部窗口增长时的矩阵误差
-
-让前部半宽 $N$ 随模数增长，取预算 $m=N(N+1)/5$。令 $h=2\pi/q$、$u=Nh$，并在前部用 $x=j/N$ 表示位置。取两个特征 $(1+\cos(xu))/2$ 与 $\sin^2(xu)/u^2$，其零网格极限为 $1$ 与 $x^2$。记 $G_N(u)$ 为在 $|j|\le N$ 上求特征对乘积之和再除以 $N$ 得到的二阶矩阵。对任意实数 $u$，每个矩阵元的误差满足
-
-$$
-\left|G_N(u)_{ab}-G_N(0)_{ab}\right|\le 2u^2 .
-$$
-
-正弦的三次余项给出第二个特征的一致误差。窗口内两个特征的绝对值至多为一，因此对乘积求和再除以 $N$ 后，每个矩阵元的误差仍为 $u^2$ 阶。当 $N\to\infty$ 且 $u\to0$ 时，极限矩阵的两行为 $(2,2/3)$ 与 $(2/3,2/5)$。若 $q/N^{5/2}\to\gamma>0$，与同一 $N$ 的零网格矩阵相比，误差为 $O(N^{-3})$。
-
-令 $t=N(N+1)-1/2$、$Z=\sum_{|j|\le N}(t-j^2)$，取 $a=(Nt/Z,-N^3/Z)$。零网格矩阵将 $a$ 恰好映到 $(1,m/N^2)$。在网格 $u$ 上，矩残差满足
-
-$$
-\left|\left[G_N(u)a-(1,m/N^2)\right]_i\right|
-\le 2u^2(|a_0|+|a_1|)\quad(i=0,1)。
-$$
-
-缩放后的格点权重 $N(t-j^2)/Z$ 在 $j=N$ 与 $j=N+1$ 的符号余量为 $N^{-1}$ 量级。要确定整个循环群的支撑，还须控制对径矩方程和对径激活阈值上的边界符号。 [Gram 矩阵误差的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_sub_le) · [残差界的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_reference_residual_le) · [对径支撑问题](https://github.com/the-omega-institute/trureturing/issues/34029)
-
-### 前部窗口与对径窗口的联立拟合
-
-固定一个非空有限集合 $S$，其中各元素是相对于对径点的有符号实偏移。令 $c$ 为取样余弦，取 $F=(1+c)/2$、$W=(1-c)/2$、$X=(1-c^2)/(Nh)^2$。零网格处取两个窗口中的连续延拓。在前部格点及 $S$ 上令拟合权重为 $v=AF/N+CX/N+BW/N^3$。三个矩方程的左边分别为 $\sum Fv$、$\sum Xv$ 与 $N^3\sum W^2v$。利用 $W^2=W-u^2X/4$，公共余弦下限 $1-2mh^2$ 使三行的目标值为 $(1-mh^2,m/N^2,3N^3mh^2/4)$。
-
-设 $M_N$ 为按系数顺序 $(A,C,B)$ 排列的三阶矩阵。若 $N^3(Nh)^4\to0$，则
-
-$$
-M_N\longrightarrow
-\begin{pmatrix}
-2 & 2/3 & 0\\
-2/3 & 2/5 & 0\\
-0 & \sum_{r\in S}r^2 & |S|
-\end{pmatrix}。
-$$
-
-前部对末行的贡献有常数倍 $N^3u^4$ 与 $Nu^6$ 的界。在固定的对径偏移 $r$ 处，$W\to1$、$N^2X\to r^2$ 且 $N^2F\le r^2u^2/4$。这些一致估计给出上述矩阵极限，无需将逐点估计和增长的求和直接交换。极限行列式为 $16|S|/45$，故充分大的 $N$ 上，任意给定的三个矩目标均有唯一的拟合系数。
-
-当 $q/N^{5/2}\to\gamma>0$ 时，目标向量趋于 $(1,1/5,3\pi^2/(5\gamma^2))$。解的极限为 $A\to3/4$、$C\to-3/4$ 以及
-
-$$
-B\longrightarrow \frac{3\pi^2/(5\gamma^2)+(3/4)\sum_{r\in S}r^2}{|S|}。
-$$
-
-故在每个固定且纳入拟合的对径格点，$N^3v(r)\to B_\infty-3r^2/4$。该计算允许拟合权重有符号。验证最优权重的支撑仍须控制前部两侧以及对径激活层上的符号，并处理极限权重恰为零的层。 [矩阵收敛的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit.coupledMatrix_tendsto) · [唯一带符号拟合的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit.coupledFit_eventually) · [联立拟合研究](https://github.com/the-omega-institute/trureturing/issues/34029)
-
-### 增长窗口边界的定量符号
-
-临界尺度下的拟合可以和格点参考系数作更精细的比较。记 $K=\lim_{N\to\infty}N^5h^2=4\pi^2/\gamma^2$，令 $(A_N,C_N,B_N)$ 为上述逆矩阵拟合。对于 $t=N(N+1)-1/2$ 与 $Z=\sum_{|j|\le N}(t-j^2)$，
-$$
-A_N-\frac{Nt}{Z}=O(N^{-3}),
-\qquad
-C_N+\frac{N^3}{Z}=O(N^{-3}).
-$$
-
-此估计仅要求 $N^5h^2$ 有界。联立矩阵的前两行与补上零第三列的格点 Gram 矩阵之差，乘以 $N^3$ 后保持有界。前部特征乘积误差以 $2u^2$ 为界，且 $N^3u^2=O(1)$。有限个对径偏移在缩放前两行中的贡献逐项趋于零，目标质量的缩放扰动满足 $N^3mh^2=O(1)$。目标向量与联立矩阵的逆有界，故拟合系数有界。固定第三个系数 $B_N$ 时，左上二阶矩阵的逆将缩放残差界传递为前部系数的误差界。
-
-记 $p_N(j)$ 为前部的带符号拟合值，并以同一三角函数公式延拓到实数 $j$。任意固定实数 $d$，格点参考值在 $j=N+d$ 处乘以 $N^2$ 后趋于 $\frac34(1-2d)$。特征与系数误差的控制保持了这个极限，
-$$
-N^2p_N(N+d)\longrightarrow \frac34(1-2d).
-$$
-因此充分大的 $N$ 下，$N$ 处的带符号拟合值严格为正，而 $N+1$ 处严格为负。由偶对称性，前部窗口负端也有相应的符号。半步 $d=1/2$ 处首项极限为零，精细比较给出 $N^3p_N(N+1/2)\to-9/16$。
-
-每个固定实数对径偏移 $r$ 处，同一拟合系数的对径带符号值满足
-$$
-N^3p_N^{\rm rear}(r)\longrightarrow B_\infty-\tfrac34r^2.
-$$
-极限非零时可确定充分大 $N$ 下的严格符号。这些极限适用于固定的非空有限对径集合 $S$ 上的带符号拟合。认证循环群最优解仍需建立有限循环格点的对应并将补集的符号控制延伸至所有剩余格点。当 $B_\infty=3r^2/4$ 时，该层的激活状态仍待判定。 [系数误差阶的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.refined_coefficients) · [前部与半步极限](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_boundary_value) · [对径极限](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_rear_value) · [研究问题](https://github.com/the-omega-institute/trureturing/issues/34029)
+格点半径增长引出矩误差的一致控制与对径精确支撑的问题。[增长尺度下的循环支撑分析](ch34-s28-s03-s02-growing-cyclic-support.md)讨论这一情形。
 
 ### 对径阈值之外的精确支撑
 

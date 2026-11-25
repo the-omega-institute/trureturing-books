@@ -1,4 +1,4 @@
-# M.2.7 Spectral perturbations that preserve counting {#spectral-perturbations-that-preserve-counting}
+# M.2.8 Spectral perturbations that preserve counting {#spectral-perturbations-that-preserve-counting}
 
 To apply [common interval perturbations](ch34-s28-s03-s02-common-spectral-perturbations.md#thm-ch31-continuous-common-spectral-perturbations) to a comparison spectrum with a prescribed counting law, the radii must also control how many ordinates can cross a threshold. Let the reference ordinates $\gamma_j$ be positive and distinct, with positive integer multiplicities $m_j$. Assume finitely many ordinates are at or below each real threshold. Write $N(T)=\sum_{\gamma_j\le T}m_j$.
 

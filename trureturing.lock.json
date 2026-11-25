@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "47d4b3d8382f984dcc7bd96faf55d0f36ad53766",
-  "pinned_at": "2026-11-25T08:42:45Z",
+  "pinned_at": "2026-11-25T09:00:41Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4620,6 +4620,22 @@
       "statement_id": "sha256:dd47f53a30ec43a6b9fdda2015f7d4b9c65cecb4e68f4f5a96187d298abe5d93",
       "line": 127,
       "signature": "theorem frontGram_sub_le (n : ℕ) (hn : 0 < n) (u : ℝ) (i j : Fin 2) : let readout"
+    },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder.eventual_support_at_threshold": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingRearFirstOrder.eventual_support_at_threshold",
+      "kind": "theorem",
+      "statement_id": "sha256:5cf0853a716476871ae060ecedf7ab7041f7ca0021382a24cec21eb3d34d5243",
+      "line": 415,
+      "signature": "theorem eventual_support_at_threshold (q : ℕ → ℕ) (hq : ∀ n, q n ≠ 0) (e l : ℕ) (hpar : ∀ᶠ n in atTop, q n % 2 = e) {K L : ℝ} (hK : Tendsto (fun n : ℕ => (n:ℝ)^5*(mesh (q n))^2) atTop (𝓝 K)) (hL : Tendsto (fun n : ℕ => (n:ℝ)*(3*((n:ℝ)^5*(mesh (q n))^2)/20-3*K/20)) atTop (𝓝 L)) (hcrit : 3*K/20=rearThreshold e (l+1)) (hne : L+3*K/8≠0) : let readout"
+    },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder.scaled_rear_first_order": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingRearFirstOrder.scaled_rear_first_order",
+      "kind": "theorem",
+      "statement_id": "sha256:5cf0853a716476871ae060ecedf7ab7041f7ca0021382a24cec21eb3d34d5243",
+      "line": 321,
+      "signature": "theorem scaled_rear_first_order {h : ℕ → ℝ} {K L : ℝ} (hK : Tendsto (fun n : ℕ => (n:ℝ)^5*(h n)^2) atTop (𝓝 K)) (hL : Tendsto (fun n : ℕ => (n:ℝ)*(3*((n:ℝ)^5*(h n)^2)/20-3*K/20)) atTop (𝓝 L)) (S : Finset ℝ) (hS : S.Nonempty) (r : ℝ) : let readout"
     },
     "D5/S3/Fourier/Asymptotics/CyclicGrowingSupport.eventual_strict_support_away_from_thresholds": {
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingSupport",
