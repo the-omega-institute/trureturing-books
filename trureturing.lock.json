@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "589b4f1e1423a85c9632cb9152cb83d5aabc5001",
-  "pinned_at": "2026-11-25T18:36:52Z",
+  "commit": "55f73b2de1aeb4a4ee55b3d016a101eb844ab39b",
+  "pinned_at": "2026-11-25T19:59:55Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -5194,6 +5194,14 @@
       "line": 464,
       "signature": "theorem sharp_first_harmonic_even_block (N : ℕ) (hN : 0 < N) : let bound"
     },
+    "D5/S3/Fourier/Concentration/FejerCollisionLimit.collision_ramp_tendsto_hard": {
+      "module": "D5/S3/Fourier/Concentration/FejerCollisionLimit",
+      "name": "D5.S3.Fourier.Concentration.FejerCollisionLimit.collision_ramp_tendsto_hard",
+      "kind": "theorem",
+      "statement_id": "sha256:433aa9dd88e405d499450570f459f2ab861dd19c95ffb79e0af364e312f33e67",
+      "line": 74,
+      "signature": "theorem collision_ramp_tendsto_hard {ι : Type u} {l : Filter ι} {I : ι → Type v} (s : ∀ n, Finset (I n)) (x c : ∀ n, I n → ℝ) (hc : ∀ᶠ n in l, ∀ i ∈ s n, ∀ j ∈ s n, 0 ≤ c n i*c n j) (B η : ι → ℝ) (hB : ∀ᶠ n in l, 0 ≤ B n) (f : ℝ → ℝ) (a d R : ℝ) (hR : 0 < R) (hd : HasDerivAt f d a) : let ramp"
+    },
     "D5/S3/Fourier/Concentration/FejerCollisionSecants.collision_ramp_exact_right": {
       "module": "D5/S3/Fourier/Concentration/FejerCollisionSecants",
       "name": "D5.S3.Fourier.Concentration.FejerCollisionSecants.collision_ramp_exact_right",
@@ -5238,7 +5246,7 @@
       "module": "D5/S3/Fourier/Concentration/FiniteCollisionVariance",
       "name": "D5.S3.Fourier.Concentration.FiniteCollisionVariance.tailCollisionMass_lower_variance",
       "kind": "theorem",
-      "statement_id": "sha256:3bd2fc528d140a440d6e9ff10b7115faa52360ac12dc8e8e3e96063823df2641",
+      "statement_id": "sha256:03556308e1ef5378ddcccad67e6ea67e8e9e6be5b8e77a73651bb5cfccf513cf",
       "line": 243,
       "signature": "theorem tailCollisionMass_lower_variance {J : Type*} [Fintype J] [DecidableEq J] (g w : J → ℝ) (hw : ∀ j, 0 ≤ w j) (hW : 0 < ∑ j, w j) {p : ℕ} (hp : 0 < p) {η : ℝ} (hη : 0 < η) : let W"
     },
@@ -7687,7 +7695,12 @@
       "kind": "theorem",
       "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
       "line": 246,
-      "signature": "public theorem cayley_circle_unit (p q : Omega.Int) (h : Nonzero p q) : toReal (cayleyX p q) ^ 2 + toReal (cayleyY p q) ^ 2 = 1"
+      "signature": "public theorem cayley_circle_unit (p q : Omega.Int) (h : Nonzero p q) : toReal (cayleyX p q) ^ 2 + toReal (cayleyY p q) ^ 2 = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.kappa_unit_interval": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
@@ -7695,7 +7708,12 @@
       "kind": "theorem",
       "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
       "line": 289,
-      "signature": "public theorem kappa_unit_interval (p q : Omega.Int) : 0 ≤ toReal (kappa p q) ∧ toReal (kappa p q) ≤ 1"
+      "signature": "public theorem kappa_unit_interval (p q : Omega.Int) : 0 ≤ toReal (kappa p q) ∧ toReal (kappa p q) ≤ 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_add": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
@@ -7703,7 +7721,12 @@
       "kind": "theorem",
       "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
       "line": 176,
-      "signature": "public theorem toRat_add (a c : Omega.Int) (b d : Omega.Nat) : toRat ((IntRatio.fraction a b).add (IntRatio.fraction c d)) = toRat (IntRatio.fraction a b) + toRat (IntRatio.fraction c d)"
+      "signature": "public theorem toRat_add (a c : Omega.Int) (b d : Omega.Nat) : toRat ((IntRatio.fraction a b).add (IntRatio.fraction c d)) = toRat (IntRatio.fraction a b) + toRat (IntRatio.fraction c d)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_equivalent": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
@@ -7711,7 +7734,12 @@
       "kind": "theorem",
       "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
       "line": 160,
-      "signature": "public theorem toRat_equivalent {x y : IntRatio} (h : IntRatio.Equivalent x y) : toRat x = toRat y"
+      "signature": "public theorem toRat_equivalent {x y : IntRatio} (h : IntRatio.Equivalent x y) : toRat x = toRat y",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_inv": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
@@ -7719,7 +7747,12 @@
       "kind": "theorem",
       "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
       "line": 198,
-      "signature": "public theorem toRat_inv (x : IntRatio) : toRat x.inv = (toRat x)⁻¹"
+      "signature": "public theorem toRat_inv (x : IntRatio) : toRat x.inv = (toRat x)⁻¹",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_mul": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
@@ -7727,7 +7760,12 @@
       "kind": "theorem",
       "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
       "line": 186,
-      "signature": "public theorem toRat_mul (x y : IntRatio) : toRat (x.mul y) = toRat x * toRat y"
+      "signature": "public theorem toRat_mul (x y : IntRatio) : toRat (x.mul y) = toRat x * toRat y",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdInt_add": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
@@ -8278,8 +8316,8 @@
       "module": "D5/S3/Quantum/AURICOmega/RationalGramOddPrime",
       "name": "D5.S3.Quantum.AURICOmega.RationalGramOddPrime.realizable_iff",
       "kind": "theorem",
-      "statement_id": "sha256:53d658d377e099f7d10c5931cdb46dc13bd35a39f2d80204cfe716536b53086d",
-      "line": 225,
+      "statement_id": "sha256:4f9c3487d537ac519dfeba9a0d99ac5a712f0bf781b227fe3961f2b664c1a157",
+      "line": 226,
       "signature": "theorem realizable_iff (n : ℕ) : (∃ a b c d : Fin n → ℚ, hasUnitGram a b c d) ↔ 7 ≤ n"
     },
     "D5/S3/Quantum/AURICOmega/RationalUnitTripleGram.rationalFiveCoordinateUnitTriple": {
@@ -8288,7 +8326,12 @@
       "kind": "theorem",
       "statement_id": "sha256:0f62f274462f1c71185055e06b85b7f5cd2065d245025c25b709f6631a671f3e",
       "line": 176,
-      "signature": "theorem rationalFiveCoordinateUnitTriple (a b c : ℚ) (ha : 0 ≤ 1 - a^2) (hb : 0 ≤ 1 - b^2) : (∃ u v w : Fin 5 → ℚ, u ⬝ᵥ u = 1 ∧ v ⬝ᵥ v = 1 ∧ w ⬝ᵥ w = 1 ∧ u ⬝ᵥ v = a ∧ u ⬝ᵥ w = b ∧ v ⬝ᵥ w = c) ↔ (∃ i j k : ℚ, 1 + 2*a*b*c - a^2 - b^2 - c^2 = i^2 + j^2 + k^2)"
+      "signature": "theorem rationalFiveCoordinateUnitTriple (a b c : ℚ) (ha : 0 ≤ 1 - a^2) (hb : 0 ≤ 1 - b^2) : (∃ u v w : Fin 5 → ℚ, u ⬝ᵥ u = 1 ∧ v ⬝ᵥ v = 1 ∧ w ⬝ᵥ w = 1 ∧ u ⬝ᵥ v = a ∧ u ⬝ᵥ w = b ∧ v ⬝ᵥ w = c) ↔ (∃ i j k : ℚ, 1 + 2*a*b*c - a^2 - b^2 - c^2 = i^2 + j^2 + k^2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/RayKernelFibreExtremum.rayKernel_isGreatest_and_integral": {
       "module": "D5/S3/Quantum/AURICOmega/RayKernelFibreExtremum",
@@ -9640,7 +9683,12 @@
       "kind": "theorem",
       "statement_id": "sha256:a030cde30578b3b64fe6c55878a90e085f0315fb06be9865ccbd81df7afcdd62",
       "line": 321,
-      "signature": "theorem rational_rank_three_boundary_iff (b : ℝ) (L R : Matrix Bool Bool ℂ) (u v w : ℂ) (hb : 0 < b) (qL : ∀ i j, RationalEntry (L i j)) (qR : ∀ i j, RationalEntry (R i j)) (qu : RationalEntry u) (qv : RationalEntry v) (qw : RationalEntry w) (he : CoherentExtendible b L R u v w) : let A"
+      "signature": "theorem rational_rank_three_boundary_iff (b : ℝ) (L R : Matrix Bool Bool ℂ) (u v w : ℂ) (hb : 0 < b) (qL : ∀ i j, RationalEntry (L i j)) (qR : ∀ i j, RationalEntry (R i j)) (qu : RationalEntry u) (qv : RationalEntry v) (qw : RationalEntry w) (he : CoherentExtendible b L R u v w) : let A",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/Entanglement/Marginals/FibRationalPureExtension.rational_pure_coupling_iff": {
       "module": "D5/S3/Quantum/Entanglement/Marginals/FibRationalPureExtension",
