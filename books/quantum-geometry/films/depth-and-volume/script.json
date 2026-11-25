@@ -25,14 +25,14 @@
     {"id": "floor", "name": "THE FLOOR", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
       ["Lean checks the general rule. Take N sites and kappa turning points, kappa at least one, N at least twice kappa.", "Lean 内核检验了一般规律：N 个格点、κ 个折返点，κ 至少为 1，N 至少是 κ 的两倍。"],
       ["Then the least depth over all placements is N over kappa plus one, rounded down, plus one.", "那么对折返点的一切摆法取最小，深度恰好是 N 除以 κ+1 向下取整再加 1。"],
-      ["Why not less? The cuts leave kappa plus one pieces, and the biggest piece sets the clock.", "为什么不能更少？κ 个折返点把链切成 κ+1 段，最长的那段定下时钟。"],
-      ["Time is not the number of steps. It is the longest line that has to wait.", "时间不是步数，而是那条必须排队等候的最长队伍。"]
+      ["Why not less? The cuts leave kappa plus one pieces, and the biggest piece alone needs one tick per gate.", "为什么不能更少？κ 个折返点把链切成 κ+1 段，最长的那段有几道门，单独就要几拍。"],
+      ["A circuit's time is not the number of steps. It is the longest line that has to wait.", "电路的时间不是步数，而是那条必须排队等候的最长队伍。"]
     ], "cues": [{"line": 0, "at": 0.8, "kind": "stamp"}]},
     {"id": "guess", "name": "TWO GUESSES FAIL", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
       ["A recent paper guessed a different rule: roughly half the chain, minus kappa.", "一篇新近的论文猜了另一条规律：大约链长的一半，减去 κ。"],
       ["With one turning point, the guesses match the true rule.", "只有一个折返点时，两条猜想公式与真实规律完全吻合。"],
       ["With two, they break. At eight sites the guess says four ticks, the circuit runs in three. At eleven, five against four.", "两个折返点就破了：8 个格点，公式说 4 拍，实际 3 拍；11 个格点，5 拍对 4 拍。"],
-      ["Lean checks that both formulas fail. Their slope is a half; here the true slope is a third.", "Lean 内核检验：两条公式都不成立。猜想的斜率是 1/2，真正的是 1/3。"]
+      ["Lean checks that both formulas fail. Their slope is a half; with two turning points, the true slope is a third.", "Lean 内核检验：两条都不成立。猜想斜率 1/2，κ = 2 时真值斜率只有 1/3。"]
     ], "cues": [{"line": 2, "at": 2.6, "kind": "impact"}, {"line": 3, "at": 0.6, "kind": "stamp"}]},
     {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
       ["Now the tempting leap: physicists conjecture that complexity grows like the volume inside a black hole.", "现在是那一步诱人的跳跃：物理学家猜想，复杂度像黑洞内部的体积一样增长。"],
