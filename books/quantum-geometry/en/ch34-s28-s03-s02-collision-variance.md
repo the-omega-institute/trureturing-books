@@ -352,13 +352,13 @@ This envelope permits dominated convergence on central windows satisfying the fo
 
 ## Principal Fejér integral on a moving central window
 
-Assume eventual normalization, positivity of the second pair moment and nonnegative pair products. Suppose $\rho_n\to0$ and choose $A_n\to+\infty$ satisfying eventually for a fixed $C<6$
+Assume eventual normalization, positivity of the second pair moment and nonnegative pair products. Suppose $\rho_n\to0$ and choose $A_n\to+\infty$ satisfying eventually
 
 $$
-A_n^2M_{4,n}\leCnM_{2,n}^2.
+A_n^2M_{4,n}\le6nM_{2,n}^2.
 $$
 
-The window condition gives $0\le R_n\leC/A_n^2$, which implies $R_n\to0$. The central Fejér integral has the precise limit
+The window condition gives $0\le R_n\le6/A_n^2$, which implies $R_n\to0$. The central Fejér integral has the precise limit
 
 $$
 \frac1{2\pi}\int_{-A_n}^{A_n}
@@ -366,7 +366,7 @@ $$
 \longrightarrow\frac1{2\sqrt\pi}.
 $$
 
-Extend the integrand by zero outside the window. Every fixed $u$ eventually enters the window and $\operatorname{sinc}(\rho_nu/2)^2\to1$. The extended function therefore converges pointwise to $e^{-u^2}$. By the global fourth-moment estimate with this cutoff and $|\operatorname{sinc}(x)|\le1$, it is eventually dominated on the whole real line by the integrable function $e^{-(1-C/6)u^2}$. Dominated convergence and the Gaussian integral $\int_{\mathbb R}e^{-u^2}du=\sqrt\pi$ give the coefficient. [Central Fejér integral limit](https://github.com/the-omega-institute/trureturing/blob/afa14c10b56a539e960ee3784347438d09897114/D5/S3/Fourier/Asymptotics/MovingFejerGaussianPrincipal.lean#L24)
+Extend the integrand by zero outside the window. Every fixed $u$ eventually enters the window and $\operatorname{sinc}(\rho_nu/2)^2\to1$. The extended function therefore converges pointwise to $e^{-u^2}$. On the inner half-window $|u|\le A_n/2$, the global fourth-moment estimate supplies an integrable Gaussian envelope. On the outer halves it gives $Q_n(u/s_n)^n\le e^{-u^2(1-u^2/A_n^2)}\le e^{-(A_n/4)(A_n-|u|)}$. Since $|\operatorname{sinc}(x)|\le1$, the sum of the two outer integrals is at most $8/A_n\to0$. Applying dominated convergence on the inner half-window and using the Gaussian integral $\int_{\mathbb R}e^{-u^2}du=\sqrt\pi$ give the coefficient. [Central Fejér integral limit](https://github.com/the-omega-institute/trureturing/blob/7bc4d569bd1e10f8988eb54c5ed93c823e5072db/D5/S3/Fourier/Asymptotics/MovingFejerGaussianPrincipal.lean#L193)
 
 If $R_n$ is eventually nonnegative and tends to zero, an explicit choice is
 
@@ -374,7 +374,7 @@ $$
 A_n=\left(R_n+\frac1{n+1}\right)^{-1/2}.
 $$
 
-Then $A_n\to+\infty$ and eventually $A_n^2R_n\le1$. For the pair-moment ratio above, nonnegative pair products and even powers ensure nonnegativity, and the denominator is eventually positive. Thus the chosen window satisfies the fourth-moment constraint with $C=1$.
+Then $A_n\to+\infty$ and eventually $A_n^2R_n\le1$. For the pair-moment ratio above, nonnegative pair products and even powers ensure nonnegativity, and the denominator is eventually positive. Thus the chosen window satisfies the fourth-moment constraint.
 
 For $\eta_n>0$ and $s_n>0$, set $\rho_n=\eta_n/s_n$. The substitution $u=s_nt$ identifies the central integral exactly with
 
