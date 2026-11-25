@@ -178,6 +178,18 @@ For $d\equiv1\pmod4$, codimension one requires $a$ to be a sum of two rational s
 A great-circle equilateral triangle and a regular tetrahedron each need four rational coordinates to preserve their respective readings. For the triangle, take $(1,0,0,0)$ and the two vectors $(-1,\pm1,\pm1,\pm1)/2$ with all three signs equal. A regular $5$-simplex needs eight rational coordinates.
 :::
 
+For any three unit vectors, we can again align the first with a coordinate axis. The unit-diagonal Gram matrix with the three prescribed inner products $a,b,c$ has determinant $\Delta=1+2abc-a^2-b^2-c^2$.
+
+::: {.theorem #thm-ch39-rational-unit-triple-gram title="A five-coordinate criterion for three unit vectors" lean="D5/S3/Quantum/AURICOmega/RationalUnitTripleGram.rationalFiveCoordinateUnitTriple"}
+Let $a,b,c\in\mathbb Q$ with $a^2,b^2\le1$. Unit vectors $u,v,w$ in $\mathbb Q^5$ with $u\cdot v=a$, $u\cdot w=b$, and $v\cdot w=c$ exist if and only if $\Delta$ is a sum of three rational squares.
+:::
+
+::: {.proof}
+A rational isometry sends $u$ to the first coordinate axis. The first coordinates of $v,w$ are then $a,b$. Treat their remaining four coordinates as quaternions $x,y$. Their squared norms are $1-a^2,1-b^2$, and the real part of $\bar x y$ is $c-ab$. Multiplicativity of the quaternion norm makes $\Delta=(1-a^2)(1-b^2)-(c-ab)^2$ the sum of the squared imaginary coordinates of $\bar x y$. Conversely, the four-square theorem supplies $x$ with the prescribed squared norm. Use the three-square decomposition as the imaginary part of $\bar x y$ and solve for $y$ when $x\ne0$. If $x=0$, the determinant condition forces $c-ab=0$, and the four-square theorem supplies $y$ directly. The full proof is checked by the Lean kernel.
+:::
+
+For $a=b=0$ and $c=3/4$, the determinant is $7/16$. If it were a sum of three rational squares, multiplying the coordinates by four and clearing denominators would give $7D^2=X^2+Y^2+Z^2$. When $D$ is even, reduction modulo $4$ forces $X,Y,Z$ to be even, so we can divide all four integers by two. When $D$ is odd, the left side is $7$ modulo $8$, which no sum of three residues from $\{0,1,4\}$ can attain. These readings require at least six rational coordinates, and $e_1,e_2,(0,3/4,1/2,1/4,1/4,1/4)$ realize them in six.
+
 ## 32.5.4 Formal Anchors, Literature Boundaries, and Constant-Free Rational Audit {#sec-ch39-29-4}
 
 We gather the fifteen frozen theorems anchoring the constant-free rational skeleton of $\mathrm{AXIOM}\text{-}\Omega$, the integer-coefficient Chebyshev doubling equivalence, and the three flat/discrete residual bounds into the following theorem box:
