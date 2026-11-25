@@ -65,7 +65,7 @@ $$
 
 每个固定实数对径偏移 $r$ 处，同一拟合系数的对径带符号值满足
 $$
-N^3p_N^{\rm rear}(r)\longrightarrow B_\infty-\tfrac34r^2.
+N^3p_N^{\mathrm{rear}}(r)\longrightarrow B_\infty-\tfrac34r^2.
 $$
 极限非零时可确定充分大 $N$ 下的严格符号。这些极限适用于固定的非空有限对径集合 $S$ 上的带符号拟合。认证循环群最优解仍需建立有限循环格点的对应并将补集的符号控制延伸至所有剩余格点。当 $B_\infty=3r^2/4$ 时，该层的激活状态仍待判定。 [系数误差阶的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.refined_coefficients) · [前部与半步极限](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_boundary_value) · [对径极限](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_rear_value) · [研究问题](https://github.com/the-omega-institute/trureturing/issues/34029)
 
@@ -108,15 +108,15 @@ $$
 对径带符号值的下一阶展开为
 
 $$
-N\left(|S|N^3p_N^{\rm rear}(r)-Q+\tfrac34D\right)
+N\left(|S|N^3p_N^{\mathrm{rear}}(r)-Q+\tfrac34D\right)
 \longrightarrow L+Q+\tfrac98 D.
 $$
 
-精确格点归一化常数为 $Z=\frac43N^3+2N^2-N/3-1/2$。结合前部拟合系数的三次误差界，得到 $N(C_N+3/4)\to9/8$。联立拟合末行与 $(0,\sum_{s\in S}s^2,|S|)$ 的差为 $o(1/N)$。增长前部的贡献为 $O(N^{-3})$，有限个固定对径特征的误差受 $N^2h^2$ 或 $h^2$ 的常数倍控制。同样的估计给出 $N^3p_N^{\rm rear}(r)=C_Nr^2+B_N+o(1/N)$。利用末行精确目标 $Q_N(1+1/N)$ 消去 $B_N$，即得上述极限。
+精确格点归一化常数为 $Z=\frac43N^3+2N^2-N/3-1/2$。结合前部拟合系数的三次误差界，得到 $N(C_N+3/4)\to9/8$。联立拟合末行与 $(0,\sum_{s\in S}s^2,|S|)$ 的差为 $o(1/N)$。增长前部的贡献为 $O(N^{-3})$，有限个固定对径特征的误差受 $N^2h^2$ 或 $h^2$ 的常数倍控制。同样的估计给出 $N^3p_N^{\mathrm{rear}}(r)=C_Nr^2+B_N+o(1/N)$。利用末行精确目标 $Q_N(1+1/N)$ 消去 $B_N$，即得上述极限。
 
-现设 $Q=T_e(l+1)$ 且周期的最终奇偶性为 $e$。$S_l$ 的第一个未纳入对径半径是 $S_{l+1}$ 的最后一个纳入半径。对于这两个窗口，该半径均满足 $3D/4=Q$。其一阶符号因此由 $L+5Q/2$ 决定。若该量为正，最优解最终选取较大的对径窗口 $S_{l+1}$，若为负则选取 $S_l$。两种情况下前部支撑均为 $|j|\le N$，并满足两个精确矩等式与上述平方距离能量界。当 $L+5Q/2=0$ 时，更细的符号仍待判定。 [Lean 内核核验的一阶定理](https://github.com/the-omega-institute/trureturing/pull/34069)
+现设 $Q=T_e(l+1)$ 且周期的最终奇偶性为 $e$。$S_l$ 的第一个未纳入对径半径是 $S_{l+1}$ 的最后一个纳入半径。对于这两个窗口，该半径均满足 $3D/4=Q$。其一阶符号因此由 $L+5Q/2$ 决定。若该量为正，最优解最终选取较大的对径窗口 $S_{l+1}$，若为负则选取 $S_l$。两种情况下前部支撑均为 $|j|\le N$，并满足两个精确矩等式与上述平方距离能量界。当 $L+5Q/2=0$ 时，更细的符号仍待判定。 [Lean 一阶对径展开证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder.scaled_rear_first_order) [Lean 阈值处最终支撑定理](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder.eventual_support_at_threshold)
 
-若在临界比例上 $q/N^{5/2}\to\gamma>0$，且 $N(q/(\gamma N^{5/2})-1)\to\eta$，则 $L=-2Q\eta$。因此激活由 $\eta$ 小于或大于 $5/4$ 决定。特别地，将 $\gamma N^{5/2}$ 按固定奇偶性作有界误差舍入得到 $\eta=0$，故进入较大的窗口。$\eta=5/4$ 的情形需要进一步展开。
+若在临界比例上 $q/N^{5/2}\to\gamma>0$，且 $N(q/(\gamma N^{5/2})-1)\to\eta$，则 $Q=3\pi^2/(5\gamma^2)$ 且 $L=-2Q\eta$。因此激活由 $\eta$ 小于或大于 $5/4$ 决定。特别地，将 $\gamma N^{5/2}$ 按固定奇偶性作有界误差舍入得到 $\eta=0$，故进入较大的窗口。$\eta=5/4$ 的情形需要进一步展开。
 
 ## 一阶余量消失时的二阶激活
 
@@ -124,7 +124,7 @@ $$
 
 $$
 \begin{aligned}
-N\Big[N\big(|S|N^3p_N^{\rm rear}(r)-Q+\tfrac34D\big)
+N\Big[N\big(|S|N^3p_N^{\mathrm{rear}}(r)-Q+\tfrac34D\big)
  -(L+Q+\tfrac98D)\Big]
 \longrightarrow H+L-\tfrac{15}{8}D .
 \end{aligned}
@@ -134,7 +134,7 @@ $$
 
 在正阈值 $Q=T_e(l+1)$ 上若 $L=-5Q/2$，两个相邻窗口共同的争议半径满足 $3D/4=Q$，二阶修正项化为 $H-5Q$。该量为正时选取 $S_{l+1}$，为负时选取 $S_l$。两种情形的前部窗口均为 $|j|\le N$，两个余弦矩均取到下界，唯一最优解仍满足上述平方距离能量不等式。
 
-以周期表示，设 $N(N(q/(\gamma N^{5/2})-1)-5/4)\to\xi$。对倒数平方展开得到 $H=Q(75/16-2\xi)$，故跃迁位置为 $\xi=-5/32$。当 $H=5Q$（在上述周期假设下即 $\xi=-5/32$）时仍待更细的估计。 [Lean 内核核验的二阶定理](https://github.com/the-omega-institute/trureturing/pull/34075)
+以周期表示，设 $N(N(q/(\gamma N^{5/2})-1)-5/4)\to\xi$。对倒数平方展开得到 $H=Q(75/16-2\xi)$，故跃迁位置为 $\xi=-5/32$。当 $H=5Q$（在上述周期假设下即 $\xi=-5/32$）时，更高阶渐近符号判据仍待解决。下节给出精确的有限判别。 [Lean 二阶展开证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.scaled_rear_second_order) [Lean 二阶支撑证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.eventual_support_at_second_order_threshold)
 
 ## 首项阈值等号处的精确有限支撑
 
@@ -148,4 +148,4 @@ $$
 
 对每个充分大的 $N$，考察较小窗口在争议半径上的带符号拟合值。若 $p_S(R)>0$，选取 $T$ 可使其纳入边界的权重为正。若 $p_S(R)\le0$，选取 $S$ 可使其未纳入边界的带符号值非正，包括精确等于零的情形。其余对径边界和前部边界的严格符号由首项极限保证。选取的拟合给出两个窗口上的精确正权重支撑，满足两个矩等式与平方距离能量不等式。该分类只要求首项收敛 $Q_N\to T_e(l+1)$ 与最终奇偶性，允许所选窗口随 $N$ 变化。
 
-前述漂移定理依次给出渐近符号的充分条件。即使二阶余量消失，有限比较仍可确定精确支撑。有限跃迁位置更高阶的显式渐近估计是另一个待推进的问题。 [Lean 内核核验的精确阈值定理](https://github.com/the-omega-institute/trureturing/pull/34080)
+前述漂移定理依次给出渐近符号的充分条件。即使二阶余量消失，有限比较仍可确定精确支撑。有限跃迁位置更高阶的显式渐近估计是另一个待推进的问题。 [Lean 精确值恒等式证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingThresholdExact.adjacent_fit_score) [Lean 精确阈值支撑证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingThresholdExact.eventual_support_at_leading_threshold)

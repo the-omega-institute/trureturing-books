@@ -1,0 +1,29 @@
+{
+  "title": "Can't copy it? Hide it in a room",
+  "title_zh": "复印不了，就藏进房间",
+  "summary": "A photocopier copies any page, but no machine copies an unknown quantum state, and the reason is angles. A quantum machine acts like a rigid turn of the whole space: it keeps the overlap of any two arrows. Fed with a blank, two states psi and phi have overlap z times one; their copies would have overlap z times z. With z = 0.6 the overlap would have to drop to 0.36 and the angle open from 53.13° to 68.90°; the gap z − z² closes only at 0 and 1. Lean checks, for any complex inner product space, one unitary (a linear isometric equivalence) and one unit blank, that two exactly cloned unit states have an overlap equal to its square, and so are identical or orthogonal. Quantum codes therefore hide the state instead of copying it: the three-bit code splits eight dimensions into four perpendicular two-dimensional rooms, a bit flip carries the state whole into another room, and each room's key S_i* opens only its own room. A nudge of the middle bit leaves the state 0.7 at home and 0.3 next door, with cross terms ±0.46i; decoding removes them and returns 0.7 + 0.3 = 1 times the state. Lean checks that for any matrices σ and ρ and perpendicular rooms, decoding returns the trace of σ times ρ. The film marks its limits: the criterion is only necessary (near copies are a literature result), the code guards only against errors built from single bit flips and not against a phase flip, and here the four rooms fill all eight dimensions, so the keys already form a full channel; codes with spare room would need one more piece.",
+  "summary_zh": "复印机什么页都能印，却没有机器能复制一个未知的量子态，原因在角度。量子机器像把整个空间刚性地转一转：任意两支箭头的重叠都不变。配上白纸，两个态 ψ、φ 的重叠是 z 乘 1；复制后的重叠却是 z 乘 z。取 z = 0.6，重叠得降到 0.36，夹角得从 53.13° 张到 68.90°；缺口 z − z² 只在 0 和 1 两端合上。Lean 检验：在任意复内积空间里，同一台酉（线性等距等价）机器、同一张单位白纸，若精确复制了两个单位态，它们的重叠就等于自身的平方，因此两态要么相同，要么正交。于是量子码不复制，而是把态藏起来：三比特码把八维空间分成四间互相垂直的二维房，一次比特翻转把态整个搬进另一间房，每间房的钥匙 S_i* 只开自己那间。把中间比特轻推一下，态七成留在原房、三成在隔壁，交叉项为 ±0.46i；解码消去交叉项，交回 0.7 + 0.3 = 1 倍的原态。Lean 检验：只要房间两两正交，对任意矩阵 σ、ρ，解码都给出 σ 的迹乘 ρ。片尾说明边界：判据只是必要条件（近似复制是文献结果）；这套码只防由单个比特翻转拼成的错误，防不了相位翻转；这里四间房正好铺满八维，钥匙本身就是完整的信道，房间铺不满时才要给其余空间补上一块。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-24",
+  "duration": "2:29",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a photocopier and a turntable for arrows, a dial whose angle would have to open, the gap z − z², four perpendicular rooms with lights and keys, a nudged state split between two rooms and decoded back",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion",
+    "D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_no-cloning-syndromes_720p_narrated.mp4",
+    "cover": "quantum-geometry_no-cloning-syndromes_cover.jpg"
+  }
+}

@@ -187,7 +187,7 @@ $$
 
 非降的有界整数序列必趋于常值，此处终值属于 $\{2,3,4\}$。
 
-**实标量与 Banach 目标。** 对 $n\ge3$，实数增益下，最小一致误差等于定向简单回路的最大绝对增益均值。下界来自势差的消去。反过来，若这些均值至多为 $r$，给各有向棱权重 $g_{uv}+r$。反向也满足回路界，折返权重为 $2r$，故无负回路。从新增零权源点取最短路距离作势，最短路距离在棱的两个方向上均满足所需不等式，故误差至多 $r$。弦分解把长为 $\ell$ 的回路分成 $\ell-2$ 个三角形，故上界为 $(n-2)\varepsilon/n$。取零辐条的扇图，沿扇缘路径给每棱增益 $\varepsilon$，则长 $n$ 的外圈达到此界。把例子扩为 $K_n$ 可令所有从较小到较大的非辐条棱取相同增益。对 $K_n$ 上的任意实 Banach 目标，平均所有 $n$ 个星形势 $g_{av}$（$g_{aa}=0$）。每棱的两个端点星形势精确拟合它，其余各误差至多 $\varepsilon$，故平均仍给出尖锐常数 $(n-2)/n$。
+**实标量与 Banach 目标。** 对 $n\ge3$，实数增益下，最小一致误差等于定向简单回路的最大绝对增益均值。下界来自势差的消去。反过来，若这些均值至多为 $r$，给各有向棱权重 $g_{uv}+r$。反向也满足回路界，折返权重为 $2r$，故无负回路。从新增零权源点取最短路距离作势，最短路距离在棱的两个方向上均满足所需不等式，故误差至多 $r$。弦分解把长为 $\ell$ 的回路分成 $\ell-2$ 个三角形，故上界为 $(n-2)\varepsilon/n$。取零辐条的扇图，沿扇缘路径给每棱增益 $\varepsilon$，则长 $n$ 的外圈达到此界。把例子扩为 $K_n$ 可令所有从较小到较大的非辐条棱取相同增益。对任意实 Banach 目标，$K_n$ 的精确统一系数也是 $(n-2)/n$，见 [@thm-appe-complete-cliquesum-banach]。
 
 ::: {.theorem #thm-appe-chordal-path-power-two title="路径幂的 $2\varepsilon$ 重构界与弦图的普适下界 $2$" lean="D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_isChordal, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_exists_two_approximate_gain_potential, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_three_banach_and_integral_lower_bound, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_three_exact_two, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.not_subtwo_universal_chordal"}
 对 $n,k\in\mathbb N$，记 $P_n^k$ 为顶点集 $\mathrm{Fin}(n)=\{i\in\mathbb N:i<n\}$ 上的路径幂，其中 $i,j$ 相邻当且仅当 $i\ne j$ 且 $|i-j|\le k$。
@@ -350,7 +350,7 @@ $$
 
 **区间图。** 任一非空顶点子集内，右端点最小的区间的所有邻区间都含该端点。将此用于长至少为 $4$ 的环的顶点集，其两个环上邻点之间的棱就是一条弦。重构时，归纳要求根 $p$ 的左端点不大于当前集合中任何区间的右端点。取左端点最小的区间为初始根，令 $\varphi(p)=1$，并以 $\varphi(x)=g(p,x)$ 精确拟合其辐棱。在邻点中保留右端点最大的 $q$，其余递归顶点为 $p$ 的非邻点（去掉 $p$）。这些非邻区间的左端点都在 $r(p)$ 右侧。因此 $\ell(q)\le r(p)$ 保证新根 $q$ 的左端点仍不大于递归集合的任一右端点，正是本归纳所需的根条件。递归势以同一个群元素左乘来接合，使 $\varphi(q)=g(p,q)$，同时精确拟合 $q$ 的递归辐棱。若 $p$ 孤立，则将它删去，余图非空时从左端点最小的区间重新开始。
 
-同属 $p$ 邻域的两点之间，误差由经过 $p$ 的一个三角形控制。若棱 $xy$ 从 $p$ 的邻点 $x$ 跨到非邻点 $y$，则 $\ell(y)\le r(x)\le r(q)$ 且 $\ell(y)>r(p)$，故 $y$ 与 $q$ 相邻。若 $x\ne q$，则 $x,q$ 均含 $r(p)$，也彼此相邻。将 $g(p,x)g(x,y)$ 与 $\varphi(y)=g(p,q)g(q,y)$ 比较，先用三角形 $(x,q,y)$，再用 $(p,x,q)$，总误差至多为 $2\varepsilon$。若 $x=q$，这条棱已被精确拟合。余下的棱由归纳控制。由左平移不变性，棱的拟合误差等于 $d(arphi(x)g(x,y),arphi(y))$。再用逆增益右平移及 $d$ 的对称性，得到反向棱的误差相同。空图没有棱需要拟合。
+同属 $p$ 邻域的两点之间，误差由经过 $p$ 的一个三角形控制。若棱 $xy$ 从 $p$ 的邻点 $x$ 跨到非邻点 $y$，则 $\ell(y)\le r(x)\le r(q)$ 且 $\ell(y)>r(p)$，故 $y$ 与 $q$ 相邻。若 $x\ne q$，则 $x,q$ 均含 $r(p)$，也彼此相邻。将 $g(p,x)g(x,y)$ 与 $\varphi(y)=g(p,q)g(q,y)$ 比较，先用三角形 $(x,q,y)$，再用 $(p,x,q)$，总误差至多为 $2\varepsilon$。若 $x=q$，这条棱已被精确拟合。余下的棱由归纳控制。由左平移不变性，棱的拟合误差等于 $d(\varphi(x)g(x,y),\varphi(y))$。再用逆增益右平移及 $d$ 的对称性，得到反向棱的误差相同。空图没有棱需要拟合。
 
 **分裂图。** 每个非空诱导子图若含团外顶点，该点的邻点均在团内。若全部顶点都在团内，则任选一点也是单纯顶点。这再次保证每个长至少为 $4$ 的环有弦。团非空时取根 $o$，令 $\varphi(o)=1$，其余团内顶点取 $\varphi(x)=g(o,x)$。辐棱精确拟合，其他团内棱误差至多为 $\varepsilon$。对每个非孤立的团外顶点 $y$，选团内邻点 $a$，置 $\varphi(y)=\varphi(a)g(a,y)$。棱 $ay$ 精确拟合。对另一个团内邻点 $x$，先用三角形 $(x,a,y)$，再用团内棱 $xa$ 的误差估计，得到至多 $2\varepsilon$。团外没有内部棱，孤立顶点可任取势。团为空时全图无棱。
 
@@ -361,7 +361,53 @@ $$
 
 第 2 项对实 Banach 空间的加法群也适用，取 $d(a,b)=\|a-b\|$。第 4 项将 [@thm-appe-chordal-banach-limit-two] 的路径幂下界带入有限区间图类。先固定 $k$ 让 $n$ 趋于无穷，再增大 $k$，最优系数的下界可任意接近 $2$。因此有限区间图上的实 Banach 重构系数与双不变伪度量群的通用重构系数，上确界均恰为 $2$。
 
-将第 1 项与 [@thm-appe-clique-bounded-banach-potential] 合用，团大小至多为 $k+1$ 时误差至多为 $\min(k-1,\,4-4/k)\varepsilon$。对团大小无统一限制的弦图，实 Banach 系数 $C_{\mathrm{Ban,chordal}}$ 在 $[2,4]$ 内的精确值仍待确定，双不变伪度量群的通用系数 $C_{\mathrm{chordal}}$ 仍待在 $\{2,3,4\}$ 中确定。固定目标群后，还可以问一个给定弦图上的最优系数。
+将第 1 项与 [@thm-appe-clique-bounded-banach-potential] 合用，团大小至多为 $k+1$ 时误差至多为 $\min(k-1,\,4-4/k)\varepsilon$。对团大小无统一限制的弦图，实 Banach 系数 $C_{\mathrm{Ban,chordal}}$ 在 $[2,4]$ 内的精确值仍待确定，双不变伪度量群的通用系数 $C_{\mathrm{chordal}}$ 仍待在 $\{2,3,4\}$ 中确定。
+
+完全图上，可以把所有星形势同时纳入平均，进一步把三角误差的系数压到 $1$ 以下。若较大的图由若干片沿树接合，还可以先逐片拟合，再在相接的团上取中点。
+
+::: {.theorem #thm-appe-complete-cliquesum-banach title="完全图的精确实 Banach 重构常数与分离团和的中点平均" lean="D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.completeGraph_banach_upper_bound, D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.completeGraph_banach_lower_bound, D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.separatedCliqueSum_banach_gain_potential"}
+1. **完全图上的实半赋范上界。** 设 $V$ 为有限顶点集，$|V|\ge2$，$E$ 为任意实半赋范向量空间，$\varepsilon\in\mathbb R$。设 $g:V\times V\to E$ 对任意 $i,j$ 满足 $g(j,i)=-g(i,j)$，且对每组两两不同的 $i,j,l$ 满足 $\|g(i,j)+g(j,l)-g(i,l)\|\le\varepsilon$。则存在势 $\varphi:V\to E$，使任意 $i\ne j$ 满足
+
+   $$
+   \|g(i,j)-(\varphi(j)-\varphi(i))\|\le\frac{|V|-2}{|V|}\varepsilon.
+   $$
+
+2. **完全图上的尖锐实 Banach 下界。** 对每个自然数 $m\ge2$，令 $\mathrm{ZeroDivSkew}(m)$ 为行和全为零的实反对称 $m\times m$ 矩阵空间，配以逐项上确界范数，成为有限维实 Banach 空间。存在 $g:\mathrm{Fin}(m)\times\mathrm{Fin}(m)\to\mathrm{ZeroDivSkew}(m)$，对任意 $i,j$ 满足 $g(j,i)=-g(i,j)$，且对两两不同的 $i,j,l$ 满足 $\|g(i,j)+g(j,l)-g(i,l)\|\le1$，使得对任意势 $\varphi:\mathrm{Fin}(m)\to\mathrm{ZeroDivSkew}(m)$，都存在 $i\ne j$ 满足
+
+   $$
+   \|g(i,j)-(\varphi(j)-\varphi(i))\|\ge\frac{m-2}{m}.
+   $$
+
+3. **分离团和上的中点平均。** 设 $T$ 是任意指标类型 $I$ 上的树，$G$ 是有限顶点集 $V$ 上的简单图，$P:I\to\mathcal P(V)$ 是一族片的顶点集，每个顶点属于至少一片，每条 $G$ 的棱的两个端点同属至少一片。给定自然数 $m\ge1$，对每条树棱 $ab$，交集 $S(a,b)=P(a)\cap P(b)$ 是非空的 $G$-团且 $|S(a,b)|\le m$。若树中不同的 $a,b$ 不相邻，则 $P(a)$ 与 $P(b)$ 不交。在每片 $P(a)$ 中，不同树邻点 $b,c$ 的附着集 $S(a,b),S(a,c)$ 两两不交，且两集之间没有 $G$ 的棱。
+
+   设 $E$ 为任意实半赋范向量空间，$g:V\times V\to E$ 为任意增益，$R\ge0$ 为实数，局部势族 $\varphi_a:V\to E$ 满足对每个 $a\in I$ 及每条端点均在 $P(a)$ 中的有向 $G$-棱 $(u,v)$，有 $\|g(u,v)-(\varphi_a(v)-\varphi_a(u))\|\le R$。则存在全局势 $\Phi:V\to E$，使每条有向 $G$-棱 $(u,v)$ 满足
+
+   $$
+   \|g(u,v)-(\Phi(v)-\Phi(u))\|\le(2-1/m)R.
+   $$
+:::
+
+::: {.proof #pf-appe-complete-cliquesum-banach}
+**星形势的平均。** 令 $n=|V|$，取 $\varphi(v)=\frac1n\sum_{w\in V}g(w,v)$。由反对称性 $g(i,i)=0$。棱 $(i,j)$ 的残差就是 $g(w,i)+g(i,j)-g(w,j)$ 对所有 $w$ 的平均，其中 $w=i,j$ 的两项为零，其余 $n-2$ 项的半范数至多为 $\varepsilon$。三角不等式给出所需上界。$n=2$ 时两项全为零，任意实数 $\varepsilon$ 都适用。
+
+**有向三角形见证。** 令 $A_{ab}$ 是从零矩阵出发，在坐标 $(a,b)$ 处加 $1$、在 $(b,a)$ 处减 $1$ 的矩阵，令 $T(a,b,c)=A_{ab}+A_{bc}+A_{ca}$。它反对称、各行之和为零，三个顶点不同则各坐标的绝对值至多为 $1$，有重复顶点时矩阵为零。固定 $0\in\mathrm{Fin}(m)$，取 $g(i,j)=T(0,i,j)$。交换 $i,j$ 使增益取负，且 $g(i,j)+g(j,l)-g(i,l)=T(i,j,l)$。若 $i\ne j$，则 $g(i,j)_{ij}$ 在两端都不同于 $0$ 时为 $1$，否则为 $0$，故这些坐标之和为 $(m-1)(m-2)$。任意势的每个矩阵同时具有零行和与零列和，后一性质来自反对称性。把势差的 $(i,j)$ 项按行、列分别求和，它们的总和为零（对角项也为零）。因此
+
+$$
+\sum_{i\ne j}\bigl(g(i,j)-(\varphi(j)-\varphi(i))\bigr)_{ij}=(m-1)(m-2).
+$$
+
+在 $m(m-1)$ 个有序异点对中，至少有一个残差坐标不小于平均值 $(m-2)/m$，其范数也不小于该值。
+
+**沿树接合。** 令 $d(a,b)$ 为 $\varphi_a-\varphi_b$ 在 $S(a,b)$ 上的平均。它随树棱反向取负。从树根出发沿唯一有限路径累加 $d$，取平移量 $c_a$，使 $c_b-c_a=d(a,b)$。于是 $\psi_a=\varphi_a+c_a$ 保持原有棱误差，且 $D(s)=\psi_b(s)-\psi_a(s)$ 在每个附着团 $S(a,b)$ 上的平均为零。记团大小为 $q$。对团内不同的 $s,t$，用同一有向棱 $(s,t)$ 上两片各自的残差相减，得 $\|D(s)-D(t)\|\le2R$。由零均值及自身项为零，
+
+$$
+\left\|\frac{D(s)}2\right\|\le\frac{q-1}{q}R\le(1-1/m)R.
+$$
+
+不相邻片不交、同片内不同附着集不交，保证每个共享顶点恰属两片。在共享顶点取两片平移后势的中点，独属一片的顶点保持该片的平移后势。每条棱都在某片内。若两端均共享，则分离条件保证它们位于同一附着团，棱残差是两片原残差的平均，半范数至多为 $R$。其余棱至多一个端点发生中点调整，增量至多为 $(1-1/m)R$，故总误差至多为 $(2-1/m)R$。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 合用前两项，$m$ 个顶点的完全图在所有实 Banach 目标上的最优统一系数恰为 $(m-2)/m$。第 3 项把已有局部拟合的误差传递到全图，在分离的附着团大小至多为 $m$ 时重构误差至多为局部误差的 $2-1/m$ 倍。接下来固定非线性目标群，考察完全图上的最优系数。
 
 **四顶点图上的 $\mathrm{SU}(2)$ 圆度量反例。** 四点弦图若无三角形便是森林。若只有一个三角形，可规范化两条辐棱，把余棱写成 $\exp X$，再取势 $1,\exp(-X/3),\exp(X/3)$，三棱误差各为 $|X|/3\le\varepsilon/3$。附着的树棱可精确拟合。剩下的非完全图是两三角形共一棱的菱形图。把一个度数为 $3$ 的顶点取作中心，将辐棱规范化为 $1$。在外缘路径的中间顶点取势 $1$，两端各在 $1$ 与精确拟合相应外缘棱的值之间取最短测地线中点，误差至多 $\varepsilon/2$。
 
@@ -409,12 +455,49 @@ $$
 解 $u\le(\sqrt3/2)(1-u^2)$ 得 $u\le1/\sqrt3$，所以 $r\ge r_0$。当 $r\ge\pi/2$，同一下界直接成立。取 $t=1/\sqrt3$，在垂直于 $1,I$ 的平面内取 $v_1=J$（沿第二虚轴的单位四元数），再按 $v_{j+1}=-v_j/2+(\sqrt3/2)v_j I$ 循环旋转。势 $q_j=t+\sqrt{1-t^2}\,v_j$ 的辐棱余弦为 $t$，外缘余弦为 $(1-t^2)\sqrt3/2=t$。又 $\cos(3\pi/10)=\sin(\pi/5)$，其平方为 $(5-\sqrt5)/8>1/3$，故 $r_0>3\pi/10$。若统一系数 $k<c_*$，在 $Q$ 上取 $\varepsilon=\pi/2$ 就会要求半径 $k\pi/2<r_0$，与下界矛盾。完整证明由 Lean 内核检查。
 :::
 
-**循环单参数族（手工推导）。** $c_*$ 也是循环族（辐棱增益为 $1$，外缘统一取 $\cos\theta+I\sin\theta$，$0<\theta\le\pi$）的最优比值。为核对最优性，记 $r(\theta)$ 为最小拟合半径，$r_0=\arccos(1/\sqrt3)$。当 $0<\theta\le\pi/3$，恒等势和外缘三角的闭路下界给出 $r(\theta)=\theta$，比值为 $1/3$。当 $\pi/3\le\theta\le\pi/2$，最大缺陷为 $2\pi-3\theta$。设 $\delta=\pi/2-\theta$，各外缘增益只改变距离 $\delta$，故 $r(\theta)\le r_0+\delta$，并由 $3c_*>1$ 得 $\delta>0$ 时比值严格低于 $c_*$。
+让三条有向外缘棱保持相同增益，只改变共同的转角，就可以逐角度求出精确的拟合半径，并确定四分之一转为何给出最大的比值。
 
-当 $\pi/2\le\theta\le\pi$，最大缺陷为 $\theta$。置 $a=\cos\theta$、$k=\cos(\theta-2\pi/3)$，最优半径为 $\arccos u_\theta$，其中 $u_\theta$ 是 $F_\theta(u)=k+(a-k)u^2-u$ 在 $(0,1)$ 内的唯一零点。事实上，设拟合的最小余弦为 $u>0$。外缘内积均值的对称部分为 $a(3|m|^2-1)/2$，反对称部分至多为 $(\sqrt3/2)\sin\theta(1-|m|^2)$，故 $u\le k+(a-k)|m|^2\le k+(a-k)u^2$。在定理证明的平面向量构造中取实部 $u_\theta$、虚部长度 $\sqrt{1-u_\theta^2}$，每条辐棱的余弦为 $u_\theta$，每条外缘棱的余弦为 $k+(a-k)u_\theta^2=u_\theta$。在 $\pi/2\le\theta\le2\pi/3$ 上，$F_\theta(1/\sqrt3)=(\sin\theta-1)/\sqrt3\le0$，故 $u_\theta\le1/\sqrt3$。隐式求导时，$r'(\theta)$ 的分子 $\sin\theta\,u_\theta^2+\sin(\theta-2\pi/3)(1-u_\theta^2)$ 至多为 $u_\theta^2$，分母 $(1+2(k-a)u_\theta)\sqrt{1-u_\theta^2}$ 至少为 $\sqrt{1-u_\theta^2}$，故 $r'(\theta)\le1/\sqrt6<c_*$。在 $2\pi/3\le\theta\le\pi$ 上，$9F_\theta(1/3)=-3\cos\theta+4\sqrt3\sin\theta-3\ge0$，因为该式在此区间凹且端点非负。因此 $r(\theta)\le\arccos(1/3)<4r_0/3$。最后一个不等式可比较 $3\arccos(1/3)$ 与 $4r_0$ 的余弦 $-23/27$ 与 $-7/9$，两角均在 $(\pi,2\pi)$。这些界给出 $\theta>\pi/2$ 时严格较小的比值。
+::: {.theorem #thm-appe-round-quaternion-equal-rim-minimax title="循环等增益外缘的精确极小极大半径与四分之一转的唯一极大比值" lean="D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionEqualRimMinimax.RoundQuaternionEqualRimMinimax.equalRim_exact_defect_and_minimax, D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionEqualRimMinimax.RoundQuaternionEqualRimMinimax.equalRim_ratio_unique_maximum_at_quarter_turn"}
+在 $K_4$ 的顶点集 $\mathrm{Fin}(4)=\{0,1,2,3\}$ 上考虑取值于实单位四元数群 $S=\operatorname{unitary}\mathbb H$ 的增益。群 $S$ 取圆距离 $d(p,q)=\arccos\langle p,q\rangle_{\mathbb R}$。令 $I\in\mathbb H$ 满足 $\operatorname{Re}I=0$ 和 $\|I\|=1$。对 $a\in[0,\pi]$，记 $G(I,a)=(g_{ij})$ 为如下增益分配。对角与中心 $0$ 的辐棱增益均为 $1$，有向外缘 $(1,2),(2,3),(3,1)$ 的增益均为 $A=\cos a+I\sin a$，反向外缘的增益为 $A^{-1}$。
+
+称增益的三角缺陷至多为 $\varepsilon$，是指 $g_{ji}=g_{ij}^{-1}$、$g_{ii}=1$，且对所有两两不同的 $i,j,k$ 都有 $d(g_{ij}g_{jk},g_{ik})\le\varepsilon$。称势 $\varphi:\mathrm{Fin}(4)\to S$ 在半径 $r$ 内拟合增益，是指每条有向棱 $i\ne j$ 都满足 $d(g_{ij},\varphi_i^{-1}\varphi_j)\le r$。
+
+当 $0\le a\le\pi/3$ 时，定义 $e(a)=3a$。当 $\pi/3<a\le\pi/2$ 时，定义 $e(a)=2\pi-3a$。当 $\pi/2<a\le\pi$ 时，定义 $e(a)=a$。当 $0\le a\le\pi/3$ 时，令 $R(a)=a$。当 $\pi/3<a\le\pi$ 时，令 $R(a)=\arccos t(a)$，其中 $t(a)$ 是下列方程的唯一正根，$\lambda(a)=\cos(a-2\pi/3)$。
+
+$$
+(\lambda(a)-\cos a)t^2+t-\lambda(a)=0.
+$$
+
+1. **精确三角缺陷与极小极大半径。** 对每个上述 $I$ 和每个 $a\in[0,\pi]$，$G(I,a)$ 的三角缺陷至多为 $e(a)$。对每个实数 $\varepsilon$，若其三角缺陷至多为 $\varepsilon$，则 $e(a)\le\varepsilon$。存在势 $\varphi:\mathrm{Fin}(4)\to S$ 在半径 $R(a)$ 内拟合 $G(I,a)$。对任意势 $\varphi:\mathrm{Fin}(4)\to S$ 与实数 $r$，若 $\varphi$ 在半径 $r$ 内拟合 $G(I,a)$，则 $R(a)\le r$。
+2. **四分之一转处唯一取等。** 对所有 $a\in(0,\pi]$，有 $R(a)/e(a)\le c_*=\frac{2}{\pi}\arccos(1/\sqrt3)$，且等号当且仅当 $a=\pi/2$。
+:::
+
+::: {.proof #pf-appe-round-quaternion-equal-rim-minimax}
+由 $I^2=-1$，含中心的三角形与外缘三角形的闭路增益分别为 $A^{\pm1}$ 与 $A^{\pm3}$。左右乘单位四元数均保距，故其缺陷分别为 $a$ 与 $\arccos(\cos(3a))$。两者都出现，取较大值并将角度折回 $[0,\pi]$，即得三段式 $e(a)$。
+
+把势同时左乘 $\varphi_0^{-1}$，使中心势为 $1$，所有相对势 $\varphi_i^{-1}\varphi_j$ 不变。记外缘势为 $x_i$，下标按外缘循环。若拟合半径 $r<\pi/2$，令 $u=\cos r>0$。由于 $r\ge0$，三条辐棱给出 $u\le\langle 1,m\rangle_{\mathbb R}\le\|m\|\le1$，其中 $m=(x_1+x_2+x_3)/3$。沿每条外缘棱左乘起点势，得 $u\le\langle x_i A,x_{i+1}\rangle_{\mathbb R}$。
+
+写 $x_i=m+y_i$，则 $\sum_i y_i=0$，$\sum_i\|y_i\|^2=3(1-\|m\|^2)$。在零和子空间取正交坐标 $E=(y_1-y_2)/\sqrt2$、$H=(y_1+y_2-2y_3)/\sqrt6$，故 $\|E\|^2+\|H\|^2=\sum_i\|y_i\|^2$。循环对称和 $\sum_i\langle x_i,x_{i+1}\rangle_{\mathbb R}$ 等于 $3\|m\|^2-\tfrac12\sum_i\|y_i\|^2$。右乘 $I$ 是斜对称等距变换，故循环斜对称和 $\sum_i\langle x_i I,x_{i+1}\rangle_{\mathbb R}=\sqrt3\langle EI,H\rangle_{\mathbb R}$，至多为 $\tfrac{\sqrt3}{2}(\|E\|^2+\|H\|^2)$。于是由 $\sin a\ge0$ 与 $\lambda(a)=-\cos a/2+(\sqrt3/2)\sin a$ 得
+
+$$
+u\le\frac13\sum_i\langle x_i A,x_{i+1}\rangle_{\mathbb R} \le\cos a\,\|m\|^2+\lambda(a)(1-\|m\|^2).
+$$
+
+差值 $\lambda(a)-\cos a=\sqrt3\sin(a-\pi/3)$ 在 $a\le\pi/3$ 时非正，故 $u\le\cos a$。取恒为 $1$ 的势即达到半径 $a$。当 $a>\pi/3$ 时，记 $D=\lambda(a)-\cos a>0$。由 $\|m\|\ge u$ 得 $Du^2+u\le\lambda(a)$。多项式 $Dt^2+t-\lambda(a)$ 在 $[0,\infty)$ 严格递增，且在 $0$ 处为 $-\lambda(a)<0$（因为 $|a-2\pi/3|\le\pi/3$），在 $1$ 处为 $1-\cos a>0$，故 $u\le t(a)<1$。余弦在 $[0,\pi]$ 递减，给出所需的半径下界。两种情形均有 $R(a)\le\pi/2$，所以 $r\ge\pi/2$ 时下界也成立。
+
+取垂直于 $1,I$ 的单位四元数 $J$，在 $J,JI$ 张成的平面内取 $v_i=J(\cos b_i+I\sin b_i)$，其中 $b_i$ 依次为 $0,2\pi/3,4\pi/3$。取中心势为 $1$、外缘势为 $x_i=t+\sqrt{1-t^2}\,v_i$。辐棱的余弦为 $t$。右乘 $A$ 将平面内的角度增加 $a$，故外缘余弦均为 $\cos a\,t^2+\lambda(a)(1-t^2)$。取 $t=t(a)$，两种余弦相等，达到半径 $R(a)$。反向棱的误差由取逆保距而相同。
+
+当 $0<a\le\pi/3$ 时，比值为 $1/3$。当 $a>\pi/3$ 时，在同一构造中取固定纬度 $q=1/\sqrt3$。外缘余弦化为 $q\sin a\le q$，故 $R(a)\le f(s)=\arccos(q\cos s)$，其中 $s=|a-\pi/2|$。在 $[0,\pi/2]$ 上，$f''(s)=q(1-q^2)\cos s/(1-q^2\cos^2 s)^{3/2}\ge0$。两端点的割线给出 $f(s)\le f(0)+(1-c_*)s$。又 $e(a)\ge\pi/2+s$，且 $c_*=2f(0)/\pi>1/2$，因为 $q<\cos(\pi/4)$。因此 $s>0$ 时，
+
+$$
+R(a)\le f(s)\le f(0)+(1-c_*)s<c_*(\pi/2+s)\le c_*e(a).
+$$
+
+在 $a=\pi/2$ 时，辐棱与外缘的余弦在纬度 $q$ 处相等，故 $q=t(\pi/2)$。于是 $R(\pi/2)=f(0)$、$e(\pi/2)=\pi/2$，比值恰为 $c_*$。完整证明由 Lean 内核检查。
+:::
 
 ::: {.problem #prob-appe-round-quaternion-k4-optimal-constant title="$K_4$ 上圆度量单位四元数增益的最优统一系数"}
-记 $C_{\mathrm{SU}(2)}(K_4)$ 为 $K_4$ 上所有正三角缺陷的圆度量单位四元数增益实例中，最小拟合半径与最大三角缺陷之比的上确界。由 [@thm-appe-round-quaternion-k4-bounds] 的统一上界和四分之一转实例得到 $c_*\le C_{\mathrm{SU}(2)}(K_4)\le4/5$。任意增益下的精确上确界仍是开放问题。
+记 $C_{\mathrm{SU}(2)}(K_4)$ 为 $K_4$ 上所有正三角缺陷的圆度量单位四元数增益实例中，最小拟合半径与最大三角缺陷之比的上确界。由 [@thm-appe-round-quaternion-k4-bounds] 的统一上界和四分之一转实例得到 $c_*\le C_{\mathrm{SU}(2)}(K_4)\le4/5$。由 [@thm-appe-round-quaternion-equal-rim-minimax]，循环等增益外缘族的最大比值 $c_*$ 仅在四分之一转处取得。任意增益下的精确上确界仍是开放问题。
 :::
 
 **小缺陷与上确界取到（手工推导）。** 缺陷 $\varepsilon$ 趋零时，将辐棱规范化为 $1$，再取切空间对数 $z_{ij}=\log g_{ij}$。每条外缘增益都距 $1$ 至多 $\varepsilon$，所以各对数的范数至多为 $\varepsilon$。三角乘积取对数的一阶项为三个对数之和，故加法三角缺陷至多为 $\varepsilon+O(\varepsilon^2)$。平均 $4$ 个加法星形势得到范数为 $O(\varepsilon)$ 的势，棱误差至多为 $\varepsilon/2+O(\varepsilon^2)$。将势取指数时的二阶误差仍为 $O(\varepsilon^2)$，因此重构误差与缺陷之比至多为 $1/2+O(\varepsilon)$。最小拟合半径是紧致势空间上连续误差函数的最小值，因而随增益连续。最大三角缺陷也是连续的。由于 $c_*>1/2$，充分小的正缺陷给出的比值都小于 $c_*$，故上确界在远离零缺陷的紧集上取到。

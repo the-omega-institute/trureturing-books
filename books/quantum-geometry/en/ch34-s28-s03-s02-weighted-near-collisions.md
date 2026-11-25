@@ -534,6 +534,25 @@ If every $\rho w_j\le1$, the product is at most $\exp(4\rho^2\sum_j w_j^2)$. The
 
 [Lean proof of the disjoint coefficient bound](lean:D5/S3/Fourier/Concentration/DisjointCharacterEnvelope.coefficient_envelope)
 
+### Signed truncation remainder for conjugate phases
+
+For the conjugate weights above, write $C_T=[x^d]e^{Sx}\prod_{j\in T}(e^{-A_jx}-1)$. Put $B_T=0$ for $|T|>d$, and otherwise define
+$$
+B_T=\left(\prod_{j\in T}w_j\right)\frac{(|S|+\sum_{j\in T}w_j)^{d-|T|}}{(d-|T|)!}.
+$$
+Retaining the signs of the individual subsets gives the real identity and degree-sensitive bound
+$$
+[x^dy^d]Q_k=\sum_{\substack{T\subseteq J\\|T|\le d}}(-1)^{|T|}|C_T|^2,\qquad |C_T|\le B_T.
+$$
+The right-axis correction is the negative of the conjugate left-axis correction, so each subset gives the indicated signed square. The norm of the local exponential tail coefficient at degree $n\ge1$ is at most $w_j^n/(n-1)!$, giving coefficientwise domination by $w_j x e^{w_j x}$. The Cauchy product preserves this nonnegative bound. Multiplication by $e^{|S|x}$ and removal of the $|T|$ extracted powers of $x$ give $B_T$. For example, at $d=1$ the mixed coefficient is $|S|^2-\sum_j w_j^2$, and the entire contribution is nonpositive when $S=0$.
+
+For any natural number $K$, subtract the signed sum over $|T|\le\min(d,K)$ from the mixed coefficient. The remainder $R_K$ satisfies
+$$
+-\!\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ odd}}}B_T^2\le R_K\le
+\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ even}}}B_T^2.
+$$
+The exact remainder is the sum of the omitted even-cardinality squares minus the sum of the odd-cardinality squares. It vanishes for $K\ge d$. Multiplying by nonnegative Fourier weights and summing preserves the computed negative contributions. This gives a degree-sensitive refinement when applying the Fejér band estimate below. Bounding the high-degree subset squares and the exceptional-character weight for the actual ζ ordinates still requires an arithmetic estimate. [Lean proof of the signed expansion](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_expansion) [Lean proof of the parity remainder](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_remainder)
+
 ### Bounding a cyclic band with nonnegative Fourier weights
 
 Let $R_H$ be the residues of the integers in $[-H,H]$. For a nonnegative residue mass $M(r)$, use the negative character in $\widehat M(k)=\sum_rM(r)\chi_k(-r)$ and put $B_N(k)=\sum_{j=0}^{N-1}\chi_k(j)$. For integers $N>H\ge0$,
@@ -874,6 +893,34 @@ $$
 The threshold shift is the negative of this ratio. The symmetric finite sums yield $m_4=(N^2-1)(3N^2-5)/35$ and give the displayed coefficient. The asymptotic keeps $N$ fixed. Small moduli can give positive weight on additional antipodal levels. [Lean proof of the switch and scaled displacement](lean:D5/S3/Fourier/Asymptotics/CyclicActivationShift.cyclic_activation_shift) · [Derivation and finite checks](https://github.com/the-omega-institute/trureturing/issues/34016#issuecomment-7148575133)
 
 The growth of the lattice radius leads to a separate question about uniform moment errors and the exact antipodal support. The [growing cyclic support analysis](ch34-s28-s03-s02-growing-cyclic-support.md) develops this regime.
+
+### Exact support away from the rear thresholds
+
+Fix the eventual parity $e\in\{0,1\}$ and suppose $N^5h^2\to K>0$. Put $Q=3K/20$. The rear window $S_l$ of index $l\ge0$ contains offsets from $-l-e/2$ through $l+e/2$ in unit steps, measured from the antipodal angle. Define
+
+$$
+T_0(l)=\frac{l(2l-1)(2l+1)}4,\qquad
+T_1(l)=l(l+1/2)(l+1).
+$$
+
+If $Q$ differs from every $T_e(l)$, there is a unique $l$ satisfying $T_e(l)<Q<T_e(l+1)$. For all sufficiently large $N$, the unique cyclic optimizer $v$ is the joint fit on the front sites $|j|\le N$ and the rear window $S_l$, extended by zero on all other sites. It is strictly positive at every site in these two windows, and both cosine moments equal $1-2mh^2$. For every feasible probability weight $w$,
+
+$$
+\sum_j w_j^2\ge\sum_j v_j^2+\sum_j(w_j-v_j)^2.
+$$
+
+Writing $R=l+e/2$, the limiting rear intercept is $B=(Q+(3/4)\sum_{r\in S_l}r^2)/|S_l|$. Finite summation gives
+
+$$
+\begin{aligned}
+\tfrac34\left(|S_l|R^2-\sum_{r\in S_l}r^2\right)&=T_e(l),\\
+\tfrac34\left(|S_l|(R+1)^2-\sum_{r\in S_l}r^2\right)&=T_e(l+1).
+\end{aligned}
+$$
+
+The strict cutoffs are therefore equivalent to $3R^2/4<B<3(R+1)^2/4$. The boundary limits give positive values at the last included sites of both windows and negative signed values at the first omitted sites. The fitted polynomial is convex in the sampled cosine, so these four signs control the full cyclic grid. The exact correspondence of grid sites transfers the fitted moment equations to the cyclic group, and the finite optimality certificate yields the squared-distance inequality.
+
+If $q/N^{5/2}\to\gamma>0$, then $Q=3\pi^2/(5\gamma^2)$. The first additional rear pair enters below $\gamma=2\pi/\sqrt5$ on even cycles and below $\gamma=\pi/\sqrt5$ on odd cycles. The same formulas classify every subsequent switch away from equality. At equality the limiting signed value of a rear level vanishes, leaving its activation unresolved. [Kernel-checked Lean proof](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingSupport.eventual_strict_support_away_from_thresholds) · [Research and proof development](https://github.com/the-omega-institute/trureturing/issues/34029)
 
 ## Changing the height cutoff in a local statistic
 

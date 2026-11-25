@@ -1,0 +1,47 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen"},
+  "music": {"bpm": 80, "progression": "d-minor"},
+  "scenes": [
+    {"id": "hook", "name": "TWO KINDS OF TURN", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["On a superconducting chip, a sideways turn takes a microwave pulse, about twenty-five nanoseconds.", "在超导芯片上，把量子比特往侧面转，要打一个微波脉冲，大约 25 纳秒。"],
+      ["A turn about the vertical axis takes zero nanoseconds.", "绕竖直轴转呢？零纳秒。"],
+      ["We assume every turn needs a push. Who is pushing here?", "我们总以为，转动就得有人推一把。那这里是谁在推？"]
+    ], "cues": [{"line": 1, "at": 1.6, "kind": "glitch"}]},
+    {"id": "area", "name": "AREA IS ANGLE", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.0, 0.2], "lines": [
+      ["Ride along with the carrier, and a pulse just turns the state about a fixed axis.", "跟着载波一起转，脉冲就只是让态绕一根固定的轴转。"],
+      ["Like a tap filling a jug: the angle is the total water, the area under the pulse.", "就像水龙头往壶里灌水：转过的角是倒进去的总水量，也就是脉冲曲线下的面积。"],
+      ["Ten megahertz for twenty-five nanoseconds gives an area of pi over two: a quarter turn, pole to equator.", "10 MHz 打 25 ns，面积是 π/2：四分之一转，从北极到赤道。"],
+      ["Twice as strong for half as long: the same area, the same quarter turn.", "强度加倍、时间减半：面积不变，还是四分之一转。"]
+    ], "cues": [{"line": 2, "at": 4.0, "kind": "chime"}]},
+    {"id": "order", "name": "PULSES IN A ROW", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["Now chain three short pulses. How far does their trace stray from the ideal?", "现在把三个短脉冲连起来：它们的迹离理想值差多远？"],
+      ["Picture a ledger with two columns: the first-order drift lands entirely in the imaginary one.", "想象一本分两栏的账：一阶漂移全部记在虚部那一栏。"],
+      ["Lean checks that the real error stays below a fixed constant times t squared.", "Lean 内核检验：迹的实部偏差不超过一个固定常数乘以 t²。"],
+      ["Halve the step: the imaginary part about halves, but the real error drops to about a quarter.", "步长减半：虚部大约减半，实部误差却降到大约四分之一。"]
+    ], "cues": [{"line": 2, "at": 1.0, "kind": "stamp"}]},
+    {"id": "vz", "name": "TURN THE MAP", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Now the free gate. A vertical turn keeps a state's height, so the readout never changes.", "现在说那扇免费的门：绕竖直轴转，态的高度不变，读数也就不变。"],
+      ["Between two pulses, it matters. Pulse, turn sixty degrees, pulse: we end at height minus one half.", "可夹在两个脉冲中间，它就要紧了：脉冲、转 60°、再脉冲，态停在高度 −1/2。"],
+      ["The trick: skip the turn, and set the phase of the next pulse back by sixty degrees.", "窍门是：不转，只把下一个脉冲的相位往回拨 60°。"],
+      ["It lands sixty degrees around, at the same height. Either way, the chance of reading zero is one quarter.", "态落在绕竖轴差 60° 的地方，高度一样；两种做法读到 0 的概率都是 1/4。"],
+      ["Turn the map, not the hiker: one number in software, zero nanoseconds.", "不转登山者，只转地图：软件里改一个数，零纳秒。"]
+    ], "cues": [{"line": 3, "at": 3.0, "kind": "chime"}, {"line": 4, "at": 1.0, "kind": "impact"}]},
+    {"id": "pull", "name": "PUSH OR PULL", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.3, 0.3], "lines": [
+      ["Underneath is a duality: push the state forward, or pull the measurement back. Turning the frame is the second kind.", "底下是一条对偶：把态往前推，或者把测量往回拉；转参考系属于后一种。"],
+      ["Like a photo: turn the subject, or turn the camera back.", "就像拍照：转被拍的人，或者把相机反着转。"],
+      ["Step by step, both sides read one, three quarters, one quarter, zero.", "一步一步，两边读到 0 的概率都是 1、3/4、1/4、0。"],
+      ["Lean checks this for any channel and a matching dual map, after any whole number of steps.", "Lean 内核检验：任何信道及其迹对偶映射，走任意整数步，读数都相等。"],
+      ["A gate need not be a push. Sometimes it is only where you stand.", "门不一定是推一把；有时，只是换了站的位置。"]
+    ], "cues": [{"line": 3, "at": 0.8, "kind": "stamp"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["The area rule and the virtual Z trick are literature results, not formalized here.", "面积律与虚拟 Z 的做法是文献结果，本书没有形式化。"],
+      ["Zero nanoseconds means no extra pulse, not zero error. Detuning, leakage and noise still cost.", "零纳秒是说不加脉冲，不是说零误差；失谐、泄漏与噪声照样要付账。"],
+      ["The pulse bound is about a kernel, not gate fidelity. The duality counts steps, not seconds.", "那条脉冲误差界讲的是积分核，不是门的保真度；对偶定理数的是步数，不是秒数。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.0, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter eleven.", "《量子计算的几何直觉》· 第十一章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

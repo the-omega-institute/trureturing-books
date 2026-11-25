@@ -1,0 +1,32 @@
+{
+  "title": "The bill for erasure",
+  "title_zh": "擦除的账单",
+  "summary": "A quantum gate is a turn and can be turned back without making entropy; the unavoidable thermodynamic cost of computing comes from forgetting. Write a qubit as a 2 × 2 table: the diagonal is the record, the off-diagonal corners are the coherence. An unread measurement, pinching, keeps the record and removes the coherence. Turning |0⟩ into |+⟩ and pinching raises the entropy from 0 to ln 2, exactly the relative entropy between the table before and after. Turning by 60° and pinching three times moves the diagonal to 3/4, 5/8 and 9/16 and adds 0.5623, 0.0992 and 0.0238 nats. Lean checks, for any finite dimension and any unitary turn, that each step's entropy increase equals that step's relative entropy, is never negative, and that the N-step total is the sum. A reset against a bath is billed as βQ = −ΔS + I + D, with D the relative entropy of the bath; starting the bit from I/2, one bath qubit at population 3/4 only takes it to diag(3/4, 1/4), and the numbers are 0.1308 + 0 + 0.1438 = 0.2747. Lean checks on real numbers that the balance with I, D ≥ 0 gives −ΔS ≤ βQ, with equality exactly when I = 0 and D = 0, and strict inequality exactly when I + D > 0. Copying |+⟩ or |−⟩ into a blank record makes their local tables identical while the joint tables differ in their corners; Lean checks that no map reading only the local table can rebuild both, and that the inverse copy restores both; pinching is this same copy with the record out of reach, and heat is paid only at reset. The heat floor k_B T ln 2 and the reading of bath energy as heat are literature and model premises; real chips dissipate far more than this floor, and the bound does not construct a reset that reaches it.",
+  "summary_zh": "量子门就是一次转动，可以倒转回去而不产生熵；计算不可回避的热力学代价来自遗忘。把量子比特写成 2×2 的表：对角线是记录，对角线外的两格是相干。不看结果的测量（捏合）留下记录、抹去相干。把 |0⟩ 转成 |+⟩ 再捏合，熵从 0 升到 ln 2，恰好等于捏合前后两张表的相对熵。每步转 60° 再捏合，连做三步，对角元依次为 3/4、5/8、9/16，熵依次增加 0.5623、0.0992、0.0238 奈特。Lean 检验了任意有限维、任意幺正转动下：每步熵增等于这一步的相对熵且非负，前 N 步总熵增等于各步之和。靠热浴复位的账单是 βQ = −ΔS + I + D，其中 D 是热浴的相对熵；比特从 I/2 出发，一个布居数为 3/4 的热浴比特只能把它推到 diag(3/4, 1/4)，数值为 0.1308 + 0 + 0.1438 = 0.2747。Lean 检验了关于实数的结论：账目平衡且 I、D ≥ 0 时 −ΔS ≤ βQ，当且仅当 I = 0 且 D = 0 时取等，当且仅当 I + D > 0 时严格。把 |+⟩ 或 |−⟩ 拷进空白记录，两者的局部表格相同而联合表格的角上不同；Lean 检验了只读局部表格的映射无法同时还原两者，而逆拷贝能把两者都还原；捏合就是这样一次拷贝，只是记录够不着，热量只在复位时付。热量下限 k_B T ln 2 与“浴能量增量即热量”是文献结果与模型前提；真实芯片的耗散远大于这一下限，下界本身也不构造能取等的复位方案。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-24",
+  "duration": "2:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a 2 × 2 table with its margin notes shredded, an entropy stack growing step by step, a reset receipt with three lines, a copy that files the notes in the corners of a joint table",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity",
+    "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance",
+    "D5/S3/DivergenceSupport/LandauerSaturation.landauer_saturation_iff",
+    "D5/S3/DivergenceSupport/LandauerSaturation.landauer_strict_iff",
+    "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.reduced_irreversibility_is_canonical_record_access_defect"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_landauer-ledger_720p_narrated.mp4",
+    "cover": "quantum-geometry_landauer-ledger_cover.jpg"
+  }
+}

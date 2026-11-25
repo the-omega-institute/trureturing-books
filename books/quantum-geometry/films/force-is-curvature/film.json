@@ -1,0 +1,29 @@
+{
+  "title": "What a loop leaves behind",
+  "title_zh": "绕一圈差多少",
+  "summary": "Carry an arrow around a block with no dial on the wall of the universe, and the only thing a loop can leave behind is a turn. Two houses and a swap U show why order matters: for the field f = diag(2, 5) and its shift f′ = diag(5, 2), U f − f U has entries 3 and −3, which is (f′ − f) U; Lean checks this factorization in any ring whenever U f = f′ U. On a map of five towns each road carries a unit complex turn, and renaming a town re-quotes every road that touches it, so a single road means nothing by itself (the exchange-rate picture is an analogy). Choosing a capital and a spanning tree gives each town a root phase, the product of turns along its unique tree route: here 1, i, i, −i and i. Lean checks that the capital gets one, each tree road adds its own turn, and a rename changes a root phase only through its two ends. Renaming every town by its inverse root phase sets the four tree roads to 1 and leaves i and −1 on the two roads outside the tree, one per loop. Under any further rename every dial turns, but the product around each loop stays i (the square, read along e5) and −1 (the outer loop), which follows in one line from the endpoint rule. Physicists call the turn around the smallest loops curvature and around bigger ones holonomy; matching it with a field strength, and the smooth or non-commuting versions, are literature results not formalized in the book.",
+  "summary_zh": "没有挂在宇宙墙上的表盘，拿着箭头绕街区一圈，能留下的只有一个转角。两座房子和一步对调 U 说明次序为什么要紧：场 f = diag(2, 5)，平移后 f′ = diag(5, 2)，U f − f U 的元素是 3 与 −3，正是 (f′ − f) U；Lean 检验了只要 U f = f′ U，这个分解在任意环里都成立。五座小镇的地图上，每条路带一个单位复数转角；给小镇改名，连着它的路都要重新报价，所以单独一条路本身没有意义（汇率是比方）。选一座首都和一棵生成树，每座小镇沿唯一树路线连乘得到根相位，这里是 1、i、i、−i、i。Lean 检验了：首都是 1，每条树路添上自己的转角，改名只通过首尾两端影响根相位。按根相位的倒数给每座小镇改名，四条树路都变成 1，树外两条路上剩下 i 与 −1，每个回路一个。再怎么改名，每只表盘都在转，可沿每个回路连乘仍是 i（方格，顺 e5 方向读）与 −1（外圈），这由改名只动首尾两端一步推出。绕最小的一圈留下的转角，物理学家叫曲率，大圈的叫和乐；把它对上场强，以及光滑的、不可交换的版本，是文献结果，本书没有形式化。",
+  "subject":"https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-24",
+  "duration": "2:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · an arrow carried around a block, two houses and a swap, a map of five towns with turns on its roads, a spanning tree combed flat, the two loops that remain",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula",
+    "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_force-is-curvature_720p_narrated.mp4",
+    "cover": "quantum-geometry_force-is-curvature_cover.jpg"
+  }
+}
