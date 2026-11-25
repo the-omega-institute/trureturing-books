@@ -153,6 +153,31 @@ The sharpest watershed appears as we increment the number of symmetric points $N
 Tetrahedral rational cap versus five-step golden closure card (`tetrahedral-rational-cap-vs-phi`): contrasts the cyan regular tetrahedron whose six great-circle edges all read rational `κ = 1/3` against the equatorial magenta five-step heap parked at the irrational root $\kappa_1 = (\varphi + 1)/4$ where it closes into a regular pentagon (with violet star diagonals `κ₂ = (2 − φ)/4` and `x₅ = x₀` labeled at stage width $\ge 480\,\mathrm{px}$, the two strict period-two conjugate irrational roots of $16\kappa^2 - 12\kappa + 1 = 0$); dragging the amber handle off that root (apart from its conjugate root $(2 - \varphi)/4$ and stationary $\kappa_1 = 1$) opens the magenta five-step gap.
 :::
 
+::: {.theorem #thm-ch39-rational-unit-simplex title="Regular simplices on rational unit spheres" lean="D5/S3/Combinatorics/Geometry/EuclideanSimplex/RationalUnitSimplex.rational_unit_simplex_iff"}
+Let $d\ge 1$. There are $d+1$ distinct unit vectors in $\mathbb Q^d$ with one common inner product between distinct vectors if and only if the odd member of $d,d+1$ is a perfect square.
+:::
+
+::: {.proof}
+The Gram matrix of all vertices is singular, forcing the common inner product to be $-1/d$. With any $d$ vertices as the columns of a square matrix, the Gram determinant is $(1+1/d)^d/(d+1)$ and must be a rational square. Removing square factors gives the criterion. For the converse, center the $d+1$ coordinate basis vectors at their centroid. In odd dimension, use rational similarities on pairs of coordinates to set the lengths, then use a rational reflection to take the unit normal to a coordinate axis. In even dimension, remove the unit normal by a rational reflection, then set the lengths by quaternion multiplication in blocks of four coordinates. The full proof is checked by the Lean kernel.
+:::
+
+::: {.remark title="How many coordinates preserve the readings?"}
+The following criterion follows from the squared-edge-length classification. Let $e$ be the least number of additional coordinates needed to realize this regular $d$-simplex in $\mathbb Q^{d+e}$ with the same Gram matrix. Write $S(m)$ when $m$ is a sum of two integer squares.
+
+| $d\bmod 4$ | Minimum additional coordinates $e$ |
+|---|---|
+| $0$ | $0$ if $d+1$ is a square, $1$ otherwise |
+| $1$ | $0$ if $d$ is a square. Otherwise $1$ if both $S(d)$ and $S(d+1)$ hold, $2$ if $S(d+1)$ alone holds, and $3$ if $S(d+1)$ fails |
+| $2$ | $2$ |
+| $3$ | $1$ |
+
+Centering a rational regular simplex at its centroid gives unit radius and inner product $-1/d$ precisely when the squared edge length is $2(d+1)/d$. Substitute $a=(d+1)/d$ into Kominers's classification. For $d\equiv0\pmod4$ with $d+1$ nonsquare, $a$ is the quadratic norm of $\sqrt{d+1}/(1+\sqrt{d+1})$, so codimension one works. For $d\equiv2\pmod4$, codimension one requires a norm from $\mathbb Q(\sqrt{-(d+1)})$. If $d\equiv2\pmod8$, the prime $2$ is inert and the valuation of $a$ at $2$ is odd. If $d\equiv6\pmod8$, some prime $p\equiv3\pmod4$ occurs in $d/2$ to odd exponent. That prime is inert because $-(d+1)\equiv-1\pmod p$. Both cases rule out codimension one.
+
+For $d\equiv1\pmod4$, codimension one requires $a$ to be a sum of two rational squares. Since $d$ and $d+1$ are coprime, this holds exactly when both $S(d)$ and $S(d+1)$ hold. Codimension two requires the Hilbert symbol $(a,-1)_p=1$ wherever $-d$ is a local square. This square condition holds at each odd prime dividing $d+1$. An odd exponent at any such prime $p\equiv3\pmod4$ rules out codimension two. When $S(d+1)$ holds, the symbol at the relevant odd primes reduces to $(-1,-1)_p=1$. At $2$, the congruence $-d\equiv3\pmod4$ rules out the local square condition. See [Kominers, Theorem 1](https://arxiv.org/abs/2605.12268v1).
+
+A great-circle equilateral triangle and a regular tetrahedron each need four rational coordinates to preserve their respective readings. For the triangle, take $(1,0,0,0)$ and the two vectors $(-1,\pm1,\pm1,\pm1)/2$ with all three signs equal. A regular $5$-simplex needs eight rational coordinates.
+:::
+
 ## 32.5.4 Formal Anchors, Literature Boundaries, and Constant-Free Rational Audit {#sec-ch39-29-4}
 
 We gather the fifteen frozen theorems anchoring the constant-free rational skeleton of $\mathrm{AXIOM}\text{-}\Omega$, the integer-coefficient Chebyshev doubling equivalence, and the three flat/discrete residual bounds into the following theorem box:
