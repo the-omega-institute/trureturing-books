@@ -1,4 +1,4 @@
-# M.2.4 A variance lower bound for near-collisions {#a-variance-lower-bound-for-near-collisions}
+# M.2.5 A variance lower bound for near-collisions {#a-variance-lower-bound-for-near-collisions}
 
 Take a finite family of frequencies $(g_j)$ with nonnegative weights $(w_j)$ of positive total weight $W=\sum_jw_j$. The mean and variance under the normalized weights are
 

@@ -873,72 +873,7 @@ $$
 $$
 The threshold shift is the negative of this ratio. The symmetric finite sums yield $m_4=(N^2-1)(3N^2-5)/35$ and give the displayed coefficient. The asymptotic keeps $N$ fixed. Small moduli can give positive weight on additional antipodal levels. [Lean proof of the switch and scaled displacement](lean:D5/S3/Fourier/Asymptotics/CyclicActivationShift.cyclic_activation_shift) · [Derivation and finite checks](https://github.com/the-omega-institute/trureturing/issues/34016#issuecomment-7148575133)
 
-### Matrix error for a growing front window
-
-Let the front half-width $N$ grow with the modulus and take budget $m=N(N+1)/5$. Write $h=2\pi/q$, $u=Nh$, and $x=j/N$ on the front. The two features $(1+\cos(xu))/2$ and $\sin^2(xu)/u^2$ extend at zero mesh to $1$ and $x^2$. Let $G_N(u)$ denote the matrix obtained by summing the pairwise products of the features over $|j|\le N$ and dividing by $N$. For every real $u$, each entry satisfies
-
-$$
-\left|G_N(u)_{ab}-G_N(0)_{ab}\right|\le 2u^2 .
-$$
-
-The cubic sine remainder gives a uniform error in the second feature. Both features have magnitude at most one on the window, so the entrywise matrix error remains of order $u^2$ after summation and division by $N$. As $N\to\infty$ and $u\to0$, the matrix has rows $(2,2/3)$ and $(2/3,2/5)$. In the regime $q/N^{5/2}\to\gamma>0$, the error compared with the zero-mesh matrix at the same $N$ is $O(N^{-3})$.
-
-For $t=N(N+1)-1/2$ and $Z=\sum_{|j|\le N}(t-j^2)$, set $a=(Nt/Z,-N^3/Z)$. At zero mesh the matrix sends $a$ exactly to $(1,m/N^2)$. At mesh $u$ the moment residual satisfies
-
-$$
-\left|\left[G_N(u)a-(1,m/N^2)\right]_i\right|
-\le 2u^2(|a_0|+|a_1|)\quad(i=0,1).
-$$
-
-The scaled lattice weight $N(t-j^2)/Z$ has sign margins of order $N^{-1}$ at $j=N$ and $j=N+1$. Determining the full cyclic support still requires control of the antipodal equations and the boundary sign at an antipodal activation threshold. [Lean proof of the Gram error](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_sub_le) · [Lean proof of the residual bound](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_reference_residual_le) · [Antipodal support problem](https://github.com/the-omega-institute/trureturing/issues/34029)
-
-### Joint fit at the front and antipodal windows
-
-Fix a nonempty finite set $S$ of signed real offsets from the antipode. With $c$ the sampled cosine, put $F=(1+c)/2$, $W=(1-c)/2$, and $X=(1-c^2)/(Nh)^2$. At mesh zero use their continuous extensions in the two windows. Fit the weight as $v=AF/N+CX/N+BW/N^3$ on the front and on $S$. The three moment equations have rows $\sum Fv$, $\sum Xv$, and $N^3\sum W^2v$. Their target for the common cosine floor $1-2mh^2$ is $(1-mh^2,m/N^2,3N^3mh^2/4)$, using $W^2=W-u^2X/4$.
-
-Let $M_N$ be the matrix of these three rows in coefficient order $(A,C,B)$. If $N^3(Nh)^4\to0$, then
-
-$$
-M_N\longrightarrow
-\begin{pmatrix}
-2 & 2/3 & 0\\
-2/3 & 2/5 & 0\\
-0 & \sum_{r\in S}r^2 & |S|
-\end{pmatrix}.
-$$
-
-The front contribution to the last row is bounded by constants times $N^3u^4$ and $Nu^6$. At a fixed antipodal offset $r$, $W\to1$, $N^2X\to r^2$ and $N^2F\le r^2u^2/4$. These estimates give the displayed matrix without a limit that exchanges a growing sum and a merely pointwise estimate. Its determinant is $16|S|/45$, so every prescribed vector of three moments has a unique coefficient fit for sufficiently large $N$.
-
-When $q/N^{5/2}\to\gamma>0$, the target tends to $(1,1/5,3\pi^2/(5\gamma^2))$. The resulting limits are $A\to3/4$, $C\to-3/4$ and
-
-$$
-B\longrightarrow \frac{3\pi^2/(5\gamma^2)+(3/4)\sum_{r\in S}r^2}{|S|}.
-$$
-
-Thus at a fixed included rear site the fitted weight satisfies $N^3v(r)\to B_\infty-3r^2/4$. This calculation permits signed fitted weights. To verify the optimizer's support, the signs at both ends of the front window and at the rear activation levels must be controlled, including the levels with zero limiting score. [Lean proof of matrix convergence](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit.coupledMatrix_tendsto) · [Lean proof of the unique signed fit](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit.coupledFit_eventually) · [Coupled fit research](https://github.com/the-omega-institute/trureturing/issues/34029)
-
-### Quantitative signs at the growing-window boundaries
-
-The critical-scale fit admits a sharper comparison with the lattice reference. Write $K=\lim_{N\to\infty}N^5h^2=4\pi^2/\gamma^2$, and let $(A_N,C_N,B_N)$ be the inverse-matrix fit above. For $t=N(N+1)-1/2$ and $Z=\sum_{|j|\le N}(t-j^2)$,
-$$
-A_N-\frac{Nt}{Z}=O(N^{-3}),
-\qquad
-C_N+\frac{N^3}{Z}=O(N^{-3}).
-$$
-
-The estimate requires only boundedness of $N^5h^2$. After multiplication by $N^3$, the first two rows of the coupled matrix differ from the lattice Gram matrix augmented by a zero third column by a bounded matrix. The front-feature product error is bounded by $2u^2$, with $N^3u^2=O(1)$. Each fixed rear contribution to the scaled rows tends to zero. The scaled change in target mass is $N^3mh^2=O(1)$. Boundedness of the target and the inverse joint matrix bounds the fitted coefficients. Holding $B_N$ fixed, the inverse of the upper-left two-by-two matrix transfers the scaled residual bound to the front coefficient errors.
-
-Let $p_N(j)$ denote the signed polynomial fitted on the front, extended to real $j$ by the same trigonometric formula. For each fixed real $d$, the scaled lattice reference at $j=N+d$ has limit $\frac34(1-2d)$ after multiplication by $N^2$. The feature and coefficient estimates preserve that limit:
-$$
-N^2p_N(N+d)\longrightarrow \frac34(1-2d).
-$$
-In particular the signed values at $N$ and $N+1$ are eventually strictly positive and strictly negative, respectively. Evenness gives the corresponding values at the negative end of the front window. At the half-step $d=1/2$ the leading limit vanishes, and the refined comparison yields $N^3p_N(N+1/2)\to-9/16$.
-
-At every fixed real rear offset $r$, using the rear feature formula in the same fitted polynomial gives
-$$
-N^3p_N^{\rm rear}(r)\longrightarrow B_\infty-\tfrac34r^2.
-$$
-The strict sign at any such offset is determined by this limit when it is nonzero. The limits concern the signed fit for a fixed nonempty finite rear set $S$. To certify a particular cyclic optimizer one still needs to identify the finite cyclic site correspondence and extend the complement signs across all other sites. At $B_\infty=3r^2/4$ the limiting sign alone leaves the activation level open. [Lean proof of the coefficient rate](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.refined_coefficients) · [Front and half-step limits](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_boundary_value) · [Rear limit](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_rear_value) · [Research problem](https://github.com/the-omega-institute/trureturing/issues/34029)
+The growth of the lattice radius leads to a separate question about uniform moment errors and the exact antipodal support. The [growing cyclic support analysis](ch34-s28-s03-s02-growing-cyclic-support.md) develops this regime.
 
 ### Exact support away from the rear thresholds
 

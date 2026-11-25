@@ -1,4 +1,4 @@
-# M.2.7 保持计数律的频谱扰动 {#保持计数律的频谱扰动}
+# M.2.8 保持计数律的频谱扰动 {#保持计数律的频谱扰动}
 
 若要把[共同区间扰动](ch34-s28-s03-s02-common-spectral-perturbations.md#thm-ch31-continuous-common-spectral-perturbations)用于有指定计数律的比较谱，还需用半径控制能穿过阈值的纵坐标数目。设参考纵坐标 $\gamma_j$ 为互不相同的正数，重数 $m_j$ 为正整数，并且对每个实阈值，处于阈值及以下的纵坐标只有有限多个。记 $N(T)=\sum_{\gamma_j\le T}m_j$。
 
