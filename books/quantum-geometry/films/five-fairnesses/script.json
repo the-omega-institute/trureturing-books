@@ -1,0 +1,47 @@
+{
+  "voice": "af_heart",
+  "speed": 0.95,
+  "say": {"Lean": "Leen", "qubits": "cue-bits", "qubit": "cue-bit", "theta": "thayta"},
+  "music": {"bpm": 80, "progression": "d-minor"},
+  "scenes": [
+    {"id": "seat", "name": "LEDGER ONE · NO JUDGE'S CHAIR", "lead": 2.2, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Textbooks list quantum rules as a fence of prohibitions. Read them as five ledgers that never cheat.", "教科书把量子规则列成一圈禁令。换个读法：这是五本从不作弊的账。"],
+      ["Ledger one: no judge's chair. Two states measure each other directly.", "第一本账：没有裁判席。两个态直接互相丈量。"],
+      ["Here the overlap is zero point four eight minus zero point four eight i. Lean checks: the record's weight is its size squared.", "这里的重叠是 0.48 − 0.48i。Lean 内核检验：记录的权重就是它的模方。"],
+      ["Swap who measures whom, and the overlap becomes its mirror image. Same size, same weight.", "调换谁量谁，重叠变成它的镜像：模一样，权重也一样。"]
+    ], "cues": [{"line": 2, "at": 3.6, "kind": "stamp"}]},
+    {"id": "budget", "name": "LEDGER TWO · GAIN AND LOSS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
+      ["Ledger two is a budget. A pure qubit has one half of purity to spend.", "第二本账是一笔预算：纯态量子比特恰好有 1/2 的纯度可花。"],
+      ["Ask it up or down: the answers come out ninety and ten percent.", "问它：上还是下？答案是 90% 与 10%。"],
+      ["Their squared distances from fifty-fifty add to zero point three two. The other zero point one eight stays hidden.", "离五五开的距离平方相加，是 0.32；剩下的 0.18，这一问看不见。"],
+      ["Lean checks the books: the budget splits exactly into what the question shows, plus what it cannot see.", "Lean 内核检验这本账：预算恰好分成这一问看得见的，加上它看不见的。"],
+      ["Tilt the state, and the shares trade places. The total never moves.", "把态转一转，两份此消彼长，总数纹丝不动。"]
+    ], "cues": [{"line": 3, "at": 1.0, "kind": "stamp"}]},
+    {"id": "copy", "name": "LEDGER THREE · NO PHOTOCOPIES", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.5, 0.2, 0.2], "lines": [
+      ["Ledger three: can one machine photocopy every state? Try two states with overlap zero point eight.", "第三本账：一台机器能复印每一个态吗？拿两个重叠为 0.8 的态试试。"],
+      ["Quantum machines never change overlaps. Before copying, it is zero point eight.", "量子机器从不改变重叠。复印之前，重叠是 0.8。"],
+      ["After copying, it would be zero point eight squared: zero point six four. The books do not balance.", "复印之后，它会变成 0.8 的平方：0.64。账对不上。"],
+      ["Lean checks the lock: one copier for both forces the overlap to equal its own square. Equal, or perpendicular.", "Lean 内核检验这把锁：同一台复印机复印两者，重叠就得等于自己的平方。要么相同，要么垂直。"]
+    ], "cues": [{"line": 2, "at": 3.4, "kind": "glitch"}, {"line": 3, "at": 1.0, "kind": "stamp"}]},
+    {"id": "steps", "name": "LEDGER FOUR · NO SKIPPING AHEAD", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Ledger four is about time. Amplifying a search turns the state by the same angle every round.", "第四本账关乎时间：放大一次搜索，每一轮都把态转过同样的角度。"],
+      ["Start from a one in a hundred chance: an angle of about five point seven degrees.", "从百分之一的机会出发：起始角约 5.7°。"],
+      ["Lean checks the rule: after n rounds, the success part is the sine of two n plus one, times theta.", "Lean 内核检验这条规律：n 轮之后，成功分量是 sin((2n+1)θ)。"],
+      ["One click per round, like a turnstile. At round seven, the chance reaches ninety-nine and a half percent.", "像闸机，一轮咔嗒一格。到第 7 轮，机会升到 99.5%。"]
+    ], "cues": [{"line": 2, "at": 1.0, "kind": "stamp"}]},
+    {"id": "stars", "name": "LEDGER FIVE · THE SAME STARLIGHT", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Ledger five is about luck. Two travellers circle by the same irrational step, from different starts.", "第五本账关乎运气：两个旅人从不同起点出发，以同一个无理数步长绕圈。"],
+      ["Each notes the sky's brightness at every step. At first, their averages disagree.", "每走一步，各自记下天空有多亮。起初，两人的平均值并不一样。"],
+      ["Lean checks the long run: the time average equals the average over the closure of the orbit.", "Lean 内核检验长程：时间上的平均，等于轨道闭包上的平均。"],
+      ["Here that closure is the whole circle, so both settle at one half. The same share of starlight.", "这里的闭包就是整个圆，两人都收敛到 1/2：分到的星光一样多。"]
+    ], "cues": [{"line": 3, "at": 2.6, "kind": "chime"}]},
+    {"id": "edge", "name": "WHAT THE LEDGERS DO NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Calling these identities fairness is this book's reading. What the kernel checks is the identities.", "把这些恒等式读作“公平”，是本书的诠释；内核检验的是恒等式本身。"],
+      ["The turnstile counts rounds of one method, not a bound for every method. P versus NP stays open.", "闸机只数一种方法的轮数，不是所有方法的下界；P 与 NP 之问仍然开放。"],
+      ["How three qubits share entanglement, and the heat of erasure in physical units, are literature results.", "三个量子比特如何分配纠缠、擦除在物理单位下的热量，都是文献结果。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.6, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter twenty-seven.", "《量子计算的几何直觉》· 第二十七章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}
