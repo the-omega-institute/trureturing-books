@@ -349,3 +349,45 @@ Q(u/s)^n\le e^{-u^2/2},\qquad s=\sqrt{nM_2/2}.
 $$
 
 该上界允许使用支配收敛处理满足四阶矩条件的中心窗口。对于实际 ζ 零点，仍须验证相应矩条件并控制窗口之外的傅里叶峰及其加权贡献。 [中心窗口高斯上界](https://github.com/the-omega-institute/trureturing/blob/09e2f8bc08952ee2744f4c46296d9812fbdd2e5b/D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.lean#L204)
+
+## 移动中心窗口的 Fejér 积分主项
+
+假设最终权重归一化、配对乘积非负且第二配对矩为正。设 $\rho_n\to0$，选择 $A_n\to+\infty$ 且对某个固定常数 $C<6$ 最终满足
+
+$$
+A_n^2M_{4,n}\leCnM_{2,n}^2.
+$$
+
+上述窗口条件给出 $0\le R_n\leC/A_n^2$，故 $R_n\to0$ 自动成立。中心 Fejér 积分具有精确极限
+
+$$
+\frac1{2\pi}\int_{-A_n}^{A_n}
+\operatorname{sinc}^2(\rho_n u/2)Q_n(u/s_n)^n\,du
+\longrightarrow\frac1{2\sqrt\pi}.
+$$
+
+把积分被积函数在窗口外延拓为零。任意固定 $u$ 最终进入窗口，且 $\operatorname{sinc}(\rho_nu/2)^2\to1$。因此延拓函数逐点收敛至 $e^{-u^2}$。由全局四阶矩界所给出的广义高斯包络与 $|\operatorname{sinc}(x)|\le1$，延拓函数最终在整个实线上受可积函数 $e^{-(1-C/6)u^2}$ 支配。支配收敛定理与高斯积分 $\int_{\mathbb R}e^{-u^2}du=\sqrt\pi$ 给出所求系数。 [中心 Fejér 积分极限定理](https://github.com/the-omega-institute/trureturing/blob/afa14c10b56a539e960ee3784347438d09897114/D5/S3/Fourier/Asymptotics/MovingFejerGaussianPrincipal.lean#L24)
+
+当 $R_n$ 最终非负且趋于零时，可以显式选取
+
+$$
+A_n=\left(R_n+\frac1{n+1}\right)^{-1/2}.
+$$
+
+于是 $A_n\to+\infty$ 且最终 $A_n^2R_n\le1$。对上述配对矩比值，非负性源于配对权重乘积的非负性与偶次幂，分母最终为正，故此窗口符合 $C=1$ 的四阶矩约束。
+
+若 $\eta_n>0$ 且 $s_n>0$，令 $\rho_n=\eta_n/s_n$。变量代换 $u=s_nt$ 将上述中心积分精确地写成
+
+$$
+\frac{s_n}{\eta_n}\int_{-A_n/s_n}^{A_n/s_n}
+K_{\eta_n}(t)|S_n(t)|^{2n}\,dt.
+$$
+
+这给出了全线 Fejér 矩的中心主项。为了得出全线极限以及硬碰撞带的渐近系数，还须证明
+
+$$
+\frac{s_n}{\eta_n}\int_{|t|>A_n/s_n}
+K_{\eta_n}(t)|S_n(t)|^{2n}\,dt\longrightarrow0,
+$$
+
+并且对邻近的乘法分辨率验证相应极限。实际 ζ 零点的矩比值条件与非中心峰的积分估计仍是开放的算术缺口。

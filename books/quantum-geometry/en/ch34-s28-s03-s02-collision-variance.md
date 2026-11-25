@@ -349,3 +349,45 @@ Q(u/s)^n\le e^{-u^2/2},\qquad s=\sqrt{nM_2/2}.
 $$
 
 This envelope permits dominated convergence on central windows satisfying the fourth-moment condition. For actual zeta ordinates, the moment conditions and the weighted contribution of Fourier peaks outside that window still require estimates. [Central Gaussian envelope](https://github.com/the-omega-institute/trureturing/blob/09e2f8bc08952ee2744f4c46296d9812fbdd2e5b/D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.lean#L204)
+
+## Principal Fejér integral on a moving central window
+
+Assume eventual normalization, positivity of the second pair moment and nonnegative pair products. Suppose $\rho_n\to0$ and choose $A_n\to+\infty$ satisfying eventually for a fixed $C<6$
+
+$$
+A_n^2M_{4,n}\leCnM_{2,n}^2.
+$$
+
+The window condition gives $0\le R_n\leC/A_n^2$, which implies $R_n\to0$. The central Fejér integral has the precise limit
+
+$$
+\frac1{2\pi}\int_{-A_n}^{A_n}
+\operatorname{sinc}^2(\rho_n u/2)Q_n(u/s_n)^n\,du
+\longrightarrow\frac1{2\sqrt\pi}.
+$$
+
+Extend the integrand by zero outside the window. Every fixed $u$ eventually enters the window and $\operatorname{sinc}(\rho_nu/2)^2\to1$. The extended function therefore converges pointwise to $e^{-u^2}$. By the global fourth-moment estimate with this cutoff and $|\operatorname{sinc}(x)|\le1$, it is eventually dominated on the whole real line by the integrable function $e^{-(1-C/6)u^2}$. Dominated convergence and the Gaussian integral $\int_{\mathbb R}e^{-u^2}du=\sqrt\pi$ give the coefficient. [Central Fejér integral limit](https://github.com/the-omega-institute/trureturing/blob/afa14c10b56a539e960ee3784347438d09897114/D5/S3/Fourier/Asymptotics/MovingFejerGaussianPrincipal.lean#L24)
+
+If $R_n$ is eventually nonnegative and tends to zero, an explicit choice is
+
+$$
+A_n=\left(R_n+\frac1{n+1}\right)^{-1/2}.
+$$
+
+Then $A_n\to+\infty$ and eventually $A_n^2R_n\le1$. For the pair-moment ratio above, nonnegative pair products and even powers ensure nonnegativity, and the denominator is eventually positive. Thus the chosen window satisfies the fourth-moment constraint with $C=1$.
+
+For $\eta_n>0$ and $s_n>0$, set $\rho_n=\eta_n/s_n$. The substitution $u=s_nt$ identifies the central integral exactly with
+
+$$
+\frac{s_n}{\eta_n}\int_{-A_n/s_n}^{A_n/s_n}
+K_{\eta_n}(t)|S_n(t)|^{2n}\,dt.
+$$
+
+This determines the central contribution to the whole-line Fejér moment. The whole-line limit and the asymptotic coefficient of the hard collision band still require
+
+$$
+\frac{s_n}{\eta_n}\int_{|t|>A_n/s_n}
+K_{\eta_n}(t)|S_n(t)|^{2n}\,dt\longrightarrow0,
+$$
+
+with the corresponding limits at neighboring multiplicative resolutions. The moment-ratio condition and estimates for the integrated noncentral peaks of actual zeta ordinates remain open arithmetic gaps.
