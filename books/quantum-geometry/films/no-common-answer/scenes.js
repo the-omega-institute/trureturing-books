@@ -161,7 +161,7 @@ function ncVec(v, x, y, a, o = {}) {
 function ncSheet(x, y, w, rows, a, o = {}) {
   if (a <= 0.003) return;
   const rh = o.rh || 74, h = 70 + rows.length * rh + 24;
-  panel(x, y, w, h, a, o.frame || C.argued, o.title || 'ANSWER SHEET · 答卷  χ');
+  panel(x, y, w, h, a, o.frame || C.argued, o.title || 'ANSWER SHEET · 答卷 · χ');
   rows.forEach(([q, ans, col, ra], i) => {
     const yy = y + 70 + i * rh + rh * 0.55, al = a * (ra == null ? 1 : ra);
     if (al <= 0.003) return;
@@ -191,17 +191,17 @@ function ncTitle(S) {
 SCENES.sheet = S => {
   const u = S.u;
   ncTitle(S);
-  const a = clamp((u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - u) / 0.5);
+  const a = clamp((u - lineAt(S, 0).s - 0.35) / 0.6) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued']]);
   /* the sheet: every question already has an answer written in (we do not yet know which) */
   const wa = Q(S, 0, 'already written', 0.8);
   const ink = k => clamp((u - phraseAt(S, 0, 'already written') - 0.25 * k) / 0.4);
-  const qa = Q(S, 2, 'But why', 0.6);
+  const qa = Q(S, 2, 'But can', 0.6);
   const rows = [
     ['I', wa > 0 ? '1' : null, C.white, 1],
-    ['X', ink(1) > 0 ? '?' : null, C.now, 1],
-    ['Z', ink(2) > 0 ? '?' : null, C.now, 1],
+    ['X', ink(1) > 0 ? '?' : null, C.white, 1],
+    ['Z', ink(2) > 0 ? '?' : null, C.white, 1],
     ['ZX', ink(3) > 0 ? '?' : null, C.white, 1],
     ['A', ink(4) > 0 ? 'χ(A)' : null, C.white, 1]
   ];
@@ -216,7 +216,7 @@ SCENES.sheet = S => {
       ['one stays one', [['χ(I) = 1', C.white]]],
       ['sums', [['χ(A + B) = χ(A) + χ(B)', C.white]]],
       ['multiples', [['χ(cA) = c χ(A)', C.white]]],
-      ['products carry over', [['χ(AB) = χ(A) χ(B)', C.now]]]
+      ['products carry over', [['χ(AB) = χ(A) χ(B)', C.white]]]
     ];
     rules.forEach(([ph, parts], i) => ncRich(parts, 1036, 270 + i * 76, { size: 36, a: ra * Q(S, 1, ph, 0.5) }));
     txt('every 2×2 complex matrix A, B · 任意 2×2 复矩阵；c 为复数', 1036, 566, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ra * Q(S, 1, 'products carry over', 0.6) });
@@ -224,8 +224,8 @@ SCENES.sheet = S => {
   /* line 2: the genealogical question */
   if (qa > 0.003) {
     panel(1000, 630, 820, 150, a * qa, C.argued);
-    txt('answers before anyone asks?', 1036, 694, { size: 34, fam: F.disp, w: 700, c: C.white, a: a * qa });
-    txt('没人提问之前，答案就已写好？', 1036, 744, { size: 30, fam: F.zh, w: 700, c: C.argued, a: a * qa });
+    txt('can such a sheet be written before anyone asks?', 1036, 694, { size: 34, fam: F.disp, w: 700, c: C.white, a: a * qa });
+    txt('这样一张答卷，真能在没人提问之前写好吗？', 1036, 744, { size: 30, fam: F.zh, w: 700, c: C.argued, a: a * qa });
   }
 };
 
@@ -253,7 +253,7 @@ SCENES.rules = S => {
     ncRich([['X² = Z² = I', C.white]], 1116, 282, { size: 38, a: qa });
     const sa = qa * Q(S, 1, 'So each answer', 0.6);
     ncRich([['χ(X)² = χ(X²) = χ(I) = 1', C.white]], 1116, 352, { size: 32, a: sa });
-    ncRich([['χ(X), χ(Z) ∈ {', C.white], ['+1', C.now], [', ', C.white], ['−1', C.now], ['}', C.white]], 1116, 420, { size: 32, a: qa * Q(S, 1, 'plus one or minus one', 0.6) });
+    ncRich([['χ(X), χ(Z) ∈ {', C.white], ['+1', C.white], [', ', C.white], ['−1', C.white], ['}', C.white]], 1116, 420, { size: 32, a: qa * Q(S, 1, 'plus one or minus one', 0.6) });
     txt('computed here · 此处手算', 1116, 470, { size: 18, fam: F.zh, w: 700, c: C.dim, a: sa });
   }
   /* line 2: the swap and its sign */
@@ -263,7 +263,7 @@ SCENES.rules = S => {
     ncRich([['ZX =', C.white]], 160, y + 12, { size: 40, a: wa });
     ncMat(NC_ZX, 290, y, wa);
     const sg = Q(S, 2, 'Z times X', 0.6);
-    const ex = ncRich([['=  ', C.white], ['−', C.now], [' XZ  =  ', C.white], ['−', C.now]], 530, y + 12, { size: 40, a: wa * sg });
+    const ex = ncRich([['=  ', C.white], ['−', C.white], [' XZ  =  ', C.white], ['−', C.white]], 530, y + 12, { size: 40, a: wa * sg });
     ncMat(NC_XZ, ex + 14, y, wa * sg);
     txt('one sign, nothing else changes · 只差一个负号', 160, y + 150, { size: 24, fam: F.zh, w: 700, c: C.dim, a: wa * sg });
   }
@@ -287,8 +287,8 @@ SCENES.table = S => {
   /* line 0: the chain on the sheet */
   const ca = a * at(S, 0, 0.6);
   panel(140, 180, 1640, 170, ca, C.cyan, 'ON THE SHEET · 答卷上');
-  ncRich([['χ(X)χ(Z) = χ(Z)χ(X) = χ(ZX) = χ(', C.white], ['−', C.now], ['XZ) = ', C.white], ['−', C.now], ['χ(X)χ(Z)', C.white]], 180, 262, { size: 34, a: ca });
-  ncRich([['x z = ', C.white], ['−', C.now], [' x z', C.white]], 180, 318, { size: 34, a: a * Q(S, 0, 'must obey', 0.6) });
+  ncRich([['χ(X)χ(Z) = χ(Z)χ(X) = χ(ZX) = χ(−XZ) = −χ(X)χ(Z)', C.white]], 180, 262, { size: 34, a: ca });
+  ncRich([['x z = − x z', C.white]], 180, 318, { size: 34, a: a * Q(S, 0, 'must obey', 0.6) });
   txt('numbers commute · 纸上的数可交换', 1740, 318, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.dim, a: a * Q(S, 0, 'numbers commute', 0.6) });
   /* the table of the four rows */
   const ta = a * at(S, 1, 0.6);
@@ -307,7 +307,7 @@ SCENES.table = S => {
       const pa = i === 0 ? ra * Q(S, 1, 'The product is one', 0.5) : ra;
       txt(ncSgn(x * z), X0 + cols[2], y, { size: 34, fam: F.math, w: 700, c: C.cyan, a: pa });
       const na = i === 0 ? ra * Q(S, 1, 'asks for minus one', 0.5) : ra;
-      txt(ncSgn(-x * z), X0 + cols[3], y, { size: 34, fam: F.math, w: 700, c: C.now, a: na });
+      txt(ncSgn(-x * z), X0 + cols[3], y, { size: 34, fam: F.math, w: 700, c: C.white, a: na });
       txt(`${ncSgn(x * z)} ≠ ${ncSgn(-x * z)}   ✗`, X0 + cols[4], y, { size: 34, fam: F.math, w: 700, c: C.white, a: na });
     });
   }
@@ -318,7 +318,7 @@ SCENES.table = S => {
     ncRich([['w = −w  ⇒  w = 0', C.white]], 1370, 500, { size: 32, a: za });
     ncRich([['x z = 0', C.white]], 1370, 570, { size: 32, a: za });
     ncRich([['but · 但  (x z)² = 1', C.white]], 1370, 640, { size: 30, a: a * Q(S, 2, 'zero squared', 0.6), fam: F.zh });
-    ncRich([['0 = 1  ✗', C.now]], 1370, 714, { size: 38, a: a * Q(S, 2, 'is not one', 0.6) });
+    ncRich([['0 = 1  ✗', C.white]], 1370, 714, { size: 38, a: a * Q(S, 2, 'is not one', 0.6) });
   }
   stamp('NO ROW FITS · 无一行能填', 760, 820, Q(S, 2, 'fail the same way', 0.5, 1.2) * (1 - at(S, 2, 0.5, 6)), C.white, 34, -0.04);
 };
@@ -336,7 +336,7 @@ SCENES.theorem = S => {
   ncRich([['χ(I) = 1,  χ(A + B) = χ(A) + χ(B),  χ(cA) = c χ(A),  χ(AB) = χ(A) χ(B)', C.white]], 250, 350, { size: 30, a: la * Q(S, 0, 'keeps one', 0.6) });
   ncRich([['IsEmpty (QubitMatrix →ₐ[ℂ] ℂ)', C.lean]], 250, 420, { size: 28, a: la * Q(S, 0, 'keeps one', 0.6), fam: F.mono });
   ncLean(250, 496, NC_LEAN.qubit_matrix_algebra_has_no_character, la * at(S, 0, 0.6), { size: 22 });
-  stamp('NO χ · 无此答卷', 1440, 470, Q(S, 0, 'Lean checks', 0.5, 0.8) * (1 - at(S, 1, 0.5)), C.lean, 34, -0.06);
+  stamp('NO χ', 1500, 470, Q(S, 0, 'Lean checks', 0.5, 0.8) * (1 - at(S, 1, 0.5)), C.lean, 34, -0.06);
   /* line 1: the aphorism — the sheet comes apart at the sign */
   const pa = a * at(S, 1, 0.6);
   if (pa > 0.003) {
@@ -348,8 +348,8 @@ SCENES.theorem = S => {
       txt(scramble(`${q}  →  ${v}`, 1 - burn * 0.8, i + 7), 360 + dx, y + dy, { size: 30, fam: F.math, w: 700, c: C.argued, a: pa * (1 - burn * 0.85) });
     });
     ctx.restore();
-    txt('One minus sign is enough to burn the whole ledger.', 1150, 700, { size: 36, fam: F.disp, w: 700, align: 'center', c: C.white, a: pa });
-    txt('一个负号，就足以烧掉整本账。', 1150, 770, { size: 40, fam: F.zh, w: 900, align: 'center', c: C.white, a: pa, ab: 2 });
+    txt('Squares allow only ±1; one minus sign then bankrupts the ledger.', 1150, 700, { size: 36, fam: F.disp, w: 700, align: 'center', c: C.white, a: pa });
+    txt('平方只许 ±1，一个负号就让整本账破产。', 1150, 770, { size: 40, fam: F.zh, w: 900, align: 'center', c: C.white, a: pa, ab: 2 });
   }
 };
 
@@ -373,7 +373,8 @@ function ncShot(key, V, r) {
 function ncTour(S, t0) {
   const p = Math.max(0, S.u - t0) / 2.6, k = Math.floor(p), f = p - k;
   const ang = (k + ease(clamp((f - 0.45) / 0.55))) * Math.PI / 2;
-  return [Math.sin(ang), 0, Math.cos(ang)];
+  /* dwell: the first 45% of each step, when the state sits exactly on a pole */
+  return { v: [Math.sin(ang), 0, Math.cos(ang)], dwell: f <= 0.45 };
 }
 SCENES.sphere = S => {
   const u = S.u, a = ncFade(S);
@@ -381,20 +382,20 @@ SCENES.sphere = S => {
   badgeQ(S, [[0, null, 'computed'], [2, 'Lean checks', 'lean'], [3, null, 'computed']]);
   /* line 0: the question */
   const q0 = a * at(S, 0, 0.6) * (1 - at(S, 1, 0.5));
-  ncRich([['ψ ≠ 0 :   Xψ = xψ   and · 且   Zψ = zψ  ?', C.now]], 120, 240, { size: 40, a: q0, fam: F.math });
+  ncRich([['ψ ≠ 0 :   Xψ = xψ   and · 且   Zψ = zψ  ?', C.white]], 120, 240, { size: 40, a: q0, fam: F.math });
   /* line 1: X swaps the entries of Z's two sure directions */
   const va = a * at(S, 1, 0.6) * (1 - at(S, 3, 0.6));
   if (va > 0.003) {
     panel(1060, 430, 760, 380, va, C.cyan, 'Z IS SURE HERE · Z 在这里确定');
     const rowsY = [560, 690];
     [[[1, 0], [0, 1]], [[0, 1], [1, 0]]].forEach(([v, w], i) => {
-      const y = rowsY[i], ra = va * (i === 0 ? Q(S, 1, 'one zero', 0.5) : Q(S, 1, 'zero one', 0.5));
+      const y = rowsY[i], ra = va * (i === 0 ? Q(S, 1, 'two basis directions', 0.5) : Q(S, 1, 'two basis directions', 0.5, 0.5));
       if (ra <= 0.003) return;
       ncRich([['X', C.white]], 1096, y + 12, { size: 38, a: ra });
       let x = ncVec(v, 1146, y, ra, { c: C.cyan });
-      const sw = va * Q(S, 1, 'swaps the two entries', 0.6);
+      const sw = va * Q(S, 1, 'X swaps them', 0.6);
       txt('=', x + 24, y + 12, { size: 38, fam: F.math, w: 700, c: C.white, a: ra * sw });
-      x = ncVec(w, x + 70, y, ra * sw, { c: C.now });
+      x = ncVec(w, x + 70, y, ra * sw, { c: C.white });
       txt(`≠ λ (${v[0]}, ${v[1]})ᵀ`, x + 30, y + 12, { size: 32, fam: F.math, w: 700, c: C.white, a: ra * Q(S, 1, 'it moves both', 0.5) });
     });
     txt('sure states of Z, up to scale ·Z 的本征方向（差一个倍数）', 1096, 784, { size: 20, fam: F.zh, w: 700, c: C.dim, a: va });
@@ -404,14 +405,14 @@ SCENES.sphere = S => {
   if (la > 0.003) {
     panel(1060, 190, 760, 200, la, C.lean, 'NO COMMON EIGENVECTOR · 无公共本征向量');
     ncRich([['Xψ = xψ,  Zψ = zψ   ⇒   ψ = 0', C.white]], 1096, 280, { size: 32, a: la });
-    txt('ψ ∈ ℂ², x, z ∈ ℂ', 1096, 318, { size: 20, fam: F.math, w: 700, c: C.dim, a: la });
-    ncLean(1096, 362, NC_LEAN.pauli_observables_have_no_common_eigenvector, la, { size: 17 });
+    txt('ψ ∈ ℂ², x, z ∈ ℂ', 1096, 322, { size: 26, fam: F.math, w: 700, c: C.dim, a: la });
+    ncLean(1096, 368, NC_LEAN.pauli_observables_have_no_common_eigenvector, la, { size: 20 });
   }
   /* lines 3–4: the Bloch sphere */
   const ba = a * at(S, 0, 0.8), tourOn = at(S, 3, 0.6);
   if (ba > 0.003) {
     const V = ncView(560, 600, 250, -0.55 + 0.03 * (u - lineAt(S, 3).s), 0.28);
-    const st = tourOn > 0 ? ncTour(S, lineAt(S, 3).s + 0.6) : [0, 0, 1];
+    const tour = tourOn > 0 ? ncTour(S, lineAt(S, 3).s + 0.6) : { v: [0, 0, 1], dwell: true }, st = tour.v;
     const ca = a * at(S, 4, 0.6);
     const sh = ncShot('bloch', V, [200, 300, 720, 600]);
     sh.begin();
@@ -420,7 +421,7 @@ SCENES.sphere = S => {
     sh.line([[-1.22, 0, 0], [1.22, 0, 0]], { color: C.white, width: 2.5, alpha: 0.8 });
     sh.bead([0, 0, 1], { color: C.cyan, r: 11 }); sh.bead([0, 0, -1], { color: C.cyan, r: 11 });
     sh.bead([1, 0, 0], { color: C.white, r: 11 }); sh.bead([-1, 0, 0], { color: C.white, r: 11 });
-    sh.arrow([0, 0, 0], st, { color: C.now, width: 4, headSize: 16 });
+    sh.arrow([0, 0, 0], st, { color: C.now, width: 4, headSize: 16, alpha: tour.dwell ? 1 : 0.5 });
     if (ca > 0.01) sh.bead([0, 0, 0], { color: C.white, r: 7, alpha: ca });
     sh.end(ba);
     const lab = (p, s, col, dx, dy) => { const q = sh.anchor(p); txt(s, q.x + dx, q.y + dy, { size: 24, fam: F.zh, w: 700, c: col, a: ba * (q.hidden ? 0.35 : 1) }); };
@@ -432,7 +433,7 @@ SCENES.sphere = S => {
     /* the readout: where the amber state is sure for Z, for X */
     const ra = ba * tourOn;
     panel(1060, 430, 760, 220, ra, C.cyan, 'IS THE ANSWER SURE? · 答案确定吗');
-    const zs = Math.abs(st[2]) > 0.9999, xs = Math.abs(st[0]) > 0.9999;
+    const zs = tour.dwell && Math.abs(st[2]) > 0.9999, xs = tour.dwell && Math.abs(st[0]) > 0.9999;
     txt('Z', 1100, 510, { size: 34, fam: F.math, w: 700, c: C.cyan, a: ra });
     txt(zs ? `sure · 确定  ${st[2] > 0 ? '+1' : '−1'}` : 'not sure · 不确定', 1160, 510, { size: 28, fam: F.zh, w: 700, c: zs ? C.now : C.dim, a: ra });
     txt('X', 1100, 570, { size: 34, fam: F.math, w: 700, c: C.white, a: ra });
@@ -483,11 +484,11 @@ FILM.poster = () => {
   const sc = TL.scenes[0], t = sc.end - 1.0;
   background(t, sc, 0, 6);
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.2, a: 0.14, cx: 1400, cy: 420, camZ: 7, lw: 1.3, dots: false });
-  ncSheet(180, 230, 600, [['I', '1', C.white], ['X', '±1', C.now], ['Z', '±1', C.now], ['ZX', '✗', C.white]], 1);
+  ncSheet(180, 230, 600, [['I', '1', C.white], ['X', '±1', C.white], ['Z', '±1', C.white], ['ZX', '✗', C.white]], 1);
   txt(DATA.film.title_zh, 1380, 420, { size: 80, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('X AND Z', 1380, 520, { size: 48, fam: F.orb, w: 900, align: 'center', c: C.cyan, ab: 3, ls: 5 });
   txt('SHARE NO ANSWER', 1380, 582, { size: 40, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 2, ls: 4 });
-  ncRich([['ZX = ', C.white], ['−', C.now], ['XZ', C.white]], 1380, 680, { size: 48, align: 'center', ab: 1 });
+  ncRich([['ZX = −XZ', C.white]], 1380, 680, { size: 48, align: 'center', ab: 1 });
   bloom(0.6);
   txt(`${DATA.book.code} · FILM`, 1380, 760, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 8 });
   txt(`${DATA.book.title.zh} · ${DATA.book.title.en}`, W / 2, 1010, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: 0.9 });

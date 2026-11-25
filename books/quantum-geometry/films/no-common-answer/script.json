@@ -1,13 +1,13 @@
 {
   "voice": "af_heart",
   "speed": 0.94,
-  "say": {"Lean": "Leen", "Bloch": "Block", "psi": "sigh"},
+  "say": {"Lean": "Leen", "Bloch": "Block"},
   "music": {"bpm": 80, "progression": "d-minor"},
   "scenes": [
-    {"id": "sheet", "name": "THE ANSWER SHEET", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+    {"id": "sheet", "name": "THE ANSWER SHEET", "lead": 2.6, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
       ["Suppose a particle carries an answer sheet, with a number already written for every question.", "假设粒子身上揣着一张答卷，每道题的答案都已经写好。"],
       ["The sheet must play fair with arithmetic: one stays one, and sums, multiples and products carry over.", "这张答卷得守算术规矩：1 还是 1，和、倍数与乘积都照样对应。"],
-      ["But why do we believe the answers are written down before anyone asks?", "可是，凭什么认为没人提问之前，答案就已经写好了？"]
+      ["But can such a sheet really be written, before anyone asks?", "可是，这样一张答卷，真能在没人提问之前就写好吗？"]
     ], "cues": [{"line": 2, "at": 0.6, "kind": "glitch"}]},
     {"id": "rules", "name": "TWO QUESTIONS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
       ["Take two questions: the two by two matrices X and Z.", "取两道题：2×2 矩阵 X 与 Z。"],
@@ -16,18 +16,18 @@
       ["Lean checks both facts by multiplying the matrices out.", "Lean 内核把矩阵逐项乘出来，检验了这两件事。"]
     ], "cues": [{"line": 2, "at": 2.2, "kind": "chime"}]},
     {"id": "table", "name": "FILL IN THE SHEET", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.6, 0.2, 0.3], "lines": [
-      ["On paper, numbers commute. So the answers x and z must obey x z equals minus x z.", "纸上的数可以交换次序，所以答案 x、z 必须满足 xz = −xz。"],
+      ["On paper, numbers commute. So the answers must obey a strange rule: their product equals minus itself.", "纸上的数可以交换次序，所以两个答案必须守一条怪规矩：乘积等于它自己的相反数。"],
       ["Try plus one and plus one. The product is one, but the rule asks for minus one.", "试 +1、+1：乘积是 1，规矩却要它等于 −1。"],
       ["The other three rows fail the same way. Only zero equals its own negative, and zero squared is not one.", "其余三行同样落空。只有 0 等于自己的相反数，而 0 的平方不是 1。"]
     ], "cues": [{"line": 1, "at": 2.4, "kind": "impact"}, {"line": 2, "at": 1.6, "kind": "impact"}]},
     {"id": "theorem", "name": "NO SUCH SHEET", "lead": 0.5, "tail": 0.8, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
       ["Lean checks the general statement: no map from two by two complex matrices to numbers keeps one, sums, multiples and products.", "Lean 内核检验了一般陈述：从 2×2 复矩阵到复数，不存在保持 1、加法、数乘与乘法的映射。"],
-      ["One minus sign is enough to burn the whole ledger.", "一个负号，就足以烧掉整本账。"]
+      ["Squares allow only plus or minus one. Then one minus sign bankrupts the whole ledger.", "平方只许 ±1；再来一个负号，整本账就破产了。"]
     ], "cues": [{"line": 0, "at": 0.8, "kind": "stamp"}]},
     {"id": "sphere", "name": "NO SHARED STATE", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.3, 0.4], "lines": [
       ["A smaller hope: one special state with a sure X answer and a sure Z answer.", "退一步：有没有某个特殊的态，X 的答案确定，Z 的答案也确定？"],
-      ["Z is sure only along one zero and zero one. X swaps the two entries, so it moves both.", "Z 只在 (1, 0) 与 (0, 1) 方向上确定；X 把两个分量对调，两个方向都被挪走。"],
-      ["Lean checks it: if X psi is x psi and Z psi is z psi, then psi is zero.", "Lean 内核检验：若 Xψ = xψ 且 Zψ = zψ，则 ψ = 0。"],
+      ["Z is sure only on the two basis directions. X swaps them, so it moves both.", "Z 只在两个基方向 (1, 0)、(0, 1) 上确定；X 把它们对调，两个方向都被挪走。"],
+      ["Lean checks it: a vector that both X and Z merely rescale must be zero.", "Lean 内核检验：在 X 与 Z 下都只被伸缩的向量，必为零向量。"],
       ["On the Bloch sphere, Z is sure at the north and south poles, X at east and west. The two pairs never meet.", "在布洛赫球上，Z 确定的态在南北极，X 确定的态在东西极；两对极点没有交点。"],
       ["And the zero vector is no state at all, not even the centre of the ball.", "而零向量根本不是态，也不是球心那个最大混合态。"]
     ], "cues": [{"line": 2, "at": 0.4, "kind": "stamp"}]},
