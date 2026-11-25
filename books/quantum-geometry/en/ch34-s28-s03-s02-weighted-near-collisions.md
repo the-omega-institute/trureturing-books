@@ -790,6 +790,20 @@ Each fixed budget lies in an interval of finite support radius. Thus $E_q(1-\lam
 
 [Lean proof of the centered cosine identity](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cosineMoment_eq_centered) · [Lean proof of the quantitative comparison](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cyclic_to_lattice_comparison)
 
+### Mass near the antipode
+
+The cyclic minimizers converge to the lattice law at every fixed centered site. The two tight constraints also determine a smaller amount of weight lying far from these sites. For a fixed $\lambda\ge0$, let $v_q$ be any cyclic minimizer at threshold $1-\lambda/q^2$. Set $c_i=\cos(2\pi i/q)$ and $A_q=\{i:c_i<0\}$. Through all integer moduli,
+$$
+q^2\sum_{i\in A_q}v_q(i)\longrightarrow \frac{3\lambda}{8},
+\qquad
+q^2\sum_{i\in A_q}(1+c_i)v_q(i)\longrightarrow 0.
+$$
+The second limit implies that for any fixed $\varepsilon>0$, the part of the rescaled mass on $A_q$ where $c_i\ge-1+\varepsilon$ tends to zero.
+
+On the fixed support of the lattice law, the first and second cosine deficits, multiplied by $q^2$, have limiting weighted sums $\lambda/4$ and $\lambda$. Over the full cycle each rescaled deficit sums to $\lambda$ because both constraints are tight. For $\lambda=0$ the pointwise upper bound one forces both moment equalities as soon as the weight is feasible. Nonnegativity then makes the second deficit outside the fixed support tend to zero. On $c_i\ge0$ it bounds $1-c_i$ after division by two, and on $c_i<0$ it bounds $1+c_i$ after the same division. Thus the first deficit over $A_q$ tends to $3\lambda/4$, and its difference from twice the rescaled mass tends to zero. This argument splits off a finite sum and bounds its remainder before passing to the limit. The related proof for character sums uses this method to compare a finite Dirichlet polynomial with a logarithmic derivative. [Character-sum tail bound](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)
+
+[Lean proof of the rescaled antipodal mass limit](lean:D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
