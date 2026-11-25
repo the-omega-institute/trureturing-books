@@ -567,6 +567,23 @@ $$
 
 可将此界用于上面的奇、偶余项预算，与先前的 $B_T$ 逐子集取较小值。在实际 ζ 尾段，仍须估计带字符权重的子集中心相位和的分布，并控制增长次数下的总余项。 [相关证明候选](https://github.com/the-omega-institute/trureturing/pull/34089)
 
+#### 带符号主项和与显式误差
+
+中心化的偶次因子常数项均为一。沿用上述记号，对 $|T|\le d$ 定义
+$$
+P_T=\left(\prod_{j\in T}(-A_j)\right)\frac{U_T^n}{n!},\qquad h_T=\frac{|U_T|^n}{n!},\qquad H_T=[x^n]e^{|U_T|x+V_T x^2/24},\qquad A_T=\prod_{j\in T}w_j.
+$$
+将偶次因子的乘积及其二次指数实数上界同时减去一后，逐系数控制仍成立。因此
+$$
+|C_T-P_T|\le A_T(H_T-h_T),\qquad
+\big||C_T|^2-|P_T|^2\big|\le A_T^2(H_T^2-h_T^2).
+$$
+第二个不等式将两个模长之差的反三角不等式上界乘以两模长之和，后者至多为 $A_T(H_T+h_T)$。结合局部误差估计与带符号展开，得到
+$$
+\left|[x^dy^d]Q_k-\sum_{\substack{T\subseteq J\\|T|\le d}}(-1)^{|T|}|P_T|^2\right|\le\sum_{\substack{T\subseteq J\\|T|\le d}}A_T^2(H_T^2-h_T^2).
+$$
+当 $d-|T|=0,1$ 时对应项的误差为零，空集的误差也是零。特别地，$d\le2$ 时整个近似为精确恒等式。对每个字符该不等式均成立，并可用非负傅里叶权重求平均。实际 ζ 零点所需尺度下的交替主项和与总误差仍待估计。 [相关证明候选](https://github.com/the-omega-institute/trureturing/pull/34094)
+
 ### 用非负傅里叶权重估计频带
 
 记 $R_H$ 为 $[-H,H]$ 中整数的模 $q$ 剩余类。对任意非负的剩余类质量 $M(r)$，定义 $B_N(k)=\sum_{j=0}^{N-1}\chi_k(j)$，并用负号特征标定义 $\widehat M(k)=\sum_rM(r)\chi_k(-r)$。当整数 $N>H\ge0$ 时，

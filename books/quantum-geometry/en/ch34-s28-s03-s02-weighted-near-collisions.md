@@ -567,6 +567,23 @@ The inequality $6^m m!\le(2m+1)!$ bounds the norm of each local even coefficient
 
 Apply this estimate to the odd and even remainder budgets above, taking the smaller bound with $B_T$ for each subset. The actual ζ tail still requires estimates for the distribution of the subset-centered phase sums with the character weights, and for their aggregate remainder at growing degree. [Related proof candidate](https://github.com/the-omega-institute/trureturing/pull/34089)
 
+#### The signed principal sum and its explicit error
+
+The centered even factors have constant coefficient one. With the preceding notation, for $|T|\le d$ define
+$$
+P_T=\left(\prod_{j\in T}(-A_j)\right)\frac{U_T^n}{n!},\qquad h_T=\frac{|U_T|^n}{n!},\qquad H_T=[x^n]e^{|U_T|x+V_T x^2/24},\qquad A_T=\prod_{j\in T}w_j.
+$$
+The same coefficientwise domination holds after subtracting one from the product of even factors and its real quadratic exponential majorant. Consequently
+$$
+|C_T-P_T|\le A_T(H_T-h_T),\qquad
+\big||C_T|^2-|P_T|^2\big|\le A_T^2(H_T^2-h_T^2).
+$$
+For the second inequality, multiply the reverse triangle bound on the difference of the two norms by their sum, which is at most $A_T(H_T+h_T)$. Combining the local estimate with the signed expansion gives
+$$
+\left|[x^dy^d]Q_k-\sum_{\substack{T\subseteq J\\|T|\le d}}(-1)^{|T|}|P_T|^2\right|\le\sum_{\substack{T\subseteq J\\|T|\le d}}A_T^2(H_T^2-h_T^2).
+$$
+The terms have zero error for $d-|T|=0,1$. The empty subset also has zero error. In particular the entire approximation is exact for $d\le2$. The inequality holds for each character and can be averaged using positive Fourier weights. Bounding the alternating principal sum and the aggregate error at the required ζ-zero scale remains open. [Related proof candidate](https://github.com/the-omega-institute/trureturing/pull/34094)
+
 ### Bounding a cyclic band with nonnegative Fourier weights
 
 Let $R_H$ be the residues of the integers in $[-H,H]$. For a nonnegative residue mass $M(r)$, use the negative character in $\widehat M(k)=\sum_rM(r)\chi_k(-r)$ and put $B_N(k)=\sum_{j=0}^{N-1}\chi_k(j)$. For integers $N>H\ge0$,
