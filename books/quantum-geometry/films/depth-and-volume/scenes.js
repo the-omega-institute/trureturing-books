@@ -180,8 +180,9 @@ function dvChain(N, S, o) {
     dot(X(j), yc, 11, 'c', a);
     txt(String(j), X(j), yc + 40, { size: fs, fam: F.mono, w: 700, align: 'center', c: C.dim, a });
   }
+  /* gate states */
+  const st = [];
   for (let k = 0; k <= N; k++) {
-    const [xa, xb] = gx(k), y = gy(k);
     let col = C.cyan, fill = 0.18, lw = 2, ta = 1;
     if (o.tick != null) {
       const T = o.tick;
@@ -190,23 +191,30 @@ function dvChain(N, S, o) {
       else { col = C.dim; fill = 0.06; ta = 0.7; }
     }
     if (o.hi && o.hi.has(k)) { col = C.now; fill = 0.45; lw = 3.5; }
-    const ga = a * (o.gate == null ? 1 : o.gate);
-    if (ga <= 0.003) continue;
+    st.push({ col, fill, lw, ta });
+  }
+  const ga = a * (o.gate == null ? 1 : o.gate);
+  /* pass 1: the legs down to the sites each gate grips, and the turning-point cuts */
+  if (ga > 0.003) for (let k = 0; k <= N; k++) {
+    const y = gy(k), sites = k === 0 ? [1] : k === N ? [N] : [k, k + 1];
+    for (const s2 of sites) line(X(s2), y + bh, X(s2), yc - 12, st[k].col, ga * 0.45, 1.5);
+  }
+  const ca = a * (o.cut || 0);
+  if (ca > 0.003) for (const s2 of S) { ctx.save(); ctx.setLineDash([7, 6]); line(X(s2), yc - 150, X(s2), yc + 12, C.mag, ca, 3); ctx.restore(); }
+  /* pass 2: the bars, opaque underneath so legs and cuts do not cross the labels */
+  if (ga > 0.003) for (let k = 0; k <= N; k++) {
+    const [xa, xb] = gx(k), y = gy(k), { col, fill, lw, ta } = st[k];
+    ctx.save(); ctx.globalAlpha = ga; ctx.fillStyle = 'rgba(6,12,30,0.92)'; ctx.fillRect(xa, y, xb - xa, bh); ctx.restore();
     fillBox(xa, y, xb - xa, bh, col, ga * fill);
     ctx.save(); ctx.globalAlpha = ga; ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.strokeRect(xa, y, xb - xa, bh); ctx.restore();
-    /* little legs down to the sites it grips */
-    const sites = k === 0 ? [1] : k === N ? [N] : [k, k + 1];
-    for (const s of sites) line(X(s), y + bh, X(s), yc - 12, col, ga * 0.45, 1.5);
-    const label = o.tick != null && o.tick >= g[k] ? String(g[k]) : (o.names == null || o.names > 0) ? dvGateName(N, k) : '';
     const isTick = o.tick != null && o.tick >= g[k];
+    const label = isTick ? String(g[k]) : (o.names == null || o.names > 0) ? dvGateName(N, k) : '';
     txt(label, (xa + xb) / 2, y + bh / 2 + fs * 0.36, { size: isTick ? fs + 4 : fs - 2, fam: F.mono, w: 700, align: 'center', c: isTick ? C.white : col, a: ga * ta * (isTick ? 1 : (o.names == null ? 1 : o.names)) });
   }
-  /* turning points: magenta cuts at the shared site */
-  const ca = a * (o.cut || 0);
-  if (ca > 0.003) for (const s of S) {
-    ctx.save(); ctx.setLineDash([7, 6]); line(X(s), yc - 150, X(s), yc + 12, C.mag, ca, 3); ctx.restore();
+  /* the turning-point markers on top */
+  if (ca > 0.003) for (const s2 of S) {
     ctx.save(); ctx.globalAlpha = ca; ctx.fillStyle = C.mag; ctx.beginPath();
-    ctx.moveTo(X(s), yc - 150); ctx.lineTo(X(s) - 12, yc - 172); ctx.lineTo(X(s) + 12, yc - 172); ctx.closePath(); ctx.fill(); ctx.restore();
+    ctx.moveTo(X(s2), yc - 150); ctx.lineTo(X(s2) - 12, yc - 172); ctx.lineTo(X(s2) + 12, yc - 172); ctx.closePath(); ctx.fill(); ctx.restore();
   }
   /* blocks: brackets under the chain */
   const ba = a * (o.blocks || 0);
@@ -221,7 +229,7 @@ function dvChain(N, S, o) {
 function dvClock(x, y, T, L, a, label = 'TICK · 拍') {
   if (a <= 0.003) return;
   panel(x, y, 260, 130, a, C.now, label);
-  const n = Math.min(L, Math.floor(T + 1e-9));
+  const n = T <= 1e-9 ? 0 : Math.min(L, Math.ceil(T - 1e-9));   /* the tick now firing */
   txt(`${n} / ${L}`, x + 130, y + 104, { size: 52, fam: F.orb, w: 900, align: 'center', c: n >= L ? C.cyan : C.now, a });
 }
 /* opening title */
@@ -245,7 +253,7 @@ SCENES.hook = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
   const T = 4 * ease(Q(S, 1, 'Count the ticks', 3.0));
-  dvChain(DV_A.N, DV_A.S, { cx: W / 2, y: 640, dx: 118, a, tick: Q(S, 1, 'Count the ticks', 0.01) > 0 ? T : null, cut: 0.35 * Q(S, 1, 'Count the ticks', 0.6) });
+  dvChain(DV_A.N, DV_A.S, { cx: W / 2, y: 740, dx: 118, a, tick: Q(S, 1, 'Count the ticks', 0.01) > 0 ? T : null, cut: 0.35 * Q(S, 1, 'Count the ticks', 0.6) });
   const ga = a * Q(S, 1, 'Count the gates', 0.5);
   if (ga > 0.003) {
     panel(330, 220, 420, 150, ga, C.white, 'GATES · 门');
@@ -321,11 +329,11 @@ SCENES.teams = S => {
   const oa = aA * at(S, 0, 0.6) * (1 - at(S, 3, 0.5));
   if (oa > 0.003) dvBlocks(DV_A.N, DV_A.S).forEach(([s, e]) => {
     const xa = R.gx(s)[0], xb = R.gx(e)[1];
-    arrow(xb - 6, 300, xa + 6, 300, C.cyan, oa, 3);
+    arrow(xb - 24, 252, xa + 24, 252, C.cyan, oa, 3);
   });
-  if (oa > 0.003) txt('order · 先后', R.gx(DV_A.N)[1] + 20, 306, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: oa });
+  if (oa > 0.003) txt('order · 先后', R.gx(DV_A.N)[1] + 10, 258, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: oa });
   const ta = aA * Q(S, 1, 'Put turning points', 0.6);
-  if (ta > 0.003) for (const s of DV_A.S) txt(`turn · 折返 ${s}`, R.X(s), 290, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.mag, a: ta });
+  if (ta > 0.003) for (const s of DV_A.S) txt(`turn · 折返 ${s}`, R.X(s), 298, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.mag, a: ta });
   dvAnalogy(100, 650, 700, 'relay: one leg per gate, baton = shared site', '接力：一棒一道门，接力棒 = 共用格点', aA * Q(S, 2, 'like a relay', 0.6));
   dvClock(860, 660, TA, 4, aA * at(S, 3, 0.5));
   const fa = aA * Q(S, 3, 'four ticks in all', 0.5);
@@ -340,9 +348,9 @@ SCENES.teams = S => {
     dvClock(860, 660, TB, 3, aB);
     panel(1180, 650, 640, 140, aB, C.cyan, 'HAND COUNT · 手算');
     dvRich([['⌊8 / 3⌋ + 1 = 2 + 1 = ', C.white], ['3', C.cyan]], 1208, 740, { size: 40, a: aB });
-    txt('N = 8 · S = {3, 6}', 320, 740, { size: 32, fam: F.mono, w: 700, align: 'center', c: C.white, a: aB });
+    txt('N = 8 · S = {3, 6}', W / 2, 205, { size: 28, fam: F.mono, w: 700, align: 'center', c: C.white, a: aB });
   }
-  if (aA > 0.003 && at(S, 1, 0.01) > 0) txt('N = 11 · S = {4, 8}', W / 2, 220, { size: 28, fam: F.mono, w: 700, align: 'center', c: C.white, a: aA * at(S, 1, 0.5) });
+  if (aA > 0.003 && at(S, 1, 0.01) > 0) txt('N = 11 · S = {4, 8}', W / 2, 205, { size: 28, fam: F.mono, w: 700, align: 'center', c: C.white, a: aA * at(S, 1, 0.5) });
 };
 
 /* ======================================================================= */
@@ -367,10 +375,14 @@ SCENES.floor = S => {
   const la = a * at(S, 0, 0.6);
   panel(240, 190, 1440, 270, la, C.lean, 'ANY N, ANY κ · 任意 N 与 κ');
   dvRich([['1 ≤ κ,  2κ ≤ N', C.white]], 290, 280, { size: 36, a: la * Q(S, 0, 'Take N sites', 0.5) });
-  dvRich([['⟹   min over placements  depth = ', C.white], ['⌊N / (κ + 1)⌋ + 1', C.lean]], 290, 352, { size: 38, a: la * at(S, 1, 0.6) });
-  txt('对折返点的一切摆法取最小', 1290, 280, { size: 24, fam: F.zh, w: 700, c: C.dim, a: la * at(S, 1, 0.6) });
+  dvRich([['⟹   minDepth(N, κ) = ', C.white], ['⌊N / (κ + 1)⌋ + 1', C.lean]], 290, 352, { size: 38, a: la * at(S, 1, 0.6) });
+  txt('least depth over all placements · 对折返点的一切摆法取最小', 1640, 280, { size: 24, fam: F.zh, w: 700, align: 'right', c: C.dim, a: la * at(S, 1, 0.6) });
   dvLean(290, 422, DV_LEAN.minDepth, la * Q(S, 0, 'Lean checks', 0.5), { size: 20 });
   stamp('⌊N/(κ+1)⌋ + 1', 1420, 400, Q(S, 0, 'Lean checks', 0.5, 0.6) * (1 - at(S, 1, 0.5, 3)), C.lean, 30, -0.06);
+  /* lines 0–1: the worked instance underneath, N = 11, κ = 2 */
+  const ia = a * at(S, 0, 0.8, 1.5) * (1 - at(S, 2, 0.5));
+  dvChain(DV_A.N, DV_A.S, { cx: W / 2, y: 720, dx: 96, a: ia, tick: 4, cut: 1, fs: 18 });
+  if (ia > 0.003) dvRich([['N = 11,  κ = 2:   ⌊11 / 3⌋ + 1 = ', C.white], ['4', C.cyan]], W / 2, 555, { size: 30, align: 'center', a: ia * at(S, 1, 0.6) });
   /* line 2: the pieces */
   const pa = a * at(S, 2, 0.6) * (1 - at(S, 3, 0.5));
   dvCells(260, 560, 11, [2, 3], 58, pa, 'N = 11 · S = {2, 3}');
@@ -380,14 +392,14 @@ SCENES.floor = S => {
   const qa = a * at(S, 3, 0.7);
   if (qa > 0.003) {
     txt('Time is not the number of steps.', W / 2, 600, { size: 50, fam: F.disp, w: 700, align: 'center', c: C.white, a: qa, ab: 2 });
-    txt('It is the longest line that has to wait.', W / 2, 670, { size: 50, fam: F.disp, w: 700, align: 'center', c: C.now, a: qa * Q(S, 3, 'It is the longest', 0.6), ab: 2 });
+    txt('It is the longest line that has to wait.', W / 2, 670, { size: 50, fam: F.disp, w: 700, align: 'center', c: C.cyan, a: qa * Q(S, 3, 'It is the longest', 0.6), ab: 2 });
   }
 };
 
 /* ======================================================================= */
 /*                              scene 5 · TWO GUESSES FAIL                   */
 /* ======================================================================= */
-const GP = { x0: 200, y0: 780, w: 980, h: 520, nMin: 2, nMax: 14, dMax: 8 };
+const GP = { x0: 190, y0: 730, w: 880, h: 470, nMin: 2, nMax: 14, dMax: 8 };
 const gpX = N => GP.x0 + (N - GP.nMin) / (GP.nMax - GP.nMin) * GP.w;
 const gpY = d => GP.y0 - d / GP.dMax * GP.h;
 SCENES.guess = S => {
@@ -416,27 +428,26 @@ SCENES.guess = S => {
     }
   }
   /* legend */
-  dot(1260, 250, 12, 'c', pa); txt('⌊N/(κ+1)⌋ + 1  true · 真值', 1286, 258, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: pa });
-  ring(1260, 300, 13, C.white, ga, 2.5); txt('guess · 猜想  (N+3)/2 − κ, (N+4)/2 − κ', 1286, 308, { size: 22, fam: F.zh, w: 700, c: C.white, a: ga });
-  chip(1420, 380, 200, 56, `κ = ${k}`, C.now, pa, 30);
-  if (k === 1) txt('they agree · 完全吻合', 1540, 390, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: a * at(S, 1, 0.6) * (1 - at(S, 2, 0.01)) });
+  dot(1200, 220, 12, 'c', pa); txt('⌊N/(κ+1)⌋ + 1  true · 真值', 1226, 228, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: pa });
+  ring(1200, 268, 13, C.white, ga, 2.5); txt('guess · 猜想  (N+3)/2 − κ, (N+4)/2 − κ', 1226, 276, { size: 22, fam: F.zh, w: 700, c: C.white, a: ga });
+  chip(1300, 340, 200, 56, `κ = ${k}`, C.now, pa, 30);
+  if (k === 1) txt('they agree · 完全吻合', 1420, 350, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: a * at(S, 1, 0.6) * (1 - at(S, 2, 0.01)) });
   /* the two witnesses */
   const w8 = a * Q(S, 2, 'At eight sites', 0.5), w11 = a * Q(S, 2, 'At eleven', 0.5);
   if (k === 2) {
     ring(gpX(8), gpY(3), 26, C.now, w8, 3); ring(gpX(11), gpY(4), 26, C.now, w11, 3);
-    panel(1250, 450, 570, 200, Math.max(w8, w11), C.cyan, 'κ = 2');
-    txt('N = 8:   guess 4   runs in 3', 1278, 530, { size: 28, fam: F.mono, w: 700, c: C.white, a: w8 });
-    txt('N = 11:  guess 5   runs in 4', 1278, 590, { size: 28, fam: F.mono, w: 700, c: C.white, a: w11 });
+    panel(1170, 400, 660, 200, Math.max(w8, w11), C.cyan, 'TWO COUNTEREXAMPLES · 两个反例');
+    txt('N = 8:   guess 4   runs in 3', 1198, 470, { size: 28, fam: F.mono, w: 700, c: C.white, a: w8 });
+    txt('N = 11:  guess 5   runs in 4', 1198, 520, { size: 28, fam: F.mono, w: 700, c: C.white, a: w11 });
   }
   /* line 4: Lean and the slopes */
   const la = a * Q(S, 3, 'Lean checks', 0.5);
   if (la > 0.003) {
-    panel(1250, 680, 570, 140, la, C.lean, 'BOTH FORMULAS FAIL · 两条都不成立');
-    txt('¬ (conjectureOne ∨ conjectureTwo)', 1278, 750, { size: 24, fam: F.mono, w: 700, c: C.white, a: la });
-    dvLean(1278, 800, DV_LEAN.refute, la, { size: 14 });
+    panel(1170, 630, 660, 150, la, C.lean, 'BOTH FORMULAS FAIL · 两条都不成立');
+    txt('¬ (conjectureOne ∨ conjectureTwo)', 1198, 696, { size: 24, fam: F.mono, w: 700, c: C.white, a: la });
+    dvLean(1198, 752, DV_LEAN.refute, la, { size: 13 });
     const sa = a * Q(S, 3, 'Their slope', 0.6);
-    txt('slope ½ · 斜率二分之一', gpX(13) - 10, gpY(dvGuess(13, 2)) - 24, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.white, a: sa });
-    txt('slope ⅓ · 斜率三分之一', gpX(14), gpY(dvFloor(14, 2)) + 50, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.cyan, a: sa });
+    dvRich([['slope · 斜率   guess ', C.white], ['1/2', C.white], ['   true ', C.cyan], ['1/3', C.cyan]], 1198, 572, { size: 26, a: sa, fam: F.zh });
   }
 };
 
