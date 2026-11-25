@@ -318,8 +318,8 @@ SCENES.five = S => {
   badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean']]);
   /* line 0: the model and its reading */
   panel(860, 200, 940, 250, a, C.cyan, 'THE UNIT QUATERNIONS · 单位四元数');
-  aoRich([['κ(p, q) = ', C.white], ['(1 + ⟨p, q⟩) / 2', C.cyan]], 890, 275, { size: 34, a: a * Q(S, 0, 'the unit quaternions', 0.6) });
-  aoRich([['[x, y, z] = x y⁻¹ z', C.white]], 890, 330, { size: 28, a: a * Q(S, 0, 'the unit quaternions', 0.6, 0.5) });
+  aoRich([['κ(p, q) = ', C.white], ['(1 + ⟨p, q⟩) / 2', C.cyan]], 890, 275, { size: 34, a: a * Q(S, 0, 'The unit quaternions', 0.6) });
+  aoRich([['[x, y, z] = x y⁻¹ z', C.white]], 890, 330, { size: 28, a: a * Q(S, 0, 'The unit quaternions', 0.6, 0.5) });
   txt('obeys every rule · 守住全部规则', 890, 380, { size: 22, fam: F.zh, w: 700, c: C.white, a: a * at(S, 0, 0.6, 2.5) });
   txt('order matters: i j = k,  j i = −k', 890, 420, { size: 22, fam: F.math, w: 700, c: C.dim, a: a * at(S, 0, 0.6, 3.0) });
   /* line 1: the table */
@@ -433,7 +433,7 @@ SCENES.born = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean']]);
   /* the phase: still on lines 0–1, turning on line 2 */
-  const turn = clamp((u - phraseAt(S, 2, 'the shadows trade')) / 4.2);
+  const turn = clamp((u - phraseAt(S, 2, 'they trade')) / 4.2);
   const chi = TAU * 0.8 * ease(turn) + 0.9 * ease(Q(S, 0, 'slide one point', 2.0)) * (1 - ease(at(S, 1, 0.8)));
   const r1 = aoRead1(chi), r2 = aoRead2(chi);
   /* the Bloch sphere: the Hopf images of x and of y c */
@@ -588,10 +588,10 @@ SCENES.edge = S => {
   const rows = [
     { k: 0, col: C.cyan, en: 'no gaps cannot be dropped', zh: '“没有缺口”不能省', note: 'rational example: hand derivation · 有理例子：手工推导' },
     { k: 1, col: C.argued, en: 'the rules are a model', zh: '母公理是模型；读作概率是诠释', note: 'MODEL · not a proof · 不是证明' },
-    { k: 2, col: C.argued, en: 'fewest columns: our choice', zh: '栏数最少：是我们的选择', note: 'theorems say what follows · 定理只说由此推出什么' }
+    { k: 1, off: 4.0, col: C.argued, en: 'fewest columns: our choice', zh: '栏数最少：是我们的选择', note: 'theorems say what follows · 定理只说由此推出什么' }
   ];
   rows.forEach((rw, i) => {
-    const ra = a * at(S, rw.k, 0.6);
+    const ra = a * at(S, rw.k, 0.6, rw.off || 0);
     if (ra <= 0.003) return;
     const y = 210 + i * 210;
     panel(860, y, 940, 180, ra, rw.col);
