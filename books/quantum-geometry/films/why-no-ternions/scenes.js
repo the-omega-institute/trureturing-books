@@ -207,14 +207,14 @@ SCENES.hook = S => {
 /* ======================================================================= */
 /*                          scene 2 · WHAT THE CROSS DROPS                   */
 /* ======================================================================= */
-const LK = { x: 110, y: 170, w: 960, h: 680, cx: 470, cy: 420, unit: 50 };
+const LK = { x: 110, y: 170, w: 960, h: 680, cx: 520, cy: 400, unit: 60 };
 const LK_BOX = { vertices: [], faces: [[0, 1, 3, 2], [4, 6, 7, 5], [0, 4, 5, 1], [2, 3, 7, 6], [0, 2, 6, 4], [1, 5, 7, 3]] };
-for (const x of [-4.5, 4.5]) for (const y of [-4.5, 4.5]) for (const z of [-4.5, 4.5]) LK_BOX.vertices.push([x, y, z]);
+for (const x of [-1, 4.5]) for (const y of [-4.5, 4.5]) for (const z of [0, 4.6]) LK_BOX.vertices.push([x, y, z]);
 SCENES.leak = S => {
   const u = S.u, a = wtFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
-  const yaw = -0.95 + 0.035 * u, pitch = 0.32;
+  const yaw = -1.62 + 0.005 * u, pitch = 0.7;
   const O = [0, 0, 0], AB = wtAdd(WT_A, WT_B);
   const pa = Q(S, 0, 'Take two arrows', 0.8), pb = Q(S, 0, 'B is', 0.8);
   const pc = Q(S, 1, 'stands up', 1.0), pr = Q(S, 1, 'their area', 0.8);
@@ -223,9 +223,9 @@ SCENES.leak = S => {
   const sh = solid('leak', { x: LK.x, y: LK.y, w: LK.w, h: LK.h, yaw, pitch, unit: LK.unit, cx: LK.cx, cy: LK.cy, px: true });
   sh.begin();
   sh.poly('box', LK_BOX, { color: C.blue, alpha: 0.06, edges: C.cyan });
-  sh.line([[-4.5, 0, 0], [4.5, 0, 0]], { color: C.dim, width: 1.2, alpha: 0.5 });
+  sh.line([[-1, 0, 0], [4.5, 0, 0]], { color: C.dim, width: 1.2, alpha: 0.5 });
   sh.line([[0, -4.5, 0], [0, 4.5, 0]], { color: C.dim, width: 1.2, alpha: 0.5 });
-  sh.line([[0, 0, -4.5], [0, 0, 4.5]], { color: C.dim, width: 1.2, alpha: 0.5 });
+  sh.line([[0, 0, 0], [0, 0, 4.6]], { color: C.dim, width: 1.2, alpha: 0.5 });
   if (pr > 0.003) sh.fan([O, WT_A, AB, WT_B], { fill: C.mag, alpha: 0.28 * pr, color: C.mag, width: 2, strokeAlpha: 0.8 * pr });
   if (pa > 0.003) sh.arrow(O, WT_A, { color: C.white, width: 5, headSize: 22, alpha: pa });
   if (pb > 0.003) sh.arrow(O, WT_B, { color: C.white, width: 5, headSize: 22, alpha: pb });
@@ -237,9 +237,9 @@ SCENES.leak = S => {
   sh.end(a);
   /* 2D labels on the solid */
   const lA = sh.anchor(WT_A), lB = sh.anchor(WT_B), lC = sh.anchor(WT_CR);
-  txt('a = (1, 2, 2)', lA.x + 18, lA.y + 30, { size: 26, fam: F.math, w: 700, c: C.white, a: a * pa });
-  txt('b = (0, 3, 4)', lB.x + 18, lB.y - 12, { size: 26, fam: F.math, w: 700, c: C.white, a: a * pb });
-  if (pc > 0.5) txt('a × b = (2, −4, 3)', lC.x + 16, lC.y + 8, { size: 26, fam: F.math, w: 700, c: C.mag, a: a * clamp((pc - 0.5) * 2) });
+  txt('a = (1, 2, 2)', lA.x + 20, lA.y + 30, { size: 26, fam: F.math, w: 700, c: C.white, a: a * pa });
+  txt('b = (0, 3, 4)', lB.x + 20, lB.y - 12, { size: 26, fam: F.math, w: 700, c: C.white, a: a * pb });
+  if (pc > 0.5) txt('a × b = (2, −4, 3)', lC.x - 16, lC.y - 16, { align: 'right', size: 26, fam: F.math, w: 700, c: C.mag, a: a * clamp((pc - 0.5) * 2) });
   /* the dropped shadow: a cyan 14 falling out of the box */
   if (ps > 0.003) {
     const lf = sh.anchor(foot), fall = ei(pd);
