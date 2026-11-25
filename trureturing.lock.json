@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "4dd78e27ba3bc05d1e2ea291701ea326cdf9e79c",
-  "pinned_at": "2026-11-25T08:25:33Z",
+  "commit": "47d4b3d8382f984dcc7bd96faf55d0f36ad53766",
+  "pinned_at": "2026-11-25T09:00:41Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -9067,6 +9067,14 @@
       "statement_id": "sha256:44caa404da43f9f5ed59271b16c65b28abcc6977a9c3ad379362a478a89627b2",
       "line": 338,
       "signature": "theorem rational_rank_le_two_at_iff (b : ℝ) (L R : Matrix Bool Bool ℂ) (u v w z : ℂ) (hb : 0 < b) (ht : L.trace + (b : ℂ) = 1) (hr : R.trace = L.trace) (qL : ∀ i j, RationalEntry (L i j)) (qR : ∀ i j, RationalEntry (R i j)) (qu : RationalEntry u) (qv : RationalEntry v) (qw : RationalEntry w) (qz : RationalEntry z) : let C"
+    },
+    "D5/S3/Quantum/Entanglement/Marginals/FibDiagonalRank.rational_rank_le_two_diagonal_iff": {
+      "module": "D5/S3/Quantum/Entanglement/Marginals/FibDiagonalRank",
+      "name": "D5.S3.Quantum.Entanglement.Marginals.FibDiagonalRank.rational_rank_le_two_diagonal_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:6d2481464210932f821b6bc9bb9c1074f7002e6270e00c132ca8ade5860a346b",
+      "line": 142,
+      "signature": "theorem rational_rank_le_two_diagonal_iff (b l r : ℚ) (hb : 0 < b) (hl : 0 ≤ l) (hr : 0 ≤ r) (hne : l ≠ r) : (∃ z : ℂ, ∃ ρ : Matrix Word Word ℂ, ρ.PosSemidef ∧ MatchesCoherentData b (diagonalEdgeBlock b l) (diagonalEdgeBlock b r) 0 0 0 z ρ ∧ ρ.rank ≤ 2 ∧ ∀ i j, RationalEntry (ρ i j)) ↔ (∃ z : ℂ, RationalEntry z ∧ normSq z = (b * (1 - b - l - r) : ℚ)) ∧ (∃ w : ℂ, RationalEntry w ∧ normSq w = (l * r : ℚ))"
     },
     "D5/S3/Quantum/Entanglement/Marginals/FibMarginalExtension.extendible_iff": {
       "module": "D5/S3/Quantum/Entanglement/Marginals/FibMarginalExtension",
