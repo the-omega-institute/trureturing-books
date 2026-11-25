@@ -4,9 +4,9 @@
  "say": {
   "Lean": "Leen",
   "unitary": "you-nitary",
-  "one-zero-one": "one, zero, one",
-  "one-one-zero": "one, one, zero",
-  "one-one-one": "one, one, one"
+  "101": "one, zero, one",
+  "110": "one, one, zero",
+  "111": "one, one, one"
  },
  "music": {
   "bpm": 80,
@@ -77,7 +77,7 @@
      "0 让火车往左，1 让火车往右。"
     ],
     [
-     "Address one-zero-one: right, left, right. The train stops at cell five, and only there.",
+     "Address 101: right, left, right. The train stops at cell five, and only there.",
      "地址 101：右、左、右。火车停在第 5 格，别处一辆也没有。"
     ]
    ],
@@ -197,30 +197,34 @@
    ],
    "lines": [
     [
-     "Real switches may whisper to their surroundings. A switch that leaves any mark is active.",
-     "真实的道岔会向周围泄露一点痕迹；只要留下痕迹，就叫它活跃。"
+     "Now a different circuit: bucket-brigade routers that wait, or point left or right.",
+     "换一种电路：桶链式三态路由器，要么等待，要么指向左或右。"
     ],
     [
-     "Silence one switch in the bottom row, and the neighbours one-one-zero and one-one-one look the same.",
-     "让底层一副道岔沉默，相邻的 110 和 111 就看起来一模一样。"
+     "Real routers may leak a mark to their surroundings. A router that leaves any mark is active.",
+     "真实的路由器可能会向周围泄露一点痕迹；只要留下痕迹，就叫它活跃。"
     ],
     [
-     "Lean checks the exact rule: the marks tell all addresses apart if and only if every bottom switch is active.",
-     "Lean 内核检验精确条件：痕迹能分清所有地址，当且仅当底层道岔全部活跃。"
+     "Silence one bottom router, and the neighbours 110 and 111 look the same.",
+     "让底层一个路由器沉默，相邻的 110 和 111 就看起来一模一样。"
     ],
     [
-     "The upper switches may stay silent. The bottom row alone gives the address away.",
-     "上层道岔可以一声不吭，单凭底层一排就泄露了整个地址。"
+     "Lean checks the exact rule: the active routers' labels tell every address apart, if and only if every bottom router is active.",
+     "Lean 内核检验精确条件：活跃路由器上的标签能分清每个地址，当且仅当底层路由器全部活跃。"
+    ],
+    [
+     "The upper routers may stay silent. The bottom row alone gives the address away.",
+     "上层路由器可以一声不吭，单凭底层一排就泄露了整个地址。"
     ]
    ],
    "cues": [
     {
-     "line": 1,
+     "line": 2,
      "at": 1.4,
      "kind": "glitch"
     },
     {
-     "line": 2,
+     "line": 3,
      "at": 1.0,
      "kind": "stamp"
     }
@@ -240,12 +244,8 @@
    ],
    "lines": [
     [
-     "This is an ideal circuit over fixed classical data. It copies no unknown quantum data.",
-     "这是固定经典数据上的理想电路，不复制任何未知的量子数据。"
-    ],
-    [
-     "It gives no gate count, depth or noise cost; the tally still walks every cell.",
-     "它不给门数、深度或噪声代价的界；计数员仍要走过每一格。"
+     "These are ideal circuits over fixed classical data: no quantum copying, and no gate, depth or noise bound.",
+     "这些是固定经典数据上的理想电路：不复制量子数据，也不给门数、深度或噪声的界。"
     ],
     [
      "Three switches per branch is a bucket-brigade literature result. The observer as pointer stays a model.",

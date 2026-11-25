@@ -219,14 +219,35 @@ function qrTree(G, a, o = {}) {
       }
     }
   }
-  /* routers */
+  /* trains, drawn under the routers so that a train standing at a router never hides its label */
+  for (const path of paths) {
+    if (!path.train || path.a <= 0.003) continue;
+    const k = Math.min(n - 0.0001, Math.max(0, path.p)), j = Math.floor(k), f = k - j;
+    const A = qrNode(G, path.addr.slice(0, j)), B = qrNode(G, path.addr.slice(0, j + 1));
+    const pos = path.p >= n ? qrNode(G, path.addr) : [lerp(A[0], B[0], f), lerp(A[1], B[1], f)];
+    dot(pos[0], pos[1], 22, 'g', a * path.a * path.train);
+    if (path.tag) txt(path.tag, pos[0] + 30, pos[1] - 18, { size: 22, fam: F.math, w: 700, c: C.now, a: a * path.a * path.train });
+  }
+  /* routers. Two circuits, kept apart:
+     · default (ReversibleQram, Boolean Toffoli/CNOT network): address bit k controls every split of level k, so each
+       router of a reached level shows that bit (faint off the enable path, cyan on it); an unreached level is blank.
+       There is no wait state here.
+     · o.tri (HannRouterProfiles, three-state bucket-brigade routers): a router holds W (wait) unless loaded. */
   for (const p of qrRouters(n)) {
     const [x, y] = qrNode(G, p), silent = o.silent && o.silent.has(p);
-    let lab = 'W', col = C.dim;
+    let lab = o.tri ? 'W' : '', col = C.dim, la = 1;
     const got = new Set();
-    for (const path of paths) { const b = setBit(p, path); if (b != null) { got.add(b); col = C.cyan; } }
+    if (o.tri) {
+      for (const path of paths) { const b = setBit(p, path); if (b != null) { got.add(b); col = C.cyan; } }
+    } else {
+      let onPath = false;
+      for (const path of paths) {
+        if (path.p > p.length) { got.add(path.addr[p.length]); if (path.addr.startsWith(p)) onPath = true; }
+      }
+      col = onPath ? C.cyan : C.dim; la = onPath ? 1 : 0.55;
+    }
     if (got.size === 1) lab = [...got][0];
-    else if (got.size > 1) lab = '0,1';               // superposed branches set this router both ways
+    else if (got.size > 1) lab = '0,1';               // superposed branches set this level both ways
     if (o.labels) { lab = o.labels(p); col = lab === 'W' ? C.dim : C.cyan; }
     if (o.marks && !silent) for (let q = 0; q < 3; q++) {
       const rr = 30 + ((t * 26 + q * 14) % 42);
@@ -234,7 +255,7 @@ function qrTree(G, a, o = {}) {
     }
     ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = 'rgba(4,10,24,0.92)'; ctx.beginPath(); ctx.arc(x, y, 26, 0, TAU); ctx.fill(); ctx.restore();
     ring(x, y, 26, silent ? C.dim : col, a, 2.5);
-    txt(lab, x, y + (lab.length > 1 ? 7 : 10), { size: lab.length > 1 ? 19 : 28, fam: F.mono, w: 700, align: 'center', c: silent ? C.dim : col, a: a * (silent ? 0.5 : 1) });
+    txt(lab, x, y + (lab.length > 1 ? 7 : 10), { size: lab.length > 1 ? 19 : 28, fam: F.mono, w: 700, align: 'center', c: silent ? C.dim : col, a: a * la * (silent ? 0.5 : 1) });
     if (silent) { line(x - 30, y - 30, x + 30, y + 30, C.white, a * 0.7, 3); }
   }
   /* cells */
@@ -245,15 +266,6 @@ function qrTree(G, a, o = {}) {
     box(x - cw / 2, y + 22, cw, 74, hi ? C.now : C.white, ca, hi ? 3 : 1.5, 'rgba(4,10,24,0.8)');
     txt(String(QR_D[i]), x, y + 74, { size: 40, fam: F.mono, w: 700, align: 'center', c: hi ? C.now : C.white, a: ca });
     txt(String(i), x, y + 124, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ca });
-  }
-  /* trains */
-  for (const path of paths) {
-    if (!path.train || path.a <= 0.003) continue;
-    const k = Math.min(n - 0.0001, Math.max(0, path.p)), j = Math.floor(k), f = k - j;
-    const A = qrNode(G, path.addr.slice(0, j)), B = qrNode(G, path.addr.slice(0, j + 1));
-    const pos = path.p >= n ? qrNode(G, path.addr) : [lerp(A[0], B[0], f), lerp(A[1], B[1], f)];
-    dot(pos[0], pos[1] - (path.p >= n ? 0 : 0), 22, 'g', a * path.a * path.train);
-    if (path.tag) txt(path.tag, pos[0] + 30, pos[1] - 18, { size: 22, fam: F.math, w: 700, c: C.now, a: a * path.a * path.train });
   }
 }
 /* opening title */
@@ -278,10 +290,11 @@ const ST_JUMPS = [[1, 5], [3, 2], [0, 7], [2, 0], [1, 1], [3, 6], [0, 3], [2, 5]
 SCENES.still = S => {
   const u = S.u;
   qrTitle(S);
-  const a = clamp((u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - u) / 0.5);
+  /* the grid fades in only after the title has gone (qrTitle ends at L0.s + 0.35) */
+  const a = clamp((u - lineAt(S, 0).s - 0.4) / 0.6) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued']]);
-  const ga = a * (1 - 0.55 * at(S, 2, 0.8));
+  const ga =a * (1 - 0.55 * at(S, 2, 0.8));
   /* the grid: digits never change */
   for (let i = 0; i < ST.rows; i++) for (let j = 0; j < ST.cols; j++) {
     const x = ST.x0 + j * ST.cw, y = ST.y0 + i * ST.ch;
@@ -466,19 +479,33 @@ const LS_COLS = ['', '0', '1', '00', '01', '10', '11'];
 SCENES.listen = S => {
   const u = S.u, a = qrFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [2, 'Lean checks', 'lean'], [3, null, 'computed']]);
-  const phase3 = at(S, 3, 0.6);
-  const silentA = Q(S, 1, 'Silence one switch', 0.4) > 0.5 && phase3 < 0.5;
+  /* line 0 announces the change of circuit: from here on the routers are HannRouterProfiles' three-state routers */
+  badgeQ(S, [[0, null, 'argued'], [2, null, 'computed'], [3, 'Lean checks', 'lean'], [4, null, 'computed']]);
+  const phase3 = at(S, 4, 0.6);
+  const silentA = Q(S, 2, 'Silence one bottom router', 0.4) > 0.5 && phase3 < 0.5;
   const silent = phase3 >= 0.5 ? new Set(['', '0', '1']) : silentA ? new Set(['11']) : new Set();
-  const showAddr = phase3 >= 0.5 ? null : Q(S, 1, 'the neighbours', 0.3) > 0.5 ? '11' : null;
+  const showAddr = phase3 >= 0.5 ? null : Q(S, 2, 'the neighbours', 0.3) > 0.5 ? '11' : null;
+  const marks = Q(S, 1, 'leak a mark', 0.8);
   qrTree(LG, a, {
-    t: S.t, marks: at(S, 0, 0.8), silent, cells: 0.8,
+    t: S.t, marks, silent, cells: 0.8, tri: true,
     paths: showAddr ? [{ addr: '110', p: 3, a: 0.7, train: 0 }, { addr: '111', p: 3, a: 0.7, train: 0 }] : [],
     labels: showAddr ? (p => (p === '11' ? '?' : p === '' || p === '1' ? '1' : 'W')) : null
   });
-  txt('mark · 痕迹', LG.x0 + LG.w / 2 + 70, LG.top - 40, { size: 22, fam: F.zh, w: 700, c: C.mag, a: a * at(S, 0, 0.8) });
+  txt('three-state routers · 三态路由器', LG.x0, LG.top - 72, { size: 22, fam: F.zh, w: 700, c: C.white, a: a * 0.85 });
+  txt('mark · 痕迹', LG.x0 + LG.w / 2 + 70, LG.top - 40, { size: 22, fam: F.zh, w: 700, c: C.mag, a: a * marks });
+  /* lines 0–1: the new circuit and what "active" means */
+  const ca = a * (1 - at(S, 2, 0.5));
+  if (ca > 0.003) {
+    panel(990, 200, 820, 330, ca, C.argued, 'A DIFFERENT CIRCUIT · 换一种电路');
+    txt('bucket-brigade routers', 1014, 272, { size: 28, fam: F.math, w: 700, c: C.white, a: ca });
+    qrRich([['W', C.dim], [' = wait   ', C.white], ['0', C.cyan], [' = left   ', C.white], ['1', C.cyan], [' = right', C.white]], 1014, 324, { size: 28, a: ca });
+    txt('桶链式三态路由器：W 等待，0 左，1 右', 1014, 372, { size: 24, fam: F.zh, w: 700, c: C.white, a: ca });
+    const ma = ca * marks;
+    txt('active · 活跃: leaves a mark, q(v) < 1', 1014, 436, { size: 24, fam: F.mono, w: 700, c: C.mag, a: ma });
+    txt('noise model · 噪声模型的设定', 1014, 482, { size: 20, fam: F.zh, w: 700, c: C.argued, a: ma });
+  }
   /* the table for 110 and 111 */
-  const tA = a * at(S, 1, 0.6) * (1 - phase3);
+  const tA = a * at(S, 2, 0.6) * (1 - phase3);
   if (tA > 0.003) {
     panel(990, 200, 820, 270, tA, C.mag, 'ROUTER LABELS · 路由器标签');
     const cx0 = 1150, dx = 92;
@@ -494,15 +521,15 @@ SCENES.listen = S => {
         txt(lab, cx0 + k * dx, y, { size: 28, fam: F.mono, w: 700, align: 'center', c: sil ? C.dim : lab === 'W' ? C.white : C.cyan, a: tA * (sil ? 0.35 : 1) });
       });
     });
-    const sa = tA * Q(S, 1, 'look the same', 0.5);
+    const sa = tA * Q(S, 2, 'look the same', 0.5);
     txt('silent column hidden → rows identical · 去掉沉默的一列，两行一样', 1014, 446, { size: 21, fam: F.zh, w: 700, c: C.white, a: sa });
   }
   /* Lean */
-  const la = a * Q(S, 2, 'Lean checks', 0.6) * (1 - phase3);
+  const la = a * Q(S, 3, 'Lean checks', 0.6) * (1 - phase3);
   if (la > 0.003) {
     panel(990, 500, 820, 320, la, C.lean, 'EXACT RULE · 精确条件  (depth ≥ 1)');
     txt('active labels tell all addresses apart', 1014, 572, { size: 26, fam: F.math, w: 700, c: C.white, a: la });
-    txt('⟺  every deepest router is active', 1014, 616, { size: 26, fam: F.math, w: 700, c: C.cyan, a: la * Q(S, 2, 'if and only if', 0.5) });
+    txt('⟺  every deepest router is active', 1014, 616, { size: 26, fam: F.math, w: 700, c: C.cyan, a: la * (0.3 + 0.7 * Q(S, 3, 'if and only if', 0.5)) });
     txt('活跃标签分清所有地址 ⟺ 最底层路由器全部活跃', 1014, 664, { size: 22, fam: F.zh, w: 700, c: C.white, a: la });
     txt('active · 活跃:  q(v) < 1', 1014, 708, { size: 20, fam: F.mono, w: 700, c: C.dim, a: la });
     qrLean(1014, 776, QR_LEAN.profile_separation_iff, la, { size: 18 });
@@ -518,7 +545,7 @@ SCENES.listen = S => {
       txt(ad, 1030, y, { size: 26, fam: F.mono, w: 700, c: C.now, a: ba });
       cols.forEach((c, k) => { const lab = qrLabel(ad, c); txt(lab, cx0 + k * dx, y, { size: 26, fam: F.mono, w: 700, align: 'center', c: lab === 'W' ? C.dim : C.cyan, a: ba }); });
     }
-    txt('8 rows, 8 different patterns · 八行各不相同', 1030, 774, { size: 22, fam: F.zh, w: 700, c: C.white, a: ba * Q(S, 3, 'bottom row alone', 0.5) });
+    txt('8 rows, 8 different patterns · 八行各不相同', 1030, 774, { size: 22, fam: F.zh, w: 700, c: C.white, a: ba * Q(S, 4, 'bottom row alone', 0.5) });
   }
 };
 
@@ -533,17 +560,17 @@ SCENES.edge = S => {
   qrTree(EG, a * 0.85, { paths: [{ addr: '101', p: 3, a: 0.8, train: 1 }], hi: new Set([5]) });
   /* the tally passes every leaf */
   const by = EG.top + 3 * EG.h + 150, x0 = EG.x0 + 10, x1 = EG.x0 + EG.w - 10;
-  const tA = a * at(S, 1, 0.6);
+  const tA = a * Q(S, 0, 'no gate, depth', 0.6);
   line(x0, by, x1, by, C.white, tA * 0.6, 2);
-  const tx = lerp(x0, x1, (S.u - lineAt(S, 1).s) / 4 % 1);
+  const tx = lerp(x0, x1, Math.max(0, S.u - phraseAt(S, 0, 'no gate, depth')) / 4 % 1);
   if (tA > 0.003) { ctx.save(); ctx.globalAlpha = tA; ctx.fillStyle = C.white; ctx.beginPath(); ctx.moveTo(tx, by - 6); ctx.lineTo(tx - 12, by + 16); ctx.lineTo(tx + 12, by + 16); ctx.closePath(); ctx.fill(); ctx.restore(); }
   const rows = [
-    { k: 0, col: C.cyan, en: 'fixed classical data D, ideal gates', zh: '固定的经典数据，理想的门', note: 'no copying of unknown quantum data · 不复制未知量子数据' },
-    { k: 1, col: C.cyan, en: 'no gate count, depth or noise bound', zh: '不给门数、深度、噪声的界', note: 'here the tally walks past all cells · 计数员走过每一格' },
-    { k: 2, col: C.argued, en: 'three switches per branch: literature', zh: '每支三副道岔：桶链式文献结果', note: 'observer = pointer: MODEL · 观察者即指针：模型诠释' }
+    { k: 0, ph: null, col: C.cyan, en: 'fixed classical data D, ideal circuits', zh: '固定的经典数据，理想的电路', note: 'no copying of unknown quantum data · 不复制未知量子数据' },
+    { k: 0, ph: 'no gate, depth', col: C.cyan, en: 'no gate count, depth or noise bound', zh: '不给门数、深度、噪声的界', note: 'the Boolean tally walks past all cells · 计数员走过每一格' },
+    { k: 1, ph: null, col: C.argued, en: 'three switches per branch: literature', zh: '每支三副道岔：桶链式文献结果', note: 'observer = pointer: MODEL · 观察者即指针：模型诠释' }
   ];
   rows.forEach((rw, i) => {
-    const ra = a * at(S, rw.k, 0.6);
+    const ra = a * (rw.ph ? Q(S, rw.k, rw.ph, 0.6) : at(S, rw.k, 0.6));
     if (ra <= 0.003) return;
     const y = 200 + i * 210;
     panel(880, y, 940, 180, ra, rw.col);
