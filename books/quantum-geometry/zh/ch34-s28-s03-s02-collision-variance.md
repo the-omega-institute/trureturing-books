@@ -52,7 +52,7 @@ $$
 \le \sum_i c_i\bigl(z_i^2+\{z_i\}(1-\{z_i\})\bigr).
 $$
 
-这里 $\{z\}$ 是小数部分，$c_i$ 允许取负值。证明是计算左端关于 $u$ 在单位区间上的积分。 [共同移位的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/fd4ef379635ad487726a2a103296d25cd326fb45/D5/S3/Fourier/Concentration/ShiftedBinVariance.lean#L69)取 $z=(G_m-p\mu)/\eta$，权重 $c_m\ge0$ 时，分箱二阶矩至多为 $MW^p$，其中 $M=pV/\eta^2+1/4$。每个箱中的有序对都属于闭距离带 $|G_m-G_n|\le\eta$。
+这里 $\{z\}$ 是小数部分，$c_i$ 允许取负值。证明是计算左端关于 $u$ 在单位区间上的积分。 [共同移位的 Lean 证明](lean:D5/S3/Fourier/Concentration/ShiftedBinVariance.exists_shifted_squared_moment)取 $z=(G_m-p\mu)/\eta$，权重 $c_m\ge0$ 时，分箱二阶矩至多为 $MW^p$，其中 $M=pV/\eta^2+1/4$。每个箱中的有序对都属于闭距离带 $|G_m-G_n|\le\eta$。
 
 一般地，设有限族 $(x_i,c_i)$ 的权重非负，总重 $A=\sum_i c_i$，关于任意中心 $a$ 的二阶矩满足 $\sum_i c_i(x_i-a)^2\le BA$。记 $M=B/\eta^2+1/4$，$E(\eta)=\sum_{|x_i-x_j|\le\eta}c_ic_j$，其中 $\eta>0$。对任意正整数 $r$ 满足 $M\le r^2$，有
 
@@ -61,6 +61,6 @@ A^2(1-M/r^2)^2\le
 \left(\frac{16r}{15}-\frac{1}{15r^3}\right)E(\eta).
 $$
 
-令 $q(k)=\max(0,1-k^2/r^2)$。若 $b_k$ 是所选分箱的总重，则 $\sum_k b_kq(k)\ge A(1-M/r^2)$。整数平方和与四次方和的精确公式给出 $\sum_k q(k)^2=16r/15-1/(15r^3)$。应用柯西–施瓦茨，再用 $\sum_k b_k^2\le E(\eta)$，即得下界。 [抛物线下界的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/fd4ef379635ad487726a2a103296d25cd326fb45/D5/S3/Fourier/Concentration/ShiftedBinVariance.lean#L187)
+令 $q(k)=\max(0,1-k^2/r^2)$。若 $b_k$ 是所选分箱的总重，则 $\sum_k b_kq(k)\ge A(1-M/r^2)$。整数平方和与四次方和的精确公式给出 $\sum_k q(k)^2=16r/15-1/(15r^3)$。应用柯西–施瓦茨，再用 $\sum_k b_k^2\le E(\eta)$，即得下界。 [抛物线下界的 Lean 证明](lean:D5/S3/Fourier/Concentration/ShiftedBinVariance.collision_parabolic_lower)
 
 对次数为 $p$ 的频率和取 $A=W^p$、$B=pV$，从而收紧上述矩判据的必要条件。对于 $B>0$，当 $\eta/\sqrt B\to0$ 时，选择 $r=\lceil\sqrt{5M}\rceil$，下界右侧对应的归一化系数趋于 $3/(5\sqrt5)$，即 $\liminf E(\eta)\sqrt B/(A^2\eta)\ge3/(5\sqrt5)$（$A>0$）。该渐近推论的最优性以及实际 ζ 纵坐标的上界仍需进一步证明。

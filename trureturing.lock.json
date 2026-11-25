@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "6663afa90893572c38d06dfc14b06880869d5b48",
-  "pinned_at": "2026-11-25T09:59:23Z",
+  "commit": "f3a639013d861f0592889f4bee51648678e48a53",
+  "pinned_at": "2026-11-25T10:51:54Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4985,7 +4985,7 @@
       "module": "D5/S3/Fourier/Concentration/DisjointCharacterEnvelope",
       "name": "D5.S3.Fourier.Concentration.DisjointCharacterEnvelope.coefficient_envelope",
       "kind": "theorem",
-      "statement_id": "sha256:e2e4d29946d7fc9bf5091652524ceb6296a2cff6ec4fd0c94b7cec34c96bcc41",
+      "statement_id": "sha256:1c61ac56e9a2c85f809bf47a9d3209fdef60d6e7407de2e97ea7b14478c9fb5f",
       "line": 313,
       "signature": "theorem coefficient_envelope {J : Type*} (s : Finset J) (a b : J → ℂ) (m n : ℕ) (r : ℝ) (hr : 0 < r) : let emptyPart"
     },
@@ -5220,6 +5220,22 @@
       "statement_id": "sha256:ed6722ec030f102d6459bdd621ac965da0693f35c7c836e0f90a7bfae01fc86d",
       "line": 372,
       "signature": "theorem sharp_second_fourth_harmonic_bound (e k : ℝ) (he₀ : 0 ≤ e) (he₁ : e ≤ 1) (hk₀ : 0 ≤ k) (hk₁ : k ≤ 1) : let bound"
+    },
+    "D5/S3/Fourier/Concentration/ShiftedBinVariance.collision_parabolic_lower": {
+      "module": "D5/S3/Fourier/Concentration/ShiftedBinVariance",
+      "name": "D5.S3.Fourier.Concentration.ShiftedBinVariance.collision_parabolic_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:220d5d6f505a040d4254d7be742f6bba8baa6142d4bf6071edb738a0c49807f2",
+      "line": 187,
+      "signature": "theorem collision_parabolic_lower {I : Type*} (s : Finset I) (x c : I → ℝ) (a V η : ℝ) (hη : 0 < η) (hc : ∀ i ∈ s, 0 ≤ c i) (hm : ∑ i ∈ s, c i * (x i - a) ^ 2 ≤ V * ∑ i ∈ s, c i) (r : ℕ) (hr : 0 < r) (hM : V / η ^ 2 + 1 / 4 ≤ (r : ℝ) ^ 2) : let W"
+    },
+    "D5/S3/Fourier/Concentration/ShiftedBinVariance.exists_shifted_squared_moment": {
+      "module": "D5/S3/Fourier/Concentration/ShiftedBinVariance",
+      "name": "D5.S3.Fourier.Concentration.ShiftedBinVariance.exists_shifted_squared_moment",
+      "kind": "theorem",
+      "statement_id": "sha256:220d5d6f505a040d4254d7be742f6bba8baa6142d4bf6071edb738a0c49807f2",
+      "line": 69,
+      "signature": "theorem exists_shifted_squared_moment {I : Type*} (s : Finset I) (z c : I → ℝ) : let roundingPenalty"
     },
     "D5/S3/Fourier/Concentration/SixResidueMomentOptimum.six_two_mode_optimum": {
       "module": "D5/S3/Fourier/Concentration/SixResidueMomentOptimum",
