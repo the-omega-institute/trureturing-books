@@ -216,7 +216,7 @@ SCENES.leak = S => {
   badgeQ(S, [[0, null, 'computed']]);
   const yaw = -1.62 + 0.005 * u, pitch = 0.7;
   const O = [0, 0, 0], AB = wtAdd(WT_A, WT_B);
-  const pa = Q(S, 0, 'Take two arrows', 0.8), pb = Q(S, 0, 'B is', 0.8);
+  const pa = Q(S, 0, 'Take two arrows', 0.8), pb = Q(S, 0, 'b is', 0.8);
   const pc = Q(S, 1, 'stands up', 1.0), pr = Q(S, 1, 'their area', 0.8);
   const ps = Q(S, 3, 'Into the shadow', 0.8), pd = Q(S, 3, 'throws it away', 1.2);
   const foot = wtSc(WT_A, WT_DOT / 9);                    // the shadow of b on the line of a
@@ -279,7 +279,7 @@ SCENES.leak = S => {
 SCENES.receipt = S => {
   const u = S.u, a = wtFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [1, null, 'computed'], [2, 'Lean checks', 'lean'], [4, null, 'computed'], [5, null, 'argued']]);
+  badgeQ(S, [[0, null, 'argued'], [1, null, 'computed'], [2, 'Lean checks', 'lean'], [3, null, 'computed'], [4, null, 'argued']]);
   /* the receipt (an analogy) */
   const rx = 150, ry = 190, rw = 640, rh = 470;
   panel(rx, ry, rw, rh, a, C.white, 'RECEIPT · 收据');
@@ -309,7 +309,7 @@ SCENES.receipt = S => {
     txt('√29', tx + 18, (T0[1] + ty) / 2 + 10, { size: 30, fam: F.mono, w: 700, c: C.mag, a: tr });
     txt('15 = 3 × 5', (T0[0] + tx) / 2 - 40, (T0[1] + ty) / 2 - 22, { size: 30, fam: F.mono, w: 700, align: 'center', c: C.white, a: tr });
   }
-  const lg = a * at(S, 4, 0.6);
+  const lg = a * at(S, 3, 0.6);
   if (lg > 0.003) {
     txt('dot · 点积', (T0[0] + tx) / 2 - 20, T0[1] + 37, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: lg });
     txt('cross · 叉乘', tx + 18, (T0[1] + ty) / 2 + 44, { size: 22, fam: F.zh, w: 700, c: C.mag, a: lg });
@@ -318,16 +318,16 @@ SCENES.receipt = S => {
   const la = a * Q(S, 2, 'Lean checks', 0.6);
   if (la > 0.003) {
     panel(880, 190, 930, 200, la, C.lean, 'ANY TWO LISTS OF REAL NUMBERS · 任意两组实数');
-    wtRich([['(Σaᵢ²)(Σbᵢ²) − (Σaᵢbᵢ)² = ½ ΣᵢΣⱼ (aᵢbⱼ − aⱼbᵢ)²', C.white]], 905, 268, { size: 29, a: la * at(S, 3, 0.6) });
+    wtRich([['(Σaᵢ²)(Σbᵢ²) − (Σaᵢbᵢ)² = ½ ΣᵢΣⱼ (aᵢbⱼ − aⱼbᵢ)²', C.white]], 905, 268, { size: 29, a: la * Q(S, 2, 'lengths squared', 0.6) });
     wtLean(905, 336, WT_LEAN.lagrange_gram_identity, la, { size: 20 });
   }
   /* line 4: in three dimensions the areas are the cross product */
   if (lg > 0.003) {
     wtRich([['3D: areas ', C.white], ['yz 2, zx −4, xy 3', C.mag], [' → 4 + 16 + 9 = 29 = |a × b|²', C.white]], 905, 444, { size: 25, a: lg });
   }
-  const ha = a * Q(S, 5, 'half a receipt', 0.5);
+  const ha = a * Q(S, 4, 'half a receipt', 0.5);
   stamp('HALF A RECEIPT', 1250, 530, ha, C.mag, 34, -0.05);
-  stamp('196 + 29 = 225', 470, 790, Q(S, 2, 'Lean checks', 0.5, 0.6) * (1 - at(S, 3, 0.5, 3)), C.lean, 30, -0.05);
+  stamp('196 + 29 = 225', 470, 790, Q(S, 2, 'Lean checks', 0.5, 0.6) * (1 - at(S, 3, 0.5)), C.lean, 30, -0.05);
 };
 
 /* ======================================================================= */
@@ -412,7 +412,7 @@ SCENES.forced = S => {
       { head: 'dot · 点积', col: C.cyan, v: '14' }, { head: 'cross · 叉乘', col: C.mag, v: '2' }, { col: C.mag, v: '−4' }, { col: C.mag, v: '3' }
     ], pe);
   }
-  stamp('CROSS, UP TO SIGN', 450, 790, Q(S, 1, 'up to one sign', 0.5) * (1 - at(S, 2, 0.5, 2.5)), C.lean, 28, -0.05);
+  stamp('CROSS, UP TO SIGN', 450, 790, Q(S, 1, 'up to sign', 0.5) * (1 - at(S, 2, 0.5, 2.5)), C.lean, 28, -0.05);
 };
 
 /* ======================================================================= */
@@ -421,14 +421,14 @@ SCENES.forced = S => {
 SCENES.edge = S => {
   const u = S.u, a = wtFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [2, null, 'lean'], [3, null, 'argued']]);
+  badgeQ(S, [[0, null, 'argued'], [1, 'Here Lean checks', 'lean'], [2, null, 'argued']]);
   const rows = [
     { k: 0, col: C.argued, head: 'LITERATURE · 文献结果', en: 'no 3-dimensional real division algebra', zh: '实数上没有能做除法的三维数系', note: 'Frobenius 1878 (associative) · Hurwitz 1898 (normed) — not formalized here · 本书未形式化' },
-    { k: 2, col: C.lean, head: 'LEAN ✓ · 内核检验', en: 'Lagrange identity · cross forced on ℝ × ℝ³', zh: '拉格朗日恒等式；四位载体上叉乘被锁定', note: 'lagrange_gram_identity · complete_consequences' },
-    { k: 3, col: C.argued, head: 'MODEL · 模型', en: 'the missing triplet = a closed arc body, S³', zh: '缺席的三元数 = 闭合的圆弧体 S³', note: 'interpretation, not a theorem · 诠释，不是定理' }
+    { k: 1, q: 'Here Lean checks', col: C.lean, head: 'LEAN ✓ · 内核检验', en: 'Lagrange identity · cross forced on ℝ × ℝ³', zh: '拉格朗日恒等式；四位载体上叉乘被锁定', note: 'lagrange_gram_identity · complete_consequences' },
+    { k: 2, col: C.argued, head: 'MODEL · 模型', en: 'the missing triplet = a closed arc body, S³', zh: '缺席的三元数 = 闭合的圆弧体 S³', note: 'interpretation, not a theorem · 诠释，不是定理' }
   ];
   rows.forEach((rw, i) => {
-    const ra = a * at(S, rw.k, 0.6);
+    const ra = a * (rw.q ? Q(S, rw.k, rw.q, 0.6) : at(S, rw.k, 0.6));
     if (ra <= 0.003) return;
     const y = 190 + i * 215;
     panel(200, y, 1520, 190, ra, rw.col, rw.head);
