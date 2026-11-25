@@ -2,12 +2,12 @@
    (book quantum-geometry, chapter 14). Scenes for theme/film/engine.js.
 
    What each scene shows, and where it rests:
-     copy     a photocopier (analogy, argued); a linear isometry as a turntable for arrows: the overlap z of two arrows
+     copy     a photocopier (analogy, argued); a unitary as a turntable for arrows: the overlap z of two arrows
               is unchanged while the disc turns (argued picture, the invariance computed); the two overlaps
               ⟨φ⊗b, ψ⊗b⟩ = z·1 and ⟨φ⊗φ, ψ⊗ψ⟩ = z·z (computed, the inner product of pure tensors).
      numbers  z = 0.6: 0.6 in, 0.36 out; the angle arccos 0.6 = 53.13° would have to open to arccos 0.36 = 68.90°;
               the gap z − z² on [0, 1] vanishes only at 0 and 1, largest 1/4 at z = 1/2 (computed).
-     theorem  NoCloningInnerProductCriterion.no_cloning_inner_product_criterion (LEAN): one linear isometry U of
+     theorem  NoCloningInnerProductCriterion.no_cloning_inner_product_criterion (LEAN): one unitary (linear isometric equivalence) U of
               H ⊗ H, unit ψ, φ, blank, exact cloning of both ⟹ z = z² ∧ (φ = ψ ∨ z = 0); CNOT copies |0⟩, |1⟩ and not
               |+⟩ (computed); the closing maxim is a reading of the theorem (argued).
      rooms    the three-bit repetition code: α|0⟩ + β|1⟩ ↦ α|000⟩ + β|111⟩; S_j = E_j V for E ∈ {I, X1, X2, X3} split
@@ -18,7 +18,7 @@
               ..... OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery (LEAN): for any σ, ρ and orthogonal
               syndromes, decode(encode(σ, ρ)) = Tr(σ) • ρ.
      edge     the criterion is necessary only; near copies (Bužek–Hillery, 5/6) are a literature result (argued);
-              Z1 commutes with both checks and flips |+_L⟩ to |−_L⟩ (computed); the decoder is defined on the rooms,
+              Z1 commutes with both checks and flips |+_L⟩ to |−_L⟩ (computed); here the four rooms fill ℂ⁸ (Σ S_i S_i* = I₈, computed), so the keys already form a channel;
               a channel on the whole space needs the complement piece (chapter 14.3).
 
    On load, FILM.init checks DATA.lean against the two theorems and re-derives every number shown on screen by an
@@ -37,6 +37,7 @@ const NC_LEAN = {
 };
 const NC_Z = 0.6;
 const NC_TH0 = Math.acos(NC_Z), NC_TH1 = Math.acos(NC_Z * NC_Z);          // 53.13°, 68.90°
+const NC_PHI = mix(C.white, C.dim, 0.45);                                 // φ: the second state, not the current one
 const NC_P0 = 0.7, NC_P1 = 0.3, NC_X = Math.sqrt(NC_P0 * NC_P1);           // σ weights and |σ01| = √0.21
 /* complex numbers [re, im] and complex matrices as arrays of rows */
 const cz = {
@@ -116,6 +117,7 @@ FILM.init.push(() => {
   const owner = new Set();
   NC_ROOM_INFO.forEach((r, j) => r.idx.forEach(idx => { owner.add(idx); check(NC_ROOMS[j][idx].some(x => cz.abs(x) > 0.5), `room ${j} holds ${idx}`); check(ncSyn(idx).join() === r.syn.join(), `syndrome of ${idx}`); }));
   check(owner.size === 8, 'the four rooms cover the eight basis states');
+  check(cm.dist(NC_ROOMS.reduce((M, Si) => cm.add(M, cm.mul(Si, cm.adj(Si))), cm.zero(8, 8)), cm.eye(8)) < 1e-12, 'Σ S_i S_i* = I₈: the keys form a channel');
   /* 4. NUDGE and the recovery identity */
   for (let k = 0; k < 30; k++) {
     const sig = Array.from({ length: 4 }, (_, i) => Array.from({ length: 4 }, (_, j) => [2 * rnd(k, 300 + 4 * i + j) - 1, 2 * rnd(k, 330 + 4 * i + j) - 1]));
@@ -225,9 +227,9 @@ function ncTurntable(rot, z, a, o = {}) {
   ncArc(cx, cy, 80, rot, rot + th, C.cyan, a, 4);
   const pa = [cx + R * Math.cos(rot), cy - R * Math.sin(rot)], pb = [cx + R * Math.cos(rot + th), cy - R * Math.sin(rot + th)];
   arrow(cx, cy, pa[0], pa[1], C.white, a, 5);
-  arrow(cx, cy, pb[0], pb[1], C.now, a, 5);
+  arrow(cx, cy, pb[0], pb[1], NC_PHI, a, 5);
   txt('ψ', pa[0] + 14 * Math.cos(rot) + 6, pa[1] - 14 * Math.sin(rot) + 10, { size: 36, fam: F.math, w: 700, c: C.white, a });
-  txt('φ', pb[0] + 14 * Math.cos(rot + th) + 6, pb[1] - 14 * Math.sin(rot + th) + 10, { size: 36, fam: F.math, w: 700, c: C.now, a });
+  txt('φ', pb[0] + 14 * Math.cos(rot + th) + 6, pb[1] - 14 * Math.sin(rot + th) + 10, { size: 36, fam: F.math, w: 700, c: NC_PHI, a });
   const mid = rot + th / 2;
   txt(`z = ${z.toFixed(2)}`, cx + 175 * Math.cos(mid), cy - 175 * Math.sin(mid) + 10, { size: 28, fam: F.mono, w: 700, align: 'center', c: C.cyan, a });
 }
@@ -279,7 +281,7 @@ SCENES.copy = S => {
     txt('coming out · 出来', 140, 470, { size: 24, fam: F.zh, w: 700, c: C.dim, a: oa });
     ncRich([['⟨φ⊗φ, ψ⊗ψ⟩', C.white]], 140, 526, { size: 30, a: oa });
     ncRich([['= z · z = ', C.white], ['z²', C.mag]], 140, 580, { size: 34, a: la * Q(S, 5, 'z times z', 0.5) });
-    ncRich([['U keeps overlaps ⟹ ', C.white], ['z', C.cyan], [' = ', C.white], ['z²', C.mag]], 140, 690, { size: 34, a: la * Q(S, 5, 'z times z', 0.5, 0.8) });
+    ncRich([['U keeps overlaps ⟹ ', C.white], ['z', C.cyan], [' = ', C.white], ['z²', C.mag]], 140, 690, { size: 34, a: la * Q(S, 5, 'z times z', 0.5, 0.3) });
   }
 };
 
@@ -289,7 +291,7 @@ SCENES.copy = S => {
 const DL = { cx: 200, cy: 720, R: 520 };
 /* z on screen: 0.6, then on line 3 it slides 0.6 → 0 → 1 */
 function nmZ(S) {
-  const p = clamp((S.u - phraseAt(S, 3, 'Slide z') - 0.3) / Math.max(1, lineAt(S, 3).e - lineAt(S, 3).s + 0.4));
+  const p = clamp((S.u - phraseAt(S, 3, 'Slide z') - 0.3) / 3.0);
   if (p <= 0) return NC_Z;
   return p < 0.4 ? lerp(NC_Z, 0, ease(p / 0.4)) : lerp(0, 1, ease((p - 0.4) / 0.6));
 }
@@ -304,10 +306,10 @@ SCENES.numbers = S => {
   ncWedge(cx, cy, R * 0.9, t0, t1, C.mag, wa, 0.32);
   ncArc(cx, cy, 120, 0, t0, C.cyan, a, 4);
   arrow(cx, cy, cx + R, cy, C.white, a, 5);
-  arrow(cx, cy, cx + R * Math.cos(t0), cy - R * Math.sin(t0), C.now, a, 5);
+  arrow(cx, cy, cx + R * Math.cos(t0), cy - R * Math.sin(t0), NC_PHI, a, 5);
   txt('ψ', cx + R + 14, cy + 12, { size: 36, fam: F.math, w: 700, c: C.white, a });
-  txt('φ', cx + R * Math.cos(t0) + 14, cy - R * Math.sin(t0) - 4, { size: 36, fam: F.math, w: 700, c: C.now, a });
-  txt(`${(t0 / NC_DEG).toFixed(2)}°`, cx + 150 * Math.cos(t0 / 2) + 6, cy - 150 * Math.sin(t0 / 2) + 10, { size: 26, fam: F.mono, w: 700, c: C.cyan, a });
+  txt('φ', cx + R * Math.cos(t0) + 14, cy - R * Math.sin(t0) - 4 - 40 * clamp(1 - t0 / 0.3), { size: 36, fam: F.math, w: 700, c: NC_PHI, a });
+  txt(`${(t0 / NC_DEG).toFixed(2)}°`, cx + 150 * Math.cos(t0 / 2) + 6, cy - 150 * Math.sin(t0 / 2) + 10, { size: 26, fam: F.mono, w: 700, c: C.cyan, a: a * clamp(t0 / 0.2) });
   if (wa > 0.003) {
     ctx.save(); ctx.setLineDash([10, 8]); line(cx, cy, cx + R * 0.9 * Math.cos(t1), cy - R * 0.9 * Math.sin(t1), C.mag, wa, 3); ctx.restore();
     txt(`${(t1 / NC_DEG).toFixed(2)}° needed · 需要`, cx + R * 0.92 * Math.cos(t1) + 10, cy - R * 0.92 * Math.sin(t1) - 14, { size: 24, fam: F.zh, w: 700, c: C.mag, a: wa * (1 - at(S, 3, 0.5)) });
@@ -324,7 +326,7 @@ SCENES.numbers = S => {
     panel(1000, 500, 820, 330, sa, C.mag, 'THE GAP · 缺口  z − z²');
     const x0 = 1060, x1 = 1760, yb = 770, hk = 480;              // gap 0.25 ↦ 120 px
     line(x0, yb, x1, yb, C.white, sa * 0.7, 2);
-    const done = Math.max(0, clamp((S.u - phraseAt(S, 3, 'Slide z') - 0.3) / Math.max(1, lineAt(S, 3).e - lineAt(S, 3).s + 0.4)));
+    const done = Math.max(0, clamp((S.u - phraseAt(S, 3, 'Slide z') - 0.3) / 3.0));
     curve(s => [lerp(x0, x1, s), yb - hk * (s - s * s)], 200, C.mag, sa * 0.85, 3);
     const gx = lerp(x0, x1, z), g = z - z * z;
     line(gx, yb, gx, yb - hk * g, C.mag, sa, 7);
@@ -345,7 +347,7 @@ function ncDial(cx, cy, R, th, a, lab, labCol) {
   if (a <= 0.003) return;
   ncArc(cx, cy, 44, 0, th, C.cyan, a, 3);
   arrow(cx, cy, cx + R, cy, C.white, a, 4);
-  arrow(cx, cy, cx + R * Math.cos(th), cy - R * Math.sin(th), C.now, a, 4);
+  arrow(cx, cy, cx + R * Math.cos(th), cy - R * Math.sin(th), NC_PHI, a, 4);
   txt(lab, cx + R / 2, cy + 50, { size: 26, fam: F.math, w: 700, align: 'center', c: labCol, a });
 }
 SCENES.theorem = S => {
@@ -354,18 +356,18 @@ SCENES.theorem = S => {
   badgeQ(S, [[0, 'Lean checks', 'lean'], [3, null, 'argued']]);
   const la = a * Q(S, 0, 'Lean checks', 0.6);
   panel(160, 180, 1600, 330, la, C.lean, 'NO-CLONING · 不可克隆 · ANY COMPLEX INNER PRODUCT SPACE H · 任意复内积空间');
-  ncRich([['U : H⊗H → H⊗H  linear isometry', C.white], ['   ‖ψ‖ = ‖φ‖ = ‖blank‖ = 1', C.white]], 196, 262, { size: 28, a: la * Q(S, 0, 'one machine', 0.6) });
+  ncRich([['U : H⊗H ≃ H⊗H  unitary (linear isometric equivalence)', C.white], ['   ‖ψ‖ = ‖φ‖ = ‖blank‖ = 1', C.white]], 196, 262, { size: 26, a: la * Q(S, 0, 'one machine', 0.6) });
   ncRich([['U(ψ⊗blank) = ψ⊗ψ,   U(φ⊗blank) = φ⊗φ', C.white]], 196, 316, { size: 28, a: la * Q(S, 1, 'copies two unit states', 0.6) });
   ncRich([['⟹  ', C.white], ['⟨φ,ψ⟩', C.cyan], [' = ', C.white], ['⟨φ,ψ⟩²', C.mag]], 196, 376, { size: 32, a: la * Q(S, 1, 'its own square', 0.6) });
   ncRich([['     and   φ = ψ   or   ⟨φ,ψ⟩ = 0', C.white]], 196, 430, { size: 32, a: la * at(S, 2, 0.6) });
   ncLean(196, 486, NC_LEAN.no_cloning_inner_product_criterion, la * Q(S, 0, 'one machine', 0.6), { size: 20 });
   /* line 2: the two survivors */
   const da = a * at(S, 2, 0.6);
-  ncDial(300, 740, 200, 0.0, da, 'z = 1 · φ = ψ', C.white);
-  ncDial(760, 740, 200, Math.PI / 2, da, 'z = 0 · ⊥', C.white);
+  ncDial(300, 740, 200, 0.0, da, 'z = 1 ⟹ φ = ψ', C.white);
+  ncDial(760, 740, 200, Math.PI / 2, da, 'z = 0 ⟹ φ ⊥ ψ', C.white);
   if (da > 0.003) {
-    txt('e.g. CNOT copies |0⟩ and |1⟩, not |+⟩', 1000, 640, { size: 24, fam: F.mono, w: 700, c: C.cyan, a: da });
-    txt('例：CNOT 能复制 |0⟩ 和 |1⟩，复制不了 |+⟩', 1000, 680, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: da });
+    txt('e.g. CNOT copies |0⟩ and |1⟩, not |+⟩ (computed)', 1000, 640, { size: 24, fam: F.mono, w: 700, c: C.cyan, a: da });
+    txt('例：CNOT 能复制 |0⟩、|1⟩，复制不了 |+⟩（屏幕计算）', 1000, 680, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: da });
   }
   /* line 3: the maxim (a reading of the theorem) */
   const ma = a * Q(S, 3, 'A copier', 0.6);
@@ -473,13 +475,12 @@ SCENES.nudge = S => {
   const ph = [lerp(home[0], back[0], dc), lerp(home[1], back[1], dc)], pt = [lerp(there[0], back[0], dc), lerp(there[1], back[1], dc)];
   if (sp > 0.003 && dc < 0.999) {
     ctx.save(); ctx.setLineDash([6, 8]); line(ph[0] + 60, ph[1] - 30, pt[0] + 60, pt[1] - 30, C.mag, a * sp * (1 - cut), 3); ctx.restore();
-    txt('cross terms ±0.46i', 480, 474, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.mag, a: a * sp * (1 - cut) });
   }
   ncLogical(ph, a * lerp(1, 0.7, sp) * (dc > 0.98 ? 0 : 1), 120);
   ncLogical(pt, a * 0.3 * sp * (dc > 0.98 ? 0 : 1), 120);
   if (sp > 0.003 && dc < 0.5) {
-    txt('0.70', home[0] + 180, home[1] - 40, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.now, a: a * sp * (1 - 2 * dc) });
-    txt('0.30', there[0] + 180, there[1] - 40, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.now, a: a * sp * (1 - 2 * dc) });
+    txt('0.70', home[0] + 180, home[1] - 40, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: a * sp * (1 - 2 * dc) });
+    txt('0.30', there[0] + 180, there[1] - 40, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: a * sp * (1 - 2 * dc) });
   }
   /* σ */
   panel(1000, 180, 820, 300, a * sp, C.cyan, 'THE NOISE MATRIX σ · 噪声矩阵  (rooms I, X₂)');
@@ -487,6 +488,7 @@ SCENES.nudge = S => {
   txt('nudge · 轻推', 1440, 260, { size: 22, fam: F.zh, w: 700, c: C.dim, a: a * sp });
   ncRich([['cos θ · I − i sin θ · X₂', C.white]], 1440, 300, { size: 22, a: a * sp });
   ncRich([['cos²θ = 0.7', C.white]], 1440, 340, { size: 22, a: a * sp });
+  txt('magenta: cross terms · 交叉项', 1440, 384, { size: 22, fam: F.zh, w: 700, c: C.mag, a: a * sp });
   ncRich([['Tr σ = ', C.white], ['0.70 + 0.30', C.cyan], [' = 1', C.white]], 1440, 430, { size: 26, a: a * Q(S, 1, 'zero point seven plus', 0.5) });
   /* the recovered logical state */
   if (dc > 0.02) {
@@ -500,11 +502,11 @@ SCENES.nudge = S => {
   /* line 2: Lean */
   const la = a * Q(S, 2, 'Lean checks', 0.6);
   if (la > 0.003) {
-    panel(1400, 500, 420, 300, la, C.lean, 'ANY σ, ANY ρ · 任意矩阵');
-    ncRich([['decode(encode(σ, ρ))', C.white]], 1424, 572, { size: 24, a: la });
-    ncRich([['= Tr(σ) · ρ', C.white]], 1424, 616, { size: 28, a: la });
-    txt('if Sᵢ* Sⱼ = δᵢⱼ I · 房间两两正交', 1424, 670, { size: 19, fam: F.zh, w: 700, c: C.lean, a: la * Q(S, 2, 'perpendicular', 0.5) });
-    ncLean(1424, 740, NC_LEAN.orthogonal_syndrome_recovery, la, { size: 16 });
+    panel(1360, 500, 460, 300, la, C.lean, 'ANY σ, ANY ρ · 任意矩阵');
+    ncRich([['decode(encode(σ, ρ))', C.white]], 1384, 572, { size: 24, a: la });
+    ncRich([['= Tr(σ) · ρ', C.white]], 1384, 616, { size: 28, a: la });
+    txt('if Sᵢ* Sⱼ = δᵢⱼ I · 房间两两正交', 1384, 672, { size: 23, fam: F.zh, w: 700, c: C.lean, a: la * Q(S, 2, 'perpendicular', 0.5) });
+    ncLean(1384, 744, NC_LEAN.orthogonal_syndrome_recovery, la, { size: 19 });
   }
 };
 
@@ -514,11 +516,11 @@ SCENES.nudge = S => {
 SCENES.edge = S => {
   const a = ncFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [1, null, 'computed'], [2, null, 'argued']]);
+  badgeQ(S, [[0, null, 'argued'], [1, null, 'computed']]);
   const rows = [
     { k: 0, col: C.argued, en: 'z ∈ {0, 1} is necessary — it builds no copier', zh: '只是必要条件：它不造复印机', note: 'near copies reach fidelity 5/6 (Bužek–Hillery): literature result, not formalized here · 文献结果，本书未形式化' },
-    { k: 1, col: C.cyan, en: 'rooms for I, X₁, X₂, X₃ only', zh: '这套码只防单个比特翻转', note: 'Z₁ rings no light and flips |+⟩ to |−⟩ (computed) · 相位翻转不亮灯，却把 |+⟩ 翻成 |−⟩' },
-    { k: 2, col: C.argued, en: 'decoding is a formula on the rooms', zh: '解码是房间上的公式', note: 'a channel on all of ℂ⁸ needs a piece for the rest of the space · 完整信道还要补上其余空间' }
+    { k: 1, col: C.cyan, en: 'rooms for I, X₁, X₂, X₃ only', zh: '这套码只防由单个比特翻转拼成的错误', note: 'Z₁ rings no light and flips |+_L⟩ to |−_L⟩ (computed) · 相位翻转不亮灯，却把 |+_L⟩ 翻成 |−_L⟩' },
+    { k: 2, col: C.cyan, en: 'here the rooms fill ℂ⁸: the keys are a full channel', zh: '这里四间房铺满八维：钥匙本身就是完整信道', note: 'Σ Sᵢ Sᵢ* = I₈ (computed); codes with spare room need a piece for the rest · 铺不满时才要补上其余空间' }
   ];
   rows.forEach((rw, i) => {
     const ra = a * at(S, rw.k, 0.6);
@@ -527,7 +529,7 @@ SCENES.edge = S => {
     panel(160, y, 1600, 180, ra, rw.col);
     txt(rw.en, 196, y + 58, { size: 32, fam: F.math, w: 700, c: rw.col, a: ra });
     txt(rw.zh, 196, y + 104, { size: 28, fam: F.zh, w: 700, c: C.white, a: ra });
-    txt(rw.note, 196, y + 148, { size: 19, fam: F.zh, w: 700, c: rw.col === C.cyan ? C.dim : C.argued, a: ra * 0.95 });
+    txt(rw.note, 196, y + 148, { size: 21, fam: F.zh, w: 700, c: rw.col === C.cyan ? C.dim : C.argued, a: ra * 0.95 });
   });
 };
 
