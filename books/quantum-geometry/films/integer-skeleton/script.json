@@ -6,8 +6,8 @@
   "scenes": [
     {"id": "hook", "name": "TWO SQUARES", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
       ["Which whole numbers are a sum of two squares? Twenty-five is: nine plus sixteen.", "哪些整数能写成两个平方之和？25 可以：9 + 16。"],
-      ["Light them up to fifty, and they look scattered. Five yes, six no, seven no, eight yes.", "把 50 以内的都点亮，看上去零零散散：5 行，6 不行，7 不行，8 又行。"],
-      ["Why keep whole numbers on a line? Let them live on a grid instead.", "凭什么整数只能排在一条线上？换个住处，让它们住进方格。"]
+      ["Light them up to fifty: they look scattered. Five yes, six no, seven no, eight yes.", "把 50 以内的都点亮，看上去零零散散：5 行，6 不行，7 不行，8 又行。"],
+      ["Why keep numbers on a line? Give them a second direction, and they live on a grid.", "凭什么数只能排在一条线上？给它们添上第二个方向，就住进了方格。"]
     ], "cues": [{"line": 2, "at": 2.2, "kind": "glitch"}]},
     {"id": "mirror", "name": "A POINT AND ITS MIRROR", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
       ["The grid point three, two is the number three plus two i. Its mirror image is three minus two i.", "格点 (3, 2) 就是数 3 + 2i；它在镜子里的像是 3 − 2i。"],
@@ -17,7 +17,7 @@
       ["So a sum of two squares is a grid point's squared distance from the origin.", "所以，两平方和就是格点到原点距离的平方。"]
     ], "cues": [{"line": 3, "at": 0.8, "kind": "stamp"}]},
     {"id": "turn", "name": "TURN AND STRETCH", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.6, 0.2, 0.3], "lines": [
-      ["Multiplying grid numbers is like turning a dial twice: angles add, lengths multiply.", "方格里的数相乘，像把转盘连拧两下：角度相加，长度相乘。"],
+      ["Multiplying grid numbers is a dial plus a zoom: angles add, lengths multiply.", "方格里的数相乘，像转盘再加变焦：角度相加，长度相乘。"],
       ["Two plus i, times three plus two i, is four plus seven i.", "(2 + i)(3 + 2i) = 4 + 7i。"],
       ["So five times thirteen, sixty-five, is four squared plus seven squared.", "所以 5 × 13 = 65 = 4² + 7²。"],
       ["Swap one factor for its mirror, and a second way appears: one squared plus eight squared.", "把一个因子换成它的镜像，又冒出第二种拆法：1² + 8²。"]
@@ -29,15 +29,15 @@
       ["The book calls the first kind plane primes, and the second kind line primes.", "本书把前一种叫面素数，后一种叫线素数。"]
     ], "cues": [{"line": 2, "at": 2.2, "kind": "glitch"}]},
     {"id": "ledger", "name": "THE FACTOR LEDGER", "lead": 0.5, "tail": 0.7, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
-      ["The full answer: factor the number, and look only at primes with remainder three.", "完整的答案：把数分解成素因子，只看除以 4 余 3 的那些。"],
+      ["Factor the number, and look only at primes with remainder three.", "把数分解成素因子，只看除以 4 余 3 的那些。"],
       ["Lean checks: the number is two squares exactly when each of those primes appears an even number of times.", "Lean 内核检验：一个数是两平方和，当且仅当每个这样的素数都出现偶数次。"],
-      ["Line primes are like socks: they count only in pairs. Three times three is nine, three squared plus zero.", "线素数像袜子，只能成双：3 × 3 = 9 = 3² + 0²。"],
+      ["Line primes are like socks: each kind needs its own twin. Three times three is nine, three squared plus zero.", "线素数像袜子：每一种都得自己凑成一双。3 × 3 = 9 = 3² + 0²。"],
       ["Twenty twenty-five holds four threes, an even count: twenty-seven squared plus thirty-six squared.", "2025 含四个 3，偶数个：2025 = 27² + 36²。"],
-      ["Twenty twenty-four holds one eleven and one twenty-three. It is not two squares.", "2024 里 11 和 23 各只有一个：它不是两平方和。"],
+      ["Twenty twenty-four holds one eleven and one twenty-three: two odd socks, not a pair. Not two squares.", "2024 里 11 和 23 各只有一个：两只单袜，配不成一双。它不是两平方和。"],
       ["Size never decided it. The factors did.", "决定它的从来不是大小，是因子。"]
     ], "cues": [{"line": 1, "at": 2.8, "kind": "stamp"}, {"line": 4, "at": 2.6, "kind": "impact"}]},
     {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
-      ["Lean proves the two squares exist. It does not hand you a fast way to find them.", "Lean 证明这两个平方存在，但没有给出找到它们的快办法。"],
+      ["Lean proves the two squares exist, but gives no fast way to find them.", "Lean 证明这两个平方存在，但没有给出找到它们的快办法。"],
       ["Nor does it count the ways. Sixty-five has two.", "它也不数有几种拆法：65 就有两种。"],
       ["How primes split into mirror pairs is a literature result. Plane and line are the book's names.", "素数怎样分裂成镜像对，是文献结果；“面”与“线”是本书起的名字。"]
     ]},

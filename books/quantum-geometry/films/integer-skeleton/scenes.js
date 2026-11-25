@@ -154,7 +154,7 @@ SCENES.hook = S => {
   const a = clamp((u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [2, null, 'argued']]);
-  const board = a * (1 - Q(S, 2, 'Let them live', 0.9));
+  const board = a * (1 - Q(S, 2, 'second direction', 0.9));
   const t1 = lineAt(S, 1).s;
   const hi = [[5, 'Five yes'], [6, 'six no'], [7, 'seven no'], [8, 'eight yes']];
   let cur = 25;
@@ -182,12 +182,12 @@ SCENES.hook = S => {
   txt('sum of two squares · 两平方和', HK.x0, HK.y0 - 30, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: board * at(S, 1, 0.5) });
   txt('a, b = 0, 1, 2, …', HK.x0 + 840 - 8, HK.y0 - 30, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.dim, a: board * at(S, 1, 0.5) });
   /* line 2: the grid appears */
-  const ga = a * Q(S, 2, 'Let them live', 1.0, 0.4);
+  const ga = a * Q(S, 2, 'second direction', 1.0, 0.9);
   if (ga > 0.003) {
     isGrid([W / 2, 520], 84, [-9, 9], [-3, 3], ga);
     txt('a + b i', W / 2 + 3 * 84 + 14, 520 - 2 * 84 - 14, { size: 30, fam: F.math, w: 700, c: C.white, a: ga });
     dot(W / 2 + 3 * 84, 520 - 2 * 84, 12, 'g', ga);
-    txt('integers on a grid · 整数住进方格', W / 2, 840, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: ga });
+    txt('a + bi: numbers on a grid · 数添上第二个方向', W / 2, 840, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: ga });
   }
 };
 
@@ -207,8 +207,8 @@ SCENES.mirror = S => {
   arrow(MI_O[0], MI_O[1], z[0], z[1], C.now, pa, 5);
   txt('3 + 2i', z[0] + 14, z[1] - 10, { size: 30, fam: F.math, w: 700, c: C.now, a: pa });
   if (ma > 0.003) {
-    ctx.save(); ctx.setLineDash([10, 8]); line(MI_O[0] - 60, MI_O[1], MI_O[0] + 6.4 * MI_U, MI_O[1], C.argued, ma * 0.9, 2.5); ctx.restore();
-    txt('mirror · 镜子', MI_O[0] + 5.2 * MI_U, MI_O[1] + 40, { size: 20, fam: F.zh, w: 700, c: C.argued, a: ma });
+    ctx.save(); ctx.setLineDash([10, 8]); line(MI_O[0] - 60, MI_O[1], MI_O[0] + 6.4 * MI_U, MI_O[1], C.white, ma * 0.6, 2.5); ctx.restore();
+    txt('mirror · 镜子', MI_O[0] + 5.2 * MI_U, MI_O[1] + 40, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ma });
     arrow(MI_O[0], MI_O[1], zb[0], zb[1], C.white, ma, 4);
     txt('3 − 2i', zb[0] + 14, zb[1] + 30, { size: 30, fam: F.math, w: 700, c: C.white, a: ma });
   }
@@ -275,7 +275,7 @@ SCENES.turn = S => {
   const sa = Q(S, 0, 'angles add', 1.0);
   isArc(TU_O, 95, 0, aA, C.white, a * sa, 4);
   isArc(TU_O, 95, aA, aA + aB * ease(sa), C.argued, a * sa, 4);
-  if (da > 0.003) txt('like a dial · 像转盘', TU_O[0] + 6.3 * TU_U, TU_O[1] - 7.6 * TU_U, { size: 22, fam: F.zh, w: 700, c: C.argued, a: da });
+  if (da > 0.003) txt('a dial plus a zoom · 转盘加变焦', TU_O[0] + 6.3 * TU_U, TU_O[1] - 7.6 * TU_U, { size: 22, fam: F.zh, w: 700, c: C.argued, a: da });
   /* line 1: the product (current, amber), until line 3 makes the mirror product current */
   const ma = a * Q(S, 3, 'Swap one factor', 0.6);
   const pa = a * Q(S, 1, 'is four plus seven', 0.8);
@@ -298,7 +298,8 @@ SCENES.turn = S => {
   const ia = a * at(S, 2, 0.6);
   txt('two squares × two squares = two squares', 1046, 676, { size: 22, fam: F.mono, w: 700, c: C.dim, a: ia });
   txt('两平方和 × 两平方和 = 两平方和', 1046, 712, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ia });
-  txt('(x² + y²)(u² + v²) = (xu − yv)² + (xv + yu)²', 1046, 770, { size: 24, fam: F.math, w: 700, c: C.white, a: ia * 0.85 });
+  txt('(x² + y²)(u² + v²) = (xu − yv)² + (xv + yu)²', 1046, 756, { size: 24, fam: F.math, w: 700, c: C.white, a: ia * 0.85 });
+  txt('identity: expand both sides · 恒等式，展开即得', 1046, 794, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ia });
 };
 
 /* ======================================================================= */
@@ -389,20 +390,21 @@ SCENES.ledger = S => {
   if (la > 0.003) isLean(1240, 292, IS_LEAN.eq_sq_add_sq_iff_even_factorization, la, { size: 17 });
   /* the rows */
   const r9 = a * at(S, 2, 0.6), r25 = a * at(S, 3, 0.6), r24 = a * at(S, 4, 0.6);
-  lgRow(420, 9, [[3, 'line'], [3, 'line']], '3² + 0²', true, r9, Q(S, 2, 'count only in pairs', 0.8));
-  if (r9 > 0.003) txt('socks: only in pairs · 袜子只能成双（比方）', 960, 494, { size: 20, fam: F.zh, w: 700, c: C.argued, a: r9 * Q(S, 2, 'like socks', 0.5) });
+  lgRow(420, 9, [[3, 'line'], [3, 'line']], '3² + 0²', true, r9, Q(S, 2, 'its own twin', 0.8));
+  if (r9 > 0.003) txt('socks: each kind needs its own twin · 同款才成双（比方）', 960, 494, { size: 20, fam: F.zh, w: 700, c: C.argued, a: r9 * Q(S, 2, 'like socks', 0.5) });
   lgRow(580, 2025, [[3, 'line'], [3, 'line'], [3, 'line'], [3, 'line'], [5, 'face'], [5, 'face']], '27² + 36²', true, r25, 1);
   lgRow(740, 2024, [[2, 'two'], [2, 'two'], [2, 'two'], [11, 'line'], [23, 'line']], 'not · 不是', false, r24, 0);
   if (r24 > 0.003) {
-    txt('11 ×1, 23 ×1: odd · 奇数次', 1100, 754, { size: 22, fam: F.zh, w: 700, c: C.mag, a: r24 * Q(S, 4, 'one twenty-three', 0.5) });
+    txt('11 ×1, 23 ×1: odd counts · 各出现奇数次', 760, 734, { size: 22, fam: F.zh, w: 700, c: C.mag, a: r24 });
+    txt('two odd socks, not a pair · 两只单袜，配不成一双', 760, 768, { size: 20, fam: F.zh, w: 700, c: C.argued, a: r24 * Q(S, 4, 'two odd socks', 0.5) });
   }
   /* line 5: the aphorism */
   const fa = a * at(S, 5, 0.6);
   if (fa > 0.003) {
-    fillBox(0, 300, W, 560, C.bg, fa * 0.72);
-    txt('FACTORS, NOT SIZE', W / 2, 540, { size: 72, fam: F.orb, w: 900, align: 'center', c: C.white, a: fa, ls: 6, ab: 3 });
-    txt('决定它的是因子，不是大小', W / 2, 630, { size: 46, fam: F.zh, w: 900, align: 'center', c: C.cyan, a: fa });
-    txt('2024 ≈ 2025 · one is, one is not', W / 2, 712, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.dim, a: fa });
+    fillBox(0, 340, W, 310, C.bg, fa * 0.78);
+    txt('FACTORS, NOT SIZE', W / 2, 458, { size: 72, fam: F.orb, w: 900, align: 'center', c: C.white, a: fa, ls: 6, ab: 3 });
+    txt('决定它的是因子，不是大小', W / 2, 548, { size: 46, fam: F.zh, w: 900, align: 'center', c: C.cyan, a: fa });
+    txt('2024 ≈ 2025 · one is, one is not', W / 2, 616, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.dim, a: fa });
   }
   stamp('even ⟺ two squares', W / 2, 580, Q(S, 1, 'Lean checks', 0.5, 0.8) * (1 - at(S, 2, 0.5)), C.lean, 34, -0.06);
 };
@@ -413,7 +415,7 @@ SCENES.ledger = S => {
 SCENES.edge = S => {
   const a = isFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued']]);
+  badgeQ(S, [[0, null, 'argued'], [1, null, 'computed'], [2, null, 'argued']]);
   const rows = [
     { k: 0, col: C.cyan, en: 'p prime, p ≡ 1 (mod 4)  ⟹  ∃ a, b : p = a² + b²', zh: '断言两个平方存在，不给找它们的快办法', note: 'existence, not a search · 存在，不是算法' },
     { k: 1, col: C.cyan, en: '65 = 1² + 8² = 4² + 7²', zh: '不数有几种拆法', note: 'two ways, computed here; no count is claimed · 两种拆法是屏幕上的计算' },
@@ -447,7 +449,7 @@ FILM.poster = () => {
   const O = [200, 600], U = 70;
   isGrid(O, U, [-1, 13], [-3, 3], 1);
   const z = isP(O, U, IS_Z), zb = isP(O, U, gConj(IS_Z));
-  ctx.save(); ctx.setLineDash([10, 8]); line(O[0] - 50, O[1], O[0] + 6 * U, O[1], C.argued, 0.9, 2.5); ctx.restore();
+  ctx.save(); ctx.setLineDash([10, 8]); line(O[0] - 50, O[1], O[0] + 6 * U, O[1], C.white, 0.6, 2.5); ctx.restore();
   arrow(O[0], O[1], z[0], z[1], C.now, 1, 6);
   arrow(O[0], O[1], zb[0], zb[1], C.white, 1, 5);
   line(O[0], O[1], O[0] + 13 * U, O[1], C.cyan, 1, 9);
