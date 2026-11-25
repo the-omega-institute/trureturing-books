@@ -871,7 +871,7 @@ $$
 $$
 \frac{r_N V}{T-\bar x}=K+\frac{m_4-m_N^2}{3}.
 $$
-阈值偏移系数是这个比值的相反数。对称有限和给出 $m_4=(N^2-1)(3N^2-5)/35$，代入即得上式的显式系数。渐近式固定 $N$，较小模数下其他对径层也能带有正权重。切换定理及其系数仍待 Lean 核验。 [推导与有限核对](https://github.com/the-omega-institute/trureturing/issues/34016#issuecomment-7148575133)
+阈值偏移系数是这个比值的相反数。对称有限和给出 $m_4=(N^2-1)(3N^2-5)/35$，代入即得上式的显式系数。渐近式固定 $N$，较小模数下其他对径层也能带有正权重。[切换与缩放偏移的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/391e6649ddcc2a04de8164b60cdc8967886d9fc1/D5/S3/Fourier/Asymptotics/CyclicActivationShift.lean#L843) · [推导与有限核对](https://github.com/the-omega-institute/trureturing/issues/34016#issuecomment-7148575133)
 
 ## 局部统计在截点变化下的误差
 
