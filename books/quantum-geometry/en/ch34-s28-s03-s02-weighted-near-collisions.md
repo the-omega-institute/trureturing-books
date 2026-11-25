@@ -553,6 +553,20 @@ $$
 $$
 The exact remainder is the sum of the omitted even-cardinality squares minus the sum of the odd-cardinality squares. It vanishes for $K\ge d$. Multiplying by nonnegative Fourier weights and summing preserves the computed negative contributions. This gives a degree-sensitive refinement when applying the Fejér band estimate below. Bounding the high-degree subset squares and the exceptional-character weight for the actual ζ ordinates still requires an arithmetic estimate. [Lean proof of the signed expansion](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_expansion) [Lean proof of the parity remainder](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_remainder)
 
+#### Centered coefficient bounds with a quadratic exponential
+
+Keep the definition of $C_T$ and set $k_T=|T|$, $n=d-k_T$, $U_T=S-\frac12\sum_{j\in T}A_j$ and $V_T=\sum_{j\in T}w_j^2$. For $k_T\le d$ there is also the bound
+$$
+|C_T|\le\left(\prod_{j\in T}w_j\right)\sum_{m=0}^{\lfloor n/2\rfloor}\frac{|U_T|^{n-2m}(V_T/24)^m}{(n-2m)!m!}.
+$$
+This retains the centered phase sum and squared weights of the selected subset. The local difference satisfies
+$$
+e^{-A_jx}-1=-A_j x e^{-A_j x/2}\sum_{m\ge0}\frac{(A_jx/2)^{2m}}{(2m+1)!}.
+$$
+The inequality $6^m m!\le(2m+1)!$ bounds the norm of each local even coefficient by the corresponding coefficient of $e^{w_j^2 x^2/24}$. Extracting the $k_T$ linear factors, combining the phase exponentials, and majorizing the Cauchy product give the degree-$n$ coefficient of $e^{|U_T|x+V_T x^2/24}$. The original coefficient is zero if $k_T>d$. The bound is exact for $n=0$ or $n=1$. If $U_T=0$ and $n$ is odd, the coefficient vanishes. For the general exponential parameter $c$ in place of $S$, a singleton $T=\{j\}$ with $A_j\ne0$ and $c=A_j/2$ gives the degree-$3$ norm $w_j^3/24$, attaining equality for the constant $1/24$ in the quadratic majorant. [Power series for hyperbolic sine](https://dlmf.nist.gov/4.33.E2)
+
+Apply this estimate to the odd and even remainder budgets above, taking the smaller bound with $B_T$ for each subset. The actual ζ tail still requires estimates for the distribution of the subset-centered phase sums with the character weights, and for their aggregate remainder at growing degree. [Lean proof of the centered overlap bound](lean:D5/S3/Fourier/Concentration/CenteredDisjointCharacterBound.centered_overlap_bound)
+
 ### Bounding a cyclic band with nonnegative Fourier weights
 
 Let $R_H$ be the residues of the integers in $[-H,H]$. For a nonnegative residue mass $M(r)$, use the negative character in $\widehat M(k)=\sum_rM(r)\chi_k(-r)$ and put $B_N(k)=\sum_{j=0}^{N-1}\chi_k(j)$. For integers $N>H\ge0$,
