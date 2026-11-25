@@ -98,3 +98,31 @@ $$
 $$
 
 Choose $\eta_n=n/(n+1)$, so each resolution is strictly smaller than the site spacing and $L=1$. Thus the coefficient $3/(5\sqrt5)$ in the preceding section is asymptotically sharp for arbitrary finite nonnegative weighted data. The same parabolic profile appears in continuous second-moment extremization of Rényi entropy, as in [Sekeh, equation (2.1) and Theorem 3.1](https://arxiv.org/abs/1509.02190v4). Here the separated finite sites ensure only diagonal collisions occur inside the closed band. Requiring the data to arise as high-degree sums from a fixed frequency family or from actual zeta ordinates requires additional arithmetic constraints. [Lean proof of the limit](https://github.com/the-omega-institute/trureturing/blob/afc30aadad62cff44787b01db91ff06d4c5adbcc/D5/S3/Fourier/Concentration/SeparatedParabolicCollision.lean#L154)
+
+## A finite Fourier variance bound for lattice convolutions
+
+For the original frequencies $g_j$ and nonnegative weights $w_j$, put $S(t)=\sum_j w_je^{ig_jt}$, $W=\sum_jw_j$ and $D=\sum_jw_j(g_j-a)^2\le VW$, where $a$ is an arbitrary real center. Centering rotates the complex sum. The bound $\cos x\ge1-x^2/2$ yields
+
+$$
+|S(t)|\ge W\max(0,1-Vt^2/2),\qquad
+|S(t)|\ge\max(0,W-Dt^2/2).
+$$
+
+When $D>0$ and $t\ne0$, the inequality $|S(t)|>W-Dt^2/2$ is strict because at least one positive-weight term has a nonzero centered argument. [Lean proof of the characteristic-function bound](https://github.com/the-omega-institute/trureturing/blob/c1296ace4f5b66516a07af37f37a1dbcec0d50e1/D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lean#L27)
+
+Suppose the frequencies lie on an affine lattice $g_j=b+h a_j$, with $h>0$ and integer $a_j$. For arbitrary real weights, natural degree $p$, positive integer $k$, real $s$, and $0\le\eta<h$, put $A=k\pi/h$. There is an exact identity
+
+$$
+E_p(\eta)=\frac{1}{2A}\int_{s-A}^{s+A}|S(t)|^{2p}\,dt.
+$$
+
+In the finite polynomial pair expansion of $|S|^{2p}$, every difference of two degree-$p$ sums equals $hd$ for an integer $d$. The corresponding cosine has mean $\cos(hds)\operatorname{sinc}(k\pi d)$. Thus all ordered pairs of equal frequency sums survive. [Lean proof of the period identity](https://github.com/the-omega-institute/trureturing/blob/c1296ace4f5b66516a07af37f37a1dbcec0d50e1/D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lean#L111)
+
+For nonnegative weights and $\eta\ge0$, integrating the pointwise lower bound over a single period gives
+
+$$
+E_p(\eta)\ge \frac{hW^{2p}}{2\pi}
+\int_{-\pi/h}^{\pi/h}\max(0,1-Vt^2/2)^{2p}\,dt.
+$$
+
+The inequality is strict when $D>0$ and $p>0$. This uses the common Fourier power expansion of degree sums. For fixed $V,h>0$ and growing degree, the rescaled variable in the integral is $t\sqrt{pV}$. Formalizing the asymptotic coefficient of its Gaussian limit remains a separate step. General real spectra at finite resolution require a further positive-kernel estimate. [Lean proof of the finite integral bound](https://github.com/the-omega-institute/trureturing/blob/c1296ace4f5b66516a07af37f37a1dbcec0d50e1/D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lean#L179)
