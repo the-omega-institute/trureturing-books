@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "ca5992cabe66962ceecde81b295365f06850a14f",
-  "pinned_at": "2026-11-25T12:38:44Z",
+  "commit": "16dc821e19c688a0618f787e23b331a9ca36e769",
+  "pinned_at": "2026-11-25T14:58:29Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -235,7 +235,10 @@
       "kind": "theorem",
       "statement_id": "sha256:86b084eb43c574d73ad7b21f9f8d7e96995e705b0e8d03403844ce2ce4263134",
       "line": 28,
-      "signature": "theorem recursive_page_table_walk (lookup : Address -> Fin N -> Address) (root leaf data : Address) (selfSlot i j : Fin N) (hself : lookup root selfSlot = root) (hroot : lookup root i = leaf) (hleaf : lookup leaf j = data) : pageWalk lookup root [i, j] = data /\\ pageWalk lookup root [selfSlot, i] = leaf /\\ forall depth : Nat, pageWalk lookup root (List.replicate depth selfSlot) = root"
+      "signature": "theorem recursive_page_table_walk (lookup : Address -> Fin N -> Address) (root leaf data : Address) (selfSlot i j : Fin N) (hself : lookup root selfSlot = root) (hroot : lookup root i = leaf) (hleaf : lookup leaf j = data) : pageWalk lookup root [i, j] = data /\\ pageWalk lookup root [selfSlot, i] = leaf /\\ forall depth : Nat, pageWalk lookup root (List.replicate depth selfSlot) = root",
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S0/Diagonal/SechPath.discrete_sech_path_positive": {
       "module": "D5/S0/Diagonal/SechPath",
@@ -251,7 +254,8 @@
       "kind": "inductive",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
       "line": 12,
-      "signature": "structure BinaryFractionalMap where a : Fin 2 b : Fin 2 c : Fin 2 d : Fin 2 deriving DecidableEq, Fintype def determinant (m : BinaryFractionalMap) : Int"
+      "signature": "structure BinaryFractionalMap where a : Fin 2 b : Fin 2 c : Fin 2 d : Fin 2 deriving DecidableEq, Fintype def determinant (m : BinaryFractionalMap) : Int",
+      "axioms": []
     },
     "D5/S0/Diagonal/SelfApplicationFates.HasFate": {
       "module": "D5/S0/Diagonal/SelfApplicationFates",
@@ -259,7 +263,10 @@
       "kind": "def",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
       "line": 41,
-      "signature": "def HasFate (m : BinaryFractionalMap) : SelfApplicationFate → Prop | .empty => fixedCoefficients m = (0, 0, 0) | .dead => fixedCoefficients m = (0, 0, -1) | .collapse => (discriminant m = 0 ∨ discriminant m = 4) ∧ fixedCoefficients m ≠ (0, 0, 0) ∧ fixedCoefficients m ≠ (0, 0, -1) | .live => discriminant m = 5 instance (m : BinaryFractionalMap) (fate : SelfApplicationFate) : Decidable (HasFate m fate)"
+      "signature": "def HasFate (m : BinaryFractionalMap) : SelfApplicationFate → Prop | .empty => fixedCoefficients m = (0, 0, 0) | .dead => fixedCoefficients m = (0, 0, -1) | .collapse => (discriminant m = 0 ∨ discriminant m = 4) ∧ fixedCoefficients m ≠ (0, 0, 0) ∧ fixedCoefficients m ≠ (0, 0, -1) | .live => discriminant m = 5 instance (m : BinaryFractionalMap) (fate : SelfApplicationFate) : Decidable (HasFate m fate)",
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S0/Diagonal/SelfApplicationFates.IsPhiFamily": {
       "module": "D5/S0/Diagonal/SelfApplicationFates",
@@ -267,7 +274,10 @@
       "kind": "def",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
       "line": 53,
-      "signature": "def IsPhiFamily (m : BinaryFractionalMap) : Prop"
+      "signature": "def IsPhiFamily (m : BinaryFractionalMap) : Prop",
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S0/Diagonal/SelfApplicationFates.Nondegenerate": {
       "module": "D5/S0/Diagonal/SelfApplicationFates",
@@ -275,7 +285,8 @@
       "kind": "def",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
       "line": 22,
-      "signature": "def Nondegenerate (m : BinaryFractionalMap) : Prop"
+      "signature": "def Nondegenerate (m : BinaryFractionalMap) : Prop",
+      "axioms": []
     },
     "D5/S0/Diagonal/SelfApplicationFates.SelfApplicationFate": {
       "module": "D5/S0/Diagonal/SelfApplicationFates",
@@ -283,7 +294,8 @@
       "kind": "inductive",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
       "line": 34,
-      "signature": "inductive SelfApplicationFate | empty | dead | collapse | live deriving DecidableEq, Fintype def HasFate (m : BinaryFractionalMap) : SelfApplicationFate → Prop | .empty => fixedCoefficients m = (0, 0, 0) | .dead => fixedCoefficients m = (0, 0, -1) | .collapse => (discriminant m = 0 ∨ discriminant m = 4) ∧ fixedCoefficients m ≠ (0, 0, 0) ∧ fixedCoefficients m ≠ (0, 0, -1) | .live => discriminant m = 5 instance (m : BinaryFractionalMap) (fate : SelfApplicationFate) : Decidable (HasFate m fate)"
+      "signature": "inductive SelfApplicationFate | empty | dead | collapse | live deriving DecidableEq, Fintype def HasFate (m : BinaryFractionalMap) : SelfApplicationFate → Prop | .empty => fixedCoefficients m = (0, 0, 0) | .dead => fixedCoefficients m = (0, 0, -1) | .collapse => (discriminant m = 0 ∨ discriminant m = 4) ∧ fixedCoefficients m ≠ (0, 0, 0) ∧ fixedCoefficients m ≠ (0, 0, -1) | .live => discriminant m = 5 instance (m : BinaryFractionalMap) (fate : SelfApplicationFate) : Decidable (HasFate m fate)",
+      "axioms": []
     },
     "D5/S0/Diagonal/SelfApplicationFates.determinant": {
       "module": "D5/S0/Diagonal/SelfApplicationFates",
@@ -291,7 +303,8 @@
       "kind": "def",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
       "line": 19,
-      "signature": "def determinant (m : BinaryFractionalMap) : Int"
+      "signature": "def determinant (m : BinaryFractionalMap) : Int",
+      "axioms": []
     },
     "D5/S0/Diagonal/SelfApplicationFates.discriminant": {
       "module": "D5/S0/Diagonal/SelfApplicationFates",
@@ -299,7 +312,10 @@
       "kind": "def",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
       "line": 30,
-      "signature": "def discriminant (m : BinaryFractionalMap) : Int"
+      "signature": "def discriminant (m : BinaryFractionalMap) : Int",
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S0/Diagonal/SelfApplicationFates.fixedCoefficients": {
       "module": "D5/S0/Diagonal/SelfApplicationFates",
@@ -307,7 +323,8 @@
       "kind": "def",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
       "line": 27,
-      "signature": "def fixedCoefficients (m : BinaryFractionalMap) : Int × Int × Int"
+      "signature": "def fixedCoefficients (m : BinaryFractionalMap) : Int × Int × Int",
+      "axioms": []
     },
     "D5/S0/Diagonal/SelfApplicationFates.fixedPolynomial": {
       "module": "D5/S0/Diagonal/SelfApplicationFates",
@@ -635,7 +652,11 @@
       "kind": "theorem",
       "statement_id": "sha256:92a7988dadc0a3b8e723075585142821237a04e2b403ae63692e8ee713e845f0",
       "line": 89,
-      "signature": "theorem trace_recurrence (a b : R) (hab : a * b = 1) (m : Nat) : a ^ (m + 2) + b ^ (m + 2) = (a + b) * (a ^ (m + 1) + b ^ (m + 1)) - (a ^ m + b ^ m)"
+      "signature": "theorem trace_recurrence (a b : R) (hab : a * b = 1) (m : Nat) : a ^ (m + 2) + b ^ (m + 2) = (a + b) * (a ^ (m + 1) + b ^ (m + 1)) - (a ^ m + b ^ m)",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S1/Recurrence/PellCompanionGcd.P": {
       "module": "D5/S1/Recurrence/PellCompanionGcd",
@@ -1481,8 +1502,8 @@
       "module": "D5/S3/Combinatorics/Geometry/EuclideanSimplex/RationalUnitSimplex",
       "name": "D5.S3.Combinatorics.Geometry.EuclideanSimplex.RationalUnitSimplex.rational_unit_simplex_iff",
       "kind": "theorem",
-      "statement_id": "sha256:f6c9d545bf8e06d09be12e2d315c88263e2572910c2e452a862755034430c072",
-      "line": 385,
+      "statement_id": "sha256:d1368c90f42d0707cebd091ec25666ecba398e3813a6275dee2656a8069bae25",
+      "line": 387,
       "signature": "theorem rational_unit_simplex_iff (n : ℕ) (hn : 0 < n) : (∃ c : ℚ, c ≠ 1 ∧ ∃ p : Fin (n + 1) → Fin n → ℚ, ∀ j k, p j ⬝ᵥ p k = if j = k then 1 else c) ↔ (Odd n ∧ IsSquare n) ∨ (Even n ∧ IsSquare (n + 1))"
     },
     "D5/S3/Combinatorics/Graph/Chordal/ChordalBanachLimitTwo.not_subtwo_banach_chordal": {
@@ -1522,7 +1543,7 @@
       "name": "SimpleGraph.PathPower.not_subtwo_universal_chordal",
       "kind": "theorem",
       "statement_id": "sha256:99fe3cf598db99f0b878093b3038fb2990c23a5071eda430cf9454b69124bd42",
-      "line": 817,
+      "line": 814,
       "signature": "theorem not_subtwo_universal_chordal : ¬ subtwo_universal_chordal_claim"
     },
     "D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_exists_two_approximate_gain_potential": {
@@ -1530,7 +1551,7 @@
       "name": "SimpleGraph.PathPower.pathPower_exists_two_approximate_gain_potential",
       "kind": "theorem",
       "statement_id": "sha256:99fe3cf598db99f0b878093b3038fb2990c23a5071eda430cf9454b69124bd42",
-      "line": 84,
+      "line": 81,
       "signature": "theorem pathPower_exists_two_approximate_gain_potential (n k : ℕ) (hk : 1 ≤ k) (g : Fin n → Fin n → H) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, (pathPower n k).Adj i j → g j i = (g i j)⁻¹) (htri : ∀ i j l, (pathPower n k).Adj i j → (pathPower n k).Adj j l → (pathPower n k).Adj i l → Dist.dist (g i j * g j l) (g i l) ≤ ε) : ∃ φ : Fin n → H, ∀ i j, (pathPower n k).Adj i j → Dist.dist (g i j) ((φ i)⁻¹ * φ j) ≤ 2 * ε"
     },
     "D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_isChordal": {
@@ -1546,7 +1567,7 @@
       "name": "SimpleGraph.PathPower.pathPower_three_banach_and_integral_lower_bound",
       "kind": "theorem",
       "statement_id": "sha256:99fe3cf598db99f0b878093b3038fb2990c23a5071eda430cf9454b69124bd42",
-      "line": 766,
+      "line": 763,
       "signature": "theorem pathPower_three_banach_and_integral_lower_bound : (∀ a b, (pathPower 12 3).Adj a b → realGain b a = -realGain a b) ∧ (∀ a b c, (pathPower 12 3).Adj a b → (pathPower 12 3).Adj b c → (pathPower 12 3).Adj a c → Dist.dist (realGain a b + realGain b c) (realGain a c) ≤ 1) ∧ (∀ φ : Fin 12 → RealCycles, ∃ i j, (pathPower 12 3).Adj i j ∧ (49 / 48 : ℝ) ≤ Dist.dist (realGain i j) (φ j - φ i)) ∧ (∀ a b, (pathPower 12 3).Adj a b → integralGain b a = (integralGain a b)⁻¹) ∧ (∀ a b c, (pathPower 12 3).Adj a b → (pathPower 12 3).Adj b c → (pathPower 12 3).Adj a c → Dist.dist (integralGain a b * integ"
     },
     "D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_three_exact_two": {
@@ -1554,15 +1575,15 @@
       "name": "SimpleGraph.PathPower.pathPower_three_exact_two",
       "kind": "theorem",
       "statement_id": "sha256:99fe3cf598db99f0b878093b3038fb2990c23a5071eda430cf9454b69124bd42",
-      "line": 788,
+      "line": 785,
       "signature": "theorem pathPower_three_exact_two (n : ℕ) (hn : 12 ≤ n) : (∀ a b, (pathPower n 3).Adj a b → integralGain b a = (integralGain a b)⁻¹) ∧ (∀ a b c, (pathPower n 3).Adj a b → (pathPower n 3).Adj b c → (pathPower n 3).Adj a c → Dist.dist (integralGain a b * integralGain b c) (integralGain a c) ≤ 1) ∧ (∀ φ : Fin n → IntegralCycles, ∃ i j, (pathPower n 3).Adj i j ∧ 2 ≤ Dist.dist (integralGain i j) ((φ i)⁻¹ * φ j)) ∧ (∃ φ : Fin n → IntegralCycles, ∀ i j, (pathPower n 3).Adj i j → Dist.dist (integralGain i j) ((φ i)⁻¹ * φ j) ≤ 2)"
     },
     "D5/S3/Combinatorics/Graph/Chordal/CliqueBoundedBanachPotential.SimpleGraph.IsChordal.exists_clique_bounded_banach_gain_potential": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/CliqueBoundedBanachPotential",
       "name": "SimpleGraph.IsChordal.exists_clique_bounded_banach_gain_potential",
       "kind": "theorem",
-      "statement_id": "sha256:69173c864493530de1e2c59fcf49030dd66c1cf72cd9ac1f96b4f2b0849ee91d",
-      "line": 360,
+      "statement_id": "sha256:05db23d32d335580c594276e5132c5a8abc3eda6832977d18de51b405a6c1c2b",
+      "line": 355,
       "signature": "theorem IsChordal.exists_clique_bounded_banach_gain_potential {V : Type u} [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (k : ℕ) (hk : 2 ≤ k) (hclique : ∀ s : Finset V, G.IsClique (s : Set V) → s.card ≤ k + 1) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ (4 - 4 / (k : ℝ)) * ε"
     },
     "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.completeGraph_banach_lower_bound": {
@@ -1729,7 +1750,7 @@
       "module": "D5/S3/Combinatorics/Graph/Chordal/UniformGainPotential",
       "name": "SimpleGraph.IsChordal.exists_uniform_approximate_gain_potential",
       "kind": "theorem",
-      "statement_id": "sha256:1ef65002139bd3a5bbbba2d4a72a633888e9fba701d959df878c8a800ca23b7a",
+      "statement_id": "sha256:870554a893a083a0796d105fe3ad97c9532a95aed25df407209918712ce05d27",
       "line": 485,
       "signature": "theorem IsChordal.exists_uniform_approximate_gain_potential [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (g : V → V → H) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, G.Adj i j → g j i = (g i j)⁻¹) (htri : ∀ i j k, G.Adj i j → G.Adj j k → G.Adj i k → Dist.dist (g i j * g j k) (g i k) ≤ ε) : ∃ φ : V → H, ∀ i j, G.Adj i j → Dist.dist (g i j) ((φ i)⁻¹ * φ j) ≤ 4 * ε"
     },
@@ -5113,7 +5134,7 @@
       "module": "D5/S3/Fourier/Concentration/FiniteSincCollisionMoment",
       "name": "D5.S3.Fourier.Concentration.FiniteSincCollisionMoment.exists_bounded_tail_window",
       "kind": "theorem",
-      "statement_id": "sha256:e85664e748befe4f407d79029afcf7ff5efc0b576d0c13c7ed360c1ce95d660e",
+      "statement_id": "sha256:71f1ee89d8aeb13147de4e353695e50ac0e18d606da0cb71f3c658706c8f394a",
       "line": 500,
       "signature": "theorem exists_bounded_tail_window {J : Type*} [Fintype J] [DecidableEq J] (g w : J → ℝ) (hw : ∀ j, 0 ≤ w j) (p : ℕ) {N : ℕ} {L H δ : ℝ} (hL : 0 < L) (hN : 0 < N) (hδ : 0 ≤ δ) (hbudget : (3 + Real.pi ^ 2 / 3) * (N : ℝ) * tailCollisionMass g w p (2 / L) < δ ^ (2 * p)) (A : ℝ) : ∃ b ∈ Ioo A (A + 2 * L), ∀ t ∈ Icc b (b + H), |∑ j, w j * Real.sin (g j * t)| < δ + (H / N / 2) * ∑ j, w j * |g j|"
     },
@@ -5121,7 +5142,7 @@
       "module": "D5/S3/Fourier/Concentration/FiniteSincCollisionMoment",
       "name": "D5.S3.Fourier.Concentration.FiniteSincCollisionMoment.sum_bin_mass_sq_le_nearCollisionMass",
       "kind": "theorem",
-      "statement_id": "sha256:e85664e748befe4f407d79029afcf7ff5efc0b576d0c13c7ed360c1ce95d660e",
+      "statement_id": "sha256:71f1ee89d8aeb13147de4e353695e50ac0e18d606da0cb71f3c658706c8f394a",
       "line": 115,
       "signature": "theorem sum_bin_mass_sq_le_nearCollisionMass {I : Type*} (s : Finset I) (x c : I → ℝ) (b : I → ℤ) (r : ℝ) (hc : ∀ i ∈ s, 0 ≤ c i) (hsame : ∀ i ∈ s, ∀ j ∈ s, b i = b j → |x i - x j| ≤ r) : (∑ k ∈ s.image b, (∑ i ∈ s with b i = k, c i) ^ 2) ≤ nearCollisionMass s x c r"
     },
@@ -5129,7 +5150,7 @@
       "module": "D5/S3/Fourier/Concentration/FiniteSincCollisionMoment",
       "name": "D5.S3.Fourier.Concentration.FiniteSincCollisionMoment.tail_moment_comparison",
       "kind": "theorem",
-      "statement_id": "sha256:e85664e748befe4f407d79029afcf7ff5efc0b576d0c13c7ed360c1ce95d660e",
+      "statement_id": "sha256:71f1ee89d8aeb13147de4e353695e50ac0e18d606da0cb71f3c658706c8f394a",
       "line": 447,
       "signature": "theorem tail_moment_comparison {J : Type*} [Fintype J] [DecidableEq J] (g w : J → ℝ) (hw : ∀ j, 0 ≤ w j) (p : ℕ) {L : ℝ} (hL : 0 < L) (center : ℝ) : tailCollisionMass g w p (2 / L) * Real.sin 1 ^ 2 ≤ doubleMean (L / 2) (fun t => ‖complexScore g w t‖ ^ (2 * p)) 0 ∧ doubleMean (L / 2) (fun t => ‖complexScore g w t‖ ^ (2 * p)) center ≤ doubleMean (L / 2) (fun t => ‖complexScore g w t‖ ^ (2 * p)) 0 ∧ doubleMean (L / 2) (fun t => ‖complexScore g w t‖ ^ (2 * p)) 0 ≤ (3 + Real.pi ^ 2 / 3) * tailCollisionMass g w p (2 / L)"
     },
@@ -5153,7 +5174,7 @@
       "module": "D5/S3/Fourier/Concentration/FiniteTailMomentMissingWindow",
       "name": "D5.S3.Fourier.Concentration.FiniteTailMomentMissingWindow.exists_arbitrarily_late_tail_window",
       "kind": "theorem",
-      "statement_id": "sha256:1218ee0652f901041c66557fb1ed5c78400b53ac9a89690fb82f602b93153e8c",
+      "statement_id": "sha256:56a0a703be1d7daabccd1e7ec86e427e3142cce2524e4a77064e54368c3bb875",
       "line": 328,
       "signature": "theorem exists_arbitrarily_late_tail_window {J : Type*} [Fintype J] (g w : J → ℝ) (hw : ∀ j, 0 ≤ w j) (p : ℕ) (hp : 0 < p) (hshort : ∀ k : J → ℤ, (∑ j, |k j|) ≤ (2 * p : ℤ) → (∑ j, (k j : ℝ) * g j) = 0 → k = 0) {H h δ : ℝ} (hh : 0 < h) (hδ : 0 < δ) : let V"
     },
@@ -6417,260 +6438,316 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon",
       "name": "D5.S3.Quantum.AURICOmega.OmegaArithmeticHorizon.bezout_identity",
       "kind": "theorem",
-      "statement_id": "sha256:38728b61338a046463413266338e491d930a5b5a69fdf82c66bc6104dd9a03c1",
+      "statement_id": "sha256:cf13994966c73ae4148cc939e7cc9c77ad9b4a9687090d315eefe834b457cf0a",
       "line": 25,
       "signature": "public theorem bezout_identity (a b : Nat) : Exists (fun x : Int => Exists (fun y : Int => Eq (((Int.ofNat a).mul x).add ((Int.ofNat b).mul y)) (Int.ofNat (gcd a b))))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_coprime": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon",
       "name": "D5.S3.Quantum.AURICOmega.OmegaArithmeticHorizon.cf_convergent_coprime",
       "kind": "theorem",
-      "statement_id": "sha256:38728b61338a046463413266338e491d930a5b5a69fdf82c66bc6104dd9a03c1",
+      "statement_id": "sha256:cf13994966c73ae4148cc939e7cc9c77ad9b4a9687090d315eefe834b457cf0a",
       "line": 36,
       "signature": "public theorem cf_convergent_coprime (coeffs : NatList) (d : Nat) (hn : Dvd d (convergentPair coeffs).current.numerator) (hd : Dvd d (convergentPair coeffs).current.denominator) : Eq d Nat.one",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_determinant": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon",
       "name": "D5.S3.Quantum.AURICOmega.OmegaArithmeticHorizon.cf_convergent_determinant",
       "kind": "theorem",
-      "statement_id": "sha256:38728b61338a046463413266338e491d930a5b5a69fdf82c66bc6104dd9a03c1",
+      "statement_id": "sha256:cf13994966c73ae4148cc939e7cc9c77ad9b4a9687090d315eefe834b457cf0a",
       "line": 31,
       "signature": "public theorem cf_convergent_determinant (coeffs : NatList) : Eq (convergentPair coeffs).determinant (alternatingSign (coefficientCount coeffs))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.euclid_prime_escape": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon",
       "name": "D5.S3.Quantum.AURICOmega.OmegaArithmeticHorizon.euclid_prime_escape",
       "kind": "theorem",
-      "statement_id": "sha256:38728b61338a046463413266338e491d930a5b5a69fdf82c66bc6104dd9a03c1",
+      "statement_id": "sha256:cf13994966c73ae4148cc939e7cc9c77ad9b4a9687090d315eefe834b457cf0a",
       "line": 20,
       "signature": "public theorem euclid_prime_escape (s : NatList) (hs : Nat.lt Nat.zero s.prod) : Exists (fun p => And (IsPrime p) (And (Dvd p s.prod.succ) (Not (NatList.Mem p s))))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.machin_rational_chain": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon",
       "name": "D5.S3.Quantum.AURICOmega.OmegaArithmeticHorizon.machin_rational_chain",
       "kind": "theorem",
-      "statement_id": "sha256:38728b61338a046463413266338e491d930a5b5a69fdf82c66bc6104dd9a03c1",
+      "statement_id": "sha256:cf13994966c73ae4148cc939e7cc9c77ad9b4a9687090d315eefe834b457cf0a",
       "line": 42,
       "signature": "public theorem machin_rational_chain : IntRatio.Equivalent machinChain (IntRatio.ofInt Int.one)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.quarterDepth_integer_sound": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon",
       "name": "D5.S3.Quantum.AURICOmega.OmegaArithmeticHorizon.quarterDepth_integer_sound",
       "kind": "theorem",
-      "statement_id": "sha256:38728b61338a046463413266338e491d930a5b5a69fdf82c66bc6104dd9a03c1",
+      "statement_id": "sha256:cf13994966c73ae4148cc939e7cc9c77ad9b4a9687090d315eefe834b457cf0a",
       "line": 47,
       "signature": "public theorem quarterDepth_integer_sound (c d p q N : Nat) (hd : Nat.lt Nat.zero d) (hp : Nat.lt Nat.zero p) (h : Nat.le (quarterDepth c d p q) N) : Nat.lt (c.mul q) ((d.mul p).mul (pow4 N.succ))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaBargmannHaarHecke.detGram3_nonneg",
       "kind": "theorem",
-      "statement_id": "sha256:a89a4d30c830ea184a8b6e123fad92c995fe2d5cc359beb183e7a3a2904f93c0",
+      "statement_id": "sha256:8895305b9a2e7d78e9c6204e2934ce496be0a5428b23728daa8614100ca73cfd",
       "line": 24,
       "signature": "public theorem detGram3_nonneg (a b c : Quad4) (ha : Not (Eq a Quad4.zero)) (hb : Not (Eq b Quad4.zero)) (hc : Not (Eq c Quad4.zero)) : IntRatio.Le (IntRatio.ofInt Int.zero) (detGram3 a b c)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.geodesic_doubling_detGram3_zero": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaBargmannHaarHecke.geodesic_doubling_detGram3_zero",
       "kind": "theorem",
-      "statement_id": "sha256:a89a4d30c830ea184a8b6e123fad92c995fe2d5cc359beb183e7a3a2904f93c0",
+      "statement_id": "sha256:8895305b9a2e7d78e9c6204e2934ce496be0a5428b23728daa8614100ca73cfd",
       "line": 30,
       "signature": "public theorem geodesic_doubling_detGram3_zero (a b : Quad4) (ha : Not (Eq a Quad4.zero)) (hb : Not (Eq b Quad4.zero)) : Equivalent (detGram3 a b (triad b a b)) (IntRatio.ofInt Int.zero)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.geodesic_doubling_kappa": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaBargmannHaarHecke.geodesic_doubling_kappa",
       "kind": "theorem",
-      "statement_id": "sha256:a89a4d30c830ea184a8b6e123fad92c995fe2d5cc359beb183e7a3a2904f93c0",
+      "statement_id": "sha256:8895305b9a2e7d78e9c6204e2934ce496be0a5428b23728daa8614100ca73cfd",
       "line": 36,
       "signature": "public theorem geodesic_doubling_kappa (a b : Quad4) (ha : Not (Eq a Quad4.zero)) (hb : Not (Eq b Quad4.zero)) : Equivalent (kappa a (triad b a b)) ((doublingReadout a b).mul (doublingReadout a b))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.haarKappaMoment_succ": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaBargmannHaarHecke.haarKappaMoment_succ",
       "kind": "theorem",
-      "statement_id": "sha256:a89a4d30c830ea184a8b6e123fad92c995fe2d5cc359beb183e7a3a2904f93c0",
+      "statement_id": "sha256:8895305b9a2e7d78e9c6204e2934ce496be0a5428b23728daa8614100ca73cfd",
       "line": 43,
       "signature": "public theorem haarKappaMoment_succ (k : Nat) : Equivalent (haarKappaMoment k.succ) ((haarKappaMoment k).mul (haarKappaStep k))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_chi1_eigenvalue": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaBargmannHaarHecke.heckeT5_chi1_eigenvalue",
       "kind": "theorem",
-      "statement_id": "sha256:a89a4d30c830ea184a8b6e123fad92c995fe2d5cc359beb183e7a3a2904f93c0",
+      "statement_id": "sha256:8895305b9a2e7d78e9c6204e2934ce496be0a5428b23728daa8614100ca73cfd",
       "line": 58,
       "signature": "public theorem heckeT5_chi1_eigenvalue (q : Quad4) (hq : Not (Eq q Quad4.zero)) : Equivalent (heckeT5Chi1 q) ((IntRatio.value Int.two.neg Nat.one.succ.succ.succ.succ).mul (evalChi1 q))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_ramanujan_margin": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaBargmannHaarHecke.heckeT5_ramanujan_margin",
       "kind": "theorem",
-      "statement_id": "sha256:a89a4d30c830ea184a8b6e123fad92c995fe2d5cc359beb183e7a3a2904f93c0",
+      "statement_id": "sha256:8895305b9a2e7d78e9c6204e2934ce496be0a5428b23728daa8614100ca73cfd",
       "line": 64,
       "signature": "public theorem heckeT5_ramanujan_margin : let four",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.peter_weyl_chi012_orthonormal": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaBargmannHaarHecke.peter_weyl_chi012_orthonormal",
       "kind": "theorem",
-      "statement_id": "sha256:a89a4d30c830ea184a8b6e123fad92c995fe2d5cc359beb183e7a3a2904f93c0",
+      "statement_id": "sha256:8895305b9a2e7d78e9c6204e2934ce496be0a5428b23728daa8614100ca73cfd",
       "line": 48,
       "signature": "public theorem peter_weyl_chi012_orthonormal : And (Equivalent (haarInner chi0 chi0) (IntRatio.ofInt Int.one)) (And (Equivalent (haarInner chi0 chi1) (IntRatio.ofInt Int.zero)) (And (Equivalent (haarInner chi0 chi2) (IntRatio.ofInt Int.zero)) (And (Equivalent (haarInner chi1 chi1) (IntRatio.ofInt Int.one)) (And (Equivalent (haarInner chi1 chi2) (IntRatio.ofInt Int.zero)) (Equivalent (haarInner chi2 chi2) (IntRatio.ofInt Int.one))))))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.quaternion_fractran_deterministic": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaBargmannHaarHecke.quaternion_fractran_deterministic",
       "kind": "theorem",
-      "statement_id": "sha256:a89a4d30c830ea184a8b6e123fad92c995fe2d5cc359beb183e7a3a2904f93c0",
+      "statement_id": "sha256:8895305b9a2e7d78e9c6204e2934ce496be0a5428b23728daa8614100ca73cfd",
       "line": 77,
       "signature": "public theorem quaternion_fractran_deterministic {psi A q₁ q₂ : Quad4} {p : Int} (hp : Not (Eq p Int.zero)) (h₁ : Eq (psi.mul A) (Quad4.scale p q₁)) (h₂ : Eq (psi.mul A) (Quad4.scale p q₂)) : Eq q₁ q₂",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.quaternion_fractran_order_separation": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaBargmannHaarHecke.quaternion_fractran_order_separation",
       "kind": "theorem",
-      "statement_id": "sha256:a89a4d30c830ea184a8b6e123fad92c995fe2d5cc359beb183e7a3a2904f93c0",
+      "statement_id": "sha256:8895305b9a2e7d78e9c6204e2934ce496be0a5428b23728daa8614100ca73cfd",
       "line": 84,
       "signature": "public theorem quaternion_fractran_order_separation : And (Eq psiXY.normSq (unwindDenominator.mul unwindDenominator)) (And (Eq psiYX.normSq (unwindDenominator.mul unwindDenominator)) (And (Step psiXY gateUnwindY unwindDenominator psiX) (Not (Enabled psiYX gateUnwindY unwindDenominator))))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_dot": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation",
       "name": "D5.S3.Quantum.AURICOmega.OmegaCayleyRotation.ad_dot",
       "kind": "theorem",
-      "statement_id": "sha256:eace2f160dd3b2b82e5804c5460adce4ac86043cdd14c9f2eb6e08a54787e25a",
+      "statement_id": "sha256:5c65d4c3bab13779c7a99833a73bcea6e33e0ab9b7f3edb05953089b942b608b",
       "line": 18,
       "signature": "public theorem ad_dot (p : Quaternion) (hp : p.Nonzero) (u v : RatVec3) : IntRatio.Equivalent ((Ad p u).dot3 (Ad p v)) (u.dot3 v)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_hom": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation",
       "name": "D5.S3.Quantum.AURICOmega.OmegaCayleyRotation.ad_hom",
       "kind": "theorem",
-      "statement_id": "sha256:eace2f160dd3b2b82e5804c5460adce4ac86043cdd14c9f2eb6e08a54787e25a",
+      "statement_id": "sha256:5c65d4c3bab13779c7a99833a73bcea6e33e0ab9b7f3edb05953089b942b608b",
       "line": 28,
       "signature": "public theorem ad_hom (p q : Quaternion) (hp : p.Nonzero) (hq : q.Nonzero) (v : RatVec3) : RatVec3.Equiv (Ad (p.mul q) v) (Ad p (Ad q v))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_scale": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation",
       "name": "D5.S3.Quantum.AURICOmega.OmegaCayleyRotation.ad_scale",
       "kind": "theorem",
-      "statement_id": "sha256:eace2f160dd3b2b82e5804c5460adce4ac86043cdd14c9f2eb6e08a54787e25a",
+      "statement_id": "sha256:5c65d4c3bab13779c7a99833a73bcea6e33e0ab9b7f3edb05953089b942b608b",
       "line": 23,
       "signature": "public theorem ad_scale (p : Quaternion) (hp : p.Nonzero) (k : Int) (hk : Not (Eq k Int.zero)) (v : RatVec3) : RatVec3.Equiv (Ad (Quaternion.scale k p) v) (Ad p v)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_det": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation",
       "name": "D5.S3.Quantum.AURICOmega.OmegaCayleyRotation.cayley_det",
       "kind": "theorem",
-      "statement_id": "sha256:eace2f160dd3b2b82e5804c5460adce4ac86043cdd14c9f2eb6e08a54787e25a",
+      "statement_id": "sha256:5c65d4c3bab13779c7a99833a73bcea6e33e0ab9b7f3edb05953089b942b608b",
       "line": 43,
       "signature": "public theorem cayley_det (s : RatVec3) : IntRatio.Equivalent (Cayley s).det (IntRatio.ofInt Int.one)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_identity": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation",
       "name": "D5.S3.Quantum.AURICOmega.OmegaCayleyRotation.cayley_identity",
       "kind": "theorem",
-      "statement_id": "sha256:eace2f160dd3b2b82e5804c5460adce4ac86043cdd14c9f2eb6e08a54787e25a",
+      "statement_id": "sha256:5c65d4c3bab13779c7a99833a73bcea6e33e0ab9b7f3edb05953089b942b608b",
       "line": 33,
       "signature": "public theorem cayley_identity (s : RatVec3) : RatMat3.Equiv ((skewMinus s).mul (Cayley s)) (skewPlus s)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_iterate_norm": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation",
       "name": "D5.S3.Quantum.AURICOmega.OmegaCayleyRotation.cayley_iterate_norm",
       "kind": "theorem",
-      "statement_id": "sha256:eace2f160dd3b2b82e5804c5460adce4ac86043cdd14c9f2eb6e08a54787e25a",
+      "statement_id": "sha256:5c65d4c3bab13779c7a99833a73bcea6e33e0ab9b7f3edb05953089b942b608b",
       "line": 47,
       "signature": "public theorem cayley_iterate_norm (s v : RatVec3) (n : Nat) : IntRatio.Equivalent ((cayleyIterate s v n).dot3 (cayleyIterate s v n)) (v.dot3 v)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_orthogonal": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation",
       "name": "D5.S3.Quantum.AURICOmega.OmegaCayleyRotation.cayley_orthogonal",
       "kind": "theorem",
-      "statement_id": "sha256:eace2f160dd3b2b82e5804c5460adce4ac86043cdd14c9f2eb6e08a54787e25a",
+      "statement_id": "sha256:5c65d4c3bab13779c7a99833a73bcea6e33e0ab9b7f3edb05953089b942b608b",
       "line": 38,
       "signature": "public theorem cayley_orthogonal (s : RatVec3) : RatMat3.Equiv ((Cayley s).transpose.mul (Cayley s)) RatMat3.one",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.heap_norm_preserved": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation",
       "name": "D5.S3.Quantum.AURICOmega.OmegaCayleyRotation.heap_norm_preserved",
       "kind": "theorem",
-      "statement_id": "sha256:eace2f160dd3b2b82e5804c5460adce4ac86043cdd14c9f2eb6e08a54787e25a",
+      "statement_id": "sha256:5c65d4c3bab13779c7a99833a73bcea6e33e0ab9b7f3edb05953089b942b608b",
       "line": 52,
       "signature": "public theorem heap_norm_preserved (a b : PythSpinor) (n : Nat) : IntRatio.Equivalent (spinorNormSq (heapAt a b n)) (IntRatio.ofInt Int.one)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.chebyshev_doubling": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaChebyshevHecke.chebyshev_doubling",
       "kind": "theorem",
-      "statement_id": "sha256:ba07449e148f12acd11ab14f8fdf09576d3b5992a6b1adea52b7c66e6e98e2dc",
+      "statement_id": "sha256:53cf121957d432f777839a069ee69c92e0518a94a84d345fb36fa461c6dd92f0",
       "line": 26,
       "signature": "public theorem chebyshev_doubling (x : Int) (n : Nat) : Eq (T intRing x (n.add n)) ((Int.two.mul (Int.square (T intRing x n))).sub Int.one)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.even_chebyshev": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaChebyshevHecke.even_chebyshev",
       "kind": "theorem",
-      "statement_id": "sha256:ba07449e148f12acd11ab14f8fdf09576d3b5992a6b1adea52b7c66e6e98e2dc",
-      "line": 31,
+      "statement_id": "sha256:53cf121957d432f777839a069ee69c92e0518a94a84d345fb36fa461c6dd92f0",
+      "line": 34,
       "signature": "public theorem even_chebyshev (x : Int) (n : Nat) : Eq (E intRing (Int.square x) n) (U intRing x (n.add n))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.full_orbital_quadrupole": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaChebyshevHecke.full_orbital_quadrupole",
       "kind": "theorem",
-      "statement_id": "sha256:ba07449e148f12acd11ab14f8fdf09576d3b5992a6b1adea52b7c66e6e98e2dc",
-      "line": 71,
+      "statement_id": "sha256:53cf121957d432f777839a069ee69c92e0518a94a84d345fb36fa461c6dd92f0",
+      "line": 74,
       "signature": "public theorem full_orbital_quadrupole (a : Orbitals.Axis) : IntRatio.Equivalent (Orbitals.fullShell a) (IntRatio.ofInt Int.zero)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_degree_four_eigenbasis": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaChebyshevHecke.lps_degree_four_eigenbasis",
       "kind": "theorem",
-      "statement_id": "sha256:ba07449e148f12acd11ab14f8fdf09576d3b5992a6b1adea52b7c66e6e98e2dc",
-      "line": 99,
+      "statement_id": "sha256:53cf121957d432f777839a069ee69c92e0518a94a84d345fb36fa461c6dd92f0",
+      "line": 102,
       "signature": "public theorem lps_degree_four_eigenbasis : And (∀ line : S5.DegreeFourLine, Eq (S5.degreeFourAction line.vector) (line.vector.scale (S5.scaledEigenvalue .degreeFour line.negativeBranch))) (∀ v : S5.DegreeFourVector, And (Eq (S5.fromEigenCoordinates (S5.doubledEigenCoordinates v)) (v.scale Int.two)) (Eq (S5.doubledEigenCoordinates (S5.fromEigenCoordinates v)) (v.scale Int.two)))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_hecke_trace_formula": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaChebyshevHecke.lps_hecke_trace_formula",
       "kind": "theorem",
-      "statement_id": "sha256:ba07449e148f12acd11ab14f8fdf09576d3b5992a6b1adea52b7c66e6e98e2dc",
-      "line": 82,
+      "statement_id": "sha256:53cf121957d432f777839a069ee69c92e0518a94a84d345fb36fa461c6dd92f0",
+      "line": 85,
       "signature": "public theorem lps_hecke_trace_formula (n : Nat) : IntRatio.Equivalent (S5.averageCharacter n).toRatio (S5.traceRepresentative n)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_hecke_traces": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaChebyshevHecke.lps_hecke_traces",
       "kind": "theorem",
-      "statement_id": "sha256:ba07449e148f12acd11ab14f8fdf09576d3b5992a6b1adea52b7c66e6e98e2dc",
-      "line": 87,
+      "statement_id": "sha256:53cf121957d432f777839a069ee69c92e0518a94a84d345fb36fa461c6dd92f0",
+      "line": 90,
       "signature": "public theorem lps_hecke_traces : S5.traceTable",
       "axioms": []
     },
@@ -6678,8 +6755,8 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaChebyshevHecke.lps_norm_five",
       "kind": "theorem",
-      "statement_id": "sha256:ba07449e148f12acd11ab14f8fdf09576d3b5992a6b1adea52b7c66e6e98e2dc",
-      "line": 76,
+      "statement_id": "sha256:53cf121957d432f777839a069ee69c92e0518a94a84d345fb36fa461c6dd92f0",
+      "line": 79,
       "signature": "public theorem lps_norm_five (g : S5.Generator) : And (Eq g.coordinates.normSq S5.i5) (Eq g.coordinates.kappa (IntRatio.value Int.one S5.n5))",
       "axioms": []
     },
@@ -6687,143 +6764,173 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaChebyshevHecke.lps_ramanujan_margins",
       "kind": "theorem",
-      "statement_id": "sha256:ba07449e148f12acd11ab14f8fdf09576d3b5992a6b1adea52b7c66e6e98e2dc",
-      "line": 90,
+      "statement_id": "sha256:53cf121957d432f777839a069ee69c92e0518a94a84d345fb36fa461c6dd92f0",
+      "line": 93,
       "signature": "public theorem lps_ramanujan_margins (shell : S5.Shell) (branch : Bool) : And (S5.MatrixMatches shell) (IntRatio.Lt (IntRatio.ofInt Int.zero) ((IntRatio.ofInt S5.i20).sub (S5.squaredEigenvalue shell branch)))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.odd_chebyshev": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaChebyshevHecke.odd_chebyshev",
       "kind": "theorem",
-      "statement_id": "sha256:ba07449e148f12acd11ab14f8fdf09576d3b5992a6b1adea52b7c66e6e98e2dc",
-      "line": 36,
+      "statement_id": "sha256:53cf121957d432f777839a069ee69c92e0518a94a84d345fb36fa461c6dd92f0",
+      "line": 39,
       "signature": "public theorem odd_chebyshev (x : Int) (n : Nat) : Eq (x.mul (oddFactor intRing (Int.square x) n)) (U intRing x (n.add n).succ)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.orbital_quadrupole": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaChebyshevHecke.orbital_quadrupole",
       "kind": "theorem",
-      "statement_id": "sha256:ba07449e148f12acd11ab14f8fdf09576d3b5992a6b1adea52b7c66e6e98e2dc",
-      "line": 58,
+      "statement_id": "sha256:53cf121957d432f777839a069ee69c92e0518a94a84d345fb36fa461c6dd92f0",
+      "line": 61,
       "signature": "public theorem orbital_quadrupole : And (∀ a : Orbitals.Axis, IntRatio.Equivalent (Orbitals.closedShell a) (IntRatio.ofInt Int.zero)) (And (IntRatio.Equivalent (Orbitals.deletedShell .x) (Orbitals.seventh (Int.ofNat Orbitals.four).neg)) (And (IntRatio.Equivalent (Orbitals.deletedShell .y) (Orbitals.seventh (Int.ofNat Orbitals.four).neg)) (And (IntRatio.Equivalent (Orbitals.deletedShell .z) (Orbitals.seventh (Int.ofNat (Orbitals.four.add Orbitals.four)))) (IntRatio.Equivalent (((Orbitals.deletedShell .x).add (Orbitals.deletedShell .y)).add (Orbitals.deletedShell .z)) (IntRatio.ofInt Int.zero)))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.pell_chebyshev": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaChebyshevHecke.pell_chebyshev",
       "kind": "theorem",
-      "statement_id": "sha256:ba07449e148f12acd11ab14f8fdf09576d3b5992a6b1adea52b7c66e6e98e2dc",
+      "statement_id": "sha256:53cf121957d432f777839a069ee69c92e0518a94a84d345fb36fa461c6dd92f0",
       "line": 20,
       "signature": "public theorem pell_chebyshev (x : Int) (n : Nat) : Eq ((Int.square (T intRing x n.succ)).sub (((Int.square x).sub Int.one).mul (Int.square (U intRing x n)))) Int.one",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.pentagonal_chebyshev": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaChebyshevHecke.pentagonal_chebyshev",
       "kind": "theorem",
-      "statement_id": "sha256:ba07449e148f12acd11ab14f8fdf09576d3b5992a6b1adea52b7c66e6e98e2dc",
-      "line": 49,
+      "statement_id": "sha256:53cf121957d432f777839a069ee69c92e0518a94a84d345fb36fa461c6dd92f0",
+      "line": 52,
       "signature": "public theorem pentagonal_chebyshev : And (QPhi.scalarRing.eqv (T QPhi.scalarRing QPhi.phiHalf QPhi.five) (QPhi.scalarRing.neg QPhi.scalarRing.one)) (And (QPhi.scalarRing.eqv (T QPhi.scalarRing QPhi.phiHalf QPhi.ten) QPhi.scalarRing.one) (QPhi.scalarRing.eqv (T QPhi.scalarRing QPhi.phiSubOneHalf QPhi.five) QPhi.scalarRing.one))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.spin_two_character": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke",
       "name": "D5.S3.Quantum.AURICOmega.OmegaChebyshevHecke.spin_two_character",
       "kind": "theorem",
-      "statement_id": "sha256:ba07449e148f12acd11ab14f8fdf09576d3b5992a6b1adea52b7c66e6e98e2dc",
-      "line": 41,
+      "statement_id": "sha256:53cf121957d432f777839a069ee69c92e0518a94a84d345fb36fa461c6dd92f0",
+      "line": 44,
       "signature": "public theorem spin_two_character (k : FiniteRatio) : let four",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaCircleClosure",
       "name": "D5.S3.Quantum.AURICOmega.OmegaCircleClosure.cayley_antipodal_closure",
       "kind": "theorem",
-      "statement_id": "sha256:45bcfa31ab23a397748b2843a272df512da95250a22866d47c49df7985859a78",
+      "statement_id": "sha256:dce47b9534ff23c99226eeedd92357b071e212666773b087a8178bfd35054674",
       "line": 34,
       "signature": "public theorem cayley_antipodal_closure (p : Int) (hp : Not (Eq p Int.zero)) : And (IntRatio.Equivalent (kappa p Int.zero) (IntRatio.ofInt Int.zero)) (And (IntRatio.Equivalent (spread p Int.zero) (IntRatio.ofInt Int.one)) (And (IntRatio.Equivalent (cayleyX p Int.zero) (IntRatio.ofInt Int.one.neg)) (IntRatio.Equivalent (cayleyY p Int.zero) (IntRatio.ofInt Int.zero))))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaCircleClosure",
       "name": "D5.S3.Quantum.AURICOmega.OmegaCircleClosure.cayley_circle_unit",
       "kind": "theorem",
-      "statement_id": "sha256:45bcfa31ab23a397748b2843a272df512da95250a22866d47c49df7985859a78",
+      "statement_id": "sha256:dce47b9534ff23c99226eeedd92357b071e212666773b087a8178bfd35054674",
       "line": 28,
       "signature": "public theorem cayley_circle_unit (p q : Int) (h : Nonzero p q) : IntRatio.Equivalent (((cayleyX p q).mul (cayleyX p q)).add ((cayleyY p q).mul (cayleyY p q))) (IntRatio.ofInt Int.one)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_add_spread_eq_one": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaCircleClosure",
       "name": "D5.S3.Quantum.AURICOmega.OmegaCircleClosure.kappa_add_spread_eq_one",
       "kind": "theorem",
-      "statement_id": "sha256:45bcfa31ab23a397748b2843a272df512da95250a22866d47c49df7985859a78",
+      "statement_id": "sha256:dce47b9534ff23c99226eeedd92357b071e212666773b087a8178bfd35054674",
       "line": 23,
       "signature": "public theorem kappa_add_spread_eq_one (p q : Int) (h : Nonzero p q) : IntRatio.Equivalent ((kappa p q).add (spread p q)) (IntRatio.ofInt Int.one)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_scale": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaCircleClosure",
       "name": "D5.S3.Quantum.AURICOmega.OmegaCircleClosure.kappa_scale",
       "kind": "theorem",
-      "statement_id": "sha256:45bcfa31ab23a397748b2843a272df512da95250a22866d47c49df7985859a78",
+      "statement_id": "sha256:dce47b9534ff23c99226eeedd92357b071e212666773b087a8178bfd35054674",
       "line": 18,
       "signature": "public theorem kappa_scale (p q k : Int) (hk : Not (Eq k Int.zero)) : IntRatio.Equivalent (kappa (k.mul p) (k.mul q)) (kappa p q)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.projective_circle_mul_normSq": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaCircleClosure",
       "name": "D5.S3.Quantum.AURICOmega.OmegaCircleClosure.projective_circle_mul_normSq",
       "kind": "theorem",
-      "statement_id": "sha256:45bcfa31ab23a397748b2843a272df512da95250a22866d47c49df7985859a78",
+      "statement_id": "sha256:dce47b9534ff23c99226eeedd92357b071e212666773b087a8178bfd35054674",
       "line": 42,
       "signature": "public theorem projective_circle_mul_normSq (p₁ q₁ p₂ q₂ : Int) : Eq ((normSq p₁ q₁).mul (normSq p₂ q₂)) (projectiveMul p₁ q₁ p₂ q₂).normSq",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.cos_two_atan_eq_cayley": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses",
       "name": "D5.S3.Quantum.AURICOmega.OmegaComposeAndWitnesses.cos_two_atan_eq_cayley",
       "kind": "theorem",
-      "statement_id": "sha256:d4707b52e68313579a34e416cc22e8ed54d17b22019eded9cfb7f4e97aba8989",
-      "line": 24,
+      "statement_id": "sha256:4ef80e2e4fcc2c9e6a9106bc8556b594ff7c493a3476eaaf74876895cfe2c104",
+      "line": 25,
       "signature": "public theorem cos_two_atan_eq_cayley (N : Nat) : EquivalentAt N (compose Cos (smul IntRatio.two Atan)) CayleyCos",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.deriv_compose_equivAt": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses",
       "name": "D5.S3.Quantum.AURICOmega.OmegaComposeAndWitnesses.deriv_compose_equivAt",
       "kind": "theorem",
-      "statement_id": "sha256:d4707b52e68313579a34e416cc22e8ed54d17b22019eded9cfb7f4e97aba8989",
-      "line": 19,
+      "statement_id": "sha256:4ef80e2e4fcc2c9e6a9106bc8556b594ff7c493a3476eaaf74876895cfe2c104",
+      "line": 20,
       "signature": "public theorem deriv_compose_equivAt (N : Nat) (f g : JetSeq) (hf : Finite f) (hg : Finite g) (g0 : IntRatio.Equivalent (g Nat.zero) IntRatio.zero) : EquivalentAt N (deriv (compose f g)) (mul (compose (deriv f) g) (deriv g))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.g120_spin_six_beat_orbit": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses",
       "name": "D5.S3.Quantum.AURICOmega.OmegaComposeAndWitnesses.g120_spin_six_beat_orbit",
       "kind": "theorem",
-      "statement_id": "sha256:d4707b52e68313579a34e416cc22e8ed54d17b22019eded9cfb7f4e97aba8989",
-      "line": 40,
+      "statement_id": "sha256:4ef80e2e4fcc2c9e6a9106bc8556b594ff7c493a3476eaaf74876895cfe2c104",
+      "line": 41,
       "signature": "public theorem g120_spin_six_beat_orbit : PythSpinor.SixBeatOrbit",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.mat2_det_mul": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses",
       "name": "D5.S3.Quantum.AURICOmega.OmegaComposeAndWitnesses.mat2_det_mul",
       "kind": "theorem",
-      "statement_id": "sha256:d4707b52e68313579a34e416cc22e8ed54d17b22019eded9cfb7f4e97aba8989",
-      "line": 32,
+      "statement_id": "sha256:4ef80e2e4fcc2c9e6a9106bc8556b594ff7c493a3476eaaf74876895cfe2c104",
+      "line": 33,
       "signature": "public theorem mat2_det_mul (A B : Mat2) : Eq (A.mul B).det (A.det.mul B.det)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.orthogonal_triad_excess_quarter": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses",
       "name": "D5.S3.Quantum.AURICOmega.OmegaComposeAndWitnesses.orthogonal_triad_excess_quarter",
       "kind": "theorem",
-      "statement_id": "sha256:d4707b52e68313579a34e416cc22e8ed54d17b22019eded9cfb7f4e97aba8989",
-      "line": 43,
+      "statement_id": "sha256:4ef80e2e4fcc2c9e6a9106bc8556b594ff7c493a3476eaaf74876895cfe2c104",
+      "line": 44,
       "signature": "public theorem orthogonal_triad_excess_quarter : IntRatio.Equivalent (Geometry.BargmannGram.detGram3 Geometry.BargmannGram.Quad4.one Geometry.BargmannGram.pHalf Geometry.BargmannGram.qHalf) (IntRatio.value Int.one Nat.one.succ.succ.succ)",
       "axioms": []
     },
@@ -6831,151 +6938,183 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses",
       "name": "D5.S3.Quantum.AURICOmega.OmegaComposeAndWitnesses.p_omega_halts_at_22",
       "kind": "theorem",
-      "statement_id": "sha256:d4707b52e68313579a34e416cc22e8ed54d17b22019eded9cfb7f4e97aba8989",
-      "line": 70,
+      "statement_id": "sha256:4ef80e2e4fcc2c9e6a9106bc8556b594ff7c493a3476eaaf74876895cfe2c104",
+      "line": 71,
       "signature": "public theorem p_omega_halts_at_22 : And (Follows pOmega pOmegaTrace pOmegaStart) (And (Eq (run pOmega (appendDigit Nat.one five) pOmegaStart) pOmegaFinal) (And (Halts pOmega pOmegaFinal) (∀ k, Nat.lt k (appendDigit Nat.one five) → Not (Halts pOmega (run pOmega k pOmegaStart)))))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses",
       "name": "D5.S3.Quantum.AURICOmega.OmegaComposeAndWitnesses.phalf_qhalf_noncommutative",
       "kind": "theorem",
-      "statement_id": "sha256:d4707b52e68313579a34e416cc22e8ed54d17b22019eded9cfb7f4e97aba8989",
-      "line": 35,
+      "statement_id": "sha256:4ef80e2e4fcc2c9e6a9106bc8556b594ff7c493a3476eaaf74876895cfe2c104",
+      "line": 36,
       "signature": "public theorem phalf_qhalf_noncommutative : Not (Ternion.RayEquiv (Ternion.triad Ternion.pHalf Ternion.p0 Ternion.qHalf) (Ternion.triad Ternion.qHalf Ternion.p0 Ternion.pHalf))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.sin_two_atan_eq_cayley": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses",
       "name": "D5.S3.Quantum.AURICOmega.OmegaComposeAndWitnesses.sin_two_atan_eq_cayley",
       "kind": "theorem",
-      "statement_id": "sha256:d4707b52e68313579a34e416cc22e8ed54d17b22019eded9cfb7f4e97aba8989",
-      "line": 28,
+      "statement_id": "sha256:4ef80e2e4fcc2c9e6a9106bc8556b594ff7c493a3476eaaf74876895cfe2c104",
+      "line": 29,
       "signature": "public theorem sin_two_atan_eq_cayley (N : Nat) : EquivalentAt N (compose Sin (smul IntRatio.two Atan)) CayleySin",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.atan_ode": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.atan_ode",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 93,
       "signature": "public theorem atan_ode : Equivalent (mul (deriv Atan) oneAddEtaSq) one",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.cayley_cos_ode": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.cayley_cos_ode",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 97,
       "signature": "public theorem cayley_cos_ode : Equivalent (mul (deriv CayleyCos) oneAddEtaSq) (smul IntRatio.two.neg CayleySin)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.cayley_sin_ode": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.cayley_sin_ode",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 102,
       "signature": "public theorem cayley_sin_ode : Equivalent (mul (deriv CayleySin) oneAddEtaSq) (smul IntRatio.two CayleyCos)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.cayley_unique_at": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.cayley_unique_at",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 107,
       "signature": "public theorem cayley_unique_at (N : Nat) {f g : JetSeq} (f0 : IntRatio.Equivalent (f Nat.zero) IntRatio.one) (g0 : IntRatio.Equivalent (g Nat.zero) IntRatio.zero) (odeF : ∀ k, Nat.lt k N → IntRatio.Equivalent (mul (deriv f) oneAddEtaSq k) (smul IntRatio.two.neg g k)) (odeG : ∀ k, Nat.lt k N → IntRatio.Equivalent (mul (deriv g) oneAddEtaSq k) (smul IntRatio.two f k)) : And (EquivalentAt N f CayleyCos) (EquivalentAt N g CayleySin)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.chain_rule": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.chain_rule",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 28,
       "signature": "public theorem chain_rule {g f : Jet2} (hg₁ : g.j1.Finite) (hg₂ : g.j2.Finite) (hf : f.Finite) (h : IntRatio.Equivalent f.j0 IntRatio.zero) : And (IntRatio.Equivalent (Jet2.compose g f).first (g.first.mul f.first)) (IntRatio.Equivalent (Jet2.compose g f).second ((g.second.mul (f.first.mul f.first)).add (g.first.mul f.second)))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.cos_sq_add_sin_sq": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.cos_sq_add_sin_sq",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 89,
       "signature": "public theorem cos_sq_add_sin_sq : Equivalent (add (mul Cos Cos) (mul Sin Sin)) one",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.deriv_cos": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.deriv_cos",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 72,
       "signature": "public theorem deriv_cos : Equivalent (deriv Cos) (neg Sin)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.deriv_exp": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.deriv_exp",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 68,
       "signature": "public theorem deriv_exp (a : IntRatio) : Equivalent (deriv (Exp a)) (smul a (Exp a))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.deriv_mul_equivAt": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.deriv_mul_equivAt",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 63,
       "signature": "public theorem deriv_mul_equivAt (N : Nat) (f g : JetSeq) : EquivalentAt N (deriv (mul f g)) (add (mul (deriv f) g) (mul f (deriv g)))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.deriv_sin": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.deriv_sin",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 76,
       "signature": "public theorem deriv_sin : Equivalent (deriv Sin) Cos",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.exp_add": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.exp_add",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 80,
       "signature": "public theorem exp_add (a b : IntRatio) : Equivalent (mul (Exp a) (Exp b)) (Exp (a.add b))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.exp_inverse": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.exp_inverse",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 84,
       "signature": "public theorem exp_inverse {a : IntRatio} (ha : IntRatio.Finite a) : Equivalent (mul (Exp a) (Exp a.neg)) one",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.kappa_jet": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.kappa_jet",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 36,
       "signature": "public theorem kappa_jet (x : IntRatio) : Jet2.Equivalent (Jet2.kappaJetAt x) ⟨Jet2.kappa x, (IntRatio.two.mul x).neg.mul (((Jet2.fidelityDen x).mul (Jet2.fidelityDen x)).inv), ((IntRatio.three.mul (x.mul x)).sub IntRatio.one).mul ((((Jet2.fidelityDen x).mul (Jet2.fidelityDen x)).mul (Jet2.fidelityDen x)).inv)⟩",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.kappa_jet_one": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.kappa_jet_one",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 45,
       "signature": "public theorem kappa_jet_one : Jet2.Equivalent (Jet2.kappaJetAt IntRatio.one) ⟨IntRatio.fraction Int.one Nat.zero.succ, IntRatio.fraction Int.one.neg Nat.zero.succ, IntRatio.fraction Int.one Nat.zero.succ.succ.succ⟩",
       "axioms": []
@@ -6984,25 +7123,29 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.kappa_secant_discrepancy",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 53,
       "signature": "public theorem kappa_secant_discrepancy (x h : IntRatio) (hx : x.Finite) (hu : h.Unit) : IntRatio.Equivalent ((((Jet2.kappa (x.add h)).sub (Jet2.kappa x)).mul h.inv).sub (Jet2.kappaJetAt x).first) ((h.mul (((IntRatio.three.mul (x.mul x)).add ((IntRatio.two.mul x).mul h)).sub IntRatio.one)).mul ((((Jet2.fidelityDen x).mul (Jet2.fidelityDen x)).mul (Jet2.fidelityDen (x.add h))).inv))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.mul_inv": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.mul_inv",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 23,
       "signature": "public theorem mul_inv {a : Jet2} (h₀ : a.j0.Unit) (h₁ : a.j1.Finite) (h₂ : a.j2.Finite) : Jet2.Equivalent (a.mul a.inv) Jet2.one",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.var_cube": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus",
       "name": "D5.S3.Quantum.AURICOmega.OmegaJetCalculus.var_cube",
       "kind": "theorem",
-      "statement_id": "sha256:065f43df7dd6e9611ed33c85eff6dbcd919e6b3b8ee5e9f23beb582091515394",
+      "statement_id": "sha256:3fccdcc7a295b2d5ee92587d3ad30fefebe34ebe5255f10e877f367076e87279",
       "line": 19,
       "signature": "public theorem var_cube : Jet2.Equivalent ((Jet2.var.mul Jet2.var).mul Jet2.var) Jet2.zero",
       "axioms": []
@@ -7011,160 +7154,194 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.dual_chart_ball_containment",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 68,
       "signature": "public theorem dual_chart_ball_containment (u v : RatVec3) : IntRatio.Le ((output u v).dot3 (output u v)) (IntRatio.ofInt Int.one)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_ge_half": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.dual_chart_denom_ge_half",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 62,
       "signature": "public theorem dual_chart_denom_ge_half (u v : RatVec3) : let half",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_sum_one": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.dual_chart_denom_sum_one",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 57,
       "signature": "public theorem dual_chart_denom_sum_one (u v : RatVec3) : IntRatio.Equivalent ((denomPlus u v).add (denomMinus u v)) (IntRatio.ofInt Int.one)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_mrp_denominators": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.dual_chart_mrp_denominators",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 73,
       "signature": "public theorem dual_chart_mrp_denominators (u v : RatVec3) : let r",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_antisymm": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.lieTriple_antisymm",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 20,
       "signature": "public theorem lieTriple_antisymm (u v w : Vec3) : Eq (lieTriple u v w) (neg (lieTriple v u w))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_derivation": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.lieTriple_derivation",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 30,
       "signature": "public theorem lieTriple_derivation (x y u v w : Vec3) : Eq (lieTriple x y (lieTriple u v w)) (add (add (lieTriple (lieTriple x y u) v w) (lieTriple u (lieTriple x y v) w)) (lieTriple u v (lieTriple x y w)))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_jacobi": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.lieTriple_jacobi",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 25,
       "signature": "public theorem lieTriple_jacobi (u v w : Vec3) : Eq (add (add (lieTriple u v w) (lieTriple v w u)) (lieTriple w u v)) zero",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_sectional_curvature_reversed": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.lieTriple_sectional_curvature_reversed",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 42,
       "signature": "public theorem lieTriple_sectional_curvature_reversed (u v : Vec3) : Eq ((lieTriple u v v).dot3 u) (gramAreaSq u v).neg",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_sectional_ratio": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.lieTriple_sectional_ratio",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 47,
       "signature": "public theorem lieTriple_sectional_ratio (u v : RatVec3) (h : Not (Eq (gramAreaSq u.num v.num) Int.zero)) : IntRatio.Equivalent ((rationalCurvatureNumerator u v).mul (rationalGramAreaSq u v).inv) (IntRatio.ofInt Int.one)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_unit_sectional_curvature": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.lieTriple_unit_sectional_curvature",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 37,
       "signature": "public theorem lieTriple_unit_sectional_curvature (u v : Vec3) : Eq ((lieTriple u v u).dot3 v) (gramAreaSq u v)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_non_scalar": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.reduced_word_non_scalar",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 96,
       "signature": "public theorem reduced_word_non_scalar (w : Word) (hr : IsReduced w) (hn : Not (Eq w .nil)) : Not (IsScalar (evalQuat w))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_normSq": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.reduced_word_normSq",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 87,
       "signature": "public theorem reduced_word_normSq (w : Word) : Eq (evalQuat w).normSq (powFive w.length)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_not_div_five": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.reduced_word_not_div_five",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 91,
       "signature": "public theorem reduced_word_not_div_five (w : Word) (hr : IsReduced w) : Not (AllDivisibleByFive (evalQuat w))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_split5_nonzero": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.reduced_word_split5_nonzero",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 82,
       "signature": "public theorem reduced_word_split5_nonzero (w : Word) (hr : IsReduced w) : Eq (evalSplit5 w).isZero .false",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_words_adjoint_injective": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup",
       "name": "D5.S3.Quantum.AURICOmega.OmegaLieTripleAndFreeGroup.reduced_words_adjoint_injective",
       "kind": "theorem",
-      "statement_id": "sha256:8a6eedee38dad515e21a5e44d57b56a7c986fe5cd4a0190d1a02a806a68f82ba",
+      "statement_id": "sha256:9a7bab45aa217d78b4424ebf244ab71b13c54a5233cb3261ceb185ad1dd2069b",
       "line": 101,
       "signature": "public theorem reduced_words_adjoint_injective (u v : Word) (hu : IsReduced u) (hv : IsReduced v) (sameX : (Ad (evalQuat u) (RatVec3.ofInt axisX)).Equiv (Ad (evalQuat v) (RatVec3.ofInt axisX))) (sameY : (Ad (evalQuat u) (RatVec3.ofInt axisY)).Equiv (Ad (evalQuat v) (RatVec3.ofInt axisY))) : Eq u v",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.adjugate_identities": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran",
       "name": "D5.S3.Quantum.AURICOmega.OmegaMatrixAndFractran.adjugate_identities",
       "kind": "theorem",
-      "statement_id": "sha256:99aa00fb4f2148d2f4e8b2719fcbf99ac4522c2733179090fc64d0a1864fd22b",
+      "statement_id": "sha256:d17cd934d73346a70e54a9f9bfa28fe2a67174fea3d1b531e42b90417d66c319",
       "line": 24,
       "signature": "public theorem adjugate_identities (A : Mat2) : And (Eq (A.mul A.adj) (Mat2.scale A.det Mat2.one)) (Eq (A.adj.mul A) (Mat2.scale A.det Mat2.one))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.cayley_hamilton": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran",
       "name": "D5.S3.Quantum.AURICOmega.OmegaMatrixAndFractran.cayley_hamilton",
       "kind": "theorem",
-      "statement_id": "sha256:99aa00fb4f2148d2f4e8b2719fcbf99ac4522c2733179090fc64d0a1864fd22b",
+      "statement_id": "sha256:d17cd934d73346a70e54a9f9bfa28fe2a67174fea3d1b531e42b90417d66c319",
       "line": 30,
       "signature": "public theorem cayley_hamilton (A : Mat2) : Eq (((A.mul A).sub (Mat2.scale A.trace A)).add (Mat2.scale A.det Mat2.one)) Mat2.zero",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_deterministic": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran",
       "name": "D5.S3.Quantum.AURICOmega.OmegaMatrixAndFractran.fractran_deterministic",
       "kind": "theorem",
-      "statement_id": "sha256:99aa00fb4f2148d2f4e8b2719fcbf99ac4522c2733179090fc64d0a1864fd22b",
+      "statement_id": "sha256:d17cd934d73346a70e54a9f9bfa28fe2a67174fea3d1b531e42b90417d66c319",
       "line": 58,
       "signature": "public theorem fractran_deterministic (prog : Fractran.Program) (n m₁ m₂ : Nat) (h₁ : Fractran.Step prog n m₁) (h₂ : Fractran.Step prog n m₂) : Eq m₁ m₂",
       "axioms": []
@@ -7173,16 +7350,18 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran",
       "name": "D5.S3.Quantum.AURICOmega.OmegaMatrixAndFractran.fractran_positive",
       "kind": "theorem",
-      "statement_id": "sha256:99aa00fb4f2148d2f4e8b2719fcbf99ac4522c2733179090fc64d0a1864fd22b",
+      "statement_id": "sha256:d17cd934d73346a70e54a9f9bfa28fe2a67174fea3d1b531e42b90417d66c319",
       "line": 63,
       "signature": "public theorem fractran_positive (prog : Fractran.Program) (k n : Nat) (h : Nat.lt Nat.zero n) : Nat.lt Nat.zero (Fractran.run prog k n)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_stable": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran",
       "name": "D5.S3.Quantum.AURICOmega.OmegaMatrixAndFractran.fractran_stable",
       "kind": "theorem",
-      "statement_id": "sha256:99aa00fb4f2148d2f4e8b2719fcbf99ac4522c2733179090fc64d0a1864fd22b",
+      "statement_id": "sha256:d17cd934d73346a70e54a9f9bfa28fe2a67174fea3d1b531e42b90417d66c319",
       "line": 68,
       "signature": "public theorem fractran_stable (prog : Fractran.Program) (k n : Nat) (h : Fractran.Halts prog (Fractran.run prog k n)) (extra : Nat) : Eq (Fractran.run prog (k.add extra) n) (Fractran.run prog k n)",
       "axioms": []
@@ -7191,7 +7370,7 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran",
       "name": "D5.S3.Quantum.AURICOmega.OmegaMatrixAndFractran.fractran_step_iff",
       "kind": "theorem",
-      "statement_id": "sha256:99aa00fb4f2148d2f4e8b2719fcbf99ac4522c2733179090fc64d0a1864fd22b",
+      "statement_id": "sha256:d17cd934d73346a70e54a9f9bfa28fe2a67174fea3d1b531e42b90417d66c319",
       "line": 53,
       "signature": "public theorem fractran_step_iff (prog : Fractran.Program) (n m : Nat) : Iff (Eq (Fractran.step prog n) (.some m)) (Fractran.Step prog n m)",
       "axioms": []
@@ -7200,7 +7379,7 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran",
       "name": "D5.S3.Quantum.AURICOmega.OmegaMatrixAndFractran.hurwitz_core_unit",
       "kind": "theorem",
-      "statement_id": "sha256:99aa00fb4f2148d2f4e8b2719fcbf99ac4522c2733179090fc64d0a1864fd22b",
+      "statement_id": "sha256:d17cd934d73346a70e54a9f9bfa28fe2a67174fea3d1b531e42b90417d66c319",
       "line": 35,
       "signature": "public theorem hurwitz_core_unit (u : Hurwitz.Core) : Eq u.doubled.normSq (Int.two.mul Int.two)",
       "axioms": []
@@ -7209,7 +7388,7 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran",
       "name": "D5.S3.Quantum.AURICOmega.OmegaMatrixAndFractran.mod_five_product_zero",
       "kind": "theorem",
-      "statement_id": "sha256:99aa00fb4f2148d2f4e8b2719fcbf99ac4522c2733179090fc64d0a1864fd22b",
+      "statement_id": "sha256:d17cd934d73346a70e54a9f9bfa28fe2a67174fea3d1b531e42b90417d66c319",
       "line": 47,
       "signature": "public theorem mod_five_product_zero (g h : Hurwitz.Generator) : Eq ((Hurwitz.split5 g.coordinates).mul (Hurwitz.split5 h.coordinates)).isZero (g.isOpposite h)",
       "axioms": []
@@ -7218,7 +7397,7 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran",
       "name": "D5.S3.Quantum.AURICOmega.OmegaMatrixAndFractran.mod_five_rank_one",
       "kind": "theorem",
-      "statement_id": "sha256:99aa00fb4f2148d2f4e8b2719fcbf99ac4522c2733179090fc64d0a1864fd22b",
+      "statement_id": "sha256:d17cd934d73346a70e54a9f9bfa28fe2a67174fea3d1b531e42b90417d66c319",
       "line": 40,
       "signature": "public theorem mod_five_rank_one (g : Hurwitz.Generator) : let f",
       "axioms": []
@@ -7227,88 +7406,106 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran",
       "name": "D5.S3.Quantum.AURICOmega.OmegaMatrixAndFractran.trace_mul_comm",
       "kind": "theorem",
-      "statement_id": "sha256:99aa00fb4f2148d2f4e8b2719fcbf99ac4522c2733179090fc64d0a1864fd22b",
+      "statement_id": "sha256:d17cd934d73346a70e54a9f9bfa28fe2a67174fea3d1b531e42b90417d66c319",
       "line": 20,
       "signature": "public theorem trace_mul_comm (A B : Mat2) : Eq (A.mul B).trace (B.mul A).trace",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.phi_fibonacci": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur",
       "name": "D5.S3.Quantum.AURICOmega.OmegaQuadraticAndSchur.phi_fibonacci",
       "kind": "theorem",
-      "statement_id": "sha256:91c1a510ebf1e261ef4b11cc47a41dbf42ad1c251902ab2c76fb3085a60b4162",
+      "statement_id": "sha256:e490b5a7873bc9a8ecd36d17887e323c6cee2f6151c9f9b60766bc5dbccabf5d",
       "line": 33,
       "signature": "public theorem phi_fibonacci (n : Nat) : Equivalent rationalRing (pow rationalRing (alpha (b",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.phi_power_norm": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur",
       "name": "D5.S3.Quantum.AURICOmega.OmegaQuadraticAndSchur.phi_power_norm",
       "kind": "theorem",
-      "statement_id": "sha256:91c1a510ebf1e261ef4b11cc47a41dbf42ad1c251902ab2c76fb3085a60b4162",
+      "statement_id": "sha256:e490b5a7873bc9a8ecd36d17887e323c6cee2f6151c9f9b60766bc5dbccabf5d",
       "line": 39,
       "signature": "public theorem phi_power_norm (n : Nat) : FiniteRatio.Equivalent (norm rationalRing (pow rationalRing (alpha (b",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.quadratic_mul_inv": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur",
       "name": "D5.S3.Quantum.AURICOmega.OmegaQuadraticAndSchur.quadratic_mul_inv",
       "kind": "theorem",
-      "statement_id": "sha256:91c1a510ebf1e261ef4b11cc47a41dbf42ad1c251902ab2c76fb3085a60b4162",
+      "statement_id": "sha256:e490b5a7873bc9a8ecd36d17887e323c6cee2f6151c9f9b60766bc5dbccabf5d",
       "line": 27,
       "signature": "public theorem quadratic_mul_inv (b c : Int) (z : RatQuadPoly b c) (h : Not (Eq (norm rationalRing z).num Int.zero)) : Equivalent rationalRing (mul rationalRing z z.inv) (QuadPoly.one rationalRing)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.quadratic_norm_mul": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur",
       "name": "D5.S3.Quantum.AURICOmega.OmegaQuadraticAndSchur.quadratic_norm_mul",
       "kind": "theorem",
-      "statement_id": "sha256:91c1a510ebf1e261ef4b11cc47a41dbf42ad1c251902ab2c76fb3085a60b4162",
+      "statement_id": "sha256:e490b5a7873bc9a8ecd36d17887e323c6cee2f6151c9f9b60766bc5dbccabf5d",
       "line": 21,
       "signature": "public theorem quadratic_norm_mul (b c : Int) (z w : RatQuadPoly b c) : FiniteRatio.Equivalent (norm rationalRing (mul rationalRing z w)) ((norm rationalRing z).mul (norm rationalRing w))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_cauchy_schwarz": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur",
       "name": "D5.S3.Quantum.AURICOmega.OmegaQuadraticAndSchur.rational_cauchy_schwarz",
       "kind": "theorem",
-      "statement_id": "sha256:91c1a510ebf1e261ef4b11cc47a41dbf42ad1c251902ab2c76fb3085a60b4162",
+      "statement_id": "sha256:e490b5a7873bc9a8ecd36d17887e323c6cee2f6151c9f9b60766bc5dbccabf5d",
       "line": 63,
       "signature": "public theorem rational_cauchy_schwarz (xs : Sequence (CoordinatePair FiniteRatio)) : (FiniteRatio.square (sumUV rationalRing xs)).Le ((sumU2 rationalRing xs).mul (sumV2 rationalRing xs))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_lagrange_gram": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur",
       "name": "D5.S3.Quantum.AURICOmega.OmegaQuadraticAndSchur.rational_lagrange_gram",
       "kind": "theorem",
-      "statement_id": "sha256:91c1a510ebf1e261ef4b11cc47a41dbf42ad1c251902ab2c76fb3085a60b4162",
+      "statement_id": "sha256:e490b5a7873bc9a8ecd36d17887e323c6cee2f6151c9f9b60766bc5dbccabf5d",
       "line": 58,
       "signature": "public theorem rational_lagrange_gram (xs : Sequence (CoordinatePair FiniteRatio)) : FiniteRatio.Equivalent (gramDet rationalRing xs) (minorSquares rationalRing xs)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_complete": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur",
       "name": "D5.S3.Quantum.AURICOmega.OmegaQuadraticAndSchur.rational_schur_complete",
       "kind": "theorem",
-      "statement_id": "sha256:91c1a510ebf1e261ef4b11cc47a41dbf42ad1c251902ab2c76fb3085a60b4162",
+      "statement_id": "sha256:e490b5a7873bc9a8ecd36d17887e323c6cee2f6151c9f9b60766bc5dbccabf5d",
       "line": 69,
       "signature": "public theorem rational_schur_complete (a b c x y : FiniteRatio) (hc : Not (Eq c.num Int.zero)) : FiniteRatio.Equivalent (scalarForm a b c x y) ((schurValue a b c x).add (schurSquare b c x y))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_min": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur",
       "name": "D5.S3.Quantum.AURICOmega.OmegaQuadraticAndSchur.rational_schur_min",
       "kind": "theorem",
-      "statement_id": "sha256:91c1a510ebf1e261ef4b11cc47a41dbf42ad1c251902ab2c76fb3085a60b4162",
+      "statement_id": "sha256:e490b5a7873bc9a8ecd36d17887e323c6cee2f6151c9f9b60766bc5dbccabf5d",
       "line": 75,
       "signature": "public theorem rational_schur_min (a b c x : FiniteRatio) (hc : FiniteRatio.zero.Lt c) : And (∀ y : FiniteRatio, (schurValue a b c x).Le (scalarForm a b c x y)) (FiniteRatio.Equivalent (scalarForm a b c x (schurMinPoint b c x)) (schurValue a b c x))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.sqrt_two_bell": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur",
       "name": "D5.S3.Quantum.AURICOmega.OmegaQuadraticAndSchur.sqrt_two_bell",
       "kind": "theorem",
-      "statement_id": "sha256:91c1a510ebf1e261ef4b11cc47a41dbf42ad1c251902ab2c76fb3085a60b4162",
+      "statement_id": "sha256:e490b5a7873bc9a8ecd36d17887e323c6cee2f6151c9f9b60766bc5dbccabf5d",
       "line": 52,
       "signature": "public theorem sqrt_two_bell : QSqrt2.scalarRing.eqv (QSqrt2.scalarRing.square QSqrt2.bell) (ofScalar rationalRing (FiniteRatio.ofInt (Int.two.mul (Int.two.mul Int.two))))",
       "axioms": []
@@ -7317,65 +7514,67 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur",
       "name": "D5.S3.Quantum.AURICOmega.OmegaQuadraticAndSchur.sqrt_two_spinor",
       "kind": "theorem",
-      "statement_id": "sha256:91c1a510ebf1e261ef4b11cc47a41dbf42ad1c251902ab2c76fb3085a60b4162",
+      "statement_id": "sha256:e490b5a7873bc9a8ecd36d17887e323c6cee2f6151c9f9b60766bc5dbccabf5d",
       "line": 45,
       "signature": "public theorem sqrt_two_spinor : And (QSqrt2.scalarRing.eqv (QSqrt2.normSq QSqrt2.u90) QSqrt2.scalarRing.one) (QSqrt2.spinorRing.eqv (pow QSqrt2.scalarRing QSqrt2.u90 (Nat.add QSqrt2.fourNat QSqrt2.fourNat)) QSqrt2.spinorRing.one)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.cayley_circle_unit": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
       "name": "D5.S3.Quantum.AURICOmega.OmegaShadowBridge.cayley_circle_unit",
       "kind": "theorem",
-      "statement_id": "sha256:e56007f77e499c7f76c9c0e279d9cb2f698b2d9d469aed66859937c4eff68a71",
-      "line": 233,
+      "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
+      "line": 246,
       "signature": "public theorem cayley_circle_unit (p q : Omega.Int) (h : Nonzero p q) : toReal (cayleyX p q) ^ 2 + toReal (cayleyY p q) ^ 2 = 1"
     },
     "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.kappa_unit_interval": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
       "name": "D5.S3.Quantum.AURICOmega.OmegaShadowBridge.kappa_unit_interval",
       "kind": "theorem",
-      "statement_id": "sha256:e56007f77e499c7f76c9c0e279d9cb2f698b2d9d469aed66859937c4eff68a71",
-      "line": 276,
+      "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
+      "line": 289,
       "signature": "public theorem kappa_unit_interval (p q : Omega.Int) : 0 ≤ toReal (kappa p q) ∧ toReal (kappa p q) ≤ 1"
     },
     "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_add": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
       "name": "D5.S3.Quantum.AURICOmega.OmegaShadowBridge.toRat_add",
       "kind": "theorem",
-      "statement_id": "sha256:e56007f77e499c7f76c9c0e279d9cb2f698b2d9d469aed66859937c4eff68a71",
-      "line": 171,
+      "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
+      "line": 176,
       "signature": "public theorem toRat_add (a c : Omega.Int) (b d : Omega.Nat) : toRat ((IntRatio.fraction a b).add (IntRatio.fraction c d)) = toRat (IntRatio.fraction a b) + toRat (IntRatio.fraction c d)"
     },
     "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_equivalent": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
       "name": "D5.S3.Quantum.AURICOmega.OmegaShadowBridge.toRat_equivalent",
       "kind": "theorem",
-      "statement_id": "sha256:e56007f77e499c7f76c9c0e279d9cb2f698b2d9d469aed66859937c4eff68a71",
-      "line": 155,
+      "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
+      "line": 160,
       "signature": "public theorem toRat_equivalent {x y : IntRatio} (h : IntRatio.Equivalent x y) : toRat x = toRat y"
     },
     "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_inv": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
       "name": "D5.S3.Quantum.AURICOmega.OmegaShadowBridge.toRat_inv",
       "kind": "theorem",
-      "statement_id": "sha256:e56007f77e499c7f76c9c0e279d9cb2f698b2d9d469aed66859937c4eff68a71",
-      "line": 186,
+      "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
+      "line": 198,
       "signature": "public theorem toRat_inv (x : IntRatio) : toRat x.inv = (toRat x)⁻¹"
     },
     "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_mul": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
       "name": "D5.S3.Quantum.AURICOmega.OmegaShadowBridge.toRat_mul",
       "kind": "theorem",
-      "statement_id": "sha256:e56007f77e499c7f76c9c0e279d9cb2f698b2d9d469aed66859937c4eff68a71",
-      "line": 181,
+      "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
+      "line": 186,
       "signature": "public theorem toRat_mul (x y : IntRatio) : toRat (x.mul y) = toRat x * toRat y"
     },
     "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdInt_add": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
       "name": "D5.S3.Quantum.AURICOmega.OmegaShadowBridge.toStdInt_add",
       "kind": "theorem",
-      "statement_id": "sha256:e56007f77e499c7f76c9c0e279d9cb2f698b2d9d469aed66859937c4eff68a71",
-      "line": 83,
+      "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
+      "line": 88,
       "signature": "public theorem toStdInt_add (a b : Omega.Int) : toStdInt (a.add b) = toStdInt a + toStdInt b",
       "axioms": [
         "Quot.sound",
@@ -7386,8 +7585,8 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
       "name": "D5.S3.Quantum.AURICOmega.OmegaShadowBridge.toStdInt_mul",
       "kind": "theorem",
-      "statement_id": "sha256:e56007f77e499c7f76c9c0e279d9cb2f698b2d9d469aed66859937c4eff68a71",
-      "line": 109,
+      "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
+      "line": 114,
       "signature": "public theorem toStdInt_mul (a b : Omega.Int) : toStdInt (a.mul b) = toStdInt a * toStdInt b",
       "axioms": [
         "Quot.sound",
@@ -7398,8 +7597,8 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
       "name": "D5.S3.Quantum.AURICOmega.OmegaShadowBridge.toStdInt_neg",
       "kind": "theorem",
-      "statement_id": "sha256:e56007f77e499c7f76c9c0e279d9cb2f698b2d9d469aed66859937c4eff68a71",
-      "line": 60,
+      "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
+      "line": 67,
       "signature": "public theorem toStdInt_neg (a : Omega.Int) : toStdInt a.neg = -toStdInt a",
       "axioms": [
         "Quot.sound",
@@ -7410,8 +7609,8 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
       "name": "D5.S3.Quantum.AURICOmega.OmegaShadowBridge.toStdNat_add",
       "kind": "theorem",
-      "statement_id": "sha256:e56007f77e499c7f76c9c0e279d9cb2f698b2d9d469aed66859937c4eff68a71",
-      "line": 32,
+      "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
+      "line": 34,
       "signature": "public theorem toStdNat_add (a b : Omega.Nat) : toStdNat (a.add b) = toStdNat a + toStdNat b",
       "axioms": []
     },
@@ -7419,8 +7618,8 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaShadowBridge",
       "name": "D5.S3.Quantum.AURICOmega.OmegaShadowBridge.toStdNat_mul",
       "kind": "theorem",
-      "statement_id": "sha256:e56007f77e499c7f76c9c0e279d9cb2f698b2d9d469aed66859937c4eff68a71",
-      "line": 40,
+      "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
+      "line": 44,
       "signature": "public theorem toStdNat_mul (a b : Omega.Nat) : toStdNat (a.mul b) = toStdNat a * toStdNat b",
       "axioms": [
         "propext"
@@ -7430,7 +7629,7 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSimplicialExactness.d0_H1_add_H2_d1",
       "kind": "theorem",
-      "statement_id": "sha256:3047ae1e54ed9d7bb4811bdfdb2b45d9d57484f5d2846c058e762b3cef586eca",
+      "statement_id": "sha256:426eeed626003823cdb97b255c6185dbfe5fae2534d59b4c49e534e20854e0d3",
       "line": 42,
       "signature": "public theorem d0_H1_add_H2_d1 (G : AddCommGroup A) (laws : G.Laws) (base : V) (e : C1 V A) (x y : V) : Eq (G.add (d0 G (H1 base e) x y) (H2 base (d1 G e) x y)) (e x y)",
       "axioms": []
@@ -7439,7 +7638,7 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSimplicialExactness.d1_H2_add_H3_d2",
       "kind": "theorem",
-      "statement_id": "sha256:3047ae1e54ed9d7bb4811bdfdb2b45d9d57484f5d2846c058e762b3cef586eca",
+      "statement_id": "sha256:426eeed626003823cdb97b255c6185dbfe5fae2534d59b4c49e534e20854e0d3",
       "line": 48,
       "signature": "public theorem d1_H2_add_H3_d2 (G : AddCommGroup A) (laws : G.Laws) (base : V) (F : C2 V A) (x y z : V) : Eq (G.add (d1 G (H2 base F) x y z) (H3 base (d2 G F) x y z)) (F x y z)",
       "axioms": []
@@ -7448,7 +7647,7 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSimplicialExactness.d1_H2_of_d2_eq_zero",
       "kind": "theorem",
-      "statement_id": "sha256:3047ae1e54ed9d7bb4811bdfdb2b45d9d57484f5d2846c058e762b3cef586eca",
+      "statement_id": "sha256:426eeed626003823cdb97b255c6185dbfe5fae2534d59b4c49e534e20854e0d3",
       "line": 54,
       "signature": "public theorem d1_H2_of_d2_eq_zero (G : AddCommGroup A) (laws : G.Laws) (base : V) (F : C2 V A) (closed : ∀ x y z w, Eq (d2 G F x y z w) G.zero) (x y z : V) : Eq (d1 G (H2 base F) x y z) (F x y z)",
       "axioms": []
@@ -7457,7 +7656,7 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSimplicialExactness.d1_d0",
       "kind": "theorem",
-      "statement_id": "sha256:3047ae1e54ed9d7bb4811bdfdb2b45d9d57484f5d2846c058e762b3cef586eca",
+      "statement_id": "sha256:426eeed626003823cdb97b255c6185dbfe5fae2534d59b4c49e534e20854e0d3",
       "line": 32,
       "signature": "public theorem d1_d0 (G : AddCommGroup A) (laws : G.Laws) (f : C0 V A) (x y z : V) : Eq (d1 G (d0 G f) x y z) G.zero",
       "axioms": []
@@ -7466,7 +7665,7 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSimplicialExactness.d2_d1",
       "kind": "theorem",
-      "statement_id": "sha256:3047ae1e54ed9d7bb4811bdfdb2b45d9d57484f5d2846c058e762b3cef586eca",
+      "statement_id": "sha256:426eeed626003823cdb97b255c6185dbfe5fae2534d59b4c49e534e20854e0d3",
       "line": 37,
       "signature": "public theorem d2_d1 (G : AddCommGroup A) (laws : G.Laws) (e : C1 V A) (x y z w : V) : Eq (d2 G (d1 G e) x y z w) G.zero",
       "axioms": []
@@ -7475,7 +7674,7 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSimplicialExactness.d2_eq_zero_iff",
       "kind": "theorem",
-      "statement_id": "sha256:3047ae1e54ed9d7bb4811bdfdb2b45d9d57484f5d2846c058e762b3cef586eca",
+      "statement_id": "sha256:426eeed626003823cdb97b255c6185dbfe5fae2534d59b4c49e534e20854e0d3",
       "line": 60,
       "signature": "public theorem d2_eq_zero_iff (G : AddCommGroup A) (laws : G.Laws) (base : V) (F : C2 V A) : Iff (∀ x y z w, Eq (d2 G F x y z w) G.zero) (Exists fun e : C1 V A => ∀ x y z, Eq (d1 G e x y z) (F x y z))",
       "axioms": []
@@ -7484,7 +7683,7 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSimplicialExactness.sum_d0",
       "kind": "theorem",
-      "statement_id": "sha256:3047ae1e54ed9d7bb4811bdfdb2b45d9d57484f5d2846c058e762b3cef586eca",
+      "statement_id": "sha256:426eeed626003823cdb97b255c6185dbfe5fae2534d59b4c49e534e20854e0d3",
       "line": 20,
       "signature": "public theorem sum_d0 (G : AddCommGroup A) (laws : G.Laws) (f : C0 V A) {first last : V} (chain : VertexChain V first last) : Eq (chain.sum G (d0 G f)) (d0 G f first last)",
       "axioms": []
@@ -7493,7 +7692,7 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSimplicialExactness.sum_d0_loop",
       "kind": "theorem",
-      "statement_id": "sha256:3047ae1e54ed9d7bb4811bdfdb2b45d9d57484f5d2846c058e762b3cef586eca",
+      "statement_id": "sha256:426eeed626003823cdb97b255c6185dbfe5fae2534d59b4c49e534e20854e0d3",
       "line": 26,
       "signature": "public theorem sum_d0_loop (G : AddCommGroup A) (laws : G.Laws) (f : C0 V A) {base : V} (chain : VertexChain V base base) : Eq (chain.sum G (d0 G f)) G.zero",
       "axioms": []
@@ -7502,154 +7701,188 @@
       "module": "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal",
       "kind": "theorem",
-      "statement_id": "sha256:62c56f882902c5f58e6dd137eb5c5e7470bb075cd9ac7db031ab6ca7fbf02973",
+      "statement_id": "sha256:5e300d4c457025beaec1d67fcfcbbd50acc808ffa6eda14404c0ea4a11638b39",
       "line": 38,
       "signature": "public theorem all_degree_peter_weyl_orthonormal (m n : Nat) : Equivalent (haarInner (evenCharPoly m) (evenCharPoly n)) (degreeDelta m n)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.alpha_sampling_norm_drift": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSphericalHaarMidpoint.alpha_sampling_norm_drift",
       "kind": "theorem",
-      "statement_id": "sha256:62c56f882902c5f58e6dd137eb5c5e7470bb075cd9ac7db031ab6ca7fbf02973",
+      "statement_id": "sha256:5e300d4c457025beaec1d67fcfcbbd50acc808ffa6eda14404c0ea4a11638b39",
       "line": 64,
       "signature": "public theorem alpha_sampling_norm_drift (weight : IntRatio) (a x₀ : RationalQuaternion) (finite : weight.Finite) (pure : Eq a.num.w Int.zero) (unit : x₀.IsUnit) : let x",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.evenChar_product_sum": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSphericalHaarMidpoint.evenChar_product_sum",
       "kind": "theorem",
-      "statement_id": "sha256:62c56f882902c5f58e6dd137eb5c5e7470bb075cd9ac7db031ab6ca7fbf02973",
+      "statement_id": "sha256:5e300d4c457025beaec1d67fcfcbbd50acc808ffa6eda14404c0ea4a11638b39",
       "line": 27,
       "signature": "public theorem evenChar_product_sum (m n : Nat) : Poly.RatioSame ((evenCharPoly m).mul (evenCharPoly n)) (evenCharProductSum m n)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.haar_evenChar_expectation": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSphericalHaarMidpoint.haar_evenChar_expectation",
       "kind": "theorem",
-      "statement_id": "sha256:62c56f882902c5f58e6dd137eb5c5e7470bb075cd9ac7db031ab6ca7fbf02973",
+      "statement_id": "sha256:5e300d4c457025beaec1d67fcfcbbd50acc808ffa6eda14404c0ea4a11638b39",
       "line": 33,
       "signature": "public theorem haar_evenChar_expectation (r : Nat) : Equivalent (haarKappaPoly (evenCharPoly r)) (zeroDelta r)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.midpoint_half_step_fidelity": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSphericalHaarMidpoint.midpoint_half_step_fidelity",
       "kind": "theorem",
-      "statement_id": "sha256:62c56f882902c5f58e6dd137eb5c5e7470bb075cd9ac7db031ab6ca7fbf02973",
+      "statement_id": "sha256:5e300d4c457025beaec1d67fcfcbbd50acc808ffa6eda14404c0ea4a11638b39",
       "line": 77,
       "signature": "public theorem midpoint_half_step_fidelity (a x₀ : RationalQuaternion) (pure : Eq a.num.w Int.zero) (unit : x₀.IsUnit) : let h",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.midpoint_unit_norm": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSphericalHaarMidpoint.midpoint_unit_norm",
       "kind": "theorem",
-      "statement_id": "sha256:62c56f882902c5f58e6dd137eb5c5e7470bb075cd9ac7db031ab6ca7fbf02973",
+      "statement_id": "sha256:5e300d4c457025beaec1d67fcfcbbd50acc808ffa6eda14404c0ea4a11638b39",
       "line": 72,
       "signature": "public theorem midpoint_unit_norm (a x₀ : RationalQuaternion) (pure : Eq a.num.w Int.zero) (unit : x₀.IsUnit) : (midpointStep a x₀).IsUnit",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.rational_spherical_pythagorean": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSphericalHaarMidpoint.rational_spherical_pythagorean",
       "kind": "theorem",
-      "statement_id": "sha256:62c56f882902c5f58e6dd137eb5c5e7470bb075cd9ac7db031ab6ca7fbf02973",
+      "statement_id": "sha256:5e300d4c457025beaec1d67fcfcbbd50acc808ffa6eda14404c0ea4a11638b39",
       "line": 56,
       "signature": "public theorem rational_spherical_pythagorean (a b c : Quad4) (ha : Not (Eq a Quad4.zero)) (hb : Not (Eq b Quad4.zero)) (hc : Not (Eq c Quad4.zero)) (right : Eq ((a.dot a).mul (b.dot c)) ((a.dot b).mul (a.dot c))) : Equivalent (kappa b c) ((kappa a b).mul (kappa c a))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.rational_spherical_sine_law": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint",
       "name": "D5.S3.Quantum.AURICOmega.OmegaSphericalHaarMidpoint.rational_spherical_sine_law",
       "kind": "theorem",
-      "statement_id": "sha256:62c56f882902c5f58e6dd137eb5c5e7470bb075cd9ac7db031ab6ca7fbf02973",
+      "statement_id": "sha256:5e300d4c457025beaec1d67fcfcbbd50acc808ffa6eda14404c0ea4a11638b39",
       "line": 43,
       "signature": "public theorem rational_spherical_sine_law (a b c : Quad4) (ha : Not (Eq a Quad4.zero)) (hb : Not (Eq b Quad4.zero)) (hc : Not (Eq c Quad4.zero)) (sab : Not (Equivalent (spread a b) IntRatio.zero)) (sbc : Not (Equivalent (spread b c) IntRatio.zero)) (sca : Not (Equivalent (spread c a) IntRatio.zero)) : And (Equivalent ((vertexSpread a b c).mul (spread b c).inv) ((vertexSpread b c a).mul (spread c a).inv)) (Equivalent ((vertexSpread b c a).mul (spread c a).inv) ((vertexSpread c a b).mul (spread a b).inv))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.kappa_heap_invariant": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaTernionHeap",
       "name": "D5.S3.Quantum.AURICOmega.OmegaTernionHeap.kappa_heap_invariant",
       "kind": "theorem",
-      "statement_id": "sha256:1fa621c846e43c441d865b7236bc86c5ac295415c9684c0b0cb20fa0d5300be2",
+      "statement_id": "sha256:7bbfe3d4775d78087bd77cb6ff48e8cf0b2dd45a5c345f3c8a270d86ad2a73df",
       "line": 49,
       "signature": "public theorem kappa_heap_invariant (a b u v : Quaternion) (hu : u.Nonzero) (hv : v.Nonzero) : IntRatio.Equivalent (kappa (triad a u v) (triad b u v)) (kappa a b)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.kappa_le_one": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaTernionHeap",
       "name": "D5.S3.Quantum.AURICOmega.OmegaTernionHeap.kappa_le_one",
       "kind": "theorem",
-      "statement_id": "sha256:1fa621c846e43c441d865b7236bc86c5ac295415c9684c0b0cb20fa0d5300be2",
+      "statement_id": "sha256:7bbfe3d4775d78087bd77cb6ff48e8cf0b2dd45a5c345f3c8a270d86ad2a73df",
       "line": 44,
       "signature": "public theorem kappa_le_one (a b : Quaternion) (ha : a.Nonzero) (hb : b.Nonzero) : IntRatio.Le (kappa a b) (IntRatio.ofInt Int.one)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.lagrange_identity": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaTernionHeap",
       "name": "D5.S3.Quantum.AURICOmega.OmegaTernionHeap.lagrange_identity",
       "kind": "theorem",
-      "statement_id": "sha256:1fa621c846e43c441d865b7236bc86c5ac295415c9684c0b0cb20fa0d5300be2",
+      "statement_id": "sha256:7bbfe3d4775d78087bd77cb6ff48e8cf0b2dd45a5c345f3c8a270d86ad2a73df",
       "line": 39,
       "signature": "public theorem lagrange_identity (a b : Quaternion) : Eq ((Int.ofNat (a.normSq.mul b.normSq)).sub (Int.square (a.dot b))) (minorSquares a b)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.lift_normSq": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaTernionHeap",
       "name": "D5.S3.Quantum.AURICOmega.OmegaTernionHeap.lift_normSq",
       "kind": "theorem",
-      "statement_id": "sha256:1fa621c846e43c441d865b7236bc86c5ac295415c9684c0b0cb20fa0d5300be2",
+      "statement_id": "sha256:7bbfe3d4775d78087bd77cb6ff48e8cf0b2dd45a5c345f3c8a270d86ad2a73df",
       "line": 54,
       "signature": "public theorem lift_normSq (a b c d : Int) : Eq (PythSpinor.liftNum a b c d).normSq ((PythSpinor.liftRadius a b c d).mul (PythSpinor.liftRadius a b c d))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.normSq_mul": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaTernionHeap",
       "name": "D5.S3.Quantum.AURICOmega.OmegaTernionHeap.normSq_mul",
       "kind": "theorem",
-      "statement_id": "sha256:1fa621c846e43c441d865b7236bc86c5ac295415c9684c0b0cb20fa0d5300be2",
+      "statement_id": "sha256:7bbfe3d4775d78087bd77cb6ff48e8cf0b2dd45a5c345f3c8a270d86ad2a73df",
       "line": 18,
       "signature": "public theorem normSq_mul (a b : Quaternion) : Eq (a.mul b).normSq (a.normSq.mul b.normSq)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.quadratic_kernel": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaTernionHeap",
       "name": "D5.S3.Quantum.AURICOmega.OmegaTernionHeap.quadratic_kernel",
       "kind": "theorem",
-      "statement_id": "sha256:1fa621c846e43c441d865b7236bc86c5ac295415c9684c0b0cb20fa0d5300be2",
+      "statement_id": "sha256:7bbfe3d4775d78087bd77cb6ff48e8cf0b2dd45a5c345f3c8a270d86ad2a73df",
       "line": 60,
       "signature": "public theorem quadratic_kernel (p q : PythSpinor) : IntRatio.Equivalent (PythSpinor.kappa_proj p q) (let d",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_assoc": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaTernionHeap",
       "name": "D5.S3.Quantum.AURICOmega.OmegaTernionHeap.triad_assoc",
       "kind": "theorem",
-      "statement_id": "sha256:1fa621c846e43c441d865b7236bc86c5ac295415c9684c0b0cb20fa0d5300be2",
+      "statement_id": "sha256:7bbfe3d4775d78087bd77cb6ff48e8cf0b2dd45a5c345f3c8a270d86ad2a73df",
       "line": 33,
       "signature": "public theorem triad_assoc (x y z u v : Quaternion) (hx : x.Nonzero) (hy : y.Nonzero) (hz : z.Nonzero) (hu : u.Nonzero) (hv : v.Nonzero) : RayEquiv (triad (triad x y z) u v) (triad x y (triad z u v))",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_left_absorption": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaTernionHeap",
       "name": "D5.S3.Quantum.AURICOmega.OmegaTernionHeap.triad_left_absorption",
       "kind": "theorem",
-      "statement_id": "sha256:1fa621c846e43c441d865b7236bc86c5ac295415c9684c0b0cb20fa0d5300be2",
+      "statement_id": "sha256:7bbfe3d4775d78087bd77cb6ff48e8cf0b2dd45a5c345f3c8a270d86ad2a73df",
       "line": 23,
       "signature": "public theorem triad_left_absorption (x z : Quaternion) (hx : x.Nonzero) (hz : z.Nonzero) : RayEquiv (triad x x z) z",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_right_absorption": {
       "module": "D5/S3/Quantum/AURICOmega/OmegaTernionHeap",
       "name": "D5.S3.Quantum.AURICOmega.OmegaTernionHeap.triad_right_absorption",
       "kind": "theorem",
-      "statement_id": "sha256:1fa621c846e43c441d865b7236bc86c5ac295415c9684c0b0cb20fa0d5300be2",
+      "statement_id": "sha256:7bbfe3d4775d78087bd77cb6ff48e8cf0b2dd45a5c345f3c8a270d86ad2a73df",
       "line": 28,
       "signature": "public theorem triad_right_absorption (x z : Quaternion) (hx : x.Nonzero) (hz : z.Nonzero) : RayEquiv (triad x z z) x",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/Products/QuaternionProductFeatureRank.least_feature_rank": {
       "module": "D5/S3/Quantum/AURICOmega/Products/QuaternionProductFeatureRank",
@@ -7663,10 +7896,12 @@
       "module": "D5/S3/Quantum/AURICOmega/ProjectiveOverlapScaling",
       "name": "D5.S3.Quantum.AURICOmega.ProjectiveOverlapScaling.kappa_scale",
       "kind": "theorem",
-      "statement_id": "sha256:9cddadc2b821bf0dc9c22a854f6fc904fd18de86232aa18e711c4fedad84d4d1",
+      "statement_id": "sha256:8b1bafc5cbe93d1a422d07cb0cbc8f533a83f2060bc27e5e3f9b1492c968bf09",
       "line": 17,
       "signature": "public theorem kappa_scale (p q k : Omega.Nat) : Omega.Ratio.Equivalent (Omega.Projective.kappa (p.mul k.succ) (q.mul k.succ)) (Omega.Projective.kappa p q)",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/ProjectiveQuaternionModel.projectiveModel_featureRank_ten": {
       "module": "D5/S3/Quantum/AURICOmega/ProjectiveQuaternionModel",
@@ -7872,10 +8107,20 @@
       "module": "D5/S3/Quantum/AURICOmega/RationalBlochTetrahedron",
       "name": "D5.S3.Quantum.AURICOmega.RationalBlochTetrahedron.no_rational_bloch_tetrahedral_triangle",
       "kind": "theorem",
-      "statement_id": "sha256:e254ad274521e90a88ba570b078bb8642cfe40ceb88eeebe26200b48e2da926b",
+      "statement_id": "sha256:cedd13913d15484f709e9881ba335e3c2b2dea5fdb58754f75bd10b175b0bf1c",
       "line": 19,
       "signature": "public theorem no_rational_bloch_tetrahedral_triangle (a b : Quad4) (denominator : Nat) (c : Quad4) (hden : Not (Eq denominator Nat.zero)) (ha : Eq a.w Int.zero) (hb : Eq b.w Int.zero) (hc : Eq c.w Int.zero) (haa : Eq (a.dot a) (Int.ofNat (denominator.mul denominator))) (hbb : Eq (b.dot b) (Int.ofNat (denominator.mul denominator))) (hcc : Eq (c.dot c) (Int.ofNat (denominator.mul denominator))) (hab : Eq ((Int.ofNat Nat.one.succ.succ).mul (a.dot b)) (Int.ofNat (denominator.mul denominator)).neg) (hbc : Eq ((Int.ofNat Nat.one.succ.succ).mul (b.dot c)) (Int.ofNat (denominator.mul denominator)).ne",
-      "axioms": []
+      "axioms": [
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/AURICOmega/RationalUnitTripleGram.rationalFiveCoordinateUnitTriple": {
+      "module": "D5/S3/Quantum/AURICOmega/RationalUnitTripleGram",
+      "name": "D5.S3.Quantum.AURICOmega.RationalUnitTripleGram.rationalFiveCoordinateUnitTriple",
+      "kind": "theorem",
+      "statement_id": "sha256:0f62f274462f1c71185055e06b85b7f5cd2065d245025c25b709f6631a671f3e",
+      "line": 176,
+      "signature": "theorem rationalFiveCoordinateUnitTriple (a b c : ℚ) (ha : 0 ≤ 1 - a^2) (hb : 0 ≤ 1 - b^2) : (∃ u v w : Fin 5 → ℚ, u ⬝ᵥ u = 1 ∧ v ⬝ᵥ v = 1 ∧ w ⬝ᵥ w = 1 ∧ u ⬝ᵥ v = a ∧ u ⬝ᵥ w = b ∧ v ⬝ᵥ w = c) ↔ (∃ i j k : ℚ, 1 + 2*a*b*c - a^2 - b^2 - c^2 = i^2 + j^2 + k^2)"
     },
     "D5/S3/Quantum/AURICOmega/RayKernelFibreExtremum.rayKernel_isGreatest_and_integral": {
       "module": "D5/S3/Quantum/AURICOmega/RayKernelFibreExtremum",
@@ -9225,8 +9470,8 @@
       "module": "D5/S3/Quantum/Entanglement/Marginals/FibRationalBoundary",
       "name": "D5.S3.Quantum.Entanglement.Marginals.FibRationalBoundary.rational_rank_three_boundary_iff",
       "kind": "theorem",
-      "statement_id": "sha256:2e029eb8d024304abd9b67c02ec4f6fe0da1a80835c4b88a259d132197c7e208",
-      "line": 317,
+      "statement_id": "sha256:a030cde30578b3b64fe6c55878a90e085f0315fb06be9865ccbd81df7afcdd62",
+      "line": 321,
       "signature": "theorem rational_rank_three_boundary_iff (b : ℝ) (L R : Matrix Bool Bool ℂ) (u v w : ℂ) (hb : 0 < b) (qL : ∀ i j, RationalEntry (L i j)) (qR : ∀ i j, RationalEntry (R i j)) (qu : RationalEntry u) (qv : RationalEntry v) (qw : RationalEntry w) (he : CoherentExtendible b L R u v w) : let A"
     },
     "D5/S3/Quantum/Entanglement/Marginals/FibRationalPureExtension.rational_pure_coupling_iff": {
@@ -9281,8 +9526,8 @@
       "module": "D5/S3/Quantum/Entanglement/Marginals/RationalQubitMixedEndpoint",
       "name": "D5.S3.Quantum.Entanglement.Marginals.RationalQubitMixedEndpoint.rational_rank_two_of_maximally_mixed_endpoint",
       "kind": "theorem",
-      "statement_id": "sha256:24a715a71dd2c997590f7ca047ce6c41de13567f9eb64cc09adab755ebf1c193",
-      "line": 92,
+      "statement_id": "sha256:c5c127040849bde61747012d1bc12b64d20c1fcf6596d1d4578cf2ec81610905",
+      "line": 93,
       "signature": "theorem rational_rank_two_of_maximally_mixed_endpoint (c : Fin 3 → ℚ) (hc : 0 < c ⬝ᵥ c) (hunit : c ⬝ᵥ c < 1) : ∃ T : Matrix (Bool × Bool) (Bool × Bool) ℂ, T.PosSemidef ∧ T.rank = 2 ∧ (∀ i j, RationalEntry (T i j)) ∧ partialTraceRight T = (1 / 2 : ℂ) • (1 : Matrix Bool Bool ℂ) ∧ partialTraceLeft T = (1 / 2 : ℂ) • (1 + rationalBlochMatrix c)"
     },
     "D5/S3/Quantum/Entanglement/Marginals/RationalQubitProjector.rational_rank_two_of_quadratic_witness": {
