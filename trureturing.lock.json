@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "89b4f1a0e3d7016b804157c0367a117c6d4ea6fc",
-  "pinned_at": "2026-11-25T23:33:02Z",
+  "pinned_at": "2026-11-26T00:00:28Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1641,6 +1641,45 @@
       "statement_id": "sha256:4469509b9f4ea9d28f4034e5897b58095dafd18fa9782254777f46e800d87446",
       "line": 28,
       "signature": "theorem IsChordal.exists_approximate_gain_potential [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (g : V → V → H) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, G.Adj i j → g j i = (g i j)⁻¹) (htri : ∀ i j k, G.Adj i j → G.Adj j k → G.Adj i k → Dist.dist (g i j * g j k) (g i k) ≤ ε) : ∃ φ : V → H, ∀ i j, G.Adj i j → Dist.dist (g i j) ((φ i)⁻¹ * φ j) ≤ ((Nat.card V - 2 : ℕ) : ℝ) * ε"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach.SimpleGraph.IsChordal.exists_multitier_clique_banach_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach",
+      "name": "SimpleGraph.IsChordal.exists_multitier_clique_banach_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:c3543c37c6aa790f2c7b888a0c3f498ce73a440b2004abdeb346259504806d7c",
+      "line": 520,
+      "signature": "theorem IsChordal.exists_multitier_clique_banach_gain_potential {V : Type u} [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (k : ℕ) (hk : 4 ≤ k) (hclique : ∀ s : Finset V, G.IsClique (s : Set V) → s.card ≤ k + 1) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ (4 - 4 * ((k : ℝ) - 2) / ((k : ℝ)^2 - 3 * (k : ℝ) + 3)) * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach.SimpleGraph.bridgedGadget_banach_upper_bound": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach",
+      "name": "SimpleGraph.bridgedGadget_banach_upper_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:c3543c37c6aa790f2c7b888a0c3f498ce73a440b2004abdeb346259504806d7c",
+      "line": 651,
+      "signature": "theorem bridgedGadget_banach_upper_bound (m N : ℕ) (hm : 2 ≤ m) (hN : 1 ≤ N) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : (Fin N × GadgetVertex m) → (Fin N × GadgetVertex m) → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, (bridgedGadget m N).Adj i j → (bridgedGadget m N).Adj j l → (bridgedGadget m N).Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : (Fin N × GadgetVertex m) → E, ∀ u v, (bridgedGadget m N).Adj u v → ‖g u v - (φ v - φ u)‖ ≤ (2 - 2 / (m : ℝ)) * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach.SimpleGraph.exists_universal_core_simplicial_banach_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach",
+      "name": "SimpleGraph.exists_universal_core_simplicial_banach_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:c3543c37c6aa790f2c7b888a0c3f498ce73a440b2004abdeb346259504806d7c",
+      "line": 557,
+      "signature": "theorem exists_universal_core_simplicial_banach_potential {V : Type u} [Finite V] (G : SimpleGraph V) (H U : Set V) (_hUH : U ⊆ H) (hU : U.Nonempty) (huniv : ∀ u ∈ U, ∀ h ∈ H, u ≠ h → G.Adj u h) (hind : G.IsIndepSet Hᶜ) (m : ℕ) (hm : 1 ≤ m) (hattach : ∀ o ∉ H, {a : V | G.Adj o a} ⊆ H ∧ G.IsClique {a : V | G.Adj o a} ∧ {a : V | G.Adj o a}.ncard ≤ m) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/WeightedTwoStepBFS.SimpleGraph.two_step_residual_bound": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/WeightedTwoStepBFS",
