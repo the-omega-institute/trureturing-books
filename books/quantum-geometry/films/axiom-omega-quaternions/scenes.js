@@ -259,7 +259,7 @@ SCENES.ruler = S => {
     if (oa > 0.003) { dot(200, 820 + dy, 12, 'g', oa); txt('origin · 原点', 200, 860 + dy, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.now, a: oa }); }
   }
   /* the cloud of points: only comparisons */
-  const ca = a * Q(S, 1, 'only comparisons', 0.9);
+  const ca = a * Q(S, 1, 'Take the ruler away', 0.9, 0.6);
   if (ca <= 0.003) return;
   RU_CLOUD.forEach((p, k) => dot(p[0], p[1], 7, 'w', ca * (0.45 + 0.25 * rnd(k, 3))));
   txt('no axes, no zero · 没有坐标轴，没有零', 180, 220, { size: 24, fam: F.zh, w: 700, c: C.white, a: ca * (1 - at(S, 2, 0.6)) });
@@ -285,21 +285,21 @@ SCENES.ruler = S => {
   /* line 3: the reading κ, from 1 down to 0 */
   const ka = a * at(S, 3, 0.6);
   if (ka > 0.003) {
-    panel(1100, 200, 700, 260, ka, C.cyan, 'READING · 读数  κ(p, q)');
-    const bx0 = 1150, bx1 = 1750, by = 320;
+    panel(1100, 200, 620, 260, ka, C.cyan, 'READING · 读数  κ(p, q)');
+    const bx0 = 1150, bx1 = 1670, by = 320;
     line(bx0, by, bx1, by, C.white, ka * 0.6, 3);
     txt('0', bx0, by + 40, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.white, a: ka });
     txt('1', bx1, by + 40, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.white, a: ka });
     const k = 1 - ease(Q(S, 3, 'zero means', 1.0)), mx = lerp(bx0, bx1, k);
     dot(mx, by, 13, 'g', ka * Q(S, 3, 'how alike', 0.5));
     txt('same point · 同一个点', bx1, by - 28, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.white, a: ka * Q(S, 3, 'one means', 0.5) });
-    txt('fully mismatched · 完全失配', bx0, by - 28, { size: 22, fam: F.zh, w: 700, c: C.white, a: ka * Q(S, 3, 'zero means', 0.5) });
+    txt('fully mismatched · 完全失配', bx0 + 34, by + 40, { size: 22, fam: F.zh, w: 700, c: C.white, a: ka * Q(S, 3, 'zero means', 0.5) });
     txt('κ(p, p) = 1      0 ≤ κ ≤ 1', 1150, 420, { size: 26, fam: F.math, w: 700, c: C.cyan, a: ka });
   }
   /* line 4: two of the rules */
   const la = a * at(S, 4, 0.6);
   if (la > 0.003) {
-    panel(1100, 490, 700, 320, la, C.argued, 'RULES · 规则 (MODEL)');
+    panel(1100, 490, 620, 320, la, C.argued, 'RULES · 规则 (MODEL)');
     aoRich([['[x, x, z] = z', C.white]], 1130, 570, { size: 32, a: la * Q(S, 4, 'does nothing', 0.5) });
     txt('a step from a point to itself does nothing', 1130, 608, { size: 18, fam: F.mono, w: 700, c: C.dim, a: la * Q(S, 4, 'does nothing', 0.5) });
     aoRich([['κ([x, u, v], [y, u, v]) = κ(x, y)', C.white]], 1130, 670, { size: 30, a: la * Q(S, 4, 'carrying never changes', 0.5) });
@@ -458,12 +458,13 @@ SCENES.born = S => {
   ring(cx, cy, cr, C.white, a * 0.5, 2);
   for (let k = 0; k < 12; k++) { const t = TAU * k / 12; line(cx + cr * 0.92 * Math.cos(t), cy - cr * 0.92 * Math.sin(t), cx + cr * Math.cos(t), cy - cr * Math.sin(t), C.white, a * 0.5, 2); }
   txt('phase circle · 相位圆', cx, cy - cr - 26, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a });
-  const hxp = cx + rr * Math.cos(chi), hyp = cy - rr * Math.sin(chi);
+  /* the hand is the overlap ⟨s(y c)|s(x)⟩ = 0.6 e^{−iχ}: horizontal shadow 0.6 cos χ = ①, vertical shadow −0.6 sin χ = ② */
+  const hxp = cx + rr * Math.cos(chi), hyp = cy + rr * Math.sin(chi);
   line(cx - cr, cy, cx + cr, cy, C.dim, a * 0.5, 1.2);
   line(cx, cy - cr, cx, cy + cr, C.dim, a * 0.5, 1.2);
   arrow(cx, cy, hxp, hyp, C.now, a, 4);
   dot(cx, cy, 7, 'w', a);
-  txt(`χ = ${Math.round(chi * 180 / Math.PI) % 360}°`, cx - cr + 10, cy - cr + 10, { size: 24, fam: F.mono, w: 700, align: 'right', c: C.now, a });
+  txt(`χ = ${Math.round(chi * 180 / Math.PI) % 360}°`, cx - cr + 10, cy - cr + 10, { size: 26, fam: F.math, w: 700, align: 'right', c: C.now, a });
   if (ka > 0.003) {
     /* shadow ① on the horizontal axis, shadow ② on the vertical axis */
     line(cx, cy + 6, hxp, cy + 6, C.cyan, ka, 7);
@@ -471,7 +472,7 @@ SCENES.born = S => {
     dashed(hxp, hyp, hxp, cy, C.cyan, ka * 0.5, 1.5);
     dashed(hxp, hyp, cx, hyp, C.cyan, ka * 0.5, 1.5);
     txt('①', hxp + (Math.cos(chi) >= 0 ? 10 : -34), cy + 38, { size: 24, fam: F.math, w: 700, c: C.cyan, a: ka });
-    txt('②', cx - 40, hyp + (Math.sin(chi) >= 0 ? -6 : 24), { size: 24, fam: F.math, w: 700, c: C.cyan, a: ka * 0.85 });
+    txt('②', cx - 40, hyp + (Math.sin(chi) <= 0 ? -6 : 24), { size: 24, fam: F.math, w: 700, c: C.cyan, a: ka * 0.85 });
     txt('clock hand · 钟表指针 (picture)', cx, cy + cr + 46, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.argued, a: a * Q(S, 2, 'clock hand', 0.6) });
   }
   /* the readouts */
@@ -490,12 +491,12 @@ SCENES.born = S => {
   /* line 3: Lean */
   const la = a * Q(S, 3, 'Lean checks', 0.6);
   if (la > 0.003) {
-    panel(1380, 620, 440, 210, la, C.lean, 'RAY KERNEL · 射线核');
-    aoLean(1400, 676, AO_LEAN.rayKernel_mul_phase_right, la * Q(S, 3, 'ignores the phase', 0.5), { size: 15 });
-    aoLean(1400, 712, AO_LEAN.rayKernel_eq_bornProbability_spinor, la * Q(S, 3, 'Born weight', 0.5), { size: 15 });
-    txt('s(x) = (1, 0),  s(y) = (0.6, −0.8)', 1400, 756, { size: 18, fam: F.math, w: 700, c: C.white, a: la * Q(S, 3, 'Born weight', 0.5, 0.4) });
-    txt('|⟨s(x)|s(y)⟩|² = 0.36', 1400, 788, { size: 20, fam: F.math, w: 700, c: C.lean, a: la * Q(S, 3, 'Born weight', 0.5, 0.6) });
-    txt('as a probability: MODEL · 读作概率是模型', 1400, 818, { size: 16, fam: F.zh, w: 700, c: C.argued, a: la * at(S, 3, 0.5, 3.0) });
+    panel(1380, 615, 440, 225, la, C.lean, 'RAY KERNEL · 射线核');
+    aoLean(1400, 672, AO_LEAN.rayKernel_mul_phase_right, la * Q(S, 3, 'ignores the phase', 0.5), { size: 15 });
+    aoLean(1400, 706, AO_LEAN.rayKernel_eq_bornProbability_spinor, la * Q(S, 3, 'equals', 0.5), { size: 15 });
+    txt('s(x) = (1, 0),  s(y) = (0.6, −0.8)', 1400, 746, { size: 18, fam: F.math, w: 700, c: C.white, a: la * Q(S, 3, 'equals', 0.5, 0.3) });
+    txt('|⟨s(x)|s(y)⟩|² = 0.36', 1400, 778, { size: 20, fam: F.math, w: 700, c: C.lean, a: la * Q(S, 3, 'equals', 0.5, 0.5) });
+    txt('as a probability: MODEL · 读作概率是模型', 1400, 818, { size: 19, fam: F.zh, w: 700, c: C.argued, a: la * Q(S, 3, 'Born weight', 0.5, 0.3) });
   }
 };
 
@@ -550,7 +551,7 @@ SCENES.homog = S => {
     const ra2 = qa * Q(S, 1, 'real part', 0.5);
     aoRich([['x⁻¹y = ', C.white], ['0.6', C.cyan], [' + 0.8 j', C.white]], 1084, 408, { size: 26, a: ra2 });
     aoRich([['x′⁻¹y′ = ', C.white], ['0.6', C.cyan], [' + 0.48 i + 0.64 k', C.white]], 1084, 450, { size: 26, a: ra2 });
-    txt('κ = (1 + real part) / 2', 1500, 408, { size: 18, fam: F.mono, w: 700, c: C.dim, a: ra2 });
+    txt('κ = (1 + real part) / 2', 1084, 486, { size: 18, fam: F.mono, w: 700, c: C.dim, a: ra2 });
   }
   const ta = a * Q(S, 2, 'one turn', 0.6);
   if (ta > 0.003) {
@@ -574,7 +575,7 @@ const ED_C = { x: 430, y: 500, r: 250 };
 SCENES.edge = S => {
   const a = aoFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [1, null, 'argued']]);
+  badgeQ(S, [[0, null, 'computed'], [0, 'pass every other test', 'argued'], [1, null, 'argued']]);
   /* line 0: rational points of the circle cos t + i sin t, with a missing point */
   const pa = a * Q(S, 0, 'rational quaternions', 0.8);
   ring(ED_C.x, ED_C.y, ED_C.r, C.white, a * 0.25, 1.5);
@@ -584,10 +585,11 @@ SCENES.edge = S => {
     ring(hx, hy, 16, C.now, ha, 3);
     txt('(1 + i)/√2 missing · 不在其中', hx - 30, hy + 52, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.now, a: ha });
     txt('cos t + i sin t:  (a/c, b/c),  c ≤ 65', ED_C.x, ED_C.y + ED_C.r + 50, { size: 22, fam: F.math, w: 700, align: 'center', c: C.cyan, a: pa });
+    txt('denser as c grows, never the whole circle · c 越大越密，但永远铺不满', ED_C.x, ED_C.y + ED_C.r + 84, { size: 19, fam: F.zh, w: 700, align: 'center', c: C.dim, a: pa });
   }
   const rows = [
     { k: 0, col: C.cyan, en: 'no gaps cannot be dropped', zh: '“没有缺口”不能省', note: 'rational example: hand derivation · 有理例子：手工推导' },
-    { k: 1, col: C.argued, en: 'the rules are a model', zh: '母公理是模型；读作概率是诠释', note: 'MODEL · not a proof · 不是证明' },
+    { k: 1, col: C.argued, en: 'rules: a model; probability: a reading', zh: '母公理是模型；读作概率是诠释', note: 'MODEL · not a proof · 不是证明' },
     { k: 1, off: 4.0, col: C.argued, en: 'fewest columns: our choice', zh: '栏数最少：是我们的选择', note: 'theorems say what follows · 定理只说由此推出什么' }
   ];
   rows.forEach((rw, i) => {
