@@ -534,6 +534,25 @@ $$
 
 [互斥系数上界的 Lean 证明](lean:D5/S3/Fourier/Concentration/DisjointCharacterEnvelope.coefficient_envelope)
 
+### 共轭相位下带符号的截断余项
+
+在上述共轭权重的情形，令 $C_T=[x^d]e^{Sx}\prod_{j\in T}(e^{-A_jx}-1)$。记 $B_T=0$ 若 $|T|>d$，否则定义
+$$
+B_T=\left(\prod_{j\in T}w_j\right)\frac{(|S|+\sum_{j\in T}w_j)^{d-|T|}}{(d-|T|)!}.
+$$
+逐个子集保留符号，得到实数恒等式及次数敏感的界
+$$
+[x^dy^d]Q_k=\sum_{\substack{T\subseteq J\\|T|\le d}}(-1)^{|T|}|C_T|^2,\qquad |C_T|\le B_T.
+$$
+右轴的局部修正是左轴修正取共轭后的相反数，故每个子集恰好贡献上述带符号平方。局部指数尾的第 $n\ge1$ 次系数模长至多为 $w_j^n/(n-1)!$，于是它逐系数受 $w_j x e^{w_j x}$ 控制。柯西乘积逐次保留该非负界，乘上 $e^{|S|x}$ 后从总次数中扣除 $|T|$，得到 $B_T$。例如 $d=1$ 时，混合系数为 $|S|^2-\sum_jw_j^2$，所以 $S=0$ 时全部贡献非正。
+
+对任意自然数 $K$，从该混合系数中减去 $|T|\le\min(d,K)$ 的带符号和，所得余项 $R_K$ 满足
+$$
+-\!\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ 为奇数}}}B_T^2\le R_K\le
+\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ 为偶数}}}B_T^2.
+$$
+余项恰为未保留的偶数阶平方和减去奇数阶平方和。当 $K\ge d$ 时余项为零。乘上非负的傅里叶权重并求和时，可继续保留已计算的负贡献。这为下述 Fejér 频带估计提供了随次数变化的精细界。实际 ζ 零点对应的高阶子集平方和以及异常字符的总权重仍需要新的算术估计。 [Lean 带符号展开证明](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_expansion) [Lean 奇偶余项界证明](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_remainder)
+
 ### 用非负傅里叶权重估计频带
 
 记 $R_H$ 为 $[-H,H]$ 中整数的模 $q$ 剩余类。对任意非负的剩余类质量 $M(r)$，定义 $B_N(k)=\sum_{j=0}^{N-1}\chi_k(j)$，并用负号特征标定义 $\widehat M(k)=\sum_rM(r)\chi_k(-r)$。当整数 $N>H\ge0$ 时，
