@@ -1,0 +1,45 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "Girard": "Zhee-rar"},
+  "music": {"bpm": 80, "progression": "d-minor"},
+  "scenes": [
+    {"id": "hook", "name": "TWO ROUTES", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["From A to C on a sphere, you can take one step along a great circle.", "在球面上从 A 到 C，可以沿大圆一步走到。"],
+      ["Or two steps: along one wall to B, a right-angle turn, then along the other.", "也可以走两步：沿一面墙到 B，拐个直角，再沿另一面墙。"],
+      ["We usually treat these as rival routes. Why should we?", "我们习惯把它们当成两条竞争的路线。凭什么？"]
+    ], "cues": [{"line": 2, "at": 2.2, "kind": "glitch"}]},
+    {"id": "cell", "name": "ONE CELL", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
+      ["Add the centre O. Three flat walls close up into one small solid, capped by a bulging piece of sphere.", "加上球心 O：三面平墙围成一枚小小的立体，顶上盖着一块鼓起的球面。"],
+      ["Look straight down the edge from O to B. B hides behind O, the walls flatten into two legs, and one arc is left.", "顺着 O 到 B 的棱看过去：B 藏到 O 背后，两面墙压成两条腿，球面上只剩一步那条弧。"],
+      ["Look at the walls instead, and you see two steps and a corner.", "改看两面墙，看到的是两步和一个拐角。"],
+      ["One step and two steps are two shadows of the same cell. That is the book's reading, not a theorem.", "一步与两步，是同一枚小胞的两个影子。这是本书的诠释，不是定理。"]
+    ], "cues": [{"line": 1, "at": 2.6, "kind": "chime"}]},
+    {"id": "count", "name": "COUNT BY HAND", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.5, 0.2, 0.2], "lines": [
+      ["Now count. Make each step forty five degrees.", "现在动手算：每一步取 45°。"],
+      ["Each of the two steps has dot product zero point seven oh seven.", "两步各自的点积是 0.707，即 cos 45°。"],
+      ["The direct step has dot product one half, exactly zero point seven oh seven squared.", "一步直达的点积是 0.5，恰好是 0.707 的平方。"],
+      ["In dot products, once and twice agree. Together they fix the size of the volume, one half, but not which way it turns.", "在点积里，一次和两次说的是同一件事；三个点积合起来能定出体积大小 0.5，却定不出它朝哪边转。"]
+    ], "cues": [{"line": 2, "at": 2.4, "kind": "chime"}]},
+    {"id": "trace", "name": "ONE NUMBER", "lead": 0.5, "tail": 2.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Quantum mechanics packs this into one number: multiply the projectors for A, B and C, and take the trace.", "量子力学把这些装进一个数：把 A、B、C 的投影算子依次相乘，再取迹。"],
+      ["Lean checks that its real part is one plus the three dot products, over four. Its imaginary part is the volume, over four.", "Lean 内核检验：实部是 1 加三个点积再除以 4，虚部是体积除以 4。"],
+      ["Here that is zero point seven two nine, plus zero point one two five i.", "这里就是 0.729 + 0.125 i。"],
+      ["Write each projector with its spinor. Then Lean checks that the trace is the product of the overlaps around the loop.", "把每个投影算子写成它的旋量；Lean 内核检验：迹等于绕回路一圈的重叠之积。"]
+    ], "cues": [{"line": 1, "at": 1.0, "kind": "stamp"}, {"line": 3, "at": 2.8, "kind": "chime"}]},
+    {"id": "angle", "name": "HALF THE CAP", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Its angle is nine point seven four degrees.", "它的辐角是 9.74°。"],
+      ["The cap's three angles overshoot a half turn by nineteen point four seven degrees. Half of that is our angle.", "球面帽的三个内角之和比 180° 多出 19.47°；它的一半，正是这个辐角。"],
+      ["At ninety degrees, the trace is one plus i, over four, and the cap fills an eighth of the sphere.", "步长推到 90°：迹是 (1 + i)/4，球面帽铺满八分之一个球面。"],
+      ["At fifteen degrees, the angle drops to about one degree. It fades like the square of the step.", "缩到 15°，辐角只剩约 1°：它随步长的平方消退。"],
+      ["Flatness is curvature, measured with too coarse a ruler.", "平直，是尺子太粗时看到的弯曲。"]
+    ], "cues": [{"line": 1, "at": 4.4, "kind": "chime"}, {"line": 4, "at": 0.6, "kind": "impact"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Lean checks the two trace identities for any vectors. The cap's angle sum is Girard's classical theorem. The numbers are computed on screen.", "Lean 检验两条迹恒等式，对任意向量成立；内角和是吉拉尔的经典定理；数字都是屏上算的。"],
+      ["Reading the two routes as two shadows of one cell is the book's model, not a proof.", "把两条路线读成同一枚小胞的两个影子，只是本书的模型，不是证明。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter twenty nine.", "《量子计算的几何直觉》· 第二十九章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

@@ -389,6 +389,28 @@ $$
 
 这给出 $R_1(\eta)\ll(\log X+1)/X$。由固定计数差的上界，加权近碰撞质量 $E_p(\eta)$ 中残余次数恰为一的部分至多为 $p^2 D_{p-1}R_1(\eta)$。沿用固定 $K$ 和 $0<\beta<1$ 的截点 $X=e^{-K}T^\beta$，并取 $p\asymp X\log X$ 时，对角估计使这部分相对 $p!V^p$ 保留指数折减，因为 $V\asymp\log X/X$ 且 $p$ 倍的多项式因子可被吸收。残余次数随 $p$ 增长时，仍需额外的算术输入。
 
+## 随阶数增长的残余次数截断 {#growing-residual-degree}
+
+记 $E_{p,\le D}(\eta)$ 为 $E_p(\eta)$ 中每边至多剩下 $D$ 个未配对项的部分，其中 $0\le D\le p$。每对计数向量至少有 $p-D$ 个共同项。记 $W=\sum_jw_j$ 与 $V=\sum_jw_j^2>0$。权重非负时，去掉频率条件后可用共同计数上界得到
+
+$
+E_{p,\le D}(\eta)\le\binom pD^{\!2}W^{2D}D_{p-D}。
+
+$
+
+只需控制 $k=p-D$ 这一阶。若 $D_{p-D}\le A e^{-c(p-D)}(p-D)!V^{p-D}$，将一个二项式系数与 $p!$ 约去，再用 $p^D/D!$ 控制另一个。令 $x=p e^c W^2/V$，得到
+
+$
+\frac{E_{p,\le D}(\eta)}{p!V^p}
+\le A e^{-cp}\frac{x^D}{(D!)^2}
+\le A e^{-cp}\rho^{-D}\exp(2\sqrt{\rho x}),\qquad \rho>0。
+
+$
+
+末项不等式取指数级数在 $\sqrt{\rho x}$ 处的第 $D$ 项，再将两边平方。两个上界均与频率分辨率无关。 [共同计数上界的 Lean 证明](lean:D5/S3/Fourier/Concentration/FiniteMultinomialOverlap.weighted_overlap_le_diagonal)
+
+沿用上文的 ζ 尾段，固定 $K$ 与 $0<\beta<1$，取 $X=e^{-K}T^\beta$ 及 $p\asymp X\log X$。在 RH 与所引重数估计下，$W^2/V=O(p(\log T)^2)$。对所有 $p/2\le k\le p$，对角估计可用相同的常数 $A,c>0$。区间 $(X,CX]$ 提供至少固定倍数的 $p$ 个指标，在这些指标上 $kw_j^2/V$ 对该范围内的 $k$ 有统一的正下界。Stirling 公式产生的 $O(\sqrt{k})$ 因子可吸收到指数中。令 $L=\log T$，取 $\rho=(L\log L)^{-2}$。于是 $2\sqrt{\rho x}=O(p/\log L)$。若 $D\le\varepsilon p/\log L$，截断代价 $D\log(1/\rho)$ 至多为 $(2+o(1))\varepsilon p$。任取固定的 $0<\varepsilon<c/2$，整个截断范围都有与 $\eta$ 无关的指数节省。实际纵坐标的剩余近碰撞质量仍需对截断以上的残余次数作估计。 [重数估计，定理 1 与第 7 节](https://arxiv.org/abs/2306.04799)
+
 ## 可逐点匹配的高阶残余项 {#matched-residual-occupations}
 
 逐坐标抵消共同出现的频率后，两边各剩 $d$ 个频率。若能把它们配成 $d$ 对，每对的频率差都在阈值 $\eta$ 内，残余权重就可以用一次近配对的权重来估计。这里把出现次数相同的词视为同一个计数向量。
@@ -746,6 +768,177 @@ q^2(1-a_{\mathrm{crit}}(q))\longrightarrow\frac{24\pi^2}{5}.
 $$
 
 [首次接触与仿射过零的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_first_contact) · [模十二例外的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_twelve_no_contact) · [锐利宽度极限的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_criticalThreshold_limit)
+
+## 整数格点上最小平方和的支撑阈值
+
+在大模数下，零点附近的二次余弦亏量把问题引向整数格点。先固定格点上的二阶矩预算 $m\ge0$。在满足 $\sum_j w_j=1$、$w_j\ge0$、$\sum_j j^2 w_j\le m$ 的权重中，最小化 $\sum_j w_j^2$。这里所有指标 $j$ 都在 $\mathbb Z$ 上，二阶矩要求可和。
+
+对每个正整数 $n$，预算恰在区间 $[(n^2-1)/5,n(n+2)/5]$ 内时，存在 $n^2\le t\le(n+1)^2$ 使最优权重为
+$$
+w_j=\frac{(t-j^2)_+}{Z},\qquad
+Z=\sum_{|j|\le n}(t-j^2)>0.
+$$
+它的二阶矩恰为 $m$。区间两端分别对应 $t=n^2$ 与 $t=(n+1)^2$。在下端点，仅 $|j|\le n-1$ 的位置有正权重。越过该端点后，支撑扩到 $|j|\le n$，并保持到上端点。所有这些闭区间首尾相接，覆盖 $m\ge0$。当 $m=0$ 时，全部权重在零点。
+
+候选权重的二阶矩是有限和的比值。代入 $t$ 的两个端点，用平方和与四次方和公式得到预算的两个端点。连续性给出中间的预算。对任意非负且总质量为一的权重 $v$，设其二阶矩可和，和为 $s$。展开平方差，将交叉项分成仿射函数 $(t-j^2)/Z$ 的贡献和支撑外的修正，得到
+$$
+\sum_j v_j^2-\sum_j w_j^2
+= \sum_j(v_j-w_j)^2+\frac{2(m-s)}{Z}
+  +\frac{2}{Z}\sum_j (j^2-t)_+v_j.
+$$
+最后一项可和且非负。当 $s\le m$ 时，等式给出权重的严格唯一性。由于 $t\ge1$，由 $w_0=t/Z$ 和 $w_0-w_1=1/Z$ 还可唯一确定 $t$ 和 $Z$。相邻闭区间在公共端点给出同样的权重与参数。半开区间 $(n^2-1)/5\le m<n(n+2)/5$ 则给出唯一指标 $n=\lfloor\sqrt{5m+1}\rfloor$。第一段 $0\le m\le3/5$ 只有零点及其两个邻点，权重分别为 $1-m,m/2,m/2$。用第二谐波的尺度 $\lambda=8\pi^2m$ 表示，第一段上端恰为 $24\pi^2/5$。把格点最小值定量传回有限循环群，还须处理第二谐波在对径附近也接近 $1$ 的情形。
+
+[闭区间支撑与精确余项的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer_on_interval) · [全局半开区间分类的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer)
+
+### 有限循环群的最小值收敛到格点最小值
+
+固定 $\lambda\ge0$，令 $m=\lambda/(8\pi^2)$、$a=1-\lambda/q^2$。记 $L(m)$ 为上面的格点最小平方和，$E_q(a)$ 为两个余弦矩均至少为 $a$ 时的循环群最小平方和。设 $m$ 处在第 $n$ 个支撑区间内，格点支撑半径为 $R$。在下端点 $R=n-1$，其余位置 $R=n$。若 $q>2R$，最小值 $E_q(a)$ 取得，且
+$$
+0\le L(m)-E_q(a)\le \frac{2t}{Z}\frac{\lambda}{q^2}\le\frac{2\lambda}{q^2}.
+$$
+对任意总质量为一的非负循环群权重 $v$，取 $\bar i$ 为余类 $i$ 的中心整数代表元。记两个余弦矩为 $M_1(v),M_2(v)$，并设 $S_1=2t(M_1(v)-a)/Z$，$S_2=(q/(2\pi))^2(M_2(v)-a)/Z$。用同一个格点最优权重 $w$，还有
+$$
+\sum_i(v_i-w_{\bar i})^2+S_1+S_2
+\le \sum_i v_i^2-L(m)+\frac{2t}{Z}\frac{\lambda}{q^2}.
+$$
+
+格点支撑在 $q>2R$ 时嵌入循环群。由 $1-\cos x\le x^2/2$，嵌入后两个矩的亏量分别至多为 $\lambda/(4q^2)$ 与 $\lambda/q^2$，从而可行。逆向估计要控制对径附近的权重，因为第二余弦在那里也接近 $1$。令 $\theta=2\pi\bar i/q$。在整个中心角范围内有 $\theta^2\cos\theta\le\sin^2\theta$。余弦非正时直接由符号得到。余弦为正时，对半角用 $\sin x\ge x\cos x$，再用 $\cos^4(\theta/2)\ge\cos\theta$。因此证书
+$$
+P_i=\frac{t\cos\theta-(q\sin\theta/(2\pi))^2}{Z}
+$$
+逐点不超过 $w_{\bar i}$。将 $2\sum_i v_iP_i$ 写成两个余弦矩并分离 $S_1,S_2$，再把 $(t-m)/Z=L(m)$ 代入平方距离的展开式即得估计。对可行权重，$S_1,S_2$ 均非负。归一化常数 $Z$ 中零点一项为 $t$，所以 $t/Z\le1$。
+
+每个固定预算都落在一个有限的支撑区间中。因此 $E_q(1-\lambda/q^2)$ 沿所有整数模数趋于 $L(\lambda/(8\pi^2))$。对实际 ζ 零点高阶频率的算术估计仍有待解决。
+
+[中心化余弦矩恒等式的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cosineMoment_eq_centered) · [定量比较的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cyclic_to_lattice_comparison)
+
+### 对径附近的质量
+
+循环群最优权重在每个固定的中心格点上趋于格点权重。两个取等的矩还决定了远离这些格点的一小部分质量。固定 $\lambda\ge0$，令 $v_q$ 为阈值 $1-\lambda/q^2$ 下任意一个循环群最优权重。记 $c_i=\cos(2\pi i/q)$、$A_q=\{i:c_i<0\}$。沿所有整数模数，
+$$
+q^2\sum_{i\in A_q}v_q(i)\longrightarrow \frac{3\lambda}{8},
+\qquad
+q^2\sum_{i\in A_q}(1+c_i)v_q(i)\longrightarrow 0.
+$$
+第二个极限表明，对任何固定的 $\varepsilon>0$，$A_q$ 中满足 $c_i\ge-1+\varepsilon$ 的部分，其质量乘以 $q^2$ 后趋于零。
+
+在格点权重的固定支撑上，第一、第二余弦亏量乘以 $q^2$ 后，加权和分别趋于 $\lambda/4$ 与 $\lambda$。两个约束均取等，所以全圆周上两个缩放后的亏量之和各为 $\lambda$。当 $\lambda=0$ 时，余弦逐点至多为一，可行性已使两个矩取等。第二亏量非负，因而其固定支撑外的部分趋于零。在 $c_i\ge0$ 处，第二亏量的一半控制 $1-c_i$。在 $c_i<0$ 处，同样的量控制 $1+c_i$。所以 $A_q$ 上的第一亏量趋于 $3\lambda/4$，它与二倍缩放质量之差趋于零。这里先取出有限和并控制余项，再取极限。相关特征标和证明也用这个方法比较有限狄利克雷多项式与对数导数。 [特征标和的余项界](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)
+
+[缩放对径质量极限的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit)
+
+### 偶数与奇数循环群的能量差
+
+固定 $\lambda>0$，令 $m=\lambda/(8\pi^2)$，格点最优权重为 $w_j=(t-j^2)_+/Z$，四阶矩为 $m_4=\sum_j j^4w_j$。沿两种奇偶性分别有
+$$
+\lim_{q\to\infty} q^2\bigl(L(m)-E_q(1-\lambda/q^2)\bigr)
+=\frac2Z\left[(t-d^2)\frac{3\lambda}{8}+\frac{4\pi^2}{3}m_4\right],
+$$
+其中偶数模数取 $d=0$，奇数模数取 $d=1/2$。奇数循环群上，采样点与对径最近相距半步，因此奇数模数的系数比偶数模数小 $3\lambda/(16Z)$。四阶矩对两种奇偶性的贡献相同。
+
+记 $h=2\pi/q$，$C=-\cos(dh)$。二次证书
+$$
+p_q(c)=\frac{t-h^{-2}(1-c^2)-\beta_q(1-c)}{Z},
+\qquad \beta_q=\frac{t-h^{-2}(1-C^2)}{1-C}
+$$
+以 $C$ 为根，另一个根 $\rho_q$ 满足 $(1-\rho_q)/h^2\to t/2$。因式分解将证书正部限制在原点附近的固定窗口内，因此可在该窗口逐项求和余弦的四阶展开。激活端点上，边界格点的原权重为零。扰动后的正部平方为 $O(h^4)$，对 $h^2$ 阶系数没有贡献。[余弦级数](https://dlmf.nist.gov/4.19.E2)
+
+配方给出任意可行权重的能量下界。为在 $h^2$ 阶达到该界，调整零点及其两个邻点的权重，在最靠近对径的余弦层补入质量，并令两个矩约束同时取等。原点附近的改变量为 $O(h^2)$，补入的质量渐近于 $3mh^2/4$。任一固定正预算下，三个调整点的极限权重均为正，因此在充分大的模数上该构造可行，也涵盖激活端点。此结论适用于固定预算下的有限循环模型。实际 ζ 零点纵坐标的加权高阶算术估计仍开放。[推导与条件](https://github.com/the-omega-institute/trureturing/issues/33993#issuecomment-7146572104)
+
+[奇偶能量修正的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicParityLimit.cyclic_parity_correction)
+
+### 哪些格点具有正权重
+
+固定 $\lambda>0$，对所有充分大的模数，循环群最优权重恰好在原点附近满足 $j^2\le t$ 的格点和最靠近对径的格点上为正。偶数循环群有一个最近对径点，奇数循环群有两个。格点激活端点 $t=N^2$ 上，$\pm N$ 的极限格点权重为零，但两个有限循环群权重为正，量级为 $q^{-2}$。
+
+在这些候选点上，把权重表示成 $1$、$1-c$ 和 $(1-c^2)/h^2$ 的线性组合，其中 $c=\cos(jh)$，$h=2\pi/q$。质量和两个亏量给出三个方程。原点、相邻格点和对径附近一个格点的特征向量在极限中线性无关。平方端点处，原点窗口二阶矩的变化对 $\pm N$ 权重的一阶改变量有正贡献，与 $1$ 和 $j^2$ 正交的首一二次多项式也给出非负贡献。二次证书在两侧第一个被排除的余弦层上都为负。凸性将这一符号传给二者之间的余弦层，再用配方验证全循环群上的唯一最优解。设最优权重为 $v$。任意可行权重 $w$ 都满足 $E(w)-E(v)\ge\sum_i(w_i-v_i)^2$。
+
+所需模数下界随固定预算而变。这里的支撑结论适用于两个指定的余弦约束。[支撑与稳定性的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicEventualSupport.cyclic_eventual_exact_support) · [精确证书与端点计算](https://github.com/the-omega-institute/trureturing/issues/34004#issuecomment-7147550923)
+
+### 有限循环上的前部支撑切换
+
+固定整数 $N\ge2$，记 $h=2\pi/q$，将两个余弦矩的共同下界设为 $1-2mh^2$。格点模型在 $m_N=(N^2-1)/5$ 处切换。对于充分大的 $q$，在 $m_N$ 附近有唯一的有限循环切换预算 $m_{N,q}$。最近对径点和前部 $|j|\le N-1$ 的各点在这一邻域内始终有正权重。两点 $\pm N$ 恰在 $m>m_{N,q}$ 时获得正权重。沿两条奇偶子列分别有
+$$
+\frac{m_{N,q}-m_N}{h^2}
+\longrightarrow
+\frac{(N^2-1)(47-31N^2)}{420}+\frac{3(N^2-1)d^2}{20},
+\qquad d=\begin{cases}0& q\text{ 为偶数},\\[2pt]1/2& q\text{ 为奇数}.\end{cases}
+$$
+两个系数都为负，所以边界点对在到达格点预算前就进入支撑。奇数模数的系数比偶数模数大 $3(N^2-1)/80$。
+
+固定候选前部窗口后，矩方程右端随 $m$ 仿射变化。在较大窗口拟合三个余弦特征，以 $N$ 点权重的零点定义切换预算。令 $x_j=j^2$，以 $\bar x$ 表示 $|j|\le N$ 内的均值，并记 $V=\sum_j(x_j-\bar x)^2$。该权重的斜率趋于 $(N^2-\bar x)/V>0$。删除两个零权重行后，切换处的矩方程仍成立。较小窗口的拟合在边界点对处的求值也有正斜率。其余前部权重保有正极限。对径权重在 $h^2$ 阶为正。将边界点对纳入考察窗口后，两端首个排除余弦层的证书值都有严格负极限，再由凸性排除循环中间的各点。 [参数二次规划，第 4 节](https://doi.org/10.1016/S0005-1098(01)00174-1)
+
+令 $T=N^2$、$W_j=(T-x_j)/Z$、$Z=\sum_j(T-x_j)$，并记 $m_4=\sum_j x_j^2W_j$。用 $r_j$ 表示预算为 $m_N$ 时前部权重的 $h^2$ 阶系数，用 $\mu=3m_N/4$ 表示总对径权重的 $h^2$ 阶系数。二次式 $r_j+\mu W_j$ 的总和为零，关于 $x_j$ 的一阶矩为 $K=m_4/3+(m_N-d^2)\mu$，二次项系数为 $1/(3Z)$。消去常数项与一次项得到
+$$
+\frac{r_N V}{T-\bar x}=K+\frac{m_4-m_N^2}{3}.
+$$
+阈值偏移系数是这个比值的相反数。对称有限和给出 $m_4=(N^2-1)(3N^2-5)/35$，代入即得上式的显式系数。渐近式固定 $N$，较小模数下其他对径层也能带有正权重。[切换与缩放偏移的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicActivationShift.cyclic_activation_shift) · [推导与有限核对](https://github.com/the-omega-institute/trureturing/issues/34016#issuecomment-7148575133)
+
+### 前部窗口增长时的矩阵误差
+
+让前部半宽 $N$ 随模数增长，取预算 $m=N(N+1)/5$。令 $h=2\pi/q$、$u=Nh$，并在前部用 $x=j/N$ 表示位置。取两个特征 $(1+\cos(xu))/2$ 与 $\sin^2(xu)/u^2$，其零网格极限为 $1$ 与 $x^2$。记 $G_N(u)$ 为在 $|j|\le N$ 上求特征对乘积之和再除以 $N$ 得到的二阶矩阵。对任意实数 $u$，每个矩阵元的误差满足
+
+$$
+\left|G_N(u)_{ab}-G_N(0)_{ab}\right|\le 2u^2 .
+$$
+
+正弦的三次余项给出第二个特征的一致误差。窗口内两个特征的绝对值至多为一，因此对乘积求和再除以 $N$ 后，每个矩阵元的误差仍为 $u^2$ 阶。当 $N\to\infty$ 且 $u\to0$ 时，极限矩阵的两行为 $(2,2/3)$ 与 $(2/3,2/5)$。若 $q/N^{5/2}\to\gamma>0$，与同一 $N$ 的零网格矩阵相比，误差为 $O(N^{-3})$。
+
+令 $t=N(N+1)-1/2$、$Z=\sum_{|j|\le N}(t-j^2)$，取 $a=(Nt/Z,-N^3/Z)$。零网格矩阵将 $a$ 恰好映到 $(1,m/N^2)$。在网格 $u$ 上，矩残差满足
+
+$$
+\left|\left[G_N(u)a-(1,m/N^2)\right]_i\right|
+\le 2u^2(|a_0|+|a_1|)\quad(i=0,1)。
+$$
+
+缩放后的格点权重 $N(t-j^2)/Z$ 在 $j=N$ 与 $j=N+1$ 的符号余量为 $N^{-1}$ 量级。要确定整个循环群的支撑，还须控制对径矩方程和对径激活阈值上的边界符号。 [Gram 矩阵误差的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_sub_le) · [残差界的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_reference_residual_le) · [对径支撑问题](https://github.com/the-omega-institute/trureturing/issues/34029)
+
+### 前部窗口与对径窗口的联立拟合
+
+固定一个非空有限集合 $S$，其中各元素是相对于对径点的有符号实偏移。令 $c$ 为取样余弦，取 $F=(1+c)/2$、$W=(1-c)/2$、$X=(1-c^2)/(Nh)^2$。零网格处取两个窗口中的连续延拓。在前部格点及 $S$ 上令拟合权重为 $v=AF/N+CX/N+BW/N^3$。三个矩方程的左边分别为 $\sum Fv$、$\sum Xv$ 与 $N^3\sum W^2v$。利用 $W^2=W-u^2X/4$，公共余弦下限 $1-2mh^2$ 使三行的目标值为 $(1-mh^2,m/N^2,3N^3mh^2/4)$。
+
+设 $M_N$ 为按系数顺序 $(A,C,B)$ 排列的三阶矩阵。若 $N^3(Nh)^4\to0$，则
+
+$$
+M_N\longrightarrow
+\begin{pmatrix}
+2 & 2/3 & 0\\
+2/3 & 2/5 & 0\\
+0 & \sum_{r\in S}r^2 & |S|
+\end{pmatrix}。
+$$
+
+前部对末行的贡献有常数倍 $N^3u^4$ 与 $Nu^6$ 的界。在固定的对径偏移 $r$ 处，$W\to1$、$N^2X\to r^2$ 且 $N^2F\le r^2u^2/4$。这些一致估计给出上述矩阵极限，无需将逐点估计和增长的求和直接交换。极限行列式为 $16|S|/45$，故充分大的 $N$ 上，任意给定的三个矩目标均有唯一的拟合系数。
+
+当 $q/N^{5/2}\to\gamma>0$ 时，目标向量趋于 $(1,1/5,3\pi^2/(5\gamma^2))$。解的极限为 $A\to3/4$、$C\to-3/4$ 以及
+
+$$
+B\longrightarrow \frac{3\pi^2/(5\gamma^2)+(3/4)\sum_{r\in S}r^2}{|S|}。
+$$
+
+故在每个固定且纳入拟合的对径格点，$N^3v(r)\to B_\infty-3r^2/4$。该计算允许拟合权重有符号。验证最优权重的支撑仍须控制前部两侧以及对径激活层上的符号，并处理极限权重恰为零的层。 [矩阵收敛的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit.coupledMatrix_tendsto) · [唯一带符号拟合的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit.coupledFit_eventually) · [联立拟合研究](https://github.com/the-omega-institute/trureturing/issues/34029)
+
+### 增长窗口边界的定量符号
+
+临界尺度下的拟合可以和格点参考系数作更精细的比较。记 $K=\lim_{N\to\infty}N^5h^2=4\pi^2/\gamma^2$，令 $(A_N,C_N,B_N)$ 为上述逆矩阵拟合。对于 $t=N(N+1)-1/2$ 与 $Z=\sum_{|j|\le N}(t-j^2)$，
+$$
+A_N-\frac{Nt}{Z}=O(N^{-3}),
+\qquad
+C_N+\frac{N^3}{Z}=O(N^{-3}).
+$$
+
+此估计仅要求 $N^5h^2$ 有界。联立矩阵的前两行与补上零第三列的格点 Gram 矩阵之差，乘以 $N^3$ 后保持有界。前部特征乘积误差以 $2u^2$ 为界，且 $N^3u^2=O(1)$。有限个对径偏移在缩放前两行中的贡献逐项趋于零，目标质量的缩放扰动满足 $N^3mh^2=O(1)$。目标向量与联立矩阵的逆有界，故拟合系数有界。固定第三个系数 $B_N$ 时，左上二阶矩阵的逆将缩放残差界传递为前部系数的误差界。
+
+记 $p_N(j)$ 为前部的带符号拟合值，并以同一三角函数公式延拓到实数 $j$。任意固定实数 $d$，格点参考值在 $j=N+d$ 处乘以 $N^2$ 后趋于 $\frac34(1-2d)$。特征与系数误差的控制保持了这个极限，
+$$
+N^2p_N(N+d)\longrightarrow \frac34(1-2d).
+$$
+因此充分大的 $N$ 下，$N$ 处的带符号拟合值严格为正，而 $N+1$ 处严格为负。由偶对称性，前部窗口负端也有相应的符号。半步 $d=1/2$ 处首项极限为零，精细比较给出 $N^3p_N(N+1/2)\to-9/16$。
+
+每个固定实数对径偏移 $r$ 处，同一拟合系数的对径带符号值满足
+$$
+N^3p_N^{\rm rear}(r)\longrightarrow B_\infty-\tfrac34r^2.
+$$
+极限非零时可确定充分大 $N$ 下的严格符号。这些极限适用于固定的非空有限对径集合 $S$ 上的带符号拟合。认证循环群最优解仍需建立有限循环格点的对应并将补集的符号控制延伸至所有剩余格点。当 $B_\infty=3r^2/4$ 时，该层的激活状态仍待判定。 [系数误差阶的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.refined_coefficients) · [前部与半步极限](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_boundary_value) · [对径极限](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_rear_value) · [研究问题](https://github.com/the-omega-institute/trureturing/issues/34029)
 
 ## 局部统计在截点变化下的误差
 

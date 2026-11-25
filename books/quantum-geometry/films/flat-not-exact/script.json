@@ -1,0 +1,47 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "Yang–Mills": "Yang Mills"},
+  "music": {"bpm": 78, "progression": "d-minor"},
+  "scenes": [
+    {"id": "torus", "name": "THE DOUGHNUT", "lead": 1.9, "tail": 1.4, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Wrap a grid around a doughnut, so every row and column closes into a loop.", "把一张网格裹到甜甜圈上：每一行、每一列都首尾相接，绕成一个圈。"],
+      ["On every edge, write one bit: zero means stay, one means flip.", "每条边上写一个比特：0 表示不变，1 表示翻转。"],
+      ["Every small square checks out. Yet walk once around, and you come back flipped.", "每个小方格都对得上账；可绕着走一整圈，回来时却被翻了过来。"]
+    ], "cues": [{"line": 2, "at": 2.6, "kind": "glitch"}]},
+    {"id": "paint", "name": "PAINT THE CORNERS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.4, 0.0, 0.2], "lines": [
+      ["The honest way to make such bits: paint every corner black or white.", "最老实的造法：把每个角涂成黑色或白色。"],
+      ["Write one on an edge when its two ends differ. That is a gradient.", "一条边两端颜色不同就写 1，相同就写 0。这叫梯度。"],
+      ["Around any square the color changes an even number of times, so the bits add to zero. That is flat.", "绕任何一个小方格走一圈，换色次数总是偶数，四个比特加起来是 0。这叫平坦。"],
+      ["So we assume the reverse: flat squares mean someone painted the corners. Why should they?", "于是我们想当然地倒过来推：每格都平，就一定有人涂过颜色。凭什么？"]
+    ], "cues": [{"line": 3, "at": 3.6, "kind": "glitch"}]},
+    {"id": "seam", "name": "ONE SEAM", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.5, 0.1, 0.2], "lines": [
+      ["Take a three by three grid, right side glued to left, top glued to bottom.", "取一张 3×3 网格：右边粘到左边，上边粘到下边。"],
+      ["Write one on the three edges crossing the right-hand glue, zero elsewhere.", "在跨过右侧粘合线的三条边上写 1，其余全写 0。"],
+      ["Each square on that seam holds two ones. Two flips cancel, so every square is flat.", "缝边上的每个方格各含两个 1；翻两次等于没翻，所以每格都平。"],
+      ["Now paint. Start black and walk along a row: stay, stay, flip.", "现在来涂色：从黑色出发沿一行走——不变、不变、翻转。"],
+      ["You come home white. No painting works: the row adds up to one.", "回到起点却成了白色。怎么涂都不行：这一行的和是 1。"],
+      ["Like a spiral garage ramp: every step looks fine, but one lap lands you a floor higher.", "就像停车楼的螺旋坡道：每一步都好好的，绕一圈却高了一层。"]
+    ], "cues": [{"line": 4, "at": 0.9, "kind": "impact"}]},
+    {"id": "test", "name": "TWO LOOPS DECIDE", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["Lean checks the exact rule: a flat labeling is a painting if and only if two loops add to zero.", "Lean 内核检验了精确判据：平坦标号来自涂色，当且仅当两条圈上的比特和都是 0。"],
+      ["One loop runs along the first row, the other down the first column.", "一条圈沿着第一行，另一条沿着第一列。"],
+      ["And on every grid at least three by three, the seam is flat, its row adds to one, and no painting makes it.", "并且在每张至少 3×3 的网格上，这条缝平坦、行和为 1，任何涂色都造不出它。"]
+    ], "cues": [{"line": 0, "at": 1.0, "kind": "stamp"}]},
+    {"id": "count", "name": "ONE IN FOUR", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.6, 0.2, 0.3], "lines": [
+      ["On the three by three grid, eighteen edges give two to the eighteen labelings: over a quarter of a million.", "在 3×3 网格上数一数：18 条边，一共 2¹⁸ = 262144 种标号。"],
+      ["Only one thousand twenty-four are flat. Just two hundred fifty-six come from paintings.", "其中平坦的只有 1024 种，来自涂色的只有 256 种。"],
+      ["So one flat labeling in four is painted. The rest hide a seam: across, down, or both.", "所以平坦标号里恰好四分之一是涂出来的；其余的藏着一条缝：横向、纵向，或两条都有。"],
+      ["Lean checks these ratios for every grid size.", "Lean 内核对任意大小的网格检验了这些比例。"],
+      ["And the squares obey exactly one rule: here each edge borders two squares, so all of them add to zero.", "方格之间有且只有一条规矩：这里每条边都夹在两个方格之间，所以全部方格加起来是 0。"]
+    ], "cues": [{"line": 3, "at": 0.6, "kind": "stamp"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["In this chapter's lattice language: bits are links, flat is zero action, and a painting is pure gauge.", "换成本章的格点语言：比特是链变量，平坦就是零作用量，涂色就是纯规范。"],
+      ["So zero action need not be pure gauge. Every square checks out, yet the loop still flips.", "所以零作用量不一定是纯规范。每格都对得上账，绕一圈照样翻。"],
+      ["This is about bits on a two-dimensional grid. Whether four-dimensional Yang–Mills has a mass gap is still open.", "这里讲的是二维网格上的比特。四维杨—米尔斯理论有没有质量间隙，仍是开放问题。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter thirty-three.", "《量子计算的几何直觉》· 第三十三章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

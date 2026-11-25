@@ -312,6 +312,12 @@ $$
 **路径的确定与条纹的对比度分享同一根单位斜边。** 横轴是可预测度 $D_{\mathrm{pred}}$，纵轴是可见度 $V_{\mathrm{vis}}$。纯态落在四分之一圆弧上：琥珀色的点 $(0.8, 0.6)$ 由青色的 $D$ 与品红的 $V$ 拼成。灰点是 $\norm{\vv{r}} = 0.6$ 的混合态，落在弧内半径为 $0.6$ 的虚线弧上。
 :::
 
+这本账也说清了 3.1 的捏合到底拿走了什么。沿 $Z$ 测一次而不读结果，$\operatorname{unreadState}$ 抹去密度矩阵的两个非对角元 $\rho_{01}$、$\rho_{10}$，对角元原样留下。对单比特，捏合丢弃的希尔伯特—施密特质量恰为两个非对角元的模平方之和 $\lvert\rho_{01}\rvert^2 + \lvert\rho_{10}\rvert^2$（[`pinching_discarded_coherence_mass`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass)）；对密度矩阵 $\rho_{10} = \overline{\rho_{01}}$、$\rho_{01} = \frac{1}{2}(r_x - i r_y)$，于是它等于 $2\lvert\rho_{01}\rvert^2 = \frac{1}{2}(r_x^2 + r_y^2)$，恰是赤道面里的剩余质量；线上那一份 $\frac{1}{2}r_z^2$ 只由对角元决定，分毫不动（后两步为手工推导）。面上那一份一旦清零，再捏一次便无物可抹——这正是 [@thm-pinching-idempotent] 落在这本账上的样子。
+
+::: {.film src="project-twice"}
+**第二遍筛，什么也筛不掉（2 分 30 秒）。** 面粉筛第一遍，品红的疙瘩留在筛上；筛第二遍，什么也没拦下（比方）。最小的投影算子 $P_0 = \operatorname{diag}(1, 0)$、$P_1 = \operatorname{diag}(0, 1)$ 各自平方等于自己，相乘为零，相加为单位矩阵：两只抽屉。布洛赫箭头为 $(0.6, 0, 0.8)$ 的态，密度矩阵对角线上是青色的 $0.9$、$0.1$，两个角上是品红的 $0.3$；沿 $Z$ 测一次而不看结果，两个角抹成零，再做一次什么也不动，一般情形即 [@thm-pinching-idempotent]。纯度账本：盈余 $0.5$ 等于青色的线上一份 $0.4^2 + 0.4^2 = 0.32$ 加品红的面上一份 $2 \times 0.3^2 = 0.18$（[@thm-complementary-pythagoras]）；捏一次、捏两次都剩 $0.32$ 与 $0$。三只抽屉的分块图是示意；把“存在”读作能连查两次的线是本书的诠释；片中数字都是屏幕上的计算。
+:::
+
 不仅如此，[@thm-complementary-pythagoras] 里的多上下文指标集 $L$ 还把**量子态层析（quantum state tomography）**的维度阶梯一次性刻画完毕：
 
 | 已测正交泡利上下文集合 $L$ | 可见子空间 $V \subseteq \mathbb{R}^3$ | 可见概率偏离总和 $\norm{P_V(s)}^2$ | 盲区正交补 $V^\perp$ | 不可见剩余质量 $\operatorname{residualMass}(V, s)$ |
