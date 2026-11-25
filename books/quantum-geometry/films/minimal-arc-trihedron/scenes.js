@@ -9,16 +9,18 @@
      cell    the solid cell; seen straight down OB, B falls on O and only the arc AC is left; the walls show the two
              steps and the right angle at B. "Two shadows of one cell" is the book's MODEL (argued).
      count   ε = 45°: A·B = B·C = cos ε = 0.707, A·C = cos²ε = 0.500 = 0.707² (the right angle at B), the oriented
-             volume A·(B×C) = sin²ε = 0.500, six times the violet tetrahedron OABC (computed).
+             volume A·(B×C) = sin²ε = 0.500, six times the violet tetrahedron OABC (computed); the three dot
+             products fix its size (Gram determinant), not its sign (a mirror keeps them and flips it).
      trace   Tr(P(A)P(B)P(C)) = (1 + A·B + B·C + C·A)/4 + i A·(B×C)/4 for any real vectors
              ..... C129QubitBargmann.triple_bargmann_bloch (LEAN); here (1 + cos ε)²/4 + i sin²ε/4 = 0.729 + 0.125 i
-             (computed); the same trace is the product of the spinor overlaps ⟨A|B⟩⟨B|C⟩⟨C|A⟩
-             ..... BargmannImaginaryMaximizers.bargmann_path_product (LEAN); sizes 0.924 · 0.924 · 0.866 = 0.739 =
+             (computed); writing P(A) = |A⟩⟨A| for the spinor of A is a hand step (computed); for spinors the
+             trace of the ket-bra chain is ⟨A|B⟩⟨B|C⟩⟨C|A⟩ ..... BargmannImaginaryMaximizers.bargmann_path_product
+             (LEAN); sizes 0.924 · 0.924 · 0.866 = 0.739 =
              |0.729 + 0.125 i| (computed).
      angle   arg Tr = atan(sin²ε/(1 + cos ε)²) = atan(tan²(ε/2)) = Ω/2, where Ω = α + β + γ − π is the angle excess
              of the cap (Girard's theorem: literature, argued; the half-angle match is algebra, computed):
              ε = 45°: 9.74°, Ω = 19.47°; ε = 90°: Tr = (1 + i)/4, 45°, Ω = 90°; ε = 15°: 0.99°, Ω = 1.99°.
-             "Flatness is curvature seen from too far away" is a maxim (argued).
+             "Flatness is curvature measured with too coarse a ruler" is a maxim (argued).
      edge    what Lean checks, what is literature, what is computed, what is the book's model.
 
    On load, FILM.init checks DATA.lean against the two theorems and re-derives every number on screen by an
@@ -146,6 +148,14 @@ FILM.init.push(() => {
   /* 4. the readouts on screen */
   const f3 = x => x.toFixed(3), f2 = x => x.toFixed(2);
   check(f3(Math.cos(E45)) === '0.707' && f3(Math.cos(E45) ** 2) === '0.500' && f3(Math.sin(E45) ** 2) === '0.500', 'count readouts');
+  /* the three dot products fix the size of the volume (Gram determinant), not its sign: mirror C fixes the dots */
+  for (let i = 1; i <= 90; i++) {
+    const { A, B, C } = mtCell(i * DEG), ab = v3.dot(A, B), bc = v3.dot(B, C), ca = v3.dot(C, A);
+    const g = 1 + 2 * ab * bc * ca - ab * ab - bc * bc - ca * ca, vol = v3.dot(A, v3.cross(B, C));
+    check(near(g, vol * vol, 1e-12), `Gram determinant = volume² at ${i}°`);
+    const Cm = [C[0], C[1], -C[2]], Am = [A[0], A[1], -A[2]];
+    check(near(v3.dot(Am, B), ab) && near(v3.dot(B, Cm), bc) && near(v3.dot(Cm, Am), ca) && near(v3.dot(Am, v3.cross(B, Cm)), -vol), `mirror keeps the dots, flips the sign at ${i}°`);
+  }
   const t45 = mtTrace(E45), t90 = mtTrace(E90), t15 = mtTrace(E15);
   check(f3(t45[0]) === '0.729' && f3(t45[1]) === '0.125', 'trace at 45°');
   check(near(t90[0], 0.25) && near(t90[1], 0.25), 'trace at 90° is (1 + i)/4');
@@ -259,7 +269,6 @@ SCENES.hook = S => {
   mtTitle(S);
   const a = clamp((u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed']]);
   const { A, B, C: Cp } = mtCell(E45);
   /* the view: the patch ABC sits near the middle of the frame, the sphere runs off it */
   const yaw = -2.45 + 0.03 * u, el = 0.42, RR = 560, V0 = mtView(0, 0, RR, yaw, el), mid = V0(v3.unit(v3.add(v3.add(A, B), Cp)));
@@ -340,12 +349,13 @@ SCENES.cell = S => {
     txt('ε = 45° per step · 每步 45°', 1352, 420, { size: 22, fam: F.zh, w: 700, c: C.dim, a: pa });
   }
   /* line 1: shadow one */
-  const s1 = a * Q(S, 1, 'B lands on O', 0.6) * (1 - at(S, 2, 0.5));
+  const s1 = a * Q(S, 1, 'B hides behind O', 0.6) * (1 - at(S, 2, 0.5));
   if (s1 > 0.003) {
-    panel(1330, 230, 470, 220, s1, C.cyan, 'SHADOW 1 · 影子一');
+    panel(1330, 230, 470, 270, s1, C.cyan, 'SHADOW 1 · 影子一');
     txt('down the edge OB · 顺棱看', 1352, 306, { size: 24, fam: F.zh, w: 700, c: C.white, a: s1 });
-    txt('B = O · one arc A→C', 1352, 352, { size: 26, fam: F.mono, w: 700, c: C.cyan, a: s1 });
-    txt('= once · 一次', 1352, 404, { size: 26, fam: F.zh, w: 700, c: C.cyan, a: s1 });
+    txt('B behind O · B 藏在 O 后', 1352, 352, { size: 24, fam: F.zh, w: 700, c: C.white, a: s1 });
+    txt('walls → 2 legs · 墙压成两条腿', 1352, 398, { size: 24, fam: F.zh, w: 700, c: C.white, a: s1 * Q(S, 1, 'two legs', 0.5) });
+    txt('one arc A→C = once · 一次', 1352, 452, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: s1 * Q(S, 1, 'one arc', 0.5) });
   }
   /* line 2: shadow two */
   const s2 = a * Q(S, 2, 'two steps', 0.6) * (1 - at(S, 3, 0.5));
@@ -360,9 +370,9 @@ SCENES.cell = S => {
   if (m > 0.003) {
     panel(1330, 230, 470, 300, m, C.argued, 'ONE CELL, TWO SHADOWS');
     txt('一体双影', 1352, 310, { size: 34, fam: F.zh, w: 900, c: C.white, a: m });
-    txt('once · 一次  ←  cell  →  twice · 两次', 1352, 372, { size: 20, fam: F.zh, w: 700, c: C.white, a: m });
+    txt('once · 一次  ←  cell  →  twice · 两次', 1352, 372, { size: 22, fam: F.zh, w: 700, c: C.white, a: m });
     txt("the book's reading · 本书的诠释", 1352, 440, { size: 22, fam: F.zh, w: 700, c: C.argued, a: m * Q(S, 3, "book's reading", 0.5) });
-    txt('MODEL, not a theorem · 不是定理', 1352, 480, { size: 20, fam: F.zh, w: 700, c: C.argued, a: m * Q(S, 3, 'not a theorem', 0.5) });
+    txt('MODEL, not a theorem · 不是定理', 1352, 480, { size: 22, fam: F.zh, w: 700, c: C.argued, a: m * Q(S, 3, 'not a theorem', 0.5) });
   }
 };
 
@@ -401,11 +411,11 @@ SCENES.count = S => {
   const r5 = a * Q(S, 3, 'volume', 0.5);
   if (r5 > 0.003) {
     line(x, 590, x + 780, 590, C.dim, r5 * 0.6, 1.2);
-    mtRich([['A·(B×C)', C.vio], [' = sin²45° = ', C.vio], [Math.pow(Math.sin(E45), 2).toFixed(3), C.vio]], x, 656, { size: 34, a: r5 });
-    txt('volume spanned by A, B, C · 三根射线撑开的体积', x, 708, { size: 22, fam: F.zh, w: 700, c: C.vio, a: r5 });
-    txt('= 6 × violet tetrahedron OABC · 紫色四面体的 6 倍', x, 750, { size: 20, fam: F.zh, w: 700, c: C.dim, a: r5 });
+    mtRich([['A·(B×C)', C.vio], [' = sin²45° = ', C.vio], [Math.pow(Math.sin(E45), 2).toFixed(3), C.vio]], x, 642, { size: 34, a: r5 });
+    txt('= 6 × violet tetrahedron OABC · 紫色四面体的 6 倍', x, 684, { size: 22, fam: F.zh, w: 700, c: C.dim, a: r5 });
+    txt('size 0.5: fixed by the three dot products · 大小由点积定出', x, 730, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: a * Q(S, 3, 'size of the volume', 0.5) });
+    txt('which way it turns: NOT in dot products · 朝向：点积定不出', x, 776, { size: 24, fam: F.zh, w: 700, c: C.vio, a: a * Q(S, 3, 'which way', 0.5) });
   }
-  if (r4 > 0.003) stamp('NOT IN DOT PRODUCTS', 1460, 640, Q(S, 3, 'None of them', 0.4) * (1 - Q(S, 3, 'one half', 0.4, 0.6)), C.vio, 22, -0.06);
 };
 
 /* ======================================================================= */
@@ -421,11 +431,11 @@ function mtPlane(x0, y0, k, a, o = {}) {
   txt('Im', x0 - 10, y0 - k * yr - 14, { size: 24, fam: F.mono, w: 700, c: C.vio, a, align: 'center' });
   for (const t of o.ticks || [0.25, 0.5, 0.75, 1]) if (t <= xr) {
     line(x0 + k * t, y0 - 6, x0 + k * t, y0 + 6, C.cyan, a * 0.6, 1.5);
-    txt(String(t), x0 + k * t, y0 + 32, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.dim, a });
+    txt(String(t), x0 + k * t, y0 + 34, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a });
   }
   for (const t of o.yticks || [0.25, 0.5]) if (t <= yr) {
     line(x0 - 6, y0 - k * t, x0 + 6, y0 - k * t, C.vio, a * 0.6, 1.5);
-    txt(String(t), x0 - 14, y0 - k * t + 6, { size: 18, fam: F.mono, w: 700, align: 'right', c: C.dim, a });
+    txt(String(t), x0 - 14, y0 - k * t + 7, { size: 20, fam: F.mono, w: 700, align: 'right', c: C.dim, a });
   }
 }
 /* the trace as a point of the plane, with its real (cyan) and imaginary (violet) legs */
@@ -441,19 +451,19 @@ function mtPoint(x0, y0, k, z, a, o = {}) {
 SCENES.trace = S => {
   const u = S.u, a = mtFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [1, 'Lean checks', 'lean'], [2, null, 'computed'], [3, 'Lean also', 'lean']]);
+  badgeQ(S, [[0, null, 'computed'], [1, 'Lean checks', 'lean'], [2, null, 'computed'], [3, null, 'computed'], [3, 'Lean checks', 'lean']]);
   /* line 0: the definition */
   const da = a * at(S, 0, 0.6);
   panel(120, 190, 1100, 160, da, C.cyan, 'ONE NUMBER · 一个数');
   mtRich([['Tr( P(A) · P(B) · P(C) )', C.white]], 150, 268, { size: 40, a: da });
-  txt('P = (I + r·σ)/2 : the projector of a Bloch vector · 布洛赫矢的投影算子', 150, 324, { size: 20, fam: F.zh, w: 700, c: C.dim, a: da });
+  txt('P = (I + r·σ)/2 : the projector of a Bloch vector · 布洛赫矢的投影算子', 150, 326, { size: 22, fam: F.zh, w: 700, c: C.dim, a: da });
   /* line 1: Lean's identity */
   const la = a * Q(S, 1, 'Lean checks', 0.6);
   if (la > 0.003) {
     panel(120, 380, 1100, 220, la, C.lean, 'FOR ANY REAL VECTORS · 对任意实向量');
     mtRich([['Tr = ', C.white], ['(1 + A·B + B·C + C·A)/4', C.cyan]], 150, 456, { size: 36, a: la });
     mtRich([['     + i ', C.white], ['A·(B×C)/4', C.vio]], 150, 510, { size: 36, a: la * Q(S, 1, 'imaginary part', 0.5) });
-    mtLean(150, 570, MT_LEAN.triple_bargmann_bloch, la, { size: 18 });
+    mtLean(150, 570, MT_LEAN.triple_bargmann_bloch, la, { size: 22 });
   }
   /* line 2: the numbers */
   const na = a * at(S, 2, 0.6);
@@ -466,28 +476,31 @@ SCENES.trace = S => {
   }
   /* the plane */
   const pa = a * at(S, 1, 0.8, 0.6);
-  const x0 = 1300, y0 = 760, k = 560;
+  const x0 = 1300, y0 = 760, k = 440;
   mtPlane(x0, y0, k, pa, { xr: 0.85, yr: 0.3, ticks: [0.25, 0.5, 0.75], yticks: [0.25] });
   const grow = ease(at(S, 2, 1.0));
   if (pa > 0.003 && grow > 0.003) {
     const [px, py] = mtPoint(x0, y0, k, [t[0] * grow, t[1] * grow], pa);
     txt(`${t[0].toFixed(3)} + ${t[1].toFixed(3)} i`, px - 10, py - 26, { size: 28, fam: F.mono, w: 700, align: 'right', c: C.white, a: pa * grow });
-    txt('shadows · 影子', x0 + k * t[0] / 2, y0 + 64, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: pa * grow });
-    txt('volume · 体积', px + 18, (y0 + py) / 2 + 8, { size: 22, fam: F.zh, w: 700, c: C.vio, a: pa * grow });
+    txt('dot products · 点积', x0 + k * t[0] / 2, y0 + 64, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: pa * grow });
+    txt('oriented volume', px + 12, py + 10, { size: 20, fam: F.zh, w: 700, c: C.vio, a: pa * grow });
+    txt('有向体积', px + 12, py + 36, { size: 22, fam: F.zh, w: 700, c: C.vio, a: pa * grow });
   }
-  /* line 3: the loop of spinor overlaps */
-  const oa = a * Q(S, 3, 'Lean also', 0.6);
+  /* line 3: the loop of spinor overlaps. P(A) = |A⟩⟨A| is a hand step (NUM); the chain trace is Lean's */
+  const oa = a * at(S, 3, 0.6);
   if (oa > 0.003) {
     const { A, B, C: Cc } = mtCell(E45), ab = mtOv(A, B), ca = mtOv(Cc, A);
-    panel(1270, 190, 540, 300, oa, C.lean, 'AROUND THE LOOP · 绕一圈');
-    mtRich([['⟨A|B⟩⟨B|C⟩⟨C|A⟩ = Tr', C.white]], 1295, 262, { size: 30, a: oa });
-    const sz = oa * Q(S, 3, 'spinor overlaps', 0.5);
-    mtRich([[ab.toFixed(3), C.white], [' × ', C.dim], [ab.toFixed(3), C.white], [' × ', C.dim], [ca.toFixed(3), C.white]], 1295, 322, { size: 28, a: sz, fam: F.mono });
-    mtRich([['= ', C.dim], [(ab * ab * ca).toFixed(3), C.white], ['  = |Tr|', C.dim]], 1295, 370, { size: 28, a: sz, fam: F.mono });
-    txt('sizes of the overlaps · 重叠的大小（屏上计算）', 1295, 410, { size: 18, fam: F.zh, w: 700, c: C.dim, a: sz });
-    mtLean(1295, 462, MT_LEAN.bargmann_path_product, oa * Q(S, 3, 'around the loop', 0.5), { size: 17 });
+    panel(1270, 190, 540, 360, oa, C.cyan, 'AROUND THE LOOP · 绕一圈');
+    mtRich([['P(A) = |A⟩⟨A|', C.cyan]], 1295, 258, { size: 28, a: oa });
+    txt('hand step · 手算', 1580, 256, { size: 22, fam: F.zh, w: 700, c: C.dim, a: oa });
+    const la2 = oa * Q(S, 3, 'Lean checks', 0.5);
+    mtRich([['Tr = ⟨A|B⟩⟨B|C⟩⟨C|A⟩', C.white]], 1295, 312, { size: 30, a: la2 });
+    mtLean(1295, 360, MT_LEAN.bargmann_path_product, la2, { size: 22 });
+    mtRich([[ab.toFixed(3), C.white], [' × ', C.dim], [ab.toFixed(3), C.white], [' × ', C.dim], [ca.toFixed(3), C.white]], 1295, 418, { size: 28, a: oa, fam: F.mono });
+    mtRich([['= ', C.dim], [(ab * ab * ca).toFixed(3), C.white], ['  = |Tr|', C.dim]], 1295, 464, { size: 28, a: oa, fam: F.mono });
+    txt('sizes of the overlaps · 重叠的大小（屏上计算）', 1295, 512, { size: 22, fam: F.zh, w: 700, c: C.dim, a: oa });
   }
-  if (la > 0.003) stamp('SHADOWS + VOLUME', 960, 456, Q(S, 1, 'volume, over four', 0.4) * (1 - at(S, 2, 0.4, 0.6)), C.lean, 26, -0.06);
+  if (la > 0.003) stamp('DOT PRODUCTS + ORIENTED VOLUME', 900, 456, Q(S, 1, 'volume, over four', 0.4) * (1 - at(S, 2, 0.4, 0.6)), C.lean, 22, -0.06);
 };
 
 /* ======================================================================= */
@@ -529,10 +542,10 @@ SCENES.angle = S => {
     panel(1230, 200, 570, 330, ca, C.mag, 'THE CAP · 球面帽');
     mtRich([['α = γ = ', C.white], [(base / DEG).toFixed(2) + '°', C.white], ['   β = 90°', C.white]], 1255, 270, { size: 28, a: ca, fam: F.mono });
     mtRich([['Ω = α + β + γ − 180° = ', C.white], [(Om / DEG).toFixed(2) + '°', C.mag]], 1255, 326, { size: 26, a: ca, fam: F.mono });
-    txt('Girard: classical · 吉拉尔定理（文献结果）', 1255, 368, { size: 18, fam: F.zh, w: 700, c: C.argued, a: ca });
+    txt('Girard: classical · 吉拉尔定理（文献结果）', 1255, 370, { size: 22, fam: F.zh, w: 700, c: C.argued, a: ca });
     const ha = ca * Q(S, 1, 'Half of that', 0.5);
     mtRich([['Ω/2 = ', C.white], [(Om / 2 / DEG).toFixed(2) + '°', C.mag], ['  = arg Tr', C.white]], 1255, 430, { size: 30, a: ha, fam: F.mono });
-    txt('tan(arg) = tan²(ε/2) · 屏上代数', 1255, 478, { size: 18, fam: F.zh, w: 700, c: C.dim, a: ha });
+    txt('tan(arg) = tan²(ε/2) · 屏上代数', 1255, 482, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ha });
   }
   /* line 2: the octant; line 3: the small step */
   const oa = a * Q(S, 2, 'eighth of the sphere', 0.6) * (1 - at(S, 3, 0.5));
@@ -543,8 +556,8 @@ SCENES.angle = S => {
   const ma = a * at(S, 4, 0.6, 0.4);
   if (ma > 0.003) {
     panel(1230, 200, 570, 170, ma, C.argued, 'MAXIM · 格言');
-    txt('flat = curved, seen from afar', 1255, 270, { size: 26, fam: F.mono, w: 700, c: C.white, a: ma });
-    txt('平直，是远看的弯曲', 1255, 320, { size: 28, fam: F.zh, w: 700, c: C.white, a: ma });
+    txt('flat = curved, coarse ruler', 1255, 270, { size: 26, fam: F.mono, w: 700, c: C.white, a: ma });
+    txt('平直，是尺子太粗时的弯曲', 1255, 320, { size: 28, fam: F.zh, w: 700, c: C.white, a: ma });
   }
 };
 
@@ -559,7 +572,7 @@ SCENES.edge = S => {
     { k: 0, p: 'Lean checks', col: C.lean, en: 'two trace identities, any vectors', zh: '两条迹恒等式，对任意向量成立', lean: true },
     { k: 0, p: 'Girard', col: C.argued, en: "cap's angle sum: Girard", zh: '球面帽内角和：吉拉尔定理', note: 'classical, not formalized here · 经典结果，本书未形式化' },
     { k: 0, p: 'numbers', col: C.cyan, en: 'every number: computed on screen', zh: '片中数字：屏幕上算出', note: '0.707 · 0.729 + 0.125 i · 9.74° · 19.47°' },
-    { k: 1, p: null, col: C.argued, en: 'one cell, two shadows · smallest step', zh: '一体双影 · 自然的最小步长', note: "the book's model, not a proof · 本书的模型，不是证明" }
+    { k: 1, p: null, col: C.argued, en: 'one cell, two shadows', zh: '一体双影：两条路线是同一小胞的两个影子', note: "the book's model, not a proof · 本书的模型，不是证明" }
   ];
   rows.forEach((rw, i) => {
     const ra = a * (rw.p ? Q(S, rw.k, rw.p, 0.6) : at(S, rw.k, 0.6));
@@ -569,9 +582,9 @@ SCENES.edge = S => {
     txt(rw.en, 290, y + 50, { size: 30, fam: F.mono, w: 700, c: rw.col, a: ra });
     txt(rw.zh, 290, y + 94, { size: 26, fam: F.zh, w: 700, c: C.white, a: ra });
     if (rw.lean) {
-      mtLean(1000, y + 52, MT_LEAN.triple_bargmann_bloch, ra, { size: 17 });
-      mtLean(1000, y + 96, MT_LEAN.bargmann_path_product, ra, { size: 17 });
-    } else txt(rw.note, 290, y + 128, { size: 19, fam: F.zh, w: 700, c: rw.col === C.cyan ? C.dim : C.argued, a: ra * 0.95 });
+      mtLean(1000, y + 52, MT_LEAN.triple_bargmann_bloch, ra, { size: 22 });
+      mtLean(1000, y + 100, MT_LEAN.bargmann_path_product, ra, { size: 22 });
+    } else txt(rw.note, 290, y + 130, { size: 22, fam: F.zh, w: 700, c: rw.col === C.cyan ? C.dim : C.argued, a: ra * 0.95 });
   });
 };
 
