@@ -1,0 +1,265 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Pauli": "Powlee"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "dial",
+   "name": "A DIAL YOU CANNOT TOUCH",
+   "lead": 1.9,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "A qubit is an arrow on a dial. Run it many times, and the detector's average gives only its height.",
+     "量子比特是表盘上的一支箭头。重复测许多次，探测器的平均值只告诉你它的高度。"
+    ],
+    [
+     "We want the slope: how fast the height changes as the knob turns.",
+     "我们想要斜率：旋钮转动时，高度变得有多快。"
+    ],
+    [
+     "Usually we nudge the knob and compare. But why should a slope need a nudge?",
+     "通常的做法是把旋钮拧一点点再比较。可凭什么说，斜率非得靠拧一点点？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 3.0,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "turns",
+   "name": "TWO QUARTER TURNS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Set the arrow at sixty degrees. Its height is one half.",
+     "把箭头放在 60°，高度是 1/2。"
+    ],
+    [
+     "Turn back a quarter turn: the height reads zero point eight seven.",
+     "往回转四分之一圈：高度读出 0.87。"
+    ],
+    [
+     "A quarter turn forward: minus zero point eight seven.",
+     "往前转四分之一圈：−0.87。"
+    ],
+    [
+     "Half the difference is minus zero point eight seven, exactly the slope of the tangent.",
+     "两值之差的一半是 −0.87，正好是切线的斜率。"
+    ],
+    [
+     "Move the arrow anywhere: half the difference still matches the tangent's slope.",
+     "箭头转到哪里，差的一半都等于切线的斜率。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 3.2,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "why",
+   "name": "WHY A QUARTER TURN",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Think of a shadow on a wall. The arrow a quarter turn ahead shows how fast the shadow moves now.",
+     "想想墙上的影子：前方四分之一圈的那支箭头，正好显出影子此刻移动的快慢。"
+    ],
+    [
+     "For one Pauli turn, the height is a pure wave plus a constant. The turn back cancels the constant, so the rule is exact.",
+     "一扇泡利门下，高度是纯正弦波加常数；往回转那一下减掉常数，规则就精确了。"
+    ],
+    [
+     "A thirty degree nudge gives a chord about four and a half percent too shallow.",
+     "拧 30° 的小步差分，弦要缓大约 4.5%。"
+    ],
+    [
+     "The slope was never next door. It was a quarter turn away.",
+     "斜率从不藏在隔壁，它在四分之一圈之外。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.4,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "lean",
+   "name": "WHAT LEAN CHECKS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Behind the tangent is a general rule, and Lean checks it for any finite system.",
+     "切线背后是一条一般规则，Lean 内核对任意有限维系统都检验过。"
+    ],
+    [
+     "With a Hermitian generator, a projector and any state, the probability is differentiable.",
+     "取厄米生成元、投影与任意一个态，测得的概率对时间可导。"
+    ],
+    [
+     "Its rate is a commutator traced against the evolved state, and that number is real.",
+     "变化率是生成元与投影的对易子同演化后的态求迹，这个数恒为实数。"
+    ],
+    [
+     "On our dial the rate is minus zero point four three three. Twice that is the slope of the height.",
+     "在我们的表盘上，概率的变化率是 −0.433，它的两倍正是高度的斜率。"
+    ],
+    [
+     "If the generator commutes with the projector, nothing moves: spin around the measured axis, and the height stays.",
+     "生成元与投影对易时，概率一动不动：绕着被测的轴转，高度不变。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 3.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "budget",
+   "name": "A BUDGET OF MODES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Slopes tell us where to step. A separate question: how many modes can be big at once?",
+     "斜率告诉我们往哪里走。另一个问题：有多少个模式能同时很大？"
+    ],
+    [
+     "Split one dollar among many people. Each winner costs at least a dime, so at most ten win.",
+     "把一块钱分给许多人：每个拿到一角以上的人至少花掉一角，所以最多十个人。"
+    ],
+    [
+     "Lean checks this for any nonnegative list with a finite total, and any positive threshold.",
+     "Lean 内核对任意总和有限的非负数列、任意正阈值检验了这个道理。"
+    ],
+    [
+     "The big terms are finitely many, at most the total over the threshold.",
+     "过线的项只有有限个，至多是总和除以阈值。"
+    ],
+    [
+     "Halves, quarters, eighths: three terms reach an eighth, and the wall is at eight.",
+     "1/2、1/4、1/8……够得到 1/8 的有三项，墙在 8。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "edge",
+   "name": "WHAT IT DOES NOT SAY",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "The quarter turn rule needs the angle in a single Pauli turn. It is a literature result.",
+     "四分之一圈规则要求角度只出现在一扇泡利门里；它是文献结果。"
+    ],
+    [
+     "The mode count is only a ceiling. It cannot stop a slope from vanishing.",
+     "模式计数只是一道天花板，拦不住斜率消失。"
+    ],
+    [
+     "Flat landscapes in large random circuits need more assumptions, also from the literature.",
+     "大规模随机电路里的平坦地貌需要更多假设，同样来自文献。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.4,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Geometric Intuition of Quantum Computing, chapter twelve.",
+     "《量子计算的几何直觉》· 第十二章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}
