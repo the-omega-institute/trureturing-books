@@ -281,7 +281,7 @@ SCENES.hook = S => {
   const qa = a * Q(S, 2, 'needs a push', 0.6);
   if (qa > 0.003) {
     chip(1400, 760, 600, 70, 'every turn = a push ?', C.white, qa, 30, F.mono);
-    txt('谁在推？', 1400, 830, { size: 30, fam: F.zh, w: 700, align: 'center', c: C.white, a: a * Q(S, 2, 'who is pushing', 0.6) });
+    txt('谁在推？', 1400, 830, { size: 30, fam: F.zh, w: 700, align: 'center', c: C.white, a: a * Q(S, 2, 'Who is pushing', 0.6) });
   }
   txt('typical numbers: engineering literature · 典型数值：工程文献', 120, 830, { size: 18, fam: F.zh, w: 700, c: C.argued, a: a * 0.9 });
 };
@@ -552,7 +552,7 @@ SCENES.pull = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [1, null, 'argued'], [2, null, 'computed'], [3, 'Lean checks', 'lean'], [4, null, 'argued']]);
   /* step count: 0..3 during line 2, one step per number spoken */
-  const L2 = lineAt(S, 2), mark = ['goes one', 'three quarters', 'one quarter', 'zero, on'];
+  const L2 = lineAt(S, 2), mark = ['read one', 'three quarters', 'one quarter', 'quarter, zero'];
   let step = 0;
   if (u >= L2.s) for (let k = 1; k < 4; k++) if (u >= phraseAt(S, 2, mark[k])) step = k;
   const cont = u < L2.s ? 1 * ease(clamp((u - phraseAt(S, 0, 'push the state')) / 1.6)) : 0;
