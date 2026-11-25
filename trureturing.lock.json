@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "16dc821e19c688a0618f787e23b331a9ca36e769",
-  "pinned_at": "2026-11-25T14:58:29Z",
+  "pinned_at": "2026-11-25T15:09:51Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1753,6 +1753,14 @@
       "statement_id": "sha256:870554a893a083a0796d105fe3ad97c9532a95aed25df407209918712ce05d27",
       "line": 485,
       "signature": "theorem IsChordal.exists_uniform_approximate_gain_potential [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (g : V → V → H) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, G.Adj i j → g j i = (g i j)⁻¹) (htri : ∀ i j k, G.Adj i j → G.Adj j k → G.Adj i k → Dist.dist (g i j * g j k) (g i k) ≤ ε) : ∃ φ : V → H, ∀ i j, G.Adj i j → Dist.dist (g i j) ((φ i)⁻¹ * φ j) ≤ 4 * ε"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/WeightedCliqueBanachPotential.SimpleGraph.IsChordal.exists_biased_clique_banach_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/WeightedCliqueBanachPotential",
+      "name": "SimpleGraph.IsChordal.exists_biased_clique_banach_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:f04a9f601638c69cb087ba6b3a53da81a32b697ec9216d11487a4e536859e212",
+      "line": 561,
+      "signature": "theorem IsChordal.exists_biased_clique_banach_gain_potential {V : Type u} [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (k : ℕ) (hk : 3 ≤ k) (hclique : ∀ s : Finset V, G.IsClique (s : Set V) → s.card ≤ k + 1) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ (4 - 4 / (k : ℝ) - 2 * ((k : ℝ) - 2)^2 / ((k : ℝ) * ((k : ℝ) - 1)^3)) * ε"
     },
     "D5/S3/Combinatorics/Graph/Hypercube/DirectionMatching.exact_matching_directions": {
       "module": "D5/S3/Combinatorics/Graph/Hypercube/DirectionMatching",
