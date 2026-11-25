@@ -47,7 +47,7 @@ const ncc = {
   conj: a => [a[0], -a[1]],
   abs: a => Math.hypot(a[0], a[1])
 };
-/* the Bloch vector of a nonzero ψ = (ψ0, ψ1): ρ = ψψ*/|ψ|², a = (2 Re ρ10, 2 Im ρ10, ρ00 − ρ11) */
+/* the Bloch vector of a nonzero ψ = (ψ0, ψ1): ρ = ψψ† / |ψ|², a = (2 Re ρ10, 2 Im ρ10, ρ00 − ρ11) */
 function ncBloch(p) {
   const n = ncc.abs(p[0]) ** 2 + ncc.abs(p[1]) ** 2, r10 = ncc.mul(p[1], ncc.conj(p[0]));
   return [2 * r10[0] / n, 2 * r10[1] / n, (ncc.abs(p[0]) ** 2 - ncc.abs(p[1]) ** 2) / n];
@@ -348,7 +348,6 @@ SCENES.theorem = S => {
       txt(scramble(`${q}  →  ${v}`, 1 - burn * 0.8, i + 7), 360 + dx, y + dy, { size: 30, fam: F.math, w: 700, c: C.argued, a: pa * (1 - burn * 0.85) });
     });
     ctx.restore();
-    txt('−', 300, 760, { size: 120, fam: F.math, w: 900, c: C.now, a: pa, ab: 3 });
     txt('One minus sign is enough to burn the whole ledger.', 1150, 700, { size: 36, fam: F.disp, w: 700, align: 'center', c: C.white, a: pa });
     txt('一个负号，就足以烧掉整本账。', 1150, 770, { size: 40, fam: F.zh, w: 900, align: 'center', c: C.white, a: pa, ab: 2 });
   }
@@ -386,19 +385,19 @@ SCENES.sphere = S => {
   /* line 1: X swaps the entries of Z's two sure directions */
   const va = a * at(S, 1, 0.6) * (1 - at(S, 3, 0.6));
   if (va > 0.003) {
-    panel(110, 190, 860, 380, va, C.cyan, 'Z IS SURE HERE · Z 在这里确定');
-    const rowsY = [330, 470];
+    panel(1060, 430, 760, 380, va, C.cyan, 'Z IS SURE HERE · Z 在这里确定');
+    const rowsY = [560, 690];
     [[[1, 0], [0, 1]], [[0, 1], [1, 0]]].forEach(([v, w], i) => {
       const y = rowsY[i], ra = va * (i === 0 ? Q(S, 1, 'one zero', 0.5) : Q(S, 1, 'zero one', 0.5));
       if (ra <= 0.003) return;
-      ncRich([['X', C.white]], 150, y + 12, { size: 38, a: ra });
-      let x = ncVec(v, 200, y, ra, { c: C.cyan });
+      ncRich([['X', C.white]], 1096, y + 12, { size: 38, a: ra });
+      let x = ncVec(v, 1146, y, ra, { c: C.cyan });
       const sw = va * Q(S, 1, 'swaps the two entries', 0.6);
       txt('=', x + 24, y + 12, { size: 38, fam: F.math, w: 700, c: C.white, a: ra * sw });
       x = ncVec(w, x + 70, y, ra * sw, { c: C.now });
       txt(`≠ λ (${v[0]}, ${v[1]})ᵀ`, x + 30, y + 12, { size: 32, fam: F.math, w: 700, c: C.white, a: ra * Q(S, 1, 'it moves both', 0.5) });
     });
-    txt('Z’s sure states, up to scale · Z 的本征方向（差一个倍数）', 150, 548, { size: 20, fam: F.zh, w: 700, c: C.dim, a: va });
+    txt('sure states of Z, up to scale ·Z 的本征方向（差一个倍数）', 1096, 784, { size: 20, fam: F.zh, w: 700, c: C.dim, a: va });
   }
   /* line 2: Lean */
   const la = a * Q(S, 2, 'Lean checks', 0.6);
@@ -409,10 +408,10 @@ SCENES.sphere = S => {
     ncLean(1096, 362, NC_LEAN.pauli_observables_have_no_common_eigenvector, la, { size: 17 });
   }
   /* lines 3–4: the Bloch sphere */
-  const ba = a * at(S, 3, 0.8);
+  const ba = a * at(S, 0, 0.8), tourOn = at(S, 3, 0.6);
   if (ba > 0.003) {
     const V = ncView(560, 600, 250, -0.55 + 0.03 * (u - lineAt(S, 3).s), 0.28);
-    const st = ncTour(S, lineAt(S, 3).s + 0.6);
+    const st = tourOn > 0 ? ncTour(S, lineAt(S, 3).s + 0.6) : [0, 0, 1];
     const ca = a * at(S, 4, 0.6);
     const sh = ncShot('bloch', V, [200, 300, 720, 600]);
     sh.begin();
@@ -431,7 +430,7 @@ SCENES.sphere = S => {
     lab([-1, 0, 0], 'X = −1 · 西 |−⟩', C.white, -190, 34);
     if (ca > 0.01) { const o = sh.anchor([0, 0, 0]); txt('centre · 球心 I/2', o.x - 22, o.y + 34, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.white, a: ca }); }
     /* the readout: where the amber state is sure for Z, for X */
-    const ra = ba * (1 - 0);
+    const ra = ba * tourOn;
     panel(1060, 430, 760, 220, ra, C.cyan, 'IS THE ANSWER SURE? · 答案确定吗');
     const zs = Math.abs(st[2]) > 0.9999, xs = Math.abs(st[0]) > 0.9999;
     txt('Z', 1100, 510, { size: 34, fam: F.math, w: 700, c: C.cyan, a: ra });
@@ -453,7 +452,7 @@ SCENES.sphere = S => {
 SCENES.edge = S => {
   const a = ncFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [1, null, 'argued']]);
+  badgeQ(S, [[0, null, 'argued']]);
   const rows = [
     { k: 0, col: C.cyan, en: 'forbids: one global table keeping every product', zh: '排除的是：守住所有乘积的全局数表', note: 'not every hidden-variable model · 并不排除所有隐变量模型', q: 'It does not' },
     { k: 1, col: C.argued, en: 'answers made in the meeting', zh: '答案在相遇时生成，而非揣在口袋里', note: "this book's reading, not a theorem · 本书的诠释，不是定理", q: "this book's reading" }
