@@ -1,6 +1,6 @@
 {
   "voice": "af_heart",
-  "speed": 0.94,
+  "speed": 1.0,
   "say": {
     "Lean": "Leen",
     "Bloch": "Block",
@@ -33,8 +33,8 @@
           "再筛一遍，筛子什么也拦不住了。"
         ],
         [
-          "That dull second pass is the mark of a measurement. In symbols, P squared equals P.",
-          "这无聊的第二遍，正是测量的标志。写成符号：P² = P。"
+          "That dull second pass is the whole idea. In symbols, P squared equals P.",
+          "这无聊的第二遍，就是全部要点。写成符号：P² = P。"
         ]
       ],
       "cues": [
@@ -93,11 +93,11 @@
       ],
       "lines": [
         [
-          "Take a qubit whose Bloch arrow points zero point six across and zero point eight up.",
+          "Take a qubit whose Bloch arrow points zero point six across, zero point eight up.",
           "取一个量子比特，布洛赫箭头横向 0.6、竖向 0.8。"
         ],
         [
-          "Its density matrix has zero point nine and zero point one on the diagonal, zero point three in each corner.",
+          "Its density matrix: zero point nine and zero point one on the diagonal, zero point three in each corner.",
           "它的密度矩阵：对角线上是 0.9 和 0.1，两个角上各是 0.3。"
         ],
         [
@@ -109,8 +109,8 @@
           "沿 Z 测一次但不看：两个角被抹成零，对角线不动。"
         ],
         [
-          "Do it again. There are no corners left to wipe, so nothing moves.",
-          "再做一次：已经没有角可抹，什么也不动。"
+          "Do it again. No corners are left to wipe, so nothing moves.",
+          "再做一次：没有角可抹了，什么也不动。"
         ]
       ],
       "cues": [
@@ -148,7 +148,7 @@
           "道理很短：不同的抽屉相乘为零，每只抽屉的平方是它自己。"
         ],
         [
-          "Why do we trust that something is there? Not because it came first, but because asking twice gives the same answer.",
+          "Why trust that something is there? Not because it came first, but because asking twice gives the same answer.",
           "我们凭什么相信某样东西在那里？不是因为它先在那里，而是因为问两遍，答案一样。"
         ],
         [
@@ -182,19 +182,19 @@
           "那么，抹掉的角去了哪儿？记一本账。"
         ],
         [
-          "The state is pure, so its purity is one. Minus one half leaves a surplus of one half.",
-          "这个态是纯态，纯度是 1；减去 ½，盈余是 ½。"
+          "The state is pure: purity one, minus one half, leaves a surplus of one half.",
+          "这是纯态：纯度 1，减去 ½，盈余是 ½。"
         ],
         [
           "Each Z reading sits zero point four from even. Square both and add: zero point three two, the line's share.",
           "Z 的两个读数各离均匀值 0.4；平方相加得 0.32，这是线上的一份。"
         ],
         [
-          "The other zero point one eight lives in the plane at right angles. It is twice the corner squared.",
-          "剩下的 0.18 住在与线垂直的平面里，恰好是角上数值平方的两倍。"
+          "The other zero point one eight lives in the plane at right angles: twice the corner squared.",
+          "剩下的 0.18 住在与线垂直的平面里：角上数值平方的两倍。"
         ],
         [
-          "Lean checks the general split: the surplus equals the visible deviations plus what is left in the perpendicular space.",
+          "Lean checks the general split: the surplus is the visible deviations plus what is left in the perpendicular space.",
           "Lean 内核检验一般的分解：盈余等于可见偏离加上正交补里的剩余质量。"
         ],
         [
@@ -224,15 +224,15 @@
       ],
       "lines": [
         [
-          "Not looking is not collapse. Reading a result keeps one drawer and rescales it, a different update.",
-          "不看不等于坍缩。读出结果是留下一只抽屉再重新归一，那是另一种更新。"
+          "Not looking is not collapse. Reading a result keeps one drawer and rescales it.",
+          "不看不等于坍缩。读出结果，是留下一只抽屉再重新归一。"
         ],
         [
-          "Pinching again never brings back the lost zero point one eight. Where it went is chapter four's question.",
-          "再捏多少次，丢掉的 0.18 也回不来；它去了哪儿，是第四章的问题。"
+          "Pinching again never returns the lost zero point one eight. Where it went is chapter four.",
+          "再捏多少次，丢掉的 0.18 也回不来；它去了哪儿，见第四章。"
         ],
         [
-          "And existence as a line you can check twice is this book's reading, not a theorem.",
+          "And existence as a line you check twice is this book's reading, not a theorem.",
           "至于“存在就是能连查两次的线”，这是本书的诠释，不是定理。"
         ]
       ]
@@ -241,7 +241,7 @@
       "id": "close",
       "name": "LEDGER",
       "lead": 0.5,
-      "tail": 3.4,
+      "tail": 2.8,
       "music": [
         1.0,
         0.6,
