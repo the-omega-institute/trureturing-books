@@ -938,7 +938,7 @@ At every fixed real rear offset $r$, using the rear feature formula in the same 
 $$
 N^3p_N^{\rm rear}(r)\longrightarrow B_\infty-\tfrac34r^2.
 $$
-The strict sign at any such offset is determined by this limit when it is nonzero. The limits concern the signed fit for a fixed nonempty finite rear set $S$. To certify a particular cyclic optimizer one still needs to identify the finite cyclic site correspondence and extend the complement signs across all other sites. At $B_\infty=3r^2/4$ the limiting sign alone leaves the activation level open.
+The strict sign at any such offset is determined by this limit when it is nonzero. The limits concern the signed fit for a fixed nonempty finite rear set $S$. To certify a particular cyclic optimizer one still needs to identify the finite cyclic site correspondence and extend the complement signs across all other sites. At $B_\infty=3r^2/4$ the limiting sign alone leaves the activation level open. [Lean proof of the coefficient rate](https://github.com/the-omega-institute/trureturing/blob/24f6cf4165508f8beb798207d26550f4647efaff/D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.lean#L558) · [Front and half-step limits](https://github.com/the-omega-institute/trureturing/blob/24f6cf4165508f8beb798207d26550f4647efaff/D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.lean#L786) · [Rear limit](https://github.com/the-omega-institute/trureturing/blob/24f6cf4165508f8beb798207d26550f4647efaff/D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.lean#L847) · [Research problem](https://github.com/the-omega-institute/trureturing/issues/34029)
 
 ## Changing the height cutoff in a local statistic
 

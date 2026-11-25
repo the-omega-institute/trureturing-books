@@ -938,7 +938,7 @@ $$
 $$
 N^3p_N^{\rm rear}(r)\longrightarrow B_\infty-\tfrac34r^2.
 $$
-极限非零时可确定充分大 $N$ 下的严格符号。这些极限适用于固定的非空有限对径集合 $S$ 上的带符号拟合。认证循环群最优解仍需建立有限循环格点的对应并将补集的符号控制延伸至所有剩余格点。当 $B_\infty=3r^2/4$ 时，该层的激活状态仍待判定。
+极限非零时可确定充分大 $N$ 下的严格符号。这些极限适用于固定的非空有限对径集合 $S$ 上的带符号拟合。认证循环群最优解仍需建立有限循环格点的对应并将补集的符号控制延伸至所有剩余格点。当 $B_\infty=3r^2/4$ 时，该层的激活状态仍待判定。 [系数误差阶的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/24f6cf4165508f8beb798207d26550f4647efaff/D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.lean#L558) · [前部与半步极限](https://github.com/the-omega-institute/trureturing/blob/24f6cf4165508f8beb798207d26550f4647efaff/D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.lean#L786) · [对径极限](https://github.com/the-omega-institute/trureturing/blob/24f6cf4165508f8beb798207d26550f4647efaff/D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.lean#L847) · [研究问题](https://github.com/the-omega-institute/trureturing/issues/34029)
 
 ## 局部统计在截点变化下的误差
 
