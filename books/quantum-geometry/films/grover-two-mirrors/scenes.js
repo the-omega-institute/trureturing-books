@@ -45,7 +45,8 @@ const grStep = v => grDiffuse(grOracle(v));
 const GR_N100 = (() => {
   const th = Math.asin(0.1);
   let best = 0, bp = -1;
-  for (let n = 0; n < 40; n++) { const pr = Math.pow(Math.sin((2 * n + 1) * th), 2); if (pr > bp) { bp = pr; best = n; } }
+  /* the first peak: angles below 180° */
+  for (let n = 0; (2 * n + 1) * th < Math.PI; n++) { const pr = Math.pow(Math.sin((2 * n + 1) * th), 2); if (pr > bp) { bp = pr; best = n; } }
   return { th, n: best, ang: (2 * best + 1) * th, pr: bp, est: Math.PI / 4 * 10 };
 })();
 
@@ -173,7 +174,7 @@ function grAxes(O, R, a, o = {}) {
   const e = P([1.12, 0]), n = P([0, 1.12]);
   arrow(O[0], O[1], e[0], e[1], C.white, a * 0.75, 2.5);
   arrow(O[0], O[1], n[0], n[1], C.white, a * 0.75, 2.5);
-  txt(o.bl || 'B  failure · 失败', e[0] - 10, e[1] + 42, { size: 24, fam: F.zh, w: 700, align: 'right', c: C.white, a });
+  txt(o.bl || 'B  failure · 失败', e[0] + 16, e[1] + 9, { size: 24, fam: F.zh, w: 700, c: C.white, a });
   txt(o.wl || 'W  success · 成功', n[0] + 18, n[1] + 12, { size: 24, fam: F.zh, w: 700, c: C.white, a });
   return P;
 }
@@ -192,7 +193,7 @@ function grTitle(S) {
 /* ======================================================================= */
 /*                               scene 1 · TWO MIRRORS                       */
 /* ======================================================================= */
-const MI_O = [700, 560];
+const MI_O = [560, 600];
 /* an asymmetric flag, in world units (pixels, y up), pointing along +x before it is turned to angle φ */
 const MI_FLAG = [[210, -16], [330, -16], [330, 70], [270, 70], [270, 40], [300, 40], [300, 16], [210, 16]];
 function miFlag(map, col, a, fill) {
@@ -204,8 +205,8 @@ SCENES.mirrors = S => {
   const a = clamp((u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
-  grMirror(MI_O, 430, 0, a, 'mirror 1 · 镜 1');
-  grMirror(MI_O, 430, GR_HINGE, a * Q(S, 0, 'that cross', 0.6), 'mirror 2 · 镜 2');
+  grMirror(MI_O, 420, 0, a, 'mirror 1 · 镜 1');
+  grMirror(MI_O, 420, GR_HINGE, a * Q(S, 0, 'that cross', 0.6), 'mirror 2 · 镜 2');
   grArc(MI_O, 120, 0, GR_HINGE, C.cyan, a * Q(S, 0, 'that cross', 0.6), 3);
   txt('30°', MI_O[0] + 140, MI_O[1] - 30, { size: 26, fam: F.mono, w: 700, c: C.cyan, a: a * Q(S, 0, 'that cross', 0.6) });
   /* the shape, its first image (dashed, dim) and its second image (amber) */
@@ -237,7 +238,7 @@ SCENES.mirrors = S => {
 /* ======================================================================= */
 /*                               scene 2 · FOUR BOXES                        */
 /* ======================================================================= */
-const PL_O = [320, 760], PL_R = 480;
+const PL_O = [260, 760], PL_R = 440;
 function plBoxes(x, y, a, amps, hi) {
   /* four boxes, the first holding the prize; the amplitude written inside */
   for (let i = 0; i < 4; i++) {
@@ -271,7 +272,7 @@ SCENES.plane = S => {
     ctx.save(); ctx.setLineDash([6, 6]);
     line(U[0], U[1], U[0], PL_O[1], C.white, sa * 0.5, 1.5); line(U[0], U[1], PL_O[0], U[1], C.white, sa * 0.5, 1.5); ctx.restore();
     arrow(PL_O[0], PL_O[1], U[0], U[1], C.now, pa, 6);
-    txt('U  start · 起点', U[0] + 14, U[1] - 14, { size: 26, fam: F.zh, w: 700, c: C.now, a: pa });
+    txt('U  start · 起点', U[0] + 26, U[1] + 34, { size: 26, fam: F.zh, w: 700, c: C.now, a: pa });
     txt('½', PL_O[0] - 30, U[1] + 10, { size: 28, fam: F.math, w: 700, align: 'right', c: C.white, a: sa });
     txt('√3/2', U[0], PL_O[1] + 40, { size: 26, fam: F.math, w: 700, align: 'center', c: C.white, a: sa });
   }
@@ -318,7 +319,8 @@ SCENES.count = S => {
   if (ma > 0.003) {
     const y = CO.y0 - 0.25 * CO.k;
     ctx.save(); ctx.setLineDash([10, 8]); line(CO.x - 30, y, xr, y, C.cyan, ma, 3); ctx.restore();
-    txt('average ¼ · 平均值 ¼  (mirror · 镜)', xr, y - 14, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.cyan, a: ma });
+    txt('average ¼ · 平均值 ¼', CO.x - 70, y - 4, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.cyan, a: ma });
+    txt('a mirror · 一面镜子', CO.x - 70, y + 26, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.cyan, a: ma });
   }
   /* the left: a small dial of the state in the plane */
   const O = [300, 700], R = 300;
@@ -331,7 +333,7 @@ SCENES.count = S => {
   const ta = a * Q(S, 3, 'turned sixty', 0.8);
   grArc(O, 110, GR_TH, 3 * GR_TH, C.argued, ta, 4);
   txt('+60°', O[0] + 100, O[1] - 150, { size: 26, fam: F.mono, w: 700, c: C.argued, a: ta });
-  txt(`${Math.round(ang / GR_DEG)}°`, tip[0] + 16, tip[1] + (ang < 0 ? 30 : -8), { size: 26, fam: F.mono, w: 700, c: C.now, a });
+  txt(`${Math.round(ang / GR_DEG)}°`, tip[0] + 22, tip[1] + 34, { size: 26, fam: F.mono, w: 700, c: C.now, a });
   /* ledger line at the top */
   const rows = [
     [0, 'mirror 1 · 镜 1:  (½, ½, ½, ½) → (−½, ½, ½, ½)', 'flips the sign'],
@@ -346,7 +348,7 @@ SCENES.count = S => {
 /* ======================================================================= */
 /*                                scene 4 · THE RULE                         */
 /* ======================================================================= */
-const RU_O = [330, 760], RU_R = 420;
+const RU_O = [260, 760], RU_R = 400;
 SCENES.rule = S => {
   const u = S.u, a = grFade(S);
   if (a <= 0) return;
@@ -365,17 +367,17 @@ SCENES.rule = S => {
       const g = (2 * n + 1) * th, q = P([Math.cos(g), Math.sin(g)]);
       const da = na * (n <= shown ? 1 : 0.25);
       dot(q[0], q[1], 9, 'w', da);
-      txt(`${2 * n + 1}θ`, q[0] + 16, q[1] - 6, { size: 22, fam: F.math, w: 700, c: C.white, a: da });
+      txt(`n = ${n}`, q[0] + 16, q[1] - 6, { size: 22, fam: F.mono, w: 700, c: C.white, a: da });
     }
     const g = (2 * shown + 1) * th, q = P([Math.cos(g), Math.sin(g)]);
     if (na > 0.003) { grArc(RU_O, 140, th, g, C.argued, na, 4); arrow(RU_O[0], RU_O[1], q[0], q[1], C.now, na, 6); }
-    if (na > 0.003 && shown > 0) txt(`n = ${shown}`, RU_O[0] + 150, RU_O[1] - 150 - 20 * shown, { size: 24, fam: F.mono, w: 700, c: C.now, a: na });
     txt('same angle 2θ every step · 每步同转 2θ', RU_O[0], RU_O[1] + 60, { size: 22, fam: F.zh, w: 700, c: C.argued, a: na });
   }
   /* the theorem panel */
   panel(960, 180, 860, 600, a, C.lean, 'ANY MARKED SET · 任意标记集合');
   grRich([['0 < p ≤ 1,   sin θ = √p', C.white]], 990, 250, { size: 28, a: a * Q(S, 0, 'any success chance', 0.6) });
-  txt('same p for every source column · 每一源列成功率相同', 990, 290, { size: 18, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 0, 'any success chance', 0.6) });
+  txt('U = CJ an isometry, P a projector · U 为等距，P 为投影', 990, 284, { size: 18, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 0, 'any marked set', 0.6) });
+  txt('same p for every source column · 每一源列成功率相同', 990, 312, { size: 18, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 0, 'any success chance', 0.6) });
   grRich([['p < 1:   W*W = 1,  B*B = 1,  W*B = 0', C.white]], 990, 360, { size: 28, a: a * at(S, 1, 0.6) });
   grRich([['Qⁿ U = ', C.now], ['sin((2n+1)θ)', C.white], [' W + ', C.now], ['cos((2n+1)θ)', C.white], [' B', C.now]], 990, 440, { size: 28, a: a * at(S, 2, 0.6) });
   txt('Q = (2UU* − I)(I − 2P),   every n ∈ ℕ', 990, 484, { size: 22, fam: F.math, w: 700, c: C.cyan, a: a * at(S, 2, 0.6) });
@@ -390,7 +392,7 @@ SCENES.rule = S => {
 /* ======================================================================= */
 /*                               scene 5 · PAST THE TOP                      */
 /* ======================================================================= */
-const OV_O = [520, 560], OV_R = 330;
+const OV_O = [480, 510], OV_R = 290;
 SCENES.over = S => {
   const u = S.u, a = grFade(S);
   if (a <= 0) return;
@@ -404,15 +406,15 @@ SCENES.over = S => {
   ctx.beginPath(); ctx.arc(OV_O[0], OV_O[1], OV_R, 0, TAU); ctx.stroke(); ctx.restore();
   line(OV_O[0] - OV_R - 30, OV_O[1], OV_O[0] + OV_R + 30, OV_O[1], C.white, a * 0.6, 2);
   line(OV_O[0], OV_O[1] + OV_R + 30, OV_O[0], OV_O[1] - OV_R - 30, C.white, a * 0.6, 2);
-  txt('W', OV_O[0] + 14, OV_O[1] - OV_R - 20, { size: 26, fam: F.math, w: 700, c: C.white, a });
-  txt('−W', OV_O[0] + 14, OV_O[1] + OV_R + 44, { size: 26, fam: F.math, w: 700, c: C.white, a });
+  txt('W', OV_O[0] - 16, OV_O[1] - OV_R - 12, { size: 26, fam: F.math, w: 700, align: 'right', c: C.white, a });
+  txt('−W', OV_O[0] - 16, OV_O[1] + OV_R + 34, { size: 26, fam: F.math, w: 700, align: 'right', c: C.white, a });
   txt('B', OV_O[0] + OV_R + 40, OV_O[1] + 9, { size: 26, fam: F.math, w: 700, c: C.white, a });
   /* the positions (2k+1)·30° for k = 0..4 */
   for (let k = 0; k <= 4; k++) {
     const g = (2 * k + 1) * GR_TH, q = [OV_O[0] + OV_R * Math.cos(g), OV_O[1] - OV_R * Math.sin(g)];
     const da = a * clamp(nF - k + 0.2);
     dot(q[0], q[1], 8, 'w', da * 0.8);
-    const off = [Math.cos(g) * 56, -Math.sin(g) * 40 + 8];
+    const off = [Math.cos(g) * 64 + (Math.abs(Math.cos(g)) < 0.2 ? 56 : 0), -Math.sin(g) * 34 + 8];
     txt(`${(2 * k + 1) * 30}°`, q[0] + off[0], q[1] + off[1], { size: 22, fam: F.mono, w: 700, align: 'center', c: C.dim, a: da });
   }
   const g = (2 * (nF - 1) + 1) * GR_TH, tip = [OV_O[0] + OV_R * Math.cos(g), OV_O[1] - OV_R * Math.sin(g)];
@@ -437,7 +439,7 @@ SCENES.over = S => {
   /* the aphorism */
   const fa = a * Q(S, 3, 'Search is not', 0.8);
   if (fa > 0.003) {
-    chip(W / 2, 800, 1200, 84, 'search is turning · 搜索是转动', C.argued, fa, 36, F.zh);
+    chip(1470, 790, 700, 80, 'search is turning · 搜索是转动', C.argued, fa, 34, F.zh);
   }
 };
 
@@ -450,7 +452,7 @@ SCENES.edge = S => {
   badgeQ(S, [[0, null, 'lean'], [1, null, 'computed'], [3, null, 'argued']]);
   const N = GR_N100;
   const rows = [
-    { k: 0, col: C.lean, en: 'p = 1:   U = W', zh: '起点就是奖品：只说起点与成功箭头重合', note: 'the separate branch of the theorem · 定理的单列分支', lean: true },
+    { k: 0, col: C.lean, en: 'p = 1:   U = W', zh: '起点就是奖品：只说起点与成功箭头重合', note: 'the p = 1 branch of the theorem · 定理里 p = 1 的那一支', lean: true },
     { k: 1, col: C.cyan, en: `N = 100:  θ = ${(N.th / GR_DEG).toFixed(2)}°,  best n = ${N.n},  ${(N.ang / GR_DEG).toFixed(1)}°,  ${N.pr.toFixed(3)}`, zh: '整数步只能逼近顶点；N = 4 是一步正好命中的特例', note: 'computed on screen · 屏幕上的计算' },
     { k: 2, col: C.cyan, en: `(π/4)√N:   (π/4)·√100 ≈ ${N.est.toFixed(2)}`, zh: '步数估计是在定理之上算出来的', note: 'arithmetic, not part of the theorem · 不属于定理本身' },
     { k: 3, col: C.argued, en: 'no quantum search beats Ω(√N) queries', zh: '查询下界 Ω(√N)', note: 'literature result, not formalized in this book · 文献结果，本书未形式化' }
