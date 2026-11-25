@@ -766,6 +766,8 @@ $$
 $$
 The last term is summable and nonnegative. When $s\le m$, the identity gives strict uniqueness of the weights. Since $t\ge1$, their values $w_0=t/Z$ and $w_0-w_1=1/Z$ also determine $t$ and $Z$. The adjacent closed intervals give the same weights and parameters at their shared endpoint. The half-open condition $(n^2-1)/5\le m<n(n+2)/5$ selects the unique index $n=\lfloor\sqrt{5m+1}\rfloor$. On the first interval $0\le m\le3/5$, the three possible sites have weights $1-m$ at zero and $m/2$ at each neighbor. In the second-harmonic scale $\lambda=8\pi^2m$, the upper endpoint is exactly $24\pi^2/5$. A quantitative transfer of the lattice minimum back to the finite cycle has to account for the second cosine also approaching $1$ near the antipode.
 
+[Lean proof of the closed-interval support and exact remainder](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer_on_interval) · [Lean proof of the global half-open classification](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer)
+
 ### The finite cyclic minimum converges to the lattice minimum
 
 Fix $\lambda\ge0$ and set $m=\lambda/(8\pi^2)$ and $a=1-\lambda/q^2$. Write $L(m)$ for the lattice minimum above and $E_q(a)$ for the minimum squared mass on the cycle with both cosine moments at least $a$. If $m$ belongs to the interval indexed by $n$, let $R$ be its support radius. At the lower endpoint $R=n-1$, and elsewhere $R=n$. When $q>2R$, the cyclic minimum is attained and
@@ -785,6 +787,8 @@ $$
 lies below $w_{\bar i}$ at every residue. Expressing $2\sum_i v_iP_i$ in terms of the two cosine moments gives the contributions $S_1,S_2$. Use $(t-m)/Z=L(m)$ in the expansion of the squared distance. Both contributions are nonnegative for feasible weights. The zero site contributes $t$ to the normalizer $Z$, giving $t/Z\le1$.
 
 Each fixed budget lies in an interval of finite support radius. Thus $E_q(1-\lambda/q^2)$ tends to $L(\lambda/(8\pi^2))$ through all integer moduli. The arithmetic estimate for high-order frequencies of the actual ζ zeros remains open.
+
+[Lean proof of the centered cosine identity](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cosineMoment_eq_centered) · [Lean proof of the quantitative comparison](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cyclic_to_lattice_comparison)
 
 ### Mass near the antipode
 

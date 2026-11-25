@@ -766,6 +766,8 @@ $$
 $$
 最后一项可和且非负。当 $s\le m$ 时，等式给出权重的严格唯一性。由于 $t\ge1$，由 $w_0=t/Z$ 和 $w_0-w_1=1/Z$ 还可唯一确定 $t$ 和 $Z$。相邻闭区间在公共端点给出同样的权重与参数。半开区间 $(n^2-1)/5\le m<n(n+2)/5$ 则给出唯一指标 $n=\lfloor\sqrt{5m+1}\rfloor$。第一段 $0\le m\le3/5$ 只有零点及其两个邻点，权重分别为 $1-m,m/2,m/2$。用第二谐波的尺度 $\lambda=8\pi^2m$ 表示，第一段上端恰为 $24\pi^2/5$。把格点最小值定量传回有限循环群，还须处理第二谐波在对径附近也接近 $1$ 的情形。
 
+[闭区间支撑与精确余项的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer_on_interval) · [全局半开区间分类的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer)
+
 ### 有限循环群的最小值收敛到格点最小值
 
 固定 $\lambda\ge0$，令 $m=\lambda/(8\pi^2)$、$a=1-\lambda/q^2$。记 $L(m)$ 为上面的格点最小平方和，$E_q(a)$ 为两个余弦矩均至少为 $a$ 时的循环群最小平方和。设 $m$ 处在第 $n$ 个支撑区间内，格点支撑半径为 $R$。在下端点 $R=n-1$，其余位置 $R=n$。若 $q>2R$，最小值 $E_q(a)$ 取得，且
@@ -785,6 +787,8 @@ $$
 逐点不超过 $w_{\bar i}$。将 $2\sum_i v_iP_i$ 写成两个余弦矩并分离 $S_1,S_2$，再把 $(t-m)/Z=L(m)$ 代入平方距离的展开式即得估计。对可行权重，$S_1,S_2$ 均非负。归一化常数 $Z$ 中零点一项为 $t$，所以 $t/Z\le1$。
 
 每个固定预算都落在一个有限的支撑区间中。因此 $E_q(1-\lambda/q^2)$ 沿所有整数模数趋于 $L(\lambda/(8\pi^2))$。对实际 ζ 零点高阶频率的算术估计仍有待解决。
+
+[中心化余弦矩恒等式的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cosineMoment_eq_centered) · [定量比较的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cyclic_to_lattice_comparison)
 
 ### 对径附近的质量
 
