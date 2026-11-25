@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "b61e3791c1e6d1c999388305e459fee333027960",
-  "pinned_at": "2026-11-25T05:06:11Z",
+  "pinned_at": "2026-11-25T05:30:28Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -8995,6 +8995,14 @@
       "statement_id": "sha256:7f6a94e7072befeecd69f231aace1d0c57fd31c947ae85c9c71d2c528412864f",
       "line": 149,
       "signature": "theorem positive_rational_rank_le_two_of_pure (b : ℝ) (u v w : ℂ) (L R : Matrix Bool Bool ℂ) (hb : 0 < b) (qL : ∀ i j, RationalEntry (L i j)) (qR : ∀ i j, RationalEntry (R i j)) (qu : RationalEntry u) (qv : RationalEntry v) (qw : RationalEntry w) (hPure : ∃ (z : ℂ) (ψ : Word → ℂ), MatchesCoherentData b L R u v w z (rankOneDensity ψ)) : ∃ (z : ℂ) (ρ : Matrix Word Word ℂ), ρ.PosSemidef ∧ MatchesCoherentData b L R u v w z ρ ∧ ρ.rank ≤ 2 ∧ ∀ i j, RationalEntry (ρ i j)"
+    },
+    "D5/S3/Quantum/Entanglement/Marginals/FibQuadraticCompletion.quadratic_rank_le_three": {
+      "module": "D5/S3/Quantum/Entanglement/Marginals/FibQuadraticCompletion",
+      "name": "D5.S3.Quantum.Entanglement.Marginals.FibQuadraticCompletion.quadratic_rank_le_three",
+      "kind": "theorem",
+      "statement_id": "sha256:a84110ca137f98df0b5d2d8ee211d2b2a0dd508cd4779621d1956ae76435283e",
+      "line": 306,
+      "signature": "theorem quadratic_rank_le_three (b : ℝ) (L R : Matrix Bool Bool ℂ) (u v w : ℂ) (hb : 0 < b) (qL : ∀ i j, RationalEntry (L i j)) (qR : ∀ i j, RationalEntry (R i j)) (qu : RationalEntry u) (qv : RationalEntry v) (qw : RationalEntry w) (he : CoherentExtendible b L R u v w) : ∃ (d : ℚ), 0 ≤ d ∧ ∃ (z : ℂ) (ρ : Matrix Word Word ℂ), ρ.PosSemidef ∧ MatchesCoherentData b L R u v w z ρ ∧ ρ.rank ≤ 3 ∧ ∀ i j, ρ i j ∈ Subfield.closure ((rationalComplex : Set ℂ) ∪ {↑(Real.sqrt (d : ℝ))})"
     },
     "D5/S3/Quantum/Entanglement/Marginals/FibRationalPureExtension.rational_pure_coupling_iff": {
       "module": "D5/S3/Quantum/Entanglement/Marginals/FibRationalPureExtension",

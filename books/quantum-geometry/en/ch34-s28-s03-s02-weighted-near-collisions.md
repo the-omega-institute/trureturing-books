@@ -917,6 +917,29 @@ $$
 
 Thus at a fixed included rear site the fitted weight satisfies $N^3v(r)\to B_\infty-3r^2/4$. This calculation permits signed fitted weights. To verify the optimizer's support, the signs at both ends of the front window and at the rear activation levels must be controlled, including the levels with zero limiting score. [Coupled fit research](https://github.com/the-omega-institute/trureturing/issues/34029)
 
+### Quantitative signs at the growing-window boundaries
+
+The critical-scale fit admits a sharper comparison with the lattice reference. Write $K=\lim_{N\to\infty}N^5h^2=4\pi^2/\gamma^2$, and let $(A_N,C_N,B_N)$ be the inverse-matrix fit above. For $t=N(N+1)-1/2$ and $Z=\sum_{|j|\le N}(t-j^2)$,
+$$
+A_N-\frac{Nt}{Z}=O(N^{-3}),
+\qquad
+C_N+\frac{N^3}{Z}=O(N^{-3}).
+$$
+
+The estimate requires only boundedness of $N^5h^2$. After multiplication by $N^3$, the first two rows of the coupled matrix differ from the lattice Gram matrix augmented by a zero third column by a bounded matrix. The front-feature product error is bounded by $2u^2$, with $N^3u^2=O(1)$. Each fixed rear contribution to the scaled rows tends to zero. The scaled change in target mass is $N^3mh^2=O(1)$. Boundedness of the target and the inverse joint matrix bounds the fitted coefficients. Holding $B_N$ fixed, the inverse of the upper-left two-by-two matrix transfers the scaled residual bound to the front coefficient errors.
+
+Let $p_N(j)$ denote the signed polynomial fitted on the front, extended to real $j$ by the same trigonometric formula. For each fixed real $d$, the scaled lattice reference at $j=N+d$ has limit $\frac34(1-2d)$ after multiplication by $N^2$. The feature and coefficient estimates preserve that limit:
+$$
+N^2p_N(N+d)\longrightarrow \frac34(1-2d).
+$$
+In particular the signed values at $N$ and $N+1$ are eventually strictly positive and strictly negative, respectively. Evenness gives the corresponding values at the negative end of the front window. At the half-step $d=1/2$ the leading limit vanishes, and the refined comparison yields $N^3p_N(N+1/2)\to-9/16$.
+
+At every fixed real rear offset $r$, using the rear feature formula in the same fitted polynomial gives
+$$
+N^3p_N^{\rm rear}(r)\longrightarrow B_\infty-\tfrac34r^2.
+$$
+The strict sign at any such offset is determined by this limit when it is nonzero. The limits concern the signed fit for a fixed nonempty finite rear set $S$. To certify a particular cyclic optimizer one still needs to identify the finite cyclic site correspondence and extend the complement signs across all other sites. At $B_\infty=3r^2/4$ the limiting sign alone leaves the activation level open.
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
