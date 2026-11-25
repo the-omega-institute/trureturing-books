@@ -6,7 +6,7 @@
    which conjugates its overlap. K(n, c) = c I + (1 − c) n nᵀ is the unread Bloch contraction along the axis n.
 
    What each scene shows, and where it rests:
-     sign      ten readers write down a sign; one tears out a page (picture of the question; argued).
+     sign      ten readers write down a sign; one rubs their note back out (picture of the question; argued).
      write     equalSuperpositionDensity has ρ₀₁ = 1/2; a phase record with amplitudes 1 (i = 0) and i (i = 1) has
                overlap 1 · (i)* = −i; two copies give (−i)² · 1/2 = −1/2 (computed).
      undo      reversing copy zero alone: i · (−1/2) = −i/2 ≠ 1/2; reversing both: i² · (−1/2) = 1/2
@@ -213,7 +213,7 @@ function rrTitle(S) {
   const p = clamp(u / 1.3);
   txt(`${DATA.book.code} · FILM`, W / 2, 330, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: ta, ls: 10 });
   txt(DATA.film.title_zh, W / 2, 480, { size: 88, fam: F.zh, w: 900, align: 'center', c: C.white, a: ta * clamp(p * 1.6), ab: 4 });
-  txt(scramble('ONE SURVIVING COPY BLOCKS THE WAY BACK', p, 5), W / 2, 580, { size: 40, fam: F.orb, w: 900, align: 'center', c: C.white, a: ta, ls: 4, ab: 2 });
+  txt(scramble('ONE SURVIVING COPY BLOCKS THE UNDO', p, 5), W / 2, 580, { size: 40, fam: F.orb, w: 900, align: 'center', c: C.white, a: ta, ls: 4, ab: 2 });
   txt('READERS · RECORDS · UNDO · SURVIVOR · RAILS · LIMITS', W / 2, 660, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.mag, a: ta * 0.9, ls: 6 });
 }
 
@@ -234,10 +234,10 @@ SCENES.sign = S => {
   /* the sign */
   line(SG.x, SG.y + 70, SG.x, 700, C.white, a * 0.8, 8);
   box(SG.x - 200, SG.y - 70, 400, 140, C.white, a, 2.4, 'rgba(4,10,24,0.85)');
-  txt('|0⟩ + |1⟩', SG.x, SG.y + 18, { size: 48, fam: F.math, w: 700, align: 'center', c: C.white, a });
+  txt('(|0⟩ + |1⟩)/√2', SG.x, SG.y + 18, { size: 44, fam: F.math, w: 700, align: 'center', c: C.white, a });
   txt('the sign · 路标', SG.x, SG.y - 88, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a });
   /* line 0: ten readers, each writes a copy */
-  const tear = Q(S, 1, 'tears out the page', 0.9);
+  const tear = Q(S, 1, 'rubs their note back out', 0.9);
   for (let j = 0; j < SG.n; j++) {
     const [rx, ry] = sgReader(j);
     const ja = a * clamp((u - lineAt(S, 0).s - 0.25 * j) / 0.4);
@@ -251,10 +251,8 @@ SCENES.sign = S => {
     else {
       fillBox(px, py, 48, 36, C.cyan, ja * 0.55 * (1 - tear));
       if (tear > 0) {
-        const fx = px + 30 * tear, fy = py - 150 * tear;
-        ctx.save(); ctx.translate(fx + 24, fy + 18); ctx.rotate(1.4 * tear);
-        fillBox(-24, -18, 48, 36, C.mag, ja * (1 - 0.8 * tear)); ctx.restore();
-        txt('torn · 撕掉', rx, ry + 92, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.mag, a: ja * tear });
+        box(px, py, 48, 36, C.cyan, ja * 0.8 * tear, 1.4);
+        txt('undone · 抹回', rx, ry + 92, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: ja * tear });
       }
     }
   }
@@ -325,15 +323,15 @@ SCENES.undo = S => {
   const u1 = Q(S, 2, 'Undo both', 0.8);
   const val = u1 > 0.5 ? '1/2' : u0 > 0.5 ? '−i/2' : '−1/2';
   rrSystem(WR.sx, WR.sy, val, a);
-  rrCard(WR.cx[0], WR.cy, WR.cw, WR.ch, 'copy 0 · 副本 0', [0, -1], u0 > 0.5 ? 'undone: × i' : 'c = −i', a, { undone: u0, focus: u0 < 0.02 && c0 > 0 ? 1 : 0 });
-  rrCard(WR.cx[1], WR.cy, WR.cw, WR.ch, 'copy 1 · 副本 1', [0, -1], u1 > 0.5 ? 'undone: × i' : 'c = −i', a, { undone: u1, focus: u0 > 0.5 && u1 < 0.5 ? 1 : 0 });
-  rrRich([['reverse = conjugate:  ', C.white], ['−i  →  i', C.cyan]], 860, 650, { size: 30, a: a * c0 * (1 - 0.6 * u0) * (1 - Q(S, 2, 'Lean checks', 0.4)) });
+  rrCard(WR.cx[0], WR.cy, WR.cw, WR.ch, 'copy 0 · 副本 0', [0, -1], u0 > 0.5 ? 'net (−i)·i = 1' : 'c = −i', a, { undone: u0, focus: u0 < 0.02 && c0 > 0 ? 1 : 0 });
+  rrCard(WR.cx[1], WR.cy, WR.cw, WR.ch, 'copy 1 · 副本 1', [0, -1], u1 > 0.5 ? 'net (−i)·i = 1' : 'c = −i', a, { undone: u1, focus: u0 > 0.5 && u1 < 0.5 ? 1 : 0 });
+  rrRich([['reverse = conjugate:  ', C.white], ['−i  →  i', C.cyan]], 860, 650, { size: 30, a: a * c0 * (1 - 0.6 * u0) * (1 - Q(S, 2, 'Undo both', 0.4)) });
   /* the two tapes */
   const ta = a * u0;
   rrTape(WR.tx, 740, [
     ['', '−1/2', C.white, 1],
     ['× i →', '−i/2', C.white, u0],
-    ['', '≠ 1/2', C.mag, Q(S, 1, 'Not one half', 0.5)]
+    ['', '≠ 1/2', C.white, Q(S, 1, 'Not one half', 0.5)]
   ], ta, 32);
   txt('copy 0 only · 只撤销第 0 份', 620, 740, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ta });
   const tb = a * back0;
@@ -349,14 +347,14 @@ SCENES.undo = S => {
     panel(1180, 650, 640, 190, la, C.lean, 'FOUR NUMBERS · 四个数');
     rrLean(1200, 718, RR_LEAN.two_copy_joint_reversal_certificate, la, { size: 18 });
     rrRich([['1/2', C.white], ['  →  ', C.dim], ['−1/2', C.white], ['  →  ', C.dim], ['−i/2', C.white], ['  →  ', C.dim], ['1/2', C.lean]], 1200, 790, { size: 32, a: la });
-    txt('start · write two · undo copy 0 · undo both', 1200, 826, { size: 15, fam: F.mono, w: 700, c: C.dim, a: la });
+    txt('start · write two · undo 0 · undo both', 1200, 826, { size: 18, fam: F.mono, w: 700, c: C.dim, a: la });
   }
 };
 
 /* ======================================================================= */
 /*                              scene 4 · ONE SURVIVOR                       */
 /* ======================================================================= */
-const SV = { x0: 120, y: 200, w: 190, h: 210, gap: 22 };
+const SV = { x0: 120, y: 200, w: 180, h: 210, gap: 20 };
 const svX = l => SV.x0 + l * (SV.w + SV.gap);
 SCENES.survivor = S => {
   const u = S.u, a = rrFade(S);
@@ -368,13 +366,13 @@ SCENES.survivor = S => {
     const ca = a * clamp((u - lineAt(S, 0).s - 0.12 * l) / 0.4);
     const isK = l === RR_K;
     const ud = isK ? 0 : clamp((u - t0 - 0.18 * l) / 0.5);
-    rrCard(svX(l), SV.y, SV.w, SV.h, isK ? 'copy k' : `copy ${l + 1}`, z, RR_ROW_LABEL[l], ca, { undone: ud, focus: isK && u > t0 ? 1 : 0, R: 48, ts: 20, ls: 22, us: 16 });
+    rrCard(svX(l), SV.y, SV.w, SV.h, isK ? 'copy k = 5' : `copy ${l}`, z, RR_ROW_LABEL[l], ca, { undone: ud, focus: isK && u > t0 ? 1 : 0, R: 48, ts: 20, ls: 22, us: 16 });
   });
   const ka = a * Q(S, 0, 'except copy k', 0.6);
   txt('survivor · 幸存', svX(RR_K) + SV.w / 2, SV.y + SV.h + 64, { size: 22, fam: F.zh, w: 900, align: 'center', c: C.now, a: ka });
   /* line 1: what is left */
   const fa = a * at(S, 1, 0.6);
-  rrRich([['every other copy: |c| = 1   ⟹   result = ', C.white], ['c(k)', C.now], [' · ρ(i, j)', C.white]], 120, 560, { size: 30, a: fa });
+  rrRich([['these seven: |c| = 1   ⟹   left = ', C.white], ['c(k)', C.now], [' · ρ₀₁', C.white]], 120, 560, { size: 30, a: fa });
   const tx = rrTape(120, 622, [
     ['ρ₀₁:', '1/2', C.white, at(S, 1, 0.5, 0.8)],
     ['write →', '3i/20', C.white, at(S, 1, 0.5, 1.6)],
@@ -386,7 +384,8 @@ SCENES.survivor = S => {
   if (la > 0) {
     rrLean(120, 700, RR_LEAN.surviving_copy_blocks_reversal, la, { size: 18 });
     rrRich([['l ≠ k: |c(l)| = 1,   ', C.white], ['c(k)', C.now], [' ≠ 1,   ρ(i, j) ≠ 0   ⟹   after ≠ ρ(i, j)', C.white]], 120, 756, { size: 26, a: la });
-    stamp('NO WAY BACK', 1520, 560, Q(S, 2, 'no way back', 0.6), C.white, 40);
+    stamp('NOT RESTORED', 1500, 560, Q(S, 2, 'never brings it back', 0.6), C.white, 40);
+    txt('回不到原值', 1500, 628, { size: 26, fam: F.zh, w: 900, align: 'center', c: C.white, a: la * Q(S, 2, 'never brings it back', 0.6, 0.3) });
   }
   /* line 3: the photo picture */
   const pa = a * at(S, 3, 0.6);
@@ -397,8 +396,9 @@ SCENES.survivor = S => {
       box(px, py, 32, 54, C.argued, pa, 1.6, 'rgba(4,10,24,0.6)');
       if (!del || clamp((u - phraseAt(S, 3, 'deleted it') - 0.1 * p) / 0.3) < 0.5) fillBox(px + 6, py + 8, 20, 26, C.argued, pa * 0.7);
     }
-    txt('photo ↔ coherence · phone ↔ copy', 1210, 796, { size: 18, fam: F.mono, w: 700, c: C.argued, a: pa });
-    txt('照片 ↔ 相干 · 手机 ↔ 副本', 1210, 830, { size: 20, fam: F.zh, w: 700, c: C.argued, a: pa });
+    txt('photo ↔ branch record · phone ↔ copy', 1200, 784, { size: 17, fam: F.mono, w: 700, c: C.argued, a: pa });
+    txt('all deleted ↔ coherence back', 1200, 810, { size: 17, fam: F.mono, w: 700, c: C.argued, a: pa });
+    txt('照片 ↔ 分支记录 · 手机 ↔ 副本 · 全删 ↔ 相干复原', 1200, 840, { size: 20, fam: F.zh, w: 700, c: C.argued, a: pa });
   }
   /* line 4: the aphorism */
   const ap = a * at(S, 4, 0.6);
@@ -440,11 +440,11 @@ SCENES.axes = S => {
   }
   const P = rrPaths(th);
   /* rails */
-  const ra = a * at(S, 0, 0.6);
+  const ra = a * at(S, 0, 0.6), swing = sw > 0 && sw < 1 ? 1 : 0, fixA = 1 - clamp(sw * 12) + clamp((sw - 0.92) * 12);
   line(AX.ox - 60, AX.oy, AX.ox + 1.3 * AX.U, AX.oy, C.cyan, ra, 4);
   const [mx, my] = axP([1.15 * P.m[0], 1.15 * P.m[1]]), [nx, ny] = axP([-0.1 * P.m[0], -0.1 * P.m[1]]);
   line(nx, ny, mx, my, C.cyan, a * at(S, 1, 0.6), 4);
-  txt('flat rail n · c = 1/2', AX.ox + 1.3 * AX.U - 10, AX.oy - 16, { size: 20, fam: F.mono, w: 700, align: 'right', c: C.cyan, a: ra });
+  txt('flat rail n · c = 1/2', AX.ox + 1.3 * AX.U - 10, AX.oy - 16, { size: 20, fam: F.mono, w: 700, align: 'right', c: C.cyan, a: ra * (1 - swing) });
   txt('tilted rail m · d = 1/3', mx + 12, my + 4, { size: 20, fam: F.mono, w: 700, c: C.cyan, a: a * at(S, 1, 0.6) * (sw > 0 && sw < 1 ? 0 : 1) });
   dot(AX.ox, AX.oy, 7, 'w', ra);
   /* the start point */
@@ -470,21 +470,22 @@ SCENES.axes = S => {
   rrRich([['K(n, c) v = c v + (1 − c)(n · v) n', C.white]], px + 24, py + 76, { size: 28, a: ra });
   txt('move the fraction 1 − c of the way to the rail · 朝轨道走 1 − c 的路', px + 24, py + 112, { size: 18, fam: F.zh, w: 700, c: C.dim, a: ra });
   const r1 = a * at(S, 1, 0.6);
-  rrRich([['n = (1, 0),  c = 1/2;   m = (3/5, 4/5),  d = 1/3', C.cyan]], px + 24, py + 170, { size: 24, a: r1 });
-  rrRich([['flat first:    (0, 1) → (0, 1/2) → ', C.white], ['(4/25, 19/50)', C.white]], px + 24, py + 226, { size: 24, a: r1 * clamp(pA * 1.3) });
-  rrRich([['tilted first:  (0, 1) → (8/25, 19/25) → ', C.white, 0.85], ['(8/25, 19/50)', C.white]], px + 24, py + 270, { size: 24, a: a * clamp(pB * 1.3) });
-  rrRich([['gap = (', C.white], ['4/25', C.mag], [', 0)', C.white]], px + 24, py + 316, { size: 26, a: ga });
+  rrRich([['n = (1, 0),  c = 1/2;   m = (3/5, 4/5),  d = 1/3', C.cyan]], px + 24, py + 170, { size: 24, a: r1 * fixA });
+  txt('θ₀ = 53.1°', px + 24 + 680, py + 170, { size: 20, fam: F.mono, w: 700, c: C.cyan, a: r1 * fixA });
+  rrRich([['flat first:    (0, 1) → (0, 1/2) → ', C.white], ['(4/25, 19/50)', C.white]], px + 24, py + 226, { size: 24, a: r1 * clamp(pA * 1.3) * fixA });
+  rrRich([['tilted first:  (0, 1) → (8/25, 19/25) → ', C.white, 0.85], ['(8/25, 19/50)', C.white]], px + 24, py + 270, { size: 24, a: a * clamp(pB * 1.3) * fixA });
+  rrRich([['gap = (', C.white], ['4/25', C.mag], [', 0)', C.white]], px + 24, py + 316, { size: 26, a: ga * fixA });
   /* line 3: the Lean identity */
   const la = a * Q(S, 3, 'Lean checks', 0.6);
   if (la > 0) {
-    rrLean(px + 24, py + 380, RR_LEAN.axisContraction_commutator, la, { size: 16 });
+    rrLean(px + 24, py + 380, RR_LEAN.axisContraction_commutator, la, { size: 18 });
     rrRich([['[K(n,c), K(m,d)] = (1−c)(1−d)(n·m)(n mᵀ − m nᵀ)', C.white]], px + 24, py + 428, { size: 24, a: la });
-    rrRich([['(1/2)(2/3)(3/5) · 4/5 = ', C.white, 0.85], ['4/25', C.mag], ['   computed here', C.dim]], px + 24, py + 470, { size: 22, a: la * Q(S, 3, 'the exact gap', 0.5) });
+    rrRich([['(1/2)(2/3)(3/5) · 4/5 = ', C.white, 0.85], ['4/25', C.mag], ['   computed here', C.dim]], px + 24, py + 470, { size: 22, a: la * Q(S, 3, 'the exact gap', 0.5) * fixA });
     const lb = a * Q(S, 3, 'It vanishes', 0.6);
-    rrLean(px + 24, py + 530, RR_LEAN.axisContraction_commutator_ne_zero_of_nonparallel_nonorthogonal, lb, { size: 15 });
+    rrLean(px + 24, py + 530, RR_LEAN.axisContraction_commutator_ne_zero_of_nonparallel_nonorthogonal, lb, { size: 18 });
     txt('n ≠ 0, m not a multiple of n, n·m ≠ 0, c, d ≠ 1  ⟹  ≠ 0', px + 24, py + 572, { size: 19, fam: F.math, w: 700, c: C.white, a: lb });
     txt('n·m = 0 or m ∥ n  ⟹  0 · 平行或垂直时为零', px + 24, py + 606, { size: 19, fam: F.zh, w: 700, c: C.white, a: lb * 0.85 });
-    txt('as unread blur: unit axes, c, d ∈ [0, 1] · 未读信道：单位轴', px + 24, py + 640, { size: 15, fam: F.zh, w: 700, c: C.dim, a: lb * 0.85 });
+    txt('as unread blur: unit axes, c, d ∈ [0, 1] · 未读信道：单位轴', px + 24, py + 640, { size: 18, fam: F.zh, w: 700, c: C.dim, a: lb * 0.85 });
     /* the live sweep */
     if (sw > 0) {
       txt(`θ = ${(th / RR_DEG).toFixed(1)}°   gap = ${(P.b2[0] - P.a2[0]).toFixed(3)}`, AX.ox + 40, 210, { size: 24, fam: F.mono, w: 700, c: C.now, a: lb });
@@ -499,41 +500,41 @@ SCENES.edge = S => {
   const u = S.u, a = rrFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [0, 'joint inverse gate', 'argued'], [1, null, 'argued'], [2, null, 'open']]);
-  const y = 210, h = 600, w = 540;
+  const y = 210, h = 600, w = 520;
   /* panel 1: conjugation is an inverse only for unit overlaps */
   const a1 = a * at(S, 0, 0.6);
   panel(120, y, w, h, a1, C.cyan, 'NOISY COPY · 带噪副本');
   rrCard(250, y + 60, 280, 240, 'c = 3/10', [0.3, 0], '|c| < 1', a1, { R: 70 });
-  rrTape(150, y + 380, [['', '1/2', C.white, 1], ['× 3/10 →', '3/20', C.white, 1], ['conj→', '9/200', C.mag, Q(S, 0, 'Noisy copies', 0.5)]], a1, 28);
+  rrTape(150, y + 380, [['', '1/2', C.white, 1], ['× 3/10 →', '3/20', C.white, 1], ['conj→', '9/200', C.white, Q(S, 0, 'Noisy copies', 0.5)]], a1, 28);
   txt('conjugating multiplies again · 共轭只会再乘一次', 150, y + 430, { size: 18, fam: F.zh, w: 700, c: C.dim, a: a1 });
   const g = a * Q(S, 0, 'joint inverse gate', 0.6);
   txt('joint inverse gate U† · 联合逆门', 150, y + 500, { size: 22, fam: F.zh, w: 700, c: C.argued, a: g });
   txt('hand-derived model · 手工推导', 150, y + 534, { size: 18, fam: F.zh, w: 700, c: C.argued, a: g * 0.85 });
   /* panel 2: the reading */
   const a2 = a * at(S, 1, 0.6);
-  panel(690, y, w, h, a2, C.argued, 'READING · 诠释');
+  panel(660, y, w, h, a2, C.argued, 'READING · 诠释');
   if (a2 > 0) {
-    for (let j = 0; j < 7; j++) { const t = (200 + 140 * j / 6) * RR_DEG; const dx = 960 + 200 * Math.cos(t), dy = y + 170 - 130 * Math.sin(t); dashed(dx, dy, 960, y + 180, C.argued, a2 * 0.35, 1.2); dot(dx, dy, 11, 'v', a2); }
-    box(900, y + 120, 120, 60, C.argued, a2, 1.8);
-    txt('fact', 960, y + 160, { size: 26, fam: F.math, w: 700, align: 'center', c: C.argued, a: a2 });
-    txt('fact = what many records agree on', 720, y + 420, { size: 20, fam: F.mono, w: 700, c: C.argued, a: a2 });
-    txt('事实 = 许多记录一致之处', 720, y + 456, { size: 22, fam: F.zh, w: 700, c: C.argued, a: a2 });
-    txt('MODEL · the book\'s reading, not a theorem', 720, y + 520, { size: 17, fam: F.mono, w: 700, c: C.argued, a: a2 * 0.9 });
-    txt('本书的诠释，不是定理', 720, y + 552, { size: 20, fam: F.zh, w: 700, c: C.argued, a: a2 * 0.9 });
+    for (let j = 0; j < 7; j++) { const t = (200 + 140 * j / 6) * RR_DEG; const dx = 920 + 200 * Math.cos(t), dy = y + 170 - 130 * Math.sin(t); dashed(dx, dy, 920, y + 180, C.argued, a2 * 0.35, 1.2); dot(dx, dy, 11, 'v', a2); }
+    box(860, y + 120, 120, 60, C.argued, a2, 1.8);
+    txt('fact', 920, y + 160, { size: 26, fam: F.math, w: 700, align: 'center', c: C.argued, a: a2 });
+    txt('fact = what many records agree on', 690, y + 420, { size: 20, fam: F.mono, w: 700, c: C.argued, a: a2 });
+    txt('事实 = 许多记录一致之处', 690, y + 456, { size: 22, fam: F.zh, w: 700, c: C.argued, a: a2 });
+    txt('MODEL · the book\'s reading, not a theorem', 690, y + 520, { size: 17, fam: F.mono, w: 700, c: C.argued, a: a2 * 0.9 });
+    txt('本书的诠释，不是定理', 690, y + 552, { size: 20, fam: F.zh, w: 700, c: C.argued, a: a2 * 0.9 });
   }
   /* panel 3: the open problem */
   const a3 = a * at(S, 2, 0.6);
-  panel(1260, y, w, h, a3, C.open, 'OPEN · 开放问题');
+  panel(1200, y, w, h, a3, C.open, 'OPEN · 开放问题');
   if (a3 > 0) {
-    const cx = 1530, cy = y + 230;
+    const cx = 1460, cy = y + 230;
     dot(cx - 110, cy, 22, 'c', a3 * 0.8); dot(cx + 110, cy, 22, 'm', a3 * 0.8);
     txt('0', cx - 110, cy + 60, { size: 26, fam: F.math, w: 700, align: 'center', c: C.white, a: a3 });
     txt('1', cx + 110, cy + 60, { size: 26, fam: F.math, w: 700, align: 'center', c: C.white, a: a3 });
     txt('?', cx, cy + 14, { size: 60, fam: F.math, w: 900, align: 'center', c: C.open, a: a3 });
-    txt('one outcome, not a blend', 1290, y + 420, { size: 20, fam: F.mono, w: 700, c: C.open, a: a3 });
-    txt('单次选支：为何只看到一个结果', 1290, y + 456, { size: 22, fam: F.zh, w: 700, c: C.open, a: a3 });
-    txt('records and blurring do not settle it', 1290, y + 520, { size: 17, fam: F.mono, w: 700, c: C.open, a: a3 * 0.9 });
-    txt('记录与模糊化都不回答这一问', 1290, y + 552, { size: 20, fam: F.zh, w: 700, c: C.open, a: a3 * 0.9 });
+    txt('one outcome, not a blend', 1230, y + 420, { size: 20, fam: F.mono, w: 700, c: C.open, a: a3 });
+    txt('单次选支：为何只看到一个结果', 1230, y + 456, { size: 22, fam: F.zh, w: 700, c: C.open, a: a3 });
+    txt('records and blurring do not settle it', 1230, y + 520, { size: 17, fam: F.mono, w: 700, c: C.open, a: a3 * 0.9 });
+    txt('记录与模糊化都不回答这一问', 1230, y + 552, { size: 20, fam: F.zh, w: 700, c: C.open, a: a3 * 0.9 });
   }
 };
 
@@ -552,10 +553,10 @@ FILM.poster = () => {
   const sc = TL.scenes[0], t = sc.end - 1.0;
   background(t, sc, 0, 6);
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.2, a: 0.14, cx: 960, cy: 420, camZ: 7, lw: 1.3, dots: false });
-  RR_ROW.forEach((z, l) => rrCard(svX(l), 600, SV.w, SV.h, l === RR_K ? 'copy k' : `copy ${l + 1}`, z, RR_ROW_LABEL[l], 1, { undone: l === RR_K ? 0 : 1, focus: l === RR_K ? 1 : 0, R: 48, ts: 20, ls: 22, us: 16 }));
+  RR_ROW.forEach((z, l) => rrCard(svX(l), 600, SV.w, SV.h, l === RR_K ? 'copy k = 5' : `copy ${l}`, z, RR_ROW_LABEL[l], 1, { undone: l === RR_K ? 0 : 1, focus: l === RR_K ? 1 : 0, R: 48, ts: 20, ls: 22, us: 16 }));
   txt(DATA.film.title_zh, W / 2, 330, { size: 80, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('ONE SURVIVING COPY', W / 2, 430, { size: 48, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 3, ls: 5 });
-  txt('BLOCKS THE WAY BACK', W / 2, 494, { size: 34, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 2, ls: 4 });
+  txt('BLOCKS THE UNDO', W / 2, 494, { size: 34, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 2, ls: 4 });
   bloom(0.6);
   txt(`${DATA.book.code} · FILM`, W / 2, 210, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 8 });
   txt(`${DATA.book.title.zh} · ${DATA.book.title.en}`, W / 2, 1010, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: 0.9 });
