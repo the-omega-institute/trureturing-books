@@ -24,13 +24,13 @@
     ], "cues": [{"line": 3, "at": 0.4, "kind": "impact"}]},
     {"id": "squeeze", "name": "A TWO-SIDED BOUND", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
       ["How sure is that total? Lean checks a bound from both sides.", "这笔总账有多可靠？Lean 检验了一个双侧界。"],
-      ["Each drop sits between two parabolas: theta squared over two, and the same minus theta to the fourth over twenty-four.", "每一截下落都夹在两条曲线之间：θ²/2，以及 θ²/2 − θ⁴/24。"],
+      ["Each drop sits between two curves: theta squared over two, and the same minus theta to the fourth over twenty-four.", "每一截下落都夹在两条曲线之间：θ²/2，以及 θ²/2 − θ⁴/24。"],
       ["Times N, the whole ledger is pinned, for any real sigma, T and alpha, and every N.", "乘以 N，整本账就被夹住：对任意实数 σ、T、α 和每一个 N 都成立。"],
-      ["Our hundred steps: zero point four nine nine six, just under one half.", "一百步的例子：0.4995835，夹在 0.4995833 与 0.5 之间。"]
+      ["Our hundred steps: zero point four nine nine six, just under one half.", "一百步的例子：0.4996，略低于 1/2。"]
     ], "cues": [{"line": 0, "at": 2.4, "kind": "stamp"}]},
     {"id": "fates", "name": "THREE FATES", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
       ["Now let N grow, with each turn sigma times T over N, to the power alpha.", "现在让 N 变大，每步转角取 σ·(T/N)^α。"],
-      ["Lean checks three fates. When alpha is above one half, the drops add up to nothing.", "Lean 检验了三种结局：α 大于 1/2，下落总账归零。"],
+      ["Lean checks three fates. When alpha is above one half, the total shrinks to nothing as N grows.", "Lean 检验了三种结局：α 大于 1/2，N 越大，总账越趋于零。"],
       ["At exactly one half, they settle at sigma squared T over two.", "α 恰好等于 1/2，总账停在 σ²T/2。"],
       ["Below one half, with sigma not zero, they grow without bound.", "α 小于 1/2 且 σ ≠ 0，总账无限增长。"]
     ], "cues": [{"line": 2, "at": 2.2, "kind": "chime"}]},
