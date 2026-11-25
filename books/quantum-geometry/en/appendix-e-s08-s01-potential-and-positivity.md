@@ -361,7 +361,7 @@ An edge between neighbors of $p$ costs one triangle comparison through $p$. If a
 
 Item 2 applies to the additive group of a real Banach space with $d(a,b)=\|a-b\|$. Item 4 places the path powers from [@thm-appe-chordal-banach-limit-two] within the finite interval graphs. First let $n$ grow at fixed $k$, then increase $k$. The lower bounds for the optimal coefficients come arbitrarily close to $2$. Thus the supremum of the reconstruction coefficients over finite interval graphs is exactly $2$ both for real Banach spaces and for groups with bi-invariant pseudometrics.
 
-Combine item 1 with [@thm-appe-clique-bounded-banach-potential]. When cliques have size at most $k+1$, the error is at most $\min(k-1,\,4-4/k)\varepsilon$. For chordal graphs with no uniform clique size bound, the exact real Banach coefficient $C_{\mathrm{Ban,chordal}}$ remains open in $[2,4]$, and the universal coefficient $C_{\mathrm{chordal}}$ for groups with bi-invariant pseudometrics remains open among $\{2,3,4\}$.
+Combine item 1 with [@thm-appe-clique-bounded-banach-potential]. For cliques of size at most $k+1$, this gives an error of at most $\min(k-1,\,4-4/k)\varepsilon$.
 
 On a complete graph, averaging all the star potentials brings the triangle-error coefficient below $1$. When a larger graph is assembled from pieces along a tree, the pieces can be fitted locally and then joined by taking midpoints on their shared cliques.
 
@@ -407,7 +407,54 @@ $$
 Disjointness of nonadjacent pieces and of distinct attachments within a piece ensures that every shared vertex belongs to exactly two pieces. Assign the midpoint of the two shifted potentials at each shared vertex, and retain the shifted potential at each unshared vertex. Every edge lies within a piece. If both endpoints are shared, separation forces them to lie in the same attachment clique. The edge residual is then the mean of the two original residuals, with seminorm at most $R$. On any other edge, at most one endpoint receives a midpoint adjustment of size at most $(1-1/m)R$, giving total error at most $(2-1/m)R$. The full proof is checked by the Lean kernel.
 :::
 
-**Manual derivation.** Together, the first two items give the exact uniform coefficient $(m-2)/m$ on the complete graph with $m$ vertices over all real Banach targets. Item 3 transfers a local fit to a global fit with a factor of $2-1/m$ when separated attachment cliques have size at most $m$. The next question concerns the optimal coefficient on a complete graph with a fixed nonlinear target group.
+**Manual derivation.** Together, the first two items give the exact uniform coefficient $(m-2)/m$ on the complete graph with $m$ vertices over all real Banach targets. Item 3 transfers a local fit to a global fit with a factor of $2-1/m$ when separated attachment cliques have size at most $m$.
+
+For general chordal graphs with a clique size bound, we can improve the equal-weight estimate of [@thm-appe-clique-bounded-banach-potential]. When both endpoints of a cross-layer edge have the maximum number of predecessors, give the shallower endpoint more weight in the deeper endpoint's average.
+
+::: {.theorem #thm-appe-biased-clique-banach-potential title="Biased Predecessor Averaging on Chordal Graphs with Bounded Clique Number" lean="D5/S3/Combinatorics/Graph/Chordal/WeightedCliqueBanachPotential.SimpleGraph.IsChordal.exists_biased_clique_banach_gain_potential"}
+Let $G$ be a simple chordal graph on a finite vertex set $V$, and let $k\in\mathbb N$ with $k\ge3$. Suppose every clique of $G$ has at most $k+1$ vertices. Let $E$ be a real seminormed vector space, let $\varepsilon\ge0$ be real, and let $g:V\times V\to E$ satisfy $g(j,i)=-g(i,j)$ for all $i,j\in V$. Suppose that $\|g(i,j)+g(j,\ell)-g(i,\ell)\|\le\varepsilon$ for every ordered triple $(i,j,\ell)$ in which $i$ is adjacent to $j$, $j$ to $\ell$, and $i$ to $\ell$. Then there exists a potential $\varphi:V\to E$ such that every ordered adjacent pair $(u,v)$ satisfies
+
+$$
+\begin{aligned}
+\bigl\|g(u,v)-(\varphi(v)-\varphi(u))\bigr\|
+&\le \left(4-\frac{4}{k}-\frac{2(k-2)^2}{k(k-1)^3}\right)\varepsilon .
+\end{aligned}
+$$
+:::
+
+::: {.proof #pf-appe-biased-clique-banach-potential}
+Each connected component inherits the hypotheses, and every edge lies in one component, so the component potentials can be combined. Denote the displayed coefficient by $R_k$. In each component choose a root $o$, form layers by distance from $o$, and let $P(x)$ be the neighbors of $x$ in the preceding layer. For a component $C$ of the subgraph induced by layers $i$ and above ($i\ge1$), its shadow $S_C$ consists of its neighbors in layer $i-1$. If two shadow vertices were nonadjacent, take shortest paths between them with interiors in $C$ and in the lower layers, respectively. The second path exists because both vertices have shortest paths to the root. Both connecting paths are induced, and their interiors differ in depth by at least $2$, so their union is a chordless cycle. Thus the shadow is a clique.
+
+Every nonroot vertex $x$ has a predecessor on a shortest path toward the root, and all its predecessors lie in the same shadow. Hence $P(x)\cup\{x\}$ is a clique and $|P(x)|\le k$. For adjacent vertices $x,y$ in the same layer, the predecessor sets are nested by inclusion. Otherwise, choosing one predecessor from each set difference gives two adjacent vertices in the common shadow that form a chordless quadrilateral with $x,y$. Call a vertex saturated if it has $k$ predecessors. Two saturated vertices of $P(v)$ would be adjacent and would have identical predecessor sets by nesting. Together with those predecessors they would form a clique of size $k+2$, a contradiction.
+
+Set $\delta=\frac{k-2}{k(k-1)^2}$. When $P(x)$ has size $m\ge2$ and contains a saturated vertex, give that vertex weight $1/m+\delta$ and every other predecessor weight $1/m-\delta/(m-1)$. Use equal weights in the other cases. The weights $w_x(b)$ sum to $1$ and are bounded below by $f(m)$, where $f(1)=1$ and $f(m)=1/m-\delta/(m-1)$ for $m\ge2$. Since $0<\delta\le1/4$, we have $f(m)>0$. For integers $2\le m\le n$, we have $(m-1)(n-1)\ge mn/4$, so $f(m)-f(n)=(n-m)\bigl(1/(mn)-\delta/((m-1)(n-1))\bigr)\ge0$. Also, $f(2)\le f(1)$.
+
+When $i\ge2$, let $D$ be the parent component containing $C$ once layer $i-1$ is included. A shortest path to the root gives a vertex in $S_C$. All vertices in $S_C$ lie in $D$, and their predecessor sets are nonempty and pairwise nested. Thus any vertex $a_C$ in the smallest set is adjacent to all of $S_C$ and belongs to $S_D$. Set $Q_C=Q_D+g(a_D,a_C)$. At layer $1$, take $a_C=o$ and $Q_C=0$, and set $\varphi(o)=0$. For each nonroot $x$, use its component $C$ in the subgraph induced by its layer and the layers above to define
+
+$$
+\begin{aligned}
+\varphi(x)&=Q_C+\sum_{b\in P(x)}w_x(b)\bigl(g(a_C,b)+g(b,x)\bigr).
+\end{aligned}
+$$
+
+Skew symmetry gives zero defect on triangles with repeated vertices. Each neighbor $x$ of the root has the sole predecessor $o$, so $\varphi(x)=g(o,x)$ and all edges at the root fit exactly. Write $T(a,b,d)=g(a,b)+g(b,d)-g(a,d)$. The difference between the gains along paths from a common anchor $a$ through predecessors $b,d$ in the same shadow to the same vertex $z$ is $T(a,b,d)-T(b,d,z)$, of seminorm at most $2\varepsilon$.
+
+For an edge from a shallower vertex $u$ other than the root to a deeper vertex $v$, let $C$ be the component at the layer of $v$ and write $c=a_C$. The construction gives $c\in P(u)$ and $u\in P(v)$. Set $M=Q_C+g(c,u)$. Then $M$ is the term through $c$ in the average for $\varphi(u)$, and $M+g(u,v)$ is the term through $u$ in the average for $\varphi(v)$. Each average differs from its distinguished term only through the other predecessor paths, with error at most $2\varepsilon$ per term. Adding the two error bounds gives a residual of seminorm at most $(4-2w_u(c)-2w_v(u))\varepsilon$. If both endpoints have $k$ predecessors, $u$ receives the extra weight in $P(v)$ and the two distinguished weights sum to at least $f(k)+1/k+\delta$. If at least one endpoint has at most $k-1$ predecessors, their sum is at least $f(k)+f(k-1)$. Substituting $\delta$ gives
+
+$$
+\begin{aligned}
+f(k)+\frac{1}{k}+\delta
+&=f(k)+f(k-1)\\
+&=\frac{2}{k}+\frac{(k-2)^2}{k(k-1)^3}.
+\end{aligned}
+$$
+
+Thus the cross-layer residual has seminorm at most $R_k\varepsilon$. For a within-layer edge, orient it so that $P(u)\subseteq P(v)$. Both endpoints share the anchor and offset $Q_C$. Fix $b\in P(u)$ and compare the path through $b$ to $u$ followed by the edge to $v$ with the predecessor paths to $v$. The matching term through $b$ uses only the triangle $(b,u,v)$, with error at most $\varepsilon$. Every other term adds at most $2\varepsilon$. Averaging over $P(v)$ gives $(3-2w_v(b))\varepsilon\le(3-2f(k))\varepsilon$, and averaging over $P(u)$ preserves the bound. As $2\delta\le(k-2)/k$, we have $R_k-(3-2f(k))=1-2/k-2\delta\ge0$. Adjacent vertices differ in depth by at most $1$, and reversing an edge negates the residual, so the estimate holds on every oriented edge. The full proof is checked by the Lean kernel.
+:::
+
+**Manual derivation.** At $k=4$, every $4$-tree has cliques of size at most $5$, so its reconstruction coefficient is at most $R_4=79/27<3$. This improves the $4-4/k=3$ bound of [@thm-appe-clique-bounded-banach-potential] and the size-independent bound from item 1 of [@thm-appe-simplicial-interval-split-potential], which is $k-1=3$. For chordal graphs with no uniform clique size bound, the exact real Banach coefficient $C_{\mathrm{Ban,chordal}}$ remains open in $[2,4]$, and the universal coefficient $C_{\mathrm{chordal}}$ for groups with bi-invariant pseudometrics remains open among $\{2,3,4\}$.
+
+For a fixed nonlinear target group, the optimal coefficient is already a question on complete graphs.
 
 **A four-vertex round $\mathrm{SU}(2)$ counterexample.** A four-vertex chordal graph with no triangle is a forest. If it has one triangle, gauge the two spokes to the identity, write the remaining gain as $\exp X$, and take potentials $1,\exp(-X/3),\exp(X/3)$. Each triangle edge has error $|X|/3\le\varepsilon/3$. Fit any attached tree edge exactly. The remaining non-complete graph is the diamond, with two triangles sharing an edge. Take a degree-$3$ vertex as hub and gauge its spokes to $1$. Give the midpoint of the rim path potential $1$, and give each endpoint the midpoint of a minimizing geodesic from $1$ to the value fitting its rim edge exactly. Every error is at most $\varepsilon/2$.
 
