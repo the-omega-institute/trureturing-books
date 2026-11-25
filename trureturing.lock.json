@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "09a9cab08f76320690a7f680443abce314eec971",
-  "pinned_at": "2026-11-25T09:07:18Z",
+  "commit": "6663afa90893572c38d06dfc14b06880869d5b48",
+  "pinned_at": "2026-11-25T09:59:23Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4585,7 +4585,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.refined_coefficients",
       "kind": "theorem",
-      "statement_id": "sha256:2acb2f37ddc475919e98dea1ddabb5180ac34793bf8ddcce700ff768c1346f91",
+      "statement_id": "sha256:e60a26f8235447811e3aefcab8531c704c5ee83c61eff11af067ea1b8f96f24a",
       "line": 558,
       "signature": "theorem refined_coefficients {h : ℕ → ℝ} (hB : (fun n : ℕ => (n : ℝ)^5 * (h n)^2) =O[atTop] (fun _ => (1 : ℝ))) (S : Finset ℝ) (hS : S.Nonempty) : let readout"
     },
@@ -4593,7 +4593,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.scaled_boundary_value",
       "kind": "theorem",
-      "statement_id": "sha256:2acb2f37ddc475919e98dea1ddabb5180ac34793bf8ddcce700ff768c1346f91",
+      "statement_id": "sha256:e60a26f8235447811e3aefcab8531c704c5ee83c61eff11af067ea1b8f96f24a",
       "line": 786,
       "signature": "theorem scaled_boundary_value {h : ℕ → ℝ} (hB : (fun n : ℕ => (n : ℝ)^5 * (h n)^2) =O[atTop] (fun _ => (1 : ℝ))) (S : Finset ℝ) (hS : S.Nonempty) (offset : ℝ) : let readout"
     },
@@ -4601,7 +4601,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.scaled_rear_value",
       "kind": "theorem",
-      "statement_id": "sha256:2acb2f37ddc475919e98dea1ddabb5180ac34793bf8ddcce700ff768c1346f91",
+      "statement_id": "sha256:e60a26f8235447811e3aefcab8531c704c5ee83c61eff11af067ea1b8f96f24a",
       "line": 847,
       "signature": "theorem scaled_rear_value {h : ℕ → ℝ} {K : ℝ} (hK : Tendsto (fun n : ℕ => (n : ℝ)^5 * (h n)^2) atTop (𝓝 K)) (S : Finset ℝ) (hS : S.Nonempty) (r : ℝ) : let readout"
     },
@@ -4625,16 +4625,16 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingRearFirstOrder.eventual_support_at_threshold",
       "kind": "theorem",
-      "statement_id": "sha256:5cf0853a716476871ae060ecedf7ab7041f7ca0021382a24cec21eb3d34d5243",
-      "line": 415,
+      "statement_id": "sha256:3203abe597092ab94003c676924d5308a730dadc65d04cd4ad06fa60ec5a5411",
+      "line": 441,
       "signature": "theorem eventual_support_at_threshold (q : ℕ → ℕ) (hq : ∀ n, q n ≠ 0) (e l : ℕ) (hpar : ∀ᶠ n in atTop, q n % 2 = e) {K L : ℝ} (hK : Tendsto (fun n : ℕ => (n:ℝ)^5*(mesh (q n))^2) atTop (𝓝 K)) (hL : Tendsto (fun n : ℕ => (n:ℝ)*(3*((n:ℝ)^5*(mesh (q n))^2)/20-3*K/20)) atTop (𝓝 L)) (hcrit : 3*K/20=rearThreshold e (l+1)) (hne : L+3*K/8≠0) : let readout"
     },
     "D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder.scaled_rear_first_order": {
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingRearFirstOrder.scaled_rear_first_order",
       "kind": "theorem",
-      "statement_id": "sha256:5cf0853a716476871ae060ecedf7ab7041f7ca0021382a24cec21eb3d34d5243",
-      "line": 321,
+      "statement_id": "sha256:3203abe597092ab94003c676924d5308a730dadc65d04cd4ad06fa60ec5a5411",
+      "line": 346,
       "signature": "theorem scaled_rear_first_order {h : ℕ → ℝ} {K L : ℝ} (hK : Tendsto (fun n : ℕ => (n:ℝ)^5*(h n)^2) atTop (𝓝 K)) (hL : Tendsto (fun n : ℕ => (n:ℝ)*(3*((n:ℝ)^5*(h n)^2)/20-3*K/20)) atTop (𝓝 L)) (S : Finset ℝ) (hS : S.Nonempty) (r : ℝ) : let readout"
     },
     "D5/S3/Fourier/Asymptotics/CyclicGrowingSupport.eventual_strict_support_away_from_thresholds": {
@@ -4985,7 +4985,7 @@
       "module": "D5/S3/Fourier/Concentration/DisjointCharacterEnvelope",
       "name": "D5.S3.Fourier.Concentration.DisjointCharacterEnvelope.coefficient_envelope",
       "kind": "theorem",
-      "statement_id": "sha256:d41fe629cd9922fb975a6f26a99d83eb4c9608ecc434dd30253807c956ef0c61",
+      "statement_id": "sha256:e2e4d29946d7fc9bf5091652524ceb6296a2cff6ec4fd0c94b7cec34c96bcc41",
       "line": 313,
       "signature": "theorem coefficient_envelope {J : Type*} (s : Finset J) (a b : J → ℂ) (m n : ℕ) (r : ℝ) (hr : 0 < r) : let emptyPart"
     },
@@ -9163,6 +9163,14 @@
       "statement_id": "sha256:4a67af8bed068782c7112f9edf5eeb58010845563dde02230773a842bc9548a1",
       "line": 327,
       "signature": "theorem rational_endpoint_rank_le_three (L R : Matrix Bool Bool ℂ) : (∃ S : Matrix (Bool × Bool) (Bool × Bool) ℂ, S.PosSemidef ∧ partialTraceRight S = L ∧ partialTraceLeft S = R ∧ S.rank ≤ 3 ∧ ∀ i j, RationalEntry (S i j)) ↔ L.PosSemidef ∧ R.PosSemidef ∧ L.trace = R.trace ∧ (∀ i j, RationalEntry (L i j)) ∧ ∀ i j, RationalEntry (R i j)"
+    },
+    "D5/S3/Quantum/Entanglement/Marginals/RationalQubitMixedEndpoint.rational_rank_two_of_maximally_mixed_endpoint": {
+      "module": "D5/S3/Quantum/Entanglement/Marginals/RationalQubitMixedEndpoint",
+      "name": "D5.S3.Quantum.Entanglement.Marginals.RationalQubitMixedEndpoint.rational_rank_two_of_maximally_mixed_endpoint",
+      "kind": "theorem",
+      "statement_id": "sha256:24a715a71dd2c997590f7ca047ce6c41de13567f9eb64cc09adab755ebf1c193",
+      "line": 92,
+      "signature": "theorem rational_rank_two_of_maximally_mixed_endpoint (c : Fin 3 → ℚ) (hc : 0 < c ⬝ᵥ c) (hunit : c ⬝ᵥ c < 1) : ∃ T : Matrix (Bool × Bool) (Bool × Bool) ℂ, T.PosSemidef ∧ T.rank = 2 ∧ (∀ i j, RationalEntry (T i j)) ∧ partialTraceRight T = (1 / 2 : ℂ) • (1 : Matrix Bool Bool ℂ) ∧ partialTraceLeft T = (1 / 2 : ℂ) • (1 + rationalBlochMatrix c)"
     },
     "D5/S3/Quantum/Entanglement/Marginals/RationalQubitProjector.rational_rank_two_of_quadratic_witness": {
       "module": "D5/S3/Quantum/Entanglement/Marginals/RationalQubitProjector",
