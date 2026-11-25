@@ -1,0 +1,269 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {
+    "Lean": "Leen",
+    "ψψ": "sigh sigh",
+    "φφ": "fye fye",
+    "ψ": "sigh",
+    "φ": "fye"
+  },
+  "music": {
+    "bpm": 80,
+    "progression": "d-minor"
+  },
+  "scenes": [
+    {
+      "id": "copy",
+      "name": "THE COPIER",
+      "lead": 1.9,
+      "tail": 1.2,
+      "music": [
+        1.0,
+        0.4,
+        0.3,
+        0.0,
+        0.1
+      ],
+      "lines": [
+        [
+          "A photocopier copies any page, unread. So why can't a machine copy an unknown quantum state?",
+          "复印机什么页都能印，看都不用看。那为什么没有机器能复制一个未知的量子态？"
+        ],
+        [
+          "The answer is not about measurement. It is about angles.",
+          "答案不在测量，而在角度。"
+        ],
+        [
+          "A quantum machine acts like a rigid turn of the whole space, a turntable for arrows.",
+          "量子机器做的事，就像把整个空间刚性地转一转：一张放箭头的转盘。"
+        ],
+        [
+          "A turn moves every arrow, but the overlap between any two arrows stays exactly the same.",
+          "一转，每支箭头都动了，可任意两支之间的重叠分毫不变。"
+        ],
+        [
+          "Feed in ψ with a blank page. Its overlap with φ and the same blank is z times one.",
+          "把 ψ 和一张白纸一起送进去：它和 φ 加同一张白纸的重叠，是 z 乘 1。"
+        ],
+        [
+          "After copying, the outputs are ψψ and φφ. Their overlap is z times z.",
+          "复制之后，输出是 ψψ 和 φφ，它们的重叠是 z 乘 z。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 3,
+          "at": 2.6,
+          "kind": "chime"
+        }
+      ]
+    },
+    {
+      "id": "numbers",
+      "name": "ONE NUMBER",
+      "lead": 0.5,
+      "tail": 1.3,
+      "music": [
+        0.9,
+        0.5,
+        0.5,
+        0.1,
+        0.2
+      ],
+      "lines": [
+        [
+          "Try z equal to zero point six.",
+          "试一个数：z = 0.6。"
+        ],
+        [
+          "Going in, the overlap is zero point six. Coming out, it would have to be zero point three six.",
+          "进机器时重叠是 0.6；出来时却得是 0.36。"
+        ],
+        [
+          "The angle would have to open from fifty-three degrees to sixty-nine. A rigid turn cannot open an angle.",
+          "夹角得从 53° 张到 69°。刚性转动张不开任何角。"
+        ],
+        [
+          "Slide z from zero to one. The gap closes only at the two ends.",
+          "把 z 从 0 滑到 1：这道缺口只在两端合上。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 2,
+          "at": 3.2,
+          "kind": "glitch"
+        }
+      ]
+    },
+    {
+      "id": "theorem",
+      "name": "ONLY ZERO OR ONE",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        1.0,
+        0.7,
+        0.6,
+        0.2,
+        0.3
+      ],
+      "lines": [
+        [
+          "Lean checks this for any complex inner product space, with one machine and one blank.",
+          "Lean 内核检验：在任意复内积空间里，同一台机器，同一张白纸。"
+        ],
+        [
+          "If it copies two unit states exactly, their overlap equals its own square.",
+          "只要它精确复制了两个单位态，它们的重叠就等于自身的平方。"
+        ],
+        [
+          "So the two states are identical, or perpendicular.",
+          "所以这两个态要么完全相同，要么彼此正交。"
+        ],
+        [
+          "A copier can only copy what is already told apart.",
+          "能复制的，只有早已分得清的东西。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 0,
+          "at": 0.6,
+          "kind": "stamp"
+        },
+        {
+          "line": 3,
+          "at": 0.4,
+          "kind": "impact"
+        }
+      ]
+    },
+    {
+      "id": "rooms",
+      "name": "HIDE IT IN A ROOM",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        0.9,
+        0.6,
+        0.6,
+        0.2,
+        0.3
+      ],
+      "lines": [
+        [
+          "Why did we think safety means copies? That habit comes from paper.",
+          "我们凭什么以为，安全就得靠备份？这个习惯来自纸张。"
+        ],
+        [
+          "A quantum code hides the state instead. Three bits hold one, in four perpendicular rooms.",
+          "量子码改为把态藏起来：三个比特装一个，住进四间互相垂直的房。"
+        ],
+        [
+          "A bit flip does not smear the state. It carries it, whole, into another room.",
+          "比特翻转不会把态抹花，而是把它整个搬进另一间房。"
+        ],
+        [
+          "Each room has its own key. A key turned in the wrong room opens nothing.",
+          "每间房有自己的钥匙；拿去开别的房，什么也打不开。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 2,
+          "at": 2.2,
+          "kind": "glitch"
+        }
+      ]
+    },
+    {
+      "id": "nudge",
+      "name": "A NUDGE, NOT A FLIP",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        1.0,
+        0.8,
+        0.7,
+        0.4,
+        0.4
+      ],
+      "lines": [
+        [
+          "Now just nudge the middle bit. Seventy percent stays home, thirty percent moves next door, still in superposition.",
+          "现在只把中间那个比特轻推一下：七成留在原房，三成挪到隔壁，两者仍是叠加。"
+        ],
+        [
+          "Decode. The cross terms vanish, and zero point seven plus zero point three gives back the state.",
+          "解码：交叉项全部消失，0.7 加 0.3，原态完整交回。"
+        ],
+        [
+          "Lean checks it for any matrices: with perpendicular rooms, decoding returns the noise trace times the state.",
+          "Lean 内核检验：对任意矩阵，只要房间两两正交，解码就给出噪声矩阵的迹乘原态。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 2,
+          "at": 0.8,
+          "kind": "stamp"
+        }
+      ]
+    },
+    {
+      "id": "edge",
+      "name": "WHAT IT DOES NOT SAY",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        1.0,
+        0.7,
+        0.6,
+        0.3,
+        0.3
+      ],
+      "lines": [
+        [
+          "No-cloning is only a necessary condition. Near copies are another story.",
+          "不可克隆只是必要条件；近似复制是另一回事。"
+        ],
+        [
+          "This code only guards against errors built from single bit flips. A phase flip slips through unseen.",
+          "这套码只防由单个比特翻转拼成的错误；相位翻转会悄悄溜过。"
+        ],
+        [
+          "Here the four rooms fill all eight dimensions, so the keys already make a full channel.",
+          "这里四间房正好铺满八维，钥匙本身就是完整的信道；铺不满时，才要给其余空间补上一块。"
+        ]
+      ]
+    },
+    {
+      "id": "close",
+      "name": "LEDGER",
+      "lead": 0.5,
+      "tail": 3.4,
+      "music": [
+        1.0,
+        0.6,
+        0.5,
+        0.3,
+        0.2
+      ],
+      "lines": [
+        [
+          "Geometric Intuition of Quantum Computing, chapter fourteen.",
+          "《量子计算的几何直觉》· 第十四章"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 0,
+          "at": 0.3,
+          "kind": "chime"
+        }
+      ]
+    }
+  ]
+}
