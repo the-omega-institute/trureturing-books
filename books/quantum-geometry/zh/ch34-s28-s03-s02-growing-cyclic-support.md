@@ -116,4 +116,4 @@ $$
 
 现设 $Q=T_e(l+1)$ 且周期的最终奇偶性为 $e$。$S_l$ 的第一个未纳入对径半径是 $S_{l+1}$ 的最后一个纳入半径。对于这两个窗口，该半径均满足 $3D/4=Q$。其一阶符号因此由 $L+5Q/2$ 决定。若该量为正，最优解最终选取较大的对径窗口 $S_{l+1}$，若为负则选取 $S_l$。两种情况下前部支撑均为 $|j|\le N$，并满足两个精确矩等式与上述平方距离能量界。当 $L+5Q/2=0$ 时，更细的符号仍待判定。 [Lean 一阶对径展开证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder.scaled_rear_first_order) [Lean 阈值处最终支撑定理](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder.eventual_support_at_threshold)
 
-若在临界比例上 $q/N^{5/2}\to\gamma>0$，且 $N(q/(\gamma N^{5/2})-1)\to\eta$，则 $L=-2Q\eta$。因此激活由 $\eta$ 小于或大于 $5/4$ 决定。特别地，将 $\gamma N^{5/2}$ 按固定奇偶性作有界误差舍入得到 $\eta=0$，故进入较大的窗口。$\eta=5/4$ 的情形需要进一步展开。
+若在临界比例上 $q/N^{5/2}\to\gamma>0$，且 $N(q/(\gamma N^{5/2})-1)\to\eta$，则 $Q=3\pi^2/(5\gamma^2)$ 且 $L=-2Q\eta$。因此激活由 $\eta$ 小于或大于 $5/4$ 决定。特别地，将 $\gamma N^{5/2}$ 按固定奇偶性作有界误差舍入得到 $\eta=0$，故进入较大的窗口。$\eta=5/4$ 的情形需要进一步展开。
