@@ -193,7 +193,7 @@ function stArm(O, R, deg, col, a, o = {}) {
 function stPlot(B, a, o = {}) {
   const X = d => B.x + (d - B.d0) / (B.d1 - B.d0) * B.w, Y = f => B.y + B.h / 2 - f * B.h * 0.42;
   const pxPerRad = B.w / ((B.d1 - B.d0) * ST_DEG), pyPerUnit = B.h * 0.42;
-  if (a <= 0.003) return { X, Y, pxPerRad, pyPerUnit };
+  if (a <= 0.003) return { X, Y, pxPerRad, pyPerUnit, B };
   line(B.x, Y(0), B.x + B.w, Y(0), C.dim, a * 0.6, 1.5);
   for (let d = Math.ceil(B.d0 / 90) * 90; d <= B.d1; d += 90) {
     line(X(d), Y(0) - 6, X(d), Y(0) + 6, C.dim, a * 0.8, 1.5);
@@ -202,14 +202,16 @@ function stPlot(B, a, o = {}) {
   for (const v of [1, -1]) { stDash(B.x, Y(v), B.x + B.w, Y(v), C.dim, a * 0.35, 1, [3, 8]); txt(v > 0 ? '1' : '−1', B.x - 12, Y(v) + 7, { size: 18, fam: F.mono, w: 700, align: 'right', c: C.dim, a }); }
   const span = o.upto == null ? 1 : o.upto;
   if (span > 0.003) curve(s => { const d = lerp(B.d0, lerp(B.d0, B.d1, span), s); return [X(d), Y(stF(d))]; }, 220, C.cyan, a, 3.5);
-  txt('height f(θ) = cos θ · 高度', B.x + 8, B.y + 6, { size: 20, fam: F.zh, w: 700, c: C.cyan, a });
-  return { X, Y, pxPerRad, pyPerUnit };
+  txt('height f(θ) = cos θ · 高度', B.x + 8, B.y - 10, { size: 20, fam: F.zh, w: 700, c: C.cyan, a });
+  return { X, Y, pxPerRad, pyPerUnit, B };
 }
 /* the tangent at d degrees, drawn with the true slope −sin θ (per radian) */
 function stTangent(P, d, half, col, a) {
   if (a <= 0.003) return;
   const s = stTan(d), x0 = P.X(d), y0 = P.Y(stF(d)), k = -s * P.pyPerUnit / P.pxPerRad;
+  ctx.save(); ctx.beginPath(); ctx.rect(P.B.x, P.B.y, P.B.w, P.B.h); ctx.clip();
   stDash(x0 - half, y0 - k * half, x0 + half, y0 + k * half, col, a, 2.5, [9, 7]);
+  ctx.restore();
 }
 /* opening title */
 function stTitle(S) {
@@ -235,14 +237,14 @@ SCENES.dial = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
   /* the knob turns back and forth: θ = 60° + 40° sin */
-  const deg = 60 + 40 * Math.sin((u - lineAt(S, 0).s) * 0.9);
+  const deg = 70 + 30 * Math.sin((u - lineAt(S, 0).s) * 0.9);
   stDial(DL_O, DL_R, a);
   const arm = stArm(DL_O, DL_R, deg, C.now, a);
   txt(`θ = ${Math.round(deg)}°`, DL_O[0] + 40, DL_O[1] + 60, { size: 28, fam: F.mono, w: 700, c: C.now, a });
   const ha = a * Q(S, 0, 'reports only its height', 0.6);
   if (ha > 0.003) {
     chip(DL_O[0] - 150, arm.hy, 170, 44, stNum(stF(deg), 2), C.cyan, ha, 24);
-    txt('detector · 探测器', DL_O[0] - 150, DL_O[1] + DL_R + 70, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: ha });
+    txt('detector · 探测器', DL_O[0] - 150, arm.hy + 66, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: ha });
     txt('height · 高度', DL_O[0] - 150, arm.hy - 40, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: ha });
   }
   /* line 1: the curve of heights is drawn as the knob turns */
@@ -291,7 +293,7 @@ SCENES.turns = S => {
   }
   stArm(TT_O, TT_R, deg, C.now, a);
   dot(P.X(deg), P.Y(stF(deg)), 14, 'g', a);
-  txt(`θ = ${Math.round(deg)}°`, TT_O[0] + 34, TT_O[1] + 64, { size: 28, fam: F.mono, w: 700, c: C.now, a });
+  txt(`θ = ${Math.round(deg)}°`, TT_O[0], TT_O[1] + TT_R + 52, { size: 28, fam: F.mono, w: 700, align: 'center', c: C.now, a });
   /* line 3: the tangent */
   const ta = a * Q(S, 3, 'slope of the tangent', 0.6);
   stTangent(P, deg, 150, C.white, ta);
@@ -307,13 +309,13 @@ SCENES.turns = S => {
   /* a gauge: the half difference (cyan) against the tangent slope (white tick) */
   const ga = a * Q(S, 3, 'slope of the tangent', 0.5);
   if (ga > 0.003) {
-    const gx = 1460, gw = 320, gy = ly + 132, gc = gx + gw / 2;
+    const gx = 1460, gw = 320, gy = ly + 118, gc = gx + gw / 2;
     line(gx, gy, gx + gw, gy, C.dim, ga, 1.5);
     fillBox(Math.min(gc, gc + stHalf(deg) * gw / 2), gy - 12, Math.abs(stHalf(deg)) * gw / 2, 24, C.cyan, ga * 0.6);
     line(gc + stTan(deg) * gw / 2, gy - 22, gc + stTan(deg) * gw / 2, gy + 22, C.white, ga, 3);
-    txt('−1', gx, gy + 40, { size: 16, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ga });
-    txt('0', gc, gy + 40, { size: 16, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ga });
-    txt('1', gx + gw, gy + 40, { size: 16, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ga });
+    txt('−1', gx, gy + 34, { size: 16, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ga });
+    txt('0', gc, gy + 34, { size: 16, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ga });
+    txt('1', gx + gw, gy + 34, { size: 16, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ga });
   }
   stamp('½ difference = slope', 1330, 300, Q(S, 3, 'exactly the slope', 0.5, 0.8) * (1 - at(S, 4, 0.5)), C.cyan, 30, -0.06);
 };
@@ -321,14 +323,14 @@ SCENES.turns = S => {
 /* ======================================================================= */
 /*                           scene 3 · WHY A QUARTER TURN                    */
 /* ======================================================================= */
-const WY_O = [440, 560], WY_R = 250;
-const WY_B = { x: 1000, y: 470, w: 820, h: 300, d0: -60, d1: 180 };
+const WY_O = [440, 610], WY_R = 240;
+const WY_B = { x: 1000, y: 490, w: 820, h: 290, d0: -60, d1: 180 };
 SCENES.why = S => {
   const u = S.u, a = stFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued'], [2, null, 'computed'], [3, null, 'argued']]);
   /* the analogy: an arrow turning at a steady rate, its shadow on the wall (the measured axis) */
-  const deg = 20 + 38 * u;
+  const deg = 20 + 30 * u;
   stDial(WY_O, WY_R, a);
   const arm = stArm(WY_O, WY_R, deg, C.now, a);
   const ga = a * Q(S, 0, 'a quarter turn ahead', 0.6);
@@ -339,10 +341,10 @@ SCENES.why = S => {
     stDash(g.tip[0], g.tip[1], WY_O[0] + 60, g.hy, C.argued, ga * 0.6, 1.5);
     arrow(WY_O[0] + 34, arm.hy, WY_O[0] + 34, arm.hy - v * k, C.argued, ga, 4);
     txt('velocity · 速度', WY_O[0] + 54, arm.hy - v * k / 2 + 8, { size: 20, fam: F.zh, w: 700, c: C.argued, a: ga });
-    txt('a quarter turn ahead · 前方四分之一圈', g.tip[0] + (g.tip[0] < WY_O[0] ? -16 : 16), g.tip[1] - 18, { size: 20, fam: F.zh, w: 700, align: g.tip[0] < WY_O[0] ? 'right' : 'left', c: C.argued, a: ga });
+    txt('dashed: the arrow a quarter turn ahead · 虚线：前方四分之一圈的箭头', 80, 296, { size: 20, fam: F.zh, w: 700, c: C.argued, a: ga });
   }
-  txt('shadow · 影子', WY_O[0] - 40, arm.hy + 8, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.cyan, a });
-  stTag('analogy · 比方', 80, 230, C.argued, a * at(S, 0, 0.6));
+  txt('amber tick on the axis: the shadow · 轴上的琥珀刻度：影子', 80, 268, { size: 20, fam: F.zh, w: 700, c: C.now, a });
+  stTag('analogy · 比方', 80, 222, C.argued, a * at(S, 0, 0.6));
   /* line 1: one Pauli turn gives one pure wave */
   const la = a * at(S, 1, 0.6);
   if (la > 0.003) {
@@ -360,9 +362,9 @@ SCENES.why = S => {
     const x1 = P.X(30), y1 = P.Y(stF(30)), x2 = P.X(90), y2 = P.Y(stF(90)), k = (y2 - y1) / (x2 - x1);
     line(x1 - 90, y1 - 90 * k, x2 + 90, y2 + 90 * k, C.mag, ca, 3);
     dot(x1, y1, 10, 'm', ca); dot(x2, y2, 10, 'm', ca); dot(P.X(60), P.Y(stF(60)), 12, 'g', ca);
-    txt(`chord ±30° · 弦  ${stNum(stChord(60, 30))}`, 1440, 520, { size: 22, fam: F.zh, w: 700, c: C.mag, a: ca });
-    txt(`tangent · 切线  ${stNum(stTan(60))}`, 1440, 552, { size: 22, fam: F.zh, w: 700, c: C.white, a: ca });
-    txt(`ratio sin h / h = ${stNum(stChord(60, 30) / stTan(60))}`, 1440, 584, { size: 22, fam: F.mono, w: 700, c: C.mag, a: ca * Q(S, 2, 'four and a half percent', 0.5) });
+    txt(`chord ±30° · 弦  ${stNum(stChord(60, 30))}`, 1010, 700, { size: 22, fam: F.zh, w: 700, c: C.mag, a: ca });
+    txt(`tangent · 切线  ${stNum(stTan(60))}`, 1010, 732, { size: 22, fam: F.zh, w: 700, c: C.white, a: ca });
+    txt(`ratio sin h / h = ${stNum(stChord(60, 30) / stTan(60))}`, 1010, 764, { size: 22, fam: F.mono, w: 700, c: C.mag, a: ca * Q(S, 2, 'four and a half percent', 0.5) });
   }
   /* line 3: the aphorism */
   const sa = a * at(S, 3, 0.5);
@@ -382,7 +384,7 @@ SCENES.lean = S => {
   /* the general rule */
   panel(860, 190, 960, 330, a, C.lean, 'ANY FINITE SYSTEM · 任意有限维系统');
   stRich([['H* = H,  P* = P = P²,  ρ a density state', C.white]], 884, 260, { size: 26, a: a * Q(S, 1, 'Hermitian generator', 0.6) });
-  stRich([['ρₜ = e^{−itH} ρ e^{itH},   p(t) = Re Tr(ρₜ P)', C.white]], 884, 312, { size: 26, a: a * Q(S, 1, 'differentiable', 0.6) });
+  stRich([['ρₜ = e^(−itH) ρ e^(itH),   p(t) = Re Tr(ρₜ P)', C.white]], 884, 312, { size: 26, a: a * Q(S, 1, 'differentiable', 0.6) });
   stRich([['p′(t) = Re( i Tr(ρₜ (HP − PH)) )', C.cyan], ['   real · 实数', C.white]], 884, 372, { size: 28, a: a * Q(S, 2, 'commutator', 0.6), fam: F.zh });
   stRich([['HP = PH  ⇒  p(t) = p(0)', C.white]], 884, 430, { size: 26, a: a * Q(S, 4, 'commutes', 0.6) });
   stLeanChip(884, 490, ST_LEAN.projection_probability_flow, a * Q(S, 0, 'Lean checks', 0.6), { size: 18 });
@@ -393,7 +395,7 @@ SCENES.lean = S => {
     const deg = 60;
     stDial(LN_O, LN_R, da);
     stArm(LN_O, LN_R, deg, C.now, da);
-    txt('H = Y/2 · P = |0⟩⟨0| · ρ = |0⟩⟨0| · t = 60°', LN_O[0], LN_O[1] + LN_R + 80, { size: 22, fam: F.math, w: 700, align: 'center', c: C.white, a: da });
+    txt('H = Y/2 · P = |0⟩⟨0| · ρ = |0⟩⟨0| · t = 60°', LN_O[0], LN_O[1] + LN_R + 52, { size: 22, fam: F.math, w: 700, align: 'center', c: C.white, a: da });
     /* the turning direction of the arrow (purple: the turn) */
     ctx.save(); ctx.globalAlpha = da * 0.9; ctx.strokeStyle = C.argued; ctx.lineWidth = 3;
     ctx.beginPath(); ctx.arc(LN_O[0], LN_O[1], LN_R * 0.45, -Math.PI / 2 + 20 * ST_DEG, -Math.PI / 2 + 80 * ST_DEG); ctx.stroke(); ctx.restore();
@@ -422,13 +424,13 @@ SCENES.lean = S => {
     const tip = [O[0] + rr * Math.sin(ph), ry + rr * tilt * Math.cos(ph)];
     arrow(O[0], O[1], tip[0], tip[1], C.now, ka, 5);
     stDash(O[0] - R - 30, ry, O[0] + R + 30, ry, C.cyan, ka * 0.5, 1.5);
-    txt('p = 0.75, always · 始终', O[0] + R + 10, ry - 16, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.cyan, a: ka });
-    txt('H = Z/2,  HP − PH = 0', O[0], O[1] + R + 70, { size: 24, fam: F.math, w: 700, align: 'center', c: C.white, a: ka });
+    txt('p = 0.75, always · 始终', O[0], ry - rr * tilt - 18, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: ka });
+    txt('H = Z/2,  HP − PH = 0', O[0], O[1] + R + 40, { size: 24, fam: F.math, w: 700, align: 'center', c: C.white, a: ka });
     panel(860, 560, 960, 230, ka, C.cyan, 'NOTHING MOVES · 一动不动');
     stRich([['p(t) = ', C.white], [stNum(stProb([0, 0, 1], [[[0.75, 0], [Math.sqrt(3) / 4, 0]], [[Math.sqrt(3) / 4, 0], [0.25, 0]]], ph), 2), C.cyan], ['   p′(t) = 0', C.white]], 884, 640, { size: 30, a: ka });
     txt('spin about the measured axis · 绕被测的轴转', 884, 700, { size: 22, fam: F.zh, w: 700, c: C.white, a: ka });
   }
-  stamp('p′ = Re i Tr(ρₜ[H, P])', 400, 250, Q(S, 0, 'Lean checks', 0.5, 0.8) * (1 - at(S, 1, 0.5, 2.5)), C.lean, 26, -0.06);
+  stamp('p′ = Re i Tr(ρₜ[H, P])', 420, 700, Q(S, 0, 'Lean checks', 0.5, 0.8) * (1 - at(S, 1, 0.5, 2.5)), C.lean, 26, -0.06);
 };
 
 /* ======================================================================= */
