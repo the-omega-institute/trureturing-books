@@ -303,16 +303,17 @@ SCENES.arc = S => {
   const cur = at(S, 2, 0.01) > 0 ? 0 : -1;
   tpArc(a, cur, { y: 560, lift: 170, x0: 220, x1: 1700, r: 16, rs: 24, ls: 20, vis });
   const P = tpBeads({ y: 560, lift: 170, x0: 220, x1: 1700 });
-  /* the climb of I–VI: point, line, area, sphere, spheres, the sphere beyond (a small icon over each bead) */
+  /* the climb of I–VI: each icon is where the part arrives: line, area, sphere, two spheres, the spacetime sphere,
+     the sphere beyond */
   for (let k = 0; k < 6; k++) {
     const ka = a * clamp(climb * 6 - k);
     if (ka <= 0.003) continue;
     const [x, y] = P[k], yy = y - 92;
-    if (k === 0) dot(x, yy, 9, 'c', ka);
-    if (k === 1) line(x - 26, yy, x + 26, yy, C.cyan, ka, 4);
-    if (k === 2) tpPoly([[x - 22, yy + 18], [x + 22, yy + 18], [x + 30, yy - 18], [x - 14, yy - 18]], C.mag, ka, 0.3, 2);
-    if (k === 3) { ring(x, yy, 22, C.white, ka, 2); ctx.save(); ctx.globalAlpha = ka * 0.6; ctx.strokeStyle = C.white; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.ellipse(x, yy, 22, 7, 0, 0, TAU); ctx.stroke(); ctx.restore(); }
-    if (k === 4) { ring(x - 12, yy, 15, C.white, ka, 2); ring(x + 12, yy, 15, C.white, ka, 2); }
+    if (k === 0) line(x - 26, yy, x + 26, yy, C.cyan, ka, 4);
+    if (k === 1) tpPoly([[x - 22, yy + 18], [x + 22, yy + 18], [x + 30, yy - 18], [x - 14, yy - 18]], C.mag, ka, 0.3, 2);
+    if (k === 2) { ring(x, yy, 22, C.white, ka, 2); ctx.save(); ctx.globalAlpha = ka * 0.6; ctx.strokeStyle = C.white; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.ellipse(x, yy, 22, 7, 0, 0, TAU); ctx.stroke(); ctx.restore(); }
+    if (k === 3) { ring(x - 12, yy, 15, C.white, ka, 2); ring(x + 12, yy, 15, C.white, ka, 2); }
+    if (k === 4) { ring(x, yy, 22, C.white, ka, 2); line(x - 16, yy - 16, x + 16, yy + 16, C.cyan, ka, 2); line(x - 16, yy + 16, x + 16, yy - 16, C.cyan, ka, 2); }
     if (k === 5) { ring(x, yy, 14, C.white, ka, 2); ring(x, yy, 28, C.mag, ka, 2); arrow(x, yy, x, yy - 44, C.mag, ka, 2.5); }
   }
   /* VII–X: an arrow curling back toward the looker */
@@ -427,20 +428,28 @@ function stop3(S, a) {
     arrow(o[0], o[1], q[0], q[1], col, a, col === C.dim ? 2 : 4);
     txt(l, q[0] + 12, q[1] - 6, { size: 26, fam: F.math, w: 700, c: col, a });
   }
-  /* the point e_x under R_z(−90°), then R_x(90°), then R_z(90°) */
-  const ph = clamp(p * 1.25) * 3, seg = [];
-  const pos = s => {
-    if (s <= 1) return tpApp(tpRot('z', -Math.PI / 2 * s), [1, 0, 0]);
-    if (s <= 2) return tpApp(tpRot('x', Math.PI / 2 * (s - 1)), [0, -1, 0]);
-    return tpApp(tpRot('z', Math.PI / 2 * (s - 2)), [0, 0, -1]);
+  /* e_x and e_y under R_z(−90°), then R_x(90°), then R_z(90°): e_x moves in turns 1, 2, e_y in turns 1, 3 */
+  const ph = clamp(p * 1.25) * 3;
+  const posOf = v0 => s => {
+    let v = tpApp(tpRot('z', -Math.PI / 2 * clamp(s)), v0);
+    if (s > 1) v = tpApp(tpRot('x', Math.PI / 2 * clamp(s - 1)), v);
+    if (s > 2) v = tpApp(tpRot('z', Math.PI / 2 * clamp(s - 2)), v);
+    return v;
   };
-  for (let i = 0; i <= 90; i++) { const s = ph * i / 90; seg.push(V(pos(s))); }
+  const pos = posOf([1, 0, 0]), posY = posOf([0, 1, 0]), seg = [], segY = [];
+  for (let i = 0; i <= 90; i++) { const s = ph * i / 90; seg.push(V(pos(s))); segY.push(V(posY(s))); }
   /* the direct turn R_y(90°): e_x to −e_z, dashed */
   const dir = []; for (let i = 0; i <= 40; i++) dir.push(V(tpApp(tpRot('y', Math.PI / 2 * i / 40), [1, 0, 0])));
   tpPath(dir, C.white, a * 0.5, 2, [6, 7]);
   tpPath(seg, C.now, a, 4);
-  const pe = V(pos(ph));
+  tpPath(segY, C.white, a * 0.9, 3);
+  const pe = V(pos(ph)), py = V(posY(ph));
   dot(pe[0], pe[1], 13, 'g', a);
+  dot(py[0], py[1], 11, 'w', a);
+  txt('e_x', pe[0] - 16, pe[1] - 14, { size: 20, fam: F.mono, w: 700, align: 'right', c: C.now, a });
+  txt('e_y', py[0] - 14, py[1] + 30, { size: 20, fam: F.mono, w: 700, align: 'right', c: C.white, a });
+  const turn = Math.min(3, Math.floor(ph) + 1);
+  if (ph > 0.02) txt(`turn ${turn} of 3 · 第 ${turn} 次`, 160, 360, { size: 24, fam: F.zh, w: 700, c: C.now, a });
   const s0 = V([1, 0, 0]), s1 = V([0, 0, -1]);
   txt('start', s0[0] + 14, s0[1] + 30, { size: 20, fam: F.mono, w: 700, c: C.white, a: a * 0.85 });
   txt('end', s1[0] + 16, s1[1] + 8, { size: 20, fam: F.mono, w: 700, c: C.white, a: a * 0.85 * clamp(ph - 1.6) });
@@ -448,7 +457,7 @@ function stop3(S, a) {
     { parts: [['R_y(90°) =', C.white]], size: 30 },
     { parts: [['R_z(90°) · R_x(90°) · R_z(−90°)', C.now]], size: 30, a: clamp(p * 2.5 - 0.2) },
     { s: 'three turns about only a and b · 只绕 a、b 转三次', fam: F.zh, size: 22, c: C.dim, a: clamp(p * 2.5 - 0.6) },
-    { s: 'dashed: the direct turn about y · 虚线：绕 y 直接转', fam: F.zh, size: 20, c: C.dim, a: clamp(p * 2.5 - 0.6) }
+    { s: 'both e_x and e_y land where R_y(90°) sends them · 两个基向量都落到 R_y(90°) 的位置', fam: F.zh, size: 19, c: C.dim, a: clamp(p * 2.5 - 0.6) }
   ], TP_LEAN.two_axis_finite_word, { s: 'any rotation, any two non-parallel axes · 任意转动、任意两根不平行的轴', a: clamp(p * 2.5 - 1.2) });
 }
 /* ---------------- IV · CHSH on the Bell state ---------------- */
@@ -485,18 +494,18 @@ function stop5(S, a) {
   arrow(O[0] - 1.6 * k, O[1], O[0] + 1.7 * k, O[1], C.dim, a, 2);
   arrow(O[0], O[1] + 1.15 * k, O[0], O[1] - 1.2 * k, C.dim, a, 2);
   txt('x', O[0] + 1.75 * k, O[1] + 8, { size: 26, fam: F.math, w: 700, c: C.dim, a });
-  txt('t', O[0] + 12, O[1] - 1.2 * k, { size: 26, fam: F.math, w: 700, c: C.dim, a });
+  txt('t', O[0] - 30, O[1] - 1.2 * k + 10, { size: 26, fam: F.math, w: 700, c: C.dim, a });
   const ca = a * clamp(p * 3 - 0.2);
   for (const s of [1, -1]) { const q0 = P(-1.1 * s, -1.1), q1 = P(1.1 * s, 1.1); line(q0[0], q0[1], q1[0], q1[1], C.cyan, ca, 3.5); }
-  txt('light · 光', P(1.12, 1.12)[0] + 24, P(1.12, 1.12)[1] + 20, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: ca });
+  txt('light · 光', P(-1.12, 1.12)[0] - 150, P(-1.12, 1.12)[1] - 6, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: ca });
   /* S = 3(t² − x²) = 3 on the hyperbola t² − x² = 1, zero on the light lines */
   const ha = a * clamp(p * 3 - 0.8);
   curve(s => { const r = lerp(-0.62, 0.62, s); return P(Math.sinh(r), Math.cosh(r)); }, 80, C.white, ha * 0.7, 2);
   txt('S = 3', P(-0.66, 1.2)[0] - 12, P(-0.66, 1.2)[1] + 8, { size: 20, fam: F.mono, w: 700, align: 'right', c: C.white, a: ha * 0.8 });
-  for (const [x, t] of [[1, 1], [-0.6, 0.6], [0.5, -0.5]]) { const q = P(x, t); dot(q[0], q[1], 9, 'c', ca); txt('S = 0', q[0] + 12, q[1] - 10, { size: 18, fam: F.mono, w: 700, c: C.cyan, a: ca }); }
+  for (const [x, t, dx, dy] of [[0.85, 0.85, 20, 26], [-0.6, 0.6, 12, -10], [0.5, -0.5, 12, -10]]) { const q = P(x, t); dot(q[0], q[1], 9, 'c', ca); txt('S = 0', q[0] + dx, q[1] + dy, { size: 18, fam: F.mono, w: 700, c: C.cyan, a: ca }); }
   const q = P(0, 1);
   dot(q[0], q[1], 11, 'g', ha);
-  txt('S(1, 0) = 3', q[0] + 16, q[1] + 6, { size: 22, fam: F.mono, w: 700, c: C.now, a: ha });
+  txt('S(1, 0) = 3', q[0] + 40, q[1] - 86, { size: 22, fam: F.mono, w: 700, c: C.now, a: ha });
   tpCard(a, 4, [
     { s: 'S = 0 on every light ray ⟹', size: 28 },
     { parts: [['S = S(1, 0) · (t² − |x|²)', C.white]], size: 30, a: clamp(p * 3 - 0.3) },
@@ -599,7 +608,7 @@ function stop8(S, a) {
     { parts: [['eⁱ = 0.5403 + 0.8415 i', C.white]], size: 28 },
     { parts: [['1 + i − 1/2 − i/6 + 1/24 + i/120', C.cyan]], size: 26, a: clamp(p * 2) },
     { parts: [['= 0.5417 + 0.8417 i   miss ', C.white], [TP_MISS.toFixed(4), C.cyan]], size: 26, a: clamp(p * 2 - 0.8) },
-    { parts: [['≤ 1⁶/6! · e¹ = e/720 ≈ ', C.white], [TP_BOUND.toFixed(4), C.lean]], size: 26, a: clamp(p * 2 - 1.0) }
+    { parts: [['≤ 1⁶/6! · e¹ = e/720 ≈ ', C.white], [TP_BOUND.toFixed(4), C.cyan]], size: 26, a: clamp(p * 2 - 1.0) }
   ], TP_LEAN.exp_tail_le, { s: 'any n, any |z| ≤ r, in any complete normed algebra · 任意阶、任意 |z| ≤ r', a: clamp(p * 2 - 1.0) });
 }
 /* ---------------- IX · the table that lists itself ---------------- */
@@ -628,7 +637,7 @@ function stop9(S, a) {
     { parts: [['twist  f(y) = 2 − y', C.white]], size: 30 },
     { parts: [['row 2 = f(diagonal) = (2, 2, 1)', C.white]], size: 26, a: hi },
     { parts: [['⟹ f(g₂₂) = g₂₂ :  f(1) = ', C.white], ['1', C.now]], size: 28, a: clamp(p * 3 - 1.8) },
-    { s: 'rows 0, 1 differ from f(d): they escape · 0、1 行与 f(d) 不同：逃出去', fam: F.zh, size: 20, c: C.dim, a: clamp(p * 3 - 2) }
+    { s: 'rows 0, 1 ≠ f(d) · 0、1 行与 f(d) 不同', fam: F.zh, size: 20, c: C.dim, a: clamp(p * 3 - 2) }
   ], TP_LEAN.diagonal_landing_fixed, { s: 'any table, any twist f · 任意表格、任意扭法 f', a: clamp(p * 3 - 1.8) });
 }
 /* ---------------- X · one turn below, half a turn above ---------------- */
@@ -703,7 +712,7 @@ SCENES.stop = S => {
   if (ba > 0.003) {
     ctx.save(); ctx.globalAlpha = ba; ctx.strokeStyle = C.white; ctx.lineWidth = 2.5;
     ctx.beginPath(); ctx.arc(TP_BAG.c[0], TP_BAG.c[1], TP_BAG.r, -Math.PI * 0.38, Math.PI * 1.38); ctx.stroke(); ctx.restore();
-    txt('bag · 袋', TP_BAG.c[0], TP_BAG.c[1] + TP_BAG.r + 40, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a: ba });
+    txt('bag · 袋', TP_BAG.c[0] + TP_BAG.r + 20, TP_BAG.c[1] + TP_BAG.r - 30, { size: 22, fam: F.zh, w: 700, align: 'left', c: C.dim, a: ba });
     const round = tpRound(S);
     const leaveT = [phraseAt(S, 2, 'four'), phraseAt(S, 2, 'three, three')];
     TP_S0.forEach((m, i) => {
@@ -725,7 +734,7 @@ SCENES.stop = S => {
     tpRich([['编号 ≤ 袋中颗数 才留下；只删不添', C.white, F.zh]], 1028, 312, { size: 26, a: rule });
     tpRich([['U(A) = { a ∈ A : a ≤ |A| } ⊆ A', C.cyan]], 1028, 360, { size: 26, a: rule });
     /* the staircase: count per round */
-    const ch = { x: 150, y: 720, w: 620, h: 120 };
+    const ch = { x: 150, y: 690, w: 620, h: 120 };
     const sa = a * Q(S, 2, 'Six', 0.6);
     if (sa > 0.003) {
       line(ch.x, ch.y + ch.h, ch.x + ch.w, ch.y + ch.h, C.dim, sa, 1.5);
@@ -757,8 +766,8 @@ SCENES.stop = S => {
   const ma = a * at(S, 4, 0.5);
   if (ma > 0.003) {
     fillBox(0, 770, W, 110, C.bg, ma * 0.85);
-    txt('What only takes away must come to rest.', W / 2, 818, { size: 40, fam: F.disp, w: 700, align: 'center', c: C.white, a: ma, ab: 2 });
-    txt('只拿走、不放回的，终将停下。', W / 2, 866, { size: 34, fam: F.zh, w: 900, align: 'center', c: C.argued, a: ma });
+    txt('Take only from a finite bag, and it must come to rest.', W / 2, 818, { size: 40, fam: F.disp, w: 700, align: 'center', c: C.white, a: ma, ab: 2 });
+    txt('有限的袋子只拿不放，终将停下。', W / 2, 866, { size: 34, fam: F.zh, w: 900, align: 'center', c: C.argued, a: ma });
   }
 };
 
@@ -807,18 +816,18 @@ SCENES.close = S => {
   /* the eleven citations in two columns */
   const p3 = clamp((S.u - from - 1.6) / 0.8) * a;
   if (p3 > 0.003) {
-    const list = DATA.lean.filter(z => z.kind === 'theorem'), size = 14;
+    const list = DATA.lean.filter(z => z.kind === 'theorem'), size = 20;
     list.forEach((r, i) => {
       const col = i < 6 ? 0 : 1, row = i < 6 ? i : i - 6;
-      const x = col ? 960 : 110, y = 500 + row * 40;
+      const x = col ? 1000 : 150, y = 500 + row * 46;
       const head = STR.en.lean || 'LEAN ✓', wh = tw(head, size * 0.78, F.mono, 700, 1) + 16;
       fillBox(x, y - size, wh, size * 1.35, C.lean, p3 * 0.95);
       txt(head, x + 8, y - size * 0.1, { size: size * 0.78, fam: F.mono, w: 700, c: C.bg, a: p3, ls: 1 });
-      txt(r.label || r.name, x + wh + 12, y, { size, fam: F.mono, w: 700, c: C.lean, a: p3 });
+      txt(r.short, x + wh + 12, y, { size, fam: F.mono, w: 700, c: C.lean, a: p3 });
     });
   }
   const pin = DATA.pin || {};
-  if (pin.commit) txt(`github.com/${pin.repo} @ ${pin.commit.slice(0, 12)}`, cx, 760, { size: 20, fam: F.mono, align: 'center', c: C.dim, a: p3, ls: 1 });
+  if (pin.commit) txt(`github.com/${pin.repo} @ ${pin.commit.slice(0, 12)}`, cx, 800, { size: 20, fam: F.mono, align: 'center', c: C.dim, a: p3, ls: 1 });
 };
 
 /* ======================================================================= */
