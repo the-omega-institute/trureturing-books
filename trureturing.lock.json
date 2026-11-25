@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "0dd78e5a26bf1fa09de8c9c5bf097fdf209b3bfb",
-  "pinned_at": "2026-11-25T07:20:49Z",
+  "commit": "861753fe51c977250ba05b8227fdbaaacea637ef",
+  "pinned_at": "2026-11-25T07:57:15Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4561,7 +4561,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicEventualSupport",
       "name": "D5.S3.Fourier.Asymptotics.CyclicEventualSupport.cyclic_eventual_exact_support",
       "kind": "theorem",
-      "statement_id": "sha256:47c02503f1391f39c96e20748a8bff66873df365072c6c07aa8a00ec5bf173b4",
+      "statement_id": "sha256:851e66a4d2ac42f75585a1569786b31125fe57ef48e6825fb504ebbc47fe0ab7",
       "line": 922,
       "signature": "theorem cyclic_eventual_exact_support (lam : ℝ) (hlam : 0 < lam) : let clip"
     },
@@ -4569,7 +4569,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingCoupledFit.coupledFit_eventually",
       "kind": "theorem",
-      "statement_id": "sha256:2a541f0b606c73811befedd8b70a0ef7fc08a91d74865a4d4fe48807e5dd4530",
+      "statement_id": "sha256:bf52ae5a5f2486e6e00656889fe0794a3dd220a1c0e7096b7c5d2acc2ce3aae4",
       "line": 429,
       "signature": "theorem coupledFit_eventually {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) {S : Finset ℝ} (hS : S.Nonempty) (rhs : ℕ → Fin 3 → ℝ) : let readout"
     },
@@ -4577,7 +4577,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingCoupledFit.coupledMatrix_tendsto",
       "kind": "theorem",
-      "statement_id": "sha256:2a541f0b606c73811befedd8b70a0ef7fc08a91d74865a4d4fe48807e5dd4530",
+      "statement_id": "sha256:bf52ae5a5f2486e6e00656889fe0794a3dd220a1c0e7096b7c5d2acc2ce3aae4",
       "line": 312,
       "signature": "theorem coupledMatrix_tendsto {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) (S : Finset ℝ) : let readout"
     },
@@ -4585,7 +4585,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.refined_coefficients",
       "kind": "theorem",
-      "statement_id": "sha256:e7a28f03b8cca0a355b7327e636469d5a7a3e3fab3e9bb2ffcd91dbd5163d0e4",
+      "statement_id": "sha256:2acb2f37ddc475919e98dea1ddabb5180ac34793bf8ddcce700ff768c1346f91",
       "line": 558,
       "signature": "theorem refined_coefficients {h : ℕ → ℝ} (hB : (fun n : ℕ => (n : ℝ)^5 * (h n)^2) =O[atTop] (fun _ => (1 : ℝ))) (S : Finset ℝ) (hS : S.Nonempty) : let readout"
     },
@@ -4593,7 +4593,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.scaled_boundary_value",
       "kind": "theorem",
-      "statement_id": "sha256:e7a28f03b8cca0a355b7327e636469d5a7a3e3fab3e9bb2ffcd91dbd5163d0e4",
+      "statement_id": "sha256:2acb2f37ddc475919e98dea1ddabb5180ac34793bf8ddcce700ff768c1346f91",
       "line": 786,
       "signature": "theorem scaled_boundary_value {h : ℕ → ℝ} (hB : (fun n : ℕ => (n : ℝ)^5 * (h n)^2) =O[atTop] (fun _ => (1 : ℝ))) (S : Finset ℝ) (hS : S.Nonempty) (offset : ℝ) : let readout"
     },
@@ -4601,7 +4601,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.scaled_rear_value",
       "kind": "theorem",
-      "statement_id": "sha256:e7a28f03b8cca0a355b7327e636469d5a7a3e3fab3e9bb2ffcd91dbd5163d0e4",
+      "statement_id": "sha256:2acb2f37ddc475919e98dea1ddabb5180ac34793bf8ddcce700ff768c1346f91",
       "line": 847,
       "signature": "theorem scaled_rear_value {h : ℕ → ℝ} {K : ℝ} (hK : Tendsto (fun n : ℕ => (n : ℝ)^5 * (h n)^2) atTop (𝓝 K)) (S : Finset ℝ) (hS : S.Nonempty) (r : ℝ) : let readout"
     },
@@ -4620,6 +4620,14 @@
       "statement_id": "sha256:dd47f53a30ec43a6b9fdda2015f7d4b9c65cecb4e68f4f5a96187d298abe5d93",
       "line": 127,
       "signature": "theorem frontGram_sub_le (n : ℕ) (hn : 0 < n) (u : ℝ) (i j : Fin 2) : let readout"
+    },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingSupport.eventual_strict_support_away_from_thresholds": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingSupport",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingSupport.eventual_strict_support_away_from_thresholds",
+      "kind": "theorem",
+      "statement_id": "sha256:0e40c74a6fbf30af4af179e3c7e9ad68fee901f80b9be147405b462973107921",
+      "line": 819,
+      "signature": "theorem eventual_strict_support_away_from_thresholds (q : ℕ → ℕ) (hq : ∀ n, q n ≠ 0) (e : ℕ) (hpar : ∀ᶠ n in atTop, q n % 2 = e) {K : ℝ} (hK : Tendsto (fun n : ℕ => (n : ℝ)^5 * (mesh (q n))^2) atTop (𝓝 K)) (hneq : ∀ l, 3*K/20 ≠ rearThreshold e l) : let readout"
     },
     "D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit": {
       "module": "D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass",
