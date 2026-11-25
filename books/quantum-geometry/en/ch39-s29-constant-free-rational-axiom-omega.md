@@ -218,6 +218,16 @@ The similarity follows by choosing rational eigenbases independent of $t$. Take 
 
 In five dimensions, the first two unit axes of the second form leave a three-dimensional complement, where squared length $7$ meets the three-square obstruction. In six dimensions, take $e_1,e_2$ and place $(2,1,1,1)$ and $(3,-5,-1,0)$ in the remaining four coordinates. Along the conic, $1+4t=5u^2$ and $1-2t=7v^2/2$. Rational rescaling returns each form to its form at the base point. Lines of rational slope through $(1/2,1/2)$ give infinitely many such parameters. At $t=0$ both matrices are the identity and four coordinates suffice.
 
+The same two matrix families also give the reverse dimension ordering. This occurs on a second conic, with a two-coordinate gap.
+
+::: {.theorem #thm-ch39-cospectral-five-seven title="A conic with five and seven rational coordinates" lean="D5/S3/Quantum/AURICOmega/RationalGramCospectral.five_seven_on_conic"}
+Let rational $u,v$ satisfy $5u^2+4v^2=9$ and $u\ne0$. For $t=(5u^2/3-1)/4$, the first matrix is realizable in $\mathbb Q^n$ exactly when $n\ge5$, and the second exactly when $n\ge7$.
+:::
+
+At $(u,v)=(1,1)$ we have $t=1/6$. The common determinant is $20/27$. A four-coordinate factor would force this determinant to be a rational square, but its reduced numerator is $2$ modulo $3$. The first form reduces to squared lengths $(1,15,3,3)$. Take one unit axis and the three vectors $(-2,-1,3,1)$, $(1,1,1,0)$ and $(1,-1,0,1)$ in its four-coordinate complement.
+
+The second form reduces to squared lengths $(1,1,5,3)$. In six coordinates align the first three directions with $e_1$, $e_2$ and $2e_3+e_4$. The last direction would give $5x^2+y^2+z^2=3$. After clearing denominators, an odd denominator gives a contradiction modulo $8$. An even denominator forces all three numerators even modulo $4$, so descent gives the contradiction. Seven coordinates suffice using two unit axes, $2e_3+e_4$ and $e_5+e_6+e_7$. The two varying eigenvalues satisfy $1+4t=5u^2/3$ and $1-2t=2v^2/3$, so rational rescaling carries both thresholds from the base point. At $u=0$, the common rank drops to three.
+
 ## 32.5.4 Formal Anchors, Literature Boundaries, and Constant-Free Rational Audit {#sec-ch39-29-4}
 
 We gather the fifteen frozen theorems anchoring the constant-free rational skeleton of $\mathrm{AXIOM}\text{-}\Omega$, the integer-coefficient Chebyshev doubling equivalence, and the three flat/discrete residual bounds into the following theorem box:
