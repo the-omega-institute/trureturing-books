@@ -4842,6 +4842,22 @@
       "line": 417,
       "signature": "theorem exists_lattice_square_moment_minimizer_on_interval (n : ℕ) (hn : 0 < n) (m : ℝ) : let lowerBound"
     },
+    "D5/S3/Fourier/Asymptotics/MovingFejerCollision.exists_fejer_window_iff": {
+      "module": "D5/S3/Fourier/Asymptotics/MovingFejerCollision",
+      "name": "D5.S3.Fourier.Asymptotics.MovingFejerCollision.exists_fejer_window_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:a037e75c3a63b12a715152986b6900ba6e94544cf8c51725495289144523bab8",
+      "line": 26,
+      "signature": "theorem exists_fejer_window_iff (V η : ℕ → ℝ) (hV : ∀ᶠ n in atTop, 0 < V n) (hη : ∀ᶠ n in atTop, 0 < η n) : let scaleReadout"
+    },
+    "D5/S3/Fourier/Asymptotics/MovingFejerCollision.moving_fejer_uniform_lower": {
+      "module": "D5/S3/Fourier/Asymptotics/MovingFejerCollision",
+      "name": "D5.S3.Fourier.Asymptotics.MovingFejerCollision.moving_fejer_uniform_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:a037e75c3a63b12a715152986b6900ba6e94544cf8c51725495289144523bab8",
+      "line": 77,
+      "signature": "theorem moving_fejer_uniform_lower (V η : ℕ → ℝ) (hV : ∀ᶠ n in atTop, 0 < V n) (hη : ∀ᶠ n in atTop, 0 < η n) : let scaleReadout"
+    },
     "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result": {
       "module": "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns",
       "name": "D5.S3.Fourier.Asymptotics.TorusObservationWindowReturns.result",

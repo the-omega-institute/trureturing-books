@@ -196,4 +196,33 @@ $$
 \le\sqrt{pV}\,E_p(\eta).
 $$
 
-若 $W>0$，等价地有 $\liminf_{p\to\infty} E_p(\eta)\sqrt{pV}/(W^{2p}\eta)\ge1/(2\sqrt\pi)$。这个系数超过任意有限加权数据的抛物线下界系数 $3/(5\sqrt5)$，因为次数和具有卷积结构。结论允许固定的实际 ζ 尾段作为输入频率族。随着高度、频率族和分辨率共同变化的统一渐近界，以及高阶碰撞的上界，仍待进一步估计。 [渐近下界](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_asymptotic_lower)
+若 $W>0$，等价地有 $\liminf_{p\to\infty} E_p(\eta)\sqrt{pV}/(W^{2p}\eta)\ge1/(2\sqrt\pi)$。这个系数超过任意有限加权数据的抛物线下界系数 $3/(5\sqrt5)$，因为次数和具有卷积结构。结论允许固定的实际 ζ 尾段作为输入频率族。下一节的尺度条件给出高度、频率族和分辨率共同变化时的统一下界。高阶碰撞的上界仍需进一步估计。 [渐近下界](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_asymptotic_lower)
+
+## 变化频谱的统一小分辨率下界
+
+现在允许频率族、权重和中心随着次数 $n$ 一起变化。仅要求方差预算 $V_n$ 与分辨率 $\eta_n$ 最终为正。记
+
+$$
+s_n=\sqrt{nV_n},\qquad \rho_n=\frac{\eta_n}{s_n}.
+$$
+
+$\rho_n\to0$ 当且仅当存在最终为正的半窗口 $A_n$，使 $A_ns_n\to+\infty$ 且 $\eta_nA_n\to0$。确实，取 $A_n=1/(s_n\sqrt{\rho_n})$，两项分别为 $1/\sqrt{\rho_n}$ 与 $\sqrt{\rho_n}$。反过来，$\rho_n=(\eta_n A_n)/(s_nA_n)$。 [两种窗口尺度相容的充要条件](lean:D5/S3/Fourier/Asymptotics/MovingFejerCollision.exists_fejer_window_iff)
+
+在 $\rho_n\to0$ 下，对每个 $\varepsilon>0$，存在仅依赖于 $V_n,\eta_n$ 两个序列及 $\varepsilon$ 的次数阈值。超过此阈值的每个 $n$，任意有限频率族 $g_j$、非负权重 $w_j$ 以及任意满足 $\sum_jw_j(g_j-a)^2\le V_n W$ 的中心 $a$，均满足
+
+$$
+\left(\frac{1}{2\sqrt\pi}-\varepsilon\right)\eta_n W^{2n}
+\le \sqrt{nV_n}\,E_n(\eta_n).
+$$
+
+证明是在相容窗口上使用 $\eta_n^{-1}K_{\eta_n}(t)=\operatorname{sinc}^2(\eta_nt/2)/(2\pi)$。由 $\eta_n A_n\to0$，此归一化核最终处处至少为 $1/(2\pi)-\varepsilon/(2\sqrt\pi)$。由 $A_ns_n\to\infty$，不带核的缩放积分趋于 $\sqrt\pi$。结合有限窗口下界即可取得统一次数阈值。 [统一碰撞下界](lean:D5/S3/Fourier/Asymptotics/MovingFejerCollision.moving_fejer_uniform_lower)
+
+例如，对随 $n$ 变化的有限 ζ 尾段，取频率 $g_\gamma=\gamma/r$，其中 $r>0$ 固定，$0<\gamma\le T_n$。可用中心 $a=0$ 和预算 $V_n=T_n^2/r^2$。如果 $\eta_n r/(T_n\sqrt n)\to0$，则
+
+$$
+E_n(\eta_n)\ge
+\left(\frac{1}{2\sqrt\pi}-\varepsilon\right)
+\frac{r\eta_n}{T_n\sqrt n}\,W_n^{2n}
+$$
+
+最终成立。这里允许底层频率族的大小增长。若不控制分辨率与方差的相对尺度，例如单个单位权重频率、$V_n=1/n^2$、固定 $\eta_n>0$，归一化碰撞比可能趋于零。实际 ζ 零点的高阶加权碰撞上界仍未解决。
