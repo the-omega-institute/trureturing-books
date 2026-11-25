@@ -452,7 +452,7 @@ function stop3(S, a) {
 }
 /* ---------------- IV · CHSH on the Bell state ---------------- */
 function stop4(S, a) {
-  const O = [470, 620], R = 230, p = tpProg(S, 3);
+  const O = [470, 680], R = 190, p = tpProg(S, 3);
   ring(O[0], O[1], R, C.dim, a * 0.5, 1.5);
   /* directions in the x–z plane, measured from +z (up) toward +x (right) */
   const dirs = [[0, 'A₀ = Z', C.white], [90, 'A₁ = X', C.white], [45, 'B₀', C.cyan], [-45, 'B₁', C.cyan]];
@@ -460,12 +460,12 @@ function stop4(S, a) {
     const da = a * clamp(p * 4 - 0.3 * i);
     const q = [O[0] + R * Math.sin(d * TP_DEG), O[1] - R * Math.cos(d * TP_DEG)];
     arrow(O[0], O[1], q[0], q[1], col, da, 4.5);
-    txt(l, q[0] + (d < 0 ? -14 : 14), q[1] + (d === 90 ? 34 : -10), { size: 26, fam: F.math, w: 700, align: d < 0 ? 'right' : 'left', c: col, a: da });
+    txt(l, q[0] + (d < 0 ? -14 : d === 0 ? 18 : 14), q[1] + (d === 90 ? 34 : d === 0 ? 26 : -10), { size: 26, fam: F.math, w: 700, align: d < 0 ? 'right' : 'left', c: col, a: da });
   });
   txt('45°', O[0] + 30, O[1] - 90, { size: 22, fam: F.mono, w: 700, c: C.white, a: a * clamp(p * 4 - 1.2) });
-  txt('Alice: white · Bob: cyan', O[0], O[1] + R + 60, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a });
+  txt('Alice: white · Bob: cyan', O[0] + R + 30, O[1] + R - 20, { size: 20, fam: F.mono, w: 700, align: 'left', c: C.dim, a });
   /* a gauge 0 … 3 with the score */
-  const gx = 160, gy = 380, gw = 640, sc = clamp(p * 2 - 0.7) * 2 * Math.SQRT2;
+  const gx = 160, gy = 350, gw = 640, sc = clamp(p * 2 - 0.7) * 2 * Math.SQRT2;
   box(gx, gy, gw, 26, C.white, a * 0.5, 1.2);
   fillBox(gx, gy, gw * sc / 3, 26, C.cyan, a * 0.55);
   for (const t of [0, 1, 2, 3]) txt(String(t), gx + gw * t / 3, gy - 10, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.dim, a });
@@ -487,7 +487,7 @@ function stop5(S, a) {
   txt('t', O[0] + 12, O[1] - 1.2 * k, { size: 26, fam: F.math, w: 700, c: C.dim, a });
   const ca = a * clamp(p * 3 - 0.2);
   for (const s of [1, -1]) { const q0 = P(-1.1 * s, -1.1), q1 = P(1.1 * s, 1.1); line(q0[0], q0[1], q1[0], q1[1], C.cyan, ca, 3.5); }
-  txt('light · 光', P(1.12, 1.12)[0] + 10, P(1.12, 1.12)[1] + 6, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: ca });
+  txt('light · 光', P(1.12, 1.12)[0] + 24, P(1.12, 1.12)[1] + 20, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: ca });
   /* S = 3(t² − x²) = 3 on the hyperbola t² − x² = 1, zero on the light lines */
   const ha = a * clamp(p * 3 - 0.8);
   curve(s => { const r = lerp(-0.62, 0.62, s); return P(Math.sinh(r), Math.cosh(r)); }, 80, C.white, ha * 0.7, 2);
@@ -501,7 +501,7 @@ function stop5(S, a) {
     { parts: [['S = S(1, 0) · (t² − |x|²)', C.white]], size: 30, a: clamp(p * 3 - 0.3) },
     { parts: [['S = 3t² − 3x²: ', C.white], ['S(1, ±1) = 0, S(1, 0) = 3', C.cyan]], size: 24, a: clamp(p * 3 - 0.8) },
     { parts: [['t² − 2x²: (1, 1) ↦ −1 ≠ 0', C.mag]], size: 24, a: clamp(p * 3 - 1.3) }
-  ], TP_LEAN.eq_smul_minkowski_of_null, { s: 'any real quadratic form, any number of space dimensions · 任意实二次型、任意空间维数', a: clamp(p * 3 - 1.1) });
+  ], TP_LEAN.eq_smul_minkowski_of_null, { s: 'any real form, any space dimension · 任意实二次型、任意空间维数', a: clamp(p * 3 - 1.1) });
 }
 
 /* ---------------- VI · the golden fixed point ---------------- */
@@ -514,7 +514,7 @@ function stop6(S, a) {
   tpPath([P(lo, lo), P(2.1, 2.1)], C.white, a * 0.5, 2, [6, 6]);
   txt('y = x', P(2.1, 2.1)[0] + 8, P(2.1, 2.1)[1] - 6, { size: 20, fam: F.math, w: 700, c: C.dim, a });
   curve(s => { const x = lerp(0.9, 2.1, s); return P(x, Math.min(2.12, 1 + 1 / x)); }, 120, C.cyan, a, 3.5);
-  txt('y = 1 + 1/x', P(1.95, 1.55)[0], P(1.95, 1.55)[1] + 6, { size: 22, fam: F.math, w: 700, c: C.cyan, a });
+  txt('y = 1 + 1/x', P(1.62, 1.3)[0], P(1.62, 1.3)[1] + 6, { size: 22, fam: F.math, w: 700, c: C.cyan, a });
   /* the cobweb */
   const n = clamp(p * 1.3) * 5, pts = [P(TP_GOLD[0], lo)];
   for (let i = 0; i < 5; i++) {
@@ -526,7 +526,7 @@ function stop6(S, a) {
   tpPath(pts, C.now, a, 3);
   const fp = P(TP_PHI, TP_PHI);
   ring(fp[0], fp[1], 12, C.white, a * clamp(p * 2 - 1), 2.5);
-  txt('φ', fp[0] - 18, fp[1] - 16, { size: 30, fam: F.math, w: 700, align: 'right', c: C.white, a: a * clamp(p * 2 - 1) });
+  txt('φ ≈ 1.618', fp[0] + 22, fp[1] + 40, { size: 26, fam: F.math, w: 700, align: 'left', c: C.white, a: a * clamp(p * 2 - 1) });
   const show = TP_GOLD.map((x, i) => (i === 3 ? '1.667' : String(+x.toFixed(3)))).slice(0, 1 + Math.floor(n + 0.5)).join(' → ');
   tpCard(a, 5, [
     { parts: [['x ↦ 1 + 1/x', C.white]], size: 32 },
@@ -567,7 +567,7 @@ function stop8(S, a) {
   tpArcPath(O[0], O[1], R, 0, -1.45, C.white, a * 0.7, 2);
   const ei = P(TP_EI);
   ring(ei[0], ei[1], 10, C.white, a, 2.5);
-  txt('e^{i}', ei[0] + 16, ei[1] - 12, { size: 26, fam: F.math, w: 700, c: C.white, a });
+  txt('eⁱ', ei[0] - 20, ei[1] + 34, { size: 30, fam: F.math, w: 700, align: 'right', c: C.white, a });
   /* the polygon of partial sums */
   const n = clamp(p * 1.4) * 6, pts = [P(TP_EXP[0])];
   for (let i = 0; i < 6; i++) { const f = clamp(n - i); if (f <= 0) break; pts.push(P([lerp(TP_EXP[i][0], TP_EXP[i + 1][0], f), lerp(TP_EXP[i][1], TP_EXP[i + 1][1], f)])); }
@@ -595,7 +595,7 @@ function stop8(S, a) {
     line(ei[0] + 12, ei[1] - 4, cx - sz, cy + 40, C.white, ia * 0.4, 1);
   }
   tpCard(a, 7, [
-    { parts: [['e^{i} = 0.5403 + 0.8415 i', C.white]], size: 28 },
+    { parts: [['eⁱ = 0.5403 + 0.8415 i', C.white]], size: 28 },
     { parts: [['1 + i − 1/2 − i/6 + 1/24 + i/120', C.cyan]], size: 26, a: clamp(p * 2) },
     { parts: [['= 0.5417 + 0.8417 i   miss ', C.white], [TP_MISS.toFixed(4), C.cyan]], size: 26, a: clamp(p * 2 - 0.8) },
     { parts: [['≤ 1⁶/6! · e¹ = e/720 ≈ ', C.white], [TP_BOUND.toFixed(4), C.lean]], size: 26, a: clamp(p * 2 - 1.0) }
@@ -632,7 +632,7 @@ function stop9(S, a) {
 }
 /* ---------------- X · one turn below, half a turn above ---------------- */
 function stop10(S, a) {
-  const p = tpProg(S, 4), Bc = [330, 620], Uc = [760, 620], R = 170;
+  const p = tpProg(S, 4), Bc = [270, 620], Uc = [790, 620], R = 160;
   const th = TAU * ease(clamp(p * 1.25 - 0.1));
   ring(Bc[0], Bc[1], R, C.white, a * 0.6, 2);
   ring(Uc[0], Uc[1], R, C.white, a * 0.6, 2);
@@ -686,6 +686,17 @@ SCENES.stop = S => {
   const u = S.u, a = tpFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued'], [1, null, 'computed'], [3, 'Lean checks', 'lean'], [4, null, 'argued']]);
+  /* line 0: the arc ends, and no grand finale is waiting after bead X */
+  const qa = a * at(S, 0, 0.6) * (1 - at(S, 1, 0.5));
+  if (qa > 0.003) {
+    tpArc(qa, 9, { y: 560, lift: 150, x0: 260, x1: 1300, r: 12, rs: 18, labels: false });
+    const fx = 1560, fy = 470;
+    txt('GRAND FINALE?', fx, fy, { size: 44, fam: F.orb, w: 900, align: 'center', c: C.argued, a: qa });
+    txt('宏大结局？', fx, fy + 56, { size: 34, fam: F.zh, w: 900, align: 'center', c: C.argued, a: qa });
+    const sa = qa * Q(S, 0, 'Shrinking', 0.5);
+    line(fx - 200, fy + 20, fx + 200, fy - 10, C.white, sa, 4);
+    txt('shrinking needs none · 只会缩小的，不需要', fx, fy + 140, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.white, a: sa });
+  }
   const ba = a * at(S, 1, 0.6);
   /* the bag */
   if (ba > 0.003) {
@@ -701,7 +712,7 @@ SCENES.stop = S => {
       const r = !TP_RUN[1].includes(m) ? 0 : !TP_RUN[2].includes(m) ? 1 : -1;
       if (r >= 0) {
         const f = ease(clamp((u - leaveT[r]) / 1.0));
-        if (u >= leaveT[r]) { x = lerp(p0[0], p0[0] + 60, f); y = lerp(p0[1], TP_BAG.c[1] - TP_BAG.r - 120, f); col = 'm'; ma = ba * (1 - 0.6 * f); }
+        if (u >= leaveT[r]) { x = lerp(p0[0], p0[0] + 60, f); y = lerp(p0[1], TP_BAG.c[1] - TP_BAG.r - 120, f); col = 'm'; ma = ba * (1 - f); }
       }
       dot(x, y, 30, col, ma);
       txt(String(m), x, y + 11, { size: 30, fam: F.mono, w: 700, align: 'center', c: C.bg, a: ma });
@@ -795,10 +806,10 @@ SCENES.close = S => {
   /* the eleven citations in two columns */
   const p3 = clamp((S.u - from - 1.6) / 0.8) * a;
   if (p3 > 0.003) {
-    const list = DATA.lean.filter(z => z.kind === 'theorem'), size = 15;
+    const list = DATA.lean.filter(z => z.kind === 'theorem'), size = 14;
     list.forEach((r, i) => {
       const col = i < 6 ? 0 : 1, row = i < 6 ? i : i - 6;
-      const x = col ? 990 : 150, y = 500 + row * 40;
+      const x = col ? 960 : 110, y = 500 + row * 40;
       const head = STR.en.lean || 'LEAN ✓', wh = tw(head, size * 0.78, F.mono, 700, 1) + 16;
       fillBox(x, y - size, wh, size * 1.35, C.lean, p3 * 0.95);
       txt(head, x + 8, y - size * 0.1, { size: size * 0.78, fam: F.mono, w: 700, c: C.bg, a: p3, ls: 1 });

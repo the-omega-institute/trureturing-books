@@ -19,7 +19,7 @@
     {"id": "second", "name": "PARTS VI TO X", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
       ["Six: a map fed its own output. One plus one over x has one positive fixed point, the golden ratio.", "第六部：把输出喂回给自己。x ↦ 1 + 1/x 在正数里只有一个不动点：黄金比。"],
       ["Seven: no referee. Two unit records overlap by exactly one only when they are the same record.", "第七部：没有裁判。两条单位记录的重叠恰好等于 1，当且仅当它们是同一条记录。"],
-      ["Eight: tiny arcs. Six terms of the series for e to the i miss the arc by about one thousandth.", "第八部：极小圆弧。e^i 的级数取前六项，离圆弧只差约千分之一。"],
+      ["Eight: tiny arcs. Six terms of the series for e to the i miss the arc by about one thousandth.", "第八部：极小圆弧。eⁱ 的级数取前六项，离圆弧只差约千分之一。"],
       ["Nine: a table that lists itself. A row that copies the twisted diagonal forces a fixed point.", "第九部：一张列出自己的表。哪一行抄下了扭过的对角线，哪里就逼出一个不动点。"],
       ["Ten: under squaring, one full turn below lifts to a half turn above. You arrive at minus one.", "第十部：在平方映射下，下面转满一圈，上面只转半圈：你停在 −1。"]
     ], "cues": [{"line": 0, "at": 3.6, "kind": "chime"}, {"line": 4, "at": 4.2, "kind": "glitch"}]},
