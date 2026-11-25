@@ -288,7 +288,7 @@ function cuGeom(k) {
   const { mx, nx, cy, node, leg } = BG, h = node / 2;
   if (k === 0) return [[mx - 150, cy - h - leg / 2], [nx + 150, cy - h - leg / 2]];
   if (k === 1) return [[mx - 150, cy + h + leg / 2], [nx + 150, cy + h + leg / 2]];
-  return [[(mx + nx) / 2, cy - h - 90], [(mx + nx) / 2, cy + h + 30]];
+  return [[(mx + nx) / 2, cy - h - 90], [(mx + nx) / 2, cy + h + 4]];
 }
 SCENES.cuts = S => {
   const a = mcFade(S);
@@ -328,9 +328,9 @@ SCENES.cuts = S => {
   stamp('NECK = 6', 730, 270, Q(S, 3, 'narrowest cut', 0.5, 0.2) * (1 - at(S, 4, 0.5, 1.0)), C.mag, 40, -0.06);
   const ia = a * at(S, 4, 0.6);
   if (ia > 0.003) {
-    panel(220, 700, 900, 110, ia, C.argued);
-    txt('the neck decides, not the middle', 250, 746, { size: 30, fam: F.disp, w: 700, c: C.argued, a: ia });
-    txt('说了算的是腰，不是肚子', 250, 790, { size: 26, fam: F.zh, w: 700, c: C.white, a: ia });
+    panel(1180, 660, 640, 130, ia, C.argued);
+    txt('the neck decides, not the middle', 1210, 712, { size: 30, fam: F.disp, w: 700, c: C.argued, a: ia });
+    txt('说了算的是腰，不是肚子', 1210, 760, { size: 26, fam: F.zh, w: 700, c: C.white, a: ia });
   }
 };
 
@@ -358,7 +358,7 @@ SCENES.bound = S => {
   txt('min cut 6 · 最小割', bx + 6 * unit + 14, by + 30, { size: 22, fam: F.zh, w: 700, c: C.mag, a });
   txt('bridges 12 · 桥', bx + 12 * unit, by + 30, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a });
   if (ma > 0.003) txt('no choice of matrices passes the lid · 怎么挑矩阵都过不去', W / 2, 840, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.white, a: ma });
-  stamp('MAX FLOW ≤ MIN CUT', 1380, 640, Q(S, 0, 'never exceeds', 0.5, 0.2), C.lean, 30, -0.06);
+  stamp('MAX FLOW ≤ MIN CUT', 1380, 568, Q(S, 0, 'never exceeds', 0.5, 0.2), C.lean, 30, -0.06);
 };
 
 /* ======================================================================= */
@@ -379,12 +379,12 @@ SCENES.fill = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean'], [6, null, 'computed']]);
   /* the lower half of the scene: routing, fading back as the theorem enters */
-  const back = 1 - 0.65 * at(S, 3, 0.6);
-  const ra = a * back;
+  const back = 1 - 0.65 * at(S, 3, 0.6) - 0.2 * at(S, 6, 0.6, 2.0);
+  const ra = a * back, gone = 1 - at(S, 3, 0.5);
   /* bridge rails */
   FL.yB.forEach((y, r) => {
     mcDash(FL.x0 - 60, y, FL.x1 + 60, y, r === 0 ? C.cyan : C.white, ra * 0.35, 1.5, [4, 8]);
-    txt(`bridge ${r} · 桥 ${r}`, FL.x1 + 80, y + 8, { size: 20, fam: F.zh, w: 700, c: r === 0 ? C.cyan : C.white, a: ra * 0.9 });
+    txt(`bridge ${r} · 桥 ${r}`, FL.x1 + 80, y + 8, { size: 20, fam: F.zh, w: 700, c: r === 0 ? C.cyan : C.white, a: ra * 0.9 * gone });
   });
   for (const R of MC_ROUTES) {
     const P = flIn(R.inp); dot(P[0], P[1], 12, 'w', ra);
@@ -416,10 +416,10 @@ SCENES.fill = S => {
   txt('outputs (i, k) · 输出', FL.x0 - 40, FL.yOut - 70, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ra });
   /* the counter */
   const ca = a * at(S, 0, 0.6);
-  panel(1260, 200, 560, 230, ca * back + 0.0, C.cyan, 'RANK · 秩  (2, 3, 2, 3)');
-  mcRich([['distinct outputs · 不同输出  ', C.white], [`${outsHit.size}`, C.cyan], [' / 6', C.white]], 1290, 280, { size: 28, a: ca * back, fam: F.zh });
-  mcRich([['bridges alone · 单桥  4, 1, 1', C.dim]], 1290, 330, { size: 22, a: ca * back * at(S, 1, 0.6, 2.4), fam: F.zh });
-  mcRich([['rank = ', C.white], ['6', C.cyan], [' = min cut', C.mag]], 1290, 392, { size: 30, a: ca * back * Q(S, 2, 'Rank six', 0.5) });
+  panel(1260, 200, 560, 230, ca * gone, C.cyan, 'RANK · 秩  (2, 3, 2, 3)');
+  mcRich([['distinct outputs · 不同输出  ', C.white], [`${outsHit.size}`, C.cyan], [' / 6', C.white]], 1290, 280, { size: 28, a: ca * gone, fam: F.zh });
+  mcRich([['bridges alone · 单桥  4, 1, 1', C.dim]], 1290, 330, { size: 22, a: ca * gone * at(S, 1, 0.6, 2.4), fam: F.zh });
+  mcRich([['rank = ', C.white], ['6', C.cyan], [' = min cut', C.mag]], 1290, 392, { size: 30, a: ca * gone * Q(S, 2, 'Rank six', 0.5) });
   stamp('FULL', 660, 640, Q(S, 2, 'the neck is full', 0.5) * (1 - at(S, 3, 0.4)), C.cyan, 56, -0.06);
   /* the theorem */
   const la = a * Q(S, 3, 'Lean checks', 0.6);
