@@ -220,7 +220,7 @@ In five dimensions, the first two unit axes of the second form leave a three-dim
 
 When can the two matrices be realized in four rational coordinates? At this dimension they share an arithmetic criterion.
 
-::: {.theorem #thm-ch39-cospectral-four-coordinates title="The four-coordinate criterion for both cospectral matrices" lean="D5/S3/Quantum/AURICOmega/RationalGramCospectral.four_coordinate_criterion"}
+::: {.theorem #thm-ch39-cospectral-four-coordinates title="The four-coordinate criterion for both cospectral matrices" lean="D5/S3/Quantum/AURICOmega/RationalGramCospectralFourCoordinates.four_coordinate_criterion"}
 Let $t\in\mathbb Q$. Each of the paired-edge and triangle-block matrices is realizable in $\mathbb Q^4$ exactly when $t=1/2$, or when $1+4t$ is a rational square and $2(1-2t)$ is a sum of two rational squares.
 :::
 

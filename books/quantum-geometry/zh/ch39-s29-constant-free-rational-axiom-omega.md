@@ -220,7 +220,7 @@
 
 两组矩阵何时能用四个有理坐标实现？在这个维数，它们有共同的算术判据。
 
-::: {.theorem #thm-ch39-cospectral-four-coordinates title="两组同谱矩阵的四坐标判据" lean="D5/S3/Quantum/AURICOmega/RationalGramCospectral.four_coordinate_criterion"}
+::: {.theorem #thm-ch39-cospectral-four-coordinates title="两组同谱矩阵的四坐标判据" lean="D5/S3/Quantum/AURICOmega/RationalGramCospectralFourCoordinates.four_coordinate_criterion"}
 设 $t\in\mathbb Q$。对成对边矩阵和三角块矩阵，各自在 $\mathbb Q^4$ 中可实现当且仅当 $t=1/2$，或 $1+4t$ 是有理平方且 $2(1-2t)$ 是两个有理平方之和。
 :::
 
