@@ -430,6 +430,37 @@ $$
 
 Choose $L_n$ with $\eta_nL_n\to+\infty$ and $L_n\ge A_n/s_n$. Set $\varepsilon_n=64/(\eta_nL_n)$. Eventually $I_{\eta_n}(L_n)\le M_{\eta_n}\le I_{\eta_n}(L_n)/(1-\varepsilon_n)$. The normalized finite-window integral $(s_n/\eta_n)I_{\eta_n}(L_n)$ and the normalized whole-line moment therefore share the same finite limit whenever either converges. Once the central principal contribution is established, the phase peaks still requiring control occupy the finite intermediate time range $A_n/s_n<|t|\le L_n$. The high-moment upper bound for actual growing zeta-ordinate families on that range remains open.
 
+### Short noncentral times for actual zeta ordinates
+
+Retain the actual harmonic weights defined above and write $Z_T(t)=\sum_\gamma w_\gamma e^{i\gamma t}$. Under the existing RH interface, there is a fixed $L>1$ such that for $T\ge L$ and $1/T\le |t|\le1/L$,
+
+$$
+1-|Z_T(t)|\ge\frac{\log(1/|t|)}{524288(\log T)^2}.
+$$
+
+[Reciprocal-height score deficit](https://github.com/the-omega-institute/trureturing/blob/6011404b062fb40c1416029ffe8b2e045b1309ad/D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.lean#L228) The retained spectrum through $X=1/|t|$ has $L\le X\le T$. Its pair moments satisfy $P_2(X)\ge X^2/(4096\log X)$ and $P_4(X)\le X^2P_2(X)$. Since $X^2t^2=1$, the quartic estimate yields $1-|Z_X(t)|^2\ge1/(16384\log X)$ and hence $1-|Z_X(t)|\ge1/(32768\log X)$. Splitting the actual finite sum through $T$ at $X$ and applying the triangle inequality at the same time $t$ gives
+
+$$
+W(T)(1-|Z_T(t)|)\ge W(X)(1-|Z_X(t)|).
+$$
+
+The harmonic mass bounds $W(X)\ge c(\log X)^2/16$ and $W(T)\le c(\log T)^2$ give the claimed deficit. Thus for each fixed $0<\delta<1$, all sufficiently large $T$ and $1/T\le|t|\le T^{-\delta}$ satisfy
+
+$$
+|Z_T(t)|^{2n}\le\exp\left(-\frac{\delta n}{262144\log T}\right).
+$$
+
+As a consequence of this estimate, use $s_n=\sqrt{nP_2(T_n)/2}$ and any positive resolution $\eta_n$. Since $P_2(T_n)\le T_n^2$ and $K_{\eta_n}\le\eta_n/(2\pi)$, the normalized contribution on this annulus is bounded by
+
+$$
+\frac{s_n}{\eta_n}\int_{1/T_n\le|t|\le T_n^{-\delta}}
+K_{\eta_n}(t)|Z_{T_n}(t)|^{2n}\,dt
+\le\frac{\sqrt{n/2}}{\pi}T_n^{1-\delta}
+\exp\left(-\frac{\delta n}{262144\log T_n}\right).
+$$
+
+This upper bound tends to zero if $T_n\to\infty$ and $(\log T_n)^2/n\to0$, since both $\log T_n$ and $\log n$ are $o(n/\log T_n)$. For the region between the moving central window and $1/T_n$, the same quartic estimate with $X=T_n$ gives $|Z_{T_n}(t)|^{2n}\le e^{-11(s_nt)^2/12}$ for $|t|\le1/T_n$. Its normalized integral outside $|s_nt|\le A_n$ tends to zero as $A_n\to\infty$. Together with relative truncation, the remaining arithmetic upper estimate is therefore needed on the intermediate range $T_n^{-\delta}<|t|\le L_n$ under these stronger growth conditions. For fixed $r>0$ and frequencies $\gamma/r$, rescale the time endpoints by $r$ and the variance scale by $1/r$.
+
 ### Occupation diagonal lower bound for finite support
 
 For finite support, the noncentral contribution also has a constraint independent of the specific frequency values. Suppose $w_j\ge0$ and $\sum_jw_j=1$, and let an occupation vector $m$ of degree $p$ satisfy $\sum_jm_j=p$. Write $c_m$ for its actual multinomial weight. Choose an index $j_0$, whose count is determined by the other counts and the total degree. For positive radii $r_j$ on the remaining coordinates define
