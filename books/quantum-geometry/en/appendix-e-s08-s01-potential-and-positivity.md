@@ -454,6 +454,69 @@ Thus the cross-layer residual has seminorm at most $R_k\varepsilon$. For a withi
 
 **Manual derivation.** At $k=4$, every $4$-tree has cliques of size at most $5$, so its reconstruction coefficient is at most $R_4=79/27<3$. This improves the $4-4/k=3$ bound of [@thm-appe-clique-bounded-banach-potential] and the size-independent bound from item 1 of [@thm-appe-simplicial-interval-split-potential], which is $k-1=3$. For chordal graphs with no uniform clique size bound, the exact real Banach coefficient $C_{\mathrm{Ban,chordal}}$ remains open in $[2,4]$, and the universal coefficient $C_{\mathrm{chordal}}$ for groups with bi-invariant pseudometrics remains open among $\{2,3,4\}$.
 
+Biased predecessor weights improve the estimate when clique sizes are bounded. With unrestricted clique sizes, how much error can pure layer-by-layer averaging and root averaging of the two-step construction control? Fix real scalar gains and retain the predecessor sets $P(x)$, shadows $S_C$, anchors $a_C$, and transport values $Q_C$ above. Call a gain $g:V\times V\to\mathbb R$ triangle-$1$-flat if it is skew on all vertex pairs and every ordered triangle $(x,y,z)$ satisfies $|g(x,y)+g(y,z)-g(x,z)|\le1$.
+
+Valid anchors equal the root $r$ at depth $1$. At greater depths, $a_C$ lies in the parent shadow and is adjacent to all of $S_C$. At depth $1$ set $Q_C=0$ and $Q_C=Q_D+g(a_D,a_C)$ at greater depths, where $D$ is the parent component. Valid weights $w_x(b)$ are nonnegative for all $x,b$, equal $0$ outside $P(x)$, and sum to $1$ on $P(x)$ for every nonroot vertex. The two-step breadth-first potential takes $\varphi_r(r)=0$ and, at a nonroot vertex $x\in C$, is defined by
+
+$$
+\varphi_r(x)=Q_C+\sum_{b\in P(x)}w_x(b)\bigl(g(a_C,b)+g(b,x)\bigr).
+$$
+
+A pure predecessor barycenter potential takes $\varphi(r)=0$ and requires $\varphi(x)=|P(x)|^{-1}\sum_{b\in P(x)}(\varphi(b)+g(b,x))$ at every nonroot vertex with a nonempty predecessor set.
+
+Define the tower graph $\operatorname{barycenterTower}(m,n)$ with root $r$ and $n$ layers of $m$ vertices $(i,j)$, where $0\le i<n$ and $0\le j<m$. Each layer is a clique, and the root is adjacent to the entire first layer. Between consecutive layers, column $0$ of the later layer is adjacent only to column $0$ of the earlier one. The remaining vertices meet the entire preceding layer. Tower gains are $0$ within a layer and $0$ forward into column $0$. Forward gains from the root or column $0$ into other columns are $1$, and all remaining forward gains are $2$. Reverse orientations negate the gains (defined on all vertex pairs by their heights).
+
+Define the bridged graph $\operatorname{bridgedGadget}(m,N)$ with $N$ copies, each having a root $o$ and sets $A=\{a_j\}$, $U=\{u_i\}$, $B=\{v_j\}$, $Y=\{y_j\}$ of $m$ vertices each. Its edges are exactly those from the root to $A$, those of the clique $A\cup U$, those joining each $v_j$ to all of $U$ and to $a_j$, those joining each $y_j$ to all of $U$ and to $v_j$, and the edges joining the copy roots into a path.
+
+::: {.theorem #thm-appe-bfs-barycenter-obstructions title="The Four-Defect Two-Step Breadth-First Bound and Obstructions to Predecessor Barycenters and Root Averaging" lean="D5/S3/Combinatorics/Graph/Chordal/Reconstruction/WeightedTwoStepBFS.SimpleGraph.two_step_residual_bound, D5/S3/Combinatorics/Graph/Chordal/TwoStepBFSAndBarycenterObstructions.SimpleGraph.pure_predecessor_barycenter_unbounded, D5/S3/Combinatorics/Graph/Chordal/TwoStepBFSAndBarycenterObstructions.SimpleGraph.twoStepBFS_root_averaging_lower_bound"}
+1. **Two-step reconstruction bound for arbitrary weights.** For every finite connected simple chordal graph, every root $r$, every valid shadow-anchor and predecessor-weight assignment, and every triangle-$1$-flat real scalar gain $g$, the corresponding two-step potential $\varphi_r$ satisfies $|g(u,v)-(\varphi_r(v)-\varphi_r(u))|\le4$ on every oriented edge $(u,v)$.
+
+2. **Unbounded pure predecessor barycenter error.** For all natural numbers $m\ge2$, $n\ge1$, the tower graph is connected and chordal, its tower gain $g$ is triangle-$1$-flat, and a pure predecessor barycenter potential exists. Each vertex $(i,j)$ has distance $i+1$ from the root, and every pure predecessor barycenter potential $\varphi$ satisfies
+
+   $$
+   \begin{aligned}
+   \varphi(i,0)&=0,\\
+   \varphi(i,j)&=(2m-1)-(2m-2)\left(\frac{m-1}{m}\right)^i\quad(j\ne0).
+   \end{aligned}
+   $$
+
+   For every real $M$, there exist natural numbers $m\ge2$, $n\ge1$ such that the corresponding tower is connected and chordal, its tower gain is triangle-$1$-flat, and there is an oriented edge $(u,v)$ on which every pure predecessor barycenter potential on that graph satisfies $|g(u,v)-(\varphi(v)-\varphi(u))|>M$.
+
+3. **Obstruction to root averaging of two-step potentials.** For all natural numbers $m\ge2$, $N\ge2$, the bridged graph is connected and chordal. For every probability distribution $\mu$ on roots ($\mu(r)\ge0$ and $\sum_r\mu(r)=1$), and every valid shadow-anchor and predecessor-weight assignment chosen in advance for each root, there exist a triangle-$1$-flat real scalar gain $g$ and an oriented edge $(u,v)$. With $\bar\varphi(x)=\sum_r\mu(r)\varphi_r(x)$ denoting the weighted mean of these two-step potentials,
+
+   $$
+   |g(u,v)-(\bar\varphi(v)-\bar\varphi(u))|\ge4-\frac4m-\frac8N.
+   $$
+:::
+
+::: {.proof #pf-appe-bfs-barycenter-obstructions}
+**Two-step bound.** Each neighbor of the root has the root as its sole predecessor, so root edges have zero residual. Adjacent vertices $u,v$ in the same layer share an anchor $a$ and transport value. Choose any predecessors $b\in P(u)$ and $t\in P(v)$. The shadow is a clique, so $b,t$ coincide or are adjacent. Chordality gives the quadrilateral $b,u,v,t$ at least one diagonal $b,v$ or $t,u$ (the assertion holds directly if $b=t$). Thus the gain difference between the path from $a$ through $b,u$ to $v$ and the path from $a$ through $t$ to $v$ splits into at most $3$ triangle defects. For a cross-layer edge $u,v$, write its two anchors as $a,c$, where $c$ lies in the shadow of $u$ and is adjacent to $u$. The difference between the path from $a$ through $b,u$ to $v$ and the path from $a$ through $c,t$ to $v$ splits into defects on $(a,b,c)$, $(b,c,u)$, $(c,u,t)$, $(u,t,v)$, each of absolute value at most $1$, or $0$ for repeated vertices. Every predecessor pair therefore has absolute residual at most $4$. Averaging over the two predecessor probability distributions preserves the bound. Reversing an edge negates its residual.
+
+**Tower.** Eliminate vertices from the last layer to the first, removing column $0$ before the remaining vertices in each layer, and remove the root last. At each elimination the remaining neighbors form a clique, proving chordality. Edges change height by at most $1$, and every vertex reaches the root along a path descending one layer at a time, so the graph is connected and the distance is exactly $i+1$. Every triangle spans at most two consecutive layers. Within-layer gains are $0$, and the two cross-layer gains differ by at most $1$ in absolute value, giving triangle-$1$-flatness. Column $0$ always has potential $0$, and the other columns share the initial value $s_0=1$ and recurrence $s_{i+1}=(1+(m-1)(s_i+2))/m$. This recurrence constructs the potential and uniquely determines it layer by layer, yielding the closed form in item 2. The edge from column $0$ to column $1$ in the final layer has gain $0$ and absolute residual exactly $(2m-1)-(2m-2)((m-1)/m)^{n-1}$. First choose $m$ with $2m-1>M$, then use $0<(m-1)/m<1$ to choose $n$ large enough that this edge has absolute residual greater than $M$ for every pure predecessor barycenter potential.
+
+**Bridged graph.** Eliminating $Y,B,U,A$ in that order and then the roots in path order gives a perfect elimination order, proving chordality. The root path and local edges ensure connectivity. Select a copy with root probability mass $p\le1/N$ and call its root $o$. For every root $r$ outside this copy, distances to its vertices equal the distance to $o$ plus the local distance. Hence $P(u_i)=A$ and $P(y_j)=U\cup\{v_j\}$, and the valid anchors at these vertices are forced to be $o$ and $a_j$, respectively. Indeed, the tail component of $y_j$ is a singleton with shadow $U\cup\{v_j\}$, and its parent shadow is $A$, where only $a_j$ is adjacent to $v_j$. The parent component's anchor must be $o$.
+
+Write the weights for root $r$ as $w_{r,x}(b)$. Normalization gives summing $w_{r,u_i}(a_j)+w_{r,y_j}(u_i)$ over all $m^2$ pairs $(i,j)$ gives a total of at most $2m$. Weight this sum by $\mu$ over roots outside the copy and average over pairs to select $(i,j)$ with
+
+$$
+\begin{aligned}
+\sum_{r\text{ outside the copy}}\mu(r)\bigl(w_{r,u_i}(a_j)+w_{r,y_j}(u_i)\bigr)&\le\frac{2}{m}(1-p).
+\end{aligned}
+$$
+
+Order the vertices with those of the other copies and $o$ first, followed by $A\setminus\{a_j\}$, $u_i$, $Y$, $(U\setminus\{u_i\})\cup B$, and $a_j$, refining each group to a strict order. Assign forward gain $1$, reverse gain $-1$, and diagonal gain $0$, so every triangle has absolute defect $1$. For each root outside the copy, the common anchor transport cancels. The mean gain of two-edge paths from $o$ to $u_i$ is $2(1-w_{r,u_i}(a_j))$, and from $a_j$ to $y_j$ it is $-2(1-w_{r,y_j}(u_i))$. Also $g(o,a_j)=g(u_i,y_j)=1$. Consequently the signed residual on $(u_i,y_j)$ is exactly $4-2w_{r,u_i}(a_j)-2w_{r,y_j}(u_i)$. For roots inside the copy, item 1 gives a signed residual lower bound of $-4$. Combining the probability masses and the weight estimate above, the signed residual of the root average is at least
+
+$$
+\begin{aligned}
+4(1-p)-\frac4m(1-p)-4p&\ge4-\frac4m-\frac8N.
+\end{aligned}
+$$
+
+Its absolute value satisfies the same bound. The full proof is checked by the Lean kernel.
+:::
+
+**Manual derivation.** Scaling the gains replaces triangle defect $1$ by any $\varepsilon>0$. Pure predecessor barycenter recurrence has no uniform error coefficient. As $m,N$ tend to infinity, root averaging in the two-step scheme with graph-dependent root laws, anchors, and predecessor weights cannot reduce the uniform error bound below $4\varepsilon$. Whether constructions beyond the two-step scheme or constructions depending on the gain itself can improve this bound on all chordal graphs remains open. The exact universal real Banach coefficient in $[2,4]$, the universal coefficient for groups with bi-invariant pseudometrics among $\{2,3,4\}$, and whether a coefficient greater than $4/3$ occurs on any $3$-tree also remain open.
+
 For a fixed nonlinear target group, the optimal coefficient is already a question on complete graphs.
 
 **A four-vertex round $\mathrm{SU}(2)$ counterexample.** A four-vertex chordal graph with no triangle is a forest. If it has one triangle, gauge the two spokes to the identity, write the remaining gain as $\exp X$, and take potentials $1,\exp(-X/3),\exp(X/3)$. Each triangle edge has error $|X|/3\le\varepsilon/3$. Fit any attached tree edge exactly. The remaining non-complete graph is the diamond, with two triangles sharing an edge. Take a degree-$3$ vertex as hub and gauge its spokes to $1$. Give the midpoint of the rim path potential $1$, and give each endpoint the midpoint of a minimizing geodesic from $1$ to the value fitting its rim edge exactly. Every error is at most $\varepsilon/2$.

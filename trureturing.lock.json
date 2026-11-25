@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "55f73b2de1aeb4a4ee55b3d016a101eb844ab39b",
-  "pinned_at": "2026-11-25T19:59:55Z",
+  "pinned_at": "2026-11-25T20:25:22Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1642,6 +1642,19 @@
       "line": 28,
       "signature": "theorem IsChordal.exists_approximate_gain_potential [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (g : V → V → H) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, G.Adj i j → g j i = (g i j)⁻¹) (htri : ∀ i j k, G.Adj i j → G.Adj j k → G.Adj i k → Dist.dist (g i j * g j k) (g i k) ≤ ε) : ∃ φ : V → H, ∀ i j, G.Adj i j → Dist.dist (g i j) ((φ i)⁻¹ * φ j) ≤ ((Nat.card V - 2 : ℕ) : ℝ) * ε"
     },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/WeightedTwoStepBFS.SimpleGraph.two_step_residual_bound": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/WeightedTwoStepBFS",
+      "name": "SimpleGraph.two_step_residual_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:ee09645e74cdd4e5966b4673a43335b0e5bedfd30a6a48ee3bcf31ddb6243e36",
+      "line": 117,
+      "signature": "theorem two_step_residual_bound [Fintype V] {G : SimpleGraph V} (hG : G.IsChordal) (hconn : G.Connected) {r : V} {a : (l : ℕ) → Component G r (l + 1) → V} {w g : V → V → ℝ} (ha : ValidShadowAnchors G r a) (hw : ValidPredecessorWeights G r w) (hg : IsTriangleOneGain G g) {u v : V} (huv : G.Adj u v) : |g u v - (twoStepBFSPotential G r a w g v - twoStepBFSPotential G r a w g u)| ≤ 4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionEqualRimMinimax.RoundQuaternionEqualRimMinimax.equalRim_exact_defect_and_minimax": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionEqualRimMinimax",
       "name": "RoundQuaternionEqualRimMinimax.equalRim_exact_defect_and_minimax",
@@ -1713,6 +1726,32 @@
       "statement_id": "sha256:129b0a12736af0c862eba8003e3d178a385c220227201f31c966987be254bcfc",
       "line": 357,
       "signature": "theorem intervalGraph_isChordal_and_two_approximate_gain_potential [Finite V] (ℓ r : V → ℝ) (hI : ∀ v, ℓ v ≤ r v) (hG : ∀ x y, G.Adj x y ↔ x ≠ y ∧ max (ℓ x) (ℓ y) ≤ min (r x) (r y)) (g : V → V → H) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ x y, G.Adj x y → g y x = (g x y)⁻¹) (htri : ∀ x y z, G.Adj x y → G.Adj y z → G.Adj x z → Dist.dist (g x y * g y z) (g x z) ≤ ε) : G.IsChordal ∧ ∃ φ : V → H, ∀ x y, G.Adj x y → Dist.dist (g x y) ((φ x)⁻¹ * φ y) ≤ 2 * ε"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/TwoStepBFSAndBarycenterObstructions.SimpleGraph.pure_predecessor_barycenter_unbounded": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/TwoStepBFSAndBarycenterObstructions",
+      "name": "SimpleGraph.pure_predecessor_barycenter_unbounded",
+      "kind": "theorem",
+      "statement_id": "sha256:421056632c725654874961ae491e1981b3da735f698132e51957f4768cf60dc5",
+      "line": 330,
+      "signature": "theorem pure_predecessor_barycenter_unbounded : (∀ m n : ℕ, 2 ≤ m → 1 ≤ n → (barycenterTower m n).IsChordal ∧ (barycenterTower m n).Connected ∧ IsTriangleOneGain (barycenterTower m n) (barycenterGain m n) ∧ (∃ φ, IsPureBFSBarycenter (barycenterTower m n) none (barycenterGain m n) φ) ∧ ∀ i : Fin n, ∀ j : Fin m, (barycenterTower m n).dist none (some (i, j)) = i.val + 1 ∧ ∀ φ, IsPureBFSBarycenter (barycenterTower m n) none (barycenterGain m n) φ → φ (some (i, j)) = if j.val = 0 then 0 else (2 * (m : ℝ) - 1) - (2 * (m : ℝ) - 2) * (((m : ℝ) - 1) / m) ^ i.val) ∧ ∀ M : ℝ, ∃ m n : ℕ, 2 ≤ m ∧ 1 ≤ n ∧ (",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/TwoStepBFSAndBarycenterObstructions.SimpleGraph.twoStepBFS_root_averaging_lower_bound": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/TwoStepBFSAndBarycenterObstructions",
+      "name": "SimpleGraph.twoStepBFS_root_averaging_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:421056632c725654874961ae491e1981b3da735f698132e51957f4768cf60dc5",
+      "line": 742,
+      "signature": "theorem twoStepBFS_root_averaging_lower_bound (m N : ℕ) (hm : 2 ≤ m) (hN : 2 ≤ N) : let G",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Combinatorics/Graph/Chordal/TwoTreeStretchSeparation.twoTree_banach_exact_constant": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/TwoTreeStretchSeparation",
