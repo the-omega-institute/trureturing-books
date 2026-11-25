@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "b89e5b90b12773b9c877030cfe98d14edf4ae364",
-  "pinned_at": "2026-11-25T21:46:17Z",
+  "commit": "89b4f1a0e3d7016b804157c0367a117c6d4ea6fc",
+  "pinned_at": "2026-11-25T23:33:02Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1813,8 +1813,8 @@
       "module": "D5/S3/Combinatorics/Graph/Chordal/WeightedCliqueBanachPotential",
       "name": "SimpleGraph.IsChordal.exists_biased_clique_banach_gain_potential",
       "kind": "theorem",
-      "statement_id": "sha256:f04a9f601638c69cb087ba6b3a53da81a32b697ec9216d11487a4e536859e212",
-      "line": 561,
+      "statement_id": "sha256:a7beca108f981e63bb46191e801d38dd3460a8f2fa82ca2a6a5661589c07e32e",
+      "line": 565,
       "signature": "theorem IsChordal.exists_biased_clique_banach_gain_potential {V : Type u} [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (k : ℕ) (hk : 3 ≤ k) (hclique : ∀ s : Finset V, G.IsClique (s : Set V) → s.card ≤ k + 1) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ (4 - 4 / (k : ℝ) - 2 * ((k : ℝ) - 2)^2 / ((k : ℝ) * ((k : ℝ) - 1)^3)) * ε"
     },
     "D5/S3/Combinatorics/Graph/Hypercube/DirectionMatching.exact_matching_directions": {
@@ -12942,6 +12942,32 @@
       "statement_id": "sha256:b24f1ab033c2c80a98732043dd03a2a3cda41a464dced7a26ed725ff21afd666",
       "line": 89,
       "signature": "theorem prime_window_mobius_of_power_prefix (hRH : RiemannHypothesis) {β P ε : ℝ} (hβ : 0 ≤ β) (hβ₁ : β < 1) (hP : 0 < P) (hε : 0 < ε) (hprefix : ∀ k : ℕ, 1 ≤ k → |∑ n ∈ Finset.Icc 1 k, (μ n : ℝ)| ≤ P*(k : ℝ)^β) : ∃ a₀ K : ℝ, 2 ≤ a₀ ∧ 0 < K ∧ ∀ m : ℕ, 2 ≤ m → ∀ a B : ℝ, a₀ ≤ a → a ≤ B → |windowDiscrepancy a B - spectralPrimitive (phaseOrbit (Real.log B)) + spectralPrimitive (phaseOrbit (Real.log a)) - (∑ n ∈ Finset.Icc 3 m, -(μ n : ℝ) * (2 * (n : ℝ)^2 / (((n : ℝ) - 1) * ((n : ℝ) - 2))) * (a ^ ((n : ℝ)⁻¹ - 1 / 2) - B ^ ((n : ℝ)⁻¹ - 1 / 2))) - (∑ n ∈ (Finset.Icc 2 m).filter (fun n => 2 * n < m +"
+    },
+    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio": {
+      "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment",
+      "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHHarmonicPairMoment.harmonic_pair_ratio",
+      "kind": "theorem",
+      "statement_id": "sha256:3f3827d8510e40a31ff1805f1c012679807888d681064df6e9d7072469ddb9a9",
+      "line": 207,
+      "signature": "theorem harmonic_pair_ratio (rh : RiemannHypothesis) : ∀ᶠ T : ℝ in atTop, let logHeight",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_reciprocal_time_deficit": {
+      "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment",
+      "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHHarmonicPairMoment.harmonic_reciprocal_time_deficit",
+      "kind": "theorem",
+      "statement_id": "sha256:3f3827d8510e40a31ff1805f1c012679807888d681064df6e9d7072469ddb9a9",
+      "line": 228,
+      "signature": "theorem harmonic_reciprocal_time_deficit (rh : RiemannHypothesis) : ∃ L : ℝ, 1 < L ∧ ∀ T t : ℝ, L ≤ T → 1/T ≤ |t| → |t| ≤ 1/L → let g : ↥(positiveCutoff rh T) → ℝ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEightNinths.prime_window_mobius_eight_ninths_of_rh": {
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEightNinths",

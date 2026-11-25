@@ -362,7 +362,7 @@ $$
 \frac{P_4(T)}{P_2(T)^2}\le4096\log T.
 $$
 
-[Harmonic-weighted moment ratio bound](https://github.com/the-omega-institute/trureturing/blob/93bd4f35a76ee2e86010f8f119ad1bb4c8aabf48/D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.lean#L59) If $T_n\to\infty$ and $\log T_n/n\to0$, the actual normalized zero spectrum satisfies the fourth-moment-ratio hypothesis of the central Gaussian profile. A fixed frequency rescaling $g_\gamma=\gamma/r$ with $r>0$ leaves this ratio invariant. The central Fejér principal contribution also requires compatibility between the resolution and actual variance scale. The noncentral peak estimate on the intermediate time range remains a separate obligation.
+[Harmonic-weighted moment ratio bound](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio) If $T_n\to\infty$ and $\log T_n/n\to0$, the actual normalized zero spectrum satisfies the fourth-moment-ratio hypothesis of the central Gaussian profile. A fixed frequency rescaling $g_\gamma=\gamma/r$ with $r>0$ leaves this ratio invariant. The central Fejér principal contribution also requires compatibility between the resolution and actual variance scale. The noncentral peak estimate on the intermediate time range remains a separate obligation.
 
 ## Principal Fejér integral on a moving central window
 
@@ -438,7 +438,7 @@ $$
 1-|Z_T(t)|\ge\frac{\log(1/|t|)}{524288(\log T)^2}.
 $$
 
-[Reciprocal-height score deficit](https://github.com/the-omega-institute/trureturing/blob/6011404b062fb40c1416029ffe8b2e045b1309ad/D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.lean#L228) The retained spectrum through $X=1/|t|$ has $L\le X\le T$. Its pair moments satisfy $P_2(X)\ge X^2/(4096\log X)$ and $P_4(X)\le X^2P_2(X)$. Since $X^2t^2=1$, the quartic estimate yields $1-|Z_X(t)|^2\ge1/(16384\log X)$ and hence $1-|Z_X(t)|\ge1/(32768\log X)$. Splitting the actual finite sum through $T$ at $X$ and applying the triangle inequality at the same time $t$ gives
+[Reciprocal-height score deficit](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_reciprocal_time_deficit) The retained spectrum through $X=1/|t|$ has $L\le X\le T$. Its pair moments satisfy $P_2(X)\ge X^2/(4096\log X)$ and $P_4(X)\le X^2P_2(X)$. Since $X^2t^2=1$, the quartic estimate yields $1-|Z_X(t)|^2\ge1/(16384\log X)$ and hence $1-|Z_X(t)|\ge1/(32768\log X)$. Splitting the actual finite sum through $T$ at $X$ and applying the triangle inequality at the same time $t$ gives
 
 $$
 W(T)(1-|Z_T(t)|)\ge W(X)(1-|Z_X(t)|).

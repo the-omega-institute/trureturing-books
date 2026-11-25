@@ -362,7 +362,7 @@ $$
 \frac{P_4(T)}{P_2(T)^2}\le4096\log T.
 $$
 
-[调和权重矩比值界](https://github.com/the-omega-institute/trureturing/blob/93bd4f35a76ee2e86010f8f119ad1bb4c8aabf48/D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.lean#L59) 若 $T_n\to\infty$ 且 $\log T_n/n\to0$，则实际归一化零点谱满足前述高斯轮廓的四阶矩比值假设。固定比例的频率缩放 $g_\gamma=\gamma/r$（$r>0$）不改变此矩比值。中心 Fejér 主项还须满足分辨率与实际方差尺度的兼容条件。中间时间区域的非中心峰估计仍须独立建立。
+[调和权重矩比值界](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio) 若 $T_n\to\infty$ 且 $\log T_n/n\to0$，则实际归一化零点谱满足前述高斯轮廓的四阶矩比值假设。固定比例的频率缩放 $g_\gamma=\gamma/r$（$r>0$）不改变此矩比值。中心 Fejér 主项还须满足分辨率与实际方差尺度的兼容条件。中间时间区域的非中心峰估计仍须独立建立。
 
 ## 移动中心窗口的 Fejér 积分主项
 
@@ -438,7 +438,7 @@ $$
 1-|Z_T(t)|\ge\frac{\log(1/|t|)}{524288(\log T)^2}.
 $$
 
-[倒数高度截断的相位亏损界](https://github.com/the-omega-institute/trureturing/blob/6011404b062fb40c1416029ffe8b2e045b1309ad/D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.lean#L228) 取保留频谱的截断高度 $X=1/|t|$，则 $L\le X\le T$。其配对矩满足 $P_2(X)\ge X^2/(4096\log X)$、$P_4(X)\le X^2P_2(X)$。因为 $X^2t^2=1$，四阶余项估计给出 $1-|Z_X(t)|^2\ge1/(16384\log X)$，故 $1-|Z_X(t)|\ge1/(32768\log X)$。在同一时刻 $t$ 将实际有限和按高度 $X$ 分为保留项和尾项，应用三角不等式得
+[倒数高度截断的相位亏损界](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_reciprocal_time_deficit) 取保留频谱的截断高度 $X=1/|t|$，则 $L\le X\le T$。其配对矩满足 $P_2(X)\ge X^2/(4096\log X)$、$P_4(X)\le X^2P_2(X)$。因为 $X^2t^2=1$，四阶余项估计给出 $1-|Z_X(t)|^2\ge1/(16384\log X)$，故 $1-|Z_X(t)|\ge1/(32768\log X)$。在同一时刻 $t$ 将实际有限和按高度 $X$ 分为保留项和尾项，应用三角不等式得
 
 $$
 W(T)(1-|Z_T(t)|)\ge W(X)(1-|Z_X(t)|).
