@@ -35,8 +35,8 @@
       ["Flatness is just curvature, seen from too far away.", "平直，不过是离得太远时看到的弯曲。"]
     ], "cues": [{"line": 1, "at": 4.4, "kind": "chime"}, {"line": 4, "at": 0.6, "kind": "impact"}]},
     {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
-      ["Lean checks the two trace identities for any vectors. The cap's angle sum is Girard's classical theorem. The numbers are computed on screen.", "Lean 检验的是两条迹恒等式，对任意向量都成立；球面帽的内角和是吉拉尔的经典定理；片中数字是屏幕上算出来的。"],
-      ["Reading the two routes as shadows of one cell, and a smallest step in nature, is the book's model, not a proof.", "把两条路线读成同一枚小胞的影子，以及“自然有最小步长”，都是本书的模型，不是证明。"]
+      ["Lean checks the two trace identities for any vectors. The cap's angle sum is Girard's classical theorem. The numbers are computed on screen.", "Lean 检验两条迹恒等式，对任意向量成立；内角和是吉拉尔的经典定理；数字都是屏上算的。"],
+      ["Reading the two routes as shadows of one cell, and a smallest step in nature, is the book's model, not a proof.", "把两条路线读成同一枚小胞的影子，以及“自然有最小步长”，都只是本书的模型。"]
     ]},
     {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
       ["Geometric Intuition of Quantum Computing, chapter twenty nine.", "《量子计算的几何直觉》· 第二十九章"]

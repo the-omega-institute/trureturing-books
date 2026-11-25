@@ -214,25 +214,25 @@ const mtSector = (p, q, n = 24) => [MT_O].concat(mtArc(p, q, n));
 /* the cell as a solid: walls, cap, rays, arcs. o: once (cyan wall OAC and arc AC), twice (the two walls and the
    two-step path), cap (alpha of the cap), tetra (violet tetrahedron OABC), walk (amber bead: [path, k]) */
 function mtSolidCell(sh, e, o = {}) {
-  const { A, B, C } = mtCell(e);
-  const once = o.once == null ? 1 : o.once, twice = o.twice == null ? 1 : o.twice;
-  sh.fan(mtSector(B, A), { fill: C.white, alpha: 0.05 + 0.12 * (o.wallHi || 0), color: C.white, width: 1.2, strokeAlpha: 0.35 + 0.4 * (o.wallHi || 0) });
-  sh.fan(mtSector(B, C), { fill: C.white, alpha: 0.05 + 0.12 * (o.wallHi || 0), color: C.white, width: 1.2, strokeAlpha: 0.35 + 0.4 * (o.wallHi || 0) });
-  sh.fan(mtSector(A, C), { fill: C.cyan, alpha: 0.04 + 0.12 * (o.onceHi || 0), color: C.cyan, width: 1.2, strokeAlpha: 0.3 + 0.4 * (o.onceHi || 0) });
-  if ((o.cap == null ? 1 : o.cap) > 0.01) sh.surface('cap', mtCap(A, B, C), { u: [0, 1], v: [0, 1], nu: 18, nv: 18, color: C.mag, alpha: 0.62 * (o.cap == null ? 1 : o.cap), grid: { every: [3, 3], color: C.mag, alpha: 0.5 }, pick: false });
-  if (o.tetra > 0.01) sh.poly('tetra', { vertices: [MT_O, A, B, C], faces: [[0, 1, 2], [0, 2, 3], [0, 3, 1], [1, 2, 3]] }, { color: C.vio, alpha: 0.42 * o.tetra, edges: C.vio });
-  for (const P of [A, B, C]) sh.line([MT_O, P], { color: C.white, width: 1.6, alpha: 0.55 });
-  if (once > 0.01) sh.tube('once', mtArc(A, C), { color: C.cyan, width: 5, alpha: once });
+  const { A, B, C: Cp } = mtCell(e);
+  const once = o.once == null ? 1 : o.once, twice = o.twice == null ? 1 : o.twice, wh = o.wallHi || 0, oh = o.onceHi || 0;
+  sh.fan(mtSector(B, A), { fill: C.white, alpha: 0.06 + 0.16 * wh, color: C.white, width: 1.4, strokeAlpha: 0.35 + 0.5 * wh });
+  sh.fan(mtSector(B, Cp), { fill: C.white, alpha: 0.06 + 0.16 * wh, color: C.white, width: 1.4, strokeAlpha: 0.35 + 0.5 * wh });
+  sh.fan(mtSector(A, Cp), { fill: C.cyan, alpha: 0.05 + 0.18 * oh, color: C.cyan, width: 1.4, strokeAlpha: 0.3 + 0.5 * oh });
+  if ((o.cap == null ? 1 : o.cap) > 0.01) sh.surface('cap', mtCap(A, B, Cp), { u: [0, 1], v: [0, 1], nu: 18, nv: 18, color: C.mag, alpha: 0.62 * (o.cap == null ? 1 : o.cap), grid: { every: [3, 3], color: C.mag, alpha: 0.5 }, pick: false });
+  if (o.tetra > 0.01) sh.poly('tetra', { vertices: [MT_O, A, B, Cp], faces: [[0, 1, 2], [0, 2, 3], [0, 3, 1], [1, 2, 3]] }, { color: C.vio, alpha: 0.42 * o.tetra, edges: C.vio });
+  for (const P of [A, B, Cp]) sh.line([MT_O, P], { color: C.white, width: 1.6, alpha: 0.55 });
+  if (once > 0.01) sh.tube('once', mtArc(A, Cp), { color: C.cyan, width: 5, alpha: once });
   if (twice > 0.01) {
     sh.tube('ab', mtArc(A, B), { color: C.white, width: 4.5, alpha: twice });
-    sh.tube('bc', mtArc(B, C), { color: C.white, width: 4.5, alpha: twice });
+    sh.tube('bc', mtArc(B, Cp), { color: C.white, width: 4.5, alpha: twice });
     const k = 0.11 * Math.min(1, e / E45 + 0.3);
     sh.line([v3.unit(v3.add(B, [k, 0, 0])), v3.unit(v3.add(B, [k, 0, k])), v3.unit(v3.add(B, [0, 0, k]))], { color: C.white, width: 2, alpha: twice * 0.9 });
   }
   sh.bead(MT_O, { color: C.white, r: 7 });
-  for (const P of [A, B, C]) sh.bead(P, { color: C.white, r: 7 });
+  for (const P of [A, B, Cp]) sh.bead(P, { color: C.white, r: 7 });
   if (o.walk) sh.bead(o.walk, { color: C.now, r: 10 });
-  return { A, B, C };
+  return { A, B, Cp };
 }
 function mtLabel(sh, p, s, dx, dy, col, a, size = 34) {
   if (a <= 0.003) return;
@@ -260,18 +260,18 @@ SCENES.hook = S => {
   const a = clamp((u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
-  const V = mtView(860, 760, 470, -2.45 + 0.03 * u, 0.42);
-  const { A, B, C } = mtCell(E45);
+  const { A, B, C: Cp } = mtCell(E45);
+  /* the view: the patch ABC sits near the middle of the frame, the sphere runs off it */
+  const yaw = -2.45 + 0.03 * u, el = 0.42, RR = 560, V0 = mtView(0, 0, RR, yaw, el), mid = V0(v3.unit(v3.add(v3.add(A, B), Cp)));
+  const V = mtView(820 - mid[0], 540 - mid[1], RR, yaw, el);
   /* the sphere: its outline and a few faint great circles */
   ring(V.cx, V.cy, V.R, C.white, a * 0.35, 1.6);
   const circ = (n, f) => { const pts = []; for (let i = 0; i <= n; i++) pts.push(f(TAU * i / n)); return pts; };
-  for (const [col, f] of [[C.dim, t => [Math.cos(t), Math.sin(t), 0]], [C.dim, t => [0, Math.cos(t), Math.sin(t)]], [C.dim, t => [Math.cos(t), 0, Math.sin(t)]]]) {
-    const pts = circ(120, f), front = pts.filter(p => V(p)[2] >= 0);
-    mtPath(V, front.length ? pts : [], col, a * 0.18, 1.4, [6, 8]);
-  }
+  for (const f of [t => [Math.cos(t), Math.sin(t), 0], t => [0, Math.cos(t), Math.sin(t)], t => [Math.cos(t), 0, Math.sin(t)]])
+    mtPath(V, circ(120, f), C.dim, a * 0.18, 1.4, [6, 8]);
   /* line 0: one step along the great arc; line 1: two steps along the walls */
   const oa = Q(S, 0, 'one step', 0.6), ta = Q(S, 1, 'two steps', 0.6);
-  const arcAC = mtArc(A, C, 60), arcAB = mtArc(A, B, 40), arcBC = mtArc(B, C, 40), twoPath = arcAB.concat(arcBC.slice(1));
+  const arcAC = mtArc(A, Cp, 60), arcAB = mtArc(A, B, 40), arcBC = mtArc(B, Cp, 40), twoPath = arcAB.concat(arcBC.slice(1));
   const k1 = ease(Q(S, 0, 'great circle', 1.6)), k2 = ease(clamp((u - phraseAt(S, 1, 'along one wall')) / 3.4));
   mtPath(V, arcAC.slice(0, Math.max(2, Math.round(60 * k1) + 1)), C.cyan, a * oa, 6);
   if (ta > 0.003) mtPath(V, twoPath.slice(0, Math.max(2, Math.round(80 * k2) + 1)), C.white, a * ta, 5);
@@ -281,7 +281,7 @@ SCENES.hook = S => {
   /* the walker: amber, on the route being described */
   const onTwo = u >= phraseAt(S, 1, 'along one wall');
   const wk = onTwo ? mtAlong(twoPath, k2) : mtAlong(arcAC, k1);
-  for (const [P, s, dx, dy] of [[A, 'A', -34, 14], [B, 'B', 0, -26], [C, 'C', 30, -8]]) {
+  for (const [P, s, dx, dy] of [[A, 'A', -34, 14], [B, 'B', 30, 14], [Cp, 'C', 30, -8]]) {
     const q = V(P);
     dot(q[0], q[1], 10, 'w', a * (s === 'B' ? Math.max(0.25, ta) : 1));
     txt(s, q[0] + dx, q[1] + dy, { size: 40, fam: F.math, w: 700, align: 'center', c: C.white, a: a * (s === 'B' ? Math.max(0.25, ta) : 1) });
@@ -310,7 +310,7 @@ SCENES.hook = S => {
 /*                               scene 2 · ONE CELL                          */
 /* ======================================================================= */
 /* camera stops: the generic view, straight down OB (B falls on O), and a view across the walls */
-const CL_GEN = { yaw: -2.42, el: 0.42 }, CL_DOWN = { yaw: -Math.PI, el: 0.0 }, CL_WALL = { yaw: -0.62, el: 0.52 };
+const CL_GEN = { yaw: -2.42, el: 0.42 }, CL_DOWN = { yaw: -Math.PI, el: 0.0 }, CL_WALL = { yaw: -1.75, el: 0.62 };
 SCENES.cell = S => {
   const u = S.u, a = mtFade(S);
   if (a <= 0) return;
@@ -320,17 +320,17 @@ SCENES.cell = S => {
   let yaw = CL_GEN.yaw + 0.05 * u, el = CL_GEN.el;
   yaw = lerp(yaw, CL_DOWN.yaw, k1); el = lerp(el, CL_DOWN.el, k1);
   yaw = lerp(yaw, CL_WALL.yaw, k2); el = lerp(el, CL_WALL.el, k2);
-  const R = 430, ox = 560, oy = 690;
+  const R = 430, ox = 620, oy = 580;
   const sh = solid('cell', { x: 120, y: 170, w: 1180, h: 680, yaw, pitch: el, unit: R, cx: ox - 120, cy: oy - 170, px: true });
   const grow = ease(at(S, 0, 1.6));
   const once = 1 - 0.75 * k2, twice = Math.max(0.25, 1 - 0.75 * k1);
   sh.begin();
-  const { A, B, C } = mtSolidCell(sh, E45, { cap: grow * (1 - 0.6 * k1), once, twice, onceHi: k1, wallHi: k2 });
+  const { A, B, Cp } = mtSolidCell(sh, E45, { cap: grow * (1 - 0.6 * k1), once, twice, onceHi: k1, wallHi: k2 });
   sh.end(a);
   mtLabel(sh, MT_O, 'O', -26, 30, C.white, a);
   mtLabel(sh, A, 'A', -30, 10, C.white, a);
   mtLabel(sh, B, 'B', k1 > 0.5 ? 30 : 26, k1 > 0.5 ? -26 : -18, C.white, a);
-  mtLabel(sh, C, 'C', 28, -10, C.white, a);
+  mtLabel(sh, Cp, 'C', 28, -10, C.white, a);
   /* line 0: what the solid is */
   const pa = a * at(S, 0, 0.6) * (1 - at(S, 1, 0.5));
   if (pa > 0.003) {
@@ -356,7 +356,7 @@ SCENES.cell = S => {
     txt('= twice · 两次', 1352, 404, { size: 26, fam: F.zh, w: 700, c: C.white, a: s2 });
   }
   /* line 3: one cell, two shadows (the book's reading) */
-  const m = a * at(S, 3, 0.6);
+  const m = a * at(S, 3, 0.6, 0.5);
   if (m > 0.003) {
     panel(1330, 230, 470, 300, m, C.argued, 'ONE CELL, TWO SHADOWS');
     txt('一体双影', 1352, 310, { size: 34, fam: F.zh, w: 900, c: C.white, a: m });
@@ -378,12 +378,12 @@ SCENES.count = S => {
   const tet = Q(S, 3, 'volume', 0.8);
   const hiTwo = Q(S, 1, 'two steps', 0.5) * (1 - at(S, 2, 0.5)), hiOne = Q(S, 2, 'direct step', 0.5) * (1 - at(S, 3, 0.5));
   sh.begin();
-  const { A, B, C } = mtSolidCell(sh, E45, { cap: 1 - 0.65 * tet, once: 0.35 + 0.65 * hiOne + 0.3 * (1 - hiTwo) * (1 - tet), twice: 0.35 + 0.65 * hiTwo, tetra: tet });
+  const { A, B, Cp } = mtSolidCell(sh, E45, { cap: 1 - 0.65 * tet, once: 0.35 + 0.65 * hiOne + 0.3 * (1 - hiTwo) * (1 - tet), twice: 0.35 + 0.65 * hiTwo, tetra: tet });
   sh.end(a);
   mtLabel(sh, MT_O, 'O', -24, 30, C.white, a, 30);
   mtLabel(sh, A, 'A', -28, 10, C.white, a, 30);
   mtLabel(sh, B, 'B', 24, -16, C.white, a, 30);
-  mtLabel(sh, C, 'C', 26, -10, C.white, a, 30);
+  mtLabel(sh, Cp, 'C', 26, -10, C.white, a, 30);
   /* the ledger */
   panel(960, 200, 840, 610, a, C.cyan, 'BY HAND · 手算   ε = 45°');
   const x = 990, c = Math.cos(E45);
@@ -445,7 +445,7 @@ SCENES.trace = S => {
   /* line 0: the definition */
   const da = a * at(S, 0, 0.6);
   panel(120, 190, 1100, 160, da, C.cyan, 'ONE NUMBER · 一个数');
-  mtRich([['Tr( P', C.white], ['A', C.white], [' P', C.white], ['B', C.white], [' P', C.white], ['C', C.white], [' )', C.white]], 150, 268, { size: 40, a: da });
+  mtRich([['Tr( P(A) · P(B) · P(C) )', C.white]], 150, 268, { size: 40, a: da });
   txt('P = (I + r·σ)/2 : the projector of a Bloch vector · 布洛赫矢的投影算子', 150, 324, { size: 20, fam: F.zh, w: 700, c: C.dim, a: da });
   /* line 1: Lean's identity */
   const la = a * Q(S, 1, 'Lean checks', 0.6);
@@ -466,8 +466,8 @@ SCENES.trace = S => {
   }
   /* the plane */
   const pa = a * at(S, 1, 0.8, 0.6);
-  const x0 = 1300, y0 = 640, k = 560;
-  mtPlane(x0, y0, k, pa, { xr: 0.85, yr: 0.55, ticks: [0.25, 0.5, 0.75], yticks: [0.25, 0.5] });
+  const x0 = 1300, y0 = 760, k = 560;
+  mtPlane(x0, y0, k, pa, { xr: 0.85, yr: 0.3, ticks: [0.25, 0.5, 0.75], yticks: [0.25] });
   const grow = ease(at(S, 2, 1.0));
   if (pa > 0.003 && grow > 0.003) {
     const [px, py] = mtPoint(x0, y0, k, [t[0] * grow, t[1] * grow], pa);
@@ -505,7 +505,7 @@ SCENES.angle = S => {
   const R = 330, ox = 360, oy = 690;
   const sh = solid('grow', { x: 100, y: 180, w: 700, h: 660, yaw: -2.42 + 0.03 * u, pitch: 0.42, unit: R, cx: ox - 100, cy: oy - 180, px: true });
   sh.begin();
-  const { A, B, C: Cc } = mtSolidCell(sh, e, { once: 0.6, twice: 0.6 });
+  const { A, B, Cp: Cc } = mtSolidCell(sh, e, { once: 0.6, twice: 0.6 });
   sh.end(a);
   mtLabel(sh, A, 'A', -26, 10, C.white, a, 28);
   mtLabel(sh, B, 'B', 22, -14, C.white, a, 28);
@@ -513,18 +513,18 @@ SCENES.angle = S => {
   /* the step readout (amber: the current choice) */
   chip(450, 230, 280, 58, `ε = ${eDeg.toFixed(1)}°`, C.now, a, 30, F.mono);
   /* the plane and the angle */
-  const x0 = 900, y0 = 700, k = 760;
-  mtPlane(x0, y0, k, a, { xr: 1.02, yr: 0.4, ticks: [0.25, 0.5, 0.75, 1], yticks: [0.25] });
+  const x0 = 870, y0 = 700, k = 600;
+  mtPlane(x0, y0, k, a, { xr: 1.05, yr: 0.4, ticks: [0.25, 0.5, 0.75, 1], yticks: [0.25] });
   const [px, py] = mtPoint(x0, y0, k, t, a, { re: 0.6, im: 0.6 });
   const ga = a * Q(S, 0, 'angle', 0.6);
   if (ga > 0.003) {
     ctx.save(); ctx.globalAlpha = ga; ctx.strokeStyle = C.mag; ctx.lineWidth = 5;
     ctx.beginPath(); ctx.arc(x0, y0, 150, -arg, 0); ctx.stroke(); ctx.restore();
-    txt(`arg = ${(arg / DEG).toFixed(2)}°`, x0 + 170, y0 - 22, { size: 30, fam: F.mono, w: 700, c: C.mag, a: ga });
-    txt(`${t[0].toFixed(3)} + ${t[1].toFixed(3)} i`, px + 16, py - 18, { size: 26, fam: F.mono, w: 700, c: C.white, a });
+    txt(`arg = ${(arg / DEG).toFixed(2)}°`, x0 + 20, y0 + 84, { size: 30, fam: F.mono, w: 700, c: C.mag, a: ga });
+    txt(`${t[0].toFixed(3)} + ${t[1].toFixed(3)} i`, px - 16, py - 22, { size: 26, fam: F.mono, w: 700, align: 'right', c: C.white, a });
   }
   /* the cap's angle ledger */
-  const ca = a * Q(S, 1, 'three angles', 0.6);
+  const ca = a * Q(S, 1, 'three angles', 0.6) * (1 - at(S, 4, 0.5));
   if (ca > 0.003) {
     panel(1230, 200, 570, 330, ca, C.mag, 'THE CAP · 球面帽');
     mtRich([['α = γ = ', C.white], [(base / DEG).toFixed(2) + '°', C.white], ['   β = 90°', C.white]], 1255, 270, { size: 28, a: ca, fam: F.mono });
@@ -540,11 +540,11 @@ SCENES.angle = S => {
   const sa = a * Q(S, 3, 'like the square', 0.6);
   if (sa > 0.003) txt('Ω ≈ ε²/2 for small ε · 小步长时', 1230, 580, { size: 26, fam: F.zh, w: 700, c: C.mag, a: sa });
   /* line 4: the maxim */
-  const ma = a * at(S, 4, 0.6);
+  const ma = a * at(S, 4, 0.6, 0.4);
   if (ma > 0.003) {
-    panel(1230, 620, 570, 170, ma, C.argued, 'MAXIM · 格言');
-    txt('flat = curved, seen from afar', 1255, 690, { size: 26, fam: F.mono, w: 700, c: C.white, a: ma });
-    txt('平直，是远看的弯曲', 1255, 740, { size: 28, fam: F.zh, w: 700, c: C.white, a: ma });
+    panel(1230, 200, 570, 170, ma, C.argued, 'MAXIM · 格言');
+    txt('flat = curved, seen from afar', 1255, 270, { size: 26, fam: F.mono, w: 700, c: C.white, a: ma });
+    txt('平直，是远看的弯曲', 1255, 320, { size: 28, fam: F.zh, w: 700, c: C.white, a: ma });
   }
 };
 
@@ -593,7 +593,7 @@ FILM.poster = () => {
   const R = 470, ox = 520, oy = 760;
   const sh = solid('cell', { x: 60, y: 120, w: 980, h: 860, yaw: CL_GEN.yaw, pitch: CL_GEN.el, unit: R, cx: ox - 60, cy: oy - 120, px: true });
   sh.begin();
-  const { A, B, C: Cc } = mtSolidCell(sh, E45, { tetra: 0.5 });
+  const { A, B, Cp: Cc } = mtSolidCell(sh, E45, { tetra: 0.5 });
   sh.end(1);
   mtLabel(sh, A, 'A', -32, 10, C.white, 1, 38);
   mtLabel(sh, B, 'B', 28, -18, C.white, 1, 38);
