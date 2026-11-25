@@ -63,7 +63,7 @@ $$
 
 令 $q(k)=\max(0,1-k^2/r^2)$。若 $b_k$ 是所选分箱的总重，则 $\sum_k b_kq(k)\ge A(1-M/r^2)$。整数平方和与四次方和的精确公式给出 $\sum_k q(k)^2=16r/15-1/(15r^3)$。应用柯西–施瓦茨，再用 $\sum_k b_k^2\le E(\eta)$，即得下界。 [抛物线下界的 Lean 证明](lean:D5/S3/Fourier/Concentration/ShiftedBinVariance.collision_parabolic_lower)
 
-对次数为 $p$ 的频率和取 $A=W^p$、$B=pV$，从而收紧上述矩判据的必要条件。对于 $B>0$，当 $\eta/\sqrt B\to0$ 时，选择 $r=\lceil\sqrt{5M}\rceil$，下界右侧对应的归一化系数趋于 $3/(5\sqrt5)$，即 $\liminf E(\eta)\sqrt B/(A^2\eta)\ge3/(5\sqrt5)$（$A>0$）。实际 ζ 纵坐标的上界仍需进一步证明。
+对次数为 $p$ 的频率和取 $A=W^p$、$B=pV$，从而收紧上述矩判据的必要条件。对于 $B>0$，当 $\eta/\sqrt B\to0$ 时，选择 $r=\lceil\sqrt{5M}\rceil$，下界右侧对应的归一化系数趋于 $3/(5\sqrt5)$，即 $\liminf E(\eta)\sqrt B/(A^2\eta)\ge3/(5\sqrt5)$（$A>0$）。该渐近推论的最优性以及实际 ζ 纵坐标的上界仍需进一步证明。
 
 ## 分离格点的抛物线权重与渐近最优性
 
@@ -81,7 +81,7 @@ E(\eta)=\frac{A(4n^2+1)}5
 \eta\ge0\ \land\ (n=1\ \lor\ \eta<1).
 $$
 
-当 $0\le\eta<1$ 时，不同格点的距离都大于 $\eta$，所以只有对角项贡献。用 $c_k^2=n^2c_k-k^2c_k$ 即得公式。$n=1$ 时只有中心有正权重。$n\ge2$ 且 $\eta\ge1$ 时，有序对 $(0,1)$ 已产生严格正的额外碰撞。负半径排除所有有序对。 [精确碰撞公式的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/afc30aadad62cff44787b01db91ff06d4c5adbcc/D5/S3/Fourier/Concentration/SeparatedParabolicCollision.lean#L25)
+当 $0\le\eta<1$ 时，不同格点的距离都大于 $\eta$，所以只有对角项贡献。用 $c_k^2=n^2c_k-k^2c_k$ 即得公式。$n=1$ 时只有中心有正权重。$n\ge2$ 且 $\eta\ge1$ 时，有序对 $(0,1)$ 已产生严格正的额外碰撞。负半径排除所有有序对。 [精确碰撞公式的 Lean 证明](lean:D5/S3/Fourier/Concentration/SeparatedParabolicCollision.separated_parabolic_collision)
 
 对于任意最终满足 $0<\eta_n<1$、且 $\eta_n\to L>0$ 的半径序列，令 $t=1/n$，则
 
@@ -97,7 +97,7 @@ $$
 \longrightarrow\frac{3}{5\sqrt5\,L}.
 $$
 
-选择 $\eta_n=n/(n+1)$，每个半径严格小于格点间距，且 $L=1$。于是上一节的常数 $3/(5\sqrt5)$ 对任意有限非负加权数据是渐近最优的。连续 Rényi 熵的二阶矩极值也出现这一抛物线形状，参见 [Sekeh 的式 (2.1) 与定理 3.1](https://arxiv.org/abs/1509.02190v4)。这里的有限格点分离保证闭距离带中仅有对角碰撞。要求数据来自固定底层频率族的高次数和，或实际 ζ 纵坐标，还需获得相应的算术约束。 [极限的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/afc30aadad62cff44787b01db91ff06d4c5adbcc/D5/S3/Fourier/Concentration/SeparatedParabolicCollision.lean#L154)
+选择 $\eta_n=n/(n+1)$，每个半径严格小于格点间距，且 $L=1$。于是上一节的常数 $3/(5\sqrt5)$ 对任意有限非负加权数据是渐近最优的。连续 Rényi 熵的二阶矩极值也出现这一抛物线形状，参见 [Sekeh 的式 (2.1) 与定理 3.1](https://arxiv.org/abs/1509.02190v4)。这里的有限格点分离保证闭距离带中仅有对角碰撞。要求数据来自固定底层频率族的高次数和，或实际 ζ 纵坐标，还需获得相应的算术约束。 [极限的 Lean 证明](lean:D5/S3/Fourier/Concentration/SeparatedParabolicCollision.parabolic_collision_ratio_limit)
 
 ## 格点卷积的有限傅里叶方差下界
 
@@ -108,7 +108,7 @@ $$
 |S(t)|\ge\max(0,W-Dt^2/2).
 $$
 
-若 $D>0$ 且 $t\ne0$，则 $|S(t)|>W-Dt^2/2$，因为至少一个正权重项的中心化相位非零。 [特征函数下界的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/c1296ace4f5b66516a07af37f37a1dbcec0d50e1/D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lean#L27)
+若 $D>0$ 且 $t\ne0$，则 $|S(t)|>W-Dt^2/2$，因为至少一个正权重项的中心化相位非零。 [特征函数下界的 Lean 证明](lean:D5/S3/Fourier/Concentration/LatticeConvolutionVariance.score_variance_lower)
 
 若频率位于同一仿射格点 $g_j=b+h a_j$，其中 $h>0$、$a_j$ 为整数，则对任意实权重、自然数 $p$、正整数 $k$、实数 $s$ 以及 $0\le\eta<h$，令 $A=k\pi/h$，有精确恒等式
 
@@ -116,7 +116,7 @@ $$
 E_p(\eta)=\frac{1}{2A}\int_{s-A}^{s+A}|S(t)|^{2p}\,dt.
 $$
 
-将 $|S|^{2p}$ 作有限多项式配对展开，任意两个次数为 $p$ 的频率和之差都是 $hd$，$d$ 为整数。对应余弦项的平均值为 $\cos(hds)\operatorname{sinc}(k\pi d)$。因此保留全部相等频率和的有序对。 [周期平均恒等式的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/c1296ace4f5b66516a07af37f37a1dbcec0d50e1/D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lean#L111)
+将 $|S|^{2p}$ 作有限多项式配对展开，任意两个次数为 $p$ 的频率和之差都是 $hd$，$d$ 为整数。对应余弦项的平均值为 $\cos(hds)\operatorname{sinc}(k\pi d)$。因此保留全部相等频率和的有序对。 [周期平均恒等式的 Lean 证明](lean:D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lattice_period_collision)
 
 当权重非负且 $\eta\ge0$ 时，结合单周期内的点态下界得到
 
@@ -125,8 +125,7 @@ E_p(\eta)\ge \frac{hW^{2p}}{2\pi}
 \int_{-\pi/h}^{\pi/h}\max(0,1-Vt^2/2)^{2p}\,dt.
 $$
 
-若 $D>0$ 且 $p>0$，该不等式严格成立。这里使用了次数和的同一傅里叶幂展开。固定 $V,h>0$ 而次数增长时，积分中的缩放变量为 $t\sqrt{pV}$，可用整个实线上的可积高斯函数控制积分余项。一般实频谱可使用下文的正核碰撞估计。 [有限积分下界的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/c1296ace4f5b66516a07af37f37a1dbcec0d50e1/D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lean#L179)
-
+若 $D>0$ 且 $p>0$，该不等式严格成立。这里使用了次数和的同一傅里叶幂展开。固定 $V,h>0$ 而次数增长时，积分中的缩放变量为 $t\sqrt{pV}$，其高斯极限给出的渐近系数仍待形式化。一般实频谱的有限分辨率碰撞需要另行建立正核估计。 [有限积分下界的 Lean 证明](lean:D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lattice_collision_variance_lower)
 
 ## 截断方差积分的高斯极限
 
@@ -145,7 +144,7 @@ I_p-\int_{-R_p}^{R_p}e^{-u^2}\,du\longrightarrow0,
 I_p\longrightarrow\sqrt\pi\ \Longleftrightarrow\ R_p\longrightarrow+\infty.
 $$
 
-换元 $u=s_pt$ 后，被积函数为 $q_p(u)=\max(0,1-u^2/(2p))^{2p}$。当 $p>0$ 时，$0\le q_p(u)\le e^{-u^2}$，且固定 $u$ 下 $q_p(u)\to e^{-u^2}$。因此支配收敛给出 $\int_{\mathbb R}|q_p(u)-e^{-u^2}|\,du\to0$，统一控制所有窗口的绝对误差。高斯窗口积分随有向半径单调增加，并在任意有限半径处严格小于 $\sqrt\pi$，所以全高斯极限也要求缩放后的半径趋于正无穷。 [窗口逼近](https://github.com/the-omega-institute/trureturing/blob/3959805f25927cfdc34434e20f04e29d0b7ce9b4/D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.lean#L120) [全高斯极限的充要条件](https://github.com/the-omega-institute/trureturing/blob/3959805f25927cfdc34434e20f04e29d0b7ce9b4/D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.lean#L185)
+换元 $u=s_pt$ 后，被积函数为 $q_p(u)=\max(0,1-u^2/(2p))^{2p}$。当 $p>0$ 时，$0\le q_p(u)\le e^{-u^2}$，且固定 $u$ 下 $q_p(u)\to e^{-u^2}$。因此支配收敛给出 $\int_{\mathbb R}|q_p(u)-e^{-u^2}|\,du\to0$，统一控制所有窗口的绝对误差。高斯窗口积分随有向半径单调增加，并在任意有限半径处严格小于 $\sqrt\pi$，所以全高斯极限也要求缩放后的半径趋于正无穷。 [窗口逼近](lean:D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.clipped_gaussian_window_error) [全高斯极限的充要条件](lean:D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.clipped_gaussian_full_limit_iff)
 
 现在回到固定方差预算 $V>0$ 及格距 $h>0$ 的卷积。取 $A_p=\pi/h$，则 $R_p\to+\infty$，且上节有限下界乘以 $\sqrt{pV}$ 后的积分系数趋于 $h/(2\sqrt\pi)$。由此，对每个 $\varepsilon>0$，所有充分大的 $p$ 与固定 $\eta\ge0$ 满足
 
@@ -154,8 +153,7 @@ $$
 \le \sqrt{pV}\,E_p(\eta).
 $$
 
-这个渐近下界继承了有限傅里叶积分的全部假设。实际碰撞质量还可能受到其他相位峰的贡献，例如所给格距并非最大格距时。实际 ζ 纵坐标的上界仍需控制这些贡献及非中心余项。这里采用了 [有限主贡献与余项控制的相关方法](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1dd9/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)，具体的余项是上述全线绝对误差。
-
+这个渐近下界继承了有限傅里叶积分的全部假设。实际碰撞质量还可能受到其他相位峰的贡献，例如所给格距并非最大格距时。一般实频谱和实际 ζ 纵坐标的上界仍需控制这些贡献及非中心余项。这里采用了 [有限主贡献与余项控制的相关方法](https://github.com/the-omega-institute/riemann-hypothesis/blob/c7d25b3bfd7906388bb8eb0774e027a2b756a7b6/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)，具体的余项是上述全线绝对误差。
 
 ## 一般实频率的正 Fejér 核下界
 
@@ -173,7 +171,7 @@ $$
 =\sum_{m,n}c_mc_n\phi_\eta(G_m-G_n).
 $$
 
-恒等式允许任意实权。若 $w_j\ge0$，全部 $c_m c_n\ge0$，且 $\phi_\eta(d)\le \mathbf 1_{|d|\le\eta}$，故右侧不超过 $E_p(\eta)$。在闭带边界 $|d|=\eta$ 处三角权恰为零。 [正核碰撞比较](https://github.com/the-omega-institute/trureturing/blob/650bb40f649ae4454afcf856c2f1c0b0ceb18f1d/D5/S3/Fourier/Concentration/FejerCollisionVariance.lean#L87)
+恒等式允许任意实权。若 $w_j\ge0$，全部 $c_m c_n\ge0$，且 $\phi_\eta(d)\le \mathbf 1_{|d|\le\eta}$，故右侧不超过 $E_p(\eta)$。在闭带边界 $|d|=\eta$ 处三角权恰为零。 [正核碰撞比较](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_comparison)
 
 再假设 $\sum_jw_j(g_j-a)^2\le VW$，其中 $a,V$ 为实数。由点态方差下界和核的非负性，对任何 $A\ge0$ 有
 
@@ -182,7 +180,7 @@ W^{2p}\int_{-A}^{A}K_\eta(t)\max(0,1-Vt^2/2)^{2p}\,dt
 \le E_p(\eta).
 $$
 
-这一估计适用于任意有限实频率族。 [有限窗口下界](https://github.com/the-omega-institute/trureturing/blob/650bb40f649ae4454afcf856c2f1c0b0ceb18f1d/D5/S3/Fourier/Concentration/FejerCollisionVariance.lean#L115)
+这一估计适用于任意有限实频率族。 [有限窗口下界](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_variance_lower)
 
 固定 $V,\eta>0$ 并令 $p\to\infty$。对 $\varepsilon>0$，取 $c=\eta/(2\pi)-\varepsilon/(2\sqrt\pi)$。由 $K_\eta(0)=\eta/(2\pi)$ 与连续性，可选择一个固定的 $A>0$，使 $|t|\le A$ 时 $K_\eta(t)\ge c$。上一节的高斯极限给出
 
@@ -198,8 +196,7 @@ $$
 \le\sqrt{pV}\,E_p(\eta).
 $$
 
-若 $W>0$，等价地有 $\liminf_{p\to\infty} E_p(\eta)\sqrt{pV}/(W^{2p}\eta)\ge1/(2\sqrt\pi)$。这个系数超过任意有限加权数据的抛物线下界系数 $3/(5\sqrt5)$，因为次数和具有卷积结构。结论允许固定的实际 ζ 尾段作为输入频率族。高度、频率族和分辨率共同变化时，可用下文的尺度条件获得统一下界。 [渐近下界](https://github.com/the-omega-institute/trureturing/blob/650bb40f649ae4454afcf856c2f1c0b0ceb18f1d/D5/S3/Fourier/Concentration/FejerCollisionVariance.lean#L156)
-
+若 $W>0$，等价地有 $\liminf_{p\to\infty} E_p(\eta)\sqrt{pV}/(W^{2p}\eta)\ge1/(2\sqrt\pi)$。这个系数超过任意有限加权数据的抛物线下界系数 $3/(5\sqrt5)$，因为次数和具有卷积结构。结论允许固定的实际 ζ 尾段作为输入频率族。随着高度、频率族和分辨率共同变化的统一渐近界，以及高阶碰撞的上界，仍待进一步估计。 [渐近下界](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_asymptotic_lower)
 
 ## 变化频谱的统一小分辨率下界
 
@@ -209,7 +206,7 @@ $$
 s_n=\sqrt{nV_n},\qquad \rho_n=\frac{\eta_n}{s_n}.
 $$
 
-$\rho_n\to0$ 当且仅当存在最终为正的半窗口 $A_n$，使 $A_ns_n\to+\infty$ 且 $\eta_nA_n\to0$。确实，取 $A_n=1/(s_n\sqrt{\rho_n})$，两项分别为 $1/\sqrt{\rho_n}$ 与 $\sqrt{\rho_n}$。反过来，$\rho_n=(\eta_n A_n)/(s_nA_n)$。 [两种窗口尺度相容的充要条件](https://github.com/the-omega-institute/trureturing/blob/7c384a3aaea1f4743f2e515a64b5241f062640fa/D5/S3/Fourier/Asymptotics/MovingFejerCollision.lean#L26)
+$\rho_n\to0$ 当且仅当存在最终为正的半窗口 $A_n$，使 $A_ns_n\to+\infty$ 且 $\eta_nA_n\to0$。确实，取 $A_n=1/(s_n\sqrt{\rho_n})$，两项分别为 $1/\sqrt{\rho_n}$ 与 $\sqrt{\rho_n}$。反过来，$\rho_n=(\eta_n A_n)/(s_nA_n)$。 [两种窗口尺度相容的充要条件](lean:D5/S3/Fourier/Asymptotics/MovingFejerCollision.exists_fejer_window_iff)
 
 在 $\rho_n\to0$ 下，对每个 $\varepsilon>0$，存在仅依赖于 $V_n,\eta_n$ 两个序列及 $\varepsilon$ 的次数阈值。超过此阈值的每个 $n$，任意有限频率族 $g_j$、非负权重 $w_j$ 以及任意满足 $\sum_jw_j(g_j-a)^2\le V_n W$ 的中心 $a$，均满足
 
@@ -218,7 +215,7 @@ $$
 \le \sqrt{nV_n}\,E_n(\eta_n).
 $$
 
-证明是在相容窗口上使用 $\eta_n^{-1}K_{\eta_n}(t)=\operatorname{sinc}^2(\eta_nt/2)/(2\pi)$。由 $\eta_n A_n\to0$，此归一化核最终处处至少为 $1/(2\pi)-\varepsilon/(2\sqrt\pi)$。由 $A_ns_n\to\infty$，不带核的缩放积分趋于 $\sqrt\pi$。结合有限窗口下界即可取得统一次数阈值。 [统一碰撞下界](https://github.com/the-omega-institute/trureturing/blob/7c384a3aaea1f4743f2e515a64b5241f062640fa/D5/S3/Fourier/Asymptotics/MovingFejerCollision.lean#L77)
+证明是在相容窗口上使用 $\eta_n^{-1}K_{\eta_n}(t)=\operatorname{sinc}^2(\eta_nt/2)/(2\pi)$。由 $\eta_n A_n\to0$，此归一化核最终处处至少为 $1/(2\pi)-\varepsilon/(2\sqrt\pi)$。由 $A_ns_n\to\infty$，不带核的缩放积分趋于 $\sqrt\pi$。结合有限窗口下界即可取得统一次数阈值。 [统一碰撞下界](lean:D5/S3/Fourier/Asymptotics/MovingFejerCollision.moving_fejer_uniform_lower)
 
 例如，对随 $n$ 变化的有限 ζ 尾段，取频率 $g_\gamma=\gamma/r$，其中 $r>0$ 固定，$0<\gamma\le T_n$。可用中心 $a=0$ 和预算 $V_n=T_n^2/r^2$。如果 $\eta_n r/(T_n\sqrt n)\to0$，则
 
