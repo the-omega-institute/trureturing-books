@@ -118,7 +118,7 @@ $$
 |y|^2-(1-|c|^2)|v|^2-(c\cdot v)^2.
 $$
 
-取 $v=0$ 和非零 $y\perp a$ 可得正值，取 $y=0$ 和非零 $v\perp c$ 可得负值。Meyer 定理保证存在非零有理零点。因为 $1-|c|^2>0$，这个零点的 $y,v$ 均非零。将 $y,v$ 代入有理 Pauli 投影构造，得到两侧归一化余块的秩二联合态。乘回共同迹，再恢复中位枢轴，整体秩至多为三。上面的复秩二、有理秩三算例表明这个统一有理上界可以达到。零点存在性来自 Meyer 定理，Lean 核验覆盖给定零点后的矩阵构造。 [Serre《A Course in Arithmetic》，第四章 §3.2，推论 2](https://doi.org/10.1007/978-1-4684-9884-4) · [给定有理零点的秩二构造](lean:D5/S3/Quantum/Entanglement/Marginals/RationalQubitProjector.rational_rank_two_of_quadratic_witness)
+取 $v=0$ 和非零 $y\perp a$ 可得正值，取 $y=0$ 和非零 $v\perp c$ 可得负值。二次型若退化，根空间本身含非零有理零点。非退化时，Meyer 定理保证存在非零有理零点。因为 $1-|c|^2>0$，这个零点的 $y,v$ 均非零。将 $y,v$ 代入有理 Pauli 投影构造，得到两侧归一化余块的秩二联合态。乘回共同迹，再恢复中位枢轴，整体秩至多为三。上面的复秩二、有理秩三算例表明这个统一有理上界可以达到。零点存在性来自 Meyer 定理，Lean 核验覆盖给定零点后的矩阵构造。 [Serre《A Course in Arithmetic》，第四章 §3.2，推论 2](https://doi.org/10.1007/978-1-4684-9884-4) · [给定有理零点的秩二构造](lean:D5/S3/Quantum/Entanglement/Marginals/RationalQubitProjector.rational_rank_two_of_quadratic_witness)
 :::
 
 若还要求整体态为纯态，有理性取决于一个范数方程。设两份边缘都是 $\operatorname{diag}(0,b,1-b)$，其中 $b$ 为有理数。真空读数为零迫使纯态只支撑在 $|010\rangle,|101\rangle$ 上。两态的权重分别为 $b,1-b$，因此耦合 $z$ 必须满足 $|z|^2=b(1-b)$。反过来，$b>0$ 时用振幅 $\sqrt b,\bar z/\sqrt b$ 即可构造所需纯态，$b=0$ 时取 $|101\rangle$。给定 $b,z$，一个所有矩阵元都取有理实部和虚部的纯扩张存在，当且仅当 $b$、$z$ 的实部和 $z$ 的虚部都是有理数，且满足这个范数等式。因此对给定的有理 $b$，有理纯扩张存在恰好等价于 $b(1-b)$ 是两个有理平方之和。 [有理纯扩张判据](lean:D5/S3/Quantum/Entanglement/Marginals/FibRationalPureExtension.rational_pure_coupling_iff)
