@@ -122,7 +122,7 @@ const wlTable = s => WL_N.map((_, v) => {
   const k = same.indexOf(v), n = same.length;
   return [WL_COLX[s[v]], n === 1 ? 560 : 400 + 300 * k / (n - 1)];
 });
-const WL_T1 = wlTable(WL_SLOT), WL_T2 = wlTable(WL_NEW);
+const WL_T1 = wlTable(WL_SLOT), WL_T2 = wlTable(WL_NEW).map((p, v) => (v === 1 ? [p[0], 650] : p));   // B lowered: no two arcs collinear
 const wlMix = (P, Q2, t) => P.map((p, i) => [lerp(p[0], Q2[i][0], t), lerp(p[1], Q2[i][1], t)]);
 function wlNode(p, name, a, o = {}) {
   if (a <= 0.003) return;
@@ -311,7 +311,7 @@ SCENES.back = S => {
     WL_N.forEach((nm, v) => {
       const s = vals ? `${vals[v]}` : nm;
       const col = i === 2 ? C.cyan : i === 3 && v === 3 ? C.now : C.white;
-      txt(s, 1440 + 80 * v, y, { size: 30, fam: vals ? F.mono : F.disp, w: 700, align: 'center', c: col, a: al * (i === 2 ? clamp((u - t0 - 0.9 - 0.55 * order.indexOf(v)) / 0.4) : 1) });
+      txt(s, 1420 + 72 * v, y, { size: 30, fam: vals ? F.mono : F.disp, w: 700, align: 'center', c: col, a: al * (i === 2 ? clamp((u - t0 - 0.9 - 0.55 * order.indexOf(v)) / 0.4) : 1) });
     });
   });
   wlRich([['each arrow: bigger → smaller · 大数指向小数', C.cyan]], 1090, 670, { size: 22, fam: F.zh, a: a * chk });
@@ -329,27 +329,27 @@ SCENES.rule = S => {
   panel(170, 220, 1580, 330, la, C.lean, 'ANY FINITE GRAPH, ANY k · 任意有限图、任意 k');
   wlRich([['G can be colored with k colors', C.white]], 220, 320, { size: 36, a: la * Q(S, 1, 'can be colored', 0.5) });
   wlRich([['⟺', C.lean]], 850, 320, { size: 40, a: la * Q(S, 1, 'exactly when', 0.5) });
-  wlRich([['some orientation: every directed path ≤ k vertices', C.cyan]], 930, 320, { size: 32, a: la * Q(S, 1, 'given directions', 0.5) });
-  wlRich([['G 可 k 着色  ⟺  存在一种定向，使每条有向路至多 k 个顶点', C.white]], 220, 390, { size: 28, fam: F.zh, a: la * Q(S, 1, 'longer than', 0.5) });
-  wlRich([['a directed path never repeats a vertex · 有向路的顶点互不相同', C.dim]], 220, 440, { size: 22, fam: F.zh, a: la * Q(S, 1, 'longer than', 0.5) });
-  wlLean(220, 510, la, 22);
+  wlRich([['some orientation: every directed path has ≤ k vertices', C.cyan]], 220, 372, { size: 34, a: la * Q(S, 1, 'given directions', 0.5) });
+  wlRich([['G 可 k 着色  ⟺  存在一种定向，使每条有向路至多 k 个顶点', C.white]], 220, 428, { size: 26, fam: F.zh, a: la * Q(S, 1, 'longer than', 0.5) });
+  wlRich([['a directed path never repeats a vertex · 有向路的顶点互不相同', C.dim]], 220, 468, { size: 21, fam: F.zh, a: la * Q(S, 1, 'longer than', 0.5) });
+  wlLean(220, 518, la, 21);
   /* line 2: both ways and a circle; the proof drops one arc */
   const ba = a * at(S, 2, 0.6) * (1 - at(S, 3, 0.5));
   if (ba > 0.003) {
-    panel(170, 580, 760, 290, ba, C.cyan, 'ALLOWED · 允许');
+    panel(170, 580, 1100, 290, ba, C.cyan, 'ALLOWED · 允许');
     const p1 = [[260, 760], [460, 760]];
     wlNode(p1[0], 'u', ba); wlNode(p1[1], 'v', ba);
     wlEdge(p1.map(p => [p[0], p[1] - 14]), 0, 1, C.white, ba, 3, true);
     wlEdge(p1.map(p => [p[0], p[1] + 14]), 1, 0, C.white, ba, 3, true);
     txt('both ways · 双向', 360, 840, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a: ba });
-    const cyc = [[640, 690], [820, 690], [730, 820]], drop = Q(S, 2, 'drops arrows', 0.8);
+    const cyc = [[620, 680], [800, 680], [710, 810]], drop = Q(S, 2, 'drops arrows', 0.8);
     [[0, 1], [1, 2], [2, 0]].forEach(([x, y], i) => {
       if (i === 2 && drop > 0) { ctx.save(); ctx.setLineDash([8, 8]); wlEdge(cyc, x, y, C.dim, ba * (1 - 0.6 * drop), 3, true); ctx.restore(); }
       else wlEdge(cyc, x, y, C.white, ba, 3, true);
     });
     cyc.forEach((p, i) => wlNode(p, ['x', 'y', 'z'][i], ba));
-    txt('a circle · 绕圈', 870, 790, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ba });
-    txt('proof drops one · 证明删去一支', 870, 830, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ba * drop });
+    txt('a circle · 绕圈', 880, 760, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ba });
+    txt('proof drops one · 证明删去一支', 880, 810, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ba * drop });
   }
   /* line 3: χ(G) = min over orientations of the longest path (a hand derivation) */
   const ca = a * at(S, 3, 0.6);
