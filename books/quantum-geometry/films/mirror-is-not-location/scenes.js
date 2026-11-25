@@ -168,7 +168,7 @@ const MR_P = miPlane(440, 560, 300, 300);
 SCENES.mirror = S => {
   const u = S.u;
   miTitle(S);
-  const a = clamp((u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - u) / 0.5);
+  const a = clamp((u - lineAt(S, 0).s - 0.7) / 0.7) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued']]);
   const P = MR_P;
@@ -208,7 +208,7 @@ function lpPoint(S) {
   let s = [lerp(2, -1, m1), 0];
   const b = ease(clamp((S.u - tb) / 1.4));
   if (b > 0) {
-    const y = lerp(0, 1.05, b) + 0.25 * Math.sin(clamp((S.u - tb - 1.4) / 4) * Math.PI);
+    const y = lerp(0, 0.8, b) + 0.2 * Math.sin(clamp((S.u - tb - 1.4) / 4) * Math.PI);
     s = [lerp(-1, 0.5, b), y];
   }
   return s;
@@ -225,7 +225,7 @@ SCENES.lamps = S => {
   /* the bisector (line 4) */
   const ga = a * Q(S, 4, 'halfway', 0.8);
   miGlass(P, 190, 900, ga);
-  if (ga > 0.01) txt('ratio = 1', P([0.5, 0])[0] + 16, 210, { size: 24, fam: F.mono, w: 700, c: C.cyan, a: ga });
+  if (ga > 0.01) txt('ratio = 1 on this line · 此线上比值为 1', P([0.5, 0])[0] + 18, 870, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: ga });
   /* the lamps */
   const la = a * at(S, 0, 0.6);
   miLamp(P([0, 0]), 'lamp 0 · 灯 0', la);
@@ -275,10 +275,10 @@ SCENES.ruler = S => {
   txt('Re 1', x1, 896, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.dim, a });
   txt('Re ½', xh, 896, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.cyan, a });
   const ha = a * Q(S, 3, 'strictly between', 0.8);
-  fillBox(xh + 8, 220, x1 - xh - 8, 640, C.lean, ha * 0.14);
+  fillBox(xh + 8, 220, x1 - xh - 8, 640, C.cyan, ha * 0.10);
   if (ha > 0.003) {
-    txt('no zero here', (xh + x1) / 2, 520, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.lean, a: ha });
-    txt('此处无零点', (xh + x1) / 2, 556, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.lean, a: ha });
+    txt('if no zero here', (xh + x1) / 2, 520, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.white, a: ha });
+    txt('若此处无零点', (xh + x1) / 2, 556, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.white, a: ha });
     txt('⟹ RH', (xh + x1) / 2, 600, { size: 28, fam: F.math, w: 700, align: 'center', c: C.lean, a: ha });
   }
   miGlass(P, 220, 860, a);
@@ -296,7 +296,7 @@ SCENES.ruler = S => {
   const l2 = a * Q(S, 2, 'Lean also checks', 0.6);
   if (l2 > 0.003) {
     panel(820, 540, 1000, 170, l2, C.lean, 'EVERY NONTRIVIAL ZERO · 每个非平凡零点');
-    miRich([['RH  ⟺  ζ(ρ) = 0, ρ ≠ −2, −4, …  ⟹  ln‖(ρ − 1)/ρ‖ = 0', C.white]], 850, 606, { size: 26, a: l2 });
+    miRich([['RH  ⟺  ∀ρ: ζ(ρ) = 0, ρ ≠ −2, −4, …  ⟹  ln‖(ρ − 1)/ρ‖ = 0', C.white]], 850, 606, { size: 25, a: l2 });
     txt('ratio one · 比值为 1', 850, 644, { size: 20, fam: F.zh, w: 700, c: C.dim, a: l2 });
     miLean(850, 688, MI_LEAN.cayley_critical_line_zeta_criterion, l2);
   }
@@ -311,7 +311,7 @@ SCENES.ruler = S => {
 /* ======================================================================= */
 /*                             scene 4 · A PERFECT FORGERY                   */
 /* ======================================================================= */
-const FG_P = miPlane(140, 540, 640, 24);
+const FG_P = miPlane(140, 540, 640, 19);
 SCENES.forgery = S => {
   const u = S.u, a = miFade(S);
   if (a <= 0) return;
@@ -319,15 +319,15 @@ SCENES.forgery = S => {
   const P = FG_P;
   /* the strip and the glass */
   const x0 = P([0, 0])[0], x1 = P([1, 0])[0];
-  fillBox(x0, 170, x1 - x0, 740, C.vio, a * 0.05);
-  line(x0, 170, x0, 910, C.dim, a * 0.6, 1.5); line(x1, 170, x1, 910, C.dim, a * 0.6, 1.5);
-  miGlass(P, 170, 910, a);
+  fillBox(x0, 200, x1 - x0, 680, C.vio, a * 0.05);
+  line(x0, 200, x0, 880, C.dim, a * 0.6, 1.5); line(x1, 200, x1, 880, C.dim, a * 0.6, 1.5);
+  miGlass(P, 200, 880, a);
   const oy = P([0, 0])[1];
   ctx.save(); ctx.setLineDash([4, 8]); line(x0 - 40, oy, x1 + 40, oy, C.dim, a * 0.6, 1.5); ctx.restore();
   for (const g of [14, -14]) { const q = P([0, g]); txt(`${g > 0 ? '' : '−'}14i`, x1 + 50, q[1] + 8, { size: 24, fam: F.math, w: 700, c: C.dim, a }); }
-  txt('Re ¼', P([0.25, 0])[0], 940, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.mag, a });
-  txt('Re ½', P([0.5, 0])[0], 940, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.cyan, a });
-  txt('Re ¾', P([0.75, 0])[0], 940, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.cyan, a });
+  txt('Re ¼', P([0.25, 0])[0], 576, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.mag, a });
+  txt('Re ½', P([0.5, 0])[0] + 34, 520, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.cyan, a });
+  txt('Re ¾', P([0.75, 0])[0], 576, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.cyan, a });
   /* the four zeros: inside the unit circle of the ratio (Re ¾) cyan, outside (Re ¼) magenta */
   const za = a * Q(S, 0, 'four zeros', 0.8);
   MI_ZEROS.forEach((z, i) => {
@@ -337,7 +337,7 @@ SCENES.forgery = S => {
   });
   /* line 1: the two symmetries as arrows between zeros */
   const sa = a * Q(S, 1, 'left–right mirror', 0.7), fa = a * Q(S, 1, 'up–down flip', 0.7);
-  if (sa > 0.003) { const p = P(MI_ZEROS[0]), q = P(MI_ZEROS[1]); arrow(p[0] - 26, p[1] + 84, q[0] + 26, q[1] + 84, C.white, sa, 2.5); arrow(q[0] + 26, q[1] + 102, p[0] - 26, p[1] + 102, C.white, sa * 0.6, 2); txt('mirror · 镜像', (p[0] + q[0]) / 2, p[1] + 140, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.white, a: sa }); }
+  if (sa > 0.003) { const p = P(MI_ZEROS[0]), q = P(MI_ZEROS[1]); arrow(p[0] - 26, p[1] + 84, q[0] + 26, q[1] + 84, C.white, sa, 2.5); arrow(q[0] + 26, q[1] + 102, p[0] - 26, p[1] + 102, C.white, sa * 0.6, 2); txt('mirror · 镜像', P([0.5, 0])[0] + 16, p[1] + 140, { size: 20, fam: F.zh, w: 700, align: 'left', c: C.white, a: sa }); }
   if (fa > 0.003) { const p = P(MI_ZEROS[0]), q = P(MI_ZEROS[2]); ctx.save(); ctx.setLineDash([8, 8]); arrow(p[0] + 190, p[1] + 30, q[0] + 190, q[1] - 30, C.white, fa * 0.8, 2); ctx.restore(); txt('flip · 翻转', p[0] + 204, oy - 14, { size: 20, fam: F.zh, w: 700, c: C.white, a: fa }); }
   /* the readout */
   panel(1000, 180, 820, 290, a, C.cyan, 'THE FORGERY · 赝品');
@@ -388,7 +388,7 @@ SCENES.idol = S => {
   txt('symmetry  ⟹  location ?', 1300, 290, { size: 40, fam: F.disp, w: 700, align: 'center', c: C.white, a: ia });
   txt('对称 ⟹ 定位？', 1300, 346, { size: 36, fam: F.zh, w: 700, align: 'center', c: C.white, a: ia });
   const xa = a * Q(S, 0, 'It is not', 0.4);
-  if (xa > 0.003) { line(1040, 330, 1560, 250, C.white, xa, 4); txt('symmetry  ⇏  location', 1300, 420, { size: 34, fam: F.disp, w: 700, align: 'center', c: C.cyan, a: xa }); }
+  if (xa > 0.003) { line(1050, 284, 1555, 262, C.white, xa, 3); txt('symmetry  ⇏  location', 1300, 420, { size: 34, fam: F.disp, w: 700, align: 'center', c: C.cyan, a: xa }); }
   /* the aphorism */
   const qa = a * at(S, 1, 0.8);
   if (qa > 0.003) {
@@ -416,7 +416,7 @@ SCENES.edge = S => {
   badge(b1, 'argued');
   badge(clamp((u - lineAt(S, 2).s) / 0.5) * clamp((S.d - u) / 0.5), 'open');
   const rows = [
-    { k: 0, col: C.white, frame: C.dim, en: 'Riemann hypothesis: external Lean proof (2026)', zh: '黎曼猜想：外部 Lean 证明，经多方独立重放', note: 'not frozen in this book’s repository · 未冻结于本书所钉仓库' },
+    { k: 0, col: C.white, frame: C.dim, en: 'Riemann hypothesis: external Lean proof (2026)', zh: '黎曼猜想：外部 Lean 证明，经多方独立重放', note: "not frozen in this book's repository · 未冻结于本书所钉仓库" },
     { k: 1, col: C.argued, frame: C.argued, en: 'lamps and mirror: pictures, not proofs', zh: '灯与镜子：比方，不是证明', note: 'interpretation · 诠释' },
     { k: 2, col: C.open, frame: C.open, en: 'arithmetic area law of the pivots', zh: '算术枢轴面积律', note: 'open problem · 开放问题  (prob-ch34-arithmetic-pivot-area-law)' }
   ];
@@ -436,7 +436,7 @@ SCENES.edge = S => {
 /* ======================================================================= */
 SCENES.close = S => {
   badgeQ(S, [[0, null, 'lean']]);
-  closingCard(S, { from: 0.1, y: 260 });
+  closingCard(S, { from: 0.1, y: 300 });
 };
 
 /* ======================================================================= */
