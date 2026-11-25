@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "b27c6859de4de19170da62be949e15c06b487ee5",
-  "pinned_at": "2026-11-25T11:03:20Z",
+  "commit": "ca5992cabe66962ceecde81b295365f06850a14f",
+  "pinned_at": "2026-11-25T12:03:23Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1476,6 +1476,14 @@
       "statement_id": "sha256:b5db29f247895d8a85c5fbc2c5d1855fa64b582ecdec584ef9705d62b8874cae",
       "line": 339,
       "signature": "theorem splitting_progression_power_tail (ε : ℝ) (hε : 0 < ε) : ∀ᶠ x : ℝ in atTop, ∀ q b m A L : ℕ, b%4=3 → 4 ∣ m → (∀ p : ℕ, p.Prime → p ∣ m → (p:ℝ) ≤ x^(1/2+ε/2) ∨ cutoff x < p) → exp (x^(ε/5)*(log x)^2)/(4*exp (4*x^(ε/5))) ≤ L → ((failures x ε q b m A L).card:ℝ) ≤ L*exp (-(min ε 1/38400)*x^(ε/5)*(log x)^2)"
+    },
+    "D5/S3/Combinatorics/Geometry/EuclideanSimplex/RationalUnitSimplex.rational_unit_simplex_iff": {
+      "module": "D5/S3/Combinatorics/Geometry/EuclideanSimplex/RationalUnitSimplex",
+      "name": "D5.S3.Combinatorics.Geometry.EuclideanSimplex.RationalUnitSimplex.rational_unit_simplex_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:f6c9d545bf8e06d09be12e2d315c88263e2572910c2e452a862755034430c072",
+      "line": 385,
+      "signature": "theorem rational_unit_simplex_iff (n : ℕ) (hn : 0 < n) : (∃ c : ℚ, c ≠ 1 ∧ ∃ p : Fin (n + 1) → Fin n → ℚ, ∀ j k, p j ⬝ᵥ p k = if j = k then 1 else c) ↔ (Odd n ∧ IsSquare n) ∨ (Even n ∧ IsSquare (n + 1))"
     },
     "D5/S3/Combinatorics/Graph/Chordal/ChordalBanachLimitTwo.not_subtwo_banach_chordal": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/ChordalBanachLimitTwo",
@@ -4593,7 +4601,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingCoupledFit.coupledFit_eventually",
       "kind": "theorem",
-      "statement_id": "sha256:cab27696f731cb0589c2c383c71df3237001c9262516d4b61ac5914a1e63ae11",
+      "statement_id": "sha256:8e4fe7972f3bfdded48e52bd454a063eb62381ec8d379ad464043b235fc9bfaf",
       "line": 429,
       "signature": "theorem coupledFit_eventually {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) {S : Finset ℝ} (hS : S.Nonempty) (rhs : ℕ → Fin 3 → ℝ) : let readout"
     },
@@ -4601,7 +4609,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingCoupledFit.coupledMatrix_tendsto",
       "kind": "theorem",
-      "statement_id": "sha256:cab27696f731cb0589c2c383c71df3237001c9262516d4b61ac5914a1e63ae11",
+      "statement_id": "sha256:8e4fe7972f3bfdded48e52bd454a063eb62381ec8d379ad464043b235fc9bfaf",
       "line": 312,
       "signature": "theorem coupledMatrix_tendsto {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) (S : Finset ℝ) : let readout"
     },
@@ -4681,8 +4689,8 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingSupport",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingSupport.eventual_strict_support_away_from_thresholds",
       "kind": "theorem",
-      "statement_id": "sha256:6cfc397bab386628865fe4bafdc694efefda7d1bfb75a3d3a3f5d4d7d2925d75",
-      "line": 852,
+      "statement_id": "sha256:b41df376111273fb1d81ac4c6cf8b7a6a873022cc826b4d639ae64b30530bc90",
+      "line": 878,
       "signature": "theorem eventual_strict_support_away_from_thresholds (q : ℕ → ℕ) (hq : ∀ n, q n ≠ 0) (e : ℕ) (hpar : ∀ᶠ n in atTop, q n % 2 = e) {K : ℝ} (hK : Tendsto (fun n : ℕ => (n : ℝ)^5 * (mesh (q n))^2) atTop (𝓝 K)) (hneq : ∀ l, 3*K/20 ≠ rearThreshold e l) : let readout"
     },
     "D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit": {
@@ -4745,7 +4753,7 @@
       "module": "D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation",
       "name": "D5.S3.Fourier.Asymptotics.LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer",
       "kind": "theorem",
-      "statement_id": "sha256:814f3aa990246c68380dbc7877178afa983d3ba529adc45812015c6b802a6584",
+      "statement_id": "sha256:dd66e094f98993776ef40f4b7dcd225983a3a2a67bd30590ad9d8a14da2bca69",
       "line": 451,
       "signature": "theorem exists_lattice_square_moment_minimizer (m : ℝ) : let lowerBound"
     },
@@ -4753,7 +4761,7 @@
       "module": "D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation",
       "name": "D5.S3.Fourier.Asymptotics.LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer_on_interval",
       "kind": "theorem",
-      "statement_id": "sha256:814f3aa990246c68380dbc7877178afa983d3ba529adc45812015c6b802a6584",
+      "statement_id": "sha256:dd66e094f98993776ef40f4b7dcd225983a3a2a67bd30590ad9d8a14da2bca69",
       "line": 417,
       "signature": "theorem exists_lattice_square_moment_minimizer_on_interval (n : ℕ) (hn : 0 < n) (m : ℝ) : let lowerBound"
     },
@@ -5001,7 +5009,7 @@
       "module": "D5/S3/Fourier/Concentration/DegreeTwoMomentWitness",
       "name": "D5.S3.Fourier.Concentration.DegreeTwoMomentWitness.exists_equal_first_data_distinct_degree_two",
       "kind": "theorem",
-      "statement_id": "sha256:133510b216e0d0677d7ff83462dfadf798fa2026ca92c4f9ad31a91fd706c451",
+      "statement_id": "sha256:adf0db4b47d89f4b28463589cd46dd6f1ac1d309361a147b277a772071dc8426",
       "line": 89,
       "signature": "theorem exists_equal_first_data_distinct_degree_two : let secondMoment"
     },
