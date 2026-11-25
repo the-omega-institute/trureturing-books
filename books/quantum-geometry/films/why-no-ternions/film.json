@@ -1,0 +1,30 @@
+{
+  "title": "Why three won't multiply",
+  "title_zh": "三维乘不拢",
+  "summary": "In October 1843 Hamilton's sons asked him every morning whether he could multiply triplets, and he could only add and subtract them. Arrows in space today do have a product, the cross product, but it leaks. For a = (1, 2, 2) and b = (0, 3, 4), of lengths 3 and 5, the cross product (2, −4, 3) stands out of their plane with length √29 ≈ 5.39, the area they span; squared, that is 29 of 15² = 225. The rest, 196 = 14², sits in the dot product 14 = |a| times the shadow 14/3 of b on a, which the cross product throws away, and a × a = 0, so nothing can be divided. As a receipt the squared lines add up: 14² + 29 = 196 + 29 = 225 = 15². Lean checks the Lagrange identity for any two lists of real numbers: the product of the squared lengths minus the squared dot product is the sum of the squared plane areas, which in three dimensions are the components of a × b, so dot and cross are the two legs of one right triangle. Hamilton's fix keeps one more slot, a number: as quaternions, a b = (−14; 2, −4, 3) has length 15 = 3 × 5 and a a = −9. Lean also checks a second fact on the carrier ℝ × ℝ³: every relation obeying two-point positivity and phase balance is the cross product up to one overall sign, and the Pauli images multiply with the dot product in the number slot and the cross product in the arrow slots (in the order φ(a)φ(b), D(a, b) = −a × b). That no three-dimensional real division algebra exists (Frobenius for associative products, Hurwitz for normed ones, Hopf in general) is a literature result not formalized in the book, and reading the missing triplet as a closed arc body is the book's model.",
+  "summary_zh": "1843 年 10 月，哈密顿的儿子们每天早上都问他三元数能不能乘了，他只会把它们相加、相减。如今空间里的箭头其实有乘法，就是叉乘，可它会漏账。取 a = (1, 2, 2) 与 b = (0, 3, 4)，长度 3 与 5：叉乘 (2, −4, 3) 从两者的平面里竖起来，长 √29 ≈ 5.39，是两者撑开的面积；平方后是 29，而 15² = 225。其余的 196 = 14² 在点积 14 里，点积等于 a 的长度 3 乘以 b 在 a 上的影子 14/3，叉乘把它扔掉了；而且 a × a = 0，于是没法做除法。当成收据，各行平方恰好对上账：14² + 29 = 196 + 29 = 225 = 15²。Lean 检验了任意两组实数的拉格朗日恒等式：长度平方之积减去点积平方，等于各坐标面面积平方之和；在三维里这些面积正是 a × b 的分量，所以点积与叉乘是同一个直角三角形的两条直角边。哈密顿的办法是多留一格，放一个数：作为四元数，a b = (−14; 2, −4, 3)，长度 15 = 3 × 5，a a = −9。Lean 还在载体 ℝ × ℝ³ 上检验了另一件事：满足两点正性与相位平衡的任意关系，都是叉乘，至多差一个整体符号；泡利矩阵的像相乘时，点积落在数位上、叉乘落在箭头位上（按 φ(a)φ(b) 的次序，D(a, b) = −a × b）。实数上不存在三维可除代数（弗罗贝尼乌斯证结合情形、胡尔维茨证赋范情形、霍普夫证一般情形）是文献结果，本书没有形式化；把缺席的三元数读作闭合的圆弧体，是本书的模型。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · Hamilton's breakfast question, a lit three-slot box with two arrows, their parallelogram and cross product and the dot product falling out, a receipt and its right triangle, a fourth number slot, the forced cross product and the Pauli product",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity",
+    "D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences"
+  ],
+  "solid": true,
+  "outputs": {
+    "narrated_720p": "quantum-geometry_why-no-ternions_720p_narrated.mp4",
+    "cover": "quantum-geometry_why-no-ternions_cover.jpg"
+  }
+}
