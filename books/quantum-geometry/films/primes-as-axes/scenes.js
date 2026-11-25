@@ -186,7 +186,7 @@ SCENES.axes = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [2, null, 'argued']]);
   /* left: the factorisation and the counts */
-  panel(120, 190, 620, 330, a, C.cyan, 'COUNT THE PRIMES · 数素数');
+  panel(120, 190, 620, 345, a, C.cyan, 'COUNT THE PRIMES · 数素数');
   paRich([['12 = 2 × 2 × 3', C.white]], 150, 278, { size: 44, a });
   const ca = a * Q(S, 0, 'Count its', 0.6);
   [['2', '× 2', 2], ['3', '× 1', 1], ['5', '× 0', 0]].forEach(([p, s, k], i) => {
@@ -195,7 +195,7 @@ SCENES.axes = S => {
     txt(`${p}  ${s}`, 330, y, { size: 30, fam: F.math, w: 700, c: k ? C.cyan : C.dim, a: ca });
   });
   const ad = a * Q(S, 1, 'an address', 0.6);
-  paRich([['address · 地址  ', C.white], ['(2, 1, 0)', C.now]], 150, 495, { size: 30, a: ad, fam: F.zh });
+  paRich([['address · 地址  ', C.white], ['(2, 1, 0)', C.now]], 150, 512, { size: 30, a: ad, fam: F.zh });
 
   /* the lattice of 5-smooth numbers 2^a 3^b 5^c, a ≤ 3, b ≤ 2, c ≤ 1 */
   const la = a * clamp((u - lineAt(S, 0).s - 0.6) / 0.8);
@@ -208,13 +208,14 @@ SCENES.axes = S => {
   /* more axes (line 2): 7, 11, … */
   const ma = a * Q(S, 2, 'one direction for every prime', 0.8);
   if (ma > 0.003) {
-    for (const [nm, e] of [['7', [96, 70]], ['11', [-40, -112]], ['13', [116, -78]]]) {
+    for (const [nm, e, L] of [['7', [96, 70], 1.6], ['11', [-40, -112], 2.6], ['13', [116, -78], 2.6]]) {
       ctx.save(); ctx.setLineDash([9, 8]);
-      line(AX.O[0], AX.O[1], AX.O[0] + e[0] * 2.6, AX.O[1] + e[1] * 2.6, C.argued, ma * 0.85, 2.5);
+      line(AX.O[0], AX.O[1], AX.O[0] + e[0] * L, AX.O[1] + e[1] * L, C.argued, ma * 0.85, 2.5);
       ctx.restore();
-      txt(nm, AX.O[0] + e[0] * 2.8, AX.O[1] + e[1] * 2.8 + 8, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.argued, a: ma });
+      txt(nm, AX.O[0] + e[0] * (L + 0.2), AX.O[1] + e[1] * (L + 0.2) + 8, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.argued, a: ma });
     }
-    txt('7, 11, 13, … one direction per prime · 每个素数一个方向', 1700, 812, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.argued, a: ma });
+    txt('7, 11, 13, … one direction per prime', 1780, 250, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.argued, a: ma });
+    txt('每个素数一个方向（图像）', 1780, 284, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.argued, a: ma });
   }
   /* lattice points */
   for (let c = 0; c <= 1; c++) for (let b = 0; b <= 2; b++) for (let k = 0; k <= 3; k++) {
@@ -238,7 +239,7 @@ SCENES.axes = S => {
   /* line 2: one ruler, below the left panel */
   const ra = a * at(S, 2, 0.6);
   if (ra > 0.003) {
-    panel(120, 560, 620, 230, ra, C.white, 'ONE RULER · 一把尺子');
+    panel(120, 565, 620, 225, ra, C.white, 'ONE RULER · 一把尺子');
     line(160, 680, 700, 680, C.white, ra * 0.7, 2);
     for (let n = 1; n <= 12; n++) {
       const x = 160 + (n - 1) * 49;
@@ -252,7 +253,7 @@ SCENES.axes = S => {
 /* ======================================================================= */
 /*                          scene 2 · SUM EQUALS PRODUCT                     */
 /* ======================================================================= */
-const TL_K = 560, TL_X = 1080, TL_Y = 205;           /* pixels per unit; top-left of the tiled rectangle */
+const TL_K = 470, TL_X = 1160, TL_Y = 255;          /* pixels per unit; top-left of the tiled rectangle */
 SCENES.sum = S => {
   const u = S.u, a = paFade(S);
   if (a <= 0) return;
@@ -313,9 +314,9 @@ SCENES.sum = S => {
     const la3 = a * at(S, 3, 0.6) * (1 - L4);
     if (la3 > 0.003) {
       const x12 = TL_X + TL_K * (1 + 1 / 4), y12 = TL_Y + TL_K;
-      line(x12 + TL_K / 32, y12 + 30, 1520, 560, C.now, la3 * 0.8, 2);
-      txt('tile 12: ¼² × ⅓² ·  area 1/144', 1530, 570, { size: 24, fam: F.math, w: 700, c: C.now, a: la3 });
-      txt('每块瓷砖一个 n，每个 n 一块', 1530, 610, { size: 22, fam: F.zh, w: 700, c: C.white, a: la3 });
+      const xm = x12 + TL_K / 32, yb = TL_Y + TL_K * 9 / 8;
+      line(xm, y12 + TL_K / 9, xm, yb + 12, C.now, la3 * 0.9, 2);
+      txt('tile 12 = ¼² × ⅓² = 1/144 · 一个 n 一块', xm + 40, yb + 44, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.now, a: la3 });
     }
   }
   /* line 4: Lean, for every n and every prime */
@@ -374,7 +375,7 @@ SCENES.apart = S => {
     panel(220, 540, 1480, 270, la, C.lean, 'ANY FINITE SET S OF PRIMES, ANY k : S → ℤ · 任意有限个素数，任意整数系数');
     paRich([['Σ', C.white], ['ₚ∈S', C.white], [' k(p) ln p = 0  ', C.white], ['⟹', C.lean], ['  k(p) = 0 for every p ∈ S', C.white]], 250, 630, { size: 38, a: la });
     paRich([['12 ln 3 − 19 ln 2 = 0.013551 ≠ 0', C.cyan]], 250, 690, { size: 28, a: la * Q(S, 2, 'only when every', 0.6) });
-    txt('computed · 屏幕上的计算', 760, 690, { size: 20, fam: F.zh, w: 700, c: C.dim, a: la * Q(S, 2, 'only when every', 0.6) });
+    txt('computed · 屏幕上的计算', 800, 690, { size: 20, fam: F.zh, w: 700, c: C.dim, a: la * Q(S, 2, 'only when every', 0.6) });
     paLean(250, 760, PA_LEAN.prime_log_indep, la, { size: 18 });
   }
   /* line 3: the aphorism */
@@ -404,11 +405,11 @@ function ckTorus(sh, T, o = {}) {
   sh.bead(torusPt(T * L2, T * L3, 0.02), { color: C.now, r: 11 });
   if (o.target) sh.bead(torusPt(Math.PI, Math.PI, 0.02), { color: C.mag, r: 10, alpha: o.target });
 }
-const ckShot = (key, yaw) => solid(key, { x: CK_SHOT[0], y: CK_SHOT[1], w: CK_SHOT[2], h: CK_SHOT[3], yaw, pitch: 0.82, zoom: 1.55, radius: 0.3 });
+const ckShot = (key, yaw) => solid(key, { x: CK_SHOT[0], y: CK_SHOT[1], w: CK_SHOT[2], h: CK_SHOT[3], yaw, pitch: 0.82, zoom: 1.22, radius: 0.3 });
 SCENES.clocks = S => {
   const u = S.u, a = paFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [2, 'never closes', 'argued'], [3, 'checked by Lean', 'lean'], [4, null, 'argued']]);
+  badgeQ(S, [[0, null, 'computed'], [2, 'never closes', 'argued'], [3, 'Lean checks', 'lean'], [4, null, 'argued']]);
   const T = ckTime(S), tgt = Q(S, 4, 'six o', 0.6);
   const sa = a * clamp((u - lineAt(S, 1).s + 0.6) / 0.9);
   const sh = ckShot('torus', -2.1 + 0.035 * u);
@@ -421,7 +422,7 @@ SCENES.clocks = S => {
     txt('now · 此刻', cur.x + 16, cur.y - 16, { size: 22, fam: F.zh, w: 700, c: C.now, a: sa * (cur.hidden ? 0.35 : 1) * (1 - tgt) });
     if (tgt > 0.01) {
       const tp = sh.anchor(torusPt(Math.PI, Math.PI, 0.02));
-      txt('both at six · 都指六点', tp.x - 18, tp.y - 22, { size: 24, fam: F.zh, w: 700, align: 'right', c: C.mag, a: sa * tgt * (tp.hidden ? 0.4 : 1) });
+      txt('both at six · 都指六点', tp.x - 26, tp.y - 26, { size: 26, fam: F.zh, w: 700, align: 'right', c: C.mag, a: sa * tgt, ab: 1 });
     }
     txt('torus of readings · 读数环面', 160, 222, { size: 22, fam: F.zh, w: 700, c: C.dim, a: sa * (1 - tgt) });
   }
@@ -434,32 +435,37 @@ SCENES.clocks = S => {
   /* line 2: never closes (hand derivation from the independence of ln 2 and ln 3) */
   const na = a * Q(S, 2, 'never closes', 0.6) * (1 - at(S, 3, 0.5));
   if (na > 0.003) {
-    panel(1160, 520, 640, 170, na, C.argued, 'NO COMMON BEAT · 没有公共节拍');
-    txt('ln 3 / ln 2 = 1.58496… is irrational', 1184, 590, { size: 24, fam: F.mono, w: 700, c: C.white, a: na });
-    txt('the line never closes · 永不闭合（手工推导）', 1184, 640, { size: 22, fam: F.zh, w: 700, c: C.argued, a: na });
+    panel(1160, 560, 640, 170, na, C.argued, 'NO COMMON BEAT · 没有公共节拍');
+    txt('ln 3 / ln 2 = 1.58496… is irrational', 1184, 630, { size: 24, fam: F.mono, w: 700, c: C.white, a: na });
+    txt('the line never closes · 永不闭合（手工推导）', 1184, 680, { size: 22, fam: F.zh, w: 700, c: C.argued, a: na });
   }
   /* line 3: Kronecker, as Lean states it */
-  const ka = a * Q(S, 3, 'checked by Lean', 0.6) * (1 - at(S, 4, 0.5));
+  const ka = a * Q(S, 3, 'Lean checks', 0.6) * (1 - at(S, 4, 0.5));
   if (ka > 0.003) {
-    panel(1140, 500, 680, 320, ka, C.lean, 'KRONECKER · 克罗内克');
-    paRich([['if  Σ k', C.white], ['ⱼ', C.white], ['a', C.white], ['ⱼ', C.white], [' ∈ ℤ  ⟹  all k', C.white], ['ⱼ', C.white], [' = 0', C.white]], 1164, 578, { size: 28, a: ka });
-    paRich([['then every target z ∈ 𝕋ᴵ is a limit', C.white]], 1164, 626, { size: 26, a: ka });
-    paRich([['of (e', C.white], ['2πi aⱼ mₙ', C.white], [')ⱼ ,  mₙ ∈ ℕ', C.white]], 1164, 672, { size: 26, a: ka });
-    txt('任意目标都是按步取样读数的极限', 1164, 714, { size: 22, fam: F.zh, w: 700, c: C.white, a: ka });
-    paLean(1164, 776, PA_LEAN.dense_circle_sequence, ka, { size: 17 });
+    panel(1140, 530, 680, 300, ka, C.lean, 'KRONECKER · 克罗内克');
+    paRich([['if  Σ kⱼaⱼ ∈ ℤ  ⟹  all kⱼ = 0', C.white]], 1164, 600, { size: 28, a: ka });
+    paRich([['then every target z on the torus is a limit', C.white]], 1164, 646, { size: 26, a: ka });
+    paRich([['of  (exp(2πi aⱼ mₙ))ⱼ ,  mₙ ∈ ℕ', C.white]], 1164, 690, { size: 26, a: ka });
+    txt('任意目标都是按步取样读数的极限', 1164, 732, { size: 22, fam: F.zh, w: 700, c: C.white, a: ka });
+    paLean(1164, 796, PA_LEAN.dense_circle_sequence, ka, { size: 17 });
   }
   /* line 4: both at six — the record near misses (computed) */
   if (tgt > 0.003) {
     const ta = a * tgt;
-    panel(1140, 470, 680, 350, ta, C.cyan, 'CLOCK 2 AT SIX · CLOCK 3 MISSES BY');
+    panel(1140, 530, 680, 300, ta, C.cyan, 'CLOCK 2 AT SIX · CLOCK 3 MISSES BY');
     PA_MISS.forEach((r, i) => {
-      const y = 528 + i * 30, ra = ta * clamp((u - lineAt(S, 4).s - 0.25 * i) / 0.4), hot = Math.abs(r.t - T_END) < 1e-9;
-      txt(`t ≈ ${r.t.toFixed(2)}`, 1170, y, { size: 22, fam: F.mono, w: 700, c: hot ? C.now : C.white, a: ra });
-      txt(`${fmtDeg(r.m)}°`, 1500, y, { size: 22, fam: F.mono, w: 700, align: 'right', c: hot ? C.now : C.cyan, a: ra });
+      const y = 590 + i * 29, ra = ta * clamp((u - lineAt(S, 4).s - 0.25 * i) / 0.4), hot = Math.abs(r.t - T_END) < 1e-9;
+      txt(`t ≈ ${r.t.toFixed(2)}`, 1166, y, { size: 22, fam: F.mono, w: 700, c: hot ? C.now : C.white, a: ra });
+      txt(`${fmtDeg(r.m)}°`, 1470, y, { size: 22, fam: F.mono, w: 700, align: 'right', c: hot ? C.now : C.cyan, a: ra });
     });
-    txt('exactly both: never · 恰好同时：永不（手工推导）', 1540, 528, { size: 18, fam: F.zh, w: 700, c: C.argued, a: ta * Q(S, 4, 'Never', 0.5) });
-    txt('as close as you like · 要多近有多近', 1540, 562, { size: 18, fam: F.zh, w: 700, c: C.argued, a: ta * Q(S, 4, 'As close', 0.5) });
-    txt('computed · 计算', 1540, 596, { size: 18, fam: F.zh, w: 700, c: C.dim, a: ta });
+    const nv = ta * Q(S, 4, 'Never', 0.5), nc = ta * Q(S, 4, 'As close', 0.5);
+    txt('exactly both:', 1510, 590, { size: 20, fam: F.mono, w: 700, c: C.argued, a: nv });
+    txt('never · 永不', 1510, 620, { size: 20, fam: F.zh, w: 700, c: C.argued, a: nv });
+    txt('as close as', 1510, 664, { size: 20, fam: F.mono, w: 700, c: C.argued, a: nc });
+    txt('you like · 任意近', 1510, 694, { size: 20, fam: F.zh, w: 700, c: C.argued, a: nc });
+    txt('hand derivation', 1510, 738, { size: 18, fam: F.mono, w: 700, c: C.argued, a: nc });
+    txt('手工推导', 1510, 766, { size: 18, fam: F.zh, w: 700, c: C.argued, a: nc });
+    txt('table: computed · 表：计算', 1510, 806, { size: 16, fam: F.zh, w: 700, c: C.dim, a: ta });
   }
 };
 
@@ -502,7 +508,7 @@ SCENES.close = S => {
 FILM.poster = () => {
   const sc = TL.scenes[3], t = sc.end - 1.0;
   background(t, sc, 3, 6);
-  const sh = solid('poster', { x: 60, y: 140, w: 1000, h: 800, yaw: -2.0, pitch: 0.82, zoom: 1.6, radius: 0.3 });
+  const sh = solid('poster', { x: 60, y: 140, w: 1000, h: 800, yaw: -2.0, pitch: 0.82, zoom: 1.3, radius: 0.3 });
   sh.begin();
   ckTorus(sh, T_END, { width: 2.8 });
   sh.end(1);
