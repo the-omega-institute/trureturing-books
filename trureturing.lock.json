@@ -5178,6 +5178,30 @@
       "line": 464,
       "signature": "theorem sharp_first_harmonic_even_block (N : ℕ) (hN : 0 < N) : let bound"
     },
+    "D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_asymptotic_lower": {
+      "module": "D5/S3/Fourier/Concentration/FejerCollisionVariance",
+      "name": "D5.S3.Fourier.Concentration.FejerCollisionVariance.fejer_collision_asymptotic_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:ece5e43e058ab9505e09e262de867fa48b09e4b41d311ab1b38b7821aeb01e75",
+      "line": 156,
+      "signature": "theorem fejer_collision_asymptotic_lower {J : Type*} [Fintype J] [DecidableEq J] (g w : J → ℝ) (hw : ∀ j, 0 ≤ w j) (a V : ℝ) (hV : 0 < V) {η : ℝ} (hη : 0 < η) (hm : ∑ j, w j*(g j-a)^2 ≤ V*∑ j,w j) (ε : ℝ) (hε : 0 < ε) : let scaleReadout"
+    },
+    "D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_comparison": {
+      "module": "D5/S3/Fourier/Concentration/FejerCollisionVariance",
+      "name": "D5.S3.Fourier.Concentration.FejerCollisionVariance.fejer_collision_comparison",
+      "kind": "theorem",
+      "statement_id": "sha256:ece5e43e058ab9505e09e262de867fa48b09e4b41d311ab1b38b7821aeb01e75",
+      "line": 87,
+      "signature": "theorem fejer_collision_comparison {J : Type*} [Fintype J] [DecidableEq J] (g w : J → ℝ) (p : ℕ) {η : ℝ} (hη : 0 < η) : let kernel"
+    },
+    "D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_variance_lower": {
+      "module": "D5/S3/Fourier/Concentration/FejerCollisionVariance",
+      "name": "D5.S3.Fourier.Concentration.FejerCollisionVariance.fejer_collision_variance_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:ece5e43e058ab9505e09e262de867fa48b09e4b41d311ab1b38b7821aeb01e75",
+      "line": 115,
+      "signature": "theorem fejer_collision_variance_lower {J : Type*} [Fintype J] [DecidableEq J] (g w : J → ℝ) (hw : ∀ j, 0 ≤ w j) (a V : ℝ) (p : ℕ) {η : ℝ} (hη : 0 < η) {A : ℝ} (hA : 0 ≤ A) (hm : ∑ j, w j*(g j-a)^2 ≤ V*∑ j,w j) : let kernel"
+    },
     "D5/S3/Fourier/Concentration/FiniteCollisionVariance.tailCollisionMass_lower_variance": {
       "module": "D5/S3/Fourier/Concentration/FiniteCollisionVariance",
       "name": "D5.S3.Fourier.Concentration.FiniteCollisionVariance.tailCollisionMass_lower_variance",

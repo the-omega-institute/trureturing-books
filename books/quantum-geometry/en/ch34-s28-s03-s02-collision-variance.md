@@ -154,3 +154,46 @@ $$
 $$
 
 This asymptotic lower bound retains the hypotheses of the finite Fourier integral. Other phase peaks can contribute to the actual collision mass, for instance when the given lattice spacing is smaller than the maximal spacing. Upper bounds for general real spectra and actual zeta ordinates still need control of these contributions and of the noncentral remainder. The approach follows the [retained contribution and controlled remainder method](https://github.com/the-omega-institute/riemann-hypothesis/blob/c7d25b3bfd7906388bb8eb0774e027a2b756a7b6/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55), with the whole-line absolute error as the remainder here.
+
+## Positive Fejér kernel bounds for real frequencies
+
+Fix a positive resolution $\eta>0$ and use the angular Fejér kernel and its triangular Fourier transform
+
+$$
+K_\eta(t)=\frac{\eta}{2\pi}\operatorname{sinc}^2\!\left(\frac{\eta t}{2}\right),
+\qquad \phi_\eta(d)=\max(0,1-|d|/\eta).
+$$
+
+The kernel $K_\eta$ is nonnegative, integrable and has whole-line integral $1$, with $\int_{\mathbb R}K_\eta(t)e^{-idt}\,dt=\phi_\eta(d)$. Expand $|S(t)|^{2p}$ into its finite degree-sum pairs and integrate each cosine to obtain the exact identity
+
+$$
+\int_{\mathbb R} K_\eta(t)|S(t)|^{2p}\,dt
+=\sum_{m,n}c_mc_n\phi_\eta(G_m-G_n).
+$$
+
+The identity holds for arbitrary real weights. If $w_j\ge0$, then all $c_mc_n\ge0$ and $\phi_\eta(d)\le\mathbf 1_{|d|\le\eta}$, so the right side is bounded by $E_p(\eta)$. The triangular weight is zero on the closed band boundary $|d|=\eta$. [Positive-kernel collision comparison](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_comparison)
+
+Assume also $\sum_jw_j(g_j-a)^2\le VW$, where $a,V$ are real. By the pointwise variance bound and positivity of the kernel, for every $A\ge0$,
+
+$$
+W^{2p}\int_{-A}^{A}K_\eta(t)\max(0,1-Vt^2/2)^{2p}\,dt
+\le E_p(\eta).
+$$
+
+This estimate applies to arbitrary finite real frequency families. [Finite-window bound](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_variance_lower)
+
+Fix $V,\eta>0$ and let $p\to\infty$. Given $\varepsilon>0$, put $c=\eta/(2\pi)-\varepsilon/(2\sqrt\pi)$. Since $K_\eta(0)=\eta/(2\pi)$ and the kernel is continuous, choose a fixed $A>0$ with $K_\eta(t)\ge c$ for $|t|\le A$. The preceding Gaussian limit gives
+
+$$
+c\sqrt{pV}\int_{-A}^{A}\max(0,1-Vt^2/2)^{2p}\,dt
+\longrightarrow \frac{\eta}{2\sqrt\pi}-\frac{\varepsilon}{2}.
+$$
+
+Consequently, for every $\varepsilon>0$ and all sufficiently large degrees $p$,
+
+$$
+\left(\frac{\eta}{2\sqrt{\pi}}-\varepsilon\right) W^{2p}
+\le\sqrt{pV}\,E_p(\eta).
+$$
+
+When $W>0$, this means $\liminf_{p\to\infty}E_p(\eta)\sqrt{pV}/(W^{2p}\eta)\ge1/(2\sqrt\pi)$. The coefficient exceeds the parabolic lower coefficient $3/(5\sqrt5)$ for arbitrary finite weighted data because the degree sums have convolution structure. A fixed finite tail of actual zeta ordinates is admissible as the input frequency family. Uniform asymptotic estimates when height, frequency family and resolution vary together, and upper bounds for high-order collisions, require further work. [Asymptotic lower bound](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_asymptotic_lower)
