@@ -17,7 +17,7 @@
       ["So a sum of two squares is a grid point's squared distance from the origin.", "所以，两平方和就是格点到原点距离的平方。"]
     ], "cues": [{"line": 3, "at": 0.8, "kind": "stamp"}]},
     {"id": "turn", "name": "TURN AND STRETCH", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.6, 0.2, 0.3], "lines": [
-      ["Multiplying grid numbers is like turning a dial twice: the angles add, and the lengths multiply.", "方格里的数相乘，像把转盘连拧两下：角度相加，长度相乘。"],
+      ["Multiplying grid numbers is like turning a dial twice: angles add, lengths multiply.", "方格里的数相乘，像把转盘连拧两下：角度相加，长度相乘。"],
       ["Two plus i, times three plus two i, is four plus seven i.", "(2 + i)(3 + 2i) = 4 + 7i。"],
       ["So five times thirteen, sixty-five, is four squared plus seven squared.", "所以 5 × 13 = 65 = 4² + 7²。"],
       ["Swap one factor for its mirror, and a second way appears: one squared plus eight squared.", "把一个因子换成它的镜像，又冒出第二种拆法：1² + 8²。"]
@@ -29,7 +29,7 @@
       ["The book calls the first kind face primes, and the second kind line primes.", "本书把前一种叫面素数，后一种叫线素数。"]
     ], "cues": [{"line": 2, "at": 2.2, "kind": "glitch"}]},
     {"id": "ledger", "name": "THE FACTOR LEDGER", "lead": 0.5, "tail": 0.7, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
-      ["Now the full answer. Factor the number, and look only at primes with remainder three.", "现在给出完整答案：把数分解成素因子，只看除以 4 余 3 的那些。"],
+      ["The full answer: factor the number, and look only at primes with remainder three.", "完整的答案：把数分解成素因子，只看除以 4 余 3 的那些。"],
       ["Lean checks: the number is two squares exactly when each of those primes appears an even number of times.", "Lean 内核检验：一个数是两平方和，当且仅当每个这样的素数都出现偶数次。"],
       ["Line primes are like socks: they count only in pairs. Three times three is nine, three squared plus zero.", "线素数像袜子，只能成双：3 × 3 = 9 = 3² + 0²。"],
       ["Twenty twenty-five holds four threes, an even count: twenty-seven squared plus thirty-six squared.", "2025 含四个 3，偶数个：2025 = 27² + 36²。"],

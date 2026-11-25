@@ -272,7 +272,7 @@ SCENES.turn = S => {
   txt('2 + i', pA[0] + 12, pA[1] + 26, { size: 26, fam: F.math, w: 700, c: C.white, a: da });
   arrow(TU_O[0], TU_O[1], pB[0], pB[1], C.white, da, 4);
   txt('3 + 2i', pB[0] + 14, pB[1] + 6, { size: 26, fam: F.math, w: 700, c: C.white, a: da });
-  const sa = Q(S, 0, 'the angles add', 1.0);
+  const sa = Q(S, 0, 'angles add', 1.0);
   isArc(TU_O, 95, 0, aA, C.white, a * sa, 4);
   isArc(TU_O, 95, aA, aA + aB * ease(sa), C.argued, a * sa, 4);
   if (da > 0.003) txt('like a dial · 像转盘', TU_O[0] + 6.3 * TU_U, TU_O[1] - 7.6 * TU_U, { size: 22, fam: F.zh, w: 700, c: C.argued, a: da });
@@ -289,7 +289,7 @@ SCENES.turn = S => {
   }
   /* the readout */
   panel(1020, 180, 800, 640, a, C.cyan, 'TURN AND STRETCH · 转动与伸缩');
-  isRich([['angles · 角度   26.6° + 33.7° = 60.3°', C.white]], 1046, 250, { size: 26, a: a * Q(S, 0, 'the angles add', 0.5), fam: F.zh });
+  isRich([['angles · 角度   26.6° + 33.7° = 60.3°', C.white]], 1046, 250, { size: 26, a: a * Q(S, 0, 'angles add', 0.5), fam: F.zh });
   isRich([['lengths² · 长度²   5 × 13 = 65', C.white]], 1046, 300, { size: 26, a: a * Q(S, 0, 'lengths multiply', 0.5), fam: F.zh });
   isRich([['(2 + i)(3 + 2i) = 6 + 4i + 3i − 2 = ', C.white], ['4 + 7i', C.now]], 1046, 380, { size: 28, a: a * at(S, 1, 0.5) });
   isRich([['65 = ', C.white], ['4² + 7²', C.cyan], [' = 16 + 49', C.white]], 1046, 440, { size: 30, a: a * at(S, 2, 0.5) });
