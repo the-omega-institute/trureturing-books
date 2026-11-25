@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "55f73b2de1aeb4a4ee55b3d016a101eb844ab39b",
-  "pinned_at": "2026-11-25T20:25:22Z",
+  "commit": "b89e5b90b12773b9c877030cfe98d14edf4ae364",
+  "pinned_at": "2026-11-25T21:46:17Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1006,8 +1006,8 @@
       "module": "D5/S3/Analytic/Laplace/CriticalGammaWindow",
       "name": "D5.S3.Analytic.Laplace.CriticalGammaWindow.critical_window_off_mass",
       "kind": "theorem",
-      "statement_id": "sha256:3aca4d2d49ddbc251c898b18c5fb35e224adc6cac779d2c83b3a08ebe63d1933",
-      "line": 113,
+      "statement_id": "sha256:2f5a10953902fab9ca33b0aab23e65a8f9ab83cebaa6eba8879ecdbd10dad122",
+      "line": 114,
       "signature": "theorem critical_window_off_mass {a : ℝ} (ha : 1 ≤ a) {g : ℝ → ℝ} (hg : Measurable g) {M : ℝ} (hM : ∀ u, 0 ≤ u → |g u| ≤ M * exp (2*u)) : let k"
     },
     "D5/S3/Analytic/OriginalHalfBinomialIntegral.b_le_one": {
@@ -1398,16 +1398,16 @@
       "module": "D5/S3/CharacterSums/DirichletRampEndpoint",
       "name": "D5.S3.CharacterSums.DirichletRampEndpoint.logDerivative_le_ramp_tail",
       "kind": "theorem",
-      "statement_id": "sha256:25cf2650c7f85f115e9bcb6cc260da7421ab37a09dc9a2de9bc5152325318ece",
-      "line": 108,
+      "statement_id": "sha256:5a1bd6c571b20b2f380b9975226b45be961ce4712f952776e7082554d2e52c97",
+      "line": 109,
       "signature": "theorem logDerivative_le_ramp_tail {N : ℕ} [NeZero N] (χ : DirichletCharacter ℂ N) (hχ : χ ≠ 1) {x : ℝ} (hx : 0 < x) : ‖deriv χ.LFunction 1 / χ.LFunction 1‖ ≤ ‖gChi χ x‖ / x + log x - 1 - eulerMascheroniConstant - ∫ u in Set.Ioi x, (Chebyshev.psi u - u) / u ^ 2"
     },
     "D5/S3/CharacterSums/DirichletRampEndpoint.uniform_logDerivative_of_ramp": {
       "module": "D5/S3/CharacterSums/DirichletRampEndpoint",
       "name": "D5.S3.CharacterSums.DirichletRampEndpoint.uniform_logDerivative_of_ramp",
       "kind": "theorem",
-      "statement_id": "sha256:25cf2650c7f85f115e9bcb6cc260da7421ab37a09dc9a2de9bc5152325318ece",
-      "line": 142,
+      "statement_id": "sha256:5a1bd6c571b20b2f380b9975226b45be961ce4712f952776e7082554d2e52c97",
+      "line": 144,
       "signature": "theorem uniform_logDerivative_of_ramp {ε η : ℝ} (hε : ε < 1 / 2) (hη : 0 < η) : ∃ X ≥ (2 : ℝ), ∀ x ≥ X, ∀ {N : ℕ} [NeZero N] (χ : DirichletCharacter ℂ N), χ ≠ 1 → ‖gChi χ x‖ ≤ x ^ (1 / 2 + ε) → ‖deriv χ.LFunction 1 / χ.LFunction 1‖ ≤ log x - 1 - eulerMascheroniConstant + η"
     },
     "D5/S3/CharacterSums/DirichletRampWindow.concave_window_iff": {
@@ -5308,7 +5308,7 @@
       "module": "D5/S3/Fourier/Concentration/FejerCollisionVariance",
       "name": "D5.S3.Fourier.Concentration.FejerCollisionVariance.fejer_collision_asymptotic_lower",
       "kind": "theorem",
-      "statement_id": "sha256:ece5e43e058ab9505e09e262de867fa48b09e4b41d311ab1b38b7821aeb01e75",
+      "statement_id": "sha256:eb21fb2cb3320526e8a6d507a847c0234819ecb057002d88b2ededf68a62e509",
       "line": 156,
       "signature": "theorem fejer_collision_asymptotic_lower {J : Type*} [Fintype J] [DecidableEq J] (g w : J → ℝ) (hw : ∀ j, 0 ≤ w j) (a V : ℝ) (hV : 0 < V) {η : ℝ} (hη : 0 < η) (hm : ∑ j, w j*(g j-a)^2 ≤ V*∑ j,w j) (ε : ℝ) (hε : 0 < ε) : let scaleReadout"
     },
@@ -5316,7 +5316,7 @@
       "module": "D5/S3/Fourier/Concentration/FejerCollisionVariance",
       "name": "D5.S3.Fourier.Concentration.FejerCollisionVariance.fejer_collision_comparison",
       "kind": "theorem",
-      "statement_id": "sha256:ece5e43e058ab9505e09e262de867fa48b09e4b41d311ab1b38b7821aeb01e75",
+      "statement_id": "sha256:eb21fb2cb3320526e8a6d507a847c0234819ecb057002d88b2ededf68a62e509",
       "line": 87,
       "signature": "theorem fejer_collision_comparison {J : Type*} [Fintype J] [DecidableEq J] (g w : J → ℝ) (p : ℕ) {η : ℝ} (hη : 0 < η) : let kernel"
     },
@@ -5324,9 +5324,22 @@
       "module": "D5/S3/Fourier/Concentration/FejerCollisionVariance",
       "name": "D5.S3.Fourier.Concentration.FejerCollisionVariance.fejer_collision_variance_lower",
       "kind": "theorem",
-      "statement_id": "sha256:ece5e43e058ab9505e09e262de867fa48b09e4b41d311ab1b38b7821aeb01e75",
+      "statement_id": "sha256:eb21fb2cb3320526e8a6d507a847c0234819ecb057002d88b2ededf68a62e509",
       "line": 115,
       "signature": "theorem fejer_collision_variance_lower {J : Type*} [Fintype J] [DecidableEq J] (g w : J → ℝ) (hw : ∀ j, 0 ≤ w j) (a V : ℝ) (p : ℕ) {η : ℝ} (hη : 0 < η) {A : ℝ} (hA : 0 ≤ A) (hm : ∑ j, w j*(g j-a)^2 ≤ V*∑ j,w j) : let kernel"
+    },
+    "D5/S3/Fourier/Concentration/FejerRelativeLocalization.relative_fejer_truncation": {
+      "module": "D5/S3/Fourier/Concentration/FejerRelativeLocalization",
+      "name": "D5.S3.Fourier.Concentration.FejerRelativeLocalization.relative_fejer_truncation",
+      "kind": "theorem",
+      "statement_id": "sha256:302e6dd8eeeb5969d6186d9900baa385d29f81b2a85596134b1675da93bb8ef7",
+      "line": 49,
+      "signature": "theorem relative_fejer_truncation {J : Type*} [Fintype J] (g w : J → ℝ) (hw : ∀ j, 0 ≤ w j) (p : ℕ) {η R : ℝ} (hη : 0 < η) (hR : 1 ≤ η*R) : let kernel",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Fourier/Concentration/FiniteCollisionVariance.tailCollisionMass_lower_variance": {
       "module": "D5/S3/Fourier/Concentration/FiniteCollisionVariance",
@@ -12622,8 +12635,8 @@
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtHalfPlane",
       "name": "D5.S3.Weil.Mertens.IntegratedExplicit.CompleteMangoldtHalfPlane.u_laplace_half_plane",
       "kind": "theorem",
-      "statement_id": "sha256:89777e68bcbdbd2dd37f06a246626203bcb816b5d79ed13f72ed187ad89c7cc8",
-      "line": 247,
+      "statement_id": "sha256:0d7a74c71e1406421b5cd6da339f8ee479e060b5419f26b099b980606fcd9534",
+      "line": 250,
       "signature": "theorem u_laplace_half_plane {s : ℂ} (hs : 1 < s.re) : IntegrableOn (fun y : ℝ => Complex.exp (-s * y) * (U (Real.exp y) : ℂ)) (Ioi 0) ∧ (∫ y : ℝ in Ioi 0, Complex.exp (-s * y) * (U (Real.exp y) : ℂ)) = (-deriv riemannZeta s / riemannZeta s) / (s * (s - 1)) - 1 / (s - 1) ^ 2 + ((1 + Real.eulerMascheroniConstant : ℝ) : ℂ) / (s - 1)"
     },
     "D5/S3/Weil/Mertens/IntegratedExplicit/CompleteMangoldtLaplace.U_eq_complete_ramps": {
