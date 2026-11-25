@@ -216,9 +216,9 @@ SCENES.hook = S => {
   const qa = a * Q(S, 1, 'computers get warm', 0.6);
   if (qa > 0.003) {
     panel(1060, 470, 700, 300, qa, C.argued, 'A PICTURE · 示意');
-    box(1180, 560, 200, 140, C.white, qa * 0.8, 2);
-    for (let k = 0; k < 6; k++) { line(1190 + k * 36, 560, 1190 + k * 36, 540, C.white, qa * 0.6, 3); line(1190 + k * 36, 700, 1190 + k * 36, 720, C.white, qa * 0.6, 3); }
-    for (let k = 0; k < 3; k++) curve(s => [1230 + k * 50 + 10 * Math.sin(s * 9 + S.t * 4), 530 - s * 60], 30, C.now, qa * 0.7 * (0.5 + 0.5 * Math.sin(S.t * 3 + k)), 2.5);
+    box(1180, 600, 200, 120, C.white, qa * 0.8, 2);
+    for (let k = 0; k < 6; k++) { line(1190 + k * 36, 600, 1190 + k * 36, 584, C.white, qa * 0.6, 3); line(1190 + k * 36, 720, 1190 + k * 36, 736, C.white, qa * 0.6, 3); }
+    for (let k = 0; k < 3; k++) curve(s => [1230 + k * 50 + 10 * Math.sin(s * 9 + S.t * 4), 570 - s * 60], 30, C.now, qa * 0.7 * (0.5 + 0.5 * Math.sin(S.t * 3 + k)), 2.5);
     const va = a * Q(S, 1, 'where would it go', 0.5);
     txt('?', 1570, 680, { size: 150, fam: F.orb, w: 900, align: 'center', c: C.mag, a: va, ab: 3 });
     txt('forgotten bit · 忘掉的比特', 1570, 740, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.mag, a: va });
@@ -274,7 +274,7 @@ SCENES.hand = S => {
   if (sp >= 1) { cells[0][1] = { s: '0', col: C.dim }; cells[1][0] = { s: '0', col: C.dim }; }
   llMat(260, 260, 190, cells, a, { size: 44 });
   llShred(260 + 190, 260, 190, sp, a); llShred(260, 260 + 190, 190, sp, a);
-  txt(sp < 0.5 ? '|+⟩⟨+|' : 'I/2', 450, 700, { size: 38, fam: F.math, w: 700, align: 'center', c: C.now, a });
+  txt(sp < 0.5 ? '|+⟩⟨+|' : 'I/2', 450, 760, { size: 38, fam: F.math, w: 700, align: 'center', c: C.now, a });
   /* entropy bar */
   const S1 = LL_LN2 * ease(sp);
   llEntropyBar(870, 260, 90, 380, S1, a);
@@ -309,7 +309,7 @@ SCENES.steps = S => {
   if (k < 0) { cells = llCells2(1, 0, 0, { fmt: v => llNum(v, 0) }); cells[0][1].s = cells[1][0].s = '0'; lab = 'ρ(0) = |0⟩⟨0|'; }
   else {
     const st = LL_STEPS[k], turn = ease(clamp(f / 0.45)), pin = ph >= 3 ? 1 : ease(clamp((f - 0.55) / 0.35));
-    const a0 = k ? LL_STEPS[k - 1].a : 1, aa = lerp(a0, st.a, turn), bb = st.b * turn;
+    const ang = LL_TH * turn, aa = (1 + st.z0 * Math.cos(ang)) / 2, bb = st.z0 * Math.sin(ang) / 2;   // the state turned by ang
     cells = llCells2(aa, bb, 1 - pin, { fmt: v => llNum(v, 3) });
     if (pin >= 1) { cells[0][1] = { s: '0', col: C.dim }; cells[1][0] = { s: '0', col: C.dim }; cells[0][0].s = LL_FRAC[k]; cells[1][1].s = ['1/4', '3/8', '7/16'][k]; }
     llShred(230 + 170, 270, 170, pin, a); llShred(230, 270 + 170, 170, pin, a);
@@ -321,19 +321,22 @@ SCENES.steps = S => {
   const X = 760, Y = 230, Hh = 460, Wd = 130, sc = Hh / LL_LN2;
   box(X, Y, Wd, Hh, C.white, a * 0.4, 1.2);
   ctx.save(); ctx.setLineDash([8, 6]); line(X - 14, Y, X + Wd + 14, Y, C.white, a * 0.7, 1.5); ctx.restore();
-  txt('ln 2', X + Wd + 20, Y + 8, { size: 22, fam: F.mono, w: 700, c: C.white, a: a * 0.8 });
+  txt('ln 2', X - 20, Y + 8, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.white, a: a * 0.8 });
   txt('S', X + Wd / 2, Y + Hh + 40, { size: 28, fam: F.math, w: 700, align: 'center', c: C.white, a });
-  let base = Y + Hh;
+  let base = Y + Hh, tot = 0;
   LL_STEPS.forEach((st, i) => {
     const g = i < k ? 1 : i === k ? (ph >= 3 ? 1 : ease(clamp((f - 0.55) / 0.35))) : 0;
     if (g <= 0) return;
-    const h = st.D * sc * g;
-    fillBox(X, base - h, Wd, h, i === k && ph < 3 ? C.now : C.mag, a * 0.5);
-    box(X, base - h, Wd, h, C.mag, a, 1.5);
-    const ty = base - h / 2 + 9;
-    txt(`D${'₁₂₃'[i]} = ${st.D.toFixed(4)}`, X + Wd + 22, i === 2 ? ty - 26 : i === 1 ? ty - 6 : ty, { size: 24, fam: F.mono, w: 700, c: i === k && ph < 3 ? C.now : C.mag, a: a * g });
-    base -= h;
+    const h = st.D * sc * g, cur = i === k && ph < 3;
+    fillBox(X, base - h, Wd, h, cur ? C.now : C.mag, a * (cur ? 0.55 : [0.5, 0.3, 0.5][i]));
+    box(X, base - h, Wd, h, C.mag, a, 2);
+    /* labels at fixed heights, with a leader to the block */
+    const ly = [560, 400, 330][i], by = base - h / 2;
+    line(X + Wd + 4, by, X + Wd + 30, ly - 8, cur ? C.now : C.mag, a * g * 0.7, 1.2);
+    txt(`D${'₁₂₃'[i]} = ${st.D.toFixed(4)}`, X + Wd + 36, ly, { size: 24, fam: F.mono, w: 700, c: cur ? C.now : C.mag, a: a * g });
+    base -= h; if (g >= 1) tot += st.D;   // totals only at whole steps: the growing block is an animation
   });
+  if (k >= 0) txt(`S = ${tot.toFixed(4)}`, X + Wd + 36, Y + 40, { size: 24, fam: F.mono, w: 700, c: C.white, a: a * (ph >= 3 ? 1 : 0.85) });
   /* the theorem */
   const la = a * Q(S, 3, 'Lean checks', 0.6);
   panel(1150, 220, 680, 560, Math.max(la, a * at(S, 1, 0.5) * 0.999), la > 0.01 ? C.lean : C.cyan, la > 0.01 ? 'ANY FINITE SIZE, ANY UNITARY U · 任意有限维' : 'THE STEPS · 每一步');
@@ -352,9 +355,9 @@ SCENES.steps = S => {
     llRich([['S(ρ(N)) − S(ρ(0))', C.white]], 1178, 450, { size: 28, a: sa });
     llRich([['  = Σ', C.mag], ['k<N', C.mag, 0.8], [' D(ρ_U(k) ‖ Π ρ_U(k))', C.mag]], 1178, 500, { size: 28, a: sa });
     txt('each step: rotate by U, then pinch · 每步先转 U 再捏合', 1178, 570, { size: 20, fam: F.zh, w: 700, c: C.white, a: la });
-    llLean(1178, 650, LL_LEAN.entropy_production_coherence_deletion_identity, la, { size: 13 });
+    llLean(1178, 650, LL_LEAN.entropy_production_coherence_deletion_identity, la, { size: 15 });
   }
-  stamp('ΔS = D', 420, 230, Q(S, 3, 'Lean checks', 0.5, 0.6) * (1 - at(S, 3, 0.5, 4.4)), C.lean, 34, -0.06);
+  stamp('ΔS = D', 400, 770, Q(S, 3, 'Lean checks', 0.5, 0.6) * (1 - at(S, 3, 0.5, 4.4)), C.lean, 34, -0.06);
 };
 
 /* ======================================================================= */
@@ -394,7 +397,7 @@ SCENES.bill = S => {
     fillBox(bx, by + bh - b.dS * sc, bw, b.dS * sc, C.cyan, ba * 0.5); box(bx, by + bh - b.dS * sc, bw, b.dS * sc, C.cyan, ba, 1.5);
     fillBox(bx, by + bh - b.bQ * sc, bw, b.D * sc, C.mag, ba * 0.35); box(bx, by + bh - b.bQ * sc, bw, b.D * sc, C.mag, ba, 1.5);
     ctx.save(); ctx.setLineDash([8, 6]); line(bx - 20, by + bh - b.dS * sc, bx + bw + 20, by + bh - b.dS * sc, C.white, ba, 2); ctx.restore();
-    txt('floor −ΔS', bx + bw + 26, by + bh - b.dS * sc + 8, { size: 20, fam: F.mono, w: 700, c: C.white, a: ba });
+    txt('floor', bx + bw + 26, by + bh - b.dS * sc + 8, { size: 20, fam: F.mono, w: 700, c: C.white, a: ba });
     txt('D', bx + bw / 2, by + bh - b.dS * sc - b.D * sc / 2 + 10, { size: 28, fam: F.math, w: 700, align: 'center', c: C.mag, a: ba });
     txt('βQ', bx + bw / 2, by + bh - b.bQ * sc - 14, { size: 26, fam: F.math, w: 700, align: 'center', c: C.now, a: ba });
     line(bx - 20, by + bh, bx + bw + 20, by + bh, C.white, ba * 0.6, 1.5);
@@ -450,17 +453,18 @@ SCENES.copy = S => {
     txt('local · 局部', 315, y + 280, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.dim, a: ra });
     /* the copy arrow and the joint table */
     const ja = ra * cp;
-    arrow(470, y + 125, 620, y + 125, C.now, ra * Math.max(ca, 0.3), 3);
+    if (ba > 0.05) arrow(620, y + 125, 470, y + 125, C.now, ra, 3);
+    else arrow(470, y + 125, 620, y + 125, C.now, ra * Math.max(ca, 0.3), 3);
     txt(ba > 0.05 ? 'copy⁻¹' : 'copy', 545, y + 108, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.now, a: ra * Math.max(ca, 0.3) });
     if (ja > 0.003) {
-      cpJoint(660, y - 5, 66, s, ja, Q(S, 2, 'filed in the corners', 0.6));
-      txt('joint · 联合（比特 + 记录）', 792, y + 290, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.dim, a: ja });
+      cpJoint(672, y + 5, 60, s, ja, Q(S, 2, 'filed in the corners', 0.6));
+      txt('joint · 联合（比特 + 记录）', 792, y + 278, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.dim, a: ja });
     }
     txt(ba > 0.5 ? `${nm} |0⟩ again · 回来了` : '', 792, y + 140, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.now, a: ra * at(S, 3, 0.6, 3.2) * (1 - cp) });
   });
   /* the local tables coincide */
   const ea = a * Q(S, 1, 'their local tables are identical', 0.6) * cp;
-  if (ea > 0.003) { chip(315, 495, 180, 44, '=', C.cyan, ea, 30); }
+  if (ea > 0.003) { chip(120, 495, 70, 70, '=', C.cyan, ea, 44); }
   /* right column: theorem */
   const la = a * Q(S, 3, 'Lean checks', 0.6);
   panel(1040, 210, 790, 330, Math.max(la, a * Q(S, 2, 'filed in the corners', 0.6)), la > 0.01 ? C.lean : C.mag, la > 0.01 ? 'SAME DIAGONAL, DIFFERENT NOTES · 对角相同、批注不同' : 'FILED · 归档');
@@ -471,12 +475,12 @@ SCENES.copy = S => {
     txt('a filing cabinet is an analogy · 档案柜只是比方', 1066, 400, { size: 18, fam: F.zh, w: 700, c: C.argued, a: fa });
   }
   if (la > 0.003) {
-    llRich([['Tr', C.white], ['E', C.white, 0.8], [' R(ρ) = Tr', C.white], ['E', C.white, 0.8], [' R(σ),   R(ρ) ≠ R(σ)', C.white]], 1066, 290, { size: 26, a: la });
+    llRich([['Tr_E R(ρ) = Tr_E R(σ),   R(ρ) ≠ R(σ)', C.white]], 1066, 290, { size: 26, a: la });
     txt('no map from the local table rebuilds both', 1066, 345, { size: 22, fam: F.mono, w: 700, c: C.lean, a: la });
     txt('没有只读局部表格的映射能同时还原两者', 1066, 380, { size: 21, fam: F.zh, w: 700, c: C.white, a: la });
     const ua = a * Q(S, 3, 'Yet running', 0.6);
     txt('the inverse copy restores both · 逆拷贝把两者都还原', 1066, 430, { size: 21, fam: F.zh, w: 700, c: C.lean, a: ua });
-    llLean(1066, 500, LL_LEAN.reduced_irreversibility_is_canonical_record_access_defect, la, { size: 11 });
+    llLean(1066, 500, LL_LEAN.reduced_irreversibility_is_canonical_record_access_defect, la, { size: 14 });
   }
   /* line 4: the maxim and the heat line (argued) */
   const ma = a * at(S, 4, 0.6);
