@@ -229,3 +229,37 @@ E_n(\eta_n)\ge
 $$
 
 最终成立。这里允许底层频率族的大小增长。若不控制分辨率与方差的相对尺度，例如单个单位权重频率、$V_n=1/n^2$、固定 $\eta_n>0$，归一化碰撞比可能趋于零。实际 ζ 零点的高阶加权碰撞上界仍未解决。
+
+
+## 从三角加权矩精确恢复闭碰撞带
+
+一般有限数据 $(x_i,c_i)$ 的带半径为 $r$ 时，记 $d_{ij}=|x_i-x_j|$，并定义
+
+$$
+L(r)=\sum_{i,j}c_ic_j\max(0,r-d_{ij}).
+$$
+
+若每对权重满足 $c_ic_j\ge0$ 且 $\delta>0$，对任意实数 $r$ 有
+
+$$
+L(r)-L(r-\delta)\le \delta E(r)
+\le L(r+\delta)-L(r).
+$$
+
+这是逐对比较。对于 $d_{ij}\le r$，正部函数的右增量恰为 $\delta$，左增量至多为 $\delta$。对于 $d_{ij}>r$，左增量为零，右增量非负。然后以非负的配对权重求和。 [有限差分夹界](https://github.com/the-omega-institute/trureturing/blob/77a1dc3fb4e2662f8d4ab41550a3ef195f11d9d1/D5/S3/Fourier/Concentration/FejerCollisionSecants.lean#L49)
+
+任意实权重下，只要 $\delta>0$ 且不存在严格介于 $r$ 与 $r+\delta$ 之间的配对距离，右侧增量就是精确的。这样的正区间总是存在。取 $\delta_0$ 为集合 $\{1\}\cup\{d_{ij}-r:d_{ij}>r\}$ 的最小值；有限性保证 $\delta_0>0$。对任意 $0<\delta\le\delta_0$，
+
+$$
+L(r+\delta)-L(r)=\delta E(r).
+$$
+
+外带不存在严格位于 $r$ 与 $r+\delta$ 之间的距离，逐对增量或为 $\delta$ 或为零。该恒等式允许任意实权重，并保留距离恰等于 $r$ 的全部闭带贡献。 [精确右增量的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/77a1dc3fb4e2662f8d4ab41550a3ef195f11d9d1/D5/S3/Fourier/Concentration/FejerCollisionSecants.lean#L77)
+
+当数据为次数 $p$ 的频率和及多项式权重时，对正半径 $r$，由三角形核恒等式可写
+
+$$
+L(r)=r\int_{\mathbb R}K_r(t)|S(t)|^{2p}\,dt.
+$$
+
+若 $0<\delta<r$，有限差分夹界可以直接用三个不同正半径的带核积分表示。精确右增量则说明，即使在边界上有碰撞质量，也可以由足够小的正向差分恢复闭带计数。要获得实际 ζ 尾段的高阶碰撞上下界，仍须控制这些带核积分在相邻半径上的渐近主项和余项。
