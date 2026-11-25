@@ -272,7 +272,7 @@ SCENES.hook = S => {
     txt('one comparison, nothing else · 只此一条比较', 1520, 610, { size: 18, fam: F.zh, w: 700, align: 'center', c: C.argued, a: ma });
   }
   /* line 3: free? */
-  const fa = a * Q(S, 3, 'is free', 0.5);
+  const fa = a * at(S, 3, 0.5, 0.5);
   stamp('FREE?', 1430, 760, fa, C.now, 60, -0.07);
 };
 
@@ -329,7 +329,7 @@ SCENES.cards = S => {
   const st = T[i], pairs = i <= 5 ? cdPairs(st) : [];
   const pa = a * (1 - clamp((k - 5) / 0.6));
   pairs.forEach(([x, y], j) => {
-    const yy = CD_BOT - (pairs.length - 1 - j) * CD_GAP;
+    const yy = CD_BOT - j * CD_GAP;                                         // pair j is the j-th card from the bottom
     const same = x === y;
     txt(same ? '=' : '≠', (CD_COL.savedLeft + CD_COL.savedRight) / 2, yy + 14, { size: 40, fam: F.math, w: 700, align: 'center', c: same ? C.cyan : C.mag, a: pa });
   });
@@ -541,7 +541,7 @@ FILM.poster = () => {
   const st = OI_CMP.states[4], P = cdLayout(st);
   for (const [, p] of P) oiCardDraw(p.x - 60, p.y + 20, p.b, 1, { col: C.dim });
   cdPairs(st).forEach(([x, y], j, arr) => {
-    const yy = CD_BOT + 20 - (arr.length - 1 - j) * CD_GAP;
+    const yy = CD_BOT + 20 - j * CD_GAP;
     txt(x === y ? '=' : '≠', (CD_COL.savedLeft + CD_COL.savedRight) / 2 - 60, yy + 14, { size: 40, fam: F.math, w: 700, align: 'center', c: x === y ? C.cyan : C.mag });
   });
   txt(DATA.film.title_zh, 1460, 420, { size: 80, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
