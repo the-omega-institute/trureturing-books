@@ -389,6 +389,28 @@ Under RH, group multiplicities by distinct positive ordinate and use $w_\gamma=m
 
 Hence $R_1(\eta)\ll(\log X+1)/X$. The fixed-difference bound gives at most $p^2D_{p-1}R_1(\eta)$ for the part of $E_p(\eta)$ at residual degree exactly one. With the same cutoff $X=e^{-K}T^\beta$ for fixed $K$ and $0<\beta<1$, and with $p\asymp X\log X$, the diagonal estimate gives an exponential saving relative to $p!V^p$, since $V\asymp\log X/X$ and the extra factor of order $p$ can be absorbed. Growing residual degrees still require an arithmetic estimate.
 
+## A growing cutoff for residual degree {#growing-residual-degree}
+
+Let $E_{p,\le D}(\eta)$ be the part of $E_p(\eta)$ with at most $D$ residual occurrences on each side, where $0\le D\le p$. Every such pair shares at least $p-D$ occurrences. Write $W=\sum_jw_j$ and $V=\sum_jw_j^2>0$. For nonnegative weights, dropping the frequency condition and applying the common-count bound gives
+
+$
+E_{p,\le D}(\eta)\le\binom pD^{\!2}W^{2D}D_{p-D}.
+
+$
+
+Thus a bound at the single degree $k=p-D$ suffices. If $D_{p-D}\le A e^{-c(p-D)}(p-D)!V^{p-D}$, cancel one binomial factor against $p!$, and bound the other by $p^D/D!$. With $x=p e^c W^2/V$ this gives
+
+$
+\frac{E_{p,\le D}(\eta)}{p!V^p}
+\le A e^{-cp}\frac{x^D}{(D!)^2}
+\le A e^{-cp}\rho^{-D}\exp(2\sqrt{\rho x}),\qquad \rho>0 .
+
+$
+
+The last inequality follows by retaining the degree-$D$ term of the exponential series at $\sqrt{\rho x}$ and squaring. The frequency resolution does not enter either bound. [Lean proof of the common-count bound](lean:D5/S3/Fourier/Concentration/FiniteMultinomialOverlap.weighted_overlap_le_diagonal)
+
+For the ζ tail above, take $X=e^{-K}T^\beta$ and $p\asymp X\log X$ with $K$ and $0<\beta<1$ fixed. Under RH and the stated multiplicity estimate, $W^2/V=O(p(\log T)^2)$. The diagonal estimate holds with the same $A,c>0$ for all $p/2\le k\le p$. The band $(X,CX]$ supplies at least a fixed multiple of $p$ coordinates with $kw_j^2/V$ bounded below uniformly for these $k$. The factor $O(\sqrt{k})$ from Stirling is absorbed into the exponential. Put $L=\log T$ and $\rho=(L\log L)^{-2}$. Then $2\sqrt{\rho x}=O(p/\log L)$, and for $D\le\varepsilon p/\log L$ the cost $D\log(1/\rho)$ is at most $(2+o(1))\varepsilon p$. Any fixed $0<\varepsilon<c/2$ gives an exponential saving for this entire block, uniformly in $\eta$. Controlling the remaining near-collision mass for the actual ordinates requires an estimate above that cutoff. [Multiplicity input, Theorem 1 and §7](https://arxiv.org/abs/2306.04799)
+
 ## Higher residual degrees with pointwise matchings {#matched-residual-occupations}
 
 After removing shared occurrences coordinate by coordinate, each side has $d$ frequencies left. If they can be paired with every discrepancy at most $\eta$, the weight of such residuals can be estimated from the weight of single close pairs. Words with the same occurrence counts represent the same count vector.
