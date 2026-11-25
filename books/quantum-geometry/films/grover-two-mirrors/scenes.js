@@ -342,7 +342,7 @@ SCENES.count = S => {
   ];
   rows.forEach(([k, s, q], i) => txt(s, 1000, 200 + i * 44, { size: 26, fam: F.zh, w: 700, c: i === 2 ? C.white : C.cyan, a: a * Q(S, k, q, 0.5) }));
   const ca = a * Q(S, 3, 'prize is certain', 0.6);
-  stamp('success 1 · 必中', 1360, 760, ca * (1 - at(S, 3, 0.5, 4.5)), C.now, 34, -0.06);
+  stamp('success 1 · 必中', 1400, 690, ca * (1 - at(S, 3, 0.5, 4.5)), C.now, 34, -0.06);
 };
 
 /* ======================================================================= */
