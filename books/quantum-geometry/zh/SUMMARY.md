@@ -146,6 +146,7 @@
   - [31.5 全息圆弧流形与阿代尔螺线管同体：超越黎曼切板近似，在同一光滑流形上统一加法、乘法、对数与素数闭合环](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md)
   - [31.6 黎曼 1854 + 1859 双璧合龙：以已证 1/2 临界线谱磨光切板黎曼流形](ch39-s33-riemann-1854-1859-spectral-manifold-polishing.md)
   - [31.7 素数寄存器与黎曼零点的全息对偶及双内禀均匀律：观察者算术暗态谐振模、梅滕斯熵与三元球哈尔均匀、去 π 绕相圈数与超均匀谱边界](ch31-s07-prime-register-riemann-zero-duality-and-dual-uniformity.md)
+  - [31.8 素数阶乘级联自举、平方视界零误差律、有理游标分辨率与有限寄存器视界封顶](ch31-s08-primorial-cascade-vernier-resolution-and-finite-register-cap.md)
 - [第三十二章 不可表达的三元数与三维概念场封顶：万数归弧、希尔伯特多场再投影与无原点流群合成](ch32-inexpressible-ternions-and-three-dimensional-field.md)
   - [32.1 三维概念场封顶原理与希尔伯特多概念混编账本：为什么“三维以上”只是独立三维场的并置投影](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)
   - [32.2 不可表达的三元数与万数归弧：弗罗贝尼乌斯缺口、哈密顿十三载死锁与数系切面投影谱系](ch39-s19-inexpressible-ternions-and-number-projections.md)
