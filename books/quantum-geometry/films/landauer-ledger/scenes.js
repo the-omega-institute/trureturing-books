@@ -353,7 +353,7 @@ SCENES.steps = S => {
     llRich([['S(ρ(k+1)) − S(ρ(k))', C.white]], 1178, 310, { size: 28, a: la });
     llRich([['  = D(σₖ ‖ Π σₖ) ≥ 0', C.mag]], 1178, 360, { size: 28, a: la });
     const sa = a * at(S, 4, 0.6);
-    llRich([['S(ρ(N)) − S(ρ(0))', C.white]], 1178, 450, { size: 28, a: sa });
+    llRich([['S(ρ(n)) − S(ρ(0))', C.white]], 1178, 450, { size: 28, a: sa });
     llRich([['  = D(σ₀ ‖ Π σ₀) + … + D(σₙ₋₁ ‖ Π σₙ₋₁)', C.mag]], 1178, 500, { size: 26, a: sa });
     txt('σₖ = U ρ(k) U*: the same U every step, then pinch', 1178, 560, { size: 20, fam: F.zh, w: 700, c: C.white, a: la });
     txt('每步用同一个 U 转动，再捏合', 1178, 592, { size: 20, fam: F.zh, w: 700, c: C.white, a: la });
