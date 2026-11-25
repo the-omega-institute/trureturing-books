@@ -1410,9 +1410,21 @@ def hub_html(site: config.Site, book: config.Book, lock: lean.Lock | None = None
     title_zh, title_en = config.pick(book.title, "zh", book.languages), config.pick(book.title, "en", book.languages)
     films_zh, films_en = config.s("zh", "ui.films"), config.s("en", "ui.films")
     fonts = _google_fonts()
-    cards = "\n".join(_film_card(site, f, lock, f.id in built,
-                                 _release_urls(site, f) if site.film_release_only else None)
-                      for f in all_films) or f'<p class="note">{_pair("none")}</p>'
+    long_cards, other_cards = [], []
+    for f in all_films:
+        cards = long_cards if f.id in book.long_form_films else other_cards
+        cards.append(_film_card(site, f, lock, f.id in built,
+                                _release_urls(site, f) if site.film_release_only else None))
+    if long_cards:
+        sections = "\n".join(
+            f'<section class="films"><h2 class="film-group-title">{_ui_pair(label)}</h2>\n'
+            + "\n".join(cards) + "\n</section>"
+            for label, cards in (("ui.long_form_films", long_cards), ("ui.other_films", other_cards))
+            if cards
+        )
+    else:
+        cards_html = "\n".join(other_cards) or f'<p class="note">{_pair("none")}</p>'
+        sections = f'<section class="films" aria-label="{esc(films_zh)} {esc(films_en)}">\n{cards_html}\n</section>'
     pin = ""
     if lock:
         pin = (f'<a class="pill" href="{esc(lock.tree_url)}" target="_blank" rel="noopener">LEAN '
@@ -1459,9 +1471,7 @@ def hub_html(site: config.Site, book: config.Book, lock: lean.Lock | None = None
     <p>{lede}</p>
   </section>
 
-  <section class="films" aria-label="{esc(films_zh)} {esc(films_en)}">
-{cards}
-  </section>
+  {sections}
 
   <footer class="foot">
     <span>{_pair("foot", slug=book.slug)}</span>
@@ -1710,6 +1720,14 @@ def _release_urls(site: config.Site, film: Film) -> dict[str, str]:
             and (asset := assets.get(release_name(film, key)))}
 
 
+def release_unit(site: config.Site, film: Film) -> buildcache.Unit:
+    """The unit of a film's MP4 renditions on a site that plays its films live (``film_release_only``):
+    :func:`video_unit` of the site without that setting. The release renders it (``collect_release``,
+    and the parallel shards of ``tools/ci/films.py --release``) and attaches it to the build cache it
+    exports, so the next release restores every film that did not change instead of rendering it again."""
+    return video_unit(replace(site, film_release_only=False), film)
+
+
 def collect_release(site: config.Site, book: config.Book, dest: Path) -> list[str]:
     """Render or restore the selected book's MP4 renditions and stage reader downloads."""
     names = []
@@ -1725,8 +1743,14 @@ def collect_release(site: config.Site, book: config.Book, dest: Path) -> list[st
 
 
 def units(site: config.Site, book: config.Book) -> list[buildcache.Unit]:
-    """One build unit per film of ``book`` (:func:`video_unit`), for :func:`tbook.buildcache.units`."""
-    return [video_unit(site, f) for f in films(book) if f.meta is not None]
+    """One build unit per film of ``book`` (:func:`video_unit`), for :func:`tbook.buildcache.units`. In a
+    release build (``TBOOK_BUILD_RELEASE=1``) of a site with ``film_release_only``, also the unit of each
+    film's MP4 renditions (:func:`release_unit`), so that the release's cache export carries them."""
+    current = [f for f in films(book) if f.meta is not None]
+    out = [video_unit(site, f) for f in current]
+    if site.film_release_only and os.environ.get("TBOOK_BUILD_RELEASE") == "1":
+        out += [release_unit(site, f) for f in current]
+    return out
 
 
 def toolchain_missing(*, canvas: bool = False) -> list[str]:

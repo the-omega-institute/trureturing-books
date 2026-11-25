@@ -126,3 +126,136 @@ E_p(\eta)\ge \frac{hW^{2p}}{2\pi}
 $$
 
 The inequality is strict when $D>0$ and $p>0$. This uses the common Fourier power expansion of degree sums. For fixed $V,h>0$ and growing degree, the rescaled variable in the integral is $t\sqrt{pV}$. Formalizing the asymptotic coefficient of its Gaussian limit remains a separate step. General real spectra at finite resolution require a further positive-kernel estimate. [Lean proof of the finite integral bound](lean:D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lattice_collision_variance_lower)
+
+## Gaussian limit of the clipped variance integral
+
+Allow the variance budget $V_p$ and window half-width $A_p$ to vary with degree $p$. Assume $V_p>0$ eventually and put
+
+$$
+s_p=\sqrt{pV_p},\quad R_p=A_ps_p,\quad
+I_p=s_p\int_{-A_p}^{A_p}\max(0,1-V_pt^2/2)^{2p}\,dt.
+$$
+
+For arbitrary real sequences $A_p$, including negative oriented half-widths,
+
+$$
+I_p-\int_{-R_p}^{R_p}e^{-u^2}\,du\longrightarrow0,
+\qquad
+I_p\longrightarrow\sqrt\pi\ \Longleftrightarrow\ R_p\longrightarrow+\infty.
+$$
+
+Substitute $u=s_pt$ to obtain the integrand $q_p(u)=\max(0,1-u^2/(2p))^{2p}$. For $p>0$, $0\le q_p(u)\le e^{-u^2}$, and at each fixed $u$ the profile converges to $e^{-u^2}$. Dominated convergence gives $\int_{\mathbb R}|q_p(u)-e^{-u^2}|\,du\to0$, bounding the absolute error uniformly over all windows. The Gaussian window integral increases monotonically with the oriented radius and is strictly below $\sqrt\pi$ at every finite radius. Hence the full Gaussian limit also forces the rescaled radius to tend to positive infinity. [Window approximation](lean:D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.clipped_gaussian_window_error) [Characterization of the full Gaussian limit](lean:D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.clipped_gaussian_full_limit_iff)
+
+Return to the convolution with fixed variance budget $V>0$ and lattice spacing $h>0$. Taking $A_p=\pi/h$ gives $R_p\to+\infty$. After multiplying the finite lower bound by $\sqrt{pV}$, its integral coefficient tends to $h/(2\sqrt\pi)$. Thus, for every $\varepsilon>0$, all sufficiently large $p$ and fixed $\eta\ge0$ satisfy
+
+$$
+\left(\frac{h}{2\sqrt\pi}-\varepsilon\right)W^{2p}
+\le \sqrt{pV}\,E_p(\eta).
+$$
+
+This asymptotic lower bound retains the hypotheses of the finite Fourier integral. Other phase peaks can contribute to the actual collision mass, for instance when the given lattice spacing is smaller than the maximal spacing. Upper bounds for general real spectra and actual zeta ordinates still need control of these contributions and of the noncentral remainder. The approach follows the [retained contribution and controlled remainder method](https://github.com/the-omega-institute/riemann-hypothesis/blob/c7d25b3bfd7906388bb8eb0774e027a2b756a7b6/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55), with the whole-line absolute error as the remainder here.
+
+## Positive Fejér kernel bounds for real frequencies
+
+Fix a positive resolution $\eta>0$ and use the angular Fejér kernel and its triangular Fourier transform
+
+$$
+K_\eta(t)=\frac{\eta}{2\pi}\operatorname{sinc}^2\!\left(\frac{\eta t}{2}\right),
+\qquad \phi_\eta(d)=\max(0,1-|d|/\eta).
+$$
+
+The kernel $K_\eta$ is nonnegative, integrable and has whole-line integral $1$, with $\int_{\mathbb R}K_\eta(t)e^{-idt}\,dt=\phi_\eta(d)$. Expand $|S(t)|^{2p}$ into its finite degree-sum pairs and integrate each cosine to obtain the exact identity
+
+$$
+\int_{\mathbb R} K_\eta(t)|S(t)|^{2p}\,dt
+=\sum_{m,n}c_mc_n\phi_\eta(G_m-G_n).
+$$
+
+The identity holds for arbitrary real weights. If $w_j\ge0$, then all $c_mc_n\ge0$ and $\phi_\eta(d)\le\mathbf 1_{|d|\le\eta}$, so the right side is bounded by $E_p(\eta)$. The triangular weight is zero on the closed band boundary $|d|=\eta$. [Positive-kernel collision comparison](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_comparison)
+
+Assume also $\sum_jw_j(g_j-a)^2\le VW$, where $a,V$ are real. By the pointwise variance bound and positivity of the kernel, for every $A\ge0$,
+
+$$
+W^{2p}\int_{-A}^{A}K_\eta(t)\max(0,1-Vt^2/2)^{2p}\,dt
+\le E_p(\eta).
+$$
+
+This estimate applies to arbitrary finite real frequency families. [Finite-window bound](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_variance_lower)
+
+Fix $V,\eta>0$ and let $p\to\infty$. Given $\varepsilon>0$, put $c=\eta/(2\pi)-\varepsilon/(2\sqrt\pi)$. Since $K_\eta(0)=\eta/(2\pi)$ and the kernel is continuous, choose a fixed $A>0$ with $K_\eta(t)\ge c$ for $|t|\le A$. The preceding Gaussian limit gives
+
+$$
+c\sqrt{pV}\int_{-A}^{A}\max(0,1-Vt^2/2)^{2p}\,dt
+\longrightarrow \frac{\eta}{2\sqrt\pi}-\frac{\varepsilon}{2}.
+$$
+
+Consequently, for every $\varepsilon>0$ and all sufficiently large degrees $p$,
+
+$$
+\left(\frac{\eta}{2\sqrt{\pi}}-\varepsilon\right) W^{2p}
+\le\sqrt{pV}\,E_p(\eta).
+$$
+
+When $W>0$, this means $\liminf_{p\to\infty}E_p(\eta)\sqrt{pV}/(W^{2p}\eta)\ge1/(2\sqrt\pi)$. The coefficient exceeds the parabolic lower coefficient $3/(5\sqrt5)$ for arbitrary finite weighted data because the degree sums have convolution structure. A fixed finite tail of actual zeta ordinates is admissible as the input frequency family. The scale condition in the next section yields a uniform lower bound when height, frequency family and resolution vary together. Upper bounds for high-order collisions require further estimates. [Asymptotic lower bound](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_asymptotic_lower)
+
+## Uniform small-resolution bound for varying spectra
+
+Now allow the frequency family, weights and center to vary with degree $n$. Assume that the variance budget $V_n$ and resolution $\eta_n$ are eventually positive. Put
+
+$$
+s_n=\sqrt{nV_n},\qquad \rho_n=\frac{\eta_n}{s_n}.
+$$
+
+The condition $\rho_n\to0$ is equivalent to the existence of eventually positive half-widths $A_n$ with $A_ns_n\to+\infty$ and $\eta_nA_n\to0$. Indeed, choose $A_n=1/(s_n\sqrt{\rho_n})$ to obtain $1/\sqrt{\rho_n}$ and $\sqrt{\rho_n}$ for the two expressions. Conversely, $\rho_n=(\eta_nA_n)/(s_nA_n)$. [Compatibility of the two window scales](lean:D5/S3/Fourier/Asymptotics/MovingFejerCollision.exists_fejer_window_iff)
+
+Under $\rho_n\to0$, for every $\varepsilon>0$ there is a degree threshold depending only on the sequences $V_n,\eta_n$ and on $\varepsilon$. For each $n$ beyond it, every finite family of real frequencies $g_j$, nonnegative weights $w_j$, and center $a$ with $\sum_jw_j(g_j-a)^2\le V_nW$ satisfies
+
+$$
+\left(\frac{1}{2\sqrt\pi}-\varepsilon\right)\eta_n W^{2n}
+\le\sqrt{nV_n}\,E_n(\eta_n).
+$$
+
+On a compatible window, the normalized kernel is $\eta_n^{-1}K_{\eta_n}(t)=\operatorname{sinc}^2(\eta_nt/2)/(2\pi)$. Because $\eta_nA_n\to0$, it is eventually at least $1/(2\pi)-\varepsilon/(2\sqrt\pi)$ throughout the window. Because $A_ns_n\to\infty$, the rescaled unweighted integral tends to $\sqrt\pi$. The finite-window inequality then gives a threshold uniform over the data. [Uniform collision lower bound](lean:D5/S3/Fourier/Asymptotics/MovingFejerCollision.moving_fejer_uniform_lower)
+
+For example, for a varying finite zeta tail take frequencies $g_\gamma=\gamma/r$ with fixed $r>0$ and $0<\gamma\le T_n$. Use center zero and budget $V_n=T_n^2/r^2$. If $\eta_n r/(T_n\sqrt n)\to0$, then eventually
+
+$$
+E_n(\eta_n)\ge
+\left(\frac{1}{2\sqrt\pi}-\varepsilon\right)
+\frac{r\eta_n}{T_n\sqrt n}\,W_n^{2n}.
+$$
+
+The underlying family may grow with $n$. Without control of the relative resolution and variance scales, the normalized collision ratio can tend to zero, as with a single unit-weight frequency, $V_n=1/n^2$ and fixed $\eta_n>0$. The upper-bound problem for high-order weighted collisions of actual zeta ordinates remains open.
+
+## Exact recovery of the closed collision band from triangular moments
+
+For general finite data $(x_i,c_i)$, write $d_{ij}=|x_i-x_j|$, and define the ramp-weighted moment at real radius $r$ by
+
+$$
+L(r)=\sum_{i,j}c_ic_j\max(0,r-d_{ij}).
+$$
+
+For $c_ic_j\ge0$ for every pair and $\delta>0$, every real radius $r$ satisfies
+
+$$
+L(r)-L(r-\delta)\le\delta E(r)
+\le L(r+\delta)-L(r).
+$$
+
+For each pair with $d_{ij}\le r$, the right increment of the positive part equals $\delta$ and the left increment is at most $\delta$. For $d_{ij}>r$, the left increment vanishes and the right increment is nonnegative. Sum these inequalities with the nonnegative pair weights. [Finite secant bounds](lean:D5/S3/Fourier/Concentration/FejerCollisionSecants.collision_ramp_secants)
+
+For arbitrary real weights and any $\delta>0$ such that no pair distance lies strictly between $r$ and $r+\delta$, the right increment is exact. A positive interval with this property always exists. Let $\delta_0$ be the minimum of the finite set $\{1\}\cup\{d_{ij}-r:d_{ij}>r\}$, so $\delta_0>0$. For every $0<\delta\le\delta_0$,
+
+$$
+L(r+\delta)-L(r)=\delta E(r).
+$$
+
+No outer distance lies strictly between $r$ and $r+\delta$, and each pair has increment either $\delta$ or zero. This identity allows arbitrary signed weights and retains all closed-band contributions at distance exactly $r$. [Exact right increment](lean:D5/S3/Fourier/Concentration/FejerCollisionSecants.collision_ramp_exact_right)
+
+For the degree-$p$ frequency sums and multinomial weights, the triangular Fourier identity gives, at positive radius $r$,
+
+$$
+L(r)=r\int_{\mathbb R}K_r(t)|S(t)|^{2p}\,dt.
+$$
+
+When $0<\delta<r$, the secant bounds can be expressed directly in terms of the weighted integrals at three positive radii. The exact right increment recovers the closed-band mass from a sufficiently small positive difference, including any mass on the boundary. Upper and lower bounds for high-degree collisions of actual zeta tails still require control of the principal contribution and remainder of these weighted integrals at neighboring radii.

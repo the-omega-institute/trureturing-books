@@ -126,3 +126,136 @@ E_p(\eta)\ge \frac{hW^{2p}}{2\pi}
 $$
 
 若 $D>0$ 且 $p>0$，该不等式严格成立。这里使用了次数和的同一傅里叶幂展开。固定 $V,h>0$ 而次数增长时，积分中的缩放变量为 $t\sqrt{pV}$，其高斯极限给出的渐近系数仍待形式化。一般实频谱的有限分辨率碰撞需要另行建立正核估计。 [有限积分下界的 Lean 证明](lean:D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lattice_collision_variance_lower)
+
+## 截断方差积分的高斯极限
+
+允许方差预算 $V_p$ 和半窗口 $A_p$ 随次数 $p$ 变化。设 $V_p>0$ 最终成立，取
+
+$$
+s_p=\sqrt{pV_p},\quad R_p=A_ps_p,\quad
+I_p=s_p\int_{-A_p}^{A_p}\max(0,1-V_pt^2/2)^{2p}\,dt.
+$$
+
+对任意实数列 $A_p$，包括负的有向半窗口，成立
+
+$$
+I_p-\int_{-R_p}^{R_p}e^{-u^2}\,du\longrightarrow0,
+\qquad
+I_p\longrightarrow\sqrt\pi\ \Longleftrightarrow\ R_p\longrightarrow+\infty.
+$$
+
+换元 $u=s_pt$ 后，被积函数为 $q_p(u)=\max(0,1-u^2/(2p))^{2p}$。当 $p>0$ 时，$0\le q_p(u)\le e^{-u^2}$，且固定 $u$ 下 $q_p(u)\to e^{-u^2}$。因此支配收敛给出 $\int_{\mathbb R}|q_p(u)-e^{-u^2}|\,du\to0$，统一控制所有窗口的绝对误差。高斯窗口积分随有向半径单调增加，并在任意有限半径处严格小于 $\sqrt\pi$，所以全高斯极限也要求缩放后的半径趋于正无穷。 [窗口逼近](lean:D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.clipped_gaussian_window_error) [全高斯极限的充要条件](lean:D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.clipped_gaussian_full_limit_iff)
+
+现在回到固定方差预算 $V>0$ 及格距 $h>0$ 的卷积。取 $A_p=\pi/h$，则 $R_p\to+\infty$，且上节有限下界乘以 $\sqrt{pV}$ 后的积分系数趋于 $h/(2\sqrt\pi)$。由此，对每个 $\varepsilon>0$，所有充分大的 $p$ 与固定 $\eta\ge0$ 满足
+
+$$
+\left(\frac{h}{2\sqrt\pi}-\varepsilon\right)W^{2p}
+\le \sqrt{pV}\,E_p(\eta).
+$$
+
+这个渐近下界继承了有限傅里叶积分的全部假设。实际碰撞质量还可能受到其他相位峰的贡献，例如所给格距并非最大格距时。一般实频谱和实际 ζ 纵坐标的上界仍需控制这些贡献及非中心余项。这里采用了 [有限主贡献与余项控制的相关方法](https://github.com/the-omega-institute/riemann-hypothesis/blob/c7d25b3bfd7906388bb8eb0774e027a2b756a7b6/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)，具体的余项是上述全线绝对误差。
+
+## 一般实频率的正 Fejér 核下界
+
+给定固定的正分辨率 $\eta>0$，使用角频率 Fejér 核及其三角形傅里叶变换
+
+$$
+K_\eta(t)=\frac{\eta}{2\pi}\operatorname{sinc}^2\!\left(\frac{\eta t}{2}\right),
+\qquad \phi_\eta(d)=\max(0,1-|d|/\eta).
+$$
+
+核 $K_\eta$ 非负、可积且全线积分为 $1$，并有 $\int_{\mathbb R}K_\eta(t)e^{-idt}\,dt=\phi_\eta(d)$。将 $|S(t)|^{2p}$ 作有限次数和配对展开，对每个余弦积分，得到精确恒等式
+
+$$
+\int_{\mathbb R} K_\eta(t)|S(t)|^{2p}\,dt
+=\sum_{m,n}c_mc_n\phi_\eta(G_m-G_n).
+$$
+
+恒等式允许任意实权。若 $w_j\ge0$，全部 $c_m c_n\ge0$，且 $\phi_\eta(d)\le \mathbf 1_{|d|\le\eta}$，故右侧不超过 $E_p(\eta)$。在闭带边界 $|d|=\eta$ 处三角权恰为零。 [正核碰撞比较](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_comparison)
+
+再假设 $\sum_jw_j(g_j-a)^2\le VW$，其中 $a,V$ 为实数。由点态方差下界和核的非负性，对任何 $A\ge0$ 有
+
+$$
+W^{2p}\int_{-A}^{A}K_\eta(t)\max(0,1-Vt^2/2)^{2p}\,dt
+\le E_p(\eta).
+$$
+
+这一估计适用于任意有限实频率族。 [有限窗口下界](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_variance_lower)
+
+固定 $V,\eta>0$ 并令 $p\to\infty$。对 $\varepsilon>0$，取 $c=\eta/(2\pi)-\varepsilon/(2\sqrt\pi)$。由 $K_\eta(0)=\eta/(2\pi)$ 与连续性，可选择一个固定的 $A>0$，使 $|t|\le A$ 时 $K_\eta(t)\ge c$。上一节的高斯极限给出
+
+$$
+c\sqrt{pV}\int_{-A}^{A}\max(0,1-Vt^2/2)^{2p}\,dt
+\longrightarrow \frac{\eta}{2\sqrt\pi}-\frac{\varepsilon}{2}.
+$$
+
+因此对每个 $\varepsilon>0$，充分大的次数 $p$ 满足
+
+$$
+\left(\frac{\eta}{2\sqrt{\pi}}-\varepsilon\right) W^{2p}
+\le\sqrt{pV}\,E_p(\eta).
+$$
+
+若 $W>0$，等价地有 $\liminf_{p\to\infty} E_p(\eta)\sqrt{pV}/(W^{2p}\eta)\ge1/(2\sqrt\pi)$。这个系数超过任意有限加权数据的抛物线下界系数 $3/(5\sqrt5)$，因为次数和具有卷积结构。结论允许固定的实际 ζ 尾段作为输入频率族。下一节的尺度条件给出高度、频率族和分辨率共同变化时的统一下界。高阶碰撞的上界仍需进一步估计。 [渐近下界](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_asymptotic_lower)
+
+## 变化频谱的统一小分辨率下界
+
+现在允许频率族、权重和中心随着次数 $n$ 一起变化。仅要求方差预算 $V_n$ 与分辨率 $\eta_n$ 最终为正。记
+
+$$
+s_n=\sqrt{nV_n},\qquad \rho_n=\frac{\eta_n}{s_n}.
+$$
+
+$\rho_n\to0$ 当且仅当存在最终为正的半窗口 $A_n$，使 $A_ns_n\to+\infty$ 且 $\eta_nA_n\to0$。确实，取 $A_n=1/(s_n\sqrt{\rho_n})$，两项分别为 $1/\sqrt{\rho_n}$ 与 $\sqrt{\rho_n}$。反过来，$\rho_n=(\eta_n A_n)/(s_nA_n)$。 [两种窗口尺度相容的充要条件](lean:D5/S3/Fourier/Asymptotics/MovingFejerCollision.exists_fejer_window_iff)
+
+在 $\rho_n\to0$ 下，对每个 $\varepsilon>0$，存在仅依赖于 $V_n,\eta_n$ 两个序列及 $\varepsilon$ 的次数阈值。超过此阈值的每个 $n$，任意有限频率族 $g_j$、非负权重 $w_j$ 以及任意满足 $\sum_jw_j(g_j-a)^2\le V_n W$ 的中心 $a$，均满足
+
+$$
+\left(\frac{1}{2\sqrt\pi}-\varepsilon\right)\eta_n W^{2n}
+\le \sqrt{nV_n}\,E_n(\eta_n).
+$$
+
+证明是在相容窗口上使用 $\eta_n^{-1}K_{\eta_n}(t)=\operatorname{sinc}^2(\eta_nt/2)/(2\pi)$。由 $\eta_n A_n\to0$，此归一化核最终处处至少为 $1/(2\pi)-\varepsilon/(2\sqrt\pi)$。由 $A_ns_n\to\infty$，不带核的缩放积分趋于 $\sqrt\pi$。结合有限窗口下界即可取得统一次数阈值。 [统一碰撞下界](lean:D5/S3/Fourier/Asymptotics/MovingFejerCollision.moving_fejer_uniform_lower)
+
+例如，对随 $n$ 变化的有限 ζ 尾段，取频率 $g_\gamma=\gamma/r$，其中 $r>0$ 固定，$0<\gamma\le T_n$。可用中心 $a=0$ 和预算 $V_n=T_n^2/r^2$。如果 $\eta_n r/(T_n\sqrt n)\to0$，则
+
+$$
+E_n(\eta_n)\ge
+\left(\frac{1}{2\sqrt\pi}-\varepsilon\right)
+\frac{r\eta_n}{T_n\sqrt n}\,W_n^{2n}
+$$
+
+最终成立。这里允许底层频率族的大小增长。若不控制分辨率与方差的相对尺度，例如单个单位权重频率、$V_n=1/n^2$、固定 $\eta_n>0$，归一化碰撞比可能趋于零。实际 ζ 零点的高阶加权碰撞上界仍未解决。
+
+## 从三角加权矩精确恢复闭碰撞带
+
+一般有限数据 $(x_i,c_i)$ 的带半径为 $r$ 时，记 $d_{ij}=|x_i-x_j|$，并定义
+
+$$
+L(r)=\sum_{i,j}c_ic_j\max(0,r-d_{ij}).
+$$
+
+若每对权重满足 $c_ic_j\ge0$ 且 $\delta>0$，对任意实数 $r$ 有
+
+$$
+L(r)-L(r-\delta)\le \delta E(r)
+\le L(r+\delta)-L(r).
+$$
+
+这是逐对比较。对于 $d_{ij}\le r$，正部函数的右增量恰为 $\delta$，左增量至多为 $\delta$。对于 $d_{ij}>r$，左增量为零，右增量非负。然后以非负的配对权重求和。 [有限差分夹界](lean:D5/S3/Fourier/Concentration/FejerCollisionSecants.collision_ramp_secants)
+
+任意实权重下，只要 $\delta>0$ 且不存在严格介于 $r$ 与 $r+\delta$ 之间的配对距离，右侧增量就是精确的。这样的正区间总是存在。取 $\delta_0$ 为集合 $\{1\}\cup\{d_{ij}-r:d_{ij}>r\}$ 的最小值；有限性保证 $\delta_0>0$。对任意 $0<\delta\le\delta_0$，
+
+$$
+L(r+\delta)-L(r)=\delta E(r).
+$$
+
+外带不存在严格位于 $r$ 与 $r+\delta$ 之间的距离，逐对增量或为 $\delta$ 或为零。该恒等式允许任意实权重，并保留距离恰等于 $r$ 的全部闭带贡献。 [精确右增量的 Lean 证明](lean:D5/S3/Fourier/Concentration/FejerCollisionSecants.collision_ramp_exact_right)
+
+当数据为次数 $p$ 的频率和及多项式权重时，对正半径 $r$，由三角形核恒等式可写
+
+$$
+L(r)=r\int_{\mathbb R}K_r(t)|S(t)|^{2p}\,dt.
+$$
+
+若 $0<\delta<r$，有限差分夹界可以直接用三个不同正半径的带核积分表示。精确右增量则说明，即使在边界上有碰撞质量，也可以由足够小的正向差分恢复闭带计数。要获得实际 ζ 尾段的高阶碰撞上下界，仍须控制这些带核积分在相邻半径上的渐近主项和余项。

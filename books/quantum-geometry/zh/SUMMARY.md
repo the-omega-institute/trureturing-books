@@ -236,6 +236,7 @@
   - [38.14 康威 FRACTRAN 与三维非阿贝尔 Ω-FRACTRAN 观察者原生语言：算术基本定理正交素数寄存器、0·1/2·1 分数因果门、p = 5 拉马努金素旋子非对易栈与零裂口防幻觉自动机](ch38-s14-omega-fractran-observer-rational-isa.md)
   - [38.15 静止画布与无腿球观察者：时空同一梯度、倾倒视界锥与破除时间流逝错觉](ch38-s15-static-canvas-and-legless-sphere-observer.md)
   - [38.16 恒定信息速率观察者、唱针式静态波纹解码与零根号凯莱引力钟慢](ch38-s16-constant-info-rate-observer-and-rational-cayley-gravity.md)
+  - [38.17 AURIC 的四重本相：破晓词源、三价金相对论平面破缺与 0 · 1/2 · 1 观察者焦点签名](ch38-s17-auric-trivalent-gold-and-observer-focus-signature.md)
 - [第三十九章 大一统母公理（AXIOM-Ω）：无源保正三元比较闭合、五阶万法演绎级联与量子五大公设归元](ch39-axiom-omega-grand-unification.md)
   - [39.1 大一统母公理（AXIOM-Ω）：无源保正三元比较闭合公理如何一举熔合比较公理、极小圆弧、三元数与连续场](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)
   - [39.2 AXIOM-Ω 五阶大一统演绎级联与公理遮诠闭环：从无源三元母公理严格贯通万数微积分、双相对论时空、四大力大统一、算术临界谱与测地智能](ch39-s25-axiom-omega-five-tier-deduction-cascade.md)

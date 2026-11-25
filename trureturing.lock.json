@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "4761719abe7cc3e016beea890f39f448fcd2f2fc",
-  "pinned_at": "2026-11-25T15:53:34Z",
+  "commit": "589b4f1e1423a85c9632cb9152cb83d5aabc5001",
+  "pinned_at": "2026-11-25T18:36:52Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4626,6 +4626,22 @@
       "line": 231,
       "signature": "theorem chordWeight_dft (N : ℕ) [NeZero N] (k : ZMod N) : ZMod.dft (fun l => (chordWeight N l : ℂ)) k = ((((N : ℝ) ^ 2 - 1) / 12 - (k.val : ℝ) * ((N : ℝ) - k.val) / 2 : ℝ) : ℂ)"
     },
+    "D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.clipped_gaussian_full_limit_iff": {
+      "module": "D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant",
+      "name": "D5.S3.Fourier.Asymptotics.ClippedGaussianMinorant.clipped_gaussian_full_limit_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:7281512a33c63910ceded9c80f758182664d2b2451995efbfef046ed52382f0b",
+      "line": 185,
+      "signature": "theorem clipped_gaussian_full_limit_iff (V A : ℕ → ℝ) (hV : ∀ᶠ n in atTop, 0 < V n) : let scale"
+    },
+    "D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.clipped_gaussian_window_error": {
+      "module": "D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant",
+      "name": "D5.S3.Fourier.Asymptotics.ClippedGaussianMinorant.clipped_gaussian_window_error",
+      "kind": "theorem",
+      "statement_id": "sha256:7281512a33c63910ceded9c80f758182664d2b2451995efbfef046ed52382f0b",
+      "line": 120,
+      "signature": "theorem clipped_gaussian_window_error (V A : ℕ → ℝ) (hV : ∀ᶠ n in atTop, 0 < V n) : let scale"
+    },
     "D5/S3/Fourier/Asymptotics/CyclicActivationShift.cyclic_activation_shift": {
       "module": "D5/S3/Fourier/Asymptotics/CyclicActivationShift",
       "name": "D5.S3.Fourier.Asymptotics.CyclicActivationShift.cyclic_activation_shift",
@@ -4825,6 +4841,22 @@
       "statement_id": "sha256:dd66e094f98993776ef40f4b7dcd225983a3a2a67bd30590ad9d8a14da2bca69",
       "line": 417,
       "signature": "theorem exists_lattice_square_moment_minimizer_on_interval (n : ℕ) (hn : 0 < n) (m : ℝ) : let lowerBound"
+    },
+    "D5/S3/Fourier/Asymptotics/MovingFejerCollision.exists_fejer_window_iff": {
+      "module": "D5/S3/Fourier/Asymptotics/MovingFejerCollision",
+      "name": "D5.S3.Fourier.Asymptotics.MovingFejerCollision.exists_fejer_window_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:a037e75c3a63b12a715152986b6900ba6e94544cf8c51725495289144523bab8",
+      "line": 26,
+      "signature": "theorem exists_fejer_window_iff (V η : ℕ → ℝ) (hV : ∀ᶠ n in atTop, 0 < V n) (hη : ∀ᶠ n in atTop, 0 < η n) : let scaleReadout"
+    },
+    "D5/S3/Fourier/Asymptotics/MovingFejerCollision.moving_fejer_uniform_lower": {
+      "module": "D5/S3/Fourier/Asymptotics/MovingFejerCollision",
+      "name": "D5.S3.Fourier.Asymptotics.MovingFejerCollision.moving_fejer_uniform_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:a037e75c3a63b12a715152986b6900ba6e94544cf8c51725495289144523bab8",
+      "line": 77,
+      "signature": "theorem moving_fejer_uniform_lower (V η : ℕ → ℝ) (hV : ∀ᶠ n in atTop, 0 < V n) (hη : ∀ᶠ n in atTop, 0 < η n) : let scaleReadout"
     },
     "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result": {
       "module": "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns",
@@ -5161,6 +5193,46 @@
       "statement_id": "sha256:540c179bdaaadc257f850eba313cc3b9ce3788256d4709090bd3bd70d7e6ba53",
       "line": 464,
       "signature": "theorem sharp_first_harmonic_even_block (N : ℕ) (hN : 0 < N) : let bound"
+    },
+    "D5/S3/Fourier/Concentration/FejerCollisionSecants.collision_ramp_exact_right": {
+      "module": "D5/S3/Fourier/Concentration/FejerCollisionSecants",
+      "name": "D5.S3.Fourier.Concentration.FejerCollisionSecants.collision_ramp_exact_right",
+      "kind": "theorem",
+      "statement_id": "sha256:2b1ad6b4a279fa0f41d6d714776c068c64a73d6d2b22f64402ff8e76bcbe5e5a",
+      "line": 77,
+      "signature": "theorem collision_ramp_exact_right {I : Type*} (s : Finset I) (x c : I → ℝ) (r : ℝ) : let ramp"
+    },
+    "D5/S3/Fourier/Concentration/FejerCollisionSecants.collision_ramp_secants": {
+      "module": "D5/S3/Fourier/Concentration/FejerCollisionSecants",
+      "name": "D5.S3.Fourier.Concentration.FejerCollisionSecants.collision_ramp_secants",
+      "kind": "theorem",
+      "statement_id": "sha256:2b1ad6b4a279fa0f41d6d714776c068c64a73d6d2b22f64402ff8e76bcbe5e5a",
+      "line": 49,
+      "signature": "theorem collision_ramp_secants {I : Type*} (s : Finset I) (x c : I → ℝ) (hc : ∀ i ∈ s, ∀ j ∈ s, 0 ≤ c i*c j) (r : ℝ) {δ : ℝ} (hδ : 0 < δ) : let ramp"
+    },
+    "D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_asymptotic_lower": {
+      "module": "D5/S3/Fourier/Concentration/FejerCollisionVariance",
+      "name": "D5.S3.Fourier.Concentration.FejerCollisionVariance.fejer_collision_asymptotic_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:ece5e43e058ab9505e09e262de867fa48b09e4b41d311ab1b38b7821aeb01e75",
+      "line": 156,
+      "signature": "theorem fejer_collision_asymptotic_lower {J : Type*} [Fintype J] [DecidableEq J] (g w : J → ℝ) (hw : ∀ j, 0 ≤ w j) (a V : ℝ) (hV : 0 < V) {η : ℝ} (hη : 0 < η) (hm : ∑ j, w j*(g j-a)^2 ≤ V*∑ j,w j) (ε : ℝ) (hε : 0 < ε) : let scaleReadout"
+    },
+    "D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_comparison": {
+      "module": "D5/S3/Fourier/Concentration/FejerCollisionVariance",
+      "name": "D5.S3.Fourier.Concentration.FejerCollisionVariance.fejer_collision_comparison",
+      "kind": "theorem",
+      "statement_id": "sha256:ece5e43e058ab9505e09e262de867fa48b09e4b41d311ab1b38b7821aeb01e75",
+      "line": 87,
+      "signature": "theorem fejer_collision_comparison {J : Type*} [Fintype J] [DecidableEq J] (g w : J → ℝ) (p : ℕ) {η : ℝ} (hη : 0 < η) : let kernel"
+    },
+    "D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_variance_lower": {
+      "module": "D5/S3/Fourier/Concentration/FejerCollisionVariance",
+      "name": "D5.S3.Fourier.Concentration.FejerCollisionVariance.fejer_collision_variance_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:ece5e43e058ab9505e09e262de867fa48b09e4b41d311ab1b38b7821aeb01e75",
+      "line": 115,
+      "signature": "theorem fejer_collision_variance_lower {J : Type*} [Fintype J] [DecidableEq J] (g w : J → ℝ) (hw : ∀ j, 0 ≤ w j) (a V : ℝ) (p : ℕ) {η : ℝ} (hη : 0 < η) {A : ℝ} (hA : 0 ≤ A) (hm : ∑ j, w j*(g j-a)^2 ≤ V*∑ j,w j) : let kernel"
     },
     "D5/S3/Fourier/Concentration/FiniteCollisionVariance.tailCollisionMass_lower_variance": {
       "module": "D5/S3/Fourier/Concentration/FiniteCollisionVariance",
