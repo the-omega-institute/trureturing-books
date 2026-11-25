@@ -4922,6 +4922,22 @@
       "line": 146,
       "signature": "theorem centered_overlap_bound {J : Type*} (t : Finset J) (c : ℂ) (a : J → ℂ) (d : ℕ) : let k"
     },
+    "D5/S3/Fourier/Concentration/CenteredDisjointPrincipal.centered_principal_remainder": {
+      "module": "D5/S3/Fourier/Concentration/CenteredDisjointPrincipal",
+      "name": "D5.S3.Fourier.Concentration.CenteredDisjointPrincipal.centered_principal_remainder",
+      "kind": "theorem",
+      "statement_id": "sha256:47dd148db9505468d48e5546c04f78b447e1e77b763dd6418493cbccdf68cdb5",
+      "line": 86,
+      "signature": "theorem centered_principal_remainder {J : Type*} (t : Finset J) (c : ℂ) (a : J → ℂ) (d : ℕ) (hd : t.card ≤ d) : let n"
+    },
+    "D5/S3/Fourier/Concentration/CenteredDisjointPrincipal.mixed_centered_principal_error": {
+      "module": "D5/S3/Fourier/Concentration/CenteredDisjointPrincipal",
+      "name": "D5.S3.Fourier.Concentration.CenteredDisjointPrincipal.mixed_centered_principal_error",
+      "kind": "theorem",
+      "statement_id": "sha256:47dd148db9505468d48e5546c04f78b447e1e77b763dd6418493cbccdf68cdb5",
+      "line": 121,
+      "signature": "theorem mixed_centered_principal_error {J : Type*} (s : Finset J) (a : J → ℂ) (d : ℕ) : let c"
+    },
     "D5/S3/Fourier/Concentration/ClippedMomentWeights.exists_clipped_moment_minimizer": {
       "module": "D5/S3/Fourier/Concentration/ClippedMomentWeights",
       "name": "D5.S3.Fourier.Concentration.ClippedMomentWeights.exists_clipped_moment_minimizer",
