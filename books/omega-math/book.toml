@@ -27,6 +27,9 @@ html = true
 pdf = ["screen", "print", "academic"]
 epub = true
 
+[films]
+long_form = ["one-axiom-no-infinity"]
+
 [html.fold]
 enable = true
 level = 0
