@@ -125,4 +125,33 @@ E_p(\eta)\ge \frac{hW^{2p}}{2\pi}
 \int_{-\pi/h}^{\pi/h}\max(0,1-Vt^2/2)^{2p}\,dt.
 $$
 
-The inequality is strict when $D>0$ and $p>0$. This uses the common Fourier power expansion of degree sums. For fixed $V,h>0$ and growing degree, the rescaled variable in the integral is $t\sqrt{pV}$. Formalizing the asymptotic coefficient of its Gaussian limit remains a separate step. General real spectra at finite resolution require a further positive-kernel estimate. [Lean proof of the finite integral bound](https://github.com/the-omega-institute/trureturing/blob/c1296ace4f5b66516a07af37f37a1dbcec0d50e1/D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lean#L179)
+The inequality is strict when $D>0$ and $p>0$. This uses the common Fourier power expansion of degree sums. For fixed $V,h>0$ and growing degree, the rescaled variable in the integral is $t\sqrt{pV}$. An integrable Gaussian majorant controls the remainder of this rescaled integral. General real spectra at finite resolution require a further positive-kernel estimate. [Lean proof of the finite integral bound](https://github.com/the-omega-institute/trureturing/blob/c1296ace4f5b66516a07af37f37a1dbcec0d50e1/D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lean#L179)
+
+
+## Gaussian limit of the clipped variance integral
+
+Allow the variance budget $V_p$ and window half-width $A_p$ to vary with degree $p$. Assume $V_p>0$ eventually and put
+
+$$
+s_p=\sqrt{pV_p},\quad R_p=A_ps_p,\quad
+I_p=s_p\int_{-A_p}^{A_p}\max(0,1-V_pt^2/2)^{2p}\,dt.
+$$
+
+For arbitrary real sequences $A_p$, including negative oriented half-widths,
+
+$$
+I_p-\int_{-R_p}^{R_p}e^{-u^2}\,du\longrightarrow0,
+\qquad
+I_p\longrightarrow\sqrt\pi\ \Longleftrightarrow\ R_p\longrightarrow+\infty.
+$$
+
+Substitute $u=s_pt$ to obtain the integrand $q_p(u)=\max(0,1-u^2/(2p))^{2p}$. For $p>0$, $0\le q_p(u)\le e^{-u^2}$, and at each fixed $u$ the profile converges to $e^{-u^2}$. Dominated convergence gives $\int_{\mathbb R}|q_p(u)-e^{-u^2}|\,du\to0$, bounding the absolute error uniformly over all windows. The Gaussian window integral increases monotonically with the oriented radius and is strictly below $\sqrt\pi$ at every finite radius. Hence the full Gaussian limit also forces the rescaled radius to tend to positive infinity. [Window approximation](https://github.com/the-omega-institute/trureturing/blob/3959805f25927cfdc34434e20f04e29d0b7ce9b4/D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.lean#L120) [Characterization of the full Gaussian limit](https://github.com/the-omega-institute/trureturing/blob/3959805f25927cfdc34434e20f04e29d0b7ce9b4/D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.lean#L185)
+
+Return to the convolution with fixed variance budget $V>0$ and lattice spacing $h>0$. Taking $A_p=\pi/h$ gives $R_p\to+\infty$. After multiplying the finite lower bound by $\sqrt{pV}$, its integral coefficient tends to $h/(2\sqrt\pi)$. Thus, for every $\varepsilon>0$, all sufficiently large $p$ and fixed $\eta\ge0$ satisfy
+
+$$
+\left(\frac{h}{2\sqrt\pi}-\varepsilon\right)W^{2p}
+\le \sqrt{pV}\,E_p(\eta).
+$$
+
+This asymptotic lower bound retains the hypotheses of the finite Fourier integral. Other phase peaks can contribute to the actual collision mass, for instance when the given lattice spacing is smaller than the maximal spacing. Upper bounds for general real spectra and actual zeta ordinates still need control of these contributions and of the noncentral remainder. The approach follows the [retained contribution and controlled remainder method](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1dd9/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55), with the whole-line absolute error as the remainder here.
