@@ -52,4 +52,10 @@ $$
    - **正交开维奠基重构与百年六大量子难题全景对决的跨章/附录锚点**：关于“静动不二、两两公平迫使二次平方、单基相位折叠反弹为测不准、时间作为打破有限克雷洛夫饱和的正交维度扩张”的形式化引理、模型叙述与实验台已收入 [§27.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)；梦境退相干前既视感与皮索特—克利福德—劳齐分形收束分别见 [§36.1.5](ch37-s05-future-selection-and-deja-vu.md#sec-ch37-dream-pre-decoherence-deja-vu) 与 [§35.6](ch39-s05-pisot-clifford-rauzy.md#sec-ch39-pisot-clifford-rauzy)；而将自 1927 年索尔维会议以来的**量子力学六大经典未解难题**与**五大主流诠释流派**置于同一联合实验台（`ORTHO//DUEL`）同本书正交自指开维观逐项对勘的完整档案、二十条 `LEAN ✓` 锚点速查表及开放前沿声明（[@prob-appendix-d-time-horizon]，`OPEN`），则专辟于 [附录 D](appendix-d.md#sec-appendix-d-six-foundational-puzzles)。
 :::
 
+把这四层分清以后，可以回头把全书当成一条路再走一遍：每一部停一站，每一站只取一条内核检验过的结论，最后落在本节的锚点上。
+
+::: {.film src="ten-parts-one-arc"}
+**十部一条弧，以及它为什么会停下（2 分 29 秒）。** 全书十部画成一条弧上的十颗珠子，琥珀色的珠子是当前这一站；这条弧是读这本书的一种方式，片中标为紫色的诠释，不是定理。每一站在屏幕上算一个小例子，再给出一条绿色的已验证结论：夹角 $60^\circ$ 的两支单位箭头，玻恩权重是重叠的平方 $1/4$（[@thm-born-modulus-square]）；$u = (3, 0)$、$v = (1, 2)$ 的青色线平方 $9$ 加品红面积平方 $36$ 等于 $9 \times 5 = 45$（[@thm-lagrange-gram-identity]）；$R_y(90^\circ) = R_z(90^\circ)\,R_x(90^\circ)\,R_z(-90^\circ)$ 只用两根紫色的轴（[@thm-two-axis-finite-word]）；固定 CHSH 设置下贝尔态得分 $3\cos 45^\circ - \cos 135^\circ = 2\sqrt{2}$，且没有哪个态更高（[@cor-fixed-chsh-tsirelson]）；$3(t^2 - x^2)$ 在青色光线上为零，$t^2 - 2x^2$ 不是（[@prop-null-cone-rigidity]）；$x \mapsto 1 + 1/x$ 的迭代 $1, 2, 1.5, 1.667, \dots$ 与唯一正不动点 $\varphi$（[@cor-golden-fixed-point-unique]，迭代值本身是屏幕计算）；重叠从 $0.8$ 转到 $1$ 时两条单位记录重合（[@thm-ch29-gram-rigidity-and-pell]）；$e^{i}$ 级数前六项的青色折线离 $e^{i}$ 差 $0.0014$，在尾界 $e/720 \approx 0.0038$ 之内（[@thm-ch34-quantum-arc-differential-and-macro-integral]）；取 $f(y) = 2 - y$，抄下品红扭对角线的第 2 行逼出 $f(1) = 1$（[@thm-ch38-self-mapped-diagonal-fixed-point]）；平方映射下，下面转满一圈，上面只从 $1$ 走到 $-1$（[@thm-ch39-double-cover-no-section-and-720-lift]，第二圈回到 $1$ 是手工推导）。终点是本节的锚点：编号 $1, 2, 3, 5, 7, 8$ 的六颗青色弹珠按“编号不超过袋中颗数才留下”的规则变成 $6, 4, 3, 3$，离开的弹珠画成品红，$N = 2 \le 6$，改变 $2 \le 6$ 次，与 [@thm-coda-fixed-point-anchor] 一致。片中所有数字都是屏幕上的计算；余弦不动点依靠巴拿赫压缩原理，是文献结果；$\mathrm{P} \neq \mathrm{NP}$（[@conj-p-neq-np]）与三维纳维—斯托克斯光滑性（[@conj-coda-navier-stokes-regularity]）标红，仍是开放问题。
+:::
+
 ---

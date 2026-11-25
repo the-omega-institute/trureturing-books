@@ -1,0 +1,38 @@
+{
+  "title": "Ten parts, one arc, and why it stops",
+  "title_zh": "十部一条弧，以及它为什么会停下",
+  "summary": "The book's ten parts are drawn as ten beads on one arc, a way to read the book rather than a theorem, and at each bead the film picks up one theorem checked by the Lean kernel, with a small number worked on screen. Part I: the Born weight of two unit arrows at 60° is the overlap squared, 1/4. Part II: for u = (3, 0) and v = (1, 2), line squared 9 plus area squared 36 is 45, the squared lengths multiplied (the Lagrange identity). Part III: any rotation of space is a finite word in turns about two non-parallel axes; R_y(90°) = R_z(90°) R_x(90°) R_z(−90°). Part IV: for the fixed CHSH settings no two-qubit state scores above 2√2, and the Bell state reaches it. Part V: a quadratic form that vanishes on every light ray is S(1, 0) times the Minkowski interval. Part VI: x ↦ 1 + 1/x has the golden ratio as its only positive fixed point; the iterates 1, 2, 1.5, 1.667, … are computed, not part of the theorem. Part VII: two unit records overlap by exactly 1 only when they are equal. Part VIII: six terms of the series for e^i miss it by 0.0014, within the Taylor tail bound e/720. Part IX: a row of a table that copies the twisted diagonal forces a fixed point of the twist. Part X: under z ↦ z², one full turn below lifts to a path from 1 to −1 above. The coda's anchor closes the arc: six marbles under a delete-only rule go 6, 4, 3, 3, and Lean checks that on any finite set a delete-only update stops within as many steps as it started with and changes at most that many times. Stopping is not emptying and is not the cosine fixed point, which rests on Banach's principle (a literature result); P versus NP and three-dimensional Navier–Stokes smoothness stay open.",
+  "summary_zh": "全书十部画成一条弧上的十颗珠子，这是读这本书的一种方式，不是定理；每颗珠子上，影片捡起一条由 Lean 内核检验过的定理，并在屏幕上算一个小数字。第一部：夹角 60° 的两支单位箭头，玻恩权重是重叠的平方 1/4。第二部：u = (3, 0)、v = (1, 2)，线的平方 9 加面积的平方 36 等于 45，正是长度平方之积（拉格朗日恒等式）。第三部：空间的任何转动都是绕两根不平行轴的有限串转动；R_y(90°) = R_z(90°) R_x(90°) R_z(−90°)。第四部：对固定的 CHSH 设置，没有哪个双比特态的得分超过 2√2，贝尔态恰好达到。第五部：在每条光线上都为零的二次型，等于 S(1, 0) 乘闵可夫斯基间隔。第六部：x ↦ 1 + 1/x 在正数里只有黄金比一个不动点；迭代值 1、2、1.5、1.667……是屏幕计算，不是定理内容。第七部：两条单位记录的重叠恰为 1，当且仅当它们相同。第八部：e^i 的级数取前六项，误差 0.0014，在泰勒尾界 e/720 之内。第九部：表中抄下扭过的对角线的那一行，逼出扭法的一个不动点。第十部：在 z ↦ z² 下，下面转满一圈，提升到上面是从 1 到 −1 的一条路。终章的锚点收住这条弧：六颗弹珠按只删不添的规则变成 6、4、3、3；Lean 检验了在任意有限集合上，只删不添的更新至多走初始元素个数那么多步就停下，改变次数也不超过这个数。停下不等于清空，也不是余弦不动点，后者依靠巴拿赫压缩原理（文献结果）；P 与 NP、三维纳维—斯托克斯方程的光滑性仍是开放问题。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:29",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · ten beads on one arc, one small worked picture per part (two arrows, a parallelogram, two axes, CHSH settings, a light cone, a cobweb, two records, a series polygon, a self-listing table, a double cover), a bag of marbles and its staircase",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction",
+    "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity",
+    "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word",
+    "D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest",
+    "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null",
+    "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique",
+    "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization",
+    "D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le",
+    "D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed",
+    "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift",
+    "D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_ten-parts-one-arc_720p_narrated.mp4",
+    "cover": "quantum-geometry_ten-parts-one-arc_cover.jpg"
+  }
+}

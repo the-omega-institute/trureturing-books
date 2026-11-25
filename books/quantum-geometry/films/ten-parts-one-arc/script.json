@@ -1,0 +1,42 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "CHSH": "C H S H", "Navier": "Nav-yay", "Stokes": "Stokes", "NP": "N P", "Banach": "Bah-nahk"},
+  "music": {"bpm": 80, "progression": "d-minor"},
+  "scenes": [
+    {"id": "arc", "name": "ONE ARC", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Ten parts, thirty-nine chapters. It looks like a pile of topics, but it is one walk.", "十部、三十九章，看上去是一堆题目，其实是同一段路。"],
+      ["Point to line, line to area, area to sphere, then a step outside. Later parts turn back toward the one who looks.", "从点到线，从线到面，从面到球，再走出球外；后面几部转回来，看那个正在看的人。"],
+      ["Let's walk it once, and pick up one checked result at every stop.", "我们把这段路走一遍，每一站只捡一条检验过的结论。"]
+    ], "cues": [{"line": 2, "at": 2.2, "kind": "chime"}]},
+    {"id": "first", "name": "PARTS I TO V", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
+      ["One: compare two arrows directly. The Born weight is the overlap squared; at sixty degrees, one quarter.", "第一部：两支箭头直接比。玻恩权重是重叠的平方：夹角 60°，就是四分之一。"],
+      ["Two: two arrows hold a line and an area. Nine plus thirty-six is forty-five, the squared lengths multiplied.", "第二部：两支箭头之间有一条线和一块面积。9 + 36 = 45，正是长度平方之积。"],
+      ["Three: two tilted axes are enough. Any turn of space is a finite chain of turns about those two.", "第三部：两根不共线的轴就够了。空间的任何转动，都是绕这两根轴的有限串转动。"],
+      ["Four: two qubits, four fixed settings. No state scores above two root two, and the Bell state hits it.", "第四部：两个量子比特，四个固定设置。没有哪个态超过 2√2，贝尔态恰好达到。"],
+      ["Five: spacetime. A quadratic form that vanishes on every light ray is the interval, times one number.", "第五部：时空。一个在每条光线上都为零的二次型，就是时空间隔乘上一个数。"]
+    ], "cues": [{"line": 0, "at": 3.4, "kind": "stamp"}, {"line": 3, "at": 4.0, "kind": "chime"}]},
+    {"id": "second", "name": "PARTS VI TO X", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["Six: a map fed its own output. One plus one over x has one positive fixed point, the golden ratio.", "第六部：把输出喂回给自己。x ↦ 1 + 1/x 在正数里只有一个不动点：黄金比。"],
+      ["Seven: no referee. Two unit records overlap by exactly one precisely when they are the same record.", "第七部：没有裁判。两条单位记录的重叠恰好等于 1，当且仅当它们是同一条记录。"],
+      ["Eight: tiny arcs. Six terms of the series for e to the i miss it by about one thousandth.", "第八部：极小圆弧。eⁱ 的级数取前六项，离 eⁱ 只差约千分之一。"],
+      ["Nine: a table that lists itself. A row that copies the twisted diagonal forces a fixed point.", "第九部：一张列出自己的表。哪一行抄下了扭过的对角线，哪里就逼出一个不动点。"],
+      ["Ten: under squaring, one full turn below lifts to a half turn above. You arrive at minus one.", "第十部：在平方映射下，下面转满一圈，上面只转半圈：你停在 −1。"]
+    ], "cues": [{"line": 0, "at": 3.6, "kind": "chime"}, {"line": 4, "at": 4.2, "kind": "glitch"}]},
+    {"id": "stop", "name": "WHERE IT STOPS", "lead": 0.5, "tail": 0.7, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Why do we expect a journey to need a grand finale? Shrinking needs none.", "我们凭什么以为一段路非要有个宏大的结局？只会缩小的东西，不需要。"],
+      ["Six marbles in a bag. Each round, every marble numbered above the count leaves. Nothing comes back.", "袋里六颗弹珠。每一轮，编号大于袋中颗数的弹珠离开，没有一颗回来。"],
+      ["Six, four, three, three. Two changes, then it is still from round two on.", "6、4、3、3。改了两次，从第二轮起就不再变。"],
+      ["Lean checks the general case: on a finite set, a delete-only update stops within as many steps as it started with.", "Lean 检验一般情形：有限集合上只删不添，至多走初始个数那么多步就停下。"],
+      ["Take only from a finite bag, and it must come to rest.", "有限的袋子只拿不放，终将停下。"]
+    ], "cues": [{"line": 3, "at": 1.0, "kind": "stamp"}, {"line": 4, "at": 0.6, "kind": "impact"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["The arc is a way to read the book, not a theorem. Lean checks each stop, not the road.", "这条弧是读这本书的一种方式，不是定理。Lean 检验的是每一站，不是这条路。"],
+      ["Coming to rest is not emptying, and it is not the cosine fixed point; that uses Banach's principle, a literature result.", "停下不等于清空，也不是余弦不动点；后者要用巴拿赫压缩原理，是文献结果。"],
+      ["And P versus NP, and three-dimensional Navier–Stokes smoothness, stay open.", "而 P 与 NP、三维纳维—斯托克斯方程的光滑性，仍是开放问题。"]
+    ], "cues": [{"line": 2, "at": 1.4, "kind": "glitch"}]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 4.0, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, the coda.", "《量子计算的几何直觉》· 终章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}
