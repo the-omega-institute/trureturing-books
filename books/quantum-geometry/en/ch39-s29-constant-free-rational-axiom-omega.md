@@ -178,6 +178,22 @@ For $d\equiv1\pmod4$, codimension one requires $a$ to be a sum of two rational s
 A great-circle equilateral triangle and a regular tetrahedron each need four rational coordinates to preserve their respective readings. For the triangle, take $(1,0,0,0)$ and the two vectors $(-1,\pm1,\pm1,\pm1)/2$ with all three signs equal. A regular $5$-simplex needs eight rational coordinates.
 :::
 
+For any three unit vectors, we can again align the first with a coordinate axis. The unit-diagonal Gram matrix with the three prescribed inner products $a,b,c$ has determinant $\Delta=1+2abc-a^2-b^2-c^2$.
+
+::: {.theorem #thm-ch39-rational-unit-triple-gram title="A five-coordinate criterion for three unit vectors" lean="D5/S3/Quantum/AURICOmega/RationalUnitTripleGram.rationalFiveCoordinateUnitTriple"}
+Let $a,b,c\in\mathbb Q$ with $a^2,b^2\le1$. Unit vectors $u,v,w$ in $\mathbb Q^5$ with $u\cdot v=a$, $u\cdot w=b$, and $v\cdot w=c$ exist if and only if $\Delta$ is a sum of three rational squares.
+:::
+
+::: {.proof}
+A rational isometry sends $u$ to the first coordinate axis. The first coordinates of $v,w$ are then $a,b$. Treat their remaining four coordinates as quaternions $x,y$. Their squared norms are $1-a^2,1-b^2$, and the real part of $\bar x y$ is $c-ab$. Clear the denominators of $x,y$ and apply the OmegaMath identity for integer quaternions. It gives $\Delta=(1-a^2)(1-b^2)-(c-ab)^2$ as the sum of the squared imaginary coordinates of $\bar x y$. Conversely, the four-square theorem supplies $x$. Use the three-square decomposition as the imaginary part of $\bar x y$ and multiply on the left by $(\bar x)^{-1}$ to find $y$ when $x\ne0$. If $x=0$, the determinant condition forces $c-ab=0$ and the four-square theorem supplies $y$ directly. The full proof is checked by the Lean kernel.
+:::
+
+When $\Delta>0$, removing the known first coordinates reduces the five-coordinate test to representing a positive definite binary quadratic form as four squares of rational linear forms. This is the rational version of Mordell's four-square criterion. [Hunsucker, §1](https://doi.org/10.4064/aa-19-4-321-325)
+
+For $a=b=0$ and $c=3/4$, the determinant is $7/16$. If it were a sum of three rational squares, multiplying the coordinates by four and clearing denominators would give $7D^2=X^2+Y^2+Z^2$. When $D$ is even, reduction modulo $4$ forces $X,Y,Z$ to be even, so we can divide all four integers by two. When $D$ is odd, the left side is $7$ modulo $8$, which no sum of three residues from $\{0,1,4\}$ can attain. These readings require at least six rational coordinates, and $e_1,e_2,(0,3/4,1/2,1/4,1/4,1/4)$ realize them in six.
+
+Six coordinates suffice for every rational positive semidefinite three-point unit Gram matrix. When $\Delta=0$, the criterion above already gives a realization in five coordinates. For $\Delta>0$, put $t=1-a^2>0$ and $r=c-ab$. Meyer's theorem gives a nonzero rational zero of the indefinite form $\lambda_1^2+\lambda_2^2+\lambda_3^2+t z^2-\Delta s^2$. Its first four terms are positive definite, so $s\ne0$ and we may scale to $s=1$. Give $\bar x y$ real part $r$ and imaginary part $\lambda=(\lambda_1,\lambda_2,\lambda_3)$. Use $z$ as the sixth coordinate of $w$ and zero as the sixth coordinate of the other two vectors. This preserves the inner product $c$, and the squared norm of $y$ plus $z^2$ is $(r^2+\Delta)/t=1-b^2$. The example above makes six the sharp uniform bound. [Local and global results underlying Meyer's theorem, Chan Corollary 3.6 and Theorem 4.2](https://wkchan.faculty.wesleyan.edu/files/2019/04/qflecturenotes.pdf)
+
 ## 32.5.4 Formal Anchors, Literature Boundaries, and Constant-Free Rational Audit {#sec-ch39-29-4}
 
 We gather the fifteen frozen theorems anchoring the constant-free rational skeleton of $\mathrm{AXIOM}\text{-}\Omega$, the integer-coefficient Chebyshev doubling equivalence, and the three flat/discrete residual bounds into the following theorem box:
