@@ -51,7 +51,7 @@ const buShares = t => { const rz = Math.cos(t), rx = Math.sin(t), pu = (1 + rz) 
 /* LEDGER THREE */
 const CO_X = 0.8, CO_A0 = Math.acos(CO_X), CO_A1 = Math.acos(CO_X * CO_X);
 /* LEDGER FOUR */
-const ST_P = 0.01, ST_TH = Math.asin(Math.sqrt(ST_P)), ST_N = 9;
+const ST_P = 0.01, ST_TH = Math.asin(Math.sqrt(ST_P)), ST_N = 8;
 const stChance = n => Math.pow(Math.sin((2 * n + 1) * ST_TH), 2);
 /* LEDGER FIVE */
 const SR_ALPHA = Math.SQRT2 - 1, SR_STARTS = [0, 0.3], SR_NMAX = 240;
@@ -324,7 +324,7 @@ SCENES.budget = S => {
   ctx.restore();
   arrow(BU_O[0], BU_O[1], tip[0], tip[1], C.now, a, 5);
   dot(tip[0], tip[1], 12, 'g', a);
-  txt(`r = (${ffNum(b.rx)}, 0, ${ffNum(b.rz)})`, tip[0] + 18, tip[1] - 14, { size: 22, fam: F.mono, w: 700, c: C.now, a });
+  txt(`r = (${ffNum(b.rx)}, 0, ${ffNum(b.rz)})`, BU_O[0] - BU_R - 10, BU_O[1] - BU_R + 20, { size: 22, fam: F.mono, w: 700, c: C.now, a });
   if (qa > 0.003) txt('shown · 看得见', BU_O[0] - 16, BU_O[1] - BU_R * b.rz / 2, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.cyan, a: qa });
   if (ha > 0.003) txt('hidden · 看不见', BU_O[0] + BU_R * b.rx / 2, BU_O[1] + 40, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.mag, a: ha });
   /* the two answers as bars against fifty-fifty */
@@ -354,7 +354,7 @@ SCENES.budget = S => {
     ffLean(1096, 738, 'complementary_context_probability_pythagoras', lea, { size: 15 });
     txt('here: state = r/√2, shadow on the up–down line (computed) · 这里取 state = r/√2', 1096, 776, { size: 15, fam: F.zh, w: 700, c: C.dim, a: lea });
   }
-  stamp('0.50 = 0.32 + 0.18', 520, 250, Q(S, 3, 'Lean checks', 0.5, 0.8) * (1 - at(S, 4, 0.5)), C.lean, 30, -0.05);
+  stamp('0.50 = 0.32 + 0.18', 820, 250, Q(S, 3, 'Lean checks', 0.5, 0.8) * (1 - at(S, 4, 0.5)), C.lean, 30, -0.05);
 };
 
 /* ======================================================================= */
@@ -407,7 +407,7 @@ SCENES.copy = S => {
     ffRich([['0.80 ≠ 0.64', C.white]], 1444, 550, { size: 40, a: na });
     txt("the books don't balance · 账对不上", 1444, 600, { size: 18, fam: F.zh, w: 700, c: C.white, a: na * 0.85 });
   }
-  txt('a copier keeps overlaps · 复印机保持重叠', 1444, 650, { size: 16, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 1, 'never change', 0.6) });
+  txt('a copier keeps overlaps · 复印机保持重叠', 1444, 650, { size: 16, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 1, 'keep overlaps', 0.6) });
   /* line 3: the lock */
   const lea = a * Q(S, 3, 'Lean checks', 0.6);
   if (lea > 0.003) {
@@ -415,8 +415,8 @@ SCENES.copy = S => {
     txt('U copies ψ and φ  ⇒  ⟨φ, ψ⟩ = ⟨φ, ψ⟩²  ∧  (φ = ψ  ∨  ⟨φ, ψ⟩ = 0)', 166, 742, { size: 28, fam: F.math, w: 700, c: C.white, a: lea });
     ffLean(166, 794, 'no_cloning_inner_product_criterion', lea, { size: 18 });
     const ea = a * Q(S, 3, 'Equal, or perpendicular', 0.6);
-    chip(1460, 780, 180, 44, 'equal · ⟨φ,ψ⟩ = 1', C.lean, ea, 17, F.mono);
-    chip(1680, 780, 220, 44, 'perpendicular · 0', C.lean, ea, 17, F.mono);
+    chip(1450, 780, 220, 44, 'equal · φ = ψ', C.lean, ea, 18, F.mono);
+    chip(1680, 780, 220, 44, 'perpendicular · 0', C.lean, ea, 18, F.mono);
   }
   stamp('0.80 ≠ 0.64', 760, 320, Q(S, 2, 'do not balance', 0.4) * (1 - at(S, 3, 0.5)), C.white, 34, -0.06);
 };
@@ -432,7 +432,7 @@ SCENES.steps = S => {
   ffTab(S, 4, 'NO SKIPPING AHEAD', '博弈公平：不能跳步', a);
   /* the round counter: rounds 0..7 from "Lean checks" to "round seven", then on to 9 */
   const t2 = phraseAt(S, 2, 'Lean checks'), t7 = phraseAt(S, 3, 'round seven');
-  const nf = S.u < t2 ? -1 : Math.min(7.999, 8 * (S.u - t2) / Math.max(0.1, t7 + 0.6 - t2)) + Q(S, 3, 'round seven', 2.0, 1.2);
+  const nf = S.u < t2 ? -1 : Math.min(7.999, 8 * (S.u - t2) / Math.max(0.1, t7 + 0.6 - t2));
   const n = Math.floor(nf);
   /* the turnstile: the failure line B, the success line W, the state at angle (2n+1)θ */
   const P = ang => [ST_O[0] + ST_R * Math.cos(ang), ST_O[1] - ST_R * Math.sin(ang)];
@@ -523,7 +523,7 @@ SCENES.stars = S => {
     for (let n = 1; n <= Math.min(N, 60); n++) { const p = pos(srFrac(s + n * SR_ALPHA)); dot(p[0], p[1], 4, i ? 'c' : 'w', ra * 0.55); }
     const pc = pos(srFrac(s + Math.max(N, 0) * SR_ALPHA));
     dot(pc[0], pc[1], 12, 'g', ra);
-    txt(names[i], p0[0] + (i ? -30 : 16), p0[1] + (i ? -12 : 30), { size: 26, fam: F.math, w: 700, c: cols[i], a: ra });
+    txt(names[i], p0[0] + (i ? -30 : -40), p0[1] + (i ? -12 : 10), { size: 26, fam: F.math, w: 700, c: cols[i], a: ra });
   });
   /* the plot of the running averages */
   const pa = a * at(S, 1, 0.6);
