@@ -851,7 +851,16 @@ $$
 \left|G_N(u)_{ab}-G_N(0)_{ab}\right|\le 2u^2 .
 $$
 
-The cubic sine remainder gives a uniform error in the second feature. Both features have magnitude at most one on the window, so summation of their products preserves the order $u^2$. When $q/N^{5/2}$ tends to a positive real number, the front matrix error is $O(N^{-3})$. The comparison uses the exact lattice weight $(t-j^2)/Z$, where $t=N(N+1)-1/2$ and $Z$ normalizes the sum over the window. Multiplied by $N$, this quadratic has sign margins of order $N^{-1}$ at $j=N$ and $j=N+1$. The matrix estimate applies to the front window. The full cyclic support also requires control of the antipodal part of the joint moment system and the signs at threshold equality. [Antipodal support problem](https://github.com/the-omega-institute/trureturing/issues/34029)
+The cubic sine remainder gives a uniform error in the second feature. Both features have magnitude at most one on the window, so the entrywise matrix error remains of order $u^2$ after summation and division by $N$. As $N\to\infty$ and $u\to0$, the matrix has rows $(2,2/3)$ and $(2/3,2/5)$. In the regime $q/N^{5/2}\to\gamma>0$, the error compared with the zero-mesh matrix at the same $N$ is $O(N^{-3})$.
+
+For $t=N(N+1)-1/2$ and $Z=\sum_{|j|\le N}(t-j^2)$, set $a=(Nt/Z,-N^3/Z)$. At zero mesh the matrix sends $a$ exactly to $(1,m/N^2)$. At mesh $u$ the moment residual satisfies
+
+$$
+\left|\left[G_N(u)a-(1,m/N^2)\right]_i\right|
+\le 2u^2(|a_0|+|a_1|)\quad(i=0,1).
+$$
+
+The scaled lattice weight $N(t-j^2)/Z$ has sign margins of order $N^{-1}$ at $j=N$ and $j=N+1$. Determining the full cyclic support still requires control of the antipodal equations and the boundary sign at an antipodal activation threshold. [Antipodal support problem](https://github.com/the-omega-institute/trureturing/issues/34029)
 
 ## Changing the height cutoff in a local statistic
 
