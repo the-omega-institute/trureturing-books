@@ -551,7 +551,7 @@ $$
 -\!\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ odd}}}B_T^2\le R_K\le
 \sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ even}}}B_T^2.
 $$
-The exact remainder is the sum of the omitted even-cardinality squares minus the sum of the odd-cardinality squares. It vanishes for $K\ge d$. Multiplying by nonnegative Fourier weights and summing preserves the computed negative contributions. This gives a degree-sensitive refinement when applying the Fejér band estimate below. Bounding the high-degree subset squares and the exceptional-character weight for the actual ζ ordinates still requires an arithmetic estimate. [Related proof candidate](https://github.com/the-omega-institute/trureturing/pull/34086)
+The exact remainder is the sum of the omitted even-cardinality squares minus the sum of the odd-cardinality squares. It vanishes for $K\ge d$. Multiplying by nonnegative Fourier weights and summing preserves the computed negative contributions. This gives a degree-sensitive refinement when applying the Fejér band estimate below. Bounding the high-degree subset squares and the exceptional-character weight for the actual ζ ordinates still requires an arithmetic estimate. [Lean proof of the signed expansion](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_expansion) [Lean proof of the parity remainder](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_remainder)
 
 #### Centered coefficient bounds with a quadratic exponential
 
@@ -565,7 +565,7 @@ e^{-A_jx}-1=-A_j x e^{-A_j x/2}\sum_{m\ge0}\frac{(A_jx/2)^{2m}}{(2m+1)!}.
 $$
 The inequality $6^m m!\le(2m+1)!$ bounds the norm of each local even coefficient by the corresponding coefficient of $e^{w_j^2 x^2/24}$. Extracting the $k_T$ linear factors, combining the phase exponentials, and majorizing the Cauchy product give the degree-$n$ coefficient of $e^{|U_T|x+V_T x^2/24}$. The original coefficient is zero if $k_T>d$. The bound is exact for $n=0$ or $n=1$. If $U_T=0$ and $n$ is odd, the coefficient vanishes. For the general exponential parameter $c$ in place of $S$, a singleton $T=\{j\}$ with $A_j\ne0$ and $c=A_j/2$ gives the degree-$3$ norm $w_j^3/24$, attaining equality for the constant $1/24$ in the quadratic majorant. [Power series for hyperbolic sine](https://dlmf.nist.gov/4.33.E2)
 
-Apply this estimate to the odd and even remainder budgets above, taking the smaller bound with $B_T$ for each subset. The actual ζ tail still requires estimates for the distribution of the subset-centered phase sums with the character weights, and for their aggregate remainder at growing degree. [Related proof candidate](https://github.com/the-omega-institute/trureturing/pull/34089)
+Apply this estimate to the odd and even remainder budgets above, taking the smaller bound with $B_T$ for each subset. The actual ζ tail still requires estimates for the distribution of the subset-centered phase sums with the character weights, and for their aggregate remainder at growing degree. [Lean proof of the centered overlap bound](lean:D5/S3/Fourier/Concentration/CenteredDisjointCharacterBound.centered_overlap_bound)
 
 #### The signed principal sum and its explicit error
 
@@ -582,7 +582,7 @@ For the second inequality, multiply the reverse triangle bound on the difference
 $$
 \left|[x^dy^d]Q_k-\sum_{\substack{T\subseteq J\\|T|\le d}}(-1)^{|T|}|P_T|^2\right|\le\sum_{\substack{T\subseteq J\\|T|\le d}}A_T^2(H_T^2-h_T^2).
 $$
-The terms have zero error for $d-|T|=0,1$. The empty subset also has zero error. In particular the entire approximation is exact for $d\le2$. The inequality holds for each character and can be averaged using positive Fourier weights. Bounding the alternating principal sum and the aggregate error at the required ζ-zero scale remains open. [Related proof candidate](https://github.com/the-omega-institute/trureturing/pull/34094)
+The terms have zero error for $d-|T|=0,1$. The empty subset also has zero error. In particular the entire approximation is exact for $d\le2$. The inequality holds for each character and can be averaged using positive Fourier weights. Bounding the alternating principal sum and the aggregate error at the required ζ-zero scale remains open. [Lean principal coefficient proof](lean:D5/S3/Fourier/Concentration/CenteredDisjointPrincipal.centered_principal_remainder) [Lean mixed error proof](lean:D5/S3/Fourier/Concentration/CenteredDisjointPrincipal.mixed_centered_principal_error)
 
 ### Bounding a cyclic band with nonnegative Fourier weights
 

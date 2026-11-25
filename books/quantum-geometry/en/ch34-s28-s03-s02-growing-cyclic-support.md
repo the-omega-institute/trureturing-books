@@ -65,7 +65,7 @@ In particular the signed values at $N$ and $N+1$ are eventually strictly positiv
 
 At every fixed real rear offset $r$, using the rear feature formula in the same fitted polynomial gives
 $$
-N^3p_N^{\rm rear}(r)\longrightarrow B_\infty-\tfrac34r^2.
+N^3p_N^{\mathrm{rear}}(r)\longrightarrow B_\infty-\tfrac34r^2.
 $$
 The strict sign at any such offset is determined by this limit when it is nonzero. The limits concern the signed fit for a fixed nonempty finite rear set $S$. To certify a particular cyclic optimizer one still needs to identify the finite cyclic site correspondence and extend the complement signs across all other sites. At $B_\infty=3r^2/4$ the limiting sign alone leaves the activation level open. [Lean proof of the coefficient rate](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.refined_coefficients) · [Front and half-step limits](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_boundary_value) · [Rear limit](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_rear_value) · [Research problem](https://github.com/the-omega-institute/trureturing/issues/34029)
 
@@ -108,12 +108,30 @@ $$
 The next-order signed rear value satisfies
 
 $$
-N\left(|S|N^3p_N^{\rm rear}(r)-Q+\tfrac34D\right)
+N\left(|S|N^3p_N^{\mathrm{rear}}(r)-Q+\tfrac34D\right)
 \longrightarrow L+Q+\tfrac98 D.
 $$
 
-The exact lattice normalization is $Z=\frac43 N^3+2N^2-N/3-1/2$. Consequently $N(C_N+3/4)\to9/8$, using the cubic error bound for the fitted front coefficient. The third row of the coupled fit differs from $(0,\sum_{s\in S}s^2,|S|)$ by $o(1/N)$. Indeed, the growing front contribution is $O(N^{-3})$, and the finitely many fixed rear features have errors bounded by constants times $N^2h^2$ or $h^2$. The same estimates show $N^3p_N^{\rm rear}(r)=C_Nr^2+B_N+o(1/N)$. Eliminating $B_N$ via the exact target $Q_N(1+1/N)$ gives the displayed limit.
+The exact lattice normalization is $Z=\frac43 N^3+2N^2-N/3-1/2$. Consequently $N(C_N+3/4)\to9/8$, using the cubic error bound for the fitted front coefficient. The third row of the coupled fit differs from $(0,\sum_{s\in S}s^2,|S|)$ by $o(1/N)$. Indeed, the growing front contribution is $O(N^{-3})$, and the finitely many fixed rear features have errors bounded by constants times $N^2h^2$ or $h^2$. The same estimates show $N^3p_N^{\mathrm{rear}}(r)=C_Nr^2+B_N+o(1/N)$. Eliminating $B_N$ via the exact target $Q_N(1+1/N)$ gives the displayed limit.
 
 Suppose now that $Q=T_e(l+1)$ and the parity is eventually $e$. The first omitted rear radius of $S_l$ is the last included rear radius of $S_{l+1}$. For both windows this radius has $3D/4=Q$. Its first-order sign is therefore determined by $L+5Q/2$. If this quantity is positive, the optimizer eventually has the larger rear window $S_{l+1}$. If it is negative, it has $S_l$. The front support is $|j|\le N$ in either case, with both exact moment equalities and the squared-distance energy bound above. When $L+5Q/2=0$, the finer sign remains open. [Lean proof of the scaled first-order rear expansion](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder.scaled_rear_first_order) [Lean proof of eventual support at threshold](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder.eventual_support_at_threshold)
 
 For $q/N^{5/2}\to\gamma>0$ at a critical ratio, if $N(q/(\gamma N^{5/2})-1)\to\eta$, then $Q=3\pi^2/(5\gamma^2)$ and $L=-2Q\eta$. Thus the activation is determined by whether $\eta$ lies below or above $5/4$. In particular parity-preserving rounding of $\gamma N^{5/2}$ with bounded error has $\eta=0$, so it enters the larger window. At $\eta=5/4$ a further expansion is needed.
+
+## Second-order activation when the first-order margin vanishes
+
+Assume also that $N(N(Q_N-Q)-L)\to H$. At any fixed offset $r$ for a nonempty finite rear set $S$, with $D=|S|r^2-\sum_{s\in S}s^2$, the second-order limit is
+
+$$
+\begin{aligned}
+N\Big[N\big(|S|N^3p_N^{\mathrm{rear}}(r)-Q+\tfrac34D\big)
+ -(L+Q+\tfrac98D)\Big]
+\longrightarrow H+L-\tfrac{15}{8}D .
+\end{aligned}
+$$
+
+The exact normalizer yields $N(N(C_N+3/4)-9/8)\to-15/8$. The cubic front-coefficient bound is sufficient for this limit. Multiplying the third-row and point-readout errors by $N^2$ still gives zero in the limit. Eliminating the rear intercept from the exact third moment as before yields the displayed correction.
+
+At a positive threshold $Q=T_e(l+1)$ with $L=-5Q/2$, the common disputed radius has $3D/4=Q$, and the correction reduces to $H-5Q$. A positive value selects $S_{l+1}$, and a negative value selects $S_l$. For both, the front window remains $|j|\le N$, the two moments attain their floors, and the unique optimizer satisfies the same squared-distance energy inequality.
+
+In modulus variables, let $N(N(q/(\gamma N^{5/2})-1)-5/4)\to\xi$. Expanding the inverse square gives $H=Q(75/16-2\xi)$, so the transition is at $\xi=-5/32$. The case $H=5Q$ (equivalently $\xi=-5/32$ under these modulus assumptions) remains open. [Lean proof of the second-order expansion](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.scaled_rear_second_order) [Lean proof of second-order support](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.eventual_support_at_second_order_threshold)

@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "4dd78e27ba3bc05d1e2ea291701ea326cdf9e79c",
-  "pinned_at": "2026-11-25T08:25:33Z",
+  "commit": "ca5992cabe66962ceecde81b295365f06850a14f",
+  "pinned_at": "2026-11-25T12:38:44Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1477,6 +1477,14 @@
       "line": 339,
       "signature": "theorem splitting_progression_power_tail (ε : ℝ) (hε : 0 < ε) : ∀ᶠ x : ℝ in atTop, ∀ q b m A L : ℕ, b%4=3 → 4 ∣ m → (∀ p : ℕ, p.Prime → p ∣ m → (p:ℝ) ≤ x^(1/2+ε/2) ∨ cutoff x < p) → exp (x^(ε/5)*(log x)^2)/(4*exp (4*x^(ε/5))) ≤ L → ((failures x ε q b m A L).card:ℝ) ≤ L*exp (-(min ε 1/38400)*x^(ε/5)*(log x)^2)"
     },
+    "D5/S3/Combinatorics/Geometry/EuclideanSimplex/RationalUnitSimplex.rational_unit_simplex_iff": {
+      "module": "D5/S3/Combinatorics/Geometry/EuclideanSimplex/RationalUnitSimplex",
+      "name": "D5.S3.Combinatorics.Geometry.EuclideanSimplex.RationalUnitSimplex.rational_unit_simplex_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:f6c9d545bf8e06d09be12e2d315c88263e2572910c2e452a862755034430c072",
+      "line": 385,
+      "signature": "theorem rational_unit_simplex_iff (n : ℕ) (hn : 0 < n) : (∃ c : ℚ, c ≠ 1 ∧ ∃ p : Fin (n + 1) → Fin n → ℚ, ∀ j k, p j ⬝ᵥ p k = if j = k then 1 else c) ↔ (Odd n ∧ IsSquare n) ∨ (Even n ∧ IsSquare (n + 1))"
+    },
     "D5/S3/Combinatorics/Graph/Chordal/ChordalBanachLimitTwo.not_subtwo_banach_chordal": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/ChordalBanachLimitTwo",
       "name": "SimpleGraph.BanachPathPower.not_subtwo_banach_chordal",
@@ -1556,6 +1564,30 @@
       "statement_id": "sha256:69173c864493530de1e2c59fcf49030dd66c1cf72cd9ac1f96b4f2b0849ee91d",
       "line": 360,
       "signature": "theorem IsChordal.exists_clique_bounded_banach_gain_potential {V : Type u} [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (k : ℕ) (hk : 2 ≤ k) (hclique : ∀ s : Finset V, G.IsClique (s : Set V) → s.card ≤ k + 1) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ (4 - 4 / (k : ℝ)) * ε"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.completeGraph_banach_lower_bound": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach",
+      "name": "SimpleGraph.completeGraph_banach_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:0a5fc9bf2658caf142b8a80ec2cde9aff8938be1b6cea4b2d33d5049f40137d9",
+      "line": 175,
+      "signature": "theorem completeGraph_banach_lower_bound (m : ℕ) (hm : 2 ≤ m) : ∃ g : Fin m → Fin m → ZeroDivSkew m, (∀ i j, g j i = -g i j) ∧ (∀ i j l, i ≠ j → j ≠ l → i ≠ l → ‖g i j + g j l - g i l‖ ≤ 1) ∧ ∀ φ : Fin m → ZeroDivSkew m, ∃ u v, u ≠ v ∧ ((m : ℝ) - 2) / m ≤ ‖g u v - (φ v - φ u)‖"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.completeGraph_banach_upper_bound": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach",
+      "name": "SimpleGraph.completeGraph_banach_upper_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:0a5fc9bf2658caf142b8a80ec2cde9aff8938be1b6cea4b2d33d5049f40137d9",
+      "line": 27,
+      "signature": "theorem completeGraph_banach_upper_bound {V : Type u} [Finite V] (hm : 2 ≤ Nat.card V) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, i ≠ j → j ≠ l → i ≠ l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, u ≠ v → ‖g u v - (φ v - φ u)‖ ≤ ((Nat.card V : ℝ) - 2) / Nat.card V * ε"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.separatedCliqueSum_banach_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach",
+      "name": "SimpleGraph.separatedCliqueSum_banach_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:0a5fc9bf2658caf142b8a80ec2cde9aff8938be1b6cea4b2d33d5049f40137d9",
+      "line": 318,
+      "signature": "theorem separatedCliqueSum_banach_gain_potential [Finite V] (T : SimpleGraph I) (hT : T.IsTree) (G : SimpleGraph V) (P : I → Set V) (hcover : ∀ v, ∃ a, v ∈ P a) (hedge : ∀ u v, G.Adj u v → ∃ a, u ∈ P a ∧ v ∈ P a) (m : ℕ) (hm : 1 ≤ m) (hattach : ∀ a b, T.Adj a b → (P a ∩ P b).Nonempty ∧ G.IsClique (P a ∩ P b) ∧ Nat.card ↥(P a ∩ P b) ≤ m) (hdisjoint : ∀ a b, a ≠ b → ¬ T.Adj a b → Disjoint (P a) (P b)) (hsep : ∀ a b c, T.Adj a b → T.Adj a c → b ≠ c → Disjoint (P a ∩ P b) (P a ∩ P c) ∧ ∀ u ∈ P a ∩ P b, ∀ v ∈ P a ∩ P c, ¬ G.Adj u v) (g : V → V → E) (R : ℝ) (hR : 0 ≤ R) (φ : I → V → E) (hfit : ∀ a u"
     },
     "D5/S3/Combinatorics/Graph/Chordal/GainPotential.SimpleGraph.IsChordal.exists_gain_potential": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/GainPotential",
@@ -4569,7 +4601,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingCoupledFit.coupledFit_eventually",
       "kind": "theorem",
-      "statement_id": "sha256:cab27696f731cb0589c2c383c71df3237001c9262516d4b61ac5914a1e63ae11",
+      "statement_id": "sha256:8e4fe7972f3bfdded48e52bd454a063eb62381ec8d379ad464043b235fc9bfaf",
       "line": 429,
       "signature": "theorem coupledFit_eventually {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) {S : Finset ℝ} (hS : S.Nonempty) (rhs : ℕ → Fin 3 → ℝ) : let readout"
     },
@@ -4577,7 +4609,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingCoupledFit.coupledMatrix_tendsto",
       "kind": "theorem",
-      "statement_id": "sha256:cab27696f731cb0589c2c383c71df3237001c9262516d4b61ac5914a1e63ae11",
+      "statement_id": "sha256:8e4fe7972f3bfdded48e52bd454a063eb62381ec8d379ad464043b235fc9bfaf",
       "line": 312,
       "signature": "theorem coupledMatrix_tendsto {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) (S : Finset ℝ) : let readout"
     },
@@ -4585,7 +4617,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.refined_coefficients",
       "kind": "theorem",
-      "statement_id": "sha256:2acb2f37ddc475919e98dea1ddabb5180ac34793bf8ddcce700ff768c1346f91",
+      "statement_id": "sha256:e60a26f8235447811e3aefcab8531c704c5ee83c61eff11af067ea1b8f96f24a",
       "line": 558,
       "signature": "theorem refined_coefficients {h : ℕ → ℝ} (hB : (fun n : ℕ => (n : ℝ)^5 * (h n)^2) =O[atTop] (fun _ => (1 : ℝ))) (S : Finset ℝ) (hS : S.Nonempty) : let readout"
     },
@@ -4593,7 +4625,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.scaled_boundary_value",
       "kind": "theorem",
-      "statement_id": "sha256:2acb2f37ddc475919e98dea1ddabb5180ac34793bf8ddcce700ff768c1346f91",
+      "statement_id": "sha256:e60a26f8235447811e3aefcab8531c704c5ee83c61eff11af067ea1b8f96f24a",
       "line": 786,
       "signature": "theorem scaled_boundary_value {h : ℕ → ℝ} (hB : (fun n : ℕ => (n : ℝ)^5 * (h n)^2) =O[atTop] (fun _ => (1 : ℝ))) (S : Finset ℝ) (hS : S.Nonempty) (offset : ℝ) : let readout"
     },
@@ -4601,7 +4633,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.scaled_rear_value",
       "kind": "theorem",
-      "statement_id": "sha256:2acb2f37ddc475919e98dea1ddabb5180ac34793bf8ddcce700ff768c1346f91",
+      "statement_id": "sha256:e60a26f8235447811e3aefcab8531c704c5ee83c61eff11af067ea1b8f96f24a",
       "line": 847,
       "signature": "theorem scaled_rear_value {h : ℕ → ℝ} {K : ℝ} (hK : Tendsto (fun n : ℕ => (n : ℝ)^5 * (h n)^2) atTop (𝓝 K)) (S : Finset ℝ) (hS : S.Nonempty) (r : ℝ) : let readout"
     },
@@ -4625,24 +4657,40 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingRearFirstOrder.eventual_support_at_threshold",
       "kind": "theorem",
-      "statement_id": "sha256:5cf0853a716476871ae060ecedf7ab7041f7ca0021382a24cec21eb3d34d5243",
-      "line": 415,
+      "statement_id": "sha256:3203abe597092ab94003c676924d5308a730dadc65d04cd4ad06fa60ec5a5411",
+      "line": 441,
       "signature": "theorem eventual_support_at_threshold (q : ℕ → ℕ) (hq : ∀ n, q n ≠ 0) (e l : ℕ) (hpar : ∀ᶠ n in atTop, q n % 2 = e) {K L : ℝ} (hK : Tendsto (fun n : ℕ => (n:ℝ)^5*(mesh (q n))^2) atTop (𝓝 K)) (hL : Tendsto (fun n : ℕ => (n:ℝ)*(3*((n:ℝ)^5*(mesh (q n))^2)/20-3*K/20)) atTop (𝓝 L)) (hcrit : 3*K/20=rearThreshold e (l+1)) (hne : L+3*K/8≠0) : let readout"
     },
     "D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder.scaled_rear_first_order": {
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingRearFirstOrder.scaled_rear_first_order",
       "kind": "theorem",
-      "statement_id": "sha256:5cf0853a716476871ae060ecedf7ab7041f7ca0021382a24cec21eb3d34d5243",
-      "line": 321,
+      "statement_id": "sha256:3203abe597092ab94003c676924d5308a730dadc65d04cd4ad06fa60ec5a5411",
+      "line": 346,
       "signature": "theorem scaled_rear_first_order {h : ℕ → ℝ} {K L : ℝ} (hK : Tendsto (fun n : ℕ => (n:ℝ)^5*(h n)^2) atTop (𝓝 K)) (hL : Tendsto (fun n : ℕ => (n:ℝ)*(3*((n:ℝ)^5*(h n)^2)/20-3*K/20)) atTop (𝓝 L)) (S : Finset ℝ) (hS : S.Nonempty) (r : ℝ) : let readout"
+    },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.eventual_support_at_second_order_threshold": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingRearSecondOrder.eventual_support_at_second_order_threshold",
+      "kind": "theorem",
+      "statement_id": "sha256:92d523b8fd0e45fe60d5254b61a3b4f5a36be6fd948e5249d7faf3bfee075c50",
+      "line": 142,
+      "signature": "theorem eventual_support_at_second_order_threshold (q : ℕ → ℕ) (hq : ∀ n, q n ≠ 0) (e l : ℕ) (hpar : ∀ᶠ n in atTop, q n % 2 = e) {K L H : ℝ} (hK : Tendsto (fun n : ℕ => (n:ℝ)^5*(mesh (q n))^2) atTop (𝓝 K)) (hL : Tendsto (fun n : ℕ => (n:ℝ)*(3*((n:ℝ)^5*(mesh (q n))^2)/20-3*K/20)) atTop (𝓝 L)) (hH : Tendsto (fun n : ℕ => (n:ℝ)*((n:ℝ)*(3*((n:ℝ)^5*(mesh (q n))^2)/20-3*K/20)-L)) atTop (𝓝 H)) (hcrit : 3*K/20=rearThreshold e (l+1)) (hmargin : L+3*K/8=0) (hne : H-3*K/4≠0) : let readout"
+    },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.scaled_rear_second_order": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingRearSecondOrder.scaled_rear_second_order",
+      "kind": "theorem",
+      "statement_id": "sha256:92d523b8fd0e45fe60d5254b61a3b4f5a36be6fd948e5249d7faf3bfee075c50",
+      "line": 77,
+      "signature": "theorem scaled_rear_second_order {h : ℕ → ℝ} {K L H : ℝ} (hK : Tendsto (fun n : ℕ => (n:ℝ)^5*(h n)^2) atTop (𝓝 K)) (hL : Tendsto (fun n : ℕ => (n:ℝ)*(3*((n:ℝ)^5*(h n)^2)/20-3*K/20)) atTop (𝓝 L)) (hH : Tendsto (fun n : ℕ => (n:ℝ)*((n:ℝ)*(3*((n:ℝ)^5*(h n)^2)/20-3*K/20)-L)) atTop (𝓝 H)) (S : Finset ℝ) (hS : S.Nonempty) (r : ℝ) : let readout"
     },
     "D5/S3/Fourier/Asymptotics/CyclicGrowingSupport.eventual_strict_support_away_from_thresholds": {
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingSupport",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingSupport.eventual_strict_support_away_from_thresholds",
       "kind": "theorem",
-      "statement_id": "sha256:6cfc397bab386628865fe4bafdc694efefda7d1bfb75a3d3a3f5d4d7d2925d75",
-      "line": 852,
+      "statement_id": "sha256:b41df376111273fb1d81ac4c6cf8b7a6a873022cc826b4d639ae64b30530bc90",
+      "line": 878,
       "signature": "theorem eventual_strict_support_away_from_thresholds (q : ℕ → ℕ) (hq : ∀ n, q n ≠ 0) (e : ℕ) (hpar : ∀ᶠ n in atTop, q n % 2 = e) {K : ℝ} (hK : Tendsto (fun n : ℕ => (n : ℝ)^5 * (mesh (q n))^2) atTop (𝓝 K)) (hneq : ∀ l, 3*K/20 ≠ rearThreshold e l) : let readout"
     },
     "D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit": {
@@ -4705,7 +4753,7 @@
       "module": "D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation",
       "name": "D5.S3.Fourier.Asymptotics.LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer",
       "kind": "theorem",
-      "statement_id": "sha256:814f3aa990246c68380dbc7877178afa983d3ba529adc45812015c6b802a6584",
+      "statement_id": "sha256:dd66e094f98993776ef40f4b7dcd225983a3a2a67bd30590ad9d8a14da2bca69",
       "line": 451,
       "signature": "theorem exists_lattice_square_moment_minimizer (m : ℝ) : let lowerBound"
     },
@@ -4713,7 +4761,7 @@
       "module": "D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation",
       "name": "D5.S3.Fourier.Asymptotics.LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer_on_interval",
       "kind": "theorem",
-      "statement_id": "sha256:814f3aa990246c68380dbc7877178afa983d3ba529adc45812015c6b802a6584",
+      "statement_id": "sha256:dd66e094f98993776ef40f4b7dcd225983a3a2a67bd30590ad9d8a14da2bca69",
       "line": 417,
       "signature": "theorem exists_lattice_square_moment_minimizer_on_interval (n : ℕ) (hn : 0 < n) (m : ℝ) : let lowerBound"
     },
@@ -4820,6 +4868,30 @@
       "statement_id": "sha256:000b194141dd38f68a841b01c66646394ef57c3e8af6aa2365f12d1a55bdaa24",
       "line": 164,
       "signature": "theorem aggregate_cosine_imbalance {q : ℕ} [NeZero q] (hq : 7 ≤ q) : let c"
+    },
+    "D5/S3/Fourier/Concentration/CenteredDisjointCharacterBound.centered_overlap_bound": {
+      "module": "D5/S3/Fourier/Concentration/CenteredDisjointCharacterBound",
+      "name": "D5.S3.Fourier.Concentration.CenteredDisjointCharacterBound.centered_overlap_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:701b678366ef4fec9201b9a4b01158ebb3493c9686c5fa73a1df2b7963b4459f",
+      "line": 146,
+      "signature": "theorem centered_overlap_bound {J : Type*} (t : Finset J) (c : ℂ) (a : J → ℂ) (d : ℕ) : let k"
+    },
+    "D5/S3/Fourier/Concentration/CenteredDisjointPrincipal.centered_principal_remainder": {
+      "module": "D5/S3/Fourier/Concentration/CenteredDisjointPrincipal",
+      "name": "D5.S3.Fourier.Concentration.CenteredDisjointPrincipal.centered_principal_remainder",
+      "kind": "theorem",
+      "statement_id": "sha256:47dd148db9505468d48e5546c04f78b447e1e77b763dd6418493cbccdf68cdb5",
+      "line": 86,
+      "signature": "theorem centered_principal_remainder {J : Type*} (t : Finset J) (c : ℂ) (a : J → ℂ) (d : ℕ) (hd : t.card ≤ d) : let n"
+    },
+    "D5/S3/Fourier/Concentration/CenteredDisjointPrincipal.mixed_centered_principal_error": {
+      "module": "D5/S3/Fourier/Concentration/CenteredDisjointPrincipal",
+      "name": "D5.S3.Fourier.Concentration.CenteredDisjointPrincipal.mixed_centered_principal_error",
+      "kind": "theorem",
+      "statement_id": "sha256:47dd148db9505468d48e5546c04f78b447e1e77b763dd6418493cbccdf68cdb5",
+      "line": 121,
+      "signature": "theorem mixed_centered_principal_error {J : Type*} (s : Finset J) (a : J → ℂ) (d : ℕ) : let c"
     },
     "D5/S3/Fourier/Concentration/ClippedMomentWeights.exists_clipped_moment_minimizer": {
       "module": "D5/S3/Fourier/Concentration/ClippedMomentWeights",
@@ -4961,7 +5033,7 @@
       "module": "D5/S3/Fourier/Concentration/DegreeTwoMomentWitness",
       "name": "D5.S3.Fourier.Concentration.DegreeTwoMomentWitness.exists_equal_first_data_distinct_degree_two",
       "kind": "theorem",
-      "statement_id": "sha256:133510b216e0d0677d7ff83462dfadf798fa2026ca92c4f9ad31a91fd706c451",
+      "statement_id": "sha256:adf0db4b47d89f4b28463589cd46dd6f1ac1d309361a147b277a772071dc8426",
       "line": 89,
       "signature": "theorem exists_equal_first_data_distinct_degree_two : let secondMoment"
     },
@@ -4985,9 +5057,25 @@
       "module": "D5/S3/Fourier/Concentration/DisjointCharacterEnvelope",
       "name": "D5.S3.Fourier.Concentration.DisjointCharacterEnvelope.coefficient_envelope",
       "kind": "theorem",
-      "statement_id": "sha256:d41fe629cd9922fb975a6f26a99d83eb4c9608ecc434dd30253807c956ef0c61",
+      "statement_id": "sha256:1c61ac56e9a2c85f809bf47a9d3209fdef60d6e7407de2e97ea7b14478c9fb5f",
       "line": 313,
       "signature": "theorem coefficient_envelope {J : Type*} (s : Finset J) (a b : J → ℂ) (m n : ℕ) (r : ℝ) (hr : 0 < r) : let emptyPart"
+    },
+    "D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_expansion": {
+      "module": "D5/S3/Fourier/Concentration/DisjointCharacterRemainder",
+      "name": "D5.S3.Fourier.Concentration.DisjointCharacterRemainder.signed_overlap_expansion",
+      "kind": "theorem",
+      "statement_id": "sha256:0a5dcd4a3fcf32820fea8e047a21a1674e30e8699ef44417fd26fb3ca99fe34f",
+      "line": 133,
+      "signature": "theorem signed_overlap_expansion {J : Type*} (s : Finset J) (a : J → ℂ) (d : ℕ) : let c"
+    },
+    "D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_remainder": {
+      "module": "D5/S3/Fourier/Concentration/DisjointCharacterRemainder",
+      "name": "D5.S3.Fourier.Concentration.DisjointCharacterRemainder.signed_overlap_remainder",
+      "kind": "theorem",
+      "statement_id": "sha256:0a5dcd4a3fcf32820fea8e047a21a1674e30e8699ef44417fd26fb3ca99fe34f",
+      "line": 169,
+      "signature": "theorem signed_overlap_remainder {J : Type*} (s : Finset J) (a : J → ℂ) (d K : ℕ) : let c"
     },
     "D5/S3/Fourier/Concentration/DisjointSupportOccupationMass.scaled_disjoint_mass": {
       "module": "D5/S3/Fourier/Concentration/DisjointSupportOccupationMass",
@@ -5220,6 +5308,38 @@
       "statement_id": "sha256:ed6722ec030f102d6459bdd621ac965da0693f35c7c836e0f90a7bfae01fc86d",
       "line": 372,
       "signature": "theorem sharp_second_fourth_harmonic_bound (e k : ℝ) (he₀ : 0 ≤ e) (he₁ : e ≤ 1) (hk₀ : 0 ≤ k) (hk₁ : k ≤ 1) : let bound"
+    },
+    "D5/S3/Fourier/Concentration/SeparatedParabolicCollision.parabolic_collision_ratio_limit": {
+      "module": "D5/S3/Fourier/Concentration/SeparatedParabolicCollision",
+      "name": "D5.S3.Fourier.Concentration.SeparatedParabolicCollision.parabolic_collision_ratio_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:279658d758c35890fc0db23065894bc39e6791a72d5c90974e09ff16ea6cc1bd",
+      "line": 156,
+      "signature": "theorem parabolic_collision_ratio_limit (η : ℕ → ℝ) (L : ℝ) (hL : 0 < L) (hη : ∀ᶠ n in atTop, 0 < η n ∧ η n < 1) (hlim : Tendsto η atTop (𝓝 L)) : let V"
+    },
+    "D5/S3/Fourier/Concentration/SeparatedParabolicCollision.separated_parabolic_collision": {
+      "module": "D5/S3/Fourier/Concentration/SeparatedParabolicCollision",
+      "name": "D5.S3.Fourier.Concentration.SeparatedParabolicCollision.separated_parabolic_collision",
+      "kind": "theorem",
+      "statement_id": "sha256:279658d758c35890fc0db23065894bc39e6791a72d5c90974e09ff16ea6cc1bd",
+      "line": 26,
+      "signature": "theorem separated_parabolic_collision (n : ℕ) (hn : 0 < n) (η : ℝ) : let mass"
+    },
+    "D5/S3/Fourier/Concentration/ShiftedBinVariance.collision_parabolic_lower": {
+      "module": "D5/S3/Fourier/Concentration/ShiftedBinVariance",
+      "name": "D5.S3.Fourier.Concentration.ShiftedBinVariance.collision_parabolic_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:220d5d6f505a040d4254d7be742f6bba8baa6142d4bf6071edb738a0c49807f2",
+      "line": 187,
+      "signature": "theorem collision_parabolic_lower {I : Type*} (s : Finset I) (x c : I → ℝ) (a V η : ℝ) (hη : 0 < η) (hc : ∀ i ∈ s, 0 ≤ c i) (hm : ∑ i ∈ s, c i * (x i - a) ^ 2 ≤ V * ∑ i ∈ s, c i) (r : ℕ) (hr : 0 < r) (hM : V / η ^ 2 + 1 / 4 ≤ (r : ℝ) ^ 2) : let W"
+    },
+    "D5/S3/Fourier/Concentration/ShiftedBinVariance.exists_shifted_squared_moment": {
+      "module": "D5/S3/Fourier/Concentration/ShiftedBinVariance",
+      "name": "D5.S3.Fourier.Concentration.ShiftedBinVariance.exists_shifted_squared_moment",
+      "kind": "theorem",
+      "statement_id": "sha256:220d5d6f505a040d4254d7be742f6bba8baa6142d4bf6071edb738a0c49807f2",
+      "line": 69,
+      "signature": "theorem exists_shifted_squared_moment {I : Type*} (s : Finset I) (z c : I → ℝ) : let roundingPenalty"
     },
     "D5/S3/Fourier/Concentration/SixResidueMomentOptimum.six_two_mode_optimum": {
       "module": "D5/S3/Fourier/Concentration/SixResidueMomentOptimum",
@@ -7764,6 +7884,15 @@
       "line": 30,
       "signature": "theorem kappa_mul_mul (p q x y : unitary ℍ[ℝ]) : quaternionModel.kappa (p * x * q) (p * y * q) = quaternionModel.kappa x y"
     },
+    "D5/S3/Quantum/AURICOmega/RationalBlochTetrahedron.no_rational_bloch_tetrahedral_triangle": {
+      "module": "D5/S3/Quantum/AURICOmega/RationalBlochTetrahedron",
+      "name": "D5.S3.Quantum.AURICOmega.RationalBlochTetrahedron.no_rational_bloch_tetrahedral_triangle",
+      "kind": "theorem",
+      "statement_id": "sha256:e254ad274521e90a88ba570b078bb8642cfe40ceb88eeebe26200b48e2da926b",
+      "line": 19,
+      "signature": "public theorem no_rational_bloch_tetrahedral_triangle (a b : Quad4) (denominator : Nat) (c : Quad4) (hden : Not (Eq denominator Nat.zero)) (ha : Eq a.w Int.zero) (hb : Eq b.w Int.zero) (hc : Eq c.w Int.zero) (haa : Eq (a.dot a) (Int.ofNat (denominator.mul denominator))) (hbb : Eq (b.dot b) (Int.ofNat (denominator.mul denominator))) (hcc : Eq (c.dot c) (Int.ofNat (denominator.mul denominator))) (hab : Eq ((Int.ofNat Nat.one.succ.succ).mul (a.dot b)) (Int.ofNat (denominator.mul denominator)).neg) (hbc : Eq ((Int.ofNat Nat.one.succ.succ).mul (b.dot c)) (Int.ofNat (denominator.mul denominator)).ne",
+      "axioms": []
+    },
     "D5/S3/Quantum/AURICOmega/RayKernelFibreExtremum.rayKernel_isGreatest_and_integral": {
       "module": "D5/S3/Quantum/AURICOmega/RayKernelFibreExtremum",
       "name": "D5.S3.Quantum.AURICOmega.RayKernelFibreExtremum.rayKernel_isGreatest_and_integral",
@@ -9068,6 +9197,14 @@
       "line": 338,
       "signature": "theorem rational_rank_le_two_at_iff (b : ℝ) (L R : Matrix Bool Bool ℂ) (u v w z : ℂ) (hb : 0 < b) (ht : L.trace + (b : ℂ) = 1) (hr : R.trace = L.trace) (qL : ∀ i j, RationalEntry (L i j)) (qR : ∀ i j, RationalEntry (R i j)) (qu : RationalEntry u) (qv : RationalEntry v) (qw : RationalEntry w) (qz : RationalEntry z) : let C"
     },
+    "D5/S3/Quantum/Entanglement/Marginals/FibDiagonalRank.rational_rank_le_two_diagonal_iff": {
+      "module": "D5/S3/Quantum/Entanglement/Marginals/FibDiagonalRank",
+      "name": "D5.S3.Quantum.Entanglement.Marginals.FibDiagonalRank.rational_rank_le_two_diagonal_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:6d2481464210932f821b6bc9bb9c1074f7002e6270e00c132ca8ade5860a346b",
+      "line": 142,
+      "signature": "theorem rational_rank_le_two_diagonal_iff (b l r : ℚ) (hb : 0 < b) (hl : 0 ≤ l) (hr : 0 ≤ r) (hne : l ≠ r) : (∃ z : ℂ, ∃ ρ : Matrix Word Word ℂ, ρ.PosSemidef ∧ MatchesCoherentData b (diagonalEdgeBlock b l) (diagonalEdgeBlock b r) 0 0 0 z ρ ∧ ρ.rank ≤ 2 ∧ ∀ i j, RationalEntry (ρ i j)) ↔ (∃ z : ℂ, RationalEntry z ∧ normSq z = (b * (1 - b - l - r) : ℚ)) ∧ (∃ w : ℂ, RationalEntry w ∧ normSq w = (l * r : ℚ))"
+    },
     "D5/S3/Quantum/Entanglement/Marginals/FibMarginalExtension.extendible_iff": {
       "module": "D5/S3/Quantum/Entanglement/Marginals/FibMarginalExtension",
       "name": "D5.S3.Quantum.Entanglement.Marginals.FibMarginalExtension.extendible_iff",
@@ -9155,6 +9292,22 @@
       "statement_id": "sha256:4a67af8bed068782c7112f9edf5eeb58010845563dde02230773a842bc9548a1",
       "line": 327,
       "signature": "theorem rational_endpoint_rank_le_three (L R : Matrix Bool Bool ℂ) : (∃ S : Matrix (Bool × Bool) (Bool × Bool) ℂ, S.PosSemidef ∧ partialTraceRight S = L ∧ partialTraceLeft S = R ∧ S.rank ≤ 3 ∧ ∀ i j, RationalEntry (S i j)) ↔ L.PosSemidef ∧ R.PosSemidef ∧ L.trace = R.trace ∧ (∀ i j, RationalEntry (L i j)) ∧ ∀ i j, RationalEntry (R i j)"
+    },
+    "D5/S3/Quantum/Entanglement/Marginals/RationalQubitMixedEndpoint.rational_rank_two_of_maximally_mixed_endpoint": {
+      "module": "D5/S3/Quantum/Entanglement/Marginals/RationalQubitMixedEndpoint",
+      "name": "D5.S3.Quantum.Entanglement.Marginals.RationalQubitMixedEndpoint.rational_rank_two_of_maximally_mixed_endpoint",
+      "kind": "theorem",
+      "statement_id": "sha256:24a715a71dd2c997590f7ca047ce6c41de13567f9eb64cc09adab755ebf1c193",
+      "line": 92,
+      "signature": "theorem rational_rank_two_of_maximally_mixed_endpoint (c : Fin 3 → ℚ) (hc : 0 < c ⬝ᵥ c) (hunit : c ⬝ᵥ c < 1) : ∃ T : Matrix (Bool × Bool) (Bool × Bool) ℂ, T.PosSemidef ∧ T.rank = 2 ∧ (∀ i j, RationalEntry (T i j)) ∧ partialTraceRight T = (1 / 2 : ℂ) • (1 : Matrix Bool Bool ℂ) ∧ partialTraceLeft T = (1 / 2 : ℂ) • (1 + rationalBlochMatrix c)"
+    },
+    "D5/S3/Quantum/Entanglement/Marginals/RationalQubitProjector.rational_rank_two_of_quadratic_witness": {
+      "module": "D5/S3/Quantum/Entanglement/Marginals/RationalQubitProjector",
+      "name": "D5.S3.Quantum.Entanglement.Marginals.RationalQubitProjector.rational_rank_two_of_quadratic_witness",
+      "kind": "theorem",
+      "statement_id": "sha256:7215480596326f0c304a6a7a32b0cd5122e10ea242b1d63786e9ca4ba68acdd2",
+      "line": 286,
+      "signature": "theorem rational_rank_two_of_quadratic_witness (a b y v : Fin 3 → ℚ) (hordered : a ⬝ᵥ a < b ⬝ᵥ b) (hy : 0 < y ⬝ᵥ y) (hlinear : a ⬝ᵥ y = b ⬝ᵥ v) (hquad : y ⬝ᵥ y = (1 - b ⬝ᵥ b) * (v ⬝ᵥ v) + (b ⬝ᵥ v) ^ 2) : ∃ T : Matrix (Bool × Bool) (Bool × Bool) ℂ, T.PosSemidef ∧ T.rank = 2 ∧ (∀ i j, RationalEntry (T i j)) ∧ partialTraceRight T = (1 / 2 : ℂ) • (1 + rationalBlochMatrix a) ∧ partialTraceLeft T = (1 / 2 : ℂ) • (1 + rationalBlochMatrix b)"
     },
     "D5/S3/Quantum/Entanglement/Marginals/RationalQubitPurity.rational_qubit_purity_iff": {
       "module": "D5/S3/Quantum/Entanglement/Marginals/RationalQubitPurity",
