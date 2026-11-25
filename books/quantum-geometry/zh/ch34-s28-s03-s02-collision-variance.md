@@ -344,7 +344,25 @@ $$
 Q(u/s)^n\le e^{-u^2/2},\qquad s=\sqrt{nM_2/2}.
 $$
 
-该上界允许使用支配收敛处理满足四阶矩条件的中心窗口。对于实际 ζ 零点，仍须验证相应矩条件并控制窗口之外的傅里叶峰及其加权贡献。 [中心窗口高斯上界](lean:D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.score_gaussian_envelope)
+该上界允许使用支配收敛处理满足四阶矩条件的中心窗口。应用于实际 ζ 零点时，需要配对矩比值界，并须控制中心窗口之外的傅里叶峰及其加权贡献。 [中心窗口高斯上界](lean:D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.score_gaussian_envelope)
+
+### 实际 ζ 零点的矩比值条件
+
+在现有 RH 条件接口下，取全部满足 $0<\gamma\le T$ 的 ζ 零点，并按解析重数 $m_\gamma$ 赋权 $a_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$。令 $W(T)=\sum_\gamma a_\gamma$，$w_\gamma=a_\gamma/W(T)$，$P_k(T)=\sum_{\gamma,\gamma'}w_\gamma w_{\gamma'}(\gamma-\gamma')^k$。记 $c=1/(2\pi)$。Riemann–von Mangoldt 计数渐近式给出 $N(T)-N(3T/4)\ge cT\log T/8$（充分大的 $T$）。对上段 $3T/4<\gamma\le T$，$a_\gamma\ge m_\gamma/(2T)$，故该段权重至少为 $c\log T/16$。结合调和质量渐近式，$W(T)\le c(\log T)^2$，且 $W(T/2)\ge c(\log T)^2/16$。
+
+上下两段的归一化权重分别至少为 $1/16$ 和 $1/(16\log T)$，段间频率差绝对值至少为 $T/4$。因此仅保留从下段到上段的有序配对，即得
+
+$$
+P_2(T)\ge\frac{T^2}{4096\log T}>0,\qquad P_4(T)\le T^2P_2(T).
+$$
+
+第二个不等式只用所有正纵坐标均不超过 $T$。所以充分大的 $T$ 上，归一化权重非负且总和为一，并且
+
+$$
+\frac{P_4(T)}{P_2(T)^2}\le4096\log T.
+$$
+
+[调和权重矩比值界](https://github.com/the-omega-institute/trureturing/blob/93bd4f35a76ee2e86010f8f119ad1bb4c8aabf48/D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.lean#L59) 若 $T_n\to\infty$ 且 $\log T_n/n\to0$，则实际归一化零点谱满足前述高斯轮廓的四阶矩比值假设。固定比例的频率缩放 $g_\gamma=\gamma/r$（$r>0$）不改变此矩比值。中心 Fejér 主项还须满足分辨率与实际方差尺度的兼容条件。中间时间区域的非中心峰估计仍须独立建立。
 
 ## 移动中心窗口的 Fejér 积分主项
 
@@ -386,7 +404,7 @@ $$
 K_{\eta_n}(t)|S_n(t)|^{2n}\,dt\longrightarrow0,
 $$
 
-并且对邻近的乘法分辨率验证相应极限。实际 ζ 零点的矩比值条件与非中心峰的积分估计仍是开放的算术缺口。
+并且对邻近的乘法分辨率验证相应极限。对于按调和权重加权的实际 ζ 零点谱，上述截断增长条件保证矩比值条件成立。非中心峰的积分估计仍是开放的算术缺口。
 
 ### 全线矩的有限观察窗口
 
