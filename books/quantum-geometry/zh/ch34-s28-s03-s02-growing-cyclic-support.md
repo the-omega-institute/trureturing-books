@@ -134,4 +134,18 @@ $$
 
 在正阈值 $Q=T_e(l+1)$ 上若 $L=-5Q/2$，两个相邻窗口共同的争议半径满足 $3D/4=Q$，二阶修正项化为 $H-5Q$。该量为正时选取 $S_{l+1}$，为负时选取 $S_l$。两种情形的前部窗口均为 $|j|\le N$，两个余弦矩均取到下界，唯一最优解仍满足上述平方距离能量不等式。
 
-以周期表示，设 $N(N(q/(\gamma N^{5/2})-1)-5/4)\to\xi$。对倒数平方展开得到 $H=Q(75/16-2\xi)$，故跃迁位置为 $\xi=-5/32$。当 $H=5Q$（在上述周期假设下即 $\xi=-5/32$）时仍待更细的估计。 [Lean 二阶展开证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.scaled_rear_second_order) [Lean 二阶支撑证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.eventual_support_at_second_order_threshold)
+以周期表示，设 $N(N(q/(\gamma N^{5/2})-1)-5/4)\to\xi$。对倒数平方展开得到 $H=Q(75/16-2\xi)$，故跃迁位置为 $\xi=-5/32$。当 $H=5Q$（在上述周期假设下即 $\xi=-5/32$）时，更高阶渐近符号判据仍待解决。下节给出精确的有限判别。 [Lean 二阶展开证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.scaled_rear_second_order) [Lean 二阶支撑证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.eventual_support_at_second_order_threshold)
+
+## 首项阈值等号处的精确有限支撑
+
+在任意正阈值 $Q=T_e(l+1)$ 上，相邻对径窗口 $S=S_l$ 和 $T=S_{l+1}$ 具有共同的争议边界半径 $R=l+1+e/2$。这两个窗口的带符号拟合值满足精确恒等式
+
+$$
+\det(M_S)p_S(R)=\det(M_T)p_T(R).
+$$
+
+较大窗口新增 $\pm R$ 两点，其取样特征一致。若对应的矩列与系数行为 $u$ 和 $r$，则 $M_T=M_S+2ur^{\mathsf T}$。两个拟合系数向量满足右端相同的矩方程。将方程相减并应用矩阵行列式引理即可得到上述恒等式。两个行列式分别趋于 $16|S|/45$ 与 $16|T|/45$，故充分大的 $N$ 上均为正。
+
+对每个充分大的 $N$，考察较小窗口在争议半径上的带符号拟合值。若 $p_S(R)>0$，选取 $T$ 可使其纳入边界的权重为正。若 $p_S(R)\le0$，选取 $S$ 可使其未纳入边界的带符号值非正，包括精确等于零的情形。其余对径边界和前部边界的严格符号由首项极限保证。选取的拟合给出两个窗口上的精确正权重支撑，满足两个矩等式与平方距离能量不等式。该分类只要求首项收敛 $Q_N\to T_e(l+1)$ 与最终奇偶性，允许所选窗口随 $N$ 变化。
+
+前述漂移定理依次给出渐近符号的充分条件。即使二阶余量消失，有限比较仍可确定精确支撑。有限跃迁位置更高阶的显式渐近估计是另一个待推进的问题。 [Lean 精确值恒等式证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingThresholdExact.adjacent_fit_score) [Lean 精确阈值支撑证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingThresholdExact.eventual_support_at_leading_threshold)

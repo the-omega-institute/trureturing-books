@@ -134,4 +134,18 @@ The exact normalizer yields $N(N(C_N+3/4)-9/8)\to-15/8$. The cubic front-coeffic
 
 At a positive threshold $Q=T_e(l+1)$ with $L=-5Q/2$, the common disputed radius has $3D/4=Q$, and the correction reduces to $H-5Q$. A positive value selects $S_{l+1}$, and a negative value selects $S_l$. For both, the front window remains $|j|\le N$, the two moments attain their floors, and the unique optimizer satisfies the same squared-distance energy inequality.
 
-In modulus variables, let $N(N(q/(\gamma N^{5/2})-1)-5/4)\to\xi$. Expanding the inverse square gives $H=Q(75/16-2\xi)$, so the transition is at $\xi=-5/32$. The case $H=5Q$ (equivalently $\xi=-5/32$ under these modulus assumptions) remains open. [Lean proof of the second-order expansion](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.scaled_rear_second_order) [Lean proof of second-order support](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.eventual_support_at_second_order_threshold)
+In modulus variables, let $N(N(q/(\gamma N^{5/2})-1)-5/4)\to\xi$. Expanding the inverse square gives $H=Q(75/16-2\xi)$, so the transition is at $\xi=-5/32$. When $H=5Q$ (equivalently $\xi=-5/32$ under these modulus assumptions), a higher-order asymptotic sign criterion remains open. The exact finite decision below applies. [Lean proof of the second-order expansion](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.scaled_rear_second_order) [Lean proof of second-order support](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.eventual_support_at_second_order_threshold)
+
+## Exact finite support at a leading threshold
+
+At each positive threshold $Q=T_e(l+1)$, the adjacent rear windows $S=S_l$ and $T=S_{l+1}$ have a common disputed boundary radius $R=l+1+e/2$. There is an exact identity between their signed fitted weights at this radius,
+
+$$
+\det(M_S)p_S(R)=\det(M_T)p_T(R).
+$$
+
+The larger window adds two new points at $\pm R$, whose sampled features coincide. If the corresponding moment column and coefficient row are $u$ and $r$, then $M_T=M_S+2ur^{\mathsf T}$. Both coefficient vectors solve the moment equations with the same right-hand side. Subtracting the fitted equations and applying the matrix determinant lemma yields the identity. The limiting determinants are $16|S|/45$ and $16|T|/45$, so both are positive for sufficiently large $N$.
+
+For each sufficiently large $N$ use the sign of the smaller-window fit at the disputed radius. If $p_S(R)>0$, taking $T$ gives a positive value at its retained boundary. If $p_S(R)\le0$, taking $S$ gives a nonpositive value at its omitted boundary, including the exact zero case. The other two rear and front-window signs required by the finite certificate follow from the leading limits. The selected fit has exact positive support on its two windows, both moments attain their floors, and the squared-distance inequality holds. This classification assumes only the leading convergence $Q_N\to T_e(l+1)$ and eventual parity, so it allows the selected window to change with $N$.
+
+The previous drift laws give successive sufficient asymptotic sign criteria. At a vanishing second-order margin the finite comparison still determines the exact support. An explicit higher-order asymptotic location of the finite transition remains a separate estimation problem. [Lean proof of the exact score identity](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingThresholdExact.adjacent_fit_score) [Lean proof of exact threshold support](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingThresholdExact.eventual_support_at_leading_threshold)

@@ -4722,6 +4722,22 @@
       "line": 878,
       "signature": "theorem eventual_strict_support_away_from_thresholds (q : ℕ → ℕ) (hq : ∀ n, q n ≠ 0) (e : ℕ) (hpar : ∀ᶠ n in atTop, q n % 2 = e) {K : ℝ} (hK : Tendsto (fun n : ℕ => (n : ℝ)^5 * (mesh (q n))^2) atTop (𝓝 K)) (hneq : ∀ l, 3*K/20 ≠ rearThreshold e l) : let readout"
     },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingThresholdExact.adjacent_fit_score": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingThresholdExact",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingThresholdExact.adjacent_fit_score",
+      "kind": "theorem",
+      "statement_id": "sha256:bda00fb735a209861647bf2824fa75ad10e4fc36abbd9feee3a326af0b3cec42",
+      "line": 134,
+      "signature": "theorem adjacent_fit_score {h : ℕ → ℝ} {K : ℝ} (hK : Tendsto (fun n : ℕ => (n:ℝ)^5*(h n)^2) atTop (𝓝 K)) (e l : ℕ) (he : e<2) : let R"
+    },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingThresholdExact.eventual_support_at_leading_threshold": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingThresholdExact",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingThresholdExact.eventual_support_at_leading_threshold",
+      "kind": "theorem",
+      "statement_id": "sha256:bda00fb735a209861647bf2824fa75ad10e4fc36abbd9feee3a326af0b3cec42",
+      "line": 185,
+      "signature": "theorem eventual_support_at_leading_threshold (q : ℕ → ℕ) (hq : ∀ n, q n ≠ 0) (e l : ℕ) (hpar : ∀ᶠ n in atTop, q n % 2 = e) {K : ℝ} (hK : Tendsto (fun n : ℕ => (n:ℝ)^5*(mesh (q n))^2) atTop (𝓝 K)) (hcrit : 3*K/20=rearThreshold e (l+1)) : let readout"
+    },
     "D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit": {
       "module": "D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass",
       "name": "D5.S3.Fourier.Asymptotics.CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit",
