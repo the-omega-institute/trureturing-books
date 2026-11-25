@@ -824,6 +824,25 @@ To obtain an exact certificate, fit the weight as a linear combination of $1$, $
 
 The bound on how large $q$ must be depends on the fixed budget. The support statement concerns the two prescribed cosine constraints. [Exact certificate and boundary calculation](https://github.com/the-omega-institute/trureturing/issues/34004#issuecomment-7147550923)
 
+### Where the front support changes on a finite cycle
+
+Fix an integer $N\ge2$ and write $h=2\pi/q$. Use the common cosine floor $1-2mh^2$. The lattice switch occurs at $m_N=(N^2-1)/5$. In a neighborhood of $m_N$, for sufficiently large $q$, the finite cycle switches at a single budget $m_{N,q}$. The nearest antipodal sites and the front sites $|j|\le N-1$ carry positive mass throughout the neighborhood. The sites $\pm N$ carry positive mass exactly when $m>m_{N,q}$. Along each parity,
+$$
+\frac{m_{N,q}-m_N}{h^2}
+\longrightarrow
+\frac{(N^2-1)(47-31N^2)}{420}+\frac{3(N^2-1)d^2}{20},
+\qquad d=\begin{cases}0& q\text{ even},\\[2pt]1/2& q\text{ odd}.\end{cases}
+$$
+Both coefficients are negative, so the boundary pair enters before the lattice budget is reached. The odd coefficient exceeds the even coefficient by $3(N^2-1)/80$.
+
+For a fixed candidate window, the moment right-hand side is affine in $m$. Fit the three cosine features on the larger window and define the switch by the zero of the weight at $N$. The slope of that weight tends to $(N^2-\bar x)/V>0$, where $x_j=j^2$, $\bar x$ is the mean of $x_j$ on $|j|\le N$, and $V=\sum_j(x_j-\bar x)^2$. Removing the two zero-weight rows leaves the same moment equations at the switch. For the smaller window, the evaluation at the omitted pair also has positive slope. The other front weights retain positive limits. The antipodal weights are positive at order $h^2$, while the first excluded cosine on each side has a strictly negative limit when the boundary pair is included in the test window. Convexity then controls the middle of the cycle. [Parametric quadratic programming, §4](https://doi.org/10.1016/S0005-1098(01)00174-1)
+
+For the shift, write $T=N^2$, $W_j=(T-x_j)/Z$ with $Z=\sum_j(T-x_j)$, and $m_4=\sum_j x_j^2W_j$. Let $r_j$ be the coefficient of $h^2$ in the front weight at budget $m_N$, and let $\mu=3m_N/4$ be the coefficient of the total antipodal weight. The quadratic $r_j+\mu W_j$ has zero total and first $x$-moment $K=m_4/3+(m_N-d^2)\mu$. Its leading coefficient is $1/(3Z)$. Eliminating the constant and linear terms gives
+$$
+\frac{r_N V}{T-\bar x}=K+\frac{m_4-m_N^2}{3}.
+$$
+The threshold shift is the negative of this ratio. The symmetric finite sums yield $m_4=(N^2-1)(3N^2-5)/35$ and give the displayed coefficient. The asymptotic keeps $N$ fixed. Small moduli can give positive weight on additional antipodal levels. Lean verification of the switch and its coefficient is pending. [Derivation and finite checks](https://github.com/the-omega-institute/trureturing/issues/34016#issuecomment-7148575133)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
