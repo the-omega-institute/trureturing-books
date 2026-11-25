@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "cab924490ffaacbe290c85ef55ac4ae0cd1edd64",
-  "pinned_at": "2026-11-25T09:55:12Z",
+  "commit": "939d0ed17f5a61cf068ac89726c53c36e55e1fb1",
+  "pinned_at": "2026-11-25T10:29:51Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -5001,7 +5001,7 @@
       "module": "D5/S3/Fourier/Concentration/DisjointCharacterEnvelope",
       "name": "D5.S3.Fourier.Concentration.DisjointCharacterEnvelope.coefficient_envelope",
       "kind": "theorem",
-      "statement_id": "sha256:e2e4d29946d7fc9bf5091652524ceb6296a2cff6ec4fd0c94b7cec34c96bcc41",
+      "statement_id": "sha256:1c61ac56e9a2c85f809bf47a9d3209fdef60d6e7407de2e97ea7b14478c9fb5f",
       "line": 313,
       "signature": "theorem coefficient_envelope {J : Type*} (s : Finset J) (a b : J → ℂ) (m n : ℕ) (r : ℝ) (hr : 0 < r) : let emptyPart"
     },
@@ -9179,6 +9179,14 @@
       "statement_id": "sha256:4a67af8bed068782c7112f9edf5eeb58010845563dde02230773a842bc9548a1",
       "line": 327,
       "signature": "theorem rational_endpoint_rank_le_three (L R : Matrix Bool Bool ℂ) : (∃ S : Matrix (Bool × Bool) (Bool × Bool) ℂ, S.PosSemidef ∧ partialTraceRight S = L ∧ partialTraceLeft S = R ∧ S.rank ≤ 3 ∧ ∀ i j, RationalEntry (S i j)) ↔ L.PosSemidef ∧ R.PosSemidef ∧ L.trace = R.trace ∧ (∀ i j, RationalEntry (L i j)) ∧ ∀ i j, RationalEntry (R i j)"
+    },
+    "D5/S3/Quantum/Entanglement/Marginals/RationalQubitMixedEndpoint.rational_rank_two_of_maximally_mixed_endpoint": {
+      "module": "D5/S3/Quantum/Entanglement/Marginals/RationalQubitMixedEndpoint",
+      "name": "D5.S3.Quantum.Entanglement.Marginals.RationalQubitMixedEndpoint.rational_rank_two_of_maximally_mixed_endpoint",
+      "kind": "theorem",
+      "statement_id": "sha256:24a715a71dd2c997590f7ca047ce6c41de13567f9eb64cc09adab755ebf1c193",
+      "line": 92,
+      "signature": "theorem rational_rank_two_of_maximally_mixed_endpoint (c : Fin 3 → ℚ) (hc : 0 < c ⬝ᵥ c) (hunit : c ⬝ᵥ c < 1) : ∃ T : Matrix (Bool × Bool) (Bool × Bool) ℂ, T.PosSemidef ∧ T.rank = 2 ∧ (∀ i j, RationalEntry (T i j)) ∧ partialTraceRight T = (1 / 2 : ℂ) • (1 : Matrix Bool Bool ℂ) ∧ partialTraceLeft T = (1 / 2 : ℂ) • (1 + rationalBlochMatrix c)"
     },
     "D5/S3/Quantum/Entanglement/Marginals/RationalQubitProjector.rational_rank_two_of_quadratic_witness": {
       "module": "D5/S3/Quantum/Entanglement/Marginals/RationalQubitProjector",
