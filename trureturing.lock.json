@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "c6faf07dab59b2c727672658e3349e87abebcfc4",
-  "pinned_at": "2026-11-25T19:19:08Z",
+  "commit": "55f73b2de1aeb4a4ee55b3d016a101eb844ab39b",
+  "pinned_at": "2026-11-25T19:59:55Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -5246,7 +5246,7 @@
       "module": "D5/S3/Fourier/Concentration/FiniteCollisionVariance",
       "name": "D5.S3.Fourier.Concentration.FiniteCollisionVariance.tailCollisionMass_lower_variance",
       "kind": "theorem",
-      "statement_id": "sha256:3bd2fc528d140a440d6e9ff10b7115faa52360ac12dc8e8e3e96063823df2641",
+      "statement_id": "sha256:03556308e1ef5378ddcccad67e6ea67e8e9e6be5b8e77a73651bb5cfccf513cf",
       "line": 243,
       "signature": "theorem tailCollisionMass_lower_variance {J : Type*} [Fintype J] [DecidableEq J] (g w : J → ℝ) (hw : ∀ j, 0 ≤ w j) (hW : 0 < ∑ j, w j) {p : ℕ} (hp : 0 < p) {η : ℝ} (hη : 0 < η) : let W"
     },
