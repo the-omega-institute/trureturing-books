@@ -154,11 +154,12 @@ SCENES.hook = S => {
   const a = clamp((u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [2, null, 'argued']]);
-  const board = a * (1 - 0.75 * Q(S, 2, 'live on a grid', 1.0));
+  const board = a * (1 - Q(S, 2, 'Let them live', 0.9));
   const t1 = lineAt(S, 1).s;
   const hi = [[5, 'Five yes'], [6, 'six no'], [7, 'seven no'], [8, 'eight yes']];
   let cur = 25;
   if (u >= t1) { cur = null; for (const [n, ph] of hi) if (u >= phraseAt(S, 1, ph)) cur = n; }
+  if (u >= lineAt(S, 2).s - 0.2) cur = null;
   for (let n = 1; n <= 50; n++) {
     const i = (n - 1) % 10, j = Math.floor((n - 1) / 10);
     const x = HK.x0 + i * (HK.s + HK.g), y = HK.y0 + j * (HK.s + HK.g);
@@ -181,7 +182,7 @@ SCENES.hook = S => {
   txt('sum of two squares · 两平方和', HK.x0, HK.y0 - 30, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: board * at(S, 1, 0.5) });
   txt('a, b = 0, 1, 2, …', HK.x0 + 840 - 8, HK.y0 - 30, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.dim, a: board * at(S, 1, 0.5) });
   /* line 2: the grid appears */
-  const ga = a * Q(S, 2, 'live on a grid', 1.0);
+  const ga = a * Q(S, 2, 'Let them live', 1.0, 0.4);
   if (ga > 0.003) {
     isGrid([W / 2, 520], 84, [-9, 9], [-3, 3], ga);
     txt('a + b i', W / 2 + 3 * 84 + 14, 520 - 2 * 84 - 14, { size: 30, fam: F.math, w: 700, c: C.white, a: ga });
@@ -199,7 +200,7 @@ SCENES.mirror = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean'], [4, null, 'computed']]);
   isGrid(MI_O, MI_U, [-1, 13], [-3, 3], a);
-  txt('real · 实轴', MI_O[0] + 13.5 * MI_U, MI_O[1] + 40, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.dim, a });
+  txt('real · 实轴', MI_O[0] + 11.6 * MI_U, MI_O[1] + 40, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.dim, a });
   txt('i', MI_O[0] + 14, MI_O[1] - 3.3 * MI_U, { size: 26, fam: F.math, w: 700, c: C.dim, a });
   const z = isP(MI_O, MI_U, IS_Z), zb = isP(MI_O, MI_U, gConj(IS_Z)), th = gArg(IS_Z);
   const pa = a * at(S, 0, 0.6), ma = a * Q(S, 0, 'mirror image', 0.6);
@@ -207,7 +208,7 @@ SCENES.mirror = S => {
   txt('3 + 2i', z[0] + 14, z[1] - 10, { size: 30, fam: F.math, w: 700, c: C.now, a: pa });
   if (ma > 0.003) {
     ctx.save(); ctx.setLineDash([10, 8]); line(MI_O[0] - 60, MI_O[1], MI_O[0] + 6.4 * MI_U, MI_O[1], C.argued, ma * 0.9, 2.5); ctx.restore();
-    txt('mirror · 镜子', MI_O[0] + 6.5 * MI_U, MI_O[1] - 12, { size: 20, fam: F.zh, w: 700, c: C.argued, a: ma });
+    txt('mirror · 镜子', MI_O[0] + 5.2 * MI_U, MI_O[1] + 40, { size: 20, fam: F.zh, w: 700, c: C.argued, a: ma });
     arrow(MI_O[0], MI_O[1], zb[0], zb[1], C.white, ma, 4);
     txt('3 − 2i', zb[0] + 14, zb[1] + 30, { size: 30, fam: F.math, w: 700, c: C.white, a: ma });
   }
@@ -224,14 +225,14 @@ SCENES.mirror = S => {
     const e = [MI_O[0] + 13 * MI_U * la, MI_O[1]];
     line(MI_O[0], MI_O[1], e[0], e[1], C.cyan, a, 9);
     dot(e[0], e[1], 14, 'c', a);
-    txt('13', MI_O[0] + 13 * MI_U, MI_O[1] + 46, { size: 34, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: a * clamp((la - 0.8) / 0.2) });
+    txt('13', MI_O[0] + 13 * MI_U, MI_O[1] - 30, { size: 34, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: a * clamp((la - 0.8) / 0.2) });
   }
   /* line 2: the legs */
   const lg = a * at(S, 2, 0.6);
   if (lg > 0.003) {
     ctx.save(); ctx.setLineDash([6, 6]);
     line(MI_O[0], MI_O[1] + 3, z[0], MI_O[1] + 3, C.white, lg * 0.8, 2); line(z[0], MI_O[1], z[0], z[1], C.white, lg * 0.8, 2); ctx.restore();
-    txt('3', (MI_O[0] + z[0]) / 2, MI_O[1] - 12, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.white, a: lg });
+    txt('3', MI_O[0] + 2.3 * MI_U, MI_O[1] - 14, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.white, a: lg });
     txt('2', z[0] + 12, (MI_O[1] + z[1]) / 2 + 8, { size: 24, fam: F.mono, w: 700, c: C.white, a: lg });
   }
   /* the readout */
@@ -247,17 +248,17 @@ SCENES.mirror = S => {
     panel(1340, 500, 480, 230, lean, C.lean, 'EVERY GRID POINT · 每个格点');
     isRich([['(a + bi)(a − bi) = a² + b²', C.white]], 1364, 572, { size: 28, a: lean * Q(S, 3, 'times its mirror', 0.5) });
     txt('a, b integers · 整数', 1364, 614, { size: 20, fam: F.zh, w: 700, c: C.lean, a: lean });
-    isLean(1364, 676, IS_LEAN.gaussian_integer_mul_conj_eq_sq_add_sq, lean, { size: 14 });
+    isLean(1364, 676, IS_LEAN.gaussian_integer_mul_conj_eq_sq_add_sq, lean, { size: 16 });
   }
   const da = a * at(S, 4, 0.6);
   if (da > 0.003) chip(MI_O[0] + 6.5 * MI_U, 790, 620, 64, 'a² + b² = distance² · 距离的平方', C.cyan, da, 26, F.zh);
-  stamp('z · z̄ = |z|²', 760, 300, Q(S, 3, 'Lean checks', 0.5, 0.8) * (1 - at(S, 4, 0.5)), C.lean, 34, -0.06);
+  stamp('z · z̄ = a² + b²', 760, 300, Q(S, 3, 'Lean checks', 0.5, 0.8) * (1 - at(S, 4, 0.5)), C.lean, 34, -0.06);
 };
 
 /* ======================================================================= */
 /*                              scene 3 · TURN AND STRETCH                   */
 /* ======================================================================= */
-const TU_O = [250, 760], TU_U = 62;
+const TU_O = [250, 720], TU_U = 62;
 SCENES.turn = S => {
   const u = S.u, a = isFade(S);
   if (a <= 0) return;
@@ -272,8 +273,8 @@ SCENES.turn = S => {
   arrow(TU_O[0], TU_O[1], pB[0], pB[1], C.white, da, 4);
   txt('3 + 2i', pB[0] + 14, pB[1] + 6, { size: 26, fam: F.math, w: 700, c: C.white, a: da });
   const sa = Q(S, 0, 'the angles add', 1.0);
-  isArc(TU_O, 150, 0, aA, C.white, a * sa, 3);
-  isArc(TU_O, 150, aA, aA + aB * ease(sa), C.argued, a * sa, 3);
+  isArc(TU_O, 95, 0, aA, C.white, a * sa, 4);
+  isArc(TU_O, 95, aA, aA + aB * ease(sa), C.argued, a * sa, 4);
   if (da > 0.003) txt('like a dial · 像转盘', TU_O[0] + 6.3 * TU_U, TU_O[1] - 7.6 * TU_U, { size: 22, fam: F.zh, w: 700, c: C.argued, a: da });
   /* line 1: the product (current, amber), until line 3 makes the mirror product current */
   const ma = a * Q(S, 3, 'Swap one factor', 0.6);
@@ -282,7 +283,7 @@ SCENES.turn = S => {
   txt('4 + 7i', pAB[0] + 14, pAB[1] - 6, { size: 30, fam: F.math, w: 700, c: ma > 0.5 ? C.cyan : C.now, a: pa });
   if (ma > 0.003) {
     ctx.save(); ctx.setLineDash([7, 7]); line(TU_O[0], TU_O[1], pBm[0], pBm[1], C.white, ma * 0.6, 2.5); ctx.restore();
-    txt('3 − 2i', pBm[0] + 10, pBm[1] + 26, { size: 22, fam: F.math, w: 700, c: C.white, a: ma * 0.8 });
+    txt('3 − 2i', pBm[0] - 12, pBm[1] + 28, { size: 22, fam: F.math, w: 700, c: C.white, a: ma * 0.8 });
     arrow(TU_O[0], TU_O[1], pM[0], pM[1], C.now, ma, 5);
     txt('8 − i', pM[0] + 14, pM[1] - 8, { size: 30, fam: F.math, w: 700, c: C.now, a: ma });
   }
@@ -331,7 +332,7 @@ SCENES.primes = S => {
     txt(`${p} = ?`, 1310, y + 4, { size: 30, fam: F.math, w: 700, c: C.white, a: ka });
     txt('✗', 1690, y + 4, { size: 30, fam: F.math, w: 700, align: 'right', c: C.mag, a: ka * la });
   });
-  if (fa > 0.003) isLean(200, 740, IS_LEAN.prime_eq_sq_add_sq_of_mod_four_eq_one, fa, { size: 14 });
+  if (fa > 0.003) isLean(200, 745, IS_LEAN.prime_eq_sq_add_sq_of_mod_four_eq_one, fa, { size: 17 });
   /* the middle: squares mod 4 */
   const ra = a * Q(S, 2, 'squares leave', 0.6);
   if (ra > 0.003) {
@@ -343,7 +344,7 @@ SCENES.primes = S => {
     }
     isRich([['0, 1 + 0, 1 → 0, 1, 2   ', C.cyan], ['never 3', C.mag]], 750, 640, { size: 24, a: a * Q(S, 2, 'never reach three', 0.5) });
     txt('永远余不出 3', 750, 676, { size: 22, fam: F.zh, w: 700, c: C.mag, a: a * Q(S, 2, 'never reach three', 0.5) });
-    isLean(1280, 790, IS_LEAN.square_residues_and_sum_obstruction, ra, { size: 14 });
+    isLean(1280, 745, IS_LEAN.square_residues_and_sum_obstruction, ra, { size: 17 });
   }
 };
 
@@ -385,7 +386,7 @@ SCENES.ledger = S => {
   isRich([['n = a² + b²', C.white], ['   ⟺   ', C.dim], ['every prime q ≡ 3 (mod 4) appears an even number of times', C.white]], 170, 240, { size: 26, a: a * Q(S, 0, 'remainder three', 0.5) });
   txt('n = a² + b²  ⟺  每个除以 4 余 3 的素数都出现偶数次', 170, 284, { size: 22, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 0, 'remainder three', 0.5) });
   const la = a * Q(S, 1, 'Lean checks', 0.6);
-  if (la > 0.003) isLean(1060, 300, IS_LEAN.eq_sq_add_sq_iff_even_factorization, la, { size: 13 });
+  if (la > 0.003) isLean(1240, 292, IS_LEAN.eq_sq_add_sq_iff_even_factorization, la, { size: 17 });
   /* the rows */
   const r9 = a * at(S, 2, 0.6), r25 = a * at(S, 3, 0.6), r24 = a * at(S, 4, 0.6);
   lgRow(420, 9, [[3, 'line'], [3, 'line']], '3² + 0²', true, r9, Q(S, 2, 'count only in pairs', 0.8));
@@ -403,7 +404,7 @@ SCENES.ledger = S => {
     txt('决定它的是因子，不是大小', W / 2, 630, { size: 46, fam: F.zh, w: 900, align: 'center', c: C.cyan, a: fa });
     txt('2024 ≈ 2025 · one is, one is not', W / 2, 712, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.dim, a: fa });
   }
-  stamp('even ⟺ two squares', 1380, 420, Q(S, 1, 'Lean checks', 0.5, 0.8) * (1 - at(S, 2, 0.5)), C.lean, 34, -0.06);
+  stamp('even ⟺ two squares', W / 2, 580, Q(S, 1, 'Lean checks', 0.5, 0.8) * (1 - at(S, 2, 0.5)), C.lean, 34, -0.06);
 };
 
 /* ======================================================================= */
@@ -414,7 +415,7 @@ SCENES.edge = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued']]);
   const rows = [
-    { k: 0, col: C.cyan, en: '∃ a, b : p = a² + b²', zh: '存在两个平方，不是找它们的快办法', note: 'existence, not a search · 存在，不是算法' },
+    { k: 0, col: C.cyan, en: 'p prime, p ≡ 1 (mod 4)  ⟹  ∃ a, b : p = a² + b²', zh: '断言两个平方存在，不给找它们的快办法', note: 'existence, not a search · 存在，不是算法' },
     { k: 1, col: C.cyan, en: '65 = 1² + 8² = 4² + 7²', zh: '不数有几种拆法', note: 'two ways, computed here; no count is claimed · 两种拆法是屏幕上的计算' },
     { k: 2, col: C.argued, en: 'primes split into mirror pairs in ℤ[i]', zh: '素数在高斯整数中分裂成镜像对', note: "literature result; face / line are the book's names · 文献结果；“面”“线”是本书起的名字" }
   ];
