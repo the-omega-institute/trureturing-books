@@ -417,10 +417,10 @@ SCENES.quat = S => {
   });
   /* line 2: any point can be sent to 1 */
   const oa = a * Q(S, 2, 'any point you like', 0.6);
-  if (oa > 0.003) txt('u(o) = 1   for any o · 任选 o', one[0] - 30, one[1] - 60, { size: 26, fam: F.math, w: 700, align: 'center', c: C.now, a: oa });
+  if (oa > 0.003) txt('u(o) = 1 · 任选 o', one[0] + 50, one[1] + 60, { size: 26, fam: F.zh, w: 700, c: C.now, a: oa });
   const pa = a * Q(S, 2, 'The origin was never', 0.8);
-  txt('The origin was never out there. · 原点从来不在外面。', W / 2, 838, { size: 28, fam: F.zh, w: 700, align: 'center', c: C.argued, a: pa });
-  if (L1 > 0) stamp('ISOMORPHIC', 1580, 430, Q(S, 1, 'Lean checks', 0.5, 0.4) * (1 - at(S, 2, 0.5)), C.lean, 30, -0.06);
+  txt('The origin was never out there. · 原点从来不在外面。', 520, 852, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.argued, a: pa });
+  if (L1 > 0) stamp('ISOMORPHIC', 880, 400, Q(S, 1, 'Lean checks', 0.5, 0.4) * (1 - at(S, 2, 0.5)), C.lean, 30, -0.06);
 };
 
 /* ======================================================================= */
@@ -463,7 +463,7 @@ SCENES.born = S => {
   line(cx, cy - cr, cx, cy + cr, C.dim, a * 0.5, 1.2);
   arrow(cx, cy, hxp, hyp, C.now, a, 4);
   dot(cx, cy, 7, 'w', a);
-  txt(`χ = ${Math.round(chi * 180 / Math.PI) % 360}°`, cx + cr + 20, cy + cr - 6, { size: 24, fam: F.mono, w: 700, c: C.now, a });
+  txt(`χ = ${Math.round(chi * 180 / Math.PI) % 360}°`, cx - cr + 10, cy - cr + 10, { size: 24, fam: F.mono, w: 700, align: 'right', c: C.now, a });
   if (ka > 0.003) {
     /* shadow ① on the horizontal axis, shadow ② on the vertical axis */
     line(cx, cy + 6, hxp, cy + 6, C.cyan, ka, 7);
@@ -502,7 +502,7 @@ SCENES.born = S => {
 /* ======================================================================= */
 /*                          scene 5 · SAME READING, SAME PAIR                */
 /* ======================================================================= */
-const HM_V = { cx: 560, cy: 560, R: 270, yaw: -0.7, el: 0.32 };
+const HM_V = { cx: 560, cy: 560, R: 270, yaw: 0.7, el: 0.42 };
 SCENES.homog = S => {
   const u = S.u, a = aoFade(S);
   if (a <= 0) return;
@@ -582,7 +582,7 @@ SCENES.edge = S => {
     AO_RAT.forEach(([c, s], k) => dot(ED_C.x + ED_C.r * c, ED_C.y - ED_C.r * s, 6, 'c', pa * clamp((S.u - phraseAt(S, 0, 'rational quaternions') - 0.01 * k) / 0.3)));
     const ha = a * Q(S, 0, 'leave holes', 0.6), hx = ED_C.x + ED_C.r * Math.SQRT1_2, hy = ED_C.y - ED_C.r * Math.SQRT1_2;
     ring(hx, hy, 16, C.now, ha, 3);
-    txt('(1 + i)/√2 is missing · 不在其中', hx + 24, hy - 22, { size: 22, fam: F.zh, w: 700, c: C.now, a: ha });
+    txt('(1 + i)/√2 missing · 不在其中', hx - 30, hy + 52, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.now, a: ha });
     txt('cos t + i sin t:  (a/c, b/c),  c ≤ 65', ED_C.x, ED_C.y + ED_C.r + 50, { size: 22, fam: F.math, w: 700, align: 'center', c: C.cyan, a: pa });
   }
   const rows = [
@@ -606,7 +606,7 @@ SCENES.edge = S => {
 /* ======================================================================= */
 SCENES.close = S => {
   badgeQ(S, [[0, null, 'lean']]);
-  closingCard(S, { from: 0.1, y: 250 });
+  closingCard(S, { from: 0.1, y: 300 });
 };
 
 /* ======================================================================= */
