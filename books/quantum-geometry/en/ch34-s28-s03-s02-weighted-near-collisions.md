@@ -871,7 +871,7 @@ For the shift, write $T=N^2$, $W_j=(T-x_j)/Z$ with $Z=\sum_j(T-x_j)$, and $m_4=\
 $$
 \frac{r_N V}{T-\bar x}=K+\frac{m_4-m_N^2}{3}.
 $$
-The threshold shift is the negative of this ratio. The symmetric finite sums yield $m_4=(N^2-1)(3N^2-5)/35$ and give the displayed coefficient. The asymptotic keeps $N$ fixed. Small moduli can give positive weight on additional antipodal levels. [Lean proof of the switch and scaled displacement](https://github.com/the-omega-institute/trureturing/blob/391e6649ddcc2a04de8164b60cdc8967886d9fc1/D5/S3/Fourier/Asymptotics/CyclicActivationShift.lean#L843) · [Derivation and finite checks](https://github.com/the-omega-institute/trureturing/issues/34016#issuecomment-7148575133)
+The threshold shift is the negative of this ratio. The symmetric finite sums yield $m_4=(N^2-1)(3N^2-5)/35$ and give the displayed coefficient. The asymptotic keeps $N$ fixed. Small moduli can give positive weight on additional antipodal levels. [Lean proof of the switch and scaled displacement](lean:D5/S3/Fourier/Asymptotics/CyclicActivationShift.cyclic_activation_shift) · [Derivation and finite checks](https://github.com/the-omega-institute/trureturing/issues/34016#issuecomment-7148575133)
 
 ## Changing the height cutoff in a local statistic
 
