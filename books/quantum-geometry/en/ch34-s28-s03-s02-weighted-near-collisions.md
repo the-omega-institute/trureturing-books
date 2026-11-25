@@ -822,6 +822,8 @@ one root is exactly $C$. The other root $\rho_q$ has $(1-\rho_q)/h^2\to t/2$. Fa
 
 The certificate bounds the energy of every feasible weight by completing the square. To attain that bound to order $h^2$, adjust the mass at zero and its nearest neighbors and add mass at the closest antipodal level, imposing both moment equalities. The front corrections are $O(h^2)$ and the added mass is asymptotic to $3mh^2/4$. For a fixed positive budget the three adjusted front sites have positive limiting weights, so the construction is feasible for all sufficiently large moduli, including at activation endpoints. The statement concerns the finite cycle at fixed budget. The weighted high-order arithmetic estimate for the actual ζ ordinates remains open. [Derivation and hypotheses](https://github.com/the-omega-institute/trureturing/issues/33993#issuecomment-7146572104)
 
+[Lean proof of the parity energy correction](lean:D5/S3/Fourier/Asymptotics/CyclicParityLimit.cyclic_parity_correction)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
