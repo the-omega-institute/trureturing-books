@@ -27,7 +27,7 @@
       ["Lean checks the rule for any two elements of any commutative ring whose product is one.", "Lean 内核检验：在任意交换环里，只要两个元素的乘积是 1，这条规则就成立。"],
       ["Halve the power sums: that is the Chebyshev rule. The angle was scaffolding; a times b equals one is the building.", "幂和各除以 2，就是切比雪夫递推。角度只是脚手架，ab = 1 才是房子。"]
     ], "cues": [{"line": 2, "at": 0.8, "kind": "stamp"}]},
-    {"id": "phases", "name": "PHASES BETWEEN TURNS", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+    {"id": "phases", "name": "PHASES BETWEEN TURNS", "lead": 0.5, "tail": 2.0, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
       ["By the QSVT literature, a whole matrix splits into one such block per singular value.", "按 QSVT 的文献结果，一整个矩阵会拆成这样的方块，每个奇异值一块。"],
       ["The same turns act on every block at once, so each corner reads the same polynomial at its own x.", "同样的转动同时作用在每一块上，于是每个角落都在自己的 x 上读出同一个多项式。"],
       ["Slip a phase twist between the turns, and the corner can carry other polynomials too.", "在两次转动之间插进相位扭转，角落还能读出别的多项式。"],
@@ -35,10 +35,10 @@
     ], "cues": [{"line": 3, "at": 0.8, "kind": "stamp"}]},
     {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
       ["The recurrence knows nothing about matrices. Joining it to the block is a hand calculation.", "递推本身对矩阵一无所知；把它接到方块上，是一步手算。"],
-      ["The phases exist, exactly k for budget k. No recipe to find them, no claim of the shortest list.", "相位被证明存在，预算为 k 就恰好 k 个；没有给出求法，也不说这是最短的一串。"],
+      ["The phases exist: one starting phase, plus exactly k more for budget k. No recipe to find them, no claim of the shortest list.", "相位确实存在：一个起始相位，再加恰好 k 个；不给求法，也不说最短。"],
       ["The grand unification of algorithms is a literature result, not formalized here.", "算法“大一统”是文献结果，本书没有形式化。"]
     ]},
-    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 2.6, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 1.6, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
       ["Geometric Intuition of Quantum Computing, chapter sixteen.", "《量子计算的几何直觉》· 第十六章"]
     ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
   ]

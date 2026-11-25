@@ -220,7 +220,15 @@ SCENES.hook = S => {
   const ta = Math.min(ang, CB_TH) / 2;
   txt('θ', HK_O[0] + 112 * Math.cos(ta) + 4, HK_O[1] - 112 * Math.sin(ta) + 10, { size: 30, fam: F.math, w: 700, c: C.vio, a: a * clamp(turn * 3) });
   if (ang > CB_TH + 0.2) txt('θ', HK_O[0] + 175 * Math.cos((CB_TH + ang) / 2) - 14, HK_O[1] - 175 * Math.sin((CB_TH + ang) / 2) + 10, { size: 30, fam: F.math, w: 700, align: 'center', c: C.vio, a: a * again });
-  if (sh > 0.01) txt('x', HK_O[0] + HK_R * Math.cos(ang) / 2, HK_O[1] + 50, { size: 34, fam: F.math, w: 700, align: 'center', c: C.cyan, a: a * sh * clamp(Math.abs(Math.cos(ang)) * 4) });
+  if (again > 0.01) {
+    line(HK_O[0], HK_O[1] + 16, HK_O[0] + HK_R * CB_X, HK_O[1] + 16, C.dim, a * again, 4);
+    txt('x = 0.6', HK_O[0] + HK_R * CB_X + 14, HK_O[1] + 24, { size: 24, fam: F.math, w: 700, c: C.dim, a: a * again });
+  }
+  if (sh > 0.01) {
+    const lx = again > 0.5 ? 'cos 2θ = −0.28' : 'x';
+    const la2 = again > 0.5 ? clamp((again - 0.5) * 4) : clamp((0.5 - again) * 4) * clamp(Math.abs(Math.cos(ang)) * 4);
+    txt(lx, HK_O[0] + HK_R * Math.cos(ang) / 2, HK_O[1] + 60, { size: 32, fam: F.math, w: 700, align: 'center', c: C.cyan, a: a * sh * (again > 0 ? la2 : clamp(Math.abs(Math.cos(ang)) * 4)) });
+  }
   txt('−1', HK_O[0] - HK_R - 40, HK_O[1] + 40, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.dim, a: a * sh });
   txt('1', HK_O[0] + HK_R + 34, HK_O[1] + 40, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.dim, a: a * sh });
   cbTag(130, 240, 'a dial: a picture of the turn', '表盘：转动的比方', a * clamp(turn * 2));
@@ -321,14 +329,15 @@ SCENES.hand = S => {
   /* line 1: the rule as two arrows into T₂ */
   const ra = a * Q(S, 1, 'Each new reading', 0.6) * (1 - at(S, 2, 0.6, 1.2));
   if (ra > 0.003) {
-    const xt = HD.x0 + 2 * HD.dx, yt = HD.y0 + 150;
-    for (const [m, lab, col] of [[1, '× 2x', C.cyan], [0, '−', C.mag]]) {
+    const xt = HD.x0 + 2 * HD.dx;
+    for (const [m, lab, col, lx, ly] of [[1, '× 2x', C.cyan, 452, 606], [0, '−', C.mag, 300, 684]]) {
       const xs = HD.x0 + m * HD.dx;
       ctx.save(); ctx.globalAlpha = ra; ctx.strokeStyle = col; ctx.lineWidth = 3;
-      ctx.beginPath(); ctx.moveTo(xs, HD.y0 + 60); ctx.quadraticCurveTo((xs + xt) / 2, yt + 60 - 40 * m, xt - 10, HD.y0 + 66); ctx.stroke(); ctx.restore();
-      txt(lab, (xs + xt) / 2 - 10, yt + 30 - 40 * m + 50, { size: 28, fam: F.math, w: 700, align: 'center', c: col, a: ra });
+      ctx.beginPath(); ctx.moveTo(xs, HD.y0 + 80); ctx.quadraticCurveTo((xs + xt) / 2, HD.y0 + (m ? 170 : 200), xt - 10, HD.y0 + 120); ctx.stroke(); ctx.restore();
+      txt(lab, lx, ly, { size: m ? 28 : 36, fam: F.math, w: 700, align: 'center', c: col, a: ra });
     }
   }
+  chip(250, 210, 200, 56, 'x = 0.6', C.cyan, a * at(S, 0, 0.5), 30, F.math);
   /* the ledger */
   panel(1150, 200, 670, 560, a, C.cyan, 'THE LEDGER · 账本');
   cbRich([['Tₘ₊₂ = ', C.white], ['2x', C.now], [' · Tₘ₊₁ − Tₘ', C.white]], 1180, 280, { size: 34, a: a * Q(S, 1, 'Each new reading', 0.6) });
@@ -355,12 +364,15 @@ SCENES.pair = S => {
   line(PR_O[0] - PR_R - 70, PR_O[1], PR_O[0] + 1.4 * PR_R + 40, PR_O[1], C.white, a * 0.5, 1.5);
   line(PR_O[0], PR_O[1] - PR_R - 50, PR_O[0], PR_O[1] + PR_R + 50, C.white, a * 0.3, 1.5);
   ring(PR_O[0], PR_O[1], PR_R, C.dim, a * 0.8, 2);
-  txt('1', P([1, 0])[0] + 8, PR_O[1] + 30, { size: 22, fam: F.mono, w: 700, c: C.dim, a });
+  txt('1', P([1, 0])[0] - 26, PR_O[1] - 12, { size: 22, fam: F.mono, w: 700, c: C.dim, a });
   txt('Re', PR_O[0] + 1.4 * PR_R + 30, PR_O[1] - 14, { size: 20, fam: F.mono, w: 700, c: C.dim, a });
   txt('Im', PR_O[0] + 12, PR_O[1] - PR_R - 30, { size: 20, fam: F.mono, w: 700, c: C.dim, a });
   /* line 3: powers a^m, b^m step around; before it, m = 1 */
-  const pm = at(S, 3, 0.5) > 0 ? clamp((u - lineAt(S, 3).s - 0.4) / Math.max(1, lineAt(S, 3).e - lineAt(S, 3).s - 1.2)) * 4 : 0;
-  const mv = 1 + (at(S, 3, 0.5) > 0 ? pm : 0), mi = Math.round(mv);
+  const pp = at(S, 3, 0.5) > 0 ? clamp((u - lineAt(S, 3).s - 0.4) / Math.max(1, lineAt(S, 3).e - lineAt(S, 3).s - 1.2)) * 4 : 0;
+  const pk = Math.min(3, Math.floor(pp)), pf = pp >= 4 ? 1 : ease(clamp((pp - pk) * 2.2));
+  const mv = 1 + (at(S, 3, 0.5) > 0 ? pk + pf : 0), mi = Math.round(mv);
+  /* labels with numbers only while the hands rest on a whole step */
+  const rest = at(S, 3, 0.5) > 0 ? clamp((Math.abs(pf - 0.5) - 0.38) / 0.12) : 1;
   const ang = (at(S, 3, 0.5) > 0 ? mv : 1) * CB_TH;
   const A = [Math.cos(ang), Math.sin(ang)], B = [Math.cos(ang), -Math.sin(ang)];
   const pa = P(A), pb = P(B);
@@ -369,8 +381,8 @@ SCENES.pair = S => {
   arrow(PR_O[0], PR_O[1], pb[0], pb[1], C.now, a * 0.75, 4);
   dot(pa[0], pa[1], 12, 'g', a); dot(pb[0], pb[1], 12, 'g', a);
   const lab = at(S, 3, 0.5) > 0 ? [`a${'⁰¹²³⁴⁵'[mi]}`, `b${'⁰¹²³⁴⁵'[mi]}`] : ['a = e^(iθ)', 'b = e^(−iθ)'];
-  txt(lab[0], pa[0] + 18, pa[1] - 10, { size: 28, fam: F.math, w: 700, c: C.now, a });
-  txt(lab[1], pb[0] + 18, pb[1] + 30, { size: 28, fam: F.math, w: 700, c: C.now, a: a * 0.85 });
+  txt(lab[0], pa[0] + 18, pa[1] - 10, { size: 28, fam: F.math, w: 700, c: C.now, a: a * rest });
+  txt(lab[1], pb[0] + 18, pb[1] + 30, { size: 28, fam: F.math, w: 700, c: C.now, a: a * 0.85 * rest });
   /* line 1: the sum (a parallelogram closing on the real axis) */
   const sa = a * Q(S, 1, 'their sum is two x', 0.8);
   if (sa > 0.003) {
@@ -379,7 +391,7 @@ SCENES.pair = S => {
     line(PR_O[0], PR_O[1], ps[0], ps[1], C.cyan, sa, 8);
     dot(ps[0], ps[1], 12, 'c', sa);
     const sl = at(S, 3, 0.5) > 0 ? `a${'⁰¹²³⁴⁵'[mi]} + b${'⁰¹²³⁴⁵'[mi]} = ${cbDec(2 * Math.cos(mi * CB_TH))}` : 'a + b = 2x = 1.2';
-    txt(sl, PR_O[0], PR_O[1] + PR_R + 70, { size: 28, fam: F.math, w: 700, align: 'center', c: C.cyan, a: sa });
+    txt(sl, PR_O[0], PR_O[1] + PR_R + 70, { size: 28, fam: F.math, w: 700, align: 'center', c: C.cyan, a: sa * rest });
   }
   /* readout */
   panel(1000, 190, 820, 210, a, C.cyan, 'THE EIGENVALUES · 特征值');
@@ -403,7 +415,7 @@ SCENES.pair = S => {
     cbRich([['aᵐ + bᵐ = 2 cos mθ = 2Tₘ', C.cyan]], 1030, 730, { size: 28, a: ha });
     cbRich([['⟹  Tₘ₊₂ = 2x · Tₘ₊₁ − Tₘ', C.white]], 1030, 786, { size: 28, a: ha * Q(S, 3, 'Chebyshev rule', 0.6) });
   }
-  stamp('a · b = 1', 330, 215, Q(S, 2, 'Lean checks', 0.5, 0.6) * (1 - at(S, 3, 0.5)), C.lean, 28, -0.06);
+  stamp('a · b = 1', 330, 215, Q(S, 2, 'Lean checks', 0.5, 0.6) * (1 - at(S, 3, 0.5)), C.white, 28, -0.06);
   const ma = a * Q(S, 3, 'The angle was scaffolding', 0.8);
   if (ma > 0.003) {
     txt('the angle was scaffolding;', 150, 205, { size: 26, fam: F.disp, w: 700, c: C.white, a: ma });
@@ -422,7 +434,7 @@ SCENES.phases = S => {
   const tp = clamp((u - lineAt(S, 1).s - 0.3) / Math.max(1, lineAt(S, 1).e - lineAt(S, 1).s - 0.8)) * 3;
   const mi = Math.min(3, Math.floor(tp + 0.5));
   CB_SIG.forEach((x, j) => {
-    const ra = a * Q(S, 0, 'one such block', 0.5, 0.35 * j);
+    const ra = a * at(S, 0, 0.5, 0.2 + 0.6 * j);
     if (ra <= 0.003) return;
     const y = 220 + j * 200, th = Math.acos(x), O = [240, y + 80];
     cbDial(O, 70, th * tp, ra, { shadow: 1, arc: false, lw: 4 });
@@ -431,7 +443,7 @@ SCENES.phases = S => {
     txt(`σ${'₁₂₃'[j]} = ${x}`, 700, y + 60, { size: 30, fam: F.math, w: 700, c: C.white, a: ra });
     txt(`T${'₀₁₂₃'[mi]}(${x}) = ${cbDec(c)}`, 700, y + 104, { size: 26, fam: F.math, w: 700, c: C.cyan, a: ra * at(S, 1, 0.5) });
   });
-  cbTag(170, 840 - 40, 'one block per singular value: QSVT literature, not formalized here', '每个奇异值一块：文献结果，本书未形式化', a * Q(S, 0, 'QSVT literature', 0.6), { size: 17 });
+  cbTag(170, 840 - 40, 'one block per singular value: QSVT literature, not formalized here', '每个奇异值一块：文献结果，本书未形式化', a * Q(S, 0, 'QSVT literature', 0.6), { size: 20 });
   /* line 2: the strip D(φ₀) · W D(φ₁) · W D(φ₂) · W D(φ₃) */
   const sa = a * at(S, 2, 0.6);
   if (sa > 0.003) {
@@ -442,7 +454,7 @@ SCENES.phases = S => {
       box(x, 240, 86, 70, isW ? C.cyan : C.vio, ia, 2, rgba(isW ? C.cyan : C.vio, 0.14));
       txt(s, x + 43, 287, { size: 32, fam: F.math, w: 700, align: 'center', c: isW ? C.cyan : C.vio, a: ia });
     });
-    txt('φ = diag(e^(iφ), e^(−iφ)) · a picture of the order · 示意', 1040, 352, { size: 19, fam: F.zh, w: 700, c: C.argued, a: sa });
+    txt('φ = diag(e^(iφ), e^(−iφ)) · a picture of the order · 示意', 1040, 354, { size: 21, fam: F.zh, w: 700, c: C.argued, a: sa });
   }
   /* line 3: Lean */
   const la = a * Q(S, 3, 'Lean checks', 0.6);
@@ -456,8 +468,8 @@ SCENES.phases = S => {
     rows.forEach(([s, ph, y]) => txt(s, 1030, y, { size: 25, fam: F.math, w: 700, c: C.white, a: la * Q(S, 3, ph, 0.5) }));
     cbRich([['⟹ ∃ φ₀, Φ:  ', C.lean], ['length Φ = k,  ', C.white], ['fold(φ₀, Φ) = (P, Q)', C.white]], 1030, 626, { size: 26, a: la * Q(S, 3, 'phases exist', 0.5) });
     cbLean(1030, 686, CB_LEAN.exists_phases, la * Q(S, 3, 'phases exist', 0.5), { size: 19 });
-    txt('all φ = 0, k = 3 · 相位全为 0：P = 4x³ − 3x = T₃,  Q = 4x² − 1', 1030, 752, { size: 20, fam: F.zh, w: 700, c: C.cyan, a: la * Q(S, 3, 'build exactly', 0.5) });
-    txt('computed here · 屏幕上的计算', 1030, 786, { size: 17, fam: F.zh, w: 700, c: C.dim, a: la * Q(S, 3, 'build exactly', 0.5) });
+    txt('all φ = 0, k = 3:  P = 4x³ − 3x = T₃,  Q = 4x² − 1', 1030, 750, { size: 24, fam: F.math, w: 700, c: C.cyan, a: la * Q(S, 3, 'phases exist', 0.5, 0.6) });
+    txt('相位全为 0 · computed here · 屏幕上的计算', 1030, 790, { size: 22, fam: F.zh, w: 700, c: C.dim, a: la * Q(S, 3, 'phases exist', 0.5, 0.6) });
   }
 };
 
@@ -470,7 +482,7 @@ SCENES.edge = S => {
   badgeQ(S, [[0, null, 'argued']]);
   const rows = [
     { k: 0, col: C.cyan, en: 'ab = 1 in a ring: no matrix in the theorem', zh: '定理里没有矩阵；接到方块上是一步手算', note: 'hand calculation · 手算桥接' },
-    { k: 1, col: C.lean, en: 'phases exist: exactly k for budget k', zh: '只说存在：不给求法，不说唯一，不说最短', note: 'existence, not an algorithm · 存在性不是算法' },
+    { k: 1, col: C.cyan, lean: 'phases exist: φ₀ plus exactly k more', zh: '只说存在：不给求法，不说唯一，不说最短', note: 'existence, not an algorithm · 存在性不是算法' },
     { k: 2, col: C.argued, en: 'search, filtering, inversion as polynomials', zh: '把各种算法统一成多项式变换', note: 'literature result, not formalized here · 文献结果，本书未形式化' }
   ];
   rows.forEach((rw, i) => {
@@ -478,7 +490,7 @@ SCENES.edge = S => {
     if (ra <= 0.003) return;
     const y = 200 + i * 210;
     panel(360, y, 1200, 180, ra, rw.col);
-    txt(rw.en, 390, y + 58, { size: 30, fam: F.math, w: 700, c: rw.col, a: ra });
+    txt(rw.en || rw.lean, 390, y + 58, { size: 30, fam: F.math, w: 700, c: rw.lean ? C.lean : rw.col, a: ra });
     txt(rw.zh, 390, y + 104, { size: 28, fam: F.zh, w: 700, c: C.white, a: ra });
     txt(rw.note, 390, y + 148, { size: 20, fam: F.zh, w: 700, c: rw.col === C.argued ? C.argued : C.dim, a: ra * 0.95 });
   });
