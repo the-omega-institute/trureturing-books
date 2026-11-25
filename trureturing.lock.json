@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "0dd78e5a26bf1fa09de8c9c5bf097fdf209b3bfb",
-  "pinned_at": "2026-11-25T06:57:12Z",
+  "pinned_at": "2026-11-25T07:05:59Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4564,6 +4564,30 @@
       "statement_id": "sha256:2a541f0b606c73811befedd8b70a0ef7fc08a91d74865a4d4fe48807e5dd4530",
       "line": 312,
       "signature": "theorem coupledMatrix_tendsto {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) (S : Finset ℝ) : let readout"
+    },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.refined_coefficients": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.refined_coefficients",
+      "kind": "theorem",
+      "statement_id": "sha256:e7a28f03b8cca0a355b7327e636469d5a7a3e3fab3e9bb2ffcd91dbd5163d0e4",
+      "line": 558,
+      "signature": "theorem refined_coefficients {h : ℕ → ℝ} (hB : (fun n : ℕ => (n : ℝ)^5 * (h n)^2) =O[atTop] (fun _ => (1 : ℝ))) (S : Finset ℝ) (hS : S.Nonempty) : let readout"
+    },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_boundary_value": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.scaled_boundary_value",
+      "kind": "theorem",
+      "statement_id": "sha256:e7a28f03b8cca0a355b7327e636469d5a7a3e3fab3e9bb2ffcd91dbd5163d0e4",
+      "line": 786,
+      "signature": "theorem scaled_boundary_value {h : ℕ → ℝ} (hB : (fun n : ℕ => (n : ℝ)^5 * (h n)^2) =O[atTop] (fun _ => (1 : ℝ))) (S : Finset ℝ) (hS : S.Nonempty) (offset : ℝ) : let readout"
+    },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_rear_value": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.scaled_rear_value",
+      "kind": "theorem",
+      "statement_id": "sha256:e7a28f03b8cca0a355b7327e636469d5a7a3e3fab3e9bb2ffcd91dbd5163d0e4",
+      "line": 847,
+      "signature": "theorem scaled_rear_value {h : ℕ → ℝ} {K : ℝ} (hK : Tendsto (fun n : ℕ => (n : ℝ)^5 * (h n)^2) atTop (𝓝 K)) (S : Finset ℝ) (hS : S.Nonempty) (r : ℝ) : let readout"
     },
     "D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_reference_residual_le": {
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit",
