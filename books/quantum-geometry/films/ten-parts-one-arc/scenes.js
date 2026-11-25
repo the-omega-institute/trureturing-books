@@ -353,7 +353,8 @@ function tpWin(S, k) {
   const s0 = lineAt(S, k).s - 0.3, s1 = k + 1 < S.L.length ? lineAt(S, k + 1).s - 0.25 : S.d;
   return clamp((S.u - s0) / 0.4) * clamp((s1 - S.u) / 0.35);
 }
-const tpProg = (S, k, dur) => clamp((S.u - lineAt(S, k).s) / (dur || Math.max(0.5, lineAt(S, k).e - lineAt(S, k).s)));
+/* progress through the stop's line, running 45% fast so that every card is complete well before the line ends */
+const tpProg = (S, k, dur) => 1.45 * clamp((S.u - lineAt(S, k).s) / (dur || Math.max(0.5, lineAt(S, k).e - lineAt(S, k).s)));
 function tpTag(s, x, y, col, a, size = 22) { txt(s, x, y, { size, fam: F.zh, w: 700, c: col, a }); }
 
 /* ---------------- I · two arrows at 60° and the weight 1/4 ---------------- */
@@ -463,7 +464,7 @@ function stop4(S, a) {
     txt(l, q[0] + (d < 0 ? -14 : d === 0 ? 18 : 14), q[1] + (d === 90 ? 34 : d === 0 ? 26 : -10), { size: 26, fam: F.math, w: 700, align: d < 0 ? 'right' : 'left', c: col, a: da });
   });
   txt('45°', O[0] + 30, O[1] - 90, { size: 22, fam: F.mono, w: 700, c: C.white, a: a * clamp(p * 4 - 1.2) });
-  txt('Alice: white · Bob: cyan', O[0] + R + 30, O[1] + R - 20, { size: 20, fam: F.mono, w: 700, align: 'left', c: C.dim, a });
+  txt('Alice: white · Bob: cyan', 160, 450, { size: 20, fam: F.mono, w: 700, align: 'left', c: C.dim, a });
   /* a gauge 0 … 3 with the score */
   const gx = 160, gy = 350, gw = 640, sc = clamp(p * 2 - 0.7) * 2 * Math.SQRT2;
   box(gx, gy, gw, 26, C.white, a * 0.5, 1.2);
@@ -827,7 +828,7 @@ FILM.poster = () => {
   const sc = TL.scenes[0], t = sc.end - 1.0;
   background(t, sc, 0, 6);
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.2, a: 0.12, cx: 960, cy: 420, camZ: 7, lw: 1.3, dots: false });
-  tpArc(1, 9, { y: 700, lift: 230, x0: 200, x1: 1720, r: 18, rs: 26, ls: 20 });
+  tpArc(1, 9, { y: 880, lift: 290, x0: 200, x1: 1720, r: 18, rs: 26, ls: 20 });
   txt(DATA.film.title_zh, W / 2, 300, { size: 74, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('TEN PARTS, ONE ARC', W / 2, 395, { size: 52, fam: F.orb, w: 900, align: 'center', c: C.cyan, ab: 3, ls: 5 });
   txt('AND WHY IT STOPS', W / 2, 455, { size: 34, fam: F.orb, w: 900, align: 'center', c: C.mag, ab: 2, ls: 4 });
