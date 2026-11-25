@@ -177,7 +177,7 @@ function fnEdge(p, q, bit, a, o = {}) {
   const col = bit ? C.mag : C.cyan, w = bit ? 8 : 3.5;
   if (o.ghost) { ctx.save(); ctx.setLineDash([12, 10]); line(p[0], p[1], q[0], q[1], col, a * 0.55, w); ctx.restore(); }
   else line(p[0], p[1], q[0], q[1], col, a * (bit ? 1 : 0.75), w);
-  if (o.label) {
+  if (o.label && (bit || !o.onesOnly)) {
     const mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2, horiz = Math.abs(q[1] - p[1]) < 1;
     const lx = mx + (horiz ? 0 : 22), ly = my + (horiz ? -14 : 9);
     txt(String(bit), lx, ly, { size: o.size || 26, fam: F.mono, w: 700, align: horiz ? 'center' : 'left', c: col, a: a * (o.ghost ? 0.6 : 1) });
@@ -197,11 +197,9 @@ function fnTorus3(G, y, a, o = {}) {
     txt(v ? '1' : '0', c[0], c[1] + 12, { size: 34, fam: F.mono, w: 700, align: 'center', c: v ? C.mag : C.cyan, a: pa * 0.9 });
   }
   for (let i = 0; i <= 3; i++) for (let j = 0; j < 3; j++) {
-    const key = `h:${i % 3}:${j}`;
-    fnEdge(P(i, j), P(i, j + 1), y.h[i % 3][j], a, { ghost: i === 3, label: o.labels });
-    if (o.hl && o.hl.has(key) && i < 3) line(P(i, j)[0], P(i, j)[1] - 0, P(i, j + 1)[0], P(i, j + 1)[1], C.now, a * o.hl.get(key), 3);
+    fnEdge(P(i, j), P(i, j + 1), y.h[i % 3][j], a, { ghost: i === 3, label: o.labels && i < 3, onesOnly: true });
   }
-  for (let i = 0; i < 3; i++) for (let j = 0; j <= 3; j++) fnEdge(P(i, j), P(i + 1, j), y.v[i][j % 3], a, { ghost: j === 3, label: o.labels });
+  for (let i = 0; i < 3; i++) for (let j = 0; j <= 3; j++) fnEdge(P(i, j), P(i + 1, j), y.v[i][j % 3], a, { ghost: j === 3, label: o.labels && j < 3, onesOnly: true });
   for (let i = 0; i <= 3; i++) for (let j = 0; j <= 3; j++) {
     const ghost = i === 3 || j === 3, c = P(i, j);
     const colr = o.paint ? o.paint[i % 3][j % 3] : null;
@@ -216,7 +214,14 @@ function fnTorus3(G, y, a, o = {}) {
 
 /* the torus of the solid shots: R = 1, r = 0.45; u around the hole (the j direction), v around the tube (i) */
 const TR_R = 1, TR_r = 0.45, TR_M = 6, TR_N = 12;
-const trPt = (u, v, lift = 0) => { const rr = TR_r + lift, c = TR_R + rr * Math.cos(TAU * v); return [c * Math.cos(TAU * u), c * Math.sin(TAU * u), rr * Math.sin(TAU * v)]; };
+let TR_OFF = 0;   // turns the grid about the axis of the torus so that the seam faces the viewer (set per shot)
+const trPt = (u, v, lift = 0) => { const rr = TR_r + lift, c = TR_R + rr * Math.cos(TAU * v), w = TAU * (u + TR_OFF); return [c * Math.cos(w), c * Math.sin(w), rr * Math.sin(TAU * v)]; };
+/* put the middle of the seam (u = (N − ½)/N) at the point of the outer equator nearest the viewer, plus `shift` */
+function trFace(sh, shift = 0) {
+  let best = 0, by = -Infinity;
+  for (let k = 0; k < 96; k++) { const w = TAU * k / 96, q = sh.p([(TR_R + TR_r) * Math.cos(w), (TR_R + TR_r) * Math.sin(w), 0]); if (q[1] > by) { by = q[1]; best = k / 96; } }
+  TR_OFF = best - (TR_N - 0.5) / TR_N + shift;
+}
 function trSurface(sh, o = {}) {
   sh.surface('torus', (u, v) => trPt(u, v), { u: [0, 1], v: [0, 1], nu: TR_N * 6, nv: TR_M * 6, color: C.blue, back: C.bg,
     grid: { every: [6, 6], color: C.cyan, alpha: o.gridA == null ? 0.75 : o.gridA } });
@@ -262,7 +267,8 @@ SCENES.torus = S => {
   const seamA = Q(S, 1, 'one means flip', 0.6);
   const sweep = Q(S, 2, 'Every small square', 2.4);
   const walk = ease(Q(S, 2, 'walk once', 3.2));
-  const sh = solid('torus', { x: 160, y: 150, w: 1100, h: 700, yaw: -0.9 + 0.05 * u, pitch: 0.62, zoom: 1.12 });
+  const sh = solid('torus', { x: 160, y: 150, w: 1100, h: 700, yaw: -0.9, pitch: 0.62, zoom: 1.12 });
+  trFace(sh, 0.03 - 0.01 * u);
   sh.begin();
   trSurface(sh);
   trSeam(sh, seamA);
@@ -364,7 +370,7 @@ SCENES.seam = S => {
   if (wk > 0.34) paint[0][1] = 0;
   if (wk > 0.67) paint[0][2] = 0;
   const plqA = at(S, 2, 0.8);
-  fnTorus3(SE_G, y, a, { labels: at(S, 1) > 0.2, plq: plqA * (1 - 0.6 * clamp(wk * 3)), paint,
+  fnTorus3(SE_G, y, a, { labels: at(S, 1) > 0.2, plq: plqA * (1 - 0.6 * clamp(wk * 3)), paint, notes: 1 - clamp(wk * 3),
     plqHi: (i, j) => j === 2 && Q(S, 2, 'two ones', 0.4) > 0 });
   /* the glue arrows */
   const ga = a * at(S, 0, 0.8, 1.2);
@@ -382,9 +388,8 @@ SCENES.seam = S => {
     if (home > 0) {
       const h = P(0, 3);
       ring(h[0], h[1], 30 + 10 * Math.sin(S.u * 8), C.now, a * home, 4);
-      fnVertex(h[0] + 70, h[1] - 70, 1, a * home, 18);
-      txt('must be white · 应为白', h[0] + 98, h[1] - 62, { size: 22, fam: F.zh, w: 700, c: C.now, a: a * home });
-      txt('but home is black ✗ · 起点是黑', h[0] + 98, h[1] - 30, { size: 22, fam: F.zh, w: 700, c: C.now, a: a * home });
+      fnVertex(h[0] + 70, h[1], 1, a * home, 18);
+      txt('?', h[0] + 70, h[1] - 32, { size: 30, fam: F.mono, w: 700, align: 'center', c: C.now, a: a * home });
     }
   }
   /* right column: the readouts */
@@ -401,11 +406,12 @@ SCENES.seam = S => {
     const steps = [['stay 0', C.cyan], ['stay 0', C.cyan], ['flip 1', C.mag]];
     steps.forEach(([s, col], k) => { const ka = r3 * clamp((wk - k / 3) * 6); txt(s, 1070 + k * 200, 604, { size: 30, fam: F.mono, w: 700, c: col, a: ka }); });
     fnRich([['sum = ', C.white], ['1', C.mag], ['  ≠ 0', C.white]], 1070, 650, { size: 30, a: r3 * home });
+    txt('home needs white, is black ✗', 1330, 646, { size: 24, fam: F.mono, w: 700, c: C.now, a: r3 * home });
   }
   const r4 = a * at(S, 5, 0.6);
   if (r4 > 0.003) {
     panel(1040, 690, 760, 130, r4, C.argued, 'ANALOGY · 比方');
-    txt('spiral ramp: each step fine, one lap = one floor', 1070, 744, { size: 24, fam: F.mono, w: 700, c: C.argued, a: r4 });
+    txt('spiral ramp: each step fine, one lap = one floor', 1070, 744, { size: 22, fam: F.mono, w: 700, c: C.argued, a: r4 });
     txt('螺旋坡道：步步都平，绕一圈换一层', 1070, 790, { size: 26, fam: F.zh, w: 700, c: C.white, a: r4 });
   }
 };
@@ -418,21 +424,20 @@ SCENES.test = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'lean']]);
   const rowA = Q(S, 1, 'first row', 1.4), colA = Q(S, 1, 'first column', 1.4);
-  const sh = solid('test', { x: 90, y: 170, w: 900, h: 640, yaw: -1.25 + 0.04 * u, pitch: 0.7, zoom: 1.02 });
+  const sh = solid('test', { x: 90, y: 170, w: 900, h: 640, yaw: -1.25, pitch: 0.7, zoom: 1.02 });
+  trFace(sh, 0.06 - 0.008 * u);
   sh.begin();
   trSurface(sh, { gridA: 0.55 });
   trSeam(sh, 1);
   trLoop(sh, 'row0', 'row', 0, ease(rowA), C.now, 1, 7);
   trLoop(sh, 'col0', 'col', 0, ease(colA), C.now, 1, 7);
   sh.end(a);
-  if (rowA > 0.3) {
-    const an = sh.anchor(trPt(0.3, 0, 0.05));
-    chip(an.x + 30, an.y + 56, 250, 46, 'row 0 adds to 1', C.mag, a * clamp((rowA - 0.3) * 3), 22);
-  }
-  if (colA > 0.3) {
-    const an = sh.anchor(trPt(0, 0.3, 0.05));
-    chip(an.x - 40, an.y - 70, 280, 46, 'column 0 adds to 0', C.cyan, a * clamp((colA - 0.3) * 3), 22);
-  }
+  /* readouts with leader lines to the lowest visible point of each loop */
+  const lowest = f => { let b = null; for (let k = 0; k < 48; k++) { const an = sh.anchor(f(k / 48)); if (!an.hidden && (!b || an.y > b.y)) b = an; } return b; };
+  const ra = a * clamp((rowA - 0.3) * 3), ca = a * clamp((colA - 0.3) * 3);
+  const rp = lowest(s => trPt(s, 0, 0.02)), cp = lowest(s => trPt(0, s, 0.02));
+  if (rp && ra > 0.003) { dashed(rp.x, rp.y, 330, 800, C.now, ra * 0.8, 2); chip(330, 800, 300, 46, 'row 0 adds to 1', C.mag, ra, 24); }
+  if (cp && ca > 0.003) { dashed(cp.x, cp.y, 820, 220, C.now, ca * 0.8, 2); chip(820, 220, 320, 46, 'column 0 adds to 0', C.cyan, ca, 24); }
   /* the theorem, in its own words */
   const t1 = a * at(S, 0, 0.7, 0.4);
   panel(1030, 190, 790, 300, t1, C.lean, 'THEOREM · 定理');
@@ -470,7 +475,7 @@ SCENES.count = S => {
     { k: 1, en: 'flat', zh: '平坦', pow: '2¹⁰', n: FN_COUNT.flat, col: C.cyan },
     { k: 1, en: 'from paintings', zh: '来自涂色', pow: '2⁸', n: FN_COUNT.exact, col: C.cyan, ph: 'two hundred fifty-six' }
   ];
-  const fl = 1 - 0.75 * at(S, 3, 0.6);
+  const fl = 1 - at(S, 3, 0.6);
   rows.forEach((rw, i) => {
     const ra = a * (rw.ph ? Q(S, rw.k, rw.ph, 0.6) : at(S, rw.k, 0.6, i === 1 ? 0.2 : 0.6)) * fl;
     if (ra <= 0.003) return;
@@ -496,15 +501,16 @@ SCENES.count = S => {
     txt(zh, x + 230, yy + 194, { size: 24, fam: F.zh, w: 700, c: C.white, a: ka });
     txt(`row ${r} · col ${c}`, x + 230, yy + 232, { size: 20, fam: F.mono, w: 700, c: C.dim, a: ka });
   });
-  stamp('1 / 4', 1390, 525, Q(S, 2, 'one flat labeling in four', 0.5) * (1 - at(S, 4, 0.6)), C.cyan, 56, -0.06);
+  stamp('1 / 4', 510, 785, Q(S, 2, 'one flat labeling in four', 0.5) * fl, C.cyan, 52, -0.06);
   /* Lean: the ratios for every grid */
   const la = a * at(S, 3, 0.6, 0.2);
   if (la > 0.003) {
-    panel(130, 600, 760, 220, la, C.lean, 'EVERY M × N · 任意网格');
-    fnLean(160, 668, FN_LEAN.periodic_grid_linear_statistics, la, { size: 18 });
-    fnRich([['painted / flat = 1/4', C.lean]], 160, 718, { size: 30, a: la });
-    fnRich([['flat / all = 1/2^(MN−1)', C.lean]], 160, 760, { size: 30, a: la });
-    fnRich([['painted / all = 1/2^(MN+1)', C.lean]], 160, 802, { size: 30, a: la });
+    panel(130, 260, 760, 330, la, C.lean, 'EVERY M × N GRID · 任意 M × N 网格');
+    fnLean(160, 340, FN_LEAN.periodic_grid_linear_statistics, la, { size: 20 });
+    fnRich([['painted / flat = 1/4', C.lean]], 160, 410, { size: 36, a: la });
+    fnRich([['flat / all = 1/2^(MN−1)', C.lean]], 160, 470, { size: 36, a: la });
+    fnRich([['painted / all = 1/2^(MN+1)', C.lean]], 160, 530, { size: 36, a: la });
+    txt('3 × 3: 1/4 · 1/256 · 1/1024', 160, 640, { size: 26, fam: F.mono, w: 700, c: C.cyan, a: la * 0.9 });
   }
   /* the one relation among the squares */
   const ra = a * at(S, 4, 0.6);
