@@ -131,7 +131,7 @@ FILM.init.push(() => {
   /* random diagonal unitaries: the mean is the number of distinct occupied phases */
   for (let k = 0; k < 10; k++) {
     const d = 2 + (k % 4), ang = [], v = [];
-    for (let i = 0; i < d; i++) { ang.push(i === d - 1 && k % 2 ? ang[0] : 6.283 * rnd(k, i)); v.push([0.2 + rnd(k, i + 9), 0]); }
+    for (let i = 0; i < d; i++) { ang.push(i === d - 1 && k % 2 ? ang[0] : 1.2 * i + 0.5 * rnd(k, i)); /* separated phases, one repeated when k is odd */ v.push([0.2 + rnd(k, i + 9), 0]); }
     const nv = Math.sqrt(v.reduce((a, z) => a + z[0] * z[0], 0)); v.forEach(z => { z[0] /= nv; });
     const ps = szMonitor(ang.map(szC.ex), v, 6000), m = ps.reduce((a, p, i) => a + (i + 1) * p, 0);
     check(Math.abs(m - new Set(ang).size) < 1e-4, `random unitary ${k}: mean ${m}`);
@@ -182,7 +182,7 @@ function szDial(O, R, th, a, o = {}) {
   if (wa > 0.003) {
     line(O[0], O[1], O[0], O[1] - R - 40, C.mag, wa, 7);
     for (let k = 0; k < 9; k++) line(O[0], O[1] - 30 - k * (R / 9), O[0] - 18, O[1] - 30 - k * (R / 9) + 14, C.mag, wa * 0.6, 2);
-    txt(o.wallLabel || '90° wall · 正交墙', O[0] + 16, O[1] - R - 50, { size: 24, fam: F.zh, w: 700, c: C.mag, a: wa });
+    txt(o.wallLabel || '90° wall · 正交墙', O[0] - 22, O[1] - R - 20, { size: 24, fam: F.zh, w: 700, align: 'right', c: C.mag, a: wa });
   }
   szArc(O, R, 0, Math.PI / 2, C.dim, a * 0.5, 1.5, [4, 8]);
   const m0 = P(0), ps = P(th), foot = [O[0] + R * Math.cos(th), O[1]];
@@ -247,14 +247,14 @@ const lmX = d => lerp(LM.x0, LM.x1, d / 90);
 SCENES.limit = S => {
   const u = S.u, a = szFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [3, 'A detour', 'computed']]);
+  badgeQ(S, [[0, null, 'argued']]);
   /* the ruler: magenta 90° between the two perpendicular states */
   line(LM.x0, LM.y, LM.x1, LM.y, C.mag, a * 0.9, 5);
   for (let d = 0; d <= 90; d += 15) { line(lmX(d), LM.y - 10, lmX(d), LM.y + 10, C.mag, a * 0.6, 2); txt(`${d}°`, lmX(d), LM.y + 92, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a }); }
   dot(LM.x0, LM.y, 18, 'w', a); dot(LM.x1, LM.y, 18, 'w', a);
   txt('m₀', LM.x0, LM.y - 34, { size: 34, fam: F.math, w: 700, align: 'center', c: C.white, a });
   txt('m₁', LM.x1, LM.y - 34, { size: 34, fam: F.math, w: 700, align: 'center', c: C.white, a });
-  txt('⟨m₀, m₁⟩ = 0  ·  90°', (LM.x0 + LM.x1) / 2, LM.y + 140, { size: 26, fam: F.math, w: 700, align: 'center', c: C.mag, a });
+  txt('⟨m₀, m₁⟩ = 0  ·  90°', 1100, LM.y - 150, { size: 26, fam: F.math, w: 700, align: 'center', c: C.mag, a });
   /* the anchor and the two legs: each leg ≤ energy·τ/ħ; τ grows on line 1 and through line 3 */
   const xa = lmX(LM.a);
   const la = a * at(S, 1, 0.6);
@@ -319,7 +319,7 @@ SCENES.clock = S => {
   const th = 90 * s * SZ_DEG, ov = szClock(s);
   const D = szDial(CK_O, CK_R, th, a, { wall: 1, shadow: at(S, 1, 0.6), wallLabel: '90° wall · 墙' });
   txt('ψ(0)', D.m0[0] - 10, D.m0[1] + 50, { size: 28, fam: F.math, w: 700, align: 'center', c: C.white, a });
-  txt('ψ(t)', D.ps[0] + 16, D.ps[1] - 12, { size: 28, fam: F.math, w: 700, c: C.now, a });
+  txt('ψ(t)', CK_O[0] + (CK_R - 90) * Math.cos(th) + 26, CK_O[1] - (CK_R - 90) * Math.sin(th) + 10, { size: 28, fam: F.math, w: 700, c: C.now, a });
   /* halfway anchor and the two 45° legs (line 2) */
   const ha = a * Q(S, 2, 'Halfway', 0.6);
   if (ha > 0.003) {
@@ -332,7 +332,7 @@ SCENES.clock = S => {
   }
   /* the table of stops */
   panel(960, 190, 880, 300, a, C.cyan, 'EQUAL TWO-LEVEL CLOCK · 二能级等权');
-  szRich([['ψ(t) = (|0⟩ + e^{−iEt/ħ}|1⟩)/√2', C.white]], 990, 252, { size: 26, a: a * at(S, 0, 0.6) });
+  szRich([['ψ(t) = (|0⟩ + e^(−iEt/ħ)|1⟩)/√2', C.white]], 990, 252, { size: 26, a: a * at(S, 0, 0.6) });
   szRich([['overlap = |cos(Et/2ħ)|', C.cyan]], 990, 296, { size: 24, a: a * at(S, 1, 0.6) });
   const cols = [0, 0.25, 0.5, 0.75, 1];
   txt('t / (πħ/E)', 990, 350, { size: 20, fam: F.mono, w: 700, c: C.dim, a: a * at(S, 1, 0.6) });
@@ -373,8 +373,8 @@ SCENES.watch = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
   /* left: one small step against the old line, scaled up: off-line height sin(δ/2), loss sin²(δ/2) */
-  const O = [230, 640], R = 520;
-  const step = lerp(45, 22.5, ease(Q(S, 1, 'loses only', 1.5))) * SZ_DEG;   // a Bloch step δ is a turn of δ/2 of the arrow
+  const O = [150, 640], R = 520;
+  const step = lerp(lerp(45, 22.5, ease(Q(S, 1, 'loses only', 1.5))), 45, ease(Q(S, 2, 'Four checks', 1.0))) * SZ_DEG;  // a Bloch step δ is a turn of δ/2 of the arrow
   const half = step / 2;
   const sa = a * at(S, 1, 0.6);
   line(O[0], O[1], O[0] + R, O[1], C.white, a, 3);
@@ -385,8 +385,8 @@ SCENES.watch = S => {
   if (sa > 0.003) {
     line(p[0], p[1], p[0], O[1], C.mag, sa, 6);
     line(O[0], O[1] + 30, p[0], O[1] + 30, C.cyan, sa, 8);
-    txt(`off · 偏离  sin = ${Math.sin(half).toFixed(3)}`, p[0] + 18, (p[1] + O[1]) / 2, { size: 24, fam: F.zh, w: 700, c: C.mag, a: sa });
-    txt(`loss · 损失  sin² = ${Math.pow(Math.sin(half), 2).toFixed(3)}`, O[0], O[1] + 86, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: sa });
+    txt(`off · 偏离  sin(δ/2) = ${Math.sin(half).toFixed(3)}`, p[0], p[1] - 30, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.mag, a: sa });
+    txt(`loss · 损失  sin²(δ/2) =${Math.pow(Math.sin(half), 2).toFixed(3)}`, O[0], O[1] + 86, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: sa });
     txt(`step · 每步 δ = ${(2 * half / SZ_DEG).toFixed(1)}°`, O[0], O[1] + 128, { size: 22, fam: F.zh, w: 700, c: C.now, a: sa });
   }
   szAnalogy('analogy · 比方：盯着的水壶烧不开 · a watched pot never boils', 120, 240, a * at(S, 0, 0.8, 1.0), { size: 22 });
@@ -409,7 +409,7 @@ SCENES.watch = S => {
   if (sa64 > 0.003) {
     const y = BY + 300;
     fillBox(BX, y, BW * SZ_P64, 40, C.cyan, sa64 * 0.55); box(BX, y, BW, 40, C.cyan, sa64 * 0.4, 1.2);
-    txt(`N = 64:  ${SZ_P64.toFixed(3)}`, BX + 12, y + 29, { size: 24, fam: F.mono, w: 700, c: C.bg, a: sa64 });
+    txt(`N = 64:  ${SZ_P64.toFixed(3)}`, BX + 12, y + 29, { size: 24, fam: F.mono, w: 700, c: C.white, a: sa64 });
     txt('N = 1:  0  ·  no checks on the way · 途中不查，全部翻走', BX, y + 84, { size: 20, fam: F.zh, w: 700, c: C.dim, a: sa64 });
   }
 };
@@ -429,12 +429,12 @@ function bkDial(O, R, angs, a, label) {
     dot(x, y, 16, 'g', a);
     if (k > 1) ring(x, y, 16 + 10 * (k - 1), C.now, a, 2);
   });
-  txt(label, O[0], O[1] + R + 54, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.now, a });
+  txt(label, O[0], O[1] + R + 54, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a });
 }
 SCENES.back = S => {
   const u = S.u, a = szFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean'], [4, null, 'argued'], [5, null, 'computed']]);
+  badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean'], [4, null, 'argued']]);
   /* left (lines 0–2): the two branches of the ledger */
   const qa = a * (1 - at(S, 3, 0.6));
   if (qa > 0.003) {
@@ -503,7 +503,7 @@ SCENES.edge = S => {
   szDial([300, 760], 360, 90 * SZ_DEG * (0.6 + 0.4 * ease(clamp(u / 4))), a * 0.8, { wall: 1, shadow: 1, wallLabel: '90°' });
   const rows = [
     { k: 0, col: C.argued, en: 'energy: a speed bound you supply', zh: 'energy 是给定的上界参数，不自动等于设备的能量', note: 'the Lean theorem assumes both leg bounds · 定理把两段位移界当作前提' },
-    { k: 1, col: C.argued, en: 'Mandelstam–Tamm, Margolus–Levitin', zh: '经典速度极限：文献结果，本书未形式化', note: 'watched-pot numbers: computed on screen · 芝诺数字：屏幕上的计算' },
+    { k: 1, col: C.argued, en: 'Mandelstam–Tamm, Margolus–Levitin', zh: '经典速度极限：文献结果，本书未形式化', note: 'strobe numbers: computed on screen · 频闪数字：屏幕上的计算' },
     { k: 2, col: C.cyan, en: 'mean = detection steps, not seconds', zh: '平均数的是探测步数，不是秒', note: 'finite-dimensional unitary steps only · 只管有限维幺正步' }
   ];
   rows.forEach((rw, i) => {
