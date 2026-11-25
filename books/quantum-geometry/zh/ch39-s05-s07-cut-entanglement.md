@@ -81,13 +81,25 @@ $$
 
 设 $b\ne 0$ 并固定 $z$。纯扩张存在，当且仅当 $\operatorname{Tr}L=1-b$ 且两份 Schur 余块都为零。迹条件和左余块为零会推出 $b>0$，因为 $b<0$ 时修正项 $v^\dagger v/b$ 的迹非正。纯态中间单占用的振幅为 $x$，其余四个振幅为 $y$。耦合行是 $x\bar y$，且 $|x|^2=b$，所以耦合行决定整个端点块 $v^\dagger v/b$。反过来，取 $x=\sqrt b$ 并从耦合行恢复 $y$ 即可构造纯态。任何具有相同边缘和 $z$ 的半正定扩张，其整体 Schur 余块半正定，且在左端点的约化为零，故其迹为零、余块也为零。这样的扩张只有这一个纯态。 [给定耦合的纯扩张判据](lean:D5/S3/Quantum/Entanglement/Marginals/FibCoherentExtension.pure_coherent_iff)
 
+当 $b>0$、边缘数据有理且存在纯扩张时，耦合 $v_{10},v_{01}$ 决定有理性是否还需检查范数。若任一耦合非零，相应端点块的非对角式就能线性解出有理的 $z$，因此纯扩张有理。若两项都为零，边缘只固定 $|z|^2=bL_{11}$，其中 $L_{11}$ 是左端点占据态的对角元。此时有理纯扩张存在恰好等价于 $bL_{11}$ 能写成两个有理平方之和。 [正占据时的有理纯扩张判据](lean:D5/S3/Quantum/Entanglement/Marginals/FibPositiveRationalPurity.positive_rational_purity_iff)
+
 这个读不到的矩阵元会影响正性。例如取 $b=1/5$、$v_{00}=v_{10}=v_{01}=1/5$，令 $L,R$ 的各项都等于 $2/5$。取 $z=1/5$ 时两个余块都为零，整体态唯一，是五个合法字的等幅纯态。取 $z=0$ 时左余块的行列式为 $-1/25$，这个取值无法给出正的整体态。
 
 两份边缘的矩阵元若都有有理实部和虚部，只要存在共同扩张，就存在矩阵元同样有理的共同扩张。归一化给出 $b=1-\operatorname{Tr}L$。在 $b>0$ 时，两圆盘的圆心、半径平方和截断后的线段参数都只用有理运算，因此选出的 $z$ 也是有理的，相切时也成立。在 $b=0$ 时取 $z=0$。选定 $z$ 后，两个 Schur 余块的张量积除以共同迹，再加回修正项。共同迹为零时，张量积这一项取零。这样得到迹为一的半正定整体态。 [有理共同扩张判据](lean:D5/S3/Quantum/Entanglement/Marginals/FibCoherentDisks.rational_coherent_extendible_iff)
 
+还可以在保持有理坐标的同时降低扩张的秩。取上面选出的有理 $z$。对两个端点余块各做一次 Schur 消元，可把每块写为两个有理秩一投影的非负有理加权和。把两侧权重配成一个 $2\times2$ 表，左上元取两个首项权重中的较小者。这样至少一个非对角元为零。将表中每个非零权重乘以对应投影的张量积再求和，得到秩至多三的有理端点余块。恢复 $b>0$ 的中间占据项只增加一个秩一项，因此有理整体态的秩至多为四。$b=0$ 时整个耦合行消失，端点余块直接给出秩至多三的整体态。 [有理端点余块的秩上界](lean:D5/S3/Quantum/Entanglement/Marginals/RationalQubitMarginalRank.rational_endpoint_rank_le_three)
+
 若还要求整体态为纯态，有理性取决于一个范数方程。设两份边缘都是 $\operatorname{diag}(0,b,1-b)$，其中 $b$ 为有理数。真空读数为零迫使纯态只支撑在 $|010\rangle,|101\rangle$ 上。两态的权重分别为 $b,1-b$，因此耦合 $z$ 必须满足 $|z|^2=b(1-b)$。反过来，$b>0$ 时用振幅 $\sqrt b,\bar z/\sqrt b$ 即可构造所需纯态，$b=0$ 时取 $|101\rangle$。给定 $b,z$，一个所有矩阵元都取有理实部和虚部的纯扩张存在，当且仅当 $b$、$z$ 的实部和 $z$ 的虚部都是有理数，且满足这个范数等式。因此对给定的有理 $b$，有理纯扩张存在恰好等价于 $b(1-b)$ 是两个有理平方之和。 [有理纯扩张判据](lean:D5/S3/Quantum/Entanglement/Marginals/FibRationalPureExtension.rational_pure_coupling_iff)
 
 例如 $b=1/4$ 时，$z=\sqrt 3/4$ 给出纯态。若 $z$ 的两坐标都是有理数，乘以四后便可把三写成两个有理平方之和。清除分母所得整数等式左边是两个平方之和，右边是三乘以一个平方，三的指数为奇数，故无解。把 $|010\rangle,|101\rangle$ 按权重 $1/4,3/4$ 作对角混合，仍可得到有理共同扩张。
+
+当中间位点的占用权重 $b=0$ 时，纯扩张还要求两端点的约化态有相同特征值。四个耦合 $v_{00},v_{10},v_{01},z$ 必须为零，且 $L,R$ 须半正定、各自迹为一、行列式相等。这些条件也充分。把端点振幅排成矩阵 $M$，两端读数是 $MM^\dagger$ 和 $(M^\dagger M)^\mathsf T$，它们有相同特征值。反过来，两个 $2\times2$ 块的迹和行列式决定其特征值。把共同特征值的平方根作为 Schmidt 系数，配上两侧各自的特征向量，就得到所需的纯态。比如 $L=I/2$、$R=\operatorname{diag}(1,0)$ 时，$L\otimes R$ 给出混合扩张，而行列式分别为 $1/4$ 和 $0$，因此纯扩张不存在。 [零占据时的纯扩张判据](lean:D5/S3/Quantum/Entanglement/Marginals/FibCoherentExtension.pure_coherent_zero_iff)
+
+若两端点块的矩阵元还都有有理实部和虚部，就有额外的算术条件。有理纯扩张存在恰好等价于两块的行列式相等，且共同的行列式能写成两个有理平方之和。纯态密度矩阵的任一非零列都给出一组有理的射影振幅。把振幅排成 $2\times2$ 矩阵后，其行列式除以所选列的对角元，所得复数的模平方恰是边缘的行列式。[有理纯扩张的行列式判据](lean:D5/S3/Quantum/Entanglement/Marginals/RationalQubitPurity.rational_qubit_purity_iff)
+
+两端同谱时，有理扩张的秩至多为二。记 $H=L-I/2$、$K=R-I/2$ 和 $s=1/4-\det L$。当 $s\ne0$ 时，$H^2=K^2=sI$，所以 $P=(I+H\otimes K/s)/2$ 是秩二投影。把 $L\otimes I$ 压缩到这个投影上，即得有理的半正定整体态。对两端分别取部分迹，利用 $\operatorname{Tr}K=0$ 和 $\operatorname{Tr}(LH)=2s$，便恢复 $L$ 与 $R$。当 $s=0$ 时，两端都为 $I/2$，可等权混合 $|000\rangle$ 和 $|101\rangle$。 [同谱边缘的有理秩二上界](lean:D5/S3/Quantum/Entanglement/Marginals/RationalQubitEqualSpectrumRank.rational_endpoint_rank_le_two_of_equal_det)
+
+最小有理秩为一还是二，取决于共同行列式能否写成两个有理平方之和。 例如两端同为 $\operatorname{diag}(1/4,3/4)$，共同的行列式为 $3/16$，仍受上面的模三障碍限制。按权重 $1/4,3/4$ 对角混合 $|000\rangle,|101\rangle$，可得到秩二的有理扩张。
 
 若观测区域是长度为 $n$ 的开链上的等宽窗口，秩可以直接由窗口间距算出。禁止连续 $K$ 个一，记 $a_\ell$ 为长度 $\ell$ 的合法字数，$b_\ell=a_\ell^2$，且 $b_0=1$。取 $m\ge1$ 个宽度为 $1\le k\le n$ 的窗口，起点严格递增，相邻起点之差为 $g_1,\ldots,g_{m-1}$。联合偏迹的秩为
 
