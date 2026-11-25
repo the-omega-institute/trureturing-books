@@ -966,7 +966,7 @@ $$
 
 因而严格阈值条件等价于 $3R^2/4<B<3(R+1)^2/4$。边界极限保证两个窗口最后纳入的格点上拟合权重为正，紧邻的第一个未纳入格点带符号值为负。拟合多项式关于采样余弦为凸函数，四个边界符号由此控制整个循环格点。精确格点对应将拟合矩方程转移至循环群，有限最优性证书给出上述平方距离不等式。
 
-若 $q/N^{5/2}\to\gamma>0$，则 $Q=3\pi^2/(5\gamma^2)$。偶周期第一对新增对径格点在 $\gamma<2\pi/\sqrt5$ 时激活，奇周期相应条件为 $\gamma<\pi/\sqrt5$。同一公式分类全部后续跃迁中严格偏离阈值的情形。在等号处，对应对径层的极限带符号值为零，激活状态仍需判定。 [Lean 内核核验的证明](https://github.com/the-omega-institute/trureturing/pull/34065) · [研究与证明](https://github.com/the-omega-institute/trureturing/issues/34029)
+若 $q/N^{5/2}\to\gamma>0$，则 $Q=3\pi^2/(5\gamma^2)$。偶周期第一对新增对径格点在 $\gamma<2\pi/\sqrt5$ 时激活，奇周期相应条件为 $\gamma<\pi/\sqrt5$。同一公式分类全部后续跃迁中严格偏离阈值的情形。在等号处，对应对径层的极限带符号值为零，激活状态仍需判定。 [Lean 内核核验的证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingSupport.eventual_strict_support_away_from_thresholds) · [研究与证明](https://github.com/the-omega-institute/trureturing/issues/34029)
 
 ## 局部统计在截点变化下的误差
 

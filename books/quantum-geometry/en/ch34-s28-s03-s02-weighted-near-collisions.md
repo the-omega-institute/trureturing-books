@@ -966,7 +966,7 @@ $$
 
 The strict cutoffs are therefore equivalent to $3R^2/4<B<3(R+1)^2/4$. The boundary limits give positive values at the last included sites of both windows and negative signed values at the first omitted sites. The fitted polynomial is convex in the sampled cosine, so these four signs control the full cyclic grid. The exact correspondence of grid sites transfers the fitted moment equations to the cyclic group, and the finite optimality certificate yields the squared-distance inequality.
 
-If $q/N^{5/2}\to\gamma>0$, then $Q=3\pi^2/(5\gamma^2)$. The first additional rear pair enters below $\gamma=2\pi/\sqrt5$ on even cycles and below $\gamma=\pi/\sqrt5$ on odd cycles. The same formulas classify every subsequent switch away from equality. At equality the limiting signed value of a rear level vanishes, leaving its activation unresolved. [Kernel-checked Lean proof](https://github.com/the-omega-institute/trureturing/pull/34065) · [Research and proof development](https://github.com/the-omega-institute/trureturing/issues/34029)
+If $q/N^{5/2}\to\gamma>0$, then $Q=3\pi^2/(5\gamma^2)$. The first additional rear pair enters below $\gamma=2\pi/\sqrt5$ on even cycles and below $\gamma=\pi/\sqrt5$ on odd cycles. The same formulas classify every subsequent switch away from equality. At equality the limiting signed value of a rear level vanishes, leaving its activation unresolved. [Kernel-checked Lean proof](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingSupport.eventual_strict_support_away_from_thresholds) · [Research and proof development](https://github.com/the-omega-institute/trureturing/issues/34029)
 
 ## Changing the height cutoff in a local statistic
 

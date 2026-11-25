@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "b44e5b9cf632787471ad0b05cd22201c13fb8e61",
-  "pinned_at": "2026-11-25T06:46:50Z",
+  "commit": "861753fe51c977250ba05b8227fdbaaacea637ef",
+  "pinned_at": "2026-11-25T07:36:31Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4545,7 +4545,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicEventualSupport",
       "name": "D5.S3.Fourier.Asymptotics.CyclicEventualSupport.cyclic_eventual_exact_support",
       "kind": "theorem",
-      "statement_id": "sha256:47c02503f1391f39c96e20748a8bff66873df365072c6c07aa8a00ec5bf173b4",
+      "statement_id": "sha256:851e66a4d2ac42f75585a1569786b31125fe57ef48e6825fb504ebbc47fe0ab7",
       "line": 922,
       "signature": "theorem cyclic_eventual_exact_support (lam : ℝ) (hlam : 0 < lam) : let clip"
     },
@@ -4553,7 +4553,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingCoupledFit.coupledFit_eventually",
       "kind": "theorem",
-      "statement_id": "sha256:2a541f0b606c73811befedd8b70a0ef7fc08a91d74865a4d4fe48807e5dd4530",
+      "statement_id": "sha256:bf52ae5a5f2486e6e00656889fe0794a3dd220a1c0e7096b7c5d2acc2ce3aae4",
       "line": 429,
       "signature": "theorem coupledFit_eventually {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) {S : Finset ℝ} (hS : S.Nonempty) (rhs : ℕ → Fin 3 → ℝ) : let readout"
     },
@@ -4561,7 +4561,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingCoupledFit.coupledMatrix_tendsto",
       "kind": "theorem",
-      "statement_id": "sha256:2a541f0b606c73811befedd8b70a0ef7fc08a91d74865a4d4fe48807e5dd4530",
+      "statement_id": "sha256:bf52ae5a5f2486e6e00656889fe0794a3dd220a1c0e7096b7c5d2acc2ce3aae4",
       "line": 312,
       "signature": "theorem coupledMatrix_tendsto {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) (S : Finset ℝ) : let readout"
     },
@@ -4569,7 +4569,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.refined_coefficients",
       "kind": "theorem",
-      "statement_id": "sha256:e7a28f03b8cca0a355b7327e636469d5a7a3e3fab3e9bb2ffcd91dbd5163d0e4",
+      "statement_id": "sha256:2acb2f37ddc475919e98dea1ddabb5180ac34793bf8ddcce700ff768c1346f91",
       "line": 558,
       "signature": "theorem refined_coefficients {h : ℕ → ℝ} (hB : (fun n : ℕ => (n : ℝ)^5 * (h n)^2) =O[atTop] (fun _ => (1 : ℝ))) (S : Finset ℝ) (hS : S.Nonempty) : let readout"
     },
@@ -4577,7 +4577,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.scaled_boundary_value",
       "kind": "theorem",
-      "statement_id": "sha256:e7a28f03b8cca0a355b7327e636469d5a7a3e3fab3e9bb2ffcd91dbd5163d0e4",
+      "statement_id": "sha256:2acb2f37ddc475919e98dea1ddabb5180ac34793bf8ddcce700ff768c1346f91",
       "line": 786,
       "signature": "theorem scaled_boundary_value {h : ℕ → ℝ} (hB : (fun n : ℕ => (n : ℝ)^5 * (h n)^2) =O[atTop] (fun _ => (1 : ℝ))) (S : Finset ℝ) (hS : S.Nonempty) (offset : ℝ) : let readout"
     },
@@ -4585,7 +4585,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingEdgeLimits.scaled_rear_value",
       "kind": "theorem",
-      "statement_id": "sha256:e7a28f03b8cca0a355b7327e636469d5a7a3e3fab3e9bb2ffcd91dbd5163d0e4",
+      "statement_id": "sha256:2acb2f37ddc475919e98dea1ddabb5180ac34793bf8ddcce700ff768c1346f91",
       "line": 847,
       "signature": "theorem scaled_rear_value {h : ℕ → ℝ} {K : ℝ} (hK : Tendsto (fun n : ℕ => (n : ℝ)^5 * (h n)^2) atTop (𝓝 K)) (S : Finset ℝ) (hS : S.Nonempty) (r : ℝ) : let readout"
     },
@@ -4604,6 +4604,14 @@
       "statement_id": "sha256:dd47f53a30ec43a6b9fdda2015f7d4b9c65cecb4e68f4f5a96187d298abe5d93",
       "line": 127,
       "signature": "theorem frontGram_sub_le (n : ℕ) (hn : 0 < n) (u : ℝ) (i j : Fin 2) : let readout"
+    },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingSupport.eventual_strict_support_away_from_thresholds": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingSupport",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingSupport.eventual_strict_support_away_from_thresholds",
+      "kind": "theorem",
+      "statement_id": "sha256:0e40c74a6fbf30af4af179e3c7e9ad68fee901f80b9be147405b462973107921",
+      "line": 819,
+      "signature": "theorem eventual_strict_support_away_from_thresholds (q : ℕ → ℕ) (hq : ∀ n, q n ≠ 0) (e : ℕ) (hpar : ∀ᶠ n in atTop, q n % 2 = e) {K : ℝ} (hK : Tendsto (fun n : ℕ => (n : ℝ)^5 * (mesh (q n))^2) atTop (𝓝 K)) (hneq : ∀ l, 3*K/20 ≠ rearThreshold e l) : let readout"
     },
     "D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit": {
       "module": "D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass",
@@ -8976,7 +8984,7 @@
       "module": "D5/S3/Quantum/Entanglement/Marginals/FibCoherentDisks",
       "name": "D5.S3.Quantum.Entanglement.Marginals.FibCoherentDisks.extendible_iff_selected",
       "kind": "theorem",
-      "statement_id": "sha256:14526f27266dac5254627ce60ce54ee16eaaa7774d9d5ddcf75067d603e5a63e",
+      "statement_id": "sha256:62635f97e5eb42e7cbfabad5a7135e941ce3f9612424a78f29334faa8964c9b1",
       "line": 298,
       "signature": "theorem extendible_iff_selected (b : ℝ) (L R : Matrix Bool Bool ℂ) (u v w : ℂ) : CoherentExtendible b L R u v w ↔ 0 ≤ b ∧ L.trace + (b : ℂ) = 1 ∧ R.trace = L.trace ∧ (b = 0 → middleRow u v w (selectedCoupling b L R u v w) = 0) ∧ (L - partialTraceRight (correction b (middleRow u v w (selectedCoupling b L R u v w)))).PosSemidef ∧ (R - partialTraceLeft (correction b (middleRow u v w (selectedCoupling b L R u v w)))).PosSemidef"
     },
@@ -8984,7 +8992,7 @@
       "module": "D5/S3/Quantum/Entanglement/Marginals/FibCoherentDisks",
       "name": "D5.S3.Quantum.Entanglement.Marginals.FibCoherentDisks.rational_coherent_extendible_iff",
       "kind": "theorem",
-      "statement_id": "sha256:14526f27266dac5254627ce60ce54ee16eaaa7774d9d5ddcf75067d603e5a63e",
+      "statement_id": "sha256:62635f97e5eb42e7cbfabad5a7135e941ce3f9612424a78f29334faa8964c9b1",
       "line": 442,
       "signature": "theorem rational_coherent_extendible_iff (b : ℝ) (L R : Matrix Bool Bool ℂ) (u v w : ℂ) (hl : ∀ i j, RationalEntry (L i j)) (hr : ∀ i j, RationalEntry (R i j)) (hu : RationalEntry u) (hv : RationalEntry v) (hw : RationalEntry w) : CoherentExtendible b L R u v w ↔ ∃ ρ : Matrix Word Word ℂ, ρ.PosSemidef ∧ ρ.trace = 1 ∧ edgeTrace ρ 1 2 = coherentEdge b L u v ∧ edgeTrace ρ 2 1 = coherentEdge b R u w ∧ ρ (.inl 0) (.inr true) = selectedCoupling b L R u v w ∧ ∀ i j, RationalEntry (ρ i j)"
     },
@@ -9024,7 +9032,7 @@
       "module": "D5/S3/Quantum/Entanglement/Marginals/FibCoherentRank",
       "name": "D5.S3.Quantum.Entanglement.Marginals.FibCoherentRank.rational_rank_le_two_at_iff",
       "kind": "theorem",
-      "statement_id": "sha256:b3d424faf6de1b83e01d8916041748e9522005556823b38a845bca04b9eb48d7",
+      "statement_id": "sha256:44caa404da43f9f5ed59271b16c65b28abcc6977a9c3ad379362a478a89627b2",
       "line": 338,
       "signature": "theorem rational_rank_le_two_at_iff (b : ℝ) (L R : Matrix Bool Bool ℂ) (u v w z : ℂ) (hb : 0 < b) (ht : L.trace + (b : ℂ) = 1) (hr : R.trace = L.trace) (qL : ∀ i j, RationalEntry (L i j)) (qR : ∀ i j, RationalEntry (R i j)) (qu : RationalEntry u) (qv : RationalEntry v) (qw : RationalEntry w) (qz : RationalEntry z) : let C"
     },
@@ -9056,7 +9064,7 @@
       "module": "D5/S3/Quantum/Entanglement/Marginals/FibQuadraticCompletion",
       "name": "D5.S3.Quantum.Entanglement.Marginals.FibQuadraticCompletion.quadratic_rank_le_three",
       "kind": "theorem",
-      "statement_id": "sha256:a84110ca137f98df0b5d2d8ee211d2b2a0dd508cd4779621d1956ae76435283e",
+      "statement_id": "sha256:f02b0659de42eaa10fec5d2ce70ba730997f04301f7904889255acec6231f8bb",
       "line": 306,
       "signature": "theorem quadratic_rank_le_three (b : ℝ) (L R : Matrix Bool Bool ℂ) (u v w : ℂ) (hb : 0 < b) (qL : ∀ i j, RationalEntry (L i j)) (qR : ∀ i j, RationalEntry (R i j)) (qu : RationalEntry u) (qv : RationalEntry v) (qw : RationalEntry w) (he : CoherentExtendible b L R u v w) : ∃ (d : ℚ), 0 ≤ d ∧ ∃ (z : ℂ) (ρ : Matrix Word Word ℂ), ρ.PosSemidef ∧ MatchesCoherentData b L R u v w z ρ ∧ ρ.rank ≤ 3 ∧ ∀ i j, ρ i j ∈ Subfield.closure ((rationalComplex : Set ℂ) ∪ {↑(Real.sqrt (d : ℝ))})"
     },
