@@ -6,7 +6,7 @@
              over A and B); slots 1, 2, 3 = a proper 3-coloring c = (1, 2, 1, 2, 3); A, B, E pairwise clash, so two
              slots are not enough (computed).
      first   every line points from the earlier slot to the later one; along an arrow the slot rises, so a directed
-             path holds at most 3 exams; the longest is A → B → E (computed); flipping A → D to D → A gives the path
+             path holds at most 3 exams; the longest ones are A → B → E and C → B → E (computed); flipping A → D to D → A gives the path
              C → D → A → B → E through all five (computed).
      back    keep the good arrows, forget the slots; h(v) = most steps along the arrows from v = (2, 1, 2, 0, 0);
              every arrow lowers h, so h is a proper coloring with 3 values; as slots 3 − h = (1, 2, 1, 3, 3), D moves
@@ -56,6 +56,14 @@ function wlSteps(arcs) {
   const h = v => (v in memo ? memo[v] : (memo[v] = out[v].reduce((m, w) => Math.max(m, 1 + h(w)), 0)));
   return WL_N.map((_, v) => h(v));
 }
+/* every directed path of the greatest length, as vertex lists */
+function wlAllLongest(arcs) {
+  const out = WL_N.map((_, v) => arcs.filter(r => r[0] === v).map(r => r[1]));
+  const L = wlLongest(arcs)[0], all = [];
+  const go = p => { if (p.length === L) all.push(p.slice()); for (const w of out[p[p.length - 1]]) if (!p.includes(w)) { p.push(w); go(p); p.pop(); } };
+  for (let v = 0; v < WL_N.length; v++) go([v]);
+  return all;
+}
 const WL_H = wlSteps(WL_GOOD);
 const WL_NEW = WL_H.map(x => 3 - x);
 const WL_LG = wlLongest(WL_GOOD), WL_LB = wlLongest(WL_BAD);
@@ -87,7 +95,9 @@ FILM.init.push(() => {
   };
   check(!colorable(2) && colorable(3), 'the chromatic number is 3');
   /* 2. the orientations shown */
-  check(WL_LG[0] === 3 && WL_LG[1].join() === '0,1,4', 'longest chain of the good arrows is A → B → E');
+  check(WL_LG[0] === 3 && WL_LG[1].join() === '0,1,4', 'A → B → E is a longest chain of the good arrows');
+  check(wlAllLongest(WL_GOOD).join(' ') === '0,1,4 2,1,4', 'the good arrows have exactly two longest chains, A → B → E and C → B → E');
+  check(wlAllLongest(WL_BAD).join(' ') === '2,3,0,1,4', 'after the flip the longest chain is unique');
   check(WL_GOOD.every(([u, v]) => WL_SLOT[u] < WL_SLOT[v]), 'good arrows point to the later slot');
   check(WL_LB[0] === 5 && WL_LB[1].join() === '2,3,0,1,4', 'after the flip, C → D → A → B → E');
   /* 3. the counts and the new timetable */
@@ -230,7 +240,7 @@ SCENES.first = S => {
   wlColumns(a);
   const ar = Q(S, 1, 'Point each line', 1.4);
   const flip = ease(Q(S, 4, 'Flip one arrow', 0.9));
-  const chainA = Q(S, 3, 'The longest chain', 0.6) * (1 - flip);
+  const chainA = Q(S, 3, 'One longest chain', 0.6) * (1 - flip);
   const badA = Q(S, 4, 'a chain runs', 0.6);
   /* the edges, then the arcs (A–D turns round on line 4) */
   WL_E.forEach(([x, y], i) => {
@@ -258,13 +268,16 @@ SCENES.first = S => {
   panel(1060, 240, 760, 560, a, C.cyan, 'WHO GOES FIRST · 谁先考');
   wlRich([['clash  →  earlier slot ⟶ later slot', C.white]], 1090, 310, { size: 26, a: a * ar });
   wlRich([['冲突 → 早的时段指向晚的时段', C.dim]], 1090, 350, { size: 22, fam: F.zh, a: a * ar });
-  wlRich([['along an arrow the slot rises · 顺箭头，时段只增', C.white]], 1090, 420, { size: 22, fam: F.zh, a: a * at(S, 2, 0.6) });
-  wlRich([['a chain holds ≤ 3 exams · 一串至多 3 门', C.white]], 1090, 462, { size: 26, fam: F.zh, a: a * Q(S, 2, 'at most three', 0.5) });
-  wlRich([['longest:  A → B → E   ', C.cyan], [`${WL_LG[0]} exams`, C.cyan]], 1090, 540, { size: 28, a: a * chainA });
+  const dim = 1 - 0.65 * badA;
+  wlRich([['along an arrow the slot rises · 顺箭头，时段只增', C.white]], 1090, 420, { size: 22, fam: F.zh, a: a * dim * at(S, 2, 0.6) });
+  wlRich([['a chain holds ≤ 3 exams · 一串至多 3 门', C.white]], 1090, 462, { size: 26, fam: F.zh, a: a * dim * Q(S, 2, 'at most three', 0.5) });
+  wlRich([['a longest:  A → B → E   ', C.cyan], [`${WL_LG[0]} exams`, C.cyan]], 1090, 525, { size: 28, a: a * chainA });
+  wlRich([['(C → B → E is another · 另一串)', C.dim]], 1090, 562, { size: 20, fam: F.zh, a: a * chainA });
   if (badA > 0) {
     wlRich([['flip A → D  to  D → A', C.now]], 1090, 620, { size: 26, a: a * Q(S, 4, 'Flip one arrow', 0.5) });
     wlRich([['C → D → A → B → E   ', C.mag], [`${WL_LB[0]} exams`, C.mag]], 1090, 680, { size: 28, a: a * badA });
-    wlRich([['this order needs 5 slots · 这种先后要 5 个时段', C.white]], 1090, 730, { size: 22, fam: F.zh, a: a * badA * at(S, 4, 0.5, 2.6) });
+    wlRich([['D → A runs back in time: not this timetable · 逆着时间，已不是这张考表', C.now]], 1090, 722, { size: 20, fam: F.zh, a: a * badA });
+    wlRich([['any timetable that follows it needs 5 slots · 照它排要 5 个时段', C.white]], 1090, 760, { size: 20, fam: F.zh, a: a * badA * at(S, 4, 0.5, 2.6) });
   } else {
     wlRich([['flip A → D  to  D → A', C.now]], 1090, 620, { size: 26, a: a * Q(S, 4, 'Flip one arrow', 0.5) });
   }
@@ -273,6 +286,8 @@ SCENES.first = S => {
 /* ======================================================================= */
 /*                             scene 3 · BACK FROM ARROWS                    */
 /* ======================================================================= */
+/* where the step labels sit once the nodes stand in the new timetable: clear of every arc and of the slot titles */
+const WL_LAB2 = [[-56, 10, 'right'], [0, 82, 'center'], [-56, 10, 'right'], [56, 10, 'left'], [56, 10, 'left']];
 SCENES.back = S => {
   const u = S.u, a = wlFade(S);
   if (a <= 0) return;
@@ -298,7 +313,8 @@ SCENES.back = S => {
     wlNode(P[v], nm, a, { col: moved && v === 3 ? C.now : C.white });
     if (ca > 0.003) {
       const cur = at(S, 2, 0.01) === 0 && ca < a;
-      txt(`${WL_H[v]}`, P[v][0] + 46, P[v][1] - 34, { size: 30, fam: F.mono, w: 700, c: cur ? C.now : C.cyan, a: ca });
+      const o = moved ? WL_LAB2[v] : [46, -34, 'left'];
+      txt(`${WL_H[v]}`, P[v][0] + o[0], P[v][1] + o[1], { size: 30, fam: F.mono, w: 700, align: o[2], c: cur ? C.now : C.cyan, a: ca });
     }
   });
   /* the readout table */
@@ -359,7 +375,7 @@ SCENES.rule = S => {
     txt('fewest colors = shortest possible longest chain · 最少颜色数 = 最长有向路最短能压到的顶点数', 220, 760, { size: 24, fam: F.zh, w: 700, c: C.white, a: ca });
     txt('the five exams: min L = 3 = χ, checked over all 3⁶ orientations here · 五门考试：屏幕上逐一枚举 3⁶ 种定向', 220, 810, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ca });
   }
-  stamp('k COLORS ⟺ k-PATHS', 960, 170, Q(S, 0, 'Lean checks', 0.5, 0.6) * (1 - at(S, 1, 0.5, 3.0)), C.lean, 34, -0.04);
+  stamp('k COLORS ⟺ PATHS ≤ k VERTICES', 960, 420, Q(S, 0, 'Lean checks', 0.5, 0.6) * (1 - at(S, 1, 0.4)), C.lean, 30, -0.04);
 };
 
 /* ======================================================================= */
@@ -424,9 +440,9 @@ SCENES.edge = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued'], [2, null, 'open']]);
   const rows = [
-    { k: 0, col: C.argued, en: '2 colors: linear time', zh: '2 着色：线性时间，向外逐层交替涂色', note: 'Kőnig 1936 · literature result · 文献结果，本书未形式化' },
-    { k: 1, col: C.argued, en: '3-coloring is NP-complete', zh: '所以 3 着色有快速算法 ⟺ P = NP', note: 'Karp 1972; Garey–Johnson–Stockmeyer 1976 · literature result · 文献结果' },
-    { k: 2, col: C.open, en: 'P ≠ NP  ·  3D Navier–Stokes regularity', zh: 'P ≠ NP；无外力三维纳维—斯托克斯整体光滑性', note: 'open problems · 开放问题 · not settled by this film · 本片不回答' }
+    { k: 0, col: C.argued, en: 'are 2 colors enough? decided in linear time', zh: '2 种颜色够不够：线性时间可判定，向外逐层交替涂色', note: 'Kőnig 1936 · literature result · 文献结果，本书未形式化' },
+    { k: 1, col: C.argued, en: '3-coloring is NP-complete', zh: '所以 3 着色有多项式时间算法 ⟺ P = NP', note: 'Karp 1972; Garey–Johnson–Stockmeyer 1976 · literature result · 文献结果' },
+    { k: 2, col: C.open, en: 'P ≠ NP  ·  3D Navier–Stokes regularity', zh: 'P ≠ NP；无外力三维纳维—斯托克斯整体光滑性', note: 'open problems · 开放问题 · Navier–Stokes: the analogy of section 26.4 · 本章 26.4 的类比' }
   ];
   rows.forEach((rw, i) => {
     const ra = a * at(S, rw.k, 0.6);
