@@ -246,7 +246,7 @@ The full architecture of *Geometric Intuition of Quantum Computing* comprises **
 **The ten parts rise in a staircase.** Each bar spans its own chapter range, from Chapters 1–4 in Part I to Chapters 38–39 in Part X.
 :::
 
-The staircase can also be climbed in one go. The long film *No Third Point* below runs about 28 minutes; its twelve acts follow the prelude, the ten parts and the coda. Each act ends on a question that the next one answers, and the player's chapter menu jumps straight to any part.
+The staircase can also be climbed in one go. The long film *No Third Point* below runs about 28½ minutes; its twelve acts follow the prelude, the ten parts and the coda. Each act ends on a question that the next one answers, and the player's chapter menu jumps straight to any part.
 
 ::: {.film src="no-third-point"}
 **No Third Point: from one arrow to outside every sphere.** Twelve acts follow the prelude, Parts I–X and the coda; the row of dots at the top left marks the current stop in amber. Each act opens on its part's title card and closes on a "next question" panel, which the following act answers. Green `LEAN ✓` marks only what the cited frozen declarations state; on-screen computations, literature results, the book's model readings and open problems are each labelled. English narration with Chinese and English subtitles.
