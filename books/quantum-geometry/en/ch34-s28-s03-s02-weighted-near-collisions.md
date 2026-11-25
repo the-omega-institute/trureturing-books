@@ -534,6 +534,25 @@ If every $\rho w_j\le1$, the product is at most $\exp(4\rho^2\sum_j w_j^2)$. The
 
 [Lean proof of the disjoint coefficient bound](lean:D5/S3/Fourier/Concentration/DisjointCharacterEnvelope.coefficient_envelope)
 
+### Signed truncation remainder for conjugate phases
+
+For the conjugate weights above, write $C_T=[x^d]e^{Sx}\prod_{j\in T}(e^{-A_jx}-1)$. Put $B_T=0$ for $|T|>d$, and otherwise define
+$$
+B_T=\left(\prod_{j\in T}w_j\right)\frac{(|S|+\sum_{j\in T}w_j)^{d-|T|}}{(d-|T|)!}.
+$$
+Retaining the signs of the individual subsets gives the real identity and degree-sensitive bound
+$$
+[x^dy^d]Q_k=\sum_{\substack{T\subseteq J\\|T|\le d}}(-1)^{|T|}|C_T|^2,\qquad |C_T|\le B_T.
+$$
+The right-axis correction is the negative of the conjugate left-axis correction, so each subset gives the indicated signed square. The norm of the local exponential tail coefficient at degree $n\ge1$ is at most $w_j^n/(n-1)!$, giving coefficientwise domination by $w_j x e^{w_j x}$. The Cauchy product preserves this nonnegative bound. Multiplication by $e^{|S|x}$ and removal of the $|T|$ extracted powers of $x$ give $B_T$. For example, at $d=1$ the mixed coefficient is $|S|^2-\sum_j w_j^2$, and the entire contribution is nonpositive when $S=0$.
+
+For any natural number $K$, subtract the signed sum over $|T|\le\min(d,K)$ from the mixed coefficient. The remainder $R_K$ satisfies
+$$
+-\!\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ odd}}}B_T^2\le R_K\le
+\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ even}}}B_T^2.
+$$
+The exact remainder is the sum of the omitted even-cardinality squares minus the sum of the odd-cardinality squares. It vanishes for $K\ge d$. Multiplying by nonnegative Fourier weights and summing preserves the computed negative contributions. This gives a degree-sensitive refinement when applying the Fejér band estimate below. Bounding the high-degree subset squares and the exceptional-character weight for the actual ζ ordinates still requires an arithmetic estimate. [Lean proof of the signed expansion](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_expansion) [Lean proof of the parity remainder](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_remainder)
+
 ### Bounding a cyclic band with nonnegative Fourier weights
 
 Let $R_H$ be the residues of the integers in $[-H,H]$. For a nonnegative residue mass $M(r)$, use the negative character in $\widehat M(k)=\sum_rM(r)\chi_k(-r)$ and put $B_N(k)=\sum_{j=0}^{N-1}\chi_k(j)$. For integers $N>H\ge0$,
