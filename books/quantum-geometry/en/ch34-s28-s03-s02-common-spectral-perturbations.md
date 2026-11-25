@@ -1,4 +1,4 @@
-# M.2.6 One spectral perturbation for many tests {#one-spectral-perturbation-for-many-tests}
+# M.2.7 One spectral perturbation for many tests {#one-spectral-perturbation-for-many-tests}
 
 ## One choice on finite grids
 

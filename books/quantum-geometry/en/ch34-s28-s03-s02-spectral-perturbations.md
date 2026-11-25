@@ -1,4 +1,4 @@
-# M.2.5 Weighted near-collisions under small perturbations {#weighted-near-collisions-under-small-perturbations}
+# M.2.6 Weighted near-collisions under small perturbations {#weighted-near-collisions-under-small-perturbations}
 
 Let $(g_j)$ be a finite family of frequencies with nonnegative weights $w_j$ and total weight $W=\sum_j w_j$. For each nonnegative integer vector $m$ of degree $p$, put $c_m=\binom{p}{m}\prod_j w_j^{m_j}$ and $G_m=\sum_j m_j g_j$. The ordered pairs with $|G_m-G_n|\le\eta$ contribute weight $c_mc_n$ to $E_{p,g}(\eta)$. The diagonal pairs $m=n$ contribute total weight $D=\sum_m c_m^2$.
 

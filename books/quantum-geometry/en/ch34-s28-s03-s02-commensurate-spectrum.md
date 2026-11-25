@@ -1,4 +1,4 @@
-# M.2.8 Frequent full phase alignment with a logarithmic square tail {#frequent-full-phase-alignment-with-a-logarithmic-square-tail}
+# M.2.9 Frequent full phase alignment with a logarithmic square tail {#frequent-full-phase-alignment-with-a-logarithmic-square-tail}
 
 The mass estimate gives the total retained weight, and the square-tail bound describes how broadly the weights are distributed. The [critical missing-window theorem](ch34-s28-s03-s02-mobius-and-spectra.md#thm-ch31-critical-missing-window) also needs control of the phase relations between frequencies.
 
