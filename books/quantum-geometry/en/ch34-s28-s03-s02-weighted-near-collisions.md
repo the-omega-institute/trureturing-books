@@ -866,7 +866,7 @@ The scaled lattice weight $N(t-j^2)/Z$ has sign margins of order $N^{-1}$ at $j=
 
 Fix a nonempty finite set $S$ of signed real offsets from the antipode. With $c$ the sampled cosine, put $F=(1+c)/2$, $W=(1-c)/2$, and $X=(1-c^2)/(Nh)^2$. At mesh zero use their continuous extensions in the two windows. Fit the weight as $v=AF/N+CX/N+BW/N^3$ on the front and on $S$. The three moment equations have rows $\sum Fv$, $\sum Xv$, and $N^3\sum W^2v$. Their target for the common cosine floor $1-2mh^2$ is $(1-mh^2,m/N^2,3N^3mh^2/4)$, using $W^2=W-u^2X/4$.
 
-Let $M_N$ be the matrix of these three rows in coefficient order $(A,C,B)$. If $h\to0$, $Nh\to0$ and $N^3(Nh)^4\to0$, then
+Let $M_N$ be the matrix of these three rows in coefficient order $(A,C,B)$. If $N^3(Nh)^4\to0$, then
 
 $$
 M_N\longrightarrow
