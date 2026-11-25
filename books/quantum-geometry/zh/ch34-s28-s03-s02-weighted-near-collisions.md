@@ -551,7 +551,7 @@ $$
 -\!\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ 为奇数}}}B_T^2\le R_K\le
 \sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ 为偶数}}}B_T^2.
 $$
-余项恰为未保留的偶数阶平方和减去奇数阶平方和。当 $K\ge d$ 时余项为零。乘上非负的傅里叶权重并求和时，可继续保留已计算的负贡献。这为下述 Fejér 频带估计提供了随次数变化的精细界。实际 ζ 零点对应的高阶子集平方和以及异常字符的总权重仍需要新的算术估计。 [相关证明候选](https://github.com/the-omega-institute/trureturing/pull/34086)
+余项恰为未保留的偶数阶平方和减去奇数阶平方和。当 $K\ge d$ 时余项为零。乘上非负的傅里叶权重并求和时，可继续保留已计算的负贡献。这为下述 Fejér 频带估计提供了随次数变化的精细界。实际 ζ 零点对应的高阶子集平方和以及异常字符的总权重仍需要新的算术估计。 [Lean 带符号展开证明](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_expansion) [Lean 奇偶余项界证明](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_remainder)
 
 #### 中心化后的二次指数系数界
 
@@ -565,7 +565,7 @@ e^{-A_jx}-1=-A_j x e^{-A_j x/2}\sum_{m\ge0}\frac{(A_jx/2)^{2m}}{(2m+1)!}.
 $$
 由 $6^m m!\le(2m+1)!$，局部偶次系数的模长逐项受 $e^{w_j^2 x^2/24}$ 控制。抽取 $k_T$ 个线性因子，合并相位指数，对柯西乘积逐系数估计，得到 $e^{|U_T|x+V_T x^2/24}$ 在次数 $n$ 的系数。若 $k_T>d$，原系数为零。取 $n=0$ 或 $n=1$ 时上界为等式。若 $U_T=0$ 且 $n$ 为奇数，系数必为零。对于用任意指数参数 $c$ 代替 $S$ 的一般形式，取单元素集 $T=\{j\}$、$A_j\ne0$ 及 $c=A_j/2$，在 $d=3$ 时有 $|C_T|=w_j^3/24$，二次指数控制的常数 $1/24$ 在此达到等号。[双曲正弦的幂级数](https://dlmf.nist.gov/4.33.E2)
 
-可将此界用于上面的奇、偶余项预算，与先前的 $B_T$ 逐子集取较小值。在实际 ζ 尾段，仍须估计带字符权重的子集中心相位和的分布，并控制增长次数下的总余项。 [相关证明候选](https://github.com/the-omega-institute/trureturing/pull/34089)
+可将此界用于上面的奇、偶余项预算，与先前的 $B_T$ 逐子集取较小值。在实际 ζ 尾段，仍须估计带字符权重的子集中心相位和的分布，并控制增长次数下的总余项。 [中心化交叠系数界的 Lean 证明](lean:D5/S3/Fourier/Concentration/CenteredDisjointCharacterBound.centered_overlap_bound)
 
 ### 用非负傅里叶权重估计频带
 
