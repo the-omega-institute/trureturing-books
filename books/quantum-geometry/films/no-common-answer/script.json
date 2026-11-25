@@ -1,0 +1,42 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "Bloch": "Block"},
+  "music": {"bpm": 80, "progression": "d-minor"},
+  "scenes": [
+    {"id": "sheet", "name": "THE ANSWER SHEET", "lead": 2.6, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Suppose a particle carries an answer sheet, with a number already written for every question.", "假设粒子身上揣着一张答卷，每道题的答案都已经写好。"],
+      ["The sheet must play fair with arithmetic: one stays one, and sums, multiples and products carry over.", "这张答卷得守算术规矩：1 还是 1，和、倍数与乘积都照样对应。"],
+      ["But can such a sheet really be written, before anyone asks?", "可是，这样一张答卷，真能在没人提问之前就写好吗？"]
+    ], "cues": [{"line": 2, "at": 0.6, "kind": "glitch"}]},
+    {"id": "rules", "name": "TWO QUESTIONS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
+      ["Take two questions: the two by two matrices X and Z.", "取两道题：2×2 矩阵 X 与 Z。"],
+      ["Square either one and you get the identity. So each answer squared is one: plus one or minus one.", "任一个自乘都得单位矩阵，所以每个答案的平方是 1：不是 +1 就是 −1。"],
+      ["Now swap the order, and a sign appears. Z times X is minus X times Z.", "再交换次序，冒出一个负号：ZX = −XZ。"],
+      ["Lean checks both facts by multiplying the matrices out.", "Lean 内核把矩阵逐项乘出来，检验了这两件事。"]
+    ], "cues": [{"line": 2, "at": 2.2, "kind": "chime"}]},
+    {"id": "table", "name": "FILL IN THE SHEET", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.6, 0.2, 0.3], "lines": [
+      ["On paper, numbers commute. So the answers must obey a strange rule: their product equals minus itself.", "纸上的数可以交换次序，所以两个答案必须守一条怪规矩：乘积等于它自己的相反数。"],
+      ["Try plus one and plus one. The product is one, but the rule asks for minus one.", "试 +1、+1：乘积是 1，规矩却要它等于 −1。"],
+      ["The other three rows fail the same way. Only zero equals its own negative, and zero squared is not one.", "其余三行同样落空。只有 0 等于自己的相反数，而 0 的平方不是 1。"]
+    ], "cues": [{"line": 1, "at": 2.4, "kind": "impact"}, {"line": 2, "at": 1.6, "kind": "impact"}]},
+    {"id": "theorem", "name": "NO SUCH SHEET", "lead": 0.5, "tail": 0.8, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Lean checks the general statement: no map from two by two complex matrices to numbers keeps one, sums, multiples and products.", "Lean 内核检验了一般陈述：从 2×2 复矩阵到复数，不存在保持 1、加法、数乘与乘法的映射。"],
+      ["Squares allow only plus or minus one. Then one minus sign bankrupts the whole ledger.", "平方只许 ±1；再来一个负号，整本账就破产了。"]
+    ], "cues": [{"line": 0, "at": 0.8, "kind": "stamp"}]},
+    {"id": "sphere", "name": "NO SHARED STATE", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.3, 0.4], "lines": [
+      ["A smaller hope: one special state with a sure X answer and a sure Z answer.", "退一步：有没有某个特殊的态，X 的答案确定，Z 的答案也确定？"],
+      ["Z is sure only on the two basis directions. X swaps them, so it moves both.", "Z 只在两个基方向 (1, 0)、(0, 1) 上确定；X 把它们对调，两个方向都被挪走。"],
+      ["Lean checks it: a vector that both X and Z merely rescale must be zero.", "Lean 内核检验：在 X 与 Z 下都只被伸缩的向量，必为零向量。"],
+      ["On the Bloch sphere, Z is sure at the north and south poles, X at east and west. The two pairs never meet.", "在布洛赫球上，Z 确定的态在南北极，X 确定的态在东西极；两对极点没有交点。"],
+      ["And the zero vector is no state at all, not even the centre of the ball.", "而零向量根本不是态，也不是球心那个最大混合态。"]
+    ], "cues": [{"line": 2, "at": 0.4, "kind": "stamp"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["This rules out one global table that keeps every product. It does not rule out every hidden variable model.", "它排除的是一张守住所有乘积的全局数表，并不排除所有隐变量模型。"],
+      ["That answers are made in the meeting, not carried in a pocket, is this book's reading, not a theorem.", "答案在相遇时才生成、而不是揣在口袋里，这是本书的诠释，不是定理。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter one.", "《量子计算的几何直觉》· 第一章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

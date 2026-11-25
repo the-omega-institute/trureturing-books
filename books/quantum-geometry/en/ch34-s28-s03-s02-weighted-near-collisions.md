@@ -389,6 +389,28 @@ Under RH, group multiplicities by distinct positive ordinate and use $w_\gamma=m
 
 Hence $R_1(\eta)\ll(\log X+1)/X$. The fixed-difference bound gives at most $p^2D_{p-1}R_1(\eta)$ for the part of $E_p(\eta)$ at residual degree exactly one. With the same cutoff $X=e^{-K}T^\beta$ for fixed $K$ and $0<\beta<1$, and with $p\asymp X\log X$, the diagonal estimate gives an exponential saving relative to $p!V^p$, since $V\asymp\log X/X$ and the extra factor of order $p$ can be absorbed. Growing residual degrees still require an arithmetic estimate.
 
+## A growing cutoff for residual degree {#growing-residual-degree}
+
+Let $E_{p,\le D}(\eta)$ be the part of $E_p(\eta)$ with at most $D$ residual occurrences on each side, where $0\le D\le p$. Every such pair shares at least $p-D$ occurrences. Write $W=\sum_jw_j$ and $V=\sum_jw_j^2>0$. For nonnegative weights, dropping the frequency condition and applying the common-count bound gives
+
+$
+E_{p,\le D}(\eta)\le\binom pD^{\!2}W^{2D}D_{p-D}.
+
+$
+
+Thus a bound at the single degree $k=p-D$ suffices. If $D_{p-D}\le A e^{-c(p-D)}(p-D)!V^{p-D}$, cancel one binomial factor against $p!$, and bound the other by $p^D/D!$. With $x=p e^c W^2/V$ this gives
+
+$
+\frac{E_{p,\le D}(\eta)}{p!V^p}
+\le A e^{-cp}\frac{x^D}{(D!)^2}
+\le A e^{-cp}\rho^{-D}\exp(2\sqrt{\rho x}),\qquad \rho>0 .
+
+$
+
+The last inequality follows by retaining the degree-$D$ term of the exponential series at $\sqrt{\rho x}$ and squaring. The frequency resolution does not enter either bound. [Lean proof of the common-count bound](lean:D5/S3/Fourier/Concentration/FiniteMultinomialOverlap.weighted_overlap_le_diagonal)
+
+For the ζ tail above, take $X=e^{-K}T^\beta$ and $p\asymp X\log X$ with $K$ and $0<\beta<1$ fixed. Under RH and the stated multiplicity estimate, $W^2/V=O(p(\log T)^2)$. The diagonal estimate holds with the same $A,c>0$ for all $p/2\le k\le p$. The band $(X,CX]$ supplies at least a fixed multiple of $p$ coordinates with $kw_j^2/V$ bounded below uniformly for these $k$. The factor $O(\sqrt{k})$ from Stirling is absorbed into the exponential. Put $L=\log T$ and $\rho=(L\log L)^{-2}$. Then $2\sqrt{\rho x}=O(p/\log L)$, and for $D\le\varepsilon p/\log L$ the cost $D\log(1/\rho)$ is at most $(2+o(1))\varepsilon p$. Any fixed $0<\varepsilon<c/2$ gives an exponential saving for this entire block, uniformly in $\eta$. Controlling the remaining near-collision mass for the actual ordinates requires an estimate above that cutoff. [Multiplicity input, Theorem 1 and §7](https://arxiv.org/abs/2306.04799)
+
 ## Higher residual degrees with pointwise matchings {#matched-residual-occupations}
 
 After removing shared occurrences coordinate by coordinate, each side has $d$ frequencies left. If they can be paired with every discrepancy at most $\eta$, the weight of such residuals can be estimated from the weight of single close pairs. Words with the same occurrence counts represent the same count vector.
@@ -746,6 +768,177 @@ q^2(1-a_{\mathrm{crit}}(q))\longrightarrow\frac{24\pi^2}{5}.
 $$
 
 [Lean proof of first contact and the affine crossing](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_first_contact) · [Lean proof of the modulus-twelve exception](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_twelve_no_contact) · [Lean proof of the sharp width limit](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_criticalThreshold_limit)
+
+## Support thresholds for the integer-lattice minimum
+
+At large moduli the quadratic deficit of the second cosine near the origin leads to an integer-lattice problem. Fix a second-moment budget $m\ge0$ and minimize $\sum_j w_j^2$ subject to $\sum_j w_j=1$, $w_j\ge0$, and $\sum_j j^2 w_j\le m$. The indices range over $\mathbb Z$, with a convergent sum for the second moment.
+
+For each positive integer $n$, precisely the budgets in $[(n^2-1)/5,n(n+2)/5]$ admit a radius parameter $n^2\le t\le(n+1)^2$ for which the minimizing weights are
+$$
+w_j=\frac{(t-j^2)_+}{Z},\qquad
+Z=\sum_{|j|\le n}(t-j^2)>0.
+$$
+Their second moment is exactly $m$. The two budget endpoints correspond to $t=n^2$ and $t=(n+1)^2$. Only the sites $|j|\le n-1$ have positive weight at the lower endpoint. Above it the support expands to $|j|\le n$ and retains that radius through the upper endpoint. The closed intervals meet at their endpoints and cover all $m\ge0$. At $m=0$ the entire mass is at zero.
+
+The candidate's second moment is a ratio of finite sums. Substituting the two endpoints for $t$ and using the sums of squares and fourth powers gives the two budget endpoints. Continuity gives the intermediate budgets. For any nonnegative law $v$ of mass one with convergent second moment $s$, expand the difference of squared masses. Split the cross term into the contribution from $(t-j^2)/Z$ and the correction outside the support to obtain
+$$
+\sum_j v_j^2-\sum_j w_j^2
+= \sum_j(v_j-w_j)^2+\frac{2(m-s)}{Z}
+  +\frac{2}{Z}\sum_j (j^2-t)_+v_j.
+$$
+The last term is summable and nonnegative. When $s\le m$, the identity gives strict uniqueness of the weights. Since $t\ge1$, their values $w_0=t/Z$ and $w_0-w_1=1/Z$ also determine $t$ and $Z$. The adjacent closed intervals give the same weights and parameters at their shared endpoint. The half-open condition $(n^2-1)/5\le m<n(n+2)/5$ selects the unique index $n=\lfloor\sqrt{5m+1}\rfloor$. On the first interval $0\le m\le3/5$, the three possible sites have weights $1-m$ at zero and $m/2$ at each neighbor. In the second-harmonic scale $\lambda=8\pi^2m$, the upper endpoint is exactly $24\pi^2/5$. A quantitative transfer of the lattice minimum back to the finite cycle has to account for the second cosine also approaching $1$ near the antipode.
+
+[Lean proof of the closed-interval support and exact remainder](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer_on_interval) · [Lean proof of the global half-open classification](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer)
+
+### The finite cyclic minimum converges to the lattice minimum
+
+Fix $\lambda\ge0$ and set $m=\lambda/(8\pi^2)$ and $a=1-\lambda/q^2$. Write $L(m)$ for the lattice minimum above and $E_q(a)$ for the minimum squared mass on the cycle with both cosine moments at least $a$. If $m$ belongs to the interval indexed by $n$, let $R$ be its support radius. At the lower endpoint $R=n-1$, and elsewhere $R=n$. When $q>2R$, the cyclic minimum is attained and
+$$
+0\le L(m)-E_q(a)\le \frac{2t}{Z}\frac{\lambda}{q^2}\le\frac{2\lambda}{q^2}.
+$$
+For any nonnegative cyclic weight $v$ of mass one, let $\bar i$ be the centered integer representative of the residue $i$. Write $M_1(v),M_2(v)$ for its cosine moments and put $S_1=2t(M_1(v)-a)/Z$ and $S_2=(q/(2\pi))^2(M_2(v)-a)/Z$. With the same lattice minimizer $w$,
+$$
+\sum_i(v_i-w_{\bar i})^2+S_1+S_2
+\le\sum_i v_i^2-L(m)+\frac{2t}{Z}\frac{\lambda}{q^2}.
+$$
+
+When $q>2R$ the lattice support embeds in the cycle. The inequality $1-\cos x\le x^2/2$ bounds the two deficits of the embedded law by $\lambda/(4q^2)$ and $\lambda/q^2$, so the law is feasible. The reverse bound accounts for weight near the antipode, where the second cosine also approaches $1$. Let $\theta=2\pi\bar i/q$. Throughout the centered range, $\theta^2\cos\theta\le\sin^2\theta$. This follows by sign when the cosine is nonpositive. Otherwise apply $\sin x\ge x\cos x$ to the positive half-angle and use $\cos^4(\theta/2)\ge\cos\theta$. Consequently the certificate
+$$
+P_i=\frac{t\cos\theta-(q\sin\theta/(2\pi))^2}{Z}
+$$
+lies below $w_{\bar i}$ at every residue. Expressing $2\sum_i v_iP_i$ in terms of the two cosine moments gives the contributions $S_1,S_2$. Use $(t-m)/Z=L(m)$ in the expansion of the squared distance. Both contributions are nonnegative for feasible weights. The zero site contributes $t$ to the normalizer $Z$, giving $t/Z\le1$.
+
+Each fixed budget lies in an interval of finite support radius. Thus $E_q(1-\lambda/q^2)$ tends to $L(\lambda/(8\pi^2))$ through all integer moduli. The arithmetic estimate for high-order frequencies of the actual ζ zeros remains open.
+
+[Lean proof of the centered cosine identity](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cosineMoment_eq_centered) · [Lean proof of the quantitative comparison](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cyclic_to_lattice_comparison)
+
+### Mass near the antipode
+
+The cyclic minimizers converge to the lattice law at every fixed centered site. The two tight constraints also determine a smaller amount of weight lying far from these sites. For a fixed $\lambda\ge0$, let $v_q$ be any cyclic minimizer at threshold $1-\lambda/q^2$. Set $c_i=\cos(2\pi i/q)$ and $A_q=\{i:c_i<0\}$. Through all integer moduli,
+$$
+q^2\sum_{i\in A_q}v_q(i)\longrightarrow \frac{3\lambda}{8},
+\qquad
+q^2\sum_{i\in A_q}(1+c_i)v_q(i)\longrightarrow 0.
+$$
+The second limit implies that for any fixed $\varepsilon>0$, the part of the rescaled mass on $A_q$ where $c_i\ge-1+\varepsilon$ tends to zero.
+
+On the fixed support of the lattice law, the first and second cosine deficits, multiplied by $q^2$, have limiting weighted sums $\lambda/4$ and $\lambda$. Over the full cycle each rescaled deficit sums to $\lambda$ because both constraints are tight. For $\lambda=0$ the pointwise upper bound one forces both moment equalities as soon as the weight is feasible. Nonnegativity then makes the second deficit outside the fixed support tend to zero. On $c_i\ge0$ it bounds $1-c_i$ after division by two, and on $c_i<0$ it bounds $1+c_i$ after the same division. Thus the first deficit over $A_q$ tends to $3\lambda/4$, and its difference from twice the rescaled mass tends to zero. This argument splits off a finite sum and bounds its remainder before passing to the limit. The related proof for character sums uses this method to compare a finite Dirichlet polynomial with a logarithmic derivative. [Character-sum tail bound](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)
+
+[Lean proof of the rescaled antipodal mass limit](lean:D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit)
+
+### The energy gap on even and odd cycles
+
+At fixed $\lambda>0$, put $m=\lambda/(8\pi^2)$ and write $w_j=(t-j^2)_+/Z$ for the lattice law. Its fourth moment is $m_4=\sum_j j^4w_j$. Along either parity of modulus,
+$$
+\lim_{q\to\infty} q^2\bigl(L(m)-E_q(1-\lambda/q^2)\bigr)
+=\frac2Z\left[(t-d^2)\frac{3\lambda}{8}+\frac{4\pi^2}{3}m_4\right],
+$$
+where $d=0$ for even $q$ and $d=1/2$ for odd $q$. The closest sampled cosine to $-1$ sits a half step from the antipode on odd cycles. This makes the odd coefficient smaller by $3\lambda/(16Z)$. The fourth moment contributes the same term on both parities.
+
+Write $h=2\pi/q$ and $C=-\cos(dh)$. In the quadratic certificate
+$$
+p_q(c)=\frac{t-h^{-2}(1-c^2)-\beta_q(1-c)}{Z},
+\qquad \beta_q=\frac{t-h^{-2}(1-C^2)}{1-C},
+$$
+one root is exactly $C$. The other root $\rho_q$ has $(1-\rho_q)/h^2\to t/2$. Factoring shows that the positive part is supported in a fixed front window, so the fourth-order cosine expansion can be summed there. At an activation endpoint the undisplaced weight of the boundary site is zero. Its squared positive part after perturbation is $O(h^4)$, so it does not change the coefficient at order $h^2$. [Cosine series](https://dlmf.nist.gov/4.19.E2)
+
+The certificate bounds the energy of every feasible weight by completing the square. To attain that bound to order $h^2$, adjust the mass at zero and its nearest neighbors and add mass at the closest antipodal level, imposing both moment equalities. The front corrections are $O(h^2)$ and the added mass is asymptotic to $3mh^2/4$. For a fixed positive budget the three adjusted front sites have positive limiting weights, so the construction is feasible for all sufficiently large moduli, including at activation endpoints. The statement concerns the finite cycle at fixed budget. The weighted high-order arithmetic estimate for the actual ζ ordinates remains open. [Derivation and hypotheses](https://github.com/the-omega-institute/trureturing/issues/33993#issuecomment-7146572104)
+
+[Lean proof of the parity energy correction](lean:D5/S3/Fourier/Asymptotics/CyclicParityLimit.cyclic_parity_correction)
+
+### Which sites carry positive mass
+
+For each fixed $\lambda>0$ and every sufficiently large modulus, the cyclic minimizer has positive mass exactly at the front sites $j^2\le t$ and at the closest antipodal sites. There is one closest antipodal site on an even cycle and two on an odd cycle. At a lattice activation boundary $t=N^2$, the limiting lattice weights at $\pm N$ are zero, but the two finite-cycle weights are positive and of order $q^{-2}$.
+
+To obtain an exact certificate, fit the weight as a linear combination of $1$, $1-c$, and $(1-c^2)/h^2$ on those sites, where $c=\cos(jh)$ and $h=2\pi/q$. Solve the three equations for the mass and the two deficits. The feature vectors at the center, a front neighbor, and an antipodal site are independent in the limit. At a square boundary, the first variation of the weight at $\pm N$ has a positive contribution from the change in the second moment on the front window. It also has a nonnegative contribution from the monic quadratic orthogonal to $1$ and $j^2$ there. The quadratic certificate is negative at the first omitted cosine on either side. Convexity then excludes the intervening residues, and completing the square certifies the unique minimum on the whole cycle. For the minimizing weight $v$, every feasible weight $w$ satisfies $E(w)-E(v)\ge\sum_i(w_i-v_i)^2$.
+
+The bound on how large $q$ must be depends on the fixed budget. The support statement concerns the two prescribed cosine constraints. [Lean proof of support and stability](lean:D5/S3/Fourier/Asymptotics/CyclicEventualSupport.cyclic_eventual_exact_support) · [Exact certificate and boundary calculation](https://github.com/the-omega-institute/trureturing/issues/34004#issuecomment-7147550923)
+
+### Where the front support changes on a finite cycle
+
+Fix an integer $N\ge2$ and write $h=2\pi/q$. Use the common cosine floor $1-2mh^2$. The lattice switch occurs at $m_N=(N^2-1)/5$. In a neighborhood of $m_N$, for sufficiently large $q$, the finite cycle switches at a single budget $m_{N,q}$. The nearest antipodal sites and the front sites $|j|\le N-1$ carry positive mass throughout the neighborhood. The sites $\pm N$ carry positive mass exactly when $m>m_{N,q}$. Along each parity,
+$$
+\frac{m_{N,q}-m_N}{h^2}
+\longrightarrow
+\frac{(N^2-1)(47-31N^2)}{420}+\frac{3(N^2-1)d^2}{20},
+\qquad d=\begin{cases}0& q\text{ even},\\[2pt]1/2& q\text{ odd}.\end{cases}
+$$
+Both coefficients are negative, so the boundary pair enters before the lattice budget is reached. The odd coefficient exceeds the even coefficient by $3(N^2-1)/80$.
+
+For a fixed candidate window, the moment right-hand side is affine in $m$. Fit the three cosine features on the larger window and define the switch by the zero of the weight at $N$. The slope of that weight tends to $(N^2-\bar x)/V>0$, where $x_j=j^2$, $\bar x$ is the mean of $x_j$ on $|j|\le N$, and $V=\sum_j(x_j-\bar x)^2$. Removing the two zero-weight rows leaves the same moment equations at the switch. For the smaller window, the evaluation at the omitted pair also has positive slope. The other front weights retain positive limits. The antipodal weights are positive at order $h^2$, while the first excluded cosine on each side has a strictly negative limit when the boundary pair is included in the test window. Convexity then controls the middle of the cycle. [Parametric quadratic programming, §4](https://doi.org/10.1016/S0005-1098(01)00174-1)
+
+For the shift, write $T=N^2$, $W_j=(T-x_j)/Z$ with $Z=\sum_j(T-x_j)$, and $m_4=\sum_j x_j^2W_j$. Let $r_j$ be the coefficient of $h^2$ in the front weight at budget $m_N$, and let $\mu=3m_N/4$ be the coefficient of the total antipodal weight. The quadratic $r_j+\mu W_j$ has zero total and first $x$-moment $K=m_4/3+(m_N-d^2)\mu$. Its leading coefficient is $1/(3Z)$. Eliminating the constant and linear terms gives
+$$
+\frac{r_N V}{T-\bar x}=K+\frac{m_4-m_N^2}{3}.
+$$
+The threshold shift is the negative of this ratio. The symmetric finite sums yield $m_4=(N^2-1)(3N^2-5)/35$ and give the displayed coefficient. The asymptotic keeps $N$ fixed. Small moduli can give positive weight on additional antipodal levels. [Lean proof of the switch and scaled displacement](lean:D5/S3/Fourier/Asymptotics/CyclicActivationShift.cyclic_activation_shift) · [Derivation and finite checks](https://github.com/the-omega-institute/trureturing/issues/34016#issuecomment-7148575133)
+
+### Matrix error for a growing front window
+
+Let the front half-width $N$ grow with the modulus and take budget $m=N(N+1)/5$. Write $h=2\pi/q$, $u=Nh$, and $x=j/N$ on the front. The two features $(1+\cos(xu))/2$ and $\sin^2(xu)/u^2$ extend at zero mesh to $1$ and $x^2$. Let $G_N(u)$ denote the matrix obtained by summing the pairwise products of the features over $|j|\le N$ and dividing by $N$. For every real $u$, each entry satisfies
+
+$$
+\left|G_N(u)_{ab}-G_N(0)_{ab}\right|\le 2u^2 .
+$$
+
+The cubic sine remainder gives a uniform error in the second feature. Both features have magnitude at most one on the window, so the entrywise matrix error remains of order $u^2$ after summation and division by $N$. As $N\to\infty$ and $u\to0$, the matrix has rows $(2,2/3)$ and $(2/3,2/5)$. In the regime $q/N^{5/2}\to\gamma>0$, the error compared with the zero-mesh matrix at the same $N$ is $O(N^{-3})$.
+
+For $t=N(N+1)-1/2$ and $Z=\sum_{|j|\le N}(t-j^2)$, set $a=(Nt/Z,-N^3/Z)$. At zero mesh the matrix sends $a$ exactly to $(1,m/N^2)$. At mesh $u$ the moment residual satisfies
+
+$$
+\left|\left[G_N(u)a-(1,m/N^2)\right]_i\right|
+\le 2u^2(|a_0|+|a_1|)\quad(i=0,1).
+$$
+
+The scaled lattice weight $N(t-j^2)/Z$ has sign margins of order $N^{-1}$ at $j=N$ and $j=N+1$. Determining the full cyclic support still requires control of the antipodal equations and the boundary sign at an antipodal activation threshold. [Lean proof of the Gram error](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_sub_le) · [Lean proof of the residual bound](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_reference_residual_le) · [Antipodal support problem](https://github.com/the-omega-institute/trureturing/issues/34029)
+
+### Joint fit at the front and antipodal windows
+
+Fix a nonempty finite set $S$ of signed real offsets from the antipode. With $c$ the sampled cosine, put $F=(1+c)/2$, $W=(1-c)/2$, and $X=(1-c^2)/(Nh)^2$. At mesh zero use their continuous extensions in the two windows. Fit the weight as $v=AF/N+CX/N+BW/N^3$ on the front and on $S$. The three moment equations have rows $\sum Fv$, $\sum Xv$, and $N^3\sum W^2v$. Their target for the common cosine floor $1-2mh^2$ is $(1-mh^2,m/N^2,3N^3mh^2/4)$, using $W^2=W-u^2X/4$.
+
+Let $M_N$ be the matrix of these three rows in coefficient order $(A,C,B)$. If $N^3(Nh)^4\to0$, then
+
+$$
+M_N\longrightarrow
+\begin{pmatrix}
+2 & 2/3 & 0\\
+2/3 & 2/5 & 0\\
+0 & \sum_{r\in S}r^2 & |S|
+\end{pmatrix}.
+$$
+
+The front contribution to the last row is bounded by constants times $N^3u^4$ and $Nu^6$. At a fixed antipodal offset $r$, $W\to1$, $N^2X\to r^2$ and $N^2F\le r^2u^2/4$. These estimates give the displayed matrix without a limit that exchanges a growing sum and a merely pointwise estimate. Its determinant is $16|S|/45$, so every prescribed vector of three moments has a unique coefficient fit for sufficiently large $N$.
+
+When $q/N^{5/2}\to\gamma>0$, the target tends to $(1,1/5,3\pi^2/(5\gamma^2))$. The resulting limits are $A\to3/4$, $C\to-3/4$ and
+
+$$
+B\longrightarrow \frac{3\pi^2/(5\gamma^2)+(3/4)\sum_{r\in S}r^2}{|S|}.
+$$
+
+Thus at a fixed included rear site the fitted weight satisfies $N^3v(r)\to B_\infty-3r^2/4$. This calculation permits signed fitted weights. To verify the optimizer's support, the signs at both ends of the front window and at the rear activation levels must be controlled, including the levels with zero limiting score. [Lean proof of matrix convergence](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit.coupledMatrix_tendsto) · [Lean proof of the unique signed fit](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit.coupledFit_eventually) · [Coupled fit research](https://github.com/the-omega-institute/trureturing/issues/34029)
+
+### Quantitative signs at the growing-window boundaries
+
+The critical-scale fit admits a sharper comparison with the lattice reference. Write $K=\lim_{N\to\infty}N^5h^2=4\pi^2/\gamma^2$, and let $(A_N,C_N,B_N)$ be the inverse-matrix fit above. For $t=N(N+1)-1/2$ and $Z=\sum_{|j|\le N}(t-j^2)$,
+$$
+A_N-\frac{Nt}{Z}=O(N^{-3}),
+\qquad
+C_N+\frac{N^3}{Z}=O(N^{-3}).
+$$
+
+The estimate requires only boundedness of $N^5h^2$. After multiplication by $N^3$, the first two rows of the coupled matrix differ from the lattice Gram matrix augmented by a zero third column by a bounded matrix. The front-feature product error is bounded by $2u^2$, with $N^3u^2=O(1)$. Each fixed rear contribution to the scaled rows tends to zero. The scaled change in target mass is $N^3mh^2=O(1)$. Boundedness of the target and the inverse joint matrix bounds the fitted coefficients. Holding $B_N$ fixed, the inverse of the upper-left two-by-two matrix transfers the scaled residual bound to the front coefficient errors.
+
+Let $p_N(j)$ denote the signed polynomial fitted on the front, extended to real $j$ by the same trigonometric formula. For each fixed real $d$, the scaled lattice reference at $j=N+d$ has limit $\frac34(1-2d)$ after multiplication by $N^2$. The feature and coefficient estimates preserve that limit:
+$$
+N^2p_N(N+d)\longrightarrow \frac34(1-2d).
+$$
+In particular the signed values at $N$ and $N+1$ are eventually strictly positive and strictly negative, respectively. Evenness gives the corresponding values at the negative end of the front window. At the half-step $d=1/2$ the leading limit vanishes, and the refined comparison yields $N^3p_N(N+1/2)\to-9/16$.
+
+At every fixed real rear offset $r$, using the rear feature formula in the same fitted polynomial gives
+$$
+N^3p_N^{\rm rear}(r)\longrightarrow B_\infty-\tfrac34r^2.
+$$
+The strict sign at any such offset is determined by this limit when it is nonzero. The limits concern the signed fit for a fixed nonempty finite rear set $S$. To certify a particular cyclic optimizer one still needs to identify the finite cyclic site correspondence and extend the complement signs across all other sites. At $B_\infty=3r^2/4$ the limiting sign alone leaves the activation level open. [Lean proof of the coefficient rate](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.refined_coefficients) · [Front and half-step limits](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_boundary_value) · [Rear limit](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_rear_value) · [Research problem](https://github.com/the-omega-institute/trureturing/issues/34029)
 
 ## Changing the height cutoff in a local statistic
 
