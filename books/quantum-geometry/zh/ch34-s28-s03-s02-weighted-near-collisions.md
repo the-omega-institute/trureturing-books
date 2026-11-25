@@ -551,7 +551,7 @@ $$
 -\!\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ 为奇数}}}B_T^2\le R_K\le
 \sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ 为偶数}}}B_T^2.
 $$
-余项恰为未保留的偶数阶平方和减去奇数阶平方和。当 $K\ge d$ 时余项为零。乘上非负的傅里叶权重并求和时，可继续保留已计算的负贡献。这为下述 Fejér 频带估计提供了随次数变化的精细界。实际 ζ 零点对应的高阶子集平方和以及异常字符的总权重仍需要新的算术估计。 [相关证明候选](https://github.com/the-omega-institute/trureturing/pull/34086)
+余项恰为未保留的偶数阶平方和减去奇数阶平方和。当 $K\ge d$ 时余项为零。乘上非负的傅里叶权重并求和时，可继续保留已计算的负贡献。这为下述 Fejér 频带估计提供了随次数变化的精细界。实际 ζ 零点对应的高阶子集平方和以及异常字符的总权重仍需要新的算术估计。 [Lean 带符号展开证明](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_expansion) [Lean 奇偶余项界证明](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_remainder)
 
 ### 用非负傅里叶权重估计频带
 

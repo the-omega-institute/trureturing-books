@@ -551,7 +551,7 @@ $$
 -\!\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ odd}}}B_T^2\le R_K\le
 \sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ even}}}B_T^2.
 $$
-The exact remainder is the sum of the omitted even-cardinality squares minus the sum of the odd-cardinality squares. It vanishes for $K\ge d$. Multiplying by nonnegative Fourier weights and summing preserves the computed negative contributions. This gives a degree-sensitive refinement when applying the Fejér band estimate below. Bounding the high-degree subset squares and the exceptional-character weight for the actual ζ ordinates still requires an arithmetic estimate. [Related proof candidate](https://github.com/the-omega-institute/trureturing/pull/34086)
+The exact remainder is the sum of the omitted even-cardinality squares minus the sum of the odd-cardinality squares. It vanishes for $K\ge d$. Multiplying by nonnegative Fourier weights and summing preserves the computed negative contributions. This gives a degree-sensitive refinement when applying the Fejér band estimate below. Bounding the high-degree subset squares and the exceptional-character weight for the actual ζ ordinates still requires an arithmetic estimate. [Lean proof of the signed expansion](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_expansion) [Lean proof of the parity remainder](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_remainder)
 
 ### Bounding a cyclic band with nonnegative Fourier weights
 

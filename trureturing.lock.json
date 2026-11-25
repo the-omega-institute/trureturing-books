@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "4dd78e27ba3bc05d1e2ea291701ea326cdf9e79c",
-  "pinned_at": "2026-11-25T08:25:33Z",
+  "commit": "69e5317f56d36618af8a2b1caf4c2d7778ca0062",
+  "pinned_at": "2026-11-25T09:29:03Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4985,9 +4985,25 @@
       "module": "D5/S3/Fourier/Concentration/DisjointCharacterEnvelope",
       "name": "D5.S3.Fourier.Concentration.DisjointCharacterEnvelope.coefficient_envelope",
       "kind": "theorem",
-      "statement_id": "sha256:d41fe629cd9922fb975a6f26a99d83eb4c9608ecc434dd30253807c956ef0c61",
+      "statement_id": "sha256:e2e4d29946d7fc9bf5091652524ceb6296a2cff6ec4fd0c94b7cec34c96bcc41",
       "line": 313,
       "signature": "theorem coefficient_envelope {J : Type*} (s : Finset J) (a b : J → ℂ) (m n : ℕ) (r : ℝ) (hr : 0 < r) : let emptyPart"
+    },
+    "D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_expansion": {
+      "module": "D5/S3/Fourier/Concentration/DisjointCharacterRemainder",
+      "name": "D5.S3.Fourier.Concentration.DisjointCharacterRemainder.signed_overlap_expansion",
+      "kind": "theorem",
+      "statement_id": "sha256:e1701112edec5b1b58bf738815d4dadd49e0b3ed1ff710f88ce4cb37f647422c",
+      "line": 133,
+      "signature": "theorem signed_overlap_expansion {J : Type*} (s : Finset J) (a : J → ℂ) (d : ℕ) : let c"
+    },
+    "D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_remainder": {
+      "module": "D5/S3/Fourier/Concentration/DisjointCharacterRemainder",
+      "name": "D5.S3.Fourier.Concentration.DisjointCharacterRemainder.signed_overlap_remainder",
+      "kind": "theorem",
+      "statement_id": "sha256:e1701112edec5b1b58bf738815d4dadd49e0b3ed1ff710f88ce4cb37f647422c",
+      "line": 169,
+      "signature": "theorem signed_overlap_remainder {J : Type*} (s : Finset J) (a : J → ℂ) (d K : ℕ) : let c"
     },
     "D5/S3/Fourier/Concentration/DisjointSupportOccupationMass.scaled_disjoint_mass": {
       "module": "D5/S3/Fourier/Concentration/DisjointSupportOccupationMass",
@@ -9068,6 +9084,14 @@
       "line": 338,
       "signature": "theorem rational_rank_le_two_at_iff (b : ℝ) (L R : Matrix Bool Bool ℂ) (u v w z : ℂ) (hb : 0 < b) (ht : L.trace + (b : ℂ) = 1) (hr : R.trace = L.trace) (qL : ∀ i j, RationalEntry (L i j)) (qR : ∀ i j, RationalEntry (R i j)) (qu : RationalEntry u) (qv : RationalEntry v) (qw : RationalEntry w) (qz : RationalEntry z) : let C"
     },
+    "D5/S3/Quantum/Entanglement/Marginals/FibDiagonalRank.rational_rank_le_two_diagonal_iff": {
+      "module": "D5/S3/Quantum/Entanglement/Marginals/FibDiagonalRank",
+      "name": "D5.S3.Quantum.Entanglement.Marginals.FibDiagonalRank.rational_rank_le_two_diagonal_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:6d2481464210932f821b6bc9bb9c1074f7002e6270e00c132ca8ade5860a346b",
+      "line": 142,
+      "signature": "theorem rational_rank_le_two_diagonal_iff (b l r : ℚ) (hb : 0 < b) (hl : 0 ≤ l) (hr : 0 ≤ r) (hne : l ≠ r) : (∃ z : ℂ, ∃ ρ : Matrix Word Word ℂ, ρ.PosSemidef ∧ MatchesCoherentData b (diagonalEdgeBlock b l) (diagonalEdgeBlock b r) 0 0 0 z ρ ∧ ρ.rank ≤ 2 ∧ ∀ i j, RationalEntry (ρ i j)) ↔ (∃ z : ℂ, RationalEntry z ∧ normSq z = (b * (1 - b - l - r) : ℚ)) ∧ (∃ w : ℂ, RationalEntry w ∧ normSq w = (l * r : ℚ))"
+    },
     "D5/S3/Quantum/Entanglement/Marginals/FibMarginalExtension.extendible_iff": {
       "module": "D5/S3/Quantum/Entanglement/Marginals/FibMarginalExtension",
       "name": "D5.S3.Quantum.Entanglement.Marginals.FibMarginalExtension.extendible_iff",
@@ -9155,6 +9179,14 @@
       "statement_id": "sha256:4a67af8bed068782c7112f9edf5eeb58010845563dde02230773a842bc9548a1",
       "line": 327,
       "signature": "theorem rational_endpoint_rank_le_three (L R : Matrix Bool Bool ℂ) : (∃ S : Matrix (Bool × Bool) (Bool × Bool) ℂ, S.PosSemidef ∧ partialTraceRight S = L ∧ partialTraceLeft S = R ∧ S.rank ≤ 3 ∧ ∀ i j, RationalEntry (S i j)) ↔ L.PosSemidef ∧ R.PosSemidef ∧ L.trace = R.trace ∧ (∀ i j, RationalEntry (L i j)) ∧ ∀ i j, RationalEntry (R i j)"
+    },
+    "D5/S3/Quantum/Entanglement/Marginals/RationalQubitProjector.rational_rank_two_of_quadratic_witness": {
+      "module": "D5/S3/Quantum/Entanglement/Marginals/RationalQubitProjector",
+      "name": "D5.S3.Quantum.Entanglement.Marginals.RationalQubitProjector.rational_rank_two_of_quadratic_witness",
+      "kind": "theorem",
+      "statement_id": "sha256:7215480596326f0c304a6a7a32b0cd5122e10ea242b1d63786e9ca4ba68acdd2",
+      "line": 286,
+      "signature": "theorem rational_rank_two_of_quadratic_witness (a b y v : Fin 3 → ℚ) (hordered : a ⬝ᵥ a < b ⬝ᵥ b) (hy : 0 < y ⬝ᵥ y) (hlinear : a ⬝ᵥ y = b ⬝ᵥ v) (hquad : y ⬝ᵥ y = (1 - b ⬝ᵥ b) * (v ⬝ᵥ v) + (b ⬝ᵥ v) ^ 2) : ∃ T : Matrix (Bool × Bool) (Bool × Bool) ℂ, T.PosSemidef ∧ T.rank = 2 ∧ (∀ i j, RationalEntry (T i j)) ∧ partialTraceRight T = (1 / 2 : ℂ) • (1 + rationalBlochMatrix a) ∧ partialTraceLeft T = (1 / 2 : ℂ) • (1 + rationalBlochMatrix b)"
     },
     "D5/S3/Quantum/Entanglement/Marginals/RationalQubitPurity.rational_qubit_purity_iff": {
       "module": "D5/S3/Quantum/Entanglement/Marginals/RationalQubitPurity",
