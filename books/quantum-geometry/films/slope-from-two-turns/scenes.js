@@ -341,10 +341,10 @@ SCENES.why = S => {
     stDash(g.tip[0], g.tip[1], WY_O[0] + 60, g.hy, C.argued, ga * 0.6, 1.5);
     arrow(WY_O[0] + 34, arm.hy, WY_O[0] + 34, arm.hy - v * k, C.argued, ga, 4);
     txt('velocity · 速度', WY_O[0] + 54, arm.hy - v * k / 2 + 8, { size: 20, fam: F.zh, w: 700, c: C.argued, a: ga });
-    txt('dashed: the arrow a quarter turn ahead · 虚线：前方四分之一圈的箭头', 80, 296, { size: 20, fam: F.zh, w: 700, c: C.argued, a: ga });
+    txt('dashed: the arrow a quarter turn ahead · 虚线：前方四分之一圈的箭头', 80, 256, { size: 20, fam: F.zh, w: 700, c: C.argued, a: ga });
   }
-  txt('amber tick on the axis: the shadow · 轴上的琥珀刻度：影子', 80, 268, { size: 20, fam: F.zh, w: 700, c: C.now, a });
-  stTag('analogy · 比方', 80, 222, C.argued, a * at(S, 0, 0.6));
+  txt('amber tick on the axis: the shadow · 轴上的琥珀刻度：影子', 80, 228, { size: 20, fam: F.zh, w: 700, c: C.now, a });
+  stTag('analogy · 比方', 80, 188, C.argued, a * at(S, 0, 0.6));
   /* line 1: one Pauli turn gives one pure wave */
   const la = a * at(S, 1, 0.6);
   if (la > 0.003) {
