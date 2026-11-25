@@ -10632,6 +10632,122 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "auric-trivalent-gold-observer-focus-sandbox",
+      "code": "OMEGA//AURIC",
+      "title": "AURIC 四重本相与观察者焦点",
+      "title_en": "The Fourfold Identity of AURIC and Observer Focus",
+      "summary": "从破晓词根与 5d¹⁰ 满壳球出发，移走两个电子，观察 Z = 79 三价金的平面四方空窗口。核对有理四极矩、自旋 2 特征与十二节点旋转平均，沿十五步 pOmega 的结构时间脊柱走向四站衔尾环。",
+      "summary_en": "Explore the dawn root and the round 5d10 shell. Remove two electrons to reveal the square-planar window of trivalent gold at Z = 79. Check the rational quadrupole, spin-two character and twelve-node rotation average, then follow the fifteen pOmega steps along the structural-time spine to the four-station ring.",
+      "path": "auric-trivalent-gold-observer-focus-sandbox/",
+      "thumbnail": "auric-trivalent-gold-observer-focus-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-25",
+      "chapter": 38,
+      "section": "38.17",
+      "presets": [
+        "pie-dawn-and-noble-aurous-sphere",
+        "relativistic-z79-d4h-lumo-window",
+        "trivalent-rank-and-j2-quadrupole-ledger",
+        "observer-focus-half-horizon-and-tau-spine",
+        "auric-ouroboros-matter-to-omega-closure"
+      ],
+      "preset_titles": {
+        "pie-dawn-and-noble-aurous-sphere": {
+          "zh": "破晓词根与满壳金的圆球",
+          "en": "The dawn root and the round full shell"
+        },
+        "relativistic-z79-d4h-lumo-window": {
+          "zh": "相对论金与平面四方的空窗口",
+          "en": "Relativistic gold and the D4h empty window"
+        },
+        "trivalent-rank-and-j2-quadrupole-ledger": {
+          "zh": "三价秩与 j = 2 四极账本",
+          "en": "Trivalent rank and the j = 2 ledger"
+        },
+        "observer-focus-half-horizon-and-tau-spine": {
+          "zh": "观察者焦点：半视界与 τ 脊柱",
+          "en": "Observer focus: half horizon and τ spine"
+        },
+        "auric-ouroboros-matter-to-omega-closure": {
+          "zh": "AURIC 衔尾环：从物质回到 Ω",
+          "en": "The AURIC ring: from matter back to Ω"
+        }
+      },
+      "tags": [
+        "破晓词源",
+        "三价金",
+        "有理四极矩",
+        "胡尔维茨旋转平均",
+        "观察者焦点"
+      ],
+      "tags_en": [
+        "Dawn etymology",
+        "Trivalent gold",
+        "Rational quadrupole",
+        "Hurwitz rotation average",
+        "Observer focus"
+      ],
+      "theory": [
+        {
+          "label": "§38.17 · AURIC 的四重本相：破晓词源、三价金相对论平面破缺与 0 · 1/2 · 1 观察者焦点签名",
+          "label_en": "§38.17 · The Fourfold Identity of AURIC: Dawn Etymology, Relativistic Square-Planar Breaking of Trivalent Gold, and the 0 · 1/2 · 1 Observer-Focus Signature",
+          "href": "../zh/ch38-s17-auric-trivalent-gold-and-observer-focus-signature.html#sec-ch38-auric-trivalent-gold-and-observer-focus-signature",
+          "href_en": "../en/ch38-s17-auric-trivalent-gold-and-observer-focus-signature.html#sec-ch38-auric-trivalent-gold-and-observer-focus-signature"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.orthogonal_triad_excess_quarter"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_norm_five"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_hecke_traces"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.kappa_jet_one"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.var_cube"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.hurwitz_core_unit"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_deterministic"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.d2_eq_zero_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.orbital_quadrupole"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.full_orbital_quadrupole"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.spin_two_character"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.haar_evenChar_expectation"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_left_absorption"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.p_omega_halts_at_22"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/DimensionRankRealization.exists_model_tfae"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
