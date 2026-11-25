@@ -1226,6 +1226,22 @@
       "line": 15,
       "signature": "theorem chinese_remainder_bijective (m n : ℕ) (h : Nat.Coprime m n) : Function.Bijective (ZMod.castHom (show m.lcm n ∣ m * n by simp [Nat.lcm_dvd_iff]) (ZMod m × ZMod n))"
     },
+    "D5/S3/Arith/Coding/HorizontalCompletenessDepth.residue_reading_injOn_iff_primorial_gt": {
+      "module": "D5/S3/Arith/Coding/HorizontalCompletenessDepth",
+      "name": "D5.S3.Arith.Coding.HorizontalCompletenessDepth.residue_reading_injOn_iff_primorial_gt",
+      "kind": "theorem",
+      "statement_id": "sha256:f6d11661bddf55baadfd9a677b625fcced032a5f7fd9978ace35444cd409d140",
+      "line": 48,
+      "signature": "theorem residue_reading_injOn_iff_primorial_gt (N r : Nat) : Set.InjOn (residueReading r) (Set.Icc 0 N) ↔ N < primePrefixProduct r"
+    },
+    "D5/S3/Arith/Coding/PrimorialWitnessBound.primorial_witness_bound": {
+      "module": "D5/S3/Arith/Coding/PrimorialWitnessBound",
+      "name": "D5.S3.Arith.Coding.PrimorialWitnessBound.primorial_witness_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:707a27352889a8de51d5f5a50186e4016eb6d8c7fc5e350e4b289ed124b15601",
+      "line": 40,
+      "signature": "theorem primorial_witness_bound (x y : Int) (hxy : x ≠ y) (r : Nat) (hbound : Int.natAbs (x - y) < primePrefixProduct r) : horizontalWitnessComplexity x y ≤ r"
+    },
     "D5/S3/Arith/Congruence/PadicBallFiberCorrespondence.congruenceFiber_eq_closedBall_inter_range": {
       "module": "D5/S3/Arith/Congruence/PadicBallFiberCorrespondence",
       "name": "D5.S3.Arith.Congruence.PadicBallFiberCorrespondence.congruenceFiber_eq_closedBall_inter_range",
@@ -6297,6 +6313,14 @@
       "statement_id": "sha256:1bc6080d42258c1006c2391ec26678c526a3bbf287ec92ba8acfce9d9c1d46c9",
       "line": 24,
       "signature": "theorem prime_dvd_dvd_of_dvd_sq_add_sq (q a b : ℕ) (hq : q.Prime) (h3 : q % 4 = 3) (h : q ∣ a ^ 2 + b ^ 2) : q ∣ a ∧ q ∣ b"
+    },
+    "D5/S3/PrimeGaps/SieveCoefficients.totient_eq_prod_sub_one_of_squarefree": {
+      "module": "D5/S3/PrimeGaps/SieveCoefficients",
+      "name": "LongGapsBetweenPrimes.totient_eq_prod_sub_one_of_squarefree",
+      "kind": "theorem",
+      "statement_id": "sha256:9fa37eebce0b68b3fda26019fe9865f9fe1ad9bc33feb711dd31d3b6f012b339",
+      "line": 181,
+      "signature": "lemma totient_eq_prod_sub_one_of_squarefree {d : ℕ} (hd : Squarefree d) : d.totient = ∏ p ∈ d.primeFactors, (p - 1)"
     },
     "D5/S3/PrimeObserver/ProjectiveMemory/GoldenProjectiveMultiplier.projective_defect_modal_step": {
       "module": "D5/S3/PrimeObserver/ProjectiveMemory/GoldenProjectiveMultiplier",
