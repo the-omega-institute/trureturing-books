@@ -233,8 +233,8 @@ SCENES.tick = S => {
   fillBox(1150, 322, 520 * Math.max(0, c), 30, C.cyan, a * 0.6); box(1150, 322, 520, 30, C.cyan, a * 0.5, 1.2);
   szRich([['angle θ = arccos|overlap| = ', C.white], [`${Math.round(th / SZ_DEG)}°`, C.now]], 1150, 410, { size: 30, a });
   const ma = a * at(S, 1, 0.6);
-  txt('mistaken with probability = overlap²', 1150, 474, { size: 22, fam: F.mono, w: 700, c: C.dim, a: ma });
-  txt('被错认的概率 = 重叠的平方', 1150, 506, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ma });
+  txt('read as old with probability overlap²', 1150, 474, { size: 22, fam: F.mono, w: 700, c: C.dim, a: ma });
+  txt('用旧读数去测，被读成旧的概率 = 重叠的平方', 1150, 506, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ma });
   const za = a * Q(S, 2, 'zero overlap', 0.6) * clamp((th / SZ_DEG - 86) / 3);
   if (za > 0.003) chip(1470, 585, 560, 56, 'overlap 0  ⇔  θ = 90°', C.mag, za, 28, F.math);
 };
@@ -362,7 +362,7 @@ SCENES.clock = S => {
     szRich([['energy = E/2,  τ = πħ/(2E):  ', C.white], ['τ = πħ/(4·energy)', C.cyan], ['  equality', C.white]], 984, 782, { size: 24, a: ea });
     szRich([['f = 5 GHz:  πħ/E = 1/(2f) = ', C.white], ['100 ps', C.now]], 984, 826, { size: 24, a: a * at(S, 5, 0.6) });
   }
-  stamp('τ ≥ πħ/4E', 470, 260, Q(S, 3, 'Lean checks', 0.5, 0.8) * (1 - at(S, 4, 0.5, 1.5)), C.lean, 34, -0.06);
+  stamp('τ ≥ πħ/(4·energy)', 470, 260, Q(S, 3, 'Lean checks', 0.5, 0.8) * (1 - at(S, 4, 0.5, 1.5)), C.lean, 34, -0.06);
 };
 
 /* ======================================================================= */
@@ -386,8 +386,9 @@ SCENES.watch = S => {
     line(p[0], p[1], p[0], O[1], C.mag, sa, 6);
     line(O[0], O[1] + 30, p[0], O[1] + 30, C.cyan, sa, 8);
     txt(`off · 偏离  sin(δ/2) = ${Math.sin(half).toFixed(3)}`, p[0], p[1] - 30, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.mag, a: sa });
-    txt(`loss · 损失  sin²(δ/2) =${Math.pow(Math.sin(half), 2).toFixed(3)}`, O[0], O[1] + 86, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: sa });
-    txt(`step · 每步 δ = ${(2 * half / SZ_DEG).toFixed(1)}°`, O[0], O[1] + 128, { size: 22, fam: F.zh, w: 700, c: C.now, a: sa });
+    txt(`shadow · 影子  cos(δ/2) = ${Math.cos(half).toFixed(3)}`, O[0], O[1] + 76, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: sa });
+    txt(`loss · 损失  1 − shadow² = sin²(δ/2) = ${Math.pow(Math.sin(half), 2).toFixed(3)}`, O[0], O[1] + 116, { size: 24, fam: F.zh, w: 700, c: C.white, a: sa });
+    txt(`Bloch step · 布洛赫角每步 δ = ${(2 * half / SZ_DEG).toFixed(1)}° · arrow turns δ/2 = ${(half / SZ_DEG).toFixed(1)}°`, O[0], O[1] + 156, { size: 22, fam: F.zh, w: 700, c: C.now, a: sa });
   }
   szAnalogy('analogy · 比方：盯着的水壶烧不开 · a watched pot never boils', 120, 240, a * at(S, 0, 0.8, 1.0), { size: 22 });
   /* right: the chain of four checks, then sixty-four */
@@ -434,11 +435,11 @@ function bkDial(O, R, angs, a, label) {
 SCENES.back = S => {
   const u = S.u, a = szFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean'], [4, null, 'argued']]);
+  badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean'], [4, null, 'computed']]);
   /* left (lines 0–2): the two branches of the ledger */
   const qa = a * (1 - at(S, 3, 0.6));
   if (qa > 0.003) {
-    panel(100, 200, 900, 640, qa, C.cyan, 'QUBIT, 45° STEPS · 比特，每步 45°');
+    panel(100, 200, 900, 640, qa, C.cyan, 'QUBIT, BLOCH STEP δ = 45° · 比特，布洛赫角每步 45°');
     txt('ask each step: back at |0⟩?  ·  每一步问：回到 |0⟩ 了吗？', 130, 270, { size: 22, fam: F.zh, w: 700, c: C.white, a: qa });
     const b1 = qa * at(S, 1, 0.6), b2 = qa * Q(S, 2, 'If not', 0.6), b3 = qa * Q(S, 2, 'Together', 0.6);
     const c2 = SZ_PQ[0], s2 = 1 - c2;
@@ -454,7 +455,7 @@ SCENES.back = S => {
     txt(`Σ n·pₙ  after ${String(n).padStart(2, ' ')} steps = ${SZ_RQ[n - 1].toFixed(3)}`, 130, 660, { size: 28, fam: F.mono, w: 700, c: C.now, a: b1 });
     txt('computed by running the protocol · 逐步运行协议算出', 130, 704, { size: 18, fam: F.zh, w: 700, c: C.dim, a: b1 });
     /* right: the first few return probabilities, and the mailbox analogy */
-    panel(1080, 200, 760, 560, qa, C.cyan, 'FIRST RETURN AT STEP n · 第 n 步首次回来');
+    panel(1080, 200, 760, 590, qa, C.cyan, 'FIRST RETURN AT STEP n · 第 n 步首次回来');
     for (let k = 0; k < 7; k++) {
       const ka = qa * clamp(at(S, 1, 0.5) * 7 - k), y = 270 + k * 58, p = SZ_PQ[k];
       if (ka <= 0.003) continue;
@@ -463,7 +464,8 @@ SCENES.back = S => {
       txt(p.toFixed(3), 1690, y + 28, { size: 22, fam: F.mono, w: 700, align: 'right', c: k ? C.mag : C.cyan, a: ka });
     }
     txt('… a long, thin tail · 一条又长又细的尾巴', 1110, 700, { size: 20, fam: F.zh, w: 700, c: C.mag, a: b2 });
-    szAnalogy('analogy · 比方：check the mailbox daily · 每天查信箱，信到就停', 1110, 740, qa * at(S, 0, 0.6, 1.0));
+    szAnalogy('analogy · 比方：check the mailbox daily · 每天查信箱，信到就停', 1110, 728, qa * at(S, 0, 0.6, 1.0));
+    szAnalogy('but here each look changes the state · 但这里每次查看都会改动态', 1110, 756, qa * at(S, 0, 0.6, 1.0), { size: 18 });
   }
   /* lines 3–5: Lean, the dial of eigenvalues */
   const la = a * Q(S, 3, 'Lean checks', 0.6);
@@ -473,8 +475,9 @@ SCENES.back = S => {
     txt('占据：本征向量与初态 v 的内积不为零；不计重数', 124, 310, { size: 20, fam: F.zh, w: 700, c: C.dim, a: la });
     szLean(124, 370, SZ_LEAN.monitored_spectral_mean, la, { size: 19 });
     bkDial([320, 640], 120, [-22.5, 22.5], la, 'qubit: 2 notes → mean 2');
-    const fa = a * Q(S, 4, 'Four strings', 0.6);
+    const fa = a * Q(S, 4, 'all four strings', 0.6);
     bkDial([760, 640], 120, SZ_4.ang, fa, '1, 1, i, −1: 3 notes');
+    txt('v = (1, 1, 1, 1)/2 · every string is played · 四根弦都被拨响', 760, 496, { size: 18, fam: F.zh, w: 700, align: 'center', c: C.dim, a: fa });
     if (fa > 0.003) {
       const n = Math.max(1, Math.round(lerp(1, 80, ease(Q(S, 4, 'the mean is three', 1.6)))));
       txt(`mean after ${n} steps = ${SZ_R4[n - 1].toFixed(3)}`, 760, 850, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: fa * Q(S, 4, 'the mean is three', 0.4) });
@@ -486,7 +489,7 @@ SCENES.back = S => {
   if (sa > 0.003) {
     const tags = ['pitch 1', 'pitch 1', 'pitch i', 'pitch −1'];
     for (let k = 0; k < 4; k++) {
-      const y = 290 + k * 70, amp = 10 * Math.sin(S.t * (6 + 3 * SZ_4.ang[k] / 90) + k) * (k === 1 ? 1 : 1);
+      const y = 290 + k * 70, amp = 30 * Math.sin(S.t * (5 + 4 * SZ_4.ang[k] / 90) + SZ_4.ang[k] * SZ_DEG);   /* same pitch, same motion */
       ctx.save(); ctx.globalAlpha = sa; ctx.strokeStyle = C.argued; ctx.lineWidth = 3;
       ctx.beginPath(); ctx.moveTo(1110, y); ctx.quadraticCurveTo(1340, y + amp, 1570, y); ctx.stroke(); ctx.restore();
       txt(tags[k], 1600, y + 8, { size: 22, fam: F.mono, w: 700, c: k < 2 ? C.now : C.argued, a: sa });
@@ -497,8 +500,8 @@ SCENES.back = S => {
   /* line 5: the maxim */
   const ma = a * at(S, 5, 0.6);
   if (ma > 0.003) {
-    chip(1460, 740, 760, 64, 'reshapes the wait, not the average', C.now, ma, 28, F.disp);
-    txt('改变等待的形状，改不了平均', 1460, 820, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: ma });
+    chip(1460, 740, 760, 64, 'this qubit: the wait changes shape, the mean stays 2', C.now, ma, 26, F.disp);
+    txt('这只比特：只改等待的形状，平均仍是 2', 1460, 820, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: ma });
   }
   stamp('mean = #eigenvalues', 1460, 300, Q(S, 3, 'Lean checks', 0.5, 0.8) * (1 - at(S, 4, 0.5, 0.0)), C.lean, 30, -0.06);
 };
