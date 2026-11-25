@@ -1,0 +1,27 @@
+{
+  "title": "Twelve gates in four ticks",
+  "title_zh": "十二道门，四拍走完",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-24",
+  "duration": "0:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · deterministic canvas",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result",
+    "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.result"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_depth-and-volume_720p_narrated.mp4",
+    "cover": "quantum-geometry_depth-and-volume_cover.jpg"
+  }
+}
