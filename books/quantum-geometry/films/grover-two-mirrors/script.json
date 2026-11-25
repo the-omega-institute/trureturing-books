@@ -1,0 +1,257 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {
+    "Lean": "Leen",
+    "Grover": "Grow-ver"
+  },
+  "music": {
+    "bpm": 80,
+    "progression": "d-minor"
+  },
+  "scenes": [
+    {
+      "id": "mirrors",
+      "name": "TWO MIRRORS",
+      "lead": 1.9,
+      "tail": 0.5,
+      "music": [
+        1.0,
+        0.4,
+        0.3,
+        0.0,
+        0.1
+      ],
+      "lines": [
+        [
+          "Take two mirror lines that cross, and bounce a shape off both.",
+          "取两条相交的镜线，让一个图形在两面镜子里先后各照一次。"
+        ],
+        [
+          "The first bounce flips it. The second flips it back. What is left is a turn.",
+          "第一次反射把它翻过去，第二次又翻回来；剩下的，是一次转动。"
+        ],
+        [
+          "They meet at thirty degrees, and the shape turned sixty. Always twice the angle.",
+          "镜线夹角 30°，图形就转了 60°：永远是夹角的两倍。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 2,
+          "at": 2.2,
+          "kind": "chime"
+        }
+      ]
+    },
+    {
+      "id": "plane",
+      "name": "FOUR BOXES",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        0.9,
+        0.5,
+        0.5,
+        0.1,
+        0.2
+      ],
+      "lines": [
+        [
+          "Now hide a prize in one of four boxes. Start with every box equal: amplitude one half each.",
+          "现在把奖品藏进四个盒子中的一个。开始时四个盒子一视同仁：振幅都是 1/2。"
+        ],
+        [
+          "Split it into two arrows: success, toward the prize, and failure, toward the other three.",
+          "把它拆成两支箭头：指向奖品的叫成功，指向其余三个盒子的叫失败。"
+        ],
+        [
+          "The start sits thirty degrees off failure, since the sine of thirty is one half.",
+          "起点偏离失败方向 30°，因为 30° 的正弦正好是 1/2。"
+        ],
+        [
+          "Grover's first mirror is the failure line. His second mirror is the line of the start.",
+          "Grover 的第一面镜子是失败那条线，第二面镜子是起点所在的线。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 3,
+          "at": 2.4,
+          "kind": "chime"
+        }
+      ]
+    },
+    {
+      "id": "count",
+      "name": "ONE STEP BY HAND",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        0.9,
+        0.6,
+        0.6,
+        0.2,
+        0.3
+      ],
+      "lines": [
+        [
+          "Let's take one step by hand. The first mirror flips the sign of the prize box.",
+          "手算一步。第一面镜子把奖品盒子的振幅变号。"
+        ],
+        [
+          "The second flips each amplitude about the average, like a mirror at height one quarter.",
+          "第二面镜子让每个振幅绕平均值翻折，好像在 1/4 的高度上立着一面镜子。"
+        ],
+        [
+          "Minus one half becomes one. Each plus one half becomes zero.",
+          "−1/2 翻成 1，三个 +1/2 都翻成 0。"
+        ],
+        [
+          "One step, and the prize is certain. The arrow turned sixty degrees, from thirty to ninety.",
+          "一步之后，奖品稳稳到手。箭头转了 60°，从 30° 到 90°。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 2,
+          "at": 1.6,
+          "kind": "impact"
+        }
+      ]
+    },
+    {
+      "id": "rule",
+      "name": "THE RULE",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        1.0,
+        0.7,
+        0.6,
+        0.3,
+        0.3
+      ],
+      "lines": [
+        [
+          "Lean checks the general rule, for any marked set and any uniform success chance p above zero.",
+          "Lean 内核检验了一般规律：任意标记集合，任意大于零的均匀成功率 p。"
+        ],
+        [
+          "Below one, success and failure are perpendicular unit arrows.",
+          "p 小于 1 时，成功与失败是两支互相垂直的单位箭头。"
+        ],
+        [
+          "After n steps the state sits exactly at the angle two n plus one, times theta.",
+          "走了 n 步，态恰好落在 (2n+1)θ 的角度上。"
+        ],
+        [
+          "It never leaves that plane, even with any spectator system tensored alongside.",
+          "它从不离开这个平面；旁边再张量并上任何旁观系统，也照样成立。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 0,
+          "at": 0.8,
+          "kind": "stamp"
+        }
+      ]
+    },
+    {
+      "id": "over",
+      "name": "PAST THE TOP",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        1.0,
+        0.8,
+        0.7,
+        0.4,
+        0.4
+      ],
+      "lines": [
+        [
+          "Why do we think more steps mean more progress? Keep turning and watch.",
+          "凭什么以为多走几步就多一分进展？接着转，看看。"
+        ],
+        [
+          "A second step reaches one hundred fifty degrees, and the chance falls back to one quarter.",
+          "第二步转到 150°，命中率又跌回 1/4。"
+        ],
+        [
+          "Third step, two hundred ten: still one quarter. Fourth, two seventy: certain again.",
+          "第三步到 210°，仍是 1/4；第四步到 270°，又一次必中。"
+        ],
+        [
+          "Search is not opening doors. It is turning: past the top, the next turn walks you back down.",
+          "搜索不是逐扇推门，而是转动；过了顶，下一步就往回走。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 3,
+          "at": 2.0,
+          "kind": "glitch"
+        }
+      ]
+    },
+    {
+      "id": "edge",
+      "name": "WHAT IT DOES NOT SAY",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        1.0,
+        0.7,
+        0.6,
+        0.3,
+        0.3
+      ],
+      "lines": [
+        [
+          "If the start already is the prize, p is one, and the theorem just says start equals success.",
+          "如果起点本身就是奖品，p 等于 1，定理只说起点就是成功箭头。"
+        ],
+        [
+          "Four boxes land exactly in one step. For every other size, whole steps only come close to the top.",
+          "四个盒子一步正好命中；除此之外，整数步只能逼近顶点。"
+        ],
+        [
+          "About pi over four, times root N, steps gets close. That count is arithmetic, not the theorem.",
+          "大约 (π/4)√N 步能走到顶点附近；这个步数是算出来的，不属于定理本身。"
+        ],
+        [
+          "And that no quantum search can do much better is a literature result, not formalized in this book.",
+          "至于没有哪种量子搜索能显著更快，这是文献结果，本书没有形式化。"
+        ]
+      ]
+    },
+    {
+      "id": "close",
+      "name": "LEDGER",
+      "lead": 0.5,
+      "tail": 3.4,
+      "music": [
+        1.0,
+        0.6,
+        0.5,
+        0.3,
+        0.2
+      ],
+      "lines": [
+        [
+          "Geometric Intuition of Quantum Computing, chapter fifteen.",
+          "《量子计算的几何直觉》· 第十五章"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 0,
+          "at": 0.3,
+          "kind": "chime"
+        }
+      ]
+    }
+  ]
+}

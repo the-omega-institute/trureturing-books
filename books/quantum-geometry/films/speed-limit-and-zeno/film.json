@@ -1,0 +1,29 @@
+{
+  "title": "How fast to the wall, how many steps home",
+  "title_zh": "多快撞墙，几步回家",
+  "summary": "A tick of a quantum clock counts only when the new state has zero overlap with the old one: their Fubini–Study angle is a 90° wall. If the angle from a common anchor to each of two perpendicular states grows at most at energy·τ/ħ, the two legs together must cover the wall, and Lean checks that τ ≥ πħ/(4·energy). An equal superposition of two levels meets the bound exactly: its angle grows steadily to 90° at πħ/E, 45° from each end at halfway; at 5 GHz that takes 100 ps (computed). Turned around, frequent checks hold the state at home: four checks on the way to a full flip leave it there with probability 0.531, sixty-four with 0.962 (computed). A second ledger asks each step whether the state is back: with Bloch steps of 45° (the state arrow turns 22.5°) it returns at once with probability 0.854, otherwise after 7.83 steps on average, exactly 2 overall. Lean checks that for a unitary step in finite dimensions the return is certain and the mean equals the number of distinct occupied eigenvalues; four levels with eigenvalues 1, 1, i, −1 give 3 (computed). The energy parameter is a supplied bound, the classic speed limits are literature results, and the mean counts detection steps, not seconds.",
+  "summary_zh": "量子钟的一声滴答要算数，新态与旧态的重叠就得为零：两者的富比尼—施图迪夹角是一堵 90° 的墙。若从同一个锚点到两个正交态的夹角都至多以 energy·τ/ħ 增长，两段路加起来必须盖住这堵墙，Lean 检验了 τ ≥ πħ/(4·energy)。二能级等权叠加恰好取等：夹角匀速长到 90°，在 πħ/E 撞墙，半途离两端各 45°；能隙对应 5 GHz 时要 100 皮秒（屏幕上的计算）。反过来，查得勤，态就留在家里：翻到底的路上查 4 次，留下的概率是 0.531，查 64 次是 0.962（屏幕上的计算）。另一本账每一步都问“回来了吗”：布洛赫角每步 45°（态箭头转 22.5°）时第一步就回来的概率是 0.854，否则平均要 7.83 步，合起来恰好 2 步。Lean 检验了有限维幺正步的返回必然发生，平均步数等于初态占据的不同本征值的个数；本征值为 1、1、i、−1 的四能级给出 3（屏幕上的计算）。energy 是给定的上界参数，经典速度极限是文献结果，平均数的是探测步数而不是秒。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-24",
+  "duration": "2:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a turning arrow and its shadow against a 90° wall, two legs from a depot covering a right angle, a steady clock, a chain of strobe checks, a return ledger and a dial of eigenvalues",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound",
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredSpectralMean.monitored_spectral_mean"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_speed-limit-and-zeno_720p_narrated.mp4",
+    "cover": "quantum-geometry_speed-limit-and-zeno_cover.jpg"
+  }
+}
