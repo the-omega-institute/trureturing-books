@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "b61e3791c1e6d1c999388305e459fee333027960",
-  "pinned_at": "2026-11-25T05:30:28Z",
+  "commit": "29a85e70ae7af83b295f9f6918982a7ad32b6887",
+  "pinned_at": "2026-11-25T05:58:48Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4549,6 +4549,38 @@
       "line": 922,
       "signature": "theorem cyclic_eventual_exact_support (lam : ℝ) (hlam : 0 < lam) : let clip"
     },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit.coupledFit_eventually": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingCoupledFit.coupledFit_eventually",
+      "kind": "theorem",
+      "statement_id": "sha256:b3716b841edd8b3ec507fc282a5023d06d769ddf7000946d7050021ba4d87b14",
+      "line": 419,
+      "signature": "theorem coupledFit_eventually {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) {S : Finset ℝ} (hS : S.Nonempty) (rhs : ℕ → Fin 3 → ℝ) : let readout"
+    },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit.coupledMatrix_tendsto": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingCoupledFit.coupledMatrix_tendsto",
+      "kind": "theorem",
+      "statement_id": "sha256:b3716b841edd8b3ec507fc282a5023d06d769ddf7000946d7050021ba4d87b14",
+      "line": 302,
+      "signature": "theorem coupledMatrix_tendsto {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) (S : Finset ℝ) : let readout"
+    },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_reference_residual_le": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingFrontFit.frontGram_reference_residual_le",
+      "kind": "theorem",
+      "statement_id": "sha256:c7524400da1a3ec2ba397932f608f0b6b0e71b98f32e4957dc7a439e8bebc704",
+      "line": 273,
+      "signature": "theorem frontGram_reference_residual_le (n : ℕ) (hn : 0 < n) (u : ℝ) (i : Fin 2) : let readout"
+    },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_sub_le": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingFrontFit.frontGram_sub_le",
+      "kind": "theorem",
+      "statement_id": "sha256:c7524400da1a3ec2ba397932f608f0b6b0e71b98f32e4957dc7a439e8bebc704",
+      "line": 127,
+      "signature": "theorem frontGram_sub_le (n : ℕ) (hn : 0 < n) (u : ℝ) (i j : Fin 2) : let readout"
+    },
     "D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit": {
       "module": "D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass",
       "name": "D5.S3.Fourier.Asymptotics.CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit",
@@ -4609,7 +4641,7 @@
       "module": "D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation",
       "name": "D5.S3.Fourier.Asymptotics.LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer",
       "kind": "theorem",
-      "statement_id": "sha256:6b8f64fe7500c5ab967942e8991b37c913ad0c37fe0729206ede3a21e4116165",
+      "statement_id": "sha256:814f3aa990246c68380dbc7877178afa983d3ba529adc45812015c6b802a6584",
       "line": 451,
       "signature": "theorem exists_lattice_square_moment_minimizer (m : ℝ) : let lowerBound"
     },
@@ -4617,7 +4649,7 @@
       "module": "D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation",
       "name": "D5.S3.Fourier.Asymptotics.LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer_on_interval",
       "kind": "theorem",
-      "statement_id": "sha256:6b8f64fe7500c5ab967942e8991b37c913ad0c37fe0729206ede3a21e4116165",
+      "statement_id": "sha256:814f3aa990246c68380dbc7877178afa983d3ba529adc45812015c6b802a6584",
       "line": 417,
       "signature": "theorem exists_lattice_square_moment_minimizer_on_interval (n : ℕ) (hn : 0 < n) (m : ℝ) : let lowerBound"
     },

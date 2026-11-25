@@ -890,7 +890,7 @@ $$
 \le 2u^2(|a_0|+|a_1|)\quad(i=0,1)。
 $$
 
-缩放后的格点权重 $N(t-j^2)/Z$ 在 $j=N$ 与 $j=N+1$ 的符号余量为 $N^{-1}$ 量级。要确定整个循环群的支撑，还须控制对径矩方程和对径激活阈值上的边界符号。 [对径支撑问题](https://github.com/the-omega-institute/trureturing/issues/34029)
+缩放后的格点权重 $N(t-j^2)/Z$ 在 $j=N$ 与 $j=N+1$ 的符号余量为 $N^{-1}$ 量级。要确定整个循环群的支撑，还须控制对径矩方程和对径激活阈值上的边界符号。 [Gram 矩阵误差的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_sub_le) · [残差界的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_reference_residual_le) · [对径支撑问题](https://github.com/the-omega-institute/trureturing/issues/34029)
 
 ### 前部窗口与对径窗口的联立拟合
 
@@ -915,7 +915,7 @@ $$
 B\longrightarrow \frac{3\pi^2/(5\gamma^2)+(3/4)\sum_{r\in S}r^2}{|S|}。
 $$
 
-故在每个固定且纳入拟合的对径格点，$N^3v(r)\to B_\infty-3r^2/4$。该计算允许拟合权重有符号。验证最优权重的支撑仍须控制前部两侧以及对径激活层上的符号，并处理极限权重恰为零的层。 [联立拟合研究](https://github.com/the-omega-institute/trureturing/issues/34029)
+故在每个固定且纳入拟合的对径格点，$N^3v(r)\to B_\infty-3r^2/4$。该计算允许拟合权重有符号。验证最优权重的支撑仍须控制前部两侧以及对径激活层上的符号，并处理极限权重恰为零的层。 [矩阵收敛的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit.coupledMatrix_tendsto) · [唯一带符号拟合的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit.coupledFit_eventually) · [联立拟合研究](https://github.com/the-omega-institute/trureturing/issues/34029)
 
 ### 增长窗口边界的定量符号
 

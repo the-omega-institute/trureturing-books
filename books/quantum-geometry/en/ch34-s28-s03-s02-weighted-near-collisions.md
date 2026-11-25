@@ -890,7 +890,7 @@ $$
 \le 2u^2(|a_0|+|a_1|)\quad(i=0,1).
 $$
 
-The scaled lattice weight $N(t-j^2)/Z$ has sign margins of order $N^{-1}$ at $j=N$ and $j=N+1$. Determining the full cyclic support still requires control of the antipodal equations and the boundary sign at an antipodal activation threshold. [Antipodal support problem](https://github.com/the-omega-institute/trureturing/issues/34029)
+The scaled lattice weight $N(t-j^2)/Z$ has sign margins of order $N^{-1}$ at $j=N$ and $j=N+1$. Determining the full cyclic support still requires control of the antipodal equations and the boundary sign at an antipodal activation threshold. [Lean proof of the Gram error](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_sub_le) · [Lean proof of the residual bound](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingFrontFit.frontGram_reference_residual_le) · [Antipodal support problem](https://github.com/the-omega-institute/trureturing/issues/34029)
 
 ### Joint fit at the front and antipodal windows
 
@@ -915,7 +915,7 @@ $$
 B\longrightarrow \frac{3\pi^2/(5\gamma^2)+(3/4)\sum_{r\in S}r^2}{|S|}.
 $$
 
-Thus at a fixed included rear site the fitted weight satisfies $N^3v(r)\to B_\infty-3r^2/4$. This calculation permits signed fitted weights. To verify the optimizer's support, the signs at both ends of the front window and at the rear activation levels must be controlled, including the levels with zero limiting score. [Coupled fit research](https://github.com/the-omega-institute/trureturing/issues/34029)
+Thus at a fixed included rear site the fitted weight satisfies $N^3v(r)\to B_\infty-3r^2/4$. This calculation permits signed fitted weights. To verify the optimizer's support, the signs at both ends of the front window and at the rear activation levels must be controlled, including the levels with zero limiting score. [Lean proof of matrix convergence](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit.coupledMatrix_tendsto) · [Lean proof of the unique signed fit](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit.coupledFit_eventually) · [Coupled fit research](https://github.com/the-omega-institute/trureturing/issues/34029)
 
 ### Quantitative signs at the growing-window boundaries
 
