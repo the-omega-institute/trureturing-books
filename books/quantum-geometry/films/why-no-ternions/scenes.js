@@ -5,8 +5,9 @@
      hook     Hamilton's breakfast question of October 1843 (his letter of 1865; literature, argued); triplets add and
               subtract slot by slot; the cross product of two arrows (its definition).
      leak     solid shot: the three-slot box, a = (1, 2, 2), b = (0, 3, 4), |a| = 3, |b| = 5; a × b = (2, −4, 3) stands
-              out of their plane, |a × b| = √29 ≈ 5.39 is the parallelogram's area; a·b = 14 is the shadow of b on a
-              and has no slot in the cross product; a × a = 0 (computed).
+              out of their plane, |a × b| = √29 ≈ 5.39 is the parallelogram's area; squared, 29 of (|a||b|)² = 225;
+              the shadow of b on a is 14/3 and a·b = |a| × 14/3 = 14 (196 = 14² fills the gap) has no slot in
+              the cross product; a × a = 0 (computed).
      receipt  the receipt analogy (argued); 14² + 29 = 196 + 29 = 225 = 15² (computed)
               ..... LagrangeGramIdentity.lagrange_gram_identity (LEAN); in three dimensions the plane areas
               a_i b_j − a_j b_i are the components of a × b: 2, −4, 3 (computed); dot and cross are two legs of one
@@ -16,7 +17,7 @@
      forced   on E = ℝ × ℝ³, every relation D with P2 D and PB D equals ±(0, a⃗ × b⃗), and the Pauli images multiply as
               φ(a) φ(b) = φ(a ∘ b) − i φ(D a b), with a ∘ b = (a₀b₀ + a⃗·b⃗, a₀b⃗ + b₀a⃗) and φ(m, v) = m 𝟙 + v·σ
               ..... OriginalClassification.complete_consequences (LEAN); the pure-arrow example is computed.
-     edge     Frobenius (1878) and Hurwitz (1898): literature, not formalized in the book; what Lean checks here;
+     edge     Frobenius (1878, associative), Hurwitz (1898, normed) and Hopf (1940, any): literature, not formalized in the book; what Lean checks here;
               the reading of the triplet as a closed arc body S³ is the book's model (argued).
 
    On load, FILM.init checks DATA.lean against the two theorems and re-derives every number on screen by an
@@ -174,7 +175,7 @@ SCENES.hook = S => {
   wtTitle(S);
   const a = clamp((u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [2, 'Arrows in space', 'computed']]);
+  badgeQ(S, [[0, null, 'argued'], [2, 'arrows in space', 'computed']]);
   /* the question, as a quote card (literature) */
   panel(150, 200, 760, 300, a, C.argued, 'DUBLIN · OCTOBER 1843');
   txt('“Well, Papa, can you', 190, 300, { size: 44, fam: F.disp, w: 700, c: C.white, a });
@@ -200,31 +201,31 @@ SCENES.hook = S => {
     txt('cross product · 叉乘', 1040, 562, { size: 24, fam: F.zh, w: 700, c: C.mag, a: ca });
     txt('a × b = (a₂b₃ − a₃b₂,  a₃b₁ − a₁b₃,  a₁b₂ − a₂b₁)', 1040, 616, { size: 28, fam: F.math, w: 700, c: C.mag, a: ca });
   }
-  const wa = a * Q(S, 2, "Why wasn't", 0.6);
+  const wa = a * Q(S, 2, "Why isn't", 0.6);
   if (wa > 0.003) chip(530, 680, 600, 76, "why isn't that enough? · 为何不够？", C.now, wa, 28, F.zh);
 };
 
 /* ======================================================================= */
 /*                          scene 2 · WHAT THE CROSS DROPS                   */
 /* ======================================================================= */
-const LK = { x: 110, y: 170, w: 960, h: 680, cx: 520, cy: 400, unit: 60 };
+const LK = { x: 110, y: 170, w: 960, h: 680, cx: 560, cy: 540, unit: 78 };
 const LK_BOX = { vertices: [], faces: [[0, 1, 3, 2], [4, 6, 7, 5], [0, 4, 5, 1], [2, 3, 7, 6], [0, 2, 6, 4], [1, 5, 7, 3]] };
-for (const x of [-1, 4.5]) for (const y of [-4.5, 4.5]) for (const z of [0, 4.6]) LK_BOX.vertices.push([x, y, z]);
+for (const x of [-0.5, 2.5]) for (const y of [-4.5, 3.5]) for (const z of [0, 4.6]) LK_BOX.vertices.push([x, y, z]);
 SCENES.leak = S => {
   const u = S.u, a = wtFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
-  const yaw = -1.62 + 0.005 * u, pitch = 0.7;
+  const yaw = 2.74 + 0.003 * u, pitch = 0.6;
   const O = [0, 0, 0], AB = wtAdd(WT_A, WT_B);
   const pa = Q(S, 0, 'Take two arrows', 0.8), pb = Q(S, 0, 'b is', 0.8);
   const pc = Q(S, 1, 'stands up', 1.0), pr = Q(S, 1, 'their area', 0.8);
-  const ps = Q(S, 3, 'Into the shadow', 0.8), pd = Q(S, 3, 'throws it away', 1.2);
+  const ps = Q(S, 3, 'shadow on a', 0.8), pd = Q(S, 3, 'throws it away', 1.2);
   const foot = wtSc(WT_A, WT_DOT / 9);                    // the shadow of b on the line of a
   const sh = solid('leak', { x: LK.x, y: LK.y, w: LK.w, h: LK.h, yaw, pitch, unit: LK.unit, cx: LK.cx, cy: LK.cy, px: true });
   sh.begin();
   sh.poly('box', LK_BOX, { color: C.blue, alpha: 0.06, edges: C.cyan });
-  sh.line([[-1, 0, 0], [4.5, 0, 0]], { color: C.dim, width: 1.2, alpha: 0.5 });
-  sh.line([[0, -4.5, 0], [0, 4.5, 0]], { color: C.dim, width: 1.2, alpha: 0.5 });
+  sh.line([[-0.5, 0, 0], [2.5, 0, 0]], { color: C.dim, width: 1.2, alpha: 0.5 });
+  sh.line([[0, -4.5, 0], [0, 3.5, 0]], { color: C.dim, width: 1.2, alpha: 0.5 });
   sh.line([[0, 0, 0], [0, 0, 4.6]], { color: C.dim, width: 1.2, alpha: 0.5 });
   if (pr > 0.003) sh.fan([O, WT_A, AB, WT_B], { fill: C.mag, alpha: 0.28 * pr, color: C.mag, width: 2, strokeAlpha: 0.8 * pr });
   if (pa > 0.003) sh.arrow(O, WT_A, { color: C.white, width: 5, headSize: 22, alpha: pa });
@@ -236,15 +237,16 @@ SCENES.leak = S => {
   }
   sh.end(a);
   /* 2D labels on the solid */
-  const lA = sh.anchor(WT_A), lB = sh.anchor(WT_B), lC = sh.anchor(WT_CR);
-  txt('a = (1, 2, 2)', lA.x + 20, lA.y + 30, { size: 26, fam: F.math, w: 700, c: C.white, a: a * pa });
-  txt('b = (0, 3, 4)', lB.x + 20, lB.y - 12, { size: 26, fam: F.math, w: 700, c: C.white, a: a * pb });
-  if (pc > 0.5) txt('a × b = (2, −4, 3)', lC.x - 16, lC.y - 16, { align: 'right', size: 26, fam: F.math, w: 700, c: C.mag, a: a * clamp((pc - 0.5) * 2) });
-  /* the dropped shadow: a cyan 14 falling out of the box */
+  const lA = sh.anchor(WT_A), lB = sh.anchor(WT_B), lC = sh.anchor(WT_CR), lO = sh.anchor(O);
+  txt('a = (1, 2, 2)', lA.x - 22, lA.y + 34, { size: 26, fam: F.math, w: 700, align: 'right', c: C.white, a: a * pa });
+  txt('b = (0, 3, 4)', lB.x - 22, lB.y - 14, { size: 26, fam: F.math, w: 700, align: 'right', c: C.white, a: a * pb });
+  if (pc > 0.5) txt('a × b = (2, −4, 3)', lC.x + 22, lC.y + 10, { size: 26, fam: F.math, w: 700, c: C.mag, a: a * clamp((pc - 0.5) * 2) });
+  if (pc > 0.5) txt('⊥ plane · 垂直于平面', lC.x + 22, lC.y + 44, { size: 20, fam: F.zh, w: 700, c: C.mag, a: a * 0.85 * clamp((pc - 0.5) * 2) });
+  /* the dropped dot product: a cyan 14 falling out of the box, clear of the arrow labels */
   if (ps > 0.003) {
-    const lf = sh.anchor(foot), fall = ei(pd);
-    const fx = lf.x + 30 * fall, fy = lerp(lf.y + 40, LK.y + LK.h - 40, fall);
-    txt('a·b = 14', fx, fy, { size: 30, fam: F.math, w: 700, align: 'center', c: C.cyan, a: a * ps });
+    const fall = ei(pd);
+    const fx = lO.x + 150, fy = lerp(lO.y + 50, LK.y + LK.h - 40, fall);
+    txt('a·b = 14', fx, fy, { size: 30, fam: F.math, w: 700, align: 'center', c: C.cyan, a: a * Q(S, 3, 'which makes fourteen', 0.6) });
     if (pd > 0.6) txt('no slot · 无处安放', fx, fy + 34, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: a * clamp((pd - 0.6) * 2.5) });
   }
   txt('the three-slot box · 三格方盒', LK.x + 40, LK.y + 30, { size: 20, fam: F.zh, w: 700, c: C.dim, a });
@@ -253,17 +255,23 @@ SCENES.leak = S => {
   wtRich([['|a| = 3     |b| = 5', C.white]], 1180, 262, { size: 32, a: a * pb });
   wtRich([['|a × b| = √29 ≈ 5.39', C.mag]], 1180, 322, { size: 32, a: a * pr });
   txt('area of the parallelogram · 平行四边形面积', 1180, 356, { size: 19, fam: F.zh, w: 700, c: C.mag, a: a * pr * 0.9 });
-  const pq = Q(S, 2, 'three times five', 0.6);
-  wtRich([['|a| |b| = 3 × 5 = 15', C.white]], 1180, 420, { size: 32, a: a * pq });
+  /* line 2: everything squared; the gap is 196 = 14², filled on line 3 */
+  const pq = Q(S, 2, 'Now square everything', 0.6);
+  wtRich([['(|a| |b|)² = 15² = 225', C.white]], 1180, 420, { size: 32, a: a * pq });
   if (pq > 0.003) {
-    const bw = 560, bx = 1180, by = 446;
-    box(bx, by, bw, 34, C.white, a * pq * 0.6, 1.2);
-    fillBox(bx, by, bw * Math.sqrt(29) / 15, 34, C.mag, a * pq * 0.55);
-    txt('5.39 of 15', bx + bw * Math.sqrt(29) / 15 + 14, by + 25, { size: 20, fam: F.mono, w: 700, c: C.white, a: a * Q(S, 2, 'Where did', 0.5) });
-    txt('?', bx + bw - 30, by + 27, { size: 30, fam: F.orb, w: 900, c: C.now, a: a * Q(S, 2, 'Where did', 0.5) });
+    const bw = 560, bx = 1180, by = 440, w29 = bw * 29 / 225;
+    box(bx, by, bw, 38, C.white, a * pq * 0.6, 1.2);
+    fillBox(bx, by, w29, 38, C.mag, a * pq * 0.6);
+    txt('29', bx + w29 / 2, by + 27, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.white, a: a * pq });
+    const fill = Q(S, 3, 'which makes fourteen', 0.8);
+    if (fill > 0.003) {
+      fillBox(bx + w29, by, (bw - w29) * fill, 38, C.cyan, a * 0.5);
+      txt('196 = 14²', bx + w29 + (bw - w29) / 2, by + 27, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.white, a: a * fill });
+    }
+    txt('?', bx + bw - 26, by + 29, { size: 30, fam: F.orb, w: 900, c: C.now, a: a * Q(S, 2, 'Where did', 0.5) * (1 - fill) });
   }
-  wtRich([['a·b = 0 + 6 + 8 = 14', C.cyan]], 1180, 540, { size: 32, a: a * ps });
-  txt('shadow of b on a · b 在 a 上的影子', 1180, 574, { size: 19, fam: F.zh, w: 700, c: C.cyan, a: a * ps * 0.9 });
+  wtRich([['shadow of b on a = 14/3 ≈ 4.67', C.cyan]], 1180, 530, { size: 24, a: a * Q(S, 3, 'shadow on a', 0.6) });
+  wtRich([['a·b = |a| × shadow = 3 × 14/3 = 14', C.cyan]], 1180, 580, { size: 27, a: a * Q(S, 3, 'which makes fourteen', 0.6) });
   /* line 4: a × a = 0 */
   const za = a * at(S, 4, 0.6);
   if (za > 0.003) {
@@ -299,7 +307,7 @@ SCENES.receipt = S => {
   row(ry + 400, '|a|²|b|² = 3²·5²', '225 ✓', C.white, a * Q(S, 1, 'fifteen squared', 0.6));
   /* the right triangle: legs 14 (cyan) and √29 (magenta), hypotenuse 15 */
   const tk = 36, T0 = [960, 770], tx = T0[0] + 14 * tk, ty = T0[1] - Math.sqrt(29) * tk;
-  const tr = a * Q(S, 1, 'Square both lines', 0.8);
+  const tr = a * Q(S, 1, 'One ninety-six', 0.8);
   if (tr > 0.003) {
     line(T0[0], T0[1], tx, T0[1], C.cyan, tr, 8);
     line(tx, T0[1], tx, ty, C.mag, tr, 8);
@@ -325,9 +333,9 @@ SCENES.receipt = S => {
   if (lg > 0.003) {
     wtRich([['3D: areas ', C.white], ['yz 2, zx −4, xy 3', C.mag], [' → 4 + 16 + 9 = 29 = |a × b|²', C.white]], 905, 444, { size: 25, a: lg });
   }
-  const ha = a * Q(S, 4, 'half a receipt', 0.5);
+  const ha = a * Q(S, 4, 'not wrong', 0.5);
   stamp('HALF A RECEIPT', 1250, 530, ha, C.mag, 34, -0.05);
-  stamp('196 + 29 = 225', 470, 790, Q(S, 2, 'Lean checks', 0.5, 0.6) * (1 - at(S, 3, 0.5)), C.lean, 30, -0.05);
+  stamp('196 + 29 = 225', 470, 790, Q(S, 2, 'Lean checks', 0.5, 0.6) * (1 - at(S, 3, 0.5)), C.cyan, 30, -0.05);
 };
 
 /* ======================================================================= */
@@ -405,7 +413,7 @@ SCENES.forced = S => {
   wtRich([['φ(m, v) = m 𝟙 + v·σ     a ∘ b = (a₀b₀ + ', C.white], ['a⃗·b⃗', C.cyan], [', a₀b⃗ + b₀a⃗)', C.white]], 850, 656, { size: 24, a: a * p2 });
   const pe = a * Q(S, 2, 'the dot in', 0.6);
   wtRich([['pure arrows: (a·σ)(b·σ) = ', C.white], ['14 𝟙', C.cyan], [' + i ', C.white], ['(2, −4, 3)·σ', C.mag]], 850, 724, { size: 26, a: pe });
-  wtTag(850, 772, 'this example computed', '此例为屏幕上的计算', C.cyan, pe, 17);
+  wtTag(850, 772, 'in this order D(a, b) = −a × b (ε = −); example computed', '此例为屏幕上的计算', C.cyan, pe, 17);
   /* the slots light up: dot in the number slot, cross in the arrow slots */
   if (pe > 0.003) {
     wtSlots(180, 560, cw, ch, [
@@ -423,7 +431,7 @@ SCENES.edge = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued'], [1, 'Here Lean checks', 'lean'], [2, null, 'argued']]);
   const rows = [
-    { k: 0, col: C.argued, head: 'LITERATURE · 文献结果', en: 'no 3-dimensional real division algebra', zh: '实数上没有能做除法的三维数系', note: 'Frobenius 1878 (associative) · Hurwitz 1898 (normed) — not formalized here · 本书未形式化' },
+    { k: 0, col: C.argued, head: 'LITERATURE · 文献结果', en: 'no 3-dimensional real division algebra', zh: '实数上没有能做除法的三维数系', note: 'Frobenius 1878 (associative) · Hurwitz 1898 (normed) · Hopf 1940 (any) — not formalized here · 本书未形式化' },
     { k: 1, q: 'Here Lean checks', col: C.lean, head: 'LEAN ✓ · 内核检验', en: 'Lagrange identity · cross forced on ℝ × ℝ³', zh: '拉格朗日恒等式；四位载体上叉乘被锁定', note: 'lagrange_gram_identity · complete_consequences' },
     { k: 2, col: C.argued, head: 'MODEL · 模型', en: 'the missing triplet = a closed arc body, S³', zh: '缺席的三元数 = 闭合的圆弧体 S³', note: 'interpretation, not a theorem · 诠释，不是定理' }
   ];
