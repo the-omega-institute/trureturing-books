@@ -7,7 +7,7 @@
     {"id": "tick", "name": "ONE TICK", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
       ["How fast can a quantum state tick, like a clock?", "量子态能像钟一样滴答，最快能多快？"],
       ["A tick counts only if the new reading can never be mistaken for the old one.", "一声滴答要算数，新读数就绝不能被错认成旧的。"],
-      ["For states, that means zero overlap: no shadow of one on the other. The angle is ninety degrees, a wall.", "对量子态，这就是重叠为零：谁也不在谁身上投下影子。夹角 90°，一堵墙。"]
+      ["For states, that means zero overlap: no shadow at all. The angle is ninety degrees, a wall.", "对量子态，这就是重叠为零：一点影子都没有。夹角 90°，一堵墙。"]
     ], "cues": [{"line": 2, "at": 4.2, "kind": "impact"}]},
     {"id": "limit", "name": "A SPEED LIMIT", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
       ["Why assume ticks come for free? Suppose the angle can only grow so fast.", "我们凭什么以为滴答是免费的？假设夹角只能长得这么快："],
@@ -29,7 +29,7 @@
       ["Four checks on the way to a full flip keep it home with chance zero point five three. Sixty-four: zero point nine six.", "翻到底的路上查 4 次，它留在家的概率是 0.53；查 64 次，是 0.96。"]
     ], "cues": [{"line": 2, "at": 1.0, "kind": "glitch"}]},
     {"id": "back", "name": "THE RETURN LEDGER", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
-      ["Now a second ledger: each step, ask whether it is back. Stop at the first yes.", "再记一本账：每一步都问“回来了吗”，第一次答“是”就停。"],
+      ["Now a second ledger: each step, ask if it is back. Stop at the first yes.", "再记一本账：每一步都问“回来了吗”，第一次答“是”就停。"],
       ["With forty-five degree steps, it is back at once with chance zero point eight five.", "每步转 45°，第一步就回来的概率是 0.85。"],
       ["If not, the return takes seven point eight three steps on average. Together: exactly two.", "没回来的话，平均要 7.83 步；两边合起来，恰好 2 步。"],
       ["Lean checks the reason: the mean is the number of distinct eigenvalues the start state occupies.", "Lean 内核检验了原因：平均步数等于初态占据的不同本征值的个数。"],
@@ -40,7 +40,7 @@
       ["What this film does not say: energy is a bound we supply, and the mean counts steps, not seconds.", "这部片没说的：energy 是我们给定的上界；平均数的是步数，不是秒。"],
       ["The classic speed limits are literature results, not formalized here. The strobe numbers are computed.", "经典的速度极限是文献结果，本书没有形式化；频闪那几个数是屏幕上算出来的。"]
     ]},
-    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 2.8, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
       ["Geometric Intuition of Quantum Computing, chapter seven.", "《量子计算的几何直觉》· 第七章"]
     ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
   ]

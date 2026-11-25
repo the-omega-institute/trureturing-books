@@ -222,7 +222,7 @@ SCENES.tick = S => {
   badgeQ(S, [[0, null, 'computed']]);
   /* the state turns from 20° (line 1) to 90° (line 2, 'The angle') */
   const th = (lerp(18, 62, ease(at(S, 1, 2.6))) + 28 * ease(Q(S, 2, 'The angle', 1.6))) * SZ_DEG;
-  const D = szDial(TK_O, TK_R, th, a, { wall: Q(S, 2, 'a wall', 0.6), shadow: at(S, 0, 0.8, 1.0) });
+  const D = szDial(TK_O, TK_R, th, a, { wall: Q(S, 2, 'zero overlap', 0.8), shadow: at(S, 0, 0.8, 1.0) });
   txt('old · 旧读数 m₀', D.m0[0] - 30, D.m0[1] + 52, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a });
   txt('new · 新的态 ψ', D.ps[0] + 18, D.ps[1] - 14, { size: 26, fam: F.zh, w: 700, c: C.now, a });
   const c = Math.cos(th);
@@ -443,16 +443,27 @@ SCENES.back = S => {
     const b1 = qa * at(S, 1, 0.6), b2 = qa * Q(S, 2, 'If not', 0.6), b3 = qa * Q(S, 2, 'Together', 0.6);
     const c2 = SZ_PQ[0], s2 = 1 - c2;
     /* a branching ledger: width ∝ probability */
-    fillBox(130, 330, 820 * c2, 70, C.cyan, b1 * 0.55); box(130, 330, 820 * c2, 70, C.cyan, b1, 1.5);
+    fillBox(130, 330, 820 * c2, 70, C.cyan, b1 * 0.25); box(130, 330, 820 * c2, 70, C.cyan, b1, 1.5);
     txt(`back at step 1 · 第一步就回来  ${c2.toFixed(3)}`, 150, 375, { size: 24, fam: F.zh, w: 700, c: C.white, a: b1 });
     fillBox(130 + 820 * c2, 330, 820 * s2, 70, C.mag, b2 * 0.55); box(130 + 820 * c2, 330, 820 * s2, 70, C.mag, b2, 1.5);
     txt(`not yet · 没回来  ${s2.toFixed(3)}`, 950, 440, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.mag, a: b2 });
     szRich([[`${c2.toFixed(3)} × 1`, C.cyan], ['  +  ', C.white], [`${s2.toFixed(3)} × ${(1 + 1 / s2).toFixed(2)}`, C.mag], ['  =  ', C.white], ['2', C.now]], 130, 530, { size: 32, a: b2 });
     txt('mean steps · 平均步数', 130, 580, { size: 20, fam: F.zh, w: 700, c: C.dim, a: b2 });
     /* the running mean */
-    const n = Math.max(1, Math.round(lerp(1, 60, ease(Q(S, 2, 'Together', 1.6)))));
-    txt(`Σ n·pₙ  after ${String(n).padStart(2, ' ')} steps = ${SZ_RQ[n - 1].toFixed(3)}`, 130, 660, { size: 28, fam: F.mono, w: 700, c: C.now, a: b3 });
-    txt('computed by running the protocol · 逐步运行协议算出', 130, 704, { size: 18, fam: F.zh, w: 700, c: C.dim, a: b3 });
+    const n = Math.max(1, Math.round(lerp(1, 60, ease(at(S, 1, 9)))));
+    txt(`Σ n·pₙ  after ${String(n).padStart(2, ' ')} steps = ${SZ_RQ[n - 1].toFixed(3)}`, 130, 660, { size: 28, fam: F.mono, w: 700, c: C.now, a: b1 });
+    txt('computed by running the protocol · 逐步运行协议算出', 130, 704, { size: 18, fam: F.zh, w: 700, c: C.dim, a: b1 });
+    /* right: the first few return probabilities, and the mailbox analogy */
+    panel(1080, 200, 760, 560, qa, C.cyan, 'FIRST RETURN AT STEP n · 第 n 步首次回来');
+    for (let k = 0; k < 7; k++) {
+      const ka = qa * clamp(at(S, 1, 0.5) * 7 - k), y = 270 + k * 58, p = SZ_PQ[k];
+      if (ka <= 0.003) continue;
+      txt(`n = ${k + 1}`, 1110, y + 26, { size: 22, fam: F.mono, w: 700, c: C.white, a: ka });
+      fillBox(1230, y + 4, Math.max(2, 440 * p), 30, k ? C.mag : C.cyan, ka * 0.6);
+      txt(p.toFixed(3), 1690, y + 28, { size: 22, fam: F.mono, w: 700, align: 'right', c: k ? C.mag : C.cyan, a: ka });
+    }
+    txt('… a long, thin tail · 一条又长又细的尾巴', 1110, 700, { size: 20, fam: F.zh, w: 700, c: C.mag, a: b2 });
+    szAnalogy('analogy · 比方：check the mailbox daily · 每天查信箱，信到就停', 1110, 740, qa * at(S, 0, 0.6, 1.0));
   }
   /* lines 3–5: Lean, the dial of eigenvalues */
   const la = a * Q(S, 3, 'Lean checks', 0.6);
