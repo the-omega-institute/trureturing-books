@@ -461,6 +461,30 @@ $$
 
 This upper bound tends to zero if $T_n\to\infty$ and $(\log T_n)^2/n\to0$, since both $\log T_n$ and $\log n$ are $o(n/\log T_n)$. For the region between the moving central window and $1/T_n$, the same quartic estimate with $X=T_n$ gives $|Z_{T_n}(t)|^{2n}\le e^{-11(s_nt)^2/12}$ for $|t|\le1/T_n$. Its normalized integral outside $|s_nt|\le A_n$ tends to zero as $A_n\to\infty$. Together with relative truncation, the remaining arithmetic upper estimate is therefore needed on the intermediate range $T_n^{-\delta}<|t|\le L_n$ under these stronger growth conditions. For fixed $r>0$ and frequencies $\gamma/r$, rescale the time endpoints by $r$ and the variance scale by $1/r$.
 
+### Short-window lower counts for the actual zero spectrum
+
+Write $N(x,y)$ for the number of nontrivial zeta zeros with ordinates in $(x,y]$, counted with analytic multiplicity, and put
+
+$$
+M(Y)=\frac{Y}{2\pi}\left(\log\frac{Y}{2\pi}-1\right).
+$$
+
+The existing unconditional dyadic Riemann–von Mangoldt estimate bounds the residual of $N(x,2x)$ from $M(2x)-M(x)$ by $B\log x$ for sufficiently large $x$. Set $E(x)=N(0,x)-M(x)$. Count additivity gives $|E(2x)-E(x)|\le B\log x$. After enlarging $D$ to bound a fixed initial band $[U,2U]$ and to satisfy $2D\log 2\ge B$, the difference $D((\log(2x))^2-(\log x)^2)$ absorbs every dyadic residual. Every real $Y\ge U$ is a dyadic multiple of a point in that initial band. Hence
+
+$$
+|N(0,Y)-M(Y)|\le D(\log Y)^2.
+$$
+
+[Cumulative counting residual](https://github.com/the-omega-institute/trureturing/blob/70b596cb65683a02563d998780d4f3360bf86590/D5/S3/Weil/ZeroData/CumulativeRvmError.lean#L90) The classical cumulative Riemann–von Mangoldt asymptotic has the stronger $O(\log Y)$ error. The displayed logarithmic-square bound follows directly from the exact dyadic counting theorem in the current formal library.
+
+For $x\le y\le 2x$ with $x$ sufficiently large, the main term grows by at least $(y-x)\log x/(4\pi)$, and the two cumulative errors cost at most $5D(\log x)^2$. Consequently there exist $L>1$ and $K>0$ such that, whenever $L\le x$ and $x+K\log x\le y\le2x$,
+
+$$
+N(x,y)\ge\frac{(y-x)\log x}{8\pi}.
+$$
+
+[Short-window lower count](https://github.com/the-omega-institute/trureturing/blob/70b596cb65683a02563d998780d4f3360bf86590/D5/S3/Weil/ZeroData/CumulativeRvmError.lean#L159) Both estimates hold without an RH premise. Under the positive-ordinate RH interface, the latter is an actual multiplicity-weighted lower count for moving bands of logarithmic width. Turning these counts into a uniform bound for the Fourier phase deficit at longer times requires additional estimates of the favorable phase intervals and their joint weighted contribution.
+
 ### Occupation diagonal lower bound for finite support
 
 For finite support, the noncentral contribution also has a constraint independent of the specific frequency values. Suppose $w_j\ge0$ and $\sum_jw_j=1$, and let an occupation vector $m$ of degree $p$ satisfy $\sum_jm_j=p$. Write $c_m$ for its actual multinomial weight. Choose an index $j_0$, whose count is determined by the other counts and the total degree. For positive radii $r_j$ on the remaining coordinates define

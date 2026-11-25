@@ -461,6 +461,30 @@ $$
 
 若 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$，此上界趋于零，因为 $\log T_n$ 和 $\log n$ 均为 $o(n/\log T_n)$。在移动中心窗口至 $1/T_n$ 的区域，取 $X=T_n$，同一四阶矩估计保证 $|t|\le1/T_n$ 时 $|Z_{T_n}(t)|^{2n}\le e^{-11(s_nt)^2/12}$。当 $A_n\to\infty$ 时，$|s_nt|>A_n$ 的这一部分归一化积分也趋于零。结合全线相对截尾界，在上述更强的增长条件下，余下待证的算术上界集中于中间时间区域 $T_n^{-\delta}<|t|\le L_n$。若采用固定 $r>0$ 的频率 $\gamma/r$，相应时间端点乘以 $r$，方差尺度乘以 $1/r$。
 
+### 实际零点谱的短区间计数下界
+
+记 $N(x,y)$ 为纵坐标位于 $(x,y]$ 内的非平凡 ζ 零点数，按解析重数计数，并令
+
+$$
+M(Y)=\frac{Y}{2\pi}\left(\log\frac{Y}{2\pi}-1\right).
+$$
+
+现有无条件 Riemann–von Mangoldt 二进区间估计保证，对于充分大的 $x$，$N(x,2x)$ 与主项增量 $M(2x)-M(x)$ 之差的绝对值至多为 $B\log x$。令 $E(x)=N(0,x)-M(x)$。由计数可加性得到 $|E(2x)-E(x)|\le B\log x$。增大 $D$ 以覆盖固定起始区间 $[U,2U]$ 上的误差，并满足 $2D\log 2\ge B$，则 $D((\log(2x))^2-(\log x)^2)$ 足以吸收每一步的二进余项。每个实数 $Y\ge U$ 均为起始区间内某一点的二进倍数，因此
+
+$$
+|N(0,Y)-M(Y)|\le D(\log Y)^2.
+$$
+
+[累计计数余项](https://github.com/the-omega-institute/trureturing/blob/70b596cb65683a02563d998780d4f3360bf86590/D5/S3/Weil/ZeroData/CumulativeRvmError.lean#L90) 经典累计 Riemann–von Mangoldt 渐近式具有更强的 $O(\log Y)$ 误差。上述对数平方界直接由当前形式化库中的精确二进区间计数定理推出。
+
+对于充分大的 $x$ 和 $x\le y\le2x$，主项增量至少为 $(y-x)\log x/(4\pi)$，两个端点的累计误差合计至多为 $5D(\log x)^2$。因此存在 $L>1$ 与 $K>0$，使得当 $L\le x$ 且 $x+K\log x\le y\le2x$ 时，
+
+$$
+N(x,y)\ge\frac{(y-x)\log x}{8\pi}.
+$$
+
+[短区间计数下界](https://github.com/the-omega-institute/trureturing/blob/70b596cb65683a02563d998780d4f3360bf86590/D5/S3/Weil/ZeroData/CumulativeRvmError.lean#L159) 这两个估计均无须 RH 前提。在正纵坐标谱的 RH 接口下，后一个估计给出了移动对数宽度区间的实际解析重数计数下界。要用这些计数建立更长时间区域的统一傅里叶相位亏损界，还需估计有利相位区间及其联合加权贡献。
+
 ### 有限支撑的占用数对角下界
 
 对于有限支撑，非中心贡献还受到一个与频率具体取值无关的约束。设 $w_j\ge0$ 且 $\sum_jw_j=1$，次数为 $p$，占用向量 $m$ 满足 $\sum_jm_j=p$。记实际多项式权重为 $c_m$。任选一个指标 $j_0$，其计数由其余计数和总次数唯一确定。对其余坐标选择正半径 $r_j$，定义
