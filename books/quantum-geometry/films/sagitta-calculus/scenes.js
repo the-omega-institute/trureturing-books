@@ -183,7 +183,8 @@ SCENES.bow = S => {
     line(Qm[0], Qm[1], Qp[0], Qp[1], C.cyan, bowA, 3);
     arrow(BW_O[0], Qp[1], P[0], P[1] + 4, C.mag, bowA, 5);
     txt('string · 弓弦 = chord', Qm[0] - 10, Qm[1] + 40, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: bowA });
-    txt('arrow · 箭 = sagitta 矢高', BW_O[0] - 24, (P[1] + Qp[1]) / 2 + 8, { size: 24, fam: F.zh, w: 700, align: 'right', c: C.mag, a: bowA });
+    line(BW_O[0] - 6, (P[1] + Qp[1]) / 2, BW_O[0] - 70, P[1] - 50, C.mag, bowA * 0.6, 1.5);
+    txt('arrow · 箭 = sagitta 矢高', BW_O[0] - 76, P[1] - 60, { size: 26, fam: F.zh, w: 700, align: 'right', c: C.mag, a: bowA });
   }
   ctx.restore();
   if (ta > 0.003) txt('θ drawn large · 角度放大示意', 130, 870, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ta });
@@ -195,7 +196,7 @@ SCENES.bow = S => {
     sgRich([['drop · 下落  ', C.white], ['1 − cos θ', C.mag]], 1270, 390, { size: 28, a: ra * Q(S, 2, 'Downward', 0.6), fam: F.zh });
     sgRich([['(1 − ', C.white], ['drop', C.mag], [')² + ', C.white], ['sideways', C.cyan], ['² = 1', C.white]], 1270, 470, { size: 26, a: ra * Q(S, 2, 'Downward', 0.6, 0.8) });
     txt('still on the circle · 仍在圆上', 1270, 520, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ra * Q(S, 2, 'Downward', 0.6, 0.8) });
-    txt('bow: a picture, the words are Latin · 弓是比方', 1270, 590, { size: 19, fam: F.zh, w: 700, c: C.argued, a: bowA });
+    txt('the bow is a picture · 弓是比方', 1270, 590, { size: 19, fam: F.zh, w: 700, c: C.argued, a: bowA });
   }
 };
 
@@ -207,7 +208,7 @@ SCENES.step = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
   /* two bars on one scale: the sideways part and the drop */
-  const x0 = 160, k = 9000, ya = 330, yb = 520;
+  const x0 = 160, k = 6000, ya = 330, yb = 520;
   txt('θ = 0.1', x0, 240, { size: 40, fam: F.math, w: 700, c: C.now, a });
   const ca = a * Q(S, 0, 'Sideways', 0.6), va = a * Q(S, 1, 'The drop', 0.6);
   txt('sideways · 横向  sin θ', x0, ya - 18, { size: 26, fam: F.zh, w: 700, c: C.cyan, a: ca });
@@ -219,7 +220,7 @@ SCENES.step = S => {
   txt(sgF(SG_V, 7), x0 + k * SG_V + 20, yb + 44, { size: 34, fam: F.mono, w: 700, c: C.mag, a: va });
   txt('≈ θ²/2 = 0.005', x0 + k * SG_V + 220, yb + 44, { size: 30, fam: F.math, w: 700, c: C.white, a: va * Q(S, 1, 'half of theta', 0.6) });
   if (thrown > 0.003) {
-    line(x0 - 20, yb - 10, x0 + k * SG_V + 190, yb + 74, C.open, a * thrown, 4);
+    line(x0 - 20, yb - 4, x0 + k * SG_V + 20, yb + 68, C.white, a * thrown, 4);
     txt('thrown away? · 扔掉？', x0, yb + 120, { size: 30, fam: F.zh, w: 700, c: C.white, a: a * thrown });
     txt('second order · 二阶小量', x0, yb + 164, { size: 24, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 3, 'second order', 0.6) });
   }
@@ -245,7 +246,7 @@ function lgJar(x, y, w, h, n, per, kpx, col, a, label, zh) {
   if (a <= 0.003) return;
   box(x, y, w, h, C.white, a * 0.7, 2);
   const fill = Math.min(h - 4, n * per * kpx);
-  fillBox(x + 4, y + h - 2 - fill, w - 8, fill, col, a * 0.65);
+  fillBox(x + 4, y + h - 2 - fill, w - 8, fill, col, a * 0.45);
   /* the current coin, falling */
   if (n > 0 && n < 100) { const cy = y + h - 2 - fill - 30 + 22 * (n % 1); dot(x + w / 2, cy, 9, 'o', a); }
   txt(label, x + w / 2, y + h + 44, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.white, a });
@@ -266,6 +267,8 @@ SCENES.ledger = S => {
   }
   lgJar(320, 250, 220, 520, ns, sgVers(0.01), kpx, C.mag, ja * clamp(at(S, 1, 0.5) + 0.35), 'smooth · θ = 0.01', '光滑的路 · 每步 0.01');
   lgJar(680, 250, 220, 520, nr, SG_V, kpx, C.mag, ja * clamp(at(S, 2, 0.5) + 0.35), 'rough · θ = 0.1', '粗糙的路 · 每步 0.1');
+  if (ns > 0) txt(sgF(ns * sgVers(0.01), 4), 430, 770 - ns * sgVers(0.01) * kpx - 16, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.mag, a: ja });
+  if (nr > 0) txt(sgF(nr * SG_V, 4), 790, Math.max(296, 770 - nr * SG_V * kpx + 40), { size: 26, fam: F.mono, w: 700, align: 'center', c: C.white, a: ja });
   txt('jar of drops: a picture · 罐子是比方', 600, 210, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.argued, a: ja });
   /* the ledger */
   panel(1110, 230, 710, 440, ja, C.cyan, 'THE LEDGER · 账本   N = 100');
@@ -320,12 +323,12 @@ SCENES.squeeze = S => {
   curve(s => sqP(SQ_G.xm * s, sgVers(SQ_G.xm * s)), 160, C.mag, a * at(S, 0, 0.8), 5);
   ctx.restore();
   if (ba > 0.003) {
-    const p1 = sqP(1.95, 1.95 * 1.95 / 2), p2 = sqP(2.45, 2.45 * 2.45 / 2 - Math.pow(2.45, 4) / 24);
+    const p1 = sqP(1.95, 1.95 * 1.95 / 2), p2 = sqP(2.2, 2.2 * 2.2 / 2 - Math.pow(2.2, 4) / 24);
     txt('θ²/2', p1[0] - 20, p1[1] - 6, { size: 28, fam: F.math, w: 700, align: 'right', c: C.lean, a: ba });
-    txt('θ²/2 − θ⁴/24', p2[0] + 10, p2[1] + 46, { size: 26, fam: F.math, w: 700, align: 'center', c: C.lean, a: ba * Q(S, 1, 'the same minus', 0.6) });
+    txt('θ²/2 − θ⁴/24', p2[0] + 20, p2[1] + 70, { size: 26, fam: F.math, w: 700, align: 'center', c: C.lean, a: ba * Q(S, 1, 'the same minus', 0.6) });
   }
-  const pv = sqP(2.15, sgVers(2.15));
-  txt('1 − cos θ', pv[0] + 18, pv[1] + 34, { size: 28, fam: F.math, w: 700, c: C.mag, a: a * at(S, 0, 0.8) });
+  const pv = sqP(1.5, sgVers(1.5));
+  txt('1 − cos θ', pv[0] + 40, pv[1] + 70, { size: 28, fam: F.math, w: 700, c: C.mag, a: a * at(S, 0, 0.8) });
   /* the statement */
   const la = a * Q(S, 0, 'Lean checks', 0.6);
   if (la > 0.003) {
@@ -338,29 +341,30 @@ SCENES.squeeze = S => {
   const na = a * at(S, 3, 0.6);
   if (na > 0.003) {
     panel(1080, 600, 740, 220, na, C.cyan, 'OUR HUNDRED STEPS · θ = 0.1, N = 100');
-    sgRich([[sgF(sgLo(1, 1, 0.5, 100), 7), C.lean], ['  ≤  ', C.white], [sgF(SG_ROUGH, 7), C.mag], ['  ≤  ', C.white], [sgF(sgHi(1, 1, 0.5, 100), 7), C.lean]], 1104, 690, { size: 34, a: na });
+    sgRich([[sgF(sgLo(1, 1, 0.5, 100), 7), C.lean], ['  ≤  ', C.white], [sgF(SG_ROUGH, 7), C.mag], ['  ≤  ', C.white], [sgF(sgHi(1, 1, 0.5, 100), 7), C.lean]], 1104, 690, { size: 30, a: na });
     txt('lower · 下界        ledger · 账        upper · 上界', 1104, 744, { size: 20, fam: F.zh, w: 700, c: C.dim, a: na });
   }
-  stamp('PINNED', 560, 330, Q(S, 2, 'is pinned', 0.5, 0.2) * (1 - at(S, 2, 0.5, 3.0)), C.lean, 36, -0.06);
+  stamp('PINNED', 420, 420, Q(S, 2, 'is pinned', 0.5, 0.2) * (1 - at(S, 2, 0.5, 3.0)), C.lean, 36, -0.06);
 };
 
 /* ======================================================================= */
 /*                               scene 5 · THREE FATES                       */
 /* ======================================================================= */
-const FT_G = { x0: 170, y0: 800, w: 800, h: 560, lx0: 1, lx1: 6, ym: 1.0 };
-const ftP = (lx, y) => [FT_G.x0 + FT_G.w * (lx - FT_G.lx0) / (FT_G.lx1 - FT_G.lx0), FT_G.y0 - FT_G.h * y / FT_G.ym];
+const FT_G = { x0: 190, y0: 800, w: 760, h: 560, lx0: 1, lx1: 6, ly0: -7, ly1: 2 };
+/* log₁₀ N across, log₁₀ Σ_N up */
+const ftP = (lx, ly) => [FT_G.x0 + FT_G.w * (lx - FT_G.lx0) / (FT_G.lx1 - FT_G.lx0), FT_G.y0 - FT_G.h * (ly - FT_G.ly0) / (FT_G.ly1 - FT_G.ly0)];
 SCENES.fates = S => {
   const a = sgFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [1, 'Lean checks', 'lean']]);
   /* axes: log₁₀ N across, Σ_N up (σ = T = 1) */
-  const o = ftP(FT_G.lx0, 0);
+  const o = ftP(FT_G.lx0, FT_G.ly0);
   arrow(o[0], o[1], o[0] + FT_G.w + 30, o[1], C.dim, a, 2);
   arrow(o[0], o[1], o[0], o[1] - FT_G.h - 30, C.dim, a, 2);
-  for (let e = 1; e <= 6; e++) { const p = ftP(e, 0); line(p[0], p[1], p[0], p[1] + 10, C.dim, a, 2); txt(`10${'⁰¹²³⁴⁵⁶'[e]}`, p[0], p[1] + 40, { size: 22, fam: F.math, w: 700, align: 'center', c: C.dim, a }); }
+  for (let e = 1; e <= 6; e++) { const p = ftP(e, FT_G.ly0); line(p[0], p[1], p[0], p[1] + 10, C.dim, a, 2); txt(`10${'⁰¹²³⁴⁵⁶'[e]}`, p[0], p[1] + 40, { size: 22, fam: F.math, w: 700, align: 'center', c: C.dim, a }); }
   txt('N', o[0] + FT_G.w + 40, o[1] + 10, { size: 28, fam: F.math, w: 700, c: C.white, a });
-  txt('Σ_N', o[0] - 10, o[1] - FT_G.h - 44, { size: 28, fam: F.math, w: 700, align: 'center', c: C.mag, a });
-  for (const y of [0.5, 1]) { const p = ftP(1, y); line(p[0] - 10, p[1], p[0] + FT_G.w, p[1], C.dim, a * 0.2, 1); txt(String(y), p[0] - 18, p[1] + 8, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.dim, a }); }
+  txt('Σ_N  (log scale · 对数刻度)', o[0] - 20, o[1] - FT_G.h - 44, { size: 26, fam: F.zh, w: 700, c: C.mag, a });
+  for (const [ly, s] of [[-6, '10⁻⁶'], [-4, '10⁻⁴'], [-2, '10⁻²'], [0, '1'], [2, '10²']]) { const p = ftP(1, ly); line(p[0] - 10, p[1], p[0] + FT_G.w, p[1], C.dim, a * 0.2, 1); txt(s, p[0] - 18, p[1] + 8, { size: 22, fam: F.math, w: 700, align: 'right', c: C.dim, a }); }
   txt('σ = T = 1 · computed here · 屏幕上算出', o[0] + FT_G.w, 230, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.cyan, a });
   /* which fate is current */
   const cur = at(S, 3, 0.01) > 0 ? 3 : at(S, 2, 0.01) > 0 ? 2 : at(S, 1, 0.01) > 0 ? 1 : 0;
@@ -369,21 +373,18 @@ SCENES.fates = S => {
   SG_ALPHAS.forEach(([al, lab], i) => {
     const fate = al > 0.5 ? 1 : al === 0.5 ? 2 : 3;
     const col = fate === cur ? C.now : C.mag;
-    curve(s => { const lx = FT_G.lx0 + (FT_G.lx1 - FT_G.lx0) * s * grow; return ftP(lx, sgSum(1, 1, al, Math.pow(10, lx))); }, 200, col, a * (fate === cur ? 1 : 0.55), fate === cur ? 5 : 3);
+    curve(s => { const lx = FT_G.lx0 + (FT_G.lx1 - FT_G.lx0) * s * grow; return ftP(lx, Math.log10(sgSum(1, 1, al, Math.pow(10, lx)))); }, 200, col, a * (fate === cur ? 1 : 0.55), fate === cur ? 5 : 3);
   });
   ctx.restore();
-  if (grow > 0.98) {
-    const lab = [[1, 6, 0.04, 'α = 1'], [0.75, 6, 0.09, 'α = 3/4'], [0.5, 6, 0.55, 'α = 1/2'], [1 / 3, 1.0, 0.92, 'α = 1/3 ↑']];
-    lab.forEach(([al, lx, y, s]) => {
-      const fate = al > 0.5 ? 1 : al === 0.5 ? 2 : 3, p = ftP(lx, y);
-      txt(s, p[0] + (lx === 6 ? 14 : 30), p[1] + 8, { size: 24, fam: F.math, w: 700, c: fate === cur ? C.now : C.mag, a });
-    });
-  }
+  if (grow > 0.98) SG_ALPHAS.forEach(([al, s]) => {
+    const fate = al > 0.5 ? 1 : al === 0.5 ? 2 : 3, p = ftP(6, Math.log10(sgSum(1, 1, al, 1e6)));
+    txt('α = ' + s, p[0] + 14, p[1] + 8, { size: 24, fam: F.math, w: 700, c: fate === cur ? C.now : C.mag, a });
+  });
   /* the three verdicts */
   const rows = [
     [1, 'α > 1/2', 'Σ_N → 0', '归零'],
     [2, 'α = 1/2', 'Σ_N → σ²T/2', '停在 σ²T/2（此处 0.5）'],
-    [3, '0 < α < 1/2, σ ≠ 0', 'Σ_N → +∞', '无限增长（N = 10⁶ 时 ' + sgF(sgSum(1, 1, 1 / 3, 1e6), 2) + '）']
+    [3, '0 < α < 1/2, σ ≠ 0', 'Σ_N → +∞', '无限增长（N = 10⁶ 时 ' + sgF(sgSum(1, 1, 1 / 3, 1e6), 4) + '）']
   ];
   const la = a * Q(S, 1, 'Lean checks', 0.6);
   if (la > 0.003) {
@@ -420,7 +421,7 @@ SCENES.edge = S => {
   const rows = [
     { k: 0, col: C.cyan, en: 'α ≤ 0: no claim', zh: 'α ≤ 0 不在定理之内；α > 0 不能去掉', note: 'Σ_N ≡ 0 here · hand derivation · 手工推导' },
     { k: 1, col: C.cyan, en: 'equal, fixed steps only', zh: '只讲等长、确定的步子', note: 'not random, not uneven · 不是随机的，也不是长短不一的' },
-    { k: 2, col: C.argued, en: '½ as Itô’s correction · arc calculus', zh: '伊藤修正项的读法 · 极小圆弧体微积分', note: 'literature result · chapter’s MODEL · 文献结果与本章模型' }
+    { k: 2, col: C.argued, en: '½ as Itô’s correction · arc calculus', zh: '伊藤修正项的读法 · 极小圆弧体微积分', note: 'literature result · MODEL of the chapter · 文献结果与本章模型' }
   ];
   rows.forEach((rw, i) => {
     const ra = a * at(S, rw.k, 0.6);
