@@ -240,7 +240,7 @@ SCENES.sift = S => {
   const pa = a * Q(S, 2, 'In symbols', 0.6);
   if (pa > 0.003) {
     panel(W / 2 - 300, 170, 600, 110, pa, C.cyan);
-    ptRich([['P', C.white], ['²', C.white], [' = ', C.white], ['P', C.now]], W / 2, 245, { size: 58, a: pa, align: 'center', ab: 1 });
+    ptRich([['P', C.white], ['²', C.white], [' = ', C.white], ['P', C.white]], W / 2, 245, { size: 58, a: pa, align: 'center', ab: 1 });
   }
   txt('analogy · 比方', 960, 210, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.argued, a: a * (1 - pa) });
 };
@@ -301,8 +301,10 @@ SCENES.pinch = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
   /* the Bloch arrow, a small static inset (the arrow is not projected here) */
-  const ia = a * at(S, 0, 0.6);
+  const wipe0 = Q(S, 3, 'corners are wiped', 0.6);
+  const ia = a * at(S, 0, 0.6) * (1 - 0.6 * wipe0);
   const O = [330, 520], R = 200;
+  txt('before the pass · 测之前', O[0], O[1] - R - 70, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: a * wipe0 });
   if (ia > 0.003) {
     ring(O[0], O[1], R, C.dim, ia * 0.7, 2);
     line(O[0], O[1] - R - 30, O[0], O[1] + R + 30, C.cyan, ia * 0.6, 2);
@@ -317,7 +319,7 @@ SCENES.pinch = S => {
   const wipe = ease(Q(S, 3, 'corners are wiped', 1.0));
   const pass2 = Q(S, 4, 'Do it again', 0.6);
   const cornerA = 1 - wipe;
-  const cnum = ptNum(0.3 * (1 - wipe));
+  const cnum = wipe > 0.98 ? '0' : ptNum(0.3 * (1 - wipe));
   const cells = [['0.9', C.cyan, 1, 0.16], [cnum, wipe > 0.98 ? C.dim : C.mag, 1, 0.16 * cornerA], [cnum, wipe > 0.98 ? C.dim : C.mag, 1, 0.16 * cornerA], ['0.1', C.cyan, 1, 0.16]];
   const mx = 780, my = 300, cell = 150;
   txt('ρ =', mx - 30, my + cell + 16, { size: 48, fam: F.math, w: 700, align: 'right', c: C.now, a: ma });
@@ -350,7 +352,7 @@ SCENES.theorem = S => {
   const a = ptFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, 'Lean checks', 'lean'], [2, null, 'argued']]);
-  const ta = a * at(S, 0, 0.6);
+  const ta = a * at(S, 0, 0.6) * (1 - 0.45 * at(S, 2, 0.6));
   panel(120, 190, 1000, 300, ta, C.lean, 'ANY FINITE RECORD MEASUREMENT · 任意有限记录测量');
   ptRich([['unread(P) ∘ unread(P) = unread(P)', C.white]], 150, 290, { size: 40, a: ta });
   txt('any n × n matrix ρ · 任意 n × n 方阵', 150, 350, { size: 24, fam: F.zh, w: 700, c: C.dim, a: ta });
@@ -364,16 +366,16 @@ SCENES.theorem = S => {
   /* three-drawer block picture: off-diagonal blocks gone, second pass sorts nothing (schematic) */
   const ba = a * at(S, 0, 0.6, 1.0);
   if (ba > 0.003) {
-    const bx = 1300, by = 210, bs = 140;
-    const cols = [C.cyan, C.mag, C.vio];
+    const bx = 1340, by = 200, bs = 124;
+    const cols = [C.cyan, C.mag, C.white];
     for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) {
       const diag = i === j;
       fillBox(bx + j * bs + 4, by + i * bs + 4, bs - 8, bs - 8, diag ? cols[i] : C.dim, ba * (diag ? 0.35 : 0.06));
       box(bx + j * bs + 4, by + i * bs + 4, bs - 8, bs - 8, diag ? cols[i] : C.dim, ba * (diag ? 0.9 : 0.4), 1.5);
       if (!diag) txt('0', bx + j * bs + bs / 2, by + i * bs + bs / 2 + 12, { size: 32, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ba });
     }
-    txt('three drawers, sorted · 三只抽屉，已分好', bx + 1.5 * bs, by + 3 * bs + 44, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: ba });
-    txt('schematic · 示意', bx + 1.5 * bs, by + 3 * bs + 78, { size: 18, fam: F.zh, w: 700, align: 'center', c: C.argued, a: ba });
+    txt('three drawers, sorted · 三只抽屉，已分好', bx + 1.5 * bs, by + 3 * bs + 38, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: ba });
+    txt('schematic · 示意', bx + 1.5 * bs, by + 3 * bs + 70, { size: 18, fam: F.zh, w: 700, align: 'center', c: C.argued, a: ba });
   }
   /* lines 2–3: the question and the aphorism (interpretation) */
   const qa = a * at(S, 2, 0.7);
@@ -382,7 +384,7 @@ SCENES.theorem = S => {
     txt('Why trust that something is there?  Because asking twice gives the same answer.', 150, 770, { size: 28, fam: F.disp, w: 700, c: C.white, a: qa * (1 - at(S, 3, 0.5)) });
     txt('凭什么相信它在那里？因为问两遍，答案一样。', 150, 812, { size: 24, fam: F.zh, w: 700, c: C.argued, a: qa * (1 - at(S, 3, 0.5)) });
     const aa = a * at(S, 3, 0.6);
-    txt('A thing is whatever the same ruler can measure twice without a change.', 150, 770, { size: 30, fam: F.disp, w: 700, c: C.now, a: aa });
+    txt('A thing is whatever the same ruler can measure twice without a change.', 150, 770, { size: 30, fam: F.disp, w: 700, c: C.white, a: aa });
     txt('所谓实体，就是同一把尺子连量两次而不走样的东西。', 150, 812, { size: 24, fam: F.zh, w: 700, c: C.argued, a: aa });
   }
   stamp('ONCE = TWICE', 640, 540, Q(S, 0, 'unread twice', 0.5, 0.4) * (1 - at(S, 1, 0.5)), C.lean, 40, -0.05);
@@ -433,7 +435,7 @@ SCENES.ledger = S => {
 SCENES.edge = S => {
   const a = ptFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [2, null, 'argued']]);
+  badgeQ(S, [[0, null, 'argued']]);
   const rows = [
     { k: 0, col: C.cyan, en: 'not looking ≠ collapse', zh: '不看，不等于坍缩', note: 'reading keeps one drawer: PₖρPₖ / Tr(ρPₖ) · 读出：留下一只抽屉再归一（第 3 章开篇）' },
     { k: 1, col: C.mag, en: 'the lost 0.18 does not come back', zh: '丢掉的 0.18 不会靠再捏回来', note: 'where it went: chapter 4 · 它去了哪儿：第四章' },
