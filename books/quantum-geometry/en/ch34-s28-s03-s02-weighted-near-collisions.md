@@ -788,6 +788,8 @@ lies below $w_{\bar i}$ at every residue. Expressing $2\sum_i v_iP_i$ in terms o
 
 Each fixed budget lies in an interval of finite support radius. Thus $E_q(1-\lambda/q^2)$ tends to $L(\lambda/(8\pi^2))$ through all integer moduli. The arithmetic estimate for high-order frequencies of the actual ζ zeros remains open.
 
+[Lean proof of the centered cosine identity](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cosineMoment_eq_centered) · [Lean proof of the quantitative comparison](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cyclic_to_lattice_comparison)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.

@@ -788,6 +788,8 @@ $$
 
 每个固定预算都落在一个有限的支撑区间中。因此 $E_q(1-\lambda/q^2)$ 沿所有整数模数趋于 $L(\lambda/(8\pi^2))$。对实际 ζ 零点高阶频率的算术估计仍有待解决。
 
+[中心化余弦矩恒等式的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cosineMoment_eq_centered) · [定量比较的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cyclic_to_lattice_comparison)
+
 ## 局部统计在截点变化下的误差
 
 频率向下舍入后，是否落在给定的高度区间内可能发生变化。局部测试只计入频率彼此接近的元组，所以改变截点的影响取决于每个变动索引附近还有多少索引。
