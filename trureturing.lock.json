@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "861753fe51c977250ba05b8227fdbaaacea637ef",
-  "pinned_at": "2026-11-25T07:57:15Z",
+  "commit": "47d4b3d8382f984dcc7bd96faf55d0f36ad53766",
+  "pinned_at": "2026-11-25T08:42:45Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4569,7 +4569,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingCoupledFit.coupledFit_eventually",
       "kind": "theorem",
-      "statement_id": "sha256:bf52ae5a5f2486e6e00656889fe0794a3dd220a1c0e7096b7c5d2acc2ce3aae4",
+      "statement_id": "sha256:cab27696f731cb0589c2c383c71df3237001c9262516d4b61ac5914a1e63ae11",
       "line": 429,
       "signature": "theorem coupledFit_eventually {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) {S : Finset ℝ} (hS : S.Nonempty) (rhs : ℕ → Fin 3 → ℝ) : let readout"
     },
@@ -4577,7 +4577,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingCoupledFit.coupledMatrix_tendsto",
       "kind": "theorem",
-      "statement_id": "sha256:bf52ae5a5f2486e6e00656889fe0794a3dd220a1c0e7096b7c5d2acc2ce3aae4",
+      "statement_id": "sha256:cab27696f731cb0589c2c383c71df3237001c9262516d4b61ac5914a1e63ae11",
       "line": 312,
       "signature": "theorem coupledMatrix_tendsto {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) (S : Finset ℝ) : let readout"
     },
@@ -4625,8 +4625,8 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingSupport",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingSupport.eventual_strict_support_away_from_thresholds",
       "kind": "theorem",
-      "statement_id": "sha256:0e40c74a6fbf30af4af179e3c7e9ad68fee901f80b9be147405b462973107921",
-      "line": 819,
+      "statement_id": "sha256:6cfc397bab386628865fe4bafdc694efefda7d1bfb75a3d3a3f5d4d7d2925d75",
+      "line": 852,
       "signature": "theorem eventual_strict_support_away_from_thresholds (q : ℕ → ℕ) (hq : ∀ n, q n ≠ 0) (e : ℕ) (hpar : ∀ᶠ n in atTop, q n % 2 = e) {K : ℝ} (hK : Tendsto (fun n : ℕ => (n : ℝ)^5 * (mesh (q n))^2) atTop (𝓝 K)) (hneq : ∀ l, 3*K/20 ≠ rearThreshold e l) : let readout"
     },
     "D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit": {
@@ -9051,6 +9051,14 @@
       "statement_id": "sha256:44caa404da43f9f5ed59271b16c65b28abcc6977a9c3ad379362a478a89627b2",
       "line": 338,
       "signature": "theorem rational_rank_le_two_at_iff (b : ℝ) (L R : Matrix Bool Bool ℂ) (u v w z : ℂ) (hb : 0 < b) (ht : L.trace + (b : ℂ) = 1) (hr : R.trace = L.trace) (qL : ∀ i j, RationalEntry (L i j)) (qR : ∀ i j, RationalEntry (R i j)) (qu : RationalEntry u) (qv : RationalEntry v) (qw : RationalEntry w) (qz : RationalEntry z) : let C"
+    },
+    "D5/S3/Quantum/Entanglement/Marginals/FibDiagonalRank.rational_rank_le_two_diagonal_iff": {
+      "module": "D5/S3/Quantum/Entanglement/Marginals/FibDiagonalRank",
+      "name": "D5.S3.Quantum.Entanglement.Marginals.FibDiagonalRank.rational_rank_le_two_diagonal_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:6d2481464210932f821b6bc9bb9c1074f7002e6270e00c132ca8ade5860a346b",
+      "line": 142,
+      "signature": "theorem rational_rank_le_two_diagonal_iff (b l r : ℚ) (hb : 0 < b) (hl : 0 ≤ l) (hr : 0 ≤ r) (hne : l ≠ r) : (∃ z : ℂ, ∃ ρ : Matrix Word Word ℂ, ρ.PosSemidef ∧ MatchesCoherentData b (diagonalEdgeBlock b l) (diagonalEdgeBlock b r) 0 0 0 z ρ ∧ ρ.rank ≤ 2 ∧ ∀ i j, RationalEntry (ρ i j)) ↔ (∃ z : ℂ, RationalEntry z ∧ normSq z = (b * (1 - b - l - r) : ℚ)) ∧ (∃ w : ℂ, RationalEntry w ∧ normSq w = (l * r : ℚ))"
     },
     "D5/S3/Quantum/Entanglement/Marginals/FibMarginalExtension.extendible_iff": {
       "module": "D5/S3/Quantum/Entanglement/Marginals/FibMarginalExtension",
