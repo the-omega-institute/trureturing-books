@@ -5282,6 +5282,30 @@
       "line": 114,
       "signature": "theorem differences_do_not_determine_triple_mass : ¬ differencesDetermineTripleMass"
     },
+    "D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lattice_collision_variance_lower": {
+      "module": "D5/S3/Fourier/Concentration/LatticeConvolutionVariance",
+      "name": "D5.S3.Fourier.Concentration.LatticeConvolutionVariance.lattice_collision_variance_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:3156e8294ffa304e74479b41e979e4deab5f03d5f82f8639eefa7b4da1afab44",
+      "line": 179,
+      "signature": "theorem lattice_collision_variance_lower {J : Type*} [Fintype J] [DecidableEq J] (a : J → ℤ) (b h : ℝ) (hh : 0 < h) (w : J → ℝ) (hw : ∀ j, 0 ≤ w j) (center V : ℝ) (p : ℕ) (η : ℝ) (hη : 0 ≤ η) (hm : ∑ j, w j * ((b + h * (a j : ℝ)) - center)^2 ≤ V * ∑ j, w j) : let g"
+    },
+    "D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lattice_period_collision": {
+      "module": "D5/S3/Fourier/Concentration/LatticeConvolutionVariance",
+      "name": "D5.S3.Fourier.Concentration.LatticeConvolutionVariance.lattice_period_collision",
+      "kind": "theorem",
+      "statement_id": "sha256:3156e8294ffa304e74479b41e979e4deab5f03d5f82f8639eefa7b4da1afab44",
+      "line": 111,
+      "signature": "theorem lattice_period_collision {J : Type*} [Fintype J] [DecidableEq J] (a : J → ℤ) (b h : ℝ) (hh : 0 < h) (w : J → ℝ) (p : ℕ) (η : ℝ) (hη : 0 ≤ η) (hηh : η < h) (k : ℕ) (hk : 0 < k) (s₀ : ℝ) : let g"
+    },
+    "D5/S3/Fourier/Concentration/LatticeConvolutionVariance.score_variance_lower": {
+      "module": "D5/S3/Fourier/Concentration/LatticeConvolutionVariance",
+      "name": "D5.S3.Fourier.Concentration.LatticeConvolutionVariance.score_variance_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:3156e8294ffa304e74479b41e979e4deab5f03d5f82f8639eefa7b4da1afab44",
+      "line": 27,
+      "signature": "theorem score_variance_lower {J : Type*} [Fintype J] (g w : J → ℝ) (hw : ∀ j, 0 ≤ w j) (a V t : ℝ) (hm : ∑ j, w j * (g j - a) ^ 2 ≤ V * ∑ j, w j) : let W"
+    },
     "D5/S3/Fourier/Concentration/LocalStatisticCutoffs.local_statistic_cutoff": {
       "module": "D5/S3/Fourier/Concentration/LocalStatisticCutoffs",
       "name": "D5.S3.Fourier.Concentration.LocalStatisticCutoffs.local_statistic_cutoff",

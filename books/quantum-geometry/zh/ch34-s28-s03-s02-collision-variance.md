@@ -98,3 +98,31 @@ $$
 $$
 
 选择 $\eta_n=n/(n+1)$，每个半径严格小于格点间距，且 $L=1$。于是上一节的常数 $3/(5\sqrt5)$ 对任意有限非负加权数据是渐近最优的。连续 Rényi 熵的二阶矩极值也出现这一抛物线形状，参见 [Sekeh 的式 (2.1) 与定理 3.1](https://arxiv.org/abs/1509.02190v4)。这里的有限格点分离保证闭距离带中仅有对角碰撞。要求数据来自固定底层频率族的高次数和，或实际 ζ 纵坐标，还需获得相应的算术约束。 [极限的 Lean 证明](lean:D5/S3/Fourier/Concentration/SeparatedParabolicCollision.parabolic_collision_ratio_limit)
+
+## 格点卷积的有限傅里叶方差下界
+
+对于原始频率 $g_j$ 及非负权重 $w_j$，令 $S(t)=\sum_j w_je^{ig_jt}$，$W=\sum_jw_j$，$D=\sum_jw_j(g_j-a)^2\le VW$，其中 $a$ 为任意实数中心。中心化只旋转复数和。由 $\cos x\ge1-x^2/2$ 得
+
+$$
+|S(t)|\ge W\max(0,1-Vt^2/2),\qquad
+|S(t)|\ge\max(0,W-Dt^2/2).
+$$
+
+若 $D>0$ 且 $t\ne0$，则 $|S(t)|>W-Dt^2/2$，因为至少一个正权重项的中心化相位非零。 [特征函数下界的 Lean 证明](lean:D5/S3/Fourier/Concentration/LatticeConvolutionVariance.score_variance_lower)
+
+若频率位于同一仿射格点 $g_j=b+h a_j$，其中 $h>0$、$a_j$ 为整数，则对任意实权重、自然数 $p$、正整数 $k$、实数 $s$ 以及 $0\le\eta<h$，令 $A=k\pi/h$，有精确恒等式
+
+$$
+E_p(\eta)=\frac{1}{2A}\int_{s-A}^{s+A}|S(t)|^{2p}\,dt.
+$$
+
+将 $|S|^{2p}$ 作有限多项式配对展开，任意两个次数为 $p$ 的频率和之差都是 $hd$，$d$ 为整数。对应余弦项的平均值为 $\cos(hds)\operatorname{sinc}(k\pi d)$。因此保留全部相等频率和的有序对。 [周期平均恒等式的 Lean 证明](lean:D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lattice_period_collision)
+
+当权重非负且 $\eta\ge0$ 时，结合单周期内的点态下界得到
+
+$$
+E_p(\eta)\ge \frac{hW^{2p}}{2\pi}
+\int_{-\pi/h}^{\pi/h}\max(0,1-Vt^2/2)^{2p}\,dt.
+$$
+
+若 $D>0$ 且 $p>0$，该不等式严格成立。这里使用了次数和的同一傅里叶幂展开。固定 $V,h>0$ 而次数增长时，积分中的缩放变量为 $t\sqrt{pV}$，其高斯极限给出的渐近系数仍待形式化。一般实频谱的有限分辨率碰撞需要另行建立正核估计。 [有限积分下界的 Lean 证明](lean:D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lattice_collision_variance_lower)
