@@ -294,7 +294,7 @@ SCENES.seat = S => {
   ffRich([['⟨ψ, φ⟩ = ', C.white], ['0.48 + 0.48i', C.cyan], ['   = conj ⟨φ, ψ⟩', C.dim]], 1048, 676, { size: 28, a: ma });
   ffRich([['|z| = |z̄|  ⇒  ', C.white], ['0.4608 = 0.4608', C.cyan]], 1048, 734, { size: 30, a: a * Q(S, 3, 'Same size', 0.6) });
   if (ma > 0.003) txt('the mirror step is computed here · 镜像一步是屏幕上的计算', 1048, 786, { size: 18, fam: F.zh, w: 700, c: C.dim, a: ma });
-  stamp('0.4608', 520, 300, Q(S, 2, 'Lean checks', 0.5, 0.8) * (1 - at(S, 3, 0.5)), C.lean, 34, -0.06);
+  stamp('0.4608', 800, 250, Q(S, 2, 'Lean checks', 0.5, 0.8) * (1 - at(S, 3, 0.5)), C.cyan, 34, -0.06);
 };
 
 /* ======================================================================= */
@@ -351,10 +351,10 @@ SCENES.budget = S => {
     box(1080, 594, 700, 200, C.lean, lea, 1.5);
     txt('if  budget = ‖state‖²  and  shown = ‖shadow‖²', 1096, 634, { size: 20, fam: F.math, w: 700, c: C.dim, a: lea });
     txt('Re Tr ρ² − 1/d = Σ (p − 1/d)² + residualMass', 1096, 684, { size: 24, fam: F.math, w: 700, c: C.white, a: lea });
-    ffLean(1096, 738, 'complementary_context_probability_pythagoras', lea, { size: 15 });
-    txt('here: state = r/√2, shadow on the up–down line (computed) · 这里取 state = r/√2', 1096, 776, { size: 15, fam: F.zh, w: 700, c: C.dim, a: lea });
+    ffLean(1096, 736, 'complementary_context_probability_pythagoras', lea, { size: 18 });
+    txt('here: state = r/√2, shadow on the up–down line (computed)', 1096, 778, { size: 20, fam: F.zh, w: 700, c: C.dim, a: lea });
   }
-  stamp('0.50 = 0.32 + 0.18', 820, 250, Q(S, 3, 'Lean checks', 0.5, 0.8) * (1 - at(S, 4, 0.5)), C.lean, 30, -0.05);
+  stamp('0.50 = 0.32 + 0.18', 820, 250, Q(S, 3, 'Lean checks', 0.5, 0.8) * (1 - at(S, 4, 0.5)), C.cyan, 30, -0.05);
 };
 
 /* ======================================================================= */
@@ -405,9 +405,11 @@ SCENES.copy = S => {
   const na = a * Q(S, 2, 'do not balance', 0.6);
   if (na > 0.003) {
     ffRich([['0.80 ≠ 0.64', C.white]], 1444, 550, { size: 40, a: na });
-    txt("the books don't balance · 账对不上", 1444, 600, { size: 18, fam: F.zh, w: 700, c: C.white, a: na * 0.85 });
+    txt("the books don't balance · 账对不上", 1444, 596, { size: 20, fam: F.zh, w: 700, c: C.white, a: na * 0.85 });
   }
-  txt('a copier keeps overlaps · 复印机保持重叠', 1444, 650, { size: 16, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 1, 'keep overlaps', 0.6) });
+  const ka = a * Q(S, 1, 'keeps overlaps', 0.6);
+  txt('reversible (isometric) copiers', 1444, 626, { size: 20, fam: F.zh, w: 700, c: C.white, a: ka * 0.8 });
+  txt('keep overlaps · 可逆复印机保重叠', 1444, 654, { size: 20, fam: F.zh, w: 700, c: C.white, a: ka * 0.8 });
   /* line 3: the lock */
   const lea = a * Q(S, 3, 'Lean checks', 0.6);
   if (lea > 0.003) {
@@ -456,8 +458,8 @@ SCENES.steps = S => {
   if (th0 > 0.003 && n < 0) { ffArc(ST_O[0], ST_O[1], 140, -ST_TH, 0, C.cyan, th0, 3); txt('θ ≈ 5.74°', ST_O[0] + 160, ST_O[1] - 20, { size: 24, fam: F.mono, w: 700, c: C.cyan, a: th0 }); }
   if (n >= 0) {
     line(tip[0], tip[1], ST_O[0], tip[1], C.cyan, a * 0.7, 2);
-    txt(`n = ${n}`, tip[0] + 18, tip[1] - 14, { size: 26, fam: F.mono, w: 700, c: C.now, a });
-    txt(`(2n+1)θ = ${ffNum(ang / FF_DEG, 1)}°`, tip[0] + 18, tip[1] + 18, { size: 20, fam: F.mono, w: 700, c: C.white, a: a * 0.85 });
+    txt(`n = ${n}`, 560, 330, { size: 30, fam: F.mono, w: 700, c: C.now, a });
+    txt(`(2n+1)θ = ${ffNum(ang / FF_DEG, 1)}°`, 560, 368, { size: 20, fam: F.mono, w: 700, c: C.white, a: a * 0.85 });
   }
   if (ka > 0.003) txt('turnstile: a picture · 闸机只是比方', ST_O[0] + 40, ST_O[1] + 46, { size: 18, fam: F.zh, w: 700, c: C.argued, a: ka });
   /* the bars: the chance sin²((2n+1)θ) per round */
@@ -486,6 +488,7 @@ SCENES.steps = S => {
     ffLean(900, 810, 'uniform_operator_rotation', lea, { size: 18 });
     txt('p = 1/100 (computed)', 1780, 810, { size: 18, fam: F.mono, w: 700, align: 'right', c: C.dim, a: lea });
   }
+  txt('for this method · 仅就这一种方法', 900, 700, { size: 20, fam: F.zh, w: 700, align: 'left', c: C.argued, a: a * at(S, 0, 0.6) });
   stamp('99.5% · n = 7', 1400, 250, Q(S, 3, 'round seven', 0.5, 0.6), C.now, 30, -0.05);
 };
 
@@ -550,7 +553,7 @@ SCENES.stars = S => {
     txt('(1/N) Σₙ f(gⁿ⁺¹)  →  ∫_G f dμ,   G = closure of the orbit', 850, 740, { size: 24, fam: F.math, w: 700, c: C.white, a: lea });
     ffLean(850, 786, 'result', lea, { size: 18 });
     const ga = a * Q(S, 3, 'the whole circle', 0.6);
-    txt('α irrational ⇒ G = whole circle, ∫ f = ½ (see the chapter remark) · 轨道铺满圆', 850, 820, { size: 15, fam: F.zh, w: 700, c: C.dim, a: ga });
+    txt('α irrational ⇒ G = whole circle, ∫ f = ½ (see the chapter remark)', 850, 822, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ga });
   }
 };
 
@@ -562,7 +565,7 @@ SCENES.edge = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued'], [1, 'P versus NP', 'open'], [2, null, 'argued']]);
   const rows = [
-    { k: 0, col: C.argued, en: '“fairness” is a reading of five identities', zh: '“公平”是对五条恒等式的读法', note: "this book's interpretation (MODEL) · 本书的诠释" },
+    { k: 0, col: C.argued, en: '“fairness” is a reading of five verified statements', zh: '“公平”是对五条已验证陈述的读法', note: "this book's interpretation (MODEL) · 本书的诠释" },
     { k: 1, col: C.open, en: "one method's rounds ≠ a bound on all methods", zh: '一种方法的轮数不是所有方法的下界', note: 'P ≠ NP stays an open conjecture · P 与 NP 之问仍然开放' },
     { k: 2, col: C.argued, en: 'three-qubit monogamy (CKW) · erasure heat k_B T ln 2', zh: '三方纠缠如何分配 · 擦除一比特的物理热量', note: 'literature results, not formalized here · 文献结果，本书未形式化' }
   ];
