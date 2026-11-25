@@ -197,7 +197,7 @@ function stPlot(B, a, o = {}) {
   line(B.x, Y(0), B.x + B.w, Y(0), C.dim, a * 0.6, 1.5);
   for (let d = Math.ceil(B.d0 / 90) * 90; d <= B.d1; d += 90) {
     line(X(d), Y(0) - 6, X(d), Y(0) + 6, C.dim, a * 0.8, 1.5);
-    txt(`${d}°`, X(d), Y(0) + 32, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.dim, a });
+    txt(`${d}°`, X(d), Y(0) + 46, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.dim, a });
   }
   for (const v of [1, -1]) { stDash(B.x, Y(v), B.x + B.w, Y(v), C.dim, a * 0.35, 1, [3, 8]); txt(v > 0 ? '1' : '−1', B.x - 12, Y(v) + 7, { size: 18, fam: F.mono, w: 700, align: 'right', c: C.dim, a }); }
   const span = o.upto == null ? 1 : o.upto;
@@ -236,12 +236,12 @@ SCENES.dial = S => {
   const a = clamp((u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
-  /* the knob turns back and forth: θ = 60° + 40° sin */
+  /* the knob turns back and forth: θ = 70° + 30° sin */
   const deg = 70 + 30 * Math.sin((u - lineAt(S, 0).s) * 0.9);
   stDial(DL_O, DL_R, a);
   const arm = stArm(DL_O, DL_R, deg, C.now, a);
   txt(`θ = ${Math.round(deg)}°`, DL_O[0] + 40, DL_O[1] + 60, { size: 28, fam: F.mono, w: 700, c: C.now, a });
-  const ha = a * Q(S, 0, 'reports only its height', 0.6);
+  const ha = a * Q(S, 0, 'average gives only its height', 0.6);
   if (ha > 0.003) {
     chip(DL_O[0] - 150, arm.hy, 170, 44, stNum(stF(deg), 2), C.cyan, ha, 24);
     txt('detector · 探测器', DL_O[0] - 150, arm.hy + 66, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: ha });
@@ -259,7 +259,7 @@ SCENES.dial = S => {
       const h = 8;
       const x1 = P.X(deg - h), y1 = P.Y(stF(deg - h)), x2 = P.X(deg + h), y2 = P.Y(stF(deg + h));
       line(x1, y1, x2, y2, C.mag, na, 4); dot(x1, y1, 9, 'm', na); dot(x2, y2, 9, 'm', na);
-      txt('nudge · 拧一点点', x2 + 18, y2 + 30, { size: 22, fam: F.zh, w: 700, c: C.mag, a: na });
+      txt('nudge · 拧一点点', x1 - 20, y1 - 24, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.mag, a: na });
     }
   }
   const qa = a * Q(S, 2, 'But why', 0.6);
@@ -324,7 +324,7 @@ SCENES.turns = S => {
 /*                           scene 3 · WHY A QUARTER TURN                    */
 /* ======================================================================= */
 const WY_O = [440, 610], WY_R = 240;
-const WY_B = { x: 1000, y: 490, w: 820, h: 290, d0: -60, d1: 180 };
+const WY_B = { x: 1000, y: 490, w: 820, h: 250, d0: -60, d1: 180 };
 SCENES.why = S => {
   const u = S.u, a = stFade(S);
   if (a <= 0) return;
@@ -362,14 +362,13 @@ SCENES.why = S => {
     const x1 = P.X(30), y1 = P.Y(stF(30)), x2 = P.X(90), y2 = P.Y(stF(90)), k = (y2 - y1) / (x2 - x1);
     line(x1 - 90, y1 - 90 * k, x2 + 90, y2 + 90 * k, C.mag, ca, 3);
     dot(x1, y1, 10, 'm', ca); dot(x2, y2, 10, 'm', ca); dot(P.X(60), P.Y(stF(60)), 12, 'g', ca);
-    txt(`chord ±30° · 弦  ${stNum(stChord(60, 30))}`, 1010, 700, { size: 22, fam: F.zh, w: 700, c: C.mag, a: ca });
-    txt(`tangent · 切线  ${stNum(stTan(60))}`, 1010, 732, { size: 22, fam: F.zh, w: 700, c: C.white, a: ca });
-    txt(`ratio sin h / h = ${stNum(stChord(60, 30) / stTan(60))}`, 1010, 764, { size: 22, fam: F.mono, w: 700, c: C.mag, a: ca * Q(S, 2, 'four and a half percent', 0.5) });
+    txt(`chord ±30° · 弦  ${stNum(stChord(60, 30))}`, 1010, 800, { size: 22, fam: F.zh, w: 700, c: C.mag, a: ca });
+    txt(`tangent · 切线  ${stNum(stTan(60))}`, 1010, 832, { size: 22, fam: F.zh, w: 700, c: C.white, a: ca });
+    txt(`ratio sin h / h = ${stNum(stChord(60, 30) / stTan(60))}`, 1010, 864, { size: 22, fam: F.mono, w: 700, c: C.mag, a: ca * Q(S, 2, 'four and a half percent', 0.5) });
   }
   /* line 3: the aphorism */
   const sa = a * at(S, 3, 0.5);
   if (sa > 0.003) {
-    txt('The slope was never next door. It was a quarter turn away.', W / 2, 860, { size: 30, fam: F.disp, w: 700, align: 'center', c: C.white, a: sa });
   }
 };
 
@@ -380,7 +379,7 @@ const LN_O = [400, 560], LN_R = 230;
 SCENES.lean = S => {
   const u = S.u, a = stFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, 'Lean checks', 'lean'], [3, null, 'computed'], [4, 'spin around', 'computed']]);
+  badgeQ(S, [[0, 'Lean checks', 'lean'], [3, null, 'computed'], [4, null, 'lean'], [4, 'spin around', 'computed']]);
   /* the general rule */
   panel(860, 190, 960, 330, a, C.lean, 'ANY FINITE SYSTEM · 任意有限维系统');
   stRich([['H* = H,  P* = P = P²,  ρ a density state', C.white]], 884, 260, { size: 26, a: a * Q(S, 1, 'Hermitian generator', 0.6) });
@@ -424,13 +423,13 @@ SCENES.lean = S => {
     const tip = [O[0] + rr * Math.sin(ph), ry + rr * tilt * Math.cos(ph)];
     arrow(O[0], O[1], tip[0], tip[1], C.now, ka, 5);
     stDash(O[0] - R - 30, ry, O[0] + R + 30, ry, C.cyan, ka * 0.5, 1.5);
-    txt('p = 0.75, always · 始终', O[0], ry - rr * tilt - 18, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: ka });
+    txt('p = 0.75 · 始终', O[0] + R + 40, ry + 8, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: ka });
     txt('H = Z/2,  HP − PH = 0', O[0], O[1] + R + 40, { size: 24, fam: F.math, w: 700, align: 'center', c: C.white, a: ka });
     panel(860, 560, 960, 230, ka, C.cyan, 'NOTHING MOVES · 一动不动');
     stRich([['p(t) = ', C.white], [stNum(stProb([0, 0, 1], [[[0.75, 0], [Math.sqrt(3) / 4, 0]], [[Math.sqrt(3) / 4, 0], [0.25, 0]]], ph), 2), C.cyan], ['   p′(t) = 0', C.white]], 884, 640, { size: 30, a: ka });
     txt('spin about the measured axis · 绕被测的轴转', 884, 700, { size: 22, fam: F.zh, w: 700, c: C.white, a: ka });
   }
-  stamp('p′ = Re i Tr(ρₜ[H, P])', 420, 700, Q(S, 0, 'Lean checks', 0.5, 0.8) * (1 - at(S, 1, 0.5, 2.5)), C.lean, 26, -0.06);
+  stamp('p′ = Re i Tr(ρ_t [H, P])', 1340, 640, Q(S, 0, 'Lean checks', 0.5, 0.8) * (1 - at(S, 1, 0.5, 1.5)), C.lean, 26, -0.06);
 };
 
 /* ======================================================================= */
@@ -439,20 +438,25 @@ SCENES.lean = S => {
 SCENES.budget = S => {
   const u = S.u, a = stFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [2, 'Lean checks', 'lean'], [4, 'Halves', 'computed']]);
+  badgeQ(S, [[1, null, 'argued'], [2, 'Lean checks', 'lean'], [4, 'Halves', 'computed']]);
+  const qa = a * at(S, 0, 0.6) * (1 - at(S, 2, 0.6));
+  if (qa > 0.003) {
+    txt('how many modes can be big at once?', 1000, 300, { size: 32, fam: F.disp, w: 700, c: C.white, a: qa });
+    txt('有多少个模式能同时很大？', 1000, 352, { size: 30, fam: F.zh, w: 700, c: C.white, a: qa });
+  }
   /* lines 0–1: the dollar, ten dimes */
   const da = a * (1 - at(S, 2, 0.6) * 0.75);
-  stTag('analogy · 比方', 120, 232, C.argued, da);
+  stTag('analogy · 比方', 120, 232, C.argued, da * at(S, 1, 0.6));
   const bx = 120, by = 270, bw = 700, bh = 60;
-  txt('one dollar · 一块钱', bx + bw, by - 14, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.white, a: da * Q(S, 0, 'Split one dollar', 0.6) });
-  box(bx, by, bw, bh, C.white, da * 0.6, 1.5);
-  const nd = Math.floor(clamp(at(S, 1, 2.0)) * 10 + 1e-9);
+  txt('one dollar · 一块钱', bx + bw, by - 14, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.white, a: da * Q(S, 1, 'Split one dollar', 0.6) });
+  box(bx, by, bw, bh, C.white, da * 0.6 * at(S, 1, 0.6), 1.5);
+  const nd = Math.floor(clamp(Q(S, 1, 'Each winner', 2.0)) * 10 + 1e-9);
   for (let k = 0; k < 10; k++) {
-    const sa = da * Q(S, 0, 'Split one dollar', 0.6) * (k < nd ? 1 : 0.25);
-    fillBox(bx + k * bw / 10 + 3, by + 3, bw / 10 - 6, bh - 6, k < nd ? C.now : C.dim, sa * 0.6);
+    const sa = da * Q(S, 1, 'Split one dollar', 0.6) * (k < nd ? 1 : 0.25);
+    fillBox(bx + k * bw / 10 + 3, by + 3, bw / 10 - 6, bh - 6, k < nd ? C.white : C.dim, sa * 0.6);
   }
-  txt(`${nd} × 0.10 ≤ 1.00`, bx, by + bh + 42, { size: 26, fam: F.mono, w: 700, c: C.now, a: da * at(S, 1, 0.5) });
-  txt('a dime or more each · 每人至少一角  ⇒  at most 10', bx, by + bh + 82, { size: 22, fam: F.zh, w: 700, c: C.white, a: da * at(S, 1, 0.5, 1.5) });
+  txt(`${nd} × 0.10 ≤ 1.00`, bx, by + bh + 42, { size: 26, fam: F.mono, w: 700, c: C.white, a: da * Q(S, 1, 'Each winner', 0.5) });
+  txt('a dime or more each · 每人至少一角  ⇒  at most 10', bx, by + bh + 82, { size: 22, fam: F.zh, w: 700, c: C.white, a: da * Q(S, 1, 'at most ten win', 0.5) });
   /* lines 2–3: the geometric spectrum λ_j = 2^−(j+1) and a threshold sliding down to 1/8 */
   const ga = a * at(S, 2, 0.6);
   if (ga > 0.003) {
@@ -480,7 +484,7 @@ SCENES.budget = S => {
   const la = a * Q(S, 2, 'Lean checks', 0.6);
   if (la > 0.003) {
     panel(1000, 190, 820, 330, la, C.lean, 'ANY NONNEGATIVE LIST · 任意非负数列');
-    stRich([['λⱼ ≥ 0,  Σ λⱼ = RW/π,  τ > 0', C.white]], 1024, 262, { size: 28, a: la });
+    stRich([['λⱼ ≥ 0,  summable · 可和,  Σ λⱼ = RW/π,  τ > 0', C.white]], 1024, 262, { size: 26, a: la, fam: F.zh });
     stRich([['{ j : λⱼ ≥ τ } is finite', C.cyan]], 1024, 320, { size: 28, a: la * Q(S, 3, 'finitely many', 0.5) });
     stRich([['#{ j : λⱼ ≥ τ } ≤ RW/(πτ)', C.mag]], 1024, 378, { size: 28, a: la * Q(S, 3, 'the total over the threshold', 0.5) });
     stLeanChip(1024, 450, ST_LEAN.finite_rank_concentration_mode_bound, la, { size: 16 });
@@ -538,8 +542,9 @@ FILM.poster = () => {
   txt('TWO TURNS', 1380, 520, { size: 52, fam: F.orb, w: 900, align: 'center', c: C.cyan, ab: 3, ls: 5 });
   txt('MEASURE A SLOPE', 1380, 582, { size: 40, fam: F.orb, w: 900, align: 'center', c: C.now, ab: 2, ls: 4 });
   stRich([['½ [f(θ + 90°) − f(θ − 90°)] = f′(θ)', C.white]], 1380, 680, { size: 36, align: 'center', ab: 1 });
+  txt('for one Pauli turn · 单扇泡利门', 1380, 730, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.argued });
   bloom(0.6);
-  txt(`${DATA.book.code} · FILM`, 1380, 760, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 8 });
+  txt(`${DATA.book.code} · FILM`, 1380, 800, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 8 });
   txt(`${DATA.book.title.zh} · ${DATA.book.title.en}`, W / 2, 1010, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: 0.9 });
   hud(t, Math.round(t * 30), 0, sc);
   post(0);
