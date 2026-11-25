@@ -9,6 +9,10 @@ const BOOK = 'quantum-geometry';
 const ID = 'primorial-cascade-vernier-horizon-sandbox';
 const SECTION = 'ch31-s08-primorial-cascade-vernier-resolution-and-finite-register-cap';
 const ANCHOR = 'sec-ch31-primorial-cascade-vernier-resolution-and-finite-register-cap';
+const AXIOM_FREE_BOX = 'thm-ch31-primorial-vernier-omega-axiom-free-anchors';
+const AXIOM_FREE = ['fractran_step_iff', 'fractran_deterministic', 'fractran_stable']
+  .map((name) => 'D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.' + name);
+const ZERO_AXIOM_CLAIM = { zh: /零公理|无公理/, en: /zero[- ]axiom|axiom-free/i };
 const LANGS = ['zh', 'en'];
 const CARDS = [
   { id: 'static-period-composite-refutation', scene: 'ray', rail: 8 },
@@ -175,25 +179,58 @@ const book = resolveBook(BOOK);
 const entry = readRegistry(book).visualizations.find(({ id }) => id === ID);
 const ids = CARDS.map(({ id }) => id);
 const lock = readLock();
+const sorted = (values) => [...values].sort();
+const emptyAxioms = (gid) => lock.declarations[gid]?.kind === 'theorem' && same(lock.declarations[gid]?.axioms, []);
+
+function chapterLean(lang) {
+  const chapter = fs.readFileSync(path.join(book.dir, lang, SECTION + '.md'), 'utf8');
+  const split = (group) => group.split(',').map((gid) => gid.trim());
+  const opening = chapter.match(new RegExp('^:::\\s*\\{\\.theorem #' + AXIOM_FREE_BOX + '\\s[^\\n]*', 'm'))?.[0] ?? '';
+  const axiomFree = /\blean="([^"]+)"/.exec(opening)?.[1];
+  return {
+    all: [...chapter.matchAll(/\blean="([^"]+)"/g)].flatMap(([, group]) => split(group)),
+    axiomFree: axiomFree ? split(axiomFree) : []
+  };
+}
+const chapters = Object.fromEntries(LANGS.map((lang) => [lang, chapterLean(lang)]));
+
 const T = await session();
 const { check } = T;
 await stageFirstChecks(T, BOOK, ID, { solid: true });
 
 const basis = await T.page.locator('#basis [data-lean-gid]').evaluateAll((links) => links.map((link) => link.dataset.leanGid));
+const evidence = await T.page.locator('#basis .lean').evaluateAll((boxes) => boxes
+  .filter((box) => box.querySelector('[data-lean-gid]'))
+  .map((box) => ({
+    gid: box.querySelector('[data-lean-gid]').dataset.leanGid,
+    green: !/(^|\s)(num|model|argued|open|frozen)(\s|$)/.test(box.className)
+      && box.querySelector('.ok')?.textContent.trim() === 'LEAN ✓',
+    zh: box.querySelector('.zh')?.textContent ?? '',
+    en: box.querySelector('.en')?.textContent ?? ''
+  })));
 check('Registration is live in section 31.8 with a theory link in each language',
   entry.code === 'OMEGA//PRIMORIAL' && entry.status === 'live' && entry.chapter === 31 && entry.section === '31.8'
     && entry.theory[0].href === '../zh/' + SECTION + '.html#' + ANCHOR
     && entry.theory[0].href_en === '../en/' + SECTION + '.html#' + ANCHOR);
-check('Both editions, the evidence panel, and the registry cite the same 16 ordered frozen theorems',
+check('The evidence panel cites 16 distinct frozen theorems in registry order, each in a green LEAN box',
   new Set(basis).size === 16 && same(basis, entry.lean.map(({ gid }) => gid))
     && basis.every((gid) => lock.declarations[gid]?.kind === 'theorem')
-    && LANGS.every((lang) => {
-      const chapter = fs.readFileSync(path.join(book.dir, lang, SECTION + '.md'), 'utf8');
-      const gids = [...chapter.matchAll(/\blean="([^"]+)"/g)].flatMap(([, group]) => group.split(','));
-      return same(gids, basis);
-    }));
-check('The first eight frozen theorems declare an empty axiom list',
-  basis.slice(0, 8).every((gid) => gid.includes('/AURICOmega/') && same(lock.declarations[gid]?.axioms, [])));
+    && same(evidence.map(({ gid }) => gid), basis) && evidence.every(({ green }) => green),
+  JSON.stringify(evidence.filter(({ green }) => !green).map(({ gid }) => gid)));
+check('Both editions cite the same 16 frozen theorems as the evidence panel, in any book order',
+  LANGS.every((lang) => chapters[lang].all.length === 16 && same(sorted(chapters[lang].all), sorted(basis))),
+  JSON.stringify(LANGS.map((lang) => chapters[lang].all.length)));
+check('Both editions cite exactly the three FRACTRAN theorems in the axiom-free box, each with an empty axiom list at the pin',
+  LANGS.every((lang) => same(chapters[lang].axiomFree, AXIOM_FREE))
+    && AXIOM_FREE.every((gid) => basis.includes(gid) && emptyAxioms(gid)),
+  JSON.stringify({ ...Object.fromEntries(LANGS.map((lang) => [lang, chapters[lang].axiomFree])),
+    axioms: AXIOM_FREE.map((gid) => lock.declarations[gid]?.axioms) }));
+for (const lang of LANGS) {
+  const claims = evidence.filter((box) => ZERO_AXIOM_CLAIM[lang].test(box[lang])).map(({ gid }) => gid);
+  check('In ' + lang + ' only the evidence of the axiom-free box claims zero axioms, and the pin lists none for each claim',
+    same(sorted(claims), sorted(AXIOM_FREE)) && claims.every(emptyAxioms),
+    JSON.stringify(claims.map((gid) => [gid.split('.').pop(), lock.declarations[gid]?.axioms])));
+}
 check('English registry fields use English text and contain no Han or fullwidth punctuation',
   [entry.title_en, entry.summary_en, ...entry.tags_en, entry.theory[0].label_en, ...ids.map((id) => entry.preset_titles[id].en)]
     .every((value) => /[A-Za-z]/.test(value) && !CJK.test(value)));

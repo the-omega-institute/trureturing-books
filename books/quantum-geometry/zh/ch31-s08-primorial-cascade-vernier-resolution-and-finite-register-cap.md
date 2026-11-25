@@ -4,7 +4,7 @@
 
 在 [§31.7](ch31-s07-prime-register-riemann-zero-duality-and-dual-uniformity.md) 揭开局域素数硬件寄存器与全局黎曼零点暗态本征模的双内禀均匀律之后，三道直击算术本体与计算硬件自洽性的追问接踵而至：**第一，既然素数在内禀标尺上均匀分布，能否仅靠少数基础素数围出一个固定不变的静态周期 $T$ 来持续吐出素数？若不能，宇宙如何在不预设 $\aleph_0$ 条无穷先验规则的前提下，仅凭单一或有限颗种子素数确定性地自举生成素数谱？第二，倘若观察者原生语言 $\Omega\text{-FRACTRAN}$ 预设了一排预先铺向无穷远的 $\aleph_0$ 座空白素数寄存器，康托尔的实无穷岂非从硬件后门重新溜回了无无穷有理数学 $\mathbf{Math}_\Omega$（[§32.7](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md)）？第三，在有限时间与有限绕数预算下，拥有更多素数寄存器 $K$ 究竟赋予观察者怎样的几何分辨率与感知维度优势，而在寄存器总数严格封顶 $K \le K_{\max}$ 时，观察者又如何免于庞加莱回归死循环？**
 
-本节将这三道追问一次性彻底贯通：**以两行纯整数算术证伪一切固定单周期 $T$，确立素数阶乘级联筛轮 $M_k = P_k\#$ 在平方视界 $(1, p_{k+1}^2)$ 内的 $100\%$ 零误差自举律；以乘法单位元 $q^0 = \mathbf{1}$ 零槽位属性、严格有限支撑阿代尔闭合与自定停机容差 $\varepsilon_{\mathrm{self}} = \frac{1}{M_\Omega}$ 的按需成核防火墙清退一切实无穷机架（锁死 $K \le K_{\max}$）；并以狄利克雷—贝克有理游标卡尺律、零串扰并行自由度、中国剩余定理反混叠视界与有限格拉姆记忆窗遗忘刷新，完成第三十一章算术—几何大厦的压轴收官**（认识论严格分层：首座定理盒 [@thm-ch31-primorial-vernier-omega-axiom-free-anchors] 的八条 `OmegaInit + OmegaMath` 冻结声明佩戴蓝色 `LEAN ✓ · 无公理` 徽章，次座定理盒 [@thm-ch31-primorial-crt-adelic-anti-deadlock-anchors] 的八条算术、同余、阿代尔与自动机声明佩戴绿色 `LEAN ✓` 徽章；明斯基双计数器、贝克对数线性型、斯特默平滑相邻整数与中国剩余数系归入 [@rem-ch31-minsky-baker-stormer-crt-literature] 的 `文献结果`；观察者按需成核防火墙、高阶素数暗态透明性与有限记忆非回归诠释标 `MODEL`；大整数精确核验归入 [@ex-ch31-primorial-vernier-and-horizon-audit] 的 `NUM`）。
+本节将这三道追问一次性彻底贯通：**以两行纯整数算术证伪一切固定单周期 $T$，确立素数阶乘级联筛轮 $M_k = P_k\#$ 在平方视界 $(1, p_{k+1}^2)$ 内的 $100\%$ 零误差自举律；以乘法单位元 $q^0 = \mathbf{1}$ 零槽位属性、严格有限支撑阿代尔闭合与自定停机容差 $\varepsilon_{\mathrm{self}} = \frac{1}{M_\Omega}$ 的按需成核防火墙清退一切实无穷机架（锁死 $K \le K_{\max}$）；并以狄利克雷—贝克有理游标卡尺律、零串扰并行自由度、中国剩余定理反混叠视界与有限格拉姆记忆窗遗忘刷新，完成第三十一章算术—几何大厦的压轴收官**（认识论严格分层：[@thm-ch31-primorial-vernier-omega-axiom-free-anchors] 的三条 FRACTRAN 定理不依赖公理。另两组定理见 [@thm-ch31-primorial-vernier-omega-arithmetic-anchors] 与 [@thm-ch31-primorial-crt-adelic-anti-deadlock-anchors]；明斯基双计数器、贝克对数线性型、斯特默平滑相邻整数与中国剩余数系归入 [@rem-ch31-minsky-baker-stormer-crt-literature] 的 `文献结果`；观察者按需成核防火墙、高阶素数暗态透明性与有限记忆非回归诠释标 `MODEL`；大整数精确核验归入 [@ex-ch31-primorial-vernier-and-horizon-audit] 的 `NUM`）。
 
 ---
 
@@ -41,7 +41,7 @@ $$
    M_1 \;=\; 2, \qquad p_{k+1} \;=\; \min\bigl\{n > 1 \;\big|\; \gcd(n, M_k) = 1\bigr\}, \qquad M_{k+1} \;=\; M_k \cdot p_{k+1}.
    $$
 
-   这里须严守与零公理内核定理 [`euclid_prime_escape`](lean:D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.euclid_prime_escape)（`LEAN ✓ · 无公理`）的数学区分：后者对任意满足 $0 < s.\mathrm{prod}$ 的有限自然数表 $s$ 构造性证明 $\exists p,\; \operatorname{IsPrime}(p) \land p \mid (s.\mathrm{prod} + 1) \land p \notin s$，无需假设 $s$ 为连续前缀，但所获新素数可能跳过中间素数（如 $2\cdot 3 + 1 = 7$ 跳过 $5$，$30{,}030 + 1 = 59 \times 509$ 给出最小素因子 $59$）；而上式在 $M_k = P_k\#$ 前缀不变式下逐颗不漏地捕获 $p_{k+1}$。
+   这里须严守与 Lean 定理 [`euclid_prime_escape`](lean:D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.euclid_prime_escape)（`LEAN ✓`）的数学区分：后者对任意满足 $0 < s.\mathrm{prod}$ 的有限自然数表 $s$ 构造性证明 $\exists p,\; \operatorname{IsPrime}(p) \land p \mid (s.\mathrm{prod} + 1) \land p \notin s$，无需假设 $s$ 为连续前缀，但所获新素数可能跳过中间素数（如 $2\cdot 3 + 1 = 7$ 跳过 $5$，$30{,}030 + 1 = 59 \times 509$ 给出最小素因子 $59$）；而上式在 $M_k = P_k\#$ 前缀不变式下逐颗不漏地捕获 $p_{k+1}$。
 
    逐级核验可见其惊人的晶体纯度：$B_1 = \{2\}$（$M_1 = 2$）在 $(1, 9)$ 内零误差吐出 $3$ 颗奇素数 $\{3, 5, 7\}$（首漏 $9 = 3^2$）；$B_2 = \{2, 3\}$（$M_2 = 6$）在 $(1, 25)$ 内零误差吐出 $7$ 颗素数 $\{5 \dots 23\}$（首漏 $25 = 5^2$）；$B_3 = \{2, 3, 5\}$（$M_3 = 30$）在 $(1, 49)$ 内零误差吐出 $12$ 颗素数 $\{7 \dots 47\}$（首漏 $49 = 7^2$）；$B_4 = \{2, 3, 5, 7\}$（$M_4 = 210$）在 $(1, 121)$ 内一口气零误差结晶出 $11 \dots 113$ 共 $26$ 颗素数（首漏 $121 = 11^2$）！
 2. **路径 B——固定 $10$ 素数动态绕数状态机（`PRIMEGAME`，[§38.14](ch38-s14-omega-fractran-observer-rational-isa.md)）**：
@@ -144,9 +144,9 @@ $$
 
 ---
 
-## 31.8.4 形式化定义、双定理对账（含八项零公理锚点）与定量核验总账 {#sec-ch31-8-4}
+## 31.8.4 形式定义、定理与定量核验 {#sec-ch31-8-4}
 
-我们将级联素数阶乘自举、有理游标分辨率与 $\varepsilon_{\mathrm{self}}$ 有限寄存器视界封顶模型、四范式总对照表、八项零公理定理与八项通用冻结定理、经典文献边界及定量总账正式收束如下：
+我们将级联素数阶乘自举、有理游标分辨率与 $\varepsilon_{\mathrm{self}}$ 有限寄存器视界封顶模型、四范式总对照表、冻结定理、经典文献边界及定量总账正式收束如下：
 
 ::: {.definition #def-ch31-primorial-vernier-and-finite-register-cap title="级联素数阶乘自举、有理游标卡尺分辨率与 ε_self 有限寄存器视界封顶系统（MODEL）"}
 在无无穷有理数学 $\mathbf{Math}_\Omega$、射影三元球面 $\mathbb{T}_3(\mathbb{Q})$ 与有理停机容差 $\varepsilon_{\mathrm{self}} = \frac{1}{M_\Omega}$（$M_\Omega \in \mathbb{N}_{\ge 2}$）下，定义**有限视界素数寄存器级联与游标分辨率系统**（本体架构标 `MODEL`，算术量定义精确）如下：
@@ -164,18 +164,26 @@ $$
 | **并行性与串扰** | 单通道同余推进 | 单读写头串行往返扫描 | 指数幂塔打包严重串扰 | **$K$ 道正交赋值零串扰并行，引理素数 $1$ 拍直达** |
 | **防死循环机制** | 有限拍精确重播，$\Delta\mathcal{I}_{\mathrm{Schur}}=0$ | 靠外部无限空白纸带逃逸 | 靠无界指数高度 $H \to \infty$ 逃逸 | **$(2H+1)^{K_{\max}} \gg M_{\mathrm{mem}}$ 格拉姆滑窗遗忘保新** |
 
-以下首座定理盒收录的八条 `OmegaInit + OmegaMath` 冻结声明在 `trureturing@dev` 中传递公理闭包严格为空（`axioms = []`），显式佩戴蓝色 **`无公理`** 验证徽章：
+下列三条 FRACTRAN 声明的传递公理列表均为空。
 
-::: {.theorem #thm-ch31-primorial-vernier-omega-axiom-free-anchors title="零公理贝祖恒等式、欧几里得素数盲区逃逸、有限连分数互素与行列式及 FRACTRAN 精确步进、确定性、保正与停机幂等定理组" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.bezout_identity,D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.euclid_prime_escape,D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_coprime,D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_determinant,D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_step_iff,D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_deterministic,D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_positive,D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_stable"}
-在 `OmegaInit` 与 `OmegaMath` 零公理整数算术、有限连分数与 `Fractran` 可计算模块中，以下八项无公理命题严格成立：
-
-1. **零公理贝祖整数线性组合与欧几里得素数盲区逃逸**（[`bezout_identity`](lean:D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.bezout_identity)、[`euclid_prime_escape`](lean:D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.euclid_prime_escape)）：对任意自然数 $a, b \in \mathbb{N}$，存在整数 $x, y \in \mathbb{Z}$ 满足 $ax + by = \gcd(a, b)$；对任意满足乘积为正 $0 < s.\mathrm{prod}$ 的有限自然数列表 $s : \mathrm{NatList}$，存在自然数 $p \in \mathbb{N}$ 同时满足 $\operatorname{IsPrime}(p)$、$p \mid (s.\mathrm{prod} + 1)$ 且 $p \notin s$；
-2. **有限连分数渐近分数自动互素与欧拉—沃利斯交错行列式**（[`cf_convergent_coprime`](lean:D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_coprime)、[`cf_convergent_determinant`](lean:D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_determinant)）：对任意系数列表 $\mathrm{coeffs} : \mathrm{NatList}$，其当前与前一步渐近分数对 $\operatorname{convergentPair}(\mathrm{coeffs})$ 的行列式恒等于交错符号 $\operatorname{alternatingSign}(\operatorname{coefficientCount}\,\mathrm{coeffs}) \in \{\pm 1\}$；凡同时整除当前渐近分数分子与分母的自然数 $d \in \mathbb{N}$ 必满足 $d = 1$；
-3. **FRACTRAN 可执行步进充要等价、单拍确定性、正态保持与停机幂等稳定律**（[`fractran_step_iff`](lean:D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_step_iff)、[`fractran_deterministic`](lean:D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_deterministic)、[`fractran_positive`](lean:D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_positive)、[`fractran_stable`](lean:D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_stable)）：对任意有限程序 $\mathrm{prog} : \mathrm{Fractran.Program}$ 与自然数 $n, m \in \mathbb{N}$，可执行求值 $\operatorname{Fractran.step}(\mathrm{prog}, n) = \operatorname{some}\,m \iff \operatorname{Fractran.Step}(\mathrm{prog}, n, m)$；若 $\operatorname{Fractran.Step}(\mathrm{prog}, n, m_1)$ 与 $\operatorname{Fractran.Step}(\mathrm{prog}, n, m_2)$ 同时成立则 $m_1 = m_2$；对任意步数 $k \in \mathbb{N}$ 与正初态 $0 < n$ 恒有 $0 < \operatorname{Fractran.run}(\mathrm{prog}, k, n)$；且一旦 $\operatorname{Fractran.Halts}\bigl(\mathrm{prog}, \operatorname{Fractran.run}(\mathrm{prog}, k, n)\bigr)$ 成立，对一切附加步数 $\mathrm{extra} \in \mathbb{N}$ 恒有 $\operatorname{Fractran.run}(\mathrm{prog}, k + \mathrm{extra}, n) = \operatorname{Fractran.run}(\mathrm{prog}, k, n)$。
+::: {.theorem #thm-ch31-primorial-vernier-omega-axiom-free-anchors title="FRACTRAN 的精确步进、确定性与停机稳定性" lean="D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_step_iff,D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_deterministic,D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_stable"}
+**FRACTRAN 可执行步进充要等价、确定性与停机稳定性**（[`fractran_step_iff`](lean:D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_step_iff)、[`fractran_deterministic`](lean:D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_deterministic)、[`fractran_stable`](lean:D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_stable)）：对任意有限程序 $\mathrm{prog} : \mathrm{Fractran.Program}$ 与自然数 $n, m \in \mathbb{N}$，可执行求值 $\operatorname{Fractran.step}(\mathrm{prog}, n) = \operatorname{some}\,m \iff \operatorname{Fractran.Step}(\mathrm{prog}, n, m)$；若 $\operatorname{Fractran.Step}(\mathrm{prog}, n, m_1)$ 与 $\operatorname{Fractran.Step}(\mathrm{prog}, n, m_2)$ 同时成立则 $m_1 = m_2$；一旦 $\operatorname{Fractran.Halts}\bigl(\mathrm{prog}, \operatorname{Fractran.run}(\mathrm{prog}, k, n)\bigr)$ 成立，对一切附加步数 $\mathrm{extra} \in \mathbb{N}$ 恒有 $\operatorname{Fractran.run}(\mathrm{prog}, k + \mathrm{extra}, n) = \operatorname{Fractran.run}(\mathrm{prog}, k, n)$。
 :::
 
 ::: {.proof #prf-ch31-primorial-vernier-omega-axiom-free-anchors}
-第 1 组由纯递归扩展欧几里得算法 `extendedGcdAux` 的余数下降归纳给出贝祖系数，并在有限区间 $[2, s.\mathrm{prod}+1]$ 内执行有界最小真因子搜索，结合 $p \in s \implies p \mid s.\mathrm{prod}$ 与 $p \mid (s.\mathrm{prod}+1)$ 推出 $p \mid 1$ 矛盾；第 2 组对列表递推展开二阶矩阵行列式反号步并由相邻渐近分数行列式 $\pm 1$ 直接迫使公因子 $d \mid 1$；第 3 组对规则列表与无余数整除器 `exactQuotient` 归纳核验首条匹配唯一步进、正分子分母保正性以及停机态下 `advance` 恒等不动。完整证明由 Lean 内核检查。
+对规则列表归纳，并通过无余数整除器 `exactQuotient` 核对求值与步进关系选中同一条首匹配规则。停机后 `advance` 保持原状态，再对附加步数归纳即得稳定性。完整证明由 Lean 内核检查。
+:::
+
+整数算术、连分数与正态保持的五条声明依赖命题外延性 `propext`。
+
+::: {.theorem #thm-ch31-primorial-vernier-omega-arithmetic-anchors title="贝祖恒等式、素数逃逸、连分数与 FRACTRAN 保正性" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.bezout_identity,D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.euclid_prime_escape,D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_coprime,D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_determinant,D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_positive"}
+1. **贝祖整数线性组合与欧几里得素数盲区逃逸**（[`bezout_identity`](lean:D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.bezout_identity)、[`euclid_prime_escape`](lean:D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.euclid_prime_escape)）：对任意自然数 $a, b \in \mathbb{N}$，存在整数 $x, y \in \mathbb{Z}$ 满足 $ax + by = \gcd(a, b)$；对任意满足乘积为正 $0 < s.\mathrm{prod}$ 的有限自然数列表 $s : \mathrm{NatList}$，存在自然数 $p \in \mathbb{N}$ 同时满足 $\operatorname{IsPrime}(p)$、$p \mid (s.\mathrm{prod} + 1)$ 且 $p \notin s$；
+2. **有限连分数渐近分数自动互素与欧拉—沃利斯交错行列式**（[`cf_convergent_coprime`](lean:D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_coprime)、[`cf_convergent_determinant`](lean:D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_determinant)）：对任意系数列表 $\mathrm{coeffs} : \mathrm{NatList}$，其当前与前一步渐近分数对 $\operatorname{convergentPair}(\mathrm{coeffs})$ 的行列式恒等于交错符号 $\operatorname{alternatingSign}(\operatorname{coefficientCount}\,\mathrm{coeffs}) \in \{\pm 1\}$；凡同时整除当前渐近分数分子与分母的自然数 $d \in \mathbb{N}$ 必满足 $d = 1$；
+3. **FRACTRAN 保正性**（[`fractran_positive`](lean:D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_positive)）：对任意有限程序 $\mathrm{prog} : \mathrm{Fractran.Program}$ 与自然数 $n$，对任意步数 $k \in \mathbb{N}$ 与正初态 $0 < n$ 恒有 $0 < \operatorname{Fractran.run}(\mathrm{prog}, k, n)$。
+:::
+
+::: {.proof #prf-ch31-primorial-vernier-omega-arithmetic-anchors}
+扩展欧几里得算法按余数递降给出贝祖系数。对列表乘积加一取最小素因子，若它也在原表内便会整除 $1$。连分数递推的行列式每步反号，任何公共因子都整除该行列式。FRACTRAN 的保正性来自正分数规则下的精确步进，再对步数归纳。完整证明由 Lean 内核检查。
 :::
 
 ::: {.theorem #thm-ch31-primorial-crt-adelic-anti-deadlock-anchors title="无平方因子欧拉乘积、中国剩余双射与素数阶乘反混叠充要阈值、有理阿代尔有限乘积、带号素数账本同构、素数对数独立与精确素除无有限自动机定理组" lean="D5/S3/PrimeGaps/SieveCoefficients.totient_eq_prod_sub_one_of_squarefree,D5/S3/Arith/ChineseRemainder.chinese_remainder_bijective,D5/S3/Arith/Coding/HorizontalCompletenessDepth.residue_reading_injOn_iff_primorial_gt,D5/S3/Arith/Coding/PrimorialWitnessBound.primorial_witness_bound,D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula,D5/S3/Factorization/PositiveRationalGroup.signed_prime_ledger_equiv_positive_rationals,D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence,D5/S3/Factorization/Automata/ExactPrimeDivisionNoDFAO.no_finite_dfao_for_exact_prime_division"}
@@ -248,5 +256,5 @@ $$
 既然素数寄存器、零点暗态与有限有理游标共同指向那只拒绝外置特权实轴 $\mathbf{1}$ 与平直坐标卡的紧致三维球面 $\mathbb{T}_3 \cong S^3(1)$，现在让我们正式推开下一章——[第三十二章 不可表达的三元数与三维概念场封顶](ch32-inexpressible-ternions-and-three-dimensional-field.md)——的大门，直探万数归弧的原生三元数本源！
 
 ::: {.viz src="primorial-cascade-vernier-horizon-sandbox" height="620"}
-完整实验室：在“级联素数阶乘与有限视界透镜”与“静态单周期与图灵无限纸带对照透镜（MODEL）”双透镜间自由切换，依次巡览两行算术证伪固定单周期（`static-period-composite-refutation`）、单种子级联筛轮与平方视界（`primorial-wheel-square-horizon`）、零槽位单位元与 $\varepsilon_{\mathrm{self}}$ 视界封顶（`jit-allocator-epsilon-horizon-cap`）、有理游标卡尺与球面星壳加密（`rational-vernier-caliper-sphere`）、时空折衷串行幂塔对单拍引理捷径（`minsky-tower-vs-lemma-shortcut`）以及同余解混叠、高素数暗态与有限记忆防死锁（`crt-dark-sector-and-memory-refresh`）六张实验卡，支持在右侧旋钮栏切换固定周期 `T` 与起点 `r`、筛轮基础素数个数 `k`、视界 `M_Ω`、有限支撑账本有理数 `r`、游标 `K` 与指数盒 `H`、串行程序（`36 → 625` 或 `PRIMEGAME 2 → 2⁵`）及同余 `K`，并在底部条带小图中实时追踪余数轨素数与合数、平方视界新素数、`K_max` 随 `M_Ω` 的台阶、游标步长随 `K` 的缩小、串行轨迹 `log N` 与模数 `P_K#` 越过 `30`。首座定理盒八条零公理 `LEAN ✓` 声明与次座定理盒八条通用 `LEAN ✓` 声明，连同 `ARGUED` 明斯基—康威—斯特默—贝克文献与手工推导、`MODEL` 本书读法与画法约定、`NUM` 大整数精确现算对账及相邻章节红色 `OPEN` 谱前沿在依据栏与理论接口抽屉中严格分层列出。
+完整实验室：在“级联素数阶乘与有限视界透镜”与“静态单周期与图灵无限纸带对照透镜（MODEL）”双透镜间自由切换，依次巡览两行算术证伪固定单周期（`static-period-composite-refutation`）、单种子级联筛轮与平方视界（`primorial-wheel-square-horizon`）、零槽位单位元与 $\varepsilon_{\mathrm{self}}$ 视界封顶（`jit-allocator-epsilon-horizon-cap`）、有理游标卡尺与球面星壳加密（`rational-vernier-caliper-sphere`）、时空折衷串行幂塔对单拍引理捷径（`minsky-tower-vs-lemma-shortcut`）以及同余解混叠、高素数暗态与有限记忆防死锁（`crt-dark-sector-and-memory-refresh`）六张实验卡，支持在右侧旋钮栏切换固定周期 `T` 与起点 `r`、筛轮基础素数个数 `k`、视界 `M_Ω`、有限支撑账本有理数 `r`、游标 `K` 与指数盒 `H`、串行程序（`36 → 625` 或 `PRIMEGAME 2 → 2⁵`）及同余 `K`，并在底部条带小图中实时追踪余数轨素数与合数、平方视界新素数、`K_max` 随 `M_Ω` 的台阶、游标步长随 `K` 的缩小、串行轨迹 `log N` 与模数 `P_K#` 越过 `30`。本节的冻结定理，连同 `ARGUED` 明斯基—康威—斯特默—贝克文献与手工推导、`MODEL` 本书读法与画法约定、`NUM` 大整数精确现算对账及相邻章节红色 `OPEN` 谱前沿在依据栏与理论接口抽屉中严格分层列出。
 :::
