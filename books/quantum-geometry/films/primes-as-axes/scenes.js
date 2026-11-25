@@ -379,9 +379,9 @@ SCENES.apart = S => {
     paLean(250, 760, PA_LEAN.prime_log_indep, la, { size: 18 });
   }
   /* line 3: the aphorism */
-  const sa = Q(S, 3, 'no exchange rate', 0.5);
-  stamp('NO EXCHANGE RATE', 1290, 455, sa, C.lean, 38, -0.05);
-  txt('素数之间，没有汇率', 1290, 522, { size: 30, fam: F.zh, w: 900, align: 'center', c: C.white, a: a * sa });
+  const sa = at(S, 3, 0.5, 0.2);
+  stamp('NO EXCHANGE RATE', 1100, 485, sa, C.lean, 34, -0.04);
+  txt('素数之间，没有汇率', 1460, 500, { size: 30, fam: F.zh, w: 900, c: C.white, a: a * sa });
 };
 
 /* ======================================================================= */
