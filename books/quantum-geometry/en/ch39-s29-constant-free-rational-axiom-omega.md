@@ -228,6 +228,16 @@ At $(u,v)=(1,1)$ we have $t=1/6$. The common determinant is $20/27$. A four-coor
 
 The second form reduces to squared lengths $(1,1,5,3)$. In six coordinates align the first three directions with $e_1$, $e_2$ and $2e_3+e_4$. The last direction would give $5x^2+y^2+z^2=3$. After clearing denominators, an odd denominator gives a contradiction modulo $8$. An even denominator forces all three numerators even modulo $4$, so descent gives the contradiction. Seven coordinates suffice using two unit axes, $2e_3+e_4$ and $e_5+e_6+e_7$. The two varying eigenvalues satisfy $1+4t=5u^2/3$ and $1-2t=2v^2/3$, so rational rescaling carries both thresholds from the base point. At $u=0$, the common rank drops to three.
 
+A two-coordinate gap also occurs with the paired-edge matrix requiring more coordinates.
+
+::: {.theorem #thm-ch39-cospectral-seven-five title="A conic with seven and five rational coordinates" lean="D5/S3/Quantum/AURICOmega/RationalGramCospectral.seven_five_on_conic"}
+Let rational $u,v$ satisfy $u^2+14v^2=15$. For $t=(u^2/5-1)/4$, the first matrix is realizable in $\mathbb Q^n$ exactly when $n\ge7$, and the second exactly when $n\ge5$.
+:::
+
+At the base point $(1,1)$, where $t=-1/5$, the paired-edge form has squared lengths $(1,5,70,70)$. In a putative six-coordinate realization align the first three vectors with $e_1$, $2e_2+e_3$ and $3e_4+5e_5+6e_6$. Their orthogonal complement has a rational orthogonal basis with squared lengths $(5,34,2380)$. Rescaling one coefficient reduces the final length equation to $11900x^2+y^2+170z^2=350$. Clearing denominators and reducing twice modulo $7$ yields descent. In seven coordinates the vector $-3e_2+6e_3+5e_7$ completes the frame.
+
+The triangle form has squared lengths $(15,1,70,210)$. Their product is $5\cdot210^2$, which precludes a square rational factor. In the complement of a unit axis, the three orthogonal vectors $(3,2,1,1)$, $(-5,4,2,5)$ and $(-3,8,4,-11)$ give the other squared lengths and attain five coordinates. Along the conic, $1+4t=u^2/5$ and $1-2t=7v^2/5$, with both eigenvalues nonzero. Rational rescaling transports the two minima.
+
 ## 32.5.4 Formal Anchors, Literature Boundaries, and Constant-Free Rational Audit {#sec-ch39-29-4}
 
 We gather the fifteen frozen theorems anchoring the constant-free rational skeleton of $\mathrm{AXIOM}\text{-}\Omega$, the integer-coefficient Chebyshev doubling equivalence, and the three flat/discrete residual bounds into the following theorem box:
