@@ -329,7 +329,7 @@ SCENES.ball = S => {
   const fi = u < t42 ? 0 : u < t162 ? 1 : 2, f = PR_FREQ[fi], g = PR_GEO[f];
   const flash = Math.max(0, 1 - Math.abs(u - (fi === 1 ? t42 : fi === 2 ? t162 : -9)) / 0.35);
   const V = prView(BL_V.cx, BL_V.cy, BL_V.R, BL_V.yaw + 0.012 * u, BL_V.el);
-  const ga = Q(S, 1, 'centre of a face', 0.8);
+  const ga = Q(S, 1, "face's centre", 0.8);
   const fc = blFace(f), n = g.normals[fc], foot = v3.sc(n, 1 - g.gaps[fc]);
   const sh = prShot('ball', V, [300, 200, 680, 680]);
   sh.begin();
@@ -377,9 +377,9 @@ const PT = { x0: 300, cw: 120, hs: 300, yA: 470, yB: 760 };
 SCENES.pointer = S => {
   const u = S.u, a = prFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [2, 'like two stencils', 'argued'], [2, 'their overlap', 'computed']]);
+  badgeQ(S, [[0, null, 'computed'], [2, 'like two stencils', 'argued'], [2, 'that overlap', 'computed']]);
   const shift = ease(Q(S, 1, 'slide the pointer', 1.0));
-  const lay = ease(Q(S, 2, 'Lay the copy', 1.2));
+  const lay = ease(Q(S, 2, 'Stack the copy', 1.2));
   const ca = PR_C.length;
   /* cell indices under the pointer */
   for (let k = 0; k <= ca; k++) txt(`${k}`, PT.x0 + (k + 0.5) * PT.cw, PT.yA + 34, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a: a * 0.8 });
@@ -397,18 +397,18 @@ SCENES.pointer = S => {
     if (shift > 0.02 && lay < 0.98) { arrow(PT.x0 + 30, yc + 40, PT.x0 + 30 + PT.cw * shift, yc + 40, C.mag, ba * (1 - lay), 2.5); txt('shift 1 · 平移一格', PT.x0 + 160, yc + 48, { size: 20, fam: F.zh, w: 700, c: C.mag, a: ba * (1 - lay) }); }
   }
   /* line 2: products cell by cell, and their sum */
-  const pa = a * Q(S, 2, 'their overlap', 0.6);
+  const pa = a * Q(S, 2, 'that overlap', 0.6);
   if (lay > 0.98) {
     txt('two stencils · 两张镂空板（比方）', 1220, 196, { size: 22, fam: F.zh, w: 700, c: C.argued, a: a * clamp((lay - 0.98) * 50) * (1 - at(S, 3, 0.6)) });
     const prod = [2, 6, 6, 2];
     prod.forEach((v, i) => txt(`${v}`, PT.x0 + (i + 1.5) * PT.cw, PT.yA + 84, { size: 30, fam: F.mono, w: 700, align: 'center', c: C.white, a: pa }));
-    txt('copy q = 1 · 副本', PT.x0 + 6 * PT.cw + 20, PT.yA - 20, { size: 20, fam: F.zh, w: 700, c: C.mag, a: pa });
+    txt('copy q = 1 · 副本', PT.x0 + 5 * PT.cw + 4, PT.yA - 100, { size: 20, fam: F.zh, w: 700, c: C.mag, a: pa });
     prRich([['γ(1) = (2 + 6 + 6 + 2) / 19 = 16/19 = ', C.white], [(16 / 19).toFixed(4), C.now]], PT.x0, PT.yA + 160, { size: 32, a: pa });
     txt('overlap · 重叠量', PT.x0, PT.yA + 204, { size: 20, fam: F.zh, w: 700, c: C.dim, a: pa });
   }
   /* right: what the overlap does */
-  panel(1200, 240, 600, 470, a * Q(S, 2, 'their overlap', 0.6), C.cyan, 'OVERLAP · 重叠');
-  const ga = a * Q(S, 2, 'their overlap', 0.6);
+  panel(1200, 240, 600, 470, a * Q(S, 2, 'that overlap', 0.6), C.cyan, 'OVERLAP · 重叠');
+  const ga = a * Q(S, 2, 'that overlap', 0.6);
   if (ga > 0.003) {
     const gx0 = 1240, gx1 = 1760, gy = 360, g = 16 / 19;
     line(gx0, gy, gx1, gy, C.dim, ga, 2);
@@ -420,7 +420,7 @@ SCENES.pointer = S => {
     if (la > 0.003) {
       txt('γ = 1 : records identical · 分不开', 1230, 470, { size: 22, fam: F.zh, w: 700, c: C.white, a: la });
       txt('interference survives · 干涉原样保留', 1230, 508, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: la });
-      const da = a * Q(S, 3, 'Below one', 0.6);
+      const da = a * at(S, 3, 0.6, 1.2);
       txt('γ < 1 : coherence × γ · 相干项乘 γ', 1230, 590, { size: 22, fam: F.zh, w: 700, c: C.white, a: da });
       txt('damped · 被压低', 1230, 628, { size: 22, fam: F.zh, w: 700, c: C.mag, a: da });
       line(lerp(gx0, gx1, g), gy + 18, gx1, gy + 18, C.mag, da, 4);
@@ -462,7 +462,7 @@ SCENES.hand = S => {
     const px = kx + kR * A, py = ky - kR * B;
     line(kx, ky, px, py, C.now, ka, 3);
     dot(px, py, 12, 'g', ka);
-    txt(`${Math.round(deg)}°`, kx + 40, ky - 14, { size: 22, fam: F.mono, w: 700, c: C.now, a: ka });
+    txt(`${Math.round(deg)}°`, px + 18, py - 18, { size: 22, fam: F.mono, w: 700, c: C.now, a: ka });
     txt('a', kx + kR * 1.15 + 10, ky + 8, { size: 24, fam: F.math, w: 700, c: C.dim, a: ka });
     txt('b', kx - 8, ky - kR * 1.15 - 12, { size: 24, fam: F.math, w: 700, c: C.dim, a: ka });
     txt('knob · 旋钮', kx, ky + 50, { size: 22, fam: F.zh, w: 700, c: C.white, a: ka });
@@ -487,14 +487,14 @@ SCENES.hand = S => {
   /* line 3: triangle and square */
   if (L3 > 0.003) {
     const la = a * L3, ta = a * Q(S, 3, 'One half', 0.6), qa = a * Q(S, 3, 'Three cells', 0.6);
-    prPolygon(1300, 470, 150, 3, ta);
-    txt('2 cells · 两格', 1300, 680, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: ta });
-    txt('cos 60° = 0.5000', 1300, 720, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: ta });
-    prPolygon(1640, 470, 150, 4, qa);
-    txt('3 cells · 三格', 1640, 680, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: qa });
-    txt('cos 45° = 0.7071', 1640, 720, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: qa });
-    txt('best (½, 1/√2, ½)', 1640, 760, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a: qa });
-    txt('centre-to-side · 边心距', 1470, 250, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: la });
+    prPolygon(1270, 470, 140, 3, ta);
+    txt('2 cells · 两格', 1270, 680, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: ta });
+    txt('cos 60° = 0.5000', 1270, 720, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: ta });
+    prPolygon(1580, 470, 140, 4, qa);
+    txt('3 cells · 三格', 1580, 680, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: qa });
+    txt('cos 45° = 0.7071', 1580, 720, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: qa });
+    txt('best (1/2, 1/√2, 1/2)', 1580, 760, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a: qa });
+    txt('centre-to-side · 边心距', 1425, 250,{ size: 22, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: la });
   }
 };
 
@@ -511,7 +511,7 @@ SCENES.ceiling = S => {
   const fa = a * at(S, 3, 0.6);
   txt('ℓ = 1', 120, 230, { size: 26, fam: F.math, w: 700, c: C.white, a: a * lad });
   PR_M.forEach((m, i) => {
-    const ca = a * clamp(lad * 4 - i);
+    const ca = a * (i === 0 ? Math.max(at(S, 0, 0.8, 1.5), clamp(lad * 4)) : clamp(lad * 4 - i));
     if (ca <= 0.003) return;
     prPolygon(CE_X[i], CE_Y, CE_R, m + 2, ca, { w: 2, lw: 3 });
     txt(`${m + 1} cells · 格`, CE_X[i], CE_Y + CE_R + 50, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.white, a: ca });
@@ -539,11 +539,14 @@ SCENES.ceiling = S => {
     panel(1130, 460, 670, 340, ta, C.lean, 'THE PRICE · 代价');
     txt('the record is a quantum channel C:', 1156, 528, { size: 21, fam: F.mono, w: 700, c: C.white, a: ta });
     prRich([['(Cρ)ᵢⱼ = γ(qᵢ − qⱼ) ρᵢⱼ', C.white]], 1156, 572, { size: 26, a: ta });
-    const ra = ta * Q(S, 2, 'for every recovery channel', 0.6);
-    txt('every recovery channel R · 任意恢复信道', 1156, 626, { size: 21, fam: F.zh, w: 700, c: C.white, a: ra });
-    prRich([['sup{T(R(Cρ), ρ) : ρ} ', C.white], ['≥', C.lean], [' ½(1 − cos(π/(m+2)))', C.lean], [' > 0', C.lean]], 1150, 676, { size: 22, a: ra });
-    txt('worst input · 最坏的输入', 1156, 712, { size: 18, fam: F.zh, w: 700, c: C.dim, a: ra });
-    prLean(1156, 768, PR_LEAN.finite_record_cosine_obstruction, ta, { size: 17 });
+    const la2 = ta * Q(S, 2, 'two branch labels differ', 0.6);
+    prRich([['two labels: qᵢ − qⱼ = ℓ ≠ 0', C.white]], 1156, 616, { size: 22, a: la2 });
+    txt('两个分支标签相差 ℓ ≠ 0', 1530, 616, { size: 18, fam: F.zh, w: 700, c: C.white, a: la2 });
+    const ra = ta * Q(S, 2, 'every recovery channel', 0.6);
+    txt('every recovery channel R · 任意恢复信道', 1156, 658, { size: 21, fam: F.zh, w: 700, c: C.white, a: ra });
+    prRich([['sup{T(R(Cρ), ρ) : ρ} ', C.white], ['≥', C.lean], [' ½(1 − cos(π/(m+2)))', C.lean], [' > 0', C.lean]], 1150, 702, { size: 22, a: ra });
+    txt('worst input · 最坏的输入', 1156, 734, { size: 18, fam: F.zh, w: 700, c: C.dim, a: ra });
+    prLean(1156, 776, PR_LEAN.finite_record_cosine_obstruction, ta, { size: 17 });
   }
   stamp('NEVER ZERO', 600, 800, Q(S, 3, 'never zero', 0.5) * (1 - at(S, 3, 0.4, 6)), C.lean, 30, -0.05);
 };
@@ -578,12 +581,13 @@ SCENES.tail = S => {
   /* right top: the lemma */
   const la = a * Q(S, 1, 'Lean checks', 0.6);
   if (la > 0.003) {
-    panel(820, 170, 980, 150, la, C.lean, 'ANY COMPLETE NORMED ALGEBRA · 任意完备赋范代数   ‖z‖ ≤ r');
+    panel(820, 170, 980, 150, la, C.lean, 'ANY COMPLETE NORMED ALGEBRA, ‖1‖ = 1 · 任意完备赋范代数   ‖z‖ ≤ r');
     prRich([['‖exp z − Σₖ₌₀ⁿ⁻¹ zᵏ/k!‖ ', C.white], ['≤', C.lean], ['  rⁿ / n! · eʳ', C.lean]], 846, 248, { size: 32, a: la });
     prLean(846, 296, PR_LEAN.exp_tail_le, la, { size: 17 });
   }
   /* right: the log chart */
-  const ga = a * at(S, 2, 0.6);
+  /* the empty chart (axes) from the first line; its bars from line 2 */
+  const ga = a * at(S, 0, 0.8, 1.2);
   if (ga > 0.003) {
     const { x0, x1, y0, y1, lo, hi } = TL_C, Y = v => y0 + (y1 - y0) * (Math.log10(v) - lo) / (hi - lo);
     line(x0, y0, x1, y0, C.dim, ga, 1.5); line(x0, y0, x0, y1, C.dim, ga, 1.5);
@@ -603,7 +607,7 @@ SCENES.tail = S => {
       }
       txt(`n = ${n}`, cx, y0 + 34, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.white, a: ba });
     });
-    txt('ceiling · 上界', x1 - 230, y1 + 40, { size: 20, fam: F.zh, w: 700, c: C.cyan, a: ga });
+    txt('ceiling · 上界', x1 - 230, y1 + 40, { size: 20, fam: F.zh, w: 700, c: C.cyan, a: ga * at(S, 2, 0.6) });
     txt('true error · 真实误差', x1 - 230, y1 + 72, { size: 20, fam: F.zh, w: 700, c: C.mag, a: ga * Q(S, 3, 'The true errors', 0.6) });
   }
 };
@@ -618,7 +622,7 @@ SCENES.edge = S => {
   const rows = [
     { k: 0, col: C.cyan, en: 'the floor is for the worst input', zh: '下界只管最坏的输入', note: 'diagonal states: untouched, error 0 · 对角态原样通过，误差为 0' },
     { k: 1, col: C.cyan, en: 'falling floor ≠ falling error', zh: '下界变小 ≠ 误差变小', note: 'c(0) = 1: γ(ℓ) = 0 for every ℓ ≠ 0, any N · 再长也一样' },
-    { k: 2, col: C.argued, en: 'one way to record; cosine tail ≠ 0', zh: '一种记录方式；小角度上余弦尾巴不为零', note: 'textbook result, not formalized here · 教科书结果，本书未形式化' }
+    { k: 2, col: C.argued, en: 'one way to record; cosine tail ≠ 0', zh: '一种记录方式；两弧度以内余弦尾巴不为零', note: 'textbook result, not formalized here · 教科书结果，本书未形式化' }
   ];
   rows.forEach((rw, i) => {
     const ra = a * at(S, rw.k, 0.6);
@@ -650,15 +654,24 @@ SCENES.edge = S => {
     const cw = 80, x0 = 140;
     prBars(x0, 470, [1, 0, 0, 0, 0, 0, 0, 0], cw, 200, C.cyan, r1);
     prBars(x0 + cw, 470, [1], cw, 200, C.mag, r1, { cells: false, outline: true });
-    txt('γ(1) = 0', x0, 560, { size: 32, fam: F.math, w: 700, c: C.now, a: r1 });
-    txt('more cells change nothing · 多给格子也不变', x0, 610, { size: 22, fam: F.zh, w: 700, c: C.dim, a: r1 });
+    txt('c(0) = 1:  γ(ℓ) = 0 for every ℓ ≠ 0', x0, 560, { size: 28, fam: F.math, w: 700, c: C.now, a: r1 });
+    /* the floor of the theorem falls with N (ℓ = 1, m = N), the channel and its error do not */
+    [[1, 0], [4, 1], [10, 2]].forEach(([N, i]) => {
+      const y = 620 + i * 40, fa = r1 * at(S, 1, 0.5, 1.0 + 0.6 * i);
+      txt(`N = ${N}`, x0, y, { size: 24, fam: F.mono, w: 700, c: C.white, a: fa });
+      txt(`floor ${prFloor(N).toFixed(4)}`, x0 + 120, y, { size: 24, fam: F.mono, w: 700, c: C.mag, a: fa });
+      txt('channel, error: same', x0 + 360, y, { size: 24, fam: F.mono, w: 700, c: C.cyan, a: fa });
+    });
+    txt('下界在降，信道与误差不变', x0, 760, { size: 22, fam: F.zh, w: 700, c: C.dim, a: r1 * at(S, 1, 0.5, 2.4) });
   }
   if (r2 > 0.003) {
-    prRich([['R₂ₙ(θ) ≠ 0', C.argued]], 200, 470, { size: 40, a: r2 });
-    txt('0 < θ ≤ 2', 200, 420, { size: 26, fam: F.math, w: 700, c: C.argued, a: r2 });
-    txt('literature · 文献结果', 200, 530, { size: 24, fam: F.zh, w: 700, c: C.argued, a: r2 });
-    txt('Lean gives a ceiling, not a floor', 200, 590, { size: 22, fam: F.mono, w: 700, c: C.dim, a: r2 });
-    txt('Lean 给的是上界，不是下界', 200, 626, { size: 22, fam: F.zh, w: 700, c: C.dim, a: r2 });
+    txt('π pulse: U = cos(π/2) − i sin(π/2) σₓ', 160, 380, { size: 26, fam: F.math, w: 700, c: C.white, a: r2 });
+    txt('its cosine part is the cosine series', 160, 420, { size: 20, fam: F.mono, w: 700, c: C.dim, a: r2 });
+    txt('脉冲的余弦部分就是余弦级数', 160, 452, { size: 20, fam: F.zh, w: 700, c: C.dim, a: r2 });
+    txt('cosine tail ≠ 0 for 0 < θ ≤ 2 rad', 160, 520, { size: 28, fam: F.math, w: 700, c: C.argued, a: r2 });
+    txt('literature · 文献结果，两弧度以内', 160, 562, { size: 22, fam: F.zh, w: 700, c: C.argued, a: r2 });
+    txt('for the series tail, Lean gives only a ceiling', 160, 630, { size: 22, fam: F.mono, w: 700, c: C.dim, a: r2 });
+    txt('对级数尾巴，Lean 只给上界', 160, 666, { size: 22, fam: F.zh, w: 700, c: C.dim, a: r2 });
   }
 };
 
