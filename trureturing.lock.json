@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "16dc821e19c688a0618f787e23b331a9ca36e769",
-  "pinned_at": "2026-11-25T15:09:51Z",
+  "commit": "4761719abe7cc3e016beea890f39f448fcd2f2fc",
+  "pinned_at": "2026-11-25T15:53:34Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1225,6 +1225,22 @@
       "statement_id": "sha256:046a0b8984ed57e930343d57f66270c94f40b1aef0ff725c6f0be7a03082bda4",
       "line": 15,
       "signature": "theorem chinese_remainder_bijective (m n : ℕ) (h : Nat.Coprime m n) : Function.Bijective (ZMod.castHom (show m.lcm n ∣ m * n by simp [Nat.lcm_dvd_iff]) (ZMod m × ZMod n))"
+    },
+    "D5/S3/Arith/Coding/HorizontalCompletenessDepth.residue_reading_injOn_iff_primorial_gt": {
+      "module": "D5/S3/Arith/Coding/HorizontalCompletenessDepth",
+      "name": "D5.S3.Arith.Coding.HorizontalCompletenessDepth.residue_reading_injOn_iff_primorial_gt",
+      "kind": "theorem",
+      "statement_id": "sha256:f6d11661bddf55baadfd9a677b625fcced032a5f7fd9978ace35444cd409d140",
+      "line": 48,
+      "signature": "theorem residue_reading_injOn_iff_primorial_gt (N r : Nat) : Set.InjOn (residueReading r) (Set.Icc 0 N) ↔ N < primePrefixProduct r"
+    },
+    "D5/S3/Arith/Coding/PrimorialWitnessBound.primorial_witness_bound": {
+      "module": "D5/S3/Arith/Coding/PrimorialWitnessBound",
+      "name": "D5.S3.Arith.Coding.PrimorialWitnessBound.primorial_witness_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:707a27352889a8de51d5f5a50186e4016eb6d8c7fc5e350e4b289ed124b15601",
+      "line": 40,
+      "signature": "theorem primorial_witness_bound (x y : Int) (hxy : x ≠ y) (r : Nat) (hbound : Int.natAbs (x - y) < primePrefixProduct r) : horizontalWitnessComplexity x y ≤ r"
     },
     "D5/S3/Arith/Congruence/PadicBallFiberCorrespondence.congruenceFiber_eq_closedBall_inter_range": {
       "module": "D5/S3/Arith/Congruence/PadicBallFiberCorrespondence",
@@ -6370,6 +6386,14 @@
       "line": 24,
       "signature": "theorem prime_dvd_dvd_of_dvd_sq_add_sq (q a b : ℕ) (hq : q.Prime) (h3 : q % 4 = 3) (h : q ∣ a ^ 2 + b ^ 2) : q ∣ a ∧ q ∣ b"
     },
+    "D5/S3/PrimeGaps/SieveCoefficients.totient_eq_prod_sub_one_of_squarefree": {
+      "module": "D5/S3/PrimeGaps/SieveCoefficients",
+      "name": "LongGapsBetweenPrimes.totient_eq_prod_sub_one_of_squarefree",
+      "kind": "theorem",
+      "statement_id": "sha256:9fa37eebce0b68b3fda26019fe9865f9fe1ad9bc33feb711dd31d3b6f012b339",
+      "line": 181,
+      "signature": "lemma totient_eq_prod_sub_one_of_squarefree {d : ℕ} (hd : Squarefree d) : d.totient = ∏ p ∈ d.primeFactors, (p - 1)"
+    },
     "D5/S3/PrimeObserver/ProjectiveMemory/GoldenProjectiveMultiplier.projective_defect_modal_step": {
       "module": "D5/S3/PrimeObserver/ProjectiveMemory/GoldenProjectiveMultiplier",
       "name": "D5.S3.PrimeObserver.ProjectiveMemory.GoldenProjectiveMultiplier.projective_defect_modal_step",
@@ -8193,6 +8217,14 @@
       "axioms": [
         "propext"
       ]
+    },
+    "D5/S3/Quantum/AURICOmega/RationalGramOddPrime.realizable_iff": {
+      "module": "D5/S3/Quantum/AURICOmega/RationalGramOddPrime",
+      "name": "D5.S3.Quantum.AURICOmega.RationalGramOddPrime.realizable_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:53d658d377e099f7d10c5931cdb46dc13bd35a39f2d80204cfe716536b53086d",
+      "line": 225,
+      "signature": "theorem realizable_iff (n : ℕ) : (∃ a b c d : Fin n → ℚ, hasUnitGram a b c d) ↔ 7 ≤ n"
     },
     "D5/S3/Quantum/AURICOmega/RationalUnitTripleGram.rationalFiveCoordinateUnitTriple": {
       "module": "D5/S3/Quantum/AURICOmega/RationalUnitTripleGram",
