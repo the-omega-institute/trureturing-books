@@ -6,7 +6,7 @@
   "scenes": [
     {"id": "axes", "name": "ADDRESSES", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
       ["Twelve is two times two times three. Count its twos, threes and fives.", "12 = 2 × 2 × 3。数一数，它有几个 2、几个 3、几个 5。"],
-      ["That count is an address: two, one, zero. Every whole number has exactly one.", "这串计数就是一个地址：(2, 1, 0)。每个正整数都有地址，而且只有一个。"],
+      ["That count is an address: two, one, zero. Every positive whole number has exactly one.","这串计数就是一个地址：(2, 1, 0)。每个正整数都有地址，而且只有一个。"],
       ["We line numbers up on one ruler. Multiplication spreads them out, one direction for every prime.", "我们习惯把数排在一把尺子上；乘法却把它们摊开：每个素数一个方向。"]
     ], "cues": [{"line": 1, "at": 1.6, "kind": "chime"}]},
     {"id": "sum", "name": "SUM EQUALS PRODUCT", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.0, 0.2], "lines": [
@@ -26,7 +26,7 @@
       ["Give s an imaginary part t. Each prime becomes a clock, turning at speed log p.", "给 s 加上虚部 t：每个素数变成一只钟，以角速度 ln p 旋转。"],
       ["Two clocks read one point on a doughnut. As time runs, the point draws a line.", "两只钟的读数合起来，是环面上的一个点；时间一走，它就画出一条线。"],
       ["The two speeds share no common beat, so the line never closes. It winds tighter and tighter.", "两个角速度没有公共节拍，这条线就永不闭合，越缠越密。"],
-      ["Lean checks Kronecker's theorem: if only the trivial whole-number mix of the speeds is whole, samples approach any target.", "Lean 内核检验了克罗内克定理：各速度只有平凡的整系数组合是整数时，按步取样就能逼近任何目标。"],
+      ["Lean checks Kronecker's theorem. Flash a lamp at fixed steps. If no nonzero whole-number mix of the steps makes whole turns, the flashes land as close as you like to any target.", "Lean 内核检验了克罗内克定理：按固定间隔闪光取样；若各步的非零整系数组合都凑不成整圈，闪光读数就能任意接近任何目标。"],
       ["Both clocks at six o'clock exactly? Never. As close as you like? Yes.", "两只钟同时恰好指向六点？永远不会。要多近有多近？可以。"]
     ], "cues": [{"line": 2, "at": 3.0, "kind": "chime"}, {"line": 3, "at": 2.0, "kind": "stamp"}]},
     {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.7, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [

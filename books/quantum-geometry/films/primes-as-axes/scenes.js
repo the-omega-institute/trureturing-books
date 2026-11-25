@@ -184,7 +184,7 @@ SCENES.axes = S => {
   paTitle(S);
   const a = clamp((u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [2, null, 'argued']]);
+  badgeQ(S, [[0, null, 'computed'], [1, 'Every positive', 'argued'], [2, null, 'argued']]);
   /* left: the factorisation and the counts */
   panel(120, 190, 620, 345, a, C.cyan, 'COUNT THE PRIMES · 数素数');
   paRich([['12 = 2 × 2 × 3', C.white]], 150, 278, { size: 44, a });
@@ -208,14 +208,14 @@ SCENES.axes = S => {
   /* more axes (line 2): 7, 11, … */
   const ma = a * Q(S, 2, 'one direction for every prime', 0.8);
   if (ma > 0.003) {
-    for (const [nm, e, L] of [['7', [96, 70], 1.6], ['11', [-40, -112], 2.6], ['13', [116, -78], 2.6]]) {
+    for (const [nm, e, L] of [['7', [96, 70], 1.3], ['11', [-120, -20], 1.0], ['13', [60, -140], 0.9]]) {
       ctx.save(); ctx.setLineDash([9, 8]);
       line(AX.O[0], AX.O[1], AX.O[0] + e[0] * L, AX.O[1] + e[1] * L, C.argued, ma * 0.85, 2.5);
       ctx.restore();
       txt(nm, AX.O[0] + e[0] * (L + 0.2), AX.O[1] + e[1] * (L + 0.2) + 8, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.argued, a: ma });
     }
-    txt('7, 11, 13, … one direction per prime', 1780, 250, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.argued, a: ma });
-    txt('每个素数一个方向（图像）', 1780, 284, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.argued, a: ma });
+    txt('7, 11, 13, … one direction per prime', 1710, 250, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.argued, a: ma });
+    txt('每个素数一个方向（图像）', 1710, 284, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.argued, a: ma });
   }
   /* lattice points */
   for (let c = 0; c <= 1; c++) for (let b = 0; b <= 2; b++) for (let k = 0; k <= 3; k++) {
@@ -253,7 +253,7 @@ SCENES.axes = S => {
 /* ======================================================================= */
 /*                          scene 2 · SUM EQUALS PRODUCT                     */
 /* ======================================================================= */
-const TL_K = 470, TL_X = 1160, TL_Y = 255;          /* pixels per unit; top-left of the tiled rectangle */
+const TL_K = 470, TL_X = 1110, TL_Y = 255;          /* pixels per unit; top-left of the tiled rectangle */
 SCENES.sum = S => {
   const u = S.u, a = paFade(S);
   if (a <= 0) return;
@@ -325,8 +325,10 @@ SCENES.sum = S => {
     panel(120, 520, 900, 290, la, C.lean, 'Re s > 1 · ALL n, ALL PRIMES · 全体 n，全体素数');
     paRich([['Σ', C.white], ['ₙ', C.white], [' n⁻ˢ  =  ', C.white], ['∏', C.white], ['ₚ', C.white], [' (1 − p⁻ˢ)⁻¹  =  ζ(s)', C.white]], 150, 610, { size: 38, a: la });
     txt('for complex s with Re s > 1 · 复数 s，Re s > 1', 150, 660, { size: 22, fam: F.zh, w: 700, c: C.lean, a: la });
-    paLean(150, 722, PA_LEAN.riemann_zeta_dirichlet_sum_eq_euler_product, la * Q(S, 4, 'the sum over all n', 0.5), { size: 17 });
-    paLean(150, 768, PA_LEAN.riemann_zeta_euler_product, la * Q(S, 4, 'product over all primes', 0.5), { size: 17 });
+    paLean(150, 722, PA_LEAN.riemann_zeta_dirichlet_sum_eq_euler_product, la * Q(S, 4, 'the sum over all n', 0.5), { size: 20 });
+    paLean(150, 772, PA_LEAN.riemann_zeta_euler_product, la * Q(S, 4, 'product over all primes', 0.5), { size: 20 });
+    /* the rectangle holds only the axes 2 and 3: say so next to ζ(s) */
+    txt(`only 2 and 3: 3/2 < ζ(2) = π²/6 ≈ ${(Math.PI * Math.PI / 6).toFixed(3)} · 只用 2、3 两根轴`, TL_X + TL_K * 2 / 3, TL_Y + TL_K * 9 / 8 + 44, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: la });
     stamp('SUM = PRODUCT', 570, 300, Q(S, 4, 'equals the product', 0.5), C.lean, 40, -0.06);
   }
 };
@@ -376,11 +378,11 @@ SCENES.apart = S => {
     paRich([['Σ', C.white], ['ₚ∈S', C.white], [' k(p) ln p = 0  ', C.white], ['⟹', C.lean], ['  k(p) = 0 for every p ∈ S', C.white]], 250, 630, { size: 38, a: la });
     paRich([['12 ln 3 − 19 ln 2 = 0.013551 ≠ 0', C.cyan]], 250, 690, { size: 28, a: la * Q(S, 2, 'only when every', 0.6) });
     txt('computed · 屏幕上的计算', 800, 690, { size: 20, fam: F.zh, w: 700, c: C.dim, a: la * Q(S, 2, 'only when every', 0.6) });
-    paLean(250, 760, PA_LEAN.prime_log_indep, la, { size: 18 });
+    paLean(250, 760, PA_LEAN.prime_log_indep, la, { size: 20 });
   }
   /* line 3: the aphorism */
   const sa = at(S, 3, 0.5, 0.2);
-  stamp('NO EXCHANGE RATE', 1100, 485, sa, C.lean, 34, -0.04);
+  stamp('NO EXCHANGE RATE', 1100, 485, sa, C.white, 34, -0.04);
   txt('素数之间，没有汇率', 1460, 500, { size: 30, fam: F.zh, w: 900, c: C.white, a: a * sa });
 };
 
@@ -403,7 +405,12 @@ function ckTorus(sh, T, o = {}) {
   if (T > 0.05) sh.tube('trail', ckTrail(T), { color: C.cyan, width: o.width || 2.6, glow: 0.6, sides: 6 });
   sh.bead(torusPt(0, 0, 0.02), { color: C.white, r: 7, alpha: 0.8 });
   sh.bead(torusPt(T * L2, T * L3, 0.02), { color: C.now, r: 11 });
-  if (o.target) sh.bead(torusPt(Math.PI, Math.PI, 0.02), { color: C.mag, r: 10, alpha: o.target });
+  /* the target (π, π): a magenta ring lifted off the surface, drawn after the amber bead so it stays on top */
+  if (o.target) {
+    const tq = torusPt(Math.PI, Math.PI, 0.06), n = [1, 0, 0];
+    sh.ring(tq, { color: C.mag, r: 20, normal: n, alpha: o.target });
+    sh.bead(tq, { color: C.mag, r: 5, alpha: o.target });
+  }
 }
 const ckShot = (key, yaw) => solid(key, { x: CK_SHOT[0], y: CK_SHOT[1], w: CK_SHOT[2], h: CK_SHOT[3], yaw, pitch: 0.82, zoom: 1.22, radius: 0.3 });
 SCENES.clocks = S => {
@@ -419,10 +426,16 @@ SCENES.clocks = S => {
   if (sa > 0.01) {
     const st = sh.anchor(torusPt(0, 0, 0.02)), cur = sh.anchor(torusPt(T * L2, T * L3, 0.02));
     txt('t = 0', st.x + 16, st.y + 30, { size: 22, fam: F.mono, w: 700, c: C.white, a: sa * (st.hidden ? 0.35 : 0.9) });
-    txt('now · 此刻', cur.x + 16, cur.y - 16, { size: 22, fam: F.zh, w: 700, c: C.now, a: sa * (cur.hidden ? 0.35 : 1) * (1 - tgt) });
+    /* "now" fades out during line 3; at line 4 it comes back below the bead with the miss */
+    const nowA = sa * (cur.hidden ? 0.35 : 1) * (1 - at(S, 3, 0.5)), missA = sa * at(S, 4, 0.5);
+    txt('now · 此刻', cur.x + 16, cur.y - 16, { size: 22, fam: F.zh, w: 700, c: C.now, a: nowA });
+    if (missA > 0.01) txt(`now · miss ${fmtDeg(PA_MISS[4].m)}° · 差 ${fmtDeg(PA_MISS[4].m)}°`, cur.x + 30, cur.y + 46, { size: 24, fam: F.zh, w: 700, c: C.now, a: missA, ab: 1 });
     if (tgt > 0.01) {
-      const tp = sh.anchor(torusPt(Math.PI, Math.PI, 0.02));
-      txt('both at six · 都指六点', tp.x - 26, tp.y - 26, { size: 26, fam: F.zh, w: 700, align: 'right', c: C.mag, a: sa * tgt, ab: 1 });
+      const tp = sh.anchor(torusPt(Math.PI, Math.PI, 0.06)), lx = 150, ly = 222;
+      txt('target: both at six · 目标：都指六点', lx, ly, { size: 26, fam: F.zh, w: 700, c: C.mag, a: sa * tgt, ab: 1 });
+      ctx.save(); ctx.setLineDash([7, 6]);
+      line(lx + 120, ly + 14, tp.x - 16, tp.y - 16, C.mag, sa * tgt * 0.9, 2);
+      ctx.restore();
     }
     txt('torus of readings · 读数环面', 160, 222, { size: 22, fam: F.zh, w: 700, c: C.dim, a: sa * (1 - tgt) });
   }
@@ -446,8 +459,9 @@ SCENES.clocks = S => {
     paRich([['if  Σ kⱼaⱼ ∈ ℤ  ⟹  all kⱼ = 0', C.white]], 1164, 600, { size: 28, a: ka });
     paRich([['then every target z on the torus is a limit', C.white]], 1164, 646, { size: 26, a: ka });
     paRich([['of  (exp(2πi aⱼ mₙ))ⱼ ,  mₙ ∈ ℕ', C.white]], 1164, 690, { size: 26, a: ka });
-    txt('任意目标都是按步取样读数的极限', 1164, 732, { size: 22, fam: F.zh, w: 700, c: C.white, a: ka });
-    paLean(1164, 796, PA_LEAN.dense_circle_sequence, ka, { size: 17 });
+    txt('任意目标都是按步取样读数的极限', 1164, 730, { size: 22, fam: F.zh, w: 700, c: C.white, a: ka });
+    txt('prime clocks, one flash every τ:  aⱼ = −τ ln pⱼ / 2π', 1164, 766, { size: 20, fam: F.mono, w: 700, c: C.dim, a: ka });
+    paLean(1164, 808, PA_LEAN.dense_circle_sequence, ka, { size: 20 });
   }
   /* line 4: both at six — the record near misses (computed) */
   if (tgt > 0.003) {
@@ -463,9 +477,9 @@ SCENES.clocks = S => {
     txt('never · 永不', 1510, 620, { size: 20, fam: F.zh, w: 700, c: C.argued, a: nv });
     txt('as close as', 1510, 664, { size: 20, fam: F.mono, w: 700, c: C.argued, a: nc });
     txt('you like · 任意近', 1510, 694, { size: 20, fam: F.zh, w: 700, c: C.argued, a: nc });
-    txt('hand derivation', 1510, 738, { size: 18, fam: F.mono, w: 700, c: C.argued, a: nc });
-    txt('手工推导', 1510, 766, { size: 18, fam: F.zh, w: 700, c: C.argued, a: nc });
-    txt('table: computed · 表：计算', 1510, 806, { size: 16, fam: F.zh, w: 700, c: C.dim, a: ta });
+    txt('hand derivation', 1510, 738, { size: 20, fam: F.mono, w: 700, c: C.argued, a: nc });
+    txt('手工推导', 1510, 766, { size: 20, fam: F.zh, w: 700, c: C.argued, a: nc });
+    txt('table: computed', 1510, 806, { size: 20, fam: F.mono, w: 700, c: C.dim, a: ta });
   }
 };
 
@@ -475,10 +489,11 @@ SCENES.clocks = S => {
 SCENES.edge = S => {
   const a = paFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued']]);
+  /* violet only over lines 0–1 (picture, no timetable); lines 2–3 (a classical divergence, an external proof) carry no badge */
+  badge(clamp(S.u / 0.8) * (1 - at(S, 2, 0.4)), 'argued');
   const rows = [
     { col: C.argued, en: '"orthogonal" is a picture', zh: '“正交”是一幅图像', note: 'the theorem: linear independence, no angles · 定理是线性无关，不量角度', nc: C.argued },
-    { col: C.cyan, en: 'as close as you like ≠ soon', zh: '要多近有多近，不等于很快', note: `the miss is ${fmtDeg(PA_MISS[7] ? PA_MISS[7].m : 0)}° only at t ≈ ${PA_MISS[7] ? PA_MISS[7].t.toFixed(0) : ''} · no timetable in the proof · 证明不给等待时间`, nc: C.dim },
+    { col: C.cyan, en: 'as close as you like ≠ soon', zh: '要多近有多近，不等于很快', note: `with clock 2 at six, clock 3's miss first drops to ${fmtDeg(PA_MISS[7] ? PA_MISS[7].m : 0)}° at t ≈ ${PA_MISS[7] ? PA_MISS[7].t.toFixed(0) : ''} · 证明不给等待时间`, nc: C.dim },
     { col: C.white, en: 'the product needs Re s > 1', zh: '乘积公式要求 Re s > 1', note: 'at s = 1:  1 + ½ + ⅓ + ¼ + ⋯ diverges · 调和级数发散', nc: C.dim },
     { col: C.white, en: 'zeros further left: the Riemann hypothesis', zh: '更左边的零点：黎曼猜想', note: 'proved by an external Lean 4 project · not frozen in this book\'s pinned repository · 外部已验证，本书所钉仓库未冻结', nc: C.white }
   ];
@@ -489,8 +504,8 @@ SCENES.edge = S => {
     panel(220, y, 1480, 146, ra, rw.col);
     txt(rw.en, 250, y + 48, { size: 30, fam: F.mono, w: 700, c: rw.col, a: ra });
     txt(rw.zh, 1670, y + 48, { size: 28, fam: F.zh, w: 700, align: 'right', c: C.white, a: ra });
-    txt(rw.note, 250, y + 98, { size: 21, fam: F.zh, w: 700, c: rw.nc, a: ra * 0.95 });
-    if (i === 3) txt('number-field ERH, Grand RH: still open · 一般数域 ERH、大黎曼猜想：仍开放', 250, y + 132, { size: 18, fam: F.zh, w: 700, c: C.open, a: ra * 0.95 });
+    txt(rw.note, 250, y + (i === 3 ? 90 : 98), { size: 22, fam: F.zh, w: 700, c: rw.nc, a: ra * 0.95 });
+    if (i === 3) txt('number-field ERH, Grand RH: still open · 一般数域 ERH、大黎曼猜想：仍开放', 250, y + 128, { size: 22, fam: F.zh, w: 700, c: C.open, a: ra * 0.95 });
   });
 };
 
