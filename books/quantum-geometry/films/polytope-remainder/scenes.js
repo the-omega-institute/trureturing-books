@@ -377,7 +377,7 @@ const PT = { x0: 300, cw: 120, hs: 300, yA: 470, yB: 760 };
 SCENES.pointer = S => {
   const u = S.u, a = prFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [2, 'like two stencils', 'argued'], [2, 'Their overlap', 'computed']]);
+  badgeQ(S, [[0, null, 'computed'], [2, 'like two stencils', 'argued'], [2, 'their overlap', 'computed']]);
   const shift = ease(Q(S, 1, 'slide the pointer', 1.0));
   const lay = ease(Q(S, 2, 'Lay the copy', 1.2));
   const ca = PR_C.length;
@@ -397,7 +397,7 @@ SCENES.pointer = S => {
     if (shift > 0.02 && lay < 0.98) { arrow(PT.x0 + 30, yc + 40, PT.x0 + 30 + PT.cw * shift, yc + 40, C.mag, ba * (1 - lay), 2.5); txt('shift 1 · 平移一格', PT.x0 + 160, yc + 48, { size: 20, fam: F.zh, w: 700, c: C.mag, a: ba * (1 - lay) }); }
   }
   /* line 2: products cell by cell, and their sum */
-  const pa = a * Q(S, 2, 'Their overlap', 0.6);
+  const pa = a * Q(S, 2, 'their overlap', 0.6);
   if (lay > 0.98) {
     txt('two stencils · 两张镂空板（比方）', 1220, 196, { size: 22, fam: F.zh, w: 700, c: C.argued, a: a * clamp((lay - 0.98) * 50) * (1 - at(S, 3, 0.6)) });
     const prod = [2, 6, 6, 2];
@@ -407,8 +407,8 @@ SCENES.pointer = S => {
     txt('overlap · 重叠量', PT.x0, PT.yA + 204, { size: 20, fam: F.zh, w: 700, c: C.dim, a: pa });
   }
   /* right: what the overlap does */
-  panel(1200, 240, 600, 470, a * Q(S, 2, 'Their overlap', 0.6), C.cyan, 'OVERLAP · 重叠');
-  const ga = a * Q(S, 2, 'Their overlap', 0.6);
+  panel(1200, 240, 600, 470, a * Q(S, 2, 'their overlap', 0.6), C.cyan, 'OVERLAP · 重叠');
+  const ga = a * Q(S, 2, 'their overlap', 0.6);
   if (ga > 0.003) {
     const gx0 = 1240, gx1 = 1760, gy = 360, g = 16 / 19;
     line(gx0, gy, gx1, gy, C.dim, ga, 2);
@@ -541,7 +541,7 @@ SCENES.ceiling = S => {
     prRich([['(Cρ)ᵢⱼ = γ(qᵢ − qⱼ) ρᵢⱼ', C.white]], 1156, 572, { size: 26, a: ta });
     const ra = ta * Q(S, 2, 'for every recovery channel', 0.6);
     txt('every recovery channel R · 任意恢复信道', 1156, 626, { size: 21, fam: F.zh, w: 700, c: C.white, a: ra });
-    prRich([['sup{T(R(Cρ), ρ) : ρ} ', C.white], ['≥', C.lean], [' ½(1 − cos(π/(m+2)))', C.lean], [' > 0', C.lean]], 1156, 676, { size: 24, a: ra });
+    prRich([['sup{T(R(Cρ), ρ) : ρ} ', C.white], ['≥', C.lean], [' ½(1 − cos(π/(m+2)))', C.lean], [' > 0', C.lean]], 1150, 676, { size: 22, a: ra });
     txt('worst input · 最坏的输入', 1156, 712, { size: 18, fam: F.zh, w: 700, c: C.dim, a: ra });
     prLean(1156, 768, PR_LEAN.finite_record_cosine_obstruction, ta, { size: 17 });
   }
@@ -561,7 +561,7 @@ SCENES.tail = S => {
   prRich([['z = −i (π/2) σₓ,   ‖z‖ = π/2 = r', C.white]], 146, 262, { size: 26, a });
   prRich([['U = exp z = −i σₓ', C.white]], 146, 314, { size: 26, a });
   txt('flips |0⟩ ↔ |1⟩ · 把比特翻过来', 146, 356, { size: 22, fam: F.zh, w: 700, c: C.dim, a });
-  const ka = a * Q(S, 0, 'keeping only n terms', 0.6);
+  const ka = a * Q(S, 0, 'from n terms', 0.6);
   prRich([['keep  Σₖ₌₀ⁿ⁻¹ zᵏ / k!', C.cyan]], 146, 420, { size: 26, a: ka });
   txt('drop the rest · 其余丢掉', 146, 460, { size: 22, fam: F.zh, w: 700, c: C.mag, a: ka });
   /* left bottom: the race of the power and the factorial */
