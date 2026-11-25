@@ -852,7 +852,7 @@ $$
 
 在这些候选点上，把权重表示成 $1$、$1-c$ 和 $(1-c^2)/h^2$ 的线性组合，其中 $c=\cos(jh)$，$h=2\pi/q$。质量和两个亏量给出三个方程。原点、相邻格点和对径附近一个格点的特征向量在极限中线性无关。平方端点处，原点窗口二阶矩的变化对 $\pm N$ 权重的一阶改变量有正贡献，与 $1$ 和 $j^2$ 正交的首一二次多项式也给出非负贡献。二次证书在两侧第一个被排除的余弦层上都为负。凸性将这一符号传给二者之间的余弦层，再用配方验证全循环群上的唯一最优解。设最优权重为 $v$。任意可行权重 $w$ 都满足 $E(w)-E(v)\ge\sum_i(w_i-v_i)^2$。
 
-所需模数下界随固定预算而变。这里的支撑结论适用于两个指定的余弦约束。[精确证书与端点计算](https://github.com/the-omega-institute/trureturing/issues/34004#issuecomment-7147550923)
+所需模数下界随固定预算而变。这里的支撑结论适用于两个指定的余弦约束。[支撑与稳定性的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicEventualSupport.cyclic_eventual_exact_support) · [精确证书与端点计算](https://github.com/the-omega-institute/trureturing/issues/34004#issuecomment-7147550923)
 
 ## 局部统计在截点变化下的误差
 

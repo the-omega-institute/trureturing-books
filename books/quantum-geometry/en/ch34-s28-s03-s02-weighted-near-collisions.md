@@ -852,7 +852,7 @@ For each fixed $\lambda>0$ and every sufficiently large modulus, the cyclic mini
 
 To obtain an exact certificate, fit the weight as a linear combination of $1$, $1-c$, and $(1-c^2)/h^2$ on those sites, where $c=\cos(jh)$ and $h=2\pi/q$. Solve the three equations for the mass and the two deficits. The feature vectors at the center, a front neighbor, and an antipodal site are independent in the limit. At a square boundary, the first variation of the weight at $\pm N$ has a positive contribution from the change in the second moment on the front window. It also has a nonnegative contribution from the monic quadratic orthogonal to $1$ and $j^2$ there. The quadratic certificate is negative at the first omitted cosine on either side. Convexity then excludes the intervening residues, and completing the square certifies the unique minimum on the whole cycle. For the minimizing weight $v$, every feasible weight $w$ satisfies $E(w)-E(v)\ge\sum_i(w_i-v_i)^2$.
 
-The bound on how large $q$ must be depends on the fixed budget. The support statement concerns the two prescribed cosine constraints. [Exact certificate and boundary calculation](https://github.com/the-omega-institute/trureturing/issues/34004#issuecomment-7147550923)
+The bound on how large $q$ must be depends on the fixed budget. The support statement concerns the two prescribed cosine constraints. [Lean proof of support and stability](lean:D5/S3/Fourier/Asymptotics/CyclicEventualSupport.cyclic_eventual_exact_support) · [Exact certificate and boundary calculation](https://github.com/the-omega-institute/trureturing/issues/34004#issuecomment-7147550923)
 
 ## Changing the height cutoff in a local statistic
 
