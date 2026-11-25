@@ -430,6 +430,37 @@ $$
 
 令 $L_n$ 满足 $\eta_nL_n\to+\infty$，并取 $L_n\ge A_n/s_n$。记 $\varepsilon_n=64/(\eta_nL_n)$。最终 $I_{\eta_n}(L_n)\le M_{\eta_n}\le I_{\eta_n}(L_n)/(1-\varepsilon_n)$。因而归一化有限窗口积分 $(s_n/\eta_n)I_{\eta_n}(L_n)$ 与归一化全线矩具有相同的有限极限（任一极限存在即推出另一极限）。在中心主项已经建立的条件下，待控制的相位峰集中到有限的中间时间区域 $A_n/s_n<|t|\le L_n$。实际增长 ζ 零点族在这一区域的高阶矩上界仍然开放。
 
+### 实际 ζ 零点的短非中心时间区域
+
+沿用上述实际调和权重，记 $Z_T(t)=\sum_\gamma w_\gamma e^{i\gamma t}$。在现有 RH 条件接口下，存在固定的 $L>1$，使得对 $T\ge L$、$1/T\le |t|\le1/L$，
+
+$$
+1-|Z_T(t)|\ge\frac{\log(1/|t|)}{524288(\log T)^2}.
+$$
+
+[倒数高度截断的相位亏损界](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_reciprocal_time_deficit) 取保留频谱的截断高度 $X=1/|t|$，则 $L\le X\le T$。其配对矩满足 $P_2(X)\ge X^2/(4096\log X)$、$P_4(X)\le X^2P_2(X)$。因为 $X^2t^2=1$，四阶余项估计给出 $1-|Z_X(t)|^2\ge1/(16384\log X)$，故 $1-|Z_X(t)|\ge1/(32768\log X)$。在同一时刻 $t$ 将实际有限和按高度 $X$ 分为保留项和尾项，应用三角不等式得
+
+$$
+W(T)(1-|Z_T(t)|)\ge W(X)(1-|Z_X(t)|).
+$$
+
+结合调和质量界 $W(X)\ge c(\log X)^2/16$、$W(T)\le c(\log T)^2$，即得上述亏损估计。因此对固定的 $0<\delta<1$，充分大的 $T$ 以及 $1/T\le|t|\le T^{-\delta}$，有
+
+$$
+|Z_T(t)|^{2n}\le\exp\left(-\frac{\delta n}{262144\log T}\right).
+$$
+
+据此手工推导该环形区域的积分界。取 $s_n=\sqrt{nP_2(T_n)/2}$ 及任意正分辨率 $\eta_n$。由 $P_2(T_n)\le T_n^2$、$K_{\eta_n}\le\eta_n/(2\pi)$，可得归一化贡献
+
+$$
+\frac{s_n}{\eta_n}\int_{1/T_n\le|t|\le T_n^{-\delta}}
+K_{\eta_n}(t)|Z_{T_n}(t)|^{2n}\,dt
+\le\frac{\sqrt{n/2}}{\pi}T_n^{1-\delta}
+\exp\left(-\frac{\delta n}{262144\log T_n}\right).
+$$
+
+若 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$，此上界趋于零，因为 $\log T_n$ 和 $\log n$ 均为 $o(n/\log T_n)$。在移动中心窗口至 $1/T_n$ 的区域，取 $X=T_n$，同一四阶矩估计保证 $|t|\le1/T_n$ 时 $|Z_{T_n}(t)|^{2n}\le e^{-11(s_nt)^2/12}$。当 $A_n\to\infty$ 时，$|s_nt|>A_n$ 的这一部分归一化积分也趋于零。结合全线相对截尾界，在上述更强的增长条件下，余下待证的算术上界集中于中间时间区域 $T_n^{-\delta}<|t|\le L_n$。若采用固定 $r>0$ 的频率 $\gamma/r$，相应时间端点乘以 $r$，方差尺度乘以 $1/r$。
+
 ### 有限支撑的占用数对角下界
 
 对于有限支撑，非中心贡献还受到一个与频率具体取值无关的约束。设 $w_j\ge0$ 且 $\sum_jw_j=1$，次数为 $p$，占用向量 $m$ 满足 $\sum_jm_j=p$。记实际多项式权重为 $c_m$。任选一个指标 $j_0$，其计数由其余计数和总次数唯一确定。对其余坐标选择正半径 $r_j$，定义
