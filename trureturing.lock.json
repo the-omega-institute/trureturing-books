@@ -7804,6 +7804,15 @@
       "line": 30,
       "signature": "theorem kappa_mul_mul (p q x y : unitary ℍ[ℝ]) : quaternionModel.kappa (p * x * q) (p * y * q) = quaternionModel.kappa x y"
     },
+    "D5/S3/Quantum/AURICOmega/RationalBlochTetrahedron.no_rational_bloch_tetrahedral_triangle": {
+      "module": "D5/S3/Quantum/AURICOmega/RationalBlochTetrahedron",
+      "name": "D5.S3.Quantum.AURICOmega.RationalBlochTetrahedron.no_rational_bloch_tetrahedral_triangle",
+      "kind": "theorem",
+      "statement_id": "sha256:e254ad274521e90a88ba570b078bb8642cfe40ceb88eeebe26200b48e2da926b",
+      "line": 19,
+      "signature": "public theorem no_rational_bloch_tetrahedral_triangle (a b : Quad4) (denominator : Nat) (c : Quad4) (hden : Not (Eq denominator Nat.zero)) (ha : Eq a.w Int.zero) (hb : Eq b.w Int.zero) (hc : Eq c.w Int.zero) (haa : Eq (a.dot a) (Int.ofNat (denominator.mul denominator))) (hbb : Eq (b.dot b) (Int.ofNat (denominator.mul denominator))) (hcc : Eq (c.dot c) (Int.ofNat (denominator.mul denominator))) (hab : Eq ((Int.ofNat Nat.one.succ.succ).mul (a.dot b)) (Int.ofNat (denominator.mul denominator)).neg) (hbc : Eq ((Int.ofNat Nat.one.succ.succ).mul (b.dot c)) (Int.ofNat (denominator.mul denominator)).ne",
+      "axioms": []
+    },
     "D5/S3/Quantum/AURICOmega/RayKernelFibreExtremum.rayKernel_isGreatest_and_integral": {
       "module": "D5/S3/Quantum/AURICOmega/RayKernelFibreExtremum",
       "name": "D5.S3.Quantum.AURICOmega.RayKernelFibreExtremum.rayKernel_isGreatest_and_integral",
