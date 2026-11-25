@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "f3a639013d861f0592889f4bee51648678e48a53",
-  "pinned_at": "2026-11-25T11:11:03Z",
+  "commit": "ca5992cabe66962ceecde81b295365f06850a14f",
+  "pinned_at": "2026-11-25T12:38:44Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1477,6 +1477,14 @@
       "line": 339,
       "signature": "theorem splitting_progression_power_tail (ε : ℝ) (hε : 0 < ε) : ∀ᶠ x : ℝ in atTop, ∀ q b m A L : ℕ, b%4=3 → 4 ∣ m → (∀ p : ℕ, p.Prime → p ∣ m → (p:ℝ) ≤ x^(1/2+ε/2) ∨ cutoff x < p) → exp (x^(ε/5)*(log x)^2)/(4*exp (4*x^(ε/5))) ≤ L → ((failures x ε q b m A L).card:ℝ) ≤ L*exp (-(min ε 1/38400)*x^(ε/5)*(log x)^2)"
     },
+    "D5/S3/Combinatorics/Geometry/EuclideanSimplex/RationalUnitSimplex.rational_unit_simplex_iff": {
+      "module": "D5/S3/Combinatorics/Geometry/EuclideanSimplex/RationalUnitSimplex",
+      "name": "D5.S3.Combinatorics.Geometry.EuclideanSimplex.RationalUnitSimplex.rational_unit_simplex_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:f6c9d545bf8e06d09be12e2d315c88263e2572910c2e452a862755034430c072",
+      "line": 385,
+      "signature": "theorem rational_unit_simplex_iff (n : ℕ) (hn : 0 < n) : (∃ c : ℚ, c ≠ 1 ∧ ∃ p : Fin (n + 1) → Fin n → ℚ, ∀ j k, p j ⬝ᵥ p k = if j = k then 1 else c) ↔ (Odd n ∧ IsSquare n) ∨ (Even n ∧ IsSquare (n + 1))"
+    },
     "D5/S3/Combinatorics/Graph/Chordal/ChordalBanachLimitTwo.not_subtwo_banach_chordal": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/ChordalBanachLimitTwo",
       "name": "SimpleGraph.BanachPathPower.not_subtwo_banach_chordal",
@@ -1556,6 +1564,30 @@
       "statement_id": "sha256:69173c864493530de1e2c59fcf49030dd66c1cf72cd9ac1f96b4f2b0849ee91d",
       "line": 360,
       "signature": "theorem IsChordal.exists_clique_bounded_banach_gain_potential {V : Type u} [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (k : ℕ) (hk : 2 ≤ k) (hclique : ∀ s : Finset V, G.IsClique (s : Set V) → s.card ≤ k + 1) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ (4 - 4 / (k : ℝ)) * ε"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.completeGraph_banach_lower_bound": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach",
+      "name": "SimpleGraph.completeGraph_banach_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:0a5fc9bf2658caf142b8a80ec2cde9aff8938be1b6cea4b2d33d5049f40137d9",
+      "line": 175,
+      "signature": "theorem completeGraph_banach_lower_bound (m : ℕ) (hm : 2 ≤ m) : ∃ g : Fin m → Fin m → ZeroDivSkew m, (∀ i j, g j i = -g i j) ∧ (∀ i j l, i ≠ j → j ≠ l → i ≠ l → ‖g i j + g j l - g i l‖ ≤ 1) ∧ ∀ φ : Fin m → ZeroDivSkew m, ∃ u v, u ≠ v ∧ ((m : ℝ) - 2) / m ≤ ‖g u v - (φ v - φ u)‖"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.completeGraph_banach_upper_bound": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach",
+      "name": "SimpleGraph.completeGraph_banach_upper_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:0a5fc9bf2658caf142b8a80ec2cde9aff8938be1b6cea4b2d33d5049f40137d9",
+      "line": 27,
+      "signature": "theorem completeGraph_banach_upper_bound {V : Type u} [Finite V] (hm : 2 ≤ Nat.card V) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, i ≠ j → j ≠ l → i ≠ l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, u ≠ v → ‖g u v - (φ v - φ u)‖ ≤ ((Nat.card V : ℝ) - 2) / Nat.card V * ε"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.separatedCliqueSum_banach_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach",
+      "name": "SimpleGraph.separatedCliqueSum_banach_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:0a5fc9bf2658caf142b8a80ec2cde9aff8938be1b6cea4b2d33d5049f40137d9",
+      "line": 318,
+      "signature": "theorem separatedCliqueSum_banach_gain_potential [Finite V] (T : SimpleGraph I) (hT : T.IsTree) (G : SimpleGraph V) (P : I → Set V) (hcover : ∀ v, ∃ a, v ∈ P a) (hedge : ∀ u v, G.Adj u v → ∃ a, u ∈ P a ∧ v ∈ P a) (m : ℕ) (hm : 1 ≤ m) (hattach : ∀ a b, T.Adj a b → (P a ∩ P b).Nonempty ∧ G.IsClique (P a ∩ P b) ∧ Nat.card ↥(P a ∩ P b) ≤ m) (hdisjoint : ∀ a b, a ≠ b → ¬ T.Adj a b → Disjoint (P a) (P b)) (hsep : ∀ a b c, T.Adj a b → T.Adj a c → b ≠ c → Disjoint (P a ∩ P b) (P a ∩ P c) ∧ ∀ u ∈ P a ∩ P b, ∀ v ∈ P a ∩ P c, ¬ G.Adj u v) (g : V → V → E) (R : ℝ) (hR : 0 ≤ R) (φ : I → V → E) (hfit : ∀ a u"
     },
     "D5/S3/Combinatorics/Graph/Chordal/GainPotential.SimpleGraph.IsChordal.exists_gain_potential": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/GainPotential",
@@ -4569,7 +4601,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingCoupledFit.coupledFit_eventually",
       "kind": "theorem",
-      "statement_id": "sha256:cab27696f731cb0589c2c383c71df3237001c9262516d4b61ac5914a1e63ae11",
+      "statement_id": "sha256:8e4fe7972f3bfdded48e52bd454a063eb62381ec8d379ad464043b235fc9bfaf",
       "line": 429,
       "signature": "theorem coupledFit_eventually {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) {S : Finset ℝ} (hS : S.Nonempty) (rhs : ℕ → Fin 3 → ℝ) : let readout"
     },
@@ -4577,7 +4609,7 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingCoupledFit",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingCoupledFit.coupledMatrix_tendsto",
       "kind": "theorem",
-      "statement_id": "sha256:cab27696f731cb0589c2c383c71df3237001c9262516d4b61ac5914a1e63ae11",
+      "statement_id": "sha256:8e4fe7972f3bfdded48e52bd454a063eb62381ec8d379ad464043b235fc9bfaf",
       "line": 312,
       "signature": "theorem coupledMatrix_tendsto {h : ℕ → ℝ} (hscale : Tendsto (fun n : ℕ => (n : ℝ)^3 * ((n : ℝ) * h n)^4) atTop (𝓝 0)) (S : Finset ℝ) : let readout"
     },
@@ -4657,8 +4689,8 @@
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingSupport",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingSupport.eventual_strict_support_away_from_thresholds",
       "kind": "theorem",
-      "statement_id": "sha256:6cfc397bab386628865fe4bafdc694efefda7d1bfb75a3d3a3f5d4d7d2925d75",
-      "line": 852,
+      "statement_id": "sha256:b41df376111273fb1d81ac4c6cf8b7a6a873022cc826b4d639ae64b30530bc90",
+      "line": 878,
       "signature": "theorem eventual_strict_support_away_from_thresholds (q : ℕ → ℕ) (hq : ∀ n, q n ≠ 0) (e : ℕ) (hpar : ∀ᶠ n in atTop, q n % 2 = e) {K : ℝ} (hK : Tendsto (fun n : ℕ => (n : ℝ)^5 * (mesh (q n))^2) atTop (𝓝 K)) (hneq : ∀ l, 3*K/20 ≠ rearThreshold e l) : let readout"
     },
     "D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit": {
@@ -4721,7 +4753,7 @@
       "module": "D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation",
       "name": "D5.S3.Fourier.Asymptotics.LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer",
       "kind": "theorem",
-      "statement_id": "sha256:814f3aa990246c68380dbc7877178afa983d3ba529adc45812015c6b802a6584",
+      "statement_id": "sha256:dd66e094f98993776ef40f4b7dcd225983a3a2a67bd30590ad9d8a14da2bca69",
       "line": 451,
       "signature": "theorem exists_lattice_square_moment_minimizer (m : ℝ) : let lowerBound"
     },
@@ -4729,7 +4761,7 @@
       "module": "D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation",
       "name": "D5.S3.Fourier.Asymptotics.LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer_on_interval",
       "kind": "theorem",
-      "statement_id": "sha256:814f3aa990246c68380dbc7877178afa983d3ba529adc45812015c6b802a6584",
+      "statement_id": "sha256:dd66e094f98993776ef40f4b7dcd225983a3a2a67bd30590ad9d8a14da2bca69",
       "line": 417,
       "signature": "theorem exists_lattice_square_moment_minimizer_on_interval (n : ℕ) (hn : 0 < n) (m : ℝ) : let lowerBound"
     },
@@ -4977,7 +5009,7 @@
       "module": "D5/S3/Fourier/Concentration/DegreeTwoMomentWitness",
       "name": "D5.S3.Fourier.Concentration.DegreeTwoMomentWitness.exists_equal_first_data_distinct_degree_two",
       "kind": "theorem",
-      "statement_id": "sha256:133510b216e0d0677d7ff83462dfadf798fa2026ca92c4f9ad31a91fd706c451",
+      "statement_id": "sha256:adf0db4b47d89f4b28463589cd46dd6f1ac1d309361a147b277a772071dc8426",
       "line": 89,
       "signature": "theorem exists_equal_first_data_distinct_degree_two : let secondMoment"
     },
@@ -7795,6 +7827,15 @@
       "statement_id": "sha256:0cb4365faadc6c670ed2ad7deb483285cd831c8e050bb3547a3f421ff2a23f21",
       "line": 30,
       "signature": "theorem kappa_mul_mul (p q x y : unitary ℍ[ℝ]) : quaternionModel.kappa (p * x * q) (p * y * q) = quaternionModel.kappa x y"
+    },
+    "D5/S3/Quantum/AURICOmega/RationalBlochTetrahedron.no_rational_bloch_tetrahedral_triangle": {
+      "module": "D5/S3/Quantum/AURICOmega/RationalBlochTetrahedron",
+      "name": "D5.S3.Quantum.AURICOmega.RationalBlochTetrahedron.no_rational_bloch_tetrahedral_triangle",
+      "kind": "theorem",
+      "statement_id": "sha256:e254ad274521e90a88ba570b078bb8642cfe40ceb88eeebe26200b48e2da926b",
+      "line": 19,
+      "signature": "public theorem no_rational_bloch_tetrahedral_triangle (a b : Quad4) (denominator : Nat) (c : Quad4) (hden : Not (Eq denominator Nat.zero)) (ha : Eq a.w Int.zero) (hb : Eq b.w Int.zero) (hc : Eq c.w Int.zero) (haa : Eq (a.dot a) (Int.ofNat (denominator.mul denominator))) (hbb : Eq (b.dot b) (Int.ofNat (denominator.mul denominator))) (hcc : Eq (c.dot c) (Int.ofNat (denominator.mul denominator))) (hab : Eq ((Int.ofNat Nat.one.succ.succ).mul (a.dot b)) (Int.ofNat (denominator.mul denominator)).neg) (hbc : Eq ((Int.ofNat Nat.one.succ.succ).mul (b.dot c)) (Int.ofNat (denominator.mul denominator)).ne",
+      "axioms": []
     },
     "D5/S3/Quantum/AURICOmega/RayKernelFibreExtremum.rayKernel_isGreatest_and_integral": {
       "module": "D5/S3/Quantum/AURICOmega/RayKernelFibreExtremum",
