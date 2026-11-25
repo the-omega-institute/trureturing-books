@@ -389,6 +389,28 @@ Under RH, group multiplicities by distinct positive ordinate and use $w_\gamma=m
 
 Hence $R_1(\eta)\ll(\log X+1)/X$. The fixed-difference bound gives at most $p^2D_{p-1}R_1(\eta)$ for the part of $E_p(\eta)$ at residual degree exactly one. With the same cutoff $X=e^{-K}T^\beta$ for fixed $K$ and $0<\beta<1$, and with $p\asymp X\log X$, the diagonal estimate gives an exponential saving relative to $p!V^p$, since $V\asymp\log X/X$ and the extra factor of order $p$ can be absorbed. Growing residual degrees still require an arithmetic estimate.
 
+## A growing cutoff for residual degree {#growing-residual-degree}
+
+Let $E_{p,\le D}(\eta)$ be the part of $E_p(\eta)$ with at most $D$ residual occurrences on each side, where $0\le D\le p$. Every such pair shares at least $p-D$ occurrences. Write $W=\sum_jw_j$ and $V=\sum_jw_j^2>0$. For nonnegative weights, dropping the frequency condition and applying the common-count bound gives
+
+$
+E_{p,\le D}(\eta)\le\binom pD^{\!2}W^{2D}D_{p-D}.
+
+$
+
+Thus a bound at the single degree $k=p-D$ suffices. If $D_{p-D}\le A e^{-c(p-D)}(p-D)!V^{p-D}$, cancel one binomial factor against $p!$, and bound the other by $p^D/D!$. With $x=p e^c W^2/V$ this gives
+
+$
+\frac{E_{p,\le D}(\eta)}{p!V^p}
+\le A e^{-cp}\frac{x^D}{(D!)^2}
+\le A e^{-cp}\rho^{-D}\exp(2\sqrt{\rho x}),\qquad \rho>0 .
+
+$
+
+The last inequality follows by retaining the degree-$D$ term of the exponential series at $\sqrt{\rho x}$ and squaring. The frequency resolution does not enter either bound. [Lean proof of the common-count bound](lean:D5/S3/Fourier/Concentration/FiniteMultinomialOverlap.weighted_overlap_le_diagonal)
+
+For the ζ tail above, take $X=e^{-K}T^\beta$ and $p\asymp X\log X$ with $K$ and $0<\beta<1$ fixed. Under RH and the stated multiplicity estimate, $W^2/V=O(p(\log T)^2)$. The diagonal estimate holds with the same $A,c>0$ for all $p/2\le k\le p$. The band $(X,CX]$ supplies at least a fixed multiple of $p$ coordinates with $kw_j^2/V$ bounded below uniformly for these $k$. The factor $O(\sqrt{k})$ from Stirling is absorbed into the exponential. Put $L=\log T$ and $\rho=(L\log L)^{-2}$. Then $2\sqrt{\rho x}=O(p/\log L)$, and for $D\le\varepsilon p/\log L$ the cost $D\log(1/\rho)$ is at most $(2+o(1))\varepsilon p$. Any fixed $0<\varepsilon<c/2$ gives an exponential saving for this entire block, uniformly in $\eta$. Controlling the remaining near-collision mass for the actual ordinates requires an estimate above that cutoff. [Multiplicity input, Theorem 1 and §7](https://arxiv.org/abs/2306.04799)
+
 ## Higher residual degrees with pointwise matchings {#matched-residual-occupations}
 
 After removing shared occurrences coordinate by coordinate, each side has $d$ frequencies left. If they can be paired with every discrepancy at most $\eta$, the weight of such residuals can be estimated from the weight of single close pairs. Words with the same occurrence counts represent the same count vector.
@@ -766,6 +788,8 @@ $$
 $$
 The last term is summable and nonnegative. When $s\le m$, the identity gives strict uniqueness of the weights. Since $t\ge1$, their values $w_0=t/Z$ and $w_0-w_1=1/Z$ also determine $t$ and $Z$. The adjacent closed intervals give the same weights and parameters at their shared endpoint. The half-open condition $(n^2-1)/5\le m<n(n+2)/5$ selects the unique index $n=\lfloor\sqrt{5m+1}\rfloor$. On the first interval $0\le m\le3/5$, the three possible sites have weights $1-m$ at zero and $m/2$ at each neighbor. In the second-harmonic scale $\lambda=8\pi^2m$, the upper endpoint is exactly $24\pi^2/5$. A quantitative transfer of the lattice minimum back to the finite cycle has to account for the second cosine also approaching $1$ near the antipode.
 
+[Lean proof of the closed-interval support and exact remainder](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer_on_interval) · [Lean proof of the global half-open classification](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer)
+
 ### The finite cyclic minimum converges to the lattice minimum
 
 Fix $\lambda\ge0$ and set $m=\lambda/(8\pi^2)$ and $a=1-\lambda/q^2$. Write $L(m)$ for the lattice minimum above and $E_q(a)$ for the minimum squared mass on the cycle with both cosine moments at least $a$. If $m$ belongs to the interval indexed by $n$, let $R$ be its support radius. At the lower endpoint $R=n-1$, and elsewhere $R=n$. When $q>2R$, the cyclic minimum is attained and
@@ -786,6 +810,8 @@ lies below $w_{\bar i}$ at every residue. Expressing $2\sum_i v_iP_i$ in terms o
 
 Each fixed budget lies in an interval of finite support radius. Thus $E_q(1-\lambda/q^2)$ tends to $L(\lambda/(8\pi^2))$ through all integer moduli. The arithmetic estimate for high-order frequencies of the actual ζ zeros remains open.
 
+[Lean proof of the centered cosine identity](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cosineMoment_eq_centered) · [Lean proof of the quantitative comparison](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cyclic_to_lattice_comparison)
+
 ### Mass near the antipode
 
 The cyclic minimizers converge to the lattice law at every fixed centered site. The two tight constraints also determine a smaller amount of weight lying far from these sites. For a fixed $\lambda\ge0$, let $v_q$ be any cyclic minimizer at threshold $1-\lambda/q^2$. Set $c_i=\cos(2\pi i/q)$ and $A_q=\{i:c_i<0\}$. Through all integer moduli,
@@ -797,6 +823,8 @@ $$
 The second limit implies that for any fixed $\varepsilon>0$, the part of the rescaled mass on $A_q$ where $c_i\ge-1+\varepsilon$ tends to zero.
 
 On the fixed support of the lattice law, the first and second cosine deficits, multiplied by $q^2$, have limiting weighted sums $\lambda/4$ and $\lambda$. Over the full cycle each rescaled deficit sums to $\lambda$ because both constraints are tight. For $\lambda=0$ the pointwise upper bound one forces both moment equalities as soon as the weight is feasible. Nonnegativity then makes the second deficit outside the fixed support tend to zero. On $c_i\ge0$ it bounds $1-c_i$ after division by two, and on $c_i<0$ it bounds $1+c_i$ after the same division. Thus the first deficit over $A_q$ tends to $3\lambda/4$, and its difference from twice the rescaled mass tends to zero. This argument splits off a finite sum and bounds its remainder before passing to the limit. The related proof for character sums uses this method to compare a finite Dirichlet polynomial with a logarithmic derivative. [Character-sum tail bound](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)
+
+[Lean proof of the rescaled antipodal mass limit](lean:D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit)
 
 ### The energy gap on even and odd cycles
 
@@ -816,13 +844,15 @@ one root is exactly $C$. The other root $\rho_q$ has $(1-\rho_q)/h^2\to t/2$. Fa
 
 The certificate bounds the energy of every feasible weight by completing the square. To attain that bound to order $h^2$, adjust the mass at zero and its nearest neighbors and add mass at the closest antipodal level, imposing both moment equalities. The front corrections are $O(h^2)$ and the added mass is asymptotic to $3mh^2/4$. For a fixed positive budget the three adjusted front sites have positive limiting weights, so the construction is feasible for all sufficiently large moduli, including at activation endpoints. The statement concerns the finite cycle at fixed budget. The weighted high-order arithmetic estimate for the actual ζ ordinates remains open. [Derivation and hypotheses](https://github.com/the-omega-institute/trureturing/issues/33993#issuecomment-7146572104)
 
+[Lean proof of the parity energy correction](lean:D5/S3/Fourier/Asymptotics/CyclicParityLimit.cyclic_parity_correction)
+
 ### Which sites carry positive mass
 
 For each fixed $\lambda>0$ and every sufficiently large modulus, the cyclic minimizer has positive mass exactly at the front sites $j^2\le t$ and at the closest antipodal sites. There is one closest antipodal site on an even cycle and two on an odd cycle. At a lattice activation boundary $t=N^2$, the limiting lattice weights at $\pm N$ are zero, but the two finite-cycle weights are positive and of order $q^{-2}$.
 
-To obtain an exact certificate, fit the weight as a linear combination of $1$, $1-c$, and $(1-c^2)/h^2$ on those sites, where $c=\cos(jh)$ and $h=2\pi/q$. Solve the three equations for the mass and the two deficits. The feature vectors at the center, a front neighbor, and an antipodal site are independent in the limit. At a square boundary, the first variation of the weight at $\pm N$ has a positive contribution from the change in the second moment on the front window. It also has a nonnegative contribution from the monic quadratic orthogonal to $1$ and $j^2$ there. The quadratic certificate is negative at the first omitted cosine on either side. Convexity then excludes the intervening residues, and completing the square certifies the unique minimum on the whole cycle.
+To obtain an exact certificate, fit the weight as a linear combination of $1$, $1-c$, and $(1-c^2)/h^2$ on those sites, where $c=\cos(jh)$ and $h=2\pi/q$. Solve the three equations for the mass and the two deficits. The feature vectors at the center, a front neighbor, and an antipodal site are independent in the limit. At a square boundary, the first variation of the weight at $\pm N$ has a positive contribution from the change in the second moment on the front window. It also has a nonnegative contribution from the monic quadratic orthogonal to $1$ and $j^2$ there. The quadratic certificate is negative at the first omitted cosine on either side. Convexity then excludes the intervening residues, and completing the square certifies the unique minimum on the whole cycle. For the minimizing weight $v$, every feasible weight $w$ satisfies $E(w)-E(v)\ge\sum_i(w_i-v_i)^2$.
 
-The bound on how large $q$ must be depends on the fixed budget. The support statement concerns the two prescribed cosine constraints. [Exact certificate and boundary calculation](https://github.com/the-omega-institute/trureturing/issues/34004#issuecomment-7147550923)
+The bound on how large $q$ must be depends on the fixed budget. The support statement concerns the two prescribed cosine constraints. [Lean proof of support and stability](lean:D5/S3/Fourier/Asymptotics/CyclicEventualSupport.cyclic_eventual_exact_support) · [Exact certificate and boundary calculation](https://github.com/the-omega-institute/trureturing/issues/34004#issuecomment-7147550923)
 
 ### Where the front support changes on a finite cycle
 
