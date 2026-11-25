@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "6663afa90893572c38d06dfc14b06880869d5b48",
-  "pinned_at": "2026-11-25T09:59:23Z",
+  "commit": "b27c6859de4de19170da62be949e15c06b487ee5",
+  "pinned_at": "2026-11-25T10:55:09Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4985,7 +4985,7 @@
       "module": "D5/S3/Fourier/Concentration/DisjointCharacterEnvelope",
       "name": "D5.S3.Fourier.Concentration.DisjointCharacterEnvelope.coefficient_envelope",
       "kind": "theorem",
-      "statement_id": "sha256:e2e4d29946d7fc9bf5091652524ceb6296a2cff6ec4fd0c94b7cec34c96bcc41",
+      "statement_id": "sha256:1c61ac56e9a2c85f809bf47a9d3209fdef60d6e7407de2e97ea7b14478c9fb5f",
       "line": 313,
       "signature": "theorem coefficient_envelope {J : Type*} (s : Finset J) (a b : J → ℂ) (m n : ℕ) (r : ℝ) (hr : 0 < r) : let emptyPart"
     },
@@ -7763,6 +7763,15 @@
       "statement_id": "sha256:0cb4365faadc6c670ed2ad7deb483285cd831c8e050bb3547a3f421ff2a23f21",
       "line": 30,
       "signature": "theorem kappa_mul_mul (p q x y : unitary ℍ[ℝ]) : quaternionModel.kappa (p * x * q) (p * y * q) = quaternionModel.kappa x y"
+    },
+    "D5/S3/Quantum/AURICOmega/RationalBlochTetrahedron.no_rational_bloch_tetrahedral_triangle": {
+      "module": "D5/S3/Quantum/AURICOmega/RationalBlochTetrahedron",
+      "name": "D5.S3.Quantum.AURICOmega.RationalBlochTetrahedron.no_rational_bloch_tetrahedral_triangle",
+      "kind": "theorem",
+      "statement_id": "sha256:e254ad274521e90a88ba570b078bb8642cfe40ceb88eeebe26200b48e2da926b",
+      "line": 19,
+      "signature": "public theorem no_rational_bloch_tetrahedral_triangle (a b : Quad4) (denominator : Nat) (c : Quad4) (hden : Not (Eq denominator Nat.zero)) (ha : Eq a.w Int.zero) (hb : Eq b.w Int.zero) (hc : Eq c.w Int.zero) (haa : Eq (a.dot a) (Int.ofNat (denominator.mul denominator))) (hbb : Eq (b.dot b) (Int.ofNat (denominator.mul denominator))) (hcc : Eq (c.dot c) (Int.ofNat (denominator.mul denominator))) (hab : Eq ((Int.ofNat Nat.one.succ.succ).mul (a.dot b)) (Int.ofNat (denominator.mul denominator)).neg) (hbc : Eq ((Int.ofNat Nat.one.succ.succ).mul (b.dot c)) (Int.ofNat (denominator.mul denominator)).ne",
+      "axioms": []
     },
     "D5/S3/Quantum/AURICOmega/RayKernelFibreExtremum.rayKernel_isGreatest_and_integral": {
       "module": "D5/S3/Quantum/AURICOmega/RayKernelFibreExtremum",
