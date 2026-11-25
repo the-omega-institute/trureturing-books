@@ -110,6 +110,18 @@ When can we choose a rational boundary coupling directly? Under the same assumpt
 
 If all three tests fail, a rational extension of rank at most three must use a coupling strictly inside both disks. Both Schur residuals can then have full rank, so the joint endpoint residual of rank at most two must be constructed directly. [Rank-three criterion for rational boundary couplings](lean:D5/S3/Quantum/Entanglement/Marginals/FibRationalBoundary.rational_rank_three_boundary_iff)
 
+::: {.remark #rem-ch39-fib-meyer-rank-three title="Rank at most three at any feasible rational coupling"}
+For $b>0$, every feasible rational $z$ admits a rational global extension of rank at most three. If the two Schur residuals have common trace zero, the joint residual is zero. If one residual is singular and their common trace is positive, the normalized tensor product has rank at most two. Otherwise, divide by the common trace and write the residuals as $(I+\sigma(a))/2$ and $(I+\sigma(c))/2$, where $\sigma$ is the Pauli linear combination and $a,c\in\mathbb Q^3$ are Bloch vectors. Positive definiteness gives $|a|,|c|<1$. Equal lengths give the equal-spectrum projection construction. For unequal lengths, swap endpoints if necessary so that $|a|<|c|$. [Rational rank-two construction for equal spectra](lean:D5/S3/Quantum/Entanglement/Marginals/RationalQubitEqualSpectrumRank.rational_endpoint_rank_le_two_of_equal_det)
+
+On the five-dimensional rational hyperplane $a\cdot y=c\cdot v$, consider the quadratic form
+
+$$
+|y|^2-(1-|c|^2)|v|^2-(c\cdot v)^2.
+$$
+
+It takes a positive value at $v=0$ and a nonzero $y\perp a$, and a negative value at $y=0$ and a nonzero $v\perp c$. Meyer's theorem gives a nonzero rational zero. Since $1-|c|^2>0$, both $y$ and $v$ at that zero are nonzero. They supply the rational Pauli projection construction for a rank-two joint state of the normalized residuals. Multiplying by the common trace and restoring the middle pivot gives a global state of rank at most three. The earlier example with complex rank two and rational rank three attains the uniform rational bound. Meyer's theorem supplies the zero, and Lean verifies the matrix construction from that zero. [Serre, A Course in Arithmetic, Chapter IV, §3.2, Corollary 2](https://doi.org/10.1007/978-1-4684-9884-4) · [Rank-two construction from a rational zero](lean:D5/S3/Quantum/Entanglement/Marginals/RationalQubitProjector.rational_rank_two_of_quadratic_witness)
+:::
+
 Requiring a pure extension adds a norm equation. Suppose both marginals are $\operatorname{diag}(0,b,1-b)$ with rational $b$. The zero vacuum readings force a pure state to be supported on $|010\rangle,|101\rangle$. Their weights are $b,1-b$, so the coupling $z$ must satisfy $|z|^2=b(1-b)$. Conversely, for $b>0$, the amplitudes $\sqrt b,\bar z/\sqrt b$ give the required pure state. For $b=0$, take $|101\rangle$. For prescribed $b,z$, a pure extension with rational real and imaginary parts in every density matrix entry exists exactly when $b$ and both coordinates of $z$ are rational and satisfy this norm equation. For rational $b$, existence is thus equivalent to writing $b(1-b)$ as a sum of two rational squares. [Criterion for a rational pure extension](lean:D5/S3/Quantum/Entanglement/Marginals/FibRationalPureExtension.rational_pure_coupling_iff)
 
 For instance, when $b=1/4$, the coupling $z=\sqrt 3/4$ gives a pure state. Rational coordinates for $z$ would express three as a sum of two rational squares after scaling by four. Clearing denominators would equate a sum of two integer squares to three times a square, where the exponent of three is odd. This is impossible. The diagonal mixture of $|010\rangle,|101\rangle$ with weights $1/4,3/4$ gives a rational common extension.
