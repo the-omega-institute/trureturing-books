@@ -33,8 +33,8 @@
      "ζ 函数也有这样一面镜子：实部等于二分之一的那条线。"
     ],
     [
-     "Its zeros come in mirror pairs. But does a mirror ever make you stand on the glass?",
-     "它的零点成对出现，互为镜像。可镜子会逼你站到玻璃上吗？"
+     "Its nontrivial zeros come in mirror pairs. But does a mirror make you stand on the glass?",
+     "它的非平凡零点成对出现，互为镜像。可镜子会逼你站到玻璃上吗？"
     ]
    ],
    "cues": [
@@ -110,11 +110,11 @@
     ],
     [
      "Lean also checks: the Riemann hypothesis means every nontrivial zero has ratio one.",
-     "Lean 还检验：黎曼猜想，等价于每个非平凡零点的比值都是 1。"
+     "Lean 还检验：黎曼猜想等价于每个非平凡零点的比值都是 1。"
     ],
     [
-     "And the mirror halves the search: no zero strictly between one half and one is enough.",
-     "镜子还把搜索减半：只要 1/2 与 1 之间没有零点，就够了。"
+     "The mirror also halves the search: no zero with real part strictly between one half and one is enough.",
+     "镜子还把搜索减半：只要没有零点的实部严格介于 1/2 与 1 之间，就够了。"
     ]
    ],
    "cues": [
@@ -143,8 +143,8 @@
      "现在造一个赝品：一个四次多项式，四个零点是 1/2 ± 1/4 ± 14i。"
     ],
     [
-     "It has every symmetry zeta has: the left–right mirror and the up–down flip.",
-     "ζ 有的对称它全都有：左右镜像，上下翻转。"
+     "It has zeta's two symmetries: the half-turn s to one minus s, and the up–down flip. Together they make the mirror.",
+     "ζ 的两种对称它都有：绕 ½ 的半圈转动 s ↦ 1 − s，和上下翻转；两者合起来，才是左右镜像。"
     ],
     [
      "Yet none of its zeros is on the line. Their ratios form a mirror pair.",
@@ -155,8 +155,8 @@
      "沿着那条线，它取实数值，而且从不低于 49。"
     ],
     [
-     "Lean checks this forgery for any nonzero shift and any nonzero height.",
-     "Lean 内核检验：只要偏移与高度都不为零，这个赝品都成立。"
+     "For any nonzero shift and height, Lean checks both symmetries and that all four zeros miss the line.",
+     "对任意非零偏移与高度，Lean 检验了两种对称，以及四个零点全不在线上。"
     ]
    ],
    "cues": [
@@ -191,7 +191,7 @@
     ],
     [
      "A mirror tells you where your twin stands, never where you stand.",
-     "镜子只告诉你影子站在哪，从不告诉你自己站在哪。"
+     "镜子只告诉你镜中人站在哪，从不告诉你自己站在哪。"
     ],
     [
      "Any proof that the zeros sit on the line must use something beyond these two symmetries.",
@@ -237,7 +237,7 @@
    "id": "close",
    "name": "LEDGER",
    "lead": 0.5,
-   "tail": 3.4,
+   "tail": 2.6,
    "music": [
     1.0,
     0.6,

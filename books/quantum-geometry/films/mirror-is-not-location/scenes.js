@@ -191,10 +191,10 @@ SCENES.mirror = S => {
   panel(1120, 260, 680, 360, a * Q(S, 1, 'zeta function', 0.8), C.cyan, 'THE MIRROR OF ZETA · ζ 的镜子');
   const pa = a * Q(S, 1, 'zeta function', 0.8);
   miRich([['s  ↔  1 − s̄', C.white]], 1150, 340, { size: 36, a: pa });
-  txt('the mirror pairs the zeros · 零点成对', 1150, 400, { size: 24, fam: F.zh, w: 700, c: C.white, a: pa * Q(S, 2, 'mirror pairs', 0.6) });
+  txt('nontrivial zeros pair up · 非平凡零点成对', 1150, 400, { size: 24, fam: F.zh, w: 700, c: C.white, a: pa * Q(S, 2, 'mirror pairs', 0.6) });
   txt('must a zero stand on the glass?', 1150, 480, { size: 26, fam: F.disp, w: 700, c: C.now, a: pa * Q(S, 2, 'does a mirror', 0.6) });
   txt('零点非得站在玻璃上吗？', 1150, 526, { size: 28, fam: F.zh, w: 700, c: C.now, a: pa * Q(S, 2, 'does a mirror', 0.6) });
-  txt('a room is a picture · 房间只是比方', 1150, 590, { size: 18, fam: F.zh, w: 700, c: C.argued, a: pa * 0.9 });
+  txt('a room is a picture · 房间只是比方', 1150, 590, { size: 22, fam: F.zh, w: 700, c: C.argued, a: pa * 0.9 });
 };
 
 /* ======================================================================= */
@@ -253,9 +253,9 @@ SCENES.lamps = S => {
     miRich([['r(−1) = 2 ÷ 1 = ', C.white], ['2', C.mag]], 1266, 554, { size: 30, a: h2 });
     const fa = a * Q(S, 3, 'swaps', 0.6);
     miRich([['mirror · 镜像  2 ↔ −1', C.white]], 1266, 624, { size: 26, a: a * at(S, 3, 0.6), fam: F.zh });
-    miRich([['r(1 − s̄) = 1 / r(s)', C.now]], 1266, 676, { size: 30, a: fa });
+    miRich([['r(1 − s̄) = 1 / r(s)', C.white]], 1266, 676, { size: 30, a: fa });
     miRich([['½ × 2 = 1', C.white]], 1266, 728, { size: 26, a: fa });
-    txt('lamps are a picture · 灯只是比方', 1266, 778, { size: 18, fam: F.zh, w: 700, c: C.argued, a: da * 0.9 });
+    txt('lamps are a picture · 灯只是比方', 1266, 778, { size: 22, fam: F.zh, w: 700, c: C.argued, a: da * 0.9 });
   }
 };
 
@@ -277,14 +277,14 @@ SCENES.ruler = S => {
   const ha = a * Q(S, 3, 'strictly between', 0.8);
   fillBox(xh + 8, 220, x1 - xh - 8, 640, C.cyan, ha * 0.10);
   if (ha > 0.003) {
-    txt('if no zero here', (xh + x1) / 2, 520, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.white, a: ha });
+    txt('if no zero', (xh + x1) / 2, 520, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.white, a: ha });
     txt('若此处无零点', (xh + x1) / 2, 556, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.white, a: ha });
     txt('⟹ RH', (xh + x1) / 2, 600, { size: 28, fam: F.math, w: 700, align: 'center', c: C.lean, a: ha });
   }
   miGlass(P, 220, 860, a);
   /* the ratio formula */
   panel(820, 190, 1000, 160, a, C.cyan, 'THE RATIO · 比值');
-  miRich([['r(s) = ', C.white], ['|s − 1| / |s|', C.white], ['  =  ', C.dim], ['‖(s − 1)/s‖', C.now]], 850, 262, { size: 34, a: a * Q(S, 0, 'The ratio is', 0.6) });
+  miRich([['r(s) = ', C.white], ['|s − 1| / |s|', C.white], ['  =  ', C.dim], ['‖(s − 1)/s‖', C.cyan]], 850, 262, { size: 34, a: a * Q(S, 0, 'The ratio is', 0.6) });
   miRich([['skeleton · 骨架:  |s − 1|² − |s|² = 1 − 2 Re s', C.white]], 850, 318, { size: 24, a: a * Q(S, 0, 'size of s minus one', 0.6), fam: F.zh });
   /* line 1: the Cayley equivalence */
   const l1 = a * Q(S, 1, 'Lean checks', 0.6);
@@ -296,7 +296,7 @@ SCENES.ruler = S => {
   const l2 = a * Q(S, 2, 'Lean also checks', 0.6);
   if (l2 > 0.003) {
     panel(820, 540, 1000, 170, l2, C.lean, 'EVERY NONTRIVIAL ZERO · 每个非平凡零点');
-    miRich([['RH  ⟺  ∀ρ: ζ(ρ) = 0, ρ ≠ −2, −4, …  ⟹  ln‖(ρ − 1)/ρ‖ = 0', C.white]], 850, 606, { size: 25, a: l2 });
+    miRich([['RH  ⟺  ∀ρ: ζ(ρ) = 0, ρ ≠ −2, −4, …, ρ ≠ 1  ⟹  ln‖(ρ − 1)/ρ‖ = 0', C.white]], 850, 606, { size: 23, a: l2 });
     txt('ratio one · 比值为 1', 850, 644, { size: 20, fam: F.zh, w: 700, c: C.dim, a: l2 });
     miLean(850, 688, MI_LEAN.cayley_critical_line_zeta_criterion, l2);
   }
@@ -325,9 +325,9 @@ SCENES.forgery = S => {
   const oy = P([0, 0])[1];
   ctx.save(); ctx.setLineDash([4, 8]); line(x0 - 40, oy, x1 + 40, oy, C.dim, a * 0.6, 1.5); ctx.restore();
   for (const g of [14, -14]) { const q = P([0, g]); txt(`${g > 0 ? '' : '−'}14i`, x1 + 50, q[1] + 8, { size: 24, fam: F.math, w: 700, c: C.dim, a }); }
-  txt('Re ¼', P([0.25, 0])[0], 576, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.mag, a });
-  txt('Re ½', P([0.5, 0])[0] + 34, 520, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.cyan, a });
-  txt('Re ¾', P([0.75, 0])[0], 576, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.cyan, a });
+  txt('Re ¼', P([0.25, 0])[0], 576, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.mag, a });
+  txt('Re ½', P([0.5, 0])[0] + 44, 612, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.cyan, a });
+  txt('Re ¾', P([0.75, 0])[0], 576, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.cyan, a });
   /* the four zeros: inside the unit circle of the ratio (Re ¾) cyan, outside (Re ¼) magenta */
   const za = a * Q(S, 0, 'four zeros', 0.8);
   MI_ZEROS.forEach((z, i) => {
@@ -336,33 +336,35 @@ SCENES.forgery = S => {
     if (ka > 0.01) txt(`${z[0] > 0.5 ? '¾' : '¼'} ${z[1] > 0 ? '+' : '−'} 14i`, q[0] + (z[0] > 0.5 ? 28 : -28), q[1] + (z[1] > 0 ? -22 : 40), { size: 22, fam: F.math, w: 700, align: z[0] > 0.5 ? 'left' : 'right', c: C.white, a: ka });
   });
   /* line 1: the two symmetries as arrows between zeros */
-  const sa = a * Q(S, 1, 'left–right mirror', 0.7), fa = a * Q(S, 1, 'up–down flip', 0.7);
-  if (sa > 0.003) { const p = P(MI_ZEROS[0]), q = P(MI_ZEROS[1]); arrow(p[0] - 26, p[1] + 84, q[0] + 26, q[1] + 84, C.white, sa, 2.5); arrow(q[0] + 26, q[1] + 102, p[0] - 26, p[1] + 102, C.white, sa * 0.6, 2); txt('mirror · 镜像', P([0.5, 0])[0] + 16, p[1] + 140, { size: 20, fam: F.zh, w: 700, align: 'left', c: C.white, a: sa }); }
-  if (fa > 0.003) { const p = P(MI_ZEROS[0]), q = P(MI_ZEROS[2]); ctx.save(); ctx.setLineDash([8, 8]); arrow(p[0] + 190, p[1] + 30, q[0] + 190, q[1] - 30, C.white, fa * 0.8, 2); ctx.restore(); txt('flip · 翻转', p[0] + 204, oy - 14, { size: 20, fam: F.zh, w: 700, c: C.white, a: fa }); }
+  const ta = a * Q(S, 1, 'half-turn', 0.7), fa = a * Q(S, 1, 'up–down flip', 0.7), sa = a * Q(S, 1, 'Together', 0.7);
+  if (ta > 0.003) { const p = P(MI_ZEROS[0]), q = P(MI_ZEROS[3]); ctx.save(); ctx.setLineDash([12, 8]); arrow(p[0] - 14, p[1] + 22, q[0] + 14, q[1] - 22, C.white, ta * 0.7, 2); ctx.restore(); txt('s ↦ 1 − s · 半圈转动', P([0.5, 0])[0] + 30, oy + 150, { size: 22, fam: F.zh, w: 700, c: C.white, a: ta }); }
+  if (sa > 0.003) { const p = P(MI_ZEROS[0]), q = P(MI_ZEROS[1]); arrow(p[0] - 26, p[1] + 84, q[0] + 26, q[1] + 84, C.white, sa, 2.5); arrow(q[0] + 26, q[1] + 102, p[0] - 26, p[1] + 102, C.white, sa * 0.6, 2); txt('1 − s̄ · mirror · 镜像', P([0.5, 0])[0] - 16, p[1] + 140, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.white, a: sa }); }
+  if (fa > 0.003) { const p = P(MI_ZEROS[0]), q = P(MI_ZEROS[2]); ctx.save(); ctx.setLineDash([8, 8]); arrow(p[0] + 190, p[1] + 30, q[0] + 190, q[1] - 30, C.white, fa * 0.8, 2); ctx.restore(); txt('s ↦ s̄ · 翻转', p[0] + 204, oy - 14, { size: 22, fam: F.zh, w: 700, c: C.white, a: fa }); }
   /* the readout */
   panel(1000, 180, 820, 290, a, C.cyan, 'THE FORGERY · 赝品');
   miRich([['F(s) = ((z − ¼)² + 14²)((z + ¼)² + 14²)', C.white]], 1024, 246, { size: 28, a: a * at(S, 0, 0.6) });
   txt('z = s − ½', 1024, 284, { size: 22, fam: F.math, w: 700, c: C.dim, a: a * at(S, 0, 0.6) });
-  miRich([['F(1 − s) = F(s)     F(s̄) = conj F(s)', C.white]], 1024, 336, { size: 26, a: a * at(S, 1, 0.6) });
+  miRich([['F(1 − s) = F(s)   F(s̄) = conj F(s)', C.white]], 1024, 336, { size: 26, a: a * Q(S, 1, 'half-turn', 0.6) });
+  miRich([['⟹  F(1 − s̄) = conj F(s)', C.white]], 1024, 372, { size: 22, a: a * Q(S, 1, 'Together', 0.6) });
   const ra = a * Q(S, 2, 'Their ratios', 0.6);
-  miRich([['ratio · 比值  ', C.white], [MI_RIN.toFixed(6), C.cyan], ['  ·  ', C.dim], [MI_ROUT.toFixed(6), C.mag]], 1024, 396, { size: 28, a: ra, fam: F.zh });
+  miRich([['ratio · 比值  ', C.white], [MI_RIN.toFixed(6), C.cyan], ['  ·  ', C.dim], [MI_ROUT.toFixed(6), C.mag]], 1024, 410, { size: 28, a: ra, fam: F.zh });
   /* the ratio label next to each zero */
   if (ra > 0.003) MI_ZEROS.forEach(z => { if (z[1] < 0) return; const q = P(z); txt(miRatio(z).toFixed(6), q[0] + (z[0] > 0.5 ? 28 : -28), q[1] + 50, { size: 20, fam: F.mono, w: 700, align: z[0] > 0.5 ? 'left' : 'right', c: z[0] > 0.5 ? C.cyan : C.mag, a: ra }); });
-  miRich([['product · 乘积  = 1', C.white]], 1024, 444, { size: 24, a: a * Q(S, 2, 'a mirror pair', 0.5), fam: F.zh });
-  const la = a * at(S, 3, 0.6);
+  miRich([['product · 乘积  = 1', C.white]], 1024, 452, { size: 24, a: a * Q(S, 2, 'a mirror pair', 0.5), fam: F.zh });
+  const la = a * at(S, 3, 0.6) * (1 - 0.65 * Q(S, 4, 'Lean checks', 0.6));
   if (la > 0.003) {
     panel(1000, 490, 820, 150, la, C.cyan, 'ALONG THE LINE · 沿临界线');
-    miRich([['F(½ + it) = (196.0625 − t²)² + t²/4  ≥  ', C.white], ['49', C.now]], 1024, 560, { size: 27, a: la });
-    txt('real, never zero · 实数，从不为零', 1024, 610, { size: 22, fam: F.zh, w: 700, c: C.dim, a: la });
+    miRich([['F(½ + it) = (196.0625 − t²)² + t²/4  ≥  ', C.white], ['49', C.cyan]], 1024, 560, { size: 27, a: la });
+    txt('real · only for δ = ¼, γ = 14 · computed · 仅此组参数，屏幕计算', 1024, 610, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: la });
   }
   const le = a * Q(S, 4, 'Lean checks', 0.6);
   if (le > 0.003) {
     panel(1000, 660, 820, 200, le, C.lean, 'ANY δ ≠ 0, γ ≠ 0 · 任意非零偏移与高度');
     txt('entire · both symmetries · exactly 4 zeros', 1024, 722, { size: 24, fam: F.mono, w: 700, c: C.white, a: le });
     txt('none with Re s = ½ · 没有一个在线上', 1024, 762, { size: 24, fam: F.zh, w: 700, c: C.white, a: le });
-    miLean(1024, 822, MI_LEAN.full_symmetry_not_fixed_line_localization, le, { size: 17 });
+    miLean(1024, 822, MI_LEAN.full_symmetry_not_fixed_line_localization, le, { size: 20 });
   }
-  stamp('NONE ON THE LINE', 470, 540, Q(S, 2, 'none of its zeros', 0.5, 0.6) * (1 - at(S, 3, 0.5, 1.6)), C.mag, 34, -0.06);
+  stamp('NONE ON THE LINE', 470, 482, Q(S, 2, 'none of its zeros', 0.5, 0.6) * (1 - at(S, 3, 0.4, -0.4)), C.mag, 34, -0.06);
 };
 
 /* ======================================================================= */
@@ -388,14 +390,14 @@ SCENES.idol = S => {
   txt('symmetry  ⟹  location ?', 1300, 290, { size: 40, fam: F.disp, w: 700, align: 'center', c: C.white, a: ia });
   txt('对称 ⟹ 定位？', 1300, 346, { size: 36, fam: F.zh, w: 700, align: 'center', c: C.white, a: ia });
   const xa = a * Q(S, 0, 'It is not', 0.4);
-  if (xa > 0.003) { line(1050, 284, 1555, 262, C.white, xa, 3); txt('symmetry  ⇏  location', 1300, 420, { size: 34, fam: F.disp, w: 700, align: 'center', c: C.cyan, a: xa }); }
+  if (xa > 0.003) { line(1050, 284, 1555, 262, C.white, xa, 3); line(1160, 340, 1420, 322, C.white, xa, 3); txt('symmetry  ⇏  location', 1300, 420, { size: 34, fam: F.disp, w: 700, align: 'center', c: C.cyan, a: xa }); }
   /* the aphorism */
   const qa = a * at(S, 1, 0.8);
   if (qa > 0.003) {
     panel(900, 470, 860, 200, qa, C.argued);
     txt('A mirror tells you where your twin stands,', 1330, 540, { size: 30, fam: F.disp, w: 700, align: 'center', c: C.white, a: qa });
     txt('never where you stand.', 1330, 580, { size: 30, fam: F.disp, w: 700, align: 'center', c: C.now, a: qa });
-    txt('镜子只告诉你影子站在哪，从不告诉你自己站在哪。', 1330, 636, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: qa });
+    txt('镜子只告诉你镜中人站在哪，从不告诉你自己站在哪。', 1330, 636, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: qa });
   }
   const ba = a * Q(S, 2, 'beyond these two symmetries', 0.6);
   if (ba > 0.003) {
