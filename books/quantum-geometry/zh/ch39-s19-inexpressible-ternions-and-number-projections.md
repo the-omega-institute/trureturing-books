@@ -85,6 +85,12 @@ $$
 平直死锁与 $180^\circ$ 极点卡：$\theta = 179^\circ$ 时，平直三元组左乘矩阵 $L_x$ 暴露实特征根与非零零因子见证，未经截断的罗德里格斯坐标读数为 $\lvert\tan(\theta/2)\rvert = 114.5887$（三维舞台品红柱按 $\min(4, \lvert\tan(\theta/2)\rvert)$ 封顶并在 $180^\circ$ 标极点环），而中央紫色极小圆弧体顺畅跨过半周。坐标与矩阵读数为 `NUM`，极点文献为 `ARGUED`，三元数本体读法为 `MODEL`。
 :::
 
+第一重铁壁也可以从三维箭头已有的那种乘法一侧来读：叉乘确实能把两个三元组乘起来，但它只记下两支箭头撑开的面积，把两者的重叠扔掉了；哈密顿添上的第四格，正是存放这份重叠的地方。下面这部短片用两支整数箭头把这笔账算清。
+
+::: {.film src="why-no-ternions"}
+**三维乘不拢（2 分 30 秒）。** 白色箭头 $a = (1, 2, 2)$ 与 $b = (0, 3, 4)$ 长 $3$ 与 $5$；品红的叉乘 $(2, -4, 3)$ 从品红平行四边形里竖起来，长 $\sqrt{29} \approx 5.39$，而 $b$ 落在 $a$ 上的青色影子——点积 $14$——在三格方盒里无处安放；并且 $a \times a = 0$。写成收据，两行恰好对上账：$14^2 + 29 = 225 = 15^2$，青色的点积与品红的叉乘是同一个直角三角形的两条直角边，斜边为 $\lvert a\rvert\lvert b\rvert$（拉格朗日恒等式，[@thm-ch39-nonlinear-ternion-representations-and-torsor] 中的 `lagrange_gram_identity`）。多留一个数位，四元数乘积给出 $ab = (-14;\, 2, -4, 3)$，长 $15 = 3 \times 5$，且 $aa = -9$。在载体 $\mathbb{R} \times \mathbb{R}^3$ 上，满足两点正性与相位平衡的任意关系都是叉乘，至多差一个整体符号；泡利矩阵的像相乘时，点积落在数位上、叉乘落在箭头位上（[@thm-ch39-ternion-spin-factor-and-number-projections] 第 1 款）。收据是比方；哈密顿 1843 年的早餐问题与弗罗贝尼乌斯—胡尔维茨对三维实可除代数的排除是文献结果（[@rem-ch39-frobenius-hurwitz-hopf-rodrigues-literature]）；把缺席的三元数读作闭合圆弧体是本书的模型（`MODEL`）；片中数字都是屏幕上的计算。
+:::
+
 ## 32.2.3 万数归弧：四元数、复数、实数、整数、有理数与素数的四道投影切刀 {#sec-ch39-19-3}
 
 既然原生三元数 $\mathbb{T}_3 \equiv \Delta\mathcal{T}_\epsilon$ 本身没有中心原点、没有特权实轴 $\mathbf{1}$，只由三段互为因果的正交极小圆弧 $[\mathbf{e}_a, \mathbf{e}_b] = \varepsilon_{abc}\mathbf{e}_c$ 循环自持，那么人类数学大厦里琳琅满目的“数”究竟从何而来？答案是：**唯当观察者在比较网络中立起自身的主格参考轴 $\mathbf{1}$（即 [§38.7](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream) 中的实轴 $\mathbf{I}$）去度量或书写这枚不可表达的三元圆弧体时，不同的观测嵌入与剖切算子才从同一枚 $\Delta\mathcal{T}_\epsilon$ 上分化出整座数系家族！**
