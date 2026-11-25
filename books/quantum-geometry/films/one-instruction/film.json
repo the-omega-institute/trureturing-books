@@ -1,0 +1,29 @@
+{
+  "title": "One instruction, paid step by step",
+  "title_zh": "一条指令，一步一付",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:12",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · two stacks of bit cards compared and restored, a step counter against a Lean ceiling, a dictionary tape scanned and wound back with tally marks, a ledger of what is checked, cited and modelled",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S0/Computability/BinaryNameComparison.name_compare_run",
+    "D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_one-instruction_720p_narrated.mp4",
+    "cover": "quantum-geometry_one-instruction_cover.jpg"
+  },
+  "summary": "A chip knows hundreds of instructions, yet one well-chosen instruction suffices for any computation given unbounded memory (a literature result), and the book reads the universe as a single comparison, CMP(A, B), as a model. But a comparison is not free. Written as two stacks of bit cards, the names 1011 and 1001 are compared by a machine that turns over both top cards, notes whether they match and sets them aside, reads to the bottom even after the mismatch, carries every card back and writes one bit: not equal, in 16 steps of a step-by-step replay. Lean checks that for any two binary names the machine halts within 2(|a| + |b|) + 4 steps, here 20, with the answer on top of the output and both names restored. A dictionary of the four names 011, 101, 110, 000 on one tape of 28 cells is searched for 110: two misses, a hit, the tape wound back; the answer is found plus two tally marks, entry 2 counting from zero, in 104 steps. Lean checks that every lookup halts within (2|q| + 12)|names| + 4|tape| + 3 steps, here 187, with the hit bit and one tally per entry before the query, and with query and dictionary restored; the missing word 111 takes 139 steps. These are upper bounds for these two constructions, not the fastest way; a lower bound for every way of comparing would need its own cost model and proof, and the one-instruction universe stays a model.",
+  "summary_zh": "芯片认得几百条指令，可只要内存不设上限，挑对一条指令就能完成任何计算（文献结果）；本书把宇宙读成只跑一条比较指令 CMP(A, B)，这是模型。可比较并不免费。把名字 1011 与 1001 写成两叠一位一张的卡片：机器每步翻开两叠最上面的卡，记下是否相同，放到一边；看到不同也一直比到底，再把每张卡搬回去，最后写下一位——不同，逐步重放共 16 步。Lean 检验了：对任意两个二元名字，机器在 2(|a| + |b|) + 4 步内停机（这里是 20），答案压在输出栈顶，两个名字原样复原。四个名字 011、101、110、000 首尾相接写在 28 格的纸带上，查 110：错过两个，第三个命中，纸带倒卷回去；答案是找到了外加两道杠，从零数起第 2 号，共 104 步。Lean 检验了：任何查询都在 (2|q| + 12)|names| + 4|tape| + 3 步内停机（这里是 187），写出命中位与查询词之前每个词条一道杠，并复原查询词与字典；查不到的 111 用了 139 步。这些是这两台构造的上界，不是最快的做法；要说任何比较方法都至少这么贵，需另立成本模型与证明；把宇宙读成一条指令仍是模型。"
+}

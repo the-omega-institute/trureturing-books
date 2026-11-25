@@ -1,0 +1,48 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen"},
+  "music": {"bpm": 82, "progression": "d-minor"},
+  "scenes": [
+    {"id": "hook", "name": "ONE INSTRUCTION", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Your phone's chip knows hundreds of instructions.", "手机里的芯片认得几百条指令。"],
+      ["Yet one well-chosen instruction, given enough memory, can run any program.", "可只要内存够用，挑对一条指令，就能跑任何程序。"],
+      ["This book reads the universe that way: a single instruction, compare A with B.", "本书就这样读宇宙：只有一条指令——拿 A 比 B。"],
+      ["But what makes us think a comparison is free?", "可是，凭什么认为比较不要钱？"]
+    ], "cues": [{"line": 3, "at": 1.2, "kind": "glitch"}]},
+    {"id": "cards", "name": "TWO STACKS OF CARDS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
+      ["Write each name as a stack of cards, one bit per card.", "把每个名字写成一叠卡片，一张一位：这里是 1011 和 1001。"],
+      ["Each step, the machine turns over both top cards, notes whether they match, and sets them aside.", "每一步，机器翻开两叠最上面的卡，记下是否相同，再放到一边。"],
+      ["It keeps going to the very bottom, even after a mismatch.", "即使已经看到不同，它也一直比到最底下。"],
+      ["Then it carries every card back. Both names are restored.", "然后把每张卡搬回去，两个名字原样复原。"],
+      ["Last, it writes one bit. Here: not equal, after sixteen steps.", "最后写下一位：这里是“不同”，一共 16 步。"]
+    ], "cues": [{"line": 4, "at": 2.4, "kind": "chime"}]},
+    {"id": "bill", "name": "THE BILL", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.5, 0.2, 0.2], "lines": [
+      ["Lean checks the bill for any two names, of any lengths.", "Lean 内核检验了这张账单：任意两个名字、任意长度。"],
+      ["At most twice the total length, plus four. Here, twice eight plus four: twenty.", "至多是总长度的两倍，再加 4 步。这里 2 × 8 + 4 = 20。"],
+      ["When it stops, both names are back, and the answer sits on top of the output.", "停机时两个名字都已复原，答案压在输出栈顶。"],
+      ["Sixteen fits under twenty. The bound is a ceiling, not a stopwatch.", "16 落在 20 之下。这个界是天花板，不是秒表。"]
+    ], "cues": [{"line": 0, "at": 0.8, "kind": "stamp"}]},
+    {"id": "dict", "name": "LOOK IT UP", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["Now a dictionary: four names of three bits, laid end to end on one tape.", "再来一本字典：四个三位的名字，首尾相接写在一条纸带上。"],
+      ["To find one one zero, it copies out each entry, checks it bit by bit, and tallies each miss.", "要找 110，机器抄出一个词条，逐位比对，每错过一个就画一道杠。"],
+      ["Two misses, then a hit. The answer: found, plus two tallies. Entry two, counting from zero.", "错过两个，第三个命中。答案是：找到了，外加两道杠——从零数起，第 2 号。"],
+      ["Then it winds the tape back. The query and the whole dictionary come home intact.", "然后把纸带倒卷回去，查询词和整本字典都完好如初。"]
+    ], "cues": [{"line": 2, "at": 1.6, "kind": "chime"}]},
+    {"id": "dictbill", "name": "THE DICTIONARY BILL", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Lean checks this bill too, for every dictionary and every query.", "这张账单 Lean 也检验过：任何字典、任何查询词。"],
+      ["Per entry, twice the query length plus twelve; per tape cell, four; then three more.", "每个词条付“查询长度的两倍加 12”，纸带每格再付 4 步，最后加 3。"],
+      ["Here that is one hundred eighty-seven. The run took one hundred four.", "这里合计 187 步；实际跑了 104 步。"],
+      ["Here, the missing word one one one takes a hundred thirty-nine steps, and reports not found.", "这里，查不到的 111 走完四个词条，用了 139 步，报告“没找到”。"]
+    ], "cues": [{"line": 0, "at": 0.8, "kind": "stamp"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["These are ceilings for these two machines, not the fastest way.", "这是这两台机器的天花板，不是最快的做法。"],
+      ["A floor for every way of comparing would need its own cost model and proof.", "要说“任何比较方法都至少这么贵”，得另立成本模型、另作证明。"],
+      ["And the one-instruction universe stays a model, not a theorem.", "至于把宇宙读成一条比较指令，那仍是模型，不是定理。"],
+      ["Even this simplest machine pays for every look.", "连这台最简单的机器，每看一眼都要付账。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter twenty-eight.", "《量子计算的几何直觉》· 第二十八章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}
