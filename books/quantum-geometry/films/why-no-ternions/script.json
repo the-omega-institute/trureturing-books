@@ -1,0 +1,46 @@
+{
+  "voice": "af_heart",
+  "speed": 1.04,
+  "say": {"Lean": "Leen", "Frobenius": "Frobaynius", "Hurwitz": "Hurvitz", "Pauli": "Powlee"},
+  "music": {"bpm": 76, "progression": "d-minor"},
+  "scenes": [
+    {"id": "hook", "name": "BREAKFAST", "lead": 1.6, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Dublin, 1843. Every morning, Hamilton's sons asked: can you multiply triplets yet?", "1843 年，都柏林。每天早上，哈密顿的儿子们都问：爸爸，三元数能乘了吗？"],
+      ["He shook his head: no, I can only add and subtract them.", "他摇摇头：不能，我只会把它们相加、相减。"],
+      ["Today, arrows in space do have a product: the cross product. Why isn't that enough?", "可如今空间里的箭头明明有乘法，就是叉乘。为什么还不够？"]
+    ], "cues": [{"line": 2, "at": 2.2, "kind": "chime"}]},
+    {"id": "leak", "name": "WHAT THE CROSS DROPS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.4, 0.1, 0.2], "lines": [
+      ["Take two arrows: a is one, two, two, length three; b is zero, three, four, length five.", "取两支箭头：a = (1, 2, 2)，长 3；b = (0, 3, 4)，长 5。"],
+      ["Their cross product stands up out of their plane. Its length is their area, about five point four.", "它们的叉乘从两者的平面里竖起来，长度就是两者撑开的面积，约 5.4。"],
+      ["Now square everything: fifteen squared is two twenty-five, the area squared only twenty-nine. Where did the rest go?", "现在全部平方：15² 是 225，面积的平方却只有 29。剩下的去哪了？"],
+      ["Into the dot product: a's length times b's shadow on a, which makes fourteen. The cross product throws it away.", "去了点积里：a 的长度乘以 b 在 a 上的影子，得 14。叉乘把它扔掉了。"],
+      ["Worse, any arrow crossed with itself gives zero, so you can never divide.", "更糟的是：任何箭头与自己叉乘都得零，于是没法做除法。"]
+    ], "cues": [{"line": 3, "at": 2.0, "kind": "glitch"}]},
+    {"id": "receipt", "name": "AN HONEST RECEIPT", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.5, 0.2, 0.2], "lines": [
+      ["Think of a product as a receipt. In an honest one, the squared lines add up to length times length, squared.", "把乘积想成一张收据：老实的收据，各行平方相加，等于长度之积的平方。"],
+      ["One ninety-six plus twenty-nine is two twenty-five, which is fifteen squared.", "196 加 29 得 225，正是 15²。"],
+      ["Lean checks it for any two lists of real numbers: lengths squared, multiplied, minus the dot squared, is the sum of squared areas.", "Lean 内核检验了：对任意两组实数，长度平方之积减去点积平方，等于各块面积的平方和。"],
+      ["In three dimensions those areas are the cross product. Dot and cross: two legs of one right triangle.", "在三维里，这些面积正是叉乘的分量。点积与叉乘，是同一个直角三角形的两条直角边。"],
+      ["The cross product is not wrong. It is half a receipt.", "叉乘没有错，它只是半张收据。"]
+    ], "cues": [{"line": 2, "at": 0.8, "kind": "stamp"}]},
+    {"id": "fourth", "name": "ONE MORE LINE", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Hamilton's fix: give the receipt one more line, a plain number beside the arrow.", "哈密顿的办法，是给收据添一行：在箭头旁边留一个普通的数。"],
+      ["Multiply a and b again: the number line gets minus fourteen, the arrow lines the cross product.", "再把 a 和 b 乘一次：数的那一行记下 −14，箭头那三行记下叉乘。"],
+      ["Length fifteen, exactly three times five. Nothing leaks, and an arrow squared is minus nine, not zero.", "长度 15，恰好 3 乘 5，一分不漏。箭头自乘现在是 −9，不再是零。"],
+      ["To multiply in three, keep a fourth.", "要在三维里乘得拢，就得留住第四行。"]
+    ], "cues": [{"line": 3, "at": 0.4, "kind": "impact"}]},
+    {"id": "forced", "name": "THE CROSS IS FORCED", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.6, 0.4, 0.4], "lines": [
+      ["Lean also checks a second fact, on one number slot and three arrow slots.", "Lean 内核还检验了另一件事：取一个数位、三个箭头位。"],
+      ["Any twisting rule obeying two axioms, positivity and phase balance, must be the cross product, up to sign.", "任何满足正性与相位平衡两条公理的扭转规则，都必定是叉乘，至多差一个整体符号。"],
+      ["And Pauli matrices multiply this way: the dot in the number slot, the cross in the arrow slots.", "泡利矩阵正是这样相乘：点积坐在数位上，叉乘坐在箭头位上。"]
+    ], "cues": [{"line": 1, "at": 2.4, "kind": "stamp"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["No three-dimensional real number system lets you divide: Frobenius for associative products, Hurwitz when lengths multiply, Hopf in general.", "实数上没有能做除法的三维数系：弗罗贝尼乌斯证了乘法可结合的情形，胡尔维茨证了长度相乘的情形，霍普夫证了一般情形。"],
+      ["Those are literature results. Here Lean checks only the identity and the forced cross product.", "这些是文献结果；这里 Lean 只检验了那条恒等式和被锁定的叉乘。"],
+      ["Reading the missing triplet as a closed arc is this book's model, not a theorem.", "把缺席的三元数读作闭合的圆弧体，是本书的模型，不是定理。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 2.8, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter thirty-two.", "《量子计算的几何直觉》· 第三十二章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

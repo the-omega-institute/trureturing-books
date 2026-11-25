@@ -1,0 +1,32 @@
+{
+  "title": "Five ledgers that never cheat",
+  "title_zh": "五本从不作弊的账",
+  "summary": "The quantum no-go rules read as five ledgers that always balance. Seat: for ψ = (0.6, 0.8) and φ = (0.8, 0.6i) the overlap is 0.48 − 0.48i, and Lean checks that the weight of the rank-one record is its modulus squared, here 0.4608; swapping who measures whom turns the overlap into its mirror image, with the same modulus. Gain and loss: a pure qubit has a purity budget Re Tr ρ² − ½ = ½; the up/down question with answers 90% and 10% shows 0.32 and leaves 0.18 hidden, and Lean checks that, once the budget is a squared length, it splits exactly into what a question shows plus the residual it cannot see. No photocopies: a reversible copier keeps overlaps, so 0.8 before would have to equal 0.8² = 0.64 after; Lean checks that one copier for two states forces the overlap to equal its square, so the states are equal or perpendicular. No skipping ahead: from a one-in-a-hundred chance, Lean checks that n rounds of amplification leave the success part sin((2n + 1)θ) with θ = arcsin √p, so the chance climbs to 99.5% at round seven. The same starlight: two travellers stepping by √2 − 1 from different places record a brightness; Lean checks that time averages tend to the average over the closure of the orbit, here the whole circle, so both settle at one half. Reading these verified statements as fairness is the book's interpretation; the round count of one method is no lower bound for all methods, and P versus NP stays open; three-qubit monogamy and the physical heat of erasure are literature results.",
+  "summary_zh": "把量子的禁令读成五本永远对得上的账。席位：ψ = (0.6, 0.8)、φ = (0.8, 0.6i) 的重叠是 0.48 − 0.48i，Lean 检验秩一记录的权重就是它的模方，这里是 0.4608；调换谁量谁，重叠变成镜像，模不变。得失：纯态量子比特的纯度预算 Re Tr ρ² − ½ = ½；上下这一问答出 90% 与 10%，看得见 0.32，看不见的 0.18 留在别处；Lean 检验：预算一旦是长度的平方，就恰好分成一个问题看得见的与它看不见的残余。不可复印：可逆的复印机保持重叠，复印前的 0.8 必须等于复印后的 0.8² = 0.64；Lean 检验：同一台复印机若能复印两个态，重叠就等于自己的平方，两个态要么相同、要么垂直。不能跳步：从百分之一的机会出发，Lean 检验 n 轮放大后成功分量是 sin((2n + 1)θ)，θ = arcsin √p，机会在第 7 轮升到 99.5%。同样的星光：两个旅人从不同地方以步长 √2 − 1 绕圈、记下亮度；Lean 检验时间平均趋于轨道闭包上的平均，这里闭包是整个圆，两人都收敛到 1/2。把这些已验证的陈述读作公平是本书的诠释；一种方法的轮数不是所有方法的下界，P 与 NP 之问仍然开放；三方纠缠单配性与擦除的物理热量是文献结果。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:28",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · five ledger pages: a complex overlap and its mirror, a purity budget bar, a copier that breaks an overlap, a turnstile of rotation rounds, two travellers' running averages",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight",
+    "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras",
+    "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion",
+    "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation",
+    "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_five-fairnesses_720p_narrated.mp4",
+    "cover": "quantum-geometry_five-fairnesses_cover.jpg"
+  }
+}

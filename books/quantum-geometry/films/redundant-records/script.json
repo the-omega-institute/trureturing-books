@@ -1,0 +1,44 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "qubit": "cue-bit"},
+  "music": {"bpm": 78, "progression": "d-minor"},
+  "scenes": [
+    {"id": "sign", "name": "ONE SIGN, MANY READERS", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Ten people pass a road sign, and each one writes down what it says.", "十个路人经过同一块路标，每人都在本子上记下它写着什么。"],
+      ["Later, one of them rubs their note back out. Can the sign go back to before?", "后来有一位把自己记下的那一笔倒着抹掉。路标能因此回到没人读过的时候吗？"],
+      ["We like to think a fact just sits out there on its own. Let us count instead.", "我们总以为事实独自摆在那里，不靠谁记着。这回不如动手算一算。"]
+    ], "cues": [{"line": 1, "at": 1.6, "kind": "glitch"}]},
+    {"id": "write", "name": "WRITING TWO COPIES", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.0, 0.2], "lines": [
+      ["Take a qubit in an even superposition. The number linking its two branches is one half.", "取一个均匀叠加的量子比特。连接两条分支的那个数，相干，等于二分之一。"],
+      ["Each record of the branch multiplies that number by the record's overlap.", "每写下一份记录，这个数就乘上这份记录的重叠。"],
+      ["A phase record has overlap minus i, a quarter turn. Two copies make it minus one half.", "相位记录的重叠是 −i，相当于转了四分之一圈；写两份，它就变成 −½。"]
+    ], "cues": [{"line": 2, "at": 4.2, "kind": "chime"}]},
+    {"id": "undo", "name": "UNDO ONE, UNDO BOTH", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["To undo a copy, conjugate it. Its quarter turn runs backwards.", "要撤销一份副本，就取它的共轭：那四分之一圈倒着转回去。"],
+      ["Undo copy zero alone: minus one half times i is minus i over two. Not one half.", "只撤销第 0 份：−½ 乘以 i 是 −i/2，回不到 ½。"],
+      ["Undo both, and it is one half again. Lean checks all four numbers.", "两份都撤销，又回到 ½。这四个数都由 Lean 内核核验。"]
+    ], "cues": [{"line": 1, "at": 4.4, "kind": "impact"}, {"line": 2, "at": 1.8, "kind": "chime"}, {"line": 2, "at": 3.2, "kind": "stamp"}]},
+    {"id": "survivor", "name": "ONE SURVIVOR", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.3, 0.3], "lines": [
+      ["Now take any number of copies, and undo every one except copy k.", "现在副本多少份都行，把除第 k 份以外的全部撤销。"],
+      ["If the others have overlaps of size one, what is left is the survivor's overlap times the old number.", "只要其余副本的重叠模长都是 1，剩下的就是幸存那一份的重叠乘以原来的数。"],
+      ["Lean checks it: if that overlap is not one, and the number was not zero, undoing the others never brings it back.", "Lean 内核检验：只要这份重叠不等于 1、原来的数又不为零，撤销其余副本就回不到原值。"],
+      ["It is like a photo that is gone only when every phone has deleted it.", "就像一张照片，只有每部手机都删了，它才真没了。"],
+      ["A fact is hard to unmake because too many hands hold it.", "事实难以抹去，是因为握着它的手太多。"]
+    ], "cues": [{"line": 2, "at": 3.4, "kind": "stamp"}]},
+    {"id": "axes", "name": "TWO SLANTED RAILS", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Copies on one axis can be undone in any order. Now a different kind of order: pull a point toward a rail.", "同一轴上的副本，撤销先后无关。下面换一种先后：把点往轨道上拉。"],
+      ["Pull halfway to the flat rail, then two thirds of the way to a tilted one.", "先往水平轨道拉一半，再往一根斜轨道拉三分之二。"],
+      ["Do it the other way round, and you land eight twenty-fifths across instead of four.", "反过来做，落点的横坐标就是 8/25，而不是 4/25。"],
+      ["Lean checks the exact gap. It vanishes for parallel or perpendicular rails, and not for slanted ones.", "Lean 内核核验了这道差的精确公式：两轨平行或垂直时为零，斜交时不为零。"]
+    ], "cues": [{"line": 2, "at": 2.8, "kind": "impact"}, {"line": 3, "at": 0.8, "kind": "stamp"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Conjugating undoes only copies of overlap size one. Noisy copies need the joint inverse gate.", "共轭只能撤销重叠模长为 1 的副本；带噪的副本要靠联合的逆门。"],
+      ["Reading facts as redundant records is this book's interpretation, not a theorem.", "把事实读作冗余的记录，是本书的诠释，不是定理。"],
+      ["And why you see one outcome, not a blend, is still an open problem.", "至于为什么你看到的是一个结果而不是混合，仍是开放问题。"]
+    ], "cues": [{"line": 2, "at": 1.0, "kind": "glitch"}]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter thirty-four.", "《量子计算的几何直觉》· 第三十四章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

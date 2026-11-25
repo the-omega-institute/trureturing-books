@@ -1,0 +1,46 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen"},
+  "music": {"bpm": 76, "progression": "d-minor"},
+  "scenes": [
+    {"id": "hook", "name": "AROUND THE BLOCK", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Carry an arrow around a block and come home. Does it still point the same way?", "拿着一支箭头绕街区走一圈，回到家门口：它还指着原来的方向吗？"],
+      ["We like to imagine one big dial on the wall of the universe, telling every place where zero is.", "我们总以为宇宙的墙上挂着一只大表盘，告诉每个地方零点在哪里。"],
+      ["Take that dial away. Each street only tells you how to carry the arrow to the next corner.", "把这只表盘拿掉，每条街就只告诉你：怎样把箭头搬到下一个路口。"]
+    ], "cues": [{"line": 2, "at": 0.4, "kind": "glitch"}]},
+    {"id": "order", "name": "ORDER MATTERS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
+      ["Start small: two houses, and one step, U, that swaps them.", "从最小的情形算起：两座房子，一步 U 把它们对调。"],
+      ["A field f reads two at the first house and five at the second, like two thermometers.", "场 f 在第一座房子读 2，在第二座读 5，就像两支温度计。"],
+      ["Read, then step; or step, then read. The two orders differ by plus three and minus three.", "先读再走，还是先走再读？两种次序相差 +3 和 −3。"],
+      ["Lean checks the rule in any ring. If f, carried one step, becomes a shifted copy, the commutator is that shift times the step.", "Lean 检验：任意环里，只要 f 走一步变成平移版，交换子就是差乘这一步。"],
+      ["So the order matters by the change in the field, times the step.", "所以次序造成的差，就是场的变化再乘上这一步。"]
+    ], "cues": [{"line": 3, "at": 0.6, "kind": "stamp"}]},
+    {"id": "towns", "name": "EXCHANGE RATES", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.5, 0.1, 0.2], "lines": [
+      ["Now a map of five towns. Each road carries a turn: a unit complex number.", "现在换成五座小镇的地图。每条路带着一个转角：一个单位复数。"],
+      ["Think of exchange rates. Each town may rename its own coin, and every road touching it must re-quote.", "把它想成汇率：每座小镇可以给自己的钱币改名，连着它的每条路都得重新报价。"],
+      ["So one road alone means nothing: renaming its ends can set it to anything.", "所以单独一条路本身没有意义：给两端改个名，就能把它拧成任何值。"]
+    ], "cues": [{"line": 1, "at": 2.2, "kind": "chime"}]},
+    {"id": "tree", "name": "ONE ROUTE TO EACH TOWN", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["Pick a capital, r, and a tree of official roads: exactly one route from it to every town.", "那就选一座首都 r，再选一棵官方道路树：从首都到每座小镇，恰好只有一条路线。"],
+      ["Multiply the turns along that route, inverting against the arrow: that is the town's root phase.", "沿这条路线把转角连乘起来，逆着箭头走就取倒数：这就是该镇的根相位。"],
+      ["Lean checks the bookkeeping: the capital gets one, each tree road adds its own turn, and renaming touches only the two ends.", "Lean 内核检验了这本账：首都是 1，每条树路添上自己的转角，改名只动首尾两端。"],
+      ["Every town in between cancels: the rename one road adds, the next road takes back.", "中间每座小镇都抵消了：前一条路添上的改名，下一条路又收了回去。"]
+    ], "cues": [{"line": 2, "at": 0.6, "kind": "stamp"}]},
+    {"id": "loop", "name": "WHAT THE LOOP KEEPS", "lead": 0.5, "tail": 0.8, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Now rename every town by the inverse of its root phase. Every tree road reads one.", "现在按根相位的倒数给每座小镇改名：每条树路都读作 1。"],
+      ["What is left sits on the two roads outside the tree: i and minus one, one per loop.", "剩下的只落在树外的两条路上：i 和 −1，每个回路一个。"],
+      ["Rename however you like: every dial turns, but each loop's product stays i and minus one.", "随便改名：每只表盘都在转，可沿每个回路连乘，仍是 i 和 −1。"],
+      ["Around the smallest loops, physicists call this turn curvature; around bigger ones, holonomy.", "绕最小的一圈留下的转角，物理学家叫它曲率；大圈的叫和乐。"],
+      ["A single road is bookkeeping. The loop is the fact.", "单独一条路只是记账；绕一圈，才是事实。"]
+    ], "cues": [{"line": 1, "at": 2.6, "kind": "chime"}, {"line": 4, "at": 2.0, "kind": "impact"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["The tree theorem is about exact, commuting phases on a graph; the commutator rule holds in any ring.", "树上那条定理讲的是图上精确、可交换的相位；交换子的规则在任意环里都成立。"],
+      ["Matching small loops to a field strength, and the non-commuting version, are literature results, not formalized here.", "把小回路的转角对上场强，以及不可交换的版本，都是文献结果，本书没有形式化。"],
+      ["And the exchange-rate story is a ladder for intuition, not a proof.", "汇率的故事只是帮直觉爬上去的梯子，不是证明。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter eighteen.", "《量子计算的几何直觉》· 第十八章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

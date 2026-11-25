@@ -1,0 +1,32 @@
+{
+  "title": "Every Square Flat, the Loop Still Flips",
+  "title_zh": "每格都平，绕一圈却翻了",
+  "summary": "Wrap a grid around a doughnut and write one bit on every edge: zero means stay, one means flip. Painting every corner black or white and writing one exactly where the two ends differ gives a gradient, and around any square the color changes an even number of times, so every gradient is flat. The converse fails on the torus: on a three by three grid with right glued to left and top to bottom, a one on the three edges that cross the right-hand glue line is flat, yet painting row 0 from black comes home needing white, because that row adds to one. Lean checks that a flat labeling is a gradient if and only if row 0 and column 0 both add to zero, and that on every grid at least three by three this single seam is flat, has row sum one and is no gradient. Counting on the three by three torus gives 262,144 labelings, 1,024 flat and 256 gradients, the flat ones split into four seam classes of 256; Lean checks the ratios 1/4, 1/2^(MN−1) and 1/2^(MN+1) for every grid size, and that the only linear relation among the squares is that all of them add to zero. Read as lattice gauge theory, zero action need not be pure gauge; the theorem is about bits on a two-dimensional grid, and the four-dimensional area law and mass gap of Yang–Mills theory remain open.",
+  "summary_zh": "把网格裹到甜甜圈上，每条边写一个比特：0 表示不变，1 表示翻转。把每个角涂成黑或白，两端颜色不同的边写 1，得到梯度；绕任何方格一圈换色次数都是偶数，所以梯度一定平坦。反过来在环面上不成立：3×3 网格右边粘左边、上边粘下边，在跨过右侧粘合线的三条边上写 1，它平坦，可从黑色出发沿第 0 行涂色，回到起点却必须是白色，因为这一行的和是 1。Lean 内核检验了：平坦标号是梯度，当且仅当第 0 行与第 0 列的和都为 0；在每张至少 3×3 的网格上，这条单缝平坦、行和为 1、且不是任何梯度。在 3×3 环面上逐个数出：262144 种标号，1024 种平坦，256 种是梯度，平坦标号按缝分成四类，每类 256 种；Lean 内核对任意大小的网格检验了比例 1/4、1/2^(MN−1) 与 1/2^(MN+1)，并检验了方格之间唯一的线性关系是全部加起来为 0。换成格点规范的读法，零作用量不一定是纯规范；这条定理讲的是二维网格上的比特，四维杨—米尔斯理论的面积律与质量间隙仍是开放问题。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:28",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a lit torus with a 6 × 12 grid and a magenta seam, painted corners, the 3 × 3 torus as a glued square, two amber loops, four seam classes",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.flat_exact_iff",
+    "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.horizontal_seam_counterexample",
+    "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.periodic_grid_linear_statistics",
+    "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.plaquette_relation_rank_one"
+  ],
+  "solid": true,
+  "outputs": {
+    "narrated_720p": "quantum-geometry_flat-not-exact_720p_narrated.mp4",
+    "cover": "quantum-geometry_flat-not-exact_cover.jpg"
+  }
+}

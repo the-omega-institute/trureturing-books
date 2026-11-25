@@ -1,0 +1,29 @@
+{
+  "title": "The second sift catches nothing",
+  "title_zh": "第二遍筛，什么也筛不掉",
+  "summary": "Sift flour once and the sieve catches the lumps; sift again and it catches nothing. The smallest projectors are the two by two matrices with a single one on the diagonal: each squares to itself, the two multiply to zero and add up to the identity, a complete record of two drawers. For the qubit with Bloch arrow (0.6, 0, 0.8) the density matrix holds 0.9 and 0.1 on the diagonal and 0.3 in each corner; measuring along Z without reading the result wipes the corners and keeps the diagonal, and doing it again moves nothing. Lean checks that for any finite record measurement, on square matrices of any size, the unread map applied twice is the unread map applied once. The purity ledger shows where the corners went: the surplus 0.5 splits into 0.32 on the line, the squared deviations of the Z readings, and 0.18 in the perpendicular plane, twice the corner squared; Lean checks the general split of the purity surplus into visible deviations plus the residual mass in the orthogonal complement. One pinch leaves 0.32 and 0, two pinches the same. Not reading is not collapse, the lost 0.18 is the question of chapter 4, and reading existence as a line you can check twice is the book's interpretation.",
+  "summary_zh": "面粉筛一遍，筛子拦下疙瘩；再筛一遍，什么也拦不住。最小的投影算子是对角线上只有一个 1 的 2×2 矩阵：各自平方等于自己，两者相乘为零、相加为单位矩阵，是一套两只抽屉的完备记录。布洛赫箭头为 (0.6, 0, 0.8) 的量子比特，密度矩阵对角线上是 0.9 与 0.1，两个角上各是 0.3；沿 Z 测一次而不看结果，两个角被抹成零、对角线不动，再做一次什么也不动。Lean 检验了：对任意有限记录测量、任意大小的方阵，未读映射用两次等于用一次。纯度账本说明角去了哪儿：盈余 0.5 分成线上的 0.32（Z 读数偏离均匀值的平方和）与垂直平面里的 0.18（角上数值平方的两倍）；Lean 检验了纯度盈余一般地分解为可见偏离与正交补里的剩余质量。捏一次剩 0.32 和 0，捏两次还是这样。不看不等于坍缩；丢掉的 0.18 去了哪儿是第四章的问题；把“存在”读作能连查两次的线，是本书的诠释。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-24",
+  "duration": "2:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a sieve passed twice, two projector matrices as drawers, a density matrix whose corners are wiped once and then never again, a purity ledger split into line and plane",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent",
+    "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_project-twice_720p_narrated.mp4",
+    "cover": "quantum-geometry_project-twice_cover.jpg"
+  }
+}

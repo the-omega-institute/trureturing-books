@@ -875,6 +875,34 @@ The threshold shift is the negative of this ratio. The symmetric finite sums yie
 
 The growth of the lattice radius leads to a separate question about uniform moment errors and the exact antipodal support. The [growing cyclic support analysis](ch34-s28-s03-s02-growing-cyclic-support.md) develops this regime.
 
+### Exact support away from the rear thresholds
+
+Fix the eventual parity $e\in\{0,1\}$ and suppose $N^5h^2\to K>0$. Put $Q=3K/20$. The rear window $S_l$ of index $l\ge0$ contains offsets from $-l-e/2$ through $l+e/2$ in unit steps, measured from the antipodal angle. Define
+
+$$
+T_0(l)=\frac{l(2l-1)(2l+1)}4,\qquad
+T_1(l)=l(l+1/2)(l+1).
+$$
+
+If $Q$ differs from every $T_e(l)$, there is a unique $l$ satisfying $T_e(l)<Q<T_e(l+1)$. For all sufficiently large $N$, the unique cyclic optimizer $v$ is the joint fit on the front sites $|j|\le N$ and the rear window $S_l$, extended by zero on all other sites. It is strictly positive at every site in these two windows, and both cosine moments equal $1-2mh^2$. For every feasible probability weight $w$,
+
+$$
+\sum_j w_j^2\ge\sum_j v_j^2+\sum_j(w_j-v_j)^2.
+$$
+
+Writing $R=l+e/2$, the limiting rear intercept is $B=(Q+(3/4)\sum_{r\in S_l}r^2)/|S_l|$. Finite summation gives
+
+$$
+\begin{aligned}
+\tfrac34\left(|S_l|R^2-\sum_{r\in S_l}r^2\right)&=T_e(l),\\
+\tfrac34\left(|S_l|(R+1)^2-\sum_{r\in S_l}r^2\right)&=T_e(l+1).
+\end{aligned}
+$$
+
+The strict cutoffs are therefore equivalent to $3R^2/4<B<3(R+1)^2/4$. The boundary limits give positive values at the last included sites of both windows and negative signed values at the first omitted sites. The fitted polynomial is convex in the sampled cosine, so these four signs control the full cyclic grid. The exact correspondence of grid sites transfers the fitted moment equations to the cyclic group, and the finite optimality certificate yields the squared-distance inequality.
+
+If $q/N^{5/2}\to\gamma>0$, then $Q=3\pi^2/(5\gamma^2)$. The first additional rear pair enters below $\gamma=2\pi/\sqrt5$ on even cycles and below $\gamma=\pi/\sqrt5$ on odd cycles. The same formulas classify every subsequent switch away from equality. At equality the limiting signed value of a rear level vanishes, leaving its activation unresolved. [Kernel-checked Lean proof](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingSupport.eventual_strict_support_away_from_thresholds) · [Research and proof development](https://github.com/the-omega-institute/trureturing/issues/34029)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.

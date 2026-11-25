@@ -1,0 +1,29 @@
+{
+  "title": "Two turns measure a slope",
+  "title_zh": "转两下，量出斜率",
+  "summary": "A qubit is an arrow on a dial, and averaged over many runs the detector gives only its height f = cos θ. Set the arrow at 60°, turn it a quarter turn back and a quarter turn forward: the heights 0.866 and −0.866 differ by 1.732, and half of that, −0.866, is exactly the slope of the tangent at 60°; wherever the arrow moves, the half difference still equals the tangent's slope. A ±30° nudge gives a chord 4.5% too shallow. For one involutory Pauli rotation the height is one pure wave plus a constant, and the turn back cancels the constant, which makes the two-point rule exact (the parameter-shift rule, a literature result). Lean checks the general rule behind the tangent: for any finite system, Hermitian generator, projector and density state, the measured probability is differentiable in time, its rate is the commutator traced against the evolved state, that number is real, and a generator that commutes with the projector leaves the probability constant. On the dial at t = π/3 (the arrow at 60°) the rate is −√3/4 ≈ −0.433, twice of which is the slope of the height. A second Lean result counts: for any nonnegative summable list with total RW/π and any positive threshold, the terms at or above the threshold are finitely many, at most RW/(πτ); for halves, quarters, eighths and τ = 1/8 that is 3 ≤ 8. The count is a ceiling and does not keep slopes from vanishing; barren plateaus of random circuits are literature results.",
+  "summary_zh": "量子比特是表盘上的一支箭头，重复测许多次，探测器的平均值只给出它的高度 f = cos θ。把箭头放在 60°，往回、往前各转四分之一圈：高度 0.866 与 −0.866 相差 1.732，差的一半 −0.866 正好是 60° 处切线的斜率；箭头转到哪里，差的一半都等于切线的斜率。拧 ±30° 的小步差分，弦要缓 4.5%。旋钮是一扇对合泡利旋转时，高度只是一道纯正弦波加常数，往回转那一下减掉常数，两点规则因此精确（参数位移律，文献结果）。Lean 检验了切线背后的一般规则：对任意有限维系统、厄米生成元、投影与密度态，测得的概率对时间可导，变化率是对易子同演化态求迹，这个数恒为实数；生成元与投影对易时概率不变。表盘上 t = π/3（箭头在 60°）时的变化率是 −√3/4 ≈ −0.433，它的两倍正是高度的斜率。另一条 Lean 结果是计数：总和为 RW/π 的非负可和数列、任意正阈值 τ，不低于阈值的项只有有限个，至多 RW/(πτ) 个；1/2、1/4、1/8……取 τ = 1/8 时是 3 ≤ 8。计数只是天花板，拦不住斜率消失；随机电路的贫瘠高原是文献结果。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a dial with an arrow and two quarter-turn helpers, the cos θ curve with its tangent, a shadow and the arrow a quarter turn ahead, a precessing arrow at fixed height, a dollar of dimes and a sliding threshold over a geometric spectrum",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow",
+    "D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_slope-from-two-turns_720p_narrated.mp4",
+    "cover": "quantum-geometry_slope-from-two-turns_cover.jpg"
+  }
+}
