@@ -1,0 +1,283 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "unitary": "you-nitary",
+  "101": "one, zero, one",
+  "110": "one, one, zero",
+  "111": "one, one, one"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "still",
+   "name": "STILL MEMORY",
+   "lead": 1.9,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "A film plays, yet nothing in the memory chip moves. Only the address changes.",
+     "电影在放，存储芯片里却没有一格在动；变的只有地址。"
+    ],
+    [
+     "So why do we think reading means carrying the data somewhere?",
+     "那我们凭什么以为，读数据就得把数据搬走？"
+    ],
+    [
+     "Here is another way: the data stays put, and the address sets the switches.",
+     "换个办法：数据原地不动，让地址去拨开关。"
+    ],
+    [
+     "This book reads the observer the same way: a pointer over a still memory. That part is a model.",
+     "本书也这样读观察者：静止存储上的一枚指针。这一层是模型诠释。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.8,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "yard",
+   "name": "THE SWITCH YARD",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Eight cells sit under a tree with three levels of forks.",
+     "八个存储格排在一棵树下，树有三层岔口。"
+    ],
+    [
+     "Think of a rail yard. Each fork is a set of points, and each address bit sets one level.",
+     "把它想成铁路编组场：每个岔口是一副道岔，地址的每一位拨一层。"
+    ],
+    [
+     "A zero sends the train left. A one sends it right.",
+     "0 让火车往左，1 让火车往右。"
+    ],
+    [
+     "Address 101: right, left, right. The train stops at cell five, and only there.",
+     "地址 101：右、左、右。火车停在第 5 格，别处一辆也没有。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.6,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "read",
+   "name": "READ, THEN UNDO",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Cell five holds a nine. The bus is a ten-digit dial, set at zero.",
+     "第 5 格存的是 9。总线是一只十位数字的转盘，指在 0。"
+    ],
+    [
+     "A tally walks past every cell, adding a number only where the train stands.",
+     "一个计数员走过每一格，只在停着火车的那格加上它的数。"
+    ],
+    [
+     "Zero plus nine: the dial reads nine.",
+     "0 加 9：转盘读数是 9。"
+    ],
+    [
+     "Then the yard runs backwards. Every switch flips back, and the wires are clean again.",
+     "然后编组场倒着走一遍：道岔全部拨回，暂存线重新干干净净。"
+    ],
+    [
+     "Read the cell, then undo the road.",
+     "读完这一格，再把来路拆掉。"
+    ],
+    [
+     "Lean checks this at every depth: the address and wires come back, and the bus gains exactly that cell.",
+     "Lean 内核检验：任意深度下，地址和线路原样复原，总线上只加被寻址的那一格。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "stamp"
+    },
+    {
+     "line": 5,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "both",
+   "name": "TWO ADDRESSES AT ONCE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Now feed in an address that is half two and half five.",
+     "现在送进一个地址：一半是 2，一半是 5。"
+    ],
+    [
+     "Each branch sets its own path. Cell two holds a four, cell five holds a nine.",
+     "每个分支拨出各自的路：第 2 格存 4，第 5 格存 9。"
+    ],
+    [
+     "Out comes the same balance: two with four, five with nine, each with weight one half.",
+     "出来的仍是同样的配比：2 配 4，5 配 9，权重各是一半。"
+    ],
+    [
+     "Lean checks that the query is unitary, and moves any amplitudes exactly this way.",
+     "Lean 内核检验：这个查询是幺正的，任意振幅都恰好这样搬动。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.4,
+     "kind": "chime"
+    },
+    {
+     "line": 3,
+     "at": 0.8,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "listen",
+   "name": "WHO ELSE IS LISTENING",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now a different circuit: bucket-brigade routers that wait, or point left or right.",
+     "换一种电路：桶链式三态路由器，要么等待，要么指向左或右。"
+    ],
+    [
+     "Real routers may leak a mark to their surroundings. A router that leaves any mark is active.",
+     "真实的路由器可能会向周围泄露一点痕迹；只要留下痕迹，就叫它活跃。"
+    ],
+    [
+     "Silence one bottom router, and the neighbours 110 and 111 look the same.",
+     "让底层一个路由器沉默，相邻的 110 和 111 就看起来一模一样。"
+    ],
+    [
+     "Lean checks the exact rule: the active routers' labels tell every address apart, if and only if every bottom router is active.",
+     "Lean 内核检验精确条件：活跃路由器上的标签能分清每个地址，当且仅当底层路由器全部活跃。"
+    ],
+    [
+     "The upper routers may stay silent. The bottom row alone gives the address away.",
+     "上层路由器可以一声不吭，单凭底层一排就泄露了整个地址。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.4,
+     "kind": "glitch"
+    },
+    {
+     "line": 3,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "edge",
+   "name": "WHAT IT DOES NOT SAY",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "These are ideal circuits over fixed classical data: no quantum copying, and no gate, depth or noise bound.",
+     "这些是固定经典数据上的理想电路：不复制量子数据，也不给门数、深度或噪声的界。"
+    ],
+    [
+     "Three switches per branch is a bucket-brigade literature result. The observer as pointer stays a model.",
+     "每支只拨三副道岔，是桶链式文献的结果；观察者即指针，仍是模型诠释。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.4,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Geometric Intuition of Quantum Computing, chapter thirty-six.",
+     "《量子计算的几何直觉》· 第三十六章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}
