@@ -212,14 +212,18 @@ SCENES.hook = S => {
   const again = ease(Q(S, 2, 'turning the same dial again', 1.6));
   const ang = CB_TH * (turn + again);
   const sh = Q(S, 1, 'shadow on the floor', 0.6);
-  cbDial(HK_O, HK_R, ang, a, { shadow: sh });
+  cbDial(HK_O, HK_R, ang, a, { shadow: sh, arc: false });
+  cbArc(HK_O, HK_R * 0.28, 0, Math.min(ang, CB_TH), C.vio, a, 3);
+  if (ang > CB_TH + 0.01) cbArc(HK_O, HK_R * 0.36, CB_TH, ang, C.vio, a, 3);
   /* the first turn stays drawn as a ghost once the dial turns again */
   if (again > 0.01) arrow(HK_O[0], HK_O[1], HK_O[0] + HK_R * Math.cos(CB_TH), HK_O[1] - HK_R * Math.sin(CB_TH), C.white, a * 0.35 * again, 3);
-  txt('θ', HK_O[0] + 96 * Math.cos(ang / 2) + 4, HK_O[1] - 96 * Math.sin(ang / 2) + 10, { size: 30, fam: F.math, w: 700, c: C.vio, a: a * clamp(turn * 3) });
+  const ta = Math.min(ang, CB_TH) / 2;
+  txt('θ', HK_O[0] + 112 * Math.cos(ta) + 4, HK_O[1] - 112 * Math.sin(ta) + 10, { size: 30, fam: F.math, w: 700, c: C.vio, a: a * clamp(turn * 3) });
+  if (ang > CB_TH + 0.2) txt('θ', HK_O[0] + 138 * Math.cos((CB_TH + ang) / 2), HK_O[1] - 138 * Math.sin((CB_TH + ang) / 2) + 10, { size: 30, fam: F.math, w: 700, align: 'center', c: C.vio, a: a * again });
   if (sh > 0.01) txt('x', HK_O[0] + HK_R * Math.cos(ang) / 2, HK_O[1] + 50, { size: 34, fam: F.math, w: 700, align: 'center', c: C.cyan, a: a * sh * clamp(Math.abs(Math.cos(ang)) * 4) });
-  txt('−1', HK_O[0] - HK_R, HK_O[1] + 50, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.dim, a: a * sh });
-  txt('1', HK_O[0] + HK_R, HK_O[1] + 50, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.dim, a: a * sh });
-  cbTag(HK_O[0] - HK_R - 20, HK_O[1] + 150, 'a dial: a picture of the turn', '表盘：转动的比方', a * clamp(turn * 2));
+  txt('−1', HK_O[0] - HK_R - 40, HK_O[1] + 40, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.dim, a: a * sh });
+  txt('1', HK_O[0] + HK_R + 34, HK_O[1] + 40, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.dim, a: a * sh });
+  cbTag(130, 240, 'a dial: a picture of the turn', '表盘：转动的比方', a * clamp(turn * 2));
   /* the readout */
   panel(1160, 230, 640, 420, a, C.cyan, 'A NUMBER AS A TURN · 数藏在转动里');
   cbRich([['x = cos θ', C.cyan]], 1190, 310, { size: 38, a: a * sh });
@@ -255,13 +259,13 @@ SCENES.block = S => {
     : [['0.6', C.cyan], ['0.8i', C.mag], ['0.8i', C.mag], ['0.6', C.white, 0.55]];
   txt(showM > 0.5 ? 'W(0.6)' : 'W(0.6)', 200, 262, { size: 40, fam: F.math, w: 700, c: C.white, a });
   if (showM > 0.5) txt(`${m}`, 200 + tw('W(0.6)', 40, F.math, 700) + 4, 238, { size: 30, fam: F.math, w: 700, c: C.now, a });
-  cbMatrix(200, 300, 300, 150, cells, a, { corner: Q(S, 0, 'top-left corner', 0.6), size: 40 });
-  txt('corner · 角落', 350, 504, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: a * Q(S, 0, 'top-left corner', 0.6) });
+  cbMatrix(200, 300, 270, 125, cells, a, { corner: Q(S, 0, 'top-left corner', 0.6), size: 38 });
+  txt('← corner · 角落', 470, 262, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: a * Q(S, 0, 'top-left corner', 0.6) });
   /* the symbolic block */
   const sa = a * (1 - at(S, 3, 0.5));
-  cbRich([['W(x) = ', C.white], ['[ x', C.cyan], ['   i√(1−x²) ; ', C.mag], ['i√(1−x²)', C.mag], ['   x ]', C.white]], 200, 620, { size: 28, a: sa });
-  cbRich([['W(x)ᵐ = [ ', C.white], ['cos mθ', C.cyan], ['   i sin mθ ; ', C.mag], ['i sin mθ', C.mag], ['   cos mθ ]', C.white]], 200, 680, { size: 28, a: sa * Q(S, 2, 'corner reads the cosine', 0.6) });
-  txt('x = 0.6 = cos θ,  √(1 − 0.36) = 0.8', 200, 740, { size: 22, fam: F.mono, w: 700, c: C.dim, a: sa });
+  cbRich([['W(x) = ', C.white], ['[ x', C.cyan], ['   i√(1−x²) ; ', C.mag], ['i√(1−x²)', C.mag], ['   x ]', C.white]], 200, 640, { size: 28, a: sa });
+  cbRich([['W(x)ᵐ = [ ', C.white], ['cos mθ', C.cyan], ['   i sin mθ ; ', C.mag], ['i sin mθ', C.mag], ['   cos mθ ]', C.white]], 200, 700, { size: 28, a: sa * Q(S, 2, 'corner reads the cosine', 0.6) });
+  txt('x = 0.6 = cos θ,  √(1 − 0.36) = 0.8', 200, 760, { size: 22, fam: F.mono, w: 700, c: C.dim, a: sa });
   /* line 3: the polynomial */
   const pa = a * at(S, 3, 0.6);
   if (pa > 0.003) {
@@ -277,7 +281,7 @@ SCENES.block = S => {
   for (let k = 1; k <= tk.m + (tk.f > 0.5 ? 1 : 0); k++) {
     const t = k * CB_TH;
     dot(BK_O[0] + BK_R * Math.cos(t), BK_O[1] - BK_R * Math.sin(t), 11, 'v', ca);
-    if (k <= 4) cbArc(BK_O, BK_R * (0.18 + 0.05 * k), (k - 1) * CB_TH, Math.min(k, tk.v) * CB_TH, C.vio, ca * 0.8, 2.5);
+    if (k <= 4) cbArc(BK_O, BK_R * 0.3, (k - 1) * CB_TH + 0.04, Math.min(k, tk.v) * CB_TH - 0.04, C.vio, ca * 0.9, 4);
   }
   if (ca > 0.01) {
     txt(`m = ${m}`, BK_O[0] - BK_R, BK_O[1] - BK_R - 30, { size: 34, fam: F.mono, w: 700, c: C.now, a: ca });
@@ -364,7 +368,7 @@ SCENES.pair = S => {
   arrow(PR_O[0], PR_O[1], pa[0], pa[1], C.now, a, 4);
   arrow(PR_O[0], PR_O[1], pb[0], pb[1], C.now, a * 0.75, 4);
   dot(pa[0], pa[1], 12, 'g', a); dot(pb[0], pb[1], 12, 'g', a);
-  const lab = at(S, 3, 0.5) > 0 ? [`a${'⁰¹²³⁴⁵'[mi]}`, `b${'⁰¹²³⁴⁵'[mi]}`] : ['a = e^{iθ}', 'b = e^{−iθ}'];
+  const lab = at(S, 3, 0.5) > 0 ? [`a${'⁰¹²³⁴⁵'[mi]}`, `b${'⁰¹²³⁴⁵'[mi]}`] : ['a = e^(iθ)', 'b = e^(−iθ)'];
   txt(lab[0], pa[0] + 18, pa[1] - 10, { size: 28, fam: F.math, w: 700, c: C.now, a });
   txt(lab[1], pb[0] + 18, pb[1] + 30, { size: 28, fam: F.math, w: 700, c: C.now, a: a * 0.85 });
   /* line 1: the sum (a parallelogram closing on the real axis) */
@@ -375,7 +379,7 @@ SCENES.pair = S => {
     line(PR_O[0], PR_O[1], ps[0], ps[1], C.cyan, sa, 8);
     dot(ps[0], ps[1], 12, 'c', sa);
     const sl = at(S, 3, 0.5) > 0 ? `a${'⁰¹²³⁴⁵'[mi]} + b${'⁰¹²³⁴⁵'[mi]} = ${cbDec(2 * Math.cos(mi * CB_TH))}` : 'a + b = 2x = 1.2';
-    txt(sl, ps[0], PR_O[1] + (ps[0] > PR_O[0] ? 54 : 54), { size: 26, fam: F.math, w: 700, align: 'center', c: C.cyan, a: sa });
+    txt(sl, PR_O[0], PR_O[1] + PR_R + 70, { size: 28, fam: F.math, w: 700, align: 'center', c: C.cyan, a: sa });
   }
   /* readout */
   panel(1000, 190, 820, 210, a, C.cyan, 'THE EIGENVALUES · 特征值');
@@ -399,11 +403,11 @@ SCENES.pair = S => {
     cbRich([['aᵐ + bᵐ = 2 cos mθ = 2Tₘ', C.cyan]], 1030, 730, { size: 28, a: ha });
     cbRich([['⟹  Tₘ₊₂ = 2x · Tₘ₊₁ − Tₘ', C.white]], 1030, 786, { size: 28, a: ha * Q(S, 3, 'Chebyshev rule', 0.6) });
   }
-  stamp('a · b = 1', PR_O[0], 230, Q(S, 2, 'Lean checks', 0.5, 0.6) * (1 - at(S, 3, 0.5)), C.lean, 28, -0.06);
+  stamp('a · b = 1', 330, 215, Q(S, 2, 'Lean checks', 0.5, 0.6) * (1 - at(S, 3, 0.5)), C.lean, 28, -0.06);
   const ma = a * Q(S, 3, 'The angle was scaffolding', 0.8);
   if (ma > 0.003) {
-    txt('the angle was scaffolding;', PR_O[0], 870 - 40, { size: 26, fam: F.disp, w: 700, align: 'center', c: C.white, a: ma });
-    txt('ab = 1 is the building', PR_O[0], 870 - 4, { size: 26, fam: F.disp, w: 700, align: 'center', c: C.white, a: ma });
+    txt('the angle was scaffolding;', 150, 205, { size: 26, fam: F.disp, w: 700, c: C.white, a: ma });
+    txt('ab = 1 is the building', 150, 241, { size: 26, fam: F.disp, w: 700, c: C.white, a: ma });
   }
 };
 
@@ -438,7 +442,7 @@ SCENES.phases = S => {
       box(x, 240, 86, 70, isW ? C.cyan : C.vio, ia, 2, rgba(isW ? C.cyan : C.vio, 0.14));
       txt(s, x + 43, 287, { size: 32, fam: F.math, w: 700, align: 'center', c: isW ? C.cyan : C.vio, a: ia });
     });
-    txt('φ = diag(e^{iφ}, e^{−iφ}) · a picture of the order · 示意', 1040, 352, { size: 19, fam: F.zh, w: 700, c: C.argued, a: sa });
+    txt('φ = diag(e^(iφ), e^(−iφ)) · a picture of the order · 示意', 1040, 352, { size: 19, fam: F.zh, w: 700, c: C.argued, a: sa });
   }
   /* line 3: Lean */
   const la = a * Q(S, 3, 'Lean checks', 0.6);
