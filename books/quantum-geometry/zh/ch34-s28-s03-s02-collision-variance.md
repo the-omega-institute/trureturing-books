@@ -299,3 +299,49 @@ $$
 $$
 
 这把所需的硬带渐近归约为邻近乘法半径处的 Fejér 加权矩渐近。实际 ζ 尾段的非中心贡献以及匹配的上界仍是待证的算术问题。
+
+## 四阶配对矩控制中心高斯轮廓
+
+对一组有限实频率 $g_j$ 与实权重 $w_j$，记 $W=\sum_jw_j$，$Q(t)=|S(t)|^2$，并定义
+
+$$
+M_k=\sum_{i,j}w_iw_j(g_i-g_j)^k.
+$$
+
+若所有配对乘积 $w_iw_j\ge0$，任意实数 $t$ 满足
+
+$$
+0\le Q(t)-\left(W^2-\frac{M_2t^2}{2}\right)
+\le\frac{M_4t^4}{24}.
+$$
+
+将次数一的傅里叶配对和展开，再对每个频率差应用全局余弦估计 $0\le\cos x-1+x^2/2\le x^4/24$，即可保留精确二次项并控制四次余项。 [全局四阶矩界](lean:D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.score_quartic)
+
+现在允许频率族和权重随次数 $n$ 改变，并令权重最终归一化为 $W_n=1$，配对乘积最终非负。假设 $M_{2,n}>0$ 最终成立，且
+
+$$
+R_n=\frac{M_{4,n}}{nM_{2,n}^2}\longrightarrow 0,
+\qquad s_n=\sqrt{nM_{2,n}/2}.
+$$
+
+对于固定的 $u$，有限四阶矩界给出
+
+$$
+0\le n\bigl(Q_n(u/s_n)-1\bigr)+u^2\le\frac{u^4R_n}{6}.
+$$
+
+所以利用指数幂极限，有
+
+$$
+Q_n(u/s_n)^n\longrightarrow e^{-u^2}.
+$$
+
+若 $a_n$ 是归一化权重下的均值，$M_{2,n}=2\sum_jw_{n,j}(g_{n,j}-a_n)^2$，此处的尺度使用实际方差。原始非负权重总量为正时，以总量除权重即可得到归一化的频率和。 [中心高斯极限](lean:D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.score_gaussian_limit)
+
+还可得到随次数增长的窗口上的可积上界。当 $n>0$、$W=1$、配对乘积非负、$M_2>0$，并且 $u^2M_4\le3nM_2^2$ 时，四阶误差至多为 $u^2/2$，从而
+
+$$
+Q(u/s)^n\le e^{-u^2/2},\qquad s=\sqrt{nM_2/2}.
+$$
+
+该上界允许使用支配收敛处理满足四阶矩条件的中心窗口。对于实际 ζ 零点，仍须验证相应矩条件并控制窗口之外的傅里叶峰及其加权贡献。 [中心窗口高斯上界](lean:D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.score_gaussian_envelope)

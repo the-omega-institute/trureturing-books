@@ -4841,6 +4841,45 @@
       "line": 335,
       "signature": "theorem cyclic_to_lattice_comparison (q n : ℕ) (hn : 0 < n) (lam : ℝ) (hq : 2 * latticeSupportRadius n (lam / (8 * Real.pi ^ 2)) < q) (hmlo : ((n : ℝ) ^ 2 - 1) / 5 ≤ lam / (8 * Real.pi ^ 2)) (hmhi : lam / (8 * Real.pi ^ 2) ≤ (n : ℝ) * (n + 2) / 5) : letI : NeZero q"
     },
+    "D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.score_gaussian_envelope": {
+      "module": "D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit",
+      "name": "D5.S3.Fourier.Asymptotics.FinitePairGaussianLimit.score_gaussian_envelope",
+      "kind": "theorem",
+      "statement_id": "sha256:ce9e315c601ff0cdd47dd3d6b7d76329be7daea36fedc7e32843c1a397c7de55",
+      "line": 204,
+      "signature": "theorem score_gaussian_envelope {J : Type*} [Fintype J] (g w : J → ℝ) (hw : ∀ i j, 0≤w i*w j) (hW : ∑ i, w i=1) (n : ℕ) (hn : 0<n) (hm : 0<pairMoment g w 2) (u : ℝ) (hwin : u^2*pairMoment g w 4 ≤ 3*(n:ℝ)*pairMoment g w 2^2) : let gaussian",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.score_gaussian_limit": {
+      "module": "D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit",
+      "name": "D5.S3.Fourier.Asymptotics.FinitePairGaussianLimit.score_gaussian_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:ce9e315c601ff0cdd47dd3d6b7d76329be7daea36fedc7e32843c1a397c7de55",
+      "line": 169,
+      "signature": "theorem score_gaussian_limit {J : ℕ → Type*} [∀ n, Fintype (J n)] (g w : ∀ n, J n → ℝ) (hw : ∀ᶠ n in atTop, ∀ i j, 0≤w n i*w n j) (hW : ∀ᶠ n in atTop, ∑ j, w n j = 1) (hM : ∀ᶠ n in atTop, 0 < pairMoment (g n) (w n) 2) (hR : Tendsto (fun n => pairMoment (g n) (w n) 4 / ((n:ℝ)*pairMoment (g n) (w n) 2^2)) atTop (𝓝 0)) (u : ℝ) : let gaussian",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.score_quartic": {
+      "module": "D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit",
+      "name": "D5.S3.Fourier.Asymptotics.FinitePairGaussianLimit.score_quartic",
+      "kind": "theorem",
+      "statement_id": "sha256:ce9e315c601ff0cdd47dd3d6b7d76329be7daea36fedc7e32843c1a397c7de55",
+      "line": 100,
+      "signature": "theorem score_quartic {J : Type*} [Fintype J] (g w : J → ℝ) (hw : ∀ i j, 0≤w i*w j) (t : ℝ) : let square",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_criticalThreshold_limit": {
       "module": "D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit",
       "name": "D5.S3.Fourier.Asymptotics.HighCosineThresholdLimit.cyclic_criticalThreshold_limit",
