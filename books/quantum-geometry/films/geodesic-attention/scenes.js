@@ -334,7 +334,7 @@ SCENES.leash = S => {
     dot(pa[0], pa[1], 14, 'g', an);
     const lp = lsP(phi, LS.R + 60);
     txt('a', lp[0] + 6, lp[1] + 6, { size: 34, fam: F.math, w: 700, c: C.now, a: an });
-    gaTag(lp[0] + 50, lp[1] + 18, 'leash · 拴绳（比方）', C.argued, an);
+    gaTag(lp[0] - 40, lp[1] + 70, 'leash · 拴绳（比方）', C.argued, an);
     /* the two legs */
     const l0 = lsP(phi / 2, LS.R - 70), l1 = lsP(phi + (90 - phi) / 2, LS.R - 70);
     txt(`${phi.toFixed(0)}°`, l0[0], l0[1], { size: 26, fam: F.mono, w: 700, align: 'center', c: C.white, a: an });
@@ -468,7 +468,7 @@ FILM.poster = () => {
   background(t, sc, 1, 6);
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.2, a: 0.14, cx: 1400, cy: 420, camZ: 7, lw: 1.3, dots: false });
   /* the sphere, the arc u–w, the detour through v and the sinking chord, drawn flat */
-  const V = gaView(560, 560, 330, -0.42, 0.34);
+  const V = gaView(560, 600, 330, 0.12, 0.42);
   ring(V.cx, V.cy, V.R, C.white, 0.45, 2);
   const path = (pts, col, a, w) => { for (let i = 1; i < pts.length; i++) { const p = V(pts[i - 1]), q = V(pts[i]); line(p[0], p[1], q[0], q[1], col, a, w); } };
   path(QG_SPHERE.circlePts([0, 0, 0], [0, 0, 1], 1), C.blue, 0.35, 1.4);
