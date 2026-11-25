@@ -14,9 +14,10 @@
             ..... NamedTreePhaseTransport.selected_tree_transport (LEAN): conjuncts 1–3 (root gets 1, tree-edge
             reconstruction, endpoint covariance) are shown; the telescoping is the proof idea.
      loop   renaming each town by its inverse root phase sets the four tree roads to 1 and leaves the loop
-            coordinates rp(s e) u(e) rp(t e)⁻¹ on the chords: e5 → i, e2 → −1 (computed); that these do not move
-            under any rename is one line from conjunct 3 (computed); the word “curvature” is the physics name
-            (argued).
+            coordinates rp(s e) u(e) rp(t e)⁻¹ on the chords: e5 → i, e2 → −1 (computed); under further renames
+            the dials turn while the loop products, recomputed from the current dials, stay i (the square read
+            along e5) and −1 (one line from conjunct 3; computed); “curvature” for the smallest loops and
+            “holonomy” for bigger ones are the physics names (argued).
      edge   exact abelian phases on a graph only; the field-strength reading and non-abelian/continuum versions are
             literature results (argued); the exchange-rate story is a picture.
 
@@ -31,6 +32,8 @@ const FC_LEAN = {
   selected_tree_transport: 'D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport'
 };
 const FC_DEG = Math.PI / 180;
+/* the colour of a rename (a vertex gauge, a definition): blue, kept apart from the violet of argued claims */
+const FC_RN = mix(C.blue, C.white, 0.3);
 /* the map: towns and roads; ang = the turn u(e) in degrees */
 const FC_P = [[330, 780], [880, 780], [880, 450], [605, 250], [330, 450]];
 const FC_E = [
@@ -175,8 +178,8 @@ function fcDial(k, deg, a, o = {}) {
     else if (k === 3) txt(lab, x - R - 12, y + 10, { size: 28, fam: F.math, w: 700, align: 'right', c: col, a });
     else txt(lab, x + R + 12, y + 10, { size: 28, fam: F.math, w: 700, c: col, a });
   }
-  if (k === 0 || k === 5) txt(`e${k}`, x - R - 8, y + R + 14, { size: 17, fam: F.mono, w: 700, align: 'right', c: C.dim, a: a * 0.9 });
-  else txt(`e${k}`, k === 3 ? x + R + 10 : x - R - 10, y - R + 2, { size: 17, fam: F.mono, w: 700, align: k === 3 ? 'left' : 'right', c: C.dim, a: a * 0.9 });
+  if (k === 0 || k === 5) txt(`e${k}`, x - R - 8, y + R + 18, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.dim, a: a * 0.9 });
+  else txt(`e${k}`, k === 3 ? x + R + 10 : x - R - 10, y - R + 2, { size: 22, fam: F.mono, w: 700, align: k === 3 ? 'left' : 'right', c: C.dim, a: a * 0.9 });
 }
 function fcTown(v, a, o = {}) {
   if (a <= 0.003) return;
@@ -191,8 +194,8 @@ function fcTown(v, a, o = {}) {
 function fcRename(v, deg, a) {
   if (a <= 0.003) return;
   const [x, y] = FC_P[v], R = 40;
-  ring(x, y, R, C.argued, a, 3);
-  line(x, y, x + R * Math.cos(deg * FC_DEG), y - R * Math.sin(deg * FC_DEG), C.argued, a, 4);
+  ring(x, y, R, FC_RN, a, 3);
+  line(x, y, x + R * Math.cos(deg * FC_DEG), y - R * Math.sin(deg * FC_DEG), FC_RN, a, 4);
 }
 /* the whole map with turns u′(e) = g(t) u(e) g(s)⁻¹ for the rename g (degrees per town) */
 function fcMap(a, g, o = {}) {
@@ -222,9 +225,9 @@ function fcTitle(S) {
 /*                            scene 1 · AROUND THE BLOCK                     */
 /* ======================================================================= */
 const HK = { x0: 300, y0: 300, x1: 860, y1: 720 };
-/* the walk: door at the bottom middle, counter-clockwise; the arrow picks up 0°, 30°, 0°, 60° on the four sides */
+/* the walk: door at the bottom middle, counter-clockwise; the arrow picks up 0° (bottom, right half), 30° (right), 0° (top), 60° (left), 0° (bottom, left half) */
 const HK_PATH = [[580, 760], [900, 760], [900, 260], [260, 260], [260, 760], [580, 760]];
-const HK_TURN = [0, 0, 30, 0, 60];
+const HK_TURN = [0, 30, 0, 60, 0];
 function hkWalk(p) {
   const seg = [];
   let L = 0;
@@ -269,11 +272,13 @@ SCENES.hook = S => {
     if (gone > 0) { line(x - R - 20, y - R - 20, x - R - 20 + 2 * (R + 20) * gone, y - R - 20 + 2 * (R + 20) * gone, C.white, da * 0.9, 6); }
   }
   /* line 2: street signs */
-  const sa = a * Q(S, 2, 'each street only tells you', 0.8);
+  const sa = a * Q(S, 2, 'street only tells you', 0.8);
   if (sa > 0.003) {
-    const signs = [[740, 760, '+0°'], [900, 510, '+30°'], [580, 260, '+0°'], [260, 510, '+60°']];
-    signs.forEach(([x, y, s], i) => chip(x, y, 108, 46, s, C.cyan, sa * clamp((u - phraseAt(S, 2, 'each street only tells you') - 0.25 * i) / 0.4), 24));
-    txt('each street: how to carry · 每条街：怎么搬', 1420, 820, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: sa });
+    /* one sign per stretch of the walk, in the order walked: the same turns as HK_TURN */
+    const signs = [[740, 760, '+0°'], [900, 510, '+30°'], [580, 260, '+0°'], [260, 510, '+60°'], [420, 760, '+0°']];
+    signs.forEach(([x, y, s], i) => chip(x, y, 108, 46, s, C.cyan, sa * clamp((u - phraseAt(S, 2, 'street only tells you') - 0.25 * i) / 0.4), 24));
+    txt('each street: how to carry · 每条街：怎么搬', 1420, 800, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: sa });
+    txt('the streets, not the ground, set the turn · 转角由街规定，不由地面', 1420, 840, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.argued, a: sa });
   }
 };
 
@@ -290,7 +295,7 @@ function odHouse(x, y, v, a, col) {
 SCENES.order = S => {
   const u = S.u, a = fcFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean']]);
+  badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean'], [4, null, 'computed']]);
   /* the two houses and the swap */
   const fa = a * Q(S, 1, 'A field f', 0.7);
   odHouse(270, 470, fa > 0.01 ? 2 : null, a * clamp(fa + at(S, 0, 0.6)), C.cyan);
@@ -332,10 +337,10 @@ SCENES.order = S => {
     fcRich([['if  U f = f′ U  then  U f − f U = (f′ − f) U', C.white]], 970, 690, { size: 30, a: la * Q(S, 3, 'If f, carried', 0.6) });
     fcLean(970, 750, FC_LEAN.covariant_commutator_formula, la, { size: 20 });
     x = fcRich([['here  (f′ − f) U = ', C.cyan]], 970, 818, { size: 24, a: la * Q(S, 3, 'that shift times', 0.6), fam: F.mono });
-    fcMat(x + 4, 818, fcMul(fcSub(FC_F2, FC_F), FC_U), C.now, la * Q(S, 3, 'that shift times', 0.6), 20, 40);
+    fcMat(x + 4, 818, fcMul(fcSub(FC_F2, FC_F), FC_U), C.now, la * Q(S, 3, 'that shift times', 0.6), 24, 46);
   }
   const ma = a * at(S, 4, 0.6);
-  if (ma > 0.003) chip(485, 860, 640, 56, 'gap = change of f along the step · 差 = 场沿这一步的变化', C.now, ma, 22, F.zh);
+  if (ma > 0.003) chip(485, 860, 640, 56, 'gap = (change of f) × step · 差 = 场的变化 × 这一步', C.now, ma, 22, F.zh);
 };
 
 /* ======================================================================= */
@@ -347,14 +352,14 @@ SCENES.towns = S => {
   badgeQ(S, [[0, null, 'computed'], [1, 'Think of exchange rates', 'argued'], [2, null, 'computed']]);
   /* rename: town 2 turns by +90° on line 1 and back on line 2; town 1 turns a full circle on line 2 */
   const g = [0, 0, 0, 0, 0];
-  const r2 = Q(S, 1, 'rename its own coin', 1.6), back = Q(S, 2, 'Renaming its two ends', 1.0);
+  const r2 = Q(S, 1, 'rename its own coin', 1.6), back = Q(S, 2, 'renaming its ends', 1.0);
   g[2] = 90 * ease(r2) * (1 - ease(back));
   const spin = Q(S, 2, 'set it to anything', 3.0, 0.2);
   g[1] = 360 * ease(spin);
   const roads = FC_E.map((e, k) => {
     const hot2 = r2 > 0 && back < 1 && (e.s === 2 || e.t === 2);
     const hot1 = spin > 0 && spin < 1 && (e.s === 1 || e.t === 1);
-    return { col: k === 0 && spin > 0 && spin < 1 ? C.now : hot2 || hot1 ? C.argued : C.white, dial: 1 };
+    return { col: k === 0 && spin > 0 && spin < 1 ? C.now : hot2 || hot1 ? FC_RN : C.white, dial: 1 };
   });
   fcMap(a * at(S, 0, 0.8), g, { roads });
   fcRename(2, g[2], a * clamp(r2 * 3) * (1 - back));
@@ -364,9 +369,9 @@ SCENES.towns = S => {
   txt('u(e): a unit complex number per road', 1110, 252, { size: 24, fam: F.mono, w: 700, c: C.white, a: a * at(S, 0, 0.6) });
   txt('每条路一个单位复数 |u(e)| = 1', 1110, 292, { size: 24, fam: F.zh, w: 700, c: C.white, a: a * at(S, 0, 0.6) });
   const ra = a * Q(S, 1, 'rename its own coin', 0.6);
-  fcRich([["rename g:  u′(e) = g(end)·u(e)·g(start)⁻¹", C.argued]], 1110, 360, { size: 25, a: ra, fam: F.mono });
-  txt('town 2 renamed by i · 小镇 2 改名乘 i', 1110, 412, { size: 22, fam: F.zh, w: 700, c: C.argued, a: ra * (1 - back) });
-  txt('e1: 1 → i    e2: 1 → −i    e5: i → −1', 1110, 450, { size: 22, fam: F.mono, w: 700, c: C.argued, a: a * Q(S, 1, 're-quote', 0.6) * (1 - back) });
+  fcRich([["rename g:  u′(e) = g(end)·u(e)·g(start)⁻¹", FC_RN]], 1110, 360, { size: 25, a: ra, fam: F.mono });
+  txt('town 2 renamed by i · 小镇 2 改名乘 i', 1110, 412, { size: 22, fam: F.zh, w: 700, c: FC_RN, a: ra * (1 - back) });
+  txt('e1: 1 → i    e2: 1 → −i    e5: i → −1', 1110, 450, { size: 22, fam: F.mono, w: 700, c: FC_RN, a: a * Q(S, 1, 're-quote', 0.6) * (1 - back) });
   /* the analogy, labelled as such */
   const aa = a * Q(S, 1, 'Think of exchange rates', 0.6);
   if (aa > 0.003) {
@@ -375,7 +380,7 @@ SCENES.towns = S => {
     txt('小镇 = 一种货币 · 路 = 汇率 · 改名 = 换币值单位', 1110, 620, { size: 22, fam: F.zh, w: 700, c: C.argued, a: aa });
     txt('(here a rate is a turn on a circle · 这里的“汇率”是转角)', 1110, 660, { size: 18, fam: F.zh, w: 700, c: C.dim, a: aa });
   }
-  const na = a * Q(S, 2, 'means nothing by itself', 0.6);
+  const na = a * Q(S, 2, 'means nothing', 0.6);
   if (na > 0.003) chip(1460, 770, 700, 60, 'one road alone: any value · 单独一条路：任意值', C.now, na, 24, F.zh);
 };
 
@@ -387,7 +392,7 @@ const TR_ROUTE = [0, 4, 3];
 SCENES.tree = S => {
   const u = S.u, a = fcFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [2, 'Lean checks', 'lean']]);
+  badgeQ(S, [[0, null, 'computed'], [2, 'Lean checks', 'lean'], [3, null, 'argued']]);
   const ta = Q(S, 0, 'a tree of official roads', 0.8);
   const roads = FC_E.map(e => e.tree ? { col: mix(C.white, C.cyan, ta), lw: 3 + 4 * ta, a: 0.85 } : { col: C.dim, dash: ta > 0.2, a: 0.7, dial: 1 - 0.5 * ta });
   /* line 1: walk the route r → 4 → 3 */
@@ -407,7 +412,7 @@ SCENES.tree = S => {
   /* the table of root phases */
   panel(1080, 180, 760, 290, a * ta, C.cyan, 'ROOT PHASE · 根相位');
   txt('one tree route from r, multiplied · 沿唯一树路线连乘', 1110, 248, { size: 21, fam: F.zh, w: 700, c: C.dim, a: a * ta });
-  const show = Q(S, 1, "That is the town's root phase", 0.8);
+  const show = Q(S, 1, "that is the town's root phase", 0.8);
   ['r', '1', '2', '3', '4'].forEach((nm, v) => {
     const x = 1130 + v * 140;
     txt(nm, x, 316, { size: 28, fam: F.math, w: 700, align: 'center', c: v ? C.cyan : C.white, a: a * ta });
@@ -421,7 +426,7 @@ SCENES.tree = S => {
     panel(1080, 500, 760, 300, la, C.lean, 'ANY GRAPH, ANY TREE · 任意图、任意树');
     const rows = [['1  rp(r) = 1', 'the capital gets one'], ['2  tree road e:  rp(t e) = u(e)·rp(s e)', 'each tree road adds'], ['3  rename g:  rp(a) ↦ g(a)·rp(a)·g(r)⁻¹', 'renaming touches only the two ends']];
     rows.forEach(([f, en], i) => txt(f, 1104, 568 + i * 52, { size: 23, fam: F.mono, w: 700, c: C.white, a: la * Q(S, 2, en, 0.5) }));
-    txt('(+ 3 more: continuous, multiplicative, rp(1) = 1)', 1104, 718, { size: 17, fam: F.mono, w: 700, c: C.dim, a: la });
+    txt('(+ 3 more: continuous, multiplicative, u ≡ 1 ⇒ rp ≡ 1)', 1104, 718, { size: 19, fam: F.mono, w: 700, c: C.dim, a: la });
     fcLean(1104, 770, FC_LEAN.selected_tree_transport, la, { size: 19 });
   }
   /* line 3: telescoping */
@@ -429,13 +434,13 @@ SCENES.tree = S => {
   if (za > 0.003) {
     panel(1080, 500, 760, 300, za, C.now, 'TOWNS IN BETWEEN CANCEL · 中间相消');
     txt('rule 3, along a route r → v₁ → v₂ → a', 1104, 566, { size: 20, fam: F.mono, w: 700, c: C.dim, a: za });
-    const parts = [['g(a)', C.now], ['u', C.white], ['g(v₂)⁻¹', C.argued], [' · ', C.dim], ['g(v₂)', C.argued], ['u', C.white], ['g(v₁)⁻¹', C.argued], [' · ', C.dim], ['g(v₁)', C.argued], ['u', C.white], ['g(r)⁻¹', C.now]];
+    const parts = [['g(a)', C.now], [' u ', C.white], ['g(v₂)⁻¹', FC_RN], [' · ', C.dim], ['g(v₂)', FC_RN], [' u ', C.white], ['g(v₁)⁻¹', FC_RN], [' · ', C.dim], ['g(v₁)', FC_RN], [' u ', C.white], ['g(r)⁻¹', C.now]];
     const size = 26;
     let x = 1104; const y = 650, strike = Q(S, 3, 'takes back', 0.8);
     parts.forEach(([s, col]) => {
       const w = tw(s, size, F.math, 700);
       txt(s, x, y, { size, fam: F.math, w: 700, c: col, a: za });
-      if (col === C.argued && strike > 0) line(x - 2, y - 8, x - 2 + (w + 4) * strike, y - 8, C.white, za, 3);
+      if (col === FC_RN && strike > 0) line(x - 2, y - 8, x - 2 + (w + 4) * strike, y - 8, C.white, za, 3);
       x += w + 6;
     });
     fcRich([['→  ', C.white], ['g(a)', C.now], [' · (u u u) · ', C.white], ['g(r)⁻¹', C.now]], 1104, 740, { size: 28, a: za * strike });
@@ -454,13 +459,22 @@ function lpPoly(vs, a, fill, dash) {
   if (dash) { ctx.setLineDash([10, 8]); ctx.strokeStyle = C.mag; ctx.lineWidth = 2.5; ctx.stroke(); }
   ctx.restore();
 }
+/* the direction in which the square's loop reads i: along e5, 4 → 2 → 1 → 0 → 4 (clockwise on screen) */
+function lpLoopArrow(a) {
+  if (a <= 0.003) return;
+  const cx = 605, cy = 610, rx = 200, ry = 92, a0 = -2.5, a1 = 2.2;
+  ctx.save(); ctx.globalAlpha = a * 0.8; ctx.strokeStyle = C.mag; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, a0, a1, false); ctx.stroke(); ctx.restore();
+  const ex = cx + rx * Math.cos(a1), ey = cy + ry * Math.sin(a1), tx = -rx * Math.sin(a1), ty = ry * Math.cos(a1), tn = Math.hypot(tx, ty);
+  arrow(ex - 20 * tx / tn, ey - 20 * ty / tn, ex, ey, C.mag, a * 0.8, 3);
+}
 SCENES.loop = S => {
   const u = S.u, a = fcFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [2, 'what physicists call', 'argued']]);
+  badgeQ(S, [[0, null, 'computed'], [3, null, 'argued']]);
   /* line 0: comb — rename each town by rp(v)⁻¹, gradually; line 2: arbitrary renames wobble */
   const cmb = ease(Q(S, 0, 'rename every town', 2.6));
-  const wob = Q(S, 2, 'No renaming', 0.6) * (1 - at(S, 3, 0.8));
+  const wob = Q(S, 2, 'Rename however you like', 0.6) * (1 - at(S, 3, 0.8));
   const g = FC_RP.map((d, v) => -(d === 270 ? -90 : d) * cmb + wob * 70 * Math.sin(1.7 * S.u + 1.3 * v) * (v ? 1 : 0.6));
   const la = Q(S, 1, 'outside the tree', 0.8);
   /* the loops behind the map */
@@ -471,30 +485,34 @@ SCENES.loop = S => {
   for (let v = 1; v < 5; v++) fcRename(v, g[v], a * clamp(Q(S, 0, 'rename every town', 0.5)) * 0.85);
   /* the loop chips */
   if (la > 0.003) {
-    chip(605, 615, 170, 54, 'loop · i', C.mag, a * la, 26, F.mono);
-    ctx.save(); ctx.setLineDash([4, 6]); line(322, 252, 545, 294, C.mag, a * la * Q(S, 1, 'minus one', 0.6) * 0.7, 2); ctx.restore();
+    lpLoopArrow(a * la);
+    chip(605, 615, 260, 54, 'loop along e5 · i', C.mag, a * la, 24, F.mono);
+    ctx.save(); ctx.setLineDash([4, 6]); line(322, 252, 372, 420, C.mag, a * la * Q(S, 1, 'minus one', 0.6) * 0.7, 2); ctx.restore();
     chip(190, 240, 260, 54, 'outer loop · −1', C.mag, a * la * Q(S, 1, 'minus one', 0.6), 26, F.mono);
   }
   /* the panel */
   panel(1080, 180, 760, 330, a, C.cyan, 'COMBED FLAT · 梳平');
-  txt('rename g(v) = rp(v)⁻¹ · 按根相位倒数改名', 1110, 250, { size: 22, fam: F.zh, w: 700, c: C.argued, a });
+  txt('rename g(v) = rp(v)⁻¹ · 按根相位倒数改名', 1110, 250, { size: 22, fam: F.zh, w: 700, c: FC_RN, a });
   txt('tree roads e0 e1 e3 e4 → 1', 1110, 300, { size: 26, fam: F.mono, w: 700, c: C.cyan, a: a * Q(S, 0, 'Every tree road reads one', 0.6) });
   const ka = a * la;
   txt('chord = rp(start)·u·rp(end)⁻¹', 1110, 356, { size: 22, fam: F.mono, w: 700, c: C.mag, a: ka });
   txt('e5: i · i · (i)⁻¹ = i', 1110, 404, { size: 26, fam: F.mono, w: 700, c: C.mag, a: ka });
   txt('e2: i · 1 · (−i)⁻¹ = −1', 1110, 450, { size: 26, fam: F.mono, w: 700, c: C.mag, a: ka * Q(S, 1, 'minus one', 0.6) });
-  txt('c = m + 1 − n = 6 + 1 − 5 = 2 loops · 2 个回路', 1110, 492, { size: 19, fam: F.zh, w: 700, c: C.dim, a: ka * Q(S, 1, 'One number per loop', 0.6) });
-  /* line 2: invariance and the name */
-  const ia = a * Q(S, 2, 'No renaming', 0.6);
+  txt('c = m + 1 − n = 6 + 1 − 5 = 2 loops · 2 个回路', 1110, 492, { size: 19, fam: F.zh, w: 700, c: C.dim, a: ka * Q(S, 1, 'one per loop', 0.6) });
+  /* line 2: the dials move, the loop products, recomputed from the current dials, do not */
+  const ia = a * Q(S, 2, 'Rename however you like', 0.6);
   if (ia > 0.003) {
-    panel(1080, 540, 760, 230, ia, C.mag, 'WHAT NO RENAME MOVES · 改名动不了的');
-    txt('rule 3: g(start), g(end), g(r) all cancel', 1110, 610, { size: 22, fam: F.mono, w: 700, c: C.white, a: ia });
-    txt('由第 3 条一步推出：两端与首都的改名全抵消', 1110, 648, { size: 22, fam: F.zh, w: 700, c: C.white, a: ia });
-    const na = ia * Q(S, 2, 'what physicists call', 0.6);
-    txt('“curvature”: the physics name · 物理学的叫法', 1110, 706, { size: 22, fam: F.zh, w: 700, c: C.argued, a: na });
-    txt('(lattice gauge theory · 格点规范理论)', 1110, 740, { size: 18, fam: F.zh, w: 700, c: C.argued, a: na });
+    const dial = k => FC_E[k].ang + g[FC_E[k].t] - g[FC_E[k].s];
+    const sq = dial(5) - dial(1) - dial(0) - dial(4), outer = dial(2) + dial(3) + dial(4) + dial(0) + dial(1);
+    panel(1080, 540, 760, 250, ia, C.mag, 'DIALS TURN, LOOPS STAY · 表盘在转，回路不动');
+    txt(`dials now · 表盘现在   e5 ${fcMod(dial(5))}°   e2 ${fcMod(dial(2))}°`, 1110, 600, { size: 22, fam: F.zh, w: 700, c: C.white, a: ia });
+    txt(`∏ square along e5 = ${fcName(sq)}    ∏ outer = ${fcName(outer)}`, 1110, 642, { size: 25, fam: F.mono, w: 700, c: C.mag, a: ia });
+    txt('rule 3: the renames cancel around a loop · 由第 3 条一步推出', 1110, 680, { size: 18, fam: F.zh, w: 700, c: C.dim, a: ia });
+    const na = a * at(S, 3, 0.6);
+    txt('smallest loop: “curvature” · 最小的圈：曲率', 1110, 730, { size: 22, fam: F.zh, w: 700, c: C.argued, a: na });
+    txt('bigger loop: “holonomy” · 大圈：和乐（物理叫法）', 1110, 766, { size: 20, fam: F.zh, w: 700, c: C.argued, a: na });
   }
-  stamp('THE LOOP IS THE FACT', 1460, 830, Q(S, 3, 'The loop is the fact', 0.5), C.mag, 34, -0.05);
+  stamp('THE LOOP IS THE FACT', 1460, 840, Q(S, 4, 'The loop is the fact', 0.5), C.mag, 34, -0.05);
 };
 
 /* ======================================================================= */
@@ -510,8 +528,8 @@ SCENES.edge = S => {
   fcMap(a * 0.55, FC_RP.map(d => -(d === 270 ? -90 : d)), { roads: FC_E.map(e => e.tree ? { col: C.cyan, lw: 6 } : { col: C.mag, dash: true, lw: 4 }), capital: true });
   ctx.restore();
   const rows = [
-    { k: 0, col: C.cyan, en: 'exact U(1) phases on a graph', zh: '图上精确的 U(1) 相位，转角可交换', note: 'no limit, no smooth space · 没有极限，没有光滑空间' },
-    { k: 1, col: C.argued, en: 'loop ↔ field strength F; SU(N) loops', zh: '回路对上场强；不可交换的矩阵版本', note: 'literature results, not formalized here · 文献结果，本书未形式化' },
+    { k: 0, col: C.cyan, en: 'tree theorem: exact U(1) phases on a graph', zh: '树定理：图上精确的 U(1) 相位，转角可交换', note: 'commutator rule: any ring · 交换子：任意环 · no limit, no smooth space · 没有极限' },
+    { k: 1, col: C.argued, en: 'small loop ↔ field strength F; SU(N) loops', zh: '小回路对上场强；不可交换的矩阵版本', note: 'literature results, not formalized here · 文献结果，本书未形式化' },
     { k: 2, col: C.argued, en: 'exchange rates = a picture', zh: '汇率只是比方', note: 'a ladder for intuition, not a proof · 梯子，不是证明' }
   ];
   rows.forEach((rw, i) => {
@@ -543,7 +561,8 @@ FILM.poster = () => {
   lpPoly(LP_SQUARE, 1, 0.22, false);
   lpPoly(LP_PENT, 1, 0, true);
   fcMap(1, FC_RP.map(d => -(d === 270 ? -90 : d)), { roads: FC_E.map(e => e.tree ? { col: C.cyan, lw: 6, a: 0.9 } : { col: C.mag, dash: true, lw: 4, a: 0.9 }), capital: true });
-  chip(605, 615, 170, 54, 'loop · i', C.mag, 1, 26, F.mono);
+  lpLoopArrow(1);
+  chip(605, 615, 260, 54, 'loop along e5 · i', C.mag, 1, 24, F.mono);
   ctx.restore();
   txt(DATA.film.title_zh, 1420, 420, { size: 92, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('WHAT A LOOP', 1420, 520, { size: 48, fam: F.orb, w: 900, align: 'center', c: C.cyan, ab: 3, ls: 5 });
