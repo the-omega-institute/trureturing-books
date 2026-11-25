@@ -30,6 +30,9 @@ html = true
 pdf = ["screen", "print", "academic"]
 epub = true
 
+[films]
+long_form = ["no-third-point"]
+
 [html.fold]
 # 侧栏保留各部与章名，进入子页时展开当前路径。
 enable = true

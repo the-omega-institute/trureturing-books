@@ -1,0 +1,2713 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Bloch": "Block",
+  "Hadamard": "Hadda-mard",
+  "qubit": "cue-bit",
+  "qubits": "cue-bits",
+  "theta": "thayta",
+  "Grover's": "Grow-ver's",
+  "sinh": "shine",
+  "cosh": "kosh",
+  "kappa": "kappa",
+  "Gödel": "Gurdel",
+  "psi": "sigh",
+  "NP": "N P",
+  "0.707": "point seven oh seven",
+  "0.729": "point seven two nine",
+  "0.125": "point one two five",
+  "0.4996": "point four nine nine six",
+  "196": "one ninety-six",
+  "720°": "seven hundred and twenty degrees"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "a00_title",
+   "name": "ONE DOT",
+   "lead": 3.8,
+   "tail": 0.5,
+   "music": [
+    0.8,
+    0.2,
+    0.1,
+    0.0,
+    0.0
+   ],
+   "lines": [
+    [
+     "Picture one dot of light in a dark room. How far away is it? How big? Which way does it point?",
+     "想象暗室里只有一个光点。它离你多远？有多大？指向哪里？"
+    ],
+    [
+     "Alone, it cannot say. There is nothing to hold it against.",
+     "它自己说不出来：没有任何东西可以拿来跟它比。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.2,
+     "kind": "chime"
+    }
+   ],
+   "chapter": {
+    "en": "Prelude · A point that measures",
+    "zh": "序曲 · 会丈量的点"
+   }
+  },
+  {
+   "id": "a00_ruler",
+   "name": "WHO MEASURED THE RULER",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "So we reach for a ruler outside: a fixed grid, a third point to stand on.",
+     "于是我们去找一把外面的尺子：一张固定的网格，一个可以站上去的第三点。"
+    ],
+    [
+     "But why do we believe that ruler is there? And who measured the ruler?",
+     "可我们凭什么相信那把尺子在那儿？尺子又是谁量的？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.6,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "a00_liang",
+   "name": "TWO THAT MEASURE",
+   "lead": 0.4,
+   "tail": 1.4,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.1
+   ],
+   "lines": [
+    [
+     "Chinese hides a hint. In the word for quantum, the first character means an amount.",
+     "汉字里藏着一个提示：“量子”的“量”读 liàng，是一份数量。"
+    ],
+    [
+     "Read it with a rising tone, and it means to measure: two that measure each other.",
+     "换成二声 liáng，它就是“丈量”：两个彼此丈量。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 1.0,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a00_overlap",
+   "name": "TWO ARROWS",
+   "lead": 0.4,
+   "tail": 0.7,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Draw two states as arrows of length one, a and b. Let a be the ruler.",
+     "把两个态画成两支长度为 1 的箭头 a 和 b，让 a 自己当尺子。"
+    ],
+    [
+     "Think of a as a road. One step along b: how far down the road does it take you?",
+     "把 a 想成一条路，沿 b 迈出一步：这一步让你沿路走了多远？"
+    ],
+    [
+     "Four fifths along, three fifths aside. The four fifths is the overlap, a dot b.",
+     "沿路五分之四步，向旁偏出五分之三步。这五分之四，就是重叠 a·b。"
+    ],
+    [
+     "Square both: sixteen twenty-fifths plus nine twenty-fifths. Exactly one.",
+     "两个都平方：16/25 加 9/25，恰好是 1。"
+    ],
+    [
+     "Lean checks the rule: the weight one state leaves on another's line is their overlap, squared.",
+     "Lean 检验的是规则：一个态落在另一个态那条线上的权重，就是两者重叠的模平方。"
+    ],
+    [
+     "No judge in the middle: only two, and a shadow.",
+     "中间没有裁判：只有两个，和一道影子。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.4,
+     "kind": "chime"
+    },
+    {
+     "line": 4,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a00_ladder",
+   "name": "THE ROAD AHEAD",
+   "lead": 0.4,
+   "tail": 0.7,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "That comparison is the seed. The film climbs from it, rung by rung.",
+     "这一次比较就是种子，整部片子从它出发，一级一级往上爬。"
+    ],
+    [
+     "A point turns out to be a line, a line a plane, a plane a sphere.",
+     "点原来是线，线原来是面，面原来是球。"
+    ],
+    [
+     "Then many spheres, the sphere of spacetime, and a step outside the sphere.",
+     "然后是多球、时空之球，再走到球外。"
+    ],
+    [
+     "Then comparison as the ground, the return to the arc, observers in the field, and the observer as the field.",
+     "然后以比较立极，归于圆弧，观察者在场内，观察者即本体。"
+    ],
+    [
+     "This ladder is the book's reading: a map, not a theorem.",
+     "这架梯子是本书的读法：是一张地图，不是定理。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a00_ask",
+   "name": "NEXT QUESTION",
+   "lead": 0.4,
+   "tail": 2.2,
+   "music": [
+    1.0,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "One catch. We drew both arrows on a grid we brought from outside.",
+     "只有一个破绽：我们是在一张从外面带来的网格上画这两支箭头的。"
+    ],
+    [
+     "With no ruler outside, how can one state measure another?",
+     "外面没有尺子，一个态怎么丈量另一个态？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.6,
+     "kind": "glitch"
+    },
+    {
+     "line": 1,
+     "at": 0.4,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "a01_title",
+   "name": "ONE RULER",
+   "lead": 3.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "No ruler outside? Then let one arrow be the ruler for the other.",
+     "外面没有尺子？那就让一支箭头给另一支当尺子。"
+    ],
+    [
+     "Turn the whole room back and forth. The angle between the two arrows never moves.",
+     "把整间屋子来回转，两支箭头之间的夹角都不动。"
+    ],
+    [
+     "We used no frame and no third point. The angle belongs to the pair.",
+     "没用坐标架，也没用第三个点：夹角只属于这一对。"
+    ]
+   ],
+   "chapter": {
+    "en": "Part I · Breaking illusions: from point to line",
+    "zh": "第一部 · 破妄·从点到线"
+   }
+  },
+  {
+   "id": "a01_shadow",
+   "name": "THE SHADOW",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Shine a light straight down onto the ruler, and b casts a shadow along it.",
+     "从尺子正上方打一束光，b 在尺子上投下一道影子。"
+    ],
+    [
+     "That shadow is the overlap, cosine theta. Here it is exactly zero point six.",
+     "影子的长度就是重叠 cos θ。这里恰好是 0.6。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a01_born",
+   "name": "SQUARE THE SHADOW",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Now ask b a yes or no question: are you a?",
+     "现在问 b 一个是非题：你是 a 吗？"
+    ],
+    [
+     "Yes gets weight zero point three six, the shadow squared. No gets zero point six four.",
+     "“是”的权重是 0.36，正是影子的平方；“否”得 0.64。"
+    ],
+    [
+     "Why squares? Among all powers of the shadow, only the square adds up to one.",
+     "为什么是平方？在影子的各次幂里，只有平方加起来恒为 1。"
+    ],
+    [
+     "Lean checks the rule: a one-line record, read on a pure state, weighs the overlap squared.",
+     "Lean 内核检验：单线记录作用在纯态上，权重是重叠的模平方。"
+    ],
+    [
+     "We like to think probability lives inside the particle. It does not. A probability is a meeting of two.",
+     "我们总以为概率藏在粒子内部。并不是：概率是两者的相遇。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a01_sieve",
+   "name": "SIFT TWICE",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Suppose the answer is yes. The record keeps the shadow on a, and drops the rest.",
+     "假设答案是“是”。记录留下落在 a 上的影子，其余扔掉。"
+    ],
+    [
+     "Ask again with the same ruler. Yes, for certain, and nothing more is dropped.",
+     "用同一把尺子再问一次：一定是“是”，再也扔不掉什么。"
+    ],
+    [
+     "Like a sieve: what passed once passes again. In symbols, P squared equals P.",
+     "像筛子：筛过一次的，再筛还能过。写成符号：P² = P。"
+    ],
+    [
+     "How do we know a thing is there at all? Because asking twice gives the same answer.",
+     "凭什么说一样东西“在那里”？因为问两遍，答案一样。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.8,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a01_away",
+   "name": "LOOK AWAY",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now record the answer, but let nobody read it.",
+     "现在把答案记下来，但谁也不去读。"
+    ],
+    [
+     "The state becomes a blend: zero point three six of yes, zero point six four of no.",
+     "态变成一份混合：0.36 的“是”，0.64 的“否”。"
+    ],
+    [
+     "In its matrix, the two corners, zero point four eight each, are wiped to zero.",
+     "在它的矩阵里，两个角上的 0.48 被抹成零。"
+    ],
+    [
+     "Lean checks the books: the total splits exactly into what stays and what was wiped. Unread twice is just unread once.",
+     "Lean 内核检验这本账：总量恰好分成留下的与抹掉的；未读两次，就是未读一次。"
+    ],
+    [
+     "On the Bloch disk, the arrow pulls in off the rim, onto the yes or no axis: length one becomes zero point two eight.",
+     "在布洛赫圆盘上，箭头离开边缘，收到“是—否”轴上：长度从 1 变成 0.28。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.6,
+     "kind": "glitch"
+    },
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a01_next",
+   "name": "NEXT QUESTION",
+   "lead": 0.5,
+   "tail": 1.9,
+   "music": [
+    1.0,
+    0.5,
+    0.4,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Part One climbed from a point to a line: a pair, a shadow, a square, a sieve, a fade.",
+     "第一部从点走到了线：一对、一道影子、一个平方、一只筛子、一次淡出。"
+    ],
+    [
+     "But each number here only says how much. None of them can turn.",
+     "可这里的每个数都只说“有多少”，没有一个会转。"
+    ],
+    [
+     "A line can tell how much. Where does the turning live?",
+     "线只说得出“有多少”。转动藏在哪里？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a02_title",
+   "name": "WHICH WAY TO TURN",
+   "lead": 3.4,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "A shadow says how much one arrow leans on another. It cannot say which way to turn.",
+     "影子能告诉你一支箭头有多少落在另一支上，却说不出该往哪边转。"
+    ],
+    [
+     "Spin a pencil on a table: you need the tabletop. Turning lives in a plane.",
+     "在桌上转一支铅笔：离不开桌面。转动住在面里。"
+    ],
+    [
+     "One arrow gives a line. Two arrows that disagree give a plane, and an area between them.",
+     "一支箭头只给出一条线；两支方向不同的箭头，才张出一个面，夹出一块面积。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.8,
+     "kind": "chime"
+    }
+   ],
+   "chapter": {
+    "en": "Part II · Unfolding wings: from line to plane",
+    "zh": "第二部 · 展翼·从线到面"
+   }
+  },
+  {
+   "id": "a02_quarter",
+   "name": "THE QUARTER TURN",
+   "lead": 0.5,
+   "tail": 1.0,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Point a clock hand east. Give it a quarter turn: it points north. Another quarter turn: west.",
+     "让表针指向东。转四分之一圈，指北；再转四分之一圈，指西。"
+    ],
+    [
+     "Call one quarter turn I. Two of them: I times I is minus one.",
+     "把四分之一圈记作 I。转两次：I 乘 I 就是 −1。"
+    ],
+    [
+     "We called it imaginary only because we never drew the plane.",
+     "我们叫它“虚数”，只因为从没画出那个面。"
+    ],
+    [
+     "Lean checks the matrix version: build J from balanced halves whose cross terms cancel, and J squared is minus one.",
+     "Lean 检验矩阵版本：交叉项相消的两个平衡半分量造出 J，J² 是负单位阵。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.2,
+     "kind": "chime"
+    },
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a02_product",
+   "name": "LINE PLUS AREA",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Take arrows three-one and one-three. Dot product: six. The parallelogram they span: area eight.",
+     "取箭头 (3, 1) 与 (1, 3)。点积：6。它们张成的平行四边形：面积 8。"
+    ],
+    [
+     "Squared lengths: ten times ten is a hundred, and six squared plus eight squared is a hundred too.",
+     "长度平方都是 10，10 × 10 = 100；而 6² + 8² 也正好是 100。"
+    ],
+    [
+     "Lean checks it for all real lists: squared lengths multiplied, minus the dot squared, equals the squared plane areas, summed.",
+     "Lean 对任意两组实数检验：长度平方之积减点积平方，等于坐标面面积平方和。"
+    ],
+    [
+     "So one product holds both: A B is A dot B plus A wedge B. Here, six plus eight I.",
+     "于是一个乘积装下两半：AB = A·B + A∧B。这里就是 6 + 8I。"
+    ],
+    [
+     "In the book's reading, the line is the particle you count; the area is the wave that turns.",
+     "本书的读法：线是被计数的粒子，面积是会转动的波。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.6,
+     "kind": "chime"
+    },
+    {
+     "line": 2,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a02_time",
+   "name": "TWO KINDS OF TIME",
+   "lead": 0.5,
+   "tail": 1.0,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Let the area sweep. A turning arrow is quantum time: smooth, and able to run backwards.",
+     "让面积扫过去。转动的箭头是量子时间：平滑，也能倒着走。"
+    ],
+    [
+     "A clock tick is a line, a record. Two records are fully distinct only when perpendicular.",
+     "钟的一声滴答是一条线，一条记录。两条记录只有互相垂直，才能完全分开。"
+    ],
+    [
+     "So each tick climbs a ninety-degree wall, like a revolving door swinging a full quarter turn.",
+     "所以每声滴答都要翻过 90° 的墙，像旋转门，每放一人都得整整转四分之一圈。"
+    ],
+    [
+     "Lean checks the consequence: a state within E tau over h-bar of two perpendicular records forces tau to be at least pi h-bar over four E.",
+     "Lean 检验其推论：一个态到两条垂直记录的夹角都不超过 Eτ/ħ，则 τ ≥ πħ/(4E)。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.6,
+     "kind": "chime"
+    },
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a02_erase",
+   "name": "THE PRICE OF WIPING",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Turning can be undone. Flattening cannot: squash the arrow onto its line, and the sideways area is gone.",
+     "转动能撤销，压扁却不能：把箭头压到它的线上，横向那块面积就没了。"
+    ],
+    [
+     "For a balanced arrow, entropy climbs from zero to log two. No heat is paid yet.",
+     "对两边均衡的箭头，熵从 0 升到 ln 2 ≈ 0.693；这一步还不付热。"
+    ],
+    [
+     "To reuse the record, reset it, as an eraser turns marks into crumbs and warmth. That entropy drop costs heat.",
+     "要再用这条记录就得复位，像橡皮把印记变成碎屑和热：熵往下降，这一降才要付热。"
+    ],
+    [
+     "Lean checks the bookkeeping: if heat equals the entropy drop plus two non-negative extras, heat is at least the drop.",
+     "Lean 检验了这笔账：若热量等于熵减加上两项非负的余项，热量就不小于熵减。"
+    ],
+    [
+     "The book reads this as the arrow of time: turning runs both ways, but resetting a record sends a bill.",
+     "本书在这里读出时间之箭：转动可以双向，复位记录却总要寄来账单。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 3.0,
+     "kind": "glitch"
+    },
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a02_ask",
+   "name": "ONE TURN TOO FEW",
+   "lead": 0.4,
+   "tail": 1.8,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "In four strokes: i is a quarter turn; the product is line plus area; area is quantum time; resetting costs heat.",
+     "四笔说完：i 是四分之一圈，几何积是线加面积，面积是量子时间，复位要付热。"
+    ],
+    [
+     "But in a plane, an arrow has room for only one perpendicular partner.",
+     "可是在一个平面里，一支箭头只容得下一个垂直的伙伴。"
+    ],
+    [
+     "Two directions make a plane. What do three make?",
+     "两个方向张成一个面。三个呢？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a03_title",
+   "name": "THREE AXES",
+   "lead": 3.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Stand a third pencil square to the first two. Now every pair spans its own turning plane.",
+     "再立第三支铅笔，与前两支都成直角。现在每两支之间，都张开一块自己的转动面。"
+    ],
+    [
+     "One plane only draws a circle. Three planes at right angles close into a sphere.",
+     "一块面只画得出一个圆；三块面以直角扣在一起，就合拢成一颗球。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.2,
+     "kind": "chime"
+    }
+   ],
+   "chapter": {
+    "en": "Part III · Closing the sphere",
+    "zh": "第三部 · 合拢·从面到球"
+   }
+  },
+  {
+   "id": "a03_address",
+   "name": "TWO ANGLES",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "From the north pole, tilt sixty degrees down a meridian. Your height drops to one half.",
+     "从北极出发，沿经线倾转 60°，高度就降到二分之一。"
+    ],
+    [
+     "Then twist forty-five degrees about the vertical. The height stays; you land on one exact point.",
+     "再绕竖轴拧转 45°。高度不变，落在一个确定的点上。"
+    ],
+    [
+     "Latitude and longitude: one right angle picks the circle, the second picks the place.",
+     "这就是纬度和经度：正交一次选定纬度圈，正交两次选定圈上的位置。"
+    ],
+    [
+     "Axes need not be square: Lean checks that any two not on one line build every rotation in finitely many turns.",
+     "轴不必垂直。Lean 检验：两根不共线的轴，有限次转动就拼得出任何转动。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a03_order",
+   "name": "ORDER",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.7,
+    0.7,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "But a quarter turn about Y, then X, stops at plus X. Swap the order: minus Y.",
+     "可是先绕 Y、再绕 X 各转四分之一圈，停在 +X；换个次序，却停在 −Y。"
+    ],
+    [
+     "So why do we believe order rules the quantum? Order belongs to the doing, not to the comparing.",
+     "那我们凭什么相信顺序主宰量子？顺序属于动作，不属于比较。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.6,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "a03_table",
+   "name": "THE TABLE",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.6,
+    0.7,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Take three states: the north pole, plus X, and our new point. Compare each pair once.",
+     "取三个态：北极、+X 和刚才那个点。每两个只比一次。"
+    ],
+    [
+     "Born weights: one half, three quarters, about point eight one. Read the table in any order; nothing changes.",
+     "玻恩权重：1/2、3/4，约 0.81。按什么次序读这张表，都不会变。"
+    ],
+    [
+     "Lean checks the strong form: families with the same complex table differ by one common turn.",
+     "Lean 检验了强的说法：两族态的复内积表相同，它们就只差一个公共的转动。"
+    ],
+    [
+     "Like distances between towns: they fix the map, except where you slide and turn it.",
+     "就像城镇之间的距离：它们定死了整张地图，只差你把它挪到哪、转多少。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a03_pulse",
+   "name": "PULSE AND PHASE",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.8,
+    0.8,
+    0.5,
+    0.4
+   ],
+   "lines": [
+    [
+     "In the lab, a sideways turn is a microwave pulse; the angle is the area under it.",
+     "在实验室里，往侧面转是打一个微波脉冲；转角就是包络下的面积。"
+    ],
+    [
+     "Ten megahertz for twenty-five nanoseconds makes pi over two: pole to equator.",
+     "10 MHz 打 25 ns，面积是 π/2：从极点转到赤道。"
+    ],
+    [
+     "A turn about the vertical takes no time. The software just shifts the phase of later pulses.",
+     "绕竖轴转，一点时间都不花：软件只是把后面脉冲的相位挪一挪。"
+    ],
+    [
+     "Like turning the map, not walking. Lean checks the general rule: push the state forward or pull the measurement back, same reading.",
+     "就像转地图而不走路。Lean 检验一般规律：态往前推或测量往回拉，读数相同。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a03_glance",
+   "name": "MEASURING COMPUTES",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "The boldest step: link two qubits, then measure only the first, at an angle alpha on its equator.",
+     "最大胆的一步：把两个量子比特连起来，然后只测第一个，沿它赤道上的角 α。"
+    ],
+    [
+     "The second receives a gate: a turn set by alpha, a Hadamard, and a known flip if you read one.",
+     "第二个收到一扇门：由 α 定的转动加阿达马门；读到 1 时再多一个已知翻转。"
+    ],
+    [
+     "Each result weighs one half; Lean checks that the branch weights of any complete projective measurement add up to the trace.",
+     "每个结果各占一半。Lean 检验：任意完备投影测量的分支权重之和等于迹。"
+    ],
+    [
+     "The links are laid like rails; each measurement throws a switch. Where you look is what you compute.",
+     "链接像铁轨一样事先铺好，每次测量都扳动一个道岔。你往哪里看，就算了什么。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.2,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a03_next",
+   "name": "ONE SPHERE CLOSED",
+   "lead": 0.5,
+   "tail": 2.2,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "One sphere is closed: every state addressed, every comparison agreeing, and a gate can be a pulse, a phase, or a glance.",
+     "一颗球就此合拢：态都有地址，比较总一致；门可以是脉冲、相位，或一次注视。"
+    ],
+    [
+     "We just linked two spheres, and never asked what the link is.",
+     "我们刚把两颗球连在一起，却从没问过，那根链接到底是什么。"
+    ],
+    [
+     "What happens when two spheres share one state?",
+     "两个球共享一个态时，会发生什么？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a04_title",
+   "name": "TWO SPHERES, ONE STATE",
+   "lead": 3.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Give two spheres one state, and look at each alone: both arrows shrink to the centre.",
+     "让两个球共享一个态，再单独看每一个：两根箭头都缩到了球心。"
+    ],
+    [
+     "The whole is pure, yet Alice's half is one half the identity. Lean checks it.",
+     "整体是纯态，Alice 那一半却是 ½ 乘单位阵。这由 Lean 检验。"
+    ],
+    [
+     "The information lives in agreement: both along Z, or both along X, they match.",
+     "信息活在两者的一致里：都沿 Z 测，或都沿 X 测，读数永远相同。"
+    ],
+    [
+     "Like a handshake, it is in neither hand.",
+     "像一次握手，它不在任何一只手里。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.0,
+     "kind": "chime"
+    }
+   ],
+   "chapter": {
+    "en": "Part IV · Entangled spheres",
+    "zh": "第四部 · 交织·多球共振"
+   }
+  },
+  {
+   "id": "a04_bell",
+   "name": "BELL AT 45°",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Could that match be a script written in advance? Bell made it a score.",
+     "这种一致会不会是事先写好的剧本？贝尔把这个怀疑变成了一道打分题。"
+    ],
+    [
+     "Alice measures along Z or X. Bob turns his pair forty-five degrees.",
+     "Alice 沿 Z 或 X 测；Bob 把自己那对方向转过 45°。"
+    ],
+    [
+     "Three pairs agree by point seven oh seven, the last by minus point seven oh seven.",
+     "三对的关联是 0.707，最后一对是 −0.707。"
+    ],
+    [
+     "Subtract the last: two root two, about two point eight three.",
+     "减去最后一项：得分 2√2 ≈ 2.83。"
+    ],
+    [
+     "Any script, or mix of scripts, scores at most two. Lean checks it.",
+     "任何剧本，或剧本的任意混合，最多得 2。这由 Lean 检验。"
+    ],
+    [
+     "Lean also checks that no state beats two root two here. The arc beats the line.",
+     "Lean 还检验了：在这道题上，没有态能超过 2√2。圆弧赢了直线。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.6,
+     "kind": "chime"
+    },
+    {
+     "line": 4,
+     "at": 3.2,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a04_clone",
+   "name": "HIDE, DON'T COPY",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.8,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Shared states are fragile. Why not back them up? A quantum machine is a rigid turn: it keeps overlaps.",
+     "共享的态很脆弱，为什么不备份？可量子机器是一次刚性转动：它保留内积。"
+    ],
+    [
+     "Overlap point six stays point six, but the copies would need point three six.",
+     "内积 0.6 仍是 0.6，复本却需要 0.36。"
+    ],
+    [
+     "A number equals its square only at zero or one. Lean checks: one machine copies two states only if they are identical or perpendicular.",
+     "一个数等于自己的平方，只能是 0 或 1。Lean 检验：同一台机器能复制的两个态，只能相同或正交。"
+    ],
+    [
+     "So we hide instead: three qubits give eight dimensions, four perpendicular planes.",
+     "那就改为藏起来：三个比特张成八维，切成四个互相垂直的平面。"
+    ],
+    [
+     "A bit flip moves the whole plane. We ask which plane, never what's inside, and move it back.",
+     "比特翻转把整个平面搬走。我们只问在哪个平面，从不问里面是什么，再把它搬回来。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 4.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a04_grover",
+   "name": "TWO MIRRORS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.9,
+    0.8,
+    0.5,
+    0.4
+   ],
+   "lines": [
+    [
+     "Hidden states can still be steered: a prize in one of four boxes, one half in each.",
+     "藏起来的态依然可以操控。把奖品藏进四个盒子之一，每个盒子先放 ½。"
+    ],
+    [
+     "Mirror one flips the prize. Mirror two flips each amplitude about the average.",
+     "第一面镜子翻转奖品；第二面镜子把每个振幅关于平均值翻转。"
+    ],
+    [
+     "One half each becomes one, zero, zero, zero: the prize, for certain, in one step.",
+     "四个 ½ 变成 1、0、0、0：一步之后，奖品确定无疑。"
+    ],
+    [
+     "Two mirrors make a turn. Lean checks: after n steps, the prize part is sine of two n plus one theta.",
+     "两面镜子合成一次转动。Lean 检验：n 步之后，奖品分量是 sin((2n + 1)θ)。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.0,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a04_block",
+   "name": "ONE POLYNOMIAL",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.5,
+    0.4
+   ],
+   "lines": [
+    [
+     "Grover's turn is one case of a bigger trick: hide x in a turn, as its cosine.",
+     "Grover 的转动只是更大技巧的一例：把 x 藏进一次转动，作为它的余弦。"
+    ],
+    [
+     "Turn it again and again; the corner reads one, point six, minus point two eight, minus point nine three six.",
+     "一转再转，角上读出 1、0.6、−0.28、−0.936。"
+    ],
+    [
+     "Each is two x times the last, minus the one before; it follows from a power-sum rule Lean checks.",
+     "每个读数等于 2x 乘上一个，再减去前一个；它来自一条由 Lean 检验的幂和规则。"
+    ],
+    [
+     "Twist the phases between turns: Lean checks the right polynomials can all be built. Search and simulation as one recipe is the literature's claim.",
+     "在转动之间拧相位：Lean 检验了合格的多项式都能这样拼出来。把搜索、模拟归为同一张配方，是文献的说法。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.0,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a04_next",
+   "name": "WOVEN",
+   "lead": 0.5,
+   "tail": 2.0,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "The whole is not stored in the parts. It is woven between them.",
+     "整体不存在零件里，而是编织在零件之间。"
+    ],
+    [
+     "Yet every turn here ticked on one shared clock, in one fixed space.",
+     "可这里的每一次转动，都踩着同一只钟，在同一个固定的空间里。"
+    ],
+    [
+     "If spheres can be woven together, can space and time be woven too?",
+     "球能彼此编织，时间与空间也能吗？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a05_title",
+   "name": "A TURN THAT NEVER CLOSES",
+   "lead": 3.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "So far the weave was all space. Now let a clock in, and see what bends.",
+     "到目前为止，织进来的都是空间。现在让一只钟也进来，看看什么会弯。"
+    ],
+    [
+     "Turn an event, and it rides a circle. Push it, and it rides a hyperbola, hugging the light cone, never crossing it.",
+     "转动一个事件，它沿圆走；推动它，它沿双曲线走，贴着光锥，永远跨不过去。"
+    ]
+   ],
+   "chapter": {
+    "en": "Part V · The spacetime sphere",
+    "zh": "第五部 · 显影·时空之球"
+   }
+  },
+  {
+   "id": "a05_cone",
+   "name": "LIGHT MEASURES ZERO",
+   "lead": 0.5,
+   "tail": 1.2,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.0,
+    0.2
+   ],
+   "lines": [
+    [
+     "Why should time subtract, when space adds? Because light must measure zero, in every frame.",
+     "空间里是相加，时间凭什么相减？因为光在任何参考系里都必须量出零。"
+    ],
+    [
+     "Lean checks it: any quadratic rule that is zero on every light ray is t squared minus x squared, times one number.",
+     "Lean 检验了：凡是在每条光线上都为零的二次型，都是 t² − x² 乘上一个数。"
+    ]
+   ]
+  },
+  {
+   "id": "a05_boost",
+   "name": "RAPIDITY BY HAND",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Push with rapidity log two. Cosh is five quarters, sinh three quarters, and the speed three fifths of light.",
+     "以快度 ln 2 推一下：cosh 是 5/4，sinh 是 3/4，速度是光速的 3/5。"
+    ],
+    [
+     "Twenty-five sixteenths minus nine sixteenths is one. Lean checks cosh squared minus sinh squared is one, for every real.",
+     "25/16 减 9/16 等于 1。Lean 检验了：对每个实数，cosh² 减 sinh² 都等于 1。"
+    ],
+    [
+     "Push twice: fifteen seventeenths, not six fifths. Speeds do not add. Rapidities do.",
+     "再推一次：速度是光速的 15/17，不是 6/5。速度不相加，快度才相加。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a05_loop",
+   "name": "WHAT A LOOP KEEPS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now carry a phase around a block. Think of changing money: each town may rename its currency.",
+     "现在带着一个相位绕街区一圈。好比一路换钱：每个小镇都可以给自己的货币改名。"
+    ],
+    [
+     "The streets read one, one, one, i. Rename three corners, and they read i, i, i, minus one.",
+     "四条街原来读作 1、1、1、i；给三个路口改名，就读作 i、i、i、−1。"
+    ],
+    [
+     "Around the block the product is i, both times. Renaming moves the phase. It cannot erase it.",
+     "绕一圈的乘积，两次都是 i。改名能挪动相位，却抹不掉它。"
+    ],
+    [
+     "Lean checks, on any connected finite graph with one anchor: loop phases agree exactly when one rename links the two fields.",
+     "Lean 检验了：单锚点的连通有限图上，回路相位相同，当且仅当两场只差一次改名。"
+    ],
+    [
+     "Physicists read that leftover turn as a force. A force is what a loop cannot forget.",
+     "物理学家把这份剩下的转角读作力。力，就是回路忘不掉的东西。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.6,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a05_waist",
+   "name": "THE NARROWEST WAIST",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Weave such pieces into a network. How much gets through? Ask a stadium crowd: the narrowest gate decides.",
+     "把这样的小块织成网络，能穿过去多少？问问散场的人群：最窄的那道门说了算。"
+    ],
+    [
+     "Legs of sizes two, three, two, three. Cut widths multiply: exits six, entrances six, leg a, the bridges and leg c, twelve.",
+     "腿是 2、3、2、3。割的宽度相乘：出口 6，入口 6，切过腿 a、三座桥和腿 c 是 12。"
+    ],
+    [
+     "Lean checks that the rank never exceeds the smallest cut, for every size. And here it reaches it: six.",
+     "Lean 检验了：对所有尺寸，秩都不超过最小割；而在这里，它正好达到：6。"
+    ],
+    [
+     "Holography turns this into a law of areas. That step is literature, not proved here.",
+     "全息理论把它推成一条面积定律；那一步是文献结果，本书没有证明。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a05_depth",
+   "name": "WORK THAT KEEPS GROWING",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.5,
+    0.4
+   ],
+   "lines": [
+    [
+     "Last, count the work. Twelve gates on eleven sites. Like cooks sharing a burner, gates sharing a site take turns.",
+     "最后，数一数功夫。十一个格点上十二道门。好比厨师共用灶眼，共用格点的门只能轮流。"
+    ],
+    [
+     "Two turning points cut the chain into three pieces, side by side. Twelve gates, four ticks.",
+     "两个折返点把链切成并排的三段。十二道门，四拍。"
+    ],
+    [
+     "Lean checks the rule: the least depth is N divided by kappa-plus-one, rounded down, then plus one. Here, three plus one.",
+     "Lean 检验了这条规律：最小深度是 N 除以 κ + 1 向下取整，再加 1。这里是 3 加 1。"
+    ],
+    [
+     "Near black holes, complexity is said to grow like volume after entanglement stops. That guess is still open.",
+     "有人说，在黑洞附近，纠缠停下之后，复杂度仍像体积一样增长。这个猜想至今未决。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 3.8,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "a05_ask",
+   "name": "FROM INSIDE",
+   "lead": 0.5,
+   "tail": 2.0,
+   "music": [
+    1.0,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Clocks, loops, waists and ticks: each was measured from inside the sphere.",
+     "钟、回路、瓶颈与节拍：每一样，都是在球的里面量出来的。"
+    ],
+    [
+     "Can a sphere ever see itself from outside?",
+     "一个球能从外面看见自己吗？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 0.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a06_title",
+   "name": "THE WHOLE LIST",
+   "lead": 3.8,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Try a list: every endless row of bits, one per line, and call that list the whole sphere.",
+     "做个试验：把所有无穷长的比特行一行一行列出来，管这张清单叫“整个球”。"
+    ],
+    [
+     "To see itself whole, it must also hold every row built from itself.",
+     "要看全自己，它就得把由它自己造出的每一行也装进去。"
+    ]
+   ],
+   "chapter": {
+    "en": "Part VI · Beyond the sphere",
+    "zh": "第六部 · 越界·球外之球"
+   }
+  },
+  {
+   "id": "a06_diagonal",
+   "name": "DIAGONAL",
+   "lead": 0.4,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Walk down the diagonal and flip each bit you meet.",
+     "沿对角线往下走，遇到一位就翻一位。"
+    ],
+    [
+     "The new row differs from row k in place k.",
+     "新的一行在第 k 位上和第 k 行不同。"
+    ],
+    [
+     "So it is nowhere in the list. Lean checks this for any twist that changes every value.",
+     "所以它不在清单里。Lean 对任何“改动每个值”的翻转都检查了这一点。"
+    ],
+    [
+     "Add it to the list; the new diagonal escapes again. Gödel used the same kind of move.",
+     "把它收进清单，新的对角线又逃出去。哥德尔用的是同一类招数。"
+    ],
+    [
+     "However full the list, it does not seal the sphere. It pushes the diagonal out.",
+     "再满的清单也封不住球，只会把对角线顶出去。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.2,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a06_crack",
+   "name": "THE CRACK",
+   "lead": 0.4,
+   "tail": 1.0,
+   "music": [
+    0.8,
+    0.5,
+    0.7,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Finite tools leave a crack as well. Tile a round dome with flat tiles, and a gap always shows.",
+     "有限的工具也总留一道缝。拿平瓷砖去贴圆屋顶，总有缝露出来。"
+    ],
+    [
+     "Quadruple the sides and the gap shrinks about sixteen-fold, but it never closes.",
+     "边数翻四倍，缝大约缩小十六倍，却永远合不上。"
+    ]
+   ]
+  },
+  {
+   "id": "a06_primes",
+   "name": "PRIME AXES",
+   "lead": 0.4,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.8,
+    0.8,
+    0.5,
+    0.5
+   ],
+   "lines": [
+    [
+     "Counting has no final list either. When we multiply, each prime is its own street.",
+     "数数也没有最后一张清单。做乘法时，每个素数都是一条独立的街。"
+    ],
+    [
+     "Right is times two, up is times three. Twelve sits two blocks right, one block up.",
+     "向右是乘 2，向上是乘 3。12 就在向右两格、向上一格的路口。"
+    ],
+    [
+     "No pile of twos ever equals a pile of threes; Lean checks that prime logarithms are independent over whole numbers.",
+     "再多的 2 也凑不成一堆 3；Lean 检查了素数的对数在整数系数下彼此独立。"
+    ],
+    [
+     "Seven already lies off the map of two, three and five, and the primes never run out.",
+     "7 已经落在 2、3、5 画出的地图之外，而素数永远用不完。"
+    ],
+    [
+     "Their rhythm sits in zeta's nontrivial zeros; an external Lean proof puts them all on the critical line.",
+     "节奏藏在 ζ 的非平凡零点里；一份外部 Lean 证明把它们全放在临界线上。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 3.0,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a06_fixed",
+   "name": "COS θ = θ",
+   "lead": 0.4,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.9,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Must chases run forever? Enter zero in radians and press cosine, again and again.",
+     "追逐一定没完没了吗？在弧度制下输入 0，一遍又一遍按余弦。"
+    ],
+    [
+     "One, point five four, point eight six, point six five: swinging left and right, closing in.",
+     "1、0.54、0.86、0.65：左右来回摆，越摆越近。"
+    ],
+    [
+     "The readings settle near point seven three nine, the angle equal to its own cosine.",
+     "读数停在 0.739 附近：这个角恰好等于它自己的余弦。"
+    ],
+    [
+     "Lean checks that exactly one positive angle does this, and that it lies between zero and one.",
+     "Lean 检查了：恰好只有一个正角做到这一点，而且它在 0 和 1 之间。"
+    ],
+    [
+     "Yet no finite number of presses lands on it exactly.",
+     "可是按有限多次，永远不会正好落在它上面。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a06_psi",
+   "name": "ψ = ψ(ψ)",
+   "lead": 0.4,
+   "tail": 2.2,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "What would it take for a chase to stop, when the diagonal never could?",
+     "追逐要怎样才能停下？对角线可从来停不下。"
+    ],
+    [
+     "Lean's answer: a list can catch its own twisted diagonal only where the twist leaves a value alone.",
+     "Lean 的答案：清单只能在扭转放过某个值的地方，接住自己扭过的对角线。"
+    ],
+    [
+     "A bit flip changes every value, so it never lands. Cosine leaves one angle alone.",
+     "翻比特会改动每个值，所以永远落不下；余弦却放过了一个角。"
+    ],
+    [
+     "Read the landing row as psi, and its address as psi's own name. The book writes: psi equals psi of psi.",
+     "把落点那一行读作 ψ，把它的地址读作 ψ 自己的名字，本书写成：ψ = ψ(ψ)。"
+    ],
+    [
+     "A chase stops only where the twist leaves something alone.",
+     "追逐只停在扭转放过的地方。"
+    ],
+    [
+     "If every escape lands on a new sphere, what can we stand on?",
+     "每次逃出都落在新的球上，那我们还能站在什么上面？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a07_title",
+   "name": "NOTHING BUT COMPARISONS",
+   "lead": 3.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Sphere after sphere, no floor is final. So stand on what every sphere keeps: comparisons.",
+     "一层球外还有一层球，没有哪层地板是最后的。那就站在每层球都保留的东西上：比较。"
+    ],
+    [
+     "Take three states and write down only how much each pair agrees. No clock, no outside frame.",
+     "取三个态，只记下每两个之间有多相融。没有钟，也没有外部坐标。"
+    ]
+   ],
+   "chapter": {
+    "en": "Part VII · Foundations: comparison as the ground",
+    "zh": "第七部 · 立极·以比较为地基"
+   }
+  },
+  {
+   "id": "a07_chart",
+   "name": "A CHART WITHOUT A MAP",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.0,
+    0.2
+   ],
+   "lines": [
+    [
+     "Think of a mileage chart for three towns, printed without a map.",
+     "好比一张三座小镇之间的里程表，印出来时没有附地图。"
+    ],
+    [
+     "A and B agree by one half, B and C by one half, but A and C are opposites.",
+     "A 与 B 的相融度是 1/2，B 与 C 也是 1/2，A 与 C 却正好相反，是 −1。"
+    ],
+    [
+     "Measure the arrow A minus B plus C. Its squared length is three, minus one, minus two, minus one.",
+     "量一量 A − B + C 这根箭头：长度平方是 3 − 1 − 2 − 1。"
+    ],
+    [
+     "That is minus one. No length squares to a negative, so no three states fit this chart.",
+     "结果是 −1。没有哪个长度的平方是负数，所以没有任何三个态符合这张表。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.4,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "a07_window",
+   "name": "THE WINDOW",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.7,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Slide that entry. The chart holds together only between minus one half and one.",
+     "滑动这一格：只有在 −1/2 到 1 之间，这张表才站得住。"
+    ],
+    [
+     "At minus one half, the three fall flat into one plane, and B is exactly A plus C.",
+     "到 −1/2 时，三个态压进同一个平面，B 恰好等于 A + C。"
+    ],
+    [
+     "Lean checks the general rule: a table gives no negative length for every arrow exactly when it is a table of overlaps.",
+     "Lean 检验了一般规律：一张表对每一根箭头都量出非负长度，当且仅当它确实是一张内积表。"
+    ],
+    [
+     "No entry came first. They fit all at once. Causes do not push; they fit.",
+     "没有哪一格先发生，它们同时嵌合。因果不是推出来的，是嵌合出来的。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.3,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a07_field",
+   "name": "FIELD AND LINE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.8,
+    0.8,
+    0.9,
+    0.6,
+    0.5
+   ],
+   "lines": [
+    [
+     "Now a different puzzle. Checking a colored map is quick. Coloring one may not be.",
+     "换一个谜题。检查一张涂好色的图很快；把它涂出来却未必。"
+    ],
+    [
+     "Color a ring of five so that neighbors differ. Three colors work: a field, set all at once.",
+     "给五个点围成的环着色，让相邻两点颜色不同。三种颜色就够：这是一片场，一下子全部定好。"
+    ],
+    [
+     "Point each edge toward the higher color, and every arrow chain stops within three points: a line.",
+     "让每条边指向号数更大的颜色，任何一串箭头都不超过三个点：这是一条线。"
+    ],
+    [
+     "Lean checks they always come together: k colors exist exactly when some arrows keep every chain within k points.",
+     "Lean 检验了二者总是相伴：能用 k 种颜色着色，当且仅当有一种定向让每串箭头都不超过 k 个点。"
+    ],
+    [
+     "But whether finding is ever as easy as checking, P versus NP, is still open.",
+     "但“找”是否总能和“验”一样容易，即 P 与 NP 问题，至今仍未解决。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.3,
+     "kind": "stamp"
+    },
+    {
+     "line": 4,
+     "at": 0.5,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "a07_fair",
+   "name": "LEDGERS THAT NEVER CHEAT",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.4,
+    0.3
+   ],
+   "lines": [
+    [
+     "The book reads quantum rules as five ledgers that never cheat.",
+     "本书把量子规则读作五本从不作弊的账。"
+    ],
+    [
+     "Open the copy ledger. A reversible copier must leave every entry of our table alone, yet copying squares each entry.",
+     "翻开复印这本账：可逆的复印机必须让表里每一格原样不动，可复印却把每一格平方。"
+    ],
+    [
+     "So one entry would read one half before and one quarter after. The table cannot stand.",
+     "于是同一格复印前是 1/2，复印后是 1/4。这张表站不住。"
+    ],
+    [
+     "Lean checks the only way out: the overlap equals its square, so the states are equal or perpendicular.",
+     "Lean 检验了唯一的出路：重叠度等于它自己的平方，所以两个态要么相同，要么正交。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.3,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a07_axiom",
+   "name": "THE COMPARISON AXIOM",
+   "lead": 0.5,
+   "tail": 2.0,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "So the book lays one stone at the bottom: all is pairwise comparison, with no third point.",
+     "于是本书在最底下放一块基石：一切都是两两比较，不借第三点。"
+    ],
+    [
+     "Two worlds that agree on every comparison differ only by turning everything at once.",
+     "在每一次比较上都一致的两个世界，最多只差整体转一下。"
+    ],
+    [
+     "Lean checks it: equal overlap tables mean one unitary carries one family onto the other.",
+     "Lean 检验了这一点：内积表相同，就有一个幺正变换把一组态整体搬到另一组上。"
+    ],
+    [
+     "And a turn of everything is a turn no one inside can see.",
+     "而整体的转动，身在其中的谁也看不见。"
+    ],
+    [
+     "If comparing is all there is, what is the smallest thing it can see?",
+     "如果只剩比较，它能看见的最小单位是什么？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.3,
+     "kind": "stamp"
+    },
+    {
+     "line": 4,
+     "at": 0.2,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a08_title",
+   "name": "THE SMALLEST CELL",
+   "lead": 3.6,
+   "tail": 0.4,
+   "music": [
+    0.9,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Ask comparison for its finest grain, and it hands you no dot. It hands you one small cell.",
+     "让比较交出最细的颗粒，它给你的不是一个点，而是一个小胞。"
+    ],
+    [
+     "Like a corner cut from an orange: three flat faces meet at the centre, and the peel stays curved.",
+     "像从橙子上切下的一角：三个平切面交于中心，橙皮仍是弯的。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.2,
+     "kind": "chime"
+    }
+   ],
+   "chapter": {
+    "en": "Part VIII · Down to the smallest arc",
+    "zh": "第八部 · 造微与归弧"
+   }
+  },
+  {
+   "id": "a08_cell",
+   "name": "ONE STEP OR TWO",
+   "lead": 0.4,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Walk from A to C: one straight step, or two forty-five degree steps with a square turn at B.",
+     "从 A 到 C：沿大圆一步直达；或者走两段 45° 的弧，在 B 处直角转弯。"
+    ],
+    [
+     "Compare in pairs. A with B gives 0.707, B with C too, and A with C one half, 0.707 squared.",
+     "只做两两比较：A 比 B 得 0.707，B 比 C 也是，A 比 C 得 1/2，正是 0.707 的平方。"
+    ],
+    [
+     "Lean checks one ledger for any three arrows. Here it reads 0.729 plus 0.125 i, the volume hiding in the i.",
+     "Lean 对任意三根箭头核验同一本账：这里读出 0.729 + 0.125i，体积就藏在虚部里。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.8,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a08_sagitta",
+   "name": "TURN, DON'T SUBTRACT",
+   "lead": 0.4,
+   "tail": 0.5,
+   "music": [
+    0.8,
+    0.7,
+    0.8,
+    0.4,
+    0.5
+   ],
+   "lines": [
+    [
+     "Why did we ever believe that a small enough step is straight?",
+     "我们凭什么相信：步子够小，就是直的？"
+    ],
+    [
+     "Turn a point by theta. It slides sine theta, and drops one minus cosine theta: the sagitta, the arrow inside a bow.",
+     "把一点转过 θ：它横移 sin θ，下沉 1 − cos θ，这就是矢高，弓里搭着的那支箭。"
+    ],
+    [
+     "A hundred turns of zero point one drop 0.4996 in all. Old calculus throws that away.",
+     "转 100 次、每次 0.1，矢高累计 0.4996。旧微积分把它扔掉了。"
+    ],
+    [
+     "Lean checks: steps shrinking faster than one over root N leave nothing; exactly that fast, half of sigma squared T.",
+     "Lean 核验：步子缩得比 1/√N 快，什么也不剩；恰好这么快，剩下 σ²T 的一半。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a08_primes",
+   "name": "PRIMES AS ARCS",
+   "lead": 0.4,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.3,
+    0.4
+   ],
+   "lines": [
+    [
+     "Whole numbers hide turns too. Adding over all numbers equals multiplying one factor per prime.",
+     "整数里也藏着转动：对全体整数求和，等于每个素数各乘一个因子。"
+    ],
+    [
+     "Lean checks it when the real part of s is above one.",
+     "Lean 在实部大于 1 时核验了它。"
+    ],
+    [
+     "Add an imaginary part, and each prime turns like a clock, at speed log p.",
+     "加上虚部，每个素数像一只钟，以速度 ln p 转动。"
+    ],
+    [
+     "The Riemann hypothesis puts every nontrivial zero on the line where the real part is one half.",
+     "黎曼猜想说：每个非平凡零点都落在实部为 1/2 的那条线上。"
+    ],
+    [
+     "It has an external Lean proof, independently replayed, not frozen in this book's own library.",
+     "它已有外部 Lean 证明并经独立重放，但没有冻结在本书自己的库里。"
+    ]
+   ]
+  },
+  {
+   "id": "a08_ternion",
+   "name": "THREE WON'T CLOSE",
+   "lead": 0.4,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Turns in a plane multiply like complex numbers. In space, take a as one, two, two, and b as zero, three, four.",
+     "平面里的转动像复数一样相乘。到了空间，取 a = (1, 2, 2)，b = (0, 3, 4)。"
+    ],
+    [
+     "Their cross product measures the area; squared, that is just twenty-nine of fifteen squared. The missing 196 is the overlap, fourteen squared.",
+     "叉积的长度是面积，平方后只有 29，而 15² 是 225；少掉的 196 是重叠 14 的平方。"
+    ],
+    [
+     "Lean checks this receipt for any two lists. A three-drawer cabinet has no drawer for the overlap.",
+     "Lean 对任意两组数核验了这张收据。三个抽屉的柜子，放不下重叠。"
+    ],
+    [
+     "Give it a fourth drawer, and the product closes, with length fifteen, three times five.",
+     "给它第四格，乘法就合拢了，长度正好 15 = 3 × 5。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a08_forces",
+   "name": "EVERY FORCE, AN ARC",
+   "lead": 0.4,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.7,
+    0.5,
+    0.4,
+    0.3
+   ],
+   "lines": [
+    [
+     "Then the book's boldest reading, marked as a model: a gauge force is the turn a loop brings back inside one cell.",
+     "接着是本书最大胆的诠释，标为模型：规范力，是小胞里绕一圈带回来的转角。"
+    ],
+    [
+     "Gravity is a shared metronome between cells, ticking slower where they crowd. Einstein's constant and the three generations stay open.",
+     "引力是小胞间共用的节拍器，越挤越慢；爱因斯坦常数与三代粒子仍开放。"
+    ]
+   ]
+  },
+  {
+   "id": "a08_ask",
+   "name": "WHO COMPARES",
+   "lead": 0.4,
+   "tail": 2.4,
+   "music": [
+    0.9,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "So comparison's smallest unit is a curved cell. But comparing needs a comparer, and no outside is left to stand on.",
+     "所以，比较的最小单位是一个弯曲的小胞。可是比较需要比较者，而外面已无处可站。"
+    ],
+    [
+     "Who does the comparing, from inside the field?",
+     "在场的里面，是谁在比较？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 0.2,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a09_title",
+   "name": "EVERYTHING THAT COMPARES",
+   "lead": 3.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Nobody stands outside to watch the rain hit this pebble. So who is comparing?",
+     "雨点打在这颗石子上，没人站在外面看。那么，是谁在比较？"
+    ],
+    [
+     "The drop and the pebble compare each other, and the pebble keeps the dent.",
+     "雨点与石子相互比量，石子留下了凹痕。"
+    ],
+    [
+     "A photon compares and passes the phase on, keeping nothing; you keep years.",
+     "光子也比较，却只把相位传下去，什么都不留；你能记住许多年。"
+    ],
+    [
+     "Why do we assume an observer needs a brain? A brain is only a deeper memory.",
+     "凭什么认定观察者非得有大脑？大脑不过是记得更深。"
+    ],
+    [
+     "This book reads everything that compares as an observer; only the memory order differs. That is a model.",
+     "本书把一切会比较的都读作观察者，差别只在记忆阶数。这是模型诠释。"
+    ]
+   ],
+   "chapter": {
+    "en": "Part IX · Observers inside the field",
+    "zh": "第九部 · 互照与破执·场内观察者"
+   }
+  },
+  {
+   "id": "a09_copies",
+   "name": "EVERY HAND LETS GO",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.0,
+    0.2
+   ],
+   "lines": [
+    [
+     "Now count what keeping costs. A qubit in even superposition links its two branches by one half.",
+     "那就算一算“留下”的代价。均匀叠加的量子比特，两条分支由二分之一连着。"
+    ],
+    [
+     "Two holders each take a phase record, a quarter turn apiece, and the link becomes minus one half.",
+     "两个持有者各取一份相位记录，各转四分之一圈，这个连接变成负二分之一。"
+    ],
+    [
+     "One lets go: minus i over two. Both let go: one half again. Lean checks these four values.",
+     "一方松手：−i/2；双方都松手：又回到 ½。这四个值由 Lean 核验。"
+    ],
+    [
+     "Keep one copy whose overlap is not one, let the pure phase copies go; Lean checks a nonzero link never returns.",
+     "留一份重叠不等于 1 的副本，让纯相位副本全部松手：Lean 核验，原本不为零的连接再也回不来。"
+    ],
+    [
+     "To unmake a fact, every hand must let go.",
+     "要抹去一个事实，得让每一只手都松开。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 3.6,
+     "kind": "stamp"
+    },
+    {
+     "line": 4,
+     "at": 0.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a09_router",
+   "name": "OPEN THE GATES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.7,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "So the past stays put, one cell per moment. How does an observer move through it?",
+     "于是过去留在原地，每个时刻一格。观察者又怎样在其中穿行？"
+    ],
+    [
+     "Picture eight fields watered through a delta of sluice gates.",
+     "想象八块田，由一片分叉的水闸渠网灌溉。"
+    ],
+    [
+     "The address zero, one, one turns three gates, and only field three gets water.",
+     "地址 0 1 1 转动三道闸门，只有第 3 块田得到水。"
+    ],
+    [
+     "With clean wires, reading adds that field's eight to the register and leaves the address and wires as they were.",
+     "线路干净时，读出把这块田里的 8 加进寄存器，地址与线路原样不动。"
+    ],
+    [
+     "Lean checks this at every depth. Time as a pointer over still memory is the book's model.",
+     "Lean 核验了任意深度的这套路由。把时间读作静止存储上的指针，是本书的模型。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 3.4,
+     "kind": "chime"
+    },
+    {
+     "line": 4,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a09_arc",
+   "name": "THE TAUT STRING",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Then the pointer moves from moment three to moment four. Which way should the state walk?",
+     "随后指针从时刻 3 走到时刻 4。态该沿哪条路走？"
+    ],
+    [
+     "Stretch a string tight across a ball: it settles on the shortest arc, never through the inside.",
+     "在球面上拉紧一根绳，它会落在最短的弧上，绝不穿进球里。"
+    ],
+    [
+     "Two states sit eighty degrees apart; a stop fifty degrees off the arc makes the trip one hundred twenty-one.",
+     "两个态相距 80°；中途绕到偏离这段弧 50° 的地方，路程变成 121°。"
+    ],
+    [
+     "Lean checks the direct angle never exceeds the two legs.",
+     "Lean 核验：直达的夹角从不超过两段之和。"
+    ],
+    [
+     "Walked through filters, four even steps keep sixty-one percent; one eighty-degree leap keeps three.",
+     "用滤片沿弧走：四个均匀的步留下 61%；一步跳 80° 只留下 3%。"
+    ],
+    [
+     "Each share is a squared overlap, the record weight Lean checks. Even steps as good thinking is a model.",
+     "每一份留下的都是重叠的平方，即 Lean 核验的记录权重。把均匀的步读作好的思考，是模型。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.4,
+     "kind": "stamp"
+    },
+    {
+     "line": 4,
+     "at": 3.0,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "a09_ask",
+   "name": "NOBODY OUTSIDE",
+   "lead": 0.5,
+   "tail": 2.0,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Records pin the past, a pointer walks it, the shortest arc sets each step, all from inside.",
+     "记录钉住过去，指针在其中行走，最短的弧定下每一步，全都在里面完成。"
+    ],
+    [
+     "If every observer is part of the field, is anything left outside?",
+     "如果每个观察者都是场的一部分，外面还剩什么？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 0.3,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "a10_title",
+   "name": "ONE TURN",
+   "lead": 3.6,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.3,
+    0.1,
+    0.0,
+    0.0
+   ],
+   "lines": [
+    [
+     "If nobody stands outside to watch, the turner must report on itself. So turn around once, and see what comes back.",
+     "如果外面没有人看着，转动者就只能自己报告。那就转一整圈，看看回来的是什么。"
+    ]
+   ],
+   "chapter": {
+    "en": "Part X · The observer is the field",
+    "zh": "第十部 · 不二与归元"
+   }
+  },
+  {
+   "id": "a10_lift",
+   "name": "HALF A TURN",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.8,
+    0.5,
+    0.4,
+    0.1,
+    0.1
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.4,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Picture two wheels linked two to one: the lower wheel z is always the square of the upper wheel w.",
+     "想象两只按二比一联动的轮子：下面那只 z，永远是上面那只 w 的平方。"
+    ],
+    [
+     "Turn z a quarter round, and w turns an eighth: one plus i over root two, squared, is i.",
+     "让 z 转四分之一圈，w 只转八分之一：(1 + i)/√2 的平方，正是 i。"
+    ],
+    [
+     "When z is home again, w has made only half a turn. It stops at minus one.",
+     "等 z 回到原处，w 只走了半圈，停在 −1。"
+    ],
+    [
+     "Lean checks that this lift from one is the only continuous one, and that it ends at minus one.",
+     "Lean 检验了：从 1 出发的连续提升只有这一条，终点是 −1。"
+    ],
+    [
+     "A second turn brings w home. It takes 720° to come back.",
+     "再转一圈，w 才回家。要 720° 才能回来。"
+    ]
+   ]
+  },
+  {
+   "id": "a10_sheet",
+   "name": "THE OTHER SHEET",
+   "lead": 0.4,
+   "tail": 0.6,
+   "music": [
+    0.7,
+    0.4,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.4,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "So why did we think a full turn changes nothing? Because we watched the arrow, not the turner.",
+     "那我们凭什么以为，转一整圈什么都不变？只因为我们盯着箭头，没看转动的人。"
+    ],
+    [
+     "The arrow, the world you see, is back. The turner has come round with its sign flipped.",
+     "箭头，也就是你看到的世界，回来了；转动者自己却换了号。"
+    ],
+    [
+     "One turn returns the world. Only two return the one who turns.",
+     "一圈，世界回来；两圈，转动的人才回来。"
+    ]
+   ]
+  },
+  {
+   "id": "a10_net",
+   "name": "INDRA'S NET",
+   "lead": 0.4,
+   "tail": 0.5,
+   "music": [
+    0.8,
+    0.5,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Now many observers. Picture Indra's net: a jewel at every knot, each reflecting all the others.",
+     "现在是许多观察者。想象因陀罗网：每个网结一颗宝珠，每颗都映着其余所有的珠。"
+    ],
+    [
+     "Give the jewels no addresses. Keep only how much each pair overlaps.",
+     "不给宝珠任何地址，只留下每两颗重叠多少。"
+    ],
+    [
+     "Turn the whole net, and every overlap stays the same.",
+     "把整张网一起转，每个重叠都不变。"
+    ],
+    [
+     "Lean checks the converse: nets with the same overlaps differ by one unitary move.",
+     "Lean 检验了反过来：重叠全都相同的两张网，只差一次幺正变换。"
+    ],
+    [
+     "So the pairs fix the net. What's left is one move of everything at once, invisible from inside.",
+     "所以两两的重叠定下了整张网。剩下的只是全体一起的一次变换，网里谁也看不见。"
+    ]
+   ]
+  },
+  {
+   "id": "a10_axiom",
+   "name": "NO RULER",
+   "lead": 0.4,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Chapter thirty-nine throws away the ruler and the origin, and keeps only comparisons.",
+     "第三十九章扔掉尺子和原点，只留下比较。"
+    ],
+    [
+     "Two moves remain, under a few rules: carry the step from y to x onto z, and read how alike points are.",
+     "只剩两个动作，守几条规矩：把从 y 到 x 的那一步搬到 z 上；读出两点有多像。"
+    ],
+    [
+     "On unit quaternions, one and i read a half; one and minus one read zero.",
+     "在单位四元数上，1 与 i 读出二分之一，1 与 −1 读出 0。"
+    ],
+    [
+     "On top of those rules, ask five things. Order matters, and small steps join any two points.",
+     "在这些规矩之上，再要五条。次序有关；小步能连通任意两点。"
+    ],
+    [
+     "Readings come as near zero as you like, and each point fits in five numbers whose dot products are the readings.",
+     "读数能任意接近零；每个点用五个数写下，它们的点积就是读数。"
+    ],
+    [
+     "Last, no limit is missing. Then Lean checks that any such structure is the unit quaternions, point for point.",
+     "最后，取极限没有缺口。Lean 检验了：这样的结构一点对一点就是单位四元数。"
+    ],
+    [
+     "That nature is built this way is the axiom itself: a model, not a proof.",
+     "至于自然是否就这样搭成，那是公理本身：一个模型，不是证明。"
+    ]
+   ]
+  },
+  {
+   "id": "a10_ask",
+   "name": "NO SEAT OUTSIDE",
+   "lead": 0.4,
+   "tail": 1.9,
+   "music": [
+    0.9,
+    0.4,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "The minus one where our half turn stopped is a point of this sphere. No watcher's seat is left outside it.",
+     "我们那半圈停下的 −1，正是这颗球上的一个点。球外没有留下旁观者的座位。"
+    ],
+    [
+     "The observer is the field.",
+     "观察者就是场。"
+    ],
+    [
+     "Then what lies outside every sphere?",
+     "那么，在所有的球之外，是什么？"
+    ]
+   ]
+  },
+  {
+   "id": "a11_title",
+   "name": "OUTSIDE EVERY SPHERE",
+   "lead": 3.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "So we climbed out of the last sphere. Is a bigger one waiting, like the next nesting doll?",
+     "我们爬出了最后一个球。外面会不会又是一个更大的球，像套娃的下一层？"
+    ],
+    [
+     "In the book's reading, each finite sphere we closed left a small gap, pointing further out.",
+     "按本书的读法，我们合拢的每个有限的球，都留下一道小缝，指向更外面。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.6,
+     "kind": "chime"
+    }
+   ],
+   "chapter": {
+    "en": "Coda · Outside every sphere",
+    "zh": "终章 · 在所有的球之外"
+   }
+  },
+  {
+   "id": "a11_compare",
+   "name": "THE ONE WHO COMPARES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "But why do we assume the outside must be one more thing to look at?",
+     "可我们凭什么以为，外面一定还是一件可以看的东西？"
+    ],
+    [
+     "Look at what never changed. Act after act, someone held two arrows and compared them.",
+     "看看什么从没变过：一幕又一幕，总有人拿着两支箭头在比较。"
+    ],
+    [
+     "A camera can photograph the whole room, except itself. The one comparing is never on the list.",
+     "相机拍得下整个房间，唯独拍不到自己；比较者从不在被比较的清单上。"
+    ],
+    [
+     "So outside every sphere: no bigger sphere, no point out there, only the one who compares. A reading, not a theorem.",
+     "所以所有球之外，没有更大的球，也没有站在外面的点，只有比较者本身。这是读法，不是定理。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.4,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "a11_rest",
+   "name": "A BAG THAT ONLY GIVES",
+   "lead": 0.5,
+   "tail": 0.7,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Then does the climbing ever end? Try a bag you only take from.",
+     "那这场攀登会有尽头吗？试试一个只拿不放的袋子。"
+    ],
+    [
+     "Cards two to nine. Each round, remove the largest card that some smaller card divides.",
+     "袋里是 2 到 9 的卡片。每一轮，拿走能被某张更小的卡片整除的最大那张。"
+    ],
+    [
+     "Nine goes, then eight, six, four. Two, three, five, seven stay, and nothing moves again.",
+     "先走 9，再走 8、6、4。剩下 2、3、5、7，再也不动。"
+    ],
+    [
+     "Lean checks the general case: on a finite set, a take-only update stops within as many steps as it had elements.",
+     "Lean 检验一般情形：有限集合上只删不添，至多走初始元素个数那么多步就停下。"
+    ],
+    [
+     "Stopping is not emptying. Take only from a finite bag, and it must come to rest.",
+     "停下不等于清空。有限的袋子只拿不放，终将停下。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "a11_ledger",
+   "name": "THE LEDGER",
+   "lead": 0.5,
+   "tail": 3.4,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Twelve stops, one ledger. Green where the Lean kernel checked a statement.",
+     "十二站，一本账。绿色是 Lean 内核检验过的陈述。"
+    ],
+    [
+     "Purple where the book reads and interprets. Red where the question is still open.",
+     "紫色是本书的读法与诠释，红色是仍未解决的问题。"
+    ],
+    [
+     "On this page: eleven green anchors, twelve readings, one open question.",
+     "这一页上：十一条绿色锚点，十二种读法，一个开放问题。"
+    ],
+    [
+     "No ruler outside, no third point. Only two things compared, and the one who compares.",
+     "外面没有尺子，也不借第三点。只有被比较的两样东西，和那个在比较的人。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.4,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

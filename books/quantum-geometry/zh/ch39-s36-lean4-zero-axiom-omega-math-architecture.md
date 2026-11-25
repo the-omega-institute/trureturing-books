@@ -46,6 +46,8 @@
 
 ## 32.8.2 在 Lean 4 中构建 `OmegaMath` 的三层“零公理”架构 {#sec-ch39-omega-math-three-layer-zero-axiom-stack}
 
+`OmegaMath` 的同一份库源码在严格后端和常规后端分别编译。严格后端通过空内核重放核验零公理闭包。书中的定理徽章依据所引用的冻结声明。常规后端编译的若干 D5 定理使用 Lean 的标准命题外延公理 `propext`。 [OmegaMath 模块与验证](https://github.com/the-omega-institute/trureturing/blob/dev/src/README.md)
+
 正确的形式化架构采用**“第 0 层规范整数结构造实例 $+$ 第 1 层类型类抽接口证相容 $+$ 第 2 层单向阴影函子接 `Mathlib`”**的三层无公理设计（`MODEL` 架构总表结合 `NUM` 编译器核验）：
 
 | 架构维度 | 错误路线：硬写 `axiom` 声明 | 传统路线：`Mathlib` 经典 `Real` 栈 | 最优路线：`OmegaMath` 零公理构造栈 |

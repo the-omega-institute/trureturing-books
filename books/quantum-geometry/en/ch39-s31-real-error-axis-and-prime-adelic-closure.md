@@ -60,7 +60,7 @@ $$
 \underbrace{\lvert q\rvert_\infty}_{\substack{\text{Real tangent expansion}\\\text{(linear error amplifier)}}} \;\times\; \underbrace{\prod_{p \in \mathbb{P}} \lvert q\rvert_p}_{\substack{\text{Prime ultrametric contraction}\\\text{(nonlinear curvature reclaim)}}} \;\equiv\; \mathbf{1} \qquad (\forall\, q \in \mathbb{Q}^\times)!
 $$
 
-Stepping $+1$ at a time along $N = 1, 2, 3, 4, 5, \dots$ reveals why each prime is born (`LEAN ✓` + `manual derivation`, paired with `MODEL` interpretation):
+Stepping $+1$ at a time along $N = 1, 2, 3, 4, 5, \dots$ reveals why each prime is born (`LEAN ✓` + `manual derivation`, paired with `MODEL` interpretation; in strict $\mathbf{Math}_\Omega$, every $q = \frac{a}{b} \in \mathbb{Q}^\times$ satisfies $\lvert q\rvert_p = 1$ outside $p \mid ab$, collapsing $\prod_{p\in\mathbb{P}}\lvert q\rvert_p$ to the finite-support product $\prod_{p \mid ab}\lvert q\rvert_p \equiv 1/\lvert q\rvert_\infty$ under an $\varepsilon_{\mathrm{self}}$-capped register horizon $K \le K_{\max}$—see [§31.8](ch31-s08-primorial-cascade-vernier-resolution-and-finite-register-cap.md#sec-ch31-8-2)):
 
 - Stepping from $1$ to **$N = 2$**: the real axis inflates to $\lvert 2\rvert_\infty = 2$ with no prior channel available; to keep the global product equal to $\mathbf{1}$, **the first primitive reclaiming channel $p = 2$ must open** ($\lvert 2\rvert_2 = \frac{1}{2}$, locking $2 \times \frac{1}{2} = \mathbf{1}$);
 - Stepping to **$N = 3$**: $\lvert 3\rvert_\infty = 3$ while $p = 2$ is completely blind ($3 \equiv 1 \pmod 2 \implies \lvert 3\rvert_2 = 1$), forcing **the second independent prime channel $p = 3$** ($\lvert 3\rvert_3 = \frac{1}{3}$, $3 \times \frac{1}{3} = \mathbf{1}$);
