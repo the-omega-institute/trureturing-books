@@ -5285,6 +5285,22 @@
       "line": 372,
       "signature": "theorem sharp_second_fourth_harmonic_bound (e k : ℝ) (he₀ : 0 ≤ e) (he₁ : e ≤ 1) (hk₀ : 0 ≤ k) (hk₁ : k ≤ 1) : let bound"
     },
+    "D5/S3/Fourier/Concentration/ShiftedBinVariance.collision_parabolic_lower": {
+      "module": "D5/S3/Fourier/Concentration/ShiftedBinVariance",
+      "name": "D5.S3.Fourier.Concentration.ShiftedBinVariance.collision_parabolic_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:220d5d6f505a040d4254d7be742f6bba8baa6142d4bf6071edb738a0c49807f2",
+      "line": 187,
+      "signature": "theorem collision_parabolic_lower {I : Type*} (s : Finset I) (x c : I → ℝ) (a V η : ℝ) (hη : 0 < η) (hc : ∀ i ∈ s, 0 ≤ c i) (hm : ∑ i ∈ s, c i * (x i - a) ^ 2 ≤ V * ∑ i ∈ s, c i) (r : ℕ) (hr : 0 < r) (hM : V / η ^ 2 + 1 / 4 ≤ (r : ℝ) ^ 2) : let W"
+    },
+    "D5/S3/Fourier/Concentration/ShiftedBinVariance.exists_shifted_squared_moment": {
+      "module": "D5/S3/Fourier/Concentration/ShiftedBinVariance",
+      "name": "D5.S3.Fourier.Concentration.ShiftedBinVariance.exists_shifted_squared_moment",
+      "kind": "theorem",
+      "statement_id": "sha256:220d5d6f505a040d4254d7be742f6bba8baa6142d4bf6071edb738a0c49807f2",
+      "line": 69,
+      "signature": "theorem exists_shifted_squared_moment {I : Type*} (s : Finset I) (z c : I → ℝ) : let roundingPenalty"
+    },
     "D5/S3/Fourier/Concentration/SixResidueMomentOptimum.six_two_mode_optimum": {
       "module": "D5/S3/Fourier/Concentration/SixResidueMomentOptimum",
       "name": "D5.S3.Fourier.Concentration.SixResidueMomentOptimum.six_two_mode_optimum",
