@@ -4626,6 +4626,22 @@
       "line": 231,
       "signature": "theorem chordWeight_dft (N : ℕ) [NeZero N] (k : ZMod N) : ZMod.dft (fun l => (chordWeight N l : ℂ)) k = ((((N : ℝ) ^ 2 - 1) / 12 - (k.val : ℝ) * ((N : ℝ) - k.val) / 2 : ℝ) : ℂ)"
     },
+    "D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.clipped_gaussian_full_limit_iff": {
+      "module": "D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant",
+      "name": "D5.S3.Fourier.Asymptotics.ClippedGaussianMinorant.clipped_gaussian_full_limit_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:7281512a33c63910ceded9c80f758182664d2b2451995efbfef046ed52382f0b",
+      "line": 185,
+      "signature": "theorem clipped_gaussian_full_limit_iff (V A : ℕ → ℝ) (hV : ∀ᶠ n in atTop, 0 < V n) : let scale"
+    },
+    "D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.clipped_gaussian_window_error": {
+      "module": "D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant",
+      "name": "D5.S3.Fourier.Asymptotics.ClippedGaussianMinorant.clipped_gaussian_window_error",
+      "kind": "theorem",
+      "statement_id": "sha256:7281512a33c63910ceded9c80f758182664d2b2451995efbfef046ed52382f0b",
+      "line": 120,
+      "signature": "theorem clipped_gaussian_window_error (V A : ℕ → ℝ) (hV : ∀ᶠ n in atTop, 0 < V n) : let scale"
+    },
     "D5/S3/Fourier/Asymptotics/CyclicActivationShift.cyclic_activation_shift": {
       "module": "D5/S3/Fourier/Asymptotics/CyclicActivationShift",
       "name": "D5.S3.Fourier.Asymptotics.CyclicActivationShift.cyclic_activation_shift",

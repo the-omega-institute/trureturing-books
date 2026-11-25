@@ -126,3 +126,31 @@ E_p(\eta)\ge \frac{hW^{2p}}{2\pi}
 $$
 
 若 $D>0$ 且 $p>0$，该不等式严格成立。这里使用了次数和的同一傅里叶幂展开。固定 $V,h>0$ 而次数增长时，积分中的缩放变量为 $t\sqrt{pV}$，其高斯极限给出的渐近系数仍待形式化。一般实频谱的有限分辨率碰撞需要另行建立正核估计。 [有限积分下界的 Lean 证明](lean:D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lattice_collision_variance_lower)
+
+## 截断方差积分的高斯极限
+
+允许方差预算 $V_p$ 和半窗口 $A_p$ 随次数 $p$ 变化。设 $V_p>0$ 最终成立，取
+
+$$
+s_p=\sqrt{pV_p},\quad R_p=A_ps_p,\quad
+I_p=s_p\int_{-A_p}^{A_p}\max(0,1-V_pt^2/2)^{2p}\,dt.
+$$
+
+对任意实数列 $A_p$，包括负的有向半窗口，成立
+
+$$
+I_p-\int_{-R_p}^{R_p}e^{-u^2}\,du\longrightarrow0,
+\qquad
+I_p\longrightarrow\sqrt\pi\ \Longleftrightarrow\ R_p\longrightarrow+\infty.
+$$
+
+换元 $u=s_pt$ 后，被积函数为 $q_p(u)=\max(0,1-u^2/(2p))^{2p}$。当 $p>0$ 时，$0\le q_p(u)\le e^{-u^2}$，且固定 $u$ 下 $q_p(u)\to e^{-u^2}$。因此支配收敛给出 $\int_{\mathbb R}|q_p(u)-e^{-u^2}|\,du\to0$，统一控制所有窗口的绝对误差。高斯窗口积分随有向半径单调增加，并在任意有限半径处严格小于 $\sqrt\pi$，所以全高斯极限也要求缩放后的半径趋于正无穷。 [窗口逼近](lean:D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.clipped_gaussian_window_error) [全高斯极限的充要条件](lean:D5/S3/Fourier/Asymptotics/ClippedGaussianMinorant.clipped_gaussian_full_limit_iff)
+
+现在回到固定方差预算 $V>0$ 及格距 $h>0$ 的卷积。取 $A_p=\pi/h$，则 $R_p\to+\infty$，且上节有限下界乘以 $\sqrt{pV}$ 后的积分系数趋于 $h/(2\sqrt\pi)$。由此，对每个 $\varepsilon>0$，所有充分大的 $p$ 与固定 $\eta\ge0$ 满足
+
+$$
+\left(\frac{h}{2\sqrt\pi}-\varepsilon\right)W^{2p}
+\le \sqrt{pV}\,E_p(\eta).
+$$
+
+这个渐近下界继承了有限傅里叶积分的全部假设。实际碰撞质量还可能受到其他相位峰的贡献，例如所给格距并非最大格距时。一般实频谱和实际 ζ 纵坐标的上界仍需控制这些贡献及非中心余项。这里采用了 [有限主贡献与余项控制的相关方法](https://github.com/the-omega-institute/riemann-hypothesis/blob/c7d25b3bfd7906388bb8eb0774e027a2b756a7b6/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)，具体的余项是上述全线绝对误差。
