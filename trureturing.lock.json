@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "6663afa90893572c38d06dfc14b06880869d5b48",
-  "pinned_at": "2026-11-25T09:59:23Z",
+  "commit": "939d0ed17f5a61cf068ac89726c53c36e55e1fb1",
+  "pinned_at": "2026-11-25T10:29:51Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4637,6 +4637,22 @@
       "line": 346,
       "signature": "theorem scaled_rear_first_order {h : ℕ → ℝ} {K L : ℝ} (hK : Tendsto (fun n : ℕ => (n:ℝ)^5*(h n)^2) atTop (𝓝 K)) (hL : Tendsto (fun n : ℕ => (n:ℝ)*(3*((n:ℝ)^5*(h n)^2)/20-3*K/20)) atTop (𝓝 L)) (S : Finset ℝ) (hS : S.Nonempty) (r : ℝ) : let readout"
     },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.eventual_support_at_second_order_threshold": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingRearSecondOrder.eventual_support_at_second_order_threshold",
+      "kind": "theorem",
+      "statement_id": "sha256:92d523b8fd0e45fe60d5254b61a3b4f5a36be6fd948e5249d7faf3bfee075c50",
+      "line": 142,
+      "signature": "theorem eventual_support_at_second_order_threshold (q : ℕ → ℕ) (hq : ∀ n, q n ≠ 0) (e l : ℕ) (hpar : ∀ᶠ n in atTop, q n % 2 = e) {K L H : ℝ} (hK : Tendsto (fun n : ℕ => (n:ℝ)^5*(mesh (q n))^2) atTop (𝓝 K)) (hL : Tendsto (fun n : ℕ => (n:ℝ)*(3*((n:ℝ)^5*(mesh (q n))^2)/20-3*K/20)) atTop (𝓝 L)) (hH : Tendsto (fun n : ℕ => (n:ℝ)*((n:ℝ)*(3*((n:ℝ)^5*(mesh (q n))^2)/20-3*K/20)-L)) atTop (𝓝 H)) (hcrit : 3*K/20=rearThreshold e (l+1)) (hmargin : L+3*K/8=0) (hne : H-3*K/4≠0) : let readout"
+    },
+    "D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder.scaled_rear_second_order": {
+      "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingRearSecondOrder",
+      "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingRearSecondOrder.scaled_rear_second_order",
+      "kind": "theorem",
+      "statement_id": "sha256:92d523b8fd0e45fe60d5254b61a3b4f5a36be6fd948e5249d7faf3bfee075c50",
+      "line": 77,
+      "signature": "theorem scaled_rear_second_order {h : ℕ → ℝ} {K L H : ℝ} (hK : Tendsto (fun n : ℕ => (n:ℝ)^5*(h n)^2) atTop (𝓝 K)) (hL : Tendsto (fun n : ℕ => (n:ℝ)*(3*((n:ℝ)^5*(h n)^2)/20-3*K/20)) atTop (𝓝 L)) (hH : Tendsto (fun n : ℕ => (n:ℝ)*((n:ℝ)*(3*((n:ℝ)^5*(h n)^2)/20-3*K/20)-L)) atTop (𝓝 H)) (S : Finset ℝ) (hS : S.Nonempty) (r : ℝ) : let readout"
+    },
     "D5/S3/Fourier/Asymptotics/CyclicGrowingSupport.eventual_strict_support_away_from_thresholds": {
       "module": "D5/S3/Fourier/Asymptotics/CyclicGrowingSupport",
       "name": "D5.S3.Fourier.Asymptotics.CyclicGrowingSupport.eventual_strict_support_away_from_thresholds",
@@ -4985,7 +5001,7 @@
       "module": "D5/S3/Fourier/Concentration/DisjointCharacterEnvelope",
       "name": "D5.S3.Fourier.Concentration.DisjointCharacterEnvelope.coefficient_envelope",
       "kind": "theorem",
-      "statement_id": "sha256:e2e4d29946d7fc9bf5091652524ceb6296a2cff6ec4fd0c94b7cec34c96bcc41",
+      "statement_id": "sha256:1c61ac56e9a2c85f809bf47a9d3209fdef60d6e7407de2e97ea7b14478c9fb5f",
       "line": 313,
       "signature": "theorem coefficient_envelope {J : Type*} (s : Finset J) (a b : J → ℂ) (m n : ℕ) (r : ℝ) (hr : 0 < r) : let emptyPart"
     },
