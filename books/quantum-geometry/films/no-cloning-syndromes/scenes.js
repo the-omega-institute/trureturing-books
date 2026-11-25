@@ -214,7 +214,7 @@ function ncTitle(S) {
 /* ======================================================================= */
 /*                               scene 1 · THE COPIER                        */
 /* ======================================================================= */
-const TT = { cx: 1380, cy: 500, R: 270 };
+const TT = { cx: 1380, cy: 520, R: 240 };
 /* the turntable: a disc with two unit arrows psi (white) and phi (amber) at overlap z, turned by rot */
 function ncTurntable(rot, z, a, o = {}) {
   if (a <= 0.003) return;
@@ -229,7 +229,7 @@ function ncTurntable(rot, z, a, o = {}) {
   txt('ψ', pa[0] + 14 * Math.cos(rot) + 6, pa[1] - 14 * Math.sin(rot) + 10, { size: 36, fam: F.math, w: 700, c: C.white, a });
   txt('φ', pb[0] + 14 * Math.cos(rot + th) + 6, pb[1] - 14 * Math.sin(rot + th) + 10, { size: 36, fam: F.math, w: 700, c: C.now, a });
   const mid = rot + th / 2;
-  txt(`z = ${z.toFixed(2)}`, cx + 120 * Math.cos(mid), cy - 120 * Math.sin(mid) + 10, { size: 28, fam: F.mono, w: 700, align: 'center', c: C.cyan, a });
+  txt(`z = ${z.toFixed(2)}`, cx + 175 * Math.cos(mid), cy - 175 * Math.sin(mid) + 10, { size: 28, fam: F.mono, w: 700, align: 'center', c: C.cyan, a });
 }
 SCENES.copy = S => {
   const u = S.u;
@@ -238,7 +238,7 @@ SCENES.copy = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued'], [4, null, 'computed']]);
   /* lines 0–1: the photocopier, then a quantum arrow that it cannot take */
-  const ca = a * (1 - at(S, 4, 0.6));
+  const ca = a * (1 - at(S, 4, 0.5));
   if (ca > 0.003) {
     panel(110, 190, 800, 560, ca, C.argued, 'ANALOGY · 比方：COPIER · 复印机');
     const pa = Q(S, 0, 'copies any page', 0.8), qa = Q(S, 0, 'unknown quantum state', 0.8);
@@ -266,10 +266,10 @@ SCENES.copy = S => {
     txt('U: a rigid turn of the whole space · 整个空间的刚性转动', TT.cx, TT.cy + TT.R + 90, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.argued, a: ta });
     txt('turntable = analogy · 转盘是比方', TT.cx, TT.cy + TT.R + 124, { size: 18, fam: F.zh, w: 700, align: 'center', c: C.argued, a: ta * 0.85 });
     const ka = ta * Q(S, 3, 'stays exactly', 0.6);
-    chip(TT.cx, TT.cy - TT.R - 70, 440, 54, 'overlap kept · 重叠不变', C.cyan, ka, 24, F.zh);
+    chip(TT.cx, TT.cy - TT.R - 62, 440, 54, 'overlap kept · 重叠不变', C.cyan, ka, 24, F.zh);
   }
   /* lines 4–5: the two overlaps */
-  const la = a * at(S, 4, 0.6);
+  const la = a * at(S, 4, 0.6, 0.6);
   if (la > 0.003) {
     panel(110, 190, 800, 560, la, C.cyan, 'TWO OVERLAPS · 两个重叠');
     txt('going in · 进去', 140, 270, { size: 24, fam: F.zh, w: 700, c: C.dim, a: la });
@@ -310,7 +310,7 @@ SCENES.numbers = S => {
   txt(`${(t0 / NC_DEG).toFixed(2)}°`, cx + 150 * Math.cos(t0 / 2) + 6, cy - 150 * Math.sin(t0 / 2) + 10, { size: 26, fam: F.mono, w: 700, c: C.cyan, a });
   if (wa > 0.003) {
     ctx.save(); ctx.setLineDash([10, 8]); line(cx, cy, cx + R * 0.9 * Math.cos(t1), cy - R * 0.9 * Math.sin(t1), C.mag, wa, 3); ctx.restore();
-    txt(`${(t1 / NC_DEG).toFixed(2)}° needed · 需要`, cx + R * 0.92 * Math.cos(t1) + 10, cy - R * 0.92 * Math.sin(t1) - 14, { size: 24, fam: F.zh, w: 700, c: C.mag, a: wa });
+    txt(`${(t1 / NC_DEG).toFixed(2)}° needed · 需要`, cx + R * 0.92 * Math.cos(t1) + 10, cy - R * 0.92 * Math.sin(t1) - 14, { size: 24, fam: F.zh, w: 700, c: C.mag, a: wa * (1 - at(S, 3, 0.5)) });
   }
   /* the ledger */
   panel(1000, 180, 820, 300, a, C.cyan, 'z = 0.6 · ONE NUMBER · 一个数');
@@ -321,8 +321,8 @@ SCENES.numbers = S => {
   /* line 3: the slider and the gap z − z² */
   const sa = a * at(S, 3, 0.6);
   if (sa > 0.003) {
-    panel(1000, 500, 820, 300, sa, C.mag, 'THE GAP · 缺口  z − z²');
-    const x0 = 1060, x1 = 1760, yb = 740, hk = 520;              // gap 0.25 ↦ 130 px
+    panel(1000, 500, 820, 330, sa, C.mag, 'THE GAP · 缺口  z − z²');
+    const x0 = 1060, x1 = 1760, yb = 770, hk = 480;              // gap 0.25 ↦ 120 px
     line(x0, yb, x1, yb, C.white, sa * 0.7, 2);
     const done = Math.max(0, clamp((S.u - phraseAt(S, 3, 'Slide z') - 0.3) / Math.max(1, lineAt(S, 3).e - lineAt(S, 3).s + 0.4)));
     curve(s => [lerp(x0, x1, s), yb - hk * (s - s * s)], 200, C.mag, sa * 0.85, 3);
@@ -334,7 +334,7 @@ SCENES.numbers = S => {
     txt('1', x1, yb + 34, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.white, a: sa });
     txt('max 1/4 at z = 1/2', lerp(x0, x1, 0.5), yb - hk * 0.25 - 16, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.mag, a: sa * 0.85 });
     const ea = sa * clamp((done - 0.9) / 0.1);
-    txt('closes only at 0 and 1 · 只在两端合上', lerp(x0, x1, 0.5), 610, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: ea });
+    txt('closes only at 0 and 1 · 只在两端合上', 1790, 570, { size: 18, fam: F.zh, w: 700, align: 'right', c: C.white, a: ea });
   }
 };
 
@@ -437,7 +437,7 @@ SCENES.rooms = S => {
   if (ka > 0.003) {
     panel(1000, 440, 820, 370, ka, C.cyan, 'KEYS · 钥匙  (analogy · 比方)');
     ncKey(1040, 520, C.now, ka); txt('S₂* in room (−,−)', 1120, 528, { size: 26, fam: F.math, w: 700, c: C.white, a: ka });
-    txt('→  the arrow comes back · 箭头回来', 1430, 528, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: ka });
+    txt('→  back · 箭头回来', 1430, 528, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: ka });
     const wa = ka * Q(S, 3, 'wrong room', 0.5);
     ncKey(1040, 590, C.dim, wa); txt('S₀* in room (−,−)', 1120, 598, { size: 26, fam: F.math, w: 700, c: C.white, a: wa });
     txt('→  0', 1430, 598, { size: 26, fam: F.mono, w: 700, c: C.mag, a: wa });
@@ -473,13 +473,13 @@ SCENES.nudge = S => {
   const ph = [lerp(home[0], back[0], dc), lerp(home[1], back[1], dc)], pt = [lerp(there[0], back[0], dc), lerp(there[1], back[1], dc)];
   if (sp > 0.003 && dc < 0.999) {
     ctx.save(); ctx.setLineDash([6, 8]); line(ph[0] + 60, ph[1] - 30, pt[0] + 60, pt[1] - 30, C.mag, a * sp * (1 - cut), 3); ctx.restore();
-    txt('cross terms ±0.46 i', (ph[0] + pt[0]) / 2 + 130, (ph[1] + pt[1]) / 2 - 30, { size: 22, fam: F.mono, w: 700, c: C.mag, a: a * sp * (1 - cut) });
+    txt('cross terms ±0.46i', 480, 474, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.mag, a: a * sp * (1 - cut) });
   }
   ncLogical(ph, a * lerp(1, 0.7, sp) * (dc > 0.98 ? 0 : 1), 120);
   ncLogical(pt, a * 0.3 * sp * (dc > 0.98 ? 0 : 1), 120);
   if (sp > 0.003 && dc < 0.5) {
-    txt('0.70', home[0] - 20, home[1] + 60, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.now, a: a * sp * (1 - 2 * dc) });
-    txt('0.30', there[0] - 20, there[1] + 60, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.now, a: a * sp * (1 - 2 * dc) });
+    txt('0.70', home[0] + 180, home[1] - 40, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.now, a: a * sp * (1 - 2 * dc) });
+    txt('0.30', there[0] + 180, there[1] - 40, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.now, a: a * sp * (1 - 2 * dc) });
   }
   /* σ */
   panel(1000, 180, 820, 300, a * sp, C.cyan, 'THE NOISE MATRIX σ · 噪声矩阵  (rooms I, X₂)');
