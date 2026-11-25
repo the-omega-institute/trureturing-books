@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "4761719abe7cc3e016beea890f39f448fcd2f2fc",
-  "pinned_at": "2026-11-25T15:53:34Z",
+  "commit": "589b4f1e1423a85c9632cb9152cb83d5aabc5001",
+  "pinned_at": "2026-11-25T18:36:52Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -5193,6 +5193,22 @@
       "statement_id": "sha256:540c179bdaaadc257f850eba313cc3b9ce3788256d4709090bd3bd70d7e6ba53",
       "line": 464,
       "signature": "theorem sharp_first_harmonic_even_block (N : ℕ) (hN : 0 < N) : let bound"
+    },
+    "D5/S3/Fourier/Concentration/FejerCollisionSecants.collision_ramp_exact_right": {
+      "module": "D5/S3/Fourier/Concentration/FejerCollisionSecants",
+      "name": "D5.S3.Fourier.Concentration.FejerCollisionSecants.collision_ramp_exact_right",
+      "kind": "theorem",
+      "statement_id": "sha256:2b1ad6b4a279fa0f41d6d714776c068c64a73d6d2b22f64402ff8e76bcbe5e5a",
+      "line": 77,
+      "signature": "theorem collision_ramp_exact_right {I : Type*} (s : Finset I) (x c : I → ℝ) (r : ℝ) : let ramp"
+    },
+    "D5/S3/Fourier/Concentration/FejerCollisionSecants.collision_ramp_secants": {
+      "module": "D5/S3/Fourier/Concentration/FejerCollisionSecants",
+      "name": "D5.S3.Fourier.Concentration.FejerCollisionSecants.collision_ramp_secants",
+      "kind": "theorem",
+      "statement_id": "sha256:2b1ad6b4a279fa0f41d6d714776c068c64a73d6d2b22f64402ff8e76bcbe5e5a",
+      "line": 49,
+      "signature": "theorem collision_ramp_secants {I : Type*} (s : Finset I) (x c : I → ℝ) (hc : ∀ i ∈ s, ∀ j ∈ s, 0 ≤ c i*c j) (r : ℝ) {δ : ℝ} (hδ : 0 < δ) : let ramp"
     },
     "D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_asymptotic_lower": {
       "module": "D5/S3/Fourier/Concentration/FejerCollisionVariance",

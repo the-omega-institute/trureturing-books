@@ -226,3 +226,36 @@ E_n(\eta_n)\ge
 $$
 
 The underlying family may grow with $n$. Without control of the relative resolution and variance scales, the normalized collision ratio can tend to zero, as with a single unit-weight frequency, $V_n=1/n^2$ and fixed $\eta_n>0$. The upper-bound problem for high-order weighted collisions of actual zeta ordinates remains open.
+
+## Exact recovery of the closed collision band from triangular moments
+
+For general finite data $(x_i,c_i)$, write $d_{ij}=|x_i-x_j|$, and define the ramp-weighted moment at real radius $r$ by
+
+$$
+L(r)=\sum_{i,j}c_ic_j\max(0,r-d_{ij}).
+$$
+
+For $c_ic_j\ge0$ for every pair and $\delta>0$, every real radius $r$ satisfies
+
+$$
+L(r)-L(r-\delta)\le\delta E(r)
+\le L(r+\delta)-L(r).
+$$
+
+For each pair with $d_{ij}\le r$, the right increment of the positive part equals $\delta$ and the left increment is at most $\delta$. For $d_{ij}>r$, the left increment vanishes and the right increment is nonnegative. Sum these inequalities with the nonnegative pair weights. [Finite secant bounds](lean:D5/S3/Fourier/Concentration/FejerCollisionSecants.collision_ramp_secants)
+
+For arbitrary real weights and any $\delta>0$ such that no pair distance lies strictly between $r$ and $r+\delta$, the right increment is exact. A positive interval with this property always exists. Let $\delta_0$ be the minimum of the finite set $\{1\}\cup\{d_{ij}-r:d_{ij}>r\}$, so $\delta_0>0$. For every $0<\delta\le\delta_0$,
+
+$$
+L(r+\delta)-L(r)=\delta E(r).
+$$
+
+No outer distance lies strictly between $r$ and $r+\delta$, and each pair has increment either $\delta$ or zero. This identity allows arbitrary signed weights and retains all closed-band contributions at distance exactly $r$. [Exact right increment](lean:D5/S3/Fourier/Concentration/FejerCollisionSecants.collision_ramp_exact_right)
+
+For the degree-$p$ frequency sums and multinomial weights, the triangular Fourier identity gives, at positive radius $r$,
+
+$$
+L(r)=r\int_{\mathbb R}K_r(t)|S(t)|^{2p}\,dt.
+$$
+
+When $0<\delta<r$, the secant bounds can be expressed directly in terms of the weighted integrals at three positive radii. The exact right increment recovers the closed-band mass from a sufficiently small positive difference, including any mass on the boundary. Upper and lower bounds for high-degree collisions of actual zeta tails still require control of the principal contribution and remainder of these weighted integrals at neighboring radii.
