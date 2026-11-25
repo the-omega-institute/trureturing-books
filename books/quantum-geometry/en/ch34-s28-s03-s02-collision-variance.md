@@ -263,3 +263,43 @@ L(r)=r\int_{\mathbb R}K_r(t)|S(t)|^{2p}\,dt.
 $$
 
 When $0<\delta<r$, the secant bounds can be expressed directly in terms of the weighted integrals at three positive radii. The exact right increment recovers the closed-band mass from a sufficiently small positive difference, including any mass on the boundary. Upper and lower bounds for high-degree collisions of actual zeta tails still require control of the principal contribution and remainder of these weighted integrals at neighboring radii.
+
+## Differentiable limits and the hard-band asymptotic coefficient
+
+Allow the finite data to depend on $n$, writing $L_n$ for the collision ramp and $E_n$ for the closed-band mass. Let $B_n$ be a normalizing factor and $\eta_n$ an arbitrary real scale. Assume eventually $B_n\ge0$ and all pair-weight products within each finite family are nonnegative. Suppose for every fixed $t$ in an open neighborhood of a real number $a$,
+
+$$
+F_n(t)=B_n L_n(t\eta_n)\longrightarrow f(t),
+$$
+
+and $f$ is differentiable at $a$. Then
+
+$$
+B_n\eta_n E_n(a\eta_n)\longrightarrow f'(a).
+$$
+
+The proof uses the two secant quotients for fixed $\delta>0$. For positive scales, apply the finite secant bounds of the preceding section. For negative scales, exchange the left and right increments and negate them. At zero scale both increments and the scaled closed-band mass vanish. Thus for sufficiently small fixed $\delta$, eventually
+
+$$
+\frac{F_n(a)-F_n(a-\delta)}{\delta}
+\le B_n\eta_n E_n(a\eta_n)
+\le\frac{F_n(a+\delta)-F_n(a)}{\delta}.
+$$
+
+Differentiability first allows a fixed $\delta$ to be chosen so that both limiting secants are close to $f'(a)$. Pointwise convergence at the neighboring radii then transfers the bounds to the finite families. This avoids requiring a uniform positive lower bound on their smallest outer gap. [Hard-band limit theorem](https://github.com/the-omega-institute/trureturing/blob/ab4908fd1508426b6d03a7f44608f31388532dfe/D5/S3/Fourier/Concentration/FejerCollisionLimit.lean#L74)
+
+For degree-dependent finite frequency families with nonnegative original weights, write $W_n$ for total weight, $V_n$ for the variance budget, $\eta_n$ for resolution, and $s_n=\sqrt{nV_n}$. Assume $W_n,\eta_n,V_n$ are eventually positive. If the principal contribution and remainder of the weighted integral give, for every fixed $t>0$,
+
+$$
+\frac{s_n}{\eta_n^2 W_n^{2n}}\,t\eta_n
+\int_{\mathbb R} K_{t\eta_n}(u)|S_n(u)|^{2n}\,du
+\longrightarrow \frac{t^2}{2\sqrt\pi},
+$$
+
+then set $a=1$. The derivative of the quadratic limiting profile gives
+
+$$
+\frac{s_n E_n(\eta_n)}{\eta_n W_n^{2n}}\longrightarrow\frac1{\sqrt\pi}.
+$$
+
+The required hard-band asymptotic thus follows from asymptotics for the Fejér-weighted moments at neighboring multiplicative radii. The noncentral contribution and matching upper estimates for actual zeta tails remain open arithmetic problems.

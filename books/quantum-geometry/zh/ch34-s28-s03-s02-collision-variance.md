@@ -263,3 +263,43 @@ L(r)=r\int_{\mathbb R}K_r(t)|S(t)|^{2p}\,dt.
 $$
 
 若 $0<\delta<r$，有限差分夹界可以直接用三个不同正半径的带核积分表示。精确右增量则说明，即使在边界上有碰撞质量，也可以由足够小的正向差分恢复闭带计数。要获得实际 ζ 尾段的高阶碰撞上下界，仍须控制这些带核积分在相邻半径上的渐近主项和余项。
+
+## 可微极限与硬碰撞带的渐近系数
+
+允许有限数据依赖于 $n$，记其碰撞斜坡为 $L_n$、闭碰撞带质量为 $E_n$。令 $B_n$ 为归一化因子，$\eta_n$ 为任意实尺度。假设最终 $B_n\ge0$，且每个数据族内的配对权重乘积皆非负。在某个实数 $a$ 的开邻域中，若对每个固定的 $t$ 有
+
+$$
+F_n(t)=B_n L_n(t\eta_n)\longrightarrow f(t),
+$$
+
+且 $f$ 在 $a$ 处可微，则
+
+$$
+B_n\eta_n E_n(a\eta_n)\longrightarrow f'(a).
+$$
+
+证明使用固定 $\delta>0$ 时的两个割线差商。正尺度时，应用上一节的有限差分夹界。负尺度时，左右割线交换且变号。零尺度时，两个增量与缩放后的闭带质量均为零。于是，对于足够小的固定 $\delta$，最终有
+
+$$
+\frac{F_n(a)-F_n(a-\delta)}{\delta}
+\le B_n\eta_n E_n(a\eta_n)
+\le\frac{F_n(a+\delta)-F_n(a)}{\delta}.
+$$
+
+先由可微性选取固定的 $\delta$，使极限函数的两个割线差商都接近 $f'(a)$，再利用相邻半径处的逐点收敛。这避免要求有限数据的最小外带间隙具有统一正下界。 [硬碰撞带极限定理](https://github.com/the-omega-institute/trureturing/blob/ab4908fd1508426b6d03a7f44608f31388532dfe/D5/S3/Fourier/Concentration/FejerCollisionLimit.lean#L74)
+
+对于随次数 $n$ 变化的原始有限频率族与非负权重，记总权重 $W_n$、方差预算 $V_n$、分辨率 $\eta_n$，设 $s_n=\sqrt{nV_n}$。假设 $W_n,\eta_n,V_n$ 最终为正。若对每个固定 $t>0$ 的带核积分主项与余项能证明
+
+$$
+\frac{s_n}{\eta_n^2 W_n^{2n}}\,t\eta_n
+\int_{\mathbb R} K_{t\eta_n}(u)|S_n(u)|^{2n}\,du
+\longrightarrow \frac{t^2}{2\sqrt\pi},
+$$
+
+则令 $a=1$，由二次极限的导数得到
+
+$$
+\frac{s_n E_n(\eta_n)}{\eta_n W_n^{2n}}\longrightarrow\frac1{\sqrt\pi}.
+$$
+
+这把所需的硬带渐近归约为邻近乘法半径处的 Fejér 加权矩渐近。实际 ζ 尾段的非中心贡献以及匹配的上界仍是待证的算术问题。
