@@ -46,6 +46,8 @@ Scaling multiplies both numerator and denominator by $s^2$. When the denominator
 
 ## 32.8.2 The Three-Layer Zero-Axiom Architecture of `OmegaMath` in Lean 4 {#sec-ch39-omega-math-three-layer-zero-axiom-stack}
 
+The same `OmegaMath` library source compiles against the strict and standard backends. The strict backend checks for an empty axiom closure by replaying the library proofs in a fresh kernel. The theorem badges in this book reflect the cited frozen declarations. Several D5 theorems compiled against the standard backend use Lean's standard propositional extensionality axiom, `propext`. [OmegaMath modules and verification](https://github.com/the-omega-institute/trureturing/blob/dev/src/README.md)
+
 The sound architecture follows a three-layer zero-axiom stack—**Layer 0 canonical integer carrier $+$ Layer 1 typeclass interface and consistency witness $+$ Layer 2 one-way shadow functor to `Mathlib`** (`MODEL` architectural comparison paired with `NUM` compiler audits):
 
 | Architectural Dimension | Flawed Route: Raw `axiom` Declarations | Classical Route: `Mathlib.Real` Stack | Optimal Route: `OmegaMath` Zero-Axiom Stack |
