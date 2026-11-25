@@ -387,3 +387,39 @@ K_{\eta_n}(t)|S_n(t)|^{2n}\,dt\longrightarrow0,
 $$
 
 并且对邻近的乘法分辨率验证相应极限。实际 ζ 零点的矩比值条件与非中心峰的积分估计仍是开放的算术缺口。
+
+### 有限支撑的占用数对角下界
+
+对于有限支撑，非中心贡献还受到一个与频率具体取值无关的约束。设 $w_j\ge0$ 且 $\sum_jw_j=1$，次数为 $p$，占用向量 $m$ 满足 $\sum_jm_j=p$。记实际多项式权重为 $c_m$。任选一个指标 $j_0$，其计数由其余计数和总次数唯一确定。对其余坐标选择正半径 $r_j$，定义
+
+$$
+v=\sum_{j\ne j_0}\frac{p w_j(1-w_j)}{r_j^2},
+\qquad B=\prod_{j\ne j_0}(1+2r_j),
+\qquad D_p=\sum_m c_m^2.
+$$
+
+实际占用数的第二中心矩为 $p w_j(1-w_j)$。所以在 $\sum_{j\ne j_0}(m_j-pw_j)^2/r_j^2\le1$ 的占用向量上，系数总质量至少为 $\max(0,1-v)$。每个计数坐标处于长度 $2r_j$ 的闭区间，其中至多有 $1+2r_j$ 个整数。去掉 $j_0$ 的投影为单射，故保留的占用向量个数至多为 $B$。由 Cauchy–Schwarz 不等式，
+
+$$
+\max(0,1-v)^2\le B D_p.
+$$
+
+[占用对角下界](lean:D5/S3/Fourier/Concentration/OccupationDiagonalFloor.occupation_diagonal_lower)
+
+这也给出全线 Fejér 矩的下界。事实上，三角加权矩的每个对角项都精确等于 $c_m^2$，且所有非对角项非负。因此对任意实频率以及任意 $\eta>0$，
+
+$$
+\max(0,1-v)^2
+\le B\int_{\mathbb R}K_\eta(t)|S(t)|^{2p}\,dt.
+$$
+
+[全线 Fejér 矩下界](lean:D5/S3/Fourier/Concentration/OccupationDiagonalFloor.fejer_occupation_floor)
+
+若支撑有 $d+1$ 个指标且 $p>0$，取所有 $r_j=\sqrt{2p}$，则 $v\le1/2$，从而
+
+$$
+\int_{\mathbb R}K_\eta(t)|S(t)|^{2p}\,dt
+\ge \frac{1}{4(1+2\sqrt{2p})^d}.
+$$
+
+对于固定支撑和固定正方差，若 $\eta_p=o(p^{-(d-1)/2})$，以 $s_p/\eta_p$ 归一化的全线矩趋于无穷。中心窗口仍可满足前述高斯极限，因此这给出了非中心积分不能忽略的一种定量情形。随次数增长的实际 ζ 零点族仍需要独立的占用数、相位峰及频率差估计。

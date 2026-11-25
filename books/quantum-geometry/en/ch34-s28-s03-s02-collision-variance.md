@@ -387,3 +387,39 @@ K_{\eta_n}(t)|S_n(t)|^{2n}\,dt\longrightarrow0,
 $$
 
 with the corresponding limits at neighboring multiplicative resolutions. The moment-ratio condition and estimates for the integrated noncentral peaks of actual zeta ordinates remain open arithmetic gaps.
+
+### Occupation diagonal lower bound for finite support
+
+For finite support, the noncentral contribution also has a constraint independent of the specific frequency values. Suppose $w_j\ge0$ and $\sum_jw_j=1$, and let an occupation vector $m$ of degree $p$ satisfy $\sum_jm_j=p$. Write $c_m$ for its actual multinomial weight. Choose an index $j_0$, whose count is determined by the other counts and the total degree. For positive radii $r_j$ on the remaining coordinates define
+
+$$
+v=\sum_{j\ne j_0}\frac{p w_j(1-w_j)}{r_j^2},
+\qquad B=\prod_{j\ne j_0}(1+2r_j),
+\qquad D_p=\sum_m c_m^2.
+$$
+
+The actual centered second moment of coordinate $j$ is $p w_j(1-w_j)$. Hence the total weight of occupations satisfying $\sum_{j\ne j_0}(m_j-pw_j)^2/r_j^2\le1$ is at least $\max(0,1-v)$. Each count lies in a closed interval of length $2r_j$, which contains at most $1+2r_j$ integers. Projection away from $j_0$ is injective, so there are at most $B$ retained occupations. Cauchy–Schwarz gives
+
+$$
+\max(0,1-v)^2\le B D_p.
+$$
+
+[Occupation diagonal bound](lean:D5/S3/Fourier/Concentration/OccupationDiagonalFloor.occupation_diagonal_lower)
+
+This gives a floor for the whole-line Fejér moment. Each diagonal term of the triangular weighted sum equals $c_m^2$, and all other terms are nonnegative. Thus for arbitrary real frequencies and every $\eta>0$,
+
+$$
+\max(0,1-v)^2
+\le B\int_{\mathbb R}K_\eta(t)|S(t)|^{2p}\,dt.
+$$
+
+[Whole-line Fejer moment lower bound](lean:D5/S3/Fourier/Concentration/OccupationDiagonalFloor.fejer_occupation_floor)
+
+For support of $d+1$ indices and $p>0$, take every $r_j=\sqrt{2p}$. Then $v\le1/2$, giving
+
+$$
+\int_{\mathbb R}K_\eta(t)|S(t)|^{2p}\,dt
+\ge \frac{1}{4(1+2\sqrt{2p})^d}.
+$$
+
+For fixed support and fixed positive variance, if $\eta_p=o(p^{-(d-1)/2})$, the whole-line moment normalized by $s_p/\eta_p$ diverges. The central window can still satisfy the Gaussian limit above, which gives a quantitative regime where the noncentral integral cannot be neglected. Actual zeta-ordinate families that grow with degree still require separate estimates for occupations, phase peaks, and frequency differences.

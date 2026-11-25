@@ -5512,6 +5512,32 @@
       "line": 574,
       "signature": "theorem low_order_agreement_and_high_order_disparity (k : ℕ) (hk : 2 ≤ k) : let g"
     },
+    "D5/S3/Fourier/Concentration/OccupationDiagonalFloor.fejer_occupation_floor": {
+      "module": "D5/S3/Fourier/Concentration/OccupationDiagonalFloor",
+      "name": "D5.S3.Fourier.Concentration.OccupationDiagonalFloor.fejer_occupation_floor",
+      "kind": "theorem",
+      "statement_id": "sha256:adb514edeff2b52912ab4f62794a7f613621b016386025a8d3ae0dccfff485ac",
+      "line": 183,
+      "signature": "theorem fejer_occupation_floor {J : Type*} [Fintype J] [DecidableEq J] (g w : J → ℝ) (hw : ∀ j, 0≤w j) (hW : ∑ j,w j=1) (j0 : J) (p : ℕ) (r : {j : J // j ≠ j0} → ℝ) (hr : ∀ j, 0 < r j) (η : ℝ) (hη : 0 < η) : let kernel",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Fourier/Concentration/OccupationDiagonalFloor.occupation_diagonal_lower": {
+      "module": "D5/S3/Fourier/Concentration/OccupationDiagonalFloor",
+      "name": "D5.S3.Fourier.Concentration.OccupationDiagonalFloor.occupation_diagonal_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:adb514edeff2b52912ab4f62794a7f613621b016386025a8d3ae0dccfff485ac",
+      "line": 70,
+      "signature": "theorem occupation_diagonal_lower {J : Type*} [Fintype J] [DecidableEq J] (w : J → ℝ) (hw : ∀ j, 0≤w j) (hW : ∑ j,w j=1) (j0 : J) (p : ℕ) (r : {j : J // j ≠ j0} → ℝ) (hr : ∀ j, 0 < r j) : let width",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Fourier/Concentration/OverlapPerturbationBudget.weighted_inverse_scale_le_of_overlap": {
       "module": "D5/S3/Fourier/Concentration/OverlapPerturbationBudget",
       "name": "D5.S3.Fourier.Concentration.OverlapPerturbationBudget.weighted_inverse_scale_le_of_overlap",
