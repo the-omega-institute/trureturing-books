@@ -33,8 +33,8 @@
           "再筛一遍，筛子什么也拦不住了。"
         ],
         [
-          "That dull second pass is the whole idea. In symbols, P squared equals P.",
-          "这无聊的第二遍，就是全部要点。写成符号：P² = P。"
+          "That dull second pass is the key. In symbols, P squared equals P.",
+          "这无聊的第二遍是关键。写成符号：P² = P。"
         ]
       ],
       "cues": [
@@ -59,16 +59,16 @@
       ],
       "lines": [
         [
-          "Start with the smallest projector: a two by two matrix with a single one in the corner.",
-          "从最小的投影算子开始：一个 2×2 矩阵，只在角上有一个 1。"
+          "Start with the smallest projector: a two by two matrix with a single one on the diagonal, top left.",
+          "从最小的投影算子开始：一个 2×2 矩阵，只在左上（对角线上）有一个 1。"
         ],
         [
-          "Multiply it by itself. The one stays one, the zeros stay zero, so P squared is P.",
+          "Square it: the one stays one, the zeros stay zero. P squared is P.",
           "自己乘自己：1 还是 1，0 还是 0，所以 P² = P。"
         ],
         [
-          "Its partner holds the other one. They multiply to zero and add up to the identity: two drawers, nothing left out.",
-          "搭档把 1 放在另一角。两者相乘为零、相加为单位矩阵：两只抽屉，不遗漏。"
+          "Its partner puts its one at the other end of the diagonal. They multiply to zero and add up to the identity: two drawers, nothing left out.",
+          "搭档把 1 放在对角线另一头。两者相乘为零、相加为单位矩阵：两只抽屉，不遗漏。"
         ]
       ],
       "cues": [
@@ -140,12 +140,12 @@
       ],
       "lines": [
         [
-          "Lean checks this for any finite set of record projectors, on matrices of any size: unread twice is unread once.",
-          "Lean 内核检验：对任意有限的一组记录投影、任意大小的方阵，未读两次等于未读一次。"
+          "Lean checks this for any finite record measurement, on matrices of any size: unread twice is unread once.",
+          "Lean 内核检验：任意有限记录投影、任意大小方阵，未读两次即未读一次。"
         ],
         [
-          "The reason is short. Different drawers multiply to zero, and each drawer squared is itself.",
-          "道理很短：不同的抽屉相乘为零，每只抽屉的平方是它自己。"
+          "Why? Different drawers multiply to zero, and each drawer squared is itself.",
+          "为什么？不同的抽屉相乘为零，每只抽屉的平方是它自己。"
         ],
         [
           "Why trust that something is there? Not because it came first, but because asking twice gives the same answer.",
@@ -178,8 +178,8 @@
       ],
       "lines": [
         [
-          "So where did the corners go? Keep a ledger.",
-          "那么，抹掉的角去了哪儿？记一本账。"
+          "So how much did the corners carry? Keep a ledger.",
+          "那么，抹掉的角值多少？记一本账。"
         ],
         [
           "The state is pure: purity one, minus one half, leaves a surplus of one half.",
@@ -194,8 +194,8 @@
           "剩下的 0.18 住在与线垂直的平面里：角上数值平方的两倍。"
         ],
         [
-          "Lean checks the general split: the surplus is the visible deviations plus what is left in the perpendicular space.",
-          "Lean 内核检验一般的分解：盈余等于可见偏离加上正交补里的剩余质量。"
+          "Booked this way, Lean checks the general split: the surplus is the visible deviations plus what is left in the perpendicular space.",
+          "按这样记账，Lean 内核检验一般的分解：盈余等于可见偏离加上正交补里的剩余质量。"
         ],
         [
           "So the pinch wipes the plane and keeps the line. After one pass: zero point three two and zero. After two: the same.",
@@ -241,7 +241,7 @@
       "id": "close",
       "name": "LEDGER",
       "lead": 0.5,
-      "tail": 2.8,
+      "tail": 2.4,
       "music": [
         1.0,
         0.6,

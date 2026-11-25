@@ -225,17 +225,17 @@ function ptTitle(S) {
 SCENES.sift = S => {
   const u = S.u;
   ptTitle(S);
-  const a = clamp((u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - u) / 0.5);
+  const a = clamp((u - lineAt(S, 0).s - 0.35) / 0.6) * clamp((S.d - u) / 0.5);   // after the title has gone
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued']]);
   /* pass 1 on the left, pass 2 on the right */
   const p1 = Q(S, 0, 'catches the lumps', 0.8), p2 = at(S, 1, 0.6);
   ptSieve(S, 500, 520, 560, a, { caught: p1 });
   txt('pass 1 · 第一遍', 500, 300, { size: 30, fam: F.zh, w: 700, align: 'center', c: C.white, a });
-  txt(`caught · 拦下 ${p1 > 0.5 ? 4 : 0} lumps`, 500, 860, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.mag, a: a * p1 });
+  txt(p1 > 0.5 ? 'caught 4 lumps · 拦下 4 个疙瘩' : 'caught 0 lumps · 拦下 0 个疙瘩', 500, 860, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.mag, a: a * p1 });
   ptSieve(S, 1420, 520, 560, a * p2, { caught: 0 });
   txt('pass 2 · 第二遍', 1420, 300, { size: 30, fam: F.zh, w: 700, align: 'center', c: C.now, a: a * p2 });
-  txt('caught · 拦下 0', 1420, 860, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: a * Q(S, 1, 'catches nothing', 0.6) });
+  txt('caught 0 lumps · 拦下 0 个疙瘩', 1420, 860, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: a * Q(S, 1, 'catches nothing', 0.6) });
   /* line 2: P² = P */
   const pa = a * Q(S, 2, 'In symbols', 0.6);
   if (pa > 0.003) {
@@ -260,7 +260,7 @@ SCENES.drawers = S => {
   txt('P₀', 150, 330, { size: 40, fam: F.math, w: 700, c: C.cyan, a: a0 });
   ptMat(230, 240, cell, P0, a0);
   /* line 1: P0 P0 = P0 */
-  const a1 = a * Q(S, 1, 'Multiply it', 0.6);
+  const a1 = a * Q(S, 1, 'Square it', 0.6);
   if (a1 > 0.003) {
     ptMat(500, 240, cell, P0, a1);
     txt('=', 735, 340, { size: 48, fam: F.math, w: 700, align: 'center', c: C.white, a: a1 });
@@ -326,7 +326,7 @@ SCENES.pinch = S => {
   ptMat(mx, my, cell, cells, ma, { size: 50 });
   /* labels: diagonal = Z readings, corners = coherence */
   const la = a * Q(S, 2, 'The diagonal', 0.6), lb = a * Q(S, 2, 'The corners', 0.6);
-  txt('diagonal: Z readings · 对角：Z 读数', mx + cell, my - 34, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: la });
+  txt('diagonal: Z readings · 对角线：Z 读数', mx + cell, my - 34, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: la });
   txt('corners: coherence · 角：相干', mx + cell, my + 2 * cell + 60, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.mag, a: lb * (1 - wipe * 0.5) });
   /* the sweep of a pass */
   const sweep = (p, col) => { if (p > 0 && p < 1) { const x = mx - 20 + (2 * cell + 40) * p; line(x, my - 10, x, my + 2 * cell + 10, col, a * 0.9, 4); } };
@@ -364,7 +364,7 @@ SCENES.theorem = S => {
     ptRich([['PₖPₗ = 0  (k ≠ l)', C.white], ['     Pₖ² = Pₖ', C.cyan]], 150, 620, { size: 28, a: pa * Q(S, 1, 'multiply to zero', 0.5) });
   }
   /* three-drawer block picture: off-diagonal blocks gone, second pass sorts nothing (schematic) */
-  const ba = a * at(S, 0, 0.6, 1.0);
+  const ba = a * Q(S, 1, 'Different drawers', 0.6);
   if (ba > 0.003) {
     const bx = 1340, by = 200, bs = 124;
     const cols = [C.cyan, C.mag, C.white];
@@ -422,10 +422,10 @@ SCENES.ledger = S => {
   /* line 4: Lean */
   const la = a * Q(S, 4, 'Lean checks', 0.6);
   if (la > 0.003) {
-    panel(120, 680, 1700, 170, la, C.lean, 'ANY FINITE DIMENSION, ANY SET OF CONTEXTS · 一般情形');
+    panel(120, 676, 1700, 190, la, C.lean, 'ANY FINITE DIMENSION, ANY SET OF CONTEXTS · 一般情形');
     ptRich([['Re Tr ρ² − 1/|d| = Σₗ Σⱼ (pₗⱼ − 1/|d|)² + residualMass(V, s)', C.white]], 150, 752, { size: 30, a: la });
-    txt('if |s|² is the surplus and |P_V s|² the visible deviations · 前提：|s|² 为盈余，|P_V s|² 为可见偏离', 150, 790, { size: 18, fam: F.zh, w: 700, c: C.dim, a: la });
-    ptLean(150, 832, PT_LEAN.complementary_context_probability_pythagoras, la, { size: 17 });
+    txt('if |s|² is the surplus and |P_V s|² the visible deviations · 前提：|s|² 为盈余，|P_V s|² 为可见偏离', 150, 798, { size: 24, fam: F.zh, w: 700, c: C.white, a: la * 0.92 });
+    ptLean(150, 846, PT_LEAN.complementary_context_probability_pythagoras, la, { size: 21 });
   }
 };
 
