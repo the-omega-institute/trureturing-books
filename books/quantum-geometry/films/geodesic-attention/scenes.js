@@ -15,7 +15,7 @@
      steps   a polarizer passes the squared overlap ..... RankOneBornPairingWeight.rank_one_born_pairing_weight (LEAN);
              four steps of 15°: 0.933, 0.871, 0.812, 0.758; idle three times then 60°: 0.250; eight steps of 7.5°: 0.872
              (computed); for a total turn under 90° even steps keep the most (§37.2.2, a hand derivation; argued);
-             the leak sin²α is half of §37.2's sagitta 1 − cos 2α (computed).
+             α here is half of §37.2's rotation angle Δθ, so 60° here is 120° there (computed).
      edge    reading even steps as good reasoning (§37.2, MODEL; argued); zero geometric cost does not make an answer right
              (§37.2, a hand derivation; argued); large-scale behaviour of the ternion-field transformer
              (prob-ch39-tft-scale-and-seams; open).
@@ -238,19 +238,20 @@ SCENES.globe = S => {
   /* line 1: a state is a unit arrow */
   const sa = a * at(S, 1, 0.6);
   if (sa > 0.003) {
-    panel(1130, 250, 660, 160, sa, C.cyan, 'STATE · 态');
+    panel(1130, 250, 660, 190, sa, C.cyan, 'STATE · 态');
     gaRich([['state = arrow, ', C.white], ['‖u‖ = 1', C.cyan]], 1155, 325, { size: 30, a: sa });
     txt('长度为一的箭头，住在球面上', 1155, 378, { size: 28, fam: F.zh, w: 700, c: C.white, a: sa });
+    txt('arrows, not the Bloch sphere · 是箭头，不是布洛赫球', 1155, 420, { size: 21, fam: F.zh, w: 700, c: C.cyan, a: sa * 0.9 });
   }
   /* lines 2–3: the straight line and its midpoint */
   const ca = a * at(S, 2, 0.6);
   if (ca > 0.003) {
-    panel(1130, 440, 660, 300, ca, C.mag, 'THE STRAIGHT LINE · 直线');
-    txt('straight? · 走直线？', 1155, 510, { size: 30, fam: F.zh, w: 700, c: C.mag, a: ca });
+    panel(1130, 470, 660, 300, ca, C.mag, 'THE STRAIGHT LINE · 直线');
+    txt('straight? · 走直线？', 1155, 540, { size: 30, fam: F.zh, w: 700, c: C.mag, a: ca });
     const ma = ca * Q(S, 3, 'Halfway', 0.6);
-    gaRich([['‖(u + w)/2‖ = cos 30° = ', C.white], ['0.866', C.mag]], 1155, 575, { size: 30, a: ma });
-    gaRich([['0.866 < 1', C.mag]], 1155, 630, { size: 30, a: ma * Q(S, 3, 'only zero', 0.5) });
-    txt('not a state · 不是一个态', 1155, 690, { size: 28, fam: F.zh, w: 700, c: C.mag, a: ca * Q(S, 3, 'no state', 0.5) });
+    gaRich([['‖(u + w)/2‖ = cos 30° = ', C.white], ['0.866', C.mag]], 1155, 605, { size: 30, a: ma });
+    gaRich([['0.866 < 1', C.mag]], 1155, 660, { size: 30, a: ma * Q(S, 3, 'only zero', 0.5) });
+    txt('not a state · 不是一个态', 1155, 720, { size: 28, fam: F.zh, w: 700, c: C.mag, a: ca * Q(S, 3, 'no state', 0.5) });
     const pm = sh.anchor([0, 0, Math.sqrt(3) / 2]);
     txt('0.866', pm.x + 16, pm.y + 34, { size: 26, fam: F.mono, w: 700, c: C.mag, a: ma });
   }
@@ -288,7 +289,7 @@ SCENES.angle = S => {
     panel(1130, 610, 660, 190, la, C.lean, 'ANY THREE UNIT STATES · 任意三个单位态');
     gaRich([['d(u, w) ', C.white], ['≤', C.lean], [' d(u, v) + d(v, w)', C.white]], 1155, 690, { size: 32, a: la });
     gaLean(1155, 752, GA_LEAN.fs_angle_triangle, la, { size: 20 });
-    stamp('NO SHORTCUT', 880, 760, Q(S, 2, 'never makes', 0.5) * (1 - at(S, 3, 0.5)), C.lean, 24, -0.06);
+    stamp('NO SHORTCUT', 560, 850, Q(S, 2, 'never makes', 0.5) * (1 - at(S, 3, 0.5)), C.lean, 24, -0.06);
   }
   /* line 3: the aphorism */
   const ap = a * at(S, 3, 0.7);
@@ -310,7 +311,7 @@ function lsArc(d0, d1, r, col, a, w) {
 SCENES.leash = S => {
   const u = S.u, a = gaFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [1, 'Tie a leash', 'argued'], [2, null, 'computed'], [3, 'Lean checks', 'lean']]);
+  badgeQ(S, [[0, null, 'argued'], [1, null, 'computed'], [1, 'Tie a leash', 'argued'], [2, null, 'computed'], [3, 'Lean checks', 'lean']]);
   /* the quarter circle of real unit arrows between the two records */
   lsArc(-6, 96, LS.R, C.white, a * 0.3, 2);
   const ra = a * at(S, 1, 0.6);
@@ -320,8 +321,8 @@ SCENES.leash = S => {
   line(O[0], O[1], p1[0], p1[1], C.white, a * (0.35 + 0.6 * ra), 3);
   dot(p0[0], p0[1], 13, 'w', a);
   dot(p1[0], p1[1], 13, 'w', a);
-  txt('m₀', p0[0] + 20, p0[1] + 10, { size: 34, fam: F.math, w: 700, c: C.white, a });
-  txt('m₁', p1[0] + 22, p1[1] + 8, { size: 34, fam: F.math, w: 700, c: C.white, a });
+  txt('m₀', p0[0], p0[1] + 58, { size: 34, fam: F.math, w: 700, c: C.white, a });
+  txt('m₁', p1[0] - 70, p1[1] + 12, { size: 34, fam: F.math, w: 700, c: C.white, a });
   txt('⟨m₀, m₁⟩ = 0 · 90°', LS.cx + 20, LS.cy + 50, { size: 24, fam: F.math, w: 700, c: C.cyan, a: ra });
   /* the anchor: at 25° during line 1, then it slides to 45° on line 2 */
   const phi = 25 + 20 * ease(Q(S, 2, 'best anchor', 1.8));
@@ -329,12 +330,11 @@ SCENES.leash = S => {
   if (an > 0.003) {
     const pa = lsP(phi), need = Math.max(phi, 90 - phi);
     /* the leash: the reach round the anchor, just outside the circle */
-    lsArc(Math.max(phi - need, -8), Math.min(phi + need, 98), LS.R + 22, C.now, an * 0.85, 8);
+    lsArc(Math.max(phi - need, -2), Math.min(phi + need, 92), LS.R + 22, C.now, an * 0.85, 8);
     line(O[0], O[1], pa[0], pa[1], C.now, an * 0.8, 2.5);
     dot(pa[0], pa[1], 14, 'g', an);
     const lp = lsP(phi, LS.R + 60);
     txt('a', lp[0] + 6, lp[1] + 6, { size: 34, fam: F.math, w: 700, c: C.now, a: an });
-    gaTag(lp[0] - 40, lp[1] + 70, 'leash · 拴绳（比方）', C.argued, an);
     /* the two legs */
     const l0 = lsP(phi / 2, LS.R - 70), l1 = lsP(phi + (90 - phi) / 2, LS.R - 70);
     txt(`${phi.toFixed(0)}°`, l0[0], l0[1], { size: 26, fam: F.mono, w: 700, align: 'center', c: C.white, a: an });
@@ -347,7 +347,7 @@ SCENES.leash = S => {
   /* lines 1–2: the leash readout */
   if (an > 0.003) {
     const need = Math.max(phi, 90 - phi);
-    panel(1060, 390, 740, 180, an, C.now, 'THE LEASH · 绳长');
+    panel(1060, 390, 740, 180, an, C.now, 'THE LEASH · 绳长（比方 · ANALOGY）');
     txt(`legs ${phi.toFixed(0)}° + ${(90 - phi).toFixed(0)}° = 90°`, 1085, 460, { size: 28, fam: F.mono, w: 700, c: C.white, a: an });
     gaRich([['leash ≥ ', C.white], [`${need.toFixed(0)}°`, C.now], ['   (best: 45°)', C.dim]], 1085, 520, { size: 30, a: an });
   }
@@ -399,7 +399,7 @@ function spRow(y, axes, f, a, label, labCol) {
 SCENES.steps = S => {
   const u = S.u, a = gaFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [1, 'Lean checks', 'lean'], [2, null, 'computed'], [4, 'even steps win', 'argued'], [4, 'Twice as many', 'computed']]);
+  badgeQ(S, [[0, null, 'computed'], [1, 'Lean checks', 'lean'], [2, null, 'computed'], [4, 'even steps always win', 'argued'], [4, 'Twice as many', 'computed']]);
   /* row A: four even steps; row B: idle three times, then leap */
   const ra = a * at(S, 0, 0.6), fa = 4.5 * clamp((u - phraseAt(S, 2, 'four even steps')) / 3.0);
   const rb = a * at(S, 3, 0.6), fb = 4.5 * clamp((u - lineAt(S, 3).s - 0.2) / 3.0);
@@ -407,25 +407,26 @@ SCENES.steps = S => {
   spRow(610, GA_LEAP, rb > 0.003 ? fb : 0, rb, 'LEAP · 跳步：0° 0° 0° 60°', C.mag);
   /* line 1: the Born weight at a filter */
   const ba = a * at(S, 1, 0.6);
-  panel(1360, 190, 440, 230, ba, C.cyan, 'ONE FILTER · 一片');
-  gaRich([['pass = cos²α', C.cyan]], 1385, 262, { size: 32, a: ba });
-  gaRich([['= |⟨φ, ψ⟩|²', C.white]], 1385, 312, { size: 32, a: ba });
-  txt('重叠的平方 = 玻恩权重', 1385, 360, { size: 24, fam: F.zh, w: 700, c: C.white, a: ba });
-  gaLean(1385, 400, GA_LEAN.rank_one_born_pairing_weight, ba * Q(S, 1, 'Lean checks', 0.6), { size: 15 });
+  panel(1340, 180, 460, 275, ba, C.cyan, 'ONE FILTER · 一片');
+  gaRich([['pass = cos²α', C.cyan]], 1362, 245, { size: 32, a: ba });
+  gaRich([['= |⟨φ, ψ⟩|²', C.white]], 1362, 292, { size: 32, a: ba });
+  txt('α: neighbouring filters · 相邻两片的夹角', 1362, 332, { size: 19, fam: F.zh, w: 700, c: C.white, a: ba * 0.9 });
+  txt('重叠的平方 = 玻恩权重', 1362, 376, { size: 24, fam: F.zh, w: 700, c: C.white, a: ba });
+  gaLean(1362, 428, GA_LEAN.rank_one_born_pairing_weight, ba * Q(S, 1, 'Lean checks', 0.6), { size: 19 });
   /* lines 2–3: the totals */
   const ea = a * Q(S, 2, 'gets through', 0.6), la = a * Q(S, 3, 'only a quarter', 0.6);
-  panel(1360, 445, 440, 190, Math.max(ea, la), C.now, 'GETS THROUGH · 通过');
-  gaRich([['even  ', C.cyan], ['0.758', C.now]], 1385, 515, { size: 32, a: ea });
-  gaRich([['leap  ', C.mag], ['0.250', C.now]], 1385, 575, { size: 32, a: la });
+  panel(1340, 475, 460, 150, Math.max(ea, la), C.now, 'GETS THROUGH · 通过');
+  gaRich([['even  ', C.cyan], ['0.758', C.now]], 1362, 540, { size: 32, a: ea });
+  gaRich([['leap  ', C.mag], ['0.250', C.now]], 1362, 595, { size: 32, a: la });
   if (Q(S, 3, 'not bold', 1) > 0) stamp('A LEAP IS EXPENSIVE', 760, 470, Q(S, 3, 'not bold', 0.5) * (1 - at(S, 4, 0.5)), C.mag, 26, -0.05);
   /* line 4: even steps win (argued), eight half steps (computed), the link to §37.2's sagitta */
   const wa = a * at(S, 4, 0.6), ha = a * Q(S, 4, 'Twice as many', 0.6);
   if (wa > 0.003) {
-    panel(1360, 660, 440, 160, wa, C.argued, 'TOTAL < 90° · 总转角 < 90°');
-    txt('even steps keep the most', 1385, 725, { size: 22, fam: F.mono, w: 700, c: C.white, a: wa });
-    txt('均匀最省 · 手工推导 §37.2.2', 1385, 765, { size: 22, fam: F.zh, w: 700, c: C.argued, a: wa });
-    gaRich([['8 × 7.5° → ', C.cyan], ['0.872', C.now]], 1385, 805, { size: 26, a: ha });
-    txt('leak sin²α = ½ (1 − cos 2α): half the sagitta of §37.2 · 漏失是矢高之半', SP_X0, 830, { size: 20, fam: F.zh, w: 700, c: C.dim, a: wa });
+    panel(1340, 645, 460, 190, wa, C.argued, 'SAME N, TOTAL < 90° · 片数相同');
+    txt('even steps keep the most', 1362, 705, { size: 22, fam: F.mono, w: 700, c: C.white, a: wa });
+    txt('均匀最省 · 手工推导 §37.2.2', 1362, 745, { size: 22, fam: F.zh, w: 700, c: C.argued, a: wa });
+    gaRich([['8 × 7.5° → ', C.cyan], ['0.872', C.now]], 1362, 795, { size: 26, a: ha });
+    txt('α here = Δθ/2 of §37.2: 60° here is 120° there · 此处 α 是正文 Δθ 之半', SP_X0, 830, { size: 24, fam: F.zh, w: 700, c: C.white, a: wa * 0.85 });
   }
 };
 
@@ -438,7 +439,7 @@ SCENES.edge = S => {
   badgeQ(S, [[0, null, 'argued'], [2, null, 'open']]);
   const rows = [
     { k: 0, col: C.argued, en: 'even steps = good reasoning ?', zh: '均匀的步 = 好推理？', note: 'a model reading (MODEL), not a theorem · 模型读法，不是定理' },
-    { k: 1, col: C.argued, en: 'zero bending ≠ a right answer', zh: '几何代价为零，不等于答案正确', note: 'smooth drive, wrong town: correctness needs an outside check · 正确性要靠外部检验' },
+    { k: 1, col: C.argued, en: 'even steps ≠ a right answer', zh: '步子再均匀，也不等于答案正确', note: 'smooth drive, wrong town: correctness needs an outside check · 正确性要靠外部检验' },
     { k: 2, col: C.open, en: 'ternion-field networks at scale', zh: '三元数场网络的大规模表现', note: 'open problem · 开放问题（prob-ch39-tft-scale-and-seams）' }
   ];
   rows.forEach((rw, i) => {

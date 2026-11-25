@@ -27,12 +27,12 @@
       ["Each filter lets through the square of the overlap. Lean checks that this is the Born weight.", "每片偏振片放过的，是重叠的平方。Lean 内核检验：这正是玻恩权重。"],
       ["Turn sixty degrees in four even steps of fifteen: zero point seven five eight gets through.", "分四步、每步 15°，转过 60°：通过 0.758。"],
       ["Idle three times, then leap sixty degrees at once: only a quarter survives. A leap is not bold; it is expensive.", "原地空转三次，最后一下猛跳 60°：只剩四分之一。跳步不是勇敢，是昂贵。"],
-      ["For any total turn under ninety degrees, even steps win. Twice as many half steps keep zero point eight seven two.", "只要总转角不到 90°，均匀的步总是赢家；步数加倍、步子减半，留下 0.872。"]
+      ["Same number of filters, total turn under ninety degrees: even steps always win. Twice as many half steps keep zero point eight seven two.", "片数相同、总转角不到 90°，均匀总是赢；步数加倍、步子减半，留下 0.872。"]
     ], "cues": [{"line": 2, "at": 3.4, "kind": "chime"}, {"line": 3, "at": 3.0, "kind": "impact"}]},
     {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
       ["The book reads even steps as a picture of good reasoning. That reading is a model, not a theorem.", "本书把均匀的步读作好推理的图像；这是一种模型读法，不是定理。"],
-      ["Zero bending does not make an answer right. A smooth drive can still end in the wrong town.", "几何代价为零，不等于答案正确：车开得再平稳，也可能开错了城。"],
-      ["And whether such networks learn well at scale is still an open problem.", "这样的网络在大规模上能否学好，仍是开放问题。"]
+      ["Keeping every step even does not make an answer right. A smooth drive can still end in the wrong town.", "步子再均匀，也不等于答案正确：车开得再平稳，也可能开错了城。"],
+      ["And whether ternion-field networks, built on this geometry, perform well at scale is still an open problem.", "以这套几何搭建的三元数场网络在大规模上表现如何，仍是开放问题。"]
     ]},
     {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
       ["Geometric Intuition of Quantum Computing, chapter thirty-seven.", "《量子计算的几何直觉》· 第三十七章"]
