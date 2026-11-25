@@ -77,7 +77,7 @@ $$
 
 设两份边缘已归一化且 $b>0$。它们唯一确定一个整体态，当且仅当上述两圆盘只交于一点。若唯一交点处的两个 Schur 余块都正定，在它附近仍能选取可行的 $z$，故至少一个余块奇异。共同迹为零时，整体余块也为零。共同迹为正时，奇异的端点余块秩为一，整体余块必须等于两个端点余块的张量积除以共同迹。 [两份边缘唯一确定整体态的判据](lean:D5/S3/Quantum/Entanglement/Marginals/FibCoherentExtension.unique_coherent_extension_iff)
 
-例如取 $b=1/4$、$L=R=\operatorname{diag}(1/4,1/2)$，并令 $v_{00}=v_{10}=0$、$v_{01}=1/4$。左余块的左上元为零，半正定性迫使右上元 $-z$ 为零。在 $z=0$ 时，左余块为 $\operatorname{diag}(0,1/2)$，右余块为 $I/4$。因此整体态唯一，且其 Schur 余块的正迹表明该态是混态。
+例如取 $b=1/4$、$L=R=\operatorname{diag}(1/4,1/2)$，并令 $v_{00}=v_{10}=0$、$v_{01}=1/4$。左余块的左上元为零，半正定性迫使右上元 $-z$ 为零。在 $z=0$ 时，左余块为 $\operatorname{diag}(0,1/2)$，右余块为 $I/4$。两个余块的秩分别是一和二，故联合余块秩为二。加上中位枢轴后，唯一的整体态秩为三。
 
 设 $b\ne 0$ 并固定 $z$。纯扩张存在，当且仅当 $\operatorname{Tr}L=1-b$ 且两份 Schur 余块都为零。迹条件和左余块为零会推出 $b>0$，因为 $b<0$ 时修正项 $v^\dagger v/b$ 的迹非正。纯态中间单占用的振幅为 $x$，其余四个振幅为 $y$。耦合行是 $x\bar y$，且 $|x|^2=b$，所以耦合行决定整个端点块 $v^\dagger v/b$。反过来，取 $x=\sqrt b$ 并从耦合行恢复 $y$ 即可构造纯态。任何具有相同边缘和 $z$ 的半正定扩张，其整体 Schur 余块半正定，且在左端点的约化为零，故其迹为零、余块也为零。这样的扩张只有这一个纯态。 [给定耦合的纯扩张判据](lean:D5/S3/Quantum/Entanglement/Marginals/FibCoherentExtension.pure_coherent_iff)
 
@@ -94,6 +94,8 @@ $$
 两份边缘的矩阵元若都有有理实部和虚部，只要存在共同扩张，就存在矩阵元同样有理的共同扩张。归一化给出 $b=1-\operatorname{Tr}L$。在 $b>0$ 时，两圆盘的圆心、半径平方和截断后的线段参数都只用有理运算，因此选出的 $z$ 也是有理的，相切时也成立。在 $b=0$ 时取 $z=0$。选定 $z$ 后，两个 Schur 余块的张量积除以共同迹，再加回修正项。共同迹为零时，张量积这一项取零。这样得到迹为一的半正定整体态。 [有理共同扩张判据](lean:D5/S3/Quantum/Entanglement/Marginals/FibCoherentDisks.rational_coherent_extendible_iff)
 
 还可以在保持有理坐标的同时降低扩张的秩。取上面选出的有理 $z$。对两个端点余块各做一次 Schur 消元，可把每块写为两个有理秩一投影的非负有理加权和。把两侧权重配成一个 $2\times2$ 表，左上元取两个首项权重中的较小者。这样至少一个非对角元为零。将表中每个非零权重乘以对应投影的张量积再求和，得到秩至多三的有理端点余块。恢复 $b>0$ 的中间占据项只增加一个秩一项，因此有理整体态的秩至多为四。$b=0$ 时整个耦合行消失，端点余块直接给出秩至多三的整体态。 [有理端点余块的秩上界](lean:D5/S3/Quantum/Entanglement/Marginals/RationalQubitMarginalRank.rational_endpoint_rank_le_three)
+
+当 $b>0$ 且两份有理边缘相容时，添入一个非负有理数的实平方根，就足以把整体秩降到至多三。从上面选出的有理 $z$ 沿水平方向走到两圆盘交集的右端点。这个端点是两个圆盘截面右端点中较早到达的一个，所以只需一个平方根。到达边界时至少一个 Schur 余块奇异。两个余块的归一化张量积秩至多二，恢复中位枢轴只增加一秩。由此得到的矩阵元都在同一个由有理复数和该平方根生成的域中。 [二次扩张上的秩三上界](lean:D5/S3/Quantum/Entanglement/Marginals/FibQuadraticCompletion.quadratic_rank_le_three)
 
 若还要求整体态为纯态，有理性取决于一个范数方程。设两份边缘都是 $\operatorname{diag}(0,b,1-b)$，其中 $b$ 为有理数。真空读数为零迫使纯态只支撑在 $|010\rangle,|101\rangle$ 上。两态的权重分别为 $b,1-b$，因此耦合 $z$ 必须满足 $|z|^2=b(1-b)$。反过来，$b>0$ 时用振幅 $\sqrt b,\bar z/\sqrt b$ 即可构造所需纯态，$b=0$ 时取 $|101\rangle$。给定 $b,z$，一个所有矩阵元都取有理实部和虚部的纯扩张存在，当且仅当 $b$、$z$ 的实部和 $z$ 的虚部都是有理数，且满足这个范数等式。因此对给定的有理 $b$，有理纯扩张存在恰好等价于 $b(1-b)$ 是两个有理平方之和。 [有理纯扩张判据](lean:D5/S3/Quantum/Entanglement/Marginals/FibRationalPureExtension.rational_pure_coupling_iff)
 
