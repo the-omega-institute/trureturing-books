@@ -802,6 +802,8 @@ The second limit implies that for any fixed $\varepsilon>0$, the part of the res
 
 On the fixed support of the lattice law, the first and second cosine deficits, multiplied by $q^2$, have limiting weighted sums $\lambda/4$ and $\lambda$. Over the full cycle each rescaled deficit sums to $\lambda$ because both constraints are tight. For $\lambda=0$ the pointwise upper bound one forces both moment equalities as soon as the weight is feasible. Nonnegativity then makes the second deficit outside the fixed support tend to zero. On $c_i\ge0$ it bounds $1-c_i$ after division by two, and on $c_i<0$ it bounds $1+c_i$ after the same division. Thus the first deficit over $A_q$ tends to $3\lambda/4$, and its difference from twice the rescaled mass tends to zero. This argument splits off a finite sum and bounds its remainder before passing to the limit. The related proof for character sums uses this method to compare a finite Dirichlet polynomial with a logarithmic derivative. [Character-sum tail bound](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)
 
+[Lean proof of the rescaled antipodal mass limit](lean:D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
