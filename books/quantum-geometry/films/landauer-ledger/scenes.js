@@ -209,9 +209,10 @@ SCENES.hook = S => {
   const p = Q(S, 0, 'A quantum gate', 4.5), th = 2.1 * Math.sin(Math.PI * clamp(p));
   llDial(520, 470, 230, th, 1, a);
   txt(p < 0.5 ? 'turn · 转' : 'turn back · 转回', 520, 790, { size: 28, fam: F.zh, w: 700, align: 'center', c: C.now, a: a * clamp(p * 6) });
-  panel(1060, 250, 700, 170, a, C.cyan, 'ENTROPY · 熵');
-  llRich([['S = ', C.white], ['0', C.cyan], ['   pure state, any angle', C.dim]], 1090, 340, { size: 32, a });
-  txt('纯态，转到哪里都一样', 1090, 390, { size: 22, fam: F.zh, w: 700, c: C.dim, a });
+  const ea = a * (1 - 0.6 * Q(S, 1, 'computers get warm', 0.6));   // the computed panel dims while the picture speaks
+  panel(1060, 250, 700, 170, ea, C.cyan, 'ENTROPY · 熵');
+  llRich([['S = ', C.white], ['0', C.cyan], ['   pure state, any angle', C.dim]], 1090, 340, { size: 32, a: ea });
+  txt('纯态，转到哪里都一样', 1090, 390, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ea });
   /* line 1: the warm chip and the question */
   const qa = a * Q(S, 1, 'computers get warm', 0.6);
   if (qa > 0.003) {
@@ -242,8 +243,8 @@ SCENES.page = S => {
   if (sp >= 1) { txt('0', PG.x + PG.c * 1.5, PG.y + PG.c * 0.5 + 16, { size: 44, fam: F.math, w: 700, align: 'center', c: C.dim, a }); txt('0', PG.x + PG.c * 0.5, PG.y + PG.c * 1.5 + 16, { size: 44, fam: F.math, w: 700, align: 'center', c: C.dim, a }); }
   /* labels */
   panel(1000, 220, 820, 160, a * ra, C.cyan, 'RECORD · 记录');
-  txt('diagonal: how often each outcome clicks', 1028, 300, { size: 26, fam: F.mono, w: 700, c: C.cyan, a: a * ra });
-  txt('对角线：每个结果出现的频率', 1028, 345, { size: 24, fam: F.zh, w: 700, c: C.white, a: a * ra });
+  txt('diagonal: the probability of each outcome', 1028, 300, { size: 26, fam: F.mono, w: 700, c: C.cyan, a: a * ra });
+  txt('对角线：每个结果出现的概率', 1028, 345, { size: 24, fam: F.zh, w: 700, c: C.white, a: a * ra });
   panel(1000, 400, 820, 160, a * na, C.mag, 'MARGIN NOTES · 批注');
   txt('off-diagonal: coherence, interference', 1028, 480, { size: 26, fam: F.mono, w: 700, c: C.mag, a: a * na });
   txt('对角线外：相干，让结果彼此干涉', 1028, 525, { size: 24, fam: F.zh, w: 700, c: C.white, a: a * na });
@@ -251,7 +252,7 @@ SCENES.page = S => {
   panel(1000, 580, 820, 200, pa, C.argued, 'PINCHING Π · 捏合');
   llRich([['Π(ρ) = diag(ρ₀₀, ρ₁₁)', C.white]], 1028, 662, { size: 32, a: pa });
   txt('unread measurement · 不看结果的测量', 1028, 708, { size: 22, fam: F.zh, w: 700, c: C.white, a: pa });
-  txt('the shredder is an analogy · 碎纸机只是比方', 1028, 752, { size: 20, fam: F.zh, w: 700, c: C.argued, a: pa });
+  txt('shredder = analogy: the notes leave this page · 比方：批注离开这一页', 1028, 752, { size: 20, fam: F.zh, w: 700, c: C.argued, a: pa });
 };
 
 /* ======================================================================= */
@@ -339,7 +340,7 @@ SCENES.steps = S => {
   if (k >= 0) txt(`S = ${tot.toFixed(4)}`, X + Wd + 36, Y + 40, { size: 24, fam: F.mono, w: 700, c: C.white, a: a * (ph >= 3 ? 1 : 0.85) });
   /* the theorem */
   const la = a * Q(S, 3, 'Lean checks', 0.6);
-  panel(1150, 220, 680, 560, Math.max(la, a * at(S, 1, 0.5) * 0.999), la > 0.01 ? C.lean : C.cyan, la > 0.01 ? 'ANY FINITE SIZE, ANY UNITARY U · 任意有限维' : 'THE STEPS · 每一步');
+  panel(1150, 220, 680, 560, Math.max(la, a * at(S, 1, 0.5) * 0.999), la > 0.01 ? C.lean : C.cyan, la > 0.01 ? 'ANY FINITE SIZE, ANY FIXED UNITARY U · 任意有限维' : 'THE STEPS · 每一步');
   const ra = a * at(S, 1, 0.5) * (1 - la / Math.max(a, 1e-6));
   if (ra > 0.003) {
     llRich([['ρ(k+1) = Π(U ρ(k) U*)', C.white]], 1178, 300, { size: 28, a: ra });
@@ -350,12 +351,13 @@ SCENES.steps = S => {
   }
   if (la > 0.003) {
     llRich([['S(ρ(k+1)) − S(ρ(k))', C.white]], 1178, 310, { size: 28, a: la });
-    llRich([['  = D(ρ_U(k) ‖ Π ρ_U(k)) ≥ 0', C.mag]], 1178, 360, { size: 28, a: la });
+    llRich([['  = D(σₖ ‖ Π σₖ) ≥ 0', C.mag]], 1178, 360, { size: 28, a: la });
     const sa = a * at(S, 4, 0.6);
     llRich([['S(ρ(N)) − S(ρ(0))', C.white]], 1178, 450, { size: 28, a: sa });
-    llRich([['  = Σ', C.mag], ['k<N', C.mag, 0.8], [' D(ρ_U(k) ‖ Π ρ_U(k))', C.mag]], 1178, 500, { size: 28, a: sa });
-    txt('each step: rotate by U, then pinch · 每步先转 U 再捏合', 1178, 570, { size: 20, fam: F.zh, w: 700, c: C.white, a: la });
-    llLean(1178, 650, LL_LEAN.entropy_production_coherence_deletion_identity, la, { size: 15 });
+    llRich([['  = D(σ₀ ‖ Π σ₀) + … + D(σₙ₋₁ ‖ Π σₙ₋₁)', C.mag]], 1178, 500, { size: 26, a: sa });
+    txt('σₖ = U ρ(k) U*: the same U every step, then pinch', 1178, 560, { size: 20, fam: F.zh, w: 700, c: C.white, a: la });
+    txt('每步用同一个 U 转动，再捏合', 1178, 592, { size: 20, fam: F.zh, w: 700, c: C.white, a: la });
+    llLean(1178, 665, LL_LEAN.entropy_production_coherence_deletion_identity, la, { size: 18 });
   }
   stamp('ΔS = D', 400, 770, Q(S, 3, 'Lean checks', 0.5, 0.6) * (1 - at(S, 3, 0.5, 4.4)), C.lean, 34, -0.06);
 };
@@ -366,30 +368,31 @@ SCENES.steps = S => {
 SCENES.bill = S => {
   const a = llFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [2, 'With one small bath', 'computed'], [3, 'Lean checks', 'lean']]);
+  badgeQ(S, [[0, null, 'argued'], [2, 'From one half each', 'computed'], [3, 'Lean checks', 'lean']]);
   /* receipt on the left */
   const rx = 160, ry = 210, rw = 760, rh = 600;
-  panel(rx, ry, rw, rh, a, C.cyan, 'RESET RECEIPT · 复位账单  (units of k_B T)');
-  const b = LL_BILL, na = Q(S, 2, 'With one small bath', 0.5);
+  panel(rx, ry, rw, rh, a, C.cyan, 'RESET RECEIPT · 复位账单  (units of kT)');
+  const b = LL_BILL, na = Q(S, 2, 'From one half each', 0.5);
   const rows = [
     [1, 'entropy removed', '拿走的熵', '−ΔS', b.dS, C.cyan, 'entropy removed from the bit'],
-    [1, 'correlation left', '留下的关联', 'I', b.I, C.white, 'correlation left between bit and bath'],
-    [1, 'how far the bath', '热浴被推离平衡', 'D', b.D, C.mag, 'how far the bath is pushed from rest']
+    [1, 'correlation left', '留下的关联', 'I', b.I, C.white, 'correlation between bit and bath'],
+    [1, 'how far the bath', '热浴的相对熵', 'D', b.D, C.mag, 'relative entropy of the bath']
   ];
   rows.forEach(([ln, ph, zh, sym, v, col, en], i) => {
     const ra = a * Q(S, ln, ph, 0.5), y = ry + 90 + i * 90;
     llRich([[sym, col]], rx + 30, y, { size: 36, a: ra });
     txt(zh, rx + 140, y - 4, { size: 26, fam: F.zh, w: 700, c: C.white, a: ra });
-    txt(en, rx + 140, y + 26, { size: 18, fam: F.mono, w: 700, c: C.dim, a: ra });
+    txt(en, rx + 140, y + 28, { size: 21, fam: F.mono, w: 700, c: C.white, a: ra * 0.75 });
     txt(v.toFixed(4), rx + rw - 40, y, { size: 32, fam: F.mono, w: 700, align: 'right', c: col, a: ra * na });
   });
   const ta = a * Q(S, 1, 'The bill has three lines', 0.5);
-  line(rx + 30, ry + 360, rx + rw - 30, ry + 360, C.white, ta * 0.7, 2);
-  llRich([['βQ = −ΔS + I + D', C.now]], rx + 30, ry + 420, { size: 36, a: ta });
-  txt(b.bQ.toFixed(4), rx + rw - 40, ry + 420, { size: 34, fam: F.mono, w: 700, align: 'right', c: C.now, a: ta * Q(S, 2, 'comes to point two seven', 0.5) });
-  txt('one bath qubit, p = 3/4, SWAP · 一个热浴比特（数值示例）', rx + 30, ry + 480, { size: 20, fam: F.zh, w: 700, c: C.cyan, a: a * na });
-  txt('heat = bath energy gained: a model premise · 热量的读法是模型前提', rx + 30, ry + 520, { size: 18, fam: F.zh, w: 700, c: C.argued, a: a * at(S, 0, 0.6) });
-  txt('reset needs a bath · 复位要靠热浴', rx + 30, ry + 560, { size: 18, fam: F.zh, w: 700, c: C.argued, a: a * at(S, 0, 0.6) });
+  line(rx + 30, ry + 340, rx + rw - 30, ry + 340, C.white, ta * 0.7, 2);
+  llRich([['βQ = −ΔS + I + D', C.now]], rx + 30, ry + 395, { size: 36, a: ta });
+  txt(b.bQ.toFixed(4), rx + rw - 40, ry + 395, { size: 34, fam: F.mono, w: 700, align: 'right', c: C.now, a: ta * Q(S, 2, 'comes to point two seven', 0.5) });
+  txt('bit: I/2 → diag(3/4, 1/4), not a full reset', rx + 30, ry + 450, { size: 21, fam: F.mono, w: 700, c: C.cyan, a: a * na });
+  txt('比特从 I/2 出发，只推到 3/4 · 一个热浴比特、SWAP（数值示例）', rx + 30, ry + 485, { size: 20, fam: F.zh, w: 700, c: C.cyan, a: a * na });
+  txt('heat = bath energy gained: a model premise · 热量的读法是模型前提', rx + 30, ry + 530, { size: 20, fam: F.zh, w: 700, c: C.argued, a: a * at(S, 0, 0.6) });
+  txt('the heat bill is paid at reset · 热账单在复位时付', rx + 30, ry + 568, { size: 20, fam: F.zh, w: 700, c: C.argued, a: a * at(S, 0, 0.6) });
   /* the bar: floor and total */
   const bx = 1010, by = 250, bw = 120, bh = 330, sc = bh / 0.3;
   const ba = a * na;
@@ -398,7 +401,8 @@ SCENES.bill = S => {
     fillBox(bx, by + bh - b.bQ * sc, bw, b.D * sc, C.mag, ba * 0.35); box(bx, by + bh - b.bQ * sc, bw, b.D * sc, C.mag, ba, 1.5);
     ctx.save(); ctx.setLineDash([8, 6]); line(bx - 20, by + bh - b.dS * sc, bx + bw + 20, by + bh - b.dS * sc, C.white, ba, 2); ctx.restore();
     txt('floor', bx + bw + 26, by + bh - b.dS * sc + 8, { size: 20, fam: F.mono, w: 700, c: C.white, a: ba });
-    txt('D', bx + bw / 2, by + bh - b.dS * sc - b.D * sc / 2 + 10, { size: 28, fam: F.math, w: 700, align: 'center', c: C.mag, a: ba });
+    txt('D', bx + bw / 2, by + bh - b.dS * sc - b.D * sc / 2 - 4, { size: 28, fam: F.math, w: 700, align: 'center', c: C.mag, a: ba });
+    txt('(bath)', bx + bw / 2, by + bh - b.dS * sc - b.D * sc / 2 + 24, { size: 18, fam: F.math, w: 700, align: 'center', c: C.mag, a: ba });
     txt('βQ', bx + bw / 2, by + bh - b.bQ * sc - 14, { size: 26, fam: F.math, w: 700, align: 'center', c: C.now, a: ba });
     line(bx - 20, by + bh, bx + bw + 20, by + bh, C.white, ba * 0.6, 1.5);
   }
@@ -408,20 +412,20 @@ SCENES.bill = S => {
     panel(1260, 210, 570, 600, la, C.lean, 'REAL NUMBERS · 实数');
     txt('if βQ = −ΔS + I + D,  I ≥ 0,  D ≥ 0', 1284, 280, { size: 22, fam: F.math, w: 700, c: C.white, a: la });
     llRich([['−ΔS ≤ βQ', C.lean]], 1284, 340, { size: 32, a: la });
-    llLean(1284, 385, LL_LEAN.landauer_bound_of_balance, la, { size: 15 });
+    llLean(1284, 385, LL_LEAN.landauer_bound_of_balance, la, { size: 18 });
     const ea = a * at(S, 4, 0.6);
     llRich([['−ΔS = βQ  ⇔  I = 0 and D = 0', C.lean]], 1284, 470, { size: 26, a: ea });
-    llLean(1284, 515, LL_LEAN.landauer_saturation_iff, ea, { size: 15 });
+    llLean(1284, 515, LL_LEAN.landauer_saturation_iff, ea, { size: 18 });
     const sa = a * Q(S, 4, 'Our bath was pushed', 0.6);
     llRich([['−ΔS < βQ  ⇔  0 < I + D', C.lean]], 1284, 600, { size: 26, a: sa });
-    llLean(1284, 645, LL_LEAN.landauer_strict_iff, sa, { size: 15 });
-    txt('here D = 0.1438 > 0 → strictly more · 严格更多', 1284, 720, { size: 19, fam: F.zh, w: 700, c: C.mag, a: sa });
+    llLean(1284, 645, LL_LEAN.landauer_strict_iff, sa, { size: 18 });
+    txt('here D = 0.1438 > 0 → strictly more · 严格更多', 1284, 720, { size: 21, fam: F.zh, w: 700, c: C.mag, a: sa });
     txt("Landauer's bound and when it is reached", 1284, 770, { size: 18, fam: F.mono, w: 700, c: C.dim, a: ea });
   }
 };
 
 /* ======================================================================= */
-/*                            scene 6 · FILED, NOT SHREDDED                  */
+/*                            scene 6 · A COPY YOU CAN UNDO               */
 /* ======================================================================= */
 /* the joint 4 × 4 table after copying |±⟩ into a blank record: cells (00,00), (00,11), (11,00), (11,11) */
 function cpJoint(x, y, c, s, a, hi) {
@@ -436,7 +440,7 @@ SCENES.copy = S => {
   const a = llFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean'], [4, null, 'argued']]);
-  const ca = Q(S, 0, 'copy the bit', 1.2), ba = Q(S, 3, 'running the copy backwards', 1.2);
+  const ca = Q(S, 0, 'copy the bit', 1.2), ba = Q(S, 3, 'Running the copy backwards', 1.2);
   const cp = ca * (1 - ba);           // 1 while copied, back to 0 when undone
   /* two rows: ρ = |+⟩ (top), σ = |−⟩ (bottom) */
   const rows = [[+1, '|+⟩', 220], [-1, '|−⟩', 520]];
@@ -470,25 +474,28 @@ SCENES.copy = S => {
   panel(1040, 210, 790, 330, Math.max(la, a * Q(S, 2, 'filed in the corners', 0.6)), la > 0.01 ? C.lean : C.mag, la > 0.01 ? 'SAME DIAGONAL, DIFFERENT NOTES · 对角相同、批注不同' : 'FILED · 归档');
   const fa = a * Q(S, 2, 'filed in the corners', 0.6) * (1 - la / Math.max(a, 1e-6));
   if (fa > 0.003) {
-    txt('the notes moved to the corners of the joint table', 1066, 300, { size: 22, fam: F.mono, w: 700, c: C.mag, a: fa });
-    txt('批注挪到了联合表格的角上：只看比特的人看不到', 1066, 345, { size: 22, fam: F.zh, w: 700, c: C.white, a: fa });
-    txt('a filing cabinet is an analogy · 档案柜只是比方', 1066, 400, { size: 18, fam: F.zh, w: 700, c: C.argued, a: fa });
+    txt('the notes moved to the corners of the joint table', 1066, 290, { size: 22, fam: F.mono, w: 700, c: C.mag, a: fa });
+    txt('批注挪到了联合表格的角上：只看比特的人看不到', 1066, 330, { size: 22, fam: F.zh, w: 700, c: C.white, a: fa });
+    const pa = fa * Q(S, 2, 'Pinching is this same copy', 0.6);
+    txt('pinching = this copy, record out of reach', 1066, 395, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: pa });
+    txt('捏合就是这样一次拷贝，只是记录够不着', 1066, 432, { size: 22, fam: F.zh, w: 700, c: C.white, a: pa });
+    txt('a filing cabinet is an analogy · 档案柜只是比方', 1066, 490, { size: 20, fam: F.zh, w: 700, c: C.argued, a: fa });
   }
   if (la > 0.003) {
-    llRich([['Tr_E R(ρ) = Tr_E R(σ),   R(ρ) ≠ R(σ)', C.white]], 1066, 290, { size: 26, a: la });
+    llRich([['local(copy ρ) = local(copy σ),  copy ρ ≠ copy σ', C.white]], 1066, 290, { size: 24, a: la });
     txt('no map from the local table rebuilds both', 1066, 345, { size: 22, fam: F.mono, w: 700, c: C.lean, a: la });
     txt('没有只读局部表格的映射能同时还原两者', 1066, 380, { size: 21, fam: F.zh, w: 700, c: C.white, a: la });
-    const ua = a * Q(S, 3, 'Yet running', 0.6);
+    const ua = a * Q(S, 3, 'Running the copy backwards', 0.6);
     txt('the inverse copy restores both · 逆拷贝把两者都还原', 1066, 430, { size: 21, fam: F.zh, w: 700, c: C.lean, a: ua });
-    llLean(1066, 500, LL_LEAN.reduced_irreversibility_is_canonical_record_access_defect, la, { size: 14 });
+    llLean(1066, 500, LL_LEAN.reduced_irreversibility_is_canonical_record_access_defect, la, { size: 17 });
   }
   /* line 4: the maxim and the heat line (argued) */
   const ma = a * at(S, 4, 0.6);
   if (ma > 0.003) {
     panel(1040, 570, 790, 220, ma, C.argued, 'IN THIS LEDGER · 本章账本');
-    txt('copy: reversible, no reset, no heat bill', 1066, 640, { size: 22, fam: F.mono, w: 700, c: C.argued, a: ma });
-    txt('拷贝可逆、无需复位，这本账里不开热账单', 1066, 680, { size: 22, fam: F.zh, w: 700, c: C.white, a: ma });
-    txt('filed → fetched back · wiped → paid for', 1066, 740, { size: 24, fam: F.mono, w: 700, c: C.now, a: ma });
+    txt('pinch or copy: entropy only; heat is paid at reset', 1066, 640, { size: 22, fam: F.mono, w: 700, c: C.argued, a: ma });
+    txt('捏合或拷贝只记熵；热账单在复位时付', 1066, 680, { size: 22, fam: F.zh, w: 700, c: C.white, a: ma });
+    txt('filed → fetched back · reset → paid for', 1066, 740, { size: 24, fam: F.mono, w: 700, c: C.now, a: ma });
   }
 };
 
@@ -501,8 +508,8 @@ SCENES.edge = S => {
   badgeQ(S, [[0, null, 'argued']]);
   const m = LL_KT / 1e-21;
   const rows = [
-    { k: 0, title: 'ENTROPY, NOT JOULES · 算的是熵', en: `k_B T ln 2 at 300 K ≈ ${m.toFixed(2)} × 10⁻²¹ J`, zh: '室温下每比特约 2.87 仄焦：兰道尔的物理，文献结果', note: 'the formalized theorems count nats · 形式化定理只算奈特' },
-    { k: 1, title: 'A BOUND, NOT A MACHINE · 只是下界', en: 'no reset protocol that reaches −ΔS = βQ', zh: '下界不造出能取等的复位方案', note: 'SWAP with one bath qubit: D > 0 for every p > 1/2 · 交换一个热浴比特：p > 1/2 时 D 恒为正' }
+    { k: 0, title: 'ENTROPY, NOT JOULES · 算的是熵', en: `floor kT ln 2 at T = 300 K ≈ ${m.toFixed(2)} × 10⁻²¹ J`, zh: '室温下每比特的地板约 2.87 仄焦：兰道尔的物理，文献结果', note: 'real chips dissipate far more; this is only the floor · 真实芯片耗散远多于此，这只是地板' },
+    { k: 1, title: 'A BOUND, NOT A MACHINE · 只是下界', en: 'the bound builds no reset that reaches −ΔS = βQ', zh: '下界本身不造出能取等的复位方案', note: 'SWAP from I/2 with one bath qubit: D > 0 for every p > 1/2 · 从 I/2 出发交换一个热浴比特：p > 1/2 时 D 恒为正' }
   ];
   rows.forEach((rw, i) => {
     const ra = a * at(S, rw.k, 0.6);
@@ -511,7 +518,7 @@ SCENES.edge = S => {
     panel(260, y, 1400, 250, ra, C.argued, rw.title);
     txt(rw.en, 300, y + 100, { size: 34, fam: F.math, w: 700, c: C.argued, a: ra });
     txt(rw.zh, 300, y + 155, { size: 30, fam: F.zh, w: 700, c: C.white, a: ra });
-    txt(rw.note, 300, y + 205, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ra * 0.95 });
+    txt(rw.note, 300, y + 207, { size: 23, fam: F.zh, w: 700, c: C.white, a: ra * 0.8 });
   });
 };
 
