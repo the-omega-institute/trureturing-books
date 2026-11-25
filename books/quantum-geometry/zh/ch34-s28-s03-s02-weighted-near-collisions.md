@@ -389,6 +389,28 @@ $$
 
 这给出 $R_1(\eta)\ll(\log X+1)/X$。由固定计数差的上界，加权近碰撞质量 $E_p(\eta)$ 中残余次数恰为一的部分至多为 $p^2 D_{p-1}R_1(\eta)$。沿用固定 $K$ 和 $0<\beta<1$ 的截点 $X=e^{-K}T^\beta$，并取 $p\asymp X\log X$ 时，对角估计使这部分相对 $p!V^p$ 保留指数折减，因为 $V\asymp\log X/X$ 且 $p$ 倍的多项式因子可被吸收。残余次数随 $p$ 增长时，仍需额外的算术输入。
 
+## 随阶数增长的残余次数截断 {#growing-residual-degree}
+
+记 $E_{p,\le D}(\eta)$ 为 $E_p(\eta)$ 中每边至多剩下 $D$ 个未配对项的部分，其中 $0\le D\le p$。每对计数向量至少有 $p-D$ 个共同项。记 $W=\sum_jw_j$ 与 $V=\sum_jw_j^2>0$。权重非负时，去掉频率条件后可用共同计数上界得到
+
+$
+E_{p,\le D}(\eta)\le\binom pD^{\!2}W^{2D}D_{p-D}。
+
+$
+
+只需控制 $k=p-D$ 这一阶。若 $D_{p-D}\le A e^{-c(p-D)}(p-D)!V^{p-D}$，将一个二项式系数与 $p!$ 约去，再用 $p^D/D!$ 控制另一个。令 $x=p e^c W^2/V$，得到
+
+$
+\frac{E_{p,\le D}(\eta)}{p!V^p}
+\le A e^{-cp}\frac{x^D}{(D!)^2}
+\le A e^{-cp}\rho^{-D}\exp(2\sqrt{\rho x}),\qquad \rho>0。
+
+$
+
+末项不等式取指数级数在 $\sqrt{\rho x}$ 处的第 $D$ 项，再将两边平方。两个上界均与频率分辨率无关。 [共同计数上界的 Lean 证明](lean:D5/S3/Fourier/Concentration/FiniteMultinomialOverlap.weighted_overlap_le_diagonal)
+
+沿用上文的 ζ 尾段，固定 $K$ 与 $0<\beta<1$，取 $X=e^{-K}T^\beta$ 及 $p\asymp X\log X$。在 RH 与所引重数估计下，$W^2/V=O(p(\log T)^2)$。对所有 $p/2\le k\le p$，对角估计可用相同的常数 $A,c>0$。区间 $(X,CX]$ 提供至少固定倍数的 $p$ 个指标，在这些指标上 $kw_j^2/V$ 对该范围内的 $k$ 有统一的正下界。Stirling 公式产生的 $O(\sqrt{k})$ 因子可吸收到指数中。令 $L=\log T$，取 $\rho=(L\log L)^{-2}$。于是 $2\sqrt{\rho x}=O(p/\log L)$。若 $D\le\varepsilon p/\log L$，截断代价 $D\log(1/\rho)$ 至多为 $(2+o(1))\varepsilon p$。任取固定的 $0<\varepsilon<c/2$，整个截断范围都有与 $\eta$ 无关的指数节省。实际纵坐标的剩余近碰撞质量仍需对截断以上的残余次数作估计。 [重数估计，定理 1 与第 7 节](https://arxiv.org/abs/2306.04799)
+
 ## 可逐点匹配的高阶残余项 {#matched-residual-occupations}
 
 逐坐标抵消共同出现的频率后，两边各剩 $d$ 个频率。若能把它们配成 $d$ 对，每对的频率差都在阈值 $\eta$ 内，残余权重就可以用一次近配对的权重来估计。这里把出现次数相同的词视为同一个计数向量。
