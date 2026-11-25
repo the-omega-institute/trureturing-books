@@ -1788,7 +1788,7 @@ SCENES.b02_next = S => {
   SPINE.rail(S, 2, a * clamp((S.d - u) / 0.6));
   const out = clamp((S.d - u) / 0.8);
   const items = [
-    ['HEAP · 流群', '[a, b, c] = a · b̄ · c', C.cyan, 'a heap that multiplies'],
+    ['HEAP · 流群', '[a, b, c] = a · b̄ · c', C.cyan, 'A heap that multiplies'],
     ['ROTOR · 旋转', 'R = (I − X)⁻¹ (I + X)', C.vio, 'a fraction that turns'],
     ['TRIANGLE · 三角形', 'det G₃ = 1 + 2B − Σκ', C.mag, 'a triangle that closes']
   ];
