@@ -125,7 +125,7 @@ E_p(\eta)\ge \frac{hW^{2p}}{2\pi}
 \int_{-\pi/h}^{\pi/h}\max(0,1-Vt^2/2)^{2p}\,dt.
 $$
 
-若 $D>0$ 且 $p>0$，该不等式严格成立。这里使用了次数和的同一傅里叶幂展开。固定 $V,h>0$ 而次数增长时，积分中的缩放变量为 $t\sqrt{pV}$，可用整个实线上的可积高斯函数控制积分余项。一般实频谱的有限分辨率碰撞需要另行建立正核估计。 [有限积分下界的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/c1296ace4f5b66516a07af37f37a1dbcec0d50e1/D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lean#L179)
+若 $D>0$ 且 $p>0$，该不等式严格成立。这里使用了次数和的同一傅里叶幂展开。固定 $V,h>0$ 而次数增长时，积分中的缩放变量为 $t\sqrt{pV}$，可用整个实线上的可积高斯函数控制积分余项。一般实频谱可使用下文的正核碰撞估计。 [有限积分下界的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/c1296ace4f5b66516a07af37f37a1dbcec0d50e1/D5/S3/Fourier/Concentration/LatticeConvolutionVariance.lean#L179)
 
 
 ## 截断方差积分的高斯极限
@@ -154,4 +154,48 @@ $$
 \le \sqrt{pV}\,E_p(\eta).
 $$
 
-这个渐近下界继承了有限傅里叶积分的全部假设。实际碰撞质量还可能受到其他相位峰的贡献，例如所给格距并非最大格距时。一般实频谱和实际 ζ 纵坐标的上界仍需控制这些贡献及非中心余项。这里采用了 [有限主贡献与余项控制的相关方法](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1dd9/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)，具体的余项是上述全线绝对误差。
+这个渐近下界继承了有限傅里叶积分的全部假设。实际碰撞质量还可能受到其他相位峰的贡献，例如所给格距并非最大格距时。实际 ζ 纵坐标的上界仍需控制这些贡献及非中心余项。这里采用了 [有限主贡献与余项控制的相关方法](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1dd9/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)，具体的余项是上述全线绝对误差。
+
+
+## 一般实频率的正 Fejér 核下界
+
+给定固定的正分辨率 $\eta>0$，使用角频率 Fejér 核及其三角形傅里叶变换
+
+$$
+K_\eta(t)=\frac{\eta}{2\pi}\operatorname{sinc}^2\!\left(\frac{\eta t}{2}\right),
+\qquad \phi_\eta(d)=\max(0,1-|d|/\eta).
+$$
+
+核 $K_\eta$ 非负、可积且全线积分为 $1$，并有 $\int_{\mathbb R}K_\eta(t)e^{-idt}\,dt=\phi_\eta(d)$。将 $|S(t)|^{2p}$ 作有限次数和配对展开，对每个余弦积分，得到精确恒等式
+
+$$
+\int_{\mathbb R} K_\eta(t)|S(t)|^{2p}\,dt
+=\sum_{m,n}c_mc_n\phi_\eta(G_m-G_n).
+$$
+
+恒等式允许任意实权。若 $w_j\ge0$，全部 $c_m c_n\ge0$，且 $\phi_\eta(d)\le \mathbf 1_{|d|\le\eta}$，故右侧不超过 $E_p(\eta)$。在闭带边界 $|d|=\eta$ 处三角权恰为零。 [正核碰撞比较](https://github.com/the-omega-institute/trureturing/blob/650bb40f649ae4454afcf856c2f1c0b0ceb18f1d/D5/S3/Fourier/Concentration/FejerCollisionVariance.lean#L87)
+
+再假设 $\sum_jw_j(g_j-a)^2\le VW$，其中 $a,V$ 为实数。由点态方差下界和核的非负性，对任何 $A\ge0$ 有
+
+$$
+W^{2p}\int_{-A}^{A}K_\eta(t)\max(0,1-Vt^2/2)^{2p}\,dt
+\le E_p(\eta).
+$$
+
+这一估计适用于任意有限实频率族。 [有限窗口下界](https://github.com/the-omega-institute/trureturing/blob/650bb40f649ae4454afcf856c2f1c0b0ceb18f1d/D5/S3/Fourier/Concentration/FejerCollisionVariance.lean#L115)
+
+固定 $V,\eta>0$ 并令 $p\to\infty$。对 $\varepsilon>0$，取 $c=\eta/(2\pi)-\varepsilon/(2\sqrt\pi)$。由 $K_\eta(0)=\eta/(2\pi)$ 与连续性，可选择一个固定的 $A>0$，使 $|t|\le A$ 时 $K_\eta(t)\ge c$。上一节的高斯极限给出
+
+$$
+c\sqrt{pV}\int_{-A}^{A}\max(0,1-Vt^2/2)^{2p}\,dt
+\longrightarrow \frac{\eta}{2\sqrt\pi}-\frac{\varepsilon}{2}.
+$$
+
+因此对每个 $\varepsilon>0$，充分大的次数 $p$ 满足
+
+$$
+\left(\frac{\eta}{2\sqrt{\pi}}-\varepsilon\right) W^{2p}
+\le\sqrt{pV}\,E_p(\eta).
+$$
+
+若 $W>0$，等价地有 $\liminf_{p\to\infty} E_p(\eta)\sqrt{pV}/(W^{2p}\eta)\ge1/(2\sqrt\pi)$。这个系数超过任意有限加权数据的抛物线下界系数 $3/(5\sqrt5)$，因为次数和具有卷积结构。结论允许固定的实际 ζ 尾段作为输入频率族。随着高度、频率族和分辨率共同变化的统一渐近界，以及高阶碰撞的上界，仍待进一步估计。 [渐近下界](https://github.com/the-omega-institute/trureturing/blob/650bb40f649ae4454afcf856c2f1c0b0ceb18f1d/D5/S3/Fourier/Concentration/FejerCollisionVariance.lean#L156)
