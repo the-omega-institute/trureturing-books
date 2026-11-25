@@ -259,8 +259,8 @@ SCENES.block = S => {
     : [['0.6', C.cyan], ['0.8i', C.mag], ['0.8i', C.mag], ['0.6', C.white, 0.55]];
   txt(showM > 0.5 ? 'W(0.6)' : 'W(0.6)', 200, 262, { size: 40, fam: F.math, w: 700, c: C.white, a });
   if (showM > 0.5) txt(`${m}`, 200 + tw('W(0.6)', 40, F.math, 700) + 4, 238, { size: 30, fam: F.math, w: 700, c: C.now, a });
-  cbMatrix(200, 300, 270, 125, cells, a, { corner: Q(S, 0, 'top-left corner', 0.6), size: 38 });
-  txt('← corner · 角落', 470, 262, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: a * Q(S, 0, 'top-left corner', 0.6) });
+  cbMatrix(200, 300, 270, 125, cells, a, { corner: Q(S, 0, 'Its corner', 0.6), size: 38 });
+  txt('← corner · 角落', 470, 262, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: a * Q(S, 0, 'Its corner', 0.6) });
   /* the symbolic block */
   const sa = a * (1 - at(S, 3, 0.5));
   cbRich([['W(x) = ', C.white], ['[ x', C.cyan], ['   i√(1−x²) ; ', C.mag], ['i√(1−x²)', C.mag], ['   x ]', C.white]], 200, 640, { size: 28, a: sa });
@@ -301,7 +301,7 @@ SCENES.hand = S => {
   badgeQ(S, [[0, null, 'computed'], [3, null, 'argued']]);
   const appear = [
     Q(S, 0, 'reads one', 0.5), Q(S, 0, 'one, zero point six', 0.5), Q(S, 0, 'minus zero point two eight', 0.5),
-    Q(S, 2, 'gives minus', 0.5), at(S, 3, 0.5, 0.6)
+    Q(S, 2, 'you get minus', 0.5), at(S, 3, 0.5, 0.6)
   ];
   let cur = 0;
   appear.forEach((p, m) => { if (p > 0.02) cur = m; });
@@ -335,11 +335,11 @@ SCENES.hand = S => {
   txt('no angle needed · 用不着角度', 1180, 324, { size: 22, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 1, 'never need the angle', 0.6) });
   cbRich([['2x = ', C.white], ['1.2', C.now]], 1180, 384, { size: 30, a: a * Q(S, 1, 'two x times', 0.6) });
   cbRich([['T₂ = 1.2 × 0.6 − 1 = ', C.white], ['−0.28', C.cyan]], 1180, 444, { size: 28, a: a * Q(S, 1, 'minus the one before', 0.6) });
-  cbRich([['T₃ = 1.2 × (−0.28) − 0.6 = ', C.white], ['−0.936', C.cyan]], 1180, 500, { size: 28, a: a * Q(S, 2, 'One point two', 0.6) });
+  cbRich([['T₃ = 1.2 × (−0.28) − 0.6 = ', C.white], ['−0.936', C.cyan]], 1180, 500, { size: 28, a: a * Q(S, 2, 'Run the rule', 0.6) });
   cbRich([['T₄ = 1.2 × (−0.936) + 0.28 = ', C.white], ['−0.8432', C.cyan]], 1180, 556, { size: 26, a: a * at(S, 3, 0.6, 0.6) });
-  txt(`check · 对照  cos 3θ = ${cbDec(Math.cos(3 * CB_TH))}`, 1180, 612, { size: 22, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 2, 'gives minus', 0.6) });
+  txt(`check · 对照  cos 3θ = ${cbDec(Math.cos(3 * CB_TH))}`, 1180, 612, { size: 22, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 2, 'you get minus', 0.6) });
   cbTag(1180, 680, 'knitting pattern: an analogy, not a proof', '织毛衣的花样：比方，不是证明', a * at(S, 3, 0.6));
-  stamp('−0.936', 1640, 500, Q(S, 2, 'gives minus', 0.5, 0.4) * (1 - at(S, 3, 0.5)), C.cyan, 26, -0.06);
+  stamp('−0.936', 1640, 500, Q(S, 2, 'you get minus', 0.5, 0.4) * (1 - at(S, 3, 0.5)), C.cyan, 26, -0.06);
 };
 
 /* ======================================================================= */
