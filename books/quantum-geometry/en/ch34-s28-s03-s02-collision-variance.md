@@ -344,7 +344,25 @@ $$
 Q(u/s)^n\le e^{-u^2/2},\qquad s=\sqrt{nM_2/2}.
 $$
 
-This envelope permits dominated convergence on central windows satisfying the fourth-moment condition. For actual zeta ordinates, the moment conditions and the weighted contribution of Fourier peaks outside that window still require estimates. [Central Gaussian envelope](lean:D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.score_gaussian_envelope)
+This envelope permits dominated convergence on central windows satisfying the fourth-moment condition. For actual zeta ordinates, applying this estimate requires a bound on the pair-moment ratio and control of the weighted Fourier peaks outside the central window. [Central Gaussian envelope](lean:D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.score_gaussian_envelope)
+
+### Pair-moment condition for actual zeta ordinates
+
+Under the existing RH interface, take all zeta zeros with $0<\gamma\le T$, using analytic multiplicities $m_\gamma$ and weights $a_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$. Put $W(T)=\sum_\gamma a_\gamma$, $w_\gamma=a_\gamma/W(T)$, and $P_k(T)=\sum_{\gamma,\gamma'}w_\gamma w_{\gamma'}(\gamma-\gamma')^k$. Set $c=1/(2\pi)$. The Riemann–von Mangoldt counting asymptotic gives $N(T)-N(3T/4)\ge cT\log T/8$ for all sufficiently large $T$. In the upper band $3T/4<\gamma\le T$, the weight satisfies $a_\gamma\ge m_\gamma/(2T)$, so the band's total weight is at least $c\log T/16$. The harmonic mass asymptotic gives $W(T)\le c(\log T)^2$ and $W(T/2)\ge c(\log T)^2/16$.
+
+The normalized masses of the lower and upper bands are at least $1/16$ and $1/(16\log T)$ respectively, and frequency differences between the two bands have modulus at least $T/4$. Retaining the ordered pairs from the lower band to the upper band gives
+
+$$
+P_2(T)\ge\frac{T^2}{4096\log T}>0,\qquad P_4(T)\le T^2P_2(T).
+$$
+
+The second inequality uses the fact that every positive ordinate is at most $T$. Thus for all sufficiently large $T$, the normalized weights are nonnegative and sum to one, with
+
+$$
+\frac{P_4(T)}{P_2(T)^2}\le4096\log T.
+$$
+
+[Harmonic-weighted moment ratio bound](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio) If $T_n\to\infty$ and $\log T_n/n\to0$, the actual normalized zero spectrum satisfies the fourth-moment-ratio hypothesis of the central Gaussian profile. A fixed frequency rescaling $g_\gamma=\gamma/r$ with $r>0$ leaves this ratio invariant. The central Fejér principal contribution also requires compatibility between the resolution and actual variance scale. The noncentral peak estimate on the intermediate time range remains a separate obligation.
 
 ## Principal Fejér integral on a moving central window
 
@@ -386,7 +404,7 @@ $$
 K_{\eta_n}(t)|S_n(t)|^{2n}\,dt\longrightarrow0,
 $$
 
-with the corresponding limits at neighboring multiplicative resolutions. The moment-ratio condition and estimates for the integrated noncentral peaks of actual zeta ordinates remain open arithmetic gaps.
+with the corresponding limits at neighboring multiplicative resolutions. For the harmonic-weighted actual zeta spectrum, the moment-ratio condition holds under the cutoff growth condition above. The integrated noncentral peaks remain an open arithmetic gap.
 
 ### Finite observation windows for whole-line moments
 
