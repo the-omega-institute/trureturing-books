@@ -9,7 +9,7 @@
               65 = 4² + 7²; (2 + i)(3 − 2i) = 8 − i, 65 = 8² + 1² (computed).
      primes   primes ≡ 1 (mod 4) with their two squares ..... SumTwoSquares.prime_eq_sq_add_sq_of_mod_four_eq_one (LEAN);
               squares mod 4 are 0 or 1 and a² + b² mod 4 ≠ 3 ..... QuadraticResidues.square_residues_and_sum_obstruction
-              (LEAN); the names face / line prime are the book's (argued).
+              (LEAN); the names plane / line prime are the book's (argued).
      ledger   n = a² + b² ⟺ every prime q ≡ 3 (mod 4) has even exponent
               ..... SumTwoSquaresClassification.eq_sq_add_sq_iff_even_factorization (LEAN);
               9 = 3² + 0², 2025 = 3⁴·5² = 27² + 36², 2024 = 2³·11·23 is not (computed; the socks are an analogy).
@@ -313,7 +313,7 @@ SCENES.primes = S => {
   txt('p = 4k + 1', 420, 220, { size: 34, fam: F.math, w: 700, align: 'center', c: C.cyan, a: a * at(S, 0, 0.5) });
   txt('p = 4k + 3', 1500, 220, { size: 34, fam: F.math, w: 700, align: 'center', c: C.mag, a: a * at(S, 0, 0.5) });
   if (na > 0.003) {
-    txt('face primes · 面素数', 420, 262, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: na });
+    txt('plane primes · 面素数', 420, 262, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: na });
     txt('line primes · 线素数', 1500, 262, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.mag, a: na });
     txt("the names are the book's reading · 叫法是本书的诠释", W / 2, 840, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.argued, a: na });
   }
@@ -417,7 +417,7 @@ SCENES.edge = S => {
   const rows = [
     { k: 0, col: C.cyan, en: 'p prime, p ≡ 1 (mod 4)  ⟹  ∃ a, b : p = a² + b²', zh: '断言两个平方存在，不给找它们的快办法', note: 'existence, not a search · 存在，不是算法' },
     { k: 1, col: C.cyan, en: '65 = 1² + 8² = 4² + 7²', zh: '不数有几种拆法', note: 'two ways, computed here; no count is claimed · 两种拆法是屏幕上的计算' },
-    { k: 2, col: C.argued, en: 'primes split into mirror pairs in ℤ[i]', zh: '素数在高斯整数中分裂成镜像对', note: "literature result; face / line are the book's names · 文献结果；“面”“线”是本书起的名字" }
+    { k: 2, col: C.argued, en: 'primes split into mirror pairs in ℤ[i]', zh: '素数在高斯整数中分裂成镜像对', note: "literature result; plane / line are the book's names · 文献结果；“面”“线”是本书起的名字" }
   ];
   rows.forEach((rw, i) => {
     const ra = a * at(S, rw.k, 0.6);

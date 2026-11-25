@@ -26,7 +26,7 @@
       ["Products stay on the grid, so everything hangs on the primes.", "乘积留在方格上，所以一切都取决于素数。"],
       ["Lean checks that every prime leaving remainder one, after division by four, is two squares.", "Lean 内核检验：除以 4 余 1 的素数，都是两个平方之和。"],
       ["Primes leaving remainder three never are: squares leave only zero or one, so two never reach three.", "余 3 的素数永远不是：平方除以 4 只余 0 或 1，两个加起来到不了 3。"],
-      ["The book calls the first kind face primes, and the second kind line primes.", "本书把前一种叫面素数，后一种叫线素数。"]
+      ["The book calls the first kind plane primes, and the second kind line primes.", "本书把前一种叫面素数，后一种叫线素数。"]
     ], "cues": [{"line": 2, "at": 2.2, "kind": "glitch"}]},
     {"id": "ledger", "name": "THE FACTOR LEDGER", "lead": 0.5, "tail": 0.7, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
       ["The full answer: factor the number, and look only at primes with remainder three.", "完整的答案：把数分解成素因子，只看除以 4 余 3 的那些。"],
@@ -39,7 +39,7 @@
     {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
       ["Lean proves the two squares exist. It does not hand you a fast way to find them.", "Lean 证明这两个平方存在，但没有给出找到它们的快办法。"],
       ["Nor does it count the ways. Sixty-five has two.", "它也不数有几种拆法：65 就有两种。"],
-      ["How primes split into mirror pairs is a literature result. Face and line are the book's names.", "素数怎样分裂成镜像对，是文献结果；“面”与“线”是本书起的名字。"]
+      ["How primes split into mirror pairs is a literature result. Plane and line are the book's names.", "素数怎样分裂成镜像对，是文献结果；“面”与“线”是本书起的名字。"]
     ]},
     {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
       ["Geometric Intuition of Quantum Computing, chapter twenty-three.", "《量子计算的几何直觉》· 第二十三章"]
