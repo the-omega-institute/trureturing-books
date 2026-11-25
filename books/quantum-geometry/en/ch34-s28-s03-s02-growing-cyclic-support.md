@@ -65,7 +65,7 @@ In particular the signed values at $N$ and $N+1$ are eventually strictly positiv
 
 At every fixed real rear offset $r$, using the rear feature formula in the same fitted polynomial gives
 $$
-N^3p_N^{\rm rear}(r)\longrightarrow B_\infty-\tfrac34r^2.
+N^3p_N^{\mathrm{rear}}(r)\longrightarrow B_\infty-\tfrac34r^2.
 $$
 The strict sign at any such offset is determined by this limit when it is nonzero. The limits concern the signed fit for a fixed nonempty finite rear set $S$. To certify a particular cyclic optimizer one still needs to identify the finite cyclic site correspondence and extend the complement signs across all other sites. At $B_\infty=3r^2/4$ the limiting sign alone leaves the activation level open. [Lean proof of the coefficient rate](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.refined_coefficients) · [Front and half-step limits](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_boundary_value) · [Rear limit](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_rear_value) · [Research problem](https://github.com/the-omega-institute/trureturing/issues/34029)
 
@@ -108,11 +108,11 @@ $$
 The next-order signed rear value satisfies
 
 $$
-N\left(|S|N^3p_N^{\rm rear}(r)-Q+\tfrac34D\right)
+N\left(|S|N^3p_N^{\mathrm{rear}}(r)-Q+\tfrac34D\right)
 \longrightarrow L+Q+\tfrac98 D.
 $$
 
-The exact lattice normalization is $Z=\frac43 N^3+2N^2-N/3-1/2$. Consequently $N(C_N+3/4)\to9/8$, using the cubic error bound for the fitted front coefficient. The third row of the coupled fit differs from $(0,\sum_{s\in S}s^2,|S|)$ by $o(1/N)$. Indeed, the growing front contribution is $O(N^{-3})$, and the finitely many fixed rear features have errors bounded by constants times $N^2h^2$ or $h^2$. The same estimates show $N^3p_N^{\rm rear}(r)=C_Nr^2+B_N+o(1/N)$. Eliminating $B_N$ via the exact target $Q_N(1+1/N)$ gives the displayed limit.
+The exact lattice normalization is $Z=\frac43 N^3+2N^2-N/3-1/2$. Consequently $N(C_N+3/4)\to9/8$, using the cubic error bound for the fitted front coefficient. The third row of the coupled fit differs from $(0,\sum_{s\in S}s^2,|S|)$ by $o(1/N)$. Indeed, the growing front contribution is $O(N^{-3})$, and the finitely many fixed rear features have errors bounded by constants times $N^2h^2$ or $h^2$. The same estimates show $N^3p_N^{\mathrm{rear}}(r)=C_Nr^2+B_N+o(1/N)$. Eliminating $B_N$ via the exact target $Q_N(1+1/N)$ gives the displayed limit.
 
 Suppose now that $Q=T_e(l+1)$ and the parity is eventually $e$. The first omitted rear radius of $S_l$ is the last included rear radius of $S_{l+1}$. For both windows this radius has $3D/4=Q$. Its first-order sign is therefore determined by $L+5Q/2$. If this quantity is positive, the optimizer eventually has the larger rear window $S_{l+1}$. If it is negative, it has $S_l$. The front support is $|j|\le N$ in either case, with both exact moment equalities and the squared-distance energy bound above. When $L+5Q/2=0$, the finer sign remains open. [Lean proof of the scaled first-order rear expansion](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder.scaled_rear_first_order) [Lean proof of eventual support at threshold](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder.eventual_support_at_threshold)
 
@@ -124,7 +124,7 @@ Assume also that $N(N(Q_N-Q)-L)\to H$. At any fixed offset $r$ for a nonempty fi
 
 $$
 \begin{aligned}
-N\Big[N\big(|S|N^3p_N^{\rm rear}(r)-Q+\tfrac34D\big)
+N\Big[N\big(|S|N^3p_N^{\mathrm{rear}}(r)-Q+\tfrac34D\big)
  -(L+Q+\tfrac98D)\Big]
 \longrightarrow H+L-\tfrac{15}{8}D .
 \end{aligned}
