@@ -843,6 +843,16 @@ $$
 $$
 The threshold shift is the negative of this ratio. The symmetric finite sums yield $m_4=(N^2-1)(3N^2-5)/35$ and give the displayed coefficient. The asymptotic keeps $N$ fixed. Small moduli can give positive weight on additional antipodal levels. Lean verification of the switch and its coefficient is pending. [Derivation and finite checks](https://github.com/the-omega-institute/trureturing/issues/34016#issuecomment-7148575133)
 
+### Matrix error for a growing front window
+
+Let the front half-width $N$ grow with the modulus and take budget $m=N(N+1)/5$. Write $h=2\pi/q$, $u=Nh$, and $x=j/N$ on the front. The two features $(1+\cos(xu))/2$ and $\sin^2(xu)/u^2$ extend at zero mesh to $1$ and $x^2$. Let $G_N(u)$ denote the matrix obtained by summing the pairwise products of the features over $|j|\le N$ and dividing by $N$. For every real $u$, each entry satisfies
+
+$$
+\left|G_N(u)_{ab}-G_N(0)_{ab}\right|\le 2u^2 .
+$$
+
+The cubic sine remainder gives a uniform error in the second feature. Both features have magnitude at most one on the window, so summation of their products preserves the order $u^2$. When $q/N^{5/2}$ tends to a positive real number, the front matrix error is $O(N^{-3})$. The comparison uses the exact lattice weight $(t-j^2)/Z$, where $t=N(N+1)-1/2$ and $Z$ normalizes the sum over the window. Multiplied by $N$, this quadratic has sign margins of order $N^{-1}$ at $j=N$ and $j=N+1$. The matrix estimate applies to the front window. The full cyclic support also requires control of the antipodal part of the joint moment system and the signs at threshold equality. [Antipodal support problem](https://github.com/the-omega-institute/trureturing/issues/34029)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
