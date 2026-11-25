@@ -16,9 +16,9 @@
       ["Twice as strong for half as long: the same area, the same quarter turn.", "强度加倍、时间减半：面积不变，还是四分之一转。"]
     ], "cues": [{"line": 2, "at": 4.0, "kind": "chime"}]},
     {"id": "order", "name": "PULSES IN A ROW", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
-      ["Change the axis from pulse to pulse, and order matters.", "每个脉冲换一根轴，次序就要紧了。"],
+      ["Now chain three short pulses. How far does their trace stray from the ideal?", "现在把三个短脉冲连起来：它们的迹离理想值差多远？"],
       ["Picture a ledger with two columns: the first-order drift lands entirely in the imaginary one.", "想象一本分两栏的账：一阶漂移全部记在虚部那一栏。"],
-      ["Lean checks a bound for three pulse kernels: the real error is at most five quarters, L to the fifth, t squared.", "Lean 内核检验：三个脉冲核相乘，迹的实部偏差不超过 5/4 · L⁵ · t²。"],
+      ["Lean checks that the real error stays below a fixed constant times t squared.", "Lean 内核检验：迹的实部偏差不超过一个固定常数乘以 t²。"],
       ["Halve the step: the imaginary part about halves, but the real error drops to about a quarter.", "步长减半：虚部大约减半，实部误差却降到大约四分之一。"]
     ], "cues": [{"line": 2, "at": 1.0, "kind": "stamp"}]},
     {"id": "vz", "name": "TURN THE MAP", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
@@ -29,14 +29,14 @@
       ["Turn the map, not the hiker: one number in software, zero nanoseconds.", "不转登山者，只转地图：软件里改一个数，零纳秒。"]
     ], "cues": [{"line": 3, "at": 3.0, "kind": "chime"}, {"line": 4, "at": 1.0, "kind": "impact"}]},
     {"id": "pull", "name": "PUSH OR PULL", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.3, 0.3], "lines": [
-      ["Underneath is a duality: push the state forward, or pull the measurement back.", "底下是一条对偶：把态往前推，或者把测量往回拉。"],
+      ["Underneath is a duality: push the state forward, or pull the measurement back. Turning the frame is the second kind.", "底下是一条对偶：把态往前推，或者把测量往回拉；转参考系属于后一种。"],
       ["Like a photo: turn the subject, or turn the camera back.", "就像拍照：转被拍的人，或者把相机反着转。"],
       ["Step by step, both sides read one, three quarters, one quarter, zero.", "一步一步，两边读到 0 的概率都是 1、3/4、1/4、0。"],
       ["Lean checks this for any channel and a matching dual map, after any whole number of steps.", "Lean 内核检验：任何信道及其迹对偶映射，走任意整数步，读数都相等。"],
       ["A gate need not be a push. Sometimes it is only where you stand.", "门不一定是推一把；有时，只是换了站的位置。"]
     ], "cues": [{"line": 3, "at": 0.8, "kind": "stamp"}]},
     {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
-      ["The area rule and the virtual Z trick are literature results, not formalized in this book.", "面积律与虚拟 Z 的做法是文献结果，本书没有形式化。"],
+      ["The area rule and the virtual Z trick are literature results, not formalized here.", "面积律与虚拟 Z 的做法是文献结果，本书没有形式化。"],
       ["Zero nanoseconds means no extra pulse, not zero error. Detuning, leakage and noise still cost.", "零纳秒是说不加脉冲，不是说零误差；失谐、泄漏与噪声照样要付账。"],
       ["The pulse bound is about a kernel, not gate fidelity. The duality counts steps, not seconds.", "那条脉冲误差界讲的是积分核，不是门的保真度；对偶定理数的是步数，不是秒数。"]
     ]},

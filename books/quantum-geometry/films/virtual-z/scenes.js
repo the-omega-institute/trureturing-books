@@ -12,7 +12,7 @@
             jug are an analogy (argued). Ω/2π = 10 MHz for 25 ns: θ = 2π · 10⁷ · 25 · 10⁻⁹ = π/2, north pole → −y,
             P(0) = 1/2; Ω/2π = 20 MHz for 12.5 ns: the same area (computed).
      order  three real symmetric 2×2 matrices of Frobenius norm 1 (L = 1), A = diag(0.8, 0.6), B = σx/√2,
-            C = [[½, ½], [½, ½]]; pulse0(X, t) = (it)⁻¹(exp(itX) − 1); the imaginary part and the real deviation of
+            C = [[½, ½], [½, −½]] (pairwise non-commuting); pulse0(X, t) = (it)⁻¹(exp(itX) − 1); the imaginary part and the real deviation of
             Tr(pulse0 A · pulse0 B · pulse0 C) from Tr(ABC) at t = 0.4, 0.2, 0.1 (computed) under the bound 5/4 L⁵ t²
             ..... OrderedThreePulseTrace.ordered_three_pulse_real_trace_bound (LEAN). The two-column ledger is an
             analogy for the proof's first-order term being purely imaginary (chapter 11; argued).
@@ -77,7 +77,7 @@ function expIsX(X, s) {
 /* pulse0(X, s) = (s i)⁻¹ (exp(s i X) − 1) for s ≠ 0 (the closed form of the proposition) */
 const pulse0 = (X, s) => cm.sc(cm.sub(expIsX(X, s), cm.I()), cx.div([1, 0], [0, s]));
 /* the three matrices of scene order (Frobenius norm 1 each) */
-const OR_A = [[0.8, 0], [0, 0.6]], OR_B = [[0, Math.SQRT1_2], [Math.SQRT1_2, 0]], OR_C = [[0.5, 0.5], [0.5, 0.5]];
+const OR_A = [[0.8, 0], [0, 0.6]], OR_B = [[0, Math.SQRT1_2], [Math.SQRT1_2, 0]], OR_C = [[0.5, 0.5], [0.5, -0.5]];
 const OR_T = [0.4, 0.2, 0.1];
 const rmul = (P, Q) => [[P[0][0] * Q[0][0] + P[0][1] * Q[1][0], P[0][0] * Q[0][1] + P[0][1] * Q[1][1]], [P[1][0] * Q[0][0] + P[1][1] * Q[1][0], P[1][0] * Q[0][1] + P[1][1] * Q[1][1]]];
 const OR_TRABC = (() => { const M = rmul(rmul(OR_A, OR_B), OR_C); return M[0][0] + M[1][1]; })();
@@ -138,8 +138,15 @@ FILM.init.push(() => {
   }
   const rows = OR_T.map(orRow);
   rows.forEach(r => check(r.dev <= r.bound, `deviation under 5/4 t² at t = ${r.t}`));
-  check(['0.2273', '0.1183', '0.0597'].every((s, i) => rows[i].im.toFixed(4) === s), 'imaginary readouts');
-  check(['0.0629', '0.0161', '0.0040'].every((s, i) => rows[i].dev.toFixed(4) === s), 'deviation readouts');
+  check(['0.0758', '0.0397', '0.0201'].every((s, i) => rows[i].im.toFixed(4) === s), 'imaginary readouts');
+  check(['0.0360', '0.0092', '0.0023'].every((s, i) => rows[i].dev.toFixed(4) === s), 'deviation readouts');
+  /* the three matrices pairwise do not commute, and the trace does not depend on the order of the three kernels */
+  const comm = (P, Q) => { const a = rmul(P, Q), b = rmul(Q, P); return Math.hypot(a[0][0] - b[0][0], a[0][1] - b[0][1], a[1][0] - b[1][0], a[1][1] - b[1][1]); };
+  check(comm(OR_A, OR_B) > 0.1 && comm(OR_B, OR_C) > 0.1 && comm(OR_A, OR_C) > 0.1, 'A, B, C pairwise non-commuting');
+  for (const t of OR_T) {
+    const P = [OR_A, OR_B, OR_C].map(X => pulse0(X, t)), T0 = cm.tr(cm.mul(cm.mul(P[0], P[1]), P[2]));
+    for (const [i, j, k] of [[0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]]) { const T = cm.tr(cm.mul(cm.mul(P[i], P[j]), P[k])); check(near(T[0], T0[0], 1e-12) && near(T[1], T0[1], 1e-12), `order-free trace at t = ${t}`); }
+  }
   check(['0.2000', '0.0500', '0.0125'].every((s, i) => rows[i].bound.toFixed(4) === s), 'bound readouts');
   check(rows[0].im / rows[1].im > 1.85 && rows[0].im / rows[1].im < 2.05 && rows[1].im / rows[2].im > 1.85 && rows[1].im / rows[2].im < 2.05, 'imaginary part about halves');
   check(rows[0].dev / rows[1].dev > 3.8 && rows[0].dev / rows[1].dev < 4.1 && rows[1].dev / rows[2].dev > 3.8 && rows[1].dev / rows[2].dev < 4.1, 'real error to about a quarter');
@@ -283,7 +290,7 @@ SCENES.hook = S => {
     chip(1400, 760, 600, 70, 'every turn = a push ?', C.white, qa, 30, F.mono);
     txt('谁在推？', 1400, 830, { size: 30, fam: F.zh, w: 700, align: 'center', c: C.white, a: a * Q(S, 2, 'Who is pushing', 0.6) });
   }
-  txt('typical numbers: engineering literature · 典型数值：工程文献', 120, 830, { size: 18, fam: F.zh, w: 700, c: C.argued, a: a * 0.9 });
+  txt('typical numbers: engineering literature · 典型数值：工程文献', 120, 830, { size: 22, fam: F.zh, w: 700, c: C.argued, a: a * 0.9 });
 };
 
 /* ======================================================================= */
@@ -315,8 +322,8 @@ SCENES.area = S => {
   sh.bead(NORTH, { color: C.white, r: 7, alpha: 0.7 });
   sh.bead(r, { color: C.now, r: 11 });
   sh.end(a);
-  const lx = V([1.3, 0, 0]), ln = V(NORTH), lr = V(r);
-  txt('X  axis · 转轴', lx[0] + 8, lx[1] + 34, { size: 22, fam: F.zh, w: 700, c: C.vio, a });
+  const lx = V([-1.3, 0, 0]), ln = V(NORTH), lr = V(r);
+  txt('X  axis · 转轴', lx[0] - 10, lx[1] + 32, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.vio, a });
   txt('|0⟩', ln[0] - 54, ln[1] - 10, { size: 26, fam: F.math, w: 700, c: C.white, a });
   txt('ψ', lr[0] + 16, lr[1] - 14, { size: 32, fam: F.math, w: 700, c: C.now, a });
   txt('rotating frame · 旋转参考系', 130, 196, { size: 22, fam: F.zh, w: 700, c: C.white, a: a * at(S, 0, 0.6) });
@@ -351,7 +358,7 @@ SCENES.area = S => {
     rich([['P(0) = cos²(θ/2) = ', C.white], [fmt(p0(r), 3), C.cyan]], 990, 742, { size: 28, a: ra });
     txt(done ? 'quarter turn · 四分之一转  ✓ π/2' : '', 990, 794, { size: 24, fam: F.zh, w: 700, c: C.now, a: ra });
   }
-  txt('area law: literature, not formalized in this book · 面积律：文献结果，本书未形式化', 140, 836, { size: 18, fam: F.zh, w: 700, c: C.argued, a: a * 0.95 });
+  txt('area law: literature, not formalized here · 面积律：文献结果，未形式化', 140, 836, { size: 22, fam: F.zh, w: 700, c: C.argued, a: a * 0.95 });
 };
 
 /* ======================================================================= */
@@ -381,7 +388,8 @@ SCENES.order = S => {
     pulseBox(190 + i * 220, 330, 170, 70, on, pa * on, cols[i]);
     txt(n, 275 + i * 220, 300, { size: 30, fam: F.math, w: 700, align: 'center', c: C.white, a: pa * on });
   });
-  txt('order matters · 次序要紧', 160, 380, { size: 22, fam: F.zh, w: 700, c: C.white, a: pa });
+  txt('three axes, chained · 三根轴，依次相乘', 160, 380, { size: 22, fam: F.zh, w: 700, c: C.white, a: pa });
+  txt('this trace does not depend on the order · 这个迹与次序无关', 160, 430, { size: 20, fam: F.zh, w: 700, c: C.dim, a: pa * at(S, 1, 0.6) });
   /* the matrices (shown with the Lean line) */
   const ma = a * at(S, 2, 0.6, 0.6);
   if (ma > 0.003) {
@@ -401,10 +409,11 @@ SCENES.order = S => {
     txt('t', c1, Y1 + 76, { size: 26, fam: F.math, w: 700, c: C.white, a: la });
     txt('Im Tr', c2, Y1 + 76, { size: 24, fam: F.mono, w: 700, c: C.mag, a: la });
     txt('|Re Tr − Tr(ABC)|', c3 - 20, Y1 + 76, { size: 20, fam: F.mono, w: 700, c: C.cyan, a: la });
-    txt('5/4 L⁵ t²', c4 + 10, Y1 + 76, { size: 22, fam: F.mono, w: 700, c: C.lean, a: la * Q(S, 2, 'five quarters', 0.5) });
+    txt('5/4 L⁵ t²', c4 + 10, Y1 + 76, { size: 22, fam: F.mono, w: 700, c: C.lean, a: la * Q(S, 2, 't squared', 0.5) });
     line(c1, Y1 + 96, X1 + 830, Y1 + 96, C.dim, la * 0.7, 1.2);
-    txt('imaginary · 虚部栏', c2, Y1 + 126, { size: 18, fam: F.zh, w: 700, c: C.mag, a: la * 0.9 });
-    txt('real · 实部栏', c3, Y1 + 126, { size: 18, fam: F.zh, w: 700, c: C.cyan, a: la * 0.9 });
+    txt('leading term ∝ t · 主项是一阶', c2, Y1 + 152, { size: 18, fam: F.zh, w: 700, c: C.mag, a: la * 0.8 });
+    txt('imaginary · 虚部栏', c2, Y1 + 124, { size: 20, fam: F.zh, w: 700, c: C.mag, a: la * 0.9 });
+    txt('real · 实部栏', c3, Y1 + 124, { size: 20, fam: F.zh, w: 700, c: C.cyan, a: la * 0.9 });
     const rows = OR_T.map(orRow);
     rows.forEach((rw, i) => {
       const ra = la * (i === 0 ? at(S, 1, 0.6, 1.0) : at(S, 3, 0.6, 1.2 * (i - 1) + 0.6));
@@ -413,7 +422,7 @@ SCENES.order = S => {
       txt(rw.t.toFixed(1), c1, y, { size: 28, fam: F.mono, w: 700, c: cur ? C.now : C.white, a: ra });
       txt(rw.im.toFixed(4), c2, y, { size: 28, fam: F.mono, w: 700, c: C.mag, a: ra });
       txt(rw.dev.toFixed(4), c3, y, { size: 28, fam: F.mono, w: 700, c: C.cyan, a: ra });
-      txt(rw.bound.toFixed(4), c4 + 10, y, { size: 28, fam: F.mono, w: 700, c: C.lean, a: ra * Q(S, 2, 'five quarters', 0.5) });
+      txt(rw.bound.toFixed(4), c4 + 10, y, { size: 28, fam: F.mono, w: 700, c: C.lean, a: ra * Q(S, 2, 't squared', 0.5) });
       if (i > 0) {
         txt(`÷${(rows[i - 1].im / rw.im).toFixed(2)}`, c2 + 120, y - 2, { size: 18, fam: F.mono, w: 700, c: C.mag, a: ra * 0.85 });
         txt(`÷${(rows[i - 1].dev / rw.dev).toFixed(2)}`, c3 + 120, y - 2, { size: 18, fam: F.mono, w: 700, c: C.cyan, a: ra * 0.85 });
@@ -424,9 +433,9 @@ SCENES.order = S => {
   /* line 2: Lean */
   const ga = a * Q(S, 2, 'Lean checks', 0.6);
   if (ga > 0.003) {
-    panel(X1, 640, 860, 185, ga, C.lean, 'ANY REAL SYMMETRIC A, B, C · 任意实对称');
+    panel(X1, 640, 860, 185, ga, C.lean, 'REAL SYMMETRIC, ‖·‖_F ≤ L, t > 0 · 实对称、范数 ≤ L');
     rich([['|Re Tr(p₀A · p₀B · p₀C) − Tr(ABC)| ', C.white], ['≤ 5/4 · L⁵ · t²', C.lean]], X1 + 30, 712, { size: 26, a: ga });
-    txt('p₀ = pulse0: an integral kernel, not a gate fidelity · 积分核，不是门保真度', X1 + 30, 752, { size: 17, fam: F.zh, w: 700, c: C.white, a: ga * 0.9 });
+    txt('p₀ = pulse0: an integral kernel, not a gate fidelity · 积分核，不是门保真度', X1 + 30, 752, { size: 21, fam: F.zh, w: 700, c: C.white, a: ga * 0.95 });
     leanChip(X1 + 30, 798, VZ_LEAN.ordered_three_pulse_real_trace_bound, ga, { size: 17 });
   }
   stamp('O(t²)', 1690, 560, Q(S, 2, 'squared', 0.5) * (1 - at(S, 3, 0.4, 2.0)), C.lean, 34, -0.06);
@@ -472,7 +481,7 @@ SCENES.vz = S => {
     sh.bead(lit, { color: C.white, r: 9, alpha: litA });
     if (showV) {
       const n = axisPhi(-VZ_LAM);
-      sh.line([V3().scale(n, -1.3), V3().scale(n, 1.3)], { color: C.vio, width: 4, alpha: 0.95 });
+      sh.line([V3().scale(n, -1.55), V3().scale(n, 1.3)], { color: C.vio, width: 4, alpha: 0.95 });
       sh.line(QG_SPHERE.arcAbout(mid, n, Math.PI / 2 * kv), { color: C.now, width: 4.5, alpha: 1 });
       sh.bead(vir, { color: C.now, r: 11 });
     }
@@ -486,8 +495,8 @@ SCENES.vz = S => {
     const q = V(lit);
     txt('literal · 照字面', q[0] + 16, q[1] + 34, { size: 22, fam: F.zh, w: 700, c: C.white, a: a * (showV ? 0.8 : 1) });
     if (showV) {
-      const n = V(V3().scale(axisPhi(-VZ_LAM), 1.3)), qv = V(vir);
-      txt('φ = −60°', n[0] + 6, n[1] + 30, { size: 24, fam: F.mono, w: 700, c: C.vio, a: a * kv });
+      const n = V(V3().scale(axisPhi(-VZ_LAM), -1.55)), qv = V(vir);
+      txt('axis φ = −60°', n[0] + 12, n[1] - 8, { size: 24, fam: F.mono, w: 700, c: C.vio, a: a * kv });
       txt('virtual · 虚拟', qv[0] - 20, qv[1] + 40, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.now, a: a * kv });
     }
     const ra = a * Q(S, 3, 'same height', 0.6), rr = Math.sqrt(0.75), rq = V([-Math.cos(V.yaw) * rr, Math.sin(V.yaw) * rr, -0.5]);
@@ -530,13 +539,13 @@ SCENES.vz = S => {
     rich([['virtual  ', C.now], [fmt(p0(virEnd), 2), C.cyan]], X1 + 464, 590, { size: 28, a: ea * Q(S, 3, 'one quarter', 0.5) });
     /* end points */
     const pa = a * Q(S, 3, 'sixty degrees around', 0.6);
-    txt(`literal (${fmt(litEnd[0], 3)}, ${fmt(litEnd[1], 3)}, ${fmt(litEnd[2], 3)})  ·  virtual (${fmt(virEnd[0], 3)}, ${fmt(virEnd[1], 3)}, ${fmt(virEnd[2], 3)})`, X1, 660, { size: 20, fam: F.mono, w: 700, c: C.dim, a: pa });
+    txt(`literal (${fmt(litEnd[0], 3)}, ${fmt(litEnd[1], 3)}, ${fmt(litEnd[2], 3)})  ·  virtual (${fmt(virEnd[0], 3)}, ${fmt(virEnd[1], 3)}, ${fmt(virEnd[2], 3)})`, X1, 662, { size: 21, fam: F.mono, w: 700, c: C.dim, a: pa });
     /* the map analogy */
     const ma = a * at(S, 4, 0.6);
     if (ma > 0.003) {
       panel(X1, 690, 860, 140, ma, C.argued, 'ANALOGY · 比方');
       txt('turn the map, not the hiker · 不转登山者，只转地图', X1 + 24, 760, { size: 24, fam: F.zh, w: 700, c: C.white, a: ma });
-      txt('φ_phys = φ − λ: literature, not formalized here · 文献结果，本书未形式化', X1 + 24, 800, { size: 17, fam: F.zh, w: 700, c: C.argued, a: ma * 0.95 });
+      txt('φ_phys = φ − λ: literature, not formalized here · 文献结果，本书未形式化', X1 + 24, 802, { size: 21, fam: F.zh, w: 700, c: C.argued, a: ma * 0.95 });
     }
   }
   if (!l0) stamp('0 ns', 1395, 395, Q(S, 4, 'zero nanoseconds', 0.5), C.cyan, 40, -0.06);
@@ -599,7 +608,7 @@ SCENES.pull = S => {
   const fa = a * at(S, 1, 0.6) * (1 - at(S, 2, 0.5));
   if (fa > 0.003) chip(W / 2, 820, 760, 60, 'analogy · 比方：turn the subject, or the camera', C.argued, fa, 24, F.zh);
   /* line 3: Lean */
-  const la = a * Q(S, 3, 'Lean checks', 0.6) * (1 - at(S, 4, 0.6, 1.6));
+  const la = a * Q(S, 3, 'Lean checks', 0.6) * (1 - clamp((S.u - lineAt(S, 4).s + 0.6) / 0.5));
   if (la > 0.003) {
     panel(460, 300, 1000, 230, la, C.lean, 'ANY CHANNEL Φ, ITS TRACE-DUAL Φ* · 任意信道及其迹对偶映射');
     rich([['Tr(Φᵗ(ρ) · E) ', C.white], ['=', C.lean], [' Tr(ρ · Φ*ᵗ(E))', C.white]], W / 2, 390, { size: 38, a: la, align: 'center' });
@@ -607,7 +616,7 @@ SCENES.pull = S => {
     leanChip(640, 494, VZ_LEAN.observer_pullback_trace_identity, la, { size: 17 });
   }
   /* line 4: the aphorism */
-  const xa = a * at(S, 4, 0.8);
+  const xa = a * at(S, 4, 0.6, 0.1);
   if (xa > 0.003) {
     panel(460, 330, 1000, 170, xa, C.white);
     txt('A gate need not be a push.', W / 2, 400, { size: 40, fam: F.disp, w: 700, align: 'center', c: C.white, a: xa });
