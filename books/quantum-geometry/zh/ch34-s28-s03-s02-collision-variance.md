@@ -196,7 +196,7 @@ $$
 \le\sqrt{pV}\,E_p(\eta).
 $$
 
-若 $W>0$，等价地有 $\liminf_{p\to\infty} E_p(\eta)\sqrt{pV}/(W^{2p}\eta)\ge1/(2\sqrt\pi)$。这个系数超过任意有限加权数据的抛物线下界系数 $3/(5\sqrt5)$，因为次数和具有卷积结构。结论允许固定的实际 ζ 尾段作为输入频率族。随着高度、频率族和分辨率共同变化的统一渐近界，以及高阶碰撞的上界，仍待进一步估计。 [渐近下界](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_asymptotic_lower)
+若 $W>0$，等价地有 $\liminf_{p\to\infty} E_p(\eta)\sqrt{pV}/(W^{2p}\eta)\ge1/(2\sqrt\pi)$。这个系数超过任意有限加权数据的抛物线下界系数 $3/(5\sqrt5)$，因为次数和具有卷积结构。结论允许固定的实际 ζ 尾段作为输入频率族。下一节的尺度条件给出高度、频率族和分辨率共同变化时的统一下界。高阶碰撞的上界仍需进一步估计。 [渐近下界](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_asymptotic_lower)
 
 ## 变化频谱的统一小分辨率下界
 

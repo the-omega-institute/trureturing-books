@@ -196,7 +196,7 @@ $$
 \le\sqrt{pV}\,E_p(\eta).
 $$
 
-When $W>0$, this means $\liminf_{p\to\infty}E_p(\eta)\sqrt{pV}/(W^{2p}\eta)\ge1/(2\sqrt\pi)$. The coefficient exceeds the parabolic lower coefficient $3/(5\sqrt5)$ for arbitrary finite weighted data because the degree sums have convolution structure. A fixed finite tail of actual zeta ordinates is admissible as the input frequency family. Uniform asymptotic estimates when height, frequency family and resolution vary together, and upper bounds for high-order collisions, require further work. [Asymptotic lower bound](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_asymptotic_lower)
+When $W>0$, this means $\liminf_{p\to\infty}E_p(\eta)\sqrt{pV}/(W^{2p}\eta)\ge1/(2\sqrt\pi)$. The coefficient exceeds the parabolic lower coefficient $3/(5\sqrt5)$ for arbitrary finite weighted data because the degree sums have convolution structure. A fixed finite tail of actual zeta ordinates is admissible as the input frequency family. The scale condition in the next section yields a uniform lower bound when height, frequency family and resolution vary together. Upper bounds for high-order collisions require further estimates. [Asymptotic lower bound](lean:D5/S3/Fourier/Concentration/FejerCollisionVariance.fejer_collision_asymptotic_lower)
 
 ## Uniform small-resolution bound for varying spectra
 
