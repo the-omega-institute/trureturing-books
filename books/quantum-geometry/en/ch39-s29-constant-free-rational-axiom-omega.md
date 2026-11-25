@@ -208,6 +208,16 @@ Give a rational Gram matrix diagonal entries $1$ and upper off-diagonal entries 
 
 In $q=\langle1,2,3,3\rangle$, take $e_0$ and the vectors $\frac{1-d_i}{1+d_i}e_0+\frac{2}{1+d_i}e_i$, with $(d_1,d_2,d_3)=(2,3,3)$. They form a unit basis, so their rational Gram matrix has diagonal entries $1$. Here $d=18$. The valuation of $-18$ at $2$ is odd, so it imposes no condition at $2$. At $3$, the nonzero square $-2\bmod3$ lifts to a square, making $-18$ a square as well. There $(18,-1)_3=1$ but $c_3(q)=(2,3)_3^2(3,3)_3=-1$. These readings require seven rational coordinates. Their Gram determinant is $18(1/6)^2=1/2$. The vectors $e_1,e_2,e_3,(1/2,1/2,0,1/2,1/2)$ have the same Gram determinant and use five coordinates. Four coordinates would force the determinant to be a rational square.
 
+The full spectrum can also leave the minimum rational dimension undetermined. Consider two four-point Gram matrices with diagonal entries $1$. In the first, two disjoint edges have inner product $2t$ and the rest have inner product $t$. In the second, the three edges of a triangle have inner product $2t$ and the fourth point is orthogonal to the triangle. Both have spectrum $1+4t,1,1-2t,1-2t$.
+
+::: {.theorem #thm-ch39-cospectral-rational-gram title="Equal spectra with different rational coordinate minima" lean="D5/S3/Quantum/AURICOmega/RationalGramCospectral.thresholds_on_conic"}
+Let nonzero rationals $u,v$ satisfy $5u^2+7v^2=3$, and set $t=(5u^2-1)/4$. The two Gram matrices above have identical characteristic polynomials. The first is realizable in $\mathbb Q^n$ exactly when $n\ge7$, and the second exactly when $n\ge6$.
+:::
+
+Take $u=v=1/2$, so $t=1/16$. Rational changes of basis reduce the two Gram forms to orthogonal vectors with squared lengths $(1,5,7,7)$ and $(1,1,7,35)$, respectively. A six-dimensional realization of the first would let us align the first three vectors with $e_1$, $2e_2+e_3$, and $e_2-2e_3+e_4+e_5$. Orthogonality then reduces the last squared length to $35x^2+y^2+2z^2=14$. Clear denominators, reduce modulo $7$, divide by $7$, and reduce again. The two reductions force all three numerators and the denominator to be divisible by $7$, giving a descent. In seven dimensions, $e_4-e_5+e_6+2e_7$ supplies the required squared length $7$.
+
+In five dimensions, the first two unit axes of the second form leave a three-dimensional complement, where squared length $7$ meets the three-square obstruction. In six dimensions, take $e_1,e_2$ and place $(2,1,1,1)$ and $(3,-5,-1,0)$ in the remaining four coordinates. Along the conic, $1+4t=5u^2$ and $1-2t=7v^2/2$. Rational rescaling returns each form to its form at the base point. Lines of rational slope through $(1/2,1/2)$ give infinitely many such parameters.
+
 ## 32.5.4 Formal Anchors, Literature Boundaries, and Constant-Free Rational Audit {#sec-ch39-29-4}
 
 We gather the fifteen frozen theorems anchoring the constant-free rational skeleton of $\mathrm{AXIOM}\text{-}\Omega$, the integer-coefficient Chebyshev doubling equivalence, and the three flat/discrete residual bounds into the following theorem box:
