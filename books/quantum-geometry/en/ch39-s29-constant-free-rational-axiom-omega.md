@@ -218,7 +218,19 @@ The similarity follows by choosing rational eigenbases independent of $t$. Take 
 
 In five dimensions, the first two unit axes of the second form leave a three-dimensional complement, where squared length $7$ meets the three-square obstruction. In six dimensions, take $e_1,e_2$ and place $(2,1,1,1)$ and $(3,-5,-1,0)$ in the remaining four coordinates. Along the conic, $1+4t=5u^2$ and $1-2t=7v^2/2$. Rational rescaling returns each form to its form at the base point. Lines of rational slope through $(1/2,1/2)$ give infinitely many such parameters. At $t=0$ both matrices are the identity and four coordinates suffice.
 
-The same two matrix families also give the reverse dimension ordering. This occurs on a second conic, with a two-coordinate gap.
+When can the two matrices be realized in four rational coordinates? At this dimension they share an arithmetic criterion.
+
+::: {.theorem #thm-ch39-cospectral-four-coordinates title="The four-coordinate criterion for both cospectral matrices" lean="D5/S3/Quantum/AURICOmega/RationalGramCospectral.four_coordinate_criterion"}
+Let $t\in\mathbb Q$. Each of the paired-edge and triangle-block matrices is realizable in $\mathbb Q^4$ exactly when $t=1/2$, or when $1+4t$ is a rational square and $2(1-2t)$ is a sum of two rational squares.
+:::
+
+Away from the two singular endpoints, a rational square factor $G=XX^{\mathsf T}$ forces the common determinant $(1+4t)(1-2t)^2$ to be a square. This gives $1+4t=s^2$ for a nonzero rational $s$. Write $B=2(1-2t)$, so $s^2+B=3$. Rational changes of basis put the paired-edge form into diagonal form with coefficients $(1,1,B,B)$ and the triangle-block form into $(3,1,B,3B)$. In the $(1,B)$ plane of the first form, the basis $(s,1)$, $(B,-s)$ has orthogonal coefficients $(3,3B)$, making the two forms rationally congruent.
+
+Align the two orthogonal unit vectors with standard axes. The remaining rational plane must contain a vector of squared length $B$. Conversely, if $B=x^2+y^2$, then $(x,y)$ and $(-y,x)$ give the required orthogonal pair. At $t=-6/25$, the values $(s,x,y)=(1/5,1,7/5)$ satisfy both conditions. At $t=-3/16$ we have $1+4t=1/4$ and $B=11/4$. If $B$ were a sum of two rational squares, clearing denominators and reducing modulo $11$ would force both numerators and the denominator to be divisible by $11$.
+
+At $t=-1/4$, the diagonal forms are $(1,0,3,3)$ and $(0,1,3,1)$. In the first, align the unit vector and a vector of squared length $3$ with $e_1$ and $e_2+e_3+e_4$. The remaining squared length requires $2(x^2+xy+y^2)=3$. In the second, the complement of two unit axes requires $x^2+y^2=3$. Descent modulo $3$ excludes both equations. At $t=1/2$, the diagonal forms are $(1,3,0,0)$ and $(1,1,0,0)$, both directly realizable in four coordinates.
+
+When the four-coordinate criterion fails, either ordering of the minima can occur with a gap of two coordinates.
 
 ::: {.theorem #thm-ch39-cospectral-five-seven title="A conic with five and seven rational coordinates" lean="D5/S3/Quantum/AURICOmega/RationalGramCospectral.five_seven_on_conic"}
 Let rational $u,v$ satisfy $5u^2+4v^2=9$ and $u\ne0$. For $t=(5u^2/3-1)/4$, the first matrix is realizable in $\mathbb Q^n$ exactly when $n\ge5$, and the second exactly when $n\ge7$.
