@@ -747,6 +747,27 @@ $$
 
 [首次接触与仿射过零的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_first_contact) · [模十二例外的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_twelve_no_contact) · [锐利宽度极限的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_criticalThreshold_limit)
 
+## 整数格点上最小平方和的支撑阈值
+
+在大模数下，零点附近的二次余弦亏量把问题引向整数格点。先固定格点上的二阶矩预算 $m\ge0$。在满足 $\sum_j w_j=1$、$w_j\ge0$、$\sum_j j^2 w_j\le m$ 的权重中，最小化 $\sum_j w_j^2$。这里所有指标 $j$ 都在 $\mathbb Z$ 上，二阶矩要求可和。
+
+对每个正整数 $n$，预算恰在区间 $[(n^2-1)/5,n(n+2)/5]$ 内时，存在 $n^2\le t\le(n+1)^2$ 使最优权重为
+$$
+w_j=\frac{(t-j^2)_+}{Z},\qquad
+Z=\sum_{|j|\le n}(t-j^2)>0.
+$$
+它的二阶矩恰为 $m$。区间两端分别对应 $t=n^2$ 与 $t=(n+1)^2$。在下端点，仅 $|j|\le n-1$ 的位置有正权重。越过该端点后，支撑扩到 $|j|\le n$，并保持到上端点。所有这些闭区间首尾相接，覆盖 $m\ge0$。当 $m=0$ 时，全部权重在零点。
+
+候选权重的二阶矩是有限和的比值。代入 $t$ 的两个端点，用平方和与四次方和公式得到预算的两个端点。连续性给出中间的预算。对任意非负且总质量为一的权重 $v$，设其二阶矩可和，和为 $s$。展开平方差，将交叉项分成仿射函数 $(t-j^2)/Z$ 的贡献和支撑外的修正，得到
+$$
+\sum_j v_j^2-\sum_j w_j^2
+= \sum_j(v_j-w_j)^2+\frac{2(m-s)}{Z}
+  +\frac{2}{Z}\sum_j (j^2-t)_+v_j.
+$$
+最后一项可和且非负。当 $s\le m$ 时，等式给出权重的严格唯一性。由于 $t\ge1$，由 $w_0=t/Z$ 和 $w_0-w_1=1/Z$ 还可唯一确定 $t$ 和 $Z$。相邻闭区间在公共端点给出同样的权重与参数。半开区间 $(n^2-1)/5\le m<n(n+2)/5$ 则给出唯一指标 $n=\lfloor\sqrt{5m+1}\rfloor$。第一段 $0\le m\le3/5$ 只有零点及其两个邻点，权重分别为 $1-m,m/2,m/2$。用第二谐波的尺度 $\lambda=8\pi^2m$ 表示，第一段上端恰为 $24\pi^2/5$。把格点最小值定量传回有限循环群，还须处理第二谐波在对径附近也接近 $1$ 的情形。
+
+[闭区间支撑与精确余项的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer_on_interval) · [全局半开区间分类的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer)
+
 ## 局部统计在截点变化下的误差
 
 频率向下舍入后，是否落在给定的高度区间内可能发生变化。局部测试只计入频率彼此接近的元组，所以改变截点的影响取决于每个变动索引附近还有多少索引。

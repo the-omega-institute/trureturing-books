@@ -747,6 +747,27 @@ $$
 
 [Lean proof of first contact and the affine crossing](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_first_contact) · [Lean proof of the modulus-twelve exception](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_twelve_no_contact) · [Lean proof of the sharp width limit](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_criticalThreshold_limit)
 
+## Support thresholds for the integer-lattice minimum
+
+At large moduli the quadratic deficit of the second cosine near the origin leads to an integer-lattice problem. Fix a second-moment budget $m\ge0$ and minimize $\sum_j w_j^2$ subject to $\sum_j w_j=1$, $w_j\ge0$, and $\sum_j j^2 w_j\le m$. The indices range over $\mathbb Z$, with a convergent sum for the second moment.
+
+For each positive integer $n$, precisely the budgets in $[(n^2-1)/5,n(n+2)/5]$ admit a radius parameter $n^2\le t\le(n+1)^2$ for which the minimizing weights are
+$$
+w_j=\frac{(t-j^2)_+}{Z},\qquad
+Z=\sum_{|j|\le n}(t-j^2)>0.
+$$
+Their second moment is exactly $m$. The two budget endpoints correspond to $t=n^2$ and $t=(n+1)^2$. Only the sites $|j|\le n-1$ have positive weight at the lower endpoint. Above it the support expands to $|j|\le n$ and retains that radius through the upper endpoint. The closed intervals meet at their endpoints and cover all $m\ge0$. At $m=0$ the entire mass is at zero.
+
+The candidate's second moment is a ratio of finite sums. Substituting the two endpoints for $t$ and using the sums of squares and fourth powers gives the two budget endpoints. Continuity gives the intermediate budgets. For any nonnegative law $v$ of mass one with convergent second moment $s$, expand the difference of squared masses. Split the cross term into the contribution from $(t-j^2)/Z$ and the correction outside the support to obtain
+$$
+\sum_j v_j^2-\sum_j w_j^2
+= \sum_j(v_j-w_j)^2+\frac{2(m-s)}{Z}
+  +\frac{2}{Z}\sum_j (j^2-t)_+v_j.
+$$
+The last term is summable and nonnegative. When $s\le m$, the identity gives strict uniqueness of the weights. Since $t\ge1$, their values $w_0=t/Z$ and $w_0-w_1=1/Z$ also determine $t$ and $Z$. The adjacent closed intervals give the same weights and parameters at their shared endpoint. The half-open condition $(n^2-1)/5\le m<n(n+2)/5$ selects the unique index $n=\lfloor\sqrt{5m+1}\rfloor$. On the first interval $0\le m\le3/5$, the three possible sites have weights $1-m$ at zero and $m/2$ at each neighbor. In the second-harmonic scale $\lambda=8\pi^2m$, the upper endpoint is exactly $24\pi^2/5$. A quantitative transfer of the lattice minimum back to the finite cycle has to account for the second cosine also approaching $1$ near the antipode.
+
+[Lean proof of the closed-interval support and exact remainder](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer_on_interval) · [Lean proof of the global half-open classification](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer)
+
 ## Changing the height cutoff in a local statistic
 
 Rounding a frequency downward can change whether it belongs to a height interval. A local test only sees tuples with nearby entries, so the effect of changing the cutoff can be bounded using the neighborhood of each changed entry.
