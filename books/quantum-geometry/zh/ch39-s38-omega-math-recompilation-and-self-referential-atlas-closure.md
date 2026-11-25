@@ -41,7 +41,7 @@
 
 ### 39.8.1.2 凝聚态 $j = 2$ 有理谐波检验台：一价金 $5d^{10}$ 各向同性对比三价金 $5d^8$ 平面四极切片 {#sec-ch39-8-1-2}
 
-为了在具体凝聚态物质体系中检验 `OmegaMath` 的球面彼得—魏尔有理谐波分解与对称破缺投影（对接 [§33.10](ch39-s12-uniform-field-and-observer-slice.md) 哈尔单态与观测切面显影），我们考察重过渡金属金离子价层 $5d$ 壳层的两类氧化态——满壳层一价金 $\mathrm{Au}^+$（$5d^{10}$）与平面四配位三价金 $\mathrm{Au}^{3+}$（$5d^8$，典型实现为 $[\mathrm{AuCl}_4]^-$ 配离子或三氧化二金 $\mathrm{Au}_2\mathrm{O}_3$ 晶格中的局域变形平面 $\mathrm{AuO}_4$ 单元）。
+为了在具体凝聚态物质体系中检验 `OmegaMath` 的球面彼得—魏尔有理谐波分解与对称破缺投影（对接 [§33.10](ch39-s12-uniform-field-and-observer-slice.md) 哈尔单态与观测切面显影，以及 [§38.17](ch38-s17-auric-trivalent-gold-and-observer-focus-signature.md#sec-ch38-auric-trivalent-gold-and-observer-focus-signature) 所破译的 **`AURIC`** 观察者焦点签名），我们考察重过渡金属金离子价层 $5d$ 壳层的两类氧化态——满壳层一价金 $\mathrm{Au}^+$（$5d^{10}$，*Aurous*）与平面四配位三价金 $\mathrm{Au}^{3+}$（$5d^8$，*Auric*，典型实现为 $[\mathrm{AuCl}_4]^-$ 配离子或三氧化二金 $\mathrm{Au}_2\mathrm{O}_3$ 晶格中的局域变形平面 $\mathrm{AuO}_4$ 单元）。
 
 在 `ProjTernion` 到三维旋转群 $\mathrm{SO}(3, \mathbb{Q})$ 的伴随商映射下，设旋子 $p = (w, x, y, z)$ 相对基准态 $p_0 = (1, 0, 0, 0)$ 的齐次射线保真度为 $\kappa(p_0, p) = \frac{w^2}{\lVert p\rVert^2} = \cos^2\alpha \in \mathbb{Q} \cap [0, 1]$（其中 $\Delta\theta = 2\alpha$ 为三维空间旋转角）。由不可约酉特征标正定核与维数平方和定理（[`posSemidef_sum_character_kernel_iff`](lean:D5/S3/FiniteGroups/GroupAlgebra/UnitaryCharacterKernel.posSemidef_sum_character_kernel_iff)、[`finrank_span_sum_character_kernel`](lean:D5/S3/FiniteGroups/GroupAlgebra/CharacterKernelRank.finrank_span_sum_character_kernel)，`LEAN ✓`）及切比雪夫多项式偶次展开（`手工推导`），原子的五条实 $5d$ 轨道 $\{d_{z^2}, d_{xz}, d_{yz}, d_{xy}, d_{x^2-y^2}\}$ 精确张成自旋 **$j = 2$** 的五维不可约谐波壳层（维数 $2j + 1 = 5$），其球面特征标为纯整系数有理多项式
 
@@ -52,7 +52,7 @@ $$
 （在 $\kappa \in \{1, \frac{1}{2}, \frac{1}{4}, 0\}$ 处分别给出精确整数特征值 $\{5, -1, -1, +1\}$）。在单位球面角向电四极算符 $\widehat{Q}_{ab} = 3n_a n_b - \delta_{ab}$（$a, b \in \{x, y, z\}$，$\operatorname{Tr}\widehat{\mathbf{Q}} = 0$）下对五条实归一化 $d$ 谐波逐一求期望（`手工推导` / `NUM`，物理电四极矩另乘电荷—径向因子 $-e\langle r^2\rangle_{5d}$ 并叠加以配体晶格贡献，`文献结果`）：
 
 - **一价金 $\mathrm{Au}^+$（$5d^{10}$ 满壳层）的严格各向同性**：五条实 $d$ 轨道各自的无迹对角四极期望分别为 $d_{z^2} : (-\frac{2}{7}, -\frac{2}{7}, +\frac{4}{7})$，$d_{xz} : (+\frac{2}{7}, -\frac{4}{7}, +\frac{2}{7})$，$d_{yz} : (-\frac{4}{7}, +\frac{2}{7}, +\frac{2}{7})$，以及 $d_{xy}, d_{x^2-y^2} : (+\frac{2}{7}, +\frac{2}{7}, -\frac{4}{7})$（非对角元全为 $0/1$）。满壳层双占据将全部五枚正交幂等元等权相加，迹和退化回 **`j = 0` 单极标量恒等球** $\mathbf{Q}(5d^{10}) = \mathbf{0}_{3\times 3}$，四极矩恒为零（严格各向同性）；
-- **平面四方三价金 $\mathrm{Au}^{3+}$（$5d^8$）的本征四极各向异性与多晶哈尔平均**：相对论性 $5d$ 轨道扩张配合强 $D_{4h}$ 平面配位场分裂，抽空平面内反键轨道 $5d_{x^2-y^2}$ 上的两枚电子，等价于在五维 $j = 2$ 壳层上施加一枚秩为 $4$ 的正交平面投影算子，留下精确有理无迹角向四极张量
+- **平面四方三价金 $\mathrm{Au}^{3+}$（$5d^8$）的本征四极各向异性与多晶哈尔平均**：相对论性 $5d$ 轨道扩张配合强 $D_{4h}$ 平面配位场分裂，抽空平面内反键轨道 $5d_{x^2-y^2}$ 上的两枚电子（如 [§38.17](ch38-s17-auric-trivalent-gold-and-observer-focus-signature.md#sec-ch38-auric-trivalent-gold-and-observer-focus-signature) [@thm-ch38-auric-quadrupole-haar-observer-anchors] 所证，张开赤道 `1/2` 接收视界窗并立起轴向 `0` 阶结晶脊线），等价于在五维 $j = 2$ 壳层上施加一枚秩为 $4$ 的正交平面投影算子，留下精确有理无迹角向四极张量
 
   $$
   \mathbf{Q}_{\mathrm{phys}}(5d^8) \;=\; \mathbf{Q}(5d^{10}) - 2\,\mathbf{Q}(d_{x^2-y^2}) \;=\; \operatorname{diag}\!\Bigl(-\frac{4}{7},\; -\frac{4}{7},\; +\frac{8}{7}\Bigr) \;=\; \frac{12}{7}\,\operatorname{diag}\!\Bigl(-\frac{1}{3},\; -\frac{1}{3},\; +\frac{2}{3}\Bigr) \;\in\; \mathbb{Q}^{3\times 3}

@@ -534,6 +534,56 @@ $$
 
 [互斥系数上界的 Lean 证明](lean:D5/S3/Fourier/Concentration/DisjointCharacterEnvelope.coefficient_envelope)
 
+### 共轭相位下带符号的截断余项
+
+在上述共轭权重的情形，令 $C_T=[x^d]e^{Sx}\prod_{j\in T}(e^{-A_jx}-1)$。记 $B_T=0$ 若 $|T|>d$，否则定义
+$$
+B_T=\left(\prod_{j\in T}w_j\right)\frac{(|S|+\sum_{j\in T}w_j)^{d-|T|}}{(d-|T|)!}.
+$$
+逐个子集保留符号，得到实数恒等式及次数敏感的界
+$$
+[x^dy^d]Q_k=\sum_{\substack{T\subseteq J\\|T|\le d}}(-1)^{|T|}|C_T|^2,\qquad |C_T|\le B_T.
+$$
+右轴的局部修正是左轴修正取共轭后的相反数，故每个子集恰好贡献上述带符号平方。局部指数尾的第 $n\ge1$ 次系数模长至多为 $w_j^n/(n-1)!$，于是它逐系数受 $w_j x e^{w_j x}$ 控制。柯西乘积逐次保留该非负界，乘上 $e^{|S|x}$ 后从总次数中扣除 $|T|$，得到 $B_T$。例如 $d=1$ 时，混合系数为 $|S|^2-\sum_jw_j^2$，所以 $S=0$ 时全部贡献非正。
+
+对任意自然数 $K$，从该混合系数中减去 $|T|\le\min(d,K)$ 的带符号和，所得余项 $R_K$ 满足
+$$
+-\!\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ 为奇数}}}B_T^2\le R_K\le
+\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ 为偶数}}}B_T^2.
+$$
+余项恰为未保留的偶数阶平方和减去奇数阶平方和。当 $K\ge d$ 时余项为零。乘上非负的傅里叶权重并求和时，可继续保留已计算的负贡献。这为下述 Fejér 频带估计提供了随次数变化的精细界。实际 ζ 零点对应的高阶子集平方和以及异常字符的总权重仍需要新的算术估计。 [Lean 带符号展开证明](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_expansion) [Lean 奇偶余项界证明](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_remainder)
+
+#### 中心化后的二次指数系数界
+
+保持 $C_T$ 的定义，令 $k_T=|T|$、$n=d-k_T$、$U_T=S-\frac12\sum_{j\in T}A_j$ 及 $V_T=\sum_{j\in T}w_j^2$。当 $k_T\le d$ 时，还可用
+$$
+|C_T|\le\left(\prod_{j\in T}w_j\right)\sum_{m=0}^{\lfloor n/2\rfloor}\frac{|U_T|^{n-2m}(V_T/24)^m}{(n-2m)!m!}.
+$$
+这一界保留了被选子集的中心相位和与平方权重。具体地，局部差分满足
+$$
+e^{-A_jx}-1=-A_j x e^{-A_j x/2}\sum_{m\ge0}\frac{(A_jx/2)^{2m}}{(2m+1)!}.
+$$
+由 $6^m m!\le(2m+1)!$，局部偶次系数的模长逐项受 $e^{w_j^2 x^2/24}$ 控制。抽取 $k_T$ 个线性因子，合并相位指数，对柯西乘积逐系数估计，得到 $e^{|U_T|x+V_T x^2/24}$ 在次数 $n$ 的系数。若 $k_T>d$，原系数为零。取 $n=0$ 或 $n=1$ 时上界为等式。若 $U_T=0$ 且 $n$ 为奇数，系数必为零。对于用任意指数参数 $c$ 代替 $S$ 的一般形式，取单元素集 $T=\{j\}$、$A_j\ne0$ 及 $c=A_j/2$，在 $d=3$ 时有 $|C_T|=w_j^3/24$，二次指数控制的常数 $1/24$ 在此达到等号。[双曲正弦的幂级数](https://dlmf.nist.gov/4.33.E2)
+
+可将此界用于上面的奇、偶余项预算，与先前的 $B_T$ 逐子集取较小值。在实际 ζ 尾段，仍须估计带字符权重的子集中心相位和的分布，并控制增长次数下的总余项。 [中心化交叠系数界的 Lean 证明](lean:D5/S3/Fourier/Concentration/CenteredDisjointCharacterBound.centered_overlap_bound)
+
+#### 带符号主项和与显式误差
+
+中心化的偶次因子常数项均为一。沿用上述记号，对 $|T|\le d$ 定义
+$$
+P_T=\left(\prod_{j\in T}(-A_j)\right)\frac{U_T^n}{n!},\qquad h_T=\frac{|U_T|^n}{n!},\qquad H_T=[x^n]e^{|U_T|x+V_T x^2/24},\qquad A_T=\prod_{j\in T}w_j.
+$$
+将偶次因子的乘积及其二次指数实数上界同时减去一后，逐系数控制仍成立。因此
+$$
+|C_T-P_T|\le A_T(H_T-h_T),\qquad
+\big||C_T|^2-|P_T|^2\big|\le A_T^2(H_T^2-h_T^2).
+$$
+第二个不等式将两个模长之差的反三角不等式上界乘以两模长之和，后者至多为 $A_T(H_T+h_T)$。结合局部误差估计与带符号展开，得到
+$$
+\left|[x^dy^d]Q_k-\sum_{\substack{T\subseteq J\\|T|\le d}}(-1)^{|T|}|P_T|^2\right|\le\sum_{\substack{T\subseteq J\\|T|\le d}}A_T^2(H_T^2-h_T^2).
+$$
+当 $d-|T|=0,1$ 时对应项的误差为零，空集的误差也是零。特别地，$d\le2$ 时整个近似为精确恒等式。对每个字符该不等式均成立，并可用非负傅里叶权重求平均。实际 ζ 零点所需尺度下的交替主项和与总误差仍待估计。 [Lean 主系数证明](lean:D5/S3/Fourier/Concentration/CenteredDisjointPrincipal.centered_principal_remainder) [Lean 混合误差证明](lean:D5/S3/Fourier/Concentration/CenteredDisjointPrincipal.mixed_centered_principal_error)
+
 ### 用非负傅里叶权重估计频带
 
 记 $R_H$ 为 $[-H,H]$ 中整数的模 $q$ 剩余类。对任意非负的剩余类质量 $M(r)$，定义 $B_N(k)=\sum_{j=0}^{N-1}\chi_k(j)$，并用负号特征标定义 $\widehat M(k)=\sum_rM(r)\chi_k(-r)$。当整数 $N>H\ge0$ 时，
