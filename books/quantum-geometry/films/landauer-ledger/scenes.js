@@ -502,7 +502,7 @@ SCENES.edge = S => {
   const m = LL_KT / 1e-21;
   const rows = [
     { k: 0, title: 'ENTROPY, NOT JOULES · 算的是熵', en: `k_B T ln 2 at 300 K ≈ ${m.toFixed(2)} × 10⁻²¹ J`, zh: '室温下每比特约 2.87 仄焦：兰道尔的物理，文献结果', note: 'the formalized theorems count nats · 形式化定理只算奈特' },
-    { k: 1, title: 'A BOUND, NOT A MACHINE · 只是下界', en: 'no reset protocol that reaches −ΔS = βQ', zh: '下界不造出能取等的复位方案', note: 'one bath qubit can never reach it · 一个热浴比特永远达不到' }
+    { k: 1, title: 'A BOUND, NOT A MACHINE · 只是下界', en: 'no reset protocol that reaches −ΔS = βQ', zh: '下界不造出能取等的复位方案', note: 'SWAP with one bath qubit: D > 0 for every p > 1/2 · 交换一个热浴比特：p > 1/2 时 D 恒为正' }
   ];
   rows.forEach((rw, i) => {
     const ra = a * at(S, rw.k, 0.6);
