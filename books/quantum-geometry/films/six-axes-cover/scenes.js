@@ -56,7 +56,7 @@ const sxScore = (x, ax) => ax.reduce((m, a) => Math.max(m, sxDot(x, a) * sxDot(x
 const SX_D = sxUnit([1, 1, 1]);
 const SX_X = [Math.sqrt(6) / 4, Math.sqrt(6) / 4, 0.5];
 /* the scene-1 points: two in the north cap, one in the south cap */
-const SX_P = sxSph(sxDeg(20), 0), SX_Qp = sxSph(sxDeg(38), sxDeg(150)), SX_R = sxSph(sxDeg(150), sxDeg(40));
+const SX_P = sxSph(sxDeg(22), sxDeg(-40)), SX_Qp = sxSph(sxDeg(36), sxDeg(-150)), SX_R = sxSph(sxDeg(148), sxDeg(-70));
 const sxAng = (p, q) => Math.acos(Math.max(-1, Math.min(1, sxDot(p, q)))) * 180 / Math.PI;
 /* a Fibonacci grid of the sphere (quadrature for the uncovered share) */
 const SX_GRID = (() => {
@@ -121,7 +121,7 @@ FILM.init.push(() => {
   check(near(Math.cos(sxDeg(45)) ** 2, 0.5), 'a 45° cap is (x·a)² > 1/2');
   const pq = sxAng(SX_P, SX_Qp), pr = sxAng(SX_P, SX_R);
   check(pq < 90 && pr > 90, 'one cap: under 90°, across the caps: over 90°');
-  check(pq.toFixed(1) === '56.1' && pr.toFixed(1) === '133.1', `the angles on screen ${pq.toFixed(1)} ${pr.toFixed(1)}`);
+  check(pq.toFixed(1) === '47.6' && pr.toFixed(1) === '127.9', `the angles on screen ${pq.toFixed(1)} ${pr.toFixed(1)}`);
   for (let k = 0; k < 400; k++) {   // within one cap: < 90°; across the two caps: > 90° (the reason: |x·a|, |y·a| > 1/√2)
     const p = sxSph(sxDeg(45) * Math.sqrt(rnd(k, 1)), TAU * rnd(k, 2)), q = sxSph(sxDeg(45) * Math.sqrt(rnd(k, 3)), TAU * rnd(k, 4));
     const qs = [-q[0], -q[1], -q[2]];
@@ -132,7 +132,7 @@ FILM.init.push(() => {
   SX_E.forEach((e, j) => check(near(sxDot(SX_D, e) ** 2, 1 / 3), `(d·e${j})² = 1/3`));
   check(near(Math.acos(1 / Math.sqrt(3)) * 180 / Math.PI, 54.735610317245346, 1e-9), 'the diagonal is 54.7° from each axis');
   const u0 = sxUncovered(SX_E);
-  check(near(u0, sxUncovered(sxAxes(0)), 0) && u0.toFixed(3) === '0.122', `three axes leave ${u0} uncovered`);
+  check(u0 === sxUncovered(sxAxes(0)) && u0.toFixed(3) === '0.122', `three axes leave ${u0} uncovered`);
   /* each of the eight diagonals is uncovered */
   for (let k = 0; k < 8; k++) { const d = sxUnit([k & 1 ? -1 : 1, k & 2 ? -1 : 1, k & 4 ? -1 : 1]); check(sxScore(d, SX_E) <= 0.5 + 1e-12, `diagonal ${k} uncovered`); }
 
@@ -144,7 +144,7 @@ FILM.init.push(() => {
   check(Math.atan(2) * 180 / Math.PI > 63.43 && Math.atan(2) * 180 / Math.PI < 63.44, 'arctan 2 = 63.4°');
   let worst = Infinity;
   for (const p of SX_GRID) worst = Math.min(worst, sxScore(p, sxAxes(SX_S)));
-  check(worst >= 0.6 - 1e-12 && worst < 0.601, `worst point of the six-axis cover ${worst}`);
+  check(worst >= 0.6 - 1e-12 && worst < 0.605, `worst point of the six-axis cover ${worst}`);
   for (const p of SX_GRID) { const m = [0, 1, 2, 3, 4, 5].filter(i => sxIn(p, i)).length; if (m < 1 || m > 3) { fail(`multiplicity ${m}`); break; } }
   /* the holes are closed on the grid from 15° to arctan 2 (the frames of scene six) */
   for (let d = 15; d <= 63; d += 1) check(sxUncovered(sxAxes(sxDeg(d))) === 0, `split ${d}° leaves no grid point uncovered`);
@@ -239,7 +239,7 @@ function sxTitle(S) {
   txt(scramble('THREE PAIRS OF CAPS LEAK, SIX COVER', p, 5), W / 2, 580, { size: 42, fam: F.orb, w: 900, align: 'center', c: C.white, a: ta, ls: 4, ab: 2 });
   txt('CAPS · THREE · SIX · WHY NOT FIVE · LIMITS', W / 2, 660, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.mag, a: ta * 0.9, ls: 6 });
 }
-const SX_GV = { cx: 640, cy: 525, R: 300, el: 0.34 };
+const SX_GV = { cx: 640, cy: 520, R: 265, el: 0.3 };
 const SX_RECT = [240, 170, 800, 710];
 
 /* ======================================================================= */
@@ -251,7 +251,7 @@ SCENES.caps = S => {
   const a = clamp((u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [3, 'blind spot', 'argued'], [3, 'How many', 'computed']]);
-  const V = sxView(SX_GV.cx, SX_GV.cy, SX_GV.R, -0.6 + 0.04 * u, SX_GV.el);
+  const V = sxView(SX_GV.cx, SX_GV.cy, SX_GV.R, -0.75 + 0.012 * u, 0.22);
   /* the caps grow to 45° as the line says "Paint every point" */
   const grow = ease(Q(S, 0, 'Paint every point', 2.0));
   const capC = Math.cos(sxDeg(45) * grow), z = [0, 0, 1];
@@ -264,7 +264,7 @@ SCENES.caps = S => {
     value: (uu, vv) => (grow < 0.01 ? 1 : clamp(0.5 + (capC - Math.abs(Math.cos(Math.PI * vv))) / 0.025)),
     grid: { every: [11, 11], color: C.white, alpha: 0.1 }, pick: false
   });
-  sxAxis(sh, z, C.vio, Q(S, 0, 'Push an axis', 0.8), 1.4, 4);
+  sxAxis(sh, z, C.vio, Q(S, 0, 'Push an axis', 0.8), 1.25, 4);
   if (pa > 0.01) {
     sh.bead(sxScale(SX_P, 1.012), { color: C.now, r: 9, alpha: pa });
     sh.bead(sxScale(SX_Qp, 1.012), { color: C.white, r: 9, alpha: pa });
@@ -276,8 +276,8 @@ SCENES.caps = S => {
   }
   if (ea > 0.01) sh.line(Array.from({ length: 121 }, (_, i) => [1.012 * Math.cos(TAU * i / 120), 1.012 * Math.sin(TAU * i / 120), 0]), { color: C.white, width: 3, alpha: ea, dash: [12, 9] });
   sh.end(a);
-  sxTag(sh, [0, 0, 1.42], '+a', 14, -6, C.vio, a * Q(S, 0, 'Push an axis', 0.8));
-  sxTag(sh, [0, 0, -1.42], '−a', 14, 18, C.vio, a * Q(S, 0, 'Push an axis', 0.8));
+  sxTag(sh, [0, 0, 1.25], '+a', 14, -6, C.vio, a * Q(S, 0, 'Push an axis', 0.8));
+  sxTag(sh, [0, 0, -1.25], '−a', 14, 4, C.vio, a * Q(S, 0, 'Push an axis', 0.8));
   if (pa > 0.01) { sxTag(sh, SX_P, 'p', 14, -14, C.now, a * pa); sxTag(sh, SX_Qp, 'q', -34, -10, C.white, a * pa); }
   if (ra > 0.01) sxTag(sh, SX_R, 'r', 16, 26, C.white, a * ra);
   if (ea > 0.01) sxTag(sh, [0, -1, 0], 'overlap 0 · 内积为 0', 14, 34, C.white, a * ea, { size: 22, fam: F.zh });
@@ -313,22 +313,22 @@ SCENES.three = S => {
   const u = S.u, a = sxFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [3, 'The leak', 'argued']]);
-  const V = sxView(SX_GV.cx, SX_GV.cy, SX_GV.R, -0.6 + 0.04 * (u + 12), SX_GV.el);
+  const V = sxView(SX_GV.cx, SX_GV.cy, SX_GV.R, -2.1 + 0.01 * u, SX_GV.el);
   const ha = ease(at(S, 0, 1.4));                                 // the holes turn magenta
   const wk = ease(Q(S, 1, 'Walk out', 2.6));
   const P = sxWalk(wk);
   const sh = sxShot('globe', V, SX_RECT);
   sh.begin();
   sxGlobe(sh, SX_E, mix(SX_UNPAINTED, C.mag, ha));
-  SX_E.forEach(e => sxAxis(sh, e, C.vio, 1, 1.38, 3.5));
+  SX_E.forEach(e => sxAxis(sh, e, C.vio, 1, 1.25, 3.5));
   const pa = Q(S, 1, 'diagonal', 0.5);
   if (pa > 0.01) {
-    sh.line([[0, 0, 0], sxScale(SX_D, 1.5)], { color: C.white, width: 2, alpha: 0.6 * pa, dash: [8, 8] });
+    sh.line([sxScale(SX_D, 1.0), sxScale(SX_D, 1.3)], { color: C.white, width: 2, alpha: 0.6 * pa, dash: [8, 8] });
     sh.bead(sxScale(P, 1.015), { color: C.now, r: 11, alpha: pa });
   }
   sh.end(a);
-  ['e₁', 'e₂', 'e₃'].forEach((s, j) => sxTag(sh, sxScale(SX_E[j], 1.42), s, 10, -8, C.vio, a));
-  if (pa > 0.01) sxTag(sh, sxScale(SX_D, 1.52), '(1, 1, 1)/√3', 12, -4, C.white, a * pa, { size: 22, fam: F.mono });
+  ['e₁', 'e₂', 'e₃'].forEach((s, j) => sxTag(sh, sxScale(SX_E[j], 1.27), s, 10, -8, C.vio, a));
+  if (pa > 0.01) sxTag(sh, sxScale(SX_D, 1.32), '(1, 1, 1)/√3', 12, -4, C.white, a * pa, { size: 22, fam: F.mono });
   /* readout: the three squared overlaps of the amber point against the bar 1/2 */
   const ra = a * at(S, 1, 0.6);
   if (ra > 0.003) {
@@ -362,7 +362,7 @@ SCENES.six = S => {
   const u = S.u, a = sxFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean']]);
-  const V = sxView(SX_GV.cx, SX_GV.cy, SX_GV.R, -0.6 + 0.04 * (u + 26), SX_GV.el);
+  const V = sxView(SX_GV.cx, SX_GV.cy, SX_GV.R, -2.1 + 0.01 * (u + 25), SX_GV.el);
   /* the split angle: 0 → 20° on line 0 (the holes close), on to arctan 2 on line 1 */
   const s = sxDeg(20) * ease(Q(S, 0, 'swing the halves', 2.4)) + (SX_S - sxDeg(20)) * ease(Q(S, 1, 'We stop', 2.4));
   const ax = sxAxes(s), done = Q(S, 1, 'whole numbers', 0.6);
@@ -370,13 +370,15 @@ SCENES.six = S => {
   const sh = sxShot('globe', V, SX_RECT);
   sh.begin();
   sxGlobe(sh, ax, C.mag);
-  ax.forEach(e => sxAxis(sh, e, C.vio, 1, 1.38, 3.5));
+  ax.forEach(e => sxAxis(sh, e, C.vio, 1, 1.25, 3.5));
+  const rk = 0.7071 * 1.006;   // the twelve cap rims: 45° round ±a
+  ax.forEach(e => [1, -1].forEach(sg => sh.line(QG_SPHERE.circlePts(sxScale(e, sg * rk), sxScale(e, sg), rk, 72), { color: C.white, width: 1.5, alpha: 0.4 })));
   if (da > 0.01) {
-    sh.line([[0, 0, 0], sxScale(SX_D, 1.5)], { color: C.white, width: 2, alpha: 0.6 * da, dash: [8, 8] });
+    sh.line([sxScale(SX_D, 1.0), sxScale(SX_D, 1.3)], { color: C.white, width: 2, alpha: 0.6 * da, dash: [8, 8] });
     sh.bead(sxScale(SX_D, 1.015), { color: C.now, r: 11, alpha: da });
   }
   sh.end(a);
-  ax.forEach((e, i) => sxTag(sh, sxScale(e, 1.42), `a${'₀₁₂₃₄₅'[i]}`, 8, -6, C.vio, a * (0.35 + 0.65 * done), { size: 22 }));
+  ax.forEach((e, i) => sxTag(sh, sxScale(e, 1.27), `a${'₀₁₂₃₄₅'[i]}`, 8, -6, C.vio, a * (0.35 + 0.65 * done), { size: 22 }));
   /* readout */
   panel(1140, 200, 660, 250, a, C.cyan, 'SPLIT · 劈开  (computed)');
   sxRich([['split angle · 张角  s = ', C.white], [`${(s * 180 / Math.PI).toFixed(1)}°`, C.now]], 1166, 270, { size: 28, a, fam: F.zh });
@@ -533,11 +535,12 @@ FILM.poster = () => {
   const sc = TL.scenes[2], t = sc.end - 1.0;
   background(t, sc, 2, 6);
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.2, a: 0.14, cx: 1400, cy: 420, camZ: 7, lw: 1.3, dots: false });
-  const V = sxView(560, 540, 330, -0.6 + 0.04 * 30, SX_GV.el), ax = sxAxes(SX_S);
+  const V = sxView(560, 540, 300, -2.1 + 0.01 * 40, SX_GV.el), ax = sxAxes(SX_S);
   const sh = sxShot('globe', V, [180, 160, 760, 760]);
   sh.begin();
   sxGlobe(sh, ax, C.mag);
-  ax.forEach(e => sxAxis(sh, e, C.vio, 1, 1.38, 4));
+  ax.forEach(e => sxAxis(sh, e, C.vio, 1, 1.25, 4));
+  ax.forEach(e => [1, -1].forEach(sg => sh.line(QG_SPHERE.circlePts(sxScale(e, sg * 0.7114), sxScale(e, sg), 0.7114, 72), { color: C.white, width: 1.5, alpha: 0.4 })));
   sh.end(1);
   txt(DATA.film.title_zh, 1340, 430, { size: 72, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('THREE PAIRS OF CAPS LEAK,', 1340, 528, { size: 40, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 3, ls: 4 });

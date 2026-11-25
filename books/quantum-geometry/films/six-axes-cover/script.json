@@ -26,7 +26,7 @@
       ["Could five do it? Take a point. The circle at right angles to it must avoid every color holding the point.", "五种行不行？取一个点。和它成直角的那一圈，必须躲开所有含这个点的颜色。"],
       ["This point sits in colors zero, two and four. Its circle runs through one, three and five.", "这个点在 0、2、4 号颜色里；它的直角圈只经过 1、3、5 号。"],
       ["Even a circle needs three colors. So every point misses at least three.", "连一个圆都要三种颜色才盖得住。所以每个点至少缺三种。"],
-      ["Picture countries on a globe, none big enough to wrap it. They cannot meet only in pairs; somewhere, three overlap.", "想象地球仪上的国家，哪个都大不到绕球一圈：它们不可能只两两相邻，总有一处三国重叠。"],
+      ["Picture countries on a globe, none big enough to wrap it. They cannot meet only in pairs; somewhere, three overlap.", "地球仪上的国家都绕不了球一圈，它们没法只两两相邻，总有一处三国重叠。"],
       ["Three present, three missing: six. Lean checks it: every such cover needs at least six colors.", "三种在，三种缺，合起来是六。Lean 内核检验：这样的覆盖至少要六种颜色。"]
     ], "cues": [{"line": 4, "at": 3.0, "kind": "stamp"}]},
     {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
