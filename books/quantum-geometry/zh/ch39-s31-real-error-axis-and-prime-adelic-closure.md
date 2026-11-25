@@ -60,7 +60,7 @@ $$
 \underbrace{\lvert q\rvert_\infty}_{\substack{\text{实数切线位发散}\\\text{（线性误差放大项）}}} \;\times\; \underbrace{\prod_{p \in \mathbb{P}} \lvert q\rvert_p}_{\substack{\text{全体素数超度量收缩}\\\text{（非线性曲率回收项）}}} \;\equiv\; \mathbf{1} \qquad (\forall\, q \in \mathbb{Q}^\times)!
 $$
 
-顺着这行恒等式逐拍审视平直 $+1$ 加法步进，每一颗新素数与每一个合数的几何分工当场水落石出（代数恒等式为 `LEAN ✓` + `手工推导`，曲率回收镜叙事标 `MODEL`）：
+顺着这行恒等式逐拍审视平直 $+1$ 加法步进，每一颗新素数与每一个合数的几何分工当场水落石出（代数恒等式为 `LEAN ✓` + `手工推导`，曲率回收镜叙事标 `MODEL`；在无无穷有理数学 $\mathbf{Math}_\Omega$ 中，对任意有理数 $q = \frac{a}{b} \in \mathbb{Q}^\times$，凡不整除分子分母乘积 $ab$ 的素数均恒满足 $\lvert q\rvert_p = 1$，故上式连乘直接坍缩为严格有限支撑乘积 $\prod_{p \mid ab}\lvert q\rvert_p \equiv 1/\lvert q\rvert_\infty$，并在 $\varepsilon_{\mathrm{self}}$ 停机容差下锁死有限激活寄存器视界 $K \le K_{\max}$，详见 [§31.8](ch31-s08-primorial-cascade-vernier-resolution-and-finite-register-cap.md#sec-ch31-8-2)）：
 
 - 从 $N = 1$ 平直跨一步到 **$N = 2$**：实数轴发生 $\lvert 2\rvert_\infty = 2$ 倍切向膨胀，此前尚无任何素数周期通道，为守住阿代尔总积等于 $\mathbf{1}$ 的闭合铁律，系统**必须开辟第一道本原超度量回收通道 $p = 2$**（赋予 $\lvert 2\rvert_2 = \frac{1}{2}$，使 $2 \times \frac{1}{2} = \mathbf{1}$）；
 - 再跨一步到 **$N = 3$**：实数轴膨胀至 $\lvert 3\rvert_\infty = 3$，检测既有通道 $p = 2$ 发现完全落入盲区（$3 \equiv 1 \pmod 2 \implies \lvert 3\rvert_2 = 1$），总积失衡为 $3 \neq 1$，系统**被迫开辟第二道独立回收通道 $p = 3$**（$\lvert 3\rvert_3 = \frac{1}{3}$，$3 \times \frac{1}{3} = \mathbf{1}$）；
