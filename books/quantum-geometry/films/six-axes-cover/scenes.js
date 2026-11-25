@@ -10,12 +10,16 @@
             cap more than 90° (angles computed on screen); the circle at 90° from the axis (overlap 0, the blind spot
             of chapter 1) is in no cap.
      three  the coordinate axes e1, e2, e3: on the diagonal d = (1, 1, 1)/√3, (d·e_j)² = 1/3 < 1/2 (computed); the
-            uncovered part of the sphere (magenta) opens round all eight diagonals; the uncovered share 12.2 % comes
-            from a 20 000-point Fibonacci grid (computed).
+            uncovered part of the sphere (magenta) opens round all eight diagonals; the six caps are tangent and do not
+            overlap, so the uncovered share is exactly 1 − 3(1 − 1/√2) = 3/√2 − 2 ≈ 12.1 % (computed).
      six    each coordinate axis splits into two unit axes at angle s from it, s from 0 to arctan 2; at s = arctan 2
             they are the six axes (1, ±2, 0), (0, 1, ±2), (±2, 0, 1) of the Lean module (computed: the grid shows no
-            uncovered point from s ≈ 15° on); on the diagonal (d·a_0)² = 3, 3/5 > 1/2, i.e. 2 · 3 = 6 > 5 (computed);
+            uncovered point for s from 15° on, see below); on the diagonal (d·a_0)² = 3, 3/5 > 1/2, i.e. 2 · 3 = 6 > 5 (computed);
             open, orthogonality-free and covering ..... RationalSixAxisCover.rational_six_axis_open_cover (LEAN).
+            The diagonal is covered iff sin 2s > 1/2 (s > 15°); at s = 45° the six points ±e_j score exactly 1/2, so
+            the sphere is covered for s ∈ (15°, arctan 2] except s = 45° (zero-area gaps at 15° and 45°). The
+            uncovered-share readout comes from a midpoint (z, φ) grid of one octant (all axis sets used here are
+            symmetric under the coordinate sign flips), tabulated every 0.5° (computed).
      five   the point x = (√6/4, √6/4, 1/2) of the chapter's example lies in colors 0, 2, 4 and in no other; its circle
             at right angles meets only colors 1, 3, 5, and each of them is alone on some arc (computed);
             the two steps of the proof — every point misses at least three colors (via the circle), some point lies in
@@ -25,7 +29,8 @@
             the two Lean results put together.
      edge   other axes also cover (s = 30°: worst squared overlap (1 + sin 60°)/3 ≈ 0.622 > 1/2, computed); the
             statements are about orthogonality-free open covers, not smooth frames or the hairy ball (chapter 10);
-            the six-axis construction answers Question 3 of Feldman & Wilce, arXiv:2608.13320v1 (literature).
+            the six-axis construction gives the upper-bound half of Question 3 of Feldman & Wilce, arXiv:2608.13320v1,
+            with classical antecedents in antipodal coverings (provenance, as the Lean module states).
 
    On load, FILM.init checks DATA.lean against the two theorems and re-derives every number shown on screen; any
    disagreement is pushed to window.FILM_ERRORS, which stops the render. */
@@ -65,6 +70,23 @@ const SX_GRID = (() => {
   return pts;
 })();
 const sxUncovered = ax => SX_GRID.reduce((n, p) => n + (sxScore(p, ax) <= 0.5 ? 1 : 0), 0) / SX_GRID.length;
+/* the exact uncovered share of the three coordinate axes: six tangent caps, each (1 − cos 45°)/2 of the sphere */
+const SX_U3 = 3 / Math.SQRT2 - 2;
+/* the uncovered share of sxAxes(s) on a midpoint (z, φ) grid of one octant (area-uniform in z), every 0.5° */
+function sxOctant(ax, N = 260) {
+  let u = 0;
+  for (let i = 0; i < N; i++) {
+    const z = (i + 0.5) / N, r = Math.sqrt(1 - z * z);
+    for (let j = 0; j < N; j++) { const f = (j + 0.5) / N * Math.PI / 2; if (sxScore([r * Math.cos(f), r * Math.sin(f), z], ax) <= 0.5) u++; }
+  }
+  return u / (N * N);
+}
+const SX_UTAB = Array.from({ length: Math.floor(64 / 0.5) + 1 }, (_, k) => sxOctant(sxAxes(sxDeg(k * 0.5))));
+const sxUncoveredAt = s => {
+  if (s <= 1e-9) return SX_U3;
+  const x = s * 180 / Math.PI / 0.5, k = Math.min(SX_UTAB.length - 2, Math.floor(x));
+  return lerp(SX_UTAB[k], SX_UTAB[k + 1], x - k);
+};
 /* the circle at right angles to x: arcs of the colors 1, 3, 5 (degrees of the angle t round the circle) */
 const SX_CF = (() => {
   const e = sxUnit([1, -1, 0]), x = SX_X;
@@ -131,8 +153,9 @@ FILM.init.push(() => {
   /* 2. THREE: the diagonal, and the uncovered share */
   SX_E.forEach((e, j) => check(near(sxDot(SX_D, e) ** 2, 1 / 3), `(d·e${j})² = 1/3`));
   check(near(Math.acos(1 / Math.sqrt(3)) * 180 / Math.PI, 54.735610317245346, 1e-9), 'the diagonal is 54.7° from each axis');
-  const u0 = sxUncovered(SX_E);
-  check(u0 === sxUncovered(sxAxes(0)) && u0.toFixed(3) === '0.122', `three axes leave ${u0} uncovered`);
+  check(near(SX_U3, 1 - 6 * (1 - Math.cos(sxDeg(45))) / 2) && (100 * SX_U3).toFixed(1) === '12.1', 'three axes: 3/√2 − 2 = 12.1 %');
+  check(sxDot(SX_E[0], SX_E[1]) === 0 && near(Math.acos(0), 2 * sxDeg(45)), 'the caps of the coordinate axes are tangent (90° = 45° + 45°)');
+  check(Math.abs(SX_UTAB[0] - SX_U3) < 0.002 && Math.abs(sxUncovered(SX_E) - SX_U3) < 0.002, `octant grid ${SX_UTAB[0]} and sphere grid agree with 3/√2 − 2`);
   /* each of the eight diagonals is uncovered */
   for (let k = 0; k < 8; k++) { const d = sxUnit([k & 1 ? -1 : 1, k & 2 ? -1 : 1, k & 4 ? -1 : 1]); check(sxScore(d, SX_E) <= 0.5 + 1e-12, `diagonal ${k} uncovered`); }
 
@@ -146,8 +169,10 @@ FILM.init.push(() => {
   for (const p of SX_GRID) worst = Math.min(worst, sxScore(p, sxAxes(SX_S)));
   check(worst >= 0.6 - 1e-12 && worst < 0.605, `worst point of the six-axis cover ${worst}`);
   for (const p of SX_GRID) { const m = [0, 1, 2, 3, 4, 5].filter(i => sxIn(p, i)).length; if (m < 1 || m > 3) { fail(`multiplicity ${m}`); break; } }
-  /* the holes are closed on the grid from 15° to arctan 2 (the frames of scene six) */
-  for (let d = 15; d <= 63; d += 1) check(sxUncovered(sxAxes(sxDeg(d))) === 0, `split ${d}° leaves no grid point uncovered`);
+  /* the holes: the diagonal is covered iff sin 2s > 1/2; at 15° and 45° there are zero-area gaps */
+  check(near(sxScore(SX_D, sxAxes(sxDeg(15))), 0.5) && near(sxScore([1, 0, 0], sxAxes(sxDeg(45))), 0.5), 'gaps at exactly 15° and 45°');
+  for (let d = 16; d <= 63; d += 1) if (d !== 45) check(sxUncovered(sxAxes(sxDeg(d))) === 0 && SX_UTAB[2 * d] === 0, `tilt ${d}° leaves no grid point uncovered`);
+  for (let d = 0; d <= 14; d += 1) check(sxScore(SX_D, sxAxes(sxDeg(d))) < 0.5, `tilt ${d}° leaves the diagonal uncovered`);
   check(sxUncovered(sxAxes(sxDeg(5))) > 0 && sxUncovered(sxAxes(sxDeg(10))) > 0, 'small splits still leak');
 
   /* 4. FIVE: the point of the example and its circle */
@@ -204,10 +229,18 @@ const sxShot = (key, V, r) => solid(key, { x: r[0], y: r[1], w: r[2], h: r[3], y
 const SX_UNPAINTED = mix(C.dim, C.bg, 0.45);
 /* the painted ball: value 0 (painted, cyan) where the largest squared overlap with the axes exceeds 1/2, value 1
    (the second colour: unpainted grey, or magenta for a hole) where it does not; a thin ramp smooths the rim */
+const SX_SHADE = [mix(C.cyan, C.bg, 0.5), mix(C.cyan, C.white, 0.35)];
+/* covered points take one shade of cyan per color (the axis of largest overlap); holes take the colour `hole` */
+function sxGlobeValue(x, ax) {
+  let m = 0, k = 0;
+  ax.forEach((a, i) => { const d = sxDot(x, a) * sxDot(x, a); if (d > m) { m = d; k = i; } });
+  const shade = 0.5 * (ax.length > 1 ? k / (ax.length - 1) : 0), t = clamp(0.5 + (0.5 - m) / 0.035);
+  return lerp(shade, 1, t);
+}
 function sxGlobe(sh, ax, hole, o = {}) {
   sh.surface('globe', (u, v) => sxSph(Math.PI * v, TAU * u), {
-    u: [0, 1], v: [0, 1], nu: o.nu || 132, nv: o.nv || 66, colors: [C.cyan, hole], range: [0, 1],
-    value: (u, v) => clamp(0.5 + (0.5 - sxScore(sxSph(Math.PI * v, TAU * u), ax)) / 0.035),
+    u: [0, 1], v: [0, 1], nu: o.nu || 132, nv: o.nv || 66, colors: [SX_SHADE[0], SX_SHADE[1], hole], range: [0, 1],
+    value: (u, v) => sxGlobeValue(sxSph(Math.PI * v, TAU * u), ax),
     grid: { every: [11, 11], color: C.white, alpha: 0.1 }, pick: false
   });
 }
@@ -226,7 +259,8 @@ const sxScale = (p, k) => [p[0] * k, p[1] * k, p[2] * k];
 /* a label at a 3D point of the shot, fainter when the ball hides it */
 function sxTag(sh, p, s, dx, dy, col, a, o = {}) {
   const q = sh.anchor(p);
-  txt(s, q.x + dx, q.y + dy, Object.assign({ size: 26, fam: F.math, w: 700, c: col, a: a * (q.hidden ? 0.3 : 1) }, o));
+  if (q.hidden) return;
+  txt(s, q.x + dx, q.y + dy, Object.assign({ size: 26, fam: F.math, w: 700, c: col, a }, o));
 }
 /* opening title */
 function sxTitle(S) {
@@ -279,8 +313,8 @@ SCENES.caps = S => {
   sxTag(sh, [0, 0, 1.25], '+a', 14, -6, C.vio, a * Q(S, 0, 'Push an axis', 0.8));
   sxTag(sh, [0, 0, -1.25], '−a', 14, 4, C.vio, a * Q(S, 0, 'Push an axis', 0.8));
   if (pa > 0.01) { sxTag(sh, SX_P, 'p', 14, -14, C.now, a * pa); sxTag(sh, SX_Qp, 'q', -34, -10, C.white, a * pa); }
-  if (ra > 0.01) sxTag(sh, SX_R, 'r', 16, 26, C.white, a * ra);
-  if (ea > 0.01) sxTag(sh, [0, -1, 0], 'overlap 0 · 内积为 0', 14, 34, C.white, a * ea, { size: 22, fam: F.zh });
+  if (ra > 0.01) sxTag(sh, SX_R, 'r', -34, 30, C.white, a * ra);
+  if (ea > 0.01) { const eq = sh.anchor([0, 0, 0]); txt('overlap 0 · 内积为 0', V.cx - V.R - 24, eq.y + 8, { size: 24, fam: F.zh, w: 700, align: 'right', c: C.white, a: a * ea }); }
 
   /* right side: the rule of one color */
   const ca = a * Q(S, 0, 'forty-five degrees', 0.6);
@@ -292,9 +326,9 @@ SCENES.caps = S => {
   if (ga > 0.003) {
     panel(1160, 440, 640, 210, ga, C.cyan, 'ANGLES · 夹角  (computed)');
     sxRich([['∠(p, q) = ', C.white], [`${sxAng(SX_P, SX_Qp).toFixed(1)}°`, C.cyan], ['  < 90°', C.white]], 1186, 515, { size: 32, a: ga });
-    txt('same cap · 同一块冰盖', 1186, 552, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ga });
+    txt('same cap · 同一块冰盖', 1186, 552, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ga });
     sxRich([['∠(p, r) = ', C.white], [`${sxAng(SX_P, SX_R).toFixed(1)}°`, C.cyan], ['  > 90°', C.white]], 1186, 605, { size: 32, a: a * ra });
-    txt('opposite caps · 分处两块', 1186, 638, { size: 20, fam: F.zh, w: 700, c: C.dim, a: a * ra });
+    txt('opposite caps · 分处两块', 1186, 638, { size: 22, fam: F.zh, w: 700, c: C.dim, a: a * ra });
   }
   if (ea > 0.01) {
     const qa = a * Q(S, 3, 'How many', 0.6);
@@ -345,14 +379,15 @@ SCENES.three = S => {
     txt('1/2', x0 - 60, yHalf + 8, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.white, a: ra });
     const ka = a * Q(S, 2, 'one third', 0.6);
     sxRich([['at the diagonal · 对角线上:  ', C.white], ['1/3 < 1/2', C.mag]], 1166, 660, { size: 28, a: ka, fam: F.zh });
-    txt('54.7° from every axis > 45° · 离每根轴都是 54.7°', 1166, 700, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ka });
+    txt('54.7° from every axis > 45° · 离每根轴都是 54.7°', 1166, 700, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ka });
   }
   const la = a * at(S, 3, 0.6);
   if (la > 0.003) {
-    sxRich([['uncovered · 没盖住  ≈ ', C.white], [`${(100 * sxUncovered(SX_E)).toFixed(1)} %`, C.mag]], 1166, 760, { size: 28, a: la, fam: F.zh });
-    txt('holes round all 8 diagonals · 8 条对角线周围都漏', 1166, 800, { size: 20, fam: F.zh, w: 700, c: C.mag, a: la });
+    sxRich([['uncovered · 没盖住  ', C.white], ['3/√2 − 2', C.mag], [` ≈ ${(100 * SX_U3).toFixed(1)} %`, C.mag]], 1166, 760, { size: 28, a: la, fam: F.zh });
+    txt('6 caps touch, never overlap · 六块冰盖只相切、不重叠', 1166, 800, { size: 22, fam: F.zh, w: 700, c: C.white, a: la });
+    txt('holes round all 8 diagonals · 8 条对角线周围都漏', 1166, 836, { size: 22, fam: F.zh, w: 700, c: C.mag, a: la });
   }
-  stamp('THE FRAME LEAKS', 640, 820, Q(S, 3, 'The leak is', 0.5), C.mag, 34, -0.05);
+  stamp('THE FRAME LEAKS', 1470, 888, Q(S, 3, 'The leak is', 0.5), C.mag, 34, -0.05);
 };
 
 /* ======================================================================= */
@@ -363,7 +398,7 @@ SCENES.six = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean']]);
   const V = sxView(SX_GV.cx, SX_GV.cy, SX_GV.R, -2.1 + 0.01 * (u + 25), SX_GV.el);
-  /* the split angle: 0 → 20° on line 0 (the holes close), on to arctan 2 on line 1 */
+  /* the tilt of each half from its old axis: 0 → 20° on line 0 (the holes close), on to arctan 2 on line 1 */
   const s = sxDeg(20) * ease(Q(S, 0, 'swing the halves', 2.4)) + (SX_S - sxDeg(20)) * ease(Q(S, 1, 'We stop', 2.4));
   const ax = sxAxes(s), done = Q(S, 1, 'whole numbers', 0.6);
   const da = Q(S, 2, 'Back on the diagonal', 0.5);
@@ -381,12 +416,12 @@ SCENES.six = S => {
   ax.forEach((e, i) => sxTag(sh, sxScale(e, 1.27), `a${'₀₁₂₃₄₅'[i]}`, 8, -6, C.vio, a * (0.35 + 0.65 * done), { size: 22 }));
   /* readout */
   panel(1140, 200, 660, 250, a, C.cyan, 'SPLIT · 劈开  (computed)');
-  sxRich([['split angle · 张角  s = ', C.white], [`${(s * 180 / Math.PI).toFixed(1)}°`, C.now]], 1166, 270, { size: 28, a, fam: F.zh });
-  const unc = sxUncovered(ax);
+  sxRich([['tilt from the old axis · 偏角  s = ', C.white], [`${(s * 180 / Math.PI).toFixed(1)}°`, C.now]], 1166, 270, { size: 28, a, fam: F.zh });
+  const unc = sxUncoveredAt(s);
   sxRich([['uncovered · 没盖住  ≈ ', C.white], [`${(100 * unc).toFixed(1)} %`, unc > 0 ? C.mag : C.cyan]], 1166, 320, { size: 28, a, fam: F.zh });
   const wa = a * done;
   if (wa > 0.003) {
-    txt('tan s = 2 · s = 63.4°', 1166, 370, { size: 22, fam: F.mono, w: 700, c: C.white, a: wa });
+    txt('tan s = 2: along 1, sideways 2 · 沿原轴 1、侧移 2', 1166, 370, { size: 22, fam: F.zh, fam: F.mono, w: 700, c: C.white, a: wa });
     txt('(1, ±2, 0)  (0, 1, ±2)  (±2, 0, 1)', 1166, 414, { size: 24, fam: F.mono, w: 700, c: C.vio, a: wa });
   }
   if (da > 0.01) {
@@ -400,9 +435,9 @@ SCENES.six = S => {
     panel(1140, 660, 660, 190, la, C.lean, 'SIX COLORS · 六种颜色');
     txt('open · 开集     no right angle inside · 内部无直角', 1166, 712, { size: 21, fam: F.zh, w: 700, c: C.white, a: la * Q(S, 3, 'six open colors', 0.5) });
     txt('together they cover the sphere · 合起来盖满球面', 1166, 752, { size: 21, fam: F.zh, w: 700, c: C.white, a: la * Q(S, 3, 'cover the sphere', 0.5) });
-    sxLean(1166, 806, SX_LEAN.rational_six_axis_open_cover, la, { size: 18 });
+    sxLean(1166, 806, SX_LEAN.rational_six_axis_open_cover, la, { size: 21 });
   }
-  stamp('COVERED', 640, 820, Q(S, 3, 'cover the sphere', 0.5), C.lean, 34, -0.05);
+  stamp('COVERED', 1470, 888, Q(S, 3, 'cover the sphere', 0.5), C.lean, 34, -0.05);
 };
 
 /* ======================================================================= */
@@ -451,18 +486,18 @@ SCENES.five = S => {
         const e = Math.min(q, sweep);
         if (e > p) fillBox(x0 + p * sc, y + 8, (e - p) * sc, 28, C.white, ra * 0.85 * at(S, 1, 0.6));
       }
-      if (holds) txt('holds x · 含 x → stays off · 不能碰', x1 - 4, y + 30, { size: 18, fam: F.zh, w: 700, align: 'right', c: C.cyan, a: ra * Q(S, 1, 'zero, two and four', 0.6) });
+      if (holds) txt('holds x · 含 x → stays off · 不能碰', x1 - 4, y + 30, { size: 21, fam: F.zh, w: 700, align: 'right', c: C.cyan, a: ra * Q(S, 1, 'zero, two and four', 0.6) });
     }
     if (sweep > 0.5 && sweep < 359.5) line(x0 + sweep * sc, y0, x0 + sweep * sc, y0 + 6 * rh, C.now, ra, 2.5);
-    txt('x: 2(x·aᵢ)² = 6.750, 0.750, 5.199, 0.301, 5.949, 1.051', 1016, 610, { size: 20, fam: F.mono, w: 700, c: C.dim, a: ra * at(S, 1, 0.6) });
+    txt('x: 2(x·aᵢ)² = 6.750, 0.750, 5.199, 0.301, 5.949, 1.051', 1016, 610, { size: 23, fam: F.mono, w: 700, c: C.white, a: ra * at(S, 1, 0.6) });
     const ta = ra * at(S, 2, 0.6);
-    txt('1, 3, 5 each stand alone somewhere · 1、3、5 各有独占的一段', 1016, 645, { size: 20, fam: F.zh, w: 700, c: C.white, a: ta });
+    txt('1, 3, 5 each stand alone somewhere · 1、3、5 各有独占的一段', 1016, 645, { size: 23, fam: F.zh, w: 700, c: C.white, a: ta });
   }
   const pa = a * at(S, 2, 0.6) * (1 - at(S, 3, 0.5));
   if (pa > 0.003) {
     panel(990, 690, 830, 140, pa, C.argued, 'PROOF OUTLINE · 证明骨架');
-    txt('a circle needs 3 colors → every point misses ≥ 3', 1016, 752, { size: 22, fam: F.mono, w: 700, c: C.white, a: pa });
-    txt('圆要三种颜色才盖得住 → 每点至少缺三种', 1016, 796, { size: 22, fam: F.zh, w: 700, c: C.white, a: pa });
+    txt('a circle needs 3 right-angle-free colors → each point misses ≥ 3', 1016, 752, { size: 19, fam: F.mono, w: 700, c: C.white, a: pa });
+    txt('无直角的颜色，一个圆也要三种 → 每点至少缺三种', 1016, 796, { size: 22, fam: F.zh, w: 700, c: C.white, a: pa });
   }
   /* line 3: the countries picture */
   const ka = a * at(S, 3, 0.6) * (1 - at(S, 4, 0.5));
@@ -478,7 +513,7 @@ SCENES.five = S => {
     const ta = ka * Q(S, 3, 'three overlap', 0.6);
     dot(cx + 2, cy - 4, 12, 'g', ta);
     txt('three at once · 三国重叠', cx + 24, cy - 14, { size: 22, fam: F.zh, w: 700, c: C.now, a: ta });
-    txt('pieces too small to wrap the globe · 每块都绕不了球一圈', 1016, 630, { size: 20, fam: F.zh, w: 700, c: C.argued, a: ka });
+    txt('pieces too small to wrap the globe · 每块都绕不了球一圈', 1016, 630, { size: 22, fam: F.zh, w: 700, c: C.argued, a: ka });
   }
   /* line 4: the tally and the theorem */
   const ta = a * at(S, 4, 0.6);
@@ -486,13 +521,14 @@ SCENES.five = S => {
     panel(990, 190, 830, 300, ta, C.argued, 'THE COUNT · 清点');
     sxRich([['somewhere: ≥ 3 present · 某处至少三种在', C.white]], 1016, 262, { size: 24, a: ta, fam: F.zh });
     sxRich([['everywhere: ≥ 3 missing · 处处至少缺三种', C.white]], 1016, 312, { size: 24, a: ta * Q(S, 4, 'three missing', 0.5), fam: F.zh });
-    sxRich([['k ≥ 3 + 3 = ', C.white], ['6', C.lean]], 1016, 386, { size: 40, a: ta * Q(S, 4, 'six', 0.5) });
-    txt('at x here: 3 present, 3 missing · 这里的 x：恰三种在、三种缺', 1016, 444, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ta * Q(S, 4, 'six', 0.5) });
+    sxRich([['k ≥ 3 + 3 = ', C.white], ['6', C.now]], 1016, 386, { size: 40, a: ta * Q(S, 4, 'six', 0.5) });
+    txt('at x here: 3 present, 3 missing · 这里的 x：恰三种在、三种缺', 1016, 444, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ta * Q(S, 4, 'six', 0.5) });
     const la = a * Q(S, 4, 'Lean checks', 0.6);
     panel(990, 520, 830, 230, la, C.lean, 'EVERY OPEN COVER OF THE SPHERE · 球面的任意开覆盖');
     sxRich([['no right angle in any piece  ⟹  ', C.white], ['6 ≤ k', C.lean]], 1016, 590, { size: 28, a: la });
-    sxLean(1016, 640, SX_LEAN.sphere_two_open_orthogonality_free_cover_lower_six, la, { size: 16 });
-    txt('with the six axes: fewest is exactly 6 · 与六轴合起来：最少恰为 6', 1016, 712, { size: 20, fam: F.zh, w: 700, c: C.white, a: la });
+    sxLean(1016, 640, SX_LEAN.sphere_two_open_orthogonality_free_cover_lower_six, la, { size: 19 });
+    txt('with the six axes: fewest is exactly 6 · 与六轴合起来：最少恰为 6', 1016, 700, { size: 22, fam: F.zh, w: 700, c: C.white, a: la });
+    txt('two Lean results combined · 两条 Lean 结论合起来', 1016, 734, { size: 19, fam: F.zh, w: 700, c: C.dim, a: la });
   }
   stamp('6 ≤ k', 500, 820, Q(S, 4, 'at least six', 0.5), C.lean, 36, -0.05);
 };
@@ -505,9 +541,9 @@ SCENES.edge = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [1, null, 'argued']]);
   const rows = [
-    { k: 0, col: C.cyan, en: 'fewest ≠ only', zh: '最少，不等于唯一', note: 'a 30° split also covers: worst 0.622 > 1/2 (computed) · 张角 30° 也盖得满' },
+    { k: 0, col: C.cyan, en: 'fewest ≠ only', zh: '最少，不等于唯一', note: 'a 30° tilt also covers: worst 0.622 > 1/2 (computed) · 偏角 30° 也盖得满' },
     { k: 1, col: C.argued, en: 'right-angle-free patches ≠ hairy ball', zh: '无直角的开块，不是毛球定理', note: 'smooth frames and the hairy ball: chapter 10 · 见第十章' },
-    { k: 2, col: C.argued, en: 'Feldman & Wilce, Question 3', zh: '回答 Feldman 与 Wilce 的问题 3', note: 'arXiv:2608.13320 · literature, no claim of discovery · 文献，本书不主张发现权' }
+    { k: 2, col: C.argued, en: 'Feldman & Wilce, Question 3 · upper bound', zh: '问题 3 的上界部分，对跖覆盖早有先例', note: 'arXiv:2608.13320 · source note, no claim of discovery · 出处说明，本书不主张发现权' }
   ];
   rows.forEach((rw, i) => {
     const ra = a * at(S, rw.k, 0.6);
@@ -516,7 +552,7 @@ SCENES.edge = S => {
     panel(300, y, 1320, 180, ra, rw.col);
     txt(rw.en, 340, y + 58, { size: 32, fam: F.mono, w: 700, c: rw.col, a: ra });
     txt(rw.zh, 340, y + 106, { size: 28, fam: F.zh, w: 700, c: C.white, a: ra });
-    txt(rw.note, 340, y + 150, { size: 20, fam: F.zh, w: 700, c: rw.col === C.cyan ? C.dim : C.argued, a: ra * 0.95 });
+    txt(rw.note, 340, y + 150, { size: 24, fam: F.zh, w: 700, c: rw.col === C.cyan ? C.dim : C.argued, a: ra * 0.95 });
   });
 };
 
@@ -545,7 +581,7 @@ FILM.poster = () => {
   txt(DATA.film.title_zh, 1340, 430, { size: 72, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('THREE PAIRS OF CAPS LEAK,', 1340, 528, { size: 40, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 3, ls: 4 });
   txt('SIX COVER', 1340, 590, { size: 40, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 2, ls: 4 });
-  sxRich([['fewest = ', C.white], ['6', C.lean]], 1340, 690, { size: 40, align: 'center', ab: 1 });
+  sxRich([['fewest = ', C.white], ['6', C.now]], 1340, 690, { size: 40, align: 'center', ab: 1 });
   bloom(0.6);
   txt(`${DATA.book.code} · FILM`, 1340, 770, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 8 });
   txt(`${DATA.book.title.zh} · ${DATA.book.title.en}`, W / 2, 1010, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: 0.9 });
