@@ -13,7 +13,7 @@
       ["Start small: two houses, and one step, U, that swaps them.", "从最小的情形算起：两座房子，一步 U 把它们对调。"],
       ["A field f reads two at the first house and five at the second, like two thermometers.", "场 f 在第一座房子读 2，在第二座读 5，就像两支温度计。"],
       ["Read, then step; or step, then read. The two orders differ by plus three and minus three.", "先读再走，还是先走再读？两种次序相差 +3 和 −3。"],
-      ["Lean checks the rule in any ring. If f, carried one step, becomes a shifted copy, the commutator is that shift times the step.", "Lean 内核检验了任意环里的规则：只要 f 走一步变成平移后的样子，交换子就等于这个差再乘上这一步。"],
+      ["Lean checks the rule in any ring. If f, carried one step, becomes a shifted copy, the commutator is that shift times the step.", "Lean 检验：任意环里，只要 f 走一步变成平移版，交换子就是差乘这一步。"],
       ["So the order matters by exactly how much the field changes along the step.", "所以次序造成的差，恰好是场沿这一步变了多少。"]
     ], "cues": [{"line": 3, "at": 0.6, "kind": "stamp"}]},
     {"id": "towns", "name": "EXCHANGE RATES", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.5, 0.1, 0.2], "lines": [

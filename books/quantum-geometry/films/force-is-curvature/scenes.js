@@ -97,7 +97,7 @@ FILM.init.push(() => {
     const g = [0, 1, 2, 3, 4].map(v => cx(360 * rnd(n, v)));
     const u2 = FC_E.map((_, k) => gauge(g, k));
     const rp2 = [[1, 0], null, null, null, null];
-    [[1, 0, 0], [2, 1, 1], [4, 4, 0], [3, 3, 4]].forEach(([k, a, b]) => {
+    [[0, 1, 0], [1, 2, 1], [4, 4, 0], [3, 3, 4]].forEach(([k, a, b]) => {
       const e = FC_E[k];
       rp2[a] = e.s === b ? cm(u2[k], rp2[b]) : cm(ci(u2[k]), rp2[b]);
     });
@@ -170,8 +170,13 @@ function fcDial(k, deg, a, o = {}) {
   dot(x, y, 5, 'w', a);
   const nm = fcName(deg);
   const lab = o.label != null ? o.label : (nm != null && Math.abs(deg - Math.round(deg)) < 1e-6 ? nm : '');
-  if (lab) txt(lab, x + R + 12, y + 10, { size: 28, fam: F.math, w: 700, c: col, a });
-  txt(`e${k}`, x - R - 10, y - R + 2, { size: 17, fam: F.mono, w: 700, align: 'right', c: C.dim, a: a * 0.9 });
+  if (lab) {
+    if (k === 0 || k === 5) txt(lab, x, y - R - 14, { size: 28, fam: F.math, w: 700, align: 'center', c: col, a });
+    else if (k === 3) txt(lab, x - R - 12, y + 10, { size: 28, fam: F.math, w: 700, align: 'right', c: col, a });
+    else txt(lab, x + R + 12, y + 10, { size: 28, fam: F.math, w: 700, c: col, a });
+  }
+  if (k === 0 || k === 5) txt(`e${k}`, x - R - 8, y + R + 14, { size: 17, fam: F.mono, w: 700, align: 'right', c: C.dim, a: a * 0.9 });
+  else txt(`e${k}`, k === 3 ? x + R + 10 : x - R - 10, y - R + 2, { size: 17, fam: F.mono, w: 700, align: k === 3 ? 'left' : 'right', c: C.dim, a: a * 0.9 });
 }
 function fcTown(v, a, o = {}) {
   if (a <= 0.003) return;
@@ -179,7 +184,7 @@ function fcTown(v, a, o = {}) {
   dot(x, y, v === 0 && o.capital ? 22 : 16, v === 0 && o.capital ? 'w' : 'c', a);
   ring(x, y, 24, C.white, a * 0.5, 1.5);
   const lab = v === 0 && o.capital ? 'r' : String(v);
-  const off = v === 3 ? [0, -36] : v === 2 || v === 1 ? [38, 10] : [-38, 10];
+  const off = v === 3 ? [0, -52] : v === 2 || v === 1 ? [52, 10] : [-52, 10];
   txt(lab, x + off[0], y + off[1], { size: 30, fam: F.math, w: 700, align: v === 3 ? 'center' : v === 2 || v === 1 ? 'left' : 'right', c: v === 0 && o.capital ? C.white : C.cyan, a });
 }
 /* a purple rename dial at a town, turned by deg */
@@ -251,7 +256,7 @@ SCENES.hook = S => {
   ctx.save(); ctx.setLineDash([5, 6]); arrow(580, 760, 580, 760 - L, C.white, a * 0.5 * clamp(p * 8), 2.5); ctx.restore();
   arrow(w.x, w.y, w.x + L * Math.cos((90 - w.turn) * FC_DEG), w.y - L * Math.sin((90 - w.turn) * FC_DEG), C.now, a, 5);
   dot(w.x, w.y, 12, 'g', a);
-  if (p > 0.98) txt(`turned ${Math.round(w.turn)}°? · 转了 ${Math.round(w.turn)}°？`, 640, 690, { size: 26, fam: F.zh, w: 700, c: C.now, a: a * clamp((p - 0.98) * 50) * (1 - at(S, 2, 0.6)) });
+  if (p > 0.98) txt(`turned ${Math.round(w.turn)}°? · 转了 ${Math.round(w.turn)}°？`, 940, 770, { size: 26, fam: F.zh, w: 700, c: C.now, a: a * clamp((p - 0.98) * 50) * (1 - at(S, 2, 0.6)) });
   /* line 1: the dial on the wall of the universe; line 2: taken away */
   const da = a * Q(S, 1, 'one big dial', 0.8), gone = Q(S, 2, 'Take that dial away', 0.9);
   if (da > 0.003) {
@@ -371,7 +376,7 @@ SCENES.towns = S => {
     txt('(here a rate is a turn on a circle · 这里的“汇率”是转角)', 1110, 660, { size: 18, fam: F.zh, w: 700, c: C.dim, a: aa });
   }
   const na = a * Q(S, 2, 'means nothing by itself', 0.6);
-  if (na > 0.003) chip(1460, 770, 700, 60, 'one open road: any value · 一条路：任意值', C.now, na, 24, F.zh);
+  if (na > 0.003) chip(1460, 770, 700, 60, 'one road alone: any value · 单独一条路：任意值', C.now, na, 24, F.zh);
 };
 
 /* ======================================================================= */
@@ -397,7 +402,7 @@ SCENES.tree = S => {
   const ca = a * Q(S, 1, 'Multiply the turns', 0.6);
   if (ca > 0.003) {
     const t1 = clamp(wp * 2), t2 = clamp(wp * 2 - 1);
-    fcRich([['rp(3) = ', C.white], ['(−i)⁻¹', C.now, t1 > 0.5 ? 1 : 0.3], [' · ', C.white], ['(−1)⁻¹', C.now, t2 > 0.5 ? 1 : 0.3], [' = i · (−1) = −i', C.white, t2 > 0.95 ? 1 : 0]], 360, 870, { size: 26, a: ca, fam: F.mono });
+    fcRich([['rp(3) = ', C.white], ['(−i)⁻¹', C.now, t1 > 0.5 ? 1 : 0.3], [' · ', C.white], ['(−1)⁻¹', C.now, t2 > 0.5 ? 1 : 0.3], [' = i · (−1) = −i', C.white, t2 > 0.95 ? 1 : 0]], 470, 872, { size: 26, a: ca, fam: F.mono });
   }
   /* the table of root phases */
   panel(1080, 180, 760, 290, a * ta, C.cyan, 'ROOT PHASE · 根相位');
@@ -411,9 +416,9 @@ SCENES.tree = S => {
   });
   txt('computed · 屏上计算', 1110, 440, { size: 18, fam: F.mono, w: 700, c: C.cyan, a: a * show });
   /* line 2: Lean, three of the six conjuncts */
-  const la = a * Q(S, 2, 'Lean checks', 0.6);
+  const la = a * Q(S, 2, 'Lean checks', 0.6) * (1 - at(S, 3, 0.5));
   if (la > 0.003) {
-    panel(1080, 500, 760, 300, la * (1 - 0.6 * at(S, 3, 0.5)), C.lean, 'ANY GRAPH, ANY TREE · 任意图、任意树');
+    panel(1080, 500, 760, 300, la, C.lean, 'ANY GRAPH, ANY TREE · 任意图、任意树');
     const rows = [['1  rp(r) = 1', 'the capital gets one'], ['2  tree road e:  rp(t e) = u(e)·rp(s e)', 'each tree road adds'], ['3  rename g:  rp(a) ↦ g(a)·rp(a)·g(r)⁻¹', 'renaming touches only the two ends']];
     rows.forEach(([f, en], i) => txt(f, 1104, 568 + i * 52, { size: 23, fam: F.mono, w: 700, c: C.white, a: la * Q(S, 2, en, 0.5) }));
     txt('(+ 3 more: continuous, multiplicative, rp(1) = 1)', 1104, 718, { size: 17, fam: F.mono, w: 700, c: C.dim, a: la });
@@ -422,17 +427,18 @@ SCENES.tree = S => {
   /* line 3: telescoping */
   const za = a * at(S, 3, 0.6);
   if (za > 0.003) {
-    panel(980, 600, 860, 250, za, C.now, 'TOWNS IN BETWEEN CANCEL · 中间相消');
+    panel(1080, 500, 760, 300, za, C.now, 'TOWNS IN BETWEEN CANCEL · 中间相消');
+    txt('rule 3, along a route r → v₁ → v₂ → a', 1104, 566, { size: 20, fam: F.mono, w: 700, c: C.dim, a: za });
     const parts = [['g(a)', C.now], ['u', C.white], ['g(v₂)⁻¹', C.argued], [' · ', C.dim], ['g(v₂)', C.argued], ['u', C.white], ['g(v₁)⁻¹', C.argued], [' · ', C.dim], ['g(v₁)', C.argued], ['u', C.white], ['g(r)⁻¹', C.now]];
     const size = 26;
-    let x = 1004; const y = 700, strike = Q(S, 3, 'takes back', 0.8);
+    let x = 1104; const y = 650, strike = Q(S, 3, 'takes back', 0.8);
     parts.forEach(([s, col]) => {
       const w = tw(s, size, F.math, 700);
       txt(s, x, y, { size, fam: F.math, w: 700, c: col, a: za });
       if (col === C.argued && strike > 0) line(x - 2, y - 8, x - 2 + (w + 4) * strike, y - 8, C.white, za, 3);
       x += w + 6;
     });
-    fcRich([['→  ', C.white], ['g(a)', C.now], [' · (u u u) · ', C.white], ['g(r)⁻¹', C.now]], 1004, 780, { size: 28, a: za * strike });
+    fcRich([['→  ', C.white], ['g(a)', C.now], [' · (u u u) · ', C.white], ['g(r)⁻¹', C.now]], 1104, 740, { size: 28, a: za * strike });
   }
 };
 
@@ -466,7 +472,8 @@ SCENES.loop = S => {
   /* the loop chips */
   if (la > 0.003) {
     chip(605, 615, 170, 54, 'loop · i', C.mag, a * la, 26, F.mono);
-    chip(605, 330, 200, 54, 'loop · −1', C.mag, a * la * Q(S, 1, 'minus one', 0.6), 26, F.mono);
+    ctx.save(); ctx.setLineDash([4, 6]); line(322, 252, 545, 294, C.mag, a * la * Q(S, 1, 'minus one', 0.6) * 0.7, 2); ctx.restore();
+    chip(190, 240, 260, 54, 'outer loop · −1', C.mag, a * la * Q(S, 1, 'minus one', 0.6), 26, F.mono);
   }
   /* the panel */
   panel(1080, 180, 760, 330, a, C.cyan, 'COMBED FLAT · 梳平');
