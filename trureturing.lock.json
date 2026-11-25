@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "ca5992cabe66962ceecde81b295365f06850a14f",
-  "pinned_at": "2026-11-25T12:03:23Z",
+  "pinned_at": "2026-11-25T12:38:44Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -5036,6 +5036,22 @@
       "statement_id": "sha256:1c61ac56e9a2c85f809bf47a9d3209fdef60d6e7407de2e97ea7b14478c9fb5f",
       "line": 313,
       "signature": "theorem coefficient_envelope {J : Type*} (s : Finset J) (a b : J → ℂ) (m n : ℕ) (r : ℝ) (hr : 0 < r) : let emptyPart"
+    },
+    "D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_expansion": {
+      "module": "D5/S3/Fourier/Concentration/DisjointCharacterRemainder",
+      "name": "D5.S3.Fourier.Concentration.DisjointCharacterRemainder.signed_overlap_expansion",
+      "kind": "theorem",
+      "statement_id": "sha256:0a5dcd4a3fcf32820fea8e047a21a1674e30e8699ef44417fd26fb3ca99fe34f",
+      "line": 133,
+      "signature": "theorem signed_overlap_expansion {J : Type*} (s : Finset J) (a : J → ℂ) (d : ℕ) : let c"
+    },
+    "D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_remainder": {
+      "module": "D5/S3/Fourier/Concentration/DisjointCharacterRemainder",
+      "name": "D5.S3.Fourier.Concentration.DisjointCharacterRemainder.signed_overlap_remainder",
+      "kind": "theorem",
+      "statement_id": "sha256:0a5dcd4a3fcf32820fea8e047a21a1674e30e8699ef44417fd26fb3ca99fe34f",
+      "line": 169,
+      "signature": "theorem signed_overlap_remainder {J : Type*} (s : Finset J) (a : J → ℂ) (d K : ℕ) : let c"
     },
     "D5/S3/Fourier/Concentration/DisjointSupportOccupationMass.scaled_disjoint_mass": {
       "module": "D5/S3/Fourier/Concentration/DisjointSupportOccupationMass",
