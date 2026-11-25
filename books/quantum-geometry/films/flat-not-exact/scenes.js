@@ -364,7 +364,7 @@ SCENES.seam = S => {
   const seamOn = at(S, 1, 0.6, 0.8);
   const y = seamOn > 0.5 ? FN_SEAM3 : fnZero(3, 3);
   /* the walk along row 0, painting as it goes: black, black, black, and home must be white */
-  const wk = at(S, 3, 4.2, 1.6), home = at(S, 4, 0.5);
+  const wk = at(S, 3, 3.2, 0.8), home = at(S, 4, 0.5);
   const paint = [[null, null, null], [null, null, null], [null, null, null]];
   if (wk > 0) paint[0][0] = 0;
   if (wk > 0.34) paint[0][1] = 0;
