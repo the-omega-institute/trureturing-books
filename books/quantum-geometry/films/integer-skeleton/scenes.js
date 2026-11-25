@@ -248,10 +248,10 @@ SCENES.mirror = S => {
     panel(1340, 500, 480, 230, lean, C.lean, 'EVERY GRID POINT · 每个格点');
     isRich([['(a + bi)(a − bi) = a² + b²', C.white]], 1364, 572, { size: 28, a: lean * Q(S, 3, 'times its mirror', 0.5) });
     txt('a, b integers · 整数', 1364, 614, { size: 20, fam: F.zh, w: 700, c: C.lean, a: lean });
-    isLean(1364, 676, IS_LEAN.gaussian_integer_mul_conj_eq_sq_add_sq, lean, { size: 16 });
+    isLean(1364, 676, IS_LEAN.gaussian_integer_mul_conj_eq_sq_add_sq, lean, { size: 15 });
   }
   const da = a * at(S, 4, 0.6);
-  if (da > 0.003) chip(MI_O[0] + 6.5 * MI_U, 790, 620, 64, 'a² + b² = distance² · 距离的平方', C.cyan, da, 26, F.zh);
+  if (da > 0.003) chip(MI_O[0] + 9.6 * MI_U, 790, 620, 64, 'a² + b² = distance² · 距离的平方', C.cyan, da, 26, F.zh);
   stamp('z · z̄ = a² + b²', 760, 300, Q(S, 3, 'Lean checks', 0.5, 0.8) * (1 - at(S, 4, 0.5)), C.lean, 34, -0.06);
 };
 
