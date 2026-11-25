@@ -253,7 +253,7 @@ SCENES.hook = S => {
   const th = Math.PI / 2 * ease(sx);
   let r = V3().rot(NORTH, [1, 0, 0], th);
   const arcX = QG_SPHERE.arcAbout(NORTH, [1, 0, 0], th).map(V);
-  ctx.save(); ctx.globalAlpha = a * 0.9; ctx.strokeStyle = C.mag; ctx.lineWidth = 4; ctx.beginPath();
+  ctx.save(); ctx.globalAlpha = a * 0.9; ctx.strokeStyle = C.now; ctx.lineWidth = 4; ctx.beginPath();
   arcX.forEach((p, i) => (i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.stroke(); ctx.restore();
   if (sz > 0) {
     const ph = TAU * 0.75 * ease(sz);
@@ -270,7 +270,7 @@ SCENES.hook = S => {
   line(1040, 400, 1760, 400, C.dim, ca * 0.8, 1.5);
   pulseBox(1080, 400, 500, 90, sx, ca);
   txt('25 ns', 1330, 432, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.mag, a: ca });
-  txt('a microwave pulse · 一个微波脉冲', 1600, 330, { size: 20, fam: F.zh, w: 700, c: C.white, a: ca });
+  txt('a microwave pulse · 一个微波脉冲', 1080, 292, { size: 20, fam: F.zh, w: 700, c: C.white, a: ca });
   const za = a * at(S, 1, 0.6);
   panel(1000, 490, 800, 200, za, C.cyan, 'VERTICAL · 竖轴   Z(λ)');
   line(1040, 640, 1760, 640, C.dim, za * 0.8, 1.5);
@@ -289,12 +289,12 @@ SCENES.hook = S => {
 /* ======================================================================= */
 /*                            scene 2 · AREA IS ANGLE                        */
 /* ======================================================================= */
-const AR_V = { cx: 470, cy: 520, R: 270, yaw: -0.55, el: 0.3 };
+const AR_V = { cx: 470, cy: 520, R: 270, yaw: 1.0, el: 0.3 };
 SCENES.area = S => {
   const u = S.u, a = vzFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued'], [2, null, 'computed']]);
-  const V = view(AR_V.cx, AR_V.cy, AR_V.R, AR_V.yaw + 0.03 * u, AR_V.el);
+  const V = view(AR_V.cx, AR_V.cy, AR_V.R, AR_V.yaw + 0.01 * u, AR_V.el);
   /* time in ns into pulse 1 (line 2) and pulse 2 (line 3) */
   const t1 = 25 * clamp((u - phraseAt(S, 2, 'Ten megahertz')) / 4.2);
   const t2 = 12.5 * clamp((u - phraseAt(S, 3, 'Twice as strong')) / 2.6);
@@ -319,7 +319,7 @@ SCENES.area = S => {
   txt('X  axis · 转轴', lx[0] + 8, lx[1] + 34, { size: 22, fam: F.zh, w: 700, c: C.vio, a });
   txt('|0⟩', ln[0] - 54, ln[1] - 10, { size: 26, fam: F.math, w: 700, c: C.white, a });
   txt('ψ', lr[0] + 16, lr[1] - 14, { size: 32, fam: F.math, w: 700, c: C.now, a });
-  txt('rotating frame · 旋转参考系', 140, 230, { size: 22, fam: F.zh, w: 700, c: C.white, a: a * at(S, 0, 0.6) });
+  txt('rotating frame · 旋转参考系', 130, 196, { size: 22, fam: F.zh, w: 700, c: C.white, a: a * at(S, 0, 0.6) });
 
   /* the envelope plot: Ω (MHz) against time (ns), 0..30 ns */
   const pa = a * at(S, 0, 0.6, 0.4);
@@ -435,12 +435,12 @@ SCENES.order = S => {
 /* ======================================================================= */
 /*                              scene 4 · TURN THE MAP                       */
 /* ======================================================================= */
-const VZ_V = { cx: 480, cy: 520, R: 275, yaw: -0.35, el: 0.32 };
+const VZ_V = { cx: 480, cy: 520, R: 275, yaw: -1.05, el: 0.45 };
 SCENES.vz = S => {
   const u = S.u, a = vzFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [2, 'The trick', 'argued'], [3, null, 'computed'], [4, null, 'argued']]);
-  const V = view(VZ_V.cx, VZ_V.cy, VZ_V.R, VZ_V.yaw + 0.025 * u, VZ_V.el);
+  const V = view(VZ_V.cx, VZ_V.cy, VZ_V.R, VZ_V.yaw + 0.004 * u, VZ_V.el);
   const sh = shot('vz', V, [120, 200, 720, 650]);
   /* line 0: a state at height 1/2 spins round the vertical axis */
   const l0 = u < lineAt(S, 1).s;
@@ -490,7 +490,7 @@ SCENES.vz = S => {
       txt('φ = −60°', n[0] + 6, n[1] + 30, { size: 24, fam: F.mono, w: 700, c: C.vio, a: a * kv });
       txt('virtual · 虚拟', qv[0] - 20, qv[1] + 40, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.now, a: a * kv });
     }
-    const ra = a * Q(S, 3, 'same height', 0.6), rq = V([-Math.sqrt(0.75), 0, -0.5]);
+    const ra = a * Q(S, 3, 'same height', 0.6), rr = Math.sqrt(0.75), rq = V([-Math.cos(V.yaw) * rr, Math.sin(V.yaw) * rr, -0.5]);
     txt('z = −0.5', rq[0] - 16, rq[1] + 8, { size: 24, fam: F.mono, w: 700, align: 'right', c: C.cyan, a: ra });
   }
 
@@ -516,7 +516,7 @@ SCENES.vz = S => {
         txt(ph, gx + 105, 370, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.white, a: ca * (1 - sw) });
         txt('φ = −60°', gx + 105, 370, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.vio, a: ca * sw });
       } else if (ph) txt(ph, gx + 105, 370, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.white, a: ca });
-      if (isZ) txt('0 ns', gx + 105, 410, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: ca * sk });
+      if (isZ) txt('0 ns', gx + 105, 410, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: ca * sk * (1 - Q(S, 4, 'zero nanoseconds', 0.3)) });
     });
     /* the phase register */
     const fa = a * Q(S, 2, 'set the phase', 0.6);
@@ -539,7 +539,7 @@ SCENES.vz = S => {
       txt('φ_phys = φ − λ: literature, not formalized here · 文献结果，本书未形式化', X1 + 24, 800, { size: 17, fam: F.zh, w: 700, c: C.argued, a: ma * 0.95 });
     }
   }
-  stamp('0 ns', 1640, 330, Q(S, 4, 'zero nanoseconds', 0.5), C.cyan, 48, -0.06);
+  if (!l0) stamp('0 ns', 1395, 395, Q(S, 4, 'zero nanoseconds', 0.5), C.cyan, 40, -0.06);
 };
 
 /* ======================================================================= */
@@ -557,13 +557,13 @@ SCENES.pull = S => {
   if (u >= L2.s) for (let k = 1; k < 4; k++) if (u >= phraseAt(S, 2, mark[k])) step = k;
   const cont = u < L2.s ? 1 * ease(clamp((u - phraseAt(S, 0, 'push the state')) / 1.6)) : 0;
   const ang = u < L2.s ? (u < phraseAt(S, 1, 'Like a photo') ? PL_STEP * cont : PL_STEP) : step * PL_STEP;
-  const anim = u >= L2.s ? ease(clamp((u - phraseAt(S, 2, mark[step])) / 0.6)) : 1;
+  const anim = u >= L2.s ? ease(clamp((u - phraseAt(S, 2, mark[step])) / 0.4)) : 1;
   const prevAng = u >= L2.s && step > 0 ? (step - 1) * PL_STEP : ang;
   const th = u >= L2.s ? lerp(prevAng, ang, anim) : ang;
   const cols = [{ x: 500, name: 'PUSH THE STATE · 推态' }, { x: 1420, name: 'PULL THE READOUT · 拉回读数' }];
-  const R = 210, cy0 = 470;
+  const R = 190, cy0 = 450;
   cols.forEach((cl, k) => {
-    const ca = a * (k === 0 ? 1 : Q(S, 0, 'pull the measurement', 0.6));
+    const ca = a * (k === 0 ? 1 : Q(S, 0, 'pull the measurement', 0.6)) * (1 - 0.8 * Q(S, 3, 'Lean checks', 0.6));
     if (ca <= 0.003) return;
     const P = yz(cl.x, cy0, R);
     panel(cl.x - 400, 190, 800, 600, ca, k === 0 ? C.now : C.white, cl.name);
@@ -655,7 +655,7 @@ FILM.poster = () => {
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.2, a: 0.14, cx: 1400, cy: 420, camZ: 7, lw: 1.3, dots: false });
   const cx0 = 540, cy0 = 520, R = 300;
   sketchBall(cx0, cy0, R, 1);
-  const V = view(cx0, cy0, R, -0.35, 0.32);
+  const V = view(cx0, cy0, R, -1.05, 0.45);
   const mid = vzAfter1(), n = axisPhi(-VZ_LAM);
   const path = (pts, col, w, dash) => { const P = pts.map(V); ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = w; if (dash) ctx.setLineDash(dash); ctx.beginPath(); P.forEach((p, i) => (i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.stroke(); ctx.restore(); };
   path(QG_SPHERE.circlePts([0, 0, -0.5], [0, 0, 1], Math.sqrt(0.75)), C.cyan, 3);
