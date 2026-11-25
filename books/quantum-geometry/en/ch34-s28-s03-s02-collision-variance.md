@@ -198,4 +198,34 @@ $$
 \le\sqrt{pV}\,E_p(\eta).
 $$
 
-When $W>0$, this means $\liminf_{p\to\infty}E_p(\eta)\sqrt{pV}/(W^{2p}\eta)\ge1/(2\sqrt\pi)$. The coefficient exceeds the parabolic lower coefficient $3/(5\sqrt5)$ for arbitrary finite weighted data because the degree sums have convolution structure. A fixed finite tail of actual zeta ordinates is admissible as the input frequency family. Uniform asymptotic estimates when height, frequency family and resolution vary together, and upper bounds for high-order collisions, require further work. [Asymptotic lower bound](https://github.com/the-omega-institute/trureturing/blob/650bb40f649ae4454afcf856c2f1c0b0ceb18f1d/D5/S3/Fourier/Concentration/FejerCollisionVariance.lean#L156)
+When $W>0$, this means $\liminf_{p\to\infty}E_p(\eta)\sqrt{pV}/(W^{2p}\eta)\ge1/(2\sqrt\pi)$. The coefficient exceeds the parabolic lower coefficient $3/(5\sqrt5)$ for arbitrary finite weighted data because the degree sums have convolution structure. A fixed finite tail of actual zeta ordinates is admissible as the input frequency family. The scale condition below gives a uniform lower bound when height, frequency family and resolution vary together. [Asymptotic lower bound](https://github.com/the-omega-institute/trureturing/blob/650bb40f649ae4454afcf856c2f1c0b0ceb18f1d/D5/S3/Fourier/Concentration/FejerCollisionVariance.lean#L156)
+
+
+## Uniform small-resolution bound for varying spectra
+
+Now allow the frequency family, weights and center to vary with degree $n$. Assume that the variance budget $V_n$ and resolution $\eta_n$ are eventually positive. Put
+
+$$
+s_n=\sqrt{nV_n},\qquad \rho_n=\frac{\eta_n}{s_n}.
+$$
+
+The condition $\rho_n\to0$ is equivalent to the existence of eventually positive half-widths $A_n$ with $A_ns_n\to+\infty$ and $\eta_nA_n\to0$. Indeed, choose $A_n=1/(s_n\sqrt{\rho_n})$ to obtain $1/\sqrt{\rho_n}$ and $\sqrt{\rho_n}$ for the two expressions. Conversely, $\rho_n=(\eta_nA_n)/(s_nA_n)$. [Compatibility of the two window scales](https://github.com/the-omega-institute/trureturing/blob/7c384a3aaea1f4743f2e515a64b5241f062640fa/D5/S3/Fourier/Asymptotics/MovingFejerCollision.lean#L26)
+
+Under $\rho_n\to0$, for every $\varepsilon>0$ there is a degree threshold depending only on the sequences $V_n,\eta_n$ and on $\varepsilon$. For each $n$ beyond it, every finite family of real frequencies $g_j$, nonnegative weights $w_j$, and center $a$ with $\sum_jw_j(g_j-a)^2\le V_nW$ satisfies
+
+$$
+\left(\frac{1}{2\sqrt\pi}-\varepsilon\right)\eta_n W^{2n}
+\le\sqrt{nV_n}\,E_n(\eta_n).
+$$
+
+On a compatible window, the normalized kernel is $\eta_n^{-1}K_{\eta_n}(t)=\operatorname{sinc}^2(\eta_nt/2)/(2\pi)$. Because $\eta_nA_n\to0$, it is eventually at least $1/(2\pi)-\varepsilon/(2\sqrt\pi)$ throughout the window. Because $A_ns_n\to\infty$, the rescaled unweighted integral tends to $\sqrt\pi$. The finite-window inequality then gives a threshold uniform over the data. [Uniform collision lower bound](https://github.com/the-omega-institute/trureturing/blob/7c384a3aaea1f4743f2e515a64b5241f062640fa/D5/S3/Fourier/Asymptotics/MovingFejerCollision.lean#L77)
+
+For example, for a varying finite zeta tail take frequencies $g_\gamma=\gamma/r$ with fixed $r>0$ and $0<\gamma\le T_n$. Use center zero and budget $V_n=T_n^2/r^2$. If $\eta_n r/(T_n\sqrt n)\to0$, then eventually
+
+$$
+E_n(\eta_n)\ge
+\left(\frac{1}{2\sqrt\pi}-\varepsilon\right)
+\frac{r\eta_n}{T_n\sqrt n}\,W_n^{2n}.
+$$
+
+The underlying family may grow with $n$. Without control of the relative resolution and variance scales, the normalized collision ratio can tend to zero, as with a single unit-weight frequency, $V_n=1/n^2$ and fixed $\eta_n>0$. The upper-bound problem for high-order weighted collisions of actual zeta ordinates remains open.
