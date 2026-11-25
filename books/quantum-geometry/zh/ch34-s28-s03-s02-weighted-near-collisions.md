@@ -940,6 +940,34 @@ N^3p_N^{\rm rear}(r)\longrightarrow B_\infty-\tfrac34r^2.
 $$
 极限非零时可确定充分大 $N$ 下的严格符号。这些极限适用于固定的非空有限对径集合 $S$ 上的带符号拟合。认证循环群最优解仍需建立有限循环格点的对应并将补集的符号控制延伸至所有剩余格点。当 $B_\infty=3r^2/4$ 时，该层的激活状态仍待判定。 [系数误差阶的 Lean 证明](https://github.com/the-omega-institute/trureturing/blob/24f6cf4165508f8beb798207d26550f4647efaff/D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.lean#L558) · [前部与半步极限](https://github.com/the-omega-institute/trureturing/blob/24f6cf4165508f8beb798207d26550f4647efaff/D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.lean#L786) · [对径极限](https://github.com/the-omega-institute/trureturing/blob/24f6cf4165508f8beb798207d26550f4647efaff/D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.lean#L847) · [研究问题](https://github.com/the-omega-institute/trureturing/issues/34029)
 
+### 对径阈值之外的精确支撑
+
+固定周期最终的奇偶性 $e\in\{0,1\}$，假设 $N^5h^2\to K>0$，记 $Q=3K/20$。指标为 $l\ge0$ 的对径窗口 $S_l$ 包含相对于对径角从 $-l-e/2$ 到 $l+e/2$ 的单位步长偏移。定义
+
+$$
+T_0(l)=\frac{l(2l-1)(2l+1)}4,\qquad
+T_1(l)=l(l+1/2)(l+1).
+$$
+
+若 $Q$ 不等于任何 $T_e(l)$，则恰有一个 $l$ 满足 $T_e(l)<Q<T_e(l+1)$。充分大的 $N$ 上，循环群上的唯一最优解 $v$ 由前部格点 $|j|\le N$ 与对径窗口 $S_l$ 上的联立拟合给出，其余格点权重均为零。这两个窗口内的权重严格为正，且两个余弦矩均达到 $1-2mh^2$。对任意可行的概率权重 $w$，
+
+$$
+\sum_j w_j^2\ge\sum_j v_j^2+\sum_j(w_j-v_j)^2.
+$$
+
+记 $R=l+e/2$，对径极限截距为 $B=(Q+(3/4)\sum_{r\in S_l}r^2)/|S_l|$。有限求和给出
+
+$$
+\begin{aligned}
+\tfrac34\left(|S_l|R^2-\sum_{r\in S_l}r^2\right)&=T_e(l),\\
+\tfrac34\left(|S_l|(R+1)^2-\sum_{r\in S_l}r^2\right)&=T_e(l+1).
+\end{aligned}
+$$
+
+因而严格阈值条件等价于 $3R^2/4<B<3(R+1)^2/4$。边界极限保证两个窗口最后纳入的格点上拟合权重为正，紧邻的第一个未纳入格点带符号值为负。拟合多项式关于采样余弦为凸函数，四个边界符号由此控制整个循环格点。精确格点对应将拟合矩方程转移至循环群，有限最优性证书给出上述平方距离不等式。
+
+若 $q/N^{5/2}\to\gamma>0$，则 $Q=3\pi^2/(5\gamma^2)$。偶周期第一对新增对径格点在 $\gamma<2\pi/\sqrt5$ 时激活，奇周期相应条件为 $\gamma<\pi/\sqrt5$。同一公式分类全部后续跃迁中严格偏离阈值的情形。在等号处，对应对径层的极限带符号值为零，激活状态仍需判定。 [Lean 内核核验的证明](https://github.com/the-omega-institute/trureturing/pull/34065) · [研究与证明](https://github.com/the-omega-institute/trureturing/issues/34029)
+
 ## 局部统计在截点变化下的误差
 
 频率向下舍入后，是否落在给定的高度区间内可能发生变化。局部测试只计入频率彼此接近的元组，所以改变截点的影响取决于每个变动索引附近还有多少索引。
