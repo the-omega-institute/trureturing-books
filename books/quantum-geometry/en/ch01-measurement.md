@@ -162,6 +162,12 @@ Suppose $\psi_0 \neq 0$. Then the second equation forces $\psi_1 \neq 0$ (otherw
 
 Geometrically, [@cor-pauli-no-common-eigenvector] is transparent: for nonzero pure states, the $Z$ eigenstates correspond to the north and south Bloch poles ($\pm\vv{e}_3$), while the $X$ eigenstates correspond to the east and west poles ($\pm\vv{e}_1$). These pairs have no point in common. The sole solution $\psi=0$ of the linear equations is the Hilbert-space zero vector, which has no pure-state Bloch image; it is not the maximally mixed state at the Bloch-ball origin. The absence of a nonzero common eigenvector expresses the incompatibility of these two ideal measurements.
 
+Read together, the two results sink an answer sheet twice, first for all matrices at once and then for a single state:
+
+::: {.film src="no-common-answer"}
+**X and Z share no answer (2 min 10 s).** The violet answer sheet is an analogy: it writes a number in advance against every $2\times 2$ complex matrix and keeps $1$, sums, multiples and products. $X$ and $Z$ both square to the identity, so each answer can only be $+1$ or $-1$; swapping their order brings out a minus sign, $ZX = -XZ$ ([@lem-qubit-weyl-star]). The four sign rows are filled in one by one, and in every row the cyan $xz$ differs from the white $-xz$, so no row fits; the general statement is [@thm-qubit-no-character]. On the Bloch sphere the cyan $Z$ poles sit north and south, the white $X$ poles east and west, and the amber state touring the four poles, wherever it stops, is sure of only one answer ([@cor-pauli-no-common-eigenvector]); the zero vector is no state, nor the maximally mixed state at the centre. The four-row table, the two products in which $X$ swaps the entries, and the pole positions are computed on screen; the theorem rules out one global table that keeps every product, not every hidden-variable model, and "answers made in the meeting" is the book's interpretation.
+:::
+
 ## 1.3 Farewell to Complex Column Vectors {#sec-ch01-3}
 
 If the geometric stage of a single qubit's pure states is an ordinary unit sphere $S^2$ in three-dimensional real space, why does nearly every textbook open by handing students an abstract two-component complex column vector
