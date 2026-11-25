@@ -430,6 +430,30 @@ $$
 
 Choose $L_n$ with $\eta_nL_n\to+\infty$ and $L_n\ge A_n/s_n$. Set $\varepsilon_n=64/(\eta_nL_n)$. Eventually $I_{\eta_n}(L_n)\le M_{\eta_n}\le I_{\eta_n}(L_n)/(1-\varepsilon_n)$. The normalized finite-window integral $(s_n/\eta_n)I_{\eta_n}(L_n)$ and the normalized whole-line moment therefore share the same finite limit whenever either converges. Once the central principal contribution is established, the phase peaks still requiring control occupy the finite intermediate time range $A_n/s_n<|t|\le L_n$. The high-moment upper bound for actual growing zeta-ordinate families on that range remains open.
 
+### Finite observation windows for whole-line moments
+
+For nonnegative weights, put $F_p(t)=|S(t)|^{2p}$ and $M_\eta=\int_{\mathbb R}K_\eta(t)F_p(t)\,dt$. The triangular frequency weight $\phi_\eta(d)=\max(0,1-|d|/\eta)$ increases with resolution $\eta$. Since the occupation-pair coefficients are nonnegative, $M_b\le M_\eta$ whenever $0<b\le\eta$. For $\eta T\ge1$, take $b=1/T$. On $|t|\le T$ the bound $K_b(t)\ge1/(8\pi T)$ gives
+
+$$
+\int_{-T}^{T}F_p(t)\,dt\le 8\pi T M_\eta.
+$$
+
+Define $I_\eta(r)=\int_{-r}^{r}K_\eta(t)F_p(t)\,dt$. On $r\le|t|\le2r$ the kernel satisfies $K_\eta(t)\le2/(\pi\eta r^2)$. Combining with the previous estimate gives, when $\eta r\ge1$,
+
+$$
+I_\eta(2r)-I_\eta(r)\le\frac{32}{\eta r}M_\eta.
+$$
+
+Summing over the dyadic shells with $r=L,2L,4L,\ldots$ and taking the limit using whole-line integrability gives the uniform relative truncation bound for every $\eta L\ge1$,
+
+$$
+0\le M_\eta-I_\eta(L)\le\frac{64}{\eta L}M_\eta.
+$$
+
+[Relative truncation bound](lean:D5/S3/Fourier/Concentration/FejerRelativeLocalization.relative_fejer_truncation) This estimate permits the support, weights, degree and resolution to vary together, including repeated frequencies.
+
+Choose $L_n$ with $\eta_nL_n\to+\infty$ and $L_n\ge A_n/s_n$. Set $\varepsilon_n=64/(\eta_nL_n)$. Eventually $I_{\eta_n}(L_n)\le M_{\eta_n}\le I_{\eta_n}(L_n)/(1-\varepsilon_n)$. The normalized finite-window integral $(s_n/\eta_n)I_{\eta_n}(L_n)$ and the normalized whole-line moment therefore share the same finite limit whenever either converges. Once the central principal contribution is established, the phase peaks still requiring control occupy the finite intermediate time range $A_n/s_n<|t|\le L_n$. The high-moment upper bound for actual growing zeta-ordinate families on that range remains open.
+
 ### Occupation diagonal lower bound for finite support
 
 For finite support, the noncentral contribution also has a constraint independent of the specific frequency values. Suppose $w_j\ge0$ and $\sum_jw_j=1$, and let an occupation vector $m$ of degree $p$ satisfy $\sum_jm_j=p$. Write $c_m$ for its actual multinomial weight. Choose an index $j_0$, whose count is determined by the other counts and the total degree. For positive radii $r_j$ on the remaining coordinates define
