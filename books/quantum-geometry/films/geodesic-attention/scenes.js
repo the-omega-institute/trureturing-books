@@ -270,7 +270,7 @@ SCENES.angle = S => {
   const pu = sh.anchor(GA_U), pw = sh.anchor(GA_W);
   txt('u', pu.x - 34, pu.y - 10, { size: 36, fam: F.math, w: 700, c: C.white, a });
   txt('w', pw.x + 16, pw.y - 10, { size: 36, fam: F.math, w: 700, c: C.white, a });
-  if (st > 0.003) { const pv = sh.anchor(gaV(b)); txt('v', pv.x + 16, pv.y + 34, { size: 36, fam: F.math, w: 700, c: C.now, a: a * st }); }
+  if (st > 0.003) { const pv = sh.anchor(gaV(b)); txt('v', pv.x - 44, pv.y + 30, { size: 36, fam: F.math, w: 700, c: C.now, a: a * st }); }
   /* line 0: the distance is the angle */
   panel(1130, 200, 660, 190, a, C.cyan, 'DISTANCE · 距离');
   gaRich([['d(u, w) = arccos |⟨u, w⟩|', C.white]], 1155, 275, { size: 30, a: a * at(S, 0, 0.6) });
@@ -288,19 +288,19 @@ SCENES.angle = S => {
     panel(1130, 610, 660, 190, la, C.lean, 'ANY THREE UNIT STATES · 任意三个单位态');
     gaRich([['d(u, w) ', C.white], ['≤', C.lean], [' d(u, v) + d(v, w)', C.white]], 1155, 690, { size: 32, a: la });
     gaLean(1155, 752, GA_LEAN.fs_angle_triangle, la, { size: 20 });
-    stamp('NO SHORTCUT', 1580, 205, Q(S, 2, 'never makes', 0.5) * (1 - at(S, 3, 0.5)), C.lean, 24, -0.06);
+    stamp('NO SHORTCUT', 880, 760, Q(S, 2, 'never makes', 0.5) * (1 - at(S, 3, 0.5)), C.lean, 24, -0.06);
   }
   /* line 3: the aphorism */
   const ap = a * at(S, 3, 0.7);
   if (ap > 0.003) {
-    txt('not a line — an arc', 660, 885 - 50, { size: 34, fam: F.orb, w: 900, align: 'center', c: C.cyan, a: ap, ls: 3 });
+    txt('not a line — an arc', 660, 872, { size: 34, fam: F.orb, w: 900, align: 'center', c: C.cyan, a: ap, ls: 3 });
   }
 };
 
 /* ======================================================================= */
 /*                              scene 3 · SPEED LIMIT                        */
 /* ======================================================================= */
-const LS = { cx: 330, cy: 760, R: 520 };
+const LS = { cx: 360, cy: 730, R: 450 };
 const lsP = (deg, r = LS.R) => [LS.cx + r * Math.cos(deg * DEG), LS.cy - r * Math.sin(deg * DEG)];
 function lsArc(d0, d1, r, col, a, w) {
   if (a <= 0.003) return;
@@ -322,19 +322,19 @@ SCENES.leash = S => {
   dot(p1[0], p1[1], 13, 'w', a);
   txt('m₀', p0[0] + 20, p0[1] + 10, { size: 34, fam: F.math, w: 700, c: C.white, a });
   txt('m₁', p1[0] + 22, p1[1] + 8, { size: 34, fam: F.math, w: 700, c: C.white, a });
-  txt('⟨m₀, m₁⟩ = 0 · 90°', LS.cx + 40, LS.cy - 40, { size: 24, fam: F.math, w: 700, c: C.cyan, a: ra });
+  txt('⟨m₀, m₁⟩ = 0 · 90°', LS.cx + 20, LS.cy + 50, { size: 24, fam: F.math, w: 700, c: C.cyan, a: ra });
   /* the anchor: at 25° during line 1, then it slides to 45° on line 2 */
   const phi = 25 + 20 * ease(Q(S, 2, 'best anchor', 1.8));
   const an = a * Q(S, 1, 'any anchor', 0.6);
   if (an > 0.003) {
     const pa = lsP(phi), need = Math.max(phi, 90 - phi);
     /* the leash: the reach round the anchor, just outside the circle */
-    lsArc(phi - need, phi + need, LS.R + 22, C.now, an * 0.85, 8);
+    lsArc(Math.max(phi - need, -8), Math.min(phi + need, 98), LS.R + 22, C.now, an * 0.85, 8);
     line(O[0], O[1], pa[0], pa[1], C.now, an * 0.8, 2.5);
     dot(pa[0], pa[1], 14, 'g', an);
     const lp = lsP(phi, LS.R + 60);
     txt('a', lp[0] + 6, lp[1] + 6, { size: 34, fam: F.math, w: 700, c: C.now, a: an });
-    gaTag(150, 230, 'leash · 拴绳（比方）', C.argued, an);
+    gaTag(lp[0] + 50, lp[1] + 18, 'leash · 拴绳（比方）', C.argued, an);
     /* the two legs */
     const l0 = lsP(phi / 2, LS.R - 70), l1 = lsP(phi + (90 - phi) / 2, LS.R - 70);
     txt(`${phi.toFixed(0)}°`, l0[0], l0[1], { size: 26, fam: F.mono, w: 700, align: 'center', c: C.white, a: an });
@@ -391,7 +391,7 @@ function spRow(y, axes, f, a, label, labCol) {
       /* what this filter took away leaves sideways, in magenta */
       const L = gaPass(axes, k - 1) - I;
       if (L > 1e-9) { const lh = 54 * L; fillBox(xs[k] - 8, y + SP_R + 44, 16, lh * 1.4 * clamp(seg * 2), C.mag, a * 0.75); }
-      txt(I.toFixed(3), (x0 + xs[k + 1] - (k === 3 ? SP_R : 0)) / 2 + (k === 4 ? 30 : 0), y - 44, { size: 24, fam: F.mono, w: 700, align: 'center', c: k === 4 ? C.now : C.cyan, a: a * clamp(seg * 3) });
+      txt(I.toFixed(3), k === 4 ? x0 + 120 : (x0 + xs[k + 1] - SP_R) / 2, y - 44, { size: 24, fam: F.mono, w: 700, align: 'center', c: k === 4 ? C.now : C.cyan, a: a * clamp(seg * 3) });
     }
   }
   axes.forEach((d, i) => spFilter(SP_XS[i], y, d, C.white, a, f >= i + 1 && f < i + 2 ? 1 : 0));
@@ -438,7 +438,7 @@ SCENES.edge = S => {
   badgeQ(S, [[0, null, 'argued'], [2, null, 'open']]);
   const rows = [
     { k: 0, col: C.argued, en: 'even steps = good reasoning ?', zh: '均匀的步 = 好推理？', note: 'a model reading (MODEL), not a theorem · 模型读法，不是定理' },
-    { k: 1, col: C.argued, en: 'zero bending ≠ a right answer', zh: '几何代价为零，不等于答案正确', note: 'correctness needs an outside check · 正确性要靠外部检验' },
+    { k: 1, col: C.argued, en: 'zero bending ≠ a right answer', zh: '几何代价为零，不等于答案正确', note: 'smooth drive, wrong town: correctness needs an outside check · 正确性要靠外部检验' },
     { k: 2, col: C.open, en: 'ternion-field networks at scale', zh: '三元数场网络的大规模表现', note: 'open problem · 开放问题（prob-ch39-tft-scale-and-seams）' }
   ];
   rows.forEach((rw, i) => {
