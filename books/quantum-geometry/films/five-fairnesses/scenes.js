@@ -51,7 +51,7 @@ const buShares = t => { const rz = Math.cos(t), rx = Math.sin(t), pu = (1 + rz) 
 /* LEDGER THREE */
 const CO_X = 0.8, CO_A0 = Math.acos(CO_X), CO_A1 = Math.acos(CO_X * CO_X);
 /* LEDGER FOUR */
-const ST_P = 0.01, ST_TH = Math.asin(Math.sqrt(ST_P)), ST_N = 10;
+const ST_P = 0.01, ST_TH = Math.asin(Math.sqrt(ST_P)), ST_N = 9;
 const stChance = n => Math.pow(Math.sin((2 * n + 1) * ST_TH), 2);
 /* LEDGER FIVE */
 const SR_ALPHA = Math.SQRT2 - 1, SR_STARTS = [0, 0.3], SR_NMAX = 240;
@@ -195,7 +195,7 @@ function ffBar(x, y, w, h, total, parts, a, o = {}) {
     if (pw > 0.5) {
       fillBox(cx, y, pw, h, col, a * 0.55);
       box(cx, y, pw, h, col, a, 1.5);
-      if (lab && pw > 110) txt(lab, cx + pw / 2, y + h / 2 + (o.size || 22) * 0.36, { size: o.size || 22, fam: F.mono, w: 700, align: 'center', c: C.white, a });
+      if (lab && pw > 160) txt(lab, cx + pw / 2, y + h / 2 + (o.size || 22) * 0.36, { size: o.size || 22, fam: F.mono, w: 700, align: 'center', c: C.white, a });
     }
     cx += pw;
   }
@@ -239,13 +239,13 @@ function ffBooks(a, hi = -1) {
 /* ======================================================================= */
 /*                     scene 1 · LEDGER ONE · NO JUDGE'S CHAIR               */
 /* ======================================================================= */
-const SE_O = [470, 560], SE_R = 400;
+const SE_O = [480, 560], SE_R = 330;
 SCENES.seat = S => {
   const u = S.u;
   ffTitle(S);
   const a = clamp((u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [2, 'Here the overlap', 'computed'], [2, 'Lean checks', 'lean'], [3, null, 'computed']]);
+  badgeQ(S, [[0, null, 'argued'], [2, 'The overlap here', 'computed'], [2, 'Lean checks', 'lean'], [3, null, 'computed']]);
   /* line 0: the five books */
   const ba = a * (1 - at(S, 1, 0.6));
   ffBooks(ba);
@@ -259,7 +259,7 @@ SCENES.seat = S => {
   arrow(SE_O[0], SE_O[1] + SE_R * 0.7, SE_O[0], SE_O[1] - SE_R * 0.75, C.dim, la * 0.8, 2);
   txt('Re', SE_O[0] + SE_R + 50, SE_O[1] + 8, { size: 22, fam: F.mono, w: 700, c: C.dim, a: la });
   txt('Im', SE_O[0] + 12, SE_O[1] - SE_R * 0.75 - 6, { size: 22, fam: F.mono, w: 700, c: C.dim, a: la });
-  const za = a * Q(S, 2, 'the overlap is', 0.8);
+  const za = a * Q(S, 2, 'The overlap here', 0.8);
   const zp = P(0.48, -0.48), r = Math.hypot(0.48, 0.48) * SE_R;
   if (za > 0.003) {
     arrow(SE_O[0], SE_O[1], zp[0], zp[1], C.cyan, za, 5);
@@ -288,7 +288,7 @@ SCENES.seat = S => {
   const lea = a * Q(S, 2, 'Lean checks', 0.6);
   if (lea > 0.003) {
     box(1040, 496, 740, 120, C.lean, lea, 1.5);
-    txt('P_k = φφ*,  ρ = ψψ*  ⇒  recordWeight = ‖φ* ⬝ ψ‖² = Tr(ρ P_k)', 1056, 540, { size: 22, fam: F.math, w: 700, c: C.white, a: lea });
+    txt('P_k = φφ*,  ρ = ψψ*  ⇒  recordWeight = ‖φ* ⬝ ψ‖² = Tr(ρ P_k)', 1056, 540, { size: 20, fam: F.math, w: 700, c: C.white, a: lea });
     ffLean(1056, 592, 'rank_one_born_pairing_weight', lea, { size: 18 });
   }
   ffRich([['⟨ψ, φ⟩ = ', C.white], ['0.48 + 0.48i', C.cyan], ['   = conj ⟨φ, ψ⟩', C.dim]], 1048, 676, { size: 28, a: ma });
@@ -300,7 +300,7 @@ SCENES.seat = S => {
 /* ======================================================================= */
 /*                      scene 2 · LEDGER TWO · GAIN AND LOSS                 */
 /* ======================================================================= */
-const BU_O = [400, 540], BU_R = 270;
+const BU_O = [380, 570], BU_R = 230;
 SCENES.budget = S => {
   const a = ffFade(S);
   if (a <= 0) return;
@@ -360,7 +360,7 @@ SCENES.budget = S => {
 /* ======================================================================= */
 /*                    scene 3 · LEDGER THREE · NO PHOTOCOPIES                */
 /* ======================================================================= */
-const CO = { before: [180, 640], after: [1000, 640], R: 300, box: [620, 470, 240, 150] };
+const CO = { before: [180, 600], after: [1000, 600], R: 300, box: [620, 430, 240, 150] };
 function coPair(O, ang, a, labA, labB) {
   const pa = [O[0] + CO.R, O[1]], pb = [O[0] + CO.R * Math.cos(ang), O[1] - CO.R * Math.sin(ang)];
   arrow(O[0], O[1], pa[0], pa[1], C.white, a, 5);
@@ -376,10 +376,10 @@ SCENES.copy = S => {
   badgeQ(S, [[0, null, 'computed'], [3, 'Lean checks', 'lean']]);
   ffTab(S, 3, 'NO PHOTOCOPIES', '关系公平：不可复印', a);
   /* before */
-  const b0 = a * Q(S, 0, 'Try two states', 0.8);
+  const b0 = a * Q(S, 0, 'Try two with', 0.8);
   if (b0 > 0.003) {
     coPair(CO.before, CO_A0, b0, 'φ ⊗ blank', 'ψ ⊗ blank');
-    txt('BEFORE · 复印前', CO.before[0] + CO.R / 2, 340, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.white, a: b0 });
+    txt('BEFORE · 复印前', CO.before[0] + CO.R / 2, 310, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.white, a: b0 });
   }
   /* the copier */
   const ca = a * at(S, 0, 0.6);
@@ -395,10 +395,10 @@ SCENES.copy = S => {
   const b1 = a * Q(S, 2, 'After copying', 0.8);
   if (b1 > 0.003) {
     coPair(CO.after, CO_A1, b1, 'φ ⊗ φ', 'ψ ⊗ ψ');
-    txt('AFTER · 复印后', CO.after[0] + CO.R / 2, 340, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.white, a: b1 });
+    txt('AFTER · 复印后', CO.after[0] + CO.R / 2, 310, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.white, a: b1 });
   }
   /* the ledger page */
-  panel(1420, 280, 380, 400, a, C.cyan, 'LEDGER THREE');
+  panel(1420, 260, 380, 410, a, C.cyan, 'LEDGER THREE');
   txt('第三本账 · overlap', 1444, 340, { size: 20, fam: F.zh, w: 700, c: C.dim, a });
   ffRich([['before  ', C.white], ['0.80 × 1', C.cyan]], 1444, 410, { size: 28, a: a * Q(S, 1, 'Before copying', 0.6) });
   ffRich([['after  ', C.white], ['0.80² = 0.64', C.cyan]], 1444, 470, { size: 28, a: b1 });
@@ -411,12 +411,12 @@ SCENES.copy = S => {
   /* line 3: the lock */
   const lea = a * Q(S, 3, 'Lean checks', 0.6);
   if (lea > 0.003) {
-    box(140, 700, 1660, 130, C.lean, lea, 1.5, 'rgba(0,0,0,0.6)');
-    txt('U copies ψ and φ  ⇒  ⟨φ, ψ⟩ = ⟨φ, ψ⟩²  ∧  (φ = ψ  ∨  ⟨φ, ψ⟩ = 0)', 166, 752, { size: 28, fam: F.math, w: 700, c: C.white, a: lea });
-    ffLean(166, 804, 'no_cloning_inner_product_criterion', lea, { size: 18 });
+    box(140, 690, 1660, 130, C.lean, lea, 1.5, 'rgba(0,0,0,0.6)');
+    txt('U copies ψ and φ  ⇒  ⟨φ, ψ⟩ = ⟨φ, ψ⟩²  ∧  (φ = ψ  ∨  ⟨φ, ψ⟩ = 0)', 166, 742, { size: 28, fam: F.math, w: 700, c: C.white, a: lea });
+    ffLean(166, 794, 'no_cloning_inner_product_criterion', lea, { size: 18 });
     const ea = a * Q(S, 3, 'Equal, or perpendicular', 0.6);
-    chip(1520, 790, 150, 44, 'equal · 1', C.lean, ea, 20, F.mono);
-    chip(1700, 790, 170, 44, 'perpendicular · 0', C.lean, ea, 17, F.mono);
+    chip(1460, 780, 180, 44, 'equal · ⟨φ,ψ⟩ = 1', C.lean, ea, 17, F.mono);
+    chip(1680, 780, 220, 44, 'perpendicular · 0', C.lean, ea, 17, F.mono);
   }
   stamp('0.80 ≠ 0.64', 760, 320, Q(S, 2, 'do not balance', 0.4) * (1 - at(S, 3, 0.5)), C.white, 34, -0.06);
 };
@@ -432,20 +432,20 @@ SCENES.steps = S => {
   ffTab(S, 4, 'NO SKIPPING AHEAD', '博弈公平：不能跳步', a);
   /* the round counter: rounds 0..7 from "Lean checks" to "round seven", then on to 9 */
   const t2 = phraseAt(S, 2, 'Lean checks'), t7 = phraseAt(S, 3, 'round seven');
-  const nf = S.u < t2 ? -1 : Math.min(7.999, 8 * (S.u - t2) / Math.max(0.1, t7 + 0.6 - t2)) + 2 * Q(S, 3, 'round seven', 2.0);
+  const nf = S.u < t2 ? -1 : Math.min(7.999, 8 * (S.u - t2) / Math.max(0.1, t7 + 0.6 - t2)) + Q(S, 3, 'round seven', 2.0, 1.2);
   const n = Math.floor(nf);
   /* the turnstile: the failure line B, the success line W, the state at angle (2n+1)θ */
   const P = ang => [ST_O[0] + ST_R * Math.cos(ang), ST_O[1] - ST_R * Math.sin(ang)];
   ffArc(ST_O[0], ST_O[1], ST_R, -Math.PI / 2 - 0.25, 0.05, C.dim, a * 0.45, 1.5);
   arrow(ST_O[0], ST_O[1], ST_O[0] + ST_R + 50, ST_O[1], C.dim, a * 0.8, 2);
   arrow(ST_O[0], ST_O[1], ST_O[0], ST_O[1] - ST_R - 50, C.dim, a * 0.8, 2);
-  txt('B  fail · 失败', ST_O[0] + ST_R + 20, ST_O[1] + 40, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.white, a });
+  txt('B  fail · 失败', ST_O[0] + ST_R + 64, ST_O[1] + 8, { size: 22, fam: F.zh, w: 700, c: C.white, a });
   txt('W  success · 成功', ST_O[0] + 16, ST_O[1] - ST_R - 56, { size: 22, fam: F.zh, w: 700, c: C.white, a });
   /* the clicks: one tick per round */
   const ka = a * at(S, 0, 0.6);
   for (let k = 0; k < ST_N; k++) {
     const ang = (2 * k + 1) * ST_TH;
-    if (ang > Math.PI / 2 + 0.6) break;
+    if (ang > Math.PI / 2 + 0.25) break;
     const p0 = [ST_O[0] + (ST_R - 16) * Math.cos(ang), ST_O[1] - (ST_R - 16) * Math.sin(ang)], p1 = [ST_O[0] + (ST_R + 16) * Math.cos(ang), ST_O[1] - (ST_R + 16) * Math.sin(ang)];
     line(p0[0], p0[1], p1[0], p1[1], k === n ? C.now : C.white, ka * (k <= n ? 0.9 : 0.3), 2.5);
   }
@@ -459,7 +459,7 @@ SCENES.steps = S => {
     txt(`n = ${n}`, tip[0] + 18, tip[1] - 14, { size: 26, fam: F.mono, w: 700, c: C.now, a });
     txt(`(2n+1)θ = ${ffNum(ang / FF_DEG, 1)}°`, tip[0] + 18, tip[1] + 18, { size: 20, fam: F.mono, w: 700, c: C.white, a: a * 0.85 });
   }
-  if (ka > 0.003) txt('turnstile: a picture · 闸机只是比方', ST_O[0] + 40, ST_O[1] + 50, { size: 18, fam: F.zh, w: 700, c: C.argued, a: ka });
+  if (ka > 0.003) txt('turnstile: a picture · 闸机只是比方', ST_O[0] + 40, ST_O[1] + 46, { size: 18, fam: F.zh, w: 700, c: C.argued, a: ka });
   /* the bars: the chance sin²((2n+1)θ) per round */
   const bx = 900, by = 640, bh = 300, bw = 70, gap = 18;
   const ga = a * th0;
@@ -469,7 +469,7 @@ SCENES.steps = S => {
     txt('100%', bx - 18, by - bh + 8, { size: 18, fam: F.mono, w: 700, align: 'right', c: C.white, a: ga * 0.7 });
     txt('chance of success · 成功机会 sin²((2n+1)θ)', bx, by - bh - 30, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: ga });
     for (let k = 0; k < ST_N; k++) {
-      const x = bx + k * (bw + gap), p = stChance(k), show = k === 0 ? 1 : clamp(nf - k + 1);
+      const x = bx + k * (bw + gap), p = stChance(k), show = k === 0 ? 1 : (k <= n ? clamp((nf - k) * 4 + 0.25) : 0);
       txt(String(k), x + bw / 2, by + 30, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ga });
       if (show <= 0.003) continue;
       const hh = bh * p * ease(show), col = k === n ? C.now : C.cyan;
@@ -493,7 +493,7 @@ SCENES.steps = S => {
 /*                    scene 5 · LEDGER FIVE · THE SAME STARLIGHT             */
 /* ======================================================================= */
 const SR_O = [400, 540], SR_R = 240;
-const SR_PLOT = { x: 860, y: 300, w: 900, h: 330 };
+const SR_PLOT = { x: 880, y: 300, w: 880, h: 300 };
 SCENES.stars = S => {
   const a = ffFade(S);
   if (a <= 0) return;
@@ -528,28 +528,29 @@ SCENES.stars = S => {
   /* the plot of the running averages */
   const pa = a * at(S, 1, 0.6);
   if (pa > 0.003) {
-    const { x, y, w, h } = SR_PLOT, X = n => x + w * n / SR_NMAX, Y = v => y + h * (1 - v);
-    panel(x - 30, y - 70, w + 60, h + 140, pa, C.cyan, 'AVERAGE BRIGHTNESS · 平均亮度');
+    const { x, y, w, h } = SR_PLOT, X = n => x + w * Math.log(n) / Math.log(SR_NMAX), Y = v => y + h * (1 - v);
+    panel(x - 50, y - 70, w + 80, h + 145, pa, C.cyan, 'AVERAGE BRIGHTNESS · 平均亮度');
+    [1, 10, 100].forEach(n => txt(String(n), X(n), y + h + 26, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.dim, a: pa }));
     line(x, y + h, x + w, y + h, C.dim, pa, 1.5); line(x, y, x, y + h, C.dim, pa, 1.5);
     ctx.save(); ctx.setLineDash([7, 7]); line(x, Y(0.5), x + w, Y(0.5), C.white, pa * 0.6, 1.5); ctx.restore();
     txt('½', x - 12, Y(0.5) + 9, { size: 26, fam: F.math, w: 700, align: 'right', c: C.white, a: pa });
     txt('1', x - 12, Y(1) + 9, { size: 22, fam: F.math, w: 700, align: 'right', c: C.dim, a: pa });
     txt('0', x - 12, Y(0) + 9, { size: 22, fam: F.math, w: 700, align: 'right', c: C.dim, a: pa });
-    txt(`steps N = ${N}`, x + w, y + h + 44, { size: 20, fam: F.mono, w: 700, align: 'right', c: C.dim, a: pa });
+    txt(`steps N = ${N} (log scale)`, x + w, y + h + 60, { size: 20, fam: F.mono, w: 700, align: 'right', c: C.dim, a: pa });
     SR_AVG.forEach((avg, i) => {
       if (N < 1) return;
       curve(s => { const n = 1 + s * (N - 1); const k = Math.floor(n), f = n - k; const v = k >= N ? avg[N] : lerp(avg[k], avg[k + 1], f); return [X(n), Y(v)]; }, Math.max(2, N * 2), cols[i], pa, 3);
-      txt(`${names[i]} ${avg[N].toFixed(3)}`, x + 20 + i * 200, y + h + 44, { size: 22, fam: F.mono, w: 700, c: cols[i], a: pa });
+      txt(`${names[i]} ${avg[N].toFixed(3)}`, x + 20 + i * 200, y + h + 60, { size: 22, fam: F.mono, w: 700, c: cols[i], a: pa });
     });
   }
   /* the theorem */
   const lea = a * Q(S, 2, 'Lean checks', 0.6);
   if (lea > 0.003) {
-    box(830, 690, 960, 140, C.lean, lea, 1.5, 'rgba(0,0,0,0.6)');
-    txt('(1/N) Σₙ f(gⁿ⁺¹)  →  ∫_G f dμ,   G = closure of the orbit', 850, 734, { size: 24, fam: F.math, w: 700, c: C.white, a: lea });
-    ffLean(850, 782, 'result', lea, { size: 18 });
+    box(830, 698, 960, 136, C.lean, lea, 1.5, 'rgba(0,0,0,0.6)');
+    txt('(1/N) Σₙ f(gⁿ⁺¹)  →  ∫_G f dμ,   G = closure of the orbit', 850, 740, { size: 24, fam: F.math, w: 700, c: C.white, a: lea });
+    ffLean(850, 786, 'result', lea, { size: 18 });
     const ga = a * Q(S, 3, 'the whole circle', 0.6);
-    txt('α irrational ⇒ G = whole circle, ∫ f = ½ (see the chapter remark) · 轨道铺满圆', 850, 818, { size: 15, fam: F.zh, w: 700, c: C.dim, a: ga });
+    txt('α irrational ⇒ G = whole circle, ∫ f = ½ (see the chapter remark) · 轨道铺满圆', 850, 820, { size: 15, fam: F.zh, w: 700, c: C.dim, a: ga });
   }
 };
 
@@ -561,8 +562,8 @@ SCENES.edge = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued'], [1, 'P versus NP', 'open'], [2, null, 'argued']]);
   const rows = [
-    { k: 0, col: C.argued, en: '“fairness” is a reading of five identities', zh: '“公平”是对五条恒等式的读法', note: 'the book’s interpretation (MODEL) · 本书的诠释' },
-    { k: 1, col: C.open, en: 'one method’s rounds ≠ a bound on all methods', zh: '一种方法的轮数不是所有方法的下界', note: 'P ≠ NP stays an open conjecture · P 与 NP 之问仍然开放' },
+    { k: 0, col: C.argued, en: '“fairness” is a reading of five identities', zh: '“公平”是对五条恒等式的读法', note: "this book's interpretation (MODEL) · 本书的诠释" },
+    { k: 1, col: C.open, en: "one method's rounds ≠ a bound on all methods", zh: '一种方法的轮数不是所有方法的下界', note: 'P ≠ NP stays an open conjecture · P 与 NP 之问仍然开放' },
     { k: 2, col: C.argued, en: 'three-qubit monogamy (CKW) · erasure heat k_B T ln 2', zh: '三方纠缠如何分配 · 擦除一比特的物理热量', note: 'literature results, not formalized here · 文献结果，本书未形式化' }
   ];
   rows.forEach((rw, i) => {
