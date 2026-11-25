@@ -223,7 +223,10 @@ function qrTree(G, a, o = {}) {
   for (const p of qrRouters(n)) {
     const [x, y] = qrNode(G, p), silent = o.silent && o.silent.has(p);
     let lab = 'W', col = C.dim;
-    for (const path of paths) { const b = setBit(p, path); if (b != null) { lab = b; col = C.cyan; } }
+    const got = new Set();
+    for (const path of paths) { const b = setBit(p, path); if (b != null) { got.add(b); col = C.cyan; } }
+    if (got.size === 1) lab = [...got][0];
+    else if (got.size > 1) lab = '0,1';               // superposed branches set this router both ways
     if (o.labels) { lab = o.labels(p); col = lab === 'W' ? C.dim : C.cyan; }
     if (o.marks && !silent) for (let q = 0; q < 3; q++) {
       const rr = 30 + ((t * 26 + q * 14) % 42);
@@ -231,7 +234,7 @@ function qrTree(G, a, o = {}) {
     }
     ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = 'rgba(4,10,24,0.92)'; ctx.beginPath(); ctx.arc(x, y, 26, 0, TAU); ctx.fill(); ctx.restore();
     ring(x, y, 26, silent ? C.dim : col, a, 2.5);
-    txt(lab, x, y + 10, { size: 28, fam: F.mono, w: 700, align: 'center', c: silent ? C.dim : col, a: a * (silent ? 0.5 : 1) });
+    txt(lab, x, y + (lab.length > 1 ? 7 : 10), { size: lab.length > 1 ? 19 : 28, fam: F.mono, w: 700, align: 'center', c: silent ? C.dim : col, a: a * (silent ? 0.5 : 1) });
     if (silent) { line(x - 30, y - 30, x + 30, y + 30, C.white, a * 0.7, 3); }
   }
   /* cells */
@@ -393,7 +396,7 @@ SCENES.read = S => {
   qrRich([['r = 0 + ', C.white], ['9', C.now], [' = ', C.white], ['9', C.now]], 1510, 330, { size: 34, a: a * Q(S, 2, 'Zero plus nine', 0.5) });
   txt('cell 5 holds 9 · 第 5 格存 9', 1510, 390, { size: 22, fam: F.zh, w: 700, c: C.white, a: da });
   /* undo: wires panel */
-  const ua = a * at(S, 3, 0.6) * (1 - at(S, 5, 0.6));
+  const ua = a * at(S, 3, 0.6) * (1 - at(S, 5, 0.3));
   if (ua > 0.003) {
     panel(1240, 500, 560, 260, ua, C.cyan, 'WIRES · 线路');
     const routed = qrWireList(3, qrRoute(3, qrBits(5, 3), qrClean(3, true))).map(Number);
@@ -404,16 +407,16 @@ SCENES.read = S => {
     txt('address 101 kept · 地址保留', 1268, 716, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ua });
   }
   /* line 4: the aphorism */
-  stamp('READ · UNDO', 650, 150 + 0 * 0, Q(S, 4, 'Read the cell', 0.5, 0.2) * (1 - at(S, 5, 0.5, 0.2)), C.cyan, 34, -0.04);
-  /* line 5: Lean */
-  const la = a * Q(S, 5, 'Lean checks', 0.6);
+  stamp('READ · UNDO', 650, 830, Q(S, 4, 'Read the cell', 0.5, 0.2) * (1 - at(S, 5, 0.5, 0.2)), C.cyan, 34, -0.04);
+  /* line 5: Lean (after the wires panel has gone) */
+  const la = a * Q(S, 5, 'Lean checks', 0.6, 0.35);
   if (la > 0.003) {
     panel(1240, 500, 560, 320, la, C.lean, 'EVERY DEPTH n · 任意深度');
     qrRich([['query(a, clean, r)', C.white]], 1264, 572, { size: 26, a: la });
     qrRich([['  = (a, clean, r + D(a))', C.cyan]], 1264, 612, { size: 26, a: la * Q(S, 5, 'the bus gains', 0.5) });
     qrRich([['any wires w come back as w', C.white]], 1264, 666, { size: 22, a: la * Q(S, 5, 'the address and wires', 0.5) });
     txt('任意线路 w 原样复原', 1264, 700, { size: 22, fam: F.zh, w: 700, c: C.white, a: la * Q(S, 5, 'the address and wires', 0.5) });
-    txt('D : address → any additive group', 1264, 744, { size: 18, fam: F.mono, w: 700, c: C.dim, a: la });
+    txt('D : address → any commutative additive group', 1264, 744, { size: 18, fam: F.mono, w: 700, c: C.dim, a: la });
     qrLean(1264, 796, QR_LEAN.correctness, la, { size: 19 });
   }
 };
@@ -449,7 +452,7 @@ SCENES.both = S => {
     panel(1200, 530, 600, 290, la, C.lean, 'ANY AMPLITUDES ψ · 任意振幅');
     qrRich([['Q†Q = 1,   QQ† = 1', C.white]], 1224, 602, { size: 28, a: la * Q(S, 3, 'unitary', 0.5) });
     qrRich([['Q · init ψ = init ((a, r) ↦ ψ(a, r − D a))', C.cyan]], 1224, 656, { size: 23, a: la * Q(S, 3, 'moves any amplitudes', 0.5) });
-    txt('values in a finite additive group · 有限加法群', 1224, 706, { size: 19, fam: F.zh, w: 700, c: C.dim, a: la });
+    txt('values in a finite commutative group · 有限交换群', 1224, 706, { size: 19, fam: F.zh, w: 700, c: C.dim, a: la });
     qrLean(1224, 774, QR_LEAN.correctness, la, { size: 19 });
   }
   txt('|010⟩ = address 2   |101⟩ = address 5', RG.x0, 170, { size: 22, fam: F.math, w: 700, c: C.now, a: ia });
