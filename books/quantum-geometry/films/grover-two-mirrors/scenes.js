@@ -260,15 +260,15 @@ SCENES.plane = S => {
     /* the start U at θ, with its two shadows */
     const sa = pa * Q(S, 2, 'thirty degrees off', 0.6);
     const U = P([Math.cos(GR_TH), Math.sin(GR_TH)]);
-    grMirror(PL_O, PL_R * 1.05, 0, a * Q(S, 3, 'first mirror', 0.6));
+    line(PL_O[0], PL_O[1], PL_O[0] + PL_R * 1.05, PL_O[1], C.cyan, a * Q(S, 3, 'first mirror', 0.6), 4);   // mirror 1, drawn as a ray like mirror 2
     if (Q(S, 3, 'second mirror', 0.6) > 0) {
       const ma = a * Q(S, 3, 'second mirror', 0.6), d = PL_R * 1.1;
       line(PL_O[0], PL_O[1], PL_O[0] + d * Math.cos(GR_TH), PL_O[1] - d * Math.sin(GR_TH), C.cyan, ma, 4);
       txt('mirror 2 · 镜 2', PL_O[0] + d * Math.cos(GR_TH) + 14, PL_O[1] - d * Math.sin(GR_TH) - 6, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: ma });
-      txt('mirror 1 · 镜 1', PL_O[0] + PL_R * 1.05, PL_O[1] - 18, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.cyan, a: a * Q(S, 3, 'first mirror', 0.6) });
+      txt('mirror 1 · 镜 1', 700, PL_O[1] + 40, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: a * Q(S, 3, 'first mirror', 0.6) });
     }
     grArc(PL_O, 150, 0, GR_TH, C.argued, sa, 3);
-    txt('θ = 30°', PL_O[0] + 170, PL_O[1] - 26, { size: 26, fam: F.mono, w: 700, c: C.argued, a: sa });
+    txt('θ = 30°', PL_O[0] + 170, PL_O[1] - 26, { size: 26, fam: F.mono, w: 700, c: C.white, a: sa });
     ctx.save(); ctx.setLineDash([6, 6]);
     line(U[0], U[1], U[0], PL_O[1], C.white, sa * 0.5, 1.5); line(U[0], U[1], PL_O[0], U[1], C.white, sa * 0.5, 1.5); ctx.restore();
     arrow(PL_O[0], PL_O[1], U[0], U[1], C.now, pa, 6);
@@ -283,7 +283,7 @@ SCENES.plane = S => {
     grRich([['W = (1, 0, 0, 0)', C.white]], 1090, 470, { size: 28, a: la * Q(S, 1, 'success, toward', 0.5) });
     grRich([['B = (0, 1, 1, 1) / √3', C.white]], 1090, 520, { size: 28, a: la * Q(S, 1, 'failure, toward', 0.5) });
     grRich([['U = ', C.now], ['½', C.white], [' W + ', C.now], ['√3/2', C.white], [' B', C.now]], 1090, 580, { size: 30, a: la * at(S, 2, 0.5) });
-    grRich([['sin θ = ½   θ = 30°', C.argued]], 1090, 630, { size: 28, a: la * Q(S, 2, 'the sine of', 0.5) });
+    grRich([['sin θ = ½   θ = 30°', C.white]], 1090, 630, { size: 28, a: la * Q(S, 2, 'the sine of', 0.5) });
     grRich([['mirror 1:  I − 2P', C.cyan]], 1090, 700, { size: 26, a: la * Q(S, 3, 'first mirror', 0.5) });
     grRich([['mirror 2:  2UU* − I', C.cyan]], 1090, 750, { size: 26, a: la * Q(S, 3, 'second mirror', 0.5) });
   }
@@ -333,7 +333,7 @@ SCENES.count = S => {
   const ta = a * Q(S, 3, 'turned sixty', 0.8);
   grArc(O, 110, GR_TH, 3 * GR_TH, C.argued, ta, 4);
   txt('+60°', O[0] + 100, O[1] - 150, { size: 26, fam: F.mono, w: 700, c: C.argued, a: ta });
-  txt(`${Math.round(ang / GR_DEG)}°`, tip[0] + 22, tip[1] + 34, { size: 26, fam: F.mono, w: 700, c: C.now, a });
+  txt(`${Math.round(ang / GR_DEG) < 0 ? '−' : ''}${Math.abs(Math.round(ang / GR_DEG))}°`, tip[0] + 22, tip[1] + 34, { size: 26, fam: F.mono, w: 700, c: C.now, a });
   /* ledger line at the top */
   const rows = [
     [0, 'mirror 1 · 镜 1:  (½, ½, ½, ½) → (−½, ½, ½, ½)', 'flips the sign'],
@@ -372,12 +372,13 @@ SCENES.rule = S => {
     const g = (2 * shown + 1) * th, q = P([Math.cos(g), Math.sin(g)]);
     if (na > 0.003) { grArc(RU_O, 140, th, g, C.argued, na, 4); arrow(RU_O[0], RU_O[1], q[0], q[1], C.now, na, 6); }
     txt('same angle 2θ every step · 每步同转 2θ', RU_O[0], RU_O[1] + 60, { size: 22, fam: F.zh, w: 700, c: C.argued, a: na });
+    txt('schematic θ = 11° · 示意角', RU_O[0], RU_O[1] + 92, { size: 18, fam: F.zh, w: 700, c: C.dim, a: na });
   }
   /* the theorem panel */
   panel(960, 180, 860, 600, a, C.lean, 'ANY MARKED SET · 任意标记集合');
-  grRich([['0 < p ≤ 1,   sin θ = √p', C.white]], 990, 250, { size: 28, a: a * Q(S, 0, 'any success chance', 0.6) });
+  grRich([['0 < p ≤ 1,   sin θ = √p', C.white]], 990, 250, { size: 28, a: a * Q(S, 0, 'success chance', 0.6) });
   txt('U = CJ an isometry, P a projector · U 为等距，P 为投影', 990, 284, { size: 18, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 0, 'any marked set', 0.6) });
-  txt('same p for every source column · 每一源列成功率相同', 990, 312, { size: 18, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 0, 'any success chance', 0.6) });
+  txt('(PU)*(PU) = p · I: same p, orthogonal success parts · 各列成功率相同且互相正交', 990, 312, { size: 18, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 0, 'success chance', 0.6) });
   grRich([['p < 1:   W*W = 1,  B*B = 1,  W*B = 0', C.white]], 990, 360, { size: 28, a: a * at(S, 1, 0.6) });
   grRich([['Qⁿ U = ', C.now], ['sin((2n+1)θ)', C.white], [' W + ', C.now], ['cos((2n+1)θ)', C.white], [' B', C.now]], 990, 440, { size: 28, a: a * at(S, 2, 0.6) });
   txt('Q = (2UU* − I)(I − 2P),   every n ∈ ℕ', 990, 484, { size: 22, fam: F.math, w: 700, c: C.cyan, a: a * at(S, 2, 0.6) });
@@ -453,9 +454,9 @@ SCENES.edge = S => {
   const N = GR_N100;
   const rows = [
     { k: 0, col: C.lean, en: 'p = 1:   U = W', zh: '起点就是奖品：只说起点与成功箭头重合', note: 'the p = 1 branch of the theorem · 定理里 p = 1 的那一支', lean: true },
-    { k: 1, col: C.cyan, en: `N = 100:  θ = ${(N.th / GR_DEG).toFixed(2)}°,  best n = ${N.n},  ${(N.ang / GR_DEG).toFixed(1)}°,  ${N.pr.toFixed(3)}`, zh: '整数步只能逼近顶点；N = 4 是一步正好命中的特例', note: 'computed on screen · 屏幕上的计算' },
+    { k: 1, col: C.cyan, en: `N = 100:  θ = ${(N.th / GR_DEG).toFixed(2)}°,  best n = ${N.n}:  angle ≈${(N.ang / GR_DEG).toFixed(1)}°,  success ≈ ${N.pr.toFixed(3)}`, zh: '除 N = 4 外，整数步只能逼近顶点', note: 'N = 100 computed on screen; every other N by Niven\'s theorem, a literature result · 数字是屏幕上的计算；其余 N 据 Niven 定理（文献结果）' },
     { k: 2, col: C.cyan, en: `(π/4)√N:   (π/4)·√100 ≈ ${N.est.toFixed(2)}`, zh: '步数估计是在定理之上算出来的', note: 'arithmetic, not part of the theorem · 不属于定理本身' },
-    { k: 3, col: C.argued, en: 'no quantum search beats Ω(√N) queries', zh: '查询下界 Ω(√N)', note: 'literature result, not formalized in this book · 文献结果，本书未形式化' }
+    { k: 3, col: C.argued, en: 'unstructured search needs Ω(√N) oracle queries', zh: '无结构搜索至少要 Ω(√N) 次查询', note: 'literature result, not formalized in this book · 文献结果，本书未形式化' }
   ];
   rows.forEach((rw, i) => {
     const ra = a * at(S, rw.k, 0.6);

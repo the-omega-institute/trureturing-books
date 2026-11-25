@@ -134,8 +134,8 @@
       ],
       "lines": [
         [
-          "Lean checks the general rule, for any marked set and any success chance p above zero.",
-          "Lean 内核检验了一般规律：任意标记集合，任意大于零的成功率 p。"
+          "Lean checks the general rule, for any marked set and any uniform success chance p above zero.",
+          "Lean 内核检验了一般规律：任意标记集合，任意大于零的均匀成功率 p。"
         ],
         [
           "Below one, success and failure are perpendicular unit arrows.",
@@ -146,8 +146,8 @@
           "走了 n 步，态恰好落在 (2n+1)θ 的角度上。"
         ],
         [
-          "It never leaves that plane, even with any spectator set alongside.",
-          "它从不离开这个平面；旁边再并上任何旁观系统，也照样成立。"
+          "It never leaves that plane, even with any spectator system tensored alongside.",
+          "它从不离开这个平面；旁边再张量并上任何旁观系统，也照样成立。"
         ]
       ],
       "cues": [
@@ -184,8 +184,8 @@
           "第三步到 210°，仍是 1/4；第四步到 270°，又一次必中。"
         ],
         [
-          "Search is not opening doors. It is turning, and past the top, every turn walks you back.",
-          "搜索不是逐扇推门，而是转动；过了顶，每转一下都在往回走。"
+          "Search is not opening doors. It is turning: past the top, the next turn walks you back down.",
+          "搜索不是逐扇推门，而是转动；过了顶，下一步就往回走。"
         ]
       ],
       "cues": [
@@ -214,8 +214,8 @@
           "如果起点本身就是奖品，p 等于 1，定理只说起点就是成功箭头。"
         ],
         [
-          "Four boxes land exactly in one step. For most sizes, whole steps only come close to the top.",
-          "四个盒子一步正好命中；对大多数规模，整数步只能逼近顶点。"
+          "Four boxes land exactly in one step. For every other size, whole steps only come close to the top.",
+          "四个盒子一步正好命中；除此之外，整数步只能逼近顶点。"
         ],
         [
           "About pi over four, times root N, steps gets close. That count is arithmetic, not the theorem.",
