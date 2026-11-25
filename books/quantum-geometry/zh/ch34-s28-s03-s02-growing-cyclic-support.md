@@ -65,7 +65,7 @@ $$
 
 每个固定实数对径偏移 $r$ 处，同一拟合系数的对径带符号值满足
 $$
-N^3p_N^{\rm rear}(r)\longrightarrow B_\infty-\tfrac34r^2.
+N^3p_N^{\mathrm{rear}}(r)\longrightarrow B_\infty-\tfrac34r^2.
 $$
 极限非零时可确定充分大 $N$ 下的严格符号。这些极限适用于固定的非空有限对径集合 $S$ 上的带符号拟合。认证循环群最优解仍需建立有限循环格点的对应并将补集的符号控制延伸至所有剩余格点。当 $B_\infty=3r^2/4$ 时，该层的激活状态仍待判定。 [系数误差阶的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.refined_coefficients) · [前部与半步极限](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_boundary_value) · [对径极限](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingEdgeLimits.scaled_rear_value) · [研究问题](https://github.com/the-omega-institute/trureturing/issues/34029)
 
@@ -108,11 +108,11 @@ $$
 对径带符号值的下一阶展开为
 
 $$
-N\left(|S|N^3p_N^{\rm rear}(r)-Q+\tfrac34D\right)
+N\left(|S|N^3p_N^{\mathrm{rear}}(r)-Q+\tfrac34D\right)
 \longrightarrow L+Q+\tfrac98 D.
 $$
 
-精确格点归一化常数为 $Z=\frac43N^3+2N^2-N/3-1/2$。结合前部拟合系数的三次误差界，得到 $N(C_N+3/4)\to9/8$。联立拟合末行与 $(0,\sum_{s\in S}s^2,|S|)$ 的差为 $o(1/N)$。增长前部的贡献为 $O(N^{-3})$，有限个固定对径特征的误差受 $N^2h^2$ 或 $h^2$ 的常数倍控制。同样的估计给出 $N^3p_N^{\rm rear}(r)=C_Nr^2+B_N+o(1/N)$。利用末行精确目标 $Q_N(1+1/N)$ 消去 $B_N$，即得上述极限。
+精确格点归一化常数为 $Z=\frac43N^3+2N^2-N/3-1/2$。结合前部拟合系数的三次误差界，得到 $N(C_N+3/4)\to9/8$。联立拟合末行与 $(0,\sum_{s\in S}s^2,|S|)$ 的差为 $o(1/N)$。增长前部的贡献为 $O(N^{-3})$，有限个固定对径特征的误差受 $N^2h^2$ 或 $h^2$ 的常数倍控制。同样的估计给出 $N^3p_N^{\mathrm{rear}}(r)=C_Nr^2+B_N+o(1/N)$。利用末行精确目标 $Q_N(1+1/N)$ 消去 $B_N$，即得上述极限。
 
 现设 $Q=T_e(l+1)$ 且周期的最终奇偶性为 $e$。$S_l$ 的第一个未纳入对径半径是 $S_{l+1}$ 的最后一个纳入半径。对于这两个窗口，该半径均满足 $3D/4=Q$。其一阶符号因此由 $L+5Q/2$ 决定。若该量为正，最优解最终选取较大的对径窗口 $S_{l+1}$，若为负则选取 $S_l$。两种情况下前部支撑均为 $|j|\le N$，并满足两个精确矩等式与上述平方距离能量界。当 $L+5Q/2=0$ 时，更细的符号仍待判定。 [Lean 一阶对径展开证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder.scaled_rear_first_order) [Lean 阈值处最终支撑定理](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingRearFirstOrder.eventual_support_at_threshold)
 
@@ -124,7 +124,7 @@ $$
 
 $$
 \begin{aligned}
-N\Big[N\big(|S|N^3p_N^{\rm rear}(r)-Q+\tfrac34D\big)
+N\Big[N\big(|S|N^3p_N^{\mathrm{rear}}(r)-Q+\tfrac34D\big)
  -(L+Q+\tfrac98D)\Big]
 \longrightarrow H+L-\tfrac{15}{8}D .
 \end{aligned}
