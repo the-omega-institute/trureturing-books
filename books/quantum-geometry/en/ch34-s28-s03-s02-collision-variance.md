@@ -63,4 +63,38 @@ $$
 
 Set $q(k)=\max(0,1-k^2/r^2)$. If $b_k$ is the mass in the selected bin, then $\sum_k b_kq(k)\ge A(1-M/r^2)$. The exact integer square and fourth-power sums give $\sum_k q(k)^2=16r/15-1/(15r^3)$. Apply Cauchy–Schwarz and then $\sum_k b_k^2\le E(\eta)$ to obtain the lower bound. [Lean proof of the parabolic lower bound](lean:D5/S3/Fourier/Concentration/ShiftedBinVariance.collision_parabolic_lower)
 
-For degree-$p$ frequency sums set $A=W^p$ and $B=pV$, strengthening the necessary condition for the moment test above. For $B>0$, as $\eta/\sqrt B\to0$, choosing $r=\lceil\sqrt{5M}\rceil$ makes the normalized coefficient of the lower bound tend to $3/(5\sqrt5)$. Thus $\liminf E(\eta)\sqrt B/(A^2\eta)\ge3/(5\sqrt5)$ when $A>0$. Optimality of this asymptotic consequence and an upper bound for actual zeta ordinates require further proofs.
+For degree-$p$ frequency sums set $A=W^p$ and $B=pV$, strengthening the necessary condition for the moment test above. For $B>0$, as $\eta/\sqrt B\to0$, choosing $r=\lceil\sqrt{5M}\rceil$ makes the normalized coefficient of the lower bound tend to $3/(5\sqrt5)$. Thus $\liminf E(\eta)\sqrt B/(A^2\eta)\ge3/(5\sqrt5)$ when $A>0$. An upper bound for actual zeta ordinates requires further proof.
+
+## Separated parabolic weights and asymptotic sharpness
+
+Take a positive integer $n$, integer sites $k=-n,\ldots,n$, and weights $c_k=n^2-k^2$. Symmetry gives mean zero. The total mass and variance are
+
+$$
+A=\frac{n(4n^2-1)}{3},\qquad B=\frac{n^2-1}{5}.
+$$
+
+The exact collision formula has a complete resolution classification.
+
+$$
+E(\eta)=\frac{A(4n^2+1)}5
+\quad\Longleftrightarrow\quad
+\eta\ge0\ \land\ (n=1\ \lor\ \eta<1).
+$$
+
+For $0\le\eta<1$, different integer sites are farther apart than $\eta$, so only the diagonal contributes. The identity $c_k^2=n^2c_k-k^2c_k$ gives the formula. At $n=1$, the center carries the entire positive weight. For $n\ge2$ and $\eta\ge1$, the ordered pair $(0,1)$ already contributes strictly positive additional mass. A negative radius excludes every pair. [Lean proof of the exact collision formula](https://github.com/the-omega-institute/trureturing/blob/afc30aadad62cff44787b01db91ff06d4c5adbcc/D5/S3/Fourier/Concentration/SeparatedParabolicCollision.lean#L25)
+
+For every resolution sequence eventually satisfying $0<\eta_n<1$ with $\eta_n\to L>0$, set $t=1/n$. Then
+
+$$
+\frac{\eta_n}{\sqrt B}=\frac{\sqrt5\,t\eta_n}{\sqrt{1-t^2}}
+\longrightarrow0,
+$$
+
+$$
+\frac{E(\eta_n)\sqrt B}{A^2\eta_n}
+=\frac{3}{5\sqrt5}\frac{4+t^2}{4-t^2}
+\frac{\sqrt{1-t^2}}{\eta_n}
+\longrightarrow\frac{3}{5\sqrt5\,L}.
+$$
+
+Choose $\eta_n=n/(n+1)$, so each resolution is strictly smaller than the site spacing and $L=1$. Thus the coefficient $3/(5\sqrt5)$ in the preceding section is asymptotically sharp for arbitrary finite nonnegative weighted data. The same parabolic profile appears in continuous second-moment extremization of Rényi entropy, as in [Sekeh, equation (2.1) and Theorem 3.1](https://arxiv.org/abs/1509.02190v4). Here the separated finite sites ensure only diagonal collisions occur inside the closed band. Requiring the data to arise as high-degree sums from a fixed frequency family or from actual zeta ordinates requires additional arithmetic constraints. [Lean proof of the limit](https://github.com/the-omega-institute/trureturing/blob/afc30aadad62cff44787b01db91ff06d4c5adbcc/D5/S3/Fourier/Concentration/SeparatedParabolicCollision.lean#L154)
