@@ -303,3 +303,49 @@ $$
 $$
 
 The required hard-band asymptotic thus follows from asymptotics for the Fejér-weighted moments at neighboring multiplicative radii. The noncentral contribution and matching upper estimates for actual zeta tails remain open arithmetic problems.
+
+## Pair fourth moments control the central Gaussian profile
+
+For a finite real frequency family $g_j$ and real weights $w_j$, write $W=\sum_jw_j$, $Q(t)=|S(t)|^2$, and define
+
+$$
+M_k=\sum_{i,j}w_iw_j(g_i-g_j)^k.
+$$
+
+If every pair product $w_iw_j\ge0$, then for every real $t$,
+
+$$
+0\le Q(t)-\left(W^2-\frac{M_2t^2}{2}\right)
+\le\frac{M_4t^4}{24}.
+$$
+
+Expand the degree-one Fourier pair sum and apply the global cosine estimate $0\le\cos x-1+x^2/2\le x^4/24$ to each frequency difference. This retains the exact quadratic term and bounds the quartic remainder. [Global fourth-moment bound](https://github.com/the-omega-institute/trureturing/blob/09e2f8bc08952ee2744f4c46296d9812fbdd2e5b/D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.lean#L100)
+
+Now let the frequencies and weights vary with degree $n$, with eventually normalized masses $W_n=1$ and eventually nonnegative pair products. Assume eventually $M_{2,n}>0$ and
+
+$$
+R_n=\frac{M_{4,n}}{nM_{2,n}^2}\longrightarrow 0,
+\qquad s_n=\sqrt{nM_{2,n}/2}.
+$$
+
+For fixed $u$ the finite fourth-moment bound gives
+
+$$
+0\le n\bigl(Q_n(u/s_n)-1\bigr)+u^2\le\frac{u^4R_n}{6}.
+$$
+
+The exponential power limit therefore gives
+
+$$
+Q_n(u/s_n)^n\longrightarrow e^{-u^2}.
+$$
+
+If $a_n$ is the mean under the normalized weights, then $M_{2,n}=2\sum_jw_{n,j}(g_{n,j}-a_n)^2$, so this scale uses the actual variance. Original nonnegative weights with positive total mass can be divided by their total to obtain the normalized score. [Central Gaussian limit](https://github.com/the-omega-institute/trureturing/blob/09e2f8bc08952ee2744f4c46296d9812fbdd2e5b/D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.lean#L169)
+
+There is also an integrable bound on a window that can grow with degree. For $n>0$, $W=1$, nonnegative pair products, $M_2>0$, and $u^2M_4\le3nM_2^2$, the scaled quartic error is at most $u^2/2$. Hence
+
+$$
+Q(u/s)^n\le e^{-u^2/2},\qquad s=\sqrt{nM_2/2}.
+$$
+
+This envelope permits dominated convergence on central windows satisfying the fourth-moment condition. For actual zeta ordinates, the moment conditions and the weighted contribution of Fourier peaks outside that window still require estimates. [Central Gaussian envelope](https://github.com/the-omega-institute/trureturing/blob/09e2f8bc08952ee2744f4c46296d9812fbdd2e5b/D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.lean#L204)
