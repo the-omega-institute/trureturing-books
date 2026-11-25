@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "b89e5b90b12773b9c877030cfe98d14edf4ae364",
-  "pinned_at": "2026-11-25T21:46:17Z",
+  "commit": "892906f8e029545c548eb21f9f8ba3a867cbda21",
+  "pinned_at": "2026-11-25T22:52:17Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -12942,6 +12942,19 @@
       "statement_id": "sha256:b24f1ab033c2c80a98732043dd03a2a3cda41a464dced7a26ed725ff21afd666",
       "line": 89,
       "signature": "theorem prime_window_mobius_of_power_prefix (hRH : RiemannHypothesis) {β P ε : ℝ} (hβ : 0 ≤ β) (hβ₁ : β < 1) (hP : 0 < P) (hε : 0 < ε) (hprefix : ∀ k : ℕ, 1 ≤ k → |∑ n ∈ Finset.Icc 1 k, (μ n : ℝ)| ≤ P*(k : ℝ)^β) : ∃ a₀ K : ℝ, 2 ≤ a₀ ∧ 0 < K ∧ ∀ m : ℕ, 2 ≤ m → ∀ a B : ℝ, a₀ ≤ a → a ≤ B → |windowDiscrepancy a B - spectralPrimitive (phaseOrbit (Real.log B)) + spectralPrimitive (phaseOrbit (Real.log a)) - (∑ n ∈ Finset.Icc 3 m, -(μ n : ℝ) * (2 * (n : ℝ)^2 / (((n : ℝ) - 1) * ((n : ℝ) - 2))) * (a ^ ((n : ℝ)⁻¹ - 1 / 2) - B ^ ((n : ℝ)⁻¹ - 1 / 2))) - (∑ n ∈ (Finset.Icc 2 m).filter (fun n => 2 * n < m +"
+    },
+    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio": {
+      "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment",
+      "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHHarmonicPairMoment.harmonic_pair_ratio",
+      "kind": "theorem",
+      "statement_id": "sha256:1e861d615b697ffabf6a29a6697e34190c30cf091da5bd883399469a099433a2",
+      "line": 59,
+      "signature": "theorem harmonic_pair_ratio (rh : RiemannHypothesis) : ∀ᶠ T : ℝ in atTop, let logHeight",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEightNinths.prime_window_mobius_eight_ninths_of_rh": {
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEightNinths",

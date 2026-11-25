@@ -362,7 +362,7 @@ $$
 \frac{P_4(T)}{P_2(T)^2}\le4096\log T.
 $$
 
-[调和权重矩比值界](https://github.com/the-omega-institute/trureturing/blob/93bd4f35a76ee2e86010f8f119ad1bb4c8aabf48/D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.lean#L59) 若 $T_n\to\infty$ 且 $\log T_n/n\to0$，则实际归一化零点谱满足前述高斯轮廓的四阶矩比值假设。固定比例的频率缩放 $g_\gamma=\gamma/r$（$r>0$）不改变此矩比值。中心 Fejér 主项还须满足分辨率与实际方差尺度的兼容条件。中间时间区域的非中心峰估计仍须独立建立。
+[调和权重矩比值界](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio) 若 $T_n\to\infty$ 且 $\log T_n/n\to0$，则实际归一化零点谱满足前述高斯轮廓的四阶矩比值假设。固定比例的频率缩放 $g_\gamma=\gamma/r$（$r>0$）不改变此矩比值。中心 Fejér 主项还须满足分辨率与实际方差尺度的兼容条件。中间时间区域的非中心峰估计仍须独立建立。
 
 ## 移动中心窗口的 Fejér 积分主项
 
@@ -405,30 +405,6 @@ K_{\eta_n}(t)|S_n(t)|^{2n}\,dt\longrightarrow0,
 $$
 
 并且对邻近的乘法分辨率验证相应极限。对于按调和权重加权的实际 ζ 零点谱，上述截断增长条件保证矩比值条件成立。非中心峰的积分估计仍是开放的算术缺口。
-
-### 全线矩的有限观察窗口
-
-对非负权重，令 $F_p(t)=|S(t)|^{2p}$，$M_\eta=\int_{\mathbb R}K_\eta(t)F_p(t)\,dt$。三角频率权重 $\phi_\eta(d)=\max(0,1-|d|/\eta)$ 随分辨率 $\eta$ 单调增加。因为占用向量的配对系数均非负，$0<b\le\eta$ 时有 $M_b\le M_\eta$。当 $\eta T\ge1$，取 $b=1/T$，则 $|t|\le T$ 上有 $K_b(t)\ge1/(8\pi T)$，因此
-
-$$
-\int_{-T}^{T}F_p(t)\,dt\le 8\pi T M_\eta.
-$$
-
-定义 $I_\eta(r)=\int_{-r}^{r}K_\eta(t)F_p(t)\,dt$。在 $r\le|t|\le2r$ 上，$K_\eta(t)\le2/(\pi\eta r^2)$。结合上式，$\eta r\ge1$ 时有
-
-$$
-I_\eta(2r)-I_\eta(r)\le\frac{32}{\eta r}M_\eta.
-$$
-
-对 $r=L,2L,4L,\ldots$ 的二进区间求和，并利用全线可积性取极限，得到对所有 $\eta L\ge1$ 的统一相对截尾界
-
-$$
-0\le M_\eta-I_\eta(L)\le\frac{64}{\eta L}M_\eta.
-$$
-
-[相对截尾界](lean:D5/S3/Fourier/Concentration/FejerRelativeLocalization.relative_fejer_truncation) 这一估计容许支撑、权重、次数及分辨率同时变化，也容许重复频率。
-
-令 $L_n$ 满足 $\eta_nL_n\to+\infty$，并取 $L_n\ge A_n/s_n$。记 $\varepsilon_n=64/(\eta_nL_n)$。最终 $I_{\eta_n}(L_n)\le M_{\eta_n}\le I_{\eta_n}(L_n)/(1-\varepsilon_n)$。因而归一化有限窗口积分 $(s_n/\eta_n)I_{\eta_n}(L_n)$ 与归一化全线矩具有相同的有限极限（任一极限存在即推出另一极限）。在中心主项已经建立的条件下，待控制的相位峰集中到有限的中间时间区域 $A_n/s_n<|t|\le L_n$。实际增长 ζ 零点族在这一区域的高阶矩上界仍然开放。
 
 ### 全线矩的有限观察窗口
 
