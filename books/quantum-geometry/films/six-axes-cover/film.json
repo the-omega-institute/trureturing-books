@@ -1,0 +1,33 @@
+{
+  "title": "Three pairs of caps leak, six cover",
+  "title_zh": "三对冰盖漏缝，六对盖满",
+  "summary": "Push an axis through a ball and paint every point within 45 degrees of either end: two polar caps, one color, and no right angle inside it, since two points of one cap are less than 90 degrees apart and one from each cap more than 90. The three coordinate axes leave holes round all eight diagonals, 3/√2 − 2 ≈ 12.1% of the sphere, since their six caps only touch: on the diagonal (1, 1, 1)/√3 the squared overlap with each axis is 1/3, below the 1/2 a cap needs. Split each axis in two and swing the halves apart like scissors; the holes close early, and when each half is tilted from its old axis by s with tan s = 2 the axes become the whole numbers (1, ±2, 0), (0, 1, ±2), (±2, 0, 1), where the diagonal scores 3/5. Lean checks that these six colors are open, free of right angles and cover the sphere, and that every such open cover needs at least six colors: every point misses at least three colors because the circle at right angles to it needs three, and somewhere three colors overlap. Six is the fewest, not the only way; the statements are about right-angle-free patches, not the hairy ball; the six axes give the upper-bound half of Question 3 of Feldman and Wilce, and antipodal coverings like it are classical.",
+  "summary_zh": "让一根轴穿过球心，把离两端不到 45° 的点涂上色：南北两块冰盖算一种颜色，里面凑不出直角，因为同一块冰盖里两点夹角不到 90°，分处两块则超过 90°。三根坐标轴的六块冰盖只相切、不重叠，在八条对角线周围漏出占球面 3/√2 − 2 ≈ 12.1% 的洞：对角线 (1, 1, 1)/√3 与每根轴的内积平方是 1/3，低于进冰盖所需的 1/2。把每根轴劈成两根、像剪刀一样张开，洞很早就合上；每半根轴偏离原轴的角 s 满足 tan s = 2 时，轴变成整数 (1, ±2, 0)、(0, 1, ±2)、(±2, 0, 1)，对角线得 3/5。Lean 检验了这六种颜色都是开集、内部无直角、合起来盖满球面，也检验了这样的开覆盖至少要六种颜色：与每个点成直角的圆要三种颜色，所以每点至少缺三种，而总有一处三种重叠。六是最少而不是唯一；这里讲无直角的开块，不是毛球定理；六轴构造给出了 Feldman 与 Wilce 问题 3 中上界的那一半，这类对跖覆盖早有先例。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:14",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a lit painted ball with polar caps, magenta holes on the diagonals, axes splitting like scissors until the holes close, the circle at right angles to a point unrolled into colour rows",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover",
+    "D5/S3/Topology/SphereOrthogonalityCover.sphere_two_open_orthogonality_free_cover_lower_six"
+  ],
+  "solid": true,
+  "scripts": [
+    "viz/two-angle-addressing/model.js"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_six-axes-cover_720p_narrated.mp4",
+    "cover": "quantum-geometry_six-axes-cover_cover.jpg"
+  }
+}

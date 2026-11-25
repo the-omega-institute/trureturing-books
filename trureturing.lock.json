@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "861753fe51c977250ba05b8227fdbaaacea637ef",
-  "pinned_at": "2026-11-25T07:36:31Z",
+  "pinned_at": "2026-11-25T07:57:15Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1572,6 +1572,22 @@
       "statement_id": "sha256:4469509b9f4ea9d28f4034e5897b58095dafd18fa9782254777f46e800d87446",
       "line": 28,
       "signature": "theorem IsChordal.exists_approximate_gain_potential [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (g : V → V → H) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, G.Adj i j → g j i = (g i j)⁻¹) (htri : ∀ i j k, G.Adj i j → G.Adj j k → G.Adj i k → Dist.dist (g i j * g j k) (g i k) ≤ ε) : ∃ φ : V → H, ∀ i j, G.Adj i j → Dist.dist (g i j) ((φ i)⁻¹ * φ j) ≤ ((Nat.card V - 2 : ℕ) : ℝ) * ε"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionEqualRimMinimax.RoundQuaternionEqualRimMinimax.equalRim_exact_defect_and_minimax": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionEqualRimMinimax",
+      "name": "RoundQuaternionEqualRimMinimax.equalRim_exact_defect_and_minimax",
+      "kind": "theorem",
+      "statement_id": "sha256:c59b1089d711736dda8dfd07f493802333accdd188b9806dc2f99224f0efadc8",
+      "line": 749,
+      "signature": "theorem equalRim_exact_defect_and_minimax (I : ℍ[ℝ]) (hI : I.re = 0) (hN : ‖I‖ = 1) (a : ℝ) (ha : a ∈ Set.Icc 0 π) : DefectLE (equalRimGains I hI hN a) (equalRimDefect a) ∧ (∀ ε, DefectLE (equalRimGains I hI hN a) ε → equalRimDefect a ≤ ε) ∧ (∃ φ : Fin 4 → U, Fits (equalRimGains I hI hN a) φ (equalRimOptRadius a)) ∧ (∀ (φ : Fin 4 → U) (r : ℝ), Fits (equalRimGains I hI hN a) φ r → equalRimOptRadius a ≤ r)"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionEqualRimMinimax.RoundQuaternionEqualRimMinimax.equalRim_ratio_unique_maximum_at_quarter_turn": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionEqualRimMinimax",
+      "name": "RoundQuaternionEqualRimMinimax.equalRim_ratio_unique_maximum_at_quarter_turn",
+      "kind": "theorem",
+      "statement_id": "sha256:c59b1089d711736dda8dfd07f493802333accdd188b9806dc2f99224f0efadc8",
+      "line": 760,
+      "signature": "theorem equalRim_ratio_unique_maximum_at_quarter_turn (a : ℝ) (ha : a ∈ Set.Ioc 0 π) : equalRimOptRadius a / equalRimDefect a ≤ (2 / π) * quarterError ∧ (equalRimOptRadius a / equalRimDefect a = (2 / π) * quarterError ↔ a = π / 2)"
     },
     "D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionK4Bounds.not_subcritical_claim": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionK4Bounds",
@@ -9067,6 +9083,14 @@
       "statement_id": "sha256:f02b0659de42eaa10fec5d2ce70ba730997f04301f7904889255acec6231f8bb",
       "line": 306,
       "signature": "theorem quadratic_rank_le_three (b : ℝ) (L R : Matrix Bool Bool ℂ) (u v w : ℂ) (hb : 0 < b) (qL : ∀ i j, RationalEntry (L i j)) (qR : ∀ i j, RationalEntry (R i j)) (qu : RationalEntry u) (qv : RationalEntry v) (qw : RationalEntry w) (he : CoherentExtendible b L R u v w) : ∃ (d : ℚ), 0 ≤ d ∧ ∃ (z : ℂ) (ρ : Matrix Word Word ℂ), ρ.PosSemidef ∧ MatchesCoherentData b L R u v w z ρ ∧ ρ.rank ≤ 3 ∧ ∀ i j, ρ i j ∈ Subfield.closure ((rationalComplex : Set ℂ) ∪ {↑(Real.sqrt (d : ℝ))})"
+    },
+    "D5/S3/Quantum/Entanglement/Marginals/FibRationalBoundary.rational_rank_three_boundary_iff": {
+      "module": "D5/S3/Quantum/Entanglement/Marginals/FibRationalBoundary",
+      "name": "D5.S3.Quantum.Entanglement.Marginals.FibRationalBoundary.rational_rank_three_boundary_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:2e029eb8d024304abd9b67c02ec4f6fe0da1a80835c4b88a259d132197c7e208",
+      "line": 317,
+      "signature": "theorem rational_rank_three_boundary_iff (b : ℝ) (L R : Matrix Bool Bool ℂ) (u v w : ℂ) (hb : 0 < b) (qL : ∀ i j, RationalEntry (L i j)) (qR : ∀ i j, RationalEntry (R i j)) (qu : RationalEntry u) (qv : RationalEntry v) (qw : RationalEntry w) (he : CoherentExtendible b L R u v w) : let A"
     },
     "D5/S3/Quantum/Entanglement/Marginals/FibRationalPureExtension.rational_pure_coupling_iff": {
       "module": "D5/S3/Quantum/Entanglement/Marginals/FibRationalPureExtension",

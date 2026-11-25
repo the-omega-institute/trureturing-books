@@ -1,0 +1,34 @@
+{
+  "title": "The shortest arc, in even steps",
+  "title_zh": "最短的弧，均匀的步",
+  "summary": "A long flight looks bent on a flat map and is the shortest arc on the globe. Picture a quantum state as an arrow of length one: states live on a sphere, and the straight line between two arrows 60° apart passes through a midpoint only 0.866 long, which is no state. Measure the distance of two states by the angle between their arrows, arccos |⟨u, v⟩|: the two are 60.0° apart, and a stop-over 40° off the arc makes the trip 96.9°; Lean checks that for any three unit states the direct angle is never more than the two legs. Add a speed limit, so that in time τ a state turns by at most Eτ/ħ: two orthogonal records sit 90° apart, a leash tied at any anchor must reach both, and even the halfway anchor needs 45°; Lean checks that then τ ≥ πħ/(4E). A row of polarizers shows how to walk the arc: each filter passes the squared overlap, which Lean checks is the Born weight; turning 60° in four even steps of 15° lets 0.758 through, idling three times and then leaping 60° lets only 0.250 through, and eight steps of 7.5° keep 0.872. That, with the same number of filters, even steps win for any total turn under 90° is a hand derivation of the book; the film's angle between arrows is half the rotation angle Δθ of §37.2, so 60° here is 120° there. Reading even steps as good reasoning is a model, keeping every step even does not make an answer right, and the large-scale behaviour of ternion-field networks is an open problem.",
+  "summary_zh": "长途航线在平面地图上看着是弯的，放回地球仪上，它是最短的那段弧。把量子态想成一支长度为一的箭头，态就住在一个球面上；相距 60° 的两支箭头之间若走直线，半路的箭头只剩 0.866 长，那不是一个态。用箭头的夹角 arccos |⟨u, v⟩| 量两个态的距离：这两个态相距 60.0°，中途绕到偏离弧 40° 的第三个态，路程涨到 96.9°；Lean 检验了任取三个单位态，直达的夹角从不超过两段之和。再加一条限速，设在时间 τ 内态最多转过 Eτ/ħ：两条正交记录相隔 90°，在任一锚点拴的绳都得够到两头，即便锚点放在正中也至少要 45°；Lean 检验了此时 τ ≥ πħ/(4E)。一排偏振片告诉我们弧该怎么走：每片放过重叠的平方，Lean 检验了这正是玻恩权重；分四步、每步 15° 转过 60°，通过 0.758，原地空转三次再一下跳 60°，只通过 0.250，八步、每步 7.5° 则留下 0.872。片数相同、总转角不到 90° 时均匀的步总是赢家，这是本书的手工推导；片中箭头之间的夹角是正文旋转角 Δθ 的一半，片中的 60° 即正文的 120°。把均匀的步读作好推理是模型读法，步子再均匀也不等于答案正确，三元数场网络的大规模表现仍是开放问题。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:14",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a lit glass sphere of unit arrows with the shortest arc, a sinking chord and a detour, a leash round an anchor between two orthogonal records, two rows of polarizers",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle",
+    "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound",
+    "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+  ],
+  "solid": true,
+  "scripts": [
+    "viz/two-angle-addressing/model.js"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_geodesic-attention_720p_narrated.mp4",
+    "cover": "quantum-geometry_geodesic-attention_cover.jpg"
+  }
+}

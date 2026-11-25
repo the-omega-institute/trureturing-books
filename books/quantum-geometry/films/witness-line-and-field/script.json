@@ -1,0 +1,48 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "Navier": "Navyay", "Stokes": "Stokes", "NP": "N P"},
+  "music": {"bpm": 80, "progression": "d-minor"},
+  "scenes": [
+    {"id": "exams", "name": "CLASHING EXAMS", "lead": 1.6, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Five exams. A line joins two that share a student, so they cannot sit at the same time.", "五门考试。两门共有学生，就连一条线：它们不能排在同一时段。"],
+      ["Give each exam a time slot, and call the slot its color. Three slots are enough here.", "给每门考试一个时段，把时段叫作它的颜色。这里三个时段就够了。"],
+      ["Two are not: A, B and E all clash with each other.", "两个不够：A、B、E 两两冲突。"]
+    ], "cues": [{"line": 1, "at": 3.0, "kind": "chime"}]},
+    {"id": "first", "name": "WHO GOES FIRST", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
+      ["Now say it with arrows. For every clash, decide which exam goes first.", "换一种说法，用箭头。每一处冲突，都定下谁先考。"],
+      ["Point each line from the earlier slot to the later one.", "让每条线从早的时段指向晚的时段。"],
+      ["Follow the arrows and the slot moves later at every step, so a chain holds at most three exams.", "顺着箭头走，每一步时段都往后推，所以一串箭头至多串起三门。"],
+      ["One longest chain is A, then B, then E: three exams.", "最长的一串之一是 A、B、E：三门。"],
+      ["Flip one arrow, so D goes before A, and a chain runs through all five.", "只把一支箭头反过来，让 D 先于 A，就有一串穿过全部五门。"]
+    ], "cues": [{"line": 3, "at": 2.6, "kind": "chime"}, {"line": 4, "at": 3.2, "kind": "glitch"}]},
+    {"id": "back", "name": "BACK FROM ARROWS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.6, 0.2, 0.3], "lines": [
+      ["Now go backwards. Keep the good arrows and forget the slots.", "现在倒过来走。留下好的那组箭头，忘掉时段。"],
+      ["For each exam, count the most steps you can still take along the arrows.", "对每门考试，数一数顺着箭头最多还能走几步。"],
+      ["The counts are two, one, two, zero, zero.", "数出来是 2、1、2、0、0。"],
+      ["Every arrow runs from a bigger count to a smaller one, so clashing exams never share a count.", "每支箭头都从大数指向小数，所以冲突的两门，数永远不同。"],
+      ["Read three minus each count as a slot: a three-slot timetable again. Only D has moved, and nothing clashes.", "把 3 减去步数当作时段，又是一张三时段考表：只有 D 换了时段，没有冲突。"],
+      ["The arrows already knew the timetable.", "箭头里本来就藏着考表。"]
+    ], "cues": [{"line": 2, "at": 2.4, "kind": "chime"}]},
+    {"id": "rule", "name": "ANY FINITE GRAPH", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Lean checks the general rule, for any finite graph and any number k.", "Lean 内核检验了一般规律：对任意有限图、任意 k 都成立。"],
+      ["It can be colored with k colors exactly when its lines can be given directions with no directed path longer than k vertices.", "图可以用 k 种颜色着色，当且仅当能给它的线定向，使每条有向路至多 k 个顶点。"],
+      ["The arrows may even run both ways, or round in a circle. The proof first drops arrows until no circle is left.", "箭头甚至可以双向，可以绕圈；证明先删去一些箭头，直到没有圈。"],
+      ["So the fewest colors you need equals the shortest you can make the longest chain.", "所以，最少要几种颜色，就等于最长的一串箭头最短能压到几个顶点。"]
+    ], "cues": [{"line": 0, "at": 0.8, "kind": "stamp"}]},
+    {"id": "field", "name": "FIELD AND LINE", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["This chapter reads a coloring as a field, a value on every vertex, and a directed path as a line.", "本章把着色读作场：每个顶点上一个值；把有向路读作线。"],
+      ["Checking a coloring is easy: one look along each line, at its two ends.", "验一张着色很容易：沿每条线看一眼两端。"],
+      ["But why should trading one witness for another tell us how to find either?", "可是，凭什么以为把一种见证换成另一种，就告诉了我们怎样找到其中任何一种？"],
+      ["Swapping witnesses is not finding them.", "交换见证，不等于找到见证。"]
+    ]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Whether two colors suffice is decided fast: walk outward, alternate, and see if two neighbors ever match.", "两种颜色够不够，很快就能判定：向外走、交替着色，看有没有相邻两门同色。"],
+      ["Three-coloring is NP-complete, so a fast method for it exists exactly when P equals NP.", "三种颜色是 NP 完全问题，所以三着色有快速算法，当且仅当 P 等于 NP。"],
+      ["P versus NP is open. So is this chapter's fluid question: does 3D Navier–Stokes flow always stay smooth?", "P 与 NP 之问仍然开放；本章关于流体的那道题也是：三维纳维—斯托克斯流是否始终光滑？"]
+    ], "cues": [{"line": 2, "at": 1.0, "kind": "impact"}]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 2.6, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter twenty-six.", "《量子计算的几何直觉》· 第二十六章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}
