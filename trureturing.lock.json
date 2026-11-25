@@ -5285,6 +5285,22 @@
       "line": 372,
       "signature": "theorem sharp_second_fourth_harmonic_bound (e k : ℝ) (he₀ : 0 ≤ e) (he₁ : e ≤ 1) (hk₀ : 0 ≤ k) (hk₁ : k ≤ 1) : let bound"
     },
+    "D5/S3/Fourier/Concentration/SeparatedParabolicCollision.parabolic_collision_ratio_limit": {
+      "module": "D5/S3/Fourier/Concentration/SeparatedParabolicCollision",
+      "name": "D5.S3.Fourier.Concentration.SeparatedParabolicCollision.parabolic_collision_ratio_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:279658d758c35890fc0db23065894bc39e6791a72d5c90974e09ff16ea6cc1bd",
+      "line": 156,
+      "signature": "theorem parabolic_collision_ratio_limit (η : ℕ → ℝ) (L : ℝ) (hL : 0 < L) (hη : ∀ᶠ n in atTop, 0 < η n ∧ η n < 1) (hlim : Tendsto η atTop (𝓝 L)) : let V"
+    },
+    "D5/S3/Fourier/Concentration/SeparatedParabolicCollision.separated_parabolic_collision": {
+      "module": "D5/S3/Fourier/Concentration/SeparatedParabolicCollision",
+      "name": "D5.S3.Fourier.Concentration.SeparatedParabolicCollision.separated_parabolic_collision",
+      "kind": "theorem",
+      "statement_id": "sha256:279658d758c35890fc0db23065894bc39e6791a72d5c90974e09ff16ea6cc1bd",
+      "line": 26,
+      "signature": "theorem separated_parabolic_collision (n : ℕ) (hn : 0 < n) (η : ℝ) : let mass"
+    },
     "D5/S3/Fourier/Concentration/ShiftedBinVariance.collision_parabolic_lower": {
       "module": "D5/S3/Fourier/Concentration/ShiftedBinVariance",
       "name": "D5.S3.Fourier.Concentration.ShiftedBinVariance.collision_parabolic_lower",
