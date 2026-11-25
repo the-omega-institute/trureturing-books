@@ -98,7 +98,8 @@ function oiRunDict(query, names, frame = []) {
   return { steps: snaps.length - 1, snaps, S, stream0 };
 }
 const oiBoundCmp = (a, b) => 2 * (a.length + b.length) + 4;
-const oiBoundDict = (q, names) => (2 * q.length + 12) * names.length + 4 * oiStream(names).length + 3;
+/* names as strings; the stream holds 2|name| + 1 cells per name */
+const oiBoundDict = (q, names) => (2 * q.length + 12) * names.length + 4 * names.reduce((s, nm) => s + 2 * nm.length + 1, 0) + 3;
 
 /* the runs shown on screen */
 const OI_A = oiCards('1011'), OI_B = oiCards('1001');
@@ -157,7 +158,7 @@ FILM.init.push(() => {
 
   /* 3. the numbers on screen */
   check(OI_CMP.steps === 16 && oiBits(OI_CMP.S.output) === '0' && oiBoundCmp('1011', '1001') === 20, 'cards: 16 steps, not equal, ceiling 20');
-  check(OI_CMP.states.filter(z => z.L === 'compare').length === 6, 'cards: five compare steps');
+  check(OI_CMP.states.filter(z => z.L === 'compare').length === 5, 'cards: five compare steps');  // states before steps 1..5
   check(JSON.stringify(OI_RUNS.map(r => [r.steps, r.bound])) === '[[16,20],[14,16],[4,4]]', 'bill: the three runs');
   check(oiStream(OI_NAMES).length === 28, 'dict: 28 tape cells');
   check(OI_DICT.steps === 104 && oiBits(OI_DICT.S.index) === '111', 'dict: 110 found at entry 2 in 104 steps');
@@ -251,13 +252,13 @@ SCENES.hook = S => {
     txt('subtract, then jump if ≤ 0', cx, cy + 74, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.white, a: oa });
     txt('相减，非正则跳转', cx, cy + 108, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: oa * 0.9 });
     txt('literature result · Mavaddat & Parhami 1988', cx, cy + 160, { size: 19, fam: F.mono, w: 700, align: 'center', c: C.argued, a: oa });
-    txt('文献结果 · 内存不设上限时可完成任何计算', cx, cy + 190, { size: 19, fam: F.zh, w: 700, align: 'center', c: C.argued, a: oa });
+    txt('文献结果 · 内存不设上限时即图灵完备', cx, cy + 190, { size: 19, fam: F.zh, w: 700, align: 'center', c: C.argued, a: oa });
   }
   /* line 2: the book's reading, CMP(A, B) as a line plus an area */
   const ma = a * Q(S, 2, 'reads the universe', 0.7);
   if (ma > 0.003) {
     panel(1060, 220, 740, 420, ma, C.argued, 'MODEL · 本书的读法');
-    const O = [1180, 560], R = 230, th = 56 * Math.PI / 180;
+    const O = [1180, 570], R = 220, th = 52 * Math.PI / 180;
     const B = [O[0] + R * Math.cos(th), O[1] - R * Math.sin(th)], A = [O[0] + R, O[1]], foot = [O[0] + R * Math.cos(th), O[1]];
     ctx.save(); ctx.globalAlpha = ma * 0.9; ctx.beginPath(); ctx.moveTo(O[0], O[1]); ctx.lineTo(A[0], A[1]); ctx.lineTo(A[0] + B[0] - O[0], B[1]); ctx.lineTo(B[0], B[1]); ctx.closePath();
     ctx.fillStyle = rgba(C.mag, 0.22); ctx.fill(); ctx.strokeStyle = C.mag; ctx.lineWidth = 2; ctx.stroke(); ctx.restore();
@@ -265,9 +266,9 @@ SCENES.hook = S => {
     arrow(O[0], O[1], A[0], A[1], C.white, ma, 4);
     arrow(O[0], O[1], B[0], B[1], C.white, ma, 4);
     txt('A', A[0] + 12, A[1] + 10, { size: 30, fam: F.math, w: 700, c: C.white, a: ma });
-    txt('B', B[0] - 6, B[1] - 14, { size: 30, fam: F.math, w: 700, c: C.white, a: ma });
+    txt('B', B[0] - 34, B[1] + 6, { size: 30, fam: F.math, w: 700, c: C.white, a: ma });
     oiRich([['CMP(A, B) = ', C.white], ['A·B', C.cyan], [' + ', C.white], ['A∧B', C.mag]], 1090, 290, { size: 34, a: ma });
-    txt('line · 线 + area · 面积', 1090, 336, { size: 22, fam: F.zh, w: 700, c: C.white, a: ma * 0.9 });
+    oiRich([['line · 线', C.cyan], ['   +   ', C.white], ['area · 面积', C.mag]], 1090, 336, { size: 22, fam: F.zh, a: ma * 0.9 });
     txt('one comparison, nothing else · 只此一条比较', 1520, 610, { size: 18, fam: F.zh, w: 700, align: 'center', c: C.argued, a: ma });
   }
   /* line 3: free? */
@@ -336,7 +337,7 @@ SCENES.cards = S => {
   panel(1320, 200, 480, 500, a, C.cyan, 'THE MACHINE · 机器');
   const phase = st.L === 'compare' ? ['compare', '比对'] : st.L === 'restoreLeft' ? ['restore a', '复原 a'] : st.L === 'restoreRight' ? ['restore b', '复原 b'] : st.L === 'finish' ? ['write the bit', '写下结果'] : ['halted', '停机'];
   txt('STEP · 步', 1350, 268, { size: 22, fam: F.zh, w: 700, c: C.dim, a });
-  txt(String(i), 1350, 360, { size: 88, fam: F.mono, w: 700, c: C.now, a });
+  txt(String(Math.min(T.length - 1, Math.floor(k + 0.45))), 1350, 360, { size: 88, fam: F.mono, w: 700, c: C.now, a });
   txt(`${phase[0]} · ${phase[1]}`, 1350, 420, { size: 26, fam: F.zh, w: 700, c: C.white, a });
   const eq = T[i].eq;
   txt('equal so far · 目前相同', 1350, 486, { size: 20, fam: F.zh, w: 700, c: C.dim, a: a * at(S, 1, 0.6) });
@@ -432,7 +433,7 @@ SCENES.dict = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
   const N = OI_DICT.steps;
-  const k = oiStep(S, [[0, DT_REW, phraseAt(S, 1, 'copies out'), lineAt(S, 2).s + 1.2], [DT_REW, N, phraseAt(S, 3, 'winds the tape'), lineAt(S, 3).e]]);
+  const k = oiStep(S, [[0, DT_REW, phraseAt(S, 1, 'copies out'), phraseAt(S, 2, 'then a hit') + 0.6], [DT_REW, N, phraseAt(S, 3, 'winds the tape'), lineAt(S, 3).e]]);
   const i = Math.min(N, Math.floor(k)), snap = OI_DICT.snaps[i];
   const tallies = snap.S.index.length - (snap.L === 'halt' ? 1 : 0);
   const hit = i >= DT_REW ? 2 : -1;
@@ -457,7 +458,7 @@ SCENES.dict = S => {
   /* the step counter */
   panel(1300, 580, 500, 220, a, C.cyan, 'STEP · 步');
   txt(String(i), 1330, 712, { size: 80, fam: F.mono, w: 700, c: C.now, a });
-  const ph = snap.L === 'rewind' ? 'rewind · 倒卷' : snap.L === 'halt' ? 'halted · 停机' : snap.L.startsWith('C:') ? 'compare · 比对' : 'read · 读带';
+  const ph = snap.L === 'rewind' || snap.L === 'finish' ? 'rewind · 倒卷' : snap.L === 'halt' ? 'halted · 停机' : snap.L.startsWith('C:') ? 'compare · 比对' : 'read · 读带';
   txt(ph, 1560, 700, { size: 24, fam: F.zh, w: 700, c: C.white, a });
   txt('replay (computed)', 1560, 740, { size: 16, fam: F.mono, w: 700, c: C.cyan, a: a * 0.9 });
 };
@@ -500,7 +501,7 @@ SCENES.edge = S => {
   const rows = [
     { k: 0, col: C.lean, en: 'step ceilings for these two machines', zh: '这两台机器的步数上限', note: 'upper bounds, not the fastest way · 是上界，不是最快做法', lean: true },
     { k: 1, col: C.dim, en: 'a floor for every way of comparing', zh: '“任何比较方法都至少这么贵”', note: 'not claimed here: needs its own cost model and proof · 本片不主张，需另立成本模型与证明' },
-    { k: 2, col: C.argued, en: 'one instruction suffices (OISC)', zh: '一条指令足以完成任何计算', note: 'literature result, given unbounded memory · 文献结果' },
+    { k: 2, col: C.argued, en: 'one instruction suffices (OISC)', zh: '一条指令即图灵完备', note: 'literature result, given unbounded memory · 文献结果' },
     { k: 2, col: C.argued, en: 'the universe runs CMP(A, B)', zh: '宇宙只跑一条比较指令', note: 'MODEL · 模型，不是定理' }
   ];
   rows.forEach((rw, j) => {

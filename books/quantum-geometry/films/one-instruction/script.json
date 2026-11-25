@@ -6,7 +6,7 @@
   "scenes": [
     {"id": "hook", "name": "ONE INSTRUCTION", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
       ["Your phone's chip knows hundreds of instructions.", "手机里的芯片认得几百条指令。"],
-      ["Yet one well-chosen instruction, given enough memory, can compute anything.", "可只要内存够用，挑对一条指令，就什么都能算。"],
+      ["Yet one well-chosen instruction, given enough memory, can run any program.", "可只要内存够用，挑对一条指令，就能跑任何程序。"],
       ["This book reads the universe that way: a single instruction, compare A with B.", "本书就这样读宇宙：只有一条指令——拿 A 比 B。"],
       ["But what makes us think a comparison is free?", "可是，凭什么认为比较不要钱？"]
     ], "cues": [{"line": 3, "at": 1.2, "kind": "glitch"}]},
