@@ -409,12 +409,49 @@ $$
 解 $u\le(\sqrt3/2)(1-u^2)$ 得 $u\le1/\sqrt3$，所以 $r\ge r_0$。当 $r\ge\pi/2$，同一下界直接成立。取 $t=1/\sqrt3$，在垂直于 $1,I$ 的平面内取 $v_1=J$（沿第二虚轴的单位四元数），再按 $v_{j+1}=-v_j/2+(\sqrt3/2)v_j I$ 循环旋转。势 $q_j=t+\sqrt{1-t^2}\,v_j$ 的辐棱余弦为 $t$，外缘余弦为 $(1-t^2)\sqrt3/2=t$。又 $\cos(3\pi/10)=\sin(\pi/5)$，其平方为 $(5-\sqrt5)/8>1/3$，故 $r_0>3\pi/10$。若统一系数 $k<c_*$，在 $Q$ 上取 $\varepsilon=\pi/2$ 就会要求半径 $k\pi/2<r_0$，与下界矛盾。完整证明由 Lean 内核检查。
 :::
 
-**循环单参数族（手工推导）。** $c_*$ 也是循环族（辐棱增益为 $1$，外缘统一取 $\cos\theta+I\sin\theta$，$0<\theta\le\pi$）的最优比值。为核对最优性，记 $r(\theta)$ 为最小拟合半径，$r_0=\arccos(1/\sqrt3)$。当 $0<\theta\le\pi/3$，恒等势和外缘三角的闭路下界给出 $r(\theta)=\theta$，比值为 $1/3$。当 $\pi/3\le\theta\le\pi/2$，最大缺陷为 $2\pi-3\theta$。设 $\delta=\pi/2-\theta$，各外缘增益只改变距离 $\delta$，故 $r(\theta)\le r_0+\delta$，并由 $3c_*>1$ 得 $\delta>0$ 时比值严格低于 $c_*$。
+让三条有向外缘棱保持相同增益，只改变共同的转角，就可以逐角度求出精确的拟合半径，并确定四分之一转为何给出最大的比值。
 
-当 $\pi/2\le\theta\le\pi$，最大缺陷为 $\theta$。置 $a=\cos\theta$、$k=\cos(\theta-2\pi/3)$，最优半径为 $\arccos u_\theta$，其中 $u_\theta$ 是 $F_\theta(u)=k+(a-k)u^2-u$ 在 $(0,1)$ 内的唯一零点。事实上，设拟合的最小余弦为 $u>0$。外缘内积均值的对称部分为 $a(3|m|^2-1)/2$，反对称部分至多为 $(\sqrt3/2)\sin\theta(1-|m|^2)$，故 $u\le k+(a-k)|m|^2\le k+(a-k)u^2$。在定理证明的平面向量构造中取实部 $u_\theta$、虚部长度 $\sqrt{1-u_\theta^2}$，每条辐棱的余弦为 $u_\theta$，每条外缘棱的余弦为 $k+(a-k)u_\theta^2=u_\theta$。在 $\pi/2\le\theta\le2\pi/3$ 上，$F_\theta(1/\sqrt3)=(\sin\theta-1)/\sqrt3\le0$，故 $u_\theta\le1/\sqrt3$。隐式求导时，$r'(\theta)$ 的分子 $\sin\theta\,u_\theta^2+\sin(\theta-2\pi/3)(1-u_\theta^2)$ 至多为 $u_\theta^2$，分母 $(1+2(k-a)u_\theta)\sqrt{1-u_\theta^2}$ 至少为 $\sqrt{1-u_\theta^2}$，故 $r'(\theta)\le1/\sqrt6<c_*$。在 $2\pi/3\le\theta\le\pi$ 上，$9F_\theta(1/3)=-3\cos\theta+4\sqrt3\sin\theta-3\ge0$，因为该式在此区间凹且端点非负。因此 $r(\theta)\le\arccos(1/3)<4r_0/3$。最后一个不等式可比较 $3\arccos(1/3)$ 与 $4r_0$ 的余弦 $-23/27$ 与 $-7/9$，两角均在 $(\pi,2\pi)$。这些界给出 $\theta>\pi/2$ 时严格较小的比值。
+::: {.theorem #thm-appe-round-quaternion-equal-rim-minimax title="循环等增益外缘的精确极小极大半径与四分之一转的唯一极大比值" lean="D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionEqualRimMinimax.RoundQuaternionEqualRimMinimax.equalRim_exact_defect_and_minimax, D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionEqualRimMinimax.RoundQuaternionEqualRimMinimax.equalRim_ratio_unique_maximum_at_quarter_turn"}
+在 $K_4$ 的顶点集 $\mathrm{Fin}(4)=\{0,1,2,3\}$ 上考虑取值于实单位四元数群 $S=\operatorname{unitary}\mathbb H$ 的增益。群 $S$ 取圆距离 $d(p,q)=\arccos\langle p,q\rangle_{\mathbb R}$。令 $I\in\mathbb H$ 满足 $\operatorname{Re}I=0$ 和 $\|I\|=1$。对 $a\in[0,\pi]$，记 $G(I,a)=(g_{ij})$ 为如下增益分配。对角与中心 $0$ 的辐棱增益均为 $1$，有向外缘 $(1,2),(2,3),(3,1)$ 的增益均为 $A=\cos a+I\sin a$，反向外缘的增益为 $A^{-1}$。
+
+称增益的三角缺陷至多为 $\varepsilon$，是指 $g_{ji}=g_{ij}^{-1}$、$g_{ii}=1$，且对所有两两不同的 $i,j,k$ 都有 $d(g_{ij}g_{jk},g_{ik})\le\varepsilon$。称势 $\varphi:\mathrm{Fin}(4)\to S$ 在半径 $r$ 内拟合增益，是指每条有向棱 $i\ne j$ 都满足 $d(g_{ij},\varphi_i^{-1}\varphi_j)\le r$。
+
+当 $0\le a\le\pi/3$ 时，定义 $e(a)=3a$。当 $\pi/3<a\le\pi/2$ 时，定义 $e(a)=2\pi-3a$。当 $\pi/2<a\le\pi$ 时，定义 $e(a)=a$。当 $0\le a\le\pi/3$ 时，令 $R(a)=a$。当 $\pi/3<a\le\pi$ 时，令 $R(a)=\arccos t(a)$，其中 $t(a)$ 是下列方程的唯一正根，$\lambda(a)=\cos(a-2\pi/3)$。
+
+$$
+(\lambda(a)-\cos a)t^2+t-\lambda(a)=0.
+$$
+
+1. **精确三角缺陷与极小极大半径。** 对每个上述 $I$ 和每个 $a\in[0,\pi]$，$G(I,a)$ 的三角缺陷至多为 $e(a)$。对每个实数 $\varepsilon$，若其三角缺陷至多为 $\varepsilon$，则 $e(a)\le\varepsilon$。存在势 $\varphi:\mathrm{Fin}(4)\to S$ 在半径 $R(a)$ 内拟合 $G(I,a)$。对任意势 $\varphi:\mathrm{Fin}(4)\to S$ 与实数 $r$，若 $\varphi$ 在半径 $r$ 内拟合 $G(I,a)$，则 $R(a)\le r$。
+2. **四分之一转处唯一取等。** 对所有 $a\in(0,\pi]$，有 $R(a)/e(a)\le c_*=\frac{2}{\pi}\arccos(1/\sqrt3)$，且等号当且仅当 $a=\pi/2$。
+:::
+
+::: {.proof #pf-appe-round-quaternion-equal-rim-minimax}
+由 $I^2=-1$，含中心的三角形与外缘三角形的闭路增益分别为 $A^{\pm1}$ 与 $A^{\pm3}$。左右乘单位四元数均保距，故其缺陷分别为 $a$ 与 $\arccos(\cos(3a))$。两者都出现，取较大值并将角度折回 $[0,\pi]$，即得三段式 $e(a)$。
+
+把势同时左乘 $\varphi_0^{-1}$，使中心势为 $1$，所有相对势 $\varphi_i^{-1}\varphi_j$ 不变。记外缘势为 $x_i$，下标按外缘循环。若拟合半径 $r<\pi/2$，令 $u=\cos r>0$。由于 $r\ge0$，三条辐棱给出 $u\le\langle 1,m\rangle_{\mathbb R}\le\|m\|\le1$，其中 $m=(x_1+x_2+x_3)/3$。沿每条外缘棱左乘起点势，得 $u\le\langle x_i A,x_{i+1}\rangle_{\mathbb R}$。
+
+写 $x_i=m+y_i$，则 $\sum_i y_i=0$，$\sum_i\|y_i\|^2=3(1-\|m\|^2)$。在零和子空间取正交坐标 $E=(y_1-y_2)/\sqrt2$、$H=(y_1+y_2-2y_3)/\sqrt6$，故 $\|E\|^2+\|H\|^2=\sum_i\|y_i\|^2$。循环对称和 $\sum_i\langle x_i,x_{i+1}\rangle_{\mathbb R}$ 等于 $3\|m\|^2-\tfrac12\sum_i\|y_i\|^2$。右乘 $I$ 是斜对称等距变换，故循环斜对称和 $\sum_i\langle x_i I,x_{i+1}\rangle_{\mathbb R}=\sqrt3\langle EI,H\rangle_{\mathbb R}$，至多为 $\tfrac{\sqrt3}{2}(\|E\|^2+\|H\|^2)$。于是由 $\sin a\ge0$ 与 $\lambda(a)=-\cos a/2+(\sqrt3/2)\sin a$ 得
+
+$$
+u\le\frac13\sum_i\langle x_i A,x_{i+1}\rangle_{\mathbb R} \le\cos a\,\|m\|^2+\lambda(a)(1-\|m\|^2).
+$$
+
+差值 $\lambda(a)-\cos a=\sqrt3\sin(a-\pi/3)$ 在 $a\le\pi/3$ 时非正，故 $u\le\cos a$。取恒为 $1$ 的势即达到半径 $a$。当 $a>\pi/3$ 时，记 $D=\lambda(a)-\cos a>0$。由 $\|m\|\ge u$ 得 $Du^2+u\le\lambda(a)$。多项式 $Dt^2+t-\lambda(a)$ 在 $[0,\infty)$ 严格递增，且在 $0$ 处为 $-\lambda(a)<0$（因为 $|a-2\pi/3|\le\pi/3$），在 $1$ 处为 $1-\cos a>0$，故 $u\le t(a)<1$。余弦在 $[0,\pi]$ 递减，给出所需的半径下界。两种情形均有 $R(a)\le\pi/2$，所以 $r\ge\pi/2$ 时下界也成立。
+
+取垂直于 $1,I$ 的单位四元数 $J$，在 $J,JI$ 张成的平面内取 $v_i=J(\cos b_i+I\sin b_i)$，其中 $b_i$ 依次为 $0,2\pi/3,4\pi/3$。取中心势为 $1$、外缘势为 $x_i=t+\sqrt{1-t^2}\,v_i$。辐棱的余弦为 $t$。右乘 $A$ 将平面内的角度增加 $a$，故外缘余弦均为 $\cos a\,t^2+\lambda(a)(1-t^2)$。取 $t=t(a)$，两种余弦相等，达到半径 $R(a)$。反向棱的误差由取逆保距而相同。
+
+当 $0<a\le\pi/3$ 时，比值为 $1/3$。当 $a>\pi/3$ 时，在同一构造中取固定纬度 $q=1/\sqrt3$。外缘余弦化为 $q\sin a\le q$，故 $R(a)\le f(s)=\arccos(q\cos s)$，其中 $s=|a-\pi/2|$。在 $[0,\pi/2]$ 上，$f''(s)=q(1-q^2)\cos s/(1-q^2\cos^2 s)^{3/2}\ge0$。两端点的割线给出 $f(s)\le f(0)+(1-c_*)s$。又 $e(a)\ge\pi/2+s$，且 $c_*=2f(0)/\pi>1/2$，因为 $q<\cos(\pi/4)$。因此 $s>0$ 时，
+
+$$
+R(a)\le f(s)\le f(0)+(1-c_*)s<c_*(\pi/2+s)\le c_*e(a).
+$$
+
+在 $a=\pi/2$ 时，辐棱与外缘的余弦在纬度 $q$ 处相等，故 $q=t(\pi/2)$。于是 $R(\pi/2)=f(0)$、$e(\pi/2)=\pi/2$，比值恰为 $c_*$。完整证明由 Lean 内核检查。
+:::
 
 ::: {.problem #prob-appe-round-quaternion-k4-optimal-constant title="$K_4$ 上圆度量单位四元数增益的最优统一系数"}
-记 $C_{\mathrm{SU}(2)}(K_4)$ 为 $K_4$ 上所有正三角缺陷的圆度量单位四元数增益实例中，最小拟合半径与最大三角缺陷之比的上确界。由 [@thm-appe-round-quaternion-k4-bounds] 的统一上界和四分之一转实例得到 $c_*\le C_{\mathrm{SU}(2)}(K_4)\le4/5$。任意增益下的精确上确界仍是开放问题。
+记 $C_{\mathrm{SU}(2)}(K_4)$ 为 $K_4$ 上所有正三角缺陷的圆度量单位四元数增益实例中，最小拟合半径与最大三角缺陷之比的上确界。由 [@thm-appe-round-quaternion-k4-bounds] 的统一上界和四分之一转实例得到 $c_*\le C_{\mathrm{SU}(2)}(K_4)\le4/5$。由 [@thm-appe-round-quaternion-equal-rim-minimax]，循环等增益外缘族的最大比值 $c_*$ 仅在四分之一转处取得。任意增益下的精确上确界仍是开放问题。
 :::
 
 **小缺陷与上确界取到（手工推导）。** 缺陷 $\varepsilon$ 趋零时，将辐棱规范化为 $1$，再取切空间对数 $z_{ij}=\log g_{ij}$。每条外缘增益都距 $1$ 至多 $\varepsilon$，所以各对数的范数至多为 $\varepsilon$。三角乘积取对数的一阶项为三个对数之和，故加法三角缺陷至多为 $\varepsilon+O(\varepsilon^2)$。平均 $4$ 个加法星形势得到范数为 $O(\varepsilon)$ 的势，棱误差至多为 $\varepsilon/2+O(\varepsilon^2)$。将势取指数时的二阶误差仍为 $O(\varepsilon^2)$，因此重构误差与缺陷之比至多为 $1/2+O(\varepsilon)$。最小拟合半径是紧致势空间上连续误差函数的最小值，因而随增益连续。最大三角缺陷也是连续的。由于 $c_*>1/2$，充分小的正缺陷给出的比值都小于 $c_*$，故上确界在远离零缺陷的紧集上取到。

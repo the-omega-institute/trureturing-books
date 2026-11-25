@@ -1,0 +1,29 @@
+{
+  "title": "Turns, not differences: the sagitta adds up",
+  "title_zh": "以旋代差：攒起来的矢高",
+  "summary": "A tiny step on a circle is not a straight line: turning a point by an angle θ moves it sideways by sin θ and drops it by 1 − cos θ, the sagitta, the arrow between a bow's string and its back; the two parts land exactly on the circle at every finite step. For θ = 0.1 the drop is 0.0049958, about θ²/2, the second-order piece the old calculus throws away. A hundred equal steps add their drops in a ledger: steps of 0.01 give 0.005 in total, steps of 0.1 (shrinking only like 1/√N) give 0.4995835. Lean checks that for any real σ, T, α and every N the accumulated sagitta Σ_N = N(1 − cos θ_N) of N equal steps θ_N = σ(T/N)^α lies between N(θ_N²/2 − θ_N⁴/24) and Nθ_N²/2, and that for T > 0 it tends to 0 when α > 1/2, to σ²T/2 when α = 1/2, and to +∞ when σ ≠ 0 and 0 < α < 1/2. Nothing is claimed for α ≤ 0 or for random or uneven steps; reading the one half as Itô's correction is a literature result, and the arc-body calculus is the chapter's model.",
+  "summary_zh": "圆上极小的一步不是直线：让点转一个角 θ，它横向走 sin θ，向下落 1 − cos θ，这就是矢高，弓弦到弓背的那支箭；在每个有限步上，两部分合起来恰好落回圆上。θ = 0.1 时下落 0.0049958，约为 θ²/2，正是旧微积分扔掉的二阶小量。把一百个等长步子的下落记进账本：每步 0.01 时总共 0.005，每步 0.1（步长只按 1/√N 缩小）时总共 0.4995835。Lean 检验了：对任意实数 σ、T、α 与每个 N，N 个等长步子 θ_N = σ(T/N)^α 的累计矢高 Σ_N = N(1 − cos θ_N) 夹在 N(θ_N²/2 − θ_N⁴/24) 与 Nθ_N²/2 之间；并且 T > 0 时，α > 1/2 则趋于 0，α = 1/2 则趋于 σ²T/2，σ ≠ 0 且 0 < α < 1/2 则趋于 +∞。α ≤ 0、随机或长短不一的步子不在定理之内；把 1/2 读成伊藤修正项是文献结果，极小圆弧体微积分是本章的模型。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-24",
+  "duration": "2:25",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a point turned on a circle with its sideways part and drop, the bow and its arrow, two jars of drops, the versine between two parabolas, three limits of the accumulated sagitta",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_bounds",
+    "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_phases"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_sagitta-calculus_720p_narrated.mp4",
+    "cover": "quantum-geometry_sagitta-calculus_cover.jpg"
+  }
+}

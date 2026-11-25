@@ -1,0 +1,33 @@
+{
+  "title": "The gate that takes no time",
+  "title_zh": "零耗时的门",
+  "summary": "On a superconducting chip a sideways turn of a qubit costs a microwave pulse of about 25 ns, while a turn about the vertical axis costs nothing. In the frame that rides with the carrier, a resonant pulse of fixed phase turns the state about an equatorial axis by its area: 10 MHz for 25 ns, or 20 MHz for 12.5 ns, is π/2, a quarter turn from the north pole to the equator (a literature result, not formalized in the book). Three pulses in a row: for three real symmetric matrices of Frobenius norm at most L, Lean checks that the real part of the trace of the three pulse kernels strays from Tr(ABC) by at most 5/4 L⁵ t²; on screen, halving t from 0.4 to 0.1 about halves the imaginary part while the real error falls to about a quarter each time; this trace does not depend on the order of the three kernels. A Z turn never changes the height of a state, so it never changes the readout; between two pulses, skipping a 60° Z turn and firing the next pulse with its phase set back by 60° lands the state 60° around at the same height z = −1/2, so the chance of reading 0 is 1/4 either way. Underneath, pushing the state forward or pulling the measurement back gives the same readout: 1, 0.75, 0.25, 0 over three 60° steps on both sides, and Lean checks the trace identity for any channel and a completely positive map dual to it, after any whole number of steps. The area rule and the virtual Z schedule are engineering literature; zero nanoseconds is not zero error; the pulse bound is about an integral kernel, not a gate fidelity.",
+  "summary_zh": "在超导芯片上，把量子比特往侧面转要打一个约 25 纳秒的微波脉冲，绕竖直轴转却不花时间。在跟着载波一起转的参考系里，相位固定的共振脉冲让态绕赤道上的一根轴转过它的面积：10 MHz 打 25 ns，或 20 MHz 打 12.5 ns，面积都是 π/2，从北极转到赤道的四分之一转（文献结果，本书未形式化）。三个脉冲依次相乘：对弗罗贝尼乌斯范数不超过 L 的三个实对称矩阵，Lean 检验了三个脉冲核乘积之迹的实部与 Tr(ABC) 相差不超过 5/4 · L⁵ · t²；屏幕上 t 从 0.4 减半到 0.1，虚部每次大约减半，实部误差每次降到大约四分之一。绕 Z 转不改变态的高度，所以不改变读数；夹在两个脉冲中间时，省掉 60° 的 Z 转、把下一个脉冲的相位往回拨 60°，态落在绕竖轴差 60° 的地方，高度同为 z = −1/2，两种做法读到 0 的概率都是 1/4。底下的道理是：把态往前推，或把测量往回拉，读数相同；三步 60° 的转动里两边都是 1、0.75、0.25、0，Lean 检验了对任何信道及与之迹对偶的完全正映射，走任意整数步，这条迹恒等式都成立。面积律与虚拟 Z 调度是工程文献结果；零纳秒不等于零误差；脉冲误差界讲的是积分核，不是门保真度。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a lit glass Bloch sphere turned by pulse area, a two-column ledger of three pulse kernels, the literal and the virtual Z path on one latitude, push the state or pull the readout step by step",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Dynamics/OrderedThreePulseTrace.ordered_three_pulse_real_trace_bound",
+    "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity"
+  ],
+  "solid": true,
+  "scripts": [
+    "viz/two-angle-addressing/model.js"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_virtual-z_720p_narrated.mp4",
+    "cover": "quantum-geometry_virtual-z_cover.jpg"
+  }
+}

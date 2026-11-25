@@ -1,0 +1,41 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "Wilce": "Wilts"},
+  "music": {"bpm": 78, "progression": "d-minor"},
+  "scenes": [
+    {"id": "caps", "name": "ICE CAPS", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Push an axis through a ball. Paint every point within forty-five degrees of either end.", "让一根轴穿过球心，把离两端不到 45° 的点都涂上色。"],
+      ["You get two polar ice caps. Call the pair one color.", "这就得到南北两块冰盖；这一对，算一种颜色。"],
+      ["Inside one cap, two points are less than ninety degrees apart. Across the caps, more than ninety.", "同一块冰盖里，两点夹角不到 90°；分处两块，夹角超过 90°。"],
+      ["So one color never holds a right angle, the blind spot of comparison. How many colors cover the ball?", "所以一种颜色里永远凑不出直角，那正是比较的盲点。盖满整颗球，要几种颜色？"]
+    ], "cues": [{"line": 1, "at": 1.0, "kind": "chime"}]},
+    {"id": "three", "name": "THREE LEAK", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.0, 0.2], "lines": [
+      ["The obvious try: the three coordinate axes, three pairs of caps.", "最顺手的办法：三根坐标轴，三对冰盖。"],
+      ["Walk out along the diagonal, toward one, one, one.", "沿着对角线往 (1, 1, 1) 的方向走。"],
+      ["Its overlap with each axis, squared, is one third. A cap needs more than one half.", "它和每根轴的内积平方都是 1/3；进冰盖却要大于 1/2。"],
+      ["Holes open around all eight diagonals. The leak is in the frame we chose, not in the ball.", "八条对角线周围都漏出了洞。漏缝出在我们挑的坐标架上，不在球上。"]
+    ], "cues": [{"line": 3, "at": 0.6, "kind": "glitch"}]},
+    {"id": "six", "name": "SIX COVER", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["So split each axis in two, and swing the halves apart like opening scissors.", "那就把每根轴劈成两根，像张开剪刀一样往两边转。"],
+      ["The holes close early. We stop where the axes become whole numbers, like one, two, zero.", "洞很早就合上了；我们停在轴变成整数的地方，比如 (1, 2, 0)。"],
+      ["Back on the diagonal, the squared overlap is three. Divide by five: three fifths, more than one half.", "回到对角线：内积平方是 3，除以 5 得 3/5，大于 1/2。"],
+      ["Lean checks these six colors: six open colors, no right angle inside any, and together they cover the sphere.", "Lean 内核检验了这六种颜色：都是开集，每种里都没有直角，合起来盖满球面。"]
+    ], "cues": [{"line": 2, "at": 3.2, "kind": "chime"}, {"line": 3, "at": 1.0, "kind": "stamp"}]},
+    {"id": "five", "name": "WHY NOT FIVE", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Could five do it? Take a point. The circle at right angles to it must avoid every color holding the point.", "五种行不行？取一个点。和它成直角的那一圈，必须躲开所有含这个点的颜色。"],
+      ["This point sits in colors zero, two and four. Its circle runs through one, three and five.", "这个点在 0、2、4 号颜色里；它的直角圈只经过 1、3、5 号。"],
+      ["Even a circle needs three right-angle-free colors. So every point misses at least three.", "连一个圆，没有直角的颜色也要三种才盖得住。所以每个点至少缺三种。"],
+      ["Picture countries on a globe, none big enough to wrap it. They cannot meet only in pairs; somewhere, three overlap.", "地球仪上的国家都绕不了球一圈，它们没法只两两相邻，总有一处三国重叠。"],
+      ["Three present, three missing: six. Lean checks it: every such cover needs at least six colors.", "三种在，三种缺，合起来是六。Lean 内核检验：这样的覆盖至少要六种颜色。"]
+    ], "cues": [{"line": 4, "at": 3.0, "kind": "stamp"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Six is the fewest. It is not the only way: other axes work too.", "六是最少；但不是唯一的办法，别的轴也行。"],
+      ["This is about patches free of right angles, not about combing a hairy ball.", "这里讲的是没有直角的开块，不是给毛球梳毛。"],
+      ["The six axes settle the upper half of a question by Feldman and Wilce; antipodal coverings like it are classical. The book claims no discovery.", "六轴只给出 Feldman–Wilce 问题 3 的上界，这类覆盖早有先例，本书不争首创。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter nine.", "《量子计算的几何直觉》· 第九章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

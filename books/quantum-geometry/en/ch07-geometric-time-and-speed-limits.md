@@ -569,6 +569,12 @@ The entry $p_1 = 0.853553$ in the row $\delta = \frac{\pi}{4}$ is the single-ste
 
 The Zeno effect says that if one looks often enough, the state cannot leave. The first-return ledger supplies the other half: however often one looks, the fact that it comes back once every two steps on average does not change, because what this number counts is not time but how many directions this qubit has to go.
 
+::: {.film src="speed-limit-and-zeno"}
+**How fast to the wall, how many steps home (2 min 30 s).** The amber state turns away from the white old reading; when its cyan shadow (the overlap) shrinks to zero the angle reaches $90^\circ$ and hits the magenta orthogonal wall. Two cyan legs from the anchor $a$, each at most $\mathrm{energy}\cdot\tau/\hbar$, must together cover that $90^\circ$, so $\tau \ge \frac{\pi\hbar}{4\cdot\mathrm{energy}}$ ([@thm-fubini-study-record-time]). For the equal two-level superposition the angle grows steadily to $90^\circ$, and the halfway anchor is $45^\circ$ from each end, so the bound holds with equality; at a gap of $5\,\mathrm{GHz}$ this takes $100\,\mathrm{ps}$ ([@ex-orthogonalization-times]). The four cyan strobe bars read $0.854$, $0.729$, $0.622$, $0.531$, and $64$ checks give $0.962$ ([@ex-zeno-strobe-freezing]). In the first-return ledger with Bloch steps of $45^\circ$ (the state arrow turns $22.5^\circ$) the state is back at the first step with probability $0.854$, otherwise after $7.83$ steps on average, exactly $2$ overall; for this qubit, probing more often only changes the shape of the distribution ([@ex-first-return-qubit]). The start $(1, 1, 1, 1)/2$ plays all four directions of the eigenvalues $1, 1, i, -1$ but occupies only three distinct eigenvalues, three amber dots, and the mean is $3$ ([@prob-monitored-spectral-mean]). The towns and depot, the pot, the mailbox and the strings are analogies; the Mandelstam–Tamm and Margolus–Levitin bounds are literature results not formalized in this book; every number in the film is computed on screen.
+:::
+
+The full lab below puts these three pieces back on one rail, where the number of levels, $N$ and the step can be changed by hand.
+
 ::: {.viz src="speed-limit-zeno" height="560"}
 **Speed limits and the Zeno strobe: the full lab.** Three scenes on one rail: overlap and angle (change the number of levels and the weights), the strobe on the Bloch sphere (change $N$), and the first-return ledger (change the step $\delta$).
 :::

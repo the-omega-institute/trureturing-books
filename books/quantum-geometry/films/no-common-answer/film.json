@@ -1,0 +1,32 @@
+{
+  "title": "X and Z share no answer",
+  "title_zh": "X 与 Z 没有共同答案",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:10",
+  "resolution": "1280x720@30",
+  "summary": "Suppose a qubit carried an answer sheet: a number written in advance against every 2×2 complex matrix, keeping one, sums, multiples and products. Two questions sink it. X and Z square to the identity, so each answer is +1 or −1; swapping their order flips a sign, ZX = −XZ, and Lean checks these facts. Since numbers commute, the answers must obey xz = −xz; all four sign rows fail, because only zero equals its own negative and zero squared is not one. Lean checks the general statement: no unital algebra map from 2×2 complex matrices to the complex numbers exists. A smaller hope fails too: Lean checks that a vector with Xψ = xψ and Zψ = zψ is zero. On the Bloch sphere Z is sure only at the north and south poles and X only at east and west, so the two pairs never meet; the zero vector is no state, not the centre of the ball. The theorem forbids one global table that keeps every product, not every hidden-variable model; that answers are made in the meeting is the book's reading.",
+  "summary_zh": "假设量子比特揣着一张答卷：对每个 2×2 复矩阵预先写好一个数，并保持 1、加法、数乘与乘法。两道题就能让它破产。X 与 Z 自乘都得单位矩阵，所以每个答案是 +1 或 −1；交换次序冒出一个负号，ZX = −XZ，这些由 Lean 检验。纸上的数可交换，答案必须满足 xz = −xz；四种正负组合全部落空，因为只有 0 等于自己的相反数，而 0 的平方不是 1。Lean 检验了一般陈述：从 2×2 复矩阵到复数不存在保单位元的代数同态。退一步也不行：Lean 检验了满足 Xψ = xψ 且 Zψ = zψ 的向量必为零。在布洛赫球上，Z 只在南北极确定，X 只在东西极确定，两对极点没有交点；零向量不是态，也不是球心。定理排除的是守住所有乘积的全局数表，并不排除所有隐变量模型；答案在相遇时生成，是本书的诠释。",
+  "style": "trureturing cyberpunk · an answer sheet with blank boxes, the matrices X and Z and their swapped products, a four-row sign table, the no-character statement, a lit glass Bloch ball with the Z and X poles and an amber state touring them",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/FiniteDimensional.qubit_weyl_star",
+    "D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character",
+    "D5/S3/Quantum/QubitWitnesses.pauli_observables_have_no_common_eigenvector"
+  ],
+  "solid": true,
+  "scripts": ["viz/two-angle-addressing/model.js"],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_no-common-answer_720p_narrated.mp4",
+    "cover": "quantum-geometry_no-common-answer_cover.jpg"
+  }
+}

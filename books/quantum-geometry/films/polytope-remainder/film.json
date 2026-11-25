@@ -1,0 +1,31 @@
+{
+  "title": "Finite always leaves a gap",
+  "title_zh": "有限总留一道缝",
+  "summary": "Build a ball from flat faces: twelve corners on a glass sphere leave a largest gap of 0.2053 at the centre of a face, forty-two corners 0.0658, a hundred and sixty-two 0.0178; the gap shrinks and never closes. A quantum memory records a branch by sliding a pointer of finitely many cells, and the overlap of the pointer with its shifted copy decides how much interference survives: for (1, 2, 3, 2, 1)/√19 shifted by one it is 16/19. Two cells a and b overlap by ab, at most one half when a equals b, the centre-to-side distance of a triangle; three cells reach only 0.7071, that of a square. Lean checks that for every finite pointer and every nonzero shift the overlap is at most cos(π/(m + 2)) with m = ⌊N/|ℓ|⌋, and that the shift record is a quantum channel for which, whenever two branch labels differ by ℓ ≠ 0, every recovery channel leaves its worst inputs an error of at least half the gap 1 − cos(π/(m + 2)), always positive: 0.2500 for two cells, 0.0170 for eleven. The same kind of gap lives in the exponential series: Lean checks that in any complete normed algebra the tail after n terms is at most rⁿ/n!·eʳ; for a π pulse the ceiling falls from 1.22 at four terms to 2.27×10⁻⁶ at twelve, while the true errors, computed on screen, stay below it and above zero. The floor is for the worst input only, a falling floor need not mean a falling error, the theorem covers one way of recording, and that the cosine's tail is nonzero for 0 < θ ≤ 2 is a textbook result not formalized in the book.",
+  "summary_zh": "用平面拼一个球：玻璃球面上取十二个角，面心离球皮最远还差 0.2053；四十二个角差 0.0658，一百六十二个角差 0.0178。缝越来越小，却合不上。量子记忆按分支的标签把一根有限格的指针平移几格来记录分支；指针与平移副本的重叠决定干涉还剩多少：(1, 2, 3, 2, 1)/√19 平移一格，重叠是 16/19。两格 a、b 的重叠是 ab，a = b 时最大，为 1/2，正是三角形的边心距；三格最多 0.7071，是正方形的边心距。Lean 检验了：任何有限指针、任何非零平移，重叠都不超过 cos(π/(m + 2))，m = ⌊N/|ℓ|⌋；这种平移记录是一个量子信道，只要两个分支标签相差 ℓ ≠ 0，无论用哪个恢复信道，最坏的输入至少留下 1 − cos(π/(m + 2)) 一半的误差，而且永远为正：两格是 0.2500，十一格是 0.0170。指数级数里也有同一类缝：Lean 检验了在任何完备赋范代数里，留 n 项后的尾巴不超过 rⁿ/n!·eʳ；对一个 π 脉冲，上界从 4 项时的 1.22 降到 12 项时的 2.27×10⁻⁶，屏幕上算出的真实误差都在上界之下，也都大于零。下界只管最坏的输入；下界变小不等于误差变小；定理只针对一种记录方式；余弦的尾巴在 0 < θ ≤ 2 上不为零是教科书结果，本书没有形式化。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · geodesic polyhedra in a glass sphere, a shifted record pointer, the two-cell knob, a ladder of inscribed polygons, the factorial tail on a log scale",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.coefficient_gamma_le_cosine",
+    "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.finite_record_cosine_obstruction",
+    "D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le"
+  ],
+  "solid": true,
+  "outputs": {
+    "narrated_720p": "quantum-geometry_polytope-remainder_720p_narrated.mp4",
+    "cover": "quantum-geometry_polytope-remainder_cover.jpg"
+  }
+}
