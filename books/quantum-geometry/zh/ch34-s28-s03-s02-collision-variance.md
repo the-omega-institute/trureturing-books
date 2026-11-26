@@ -475,7 +475,7 @@ $$
 |N(0,Y)-M(Y)|\le D(\log Y)^2.
 $$
 
-[累计计数余项](https://github.com/the-omega-institute/trureturing/blob/70b596cb65683a02563d998780d4f3360bf86590/D5/S3/Weil/ZeroData/CumulativeRvmError.lean#L90) 经典累计 Riemann–von Mangoldt 渐近式具有更强的 $O(\log Y)$ 误差。上述对数平方界直接由当前形式化库中的精确二进区间计数定理推出。
+[累计计数余项](lean:D5/S3/Weil/ZeroData/CumulativeRvmError.cumulative_rvm_error) 经典累计 Riemann–von Mangoldt 渐近式具有更强的 $O(\log Y)$ 误差。上述对数平方界直接由当前形式化库中的精确二进区间计数定理推出。
 
 对于充分大的 $x$ 和 $x\le y\le2x$，主项增量至少为 $(y-x)\log x/(4\pi)$，两个端点的累计误差合计至多为 $5D(\log x)^2$。因此存在 $L>1$ 与 $K>0$，使得当 $L\le x$ 且 $x+K\log x\le y\le2x$ 时，
 
@@ -483,7 +483,7 @@ $$
 N(x,y)\ge\frac{(y-x)\log x}{8\pi}.
 $$
 
-[短区间计数下界](https://github.com/the-omega-institute/trureturing/blob/70b596cb65683a02563d998780d4f3360bf86590/D5/S3/Weil/ZeroData/CumulativeRvmError.lean#L159) 这两个估计均无须 RH 前提。在正纵坐标谱的 RH 接口下，后一个估计给出了移动对数宽度区间的实际解析重数计数下界。要用这些计数建立更长时间区域的统一傅里叶相位亏损界，还需估计有利相位区间及其联合加权贡献。
+[短区间计数下界](lean:D5/S3/Weil/ZeroData/CumulativeRvmError.short_window_count_lower) 这两个估计均无须 RH 前提。在正纵坐标谱的 RH 接口下，后一个估计给出了移动对数宽度区间的实际解析重数计数下界。要用这些计数建立更长时间区域的统一傅里叶相位亏损界，还需估计有利相位区间及其联合加权贡献。
 
 ### 有限支撑的占用数对角下界
 

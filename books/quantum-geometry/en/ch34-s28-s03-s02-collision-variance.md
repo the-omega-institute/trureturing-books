@@ -475,7 +475,7 @@ $$
 |N(0,Y)-M(Y)|\le D(\log Y)^2.
 $$
 
-[Cumulative counting residual](https://github.com/the-omega-institute/trureturing/blob/70b596cb65683a02563d998780d4f3360bf86590/D5/S3/Weil/ZeroData/CumulativeRvmError.lean#L90) The classical cumulative Riemann–von Mangoldt asymptotic has the stronger $O(\log Y)$ error. The displayed logarithmic-square bound follows directly from the exact dyadic counting theorem in the current formal library.
+[Cumulative counting residual](lean:D5/S3/Weil/ZeroData/CumulativeRvmError.cumulative_rvm_error) The classical cumulative Riemann–von Mangoldt asymptotic has the stronger $O(\log Y)$ error. The displayed logarithmic-square bound follows directly from the exact dyadic counting theorem in the current formal library.
 
 For $x\le y\le 2x$ with $x$ sufficiently large, the main term grows by at least $(y-x)\log x/(4\pi)$, and the two cumulative errors cost at most $5D(\log x)^2$. Consequently there exist $L>1$ and $K>0$ such that, whenever $L\le x$ and $x+K\log x\le y\le2x$,
 
@@ -483,7 +483,7 @@ $$
 N(x,y)\ge\frac{(y-x)\log x}{8\pi}.
 $$
 
-[Short-window lower count](https://github.com/the-omega-institute/trureturing/blob/70b596cb65683a02563d998780d4f3360bf86590/D5/S3/Weil/ZeroData/CumulativeRvmError.lean#L159) Both estimates hold without an RH premise. Under the positive-ordinate RH interface, the latter is an actual multiplicity-weighted lower count for moving bands of logarithmic width. Turning these counts into a uniform bound for the Fourier phase deficit at longer times requires additional estimates of the favorable phase intervals and their joint weighted contribution.
+[Short-window lower count](lean:D5/S3/Weil/ZeroData/CumulativeRvmError.short_window_count_lower) Both estimates hold without an RH premise. Under the positive-ordinate RH interface, the latter is an actual multiplicity-weighted lower count for moving bands of logarithmic width. Turning these counts into a uniform bound for the Fourier phase deficit at longer times requires additional estimates of the favorable phase intervals and their joint weighted contribution.
 
 ### Occupation diagonal lower bound for finite support
 

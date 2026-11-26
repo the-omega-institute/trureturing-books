@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "89b4f1a0e3d7016b804157c0367a117c6d4ea6fc",
-  "pinned_at": "2026-11-25T23:33:02Z",
+  "commit": "a26819005cd97e87f60580983af6d6ae01cd6f80",
+  "pinned_at": "2026-11-26T00:20:29Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -13560,6 +13560,32 @@
       "statement_id": "sha256:1c3416ed0d204411540d4b911935ddc310a3a8647f468d22d94a4f6b2696a5b1",
       "line": 130,
       "signature": "theorem firstLiMass_lt_one : firstLiMass < 1"
+    },
+    "D5/S3/Weil/ZeroData/CumulativeRvmError.cumulative_rvm_error": {
+      "module": "D5/S3/Weil/ZeroData/CumulativeRvmError",
+      "name": "D5.S3.Weil.ZeroData.CumulativeRvmError.cumulative_rvm_error",
+      "kind": "theorem",
+      "statement_id": "sha256:28b2cd1cf2a5e54ccf7e38c7c8e360786940d9bfa82ae6e338f17a1a2daa99f8",
+      "line": 90,
+      "signature": "theorem cumulative_rvm_error : ∃ U D : ℝ, 1 < U ∧ 0 ≤ D ∧ ∀ Y, U ≤ Y → |(Zeta23.Ncount 0 Y : ℝ) - (1/(2*Real.pi))*Y*(Real.log (Y/(2*Real.pi))-1)| ≤ D*(Real.log Y)^2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Weil/ZeroData/CumulativeRvmError.short_window_count_lower": {
+      "module": "D5/S3/Weil/ZeroData/CumulativeRvmError",
+      "name": "D5.S3.Weil.ZeroData.CumulativeRvmError.short_window_count_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:28b2cd1cf2a5e54ccf7e38c7c8e360786940d9bfa82ae6e338f17a1a2daa99f8",
+      "line": 159,
+      "signature": "theorem short_window_count_lower : ∃ L K : ℝ, 1 < L ∧ 0 < K ∧ ∀ x y : ℝ, L ≤ x → x+K*Real.log x ≤ y → y ≤ 2*x → (y-x)*Real.log x/(8*Real.pi) ≤ (Zeta23.Ncount x y : ℝ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Weil/ZeroData/UnconditionalCanonicalZeroData.zetaZeroData_representation_iff": {
       "module": "D5/S3/Weil/ZeroData/UnconditionalCanonicalZeroData",
