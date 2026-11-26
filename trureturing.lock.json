@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "c05c6a50f9422cd571bee8229b5e822a453b770c",
-  "pinned_at": "2026-11-26T20:04:35Z",
+  "commit": "c0f14daed597e1fbab269cf9f08e0ef88cdfaec3",
+  "pinned_at": "2026-11-26T20:31:28Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -11140,6 +11140,292 @@
       "statement_id": "sha256:29f0424e2386e0d675fc12e12f82d21c487d943d53b7c12598846855bf5023a6",
       "line": 99,
       "signature": "public lemma qftSource_circuit_event_count (n : Nat) : ResourcePool.count event (circuit oracles n).eventCost = n * (if .gate .hadamard = event then 1 else 0) + n.choose 2 * (if .gate .controlledPhase = event then 1 else 0) + (n / 2) * (if .gate .swap = event then 1 else 0)"
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.anomaly_cancel": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.anomaly_cancel",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 402,
+      "signature": "theorem anomaly_cancel : 2 * hypercharge .QL + hypercharge .uc + hypercharge .dc = 0 ∧ 3 * hypercharge .QL + hypercharge .LL = 0 ∧ 6 * hypercharge .QL + 3 * hypercharge .uc + 3 * hypercharge .dc + 2 * hypercharge .LL + hypercharge .ec + hypercharge .nuc = 0 ∧ 6 * hypercharge .QL ^ 3 + 3 * hypercharge .uc ^ 3 + 3 * hypercharge .dc ^ 3 + 2 * hypercharge .LL ^ 3 + hypercharge .ec ^ 3 + hypercharge .nuc ^ 3 = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.cover_kernel_iff": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.cover_kernel_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 467,
+      "signature": "theorem cover_kernel_iff (t : ℂ) (q : ℍ[ℝ]) (g : C) (ht : t * conj t = 1) : gaugeLift (cover t q g) = 1 ↔ t ^ 6 = 1 ∧ quatMatrix q = t ^ 3 • (1 : W) ∧ g = t ^ 4 • (1 : C)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.fermion_dimension": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.fermion_dimension",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 123,
+      "signature": "theorem fermion_dimension : Module.finrank ℂ H = 32",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.finite_spectral_triple_ko6": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.finite_spectral_triple_ko6",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 334,
+      "signature": "theorem finite_spectral_triple_ko6 (y : Yukawa) (μ : ℂ) : Function.Injective rep ∧ (∀ v, J_F (J_F v) = v) ∧ j (D_F y μ) = D_F y μ ∧ j γ_F = -γ_F ∧ γ_F * γ_F = 1 ∧ γ_Fᴴ = γ_F ∧ D_F y μ * γ_F + γ_F * D_F y μ = 0 ∧ (D_F y μ)ᴴ = D_F y μ ∧ (∀ a, comm (rep a) γ_F = 0) ∧ (∀ a b, comm (rep a) (opposite b) = 0) ∧ (∀ a b, comm (comm (D_F y μ) (rep a)) (opposite b) = 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.gaugeLift_det": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.gaugeLift_det",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 361,
+      "signature": "theorem gaugeLift_det (a : A) (ha : a ∈ unitary A) : (gaugeLift a).det = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.higgsDirac_fluctuation": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.higgsDirac_fluctuation",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 610,
+      "signature": "theorem higgsDirac_fluctuation (y : Yukawa) (μ : ℂ) (h : ℍ[ℝ]) : higgsDirac y μ (1 + h) = D_F y μ + higgsForm y h + j (higgsForm y h)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.higgs_minimum_iff": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.higgs_minimum_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 622,
+      "signature": "theorem higgs_minimum_iff (a b : ℝ) (y : Yukawa) (μ : ℂ) (ha : 0 < a) (hy : 0 < moment y 2) : (∃ x > 0, ∀ z ≥ 0, potential a b y μ x ≤ potential a b y μ z) ↔ 2*a*Complex.normSq μ*Complex.normSq y.nu < b*moment y 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.higgs_minimum_massless": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.higgs_minimum_massless",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 684,
+      "signature": "theorem higgs_minimum_massless (a b : ℝ) (y : Yukawa) (ha : 0 < a) (hb : 0 < b) (hy : y.nu ≠ 0 ∨ y.electron ≠ 0 ∨ y.up ≠ 0 ∨ y.down ≠ 0) : ∃ x > 0, ∀ z ≥ 0, potential a b y 0 x ≤ potential a b y 0 z",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.hypercharge_table": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.hypercharge_table",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 398,
+      "signature": "theorem hypercharge_table : hypercharge .QL = 1/6 ∧ hypercharge .uc = -2/3 ∧ hypercharge .dc = 1/3 ∧ hypercharge .LL = -1/2 ∧ hypercharge .ec = 1 ∧ hypercharge .nuc = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.inner_fluctuation_iff": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.inner_fluctuation_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 559,
+      "signature": "theorem inner_fluctuation_iff (y : Yukawa) (μ : ℂ) (T : Mat) : T ∈ oneForms y μ ∧ Tᴴ = T ↔ ∃ h, T = higgsForm y h",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.order_one": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.order_one",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 327,
+      "signature": "theorem order_one (y : Yukawa) (μ : ℂ) (a b : A) : comm (comm (D_F y μ) (rep a)) (opposite b) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.order_zero": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.order_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 255,
+      "signature": "theorem order_zero (a b : A) : comm (rep a) (opposite b) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.potential_eq_spectral_action": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.potential_eq_spectral_action",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 677,
+      "signature": "theorem potential_eq_spectral_action (a b : ℝ) (y : Yukawa) (μ : ℂ) (h : ℍ[ℝ]) : let d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.quatMatrix_det": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.quatMatrix_det",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 69,
+      "signature": "theorem quatMatrix_det (h : ℍ[ℝ]) : (quatMatrix h).det = Quaternion.normSq h",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.quatMatrix_hs_inner": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.quatMatrix_hs_inner",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 104,
+      "signature": "theorem quatMatrix_hs_inner (h k : ℍ[ℝ]) : ((quatMatrix h)ᴴ * quatMatrix k).trace.re / 2 = ⟪h, k⟫_ℝ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.quatMatrix_specialUnitary": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.quatMatrix_specialUnitary",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 80,
+      "signature": "theorem quatMatrix_specialUnitary (U : W) : U ∈ unitary W ∧ U.det = 1 ↔ ∃ h : ℍ[ℝ], Quaternion.normSq h = 1 ∧ quatMatrix h = U",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.reduced_cover": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.reduced_cover",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 416,
+      "signature": "theorem reduced_cover (u : A) (hu : u ∈ unitary A) (hc : reducedCharacter u = 1) : ∃ t g, t * conj t = 1 ∧ g ∈ unitary C ∧ g.det = 1 ∧ cover t u.2.1 g = u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.rep_det": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.rep_det",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 354,
+      "signature": "theorem rep_det (a : A) (ha : a ∈ unitary A) : (rep a).det = reducedCharacter a ^ 4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.trace_dirac_four": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.trace_dirac_four",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 664,
+      "signature": "theorem trace_dirac_four (y : Yukawa) (μ : ℂ) (h : ℍ[ℝ]) : let d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.trace_dirac_sq": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.trace_dirac_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 650,
+      "signature": "theorem trace_dirac_sq (y : Yukawa) (μ : ℂ) (h : ℍ[ℝ]) : let d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.unimodularity_witness": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.unimodularity_witness",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 369,
+      "signature": "theorem unimodularity_witness : ∃ a : A, a ∈ unitary A ∧ (rep a).det = 1 ∧ (gaugeLift a).det = 1 ∧ reducedCharacter a ≠ 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.weak_generators_independent": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.weak_generators_independent",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 110,
+      "signature": "theorem weak_generators_independent : LinearIndependent ℝ (![⟨0, 1, 0, 0⟩, ⟨0, 0, 1, 0⟩, ⟨0, 0, 0, 1⟩] : Fin 3 → ℍ[ℝ])",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation": {
       "module": "D5/S3/Quantum/GleasonComplexRepresentation",
