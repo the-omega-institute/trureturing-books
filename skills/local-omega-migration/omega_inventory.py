@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """Inventory of Lean citations by foundation: which ones already rest on strict Omega mathematics.
 
-A cited declaration counts as Omega-only when its frozen row in trureturing records
-``libraries`` as a non-empty subset of {OmegaInit, OmegaMath} and ``axioms`` as ``[]``
-(trureturing docs/CONTRIBUTING.md, "Omega-only, zero-axiom claim"). For every other citation
+A frozen row in trureturing carries one measurement per backend: the primary record is the
+official Lean Init and Mathlib build, and ``strict_omega``, when present, is the strict build.
+A cited declaration counts as Omega-only when one of these measurements records ``libraries``
+as a non-empty subset of {OmegaInit, OmegaMath} and ``axioms`` as ``[]`` (trureturing
+docs/CONTRIBUTING.md, "Omega-only, zero-axiom claim"). The official build names its foundation
+``Init``, so a D5 consumer of the Omega interface qualifies through its strict measurement; the
+report keeps both backends' ``libraries`` and ``axioms`` side by side. For every other citation
 the script gives a first-pass tier from the Lean signature and the module source. Tiers B and C
 are candidates for migration and still need a reading of the statement; tier D needs real or
 complex analysis, which strict Omega mathematics does not provide.
@@ -78,11 +82,25 @@ def frozen_row(state: dict, want: list[str]) -> dict | None:
     return None
 
 
+def measurements(row: dict) -> dict[str, dict]:
+    """Backend -> the ``libraries`` and ``axioms`` measured on it (``None`` when not recorded)."""
+    out = {"official": {"libraries": row.get("libraries"), "axioms": row.get("axioms")}}
+    strict = row.get("strict_omega")
+    if strict is not None:
+        out["strict"] = {"libraries": strict.get("libraries"), "axioms": strict.get("axioms")}
+    return out
+
+
+def omega_backends(row: dict) -> list[str]:
+    """Backends whose measurement supports the Omega-only, zero-axiom claim."""
+    return [name for name, m in measurements(row).items()
+            if m["libraries"] and set(m["libraries"]) <= OMEGA_LIBS and m["axioms"] == []]
+
+
 def tier(row: dict | None, sig: str, src: str) -> str:
     if row is None:
         return "unresolved"
-    libs, axioms = row.get("libraries"), row.get("axioms")
-    if libs and set(libs) <= OMEGA_LIBS and axioms == []:
+    if omega_backends(row):
         return "A-omega"
     if row.get("kind") != "theorem":
         return "N-definition"
@@ -100,7 +118,7 @@ BRIDGE_MODULES = {"D5/S3/Quantum/AURICOmega/OmegaShadowBridge"}
 OPEN_TIERS = ("C-exact", "B-structural")
 
 TIER_NOTE = {
-    "A-omega": "已是仅 Omega · 零公理",
+    "A-omega": "已是仅 Omega · 零公理（至少一个后端的测量如此）",
     "C-exact": "候选：签名只用自然数、整数、有理数、有限对象或纯逻辑",
     "B-structural": "候选：有限结构，需先把 Mathlib 基础设施移植到 OmegaMath",
     "D-analytic": "暂不可迁：需要实数、复数、极限或测度",
@@ -152,6 +170,8 @@ def main() -> int:
                          "kind": row.get("kind") if row else None,
                          "libraries": row.get("libraries") if row else None,
                          "axioms": row.get("axioms") if row else None,
+                         "strict_omega": measurements(row).get("strict") if row else None,
+                         "omega_backends": omega_backends(row) if row else [],
                          "signature": sig, "cited": places})
         report["books"][book.slug] = rows
 
@@ -167,6 +187,15 @@ def main() -> int:
         for t in TIER_NOTE:
             lines.append(f"| `{t}` | {counts.get(t, 0)} | {TIER_NOTE[t]} |")
         lines.append("")
+        omega = [r for r in rows if r["tier"] == "A-omega"]
+        if omega:
+            official = collections.Counter(
+                "未记录" if r["axioms"] is None else "空" if not r["axioms"] else "、".join(r["axioms"])
+                for r in omega)
+            strict_only = sum(1 for r in omega if r["omega_backends"] == ["strict"])
+            lines += [f"`A-omega` 的 {len(omega)} 条中，{strict_only} 条只由严格端测量支持；"
+                      f"这 {len(omega)} 条在官方端的公理："
+                      + "；".join(f"{k} {v} 条" for k, v in sorted(official.items())) + "。", ""]
         for t in OPEN_TIERS:
             pick = [r for r in rows if r["tier"] == t]
             if not pick:

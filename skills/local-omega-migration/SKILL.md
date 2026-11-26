@@ -20,11 +20,11 @@ python3 skills/local-omega-migration/omega_inventory.py                 # 全部
 python3 skills/local-omega-migration/omega_inventory.py --book quantum-geometry
 ```
 
-脚本只读 `--ref`（默认 `origin/dev`）上的冻结状态片与源码，不改上游 checkout；输出在 `build/omega/`（不提交）：`inventory.json` 给每条引用的层级、签名与全部被引位置（含视频、演示文稿与可视化），`inventory.md` 按层级列出候选。
+脚本只读 `--ref`（默认 `origin/dev`）上的冻结状态片与源码，不改上游 checkout；输出在 `build/omega/`（不提交）：`inventory.json` 给每条引用的层级、两个后端各自的 `libraries` 与 `axioms`、签名与全部被引位置（含视频、演示文稿与可视化），`inventory.md` 按层级列出候选，并写明 `A-omega` 各条在官方端的公理。
 
 | 层级 | 判定 |
 | --- | --- |
-| `A-omega` | 冻结行的 `libraries` 是 `{OmegaInit, OmegaMath}` 的非空子集，且 `axioms` 为 `[]`：已迁移 |
+| `A-omega` | 冻结行某一后端的测量中，`libraries` 是 `{OmegaInit, OmegaMath}` 的非空子集，且 `axioms` 为 `[]`：已迁移。主记录是官方端，`strict_omega` 是严格端；官方端把基础库记作 `Init`，所以 D5 的 Omega 出版引用靠严格端入选 |
 | `C-exact` | 签名与模块源码只用自然数、整数、有理数、有限对象或纯逻辑：候选 |
 | `B-structural` | 用到 Mathlib 的有限结构（`Finset`、`Matrix`、`ZMod`、图、群等）：候选，需先在 OmegaMath 补基础设施 |
 | `D-analytic` | 需要实数、复数、极限、测度、拓扑或赋范空间：不迁移 |
