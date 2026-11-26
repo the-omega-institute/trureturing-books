@@ -493,7 +493,7 @@ $$
 1-|Z_T(t)|\ge\frac{1}{4096\log T}.
 $$
 
-[周期相位亏损界](https://github.com/the-omega-institute/trureturing/blob/2135f55e75121b7777570583931a435686bb45d8/D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHPeriodicPhaseCoverage.lean#L331) 取 $b=\pi/(8K)$ 与 $H=2\pi/|t|$，则 $8H\le T$ 且 $H/16\ge K\log T$。从 $k_0H$ 开始，其中 $k_0=\lceil T/(2H)\rceil$，在 $[T/2,T]$ 中取 $q=\lfloor T/(4H)\rfloor\ge T/(8H)$ 个完整周期。每个周期中分别取以相位 $0$ 与 $\pi$ 为起点、宽度均为 $H/16$ 的两个半开区间。每族区间两两不交，对应相位分别距 $+1$ 与 $-1$ 至多 $\pi/8<1/2$。
+[周期相位亏损界](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHPeriodicPhaseCoverage.harmonic_periodic_phase_deficit) 取 $b=\pi/(8K)$ 与 $H=2\pi/|t|$，则 $8H\le T$ 且 $H/16\ge K\log T$。从 $k_0H$ 开始，其中 $k_0=\lceil T/(2H)\rceil$，在 $[T/2,T]$ 中取 $q=\lfloor T/(4H)\rfloor\ge T/(8H)$ 个完整周期。每个周期中分别取以相位 $0$ 与 $\pi$ 为起点、宽度均为 $H/16$ 的两个半开区间。每族区间两两不交，对应相位分别距 $+1$ 与 $-1$ 至多 $\pi/8<1/2$。
 
 根据短区间计数界及 $T\ge4$ 时的 $\log(T/2)\ge\log T/2$，每个区间的解析重数计数至少为 $H\log T/(256\pi)$。高处每个零点对 $W(T)$ 的贡献至少为 $m_\gamma/(2T)$。因而每族区间的调和质量至少为 $\log T/(4096\pi)$。把原始复数得分投影到自身单位方向上。若该方向的实部非负，选取 $-1$ 附近的区间族，否则选取 $+1$ 附近的区间族。相应投影值至多为 $1/2$，而所有单位相位的投影值至多为 $1$。故原始模长亏损至少为 $\log T/(8192\pi)$。除以 $W(T)\le(\log T)^2/(2\pi)$ 即得所求结论。负时间由复共轭得到相同的界。
 

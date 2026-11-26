@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "a26819005cd97e87f60580983af6d6ae01cd6f80",
-  "pinned_at": "2026-11-26T00:32:29Z",
+  "commit": "a053e43540994a946daf0075a7c59756b0d652a9",
+  "pinned_at": "2026-11-26T02:12:18Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -12986,7 +12986,7 @@
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment",
       "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHHarmonicPairMoment.harmonic_pair_ratio",
       "kind": "theorem",
-      "statement_id": "sha256:3f3827d8510e40a31ff1805f1c012679807888d681064df6e9d7072469ddb9a9",
+      "statement_id": "sha256:88a57432366fda22e45d863fdb0f33b9d537a13b6e0bb912570b905bf758bf72",
       "line": 207,
       "signature": "theorem harmonic_pair_ratio (rh : RiemannHypothesis) : ∀ᶠ T : ℝ in atTop, let logHeight",
       "axioms": [
@@ -12999,7 +12999,7 @@
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment",
       "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHHarmonicPairMoment.harmonic_reciprocal_time_deficit",
       "kind": "theorem",
-      "statement_id": "sha256:3f3827d8510e40a31ff1805f1c012679807888d681064df6e9d7072469ddb9a9",
+      "statement_id": "sha256:88a57432366fda22e45d863fdb0f33b9d537a13b6e0bb912570b905bf758bf72",
       "line": 228,
       "signature": "theorem harmonic_reciprocal_time_deficit (rh : RiemannHypothesis) : ∃ L : ℝ, 1 < L ∧ ∀ T t : ℝ, L ≤ T → 1/T ≤ |t| → |t| ≤ 1/L → let g : ↥(positiveCutoff rh T) → ℝ",
       "axioms": [
@@ -13167,6 +13167,19 @@
       "statement_id": "sha256:1522c248c8ea877a5381f817c1108203f8857c40fdd6c87234533391d92b1716",
       "line": 203,
       "signature": "theorem prime_window_mobius_very_late_of_rh (hRH : RiemannHypothesis) {d ε : ℝ} (hd : 1/2 ≤ d) (hdone : d ≤ 1) (hε : 0 < ε) : ∃ a₀ K : ℝ, 2 ≤ a₀ ∧ 0 < K ∧ ∀ m : ℕ, 2 ≤ m → ∀ a B : ℝ, a₀ ≤ a → a ≤ B → ((m : ℝ)+1)^(1+d) ≤ Real.log a → |windowDiscrepancy a B - spectralPrimitive (phaseOrbit (Real.log B)) + spectralPrimitive (phaseOrbit (Real.log a)) - (∑ n ∈ Finset.Icc 3 m, -(μ n : ℝ) * (2 * (n : ℝ)^2 / (((n : ℝ) - 1) * ((n : ℝ) - 2))) * (a ^ ((n : ℝ)⁻¹ - 1 / 2) - B ^ ((n : ℝ)⁻¹ - 1 / 2))) - (∑ n ∈ (Finset.Icc 2 m).filter (fun n => 2 * n < m + 1), -(μ n : ℝ) * (rootPrimitive (n : ℝ) B - rootPrimit"
+    },
+    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHPeriodicPhaseCoverage.harmonic_periodic_phase_deficit": {
+      "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHPeriodicPhaseCoverage",
+      "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHPeriodicPhaseCoverage.harmonic_periodic_phase_deficit",
+      "kind": "theorem",
+      "statement_id": "sha256:7f62bb85ebad8642f7d59114803ed26c6d351a8217ed5831184988e30fb17e93",
+      "line": 332,
+      "signature": "theorem harmonic_periodic_phase_deficit (rh : RiemannHypothesis) : ∃ L b : ℝ, 1<L ∧ 0<b ∧ ∀ T t : ℝ, L≤T → 16*Real.pi/T≤|t| → |t|≤b/Real.log T → let g : ↥(positiveCutoff rh T) → ℝ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHRootLateIncrement.root_signal_late_increment_lower": {
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHRootLateIncrement",
