@@ -111,6 +111,10 @@ $$
 
 The minimal neutral traceless portal rank is therefore **exactly $5$** on the #35 zero window (and rises to **exactly $6$** on the #78 and #288 zero windows, where rank $5$ exceeds $25.8094 > 8\pi$—a direct link between Riemann zero selection and Higgs portal rank).
 
+::: {.film src="rank-five-portal"}
+**Two-loop gauge thresholds lift the Higgs mass squared by about $10^{26}\;\mathrm{GeV}^2$, no species-traceless portal can cancel them, and a neutral traceless portal needs rank $5$ to stay under $8\pi$ (2 min 42 s).** The opening computes the matching targets $m_H = 125.25\;\mathrm{GeV}$, $\lambda(M_Z) \approx 0.12938$ and $8\pi \approx 25.133$ on screen, then raises the magenta two-loop wall on a log ladder to about $1.05 \times 10^{26}\;\mathrm{GeV}^2$, $1.34 \times 10^{22}$ times the tree value (interval certificate); the three meeting curves are a schematic. Cyan and magenta bars show $12(-F) + 4(3F) = 0$; the width requirement $\log(Q/m_{\min}) > 3.45$ is this section's written argument, while the crossing widths $3.272$ and $1.787583$ and $\Delta_{\mathrm{pole}} > 6.8122 \times 10^{23}\;\mathrm{GeV}^2$ are certificate values. The contact floor is drawn rank by rank: rank $\le 4$ breaks the dashed $8\pi$ line, and the amber rank-five interval $(24.271, 24.931)$ sits below it. The green label belongs only to [@thm-ou-ch06-schur-minimum]; the parabola beside it is a $1 \times 1$ worked example with chosen numbers, and the margin $> 3.11842$ is the chapter's certificate. In the low-energy panels the $Z$-width and CLEO comparisons are model-internal recomputations, and the $80.38\;\mathrm{GeV}$ charged singlet against the OPAL limit is argued; the closing red [@prob-ou-ch06-question1-open] remains open.
+:::
+
 A pair of transparent hand checks shows both how [@thm-ou-ch06-schur-minimum] certifies unitarity of the rank-five portal and why equal-depth electroweak vacua lock the cubic Higgs coupling rigidly to $3\times$ its Standard Model value:
 
 ::: {.example #ex-ou-ch06-rank-five-and-cubic title="Hand Check: $2 \times 2$ Schur Unitarity of the Rank-Five Portal and the $3\times$ Equal-Depth Self-Coupling"}

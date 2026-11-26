@@ -563,14 +563,14 @@ FILM.poster = () => {
   background(t, sc, 0, 6);
   txt(DATA.film.title_zh, W / 2, 300, { size: 92, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('THE FOUR-LAYER VACUUM', W / 2, 390, { size: 50, fam: F.orb, w: 900, align: 'center', c: C.cyan, ab: 2, ls: 5 });
-  const bx = W / 2 - 315, by = 640, sp = 210, k = 48;
+  const bx = W / 2 - 315, by = 710, sp = 210, k = 40;
   line(bx - 60, by, bx + 3 * sp + 60, by, C.dim, 1, 2);
   FV_W.forEach((w, j) => {
     const x = bx + j * sp, col = w > 0 ? C.cyan : C.mag, h = Math.abs(w) * k;
     fillBox(x - 26, w > 0 ? by - h : by, 52, h, col, 0.5); box(x - 26, w > 0 ? by - h : by, 52, h, col, 1, 2);
     txt((w > 0 ? '+' : '') + w, x + 44, w > 0 ? by - h + 24 : by + h - 6, { size: 30, fam: F.math, w: 700, c: col });
   });
-  txt('Σ w = Σ w j = Σ w j² = 0', W / 2, 490, { size: 40, fam: F.math, w: 700, align: 'center', c: C.white, ab: 1 });
+  txt('Σ w = Σ w j = Σ w j² = 0', W / 2, 480, { size: 40, fam: F.math, w: 700, align: 'center', c: C.white, ab: 1 });
   bloom(0.5);
   txt(`${DATA.book.code} · FILM`, W / 2, 900, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 8 });
   txt(`${DATA.book.title.zh} · ${DATA.book.title.en}`, W / 2, 1010, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: 0.9 });

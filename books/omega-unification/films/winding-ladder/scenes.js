@@ -321,7 +321,7 @@ SCENES.wall = S => {
   if (cur === 3) {
     const fa = a * at(S, 2, 0.5);
     panel(fx, fy, fw, fh, fa, C.now, 'K = 27 · GLOBAL MINIMUM IN THE WINDOWS · 全局极小落进三窗');
-    const ba = a * Q(S, 2, 'flavor readings', 0.6);
+    const ba = a * at(S, 2, 0.6, 0.6);
     [[[['|V', C.white], ['ub', C.white, 1], ['|²', C.white]], WL.f27v], [[['J', C.white]], WL.f27j]].forEach(([lab, v], i) => {
       const y = fy + 50 + i * 60, bx = fx + 200, bw = 760;
       rich(lab, fx + 30, y + 30, { size: 30, a: ba });

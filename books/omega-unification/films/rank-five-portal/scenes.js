@@ -423,10 +423,10 @@ SCENES.pinch = S => {
     line(M(RF.opal), MY - 70, M(RF.opal), MY + 8, C.mag, xa, 3);
     txt('98.0 GeV long-lived limit · 长寿命下限', M(RF.opal) - 8, MY - 80, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.mag, a: xa });
     dot(M(RF.mS), MY - 30, 13, 'g', oa);
-    txt('S · 80.38 GeV', M(RF.mS), MY - 104, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.now, a: oa });
-    txt('purely gauge-produced, τ > 1 μs: excluded', 1400, 620, { size: 22, fam: F.zh, w: 700, c: C.white, a: xa });
-    txt('仅靠规范产生且寿命 > 1 μs 的分支：排除', 1400, 656, { size: 22, fam: F.zh, w: 700, c: C.white, a: xa });
-    txt('a prompt decay is needed · 须迅速衰变', 1400, 720, { size: 22, fam: F.zh, w: 700, c: C.argued, a: xa });
+    txt('S · 80.38 GeV', M(RF.mS), MY + 74, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.now, a: oa });
+    txt('purely gauge-produced, τ > 1 μs: excluded', 1360, 620, { size: 20, fam: F.zh, w: 700, c: C.white, a: xa });
+    txt('仅靠规范产生且寿命 > 1 μs 的分支：排除', 1360, 656, { size: 20, fam: F.zh, w: 700, c: C.white, a: xa });
+    txt('a prompt decay is needed · 须迅速衰变', 1360, 720, { size: 20, fam: F.zh, w: 700, c: C.argued, a: xa });
   }
 };
 

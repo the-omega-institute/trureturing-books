@@ -35,7 +35,7 @@
       ["Such zeros have positive density. Yet this is a witness inside the model, not a derivation of quark mixing.", "这样的零点具有正密度。但这是模型内部的见证，不是对夸克混合的推导。"]
     ]},
     {"id": "cracks", "name": "FOUR CRACKS", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "cues": [{"line": 0, "at": 3.0, "kind": "glitch"}], "lines": [
-      ["Stress tests on this very zero show cracks. Near the vacuum, weights two billionths apart differ by under ten to the minus seventy-four.", "直接施在这枚零点上的压力测试露出了裂隙：在真空附近，相差 2×10⁻⁹ 的两组权重，作用差小于 10⁻⁷⁴。"],
+      ["Stress tests on this very zero show cracks. Near the vacuum, weights two billionths apart differ by under ten to the minus seventy-four.", "压力测试露出裂隙：真空附近相差 2×10⁻⁹ 的权重，作用差不到 10⁻⁷⁴。"],
       ["Charge one's light modes leak over thirty-one percent into heavy states of charges two and minus four.", "荷 1 的三轻模，有三成一以上泄入荷 2 与荷 −4 的重态。"],
       ["One vacuum admits both proton-protecting currents and currents that let the proton decay.", "同一个真空，既容得下保护质子的电流，也容得下让质子衰变的电流。"],
       ["And the windows fix only k over d squared: a second scale law is still missing.", "三窗只钉住 k/d²：第二条尺度律仍然缺席。"]
