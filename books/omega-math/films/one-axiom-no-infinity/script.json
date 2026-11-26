@@ -1630,8 +1630,8 @@
      "在 q = (3, 1, −2, 4)：χ₁ = 1/5，搅一次得到 −2/25。"
     ],
     [
-     "The margin, four ninety-six over twenty-five, is positive, as Lean checks. Only the constant fails; for every other shell, the literature proves the bound.",
-     "裕度 496/25 > 0，Lean 已检验；常值不及格，其余各层的界由文献证明。"
+     "The margin, four ninety-six over twenty-five, is positive, as Lean checks. The constant fails. The literature proves the bound on every nonconstant rotation-group shell.",
+     "裕度 496/25 > 0，Lean 已检验；常值超出此界；文献证明了旋转群所有非常值壳层的界。"
     ]
    ],
    "cues": [
@@ -1865,8 +1865,8 @@
      "它的时间不是墙上的钟，而是它真正吸收了多少新结构。"
     ],
     [
-     "Like a diary: a day with nothing new written adds no page. Here, zero, three quarters, three halves.",
-     "就像日记：一天没写下新东西，就不添一页。这里依次是 0、3/4、3/2。"
+     "Like a diary: a day with nothing new written adds no page. A first comparison adds no cycle. The next closes a triangle. The readings are zero, one half, and two.",
+     "就像日记：一天没写下新东西，就不添一页。第一条比较边未增环路，下一拍闭合三角形。读数依次为 0、1/2、2。"
     ],
     [
      "That is an interpretation, so it wears purple, not green.",
