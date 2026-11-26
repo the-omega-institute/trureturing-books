@@ -691,25 +691,58 @@ s = await pick(SHELL);
 check('no stage labels on top of each other on the ball', (await labelOverlaps(page, '.stage .tag')).length === 0);
 check('no sideways scrolling', (await overflowX(page)) <= 0);
 
-/* ---------- the three-window qualification of the winding ladder ---------- */
+/* ---------- the qualifications of the winding ladder ---------- */
 const windingCopy = {
   zh: {
-    certificate: [/18（三窗内梯度范数/, /19（三窗内首个驻点/, /21（三窗内首个严格局部极小/],
-    note: '三窗内 18 圈以内没有驻点',
-    levels: ['三窗内无驻点', '三窗内鞍点', '三窗内严格局部极小']
+    certificate: [
+      /18（三窗内梯度范数 > 3\.00565，无驻点）/,
+      /19（三窗内首个驻点，第 295872666901 枚为鞍点）/,
+      /21（三窗内首个严格局部极小，第 226358 枚）/,
+      /31（三窗精确参考味局部极小）/,
+      /36（权重随高度调整的三窗精确参考味全局真空）/,
+      /105（固定权重跨所有高度的三窗精确参考味共同真空）/
+    ],
+    notes: [
+      '三窗内 18 圈以内无驻点、19 圈首现鞍点、21 圈首现严格局部极小',
+      '逐高度权重的 36 圈',
+      '105 圈才以固定权重给出跨所有高度的三窗精确参考味共同真空'
+    ],
+    levels: {
+      18: [0, '三窗内无驻点'],
+      19: [1, '三窗内鞍点'],
+      21: [2, '三窗内严格局部极小'],
+      105: [6, '固定权重跨高度参考味真空']
+    }
   },
   en: {
-    certificate: [/18 \(gradient norm > 3\.00565, no critical point in the three-window domain\)/, /19 \(the first critical point in the three-window domain/, /21 \(the first strict local minimum in the three-window domain/],
-    note: 'in the three-window domain, no critical point up to 18 windings',
-    levels: ['no critical point in the three windows', 'a saddle in the three windows', 'a strict local minimum in the three windows']
+    certificate: [
+      /18 \(gradient norm > 3\.00565, no critical point in the three-window domain\)/,
+      /19 \(the first critical point in the three-window domain, a saddle at zero 295872666901\)/,
+      /21 \(the first strict local minimum in the three-window domain, zero 226358\)/,
+      /31 \(a three-window local minimum with the exact reference flavour\)/,
+      /36 \(a global three-window, exact-reference-flavour vacuum with height-dependent weights\)/,
+      /105 \(one global three-window, exact-reference-flavour vacuum for all heights with fixed weights\)/
+    ],
+    notes: [
+      'inside the three-window domain, no critical point up to 18 windings, a saddle at 19 and a strict local minimum at 21',
+      'height-dependent 36',
+      'only at 105 do fixed weights give one global three-window, exact-reference-flavour vacuum for all heights'
+    ],
+    levels: {
+      18: [0, 'no critical point in the three windows'],
+      19: [1, 'a saddle in the three windows'],
+      21: [2, 'a strict local minimum in the three windows'],
+      105: [6, 'fixed-weight flavour vacuum for all heights']
+    }
   }
 };
 const checkWindingCopy = async (p, lang) => {
-  const { certificate, note, levels } = windingCopy[lang];
+  const { certificate, notes, levels } = windingCopy[lang];
   const localized = (text) => lang === 'zh' || !CJK.test(text);
+  const titleSeparator = lang === 'zh' ? '：' : ': ';
   const checkCertificate = async (box, label) => {
     const text = await box.innerText();
-    check(`winding ladder (${lang}): ${label} qualifies thresholds 18, 19 and 21`,
+    check(`winding ladder (${lang}): ${label} qualifies thresholds 18, 19, 21, 31, 36 and 105`,
       (await box.isVisible()) && certificate.every((pattern) => pattern.test(text)) && localized(text), text);
   };
   await checkCertificate(p.locator(`#basisCert .${lang}`), 'evidence box');
@@ -720,16 +753,19 @@ const checkWindingCopy = async (p, lang) => {
   await pick(LADDER, p);
   for (const selector of ['#presetNote', '#tour .tour-note']) {
     const text = await p.locator(selector).textContent();
-    check(`winding ladder (${lang}): ${selector} qualifies the bound through 18 windings`, text.includes(note) && localized(text), text);
+    check(`winding ladder (${lang}): ${selector} qualifies thresholds 18, 19, 21, 36 and 105`,
+      notes.every((note) => text.includes(note)) && localized(text), text);
   }
-  for (const [level, k] of [18, 19, 21].entries()) {
+  for (const k of [18, 19, 21, 105]) {
+    const [level, wording] = levels[k];
     const current = await rail(k - 14, p);
     const title = await p.locator('#hudBig').innerText();
     const key = await p.locator('#roKey').innerText();
     check(`winding ladder (${lang}, K = ${k}): the stage title qualifies level ${level}`,
-      current.preset === LADDER && current.ledger.m === k && title.includes(`K = ${k}`) && title.endsWith(levels[level]) && localized(title), title);
+      current.preset === LADDER && current.ledger.m === k && current.ledger.level === level &&
+      title.endsWith(`K = ${k}${titleSeparator}${wording}`) && localized(title), title);
     check(`winding ladder (${lang}, K = ${k}): the key readout qualifies level ${level}`,
-      key === `${level} · ${levels[level]}` && localized(key), key);
+      key === `${level} · ${wording}` && localized(key), key);
     const { layout, hud } = await stageView(p, '#stage');
     const overlaps = await labelOverlaps(p, '#hudBig, #hudSub, #roKey, #presetNote', 0);
     const overflow = await overflowX(p);

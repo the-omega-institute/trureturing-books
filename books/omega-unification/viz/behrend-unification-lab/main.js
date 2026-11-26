@@ -392,7 +392,7 @@
     ['合窗全局最低', 'a global minimum in the windows'],
     ['参考味局部极小', 'a local minimum with the reference flavour'],
     ['逐高度全局味真空', 'a global flavour vacuum, height by height'],
-    ['跨高度共同真空', 'one vacuum for all heights']
+    ['固定权重跨高度参考味真空', 'fixed-weight flavour vacuum for all heights']
   ];
   const M0 = 14,
     MMAX = 110;
@@ -1664,8 +1664,8 @@
       'With 44-bit inputs the amber bracket falls inside the single integer cell 32071996606, the cyan one is the bracket with 288-bit inputs; the reference code 32071992476 lies 4130 cells to the left. Violet bars: the arithmetic weight of three height bands.'
     ],
     'winding-ladder': [
-      '琥珀点沿紫色阶梯走到 K = 105：三窗内 18 圈以内没有驻点，19 出现鞍点，21、27、31、36 依次解锁，105 才有跨高度共同真空；旁边是 W₁₀₅ 在零相位附近的起伏。',
-      'The amber point climbs the violet ladder to K = 105: in the three-window domain, no critical point up to 18 windings, a saddle at 19, then 21, 27, 31 and 36, and one vacuum for all heights only at 105; beside it W₁₀₅ ripples near the zero phases.'
+      '琥珀点沿紫色阶梯走到 K = 105：三窗内 18 圈以内无驻点、19 圈首现鞍点、21 圈首现严格局部极小；27、31 与逐高度权重的 36 圈依次解锁，105 圈才以固定权重给出跨所有高度的三窗精确参考味共同真空；旁边是 W₁₀₅ 在零相位附近的起伏。',
+      'The amber point climbs the violet ladder to K = 105: inside the three-window domain, no critical point up to 18 windings, a saddle at 19 and a strict local minimum at 21; then 27, 31 and height-dependent 36 unlock, and only at 105 do fixed weights give one global three-window, exact-reference-flavour vacuum for all heights; beside it W₁₀₅ ripples near the zero phases.'
     ],
     'memory-rank': [
       'D 走到 1600：171 条弦全部点亮成青色，紫色的记忆秩从 38 经 [29, 33]、26–27、24、23 降到 19；216 是交替相消门槛，512 处时钟数从 9 跳到 10。',
