@@ -1,0 +1,216 @@
+# Chapter 12 The Shared Arithmetic Clock, Three-Band Concentration, and the Seventh-Time Prediction {#sec-ch12}
+
+Across the preceding three volumes, the 19-point Behrend shell driven by the positive Riemann zeta zeros reached the threshold of all four grand-unification questions one sector at a time. In [Volume II](ch04-gauge-crossings-and-monotone-barriers.md), a chosen heavy-threshold prescription and field table allow the charged shell mass operator to invert two-loop gauge running to $\alpha_s(M_Z) \approx 0.1184$; in [Volume III](ch07-chiral-three-generations.md), all five Standard Model hypercharges isolate three light modes inside a shared spectral gap while local flavor parameters and baryon triality reconstruct quark mixing and suppress $\Delta B = 1$ proton decay; in [Volume IV](ch10-regge-gravity-and-spin2.md), a four-layer heat-kernel balance hits the target vacuum curvature within $0.2\%$ once the Newton term is calibrated. As long as each sector sets its own watch, every sector delivers a reproducible model-internal witness.
+
+Now comes the true stress test of unification. Nature does not issue one clock for gauge unification and a private backup clock for quark flavor, nor does it swap probability distributions over the Riemann zeros between measurements. The moment we force all four branches to read time from a **single shared arithmetic clock** over a **common set of zero weights**, every gentle local compromise slams into a hard arithmetic wall. Four arithmetic times close cleanly; the fifth fractures globally across every scale. Rescuing the fifth time with one pass of the neutral-shell resolvent trace forces a sharp irreducible shift at the sixth time, locks the held-out 35-bit binary code of the seventh time far off the arithmetic reference, crushes more than $99.931\%$ of the spectral mass into three narrow height bands, and exposes a stubborn held-out deficit in quark $\mathrm{CP}$ violation $J$. This is not an accidental miss on a single tune; it is the first rigid boundary map of cross-sector coupling.
+
+## 12.1 The Shared Quadratic Resolvent Clock and the Five-Time Rupture
+
+Intuitively, a shared arithmetic clock behaves like a bank of Lorentzian low-pass filters tuned to integer harmonics: inserting one positive semidefinite operator $K$ into $(I + j^2 K)^{-1}$ probes the same unit source $s$ at successive integer indices $j = 1, 2, 3, \dots$, suppressing high-frequency eigenvalues ever more sharply as $j$ grows. When the spectrum of $K$ is driven by positive Riemann zeta ordinates $\gamma > 0$ that must first survive all three physical selection windows—two-loop strong coupling `[1]`, five-charge three-light-mode cut `[2]`, and four-layer curvature `[4]` (scanning sequentially, zero of the first $8{,}192$ zeros pass all three; **`#8359`** is the first simultaneous three-window hit, yet porting the earlier flavor calibration to `#8359` leaves $|V_{ub}| \approx 0.00287268$, a full $23.026\%$ below reference)—the mathematical contract takes the following exact form.
+
+::: {.definition #def-ou-ch12-shared-clock title="Shared Quadratic Resolvent Arithmetic Clock and Neutral-Shell Flavor Reweighting"}
+Fix a unit source vector $s$ and a single positive semidefinite operator $K$. The $j$-th arithmetic time reading is defined as the quadratic resolvent expectation
+
+$$
+F(j) \;=\; \bigl\langle s,\, (I + j^2 K)^{-1} s \bigr\rangle
+\;=\; \int_0^1 \frac{1 - y}{1 + (j^2 - 1) y}\, dp(y),
+$$
+
+where the spectral variable at common scale $A > 0$ and candidate zero height $\gamma$ is $x = (A / \gamma)^2$, compactified via $y = x / (1 + x) \in [0, 1]$, the kernel is $k_j(y) = (1 - y) / (1 + (j^2 - 1) y)$, and $p$ is the arithmetic probability measure over candidate zeros. The arithmetic reference time sequence is given by the normalized logarithmic derivative ratio of the completed Riemann $\xi$-function:
+
+$$
+T_j \;=\; \frac{\xi'(1/2 + j) / \bigl(2j\,\xi(1/2 + j)\bigr)}{\xi''(1/2) / \bigl(2\,\xi(1/2)\bigr)}
+\qquad (j = 1, 2, \dots).
+$$
+
+On the flavor side, let $L_\gamma$ denote the Laplacian of the 19-point neutral Behrend shell (carrying one constant zero mode and eighteen positive eigenvalues $\lambda > 8$), with resolvent trace response $\eta_\gamma = x \operatorname{tr}(x I + L_\gamma)^{-1}$. Under one neutral-shell reweighting, the flavor probability measure is
+
+$$
+d\nu \;=\; \frac{\eta\, dp}{\mathbb{E}_p[\eta]}, \qquad M \;=\; \mathbb{E}_p[\eta_\gamma].
+$$
+
+:::
+
+First run the strictest possible control test: require the arithmetic times $F(j)$ and the reference quark-mixing ($\mathrm{CKM}$) determinant stationary point to share the **exact same probability measure $p$** with zero flavor reweighting. Through the fourth time, the outlook still appears deceptively smooth:
+
+- At the reference scale, six positive zeros match $T_1, \dots, T_4$ exactly while making reference quark mixing the unique maximum;
+- Restricting every support point to three-window zeros `[1]+[2]+[4]` pushes the feasible scale infimum past $A > 41{,}312{,}660.31094$, achieved by five real zeros at $A \approx 41{,}312{,}675.40982$ (leaving background-averaged $|V_{ub}|$ low by $8.0003\%$);
+- Nudging to integer scale $A = 41{,}312{,}680$ with seven three-window zeros locks mean $|V_{ub}|^2$ exactly too: held-out $|V_{cb}|^2$ lies only $5.69 \times 10^{-13}$ high, all nine quark transition probabilities stay within $9.214 \times 10^{-9}$, and held-out Jarlskog $\mathrm{CP}$ invariant $J$ sits $1.4093\%$ low (expanding to $1.4093\%$–$2.1316\%$ on nine zeros at the same scale, and spanning any chosen deficit in $[0,\, 12.276863\%]$ on at most eight zeros at sufficiently high scale).
+
+Push one step further to the **fifth arithmetic time $T_5$**, however, and the shared-probability ansatz shatters globally. Across every common scale $A$, every zero subset, and every nonnegative weight vector preserving the first four times and the reference flavor stationary point, $F(5)$ is trapped strictly inside
+
+$$
+0.963278306636895970 \;\le\; F(5) \;\le\; 0.963278478925447241.
+$$
+
+Truncated to $22$ binary fractional bits, it reads `4040282` everywhere while the reference $T_5$ reads `4040283`; keeping the stationary point exact forces the maximum error over the first five times above $2.53705 \times 10^{-10}$. Even relaxing the first four times by $2^{-33}$ and the stationary derivative by $2^{-38}$ fails to close the gap; binning all five times on a common dyadic grid succeeds at $30$ bits and fails globally at **$31$ bits** by at least $45.57$ bin widths, with minimal max absolute error $\approx \mathbf{2.5597450743 \times 10^{-10}}$ (see the replay ledger [`README.md`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/README.md)).
+
+Allowing a background-dependent flavor readout efficiency $\eta_\gamma$ between $p$ and $\nu$ opens a narrow escape hatch at a steep price: matching five arithmetic times alongside the flavor stationary point requires a maximum-to-minimum efficiency ratio of at least **$\mathbf{18.49684338\ldots}$**. Remarkably, the 19-point neutral Behrend shell supplies precisely this leverage—one constant zero mode plus eighteen positive modes make $\eta_\gamma = x \operatorname{tr}(x I + L_\gamma)^{-1}$ span $(1, 19)$, clearing $18.49684\ldots$ with room to spare (whereas a three-zero-mode charged sector tops out below $19/3$ and fails outright).
+
+Under neutral-shell reweighting $d\nu = \eta\, dp / \mathbb{E}_p[\eta]$, the required common scale must exceed $2{,}899{,}267{,}716.58$. Seven real three-window zeros solve all five times and the flavor stationary point at $A = 2{,}903{,}616{,}618$, and eight zeros match mean $|V_{ub}|^2$ simultaneously at $A = 2{,}903{,}600{,}000$ ($\approx 2.9036 \times 10^9$). Yet one neutral-shell pass buys only a single extra step: locking the first five times forces an irreducible positive **sixth-time shift**. Even for an arbitrary efficiency function bounded in ratio by $19$, the infimum shift is $1.32318575047 \times 10^{-8}$; pinning the readout to the true neutral-shell trace $\eta_\gamma$ sharpens the floor to
+
+$$
+F(6) - T_6 \;\ge\; 1.33015563912 \times 10^{-8}.
+$$
+
+The explicit seven-zero witness attains $1.33072788424 \times 10^{-8}$ (just $0.0430\%$ above the sharp infimum), while the held-out seventh-time test below adopts the separately prescribed sixth-time input $T_6 + 1.360900010 \times 10^{-8}$ (about $2.31\%$ above the infimum). Simultaneous 36-bit dyadic binning across all six times remains globally excluded. Stacking powers of $\eta_\gamma$ to absorb further times explodes exponentially: six exact times already require at least three factors, forty-one exact times require an efficiency ratio exceeding $1.01349 \times 10^{42}$ (thirty-three factors of $\eta_\gamma$), and demanding exact mean $|V_{cb}|^2$ as well drives the common scale past $1.37047 \times 10^{12}$.
+
+## 12.2 The Held-Out Seventh-Time 35-Bit Code and 44-Bit Input Precision
+
+The sharpest test of any quantitative model is never what it fits, but how rigidly it binds the **next unseen observable**. Fix the shared quadratic resolvent clock ([@def-ou-ch12-shared-clock]) to the exact reference values $T_1, \dots, T_5$ and the prescribed sixth-time input $T_6 + 1.360900010 \times 10^{-8}$. How much room remains for the held-out **seventh time $F(7)$**?
+
+Classical moment theory and Gauss–Radau quadrature settle the question exactly (verified in [`ch39-shared-clock-checks.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-shared-clock-checks.py)). Define the denominator polynomial and reweighted measure
+
+$$
+D(y) \;=\; \prod_{j=2}^6 \bigl(1 + (j^2 - 1) y\bigr), \qquad d\sigma(y) \;=\; \frac{dp(y)}{D(y)}.
+$$
+
+Because $D(y)$ together with $D(y) k_j(y)$ ($j = 1, \dots, 6$) spans all polynomials of degree at most six, normalization plus the six time readings uniquely determine the seven power moments $m_r = \int_0^1 y^r\, d\sigma(y)$ ($r = 0, \dots, 6$). The $4 \times 4$ Hankel moment matrix $(m_{i+j})_{i,j=0}^3$ has determinant strictly greater than $8.95 \times 10^{-34}$; since three radial atoms generate at most rank three, every valid spectrum requires at least **four distinct radial atoms** (four finite poles on positive zero heights).
+
+Anchoring an endpoint at $e = 0$ or $e = 1$ and placing three interior nodes at the roots of the cubic orthogonal polynomial for $(y - e) d\sigma$ yields two Gauss–Radau quadrature rules exact through degree six. Polynomial division of $D(y) k_7(y) = D(y)(1 - y)/(1 + 48 y)$ leaves a degree-five quotient (integrated exactly) plus the pole remainder
+
+$$
+\frac{D(-1/48)\bigl(1 + 1/48\bigr)}{1 + 48 y},
+$$
+
+whose seventh derivative is strictly negative across $[0, 1]$. By the Hermite interpolation remainder over one endpoint and three doubled interior nodes, $e = 0$ gives the sharp upper bound and $e = 1$ the sharp lower bound:
+
+| Gauss–Radau sharp endpoint | Rigorous lower enclosure | Rigorous upper enclosure |
+| --- | ---: | ---: |
+| Lower endpoint (anchor $e = 1$) | `0.93341795164287258400188` | `0.93341795164287258400189` |
+| Upper endpoint (anchor $e = 0$) | `0.93341795164501234976009` | `0.93341795164501234976010` |
+
+The entire feasible interval has width just **$2.140 \times 10^{-12}$**, locking $F(7)$ strictly above $T_7$:
+
+$$
+1.20207618035599 \times 10^{-7} \;<\; F(7) - T_7 \;<\; 1.20209757801358 \times 10^{-7}.
+$$
+
+Across all real three-window zeros, the endpoint numerical uncertainties stay below $2.389 \times 10^{-18}$ and $6.579 \times 10^{-18}$. Truncating $F(7)$ to $b$ binary fractional bits via $\lfloor 2^b F(7) \rfloor$ yields three unmistakable verdicts:
+
+1. **Forced 35-bit output code:** Every shared quadratic resolvent clock matching the six inputs is locked to the 35-bit dyadic integer code **`32071996606`** (written in decimal, i.e., $\lfloor 2^{35} F(7)\rfloor$), whereas the arithmetic reference $T_7$ sits at **`32071992476`**—a rigid separation of $4{,}130$ code steps. Only at $36$ bits do the lower and upper extremes split into adjacent decimal codes `64143993212` and `64143993213` (both achieved by explicit seven-zero witnesses). Any selector that accepts the sixth-time shift yet still reports the reference code at $j = 7$ directly falsifies the shared quadratic resolvent clock.
+2. **Minimal 44-bit input precision:** Discretizing the six inputs themselves exposes a single-bit cliff. Retaining **44 bits** of binary precision per input time allows a pure rational integer certificate to force output code `32071996606`. Dropping to **43 bits** immediately admits an explicit counterexample on the exact same seven real zeros generating two distinct 35-bit output codes. Forty-four bits is the exact minimal input precision.
+3. **Extrapolation horizon and millionth-index supremum:** Pushing the same four-node rules to higher indices shows that the radial relaxation width first crosses $0.01$ at **$j = 1343$**. Out at $j = 1{,}000{,}000$, any fixed measure decays toward zero, yet allowing seven real zeros to be re-selected per index keeps the supremum above $0.39155545776$ (approx. $0.39155545812$, enclosed within $4.715 \times 10^{-12}$ at every finite index by two explicit curves).
+
+## 12.3 Three-Band Spectral Concentration, Stiffness Sensitivity, and Held-Out CP Deficits
+
+The same six arithmetic times do not merely constrain future readings; they violently compress both the arithmetic measure $p$ and the neutral flavor measure $\nu$ onto three narrow islands of the Riemann zero height axis. At $A = 2{,}903{,}600{,}000$, define the three-band union
+
+$$
+B \;=\; [3.8, 4.5] \times 10^{10} \;\cup\; [7, 10] \times 10^{10} \;\cup\; [10^{12}, \infty).
+$$
+
+Using the rational nonnegative polynomial $G(y) = y(y - 0.001212594)^2 (y - 0.004902081)^2 (1 - y + 4 \times 10^{-9} y)$ and cutoff $t = u(10^{12}, A_-)$ (where $u(h, a) = [1 + (h/a)^2]^{-1}$), set $N(y) = D(t) G(y) / G(t)$. The verification script [`ch39-six-time-height-bands.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-six-time-height-bands.py) certifies that all seven degree-six Bernstein coefficients of $N - D(1 + 18 y)/(1 + 18 t)$ are nonnegative on each of the three compact intervals covering the image of $B^c$. Thus $p(B^c) \le \mathbb{E}_p[N/D]$ and $\nu(B^c) \le (1 + 18 t)\mathbb{E}_p[N/D]$; expanding $N/D = c_0 + \sum_{j=1}^6 c_j k_j(y)$ turns any timing error budget $\varepsilon_j$ directly into an explicit penalty $\sum_j |c_j|\varepsilon_j$. The resulting lower bounds survive large scale and timing perturbations:
+
+| Error hypothesis (baseline common scale $A = 2{,}903{,}600{,}000$) | Arithmetic mass $p(B)$ | Neutral flavor mass $\nu(B)$ |
+| --- | ---: | ---: |
+| Fixed scale, six exact time readings | $> 99.93115\%$ | $> 99.93114\%$ |
+| Fixed scale, each of six times within $1.67 \times 10^{-15}$ | $> 99.91508\%$ | $> 99.91508\%$ |
+| Fixed scale, first five exact, sixth within $2.10 \times 10^{-13}$ | $> 99.91504\%$ | $> 99.91504\%$ |
+| Scale relative error $\le 4\%$, each of six times within $2^{-50}$ | $> 99.91614\%$ | $> 99.91613\%$ |
+
+Over $99.931\%$ of the total mass splits into three peaks of roughly $23.44\%$, $37.4\%$, and $39.1\%$. No single zero can hold more than $39.1568\%$ of $p$ or $39.0755\%$ of $\nu$ (nearly halving the $68.6803\%$ cap from two flavor probabilities alone). At or below this scale, the top band forces support on zeros of index at least $106{,}969{,}920{,}543{,}671$ and puts over $23.893\%$ of mass above $\gamma = 1.5 \times 10^{13}$, while a strictly positive residual weight $p(\gamma < 2 \times 10^8) > 2.44066534 \times 10^{-11}$ remains forced at the bottom.
+
+::: {.remark #rem-ou-ch12-stiffness-sensitivity title="Neutral-Shell Stiffness Sensitivity and Unmaskable Response Drops"}
+The six exact times already pin the mean neutral-shell response $M = \mathbb{E}_p[\eta_\gamma]$ inside $[1.0020816770805,\, 1.0020816771057]$. Perturbing every edge stiffness of $L_\gamma = \sum_e w_e b_e b_e^*$ via $w_e \mapsto w_e \exp(t a_e)$ ($|a_e| \le 1$) and writing $R = (x I + L_\gamma)^{-1}$ yields
+
+$$
+-\left.\frac{d\eta_\gamma}{dt}\right|_{t=0} \;=\; \sum_e a_e\, x w_e \|R b_e\|^2.
+$$
+
+Because every edge term is nonnegative, the steepest directional derivative is attained by stiffening all edges uniformly: $S = \mathbb{E}_p\sum_{\lambda > 0} x \lambda / (x + \lambda)^2$. Combining seventh-order divided-difference sign checks for $\lambda > 8$, the Weyl shift bound $4\delta$ for the three softened radial spokes ($\delta \le (23/25) 2^{-20}/8462^2$), and the single-mode derivative bound $|\partial_\lambda q_\lambda| \le 1/(6\sqrt{3}\lambda)$ certifies
+
+$$
+0.00208104145403 \;<\; S \;<\; 0.00208104148066,
+$$
+
+with over $60.6546\%$ from the first band, over $19.6015\%$ from the second, and under $0.205319\%$ from the top band. Even if the system is allowed to **re-optimize a new measure $p'$ freely** on the original support so that all six times remain exact, multiplying every neutral edge stiffness by $1 + \epsilon$ ($\epsilon = 10^{-7}$) forces a pointwise drop via resolvent anti-monotonicity:
+
+$$
+\sum_{\lambda > 0}\frac{\epsilon x \lambda}{(x + \lambda)\bigl(x + (1 + \epsilon)\lambda\bigr)}
+\;\ge\;
+\frac{\epsilon}{1 + \epsilon}\sum_{\lambda > 0}\frac{x \lambda}{(x + \lambda)^2},
+$$
+
+which after subtracting the original baseline width forces $M(p, L) - M(p', L') > 1.82 \times 10^{-10}$—weight reshuffling cannot disguise a stiffness shift.
+:::
+
+::: {.figure src="ch12-arithmetic-clock-bands"}
+**Three-band spectral concentration and stiffness sensitivity under the shared arithmetic clock.** At $A \approx 2.9036 \times 10^9$, six arithmetic times compress more than $99.931\%$ of both $p$ and $\nu$ into $[3.8, 4.5] \times 10^{10}$, $[7, 10] \times 10^{10}$, and $[10^{12}, \infty)$ (roughly $23.44\%$, $37.4\%$, and $39.1\%$), locking the held-out 35-bit seventh-time code to `32071996606` against reference `32071992476` and breaking down the three-band shares of stiffness sensitivity $S \approx 0.00208104$.
+:::
+
+Turning from arithmetic times to the sharpest cross-sector physical hold-out—the **quark $\mathrm{CP}$-violation invariant $J$**—reveals an equally stubborn wall. On the eight-zero three-window witness at $A = 2{,}903{,}600{,}000$ matching the first five arithmetic times, the reference flavor stationary point, and mean $|V_{ub}|^2$ simultaneously, held-out average $J$ drops **$6.0833\%$** below reference. Expanding the three-window candidate pool tracks how persistent this deficit remains:
+
+- On an 11-zero list under the same conditions, the relative deficit in average $J$ spans $5.8282\%$ to $7.6012\%$; fixing the sixth-time shift and mean $|V_{cb}|^2$ ($+2 \times 10^{-12}$ above reference) narrows the interval to $6.1691\%$–$6.4132\%$.
+- Expanding to 19 zeros yields $5.5700\%$–$7.0152\%$; adding four high zeros to form the 23-zero list widens the interval to **$[5.5700\%,\, 9.3435\%]$**.
+- Dropping all arithmetic-time constraints and allowing free flavor weights over all three-window zeros while fixing exact mean $|V_{ub}|^2$ traps the full-spectrum supremum deficit strictly between $16.56788\%$ and $16.56886\%$ (approx. **$16.568\%$**; fixing $|V_{cb}|^2$ at $+2 \times 10^{-12}$ gives $[4.901\%,\, 9.915\%]$). Even freezing every weight below an arbitrary height cutoff and reweighting only arbitrarily high zeros shifts the overall $\mathrm{CP}$ deficit by more than $0.842824$ percentage points while keeping every band's arithmetic mass, flavor mass, and both transition means identical.
+
+::: {.viz src="behrend-unification-lab" preset="clock-bands" height="500"}
+**Interactive card: shared arithmetic clock and three-band concentration (`clock-bands`).** Sweep input binary precision across 43, 44, and 288 bits and adjust the per-edge log-stiffness dial $s$ to inspect the three height bands $[3.8, 4.5] \times 10^{10}$, $[7, 10] \times 10^{10}$, and $[10^{12}, \infty)$ ($> 99.915\%$ arithmetic weight under the shifted sixth time; $> 99.931\%$ under exact six times), watch the four-node Gauss–Radau bracket lock $\lfloor 2^{35} F_7 \rfloor = 32071996606$ at 44 bits ($4,130$ cells above reference `32071992476`, 288-bit absolute width $2.140 \times 10^{-12}$), and check the edge-stiffness sensitivity ($\approx 0.00208104$) and held-out $J$ deficit evidence.
+:::
+
+## 12.4 Elimination of Naive Weight Selectors and Kernel-Checked Concentration Bounds
+
+Once six arithmetic times crush more than $99.931\%$ of spectral mass into three disjoint non-monotone bands, the central dynamical question becomes unavoidable: **can any simple physical weight rule generate such a distribution without post-hoc calibration?** Rigorous interval certificates eliminate every naive candidate in turn:
+
+| Candidate weight selector | Model setup and constraints | Quantitative exclusion or exact cost |
+| --- | --- | --- |
+| Power-law $\gamma^{-s}$ times non-increasing efficiency | Four arithmetic times + three windows across all scales (`#8359` weight $< 2.635 \times 10^{-9}$) | Excluded for all $s \ge 1.00001485$; base measure must dip and rise, forcing $> 259\times$ correction to any log-concave density in $\log\gamma$; inverse-square prior requires $> 4.87 \times 10^{14}$ tail-to-low odds boost |
+| Gaussian determinants & shell heat traces | Neutral kernel $B \ge 1/128$ ($B \ge 10^6$ with arbitrary magnetic phases); five-charge heat traces | Same-sign power products excluded; opposite-sign balance at $B \ge A$ requires total positive exponent $> 3.20571 \times 10^{27}$; Q4 four-layer polarization gives three-point correction $< 3.857$ vs required $> 259\times$; $\le 24$ heat-trace factors fall short of the $1.95557 \times 10^8$ decade-band gain |
+| Gibbs triangle weights $e^{-\beta S_\triangle}$ | Inverse-square prior + six arithmetic times | At most finitely many real $\beta$, all outside $[-12158.64,\, 98714.51]$; all real $\beta$ excluded on the 23-zero list; even band-separate normalization leaves $14.0553\times / 18.8422\times$ internal odds gaps on seven-point spectra |
+| Short coherent walks & light-mode counts | 2-step open / 3-step closed; linear five-charge light-mode modulation | Short-walk Born efficiency ratio $< 3.705 \times 10^8$ vs required $2.28327 \times 10^{14}$ (longer closed walks need up to $63$ edges on $22$ indexed zeros); five-charge light-mode count share over 41 arithmetic times must stay $< 7.8 \times 10^{-9}$ |
+| Single-shot physical selector vs entropy-minimizing prior | Full-spectrum pass rate / relative entropy to inverse-square prior | Full-spectrum pass rate strictly $< 4.42870 \times 10^{-5}$ (optimal endpoint exceeds all bounded-step dual-clock circuits; on 11 zeros it uniquely recovers the 8-zero $6.08330\%$ deficit in exactly $363$ controlled dual-clock queries for fixed-path superposition, or $243$–$363$ in general); entropy minimization uniquely selects $6.83812\%$ deficit ($\approx 50.08072$ bits per accepted sample; full-spectrum entropy weights require one exact radial spoke plus $b + 154$ and $b + 54$ coordinate bits for $2^{-b}$ log-weight accuracy) |
+
+Even retaining all zeros above any cutoff $H$ under inverse-square weighting inside any fixed positive shell-phase window drives the limiting distribution of $H / \gamma$ to uniform on $[0, 1]$, leaving a limiting two-time error of $3.71810906 \times 10^{-6}$ after optimizing scale; at unit scale $a = 1$, the five-charge three-light-mode support cannot match even the first arithmetic time alone ($> 32.092\%$ must sit outside it, rising past $87.818\%$ for the first $40$ times).
+
+Beneath every exclusion beat two universal Fourier-and-variance concentration theorems formally frozen inside the Lean 4 kernel. The first bounds nonnegative cyclic band weights above by a positive Fejér Fourier average, quantifying why narrow-band concentration inevitably pumps high-frequency Fourier energy:
+
+::: {.theorem #thm-ou-ch12-cyclic-fejer-band title="Positive Fourier Upper Bound for Cyclic Fejér Bands" lean="D5/S3/Fourier/Concentration/CyclicFejerBand.band_le_positive_fourier"}
+Let $q \ge 1$ be a modulus, let $H, N \in \mathbb{N}$ satisfy $H < N$, and let $M : \mathbb{Z} / q\mathbb{Z} \to \mathbb{R}$ be nonnegative ($M(r) \ge 0$ for all $r$). Write $R_H \subseteq \mathbb{Z} / q\mathbb{Z}$ for the residue classes of $[-H, H] \bmod q$, and define the prefix character sum and discrete Fourier transform
+
+$$
+B_N(k) \;=\; \sum_{j=0}^{N-1} \chi_k(j),
+\qquad
+\widehat{M}(k) \;=\; \sum_{r \in \mathbb{Z} / q\mathbb{Z}} M(r)\, \chi_k(-r).
+$$
+
+Then the total band weight over $R_H$ satisfies
+
+$$
+(N - H)\sum_{r \in R_H} M(r) + H M(0)
+\;\le\;
+\frac{1}{q}\sum_{k \in \mathbb{Z} / q\mathbb{Z}} |B_N(k)|^2 \operatorname{Re}\widehat{M}(k).
+$$
+
+:::
+
+::: proof
+For each integer shift $h \in [-H, H]$ and each $0 \le j < N - H$, shifting either the first or second coordinate of $(j, j)$ by $|h|$ according to the sign of $h$ yields at least $N - H$ ordered pairs in $[0, N - 1]^2$ whose difference equals $h \bmod q$. For $h = 0$, all $N$ diagonal pairs contribute, accounting for the extra term $H M(0)$. Since $M \ge 0$, summing $M(j_1 - j_2 \bmod q)$ over all $(j_1, j_2) \in [0, N - 1]^2$ bounds the left-hand side from above. Applying discrete Fourier inversion on $\mathbb{Z} / q\mathbb{Z}$ factorizes the double coordinate sum into $B_N(k)\overline{B_N(k)} = |B_N(k)|^2$; taking real parts preserves the real sum and yields the stated inequality. The full proof is checked by the Lean kernel.
+:::
+
+The second theorem sets the complementary floor: for any finite nonnegative weight distribution of positive total mass, its $p$-fold convolution cannot suppress near-collision mass inside band width $\eta > 0$ below an explicit variance floor.
+
+::: {.theorem #thm-ou-ch12-collision-variance title="Variance Lower Bound for Finite Tail Collision Mass" lean="D5/S3/Fourier/Concentration/FiniteCollisionVariance.tailCollisionMass_lower_variance"}
+Let $J$ be a finite index set, let $g : J \to \mathbb{R}$ be frequencies, and let $w : J \to \mathbb{R}$ satisfy $w_j \ge 0$ for all $j \in J$ with strictly positive total mass $W = \sum_{j \in J} w_j > 0$. Define the weighted mean and variance
+
+$$
+\mu \;=\; \frac{1}{W}\sum_{j \in J} w_j g_j,
+\qquad
+V \;=\; \frac{1}{W}\sum_{j \in J} w_j (g_j - \mu)^2.
+$$
+
+For every positive integer $p > 0$ and band width $\eta > 0$, set $G_m = \sum_{j \in J} m_j g_j$ and $c_m = \binom{p}{m} \prod_{j \in J} w_j^{m_j}$ over multi-indices $m$ of total degree $p$, and define the tail collision mass $E_p(\eta) = \sum_{|G_m - G_n| \le \eta} c_m c_n$. Then
+
+$$
+\frac{9}{16} W^{2p}
+\;\le\;
+\left(1 + \frac{4\sqrt{p V}}{\eta}\right) E_p(\eta).
+$$
+
+:::
+
+::: proof
+Shifting every frequency by $g_j \mapsto g_j - \mu$ translates each $G_m$ by $-p\mu$, preserving all pairwise distances $|G_m - G_n|$ and hence $E_p(\eta)$. Evaluating the exponential sum $A(t) = \sum_{j \in J} w_j e^{(g_j - \mu) t}$ at $t = 0$ gives $A(0) = W$, $A'(0) = 0$, and $A''(0) = W V$. Differentiating $A(t)^p = \sum_m c_m e^{(G_m - p\mu) t}$ twice at $t = 0$ yields $\sum_m c_m = W^p$ and $\sum_m c_m (G_m - p\mu)^2 = p V W^p$. By Chebyshev's inequality, at least $\frac{3}{4} W^p$ of the total weight lies in the closed interval $[p\mu - 2\sqrt{pV},\, p\mu + 2\sqrt{pV}]$. Partitioning this interval into bins of width $\eta$ uses at most $\lfloor 4\sqrt{pV}/\eta \rfloor + 1 \le 1 + 4\sqrt{pV}/\eta$ bins, and every ordered pair within a single bin lies within distance $\eta$ and thus enters $E_p(\eta)$. Applying Cauchy–Schwarz across the bin weights gives $\left(\frac{3}{4} W^p\right)^2 \le \left(1 + 4\sqrt{pV}/\eta\right) E_p(\eta)$. The full proof is checked by the Lean kernel.
+:::
+
+Taken together, the shared arithmetic clock acts as an unforgiving caliper: it eliminates naive power laws, monotone efficiencies, Gaussian determinants, Gibbs triangle weights, short walks, and single-shot post-selection as dynamical origins of the three-band spectrum, while pinning every calibrated survivor between a rigid 35-bit seventh-time prediction and a $> 6\%$ held-out $\mathrm{CP}$ deficit. Since external probability reweighting breaks at every turn, we must pivot inside the shell itself: can an intrinsic Wilson action built directly from the $529$ triangular plaquettes of the 19-point shell pull the dual clocks into a joint three-window flavor vacuum by pure energy minimization? That steep winding staircase is the subject of [Chapter 13](ch13-winding-ladder-and-joint-vacuum.md).

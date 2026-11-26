@@ -1,0 +1,158 @@
+# Chapter 13 The 529-Triangle Dual-Clock Action, the Winding Ladder, and the Joint Zero Witness {#sec-ch13}
+
+[Chapter 12](ch12-shared-arithmetic-clock.md) drove external probability reweighting into a cul-de-sac: smooth priors, monotone efficiencies, Gaussian determinants, Gibbs factors, and short walks all break against the shared arithmetic clock. Faced with such a wall, physics knows only one honorable pivot—**stop cherry-picking backgrounds from outside, write down an intrinsic action inside the shell, and let energy minimization pull the vacuum into place**.
+
+The 19-point Behrend shell naturally spans **$529$ triangular plaquettes**, each enclosing a nontrivial holonomy built from the dual clock phases $(\theta_1, \theta_2)$—a discrete non-abelian Wilson lattice gauge action on a finite 19-site sphere, where higher winding orders $k$ act as progressively sharper Fourier harmonics carving narrow interference pockets across the two-torus. Summing multi-winding Wilson contributions over all $529$ triangles with nonnegative weights $w_k \ge 0$ produces not vague heuristics, but an extraordinarily sharp **winding-number staircase** down to the exact integer.
+
+Along that staircase, no critical point exists up to $18$ windings; $19$ yields the first saddle; $21$ the first local minimum; $27$ achieves the first global three-window vacuum while crashing quark flavor; $31$ and $36$ unlock local and height-dependent global flavor vacua; and precisely **$105$ windings** achieves a height-independent global vacuum across all finite heights and the unit-spoke limit—culminating in a parts-per-million joint witness at real Riemann zero **`#2,306,888,100,085`**. Yet four surgical stress tests applied to that very witness expose a 100-dimensional continuous flat manifold and sharp cross-sector fault lines right beneath the summit.
+
+## 13.1 The 529-Triangle Dual-Clock Action, Noncommutative Curvature, and Global Angle Bounds
+
+We first specify the multi-winding dual-clock variational problem and anchor in the Lean kernel why triangular shell holonomies carry irreducible directional curvature rather than trivial abelian phase cancellations.
+
+::: {.definition #def-ou-ch13-wilson-winding-action title="529-Triangle Multi-Winding Dual-Clock Wilson Action and Three-Window Acceptance"}
+On the $529$ triangular plaquettes of the 19-point Behrend shell at zero height $\gamma$ (setting the three radial spoke softenings) and dual clock phases $(\theta_1, \theta_2) \in (\mathbb{R} / 2\pi\mathbb{Z})^2$, let $\phi_\triangle(\theta_1, \theta_2)$ be the oriented loop holonomy angle of triangle $\triangle$. For maximum winding order $K \ge 1$ and normalized nonnegative weights $w = (w_1, \dots, w_K)$ ($w_k \ge 0$, $\sum_{k=1}^K w_k = 1$), the multi-winding Wilson action is
+
+$$
+S_w(\theta_1, \theta_2; \gamma)
+\;=\; \sum_{k=1}^K w_k \sum_{\triangle = 1}^{529} \Bigl(1 - \cos\bigl(k\,\phi_\triangle(\theta_1, \theta_2)\bigr)\Bigr).
+$$
+
+A background $(\theta_1, \theta_2; \gamma)$ satisfies **three-window acceptance `[1]+[2]+[4]`** if it simultaneously passes the five-charge three-light-mode cut `[2]`, the two-loop strong-coupling window `[1]`, and the $0.2\%$ four-layer curvature window `[4]`. Its quark flavor readout is governed by the six-face holonomy coordinate $c(\theta_1, \theta_2)$, which yields $|V_{ub}|^2$ and the signed Jarlskog invariant $J$.
+:::
+
+The reason shell triangles can separate orientations, fix the sign of $J$, and build genuine non-abelian barriers lies in the algebraic structure of rational quaternion triads: if consecutive rotations commuted, closed triangular holonomies would degenerate into flat abelian sums and chiral $\mathrm{CP}$ sign discrimination would evaporate. Reversing order breaks projective ray equivalence, while orthogonal half-step rays carry an exact rational Bargmann–Gram spherical excess of $1/4$. Both anchors are frozen directly in Lean 4 (with the second carrying an empty axiom list `axioms: []`):
+
+::: {.theorem #thm-ou-ch13-noncommutative-witness title="Projective Ternion Noncommutativity and Exact Orthogonal Bargmann–Gram Excess" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.orthogonal_triad_excess_quarter"}
+Inside the `OmegaMath` library, take the benchmark integer quaternions $p_0 = (1, 0, 0, 0)$, $p_{\mathrm{Half}} = (1, 1, 0, 0)$, and $q_{\mathrm{Half}} = (1, 0, 1, 0)$, with ternary product $\operatorname{triad}(\mathbf{a}, \mathbf{b}, \mathbf{c}) = (\mathbf{a}\bar{\mathbf{b}})\mathbf{c}$, projective ray equivalence $\sim_{\mathrm{ray}}$ (`Ternion.RayEquiv`), and normalized $3 \times 3$ Bargmann–Gram determinant $\det\mathbf{G}_3$. Then both statements hold:
+
+1. **Explicit projective noncommutativity (`phalf_qhalf_noncommutative`):** reversing the outer arguments yields inequivalent projective rays:
+
+   $$
+   \neg\Bigl(\operatorname{triad}(p_{\mathrm{Half}},\, p_0,\, q_{\mathrm{Half}}) \;\sim_{\mathrm{ray}}\; \operatorname{triad}(q_{\mathrm{Half}},\, p_0,\, p_{\mathrm{Half}})\Bigr).
+   $$
+
+2. **Exact quarter excess on the orthogonal triad (`orthogonal_triad_excess_quarter`, zero axioms):** under signed rational equivalence `IntRatio.Equivalent`,
+
+   $$
+   \det\mathbf{G}_3(1,\, p_{\mathrm{Half}},\, q_{\mathrm{Half}}) \;\equiv\; \frac{1}{4}.
+   $$
+
+:::
+
+::: proof
+For part 1, direct integer quaternion multiplication gives $\operatorname{triad}(p_{\mathrm{Half}}, p_0, q_{\mathrm{Half}}) = (1, 1, 1, 1)$ and $\operatorname{triad}(q_{\mathrm{Half}}, p_0, p_{\mathrm{Half}}) = (1, 1, 1, -1)$. Assuming ray equivalence yields nonzero integers $k, l$ with $k(1, 1, 1, 1) = l(1, 1, 1, -1)$; equating first coordinates gives $k = l$ while equating last coordinates gives $k = -l$, forcing $l = 0$, a contradiction. For part 2, direct evaluation yields squared norms $\|1\|^2 = 1$ and $\|p_{\mathrm{Half}}\|^2 = \|q_{\mathrm{Half}}\|^2 = 2$ with all pairwise inner products equal to $1$, giving fidelities $\kappa(1, p_{\mathrm{Half}}) = \frac{1}{2}$, $\kappa(p_{\mathrm{Half}}, q_{\mathrm{Half}}) = \frac{1}{4}$, $\kappa(q_{\mathrm{Half}}, 1) = \frac{1}{2}$, and Bargmann loop invariant $B = \frac{1}{4}$. Substituting into $\det\mathbf{G}_3 = 1 + 2B - (\kappa_{ab} + \kappa_{bc} + \kappa_{ca})$ reduces to $1 + \frac{1}{2} - \frac{5}{4} = \frac{1}{4}$ definitionally with zero axioms. The full proof is checked by the Lean kernel.
+:::
+
+Before choosing a single action weight, the three physical windows `[1]+[2]+[4]` already carve an extraordinarily tight angular corridor across the full dual-clock torus:
+
+$$
+|c| \;>\; 0.9404240 \quad ([2]+[4]\text{ only}),
+\qquad
+c \;>\; 0.97561882 \quad (\text{full } [1]+[2]+[4]).
+$$
+
+Concretely, `[2]+[4]` alone compress the six-face coordinate to $|c| > 0.9404240$; adding two-loop strong coupling `[1]` and even heavy-mode decoupling eliminates the entire negative flavor branch unconditionally (zero probability regardless of spectral weights), trapping all candidates on the positive branch $c > 0.97561882$. Inside this corridor:
+
+- Both clocks stay within $1/32$ turn of $0$, and inter-clock separation stays strictly **$< 0.215915\;\mathrm{rad}$** (or in $[0.25625369,\, 0.256255]\;\mathrm{rad}$ under the site-variance min-cut);
+- Measured by natural density over all positive Riemann zeros, three-window acceptance has strict upper bound **$< 0.0229124\%$**, tightening to **$< 0.012050834\%$** under the site-variance min-cut (which also bounds the original candidate set contained inside it);
+- Inversely, reading just **three real triangles** of the bare shell reconstructs both clocks on the known three-window domain—at 26-bit precision, full-torus inversion certifies all physical windows for the first two min-cut hits `#8236` and `#8359`; single face $(1, 6, 8)$ at error $\le 2^{-6}$ already separates them, whereas the full bipartition cut table or min-cut alone needs $47$ and $48$ binary bits respectively.
+
+### Half-Turn Clock Diagnostic and Three-Charge Splicing Exclusion
+
+To feel how tightly the four sectors interlock inside this corridor, take a reproducible pair of open phase windows separated by a half-turn of the second clock and splice individual odd charges across them:
+
+| Phase window or odd-charge splice | Three gen. `[2]` | Strong coupling `[1]` ($\alpha_s$) | Curvature `[4]` | Single-background $|V_{ub}|^2$ (vs ref.) |
+| --- | --- | ---: | ---: | ---: |
+| Baseline viable phase window | 3 modes / charge | $0.11844$ | $\approx 1.00072$ | $0.3472\times$ |
+| Second clock rotated by half a turn | 3 modes / charge | $0.12121$ | $\approx 1.00072$ | $131\times$ |
+| Charge $1$ alone moved to half-turn window | Spliced spectrum | $0.12299$ | Baseline preserved | Charge $1$–$2$ TV distance $> 6.459\%$ |
+| Charge $3$ alone moved to half-turn window | Spliced spectrum | $0.11678$ | Baseline preserved | Charge $3$–$2$ TV distance $> 7.254\%$ |
+
+Three sharp lessons jump straight out of this diagnostic: first, generation count and four-layer curvature barely notice the half-turn, leaving strong coupling `[1]` and quark flavor `[3]` to break sign symmetry; second, the jump from $0.11844$ to $0.12121$ comes from charge $1$ pushing upward ($0.12299$) overpowering charge $3$ pulling downward ($0.11678$); third, while any two of the three squared-mass sums for charges $1, 2, 3$ can be balanced exactly by three real zeros, all three simultaneously are excluded across every common probability distribution over all positive zeros.
+
+## 13.2 The Sharp Winding-Number Staircase: From 18 to 105
+
+Armed with the global angular bounds, we feed the multi-winding Wilson action $S_w$ ([@def-ou-ch13-wilson-winding-action]) into the joint crucible of three-window acceptance and reference quark mixing, increasing the maximum winding order $K$ one rung at a time. Every threshold below is backed by both rigorous global exclusion certificates and explicit numbered zero witnesses (see [`ch39-reference-flavor-global-winding.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-reference-flavor-global-winding.py), [`ch39-height-independent-flavor-vacuum.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-height-independent-flavor-vacuum.py), and [`ch39-common-all-phase-global-order.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-common-all-phase-global-order.py)):
+
+| Max winding $K$ | Sharp variational milestone | Key witnesses, weights, and energy/flavor costs |
+| --- | --- | --- |
+| $K \le 18$ | **No critical point** anywhere in three windows (including bare 529-triangle unit-charge sum) | For every normalized $w \ge 0$, $\|\nabla S_w\| > 3.00565$ across the entire three-window domain |
+| $K = 19$ | **First stationary point** in three windows | Zero `#295,872,666,901` produces the first critical point, an unstable saddle |
+| $K = 21$ | **First strict local minimum** ($K \le 20$ excluded at second order) | Zero `#226,358` achieves a positive-definite Hessian (three terms fitted to that point), still beaten globally by zero phase |
+| $K = 27$ | **First global three-window minimum** ($K = 26$ excluded globally) | Weights $w_1 : w_{27} = 100 : 13$ (or $8 : 1$; necessary $r \in (0.124, 0.141)$, sufficient $[0.125, 0.140]$); zero `#4,224,080,297,279` hits within $2.26473 \times 10^{-7}$ of vacuum, yet $|V_{ub}|^2 \le 26.922\%$ and $J \le 31.362\%$ of reference; restoring flavor while keeping three windows costs $> 1.3266175$ in action |
+| $K = 31$ | **First local minimum with reference flavor** ($K \le 30$ always curves downward) | Requires three positive terms (two still insufficient, zero phase still lower by $> 1.97854$); even recording only the 9-bit dyadic integer code `505` (decimal) locks the 31-winding floor (8-bit `252` has a 30-winding counterexample) |
+| $K = 36$ | **First height-dependent global minimum with reference flavor** | Even the 8-bit dyadic integer code `252` (decimal) locks $K = 36$ (7-bit allows $K = 34$); splitting `26` (`1,1,2,1,15,6`) or **`6899`** integer parts over windings $(1, 2, 30, 32, 33, 36)$ drives $|V_{ub}|^2$ and $J$ errors below $0.47\;\mathrm{ppm}$ and $0.29\;\mathrm{ppm}$ across all finite heights |
+| $K = 105$ | **Exact threshold for height-independent global vacuum** across all finite heights and the unit-spoke limit ($K \le 104$ excluded on all four phase branches) | 13 terms suffice for finite heights; adding the unit-spoke limit requires 14 terms reaching $K = 105$ on the sole surviving branch $-0.01280 \le x \le -0.00815$; forces $w_{104} > 0.6589\%$ and $w_{105} > 6.8674\%$, yet leaves **$100$ continuous free coefficients** |
+
+Why does an impenetrable no-critical-point wall stand all the way up to $K = 18$? At low windings, the fundamental cosines of all $529$ triangles pull coherently toward zero phase, leaving the narrow three-window corridor stranded on a steep slope where no convex combination can cancel the gradient ($\|\nabla S_w\| > 3.00565$). Only at $K = 19$ do higher harmonics create enough local counter-slope to produce a saddle, and only at $K = 27$ can the pocket sink deeper than zero phase to become the **global minimum**.
+
+At $K = 27$, a remarkably clean two-term ratio such as $100:13$ or $8:1$ pulls the global minimum inside `[1]+[2]+[4]` for every height $\gamma \ge 10^{12}$, the three softened radial spokes break mirror degeneracy cleanly, and real zero `#4,224,080,297,279` lands within $2.26473 \times 10^{-7}$ of the free global minimum. Yet sending that vacuum into the quark flavor readout exposes a chasm: across the entire viable ratio interval, $|V_{ub}|^2$ stalls at $26.909\%$–$26.922\%$ of reference and signed $J$ stalls at $31.337\%$–$31.362\%$. Forcing reference flavor back onto the $100:13$ action costs at least $1.25008749932365$ across the torus and $(1.3266175,\, 1.32661933)$ while keeping all three windows intact.
+
+Unifying three-window acceptance and reference quark mixing inside a single global minimum first becomes possible at $K = 36$ if coefficients may track height. Remarkably, six small integers already suffice across every finite height (see [`ch39-small-integer-flavor-action.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-small-integer-flavor-action.py)):
+
+$$
+w_{\text{26}} \;=\; \frac{1}{26}\bigl(\delta_1 + \delta_2 + 2\,\delta_{30} + \delta_{32} + 15\,\delta_{33} + 6\,\delta_{36}\bigr),
+$$
+
+which passes all three windows with residuals $+0.4210\%$ / $+0.2567\%$ and exact 8-bit dyadic integer code `252` (decimal); keeping the same six winding orders and splitting **`6899`** integer parts drives $|V_{ub}|^2$ and $J$ errors below **$0.47\;\mathrm{ppm}$** and **$0.29\;\mathrm{ppm}$** across all finite heights!
+
+Removing height dependence completely—locking one fixed weight vector and phase across all finite heights and the unit-spoke limit—eliminates all four candidate branches up to $104$ windings and pins the exact floor at **$105$ windings**, forcing heavy high-frequency weight on the top two modes:
+
+$$
+w_{104} \;>\; 0.6589\%, \qquad w_{105} \;>\; 6.8674\%, \qquad -0.01280 \;\le\; x \;\le\; -0.00815.
+$$
+
+Yet just when $105$ windings seems to pin down the action, dimension counting delivers a sobering twist: fixing the global vacuum, all three windows, and all reference flavor observables still leaves a **$100$-dimensional continuous feasible family** of weight vectors (subject to normalization, nonnegativity, and the stated lower bounds on $w_{104}$ and $w_{105}$).
+
+::: {.figure src="ch13-winding-threshold-ladder"}
+**The 529-triangle winding-number staircase ($18 \to 19 \to 21 \to 27 \to 31 \to 36 \to 105$).** Each rung marks an exact variational phase transition from the no-stationary-point barrier ($\|\nabla S\| > 3.00565$) through the 27-winding global three-window vacuum (with its flavor chasm $J \le 31.362\%$ and restoration cost $> 1.3266$) up to the height-independent 105-winding global flavor vacuum requiring $w_{104} > 0.6589\%$ and $w_{105} > 6.8674\%$.
+:::
+
+## 13.3 Monotone-Weight and Native Autocorrelation Exclusions
+
+The forced high-frequency spikes $w_{104} > 0.6589\%$ and $w_{105} > 6.8674\%$ already hint that any naturally damped action where higher windings carry less weight must fail. Prefix-average bounds, geometric-tail estimates, and rigorous certificates elevate that intuition into an unconditional global exclusion (see [`ch39-monotone-winding-action.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-monotone-winding-action.py) and [`ch39-monotone-finite-flavor-code.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-monotone-finite-flavor-code.py)):
+
+::: {.remark #rem-ou-ch13-monotone-cone-geometry title="Geometric Isolation of the Monotone Cone, the 10-Bit Code Floor, and Autocorrelation Exclusions"}
+Let $\mathcal{M}$ denote the closed convex cone of all normalized non-increasing winding weight sequences $w_1 \ge w_2 \ge \cdots \ge 0$ (covering every finite cutoff and every summable infinite series). A single native shell competitor determined by two integer shell phases beats **every** three-window reference-flavor background by strictly **more than $1/4$** in action, enforcing three quantitative separations:
+
+1. **Total-variation distance floor from $\mathcal{M}$:** Every successful global-vacuum weight vector sits strictly farther than **$13 / 19200$** in total-variation distance from the entire monotone cone $\mathcal{M}$; our explicit 36- and 105-winding witnesses lie at massive distances of **$82.9243\%$** and **$82.7174\%$**. Monotone weights can still stabilize a strict *local* minimum across all heights, never a global flavor vacuum.
+2. **Sharp 10-bit code floor vs 9-bit counterexample:** Recording only the 10-bit dyadic integer code **`1011`** (written in decimal, i.e., $\lfloor 2^{10} c\rfloor$) of the six-face flavor coordinate already excludes every normalized non-increasing weight globally (the same native competitor wins by $> 1/8$ across the entire code bin). Relaxing by one bit to the 9-bit dyadic integer code **`505`** (decimal) immediately admits a monotone global-vacuum counterexample passing all three windows (with a certified finite-support upper bound of $10^{24}$ windings).
+3. **Global failure of all four native phase autocorrelations:** Even generating weights via coherent autocorrelations of bare clocked-face phases—allowing weights to rise with winding—still loses globally to a native shell competitor by **more than $1/256$** across the entire decay parameter domain.
+:::
+
+::: {.viz src="behrend-unification-lab" preset="winding-ladder" height="500"}
+**Interactive card: 529-triangle dual-clock action and winding staircase (`winding-ladder`).** Step across all seven certified winding thresholds ($K \le 18 \to 19 \to 21 \to 27 \to 31 \to 36 \to 105$), inspect the live 529-triangle unit-charge holonomy heat map $W_K(\phi_1, \phi_2)/529$ near zero phase (marked with the $1/32$-turn reference square), toggle between arbitrary nonnegative and non-increasing weights to compare the $> 1/4$ monotone barrier, and inspect the 105-winding action gap on flagship zero `#2,306,888,100,085`.
+:::
+
+## 13.4 The Flagship Joint Zero Witness #2,306,888,100,085 and Four Stress Tests
+
+Beyond every threshold stands a landmark single-background witness on the real Riemann zero line: **positive zero `#2,306,888,100,085`** (reconstructed in [`ch39-fixed-vacuum-numbered-zero.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-fixed-vacuum-numbered-zero.py) and [`ch39-joint-zero-vacuum-flavor-density.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-joint-zero-vacuum-flavor-density.py)).
+
+::: {.example #ex-ou-ch13-flagship-zero title="Flagship Single-Zero Witness #2,306,888,100,085 and Its Positive-Density Neighborhood"}
+Evaluated on its own dual clocks without separate sector tunes, single zero `#2,306,888,100,085` simultaneously achieves:
+
+- **All three windows:** five-charge three-light-mode cut `[2]`, two-loop strong coupling `[1]`, and four-layer curvature `[4]`;
+- **Near-vacuum 105-winding energy:** an action gap of only **$4.857224 \times 10^{-8}$** above the 105-winding free dual-clock minimum at the same height;
+- **Parts-per-million quark flavor agreement:** relative deviations of **$+1.328335\;\mathrm{ppm}$** in $|V_{ub}|^2$ and **$+0.811085\;\mathrm{ppm}$** in signed $J$ on the exact same background.
+
+Nor is this a solitary fluke: `#37,179,176,867` places both clocks within $10^{-5}\;\mathrm{rad}$ of the fixed vacuum (action gap $5.790335 \times 10^{-8}$), and `#40,166,104,723` lands at $-1.314\;\mathrm{ppm}$ in $|V_{ub}|^2$ and $-0.802\;\mathrm{ppm}$ in $J$. Under dual-clock equidistribution, joint near-vacuum hits (action gap $< 10^{-7}$, $|V_{ub}|^2$ error $< 2\;\mathrm{ppm}$, $J$ error $< 1.2\;\mathrm{ppm}$) occur with strictly positive natural lower density **$> 1.82378 \times 10^{-13}$**. Co-rotating both clocks by angle $t$ preserves flavor identically while incurring a quadratic energy cost $\approx 1026.3463\, t^2$; yet coupling this witness back to the six arithmetic times of [Chapter 12](ch12-shared-arithmetic-clock.md) caps its arithmetic share below $0.02536541\%$ (approachable to $0.02534550\%$).
+:::
+
+Most revealing of all are **four precision stress tests** conducted directly on `#2,306,888,100,085`—each exposing an exact structural crack hidden behind the parts-per-million triumph:
+
+| Stress test on witness `#2,306,888,100,085` | Probe setup | Exact structural fault exposed |
+| --- | --- | --- |
+| **Test 1: Global identifiability vs near-vacuum blindness** | $100$ global action differences vs near-vacuum open window | Global scan identifies all $105$ weights with $\kappa \le 11.584$ ($\le 9.849$ on first $100$ zeros, $2.49$ on $100$ of first $250$); yet inside the near-vacuum window, two weight vectors differing by $2 \times 10^{-9}$ differ in action by **$< 1.690 \times 10^{-75}$** across all finite heights |
+| **Test 2: Cross-charge light-subspace leakage** | Charge-$1$ light triad vs charges $2$ and $-4$ | Allowing arbitrary per-site phases on all $19$ sites leaves heavy-sector leakage **$> 38.321\%$ / $> 37.290\%$**; allowing arbitrary $19$-site permutations still leaves **$> 31.060\%$ / $> 31.097\%$** |
+| **Test 3: Proton selection-rule degeneracy** | 105-winding weights on dim-6 light vertices (Wilson modulus $\ge 0.0314398$) | **Orthogonal** auxiliary currents enforce $\Delta B \equiv 0 \pmod 3$, whereas **parallel** currents turn on $QQQL$ decay; both share the exact same shell vacuum and tree spectrum |
+| **Test 4: Single-integer uniqueness vs continuous $k/d^2$ drift** | Holding $d = 724$ or $k = 32$ fixed vs joint continuous shift | Each single integer scan uniquely pins $(k, d) = (32, 724)$, yet moving jointly to $d = 724.19, k \approx 32.016797784$ stays inside all three windows because the physical corridor tracks only **$k / d^2$** |
+
+Inspecting these four faults side by side (reproduced in [`ch39-fixed-vacuum-weight-dimension.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-fixed-vacuum-weight-dimension.py), [`ch39-near-vacuum-weight-resolution.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-near-vacuum-weight-resolution.py), [`ch39-joint-zero-light-subspaces.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-joint-zero-light-subspaces.py), [`ch39-fixed-vacuum-proton-currents.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-fixed-vacuum-proton-currents.py), and [`ch39-joint-vacuum-scale-window.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-joint-vacuum-scale-window.py)) crystallizes the verdict:
+
+1. **A seventy-five-order-of-magnitude resolution cliff:** Global probes invert all $105$ winding weights effortlessly (condition number down to $2.49$), yet any low-energy observer confined to the near-vacuum open window faces action differences below $1.690 \times 10^{-75}$ between weight vectors $2 \times 10^{-9}$ apart.
+2. **Geometric misalignment of light generations:** Even though every hypercharge carves out three light modes on the same background, the charge-$1$ light triad tilts sharply relative to charges $2$ and $-4$, leaking over $31\%$ of its probability into heavy states even under arbitrary site phases and site permutations.
+3. **Vacuum silence on proton decay:** One identical 105-winding shell vacuum and tree-level spectrum accommodates both proton-protecting orthogonal currents ($\Delta B \equiv 0 \pmod 3$) and $QQQL$-inducing parallel currents; the bare shell vacuum alone cannot adjudicate baryon stability.
+4. **One missing scale law:** Discrete integer scans lock $d = 724$ and $k = 32$ separately, yet continuous motion shows the three windows constrain only the ratio $k / d^2$, leaving a second independent scale law still to be derived.
+
+The 529-triangle dual-clock action therefore brings us to a striking plateau: a genuine single-zero vacuum hitting all three windows and parts-per-million quark flavor exists with positive natural density, yet demands $105$ non-monotone windings and retains a 100-dimensional continuous flat manifold. If high-order responses and weak port couplings are to emerge organically from finite-radius geometry and internal hidden degrees of freedom, we must open the interior of the lifted shell—turning to the 624-channel architecture and local memory-rank staircase of [Chapter 14](ch14-624-channels-and-memory-rank.md).

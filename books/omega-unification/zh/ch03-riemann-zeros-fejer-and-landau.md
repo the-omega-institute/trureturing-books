@@ -1,0 +1,198 @@
+# 第三章 黎曼零点谱底座：费耶尔碰撞、兰道围道与候选零点窗 {#sec-ou-ch03}
+
+[第二章](ch02-quaternion-clocks-and-haar-zeros.md)用一个极其诱人的结果收尾：借助十九点贝伦德球壳的 $22$ 个有理独立频率，沿密度为 $1/(2\pi)$ 的正黎曼零点子序列做无权平均，即可复现整个标准模型规范群的哈尔积分。然而老练的解析数论学家和物理学家都会在同一秒提出尖锐质疑：**无穷远处的等分布极限是一回事，有限截断高度 $T$ 下的定量相位抵消、四阶碰撞矩与真实零点窗口的选点行为则是另一回事！**
+
+本章正式摊开第一卷最底层的解析数论谱底座，并同时把**形式化证明的疆界**与**有限物理窗的实算证据**放在一张对照图上。我们按四步层层推进：
+
+1. 先明确界定经典黎曼猜想（RH）与狄利克雷广义黎曼猜想（Dirichlet GRH）的**外部形式化事实状态**，并用 Lean 4 冻结定理立起临界线上的费耶尔临界差额与凯莱单位圆判据；
+2. 再沿 `trureturing@dev` 冻结的四条核心解析定理，完整走通“调和权配对矩比 $\to$ 倒高度与周期相位亏损 $\to$ 无条件兰道左右竖边积分界 $\to$ 调和加权零点谱的高斯硬碰撞极限 $1/\sqrt{\pi}$”的严密链条；
+3. 随后把镜头拉进具体的有限零点窗口，展示第 $11431$ 枚零点在 $[10000, 12999]$ 中的中点隔离、费耶尔对角占比、最大额外配对份额与有限观察半径（$111521$ / $111532$），以及第 $8236$ 与第 $8359$ 枚零点如何踏入三物理窗口筛选；
+4. 最后毫不粉饰地划出**全局调和平均界**与**单枚零点双钟选点**之间仍未合龙的比较定理鸿沟。
+
+## 3.1 RH 与狄利克雷 GRH 的外部形式化状态及费耶尔—凯莱判据 {#sec-ou-3-1}
+
+按[前言](README.md#rem-ou-epistemic-contract)立下的六层认识论诚实契约，我们在动用任何带 `RiemannHypothesis` 前提的定理之前，先清点它的外部形式化凭证（`EXT-LEAN`）：
+
+- **权威出处与联合认证**：Levent Alpöge 于 2026 年 11 月 20 日公布覆盖经典黎曼猜想（RH）与有理数域 $\mathbb{Q}$ 上全体狄利克雷 $L$ 函数广义黎曼猜想（Dirichlet GRH）的 Lean 4（`v4.33.1`，共 $175{,}187$ 个模块）形式化证明；2026 年 11 月 21 日，Lean FRO 与 Mathlib Initiative 发表[联合声明](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/)，确认经 `comparator` 与 `con-leche --compare` 双重核验，该证明导出的终端命题与纯 Mathlib 陈述 `RiemannHypothesis` 完全一致。
+- **独立重放与公理边界**：组织镜像与可复现构建仓库 [`the-omega-institute/riemann-hypothesis`](https://github.com/the-omega-institute/riemann-hypothesis) 的源码静态扫描与公理审计证实全库零 `sorry`、零 `admit`、零自定义公理，公理闭包仅为 Lean 标准三公理 $\{\mathrm{propext}, \mathrm{Classical.choice}, \mathrm{Quot.sound}\}$，并已通过多支独立团队在 `leanchecker`、`lean4lean`、`nanoda` 与 `con-leche` 上的全模块重放。
+- **本书的严格书写纪律**：因该外部工程尚未冻结进入 `the-omega-institute/trureturing@dev`，**RH 与狄利克雷 GRH 本身不佩戴本书的绿色 `lean=` 徽章**；同时，其范围严格止于 $\mathbb{Q}$ 上的 $\zeta(s)$ 与狄利克雷 $L$ 函数——戴德金 $\zeta_K$ 函数的扩展黎曼猜想（ERH）、自守 $L$ 函数的全广义黎曼猜想（Grand RH）、零点单重性、蒙哥马利 GUE 对关联、希尔伯特—波利亚算子以及物理大统一假说均保持 `OPEN` 或 `MODEL`。
+
+在 `trureturing@dev` 内部，下列 Lean 4 冻结定理直接把经典 RH 等价地改写为两道几何—分析刚性判据：一侧是实轴上积分曼戈尔特（Mangoldt）余项 $U(x)$ 相对第一李质量包络 $M\sqrt{x}$ 的**对数平方费耶尔差额**，另一侧则是复平面上凯莱变换把临界线 $\operatorname{Re} s = \frac{1}{2}$ 精确卷成单位圆的**零径向亏量准则**：
+
+::: {.theorem #thm-ou-ch03-fejer-gap title="曼戈尔特费耶尔临界差额与凯莱单位圆临界线判据" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtFejerGap.rh_iff_eventually_fejer_gap D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion"}
+1. **费耶尔临界差额充要判据**（[`rh_iff_eventually_fejer_gap`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtFejerGap.rh_iff_eventually_fejer_gap)）：记第一李质量 $M := \mathrm{firstLiMass} = 2 + \gamma_{\mathrm{EM}} - \ln(4\pi)$，记 $U(x)$ 为完整积分曼戈尔特余项。经典黎曼假设（`RiemannHypothesis`）成立，当且仅当对每个实数 $c < \frac{1}{48}$，存在充分大的门槛使所有充分大的实数 $x$ 均满足
+
+   $$
+   U(x) \;\le\; M\sqrt{x} - c\,(\log x)^2.
+   $$
+
+2. **凯莱单位圆临界线判据**（[`cayley_critical_line_zeta_criterion`](lean:D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion)）：对一切复数 $s \in \mathbb{C}$，凯莱系数 $\mathrm{cayleyCoefficient}(s)$ 满足单位圆条件
+
+   $$
+   \bigl|\mathrm{cayleyCoefficient}(s)\bigr| = 1 \;\Longleftrightarrow\; \operatorname{Re} s = \frac{1}{2};
+   $$
+
+   且经典黎曼假设（`RiemannHypothesis`）成立，当且仅当对每一个满足 $\zeta(\rho) = 0$、$\rho \neq 1$ 且对一切自然数 $n$ 有 $\rho \neq -2(n + 1)$ 的非平凡零点 $\rho \in \mathbb{C}$，其对数径向亏量恒为零：
+
+   $$
+   \mathrm{logarithmicRadialDefect}(\rho) = 0.
+   $$
+
+:::
+
+::: proof
+第一款正向在 RH 下对谱中各零点的余弦项赋非负权，取 $N \ge 2$ 个等距相位构成非负费耶尔核 $\sum_{j,k=0}^{N-1} \cos((j-k)\theta) = |\sum_{j=0}^{N-1} e^{ij\theta}|^2 \ge 0$。取步长 $b_{jk} y e^{-y/2}$（其中 $y = \log x$、$b_{jk} = |j-k|/(2N)$），将谱亏量的二阶差分与曼戈尔特斜坡的中点上界逐对比较并按 $y^2 e^{-y/2}$ 归一化，平均系数给出 $C_N = \frac{1 - N^{-2}}{48} \to \frac{1}{48}$；对任意给定 $c < 1/48$ 选定有限 $N$ 使 $c < C_N$ 即可得出最终尾部不等式。反向取 $c = 1/128$ 即可推出差额趋于正无穷并由临界包络判据回到 RH。第二款由凯莱莫比乌斯映射 $(s - 1)/s$ 把有限临界线 $\operatorname{Re} s = 1/2$ 逐点双射映到除去 $1$ 点的单位圆 $S^1 \setminus \{1\}$，再将对数径向亏量归零等价于 $|\mathrm{cayleyCoefficient}(\rho)| = 1$ 代入全部非平凡零点即得。完整证明由 Lean 内核检查。
+:::
+
+## 3.2 调和权配对矩比、倒高度亏损与兰道围道竖边界 {#sec-ou-3-2}
+
+把目光从实轴素数余项转向零点纵坐标自身：若要量化零点相位和 $Z_T(t) = \sum_{0 < \gamma \le T} w_\gamma e^{i\gamma t}$ 在多大时间窗口内绝不会重新同步回峰（即 $1 - |Z_T(t)|$ 保持严格正下界），最自然的全局权选法是**临界线调和权**。对所有满足 $0 < \gamma \le T$ 的正零点纵坐标，按解析重数 $m_\gamma$ 赋权
+
+$$
+a_\gamma := \frac{m_\gamma \gamma}{\frac{1}{4} + \gamma^2}, \qquad W(T) := \sum_{0 < \gamma \le T} a_\gamma, \qquad w_\gamma := \frac{a_\gamma}{W(T)},
+$$
+
+并定义第 $k$ 阶频率差配对矩 $P_k(T) := \sum_{\gamma, \gamma'} w_\gamma w_{\gamma'} (\gamma - \gamma')^k$。以下冻结定理在 RH 前提下先锁定四阶与二阶配对矩的比值上界，并立即推导出短非中心时间区间的定量相位亏损：
+
+::: {.theorem #thm-ou-ch03-harmonic-pair-ratio title="调和加权零点配对矩比与倒高度时间相位亏损界" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_reciprocal_time_deficit"}
+假设经典黎曼假设（`RiemannHypothesis`）成立，沿用上述截至高度 $T$ 的归一化调和权重 $w_\gamma$、配对矩 $P_2(T), P_4(T)$ 与复相位得分 $Z_T(t) := \sum_{0 < \gamma \le T} w_\gamma e^{i\gamma t}$。则以下两条结论成立：
+
+1. **四阶与二阶配对矩比值上界**（[`harmonic_pair_ratio`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio)）：对所有充分大的实数 $T$，归一化权重非负且和为 $1$，$P_2(T) > 0$，且满足
+
+   $$
+   \frac{P_4(T)}{P_2(T)^2} \;\le\; 4096\,\log T.
+   $$
+
+2. **倒高度时间区的相位亏损下界**（[`harmonic_reciprocal_time_deficit`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_reciprocal_time_deficit)）：存在常数 $L > 1$，使对所有满足 $T \ge L$ 与 $\frac{1}{T} \le |t| \le \frac{1}{L}$ 的实数 $T, t$，皆有
+
+   $$
+   1 - |Z_T(t)| \;\ge\; \frac{\log(|t|^{-1})}{524288\,(\log T)^2}.
+   $$
+
+:::
+
+::: proof
+记 $c = 1/(2\pi)$。在第一款中，黎曼—冯·曼戈尔特计数渐近式给出充分大 $T$ 时上段 $(3T/4, T]$ 的计数至少为 $cT\log T / 8$，且该段内 $a_\gamma \ge m_\gamma / (2T)$，结合总质量界 $W(T) \le c(\log T)^2$ 与下段质量下界 $W(T/2) \ge c(\log T)^2 / 16$，知下段与上段的归一化权重分别至少为 $1/16$ 与 $1/(16\log T)$、段间频差至少为 $T/4$。仅保留跨段有序对即得 $P_2(T) \ge T^2 / (4096\log T) > 0$；又因全部正纵坐标不超过 $T$，恒有 $P_4(T) \le T^2 P_2(T)$，两式相除即得 $P_4(T)/P_2(T)^2 \le 4096\log T$。在第二款中，令截断高度 $X := 1/|t| \in [L, T]$。因为 $X^2 t^2 = 1$，四阶余项界对截断和 $Z_X(t)$ 给出 $1 - |Z_X(t)| \ge 1/(32768\log X)$；将全和 $Z_T(t)$ 按高度 $X$ 拆为保留项与尾项并施三角不等式得 $W(T)(1 - |Z_T(t)|) \ge W(X)(1 - |Z_X(t)|)$，代入 $W(X) \ge c(\log X)^2/16$ 与 $W(T) \le c(\log T)^2$ 即得所述亏损下界。完整证明由 Lean 内核检查。
+:::
+
+为了把相位亏损的控制一路推过中间时间 $b/\log T$ 直到对数时间 $\log T$，必须把兰道（Landau）有限矩形围道上的 $-\zeta'(s)/\zeta(s)$ 积分误差一项项钉牢。下面这条 Lean 4 冻结定理**完全不依赖 RH**，无条件给出有限兰道围道左、右两条竖边的显式范数上界：
+
+::: {.theorem #thm-ou-ch03-landau-vertical title="有限兰道围道左、右竖边积分的显式上界" lean="D5/S3/Weil/ZetaExplicit/LandauLeftVertical.norm_left_vertical_integral D5/S3/Weil/ZetaExplicit/LandauRightVertical.norm_right_vertical_integral"}
+以下两条估计无条件成立（不预设 RH）：
+
+1. **左竖边 $\operatorname{Re} s = -\frac{1}{4}$ 上界**（[`norm_left_vertical_integral`](lean:D5/S3/Weil/ZetaExplicit/LandauLeftVertical.norm_left_vertical_integral)）：对一切实数 $x > 1$ 与 $V \ge 1$，令 $s = -\frac{1}{4} + i u$，则
+
+   $$
+   \left|\int_1^V x^s \frac{-\zeta'(s)}{\zeta(s)}\,du\right| \;\le\; x^{-1/4}\left(80(V - 1) + \frac{20(1 + \log V)}{\log x}\right).
+   $$
+
+2. **右竖边 $\operatorname{Re} s = 1 + \frac{1}{\log(3x)}$ 上界**（[`norm_right_vertical_integral`](lean:D5/S3/Weil/ZetaExplicit/LandauRightVertical.norm_right_vertical_integral)）：对一切实数 $x > 1$ 与 $V > 1$，令 $c := 1 + \frac{1}{\log(3x)}$ 与 $s = c + i u$，则
+
+   $$
+   \left|\int_1^V x^s \frac{-\zeta'(s)}{\zeta(s)}\,du\right| \;\le\; 400\Bigl(V\log(2x) + x\bigl(\log(2x)\bigr)^2\Bigr).
+   $$
+
+:::
+
+::: proof
+在第一款中，借助 $\zeta$ 函数的函数方程将 $-\zeta'(s)/\zeta(s)$ 拆成 $\log(\frac{3}{4} + iu) + r(u)$；由双伽马递推、Binet 估计与反射直线 $\operatorname{Re}(1 - s) = \frac{5}{4}$ 上的绝对收敛级数可得一致界 $|r(u)| \le 80$。提出 $x^{-1/4}$ 后，余项积分至多为 $80(V - 1)$，而对数项用原函数 $e^{iu\log x}/(i\log x)$ 分部积分并利用 $|\frac{d}{du}\log(\frac{3}{4} + iu)| \le 1/u$ 给出 $\frac{20(1+\log V)}{\log x}$。在第二款中，在绝对收敛半平面 $\operatorname{Re} s = c > 1$ 逐项积分冯·曼戈尔特级数：最接近 $x$ 的整数项由区间长度控制（$n = 1$ 时 $\Lambda(1) = 0$）；$[x/2, 2x]$ 内其余整数以 $|\log x - \log n| \ge |x - n|/(2x)$ 化为两段调和和；区间外则 $|\log x - \log n| \ge 1/2$ 由积分判别控制，最后代入 $x^c \le 3x$ 即得统一界。完整证明由 Lean 内核检查。
+:::
+
+## 3.3 周期相位亏损、兰道窗转移与高斯碰撞极限 $1/\sqrt{\pi}$ {#sec-ou-3-3}
+
+现在把倒高度时间区、周期相位区与对数时间区三段无缝焊在一起！在 `trureturing@dev` 中，下面这条三位一体的冻结定理首先在倒对数时间段 $16\pi/T \le |t| \le b/\log T$ 用相反相位弧证明 $1/(4096\log T)$ 的一致亏损，再在接收一致兰道零点和包络的前提下把亏损推进至 $b/\log T \le |t| \le \log T$（常数跃升为 $1/(32\log T)$），最终锁定调和加权实际 $\zeta$ 零点谱的**高斯硬碰撞极限 $1/\sqrt{\pi}$**：
+
+::: {.theorem #thm-ou-ch03-harmonic-collision-limit title="周期相位亏损、兰道对数窗转移与调和零点高斯碰撞极限" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHPeriodicPhaseCoverage.harmonic_periodic_phase_deficit D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.harmonic_landau_window_deficit D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLogarithmicCollisionLimit.harmonic_zeta_collision_limit"}
+假设经典黎曼假设（`RiemannHypothesis`）成立，沿用 [@thm-ou-ch03-harmonic-pair-ratio] 中的 $a_\gamma, W(T), w_\gamma, P_2(T)$ 与 $Z_T(t)$。
+
+1. **周期相反相位弧亏损界**（[`harmonic_periodic_phase_deficit`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHPeriodicPhaseCoverage.harmonic_periodic_phase_deficit)）：存在常数 $L > 1$ 与 $b > 0$，使对一切 $T \ge L$ 及 $\frac{16\pi}{T} \le |t| \le \frac{b}{\log T}$，皆有
+
+   $$
+   1 - |Z_T(t)| \;\ge\; \frac{1}{4096\,\log T}.
+   $$
+
+2. **一致兰道包络下的对数时间亏损转移**（[`harmonic_landau_window_deficit`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.harmonic_landau_window_deficit)）：给定 $b > 0$ 与 $C > 0$，若对一切 $V > 1$ 与 $t \neq 0$ 成立一致兰道零点和包络
+
+   $$
+   \left|\sum_{0 < \gamma \le V} m_\gamma e^{i\gamma t}\right| \;\le\; C\left(V + e^{|t|/2}(1 + |t|)^2 + e^{|t|/2}(1 + \log V) + \frac{\log V}{|t|}\right),
+   $$
+
+   则存在常数 $L > 1$，使对一切 $T \ge L$ 及 $\frac{b}{\log T} \le |t| \le \log T$，皆有
+
+   $$
+   1 - |Z_T(t)| \;\ge\; \frac{1}{32\,\log T}.
+   $$
+
+3. **调和加权 $\zeta$ 零点的高斯硬碰撞极限**（[`harmonic_zeta_collision_limit`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLogarithmicCollisionLimit.harmonic_zeta_collision_limit)）：在存在 $C > 0$ 使上述一致兰道包络成立的前提下，设实数列 $T_n \to \infty$、$\eta_n$ 最终为正，记方差尺度 $s_n := \sqrt{n P_2(T_n)/2}$。若满足 $(\log T_n)^2 / n \to 0$、$\eta_n / s_n \to 0$ 且 $\eta_n \log T_n \to \infty$，则频率差绝对值不超过 $\eta_n$ 的有序占用向量对加权碰撞和 $E_n(\eta_n)$ 精确满足
+
+   $$
+   \frac{s_n\,E_n(\eta_n)}{\eta_n\,W(T_n)^{2n}} \;\longrightarrow\; \frac{1}{\sqrt{\pi}}.
+   $$
+
+:::
+
+::: proof
+在第一款中，置周期 $H := 2\pi/|t|$，则在区间 $[T/2, T]$ 内可排入至少 $T/(8H)$ 个完整周期；每个周期内以相位 $0$ 与 $\pi$ 为起点各取宽 $H/16$ 的半开区间，短窗零点计数下界赋予两族相反相位弧各自至少 $\log T / (4096\pi)$ 的调和质量。把总得分投影到自身单位方向，按其实部正负挑选相反符号那一族（投影至多 $1/2$），即得亏损至少 $1/(4096\log T)$。在第二款中，在 $b/\log T \le |t| \le \log T$ 上对 $V = T$ 与 $V = 3T/4$ 分别套用一致兰道包络，差和模长至多 $2C(7 + 1/b)T$，对充分大 $T$ 严格低于 $(3T/4, T]$ 内解析重数计数下界 $T\log T / (16\pi)$ 的一半；用三角不等式与 $a_\gamma \ge m_\gamma/(2T)$ 转移给 $Z_T(t)$ 即得 $1/(32\log T)$。在第三款中，[@thm-ou-ch03-harmonic-pair-ratio] 保证中心窗 $|t| \le 1/T_n$ 的移动费耶尔积分给出高斯主项 $1/(2\sqrt{\pi})$；倒高度、周期相位与兰道转移三段拼接覆盖整个 $1/T_n \le |t| \le \log T_n$，统一亏损 $c/\log T_n$ 使 $|Z_{T_n}(t)|^{2n} \le \exp(-2cn/\log T_n)$ 压垮多项式前因子；再由全线相对截尾界（依托 $\eta_n \log T_n \to \infty$）将极限传回全实轴，最后对 $\eta_n$ 的固定正倍数作割线夹逼即得硬碰撞极限 $1/\sqrt{\pi}$。完整证明由 Lean 内核检查。
+:::
+
+值得一提的是上下游之间的完整衔接（`ARGUED / EXT-LEAN`）：在 `trureturing@dev` 中，[@thm-ou-ch03-landau-vertical] 的左右竖边界结合上边对数平方界已经推出含端点的一致的兰道零点包络（`actual_cutoff_landau_envelope`），从而在 RH 下自动满足 [@thm-ou-ch03-harmonic-collision-limit] 第 2、3 款所需的兰道前提；而 Alpöge 的外部形式化证明（`EXT-LEAN`）又直接给出了 `RiemannHypothesis`。至此，从零点分布到全局调和碰撞极限的纯数论主干已完全打通。
+
+## 3.4 有限候选零点窗：第 $11431$ 枚的中点隔离与第 $8236$ / $8359$ 枚的三窗筛选 {#sec-ou-3-4}
+
+现在把视角从 $T \to \infty$ 的全局渐近切回十九点贝伦德球壳实际读取的**具体有限零点窗口**。全书后续卷目中反复出现两组最具代表性的零点地标——**第 $11431$ 枚周围的十九零点局部窗**，以及**第 $8236$ / $8359$ 枚首次通过三物理窗口的零点**。让我们用严格区间算术（`CERT`）看清它们为何脱颖而出，以及各自的准确边界。
+
+### 3.4.1 第 $11431$ 枚零点在 $[10000, 12999]$ 中的中点隔离、费耶尔份额与有限观察半径
+
+在全书第二卷的规范交汇与两步质量算子检验中，第 $11431$ 枚正零点是一处核心样本。把它放进左右各九枚的十九零点局部窗口 $\#11422$ 至 $\#11440$，立刻浮现出四组经 $160$ 位 Arb 球算术认证的精确数字（`CERT`，复算脚本 [`ch39-zero-midpoint-fejer.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-zero-midpoint-fejer.py)、[`ch39-midpoint-weight-bound.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-midpoint-weight-bound.py)、[`ch39-finite-fejer-observation.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-finite-fejer-observation.py) 与 [`ch39-harmonic-local-observation.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-harmonic-local-observation.py)）：
+
+1. **三千枚中心里的唯一孤立中点（$35.60$ 倍锐度优势）**：对每个中心编号 $n$，定义九邻域中点偏差 $E_n := \min_{1 \le i, j \le 9} |\gamma_{n - i} + \gamma_{n + j} - 2\gamma_n|$。在 $n = 10000$ 至 $12999$ 的全部 $3000$ 个中心（合计比较 $243{,}000$ 个三元组）中，无论是否除以局部平均间距，**第 $11431$ 枚均唯一排第一**：其几乎精准落在第 $11427$ 与第 $11436$ 枚正中，最小偏差
+
+   $$
+   \Delta = |\gamma_{11427} + \gamma_{11436} - 2\gamma_{11431}| \in (1.6812114283,\; 1.6812114285)\times 10^{-6},
+   $$
+
+   次小偏差者第 $11628$ 枚的偏差竟是它的 **$35.60$ 倍**（严格落在 $(35.59, 35.60)$ 内）！但切忌把这一局部特征神话为全谱唯一：由于黎曼—冯·曼戈尔特计数公式给出 $\gamma_N / N \to 0$，逐项求和立证 $E_n \le \gamma_{n+1} - \gamma_{n-1}$ 的均值趋零，因此在更高处满足绝对偏差小于 $E_{11431}$ 的中心具有自然密度 $1$（`ARGUED`）。
+2. **占据对角主导的四阶费耶尔矩（$94.62\%$）**：在十九零点窗上取等权 $1/19$ 与分辨率 $\eta = 0.01$，无序对自身配对的占据对角背景恒为 $B = (19 + 4\times 171)/19^4 = 703/130321$，而总四阶费耶尔矩落在 $(0.00570094240512, 0.00570094240513)$，其中整整 **$94.62\%$**（精确值 $94.6224672\%$）来自自身占据对角。
+3. **孤立碰撞带内的最大额外配对占比（$23.657\%$ / $23.670\%$）**：窗口内第二小异对间距为 $\Delta_2 \in (0.0023277388, 0.0023277390)$。只要分辨率落在 $\Delta < \eta \le \Delta_2$，三角核中唯一新冒头的非对角信号就是 $\gamma_{11427} + \gamma_{11436} \approx 2\gamma_{11431}$！即使允许自由调节全部十九枚零点的非负概率权重，这组额外配对最多只能占四阶费耶尔矩的 **$23.657017\%$**；换作闭带等权计数，上限则是精确解析数 $4/(12 + 2\sqrt{6}) \approx \mathbf{23.670068\%}$。
+4. **首次辨出额外碰撞的有限观察半径（$111521$ 与 $111532$）**：将分辨率固定为 $\eta = 1/1000$，只需在有限时间区间 $[-T, T]$ 上测得有限积分 $I_\eta(T) > B$，就能无歧义地排除“只有自身配对”的零背景。通用相对截尾界给出较保守的充分整数半径 $11{,}330{,}943$（等权）与 $11{,}331{,}843$（局部调和权）；而直接用 $160$ 位球算术计算有限余弦积分，首次越过整线占据对角的**精确最小整数观察半径**分别低两个数量级：等权下恰为 **$111521$**（$111520$ 时仍为负），局部调和权下恰为 **$111532$**（$111531$ 时仍为负）！
+
+::: {.example #ex-ou-ch03-fejer-11431 title="孤立碰撞带 23.670% 锐上限的三行初等推导"}
+在 $\Delta < \eta \le \Delta_2$ 的孤立分辨率带内，记 $\#11427, \#11436, \#11431$ 三个零点的概率权重依次为 $x, y, z \ge 0$，令 $q := 1 - \Delta/\eta \in (0, 1]$。额外配对贡献恰为 $4q x y z^2$，而占据对角为 $D = \sum_i p_i^4 + 4\sum_{i < j} p_i^2 p_j^2$；其余十六个权重只能增大分母。对 $x, y > 0$ 设 $t := z^2 / (xy)$，由 $x^2 + y^2 \ge 2xy$ 立得
+
+$$
+D \;\ge\; x^4 + y^4 + z^4 + 4(x^2 y^2 + x^2 z^2 + y^2 z^2) \;\ge\; (xy)^2\bigl(6 + 8t + t^2\bigr).
+$$
+
+从而额外信号与对角之比受均值不等式 $t + 6/t \ge 2\sqrt{6}$ 精确封顶：
+
+$$
+\frac{4q x y z^2}{D} \;\le\; \frac{4q}{8 + t + 6/t} \;\le\; \frac{4q}{8 + 2\sqrt{6}} \quad \Longrightarrow \quad \frac{\text{额外贡献}}{\text{总四阶矩}} \;\le\; \frac{4q}{8 + 2\sqrt{6} + 4q}.
+$$
+
+等号恰在 $x = y \approx 0.280498$、$z = 6^{1/4}x \approx 0.439003$、其余十六项归零时取到；令 $q = 1$（闭带计数）给出 $4/(12 + 2\sqrt{6}) \approx 23.670068\%$，令 $\eta = \Delta_2$ 给出 $23.657017\%$。
+:::
+
+### 3.4.2 第 $8236$ 枚与第 $8359$ 枚如何跨入三物理窗口筛选
+
+把单窗统计升级为[第二卷](ch04-gauge-crossings-and-monotone-barriers.md)–[第四卷](ch10-regge-gravity-and-spin2.md)共同使用的**三物理窗口筛选**——同时要求（i）五种规范荷各留恰好三个轻模、（ii）两圈尖阈值强耦合落入 $0.117 < \alpha_s(M_Z) < 0.119$、（iii）四层一圈曲率比相对目标误差低于 $0.2\%$——逐枚编号穷举揭示出另一幕极具戏剧性的图景（`CERT / MODEL`，复算脚本 [`ch39-first-three-mode-observables.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-first-three-mode-observables.py) 与 [`ch39-neutral-site-variance-gap.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-neutral-site-variance-gap.py)）：
+
+| 轻重谱分界方案 | 穷举范围 | 五荷各三轻模数 | 强耦合合格数 | 曲率合格数 | 首次三窗全通零点 | 首枚实测读数（$\alpha_s$ / 曲率比） |
+| :--- | :--- | :---: | :---: | :---: | :---: | :--- |
+| 常数分界 $9$ | $\#1\text{–}\#8192$ | $67$ | $22$ | $2$（$\#6514, \#8035$） | 无（$0$ 枚） | — |
+| 常数分界 $9$ | $\#1\text{–}\#8359$ | $69$ | $23$ | $3$ | **$\#8359$**（$\gamma \approx 8462.07$） | $(0.1184112, 0.1184213)$ / $0.99935102$ |
+| 站点方差最小割 $T = 9 + (1 - \delta)^2$ | $\#1\text{–}\#8359$ | — | — | — | **$\#8236$**（$\gamma \approx 8354.92$） | $(0.1183058, 0.1183120)$ / $1.00093826$ |
+
+细节本身就是最好的教材：在常数分界 $9$ 下，前 $8192$ 枚零点中强耦合窗与曲率窗的交集完全为空，直到第 **$8359$** 枚才首次同时通过三项检验（但把先前校准的味张量移到第 $8359$ 枚时，留出检验读出的 $|V_{ub}| \approx 0.00287268$ 比参考值低 $23.026\%$）。一旦把人工常数 $9$ 换为全壳非平凡二分的最小跨界边权平方和——即内禀的**站点方差分界** $T = 9 + (1 - \delta)^2$——原本因荷六第三本征值略高于 $9$（约 $9.2061$）而被挡在门外的第 **$8236$** 枚立刻率先过关，与第 $8359$ 枚并列成为前 $8359$ 枚中的全部两枚三窗命中（类似地，更高处的第 $148341$ 枚也在分界 $9$ 时荷六仅留两模，而在站点方差分界下五荷各三模且通过全部三窗）。
+
+::: {.figure src="ch03-zero-window-landscape"}
+**黎曼零点谱的多尺度分析疆界与有限候选窗口图景。** 上栏对照 [@thm-ou-ch03-harmonic-pair-ratio] 与 [@thm-ou-ch03-harmonic-collision-limit] 覆盖的四段全局时间区：中心高斯主项窗 $|t| \le 1/T$（青色）、倒高度亏损区 $1/T \le |t| \le 1/L$、周期相反相位弧区 $16\pi/T \le |t| \le b/\log T$ 与兰道对数窗转移区 $b/\log T \le |t| \le \log T$（品红色衰减包络）。下栏聚焦两处具体有限零点窗口：左侧标出第 $11431$ 枚在 $[10000, 12999]$ 中的 $35.60\times$ 孤立中点偏移及有限观察半径 $111521$ / $111532$；右侧标出第 $8236$ 枚（站点方差分界首中）与第 $8359$ 枚（分界 $9$ 首中）在三物理窗口中的位置（琥珀色标示具体候选零点，红色箭头标示全局平均界与单零点选点之间的开放缺口）。
+:::
+
+## 3.5 全局平均界与单零点选点之间的诚实缺口及卷一收束 {#sec-ou-3-5}
+
+走完第一卷全部三章，我们必须以尼采式的清醒审视刚刚架起的整座桥梁——看看哪几跨已经由 Lean 内核与 Arb 区间焊死，又在哪一跨正悬着断口（`OPEN`）：
+
+- **已经焊死的跨段**：（1）十九点贝伦德球壳的完整整数解剖、$22$ 个有理独立频率、射影三元流群与最小 $21$ 维有理格拉姆障碍；（2）四元数双时钟的非交换逆谱唯一性、三探针全局单射、密度 $1/(2\pi)$ 的零点标准模型哈尔积分与 $D = 0$ 威尔逊扩散检验；（3）在外部核验的 RH 基础上，由 Lean 4 内核锁死的费耶尔临界差额、调和配对矩比、倒高度与周期相位亏损、无条件兰道左右竖边积分界以及全局高斯硬碰撞极限 $1/\sqrt{\pi}$；（4）第 $11431$ 枚与第 $8236$ / $8359$ 枚等具体有限零点窗的高精度区间复算。
+- **尚未闭合的真实断口（`OPEN`）**：第一，[@thm-ou-ch03-harmonic-pair-ratio]–[@thm-ou-ch03-harmonic-collision-limit] 全部控制的是**截至高度 $T$ 的整段调和加权谱平均量**，而十九点球壳上的规范阈值、轻模计数与味读数读取的是**单枚零点的双钟相位**或极少数离散零点的谱权组合——从全局相位和平均界走向单个球壳的质量谱或指定相位窗内的双钟同时命中，至今仍缺少桥梁比较定理。第二，第 $11431$ 枚的中点孤立性依赖于选定的搜索区间与邻域宽度，而第 $8236$ / $8359$ 枚的率先命中仍需外部指定场表、质量标尺与轻重分界。究竟是哪一条物理作用量决定了零点谱权与选点律？
+
+带着这份毫不含糊的算术装备与问题清单，第一卷就此收束。下一章起，我们正式步入[第二卷：第一问](ch04-gauge-crossings-and-monotone-barriers.md)，把这颗十九点磁球壳直接架到标准模型三支规范耦合的火线上，直面[第四章 磁球壳质量算子、三力交汇阈值与单调质量障碍](ch04-gauge-crossings-and-monotone-barriers.md)。

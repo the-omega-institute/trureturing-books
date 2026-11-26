@@ -1,0 +1,207 @@
+# Chapter 6 Higgs Mass Matching, the Rank-Five Neutral Portal Floor, and Low-Energy Experimental Bounds {#sec-ou-ch06}
+
+> "Getting three gauge couplings to cross at high energy is only half the exam; the tougher examiner sits at $125.25\;\mathrm{GeV}$—every heavy state you place at $10^{14}\;\mathrm{GeV}$ kicks the Higgs mass squared upward by more than twenty orders of magnitude through two-loop gauge graphs, while every light partner you add to balance the broken vacuum walks straight into the crosshairs of LEP, CLEO, OPAL, and the LHC."
+
+[Chapter 4](ch04-gauge-crossings-and-monotone-barriers.md) and [Chapter 5](ch05-kinetic-trace-and-uv-ceilings.md) charted the exact boundaries of gauge unification. Now we confront the second half of Question 1: **can the very same Behrend heavy spectrum and electroweak vacuum-balancing partners reproduce the observed Higgs mass $m_H = 125.25\;\mathrm{GeV}$ and electroweak scale $v = 246.22\;\mathrm{GeV}$ under tree-level stability and $8\pi$ contact unitarity—while surviving every low-energy collider precision test?**
+
+This chapter sweeps from ultraviolet matching thresholds straight down to experimental collider data: quantifying pure electroweak two-loop thresholds and cross-candidate polynomial portals, deploying the block Schur minimum theorem to prove all-inertia spectral-width exclusion, the exact minimal rank **$5$** for neutral traceless portals, and parameter-free heat-kernel response tests, and closing with the four-way low-energy collider pinch (full derivations and interval certificates reside in [the dual-clock minimal-arc replay notes](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-%E5%9B%9B%E5%85%83%E6%95%B0%E5%8F%8C%E6%97%B6%E9%92%9F%E4%B8%8E%E6%9E%81%E5%B0%8F%E5%9C%86%E5%BC%A7.md), [the gauge kinetic-trace replay notes](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-%E8%A7%84%E8%8C%83%E5%8A%A8%E8%83%BD%E8%B0%B1%E8%BF%B9%E4%B8%8E%E9%98%88%E5%80%BC.md), and [the full replay compendium](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/%CE%A9%E5%A4%8D%E7%AE%97%E8%AF%B4%E6%98%8E.md)).
+
+## 6.1 Electroweak Matching Targets, Two-Loop Gauge Thresholds, and Cross-Candidate Polynomial Portals {#sec-ou-ch06-s01}
+
+We first record the electroweak matching targets, portal structures, and unitarity bounds, anchored by the Lean 4 block Schur minimum theorem that powers both scattering-matrix positivity checks and endpoint eliminations throughout this chapter.
+
+::: {.definition #def-ou-ch06-higgs-portal title="Electroweak Higgs Matching Targets, Two-Loop Pure-Gauge Thresholds, and Contact Unitarity"}
+For the Standard Model Higgs potential $V(H) = -m_H^2 H^\dagger H + \lambda(H^\dagger H)^2$ (with effective high-side quadratic mass term $+m^2 H^\dagger H$), fix four baseline targets and constraints:
+
+1. **Low-energy electroweak and high-side quartic targets**: vacuum expectation value $v = 246.22\;\mathrm{GeV}$, physical Higgs mass $m_H = 125.25\;\mathrm{GeV}$ (tree-level low-side boundary $\lambda(M_Z) = m_H^2/(2v^2) \approx 0.12938$), and high-side reference quartic $\lambda_H = 0.02335$.
+2. **Two-loop pure electroweak gauge mass threshold $\Delta_{\mathrm{pole}}$**: the finite shift to the light Higgs squared mass induced at two loops purely by electroweak gauge interactions of active heavy charged scalars and heavy Dirac multiplets in a fixed perturbative pole or $\overline{\mathrm{MS}}$ scheme (matching the broken electroweak phase requires a net negative hard mass parameter $-m_{\mathrm{low}}^2 < 0$).
+3. **Species-traceless leading portal $(-F, 3F)$ vs. subleading common portal $b$**: on each $(4, 2, 1)$ heavy scalar layer ($12$ colored real components and $4$ uncolored real components), assigning Hermitian portal blocks $(-F, 3F)$ cancels the leading one-loop quadratic tadpole layer-by-layer via $12(-F) + 4(3F) = 0$ (**species-traceless**); releasing tracelessness adds a common one-loop-order portal $b$ (or positive operator $B \succeq 0$), producing physical species portals $(-F + B,\; 3F + B)$.
+4. **Tree-level boundedness and $8\pi$ contact unitarity**: the combined light-heavy quartic potential is bounded below along every nonzero field ray, and the two-body $s$-wave radial contact scattering matrix $\mathcal{A}$ satisfies the perturbative partial-wave unitarity ceiling
+
+   $$
+   \|\mathcal{A}\|_{\mathrm{op}} \;<\; 8\pi \;\approx\; 25.13274.
+   $$
+
+:::
+
+Whenever we certify positivity of $8\pi I \pm \mathcal{A}$ on coupled Higgs–heavy-radial channels or eliminate high-potential shell vertices into an effective boundary operator, the exact matrix identity at work is the Lean-verified block Schur complement minimum theorem:
+
+::: {.theorem #thm-ou-ch06-schur-minimum title="Block Schur Complement Quadratic Form as Exact Minimum" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
+Let $m, n$ be finite index types, $A \in M_m(\mathbb{C})$ a Hermitian matrix, $B \in M_{m \times n}(\mathbb{C})$ any complex matrix, and $C \in M_n(\mathbb{C})$ a positive-definite matrix. Set $S := A - B C^{-1} B^{\mathsf{H}}$. Then for every boundary vector $x \in \mathbb{C}^m$, the set of block quadratic values
+
+$$
+\left\{\, \begin{pmatrix} x \\ y \end{pmatrix}^* \begin{pmatrix} A & B \\ B^{\mathsf{H}} & C \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} \;\Bigg|\; y \in \mathbb{C}^n \,\right\}
+$$
+
+as $y$ ranges over $\mathbb{C}^n$ has exact least element (`IsLeast`) equal to the boundary Schur complement value $x^* S x = x^*(A - B C^{-1} B^{\mathsf{H}})x$, attained at the unique minimizer $y^* = -C^{-1} B^{\mathsf{H}} x$.
+:::
+
+::: {.proof}
+Because $C$ is positive definite, it is Hermitian and invertible. Completing the square on the block quadratic form gives the exact algebraic identity
+
+$$
+\begin{pmatrix} x \\ y \end{pmatrix}^* \begin{pmatrix} A & B \\ B^{\mathsf{H}} & C \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} \;=\; x^*(A - B C^{-1} B^{\mathsf{H}})x \;+\; (C^{-1} B^{\mathsf{H}} x + y)^*\,C\,(C^{-1} B^{\mathsf{H}} x + y).
+$$
+
+Evaluating at $y^* = -C^{-1} B^{\mathsf{H}} x$ annihilates the second term, showing $x^* S x$ lies in the range; for every $y \in \mathbb{C}^n$, positive definiteness of $C$ guarantees the second term is nonnegative, bounding all values below by $x^* S x$. The full proof is checked by the Lean kernel.
+:::
+
+Armed with [@def-ou-ch06-higgs-portal] and [@thm-ou-ch06-schur-minimum], three immediate electroweak benchmarks lock into focus:
+
+1. **Quartic metastability at crossing and the $10^{-27}$ hierarchy scale**.
+   Integrating one-loop Higgs running up the two-tier vector-like two-loop gauge crossing trajectory of [Chapter 4](ch04-gauge-crossings-and-monotone-barriers.md) from $m_H = 125.25\;\mathrm{GeV}$ (with vanishing heavy Yukawas and heavy portals) drives the quartic negative across the entire crossing rectangle:
+
+   $$
+   \lambda(\mu) \;\in\; (-0.061,\; -0.056), \qquad \frac{m_H^2(\mu)}{\mu^2} \;\in\; (3.84,\; 4.48) \times 10^{-27} \quad (\sim 4 \times 10^{-27}),
+   $$
+
+   with $\lambda$ first crossing zero between $8.0 \times 10^5$ and $1.14 \times 10^6\;\mathrm{GeV}$. Conversely, demanding $\lambda(\mu) = 0$ at unification forces a tree-level low-energy Higgs mass in **$141.44\text{–}143.58\;\mathrm{GeV}$**, well above $125.25\;\mathrm{GeV}$ (see [`ch39-two-tier-higgs-quartic.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-two-tier-higgs-quartic.py)).
+2. **Pure electroweak two-loop mass wall on `#11661` and `#11934` ($\sim +1.05 \times 10^{26}\;\mathrm{GeV}^2$)**.
+   On the certified cut-9 crossings `#11661` and `#11934` ($d = 724$, multiplier $32$), summing the $\overline{\mathrm{MS}}$ pure electroweak two-loop finite thresholds (Farina–Pappadopulo–Strumia) over all $29$ active heavy Dirac multiplets ($15$ charge-1 color triplets and $14$ charge-3 weak doublets) and $14$ active heavy complex scalar doublets below crossing yields **strictly positive** contributions term-by-term (since $6(t - \frac{1}{3})^2 + \frac{17}{6} > 0$ and $1 + 12t > 0$): roughly $+8.17 \times 10^{24}\;\mathrm{GeV}^2$ from scalars and $+9.68 \times 10^{25}\;\mathrm{GeV}^2$ from Dirac multiplets, totaling
+
+   $$
+   \Delta m^2_{11661} \;\in\; (1.0496,\; 1.0503) \times 10^{26}\;\mathrm{GeV}^2, \qquad \Delta m^2_{11934} \;\in\; (1.0428,\; 1.0440) \times 10^{26}\;\mathrm{GeV}^2
+   $$
+
+   (roughly $+1.05 \times 10^{26}\;\mathrm{GeV}^2$, or $1.34 \times 10^{22}$ times the electroweak tree parameter $125.25^2/2\;\mathrm{GeV}^2$; even the pure gauge-regenerated double-logarithmic scalar portal running alone contributes $+3.64 \times 10^{24}$ and $+3.63 \times 10^{24}\;\mathrm{GeV}^2$, see [`ch39-chiral-gauge-portal-mass.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-chiral-gauge-portal-mass.py)).
+3. **Cross-candidate spectral polynomial portal obstructions**.
+   Ask whether a single spectral portal $P(z) = \sum a_k z^k$ in $z = (h/80)^2$ at the common subtraction scale $Q = 3.725 \times 10^{14}\;\mathrm{GeV}$ can cancel the finite gauge thresholds across multiple cut-9 zeros simultaneously (see [`ch39-chiral-common-portal-scale.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-chiral-common-portal-scale.py) and [`ch39-chiral-third-portal-obstruction.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-chiral-third-portal-obstruction.py)):
+   - A constant portal leaves a residual $> 1.81 \times 10^{23}\;\mathrm{GeV}^2$ on at least one of `#11661` and `#11934`.
+   - With nonnegative coefficients $a_k \ge 0$, canceling both `#11661` and `#11934` requires **minimal degree $4$** (moment ratios for $k = 0, 1, 2, 3$ fall strictly below $T_2/T_1$, while $k = 4$ crosses it, giving $a_0 \approx 0.0006$, $a_4 \approx 0.071$).
+   - Adjoining the first post-window cut-9 zero **`#12207`** leaves that degree-4 fit with a residual of $\approx -8 \times 10^{21}\;\mathrm{GeV}^2$; moreover, **every nonnegative-coefficient polynomial of arbitrary finite degree (or convergent series) is strictly excluded across `#11661` and `#12207`**—the minimum monomial ratio at $k = 5$ already exceeds the threshold ratio, forcing a residual $> 6.46 \times 10^{20}\;\mathrm{GeV}^2$. Only by allowing a negative linear coefficient does a unique everywhere-positive quadratic portal $P(z) \approx 0.02295 - 0.06437 z + 0.07150 z^2$ (minimum $> 0.006$ on $\mathbb{R}$) fit all three zeros at once.
+
+## 6.2 All-Inertia Spectral-Width Exclusion and the Exact Rank-Five Floor for Neutral Traceless Portals {#sec-ou-ch06-s02}
+
+Turning to the two-flavor continuous-arc and edge-preserving finite-subdivision ($h \le 0.01$) heavy scalar system yields the two sharpest ultraviolet portal theorems of the volume.
+
+### Spectral-Width Exclusion Across Arbitrary Positive Arc Inertia $\rho > 0$
+
+Suppose all active heavy scalars lie below $Q$ with logarithmic spectral width bounded by $L \ge \log(Q/m_{\min})$. Under tree-level boundedness, $8\pi$ contact unitarity, and one-loop quartic matching, weighted Gaussian averaging over negative portal directions combined with square completion in $g_U^2$ (by the same algebra as [@thm-ou-ch05-rational-schur]) proves a multiplicity-independent **necessary spectral-width condition** for any species-traceless Hermitian portal $(-F, 3F)$ to make $\Delta_{\mathrm{pole}}$ negative:
+
+$$
+\log\!\left(\frac{Q}{m_{\min}}\right) \;>\; 3.45 \qquad \left(\frac{Q}{m_{\min}} \;>\; e^{3.45} \;>\; 31.50039\right).
+$$
+
+Yet scanning **all positive arc inertias $\rho > 0$** ($d = \pi^2/(\rho\theta_{804}) > 0$), **all clock angles and rotation axes**, and all $h \le 0.01$ finite grids traps every perturbative gauge crossing inside $26.845 < \log(Q/\mathrm{TeV}) < 26.889$, $W < 49.2$, and $\alpha_G^{-1} < 38.36$ (with $\log(Q/m_{\min}) < 3.272$ on the #35 zero window, and tightly pinched by the two-layer fermion floor across all angles). Substituting into the pole-mass inequality **excludes every species-traceless portal $(-F, 3F)$ across all perturbative crossings**:
+
+$$
+\Delta_{\mathrm{pole}} \;>\; 6.8122 \times 10^{23}\;\mathrm{GeV}^2 \qquad (\Delta_{\mathrm{pole}} > 1.0985 \times 10^{24}\;\mathrm{GeV}^2 \text{ on all \#35 perturbative crossings}).
+$$
+
+At high inertia ($0 < d \le \frac{1}{2}$, precisely $172$ active scalar layers), the width contracts to $\log(Q/m_{\min}) < 1.787583 < 1.794796$, ruling out even one-loop quartic matching alone for traceless portals.
+
+**Releasing tracelessness and spectral-shape sensitivity**: Adding a common one-loop-order portal $b$ on the 18-layer low-inertia solution ($-fI + bI,\; 3fI + bI$) immediately opens a unique bounded, unitary solution ($0.09 C^2 + 0.005 S^2$, contact norm $< 22.167 < 8\pi$):
+
+$$
+f \;\in\; (0.0846092,\; 0.0863030) \quad (f \approx 0.085), \qquad b \;\in\; (0.0061493,\; 0.0071064) \quad (b \approx 0.0066),
+$$
+
+at the cost of a relative mass sensitivity $b S_b / m_{\mathrm{low}}^2 > 4.0444 \times 10^{21}$ ($> 4 \times 10^{21}$). In the high-inertia 172-layer regime, however, **even releasing tracelessness fails if $b$ is uniform across all 172 layers**: two-loop mass matching caps $b < 0.002148$ whereas one-loop quartic matching requires $b > 0.005$. Only a spectrally shaped portal weighted toward the lowest modes (such as the six modes below $y = 1/16$, or the heat-kernel portal below) restores joint matching.
+
+### Exact Minimal Rank Five for Neutral Traceless Portals
+
+Return to the spin-balanced all-scale equal-trace two-loop crossing of [Chapter 5](ch05-kinetic-trace-and-uv-ceilings.md) ($Q \in (5.268, 5.390) \times 10^{14}\;\mathrm{GeV}$, carrying $3$ gauge-neutral complex singlets and $58$ charged real scalars per layer). Keeping the subleading common portal $b$ on the charged scalars, restrict the leading traceless Hermitian portal $P$ to act on active neutral heavy scalars with rank $d$ and negative-eigenvalue diagonal block $N$ ($k$ negative directions, $K = \operatorname{tr}N^2$). Tracelessness bounds the positive squared eigenvalues by $(\operatorname{tr}N)^2 \le kK$, so one-loop quartic matching gives $D(\lambda_H - \lambda_{\mathrm{low}}) \le t_{\max}(k + 1)K$. Averaging over the negative subspace with complex Gaussian covariance $N$ under tree-level stability bounds the normalized radial contact diagonal from below by $(1 + 1/k)K/(2\lambda_H)$, canceling $K$ and $k$ into a basis-independent floor:
+
+$$
+\mathcal{A}_{\mathrm{neg}} \;\ge\; \frac{D(\lambda_H - \lambda_{\mathrm{low}})}{2\lambda_H (d - 1) t_{\max}}.
+$$
+
+- **Rank $d \le 4$ is universally excluded**: on the #35 crossing rectangle, $d \le 4$ forces the contact norm strictly above **$31.97519 > 8\pi$** (and rank $1$ traceless matrices vanish identically), for arbitrary eigenvectors and non-commuting mass bases.
+- **Exact rank $d = 5$ construction and Schur verification**: selecting any $5$ of the $6$ neutral directions across the two lowest mass levels (separated by a uniform gap from level 3) and setting $P = p(5vv^* - I)/4$ ($|v_i| = 1/\sqrt{5}$, eigenvalues $+p$ and fourfold $-p/4$) solves both matching equations at $p \in (1.90453, 1.93017)$ and $b \in (0.00172813, 0.00204114)$. The normalized negative radial diagonal lies in $(24.27098, 24.93094)$, and applying [@thm-ou-ch06-schur-minimum] to the $2 \times 2$ Schur checks of $8\pi I \pm \mathcal{A}$ certifies a positive unitarity margin $> 3.11842$ alongside all orthogonal channels.
+
+The minimal neutral traceless portal rank is therefore **exactly $5$** on the #35 zero window (and rises to **exactly $6$** on the #78 and #288 zero windows, where rank $5$ exceeds $25.8094 > 8\pi$—a direct link between Riemann zero selection and Higgs portal rank).
+
+A pair of transparent hand checks shows both how [@thm-ou-ch06-schur-minimum] certifies unitarity of the rank-five portal and why equal-depth electroweak vacua lock the cubic Higgs coupling rigidly to $3\times$ its Standard Model value:
+
+::: {.example #ex-ou-ch06-rank-five-and-cubic title="Hand Check: $2 \times 2$ Schur Unitarity of the Rank-Five Portal and the $3\times$ Equal-Depth Self-Coupling"}
+1. **Two-by-two Schur positivity for rank $5$**: on the five-dimensional neutral subspace, the flat traceless portal $P = p(5vv^* - I)/4$ ($|v_i| = 1/\sqrt{5}$) has eigenvalues $+p$ and fourfold $-p/4$. Equipping the four-dimensional negative complex subspace with the stabilizing quartic $[(p/4)^2/(4\lambda_H) + 0.0001]\|z_-\|^4$ produces a $2 \times 2$ coupled radial scattering block $\mathcal{A}$ between the Higgs radial state and the negative heavy trace state, whose heavy diagonal sits in $(24.271, 24.931)$. Eliminating the positive heavy block $C$ inside $8\pi I \pm \mathcal{A}$ via [@thm-ou-ch06-schur-minimum] leaves a boundary Schur complement $A - B C^{-1} B^{\mathsf{H}} > 3.11842 > 0$, certifying $\|\mathcal{A}\|_{\mathrm{op}} < 8\pi \approx 25.1327$; dropping to rank $4$ already pushes the heavy diagonal itself past $31.975 > 8\pi$, violating unitarity before off-diagonal mixing even enters.
+2. **Why equal-depth vacua force $3\times$ cubic and $13\times$ quartic Higgs self-couplings**: rewriting the minimal equal-depth doublet potential $U_0(s) = (m_H^2/v^4) s(s - v^2/2)^2$ in terms of the canonical radial Higgs fluctuation $r = v + h$ ($s = r^2/2$) yields
+
+   $$
+   U_0(r) \;=\; \frac{m_H^2}{8 v^4}\,r^2(r^2 - v^2)^2 \;=\; \frac{m_H^2}{8 v^4}(v + h)^2(2vh + h^2)^2.
+   $$
+
+   Expanding to fourth order in $h$ gives
+
+   $$
+   U_0(v + h) \;=\; \frac{1}{2}m_H^2 h^2 \;+\; \frac{3 m_H^2}{2 v}\,h^3 \;+\; \frac{13 m_H^2}{8 v^2}\,h^4 \;+\; \mathcal{O}(h^5).
+   $$
+
+   Comparing term-by-term against the Standard Model tree potential $V_{\mathrm{SM}}(v + h) = \frac{1}{2}m_H^2 h^2 + \frac{m_H^2}{2v}h^3 + \frac{m_H^2}{8v^2}h^4$, the third derivative $U_0'''(v) = 9m_H^2/v$ is **identically $3\times$** the Standard Model value and the fourth derivative $U_0^{(4)}(v) = 39m_H^2/v^2$ is **identically $13\times$**, with zero free parameters to soften the prediction.
+:::
+
+## 6.3 The Heat-Kernel Portal $P_t = e^{-tK/d}$ and Parameter-Free Species-Response Tests {#sec-ou-ch06-s03}
+
+Because uniform common portals fail in the high-inertia 172-layer regime, the most canonical geometric ansatz weights both leading and common portals by the shell's own **heat kernel**:
+
+$$
+P_t \;=\; \exp\!\left(-\frac{tK}{d}\right), \qquad F \;=\; f P_t, \qquad B \;=\; b P_t \qquad (p_i = e^{-t e_i},\; e_i = x_i/d).
+$$
+
+For any positive Hermitian common portal $B \succeq 0$ with operator norm $B_* = \|B\|_{\mathrm{op}}$ and mass-weighted mean $\bar{b} = \sum_i y_i(1 - l_i) B_{ii} / \sum_i y_i(1 - l_i)$, joint matching requires $B_*/\bar{b} > 2.15$. This cleanly partitions diffusion time $t$:
+
+1. **Short-time exclusion ($0 \le t \le 0.49$)**: evaluating at $t = 0.49$ gives $B_*/\bar{b} < 2.145925 < 2.15$; by monotonicity, the entire interval $0 \le t \le 0.49$ is excluded for **every** choice of leading Hermitian portal $F$.
+2. **Viable band ($8 \le t \le 16$) and the intrinsic arc ratio $t = \theta_{804}/\theta_{12} = 8.53511\ldots$**: subdividing $[8, 16]$ into $1600$ certified cells establishes bounded, unitary solutions at every point, with full infinite-tower contact norm $< 25.12 < 8\pi$. Crucially, the Behrend shell's intrinsic ratio of longest to shortest edge arc length
+
+   $$
+   t \;=\; \frac{\theta_{804}}{\theta_{12}} \;=\; 8.53511335934\ldots
+   $$
+
+   sits comfortably inside $[8, 16]$, yielding $f \in (0.3056, 0.3623)$, $b \in (0.0769, 0.1507)$, tail contribution $< 2.121 \times 10^{-6}$ above layer $172$, mass sensitivity $> 9.723 \times 10^{22}$, and arithmetic zero-recurrence at fixed parameters with positive lower natural density $> 2.0264 \times 10^{-59}$.
+3. **Two parameter-free tests**: varying the Higgs background $h_H = H^\dagger H$, define the tree-level species mass-response difference $A_i := \partial(m_{S,i}^2 - m_{C,i}^2)/\partial h_H = 4f e^{-t e_i}$. The common portal $b$ cancels identically in $A_i$, and taking ratios $A_i/A_j$ eliminates $f$ as well:
+   - **Two-level ratio discriminator**: between levels $1$ and $7$ ($0.11854 < e_7 - e_1 < 0.15417$), the intrinsic arc-ratio time $t = \theta_{804}/\theta_{12}$ predicts **$A_1/A_7 \in (2.750,\; 3.728)$** (precisely $(2.75042, 3.72783)$), cleanly disjoint from $t = 16$ where $A_1/A_7 \in (6.66350, 11.78302)$. Paired with the Dirichlet ground squared masses $E_{\mathrm{long}}, E_{\mathrm{short}}$ of the longest and shortest edges, it predicts the universal dimensionless identity $(E_{\mathrm{long}}^2/E_{\mathrm{short}})\log(A_i/A_j)/(m_j^2 - m_i^2) = 1$ (within $< 5.7 \times 10^{-12}$ on $h \le 10^{-6}$ grids).
+   - **Three-level convexity test against positive heat mixtures**: allowing any finite positive heat-kernel mixture $A(e) = \int_0^\infty e^{-te}\,\mathrm{d}\mu(t)$, pick $a = e_1 < b' = e_7 < c = e_{19}$ with exponent $p = (c-a)/(b'-a) \in (6.14645, 8.19706) > 1$. Setting $X = e^{-t(b'-a)}$ under the tilted probability measure gives, by strict convexity of $x^p$,
+
+     $$
+     \frac{A(c)}{A(a)} \;=\; \mathbb{E}[X^p] \;\ge\; \bigl(\mathbb{E}[X]\bigr)^p \;=\; \left[\frac{A(b')}{A(a)}\right]^p,
+     $$
+
+     with **equality if and only if $\mu$ is concentrated at a single diffusion time**. Two levels can always be mimicked by a two-point mixture, whereas three levels matching the single arc-ratio heat kernel within $0.001$ in log response already constrain the tilted distribution via Chebyshev's inequality to $\mathbb{P}(|t - \theta_{804}/\theta_{12}| \ge 2) < 0.05533$ and $\mathbb{P}(|t - \theta_{804}/\theta_{12}| \ge 3) < 0.02737$.
+
+The table below collects the entire ultraviolet Higgs-portal landscape—every exclusion boundary and every surviving corridor—before we turn to the low-energy collider pinch:
+
+| UV Portal Family | Crossing & Spectral Regime | Certified Verdict | Quantitative Criterion & Sensitivity |
+| :--- | :--- | :--- | :--- |
+| Zero-portal continuous matching | Two-tier vector-like two-loop crossing | $\lambda(\mu) \in (-0.061, -0.056)$ | Enforcing $\lambda(\mu) = 0$ forces $m_H \in 141.44\text{–}143.58\;\mathrm{GeV}$ |
+| Cross-candidate polynomial $P(z)$ | `#11661`, `#11934`, `#12207` | Nonnegative coeffs: $\deg \ge 4$ (2 zeros), ruled out (3 zeros) | Negative linear term restores unique positive quadratic ($> 0.006$) |
+| Species-traceless $(-F, 3F)$ | Arbitrary positive arc inertia $\rho > 0$ | Excluded across all perturbative crossings & clocks | Requires $\log(Q/m_{\min}) > 3.45$; forces $\Delta_{\mathrm{pole}} > 6.81 \times 10^{23}\;\mathrm{GeV}^2$ |
+| Released tracelessness $+ bI$ | Low-inertia 18 layers vs. high-inertia 172 layers | Viable at low inertia; uniform $b$ excluded at 172 layers | Low inertia: $f \approx 0.085, b \approx 0.0066$ (sensitivity $> 4 \times 10^{21}$) |
+| Neutral traceless leading $P$ | Spin-balanced all-scale equal-trace crossing | Exact minimal rank **$5$** (`#78/#288` shifts to $6$) | $d \le 4$ gives norm $> 31.975 > 8\pi$; $d = 5$ Schur margin $> 3.118$ |
+| Heat-kernel portal $P_t = e^{-tK/d}$ | High-inertia 172-layer full tower | Excluded $t \le 0.49$; viable $8 \le t \le 16$ | $t = \theta_{804}/\theta_{12} = 8.53511$ predicts $A_1/A_7 \in (2.750, 3.728)$ |
+
+## 6.4 The Low-Energy Collider Pinch: Equal-Depth Vacua, Gluon Fusion, $Z$ Width, CLEO, and OPAL {#sec-ou-ch06-s04}
+
+The final tightening of the vise comes from low energy itself. Re-balancing the one-loop gravitational and vacuum heat trace in the broken electroweak phase (developed in [Chapter 11](ch11-induced-gravity-and-dark-energy.md)) inserts light scalar partners at the top, five light-quark, and $W$-boson mass layers. Every one of these partners confronts precision collider measurements directly:
+
+1. **Equal-depth electroweak vacua: $3\times$ cubic Higgs self-coupling or a real singlet $\le 8.602\;\mathrm{TeV}$**.
+   Setting both the symmetric ($s = 0$) and broken ($s_0 = v^2/2$) tree-level vacua to zero fixes the minimal pure-doublet potential uniquely to degree $3$: $U_0(s) = (m_H^2/v^4) s(s - v^2/2)^2$. This predicts a **cubic Higgs self-coupling exactly $3\times$ the Standard Model tree value** ($13\times$ quartic, barrier $1.7612 \times 10^7\;\mathrm{GeV}^4$, wall tension $9.4915 \times 10^5\;\mathrm{GeV}^3$). Realizing equal-depth vacua via a renormalizable real singlet $S$ with $U(s, S) = \lambda(s - aS)^2 + g s(S - b)^2$ ($ab = s_0$) locks the product of mass eigenvalues to $2\lambda g v^4$: across $\lambda, g \le 4\pi$, the **second scalar mass is bounded above by $\le 8.602\;\mathrm{TeV}$** (e.g., $377.38\;\mathrm{GeV}$ and $1.298\times$ standard cubic coupling at $a = v, b = v/2, g = 2$, see [`ch39-two-electroweak-vacua.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-two-electroweak-vacua.py)).
+2. **Top color-sextet partner: $gg \to H$ jumps to $5.60\text{–}5.68\times$ SM, and suppressing it costs $> 38.25\;\mathrm{MeV}$ of Higgs width**.
+   At the top layer ($m_t = 172.5\;\mathrm{GeV}$), the minimal $12$ real scalar partners form one complex color sextet ($\mathbf{6}$, index $2T(\mathbf{6}) = 5$). Demanding one-loop thermal-trace cancellation across an open cutoff interval up to second Higgs derivative forces $\sum\dot{z}_s = 12\dot{z}_t$ and $\sum\dot{z}_s^2 = 12\dot{z}_t^2$, hence $\sum(\dot{z}_s - \dot{z}_t)^2 = 0$, locking the sextet's Higgs coupling strictly to $\dot{z}_t = 2m_t^2/v$. Across all $26$ light-color assignments ($20$ charged $+$ $6$ neutral), the top sextet adds $+1.794783$ to the gluon-fusion loop amplitude and pushes the leading-order **$gg \to H$ rate to $5.60\text{–}5.68\times$ Standard Model** ($5.595\text{–}5.681\times$). Attempting to cancel the amplitude back within **$1.10\times$ SM** using arbitrary light-scalar portals runs straight into Cauchy–Schwarz (via [@thm-ou-ch04-lagrange-gram]): **new tree-level Higgs pair-decay width must exceed $\Gamma_{\mathrm{light}} > 38.25\;\mathrm{MeV}$** ($> 44.44\;\mathrm{MeV}$ for $1.00\times$ SM), collapsing $\mathrm{VBF} \to H \to ZZ$ below $0.108$ in sharp conflict with ATLAS Run 2. Escaping this pinch requires either heavy-shell Higgs slopes $> 1.07 \times 10^{10}$ or at least $12$ extra neutral real scalars plus $3$ Dirac fields taking over the top slope (which still leaves a $1\;\mathrm{TeV}$ running-slope mismatch $> 0.23619$ if Higgs quartic cancellation is also demanded, see [`ch39-heat-top-higgs-gluons.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-heat-top-higgs-gluons.py)).
+3. **20 charged vs. 6 neutral light-color assignments: LEP $Z$ width and CLEO continuum $R$**.
+   With the top sextet fixed, enumerating all $5^5 = 3125$ minimal color assignments on the five light quark layers yields exactly **$20$ charged assignments** (one $\mathbf{3}$ and one $\mathbf{6}$ with $|Q| = 1/3$) that restore high-scale one-loop crossing ($\approx 8.02 \times 10^{15}\;\mathrm{GeV}$)—and **every one adds $17.59\text{–}17.75\;\mathrm{MeV}$** ($17.5920\text{–}17.7478\;\mathrm{MeV}$) to the tree-level $Z$ width (versus LEP's $2495.2 \pm 2.3\;\mathrm{MeV}$).
+
+   Moving the hypercharge budget into a $|Y| = 1$ color/weak singlet $S$ at the $W$-mass layer ($80.38\;\mathrm{GeV} > M_Z/2$) and placing electrically neutral real color octets ($\mathbf{8}$) on five of the six eligible light layers yields exactly **$6$ zero-direct-$Z$-width assignments**. At two loops, this hypercharge displacement leaves the pure-QCD beta coefficient untouched ($\Delta B_{33} = 0$, altering only $\Delta B_{11} = \frac{32}{25}$, $\Delta B_{13} = -\frac{32}{5}$, and $\Delta B_{31} = -\frac{4}{5}$), shifting the retrodicted $\alpha_s(M_Z)$ by $+0.00157$ across both candidate zeros. Both branches share identical one-loop ($\alpha_s(10\;\mathrm{GeV}) \approx 0.152$) and pure-QCD two-loop ($\approx 0.146$, sharing $\beta_0 = \frac{31}{6}$ and $\beta_1 = -\frac{199}{3}$) running, yet on the seven CLEO continuum hadronic cross-section points ($6.964\text{–}10.538\;\mathrm{GeV}$), **the neutral octet branch achieves $\chi^2 \approx 6.05$** ($6.0474 / 6.0520$) while **every one of the $20$ charged assignments sits at $\chi^2 \ge 13.54$** ($13.5372\text{–}29.2980$, strictly worse for any common acceptance efficiency $f \ge 0.34$, see [`ch39-colored-width-and-thresholds.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-colored-width-and-thresholds.py) and [`ch39-light-hypercharge-displacement.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-light-hypercharge-displacement.py)). Moreover, combining the rational Cayley folding mass law with the minimal top color sextet across all $26$ assignments and arbitrary light-quark slope signs pushes the width-independent gluon-fusion to $t\bar{t}H$ production ratio ($\sigma_{ggH}/\sigma_{t\bar{t}H}$, identical Higgs final states) to at least **$2.91467\times$ Standard Model**, providing a clean LHC discriminator immune to total-width cancellations.
+4. **OPAL $80.38\;\mathrm{GeV}$ charged-singlet bound and Majorana neutrino decay ($B_e + B_\mu \ge 50\%$)**.
+   All $6$ neutral-color assignments require the $80.38\;\mathrm{GeV}$, $|Q| = 1$ singlet scalar $S$ (whose LEP2 Born pair-production cross section at $206.6\;\mathrm{GeV}$ is $0.15946\;\mathrm{pb}$, matching a right-handed smuon of the same mass). OPAL's $98.0\;\mathrm{GeV}$ long-lived charged spin-zero limit **rules out any purely gauge-produced $S$ with lifetime exceeding $1\;\mu\mathrm{s}$**.
+
+   Prompt decay via a renormalizable dilepton operator requires an antisymmetric flavor coupling $\sum_{i<j} f_{ij} S^+(\nu_i \ell_j - \ell_i \nu_j) + \mathrm{h.c.}$ Charged-lepton Yukawas $Y_e$ alone cannot generate this tensor (blocked by flavor center symmetry), but combining the Majorana neutrino mass matrix $m_\nu$ with the same heavy shell mass $M$ via $f = M(A^\top \kappa - \kappa A)$ ($A = Y_e Y_e^\dagger$, $\kappa = 2m_\nu/v^2$) guarantees that every decay channel contains at least one electron or muon, forcing **$B_e + B_\mu \ge 50\%$** (under normal ordering with $m_1 = 0$, every CP phase gives $0.5 \le B_e + B_\mu < 0.50025$ and $\tau_S < 4.21 \times 10^{-19}\;\mathrm{s}$, landing inside the allowed projection of LEP dilepton reinterpretations while lifting vacuum re-balancing from $1002$ real scalars and $173$ Dirac fields to $1006$ and $174$, see [`ch39-charged-singlet-at-lep.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-charged-singlet-at-lep.py) and [`ch39-neutrino-flavor-and-heat.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-neutrino-flavor-and-heat.py)).
+
+Stepping back across all four collider probes reveals a remarkably tight cross-constraint: high-scale unification pushes the heavy spectrum to $10^{14}\text{–}10^{15}\;\mathrm{GeV}$, two-loop Higgs matching and $8\pi$ unitarity squeeze the portal into a narrow rank-5 or heat-kernel corridor, and broken-phase vacuum balancing pulls light partners directly into the line of fire of $gg \to H$, the $Z$ width, CLEO, and OPAL. No adjustment in one sector escapes cross-examination by the others.
+
+| Collider Probe | Sector & Mechanism | Certified Prediction / Exclusion Bound | Experimental Contrast & Surviving Narrow Gap |
+| :--- | :--- | :--- | :--- |
+| Equal-depth EW vacua | Minimal cubic doublet vs. renormalizable singlet $S$ | $3\times$ cubic Higgs coupling; or $m_S \le 8.602\;\mathrm{TeV}$ | Directly testable via di-Higgs and singlet searches at HL-LHC |
+| $gg \to H$ & Higgs width | Top color sextet locked to $\dot{z}_s = 2m_t^2/v$ | $gg \to H$ at $5.60\text{–}5.68\times$ SM; suppressing to $1.10\times$ adds $> 38.25\;\mathrm{MeV}$ | In stark tension with ATLAS Run 2; requires neutral top-slope fields or steep heavy slopes |
+| LEP $Z$ width & CLEO $R$ | 20 charged vs. 6 neutral light-color assignments | Charged adds $17.59\text{–}17.75\;\mathrm{MeV}$, CLEO $\chi^2 \ge 13.54$; neutral $\chi^2 \approx 6.05$ | Neutral octets shut off direct $Z$ width and beat all 20 charged assignments |
+| OPAL & LEP2 decays | $80.38\;\mathrm{GeV}$ charged singlet $S$ shared by all 6 neutral models | $\tau_S > 1\;\mu\mathrm{s}$ excluded by OPAL ($98.0\;\mathrm{GeV}$); antisymmetric decay $B_e + B_\mu \ge 50\%$ | Normal-ordering Majorana coupling yields $\tau_S < 4.21 \times 10^{-19}\;\mathrm{s}$; LHC $WW$ check open |
+
+::: {.problem #prob-ou-ch06-question1-open title="Question 1 Closing Milestone: First-Principles Origin of Thresholds, Higgs Self-Coupling, and the Electroweak Scale"}
+Synthesizing all exclusions and conditional constructions across Volume II ([Chapter 4](ch04-gauge-crossings-and-monotone-barriers.md) through this chapter), **Question 1 remains open as a zero-fitting deduction from a single minimal-arc master connection**, crystallized into four concrete mathematical and physical tasks:
+
+1. **Microscopic partition-function derivation of stiffness and matching**: derive effective gauge stiffness, parity splitting or step normalization, and finite scheme-conversion constants directly from the discrete partition function, resolving the $\Delta\alpha_s \sim 0.034$ gap between sharp and finite-momentum definitions.
+2. **Ultraviolet completion beyond the perturbative ceilings**: construct the nonperturbative or new microscopic dynamics taking over above the $3.9Q$ (pure-scalar) and $14Q\text{–}30Q$ (spin-balanced) perturbative ceilings, together with finite-width resummation of the eight heavy-vector two-loop on-shell cascades.
+3. **Dynamical origin of $v/M_P$, $\lambda(\mu)$, and portal rank**: eliminate the $10^{21\text{–}23}$ fine-tuning sensitivity in $\Delta_{\mathrm{pole}}$ by deriving the electroweak scale, ultraviolet Higgs quartic boundary, and rank-5/rank-6 neutral or heat-kernel portals $P_t$ directly from the master action.
+4. **Joint resolution of broken-phase vacuum balance and collider bounds**: reconcile broken-phase thermal trace cancellation with the $gg \to H$ ($5.6\times$ SM), Higgs width ($> 38.25\;\mathrm{MeV}$), LEP $Z$-width, CLEO, and OPAL/LHC constraints in a full global likelihood.
+:::
+
+Volume II has mapped every wall and every surviving corridor of Question 1. In Volume III (beginning with [Chapter 7](ch07-chiral-three-generations.md)), we carry the same 19-point Behrend shell and two-step mass operator into Questions 2 and 3: why nature exhibits exactly three chiral generations, how quark flavor hierarchies and CKM mixing emerge or stall, and how discrete baryon triality guards the proton.
