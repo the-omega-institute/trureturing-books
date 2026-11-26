@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "c0f14daed597e1fbab269cf9f08e0ef88cdfaec3",
-  "pinned_at": "2026-11-26T20:31:28Z",
+  "commit": "3edc246ad4c9566f2d2c7139ca15664b66359d43",
+  "pinned_at": "2026-11-26T21:03:09Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1047,18 +1047,21 @@
         "propext"
       ]
     },
+    "D5/S3/Analytic/Oscillation/MontgomeryCountDiscrepancy.concentrated_unit_band_profile_forces_unbounded_count_discrepancy": {
+      "module": "D5/S3/Analytic/Oscillation/MontgomeryCountDiscrepancy",
+      "name": "D5.S3.Analytic.Oscillation.MontgomeryCountDiscrepancy.concentrated_unit_band_profile_forces_unbounded_count_discrepancy",
+      "kind": "theorem",
+      "statement_id": "sha256:619b7e60c3b290f38fd75801e79d275e29cf481c44770c991bb4fcfeda23d03a",
+      "line": 493,
+      "signature": "theorem concentrated_unit_band_profile_forces_unbounded_count_discrepancy (S : Spectrum) (hS : ConcentratedUnitBandProfile S) (D H₀ : ℝ) : ∃ H : ℝ, H₀ ≤ H ∧ D < |(S.N H : ℝ) - H / (2 * Real.pi) * (Real.log (H / (2 * Real.pi)) - 1)|"
+    },
     "D5/S3/Analytic/Oscillation/MontgomeryCountDiscrepancy.unit_band_profile_forces_unbounded_count_discrepancy": {
       "module": "D5/S3/Analytic/Oscillation/MontgomeryCountDiscrepancy",
       "name": "D5.S3.Analytic.Oscillation.MontgomeryCountDiscrepancy.unit_band_profile_forces_unbounded_count_discrepancy",
       "kind": "theorem",
-      "statement_id": "sha256:94a0b3668a1ed10f84355c7a6035c1e631089afde619f9b975cec1a13782e967",
-      "line": 456,
-      "signature": "theorem unit_band_profile_forces_unbounded_count_discrepancy (S : Spectrum) (hS : UnitBandProfile S) (D H₀ : ℝ) : ∃ H : ℝ, H₀ ≤ H ∧ D < |(S.N H : ℝ) - H / (2 * Real.pi) * (Real.log (H / (2 * Real.pi)) - 1)|",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ]
+      "statement_id": "sha256:619b7e60c3b290f38fd75801e79d275e29cf481c44770c991bb4fcfeda23d03a",
+      "line": 485,
+      "signature": "theorem unit_band_profile_forces_unbounded_count_discrepancy (S : Spectrum) (hS : UnitBandProfile S) (D H₀ : ℝ) : ∃ H : ℝ, H₀ ≤ H ∧ D < |(S.N H : ℝ) - H / (2 * Real.pi) * (Real.log (H / (2 * Real.pi)) - 1)|"
     },
     "D5/S3/Analytic/Oscillation/SpectrumCommensurateAlignment.exists_logarithmic_full_alignment": {
       "module": "D5/S3/Analytic/Oscillation/SpectrumCommensurateAlignment",
