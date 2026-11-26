@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "2d6bf32ffe344031b86e183ad05883d5fc40d904",
-  "pinned_at": "2026-11-26T07:23:41Z",
+  "commit": "7c33b262cb56f170ce78fbf0838006c2d75de313",
+  "pinned_at": "2026-11-26T08:32:02Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -13736,6 +13736,19 @@
       "statement_id": "sha256:0c230a6759a124696a2512db419424da8cec03eefde3f5514acdc29e7f51bce3",
       "line": 143,
       "signature": "theorem golden_right_half_strip_implies_rh (hRight : forall rho : Complex, riemannZeta rho = 0 -> (1 : Real) / 2 < rho.re -> rho.re < 1 -> False) : RiemannHypothesis"
+    },
+    "D5/S3/Weil/ZetaExplicit/LandauLeftVertical.norm_left_vertical_integral": {
+      "module": "D5/S3/Weil/ZetaExplicit/LandauLeftVertical",
+      "name": "D5.S3.Weil.ZetaExplicit.LandauLeftVertical.norm_left_vertical_integral",
+      "kind": "theorem",
+      "statement_id": "sha256:d4dad2a5823c28a0c616a2123871c0c07558f4789a27d3782478c5b101875015",
+      "line": 164,
+      "signature": "theorem norm_left_vertical_integral {x V : ℝ} (hx : 1 < x) (hV : 1 ≤ V) : ‖∫ t in 1..V, (x : ℂ) ^ ((-1 / 4 : ℂ) + t * I) * (-logDeriv riemannZeta ((-1 / 4 : ℂ) + t * I))‖ ≤ let logBase",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Weil/ZetaExplicit/LandauRightVertical.norm_right_vertical_integral": {
       "module": "D5/S3/Weil/ZetaExplicit/LandauRightVertical",

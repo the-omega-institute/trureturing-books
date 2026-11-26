@@ -530,7 +530,22 @@ $$
 Integrate the von Mangoldt series term by term on $\operatorname{Re}s=c>1$. Bound the nearest integer term by the interval length, which also covers exact resonance. When the nearest integer is $1$, its coefficient $\Lambda(1)$ vanishes. For the other integers in $[x/2,2x]$, the logarithmic gap $|\log x-\log n|$ is at least $|x-n|/(2x)$. Two harmonic sums bound the reciprocal distances on either side of the nearest integer. Beyond this interval the gap is at least $1/2$, and an integral test bounds the absolute series. The moving line gives $x^c\le 3x$. The full proof is checked by the Lean kernel.
 :::
 
-The right edge is oriented upward, so $ds=i\,du$. Its contribution to the contour integral of $\zeta'/\zeta$ with normalization $1/(2\pi i)$ equals the integral in the theorem multiplied by $-1/(2\pi)$. Ford and Zaharescu keep the oscillatory term at the nearest prime power. The theorem bounds the magnitude of the whole edge. After division by $\sqrt{x}$, the second term has order $e^{|t|/2}(1+|t|)^2$. Formalizing the full zero-sum formula still requires the other contour edges, the residues, and a transfer from heights avoiding zeros to arbitrary cutoffs. [Ford–Zaharescu, proof of Lemma 1](https://arxiv.org/abs/math/0405459v2)
+The right edge is oriented upward, so $ds=i\,du$. Its contribution to the contour integral of $\zeta'/\zeta$ with normalization $1/(2\pi i)$ equals the integral in the theorem multiplied by $-1/(2\pi)$. Ford and Zaharescu keep the oscillatory term at the nearest prime power. The theorem bounds the magnitude of the whole edge. After division by $\sqrt{x}$, the second term has order $e^{|t|/2}(1+|t|)^2$. [Ford–Zaharescu, proof of Lemma 1](https://arxiv.org/abs/math/0405459v2)
+
+::: {.theorem #thm-ch34-landau-left-edge title="Left vertical edge of the Landau contour" lean="D5/S3/Weil/ZetaExplicit/LandauLeftVertical.norm_left_vertical_integral"}
+For real $x>1$ and $V\ge1$, write $s=-1/4+iu$. Then
+
+$$
+\left|\int_1^V x^s\frac{-\zeta'(s)}{\zeta(s)}\,du\right|
+\le x^{-1/4}\left(80(V-1)+\frac{20(1+\log V)}{\log x}\right).
+$$
+:::
+
+::: proof
+The zeta functional equation gives $-\zeta'(s)/\zeta(s)=\log(3/4+iu)+r(u)$ with $|r(u)|\le80$, by the digamma recurrence, the Binet bound and the absolutely convergent series on the reflected line $\operatorname{Re}(1-s)=5/4$. Factor $x^s$ into $x^{-1/4}e^{iu\log x}$. The integral of the remainder costs at most $80(V-1)$ before scaling. Integrate the logarithm by parts using the primitive $e^{iu\log x}/(i\log x)$. The logarithm derivative has norm at most $1/u$, and the two endpoints together with the integrated derivative give the second term. The Lean proof is unconditional.
+:::
+
+The left edge is oriented downward, so its normalized contribution to the contour integral with $\zeta'/\zeta$ is the integral in the theorem times $1/(2\pi)$. With $x=e^{|t|}$, division by $\sqrt{x}$ yields a term of order $V$ and a term bounded by a constant times $(1+\log V)/|t|$. The zero-sum deduction still requires the horizontal edges, the residue identity and the passage to arbitrary cutoff heights.
 
 For fixed $b>0$, the four terms in brackets are together at most $(7+1/b)T$ on $b/\log T\le|t|\le\log T$ when $T$ is sufficiently large and $1<V\le T$. Indeed $\log T\le T^{1/4}$ eventually, $e^{|t|/2}\le\sqrt T$, and $\log V/|t|\le(\log T)^2/b$. Apply this to $V=T$ and $V=3T/4$. Their difference has norm at most $2C(7+1/b)T$, which is eventually at most $T\log T/(32\pi)$. The multiplicity count on $(3T/4,T]$ is at least $T\log T/(16\pi)$.
 
