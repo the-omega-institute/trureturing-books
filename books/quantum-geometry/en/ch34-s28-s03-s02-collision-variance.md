@@ -614,6 +614,69 @@ For each fixed $A>1$, the normalized integral through $A\log T_n$ tends to the c
 
 The ordinary Montgomery pair-correlation conjecture would supply the long-band upper bound. The result includes $\eta_n\log T_n\to a$ for $0<a<\infty$. At finer resolutions the diagonal contribution grows relative to the bin width, as the next section explains. [Ford–Soundararajan–Zaharescu, §1](https://arxiv.org/abs/0805.2745v3)
 
+### Commensurate spectra with the same unit-band profile
+
+The upper bound in [@thm-ch34-zeta-harmonic-critical-collision-limit] controls frequencies beyond the unit band. One spectrum can match the two-term zero count with $O(\log\log H)$ error and the full unit-band Lorentz profile, while its normalized critical collision mass eventually exceeds the Gaussian constant by a fixed amount. The comparison uses one spectrum at every real truncation height.
+
+For a cyclic group with $M>0$ sites, choose a set $A$ of $k$ Fourier columns normalized to have unit norm. Assign a $k$-site subset $X$ the squared modulus of the corresponding row minor. Column orthogonality makes these probabilities sum to one. At $r\in\mathbb Z/M\mathbb Z$ let $S_X(r)=\sum_{x\in X}\exp(2\pi i r x/M)$.
+
+::: {.theorem #thm-ch34-cyclic-projection-second-moment title="Second moment of a cyclic projection ensemble" lean="D5/S3/Analytic/Oscillation/CyclicProjectionMoments.cyclic_projection_second_moment"}
+For every such choice of $M$, $A$, and $r$,
+
+$$
+\mathbb E|S_X(r)|^2=k+k^2\mathbf1_{\{r=0\}}-|A\cap(A+r)|.
+$$
+
+:::
+
+::: proof
+The diagonal site pairs contribute $k$. For distinct sites the inclusion probability is the product of the diagonal projection entries minus the squared modulus of the off-diagonal entry. The first term, summed over all site pairs, contributes $k^2$ at frequency zero. In the second term, expand the projection entries over the selected columns. Summation over each site cancels every pair of columns whose difference is not $r$. On equal sites the difference of the two projection products vanishes, so each product can be summed over all ordered pairs. The full proof is checked by the Lean kernel.
+:::
+
+An infinite comparison can use this cyclic projection law separately on each interval $I_j=(y_j,y_{j+1}]$, with $y_{j+1}=y_j+\lceil(\log y_j)^4\rceil$ and $y_0$ sufficiently large. Put $F(H)=\frac{H}{2\pi}(\log(H/(2\pi))-1)$, $L_j=\log y_{j+1}$, and let $R_j$ be the smallest power of two at least $L_j$. The available sites in $I_j$ lie on $h_j\mathbb Z$ with $h_j=2\pi/(3R_j)$. If there are $M_j$ sites, select $k_j=\lfloor F(y_{j+1})\rfloor-\lfloor F(y_j)\rfloor$ consecutive columns on that cycle. This fixes the count in the full block. The site count and the rank each have order $L_j^5$. Write $p_j=k_j/M_j$ and $a_j=2\pi p_j/h_j=L_j+O(1)$. The densities stay bounded away from zero and satisfy $p_j\le 1/3+o(1)$.
+
+For a prefix of $m$ sites the count has mean $m p_j$. Its variance is the sum of the squared projection entries from the prefix to its complement. There are at most $4u$ ordered crossing pairs at cyclic distance $u\ge1$, and each squared entry is at most $1/(4u^2)$ by the geometric-series formula for the consecutive columns. Thus the variance is $O(\log M_j)$, uniformly over prefixes. The count is distributed as a sum of independent Bernoulli variables from the restricted kernel. Bernstein's inequality and a union bound give error $O(\log M_j)$ for all prefixes with probability tending to one. For $H\in I_j$, the fraction of sites through $H$ differs from the corresponding length fraction by $O(1/M_j)$. Interpolating $F$ linearly across $I_j$ costs $O((\log y_j)^8/y_j)$ since $F''(x)=1/(2\pi x)$. Summing the completed counts by telescoping gives $N(H)=F(H)+O(\log\log H)$ at all real cutoffs. [Restricted determinantal counts](https://arxiv.org/abs/math/0503110)
+
+For the Lorentz statistic in a full block write $M=M_j$, $p=p_j$, $h=h_j$, $K(d)=M^{-1}\sum_{a=0}^{k_j-1}e^{2\pi iad/M}$, and $w_h(d)=4/(4+h^2d^2)$. The expectation is
+
+$$
+p^2\sum_{|d|<M}(M-|d|)w_h(d)e^{ihdt}
++k_j-\sum_{|d|<M}(M-|d|)w_h(d)|K(d)|^2 e^{ihdt}.
+$$
+
+In the first sum, replacing the triangular coefficient by $M$ on all integers costs $O(h^{-2}\log M)=o(k_j)$. The infinite series is the periodization $(2\pi/h)\sum_{\ell\in\mathbb Z}e^{-2|t-2\pi\ell/h|}$, by its Fourier coefficients. Through $|t|\le3L_j/2$, the central term gives $k_j a_j e^{-2|t|}$ and the other periods contribute $o(k_j)$. In the last sum, the normalized coefficients converge in absolute sum to the squared Fourier coefficients of the indicator of $[0,p]$ on the circle. For fixed $d$ this follows from the Riemann sum and $h\to0$. The bound $O(d^{-2})$ controls the coefficients through $|d|\le M/2$. The rest contribute $O(h^{-2}/M^2)$ using $\sum_{d\bmod M}|K(d)|^2=p$. The circular autocorrelation equals $(p-|ht/(2\pi)|)_+$ here, since $|ht/(2\pi)|\le1/2$ and $p<1/2$ for all sufficiently large $j$. The expectation divided by $k_j$ is therefore $a_j e^{-2|t|}+\min(1,|t|/a_j)+o(1)$ uniformly. [Squared-minor inclusion probabilities](https://www.numdam.org/item/10.1007/s10240-003-0016-0/)
+
+The pair statistic has Boolean-cube Lipschitz constant $O(L_j)$ by the row sum of $w_h$. Homogeneous strong Rayleigh concentration at deviation $k_j/L_j$ bounds the failure probability at any one time by $2\exp(-c k_j/L_j^4)$. The exponent $k_j/L_j^4$ has order $L_j$. A mesh of width $L_j^{-20}$ on $[-3L_j/2,3L_j/2]$ has polynomially many points, so the probability of a deviation at any mesh point tends to zero. The derivative is at most $(y_{j+1}-y_j)k_j^2=O(L_j^{14})$, so the mesh estimates extend uniformly in time. Intersect this event with the prefix count event and choose one subset in each block. [Concentration for strong Rayleigh measures](https://arxiv.org/abs/1108.0687v2)
+
+At height $H$, all sites through $H$ lie on the lattice for the current block since the denominators $R_j$ divide their successors. Every interval of length one has $O(\log H)$ available sites, so the absolute Lorentz row sum is $O(\log H)$. Counting pairs across one seam by unit intervals gives $O(\log^3 H)$, using the bound $O(\log H/(1+d))$ for the weighted sum of sites across the seam at distance $d$. There are $O(H/\log^4 H)$ seams. Below $\sqrt H$ they have spacing at least one, and above $\sqrt H$ spacing at least $(\log H/2)^4$. The top partial block has $O(\log^5 H)$ sites. The seams and partial block each contribute $o(N(H))$. The same row bound discards all blocks through the one meeting $H/\log^3 H$ at cost $o(N(H))$. In the remaining blocks $a_j/\log H\to1$ uniformly and their counts sum to $N(H)(1+o(1))$. Hence the normalized pair sum is
+
+$$
+\frac{G_H(t)}{N(H)}
+=\bigl(1+o(1)\bigr)\log H\,e^{-2|t|}+\frac{|t|}{\log H}+o(1)
+\qquad (|t|\le\log H)
+$$
+
+uniformly, with the same two terms as the zeta unit-band theorem. [Unit-band formula](https://arxiv.org/abs/2306.04799)
+
+As a check on the distinction between pointwise and averaged bounds, let $P_H=2\pi/h_j$ be the common period at $H\in I_j$. Over any full period, each off-diagonal character integrates to zero, since distinct lattice sites differ by a nonzero integer multiple of $h_j$. The mean of $G_H$ over the period is therefore exactly $N(H)$. Nonnegativity of the Lorentz statistic then bounds its mean over an interval of length comparable to $\log H$ by $O(N(H))$, even in intervals containing the recurrence.
+
+At $Y_j=y_{j+1}$ the pair statistic repeats its value at zero at time $2\pi/h_j=3R_j$, which lies between $3\log Y_j$ and $6\log Y_j$. To see what this does to the hard-band collision mass, use the same positive harmonic weights as for the zeta spectrum, now on the selected sites. For sufficiently large $n$, let $T_n=Y_j$ be the largest block endpoint at most $n$ and put $\eta_n=h_j/8$. Since the block lengths are $O(\log^4 n)$ near $n$, one has $T_n/n\to1$. The variance is $V_n=P_2(T_n)/2$, with $s_n=\sqrt{nV_n}$. Two fixed distinct sites give $V_n\gtrsim W(T_n)^{-2}$, and the count bound gives $W(T_n)=O(\log^2 T_n)$ by summation by parts. Thus $s_n/h_j\to\infty$. The lattice variance lower bound integrates $(1-V_nt^2/2)_+^{2n}$ over a period with factor $h_j/(2\pi)$. On $|t|\le1/(2s_n)$ the integrand is at least $3/4$ by Bernoulli's inequality. It follows that the normalized collision mass is eventually at least $3/\pi>1/\sqrt\pi$, although $\eta_n\log T_n\in(\pi/24,\pi/12]$, $(\log T_n)^2/n\to0$, and $\eta_n/s_n\to0$. The infinite comparison is a written proof about the selected sites. The zeta prime-sum identities impose further arithmetic conditions on actual ordinates.
+
+#### The unit band rules out bounded count discrepancy
+
+A uniformly bounded error $|N(H)-F(H)|$ would contradict the unit-band profile. To see this, let $a=\log H/(2\pi)$ and take a real Schwartz test function $g$ with Fourier support inside $(-1,1)$, using the Fourier convention $\widehat g(\alpha)=\int g(u)e^{-2\pi i\alpha u}\,du$. The smoothed count at $x$ is $C_H(x)=\sum_{\gamma\le H}g(a(x-\gamma))$. Fourier inversion of $g*\widetilde g$, with $\widetilde g(u)=g(-u)$, tests the profile against $|\widehat g|^2$. The peak $\log H\,e^{-2|\alpha|\log H}$ has asymptotic unit mass and contributes $|\widehat g(0)|^2$.
+
+Under bounded discrepancy there are uniformly bounded numbers of points per unit cell in the scaled coordinate $a\gamma$, since $F'(x)\le a+O(1)$ through the cutoff. Accordingly, dropping the Lorentz weight from the normalized pair sum costs $O(a^{-2})$. Each row of the error is bounded by summing the Schwartz suprema of $(1+u^2)|(g*\widetilde g)(u)|$ over the cells, using $1-4/(4+v^2)\le v^2/4$. The unweighted pair sum is $a\int_{\mathbb R} C_H^2$, and $N(H)/(aH)\to1$. The contribution outside $[0,H]$ to $\int(|C_H|+C_H^2)$ is $o(H)$. The $O(\log H)$ sites within distance one of the endpoints give a bounded exterior $L^1$ contribution and all other sites contribute only the Schwartz tail beyond scaled distance $a$. The same cell bound gives a uniform supremum of $|C_H|$, which controls the exterior $L^2$ contribution. Also $H^{-1}\int C_H\to\int g$. Combining these facts gives
+
+$$
+\lim_{H\to\infty}\frac1H\int_0^H\left(C_H(x)-\int g\right)^2\,dx
+=\int_{\mathbb R}|\alpha|\,|\widehat g(\alpha)|^2\,d\alpha .
+$$
+
+On the other hand, integrating by parts against the cumulative count error bounds $C_H$ minus the convolution with the truncated density $F'$ by $D_*\|g'\|_1$, where $D_*$ is a bound independent of $g$ and $H$. One may set the reference density to zero below a fixed height exceeding $2\pi$, which changes its cumulative discrepancy by a bounded amount. The convolution of the reference density with $g(a\,\cdot)$ tends to $\int g$ in mean square over $[0,H]$. Indeed $F'/a\to1$ uniformly on each fixed interior fraction of $[0,H]$, and the truncated normalized density is bounded up to the edges. The variance limit is therefore at most $D_*^2\|g'\|_1^2$.
+
+Choose $g_R=\mathbf1_{[-R,R]}*\phi$ with a nonnegative unit-mass Schwartz $\phi$ of Fourier support inside $(-1,1)$. Such a $\phi$ is obtained by normalizing the squared modulus of the inverse transform of a nonzero smooth bump supported inside $(-1/2,1/2)$. Then $\|g_R'\|_1\le2$. The integral on the right is $\pi^{-2}\log R+O(1)$, by inserting $\widehat g_R(\alpha)=\sin(2\pi R\alpha)\widehat\phi(\alpha)/(\pi\alpha)$. Below $1/R$ the integral is bounded, and on any fixed neighborhood of zero the replacement $|\widehat\phi|^2=1+O(|\alpha|)$ costs a bounded error. The cosine part of $2\sin^2(2\pi R\alpha)=1-\cos(4\pi R\alpha)$ integrates to a bounded term from $1/R$ to the end of that neighborhood. Taking $H\to\infty$ at fixed $R$ and then $R\to\infty$ contradicts the uniform variance bound. [Fourier variance for sine-kernel statistics](https://arxiv.org/abs/math/0006037v3)
+
 ### Occupation diagonal lower bound for finite support
 
 For finite support, the noncentral contribution also has a constraint independent of the specific frequency values. Suppose $w_j\ge0$ and $\sum_jw_j=1$, and let an occupation vector $m$ of degree $p$ satisfy $\sum_jm_j=p$. Write $c_m$ for its actual multinomial weight. Choose an index $j_0$, whose count is determined by the other counts and the total degree. For positive radii $r_j$ on the remaining coordinates define

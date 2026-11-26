@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "cab15fbfced760776da5da7e325eecefd58b1f1b",
-  "pinned_at": "2026-11-26T16:25:12Z",
+  "commit": "753470c62ab22ae24dd8aa033a5ab26eaa70fe05",
+  "pinned_at": "2026-11-26T17:06:03Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1033,6 +1033,19 @@
       "statement_id": "sha256:60d38eaca300529aec21cb61b7f4d861c7f369512f0b094c97bc603dc98133c0",
       "line": 76,
       "signature": "theorem binomial_hasSum (u : ℝ) (hu0 : 0 ≤ u) (hu1 : u < 1) : HasSum (fun n : ℕ => b n * u ^ n) (1 / Real.sqrt (1 - u))"
+    },
+    "D5/S3/Analytic/Oscillation/CyclicProjectionMoments.cyclic_projection_second_moment": {
+      "module": "D5/S3/Analytic/Oscillation/CyclicProjectionMoments",
+      "name": "D5.S3.Analytic.Oscillation.CyclicProjectionMoments.cyclic_projection_second_moment",
+      "kind": "theorem",
+      "statement_id": "sha256:899103e959ad09dbebac0958459b965c509104cf8ef9afb1fb13e3cf8a7f4afe",
+      "line": 266,
+      "signature": "theorem cyclic_projection_second_moment (a : Fin k ↪ ZMod m) (s : ℂ) (hs : star s * s = (m : ℂ)⁻¹) (r : ZMod m) : let U",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Analytic/Oscillation/SpectrumCommensurateAlignment.exists_logarithmic_full_alignment": {
       "module": "D5/S3/Analytic/Oscillation/SpectrumCommensurateAlignment",
