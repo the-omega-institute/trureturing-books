@@ -1,0 +1,24 @@
+{
+  "title": "Windows on the Zeros",
+  "title_zh": "零点窗口",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "0:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · deterministic canvas",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [],
+  "outputs": {
+    "narrated_720p": "omega-unification_zero-windows_720p_narrated.mp4",
+    "cover": "omega-unification_zero-windows_cover.jpg"
+  }
+}
