@@ -213,6 +213,24 @@
 第 1 款将 $\lVert(\sum_i w_i A_i)\eta\rVert^2$ 按复内积双线性展开，并与 $\frac{1}{2}\sum_{i,j} w_i w_j \lVert(A_i - A_j)\eta\rVert^2$ 逐项对消交叉内积即得，全程不要求 $A_i$ 彼此对易。第 2 款先由 $E_i$ 的单调下界消去剪切算符，再用第 1 款控制 $\lVert a\eta\rVert^2 \le M\mathscr{A}\lVert\eta\rVert^2$，结合自伴平方根关系 $\lVert B\eta\rVert^2 = \operatorname{Re}\langle\eta, a\eta\rangle \le \lVert\eta\rVert\lVert a\eta\rVert$ 消去 $\lVert\eta\rVert$ 即得时钟下界；在 $B\eta \neq 0$ 时两边消去 $\lVert B\eta\rVert^2$ 并平方得面积上限。第 3 款在纯量情形合并拉格朗日平方差与非负和 $\sum_i w_i \rho_i \delta_i$，由正权重下非负和为零等价于逐项为零锁死充要刚性。完整证明由 Lean 内核检查。
 :::
 
+此外，针对非对易时钟算符在有限阈值 $\ell > 0$ 下谱投影 $P_\ell$ 是否非空及其秩下界（不借助经典 Wigner 启发式），内核验证了以下完全非对易的次水平投影秩界定理：
+
+::: {.theorem #thm-ch39-noncommuting-clock-sublevel title="非对易正算符次水平投影的补空间能量下界、试探态质量与秩界" lean="D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel.sublevelProjection_energy_lower_bound, D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel.sublevel_rank_of_trial_energy, D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel.sublevel_nonempty_and_rayleigh_rank, D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel.noncommuting_sum_sublevel_rank_bound"}
+在任意复希尔伯特空间 $\mathcal{H}$ 上，设 $T \in \mathcal{B}(\mathcal{H})$ 为正算符（$T \ge 0$），对任意阈值 $\ell > 0$ 记次水平谱投影为 $P_\ell = \mathrm{starProjection}(\ker (T - \ell\mathbf{1})_+)$：
+
+1. **不变分裂与补空间严格能量超额**（[`sublevelProjection_energy_lower_bound`](lean:D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel.sublevelProjection_energy_lower_bound)）：$T$ 约化 $\ker(T - \ell\mathbf{1})_+$ 与其正交补，对任意 $x \in \mathcal{H}$ 有 $\ell\lVert(\mathbf{1} - P_\ell)x\rVert^2 \le \operatorname{Re}\langle x, T x\rangle$，且只要 $(\mathbf{1} - P_\ell)x \neq 0$ 不等号严格成立。
+2. **试探正交规范族的次水平投影质量与秩下界**（[`sublevel_rank_of_trial_energy`](lean:D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel.sublevel_rank_of_trial_energy)、[`sublevel_nonempty_and_rayleigh_rank`](lean:D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel.sublevel_nonempty_and_rayleigh_rank)）：对任意 $k$ 个正交规范试探态 $u_1, \dots, u_k$ 及总试探能量 $S = \sum_{j=1}^k \operatorname{Re}\langle u_j, T u_j\rangle$，恒有
+   $$
+   k - \frac{S}{\ell} \;\le\; \sum_{j=1}^k \lVert P_\ell u_j\rVert^2,
+   $$
+   且若 $\operatorname{ran} P_\ell$ 维数 $r < k$，必有严格下界 $\ell(k - r) < S$；特别地，只要 $k > 0$ 且 $S \le k\ell$ 即保证 $\operatorname{ran} P_\ell \neq \{0\}$，而任何满足瑞利商 $\operatorname{Re}\langle v, T v\rangle \le \ell\lVert v\rVert^2$ 的试探子空间 $W$ 上 $P_\ell$ 单射且 $\dim W \le \dim\operatorname{ran} P_\ell$。
+3. **非对易正和时钟算符直接应用**（[`noncommuting_sum_sublevel_rank_bound`](lean:D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel.noncommuting_sum_sublevel_rank_bound)）：对任意有限指标集 $s$ 与无需两两对易的算符族 $A_i, E_i$（$E_i \ge 0$），取 $T = \sum_{i\in s} A_i^* E_i A_i$ 与 $S = \sum_{j=1}^k \sum_{i\in s} \operatorname{Re}\langle A_i u_j, E_i A_i u_j\rangle$，上述投影质量下界与缺秩严格能量界无条件成立。
+:::
+
+::: proof
+第 1 款利用连续泛函演算分解 $T - \ell\mathbf{1} = S_+ - S_-$（$S_+ S_- = 0$）证得 $S_-$ 在 $(\ker S_+)^\perp$ 上恒为零，从而在正交补非零向量上导出严格正的 $S_+$ 二次型超额。第 2 款对 $u_j$ 逐项求和并由勾股分解 $\lVert P_\ell u_j\rVert^2 + \lVert(\mathbf{1} - P_\ell)u_j\rVert^2 = 1$ 得质量下界；若 $\dim\operatorname{ran} P_\ell = r < k$，由贝塞尔不等式 $\sum_j \lVert P_\ell u_j\rVert^2 \le r$ 推出至少存在一个 $(\mathbf{1} - P_\ell)u_j \neq 0$，触发严格超额 $\ell(k - r) < S$；瑞利子空间上反设 $P_\ell v = 0$ 亦直接与严格超额矛盾。第 3 款由合同保正性将第 2 款直接应用于 $T = \sum_{i\in s} A_i^* E_i A_i$。完整证明由 Lean 内核检查。
+:::
+
 最后，我们在同一张无折行单行单元格基准表中，把深空静止、亚光速巡航、致密中子星表面、等效原理双负载共标度以及黑洞事件视界五档典型工况的预算分账一次算穿：
 
 ::: {.example #ex-ch39-four-regime-clock-budget-calculus title="四类宇宙参考工况及复合双负载下的普适主频勾股分账手算表"}

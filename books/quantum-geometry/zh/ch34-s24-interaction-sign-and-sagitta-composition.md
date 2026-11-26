@@ -145,6 +145,29 @@ $$
 第 1 款在任意正交规范基上用一致下界把有限子集基数压在 $\operatorname{Re}(\operatorname{Tr} W)/c$ 之下，从而导出基有限与 `Module.finrank` 上界（投影情形限制于 $\operatorname{ran} p$ 的正交规范基）。第 2 款显式构造 $\mathbb{N} \times \mathrm{Fin}\,r \simeq \mathbb{N}$ 的分块循环双射（每组含 $1$ 个奇数指标与 $r - 1$ 个偶数指标），直接计算两种截断的基数与配对核之和。第 3 款在每条有限纤维上直接展开 $\sum_a v_a(\mathbf{1}_I(a) - p) = 0$ 与 $\sum_a |v_a(\mathbf{1}_I(a) - p)| = 2p(1-p)$，再由非负项级数的乘积可和性推出充要等价。第 4 款以 $p$-级数 $\sum (k+1)^{-2} \le 2$ 控制绝对收敛与一致上界，并对有限和逐项三次求导得 $-i H_N$ 后应用调和级数发散定理。完整证明由 Lean 内核检查。
 :::
 
+进一步，当对闭合截面振幅补充显式有限正性锚点 $F_0$ 时，上述无限维循环重排障碍可严格修复为如下定量维数封顶与单侧尾模定理：
+
+::: {.theorem #thm-ch34-quantitative-closed-cut-repair title="循环并最优方差界、有限正性锚点维数封顶与不连通联合截面单侧尾模" lean="D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound.optimal_cycle_union_area_variance_bound, D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound.finite_and_card_fiber_le_of_eventually_positive, D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound.finrank_le_of_eventually_positive_cycle_cuts, D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound.disjoint_joint_cut_one_sided_tail_bound"}
+1. **循环并加权面积方差的精确最优上界**（[`optimal_cycle_union_area_variance_bound`](lean:D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound.optimal_cycle_union_area_variance_bound)）：对非空有限指标集 $s$、子集 $I \subseteq s$、权重 $w_i \in [c, 1]$（$c > 0$）、带内偏差 $\le d$ 与带外偏差 $\le D$（$0 \le d \le D$），若带外基数满足 $|s \setminus I|\,r \le |s|$（$r \ge 1$），则加权均方偏差严格满足
+   $$
+   \frac{\sum_{i\in s} w_i (\mathrm{val}_i - s_0)^2}{\sum_{i\in s} w_i} \;\le\; d^2 + \frac{D^2 - d^2}{1 + c(r - 1)},
+   $$
+   且该常数对 $1$ 个权 $1$ 偏差 $D$ 的带外项配 $r - 1$ 个权 $c$ 偏差 $d$ 的带内项精确取等。
+2. **有限正性锚点下的谱带容量与总维数定量上界**（[`finite_and_card_fiber_le_of_eventually_positive`](lean:D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound.finite_and_card_fiber_le_of_eventually_positive)、[`finrank_le_of_eventually_positive_cycle_cuts`](lean:D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound.finrank_le_of_eventually_positive_cycle_cuts)）：设复希尔伯特空间 $\mathcal{H}$ 具有分入 $m$ 个谱带的希尔伯特基、权重 $w_i \in [c, 1]$、满足 $K^2(d^2 + D^2/(rc)) \le \delta^2/4$（$r \ge 2$）的助推方差上界；若存在有限锚点集 $F_0$（记 $q = |F_0|$、$q_j = |F_0 \cap \mathrm{band}_j|$）使得对一切含 $F_0$ 的非空有限截断 $F$ 均有闭合振幅 $\mathrm{cutoffAmplitude}(F) > 0$，则 $\mathcal{H}$ 必有限维，每个谱带基数至多为 $\max(1, q_j + (r - 1)(q - q_j)) - 1$，且总维数满足 $q = 0 \implies \dim\mathcal{H} = 0$，对 $q > 0$ 有
+   $$
+   \dim_{\mathbb{C}} \mathcal{H} \;\le\; q\bigl[1 + (m - 1)(r - 1)\bigr] - m.
+   $$
+3. **不连通联合截面的精确单侧尾模**（[`disjoint_joint_cut_one_sided_tail_bound`](lean:D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound.disjoint_joint_cut_one_sided_tail_bound)）：对非负序列 $w : \mathbb{N} \to \mathbb{R}$、满足 $p = \sum_{a\in I} v_a \in (0, 1)$ 的有限分布 $v$ 及任意已完成的有限纤维集 $J \subset \mathbb{N}$，任取落在 $J$ 之外的有限对集 $S \subset (\mathbb{N}\setminus J)\times\alpha$，其带号联合截面和恒满足精确界
+   $$
+   \Bigl\lvert\sum_{x\in S} f(x)\Bigr\rvert \;\le\; p(1 - p)\sum_{i\in \pi_1(S)} w_i,
+   $$
+   且正负两侧单边事件矩形 $K \times I$ 与 $K \times (\alpha \setminus I)$ 分别精确取到 $\pm p(1 - p)\sum_{i\in K} w_i$。
+:::
+
+::: proof
+第 1 款把带内权下界 $W_{\mathrm{in}} \ge c(r-1)|s\setminus I|$ 与带外权上界 $W_{\mathrm{out}} \le |s\setminus I|$ 联立得 $W_{\mathrm{out}}/W_s \le (1 + c(r-1))^{-1}$，再用权重凸组合导出最优常数并显式在 $\mathrm{Finset.range}\;r$ 上验证取等。第 2 款反证：若某谱带至少含 $q_j + (r-1)(q-q_j)$ 个基元，则保留 $F_0$ 并在该谱带内为每个带外锚点配齐 $r-1$ 个新基元形成满足带外比例 $\le 1/r$ 的有限扩充集 $F \supseteq F_0$，代入已冻结方差界 [`cycle_union_area_variance_bound`](lean:D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary.cycle_union_area_variance_bound) 导出 $\mathrm{cutoffAmplitude}(F) \le 0$ 矛盾；对 $m$ 个谱带求和即得总维数上界。第 3 款按第一坐标分组并利用单纤维正部和与负部和恰为 $\pm p(1-p)w_i$ 导出双侧精确取等与一般有限子集上界。完整证明由 Lean 内核检查。
+:::
+
 在通往四维洛伦兹无质量自旋-$2$ 几何运动学的第一步上，四维代数曲率张量的正交分解与零锥横截屏（null screen）潮汐重构的精确阈值亦已由 Lean 内核严格验证：
 
 ::: {.theorem #thm-ch34-weyl-null-screen-reconstruction title="四维代数曲率分解与五条零光线 Weyl 潮汐重构定理" lean="D5/S3/Geometry/Lorentz/WeylNullScreen.finrank_algebraicCurvature4, D5/S3/Geometry/Lorentz/WeylNullScreen.finrank_weyl4, D5/S3/Geometry/Lorentz/WeylNullScreen.finrank_tracelessRicci4, D5/S3/Geometry/Lorentz/WeylNullScreen.null_tidal_ricci_invariance, D5/S3/Geometry/Lorentz/WeylNullScreen.weyl_null_screen_sampling, D5/S3/Geometry/Lorentz/WeylNullScreen.weyl_null_screen_zero, D5/S3/Geometry/Lorentz/WeylNullScreen.weyl_null_screen_vanishing"}

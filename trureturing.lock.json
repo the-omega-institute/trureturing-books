@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "753470c62ab22ae24dd8aa033a5ab26eaa70fe05",
-  "pinned_at": "2026-11-26T17:06:03Z",
+  "commit": "c8be5b18a6e5596c3b421600629d7d80061fbe3f",
+  "pinned_at": "2026-11-26T17:54:00Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -9365,6 +9365,19 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary.cycle_union_area_variance_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ClosedTraceFinitenessBoundary.cycle_union_area_variance_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:80b49ddafb9721f2cb75ca3df50f5779c3ac6277331597db4a7116474f088733",
+      "line": 191,
+      "signature": "theorem cycle_union_area_variance_bound (s I : Finset ι) (hIs : I ⊆ s) (hs : s.Nonempty) (w val : ι → ℝ) (c s₀ Δs sMax : ℝ) (r : ℕ) (hc : 0 < c) (_hΔs : 0 ≤ Δs) (_hsMax : 0 ≤ sMax) (hr : 0 < r) (hw_lo : ∀ i ∈ s, c ≤ w i) (hw_hi : ∀ i ∈ s, w i ≤ 1) (hI_dev : ∀ i ∈ I, |val i - s₀| ≤ Δs) (hout_dev : ∀ i ∈ s \\ I, |val i - s₀| ≤ sMax) (hfrac : ((s \\ I).card : ℝ) * (r : ℝ) ≤ (s.card : ℝ)) : (∑ i ∈ s, w i * (val i - s₀) ^ 2) / (∑ i ∈ s, w i) ≤ Δs ^ 2 + sMax ^ 2 / ((r : ℝ) * c)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary.disjoint_joint_cut_summable_iff": {
       "module": "D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary",
       "name": "D5.S3.Quantum.Analysis.NullConeGravity.ClosedTraceFinitenessBoundary.disjoint_joint_cut_summable_iff",
@@ -9398,6 +9411,58 @@
       "statement_id": "sha256:80b49ddafb9721f2cb75ca3df50f5779c3ac6277331597db4a7116474f088733",
       "line": 97,
       "signature": "theorem finiteDimensional_and_finrank_range_le_of_isTraceClass_lower_bound {p C : H →L[ℂ] H} (hp : IsStarProjection p) (hC_nn : 0 ≤ C) (hC_tc : IsTraceClass C) {c : ℝ} (hc : 0 < c) (hlow : ∀ x : H, x ∈ LinearMap.range p.toLinearMap → c * ‖x‖ ^ 2 ≤ (⟪x, C x⟫_ℂ).re) : FiniteDimensional ℂ (LinearMap.range p.toLinearMap) ∧ (Module.finrank ℂ (LinearMap.range p.toLinearMap) : ℝ) ≤ (trace C hC_tc).re / c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel.noncommuting_sum_sublevel_rank_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NoncommutingClockSublevel.noncommuting_sum_sublevel_rank_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:7146fd0a40cfe8a67e3d013c766133de2a8e6632087de3a92cd0b8b123027fb4",
+      "line": 275,
+      "signature": "theorem noncommuting_sum_sublevel_rank_bound {ι : Type*} {k : ℕ} (s : Finset ι) (A E : ι → H →L[ℂ] H) (hE : ∀ i ∈ s, 0 ≤ E i) {ℓ : ℝ} (hℓ : 0 < ℓ) (u : Fin k → H) (hu : Orthonormal ℂ u) : let T",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel.sublevelProjection_energy_lower_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NoncommutingClockSublevel.sublevelProjection_energy_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:7146fd0a40cfe8a67e3d013c766133de2a8e6632087de3a92cd0b8b123027fb4",
+      "line": 49,
+      "signature": "theorem sublevelProjection_energy_lower_bound (T : H →L[ℂ] H) (hT : 0 ≤ T) (ℓ : ℝ) (_hℓ : 0 < ℓ) : let K",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel.sublevel_nonempty_and_rayleigh_rank": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NoncommutingClockSublevel.sublevel_nonempty_and_rayleigh_rank",
+      "kind": "theorem",
+      "statement_id": "sha256:7146fd0a40cfe8a67e3d013c766133de2a8e6632087de3a92cd0b8b123027fb4",
+      "line": 223,
+      "signature": "theorem sublevel_nonempty_and_rayleigh_rank {k : ℕ} (T : H →L[ℂ] H) (hT : 0 ≤ T) {ℓ : ℝ} (hℓ : 0 < ℓ) : let P",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel.sublevel_rank_of_trial_energy": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NoncommutingClockSublevel.sublevel_rank_of_trial_energy",
+      "kind": "theorem",
+      "statement_id": "sha256:7146fd0a40cfe8a67e3d013c766133de2a8e6632087de3a92cd0b8b123027fb4",
+      "line": 172,
+      "signature": "theorem sublevel_rank_of_trial_energy {k : ℕ} (T : H →L[ℂ] H) (hT : 0 ≤ T) {ℓ : ℝ} (hℓ : 0 < ℓ) (u : Fin k → H) (hu : Orthonormal ℂ u) : let P",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -9489,6 +9554,58 @@
       "statement_id": "sha256:88da614eb788c4ec4b01c0f7450ee043d76815673140bb68122371aa742bd6d0",
       "line": 297,
       "signature": "theorem shear_clock_deficit_and_rigidity (s : Finset ι) (hs : s.Nonempty) (w ρ δ : ι → ℝ) (ε : ℝ) (hw : ∀ i ∈ s, 0 < w i) (hρ : ∀ i ∈ s, 0 < ρ i) (hδ : ∀ i ∈ s, 0 ≤ δ i) (hε : ε < 1) : let M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound.disjoint_joint_cut_one_sided_tail_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuantitativeClosedCutBound.disjoint_joint_cut_one_sided_tail_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:6e2e8600b6a82478507e751fd4a1248077b31d380e41ccf34eb8d9d99aac2f5d",
+      "line": 375,
+      "signature": "theorem disjoint_joint_cut_one_sided_tail_bound (w : ℕ → ℝ) (v : α → ℝ) (I : Finset α) (J : Finset ℕ) (hw : ∀ i, 0 ≤ w i) (hv : ∀ a, 0 ≤ v a) (hv_sum : ∑ a : α, v a = 1) (hp_pos : 0 < ∑ a ∈ I, v a) (hp_lt : ∑ a ∈ I, v a < 1): let p",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound.finite_and_card_fiber_le_of_eventually_positive": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuantitativeClosedCutBound.finite_and_card_fiber_le_of_eventually_positive",
+      "kind": "theorem",
+      "statement_id": "sha256:6e2e8600b6a82478507e751fd4a1248077b31d380e41ccf34eb8d9d99aac2f5d",
+      "line": 173,
+      "signature": "theorem finite_and_card_fiber_le_of_eventually_positive (band : ι → Fin m) (w : ι → ℝ) (cutoffAmplitude : Finset ι → ℝ) (K δ c d D : ℝ) (r : ℕ) (F₀ : Finset ι) (hc : 0 < c) (hδ : 0 < δ) (hK : 0 ≤ K) (hd : 0 ≤ d) (hD : 0 ≤ D) (hr : 2 ≤ r) (hw : ∀ i, w i ∈ Set.Icc c 1) (hsmall : K ^ 2 * (d ^ 2 + D ^ 2 / ((r : ℝ) * c)) ≤ δ ^ 2 / 4) (hboost : ∀ (F : Finset ι) (j : Fin m), F.Nonempty → (F.filter (fun i => band i ≠ j)).card * r ≤ F.card → cutoffAmplitude F ≤ (∑ i ∈ F, w i) * (K * Real.sqrt ((∑ i ∈ F, w i * (if band i = j then d else D) ^ 2) / (∑ i ∈ F, w i)) - δ / 2)) (hpositive : ∀ F, F₀ ⊆ F → F.No",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound.finrank_le_of_eventually_positive_cycle_cuts": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuantitativeClosedCutBound.finrank_le_of_eventually_positive_cycle_cuts",
+      "kind": "theorem",
+      "statement_id": "sha256:6e2e8600b6a82478507e751fd4a1248077b31d380e41ccf34eb8d9d99aac2f5d",
+      "line": 286,
+      "signature": "theorem finrank_le_of_eventually_positive_cycle_cuts {m : ℕ} (b : HilbertBasis ι ℂ H) (band : ι → Fin m) (w : ι → ℝ) (cutoffAmplitude : Finset ι → ℝ) (K δ c d D : ℝ) (r : ℕ) (F₀ : Finset ι) (hc : 0 < c) (hδ : 0 < δ) (hK : 0 ≤ K) (hd : 0 ≤ d) (hD : 0 ≤ D) (hr : 2 ≤ r) (hw : ∀ i, w i ∈ Set.Icc c 1) (hsmall : K ^ 2 * (d ^ 2 + D ^ 2 / ((r : ℝ) * c)) ≤ δ ^ 2 / 4) (hboost : ∀ (F : Finset ι) (j : Fin m), F.Nonempty → (F.filter (fun i => band i ≠ j)).card * r ≤ F.card → cutoffAmplitude F ≤ (∑ i ∈ F, w i) * (K * Real.sqrt ((∑ i ∈ F, w i * (if band i = j then d else D) ^ 2) / (∑ i ∈ F, w i)) - δ / 2)) (",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound.optimal_cycle_union_area_variance_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuantitativeClosedCutBound",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuantitativeClosedCutBound.optimal_cycle_union_area_variance_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:6e2e8600b6a82478507e751fd4a1248077b31d380e41ccf34eb8d9d99aac2f5d",
+      "line": 140,
+      "signature": "theorem optimal_cycle_union_area_variance_bound (s I : Finset ι) (hIs : I ⊆ s) (hs : s.Nonempty) (w val : ι → ℝ) (c s₀ d D : ℝ) (r : ℕ) (hc : 0 < c) (hd : 0 ≤ d) (hdD : d ≤ D) (hr : 1 ≤ r) (hw_lo : ∀ i ∈ s, c ≤ w i) (hw_hi : ∀ i ∈ s, w i ≤ 1) (hI_dev : ∀ i ∈ I, |val i - s₀| ≤ d) (hout_dev : ∀ i ∈ s \\ I, |val i - s₀| ≤ D) (hfrac : ((s \\ I).card : ℝ) * (r : ℝ) ≤ (s.card : ℝ)) : ((∑ i ∈ s, w i * (val i - s₀) ^ 2) / (∑ i ∈ s, w i) ≤ d ^ 2 + (D ^ 2 - d ^ 2) / (1 + c * ((r : ℝ) - 1))) ∧ ((∑ i ∈ Finset.range r, (if i = 0 then 1 else c) * (if i = 0 then D else d) ^ 2) / (∑ i ∈ Finset.range r, if i = 0",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
