@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "914f3edc9ed058836d4def81f6515e59ec36539b",
-  "pinned_at": "2026-11-26T18:55:59Z",
+  "commit": "c05c6a50f9422cd571bee8229b5e822a453b770c",
+  "pinned_at": "2026-11-26T19:32:01Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1041,6 +1041,19 @@
       "statement_id": "sha256:899103e959ad09dbebac0958459b965c509104cf8ef9afb1fb13e3cf8a7f4afe",
       "line": 266,
       "signature": "theorem cyclic_projection_second_moment (a : Fin k ↪ ZMod m) (s : ℂ) (hs : star s * s = (m : ℂ)⁻¹) (r : ZMod m) : let U",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Analytic/Oscillation/MontgomeryCountDiscrepancy.unit_band_profile_forces_unbounded_count_discrepancy": {
+      "module": "D5/S3/Analytic/Oscillation/MontgomeryCountDiscrepancy",
+      "name": "D5.S3.Analytic.Oscillation.MontgomeryCountDiscrepancy.unit_band_profile_forces_unbounded_count_discrepancy",
+      "kind": "theorem",
+      "statement_id": "sha256:94a0b3668a1ed10f84355c7a6035c1e631089afde619f9b975cec1a13782e967",
+      "line": 456,
+      "signature": "theorem unit_band_profile_forces_unbounded_count_discrepancy (S : Spectrum) (hS : UnitBandProfile S) (D H₀ : ℝ) : ∃ H : ℝ, H₀ ≤ H ∧ D < |(S.N H : ℝ) - H / (2 * Real.pi) * (Real.log (H / (2 * Real.pi)) - 1)|",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
