@@ -614,6 +614,52 @@ For each fixed $A>1$, the normalized integral through $A\log T_n$ tends to the c
 
 The ordinary Montgomery pair-correlation conjecture would supply the long-band upper bound. The result includes $\eta_n\log T_n\to a$ for $0<a<\infty$. At finer resolutions the diagonal contribution grows relative to the bin width, as the next section explains. [Ford–Soundararajan–Zaharescu, §1](https://arxiv.org/abs/0805.2745v3)
 
+### Commensurate spectra with the same unit-band profile
+
+The upper bound in [@thm-ch34-zeta-harmonic-critical-collision-limit] controls frequencies beyond the unit band. The two-term zero count and the unit-band Lorentz profile together allow a different critical collision limit. The comparison uses one spectrum at every real truncation height.
+
+For a cyclic group with $M>0$ sites, choose a set $A$ of $k$ Fourier columns normalized to have unit norm. Assign a $k$-site subset $X$ the squared modulus of the corresponding row minor. Column orthogonality makes these probabilities sum to one. At $r\in\mathbb Z/M\mathbb Z$ let $S_X(r)=\sum_{x\in X}\exp(2\pi i r x/M)$.
+
+::: {.theorem #thm-ch34-cyclic-projection-second-moment title="Second moment of a cyclic projection ensemble" lean="D5/S3/Analytic/Oscillation/CyclicProjectionMoments.cyclic_projection_second_moment"}
+For every such choice of $M$, $A$, and $r$,
+
+$$
+\mathbb E|S_X(r)|^2=k+k^2\mathbf1_{\{r=0\}}-|A\cap(A+r)|.
+$$
+
+:::
+
+::: proof
+The diagonal site pairs contribute $k$. For distinct sites the inclusion probability is the product of the diagonal projection entries minus the squared modulus of the off-diagonal entry. The first term, summed over all site pairs, contributes $k^2$ at frequency zero. In the second term, expand the projection entries over the selected columns. Summation over each site cancels every pair of columns whose difference is not $r$. On equal sites the difference of the two projection products vanishes, so each product can be summed over all ordered pairs. The full proof is checked by the Lean kernel.
+:::
+
+An infinite comparison can use this cyclic projection law separately on each interval $I_j=(j^2,(j+1)^2]$, beginning at a sufficiently large index. Put $F(H)=\frac{H}{2\pi}(\log(H/(2\pi))-1)$, $L_j=\log((j+1)^2)$, and let $R_j$ be the smallest power of two at least $L_j$. The available sites in $I_j$ lie on $h_j\mathbb Z$ with $h_j=2\pi/(3R_j)$. If there are $M_j$ sites, select $k_j=\lfloor F((j+1)^2)\rfloor-\lfloor F(j^2)\rfloor$ consecutive columns on that cycle. This fixes the count in the full block. Write $p_j=k_j/M_j$ and $a_j=2\pi p_j/h_j=L_j+O(1)$.
+
+For a prefix of $m$ sites the count has mean $m p_j$. Its variance is the sum of the squared projection entries from the prefix to its complement. There are at most $4u$ ordered crossing pairs at cyclic distance $u\ge1$, and each squared entry is at most $1/(4u^2)$ by the geometric-series formula for the consecutive columns. Thus the variance is $O(\log M_j)$, uniformly over prefixes. The count is distributed as a sum of independent Bernoulli variables from the restricted kernel. Bernstein's inequality and a union bound give error $O(\log M_j)$ for all prefixes with probability tending to one. For $H\in I_j$, the fraction of sites through $H$ differs from the corresponding length fraction by $O(1/M_j)$. Interpolating $F$ linearly across $I_j$ costs $O(1)$ since $F''(x)=1/(2\pi x)$. Summing the completed counts by telescoping gives $N(H)=F(H)+O(\log H)$ at all real cutoffs. [Restricted determinantal counts](https://arxiv.org/abs/math/0503110)
+
+For the Lorentz statistic in a full block write $M=M_j$, $p=p_j$, $h=h_j$, $K(d)=M^{-1}\sum_{a=0}^{k_j-1}e^{2\pi iad/M}$, and $w_h(d)=4/(4+h^2d^2)$. The expectation is
+
+$$
+p^2\sum_{|d|<M}(M-|d|)w_h(d)e^{ihdt}
++k_j-\sum_{|d|<M}(M-|d|)w_h(d)|K(d)|^2 e^{ihdt}.
+$$
+
+In the first sum, replacing the triangular coefficient by $M$ on all integers costs $O(h^{-2}\log M)=o(k_j)$. The infinite series is the periodization $(2\pi/h)\sum_{\ell\in\mathbb Z}e^{-2|t-2\pi\ell/h|}$, by its Fourier coefficients. Through $|t|\le3L_j/2$, the central term gives $k_j a_j e^{-2|t|}$ and the other periods contribute $o(k_j)$. In the last sum, the normalized coefficients converge in absolute sum to the squared Fourier coefficients of the indicator of $[0,p]$ on the circle. For fixed $d$ this follows from the Riemann sum and $h\to0$. The bound $O(d^{-2})$ controls the coefficients through $|d|\le M/2$. The rest contribute $O(h^{-2}/M^2)$ using $\sum_{d\bmod M}|K(d)|^2=p$. The limiting autocorrelation is $(p-|ht/(2\pi)|)_+$ on this band. The expectation divided by $k_j$ is therefore $a_j e^{-2|t|}+\min(1,|t|/a_j)+o(1)$ uniformly. [Squared-minor inclusion probabilities](https://www.numdam.org/item/10.1007/s10240-003-0016-0/)
+
+The pair statistic has Boolean-cube Lipschitz constant $O(L_j)$ by the row sum of $w_h$. Homogeneous strong Rayleigh concentration at deviation $k_j/L_j$ bounds the failure probability at any one time by $2\exp(-c k_j/L_j^4)$. On a time mesh of width $(j+1)^{-7}$, the union bound tends to zero. The derivative is bounded by $(2j+1)k_j^2$, so the mesh estimates extend uniformly in time. Intersect this event with the prefix count event and choose one subset in each block. [Concentration for strong Rayleigh measures](https://arxiv.org/abs/1108.0687v2)
+
+At height $H$, all sites through $H$ lie on the lattice for the current block since the denominators $R_j$ divide their successors. Every interval of length one has $O(\log H)$ available sites, so the absolute Lorentz row sum is $O(\log H)$. Counting pairs across one seam by unit intervals gives $O(\log^3 H)$, using the bound $O(\log H/(1+d))$ for the weighted sum of sites across the seam at distance $d$. There are $O(\sqrt H)$ seams, and the top partial block contains $O(\sqrt H\log H)$ sites. Both errors are $o(N(H))$. The same row bound discards all blocks through the one meeting $H/\log^3 H$ at cost $o(N(H))$. In the remaining blocks $a_j/\log H\to1$ uniformly and their counts sum to $N(H)(1+o(1))$. Hence the normalized pair sum is
+
+$$
+\frac{G_H(t)}{N(H)}
+=\bigl(1+o(1)\bigr)\log H\,e^{-2|t|}+\frac{|t|}{\log H}+o(1)
+\qquad (|t|\le\log H)
+$$
+
+uniformly, with the same two terms as the zeta unit-band theorem. [Unit-band formula](https://arxiv.org/abs/2306.04799)
+
+At $Y_j=(j+1)^2$ the pair statistic repeats its value at zero at time $2\pi/h_j=3R_j$, which lies between $3\log Y_j$ and $6\log Y_j$. To see what this does to the hard-band collision mass, use the same positive harmonic weights as for the zeta spectrum, now on the selected sites. Set $j=\max(j_0,\lfloor n^{1/4}\rfloor)$, $T_n=Y_j$, and $\eta_n=h_j/8$. The variance is $V_n=P_2(T_n)/2$, with $s_n=\sqrt{nV_n}$. Two fixed distinct sites give $V_n\gtrsim W(T_n)^{-2}$, and the count bound gives $W(T_n)=O(\log^2 T_n)$ by summation by parts. Thus $s_n/h_j\to\infty$. The lattice variance lower bound integrates $(1-V_nt^2/2)_+^{2n}$ over a period with factor $h_j/(2\pi)$. On $|t|\le1/(2s_n)$ the integrand is at least $3/4$ by Bernoulli's inequality. It follows that the normalized collision mass is eventually at least $3/\pi>1/\sqrt\pi$, although $\eta_n\log T_n\in(\pi/24,\pi/12]$, $(\log T_n)^2/n\to0$, and $\eta_n/s_n\to0$. The infinite comparison is a written proof about the selected sites. The zeta prime-sum identities impose further arithmetic conditions on actual ordinates.
+
 ### Occupation diagonal lower bound for finite support
 
 For finite support, the noncentral contribution also has a constraint independent of the specific frequency values. Suppose $w_j\ge0$ and $\sum_jw_j=1$, and let an occupation vector $m$ of degree $p$ satisfy $\sum_jm_j=p$. Write $c_m$ for its actual multinomial weight. Choose an index $j_0$, whose count is determined by the other counts and the total degree. For positive radii $r_j$ on the remaining coordinates define
