@@ -530,7 +530,22 @@ $$
 在 $\operatorname{Re}s=c>1$ 处逐项积分 von Mangoldt 级数。最接近 $x$ 的整数项由区间长度控制，即使频率恰为零也成立。若最近整数为 $1$，其系数 $\Lambda(1)$ 为零。对 $[x/2,2x]$ 内其余整数，频率差的绝对值 $|\log x-\log n|$ 至少为 $|x-n|/(2x)$。按最近整数左右分别对倒数距离求和，由两段调和和控制。在该区间外频率差的绝对值至少为 $1/2$，用积分判别控制绝对级数。最后利用 $x^c\le 3x$。完整证明由 Lean 内核检查。
 :::
 
-右竖边向上取向，$ds=i\,du$，因此 $\zeta'/\zeta$ 的轮廓积分乘以 $1/(2\pi i)$ 后，这条边的贡献等于上式积分乘以 $-1/(2\pi)$。Ford 与 Zaharescu 保留最近素数幂的振荡项。这里估计的是整条边的模长。除以 $\sqrt{x}$ 后，右边第二项给出统一估计中的 $e^{|t|/2}(1+|t|)^2$ 量级。要在 Lean 中得到整个零点和公式，还需要其余轮廓边、留数以及从避开零点的高度转移到任意截断。 [Ford–Zaharescu，引理 1 的证明](https://arxiv.org/abs/math/0405459v2)
+右竖边向上取向，$ds=i\,du$，因此 $\zeta'/\zeta$ 的轮廓积分乘以 $1/(2\pi i)$ 后，这条边的贡献等于上式积分乘以 $-1/(2\pi)$。Ford 与 Zaharescu 保留最近素数幂的振荡项。这里估计的是整条边的模长。除以 $\sqrt{x}$ 后，右边第二项给出统一估计中的 $e^{|t|/2}(1+|t|)^2$ 量级。 [Ford–Zaharescu，引理 1 的证明](https://arxiv.org/abs/math/0405459v2)
+
+::: {.theorem #thm-ch34-landau-left-edge title="Landau 轮廓的左竖边界" lean="D5/S3/Weil/ZetaExplicit/LandauLeftVertical.norm_left_vertical_integral"}
+设 $x>1$、$V\ge1$ 为实数，写 $s=-1/4+iu$。则
+
+$$
+\left|\int_1^V x^s\frac{-\zeta'(s)}{\zeta(s)}\,du\right|
+\le x^{-1/4}\left(80(V-1)+\frac{20(1+\log V)}{\log x}\right).
+$$
+:::
+
+::: proof
+由 ζ 函数的函数方程，$-\zeta'(s)/\zeta(s)=\log(3/4+iu)+r(u)$。利用双伽马函数递推、Binet 估计和反射直线 $\operatorname{Re}(1-s)=5/4$ 上绝对收敛的级数，可得 $|r(u)|\le80$。将 $x^s$ 写成 $x^{-1/4}e^{iu\log x}$。提出 $x^{-1/4}$ 后，余项的积分至多为 $80(V-1)$。取原函数 $e^{iu\log x}/(i\log x)$，对含对数的一项分部积分。对数的导数模长至多为 $1/u$，两端点和导数积分给出第二项。Lean 证明无须假设 RH。
+:::
+
+左竖边向下取向，因此以 $\zeta'/\zeta$ 写出的轮廓积分，经归一化后，这条边的贡献等于上式积分乘以 $1/(2\pi)$。取 $x=e^{|t|}$ 并除以 $\sqrt{x}$ 后，两项分别由 $V$ 和 $(1+\log V)/|t|$ 的常数倍控制。要推出整个零点和公式，还需控制水平边、验证留数恒等式，以及转移到任意截断高度。
 
 固定 $b>0$。对充分大的 $T$，在 $b/\log T\le|t|\le\log T$ 且 $1<V\le T$ 时，括号内四项合计至多为 $(7+1/b)T$。这是因为最终有 $\log T\le T^{1/4}$，且 $e^{|t|/2}\le\sqrt T$、$\log V/|t|\le(\log T)^2/b$。将界分别用于 $V=T$ 和 $V=3T/4$，两者之差的模长至多为 $2C(7+1/b)T$，最终至多为 $T\log T/(32\pi)$。而 $(3T/4,T]$ 内的解析重数计数至少为 $T\log T/(16\pi)$。
 
