@@ -506,6 +506,31 @@ $$
 
 剩余中间区域位于 $b/\log T_n$ 之外，需要更细相位尺度的算术信息。
 
+### 从统一 Landau 估计推到对数时间
+
+在 RH 下，令 $F_V(t)=\sum_{0<\gamma\le V}m_\gamma e^{i\gamma t}$。假设存在统一估计
+$$
+|F_V(t)|\le C\left[V+e^{|t|/2}(1+|t|)^2+e^{|t|/2}(1+\log V)+\frac{\log V}{|t|}\right]
+\qquad(V>1,\ t\ne0).
+$$
+文献中的 Gonek 统一 Landau 公式给出这一前提。取 $x=e^{|t|}$，在 RH 下将零点和除以 $\sqrt{x}$ 得到 $F_V(|t|)$。由 $\Lambda(x)\le\log x$ 及误差项中以 $V$ 截断的最小值，主项和邻近素数幂的误差都可由常数乘 $V|t|e^{-|t|/2}$ 控制。其余三项来自两个含 $x$ 的误差和 $x\to1$ 时的误差。复共轭给出负时间的估计。[Gonek，定理 1，式 (3)，第 92–93 页](https://www.sas.rochester.edu/mth/people/faculty/gonek-steve/assets/pdf/8-landau-form.pdf)
+
+固定 $b>0$。对充分大的 $T$，在 $b/\log T\le|t|\le\log T$ 且 $1<V\le T$ 时，括号内四项合计至多为 $(7+1/b)T$。这是因为最终有 $\log T\le T^{1/4}$，且 $e^{|t|/2}\le\sqrt T$、$\log V/|t|\le(\log T)^2/b$。将界分别用于 $V=T$ 和 $V=3T/4$，两者之差的模长至多为 $2C(7+1/b)T$，最终至多为 $T\log T/(32\pi)$。而 $(3T/4,T]$ 内的解析重数计数至少为 $T\log T/(16\pi)$。
+
+该区间内调和权重逐项大于等于保留权重 $m_\gamma/(2T)$。剩余权重非负，其得分模长至多是其总质量。由三角不等式，原得分的亏损至少是保留部分的亏损，即至少为区间计数的一半再除以 $2T$。结合 $W(T)\le(\log T)^2/(2\pi)$，得到
+$$
+1-|Z_T(t)|\ge\frac1{32\log T},
+\qquad \frac b{\log T}\le |t|\le\log T.
+$$
+Lean 定理以统一估计为显式前提，核验了这一步转移。[对数时间调和得分亏损界](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.harmonic_landau_window_deficit)
+
+结合先前的时间估计，可在 RH 与上述统一估计下得到一类分辨率趋零时的高斯碰撞极限。设 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$，令 $s_n=\sqrt{nP_2(T_n)/2}$，取满足 $\eta_n/s_n\to0$ 和 $\eta_n\log T_n\to\infty$ 的 $\eta_n>0$。按四阶矩条件选取中心窗参数 $A_n$，必要时将其缩至 $s_n/T_n$。由二阶矩下界仍有 $A_n\to\infty$。从 $A_n/s_n$ 到 $1/T_n$ 使用短时间高斯上界，从 $1/T_n$ 到 $b/\log T_n$ 使用前述估计。新增区间直到 $\log T_n$ 的归一化 Fejér 贡献至多为
+$$
+\frac{\sqrt{n/2}\,T_n\log T_n}{\pi}
+\exp\left(-\frac{n}{16\log T_n}\right)\longrightarrow0,
+$$
+其中用到 $K_{\eta_n}\le\eta_n/(2\pi)$ 与 $s_n\le T_n\sqrt{n/2}$。在 $\log T_n$ 处作相对截断，即可把中心 Fejér 极限传到全线。此论证适用于 $\eta_n$ 的每个固定正倍数，因此割线结果给出原调和权重的硬碰撞极限 $s_n E_n(\eta_n)/(\eta_n W(T_n)^{2n})\to1/\sqrt\pi$。这个积分推论使用了文献前提。若 $\eta_n\log T_n$ 有界，仍需控制更长时间。
+
 ### 有限支撑的占用数对角下界
 
 对于有限支撑，非中心贡献还受到一个与频率具体取值无关的约束。设 $w_j\ge0$ 且 $\sum_jw_j=1$，次数为 $p$，占用向量 $m$ 满足 $\sum_jm_j=p$。记实际多项式权重为 $c_m$。任选一个指标 $j_0$，其计数由其余计数和总次数唯一确定。对其余坐标选择正半径 $r_j$，定义
