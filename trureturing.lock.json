@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "284e44aeafed2bc25331f4fd0b3ed855fda2050c",
-  "pinned_at": "2026-11-26T22:39:33Z",
+  "commit": "c8fd9e59d10abde285525bcb61b543b9f96e46c9",
+  "pinned_at": "2026-11-26T23:07:31Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -6477,6 +6477,292 @@
       "statement_id": "sha256:01623290aa1d6316b36da3d818e2a1051a7f40f32045dfbbbebd875c9773b86a",
       "line": 167,
       "signature": "theorem three_point_branches (l r : Fin 3 → Spinor) (h : ∑ i, momentum (l i) (r i) = 0) : (∀ i j, bracket (r i) (r j) = 0) ∨ (∀ i j, bracket (l i) (l j) = 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.area_boost_pair": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.area_boost_pair",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 342,
+      "signature": "theorem area_boost_pair (q p Γ area : ℝ) : cornerPoisson chartH chartE q p Γ area = 2 * chartE q p Γ area ∧ cornerPoisson chartH chartF q p Γ area = -2 * chartF q p Γ area ∧ cornerPoisson chartE chartF q p Γ area = chartH q p Γ area ∧ (chartH q p Γ area ^ 2 + 4 * chartE q p Γ area * chartF q p Γ area) / 4 = area ^ 2 ∧ cornerPoisson chartRapidity chartArea q p Γ area = 1 ∧ cornerPoisson chartRapidity chartF q p Γ area = 2 * area * Real.exp (-q)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.bf_complete_square": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.bf_complete_square",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 596,
+      "signature": "theorem bf_complete_square (W : V →ₗ[ℝ] V →ₗ[ℝ] ℝ) (J : V →ₗ[ℝ] V) (hsym : ∀ x y, W x y = W y x) (hadj : ∀ x y, W (J x) y = W x (J y)) (s g gravity : ℝ) (hs : s ^ 2 = 1) (hj : ∀ x, J (J x) = s • x) (hg : g ≠ 0) (F B : V) : bfDensity W J gravity g F B = gravity + s / (2 * g ^ 2) * W F (J F) - g ^ 2 / 2 * W (B - bfCritical J s g F) (J (B - bfCritical J s g F))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.bf_stationary_iff": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.bf_stationary_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 579,
+      "signature": "theorem bf_stationary_iff (W : V →ₗ[ℝ] V →ₗ[ℝ] ℝ) (J : V →ₗ[ℝ] V) (hn : ∀ x, (∀ v, W v x = 0) → x = 0) (s g : ℝ) (hs : s ^ 2 = 1) (hj : ∀ x, J (J x) = s • x) (hg : g ≠ 0) (F B : V) : bfStationary W J g F B ↔ B = bfCritical J s g F",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.bf_variation": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.bf_variation",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 557,
+      "signature": "theorem bf_variation (W : V →ₗ[ℝ] V →ₗ[ℝ] ℝ) (J : V →ₗ[ℝ] V) (hsym : ∀ x y, W x y = W y x) (hadj : ∀ x y, W (J x) y = W x (J y)) (gravity coupling t : ℝ) (F B v : V) : bfDensity W J gravity coupling F (B + t • v) = bfDensity W J gravity coupling F B + t * W v (F - coupling ^ 2 • J B) - coupling ^ 2 / 2 * t ^ 2 * W v (J v)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.bf_zero_coupling": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.bf_zero_coupling",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 625,
+      "signature": "theorem bf_zero_coupling (W : V →ₗ[ℝ] V →ₗ[ℝ] ℝ) (J : V →ₗ[ℝ] V) (hn : ∀ x, (∀ v, W v x = 0) → x = 0) (F B : V) : bfStationary W J 0 F B ↔ F = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.chart_moment_casimir": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.chart_moment_casimir",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 375,
+      "signature": "theorem chart_moment_casimir (q p Γ area : ℝ) : gravitationalCasimir (chartMoment q p Γ area) = area ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.corner_bracket": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.corner_bracket",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 98,
+      "signature": "theorem corner_bracket (X Z : L) (a b : A) (u v : CornerInternal gYM) : ⁅P (gYM",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.corner_internal_brackets": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.corner_internal_brackets",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 111,
+      "signature": "theorem corner_internal_brackets (X : L) (u v : A ⊗[ℝ] SpecialLinear.sl (Fin 2) ℝ) (l η : A ⊗[ℝ] gYM) : let d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.corner_jacobi": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.corner_jacobi",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 142,
+      "signature": "theorem corner_jacobi (x y z : CornerAlgebra A L gYM) : ⁅x, ⁅y,z⁆⁆ + ⁅y, ⁅z,x⁆⁆ + ⁅z, ⁅x,y⁆⁆ = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.enveloping_commutators": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.enveloping_commutators",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 150,
+      "signature": "theorem enveloping_commutators (u v : A ⊗[ℝ] SpecialLinear.sl (Fin 2) ℝ) (l η : A ⊗[ℝ] gYM) : let Q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.internal_casimir_invariant": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.internal_casimir_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 322,
+      "signature": "theorem internal_casimir_invariant (κ : LinearMap.BilinForm ℝ Y) (hκ : κ.lieInvariant Y) (u ν : Y) (t : ℝ) : ymCasimir κ (ν + t • ⁅u, ν⁆) = ymCasimir κ ν + t ^ 2 * ymCasimir κ ⁅u, ν⁆",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.jet_rules": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.jet_rules",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 277,
+      "signature": "theorem jet_rules (m n N : ℕ) : jetWitt m N (jetMonomial N n) = -(n : ℝ) • jetMonomial N (m+n) ∧ jetMonomial N m * jetMonomial N n = jetMonomial N (m+n) ∧ (N ≤ n → jetMonomial N n = 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.laurent_current_modes": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.laurent_current_modes",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 224,
+      "signature": "theorem laurent_current_modes {gYM : Type*} [LieRing gYM] [LieAlgebra ℝ gYM] (m n : ℤ) (u v : CornerInternal gYM) : let X : (⊤ : LieSubalgebra ℝ (Derivation ℝ LP LP))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.normal_area_casimir": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.normal_area_casimir",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 296,
+      "signature": "theorem normal_area_casimir (M : LieAlgebra.SpecialLinear.sl (Fin 2) ℝ) : gravitationalCasimir M = -M.val.det ∧ gravitationalCasimir M = M.val 0 0 ^ 2 + M.val 0 1 * M.val 1 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.normal_area_variation": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.normal_area_variation",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 311,
+      "signature": "theorem normal_area_variation (U M : LieAlgebra.SpecialLinear.sl (Fin 2) ℝ) (t : ℝ) : gravitationalCasimir (M + t • ⁅U, M⁆) = gravitationalCasimir M + t ^ 2 * gravitationalCasimir ⁅U, M⁆",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.null_screen_hodge": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.null_screen_hodge",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 529,
+      "signature": "theorem null_screen_hodge (r : WeylNullScreen.FutureNullRay) : let g : Metric4 ℝ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.real_hodge_structure": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.real_hodge_structure",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 429,
+      "signature": "theorem real_hodge_structure (g : Metric4 ℝ) (hs : gᵀ = g) (hg : g.det ≠ 0) : realHodge g = hodge g (Real.sqrt |g.det|) ∧ (metricSign g = -1 ∨ metricSign g = 1) ∧ realHodge g ^ 2 = metricSign g • (1 : BivectorMatrix ℝ) ∧ (realHodge g)ᵀ * W ℝ = W ℝ * realHodge g",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.urbantke_bf_on_shell": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.urbantke_bf_on_shell",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 685,
+      "signature": "theorem urbantke_bf_on_shell (metric : Metric4 ℝ) (hm : metricᵀ = metric) (hd : metric.det ≠ 0) (κ : Matrix ι ι ℝ) (hk : κᵀ = κ) (hκ : κ.det ≠ 0) (g gravity : ℝ) (hg : g ≠ 0) (F : Urbantke.PairIndex × ι → ℝ) : let w",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.urbantke_bf_yang_mills": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.urbantke_bf_yang_mills",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 661,
+      "signature": "theorem urbantke_bf_yang_mills (metric : Metric4 ℝ) (hm : metricᵀ = metric) (hd : metric.det ≠ 0) (κ : Matrix ι ι ℝ) (hk : κᵀ = κ) (hκ : κ.det ≠ 0) (g gravity : ℝ) (hg : g ≠ 0) (F B : Urbantke.PairIndex × ι → ℝ) : let w",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.urbantke_lorentz_phase": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.urbantke_lorentz_phase",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 485,
+      "signature": "theorem urbantke_lorentz_phase (B : Matrix PairIndex (Fin 3) ℂ) (hQ : (wedgeGram B).det ≠ 0) (hr : Bᵀ * W ℂ * B.map star = 0) : ∃ (g : Metric4 ℝ) (l phase : ℂ), l ≠ 0 ∧ gᵀ = g ∧ g.det < 0 ∧ urbantke B = l • Complex.ofRealHom.mapMatrix g ∧ (phase = Complex.I ∨ phase = -Complex.I) ∧ hodge (urbantke B) (density B) = phase⁻¹ • (realHodge g).map Complex.ofRealHom ∧ (realHodge g).map Complex.ofRealHom * B = phase • B",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.urbantke_real_hodge": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.urbantke_real_hodge",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 524,
+      "signature": "theorem urbantke_real_hodge (B : Matrix PairIndex (Fin 3) ℝ) (hQ : (wedgeGram B).det ≠ 0) : 0 < (urbantke B).det ∧ realHodge (urbantke B) ^ 2 = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D.witt_bracket": {
+      "module": "D5/S3/Geometry/Lorentz/UnifiedCornerBF4D",
+      "name": "D5.S3.Geometry.Lorentz.UnifiedCornerBF4D.witt_bracket",
+      "kind": "theorem",
+      "statement_id": "sha256:09c7051702feed88433f0d67fbd5185069a67cad0a55ad303aec0f6e79fa6402",
+      "line": 201,
+      "signature": "theorem witt_bracket (m n : ℤ) : ⁅witt m, witt n⁆ = ((m : ℝ) - (n : ℝ)) • witt (m+n)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
