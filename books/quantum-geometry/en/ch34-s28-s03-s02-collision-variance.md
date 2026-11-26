@@ -506,6 +506,31 @@ $$
 
 The remaining intermediate estimate is needed beyond $b/\log T_n$. It requires additional arithmetic information at finer phase scales.
 
+### From a uniform Landau bound to logarithmic times
+
+Under RH, let $F_V(t)=\sum_{0<\gamma\le V}m_\gamma e^{i\gamma t}$. Assume the uniform estimate
+$$
+|F_V(t)|\le C\left[V+e^{|t|/2}(1+|t|)^2+e^{|t|/2}(1+\log V)+\frac{\log V}{|t|}\right]
+\qquad(V>1,\ t\ne0).
+$$
+Gonek's uniform Landau formula supplies this premise at the literature level. With $x=e^{|t|}$, RH permits division of the zero sum by $\sqrt{x}$ to recover $F_V(|t|)$. The main term and nearest-prime-power error are both bounded by a constant times $V|t|e^{-|t|/2}$, using $\Lambda(x)\le\log x$ and the truncation by $V$ in the error. The other three terms follow from the two errors containing $x$ and the error as $x\to1$. Conjugation gives the estimate at negative times. [Gonek, Theorem 1, equation (3), pp. 92–93](https://www.sas.rochester.edu/mth/people/faculty/gonek-steve/assets/pdf/8-landau-form.pdf)
+
+For fixed $b>0$, the four terms in brackets are together at most $(7+1/b)T$ on $b/\log T\le|t|\le\log T$ when $T$ is sufficiently large and $1<V\le T$. Indeed $\log T\le T^{1/4}$ eventually, $e^{|t|/2}\le\sqrt T$, and $\log V/|t|\le(\log T)^2/b$. Apply this to $V=T$ and $V=3T/4$. Their difference has norm at most $2C(7+1/b)T$, which is eventually at most $T\log T/(32\pi)$. The multiplicity count on $(3T/4,T]$ is at least $T\log T/(16\pi)$.
+
+On this band the harmonic weights dominate the retained weights $m_\gamma/(2T)$. The remaining weights are nonnegative, so the norm of their score is at most their total mass. The triangle inequality therefore preserves the retained deficit, which is at least half the band count divided by $2T$. The mass bound $W(T)\le(\log T)^2/(2\pi)$ now gives
+$$
+1-|Z_T(t)|\ge\frac1{32\log T},
+\qquad \frac b{\log T}\le |t|\le\log T.
+$$
+The Lean theorem verifies this transfer with the uniform estimate as an explicit premise. [Logarithmic-time harmonic deficit](https://github.com/the-omega-institute/trureturing/blob/df11bdd3ff3cbd92999114c5316053aa19fdd244/D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.lean#L240)
+
+Together with the preceding time estimates this gives a Gaussian collision limit under RH and the stated uniform estimate for a range of shrinking resolutions. Let $T_n\to\infty$ with $(\log T_n)^2/n\to0$, let $s_n=\sqrt{nP_2(T_n)/2}$, and take $\eta_n>0$ with $\eta_n/s_n\to0$ and $\eta_n\log T_n\to\infty$. Choose the central half-width $A_n$ from the fourth-moment condition, reducing it to at most $s_n/T_n$ if necessary. This still gives $A_n\to\infty$ by the second-moment lower bound. Between $A_n/s_n$ and $1/T_n$ use the short-time Gaussian envelope. Between $1/T_n$ and $b/\log T_n$ use the estimates above. On the additional interval up to $\log T_n$, the normalized Fejér contribution is at most
+$$
+\frac{\sqrt{n/2}\,T_n\log T_n}{\pi}
+\exp\left(-\frac{n}{16\log T_n}\right)\longrightarrow0,
+$$
+using $K_{\eta_n}\le\eta_n/(2\pi)$ and $s_n\le T_n\sqrt{n/2}$. Relative truncation at $\log T_n$ then transfers the central Fejér limit to the full line. The argument applies to every fixed positive multiple of $\eta_n$, so the secant result gives $s_n E_n(\eta_n)/(\eta_n W(T_n)^{2n})\to1/\sqrt\pi$ for the original harmonic weights. This integrated consequence uses the literature premise. Resolutions with bounded $\eta_n\log T_n$ still require longer-time control.
+
 ### Occupation diagonal lower bound for finite support
 
 For finite support, the noncentral contribution also has a constraint independent of the specific frequency values. Suppose $w_j\ge0$ and $\sum_jw_j=1$, and let an occupation vector $m$ of degree $p$ satisfy $\sum_jm_j=p$. Write $c_m$ for its actual multinomial weight. Choose an index $j_0$, whose count is determined by the other counts and the total degree. For positive radii $r_j$ on the remaining coordinates define
