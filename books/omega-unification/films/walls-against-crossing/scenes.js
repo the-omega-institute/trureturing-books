@@ -276,7 +276,7 @@ SCENES.shell = S => {
     dashed(ax.X(15), ax.Y(0), ax.X(15), ax.Y(300), C.now, pa * f, 2);
     dot(ax.X(15), ax.Y(0), 11, 'g', pa * f);
     txt('fold at c = 15 · 折返', ax.X(15), ax.Y(300) - 14, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.now, a: pa * f });
-    txt('light near c · 近 c 变轻', ax.X(15) + 24, ax.Y(0) - 22, { size: 20, fam: F.zh, w: 700, c: C.cyan, a: pa * f });
+    txt('light near c · 近 c 变轻', ax.X(15), ax.Y(300) - 48, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: pa * f });
     txt('m = κ h(λ)', ax.X(4), ax.Y(420), { size: 28, fam: F.math, w: 700, c: C.white, a: pa });
   }
   /* weak-centre parity */
@@ -345,7 +345,8 @@ SCENES.monotone = S => {
   badgeQ(S, [[0, null, 'argued'], [1, 'leaves a spread', 'computed']]);
   /* left: the shared rule, morphing between schematic shapes */
   panel(140, 230, 760, 590, a, C.now, 'ONE SHARED RULE m = f(h) · 共用一条规则');
-  const ax = waAxes(230, 300, 600, 400, [0, 1], [0, 1.05], a, { xl: 'h  two-step reading · 两步读数', yl: 'm' });
+  const ax = waAxes(230, 300, 600, 400, [0, 1], [0, 1.05], a, { yl: 'm' });
+  txt('h', 850, 708, { size: 26, fam: F.math, w: 700, c: C.dim, a });
   const ph = (S.u * 0.35) % WA_RULES.length, i0 = Math.floor(ph), fr = ease(clamp((ph - i0) * 2 - 0.6));
   const f = h => lerp(WA_RULES[i0](h), WA_RULES[(i0 + 1) % WA_RULES.length](h), fr);
   curve(t => [ax.X(t), ax.Y(f(t))], 200, C.now, a, 5);
@@ -354,9 +355,9 @@ SCENES.monotone = S => {
     const h = 0.05 + 0.9 * rnd(k, 3);
     dot(ax.X(h), ax.Y(f(h)), 9, k % 2 ? 'm' : 'c', a * at(S, 0, 0.5, 1.5 + 0.1 * k));
   }
-  txt('odd · 奇', 250, 760, { size: 20, fam: F.zh, w: 700, c: C.mag, a });
-  txt('even · 偶', 360, 760, { size: 20, fam: F.zh, w: 700, c: C.cyan, a });
-  txt('never decreasing · schematic shapes · 示意', 860, 760, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.argued, a });
+  txt('odd · 奇', 250, 790, { size: 20, fam: F.zh, w: 700, c: C.mag, a });
+  txt('even · 偶', 360, 790, { size: 20, fam: F.zh, w: 700, c: C.cyan, a });
+  txt('never decreasing · schematic · 示意', 860, 790, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.argued, a });
   /* right: the certified bounds */
   const r1 = a * Q(S, 1, 'leaves a spread', 0.6);
   panel(960, 230, 830, 190, r1, C.cyan, 'EVERY PHASE OF THE TORUS · 全环面');
@@ -364,18 +365,17 @@ SCENES.monotone = S => {
   txt('sharp · 尖阈值', 1420, 320, { size: 22, fam: F.zh, w: 700, c: C.dim, a: r1 });
   txt('spread > 0.2426', 990, 385, { size: 34, fam: F.math, w: 700, c: C.cyan, a: r1 * 0.9 });
   txt('finite subtraction · 有限减法', 1420, 385, { size: 22, fam: F.zh, w: 700, c: C.dim, a: r1 });
-  stamp('NO CROSSING', 1600, 290, Q(S, 1, 'zero point seven', 0.5), C.now, 30, -0.1);
   const r2 = a * Q(S, 2, 'log slope', 0.6);
-  panel(960, 440, 830, 110, r2, C.cyan);
-  waRich([['K', C.white], ['min', C.white, F.mono], [' = 106.75467', C.cyan]], 990, 510, { size: 44, a: r2 });
-  txt('Lip(ln m / ln λ) · 18 layers', 1430, 510, { size: 20, fam: F.mono, w: 700, c: C.dim, a: r2 });
+  panel(960, 440, 830, 130, r2, C.cyan);
+  waRich([['K_min = ', C.white], ['106.75467', C.cyan]], 990, 505, { size: 44, a: r2 });
+  txt('min Lipschitz slope of ln m / ln λ · one 18-layer tower, zero #11431', 990, 548, { size: 18, fam: F.mono, w: 700, c: C.dim, a: r2 });
   /* spans in natural-log units */
   const r3 = a * Q(S, 3, 'log-convex', 0.6);
-  panel(960, 570, 830, 250, r3, C.cyan, 'LOG-CONVEX SPAN · 对数凸跨度 (ln)');
-  const sc = 600 / 120, bx = 1150;
+  panel(960, 590, 830, 230, r3, C.cyan, 'LOG-CONVEX SPAN · 对数凸跨度 (ln)');
+  const sc = 480 / 120, bx = 1150;
   const bars = [['sharp', 115.64515, C.cyan, '> 115.65'], ['finite', 82.58089, C.cyan, '> 82.58'], ['M_Z → M̄_P', Math.log(WA_IN.MPbar / WA_IN.MZ), C.now, fmt(Math.log(WA_IN.MPbar / WA_IN.MZ), 2)]];
   bars.forEach(([lab, v, col, s], j) => {
-    const y = 630 + j * 62, g = ease(clamp((r3 / a) * 1.2 - 0.2 * j)) * (j === 2 ? Q(S, 3, 'Z mass to reduced Planck', 0.8) : 1);
+    const y = 638 + j * 58, g = ease(clamp((r3 / a) * 1.2 - 0.2 * j)) * (j === 2 ? Q(S, 3, 'Z mass to reduced Planck', 0.8) : 1);
     txt(lab, bx - 14, y + 26, { size: 20, fam: F.mono, w: 700, align: 'right', c: col, a: r3 });
     fillBox(bx, y + 4, v * sc * g, 30, col, r3 * 0.7);
     txt(s, bx + v * sc * g + 12, y + 30, { size: 26, fam: F.math, w: 700, c: col, a: r3 * g });
@@ -403,9 +403,9 @@ SCENES.keys = S => {
   txt('α_s ∈ (0.1188844, 0.1189006)', 1010, 455, { size: 30, fam: F.math, w: 700, c: C.cyan, a: k2 * Q(S, 2, 'The readout', 0.6) });
   /* the α_s number line */
   const na = a * at(S, 1, 0.6, 1.0);
-  const X = v => 220 + (v - 0.110) / (0.160 - 0.110) * 1480, y = 650;
+  const X = v => 300 + (v - 0.110) / (0.160 - 0.110) * 1400, y = 650;
   if (na > 0) {
-    line(220, y, 1700, y, C.dim, na, 2);
+    line(300, y, 1700, y, C.dim, na, 2);
     for (const v of [0.11, 0.12, 0.13, 0.14, 0.15, 0.16]) { line(X(v), y - 8, X(v), y + 8, C.dim, na, 2); txt(v.toFixed(2), X(v), y + 40, { size: 20, fam: F.mono, align: 'center', c: C.dim, a: na }); }
     txt('α_s(M_Z)', 140, y + 8, { size: 22, fam: F.math, w: 700, c: C.dim, a: na });
     fillBox(X(0.117), y - 30, X(0.119) - X(0.117), 60, C.cyan, na * 0.25);
@@ -466,12 +466,12 @@ SCENES.bedrock = S => {
   txt('20', bx + 5 * (bw + gap) - 6, by - 20 * sc - 8, { size: 20, fam: F.mono, w: 700, align: 'right', c: C.lean, a: pa });
   const labs = ['36/5', '4/25', '324/125', '2916/625', '5476/625'];
   WA_LPS.forEach(([l, d], i) => {
-    const v = l * l / 5 ** d, x = bx + i * (bw + gap), g = ease(clamp((pa / Math.max(a, 1e-6)) * 1.5 - 0.12 * i));
+    const v = l * l / 5 ** d, x = bx + i * (bw + gap), g = ease(clamp(Q(S, 2, 'norm five', 1.6) * 1.5 - 0.12 * i));
     fillBox(x, by - v * sc * g, bw, v * sc * g, C.cyan, pa * 0.75);
     txt(labs[i], x + bw / 2, by + 28, { size: 19, fam: F.math, w: 700, align: 'center', c: C.cyan, a: pa });
     txt(`j=${d / 2}`, x + bw / 2, by - v * sc * g - 10, { size: 17, fam: F.mono, w: 700, align: 'center', c: C.dim, a: pa * g });
   });
-  txt('λ² per branch (values recomputed) · 各分支 λ²', 1010, 682, { size: 18, fam: F.zh, w: 700, c: C.cyan, a: pa * 0.8 });
+  txt('bars: λ² per branch, values recomputed · 各分支 λ²', 1010, 385, { size: 18, fam: F.zh, w: 700, c: C.cyan, a: pa * 0.8 });
   /* the three tiers */
   const tiers = [['Kernel-checked: the tools', '内核检验：工具', C.lean, 'Kernel-checked'], ['Certified in the model: the walls', '模型内证书：墙', C.cyan, 'Certified in the model'],
     ['Conditional: every crossing so far', '有条件：迄今每次交汇', C.argued, 'Conditional']];

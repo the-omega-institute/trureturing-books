@@ -283,15 +283,15 @@ SCENES.circle = S => {
   if (b <= 0.003) return;
   panel(160, 195, 1600, 255, b, C.lean, 'FEJÉR CRITICAL GAP · 费耶尔临界差额');
   zwRich([['RH', C.white], ['  ⟺  ', C.dim], ['∀ c < 1/48 :  eventually  ', C.white], ['U(x) ≤ M√x − c (log x)²', C.lean]], 200, 285, { size: 36, fam: F.math, a: b });
-  zwRich([['M = firstLiMass = 2 + γ − ln 4π ≈ ', C.white], [ZW_M.toFixed(7), C.cyan], ['   NUM · computed here', C.cyan]], 200, 345, { size: 24, fam: F.math, a: b * Q(S, 3, 'M root x', 0.6) });
-  txt('U(x) = integrated Mangoldt remainder · 积分曼戈尔特余项', 1720, 345, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.dim, a: b * Q(S, 3, 'prime remainder', 0.6) });
+  zwRich([['M = firstLiMass = 2 + γ − ln 4π ≈ ', C.white], [ZW_M.toFixed(7), C.cyan], ['   NUM · computed here', C.cyan]], 200, 345, { size: 24, fam: F.math, a: b * at(S, 3, 0.6, 1.5) });
+  txt('U(x) = integrated Mangoldt remainder · 积分曼戈尔特余项', 1720, 345, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.dim, a: b * at(S, 3, 0.6, 2.0) });
   zwLean(200, 415, ZW_LEAN.fejer, b, { size: 20, last: true });
   /* the proof idea: the Fejér kernel is a square, so it is never negative */
   const ka = b * at(S, 3, 0.6, 1.2);
   if (ka > 0.003) {
     const x0 = 300, x1 = 1620, y0 = 800, hh = 250, X = th => x0 + (th + Math.PI) / TAU * (x1 - x0), Yk = f => y0 - f / (ZW_FN * ZW_FN) * hh;
     line(x0, y0, x1, y0, C.dim, ka, 1.5);
-    curve(i => { const th = -Math.PI + i * TAU / 300; return [X(th), Yk(zwFejer(ZW_FN, th))]; }, 300, C.cyan, ka, 3);
+    curve(i => { const th = -Math.PI + i * TAU; return [X(th), Yk(zwFejer(ZW_FN, th))]; }, 300, C.cyan, ka, 3);
     txt('−π', x0, y0 + 30, { size: 20, fam: F.math, w: 700, align: 'center', c: C.dim, a: ka });
     txt('0', X(0), y0 + 30, { size: 20, fam: F.math, w: 700, align: 'center', c: C.dim, a: ka });
     txt('π', x1, y0 + 30, { size: 20, fam: F.math, w: 700, align: 'center', c: C.dim, a: ka });
@@ -310,14 +310,15 @@ SCENES.phases = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [2, 'Lean bounds', 'lean']]);
   /* left: the phasor chain, with t pulled to 0 while line 1 says "lines up again" */
-  const pull = Q(S, 1, 'only if', 1.4) * (1 - Q(S, 1, 'lines up', 1.8, 1.0));
-  const t = 0.05 + 0.85 * (1 - ease(pull)) + 0.02 * S.u * (1 - pull);
-  const O = [200, 520], R = 520;
+  const pull = at(S, 1, 2.0) * (1 - Q(S, 1, 'lines up', 1.8, 1.0));
+  const t = (0.85 + 0.02 * S.u) * (1 - ease(pull));
+  const O = [470, 510], R = 270;
   const pa = a * at(S, 0, 0.6);
   if (pa > 0.003) {
-    ctx.save(); ctx.setLineDash([8, 8]); line(O[0] + R, 260, O[0] + R, 780, C.dim, pa * 0.7, 1.5); ctx.restore();
-    txt('|Z| = 1', O[0] + R + 10, 280, { size: 20, fam: F.math, w: 700, c: C.dim, a: pa });
-    line(O[0], 260, O[0], 780, C.dim, pa * 0.3, 1);
+    ctx.save(); ctx.setLineDash([8, 8]); ring(O[0], O[1], R, C.dim, pa * 0.7, 1.5); ctx.restore();
+    txt('|Z| = 1', O[0] + R * 0.72 + 12, O[1] - R * 0.72 - 8, { size: 20, fam: F.math, w: 700, c: C.dim, a: pa });
+    line(O[0] - R - 20, O[1], O[0] + R + 20, O[1], C.dim, pa * 0.3, 1);
+    line(O[0], O[1] - R - 20, O[0], O[1] + R + 20, C.dim, pa * 0.3, 1);
     let px = O[0], py = O[1];
     ZW_G.forEach((g, k) => {
       const len = ZW_W[k] * R, nx = px + len * Math.cos(g * t), ny = py - len * Math.sin(g * t);
@@ -328,7 +329,7 @@ SCENES.phases = S => {
     arrow(O[0], O[1], O[0] + Z[0] * R, O[1] - Z[1] * R, C.now, pa * at(S, 1, 0.5), 4);
     txt(`|Z| = ${zwAbs(Z).toFixed(3)}`, 160, 820, { size: 30, fam: F.mono, w: 700, c: C.now, a: pa * at(S, 1, 0.5) });
     txt(`t = ${t.toFixed(3)}`, 420, 820, { size: 24, fam: F.mono, w: 700, c: C.dim, a: pa * at(S, 1, 0.5) });
-    txt('schematic ordinates, exact sum · 示意零点，和精确计算', 160, 225, { size: 20, fam: F.zh, w: 700, c: C.dim, a: pa });
+    txt('schematic ordinates, exact sum · 示意零点，和精确计算', 160, 205, { size: 20, fam: F.zh, w: 700, c: C.dim, a: pa });
   }
   /* right top: the weights */
   panel(900, 190, 900, 190, pa, C.cyan, 'HARMONIC WEIGHT · 调和权');
@@ -416,7 +417,7 @@ SCENES.collide = S => {
   const ca = a * g3;
   if (ca <= 0.003) return;
   zwRich([['s_n E_n(η_n) / (η_n W(T_n)^{2n})', C.white], ['  →  ', C.dim], ['1/√π', C.lean]], 860, 260, { size: 34, fam: F.math, a: ca });
-  zwRich([['1/√π = ', C.white], [(1 / Math.sqrt(Math.PI)).toFixed(10) + '…', C.cyan], ['   NUM', C.cyan]], 860, 312, { size: 26, fam: F.math, a: ca * Q(S, 3, 'one over root pi', 0.6) });
+  zwRich([['1/√π = ', C.white], [(1 / Math.sqrt(Math.PI)).toFixed(10) + '…', C.cyan], ['   NUM', C.cyan]], 860, 312, { size: 26, fam: F.math, a: ca * at(S, 3, 0.6, 2.5) });
   zwLean(860, 360, ZW_LEAN.collide, ca * Q(S, 3, 'Lean checks', 0.6), { size: 18, last: true });
   txt('given RH and the Landau envelope · 以 RH 与兰道包络为前提', 860, 398, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ca * Q(S, 3, 'Lean checks', 0.6) });
   /* the Gaussian shape e^{−x²}/√π, peak 1/√π, with a narrow hard band */
@@ -424,8 +425,8 @@ SCENES.collide = S => {
   const sa = ca * Q(S, 3, 'near-collision', 1.0);
   line(gx0, gy0, gx1, gy0, C.dim, sa, 1.5);
   fillBox(GX(-0.12), GY(1 / Math.sqrt(Math.PI)), GX(0.12) - GX(-0.12), gh, C.now, sa * 0.35);
-  curve(i => { const x = -3 + 6 * i / 200; return [GX(x), GY(Math.exp(-x * x) / Math.sqrt(Math.PI))]; }, 200, C.cyan, sa, 3);
-  txt('1/√π', GX(0) + 22, GY(1 / Math.sqrt(Math.PI)) + 8, { size: 24, fam: F.math, w: 700, c: C.lean, a: sa });
+  curve(i => { const x = -3 + 6 * i; return [GX(x), GY(Math.exp(-x * x) / Math.sqrt(Math.PI))]; }, 200, C.cyan, sa, 3);
+  txt('1/√π', GX(0) + 50, GY(1 / Math.sqrt(Math.PI)) + 4, { size: 24, fam: F.math, w: 700, c: C.lean, a: sa });
   txt('|difference| ≤ η', GX(0) - 22, gy0 - 20, { size: 18, fam: F.math, w: 700, align: 'right', c: C.now, a: sa });
   txt('shape schematic · 形状示意', gx1, gy0 + 30, { size: 18, fam: F.zh, w: 700, align: 'right', c: C.dim, a: sa });
 };
@@ -456,9 +457,9 @@ SCENES.window = S => {
   const ma = a * at(S, 1, 0.6);
   if (ma > 0.003) {
     const p = Q(S, 1, 'within two millionths', 1.2);
-    curve(i => { const s = i / 60, x = lerp(ZS(5), ZS(14), s), y = 295 - Math.sin(Math.PI * s) * 60; return [x, y]; }, Math.max(1, Math.round(60 * clamp(p * 1.4))), C.cyan, ma, 2.5);
-    arrow(ZS(9), 236, ZS(9), 290, C.now, ma * clamp(p * 2 - 1), 2.5);
-    txt('½(γ₁₁₄₂₇ + γ₁₁₄₃₆) ≈ γ₁₁₄₃₁', ZS(9) + 24, 226, { size: 20, fam: F.math, w: 700, c: C.now, a: ma * clamp(p * 2 - 1) });
+    curve(i => { const s = i * clamp(p * 1.4), x = lerp(ZS(5), ZS(14), s), y = 295 - Math.sin(Math.PI * s) * 60; return [x, y]; }, 60, C.cyan, ma, 2.5);
+    arrow(ZS(9), 240, ZS(9), 292, C.now, ma * clamp(p * 2 - 1), 2.5);
+    txt('½(γ₁₁₄₂₇ + γ₁₁₄₃₆) ≈ γ₁₁₄₃₁', ZS(9) + 18, 282, { size: 18, fam: F.math, w: 700, c: C.now, a: ma * clamp(p * 2 - 1) });
     zwRich([['Δ = |γ₁₁₄₂₇ + γ₁₁₄₃₆ − 2γ₁₁₄₃₁| ∈ ', C.white], ['(1.6812114283, 1.6812114285) × 10⁻⁶', C.cyan]], W / 2, 410, { size: 28, fam: F.math, align: 'center', a: ma * Q(S, 1, 'within two millionths', 0.6) });
     txt('rank 1 of 3,000 centres #10000–#12999 · 243,000 triples · 三千个中心中唯一第一', W / 2, 452, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a: ma * Q(S, 1, 'three thousand', 0.6) });
   }
@@ -496,10 +497,10 @@ SCENES.window = S => {
     txt('equal weights · 等权     (111520: not yet)', 1460, 682, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.white, a: oa });
     const ha = a * Q(S, 3, 'radius 111521', 0.6, 0.8);
     txt('111532   local harmonic weights · 局部调和权', 1150, 740, { size: 22, fam: F.zh, w: 700, c: C.white, a: ha });
-    txt('generic sufficient bound 11,330,943 · 160-bit Arb', 1150, 790, { size: 18, fam: F.mono, w: 700, c: C.dim, a: ha });
+    txt('generic sufficient bound: 11,330,943 · 通用充分半径', 1150, 790, { size: 18, fam: F.mono, w: 700, c: C.dim, a: ha });
   }
   const ca = a * Q(S, 3, 'These are certificates', 0.6);
-  stamp('CERTIFICATE', 1640, 470, ca * (1 - Q(S, 3, 'not theorems', 0.6, 1.6)), C.cyan, 26, -0.06);
+  stamp('CERTIFICATE', 1600, 462, ca * (1 - Q(S, 3, 'not theorems', 0.6, 1.6)), C.cyan, 26, -0.06);
 };
 
 /* ======================================================================= */
@@ -525,7 +526,7 @@ SCENES.filter = S => {
   if (g3 > 0.003) {
     panel(160, 190, 1600, 170, a * g3, C.argued, 'MODEL · 选定的输入');
     txt('chosen inputs: field table · mass unit · light-heavy cut', 200, 262, { size: 30, fam: F.math, w: 700, c: C.white, a: a * g3 });
-    txt('window hit ≠ prediction · 命中窗口 ≠ 预言', 200, 320, { size: 30, fam: F.zh, w: 700, c: C.argued, a: a * Q(S, 3, 'not a prediction', 0.6) });
+    txt('window hit ≠ prediction · 命中窗口 ≠ 预言', 200, 320, { size: 30, fam: F.zh, w: 700, c: C.argued, a: a * at(S, 3, 0.6, 2.2) });
   }
   /* line 1: cut 9 */
   const la = a * at(S, 1, 0.6), cur2 = at(S, 2, 0.5);
@@ -556,7 +557,7 @@ SCENES.filter = S => {
     const ea = sa * Q(S, 2, 'site-variance cut', 0.6);
     dot(1330, y, 11, 'g', ea);
     txt('charge-6 third eigenvalue ≈ 9.2061', 1330, y - 22, { size: 18, fam: F.math, w: 700, align: 'center', c: C.now, a: ea });
-    txt('positions schematic · 示意', ax1, y + 38, { size: 16, fam: F.zh, w: 700, align: 'right', c: C.dim, a: ea });
+    txt('positions schematic · 示意', ax1, y - 22, { size: 16, fam: F.zh, w: 700, align: 'right', c: C.dim, a: ea });
     const ha = sa * Q(S, 2, 'gets in first', 0.6);
     txt('#8236   γ ≈ 8354.92', 1020, 668, { size: 34, fam: F.mono, w: 700, c: C.now, a: ha });
     txt('α_s ∈ (0.1183058, 0.1183120)', 1020, 712, { size: 22, fam: F.math, w: 700, c: C.white, a: ha });
@@ -639,7 +640,7 @@ FILM.poster = () => {
   /* the critical line folded onto the unit circle, and the 19-zero window */
   const cx = W / 2, cy = 610, r = 150;
   ring(cx, cy, r, C.dim, 0.8, 1.5);
-  curve(i => { const y = -6 + 12 * i / 200; const w = zwCayley(0.5, y); return [cx + w[0] * r, cy - w[1] * r]; }, 200, C.cyan, 1, 4);
+  curve(i => { const y = -6 + 12 * i; const w = zwCayley(0.5, y); return [cx + w[0] * r, cy - w[1] * r]; }, 200, C.cyan, 1, 4);
   const w = zwCayley(0.5, 0.7);
   dot(cx + w[0] * r, cy - w[1] * r, 13, 'g', 1);
   line(cx - 700, cy, cx - 260, cy, C.dim, 0.6, 1.5);

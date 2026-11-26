@@ -90,7 +90,7 @@
     ],
     [
      "Then as a gap: RH holds exactly when, for every c below one forty-eighth, the prime remainder ends up c log squared below M root x.",
-     "第二次改写成差额：RH 成立，当且仅当对每个小于 1/48 的 c，积分曼戈尔特余项最终都比 M√x 低出 c·(log x)²。"
+     "第二次改写成差额：RH 成立，当且仅当对每个 c < 1/48，曼戈尔特余项最终比 M√x 低出 c(log x)²。"
     ]
    ],
    "cues": [
@@ -286,7 +286,7 @@
     ],
     [
      "And 11431's sharpness is local: higher up, almost every centre beats it. Averages are welded; selection is open.",
-     "而第 11431 枚的锐度只是局部的：更高处，几乎每个中心都胜过它。平均已焊死，选点仍开放。"
+     "第 11431 枚的锐度只是局部：更高处几乎每个中心都胜过它。平均已焊死，选点仍开放。"
     ]
    ],
    "cues": [

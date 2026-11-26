@@ -330,24 +330,24 @@ SCENES.orbits = S => {
   }
   /* right: σ and the table */
   const sa = a * at(S, 0, 0.6);
-  panel(1060, 190, 740, 130, sa, C.cyan, 'CYCLE THE COORDINATES · 坐标轮换');
+  panel(1060, 190, 740, 150, sa, C.cyan, 'CYCLE THE COORDINATES · 坐标轮换');
   txt('σ(x, y, z) = (y, z, x)', 1090, 276, { size: 42, fam: F.math, w: 700, c: C.white, a: sa });
-  txt('a 120° turn about the pole · 绕极轴转 120°', 1772, 300, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.now, a: a * at(S, 0, 0.6, 1.2) });
+  txt('a 120° turn about the pole · 绕极轴转 120°', 1090, 324, { size: 20, fam: F.zh, w: 700, c: C.now, a: a * at(S, 0, 0.6, 1.2) });
   const pla = a * pa;
-  panel(1060, 344, 740, 110, pla, C.now, 'FIXED POINT · 不动点');
-  txt('σ(17, 17, 17) = (17, 17, 17)', 1090, 420, { size: 34, fam: F.math, w: 700, c: C.now, a: pla });
+  panel(1060, 364, 740, 110, pla, C.now, 'FIXED POINT · 不动点');
+  txt('σ(17, 17, 17) = (17, 17, 17)', 1090, 440, { size: 34, fam: F.math, w: 700, c: C.now, a: pla });
   const la = a * Q(S, 2, 'six orbits', 0.5);
-  panel(1060, 478, 740, 356, la, C.cyan, 'ORBITS BY LAYER · 按层排列的轨道');
+  panel(1060, 498, 740, 336, la, C.cyan, 'ORBITS BY LAYER · 按层排列的轨道');
   NP_LAYERS.slice(1).forEach((L, k) => {
     const ra = a * Q(S, 2, 'six orbits', 0.5, 0.35 * k);
-    const y = 546 + k * 56;
+    const y = 562 + k * 56;
     dot(1098, y - 8, 11, L.pearl, ra);
     txt(`${L.en} · ${L.zh}`, 1124, y, { size: 24, fam: F.zh, w: 700, c: npCol(L), a: ra });
     txt(L.reps.join('  '), 1384, y, { size: 22, fam: F.mono, w: 700, c: C.white, a: ra });
     txt(L.n, 1772, y, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.dim, a: ra });
   });
   const sum = a * Q(S, 2, 'inner core', 0.5);
-  txt('1 + 6 × 3 = 19', 1430, 800, { size: 36, fam: F.math, w: 700, align: 'center', c: C.now, a: sum });
+  txt('1 + 6 × 3 = 19', 1430, 806, { size: 36, fam: F.math, w: 700, align: 'center', c: C.now, a: sum });
 };
 
 /* ======================================================================= */

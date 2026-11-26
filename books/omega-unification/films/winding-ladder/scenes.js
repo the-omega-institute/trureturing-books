@@ -62,7 +62,7 @@ const WL = {
   w36: [[1, 1], [2, 1], [30, 2], [32, 1], [33, 15], [36, 6]], parts: 26, res26: ['+0.4210 %', '+0.2567 %'], parts2: 6899,
   ppmV: 0.47, ppmJ: 0.29, w104: 0.6589, w105: 6.8674, free: 100,
   code10: 1011, code9: 505, code8: 252, cMin: 0.97561882,
-  cliff: 1.690e-75, apart: 2e-9, leak: [31.060, 31.097], d: 724, k: 32, d2: 724.19, k2: 32.016797784
+  cliff: 1.690e-75, apart: 2e-9, leak: ['31.060', '31.097'], d: 724, k: 32, d2: 724.19, k2: 32.016797784
 };
 const commas = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 const RUNGS = [
@@ -108,7 +108,7 @@ FILM.init.push(() => {
   check(WL.f27v < 100 / 3 && WL.f27j < 100 / 3, 'below a third of reference');
   check(WL.gapV < 5e-8 && Math.max(WL.vub, WL.jj) < 1.5, 'gap < 5e-8, flavor < 1.5 ppm');
   check(Math.abs(WL.vub) < WL.boxV && Math.abs(WL.jj) < WL.boxJ && Math.abs(WL.vubN) < WL.boxV && Math.abs(WL.jN) < WL.boxJ, 'both zeros inside the density box');
-  check(WL.cliff < 1e-74 && Math.min(...WL.leak) > 31, 'cliff < 1e-74, leak > 31 %');
+  check(WL.cliff < 1e-74 && Math.min(...WL.leak.map(Number)) > 31, 'cliff < 1e-74, leak > 31 %');
   check(Math.abs(WL.k / WL.d ** 2 - WL.k2 / WL.d2 ** 2) / (WL.k / WL.d ** 2) < 1e-9, 'k/d² unchanged by the joint shift');
   check(commas(WL.zero) === '2,306,888,100,085', 'zero number');
   check(2e12 + 306e9 + 888e6 + 100e3 + 85 === WL.zero, 'spoken zero number');
@@ -123,8 +123,11 @@ const wlFade = S => clamp(S.u / 0.5) * clamp((S.d - S.u) / 0.5);
 function rich(parts, x, y, o = {}) {
   const size = o.size || 30, fam = o.fam || F.math, w = o.w || 700, a = o.a == null ? 1 : o.a;
   let cx = x;
-  if (o.align === 'center') cx = x - parts.reduce((s, p) => s + tw(p[0], size, fam, w), 0) / 2;
-  for (const [s, col] of parts) { txt(s, cx, y, { size, fam, w, c: col, a, ab: o.ab }); cx += tw(s, size, fam, w); }
+  if (o.align === 'center') cx = x - parts.reduce((s, p) => s + tw(p[0], p[2] ? size * 0.62 : size, fam, w), 0) / 2;
+  for (const [s, col, sub] of parts) {
+    const sz = sub ? size * 0.62 : size;
+    txt(s, cx, y + (sub ? size * 0.22 : 0), { size: sz, fam, w, c: col, a, ab: o.ab }); cx += tw(s, sz, fam, w);
+  }
   return cx;
 }
 const WL_MISSING = new Set();
@@ -188,47 +191,34 @@ SCENES.hook = S => {
   title(S);
   const a = clamp((S.u - lineAt(S, 0).s + 0.3) / 0.7) * clamp((S.d - S.u) / 0.5);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [3, null, 'computed']]);
-  /* line 0: outside versus inside */
-  const oa = a * at(S, 0, 0.6) * (1 - at(S, 1, 0.5));
-  if (oa > 0.003) {
-    panel(220, 330, 640, 220, oa, C.dim, 'CHAPTER 12 · 第十二章');
-    txt('pick zeros from outside', 250, 430, { size: 34, fam: F.disp, w: 700, c: C.dim, a: oa });
-    txt('从外部挑零点', 250, 486, { size: 30, fam: F.zh, w: 700, c: C.dim, a: oa });
-    line(240, 420, 840, 420, C.dim, oa * Q(S, 0, 'has failed', 0.5), 4);
-    const ia = oa * Q(S, 0, 'write an action', 0.5);
-    arrow(890, 440, 1030, 440, C.cyan, ia, 3);
-    panel(1060, 330, 640, 220, ia, C.cyan, 'CHAPTER 13 · 第十三章');
-    txt('write an action inside', 1090, 430, { size: 34, fam: F.disp, w: 700, c: C.white, a: ia });
-    txt('在壳内写下作用量', 1090, 486, { size: 30, fam: F.zh, w: 700, c: C.cyan, a: ia });
-  }
+  badgeQ(S, [[0, null, 'argued'], [2, null, 'computed']]);
   /* line 1+: one schematic triangle with its loop angle */
-  const ta = a * at(S, 1, 0.6);
+  const ta = a * at(S, 0, 0.6);
   if (ta > 0.003) {
     const A = [250, 740], B = [700, 740], Cc = [470, 340];
     line(A[0], A[1], B[0], B[1], C.cyan, ta, 3); line(B[0], B[1], Cc[0], Cc[1], C.cyan, ta, 3); line(Cc[0], Cc[1], A[0], A[1], C.cyan, ta, 3);
     [[A, 'i'], [B, 'j'], [Cc, 'l']].forEach(([p, n]) => { dot(p[0], p[1], 14, 'c', ta); txt(n, p[0] + (n === 'l' ? 22 : n === 'i' ? -30 : 20), p[1] + (n === 'l' ? 0 : 36), { size: 28, fam: F.math, w: 700, c: C.white, a: ta }); });
-    const sweep = ease(at(S, 1, 2.0, 0.8));
+    const sweep = ease(at(S, 0, 2.0, 0.8));
     ctx.save(); ctx.globalAlpha = ta; ctx.strokeStyle = C.mag; ctx.lineWidth = 4; ctx.beginPath();
-    ctx.arc(475, 610, 70, -Math.PI / 2, -Math.PI / 2 + sweep * TAU * 0.86); ctx.stroke(); ctx.restore();
-    if (sweep > 0.95) arrow(475 + 70 * Math.cos(-Math.PI / 2 + TAU * 0.86 - 0.2), 610 + 70 * Math.sin(-Math.PI / 2 + TAU * 0.86 - 0.2), 475 + 70 * Math.cos(-Math.PI / 2 + TAU * 0.86), 610 + 70 * Math.sin(-Math.PI / 2 + TAU * 0.86), C.mag, ta, 4);
-    txt('φ△(θ₁, θ₂)', 475, 620, { size: 28, fam: F.math, w: 700, align: 'center', c: C.mag, a: ta * sweep });
+    ctx.arc(472, 632, 88, -Math.PI / 2, -Math.PI / 2 + sweep * TAU * 0.86); ctx.stroke(); ctx.restore();
+    if (sweep > 0.95) arrow(472 + 88 * Math.cos(-Math.PI / 2 + TAU * 0.86 - 0.2), 632 + 88 * Math.sin(-Math.PI / 2 + TAU * 0.86 - 0.2), 472 + 88 * Math.cos(-Math.PI / 2 + TAU * 0.86), 632 + 88 * Math.sin(-Math.PI / 2 + TAU * 0.86), C.mag, ta, 4);
+    txt('φ△(θ₁, θ₂)', 472, 641, { size: 24, fam: F.math, w: 700, align: 'center', c: C.mag, a: ta * sweep });
     tag(150, 230, 'SCHEMATIC · 示意', C.argued, ta);
-    const ca = a * Q(S, 1, 'five hundred twenty-nine', 0.5);
+    const ca = a * Q(S, 0, 'five hundred twenty-nine', 0.5);
     if (ca > 0.003) {
       txt('529', 740, 300, { size: 84, fam: F.orb, w: 900, c: C.cyan, a: ca, ab: 2 });
       txt('triangles · 三角面', 750, 346, { size: 24, fam: F.zh, w: 700, c: C.white, a: ca });
     }
   }
   /* line 2: the action */
-  const fa = a * at(S, 2, 0.6);
+  const fa = a * at(S, 1, 0.6);
   if (fa > 0.003) {
     panel(980, 200, 800, 200, fa, C.argued, 'THE MODEL · 模型 · S_w');
-    rich([['S', C.white], ['w', C.white], [' = Σ', C.white], ['k', C.now], [' w', C.white], ['k', C.now], [' Σ', C.white], ['△', C.cyan], [' s△ (1 − cos ', C.white], ['k', C.now], [' φ△)', C.mag]], 1010, 300, { size: 40, a: fa });
+    rich([['S', C.white], ['w', C.white, 1], [' = Σ', C.white], ['k', C.now, 1], [' w', C.white], ['k', C.now, 1], [' Σ', C.white], ['△', C.cyan, 1], [' s', C.white], ['△', C.cyan, 1], [' (1 − cos ', C.white], ['k', C.now], [' φ', C.mag], ['△', C.mag, 1], [')', C.white]], 1010, 300, { size: 42, a: fa });
     txt('w_k ≥ 0,  Σ w_k = 1 · 非负归一权   k = winding · 绕数', 1010, 360, { size: 22, fam: F.zh, w: 700, c: C.dim, a: fa });
   }
   /* lines 2–3: the harmonics 1 − cos(kφ) near zero phase (computed) */
-  const pa = a * at(S, 2, 0.6, 1.2);
+  const pa = a * at(S, 1, 0.6, 1.2);
   if (pa > 0.003) {
     const X = f => HP.x0 + (f + HP.r) / (2 * HP.r) * HP.w, Y = v => HP.y0 - v / 2 * HP.h;
     line(HP.x0, HP.y0, HP.x0 + HP.w, HP.y0, C.dim, pa, 2);
@@ -238,11 +228,11 @@ SCENES.hook = S => {
     txt('1 − cos kφ', HP.x0, HP.y0 - HP.h - 14, { size: 22, fam: F.math, w: 700, c: C.white, a: pa });
     curve(t => { const f = -HP.r + 2 * HP.r * t; return [X(f), Y(1 - Math.cos(f))]; }, 120, C.cyan, pa, 3);
     txt('k = 1', X(HP.r) - 6, Y(1 - Math.cos(HP.r)) - 12, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.cyan, a: pa });
-    const ka = a * Q(S, 3, 'sharper harmonics', 0.8);
+    const ka = a * Q(S, 2, 'sharper harmonics', 0.8);
     if (ka > 0.003) {
       curve(t => { const f = -HP.r + 2 * HP.r * t * ka; return [X(f), Y(1 - Math.cos(19 * f))]; }, 600, C.now, a, 2.5);
-      txt('k = 19', HP.x0 + HP.w, HP.y0 - HP.h + 4, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.now, a: ka });
-      txt('narrow pockets · 狭窄势阱', X(0), HP.y0 + 30 + 32, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.now, a: a * Q(S, 3, 'narrow pockets', 0.6) });
+      txt('k = 19', HP.x0 + HP.w, HP.y0 - HP.h - 14, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.now, a: ka });
+      txt('narrow pockets · 狭窄势阱', X(0), HP.y0 + 30 + 32, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.now, a: a * Q(S, 2, 'narrow pockets', 0.6) });
     }
   }
 };
@@ -279,7 +269,7 @@ SCENES.order = S => {
     qRow(xR, 260, '(1 + i)(1 + j) =', triad(PH, P0, QH), pa, false);
     const ra = a * Q(S, 1, 'Reverse them', 0.5);
     qRow(xR, 360, '(1 + j)(1 + i) =', triad(QH, P0, PH), ra, Q(S, 1, 'flips', 0.3) > 0.5);
-    txt('triad(a, b, c) = (a b̄) c,   b = p₀ = 1', xR + 880, 300, { size: 22, fam: F.mono, w: 700, c: C.dim, a: pa });
+    txt('triad(a, b, c) = (a · b*) · c,   b = p₀ = 1', xR + 880, 300, { size: 22, fam: F.mono, w: 700, c: C.dim, a: pa });
     txt('not one ray · 不在同一射线', xR + 880, 404, { size: 26, fam: F.zh, w: 700, c: C.now, a: a * Q(S, 2, 'different rays', 0.5) });
   }
   /* line 2: the Gram quarter */
@@ -309,29 +299,16 @@ SCENES.wall = S => {
   const a = wlFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
-  const k1 = at(S, 1, 0.01) > 0, k2 = Q(S, 2, 'At nineteen', 0.01) > 0, k3 = Q(S, 2, 'At twenty-one', 0.01) > 0, k4 = at(S, 3, 0.01) > 0;
+  const k1 = at(S, 0, 0.01) > 0, k2 = Q(S, 1, 'At nineteen', 0.01) > 0, k3 = Q(S, 1, 'At twenty-one', 0.01) > 0, k4 = at(S, 2, 0.01) > 0;
   const cur = k4 ? 3 : k3 ? 2 : k2 ? 1 : k1 ? 0 : -1;
-  stairs({ a: a * at(S, 0, 0.6, 1.5), cur, upto: cur });
-  /* line 0: the corridor on the torus */
-  const ca = a * at(S, 0, 0.6) * (1 - at(S, 1, 0.5));
-  if (ca > 0.003) {
-    const x = 180, y = 190, s = 240, h = s / 32 * 2;
-    box(x, y, s, s, C.dim, ca, 1.5);
-    txt('θ₁', x + s / 2, y + s + 30, { size: 22, fam: F.math, w: 700, align: 'center', c: C.dim, a: ca });
-    txt('θ₂', x - 30, y + s / 2 + 8, { size: 22, fam: F.math, w: 700, c: C.dim, a: ca });
-    fillBox(x + s / 2 - h / 2, y + s / 2 - h / 2, h, h, C.now, ca * 0.5); box(x + s / 2 - h / 2, y + s / 2 - h / 2, h, h, C.now, ca, 2);
-    factPanel(500, 190, 980, 200, ca, C.cyan, 'THREE WINDOWS [1]+[2]+[4] · 三窗', [
-      ['both clocks within 1/32 turn of 0', C.white, 28, F.disp],
-      ['两只钟离 0 都不超过 1/32 圈 · flavor coordinate c > 0.97561882', C.dim, 22]
-    ]);
-  }
+  stairs({ a, cur, upto: cur });
   const fx = 500, fy = 190, fw = 1260, fh = 210;
-  if (cur === 0) factPanel(fx, fy, fw, fh, a * at(S, 1, 0.5), C.dim, 'K ≤ 18 · 三窗内无驻点', [
+  if (cur === 0) factPanel(fx, fy, fw, fh, a * at(S, 0, 0.5), C.dim, 'K ≤ 18 · 三窗内无驻点', [
     ['‖∇S_w‖ > ' + WL.grad + '   for every w ≥ 0', C.white, 40, F.math],
     ['任意非负归一权，三窗内梯度处处不为零', C.dim, 24]
   ]);
   if (cur === 1 || cur === 2) {
-    const s1 = a * Q(S, 2, 'At nineteen', 0.5), s2 = a * Q(S, 2, 'At twenty-one', 0.5);
+    const s1 = a * Q(S, 1, 'At nineteen', 0.5), s2 = a * Q(S, 1, 'At twenty-one', 0.5);
     factPanel(fx, fy, 610, fh, s1, cur === 1 ? C.now : C.cyan, 'K = 19 · 首个驻点', [
       ['saddle · 鞍点', C.white, 34],
       ['zero #' + commas(WL.saddle), C.dim, 24, F.mono]
@@ -342,18 +319,18 @@ SCENES.wall = S => {
     ]);
   }
   if (cur === 3) {
-    const fa = a * at(S, 3, 0.5);
-    panel(fx, fy, fw, fh + 30, fa, C.now, 'K = 27 · GLOBAL MINIMUM IN THE WINDOWS · 全局极小落进三窗');
-    const ba = a * Q(S, 3, 'flavor readings', 0.6);
-    [['|V_ub|²', WL.f27v], ['J', WL.f27j]].forEach(([lab, v], i) => {
-      const y = fy + 70 + i * 66, bx = fx + 200, bw = 760;
-      txt(lab, fx + 30, y + 30, { size: 30, fam: F.math, w: 700, c: C.white, a: ba });
+    const fa = a * at(S, 2, 0.5);
+    panel(fx, fy, fw, fh, fa, C.now, 'K = 27 · GLOBAL MINIMUM IN THE WINDOWS · 全局极小落进三窗');
+    const ba = a * Q(S, 2, 'flavor readings', 0.6);
+    [[[['|V', C.white], ['ub', C.white, 1], ['|²', C.white]], WL.f27v], [[['J', C.white]], WL.f27j]].forEach(([lab, v], i) => {
+      const y = fy + 50 + i * 60, bx = fx + 200, bw = 760;
+      rich(lab, fx + 30, y + 30, { size: 30, a: ba });
       box(bx, y, bw, 40, C.dim, ba, 1.5);
       fillBox(bx, y, bw * v / 100 * ease(ba), 40, C.now, ba * 0.7);
       txt('≤ ' + v + ' %', bx + bw * v / 100 + 16, y + 30, { size: 28, fam: F.mono, w: 700, c: C.now, a: ba });
       txt('100 % reference · 参考', bx + bw - 8, y + 30, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.dim, a: ba });
     });
-    txt('flavor collapses · 味塌缩', fx + fw - 30, fy + 70 + 2 * 66 + 18, { size: 24, fam: F.zh, w: 700, align: 'right', c: C.now, a: ba });
+    txt('flavor collapses · 味塌缩', fx + fw - 30, fy + 190, { size: 24, fam: F.zh, w: 700, align: 'right', c: C.now, a: ba });
   }
 };
 
@@ -364,7 +341,7 @@ SCENES.summit = S => {
   const a = wlFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
-  const cur = at(S, 3, 0.01) > 0 ? 6 : at(S, 1, 0.01) > 0 ? 5 : 4;
+  const cur = at(S, 2, 0.01) > 0 ? 6 : at(S, 1, 0.01) > 0 ? 5 : 4;
   stairs({ a, cur, upto: cur });
   const fx = 160, fy = 190, fw = 1600;
   if (cur === 4) factPanel(fx, fy, 1040, 210, a * at(S, 0, 0.5), C.now, 'K = 31 · 参考味局部极小', [
@@ -376,15 +353,15 @@ SCENES.summit = S => {
     panel(fx, fy, 1300, 250, fa, C.now, 'K = 36 · WEIGHTS MAY TRACK HEIGHT · 权重随高度调整');
     rich([['w = (δ₁ + δ₂ + 2δ₃₀ + δ₃₂ + 15δ₃₃ + 6δ₃₆) / ', C.white], ['26', C.cyan]], fx + 28, fy + 90, { size: 34, a: fa });
     txt('residuals ' + WL.res26.join(' / ') + ' · 残差', fx + 28, fy + 140, { size: 24, fam: F.zh, w: 700, c: C.dim, a: fa });
-    const pa = a * Q(S, 2, 'sixty-eight ninety-nine', 0.6);
-    rich([['same six windings, ', C.white], [String(WL.parts2), C.now], [' parts:  |V_ub|² < ' + WL.ppmV + ' ppm,  J < ' + WL.ppmJ + ' ppm', C.white]], fx + 28, fy + 204, { size: 30, a: pa });
+    const pa = a * at(S, 1, 0.6, 3.0);
+    rich([['same six windings, ', C.white], [String(WL.parts2), C.now], [' parts:  |V', C.white], ['ub', C.white, 1], ['|² < ' + WL.ppmV + ' ppm,  J < ' + WL.ppmJ + ' ppm', C.white]], fx + 28, fy + 204, { size: 30, a: pa });
   }
   if (cur === 6) {
-    const fa = a * at(S, 3, 0.5);
+    const fa = a * at(S, 2, 0.5);
     panel(fx, fy, 1180, 230, fa, C.now, 'K = 105 · ONE FIXED VACUUM FOR EVERY HEIGHT · 统一全局真空');
     txt('K ≤ 104: all four phase branches excluded · 四条相位支全部排除', fx + 28, fy + 80, { size: 24, fam: F.zh, w: 700, c: C.dim, a: fa });
     rich([['w₁₀₄ > ' + WL.w104 + ' %,   w₁₀₅ > ' + WL.w105 + ' %', C.white]], fx + 28, fy + 140, { size: 34, a: fa });
-    const ra = a * Q(S, 3, 'one hundred coefficients', 0.6);
+    const ra = a * Q(S, 2, 'one hundred coefficients', 0.6);
     rich([['still ', C.white], [String(WL.free), C.mag], [' free coefficients · 个连续自由系数', C.white]], fx + 28, fy + 200, { size: 32, a: ra, fam: F.zh });
     stamp('100 FREE', 1520, 300, ra, C.mag, 44, -0.06);
   }
@@ -406,7 +383,7 @@ function bits(x, y, n, cw, a, label, col, verdict, vcol) {
 SCENES.damp = S => {
   const a = wlFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [1, 'Interval certificates', 'computed']]);
+  badgeQ(S, [[0, null, 'argued'], [0, 'Interval certificates', 'computed']]);
   /* left: a decaying weight profile, schematic */
   const la = a * at(S, 0, 0.6);
   if (la > 0.003) {
@@ -419,7 +396,7 @@ SCENES.damp = S => {
     tag(560, 310, 'SCHEMATIC · 示意', C.argued, la);
   }
   /* right: the gap to a native competitor */
-  const ga = a * Q(S, 1, 'native shell competitor', 0.6);
+  const ga = a * Q(S, 0, 'native shell competitor', 0.6);
   if (ga > 0.003) {
     panel(960, 190, 820, 330, ga, C.mag, 'ACTION · 作用量');
     const yTop = 290, yBot = 450;
@@ -429,15 +406,15 @@ SCENES.damp = S => {
     line(1000, yBot, 1380, yBot, C.mag, ga, 3);
     txt('native competitor', 1400, yBot + 2, { size: 20, fam: F.disp, w: 700, c: C.mag, a: ga });
     txt('原生竞争点', 1400, yBot + 30, { size: 18, fam: F.zh, w: 700, c: C.dim, a: ga });
-    const gp = Q(S, 1, 'more than one quarter', 0.6);
+    const gp = Q(S, 0, 'over one quarter', 0.6);
     arrow(1190, yTop + 8, 1190, yBot - 8, C.now, ga * gp, 3); arrow(1190, yBot - 8, 1190, yTop + 8, C.now, ga * gp, 3);
     txt('> 1/4', 1214, (yTop + yBot) / 2 + 14, { size: 40, fam: F.orb, w: 900, c: C.now, a: ga * gp });
-    txt('levels schematic · gap certified · 位置示意，能差有证书', 1000, 500, { size: 18, fam: F.zh, w: 700, c: C.dim, a: ga });
+    txt('levels schematic · 位置示意', 1000, 500, { size: 18, fam: F.zh, w: 700, c: C.dim, a: ga });
   }
   /* line 2: the codes */
-  const ca = a * at(S, 2, 0.6);
+  const ca = a * at(S, 1, 0.6);
   bits(300, 610, WL.code10, 60, ca, '10 binary digits · 十位码  ⌊2¹⁰ c⌋ = ' + WL.code10, C.cyan, 'all excluded · 全数排除', C.cyan);
-  bits(300, 730, WL.code9, 60, a * Q(S, 2, 'With nine digits', 0.6), '9 binary digits · 九位码  ⌊2⁹ c⌋ = ' + WL.code9, C.now, 'counterexample · 反例', C.now);
+  bits(300, 730, WL.code9, 60, a * Q(S, 1, 'With nine digits', 0.6), '9 binary digits · 九位码  ⌊2⁹ c⌋ = ' + WL.code9, C.now, 'counterexample · 反例', C.now);
 };
 
 /* ======================================================================= */
@@ -455,8 +432,8 @@ SCENES.flagship = S => {
   const wa = a * at(S, 1, 0.6);
   if (wa > 0.003) {
     panel(160, 360, 760, 240, wa, C.cyan, 'ITS OWN TWO CLOCKS · 它自己的两只钟');
-    ['[1]', '[2]', '[4]'].forEach((s, i) => { const p = clamp(at(S, 1, 0.4, 0.4 + 0.35 * i)); chip(250 + i * 150, 440, 120, 54, s + ' ✓', C.cyan, wa * p, 26); });
-    txt('three windows · 三窗', 700, 450, { size: 24, fam: F.zh, w: 700, c: C.white, a: wa });
+    ['[1]', '[2]', '[4]'].forEach((s, i) => { const p = clamp(at(S, 1, 0.4, 0.4 + 0.35 * i)); chip(240 + i * 130, 440, 110, 54, s + ' ✓', C.cyan, wa * p, 26); });
+    txt('three windows · 三窗', 590, 450, { size: 24, fam: F.zh, w: 700, c: C.white, a: wa });
     const ga = a * Q(S, 1, 'with an action', 0.5);
     txt('105-winding gap · 能隙', 190, 530, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ga });
     txt(WL.gap, 190, 578, { size: 40, fam: F.math, w: 700, c: C.white, a: ga });
@@ -466,14 +443,14 @@ SCENES.flagship = S => {
   if (pa > 0.003) {
     panel(960, 360, 800, 240, pa, C.cyan, 'FLAVOR ERROR · 味偏差 (ppm)');
     const X = v => PP.x0 + (v + PP.r) / (2 * PP.r) * PP.w;
-    [['|V_ub|²', WL.vub, WL.vubN, WL.boxV, 450], ['J', WL.jj, WL.jN, WL.boxJ, 530]].forEach(([lab, v, vn, bx, y]) => {
+    [[[['|V', C.white], ['ub', C.white, 1], ['|²', C.white]], WL.vub, WL.vubN, WL.boxV, 450], [[['J', C.white]], WL.jj, WL.jN, WL.boxJ, 530]].forEach(([lab, v, vn, bx, y]) => {
       line(X(-PP.r), y, X(PP.r), y, C.dim, pa, 2);
       fillBox(X(-bx), y - 18, X(bx) - X(-bx), 36, C.cyan, pa * 0.12);
       box(X(-bx), y - 18, X(bx) - X(-bx), 36, C.cyan, pa * 0.6, 1);
       line(X(0), y - 24, X(0), y + 24, C.white, pa, 2);
       dot(X(vn), y, 11, 'c', pa * Q(S, 2, 'Both flavor readings', 0.5));
       dot(X(v), y, 14, 'g', pa);
-      txt(lab, PP.x0 - 8, y - 26, { size: 22, fam: F.math, w: 700, c: C.white, a: pa });
+      rich(lab, PP.x0 - 8, y - 26, { size: 22, a: pa });
       txt((v > 0 ? '+' : '') + v, X(v), y - 26, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.now, a: pa });
       txt('±' + bx, X(bx) + 8, y + 32, { size: 18, fam: F.mono, w: 700, c: C.cyan, a: pa });
     });
@@ -485,7 +462,7 @@ SCENES.flagship = S => {
   if (da > 0.003) {
     panel(160, 640, 760, 170, da, C.cyan, 'JOINT NEAR-VACUUM ZEROS · 联合近真空零点');
     txt('natural lower density > ' + WL.dens, 190, 720, { size: 30, fam: F.math, w: 700, c: C.white, a: da });
-    txt('gap < 10⁻⁷,  ≤ 2 ppm,  ≤ 1.2 ppm · 自然下密度', 190, 770, { size: 22, fam: F.zh, w: 700, c: C.dim, a: da });
+    txt('gap < 10⁻⁷,  < 2 ppm,  < 1.2 ppm · 自然下密度', 190, 770, { size: 22, fam: F.zh, w: 700, c: C.dim, a: da });
     const ma = a * Q(S, 3, 'Yet this is', 0.5);
     panel(960, 640, 800, 170, ma, C.argued, 'WHAT KIND OF RESULT · 结论的身份');
     txt('a witness inside the model', 990, 718, { size: 32, fam: F.disp, w: 700, c: C.white, a: ma });
@@ -509,7 +486,7 @@ SCENES.cracks = S => {
   ];
   let cl = 0;
   for (let j = 0; j < S.L.length; j++) if (S.u >= S.L[j].s) cl = j;
-  cells.forEach((c, i) => factPanel(c.x, c.y, 790, 250, a * (i ? at(S, i, 0.6) : Q(S, 0, 'Near the vacuum', 0.6)), cl === i ? C.now : C.cyan, c.head, c.rows));
+  cells.forEach((c, i) => factPanel(c.x, c.y, 790, 230, a * (i ? at(S, i, 0.6) : Q(S, 0, 'Near the vacuum', 0.6)), cl === i ? C.now : C.cyan, c.head, c.rows));
 };
 
 /* ======================================================================= */

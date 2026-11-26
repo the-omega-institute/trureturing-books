@@ -248,7 +248,7 @@ function fmTitle(S) {
 /* ======================================================================= */
 /*                         scene 1 · THE LOCK OF THREE                       */
 /* ======================================================================= */
-const LK_O = [500, 520], LK_S = 390;
+const LK_O = [500, 500], LK_S = 340;
 function lkScreen(uv) { return [LK_O[0] + LK_S * uv[0], LK_O[1] - LK_S * uv[1]]; }
 /* draw the shell turned by the fraction k of the cycle (k = 0 rest, k = 1 every point on its image) */
 function lkShell(a, k, orbA) {
@@ -289,10 +289,10 @@ SCENES.lock = S => {
   lkShell(a, turn, orbA);
   /* the pole label */
   const pa = a * Q(S, 1, 'fixes one pole', 0.6);
-  txt('(17, 17, 17)', LK_O[0] + 26, LK_O[1] + 8, { size: 24, fam: F.mono, w: 700, c: C.now, a: pa });
+  if (pa > 0.003) { fillBox(LK_O[0] - 92, LK_O[1] + 22, 184, 34, C.bg, pa * 0.85); txt('(17, 17, 17)', LK_O[0], LK_O[1] + 48, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.now, a: pa }); }
   txt('view down the (1, 1, 1) axis · 沿 (1,1,1) 方向俯视', LK_O[0], 822, { size: 18, fam: F.zh, w: 700, align: 'center', c: C.dim, a });
   /* a turning arrow around the axis while the cycle acts */
-  const ta = a * clamp(turn * 4) * (1 - clamp((turn - 0.85) * 6));
+  const ta = a * clamp(turn * 4) * (1 - clamp((turn - 0.75) * 5));
   fmArc(LK_O[0], LK_O[1], LK_S * 0.86, -Math.PI * 0.75, -Math.PI * 0.75 + TAU / 3 * ease(turn), C.now, ta, 4);
   /* the ledger page */
   panel(1000, 280, 800, 540, a, C.cyan, 'THE SHELL · 十九点球壳');
@@ -311,7 +311,7 @@ SCENES.lock = S => {
       const v = lerp(gen[i][j], perm[i][j], k);
       fillBox(x0 + j * cw + 6, y0 + i * ch + 6, cw - 12, ch - 12, C.cyan, ca * 0.6 * v);
       box(x0 + j * cw + 6, y0 + i * ch + 6, cw - 12, ch - 12, C.cyan, ca * 0.35, 1);
-      if (perm[i][j] && k > 0.5) txt('e^{iα}', x0 + j * cw + cw / 2, y0 + i * ch + ch / 2 + 9, { size: 24, fam: F.math, w: 700, align: 'center', c: C.white, a: ca * clamp((k - 0.5) * 3) });
+      if (perm[i][j] && k > 0.5) txt('eⁱᵅ', x0 + j * cw + cw / 2, y0 + i * ch + ch / 2 + 9, { size: 24, fam: F.math, w: 700, align: 'center', c: C.white, a: ca * clamp((k - 0.5) * 3) });
     }
     txt('|V_CKM|', x0 + 1.5 * cw, y0 + 3 * ch + 28, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ca });
     const la = a * Q(S, 2, 'permutation with phases', 0.6);
@@ -320,7 +320,7 @@ SCENES.lock = S => {
     txt('for any edge phases z_i', 1420, 690, { size: 20, fam: F.mono, w: 700, c: C.dim, a: la });
     txt('written argument · 书面论证', 1420, 730, { size: 20, fam: F.zh, w: 700, c: C.argued, a: la });
   }
-  stamp('MUST BREAK · 必须破缺', 1400, 260, Q(S, 3, 'must break', 0.5), C.mag, 30, -0.05);
+  stamp('MUST BREAK · 必须破缺', 1400, 232, Q(S, 3, 'must break', 0.5), C.mag, 30, -0.05);
 };
 
 /* ======================================================================= */
@@ -428,10 +428,10 @@ SCENES.walls = S => {
     txt('fits 9 masses + CKM on one zero  ·  单枚零点可拟', 166, 660, { size: 22, fam: F.zh, w: 700, c: C.white, a: ta });
     fmRich([['heavy block  ', C.dim], ['> 16.63', C.mag]], 166, 708, { size: 26, a: ta * Q(S, 3, 'but at a vacuum cost', 0.6) });
     fmRich([['vacuum coefficient  ', C.dim], ['> 3.45 × 10³⁴ GeV²', C.mag]], 166, 752, { size: 26, a: ta * Q(S, 3, 'vacuum cost', 0.6, 0.5) });
-    fmRich([['three zeros together: some ratio  ', C.dim], ['< 98.7 %', C.mag]], 166, 796, { size: 22, a: ta * Q(S, 3, 'thirty-four', 0.6) });
+    fmRich([['three zeros together: some ratio  ', C.dim], ['< 98.7 %', C.mag]], 166, 796, { size: 22, a: ta * Q(S, 3, 'vacuum cost', 0.6, 1.2) });
   }
   /* card: minimal site support, after the line */
-  const sa = a * Q(S, 3, 'thirty-four', 0.6, 0.6);
+  const sa = a * Q(S, 3, 'Richer transport', 0.6, 1.2);
   if (sa > 0.003) {
     panel(1040, 590, 760, 230, sa, C.cyan, 'MINIMAL SITE SUPPORT · 最小站点支撑');
     const rows = [[8, 'm_t / m_b needs ≥ 8 sites'], [16, 'stationarity needs ≥ 16 sites']];
@@ -545,9 +545,9 @@ SCENES.gram = S => {
   const fa = a * Q(S, 2, 'forty-two dimensions', 0.6);
   if (fa > 0.003) {
     chip(1050, 778, 300, 48, '≥ 42 per side', C.argued, fa, 22);
-    chip(1365, 778, 300, 48, '≥ 48 with doublets', C.argued, fa * Q(S, 2, 'forty-five', 0.4), 22);
-    chip(1680, 778, 240, 48, '≥ 45 at H = 0', C.argued, a * Q(S, 2, 'forty-five', 0.6), 22);
-    txt('folding dimensions: the chapter’s replay results, not Lean · 折叠维数：本章复算结果', 900, 830, { size: 16, fam: F.zh, w: 700, c: C.argued, a: fa });
+    chip(1365, 778, 300, 48, '≥ 48 with doublets', C.argued, fa * Q(S, 2, 'forty-two dimensions', 0.6, 0.8), 22);
+    chip(1680, 778, 240, 48, '≥ 45 at H = 0', C.argued, fa * Q(S, 2, 'forty-two dimensions', 0.6, 1.6), 22);
+    txt('folding dimensions: the chapter\'s replay results, not Lean · 折叠维数：本章复算结果', 900, 830, { size: 16, fam: F.zh, w: 700, c: C.argued, a: fa });
   }
 };
 
@@ -567,7 +567,8 @@ SCENES.calib = S => {
     ctx.save(); ctx.globalAlpha = m; ctx.strokeStyle = C.cyan; ctx.lineWidth = 2.5; ctx.beginPath();
     tri.forEach((p, i) => (i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.closePath(); ctx.stroke(); ctx.restore();
     tri.forEach((p, i) => { dot(p[0], p[1], 12, 'c', m); txt(names[i], p[0] + (i === 0 ? 20 : i === 1 ? -10 : 10), p[1] + (i === 0 ? 6 : 34), { size: 18, fam: F.mono, w: 700, align: i === 1 ? 'center' : 'left', c: C.white, a: m }); });
-    const n = Math.round(28 * ease(Q(S, 0, 'twenty-eight windings', 1.2)));
+    const w0 = phraseAt(S, 0, 'mirror triangle'), w1 = phraseAt(S, 0, 'twenty-eight windings') + 0.8;
+    const n = Math.round(28 * ease(clamp((S.u - w0) / Math.max(0.5, w1 - w0))));
     txt(String(n), 680, 450, { size: 96, fam: F.orb, w: 900, align: 'center', c: C.cyan, a: m });
     txt('windings · 圈', 680, 494, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: m });
     txt('baseline needs 42', 680, 528, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.dim, a: m * Q(S, 0, 'twenty-eight windings', 0.6) });
@@ -592,17 +593,17 @@ SCENES.calib = S => {
   const la = a * at(S, 2, 0.6);
   if (la > 0.003) {
     const steps = [
-      { n: 2, en: 'fixed 19×19 unitary  ⇒  no mixing', zh: '固定酉矩阵：禁止代际混合', ph: 'No fixed matrix' },
-      { n: 5, en: 'fixed local generators  ⇒  ℂ I', zh: '固定局域生成元：只剩标量', ph: 'five zeros shrink' },
-      { n: 7, en: 'any fixed matrix  ⇒  quadratic in P', zh: '任意固定矩阵：轮换的二次多项式', ph: 'seven shrink' }
+      { n: 2, en: 'fixed unitary ⇒ no mixing', zh: '固定酉矩阵：禁止代际混合', ph: 'No fixed matrix' },
+      { n: 5, en: 'local generators ⇒ ℂ I', zh: '固定局域生成元：只剩标量', ph: 'five zeros shrink' },
+      { n: 7, en: 'any fixed matrix ⇒ quadratic in P', zh: '任意固定矩阵：轮换的二次多项式', ph: 'seven shrink' }
     ];
     steps.forEach((st, i) => {
       const sa = a * Q(S, 2, st.ph, 0.6);
       if (sa <= 0.003) return;
-      const x = 140 + i * 370, y = 760 - i * 60, w = 350;
+      const x = 140 + i * 375, y = 760 - i * 60, w = 360;
       box(x, y - 60, w, 128 + 0, C.cyan, sa, 1.5, 'rgba(0,0,0,0.55)');
       txt(`${st.n} zeros`, x + 18, y - 22, { size: 26, fam: F.orb, w: 900, c: C.cyan, a: sa });
-      txt(st.en, x + 18, y + 14, { size: 18, fam: F.mono, w: 700, c: C.white, a: sa });
+      txt(st.en, x + 18, y + 14, { size: 17, fam: F.mono, w: 700, c: C.white, a: sa });
       txt(st.zh, x + 18, y + 48, { size: 18, fam: F.zh, w: 700, c: C.dim, a: sa });
     });
     txt('rigidity ladder · 刚性阶梯 (certificates)', 140, 590, { size: 20, fam: F.zh, w: 700, c: C.cyan, a: la });
@@ -613,7 +614,7 @@ SCENES.calib = S => {
     txt('a spectral operator', 1300, 668, { size: 30, fam: F.disp, w: 700, c: C.white, a: sp });
     txt('that moves with the background', 1300, 708, { size: 24, fam: F.disp, w: 700, c: C.white, a: sp });
     txt('随背景协变的谱算子，不是常数', 1300, 752, { size: 24, fam: F.zh, w: 700, c: C.white, a: sp });
-    txt('the chapter’s reading · 本章的结论读法', 1300, 796, { size: 18, fam: F.zh, w: 700, c: C.argued, a: sp });
+    txt('the chapter\'s reading · 本章的结论读法', 1300, 796, { size: 18, fam: F.zh, w: 700, c: C.argued, a: sp });
   }
 };
 

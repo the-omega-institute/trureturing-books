@@ -253,7 +253,7 @@ SCENES.gap = S => {
     });
     txt('light → heavy · 由轻到重', bx, by - 40, { size: 20, fam: F.zh, w: 700, c: C.white, a: sa });
     txt('every prefix < 0 · 每个前缀都为负', 1400, 520, { size: 24, fam: F.zh, w: 700, c: C.mag, a: sa * Q(S, 1, 'every mass prefix', 0.5) });
-    txt('ρ ≥ dQ⁴ / 64π²', 1400, 570, { size: 28, fam: F.math, w: 700, c: C.white, a: sa * Q(S, 1, 'negative polarization deficit', 0.5) });
+    txt('ρ ≥ dQ⁴ / 64π²', 1400, 570, { size: 28, fam: F.math, w: 700, c: C.white, a: sa * Q(S, 1, 'negative deficit', 0.5) });
     fvTag(1400, 640, 'layer order schematic · 次序示意', C.argued, sa);
   }
   /* lines 2–3: the two misses */
@@ -281,7 +281,7 @@ SCENES.singlets = S => {
   const a = fvFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
-  const n310 = Q(S, 1, 'three hundred ten', 2.2), hit = Q(S, 2, 'At three hundred eleven', 0.6);
+  const n310 = Q(S, 1, 'three hundred ten', 2.2), hit = Q(S, 2, 'Three hundred eleven can', 0.6);
   const flip = Q(S, 3, 'turns negative', 0.6);
   fvLadder(a, [
     { e: Math.log10(1.5e-7), label: '> 1.5 × 10⁻⁷  (≤ 310)', sub: '不超过 310 份', col: C.mag, a: Q(S, 1, 'forces Lambda G', 0.6) },
@@ -306,8 +306,8 @@ SCENES.singlets = S => {
     panel(1150, 200, 650, 250, ma, C.cyan, '311 EQUAL MASSES · 311 份等质量');
     txt('Q / M_P ≈ 0.42929', 1180, 270, { size: 28, fam: F.math, w: 700, c: C.white, a: ma });
     txt('M_s / M_P ≈ 0.017260', 1180, 315, { size: 28, fam: F.math, w: 700, c: C.white, a: ma });
-    txt('Δu ∈ (1.2030, 1.2031) × 10⁻¹²²', 1180, 380, { size: 28, fam: F.math, w: 700, c: C.now, a: ma * Q(S, 2, 'tuned to its', 0.5) });
-    txt('122-digit tuning · 122 位精细微调', 1180, 425, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ma * Q(S, 2, 'tuned to its', 0.5) });
+    txt('Δu ∈ (1.2030, 1.2031) × 10⁻¹²²', 1180, 380, { size: 28, fam: F.math, w: 700, c: C.now, a: ma * Q(S, 2, 'only with tuning', 0.5) });
+    txt('122-digit tuning · 122 位精细微调', 1180, 425, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ma * Q(S, 2, 'only with tuning', 0.5) });
   }
   /* line 3: the cutoff cliff */
   const ca = a * at(S, 3, 0.6);
@@ -343,6 +343,13 @@ SCENES.gram = S => {
   txt('det G(u,v,w) = ‖u‖²‖v‖²‖w‖² + 2⟨u,v⟩⟨u,w⟩⟨v,w⟩ − ‖u‖²⟨v,w⟩² − ‖v‖²⟨u,w⟩² − ‖w‖²⟨u,v⟩²', 175, 335, { size: 30, fam: F.math, w: 700, c: C.white, a: la * at(S, 1, 0.6) });
   fvLean(175, 400, la, 20);
   stamp('LEAN ✓', 1610, 395, Q(S, 1, 'Gram determinant', 0.5, 0.4) * (1 - at(S, 2, 0.5, 1.5)), C.lean, 30, -0.06);
+  /* line 1: the symbolic Gram matrix */
+  const sa = a * at(S, 1, 0.6) * (1 - at(S, 2, 0.4));
+  if (sa > 0.003) {
+    txt('G(u, v, w) =', 520, 640, { size: 34, fam: F.math, w: 700, c: C.white, a: sa });
+    fvMatrix(760, 520, [['⟨u,u⟩', '⟨u,v⟩', '⟨u,w⟩'], ['⟨v,u⟩', '⟨v,v⟩', '⟨v,w⟩'], ['⟨w,u⟩', '⟨w,v⟩', '⟨w,w⟩']], sa, { cw: 150, rh: 70, size: 32 });
+    txt('pairwise real inner products · 两两实内积', 760, 780, { size: 22, fam: F.zh, w: 700, c: C.dim, a: sa });
+  }
   /* lines 2–3: the worked examples */
   const ea = a * at(S, 2, 0.6);
   if (ea <= 0.003) return;
@@ -380,7 +387,13 @@ SCENES.stencil = S => {
   const ba = a * at(S, 1, 0.6);
   if (ba <= 0.003) return;
   /* the weights on the mass axis */
-  const bx = 220, by = 380, sp = 210, k = 48;
+  const bx = 220, by = 375, sp = 210, k = 44;
+  const ea = ba * (1 - at(S, 2, 0.4));
+  if (ea > 0.003) {
+    txt('equally spaced squared masses', 1100, 330, { size: 30, fam: F.disp, w: 700, c: C.white, a: ea });
+    txt('等距平方质量  0, μ², 2μ², 3μ²', 1100, 380, { size: 28, fam: F.zh, w: 700, c: C.dim, a: ea });
+    txt('net polarization = bosons − fermions · 净偏振 = 玻色 − 费米', 1100, 440, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ea });
+  }
   panel(140, 200, 880, 330, ba, C.cyan, 'WEIGHTS · 净偏振权重 D(−1, 3, −3, 1)');
   line(bx - 40, by, bx + 3 * sp + 80, by, C.dim, ba, 2);
   const lbl = ['0', 'μ²', '2μ²', '3μ²'];
@@ -409,7 +422,7 @@ SCENES.stencil = S => {
   /* line 3: the finite positive remainder */
   const fa = a * at(S, 3, 0.6);
   if (fa > 0.003) {
-    panel(140, 560, 880, 250, fa, C.cyan, 'HEAT TRACE · 热迹  −D(1 − e^{−at})³');
+    panel(140, 560, 880, 250, fa, C.cyan, 'HEAT TRACE · 热迹  −D(1 − e⁻ᵃᵗ)³');
     const px = 180, py = 760, pw = 420, ph = 140, T = 10, f = t => (t < 1e-6 ? 1 : Math.pow(-Math.expm1(-t), 3) / (t * t * t));
     const pr = clamp((S.u - lineAt(S, 3).s) / 1.6);
     ctx.save(); ctx.globalAlpha = fa * 0.35; ctx.fillStyle = C.cyan; ctx.beginPath(); ctx.moveTo(px, py);
@@ -427,18 +440,18 @@ SCENES.stencil = S => {
   if (ra > 0.003) {
     panel(1060, 560, 740, 250, ra, C.cyan, 'D = 4,  μ = v² / M · best C / c');
     const vals = [['#11661', 0.979478], ['#11934', 0.991359], ['#12207', 0.967553]];
-    const x0 = 1090, x1 = 1640, X = v => x0 + (v - 0.9) / 0.1 * (x1 - x0);
+    const x0 = 1090, x1 = 1560, X = v => x0 + (v - 0.95) / 0.05 * (x1 - x0);
     dashed(X(1), 600, X(1), 760, C.now, ra, 2);
     txt('1', X(1), 790, { size: 20, fam: F.math, w: 700, align: 'center', c: C.now, a: ra });
-    txt('0.9', x0, 790, { size: 18, fam: F.math, w: 700, align: 'center', c: C.dim, a: ra });
+    txt('0.95', x0, 790, { size: 18, fam: F.math, w: 700, align: 'center', c: C.dim, a: ra });
     vals.forEach(([z, v], i) => {
       const y = 625 + i * 48, best = i === 1;
       const va = ra * Q(S, 4, 'one zero reaches', 0.5);
       fillBox(x0, y - 18, X(v) - x0, 26, best ? C.now : C.cyan, va * 0.45);
       txt(z, x0 + 6, y + 2, { size: 18, fam: F.mono, w: 700, c: C.white, a: va });
-      txt(v.toFixed(6), X(v) + 12, y + 2, { size: 20, fam: F.math, w: 700, c: best ? C.now : C.cyan, a: va });
+      txt(v.toFixed(6), x1 + 24, y + 2, { size: 22, fam: F.math, w: 700, c: best ? C.now : C.cyan, a: va });
     });
-    fvTag(1530, 800, 'chosen inputs · 选定输入', C.argued, ra * Q(S, 4, 'chosen light scale', 0.5), 16);
+    fvTag(1230, 800, 'chosen inputs · 选定输入', C.argued, ra * Q(S, 4, 'chosen light scale', 0.5), 16);
   }
 };
 
@@ -480,7 +493,7 @@ SCENES.higgs = S => {
   if (da > 0.003) {
     panel(1240, 200, 560, 360, da, C.now, 'TREE DROP · 树势落差');
     txt('ρ_H(v) − ρ_H(0) = −m_h² v² / 8', 1270, 275, { size: 26, fam: F.math, w: 700, c: C.white, a: da });
-    txt('ΔC = 8πΔρ / M_P⁴ = −π m_h² v² / M_P⁴', 1270, 330, { size: 24, fam: F.math, w: 700, c: C.white, a: da });
+    txt('ΔC = 8πΔρ / M_P⁴ = −π m_h² v² / M_P⁴', 1270, 330, { size: 22, fam: F.math, w: 700, c: C.white, a: da });
     txt(`m_h = ${FV_MH},  v = ${FV_VEV} GeV`, 1270, 385, { size: 22, fam: F.math, w: 700, c: C.dim, a: da });
     txt('M_P = 1.22089 × 10¹⁹ GeV', 1270, 420, { size: 22, fam: F.math, w: 700, c: C.dim, a: da });
     txt(`= −${(-h * 1e67).toFixed(4)} × 10⁻⁶⁷`, 1270, 495, { size: 38, fam: F.math, w: 700, c: C.now, a: da * ha });
@@ -529,7 +542,7 @@ SCENES.ledger = S => {
   }
   const qa = a * at(S, 3, 0.7);
   if (qa > 0.003) {
-    txt('Reaching 10⁻¹²² in a model is a witness, not a derivation.', W / 2, 740, { size: 40, fam: F.disp, w: 700, align: 'center', c: C.white, a: qa, ab: 2 });
+    txt('Reaching 10⁻¹²² in a model is a witness, not a derivation.', W / 2, 740, { size: 38, fam: F.math, w: 700, align: 'center', c: C.white, a: qa });
     txt('在模型里够到 10⁻¹²²，是见证，不是推导。', W / 2, 795, { size: 28, fam: F.zh, w: 700, align: 'center', c: C.dim, a: qa });
   }
 };

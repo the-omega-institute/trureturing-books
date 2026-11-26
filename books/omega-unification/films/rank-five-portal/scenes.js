@@ -21,14 +21,10 @@
                 value of the block quadratic form over y is x*(A − B C⁻¹ Bᴴ)x; the 1 × 1 instance A = 3, B = 2,
                 C = 4, x = 1 is a worked example with chosen numbers (computed); the Schur margin > 3.11842 for
                 8π I ± 𝒜 is the chapter's certificate (computed).
-     heat       the heat-kernel portal P_t = e^{−tK/d} is a chosen ansatz (argued); t ≤ 0.49 excluded, [8, 16]
-                viable in 1600 certified cells, t = θ804/θ12 = 8.53511335934… (certificate); A_1/A_7 = e^{t(e7−e1)}
-                with 0.11854 < e7 − e1 < 0.15417 gives (2.75042, 3.72783) at the arc ratio and (6.66350, 11.78302)
-                at t = 16 (recomputed here from the stated bounds). The mode profile drawn is schematic.
      pinch      the low-energy partners of the broken-vacuum balance in this model: 20 charged assignments add
                 17.5920–17.7478 MeV to the tree Z width (LEP 2495.2 ± 2.3 MeV); 6 neutral assignments give
-                CLEO χ² ≈ 6.05 against 13.5372–29.2980 (certificate, computed); OPAL's 98.0 GeV long-lived limit
-                and the Majorana decay with B_e + B_μ ≥ 50 %, τ_S < 4.21 × 10⁻¹⁹ s (argued).
+                CLEO χ² ≈ 6.05 against 13.5372–29.2980 (certificate, computed); the 80.38 GeV charged singlet against
+                OPAL's 98.0 GeV long-lived limit (argued: a literature bound compared with a model choice).
      open       prob-ou-ch06-question1-open: Question 1 is open (open).
 
    On load, FILM.init checks DATA.lean against the cited theorem and recomputes every number derived on screen;
@@ -42,8 +38,6 @@ const RF = {
   wall: [[1.0496e26, 1.0503e26], [1.0428e26, 1.0440e26]], wallRatio: 1.34e22,
   needW: 3.45, eNeed: 31.50039, w35: 3.272, w172: 1.787583, quart172: 1.794796, dPole: 6.8122e23,
   floor4: 31.97519, diag5: [24.27098, 24.93094], margin: 3.11842,
-  tExcl: 0.49, band: [8, 16], cells: 1600, tArc: 8.53511335934, de: [0.11854, 0.15417],
-  ratArc: [2.75042, 3.72783], rat16: [6.66350, 11.78302],
   zAdd: [17.5920, 17.7478], zLEP: 2495.2, zErr: 2.3, chiN: 6.05, chiC: [13.5372, 29.2980],
   mS: 80.38, opal: 98.0
 };
@@ -94,18 +88,11 @@ FILM.init.push(() => {
   /* schur: the worked instance */
   check(RF_S === 2 && RF_YSTAR === -0.5 && rfQ(RF_YSTAR) === RF_S, 'q(−1/2) = 2 = A − B²/C');
   for (let k = -40; k <= 40; k++) { const y = k / 10; check(rfQ(y) >= RF_S - 1e-12, `q(${y}) ≥ 2`); check(Math.abs(rfQ(y) - (RF_S + RFX.C * (y + 0.5) ** 2)) < 1e-12, `square at ${y}`); }
-  /* heat: the band, the arc ratio and the two response intervals */
-  check(RF.tArc > RF.band[0] && RF.tArc < RF.band[1] && RF.tExcl < RF.band[0], 'arc ratio inside [8, 16]');
-  const iv = t => RF.de.map(d => Math.exp(t * d));
-  const a1 = iv(RF.tArc), a2 = iv(16);
-  check(Math.abs(a1[0] - RF.ratArc[0]) < 1e-3 && Math.abs(a1[1] - RF.ratArc[1]) < 1e-3, `A1/A7 at the arc ratio ${a1}`);
-  check(Math.abs(a2[0] - RF.rat16[0]) < 1e-3 && Math.abs(a2[1] - RF.rat16[1]) < 2e-3, `A1/A7 at t = 16 ${a2}`);
-  check(RF.ratArc[1] < RF.rat16[0], 'the two intervals are disjoint');
   /* pinch */
   check(Math.abs(RF.zAdd[0] / RF.zErr - 7.649) < 1e-3, 'added Z width ≈ 7.6 × the LEP error');
   check(RF.chiN < RF.chiC[0] && RF.mS < RF.opal, 'CLEO and OPAL orderings');
 });
-Object.assign(FILM.speed, { hook: 0.02, traceless: 0.016, rank: 0.014, schur: 0.014, heat: 0.016, pinch: 0.018, open: 0.012, close: 0.025 });
+Object.assign(FILM.speed, { hook: 0.02, traceless: 0.016, rank: 0.014, schur: 0.014, pinch: 0.018, open: 0.012, close: 0.025 });
 
 /* ======================================================================= */
 /*                                  drawing                                  */
@@ -382,64 +369,7 @@ SCENES.schur = S => {
 };
 
 /* ======================================================================= */
-/*                           scene 5 · HEAT-KERNEL PORTAL                    */
-/* ======================================================================= */
-SCENES.heat = S => {
-  const a = rfFade(S);
-  if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [1, null, 'computed']]);
-  /* top-left: the ansatz and a schematic mode profile */
-  panel(120, 190, 640, 290, a, C.argued, 'HEAT-KERNEL PORTAL · 热核门户');
-  rfRich([['P', C.white], ['t', C.white, 'sub'], [' = e^(−tK/d)', C.white]], 160, 270, { size: 36, a });
-  txt('a chosen ansatz · 选定的拟设', 160, 310, { size: 22, fam: F.zh, w: 700, c: C.argued, a });
-  const tt = lerp(2, RF.tArc, ease(at(S, 1, 3.0)));
-  for (let i = 0; i < 12; i++) {
-    const e = i / 11 * 0.5, h = 120 * Math.exp(-tt * e), x = 170 + i * 46;
-    fillBox(x, 450 - h, 32, h, C.cyan, a * 0.5); box(x, 450 - h, 32, h, C.cyan, a, 1.5);
-  }
-  txt('low modes → · 低模', 170, 470, { size: 18, fam: F.zh, w: 700, c: C.dim, a });
-  txt('schematic · 示意', 720, 470, { size: 18, fam: F.zh, w: 700, align: 'right', c: C.argued, a });
-  /* top-right: the diffusion time axis */
-  const ba = a * at(S, 1, 0.6);
-  const AX = 860, AW = 900, AY = 380, X = t => AX + t / 17 * AW;
-  panel(800, 190, 1000, 290, ba, C.cyan, 'DIFFUSION TIME · 扩散时间 t');
-  if (ba > 0.003) {
-    arrow(AX, AY, AX + AW + 20, AY, C.dim, ba, 2);
-    for (const t of [0, 4, 8, 12, 16]) { line(X(t), AY - 8, X(t), AY + 8, C.dim, ba, 2); txt(String(t), X(t), AY + 36, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ba }); }
-    const xa = ba * Q(S, 1, 'excluded', 0.5);
-    fillBox(X(0), AY - 30, X(RF.tExcl) - X(0) + 6, 60, C.mag, xa * 0.7);
-    txt('t ≤ 0.49 excluded · 排除', X(0), AY - 46, { size: 20, fam: F.zh, w: 700, c: C.mag, a: xa });
-    const va = ba * Q(S, 1, 'viable', 0.5);
-    fillBox(X(8), AY - 24, X(16) - X(8), 48, C.cyan, va * 0.22);
-    for (let k = 0; k <= 80; k++) line(X(8 + k / 10), AY - 24, X(8 + k / 10), AY + 24, C.cyan, va * 0.45, 1);
-    box(X(8), AY - 24, X(16) - X(8), 48, C.cyan, va, 2);
-    txt('[8, 16] viable · 1600 cells · 可行', X(12), AY - 40, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: va });
-    const ma = ba * Q(S, 1, 'arc ratio', 0.5);
-    line(X(RF.tArc), AY - 60, X(RF.tArc), AY + 50, C.now, ma, 4);
-    dot(X(RF.tArc), AY, 12, 'g', ma);
-    txt('θ804/θ12 = 8.53511…', X(RF.tArc) - 10, AY + 76, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.now, a: ma });
-  }
-  /* bottom: the parameter-free ratio A1/A7 */
-  const ra = a * at(S, 2, 0.6);
-  panel(120, 510, 1680, 320, ra, C.cyan, 'PARAMETER-FREE TEST · 无参数检验  A₁/A₇ = e^(t(e₇ − e₁)),  0.11854 < e₇ − e₁ < 0.15417');
-  if (ra > 0.003) {
-    const RX = 200, RW = 1500, RY = 700, R = z => RX + z / 12 * RW;
-    arrow(RX, RY, RX + RW + 30, RY, C.dim, ra, 2);
-    for (let z = 0; z <= 12; z += 2) { line(R(z), RY - 8, R(z), RY + 8, C.dim, ra, 2); txt(String(z), R(z), RY + 36, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ra }); }
-    const g = ease(at(S, 2, 1.6));
-    fillBox(R(RF.ratArc[0]), RY - 60, (R(RF.ratArc[1]) - R(RF.ratArc[0])) * g, 44, C.now, ra * 0.6);
-    box(R(RF.ratArc[0]), RY - 60, (R(RF.ratArc[1]) - R(RF.ratArc[0])) * g, 44, C.now, ra, 2);
-    txt('t = 8.535:  (2.750, 3.728)', R(RF.ratArc[0]), RY - 80, { size: 24, fam: F.mono, w: 700, c: C.now, a: ra * g });
-    const sa = a * Q(S, 2, 'between 2.750', 0.5, 0.6);
-    fillBox(R(RF.rat16[0]), RY - 60, R(RF.rat16[1]) - R(RF.rat16[0]), 44, C.white, sa * 0.18);
-    box(R(RF.rat16[0]), RY - 60, R(RF.rat16[1]) - R(RF.rat16[0]), 44, C.white, sa, 2);
-    txt('t = 16:  (6.664, 11.783)', R(RF.rat16[0]), RY - 80, { size: 24, fam: F.mono, w: 700, c: C.white, a: sa });
-    txt('disjoint · 截然分离   ·   NUM · recomputed from the stated bounds · 由所给界复算', W / 2, 800, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: sa });
-  }
-};
-
-/* ======================================================================= */
-/*                            scene 6 · LOW-ENERGY PINCH                     */
+/*                            scene 5 · LOW-ENERGY PINCH                     */
 /* ======================================================================= */
 SCENES.pinch = S => {
   const a = rfFade(S);
@@ -479,9 +409,9 @@ SCENES.pinch = S => {
   }
   /* OPAL: the charged singlet at 80.38 GeV */
   const oa = a * at(S, 3, 0.6);
-  panel(PXs[0], PYs[1], PW, PH, oa, C.argued, 'OPAL · CHARGED SINGLET S · 带电单态');
+  panel(PXs[0], PYs[1], 1680, PH, oa, C.argued, 'OPAL · CHARGED SINGLET S · 带电单态 (|Q| = 1)');
   if (oa > 0.003) {
-    const MX = 170, MW = 700, MY = 680, M = m => MX + (m - 60) / 50 * MW;
+    const MX = 200, MW = 1100, MY = 700, M = m => MX + (m - 60) / 50 * MW;
     arrow(MX, MY, MX + MW + 20, MY, C.dim, oa, 2);
     for (const m of [60, 70, 80, 90, 100, 110]) { line(M(m), MY - 6, M(m), MY + 6, C.dim, oa, 2); txt(String(m), M(m), MY + 32, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.dim, a: oa }); }
     const xa = oa * Q(S, 3, 'OPAL excludes', 0.5);
@@ -490,24 +420,14 @@ SCENES.pinch = S => {
     txt('98.0 GeV long-lived limit · 长寿命下限', M(RF.opal) - 8, MY - 80, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.mag, a: xa });
     dot(M(RF.mS), MY - 30, 13, 'g', oa);
     txt('S · 80.38 GeV', M(RF.mS), MY - 104, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.now, a: oa });
-    txt('τ > 1 μs  excluded · 排除', MX, 792, { size: 22, fam: F.zh, w: 700, c: C.white, a: xa });
-  }
-  /* decay: B_e + B_μ ≥ 50 % */
-  const da = a * at(S, 4, 0.6);
-  panel(PXs[1], PYs[1], PW, PH, da, C.argued, 'MAJORANA DECAY · 马约拉纳衰变');
-  if (da > 0.003) {
-    const cx = 1130, cy = 680, r = 90, g = ease(at(S, 4, 1.4));
-    ring(cx, cy, r, C.dim, da, 18);
-    ctx.save(); ctx.globalAlpha = da; ctx.strokeStyle = C.cyan; ctx.lineWidth = 18; ctx.beginPath(); ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * g); ctx.stroke(); ctx.restore();
-    txt('≥ 50%', cx, cy + 14, { size: 36, fam: F.orb, w: 900, align: 'center', c: C.cyan, a: da });
-    txt('B(e) + B(μ) ≥ 50%', 1270, 640, { size: 30, fam: F.math, w: 700, c: C.white, a: da });
-    txt('含电子或 μ 子的衰变 ≥ 一半', 1270, 684, { size: 22, fam: F.zh, w: 700, c: C.dim, a: da });
-    txt('τ(S) < 4.21 × 10⁻¹⁹ s', 1270, 744, { size: 28, fam: F.math, w: 700, c: C.white, a: da * Q(S, 4, 'decay fast', 0.5) });
+    txt('purely gauge-produced, τ > 1 μs: excluded', 1400, 620, { size: 22, fam: F.zh, w: 700, c: C.white, a: xa });
+    txt('仅靠规范产生且寿命 > 1 μs 的分支：排除', 1400, 656, { size: 22, fam: F.zh, w: 700, c: C.white, a: xa });
+    txt('a prompt decay is needed · 须迅速衰变', 1400, 720, { size: 22, fam: F.zh, w: 700, c: C.argued, a: xa });
   }
 };
 
 /* ======================================================================= */
-/*                             scene 7 · QUESTION ONE                        */
+/*                             scene 6 · QUESTION ONE                        */
 /* ======================================================================= */
 SCENES.open = S => {
   const a = rfFade(S);
@@ -547,7 +467,7 @@ SCENES.open = S => {
 };
 
 /* ======================================================================= */
-/*                                scene 8 · LEDGER                           */
+/*                                scene 7 · LEDGER                           */
 /* ======================================================================= */
 SCENES.close = S => {
   badgeQ(S, [[0, null, 'lean']]);

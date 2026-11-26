@@ -455,7 +455,7 @@ SCENES.cut = S => {
     const col = keep > 0.5 ? C.now : C.cyan;
     chip(x, y, 130, 100, String(r), col, ra * (1 - 0.6 * out), 56, F.orb);
     if (out > 0.003) line(x - 60, y + 46, x + 60, y - 46, C.dim, ra * out, 4);
-    if (r === 1) txt('widest gap · 最宽谱隙', x, y + 92, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.white, a: ra * w1 });
+    if (r === 1) txt('widest gap · 最宽谱隙', x - 62, y + 92, { size: 20, fam: F.zh, w: 700, c: C.white, a: ra * w1 });
   });
   txt('equal characters 1, ω, ω² keep 3 and 15 · 特征标等重：3 与 15 并存', 510, 500, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.now, a: a * w3 });
   txt('34 zeros + full-torus interval certificate', 510, 550, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a: a * w3 });
@@ -504,14 +504,14 @@ SCENES.zeros = S => {
   line(x0, ya, x1, ya, C.dim, a, 2);
   for (const t of [9, 9.5, 10, 10.5]) { line(X(t), ya - 6, X(t), ya + 6, C.dim, a, 2); txt(String(t), X(t), ya + 36, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.dim, a }); }
   const c9 = a * Q(S, 0, 'the fixed cut nine', 0.5), cT = a * Q(S, 0, 'the cut T', 0.5);
-  dashed(X(9), 240, X(9), ya, C.now, c9, 3);
-  txt('cut 9', X(9), 236, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.now, a: c9 });
-  dashed(X(10), 240, X(10), ya, C.mag, cT, 3);
-  txt('T ≈ 10', X(10), 236, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.mag, a: cT });
+  dashed(X(9), 266, X(9), ya, C.now, c9, 3);
+  txt('cut 9', X(9), 256, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.now, a: c9 });
+  dashed(X(10), 266, X(10), ya, C.mag, cT, 3);
+  txt('T ≈ 10', X(10), 256, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.mag, a: cT });
   const rows = [
-    { z: TL_ZEROS[0], y: 320, on: Q(S, 1, 'At zero number 8236', 0.6), v9: '✗', vT: '✓ earliest triple-window hit' },
-    { z: TL_ZEROS[1], y: 430, on: Q(S, 2, 'T rescues', 0.6), v9: '✗', vT: '✓ rescued' },
-    { z: TL_ZEROS[2], y: 540, on: Q(S, 3, 'zero 8359', 0.6), v9: '✓', vT: '✓' }
+    { z: TL_ZEROS[0], y: 335, on: Q(S, 1, 'At zero number 8236', 0.6), v9: '✗', vT: '✓ first hit' },
+    { z: TL_ZEROS[1], y: 445, on: Q(S, 2, 'T rescues', 0.6), v9: '✗', vT: '✓ rescued' },
+    { z: TL_ZEROS[2], y: 555, on: Q(S, 3, 'zero 8359', 0.6), v9: '✓', vT: '✓' }
   ];
   for (const r of rows) {
     const ra = a * r.on; if (ra <= 0.003) continue;
@@ -553,14 +553,14 @@ SCENES.lattice = S => {
     panel(730, 190, 1070, 300, ma, C.cyan, 'FIVE-STEP OVERLAP KERNEL · 五步单纯形重叠核 · g = I − J/5');
     const x0 = 790, x1 = 1740, lo = 3.40, hi = 3.55, X = v => x0 + (v - lo) / (hi - lo) * (x1 - x0), y = 380;
     line(x0, y, x1, y, C.dim, ma, 2);
-    for (const t of [3.40, 3.45, 3.50, 3.55]) { line(X(t), y - 6, X(t), y + 6, C.dim, ma, 2); txt(tlF(t, 2), X(t), y + 36, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ma }); }
+    for (const t of [3.40, 3.45, 3.50, 3.55]) { line(X(t), y - 6, X(t), y + 6, C.dim, ma, 2); txt(tlF(t, 2), X(t), y + 54, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ma }); }
     const wa = ma * Q(S, 1, 'narrow window', 0.6);
     fillBox(X(TL_MASS[0]), y - 22, X(TL_MASS[1]) - X(TL_MASS[0]), 44, C.cyan, wa * 0.3);
     box(X(TL_MASS[0]), y - 22, X(TL_MASS[1]) - X(TL_MASS[0]), 44, C.cyan, wa, 2);
     txt(`(25 − 5√5)/4 ≈ ${tlF(TL_MASS[0], 5)}`, X(TL_MASS[0]) - 6, y - 40, { size: 22, fam: F.math, w: 700, align: 'right', c: C.cyan, a: wa });
     txt('7/2', X(TL_MASS[1]) + 6, y - 40, { size: 22, fam: F.math, w: 700, c: C.cyan, a: wa });
     txt('Wilson mass m', 790, 265, { size: 22, fam: F.mono, w: 700, c: C.white, a: ma });
-    tlRich([['3', C.cyan], [' species of one chirality · 三个同手征物种', C.white]], 790, 460, { size: 26, fam: F.zh, a: ma * Q(S, 1, 'three species', 0.6) });
+    tlRich([['3', C.cyan], [' species of one chirality · 三个同手征物种', C.white]], 790, 472, { size: 26, fam: F.zh, a: ma * Q(S, 1, 'three species', 0.6) });
   }
   const ia = a * Q(S, 2, 'With the shell itself', 0.6);
   if (ia > 0.003) {
@@ -583,14 +583,14 @@ SCENES.rough = S => {
   /* rough links: jittered plaquettes */
   const ra = a * at(S, 0, 0.6) * top;
   panel(120, 190, 820, 360, ra, C.cyan, 'SU(5) ROUGH BACKGROUND · 5⁴ BOX');
-  for (let i = 0; i < 9; i++) for (let j = 0; j < 4; j++) {
+  for (let i = 0; i < 5; i++) for (let j = 0; j < 4; j++) {
     const x = 170 + i * 52, y = 250 + j * 52, jit = 0.9 * (rnd(i, j + Math.floor(S.u * 2)) - 0.5);
     ctx.save(); ctx.translate(x + 20, y + 20); ctx.rotate(jit); box(-18, -18, 36, 36, C.mag, ra * 0.7, 1.4); ctx.restore();
   }
   const ca = ra * Q(S, 1, 'One explicit SU five background', 0.6);
-  txt('(I₅̄, I₁₀) = (2, 7)', 650, 300, { size: 34, fam: F.math, w: 700, align: 'center', c: C.white, a: ca });
-  txt('−2 + 2 × 7 = 12', 650, 370, { size: 34, fam: F.math, w: 700, align: 'center', c: C.white, a: ca * Q(S, 1, 'centre charge twelve', 0.5) });
-  txt('12 ≡ 2 (mod 5) ≠ 0', 650, 440, { size: 36, fam: F.math, w: 700, align: 'center', c: C.now, a: ca * Q(S, 1, 'two mod five', 0.5) });
+  txt('(I(5̄), I(10)) = (2, 7)', 690, 300, { size: 34, fam: F.math, w: 700, align: 'center', c: C.white, a: ca });
+  txt('−2 + 2 × 7 = 12', 690, 370, { size: 34, fam: F.math, w: 700, align: 'center', c: C.white, a: ca * Q(S, 1, 'centre charge twelve', 0.5) });
+  txt('12 ≡ 2 (mod 5) ≠ 0', 690, 440, { size: 36, fam: F.math, w: 700, align: 'center', c: C.now, a: ca * Q(S, 1, 'two mod five', 0.5) });
   txt('centre charge on the left-handed determinant line', 530, 520, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ca });
   /* Higgs frames */
   const ha = a * Q(S, 2, 'Three orthogonal Higgs frames', 0.6) * top;
@@ -610,11 +610,11 @@ SCENES.rough = S => {
     const items = [
       ['why 3 and not 15 (or 1)', '三代唯一性：为何排除 1 与 15', 'why three'],
       ['why the cut T (or 9)', '分界的动力学起源', 'why this cut'],
-      ['a chiral measure with no frames put in', '无外置标架的非微扰手征测度', 'a chiral measure']
+      ['chiral measure, no frames put in', '无外置标架的非微扰手征测度', 'a chiral measure']
     ];
     items.forEach(([en, zh, ph], i) => {
       const x = 160 + i * 555, ia = oa * Q(S, 3, ph, 0.5);
-      txt(en, x, 680, { size: 26, fam: F.mono, w: 700, c: C.white, a: ia });
+      txt(en, x, 680, { size: 24, fam: F.mono, w: 700, c: C.white, a: ia });
       txt(zh, x, 730, { size: 24, fam: F.zh, w: 700, c: C.open, a: ia });
     });
     stamp('OPEN', 1640, 790, Q(S, 3, 'put in by hand', 0.5), C.open, 36, -0.06);

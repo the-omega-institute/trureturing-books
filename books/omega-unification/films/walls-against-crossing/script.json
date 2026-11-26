@@ -33,7 +33,7 @@
       ["Any such rule, at every phase of the double-clock torus, leaves a spread above zero point seven at sharp thresholds.", "任何这样的规则，在双时钟环面的每个相位上，尖阈值下都留下大于 0.7 的极差。"],
       ["Even one plain eighteen-layer tower would need a log slope of at least one hundred six point seven five.", "即使只有一座十八层的普通重塔，对数斜率也至少要 106.75。"],
       ["If the rule is log-convex, its mass span must exceed eighty-two log units. Z mass to reduced Planck mass is under thirty-eight.", "若规则对数凸，质量跨度须超过 82 个对数单位；而从 Z 质量到约化普朗克质量不到 38。"]
-    ], "cues": [{"line": 1, "at": 3.2, "kind": "stamp"}]},
+    ], "cues": [{"line": 1, "at": 3.2, "kind": "impact"}]},
     {"id": "keys", "name": "CONDITIONAL CROSSINGS · 条件交汇", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.7, 0.3, 0.4], "lines": [
       ["Two keys open a crossing, each on conditions. Key one: make the even sector thirty-two times heavier.", "两把钥匙能打开交汇，各带条件。钥匙一：把偶扇区加重 32 倍。"],
       ["Fix the unit with clock chord seven twenty-four: at zero eleven six six one, the strong coupling comes out zero point one one eight four.", "以钟弦 724 定绝对单位，第 11661 枚黎曼零点反推出强耦合 0.1184。"],

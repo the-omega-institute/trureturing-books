@@ -47,18 +47,18 @@
       ["Now read the two-step masses at actual Riemann zeros, against the fixed cut nine and the cut T.", "现在在实际黎曼零点上读两步质量，对照固定分界 9 与分界 T。"],
       ["At zero number 8236, the third mass is 9.2061: above nine, below T.", "第 8236 号零点的第三个质量是 9.2061：高于 9，低于 T。"],
       ["Under T it becomes the earliest zero to hit all three windows, and T rescues zero number 148341 as well.", "按 T 分界，它成为最早三窗齐中的零点；第 148341 号零点也被 T 挽救。"],
-      ["Still, T is a model choice: with charge-conjugate pairs on each site, zero 8359 keeps only two charge-two modes.", "但 T 仍是模型假设：每个站点放入电荷共轭双态后，第 8359 号零点的荷二只剩两个轻模。"]
+      ["Still, T is a model choice: with charge-conjugate pairs on each site, zero 8359 keeps only two charge-two modes.", "但 T 仍属模型假设：换成共轭双态站点，第 8359 号零点的荷二只剩两模。"]
     ], "cues": [{"line": 1, "at": 2.2, "kind": "chime"}, {"line": 3, "at": 0.8, "kind": "glitch"}]},
     {"id": "lattice", "name": "INTO FOUR DIMENSIONS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.3, 0.3], "lines": [
       ["Three positive eigenvalues are not yet four-dimensional Weyl fermions.", "三个正本征值，还不是四维外尔费米子。"],
-      ["On a four-dimensional lattice, a five-step overlap kernel with Wilson mass in a narrow window gives three species of one chirality.", "在四维格点上，威尔逊质量落在一个窄窗内的五步重叠核，给出三个同手征物种。"],
-      ["With the shell itself as the mass term, the index on gently curved fields is three times a single one; the sixteen heavy layers give zero.", "把球壳本身当作质量项，小曲率规范场上的指数恰为单份的三倍，十六个重层贡献为零。"]
+      ["On a four-dimensional lattice, a five-step overlap kernel with Wilson mass in a narrow window gives three species of one chirality.", "四维格点上，威尔逊质量落在窄窗内的五步重叠核给出三个同手征物种。"],
+      ["With the shell itself as the mass term, the index on gently curved fields is three times a single one; the sixteen heavy layers give zero.", "以球壳作质量项，小曲率场上指数恰为单份的三倍，十六个重层为零。"]
     ]},
     {"id": "rough", "name": "ROUGH FIELDS", "lead": 0.5, "tail": 0.8, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
       ["But the path integral is dominated by rough gauge links.", "可路径积分的主体，是粗糙的规范链。"],
-      ["One explicit SU five background gives indices two and seven: centre charge twelve, two mod five, not zero.", "一个显式 SU(5) 粗糙背景给出指数 (2, 7)：中心荷 12，模 5 余 2，不为零。"],
+      ["One explicit SU five background gives indices two and seven: centre charge twelve, two mod five, not zero.", "显式 SU(5) 粗糙背景给出指数 (2, 7)：中心荷 12，模 5 余 2，不为零。"],
       ["Three orthogonal Higgs frames leave an SU two and lose the gap; four frames hold it.", "三份正交希格斯标架留下 SU(2)，守不住谱隙；四份才守得住。"],
-      ["Still open: why three and not fifteen, why this cut, and a chiral measure without frames put in by hand.", "仍然开放：为何是 3 而不是 15，为何是这条分界，以及不靠外置标架的手征测度。"]
+      ["Still open: why three and not fifteen, why this cut, and a chiral measure without frames put in by hand.", "仍然开放：为何是 3 不是 15，为何是这条分界，以及无外置标架的手征测度。"]
     ], "cues": [{"line": 1, "at": 2.4, "kind": "impact"}, {"line": 3, "at": 0.5, "kind": "stamp"}]},
     {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
       ["Omega Unification, chapter seven.", "《OMEGA 统一》· 第七章"]

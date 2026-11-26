@@ -35,7 +35,7 @@
     {"id": "calib", "name": "CALIBRATED, THEN RIGID", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
       ["Positive reconstructions exist: a mirror triangle of zeros rebuilds the reference C K M in twenty-eight windings.", "正向重构确实存在：由零点组成的镜像三角，绕二十八圈就重建出参考 CKM。"],
       ["A finite rational response, calibrated on one zero, matches all seven to ten to the minus eleven.", "有限有理响应在一枚零点上校准，就在全部七枚零点上逼近到 10⁻¹¹ 以内。"],
-      ["No fixed matrix can stand in: five zeros shrink local ones to scalars, seven shrink all to polynomials in the cycle.", "固定矩阵替代不了它：五枚零点让局域的坍缩为标量，七枚让一切坍缩为轮换的多项式。"],
+      ["No fixed matrix can stand in: five zeros shrink local ones to scalars, seven shrink all to polynomials in the cycle.", "固定矩阵替代不了：五枚零点让局域者只剩标量，七枚让一切成为轮换多项式。"],
       ["So the mixing law must move with the background.", "所以混合法则必须随背景而动。"]
     ], "cues": [{"line": 2, "at": 4.0, "kind": "stamp"}]},
     {"id": "horizon", "name": "THE OPEN FLAVOUR HORIZON", "lead": 0.5, "tail": 0.8, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [

@@ -276,7 +276,9 @@ const qcFade = S => clamp(S.u / 0.5) * clamp((S.d - S.u) / 0.5);
 function qcRich(parts, x, y, o = {}) {
   const size = o.size || 30, fam = o.fam || F.math, w = o.w || 700, a = o.a == null ? 1 : o.a;
   let cx = x;
-  if (o.align === 'center') cx = x - parts.reduce((s, p) => s + tw(p[0], size, fam, w), 0) / 2;
+  const tot = parts.reduce((s, p) => s + tw(p[0], size, fam, w), 0);
+  if (o.align === 'center') cx = x - tot / 2;
+  else if (o.align === 'right') cx = x - tot;
   for (const [s, col] of parts) { txt(s, cx, y, { size, fam, w, c: col, a }); cx += tw(s, size, fam, w); }
   return cx;
 }
@@ -356,32 +358,42 @@ SCENES.clocks = S => {
   /* lines 1–4: the two quaternion axes in 3D, the area they span, the ledger */
   const qa = a * at(S, 1, 0.7);
   if (qa <= 0.003) return;
-  const yaw = -0.55 + 0.05 * u, pitch = 0.42, sc = 300, [ox, oy] = [CL_O[0], CL_O[1] + 60];
+  const yaw = -0.62 + 0.012 * u, pitch = 0.5, sc = 330, [ox, oy] = [CL_O[0], CL_O[1] + 40];
   const P = v => qcP(v, ox, oy, sc, yaw, pitch);
+  /* a label just beyond the tip of a drawn segment, on the far side from the origin */
+  const tag = (o, p, s, col, al, size = 26, off = 34) => {
+    const dx = p[0] - o[0], dy = p[1] - o[1], n = Math.hypot(dx, dy) || 1;
+    txt(s, p[0] + dx / n * off, p[1] + dy / n * off + size * 0.35, { size, fam: F.math, w: 700, align: dx > 0 ? 'left' : 'right', c: col, a: al });
+  };
+  const po = P([0, 0, 0]);
   [[[1, 0, 0], 'i'], [[0, 1, 0], 'j'], [[0, 0, 1], 'k']].forEach(([e, n]) => {
-    const p0 = P(e.map(c => -c * 0.9)), p1 = P(e.map(c => c * 1.05));
+    const p0 = P(e.map(c => -c * 0.9)), p1 = P(e.map(c => c * 1.2));
     line(p0[0], p0[1], p1[0], p1[1], C.dim, qa * 0.6, 1.5);
-    txt(n, p1[0] + 10, p1[1] - 8, { size: 28, fam: F.math, w: 700, c: C.dim, a: qa });
+    tag(po, p1, n, C.dim, qa, 26, 16);
   });
   const uv = QU.slice(1), vv = QV.slice(1);
-  const pu = P(uv), pv = P(vv), po = P([0, 0, 0]), puv = P(uv.map((c, i) => c + vv[i]));
-  /* line 4: the parallelogram u ∧ v and the normal u × v */
+  const pu = P(uv), pv = P(vv), puv = P(uv.map((c, i) => c + vv[i]));
+  /* line 3: the parallelogram u ∧ v and the normal u × v */
   const ea = qa * Q(S, 3, 'squared area', 0.8);
   qcPoly([po, pu, puv, pv], C.white, ea, 0.16, 1.5);
   if (ea > 0.003) {
     const cr = P([0, 0, 0.8]);
     arrow(po[0], po[1], cr[0], cr[1], C.now, ea, 4);
-    txt('u × v', cr[0] + 14, cr[1] + 6, { size: 28, fam: F.math, w: 700, c: C.now, a: ea });
-    const mid = P([uv[0] * 0.5 + vv[0] * 0.5, uv[1] * 0.5 + vv[1] * 0.5, 0]);
-    txt('E = |u × v|²', mid[0], mid[1] + 70, { size: 26, fam: F.math, w: 700, align: 'center', c: C.white, a: ea });
+    txt('u × v', cr[0] + 16, cr[1] + 30, { size: 28, fam: F.math, w: 700, c: C.now, a: ea });
+    const mid = [(po[0] + puv[0]) / 2, (po[1] + puv[1]) / 2];
+    txt('E = |u × v|²', mid[0], mid[1] + 10, { size: 26, fam: F.math, w: 700, align: 'center', c: C.white, a: ea });
   }
   arrow(po[0], po[1], pu[0], pu[1], C.cyan, qa, 5);
   arrow(po[0], po[1], pv[0], pv[1], C.mag, qa, 5);
-  txt('u  (axis of U)', pu[0] - 30, pu[1] + 44, { size: 24, fam: F.math, w: 700, c: C.cyan, a: qa });
-  txt('v  (axis of V)', pv[0] + 18, pv[1] - 16, { size: 24, fam: F.math, w: 700, c: C.mag, a: qa });
+  tag(po, pu, 'u', C.cyan, qa, 30, 22);
+  tag(po, pv, 'v', C.mag, qa, 30, 22);
+  if (qa > 0.003) {
+    txt('u = axis of U · U 的虚轴', 140, 790, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: qa });
+    txt('v = axis of V · V 的虚轴', 140, 825, { size: 22, fam: F.zh, w: 700, c: C.mag, a: qa });
+  }
   /* the ledger */
   panel(1000, 200, 800, 630, qa, C.cyan, 'TWO CLOCKS · 两只时钟');
-  const r1 = qa * Q(S, 1, 'Our sample', 0.6), r2 = qa * Q(S, 2, 'half-traces', 0.6), r3 = qa * Q(S, 2, 'x and y are', 0.6), r3b = qa * at(S, 3, 0.6), r4 = qa * Q(S, 3, 'four E', 0.6);
+  const r1 = qa * Q(S, 1, 'Our sample', 0.6), r2 = qa * Q(S, 2, 'half-traces', 0.6), r3 = qa * Q(S, 2, 'x and y are', 0.6), r3b = qa * at(S, 3, 0.6), r4 = qa * Q(S, 3, 'and U V minus', 0.6);
   qcRich([['U = (1 + 2i)/√5', C.cyan], ['    ', C.white], ['V = (1 + 2j)/√5', C.mag]], 1030, 280, { size: 32, a: r1 });
   qcRich([['x = Re U    y = Re V', C.white]], 1030, 350, { size: 30, a: r2 });
   qcRich([['z = Re(U V⁻¹) = xy + u·v', C.white]], 1030, 400, { size: 30, a: r2 });
@@ -391,7 +403,7 @@ SCENES.clocks = S => {
   qcRich([['|u × v|² = 16/25 = E', C.white]], 1030, 665, { size: 30, a: ea });
   qcRich([['|UV − VU|² = 4E = ', C.white], ['64/25', C.now]], 1030, 720, { size: 30, a: r4 });
   qcRich([['Re(U V U⁻¹ V⁻¹) = 1 − 2E = −7/25', C.white]], 1030, 775, { size: 28, a: r4 });
-  if (r4 > 0.003) txt('UV ≠ VU · 次序要紧', 1780, 250, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.now, a: r4 });
+  if (r4 > 0.003) txt('UV ≠ VU · 次序要紧', 1770, 812, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.now, a: r4 });
 };
 
 /* ======================================================================= */
@@ -421,7 +433,11 @@ function qcBody(cx, cy, sc, yaw, pitch, a, o = {}) {
   if (o.point) {
     const p = P([QX, QY, QZ]);
     dot(p[0], p[1], 16, 'g', a); ring(p[0], p[1], 24, C.now, a, 2);
-    if (o.label) txt('(x, y, z) = (0.447, 0.447, 0.2)', p[0] + 32, p[1] - 14, { size: 24, fam: F.math, w: 700, c: C.now, a });
+    if (o.label) {
+      const lw = tw('(x, y, z) = (0.447, 0.447, 0.2)', 24, F.math, 700);
+      fillBox(p[0] + 26, p[1] - 40, lw + 16, 36, C.bg, a * 0.8);
+      txt('(x, y, z) = (0.447, 0.447, 0.2)', p[0] + 34, p[1] - 14, { size: 24, fam: F.math, w: 700, c: C.now, a });
+    }
   }
   if (o.axes) [[[1.25, 0, 0], 'x'], [[0, 1.25, 0], 'y'], [[0, 0, 1.25], 'z']].forEach(([e, n]) => {
     const p0 = P([0, 0, 0]), p1 = P(e); arrow(p0[0], p0[1], p1[0], p1[1], C.white, a * 0.6, 1.6);
@@ -433,9 +449,9 @@ SCENES.body = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [2, 'Lean checks', 'lean'], [3, 'curvature identity', 'lean']]);
   const ba = a * Q(S, 1, 'convex body', 0.8);
-  qcBody(500, 520, 230, -0.6 + 0.09 * u, 0.38, ba, { point: true, label: ba > 0.5, axes: true });
+  qcBody(500, 495, 205, 0.5 + 0.03 * u, 0.38, ba, { point: true, label: ba > 0.5, axes: true });
   if (ba > 0.003) {
-    txt('vol = π²/2', 160, 230, { size: 40, fam: F.math, w: 700, c: C.white, a: ba });
+    txt('vol = π²/2', 140, 215, { size: 36, fam: F.math, w: 700, c: C.white, a: ba });
     const sa = a * Q(S, 1, 'whose skin', 0.7);
     txt('skin: E = 0 · clocks commute', 160, 790, { size: 28, fam: F.disp, w: 700, c: C.cyan, a: sa });
     txt('表皮：E = 0，两钟交换', 160, 828, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: sa });
@@ -468,7 +484,6 @@ SCENES.body = S => {
     qcRich([['u = (2, 0, 0), v = (0, 2, 0):  {u, v, u} = 4v,  ⟨4v, v⟩ = 16 = 4·4 − 0²', C.white]], 985, 772, { size: 21, a: l2 * Q(S, 3, 'Gram area squared', 0.6) });
     qcRich([['{u, v, w} := ⟨u, w⟩v − ⟨v, w⟩u      (computed example)', C.dim]], 985, 810, { size: 20, a: l2 * Q(S, 3, 'Gram area squared', 0.6) });
   }
-  stamp('E ≥ 0', 760, 300, Q(S, 2, 'never negative', 0.5) * (1 - at(S, 3, 0.5)), C.lean, 38, -0.06);
 };
 
 /* ======================================================================= */
@@ -501,9 +516,9 @@ SCENES.words = S => {
     txt('Ad(w) · axisX', WD_O[0], WD_O[1] - WD_R - 22, { size: 24, fam: F.math, w: 700, align: 'center', c: C.white, a });
     dot(e[0], e[1], 10, 'w', a * (e[2] < 0 ? 1 : 0.4));
   }
-  const reveal = n => (n === 1 ? at(S, 2, 0.6) : n === 2 ? Q(S, 2, '186 words', 0.6) : Q(S, 2, 'x and y axes', 0.6));
+  const reveal = n => (n === 1 ? Q(S, 0, 'six Hurwitz', 0.8) : n === 2 ? at(S, 2, 0.6) : Q(S, 2, '186 words', 0.6));
   HW_PTS.forEach((pt, i) => {
-    const ra = a * reveal(pt.len) * clamp((u - lineAt(S, 2).s) / 0.3);
+    const ra = a * reveal(pt.len);
     if (ra <= 0.003) return;
     const p = qcP(pt.v, WD_O[0], WD_O[1], WD_R, yaw, pitch), front = p[2] < 0;
     dot(p[0], p[1], pt.len === 1 ? 11 : pt.len === 2 ? 8 : 6, pt.len === 1 ? 'c' : pt.len === 2 ? 'm' : 'w', ra * (front ? 1 : 0.35));
@@ -514,7 +529,7 @@ SCENES.words = S => {
     const p = qcP(pt.v, WD_O[0], WD_O[1], WD_R, yaw, pitch);
     ring(p[0], p[1], 16, C.now, fa, 3);
     txt(pt.w.map(g => '(' + HW_NAME[g] + ')').join(''), WD_O[0], WD_O[1] + WD_R + 44, { size: 24, fam: F.math, w: 700, align: 'center', c: C.now, a: fa });
-    txt('length 1 · 2 · 3', WD_O[0] + WD_R - 10, WD_O[1] - WD_R + 10, { size: 20, fam: F.mono, w: 700, align: 'left', c: C.dim, a: fa });
+    qcRich([['length ', C.dim], ['1', C.cyan], [' · ', C.dim], ['2', C.mag], [' · ', C.dim], ['3', C.white]], WD_O[0] + WD_R - 20, WD_O[1] - WD_R + 6, { size: 20, fam: F.mono, a: fa });
   }
   const ca = a * Q(S, 2, 'different frames', 0.6);
   if (ca > 0.003) {
@@ -528,7 +543,7 @@ SCENES.words = S => {
     qcRich([['u, v reduced, same X and Y images  ⇒  u = v', C.white]], 145, 765, { size: 25, a: la });
     qcLean(145, 812, 'reduced_words_adjoint_injective', la, { size: 19 });
   }
-  stamp('NO HIDDEN RELATION', 1390, 230, Q(S, 3, 'letter for letter', 0.5), C.lean, 30, -0.05);
+  stamp('NO HIDDEN RELATION', WD_O[0], WD_O[1], Q(S, 3, 'letter for letter', 0.5), C.lean, 30, -0.05);
 };
 
 /* ======================================================================= */
@@ -542,7 +557,8 @@ function hrLoop(x, y, a, edges) {
     const p = pts[i], q = pts[(i + 1) % 3], e = edges[i];
     if (!e) { line(p[0], p[1], q[0], q[1], C.dim, a * 0.8, 2); continue; }
     arrow(p[0], p[1], q[0] * 0.92 + p[0] * 0.08, q[1] * 0.92 + p[1] * 0.08, e[1], a, 5);
-    txt(e[0], (p[0] + q[0]) / 2 + (i === 2 ? 0 : i === 0 ? 22 : -22) * 1.4, (p[1] + q[1]) / 2 + (i === 2 ? 36 : -6), { size: 26, fam: F.math, w: 700, align: 'center', c: e[1], a });
+    const off = [[36, -4], [0, 42], [-36, -4]][i];
+    txt(e[0], (p[0] + q[0]) / 2 + off[0], (p[1] + q[1]) / 2 + off[1], { size: 26, fam: F.math, w: 700, align: 'center', c: e[1], a });
   }
   pts.forEach(p => dot(p[0], p[1], 9, 'w', a));
 }
@@ -553,6 +569,23 @@ SCENES.hear = S => {
   /* line 0: the edge rule */
   const e0 = a * at(S, 0, 0.6);
   qcRich([['every ', C.white], ['724', C.cyan], [' edge × ', C.white], ['U', C.cyan], ['      every ', C.white], ['804', C.mag], [' edge × ', C.white], ['V', C.mag], ['      two components per site', C.dim]], W / 2, 215, { size: 28, align: 'center', a: e0 });
+  /* line 0: a schematic shell with its clock edges, and a column of levels (pictures, not data) */
+  const sa = a * at(S, 0, 0.6) * (1 - Q(S, 1, 'closed walks', 0.6));
+  if (sa > 0.003) {
+    const cx = 700, cy = 540, R = 230, N = 19;
+    const pt = k => [cx + R * Math.cos(TAU * k / N - Math.PI / 2), cy + R * Math.sin(TAU * k / N - Math.PI / 2)];
+    for (let k = 0; k < N; k++) { const p = pt(k), q = pt((k + 1) % N); line(p[0], p[1], q[0], q[1], C.dim, sa * 0.5, 1.5); }
+    [[0, 7], [5, 12], [10, 17], [15, 3]].forEach(([i, j]) => { const p = pt(i), q = pt(j); line(p[0], p[1], q[0], q[1], C.cyan, sa, 3); });
+    [[2, 10], [7, 14], [12, 1], [17, 6]].forEach(([i, j]) => { const p = pt(i), q = pt(j); line(p[0], p[1], q[0], q[1], C.mag, sa, 3); });
+    for (let k = 0; k < N; k++) { const p = pt(k); dot(p[0], p[1], 8, 'w', sa); }
+    txt('U', cx - R - 60, cy - 10, { size: 34, fam: F.math, w: 700, c: C.cyan, a: sa });
+    txt('V', cx + R + 36, cy - 10, { size: 34, fam: F.math, w: 700, c: C.mag, a: sa });
+    txt('axes hidden · 轴藏起来 · schematic shell 示意', cx, cy + R + 62, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.white, a: sa });
+    const lx = 1200, la0 = sa * at(S, 0, 0.8, 2.0);
+    for (let k = 0; k < 14; k++) { const y = 760 - 470 * Math.pow(k / 13, 0.8); line(lx, y, lx + 300, y, C.white, la0 * 0.85, 2.5); }
+    txt('levels only · 只留能级', lx + 150, 270, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.white, a: la0 });
+    txt('schematic · 示意', lx + 150, 800, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.dim, a: la0 });
+  }
   /* line 1: three winding classes in length order */
   const cards = [
     { k: 'i', edges: [['U', C.cyan], null, null], read: 'x', note: 'one 724 edge' },
@@ -564,9 +597,9 @@ SCENES.hear = S => {
     const x = 140 + i * 560, y = 250;
     panel(x, y, 520, 250, ca, C.argued, `WALK (${c.k}) · 闭走`);
     hrLoop(x + 140, y + 140, ca, c.edges);
-    txt('reads', x + 300, y + 120, { size: 24, fam: F.mono, w: 700, c: C.dim, a: ca });
-    chip(x + 400, y + 140, 120, 80, c.read, C.now, ca * Q(S, 1, 'recovers all three', 0.5), 50, F.math);
-    txt(c.note, x + 300, y + 226, { size: 20, fam: F.mono, w: 700, c: C.white, a: ca * 0.85 });
+    txt('reads →', x + 268, y + 150, { size: 22, fam: F.mono, w: 700, c: C.dim, a: ca });
+    chip(x + 430, y + 140, 120, 80, c.read, C.now, ca * Q(S, 1, 'recovers all three', 0.5), 50, F.math);
+    txt(c.note, x + 268, y + 226, { size: 20, fam: F.mono, w: 700, c: C.white, a: ca * 0.85 });
     if (i < 2) arrow(x + 522, y + 125, x + 556, y + 125, C.dim, ca, 2);
   });
   if (a * Q(S, 1, 'closed walks', 0.5) > 0.003) txt('shorter → longer · 由短到长 · schematic loops 示意', W / 2, 532, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.dim, a: a * Q(S, 1, 'closed walks', 0.5) });
@@ -585,15 +618,15 @@ SCENES.hear = S => {
   if (pa > 0.003) {
     qcRich([['shifts u = (−1000, −204000, −215000)', C.white]], 965, 630, { size: 25, a: pa });
     const ka = a * Q(S, 3, 'certificate', 0.5);
-    const bx = 965, by = 670, bw = 520;
+    const bx = 965, by = 690, bw = 520;
     line(bx, by, bx + bw, by, C.dim, ka, 2);
     fillBox(bx, by - 10, bw * 0.331, 20, C.cyan, ka * 0.7);
     line(bx + bw, by - 22, bx + bw, by + 22, C.white, ka, 2.5);
     txt('1', bx + bw + 12, by + 9, { size: 24, fam: F.mono, w: 700, c: C.white, a: ka });
     txt('Lip∞ ≤ 0.331', bx + bw * 0.331 + 14, by - 18, { size: 24, fam: F.math, w: 700, c: C.cyan, a: ka });
-    txt('interval certificate · amplification ≤ 5.196 × 10¹⁰', 965, 730, { size: 21, fam: F.mono, w: 700, c: C.cyan, a: ka });
-    txt('three readings: injective on the whole body · 全局单射', 965, 768, { size: 21, fam: F.zh, w: 700, c: C.white, a: ka });
-    txt('two readings: impossible (invariance of domain) · 两个不够', 965, 806, { size: 21, fam: F.zh, w: 700, c: C.argued, a: a * Q(S, 3, 'Two readings never could', 0.5) });
+    txt('interval certificate · amplification ≤ 5.196 × 10¹⁰', 965, 740, { size: 21, fam: F.mono, w: 700, c: C.cyan, a: ka });
+    txt('three readings: injective on the whole body · 全局单射', 965, 774, { size: 21, fam: F.zh, w: 700, c: C.white, a: ka });
+    txt('two readings: impossible (invariance of domain) · 两个不够', 965, 808, { size: 21, fam: F.zh, w: 700, c: C.argued, a: a * Q(S, 3, 'Two readings never could', 0.5) });
   }
 };
 
@@ -619,6 +652,7 @@ SCENES.haar = S => {
   line(HZ_X0 - 10, HZ_Y0 - HZ_H, HZ_X1 + 10, HZ_Y0 - HZ_H, C.dim, ca * 0.3, 1);
   txt('1', HZ_X0 - 22, HZ_Y0 - HZ_H + 8, { size: 20, fam: F.mono, w: 700, align: 'right', c: C.dim, a: ca });
   txt('0', HZ_X0 - 22, HZ_Y0 + 7, { size: 20, fam: F.mono, w: 700, align: 'right', c: C.dim, a: ca });
+  qcRich([['▮ bar = sin²p · sin²q · |sin v|     ', C.cyan], ['● u', C.now], ['   (zero #1 … #128)', C.dim]], HZ_X0, HZ_Y0 - HZ_H - 26, { size: 20, fam: F.mono, a: ca });
   [1, 32, 64, 96, 128].forEach(n => txt(`#${n}`, hzX(n - 1), HZ_Y0 + 30, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ca }));
   const sweep = Q(S, 2, 'Keep the zero', 0.1) ? 128 * ease(clamp((S.u - phraseAt(S, 2, 'Keep the zero')) / (lineAt(S, 3).s + 2.2 - phraseAt(S, 2, 'Keep the zero')))) : 0;
   const first = Q(S, 1, 'fourth angle', 0.6);
@@ -649,15 +683,15 @@ SCENES.haar = S => {
   /* the count */
   const na = ca * clamp(sweep / 4);
   if (na > 0.003) {
-    qcRich([['kept ', C.white], [`${kept}`, C.now], [` / ${Math.min(128, Math.ceil(sweep))}`, C.white]], 1745, 410, { size: 34, align: 'right', a: na, fam: F.mono });
-    if (sweep >= 128) txt('16 / 128 = 0.125 (computed)', 1745, 450, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.dim, a: ca * Q(S, 3, '16 pass', 0.6) });
+    const done = sweep >= 128 ? ca * Q(S, 3, '16 pass', 0.6) : 0;
+    qcRich([['kept ', C.white], [`${kept}`, C.now], [` / ${Math.min(128, Math.ceil(sweep))}`, C.white], [done > 0.5 ? ' = 0.125' : '', C.white]], 1745, 414, { size: 30, align: 'right', a: na, fam: F.mono });
   }
   /* line 4: the limit density */
-  const da = ca * Q(S, 4, 'one over two pi', 0.7);
+  const da = ca * Q(S, 4, 'Assuming classical R H', 0.7);
   if (da > 0.003) {
-    panel(1130, 470, 615, 120, da, C.argued);
-    qcRich([['density → 1/(2π) = 0.159155…', C.white]], 1155, 520, { size: 28, a: da });
-    txt('under classical RH (external Lean proof) · optimal', 1155, 562, { size: 19, fam: F.mono, w: 700, c: C.argued, a: da });
+    panel(680, 450, 620, 120, da, C.argued, null, { fill: 'rgba(4,10,24,0.9)' });
+    qcRich([['density → ', C.white], ['1/(2π) = 0.159155…', C.now]], 705, 502, { size: 28, a: da });
+    txt('under classical RH (external Lean proof) · optimal', 705, 546, { size: 19, fam: F.mono, w: 700, c: C.argued, a: da });
   }
 };
 
@@ -686,7 +720,7 @@ SCENES.schur = S => {
     txt(t.s, x + tw0 / 2, 250, { size: t.s.length > 3 ? 17 : 21, fam: F.mono, w: 700, align: 'center', c: C.white, a: ta });
     x += tw0 + gap;
   });
-  const grp = [['p, q, v, u · weak clocks + test', 0, 3, 'four,'], ['U(1)²', 4, 5, 'two, and'], ['SU(3)', 6, 13, 'sixteen'], ['SU(3)', 14, 21, 'sixteen']];
+  const grp = [['weak clocks + test', 0, 3, 'four,'], ['U(1)²', 4, 5, 'two, and'], ['SU(3)', 6, 13, 'sixteen'], ['SU(3)', 14, 21, 'sixteen']];
   grp.forEach(([lab, i0, i1, ph], g) => {
     const ga = a * Q(S, 0, ph, 0.6);
     const xa = xs[i0], xb = xs[i1] + tw0;
@@ -737,7 +771,7 @@ SCENES.schur = S => {
 /* ======================================================================= */
 SCENES.close = S => {
   badgeQ(S, [[0, null, 'lean']]);
-  closingCard(S, { from: 0.1, y: 240 });
+  closingCard(S, { from: 0.1, y: 290 });
 };
 
 /* ======================================================================= */

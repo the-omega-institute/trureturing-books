@@ -458,7 +458,7 @@ SCENES.triality = S => {
     BT_OPS.forEach((o, i) => {
       const y = fy + i * 78, j = btMod3(-o.B);
       let oa = ra;
-      if (o.B === 0) oa *= Q(S, 1, 'Yukawa couplings', 0.5);
+      if (o.B === 0) oa *= Q(S, 1, 'Yukawa and Weinberg', 0.5);
       else if (o.B === 1) oa *= Q(S, 1, 'QQQL picks up', 0.5);
       else if (o.B === 2) oa *= at(S, 2, 0.5);
       else oa *= Q(S, 2, 'jumps from dimension', 0.5);
@@ -497,7 +497,7 @@ SCENES.anomaly = S => {
   /* top: the charges */
   panel(140, 185, 1640, 150, a, C.cyan, 'GAUGED U(1)X · 规范 U(1)X');
   btRich([['X = 3B − 9L', C.white], ['τ', C.mag, 0.7, 6], ['     quarks (Q, u', C.dim], ['c', C.dim, 0.6, -14], [', d', C.dim], ['c', C.dim, 0.6, -14], [')  ', C.dim], ['+1, −1, −1', C.cyan]], 180, 262, { size: 34, a: a * at(S, 0, 0.6) });
-  btRich([['τ family (L, e', C.dim], ['c', C.dim, 0.6, -11], [', ν', C.dim], ['c', C.dim, 0.6, -11], [')  ', C.dim], ['−9, +9, +9', C.mag], ['      e, μ leptons  0', C.dim]], 180, 310, { size: 26, a: a * Q(S, 0, 'plus one conjugate', 0.5) });
+  btRich([['τ family (L, e', C.dim], ['c', C.dim, 0.6, -11], [', ν', C.dim], ['c', C.dim, 0.6, -11], [')  ', C.dim], ['−9, +9, +9', C.mag], ['      e, μ leptons  0', C.dim]], 180, 310, { size: 26, a: a * Q(S, 0, 'plus a conjugate', 0.5) });
   /* the ledger */
   const ta = a * at(S, 0, 0.5, 2.0) * (1 - p2);
   if (ta > 0.003) {
@@ -534,7 +534,7 @@ SCENES.anomaly = S => {
     btRich([['⟨φ⟩, X(φ) = 9   ⟶   ', C.white], ['Z9', C.cyan]], 940, 480, { size: 34, a: za * Q(S, 2, 'charge nine', 0.5) });
     btRich([['quarks e', C.white], ['2πi/9', C.dim, 0.65, -14], ['   leptons 1', C.white]], 940, 545, { size: 30, a: za * Q(S, 2, 'charge nine', 0.5, 0.4) });
     btRich([['(e', C.white], ['2πi/9', C.dim, 0.65, -14], [')³ = e', C.white], ['2πi/3', C.dim, 0.65, -14], [' = colour centre', C.now]], 940, 615, { size: 30, a: za * Q(S, 2, 'its cube', 0.5) });
-    btRich([['on colour singlets:  ', C.white], ['Z3,  ΔB ∈ 3Z', C.cyan]], 940, 685, { size: 30, a: za * Q(S, 2, 'acts as Z three', 0.5) });
+    btRich([['on colour singlets:  ', C.white], ['Z3,  ΔB ∈ 3Z', C.cyan]], 940, 685, { size: 30, a: za * Q(S, 2, 'singlets see Z three', 0.5) });
     const pa = a * at(S, 3, 0.6);
     txt('price: charges depend on the generation · 代价：荷依赖世代', 940, 740, { size: 22, fam: F.zh, w: 700, c: C.argued, a: pa });
   }
@@ -546,7 +546,7 @@ SCENES.anomaly = S => {
 SCENES.lift = S => {
   const a = btFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [1, null, 'argued']]);
+  badgeQ(S, [[0, null, 'computed'], [0, 'smallest extension', 'argued']]);
   /* left: the anomaly phase table */
   const ta = a * at(S, 0, 0.6);
   panel(120, 190, 760, 600, ta, C.cyan, 'A(m, k) = exp(−2πi m k² / 3)');
@@ -564,7 +564,7 @@ SCENES.lift = S => {
     txt('flux m, flat line k on S² × L(3,1) · 磁通 m、平坦线 k', 160, 760, { size: 21, fam: F.zh, w: 700, c: C.dim, a: ta });
   }
   /* right: Z9 → 3-cycle, then 19 → 25 states (schematic) */
-  const za = a * at(S, 1, 0.6);
+  const za = a * Q(S, 0, 'smallest extension', 0.6);
   if (za > 0.003) {
     panel(940, 190, 860, 260, za, C.argued, 'MINIMAL EXTENSION · 最小扩张');
     const cx = 1110, cy = 330, R = 80;
@@ -581,10 +581,10 @@ SCENES.lift = S => {
     }
     txt('P · 3-cycle', 1560, cy + 10, { size: 24, fam: F.mono, w: 700, c: C.white, a: za });
   }
-  const sa = a * at(S, 2, 0.6);
+  const sa = a * at(S, 1, 0.6);
   if (sa > 0.003) {
     panel(940, 480, 860, 310, sa, C.argued, 'LIFTED SHELL · 提升球壳 (schematic 示意)');
-    const g = ease(Q(S, 2, 'at least twenty-five', 1.0));
+    const g = ease(Q(S, 1, 'at least twenty-five', 1.0));
     const n = 19 + Math.round(6 * g);
     for (let i = 0; i < 25; i++) {
       if (i >= n) break;

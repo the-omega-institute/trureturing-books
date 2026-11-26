@@ -35,8 +35,8 @@
      "让三种力在高能交汇，只完成了半张考卷。"
     ],
     [
-     "The tougher examiner sits at the electroweak scale: a Higgs mass of 125.25 GeV.",
-     "更严厉的考官坐在电弱标度：希格斯质量 125.25 GeV。"
+     "The tougher examiner sits at the Higgs mass: 125.25 GeV.",
+     "更严厉的考官坐在希格斯质量 125.25 GeV 处。"
     ],
     [
      "Heavy states near ten to the fourteen GeV push the Higgs mass squared up.",
@@ -175,40 +175,6 @@
    ]
   },
   {
-   "id": "heat",
-   "name": "HEAT-KERNEL PORTAL",
-   "lead": 0.5,
-   "tail": 0.6,
-   "music": [
-    0.9,
-    0.7,
-    0.6,
-    0.3,
-    0.3
-   ],
-   "lines": [
-    [
-     "At 172 layers a uniform portal fails, so the portal leans toward low modes, like a heat kernel.",
-     "到了 172 层，均匀门户无解；门户向低模倾斜，取热核形状。"
-    ],
-    [
-     "Times up to 0.49 are excluded, 8 to 16 is viable, and the shell's arc ratio, 8.535, falls inside.",
-     "t ≤ 0.49 被排除，8 到 16 可行，球壳固有弧比 8.535 恰在其中。"
-    ],
-    [
-     "With no free parameter, it predicts a ratio for layers one and seven between 2.750 and 3.728.",
-     "它无自由参数地预言：第 1 与第 7 层的响应比在 2.750 到 3.728 之间。"
-    ]
-   ],
-   "cues": [
-    {
-     "line": 1,
-     "at": 4.2,
-     "kind": "chime"
-    }
-   ]
-  },
-  {
    "id": "pinch",
    "name": "LOW-ENERGY PINCH",
    "lead": 0.5,
@@ -236,10 +202,6 @@
     [
      "All six need a charged singlet at 80.38 GeV, which OPAL excludes if it is long-lived.",
      "这 6 种都需要一枚 80.38 GeV 的带电单态；若它长寿命，OPAL 已将其排除。"
-    ],
-    [
-     "A Majorana coupling lets it decay fast, with electrons or muons in at least half the decays.",
-     "马约拉纳顶角让它迅速衰变，至少一半的衰变含电子或 μ 子。"
     ]
    ],
    "cues": [

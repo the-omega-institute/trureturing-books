@@ -403,12 +403,14 @@ SCENES.spin = S => {
   const E = { cx: 1290, cy: 400, r: 140 }, P = { cx: 1630, cy: 400, r: 140 };
   if (ra > 0.003) {
     panel(1100, 190, 700, 470, ra, C.cyan, 'TURN BY θ · 转过 θ');
+    if (th > 0.01) { ctx.save(); ctx.globalAlpha = ra; ctx.strokeStyle = C.now; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(E.cx, E.cy, E.r * 1.08, -th, 0); ctx.stroke(); ctx.restore(); }
     daEllipse(E.cx, E.cy, E.r, th, ra);
     txt('source · 源', E.cx, 610, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: ra });
     /* the pair plane */
     ring(P.cx, P.cy, P.r, C.dim, ra * 0.5, 1.5);
     line(P.cx - P.r - 10, P.cy, P.cx + P.r + 10, P.cy, C.dim, ra * 0.5, 1.2); line(P.cx, P.cy - P.r - 10, P.cx, P.cy + P.r + 10, C.dim, ra * 0.5, 1.2);
     const vx = P.cx + (T.t11 - T.t22) / d * P.r, vy = P.cy - 2 * T.t12 / d * P.r;
+    if (th > 0.01) { ctx.save(); ctx.globalAlpha = ra; ctx.strokeStyle = C.mag; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(P.cx, P.cy, P.r, -Math.min(2 * th, TAU - 1e-3), 0); ctx.stroke(); ctx.restore(); }
     arrow(P.cx, P.cy, vx, vy, C.mag, ra, 4);
     txt('(T¹¹ − T²², 2T¹²)', P.cx, 610, { size: 22, fam: F.math, w: 700, align: 'center', c: C.mag, a: ra });
   }
@@ -416,7 +418,7 @@ SCENES.spin = S => {
   if (ta > 0.003) {
     panel(120, 690, 1680, 140, ta, C.now, 'ROTATION · 转动');
     const dg = Math.round(daDeg(th));
-    daRich([['θ = ', C.white], [`${dg}°`, C.now], ['   →   pair turns ', C.white], [`${2 * dg}°`, C.mag], ['   numerator stays ', C.white], [daNum(T).toFixed(4), C.cyan]], 160, 776, { size: 32, a: ta, fam: F.mono });
+    daRich([['θ = ', C.white], [`${dg}°`, C.now], ['   →   pair turns ', C.white], [`${2 * dg}°`, C.mag], ['   numerator unchanged', C.cyan]], 160, 776, { size: 32, a: ta, fam: F.mono });
     const ha = a * Q(S, 3, 'helicities plus', 0.6);
     chip(1640, 762, 260, 64, 'helicity ±2', C.mag, ha, 30);
   }
@@ -458,20 +460,20 @@ SCENES.positive = S => {
   txt('○ k = 0: 5 negative, 10 zero', gx, 720, { size: 20, fam: F.mono, w: 700, c: C.dim, a: ra });
   /* the 15 edge modes at one nonzero momentum */
   const ia = ra * Q(S, 1, 'one positive direction', 0.6);
-  const bx = 1360, by = 250, cw = 26, conf = at(S, 2, 0.6);
+  const bx = 1330, by = 250, cw = 26, conf = at(S, 2, 0.6);
   txt('15 edge modes · 15 个边长方向', bx, by + 10, { size: 22, fam: F.zh, w: 700, c: C.white, a: ia });
   for (let i = 0; i < 15; i++) {
     const y = by + 40 + i * 24, sgn = i === 0 ? '+' : i <= 10 ? '−' : '0';
     const col = i === 0 ? mix(C.white, C.now, conf) : i <= 10 ? C.cyan : C.dim;
-    fillBox(bx, y, 180, 20, col, ia * (i === 0 ? 0.55 : 0.3));
-    box(bx, y, 180, 20, col, ia, 1.2);
-    txt(sgn, bx + 200, y + 17, { size: 20, fam: F.mono, w: 700, c: col, a: ia });
+    fillBox(bx, y, 120, 20, col, ia * (i === 0 ? 0.55 : 0.3));
+    box(bx, y, 120, 20, col, ia, 1.2);
+    txt(sgn, bx + 136, y + 17, { size: 20, fam: F.mono, w: 700, c: col, a: ia });
   }
   txt('1 + · 10 − · 4 zero', bx, by + 420, { size: 24, fam: F.mono, w: 700, c: C.white, a: ia });
-  daCert(bx, by + 452, 'NUM · per-momentum certificate · 逐动量证书', ia);
+  daCert(bx, by + 452, 'NUM · certificate · 逐动量证书', ia);
   const ca = ra * conf;
   if (ca > 0.003) {
-    txt('◀ conformal mode · 共形模', bx + 230, by + 57, { size: 22, fam: F.zh, w: 700, c: C.now, a: ca });
+    txt('◀ conformal mode · 共形模', bx + 150, by + 57, { size: 22, fam: F.zh, w: 700, c: C.now, a: ca });
     txt('Euclidean instability, reborn on the lattice', 960, 780, { size: 26, fam: F.disp, w: 700, c: C.now, a: ca });
     txt('欧氏引力的共形不稳定，在格点上重现', 960, 814, { size: 22, fam: F.zh, w: 700, c: C.white, a: ca });
   }
@@ -485,9 +487,9 @@ SCENES.wall = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [3, null, 'computed']]);
   panel(120, 190, 1680, 170, a, C.cyan, 'HINGE LOADS · 铰链负载');
-  daRich([['weight on hinge h  →  ', C.white], ['N_h ∈ ℕ', C.now]], 160, 262, { size: 34, a: a * at(S, 0, 0.6) });
+  daRich([['weight on hinge h  →  ', C.white], ['Nₕ ∈ ℕ', C.now]], 160, 262, { size: 34, a: a * at(S, 0, 0.6) });
   const sa = a * at(S, 1, 0.6);
-  daRich([['∂S/∂η ∝ 3 ( Σ₄ N_h − ', C.white], ['√3', C.mag], [' · Σ₆ N_h )', C.white]], 160, 330, { size: 34, a: sa });
+  daRich([['∂S/∂η ∝ 3 ( Σ₄ Nₕ − ', C.white], ['√3', C.mag], [' · Σ₆ Nₕ )', C.white]], 160, 330, { size: 34, a: sa });
   txt('flat cell: 30 four-valent · 20 six-valent hinges', 1100, 262, { size: 22, fam: F.mono, w: 700, c: C.dim, a: sa });
   txt('平直胞：30 张四价面 · 20 张六价面', 1100, 300, { size: 22, fam: F.zh, w: 700, c: C.dim, a: sa });
   daCert(1100, 336, 'NUM · stationarity certificate · 驻点证书', sa);
@@ -506,7 +508,7 @@ SCENES.wall = S => {
       const y = 470 + i * 120, ok = rows[i][3];
       txt(h, 160, y, { size: 28, fam: F.mono, w: 700, c: C.white, a: ra });
       txt(m, 160, y + 40, { size: 26, fam: F.math, w: 700, c: ok ? C.cyan : C.mag, a: ra });
-      txt(n2, 420, y + 40, { size: 22, fam: F.mono, w: 700, c: C.dim, a: ra });
+      txt(n2, 420, y + 40, { size: 22, fam: F.math, w: 700, c: C.dim, a: ra });
       txt(ok ? '✓' : '✗', 960, y + 20, { size: 44, fam: F.math, w: 700, align: 'center', c: ok ? C.cyan : C.mag, a: ra });
     });
   }
@@ -541,30 +543,29 @@ SCENES.anchors = S => {
   /* left: the triangle */
   const la = a * at(S, 1, 0.6);
   if (la > 0.003) {
-    panel(120, 190, 800, 450, la, C.lean, 'd ∘ d = 0 · 上边缘的上边缘为零');
-    const P = { x: [230, 600], y: [660, 600], z: [440, 290] };
-    const V = { x: [250, 580], y: [700, 580], z: [470, 300] };
+    panel(120, 190, 800, 480, la, C.lean, 'd ∘ d = 0 · 上边缘的上边缘为零');
+    const V = { x: [210, 500], y: [530, 500], z: [370, 280] };
     const ea = la * Q(S, 1, 'the differences', 0.6);
     line(V.x[0], V.x[1], V.y[0], V.y[1], C.cyan, ea, 3); line(V.y[0], V.y[1], V.z[0], V.z[1], C.cyan, ea, 3); line(V.x[0], V.x[1], V.z[0], V.z[1], C.cyan, ea, 3);
     for (const k of ['x', 'y', 'z']) {
       dot(V[k][0], V[k][1], 12, 'c', la);
-      txt(`f(${k}) = ${DA_F[k]}`, V[k][0] + (k === 'z' ? 24 : 0), V[k][1] + (k === 'z' ? 8 : 40), { size: 24, fam: F.mono, w: 700, align: k === 'z' ? 'left' : 'center', c: C.white, a: la });
+      txt(`f(${k}) = ${DA_F[k]}`, V[k][0] + (k === 'z' ? 24 : 0), V[k][1] + (k === 'z' ? 8 : 42), { size: 24, fam: F.mono, w: 700, align: k === 'z' ? 'left' : 'center', c: C.white, a: la });
     }
     const e = (p, q) => DA_F[q] - DA_F[p];
     txt(`${e('x', 'y')}`, (V.x[0] + V.y[0]) / 2, V.x[1] - 12, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: ea });
     txt(`${e('y', 'z')}`, (V.y[0] + V.z[0]) / 2 + 22, (V.y[1] + V.z[1]) / 2, { size: 26, fam: F.mono, w: 700, c: C.cyan, a: ea });
     txt(`${e('x', 'z')}`, (V.x[0] + V.z[0]) / 2 - 26, (V.x[1] + V.z[1]) / 2, { size: 26, fam: F.mono, w: 700, align: 'right', c: C.cyan, a: ea });
     const sa = la * Q(S, 1, 'cancel', 0.6);
-    daRich([[`(${e('y', 'z')} + ${e('x', 'y')}) − ${e('x', 'z')} = `, C.white], ['0', C.now]], 720, 400, { size: 32, a: sa, align: 'center' });
-    txt('d¹(d⁰f) = 0', 720, 460, { size: 30, fam: F.math, w: 700, align: 'center', c: C.lean, a: sa });
-    txt('d²(d¹e) = 0', 720, 506, { size: 30, fam: F.math, w: 700, align: 'center', c: C.lean, a: sa });
-    daLean(150, 600, DA_LEAN.d1d0, la, { size: 18 });
-    daLean(500, 600, DA_LEAN.d2d1, la, { size: 18 });
+    daRich([[`(${e('y', 'z')} + ${e('x', 'y')}) − ${e('x', 'z')} = `, C.white], ['0', C.now]], 730, 360, { size: 32, a: sa, align: 'center' });
+    txt('d¹(d⁰f) = 0', 730, 424, { size: 30, fam: F.math, w: 700, align: 'center', c: C.lean, a: sa });
+    txt('d²(d¹e) = 0', 730, 470, { size: 30, fam: F.math, w: 700, align: 'center', c: C.lean, a: sa });
+    daLean(150, 606, DA_LEAN.d1d0, la, { size: 18 });
+    daLean(150, 644, DA_LEAN.d2d1, la, { size: 18 });
   }
   /* right: the eight beats */
   const ra = a * at(S, 2, 0.6);
   if (ra > 0.003) {
-    panel(960, 190, 840, 450, ra, C.lean, 'QSqrt2 · δ² = 2');
+    panel(960, 190, 840, 480, ra, C.lean, 'QSqrt2 · δ² = 2');
     const cx = 1200, cy = 420, r = 150;
     ring(cx, cy, r, C.dim, ra * 0.6, 1.5);
     line(cx - r - 16, cy, cx + r + 16, cy, C.dim, ra * 0.4, 1); line(cx, cy - r - 16, cx, cy + r + 16, C.dim, ra * 0.4, 1);
@@ -586,20 +587,20 @@ SCENES.anchors = S => {
     txt('u₉₀² ≡ i    u₉₀⁴ ≡ −1', 1400, 420, { size: 26, fam: F.math, w: 700, c: C.white, a: ra * clamp(beats - 3) });
     txt(`beat ${Math.min(8, Math.floor(beats))} / 8`, 1400, 480, { size: 26, fam: F.mono, w: 700, c: C.now, a: ra * clamp(beats) });
     txt('u₉₀⁴⁺⁴ ≡ 1', 1400, 540, { size: 30, fam: F.math, w: 700, c: C.lean, a: ra * clamp(beats - 7) });
-    daLean(990, 600, DA_LEAN.spinor, ra, { size: 18 });
+    daLean(990, 644, DA_LEAN.spinor, ra, { size: 18 });
   }
   /* line 3: degree two against degree four; line 4: the open problem */
   const ca = a * at(S, 3, 0.6) * (1 - op);
   if (ca > 0.003) {
-    panel(120, 670, 1680, 160, ca, C.cyan, 'DEGREE · 次数');
-    daRich([['√2 spinor:  degree ', C.white], ['2', C.lean], ['        flat hinge balance 4β⁴ = 3:  degree ', C.white], ['4', C.mag]], 160, 760, { size: 32, a: ca });
-    txt('√2 旋量只要二次；平直铰链平衡要四次', 160, 806, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ca });
+    panel(120, 694, 1680, 140, ca, C.cyan, 'DEGREE · 次数');
+    daRich([['√2 spinor:  degree ', C.white], ['2', C.cyan], ['        flat hinge balance 4β⁴ = 3:  degree ', C.white], ['4', C.mag]], 160, 770, { size: 32, a: ca });
+    txt('√2 旋量只要二次；平直铰链平衡要四次', 160, 812, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ca });
   }
   const oa = a * op;
   if (oa > 0.003) {
-    panel(120, 670, 1680, 160, oa, C.open, 'OPEN · 未解');
-    txt('Regge action, source normalization and area unit from one minimal arc', 160, 750, { size: 30, fam: F.disp, w: 700, c: C.open, a: oa });
-    txt('从单一极小圆弧导出雷吉作用、源归一化与面积单位：仍未解决', 160, 798, { size: 24, fam: F.zh, w: 700, c: C.white, a: oa });
+    panel(120, 694, 1680, 140, oa, C.open, 'OPEN · 未解');
+    txt('Regge action, source normalization and area unit from one minimal arc', 160, 768, { size: 30, fam: F.disp, w: 700, c: C.open, a: oa });
+    txt('从单一极小圆弧导出雷吉作用、源归一化与面积单位：仍未解决', 160, 812, { size: 24, fam: F.zh, w: 700, c: C.white, a: oa });
   }
 };
 

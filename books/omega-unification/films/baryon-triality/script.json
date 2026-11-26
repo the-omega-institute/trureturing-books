@@ -30,16 +30,16 @@
    ],
    "lines": [
     [
-     "Will the proton decay? Grand unification puts quarks and leptons in one multiplet.",
-     "质子会不会衰变？大统一把夸克与轻子装进同一个多重态。"
+     "Will the proton decay? In grand unification, quarks and leptons share one multiplet.",
+     "质子会不会衰变？在大统一里，夸克与轻子同处一个多重态。"
     ],
     [
-     "Then three quark doublets and a lepton doublet can meet at a single point: the operator QQQL.",
+     "So three quark doublets and a lepton doublet can meet at a single point: the operator QQQL.",
      "于是三个夸克双重态与一个轻子双重态可以在同一点相遇：这就是算符 QQQL。"
     ],
     [
-     "Its hypercharge, three sixths minus one half, is zero. It is gauge invariant, and changes baryon number by one.",
-     "它的超荷是三个六分之一减二分之一，恰为零；它规范不变，却让重子数改变一。"
+     "Its hypercharge, three sixths minus a half, is zero: gauge invariant, yet it changes baryon number by one.",
+     "它的超荷是三个六分之一减二分之一，恰为零：规范不变，却让重子数改变一。"
     ]
    ],
    "cues": [
@@ -64,8 +64,8 @@
    ],
    "lines": [
     [
-     "Maybe three identical quark fields, antisymmetrized, cancel by Pauli exclusion?",
-     "也许三个同代夸克场一反对称化，就被泡利不相容消掉了？"
+     "Maybe three identical quarks cancel by Pauli exclusion?",
+     "也许三个同代夸克会被泡利不相容消掉？"
     ],
     [
      "Expand it term by term: twelve quark components, four lepton components.",
@@ -76,8 +76,8 @@
      "恰好有三十六个互异单项留下来；这一项的系数是四。"
     ],
     [
-     "So the same connection, clocks and mass spectrum allow any coefficient c6.",
-     "所以同一套联络、时钟与质量谱，可以配上任意的系数 c6。"
+     "So the same low-energy data allow any coefficient c6.",
+     "所以同一套低能数据，可以配上任意的系数 c6。"
     ]
    ],
    "cues": [
@@ -110,7 +110,7 @@
      "证明就是一个锥：令 e(x, y) 等于 F(base, x, y)，它的上边缘恰好还原 F。"
     ],
     [
-     "Lean also checks that six Hurwitz generators split mod five into nonzero rank-one matrices.",
+     "Lean also checks: six Hurwitz generators split mod five into nonzero rank-one matrices.",
      "Lean 还检验：六个赫维茨生成元在模五下分裂为非零的秩一矩阵。"
     ],
     [
@@ -140,20 +140,20 @@
    ],
    "lines": [
     [
-     "Here is one. On neutral color singlets, the generation-universal charge reduces to minus h times B, mod three.",
-     "这就是一条：在超荷中性的色单态算符上，世代共同的荷化为负 h 乘 B，模三。"
+     "Here is one. On neutral color singlets, the charge reduces to minus h times B, mod three.",
+     "这就是一条：在超荷中性的色单态上，荷化为负 h 乘 B，模三。"
     ],
     [
-     "Take h nonzero. Yukawa couplings and the Weinberg term carry phase one. QQQL picks up a nontrivial cube root, and is forbidden.",
-     "取 h 不为零：汤川项与温伯格项相位为一，全部保留；QQQL 带上非平凡的三次单位根，被禁止。"
+     "Take h nonzero. Yukawa and Weinberg terms keep phase one; QQQL picks up a nontrivial cube root, and is forbidden.",
+     "取 h 不为零：汤川项与温伯格项相位为一，保留；QQQL 带上非平凡的三次单位根，被禁止。"
     ],
     [
-     "Only changes of baryon number by three survive: the first allowed operator jumps from dimension six to fifteen.",
-     "只剩重子数改变三的过程，于是最低允许的算符从六维跳到十五维。"
+     "Only changes of B by three survive: the first allowed operator jumps from dimension six to fifteen.",
+     "只剩 B 改变三的过程：最低允许的算符从六维跳到十五维。"
     ],
     [
-     "Keep B minus L too, and the floor is eighteen. Three generations of weak instantons change B by exactly three.",
-     "若同时守恒 B 减 L，门槛升到十八维；而三代弱瞬子恰好让 B 改变三。"
+     "With B minus L kept, eighteen. And three generations of weak instantons change B by exactly three.",
+     "若同时守恒 B 减 L，则是十八维；而三代弱瞬子恰好让 B 改变三。"
     ]
    ],
    "cues": [
@@ -183,7 +183,7 @@
    ],
    "lines": [
     [
-     "Triality can be gauged: X equals three B minus nine L tau, plus one conjugate tau neutrino.",
+     "Triality can be gauged: X equals three B minus nine L tau, plus a conjugate tau neutrino.",
      "重子三重对称可以规范化：X 等于三 B 减九 L_τ，再添一个共轭 τ 中微子。"
     ],
     [
@@ -191,8 +191,8 @@
      "六项反常迹，夸克对 τ 代，逐一相消为零。"
     ],
     [
-     "A charge nine condensate leaves Z nine; its cube is the color center, so on color singlets it acts as Z three.",
-     "荷九凝聚留下 Z9；它的立方正是色中心，所以在色单态上作用为 Z3。"
+     "A charge nine condensate leaves Z nine; its cube is the color center, so singlets see Z three.",
+     "荷九凝聚留下 Z9；它的立方正是色中心，所以色单态看到的是 Z3。"
     ],
     [
      "The price: the charge must depend on the generation.",
@@ -221,22 +221,18 @@
    ],
    "lines": [
     [
-     "Put the shell's own triality phase inside SU(5), on a lens space, and a cubic anomaly phase appears.",
-     "把球壳自己的三重相位装进 SU(5)，放到透镜空间上，就冒出一个立方反常相位。"
+     "Inside SU(5) on a lens space, the shell's triality phase meets a cubic anomaly; the smallest extension that trivializes it is Z nine.",
+     "把球壳的三重相位装进 SU(5)、放到透镜空间上，会遇到一个立方反常；能把它平凡化的最小扩张是 Z9。"
     ],
     [
-     "The smallest extension that trivializes it is Z nine.",
-     "能把它平凡化的最小扩张是 Z9。"
-    ],
-    [
-     "Carrying Z nine faithfully, the nineteen-point Behrend shell must grow to at least twenty-five states.",
-     "要忠实承载 Z9，十九点贝伦德球壳最少要扩到二十五个状态。"
+     "To carry Z nine faithfully, the nineteen-point Behrend shell needs at least twenty-five states.",
+     "要忠实承载 Z9，十九点贝伦德球壳最少需要二十五个状态。"
     ]
    ],
    "cues": [
     {
-     "line": 2,
-     "at": 4.2,
+     "line": 1,
+     "at": 4.0,
      "kind": "chime"
     }
    ]
@@ -263,7 +259,7 @@
      "辅助电流相互正交，六维顶点相消，三重对称成立，质子稳定。"
     ],
     [
-     "Parallel currents switch on QQQL, with a Wilson factor of at least zero point zero three one four.",
+     "Parallel currents switch on QQQL, with Wilson factor at least zero point zero three one four.",
      "辅助电流相互平行，QQQL 被激活，威尔逊因子至少约 0.0314。"
     ],
     [

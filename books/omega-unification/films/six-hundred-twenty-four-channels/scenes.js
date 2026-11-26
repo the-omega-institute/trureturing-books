@@ -284,10 +284,10 @@ SCENES.count = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
   const ra = a * (1 - at(S, 2, 0.6));
-  const sq = Q(S, 1, 'square each count', 0.8);
+  const sq = Q(S, 1, 'Squaring', 0.8);
   if (ra > 0.003) {
     chTiles(260, 12, 4, sq, ra * at(S, 0, 0.8), C.cyan, sq > 0.5 ? '12 states × 4² = 16 · 十二态，各 16' : '12 states × 4 readings · 十二态，各 4 种读数');
-    chTiles(470, 12, 6, sq, ra * Q(S, 0, 'another twelve', 0.8), C.mag, sq > 0.5 ? '12 states × 6² = 36 · 十二态，各 36' : '12 states × 6 readings · 十二态，各 6 种读数');
+    chTiles(470, 12, 6, sq, ra * Q(S, 0, 'twelve more', 0.8), C.mag, sq > 0.5 ? '12 states × 6² = 36 · 十二态，各 36' : '12 states × 6 readings · 十二态，各 6 种读数');
     const ea = ra * Q(S, 1, 'twelve times sixteen', 0.5);
     chRich([['12 × 16 = 192', C.cyan]], 560, 700, { size: 46, a: ea, align: 'center' });
     chRich([['+', C.dim]], 860, 700, { size: 46, a: ra * Q(S, 1, 'plus twelve', 0.5), align: 'center' });
@@ -304,7 +304,7 @@ SCENES.count = S => {
       line(X(v), yl - 10, X(v), yl + 10, C.dim, ga, 2);
       txt(v.toFixed(1), X(v), yl + 44, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ga });
     }
-    const ba = ga * Q(S, 2, 'the gain lands', 0.8);
+    const ba = ga * Q(S, 2, 'puts the gain', 0.8);
     fillBox(X(623.91), yl - 40, X(624.09) - X(623.91), 80, C.cyan, ba * 0.25);
     box(X(623.91), yl - 40, X(624.09) - X(623.91), 80, C.cyan, ba, 2.5);
     txt('623.91', X(623.91), yl - 58, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: ba });
@@ -330,7 +330,7 @@ SCENES.cycle = S => {
   if (ba > 0.003) {
     panel(1000, 200, 800, 300, ba, C.cyan, 'RETURN · 回程');
     const x0 = 1040, wB = 720, xs = x0 + wB * 216 / 624, y0 = 290;
-    const free = Q(S, 1, 'all of them return', 0.8);
+    const free = Q(S, 1, 'all return', 0.8);
     fillBox(x0, y0, wB, 46, C.cyan, ba * 0.3);
     fillBox(x0, y0, xs - x0, 46, mix(C.dim, C.cyan, free), ba * (0.6 + 0.2 * free));
     box(x0, y0, wB, 46, C.cyan, ba, 2);
@@ -376,7 +376,7 @@ SCENES.cycle = S => {
     panel(1000, 540, 800, 280, oa2, C.mag, 'MASS ON THE SAME GRAPH · 同图传质量');
     txt('old 19-point block fixed · 固定旧十九点块', 1030, 610, { size: 22, fam: F.zh, w: 700, c: C.white, a: oa2 });
     for (let i = 0; i < 6; i++) {
-      const x = 1030 + i * 126, ca = oa2 * Q(S, 3, 'every candidate', 0.4, i * 0.12);
+      const x = 1030 + i * 126, ca = oa2 * Q(S, 3, 'every mass reading', 0.4, i * 0.12);
       chip(x + 56, 668, 112, 40, `#${11485 + i}`, C.cyan, ca, 20);
       arrow(x + 56, 738, x + 56, 698, C.now, ca * Q(S, 3, 'goes up', 0.5), 3);
     }
@@ -478,7 +478,7 @@ SCENES.gram = S => {
     txt('b / a', X(3.45), oy - 14, { size: 24, fam: F.math, w: 700, align: 'center', c: C.white, a: pa });
     txt('c / d', ox + 14, Y(3.5) + 4, { size: 24, fam: F.math, w: 700, c: C.white, a: pa });
     /* line 1: squeeze the left side */
-    const qa = pa * Q(S, 1, 'Squeeze the left side', 0.6);
+    const qa = pa * Q(S, 1, 'Squeeze b inputs', 0.6);
     fillBox(X(1), Y(1.25), 2 * sx, 1.25 * sy, C.now, qa * 0.08);
     dashed(X(1), oy, X(1), Y(1.25), C.now, qa, 2);
     txt('a < b · 左侧压缩', X(2), Y(1.25) - 14, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.now, a: qa });
@@ -582,24 +582,24 @@ SCENES.stair = S => {
 SCENES.hurwitz = S => {
   const a = chFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [1, null, 'lean'], [3, null, 'computed']]);
+  badgeQ(S, [[0, null, 'argued'], [0, 'built on', 'lean'], [2, null, 'computed']]);
   const ia = a * at(S, 0, 0.6);
-  txt('norm-5 Hurwitz words prepare the coupling inputs · 范数五赫维茨词制备耦合输入', W / 2, 205, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.white, a: ia * (1 - at(S, 3, 0.5)) });
+  txt('norm-5 Hurwitz words prepare the coupling inputs · 范数五赫维茨词制备耦合输入', W / 2, 205, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.white, a: ia * (1 - at(S, 2, 0.5)) });
   /* twelve tiles */
-  const ta = a * at(S, 1, 0.6), nq = Q(S, 2, 'squared norm four', 0.6);
+  const ta = a * Q(S, 0, 'built on', 0.6), nq = Q(S, 1, 'squared norm four', 0.6);
   const twd = 256, th = 150, gap = 18, x0 = W / 2 - (6 * twd + 5 * gap) / 2;
-  const up = at(S, 3, 0.6);
+  const up = at(S, 2, 0.6);
   if (ta > 0.003) CH_HUR.forEach((q, i) => {
     const col = i < 4 ? C.cyan : C.mag;
     const x = x0 + (i % 6) * (twd + gap), y = 240 + Math.floor(i / 6) * (th + gap) - up * 0;
-    const ka = ta * clamp(at(S, 1, 0.4) * 6 - i * 0.35);
+    const ka = ta * clamp(Q(S, 0, 'built on', 0.4) * 6 - i * 0.35);
     panel(x, y, twd, th, ka, col);
     txt(chHurName(q), x + twd / 2, y + 46, { size: i < 4 ? 32 : 24, fam: F.math, w: 700, align: 'center', c: C.white, a: ka });
-    txt(`(${q.join(', ')})`, x + twd / 2, y + 90, { size: 22, fam: F.mono, w: 700, align: 'center', c: col, a: ka * Q(S, 2, 'Doubled', 0.5) });
+    txt(`(${q.join(', ')})`, x + twd / 2, y + 90, { size: 22, fam: F.mono, w: 700, align: 'center', c: col, a: ka * Q(S, 1, 'Doubled', 0.5) });
     txt(`normSq = ${chNorm(q)}`, x + twd / 2, y + 128, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.lean, a: ka * nq });
   });
   txt('24 units = ± 12 representatives · 模去正负号的十二个代表', W / 2, 600, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a: ta * (1 - up) });
-  const la = a * Q(S, 2, 'Lean checks', 0.6);
+  const la = a * Q(S, 1, 'Lean checks', 0.6);
   if (la > 0.003) {
     chLean(500, 660, CH_LEAN.hurwitz, la, { size: 22, tail: '   ·  axioms: [ ]' });
     txt('zero axioms · 零公理 (OmegaInit, OmegaMath)', 500, 700, { size: 20, fam: F.zh, w: 700, c: C.lean, a: la * (1 - up) });
@@ -611,7 +611,7 @@ SCENES.hurwitz = S => {
     const lx0 = 200, lx1 = 1720, X = n => lx0 + n / 24 * (lx1 - lx0), yl = 760;
     line(lx0, yl, lx1, yl, C.dim, wa, 2);
     for (let n = 0; n <= 24; n += 4) txt(String(n), X(n), yl + 32, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.dim, a: wa });
-    const a16 = wa * Q(S, 3, 'Sixteen-step', 0.5), a21 = wa * Q(S, 3, 'needs twenty-one', 0.5);
+    const a16 = wa * Q(S, 2, 'Sixteen-step', 0.5), a21 = wa * Q(S, 2, 'needs twenty-one', 0.5);
     dot(X(16), yl, 12, 'w', a16);
     txt('16: in the box, no zero · 进盒，无零点匹配', X(16) - 20, yl - 44, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.white, a: a16 });
     txt('×', X(16), yl - 16, { size: 30, fam: F.mono, w: 900, align: 'center', c: C.dim, a: a16 });

@@ -175,7 +175,7 @@ function scDial(x, y, r, th, col, a, o = {}) {
 /*                              scene 1 · ONE CLOCK                          */
 /* ======================================================================= */
 const SC_SECT = [
-  { en: 'GAUGE', zh: '规范耦合', sub: 'α_s(M_Z) ≈ 0.1184', rate: 0.9 },
+  { en: 'GAUGE', zh: '规范耦合', sub: 'αs(MZ) ≈ 0.1184', rate: 0.9 },
   { en: 'THREE GENERATIONS', zh: '三代轻模', sub: '3 light modes', rate: 1.6 },
   { en: 'QUARK FLAVOUR', zh: '夸克味混合', sub: 'CKM mixing', rate: 0.55 },
   { en: 'CURVATURE', zh: '真空曲率', sub: 'within 0.2 %', rate: 1.25 }
@@ -194,12 +194,12 @@ SCENES.hook = S => {
     const hl = i === 0 || i === 2 ? at(S, 1, 0.5) * (1 - merge) : 0;
     const col = hl > 0.5 ? C.now : C.cyan;
     const r = lerp(78, 40, merge);
-    scDial(x, y, r, S.u * s.rate * (1 - merge) + 0.6 * i * (1 - merge), col, sa * (1 - 0.85 * merge));
+    scDial(x, y, r, S.u * s.rate * (1 - merge) + 0.6 * i * (1 - merge), col, sa * (1 - merge));
     const la = sa * (1 - merge);
     const tx = hx < W / 2 ? hx + 110 : hx - 110, al = hx < W / 2 ? 'left' : 'right';
     txt(s.en, tx, hy - 22, { size: 26, fam: F.disp, w: 700, c: col, a: la, align: al, ls: 2 });
     txt(s.zh, tx, hy + 16, { size: 26, fam: F.zh, w: 700, c: C.white, a: la, align: al });
-    txt(s.sub, tx, hy + 52, { size: 20, fam: F.mono, w: 700, c: C.dim, a: la, align: al });
+    txt(s.sub, tx, hy + 52, { size: 22, fam: F.math, w: 700, c: C.dim, a: la, align: al });
   });
   /* the two clocks nature does not keep separately */
   const na = a * at(S, 1, 0.5) * (1 - merge);
@@ -232,7 +232,7 @@ SCENES.clock = S => {
   badgeQ(S, [[0, null, 'computed']]);
   const a = scFade(S);
   const px = 170, py = 230, pw = 860, ph = 520;
-  panel(px - 40, py - 50, pw + 80, ph + 110, a, C.cyan, 'KERNELS  k_j(y) = (1 − y) / (1 + (j² − 1) y)');
+  panel(px - 40, py - 50, pw + 80, ph + 130, a, C.cyan, 'KERNELS  k_j(y) = (1 − y) / (1 + (j² − 1) y)');
   const X = y => px + y * pw, Y = k => py + ph - k * (ph - 30);
   line(px, Y(0), px + pw, Y(0), C.dim, a, 2); line(px, Y(0), px, Y(1) - 10, C.dim, a, 2);
   txt('y', px + pw + 14, Y(0) + 8, { size: 26, fam: F.math, c: C.dim, a });
@@ -246,8 +246,10 @@ SCENES.clock = S => {
     const ca = a * clamp(nShow - j + 1);
     const col = j === cur ? C.now : C.cyan;
     curve(t => [X(t), Y(scKer(j, t))], 160, col, ca * (j === cur ? 1 : 0.55), j === cur ? 4 : 2.5);
-    const yl = 0.06 + 0.012 * j;
-    txt(`j=${j}`, X(yl) + 10, Y(scKer(j, yl)) - 4, { size: 18, fam: F.mono, w: 700, c: col, a: ca * (j === cur ? 1 : 0.7) });
+    if (j <= 2 || j === cur) {
+      const yl = j === 1 ? 0.3 : j === 2 ? 0.22 : 0.1;
+      txt(`j = ${j}`, X(yl) + 14, Y(scKer(j, yl)) - 6, { size: 22, fam: F.mono, w: 700, c: col, a: ca });
+    }
   }
   /* schematic zero points on the y axis carrying weight */
   const za = a * at(S, 1, 0.6, 2.2);
@@ -256,7 +258,7 @@ SCENES.clock = S => {
     line(X(y), Y(0), X(y), Y(0) - h * za, C.mag, za, 4);
     dot(X(y), Y(0) - h * za, 7, 'm', za);
   }
-  txt('zero heights γ → points y, weights p (schematic)', px + pw / 2, Y(0) + 62, { size: 20, fam: F.mono, w: 700, c: C.mag, a: za, align: 'center' });
+  txt('zero heights γ → points y, weights p (schematic)', px + pw / 2, Y(0) + 66, { size: 22, fam: F.math, w: 700, c: C.mag, a: za, align: 'center' });
   /* the definition */
   const fa = a * at(S, 0, 0.6, 0.4);
   const rx = 1150;
@@ -327,15 +329,15 @@ SCENES.rupture = S => {
   /* the efficiency ratio: needed ≥ 18.4968…, the neutral shell spans 1 → 19 */
   const ea = a * resc;
   if (ea > 0.003) {
-    const ex = 1110, ew = 660, ey = 470;
+    const ex = 1120, ew = 600, ey = 470;
     panel(ex - 30, 340, ew + 60, 270, ea, C.cyan, 'NEUTRAL SHELL · 中性壳 η = x tr(xI + L)⁻¹');
     const X = v => ex + (v - 1) / 19 * ew;
-    line(X(1), ey, X(20), ey, C.dim, ea, 2);
+    line(X(1), ey, X(19.6), ey, C.dim, ea, 2);
     for (const v of [1, 5, 10, 15, 19]) { line(X(v), ey - 8, X(v), ey + 8, C.dim, ea, 2); txt(String(v), X(v), ey + 38, { size: 20, fam: F.mono, c: C.dim, a: ea, align: 'center' }); }
     const g = ease(clamp((S.u - phraseAt(S, 2, 'the shell spans')) / 1.0));
     fillBox(X(1), ey - 30, (X(19) - X(1)) * g, 18, C.cyan, ea * 0.85);
     txt('shell: 1 → 19 (1 zero mode + 18)', X(1), ey - 44, { size: 20, fam: F.mono, w: 700, c: C.cyan, a: ea * g });
-    line(X(SC_NUM.ratio), ey - 60, X(SC_NUM.ratio), ey + 60, C.now, ea, 3);
+    line(X(SC_NUM.ratio), ey - 60, X(SC_NUM.ratio), ey + 14, C.now, ea, 3);
     txt('needed ≥ 18.49684…', X(SC_NUM.ratio) - 10, ey + 90, { size: 22, fam: F.mono, w: 700, c: C.now, a: ea, align: 'right' });
   }
   /* the forced sixth-time shift */
@@ -354,16 +356,16 @@ SCENES.seventh = S => {
   const a = scFade(S);
   /* the six inputs */
   const ia = a * at(S, 0, 0.6);
-  const lab = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6 + 1.3609·10⁻⁸'];
+  const lab = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6 + 1.360900010·10⁻⁸'];
   lab.forEach((s, i) => {
     const ca = ia * clamp(at(S, 0, 0.4, 0.25 * i) * 1.0);
-    const w = i < 5 ? 150 : 330, x = 150 + i * 175;
+    const w = i < 5 ? 150 : 400, x = 140 + i * 170;
     const col = i < 5 ? C.cyan : C.mag;
     box(x, 190, w, 64, col, ca, 2, 'rgba(0,0,0,0.5)');
     txt(`F(${i + 1}) = ${s}`, x + w / 2, 233, { size: i < 5 ? 22 : 22, fam: F.math, w: 700, c: col, a: ca, align: 'center' });
   });
   const qa = a * Q(S, 0, 'ask about the seventh', 0.6);
-  chip(1660, 222, 200, 64, 'F(7) = ?', C.now, qa, 30, F.math);
+  chip(1680, 222, 190, 64, 'F(7) = ?', C.now, qa, 30, F.math);
   /* the Gauss–Radau window */
   const wa = a * Q(S, 1, 'a window two point', 0.7);
   if (wa > 0.003) {
@@ -407,7 +409,7 @@ SCENES.bits = S => {
   const drop = Q(S, 1, 'Drop to forty-three', 0.6);
   const back = Q(S, 2, 'exact threshold', 0.6);
   const nb = 44 - drop * (1 - back);
-  const x0 = 160, cw = 36, y = 260;
+  const x0 = 190, cw = 34, y = 260;
   panel(x0 - 30, 190, 44 * cw + 60, 170, a, C.cyan, 'INPUT PRECISION PER TIME · 每项输入保留的二进制位');
   const fill = ease(at(S, 0, 2.2, 0.4));
   for (let i = 0; i < 44; i++) {
@@ -443,13 +445,14 @@ SCENES.bits = S => {
 SCENES.bands = S => {
   badgeQ(S, [[0, null, 'computed']]);
   const a = scFade(S);
-  const ax0 = 220, ax1 = 1700, ay = 520, L0 = 8, L1 = 14;
+  const ax0 = 220, ax1 = 1680, ay = 545, L0 = 8, L1 = 14;
+  const SUP = { 8: '⁸', 9: '⁹', 10: '¹⁰', 11: '¹¹', 12: '¹²', 13: '¹³', 14: '¹⁴' };
   const X = l => ax0 + (l - L0) / (L1 - L0) * (ax1 - ax0);
   const aa = a * at(S, 0, 0.6);
   line(ax0, ay, ax1, ay, C.dim, aa, 2);
-  for (let l = L0; l <= L1; l++) { line(X(l), ay - 8, X(l), ay + 8, C.dim, aa, 2); txt(`10^${l}`, X(l), ay + 40, { size: 22, fam: F.mono, w: 700, c: C.dim, a: aa, align: 'center' }); }
+  for (let l = L0; l <= L1; l++) { line(X(l), ay - 8, X(l), ay + 8, C.dim, aa, 2); txt(`10${SUP[l]}`, X(l), ay + 40, { size: 24, fam: F.math, w: 700, c: C.dim, a: aa, align: 'center' }); }
   txt('zero height γ (log scale) · 零点高度', ax1, ay + 78, { size: 20, fam: F.zh, w: 700, c: C.dim, a: aa, align: 'right' });
-  const hmax = 290 / 40;
+  const hmax = 230 / 40;
   SC_BANDS.forEach((b, i) => {
     const ba = a * Q(S, 0, 'three narrow height bands', 0.6, 0.45 * i);
     if (ba <= 0.003) return;
@@ -459,28 +462,30 @@ SCENES.bands = S => {
     const x = X(b.lo), w = Math.max(10, X(b.hi) - X(b.lo));
     fillBox(x, ay - h, w, h, col, ba * 0.8);
     if (b.ray) arrow(X(b.lo), ay - h - 12, ax1 + 30, ay - h - 12, col, ba, 3);
-    const lx = b.ray ? X(b.lo) + 230 : x + w / 2;
-    txt(b.pct, lx, ay - h - (b.ray ? 30 : 46), { size: 30, fam: F.mono, w: 700, c: col, a: ba, align: 'center' });
-    txt(b.en, lx, ay - h - (b.ray ? 66 : 16), { size: 20, fam: F.math, w: 700, c: C.white, a: ba, align: 'center' });
+    /* labels: the first band to its left, the second above, the ray above its arrow */
+    const lx = b.ray ? X(b.lo) + 230 : i === 0 ? x - 16 : x + w / 2, al = i === 0 ? 'right' : 'center';
+    const ly = b.ray ? ay - h - 30 : i === 0 ? ay - h + 10 : ay - h - 46;
+    txt(b.pct, lx, ly, { size: 30, fam: F.mono, w: 700, c: col, a: ba, align: al });
+    txt(b.en, lx, ly + (b.ray ? -36 : 32), { size: 22, fam: F.math, w: 700, c: C.white, a: ba, align: al });
   });
   const ta = a * Q(S, 0, '99.931 percent', 0.6);
-  chip(560, 230, 420, 66, 'p(B) > 99.931 %', C.now, ta, 34);
+  chip(500, 250, 420, 66, 'p(B) > 99.931 %', C.now, ta, 34);
   const ga = a * Q(S, 1, 'almost nothing between', 0.6);
-  txt('gaps hold < 0.069 % · 带间几乎为空', X(9.3), ay - 60, { size: 22, fam: F.zh, w: 700, c: C.mag, a: ga, align: 'center' });
+  txt('gaps hold < 0.069 % · 带间几乎为空', X(9.0), ay - 40, { size: 22, fam: F.zh, w: 700, c: C.mag, a: ga, align: 'center' });
   /* stiffness and held-out J */
   const sa = a * at(S, 2, 0.6);
   if (sa > 0.003) {
-    panel(140, 620, 940, 200, sa, C.cyan, 'STIFFNESS · 刚度  w_e → w_e (1 + 10⁻⁷)');
-    txt('sensitivity S ∈ (0.00208104145, 0.00208104148)', 170, 700, { size: 26, fam: F.mono, w: 700, c: C.white, a: sa });
-    txt('response drop > 1.82 × 10⁻¹⁰', 170, 750, { size: 28, fam: F.mono, w: 700, c: C.mag, a: sa });
-    txt('even after re-choosing p′ · 重选权重也掩盖不了', 170, 795, { size: 22, fam: F.zh, w: 700, c: C.dim, a: sa });
+    panel(140, 650, 940, 185, sa, C.cyan, 'STIFFNESS · 刚度  w_e → w_e (1 + 10⁻⁷)');
+    txt('sensitivity S ∈ (0.00208104145, 0.00208104148)', 170, 722, { size: 26, fam: F.mono, w: 700, c: C.white, a: sa });
+    txt('response drop  > 1.82 × 10⁻¹⁰', 170, 772, { size: 30, fam: F.math, w: 700, c: C.mag, a: sa });
+    txt('even after re-choosing p′ · 重选权重也掩盖不了', 170, 815, { size: 22, fam: F.zh, w: 700, c: C.dim, a: sa });
   }
   const ja = a * at(S, 3, 0.6);
   if (ja > 0.003) {
-    panel(1120, 620, 660, 200, ja, C.mag, 'HELD-OUT CP · 留出的 J');
-    txt('J : −6.0833 %', 1150, 710, { size: 48, fam: F.mono, w: 700, c: C.mag, a: ja, ab: 1 });
-    txt('8 zeros · A = 2,903,600,000', 1150, 760, { size: 22, fam: F.mono, w: 700, c: C.white, a: ja });
-    txt('八点见证，未参与标定', 1150, 798, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ja });
+    panel(1120, 650, 660, 185, ja, C.mag, 'HELD-OUT CP · 留出的 J');
+    txt('J : −6.0833 % vs ref', 1150, 730, { size: 44, fam: F.mono, w: 700, c: C.mag, a: ja, ab: 1 });
+    txt('8 zeros · A = 2,903,600,000', 1150, 775, { size: 22, fam: F.mono, w: 700, c: C.white, a: ja });
+    txt('八点见证，未参与标定', 1150, 815, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ja });
   }
 };
 
@@ -490,7 +495,7 @@ SCENES.bands = S => {
 const SC_SEL = [
   ['power law γ⁻ˢ · 幂律', 'excluded for all s ≥ 1.00001485'],
   ['Gaussian determinants, heat traces · 高斯行列式', '≤ 24 heat-trace factors miss the 1.95557 × 10⁸ gain'],
-  ['Gibbs triangle weights e^(−βS△) · 吉布斯三角权', 'all real β excluded on the 23-zero list'],
+  ['Gibbs triangle weights · 吉布斯三角权', 'all real β excluded on the 23-zero list'],
   ['short coherent walks · 短程相干游走', 'ratio < 3.705 × 10⁸, needed 2.28327 × 10¹⁴'],
   ['single-shot selector · 单次选择器', 'full-spectrum pass rate < 4.42870 × 10⁻⁵']
 ];
@@ -498,13 +503,13 @@ SCENES.selectors = S => {
   badgeQ(S, [[0, null, 'computed']]);
   const a = scFade(S);
   const qa = a * at(S, 0, 0.6);
-  txt('a simple rule that grows the three bands?', W / 2, 220, { size: 34, fam: F.disp, w: 700, c: C.white, a: qa, align: 'center' });
-  txt('能不靠拟合自动长出三条带的简单法则？', W / 2, 266, { size: 28, fam: F.zh, w: 700, c: C.dim, a: qa, align: 'center' });
+  txt('a simple rule that grows the three bands?', W / 2, 210, { size: 34, fam: F.disp, w: 700, c: C.white, a: qa, align: 'center' });
+  txt('能不靠拟合自动长出三条带的简单法则？', W / 2, 254, { size: 28, fam: F.zh, w: 700, c: C.dim, a: qa, align: 'center' });
   const t1 = lineAt(S, 1), span = Math.max(1, t1.e - t1.s);
   SC_SEL.forEach((r, i) => {
     const ra = a * at(S, 1, 0.4, span * i / 6);
     if (ra <= 0.003) return;
-    const y = 320 + i * 86;
+    const y = 295 + i * 82;
     box(150, y, 1620, 70, C.cyan, ra, 1.5, 'rgba(0,0,0,0.5)');
     txt(r[0], 175, y + 45, { size: 26, fam: F.zh, w: 700, c: C.white, a: ra });
     txt(r[1], 1745, y + 45, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: ra, align: 'right' });
@@ -512,9 +517,10 @@ SCENES.selectors = S => {
     line(165, y + 36, 165 + (tw(r[0], 26, F.zh, 700) + 20) * st, y + 36, C.mag, st, 4);
   });
   const sa = Q(S, 1, 'certificates exclude each one', 0.5);
-  stamp('EXCLUDED · 排除', 1460, 300, sa * a, C.mag, 44, -0.06);
+  stamp('EXCLUDED · 排除', 1440, 770, sa * a, C.mag, 44, -0.06);
   const fa = a * at(S, 2, 0.6);
-  txt('external weights break at every turn · 外加权重处处触壁', W / 2, 800, { size: 30, fam: F.zh, w: 700, c: C.mag, a: fa, align: 'center' });
+  txt('external weights break at every turn', 160, 760, { size: 30, fam: F.disp, w: 700, c: C.mag, a: fa });
+  txt('外加的权重处处触壁', 160, 806, { size: 28, fam: F.zh, w: 700, c: C.mag, a: fa });
 };
 
 /* ======================================================================= */
@@ -526,11 +532,11 @@ SCENES.lean = S => {
   const la = a * at(S, 0, 0.6);
   const dim2 = 1 - 0.55 * at(S, 2, 0.6) * (1 - at(S, 3, 0.6));
   panel(130, 180, 1660, 180, la * dim2, C.lean, 'LEAN ✓ · CyclicFejerBand.band_le_positive_fourier');
-  txt('(N − H) Σ_{r ∈ R_H} M(r) + H·M(0)  ≤  (1/q) Σ_k |B_N(k)|² Re M̂(k)', W / 2, 270, { size: 34, fam: F.math, w: 700, c: C.white, a: la * dim2, align: 'center' });
+  txt('(N − H) · Σ_(r ∈ R_H) M(r) + H · M(0)  ≤  (1/q) · Σ_k |B_N(k)|² · Re M̂(k)', W / 2, 270, { size: 34, fam: F.math, w: 700, c: C.white, a: la * dim2, align: 'center' });
   txt('M ≥ 0 on ℤ/qℤ,  H < N  ·  窄频带权重 ≤ 非负傅里叶和', W / 2, 325, { size: 22, fam: F.zh, w: 700, c: C.lean, a: la * dim2, align: 'center' });
   const vb = a * at(S, 1, 0.6);
   panel(130, 390, 1660, 180, vb * dim2, C.lean, 'LEAN ✓ · FiniteCollisionVariance.tailCollisionMass_lower_variance');
-  txt('(9/16) · W^{2p}  ≤  (1 + 4√(pV) / η) · E_p(η)', W / 2, 480, { size: 38, fam: F.math, w: 700, c: C.white, a: vb * dim2, align: 'center' });
+  txt('(9/16) · W²ᵖ  ≤  (1 + 4√(pV) / η) · Eₚ(η)', W / 2, 480, { size: 38, fam: F.math, w: 700, c: C.white, a: vb * dim2, align: 'center' });
   txt('w ≥ 0, W > 0, p > 0, η > 0  ·  方差越小，近碰撞质量越多', W / 2, 535, { size: 22, fam: F.zh, w: 700, c: C.lean, a: vb * dim2, align: 'center' });
   /* the worked example, brute force */
   const ea = a * at(S, 2, 0.6) * (1 - at(S, 3, 0.6));

@@ -14,7 +14,7 @@
   {
    "id": "hook",
    "name": "INDUCED GRAVITY",
-   "lead": 1.9,
+   "lead": 1.6,
    "tail": 0.5,
    "music": [
     1.0,
@@ -25,7 +25,7 @@
    ],
    "lines": [
     [
-     "Sakharov's idea: perhaps gravity and the vacuum energy are not inputs, but echoes of quantum fluctuations.",
+     "Sakharov's idea: maybe gravity and vacuum energy are not inputs, but echoes of quantum fluctuations.",
      "萨哈罗夫的设想：引力与真空能也许不是输入，而是量子涨落的回声。"
     ],
     [
@@ -59,16 +59,16 @@
    ],
    "lines": [
     [
-     "First, the visible spectrum alone: the light Standard Model fields plus the heavy towers.",
-     "先看可见谱本身：标准模型的轻场，加上重谱塔。"
+     "First, the visible spectrum alone.",
+     "先看可见谱本身。"
     ],
     [
-     "Fermion layers always open before the positive heavy vectors, so every mass prefix keeps a negative polarization deficit.",
+     "Fermion layers open first, so every mass prefix keeps a negative deficit.",
      "费米子层总是先开启，所以每个质量前缀都留着负的偏振亏量。"
     ],
     [
      "Then Lambda G stays above zero point zero one one eight: over ten to the hundred twenty times too big.",
-     "于是 ΛG 始终大于 0.0118：比目标大出 10¹²⁰ 倍以上。"
+     "于是 ΛG 始终大于 0.0118：比目标大出 10 的 120 次方倍以上。"
     ],
     [
      "And gravity comes out far too weak.",
@@ -97,20 +97,20 @@
    ],
    "lines": [
     [
-     "Next, add the cheapest hidden fields: minimally coupled real singlet scalars.",
-     "接着加入最便宜的隐场：最小耦合的实单态标量。"
+     "Next, add hidden real singlet scalars.",
+     "接着加入隐扇区的最小耦合实单态标量。"
     ],
     [
      "With three hundred ten or fewer, matching Newton's constant forces Lambda G above ten to the minus seven.",
      "不超过 310 份时，只要对上牛顿常数，ΛG 就被迫大于 1.5×10⁻⁷。"
     ],
     [
-     "At three hundred eleven, equal masses hit both targets, if a mass ratio is tuned to its hundred twenty-second digit.",
-     "到 311 份，等质量单态能同时命中两个目标，前提是把质量比调到第 122 位。"
+     "Three hundred eleven can hit both targets, but only with tuning in the hundred twenty-second digit.",
+     "311 份能同时命中两个目标，但必须精调到第 122 位。"
     ],
     [
-     "Then raise the cutoff by about four parts in ten to the hundred twenty, and the vacuum term turns negative.",
-     "再把截止上调约 10¹²⁰ 分之四，真空项就翻成负号。"
+     "Raise the cutoff by about four parts in ten to the hundred twenty, and it turns negative.",
+     "再把截止上调约 10 的 120 次方分之四，真空项就翻成负号。"
     ]
    ],
    "cues": [
@@ -186,7 +186,7 @@
      "把权重 −1、3、−3、1 放在平方质量 0、μ²、2μ²、3μ² 上。"
     ],
     [
-     "The sum, the first moment and the second moment all vanish. Only the third survives.",
+     "The sum, the first and the second moments all vanish. Only the third survives.",
      "权重之和、一阶矩与二阶矩全都为零，只有三阶矩留下来。"
     ],
     [
@@ -224,15 +224,15 @@
      "然后希格斯场滚进电弱破缺真空。"
     ],
     [
-     "Its tree potential drops by m h squared v squared over eight, shifting Lambda G down by about ten to the minus sixty-seven.",
-     "树势落差 m_h²v²/8，让 ΛG 移动 −1.345×10⁻⁶⁷。"
+     "Its tree potential shifts Lambda G down by about ten to the minus sixty-seven.",
+     "树势落差 m_h²v²/8 让 ΛG 下移 1.345×10⁻⁶⁷。"
     ],
     [
      "That is fifty-five orders of magnitude larger than the four-layer term.",
      "这比四层正真空项大出 55 个数量级。"
     ],
     [
-     "Cancelling it with copies of the four layers drags the gravity cutoff below four point one eight electron volts.",
+     "Cancelling it with four-layer copies drags the cutoff below four point one eight electron volts.",
      "若靠复制四层结构去抵消，引力截止会被拖到 4.18 eV 以下。"
     ]
    ],
@@ -258,12 +258,12 @@
    ],
    "lines": [
     [
-     "So here is the honest balance for question four.",
+     "The honest balance for question four.",
      "这就是第四问的诚实总账。"
     ],
     [
-     "Green: the Gram identity. Cyan: floors, counts and cliffs, each with a replay certificate.",
-     "绿色：格拉姆恒等式。青色：下界、计数与悬崖，各有一份可复算的证书。"
+     "Green: the Gram identity. Cyan: floors, counts and cliffs, each with a certificate.",
+     "绿色：格拉姆恒等式。青色：下界、计数与悬崖，各有一份证书。"
     ],
     [
      "Red: deriving Newton's constant and the sign and size of dark energy, without hand-placed fields or cutoffs.",
@@ -286,7 +286,7 @@
    "id": "close",
    "name": "LEDGER",
    "lead": 0.5,
-   "tail": 3.4,
+   "tail": 2.8,
    "music": [
     1.0,
     0.6,
