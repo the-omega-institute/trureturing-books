@@ -181,7 +181,7 @@ SCENES.ground = S => {
   }
   const a = clamp((u - L1.s + 0.2) / 0.7) * clamp((S.d - u) / 0.5);
   if (a <= 0.003) return;
-  badgeQ(S, [[1, 'First, the ground', 'argued'], [3, 'leaves Grand RH', 'open']]);
+  badgeQ(S, [[1, 'First, the ground', 'argued'], [3, 'Grand RH stays open', 'open']]);
   /* line 1: the external dossier */
   panel(140, 200, 820, 430, a, C.argued, 'EXT-LEAN · 外部形式化事实');
   txt('RiemannHypothesis', 180, 285, { size: 38, fam: F.mono, w: 700, c: C.white, a });
@@ -209,9 +209,9 @@ SCENES.ground = S => {
     panel(1020, 480, 760, 340, sa, C.open, 'SCOPE · 范围');
     txt('covers · 覆盖', 1060, 540, { size: 20, fam: F.zh, w: 700, c: C.cyan, a: sa });
     txt('ζ(s) and Dirichlet L(s, χ) over ℚ', 1060, 580, { size: 26, fam: F.math, w: 700, c: C.white, a: sa });
-    const pa = a * Q(S, 3, 'nothing about physics', 0.5);
+    const pa = a * Q(S, 3, 'nothing in physics', 0.5);
     txt('physics: says nothing · 物理：不置一词', 1060, 630, { size: 22, fam: F.zh, w: 700, c: C.white, a: pa });
-    const oa = a * Q(S, 3, 'leaves Grand RH', 0.5);
+    const oa = a * Q(S, 3, 'Grand RH stays open', 0.5);
     txt('still OPEN · 仍开放', 1060, 685, { size: 20, fam: F.zh, w: 700, c: C.open, a: oa });
     txt('ERH (Dedekind ζ_K) · Grand RH', 1060, 725, { size: 24, fam: F.math, w: 700, c: C.open, a: oa });
     txt('simple zeros · GUE pairs · Hilbert–Pólya', 1060, 765, { size: 22, fam: F.math, w: 700, c: C.open, a: oa * 0.9 });
@@ -334,7 +334,7 @@ SCENES.phases = S => {
   /* right top: the weights */
   panel(900, 190, 900, 190, pa, C.cyan, 'HARMONIC WEIGHT · 调和权');
   zwRich([['a_γ = γ / (1/4 + γ²)', C.white], ['      w_γ = a_γ / W(T)', C.cyan]], 935, 255, { size: 28, fam: F.math, a: pa });
-  zwRich([['Z_T(t) = Σ_{0<γ≤T} w_γ e^{iγt}', C.white]], 935, 302, { size: 26, fam: F.math, a: pa * Q(S, 0, 'add their phases', 0.6) });
+  zwRich([['Z_T(t) = Σ_{0<γ≤T} w_γ e^{iγt}', C.white]], 935, 302, { size: 26, fam: F.math, a: pa * Q(S, 0, 'add the phases', 0.6) });
   const ra = a * Q(S, 2, 'Lean bounds', 0.6);
   zwRich([['P₄(T)/P₂(T)² ≤ 4096 log T', C.lean]], 935, 352, { size: 24, fam: F.math, a: ra });
   zwLean(1340, 352, ZW_LEAN.ratio, ra, { size: 18, last: true });
@@ -499,7 +499,7 @@ SCENES.window = S => {
     txt('111532   local harmonic weights · 局部调和权', 1150, 740, { size: 22, fam: F.zh, w: 700, c: C.white, a: ha });
     txt('generic sufficient bound: 11,330,943 · 通用充分半径', 1150, 790, { size: 18, fam: F.mono, w: 700, c: C.dim, a: ha });
   }
-  const ca = a * Q(S, 3, 'These are certificates', 0.6);
+  const ca = a * Q(S, 3, 'Certificates, not', 0.6);
   stamp('CERTIFICATE', 1600, 462, ca * (1 - Q(S, 3, 'not theorems', 0.6, 1.6)), C.cyan, 26, -0.06);
 };
 
@@ -509,15 +509,15 @@ SCENES.window = S => {
 SCENES.filter = S => {
   const a = zwFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [3, 'chosen inputs', 'argued']]);
-  const g3 = Q(S, 3, 'But field table', 0.6);
+  badgeQ(S, [[0, null, 'computed'], [3, 'inputs are chosen', 'argued']]);
+  const g3 = at(S, 3, 0.6);
   const gates = [
     ['LIGHT MODES · 轻模', '3 per charge × 5 charges', '五荷各三轻模', 'light modes'],
     ['STRONG COUPLING · 强耦合', '0.117 < α_s(M_Z) < 0.119', '两圈尖阈值', 'strong coupling'],
     ['CURVATURE · 曲率', '|ratio − 1| < 0.2%', '四层一圈曲率比', 'curvature']
   ];
   gates.forEach(([h, s, z, ph], i) => {
-    const ga = a * Q(S, 0, ph, 0.5) * (1 - g3);
+    const ga = a * at(S, 0, 0.5, 0.9 * i) * (1 - g3);
     const x = 160 + i * 560;
     panel(x, 190, 520, 170, ga, C.cyan, h);
     txt(s, x + 30, 270, { size: 28, fam: F.math, w: 700, c: C.white, a: ga });
@@ -572,7 +572,7 @@ SCENES.filter = S => {
 SCENES.gap = S => {
   const a = zwFade(S);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'lean'], [1, null, 'open'], [2, 'higher up', 'argued'], [2, 'selection is open', 'open']]);
+  badgeQ(S, [[0, null, 'lean'], [1, null, 'open'], [2, 'Higher up', 'argued'], [2, 'selection is open', 'open']]);
   /* left: the global average */
   const la = a * at(S, 0, 0.6);
   panel(140, 200, 760, 320, la, C.lean, 'LEAN · GLOBAL AVERAGES · 全局平均');
@@ -601,7 +601,7 @@ SCENES.gap = S => {
     txt('comparison theorem: global average → single zero · 比较定理缺位', 960, 608, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.white, a: oa });
   }
   /* line 2: locality, and the aphorism */
-  const da = a * Q(S, 2, 'higher up', 0.6);
+  const da = a * Q(S, 2, 'almost every centre', 0.6);
   txt('higher up, centres beating #11431 have natural density 1 · ARGUED', W / 2, 690, { size: 22, fam: F.math, w: 700, align: 'center', c: C.argued, a: da });
   const qa = a * Q(S, 2, 'Averages are welded', 0.6);
   zwRich([['Averages are welded. ', C.white], ['Selection is open.', C.open]], W / 2, 775, { size: 46, fam: F.disp, align: 'center', a: qa, ab: 2 });

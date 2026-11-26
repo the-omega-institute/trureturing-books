@@ -297,7 +297,7 @@ function scTickRow(S, a, o) {
 SCENES.rupture = S => {
   badgeQ(S, [[0, null, 'computed']]);
   const a = scFade(S);
-  const brk = Q(S, 0, 'The fifth tick breaks', 0.4);
+  const brk = Q(S, 0, 'the fifth breaks', 0.4);
   const resc = Q(S, 2, 'rescues tick five', 0.6);
   const six = Q(S, 3, 'the sixth tick is forced up', 0.8);
   scTickRow(S, a, {
@@ -308,7 +308,7 @@ SCENES.rupture = S => {
     }
   });
   /* glitch shake of the fifth cell at the break */
-  const sh = brk * (1 - resc) * Math.sin(S.u * 40) * clamp(1 - (S.u - phraseAt(S, 0, 'The fifth tick breaks')) / 0.8);
+  const sh = brk * (1 - resc) * Math.sin(S.u * 40) * clamp(1 - (S.u - phraseAt(S, 0, 'the fifth breaks')) / 0.8);
   if (Math.abs(sh) > 0.01) line(1240 + 6 * sh, 190, 1300 - 6 * sh, 265, C.mag, a, 3);
   /* the 22-bit ruler: two adjacent codes, the certified F(5) window drawn to scale */
   const ra = a * at(S, 1, 0.6) * (1 - 0.6 * resc);
@@ -334,7 +334,7 @@ SCENES.rupture = S => {
     const X = v => ex + (v - 1) / 19 * ew;
     line(X(1), ey, X(19.6), ey, C.dim, ea, 2);
     for (const v of [1, 5, 10, 15, 19]) { line(X(v), ey - 8, X(v), ey + 8, C.dim, ea, 2); txt(String(v), X(v), ey + 38, { size: 20, fam: F.mono, c: C.dim, a: ea, align: 'center' }); }
-    const g = ease(clamp((S.u - phraseAt(S, 2, 'the shell spans')) / 1.0));
+    const g = ease(clamp((S.u - phraseAt(S, 2, 'just enough efficiency range')) / 1.0));
     fillBox(X(1), ey - 30, (X(19) - X(1)) * g, 18, C.cyan, ea * 0.85);
     txt('shell: 1 → 19 (1 zero mode + 18)', X(1), ey - 44, { size: 20, fam: F.mono, w: 700, c: C.cyan, a: ea * g });
     line(X(SC_NUM.ratio), ey - 60, X(SC_NUM.ratio), ey + 14, C.now, ea, 3);
@@ -367,7 +367,7 @@ SCENES.seventh = S => {
   const qa = a * Q(S, 0, 'ask about the seventh', 0.6);
   chip(1680, 222, 190, 64, 'F(7) = ?', C.now, qa, 30, F.math);
   /* the Gauss–Radau window */
-  const wa = a * Q(S, 1, 'a window two point', 0.7);
+  const wa = a * Q(S, 1, 'a window two point one', 0.7);
   if (wa > 0.003) {
     panel(130, 300, 1660, 220, wa, C.now, 'GAUSS–RADAU · 高斯–拉道锐端点');
     const x0 = 400, x1 = 1520;
@@ -391,12 +391,12 @@ SCENES.seventh = S => {
     box(1340, yb, 360, 70, C.now, fa, 2, rgba(C.now, 0.1));
     txt('32071996606', 1520, yb + 48, { size: 34, fam: F.mono, w: 700, c: C.now, a: fa, align: 'center' });
     txt('forced · 被迫的码', 1520, yb + 105, { size: 22, fam: F.zh, w: 700, c: C.now, a: fa, align: 'center' });
-    const ga = Q(S, 2, '4130 codes above', 0.8) * ca;
+    const ga = Q(S, 2, '4130 above', 0.8) * ca;
     arrow(600, yb + 35, 600 + 720 * ease(ga), yb + 35, C.white, ga, 3);
     txt('+ 4130 codes · 高出 4130 格', 960, yb + 18, { size: 26, fam: F.mono, w: 700, c: C.white, a: ga, align: 'center' });
     txt('(not to scale)', 960, yb + 82, { size: 18, fam: F.mono, c: C.dim, a: ga, align: 'center' });
   }
-  const sa = Q(S, 3, 'falsifies the shared clock', 0.5);
+  const sa = Q(S, 3, 'falsifies the clock', 0.5);
   stamp('FALSIFIABLE · 可证伪', W / 2, 470, sa * a, C.mag, 54, -0.05);
 };
 
@@ -454,9 +454,9 @@ SCENES.bands = S => {
   txt('zero height γ (log scale) · 零点高度', ax1, ay + 78, { size: 20, fam: F.zh, w: 700, c: C.dim, a: aa, align: 'right' });
   const hmax = 230 / 40;
   SC_BANDS.forEach((b, i) => {
-    const ba = a * Q(S, 0, 'three narrow height bands', 0.6, 0.45 * i);
+    const ba = a * Q(S, 0, 'three height bands', 0.6, 0.45 * i);
     if (ba <= 0.003) return;
-    const cur = Math.min(2, Math.floor((S.u - phraseAt(S, 0, 'three narrow height bands')) / 0.45));
+    const cur = Math.min(2, Math.floor((S.u - phraseAt(S, 0, 'three height bands')) / 0.45));
     const col = i === cur && at(S, 1, 0.1) < 1 ? C.now : C.cyan;
     const h = b.w * hmax * ease(ba);
     const x = X(b.lo), w = Math.max(10, X(b.hi) - X(b.lo));
@@ -470,7 +470,7 @@ SCENES.bands = S => {
   });
   const ta = a * Q(S, 0, '99.931 percent', 0.6);
   chip(500, 250, 420, 66, 'p(B) > 99.931 %', C.now, ta, 34);
-  const ga = a * Q(S, 1, 'almost nothing between', 0.6);
+  const ga = a * Q(S, 1, 'almost nothing', 0.6);
   txt('gaps hold < 0.069 % · 带间几乎为空', X(9.0), ay - 40, { size: 22, fam: F.zh, w: 700, c: C.mag, a: ga, align: 'center' });
   /* stiffness and held-out J */
   const sa = a * at(S, 2, 0.6);
@@ -516,7 +516,7 @@ SCENES.selectors = S => {
     const st = a * at(S, 1, 0.35, span * i / 6 + 0.6);
     line(165, y + 36, 165 + (tw(r[0], 26, F.zh, 700) + 20) * st, y + 36, C.mag, st, 4);
   });
-  const sa = Q(S, 1, 'certificates exclude each one', 0.5);
+  const sa = Q(S, 1, 'certificates exclude them all', 0.5);
   stamp('EXCLUDED · 排除', 1440, 770, sa * a, C.mag, 44, -0.06);
   const fa = a * at(S, 2, 0.6);
   txt('external weights break at every turn', 160, 760, { size: 30, fam: F.disp, w: 700, c: C.mag, a: fa });

@@ -34,11 +34,11 @@
    ],
    "lines": [
     [
-     "Chapter two averaged over infinitely many zeros. What can a finite height, or one single zero, really give?",
-     "第二章在无穷多枚零点上取平均。那么有限的高度、单独一枚零点，究竟能给出什么？"
+     "Chapter two averaged over infinitely many zeros. What can one finite window really give?",
+     "第二章在无穷多枚零点上取平均。一个有限的窗口，究竟能给出什么？"
     ],
     [
-     "First, the ground: RH and Dirichlet GRH now have an external Lean proof, by Levent Alpöge.",
+     "First, the ground: RH and Dirichlet GRH have an external Lean proof, by Levent Alpöge.",
      "先看地基：RH 与狄利克雷 GRH 如今有了 Levent Alpöge 的外部 Lean 证明。"
     ],
     [
@@ -46,8 +46,8 @@
      "它尚未冻结进所钉的库，所以从不佩戴绿色徽章。"
     ],
     [
-     "It reaches only zeta and Dirichlet L functions, says nothing about physics, and leaves Grand RH open.",
-     "它只管 ζ 函数与狄利克雷 L 函数，不对物理说任何话；全广义黎曼猜想仍是开放问题。"
+     "It covers only zeta and Dirichlet L functions, nothing in physics. Grand RH stays open.",
+     "它只管 ζ 函数与狄利克雷 L 函数，不涉物理；全广义黎曼猜想仍是开放问题。"
     ]
    ],
    "cues": [
@@ -77,8 +77,8 @@
    ],
    "lines": [
     [
-     "Inside the pinned library, Lean restates the hypothesis twice.",
-     "在所钉的库内部，Lean 把这条猜想改写了两次。"
+     "Lean restates RH twice.",
+     "Lean 把 RH 改写了两次。"
     ],
     [
      "First as a circle: the Cayley map lands on the unit circle exactly when the real part is one half.",
@@ -89,7 +89,7 @@
      "于是 RH 说：每一枚非平凡零点都落在圆上。"
     ],
     [
-     "Then as a gap: RH holds exactly when, for every c below one forty-eighth, the prime remainder ends up c log squared below M root x.",
+     "Then as a gap: RH holds exactly when the prime remainder stays c log squared below M root x, for all c under a forty-eighth.",
      "第二次改写成差额：RH 成立，当且仅当对每个 c < 1/48，曼戈尔特余项最终比 M√x 低出 c(log x)²。"
     ]
    ],
@@ -120,8 +120,8 @@
    ],
    "lines": [
     [
-     "Give each zero height gamma a harmonic weight, and add their phases at time t.",
-     "给每个零点高度 γ 一个调和权，再把它们在时刻 t 的相位加起来。"
+     "Weight each zero height gamma harmonically, and add the phases at time t.",
+     "给每个零点高度 γ 配上调和权，再把时刻 t 的相位加起来。"
     ],
     [
      "The weighted sum Z reaches length one only if every phase lines up.",
@@ -158,8 +158,8 @@
    ],
    "lines": [
     [
-     "That envelope comes from a Landau contour, a rectangle around the zeros.",
-     "这个包络来自兰道围道：一个圈住零点的矩形。"
+     "That envelope needs a Landau contour around the zeros.",
+     "这个包络需要一个圈住零点的兰道围道。"
     ],
     [
      "Lean bounds its left and right edges with explicit constants, and those bounds need no RH.",
@@ -170,7 +170,7 @@
      "接上顶边就得到包络；这一步只是论证，未作引用。"
     ],
     [
-     "Stitch the windows together, and Lean checks that the scaled near-collision count tends to one over root pi.",
+     "Stitch the windows, and Lean checks that the scaled near-collision count tends to one over root pi.",
      "把各时间窗拼起来，Lean 检验：近碰撞的归一化计数趋于 1/√π。"
     ]
    ],
@@ -196,8 +196,8 @@
    ],
    "lines": [
     [
-     "Now drop to one window: zero 11431, and nine neighbours on each side.",
-     "现在落到一个窗口：第 11431 枚零点，左右各九枚邻居。"
+     "Now one window: zero 11431, nine neighbours on each side.",
+     "现在看一个窗口：第 11431 枚零点，左右各九枚邻居。"
     ],
     [
      "Among three thousand centres, it sits nearest a midpoint of two neighbours: within two millionths.",
@@ -208,8 +208,8 @@
      "次优者差了 35.6 倍；这组额外配对只占四阶矩不到四分之一。"
     ],
     [
-     "At resolution one thousandth, it first shows up at radius 111521. These are certificates, not theorems.",
-     "分辨率取千分之一，它在半径 111521 处首次显现。这些是证书，不是定理。"
+     "At resolution one thousandth, it first shows up at radius 111521. Certificates, not theorems.",
+     "分辨率取千分之一，它在半径 111521 处首次显现。是证书，不是定理。"
     ]
    ],
    "cues": [
@@ -234,20 +234,20 @@
    ],
    "lines": [
     [
-     "Later volumes ask one zero to pass three windows: light modes, strong coupling, curvature.",
-     "后面几卷要求单枚零点同时通过三扇窗：轻模、强耦合、曲率。"
+     "Later volumes ask one zero to pass three windows at once.",
+     "后面几卷要求单枚零点同时通过三扇窗。"
     ],
     [
      "With the cut fixed at nine, zero 8359 passes all three first.",
      "分界固定为 9 时，第 8359 枚最先三窗全通。"
     ],
     [
-     "Switch to the shell's own site-variance cut, and zero 8236 gets in first.",
+     "With the shell's own site-variance cut, zero 8236 gets in first.",
      "换成球壳自身的站点方差分界，第 8236 枚抢先过关。"
     ],
     [
-     "But field table, mass unit and cut are chosen inputs. A window hit is not a prediction.",
-     "但场表、质量标尺与分界都是选定的输入。命中窗口不是预言。"
+     "But the inputs are chosen. A window hit is not a prediction.",
+     "但这些输入都是选定的。命中窗口不是预言。"
     ]
    ],
    "cues": [
@@ -285,8 +285,8 @@
      "球壳读取的却是一枚零点、或寥寥几枚。连接两者的比较定理至今还没有。"
     ],
     [
-     "And 11431's sharpness is local: higher up, almost every centre beats it. Averages are welded; selection is open.",
-     "第 11431 枚的锐度只是局部：更高处几乎每个中心都胜过它。平均已焊死，选点仍开放。"
+     "Higher up, almost every centre beats 11431. Averages are welded; selection is open.",
+     "更高处，几乎每个中心都胜过第 11431 枚。平均已焊死，选点仍开放。"
     ]
    ],
    "cues": [
@@ -301,7 +301,7 @@
    "id": "close",
    "name": "LEDGER",
    "lead": 0.5,
-   "tail": 3.6,
+   "tail": 3.0,
    "music": [
     1.0,
     0.6,
