@@ -48,7 +48,7 @@ Grouping the seven cyclic orbits by vertex degree exposes the layered geometry o
 
 | Orbit Representative | Vertices | Degree in $G_{19}$ | Geometric Role and Physical Interface |
 | :--- | :---: | :---: | :--- |
-| $(17, 17, 17)$ | $1$ | $18$ | Unique $\sigma$-fixed pole, adjacent to all $18$ other vertices; connects to the inner ring via $3$ tunable radial spokes |
+| $(17, 17, 17)$ | $1$ | $18$ | Unique $\sigma$-fixed pole, adjacent to all $18$ other vertices; connects to one degree-$10$ outer three-point orbit via $3$ height-softened radial spokes |
 | $(13, 13, 23)$ | $3$ | $18$ | Inner core triangle, each vertex adjacent to all $18$ others; first stations of the minimal-denominator rays carrying the $12$ clock-phase edges |
 | $(11, 11, 25)$ | $3$ | $14$ | Sub-inner ring; pairs $(11, 11, 25) \to (13, 13, 23)$ form the shortest native arc $d^2 = 12$ |
 | $(7, 17, 23)$, $(7, 23, 17)$ | $3 + 3$ | $16$ | Mirror-paired middle orbits mediating shell reflections and relay transport |

@@ -745,9 +745,18 @@ const checkWindingCopy = async (p, lang) => {
     check(`winding ladder (${lang}): ${label} qualifies thresholds 18, 19, 21, 31, 36 and 105`,
       (await box.isVisible()) && certificate.every((pattern) => pattern.test(text)) && localized(text), text);
   };
+  const checkModel = async (selector) => {
+    const box = p.locator(`${selector} .lean.model .${lang}`);
+    const text = await box.innerText();
+    check(`winding ladder (${lang}): ${selector} states the normalized heat map`,
+      (await box.isVisible()) && text.includes('W_K(φ₁, φ₂) = Σ_T cos K(c_T + n·φ) / 529') &&
+      !/W_K\(φ₁,\s*φ₂\)\s*\/\s*529/.test(text) && localized(text), text);
+  };
   await checkCertificate(p.locator(`#basisCert .${lang}`), 'evidence box');
+  await checkModel('#basis');
   await p.locator('#infoBtn').evaluate((button) => button.click());
   await checkCertificate(p.locator('#drawer #drawerEvidence .lean.num').nth(1).locator(`.${lang}`), 'drawer certificate');
+  await checkModel('#drawer #drawerEvidence');
   await p.keyboard.press('Escape');
 
   await pick(LADDER, p);
