@@ -2,7 +2,7 @@
 
 > *“人们以为求球面平均离不开圆周率 $\pi$ 与无穷黎曼和；殊不知在母公理锁定的三维球面上，$\pi^2$ 在表面积与四枚半整数伽马因子之间百分之百精确对消，整个哈尔积分塌缩为一条有限整数阶乘算式。”*
 
-[第十章](ch10-peter-weyl-rational-spin-shells.md) 把傅里叶核从超越复指数 $e^{-\hat{\mathbf{i}}2\pi\xi x}$ 净化成了纯整系数切比雪夫多项式 $E_n(\kappa)$，却故意留下一道最后关口：要想检验不同自旋壳层之间严格正交（$\langle \chi_j, \chi_{j'}\rangle = \delta_{jj'}$），或者对无原点三元流群卷积与 $5d^8$ 四极张量执行全域平均，我们必须能够计算三维三元球面 $\mathbb{T}_3 \cong S^3(1)$ 上的归一化哈尔期望 $\mathbb{E}_{\mathbb{T}_3}[\cdot]$。
+[第十章](ch10-peter-weyl-rational-spin-shells.md) 把傅里叶核从超越复指数 $e^{-\hat{\mathbf{i}}2\pi\xi x}$ 净化成了纯整系数切比雪夫多项式 $E_n(\kappa)$，却故意留下一道最后关口：要想检验不同自旋壳层之间严格正交（$\langle \chi_j, \chi_{j'}\rangle = \delta_{jj'}$），或者对无原点三元流群卷积与 $5d^8$ 四极张量执行全域平均，我们必须能够计算实三维球面 $SU(2)\cong S^3(\mathbb{R})$ 上的归一化哈尔期望 $\mathbb{E}_{\mathbb{T}_3}[\cdot]$。本章的有限阶乘公式用于多项式信号。
 
 在经典微积分的习惯里，一看到“球面积分”，直觉就会本能地掏出超球面面积 $2\pi^2$、三重三角换元 $(\psi, \vartheta, \varphi)$ 与无穷分割的黎曼和极限——仿佛 $\pi$ 是贴在弯曲几何脊梁骨上撕不下来的永恒标签。本章彻底打破这层幻觉：**三维球面的归一化多项式哈尔积分里根本不存在 $\pi$，也不存在任何极限过程**。每一个齐次偶次单项式的球面期望，都精确等于一个有限整数阶乘比值，其单变量矩 $\mathbb{E}_{\mathbb{T}_3}[\kappa^k]$ 正是卡塔兰数（Catalan numbers）除以 $4^k$；而单变量矩递推律、低阶具体锚点（$j \le 2$）、**全阶偶次特征标的零均值期望律**（$\forall r \in \mathbb{N},\; \mathbb{E}_{\mathbb{T}_3}[E_r(\kappa)] \equiv \delta_{r, 0}$）以及**全阶彼得—魏尔偶次特征核的正交归一性**（$\forall m, n \in \mathbb{N},\; \langle E_m, E_n\rangle_{\mathbb{T}_3} \equiv \delta_{m, n}$），均已在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成。
 

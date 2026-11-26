@@ -2,7 +2,7 @@
 
 > *“把波放回紧致无外的三维球面，连续发散的频率瞬间结晶为离散自旋阶梯，超越复指数退场为纯整数切比雪夫多项式。”*
 
-第三卷（[第七章](ch07-second-order-jet-calculus.md)–[第九章](ch09-telescoping-stokes-and-arc-manifold.md)）已经清除了微积分中的极限幽灵：在二阶幂零射流环与流群望远镜求和下，微分与积分都归约为有限步有理代数。从本章开始，第四卷进入调和分析的核心战场——**在无无穷、无超越数的三维三元数流群 $\mathbb{T}_3(\mathbb{Q})$ 上重建傅里叶变换**。
+第三卷（[第七章](ch07-second-order-jet-calculus.md)–[第九章](ch09-telescoping-stokes-and-arc-manifold.md)）已经清除了微积分中的极限幽灵：在二阶幂零射流环与流群望远镜求和下，微分与积分都归约为有限步有理代数。从本章开始，第四卷进入调和分析的核心战场——在经典实三维球面上辨认谱壳，并把可精确计算的整数自旋读数写成有理多项式。
 
 经典教材把傅里叶变换奉为分析学的万用钥匙，却鲜少追问一个谱系学问题：为什么我们在展开周期或局域波场时，要默认站在一条两端无限敞开的平直实数轴上，去吞咽 $\pi$、$e$、连续无界频率与截断振铃？答案与第一卷的诊断如出一辙——平直傅里叶变换只是把弯曲闭合的三元球面强行摊平后的切线近似。一旦把函数空间放回母公理 `AXIOM-Ω` 锁定的紧致无外三维球面 $\mathbb{T}_3 \cong S^3(1)$，彼得—魏尔（Peter–Weyl）分解立刻将频谱量子化为离散的半整数自旋壳层，而所有整数自旋的球面特征标都直接坍缩为关于有理保真度 $\kappa$ 的整系数切比雪夫多项式；其中的佩尔律、倍阶律、全谱偶奇壳消根号恒等式、自旋 $j = 2$ 二次特征标、全阶整数自旋克莱布施—高登乘积律以及 $5d^{10}/5d^8$ 轨道角向四极平衡，均已在严格零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成。
 
@@ -123,7 +123,7 @@ $$
 | **频谱结构** | 连续无界实频谱 $\xi \in \mathbb{R}$ | 仅含整数角动量 $\ell \in \mathbb{N}$ | 完备半整数自旋壳 $j \in \frac{1}{2}\mathbb{N}$，维数 $(2j+1)^2$ |
 | **基本核函数** | 超越复指数 $e^{-\hat{\mathbf{i}}2\pi\xi x}$ | 连带勒让德函数配极轴奇点 | 整系数切比雪夫核 $E_j(\kappa)$ 与有理分式投影核 |
 | **底层基波意义** | 无离散基频，依赖原点平移 | $\ell = 0$ 标量与 $\ell = 1$ 极矢 | $j = 0$ 过去锚、$j = \frac{1}{2}$ 现在旋量、$j = 1$ 未来曲率 |
-| **卷积结构** | 依赖原点的阿贝尔标量乘积 | 无内禀群卷积 | 无原点三元流群卷积 $\to$ 矩阵乘积 $\widehat{f}_j \widehat{g}_j^\dagger \widehat{h}_j$ |
+| **卷积结构** | 依赖原点的阿贝尔标量乘积 | 无内禀群卷积 | 归一化哈尔测度下的 $L^1$ 三元卷积 $\to$ 矩阵乘积 $\widehat{f}_j \widehat{g}_j^\dagger \widehat{h}_j$ |
 
 ---
 
@@ -269,24 +269,30 @@ $$
 
 ### 10.4.1 无原点三元流群卷积的频域分块对角化 {#sec-ch10-ternary-convolution}
 
-传统群卷积 $(f * g)(w) = \mathbb{E}_x[f(x)g(x^{-1}w)]$ 暗中依赖一个钦定原点 $1$ 才能写下逆元 $x^{-1}$。而在无原点三元流群 $(\mathbb{T}_3, [-,-,-])$ 中（[第四章](ch04-heaps-and-lie-triple-curvature.md)），三元运算 $[\mathbf{x}, \mathbf{y}, \mathbf{z}]$ 无需钦定单位元即可直接定义。对流群上任意三个实值函数 $f, g, h$（若为复值信号则在中间槽对 $g$ 取复共轭 $\overline{g(\mathbf{y})}$），定义**无原点三元流群卷积**：
+传统群卷积 $(f * g)(w) = \mathbb{E}_x[f(x)g(x^{-1}w)]$ 暗中依赖一个钦定原点 $1$ 才能写下逆元 $x^{-1}$。三元运算 $[\mathbf{x}, \mathbf{y}, \mathbf{z}]$ 则无需钦定单位元（[第四章](ch04-heaps-and-lie-triple-curvature.md)）。这里在经典紧群 $SU(2)\cong S^3(\mathbb{R})$ 上取归一化哈尔测度 $\mu$，多变量期望使用乘积测度。对连续复值信号 $f,g,h$，以下积分在每个 $\mathbf{w}$ 处绝对收敛。对 $f,g,h\in L^1(\mu)$，同一公式几乎处处定义**无原点三元流群卷积**：
 
 $$
-(f \circledast g \circledast h)(\mathbf{w}) \;:=\; \mathbb{E}_{\mathbf{x},\,\mathbf{y}}\!\Bigl[f(\mathbf{x})\,g(\mathbf{y})\,h\bigl([\mathbf{y}, \mathbf{x}, \mathbf{w}]\bigr)\Bigr].
+(f \circledast g \circledast h)(\mathbf{w}) \;:=\; \mathbb{E}_{\mathbf{x},\,\mathbf{y}}\!\Bigl[f(\mathbf{x})\,\overline{g(\mathbf{y})}\,h\bigl([\mathbf{y}, \mathbf{x}, \mathbf{w}]\bigr)\Bigr].
 $$
 
-设 $D^j$ 为第 $j$ 阶 $(2j+1)$ 维幺正表示，它天然保持三元流群运算：$D^j([\mathbf{x}, \mathbf{y}, \mathbf{z}]) = D^j(\mathbf{x})\,D^j(\mathbf{y})^\dagger\,D^j(\mathbf{z})$。定义函数的第 $j$ 壳矩阵傅里叶系数 $\widehat{f}_j := \mathbb{E}_{\mathbf{x}}[f(\mathbf{x})\,D^j(\mathbf{x})]$（对复值信号中间槽记 $\widehat{g}_j^\dagger = \mathbb{E}_{\mathbf{y}}[\overline{g(\mathbf{y})}\,D^j(\mathbf{y})^\dagger]$）。做变量替换 $\mathbf{z} := [\mathbf{y}, \mathbf{x}, \mathbf{w}]$，由流群双侧消去恒等式立得反解 $[\mathbf{x}, \mathbf{y}, \mathbf{z}] = [\mathbf{x}, \mathbf{y}, [\mathbf{y}, \mathbf{x}, \mathbf{w}]] = \mathbf{w}$。由期望的流群平移不变性，三元卷积的傅里叶变换仅用一行即完全对角化：
+固定 $\mathbf{x},\mathbf{y}$，映射 $\mathbf{w}\mapsto\mathbf{z}=[\mathbf{y},\mathbf{x},\mathbf{w}]$ 是保哈尔测度的左平移，逆映射为 $\mathbf{w}=[\mathbf{x},\mathbf{y},\mathbf{z}]$。由 Tonelli 定理，被积函数绝对值在 $\mathbf{x},\mathbf{y},\mathbf{w}$ 上的积分恰为 $\|f\|_1\|g\|_1\|h\|_1$。因此卷积属于 $L^1(\mu)$，所得等价类与三个输入代表元的选择无关。
+
+设 $D^j$ 为第 $j$ 阶 $(2j+1)$ 维幺正表示，满足 $D^j([\mathbf{x}, \mathbf{y}, \mathbf{z}]) = D^j(\mathbf{x})\,D^j(\mathbf{y})^\dagger\,D^j(\mathbf{z})$。定义第 $j$ 壳矩阵傅里叶系数 $\widehat{f}_j := \mathbb{E}_{\mathbf{x}}[f(\mathbf{x})\,D^j(\mathbf{x})]$。表示有界，故上述绝对可积性也适用于逐矩阵元的计算。用 Fubini 定理和同一换元便可手工推出卷积的傅里叶分块公式：
 
 $$
 \begin{aligned}
 \widehat{(f \circledast g \circledast h)}_j
-&\;=\; \mathbb{E}_{\mathbf{w}}\!\Bigl[\mathbb{E}_{\mathbf{x},\,\mathbf{y}}\bigl[f(\mathbf{x})\,g(\mathbf{y})\,h([\mathbf{y}, \mathbf{x}, \mathbf{w}])\bigr]\,D^j(\mathbf{w})\Bigr] \\
-&\;=\; \mathbb{E}_{\mathbf{x},\,\mathbf{y},\,\mathbf{z}}\!\Bigl[f(\mathbf{x})\,g(\mathbf{y})\,h(\mathbf{z})\,D^j(\mathbf{x})\,D^j(\mathbf{y})^\dagger\,D^j(\mathbf{z})\Bigr]
-\;=\; \widehat{f}_j\,\widehat{g}_j^\dagger\,\widehat{h}_j.
+&\;=\; \mathbb{E}_{\mathbf{w}}\!\Bigl[(f \circledast g \circledast h)(\mathbf{w})\,D^j(\mathbf{w})\Bigr] \\
+&\;=\; \mathbb{E}_{\mathbf{x},\,\mathbf{y},\,\mathbf{z}}\!\Bigl[
+    f(\mathbf{x})\,\overline{g(\mathbf{y})}\,h(\mathbf{z})\,
+    D^j(\mathbf{x})\,D^j(\mathbf{y})^\dagger\,D^j(\mathbf{z})\Bigr] \\
+&\;=\; \widehat{f}_j\,\widehat{g}_j^\dagger\,\widehat{h}_j.
 \end{aligned}
 $$
 
-空间域中纠缠难解的弯曲球面三元搬运——从三维旋转滤波到三元数场注意力机制 $[\mathbf{Q}, \mathbf{K}, \mathbf{V}]$——翻入彼得—魏尔频域后，瞬间拆解为每一阶自旋壳上干净的 $(2j+1) \times (2j+1)$ 矩阵三连乘 $\widehat{f}_j\,\widehat{g}_j^\dagger\,\widehat{h}_j$！在有限非阿贝尔子流群上，这一对角化甚至只需有限步精确算术：例如 $8$ 元四元数群 $Q_8$ 的不可约维数满足 $4 \times 1^2 + 2^2 = 8$，$24$ 元赫维茨二元四面体群 $2T$（[第十四章](ch14-adelic-closure-and-hurwitz-primes.md)）的七座不可约壳满足 $3 \times 1^2 + 3 \times 2^2 + 3^2 = 24$，全部三元卷积在各自有限壳层上零误差对角化并严守帕塞瓦尔总能量守恒。
+仅有逐点有限的 Borel 函数仍可能使积分发散。取 $g=h=1$，令 $f(q)=(1-q_0)^{-2}$（$q\ne 1$，$q_0$ 为四元数的实部），并置 $f(1)=0$。在单位元附近，用 $q=(\sqrt{1-|u|^2},u)$ 作坐标，则 $1-q_0\le |u|^2$，哈尔密度相对于三维体积在此处有正下界。积分因此至少发散如 $\int_0^\epsilon r^{-2}\,dr$，每个 $\mathbf{w}$ 处的卷积以及 $j=0$ 的傅里叶系数都无有限值。
+
+空间域中的曲面三元搬运——从三维旋转滤波到三元数场注意力机制 $[\mathbf{Q}, \mathbf{K}, \mathbf{V}]$——翻入彼得—魏尔频域后，拆解为每一阶自旋壳上的矩阵三连乘。在有限非阿贝尔群上，归一化哈尔期望就是有限平均，所有复值函数都可用同样的分块公式。例如 $8$ 元四元数群 $Q_8$ 的不可约维数满足 $4 \times 1^2 + 2^2 = 8$，$24$ 元赫维茨二元四面体群 $2T$（[第十四章](ch14-adelic-closure-and-hurwitz-primes.md)）的七个不可约块满足 $3 \times 1^2 + 3 \times 2^2 + 3^2 = 24$。
 
 ### 10.4.2 凝聚态 $j = 2$ 有理谐波：$d^{10}$ 各向同性与 $d^8$ 四极张量平衡 {#sec-ch10-d10-vs-d8-quadrupole}
 
@@ -351,4 +357,4 @@ $j = 0, \frac{1}{2}, 1$ 之后的第一座高阶整数自旋壳就是五维四�
 **彼得—魏尔偶次切比雪夫自旋壳与四极平衡实验卡（`peter-weyl-even-chebyshev`）。** 沿有理保真度 $\kappa$ 扫过偶次切比雪夫核 $E_n(\kappa) = U_{2n}(\sqrt{\kappa})$ 的曲线与典范有理节点（[@ex-ch10-spin-character-table]），任选两座整数自旋壳 $(m, n)$ 实时展开融合乘积 $\sum_{r=\lvert m-n\rvert}^{m+n} E_r(\kappa)$，并在五维 $j = 2$ 轨道账本中比对 $5d^{10}$ 全轴归零与 $5d^8$ 无迹四极对角元 $\bigl(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7}\bigr)$（[@thm-ch10-zero-axiom-orbital-quadrupole]、[@ex-ch10-d10-d8-quadrupole-ledger]）。
 :::
 
-至此，一个悬而未决的核心难题浮上水面：无论是验证彼得—魏尔特征标正交性 $\langle \chi_j, \chi_{j'}\rangle = \delta_{jj'}$，计算三元流群卷积期望 $\mathbb{E}_{\mathbf{x},\mathbf{y}}[\cdots]$，还是证明 $5d^8$ 四极张量的球面旋转平均严格为零，我们都在反复调用**三维球面 $\mathbb{T}_3$ 上的全局哈尔期望 $\mathbb{E}_{\mathbb{T}_3}[\cdot]$**。按传统教科书的做法，求球面平均非得写出含 $\pi$ 的球面积分 $\frac{1}{2\pi^2}\int_{S^3}\cdots\,d\sigma$ 与无穷黎曼和极限不可。果真如此吗？下一章将揭晓三维球面最惊人的算术奇迹：在维度 $3$ 上，$\pi^2$ 在分子与分母之间百分之百精确抵消，整个三维球面哈尔积分彻底化为一条有限整数阶乘公式。
+至此，一个悬而未决的核心难题浮上水面：无论是验证彼得—魏尔特征标正交性 $\langle \chi_j, \chi_{j'}\rangle = \delta_{jj'}$，计算三元流群卷积期望 $\mathbb{E}_{\mathbf{x},\mathbf{y}}[\cdots]$，还是证明 $5d^8$ 四极张量的球面旋转平均严格为零，我们都在反复调用**三维球面 $\mathbb{T}_3$ 上的全局哈尔期望 $\mathbb{E}_{\mathbb{T}_3}[\cdot]$**。按传统教科书的做法，求球面平均非得写出含 $\pi$ 的球面积分 $\frac{1}{2\pi^2}\int_{S^3}\cdots\,d\sigma$ 与无穷黎曼和极限不可。果真如此吗？下一章将揭晓三维球面最惊人的算术奇迹：在维度 $3$ 上，$\pi^2$ 在分子与分母之间百分之百精确抵消，多项式信号的哈尔积分可用有限整数阶乘比精确计算。

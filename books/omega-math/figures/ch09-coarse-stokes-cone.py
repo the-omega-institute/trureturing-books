@@ -3,11 +3,13 @@
 SIZE = (704, 345)
 WRAP = True
 ALT = {
-    "zh": "左图中，三角面 (0,1,3) 与 (1,2,3) 沿公共边以相反方向粘合；内边按流群律 [y,x,x]=y 消去，"
-          "留下外边界 0→1→2→3→0。右图通过加锥顶 b 构造 H₁、H₂、H₃。由锥同伦恒等式，"
+    "zh": "左图中，三角面 (0,1,3) 与 (1,2,3) 反向经过共边。沿 0→1 锚定第二面，"
+          "按 W₁W̃₂ 相乘使内边输运与其逆相邻消去，留下外边界 0→1→2→3→0。"
+          "右图通过加锥顶 b 构造 H₁、H₂、H₃。由锥同伦恒等式，"
           "δ₂F=0 当且仅当 F=δ₁(H₂F)。",
-    "en": "Left, triangles (0,1,3) and (1,2,3) traverse their common edge oppositely. The heap law "
-          "[y,x,x]=y cancels the interior edge, leaving the outer cycle 0→1→2→3→0. Right, adjoining "
+    "en": "Left, triangles (0,1,3) and (1,2,3) traverse their common edge oppositely. Whisker the second "
+          "face along 0→1 so that in W₁W̃₂ the interior edge transport is next to its inverse. "
+          "Their cancellation leaves the outer cycle 0→1→2→3→0. Right, adjoining "
           "the vertex b defines H₁, H₂, and H₃. The cone homotopy gives δ₂F=0 exactly when F=δ₁(H₂F).",
 }
 
@@ -33,8 +35,10 @@ def draw(fig):
     for i, ((x, y), dx, dy) in enumerate(zip(vertices, [-13, 13, 13, -13], [-10, -10, 17, 17])):
         left.dot(x, y, 4, "ink", ring="bg")
         left.text(x + dx, y + dy, str(i), size=15, anchor="middle")
-    left.text(172, 267, "[y, x, x] = y", size=18, anchor="middle", weight=600)
-    left.text(172, 303, left.t("按拼接顺序得到边界", "Shelling order gives the boundary"),
+    left.text(172, 57, left.t("第二面的锚定路径 0→1", "Whisker for the second face 0→1"),
+              size=14, anchor="middle")
+    left.text(172, 267, "W₁W̃₂ = Hol(∂Σ)", size=18, anchor="middle", weight=600)
+    left.text(172, 303, left.t("展开后相邻逆元消去", "Adjacent inverses cancel in the product"),
               size=14, anchor="middle")
 
     right.text(172, 24, right.t("加一个顶点 · 锥同伦", "Adjoin a vertex · cone homotopy"),

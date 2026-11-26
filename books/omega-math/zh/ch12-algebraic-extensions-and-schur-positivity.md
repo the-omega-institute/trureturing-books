@@ -307,7 +307,7 @@ $$
 
 ## 12.4 格拉姆正定分解、等距刚性与迈向第五卷的桥梁 {#sec-ch12-gram-realizability-and-isometry}
 
-有理平方和与舒尔补给出的是算子正定性的**可计算证书**；在经典希尔伯特空间与几何阴影层中，这种正定性恰恰等价于“存在可观测的格拉姆几何实现”，并且格拉姆内积一旦锁定，全局空间对称性也就随之完全刚性化。下面两条已经 Lean 内核验证的定理，把第四卷的调和与正定工具收束为两座终极刚性桥墩。
+有理平方和与舒尔补给出的是算子正定性的**可计算证书**；在经典希尔伯特空间与几何阴影层中，有界算子的正性等价于格拉姆因子分解；全局等距的刚性则来自一个置换对张成族全部内积的保持。下面两条已经 Lean 内核验证的定理，把第四卷的调和与正定工具收束为两座终极刚性桥墩。
 
 ::: {.theorem #thm-ch12-gram-realizability title="正算子的格拉姆因子分解等价刻画" lean="D5/S3/QuantumBounds/GramRealizability.gram_realizability"}
 设 $V$ 为复希尔伯特空间，$Q : V \to_L V$ 为有界线性算子。则 $Q$ 为正算子（$0 \le Q$），当且仅当存在有界线性算子 $O : V \to_L V$，同时满足算子因子分解 $Q = O^\dagger O$ 与格拉姆配对恒等式：对一切 $x, y \in V$，
@@ -339,8 +339,10 @@ $$
 :::
 
 ::: {.remark #rem-ch12-rational-sos-vs-real-shadow title="零公理有理正定代数与经典希尔伯特阴影的双向分工"}
-请特别留意本章七组冻结定理之间的精确层次分工：在零公理内核侧（`OmegaInit` 与 `OmegaMath`，`axioms: []`），[@thm-ch12-zero-axiom-quadpoly-qsqrt2]、[@thm-ch12-zero-axiom-qphi-fibonacci-pentagon] 与 [@thm-ch12-zero-axiom-lagrange-schur] 已经直接以纯有限有序对与 `Omega.FiniteRatio` 算术证成了二次范数乘性、精确求逆、`QSqrt2` 与 `QPhi` 的旋量/贝尔/斐波那契/五角切比雪夫闭合、拉格朗日—格拉姆恒等式、柯西—施瓦茨不等式以及标量舒尔补极小值，全程不触碰实数完备化或特征值求解；而在经典实复希尔伯特阴影侧，[@thm-ch12-lagrange-gram] 与 [@thm-ch12-schur-minimum] 提供对应的实求和与任意有限维复分块矩阵版本，[@thm-ch12-gram-realizability] 与 [@thm-ch12-gram-isometry-extension] 则进一步保证：一旦某套球面特征核或赫克算子的格拉姆正定性被有理证书锁定，它便无条件对应真实的算子平方分解 $Q = O^\dagger O$ 与全局刚性等距。
+请特别留意本章七组冻结定理之间的精确层次分工：在零公理内核侧（`OmegaInit` 与 `OmegaMath`，`axioms: []`），[@thm-ch12-zero-axiom-quadpoly-qsqrt2]、[@thm-ch12-zero-axiom-qphi-fibonacci-pentagon] 与 [@thm-ch12-zero-axiom-lagrange-schur] 已经直接以纯有限有序对与 `Omega.FiniteRatio` 算术证成了二次范数乘性、精确求逆、`QSqrt2` 与 `QPhi` 的旋量/贝尔/斐波那契/五角切比雪夫闭合、拉格朗日—格拉姆恒等式、柯西—施瓦茨不等式以及标量舒尔补极小值，全程不触碰实数完备化或特征值求解；而在经典实复希尔伯特阴影侧，[@thm-ch12-lagrange-gram] 与 [@thm-ch12-schur-minimum] 提供对应的实求和与任意有限维复分块矩阵版本。若有理证书确立了复希尔伯特空间上有界算子 $Q$ 的正性，[@thm-ch12-gram-realizability] 给出 $Q=O^\dagger O$。在实内积空间里，[@thm-ch12-gram-isometry-extension] 则把张成族上保持每一对格拉姆内积的指定置换唯一延拓为全局线性等距同构。
 :::
+
+一个手算便可看出两个前提各管什么。在 $\mathbb{R}^2$ 中，$e_1,2e_2$ 张成全空间，格拉姆矩阵 $\operatorname{diag}(1,4)$ 正定。对换却把范数 $1$ 送到 $2$，故无法延拓成等距。若只取向量 $e_1$，恒等置换保持内积，但恒等映射与关于 $e_1$ 轴的反射都是延拓，这里便失去了唯一性。
 
 在下面的交互实验卡中，读者可以在同一座实验室里切换并联动探索本章全部三组零公理引擎：在 `QSqrt2` 视图中逐拍步进单位 $90^\circ$ 旋量的八拍闭合 $u_{90}^8 = 1$ 并核对零浮点误差的 CHSH 齐雷尔森平方极值 $S_{\mathrm{CHSH}}^2 = 8$（[@thm-ch12-zero-axiom-quadpoly-qsqrt2]）；在 `QPhi` 视图中步进斐波那契幂次 $\varphi^{n+1} = F_n + F_{n+1}\varphi$ 与十拍切比雪夫轨道，见证无三角函数的 $T_5(\varphi/2) = -1$ 闭合（[@thm-ch12-zero-axiom-qphi-fibonacci-pentagon]）；再拖动内部变量 $y$ 与边界参数 $x$ 沿有理舒尔谷地滑动，亲手验证 $y^* = -\frac{2}{3}x$ 处的精确谷底极小值 $S = \frac{4}{3}$（[@thm-ch12-zero-axiom-lagrange-schur]、[@thm-ch12-schur-minimum]）。
 
