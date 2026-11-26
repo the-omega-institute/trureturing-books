@@ -104,12 +104,6 @@ $$
 - **唯一三站点覆盖与零陈数**：三条射线首站恰是球壳全部钟边的**唯一最小三站点顶点覆盖**；随着两只钟绕遍整个相位环面 $\mathbb{T}^2$，三条低模循环特征标线丛的第一陈数严格为 **$(0, 0, 0)$**，意味着低模纤维丛在钟环面上整体平凡、无拓扑缠绕障碍。
 - **外端三点轨道读出与内站盲相位**：每组三条时钟边的外端轨道均能在全相位域稳定独立地读出全部三个轻态，重构矩阵的逆放大因子严格小于 $4$；相反，三条内射线首站上存在使某一轻模完全不可见的“盲相位”。
 
-::: {.example #ex-ou-ch07-three-edge-projected-frame title="改变三条边的电导后，如何追踪两个轻态方向"}
-在十九站壳上选定原边 $(0,2)$、$(5,14)$，再从其余 $133$ 条中任选一条，让三条边的电导各自取任意非负值。对五种荷、整个双钟环面和软边亏额 $0\leq\delta\leq10^{-8}$，区间计算给出一个可连续选取标架的试探二平面。其上每个单位向量的平均能量都低于第四本征值 $\lambda_4$。在 $\lambda_3<\lambda_4$ 处，将平面的两个基向量正交投影到最低三态空间 $E$，它们仍然线性独立。若有非零线性组合投影为零，将其归一化就会得到一个与最低三态都正交的向量，其平均能量至少是 $\lambda_4$。因此 $E$ 有两个全局独立截面，第二陈类 $c_2(E)=0$。把所选边对随三个空间坐标作循环轮换，共得到 $3\times133=399$ 个不同的无序三边组。[三边标架的区间复算](https://github.com/the-omega-institute/trureturing-experiments/blob/07f935cd79798a0e66adadd7e7597cdbd676ad82/experiments/ch39-omega-research/replay/ch39-third-edge-light-frame.py)
-
-试探平面有时必须随电导移动。另取 $(1,6),(4,5),(5,7)$，在荷 $1$、有效钟相位 $(-1,+1)$ 处，把三条电导同时从 $0.01$ 调到 $256$。两个端点都有三四带隙，但没有同一个二平面能在两端都满足上述能量界。允许平面随一条电导连续变化，同一投影论证就能对这组三边的五种荷给出 $c_2(E)=0$。[固定平面反例与变权标架的区间复算](https://github.com/the-omega-institute/trureturing-experiments/blob/07f935cd79798a0e66adadd7e7597cdbd676ad82/experiments/ch39-omega-research/replay/ch39-unanchored-plane-obstruction.py)
-:::
-
 ### 7.2.2 五步单纯形重叠核、十九点壳升维与 $8K - 3$ 步味色散匹配
 
 进入真正的四维欧氏格点时，常数通量共用的有理度量是 $g = I - J/5$（该度量将在[第十章](ch10-regge-gravity-and-spin2.md)同样充当四维单纯形雷吉引力的平直底座）。在这一度量上构造**五步单纯形威尔逊—重叠核**（[`ch39-simplex-overlap.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-simplex-overlap.py)）：
