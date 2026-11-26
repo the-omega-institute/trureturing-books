@@ -4,7 +4,7 @@
 
 On the signed real unit quaternion group $\mathrm{SU}(2)\cong S^3(\mathbb R)$, [Chapter 10](ch10-peter-weyl-rational-spin-shells.md) takes Fourier coefficients against the matrix entries of $D^j(q)$. The traces $\chi_j(q)=U_{2j}(c)$, with $c=\operatorname{Re}(q)$, form an orthonormal basis for square-integrable class functions under normalized Haar measure. At integer spin $j=n$ the character equals $E_n(\kappa)$ with $\kappa=c^2$. At $j=n+\tfrac12$ the character changes sign under $q\mapsto-q$, while its square is polynomial in $\kappa$. This chapter computes normalized Haar averages of polynomial signals, including the inner products of the integer-spin characters, by finite factorial formulas.
 
-In classical calculus, the words "spherical integral" trigger an automatic reflex: reach for the hypersurface volume $2\pi^2$, introduce triple trigonometric angles $(\psi, \vartheta, \varphi)$, and invoke infinite Riemann-sum limits—as if $\pi$ were permanently branded onto curved geometry. This chapter dismantles that illusion. **Normalized polynomial Haar integration on the three-sphere contains no $\pi$ and no limits whatsoever.** Every homogeneous even monomial integrates to an exact finite ratio of integer factorials, the single-variable fidelity moments $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^k]$ are literally Catalan numbers divided by $4^k$, and the exact moment recurrence, the low-degree anchor ($j \le 2$), **the universal zero-mean expectation of all positive-degree even characters** ($\forall r \in \mathbb{N},\; \mathbb{E}_{\mathrm{SU}(2)}[E_r(\kappa)] \equiv \delta_{r, 0}$), and **all-degree Peter–Weyl even-character orthonormality** ($\forall m, n \in \mathbb{N},\; \langle E_m, E_n\rangle_{\mathrm{SU}(2)} \equiv \delta_{m, n}$) are all proved with zero axioms inside `OmegaInit` and `OmegaMath` (`axioms: []`).
+The Gaussian argument in §11.1 identifies normalized Haar moments on the real unit three-sphere with factorial ratios. In particular, $\mathbb E_{\mathrm{SU}(2)}[\kappa^k]=C_k/4^k$ for the $k$-th Catalan number $C_k$. The four Lean declarations below prove the rational moment recurrence, the first three characters’ Gram matrix, and the all-degree mean and inner-product identities using `Omega.IntRatio.Equivalent`. Their recorded axiom lists are `[]` on the strict backend and `[propext]` on the official backend.
 
 ---
 
@@ -101,13 +101,13 @@ $$
 
 That single line is a gem of zero-axiom algebra: **without surface elements or polar Jacobians, the elementary sum $(2a + 1) + (2b + 1) + (2c + 1) + (2d + 1) = 2(m + 2)$ proves that $H(a, b, c, d)$ respects the sphere relation $w^2 + x^2 + y^2 + z^2 = \lVert q\rVert^2$ identically and is normalized by $H(0, 0, 0, 0) = 1$**. As an immediate sanity check on $(w^2 + x^2 + y^2 + z^2)^2$: since $H(2, 0, 0, 0) = \frac{4!}{4^2 \cdot 2! \cdot 3!} = \frac{1}{8}$ and $H(1, 1, 0, 0) = \frac{2! \cdot 2!}{4^2 \cdot 1! \cdot 1! \cdot 3!} = \frac{1}{24}$, the four quartic terms and twelve cross terms sum cleanly to $4 \times \frac{1}{8} + 12 \times \frac{1}{24} = \frac{1}{2} + \frac{1}{2} = 1$.
 
-Specializing this step ratio to powers of the projective fidelity $\kappa = w^2 / \lVert q\rVert^2$ by setting $a = k$ and $b = c = d = 0$ ($m = k$), write $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^k] = H(k, 0, 0, 0) = \frac{(2k)!}{4^k\,k!\,(k + 1)!}$ for the $k$-th $\pi$-free scalar moment (with base value $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^0] = 1$ directly from the definition). The exact factorial ratio recurrence linking consecutive moments is proved for every $k \in \mathbb{N}$ inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`):
+Specializing this step ratio to powers of the projective fidelity $\kappa = w^2 / \lVert q\rVert^2$ by setting $a = k$ and $b = c = d = 0$ ($m = k$), write $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^k] = H(k, 0, 0, 0) = \frac{(2k)!}{4^k\,k!\,(k + 1)!}$ for the $k$-th $\pi$-free scalar moment (with base value $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^0] = 1$ directly from the definition). The exact factorial ratio recurrence linking consecutive moments is proved for every $k \in \mathbb{N}$ on the strict backend of `OmegaInit` and `OmegaMath`:
 
 ::: {.theorem #thm-ch11-haar-kappa-moment-succ title="Zero-Axiom Factorial Recurrence for Pi-Free Three-Sphere Fidelity Moments" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.haarKappaMoment_succ"}
-Let `haarKappaMoment k` denote the $\pi$-free rational factorial moment $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^k] = \frac{(2k)!}{4^k\,k!\,(k + 1)!}$ of the even scalar coordinate $\kappa^k = (w^2 / \lVert q\rVert^2)^k$ on $S^3$, valued in `Omega.IntRatio`. Then for every natural number $k \in \mathbb{N}$, under the zero-axiom equivalence `Omega.IntRatio.Equivalent`,
+For $k\in\mathbb N$, `haarKappaMoment k` represents $(2k)!/(4^k k!(k+1)!)$ and `haarKappaStep k` represents $(2k+1)/(2(k+2))$. In `Omega.IntRatio.Equivalent` the recurrence is
 
 $$
-\mathbb{E}_{\mathrm{SU}(2)}\!\left[\kappa^{k + 1}\right] \;\equiv\; \mathbb{E}_{\mathrm{SU}(2)}\!\left[\kappa^k\right] \cdot \frac{2k + 1}{2\,(k + 2)}.
+\operatorname{haarKappaMoment}(k+1)\;\equiv\;\operatorname{haarKappaMoment}(k)\cdot\operatorname{haarKappaStep}(k).
 $$
 :::
 
@@ -146,15 +146,15 @@ $$
 \langle f, g\rangle_{\mathrm{SU}(2)} \;:=\; \operatorname{haarInner}(f, g) \;:=\; \mathbb{E}_{\mathrm{SU}(2)}\!\bigl[f(\kappa)\,g(\kappa)\bigr].
 $$
 
-Before ascending to the universal all-degree theorem, begin with the most transparent low-degree anchor: inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), the first three even (integer-spin) Peter–Weyl character polynomials from [Chapter 10](ch10-peter-weyl-rational-spin-shells.md)—$\chi_0(\kappa) = 1$, $\chi_1(\kappa) = 4\kappa - 1$, and $\chi_2(\kappa) = 16\kappa^2 - 12\kappa + 1$—are certified to form an exact orthonormal system:
+Before ascending to the universal all-degree theorem, begin with the most transparent low-degree anchor: on the strict backend of `OmegaInit` and `OmegaMath`, the first three even (integer-spin) Peter–Weyl character polynomials from [Chapter 10](ch10-peter-weyl-rational-spin-shells.md)—$\chi_0(\kappa) = 1$, $\chi_1(\kappa) = 4\kappa - 1$, and $\chi_2(\kappa) = 16\kappa^2 - 12\kappa + 1$—are certified to form an exact orthonormal system:
 
 ::: {.theorem #thm-ch11-peter-weyl-chi012-orthonormal title="Zero-Axiom Haar Orthonormality of the First Three Even Peter–Weyl Characters" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.peter_weyl_chi012_orthonormal"}
-Under the zero-axiom $\pi$-free rational Haar inner product `haarInner`, the first three even Peter–Weyl character polynomials $\chi_0(\kappa) = 1$, $\chi_1(\kappa) = 4\kappa - 1$, and $\chi_2(\kappa) = 16\kappa^2 - 12\kappa + 1$ simultaneously satisfy all six pairwise orthonormality relations under `Omega.IntRatio.Equivalent`:
+Write $H_{ij}=\operatorname{haarInner}(\chi_i,\chi_j)$ for the rational pairing of the coefficient lists $\chi_0,\chi_1,\chi_2$. Under `Omega.IntRatio.Equivalent` the six entries satisfy
 
 $$
 \begin{aligned}
-\langle \chi_0, \chi_0\rangle_{\mathrm{SU}(2)} &\equiv 1, & \langle \chi_0, \chi_1\rangle_{\mathrm{SU}(2)} &\equiv 0, & \langle \chi_0, \chi_2\rangle_{\mathrm{SU}(2)} &\equiv 0, \\
-\langle \chi_1, \chi_1\rangle_{\mathrm{SU}(2)} &\equiv 1, & \langle \chi_1, \chi_2\rangle_{\mathrm{SU}(2)} &\equiv 0, & \langle \chi_2, \chi_2\rangle_{\mathrm{SU}(2)} &\equiv 1.
+H_{00} &\equiv 1, & H_{01} &\equiv 0, & H_{02} &\equiv 0, \\
+H_{11} &\equiv 1, & H_{12} &\equiv 0, & H_{22} &\equiv 1.
 \end{aligned}
 $$
 :::
@@ -213,13 +213,13 @@ $$
 Half-integer shell norms check out just as effortlessly: $\mathbb{E}[\chi_{1/2}^2] = \mathbb{E}[4\kappa] = 4 \cdot \frac{1}{4} = 1$, and $\mathbb{E}[\chi_{3/2}^2] = \mathbb{E}[64\kappa^3 - 64\kappa^2 + 16\kappa] = 5 - 8 + 4 = 1$. Because every odd-degree monomial has zero expectation, every integer-spin character is automatically orthogonal to every half-integer character as well.
 :::
 
-These integer cancellations are no coincidence of low degree ($j \le 2$): both **the universal $\pi$-free Haar zero-mean law across all even characters $r \in \mathbb{N}$** and **all-degree Peter–Weyl even-character orthonormality for every pair $(m, n) \in \mathbb{N}^2$** are proved with zero axioms inside `OmegaInit` and `OmegaMath` (`axioms: []`). First, the factorial moment functional maps the trivial monopole character $E_0(\kappa) = 1$ to $1$ and sends every positive-degree even character $E_r(\kappa)$ ($r \ge 1$) identically to $0$:
+The factorial moment functional sends the constant character to one and each positive-degree even character to zero. Section 11.1 identifies this rational evaluation with the normalized real Haar mean.
 
 ::: {.theorem #thm-ch11-haar-even-char-expectation title="Zero-Axiom All-Degree Pi-Free Haar Expectation of Even Characters" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.haar_evenChar_expectation"}
-Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), let `haarKappaPoly` denote the $\pi$-free rational factorial Haar functional contracting a rational polynomial coefficient list against `haarKappaMoment k` $= \frac{(2k)!}{4^k\,k!\,(k + 1)!}$, let `evenCharPoly r` be the $r$-th even-degree Chebyshev character polynomial $E_r(\kappa)$ of [@thm-ch10-even-char-product-sum], and let `zeroDelta r` be the Kronecker indicator at zero ($1$ for $r = 0$, $0$ for $r \ge 1$). Then for every natural number $r \in \mathbb{N}$, under `Omega.IntRatio.Equivalent`,
+For each $r\in\mathbb N$, `evenCharPoly r` is the coefficient list for $E_r$ from [@thm-ch10-even-char-product-sum]. The functional `haarKappaPoly` weights the coefficient of degree $k$ by `haarKappaMoment k`. With `zeroDelta r` equal to one at $r=0$ and zero otherwise, the declaration gives the following `Omega.IntRatio.Equivalent` identity.
 
 $$
-\mathbb{E}_{\mathrm{SU}(2)}\!\bigl[E_r(\kappa)\bigr] \;\equiv\; \operatorname{haarKappaPoly}(\operatorname{evenCharPoly}\; r) \;\equiv\; \delta_{r, 0}.
+\operatorname{haarKappaPoly}(\operatorname{evenCharPoly}\;r)\;\equiv\;\operatorname{zeroDelta}(r).
 $$
 :::
 
@@ -227,24 +227,24 @@ $$
 Rather than stopping on the unshifted axis $j = 0$, the proof establishes simultaneously for every shift exponent $j \in \mathbb{N}$ and character degree $r \in \mathbb{N}$ the closed-form shifted mixed-moment table (`MomentTable.expected j r`):
 
 $$
-\mathbb{E}_{\mathrm{SU}(2)}\!\bigl[\kappa^j\,E_r(\kappa)\bigr] \;\equiv\; \mathbb{E}_{\mathrm{SU}(2)}\!\left[\kappa^j\right] \cdot \frac{(2r + 1)\,\prod_{k = 0}^{r - 1}(j - k)}{\prod_{k = 0}^{r - 1}(j + k + 2)},
+\operatorname{haarKappaPoly}\!\left(\kappa^j E_r\right) \;\equiv\; \operatorname{haarKappaMoment}(j) \cdot \frac{(2r + 1)\,\prod_{k = 0}^{r - 1}(j - k)}{\prod_{k = 0}^{r - 1}(j + k + 2)},
 $$
 
 where both empty products equal $1$ when $r = 0$. Two-step induction on $r$ (quantified over all $j$ simultaneously) closes directly: the base $r = 0$ is immediate, and $r = 1$ combines linearity of `haarKappaPoly` with the scalar moment recurrence [@thm-ch11-haar-kappa-moment-succ] to reduce $4\,\mathbb{E}[\kappa^{j+1}] - \mathbb{E}[\kappa^j]$ to $\mathbb{E}[\kappa^j]\cdot\frac{3j}{j+2}$; the inductive step inserts $E_{r+2}(\kappa) = (4\kappa - 2)E_{r+1}(\kappa) - E_r(\kappa)$ into the shifted integral, absorbs $4\,\mathbb{E}[\kappa^{j+1}]$ back into $\mathbb{E}[\kappa^j]$ via [@thm-ch11-haar-kappa-moment-succ], brings all terms over the common rising product $\prod_{k = 0}^{r + 1}(j + k + 2)$, and verifies an exact integer polynomial identity in $(j, r, \prod_{k = 0}^{r - 1}(j - k))$. Specializing to $j = 0$ yields $\mathbb{E}[\kappa^0] \equiv 1$ at $r = 0$, whereas for every $r \ge 1$ the falling product $\prod_{k = 0}^{r - 1}(0 - k)$ begins with the factor $0$, annihilating the numerator identically. The full proof is checked by the Lean kernel.
 :::
 
-Coupling the zero-axiom all-degree character fusion law [@thm-ch10-even-char-product-sum] from [Chapter 10](ch10-peter-weyl-rational-spin-shells.md) directly to [@thm-ch11-haar-even-char-expectation] immediately seals $\pi$-free Peter–Weyl orthonormality across the entire integer-spin spectrum:
+Combining the [Chapter 10](ch10-peter-weyl-rational-spin-shells.md) fusion identity [@thm-ch10-even-char-product-sum] with [@thm-ch11-haar-even-char-expectation] gives the rational inner-product formula. By §11.1, its real Haar interpretation is $\langle E_m,E_n\rangle_{\mathrm{SU}(2)}=\delta_{mn}$.
 
 ::: {.theorem #thm-ch11-all-degree-peter-weyl-orthonormal title="Zero-Axiom All-Degree Peter–Weyl Even-Character Orthonormality" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"}
-Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), let `haarInner` be the $\pi$-free rational Haar inner product $\langle f, g\rangle_{\mathrm{SU}(2)} = \operatorname{haarKappaPoly}(f \cdot g)$ and let `degreeDelta m n` $= \operatorname{zeroDelta}(\lvert m - n\rvert) = \delta_{m, n}$ be the Kronecker delta valued in `Omega.IntRatio` ($1$ when $m = n$, $0$ when $m \neq n$). Then for all natural numbers $m, n \in \mathbb{N}$, under `Omega.IntRatio.Equivalent`,
+The rational pairing `haarInner` applies `haarKappaPoly` to the product of two coefficient lists. For $m,n\in\mathbb N$, `degreeDelta m n` is one when $m=n$ and zero otherwise. The declaration gives the following `Omega.IntRatio.Equivalent` identity.
 
 $$
-\langle E_m, E_n\rangle_{\mathrm{SU}(2)} \;\equiv\; \operatorname{haarInner}(\operatorname{evenCharPoly}\; m,\; \operatorname{evenCharPoly}\; n) \;\equiv\; \delta_{m, n}.
+\operatorname{haarInner}(\operatorname{evenCharPoly}\;m,\operatorname{evenCharPoly}\;n)\;\equiv\;\operatorname{degreeDelta}(m,n).
 $$
 :::
 
 ::: {.proof}
-By [@thm-ch10-even-char-product-sum] (`Characters.product m n` and `Poly.ratios_mul`) together with invariance of `haarKappaPoly` under coefficientwise equality including trailing zeros (`Integration.integral_congr`), the inner product $\langle E_m, E_n\rangle_{\mathrm{SU}(2)}$ reduces to the $\pi$-free Haar expectation of the finite inclusive sum $\sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa)$. Induction on the summation span using additivity of `haarKappaPoly` and [@thm-ch11-haar-even-char-expectation] sends every summand with $r \ge 1$ to $0$, leaving only the lower-endpoint indicator $\delta_{\lvert m - n\rvert, 0} = \delta_{m, n}$ (since $r = 0$ lies in $[\lvert m - n\rvert, m + n]$ if and only if $\lvert m - n\rvert = 0$, i.e., $m = n$). The full proof is checked by the Lean kernel.
+By [@thm-ch10-even-char-product-sum] (`Characters.product m n` and `Poly.ratios_mul`) together with invariance of `haarKappaPoly` under coefficientwise equality including trailing zeros (`Integration.integral_congr`), the inner product $\operatorname{haarInner}(E_m,E_n)$ reduces to the $\pi$-free Haar expectation of the finite inclusive sum $\sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa)$. Induction on the summation span using additivity of `haarKappaPoly` and [@thm-ch11-haar-even-char-expectation] sends every summand with $r \ge 1$ to $0$, leaving only the lower-endpoint indicator $\delta_{\lvert m - n\rvert, 0} = \delta_{m, n}$ (since $r = 0$ lies in $[\lvert m - n\rvert, m + n]$ if and only if $\lvert m - n\rvert = 0$, i.e., $m = n$). The full proof is checked by the Lean kernel.
 :::
 
 The concrete $3 \times 3$ identity Gram matrix of [@thm-ch11-peter-weyl-chi012-orthonormal] is thus unified inside the universal all-degree theorem [@thm-ch11-all-degree-peter-weyl-orthonormal] across every $m, n \in \mathbb{N}$, without ever invoking real numbers, limits, or $\pi$. (Combinatorially, substituting $\mathbb{E}[\kappa^k] = \frac{1}{4^k(k + 1)}\binom{2k}{k}$ into $E_r(\kappa) = \sum_{k = 0}^{r} (-1)^{r - k}\binom{r + k}{2k} 4^k \kappa^k$ cancels $4^k$ against $4^{-k}$ and yields the vanishing $(r + 1)$-st forward difference of the degree-$r$ polynomial $\binom{r + x}{r}$, mirroring the kernel-verified shifted-moment table above.) Returning to the $5d^8$ quadrupole tensor $\mathbf{Q}_{\mathrm{phys}}(5d^8) = \diag(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7})$ of [Chapter 10](ch10-peter-weyl-rational-spin-shells.md), rotating by $\operatorname{Ad}(q)\,\mathbf{Q}\,\operatorname{Ad}(q)^\top$ produces degree-four homogeneous polynomials divided by $\lVert q\rVert^4$; plugging in $H(2, 0, 0, 0) = \frac{1}{8}$, $H(1, 1, 0, 0) = \frac{1}{24}$, and vanishing odd monomials collapses the rotational average straight to $\frac{1}{3}(\Tr \mathbf{Q})\,I_3 = \mathbf{0}_{3\times 3}$, without ever touching $\pi$.

@@ -4,7 +4,7 @@
 
 [第十章](ch10-peter-weyl-rational-spin-shells.md) 在有号实单位四元数群 $\mathrm{SU}(2)\cong S^3(\mathbb R)$ 上用 $D^j(q)$ 的矩阵元计算傅里叶系数。各自旋表示的迹 $\chi_j(q)=U_{2j}(c)$（$c=\operatorname{Re}(q)$）在归一化哈尔测度下构成平方可积类函数空间的标准正交基。整数自旋 $j=n$ 的特征标等于 $E_n(\kappa)$，其中 $\kappa=c^2$。对 $j=n+\tfrac12$，特征标在 $q\mapsto-q$ 时变号，而其平方是 $\kappa$ 的多项式。本章用有限阶乘公式计算多项式信号的归一化哈尔平均，包括整数自旋特征标的内积。
 
-在经典微积分的习惯里，一看到“球面积分”，直觉就会本能地掏出超球面面积 $2\pi^2$、三重三角换元 $(\psi, \vartheta, \varphi)$ 与无穷分割的黎曼和极限——仿佛 $\pi$ 是贴在弯曲几何脊梁骨上撕不下来的永恒标签。本章彻底打破这层幻觉：**三维球面的归一化多项式哈尔积分里根本不存在 $\pi$，也不存在任何极限过程**。每一个齐次偶次单项式的球面期望，都精确等于一个有限整数阶乘比值，其单变量矩 $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^k]$ 正是卡塔兰数（Catalan numbers）除以 $4^k$；而单变量矩递推律、低阶具体锚点（$j \le 2$）、**全阶偶次特征标的零均值期望律**（$\forall r \in \mathbb{N},\; \mathbb{E}_{\mathrm{SU}(2)}[E_r(\kappa)] \equiv \delta_{r, 0}$）以及**全阶彼得—魏尔偶次特征核的正交归一性**（$\forall m, n \in \mathbb{N},\; \langle E_m, E_n\rangle_{\mathrm{SU}(2)} \equiv \delta_{m, n}$），均已在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成。
+第 11.1 节的高斯推导把实单位三维球面的归一化哈尔矩写为阶乘比。特别地，$\mathbb E_{\mathrm{SU}(2)}[\kappa^k]=C_k/4^k$，其中 $C_k$ 是第 $k$ 个卡塔兰数。下文四条 Lean 声明在 `Omega.IntRatio.Equivalent` 下证明有理矩递推、前三个特征标的格拉姆矩阵，以及全阶均值和内积恒等式。它们的公理依赖在严格后端记录为 `[]`，在官方后端记录为 `[propext]`。
 
 ---
 
@@ -101,13 +101,13 @@ $$
 
 这一行恒等式堪称零公理代数之玉：**无需面积微元、无需极坐标雅可比行列式，单纯凭 $(2a + 1) + (2b + 1) + (2c + 1) + (2d + 1) = 2(m + 2)$ 这条小学加法，就证明了 $H(a, b, c, d)$ 在球面关系 $w^2 + x^2 + y^2 + z^2 = \lVert q\rVert^2$ 下严格良定义，且自然满足归一化 $H(0, 0, 0, 0) = 1$**。作为顺手交叉检验，取二次幂展开 $(w^2 + x^2 + y^2 + z^2)^2$ 的四项纯四次方与十二项交叉平方项：由 $H(2, 0, 0, 0) = \frac{4!}{4^2 \cdot 2! \cdot 3!} = \frac{1}{8}$ 与 $H(1, 1, 0, 0) = \frac{2! \cdot 2!}{4^2 \cdot 1! \cdot 1! \cdot 3!} = \frac{1}{24}$，立即核对 $4 \times \frac{1}{8} + 12 \times \frac{1}{24} = \frac{1}{2} + \frac{1}{2} = 1$。
 
-现在把上述步进比值特化到保真度 $\kappa = w^2 / \lVert q\rVert^2$ 的纯幂次，即令 $a = k$、$b = c = d = 0$（于是 $m = k$），记第 $k$ 阶无 $\pi$ 标量矩为 $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^k] = H(k, 0, 0, 0) = \frac{(2k)!}{4^k\,k!\,(k + 1)!}$（零阶初值由定义立得 $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^0] = 1$）。相邻两阶有理矩之间的精确阶乘比递推律已在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中对一切自然数 $k \in \mathbb{N}$ 严格证成：
+现在把上述步进比值特化到保真度 $\kappa = w^2 / \lVert q\rVert^2$ 的纯幂次，即令 $a = k$、$b = c = d = 0$（于是 $m = k$），记第 $k$ 阶无 $\pi$ 标量矩为 $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^k] = H(k, 0, 0, 0) = \frac{(2k)!}{4^k\,k!\,(k + 1)!}$（零阶初值由定义立得 $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^0] = 1$）。相邻两阶有理矩之间的精确阶乘比递推律已在 `OmegaInit` 与 `OmegaMath` 的严格后端上对一切自然数 $k \in \mathbb{N}$ 严格证成：
 
 ::: {.theorem #thm-ch11-haar-kappa-moment-succ title="三维球面无 π 标量保真度矩的零公理阶乘递推律" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.haarKappaMoment_succ"}
-记 `haarKappaMoment k` 为三维球面上偶次标量坐标保真度 $\kappa^k = (w^2 / \lVert q\rVert^2)^k$ 的无 $\pi$ 有理阶乘矩 $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^k] = \frac{(2k)!}{4^k\,k!\,(k + 1)!}$（取值于 `Omega.IntRatio`）。则对一切自然数 $k \in \mathbb{N}$，在零公理等价关系 `Omega.IntRatio.Equivalent` 下恒成立
+对 $k\in\mathbb N$，`haarKappaMoment k` 表示 $(2k)!/(4^k k!(k+1)!)$，`haarKappaStep k` 表示 $(2k+1)/(2(k+2))$。在 `Omega.IntRatio.Equivalent` 下有递推式
 
 $$
-\mathbb{E}_{\mathrm{SU}(2)}\!\left[\kappa^{k + 1}\right] \;\equiv\; \mathbb{E}_{\mathrm{SU}(2)}\!\left[\kappa^k\right] \cdot \frac{2k + 1}{2\,(k + 2)}.
+\operatorname{haarKappaMoment}(k+1)\;\equiv\;\operatorname{haarKappaMoment}(k)\cdot\operatorname{haarKappaStep}(k).
 $$
 :::
 
@@ -146,15 +146,15 @@ $$
 \langle f, g\rangle_{\mathrm{SU}(2)} \;:=\; \operatorname{haarInner}(f, g) \;:=\; \mathbb{E}_{\mathrm{SU}(2)}\!\bigl[f(\kappa)\,g(\kappa)\bigr].
 $$
 
-在登顶全阶普遍定理之前，先看最透明的低阶具体锚点：在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，[第十章](ch10-peter-weyl-rational-spin-shells.md)的前三座核心整数自旋壳特征标 $\chi_0(\kappa) = 1$、$\chi_1(\kappa) = 4\kappa - 1$ 与 $\chi_2(\kappa) = 16\kappa^2 - 12\kappa + 1$ 立刻被证成精确标准正交系：
+在登顶全阶普遍定理之前，先看最透明的低阶具体锚点：在 `OmegaInit` 与 `OmegaMath` 的严格后端上，[第十章](ch10-peter-weyl-rational-spin-shells.md)的前三座核心整数自旋壳特征标 $\chi_0(\kappa) = 1$、$\chi_1(\kappa) = 4\kappa - 1$ 与 $\chi_2(\kappa) = 16\kappa^2 - 12\kappa + 1$ 立刻被证成精确标准正交系：
 
 ::: {.theorem #thm-ch11-peter-weyl-chi012-orthonormal title="前三阶偶次彼得—魏尔特征核的零公理哈尔正交归一性" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.peter_weyl_chi012_orthonormal"}
-在零公理无 $\pi$ 哈尔有理内积 `haarInner` 下，前三座偶次彼得—魏尔特征多项式 $\chi_0(\kappa) = 1$、$\chi_1(\kappa) = 4\kappa - 1$ 与 $\chi_2(\kappa) = 16\kappa^2 - 12\kappa + 1$ 的全部六组两两内积在 `Omega.IntRatio.Equivalent` 下同时满足标准正交归一关系：
+记 $H_{ij}=\operatorname{haarInner}(\chi_i,\chi_j)$ 为系数表 $\chi_0,\chi_1,\chi_2$ 的有理配对。在 `Omega.IntRatio.Equivalent` 下，六个矩阵元满足
 
 $$
 \begin{aligned}
-\langle \chi_0, \chi_0\rangle_{\mathrm{SU}(2)} &\equiv 1, & \langle \chi_0, \chi_1\rangle_{\mathrm{SU}(2)} &\equiv 0, & \langle \chi_0, \chi_2\rangle_{\mathrm{SU}(2)} &\equiv 0, \\
-\langle \chi_1, \chi_1\rangle_{\mathrm{SU}(2)} &\equiv 1, & \langle \chi_1, \chi_2\rangle_{\mathrm{SU}(2)} &\equiv 0, & \langle \chi_2, \chi_2\rangle_{\mathrm{SU}(2)} &\equiv 1.
+H_{00} &\equiv 1, & H_{01} &\equiv 0, & H_{02} &\equiv 0, \\
+H_{11} &\equiv 1, & H_{12} &\equiv 0, & H_{22} &\equiv 1.
 \end{aligned}
 $$
 :::
@@ -213,13 +213,13 @@ $$
 连半整数自旋壳的归一化也可一步验明：$\mathbb{E}[\chi_{1/2}^2] = \mathbb{E}[4\kappa] = 4 \cdot \frac{1}{4} = 1$，而 $\mathbb{E}[\chi_{3/2}^2] = \mathbb{E}[64\kappa^3 - 64\kappa^2 + 16\kappa] = 5 - 8 + 4 = 1$！同时，因为任意奇数次单项式期望为零，整数壳与半整数壳的交叉内积 $\langle \chi_m, \chi_{n + 1/2}\rangle$ 亦恒等于 $0$。
 :::
 
-上述整数对消绝非 $j \le 2$ 的低阶偶合：不仅前三座锚点壳层正交归一，**全体整数自旋壳层 $r \in \mathbb{N}$ 上的偶次特征标无 $\pi$ 哈尔期望归零律，以及任意一对整数自旋 $(m, n) \in \mathbb{N}^2$ 的全阶彼得—魏尔正交归一性**，均已一举在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核完整证成。第一步，阶乘矩泛函将常值单极壳 $E_0(\kappa) = 1$ 映至 $1$，而将一切正阶偶次特征标 $E_r(\kappa)$（$r \ge 1$）精确清零：
+阶乘矩泛函将常值特征标映至一，将所有正阶偶次特征标映至零。第 11.1 节的高斯推导将这一有理泛函的取值与实球面的归一化哈尔均值对应。
 
 ::: {.theorem #thm-ch11-haar-even-char-expectation title="全阶偶次特征标的零公理无 π 哈尔期望归零律" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.haar_evenChar_expectation"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，记 `haarKappaPoly` 为把有理系数表逐项与无 $\pi$ 阶乘矩 `haarKappaMoment k` $= \frac{(2k)!}{4^k\,k!\,(k + 1)!}$ 缩并的球面哈尔期望泛函，记 `evenCharPoly r` 为 [@thm-ch10-even-char-product-sum] 中的第 $r$ 阶偶次切比雪夫特征多项式 $E_r(\kappa)$，并记 `zeroDelta r` 为零点克罗内克指示量（$r = 0$ 时为 $1$，$r \ge 1$ 时为 $0$）。则对一切自然数 $r \in \mathbb{N}$，在 `Omega.IntRatio.Equivalent` 下恒成立
+对每个 $r\in\mathbb N$，`evenCharPoly r` 是 [@thm-ch10-even-char-product-sum] 中 $E_r$ 的系数表。泛函 `haarKappaPoly` 按 `haarKappaMoment k` 加权各个 $k$ 次系数。`zeroDelta r` 在 $r=0$ 时取一，其余取零。声明给出下列 `Omega.IntRatio.Equivalent` 恒等式。
 
 $$
-\mathbb{E}_{\mathrm{SU}(2)}\!\bigl[E_r(\kappa)\bigr] \;\equiv\; \operatorname{haarKappaPoly}(\operatorname{evenCharPoly}\; r) \;\equiv\; \delta_{r, 0}.
+\operatorname{haarKappaPoly}(\operatorname{evenCharPoly}\;r)\;\equiv\;\operatorname{zeroDelta}(r).
 $$
 :::
 
@@ -227,24 +227,24 @@ $$
 证明不局限于 $j = 0$ 轴线，而是对一切平移幂次 $j \in \mathbb{N}$ 与特征阶数 $r \in \mathbb{N}$ 同步建立精确移位混合矩封闭表（`MomentTable.expected j r`）：
 
 $$
-\mathbb{E}_{\mathrm{SU}(2)}\!\bigl[\kappa^j\,E_r(\kappa)\bigr] \;\equiv\; \mathbb{E}_{\mathrm{SU}(2)}\!\left[\kappa^j\right] \cdot \frac{(2r + 1)\,\prod_{k = 0}^{r - 1}(j - k)}{\prod_{k = 0}^{r - 1}(j + k + 2)},
+\operatorname{haarKappaPoly}\!\left(\kappa^j E_r\right) \;\equiv\; \operatorname{haarKappaMoment}(j) \cdot \frac{(2r + 1)\,\prod_{k = 0}^{r - 1}(j - k)}{\prod_{k = 0}^{r - 1}(j + k + 2)},
 $$
 
 其中 $r = 0$ 时分子分母空乘积均取 $1$。对 $r$ 施以相邻双阶归纳（对全部 $j$ 同步量化）：基步 $r = 0$ 平凡成立，基步 $r = 1$ 由 `haarKappaPoly` 线性性与标量矩递推律 [@thm-ch11-haar-kappa-moment-succ] 将 $4\,\mathbb{E}[\kappa^{j+1}] - \mathbb{E}[\kappa^j]$ 化为 $\mathbb{E}[\kappa^j]\cdot\frac{3j}{j+2}$；归纳步把递推式 $E_{r+2}(\kappa) = (4\kappa - 2)E_{r+1}(\kappa) - E_r(\kappa)$ 代入移位积分，再次借 [@thm-ch11-haar-kappa-moment-succ] 将 $4\,\mathbb{E}[\kappa^{j+1}]$ 吸收回 $\mathbb{E}[\kappa^j]$，通分至公共上升阶乘 $\prod_{k = 0}^{r + 1}(j + k + 2)$ 后化为关于 $(j, r, \prod_{k = 0}^{r - 1}(j - k))$ 的有限整系数多项式恒等式。最后令 $j = 0$：$r = 0$ 处给出 $\mathbb{E}[\kappa^0] \equiv 1$，而对一切 $r \ge 1$，下降阶乘 $\prod_{k = 0}^{r - 1}(0 - k)$ 含首因子 $0$，使分子恒等归零。完整证明由 Lean 内核检查。
 :::
 
-现在把[第十章](ch10-peter-weyl-rational-spin-shells.md)的零公理全阶特征标融合律 [@thm-ch10-even-char-product-sum] 直接扣合到 [@thm-ch11-haar-even-char-expectation] 之上，全谱无 $\pi$ 彼得—魏尔正交归一性便一步封顶：
+将[第十章](ch10-peter-weyl-rational-spin-shells.md)的乘积律 [@thm-ch10-even-char-product-sum] 与 [@thm-ch11-haar-even-char-expectation] 结合，可得有理内积公式。根据第 11.1 节，其对应的实哈尔内积为 $\langle E_m,E_n\rangle_{\mathrm{SU}(2)}=\delta_{mn}$。
 
 ::: {.theorem #thm-ch11-all-degree-peter-weyl-orthonormal title="全阶偶次彼得—魏尔特征核的零公理哈尔正交归一性" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，记 `haarInner` 为无 $\pi$ 有理球面哈尔内积 $\langle f, g\rangle_{\mathrm{SU}(2)} = \operatorname{haarKappaPoly}(f \cdot g)$，记 `degreeDelta m n` $= \operatorname{zeroDelta}(\lvert m - n\rvert) = \delta_{m, n}$ 为取值于 `Omega.IntRatio` 的克罗内克增量（$m = n$ 时为 $1$，$m \neq n$ 时为 $0$）。则对一切自然数 $m, n \in \mathbb{N}$，在 `Omega.IntRatio.Equivalent` 下恒有
+有理配对 `haarInner` 将 `haarKappaPoly` 应用于两个系数表的乘积。对 $m,n\in\mathbb N$，`degreeDelta m n` 在 $m=n$ 时取一，其余取零。声明给出下列 `Omega.IntRatio.Equivalent` 恒等式。
 
 $$
-\langle E_m, E_n\rangle_{\mathrm{SU}(2)} \;\equiv\; \operatorname{haarInner}(\operatorname{evenCharPoly}\; m,\; \operatorname{evenCharPoly}\; n) \;\equiv\; \delta_{m, n}.
+\operatorname{haarInner}(\operatorname{evenCharPoly}\;m,\operatorname{evenCharPoly}\;n)\;\equiv\;\operatorname{degreeDelta}(m,n).
 $$
 :::
 
 ::: {.proof}
-由 [@thm-ch10-even-char-product-sum]（`Characters.product m n` 与 `Poly.ratios_mul`）以及 `haarKappaPoly` 在逐项相等系数表（含尾部补零）下的良定义性（`Integration.integral_congr`），乘积内积 $\langle E_m, E_n\rangle_{\mathrm{SU}(2)}$ 化归为有限闭区间和 $\sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa)$ 的无 $\pi$ 哈尔期望。对求和跨度归纳并反复运用 `haarKappaPoly` 的可加性与 [@thm-ch11-haar-even-char-expectation]，所有满足 $r \ge 1$ 的项悉数归零，仅存下端点指示量 $\delta_{\lvert m - n\rvert, 0} = \delta_{m, n}$（因指标 $r = 0$ 落入 $[\lvert m - n\rvert, m + n]$ 当且仅当 $\lvert m - n\rvert = 0$，即 $m = n$）。完整证明由 Lean 内核检查。
+由 [@thm-ch10-even-char-product-sum]（`Characters.product m n` 与 `Poly.ratios_mul`）以及 `haarKappaPoly` 在逐项相等系数表（含尾部补零）下的良定义性（`Integration.integral_congr`），乘积内积 $\operatorname{haarInner}(E_m,E_n)$ 化归为有限闭区间和 $\sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa)$ 的无 $\pi$ 哈尔期望。对求和跨度归纳并反复运用 `haarKappaPoly` 的可加性与 [@thm-ch11-haar-even-char-expectation]，所有满足 $r \ge 1$ 的项悉数归零，仅存下端点指示量 $\delta_{\lvert m - n\rvert, 0} = \delta_{m, n}$（因指标 $r = 0$ 落入 $[\lvert m - n\rvert, m + n]$ 当且仅当 $\lvert m - n\rvert = 0$，即 $m = n$）。完整证明由 Lean 内核检查。
 :::
 
 至此，[@thm-ch11-peter-weyl-chi012-orthonormal] 的三阶正交格拉姆矩阵 $I_3$ 被无缝纳入 [@thm-ch11-all-degree-peter-weyl-orthonormal] 覆盖全部 $m, n \in \mathbb{N}$ 的零公理全谱定理中，全程不依赖实数、极限或半个 $\pi$。（从组合直觉旁观，把 $\mathbb{E}[\kappa^k] = \frac{1}{4^k(k + 1)}\binom{2k}{k}$ 代入 $E_r(\kappa) = \sum_{k = 0}^{r} (-1)^{r - k}\binom{r + k}{2k} 4^k \kappa^k$ 也会看见 $4^k$ 与 $4^{-k}$ 彻底对消，留下 $r$ 次多项式 $\binom{r + x}{r}$ 的 $(r + 1)$ 阶前向差分，恰与上述内核移位矩表互为映照。）同理，回到[第十章](ch10-peter-weyl-rational-spin-shells.md)的 $5d^8$ 四极张量 $\mathbf{Q}_{\mathrm{phys}}(5d^8) = \diag(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7})$：在旋转作用 $\operatorname{Ad}(q)\,\mathbf{Q}\,\operatorname{Ad}(q)^\top$ 下，旋转矩阵元的二次积展开为 $(w, x, y, z)$ 的四次齐次多项式除以 $\lVert q\rVert^4$；代入 $H(2,0,0,0) = \frac{1}{8}$、$H(1,1,0,0) = \frac{1}{24}$ 与奇次项归零，旋转平均直接坍缩为 $\frac{1}{3}(\Tr \mathbf{Q})\,I_3 = \mathbf{0}_{3\times 3}$，全程不借半个 $\pi$。
