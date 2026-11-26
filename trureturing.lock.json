@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "12036e5e3cc8d8d9f92467546faa8e37a61702b4",
-  "pinned_at": "2026-11-26T18:28:33Z",
+  "commit": "914f3edc9ed058836d4def81f6515e59ec36539b",
+  "pinned_at": "2026-11-26T18:55:59Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -895,8 +895,8 @@
       "name": "D5.S1.Words.TribonacciPrefixRefutation.result",
       "kind": "theorem",
       "statement_id": "sha256:fc522e5464c70a047b2f8ffda8f800f4882168a6fb3ab7b062a269ce9ee8c051",
-      "line": 0,
-      "signature": ""
+      "line": 255,
+      "signature": "theorem result : ¬ claim"
     },
     "D5/S1/Words/TribonacciUniformLogSquared.uniform_log_squared": {
       "module": "D5/S1/Words/TribonacciUniformLogSquared",
@@ -1920,6 +1920,32 @@
       "statement_id": "sha256:a7beca108f981e63bb46191e801d38dd3460a8f2fa82ca2a6a5661589c07e32e",
       "line": 565,
       "signature": "theorem IsChordal.exists_biased_clique_banach_gain_potential {V : Type u} [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (k : ℕ) (hk : 3 ≤ k) (hclique : ∀ s : Finset V, G.IsClique (s : Set V) → s.card ≤ k + 1) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ (4 - 4 / (k : ℝ) - 2 * ((k : ℝ) - 2)^2 / ((k : ℝ) * ((k : ℝ) - 1)^3)) * ε"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/WeightedSimplicialBanachPotential.SimpleGraph.IsChordal.exists_weighted_simplicial_banach_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/WeightedSimplicialBanachPotential",
+      "name": "SimpleGraph.IsChordal.exists_weighted_simplicial_banach_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:9f2c9a26619c97c622d06cc391abcfd9916ff3cc06a60a7c53089a98d1c73072",
+      "line": 379,
+      "signature": "theorem IsChordal.exists_weighted_simplicial_banach_gain_potential {V : Type*} [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (k : ℕ) (hk : 2 ≤ k) (hclique : ∀ C : Set V, G.IsClique C → C.ncard ≤ k + 1) {E : Type*} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hskew : ∀ x y, g y x = -g x y) (htri : ∀ x y z, G.Adj x y → G.Adj y z → G.Adj x z → ‖g x y + g y z - g x z‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ max ((k : ℝ) - 2) (((k : ℝ) - 1 + Real.sqrt (((k : ℝ) + 3)^2 - 16)) / 4) * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/WeightedSimplicialBanachPotential.SimpleGraph.cliqueTree_occurrenceCenter_banach_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/WeightedSimplicialBanachPotential",
+      "name": "SimpleGraph.cliqueTree_occurrenceCenter_banach_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:9f2c9a26619c97c622d06cc391abcfd9916ff3cc06a60a7c53089a98d1c73072",
+      "line": 721,
+      "signature": "theorem cliqueTree_occurrenceCenter_banach_potential {V : Type*} [Fintype V] {I : Type*} [Finite I] {T : SimpleGraph I} {G : SimpleGraph V} {K : I → Set V} (hK : IsCliqueTree T G K) (hsep : ∀ a b, T.Adj a b → (K a ∩ K b).Nonempty) (π : I → V → ℝ) (hπ : ∀ a x, 0 ≤ π a x) (hsupp : ∀ a x, x ∉ K a → π a x = 0) (htotal : ∀ a, ∑ x, π a x = 1) (α d : ℝ) (hd₀ : 0 ≤ d) (hα : ∀ a u v, u ∈ K a → v ∈ K a → G.Adj u v → 1 - π a u - π a v ≤ α) (hd : ∀ a b, T.Adj a b → (1 - 1 / ((K a ∩ K b).ncard : ℝ)) * (1 - ∑ x ∈ (K a ∩ K b).toFinite.toFinset, min (π a x) (π b x)) ≤ d) (D : ℕ) (hD : ∀ x a b, x ∈ K a → x ∈ K",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Combinatorics/Graph/Hypercube/DirectionMatching.exact_matching_directions": {
       "module": "D5/S3/Combinatorics/Graph/Hypercube/DirectionMatching",

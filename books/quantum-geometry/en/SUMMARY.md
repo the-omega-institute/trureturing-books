@@ -281,6 +281,7 @@
   - [E.7 Panoramic Audit and Further-Processing Table for the Nine Intermediate Hypotheses (H1–H9)](appendix-e-s07-intermediate-hypotheses-audit.md)
   - [E.8 Third-Point Redundancy and Positivity of the Involution: Reducing H2 and H3 with the Arc-Body Calculus, and Restating the Inputs of H5–H7](appendix-e-s08-third-point-redundancy.md)
     - [E.8.1 Comparison potentials, Gram positivity, and curvature](appendix-e-s08-s01-potential-and-positivity.md)
+      - [E.8.1.4 Where Curvature Comes From](appendix-e-s08-s01-s04-curvature.md)
     - [E.8.2 Born weights, dynamics, and ensembles](appendix-e-s08-s02-born-dynamics-ensembles.md)
     - [E.8.3 Orbits, observers, and complex structure](appendix-e-s08-s03-orbits-and-structure.md)
 - [Appendix F Exclusion Balls, Face Polarity, and Spin-Factor Orientation Classification](appendix-f.md)

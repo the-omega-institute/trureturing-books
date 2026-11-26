@@ -596,6 +596,51 @@ $$
 
 **手工推导。** 两项都允许任意大的袋，也都允许袋内的棱连接不同的入射分隔集，可与 [@thm-appe-complete-cliquesum-banach] 中的分离团和条件比较。任意有限 $m\ge1$ 都给出 $R_\ell<1+\ell$（$\ell\ge1$），因为递推中最后一项严格小于 $1+R_\ell$。故第 1 项在 $D\le5$ 时给出严格小于 $3$ 的系数，在 $D\le7$ 时给出严格小于 $4$ 的系数。若 $m\le4$ 且 $D\le19$，用 $m=4$ 的递推作上界，得 $R_9=373533/131072<20/7$，严格低于 [@thm-appe-multitier-universal-banach] 的一般 $4$-树上界。第 2 项在每个顶点至多属于两个袋时，对任意直径都给出 $M(T,K)<3$。无团大小限制的弦图上，实 Banach 通用系数在 $[2,4]$ 内、双不变伪度量群的通用系数在 $\{2,3,4\}$ 中的精确值仍待确定。是否有 $3$-树的系数超过 $4/3$，以及 $C_{\mathrm{SU}(2)}(K_4)$ 在 $[c_*,4/5]$ 内的精确值，也仍是开放问题。后一个问题见 [@prob-appe-round-quaternion-k4-optimal-constant]。
 
+给前驱与团袋中的星势加权，可以分别利用旧残差的抵消和相邻团袋的共同权重来控制重构误差。
+
+::: {.theorem #thm-appe-weighted-simplicial-and-occurrence-banach title="加权单纯消元与团树出现子树中心的 Banach 势界" lean="D5/S3/Combinatorics/Graph/Chordal/WeightedSimplicialBanachPotential.SimpleGraph.IsChordal.exists_weighted_simplicial_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/WeightedSimplicialBanachPotential.SimpleGraph.cliqueTree_occurrenceCenter_banach_potential"}
+两款均取任意实半范数向量空间 $E$、实数 $\varepsilon\ge0$ 和增益 $g:V\times V\to E$。对所有 $x,y\in V$，有 $g(y,x)=-g(x,y)$。当 $xy,yz,xz$ 都是 $G$ 的边时，有 $\|g(x,y)+g(y,z)-g(x,z)\|\le\varepsilon$。势 $\varphi:V\to E$ 在有向邻接对 $(u,v)$ 上的残差为 $g(u,v)-(\varphi(v)-\varphi(u))$。
+
+1. **有界团大小弦图的加权单纯消元。** 设 $G$ 是有限顶点集 $V$ 上的简单弦图，$k\in\mathbb N$ 且 $k\ge2$，并且 $G$ 的每个团至多有 $k+1$ 个顶点。则存在势 $\varphi$，使 $G$ 的每条有向边上的残差半范数至多为
+
+   $$
+   R_k\varepsilon,\qquad R_k=\max\left\{k-2,\frac{k-1+\sqrt{(k+3)^2-16}}{4}\right\}.
+   $$
+
+2. **加权团树的出现子树中心。** 设 $V,I$ 为有限集，$G$ 是 $V$ 上的简单图，$(T,K)$ 是 $G$ 在指标集 $I$ 上的团树，团袋为 $K(a)\subseteq V$，团树的定义见 [@thm-appe-cliquetree-banach-potential]。每条树边 $ab$ 的分隔集 $S_{ab}=K(a)\cap K(b)$ 非空。对每个 $a\in I$，取支撑于 $K(a)$ 的概率分布 $\pi_a:V\to\mathbb R_{\ge0}$，即在 $K(a)$ 外取零且 $\sum_{x\in V}\pi_a(x)=1$。取实数 $\alpha,d$，其中 $d\ge0$，并满足以下条件。
+
+   $$
+   \begin{aligned}
+   1-\pi_a(x)-\pi_a(y)&\le\alpha &&\text{若 }x,y\in K(a)\text{ 且 }xy\text{ 是 }G\text{ 的边},\\
+   \left(1-\frac1{|S_{ab}|}\right)\left(1-\sum_{x\in S_{ab}}\min\{\pi_a(x),\pi_b(x)\}\right)&\le d &&\text{若 }ab\text{ 是 }T\text{ 的边}.
+   \end{aligned}
+   $$
+
+   设 $D\in\mathbb N$，且对每个 $x\in V$ 和任意两个含 $x$ 的团袋 $K(a),K(b)$，有 $\operatorname{dist}_T(a,b)\le D$。则存在势 $\varphi$，使每条有向边上的残差半范数至多为 $\bigl(\alpha+4\lfloor(D+1)/2\rfloor d\bigr)\varepsilon$。若 $D\le1$，同一势在每条有向边上的残差半范数也至多为 $(\alpha+2d)\varepsilon$。
+:::
+
+::: {.proof #pf-appe-weighted-simplicial-and-occurrence-banach}
+**加权消元。** 反转由狄拉克定理逐次得到的单纯顶点删除顺序。每个顶点 $v$ 的前驱邻点集 $S_v$ 是团，加入 $v$ 后仍是团，故 $|S_v|\le k$。令 $R=R_k$、$s=1/(1+R)$、$t=1-(k-1)s$。由 $(k+3)^2-16\le9(k-1)^2$ 可得 $k-2\le R\le k-1$，从而 $0\le t\le s$。令 $\varphi(v)$ 为候选值 $\varphi(w)+g(w,v)$ 的加权平均。若 $0<|S_v|<k$，取均匀权重。若 $|S_v|=k$，给排序最靠后的前驱权重 $t$，其余权重均为 $s$。若无前驱，取 $\varphi(v)=0$。记权重为 $w_v(w)$，残差为 $r_{w,v}$。加权平均给出恒等式 $\sum_{w\in S_v}w_v(w)r_{w,v}=0$，后续各步不会改变这些残差。
+
+对 $x\in S_v$，将其候选值减去平均值，得到 $r_{x,v}$。其中 $w=x$ 的项为零，其余各项是旧残差 $r_{x,w}$ 与三角缺陷 $g(x,v)-g(x,w)-g(w,v)$ 之和。若 $x$ 的权重至少为 $s$，这些项的总权重至多为 $1-s$，归纳界给出 $(1-s)(R+1)\varepsilon=R\varepsilon$。这涵盖了均匀情形，因为 $|S_v|\le k-1\le1+R$。
+
+若 $|S_v|=k$ 且 $x$ 是排序最靠后的前驱，则 $A=S_v\setminus\{x\}\subseteq S_x$ 且 $|A|=k-1$。由反对称性，$x$ 的零和恒等式也适用于反向残差 $r_{x,w}$。若 $A=S_x$，均匀权重使 $\sum_{w\in A}s r_{x,w}=0$。否则 $S_x=A\cup\{z\}$，记 $S_x$ 中排序最靠后的顶点为 $b$。从 $\sum_{w\in A}s r_{x,w}$ 减去 $x$ 的加权零和，余下 $(s-t)r_{x,b}-s r_{x,z}$，其半范数至多为 $(2s-t)R\varepsilon$。三角缺陷贡献至多 $(k-1)s\varepsilon$。$R_k$ 的根式项是 $2R^2-(k-1)R-(k-1)=0$ 的正根，取最大值便有 $2R^2-(k-1)R-(k-1)\ge0$。代入 $s,t$，这正是 $(k-1)s+(2s-t)R\le R$，归纳完成。
+
+**出现子树中心。** 取加权星势 $p_a(v)=\sum_{x\in K(a)}\pi_a(x)g(x,v)$。团袋内的边残差是三角缺陷的加权平均，两端点的项为零，故残差半范数至多为 $\alpha\varepsilon$。用树上平移构造 `tree_offsets` 从根出发，沿每条边累加 $p_a-p_b$ 在 $S_{ab}$ 上的平均值，得到平移后的势 $\psi_a$，使 $\psi_b-\psi_a$ 在每个 $S_{ab}$ 上均值为零。
+
+令 $M=1-\sum_{x\in S_{ab}}\min\{\pi_a(x),\pi_b(x)\}$。在 $S_{ab}$ 内两点之间，$\psi_b-\psi_a$ 的增量是两个局部残差之差。从两组权重中各减去共同权重后，每组只余非负质量 $M$，所以增量的半范数至多为 $2M\varepsilon$。固定一端，对分隔集中的另一端取平均。由零均值条件，该平均等于固定端的势差，而两端重合时增量为零。因此共有顶点处的势差半范数至多为 $2(1-1/|S_{ab}|)M\varepsilon\le2d\varepsilon$。
+
+含顶点 $v$ 的团袋构成子树。取其最长路径的一个中间顶点为中心。任一分支到该路径的距离不超过接点到两端的较短距离，否则可延长最长路径。因此中心到任一团袋的距离至多为 $\lfloor(D+1)/2\rfloor$。取 $\varphi(v)$ 为中心处的平移后势值。每条边都在某个团袋内，从该团袋沿出现子树到各端点的中心逐步累加势差，两端合计增加至多 $4\lfloor(D+1)/2\rfloor d\varepsilon$ 的误差。
+
+当 $D\le1$ 时，一个顶点至多出现在两个团袋内，因为三个两两邻接的团袋会成环。只有一个团袋就取其势值，有两个便取中点。每个端点相对边所在团袋的改变量至多为 $d\varepsilon$，从而给出 $(\alpha+2d)\varepsilon$。当 $D=0$ 时两端都无需移动，得到 $\alpha\varepsilon$。当 $D=1$ 时，中点界也蕴含一般界。完整证明由 Lean 内核检查。
+:::
+
+第 1 款给出 $R_2=1$ 及 $R_3=(1+\sqrt5)/2<5/3<2$，因而所有团大小至多为 $4$ 的弦图（包括所有 $3$-树）都有低于 $2$ 的统一系数。$R_4=(3+\sqrt{33})/4<7/3<20/7$，严格改进了 [@thm-appe-multitier-universal-banach] 中所有 $4$-树的界。$R_5=3<40/13$ 适用于团大小至多为 $6$ 的所有弦图。
+
+第 2 款的下列推论允许任意团大小与团树直径，各团袋均须非空。若 $D\le2$ 且团树最大度数至多为 $3$，可取严格小于 $11/3$ 的系数。若 $D\le1$ 且最大度数至多为 $2$，可取严格小于 $2$ 的系数。若 $D\le2$ 且每条树边满足 $\max\{|K(a)|,|K(b)|\}\le c|S_{ab}|$（$c\ge1$），可取系数 $5-4/c$，在 $c=2$ 时为 $3$，在 $c=4/3$ 时为 $2$。
+
+团大小不受限时，区间 $[2,4]$ 内的最优实 Banach 统一系数、集合 $\{2,3,4\}$ 中的双不变伪度量群最优统一系数，以及是否有 $3$-树的系数超过 $4/3$，均仍待确定。等式 $C_{\mathrm{SU}(2)}(K_4)=c_*$ 的全局 Lean 形式化也仍是开放问题。见 [@prob-appe-round-quaternion-k4-optimal-constant]。
+
 接下来固定非线性目标群，考察完全图上的最优系数。
 
 **四顶点图上的 $\mathrm{SU}(2)$ 圆度量反例。** 四点弦图若无三角形便是森林。若只有一个三角形，可规范化两条辐棱，把余棱写成 $\exp X$，再取势 $1,\exp(-X/3),\exp(X/3)$，三棱误差各为 $|X|/3\le\varepsilon/3$。附着的树棱可精确拟合。剩下的非完全图是两三角形共一棱的菱形图。把一个度数为 $3$ 的顶点取作中心，将辐棱规范化为 $1$。在外缘路径的中间顶点取势 $1$，两端各在 $1$ 与精确拟合相应外缘棱的值之间取最短测地线中点，误差至多 $\varepsilon/2$。
@@ -869,132 +914,4 @@ $$
 
 这里的因子 $m-2$ 与 [@thm-appe-chordal-gain-potential-stability] 中的 $\lvert V\rvert-2$ 来源不同：定理中它是沿消去次序累积的三点偏差的个数，这里它是扰动矩阵每行非零元的个数。
 
-## E.8.1.4 曲率从哪里来 {#sec-appe-curvature-from-half-comparison}
-
-条款 IV 让一切三点和乐等于 $\mathbf{1}$，而球面角盈与贝里相位确实存在。两者并不冲突：平坦的是全比较，弯曲的是它的平方根。
-
-::: {.remark #rem-appe-half-comparison-holonomy title="全比较平坦，半比较的三点和乐是吉拉尔角盈（手工推导与文献结果）"}
-**手工推导。** 对求同读数为实标量 $s>-1$ 的公平元 $u$，由 $u+u^*=2s\mathbf{1}$ 得 $u^2=2su-\mathbf{1}$，于是 $(\mathbf{1}+u)^2=2(1+s)\,u$。令
-
-$$
-r(u):=\frac{\mathbf{1}+u}{\sqrt{2(1+s)}},
-$$
-
-则 $r(u)$ 是公平元且 $r(u)^2=u$，称为 $u$ 的**半比较**。它的求同读数满足 $S(r)^2=\frac{1+s}{2}=1-\frac v2$。
-
-在 $\mathcal{Cl}_{3,0}$ 中取两两不对径的单位向量 $a,b,c$，记 $r_{ab}=r(ab)$，$[a,b,c]=a\cdot(b\times c)$，$\mathbf{I}=e_1e_2e_3$。则全比较满足 $ab\cdot bc\cdot ca=\mathbf{1}$，而
-
-$$
-r_{ab}\,r_{bc}\,r_{ca}=\frac{(1+a\cdot b+b\cdot c+c\cdot a)+[a,b,c]\,\mathbf{I}a}{\sqrt{2(1+a\cdot b)(1+b\cdot c)(1+c\cdot a)}} .
-$$
-
-推导：$(\mathbf{1}+ab)(\mathbf{1}+bc)(\mathbf{1}+ca)=2+ab+ba+ca+ac+bc+a(bc)a$，其中用到 $ab\cdot bc=ac$、$bc\cdot ca=ba$、$ab\cdot ca=a(bc)a$ 与 $ab\cdot bc\cdot ca=\mathbf{1}$。标量部分是 $2(1+a\cdot b+b\cdot c+c\cdot a)$。双向量部分是 $b\wedge c+a(b\wedge c)a$；记 $b\wedge c=\mathbf{I}n$，$n=b\times c$，则 $a(\mathbf{I}n)a=\mathbf{I}\bigl(2(a\cdot n)a-n\bigr)$，两项相加得 $2[a,b,c]\,\mathbf{I}a$。分母由 $r$ 的公平性确定，同时给出恒等式
-
-$$
-(1+a\cdot b+b\cdot c+c\cdot a)^2+[a,b,c]^2=2(1+a\cdot b)(1+b\cdot c)(1+c\cdot a).
-$$
-
-**文献结果。** 上式右端形如 $\cos\frac\Omega2+\sin\frac\Omega2\,\mathbf{I}a$，是保持 $a$ 不动的旋子，其中 $\frac\Omega2=\operatorname{atan2}\bigl([a,b,c],\,1+a\cdot b+b\cdot c+c\cdot a\bigr)$；分母为正时即 $\tan\frac\Omega2=\dfrac{[a,b,c]}{1+a\cdot b+b\cdot c+c\cdot a}$。$\lvert\Omega\rvert$ 是球面三角形 $abc$ 的面积，即吉拉尔角盈，$\Omega$ 的符号由 $[a,b,c]$ 的符号给出（van Oosterom–Strackee 1983；Eriksson 1990）。
-
-**与冻结定理的对应。** 乘积公式与分母恒等式在泡利矩阵模型里已冻结，见 [@thm-appe-bloch-triangle-return-phase]。分子的两个量 $1+a\cdot b+b\cdot c+c\cdot a$ 与 $[a,b,c]$ 正是 [`triple_bargmann_bloch`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch) 中 $4\operatorname{Tr}(P_aP_bP_c)$ 的实部与虚部。把上面的恒等式与 $\det G(a,b,c)=[a,b,c]^2$ 联立（$[a,b,c]^2$ 的展开式冻结为 [`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)），得到
-
-$$
-\det G(a,b,c)=(2-v_{ab})(2-v_{bc})(2-v_{ca})\,(1-\cos\Omega),\qquad v_{xy}=1-x\cdot y ,
-$$
-
-其中 $\det G$ 的展开式见 [`three_anchor_gram_det_formula`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula)。
-:::
-
-$S(r)^2=1-\frac v2$ 在布洛赫球上就是 $\cos^2\frac\theta2$：半比较求同读数的平方等于 $1$ 减去半个矢高，这是玻恩权重的弦—矢高写法，它本身不替代 `H5` 的可加性前提。行列式公式说的是：三点格拉姆体积等于三个互补矢高之积乘以角盈的矢高，[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)“二生三”原胞的 $\det G=\sin^4\epsilon$ 是它的特例。对 `H8` 而言，第 1 层内生的射影和乐不需要新的输入，它是条款 IV 之下把全比较开平方的结果；仍然需要第 2 层新输入的，是随时空基点变化的纤维联络及其动力学。
-
-乘积公式不只停在手工推导上。把 $\mathcal{Cl}_{3,0}$ 换成它的泡利矩阵模型（$e_k\mapsto\sigma_k$，$\mathbf{I}\mapsto i\mathbf{1}$，对合 ${}^*$ 对应共轭转置），半比较成为一个具体的 $2\times2$ 酉矩阵，下面两条结论已在 Lean 中验证。对 $r\in\mathbb{R}^3$ 记 $r\cdot\sigma=r_1\sigma_x+r_2\sigma_y+r_3\sigma_z$，$P_r=\frac12(\mathbf{1}+r\cdot\sigma)$；对 $\phi\in\mathbb{C}^2$ 记向 $r$ 的归一化投影
-
-$$
-N_r(\phi):=\frac{P_r\phi}{\sqrt{\operatorname{Re}\,\phi^\dagger P_r\phi}} .
-$$
-
-::: {.lemma #lem-appe-rotor-gate-normalized-projection title="旋子门把 $a\cdot\sigma$ 转到 $b\cdot\sigma$，在本征旋量上等于归一化投影" lean="D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.rotor_shortest_gate"}
-设 $a,b\in\mathbb{R}^3$ 是单位向量且 $b\neq-a$，令
-
-$$
-R_{a\to b}:=\frac{\mathbf{1}+(b\cdot\sigma)(a\cdot\sigma)}{\sqrt{2(1+a\cdot b)}} .
-$$
-
-则
-
-1. $R_{a\to b}\,R_{a\to b}^\dagger=\mathbf{1}$；
-2. $R_{a\to b}\,(a\cdot\sigma)\,R_{a\to b}^\dagger=b\cdot\sigma$；
-3. 对满足 $\psi^\dagger\psi=1$ 与 $P_a\psi=\psi$ 的 $\psi\in\mathbb{C}^2$，有 $R_{a\to b}\,\psi=N_b(\psi)$。
-:::
-
-::: proof
-记 $A=a\cdot\sigma$，$B=b\cdot\sigma$，则 $A^2=B^2=\mathbf{1}$，$AB+BA=2(a\cdot b)\mathbf{1}$。分子 $\mathbf{1}+BA$ 满足 $(\mathbf{1}+BA)(\mathbf{1}+AB)=2(1+a\cdot b)\mathbf{1}$ 与 $(\mathbf{1}+BA)A(\mathbf{1}+AB)=2(1+a\cdot b)B$，这是前两条。第三条：$A\psi=\psi$ 给出 $(\mathbf{1}+BA)\psi=2P_b\psi$，而 $\psi^\dagger P_b\psi=\frac{1+a\cdot b}{2}>0$，两边的归一化因子相同。完整证明由 Lean 内核检查。
-:::
-
-::: {.theorem #thm-appe-bloch-triangle-return-phase title="布洛赫三角上三次旋子门的返回相位" lean="D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy"}
-设 $a,b,c\in\mathbb{R}^3$ 是单位向量，$b\neq-a$，$c\neq-b$，$a\neq-c$。记
-
-$$
-S:=1+a\cdot b+b\cdot c+c\cdot a,\qquad D:=a\cdot(b\times c).
-$$
-
-则
-
-1. $S^2+D^2=2(1+a\cdot b)(1+b\cdot c)(1+c\cdot a)$，且 $S^2+D^2>0$；
-2. 三个旋子门的乘积为
-
-   $$
-   R_{c\to a}\,R_{b\to c}\,R_{a\to b}=\frac{S\,\mathbf{1}-iD\,(a\cdot\sigma)}{\sqrt{S^2+D^2}} ;
-   $$
-
-3. 对满足 $\psi^\dagger\psi=1$ 与 $P_a\psi=\psi$ 的 $\psi\in\mathbb{C}^2$，依次向 $b$、$c$、$a$ 做归一化投影，得
-
-   $$
-   N_a\bigl(N_c(N_b(\psi))\bigr)=\frac{S-iD}{\sqrt{S^2+D^2}}\,\psi .
-   $$
-:::
-
-::: proof
-第 1 条：记 $x=a\cdot b$，$y=b\cdot c$，$z=c\cdot a$。格拉姆恒等式 $D^2=1+2xyz-x^2-y^2-z^2$（[`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)）代入后，$S^2+D^2$ 展开为 $2(1+x)(1+y)(1+z)$；三个因子在两两不对径时都为正。第 2 条：三个分子相乘得 $(\mathbf{1}+AC)(\mathbf{1}+CB)(\mathbf{1}+BA)=2S\,\mathbf{1}-2iD\,A$，三个归一化因子之积由第 1 条等于 $2\sqrt{S^2+D^2}$。第 3 条：[@lem-appe-rotor-gate-normalized-projection] 的第 3 条把每一次归一化投影换成相应的旋子门，前两条保证每一步之后的旋量仍是单位旋量并落在下一步所需的本征空间里；最后用 $A\psi=\psi$。完整证明由 Lean 内核检查。
-:::
-
-与 [@rem-appe-half-comparison-holonomy] 对照：$R_{a\to b}$ 是 $r_{ba}=r_{ab}^*$ 的像，所以定理第 2 条是注记中乘积的对合 $(r_{ab}\,r_{bc}\,r_{ca})^*=r_{ac}\,r_{cb}\,r_{ba}$，$D$ 前的符号随之由正变负；第 1 条就是注记末尾的恒等式。第 3 条给出第 2 条的操作读法：从 $a$ 的本征旋量出发，沿 $a\to b\to c\to a$ 做三次归一化投影，回到原旋量并乘上模为 $1$ 的因子 $(S-iD)/\sqrt{S^2+D^2}$。Lean 没有陈述的部分照旧分层：把辐角 $\operatorname{atan2}(D,S)$ 等同于半个吉拉尔角盈是文献结果；旋子的指数形式没有形式化；“最短”意义下的最小性与唯一性也没有形式化，Lean 模块里 `rotor` 与 `shortestGate` 只是名字。Lean 中 $N_r(\phi)$ 对一切 $\phi$ 有定义（分母为零时按 Lean 的约定取零向量）；定理只在各步分母 $\sqrt{(1+u\cdot v)/2}>0$ 处用到它。
-
-[@rem-appe-real-realizability-return-phase] 第 1、2 款在“有一个对象与其余每个对象都不正交”的情形已在所钉仓库冻结，陈述如下；这时不需要填满的条件。一般的填满情形与单比特的第 4 款仍是手工推导。
-
-::: {.proposition #prop-appe-real-rephasing-star title="有一行不含零的厄米矩阵：可重定相为实矩阵，当且仅当三点乘积全为实" lean="D5/S3/Quantum/PureState/BargmannRealRephasing.exists_real_rephasing_iff_triple_products_real D5/S3/Quantum/PureState/BargmannRealRephasing.exists_real_gram_rephasing_iff_triple_products_real"}
-设 $G$ 是 $N\times N$ 复矩阵，$i_0$ 是一个指标，并且 $G_{i_0j}\neq0$ 对每个 $j$ 成立。
-
-1. 若 $G$ 是厄米矩阵，则存在实数 $\theta_1,\dots,\theta_N$ 使一切 $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ 为实数，当且仅当对一切指标 $i,j,k$（允许重复），$G_{ij}G_{jk}G_{ki}$ 为实数。
-2. 若 $G$ 半正定，则存在实数 $\theta_1,\dots,\theta_N$ 与 $N\times N$ 实矩阵 $B$，使 $e^{i\theta_i}G_{ij}e^{-i\theta_j}=\left(B^{\mathsf T}B\right)_{ij}$ 对一切 $i,j$ 成立，当且仅当对一切指标 $i,j,k$，$G_{ij}G_{jk}G_{ki}$ 为实数。
-:::
-
-::: proof
-“仅当”：相位沿 $i\to j\to k\to i$ 相消，重定相不改变 $G_{ij}G_{jk}G_{ki}$，而它在实矩阵中算出来是实数。“当”：取 $\theta_j=\arg G_{i_0j}$。由厄米性 $G_{ji_0}=\overline{G_{i_0j}}$，于是
-
-$$
-e^{i\theta_i}G_{ij}e^{-i\theta_j}=\frac{G_{i_0i}\,G_{ij}\,G_{ji_0}}{\lvert G_{i_0i}\rvert\,\lvert G_{i_0j}\rvert},
-$$
-
-是三点乘积 $G_{i_0i}G_{ij}G_{ji_0}$ 的正实数倍，所以是实数；$G_{ij}=0$ 的元素重定相后仍为零。第 2 款：重定相是 $G\mapsto DGD^{*}$，$D$ 为对角酉矩阵，保持半正定；重定相后的矩阵元素全为实数，所以它是实对称半正定矩阵，可写成 $B^{\mathsf T}B$。
-
-对厄米矩阵，含重复指标的三点乘积（如 $G_{ij}G_{ji}G_{ii}=\lvert G_{ij}\rvert^2G_{ii}$）与含零元的三点乘积自动是实数，所以条件只在非正交图的三角形上有内容，与 [@rem-appe-real-realizability-return-phase] 第 2 款的写法一致。完整证明由 Lean 内核检查。
-:::
-
-返回相位的虚部只在 $D\neq0$ 时出现。两两比较读得出 $D$ 是否为零，读不出它的符号：$D^2=1+2xyz-x^2-y^2-z^2$（$x=a\cdot b$，$y=b\cdot c$，$z=c\cdot a$，即 [`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)）只给出它的平方。$D$ 是否为零恰好回答一个与 `H7` 相邻的问题：一族对象是否需要复数振幅。
-
-::: {.remark #rem-appe-real-realizability-return-phase title="一族对象何时可以只用实数描述：三点巴格曼乘积是否为实（手工推导与文献结果）"}
-**手工推导。** 设 $\psi_1,\dots,\psi_N\in\mathbb{C}^d$ 是单位向量，$G_{ij}=\langle\psi_i,\psi_j\rangle$。把 $G_{ij}\neq0$ 的点对连成图 $\Gamma$，称为**非正交图**。称这族对象**可实化**，若有实数 $\theta_1,\dots,\theta_N$ 使一切 $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ 都是实数。这时该实矩阵是 $e^{-i\theta_i}\psi_i$ 的格拉姆阵，实对称半正定，秩 $r=\operatorname{rank}G\le d$，可写成 $V^{\mathsf T}V$，$V$ 的列是 $\mathbb{R}^r\subseteq\mathbb{C}^d$ 中的实向量 $v_i$；两组向量的格拉姆阵相同，由冻结定理 [`exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq)，有 $d\times d$ 酉矩阵 $U$ 使 $e^{-i\theta_i}\psi_i=Uv_i$。所以可实化就是：乘过相位之后，这族向量落在一个实子空间的酉像里，并且格拉姆阵到相位为止不变。对 $\Gamma$ 中的闭走道 $i_0,i_1,\dots,i_k=i_0$，称 $G_{i_0i_1}G_{i_1i_2}\cdots G_{i_{k-1}i_0}$ 为它的**巴格曼乘积**；它在 $\psi_i\mapsto e^{-i\theta_i}\psi_i$ 下不变。
-
-1. 可实化时，每个巴格曼乘积都是实数，特别是每个三点乘积 $G_{ij}G_{jk}G_{ki}$。
-2. 反之，若 $\Gamma$ 被三角形填满（[@rem-appe-triangle-simple-connectivity]；例如任意两个对象都不正交，或 $\Gamma$ 是弦图），并且 $\Gamma$ 的每个三角形上三点乘积都是实数，则这族对象可实化。
-3. 填满的条件不能去掉：$\mathbb{C}^3$ 中取 $\psi_1=e_1$，$\psi_2=\frac{1}{\sqrt3}(e_1+e_2+e_3)$，$\psi_3=e_2$，$\psi_4=\frac12\bigl(e_1+ie_2-(1+i)e_3\bigr)$。$\psi_1\perp\psi_3$，$\psi_2\perp\psi_4$，其余内积非零，$\Gamma$ 是没有三角形的四圈：第 2 款中“三角形上为实”的要求空真，而“被三角形填满”不成立。四圈的巴格曼乘积 $G_{12}G_{23}G_{34}G_{41}=\frac{1}{\sqrt3}\cdot\frac{1}{\sqrt3}\cdot\frac i2\cdot\frac12=\frac{i}{12}$ 不是实数，由第 1 款这族对象不可实化。
-4. 单比特：设 $\psi_a$ 的布洛赫向量为 $a$。可实化当且仅当全部布洛赫向量落在一个过球心的平面上，当且仅当每三个的有向体积 $D=a\cdot(b\times c)$ 都为零；这里不需要填满的条件，例如 $a,b,-a,-b$ 的非正交图是四圈，它们仍可实化。对两两不对径的 $a,b,c$，[@thm-appe-bloch-triangle-return-phase] 的返回相位 $(S-iD)/\sqrt{S^2+D^2}$ 不是实数当且仅当 $D\neq0$。
-5. 两两求同读数 $a\cdot b$、$b\cdot c$、$c\cdot a$ 只给出 $D^2$。复共轭 $\psi\mapsto\bar\psi$ 把布洛赫向量 $(r_x,r_y,r_z)$ 变为 $(r_x,-r_y,r_z)$：两两读数不变，$D$ 变号，返回相位取共轭。
-
-推导：第 1 款，巴格曼乘积不变，而在实矩阵 $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ 中算出的它是实数。第 2 款，在 $\Gamma$ 的边上令 $g(i,j)=\left(G_{ij}/\lvert G_{ij}\rvert\right)^2$，它只在 $G_{ij}\neq0$ 的边上定义，取值在单位圆群中。$G_{ji}=\overline{G_{ij}}$ 给出 $g(j,i)=g(i,j)^{-1}$。在三角形 $ijk$ 上，记 $B_{ijk}=G_{ij}G_{jk}G_{ki}\neq0$，则 $g(i,j)\,g(j,k)\,g(i,k)^{-1}=g(i,j)\,g(j,k)\,g(k,i)=\left(B_{ijk}/\lvert B_{ijk}\rvert\right)^2$，它等于 $1$ 当且仅当 $B_{ijk}$ 是实数（正负都可以）。所以三点乘积为实，正是 $g$ 在三角形上的链式律 $g(i,j)\,g(j,k)=g(i,k)$。由 [@rem-appe-triangle-simple-connectivity] 第 1 款（$\Gamma$ 是弦图时即 [@thm-appe-chordal-gain-potential]，群取单位圆群），有单位圆群中的 $\varphi_i$ 使 $g(i,j)=\varphi_i^{-1}\varphi_j$。取 $\theta_i$ 使 $e^{2i\theta_i}=\varphi_i$，则 $\left(e^{i\theta_i}G_{ij}e^{-i\theta_j}/\lvert G_{ij}\rvert\right)^2=\varphi_i\,g(i,j)\,\varphi_j^{-1}=1$，所以 $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ 是实数；不相邻的点对上 $G_{ij}=0$ 本来就是实数。第 3 款是直接计算。第 4 款：对秩一投影 $P_a=\lvert\psi_a\rangle\langle\psi_a\rvert=\frac12(\mathbf{1}+a\cdot\sigma)$ 有 $G_{ab}G_{bc}G_{ca}=\operatorname{Tr}(P_aP_bP_c)$，而冻结定理 [`triple_bargmann_bloch`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch) 给出 $\operatorname{Tr}(P_aP_bP_c)=\frac14(S+iD)$，所以三点乘积为实当且仅当 $D=0$。若布洛赫向量都在一个过球心的平面上，用一个转动把这个平面转到 $xz$ 平面，转动由某个酉矩阵实现（$\mathrm{SU}(2)$ 到 $\mathrm{SO}(3)$ 是满射，`文献结果`）；$xz$ 平面上的单位向量 $(\sin\alpha,0,\cos\alpha)$ 的本征旋量是 $\left(\cos\frac\alpha2,\sin\frac\alpha2\right)$，是实向量，所以这族对象可实化。反之，可实化给出 $\mathbb{R}^r\subseteq\mathbb{C}^2$（$r\le2$）中的实向量 $v_i$ 与酉矩阵 $U$，实向量的布洛赫向量在 $xz$ 平面上，$U$ 把这个平面转成另一个过球心的平面。布洛赫向量共一个过球心的平面，当且仅当它们张成的空间至多二维，当且仅当任取三个的有向体积都为零。最后一句是 [@thm-appe-bloch-triangle-return-phase] 第 1、2 条：两两不对径时 $S^2+D^2>0$。第 5 款的 $D^2$ 公式见上文；复共轭的作用是直接计算（$\bar\sigma_y=-\sigma_y$）。
-
-**文献结果。** 第 1 款的方向（非实的巴格曼乘积说明这族对象不能都写成实向量）是 Fernandes、Wagner、Novo 与 Galvão (2024) 的虚性见证；他们还指出，两两重叠的测量足以为四个态的集合见证虚性，对三个态的集合则不能。这与第 4、5 款不矛盾：三个单位向量的两两重叠模长总能由 $\mathbb{R}^3$ 中的实向量实现（把格拉姆阵的三个非对角元都换成它们的模长，行列式不会变小），而第 4 款用到了单比特的维数，并且这里的可实化要求格拉姆阵到相位为止不变。第 2 款的论证与增益图的平衡判据同型：增益图平衡当且仅当增益可以切换为恒等（Zaslavsky 1989）。
-:::
-
-`H7` 在台账里列的“中心复结构”是复合系统层析的输入，这条注记回答的是一个相邻而更窄的问题：一族给定的对象，在保留格拉姆阵到相位为止的意义下，是否需要复数振幅。只要可比三角形填满每个圈，答案可以由三点巴格曼乘积判定，也就是比较值乘积的读数；两两重叠的模长一般不够。在单比特上，两两求同读数通过 $D^2$ 就够了：可实化当且仅当没有三个对象围出非零的有向体积；两两读数看不到的只是 $D$ 的符号，即复共轭交换的那一对手性。这并没有推出复结构。实向量构成的模型满足全部条款（E.8.2.3 的计数），所以“需要复数”仍是输入；改变的是这条输入的形状。第 3 款的四圈与 [@rem-appe-triangle-simple-connectivity] 中的四圈是同一个图：在一般维数中，这个图既让三角相容不足以推出势表示，也让三点读数不足以判定可实化；单比特上的 $a,b,-a,-b$ 说明，在维数受限时同一个图并不妨碍判定。
+对于半比较，返回相位刻画了另一种三点效应。见[曲率从哪里来](appendix-e-s08-s01-s04-curvature.md#sec-appe-curvature-from-half-comparison)。
