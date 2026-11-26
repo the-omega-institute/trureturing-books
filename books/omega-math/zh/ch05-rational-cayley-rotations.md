@@ -39,7 +39,7 @@ $$
 
 所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。我们完全不依赖实数连续统或商公理 `Quot.sound`：三维有理向量以带公共严格正自然数分母的整三元组 `RatVec3` 编码，三维有理矩阵以带公共严格正自然数分母的整矩阵 `RatMat3` 编码，有理相等由交叉相乘等价关系 `RatVec3.Equiv`、`RatMat3.Equiv` 与 `Omega.IntRatio.Equivalent` 刻画。记 $\mathbf{I} - X$ 为 `skewMinus s`、$\mathbf{I} + X$ 为 `skewPlus s`、正向凯莱闭式矩阵 $\mathbf{R}(\boldsymbol{\sigma})$ 为 `Cayley s`，并记从 $\mathbf{v}$ 出发连续作用 $n$ 次凯莱矩阵的结果为 `cayleyIterate s v n`（即 $\mathbf{R}(\boldsymbol{\sigma})^n \mathbf{v}$）。以下四条核心性质在零公理内核中全部无条件成立。
 
-::: {.theorem #thm-ch05-rational-cayley-core title="三维有理凯莱变换的零公理闭合、正交、行列式与迭代保范定理" lean="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_identity D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_orthogonal D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_det D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_iterate_norm"}
+::: {.theorem #thm-ch05-rational-cayley-core title="三维有理凯莱变换的闭合、正交、行列式与迭代保范定理" lean="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_identity D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_orthogonal D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_det D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_iterate_norm"}
 所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。对任意有理三维向量 `s, v : RatVec3` 与任意自然数 `n : Nat`，正向有理凯莱矩阵 `Cayley s`（记作 $\mathbf{R}(\boldsymbol{\sigma})$）满足以下四条精确恒等式：
 
 1. **去分母凯莱闭合方程**（[`cayley_identity`](lean:D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_identity)）：在 `RatMat3.Equiv` 下成立
@@ -142,7 +142,7 @@ $$
 
 并按 $w_p \ge 0$ 取正号、$w_p < 0$ 取负号的构造性符号切换 `orientNumerator`，定义选定卡的球极输出 `output u v` $:= \operatorname{orientNumerator}(w_p, \mathbf{v}_p) / (r_p + \lvert w_p\rvert) : \mathrm{RatVec3}$。下面这条零公理内核定理一举确立归一化分母的 MRP 展开、精确归一和、零选择公理的 $\frac{1}{2}$ 构造下界以及输出闭球锁定。
 
-::: {.theorem #thm-ch05-dual-chart-singularity-free title="双卡修正罗德里格斯分母归一化、构造性半界与闭单位球锁定（零公理内核定理）" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_mrp_denominators D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_sum_one D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_ge_half D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_ball_containment"}
+::: {.theorem #thm-ch05-dual-chart-singularity-free title="双卡修正罗德里格斯分母归一化、构造性半界与闭单位球锁定" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_mrp_denominators D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_sum_one D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_ge_half D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_ball_containment"}
 所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。对任意两枚三维有理向量 `u, v : RatVec3`，记 $r_p := (\operatorname{product}(\mathbf{u}, \mathbf{v})).\mathrm{radius}$ 与分母前驱 $r := (\operatorname{product}(\mathbf{u}, \mathbf{v})).\mathrm{radiusPred}$（故 $r + 1 = r_p$）。则以下四条定理无条件成立：
 
 1. **归一化分母与展开 MRP 分式精确等同**（[`dual_chart_mrp_denominators`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_mrp_denominators)）：在 `Omega.IntRatio.Equivalent` 下同时成立
@@ -183,7 +183,7 @@ $$
 下图把前两节的核心几何机制并置呈现：一边是精确驻留单位球面的有理凯莱变换（[@thm-ch05-rational-cayley-core]）对比向外膨胀脱轨的二阶泰勒截断，另一边则是以零公理半界与闭球锁定定理（[@thm-ch05-dual-chart-singularity-free]）将合成结果锁在单位闭球内的双卡切换结构。
 
 ::: {.figure src="ch05-cayley-dual-chart"}
-**三维有理凯莱锁球轨道对比泰勒截断漂移，以及无奇点双卡切换下界 $\max(D_+, D_-) \ge \frac{1}{2}$。** 图中对照正向有理凯莱迭代 $\mathbf{R}(\boldsymbol{\sigma})^n \mathbf{v}_0$ 在每一步精确保持单位模方（反观二阶泰勒截断 $T_2(X)$ 沿径向逐步膨胀脱轨），并展示双卡乘法 $\boldsymbol{\sigma}_A \star_{\mathcal{S}} \boldsymbol{\sigma}_B$ 在主卡分母 $D_+$ 与阴影卡分母 $D_-$ 之间切换时如何借助 $D_+ + D_- = (1 + \lVert\boldsymbol{\sigma}_A\rVert^2)(1 + \lVert\boldsymbol{\sigma}_B\rVert^2) \ge 1$ 保证 $\max(D_+, D_-) \ge \frac{1}{2}$ 与自动锁球；零公理内核定理见 [@thm-ch05-rational-cayley-core]，双卡定义见 [@def-ch05-dual-chart-star]，十二步数值算例见 [@ex-ch05-cayley-vs-taylor]。
+**三维有理凯莱锁球轨道对比泰勒截断漂移，以及无奇点双卡切换下界 $\max(D_+, D_-) \ge \frac{1}{2}$。** 图中对照正向有理凯莱迭代 $\mathbf{R}(\boldsymbol{\sigma})^n \mathbf{v}_0$ 在每一步精确保持单位模方（反观二阶泰勒截断 $T_2(X)$ 沿径向逐步膨胀脱轨），并展示双卡乘法 $\boldsymbol{\sigma}_A \star_{\mathcal{S}} \boldsymbol{\sigma}_B$ 在主卡分母 $D_+$ 与阴影卡分母 $D_-$ 之间切换时如何借助 $D_+ + D_- = (1 + \lVert\boldsymbol{\sigma}_A\rVert^2)(1 + \lVert\boldsymbol{\sigma}_B\rVert^2) \ge 1$ 保证 $\max(D_+, D_-) \ge \frac{1}{2}$ 与自动锁球；定理见 [@thm-ch05-rational-cayley-core]，双卡定义见 [@def-ch05-dual-chart-star]，十二步数值算例见 [@ex-ch05-cayley-vs-taylor]。
 :::
 
 ## 5.3 无根号伴随旋转：非平方模方也能生成整数正交阵
@@ -211,7 +211,7 @@ $$
 
 为什么根号凭空蒸发了？因为共轭作用同时在两侧乘上 $p$ 与 $\bar{p}$，把本该出现两次的 $\sqrt{N}$ 合并成了单一严格正整数分母 $N = \lVert p\rVert^2 \in \mathbb{Z}_{>0}$！这一无根号伴随作用的三条基本代数法则——三维有理内积守恒、非零整缩放不变（含符号翻转 $p \mapsto -p$）以及四元数乘法同态——已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中由 Lean 内核直接锁死。
 
-::: {.theorem #thm-ch05-rational-adjoint-action title="无根号齐次伴随旋转的零公理保内积、缩放不变与乘法同态定理" lean="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_dot D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_scale D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_hom"}
+::: {.theorem #thm-ch05-rational-adjoint-action title="无根号齐次伴随旋转的保内积、缩放不变与乘法同态定理" lean="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_dot D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_scale D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_hom"}
 所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。设 `p, q : Quaternion` 为满足非零条件 `p.Nonzero` 与 `q.Nonzero` 的整四元数，`k : Int` 为任意非零有号整数（$k \neq 0$），`u, v : RatVec3` 为任意有理三维向量。则齐次无根号伴随作用 `Ad` 满足：
 
 1. **有理内积守恒**（[`ad_dot`](lean:D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_dot)）：在 `Omega.IntRatio.Equivalent` 下成立
@@ -258,7 +258,7 @@ $$
 
 确立了无超越数的三维旋转后，我们转向时间演化中的简谐振荡与大范围球面覆盖。在[第四章](ch04-heaps-and-lie-triple-curvature.md)中，[@thm-ch04-anchored-heap-and-reflection] 已经证明迭代流群反射 $x_{n+2} = [x_{n+1}, x_n, x_{n+1}]$ 等同于定基群中的等步幂次 $b^n$，而 [@def-ch04-pyth-spinor-and-bridge] 则构筑了严格区分 $\pm p$ 的有号毕达哥拉斯旋量载体 `PythSpinor`（带整四元组分子与严格正半径 $r > 0$，满足 $\lVert p_{\mathrm{num}}\rVert^2 = r^2$）。在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）内部，这条有号旋量流群递推在每一个节拍 $n \in \mathbb{N}$ 上都严格守住精确有理单位模方，全程无需实数或开方。
 
-::: {.theorem #thm-ch05-spinor-heap-norm-preserved title="有号毕达哥拉斯旋量流群递推的零公理单位模方守恒定理" lean="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.heap_norm_preserved"}
+::: {.theorem #thm-ch05-spinor-heap-norm-preserved title="有号毕达哥拉斯旋量流群递推的单位模方守恒定理" lean="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.heap_norm_preserved"}
 所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。设 `a, b : PythSpinor` 为任意两枚有号毕达哥拉斯旋量，记 `heapAt a b n : PythSpinor` 为以 $x_0 = a$、$x_1 = b$ 为初值的迭代流群反射序列 $x_{n+2} = [x_{n+1}, x_n, x_{n+1}]$ 在第 $n$ 拍的状态，并记 `spinorNormSq p` 为旋量 $p$ 的有理平方范数 $\lVert p_{\mathrm{num}}\rVert^2 / r^2 \in \mathrm{IntRatio}$。则对一切自然数 `n : Nat`，在 `Omega.IntRatio.Equivalent` 下恒有
 
 $$
@@ -337,7 +337,7 @@ $$
 在进入第六章之前，不妨打开下面的交互实验卡，将本章的三套无超越数旋转机制放在同一座三维舞台上实时对照：调节有理生成元 $\boldsymbol{\sigma}$ 与迭代步数，直观比较精确锁球的 $\mathbf{R}(\boldsymbol{\sigma})$ 及无根号整系数伴随旋转 $\operatorname{Ad}(p_{\mathrm{Half}})$ 如何始终严守单位模方 $1/1$，而二阶泰勒截断 $T_2(X)$ 步步向外漂移；再把相同的有理坐标另作 MRP 输入，实时检查分母下界 $\max(D_+, D_-) \ge \frac{1}{2}$ 如何永不触零并将结果锁在三维单位闭球之内。
 
 ::: {.viz src="ternion-cayley-lab" preset="cayley3d-vs-taylor-drift" height="520"}
-**三维有理凯莱旋转 $\mathbf{R}(\boldsymbol{\sigma})$、无根号伴随旋转 $\operatorname{Ad}(p_{\mathrm{Half}})$ 对比泰勒漂移与双卡分母下界实验。** 实时迭代比较精确有理凯莱变换与二阶泰勒截断 $T_2(X)$ 的模方漂移，核验非平方模方锚点 `pHalf = (1, 1, 0, 0)` 的整系数 $90^\circ$ 伴随作用，并观测双卡乘法中 $\max(D_+, D_-) \ge \frac{1}{2}$ 在有理 MRP 输入上的无奇点切换；零公理内核证明见 [@thm-ch05-rational-cayley-core] 与 [@thm-ch05-rational-adjoint-action]，双卡与数值对照见 [@def-ch05-dual-chart-star]、[@ex-ch05-cayley-vs-taylor] 与 [@ex-ch05-phalf-integer-rotation]。
+**三维有理凯莱旋转 $\mathbf{R}(\boldsymbol{\sigma})$、无根号伴随旋转 $\operatorname{Ad}(p_{\mathrm{Half}})$ 对比泰勒漂移与双卡分母下界实验。** 实时迭代比较精确有理凯莱变换与二阶泰勒截断 $T_2(X)$ 的模方漂移，核验非平方模方锚点 `pHalf = (1, 1, 0, 0)` 的整系数 $90^\circ$ 伴随作用，并观测双卡乘法中 $\max(D_+, D_-) \ge \frac{1}{2}$ 在有理 MRP 输入上的无奇点切换；证明见 [@thm-ch05-rational-cayley-core] 与 [@thm-ch05-rational-adjoint-action]，双卡与数值对照见 [@def-ch05-dual-chart-star]、[@ex-ch05-cayley-vs-taylor] 与 [@ex-ch05-phalf-integer-rotation]。
 :::
 
 ::: {.remark #rem-ch05-where-pi-enters title="圆周率从何闯入，以及迈向球面有理三角学"}

@@ -115,7 +115,7 @@ $$
 
 为什么三元迁移 $[\mathbf{a}, \mathbf{b}, \mathbf{c}] = \operatorname{norm}(\mathbf{a}\bar{\mathbf{b}}\mathbf{c})$ 永远不会把三个合法非零整三元数乘成零四元组 $(0, 0, 0, 0)$，又为何左右消去律与外结合律在射影层面上无条件成立？在零公理基础库 `OmegaMath` 中，我们甚至不需要把最大公约数约分硬塞进核心代数定律里：直接在整四元数 `Quaternion` 上取未约分三元代表元 $\operatorname{triad}(\mathbf{a}, \mathbf{b}, \mathbf{c}) := (\mathbf{a}\bar{\mathbf{b}})\mathbf{c}$，并以纯整数缩放关系 `RayEquiv` 刻画有号射影共线（完全不碰 `Quot.sound`），下面四条零公理冻结定理一次性把范数乘性与流群公理钉死在裸 CIC 内核之中：
 
-::: {.theorem #thm-ch03-quaternion-norm-and-heap-laws title="整四元数四平方乘性与射影流群公理（零公理内核定理）" lean="D5/S3/Quantum/AURICOmega/OmegaTernionHeap.normSq_mul D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_left_absorption D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_right_absorption D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_assoc"}
+::: {.theorem #thm-ch03-quaternion-norm-and-heap-laws title="整四元数四平方乘性与射影流群公理" lean="D5/S3/Quantum/AURICOmega/OmegaTernionHeap.normSq_mul D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_left_absorption D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_right_absorption D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_assoc"}
 设 `Quaternion` 为 `Omega.Int` 上的整四元数类型，配哈密顿乘积 $\mathbf{a}\mathbf{b}$、共轭 $\bar{\mathbf{b}}$、自然数平方范数 $\lVert\mathbf{a}\rVert^2 := \operatorname{normSq}(\mathbf{a}) \in \mathbb{N}$、非零谓词 `Nonzero` 与整数三元代表元 $\operatorname{triad}(\mathbf{a}, \mathbf{b}, \mathbf{c}) := (\mathbf{a}\bar{\mathbf{b}})\mathbf{c}$。称两枚整四元数 $\mathbf{a}, \mathbf{b}$ 满足射影射线等价 $\mathbf{a} \sim_{\mathrm{ray}} \mathbf{b}$（`RayEquiv a b`），若二者均非零且存在非零整数 $k, l \in \mathbb{Z} \setminus \{0\}$ 使 $k\mathbf{a} = l\mathbf{b}$。则在裸 CIC（仅依赖 `OmegaInit` 与 `OmegaMath`，零公理）中，以下四条定理全部成立：
 
 1. **欧拉—拉格朗日四平方乘性**（[`normSq_mul`](lean:D5/S3/Quantum/AURICOmega/OmegaTernionHeap.normSq_mul)）：对一切 $\mathbf{a}, \mathbf{b} : \mathrm{Quaternion}$，
@@ -149,7 +149,7 @@ $$
 
 有了四平方乘性与流群公理，接下来要锁死读数通道：如何不借实数柯西—施瓦茨不等式、全凭整数恒等式证出射影保真度 $\kappa(\mathbf{a}, \mathbf{b}) \le 1$，并确认它在共同流群平移下精确不变？答案藏在四维拉格朗日恒等式里——$\lVert\mathbf{a}\rVert^2\lVert\mathbf{b}\rVert^2$ 与 $\langle\mathbf{a}, \mathbf{b}\rangle^2$ 的差值，恰好等于六枚 $2 \times 2$ 普吕克子式（Plücker minors）的整数平方和！这三条定理同样落在零公理 `OmegaInit` 与 `OmegaMath` 内核层中：
 
-::: {.theorem #thm-ch03-lagrange-and-kappa-invariance title="四维拉格朗日恒等式、射影保真度上界与流群平移不变性（零公理内核定理）" lean="D5/S3/Quantum/AURICOmega/OmegaTernionHeap.lagrange_identity D5/S3/Quantum/AURICOmega/OmegaTernionHeap.kappa_le_one D5/S3/Quantum/AURICOmega/OmegaTernionHeap.kappa_heap_invariant"}
+::: {.theorem #thm-ch03-lagrange-and-kappa-invariance title="四维拉格朗日恒等式、射影保真度上界与流群平移不变性" lean="D5/S3/Quantum/AURICOmega/OmegaTernionHeap.lagrange_identity D5/S3/Quantum/AURICOmega/OmegaTernionHeap.kappa_le_one D5/S3/Quantum/AURICOmega/OmegaTernionHeap.kappa_heap_invariant"}
 对整四元数 $\mathbf{a} = (a_w, a_x, a_y, a_z)$ 与 $\mathbf{b} = (b_w, b_x, b_y, b_z)$，记欧氏整内积为 $\langle\mathbf{a}, \mathbf{b}\rangle := \mathbf{a}\cdot\mathbf{b} \in \mathbb{Z}$，在 `Omega.IntRatio` 中定义射影保真度 $\kappa(\mathbf{a}, \mathbf{b}) := \operatorname{IntRatio.value}\bigl(\langle\mathbf{a}, \mathbf{b}\rangle^2,\, \lVert\mathbf{a}\rVert^2\lVert\mathbf{b}\rVert^2\bigr)$，并定义六枚 $2 \times 2$ 普吕克子式的平方和为
 
 $$
@@ -249,7 +249,7 @@ $$
 
 上述第 4 款中两枚绕正交轴各转四分之一圈的锚点的次序敏感分裂并不止于手工验算：无需约分、无需商集公理 `Quot.sound`，下面这条冻结在零公理基础库 `OmegaInit` 与 `OmegaMath` 中的见证定理直接在射影射线等价关系 `Ternion.RayEquiv` 上锁死了非交换性：
 
-::: {.theorem #thm-ch03-phalf-qhalf-noncommutative title="绕正交轴各转四分之一圈的锚点的射影三元非交换见证（零公理内核定理）" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative"}
+::: {.theorem #thm-ch03-phalf-qhalf-noncommutative title="绕正交轴各转四分之一圈的锚点的射影三元非交换见证" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative"}
 在零公理库 `OmegaMath`（仅依赖 `OmegaInit` 与 `OmegaMath`，零公理）中，取整四元数锚点 $p_0 := (1, 0, 0, 0)$、$p_{\mathrm{Half}} := (1, 1, 0, 0)$ 与 $q_{\mathrm{Half}} := (1, 0, 1, 0)$，沿用 [@thm-ch03-quaternion-norm-and-heap-laws] 中的整数三元代表元 $\operatorname{triad}(\mathbf{a}, \mathbf{b}, \mathbf{c}) := (\mathbf{a}\bar{\mathbf{b}})\mathbf{c}$ 与射影射线等价关系 $\sim_{\mathrm{ray}}$（`Ternion.RayEquiv`）。则反序三元积不共射线：
 
 $$
@@ -300,7 +300,7 @@ $$
 在合上第一卷之前，不妨在下方交互实验卡中亲手检验整三元数的规范化与非交换自锁：切换整四元组输入，观察 `gcd` 最大公约数约分与首非零正号锁定如何将每条射线归约为全宇宙唯一的规范整代表元（彻底免除 `Quot.sound`），并一步对比反序三元迁移 $[p_{\mathrm{Half}}, p_0, q_{\mathrm{Half}}] = (1, 1, 1, 1) \neq (1, 1, 1, -1) = [q_{\mathrm{Half}}, p_0, p_{\mathrm{Half}}]$ 在第四分量上的显式分裂（[@thm-ch03-phalf-qhalf-noncommutative]）与精确分数保真度读数。
 
 ::: {.viz src="ternion-cayley-lab" preset="canonical-ternion-noncomm" height="520"}
-**规范整三元数约分与非对易三元迁移实时实验。** 在实验室中检验 `gcd` 约分与首非零正号规范化算子 `norm`，并直观对照 $[p_{\mathrm{Half}}, p_0, q_{\mathrm{Half}}] = (1, 1, 1, 1) \neq (1, 1, 1, -1) = [q_{\mathrm{Half}}, p_0, p_{\mathrm{Half}}]$ 的次序敏感分裂、$g_{120} = (1, 1, 1, 1)$ 的三拍射影闭合及精确射影保真度 $\kappa_{\mathrm{proj}}$；对应零公理内核定理见 [@thm-ch03-quaternion-norm-and-heap-laws] 与 [@thm-ch03-lagrange-and-kappa-invariance]，手算见证见 [@ex-ch03-five-anchors-and-closure]。
+**规范整三元数约分与非对易三元迁移实时实验。** 在实验室中检验 `gcd` 约分与首非零正号规范化算子 `norm`，并直观对照 $[p_{\mathrm{Half}}, p_0, q_{\mathrm{Half}}] = (1, 1, 1, 1) \neq (1, 1, 1, -1) = [q_{\mathrm{Half}}, p_0, p_{\mathrm{Half}}]$ 的次序敏感分裂、$g_{120} = (1, 1, 1, 1)$ 的三拍射影闭合及精确射影保真度 $\kappa_{\mathrm{proj}}$；对应定理见 [@thm-ch03-quaternion-norm-and-heap-laws] 与 [@thm-ch03-lagrange-and-kappa-invariance]，手算见证见 [@ex-ch03-five-anchors-and-closure]。
 :::
 
 至此，第一卷的逻辑地基与齐次有理数系全部落成：我们拥有裸 CIC 地板、观察者精度契约 $\varepsilon_{\mathrm{self}} = 1/M$、AXIOM-Ω 的模型法则、零公理一维射影闭环 $\mathbb{QP}^1$ 与三维规范整三元数载体 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$。进入第二卷[第四章](ch04-heaps-and-lie-triple-curvature.md)，我们将正式拆解无原点流群、李三元曲率与有号旋量双覆叠，把特征秩 $5$ 的双覆叠旋量同样铸造进纯整数零公理代数之中。

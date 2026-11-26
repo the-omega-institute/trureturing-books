@@ -184,7 +184,7 @@ For $j=n+\frac12$, the signed character is $U_{2n+1}(c)=c\,\operatorname{oddFact
 
 All five single-shell algebraic laws of this Chebyshev engine—the signed Pell relation, first-kind index doubling, universal square-root elimination across all integer spin shells, signed factorization across all half-integer spin shells, and the rational spin-$2$ character formula—are proved in D5 on the strict backend (`strict_omega.axioms: []`):
 
-::: {.theorem #thm-ch10-zero-axiom-chebyshev-shells title="Zero-Axiom Chebyshev Pell, Doubling, Even-Odd Spin-Shell Elimination, and Spin-Two Character" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.pell_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.chebyshev_doubling D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.even_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.odd_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.spin_two_character"}
+::: {.theorem #thm-ch10-zero-axiom-chebyshev-shells title="Chebyshev Pell, Doubling, Even-Odd Spin-Shell Elimination, and Spin-Two Character" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.pell_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.chebyshev_doubling D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.even_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.odd_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.spin_two_character"}
 The cited D5 declarations record `strict_omega.axioms: []`. Writing $T_n(x)$ and $U_n(x)$ for the first- and second-kind Chebyshev polynomials, $E_n(k)$ for the even-shell polynomial, and $\operatorname{oddFactor}_n(k)$ for the odd-shell factor polynomial, the following five theorems hold:
 
 1. **Signed Pell relation** (`pell_chebyshev`): for all `x : Omega.Int` and `n : Omega.Nat`, exact integer equality holds:
@@ -225,7 +225,7 @@ All five statements are proved inside `module` + `prelude` files from the three-
 
 Beyond single-shell identities, the **all-degree integer-spin Clebsch–Gordan character fusion law**—generalizing the low-degree doubling rule of §10.2 to every pair of integer spins $(m, n) \in \mathbb{N}^2$—is likewise proved coefficientwise in D5 on the strict backend (`strict_omega.axioms: []`).
 
-::: {.theorem #thm-ch10-even-char-product-sum title="Zero-Axiom All-Degree Even-Character Clebsch–Gordan Product Law" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.evenChar_product_sum"}
+::: {.theorem #thm-ch10-even-char-product-sum title="All-Degree Even-Character Clebsch–Gordan Product Law" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.evenChar_product_sum"}
 The cited D5 declarations record `strict_omega.axioms: []`. Represent the $r$-th even-degree character polynomial $E_r(\kappa)$ of [@def-ch10-even-chebyshev] (matching the degree-$2r$ Chebyshev character $U_{2r}(\sqrt{\kappa})$) in ascending powers of $\kappa$ as the rational coefficient list `evenCharPoly r : CoefficientList`, and let `evenCharProductSum m n` denote the coefficient list of the inclusive character sum $\sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa)$ (starting at `gap m n` $= \lvert m - n\rvert$ across `span m n` $= 2\min(m, n)$ steps up to $\lvert m - n\rvert + 2\min(m, n) = m + n$). Then for all natural numbers $m, n \in \mathbb{N}$, polynomial multiplication agrees coefficientwise with the inclusive sum under `Poly.RatioSame` (with omitted trailing entries interpreted as $0$, and each degree-$k$ entry related by `Omega.IntRatio.Equivalent`):
 
 $$
@@ -300,7 +300,7 @@ Beyond the causal triad $\{0, \frac{1}{2}, 1\}$, the first higher integer shell 
 
 Consider the traceless angular electric quadrupole operator on the unit sphere, $\widehat{Q}_{ab} = 3 n_a n_b - \delta_{ab}$ ($a, b \in \{x, y, z\}$, $\Tr\widehat{\mathbf{Q}} = 0$; physical electric quadrupole moments multiply by the radial charge factor $-e\langle r^2\rangle_{5d}$ and add ligand lattice contributions, standard ligand-field background). Computing the angular expectation of $\widehat{\mathbf{Q}}$ across all five normalized real $d$ harmonics produces nothing but exact rational fractions with denominator $7$—not a single $\pi$ or square root survives. Both the vanishing of the five-orbital and closed-$d^{10}$ diagonal sums and the exact trace-free $d^8$ diagonal `(-4/7, -4/7, +8/7)` are proved in D5 on the strict backend (`strict_omega.axioms: []`):
 
-::: {.theorem #thm-ch10-zero-axiom-orbital-quadrupole title="Zero-Axiom Rational $d^{10}$ and $d^8$ Orbital Angular Quadrupole Balance" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.orbital_quadrupole D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.full_orbital_quadrupole"}
+::: {.theorem #thm-ch10-zero-axiom-orbital-quadrupole title="Rational $d^{10}$ and $d^8$ Orbital Angular Quadrupole Balance" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.orbital_quadrupole D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.full_orbital_quadrupole"}
 Each cited D5 declaration records `strict_omega.axioms: []` on the strict backend and `axioms: ["propext"]` on the official backend. Under signed exact ratio equivalence `Omega.IntRatio.Equivalent`, the diagonal angular quadrupole ledger of the five real $d$-orbitals satisfies:
 
 1. **Closed $d^{10}$ vanishing and doubly-vacated $d^8$ trace-free diagonal** (`orbital_quadrupole`):

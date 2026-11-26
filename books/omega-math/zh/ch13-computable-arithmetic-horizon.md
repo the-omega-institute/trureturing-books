@@ -18,7 +18,7 @@ $$
 
 对任意自然数对 $(a, b)$ 反复执行带余除法 $(a, b) \mapsto (b, a \bmod b)$，余数序列严格递减，必在有限步后归零；最后一个非零余数（或在 $a = b = 0$ 时约定为 $0$）即最大公约数 $\gcd(a, b)$。沿递归轨迹逆向回代每一步的商，直接在裸归纳构造演算中交付下述**零公理裴蜀恒等式（Bézout's identity）**，其传递公理闭包严格为空（`OmegaInit` 与 `OmegaMath`，`strict_omega.axioms: []`）：
 
-::: {.theorem #thm-ch13-bezout-identity title="零公理自然数裴蜀恒等式" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.bezout_identity"}
+::: {.theorem #thm-ch13-bezout-identity title="自然数裴蜀恒等式" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.bezout_identity"}
 所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。对任意自然数 $a, b \in \mathbb{N}$（`Omega.Nat`，包含零元情形），均存在有号整数 $x, y \in \mathbb{Z}$（`Omega.Int`）满足
 
 $$
@@ -54,7 +54,7 @@ $$
 
 上述构造不依赖任何非构造性存在命题，其完整的素数逃逸律已在D5 声明的严格构建中得到验证（`strict_omega.axioms: []`）：
 
-::: {.theorem #thm-ch13-euclid-prime-escape title="零公理欧几里得素数逃逸定理" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.euclid_prime_escape"}
+::: {.theorem #thm-ch13-euclid-prime-escape title="欧几里得素数逃逸定理" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.euclid_prime_escape"}
 所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。设 $s$ 为任意有限自然数列表（`s : NatList`）且其元素乘积严格为正（$0 < s.\mathrm{prod}$）。则存在自然数 $p$ 同时满足
 
 $$
@@ -113,7 +113,7 @@ $$
 
 这组 $2 \times 2$ 整矩阵乘积立刻暴露出连分数最深层的几何刚性：每一枚单步转移矩阵的行列式恒为 $\det(M_k) = a_k \cdot 0 - 1 \cdot 1 = -1$。对包含 $k = m + 1$ 项自然数部分商的列表 `coeffs`（长度为 `coefficientCount coeffs`）执行递推，其渐近矩阵对 `convergentPair coeffs` 的行列式随系数个数逐拍翻号而面积绝对值恒守为 $1$。这一**欧拉—沃利斯渐近行列式恒等式**及其推论**渐近分数自动互素性**均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中由内核锁死：
 
-::: {.theorem #thm-ch13-cf-convergent-determinant title="零公理有限连分数渐近行列式恒等式" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_determinant"}
+::: {.theorem #thm-ch13-cf-convergent-determinant title="有限连分数渐近行列式恒等式" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_determinant"}
 所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。对任意有限自然数部分商列表 $\mathrm{coeffs} : \mathrm{NatList}$，其欧拉—沃利斯渐近对 $\operatorname{convergentPair}(\mathrm{coeffs})$ 的整数行列式精确等于
 
 $$
@@ -128,7 +128,7 @@ $$
 
 由行列式恒为 $\pm 1$ 当场落下第一条免费的零公理结构推论：每一项连分数渐近分数自动处于最简既约形态，永无需额外约分。
 
-::: {.theorem #thm-ch13-cf-convergent-coprime title="零公理连分数渐近分子与分母互素定理" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_coprime"}
+::: {.theorem #thm-ch13-cf-convergent-coprime title="连分数渐近分子与分母互素定理" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_coprime"}
 所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。对任意有限自然数部分商列表 $\mathrm{coeffs} : \mathrm{NatList}$，记 $\operatorname{convergentPair}(\mathrm{coeffs})$ 的当前渐近分子为 $\mathrm{num}$、渐近分母为 $\mathrm{den}$。则对任意自然数 $d \in \mathbb{N}$，若同时满足 $d \mid \mathrm{num}$ 与 $d \mid \mathrm{den}$，必有
 
 $$
@@ -191,7 +191,7 @@ $$
 下面的静态图把本章的三根零公理算术支柱并置在同一幅视野之中：左侧展示从空表一路推进至 $30031 = 59 \times 509$ 的欧几里得素数逃逸链（[@thm-ch13-euclid-prime-escape]、[@ex-ch13-euclid-escape-chain]），中栏刻画斐波那契分数 $34/21$ 的欧拉—沃利斯交替行列式与既约夹逼（[@thm-ch13-cf-convergent-determinant]、[@thm-ch13-cf-convergent-coprime]、[@ex-ch13-fibonacci-convergents]），右侧则预告第 13.5 节的四分深度整数预算 $70 < 128$（[@thm-ch13-omega-quarter-depth-integer]、[@ex-ch13-quarter-depth-worked]）。
 
 ::: {.figure src="ch13-euclid-cf-depth"}
-**零公理算术地平线的三根有限支柱：素数逃逸、有限连分数与四分深度预算。** 图中依次呈现有限素数表的欧几里得逃逸见证 $N_S = 1 + \prod S$ 及其在 $30031 = 59 \times 509$ 处的首次合数分裂（[@thm-ch13-euclid-prime-escape]）、有理数 $34/21$ 沿欧拉—沃利斯递推保持单位交替行列式 $p_{n+1}q_n - p_n q_{n+1} = (-1)^n$ 与自动互素性的七阶渐近链（[@thm-ch13-cf-convergent-determinant]、[@thm-ch13-cf-convergent-coprime]），以及主界 $7/2$ 与容差 $1/10$ 在深度 $N = 2$ 下锁死精确整数不等式 $70 < 2 \cdot 4^3 = 128$ 的无极限衰减门槛（[@thm-ch13-omega-quarter-depth-integer]）。
+**素数逃逸、有限连分数与四分深度预算。** 图中依次呈现有限素数表的欧几里得逃逸见证 $N_S = 1 + \prod S$ 及其在 $30031 = 59 \times 509$ 处的首次合数分裂（[@thm-ch13-euclid-prime-escape]）、有理数 $34/21$ 沿欧拉—沃利斯递推保持单位交替行列式 $p_{n+1}q_n - p_n q_{n+1} = (-1)^n$ 与自动互素性的七阶渐近链（[@thm-ch13-cf-convergent-determinant]、[@thm-ch13-cf-convergent-coprime]），以及主界 $7/2$ 与容差 $1/10$ 在深度 $N = 2$ 下锁死精确整数不等式 $70 < 2 \cdot 4^3 = 128$ 的无极限衰减门槛（[@thm-ch13-omega-quarter-depth-integer]）。
 :::
 
 ## 13.4 可判定幺半群中的可执行素因子剥离
@@ -225,7 +225,7 @@ $$
 
 这条预算在所钉 `trureturing` 冻结库中呈现出全书最清晰的**零公理核心 vs. 第二层实数影子**架构分层。首先，核心整数严格不等式已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 严格构建中以**字面零公理（`strict_omega.axioms: []`）**独立证毕，全程不导入官方 `Init` 或 `Mathlib`：
 
-::: {.theorem #thm-ch13-omega-quarter-depth-integer title="零公理四分深度整数预算严格不等式" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.quarterDepth_integer_sound"}
+::: {.theorem #thm-ch13-omega-quarter-depth-integer title="四分深度整数预算严格不等式" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.quarterDepth_integer_sound"}
 所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。对任意自然数 $c, d, p, q, N \in \mathbb{N}$（`Omega.Nat`），若满足 $0 < d$、$0 < p$ 以及可执行四分深度界 $\operatorname{quarterDepth}(c, d, p, q) \le N$，则精确整数严格不等式成立：
 
 $$
@@ -302,14 +302,14 @@ $$
 反之，若尝试将深度压缩至 $N = 1$，则 $(d p) \cdot 4^{1 + 1} = 2 \times 16 = 32 < 70$，对应 $(1/4)^2 \cdot (7/2) = \frac{7}{32} = 0.21875 > 0.1$，误差界即刻告破。因此 $N = 2$ 不仅充分，而且恰好是满足该误差预算的最小整数深度。
 :::
 
-::: {.remark #rem-ch13-zero-axiom-horizon title="零公理整数核心与经典实数影子的架构分层"}
+::: {.remark #rem-ch13-zero-axiom-horizon title="严格后端的整数核心与经典实数影子"}
 回头纵览本章全部十条冻结定理，一条极其清晰的公理边界跃然纸上：裴蜀恒等式（[@thm-ch13-bezout-identity]）、欧几里得素数逃逸（[@thm-ch13-euclid-prime-escape]）、欧拉—沃利斯渐近行列式（[@thm-ch13-cf-convergent-determinant]）、连分数渐近互素性（[@thm-ch13-cf-convergent-coprime]）以及四分深度预算的整数半部（[@thm-ch13-omega-quarter-depth-integer]），均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 严格构建中以**字面零公理（`strict_omega.axioms: []`）**完成形式化冻结，全程不触碰经典选择公理、商类型公理或实数完备化。与此同时，[@thm-ch13-reduced-den]、[@thm-ch13-convergents-length-log]、[@thm-ch13-strip-factors-correct] 以及经典层的四分深度对偶（[@thm-ch13-quarter-depth-integer] 与 [@thm-ch13-quarter-depth-real]）构成了面向 `Mathlib` 与经典韦伊—布尔诺尔（Weil–Burnol）实分析的第二层单向阴影接口——这一“零公理有理内核驱动、经典连续统作单向影子”的分层模式，将在[第十八章](ch18-zero-axiom-kernel-and-shadow-bridge.md)升华为全书的终极审计架构。
 :::
 
 在迈入阿代尔乘积闭环之前，读者可直接在下方的交互实验卡中逐拍检验这三套有限整数构造：从任意前缀素数表触发 $30031 = 59 \times 509$ 的逃逸搜索，逐步展开 $34/21$ 的欧拉—沃利斯交替行列式，并即时调节有理主界与容差核验 $70 < 128$ 的四分深度门槛。
 
 ::: {.viz src="adelic-arithmetic-observer-lab" preset="euclid-cf-quarter-depth" height="520"}
-**素数逃逸、有限连分数与四分深度预算实验卡（`euclid-cf-quarter-depth`）。** 交互步进检验有限素数表见证 $N_S = 1 + \prod S$ 及 $30031 = 59 \times 509$ 的有界最小素因子捕获（[@thm-ch13-euclid-prime-escape]）、有理数 $34/21$ 的欧拉—沃利斯渐近分数与交替单位行列式 $\pm 1$（[@thm-ch13-cf-convergent-determinant]、[@thm-ch13-cf-convergent-coprime]），以及主界 $c/d = 7/2$、容差 $p/q = 1/10$ 在深度 $N = 2$ 下满足 $c q = 70 < (d p)\cdot 4^{N+1} = 128$ 的零公理整数预算与无极限实数传递（[@thm-ch13-omega-quarter-depth-integer]、[@thm-ch13-quarter-depth-real]）。
+**素数逃逸、有限连分数与四分深度预算实验卡（`euclid-cf-quarter-depth`）。** 交互步进检验有限素数表见证 $N_S = 1 + \prod S$ 及 $30031 = 59 \times 509$ 的有界最小素因子捕获（[@thm-ch13-euclid-prime-escape]）、有理数 $34/21$ 的欧拉—沃利斯渐近分数与交替单位行列式 $\pm 1$（[@thm-ch13-cf-convergent-determinant]、[@thm-ch13-cf-convergent-coprime]），以及主界 $c/d = 7/2$、容差 $p/q = 1/10$ 在深度 $N = 2$ 下满足 $c q = 70 < (d p)\cdot 4^{N+1} = 128$ 的整数预算与无极限实数传递（[@thm-ch13-omega-quarter-depth-integer]、[@thm-ch13-quarter-depth-real]）。
 :::
 
 既然有限算术已经证明素数必在旧周期的共同盲区中源源不断地按需诞生，下一个核心追问自然浮现：**在有理数域的全体度量通道中，平直尺度上的膨胀与每一颗素数通道上的收缩如何精确闭合？而当素数走出标量整数、裂变为三维球面上的非对易整旋子时，又会编织出怎样一座自由群迷宫？** 这正是[第十四章](ch14-adelic-closure-and-hurwitz-primes.md)的主题。

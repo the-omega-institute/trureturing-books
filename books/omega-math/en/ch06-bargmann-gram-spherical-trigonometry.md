@@ -75,7 +75,7 @@ Every squared term is nonnegative and the sum vanishes precisely when $u_i v_j -
 
 In any dimension $d \ge 2$ over $\mathbb{Q}^d$, orthogonalizing $\mathbf{b}$ and $\mathbf{c}$ against $\mathbf{a}$ and applying [@thm-ch06-lagrange-gram-identity] yields $\det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) \ge 0$ by pure polynomial algebra. On our four-component integer quaternion carrier `Quad4` ($\mathbb{Z}^4 \setminus \{\mathbf{0}\}$), this fundamental rational spherical closure inequality leaves the classical real continuum behind altogether and is proved in the cited D5 proofs on the strict backend (`strict_omega.axioms: []`) under the signed rational order `Omega.IntRatio.Le`:
 
-::: {.theorem #thm-ch06-detgram3-nonneg title="Zero-Axiom Universal Nonnegativity of the Bargmann–Gram Closure Determinant" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg"}
+::: {.theorem #thm-ch06-detgram3-nonneg title="Universal Nonnegativity of the Bargmann–Gram Closure Determinant" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg"}
 Let $\mathbf{a}, \mathbf{b}, \mathbf{c} \in \mathbb{Z}^4$ be any three nonzero integer quaternions in `Quad4` ($\mathbf{a} \neq \mathbf{0}$, $\mathbf{b} \neq \mathbf{0}$, $\mathbf{c} \neq \mathbf{0}$). Under the zero-axiom signed rational type `Omega.IntRatio` and its order relation `IntRatio.Le`, the normalized $3 \times 3$ Bargmann–Gram closure determinant is universally nonnegative:
 
 $$

@@ -83,7 +83,7 @@ $$
 
 Remarkably, for **every** nonzero integer quaternion $\mathbf{q} = (w, x, y, z) \in \mathbb{Z}^4 \setminus \{0\}$ (represented in `OmegaMath` by `q : Quad4` with `q ≠ 0`), the action of $\widehat{T}_5$ on $\chi_1$ needs no integration or matrix diagonalization at all — four elementary polynomial steps settle the exact eigenvalue pointwise under signed rational equivalence (`Omega.IntRatio.Equivalent`) in D5 on the strict backend (`strict_omega.axioms: []`):
 
-::: {.theorem #thm-ch15-hecke-t5-chi1-eigenvalue title="Zero-Axiom Universal Norm-5 Spherical Hecke Eigenvalue Identity on the Spin-1 Character" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_chi1_eigenvalue"}
+::: {.theorem #thm-ch15-hecke-t5-chi1-eigenvalue title="Universal Norm-5 Spherical Hecke Eigenvalue Identity on the Spin-1 Character" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_chi1_eigenvalue"}
 The cited D5 declarations record `strict_omega.axioms: []`. For every nonzero integer quaternion $\mathbf{q} : \mathrm{Quad4}$ ($\mathbf{q} \neq 0$, i.e., $\mathbf{q} = (w, x, y, z) \in \mathbb{Z}^4 \setminus \{0\}$), the norm-$5$ spherical Hecke sum $\operatorname{heckeT5Chi1}(\mathbf{q}) = (\widehat{T}_5 \chi_1)(\mathbf{q}) = \sum_{r \in S_5}\chi_1(\mathbf{q}\cdot r)$ and the scaled spin-$1$ character $-\frac{2}{5}\operatorname{evalChi1}(\mathbf{q}) = -\frac{2}{5}\chi_1(\mathbf{q})$ satisfy signed rational equivalence `Equivalent` (`Omega.IntRatio.Equivalent`):
 
 $$
@@ -136,7 +136,7 @@ The full proof is checked by the Lean kernel.
 
 Once [@thm-ch15-hecke-t5-chi1-eigenvalue] locks the universal eigenvalue to $\widehat{\lambda}_1 = -\frac{2}{5}$, substituting into the complex-free rational Ramanujan PSD threshold $4p - \widehat{\lambda}_1^2 = 20 - (-2/5)^2$ at $p = 5$ delivers a strictly positive rational margin, likewise verified in D5 on the strict backend (`strict_omega.axioms: []`):
 
-::: {.theorem #thm-ch15-hecke-t5-ramanujan-margin title="Zero-Axiom Rational Ramanujan Positivity Margin at Norm 5 on the Spin-1 Shell" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_ramanujan_margin"}
+::: {.theorem #thm-ch15-hecke-t5-ramanujan-margin title="Rational Ramanujan Positivity Margin at Norm 5 on the Spin-1 Shell" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_ramanujan_margin"}
 The cited D5 declarations record `strict_omega.axioms: []`. The complex-free rational Ramanujan margin at $p = 5$ for the spin-$1$ shell eigenvalue $-\frac{2}{5}$ satisfies both `Omega.IntRatio` equivalence and strict positivity:
 
 $$
@@ -171,7 +171,7 @@ $$
 
 At integer spin $\ell$, write $V_\ell=\operatorname{Sym}^{2\ell}(\mathbb C^2)$ for one irreducible copy of dimension $2\ell+1$. Right translation on spherical matrix coefficients acts on one factor, so each eigenvalue from this copy repeats $2\ell+1$ times in the full degree-$2\ell$ harmonic space on the three-sphere. The six normalized lifts share scalar coordinate $1/\sqrt5$ ([@thm-ch14-lps-norm-five]). The scalar even Chebyshev sequence starts at $E_0(\kappa)=1$, $E_1(\kappa)=4\kappa-1$, with $E_{n+2}(\kappa)=(4\kappa-2)E_{n+1}(\kappa)-E_n(\kappa)$. At $\kappa=1/5$ the following frozen identity gives its integer numerator recurrence.
 
-::: {.theorem #thm-ch15-lps-hecke-trace-formula title="Zero-Axiom Integer Recurrence for the Scalar Norm-5 Character" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_hecke_trace_formula"}
+::: {.theorem #thm-ch15-lps-hecke-trace-formula title="Integer Recurrence for the Scalar Norm-5 Character" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_hecke_trace_formula"}
 The cited D5 declaration records `strict_omega.axioms: []` on the strict backend and `axioms: ["propext"]` on the official backend. Let $\mathrm{S5.averageCharacter}(n) := E_n(\tfrac{1}{5})$ denote the `FiniteRatio` even Chebyshev character at $\kappa = \frac{1}{5}$, and define the scaled integer trace representative $\mathrm{S5.traceRepresentative}(n) := \mathrm{IntRatio.value}(a_n, 5^n)$ via the integer recurrence $a_0 := 1$, $a_1 := -1$, and $a_{n+2} := -6 a_{n+1} - 25 a_n$. Then for every $n \in \mathbb{N}$, signed rational equivalence `Omega.IntRatio.Equivalent` holds universally:
 
 $$
@@ -227,7 +227,7 @@ The trace calculation and the six frozen scalar values give the two trace column
 
 Even better, the zero-axiom kernel explicitly diagonalizes not only the integer shells $V_1$ and $V_2$, but all four low nonconstant symmetric-power shells $\mathrm{Sym}^d(\mathbb{C}^2)$ ($d = 1, 2, 3, 4$, covering spins $j = \frac{d}{2} \in \{\frac{1}{2}, 1, \frac{3}{2}, 2\}$ and dimensions $d + 1 \in \{2, 3, 4, 5\}$). The trick is remarkably clean: withhold the $\sqrt{5}$ normalization and let each generator $g = (w, x, y, z) \in S_5$ act via its Gaussian-integer defining matrix $M_g = \bigl(\begin{smallmatrix} w + ix & y + iz \\ -y + iz & w - ix \end{smallmatrix}\bigr)$ (trace $2$, determinant $5$) in the monomial basis $u^{d-r} v^r$; summing over all six conjugate-paired generators cancels every imaginary part to yield a pure integer matrix, while squaring turns $(\sqrt{5})^{2d}$ into the exact integer denominator $5^d$:
 
-::: {.theorem #thm-ch15-lps-ramanujan-margins title="Zero-Axiom Low-Spin Symmetric-Power Integer Matrices and Strict Ramanujan Margins at Norm 5" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_ramanujan_margins"}
+::: {.theorem #thm-ch15-lps-ramanujan-margins title="Low-Spin Symmetric-Power Integer Matrices and Strict Ramanujan Margins at Norm 5" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_ramanujan_margins"}
 The cited D5 declarations record `strict_omega.axioms: []`. Let `shell : S5.Shell` range over the four nonconstant symmetric-power shells `degreeOne`, `degreeTwo`, `degreeThree`, and `degreeFour` (degrees $d = 1, 2, 3, 4$, spins $j = \frac{1}{2}, 1, \frac{3}{2}, 2$), and let `branch : Bool` index spectral branches (separating the two branches at $d = 4$). Then for every pair `(shell, branch)`, both statements hold.
 
 **(1) Exact integer matrix match (`S5.MatrixMatches shell`).** In the monomial basis, every entry of the six-generator sum of unnormalized Gaussian-integer matrices $M_g$ ($g \in S_5$) on degree $d$ agrees as a Gaussian integer (zero imaginary part) with `S5.matrixEntry shell`, yielding $6 I_2$ ($d = 1$), $-2 I_3$ ($d = 2$), $-18 I_4$ ($d = 3$), and the symmetric $5 \times 5$ integer matrix
@@ -256,7 +256,7 @@ For the first conjunct, `S5.matrices_match` verifies all $2^2 + 3^2 + 4^2 + 5^2 
 
 Notice the sharp geometric threshold revealed by [@thm-ch15-lps-ramanujan-margins]: on the first three shells ($j = \frac{1}{2}, 1, \frac{3}{2}$), the six-generator sum is already a scalar multiple of the identity ($6 I_2$, $-2 I_3$, $-18 I_4$), so every vector is an eigenvector; at degree $4$ (the five-dimensional spin-$2$ shell $V_2$, splitting under octahedral symmetry as $E \oplus T_2$, $5 = 2 + 3$), the outer monomials $u^4$ and $v^4$ couple via off-diagonal entries $64$. To prove inside the zero-axiom kernel that $+54$ (multiplicity $2$) and $-74$ (multiplicity $3$) exhaust all five dimensions with no hidden direction escaping, the library exhibits all five explicit integer eigenlines together with two division-free doubled basis changes:
 
-::: {.theorem #thm-ch15-lps-degree-four-eigenbasis title="Zero-Axiom Degree-Four Five-Line Integer Eigenbasis and Doubled Basis-Change Theorem" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_degree_four_eigenbasis"}
+::: {.theorem #thm-ch15-lps-degree-four-eigenbasis title="Degree-Four Five-Line Integer Eigenbasis and Doubled Basis-Change Theorem" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_degree_four_eigenbasis"}
 The cited D5 declarations record `strict_omega.axioms: []`. Let `S5.degreeFourAction` denote multiplication by $M^{(4)}$ on $\mathbb{Z}^5$ (`S5.DegreeFourVector`). Then both statements hold.
 
 **(1) Five exact integer eigenlines.** Each of the five constructors of `S5.DegreeFourLine` defines an exact eigenvector of $M^{(4)}$ — `outerSum` $= (1, 0, 0, 0, 1)$ and `middle` $= (0, 0, 1, 0, 0)$ on branch `false` (scaled eigenvalue $+54$); `outerDifference` $= (1, 0, 0, 0, -1)$, `firstInterior` $= (0, 1, 0, 0, 0)$, and `lastInterior` $= (0, 0, 0, 1, 0)$ on branch `true` (scaled eigenvalue $-74$):

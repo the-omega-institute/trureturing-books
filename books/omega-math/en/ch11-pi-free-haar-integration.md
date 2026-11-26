@@ -62,13 +62,13 @@ For the classical real unit sphere $S^3\subset\mathbb R^4$ used here, two cancel
 - **Compared with the two-sphere $S^2$ ($n = 3$)**: Here $\Gamma(\frac{1}{2})^3 = \pi\sqrt{\pi}$ leaves an awkward half-integer radial denominator $\Gamma(m + \frac{3}{2})$; even more fundamentally, $\chi(S^2) = 2 \neq 0$ prevents $S^2$ from being a group at all, so neither a group-invariant Haar measure nor a Peter–Weyl character algebra exists on $S^2$.
 - **Uniquely on the three-sphere $S^3 \cong \mathrm{Sp}(1)$ ($n = 4$)**: It is the **only non-abelian compact Lie-group sphere**, and its four coordinates match $\Gamma(\frac{1}{2})^4 = \pi^2$ squarely against $\sigma(S^3) = 2\pi^2$ while turning $\Gamma(m + 2)/\Gamma(2)$ directly into the pure integer factorial $(m + 1)!$.
 
-::: {.remark #rem-ch11-shadow-vs-intrinsic title="Epistemic Division Between the Classical Gaussian Shadow and Intrinsic Zero-Axiom Definition (Literature Result and Algebraic Reconstruction)"}
+::: {.remark #rem-ch11-shadow-vs-intrinsic title="The Classical Gaussian Derivation and the Intrinsic Factorial Definition (Literature Result and Algebraic Reconstruction)"}
 Evaluating polynomial integrals over spheres by equating Cartesian and polar Gaussian integrals is a classic analytic trick (see G. B. Folland, *Amer. Math. Monthly* **108**(5), 446–448, 2001; literature result). Within zero-axiom `OmegaMath`, that derivation serves solely as a **shadow alignment check**: it explains to readers trained in real analysis why $\pi$ had to vanish. Inside the zero-axiom core itself, we never construct $\mathbb{R}$, $\pi$, or Lebesgue measure; instead, we adopt the factorial ratio directly as our intrinsic rational linear functional and verify its projective homogeneity invariance, normalization, symmetry, and orthonormality by pure finite arithmetic.
 :::
 
 ---
 
-## 11.2 Intrinsic Zero-Axiom Factorial Functional, Homogeneity Invariance, and Exact Moment Recurrence {#sec-ch11-intrinsic-functional-and-recurrence}
+## 11.2 Intrinsic Factorial Functional, Homogeneity Invariance, and Exact Moment Recurrence {#sec-ch11-intrinsic-functional-and-recurrence}
 
 Apply this polynomial moment formula to the projective reading $P(q)/\lVert q\rVert^{2m}$, with $P$ homogeneous of degree $2m$ and rational coefficients. On the real unit sphere the denominator is one, so linearity reduces the Haar expectation to the moments of the monomials of $P$. The reading is independent of the nonzero homogeneous representative.
 
@@ -103,7 +103,7 @@ That single line is a gem of zero-axiom algebra: **without surface elements or p
 
 Specializing this step ratio to powers of the projective fidelity $\kappa = w^2 / \lVert q\rVert^2$ by setting $a = k$ and $b = c = d = 0$ ($m = k$), write $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^k] = H(k, 0, 0, 0) = \frac{(2k)!}{4^k\,k!\,(k + 1)!}$ for the $k$-th $\pi$-free scalar moment (with base value $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^0] = 1$ directly from the definition). The exact factorial ratio recurrence linking consecutive moments is proved for every $k \in \mathbb{N}$ on the strict backend of `OmegaInit` and `OmegaMath`:
 
-::: {.theorem #thm-ch11-haar-kappa-moment-succ title="Zero-Axiom Factorial Recurrence for Pi-Free Three-Sphere Fidelity Moments" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.haarKappaMoment_succ"}
+::: {.theorem #thm-ch11-haar-kappa-moment-succ title="Factorial Recurrence for Pi-Free Three-Sphere Fidelity Moments" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.haarKappaMoment_succ"}
 For $k\in\mathbb N$, `haarKappaMoment k` represents $(2k)!/(4^k k!(k+1)!)$ and `haarKappaStep k` represents $(2k+1)/(2(k+2))$. In `Omega.IntRatio.Equivalent` the recurrence is
 
 $$
@@ -138,7 +138,7 @@ where $C_k = 1, 1, 2, 5, 14, 42, \dots$ is the **$k$-th Catalan number**. Viewed
 
 ---
 
-## 11.3 Zero-Axiom Rational Orthonormality of Peter–Weyl Character Kernels {#sec-ch11-peter-weyl-orthonormality}
+## 11.3 Rational Orthonormality of Peter–Weyl Character Kernels {#sec-ch11-peter-weyl-orthonormality}
 
 With the five exact rational moments $\mathbb{E}[\kappa^0] = 1$ through $\mathbb{E}[\kappa^4] = \frac{7}{128}$ generated from $\mathbb{E}[\kappa^0] = 1$ and [@thm-ch11-haar-kappa-moment-succ], the payoff is immediate. Without trigonometric product-to-sum identities, integration by parts, or any approximation to $\pi$, define the $\pi$-free rational spherical inner product on polynomials in $\kappa$ by
 
@@ -148,7 +148,7 @@ $$
 
 Before ascending to the universal all-degree theorem, begin with the most transparent low-degree anchor: on the strict backend of `OmegaInit` and `OmegaMath`, the first three even (integer-spin) Peter–Weyl character polynomials from [Chapter 10](ch10-peter-weyl-rational-spin-shells.md)—$\chi_0(\kappa) = 1$, $\chi_1(\kappa) = 4\kappa - 1$, and $\chi_2(\kappa) = 16\kappa^2 - 12\kappa + 1$—are certified to form an exact orthonormal system:
 
-::: {.theorem #thm-ch11-peter-weyl-chi012-orthonormal title="Zero-Axiom Haar Orthonormality of the First Three Even Peter–Weyl Characters" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.peter_weyl_chi012_orthonormal"}
+::: {.theorem #thm-ch11-peter-weyl-chi012-orthonormal title="Haar Orthonormality of the First Three Even Peter–Weyl Characters" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.peter_weyl_chi012_orthonormal"}
 Write $H_{ij}=\operatorname{haarInner}(\chi_i,\chi_j)$ for the rational pairing of the coefficient lists $\chi_0,\chi_1,\chi_2$. Under `Omega.IntRatio.Equivalent` the six entries satisfy
 
 $$
@@ -215,7 +215,7 @@ Half-integer shell norms check out just as effortlessly: $\mathbb{E}[\chi_{1/2}^
 
 The factorial moment functional sends the constant character to one and each positive-degree even character to zero. Section 11.1 identifies this rational evaluation with the normalized real Haar mean.
 
-::: {.theorem #thm-ch11-haar-even-char-expectation title="Zero-Axiom All-Degree Pi-Free Haar Expectation of Even Characters" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.haar_evenChar_expectation"}
+::: {.theorem #thm-ch11-haar-even-char-expectation title="All-Degree Pi-Free Haar Expectation of Even Characters" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.haar_evenChar_expectation"}
 For each $r\in\mathbb N$, `evenCharPoly r` is the coefficient list for $E_r$ from [@thm-ch10-even-char-product-sum]. The functional `haarKappaPoly` weights the coefficient of degree $k$ by `haarKappaMoment k`. With `zeroDelta r` equal to one at $r=0$ and zero otherwise, the declaration gives the following `Omega.IntRatio.Equivalent` identity.
 
 $$
@@ -235,7 +235,7 @@ where both empty products equal $1$ when $r = 0$. Two-step induction on $r$ (qua
 
 Combining the [Chapter 10](ch10-peter-weyl-rational-spin-shells.md) fusion identity [@thm-ch10-even-char-product-sum] with [@thm-ch11-haar-even-char-expectation] gives the rational inner-product formula. By §11.1, its real Haar interpretation is $\langle E_m,E_n\rangle_{\mathrm{SU}(2)}=\delta_{mn}$.
 
-::: {.theorem #thm-ch11-all-degree-peter-weyl-orthonormal title="Zero-Axiom All-Degree Peter–Weyl Even-Character Orthonormality" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"}
+::: {.theorem #thm-ch11-all-degree-peter-weyl-orthonormal title="All-Degree Peter–Weyl Even-Character Orthonormality" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"}
 The rational pairing `haarInner` applies `haarKappaPoly` to the product of two coefficient lists. For $m,n\in\mathbb N$, `degreeDelta m n` is one when $m=n$ and zero otherwise. The declaration gives the following `Omega.IntRatio.Equivalent` identity.
 
 $$
