@@ -2,11 +2,11 @@
 
 SIZE = (356, 525)
 ALT = {
-    "zh": "固定旧传播块需要 38 个辅助态。截止量 D 为 56、216、224 时，最小秩分别在 29 至 32、"
+    "zh": "固定旧传播块需要 38 个辅助态。截止量 D 为 56、216、224 时，最小秩分别在 29 至 31、"
           "26 至 27、25 至 26 之间。从 D=392 起，已证的阶梯依次为 24、23、21、20、19。"
           "392 是循环对称的 24 态门槛，512 处唯一恢复全频所需时钟数由 9 增至 10。",
     "en": "A fixed propagation block requires 38 auxiliary states. At cutoffs 56, 216, and 224 "
-          "the minimum ranks lie in 29–32, 26–27, and 25–26. The exact staircase from cutoff 392 "
+          "the minimum ranks lie in 29–31, 26–27, and 25–26. The exact staircase from cutoff 392 "
           "takes values 24, 23, 21, 20, and 19. Cutoff 392 is the cyclic-symmetry threshold for "
           "24 states, and at 512 the clock count for full-response uniqueness rises from 9 to 10.",
 }
@@ -21,7 +21,7 @@ def draw(fig):
              size=13, anchor="middle", color="dim")
 
     # Early cutoffs have independent lower and upper certificates, with unknown exact ranks.
-    early = ((56, 29, 32), (216, 26, 27), (224, 25, 26))
+    early = ((56, 29, 31), (216, 26, 27), (224, 25, 26))
     fig.text(18, 79, t("截止量 D", "Cutoff D"), size=13, color="dim")
     fig.text(337, 79, t("秩／区间", "Rank / Range"), size=13, color="dim", anchor="end")
     ranges = fig.axes(111, 88, 152, 105, (24, 38), (0, 4))

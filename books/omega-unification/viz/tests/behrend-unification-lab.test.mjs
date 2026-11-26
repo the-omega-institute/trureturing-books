@@ -333,8 +333,8 @@ function chordsUpTo(D) {
 const RANK_TABLE = [
   [0, 38, 38],
   [12, 29, 38],
-  [56, 29, 32],
-  [100, 26, 32],
+  [56, 29, 31],
+  [100, 26, 31],
   [216, 26, 27],
   [224, 25, 26],
   [244, 25, 26],
@@ -662,7 +662,7 @@ check('memory still: D = 1600, all 171 chords, one component, rank 19', s.ledger
     prev = [lo, hi];
     if (t.ledger.clocks !== (D < 512 ? 9 : 10)) worst ||= `clocks at ${D}`;
   }
-  check('the rank staircase: 38, [29, 32] at 56, 26–27 at 216, 25–26, 24 at 392, 23 at 544, 21, 20, 19; chords and components agree', !worst, worst);
+  check('the rank staircase: 38, [29, 31] at 56, 26–27 at 216, 25–26, 24 at 392, 23 at 544, 21, 20, 19; chords and components agree', !worst, worst);
   const first = [...new Set(range(19).flatMap((i) => range(19).map((j) => 2 * (R - dotI(SITES[i], SITES[j])))))].filter((d) => d > 0).sort((a, b) => a - b).find((d) => chordsUpTo(d).connected);
   check('the least cutoff that connects the chord graph', (await page.evaluate(() => window.BUL_DEBUG.bench())).connect === first && first === 152, String(first));
 }
