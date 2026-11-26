@@ -646,7 +646,7 @@ SCENES.zeros = S => {
       const isCur = run > 0 && run < 1 && i === cur;
       txt(en, 160, y, { size: 24, fam: F.mono, w: 700, c: C.white, a: ra });
       txt(zh, 160, y + 32, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ra });
-      txt(z, 1160, y + 14, { size: 38, fam: F.orb, w: 900, align: 'right', c: isCur ? C.now : C.argued, a: ra });
+      txt(z, 1160, y + 14, { size: 38, fam: F.mono, w: 700, align: 'right', c: isCur ? C.now : C.argued, a: ra });
     });
   }
   /* three copies */
@@ -660,7 +660,7 @@ SCENES.zeros = S => {
       txt(`copy ${i + 1}`, x + 70, 390, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ca });
       txt(['|r⟩', '|t₁⟩', '|t₂⟩'][i], x + 70, 360, { size: 34, fam: F.math, w: 700, align: 'center', c: i ? C.mag : C.cyan, a: ca });
     }
-    txt('codewords share one phase e^{iφ(γ)}', 1270, 448, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: ca });
+    txt('codewords share one phase e^(iφ(γ))', 1270, 448, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: ca });
     const qa = ca * Q(S, 2, 'three copies', 0.5);
     txt('3 copies → qutrit, zero error', 1270, 510, { size: 26, fam: F.mono, w: 700, c: C.now, a: qa });
     txt('2 copies → at most a qubit', 1270, 556, { size: 22, fam: F.mono, w: 700, c: C.white, a: qa });

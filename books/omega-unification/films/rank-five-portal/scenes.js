@@ -186,7 +186,7 @@ SCENES.hook = S => {
       txt('#11934 (1.0428, 1.0440)', LX, 322, { size: 20, fam: F.mono, w: 700, c: C.white, a: wa });
       txt('× 10²⁶ GeV²', LX, 354, { size: 20, fam: F.mono, w: 700, c: C.white, a: wa });
       txt('every term > 0 · 每一项为正', LX, 398, { size: 20, fam: F.zh, w: 700, c: C.mag, a: wa });
-      const ka = la * Q(S, 3, 'GeV squared', 0.5);
+      const ka = la * Q(S, 3, 'about 1.05', 0.5, 0.6);
       arrow(X0 + 360, Y(eTree), X0 + 360, Y(eWall), C.now, ka, 3);
       txt('× 1.34 × 10²²', LX, 560, { size: 34, fam: F.mono, w: 700, c: C.now, a: ka });
       txt('the tree value · 树级值', LX, 598, { size: 20, fam: F.zh, w: 700, c: C.white, a: ka });
