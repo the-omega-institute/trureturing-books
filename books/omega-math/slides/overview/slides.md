@@ -122,7 +122,7 @@ section: "第三卷"
   <h2 class="t">无极限微积分<em>直接计算系数</em></h2>
   <div class="g2 mt">
     <div class="card"><h4>Jet2 · 幂零环</h4><p>在 <Tex t="\mathbb Q[\eta]/(\eta^3)" /> 中，二阶射流是三个精确的有理系数。</p></div>
-    <div class="card"><h4>D-有限 · 任意有限阶</h4><p>用有理递推按需生成系数。形式微分与乘法可逐阶计算。</p></div>
+    <div class="card"><h4>D-有限 · 任意有限阶</h4><p>在有理普通点给定有理初始导数后，递推逐阶生成有理系数。形式微分与乘法可逐阶计算。</p></div>
   </div>
   <TheoremCard class="compact mt" label="定理7.5" title="保真度核的精确二阶射流" cite="thm-ch07-fidelity-jet-and-secant" gid="D5/S3/Quantum/AURICOmega/OmegaJetCalculus.kappa_jet">
     <p>令 <Tex t="D=1+x^2" />。对有限有理 <Tex t="x" />，<Tex t="\kappa(x)=D^{-1}" /> 的 Jet2 读数为 <Tex t="\bigl(D^{-1},-2xD^{-2},(3x^2-1)D^{-3}\bigr)" />。</p>
