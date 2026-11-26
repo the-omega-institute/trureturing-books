@@ -517,6 +517,38 @@ $$
 
 **手工推导。** 缩放增益可把三角缺陷 $1$ 换成任意 $\varepsilon>0$。纯前驱重心递推没有统一误差系数，而当 $m,N$ 趋于无穷时，两步势采用仅依赖图的锚点、前驱权重与根平均，无法把统一误差界降到 $4\varepsilon$ 以下。超出两步构造或依赖增益本身的构造能否在所有弦图上突破这一界，仍属开放问题。实 Banach 通用系数在 $[2,4]$ 内、双不变伪度量群的通用系数在 $\{2,3,4\}$ 中的精确值，以及是否存在系数超过 $4/3$ 的 $3$-树，均待确定。
 
+根平均的下界给出了检验重构方法的同一族图。团大小有界时，可以按前驱数目分配权重来改进两步重构。对桥接图，则可以先根据通用顶点拟合每份副本的核，再补上根顶点。
+
+::: {.theorem #thm-appe-multitier-universal-banach title="多层前驱权重界与通用核的单纯扩展" lean="D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach.SimpleGraph.IsChordal.exists_multitier_clique_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach.SimpleGraph.exists_universal_core_simplicial_banach_potential, D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach.SimpleGraph.bridgedGadget_banach_upper_bound"}
+以下各项都取实半赋范向量空间 $E$、实数 $\varepsilon\ge0$，以及定义在相应顶点集 $V$ 的所有有序对上的增益 $g:V\times V\to E$。设对任意 $i,j\in V$ 有 $g(j,i)=-g(i,j)$，且对每个有序三角形 $(i,j,\ell)$ 有 $\|g(i,j)+g(j,\ell)-g(i,\ell)\|\le\varepsilon$。
+
+1. **团大小有界时的多层前驱权重界。** 设 $G$ 是有限顶点集 $V$ 上的简单弦图，且自然数 $k\ge4$ 满足 $G$ 的每个团至多有 $k+1$ 个顶点。则存在势 $\varphi:V\to E$，使每个有向邻接对 $(u,v)$ 都满足
+
+   $$
+   \bigl\|g(u,v)-(\varphi(v)-\varphi(u))\bigr\|\le\left(4-\frac{4(k-2)}{k^2-3k+3}\right)\varepsilon .
+   $$
+
+2. **通用核的单纯扩展。** 设 $G$ 是有限顶点集 $V$ 上的简单图，且 $U\subseteq H\subseteq V$，其中 $U$ 非空，每个 $u\in U$ 都与 $H$ 中除自身外的所有顶点相邻。设 $H^c$ 是独立集，且对某个自然数 $m\ge1$，每个 $o\in H^c$ 的邻域 $N(o)$ 都包含于 $H$，并构成大小至多为 $m$ 的团。则存在势 $\varphi:V\to E$，使每个有向邻接对 $(u,v)$ 的误差 $\|g(u,v)-(\varphi(v)-\varphi(u))\|$ 至多为 $\max\{1,2-2/m\}\varepsilon$。
+
+3. **桥接图的重构。** 对任意自然数 $m\ge2$、$N\ge1$，取 [@thm-appe-bfs-barycenter-obstructions] 所用的 $\operatorname{bridgedGadget}(m,N)$，其顶点集 $V$ 由副本编号与副本内顶点组成。则存在势 $\varphi:V\to E$，使每个有向邻接对 $(u,v)$ 的误差 $\|g(u,v)-(\varphi(v)-\varphi(u))\|$ 至多为 $(2-2/m)\varepsilon$。
+:::
+
+::: {.proof #pf-appe-multitier-universal-banach}
+**多层前驱权重。** 在每个连通分量内选根，沿用 [@thm-appe-biased-clique-banach-potential] 证明中的距离分层、前驱集 $P(v)$、影子锚点 $a_C$ 和传递量 $Q_C$。前驱集 $P(v)$ 与 $v$ 构成团，所以 $|P(v)|\le k$。相邻的同层顶点具有按包含关系嵌套的前驱集。若 $S=\{u\in P(v):s\le|P(u)|\}$ 非空，取其中前驱集最小的 $u$。由嵌套性，$P(u)$ 中每个顶点都与 $S$ 中每个顶点相邻。两集各自成团，且位于不同层，因此 $P(u)\cup S$ 是团，给出 $|S|+s\le k+1$。
+
+置 $D=k^2-3k+3$、$\alpha=(k-3)/D$、$\beta=(k-2)/D$。对正整数 $m\le k-2$ 取 $f_m=1/m$，另取 $f_{k-1}=\beta$、$f_k=\alpha$、$f_0=1$。对 $b\in P(v)$，先分配权重 $\max\{f_{|P(v)|},2\beta-f_{|P(b)|}\}$。由于 $2\beta-\alpha=(k-1)/D<1/(k-2)\le1/2$，最小档值为 $\alpha>0$。当 $1\le|P(v)|\le k-2$ 时，初始权重均为 $1/|P(v)|$。当 $|P(v)|=k-1$ 时，以 $\beta$ 为基准，只有达到 $k$ 个前驱的顶点多得 $\beta-\alpha$，且这种顶点至多有 $1$ 个。当 $|P(v)|=k$ 时，以 $\alpha$ 为基准，达到 $k-1$ 个前驱的顶点多得 $\beta-\alpha$，达到 $k$ 个的再多得 $\beta-\alpha$，两种阈值对应的顶点分别至多有 $2$ 个和 $1$ 个。两个大档的权重总和分别由 $(k-1)\beta+(\beta-\alpha)=1$ 和 $k\alpha+3(\beta-\alpha)=1$ 控制。均分剩余权重后，所得 $w_v(b)$ 总和为 $1$，且保留上述每项下界。
+
+非根顶点 $x$ 的势取 $Q_C$ 加上各路径增益 $g(a_C,b)+g(b,x)$ 按 $w_x(b)$ 的加权平均。根的势取 $0$，根边由唯一前驱精确拟合。从同一锚点 $a$ 经影子中的前驱 $b,d$ 到达同一顶点 $x$，两条路径的增益之差等于三角形 $(a,b,d)$ 与 $(b,d,x)$ 的缺陷之差，半范数至多为 $2arepsilon$。有重合顶点时，相应缺陷由反对称性为零。对从非根顶点 $u$ 到下一层顶点 $v$ 的边，记 $c$ 为 $v$ 所在分量的影子锚点。$c\in P(u)$，$u\in P(v)$，传递量的递推使经过 $c$ 到 $u$ 的项加上 $g(u,v)$ 后恰与到 $v$ 的平均中经过 $u$ 的项相等。两次平均与各自匹配项的偏差之和至多为 $(4-2w_u(c)-2w_v(u))\varepsilon$。由权重下界，$w_u(c)+w_v(u)\ge f_{|P(u)|}+(2\beta-f_{|P(u)|})=2\beta$，故跨层误差至多为 $(4-4\beta)\varepsilon$。
+
+对同层边，定向使 $P(u)\subseteq P(v)$，两端共用锚点和传递量。从任一 $b\in P(u)$ 经 $u$ 到 $v$ 的路径与到 $v$ 的匹配项只差一个三角缺陷，与其余项至多差三个。先对 $P(v)$ 平均，得到 $(3-2w_v(b))\varepsilon\le(3-2\alpha)\varepsilon$，再对 $P(u)$ 平均仍保此界。由 $2\beta-\alpha\le1/2$，此界至多为 $(4-4\beta)\varepsilon$。反向边的残差取负，各连通分量的势合起来即得所求。
+
+**通用核与单纯顶点。** 对 $h\in H$，令 $\varphi(h)$ 为 $g(z,h)$ 在 $z\in U$ 上的均值。核内边 $(a,b)$ 的残差是 $g(z,a)+g(a,b)-g(z,b)$ 的均值。若 $z$ 等于某个端点，该项由反对称性为零。否则，通用性保证三角形存在，该项的半范数至多为 $\varepsilon$。对 $o\notin H$，若 $N(o)$ 非空，则对 $b\in N(o)$ 的候选值 $\varphi(b)+g(b,o)$ 取均值作为 $\varphi(o)$。两位不同邻点的候选值之差由核内边残差与经过 $o$ 的三角缺陷控制，半范数至多为 $2\varepsilon$。对边 $(a,o)$，均值中来自 $a$ 的项与自身之差为零，因此残差至多为 $2(1-1/|N(o)|)\varepsilon\le(2-2/m)\varepsilon$。孤立点取势为零，$H^c$ 中没有边，反向边的误差相同。合并两类边的误差界即得第 2 项。
+
+**桥接图。** 在每份副本中，以去根后留下的顶点为 $H$，以 $U$ 为其中的通用顶点集。作为唯一的核外顶点，根 $o$ 恰与大小为 $m$ 的团 $A$ 相邻。对整份副本应用第 2 项，由 $m\ge2$ 得局部误差界 $(2-2/m)\varepsilon$。沿根组成的路径依次平移各副本的势，使相邻根的势差等于对应桥边增益。平移保持各副本内的势差，所有桥边的残差为零。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 第 1 项对每个 $k\ge4$ 都严格改进 [@thm-appe-biased-clique-banach-potential] 的界。减去两界共有的 $4-4/k$ 后，比较等价于 $2(k-3)(k-1)^3>(k-2)^2D$，这由 $D<(k-1)^2$ 和 $2(k-3)(k-1)=2((k-2)^2-1)>(k-2)^2$ 得出。取 $k=4$，每棵 $4$-树的重构系数至多为 $20/7$，且 $20/7<79/27<3$。当 $N(m-1)>4m$ 时，[@thm-appe-bfs-barycenter-obstructions] 对任意预先固定的根平均两步方案给出的实值三角-$1$-平坦增益，有边误差至少为 $4-4/m-8/N>2-2/m$。第 3 项对同一增益给出所有边误差至多为 $2-2/m$ 的势。无团大小限制的弦图上，实 Banach 通用系数在 $[2,4]$ 内、双不变伪度量群的通用系数在 $\{2,3,4\}$ 中的精确值仍待确定。
+
 接下来固定非线性目标群，考察完全图上的最优系数。
 
 **四顶点图上的 $\mathrm{SU}(2)$ 圆度量反例。** 四点弦图若无三角形便是森林。若只有一个三角形，可规范化两条辐棱，把余棱写成 $\exp X$，再取势 $1,\exp(-X/3),\exp(X/3)$，三棱误差各为 $|X|/3\le\varepsilon/3$。附着的树棱可精确拟合。剩下的非完全图是两三角形共一棱的菱形图。把一个度数为 $3$ 的顶点取作中心，将辐棱规范化为 $1$。在外缘路径的中间顶点取势 $1$，两端各在 $1$ 与精确拟合相应外缘棱的值之间取最短测地线中点，误差至多 $\varepsilon/2$。
