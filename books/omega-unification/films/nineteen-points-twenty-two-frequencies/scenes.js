@@ -499,7 +499,7 @@ SCENES.relation = S => {
     curve(t => pt(-0.1 + t * (t136 + 0.2)), 60, C.dim, ca * 0.6, 2);
     ctx.restore();
     const ga = a * Q(S, 2, 'one great circle', 0.6);
-    /* arcs: θ68 (pole → Q) magenta, θ12 (Q → P) cyan on the circle; θ136 (pole → P) amber, outside */
+    /* arcs: θ68 (pole → Q) magenta, θ12 (Q → P) cyan on the circle; θ136 (pole → P) amber, just inside */
     const g1 = ca * clamp(ga * 2), g2 = ca * clamp(ga * 2 - 1);
     curve(t => pt(t * t68), 30, C.mag, g1, 6);
     curve(t => pt(t68 + t * t12), 20, C.cyan, g1, 6);
