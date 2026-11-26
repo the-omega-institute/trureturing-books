@@ -6,7 +6,7 @@ This chapter lifts arithmetic from the scalar line to **adelic closure across al
 
 ## 14.1 Flat Tangent Amplification and Ultrametric Prime Curvature Recovery
 
-On the compact curved rational three-sphere $\mathbb{T}_3(\mathbb{Q})$ developed in Volumes I and II, every intrinsic pairwise comparison is a bounded rational fidelity $\kappa \in [0, 1]$; nothing inside the compact manifold stretches to infinity. Only when an observer flattens the sphere onto a tangent line and marches outward in flat $+1$ increments does the ordinary archimedean absolute value $|r|_\infty$ amplify coordinates without bound.
+On the rational projective carrier $\mathbb{T}_3(\mathbb{Q})$ developed in Volumes I and II, every intrinsic pairwise comparison is a bounded rational fidelity $\kappa \in [0, 1]$; its real completion is compact. Only when an observer flattens the sphere onto a tangent line and marches outward in flat $+1$ increments does the ordinary archimedean absolute value $|r|_\infty$ amplify coordinates without bound.
 
 Remarkably, the multiplicative group $\mathbb{Q}^\times$ carries an exact counterbalancing architecture built right inside the rationals. For every prime $p \in \mathbb{P}$ and every nonzero rational $r = \pm p^{v_p(r)} \frac{a}{b}$ (with $p \nmid a, p \nmid b$ and integer $p$-adic valuation $v_p(r) \in \mathbb{Z}$), define its **$p$-adic ultrametric norm** by
 
@@ -262,7 +262,7 @@ The static figure below pairs the scalar adelic product balance of Section 14.2 
 
 ## 14.5 Exponential Word Growth, Bit-Height Rate, and the Norm-5 Six-Axis Sphere Cover
 
-The free embedding $F_3 \hookrightarrow \mathrm{SO}(3, \mathbb{Q})$ packs exponential combinatorial richness into compact rational geometry. Counting reduced words of exact length $L$ gives $1$ empty word at $L = 0$, $6$ single-gate words at $L = 1$, and $5$ non-backtracking branches at every subsequent step, yielding $N_{\mathrm{words}}(L) = 6 \cdot 5^{L - 1}$ for $L \ge 1$:
+The free embedding $F_3 \hookrightarrow \mathrm{SO}(3, \mathbb{Q})$ packs exponential combinatorial richness into the rational rotations of the compact real rotation group. Counting reduced words of exact length $L$ gives $1$ empty word at $L = 0$, $6$ single-gate words at $L = 1$, and $5$ non-backtracking branches at every subsequent step, yielding $N_{\mathrm{words}}(L) = 6 \cdot 5^{L - 1}$ for $L \ge 1$:
 
 | Word length (gates) $L$ | Reduced words $N_{\mathrm{words}}(L)$ | Cumulative words (ball $\le L$) | Spinor norm squared $\|\mathbf{q}\|^2 = 5^L$ | Spinor bit height $\frac{L}{2}\log_2 5$ |
 | :---: | ---: | ---: | ---: | ---: |
