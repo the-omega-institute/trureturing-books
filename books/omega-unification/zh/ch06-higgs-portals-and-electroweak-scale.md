@@ -169,6 +169,8 @@ $$
 | 中性无迹领先门户 $P$ | 自旋配平全尺度等迹交点 | 最小精确秩为 **$5$**（`#78/#288` 升至 $6$） | $d \le 4$ 接触范数 $> 31.975 > 8\pi$；$d = 5$ 舒尔裕度 $> 3.118$ |
 | 热核门户 $P_t = e^{-tK/d}$ | 高惯性 $172$ 层全塔 | $t \le 0.49$ 排除；$8 \le t \le 16$ 可行 | $t = \theta_{804}/\theta_{12} = 8.53511$ 预言 $A_1/A_7 \in (2.750, 3.728)$ |
 
+电弱破缺后，用电荷 $Q$ 作探针可以测到 $A_{QQ}$ 和 $A_{QT_3}$。检验统一还须在两个顶点都耦合弱同位旋 $T_3$，看 $A_{T_3T_3}$ 是否等于 $A_{QT_3}$。在零裸希格斯二次与四次项的十九站壳一圈模型中，固定五个截止位置可以满足归一化、引力、希格斯势及前两个动能系数共七个条件，但独立的弱响应仍相差 $-0.07426$ 左右。在同一背景与减法处方下，取质量在各重多重态内部简并，把每个固有时已经开启的截止权重相加。若这个和处处非负，则在每个 $M>M_Z$ 上都有 $A_{T_3T_3}<A_{QT_3}$。允许它取负后，可将最低截止取在 $M_Z$，用八个位置及一组公共权重在 $M\simeq1.1764\times10^{14}\,\mathrm{GeV}$ 满足全部八式。如何从壳本身推出这些权重仍然开放。 [轮廓的符号界](https://github.com/the-omega-institute/trureturing-experiments/blob/07db7f75e6fc3b9c80a1ae15c1f4719ce11fb6ad/experiments/ch39-omega-research/replay/ch39-neutral-positive-profile.py) · [八式的区间解](https://github.com/the-omega-institute/trureturing-experiments/blob/07db7f75e6fc3b9c80a1ae15c1f4719ce11fb6ad/experiments/ch39-omega-research/replay/ch39-neutral-mz-cutoff.py)
+
 ## 6.4 低能对撞机数据的交叉合围：等深真空、胶子融合、$Z$ 宽度、CLEO 与 OPAL {#sec-ou-ch06-s04}
 
 高能门户的约束已经够紧了，但故事最惊心动魄的一幕发生在低能电弱破缺真空本身。为了在电弱破缺后维持引力与宇宙学常数的逐层热核配平（见[第十一章](ch11-induced-gravity-and-dark-energy.md)），破缺真空必须在顶夸克、五个轻夸克及电弱玻色子质量层引入对应的标量伙伴。这些轻标量与等深势结构直接暴露在当今高能物理最精密的对撞机实验探针之下，形成了四面夹击的**现象学紧箍咒**：

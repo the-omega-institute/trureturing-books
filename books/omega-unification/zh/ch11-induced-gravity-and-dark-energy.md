@@ -74,6 +74,8 @@ $$
 
 现在考察跨零点共享截止与紫外稳定性。若让 #11661、#11934、#12207 共用同一个引力截止（必要条件 $x > 0.18$），按 $12207 \to 11661 \to 11934$ 排序，所需隐矩满足 $\Delta S > 0$（相邻 $x\Delta S > 9.07\times 10^{-8},\; 1.36\times 10^{-6}$）而 $\Delta T < 0$（相邻 $\Delta K_{\mathrm{vis}} > 1.48\times 10^{-8},\; 2.13\times 10^{-7}$）。由于 $E_3$ 与 $E_2$ 同向递减，**至少有两个隐单态必须沿相反方向改变质量**。这一界限是尖锐的：取共同截止 $Q = 3M_P/7$，可以把 $311$ 个单态中的 **$309$ 个固定在共同质量 $Q/32$**，仅调动余下 $2$ 个即可逐枚精确配平。
 
+在电弱真空取第 $2\,306\,888\,100\,085$ 枚正零点及其左右邻点，固定重标量门户强度为 $0.42995401872$，符号由各壳的三循环决定。在 $0<Q^2/M_P^2\leq1$ 内自由选取五个截止位置，一组归一化的有符号权重就能在三处同时满足牛顿项 $K=1$ 和真空项 $W=8\pi\rho/M_P^4=10^{-122}$。用 $b$ 记负权绝对值之和，这个五点解的 $b\simeq1.797\times10^7$。若把代价限制在接近最低值的 $b\leq1\,308\,843.19305$，每组解都必须在六个互不相交的区间中各占一个位置，且有六点解达到这一预算。因此在此预算内，六个截止位置恰为最少。[五点构造](https://github.com/the-omega-institute/trureturing-experiments/blob/7f02423e1c24e735988d534c6b813f672c7304fe/experiments/ch39-omega-research/replay/ch39-three-index-five-cutoffs.py) · [近最优代价下的六点下界](https://github.com/the-omega-institute/trureturing-experiments/blob/7f02423e1c24e735988d534c6b813f672c7304fe/experiments/ch39-omega-research/replay/ch39-cutoff-window-stability.py)
+
 更致命的测试是**固定全部物理质量、微调紫外截止 $Q$**。利用热核递推 $2E_3(u) + uE_2(u) = E_2(u) + uE_1(u) = e^{-u}$，在匹配点 $K = 1,\; C = c$ 对 $x = Q^2/M_P^2$ 求导，立得
 
 $$
