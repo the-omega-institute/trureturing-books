@@ -4,7 +4,7 @@
 
 在 [§32.7](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md) 确立了无无穷、无超越数的有限有理数学体系 $\mathbf{Math}_\Omega$ 之后，一个最锋利的工程与逻辑落地问题迎面而来：**要在现代交互式定理证明器 Lean 4 中把这座大厦真正建起来，我们究竟需要改动 Lean 4 的底层内核吗？还是直接用 `axiom` 关键字把母公理 $\mathrm{AXIOM}\text{-}\Omega$ 写进头文件？抑或在现有内核之上另辟一条零公理构造路径？**
 
-本节给出终极架构裁决：**分毫不需要改动 Lean 4 坚不可摧的验证内核，更绝对禁止使用 `axiom` 关键字硬塞自定义公理**。真正与 $\mathbf{Math}_\Omega$ 天生同构的，恰恰是尚未导入 `Mathlib.Data.Real.Basic` 之前的 **Lean 4 原生归纳构造演算（Calculus of Inductive Constructions, CIC）裸内核**。只需绕开依赖选择公理与柯西商集的经典实数分支，用**纯整数规范射影结构（`structure`）**消除商公理、用**类型类字段（`class`）**列出选定的迁移与读数定律、再配一层通往 `Mathlib` 的**单向阴影投影函子 $\Pi_{\mathbb{R}}$**，即可在零外部依赖下跑通 `#print axioms` 输出 **`does not depend on any axioms`** 的可执行 `OmegaMath` 内核；在此基座上，§32.8.4 进一步将该架构延展至特征秩 $5$ 有号旋量载体 `PythSpinor`、零公理二次扩张域 `QSqrt2` 与 `QPhi`、模方 $5$ 的 LPS 自由生成元与球谐赫克算子及有限拉马努金图 $X^{5, 13}$，以及任意阶 D-有限微分射流环 $J_N(\mathbb{Q})$ 与无 $\pi$ 马青有理包络（将三层 `OmegaMath` 工程路线图、证明有向无环图膨胀倍率对照与 `OmegaCore` 演进规划标为 **`MODEL`**；将十五条冻结核心定理——完备三元比较四元数同构、弦距读数恒等式、定基流群分解、射影核与旋量玻恩权重同一、四元数流群切比雪夫递推、拉格朗日—格拉姆恒等式、舒尔补二次型极小值可达定理、保格拉姆线性等距唯一延拓、有理六轴无正交开覆盖、既约分母最大公约数约化与连分数收敛子对数长度界、可判定单群素因子剥离定阶、二进制名称比较显式步数界，以及整数四分深度预算完备性与无极限实数上界传递定理——标为绿色 **`LEAN ✓`**；将 CIC 类型论文献、赫德伯格可判定相等性唯一性定理、独立内核审计记录、§32.8.4 的全称书面证明与 Lean `v4.35.0` 及双工作精度 Arb 实测标为 **`ARGUED` / `NUM`**）。
+§32.8.3 的可执行原型使用 Lean 隐式导入的标准库 `Init`。有限算例定理 `omega_zero_axiom_master_check` 的公理闭包为空。代码声明了 `OmegaSpace` 类型类，构造其实例还须另行证明各字段。在所钉提交 [{commit}](trureturing:) 上，严格库重放从所选库根（如 `OmegaMath.Projective.Circle`）出发，在空内核中核对其导入闭包。实数桥接定理 `OmegaShadowBridge.cayley_circle_unit` 的官方端记录列出三条依赖，即 `propext`、`Classical.choice` 和 `Quot.sound`。§32.8.4 进一步将该架构延展至特征秩 $5$ 有号旋量载体 `PythSpinor`、零公理二次扩张域 `QSqrt2` 与 `QPhi`、模方 $5$ 的 LPS 自由生成元与球谐赫克算子及有限拉马努金图 $X^{5, 13}$，以及任意阶 D-有限微分射流环 $J_N(\mathbb{Q})$ 与无 $\pi$ 马青有理包络（将三层 `OmegaMath` 工程路线图、证明有向无环图膨胀倍率对照与 `OmegaCore` 演进规划标为 **`MODEL`**；将十五条冻结核心定理——完备三元比较四元数同构、弦距读数恒等式、定基流群分解、射影核与旋量玻恩权重同一、四元数流群切比雪夫递推、拉格朗日—格拉姆恒等式、舒尔补二次型极小值可达定理、保格拉姆线性等距唯一延拓、有理六轴无正交开覆盖、既约分母最大公约数约化与连分数收敛子对数长度界、可判定单群素因子剥离定阶、二进制名称比较显式步数界，以及整数四分深度预算完备性与无极限实数上界传递定理——标为绿色 **`LEAN ✓`**；将 CIC 类型论文献、赫德伯格可判定相等性唯一性定理、独立内核审计记录、§32.8.4 的全称书面证明与 Lean `v4.35.0` 及双工作精度 Arb 实测标为 **`ARGUED` / `NUM`**）。
 
 ::: {.remark #rem-ch39-sister-monograph-omega-math title="姊妹专著：OMEGA MATH 六卷全本、四座三维实验室与双附录索引"}
 本节浓缩呈现 `OmegaMath` 零公理形式化架构与量子几何主线的衔接；独立六卷姊妹专著 **[《OMEGA MATH》（`OMEGA//MATH`）六卷目录](https://github.com/the-omega-institute/trureturing-books/blob/main/books/omega-math/zh/SUMMARY.md)** 现已完备收录全书 **18 章**、终章及 **[附录 A](https://github.com/the-omega-institute/trureturing-books/blob/main/books/omega-math/zh/appendix-a.md)**／**[附录 B](https://github.com/the-omega-institute/trureturing-books/blob/main/books/omega-math/zh/appendix-b.md)**，集成 **严格端公理记录为空的 D5 冻结定理**与第 2 层 **11 条 `OmegaShadowBridge` 单向阴影函子定理**、**19 幅双语语义静态图**、四座三维交互实验室（**`OMEGA//SPIN`**、**`OMEGA//LAB`**、**`OMEGA//JET`**、**`OMEGA//ARC`**，合计 16 张实验卡）以及双语概览演示文稿 **`overview`**，系统覆盖纯 CIC 与齐次射影闭环、无原点流群与利雅三元恒常单位曲率、双卡无奇点凯莱旋转、无极限射流与凯莱—三角大一统、全阶无 $\pi$ 球面彼得—魏尔调和分析、赫维茨自由群 $F_3$ 与模方 $5$ 赫克—拉马努金有理谱论、$\Omega$-FRACTRAN 旋子机与空内核审计，并可直达收官 **[第十八章 空内核审计、单向阴影函子与六卷全息工作台](https://github.com/the-omega-institute/trureturing-books/blob/main/books/omega-math/zh/ch18-zero-axiom-kernel-and-shadow-bridge.md)**。
@@ -115,9 +115,9 @@ $$
 
 ---
 
-## 32.8.3 零外部依赖 Lean 4 可执行原型（`v4.35.0` 实机核验）与三步演进路线 {#sec-ch39-lean4-zero-axiom-executable-prototype}
+## 32.8.3 使用标准 `Init` 的 Lean 4 可执行原型（`v4.35.0` 实机核验）与三步演进路线 {#sec-ch39-lean4-zero-axiom-executable-prototype}
 
-下面这段完整代码**不导入 `Mathlib` 的任何一行代码（零 `import` 语句）**，仅凭 Lean 4（`v4.35.0`）原生裸内核，从零实现了零公理既约有理数 `QRat`、规范齐次整数三元数 `ProjTernion`、二阶无极限微积分环 `Jet2Rat`（$\mathbb{Q}[\eta]/(\eta^3)$）以及 `OmegaSpace` 类型类契约，并用**单条内核反射指令 `by decide`** 一步核验 `{0, 1/2, 1}` 因果有理锚点、`(1,1,1,1)` 三拍精确闭合、两枚整正交旋子非对易合成以及 $x_0 = 1$ 处的二阶代数导数。将本段代码原样送入 `lean --stdin`（`v4.35.0`），编译器零警告通过，末尾 `#print axioms` 逐字输出 **`'omega_zero_axiom_master_check' does not depend on any axioms`**：
+这段代码没有 `prelude` 指令，Lean `v4.35.0` 会自动导入标准 `Init`。原型用其中的 `Int`、`Nat` 和 `Nat.gcd` 实现既约有理数 `QRat`、原始整数四元组 `ProjTernion` 与二阶射流 `Jet2Rat`，并声明 `OmegaSpace` 的字段。另一个定理 `omega_zero_axiom_master_check` 用 `decide` 证明有限项合取，涵盖保真度读数、三拍归位、非交换见证与 $x_0=1$ 处的射流。运行 `#print axioms omega_zero_axiom_master_check` 给出 **`does not depend on any axioms`**。
 
 ```lean
 /-- 1. 零公理既约有理数 QRat（纯 Int × Nat 规范代表元，绕开标准库 Rat 内嵌的经典证明项） -/
@@ -256,7 +256,7 @@ theorem omega_zero_axiom_master_check :
 
 落到具体的形式化工程演进路线图上，整套 `OmegaMath` 体系分三步梯次推进（`MODEL` 工程路线）：
 
-1. **第一步（零依赖可执行内核 `OmegaCore`）**：以数百行零导入 Lean 4 代码将 `QRat`、`ProjTernion` / `CanonProjTernion`、`Jet2Rat` 与 `OmegaSpace` 完整定型，确保核心几何与二阶微积分定理保持 `#print axioms` 为空且 $100\%$ 支持 `#eval` 原生编译；
+1. **第一步 · `OmegaCore` 的可执行算术。** 在标准 `Init` 上实现上述载体与运算，用 `decide` 核验各有限算例，读取对应定理的公理闭包。
 2. **第二步（有理格拉姆舒尔补与流群测地算法层）**：在 `OmegaCore` 之上实现精确有理 Cholesky / 舒尔补正定证书、连分数收敛子与有限素因子定阶算法，让自动化形式证明器直接用高速内核归约（`decide`）替代繁琐的极限滤子搜索；
 3. **第三步（单向阴影函子 $\Pi_{\mathbb{R}}$ 对接 `Mathlib`）**：通过有理旋转稠密性与整数预算传递引理（如 `rationalQuarterDepth_integer_sound` $\to$ `rationalQuarterDepth_real_sound`）单向导出经典实分析定理，实现“内核零公理可计算、外层全生态互通”。
 
@@ -303,7 +303,7 @@ theorem omega_zero_axiom_master_check :
 
 ## 32.8.4 特征秩 5 旋量提升、有限次代数扩张、模方 5 赫克扩展子与 D-有限微分射流 {#sec-ch39-omega-math-pythspinor-algebraic-lps-dfinite}
 
-在 §32.8.1–§32.8.3 建成的零公理三层基座之上，四道更深一层的代数与分析边界问题紧随而来：（一）为何射影载体 `ProjTernion` 的二次射线核特征秩封顶于 $10$，而上述冻结定理第 1 组所刻画的比较系统却在所选有号核下要求特征秩 $5$ 并借旋量双覆叠保存 $720^\circ$ 符号记忆？（二）当物理可观测量确实触及无理代数数（例如把非平方模方态 `pHalf` 沿同一射线作单位归一化、达到 CHSH 齐雷尔森上界 $2\sqrt{2}$ 或闭合五角黄金比切比雪夫周期）时，如何在不退回实数连续统 $\mathbb{R}$ 的前提下以零公理有限次代数扩张精确承载？（三）受上述冻结定理中模方 $5$ 整坐标算术启发，四坐标模方 $5$ 赫维茨四元数如何在 $\mathrm{SO}(3, \mathbb{Q})$ 内自由生成 $F_3$，并在球谐空间上诱导精确有理赫克算子（矩阵、迹与特征多项式）及其认证谱与有限拉马努金凯莱图？（四）如何将二阶射流 `Jet2Rat` 推广到任意阶 D-有限微分射流环 $J_N(\mathbb{Q})$，在纯有理多项式环内打通凯莱参数化与三角恒等式，并无须预设超越常数 $\pi$ 即导出可任意收紧的马青有理双边包络？本小节将这四条结构延展统一收束进零公理、无超越数、无实无穷的 `OmegaMath` 体系（全称命题由书面证明给出，标为 `ARGUED`；有限实例、谱界与包络由精确有理、双工作精度 Arb 证书及独立零导入 Lean 辅助核验认证，标为 `NUM`，且该独立脚本不计入本仓库所钉 `trureturing` 冻结 `LEAN ✓` 定理总数）。
+在 §32.8.1–§32.8.3 所述的三层架构之上，四道更深一层的代数与分析边界问题紧随而来：（一）为何射影载体 `ProjTernion` 的二次射线核特征秩封顶于 $10$，而上述冻结定理第 1 组所刻画的比较系统却在所选有号核下要求特征秩 $5$ 并借旋量双覆叠保存 $720^\circ$ 符号记忆？（二）当物理可观测量确实触及无理代数数（例如把非平方模方态 `pHalf` 沿同一射线作单位归一化、达到 CHSH 齐雷尔森上界 $2\sqrt{2}$ 或闭合五角黄金比切比雪夫周期）时，如何在不退回实数连续统 $\mathbb{R}$ 的前提下以零公理有限次代数扩张精确承载？（三）受上述冻结定理中模方 $5$ 整坐标算术启发，四坐标模方 $5$ 赫维茨四元数如何在 $\mathrm{SO}(3, \mathbb{Q})$ 内自由生成 $F_3$，并在球谐空间上诱导精确有理赫克算子（矩阵、迹与特征多项式）及其认证谱与有限拉马努金凯莱图？（四）如何将二阶射流 `Jet2Rat` 推广到任意阶 D-有限微分射流环 $J_N(\mathbb{Q})$，在纯有理多项式环内打通凯莱参数化与三角恒等式，并无须预设超越常数 $\pi$ 即导出可任意收紧的马青有理双边包络？本小节将这四条结构延展统一收束进零公理、无超越数、无实无穷的 `OmegaMath` 体系（全称命题由书面证明给出，标为 `ARGUED`；有限实例、谱界与包络由精确有理、双工作精度 Arb 证书及独立零导入 Lean 辅助核验认证，标为 `NUM`，且该独立脚本不计入本仓库所钉 `trureturing` 冻结 `LEAN ✓` 定理总数）。
 
 ### 32.8.4.1 射影射线秩 10 与有号有理旋量 `PythSpinor` 秩 5 的精确分离 {#sec-ch39-pythspinor-rank5-double-cover}
 
