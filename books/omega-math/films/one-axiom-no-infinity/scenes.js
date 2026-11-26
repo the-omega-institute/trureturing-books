@@ -3667,7 +3667,7 @@ SCENES.b05_ask = S => {
      the four-rule FRACTRAN program P_Ω = [11/49, 7/25, 5/9, 3/4] run from 2^17 (ch. 16, theorem p_omega_halts_at_22);
      the integer quaternions X = 1 + 2i, Y = 1 + 2j, XY, YX and the unwind gate conj(Y) with divisor 5
      (ch. 16, quaternion_fractran_order_separation);
-     the observer's structural time 0 → 3/4 → 3/2 (ch. 17, the book's worked example; an interpretation, MODEL);
+     the observer's structural time 0 → 1/2 → 2 (ch. 17, the book's worked example; an interpretation, MODEL);
      the Cayley point (q² − p², 2pq) / (p² + q²) at (p, q) = (1, 2) (ch. 18, cayley_circle_unit, core and shadow).
    FILM.init re-derives every number independently and reports any disagreement as a page error. */
 const B06 = (() => {
@@ -3702,7 +3702,7 @@ const B06 = (() => {
   const XY = qmul(X, Y), YX = qmul(Y, X);
   const XYG = qmul(XY, GATE), YXG = qmul(YX, GATE);
   const fmtQ = q => `(${q.map(v => (v < 0 ? '−' + -v : String(v))).join(', ')})`;
-  /* the observer's three steps (ch. 17 worked example): Schur innovation |x⊥|²/|x|² plus the book's edge weight 1/4 */
+  /* the observer's three steps (ch. 17 worked example): Schur innovation |x⊥|²/|x|² plus the comparison-graph cycle increment */
   function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a; }
   function frac(n, d) { const g = gcd(n, d) || 1; return [n / g, d / g]; }
   function fadd(a, b) { return frac(a[0] * b[1] + b[0] * a[1], a[1] * b[1]); }
@@ -3718,16 +3718,28 @@ const B06 = (() => {
     const sq = num.reduce((s, v) => fadd(s, [v[0] * v[0], v[1] * v[1]]), [0, 1]);
     return { perp: num, ratio: frac(sq[0] * 1, sq[1] * dotv(x, x)) };
   }
-  const E0 = [1, 0, 0, 0], H1 = [1, 1, 0, 0], G = [1, 1, 1, 1], EDGE = [1, 4];
+  const E0 = [1, 0, 0, 0], H1 = [1, 1, 0, 0], H2 = [1, 0, 1, 0];
   function observerSteps() {
     const basis = [E0];
-    const s1 = innovation(basis, E0);                       // repeat the seed: nothing new
-    const s2 = innovation(basis, H1);                       // absorb h1
-    basis.push(s2.perp.map(v => v[0] / v[1]));
-    const s3 = innovation(basis, G);                        // absorb the composite g = (1, 1, 1, 1)
-    const d1 = s1.ratio, d2 = fadd(s2.ratio, EDGE), d3 = fadd(s3.ratio, EDGE);
-    const t1 = d1, t2 = fadd(t1, d2), t3 = fadd(t2, d3);
-    return [{ x: E0, di: s1.ratio, edge: [0, 1], d: d1, tau: t1 }, { x: H1, di: s2.ratio, edge: EDGE, d: d2, tau: t2 }, { x: G, di: s3.ratio, edge: EDGE, d: d3, tau: t3 }];
+    const beats = [
+      { x: E0, comparisons: [] },
+      { x: H1, comparisons: [[0, 1]] },
+      { x: H2, comparisons: [[0, 2], [1, 2]] }
+    ];
+    let tau = [0, 1], vertices = 1, edges = 0, previousBetti = 0;
+    return beats.map(({ x, comparisons }) => {
+      const { perp, ratio: di } = innovation(basis, x);
+      if (di[0] > 0) basis.push(perp.map(([n, d]) => n / d));
+      // Each new vertex attaches to the seed component. The third beat closes a triangle.
+      if (comparisons.length) vertices++;
+      edges += comparisons.length;
+      const betti = edges - vertices + 1;
+      const deltaBetti = betti - previousBetti;
+      const d = fadd(di, [deltaBetti, 1]);
+      previousBetti = betti;
+      tau = fadd(tau, d);
+      return { x, comparisons, di, deltaBetti, d, tau };
+    });
   }
   const OBS = observerSteps();
   /* the Cayley point of (p, q) = (1, 2) */
@@ -3801,9 +3813,10 @@ FILM.init.push(() => {
   if (mm(B.XY, B.GATE).join() !== '5,10,0,0' || B.XYG.some(v => B.mod(v, 5))) err('XY does not pass the gate');
   if (B.XYG.map(v => v / 5).join() !== B.X.join()) err('XY does not unwind to X');
   if (B.YXG.join() !== '5,-6,0,-8' || B.YXG.map(v => B.mod(v, 5)).join() !== '0,4,0,2') err('YX remainders changed');
-  /* observer: 0, 3/4, 3/2 */
-  if (B.OBS.map(s => B.fstr(s.tau)).join() !== '0,3/4,3/2') err('structural time is not 0, 3/4, 3/2');
+  /* observer: 0, 1/2, 2 */
+  if (B.OBS.map(s => B.fstr(s.tau)).join() !== '0,1/2,2') err('structural time is not 0, 1/2, 2');
   if (B.OBS.map(s => B.fstr(s.di)).join() !== '0,1/2,1/2') err('innovation ratios changed');
+  if (B.OBS.map(s => s.deltaBetti).join() !== '0,0,1') err('comparison cycle increments changed');
   /* Cayley point (3/5, 4/5) and x² + y² = 1 */
   const cx = B.CAY.x, cy = B.CAY.y;
   if (B.fstr(cx) !== '3/5' || B.fstr(cy) !== '4/5') err('Cayley point is not (3/5, 4/5)');
@@ -3969,31 +3982,33 @@ SCENES.b06_observer = S => {
   txt('MODEL · 诠释', cx, cy - R - 30, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.argued, a, ls: 3 });
   const inside = at(S, 1, 0.8);
   txt('∂S = ∅ · no outside · 没有外部', cx, cy + R + 52, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.argued, a: a * inside });
-  /* the ledger rows appear one by one; nodes = the seed plus one per step that brought new structure (one new edge each) */
-  const shownAt = [Q(S, 3, 'Like a diary', 0.5), Q(S, 3, 'three quarters', 0.5), Q(S, 3, 'three halves', 0.5)];
+  /* The ledger and the comparison graph use the same beat data. */
+  const shownAt = [Q(S, 3, 'Like a diary', 0.5), Q(S, 3, 'A first comparison', 0.5), Q(S, 3, 'closes a triangle', 0.5)];
   const cur = shownAt.reduce((k, v, i) => (v > 0 ? i : k), -1);
-  const nn = 1 + B.OBS.filter((s, i) => shownAt[i] > 0 && s.d[0] > 0).length;
-  const nodes = [[0, 0], [-120, -80], [110, -60]];
-  for (let i = 0; i < nn; i++) {
-    const [dx, dy] = nodes[i], x = cx + dx * Math.cos(spin) - dy * Math.sin(spin) * 0.2, y = cy + dy;
-    if (i) line(cx, cy, x, y, C.argued, a * 0.6, 2);
-    dot(x, y, 12, i === nn - 1 && i > 0 ? 'g' : 'v', a);
-  }
+  const nodes = [[0, 0], [-120, -80], [110, -60]].map(([dx, dy]) =>
+    [cx + dx * Math.cos(spin) - dy * Math.sin(spin) * 0.2, cy + dy]);
+  let count = 1;
+  B.OBS.forEach(({ comparisons }, i) => {
+    if (!comparisons.length || shownAt[i] <= 0) return;
+    count++;
+    comparisons.forEach(([from, to]) => line(...nodes[from], ...nodes[to], C.argued, a * shownAt[i] * 0.65, 2));
+  });
+  nodes.slice(0, count).forEach(([x, y], i) => dot(x, y, 12, i === count - 1 && i > 0 ? 'g' : 'v', a));
   /* the eye turned around */
   const eye = at(S, 0, 0.6) * (1 - at(S, 1, 0.5));
   txt('?', cx, cy + 30, { size: 140, fam: F.orb, w: 900, align: 'center', c: C.argued, a: eye * fade });
   /* the diary ledger */
   const d = Q(S, 2, 'Its time', 0.6) * fade;
   panel(1000, 210, 780, 560, d, C.argued, 'STRUCTURAL TIME · 结构时间 · τ');
-  txt('Δτ = |x⊥|²/|x|² + edge weight 1/4 (the book\'s worked example)', 1030, 290, { size: 18, fam: F.mono, w: 700, c: C.white, a: d });
+  txt('Δτ = |x⊥|²/|x|² + Δb₁ · cycle rank / 环路秩', 1030, 290, { size: 18, fam: F.mono, w: 700, c: C.white, a: d });
   txt('a wall clock ticks anyway; τ does not · 钟总在走，τ 不', 1030, 326, { size: 20, fam: F.zh, w: 700, c: C.dim, a: d });
-  const rows = ['repeat e₀ = (1,0,0,0)', 'absorb (1,1,0,0)', 'absorb (1,1,1,1)'];
+  const rows = ['repeat e₀ = (1,0,0,0)', 'add h₁ = (1,1,0,0) · tree edge', 'add h₂ = (1,0,1,0) · triangle'];
   B.OBS.forEach((s, i) => {
     const y = 410 + i * 110, now = i === cur;
     const al = d * shownAt[i];
     txt(`day ${i + 1} · ${rows[i]}`, 1030, y, { size: 22, fam: F.mono, w: 700, c: C.white, a: al });
     txt(s.d[0] > 0 ? '+ page' : 'no new page', 1750, y, { size: 20, fam: F.mono, w: 700, align: 'right', c: C.argued, a: al });
-    txt(`Δτ = ${B.fstr(s.di)} + ${B.fstr(s.edge)} = ${B.fstr(s.d)}`, 1030, y + 40, { size: 26, fam: F.math, w: 700, c: C.argued, a: al });
+    txt(`Δτ = ${B.fstr(s.di)} + ${s.deltaBetti} = ${B.fstr(s.d)}`, 1030, y + 40, { size: 26, fam: F.math, w: 700, c: C.argued, a: al });
     txt(`τ = ${B.fstr(s.tau)}`, 1750, y + 40, { size: 34, fam: F.orb, w: 900, align: 'right', c: now ? C.now : C.white, a: al });
   });
   const w = Q(S, 4, 'interpretation', 0.5) * fade;
@@ -4070,7 +4085,7 @@ SCENES.b06_ask = S => {
   const a = clamp(u / 0.6);
   const cards = [
     [480, 'MACHINE · 机器', '[11/49, 7/25, 5/9, 3/4]', C.lean, 'LEAN ✓ halts at 22'],
-    [960, 'OBSERVER · 观察者', 'τ : 0 → 3/4 → 3/2', C.argued, 'MODEL · interpretation'],
+    [960, 'OBSERVER · 观察者', 'τ : 0 → 1/2 → 2', C.argued, 'MODEL · interpretation'],
     [1440, 'JUDGE · 裁判', 'axioms: [ ]', C.lean, 'LEAN ✓ core circle']
   ];
   cards.forEach(([x, t, body, col, foot], i) => {

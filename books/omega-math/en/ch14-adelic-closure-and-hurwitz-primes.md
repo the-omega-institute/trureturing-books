@@ -78,15 +78,17 @@ Checking $r = -18/35$ directly: $\frac{18}{35} \cdot \frac{1}{2} \cdot \frac{1}{
 
 On the scalar integer line $\mathbb{Z}_+$, prime multiplication is commutative ($2 \cdot 3 = 3 \cdot 2$) and therefore blind to non-commuting three-dimensional rotational word order. When we lift arithmetic into the four-dimensional integer quaternions — the **Lipschitz ring** $\mathcal{L}(\mathbb{Z}) = \mathbb{Z}[\mathbf{i}, \mathbf{j}, \mathbf{k}] \cong \mathbb{Z}^4$ and the maximal **Hurwitz ring** $\mathcal{H}(\mathbb{Z}) = \mathcal{L}(\mathbb{Z}) \cup (\mathbb{Z} + \frac{1}{2})^4$ — every odd prime $p$ undergoes a striking **non-abelian spinor splitting**.
 
-By Jacobi's four-square theorem and Hurwitz factorization (`Literature result, not formalized in this book`; see [@rem-ch14-literature-and-model-boundary]), for every odd prime $p$ the equation $w^2 + x^2 + y^2 + z^2 = p$ has exactly $r_4(p) = 8(p + 1)$ integer solutions in $\mathbb{Z}^4$ and $24(p + 1)$ norm-$p$ elements in $\mathcal{H}(\mathbb{Z})$. Quotienting by the $24$ Hurwitz units (or, for $p \equiv 1 \pmod 4$, by the $8$ Lipschitz units $\{\pm 1, \pm\mathbf{i}, \pm\mathbf{j}, \pm\mathbf{k}\}$), every odd prime $p$ splits into **exactly $p + 1$ primitive norm-$p$ spinor classes** $\{\boldsymbol{\pi}_{p,k}\}_{k=1}^{p+1}$.
+By Jacobi's four-square theorem and Hurwitz factorization (`Literature result, not formalized in this book`; see [@rem-ch14-literature-and-model-boundary]), for every odd prime $p$ the equation $w^2 + x^2 + y^2 + z^2 = p$ has exactly $r_4(p) = 8(p + 1)$ integer solutions in $\mathbb{Z}^4$ and $24(p + 1)$ norm-$p$ elements in $\mathcal{H}(\mathbb{Z})$. Taking associate classes under left multiplication by the $24$ Hurwitz units (or, for $p \equiv 1 \pmod 4$, by the $8$ Lipschitz units $\{\pm 1, \pm\mathbf{i}, \pm\mathbf{j}, \pm\mathbf{k}\}$), every odd prime $p$ splits into **exactly $p + 1$ primitive norm-$p$ spinor classes** $\{\boldsymbol{\pi}_{p,k}\}_{k=1}^{p+1}$.
 
-When $p \equiv 1 \pmod 4$, parity modulo $4$ forces $w^2 + x^2 + y^2 + z^2 = p$ to have **exactly one odd coordinate and three even coordinates**. Multiplying on the left by a unique Lipschitz unit places every associate class in canonical form:
+When $p \equiv 1 \pmod 4$, parity modulo $4$ forces $w^2 + x^2 + y^2 + z^2 = p$ to have **exactly one odd coordinate and three even coordinates**. Multiplying on the left by a unique Lipschitz unit places every Lipschitz left associate class in canonical form:
 
 $$
 w > 0, \qquad w \equiv 1 \pmod 2, \qquad x \equiv y \equiv z \equiv 0 \pmod 2.
 $$
 
 These $p + 1$ canonical Lipschitz spinors come in $(p + 1)/2$ conjugate pairs $\boldsymbol{\pi}, \overline{\boldsymbol{\pi}}$ (no element is self-conjugate because $p$ is not a square), producing $(p + 1)/2$ inverse pairs of exact rational rotations in $\mathrm{SO}(3, \mathbb{Q})$.
+
+The classes give a count, while spherical right translation depends on the representatives. The conjugate pairing below comes from the parity and positive-sign conditions. Arbitrary representatives need not have this property, as the $p=3$ example in Chapter 15 shows.
 
 ::: {.definition #def-ch14-hurwitz-prime-spinors title="Hurwitz Prime Spinors and the Canonical Norm-5 Six-Generator Set S₅"}
 For any odd prime $p \equiv 1 \pmod 4$, define its **canonical norm-$p$ prime spinor set** by

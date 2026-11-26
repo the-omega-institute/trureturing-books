@@ -78,15 +78,17 @@ $$
 
 在标量正整数 $\mathbb{Z}_+$ 中，素数乘法是可交换的（$2 \cdot 3 = 3 \cdot 2$），因而无法原生编码三维空间的非对易旋转词序。但是，当我们把算术从一维整数环 $\mathbb{Z}$ 提升至四维整四元数环——即**利普希茨整环** $\mathcal{L}(\mathbb{Z}) = \mathbb{Z}[\mathbf{i}, \mathbf{j}, \mathbf{k}] \cong \mathbb{Z}^4$ 与包含半整顶点的极大**赫维茨整环** $\mathcal{H}(\mathbb{Z}) = \mathcal{L}(\mathbb{Z}) \cup (\mathbb{Z} + \frac{1}{2})^4$——每一颗奇素数 $p$ 都会沿三维球面的旋转自由度发生戏剧性的**非阿贝尔素旋子分裂**！
 
-根据雅可比四平方和定理与赫维茨四元整环唯一分解理论（`文献结果`，见 [@rem-ch14-literature-and-model-boundary]），对每一颗奇素数 $p$，四平方和方程 $w^2 + x^2 + y^2 + z^2 = p$ 在 $\mathbb{Z}^4$ 中恰有 $r_4(p) = 8(p + 1)$ 组整数解，在极大赫维茨整环 $\mathcal{H}(\mathbb{Z})$ 中恰有 $24(p + 1)$ 个模方为 $p$ 的元素；模去 $24$ 个赫维茨单位元（或对 $p \equiv 1 \pmod 4$ 模去 $8$ 个利普希茨单位元 $\{\pm 1, \pm \mathbf{i}, \pm \mathbf{j}, \pm \mathbf{k}\}$），奇素数 $p$ 精确分裂为 **$p + 1$ 枚本原模方 $p$ 素旋子** $\{\boldsymbol{\pi}_{p,k}\}_{k=1}^{p+1}$。
+根据雅可比四平方和定理与赫维茨四元整环唯一分解理论（`文献结果`，见 [@rem-ch14-literature-and-model-boundary]），对每一颗奇素数 $p$，四平方和方程 $w^2 + x^2 + y^2 + z^2 = p$ 在 $\mathbb{Z}^4$ 中恰有 $r_4(p) = 8(p + 1)$ 组整数解，在极大赫维茨整环 $\mathcal{H}(\mathbb{Z})$ 中恰有 $24(p + 1)$ 个模方为 $p$ 的元素；按 $24$ 个赫维茨单位元的左乘取相伴类（或对 $p \equiv 1 \pmod 4$ 模去 $8$ 个利普希茨单位元 $\{\pm 1, \pm \mathbf{i}, \pm \mathbf{j}, \pm \mathbf{k}\}$），奇素数 $p$ 精确分裂为 **$p + 1$ 枚本原模方 $p$ 素旋子** $\{\boldsymbol{\pi}_{p,k}\}_{k=1}^{p+1}$。
 
-当 $p \equiv 1 \pmod 4$ 时，奇偶模 $4$ 约束要求 $w^2 + x^2 + y^2 + z^2 = p$ 的四个整数分量中**恰有一个为奇数、其余三个为偶数**。借 $8$ 个利普希茨单位元的左乘，每一类相伴元都唯一规范化为满足
+当 $p \equiv 1 \pmod 4$ 时，奇偶模 $4$ 约束要求 $w^2 + x^2 + y^2 + z^2 = p$ 的四个整数分量中**恰有一个为奇数、其余三个为偶数**。借 $8$ 个利普希茨单位元的左乘，每个利普希茨左相伴类都唯一规范化为满足
 
 $$
 w > 0, \qquad w \equiv 1 \pmod 2, \qquad x \equiv y \equiv z \equiv 0 \pmod 2
 $$
 
 的本原利普希茨整旋子 $\boldsymbol{\pi}_{p,k} = (w, x, y, z) \in \mathbb{Z}^4$。这 $p + 1$ 枚素旋子成对互为共轭（因 $p$ 非完全平方数，无自共轭元），从而自然分为 $(p + 1)/2$ 对互逆三维有理旋转。
+
+相伴类给出计数，球面右平移则取决于所选代表元。下面的共轭配对来自明确的奇偶与正号条件。一般奇素数的任意代表元未必有这项性质，第十五章将给出 $p=3$ 的例子。
 
 ::: {.definition #def-ch14-hurwitz-prime-spinors title="赫维茨素旋子与 p = 5 规范六生成元集 S₅"}
 对奇素数 $p \equiv 1 \pmod 4$，定义其**规范模方 $p$ 素旋子集**为
