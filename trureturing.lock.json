@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "7c33b262cb56f170ce78fbf0838006c2d75de313",
-  "pinned_at": "2026-11-26T08:32:02Z",
+  "commit": "03966ec6991f9ccdb64881dfac78a1999b0f3d31",
+  "pinned_at": "2026-11-26T10:42:39Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1759,6 +1759,32 @@
       "statement_id": "sha256:d239e2b4847f06bb3fde67f522d57818b1261a1debda842dd2cd28aca1a734e1",
       "line": 855,
       "signature": "theorem reconstruction_bound (g : Fin 4 → Fin 4 → U) (ε : ℝ) (he : 0 ≤ ε) (hπ : ε ≤ π) (hg : DefectLE g ε) : ∃ φ : Fin 4 → U, Fits g φ (4 * ε / 5)"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionLocalSharpness.RoundQuaternionLocalSharpness.quarterLocal_angularRegion": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionLocalSharpness",
+      "name": "RoundQuaternionLocalSharpness.quarterLocal_angularRegion",
+      "kind": "theorem",
+      "statement_id": "sha256:2b798ea3dfb503a7cdb43dce47137b1d23a9eed1b3d6d8ddc9f0d42d33da2422",
+      "line": 613,
+      "signature": "theorem quarterLocal_angularRegion (a b c u v w : ℝ) (ha : |a - π/2| ≤ 17*π/900) (hb : |b - π/2| ≤ 17*π/900) (hc : |c - π/2| ≤ 17*π/900) (hu : 0 ≤ u) (hv : 0 ≤ v) (huv : u + v < π/2) (hsize : u^2 + v^2 + (u+v)^2 ≤ (4497/500) * localR^2) : let g",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionLocalSharpness.RoundQuaternionLocalSharpness.quarterLocal_strictFit": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionLocalSharpness",
+      "name": "RoundQuaternionLocalSharpness.quarterLocal_strictFit",
+      "kind": "theorem",
+      "statement_id": "sha256:2b798ea3dfb503a7cdb43dce47137b1d23a9eed1b3d6d8ddc9f0d42d33da2422",
+      "line": 116,
+      "signature": "theorem quarterLocal_strictFit (A : Fin 3 → U) (p q : ℂ) (η γ : Fin 3 → ℝ) (hA : ∀ j, (A j : ℍ[ℝ]) = quatPair ⟨-η j, γ j⟩ (transverse p q j)) (hγ : ∀ j, γ j = √(1 - (η j)^2 - ‖transverse p q j‖^2)) (hγpos : ∀ j, 0 < γ j) (hp : ‖p‖ ≤ localR) (hq : ‖q‖ ≤ localR) (he : etaMax η ≤ localR) : let g",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Combinatorics/Graph/Chordal/SimplicialAndIntervalPotential.SimpleGraph.BanachPathPower.pathPower_isIntervalGraph": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/SimplicialAndIntervalPotential",
