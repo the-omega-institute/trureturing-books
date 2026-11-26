@@ -74,9 +74,9 @@ FILM.init.push(() => {
   check(Math.abs(cram(0, 2) - X13.t) < 1e-9 && Math.abs(cram(0, 1) - X12.t) < 1e-9, 'crossings');
   check(fmt(WA_GAP, 3) === '3.664', `gap ${WA_GAP}`);
   /* the thresholdless sin²θ prediction (three lines through one point, α̂ and α_s fixed) is ≈ 0.2076 */
-  const k = WA_K, ai = WA_IN.ainv;
-  const det = ai * (-k[0] + k[1]) - (-k[1] + k[2]) * (-1.6 * ai);
-  const sPred = (WA_A0[2] * (-k[0] + k[1]) - (-k[1] + k[2]) * (-0.6 * ai)) / det;
+  const k = WA_K, a0inv = WA_IN.ainv;
+  const det = a0inv * (-k[0] + k[1]) - (-k[1] + k[2]) * (-1.6 * a0inv);
+  const sPred = (WA_A0[2] * (-k[0] + k[1]) - (-k[1] + k[2]) * (-0.6 * a0inv)) / det;
   check(fmt(sPred, 4) === '0.2076', `sin² prediction ${sPred}`);
 
   /* 2. the blind combination, in integers (b scaled by 30) */
@@ -425,7 +425,7 @@ SCENES.keys = S => {
       line(xs, y - 26, xs, y + 26, C.mag, a, 4);
       txt('finite-momentum matching · 0.1532183', xs, y + 78, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.mag, a: a * clamp(j * 2 - 1) });
     }
-    txt('model rules, chosen after the fit · 看过拟合后提出的模型规则', W / 2, 810, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.argued, a: a * at(S, 3, 0.6) });
+    txt('model rules, not derivations · 模型规则，不是推导', W / 2, 810, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.argued, a: a * at(S, 3, 0.6) });
   }
 };
 
@@ -495,7 +495,7 @@ SCENES.close = S => {
 /*                                   poster                                  */
 /* ======================================================================= */
 FILM.poster = () => {
-  const si = 3, sc = TL.scenes[si], t = sc.end - 1.0;
+  const si = 0, sc = TL.scenes[si], t = sc.end - 1.0;
   background(t, sc, si, sc.end - sc.start - 1.0);
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.1, a: 0.12, cx: 1400, cy: 420, camZ: 7, lw: 1.3, dots: false });
   /* the three lines and the triangle on the left */

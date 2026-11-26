@@ -67,7 +67,7 @@
    "id": "circle",
    "name": "LINE INTO CIRCLE",
    "lead": 0.5,
-   "tail": 0.6,
+   "tail": 0.5,
    "music": [
     0.9,
     0.5,
@@ -110,7 +110,7 @@
    "id": "phases",
    "name": "PHASES FALL SHORT",
    "lead": 0.5,
-   "tail": 0.6,
+   "tail": 0.5,
    "music": [
     0.9,
     0.7,
@@ -124,8 +124,8 @@
      "给每个零点高度 γ 配上调和权，再把时刻 t 的相位加起来。"
     ],
     [
-     "The weighted sum Z reaches length one only if every phase lines up.",
-     "加权和 Z 的长度只有在所有相位重新对齐时才能达到 1。"
+     "Z reaches length one only when every phase lines up.",
+     "Z 的长度只有在所有相位对齐时才能达到 1。"
     ],
     [
      "Under RH, Lean bounds the shortfall near one over T by a constant over a power of log T.",
@@ -148,7 +148,7 @@
    "id": "collide",
    "name": "ONE OVER ROOT PI",
    "lead": 0.5,
-   "tail": 0.6,
+   "tail": 0.5,
    "music": [
     1.0,
     0.8,
@@ -186,7 +186,7 @@
    "id": "window",
    "name": "ZERO 11431",
    "lead": 0.5,
-   "tail": 0.6,
+   "tail": 0.5,
    "music": [
     1.0,
     0.7,
@@ -224,7 +224,7 @@
    "id": "filter",
    "name": "THREE WINDOWS",
    "lead": 0.5,
-   "tail": 0.6,
+   "tail": 0.5,
    "music": [
     1.0,
     0.7,
@@ -267,7 +267,7 @@
    "id": "gap",
    "name": "THE HONEST GAP",
    "lead": 0.5,
-   "tail": 0.6,
+   "tail": 0.5,
    "music": [
     1.0,
     0.7,
@@ -301,7 +301,7 @@
    "id": "close",
    "name": "LEDGER",
    "lead": 0.5,
-   "tail": 3.0,
+   "tail": 2.6,
    "music": [
     1.0,
     0.6,

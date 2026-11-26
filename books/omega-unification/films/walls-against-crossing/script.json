@@ -220,8 +220,8 @@
      "钥匙二：每一步按 32 归一化，读数 0.1189。"
     ],
     [
-     "Both are model rules picked after the fit; another matching rule sends key two to zero point one five three.",
-     "两者都是看过拟合后才选定的模型规则；换一种匹配处方，钥匙二跳到 0.153。"
+     "Both are model rules, not derivations; another matching rule sends key two to zero point one five three.",
+     "两者都是模型规则，不是推导；换一种匹配处方，钥匙二跳到 0.153。"
     ]
    ],
    "cues": [

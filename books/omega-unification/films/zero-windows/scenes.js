@@ -296,7 +296,7 @@ SCENES.circle = S => {
     txt('0', X(0), y0 + 30, { size: 20, fam: F.math, w: 700, align: 'center', c: C.dim, a: ka });
     txt('π', x1, y0 + 30, { size: 20, fam: F.math, w: 700, align: 'center', c: C.dim, a: ka });
     txt('36', X(0) + 18, Yk(36) + 8, { size: 20, fam: F.mono, w: 700, c: C.cyan, a: ka });
-    txt('proof idea: Fejér kernel |Σ_{j<6} e^{ijθ}|² ≥ 0', x0, 500, { size: 22, fam: F.math, w: 700, c: C.white, a: ka });
+    txt('proof idea: Fejér kernel |Σ_(j<6) e^(ijθ)|² ≥ 0', x0, 500, { size: 22, fam: F.math, w: 700, c: C.white, a: ka });
     txt('证明骨架：费耶尔核是平方，从不为负 · NUM computed', x0, 534, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ka });
   }
 };
@@ -334,7 +334,7 @@ SCENES.phases = S => {
   /* right top: the weights */
   panel(900, 190, 900, 190, pa, C.cyan, 'HARMONIC WEIGHT · 调和权');
   zwRich([['a_γ = γ / (1/4 + γ²)', C.white], ['      w_γ = a_γ / W(T)', C.cyan]], 935, 255, { size: 28, fam: F.math, a: pa });
-  zwRich([['Z_T(t) = Σ_{0<γ≤T} w_γ e^{iγt}', C.white]], 935, 302, { size: 26, fam: F.math, a: pa * Q(S, 0, 'add the phases', 0.6) });
+  zwRich([['Z_T(t) = Σ_(0<γ≤T) w_γ e^(iγt)', C.white]], 935, 302, { size: 26, fam: F.math, a: pa * Q(S, 0, 'add the phases', 0.6) });
   const ra = a * Q(S, 2, 'Lean bounds', 0.6);
   zwRich([['P₄(T)/P₂(T)² ≤ 4096 log T', C.lean]], 935, 352, { size: 24, fam: F.math, a: ra });
   zwLean(1340, 352, ZW_LEAN.ratio, ra, { size: 18, last: true });
@@ -416,7 +416,7 @@ SCENES.collide = S => {
   /* line 3: the collision limit */
   const ca = a * g3;
   if (ca <= 0.003) return;
-  zwRich([['s_n E_n(η_n) / (η_n W(T_n)^{2n})', C.white], ['  →  ', C.dim], ['1/√π', C.lean]], 860, 260, { size: 34, fam: F.math, a: ca });
+  zwRich([['s_n E_n(η_n) / (η_n W(T_n)²ⁿ)', C.white], ['  →  ', C.dim], ['1/√π', C.lean]], 860, 260, { size: 34, fam: F.math, a: ca });
   zwRich([['1/√π = ', C.white], [(1 / Math.sqrt(Math.PI)).toFixed(10) + '…', C.cyan], ['   NUM', C.cyan]], 860, 312, { size: 26, fam: F.math, a: ca * at(S, 3, 0.6, 2.5) });
   zwLean(860, 360, ZW_LEAN.collide, ca * Q(S, 3, 'Lean checks', 0.6), { size: 18, last: true });
   txt('given RH and the Landau envelope · 以 RH 与兰道包络为前提', 860, 398, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ca * Q(S, 3, 'Lean checks', 0.6) });

@@ -271,12 +271,11 @@ function chTiles(y, n, k, sq, a, col, label) {
   for (let i = 0; i < n; i++) {
     const x = x0 + i * (tw0 + gap), ta = a * clamp((a * 14 - i * 0.6));
     box(x, y, tw0, 110, col, ta, 2, 'rgba(4,10,24,0.8)');
-    const dk = 1 - sq;
     for (let r = 0; r < k; r++) {
       const cx = x + tw0 / 2 + (r - (k - 1) / 2) * 15;
-      dot(cx, y + 55, 7, col === C.mag ? 'm' : 'c', ta * dk);
+      dot(cx, y + 55, 7, col === C.mag ? 'm' : 'c', ta * clamp(1 - 2 * sq));
     }
-    txt(String(k * k), x + tw0 / 2, y + 72, { size: 44, fam: F.orb, w: 900, align: 'center', c: C.white, a: ta * sq });
+    txt(String(k * k), x + tw0 / 2, y + 72, { size: 44, fam: F.orb, w: 900, align: 'center', c: C.white, a: ta * clamp(2 * sq - 1) });
   }
 }
 SCENES.count = S => {
@@ -331,8 +330,9 @@ SCENES.cycle = S => {
     panel(1000, 200, 800, 300, ba, C.cyan, 'RETURN · 回程');
     const x0 = 1040, wB = 720, xs = x0 + wB * 216 / 624, y0 = 290;
     const free = Q(S, 1, 'all return', 0.8);
-    fillBox(x0, y0, wB, 46, C.cyan, ba * (0.3 + 0.3 * free));
-    fillBox(x0, y0, xs - x0, 46, C.dim, ba * 0.6 * (1 - free));
+    fillBox(xs, y0, x0 + wB - xs, 46, C.cyan, ba * 0.45);
+    fillBox(x0, y0, xs - x0, 46, C.cyan, ba * 0.45 * free);
+    for (let h = x0 + 12; h < xs - 4; h += 18) line(h, y0 + 42, h + 14, y0 + 4, C.dim, ba * 0.7 * (1 - free), 2);
     box(x0, y0, wB, 46, C.cyan, ba, 2);
     line(xs, y0 - 6, xs, y0 + 52, C.white, ba * (1 - free), 2);
     txt('216 stuck · 被困', x0 + 10, y0 + 82, { size: 24, fam: F.zh, w: 700, c: C.dim, a: ba * Q(S, 0, 'two hundred sixteen', 0.5) * (1 - free) });
@@ -378,10 +378,10 @@ SCENES.cycle = S => {
     for (let i = 0; i < 6; i++) {
       const x = 1030 + i * 126, ca = oa2 * Q(S, 3, 'every mass reading', 0.4, i * 0.12);
       chip(x + 56, 668, 112, 40, `#${11485 + i}`, C.cyan, ca, 20);
-      arrow(x + 56, 738, x + 56, 698, C.now, ca * Q(S, 3, 'goes up', 0.5), 3);
+      arrow(x + 56, 738, x + 56, 698, C.now, ca * Q(S, 3, 'every mass reading', 0.5, 0.8), 3);
     }
-    chRich([['Δ mass > 3.163 × 10⁻⁵', C.now]], 1030, 790, { size: 30, a: oa2 * Q(S, 3, 'goes up', 0.5) });
-    chTag(1500, 790, 'CERT · 复算证书', C.cyan, oa2 * Q(S, 3, 'goes up', 0.5));
+    chRich([['Δ mass > 3.163 × 10⁻⁵', C.now]], 1030, 790, { size: 30, a: oa2 * Q(S, 3, 'every mass reading', 0.5, 0.8) });
+    chTag(1500, 790, 'CERT · 复算证书', C.cyan, oa2 * Q(S, 3, 'every mass reading', 0.5, 0.8));
   }
 };
 
@@ -568,7 +568,7 @@ SCENES.stair = S => {
   const flA = a * ptA[2];
   if (flA > 0.003) {
     line(X(1568), Y(19), X(Dmax), Y(19), C.cyan, flA, 5);
-    txt('floor 19 · 地板', X(1568) + 10, Y(19) + 40, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: flA });
+    txt('floor 19 · 地板', X(1568) - 24, Y(19) + 8, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.cyan, a: flA });
     txt('dashed: between tabulated cutoffs · 虚线：表中截止之间', X(900), Y(36), { size: 20, fam: F.zh, w: 700, c: C.dim, a: flA });
   }
   const ca = a * Q(S, 3, 'replay certificates', 0.6);
@@ -658,9 +658,13 @@ SCENES.zeros = S => {
       const x = 1290 + i * 168;
       box(x, 300, 140, 100, C.cyan, ca, 2, 'rgba(4,10,24,0.8)');
       txt(`copy ${i + 1}`, x + 70, 390, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ca });
-      txt(['|r⟩', '|t₁⟩', '|t₂⟩'][i], x + 70, 360, { size: 34, fam: F.math, w: 700, align: 'center', c: i ? C.mag : C.cyan, a: ca });
     }
-    txt('codewords share one phase e^(iφ(γ))', 1270, 448, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: ca });
+    txt('|r⟩', 1360, 360, { size: 34, fam: F.math, w: 700, align: 'center', c: C.cyan, a: ca });
+    txt('|t₁', 1528, 360, { size: 34, fam: F.math, w: 700, align: 'center', c: C.mag, a: ca });
+    txt('t₂⟩', 1696, 360, { size: 34, fam: F.math, w: 700, align: 'center', c: C.mag, a: ca });
+    txt('∧', 1612, 360, { size: 30, fam: F.math, w: 700, align: 'center', c: C.mag, a: ca });
+    txt('radial |r⟩ · antisymmetric pair |t₁ ∧ t₂⟩ · 反对称切向对', 1270, 432, { size: 17, fam: F.zh, w: 700, c: C.dim, a: ca });
+    txt('codewords share one phase e^(iφ(γ))', 1270, 470, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: ca });
     const qa = ca * Q(S, 2, 'three copies', 0.5);
     txt('3 copies → qutrit, zero error', 1270, 510, { size: 26, fam: F.mono, w: 700, c: C.now, a: qa });
     txt('2 copies → at most a qubit', 1270, 556, { size: 22, fam: F.mono, w: 700, c: C.white, a: qa });
