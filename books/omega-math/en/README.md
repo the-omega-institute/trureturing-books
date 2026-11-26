@@ -26,7 +26,7 @@ Any attempt to rebuild foundational mathematics must guard fiercely against blur
 
 | Evidence Tier | Presentation and Verification Source | Axiomatic and Logical Boundary |
 | :--- | :--- | :--- |
-| **Frozen theorem with an empty strict axiom closure** | The theorem box links a frozen D5 declaration. Appendix A gives the strict backend evidence. | `strict_omega.axioms` is `[]`. Top-level `axioms` records the ordinary official build. |
+| **Frozen theorem with an empty strict axiom closure** | The theorem box links a frozen D5 declaration. Appendix A gives the strict backend evidence. | `strict_omega.axioms` is `[]`. The same declaration row’s `axioms` field records its official dependencies. |
 | **Classical Shadow Frozen Anchor** | Formal theorem box linked to a frozen declaration on the classical `Mathlib` side (explicitly marked in prose) | Checked by the Lean 4 kernel, but lives in the classical continuum shadow using `{propext, Classical.choice, Quot.sound}` |
 | **Rigorous Derivation or Literature Result (`ARGUED`)** | Complete algebraic derivation or cited literature theorem in prose, definitions, or remarks | Author- and reviewer-checked; constructive results not yet frozen in the zero-axiom library stay here and never wear a kernel badge |
 | **Conceptual Model or Program (`MODEL`)** | Architectural frameworks, observer interpretations, and cross-domain syntheses | Explicitly identified as modeling or interpretation, never disguised as a deductive theorem |

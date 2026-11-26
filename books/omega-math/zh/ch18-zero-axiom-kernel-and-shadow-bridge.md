@@ -1,6 +1,6 @@
 # 第十八章 空内核审计、单向阴影函子与六卷全息工作台
 
-> *“不动 Lean 4 底层内核分毫，不借半条自定义公理；把规范整数载体与类型类相容性留在纯归纳构造演算的空内核里，把实分析放到单向阴影函子的外侧，证明本身便是零误差的可执行计算。”*
+> *“选定一个严格库根，沿导入关系取闭包，在新的 Lean 空内核中重放。再沿着一条圆周恒等式走过桥，看看它的实数证明究竟用了哪些公理。”*
 
 六卷从齐次射影闭环铺展到非阿贝尔旋子机与自包含观察者，最后回到两个可以在 Lean 4 中核对的问题。严格库的哪些导入闭包能在空内核中重放？依赖这些库的书用定理在两种后端各用了哪些公理？
 
@@ -12,11 +12,11 @@
 
 1. **第 0 层：免商规范整数载体（消除 `Quot.sound`）**：
    - 在严格后端的 `OmegaInit` $+$ `OmegaMath` 中，每个源文件均以 `module` 与 `prelude` 开篇，彻底关闭对官方 `Init` 的隐式导入；`Omega.Nat`、`Omega.Int`、`Omega.Ratio` 与 `Omega.IntRatio` 用正分母前驱存储有限比值、以交叉相乘定义等价 `IntRatio.Equivalent` 并将零分母传递为 `undefined`，全程不触碰任何商类型公理 `Quot.sound`；
-   - 在基于 `Init` 编写的可执行反射原型中，则以互素规范整数对 `QRat` 与首非零项为正的规范整数四元组 `ProjTernion` / `CanonProjTernion` 替代 `Quotient`，凭可判定相等性（赫德伯格定理）免除 `Quot.sound`。
-2. **第 1 层：可计算类型类 `class OmegaSpace` 证成相对无矛盾性**：
-   将母公理 $\mathrm{AXIOM}\text{-}\Omega$ 的三元比较算子 `triad`、有理保真核 `kappa` 及六条恒等律封装为可计算类型类 `class OmegaSpace (M : Type)`，并在裸 CIC 中给出具体非阿贝尔实例（如规范非零子类型 `CanonProjTernion`），从而在 CIC 内部构造性地证成公理体系自身的相对无矛盾性与非退化可满足性。
+   - 基于 `Init` 的反射算例用最大公约数约分 `QRat` 整数对。本节原型的 `ProjTernion` 存储四个原始整数，包含零元组和未约分的倍数。第 3 章对非零射线除去公因子并令首个非零分量为正，由此取得 `CanonProjTernion` 的规范代表。
+2. **第 1 层 · 用类型类字段表达模型定律**
+   第 1 章的 `OmegaSpace` 示意接口列出三元消去律、结合律，以及读数的自反性、对称性和左右不变性。完整的 AXIOM-Ω 模型还须给出读数分离性、非负性、格拉姆正性、可趋零性与非交换见证，并指定判断最小性的比较类。第 3 章在规范代表上给出手工推导。姊妹卷的 `QRat` 原型核验有限个算例的合取。要构造 `OmegaSpace` 实例，还须给出各全称字段的证明。
 3. **第 2 层：通往 `Mathlib` 的单向阴影函子 $\Pi_{\mathbb{R}} : \mathbf{OmegaMath} \to \mathbf{Mathlib}$**：
-   一切射影闭合、流群测地、利雅三元曲率、双卡旋转、射流复合统一、全阶无 $\pi$ 哈尔正交、舒尔补、自由群 $F_3$ 伴随单射与整数深度预算证书均留在第 0–1 层零公理核心内完成；唯有当外围经典分析需要实数或复希尔伯特空间不等式时，才在最外层经单向阴影桥投射进 `Mathlib`，防止 `Classical.choice` 与极限滤子反向污染核心计算层。
+   例如，严格端的圆周定理证明整数比值的恒等式，`OmegaShadowBridge` 再将其传递到实数上。附录 A 给出核心定理的严格端与官方端公理记录，以及桥接定理的官方端记录。
 
 下面六条射影圆周定理在所钉提交 [{commit}](trureturing:) 的 `strict_omega` 记录中只依赖 `OmegaInit` 和 `OmegaMath`，公理均为 `[]`。例如对径闭合 `cayley_antipodal_closure` 的官方记录仅依赖 `propext`。双端记录见 [附录 A §A.3](appendix-a.md#sec-om-appa-frozen-registry)。
 
@@ -83,7 +83,7 @@
 
 ## 18.2 六卷集成原型与诚实编译器公理审计 {#sec-om-ch18-six-volume-prototype-and-honest-audit}
 
-为使读者在一页代码内俯瞰全书六卷的统一代数骨架，下面展示一份紧凑可读的六卷集成 `OmegaMath.Core` 原型蓝图，依次涵盖齐次射影线 `QProj1`（卷 I）、规范三元数 `ProjTernion` 与球面格拉姆行列式 `detGram3`（卷 I–II）、二阶幂零射流 `Jet2`（卷 III）、无 $\pi$ 球面切比雪夫谐波 `SphericalFourier`（卷 IV）、模方 $5$ 赫克迹 `heckeT5Chi1`（卷 V）与非阿贝尔旋子整除闸门 `omegaFractranStep?`（卷 VI），并以统一合取核验 `omega_math_grand_kernel_verified` 串起六卷算例：
+为使读者在一页代码内俯瞰全书六卷的统一代数骨架，下面展示一份紧凑可读的六卷集成 `OmegaMath.Core` 原型蓝图，依次涵盖齐次射影线 `QProj1`（卷 I）、原始整数四元组 `ProjTernion` 与球面格拉姆行列式 `detGram3`（卷 I–II）、二阶幂零射流 `Jet2`（卷 III）、无 $\pi$ 球面切比雪夫谐波 `SphericalFourier`（卷 IV）、模方 $5$ 赫克迹 `heckeT5Chi1`（卷 V）与非阿贝尔旋子整除闸门 `omegaFractranStep?`（卷 VI），并以统一合取核验 `omega_math_grand_kernel_verified` 串起六卷算例：
 
 ```lean
 -- 可读教学原型（使用标准库 Init.Rat 以便直览六卷代数骨架；
@@ -104,7 +104,7 @@ def QProj1.spread (x : QProj1) : Rat :=
   let d : Int := x.p * x.p + x.q * x.q
   if d = 0 then 0 else (x.p * x.p : Rat) / (d : Rat)
 
-/-- 卷 I–II：规范整数三元数载体与三元流群迁移 -/
+/-- 卷 I–II：原始整数四元组与四元数乘法 -/
 structure ProjTernion where
   w : Int
   x : Int
@@ -181,14 +181,14 @@ end OmegaMath.Core
 
 1. **`Init.Rat` 教学原型。** 在 Lean `v4.35.0` 中，`Rat.add`、`Rat.mul`、`Rat.div` 依赖 `propext`、`Classical.choice` 和 `Quot.sound`，`Rat.inv` 只依赖 `propext` 和 `Quot.sound`。单独定义 `fun (a b : Rat) => a == b` 的公理依赖为空。对等式 `(1 : Rat) + 1 = 2`，`by decide` 在 `Rat.add` 的归约处停住。
 2. **基于 `Init` 的 `QRat` 原型。** 姊妹专著 §32.8 的 `QRat` 用 `Nat.gcd` 约分整数对。有限例证 `omega_zero_axiom_master_check` 由 `by decide` 检查，`#print axioms` 给出空依赖。
-3. **严格库重放与 D5 双端核对**。严格库以 `prelude` 关闭隐式官方 `Init` 导入。`OmegaChecks.Audit` 对选定库根的传递导入闭包检查公理与声明种类，再在 `mkEmptyEnvironment` 中重放。D5 消费端分别编译并核对导出，逐声明的严格公理测量写在 `strict_omega.axioms`，常规测量写在顶层 `axioms`。复现入口见 [附录 A §A.6](appendix-a.md#sec-om-appa-audit-checklist)。
+3. **严格库重放与 D5 双端核对**。严格库以 `prelude` 关闭隐式官方 `Init` 导入。`OmegaChecks.Audit` 对选定库根的传递导入闭包检查公理与声明种类，再在 `mkEmptyEnvironment` 中重放。D5 消费端分别编译并核对导出，在有成对测量的声明行中，`strict_omega.axioms` 给出严格端依赖，`axioms` 给出官方端依赖。复现入口见 [附录 A §A.6](appendix-a.md#sec-om-appa-audit-checklist)。
 
 | 实现层级 | 导入范围 | 公理证据 | 核验方式 | 工程角色 |
 | :--- | :--- | :--- | :---: | :--- |
 | **可读 `Init.Rat` 原型** | 隐式 `Init`（含 `Rat`/`BEq`） | `{propext, Classical.choice, Quot.sound}` | 否 | 教学蓝图与快速规格展示 |
 | **无显式导入的 `QRat` 原型** | 仅隐式 `Init`（使用 `QRat`） | `∅`（`does not depend on any axioms`） | 仅检公理 | 原生 `#eval` 与一步 `decide` 验证 |
 | **严格库** | `OmegaInit`、`OmegaMathlib`、`OmegaMath` 的选定导入闭包 | 每条声明的传递公理依赖均为空 | 空内核重放 | 构造数学基础 |
-| **双端 D5 消费模块** | 同一源码分别用严格接口和官方接口构建 | 严格端 `strict_omega.axioms`，官方端顶层 `axioms` | 双端编译、导出对照与分端测量 | 书中引用的冻结定理 |
+| **双端 D5 消费模块** | 同一源码分别用严格接口和官方接口构建 | 成对声明行的 `strict_omega.axioms` 为严格端，`axioms` 为官方端 | 双端编译、导出对照与分端测量 | 书中引用的冻结定理 |
 | **第 2 层阴影桥 `OmegaShadowBridge` 与 `Mathlib.Real` 外层** | `OmegaInit`/`OmegaMath` $+$ `Init`/`Mathlib`（单向桥，见 [@thm-ch18-omega-shadow-bridge]） | 分层递进：`[]` / `propext` / `{Quot.sound, propext}` 至 `{propext, Classical.choice, Quot.sound}` | 否 | 经单向阴影函子 $\Pi_{\mathbb{R}}$ 对接传统分析 |
 :::
 

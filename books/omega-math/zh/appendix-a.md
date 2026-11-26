@@ -1,12 +1,12 @@
 # 附录 A OmegaInit 与 OmegaMath 零公理模块及冻结索引
 
-本附录以所钉的 trureturing 提交 [{commit}](trureturing:) 为准，列出严格库的主要模块、D5 冻结定理、单向桥接与经典对照。文末分别给出严格库的空内核重放入口和 D5 的双后端核对入口。全书形式化验证统计见 [附录 B `B.4](appendix-b.md#sec-om-appb-live-stats)。
+本附录以所钉的 trureturing 提交 [{commit}](trureturing:) 为准，列出严格库的主要模块、D5 冻结定理、单向桥接与经典对照。文末分别给出严格库的空内核重放入口和 D5 的双后端核对入口。全书形式化验证统计见 [附录 B §B.4](appendix-b.md#sec-om-appb-live-stats)。
 
 ## A.1 OmegaInit 严格基础库索引 {#sec-om-appa-omegainit}
 
 严格实现位于 `strict/OmegaInit.lean` 与 `strict/OmegaInit/`，常规构建使用 `src/OmegaInit*` 下的官方接口文件。下表按归纳基础与整数运算选列入口。空内核重放及移植声明的上游归属检查见 [§A.6](#sec-om-appa-audit-checklist)。
 
-| 序号 | 仓库模块路径（`src/` 下） | 对照官方 `Init` 模块 | 核心公开声明与用途 |
+| 序号 | 严格实现路径（`strict/` 下） | 对照官方 `Init` 模块 | 核心公开声明与用途 |
 | :---: | :--- | :--- | :--- |
 | 1 | `OmegaInit/Prelude.lean` | `Init.Prelude` | `Omega.Eq`、`Omega.True`/`False`/`And`/`Or`/`Not`、`Omega.Bool`、`Omega.Nat`（`add`/`mul`/`sub`/`le`/`lt`） |
 | 2 | `OmegaInit/Core.lean` | `Init.Core` | `Omega.Nat.add_zero` 等基础递归归纳恒等式 |
@@ -37,7 +37,7 @@
 
 ## A.3 D5 冻结定理与双后端公理记录 {#sec-om-appa-frozen-registry}
 
-下表列出本书的 `D5/S3/Quantum/AURICOmega/` 核心定理。冻结状态片的顶层 `axioms` 记录常规官方后端，`strict_omega.axioms` 和 `strict_omega.libraries` 记录严格后端。就下表所列 14 个模块的 127 条定理而言，所钉提交上的严格端公理记录全部为 `[]`，官方端有 107 条仅依赖 `propext`，其余 20 条为 `[]`。库与公理列采用严格端记录。双端编译对照与分端测量的复核入口见 [§A.6](#sec-om-appa-audit-checklist)。
+下表列出本书的 `D5/S3/Quantum/AURICOmega/` 核心定理。每条定理在冻结状态片的 `declarations` 数组中各占一行。该行的 `axioms` 记录官方端公理，`strict_omega.axioms` 和 `strict_omega.libraries` 记录严格端依赖。就下表所列 14 个模块的 127 条定理而言，所钉提交上的严格端公理记录全部为 `[]`，官方端有 107 条仅依赖 `propext`，其余 20 条为 `[]`。库与公理列采用严格端记录。双端编译对照与分端测量的复核入口见 [§A.6](#sec-om-appa-audit-checklist)。
 
 | 序号 | 冻结 D5 模块（`D5/S3/Quantum/AURICOmega/` 下） | 对应卷章 | 定理数 | 严格端依赖库与公理闭包 | 核心数学内容 |
 | :---: | :--- | :---: | :---: | :---: | :--- |
@@ -52,7 +52,7 @@
 | 9 | `OmegaArithmeticHorizon` | 卷 III 第 8 章、卷 V 第 13 章 | 6 | `OmegaInit, OmegaMath` / `[]` | 贝祖等式、构造性欧几里得素数逃逸、有限连分数收敛子互素与行列式、马青有理链及纯零公理整数四分深度 |
 | 10 | `OmegaBargmannHaarHecke` | 卷 II 第 6 章、卷 IV 第 11 章、卷 V 第 15 章、卷 VI 第 16 章 | 9 | `OmegaInit, OmegaMath` / `[]` | $3\times 3$ 巴格曼—格拉姆非负与测地倍角退化、卡塔兰哈尔矩与 $\chi_{0,1,2}$ 正交归一、模方 $5$ 赫克特征值/裕度与四元数 FRACTRAN |
 | 11 | `OmegaMatrixAndFractran` | 卷 V–VI 第 14、16 章 | 10 | `OmegaInit, OmegaMath` / `[]` | 整数 `Mat2` 迹轮换/伴随/凯莱—哈密顿、赫维茨 12 晶核与模 $5$ 秩一/零乘积判定、FRACTRAN 步进等价/确定性/正性与停机稳定 |
-| 12 | `OmegaComposeAndWitnesses` | 卷 I–III、VI 第 3–4、6、8、16 章 | 8 | `OmegaInit, OmegaMath` / `[]` | 形式复合链式法则与任意阶凯莱—三角大一统、`Mat2` 行列式乘性、正交半转非交换、`g120_spin` 六拍双覆叠、正交角盈 $\frac{1}{4}$ 与 $P_\Omega$ 15 拍停机于 $22$ |
+| 12 | `OmegaComposeAndWitnesses` | 卷 I–III、VI 第 3–4、6、8、16 章 | 8 | `OmegaInit, OmegaMath` / `[]` | 形式复合链式法则与任意阶凯莱—三角大一统、`Mat2` 行列式乘性、绕正交轴的四分之一转非交换、`g120_spin` 六拍双覆叠、正交角盈 $\frac{1}{4}$ 与 $P_\Omega$ 15 拍停机于 $22$ |
 | 13 | `OmegaSphericalHaarMidpoint` | 卷 II–IV 第 6–7、10–11 章 | 8 | `OmegaInit, OmegaMath` / `[]` | 全阶偶次特征标乘积律、无 $\pi$ 哈尔期望归零与全阶彼得—魏尔正交归一、有理球面正弦／勾股律、$\alpha$-采样漂移、中点凯莱驻球守恒与半拍保真度 |
 | 14 | `OmegaLieTripleAndFreeGroup` | 卷 II、V 第 4–5、14 章 | 15 | `OmegaInit, OmegaMath` / `[]` | 利雅三元系三公理与恒常单位截面曲率 $K \equiv +1$、双卡修正罗德里格斯分母和为 $1$／半界／闭球锁定、$S_5$ 既约词模 $5$ 非零／精确模方／非标量与自由群 $F_3 \hookrightarrow \mathrm{SO}(3,\mathbb{Q})$ 伴随单射 |
 | **合计** | **14 个表列 D5 模块** | **全书卷 I–VI** | **127** | **`OmegaInit, OmegaMath` / `[]`** | **所列定理的严格端测量** |
@@ -94,7 +94,7 @@
 
 ## A.5 六卷引用的经典 Mathlib 阴影锚点索引 {#sec-om-appa-classical-anchors}
 
-除上述严格端零公理定理与 `OmegaShadowBridge` 之外，全书第一至六卷还在经典连续统对照侧引用了一组冻结的 `Mathlib` 阴影锚点（均经 Lean 4 内核冻结，位于经典三公理闭包侧；全书动态分类统计见 [附录 B §B.4](appendix-b.md#sec-om-appb-live-stats)），用作检验零公理有理骨架在实/复连续统投影下严丝合缝的外部刻度尺：
+卷 I–VI 引用下表 35 条不同的 `Mathlib` 冻结声明，用于与经典实分析、复分析对照。在所钉提交上，这 35 条声明行均缺少官方 `axioms` 字段。官方端公理依赖以许可集合 `{propext, Classical.choice, Quot.sound}` 为上界，各条实际闭包未见记录。全书统计见 [附录 B §B.4](appendix-b.md#sec-om-appb-live-stats)。
 
 | 卷次与引用章 | 经典 `Mathlib` 阴影冻结声明（`trureturing@dev`） | 跨卷对照角色 |
 | :--- | :--- | :--- |
@@ -122,4 +122,4 @@ make install-tools
 python3 src/OmegaChecks/portable.py --backend both D5.S3.Quantum.AURICOmega.OmegaCircleClosure
 ```
 
-这个命令在两端编译该消费模块，比较导出接口，并将官方端的公理依赖报告写入 `.lake/build/omega-checks/selected-official-axioms.json`。冻结流程另外对两套编译产物作成对测量，比较适用声明的类型及其相关定义，再在 `Golden/Frozen/state/<模块>.lean.json` 中保存官方端顶层字段和严格端 `strict_omega` 字段。可在 `src/OmegaChecks/portable.py` 的 `--frozen-request` 路径和 `Audit.lean` 的 `--consumer` 分支核对这个过程。复核上表时，在所钉提交的状态片中按表内 GID 匹配定理，分别读取 `axioms` 和 `strict_omega.axioms`。例如 `OmegaCircleClosure.cayley_antipodal_closure` 的官方记录是 `["propext"]`，严格记录是 `[]`。
+这个命令在两端编译该消费模块，比较导出接口，并将官方端的公理依赖报告写入 `.lake/build/omega-checks/selected-official-axioms.json`。冻结流程另外对两套编译产物作成对测量，比较适用声明的类型及其相关定义，再将测量写入 `Golden/Frozen/state/<模块>.lean.json` 的对应 `declarations` 声明行，官方字段在该行，严格字段在该行的 `strict_omega` 对象中。可在 `src/OmegaChecks/portable.py` 的 `--frozen-request` 路径和 `Audit.lean` 的 `--consumer` 分支核对这个过程。复核上表时，在所钉提交的状态片中按表内 GID 匹配定理，分别读取 `axioms` 和 `strict_omega.axioms`。例如 `OmegaCircleClosure.cayley_antipodal_closure` 的官方记录是 `["propext"]`，严格记录是 `[]`。

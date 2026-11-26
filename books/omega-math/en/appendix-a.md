@@ -1,12 +1,12 @@
 # Appendix A Index of Zero-Axiom OmegaInit and OmegaMath Modules and Frozen Declarations
 
-This appendix uses the pinned trureturing commit [{commit}](trureturing:) to index the main strict library modules, frozen D5 theorems, one-way bridges, and classical reference results. It closes with commands for empty-kernel replay of strict library modules and for comparing D5 consumers across the two backends. For book-wide verification statistics, see [Appendix B `B.4](appendix-b.md#sec-om-appb-live-stats).
+This appendix uses the pinned trureturing commit [{commit}](trureturing:) to index the main strict library modules, frozen D5 theorems, one-way bridges, and classical reference results. It closes with commands for empty-kernel replay of strict library modules and for comparing D5 consumers across the two backends. For book-wide verification statistics, see [Appendix B §B.4](appendix-b.md#sec-om-appb-live-stats).
 
 ## A.1 Strict OmegaInit Foundation Index {#sec-om-appa-omegainit}
 
 The strict implementation lives in `strict/OmegaInit.lean` and `strict/OmegaInit/`. The ordinary build uses the official interface files under `src/OmegaInit*`. The table lists entry points for inductive foundations and integer arithmetic. For empty-kernel replay and the upstream ownership checks on ported declarations, see [§A.6](#sec-om-appa-audit-checklist).
 
-| # | Source Path (under `src/`) | Mirrored Official `Init` Module | Key Public Declarations and Role |
+| # | Strict source path (under `strict/`) | Mirrored Official `Init` Module | Key Public Declarations and Role |
 | :---: | :--- | :--- | :--- |
 | 1 | `OmegaInit/Prelude.lean` | `Init.Prelude` | `Omega.Eq`, `Omega.True`/`False`/`And`/`Or`/`Not`, `Omega.Bool`, `Omega.Nat` (`add`/`mul`/`sub`/`le`/`lt`) |
 | 2 | `OmegaInit/Core.lean` | `Init.Core` | `Omega.Nat.add_zero` and foundational recursive identities |
@@ -37,7 +37,7 @@ The companion audit and regression harness lives in `src/OmegaChecks/`: `Audit.l
 
 ## A.3 Frozen D5 Theorems and Axiom Records for Both Backends {#sec-om-appa-frozen-registry}
 
-The table lists the book’s core theorems under `D5/S3/Quantum/AURICOmega/`. In the frozen records, top-level `axioms` describes the ordinary official backend. The fields `strict_omega.axioms` and `strict_omega.libraries` describe the strict backend. At the pinned commit, all 127 listed theorems across 14 modules have `[]` on the strict backend. On the official backend, 107 depend only on `propext` and 20 have `[]`. The libraries and axioms column shows the strict measurements. See [§A.6](#sec-om-appa-audit-checklist) for the commands and records behind the paired comparison.
+The table lists the book’s core theorems under `D5/S3/Quantum/AURICOmega/`. Each theorem has a row in the frozen state’s `declarations` array. Its `axioms` field records official dependencies. Its `strict_omega.axioms` and `strict_omega.libraries` fields record strict dependencies. At the pinned commit, all 127 listed theorems across 14 modules have `[]` on the strict backend. On the official backend, 107 depend only on `propext` and 20 have `[]`. The libraries and axioms column shows the strict measurements. See [§A.6](#sec-om-appa-audit-checklist) for the commands and records behind the paired comparison.
 
 | # | Frozen D5 Module (under `D5/S3/Quantum/AURICOmega/`) | Volumes & Chapters | Theorems | Strict Libraries / Axioms | Core Mathematical Content |
 | :---: | :--- | :---: | :---: | :---: | :--- |
@@ -94,7 +94,7 @@ The module `D5/S3/Quantum/AURICOmega/OmegaShadowBridge` lives strictly in Layer 
 
 ## A.5 Classical Mathlib Shadow Anchors Cited Across Volumes I–VI {#sec-om-appa-classical-anchors}
 
-Alongside the core theorems with empty strict axiom records and `OmegaShadowBridge`, Volumes I–VI cite a companion set of frozen classical `Mathlib` shadow declarations (kernel-verified under the standard three-axiom closure; live book-wide totals appear in [Appendix B §B.4](appendix-b.md#sec-om-appb-live-stats)) as external laboratory gauges verifying that the zero-axiom rational skeleton projects cleanly into classical real and complex analysis:
+Volumes I–VI cite the 35 distinct frozen `Mathlib` declarations below for comparison with classical real and complex analysis. At the pinned commit, all 35 declaration rows omit the official `axioms` field. Their official dependencies are bounded by the permitted set `{propext, Classical.choice, Quot.sound}`. The individual closures are unreported. See [Appendix B §B.4](appendix-b.md#sec-om-appb-live-stats) for book-wide counts.
 
 | Volume & Chapters | Frozen Classical `Mathlib` Shadow Declarations (`trureturing@dev`) | Cross-Volume Comparison Role |
 | :--- | :--- | :--- |
@@ -122,4 +122,4 @@ make install-tools
 python3 src/OmegaChecks/portable.py --backend both D5.S3.Quantum.AURICOmega.OmegaCircleClosure
 ```
 
-This command compiles the consumer against both backends, compares the exported interfaces, and writes an official axiom dependency report to `.lake/build/omega-checks/selected-official-axioms.json`. The freezing workflow additionally measures paired build artifacts and compares eligible declarations’ types and related definitions. It records the official fields at the top level and the strict fields under `strict_omega` in `Golden/Frozen/state/<module>.lean.json`. See the `--frozen-request` path in `src/OmegaChecks/portable.py` and the `--consumer` branch of `Audit.lean`. To check the table, match the listed GIDs to theorem records at the pinned commit and read `axioms` and `strict_omega.axioms` separately. For example, `OmegaCircleClosure.cayley_antipodal_closure` has `["propext"]` in the official record and `[]` in the strict record.
+This command compiles the consumer against both backends, compares the exported interfaces, and writes an official axiom dependency report to `.lake/build/omega-checks/selected-official-axioms.json`. The freezing workflow additionally measures paired build artifacts and compares eligible declarations’ types and related definitions. It writes the measurements in the matching `declarations` row of `Golden/Frozen/state/<module>.lean.json`, with official fields on that row and strict fields in its `strict_omega` object. See the `--frozen-request` path in `src/OmegaChecks/portable.py` and the `--consumer` branch of `Audit.lean`. To check the table, match the listed GIDs to theorem records at the pinned commit and read `axioms` and `strict_omega.axioms` separately. For example, `OmegaCircleClosure.cayley_antipodal_closure` has `["propext"]` in the official record and `[]` in the strict record.

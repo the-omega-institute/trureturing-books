@@ -3,10 +3,10 @@
 SIZE = (358, 500)
 ALT = {
     "zh": "严格库 OmegaInit 与 OmegaMath 的选定导入闭包在空内核中重放。D5 消费模块在两端编译，"
-          "严格端使用 strict_omega.axioms，官方端使用顶层 axioms。紫色单向桥把核心结果传到 Mathlib 实数。",
+          "成对声明行的 strict_omega.axioms 和 axioms 分别给出严格端与官方端公理。紫色单向桥把核心结果传到 Mathlib 实数。",
     "en": "Selected strict library closures replay in an empty kernel. D5 consumers build on both "
-          "backends, with strict_omega.axioms for the strict backend and top-level axioms for the "
-          "official backend. The violet bridge transports core results one way to the Mathlib reals.",
+          "backends. Each paired declaration row gives strict_omega.axioms for the strict backend "
+          "and axioms for the official backend. The violet bridge transports core results one way to the Mathlib reals.",
 }
 
 

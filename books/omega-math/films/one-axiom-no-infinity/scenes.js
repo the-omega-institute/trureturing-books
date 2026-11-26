@@ -446,7 +446,7 @@ SCENES.b00_ledger = S => {
     const cc = Q(S, 3, 'is a contract', 0.5);
     txt('class OmegaSpace (M : Type) where …', cx, 520, { size: 30, fam: F.mono, w: 700, c: C.cyan, a: ca * cc });
     txt('a contract: a model must be built · 契约：得造出一个模型', cx + 700, 520, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: ca * cc });
-    B00.note('the book builds one: Volume I, chapter 3 · 第一卷第三章亲手造出一个', cx, 620, ca * Q(S, 3, 'must build', 0.6), { size: 22 });
+    B00.note('Chapter 3 works on normalized rays · 第三章在规范射线上核对', cx, 620, ca * Q(S, 3, 'must build', 0.6), { size: 22 });
   }
 };
 
@@ -748,7 +748,7 @@ SCENES.b01_floor = S => {
   txt('3/6  ≟  1/2', 420, 520, { size: 46, fam: F.math, w: 700, c: C.white, a: a1 });
   txt('decide:  3 · 2 = 6 · 1', 420, 600, { size: 38, fam: F.math, w: 700, c: C.cyan, a: a1 * Q(S, 1, 'integer by integer', 0.5) });
   txt('→ yes, in finitely many steps', 420, 660, { size: 26, fam: F.mono, w: 700, c: C.cyan, a: a1 * Q(S, 1, 'a program that halts', 0.5) });
-  txt('equal ⇔ the same integers', 1040, 520, { size: 26, fam: F.mono, w: 700, c: C.white, a: a1 * Q(S, 1, 'Equality is checked', 0.5) });
+  txt('equivalent ⇔ cross products agree', 1040, 520, { size: 26, fam: F.mono, w: 700, c: C.white, a: a1 * Q(S, 1, 'Equality is checked', 0.5) });
   txt('no quotient, no choice', 1040, 560, { size: 22, fam: F.mono, c: C.dim, a: a1 * Q(S, 1, 'Equality is checked', 0.5) });
   /* the precision contract: fractions of [0, 1] with denominator ≤ M */
   const a2 = at(S, 2, 0.7);
@@ -840,13 +840,13 @@ SCENES.b01_axiom = S => {
   panel(900, 240, 860, 250, a5, C.dim, 'AXIOM · 硬塞的公理');
   txt('axiom kappa_refl : ∀ x, kappa x x = 1', 930, 330, { size: 24, fam: F.mono, w: 700, c: C.white, a: a5 });
   txt('trusted, never built: one bad edge case gives False', 930, 380, { size: 21, fam: F.mono, c: C.dim, a: a5 });
-  B01.strike(925, 336, 560, Q(S, 5, 'not an axiom', 0.4) * a5);
-  txt('a hire nobody interviewed', 930, 440, { size: 22, fam: F.mono, c: C.argued, a: Q(S, 5, 'not a hire', 0.5) * a5 });
-  const a6 = Q(S, 5, 'a job posting', 0.5);
+  B01.strike(925, 336, 560, Q(S, 5, 'class fields', 0.4) * a5);
+  txt('a hire nobody interviewed', 930, 440, { size: 22, fam: F.mono, c: C.argued, a: Q(S, 5, 'some laws', 0.5) * a5 });
+  const a6 = Q(S, 5, 'class fields', 0.5);
   panel(900, 520, 860, 280, a6, C.cyan, 'CLASS · 类型类契约');
   ['class OmegaSpace (M : Type) where', '  triad : M → M → M → M', '  kappa : M → M → QRat', '  idemp_left : ∀ x z, triad x x z = z  …'].forEach((s, i) =>
     txt(s, 930, 600 + i * 40, { size: 24, fam: F.mono, w: 700, c: i ? C.white : C.cyan, a: a6 }));
-  txt('a job posting · filled only by a built instance', 930, 780, { size: 21, fam: F.mono, c: C.argued, a: Q(S, 5, 'Only a built example', 0.5) });
+  txt('full model · remaining laws need proofs', 930, 780, { size: 21, fam: F.mono, c: C.argued, a: Q(S, 5, 'separate proofs', 0.5) });
 };
 
 SCENES.b01_circle = S => {

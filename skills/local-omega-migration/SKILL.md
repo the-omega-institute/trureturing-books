@@ -48,10 +48,10 @@ python3 skills/local-omega-migration/omega_inventory.py --book quantum-geometry
 
 在 trureturing 按它的 `CLAUDE.md` §3.1–3.2、`src/README.md` 与 `skills/codex-formalize/SKILL.md` 工作；本仓库不写 Lean。
 
-- 可复用的通用结果放 `src/OmegaMath/`：移植钉版 Mathlib 的，保留定义模块的路径，把 `Mathlib` 换成 `OmegaMath`，在原全名前加 `Omega.`；原创结果就近放在专题目录，模块文档首行写 `Omega original.`。Init 级基础放 `src/OmegaInit/`，按官方 Init 的对应规则命名。
+- 项目自己的数学放 `src/OmegaMath/`，原创模块文档首行写 `Omega original.`。钉版 Lean Init 的严格移植放 `strict/OmegaInit/`，钉版 Mathlib 的严格移植放 `strict/OmegaMathlib/`。移植沿用上游定义模块的相对路径，声明全名前加 `Omega.`。`src/OmegaInit/` 与 `src/OmegaMathlib/` 是生成的官方接口。
 - 面向书的结论放 D5 模块：`module`、`prelude`，只 `public import` 所需的 Omega 模块；一批按主题合成少数几个模块。
 - PR 正文逐条写书中位置（文件与 `#id`）、被替换的原 GID 与新 GID；判形照实写 `bind-only`，准入依据是 §3.2 的“OmegaMath 的 D5 出版引用”，数学成果归于 OmegaMath 中的原证明。
-- 合入 `dev` 并冻结后按书锁核对顶层 `libraries` 与 `axioms`，以确认出版口径。有严格端测量时，同时核对 `strict_omega.libraries` 与 `strict_omega.axioms`。库根的空内核重放可用 `lake test -- <严格库根>`，D5 消费模块先用 `make install-tools` 安装所钉检查器，再用 `python3 src/OmegaChecks/portable.py --backend both <消费模块名>` 检查双端编译和导出。写作与核验见 [local-content-accuracy](../local-content-accuracy/SKILL.md)。
+- 合入 `dev` 并冻结后按书锁在冻结状态片中匹配声明行，核对官方端 `declarations[].libraries` 与 `declarations[].axioms`。历史行缺官方公理字段时只给出许可上界。有严格端测量时，同时核对该行的 `declarations[].strict_omega.libraries` 与 `declarations[].strict_omega.axioms`。库根的空内核重放可用 `lake test -- <严格库根>`，D5 消费模块先用 `make install-tools` 安装所钉检查器，再用 `python3 src/OmegaChecks/portable.py --backend both <消费模块名>` 检查双端编译和导出。写作与核验见 [local-content-accuracy](../local-content-accuracy/SKILL.md)。
 
 ## 4. 回到书库
 

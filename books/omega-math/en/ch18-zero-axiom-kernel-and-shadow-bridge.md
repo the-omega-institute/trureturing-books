@@ -1,6 +1,6 @@
 # Chapter 18 Empty-Kernel Auditing, the One-Way Shadow Functor, and the Six-Volume Workbench
 
-> *“Not a single line of the Lean 4 kernel is altered, and not a single custom axiom is smuggled in: keep canonical integer carriers and typeclass consistency inside bare CIC under empty-kernel replay, place classical real analysis beyond a one-way shadow functor, and proof becomes exact executable computation.”*
+> *“Select a strict library root, follow its imports, and replay that closure in a fresh Lean kernel. Then follow a single circle identity across the bridge and read which axioms its real proof uses.”*
 
 From homogeneous projective closure to non-Abelian spinor machines and the self-contained observer, the six volumes lead to two questions we can put to Lean 4. Which strict library import closures can replay in an empty kernel? Which axioms do the theorems cited in the book use on each backend?
 
@@ -12,11 +12,11 @@ Formalizing infinity-free, transcendental-free mathematics in Lean 4 neither alt
 
 1. **Layer 0: Quotient-Free Canonical Integer Carriers (Eliminating `Quot.sound`)**:
    - In the strict backend’s `OmegaInit` + `OmegaMath`, every file opens with `module` and `prelude`, closing off implicit official `Init` imports entirely. `Omega.Nat`, `Omega.Int`, `Omega.Ratio`, and `Omega.IntRatio` store finite fractions with positive predecessor denominators, define equivalence by cross-multiplication (`IntRatio.Equivalent`), and propagate `undefined` cleanly without touching `Quot.sound`;
-   - In executable reflection prototypes over `Init`, GCD-reduced integer pairs `QRat` and first-nonzero-positive integer quadruples `ProjTernion` / `CanonProjTernion` replace `Quotient` with unique canonical normal forms equipped with constructive `DecidableEq` (Hedberg's UIP).
-2. **Layer 1: Constructive Relative Consistency via `class OmegaSpace`**:
-   The mother laws of $\mathrm{AXIOM}\text{-}\Omega$—ternary transport `triad`, rational fidelity `kappa`, and their six equational identities—are packaged as a computable typeclass `class OmegaSpace (M : Type)` rather than raw `axiom` declarations. Exhibiting a nontrivial non-Abelian inhabitant (such as `CanonProjTernion`) inside bare CIC proves relative consistency and non-degenerate satisfiability constructively.
+   - The `Init` reflection examples reduce `QRat` integer pairs by their GCD. The `ProjTernion` structure below stores four raw integers, including the zero tuple and scalar multiples. On nonzero rays, Chapter 3 obtains `CanonProjTernion` by dividing by the common GCD and choosing the first nonzero coordinate positive.
+2. **Layer 1. Model laws as typeclass fields**
+   Chapter 1’s schematic `OmegaSpace` packages ternary cancellation and associativity with reflexivity, symmetry and two-sided invariance of the reading. A full model of AXIOM-Ω also needs reading separation, nonnegativity, Gram positivity, zero-reaching, a noncommutative witness and a specified comparison class for minimality. Chapter 3 gives a hand argument on normalized representatives. The companion `QRat` prototype checks a finite conjunction of examples. Constructing an `OmegaSpace` instance would require proofs of its universally quantified fields.
 3. **Layer 2: One-Way Shadow Functor $\Pi_{\mathbb{R}} : \mathbf{OmegaMath} \to \mathbf{Mathlib}$**:
-   Projective closure, heap geodesics, Lie triple curvature, dual-chart rotations, jet composition unification, all-degree $\pi$-free Haar orthonormality, rational Schur complements, free-group $F_3$ adjoint injectivity, and integer depth certificates remain inside the zero-axiom Layers 0–1. Only when an external classical statement over $\mathbb{R}$ or $\mathbb{C}$ is needed does a one-way soundness bridge transport the certified rational bound outward into `Mathlib`, preventing `Classical.choice` and limit filters from contaminating the computational core.
+   For example, the strict circle theorem certifies an identity of integer ratios. `OmegaShadowBridge` transports it to the real numbers. Appendix A lists the strict and official dependencies of the core theorems and the official dependencies of the bridge.
 
 At the pinned commit [{commit}](trureturing:), the `strict_omega` records for these six projective-circle theorems list only `OmegaInit` and `OmegaMath` and give `[]` for the axioms of each. The official record for antipodal closure, `cayley_antipodal_closure`, lists `propext` alone. For both sets of records, see [Appendix A §A.3](appendix-a.md#sec-om-appa-frozen-registry).
 
@@ -104,7 +104,7 @@ def QProj1.spread (x : QProj1) : Rat :=
   let d : Int := x.p * x.p + x.q * x.q
   if d = 0 then 0 else (x.p * x.p : Rat) / (d : Rat)
 
-/-- Vols I–II: Canonical integer ternion carrier and quaternion multiplication -/
+/-- Vols I–II: Raw integer quadruples and quaternion multiplication -/
 structure ProjTernion where
   w : Int
   x : Int
@@ -181,14 +181,14 @@ The `Init.Rat` teaching prototype, the executable `QRat` prototype, the strict l
 
 1. **The `Init.Rat` teaching prototype.** In Lean `v4.35.0`, `Rat.add`, `Rat.mul`, and `Rat.div` depend on `propext`, `Classical.choice`, and `Quot.sound`. `Rat.inv` depends on `propext` and `Quot.sound`. The standalone function `fun (a b : Rat) => a == b` has an empty axiom closure. For `(1 : Rat) + 1 = 2`, `by decide` gets stuck reducing `Rat.add`.
 2. **The `QRat` prototype using `Init`.** Section 32.8 of the companion book uses `Nat.gcd` to normalize integer pairs. Lean checks the finite example `omega_zero_axiom_master_check` by `decide`, and `#print axioms` reports an empty dependency list.
-3. **Strict library replay and paired D5 checks.** The strict libraries use `prelude` to disable implicit official `Init` imports. `OmegaChecks.Audit` inspects the axioms and declaration kinds in the transitive import closure of selected library roots, then replays that closure in `mkEmptyEnvironment`. D5 consumers are compiled separately and their exports compared. The measured declaration dependencies appear under `strict_omega.axioms` for the strict backend and under top-level `axioms` for the ordinary build. For the commands, see [Appendix A §A.6](appendix-a.md#sec-om-appa-audit-checklist).
+3. **Strict library replay and paired D5 checks.** The strict libraries use `prelude` to disable implicit official `Init` imports. `OmegaChecks.Audit` inspects the axioms and declaration kinds in the transitive import closure of selected library roots, then replays that closure in `mkEmptyEnvironment`. D5 consumers are compiled separately and their exports compared. On each measured declaration row, `strict_omega.axioms` gives the strict dependencies and `axioms` gives the official ones. For the commands, see [Appendix A §A.6](appendix-a.md#sec-om-appa-audit-checklist).
 
 | Implementation Tier | Import Closure | Axiom Evidence | Verification | Engineering Role |
 | :--- | :--- | :--- | :---: | :--- |
 | **Readable `Init.Rat` prototype** | Implicit `Init` (`Rat`/`BEq`) | `{propext, Classical.choice, Quot.sound}` | No | Pedagogical six-volume blueprint |
 | **`QRat` prototype** | Implicit `Init` (uses `QRat`) | `∅` (`does not depend on any axioms`) | Axiom-only | Native `#eval` and one-step `decide` |
 | **Strict libraries** | Selected import closure in `OmegaInit`, `OmegaMathlib`, and `OmegaMath` | Empty transitive axiom dependencies for every declaration in the closure | Empty-kernel replay | Constructive foundation |
-| **D5 consumers on both backends** | The same sources built with strict and official interfaces | `strict_omega.axioms` for strict and top-level `axioms` for official | Paired builds, export comparison, and per-backend measurement | Frozen theorems cited in the book |
+| **D5 consumers on both backends** | The same sources built with strict and official interfaces | On a paired declaration row, `strict_omega.axioms` for strict and `axioms` for official | Paired builds, export comparison, and per-backend measurement | Frozen theorems cited in the book |
 | **Layer-2 `OmegaShadowBridge` and `Mathlib.Real` shell** | `OmegaInit`/`OmegaMath` + `Init`/`Mathlib` (one-way bridge, [@thm-ch18-omega-shadow-bridge]) | Graduated: `[]` / `propext` / `{Quot.sound, propext}` up to `{propext, Classical.choice, Quot.sound}` | No | Outer analysis via shadow functor $\Pi_{\mathbb{R}}$ |
 :::
 

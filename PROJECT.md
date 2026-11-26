@@ -56,7 +56,7 @@
 
 书内条目、原始文献、外部代码和媒体依照[写作手册第 4 节](docs/AUTHORING.md#4-引用与链接)引用。引用本书时注明中英文版和条目或章节。第 14 节的外部证明引用分别指向固定版本的命题定义、终端定理和独立核验记录。
 
-**Lean 公理与重放的忠实性。** 正文、图注、可视化、演示文稿及影片凡声称零公理或内核重放，须写明所钉提交、后端和受检范围。常规官方构建的公理依赖取冻结状态片顶层 `axioms`，书库据此生成徽章与统计。严格端的测量取同一声明的 `strict_omega.axioms`，缺项即无该端测量证据。严格库的空内核重放须标明所选库根及其导入闭包。D5 双后端冻结证据须标明双端编译、接口对照与分端测量。每个复现命令须与文字所述对象一致。两端记录不同的例子及复核方法见 [《OMEGA MATH》附录 A](books/omega-math/zh/appendix-a.md#sec-om-appa-audit-checklist)。
+**Lean 公理与重放的忠实性。** 正文、图注、可视化、演示文稿及影片凡声称零公理或内核重放，须写明所钉提交、后端和受检范围。先在冻结状态片的 `declarations` 数组中匹配所引声明。书库据该声明的官方测量 `declarations[].axioms` 生成徽章与统计。历史行缺此字段时，只能给出三个标准公理的许可上界。`declarations[].strict_omega.axioms` 记录该声明的严格端测量，缺项表示该端未提供测量记录。严格库的空内核重放须标明所选库根及其导入闭包。D5 双后端冻结证据须标明双端编译、接口对照与分端测量。每个复现命令须与文字所述对象一致。两端记录不同的例子及复核方法见 [《OMEGA MATH》附录 A](books/omega-math/zh/appendix-a.md#sec-om-appa-audit-checklist)。
 
 ## 5. 数学排版与零模型标识铁律
 
@@ -197,4 +197,4 @@ PR 在实际合并树上按相对第一父提交的文件变化选择任务；�
 
 ## 15. 迁移到纯 Omega 数学
 
-trureturing `dev` 的 `OmegaInit` 与 `OmegaMath` 是不依赖 Mathlib、零公理的严格库。书中凡能用它陈述、且换过去数学内容不变的形式化结论，逐步改为引用冻结行 `libraries` 为 `{OmegaInit, OmegaMath}` 的非空子集、`axioms` 为 `[]` 的 D5 声明（“仅 Omega · 零公理”）。需要实数、复数、极限、测度、拓扑或赋范空间的结论不在此列；把它们改写成有理数版本是作者的写作决定，不算迁移。上游一律走 trureturing `CLAUDE.md` §3.2 的“OmegaMath 的 D5 出版引用”：通用结果进 `src/OmegaMath/`，书用结论放在只导入 Omega 模块的 `prelude` D5 模块，合入并冻结后再回书改引用。方法与盘点脚本见 [skills/local-omega-migration/SKILL.md](skills/local-omega-migration/SKILL.md)；批次、复核结论与进度只记在追踪 Issue [#1217](https://github.com/the-omega-institute/trureturing-books/issues/1217)，遵守第 11 节。
+trureturing `dev` 的 `OmegaInit` 与 `OmegaMath` 是不依赖 Mathlib、零公理的严格库。书中凡能用它陈述、且换过去数学内容不变的形式化结论，逐步改为引用冻结行 `libraries` 为 `{OmegaInit, OmegaMath}` 的非空子集、`axioms` 为 `[]` 的 D5 声明（“仅 Omega · 零公理”）。需要实数、复数、极限、测度、拓扑或赋范空间的结论不在此列；把它们改写成有理数版本是作者的写作决定，不算迁移。上游一律走 trureturing `CLAUDE.md` §3.2 的“OmegaMath 的 D5 出版引用”：项目自己的数学进 `src/OmegaMath/`，钉版 Init 和 Mathlib 的严格移植分别进 `strict/OmegaInit/` 和 `strict/OmegaMathlib/`，书用结论放在只导入 Omega 模块的 `prelude` D5 模块，合入并冻结后再回书改引用。方法与盘点脚本见 [skills/local-omega-migration/SKILL.md](skills/local-omega-migration/SKILL.md)；批次、复核结论与进度只记在追踪 Issue [#1217](https://github.com/the-omega-institute/trureturing-books/issues/1217)，遵守第 11 节。

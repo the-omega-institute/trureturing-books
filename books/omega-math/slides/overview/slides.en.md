@@ -33,8 +33,8 @@ section: "Prelude"
     </div>
     <div class="card">
       <h4>Mathlib.Real</h4>
-      <h3>3 standard axioms</h3>
-      <p>The classical real route used in the book draws on <code>propext</code>, <code>Classical.choice</code> and <code>Quot.sound</code>.</p>
+      <h3>Up to 3 standard axioms</h3>
+      <p>The official dependencies of each frozen theorem lie within the permitted set of <code>propext</code>, <code>Classical.choice</code> and <code>Quot.sound</code>.</p>
     </div>
     <div class="card hot">
       <h4>Custom axiom</h4>
@@ -236,7 +236,7 @@ layout: cover
 
 <h2 class="t">Empty-kernel <em>audit</em></h2>
 <p class="sm muted">The auditor replays selected strict library import closures in a fresh empty kernel and checks each declaration’s transitive axioms.</p>
-<p class="sm mt-s">D5 consumers build in both backends and their exports are compared. Frozen records give strict dependencies under <code>strict_omega.axioms</code> and ordinary official dependencies under top-level <code>axioms</code>.</p>
+<p class="sm mt-s">For the 127 D5 theorems in Appendix A.3, both builds are compared. Each declaration row records strict dependencies under <code>strict_omega.axioms</code> and official dependencies under <code>axioms</code>.</p>
 <p class="sm mt-s"><code>OmegaShadowBridge</code> carries core constructions one way into the classical reals.</p>
 <p class="sm mt-s"><b>Four interactive 3D labs</b> · <a :href="readingLink('viz/omega-math-workbench/')">OMEGA//LAB</a> · <a :href="readingLink('viz/ternion-cayley-lab/')">OMEGA//SPIN</a> · <a :href="readingLink('viz/dfinite-algebraic-schur-lab/')">OMEGA//JET</a> · <a :href="readingLink('viz/adelic-arithmetic-observer-lab/')">OMEGA//ARC</a></p>
 <p class="sm mt-s"><b>Reading map</b> · <a :href="readingLink('en/ch01-axiom-omega-and-cic.html')">Ch. 1 Foundations</a> · <a :href="readingLink('en/ch18-zero-axiom-kernel-and-shadow-bridge.html')">Ch. 18 Audit</a> · <a :href="readingLink('en/coda.html')">Coda Six volumes</a> · 19 bilingual static figures · <a :href="readingLink('en/appendix-a.html')">App. A Frozen index</a> · <a :href="readingLink('en/appendix-b.html')">App. B Evidence ledger</a></p>

@@ -265,12 +265,12 @@
    ],
    "lines": [
     [
-     "In the usual library, they arrive with three extra axioms: choice, quotients, and propositional extensionality.",
-     "在常用的库里，它们随三条额外公理一起进来：选择公理、商公理、命题外延性。"
+     "A classical proof here can use up to three standard axioms: choice, quotients, and propositional extensionality.",
+     "这里的经典证明最多可以用三条标准公理，即选择公理、商公理与命题外延性。"
     ],
     [
-     "Omega Math uses none of them. Equality is checked integer by integer, by a program that halts.",
-     "Omega 数学一件都不用：相等逐个整数核对，由一个必定停机的程序判定。"
+     "The strict library uses none of them. Equality is checked integer by integer, by a program that halts.",
+     "严格库的这项运算不依赖公理：相等逐个整数核对，由一个必定停机的程序判定。"
     ],
     [
      "Precision becomes a contract: one over M. Need it finer? Raise M. It is always some finite number.",
@@ -316,8 +316,8 @@
      "任选一点临时当零，乘法就在它周围长回来；没有哪一点是王室。"
     ],
     [
-     "Lean keeps the laws as a class, not an axiom: a job posting, not a hire. Only a built example fills it.",
-     "Lean 把法则写成类型类，而不是公理：是招聘启事，不是录用通知。只有亲手造出的实例才能上岗。"
+     "Lean lists some laws as class fields. A full model must supply separate proofs for the rest.",
+     "Lean 把部分法则列为类型类字段。完整模型还须分别证明其余条件。"
     ]
    ],
    "cues": [
@@ -440,8 +440,8 @@
      "一种顺序得 (1, 1, 1, 1)，另一种得 (1, 1, 1, −1)。"
     ],
     [
-     "Lean checks that these two never share a ray. Order finally leaves a mark, with no axiom used.",
-     "Lean 内核检验：两者不在同一条射线上。次序终于留下痕迹，且没用一条公理。"
+     "Lean checks that these two never share a ray. Order leaves a mark. The strict proof uses no axioms.",
+     "Lean 内核检验：两者不在同一条射线上。次序留下了痕迹。严格端证明的公理清单为空。"
     ]
    ],
    "cues": [
@@ -2095,8 +2095,8 @@
    ],
    "lines": [
     [
-     "The D5 ledger has two records. The strict axiom list is empty for each theorem shown here. The ordinary build has its own record.",
-     "D5 有两套记录。画面所列定理在严格端的公理清单为空，常规构建另有记录。"
+     "Each D5 theorem shown here has two records. Its strict axiom list is empty. Its official dependencies are recorded separately.",
+     "画面所列各条 D5 定理都有两套记录。严格端的公理清单为空，官方端的依赖另有记录。"
     ],
     [
      "Outside the wall, eleven bridge theorems cast shadows onto the classical numbers. One way only.",
