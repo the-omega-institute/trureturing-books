@@ -616,7 +616,7 @@ The ordinary Montgomery pair-correlation conjecture would supply the long-band u
 
 ### Commensurate spectra with the same unit-band profile
 
-The upper bound in [@thm-ch34-zeta-harmonic-critical-collision-limit] controls frequencies beyond the unit band. A spectrum can match the two-term zero count and the unit-band Lorentz profile and still have critical collision masses bounded above the Gaussian limit. The comparison uses one spectrum at every real truncation height.
+The upper bound in [@thm-ch34-zeta-harmonic-critical-collision-limit] controls frequencies beyond the unit band. A spectrum can match the two-term zero count and the unit-band Lorentz profile and still have normalized critical collision masses eventually at least a constant greater than the Gaussian limit. The comparison uses one spectrum at every real truncation height.
 
 For a cyclic group with $M>0$ sites, choose a set $A$ of $k$ Fourier columns normalized to have unit norm. Assign a $k$-site subset $X$ the squared modulus of the corresponding row minor. Column orthogonality makes these probabilities sum to one. At $r\in\mathbb Z/M\mathbb Z$ let $S_X(r)=\sum_{x\in X}\exp(2\pi i r x/M)$.
 
