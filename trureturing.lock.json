@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "8ad0c7f9801f394364c7313057ef05c24e439af4",
-  "pinned_at": "2026-11-26T11:38:18Z",
+  "commit": "444999cc0f3f3f5c08b0a2227856976eda90d986",
+  "pinned_at": "2026-11-26T14:13:54Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4936,40 +4936,25 @@
       "module": "D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit",
       "name": "D5.S3.Fourier.Asymptotics.FinitePairGaussianLimit.score_gaussian_envelope",
       "kind": "theorem",
-      "statement_id": "sha256:ce9e315c601ff0cdd47dd3d6b7d76329be7daea36fedc7e32843c1a397c7de55",
+      "statement_id": "sha256:5eb6a4eed5acb7b3ef4137eb543b51506cf9db7fed13186ab25748a6b8f33a84",
       "line": 204,
-      "signature": "theorem score_gaussian_envelope {J : Type*} [Fintype J] (g w : J → ℝ) (hw : ∀ i j, 0≤w i*w j) (hW : ∑ i, w i=1) (n : ℕ) (hn : 0<n) (hm : 0<pairMoment g w 2) (u : ℝ) (hwin : u^2*pairMoment g w 4 ≤ 3*(n:ℝ)*pairMoment g w 2^2) : let gaussian",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ]
+      "signature": "theorem score_gaussian_envelope {J : Type*} [Fintype J] (g w : J → ℝ) (hw : ∀ i j, 0≤w i*w j) (hW : ∑ i, w i=1) (n : ℕ) (hn : 0<n) (hm : 0<pairMoment g w 2) (u : ℝ) (hwin : u^2*pairMoment g w 4 ≤ 3*(n:ℝ)*pairMoment g w 2^2) : let gaussian"
     },
     "D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.score_gaussian_limit": {
       "module": "D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit",
       "name": "D5.S3.Fourier.Asymptotics.FinitePairGaussianLimit.score_gaussian_limit",
       "kind": "theorem",
-      "statement_id": "sha256:ce9e315c601ff0cdd47dd3d6b7d76329be7daea36fedc7e32843c1a397c7de55",
+      "statement_id": "sha256:5eb6a4eed5acb7b3ef4137eb543b51506cf9db7fed13186ab25748a6b8f33a84",
       "line": 169,
-      "signature": "theorem score_gaussian_limit {J : ℕ → Type*} [∀ n, Fintype (J n)] (g w : ∀ n, J n → ℝ) (hw : ∀ᶠ n in atTop, ∀ i j, 0≤w n i*w n j) (hW : ∀ᶠ n in atTop, ∑ j, w n j = 1) (hM : ∀ᶠ n in atTop, 0 < pairMoment (g n) (w n) 2) (hR : Tendsto (fun n => pairMoment (g n) (w n) 4 / ((n:ℝ)*pairMoment (g n) (w n) 2^2)) atTop (𝓝 0)) (u : ℝ) : let gaussian",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ]
+      "signature": "theorem score_gaussian_limit {J : ℕ → Type*} [∀ n, Fintype (J n)] (g w : ∀ n, J n → ℝ) (hw : ∀ᶠ n in atTop, ∀ i j, 0≤w n i*w n j) (hW : ∀ᶠ n in atTop, ∑ j, w n j = 1) (hM : ∀ᶠ n in atTop, 0 < pairMoment (g n) (w n) 2) (hR : Tendsto (fun n => pairMoment (g n) (w n) 4 / ((n:ℝ)*pairMoment (g n) (w n) 2^2)) atTop (𝓝 0)) (u : ℝ) : let gaussian"
     },
     "D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit.score_quartic": {
       "module": "D5/S3/Fourier/Asymptotics/FinitePairGaussianLimit",
       "name": "D5.S3.Fourier.Asymptotics.FinitePairGaussianLimit.score_quartic",
       "kind": "theorem",
-      "statement_id": "sha256:ce9e315c601ff0cdd47dd3d6b7d76329be7daea36fedc7e32843c1a397c7de55",
+      "statement_id": "sha256:5eb6a4eed5acb7b3ef4137eb543b51506cf9db7fed13186ab25748a6b8f33a84",
       "line": 100,
-      "signature": "theorem score_quartic {J : Type*} [Fintype J] (g w : J → ℝ) (hw : ∀ i j, 0≤w i*w j) (t : ℝ) : let square",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ]
+      "signature": "theorem score_quartic {J : Type*} [Fintype J] (g w : J → ℝ) (hw : ∀ i j, 0≤w i*w j) (t : ℝ) : let square"
     },
     "D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_criticalThreshold_limit": {
       "module": "D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit",
@@ -13034,6 +13019,19 @@
       "line": 89,
       "signature": "theorem prime_window_mobius_of_power_prefix (hRH : RiemannHypothesis) {β P ε : ℝ} (hβ : 0 ≤ β) (hβ₁ : β < 1) (hP : 0 < P) (hε : 0 < ε) (hprefix : ∀ k : ℕ, 1 ≤ k → |∑ n ∈ Finset.Icc 1 k, (μ n : ℝ)| ≤ P*(k : ℝ)^β) : ∃ a₀ K : ℝ, 2 ≤ a₀ ∧ 0 < K ∧ ∀ m : ℕ, 2 ≤ m → ∀ a B : ℝ, a₀ ≤ a → a ≤ B → |windowDiscrepancy a B - spectralPrimitive (phaseOrbit (Real.log B)) + spectralPrimitive (phaseOrbit (Real.log a)) - (∑ n ∈ Finset.Icc 3 m, -(μ n : ℝ) * (2 * (n : ℝ)^2 / (((n : ℝ) - 1) * ((n : ℝ) - 2))) * (a ^ ((n : ℝ)⁻¹ - 1 / 2) - B ^ ((n : ℝ)⁻¹ - 1 / 2))) - (∑ n ∈ (Finset.Icc 2 m).filter (fun n => 2 * n < m +"
     },
+    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalResolutionCollisionLimit.harmonic_zeta_critical_collision_limit": {
+      "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalResolutionCollisionLimit",
+      "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHCriticalResolutionCollisionLimit.harmonic_zeta_critical_collision_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:4a69da4af49125cbfc34968f66c47f492fd176ab060130fdbced71b13b23c3f9",
+      "line": 460,
+      "signature": "theorem harmonic_zeta_critical_collision_limit (rh : RiemannHypothesis) (hcorr : MontgomeryUpperBoundOnLogBands (zetaSpectrum rh)) (T η : ℕ → ℝ) (hT : Tendsto T atTop atTop) (hη : ∀ᶠ n : ℕ in atTop, 0 < η n) (hh : Tendsto (fun n : ℕ => (Real.log (T n))^2 / (n : ℝ)) atTop (𝓝 0)) (hresolution : ∃ a > (0 : ℝ), ∀ᶠ n in atTop, a ≤ η n * Real.log (T n)) : let scale (n : ℕ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio": {
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment",
       "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHHarmonicPairMoment.harmonic_pair_ratio",
@@ -13054,27 +13052,17 @@
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer",
       "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHLandauWindowTransfer.harmonic_landau_window_deficit",
       "kind": "theorem",
-      "statement_id": "sha256:76da5d16184838a9c68008cdc8b0b893ec9a39f67ac177c5f1de1c6f8713e152",
+      "statement_id": "sha256:62866b523517f9275353ce336ca8dcb71eff4267f2a95e797e370c5fc21e858b",
       "line": 240,
-      "signature": "theorem harmonic_landau_window_deficit (rh : RiemannHypothesis) (b C : ℝ) (hb : 0 < b) (hC : 0 < C) (hLandau : ∀ V t : ℝ, 1 < V → 0 < |t| → ‖∑ j ∈ positiveCutoff rh V, (Zeta23.zeroMult j.val : ℂ)*phase (ordinate j) t‖ ≤ C*(V+Real.exp (|t|/2)*(1+|t|)^2+Real.exp (|t|/2)*(1+Real.log V)+Real.log V/|t|)) : ∃ L : ℝ, 1<L ∧ ∀ T t : ℝ, L≤T → b/Real.log T≤|t| → |t|≤Real.log T → let g : ↥(positiveCutoff rh T) → ℝ",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ]
+      "signature": "theorem harmonic_landau_window_deficit (rh : RiemannHypothesis) (b C : ℝ) (hb : 0 < b) (hC : 0 < C) (hLandau : ∀ V t : ℝ, 1 < V → 0 < |t| → ‖∑ j ∈ positiveCutoff rh V, (Zeta23.zeroMult j.val : ℂ)*phase (ordinate j) t‖ ≤ C*(V+Real.exp (|t|/2)*(1+|t|)^2+Real.exp (|t|/2)*(1+Real.log V)+Real.log V/|t|)) : ∃ L : ℝ, 1<L ∧ ∀ T t : ℝ, L≤T → b/Real.log T≤|t| → |t|≤Real.log T → let g : ↥(positiveCutoff rh T) → ℝ"
     },
     "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLogarithmicCollisionLimit.harmonic_zeta_collision_limit": {
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLogarithmicCollisionLimit",
       "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHLogarithmicCollisionLimit.harmonic_zeta_collision_limit",
       "kind": "theorem",
-      "statement_id": "sha256:77f4b01c7dc64e95884a90dc581be33e087224b3778e9e3df2f3b1e7ff0c289c",
-      "line": 541,
-      "signature": "theorem harmonic_zeta_collision_limit (rh : RiemannHypothesis) (C : ℝ) (hC : 0 < C) (hLandau : ∀ V t : ℝ, 1 < V → 0 < |t| → ‖∑ j ∈ positiveCutoff rh V, (Zeta23.zeroMult j.val : ℂ) * phase (ordinate j) t‖ ≤ C * (V + Real.exp (|t| / 2) * (1 + |t|)^2 + Real.exp (|t| / 2) * (1 + Real.log V) + Real.log V / |t|)) (T η : ℕ → ℝ) (hT : Tendsto T atTop atTop) (hη : ∀ᶠ n : ℕ in atTop, 0 < η n) (hh : Tendsto (fun n : ℕ => (Real.log (T n))^2 / (n : ℝ)) atTop (𝓝 0)) (htrunc : Tendsto (fun n : ℕ => η n * Real.log (T n)) atTop atTop) : let scale (n : ℕ)",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ]
+      "statement_id": "sha256:14a512b49924c808fe22d62572c1cec9c716d20c0e79f31f4cc48458782c62ba",
+      "line": 543,
+      "signature": "theorem harmonic_zeta_collision_limit (rh : RiemannHypothesis) (C : ℝ) (hC : 0 < C) (hLandau : ∀ V t : ℝ, 1 < V → 0 < |t| → ‖∑ j ∈ positiveCutoff rh V, (Zeta23.zeroMult j.val : ℂ) * phase (ordinate j) t‖ ≤ C * (V + Real.exp (|t| / 2) * (1 + |t|)^2 + Real.exp (|t| / 2) * (1 + Real.log V) + Real.log V / |t|)) (T η : ℕ → ℝ) (hT : Tendsto T atTop atTop) (hη : ∀ᶠ n : ℕ in atTop, 0 < η n) (hh : Tendsto (fun n : ℕ => (Real.log (T n))^2 / (n : ℝ)) atTop (𝓝 0)) (htrunc : Tendsto (fun n : ℕ => η n * Real.log (T n)) atTop atTop) : let scale (n : ℕ)"
     },
     "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEightNinths.prime_window_mobius_eight_ninths_of_rh": {
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEightNinths",
