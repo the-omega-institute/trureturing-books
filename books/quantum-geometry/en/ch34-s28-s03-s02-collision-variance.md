@@ -39,7 +39,7 @@ $$
 \log L\ge \log N+2p\log\log T-O(p+\log T).
 $$
 
-This inequality constrains the averaging length of the moment test. An upper bound for high-order weighted near-collisions of actual ζ ordinates at positive resolution and the possible existence of missing windows in shorter ranges remain open here.
+This inequality constrains the averaging length of the moment test. In its resolution regime, [@thm-ch34-zeta-harmonic-collision-limit] gives a matching upper bound for harmonic-weighted collisions of actual zeta ordinates. The existence of missing windows in shorter sampling ranges remains open.
 
 ## Common shifted bins and a parabolic test function
 
@@ -225,7 +225,7 @@ E_n(\eta_n)\ge
 \frac{r\eta_n}{T_n\sqrt n}\,W_n^{2n}.
 $$
 
-The underlying family may grow with $n$. Without control of the relative resolution and variance scales, the normalized collision ratio can tend to zero, as with a single unit-weight frequency, $V_n=1/n^2$ and fixed $\eta_n>0$. The upper-bound problem for high-order weighted collisions of actual zeta ordinates remains open.
+The underlying family may grow with $n$. Without control of the relative resolution and variance scales, the normalized collision ratio can tend to zero, as with a single unit-weight frequency, $V_n=1/n^2$ and fixed $\eta_n>0$. For the harmonic-weighted zeta spectrum, [@thm-ch34-zeta-harmonic-collision-limit] also gives the matching upper bound under its growth and resolution conditions.
 
 ## Exact recovery of the closed collision band from triangular moments
 
@@ -298,7 +298,7 @@ $$
 \frac{s_n E_n(\eta_n)}{\eta_n W_n^{2n}}\longrightarrow\frac1{\sqrt\pi}.
 $$
 
-The required hard-band asymptotic thus follows from asymptotics for the Fejér-weighted moments at neighboring multiplicative radii. The noncentral contribution and matching upper estimates for actual zeta tails remain open arithmetic problems.
+The required hard-band asymptotic thus follows from asymptotics for the Fejér-weighted moments at neighboring multiplicative radii. For the actual harmonic-weighted zeta spectrum, [@thm-ch34-zeta-harmonic-collision-limit] follows this reduction and gives the corresponding resolution conditions.
 
 ## Pair fourth moments control the central Gaussian profile
 
@@ -362,7 +362,7 @@ $$
 \frac{P_4(T)}{P_2(T)^2}\le4096\log T.
 $$
 
-[Harmonic-weighted moment ratio bound](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio) If $T_n\to\infty$ and $\log T_n/n\to0$, the actual normalized zero spectrum satisfies the fourth-moment-ratio hypothesis of the central Gaussian profile. A fixed frequency rescaling $g_\gamma=\gamma/r$ with $r>0$ leaves this ratio invariant. The central Fejér principal contribution also requires compatibility between the resolution and actual variance scale. The noncentral peak estimate on the intermediate time range remains a separate obligation.
+[Harmonic-weighted moment ratio bound](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio) If $T_n\to\infty$ and $\log T_n/n\to0$, the actual normalized zero spectrum satisfies the fourth-moment-ratio hypothesis of the central Gaussian profile. A fixed frequency rescaling $g_\gamma=\gamma/r$ with $r>0$ leaves this ratio invariant. The central Fejér principal contribution also requires compatibility between the resolution and actual variance scale. The phase estimates below control the intermediate noncentral peaks.
 
 ## Principal Fejér integral on a moving central window
 
@@ -404,7 +404,7 @@ $$
 K_{\eta_n}(t)|S_n(t)|^{2n}\,dt\longrightarrow0,
 $$
 
-with the corresponding limits at neighboring multiplicative resolutions. For the harmonic-weighted actual zeta spectrum, the moment-ratio condition holds under the cutoff growth condition above. The integrated noncentral peaks remain an open arithmetic gap.
+with the corresponding limits at neighboring multiplicative resolutions. For the harmonic-weighted actual zeta spectrum, the moment-ratio condition holds under the cutoff growth condition above. The uniform Landau estimate below controls the integrated noncentral peaks and gives [@thm-ch34-zeta-harmonic-collision-limit] when $\eta_n\log T_n\to\infty$.
 
 ### Finite observation windows for whole-line moments
 
@@ -428,7 +428,7 @@ $$
 
 [Relative truncation bound](lean:D5/S3/Fourier/Concentration/FejerRelativeLocalization.relative_fejer_truncation) This estimate permits the support, weights, degree and resolution to vary together, including repeated frequencies.
 
-Choose $L_n$ with $\eta_nL_n\to+\infty$ and $L_n\ge A_n/s_n$. Set $\varepsilon_n=64/(\eta_nL_n)$. Eventually $I_{\eta_n}(L_n)\le M_{\eta_n}\le I_{\eta_n}(L_n)/(1-\varepsilon_n)$. The normalized finite-window integral $(s_n/\eta_n)I_{\eta_n}(L_n)$ and the normalized whole-line moment therefore share the same finite limit whenever either converges. Once the central principal contribution is established, the phase peaks still requiring control occupy the finite intermediate time range $A_n/s_n<|t|\le L_n$. The high-moment upper bound for actual growing zeta-ordinate families on that range remains open.
+Choose $L_n$ with $\eta_nL_n\to+\infty$ and $L_n\ge A_n/s_n$. Set $\varepsilon_n=64/(\eta_nL_n)$. Eventually $I_{\eta_n}(L_n)\le M_{\eta_n}\le I_{\eta_n}(L_n)/(1-\varepsilon_n)$. The normalized finite-window integral $(s_n/\eta_n)I_{\eta_n}(L_n)$ and the normalized whole-line moment therefore share the same finite limit whenever either converges. Once the central principal contribution is established, the phase peaks still requiring control occupy the finite intermediate time range $A_n/s_n<|t|\le L_n$. Under the hypotheses of [@thm-ch34-zeta-harmonic-collision-limit], one can set $L_n=\log T_n$ and control the integral on this range with the phase estimates below.
 
 ### Short noncentral times for actual zeta ordinates
 
@@ -459,7 +459,7 @@ K_{\eta_n}(t)|Z_{T_n}(t)|^{2n}\,dt
 \exp\left(-\frac{\delta n}{262144\log T_n}\right).
 $$
 
-This upper bound tends to zero if $T_n\to\infty$ and $(\log T_n)^2/n\to0$, since both $\log T_n$ and $\log n$ are $o(n/\log T_n)$. For the region between the moving central window and $1/T_n$, the same quartic estimate with $X=T_n$ gives $|Z_{T_n}(t)|^{2n}\le e^{-11(s_nt)^2/12}$ for $|t|\le1/T_n$. Its normalized integral outside $|s_nt|\le A_n$ tends to zero as $A_n\to\infty$. Together with relative truncation, the remaining arithmetic upper estimate is therefore needed on the intermediate range $T_n^{-\delta}<|t|\le L_n$ under these stronger growth conditions. For fixed $r>0$ and frequencies $\gamma/r$, rescale the time endpoints by $r$ and the variance scale by $1/r$.
+This upper bound tends to zero if $T_n\to\infty$ and $(\log T_n)^2/n\to0$, since both $\log T_n$ and $\log n$ are $o(n/\log T_n)$. For the region between the moving central window and $1/T_n$, the same quartic estimate with $X=T_n$ gives $|Z_{T_n}(t)|^{2n}\le e^{-11(s_nt)^2/12}$ for $|t|\le1/T_n$. Its normalized integral outside $|s_nt|\le A_n$ tends to zero as $A_n\to\infty$. Together with relative truncation, the integral that remains to be estimated lies on the intermediate range $T_n^{-\delta}<|t|\le L_n$ under these stronger growth conditions. For fixed $r>0$ and frequencies $\gamma/r$, rescale the time endpoints by $r$ and the variance scale by $1/r$.
 
 ### Short-window lower counts for the actual zero spectrum
 
@@ -504,7 +504,7 @@ $$
 \exp\left(-\frac{n}{2048\log T_n}\right)\longrightarrow0.
 $$
 
-The remaining intermediate estimate is needed beyond $b/\log T_n$. It requires additional arithmetic information at finer phase scales.
+The uniform Landau estimate in the next section extends the phase bound from $b/\log T_n$ to $\log T_n$.
 
 ### From a uniform Landau bound to logarithmic times
 
@@ -525,10 +525,12 @@ $$
 The Lean theorem verifies this transfer with the uniform estimate as an explicit premise. [Logarithmic-time harmonic deficit](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.harmonic_landau_window_deficit)
 
 ::: {.theorem #thm-ch34-zeta-harmonic-collision-limit title="Gaussian collision limit for harmonic-weighted zeta zeros" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLogarithmicCollisionLimit.harmonic_zeta_collision_limit"}
-Assume RH and the uniform estimate above for some fixed $C>0$. Let $T_n\to\infty$ with $(\log T_n)^2/n\to0$ and set $s_n=\sqrt{nP_2(T_n)/2}$. If $\eta_n$ is eventually positive, $\eta_n/s_n\to0$ and $\eta_n\log T_n\to\infty$, then
+Assume the Riemann hypothesis (RH) in Mathlib’s formulation. If $\zeta(s)=0$, $s\ne1$, and $s\ne-2(k+1)$ for every natural number $k$, then $\operatorname{Re}s=1/2$. Also assume the uniform estimate above for some fixed $C>0$. Let $T_n\to\infty$ with $(\log T_n)^2/n\to0$ and set $s_n=\sqrt{nP_2(T_n)/2}$. If $\eta_n$ is eventually positive, $\eta_n/s_n\to0$ and $\eta_n\log T_n\to\infty$, then
+
 $$
 \frac{s_n E_n(\eta_n)}{\eta_n W(T_n)^{2n}}\longrightarrow\frac1{\sqrt\pi}.
 $$
+
 Here $E_n(r)$ sums over ordered pairs of occupation vectors whose absolute frequency difference is at most $r$. Each pair contributes the product of its two multinomial weights induced by the original harmonic weights.
 :::
 
@@ -536,7 +538,9 @@ Here $E_n(r)$ sums over ordered pairs of occupation vectors whose absolute frequ
 The fourth-moment bound $P_4(T)\le T^2P_2(T)$ allows the central window to extend to $|t|\le1/T_n$. The lower bound on the second moment makes its rescaled half-width $s_n/T_n$ tend to infinity. The central integral gives $1/(2\sqrt\pi)$. The reciprocal-height, periodic-phase, and Landau estimates cover the entire range $1/T_n\le|t|\le\log T_n$ with a uniform score deficit of at least $c/\log T_n$ for some $c>0$. The score raised to the power $2n$ is therefore bounded by $\exp(-2cn/\log T_n)$, which absorbs the factor $T_n\sqrt n\log T_n$ in the normalized integral. Relative truncation transfers the limit to the full line. The argument works for every fixed positive multiple of $\eta_n$. This gives a quadratic ramp limit, and the two secants recover the hard-band constant with the endpoint included. The full proof is checked by the Lean kernel.
 :::
 
-Gonek's uniform estimate remains an explicit premise of the theorem. When $\eta_n\log T_n$ is bounded, the relative truncation estimate gives no vanishing error bound.
+Alpöge’s external formalization proves Mathlib’s Riemann hypothesis. The frozen declaration above takes that proposition and Gonek’s uniform estimate as explicit premises. [External RH theorem](https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean#L4)
+
+When $\eta_n\log T_n$ is bounded, the relative truncation estimate gives no vanishing error bound.
 
 ### Occupation diagonal lower bound for finite support
 
