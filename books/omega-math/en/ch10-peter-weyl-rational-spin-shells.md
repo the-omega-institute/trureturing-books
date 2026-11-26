@@ -121,7 +121,7 @@ certifying the exact zero-trace orthogonal node of a $120^\circ$ rotation withou
 | :--- | :--- | :--- | :--- |
 | **Underlying space** | Open non-compact line $(-\infty, +\infty)$ | Compact non-group ($\chi(S^2) = 2$) | Compact group of signed real unit quaternions $S^3(\mathbb{R})$ |
 | **Spectrum topology** | Continuous unbounded $\xi \in \mathbb{R}$ | Integer orbital momenta $\ell \in \mathbb{N}$ only | Complete half-integer shells $j \in \frac{1}{2}\mathbb{N}$, dim $(2j+1)^2$ |
-| **Transform kernel** | Transcendental $e^{-\hat{\mathbf{i}}2\pi\xi x}$ | Associated Legendre with polar singularities | Spin $j$ has character $U_{2j}(c)$. For integer $j=n$, this is $E_n(\kappa)$ with $\kappa=c^2$. |
+| **Transform kernel** | Transcendental $e^{-\hat{\mathbf{i}}2\pi\xi x}$ | Associated Legendre with polar singularities | Matrix coefficients $D^j_{ab}(q)$. The matrix trace $\chi_j(q)=\Tr D^j(q)=U_{2j}(c)$ gives the character, equal to $E_n(\kappa)$ for integer $j=n$. |
 | **Lowest harmonics** | No discrete fundamental mode | $\ell = 0$ scalar, $\ell = 1$ polar vector | $j = 0$ Past anchor, $j = \frac{1}{2}$ Present spinor, $j = 1$ Future field |
 | **Convolution law** | Origin-dependent abelian product | No intrinsic group convolution | $L^1$ ternary convolution with normalized Haar measure on $\mathrm{SU}(2)$ $\to \widehat{f}_j \widehat{g}_j^\dagger \widehat{h}_j$ |
 
