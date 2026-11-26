@@ -302,7 +302,7 @@ SCENES.count = S => {
     line(x0, yl, x1, yl, C.dim, ga, 2);
     for (const v of [623.8, 623.9, 624.0, 624.1, 624.2]) {
       line(X(v), yl - 10, X(v), yl + 10, C.dim, ga, 2);
-      txt(v.toFixed(1), X(v), yl + 44, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ga });
+      txt(v.toFixed(1), X(v), yl + 80, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ga });
     }
     const ba = ga * Q(S, 2, 'puts the gain', 0.8);
     fillBox(X(623.91), yl - 40, X(624.09) - X(623.91), 80, C.cyan, ba * 0.25);
@@ -331,8 +331,8 @@ SCENES.cycle = S => {
     panel(1000, 200, 800, 300, ba, C.cyan, 'RETURN · 回程');
     const x0 = 1040, wB = 720, xs = x0 + wB * 216 / 624, y0 = 290;
     const free = Q(S, 1, 'all return', 0.8);
-    fillBox(x0, y0, wB, 46, C.cyan, ba * 0.3);
-    fillBox(x0, y0, xs - x0, 46, mix(C.dim, C.cyan, free), ba * (0.6 + 0.2 * free));
+    fillBox(x0, y0, wB, 46, C.cyan, ba * (0.3 + 0.3 * free));
+    fillBox(x0, y0, xs - x0, 46, C.dim, ba * 0.6 * (1 - free));
     box(x0, y0, wB, 46, C.cyan, ba, 2);
     line(xs, y0 - 6, xs, y0 + 52, C.white, ba * (1 - free), 2);
     txt('216 stuck · 被困', x0 + 10, y0 + 82, { size: 24, fam: F.zh, w: 700, c: C.dim, a: ba * Q(S, 0, 'two hundred sixteen', 0.5) * (1 - free) });
@@ -361,13 +361,13 @@ SCENES.cycle = S => {
     }
     const lab = (k, s, col, la2) => {
       const th = -Math.PI / 2 + k / 17 * TAU;
-      txt(s, cx + (R + 62) * Math.cos(th), cy + (R + 62) * Math.sin(th) + 8, { size: 24, fam: F.zh, w: 700, align: 'center', c: col, a: ra * la2 });
+      txt(s, cx + (R + 95) * Math.cos(th), cy + (R + 70) * Math.sin(th) + 8, { size: 24, fam: F.zh, w: 700, align: 'center', c: col, a: ra * la2 });
     };
     lab(1.5, '4 in · 汇合', C.mag, ma);
     lab(5.5, '4 out · 逆送', C.mag, oa);
     lab(12.5, '9 home · 回程', C.cyan, 1);
     const sa = ra * Q(S, 2, 'seventeen-tick', 0.6);
-    txt('17', cx, cy + 30, { size: 110, fam: F.orb, w: 900, align: 'center', c: C.now, a: sa, ab: 3 });
+    txt('17', cx, cy + 36, { size: 130, fam: F.math, w: 900, align: 'center', c: C.now, a: sa, ab: 3 });
     txt('ticks · 拍', cx, cy + 80, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: sa });
   }
   /* right bottom: the same-graph mass obstruction */
@@ -396,13 +396,13 @@ SCENES.schur = S => {
   txt('eliminate 2 hidden modes · 舒尔补消去两个隐藏模式', W / 2, 225, { size: 28, fam: F.zh, w: 700, align: 'center', c: C.white, a: ta });
   chRich([['h = e + t f,   k = t e + f', C.cyan], ['     t² ≠ 1  ⟹  invertible', C.dim]], W / 2, 280, { size: 30, a: ta * Q(S, 0, 'Schur complement', 0.6), align: 'center' });
   /* the chain */
-  const ca = a * at(S, 1, 0.6);
+  const ca = a * at(S, 0, 0.8, 1.6);
   const xs = [360, 660, 960, 1260, 1560], names = ['k', 'b', 'd', 'h', 'a'], yc = 470;
   const edges = [['ζ = −b k', 0], ['β = −t b d', 1], ['γ = −d h', 2], ['ε = −a h', 3]];
   const hiBE = Q(S, 2, 'beta and epsilon', 0.6), hiG = Q(S, 2, 'gamma cannot', 0.6);
   if (ca > 0.003) {
     edges.forEach(([lab, i], n) => {
-      const ea = ca * clamp(at(S, 1, 0.5) * 4 - n * 0.6);
+      const ea = ca * at(S, 1, 0.8) * clamp(at(S, 1, 0.5) * 4 - n * 0.6);
       let col = C.cyan;
       if ((i === 1 || i === 3) && hiBE > 0) col = mix(C.cyan, C.now, hiBE);
       if (i === 2 && hiG > 0) col = mix(C.cyan, C.lean, hiG);
@@ -417,7 +417,7 @@ SCENES.schur = S => {
       txt(nm, xs[i], yc + 14, { size: 40, fam: F.math, w: 700, align: 'center', c: C.white, a: ca });
       if (i >= 1) txt('≠ 0', xs[i], yc - 96, { size: 22, fam: F.math, w: 700, align: 'center', c: C.now, a: ca * nz * (1 - hiG * 0.4) });
     });
-    txt('one chain of couplings · 同一条耦合链上相邻两项之积', W / 2, 590, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.dim, a: ca });
+    txt('one chain of couplings · 同一条耦合链上相邻两项之积', W / 2, 590, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.dim, a: ca * at(S, 1, 0.6) });
   }
   /* the Lean statement */
   const la = a * Q(S, 2, 'Lean checks', 0.6);
@@ -516,6 +516,7 @@ SCENES.stair = S => {
     line(X(D), y0, X(D), y0 + 8, C.dim, pa, 2);
     txt(String(D), X(D), y0 + 32, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a: pa });
   }
+  txt('?', W / 2 + 100, Y(29), { size: 120, fam: F.orb, w: 900, align: 'center', c: C.now, a: pa * (1 - at(S, 1, 0.5)) * 0.8 });
   txt('D', x1 + 10, y0 + 8, { size: 26, fam: F.math, w: 700, c: C.white, a: pa });
   /* fixed block */
   const fa = a * Q(S, 1, 'Freeze the old', 0.6);
@@ -586,29 +587,29 @@ SCENES.hurwitz = S => {
   const ia = a * at(S, 0, 0.6);
   txt('norm-5 Hurwitz words prepare the coupling inputs · 范数五赫维茨词制备耦合输入', W / 2, 205, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.white, a: ia * (1 - at(S, 2, 0.5)) });
   /* twelve tiles */
-  const ta = a * Q(S, 0, 'built on', 0.6), nq = Q(S, 1, 'squared norm four', 0.6);
+  const ta = a * at(S, 0, 0.6, 0.8), nq = Q(S, 1, 'squared norm four', 0.6);
   const twd = 256, th = 150, gap = 18, x0 = W / 2 - (6 * twd + 5 * gap) / 2;
   const up = at(S, 2, 0.6);
   if (ta > 0.003) CH_HUR.forEach((q, i) => {
     const col = i < 4 ? C.cyan : C.mag;
     const x = x0 + (i % 6) * (twd + gap), y = 240 + Math.floor(i / 6) * (th + gap) - up * 0;
-    const ka = ta * clamp(Q(S, 0, 'built on', 0.4) * 6 - i * 0.35);
+    const ka = ta * clamp(at(S, 0, 0.4, 0.8) * 6 - i * 0.35);
     panel(x, y, twd, th, ka, col);
     txt(chHurName(q), x + twd / 2, y + 46, { size: i < 4 ? 32 : 24, fam: F.math, w: 700, align: 'center', c: C.white, a: ka });
     txt(`(${q.join(', ')})`, x + twd / 2, y + 90, { size: 22, fam: F.mono, w: 700, align: 'center', c: col, a: ka * Q(S, 1, 'Doubled', 0.5) });
     txt(`normSq = ${chNorm(q)}`, x + twd / 2, y + 128, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.lean, a: ka * nq });
   });
-  txt('24 units = ± 12 representatives · 模去正负号的十二个代表', W / 2, 600, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a: ta * (1 - up) });
+  txt('24 units = ± 12 representatives · 模去正负号的十二个代表', W / 2, 720, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a: ta * (1 - up) });
   const la = a * Q(S, 1, 'Lean checks', 0.6);
   if (la > 0.003) {
-    chLean(500, 660, CH_LEAN.hurwitz, la, { size: 22, tail: '   ·  axioms: [ ]' });
-    txt('zero axioms · 零公理 (OmegaInit, OmegaMath)', 500, 700, { size: 20, fam: F.zh, w: 700, c: C.lean, a: la * (1 - up) });
+    chLean(500, 612, CH_LEAN.hurwitz, la, { size: 22, tail: '   ·  axioms: [ ]' });
+    txt('zero axioms · 零公理 (OmegaInit, OmegaMath)', 500, 660, { size: 20, fam: F.zh, w: 700, c: C.lean, a: la * (1 - up) });
   }
   /* the word ladder */
   const wa = a * up;
   if (wa > 0.003) {
-    panel(140, 610, 1640, 220, wa, C.cyan, 'WORD LENGTH · 词长');
-    const lx0 = 200, lx1 = 1720, X = n => lx0 + n / 24 * (lx1 - lx0), yl = 760;
+    panel(140, 640, 1640, 196, wa, C.cyan, 'WORD LENGTH · 词长');
+    const lx0 = 200, lx1 = 1720, X = n => lx0 + n / 24 * (lx1 - lx0), yl = 776;
     line(lx0, yl, lx1, yl, C.dim, wa, 2);
     for (let n = 0; n <= 24; n += 4) txt(String(n), X(n), yl + 32, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.dim, a: wa });
     const a16 = wa * Q(S, 2, 'Sixteen-step', 0.5), a21 = wa * Q(S, 2, 'needs twenty-one', 0.5);
@@ -617,7 +618,7 @@ SCENES.hurwitz = S => {
     txt('×', X(16), yl - 16, { size: 30, fam: F.mono, w: 900, align: 'center', c: C.dim, a: a16 });
     dot(X(21), yl, 14, 'g', a21);
     txt('21: first single word → #11439', X(21), yl - 44, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.now, a: a21 });
-    chTag(1500, 664, 'CERT · 复算证书', C.cyan, a21);
+    chTag(1500, 694, 'CERT · 复算证书', C.cyan, a21);
   }
 };
 
@@ -641,7 +642,7 @@ SCENES.zeros = S => {
     chTag(940, 250, 'MODEL · 模型内', C.argued, ta, 18);
     const run = at(S, 1, 4.2, 0.2), cur = Math.min(4, Math.floor(run * 5));
     CH_WIN.forEach(([en, zh, z], i) => {
-      const y = 300 + i * 74, ra = ta * Q(S, 1, 'Spectral weight', 0.4, i * 0.6);
+      const y = 300 + i * 74, ra = ta * at(S, 0, 0.4, 1.0 + i * 0.35);
       const isCur = run > 0 && run < 1 && i === cur;
       txt(en, 160, y, { size: 24, fam: F.mono, w: 700, c: C.white, a: ra });
       txt(zh, 160, y + 32, { size: 20, fam: F.zh, w: 700, c: C.dim, a: ra });

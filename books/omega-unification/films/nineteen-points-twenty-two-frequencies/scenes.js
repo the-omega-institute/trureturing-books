@@ -390,7 +390,7 @@ SCENES.edges = S => {
   const ca = a * at(S, 1, 0.5);
   panel(1060, 344, 740, 260, ca, C.cyan, 'COUNT · 计数');
   const rows = [
-    [0, '171', 'pairs · 点对', C.white, '171 pairs'],
+    [1, '171', 'pairs · 点对', C.white, '171 pairs'],
     [1, '− 36', 'longest chords dropped · 剔除最长弦', C.mag, 'longest chords'],
     [1, '= 135', 'edges · 原边', C.cyan, '135 survive'],
     [2, '529', 'triangles · 三角面', C.now, '529 triangles']
@@ -483,7 +483,7 @@ SCENES.relation = S => {
   txt('23 angles', 160, 268, { size: 36, fam: F.orb, w: 900, c: C.white, a: ta });
   txt('→', 390, 266, { size: 36, fam: F.math, w: 700, c: C.dim, a: ta });
   txt('21 fields', 450, 268, { size: 36, fam: F.orb, w: 900, c: C.cyan, a: ta });
-  const sa = a * Q(S, 0, 'Three lengths', 0.5);
+  const sa = a * Q(S, 0, '12, 68 and 136', 0.5);
   ['12', '68', '136'].forEach((j, k) => chip(810 + k * 120, 252, 100, 52, j, C.now, sa, 28, F.orb));
   txt('→ ℚ(√−2)', 1124, 266, { size: 34, fam: F.math, w: 700, c: C.now, a: sa });
   txt('20 others: one field each · 其余各占一域', 1330, 262, { size: 22, fam: F.zh, w: 700, c: C.dim, a: sa });
@@ -668,8 +668,8 @@ FILM.poster = () => {
   txt('x² + y² + z² = 867', 130, 650, { size: 50, fam: F.math, w: 700, c: C.white });
   txt('θ₁₃₆ = θ₁₂ + θ₆₈', 130, 724, { size: 44, fam: F.math, w: 700, c: C.now });
   bloom(0.5);
-  txt(`${DATA.book.code} · FILM`, 130, 880, { size: 24, fam: F.mono, w: 700, c: C.cyan, ls: 8 });
-  txt(`${DATA.book.title.zh} · ${DATA.book.title.en}`, 130, 1000, { size: 26, fam: F.zh, w: 700, c: C.white, a: 0.9 });
+  txt(`${DATA.book.code} · FILM`, 130, 870, { size: 24, fam: F.mono, w: 700, c: C.cyan, ls: 8 });
+  txt(`${DATA.book.title.zh} · ${DATA.book.title.en}`, 130, 940, { size: 26, fam: F.zh, w: 700, c: C.white, a: 0.9 });
   hud(t, Math.round(t * 30), 2, sc);
   post(0);
 };

@@ -425,7 +425,7 @@ SCENES.exact = S => {
     txt('split5 rank one   : no coefficient for QQQL', 290, 380, { size: 30, fam: F.mono, w: 700, c: C.white, a: na });
     txt('局域闭合不造全局壁垒；有限域分裂不定 QQQL 的系数', 290, 430, { size: 24, fam: F.zh, w: 700, c: C.argued, a: na });
     txt('Local closure builds no global wall.', W / 2, 600, { size: 50, fam: F.disp, w: 700, align: 'center', c: C.white, a: na * Q(S, 3, 'Local closure', 0.6), ab: 2 });
-    txt('The proton needs a global symmetry.', W / 2, 680, { size: 50, fam: F.disp, w: 700, align: 'center', c: C.now, a: na * Q(S, 3, 'the proton needs', 0.6), ab: 2 });
+    txt('The proton needs a global symmetry.', W / 2, 680, { size: 50, fam: F.disp, w: 700, align: 'center', c: C.now, a: na * at(S, 3, 0.6, 3.0), ab: 2 });
   }
 };
 
@@ -439,7 +439,7 @@ SCENES.triality = S => {
   /* top: the charge */
   panel(140, 185, 1640, 140, a, C.cyan, 'GENERATION-UNIVERSAL Z3 · 世代共同 Z3');
   btRich([['X ≡ h(2Y − B) + q(3B)', C.dim], ['   ⟶   ', C.white], ['X', C.white], ['eff', C.dim], [' ≡ −h B  (mod 3)', C.cyan]], 190, 268, { size: 38, a: a * at(S, 0, 0.6) });
-  txt('colour singlet, Y = 0 · 色单态、超荷中性', 1740, 300, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.dim, a: a * Q(S, 0, 'reduces to minus h', 0.5) });
+  txt('colour singlet, Y = 0 · 色单态、超荷中性', 1740, 300, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.dim, a: a * Q(S, 0, 'the charge is minus h', 0.5) });
   chip(1640, 240, 170, 44, 'h ≢ 0', C.now, a * Q(S, 1, 'Take h nonzero', 0.5), 26);
   /* line 0: the three phases of Z3 */
   const za = a * at(S, 0, 0.6, 1.0) * (1 - at(S, 1, 0.5, 1.2));

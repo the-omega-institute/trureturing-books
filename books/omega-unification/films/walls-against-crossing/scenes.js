@@ -166,16 +166,16 @@ SCENES.gap = S => {
   badgeQ(S, [[0, null, 'computed']]);
   /* main plot */
   const ax = waAxes(220, 230, 860, 500, [2, 17], [0, 64], a, { xt: [2, 5, 8, 11, 14, 17], yt: [0, 20, 40, 60], xl: 'log₁₀ (μ / GeV)', yl: 'α⁻¹  inverse coupling · 逆耦合' });
-  const p = ease(Q(S, 1, 'run them upward', 4.0));
+  const p = ease(Q(S, 1, 'upward', 4.0));
   waLines(ax, 2, 17, a, { p });
   for (let i = 0; i < 3; i++) {
     const y0 = ax.Y(WA_A0[i]);
     dot(ax.X(LMZ), y0, 9, ['c', 'm', 'w'][i], a);
     txt(`${WA_NAME[i]} ${fmt(WA_A0[i], 2)}`, ax.X(LMZ) + 20, y0 + (i === 0 ? -14 : 40), { size: 24, fam: F.math, w: 700, c: WA_COL[i], a: a * at(S, 1, 0.6) });
   }
-  txt('M_Z', ax.X(LMZ), 790, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.now, a: a * at(S, 1, 0.6) * (1 - Q(S, 2, 'small triangle', 0.6)) });
+  txt('M_Z', ax.X(LMZ), 790, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.now, a: a * at(S, 1, 0.6) * (1 - Q(S, 2, 'They miss', 0.6)) });
   /* the triangle on the main plot */
-  const tri = Q(S, 2, 'small triangle', 0.8);
+  const tri = Q(S, 2, 'They miss', 0.8);
   const P = [X12, X23, X13].map(X => [ax.X(X.lg), ax.Y(X.a[X === X23 ? 1 : 0])]);
   if (tri > 0) {
     ctx.save(); ctx.globalAlpha = a * tri * 0.35; ctx.fillStyle = C.now; ctx.beginPath();
@@ -200,7 +200,7 @@ SCENES.gap = S => {
     ZP.forEach((q, i) => (i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]))); ctx.closePath(); ctx.fill(); ctx.restore();
     ZP.forEach(q => dot(q[0], q[1], 8, 'g', a * tri));
     /* the gap at the α₁ = α₃ crossing */
-    const g = Q(S, 3, 'three point six six', 0.8);
+    const g = Q(S, 2, 'three point six six', 0.8);
     const gx = zx.X(X13.lg), y1 = zx.Y(X13.a[0]), y2 = zx.Y(X13.a[1]);
     arrow(gx, y1, gx, y2 + 4, C.now, a * g, 4); arrow(gx, y2, gx, y1 - 4, C.now, a * g, 4);
     txt(`Δα⁻¹ = ${fmt(WA_GAP, 3)}`, 1270, 360, { size: 40, fam: F.math, w: 700, c: C.now, a: a * g });
@@ -226,7 +226,7 @@ SCENES.blind = S => {
     ['light fields b · 轻场', '(41/10, −19/6, −7)', '−2/5', null]
   ];
   rows.forEach((r, i) => {
-    const ra = a * (i < 3 ? at(S, 1, 0.5, 0.2 + 0.9 * i) : Q(S, 2, 'light fields', 0.5));
+    const ra = a * (i < 3 ? at(S, 1, 0.5, 0.2 + 0.9 * i) : Q(S, 2, 'Light fields', 0.5));
     const y = 380 + i * 110, col = i < 3 ? C.cyan : C.now;
     txt(r[0], 175, y, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ra });
     txt(r[1], 175, y + 44, { size: 32, fam: F.math, w: 700, c: C.white, a: ra });
@@ -234,20 +234,20 @@ SCENES.blind = S => {
     if (r[3]) txt(r[3], 560, y, { size: 20, fam: F.zh, w: 700, c: C.cyan, a: ra * 0.8 });
   });
   /* C(μ) along the window */
-  const pa = a * Q(S, 2, 'one over five pi', 0.6);
+  const pa = a * Q(S, 2, 'Light fields', 0.6);
   const ax = waAxes(1100, 330, 660, 400, [2, 17], [-14, 1], pa, { xt: [2, 7, 13, 17], yt: [-12, -8, -4, 0], xl: 'log₁₀ (μ / GeV)', yl: 'C(μ)' });
   if (pa > 0) {
     ctx.save(); ctx.globalAlpha = pa * 0.14; ctx.fillStyle = C.cyan; ctx.fillRect(ax.X(13), 330, ax.X(17) - ax.X(13), 400); ctx.restore();
     txt('10¹³–10¹⁷ GeV', (ax.X(13) + ax.X(17)) / 2, 712, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: pa });
     dashed(1100, ax.Y(0), 1760, ax.Y(0), C.white, pa * 0.7, 2);
     txt('C = 0 · needed · 所需', 1120, ax.Y(0) - 12, { size: 20, fam: F.zh, w: 700, c: C.white, a: pa * 0.8 });
-    const g = ease(Q(S, 3, 'starts at minus twelve point eight', 2.5));
+    const g = ease(Q(S, 2, 'minus twelve point eight', 2.5));
     curve(t => { const lg = lerp(LMZ, lerp(LMZ, 17, g), t); return [ax.X(lg), ax.Y(waC(waT(lg)))]; }, 2, C.now, pa, 5);
     txt(`dC/d ln μ = 1/(5π) ≈ ${fmt(1 / (5 * Math.PI), 4)}`, W - 140, 280, { size: 26, fam: F.math, w: 700, align: 'right', c: C.now, a: pa });
-    const q = Q(S, 3, 'starts at minus twelve point eight', 0.6);
+    const q = Q(S, 2, 'minus twelve point eight', 0.6);
     dot(ax.X(LMZ), ax.Y(waC(0)), 9, 'g', pa * q);
     txt(fmt(waC(0), 2).replace('-', '−'), ax.X(LMZ) + 18, ax.Y(waC(0)) - 22, { size: 30, fam: F.math, w: 700, c: C.now, a: pa * q });
-    const e = Q(S, 3, 'two point two', 0.6);
+    const e = Q(S, 2, 'two point two', 0.6);
     dot(ax.X(17), ax.Y(waC(waT(17))), 9, 'g', pa * e);
     txt(`${fmt(waC(waT(17)), 2).replace('-', '−')}  (+${fmt(waT(17) / (5 * Math.PI), 2)})`, ax.X(17) - 10, ax.Y(waC(waT(17))) - 22, { size: 28, fam: F.math, w: 700, align: 'right', c: C.now, a: pa * e });
   }
@@ -260,19 +260,19 @@ const WA_LMAX = 30.386;
 SCENES.shell = S => {
   const a = waFade(S, 0);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [2, null, 'computed'], [3, null, 'argued']]);
-  txt('heavy spectrum must split multiplets · 重谱必须撕开多重态', W / 2, 225, { size: 30, fam: F.zh, w: 700, align: 'center', c: C.white, a: a * (1 - at(S, 1, 0.6)) });
+  badgeQ(S, [[0, null, 'argued'], [1, null, 'computed'], [2, null, 'argued']]);
+  txt('heavy spectrum must split multiplets · 重谱必须撕开多重态', W / 2, 225, { size: 30, fam: F.zh, w: 700, align: 'center', c: C.white, a: a * (1 - Q(S, 0, 'Its nonzero', 0.6)) });
   /* the operator */
-  const oa = a * at(S, 1, 0.6);
+  const oa = a * Q(S, 0, 'Its nonzero', 0.6);
   waRich([['(L', C.cyan], ['q', C.cyan], ['ψ)', C.cyan], ['ᵤ = Σ w (ψᵤ − z^q ψᵥ)', C.white]], 160, 240, { size: 30, a: oa });
-  txt(`c = tr(L₀) / 18 = 270 / 18 = 15`, 160, 290, { size: 30, fam: F.math, w: 700, c: C.now, a: oa * at(S, 1, 0.6, 2.4) });
+  txt(`c = tr(L₀) / 18 = 270 / 18 = 15`, 160, 290, { size: 30, fam: F.math, w: 700, c: C.now, a: oa * Q(S, 0, 'average fifteen', 0.6) });
   /* the curve h(λ) = λ|λ − 15| */
-  const pa = a * Q(S, 2, 'two-step mass reading', 0.6);
+  const pa = a * Q(S, 1, 'two-step mass reading', 0.6);
   const ax = waAxes(220, 360, 820, 400, [0, 31], [0, 480], pa, { xt: [0, 5, 10, 15, 20, 25, 30], yt: [0, 100, 200, 300, 400], xl: 'λ  eigenvalue · 本征值', yl: 'h(λ) = λ |λ − 15|' });
   if (pa > 0) {
-    const g = ease(Q(S, 2, 'two-step mass reading', 2.4));
+    const g = ease(Q(S, 1, 'two-step mass reading', 2.4));
     curve(t => { const l = t * WA_LMAX * g; return [ax.X(l), ax.Y(l * Math.abs(l - 15))]; }, 240, C.cyan, pa, 5);
-    const f = Q(S, 2, 'folds back', 0.6);
+    const f = Q(S, 1, 'folds back', 0.6);
     dashed(ax.X(15), ax.Y(0), ax.X(15), ax.Y(300), C.now, pa * f, 2);
     dot(ax.X(15), ax.Y(0), 11, 'g', pa * f);
     txt('fold at c = 15 · 折返', ax.X(15), ax.Y(300) - 14, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.now, a: pa * f });
@@ -280,11 +280,11 @@ SCENES.shell = S => {
     txt('m = κ h(λ)', ax.X(4), ax.Y(420), { size: 28, fam: F.math, w: 700, c: C.white, a: pa });
   }
   /* weak-centre parity */
-  const za = a * at(S, 3, 0.6);
+  const za = a * at(S, 2, 0.6);
   panel(1150, 360, 640, 190, za, C.mag, 'CENTRE-ODD · 中心奇 (−1)');
   txt('Q_L   L_L   H', 1180, 455, { size: 40, fam: F.math, w: 700, c: C.mag, a: za });
   txt('weak doublets · 弱二重态', 1180, 515, { size: 22, fam: F.zh, w: 700, c: C.dim, a: za });
-  const zb = a * at(S, 3, 0.6, 1.6);
+  const zb = a * at(S, 2, 0.6, 1.6);
   panel(1150, 580, 640, 190, zb, C.cyan, 'CENTRE-EVEN · 中心偶 (+1)');
   txt('u_Rᶜ  d_Rᶜ  e_Rᶜ  V⁰', 1180, 675, { size: 40, fam: F.math, w: 700, c: C.cyan, a: zb });
   txt('singlets, neutral vectors · 弱单态与中性矢量', 1180, 735, { size: 22, fam: F.zh, w: 700, c: C.dim, a: zb });
@@ -342,7 +342,7 @@ const WA_RULES = [h => h, h => Math.pow(h, 3), h => 0.15 + 0.85 * Math.floor(h *
 SCENES.monotone = S => {
   const a = waFade(S, 0);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [1, 'leaves a spread', 'computed']]);
+  badgeQ(S, [[0, null, 'argued'], [1, 'leaves a sharp-threshold spread', 'computed']]);
   /* left: the shared rule, morphing between schematic shapes */
   panel(140, 230, 760, 590, a, C.now, 'ONE SHARED RULE m = f(h) · 共用一条规则');
   const ax = waAxes(230, 300, 600, 400, [0, 1], [0, 1.05], a, { yl: 'm' });
@@ -359,7 +359,7 @@ SCENES.monotone = S => {
   txt('even · 偶', 360, 790, { size: 20, fam: F.zh, w: 700, c: C.cyan, a });
   txt('never decreasing · schematic · 示意', 860, 790, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.argued, a });
   /* right: the certified bounds */
-  const r1 = a * Q(S, 1, 'leaves a spread', 0.6);
+  const r1 = a * Q(S, 1, 'leaves a sharp-threshold spread', 0.6);
   panel(960, 230, 830, 190, r1, C.cyan, 'EVERY PHASE OF THE TORUS · 全环面');
   txt('spread > 0.7048', 990, 320, { size: 44, fam: F.math, w: 700, c: C.cyan, a: r1 });
   txt('sharp · 尖阈值', 1420, 320, { size: 22, fam: F.zh, w: 700, c: C.dim, a: r1 });
@@ -388,19 +388,19 @@ SCENES.monotone = S => {
 SCENES.keys = S => {
   const a = waFade(S, 0);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'argued'], [1, 'the strong coupling', 'computed'], [3, null, 'argued']]);
+  badgeQ(S, [[0, null, 'argued'], [1, 'gives', 'computed'], [3, null, 'argued']]);
   const k1 = a * at(S, 0, 0.6, 1.5), k2 = a * Q(S, 2, 'Key two', 0.6);
   const hot1 = S.u < lineAt(S, 2).s, hot2 = S.u >= lineAt(S, 2).s && S.u < lineAt(S, 3).s;
   panel(140, 220, 800, 260, k1, hot1 ? C.now : C.cyan, 'KEY 1 · WEAK-CENTRE SPLIT · 弱中心分档');
   txt('even sector × 32 · 偶扇区 × 32', 170, 300, { size: 30, fam: F.zh, w: 700, c: C.white, a: k1 });
   txt(`κ = M̄_P / 724² ≈ ${fmt(WA_IN.MPbar / 724 ** 2 / 1e12, 3)} × 10¹² GeV`, 170, 355, { size: 28, fam: F.math, w: 700, c: C.white, a: k1 * at(S, 1, 0.6) });
   txt('zero #11661 · 16 heavy scalars · two loops', 170, 405, { size: 22, fam: F.mono, w: 700, c: C.dim, a: k1 * at(S, 1, 0.6) });
-  txt('α_s ∈ (0.1183797, 0.1183860)', 170, 455, { size: 30, fam: F.math, w: 700, c: C.cyan, a: k1 * Q(S, 1, 'the strong coupling', 0.6) });
+  txt('α_s ∈ (0.1183797, 0.1183860)', 170, 455, { size: 30, fam: F.math, w: 700, c: C.cyan, a: k1 * Q(S, 1, 'gives', 0.6) });
   panel(980, 220, 800, 260, k2, hot2 ? C.now : C.cyan, 'KEY 2 · POSITIVE ONE-STEP · 正一步收缩');
   txt('T = I − L / N ⪰ 0,  N = 2⁵ = 32', 1010, 300, { size: 30, fam: F.math, w: 700, c: C.white, a: k2 });
   txt('min N: 31 any phase, 23 native · dyadic → 32', 1010, 355, { size: 22, fam: F.mono, w: 700, c: C.dim, a: k2 });
   txt('zero #11431 · sharp, two loops', 1010, 405, { size: 22, fam: F.mono, w: 700, c: C.dim, a: k2 });
-  txt('α_s ∈ (0.1188844, 0.1189006)', 1010, 455, { size: 30, fam: F.math, w: 700, c: C.cyan, a: k2 * Q(S, 2, 'The readout', 0.6) });
+  txt('α_s ∈ (0.1188844, 0.1189006)', 1010, 455, { size: 30, fam: F.math, w: 700, c: C.cyan, a: k2 * Q(S, 2, 'It reads', 0.6) });
   /* the α_s number line */
   const na = a * at(S, 1, 0.6, 1.0);
   const X = v => 300 + (v - 0.110) / (0.160 - 0.110) * 1400, y = 650;
@@ -410,13 +410,13 @@ SCENES.keys = S => {
     txt('α_s(M_Z)', 140, y + 8, { size: 22, fam: F.math, w: 700, c: C.dim, a: na });
     fillBox(X(0.117), y - 30, X(0.119) - X(0.117), 60, C.cyan, na * 0.25);
     txt('window [0.117, 0.119] · 实验窗', X(0.117) - 10, y - 46, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.cyan, a: na });
-    const m1 = a * Q(S, 1, 'the strong coupling', 0.5), m2 = a * Q(S, 2, 'The readout', 0.5);
+    const m1 = a * Q(S, 1, 'gives', 0.5), m2 = a * Q(S, 2, 'It reads', 0.5);
     line(X(0.11838), y - 26, X(0.11838), y + 26, C.cyan, m1, 4);
     txt('key 1 · 0.1184', X(0.11838) - 10, y + 78, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.cyan, a: m1 });
     line(X(0.11889), y - 26, X(0.11889), y + 26, C.white, m2, 4);
     txt('key 2 · 0.1189', X(0.11889) + 10, y + 78, { size: 22, fam: F.mono, w: 700, c: C.white, a: m2 });
     /* the scheme swap */
-    const j = Q(S, 3, 'Swap the matching rule', 1.2);
+    const j = Q(S, 3, 'another matching rule', 1.2);
     if (j > 0) {
       const xs = lerp(X(0.11889), X(0.1532183), ease(j));
       ctx.save(); ctx.setLineDash([8, 8]);

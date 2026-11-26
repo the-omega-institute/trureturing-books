@@ -68,7 +68,7 @@
      "也许三个同代夸克会被泡利不相容消掉？"
     ],
     [
-     "Expand it term by term: twelve quark components, four lepton components.",
+     "Expand it: twelve quark components, four lepton components.",
      "那就逐项展开：夸克有十二个分量，轻子有四个。"
     ],
     [
@@ -102,7 +102,7 @@
    ],
    "lines": [
     [
-     "Can local flatness forbid it? Lean checks, with zero axioms, that a closed two-cochain is exact.",
+     "Can local flatness forbid it? Lean checks, with zero axioms: a closed two-cochain is exact.",
      "局域平坦能不能禁止它？Lean 内核在零公理下检验：闭的二上链一定正合。"
     ],
     [
@@ -114,8 +114,8 @@
      "Lean 还检验：六个赫维茨生成元在模五下分裂为非零的秩一矩阵。"
     ],
     [
-     "Neither fixes c6. Local closure builds no global wall; the proton needs a global symmetry.",
-     "这两条都管不住 c6。局域闭合砌不出全局的墙，质子需要一条全局对称。"
+     "Neither fixes c6. Local closure builds no global wall.",
+     "这两条都管不住 c6。局域闭合砌不出全局的墙。"
     ]
    ],
    "cues": [
@@ -140,8 +140,8 @@
    ],
    "lines": [
     [
-     "Here is one. On neutral color singlets, the charge reduces to minus h times B, mod three.",
-     "这就是一条：在超荷中性的色单态上，荷化为负 h 乘 B，模三。"
+     "The proton needs a global symmetry. On neutral color singlets, the charge is minus h times B, mod three.",
+     "质子需要一条全局对称：在超荷中性的色单态上，荷是负 h 乘 B，模三。"
     ],
     [
      "Take h nonzero. Yukawa and Weinberg terms keep phase one; QQQL picks up a nontrivial cube root, and is forbidden.",
@@ -152,7 +152,7 @@
      "只剩 B 改变三的过程：最低允许的算符从六维跳到十五维。"
     ],
     [
-     "With B minus L kept, eighteen. And three generations of weak instantons change B by exactly three.",
+     "With B minus L kept, eighteen. Three generations of weak instantons change B by exactly three.",
      "若同时守恒 B 减 L，则是十八维；而三代弱瞬子恰好让 B 改变三。"
     ]
    ],
@@ -187,8 +187,8 @@
      "重子三重对称可以规范化：X 等于三 B 减九 L_τ，再添一个共轭 τ 中微子。"
     ],
     [
-     "All six anomaly traces, quarks against the tau family, cancel to zero.",
-     "六项反常迹，夸克对 τ 代，逐一相消为零。"
+     "All six anomaly traces cancel to zero.",
+     "六项反常迹逐一相消为零。"
     ],
     [
      "A charge nine condensate leaves Z nine; its cube is the color center, so singlets see Z three.",
@@ -221,8 +221,8 @@
    ],
    "lines": [
     [
-     "Inside SU(5) on a lens space, the shell's triality phase meets a cubic anomaly; the smallest extension that trivializes it is Z nine.",
-     "把球壳的三重相位装进 SU(5)、放到透镜空间上，会遇到一个立方反常；能把它平凡化的最小扩张是 Z9。"
+     "On a lens space, the shell's triality phase meets a cubic anomaly; the smallest extension that trivializes it is Z nine.",
+     "把球壳的三重相位放到透镜空间上，会遇到一个立方反常；能把它平凡化的最小扩张是 Z9。"
     ],
     [
      "To carry Z nine faithfully, the nineteen-point Behrend shell needs at least twenty-five states.",

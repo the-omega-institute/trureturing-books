@@ -1,53 +1,300 @@
 {
-  "voice": "af_heart",
-  "speed": 0.94,
-  "say": {"Lean": "Leen", "GeV": "G E V", "LPS": "L P S", "Cauchy": "Koh-shee", "Weyl": "Vile"},
-  "music": {"bpm": 78, "progression": "d-minor"},
-  "scenes": [
-    {"id": "gap", "name": "THE MISS · 错身", "lead": 2.2, "tail": 0.6, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
-      ["Three forces, three running couplings. Do they meet at a single energy?", "三种力，三条跑动耦合。它们会在同一个能标相遇吗？"],
-      ["Start from measured values at the Z mass, and run them upward with Standard Model one-loop slopes.", "从 Z 玻色子质量处的实测值出发，按标准模型单圈斜率向上跑。"],
-      ["The lines pass each other in a small triangle. They never share one point.", "三条直线错身而过，围出一个小三角，从不共点。"],
-      ["Where lines one and three cross, line two sits three point six six units higher.", "在第一、三条线的交点处，第二条线高出 3.66 个单位。"]
-    ], "cues": [{"line": 3, "at": 2.2, "kind": "stamp"}]},
-    {"id": "blind", "name": "THE BLIND COMBINATION · 盲视组合", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
-      ["Why so stubborn? Take one combination: line one, minus three times line two, plus two times line three.", "为什么如此顽固？取一个组合：第一条线，减三倍第二条，加两倍第三条。"],
-      ["It cannot see a shared coupling, a complete family, or heavy gauge vectors: every dot product is zero.", "它看不见共同耦合、完整家族与重规范矢量：每个点积都是零。"],
-      ["The light fields lift it by only one over five pi per unit of log energy.", "轻场每走一个对数能量单位，只把它抬高 1/(5π)。"],
-      ["It starts at minus twelve point eight, and by ten to the seventeen GeV it has climbed only two point two.", "它从 −12.8 出发，到 10¹⁷ GeV 只爬升了 2.2。"]
-    ], "cues": [{"line": 1, "at": 3.0, "kind": "chime"}]},
-    {"id": "shell", "name": "THE MAGNETIC SHELL · 磁球壳", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.5, 0.2, 0.2], "lines": [
-      ["So the heavy spectrum must tear multiplets apart. Can the nineteen-point shell do that by itself?", "所以重谱必须把多重态撕开。十九点球壳能自己做到吗？"],
-      ["On the shell, a charged magnetic Laplacian has eigenvalues lambda. Its neutral positive eigenvalues average fifteen.", "球壳上的带荷磁拉普拉斯算子有本征值 λ；中性正本征值的均值是 15。"],
-      ["The two-step mass reading is lambda times its distance from fifteen. The curve folds back to zero there.", "两步质量读数是 λ 乘以它到 15 的距离：曲线在那里折回到零。"],
-      ["The weak centre splits the fields: doublets are odd, singlets and neutral vectors are even.", "弱中心把场分成两扇：双重态为奇，单态与中性矢量为偶。"]
-    ]},
-    {"id": "walls", "name": "FOUR WALLS · 四道墙", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.3, 0.3], "lines": [
-      ["Inside this model, interval certificates raise four walls against the crossing.", "在这个模型里，区间证书立起四道挡住交汇的墙。"],
-      ["Native generators sharing high modes: the spread of the three lines stays above two point nine three six.", "原生生成元共用高模：三线极差始终大于 2.936。"],
-      ["Short-step face weights: the strong coupling at the Z mass stays below zero point zero seven six.", "短步正面权：Z 质量处的强耦合始终低于 0.076。"],
-      ["A Planck-pinned mass unit: the spread stays above two point zero three seven.", "质量单位钉在普朗克尺度：极差始终大于 2.037。"]
-    ], "cues": [{"line": 1, "at": 3.0, "kind": "impact"}, {"line": 2, "at": 3.0, "kind": "impact"}, {"line": 3, "at": 2.5, "kind": "impact"}]},
-    {"id": "monotone", "name": "THE MONOTONE WALL · 单调之墙", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.6, 0.4, 0.3], "lines": [
-      ["The sharpest wall: let every heavy field share one mass rule that never decreases.", "最锋利的一道墙：让所有重场共用同一条从不下降的质量规则。"],
-      ["Any such rule, at every phase of the double-clock torus, leaves a spread above zero point seven at sharp thresholds.", "任何这样的规则，在双时钟环面的每个相位上，尖阈值下都留下大于 0.7 的极差。"],
-      ["Even one plain eighteen-layer tower would need a log slope of at least one hundred six point seven five.", "即使只有一座十八层的普通重塔，对数斜率也至少要 106.75。"],
-      ["If the rule is log-convex, its mass span must exceed eighty-two log units. Z mass to reduced Planck mass is under thirty-eight.", "若规则对数凸，质量跨度须超过 82 个对数单位；而从 Z 质量到约化普朗克质量不到 38。"]
-    ], "cues": [{"line": 1, "at": 3.2, "kind": "impact"}]},
-    {"id": "keys", "name": "CONDITIONAL CROSSINGS · 条件交汇", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.7, 0.3, 0.4], "lines": [
-      ["Two keys open a crossing, each on conditions. Key one: make the even sector thirty-two times heavier.", "两把钥匙能打开交汇，各带条件。钥匙一：把偶扇区加重 32 倍。"],
-      ["Fix the unit with clock chord seven twenty-four: at zero eleven six six one, the strong coupling comes out zero point one one eight four.", "以钟弦 724 定绝对单位，第 11661 枚黎曼零点反推出强耦合 0.1184。"],
-      ["Key two: normalize every step by thirty-two. The readout is zero point one one eight nine.", "钥匙二：每一步按 32 归一化。读数是 0.1189。"],
-      ["Both are model rules chosen after seeing the fit. Swap the matching rule, and key two's masses give zero point one five three.", "两者都是看过拟合后才提出的模型规则。换一种匹配处方，钥匙二的同一组质量给出 0.153。"]
-    ], "cues": [{"line": 3, "at": 3.8, "kind": "glitch"}]},
-    {"id": "bedrock", "name": "THE BEDROCK · 基石", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.6, 0.5, 0.2, 0.2], "lines": [
-      ["Under all of this lie two exact tools, checked by the Lean kernel.", "这一切之下，是两件由 Lean 内核检验的精确工具。"],
-      ["Lagrange and Gram: the Cauchy-Schwarz deficit is half a sum of squares. Here both sides are fifty-four.", "拉格朗日—格拉姆：柯西—施瓦茨亏量等于平方和的一半。这里两边都是 54。"],
-      ["On the norm five LPS shell, the integer matrices match, and twenty minus lambda squared stays positive on every branch.", "在模方 5 的 LPS 壳层上，整数矩阵精确匹配，20 − λ² 在每个分支上都为正。"],
-      ["Kernel-checked: the tools. Certified in the model: the walls. Conditional: every crossing so far.", "内核检验的：工具。模型内证书的：墙。有条件的：迄今每一次交汇。"]
-    ], "cues": [{"line": 0, "at": 2.6, "kind": "stamp"}]},
-    {"id": "close", "name": "WALLS", "lead": 0.5, "tail": 3.0, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
-      ["Omega Unification, chapter four.", "《OMEGA 统一》· 第四章"]
-    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
-  ]
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "GeV": "G E V",
+  "LPS": "L P S",
+  "Cauchy": "Koh-shee",
+  "Weyl": "Vile"
+ },
+ "music": {
+  "bpm": 78,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "gap",
+   "name": "THE MISS · 错身",
+   "lead": 2.2,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Three forces, three running couplings. Do they ever meet at one energy?",
+     "三种力，三条跑动耦合。它们会在同一个能标相遇吗？"
+    ],
+    [
+     "Run the measured values upward from the Z mass, at one loop in the Standard Model.",
+     "从 Z 质量处的实测值出发，按标准模型单圈向上跑。"
+    ],
+    [
+     "They miss. Where lines one and three cross, line two sits three point six six higher.",
+     "它们错身而过：在第一、三条线的交点处，第二条线高出 3.66。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "blind",
+   "name": "THE BLIND COMBINATION · 盲视组合",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Why so stubborn? Take line one, minus three times line two, plus two times line three.",
+     "为什么如此顽固？取第一条线，减三倍第二条，加两倍第三条。"
+    ],
+    [
+     "That combination cannot see a shared coupling, a complete family, or heavy gauge vectors.",
+     "这个组合看不见共同耦合、完整家族与重规范矢量。"
+    ],
+    [
+     "Light fields lift it from minus twelve point eight by only two point two, all the way to ten to the seventeen GeV.",
+     "轻场把它从 −12.8 一路抬到 10¹⁷ GeV，也只抬高了 2.2。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.6,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "shell",
+   "name": "THE MAGNETIC SHELL · 磁球壳",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Could the nineteen-point magnetic shell tear multiplets apart by itself? Its nonzero neutral eigenvalues average fifteen.",
+     "十九点磁球壳能自己把多重态撕开吗？它的中性非零本征值均值是 15。"
+    ],
+    [
+     "The two-step mass reading, lambda times its distance from fifteen, folds back to zero there.",
+     "两步质量读数是 λ 乘以它到 15 的距离，曲线在那里折回到零。"
+    ],
+    [
+     "And the weak centre splits the fields: doublets are odd, singlets and neutral vectors are even.",
+     "弱中心再把场分成两扇：双重态为奇，单态与中性矢量为偶。"
+    ]
+   ]
+  },
+  {
+   "id": "walls",
+   "name": "FOUR WALLS · 四道墙",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Inside this model, interval certificates raise four walls.",
+     "在这个模型里，区间证书立起四道墙。"
+    ],
+    [
+     "Native generators sharing high modes: spread above two point nine three six.",
+     "原生生成元共用高模：极差大于 2.936。"
+    ],
+    [
+     "Short-step face weights: strong coupling below zero point zero seven six.",
+     "短步正面权：强耦合低于 0.076。"
+    ],
+    [
+     "A Planck-pinned mass unit: spread above two point zero three seven.",
+     "质量单位钉在普朗克尺度：极差大于 2.037。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.0,
+     "kind": "impact"
+    },
+    {
+     "line": 2,
+     "at": 3.0,
+     "kind": "impact"
+    },
+    {
+     "line": 3,
+     "at": 2.5,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "monotone",
+   "name": "THE MONOTONE WALL · 单调之墙",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.6,
+    0.4,
+    0.3
+   ],
+   "lines": [
+    [
+     "The sharpest wall: all heavy fields share one never-decreasing mass rule.",
+     "最锋利的一道墙：所有重场共用同一条从不下降的质量规则。"
+    ],
+    [
+     "Any such rule, at every torus phase, leaves a sharp-threshold spread above zero point seven.",
+     "任何这样的规则，在环面的每个相位上，都留下大于 0.7 的尖阈值极差。"
+    ],
+    [
+     "Even one plain tower needs a log slope of at least one hundred six point seven five.",
+     "哪怕只有一座普通重塔，对数斜率也至少要 106.75。"
+    ],
+    [
+     "A log-convex rule needs a span over eighty-two; Z mass to reduced Planck is under thirty-eight.",
+     "对数凸的规则需要超过 82 的跨度；而从 Z 质量到约化普朗克质量不到 38。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.2,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "keys",
+   "name": "CONDITIONAL CROSSINGS · 条件交汇",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.7,
+    0.3,
+    0.4
+   ],
+   "lines": [
+    [
+     "Two keys open a crossing, on conditions. Key one: make the even sector thirty-two times heavier.",
+     "两把钥匙能打开交汇，但各有条件。钥匙一：把偶扇区加重 32 倍。"
+    ],
+    [
+     "With the unit set by chord seven twenty-four, zero eleven six six one gives zero point one one eight four.",
+     "以钟弦 724 定单位，第 11661 枚零点给出 0.1184。"
+    ],
+    [
+     "Key two: normalize every step by thirty-two. It reads zero point one one eight nine.",
+     "钥匙二：每一步按 32 归一化，读数 0.1189。"
+    ],
+    [
+     "Both are model rules picked after the fit; another matching rule sends key two to zero point one five three.",
+     "两者都是看过拟合后才选定的模型规则；换一种匹配处方，钥匙二跳到 0.153。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 3.4,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "bedrock",
+   "name": "THE BEDROCK · 基石",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Beneath it all lie two exact tools, checked by the Lean kernel.",
+     "这一切之下，是两件由 Lean 内核检验的精确工具。"
+    ],
+    [
+     "Lagrange and Gram: the Cauchy-Schwarz deficit is half a sum of squares. Here both sides are fifty-four.",
+     "拉格朗日—格拉姆：柯西—施瓦茨亏量等于平方和的一半。这里两边都是 54。"
+    ],
+    [
+     "On the norm five LPS shell, the matrices match, and twenty minus lambda squared stays positive.",
+     "在模方 5 的 LPS 壳层上，矩阵精确匹配，20 − λ² 始终为正。"
+    ],
+    [
+     "Kernel-checked: the tools. Certified in the model: the walls. Conditional: every crossing so far.",
+     "内核检验的：工具。模型内证书的：墙。有条件的：迄今每一次交汇。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 2.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "WALLS",
+   "lead": 0.5,
+   "tail": 3.0,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Unification, chapter four.",
+     "《OMEGA 统一》· 第四章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
 }
