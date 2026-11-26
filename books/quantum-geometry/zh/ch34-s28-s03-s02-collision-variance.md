@@ -691,7 +691,24 @@ $$
 令 $g_R=\mathbf1_{[-R,R]}*\phi$，其中 $\phi$ 是一个实偶光滑凸起函数 $b$ 的傅里叶逆变换。取 $b$ 支撑于 $[-1/2,1/2]$，在 $[-1/4,1/4]$ 上等于一。由窗函数两端的平移之差得到 $\|g_R'\|_1\le2\|\phi\|_1$。代入 $\widehat g_R(\alpha)=\sin(2\pi R\alpha)b(\alpha)/(\pi\alpha)$，可在每个满足 $j\in\mathbb N$ 且包含于 $(0,1/4]$ 的倍增区间 $[2^j/(2R),2^{j+1}/(2R)]$ 上估计傅里叶能量。正弦平方在该区间恰取整周期平均值 $1/2$，而 $1/\alpha$ 可用右端点的倒数下界，因此每个区间至少贡献 $1/(4\pi^2)$。先固定 $R$ 取高度极限，再令 $R$ 增大，便与方差的一致上界矛盾。完整证明由 Lean 内核检查。
 :::
 
-共格比较谱表明，计数误差仍可有 $O(\log\log H)$ 上界。对于 ζ 零点，Baluyot、Goldston、Suriajaya 与 Turnage-Butterbaugh 的公式 (1.4) 以复零点之差为变量。由黎曼假设将零点限制在临界线上后，交换有序对的两项可将该统计量化为纵坐标的余弦和。记 $L=\log H$。对每个固定的测试函数 $g$，乘在指数峰上的有界加性系数误差对频带积分贡献至多 $O(\|\widehat g\|_\infty^2/L)$，一致余项贡献至多 $O(\|\widehat g\|_2^2/\sqrt L)$。这两项趋零，足以在书面推导中沿用上述方差反证。碰撞定理还需要独立的长频带估计。 [单位频带公式 (1.1)–(1.4)](https://arxiv.org/html/2306.04799v1#S1.E4)
+共格比较谱表明，在上面的单位频带假设下，计数误差仍可有 $O(\log\log H)$ 上界。证明只通过固定带限测试函数的积分使用单位频带轮廓。零频附近的误差即使逐点有界，其积分仍会随峰宽一起缩小。
+
+::: {.theorem #thm-ch34-montgomery-concentrated-peak-discrepancy title="指数峰的频率相关误差下仍有无界计数误差" lean="D5/S3/Analytic/Oscillation/MontgomeryCountDiscrepancy.concentrated_unit_band_profile_forces_unbounded_count_discrepancy"}
+沿用同一个谱及配对和的归一化，令 $L=\log H$。若存在常数 $B\ge0$ 和 $e(H)\to0$，使得对所有充分大的实数 $H$ 和每个 $|\alpha|\le1$，
+
+$$
+\left|P_H(\alpha)-L e^{-2L|\alpha|}-|\alpha|\right|
+\le B e^{-2L|\alpha|}+e(H),
+$$
+
+则对每个实数 $D$ 和 $H_0$，存在实数 $H\ge H_0$ 使 $|N(H)-F(H)|>D$。
+:::
+
+::: proof
+固定一个傅里叶变换支撑在 $[-1,1]$ 上的实值 Schwartz 函数 $g$，以 $p=|\widehat g|^2$ 测试频带轮廓。$p$ 连续、有界、可积，且在频带外为零。对充分大的 $H$ 有 $L>0$。因为 $\int_{\mathbb R}e^{-2L|\alpha|}\,d\alpha=1/L$，误差对测试积分的影响至多为 $B\|p\|_\infty/L+e(H)\|p\|_1$。这两项均趋于零。对归一化指数峰作代换 $v=L\alpha$，被积函数成为 $e^{-2|v|}p(v/L)$。由连续性和控制收敛，峰的贡献趋于 $p(0)$。上一证明所用的方差极限与有界计数误差给出的方差上界因此仍然适用。完整证明由 Lean 内核检查。
+:::
+
+Baluyot、Goldston、Suriajaya 与 Turnage-Butterbaugh 的公式 (1.4) 给出上式的两类误差，其中 $e(H)=O(L^{-1/2})$。其统计量以复零点之差为变量。由黎曼假设将零点限制在临界线上后，交换有序对的两项可将该统计量化为纵坐标的余弦和。由偶性，频带估计从 $[0,1]$ 延伸到 $[-1,1]$。因此在此识别下，ζ 零点计数与两项主项之差在每个实数尾部无界。碰撞定理还需要独立的长频带估计。 [单位频带公式 (1.1)–(1.4)](https://arxiv.org/html/2306.04799v1#S1.E4)
 
 ### 有限支撑的占用数对角下界
 

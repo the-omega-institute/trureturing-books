@@ -691,7 +691,24 @@ On the other hand, integrating by parts against the cumulative count error bound
 Let $g_R=\mathbf1_{[-R,R]}*\phi$, where $\phi$ is the inverse Fourier transform of a real even smooth bump $b$, supported on $[-1/2,1/2]$ and equal to one on $[-1/4,1/4]$. Differentiation gives the difference of two translates of $\phi$, so $\|g_R'\|_1\le2\|\phi\|_1$. Insert $\widehat g_R(\alpha)=\sin(2\pi R\alpha)b(\alpha)/(\pi\alpha)$ in the Fourier energy. On each dyadic interval $[2^j/(2R),2^{j+1}/(2R)]$ with $j\in\mathbb N$ that lies in $(0,1/4]$, the squared sine averages $1/2$ over full periods and $1/\alpha$ is bounded below by the reciprocal of the right endpoint. Each interval contributes at least $1/(4\pi^2)$. Taking the height limit at fixed $R$ and then increasing $R$ contradicts the uniform variance bound. The full proof is checked by the Lean kernel.
 :::
 
-The commensurate comparison shows that the count discrepancy can still have an $O(\log\log H)$ upper bound. For zeta zeros, formula (1.4) of Baluyot, Goldston, Suriajaya and Turnage-Butterbaugh uses complex zero differences. With the zeros on the critical line by the Riemann hypothesis, exchanging the members of each ordered pair reduces the statistic to the ordinate cosine sum. Write $L=\log H$. For each fixed test $g$, the bounded additive correction multiplying the exponential contributes $O(\|\widehat g\|_\infty^2/L)$ to the frequency integral, and the uniform remainder contributes $O(\|\widehat g\|_2^2/\sqrt L)$. Both terms vanish, so the same variance argument applies as a written derivation. The collision theorem still requires a separate bound on the longer band. [Unit-band formula, (1.1)–(1.4)](https://arxiv.org/html/2306.04799v1#S1.E4)
+The commensurate comparison shows that the count discrepancy under the preceding unit-band hypothesis can still have an $O(\log\log H)$ upper bound. The proof uses the profile through integrals against fixed band-limited tests. A bounded error concentrated near zero frequency makes a smaller contribution as the width of the peak shrinks.
+
+::: {.theorem #thm-ch34-montgomery-concentrated-peak-discrepancy title="Unbounded count discrepancy with a frequency-dependent peak error" lean="D5/S3/Analytic/Oscillation/MontgomeryCountDiscrepancy.concentrated_unit_band_profile_forces_unbounded_count_discrepancy"}
+Use the same spectrum and normalization of the pair sum, and let $L=\log H$. Suppose there are a fixed $B\ge0$ and $e(H)\to0$ such that for all sufficiently large real $H$ and every $|\alpha|\le1$,
+
+$$
+\left|P_H(\alpha)-L e^{-2L|\alpha|}-|\alpha|\right|
+\le B e^{-2L|\alpha|}+e(H).
+$$
+
+Then for every real $D$ and $H_0$ there is a real $H\ge H_0$ with $|N(H)-F(H)|>D$.
+:::
+
+::: proof
+Fix a real Schwartz function $g$ with Fourier support in $[-1,1]$ and test the band profile against $p=|\widehat g|^2$. Then $p$ is continuous, bounded, integrable, and zero outside the band. For large $H$ we have $L>0$. Since $\int_{\mathbb R}e^{-2L|\alpha|}\,d\alpha=1/L$, the error contributes at most $B\|p\|_\infty/L+e(H)\|p\|_1$ to the tested integral. Both terms vanish. In the normalized peak integral substitute $v=L\alpha$ to obtain the integrand $e^{-2|v|}p(v/L)$. Continuity and dominated convergence give the peak contribution $p(0)$ in the limit. The variance limit and the variance bound under bounded count discrepancy from the preceding proof therefore apply. The full proof is checked by the Lean kernel.
+:::
+
+Formula (1.4) of Baluyot, Goldston, Suriajaya and Turnage-Butterbaugh supplies the two error terms with $e(H)=O(L^{-1/2})$. Their statistic uses complex zero differences. With the zeros on the critical line by the Riemann hypothesis, swapping the members of each ordered pair reduces it to the ordinate cosine sum. Evenness extends the estimate from $[0,1]$ to $[-1,1]$. With that identification, the discrepancy of the zeta zero count from the two-term main term is unbounded on every real tail. The collision theorem still requires a separate bound on the longer band. [Unit-band formula, (1.1)–(1.4)](https://arxiv.org/html/2306.04799v1#S1.E4)
 
 ### Occupation diagonal lower bound for finite support
 
