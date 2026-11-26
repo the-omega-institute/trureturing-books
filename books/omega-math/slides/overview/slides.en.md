@@ -122,7 +122,7 @@ section: "Volume III"
   <h2 class="t">Limit-free calculus <em>computes coefficients directly</em></h2>
   <div class="g2 mt">
     <div class="card"><h4>Jet2 · Nilpotent ring</h4><p>In <Tex t="\mathbb Q[\eta]/(\eta^3)" />, a second-order jet consists of three exact rational coefficients.</p></div>
-    <div class="card"><h4>D-finite · Any finite order</h4><p>Rational recurrences generate coefficients on demand. Formal differentiation and multiplication work order by order.</p></div>
+    <div class="card"><h4>D-finite · Any finite order</h4><p>At an ordinary rational basepoint with rational initial derivatives, the recurrence generates rational coefficients. Formal differentiation and multiplication work order by order.</p></div>
   </div>
   <TheoremCard class="compact mt" label="Theorem 7.5" title="Exact second-order fidelity jet" cite="thm-ch07-fidelity-jet-and-secant" gid="D5/S3/Quantum/AURICOmega/OmegaJetCalculus.kappa_jet">
     <p>Set <Tex t="D=1+x^2" />. At finite rational <Tex t="x" />, the Jet2 coefficients of <Tex t="\kappa(x)=D^{-1}" /> are <Tex t="\bigl(D^{-1},-2xD^{-2},(3x^2-1)D^{-3}\bigr)" />.</p>
