@@ -2,11 +2,12 @@
 
 SIZE = (356, 495)
 ALT = {
-    "zh": "最大绕数不超过 18 时无合格驻点，19 首现鞍点，21 首现局部极小，27 首现三窗全局极小，"
+    "zh": "最大绕数不超过 18 时三窗内无合格驻点，19 首现三窗内鞍点，21 首现三窗局部极小，27 首现三窗全局极小，"
           "31 首现局部味极小，36 首现依赖高度的全局味极小，105 首现跨高度的共同真空。"
           "权重随绕数非增时，全局能差大于四分之一。联合零点见证编号为 2,306,888,100,085。",
-    "en": "No admissible critical point occurs through winding order 18. The thresholds are 19 for a "
-          "saddle, 21 for a local minimum, 27 for a three-window global minimum, 31 for a local "
+    "en": "No critical point occurs in the three-window domain through winding order 18. "
+          "The thresholds are 19 for a three-window saddle, 21 for a three-window local minimum, "
+          "27 for a three-window global minimum, 31 for a local "
           "flavor minimum, 36 for a height-dependent global flavor minimum, and 105 for a common vacuum "
           "across heights. Nonincreasing weights leave a global energy gap above one quarter. "
           "The joint zero witness is 2,306,888,100,085.",
@@ -22,9 +23,9 @@ def draw(fig):
              size=13, anchor="middle", color="dim")
 
     milestones = (
-        (18, t("无驻点", "No critical point")),
-        (19, t("鞍点", "Saddle")),
-        (21, t("局部极小", "Local minimum")),
+        (18, t("三窗内无驻点", "No critical point\nin three windows")),
+        (19, t("三窗内鞍点", "Three-window\nsaddle")),
+        (21, t("三窗局部极小", "Three-window\nlocal minimum")),
         (27, t("三窗全局极小", "Three-window global minimum")),
         (31, t("局部味极小", "Local flavor minimum")),
         (36, t("全局味极小\n依赖高度", "Global flavor minimum\nHeight dependent")),

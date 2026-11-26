@@ -106,7 +106,7 @@ $$
 Yet just when $105$ windings seems to pin down the action, dimension counting delivers a sobering twist: fixing the global vacuum, all three windows, and all reference flavor observables still leaves a **$100$-dimensional continuous feasible family** of weight vectors (subject to normalization, nonnegativity, and the stated lower bounds on $w_{104}$ and $w_{105}$).
 
 ::: {.figure src="ch13-winding-threshold-ladder"}
-**Winding thresholds for phase selection ($\le 18 \to 19 \to 21 \to 27 \to 31 \to 36 \to 105$).** The logarithmic staircase plots all seven sharp order milestones—no critical point ($\le 18$, dim), saddle ($19$), local minimum ($21$), three-window global minimum ($27$), local flavor minimum ($31$), height-dependent global flavor minimum ($36$, cyan), and height-independent common vacuum ($105$, amber)—above the magenta barrier box (nonincreasing weights leave a global energy gap $> 1/4$) and the amber footer naming joint zero witness `#2,306,888,100,085`.
+**Winding thresholds for three-window and flavor phase selection ($\le 18 \to 19 \to 21 \to 27 \to 31 \to 36 \to 105$).** The logarithmic staircase plots all seven sharp order milestones—no critical point in the three-window domain ($\le 18$, dim), three-window saddle ($19$), three-window local minimum ($21$), three-window global minimum ($27$), local flavor minimum ($31$), height-dependent global flavor minimum ($36$, cyan), and height-independent common vacuum ($105$, amber)—above the magenta barrier box (nonincreasing weights leave a global energy gap $> 1/4$) and the amber footer naming joint zero witness `#2,306,888,100,085`.
 :::
 
 ## 13.3 Monotone-Weight and Native Autocorrelation Exclusions

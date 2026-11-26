@@ -401,6 +401,17 @@ const dragFromTo = async (from, to) => {
   return state();
 };
 
+/** The free-play note (kit.cards idle) of `p` in `lang`: it must not claim that every number is computed by the script,
+    and must tell the live readouts apart from the bundled Tier-4 replay certificates (also in the tour copy). */
+const idleNote = async (p, lang) => {
+  const [note, tour] = await p.evaluate(() => [document.getElementById('presetNote').textContent, (document.querySelector('#tour .tour-note') || { textContent: '' }).textContent]);
+  const ok =
+    lang === 'zh'
+      ? /^自由探索/.test(note) && !/都由脚本现算|页面上的数由脚本现算/.test(note) && /实时读数由脚本现算/.test(note) && /标注“证书”的数取自随页打包的第四层复算证书/.test(note)
+      : /^Free play/.test(note) && !/every number of the page is computed|numbers of the page are computed by its script/.test(note) && /live readouts are computed by the script/.test(note) && /certified numbers come from bundled Tier-4 replay certificates/.test(note) && !CJK.test(note);
+  return { ok: ok && tour === note, text: note };
+};
+
 let s = await state();
 check('page carries its id', (await page.evaluate(() => document.body.dataset.vizId)) === ID);
 check('opens on the shell card, parked at its still γ₁', s.preset === SHELL && s.scene === 'shell' && Math.abs(s.t - G1) < 1e-9 && !s.playing, JSON.stringify([s.preset, s.t, s.playing]));
@@ -483,6 +494,10 @@ for (const [chip, tr] of [
     [a, b, c] = tr.map((i) => SITES[i]),
     det = sarrus(a, b, c);
   check(`triad chip ${chip}: det G₃ = det(a, b, c)²/867³ and Ω by L'Huilier`, s.preset === null && t.tr.join() === tr.join() && eqF(t.detG, BigInt(det) ** 2n, 867n ** 3n) && Math.abs(t.omega - solidAngle(a, b, c)) < 1e-9 && (chip !== 'mirror' || (det === 0 && t.detG[0] === '0')), JSON.stringify(t.detG));
+}
+{
+  const n = await idleNote(page, 'zh');
+  check('free play (zh): the note tells live readouts from the bundled Tier-4 certificates, no claim that every number is computed', s.preset === null && n.ok, n.text);
 }
 for (const hl of ['short', 'mid', 'orbits', 'clocks']) {
   s = await press(`[data-hl="${hl}"]`);
@@ -696,6 +711,15 @@ check('no sideways scrolling', (await overflowX(page)) <= 0);
       canvas = await en.evaluate(() => window.__canvasText.slice()),
       body = await en.evaluate(() => document.body.innerText.replace(/中/g, ''));
     check(`English (${card}): no Chinese or full-width punctuation on screen, in the readouts or on the canvases`, left.length === 0 && !canvas.some((x) => CJK.test(x)) && !CJK.test(body), [...left, ...canvas.filter((x) => CJK.test(x))].slice(0, 3).join(' | '));
+  }
+  {
+    // leave the card through a control: the free-play note in English
+    await en.locator('[data-triad="inner"]').evaluate((b) => b.click());
+    await settle(en);
+    const preset = await en.evaluate(() => window.BUL_DEBUG.state.preset),
+      n = await idleNote(en, 'en'),
+      left = await cjkLeftovers(en);
+    check('free play (en): the note tells live readouts from the bundled Tier-4 certificates, no claim that every number is computed; no Chinese on screen', preset === null && n.ok && left.length === 0, n.text);
   }
   await en.click('#infoBtn');
   const drawer = await en.evaluate(() => [...document.querySelectorAll('#drawer .en, #drawer .drawer-evidence .en')].map((e) => e.innerText).join('\n'));

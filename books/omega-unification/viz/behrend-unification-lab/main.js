@@ -1678,7 +1678,7 @@
     noteEl: $('presetNote'),
     tour: $('tour'),
     onPick: applyPreset,
-    idle: ['自由探索：时间轴、琥珀标记与右栏旋钮改的是本卡的量；页面上的数都由脚本现算。', 'Free play: the rail, the amber mark and the dials change the quantity of the card; every number of the page is computed by its script.']
+    idle: ['自由探索：时间轴、琥珀标记与右栏旋钮改的是本卡的量；实时读数由脚本现算，标注“证书”的数取自随页打包的第四层复算证书。', 'Free play: the rail, the amber mark and the dials change the quantity of the card; live readouts are computed by the script, while certified numbers come from bundled Tier-4 replay certificates.']
   });
 
   /* ---------- the NUM box and the numbers of the drawer: computed once, when the page opens ---------- */
