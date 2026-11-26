@@ -56,7 +56,7 @@ $$
 \mathbb{E}_{\mathbb{T}_3}\!\left[\frac{w^{2a} x^{2b} y^{2c} z^{2d}}{\lVert q\rVert^{2m}}\right] \;\equiv\; \frac{(2a)!\,(2b)!\,(2c)!\,(2d)!}{4^m\,a!\,b!\,c!\,d!\,(m + 1)!} \;\in\; \mathbb{Q}_+, \qquad m \;=\; a + b + c + d.
 $$
 
-Observe why dimension $3$ ($S^3 \subset \mathbb{R}^4$, locked by `AXIOM-Ω`) sits at a unique double sweet spot:
+For the classical real unit sphere $S^3\subset\mathbb R^4$ used here, two cancellations simplify the moment formula:
 
 - **Compared with the circle $S^1$ ($n = 2$)**: While $\sigma(S^1) = 2\pi$ cancels $\Gamma(\frac{1}{2})^2 = \pi$ and leaves $m!$, $S^1$ is abelian—every irreducible representation is one-dimensional, incapable of carrying non-commutative three-dimensional curvature or spinor double covers.
 - **Compared with the two-sphere $S^2$ ($n = 3$)**: Here $\Gamma(\frac{1}{2})^3 = \pi\sqrt{\pi}$ leaves an awkward half-integer radial denominator $\Gamma(m + \frac{3}{2})$; even more fundamentally, $\chi(S^2) = 2 \neq 0$ prevents $S^2$ from being a group at all, so neither a group-invariant Haar measure nor a Peter–Weyl character algebra exists on $S^2$.
