@@ -75,7 +75,7 @@ To keep cross-references crisp across all five volumes, we fix the core symbols 
 
 - **Shell and arc notation:** $V_{19}$ denotes the $19$ nonnegative integer solutions of $x_1^2 + x_2^2 + x_3^2 = 867$; $G_{19} = (V_{19}, E_{135})$ is the $135$-edge graph retaining all pairs with $d^2 \le 804$ (enclosing $529$ triangles); $\theta_j = \arccos(1 - j/1734)$ is the central arc angle of squared chord length $j$.
 - **Dual-clock and spectral notation:** $U, V \in \mathrm{Sp}(1)$ denote unit quaternion clocks with half-traces $x = \operatorname{Re} U$, $y = \operatorname{Re} V$, $z = \operatorname{Re}(UV^{-1})$ and commutator defect $E = 1 + 2xyz - x^2 - y^2 - z^2$; positive Riemann zero ordinates $\gamma > 0$ are counted with analytic multiplicity $m_\gamma$, $Z_T(t)$ denotes the normalized harmonic phase score up to height $T$, and $P_k(T)$ denotes the $k$-th pair difference moment.
-- **Proof-closure convention:** Every `proof` block immediately following a `lean=` theorem sketches the proof architecture and closes with the standard sentence "The full proof is checked by the Lean kernel." Hand derivations, certified intervals, models, and open boundaries are tagged explicitly as `ARGUED`, `CERT`, `MODEL`, or `OPEN`.
+- **Proof-closure convention:** Every `proof` block immediately following a `lean=` theorem sketches the proof architecture and closes with the standard sentence "The full proof is checked by the Lean kernel." Hand derivations, Tier-4 interval and replay certificates (shorthand `CERT` in prose, part of Tier 4 `NUM`), effective models, and open boundaries are tagged explicitly as `ARGUED`, `CERT` / `NUM`, `MODEL`, or `OPEN`.
 
 This monograph reads linearly from Volume I to Volume V, yet it also supports three focused entry tracks:
 

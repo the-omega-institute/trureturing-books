@@ -10,7 +10,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT } from '../../../../tools/node/viz-common.mjs';
-import { session, stageFirstChecks, settle, openStill, playsAfter, until, labelOverlaps, overflowX, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, stageView, settle, openStill, playsAfter, until, labelOverlaps, overflowX, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'omega-unification';
 const ID = 'behrend-unification-lab';
@@ -357,26 +357,26 @@ await stageFirstChecks(T, BOOK, ID, { solid: { preset: SHELL } });
 /* ---------- the page ---------- */
 const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page);
-const state = async () => {
-  await settle(page);
-  return page.evaluate(() => window.BUL_DEBUG.state);
+const state = async (p = page) => {
+  await settle(p);
+  return p.evaluate(() => window.BUL_DEBUG.state);
 };
 /** Move the rail to v without leaving the card (the input event of the range, as a reader's drag does). */
-const rail = async (v) => {
-  await page.evaluate((x) => {
+const rail = async (v, p = page) => {
+  await p.evaluate((x) => {
     const el = document.getElementById('now');
     el.value = String(x);
     el.dispatchEvent(new Event('input', { bubbles: true }));
     TRV.kit.flush();
   }, v);
-  return state();
+  return state(p);
 };
 /** Click a card, stop its playback and put the rail on its declared still (the card stays marked). */
-const pick = async (card) => {
-  await page.click(`[data-preset="${card}"]`);
-  await settle(page);
-  await page.evaluate(() => TRV.kit.pause());
-  return rail(CARDS[card].still);
+const pick = async (card, p = page) => {
+  await p.click(`[data-preset="${card}"]`);
+  await settle(p);
+  await p.evaluate(() => TRV.kit.pause());
+  return rail(CARDS[card].still, p);
 };
 const dial = async (id, v) => {
   await page.evaluate(
@@ -401,8 +401,7 @@ const dragFromTo = async (from, to) => {
   return state();
 };
 
-/** The free-play note (kit.cards idle) of `p` in `lang`: it must not claim that every number is computed by the script,
-    and must tell the live readouts apart from the bundled Tier-4 replay certificates (also in the tour copy). */
+/** The free-play note and its tour copy identify live readouts and bundled Tier-4 replay certificates. */
 const idleNote = async (p, lang) => {
   const [note, tour] = await p.evaluate(() => [document.getElementById('presetNote').textContent, (document.querySelector('#tour .tour-note') || { textContent: '' }).textContent]);
   const ok =
@@ -446,7 +445,7 @@ check('two green boxes, one for each frozen theorem of the registry', JSON.strin
   check('held-out J (zh = en): actual three-window zero supports, 8, 11 and 23 zeros, the same percentages', /在实际三窗零点支撑上，留出的平均 J 亏额为 6\.0833%（八点），指定第六项时间与平均 \|Vcb\|² 后为 6\.1691%–6\.4132%（十一点）与 5\.5700%–9\.3435%（二十三点）/.test(cert.zh) && /On actual three-window zero supports the held-out deficit of the mean J is 6\.0833% \(eight zeros\), and with the sixth time and mean \|Vcb\|² fixed 6\.1691%–6\.4132% \(eleven zeros\) and 5\.5700%–9\.3435% \(twenty-three zeros\)/.test(cert.en) && pct(cert.zh) === pct(cert.en), `${pct(cert.zh)} | ${pct(cert.en)}`);
   check('ShellProjection.lean: the 9-point shell of squared radius 17', /平方半径 17（r² = 17）的九点壳/.test(cert.zh) && /9-point shell of squared radius 17 \(r² = 17\)/.test(cert.en) && !/R = 17/.test(cert.zh + cert.en));
   const lede = await page.$$eval('#drawer .lede:not(.refs)', (ps) => ps.map((p) => p.textContent).join('\n'));
-  check('drawer ledes: live numbers by the script, the rest bundled certificates; no claim that every number is computed', !/页面上的数由脚本现算|页面上的数都由脚本现算/.test(lede) && !/numbers of the page are computed by its script/.test(lede) && /由脚本在打开页面时现算（第一个 NUM 框）/.test(lede) && /第四层复算证书（第二个 NUM 框）/.test(lede) && /computed live by the script when the page opens \(the first NUM box\)/.test(lede) && /bundled Tier-4 replay certificates from trureturing-experiments \(the second NUM box\)/.test(lede));
+  check('drawer ledes identify the live NUM box and the bundled Tier-4 certificate box', !/页面上的数由脚本现算|页面上的数都由脚本现算/.test(lede) && !/numbers of the page are computed by its script/.test(lede) && /由脚本在打开页面时现算（第一个 NUM 框）/.test(lede) && /第四层复算证书（第二个 NUM 框）/.test(lede) && /computed live by the script when the page opens \(the first NUM box\)/.test(lede) && /bundled Tier-4 replay certificates from trureturing-experiments \(the second NUM box\)/.test(lede));
   const ids = await page.evaluate(() => ['basisLive', 'basisCert'].map((id) => document.querySelectorAll(`[id="${id}"]`).length));
   check('the drawer copies of the evidence boxes drop their ids (no duplicate ids)', ids.join() === '1,1' && (await page.$$eval('#drawerEvidence .lean', (els) => els.length)) === boxes.length, ids.join());
 }
@@ -497,7 +496,7 @@ for (const [chip, tr] of [
 }
 {
   const n = await idleNote(page, 'zh');
-  check('free play (zh): the note tells live readouts from the bundled Tier-4 certificates, no claim that every number is computed', s.preset === null && n.ok, n.text);
+  check('free play (zh): the note identifies live readouts and bundled Tier-4 certificates', s.preset === null && n.ok, n.text);
 }
 for (const hl of ['short', 'mid', 'orbits', 'clocks']) {
   s = await press(`[data-hl="${hl}"]`);
@@ -692,6 +691,54 @@ s = await pick(SHELL);
 check('no stage labels on top of each other on the ball', (await labelOverlaps(page, '.stage .tag')).length === 0);
 check('no sideways scrolling', (await overflowX(page)) <= 0);
 
+/* ---------- the three-window qualification of the winding ladder ---------- */
+const windingCopy = {
+  zh: {
+    certificate: [/18（三窗内梯度范数/, /19（三窗内首个驻点/, /21（三窗内首个严格局部极小/],
+    note: '三窗内 18 圈以内没有驻点',
+    levels: ['三窗内无驻点', '三窗内鞍点', '三窗内严格局部极小']
+  },
+  en: {
+    certificate: [/18 \(gradient norm > 3\.00565, no critical point in the three-window domain\)/, /19 \(the first critical point in the three-window domain/, /21 \(the first strict local minimum in the three-window domain/],
+    note: 'in the three-window domain, no critical point up to 18 windings',
+    levels: ['no critical point in the three windows', 'a saddle in the three windows', 'a strict local minimum in the three windows']
+  }
+};
+const checkWindingCopy = async (p, lang) => {
+  const { certificate, note, levels } = windingCopy[lang];
+  const localized = (text) => lang === 'zh' || !CJK.test(text);
+  const checkCertificate = async (box, label) => {
+    const text = await box.innerText();
+    check(`winding ladder (${lang}): ${label} qualifies thresholds 18, 19 and 21`,
+      (await box.isVisible()) && certificate.every((pattern) => pattern.test(text)) && localized(text), text);
+  };
+  await checkCertificate(p.locator(`#basisCert .${lang}`), 'evidence box');
+  await p.locator('#infoBtn').evaluate((button) => button.click());
+  await checkCertificate(p.locator('#drawer #drawerEvidence .lean.num').nth(1).locator(`.${lang}`), 'drawer certificate');
+  await p.keyboard.press('Escape');
+
+  await pick(LADDER, p);
+  for (const selector of ['#presetNote', '#tour .tour-note']) {
+    const text = await p.locator(selector).textContent();
+    check(`winding ladder (${lang}): ${selector} qualifies the bound through 18 windings`, text.includes(note) && localized(text), text);
+  }
+  for (const [level, k] of [18, 19, 21].entries()) {
+    const current = await rail(k - 14, p);
+    const title = await p.locator('#hudBig').innerText();
+    const key = await p.locator('#roKey').innerText();
+    check(`winding ladder (${lang}, K = ${k}): the stage title qualifies level ${level}`,
+      current.preset === LADDER && current.ledger.m === k && title.includes(`K = ${k}`) && title.endsWith(levels[level]) && localized(title), title);
+    check(`winding ladder (${lang}, K = ${k}): the key readout qualifies level ${level}`,
+      key === `${level} · ${levels[level]}` && localized(key), key);
+    const { layout, hud } = await stageView(p, '#stage');
+    const overlaps = await labelOverlaps(p, '#hudBig, #hudSub, #roKey, #presetNote', 0);
+    const overflow = await overflowX(p);
+    check(`winding ladder (${lang}, K = ${k}): clean layout with no horizontal overflow`,
+      !layout.length && !hud.length && !overlaps.length && overflow === 0, [...layout, ...hud, ...overlaps, `overflow ${overflow}px`].join(' | '));
+  }
+};
+await checkWindingCopy(page, 'zh');
+
 /* ---------- English: no Chinese on screen, in the drawer, in the probe-visible texts or on the canvases ---------- */
 {
   const en = await T.open(BOOK, ID, '?lang=en', { viewport: { width: 1440, height: 900 }, locale: 'en-US' });
@@ -719,11 +766,13 @@ check('no sideways scrolling', (await overflowX(page)) <= 0);
     const preset = await en.evaluate(() => window.BUL_DEBUG.state.preset),
       n = await idleNote(en, 'en'),
       left = await cjkLeftovers(en);
-    check('free play (en): the note tells live readouts from the bundled Tier-4 certificates, no claim that every number is computed; no Chinese on screen', preset === null && n.ok && left.length === 0, n.text);
+    check('free play (en): the note identifies live readouts and bundled Tier-4 certificates in English', preset === null && n.ok && left.length === 0, n.text);
   }
   await en.click('#infoBtn');
   const drawer = await en.evaluate(() => [...document.querySelectorAll('#drawer .en, #drawer .drawer-evidence .en')].map((e) => e.innerText).join('\n'));
   check('English: the drawer carries no Chinese', !CJK.test(drawer) && /not a proof/.test(drawer));
+  await en.keyboard.press('Escape');
+  await checkWindingCopy(en, 'en');
   await en.context().close();
 }
 
