@@ -343,7 +343,7 @@ SCENES.orbits = S => {
     const y = 562 + k * 56;
     dot(1098, y - 8, 11, L.pearl, ra);
     txt(`${L.en} · ${L.zh}`, 1124, y, { size: 24, fam: F.zh, w: 700, c: npCol(L), a: ra });
-    txt(L.reps.join('  '), 1384, y, { size: 22, fam: F.mono, w: 700, c: C.white, a: ra });
+    txt(L.reps.join('  '), 1370, y, { size: 20, fam: F.mono, w: 700, c: C.white, a: ra });
     txt(L.n, 1772, y, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.dim, a: ra });
   });
   const sum = a * Q(S, 2, 'inner core', 0.5);
@@ -536,7 +536,7 @@ SCENES.relation = S => {
   txt('θ₁₃₆ = θ₁₂ + θ₆₈', 890, 744, { size: 44, fam: F.math, w: 700, c: C.now, a: ra });
   const ka = a * Q(S, 3, '22 rationally independent', 0.6);
   if (ka > 0.003) {
-    txt('23 − 1 = 22', 1520, 744, { size: 46, fam: F.orb, w: 900, c: C.white, a: ka });
+    txt('23 − 1 = 22', 1770, 744, { size: 46, fam: F.orb, w: 900, align: 'right', c: C.white, a: ka });
     txt('independent frequencies · 有理独立频率', 890, 806, { size: 24, fam: F.zh, w: 700, c: C.argued, a: ka });
   }
 };
