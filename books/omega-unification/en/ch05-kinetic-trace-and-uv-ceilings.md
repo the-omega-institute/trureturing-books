@@ -216,6 +216,12 @@ The table below collects all four perturbative ultraviolet ceilings alongside th
 | Index-1 $\mathrm{Spin}(10)$ ($C_A = 8$) | Spin-balanced (pure scalar fails by $5Q$) | **$30Q$** | Positive inverse coupling requires $I C_A > 8.69866 > 8$ |
 | Finite-rank truncation | Continuous arc or $h \le 0.01$ subbundle | Operator distance $\equiv 1$ | Local intertwined section rank $\ge 13{,}384$ (infinite on arcs) |
 
+The short film below walks the chapter's thread from the heat-trace ledger to the ultraviolet ceiling.
+
+::: {.film src="kinetic-trace-ceiling"}
+**One positive heat trace forces left-right balance first and an ultraviolet ceiling next (2 min 49 s).** The cyan and magenta bars are the trace weights of the left sector $L = (\frac{2}{5}, 2, 1)$ and the right sector $R = (\frac{8}{5}, 0, 1)$, the amber total is $L + R = (2, 2, 2)$, and the balance law $W_L = W_R$ is a definition under the model hypothesis (exact fractions computed on screen); the two rows of spectral sticks are schematic and the Laplace-uniqueness step is argued; the magenta curve is the three-copy ratio $3^{1-u}$, equal to $1$, $\frac{1}{3}$ and $\frac{1}{2187}$ at $u = 1, 2, 8$ (computed on screen). The green `LEAN ✓` sits only on rational Schur completion and the attained positive-pivot minimum ([@thm-ou-ch05-rational-schur]), where the white parabola $7 + 6y + 2y^2$ touches its cyan floor $\frac{5}{2}$ at $y^* = -\frac{3}{2}$; the Stieltjes third-moment floor in the violet panel is the hand derivation of [@ex-ou-ch05-three-copy-and-stieltjes]. The magenta overshoot above $4.89948$, the magenta band $r \le 189$, the six two-scale gap bars, the two ledgers of the spin-balanced tower (a model construction) with the amber exposure gap $\ge 0.00418$, and the four ceilings $3.9Q$, $14Q$, $20Q$, $30Q$ on the energy axis all come from the chapter's interval certificates; reading them as the expiry date of the effective theory rather than a physical pole is the argued verdict of [@rem-ou-ch05-uv-verdict].
+:::
+
 ::: {.remark #rem-ou-ch05-uv-verdict title="Meaning of Perturbative Ceilings and Transition to Chapter 6"}
 We do not interpret formal singularities of truncated beta functions in the strong-coupling regime as literal physical poles. Rather, these ceilings certify the **exact horizon of perturbative effective field theory**: any unified crossing carrying the full charged Behrend tower must hand over to nonperturbative or new microscopic dynamics within a factor of $3.9$ to $30$ above $Q$, long before reaching the Planck scale.
 

@@ -1,0 +1,30 @@
+{
+  "title": "Deficit Angles and Spin Two",
+  "title_zh": "角亏与自旋二",
+  "summary": "Flat four-simplices glued like rigid origami keep all their curvature on the triangular hinges: across one hinge, wedges of the dihedral angle arccos(1/4) ≈ 75.52° fan out, and four leave a gap of +57.91° while five overshoot by −17.61°, the deficit angle (computed). The Regge weight exp[−sV − bK] carries Newton's constant and the cosmological constant as dials; the boundary of the five-simplex (6, 20) and two Pachner moves to (10, 30) and (12, 34), counted on screen from vertex sets, let twice the second step minus the first cancel volume and angle, so G = A/(2(d₁ − 2d₂)) (computed); two 24-simplex spheres with identical hinge counts (33, 21, 3, 7) are told apart by 252 six-step dual walks (the chapter's replay certificate). Around the flat lattice g = I − J/5 the long-wave kernel is Fierz–Pauli and the null-pole numerator ½|T¹¹ − T²²|² + 2|T¹²|² is nonnegative of rank 2; a source turned by θ turns that pair by 2θ, the helicities ±2 (certificate, rotation computed); ten time slices give T = AA† ≥ 0, yet every one of the 255 nonzero momenta of the 4⁴ box has inertia one positive, ten negative, four zero: the conformal mode (certificates). Integer hinge loads hit a √3 wall: stationarity needs Σ₄N = √3 Σ₆N, real Born amplitudes need degree 4 (4β⁴ = 3), and the Pell ground state (2911, 2521) on 5432 slots from zero #11366 loses the massless pole once β ≥ 1/2 (model-internal certificates). Lean checks the two coboundary identities d¹d⁰ = 0 and d²d¹ = 0 and the unit-norm, eight-beat right-angle spinor of QSqrt2; deriving the Regge action from a single minimal arc remains open.",
+  "summary_zh": "平直的四维单纯形像刚性折纸一样粘合，全部曲率集中在三角铰链上：横切一张铰链，张角 arccos(1/4) ≈ 75.52° 的楔子围着它展开，四个留下 +57.91° 的缺口，五个多出 −17.61°，这就是角亏（屏幕计算）。雷吉权重 exp[−sV − bK] 以牛顿常数与宇宙学常数为两只旋钮；从五单纯形边界 (6, 20) 出发，两次帕赫纳移动到 (10, 30) 与 (12, 34)（由顶点集当场计数），第一步减两倍第二步消去体积与二面角，得 G = A/(2(d₁ − 2d₂))（屏幕计算）；两张铰链计数同为 (33, 21, 3, 7) 的 24 单形四维球面，由 252 条六步对偶闭走区分（本章复算证书）。在平直格 g = I − J/5 附近，长波核为菲尔茨—泡利型，零锥极点分子 ½|T¹¹ − T²²|² + 2|T¹²|² 非负且秩为 2；源转过 θ，这对分量转过 2θ，即螺旋度 ±2（证书，转动为屏幕计算）；十种时间切片给出 T = AA† ≥ 0，但 4⁴ 盒的 255 个非零动量处惯性都是一正、十负、四零：共形模（证书）。整数铰链负载撞上 √3 墙：驻点要求 Σ₄N = √3 Σ₆N，实玻恩振幅至少要四次数域（4β⁴ = 3），第 11366 枚零点在 5432 槽上的佩尔整数基态 (2911, 2521) 一旦 β ≥ 1/2 就失去无质量极点（模型内证书）。Lean 内核检验两条上边缘恒等式 d¹d⁰ = 0、d²d¹ = 0，以及 QSqrt2 中直角旋量模方为一、八拍闭合；从单一极小圆弧导出雷吉作用仍未解决。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "2:51",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · wedge fans around a hinge with the deficit in magenta, a Pachner ledger, a rotating source ellipse against its double-angle pair, a 16×16 grid of momenta with the 15-mode inertia bar, the √3 number-field ladder and Pell card, a coboundary triangle and the eight-beat spinor circle",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.d1_d0",
+    "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.d2_d1",
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.sqrt_two_spinor"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_deficit-angles-and-spin-two_720p_narrated.mp4",
+    "cover": "omega-unification_deficit-angles-and-spin-two_cover.jpg"
+  }
+}

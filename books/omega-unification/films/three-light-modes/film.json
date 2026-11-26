@@ -1,0 +1,28 @@
+{
+  "title": "Three Light Modes",
+  "title_zh": "每种荷三个轻模",
+  "summary": "The nineteen positive integer points of x² + y² + z² = 867, seen down the pole (17, 17, 17), are joined by 135 edges; the clock edges d² = 724 and 804 carry two phases. For the five hypercharges q = 1, 2, −3, −4, 6 the film computes all nineteen eigenvalues of each magnetic Laplacian at δ = 0 while the two clock phases run along a winding path of the torus: three cyan modes stay below 8.685 and sixteen above 9.6 at every sample, and the chapter's interval replay certificate extends this to the whole torus and every positive Riemann zero. Cycling the coordinates turns the picture by 120° onto itself, so each matrix splits into character blocks 1, ω, ω² of sizes 7, 6, 6, each holding exactly one light mode (computed). Lean checks a rational backbone of such splits: even Chebyshev characters are orthonormal under a π-free Haar inner product, in every degree. Three is not forced: shared gaps allow 1, 3, 7 or 15 light modes, the widest gap picks 1 and equal characters leave 3 and 15 (certificate). The site-variance cut T = 9 + (1 − δ)² is read off a degree census computed on screen, and the certified two-step readouts of zeros #8236 and #148341 fall between 9 and T, while reading T as the physical cut stays a model choice: with charge-conjugate pairs on each site, #8359 keeps only two charge-2 modes (argued). The five-step overlap kernel gives three species of one chirality for (25 − 5√5)/4 < m < 7/2 with smooth index −3 Pf(C), and the shell lifted as a 4D mass gives three times a single index (certificates); a rough SU(5) background with indices (2, 7) leaves centre charge 12 ≡ 2 (mod 5), three Higgs frames lose the gap and four hold it (argued). Question 2 stays open: why 3 and not 15, why this cut, and a chiral measure with no frames put in by hand. Green is given only to the one cited Lean theorem; computations, certificates, model choices and open problems are labelled apart.",
+  "summary_zh": "球面 x² + y² + z² = 867 上的十九个正整点，沿极点 (17, 17, 17) 俯视，由 135 条边相连；平方弦长 724 与 804 的钟边带着两只钟的相位。对五种超荷 q = 1、2、−3、−4、6，片中在 δ = 0 时现算每个磁拉普拉斯算子的全部十九个本征值，并让两只钟的相位沿环面上一条缠绕路径扫过：每个采样点上三个青色模都低于 8.685，十六个模都高于 9.6；本章的区间复算证书把这一点推广到整张环面与全部正黎曼零点。把坐标轮换，画面绕极点转 120° 后与自身重合，于是每个矩阵拆成特征标 1、ω、ω² 的三块，大小 7、6、6，每块恰有一个轻模（屏幕计算）。这类拆分的有理骨架由 Lean 内核检验：在无 π 的有理哈尔内积下，各阶偶次切比雪夫特征标正交归一。三并非必然：共享谱隙容许 1、3、7 或 15 个轻模，最宽谱隙选出 1，特征标等重留下 3 与 15（证书）。站点方差分界 T = 9 + (1 − δ)² 由屏幕上现算的度数普查读出；#8236 与 #148341 两枚零点的两步质量证书读数落在 9 与 T 之间，而把 T 读作物理分界仍是模型选择：每个站点换成电荷共轭双态后，#8359 的荷二只剩两个轻模（论证）。五步重叠核在 (25 − 5√5)/4 < m < 7/2 时给出三个同手征物种，光滑指数为 −3 Pf(C)；以球壳作四维质量项，指数恰为单份的三倍（证书）。指数为 (2, 7) 的 SU(5) 粗糙背景留下中心荷 12 ≡ 2 (mod 5)；三份希格斯标架守不住谱隙，四份才守得住（论证）。第二问仍然开放：为何是 3 不是 15，为何是这条分界，以及无外置标架的手征测度。绿色只给所引的一条 Lean 定理；屏幕计算、复算证书、模型选择与开放问题分别标注。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "2:46",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · the 19-point shell seen down its pole with cyan and magenta clock edges, five columns of eigenvalues with the shared gap band while an amber point sweeps the clock torus, a 120° turn and three character blocks, a rank ledger and a degree census, a number line of two-step masses with the cuts 9 and T, a schematic tesseract with the overlap mass window, and the open Question 2",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_three-light-modes_720p_narrated.mp4",
+    "cover": "omega-unification_three-light-modes_cover.jpg"
+  }
+}

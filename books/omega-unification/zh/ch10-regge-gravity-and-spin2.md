@@ -187,6 +187,10 @@ $$
 
 从而可无损反演全部 $20$ 个曲率分量并自动滤除 $5$ 个非度量自由度（[二十五角亏反演证书](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-hinge-curvature-inverse.py)）。两组共线引力波洛伦兹助推检验排除了非零的逐面独立 $\delta_h^3$ 系数；反之，利用这 $25$ 个角亏的反演矩阵构造跨面三标记正概率分布，可使零点时钟直接耦合至洛伦兹不变量曲率算子立方迹 $\operatorname{tr}(\mathcal{R}^3)$，在复化在壳三波上把 #11366 与 #11431 分离出 $-3.7816\times 10^{-9}$（[协变曲率立方证书](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-clock-covariant-cubic.py)）。若把三个标记分散到沿格向排列的三座胞上，则一切单胞与双胞完整边缘概率都保持不变，三胞相关却仍能改变 $\operatorname{tr}(\mathcal{R}^3)$ 耦合，且三位全一概率足以分辨全部 $1{,}238$ 枚零点（最小间隔约 $4.48\times 10^{-13}$，出现在 #11870 与 #11943 之间，见[三胞边缘证书](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-gravity-three-cell-marginals.py)）。
 
+::: {.film src="deficit-angles-and-spin-two"}
+**角亏就是曲率：它在长波里承载两个自旋二螺旋度，落到整数铰链负载上却撞上 $\sqrt{3}$ 墙（2 分 51 秒）。** 青色楔子以二面角 $\theta = \arccos(1/4) \approx 75.52^\circ$ 围着铰链展开，四个留下 $+57.91^\circ$ 的品红缺口，五个多出 $-17.61^\circ$；从 $(6, 20)$ 经两次帕赫纳移动到 $(10, 30)$ 与 $(12, 34)$ 的计数在屏幕上由顶点集算出，第一步减两倍第二步得 $G = A/(2(d_1 - 2d_2))$。源椭圆转过 $\theta$ 时，品红箭头 $(T^{11} - T^{22}, 2T^{12})$ 转过 $2\theta$；$16\times 16$ 点阵逐一点亮 $255$ 个非零动量，琥珀色条标出唯一反号的共形模；佩尔卡片给出 $3\cdot 2911^2 - 4\cdot 2521^2 = -1$ 与第 $11366$ 枚零点的 $5432$ 槽整数基态。这些是屏幕计算或本章离散模型内的复算证书（青色 NUM）。绿色 LEAN ✓ 只给三角形上的上边缘恒等式 [@thm-ou-ch10-coboundary-zero] 与紫色圆周上八拍闭合的直角旋量 [@thm-ou-ch10-sqrt2-spinor]；红色 OPEN 标出从单一极小圆弧导出雷吉作用仍未解决。
+:::
+
 | 检验维度 | 基准对比（#11366 vs #11431 或全窗极值） | 模型内已确立的精确结果或边界 | 遗留的第一性原理缺口 |
 | --- | --- | --- | --- |
 | 裸参数与物质行列式 | $(20,54)$ 与 $(24,64)$ 四维球面 | $d_1 - 2d_2 = -4\pi A b$；全谱物质以 $252$ 条六步闭走分辨同直方图 $S^4$ | 裸作用与连续重整化极限的推导 |

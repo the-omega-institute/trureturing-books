@@ -1,0 +1,28 @@
+{
+  "title": "The Four-Layer Vacuum",
+  "title_zh": "四层真空配平",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "2:47",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a logarithmic ladder of |Lambda G| from 1 to 10^-122, a polarization staircase, a grid of 311 singlets, a Gram matrix evaluated two ways, the (-1, 3, -3, 1) weight bars with their moments and heat-trace area, a Higgs potential and its tree cliff, the three-column ledger",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_four-layer-vacuum_720p_narrated.mp4",
+    "cover": "omega-unification_four-layer-vacuum_cover.jpg"
+  },
+  "summary": "Sakharov's idea put to the test: let every field fluctuate once in proper time and read off Newton's constant and Lambda G. The visible spectrum alone (light layer 24 + 4 - 90 = -62, visible total -310, computed on screen) keeps a negative polarization deficit at every mass prefix, so Lambda G > 0.01180 and G^-1/M_P^2 < 6.688e-6 (the chapter's interval certificates). Adding minimally coupled real singlets, 310 or fewer force Lambda G > 1.5e-7, 311 equal-mass singlets hit both targets only with a mass ratio tuned to (1.2030, 1.2031) x 10^-122, and a relative cutoff raise of about 4.22e-120 turns the vacuum term negative (certificates). Lean checks the three-anchor Gram determinant formula for any three vectors of a real inner-product space; two integer examples (25, and 0 for a dependent third vector) are computed on screen. The four-layer stencil D(-1, 3, -3, 1) on squared masses 0, mu^2, 2 mu^2, 3 mu^2 kills the moments of order 0, 1 and 2 (the third is 6), leaving the finite positive I(0) = (9 ln 3 - 12 ln 2)/2 = 0.78487 (computed); with D = 4 and the chosen rule mu = v^2/M the best readings are 0.979478, 0.991359 and 0.967553 of the target (certificates, conditional on chosen inputs). In the broken electroweak vacuum the Higgs tree drop -pi m_h^2 v^2/M_P^4 = -1.3448e-67, recomputed on screen, sits 55 orders above the four-layer term, and cancelling it by copies forces the cutoff below 4.18 eV. The non-circular derivation of Newton's constant and of the sign and size of dark energy remains open.",
+  "summary_zh": "检验萨哈罗夫的设想：让每个场做一圈固有时涨落，读出牛顿常数与 ΛG。仅凭可见谱（轻层 24 + 4 − 90 = −62，可见合计 −310，屏幕计算），每个质量前缀都留有负的偏振亏量，于是 ΛG > 0.01180、G⁻¹/M_P² < 6.688×10⁻⁶（本章区间证书）。加入最小耦合实单态：不超过 310 份时 ΛG 被迫大于 1.5×10⁻⁷；311 份等质量单态能同时命中两个目标，但质量比须调到 (1.2030, 1.2031)×10⁻¹²²；截止相对上调约 4.22×10⁻¹²⁰ 真空项就转负（证书）。Lean 内核检查三锚格拉姆行列式展开公式（任意实内积空间中的任意三个向量）；屏幕上用两组整数向量算出 25 与依赖情形的 0。四层模板 D(−1, 3, −3, 1) 放在平方质量 0、μ²、2μ²、3μ² 上，消去零至二阶矩（三阶矩为 6），留下有限且为正的 I(0) = (9 ln 3 − 12 ln 2)/2 = 0.78487（屏幕计算）；取 D = 4 与选定规则 μ = v²/M，三枚零点的最优读数为目标的 0.979478、0.991359、0.967553（证书，依赖选定输入）。进入电弱破缺真空后，屏幕重算的希格斯树势落差 −π m_h² v²/M_P⁴ = −1.3448×10⁻⁶⁷ 比四层项大 55 个数量级，靠复制四层去抵消会迫使截止低于 4.18 eV。无循环地导出牛顿常数以及暗能量的正负与大小，仍是开放问题。"
+}

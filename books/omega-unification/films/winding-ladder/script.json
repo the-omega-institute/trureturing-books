@@ -1,0 +1,47 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen"},
+  "music": {"bpm": 78, "progression": "a-minor"},
+  "scenes": [
+    {"id": "hook", "name": "529 TRIANGLES", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "cues": [{"line": 0, "at": 2.6, "kind": "chime"}], "lines": [
+      ["The nineteen-point shell spans five hundred twenty-nine triangles, each carrying a loop angle built from two clock phases.", "十九点球壳张成 529 个三角面，每个面都带着一个由两只钟的相位围出的回路角。"],
+      ["In this model, each triangle pays one minus cosine of k times its angle, for each winding k.", "在这个模型里，对每个绕数 k，每个三角面付出 1 减去 k 倍回路角的余弦。"],
+      ["Higher windings are sharper harmonics, carving narrow pockets the first harmonic cannot.", "绕数越高，谐波越尖锐：它们能凿出基频凿不出的狭窄势阱。"]
+    ]},
+    {"id": "order", "name": "ORDER MATTERS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "cues": [{"line": 1, "at": 3.4, "kind": "glitch"}, {"line": 2, "at": 0.6, "kind": "stamp"}], "lines": [
+      ["Why can a triangle feel orientation? Because rotations do not commute; otherwise loop phases would just add.", "三角面凭什么分得出取向？因为旋转不可交换；否则回路相位只会简单相加。"],
+      ["One plus i times one plus j gives one, one, one, one. Reverse them, and the last entry flips.", "1+i 乘 1+j 得 (1, 1, 1, 1)；把次序倒过来，最后一个分量就变号。"],
+      ["Lean checks they lie on different rays, and that the orthogonal half-step triad has Gram determinant exactly one quarter.", "Lean 检验：二者不在同一射线上；正交半步三元组的格拉姆行列式恰为 1/4。"]
+    ]},
+    {"id": "wall", "name": "THE WALL", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "cues": [{"line": 0, "at": 0.4, "kind": "impact"}], "lines": [
+      ["Up to eighteen, nothing: the slope inside the windows always stays above three.", "直到 18 圈，什么也没有：三窗之内，梯度处处大于 3。"],
+      ["At nineteen, the first stationary point appears, a saddle. At twenty-one, the first strict local minimum.", "19 圈首现驻点，是个鞍点；21 圈首现严格局部极小。"],
+      ["At twenty-seven the global minimum enters the windows, but the flavor readings collapse to under a third of reference.", "27 圈时全局最低点终于落进三窗，可两项味读数跌到参考值的三分之一以下。"]
+    ]},
+    {"id": "summit", "name": "ONE HUNDRED FIVE", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "cues": [{"line": 2, "at": 3.2, "kind": "chime"}], "lines": [
+      ["Demand the reference flavor too, and the ladder climbs: the first such local minimum sits at thirty-one.", "再要求参考味，阶梯就继续往上爬：兼顾参考味的局部极小首现于 31 圈。"],
+      ["At thirty-six, a global flavor vacuum exists, if the weights may change with height.", "36 圈时，只要权重允许随高度调整，兼顾参考味的全局真空就存在。"],
+      ["One fixed set of weights for every height needs exactly one hundred five windings, and leaves one hundred coefficients free.", "一套权重通吃全部高度，恰好需要 105 圈，而且仍留下 100 个自由系数。"]
+    ]},
+    {"id": "damp", "name": "NO DAMPING", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "cues": [{"line": 0, "at": 3.2, "kind": "impact"}], "lines": [
+      ["Could decaying weights work instead? Interval certificates say no: a native shell competitor beats every such vacuum by over one quarter.", "权重能不能随圈数衰减？区间证书说不能：原生竞争点总比这类味真空低出 1/4 以上。"],
+      ["Ten binary digits of the flavor coordinate already exclude them all. With nine digits, a counterexample appears.", "六面味坐标只记十位二进制就足以全数排除；退到九位，反例立刻出现。"]
+    ]},
+    {"id": "flagship", "name": "THE FLAGSHIP ZERO", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.4], "cues": [{"line": 0, "at": 0.4, "kind": "chime"}], "lines": [
+      ["Now take one real Riemann zero, the one whose number fills the screen.", "现在看一枚真实的黎曼零点，就是屏幕上这个编号。"],
+      ["Its own clocks pass all three windows, with an action under five times ten to the minus eight above the vacuum.", "仅凭它自己的两只钟就通过三窗，作用量只比真空高出不到 5×10⁻⁸。"],
+      ["Both flavor readings land within one and a half parts per million of reference.", "两项味读数与参考值的偏差都在百万分之一点五以内。"],
+      ["Such zeros have positive density. Yet this is a witness inside the model, not a derivation of quark mixing.", "这样的零点具有正密度。但这是模型内部的见证，不是对夸克混合的推导。"]
+    ]},
+    {"id": "cracks", "name": "FOUR CRACKS", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "cues": [{"line": 0, "at": 3.0, "kind": "glitch"}], "lines": [
+      ["Stress tests on this very zero show cracks. Near the vacuum, weights two billionths apart differ by under ten to the minus seventy-four.", "压力测试露出裂隙：真空附近相差 2×10⁻⁹ 的权重，作用差不到 10⁻⁷⁴。"],
+      ["Charge one's light modes leak over thirty-one percent into heavy states of charges two and minus four.", "荷 1 的三轻模，有三成一以上泄入荷 2 与荷 −4 的重态。"],
+      ["One vacuum admits both proton-protecting currents and currents that let the proton decay.", "同一个真空，既容得下保护质子的电流，也容得下让质子衰变的电流。"],
+      ["And the windows fix only k over d squared: a second scale law is still missing.", "三窗只钉住 k/d²：第二条尺度律仍然缺席。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}], "lines": [
+      ["Omega Unification, chapter thirteen.", "《OMEGA 统一》· 第十三章"]
+    ]}
+  ]
+}

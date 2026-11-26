@@ -1,0 +1,308 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {
+    "Lean": "Leen",
+    "Hasse": "Hassuh",
+    "y-bar": "y bar",
+    "two-adic": "two addic"
+  },
+  "music": {
+    "bpm": 78,
+    "progression": "d-minor"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "name": "NINETEEN POINTS",
+      "lead": 1.3,
+      "tail": 0.5,
+      "music": [
+        1.0,
+        0.4,
+        0.3,
+        0.0,
+        0.1
+      ],
+      "lines": [
+        [
+          "Take the sphere x squared plus y squared plus z squared equals 867.",
+          "取球面 x² + y² + z² = 867。"
+        ],
+        [
+          "Keep only whole-number points with no negative coordinate: there are exactly nineteen.",
+          "只留坐标全为非负整数的点：恰好十九个。"
+        ],
+        [
+          "Choosing this shell is a modelling choice. After that, everything on it is hard arithmetic.",
+          "选这颗球壳是一个模型选择；选定之后，它上面的一切都是硬算术。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 1,
+          "at": 3.4,
+          "kind": "chime"
+        }
+      ]
+    },
+    {
+      "id": "orbits",
+      "name": "ONE POLE, SIX ORBITS",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        0.9,
+        0.5,
+        0.5,
+        0.1,
+        0.2
+      ],
+      "lines": [
+        [
+          "Cycle the coordinates: x to y, y to z, z back to x.",
+          "把坐标轮换一下：x 变 y，y 变 z，z 回到 x。"
+        ],
+        [
+          "One point stays put: the pole, seventeen, seventeen, seventeen.",
+          "只有一个点纹丝不动：极点 (17, 17, 17)。"
+        ],
+        [
+          "The other eighteen form six orbits of three, from the outer rim to the inner core.",
+          "其余十八个点组成六条三点轨道，从外层一直排到内层核心。"
+        ]
+      ]
+    },
+    {
+      "id": "edges",
+      "name": "135 EDGES",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        0.9,
+        0.7,
+        0.6,
+        0.2,
+        0.3
+      ],
+      "lines": [
+        [
+          "Join two points when their squared distance is at most 804.",
+          "两点的平方距离不超过 804，就连一条边。"
+        ],
+        [
+          "Of the 171 pairs, 135 survive; the 36 longest chords are dropped.",
+          "171 个点对里留下 135 条；最长的 36 条弦被剔除。"
+        ],
+        [
+          "Those edges close up 529 triangles.",
+          "这些边围出 529 个三角面。"
+        ],
+        [
+          "The degrees add up to 270, twice 135, as the handshake rule demands.",
+          "度数加起来是 270，正好是 135 的两倍，与握手引理分毫不差。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 1,
+          "at": 2.6,
+          "kind": "glitch"
+        },
+        {
+          "line": 2,
+          "at": 1.2,
+          "kind": "chime"
+        }
+      ]
+    },
+    {
+      "id": "arcs",
+      "name": "23 LENGTHS",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        1.0,
+        0.8,
+        0.7,
+        0.4,
+        0.4
+      ],
+      "lines": [
+        [
+          "The 135 edges come in only 23 different squared lengths.",
+          "135 条边只有 23 种不同的平方弦长。"
+        ],
+        [
+          "Each length j gives an arc angle theta, with cosine one minus j over 1734.",
+          "每个弦长 j 给出一个弧角 θ，其余弦为 1 − j/1734。"
+        ],
+        [
+          "Could these angles hide a rational relation that locks some clocks together?",
+          "这些角之间会不会藏着有理关系，让几只时钟锁死在一起？"
+        ],
+        [
+          "Each angle lives in an imaginary quadratic field, and a Galois argument keeps different fields apart.",
+          "每个角落在一个虚二次域里；伽罗瓦论证说明，不同域的角彼此绑不到一起。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 3,
+          "at": 1.8,
+          "kind": "stamp"
+        }
+      ]
+    },
+    {
+      "id": "relation",
+      "name": "ONE RELATION",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        1.0,
+        0.7,
+        0.6,
+        0.3,
+        0.3
+      ],
+      "lines": [
+        [
+          "The 23 angles sit in 21 fields: 12, 68 and 136 share the field of root minus two.",
+          "23 个角只占 21 个域：12、68、136 同住 ℚ(√−2)。"
+        ],
+        [
+          "Multiply the numbers for 12 and 68, and you get exactly the one for 136.",
+          "把 12 与 68 对应的数相乘，恰好得到 136 的那个数。"
+        ],
+        [
+          "The sphere shows why: three points sit in order on one great circle, so the arcs simply add.",
+          "球面上一看便知：三个点依次落在同一条大圆上，弧长直接相加。"
+        ],
+        [
+          "One relation among 23 angles leaves exactly 22 rationally independent frequencies.",
+          "23 个角之间只有这一条关系，于是恰好留下 22 个有理独立频率。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 1,
+          "at": 3.2,
+          "kind": "impact"
+        },
+        {
+          "line": 3,
+          "at": 2.4,
+          "kind": "chime"
+        }
+      ]
+    },
+    {
+      "id": "lean",
+      "name": "TWO LEAN PILLARS",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        1.0,
+        0.8,
+        0.7,
+        0.4,
+        0.4
+      ],
+      "lines": [
+        [
+          "Two results here are checked by the Lean kernel.",
+          "这里有两条结论由 Lean 内核检验。"
+        ],
+        [
+          "First, for nonzero integer quaternions, the triad x y-bar z is associative up to rescaling.",
+          "其一：对非零整四元数，三元积 (x ȳ) z 在射线等价下满足结合律。"
+        ],
+        [
+          "And the rational overlap kappa survives passing both arguments through the same triad.",
+          "并且两个自变量经过同一个三元迁移后，有理重叠 κ 保持不变。"
+        ],
+        [
+          "Second, if a continuous shell density h casts the one-axis shadow f, then h is minus two r f prime.",
+          "其二：若连续的球壳密度 h 投下单轴影子 f，则 h = −2r f′。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 0,
+          "at": 0.8,
+          "kind": "stamp"
+        }
+      ]
+    },
+    {
+      "id": "gram",
+      "name": "21, NOT 18",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        1.0,
+        0.7,
+        0.6,
+        0.3,
+        0.3
+      ],
+      "lines": [
+        [
+          "Last, the plain graph Laplacian of the 135 edges.",
+          "最后，看那 135 条边的普通图拉普拉斯。"
+        ],
+        [
+          "Over the reals its rank is 18: nineteen vectors in eighteen dimensions reproduce it.",
+          "在实数上它的秩是 18：十九个向量放进十八维就能复现它。"
+        ],
+        [
+          "Demand rational coordinates, and a two-adic Hasse obstruction rules out 18, 19 and 20.",
+          "一旦要求坐标全为有理数，2-进哈塞障碍便封死了 18、19、20 维。"
+        ],
+        [
+          "The minimum is 21: three dimensions the real numbers never see.",
+          "最小维数是 21：多出三个实数看不见的维度。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 2,
+          "at": 2.8,
+          "kind": "glitch"
+        },
+        {
+          "line": 3,
+          "at": 0.9,
+          "kind": "impact"
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "name": "LEDGER",
+      "lead": 0.5,
+      "tail": 2.0,
+      "music": [
+        1.0,
+        0.6,
+        0.5,
+        0.3,
+        0.2
+      ],
+      "lines": [
+        [
+          "Omega Unification, chapter one.",
+          "《OMEGA 统一》· 第一章"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 0,
+          "at": 0.3,
+          "kind": "chime"
+        }
+      ]
+    }
+  ]
+}

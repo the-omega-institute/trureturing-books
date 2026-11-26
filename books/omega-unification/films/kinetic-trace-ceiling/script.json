@@ -1,0 +1,288 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Behrend": "Bair-rend",
+  "Schur": "Shoor",
+  "Stieltjes": "Steel-yes",
+  "Casimir": "Kazimeer",
+  "GeV": "G E V",
+  "SU": "S U",
+  "UV": "U V",
+  "Laplace": "La-plahss"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "name": "KINETIC LEDGER",
+   "lead": 1.9,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "A bold hypothesis: gauge kinetic energy is a positive heat trace over heavy matter.",
+     "一个大胆的假设：规范动能是重物质上的正热核迹。"
+    ],
+    [
+     "Each block of matter carries three trace weights: hypercharge, weak, and colour.",
+     "每块物质积木带三支迹权：超荷、弱、色。"
+    ],
+    [
+     "A left doublet set carries two fifths, two, and one. Its right partner carries eight fifths, zero, and one.",
+     "左双重态套组是 2/5、2、1；互补右部门是 8/5、0、1。"
+    ],
+    [
+     "Together they make two, two, two. So equal traces demand that left and right heat weights balance.",
+     "合起来正好是 2、2、2。于是三支迹相等，就要求左右热权配平。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.2,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "laplace",
+   "name": "LAPLACE LOCK",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "The heat trace sums e to the minus u y over every mode.",
+     "热迹把每个模式的 e 的负 u y 次方加起来。"
+    ],
+    [
+     "If left and right agree on any interval of u, Laplace uniqueness forces identical spectra.",
+     "只要左右热迹在 u 的任一区间上相等，拉普拉斯唯一性就逼出完全相同的谱。"
+    ],
+    [
+     "Then every threshold opens full families, and the coupling gaps never run.",
+     "那样每个阈值只放出完整家族，耦合之差纹丝不动。"
+    ],
+    [
+     "So match one scale only: three right copies per left mode, shifted up by log three.",
+     "那就只配一个尺度：每个左模式配三份右副本，各上移 log 3。"
+    ],
+    [
+     "At u equals one they agree. At u equals two, one third. At u equals eight, one part in two thousand one hundred eighty-seven.",
+     "u = 1 时相等；u = 2 时只剩三分之一；u = 8 时只剩 2187 分之一。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 4,
+     "at": 3.0,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "schur",
+   "name": "SCHUR LOCK",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Lean checks the move this chapter keeps using: completing the square over the rationals.",
+     "Lean 内核检验了本章反复使用的一步：有理数上的配方。"
+    ],
+    [
+     "For a nonzero pivot c, the form splits into a Schur value plus c times a square.",
+     "主元 c 非零时，二次型恰好拆成舒尔值加 c 乘一个平方。"
+    ],
+    [
+     "For a positive pivot, the Schur value is a floor, reached at y equals minus b over c, times x.",
+     "主元为正时，舒尔值是下界，并在 y 等于负 b/c 乘 x 处取到。"
+    ],
+    [
+     "Applied to right modes above threshold, the same move bounds the third heat moment from below.",
+     "把同一配方用在阈上的右模式上，三阶热矩便有了下界。"
+    ],
+    [
+     "In the rank twenty window, that floor overshoots the target by more than four point eight nine nine.",
+     "在秩 20 跳层窗口里，这个下界比目标高出 4.899 以上。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.8,
+     "kind": "stamp"
+    },
+    {
+     "line": 4,
+     "at": 2.6,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "scales",
+   "name": "TWO SCALES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "With pure scalar towers, every crossing with scale ratio up to one hundred eighty-nine is excluded.",
+     "纯标量塔下，标度比不超过 189 的一切交点都被排除。"
+    ],
+    [
+     "At four hundred, a two loop crossing exists, near five times ten to the fourteen GeV.",
+     "标度比 400 时存在两圈交点，Q 约为 5 × 10¹⁴ GeV。"
+    ],
+    [
+     "Now match only the trace at the crossing, with any right spectrum at all.",
+     "现在只在交点配平热迹，右谱任取。"
+    ],
+    [
+     "Certificates still find a strict gap at each second cutoff: above one at u equals eight, above four near seventy-three.",
+     "区间证书在每个第二截止处都找到严格缺口：u = 8 时大于 1，u 约 73 时大于 4。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.4,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "spin",
+   "name": "SPIN BALANCE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "The way out: each layer holds a scalar L, a Dirac L, and three scalar R's.",
+     "破局之道：每个质量层放一份标量 L、一份狄拉克 L、三份标量 R。"
+    ],
+    [
+     "The trace counts Dirac twice: six, six, six, at every scale.",
+     "迹把狄拉克计作两份：6、6、6，在任何尺度上都相等。"
+    ],
+    [
+     "The running weighs Dirac four thirds, so two thirds of L survive.",
+     "跑动给狄拉克计 4/3，于是剩下三分之二个 L。"
+    ],
+    [
+     "The certified crossing sits near five point three times ten to the fourteen GeV, just apart from the Behrend arc ratio.",
+     "认证的交点约在 5.3 × 10¹⁴ GeV，与贝伦德弧比近在咫尺，却严格分离。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.6,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "ceiling",
+   "name": "UV CEILING",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Push both crossings upward. How long does perturbation theory last?",
+     "把两组交点往上推：微扰论能撑多远？"
+    ],
+    [
+     "The pure scalar tower fails by three point nine Q, the spin balanced one by fourteen Q.",
+     "纯标量塔到 3.9Q 就倒下，自旋配平塔撑到 14Q。"
+    ],
+    [
+     "Index one SU five fails by twenty Q, and Spin ten by thirty Q.",
+     "指标一的 SU(5) 止步于 20Q，Spin(10) 止步于 30Q。"
+    ],
+    [
+     "Not a physical pole: the expiry date of the effective theory.",
+     "这不是物理极点，而是有效理论的保质期。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.4,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.4,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Unification, chapter five.",
+     "《OMEGA 统一》· 第五章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+  "title": "Kinetic Traces and the UV Ceiling",
+  "title_zh": "动能谱迹与紫外封顶",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "2:49",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · trace bars for L, R and L + R, two stick spectra and the three-copy ratio curve, a Schur parabola with its floor, a scale-ratio axis with a gap bar chart, two spin ledgers, a log energy axis with four ceilings",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_complete",
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_min"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_kinetic-trace-ceiling_720p_narrated.mp4",
+    "cover": "omega-unification_kinetic-trace-ceiling_cover.jpg"
+  },
+  "summary": "Gauge kinetic terms read as one positive heat trace over heavy matter, followed to the point where perturbation theory gives out. Ledger: under the chapter's model hypothesis, left doublets carry trace weights (2/5, 2, 1) and their right partner (8/5, 0, 1), so L + R = (2, 2, 2) and equal traces demand W_L = W_R (computed on screen in exact fractions). Laplace lock: if the heat traces agree on an interval of the inverse cutoff, Laplace uniqueness forces equal spectra and no differential running (argued; the stick spectra are schematic); matching one scale with three right copies shifted by log 3 gives S_R/S_L = 3^(1−u): 1, 1/3 and 1/2187 at u = 1, 2, 8 (computed). Schur lock: Lean checks rational Schur completion (rational_schur_complete) and the attained positive-pivot minimum (rational_schur_min), shown on 7 + 6y + 2y² with floor 5/2 at y* = −3/2; the same completion gives the Stieltjes third-moment floor C ≥ B + (B − M)²/(M − W) (the chapter's hand derivation), which overshoots the target by more than 4.89948 in the rank-20 window (certificate). Two scales: pure scalar crossings with r ≤ 189 are excluded, r = 400 has a two-loop crossing near 5 × 10^14 GeV, and matching only the trace at the crossing leaves certified gaps at every second cutoff checked, from > 1.06192 at u = 8 to > 4.005 at u = a² ≈ 72.85 (certificates). Spin balance: one scalar L, one Dirac L and three scalar R per layer give (6, 6, 6) in the trace and (2, 2, 2) + (2/3)L in the one-loop running (a model construction; fractions computed); the certified crossing Q ∈ (5.268, 5.390) × 10^14 GeV stays apart from the Behrend arc ratio by an exposure gap ≥ 0.00418 (certificate). Ceilings: perturbation theory ends by 3.9Q (pure scalar), 14Q (spin balanced), 20Q for index-one SU(5) and 30Q for Spin(10) (certificates); reading this as the expiry date of the effective theory, not a physical pole, is the chapter's verdict (argued).",
+  "summary_zh": "把规范动能读成重物质上的一条正热核迹，一路追到微扰论失效。账本：在本章的模型假设下，左双重态的迹权是 (2/5, 2, 1)，互补右部门是 (8/5, 0, 1)，L + R = (2, 2, 2)，三支迹相等就要求 W_L = W_R（屏幕上的精确分数计算）。拉普拉斯锁：热迹若在逆截止的一段区间上相等，拉普拉斯唯一性就逼出同谱、差分跑动归零（论证；谱线为示意）；只在一个尺度上配平、给每个左模式配三份上移 log 3 的右副本，得 S_R/S_L = 3^(1−u)，在 u = 1、2、8 处为 1、1/3、1/2187（屏幕计算）。舒尔锁：Lean 内核检验有理舒尔配方（rational_schur_complete）与正主元可达极小值（rational_schur_min），画面用 7 + 6y + 2y² 展示下界 5/2 在 y* = −3/2 处取到；同一配方给出斯蒂尔杰斯三阶矩下界 C ≥ B + (B − M)²/(M − W)（本章的手工推导），在秩 20 窗口里比目标高出 4.89948 以上（证书）。双尺度：纯标量塔 r ≤ 189 的交点全被排除，r = 400 有约 5 × 10¹⁴ GeV 的两圈交点；只在交点配平热迹时，每个复查的第二截止处都有严格缺口，从 u = 8 的 > 1.06192 到 u = a² ≈ 72.85 的 > 4.005（证书）。自旋配平：每层一份标量 L、一份狄拉克 L、三份标量 R，迹为 (6, 6, 6)，一圈跑动为 (2, 2, 2) + (2/3)L（模型构造；分数为屏幕计算）；认证交点 Q ∈ (5.268, 5.390) × 10¹⁴ GeV，与贝伦德弧比之间隔着 ≥ 0.00418 的暴露禁隙（证书）。封顶：微扰论在 3.9Q（纯标量）、14Q（自旋配平）、20Q（指标一 SU(5)）与 30Q（Spin(10)）前终止（证书）；把它读作有效理论的保质期而非物理极点，是本章的结论（论证）。"
+}

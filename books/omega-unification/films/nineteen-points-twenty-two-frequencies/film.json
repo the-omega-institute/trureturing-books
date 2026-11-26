@@ -1,0 +1,31 @@
+{
+  "title": "Nineteen Points, Twenty-Two Frequencies",
+  "title_zh": "十九个点，二十二个频率",
+  "summary": "The sphere x² + y² + z² = 867 = 3·17² carries exactly 19 integer points with nonnegative coordinates; cycling the coordinates fixes the pole (17, 17, 17) and splits the other 18 into six orbits of three. Joining every pair with squared distance at most 804 keeps 135 of the 171 pairs and closes 529 triangles; the degrees add to 270 = 2·135. The 135 edges take 23 squared lengths j, with arc angles cos θ = 1 − j/1734; their 23 unit-circle numbers fall into 21 imaginary quadratic fields, and the product of the numbers for 12 and 68 is exactly the one for 136, visible as three points in order on one great circle, so θ₁₃₆ = θ₁₂ + θ₆₈. Every count, length, field and that product are computed on screen; that the remaining 22 angles are rationally independent is the chapter's Galois argument (argued), and picking this shell as the testbed is a modelling choice. Lean checks the projective ternion heap of integer quaternions (triad associativity up to ray equivalence, invariance of the rational overlap κ) and the isotropic shell inversion h = −2r f′ with its mass identity, shown on the computed example f = e^(−t²), h = 4r² e^(−r²). The plain Laplacian of the 135 edges has real rank 18 (computed), while its minimal rational Gram dimension is 21 by a 2-adic Hasse obstruction (replay certificate and written argument).",
+  "summary_zh": "球面 x² + y² + z² = 867 = 3·17² 上恰有 19 个坐标非负的整点；坐标轮换只固定极点 (17, 17, 17)，其余 18 点分成六条三点轨道。把平方距离不超过 804 的点对连成边，171 对里留下 135 条，围出 529 个三角面，度数之和 270 = 2·135。这 135 条边只有 23 种平方弦长 j，弧角满足 cos θ = 1 − j/1734；对应的 23 个单位圆上的数落在 21 个虚二次域里，12 与 68 两数之积恰为 136 的那个数——三点依次落在同一条大圆上，故 θ₁₃₆ = θ₁₂ + θ₆₈。片中的计数、弦长、域与这一乘积都在屏幕上精确算出；其余 22 个角有理独立来自本章的伽罗瓦论证（论证层），选这颗球壳作试验台是模型选择。Lean 内核检验了整四元数射影三元流群（三元积在射线等价下结合、有理重叠 κ 平移不变）与各向同性球壳反演 h = −2r f′ 及其质量恒等式，片中以屏幕算出的例子 f = e^(−t²)、h = 4r² e^(−r²) 演示。135 条边的无权拉普拉斯实秩为 18（屏幕算出），最小有理格拉姆维数却是 21，来自 2-进哈塞障碍（复算证书与书面论证）。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "2:45",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · the 19 points of the shell projected along the pole, orbits cycling, 135 great-circle edges, a 23-line arc spectrum sorted into quadratic fields, one great circle where three arcs add, two Lean panels, a Laplacian heatmap against a dimension ladder",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_assoc",
+    "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.kappa_heap_invariant",
+    "D5/S3/Quantum/StaticExchange/IsotropicShellInversion.shell_density_unique",
+    "D5/S3/Quantum/StaticExchange/IsotropicShellInversion.shell_projection_mass"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_nineteen-points-twenty-two-frequencies_720p_narrated.mp4",
+    "cover": "omega-unification_nineteen-points-twenty-two-frequencies_cover.jpg"
+  }
+}

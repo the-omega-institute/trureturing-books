@@ -1,0 +1,340 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Gauss-Radau": "Gauss Rah-dow",
+  "CP": "C P",
+  "4130": "four thousand one hundred thirty",
+  "8359": "eight thousand three hundred fifty-nine"
+ },
+ "music": {
+  "bpm": 78,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "name": "ONE CLOCK",
+   "lead": 1.2,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Four sectors each set their own watch and get a model-internal witness.",
+     "四个战场各自校表，各自拿出一份模型内见证。"
+    ],
+    [
+     "But nature keeps no separate clocks for gauge couplings and for quark flavour.",
+     "可自然界不会为规范耦合和夸克味混合各备一只钟。"
+    ],
+    [
+     "So force them all onto one shared clock, with one common set of zero weights.",
+     "那就逼它们读同一只钟，共用同一组零点权重。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.6,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "clock",
+   "name": "RESOLVENT CLOCK",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "The clock is a quadratic resolvent: one operator, read at integer ticks j.",
+     "这只钟是二次预解式：同一个算子，在整数刻度 j 上读数。"
+    ],
+    [
+     "Each zero becomes a point y; tick j averages one kernel over the weights.",
+     "每个零点化为一点 y；第 j 拍用这组权重给一条核函数取平均。"
+    ],
+    [
+     "Higher ticks bend the kernel harder, like sharper low-pass filters.",
+     "刻度越高，核函数弯得越狠，就像越来越陡的低通滤波器。"
+    ],
+    [
+     "Only zeros through three physics windows carry weight; the first is number 8359.",
+     "只有三道物理窗口齐过的零点才分得到权重；第一枚是第 8359 号。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 4.0,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "rupture",
+   "name": "FIFTH TICK BREAKS",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "With one shared weighting, four ticks close; the fifth breaks at every scale.",
+     "共用同一组概率时，前四拍精确闭合；第五拍在一切尺度上断裂。"
+    ],
+    [
+     "At twenty-two binary digits, every allowed clock lands one code below the reference.",
+     "按 22 位二进制读取，所有合法的钟都比参考值低一个码。"
+    ],
+    [
+     "A neutral shell reweighting rescues tick five, with just enough efficiency range.",
+     "中性壳重加权救回了第五拍：它的效率倍率范围刚好够用。"
+    ],
+    [
+     "Then the sixth tick is forced up, by at least 1.33 times ten to the minus eight.",
+     "可第六拍随即被迫上移，至少 1.33 × 10⁻⁸。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 4.2,
+     "kind": "glitch"
+    },
+    {
+     "line": 3,
+     "at": 2.0,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "seventh",
+   "name": "THE SEVENTH TICK",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Now fix those six ticks and ask about the seventh, which nobody fitted.",
+     "现在锁住这六拍（第六拍取偏移后的值），去问没有人拟合过的第七拍。"
+    ],
+    [
+     "Gauss-Radau quadrature leaves a window two point one four trillionths wide.",
+     "高斯–拉道求积只留下一个宽 2.14 × 10⁻¹² 的窗口。"
+    ],
+    [
+     "At thirty-five binary digits, that window is one code, 4130 above the reference.",
+     "按 35 位二进制读取，这个窗口只占一个码，比参考码高出 4130 格。"
+    ],
+    [
+     "A selector that keeps the sixth shift but reports the reference code falsifies the clock.",
+     "若一个选择器接受第六拍的偏移，却在第七拍仍报参考码，它就证伪了这只钟。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 3.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "bits",
+   "name": "FORTY-FOUR BITS",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Inputs kept to forty-four binary digits force that code by a rational certificate.",
+     "每项输入保留 44 位二进制，纯有理数证书就能锁死那个码。"
+    ],
+    [
+     "Drop to forty-three, and the same seven real zeros give two different codes.",
+     "退到 43 位，同样七枚真实零点就能给出两个不同的码。"
+    ],
+    [
+     "Forty-four bits is the exact threshold.",
+     "44 位正是精确门槛。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.2,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "bands",
+   "name": "THREE BANDS",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "The six ticks also squeeze the weights: over 99.931 percent sits in three height bands.",
+     "这六拍还挤压了权重本身：超过 99.931% 落进三条高度带。"
+    ],
+    [
+     "Roughly 23, 37 and 39 percent, with almost nothing in between.",
+     "大约 23%、37% 与 39%，带间几乎空无一物。"
+    ],
+    [
+     "Stiffen the edges by one part in ten million: no reweighting hides the drop.",
+     "把边刚度加强千万分之一：怎样重排权重都藏不住响应的下降。"
+    ],
+    [
+     "On the eight-zero solution, the held-out quark CP invariant J comes out six point zero eight percent low.",
+     "在八点解上，留出的夸克 CP 不变量 J 比参考值低了 6.08%。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 4.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "selectors",
+   "name": "NO NAIVE SELECTOR",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Could a simple rule grow these bands without fitting?",
+     "有没有一条简单法则，不靠拟合就能长出这三条带？"
+    ],
+    [
+     "Power laws, Gaussian determinants, Gibbs weights, short walks, single-shot selectors: certificates exclude them all.",
+     "幂律、高斯行列式、吉布斯三角权、短程相干游走、单次选择器：区间证书逐一排除。"
+    ],
+    [
+     "Weights pasted on from outside break at every turn.",
+     "从外面给零点贴上的权重，处处触壁。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 6.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "lean",
+   "name": "TWO LEAN FLOORS",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Two Lean theorems sit underneath. One caps narrow-band weight by a positive Fourier sum.",
+     "底下是两条 Lean 定理。第一条把窄频带的权重压在一个非负傅里叶和之下。"
+    ],
+    [
+     "The other floors near-collision mass: less variance forces more collision.",
+     "第二条给近碰撞质量垫了地板：方差越小，碰撞越多。"
+    ],
+    [
+     "Two equal weights at zero and one, squared: nine is at most about forty.",
+     "两个等重的频率 0 与 1，取二次卷积：9 不超过约 40。"
+    ],
+    [
+     "Next chapter: look inside the shell.",
+     "下一章：转向壳体内部。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.8,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.4,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Unification, chapter twelve.",
+     "《OMEGA 统一》· 第十二章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

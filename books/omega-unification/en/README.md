@@ -69,6 +69,14 @@ The road map across all five volumes runs as follows:
 - **Volume V ([Chapter 12](ch12-shared-arithmetic-clock.md)–[Chapter 15](ch15-unified-verdict-and-open-roadmap.md)): Cross-Question Coupling, Weight Selection, and Unified Verdict.** Forces all four sectors to share a single zero-weight distribution, revealing three-band concentration and the razor-thin seventh-time prediction (Chapter 12); climbs the 529-triangle dual-clock winding ladder ($19 \to 21 \to 27 \to 31 \to 36 \to 105$ windings), proving the 10-bit monotone-weight obstruction and identifying the joint zero witness #2,306,888,100,085 (Chapter 13); analyzes the 624 internal channels, local memory rank, and near-vacuum inverse-identifiability cliff (Chapter 14); and closes in [Chapter 15](ch15-unified-verdict-and-open-roadmap.md) with the complete four-question balance sheet, five structural tensions, and open first-principles roadmap.
 - **Coda and Appendices ([Coda](coda.md), [Appendix A](appendix-a.md), [Appendix B](appendix-b.md)).** Reflects on why honest boundaries carry more scientific force than premature unification, and supplies the full replay repository index, certificate guide, controlled glossary, and live formalization statistics.
 
+The same road can also be travelled in one sitting. The long film *Four Questions, Zero Shortcuts* below runs about 22 minutes in seven acts, one for the prelude, one for each of the five volumes and one for the coda; every act ends on a question that the next act answers, and the player's chapter menu jumps straight to any volume.
+
+::: {.film src="four-questions-zero-shortcuts"}
+**Four Questions, Zero Shortcuts: from nineteen integer points to the four-question balance sheet.** Seven acts follow the prelude, Volumes I to V and the coda; the row of dots at the top left marks the current stop in amber. Each act opens on its title card and closes on a "next question" panel that the following act answers, and two scores stay on screen throughout: all four questions have model-internal witnesses (4/4), and none is derived from one master connection with zero post-hoc fitting (0/4). Green `LEAN ✓` marks only what the cited frozen declarations state; interval and exact rational certificates and on-screen computations are cyan, written arguments, the external formalized fact of classical RH and model-internal constructions are violet, and open problems are red. English narration with Chinese and English subtitles.
+:::
+
+Whether you watch the film first or read volume by volume, we begin by fixing the notation the whole book relies on.
+
 ## 0.4 Notation, Reading Tracks, and Replay Conventions {#sec-ou-0-4}
 
 To keep cross-references crisp across all five volumes, we fix the core symbols from the start:

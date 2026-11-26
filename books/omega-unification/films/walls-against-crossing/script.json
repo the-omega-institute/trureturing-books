@@ -1,0 +1,300 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "GeV": "G E V",
+  "LPS": "L P S",
+  "Cauchy": "Koh-shee",
+  "Weyl": "Vile"
+ },
+ "music": {
+  "bpm": 78,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "gap",
+   "name": "THE MISS · 错身",
+   "lead": 1.8,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Three forces, three running couplings. Do they ever meet at one energy?",
+     "三种力，三条跑动耦合。它们会在同一个能标相遇吗？"
+    ],
+    [
+     "Run the measured values upward from the Z mass, at one loop in the Standard Model.",
+     "从 Z 质量处的实测值出发，按标准模型单圈向上跑。"
+    ],
+    [
+     "They miss. Where lines one and three cross, line two sits three point six six higher.",
+     "它们错身而过：在第一、三条线的交点处，第二条线高出 3.66。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "blind",
+   "name": "THE BLIND COMBINATION · 盲视组合",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Why so stubborn? Take line one, minus three times line two, plus two times line three.",
+     "为什么如此顽固？取第一条线，减三倍第二条，加两倍第三条。"
+    ],
+    [
+     "That combination cannot see a shared coupling, a complete family, or heavy gauge vectors.",
+     "这个组合看不见共同耦合、完整家族与重规范矢量。"
+    ],
+    [
+     "Light fields lift it from minus twelve point eight by only two point two, up to ten to the seventeen GeV.",
+     "轻场把它从 −12.8 一路抬到 10¹⁷ GeV，也只抬高了 2.2。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.6,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "shell",
+   "name": "THE MAGNETIC SHELL · 磁球壳",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Could the nineteen-point magnetic shell tear multiplets apart by itself? Its nonzero neutral eigenvalues average fifteen.",
+     "十九点磁球壳能自己把多重态撕开吗？它的中性非零本征值均值是 15。"
+    ],
+    [
+     "The two-step mass reading, lambda times its distance from fifteen, folds back to zero there.",
+     "两步质量读数是 λ 乘以它到 15 的距离，曲线在那里折回到零。"
+    ],
+    [
+     "And the weak centre splits the fields: doublets are odd, singlets and neutral vectors are even.",
+     "弱中心再把场分成两扇：双重态为奇，单态与中性矢量为偶。"
+    ]
+   ]
+  },
+  {
+   "id": "walls",
+   "name": "FOUR WALLS · 四道墙",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Inside this model, interval certificates raise four walls.",
+     "在这个模型里，区间证书立起四道墙。"
+    ],
+    [
+     "Native generators sharing high modes: spread above two point nine three six.",
+     "原生生成元共用高模：极差大于 2.936。"
+    ],
+    [
+     "Short-step face weights: strong coupling below zero point zero seven six.",
+     "短步正面权：强耦合低于 0.076。"
+    ],
+    [
+     "A Planck-pinned mass unit: spread above two point zero three seven.",
+     "质量单位钉在普朗克尺度：极差大于 2.037。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.0,
+     "kind": "impact"
+    },
+    {
+     "line": 2,
+     "at": 3.0,
+     "kind": "impact"
+    },
+    {
+     "line": 3,
+     "at": 2.5,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "monotone",
+   "name": "THE MONOTONE WALL · 单调之墙",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.8,
+    0.6,
+    0.4,
+    0.3
+   ],
+   "lines": [
+    [
+     "The sharpest wall: all heavy fields share one never-decreasing mass rule.",
+     "最锋利的一道墙：所有重场共用同一条从不下降的质量规则。"
+    ],
+    [
+     "Any such rule, at every torus phase, leaves a sharp-threshold spread above zero point seven.",
+     "任何这样的规则，在环面的每个相位上，都留下大于 0.7 的尖阈值极差。"
+    ],
+    [
+     "Even one plain tower needs a log slope of at least one hundred six point seven five.",
+     "哪怕只有一座普通重塔，对数斜率也至少要 106.75。"
+    ],
+    [
+     "A log-convex rule needs a span over eighty-two; Z mass to reduced Planck is under thirty-eight.",
+     "对数凸的规则需要超过 82 的跨度；而从 Z 质量到约化普朗克质量不到 38。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.2,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "keys",
+   "name": "CONDITIONAL CROSSINGS · 条件交汇",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.7,
+    0.7,
+    0.3,
+    0.4
+   ],
+   "lines": [
+    [
+     "Two keys open a crossing, on conditions. Key one: make the even sector thirty-two times heavier.",
+     "两把钥匙能打开交汇，但各有条件。钥匙一：把偶扇区加重 32 倍。"
+    ],
+    [
+     "With chord seven twenty-four as the unit, zero eleven six six one gives zero point one one eight four.",
+     "以钟弦 724 为单位，第 11661 枚零点给出 0.1184。"
+    ],
+    [
+     "Key two: normalize every step by thirty-two. It reads zero point one one eight nine.",
+     "钥匙二：每一步按 32 归一化，读数 0.1189。"
+    ],
+    [
+     "Both are model rules, not derivations; another matching rule sends key two to zero point one five three.",
+     "两者都是模型规则，不是推导；换一种匹配处方，钥匙二跳到 0.153。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 3.4,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "bedrock",
+   "name": "THE BEDROCK · 基石",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Beneath it all lie two exact tools, checked by the Lean kernel.",
+     "这一切之下，是两件由 Lean 内核检验的精确工具。"
+    ],
+    [
+     "Lagrange and Gram: the Cauchy-Schwarz deficit is half a sum of squares. Here both sides are fifty-four.",
+     "拉格朗日—格拉姆：柯西—施瓦茨亏量等于平方和的一半。这里两边都是 54。"
+    ],
+    [
+     "On the norm five LPS shell, the matrices match, and twenty minus lambda squared stays positive.",
+     "在模方 5 的 LPS 壳层上，矩阵精确匹配，20 − λ² 始终为正。"
+    ],
+    [
+     "Kernel-checked: the tools. Certified in the model: the walls. Conditional: every crossing so far.",
+     "内核检验的：工具。模型内证书的：墙。有条件的：迄今每一次交汇。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 2.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "WALLS",
+   "lead": 0.5,
+   "tail": 2.0,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Unification, chapter four.",
+     "《OMEGA 统一》· 第四章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

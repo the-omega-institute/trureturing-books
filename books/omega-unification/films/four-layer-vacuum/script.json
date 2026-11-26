@@ -1,0 +1,312 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Sakharov": "Sakharoff",
+  "mu squared": "mew squared"
+ },
+ "music": {
+  "bpm": 78,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "name": "INDUCED GRAVITY",
+   "lead": 1.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Sakharov's idea: maybe gravity and vacuum energy are not inputs, but echoes of quantum fluctuations.",
+     "萨哈罗夫的设想：引力与真空能也许不是输入，而是量子涨落的回声。"
+    ],
+    [
+     "Let every field fluctuate once on a curved background, and read off two numbers.",
+     "让每个场在弯曲背景上做一圈涨落，然后读出两个数。"
+    ],
+    [
+     "Newton's constant must come out right, and Lambda G must land near ten to the minus one twenty-two.",
+     "牛顿常数必须对上，而 ΛG 必须落在 10⁻¹²² 附近。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "gap",
+   "name": "VISIBLE GAP",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "First, the visible spectrum alone.",
+     "先看可见谱本身。"
+    ],
+    [
+     "Fermion layers open first, so every mass prefix keeps a negative deficit.",
+     "费米子层总是先开启，所以每个质量前缀都留着负的偏振亏量。"
+    ],
+    [
+     "Then Lambda G stays above zero point zero one one eight: over ten to the hundred twenty times too big.",
+     "于是 ΛG 始终大于 0.0118：比目标大出 10 的 120 次方倍以上。"
+    ],
+    [
+     "And gravity comes out far too weak.",
+     "引力也弱得离谱。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.4,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "singlets",
+   "name": "311 SINGLETS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Next, add hidden real singlet scalars.",
+     "接着加入隐扇区的最小耦合实单态标量。"
+    ],
+    [
+     "With three hundred ten or fewer, matching Newton's constant forces Lambda G above ten to the minus seven.",
+     "不超过 310 份时，只要对上牛顿常数，ΛG 就被迫大于 1.5×10⁻⁷。"
+    ],
+    [
+     "Three hundred eleven can hit both targets, but only with tuning in the hundred twenty-second digit.",
+     "311 份能同时命中两个目标，但必须精调到第 122 位。"
+    ],
+    [
+     "Raise the cutoff by about four parts in ten to the hundred twenty, and it turns negative.",
+     "再把截止上调约 10 的 120 次方分之四，真空项就翻成负号。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.4,
+     "kind": "chime"
+    },
+    {
+     "line": 3,
+     "at": 3.4,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "gram",
+   "name": "THREE ANCHORS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Are such constraints truly independent? The test is an identity the Lean kernel checks.",
+     "这些约束真的彼此独立吗？检验它的是一条由 Lean 内核检查的恒等式。"
+    ],
+    [
+     "For any three vectors in a real inner-product space, the Gram determinant expands like this.",
+     "实内积空间里任取三个向量，格拉姆行列式都这样展开。"
+    ],
+    [
+     "Three integer vectors: the formula and the matrix agree.",
+     "三个整数向量：公式与矩阵结果一致。"
+    ],
+    [
+     "Make the third the sum of the first two, and it drops to zero. Pure algebra, no gravity claimed.",
+     "让第三个等于前两个之和，行列式就落到零。纯代数，不宣称任何引力结论。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "stencil",
+   "name": "FOUR LAYERS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Instead of luck at one cutoff, can the divergences cancel at every cutoff?",
+     "与其在一个截止上碰运气，能不能让发散项在每个截止上都相消？"
+    ],
+    [
+     "Put weights minus one, three, minus three, one on squared masses zero, one, two and three mu squared.",
+     "把权重 −1、3、−3、1 放在平方质量 0、μ²、2μ²、3μ² 上。"
+    ],
+    [
+     "The sum, the first and the second moments all vanish. Only the third survives.",
+     "权重之和、一阶矩与二阶矩全都为零，只有三阶矩留下来。"
+    ],
+    [
+     "What remains is finite and strictly positive, whatever the cutoff.",
+     "剩下的真空能有限且严格为正，与截止无关。"
+    ],
+    [
+     "With four polarizations and a chosen light scale, one zero reaches ninety-nine percent of the target.",
+     "取 4 个偏振与选定的轻质量标度 v²/M，有一枚零点达到目标的 99%。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 3.2,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "higgs",
+   "name": "HIGGS CLIFF",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Then the Higgs rolls into the broken vacuum.",
+     "然后希格斯场滚进电弱破缺真空。"
+    ],
+    [
+     "Its tree potential shifts Lambda G down by about ten to the minus sixty-seven.",
+     "树势落差 m_h²v²/8 让 ΛG 下移 1.345×10⁻⁶⁷。"
+    ],
+    [
+     "That is fifty-five orders of magnitude larger than the four-layer term.",
+     "这比四层正真空项大出 55 个数量级。"
+    ],
+    [
+     "Cancelling it with four-layer copies drags the cutoff below four point one eight electron volts.",
+     "若靠复制四层结构去抵消，引力截止会被拖到 4.18 eV 以下。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "ledger",
+   "name": "QUESTION FOUR",
+   "lead": 0.5,
+   "tail": 0.8,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "The honest balance for question four.",
+     "这就是第四问的诚实总账。"
+    ],
+    [
+     "Green: the Gram identity. Cyan: floors, counts and cliffs, each with a certificate.",
+     "绿色：格拉姆恒等式。青色：下界、计数与悬崖，各有一份证书。"
+    ],
+    [
+     "Red: deriving Newton's constant and the sign and size of dark energy, without hand-placed fields or cutoffs.",
+     "红色：不靠手工放入的场与截止，导出牛顿常数以及暗能量的正负与大小。"
+    ],
+    [
+     "Reaching ten to the minus one twenty-two in a model is a witness, not a derivation.",
+     "在模型里够到 10⁻¹²²，是一份见证，不是一次推导。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.6,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 2.8,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Unification, chapter eleven.",
+     "《OMEGA 统一》· 第十一章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

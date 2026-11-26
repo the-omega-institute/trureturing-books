@@ -1,0 +1,29 @@
+{
+  "title": "Baryon Triality",
+  "title_zh": "重子三重对称",
+  "summary": "Will the proton decay? Three quark doublets and a lepton doublet meet in the dimension-six operator QQQL, whose hypercharge 3 · 1/6 − 1/2 is zero. Expanding it for one generation leaves exactly 36 nonzero Grassmann monomials, one with coefficient 4, so gauge orthogonality and the low-energy spectrum leave its coefficient c6 free (computed on screen; the inverse argument is written). Lean checks, with zero axioms, that a closed simplicial 2-cochain is exact through the cone, and that the six norm-5 Hurwitz generators split mod 5 into nonzero rank-one matrices; neither fixes c6. Exact baryon triality does: on neutral colour singlets the charge is −hB mod 3, Yukawa and Weinberg terms keep phase 1, QQQL and ΔB = 2 are forbidden, and the first allowed operator jumps from dimension 6 to 15 (18 with B − L; replay certificate). Gauging X = 3B − 9Lτ cancels all six anomaly traces, recomputed on screen, and the charge-9 condensate leaves Z9, whose cube is the colour centre. A cubic anomaly phase exp(−2πi m k²/3) needs Z9, which lifts the 19-point Behrend shell to at least 25 states (the chapter's replay result; the dots are schematic). On joint witness zero #2,306,888,100,085 the same vacuum allows orthogonal currents that keep triality and parallel currents with Wilson factor at least 0.0314398418770995 (replay certificate); deciding c6 from the partition function is open.",
+  "summary_zh": "质子会不会衰变？三个夸克双重态与一个轻子双重态在六维算符 QQQL 处相遇，超荷 3 · 1/6 − 1/2 恰为零。单代展开恰好留下 36 个非零格拉斯曼单项，其中一项系数为 4，所以规范正交与低能谱管不住系数 c6（屏幕上的计算；反推论证为书面论证）。Lean 内核在零公理下检验：单纯形闭二上链经锥构造一定正合，六个模方为 5 的赫维茨生成元在模 5 下分裂为非零秩一矩阵；两者都定不了 c6。精确重子三重对称才定得了：在超荷中性的色单态上荷为 −hB 模 3，汤川项与温伯格项相位为一，QQQL 与 ΔB = 2 被禁止，最低允许算符从六维跳到十五维（保 B − L 时十八维，复算证书）。规范化 X = 3B − 9Lτ 的六项反常迹全部相消（屏幕上重算），荷 9 凝聚留下 Z9，其立方正是色中心。立方反常相位 exp(−2πi m k²/3) 需要 Z9，十九点贝伦德球壳因此至少扩为二十五态（本章复算结果，点阵为示意）。在联合见证零点 #2,306,888,100,085 上，同一座真空既容许保住三重对称的正交电流，也容许威尔逊因子至少 0.0314398418770995 的平行电流（复算证书）；由配分函数裁决 c6 仍是开放问题。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "2:54",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a QQQL vertex, a grid of the 36 monomials, a cone over a triangle, three-phase dials for each operator, the six-trace anomaly ledger, a nine-step Z9 wheel, a table of anomaly-phase dials, the 19 → 25 lifted shell (schematic), the two-branch fork with the open c6 question",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.d2_eq_zero_iff",
+    "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.mod_five_rank_one"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_baryon-triality_720p_narrated.mp4",
+    "cover": "omega-unification_baryon-triality_cover.jpg"
+  }
+}

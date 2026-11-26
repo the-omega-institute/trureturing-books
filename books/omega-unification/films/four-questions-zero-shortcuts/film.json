@@ -1,0 +1,45 @@
+{
+  "title": "Four Questions, Zero Shortcuts",
+  "title_zh": "四问，零圆满",
+  "summary": "The long film of Omega Unification, about 22 minutes in seven acts: the prelude, the five volumes and the coda, one chapter each in the player's chapter menu. It puts the four questions of grand unification (gauge crossing and the Higgs, three chiral generations, flavour and the proton, spin-two gravity and the cosmological constant) to one small discrete laboratory and keeps two scores on screen: 4/4 questions have model-internal witnesses, 0/4 are derived from one master connection with no after-the-fact fitting. Volume I builds the laboratory: the 19 integer points of x² + y² + z² = 867, 135 edges closing 529 triangles, 22 rationally independent frequencies, a Laplacian of real rank 18 that needs 21 rational coordinates, two quaternion clocks whose commutator defect is a Gram determinant, and the Riemann zeros as a parameter-free sampler under RH, an external Lean proof shown in violet, not frozen here. Volume II measures the one-loop coupling gap at 3.664 and shows that no shared monotone mass rule on the shell closes it; conditional two-loop crossings rest on inputs chosen after the fit, and the Higgs needs a neutral portal of exact minimal rank five. Volume III finds three light modes per charge at the shell's own site-variance cut, meets the rough-background and Yukawa walls, folds the mixing matrix with rational Cayley rotations, and lets baryon triality protect the proton while the same vacuum still allows both branches. Volume IV puts curvature into deficit angles of four-simplices, finds a long-wave spin-two propagator, and shows the four-layer (−1, 3, −3, 1) vacuum cancellation reach the target in a chosen model until electroweak breaking adds a term 55 orders larger. Volume V forces the four sectors onto one arithmetic clock, climbs the winding ladder to 105, tests the joint witness zero #2,306,888,100,085, and reads the balance sheet. The coda shows why six sharp walls and four open gates are worth a book. Each act ends on a question that the next one answers. Green is given only to what the cited frozen Lean declarations state; certificates and on-screen computations are cyan, written arguments, external facts and model readings violet, open problems red. English narration with Chinese and English subtitles.",
+  "summary_zh": "《OMEGA 统一》的长片，约 22 分钟，七幕依次对应前言、五卷与终章，每幕一个章节，可从播放器的章节菜单跳转。全片把大统一的四个问题（规范交汇与希格斯、三代手征费米子、味谱与质子、自旋二引力与宇宙学常数）交给同一个小小的离散实验台，屏幕上始终记着两个分数：4/4 个问题有模型内见证，0/4 个问题由一条主联络、不做事后拟合地推出。第一卷搭起实验台：x² + y² + z² = 867 的十九个整点，135 条边围出 529 个三角面，22 个有理独立频率，实秩 18 却需要 21 个有理坐标的拉普拉斯矩阵，交换子亏量即格拉姆行列式的两只四元数时钟，以及在 RH 之下充当无参数采样器的黎曼零点（RH 是外部 Lean 证明，紫色标注，未在本库冻结）。第二卷量出 3.664 的单圈耦合缺口，并说明球壳上任何共用单调质量规则都填不平它；条件性的两圈交汇依赖看过拟合后才选定的输入，希格斯需要精确最小秩为五的中性门户。第三卷在球壳自带的站点方差分界下找到每种荷三个轻模，撞上粗糙背景与汤川之墙，用有理凯莱旋转折出混合矩阵，由重子三重对称保护质子，而同一真空仍容许两支。第四卷把曲率放进四维单纯形的角亏，得到长波自旋二传播子，四层 (−1, 3, −3, 1) 真空配平在选定模型里逼近目标，直到电弱破缺带来大出 55 个数量级的一项。第五卷把四个部门压到同一只算术钟上，沿绕数阶梯爬到 105，压力测试联合见证零点 #2,306,888,100,085，并读出总账。终章说明六道清晰的墙与四道仍开放的门禁为什么值得一本书。每幕结尾交出一个问题，由下一幕回答。绿色只给所引 Lean 冻结声明实际陈述的结论；证书与屏幕计算为青色，书面论证、外部事实与模型诠释为紫色，开放问题为红色。英文旁白，中英双语字幕。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "21:39",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · seven acts on one road, a title card for each part and a question handed from act to act; integer points on a shell, quaternion clocks, coupling lines, light modes, deficit angles, a winding ladder and a balance sheet",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_four-questions-zero-shortcuts_720p_narrated.mp4",
+    "cover": "omega-unification_four-questions-zero-shortcuts_cover.jpg"
+  },
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg",
+    "D5/S3/Quantum/Analysis/CompactGroups/SchurOrthogonality.integral_dual_mul_dual_inv_self",
+    "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion",
+    "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity",
+    "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least",
+    "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_orthogonal",
+    "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq",
+    "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.d1_d0",
+    "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.d2_d1",
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.sqrt_two_spinor",
+    "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula",
+    "D5/S3/Fourier/Concentration/CyclicFejerBand.band_le_positive_fourier",
+    "D5/S3/Fourier/Concentration/FiniteCollisionVariance.tailCollisionMass_lower_variance",
+    "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative",
+    "D5/S3/Quantum/Matrix/Schur/TwoHiddenScalarResponse.response_iff",
+    "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_assoc",
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_min",
+    "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"
+  ]
+}

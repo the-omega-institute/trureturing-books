@@ -1,0 +1,282 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Regge": "Redge-ay",
+  "Pachner": "Pakh-ner",
+  "Fierz": "Feerts",
+  "Pauli": "Powlee",
+  "Pell": "Pel",
+  "arccos": "arc cosine",
+  "Born": "Born"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "hinge",
+   "name": "RIGID ORIGAMI",
+   "lead": 1.9,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Glue flat four-simplices together like rigid origami. Where is the curvature?",
+     "把平直的四维单纯形像刚性折纸一样粘起来。曲率藏在哪里？"
+    ],
+    [
+     "Not inside any piece, but on the triangles where pieces meet: the hinges.",
+     "不在任何一块里面，而在各块相接的三角面上：铰链。"
+    ],
+    [
+     "Across a hinge, wedges of arc cosine one quarter fan out, about seventy-five and a half degrees each.",
+     "横切一张铰链，张角 arccos(1/4) 的楔子围着它展开，每个约 75.5°。"
+    ],
+    [
+     "Four wedges leave a gap of fifty-eight degrees; five overshoot by seventeen point six. That mismatch is the deficit angle.",
+     "四个楔子留下约 58° 的缺口，五个多出约 17.6°。这份盈亏就是角亏。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.0,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "pachner",
+   "name": "READING THE DIALS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "The Regge action weighs volume and deficit; Newton's constant and the cosmological constant are the dials.",
+     "雷吉作用按体积与角亏赋权；牛顿常数与宇宙学常数就是两只旋钮。"
+    ],
+    [
+     "Start from the boundary of a five-simplex: six pieces, twenty hinges.",
+     "从五单纯形的边界出发：6 个四单形，20 张铰链。"
+    ],
+    [
+     "One Pachner move gives ten and thirty; a second gives twelve and thirty-four.",
+     "一次帕赫纳移动得到 (10, 30)；再一次得到 (12, 34)。"
+    ],
+    [
+     "Subtract twice the second step from the first: volume and angle cancel, and Newton's constant can be read off.",
+     "第一步减去两倍第二步：体积与二面角同时消去，牛顿常数直接读出。"
+    ],
+    [
+     "Yet matter hears more: two spheres with identical hinge counts differ by two hundred fifty-two six-step walks.",
+     "物质听得更细：两张铰链计数完全相同的四维球面，相差 252 条六步闭走。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "spin",
+   "name": "SPIN TWO",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now let edge lengths wiggle around a flat lattice.",
+     "现在让边长在平直格点附近微微抖动。"
+    ],
+    [
+     "At long wavelengths, the Regge action becomes the Fierz-Pauli kernel of a massless spin-two field.",
+     "长波极限下，雷吉作用化成菲尔茨—泡利核：无质量自旋二场的核。"
+    ],
+    [
+     "On a light ray, the pole numerator is a sum of two squares: never negative, rank two.",
+     "沿光线方向，极点分子是两个平方之和：从不为负，秩恰为 2。"
+    ],
+    [
+     "Turn the source by theta, and that pair turns by two theta: helicities plus and minus two.",
+     "把源转过 θ，这对分量就转过 2θ：螺旋度 +2 与 −2。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.6,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "positive",
+   "name": "POSITIVE, YET UNSTABLE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Ten time slicings each give a positive transfer matrix, A times A dagger.",
+     "十种时间切片各给出一个正的转移矩阵：A A†。"
+    ],
+    [
+     "But on a periodic lattice of four sites a side, all two hundred fifty-five nonzero momenta show one positive direction, ten negative.",
+     "可是在每边 4 格的周期格上，全部 255 个非零动量都显出一正、十负。"
+    ],
+    [
+     "That lone opposite sign is the conformal mode, Euclidean gravity's old instability, reborn.",
+     "那唯一的反号方向就是共形模：欧氏引力的老毛病，在格点上重现。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "wall",
+   "name": "THE ROOT-THREE WALL",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now make each hinge weight a whole number.",
+     "现在把每张铰链的权重换成整数。"
+    ],
+    [
+     "Flat stationarity then demands four-valent loads equal root three times six-valent loads.",
+     "平直驻点于是要求：四价面负载之和等于六价面负载之和的 √3 倍。"
+    ],
+    [
+     "Nonzero rational counts never can. Real Born amplitudes need a number field of degree four.",
+     "非零有理计数永远做不到。实玻恩振幅至少需要四次数域。"
+    ],
+    [
+     "Bend the cell slightly, and zero eleven thousand three hundred sixty-six yields an integer ground state on five thousand four hundred thirty-two slots.",
+     "让胞微微弯曲，第 11366 枚零点在 5432 个槽位上给出整数基态。"
+    ],
+    [
+     "But select it strongly enough, and the massless graviton pole disappears.",
+     "可一旦选得足够强，无质量引力子极点就消失了。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.4,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "anchors",
+   "name": "TWO KERNEL FACTS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Two facts beneath this are checked by the Lean kernel.",
+     "这一切底下有两条事实，由 Lean 内核检验。"
+    ],
+    [
+     "A coboundary of a coboundary is zero: around a triangle, the differences cancel.",
+     "上边缘的上边缘为零：绕三角形一圈，差值两两相消。"
+    ],
+    [
+     "And with delta squared equal to two, the right-angle spinor has unit norm and closes in eight beats.",
+     "在 δ² = 2 的二次扩张里，直角旋量模方为一，八拍闭合。"
+    ],
+    [
+     "Root two needs degree two; a flat hinge needs degree four.",
+     "√2 只要二次；平直铰链却要四次。"
+    ],
+    [
+     "Deriving the Regge action from a single minimal arc is still open.",
+     "从单一极小圆弧导出雷吉作用，仍是未解问题。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.4,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Unification, chapter ten.",
+     "《OMEGA 统一》· 第十章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}
