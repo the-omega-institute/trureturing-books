@@ -169,7 +169,7 @@ $$
 | 中性无迹领先门户 $P$ | 自旋配平全尺度等迹交点 | 最小精确秩为 **$5$**（`#78/#288` 升至 $6$） | $d \le 4$ 接触范数 $> 31.975 > 8\pi$；$d = 5$ 舒尔裕度 $> 3.118$ |
 | 热核门户 $P_t = e^{-tK/d}$ | 高惯性 $172$ 层全塔 | $t \le 0.49$ 排除；$8 \le t \le 16$ 可行 | $t = \theta_{804}/\theta_{12} = 8.53511$ 预言 $A_1/A_7 \in (2.750, 3.728)$ |
 
-电弱破缺后，中性动能矩阵还有一个独立检验。用电荷 $Q$ 作探针能测到 $A_{QQ}$ 和 $A_{QT_3}$，两个顶点都耦合到弱同位旋 $T_3$ 才能测到 $A_{T_3T_3}$。在十九站壳的一圈算例中，固定五个截止位置、取零裸希格斯二次和四次项，归一化、引力、希格斯势及前两个动能条件共七式，区间计算在 $M\simeq1.1764\times10^{14}\,\mathrm{GeV}$ 附近隔离出一个共同解。在背景费曼规范下对两项作相同的 $M_Z$ 减法，该解却给出 $A_{T_3T_3}-A_{QT_3}\simeq-0.07426$，而统一要求两者相等。每个内部质量简并的重多重态在此差值中的贡献都因 $\operatorname{tr}(T_3Y)=0$ 而消去。[七式解的区间验证](https://github.com/the-omega-institute/trureturing-experiments/blob/07f935cd79798a0e66adadd7e7597cdbd676ad82/experiments/ch39-omega-research/replay/ch39-seven-identification.py) · [弱响应计算](https://github.com/the-omega-institute/trureturing-experiments/blob/07f935cd79798a0e66adadd7e7597cdbd676ad82/experiments/ch39-omega-research/replay/ch39-neutral-bosonic.py)
+电弱破缺后，用电荷 $Q$ 作探针可测到 $A_{QQ}$ 和 $A_{QT_3}$，而 $A_{T_3T_3}$ 需要两个弱同位旋顶点。在十九站壳的一圈算例中，裸希格斯二次项与四次项均取零。固定五个截止位置，归一化、引力、希格斯势及前两个中性动能条件共七式可同时满足，但在交汇端点仍有 $A_{T_3T_3}-A_{QT_3}\simeq-0.07426$。允许自由选择八个正截止位置并使用有正有负的权重后，一组公共权重在 $M\simeq1.1764\times10^{14}\,\mathrm{GeV}$ 满足全部八式，端点的中性动能矩阵正定。这组解最小的截止能量约为 $1.22\,\mathrm{keV}$。如何由壳本身确定这些位置与权重仍是开放问题。[五点残差与八点端点匹配](https://github.com/the-omega-institute/trureturing-experiments/blob/7f02423e1c24e735988d534c6b813f672c7304fe/experiments/ch39-omega-research/replay/ch39-full-neutral-free-cutoff.py)
 
 ## 6.4 低能对撞机数据的交叉合围：等深真空、胶子融合、$Z$ 宽度、CLEO 与 OPAL {#sec-ou-ch06-s04}
 
