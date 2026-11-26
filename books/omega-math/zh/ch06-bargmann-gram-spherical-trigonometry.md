@@ -4,7 +4,7 @@
 
 经过[第四章](ch04-heaps-and-lie-triple-curvature.md)的无原点流群与利雅三元曲率，以及[第五章](ch05-rational-cayley-rotations.md)的三维凯莱有理旋转与切比雪夫谐波，我们在第二卷的最后一章正面攻克古典几何中最顽固的超越壁垒：**球面三角学**。在传统教材中，球面三角形被写满 $\cos c = \cos a\cos b + \sin a\sin b\cos C$、$\arccos$ 反三角函数与吉拉尔角盈 $\Omega = A + B + C - \pi$；只要三个顶点取在普通的非平方模方整射线（如 `[1:0:0:0]`、`[1:1:0:0]`、`[1:0:1:0]`）上，连一条边的夹角余弦都立刻溅出无理根号 $\frac{1}{\sqrt{2}}$。
 
-本章将证明，这些无理数与超越函数全都是强行拆解三点闭环留下的假象。一旦引入**尺度无关、符号无关的纯有理巴格曼三点环路不变量** $B(\mathbf{a}, \mathbf{b}, \mathbf{c}) \in \mathbb{Q}$ 与归一化的 $3 \times 3$ **巴格曼—格拉姆闭合行列式** $\det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) \ge 0$，整部球面三角学便彻底化为纯有理多项式代数：它在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中对一切非零整四元数普遍非负，在流群测地倍增三元组上精确归零并锁死整系数圆弧倍增律，直接导出普遍成立的有理球面正弦律与有理球面勾股定理，并在基准正交半步三元组 $(o, p_{\mathrm{Half}}, q_{\mathrm{Half}})$ 上给出精确零公理角盈见证 $\det\mathbf{G}_3 \equiv \frac{1}{4}$，全篇不见半个 $\sin$、$\cos$、$\arccos$ 或 $\pi$。
+本章将证明，这些无理数与超越函数全都是强行拆解三点闭环留下的假象。一旦引入**尺度无关、符号无关的纯有理巴格曼三点环路不变量** $B(\mathbf{a}, \mathbf{b}, \mathbf{c}) \in \mathbb{Q}$ 与归一化的 $3 \times 3$ **巴格曼—格拉姆闭合行列式** $\det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) \ge 0$，整部球面三角学便彻底化为纯有理多项式代数：它在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中对一切非零整四元数普遍非负，在流群测地倍增三元组上精确归零并锁死整系数圆弧倍增律，直接导出普遍成立的有理球面正弦律与有理球面勾股定理，并在基准正交半步三元组 $(o, p_{\mathrm{Half}}, q_{\mathrm{Half}})$ 上给出精确零公理角盈见证 $\det\mathbf{G}_3 \equiv \frac{1}{4}$，全篇不见半个 $\sin$、$\cos$、$\arccos$ 或 $\pi$。
 
 ## 6.1 告别正弦与余弦：无根号巴格曼三点环路不变量
 
@@ -73,7 +73,7 @@ $$
 由于实数平方非负，右端恒 $\ge 0$，且等于 $0$ 当且仅当每一项 $u_i v_j - u_j v_i = 0$。完整证明由 Lean 内核检查。
 :::
 
-在一般维数 $d \ge 2$ 的有理空间 $\mathbb{Q}^d$ 中，只需将 $\mathbf{b}, \mathbf{c}$ 正交化到 $\mathbf{a}$ 的补空间并对所得向量施加 [@thm-ch06-lagrange-gram-identity]，即可纯多项式地推出 $\det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) \ge 0$。在三元球面整数载体 `Quad4`（$\mathbb{Z}^4 \setminus \{\mathbf{0}\}$）上，这一球面有理三角基本闭合不等式彻底摆脱了实数连续统，直接落户于零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）的精确有号分数序 `Omega.IntRatio.Le` 之中：
+在一般维数 $d \ge 2$ 的有理空间 $\mathbb{Q}^d$ 中，只需将 $\mathbf{b}, \mathbf{c}$ 正交化到 $\mathbf{a}$ 的补空间并对所得向量施加 [@thm-ch06-lagrange-gram-identity]，即可纯多项式地推出 $\det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) \ge 0$。在三元球面整数载体 `Quad4`（$\mathbb{Z}^4 \setminus \{\mathbf{0}\}$）上，这一球面有理三角基本闭合不等式彻底摆脱了实数连续统，直接落户于使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）的精确有号分数序 `Omega.IntRatio.Le` 之中：
 
 ::: {.theorem #thm-ch06-detgram3-nonneg title="四元巴格曼—格拉姆闭合行列式的零公理普遍非负性" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg"}
 设 $\mathbf{a}, \mathbf{b}, \mathbf{c} \in \mathbb{Z}^4$ 为 `Quad4` 中任意三枚非零整四元数（$\mathbf{a} \neq \mathbf{0}$、$\mathbf{b} \neq \mathbf{0}$、$\mathbf{c} \neq \mathbf{0}$）。在零公理有号分数类型 `Omega.IntRatio` 及其序关系 `IntRatio.Le` 下，归一化 $3 \times 3$ 巴格曼—格拉姆闭合行列式普遍非负：
@@ -139,7 +139,7 @@ $$
 
 保留 $B$ 的一次方程记录了有号内积的乘积关系。平方只保留乘积的模方。$B$ 对任意顶点置换和共同正交变换都不变，因此不记录大圆的行进方向。
 
-现在将这套大圆共线律施于[第四章](ch04-heaps-and-lie-triple-curvature.md)的等步流群自平行延拓：对任意两枚非零整四元数 $\mathbf{a}, \mathbf{b} \in \mathbb{Z}^4 \setminus \{\mathbf{0}\}$，令 $\mathbf{c} := [\mathbf{b}, \mathbf{a}, \mathbf{b}] = \mathbf{b}\bar{\mathbf{a}}\mathbf{b}$（`triad b a b`）。在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，以下两条冻结定理依次确立了倍增三元组的大圆共线归零律与整系数圆弧倍增保真度律。
+现在将这套大圆共线律施于[第四章](ch04-heaps-and-lie-triple-curvature.md)的等步流群自平行延拓：对任意两枚非零整四元数 $\mathbf{a}, \mathbf{b} \in \mathbb{Z}^4 \setminus \{\mathbf{0}\}$，令 $\mathbf{c} := [\mathbf{b}, \mathbf{a}, \mathbf{b}] = \mathbf{b}\bar{\mathbf{a}}\mathbf{b}$（`triad b a b`）。在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中，以下两条冻结定理依次确立了倍增三元组的大圆共线归零律与整系数圆弧倍增保真度律。
 
 ::: {.theorem #thm-ch06-geodesic-doubling-detgram3-zero title="流群测地倍增三元组的巴格曼—格拉姆行列式恒为零" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.geodesic_doubling_detGram3_zero"}
 设 $\mathbf{a}, \mathbf{b} \in \mathbb{Z}^4$ 为 `Quad4` 中任意两枚非零整四元数（$\mathbf{a} \neq \mathbf{0}$、$\mathbf{b} \neq \mathbf{0}$），记流群测地倍增延拓为 $[\mathbf{b}, \mathbf{a}, \mathbf{b}] := \mathbf{b}\bar{\mathbf{a}}\mathbf{b}$（`triad b a b`）。则在零公理等价关系 `Omega.IntRatio.Equivalent` 下，三元组 $(\mathbf{a}, \mathbf{b}, [\mathbf{b}, \mathbf{a}, \mathbf{b}])$ 的巴格曼—格拉姆闭合行列式恒为零：
@@ -211,7 +211,7 @@ $$
 s(\mathbf{a}, \mathbf{b})\,s(\mathbf{c}, \mathbf{a}) - \det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) = \frac{\bigl(\lVert\mathbf{a}\rVert^2\langle\mathbf{b}, \mathbf{c}\rangle - \langle\mathbf{a}, \mathbf{b}\rangle\langle\mathbf{a}, \mathbf{c}\rangle\bigr)^2}{\lVert\mathbf{a}\rVert^4\,\lVert\mathbf{b}\rVert^2\,\lVert\mathbf{c}\rVert^2} \ge 0.
 $$
 
-由此立见有理球面交叉律 $\det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) = s(\mathbf{a}, \mathbf{b})\,s(\mathbf{c}, \mathbf{a})\,S_a$。在三元球面整四元数载体 `Quad4` 上，古典球面正弦定理与球面勾股定理的纯有理版本均已在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中直接证毕。先看轮换对称的有理球面正弦律：
+由此立见有理球面交叉律 $\det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) = s(\mathbf{a}, \mathbf{b})\,s(\mathbf{c}, \mathbf{a})\,S_a$。在三元球面整四元数载体 `Quad4` 上，古典球面正弦定理与球面勾股定理的纯有理版本均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中直接证毕。先看轮换对称的有理球面正弦律：
 
 ::: {.theorem #thm-ch06-rational-spherical-sine-law title="有理球面正弦律" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.rational_spherical_sine_law"}
 设 $\mathbf{a}, \mathbf{b}, \mathbf{c} \in \mathbb{Z}^4$ 为 `Quad4` 中任意三枚非零整四元数（$\mathbf{a} \neq \mathbf{0}$、$\mathbf{b} \neq \mathbf{0}$、$\mathbf{c} \neq \mathbf{0}$），且三条边展开度在 `Omega.IntRatio` 中均不等价于零：$s(\mathbf{a}, \mathbf{b}) \not\equiv 0$、$s(\mathbf{b}, \mathbf{c}) \not\equiv 0$、$s(\mathbf{c}, \mathbf{a}) \not\equiv 0$。则在零公理等价关系 `Omega.IntRatio.Equivalent` 下，三处有理顶点展开度与各自对边展开度之比在轮换下完全相等：

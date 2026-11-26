@@ -8,7 +8,7 @@ The previous two chapters carried purely rational harmonic analysis to unexpecte
 2. **Quantum nonlocality extrema**: The Tsirelson quantum ceiling of the Clauser–Horne–Shimony–Holt (CHSH) Bell inequality equals $2\sqrt{2}$.
 3. **Pentagonal symmetry and golden Chebyshev closure**: Pentagonal and icosahedral spinor cycles hinge on $\cos(\pi/5) = \varphi/2$, a root of the irreducible quadratic $4x^2 - 2x - 1 = 0$.
 
-Classical analysis reacts to any of these three thresholds by dumping the entire calculation into the real continuum $\mathbb{R}$, built from Cauchy equivalence classes and the axiom of choice. This chapter executes the surgical alternative of `OmegaMath`: **never swallow an uncountable continuum merely to adjoin a single square root**. Constructing degree-2 algebraic extensions `QuadPoly(b, c)` (realized over integral parameters as `RatQuadPoly b c`) directly as ordered pairs of finite rationals—and pairing them with rational Lagrange–Gram identities and block Schur complement positivity—captures both algebraic extrema and operator positivity with zero limits and zero numerical eigenvalue approximations. The full zero-axiom core—norm multiplicativity, exact inversion, `QSqrt2` and `QPhi` extrema, pentagonal Chebyshev closure, and rational Lagrange–Gram and Schur completion—is proved inside `OmegaInit` and `OmegaMath` (`axioms: []`).
+Classical analysis reacts to any of these three thresholds by dumping the entire calculation into the real continuum $\mathbb{R}$, built from Cauchy equivalence classes and the axiom of choice. This chapter executes the surgical alternative of `OmegaMath`: **never swallow an uncountable continuum merely to adjoin a single square root**. Constructing degree-2 algebraic extensions `QuadPoly(b, c)` (realized over integral parameters as `RatQuadPoly b c`) directly as ordered pairs of finite rationals—and pairing them with rational Lagrange–Gram identities and block Schur complement positivity—captures both algebraic extrema and operator positivity with zero limits and zero numerical eigenvalue approximations. The full zero-axiom core—norm multiplicativity, exact inversion, `QSqrt2` and `QPhi` extrema, pentagonal Chebyshev closure, and rational Lagrange–Gram and Schur completion—is proved in D5 on the strict backend (`strict_omega.axioms: []`).
 
 ---
 
@@ -94,10 +94,10 @@ Setting $b = 0$ and $c = 2$ (relation $\delta^2 = 2$, discriminant $\Delta = 8$,
 
    In the operator shadow, any CHSH operator $C = A_0\otimes(B_0 + B_1) + A_1\otimes(B_0 - B_1)$ built from self-adjoint unitaries obeys Landau's identity $C^2 = 4I - [A_0, A_1]\otimes[B_0, B_1]$, forcing $\lVert C\rVert^2 \le 8$; the `QSqrt2` construction saturates this bound exactly.
 
-Norm multiplicativity and exact inversion for general integral-parameter quadratic algebras `RatQuadPoly b c`, together with the `QSqrt2` unit $90^\circ$ spinor closure and squared CHSH bound, are proved with zero axioms inside `OmegaInit` and `OmegaMath` (`axioms: []`):
+Norm multiplicativity and exact inversion for general integral-parameter quadratic algebras `RatQuadPoly b c`, together with the `QSqrt2` unit $90^\circ$ spinor closure and squared CHSH bound, are proved in D5 on the strict backend (`strict_omega.axioms: []`):
 
 ::: {.theorem #thm-ch12-zero-axiom-quadpoly-qsqrt2 title="Zero-Axiom Quadratic Norm Multiplicativity, Exact Inversion, and QSqrt2 Spinor and Bell Extrema" lean="D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.quadratic_norm_mul D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.quadratic_mul_inv D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.sqrt_two_spinor D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.sqrt_two_bell"}
-Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), the following four theorems hold:
+The cited D5 declarations record `strict_omega.axioms: []`. The following four theorems hold:
 
 1. **Universal quadratic norm multiplicativity** (`quadratic_norm_mul`): for all integers `b c : Omega.Int` and all elements `z w : RatQuadPoly b c`, under `Omega.FiniteRatio.Equivalent`,
 
@@ -151,10 +151,10 @@ Setting $b = 1$ and $c = 1$ (relation $\varphi^2 = \varphi + 1$, discriminant $\
 
    In `QPhi`, testing $x_1 := \frac{\varphi}{2}$ gives $4(\frac{\varphi}{2})^2 - 2(\frac{\varphi}{2}) - 1 = \varphi^2 - \varphi - 1 = 0$, immediately forcing $T_5(\varphi/2) = -1$, and hence $T_{10}(\varphi/2) = 2 T_5(\varphi/2)^2 - 1 = 1$. Likewise, testing $x_2 := \frac{\varphi - 1}{2}$ gives $4(\frac{\varphi - 1}{2})^2 + 2(\frac{\varphi - 1}{2}) - 1 = (\varphi^2 - 2\varphi + 1) + (\varphi - 1) - 1 = \varphi^2 - \varphi - 1 = 0$, proving $T_5\bigl(\frac{\varphi - 1}{2}\bigr) = 1$ with zero trigonometry.
 
-All three golden laws are proved with zero axioms inside `OmegaInit` and `OmegaMath` (`axioms: []`) across `OmegaQuadraticAndSchur` and `OmegaChebyshevHecke`:
+All three golden laws are proved in D5 on the strict backend (`strict_omega.axioms: []`) across `OmegaQuadraticAndSchur` and `OmegaChebyshevHecke`:
 
 ::: {.theorem #thm-ch12-zero-axiom-qphi-fibonacci-pentagon title="Zero-Axiom Golden Field QPhi Fibonacci Powers, Norm Law, and Pentagonal Chebyshev Closure" lean="D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.phi_fibonacci D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.phi_power_norm D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.pentagonal_chebyshev"}
-Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), in the golden quadratic extension `QPhi` ($b = 1, c = 1$, relation $\varphi^2 = \varphi + 1$), the following three theorems hold:
+The cited D5 declarations record `strict_omega.axioms: []`. In the golden quadratic extension `QPhi` ($b = 1, c = 1$, relation $\varphi^2 = \varphi + 1$), the following three theorems hold:
 
 1. **Fibonacci power law** (`phi_fibonacci`): for every natural number `n : Omega.Nat`, under `QuadPoly.Equivalent`,
 
@@ -207,10 +207,10 @@ $$
 
 This single line accomplishes two decisive tasks at once. First, it displays the quadratic form as a weighted sum of two squares, reducing **positive semidefiniteness to two rational inequalities $c > 0$ and $S := a - b^2/c \ge 0$** without ever solving a characteristic polynomial. Second, because $c > 0$ and the squared term is nonnegative, minimizing over the internal variable $y$ for any fixed boundary value $x$ attains its unique global minimum at $y^* = -\frac{b}{c}x$, where the value equals the Schur complement form $S x^2 = (a - b^2/c)x^2$.
 
-This entire rational positivity and minimization engine—spanning the Lagrange–Gram identity and Cauchy–Schwarz inequality for arbitrary finite rational coordinate sequences, nonzero-pivot scalar Schur completion, and positive-pivot global minimization—is proved directly over `Omega.FiniteRatio` with zero axioms inside `OmegaInit` and `OmegaMath` (`axioms: []`):
+This entire rational positivity and minimization engine—spanning the Lagrange–Gram identity and Cauchy–Schwarz inequality for arbitrary finite rational coordinate sequences, nonzero-pivot scalar Schur completion, and positive-pivot global minimization—is proved directly over `Omega.FiniteRatio` in D5 on the strict backend (`strict_omega.axioms: []`):
 
 ::: {.theorem #thm-ch12-zero-axiom-lagrange-schur title="Zero-Axiom Rational Lagrange–Gram Identity, Cauchy–Schwarz Inequality, and Scalar Schur Minimum" lean="D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_lagrange_gram D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_cauchy_schwarz D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_complete D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_min"}
-Inside the zero-axiom libraries `OmegaInit` and `OmegaMath` (`axioms: []`), the following four rational positivity and minimization theorems hold:
+The cited D5 declarations record `strict_omega.axioms: []`. The following four rational positivity and minimization theorems hold:
 
 1. **Rational Lagrange–Gram identity** (`rational_lagrange_gram`): for any finite rational coordinate-pair sequence `xs : Sequence (CoordinatePair FiniteRatio)`, under `Omega.FiniteRatio.Equivalent`,
 
@@ -339,7 +339,7 @@ For every finitely supported coefficient tuple $c$, bilinearity gives $\bigl\lVe
 :::
 
 ::: {.remark #rem-ch12-rational-sos-vs-real-shadow title="Division of Labor Between Zero-Axiom Rational Positivity and the Hilbert Shadow"}
-Observe the exact architectural division across all seven frozen theorem groups in this chapter. Inside the zero-axiom core (`OmegaInit` and `OmegaMath`, `axioms: []`), [@thm-ch12-zero-axiom-quadpoly-qsqrt2], [@thm-ch12-zero-axiom-qphi-fibonacci-pentagon], and [@thm-ch12-zero-axiom-lagrange-schur] establish quadratic norm multiplicativity, exact inversion, the `QSqrt2` and `QPhi` spinor/Bell/Fibonacci/pentagonal Chebyshev identities, the rational Lagrange–Gram identity, Cauchy–Schwarz, and scalar Schur minimization directly in finite pair and `Omega.FiniteRatio` arithmetic with no real completeness and no eigenvalues. On the classical real and complex shadow layer, [@thm-ch12-lagrange-gram] and [@thm-ch12-schur-minimum] provide the parallel real-sum and arbitrary finite-dimensional complex block-matrix versions. If a rational certificate establishes positivity of a bounded operator $Q$ on a complex Hilbert space, [@thm-ch12-gram-realizability] yields $Q=O^\dagger O$. In a real inner product space, [@thm-ch12-gram-isometry-extension] gives a unique global linear isometry extending a specified permutation of a spanning family that preserves every pairwise Gram inner product.
+Observe the exact architectural division across all seven frozen theorem groups in this chapter. Among the frozen D5 results using `OmegaInit` and `OmegaMath` (`strict_omega.axioms: []`), [@thm-ch12-zero-axiom-quadpoly-qsqrt2], [@thm-ch12-zero-axiom-qphi-fibonacci-pentagon], and [@thm-ch12-zero-axiom-lagrange-schur] establish quadratic norm multiplicativity, exact inversion, the `QSqrt2` and `QPhi` spinor/Bell/Fibonacci/pentagonal Chebyshev identities, the rational Lagrange–Gram identity, Cauchy–Schwarz, and scalar Schur minimization directly in finite pair and `Omega.FiniteRatio` arithmetic with no real completeness and no eigenvalues. On the classical real and complex shadow layer, [@thm-ch12-lagrange-gram] and [@thm-ch12-schur-minimum] provide the parallel real-sum and arbitrary finite-dimensional complex block-matrix versions. If a rational certificate establishes positivity of a bounded operator $Q$ on a complex Hilbert space, [@thm-ch12-gram-realizability] yields $Q=O^\dagger O$. In a real inner product space, [@thm-ch12-gram-isometry-extension] gives a unique global linear isometry extending a specified permutation of a spanning family that preserves every pairwise Gram inner product.
 :::
 
 A hand calculation shows what each hypothesis does. In $\mathbb{R}^2$, $e_1,2e_2$ span the plane and have positive definite Gram matrix $\operatorname{diag}(1,4)$. Swapping them sends a vector of norm $1$ to a vector of norm $2$, so no isometry extends the swap. For the family consisting of $e_1$ alone, the identity permutation preserves its inner product, but both the identity and reflection across the $e_1$-axis extend it. Uniqueness can fail when the family does not span.

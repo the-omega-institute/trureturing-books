@@ -4,7 +4,7 @@
 
 第三卷（[第七章](ch07-second-order-jet-calculus.md)–[第九章](ch09-telescoping-stokes-and-arc-manifold.md)）已经清除了微积分中的极限幽灵：在二阶幂零射流环与流群望远镜求和下，微分与积分都归约为有限步有理代数。从本章开始，第四卷进入调和分析的核心战场——在经典实三维球面上辨认谱壳，并把可精确计算的整数自旋读数写成有理多项式。
 
-经典教材把傅里叶变换奉为分析学的万用钥匙，却鲜少追问一个谱系学问题：为什么我们在展开周期或局域波场时，要默认站在一条两端无限敞开的平直实数轴上，去吞咽 $\pi$、$e$、连续无界频率与截断振铃？答案与第一卷的诊断如出一辙——平直傅里叶变换只是把弯曲闭合的三元球面强行摊平后的切线近似。一旦把函数空间放回经典紧群——实单位四元数群 $S^3(1)\cong\mathrm{SU}(2)$，彼得—魏尔（Peter–Weyl）分解立刻将频谱量子化为离散的半整数自旋壳层，而所有整数自旋的球面特征标都直接坍缩为关于保真度 $\kappa$ 的整系数切比雪夫多项式；其中的佩尔律、倍阶律、偶壳消根号与奇壳有号因子分解、自旋 $j = 2$ 二次特征标、全阶整数自旋克莱布施—高登乘积律以及 $5d^{10}/5d^8$ 轨道角向四极平衡，均已在严格零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成。
+经典教材把傅里叶变换奉为分析学的万用钥匙，却鲜少追问一个谱系学问题：为什么我们在展开周期或局域波场时，要默认站在一条两端无限敞开的平直实数轴上，去吞咽 $\pi$、$e$、连续无界频率与截断振铃？答案与第一卷的诊断如出一辙——平直傅里叶变换只是把弯曲闭合的三元球面强行摊平后的切线近似。一旦把函数空间放回经典紧群——实单位四元数群 $S^3(1)\cong\mathrm{SU}(2)$，彼得—魏尔（Peter–Weyl）分解立刻将频谱量子化为离散的半整数自旋壳层，而所有整数自旋的球面特征标都直接坍缩为关于保真度 $\kappa$ 的整系数切比雪夫多项式；其中的佩尔律、倍阶律、偶壳消根号与奇壳有号因子分解、自旋 $j = 2$ 二次特征标、全阶整数自旋克莱布施—高登乘积律以及 $5d^{10}/5d^8$ 轨道角向四极平衡，均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中由 Lean 内核直接证成。
 
 ---
 
@@ -182,10 +182,10 @@ $$
 
 对 $j=n+\frac12$，有号特征标为 $U_{2n+1}(c)=c\,\operatorname{oddFactor}_n(\kappa)$。将 $q$ 换为 $-q$ 会翻转其符号。射影读数确定它的绝对值 $\sqrt{\kappa}\,\lvert\operatorname{oddFactor}_n(\kappa)\rvert$ 和平方 $\kappa\,\operatorname{oddFactor}_n(\kappa)^2$。有理齐次输入下，该平方及所有整数自旋特征标都取有理值。例如 $p=(1,1,0,0)$ 给出 $\kappa=1/2$，基础特征标的绝对值却为 $\sqrt{2}$。在 $\operatorname{Sym}^{2j}(\mathbb C^2)$ 的单项式基中，每个矩阵元都是单位四元数坐标的 $2j$ 次齐次式。矩阵元与共轭矩阵元相乘，在整数输入上分母为 $\lVert p\rVert^{4j}=(\lVert p\rVert^2)^{2j}$，因而双侧读数也消去根号和提升的符号。
 
-上述切比雪夫母引擎的五条单壳核心恒等式——有号佩尔关系、第一类倍阶律、全体整数自旋壳的普遍消根号律、全体半整数自旋壳的有号因子分解，以及有理自旋 $j = 2$ 特征标公式——均已在严格零公理库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成：
+上述切比雪夫母引擎的五条单壳核心恒等式——有号佩尔关系、第一类倍阶律、全体整数自旋壳的普遍消根号律、全体半整数自旋壳的有号因子分解，以及有理自旋 $j = 2$ 特征标公式——均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中由 Lean 内核直接证成：
 
 ::: {.theorem #thm-ch10-zero-axiom-chebyshev-shells title="零公理切比雪夫佩尔律、倍阶律、偶奇自旋壳消根号与自旋二特征标" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.pell_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.chebyshev_doubling D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.even_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.odd_chebyshev D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.spin_two_character"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，记整数环上的第一、二类切比雪夫多项式为 $T_n(x), U_n(x)$，偶次壳多项式为 $E_n(k)$，奇次壳因子多项式为 $\operatorname{oddFactor}_n(k)$，则以下五条定理严格成立：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。记整数环上的第一、二类切比雪夫多项式为 $T_n(x), U_n(x)$，偶次壳多项式为 $E_n(k)$，奇次壳因子多项式为 $\operatorname{oddFactor}_n(k)$，则以下五条定理严格成立：
 
 1. **有号佩尔恒等式**（`pell_chebyshev`）：对任意整数 `x : Omega.Int` 与自然数 `n : Omega.Nat`，整数精确相等
 
@@ -223,10 +223,10 @@ $$
 五条命题均在 `module` $+$ `prelude` 隔离环境中直接由抽象交换环上的切比雪夫三项递推归约证毕，并分别实例化至整数环 `intRing` 与有限有理环 `rationalRing`。第 1 款借关系 $T_{n+1}(x) = U_{n+1}(x) - x U_n(x)$ 将左端改写为二阶递推不变量 $U_{n+1}(x)^2 - 2x U_{n+1}(x) U_n(x) + U_n(x)^2$，对 $n$ 归纳立得其恒等于初值 $1$；第 2 款由和差复合律与第 1 款归纳锁死 $T_{2n}(x) = 2 T_n(x)^2 - 1$；第 3 款按前文两步递推消去奇下标项归纳证得 $E_n(x^2) = U_{2n}(x)$；第 4 款由 $U_{2n+1}(x) = 2x U_{2n}(x) - U_{2n-1}(x)$ 配合第 3 款归纳抽出公因子 $x$；第 5 款在 `rationalRing` 中直接展开 $E_2(k) = (4k - 2)(4k - 1) - 1$ 并在 `Omega.FiniteRatio.Equivalent` 下化为 $16k^2 - 12k + 1$。完整证明由 Lean 内核检查。
 :::
 
-更进一步，不止单座自旋壳的内部结构，任意两座整数自旋壳之间的**全阶克莱布施—高登（Clebsch–Gordan）特征标融合律**——也就是 §10.2 低阶倍频融合律在全部整数自旋 $(m, n) \in \mathbb{N}^2$ 上的普遍推广——同样已作为纯有理系数表恒等式在零公理库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成。
+更进一步，不止单座自旋壳的内部结构，任意两座整数自旋壳之间的**全阶克莱布施—高登（Clebsch–Gordan）特征标融合律**——也就是 §10.2 低阶倍频融合律在全部整数自旋 $(m, n) \in \mathbb{N}^2$ 上的普遍推广——同样已作为纯有理系数表恒等式在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中由 Lean 内核直接证成。
 
 ::: {.theorem #thm-ch10-even-char-product-sum title="零公理全阶整数自旋特征标乘积律" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.evenChar_product_sum"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，将 [@def-ch10-even-chebyshev] 递推生成的第 $r$ 阶偶次切比雪夫特征多项式 $E_r(\kappa)$ 按 $\kappa$ 的升幂表为有理系数表 `evenCharPoly r : CoefficientList`（对应 $2r$ 次切比雪夫特征标 $U_{2r}(\sqrt{\kappa})$），并记 `evenCharProductSum m n` 为闭区间和 $\sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa)$ 的有理系数表（起点为 `gap m n` $= \lvert m - n\rvert$，跨度为 `span m n` $= 2\min(m, n)$，终点 $\lvert m - n\rvert + 2\min(m, n) = m + n$）。则对一切自然数 $m, n \in \mathbb{N}$，多项式卷积乘积与该有限特征标和在逐次幂系数等价关系 `Poly.RatioSame`（缺省高次项视作 $0$，每阶系数满足 `Omega.IntRatio.Equivalent`）下严格相等：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。将 [@def-ch10-even-chebyshev] 递推生成的第 $r$ 阶偶次切比雪夫特征多项式 $E_r(\kappa)$ 按 $\kappa$ 的升幂表为有理系数表 `evenCharPoly r : CoefficientList`（对应 $2r$ 次切比雪夫特征标 $U_{2r}(\sqrt{\kappa})$），并记 `evenCharProductSum m n` 为闭区间和 $\sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa)$ 的有理系数表（起点为 `gap m n` $= \lvert m - n\rvert$，跨度为 `span m n` $= 2\min(m, n)$，终点 $\lvert m - n\rvert + 2\min(m, n) = m + n$）。则对一切自然数 $m, n \in \mathbb{N}$，多项式卷积乘积与该有限特征标和在逐次幂系数等价关系 `Poly.RatioSame`（缺省高次项视作 $0$，每阶系数满足 `Omega.IntRatio.Equivalent`）下严格相等：
 
 $$
 E_m(\kappa)\,E_n(\kappa) \;\equiv\; \sum_{r = \lvert m - n\rvert}^{m + n} E_r(\kappa).
@@ -298,10 +298,10 @@ $$
 
 $j = 0, \frac{1}{2}, 1$ 之后的第一座高阶整数自旋壳就是五维四极壳 $j = 2$，其特征标正是前面算出的 $E_2(\kappa) = 16\kappa^2 - 12\kappa + 1$。它在原子与凝聚态物理中有现成的天然实验台：重过渡金属金离子价层 $5d$ 轨道张成的恰恰是自旋/轨道角动量 $j = 2$ 的五维实谐波壳层 $\{d_{z^2}, d_{xz}, d_{yz}, d_{xy}, d_{x^2-y^2}\}$。
 
-考察单位球面上的无迹角向电四极算符 $\widehat{Q}_{ab} = 3 n_a n_b - \delta_{ab}$（$a, b \in \{x, y, z\}$，$\Tr\widehat{\mathbf{Q}} = 0$；实际物理电四极矩另乘径向电荷因子 $-e\langle r^2\rangle_{5d}$ 并叠加以配体晶格贡献，属配位场文献背景）。对五条归一化实 $d$ 谐波逐一求无迹角向期望，全部结果竟然都是分母仅为 $7$ 的纯有理分数，不含半个 $\pi$ 或无理根号；而且五轨道满壳归零、$d^{10}$ 闭壳各轴归零与抽去一枚双占据轨道后的无迹 $d^8$ 精确有理对角平衡，均已在严格零公理库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接锁死：
+考察单位球面上的无迹角向电四极算符 $\widehat{Q}_{ab} = 3 n_a n_b - \delta_{ab}$（$a, b \in \{x, y, z\}$，$\Tr\widehat{\mathbf{Q}} = 0$；实际物理电四极矩另乘径向电荷因子 $-e\langle r^2\rangle_{5d}$ 并叠加以配体晶格贡献，属配位场文献背景）。对五条归一化实 $d$ 谐波逐一求无迹角向期望，全部结果竟然都是分母仅为 $7$ 的纯有理分数，不含半个 $\pi$ 或无理根号；而且五轨道满壳归零、$d^{10}$ 闭壳各轴归零与抽去一枚双占据轨道后的无迹 $d^8$ 精确有理对角平衡，均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中由 Lean 内核直接锁死：
 
 ::: {.theorem #thm-ch10-zero-axiom-orbital-quadrupole title="零公理 $d^{10}$ 与 $d^8$ 轨道角向四极张量归零与无迹对角平衡" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.orbital_quadrupole D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.full_orbital_quadrupole"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，于有号精确比值等价 `Omega.IntRatio.Equivalent` 下，五条实 $d$ 轨道角向四极对角账本满足以下两条定理：
+所引 D5 声明各自的严格端记录为 `strict_omega.axioms: []`，官方端记录为 `axioms: ["propext"]`。于有号精确比值等价 `Omega.IntRatio.Equivalent` 下，五条实 $d$ 轨道角向四极对角账本满足以下两条定理：
 
 1. **$d^{10}$ 闭壳归零与双空轨道 $d^8$ 无迹对角平衡**（`orbital_quadrupole`）：
 

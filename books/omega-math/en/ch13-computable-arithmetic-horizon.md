@@ -4,7 +4,7 @@ Having constructed rational harmonic analysis on the three-sphere across Volume 
 
 Classical number theory routinely begins from a Platonic premise: that the natural numbers $\mathbb{N}$ form a completed infinite totality and that the primes $\mathbb{P}$ sit already laid out along an infinite number line. Analytic number theory then layers on the real completion $\mathbb{R}$, infinite limits, and the transcendental logarithm $\ln x$. In zero-axiom rational mathematics without infinity or transcendentals (`OmegaMath`), we face a foundational challenge before touching a single spectrum: **if we reject completed infinities, limits, and transcendental functions, can the three workhorses of arithmetic — the inexhaustibility of primes, best rational approximation, and geometric error-decay budgets — be rebuilt entirely as finite, terminating, executable integer constructions?**
 
-This chapter delivers three affirmative answers and anchors all core integer pillars directly inside the strict zero-axiom `OmegaInit` and `OmegaMath` library (`axioms: []`). First, we formalize Bézout's identity and the **Euclid Prime-Escape theorem** with literal zero axioms, replacing the static claim of infinitely many primes with a constructive proof that every finite natural-number list of positive product carries a blind-spot witness $N_S = 1 + \prod S$ birthing a fresh prime outside the list. Second, we anchor the **Euler–Wallis convergent determinant** and automatic convergent coprimality in zero axioms, pairing them with classical Layer-2 Lean theorems on reduced denominators, logarithmic convergent length, and executable prime-factor order stripping in decidable monoids. Third, we certify the **quarter-depth integer budget inequality** in literal zero axioms and contrast it with the Layer-2 real-shadow bridge onto classical real majorants.
+This chapter delivers three affirmative answers and anchors all core integer pillars in D5 on the strict backend (`strict_omega.axioms: []`). First, we formalize Bézout's identity and the **Euclid Prime-Escape theorem** with literal zero axioms, replacing the static claim of infinitely many primes with a constructive proof that every finite natural-number list of positive product carries a blind-spot witness $N_S = 1 + \prod S$ birthing a fresh prime outside the list. Second, we anchor the **Euler–Wallis convergent determinant** and automatic convergent coprimality in zero axioms, pairing them with classical Layer-2 Lean theorems on reduced denominators, logarithmic convergent length, and executable prime-factor order stripping in decidable monoids. Third, we certify the **quarter-depth integer budget inequality** in literal zero axioms and contrast it with the Layer-2 real-shadow bridge onto classical real majorants.
 
 ## 13.1 From Completed Infinite Sets to the Computable Arithmetic Horizon
 
@@ -16,10 +16,10 @@ $$
 a = q b + r, \qquad 0 \le r < b.
 $$
 
-Iterating the Euclidean step $(a, b) \mapsto (b, a \bmod b)$ produces a strictly decreasing sequence of remainders that reaches $0$ in finitely many steps, yielding $\gcd(a, b)$ (with $\gcd(0, 0) = 0$). Back-substituting the quotients along that finite trace yields the following **zero-axiom Bézout identity**, checked inside `OmegaInit` and `OmegaMath` with an empty axiom closure (`axioms: []`):
+Iterating the Euclidean step $(a, b) \mapsto (b, a \bmod b)$ produces a strictly decreasing sequence of remainders that reaches $0$ in finitely many steps, yielding $\gcd(a, b)$ (with $\gcd(0, 0) = 0$). Back-substituting the quotients along that finite trace yields the following **zero-axiom Bézout identity**, checked in D5 on the strict backend (`strict_omega.axioms: []`):
 
 ::: {.theorem #thm-ch13-bezout-identity title="Zero-Axiom Natural-Number Bézout Identity" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.bezout_identity"}
-Inside the zero-axiom library `OmegaInit` and `OmegaMath` (`axioms: []`), for all natural numbers $a, b \in \mathbb{N}$ (`Omega.Nat`, including zero inputs), there exist signed integers $x, y \in \mathbb{Z}$ (`Omega.Int`) satisfying
+The cited D5 declarations record `strict_omega.axioms: []`. For all natural numbers $a, b \in \mathbb{N}$ (`Omega.Nat`, including zero inputs), there exist signed integers $x, y \in \mathbb{Z}$ (`Omega.Int`) satisfying
 
 $$
 a x + b y = \gcd(a, b).
@@ -52,10 +52,10 @@ $$
 
 :::
 
-This construction needs no non-constructive existence principle, and its full prime-escape law is formally anchored inside the zero-axiom `OmegaInit` and `OmegaMath` kernel (`axioms: []`):
+This construction needs no non-constructive existence principle, and its full prime-escape law is formally anchored in D5 on the strict backend (`strict_omega.axioms: []`):
 
 ::: {.theorem #thm-ch13-euclid-prime-escape title="Zero-Axiom Euclid Prime-Escape Theorem" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.euclid_prime_escape"}
-Inside the zero-axiom library `OmegaInit` and `OmegaMath` (`axioms: []`), let $s$ be any finite natural-number list (`s : NatList`) with strictly positive product ($0 < s.\mathrm{prod}$). Then there exists a natural number $p$ satisfying simultaneously
+The cited D5 declarations record `strict_omega.axioms: []`. Let $s$ be any finite natural-number list (`s : NatList`) with strictly positive product ($0 < s.\mathrm{prod}$). Then there exists a natural number $p$ satisfying simultaneously
 
 $$
 \operatorname{IsPrime}(p) \;\wedge\; \bigl(p \mid (s.\mathrm{prod} + 1)\bigr) \;\wedge\; p \notin s.
@@ -111,10 +111,10 @@ $$
 
 :::
 
-This $2 \times 2$ integer matrix product exposes the algebraic rigidity of continued fractions at once: every step matrix has determinant $\det(M_k) = a_k \cdot 0 - 1 \cdot 1 = -1$, so evaluating a finite natural-number partial-quotient list `coeffs` of length `coefficientCount coeffs` flips the determinant sign at every step while preserving unit area. Both the **Euler–Wallis convergent determinant identity** and automatic **convergent coprimality** are formally verified inside the strict zero-axiom `OmegaInit` and `OmegaMath` library (`axioms: []`):
+This $2 \times 2$ integer matrix product exposes the algebraic rigidity of continued fractions at once: every step matrix has determinant $\det(M_k) = a_k \cdot 0 - 1 \cdot 1 = -1$, so evaluating a finite natural-number partial-quotient list `coeffs` of length `coefficientCount coeffs` flips the determinant sign at every step while preserving unit area. Both the **Euler–Wallis convergent determinant identity** and automatic **convergent coprimality** are formally verified in D5 on the strict backend (`strict_omega.axioms: []`):
 
 ::: {.theorem #thm-ch13-cf-convergent-determinant title="Zero-Axiom Finite Continued-Fraction Convergent Determinant Identity" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_determinant"}
-Inside the zero-axiom library `OmegaInit` and `OmegaMath` (`axioms: []`), for every finite list of natural-number partial quotients $\mathrm{coeffs} : \mathrm{NatList}$, the integer determinant of its Euler–Wallis convergent pair $\operatorname{convergentPair}(\mathrm{coeffs})$ satisfies
+The cited D5 declarations record `strict_omega.axioms: []`. For every finite list of natural-number partial quotients $\mathrm{coeffs} : \mathrm{NatList}$, the integer determinant of its Euler–Wallis convergent pair $\operatorname{convergentPair}(\mathrm{coeffs})$ satisfies
 
 $$
 \bigl(\operatorname{convergentPair}(\mathrm{coeffs})\bigr).\mathrm{determinant} = (-1)^{\operatorname{coefficientCount}(\mathrm{coeffs})}.
@@ -129,7 +129,7 @@ The proof proceeds by structural induction on `coeffs : NatList`. For the empty 
 The unit determinant immediately enforces our first zero-axiom structural corollary: every convergent fraction is automatically in lowest terms, requiring no secondary reduction.
 
 ::: {.theorem #thm-ch13-cf-convergent-coprime title="Zero-Axiom Coprimality of Continued-Fraction Convergent Numerator and Denominator" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_coprime"}
-Inside the zero-axiom library `OmegaInit` and `OmegaMath` (`axioms: []`), for every finite list of natural-number partial quotients $\mathrm{coeffs} : \mathrm{NatList}$ with convergent numerator $\mathrm{num}$ and denominator $\mathrm{den}$ in $\operatorname{convergentPair}(\mathrm{coeffs})$, any natural number $d \in \mathbb{N}$ dividing both $\mathrm{num}$ and $\mathrm{den}$ ($d \mid \mathrm{num}$ and $d \mid \mathrm{den}$) satisfies
+The cited D5 declarations record `strict_omega.axioms: []`. For every finite list of natural-number partial quotients $\mathrm{coeffs} : \mathrm{NatList}$ with convergent numerator $\mathrm{num}$ and denominator $\mathrm{den}$ in $\operatorname{convergentPair}(\mathrm{coeffs})$, any natural number $d \in \mathbb{N}$ dividing both $\mathrm{num}$ and $\mathrm{den}$ ($d \mid \mathrm{num}$ and $d \mid \mathrm{den}$) satisfies
 
 $$
 d = 1.
@@ -223,10 +223,10 @@ $$
 \operatorname{quarterDepth}(c, d, p, q) := \left\lfloor \log_4 \left\lfloor \frac{c q}{d p} \right\rfloor \right\rfloor.
 $$
 
-In the pinned `trureturing` library, this budget exhibits the monograph's cleanest separation between the **zero-axiom integer core** and the **Layer-2 real shadow**. First, the integer strict inequality itself is proved with **literal zero axioms (`axioms: []`)** inside the isolated `OmegaInit` and `OmegaMath` stack, importing neither Lean's standard `Init` nor `Mathlib`:
+In the pinned `trureturing` library, this budget exhibits the monograph's cleanest separation between the **zero-axiom integer core** and the **Layer-2 real shadow**. First, the integer strict inequality itself is proved with **literal zero axioms (`strict_omega.axioms: []`)** in the strict build of D5 using `OmegaInit` and `OmegaMath`, importing neither Lean's standard `Init` nor `Mathlib`:
 
 ::: {.theorem #thm-ch13-omega-quarter-depth-integer title="Zero-Axiom Strict Integer Inequality for the Quarter-Depth Budget" lean="D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.quarterDepth_integer_sound"}
-Inside the zero-axiom library `OmegaInit` and `OmegaMath` (`axioms: []`), for all natural numbers $c, d, p, q, N \in \mathbb{N}$ (`Omega.Nat`) satisfying $0 < d$, $0 < p$, and $\operatorname{quarterDepth}(c, d, p, q) \le N$, the exact integer strict inequality holds:
+The cited D5 declarations record `strict_omega.axioms: []`. For all natural numbers $c, d, p, q, N \in \mathbb{N}$ (`Omega.Nat`) satisfying $0 < d$, $0 < p$, and $\operatorname{quarterDepth}(c, d, p, q) \le N$, the exact integer strict inequality holds:
 
 $$
 c \cdot q < (d \cdot p) \cdot 4^{N + 1}.
@@ -303,7 +303,7 @@ Conversely, reducing the depth to $N = 1$ fails both tests immediately: $(d p) \
 :::
 
 ::: {.remark #rem-ch13-zero-axiom-horizon title="Architectural Separation Between the Zero-Axiom Integer Core and the Classical Real Shadow"}
-Stepping back across the chapter's ten frozen theorems reveals a razor-sharp axiomatic boundary. Bézout's identity ([@thm-ch13-bezout-identity]), Euclid prime escape ([@thm-ch13-euclid-prime-escape]), the Euler–Wallis convergent determinant ([@thm-ch13-cf-convergent-determinant]), convergent coprimality ([@thm-ch13-cf-convergent-coprime]), and the integer quarter-depth inequality ([@thm-ch13-omega-quarter-depth-integer]) are all formally verified inside the isolated `OmegaInit` and `OmegaMath` stack with **literal zero axioms (`axioms: []`)**, touching neither classical choice, quotient axioms, nor real completeness. Meanwhile, [@thm-ch13-reduced-den], [@thm-ch13-convergents-length-log], [@thm-ch13-strip-factors-correct], and the classical `BurnolRationalDepthBudget` pair ([@thm-ch13-quarter-depth-integer] and [@thm-ch13-quarter-depth-real]) supply the Layer-2 `Mathlib` bridge whenever classical analytic Weil–Burnol majorants are needed — exemplifying the one-way shadow architecture audited across the full monograph in [Chapter 18](ch18-zero-axiom-kernel-and-shadow-bridge.md).
+Stepping back across the chapter's ten frozen theorems reveals a razor-sharp axiomatic boundary. Bézout's identity ([@thm-ch13-bezout-identity]), Euclid prime escape ([@thm-ch13-euclid-prime-escape]), the Euler–Wallis convergent determinant ([@thm-ch13-cf-convergent-determinant]), convergent coprimality ([@thm-ch13-cf-convergent-coprime]), and the integer quarter-depth inequality ([@thm-ch13-omega-quarter-depth-integer]) are all formally verified in the strict build of D5 using `OmegaInit` and `OmegaMath` with **literal zero axioms (`strict_omega.axioms: []`)**, touching neither classical choice, quotient axioms, nor real completeness. Meanwhile, [@thm-ch13-reduced-den], [@thm-ch13-convergents-length-log], [@thm-ch13-strip-factors-correct], and the classical `BurnolRationalDepthBudget` pair ([@thm-ch13-quarter-depth-integer] and [@thm-ch13-quarter-depth-real]) supply the Layer-2 `Mathlib` bridge whenever classical analytic Weil–Burnol majorants are needed — exemplifying the one-way shadow architecture audited across the full monograph in [Chapter 18](ch18-zero-axiom-kernel-and-shadow-bridge.md).
 :::
 
 Before moving on to global adelic closure, you can test all three finite integer constructions interactively in the lab card below: step through the prime-escape chain up to $30031 = 59 \times 509$, trace the Euler–Wallis alternating determinants on $34/21$, and vary the rational majorant and tolerance to inspect the sharp quarter-depth threshold $70 < 128$.

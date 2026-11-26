@@ -24,7 +24,7 @@
 | 静态素数无穷集、复 $\zeta(s)$、$\ln p$ 与 $\sqrt{p}$ | 构造性欧几里得素数逃逸、有限连分数与整数四分深度；阿代尔乘积归元 $\lvert x\rvert_\infty\prod_p\lvert x\rvert_p = 1$、赫维茨自由群 $F_3$ 与无复数赫克—拉马努金半正定判据 $4p\langle f,f\rangle_{\mathbb{Q}} - \langle \widehat{T}_p f, \widehat{T}_p f\rangle_{\mathbb{Q}} \ge 0$ | [第 13 章](ch13-computable-arithmetic-horizon.md)、[第 14 章](ch14-adelic-closure-and-hurwitz-primes.md)、[第 15 章](ch15-rational-hecke-ramanujan-spectrum.md) |
 | 图灵纸带、可变字节数组与不可逆逻辑门 | 非阿贝尔 $\Omega$-FRACTRAN 四元数旋子精确整除闸门（配零公理 `Mat2` 凯莱—哈密顿与模 $5$ 秩一分裂） | [第 16 章](ch16-omega-fractran-and-nonabelian-stack.md) |
 | 外置实数时钟 $t \in \mathbb{R}$ 与刚性背景时空 | 自包含观察者内部有理结构时间 $\tau = \sum(\Delta\mathcal{I}_{\mathrm{Schur}} + \Delta b_1)$ 与静止画布记忆切分 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} = 1$ | [第 17 章](ch17-observer-universe-and-single-gradient.md) |
-| 携带三大经典公理的 `noncomputable` `Mathlib.Real` | 空内核重放的 `OmegaInit` $+$ `OmegaMath`（`axioms: []`）核心，经单向阴影函子 $\Pi_{\mathbb{R}}$（`OmegaShadowBridge`）隔离对接经典分析 | [第 1 章](ch01-axiom-omega-and-cic.md)、[第 18 章](ch18-zero-axiom-kernel-and-shadow-bridge.md) |
+| 携带三大经典公理的 `noncomputable` `Mathlib.Real` | 所选严格库根 `OmegaInit`、`OmegaMath` 的导入闭包经空内核重放，传递公理依赖为空。该核心经单向阴影函子 $\Pi_{\mathbb{R}}$（`OmegaShadowBridge`）隔离对接经典分析 | [第 1 章](ch01-axiom-omega-and-cic.md)、[第 18 章](ch18-zero-axiom-kernel-and-shadow-bridge.md) |
 
 ## B.2 六层认识论证据分层总账 {#sec-om-appb-epistemic-ledger}
 

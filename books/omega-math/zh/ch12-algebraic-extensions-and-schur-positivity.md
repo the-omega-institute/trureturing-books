@@ -8,7 +8,7 @@
 2. **量子非定域极值**：克劳泽—霍恩—西蒙尼—霍尔特（CHSH）贝尔不等式的齐雷尔森（Tsirelson）量子天花板精确等于 $2\sqrt{2}$；
 3. **五重对称与黄金切比雪夫闭合**：五角形与二十面体旋量周期对应的余弦 $\cos(\pi/5) = \varphi/2$ 满足不可约二次方程 $4x^2 - 2x - 1 = 0$。
 
-传统分析遇到这三道门槛时，会不加思索地把整个系统一脚踢进由柯西商集与选择公理构造的实数域 $\mathbb{R}$。本章展现 `OmegaMath` 的精准外科手术：**绝不为了添一枚二次根号而吞下整座不可数实无穷连续统**。只需直接把既约有理数或有限比值打包成有序对，构造零公理二次代数扩张域 `QuadPoly(b, c)`（及其整参数有理实现 `RatQuadPoly b c`），再配合有理拉格朗日—格拉姆恒等式与分块舒尔补配方法，就能在无极限、无特征值数值逼近的纯代数世界里一口气打通旋量极值与算子正定性——全套二次范数乘性、精确求逆、`QSqrt2` 与 `QPhi` 极值、五角切比雪夫闭合以及有理拉格朗日—舒尔极小值定理，均已在严格零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成。
+传统分析遇到这三道门槛时，会不加思索地把整个系统一脚踢进由柯西商集与选择公理构造的实数域 $\mathbb{R}$。本章展现 `OmegaMath` 的精准外科手术：**绝不为了添一枚二次根号而吞下整座不可数实无穷连续统**。只需直接把既约有理数或有限比值打包成有序对，构造零公理二次代数扩张域 `QuadPoly(b, c)`（及其整参数有理实现 `RatQuadPoly b c`），再配合有理拉格朗日—格拉姆恒等式与分块舒尔补配方法，就能在无极限、无特征值数值逼近的纯代数世界里一口气打通旋量极值与算子正定性——全套二次范数乘性、精确求逆、`QSqrt2` 与 `QPhi` 极值、五角切比雪夫闭合以及有理拉格朗日—舒尔极小值定理，均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中由 Lean 内核直接证成。
 
 ---
 
@@ -94,10 +94,10 @@
 
    在算子阴影层上，任意自伴酉算符组对应的 CHSH 算符 $C = A_0\otimes(B_0 + B_1) + A_1\otimes(B_0 - B_1)$ 满足兰道恒等式 $C^2 = 4I - [A_0, A_1]\otimes[B_0, B_1]$，故 $\lVert C\rVert^2 \le 8$；上述 `QSqrt2` 代数构造以纯有限算术精确触顶。
 
-一般整参数有理二次代数 `RatQuadPoly b c` 的范数乘性与非零范数精确求逆，连同 `QSqrt2` 中单位 $90^\circ$ 旋量八拍闭合与 CHSH 平方极值，均已在严格零公理库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成：
+一般整参数有理二次代数 `RatQuadPoly b c` 的范数乘性与非零范数精确求逆，连同 `QSqrt2` 中单位 $90^\circ$ 旋量八拍闭合与 CHSH 平方极值，均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中由 Lean 内核直接证成：
 
 ::: {.theorem #thm-ch12-zero-axiom-quadpoly-qsqrt2 title="零公理二次扩张范数乘性、精确求逆与 QSqrt2 旋量及贝尔极值" lean="D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.quadratic_norm_mul D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.quadratic_mul_inv D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.sqrt_two_spinor D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.sqrt_two_bell"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，以下四条定理严格成立：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。以下四条定理严格成立：
 
 1. **普遍二次范数乘性律**（`quadratic_norm_mul`）：对任意整数参数 `b c : Omega.Int` 及任意 `z w : RatQuadPoly b c`，在 `Omega.FiniteRatio.Equivalent` 下恒有
 
@@ -151,10 +151,10 @@
 
    在 `QPhi` 内检验 $x_1 := \frac{\varphi}{2}$：$4(\frac{\varphi}{2})^2 - 2(\frac{\varphi}{2}) - 1 = \varphi^2 - \varphi - 1 = 0$，立即得到 $T_5(\varphi/2) = -1$，再由倍角复合 $T_{10}(x) = 2 T_5(x)^2 - 1$ 立刻闭合至 $T_{10}(\varphi/2) = 2(-1)^2 - 1 = 1$！同时检验 $x_2 := \frac{\varphi - 1}{2}$：$4(\frac{\varphi - 1}{2})^2 + 2(\frac{\varphi - 1}{2}) - 1 = (\varphi^2 - 2\varphi + 1) + (\varphi - 1) - 1 = \varphi^2 - \varphi - 1 = 0$，立得 $T_5\bigl(\frac{\varphi - 1}{2}\bigr) = 1$。
 
-这三条黄金定律均已在严格零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中跨 `OmegaQuadraticAndSchur` 与 `OmegaChebyshevHecke` 联合证成：
+这三条黄金定律均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中跨 `OmegaQuadraticAndSchur` 与 `OmegaChebyshevHecke` 联合证成：
 
 ::: {.theorem #thm-ch12-zero-axiom-qphi-fibonacci-pentagon title="零公理黄金扩张 QPhi 斐波那契幂律、范数律与五角切比雪夫闭合" lean="D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.phi_fibonacci D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.phi_power_norm D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.pentagonal_chebyshev"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）的黄金二次扩张 `QPhi`（$b = 1, c = 1$，即 $\varphi^2 = \varphi + 1$）中，以下三条定理严格成立：
+在所引 D5 声明（`strict_omega.axioms: []`）使用的黄金二次扩张 `QPhi`（$b = 1, c = 1$，即 $\varphi^2 = \varphi + 1$）中，以下三条定理严格成立：
 
 1. **斐波那契幂律**（`phi_fibonacci`）：对一切自然数 `n : Omega.Nat`，在 `QuadPoly.Equivalent` 下恒有
 
@@ -207,10 +207,10 @@ $$
 
 这一行初等配方同时完成了两件大事：第一，它把二次型拆成了两个完全平方的加权和，从而**半正定判据完全归约为两条有理不等式 $c > 0$ 与 $S := a - b^2/c \ge 0$**，根本不需要求解特征多项式的无理根；第二，由于 $c > 0$ 且平方项非负，对固定边界变量 $x$，内部变量 $y$ 跑遍全域时的精确最小值无条件落在唯一消元点 $y^* = -\frac{b}{c}x$ 处，最小取值恰等于舒尔补二次型 $S x^2 = (a - b^2/c)x^2$！
 
-这整套纯有理正定与极小化引擎——涵盖任意有限有理坐标对序列的拉格朗日—格拉姆恒等式与柯西—施瓦茨不等式，以及任意非零主元的标量舒尔配方与正主元全局可达极小值——均已在严格零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中直接对 `Omega.FiniteRatio` 证成：
+这整套纯有理正定与极小化引擎——涵盖任意有限有理坐标对序列的拉格朗日—格拉姆恒等式与柯西—施瓦茨不等式，以及任意非零主元的标量舒尔配方与正主元全局可达极小值——均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中直接对 `Omega.FiniteRatio` 证成：
 
 ::: {.theorem #thm-ch12-zero-axiom-lagrange-schur title="零公理有理拉格朗日—格拉姆恒等式、柯西—施瓦茨不等式与标量舒尔补极小值" lean="D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_lagrange_gram D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_cauchy_schwarz D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_complete D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_min"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，以下四条有理正定与极小值定理严格成立：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。以下四条有理正定与极小值定理严格成立：
 
 1. **有理拉格朗日—格拉姆恒等式**（`rational_lagrange_gram`）：对任意有限有理坐标对序列 `xs : Sequence (CoordinatePair FiniteRatio)`，在 `Omega.FiniteRatio.Equivalent` 下恒有
 
@@ -339,7 +339,7 @@ $$
 :::
 
 ::: {.remark #rem-ch12-rational-sos-vs-real-shadow title="零公理有理正定代数与经典希尔伯特阴影的双向分工"}
-请特别留意本章七组冻结定理之间的精确层次分工：在零公理内核侧（`OmegaInit` 与 `OmegaMath`，`axioms: []`），[@thm-ch12-zero-axiom-quadpoly-qsqrt2]、[@thm-ch12-zero-axiom-qphi-fibonacci-pentagon] 与 [@thm-ch12-zero-axiom-lagrange-schur] 已经直接以纯有限有序对与 `Omega.FiniteRatio` 算术证成了二次范数乘性、精确求逆、`QSqrt2` 与 `QPhi` 的旋量/贝尔/斐波那契/五角切比雪夫闭合、拉格朗日—格拉姆恒等式、柯西—施瓦茨不等式以及标量舒尔补极小值，全程不触碰实数完备化或特征值求解；而在经典实复希尔伯特阴影侧，[@thm-ch12-lagrange-gram] 与 [@thm-ch12-schur-minimum] 提供对应的实求和与任意有限维复分块矩阵版本。若有理证书确立了复希尔伯特空间上有界算子 $Q$ 的正性，[@thm-ch12-gram-realizability] 给出 $Q=O^\dagger O$。在实内积空间里，[@thm-ch12-gram-isometry-extension] 则把张成族上保持每一对格拉姆内积的指定置换唯一延拓为全局线性等距同构。
+请特别留意本章七组冻结定理之间的精确层次分工：在使用 `OmegaInit` 与 `OmegaMath` 的 D5 声明中（`strict_omega.axioms: []`），[@thm-ch12-zero-axiom-quadpoly-qsqrt2]、[@thm-ch12-zero-axiom-qphi-fibonacci-pentagon] 与 [@thm-ch12-zero-axiom-lagrange-schur] 已经直接以纯有限有序对与 `Omega.FiniteRatio` 算术证成了二次范数乘性、精确求逆、`QSqrt2` 与 `QPhi` 的旋量/贝尔/斐波那契/五角切比雪夫闭合、拉格朗日—格拉姆恒等式、柯西—施瓦茨不等式以及标量舒尔补极小值，全程不触碰实数完备化或特征值求解；而在经典实复希尔伯特阴影侧，[@thm-ch12-lagrange-gram] 与 [@thm-ch12-schur-minimum] 提供对应的实求和与任意有限维复分块矩阵版本。若有理证书确立了复希尔伯特空间上有界算子 $Q$ 的正性，[@thm-ch12-gram-realizability] 给出 $Q=O^\dagger O$。在实内积空间里，[@thm-ch12-gram-isometry-extension] 则把张成族上保持每一对格拉姆内积的指定置换唯一延拓为全局线性等距同构。
 :::
 
 一个手算便可看出两个前提各管什么。在 $\mathbb{R}^2$ 中，$e_1,2e_2$ 张成全空间，格拉姆矩阵 $\operatorname{diag}(1,4)$ 正定。对换却把范数 $1$ 送到 $2$，故无法延拓成等距。若只取向量 $e_1$，恒等置换保持内积，但恒等映射与关于 $e_1$ 轴的反射都是延拓，这里便失去了唯一性。

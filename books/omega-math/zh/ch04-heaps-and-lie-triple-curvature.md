@@ -94,10 +94,10 @@ $$
 $$
 :::
 
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，纯虚切方向编码为整三维向量 `Vec3`（$\mathbb{Z}^3$），一阶换位子写为 `commutator u v` $= 2(\mathbf{u} \times \mathbf{v})$，而利雅三元括号定义为纯整系数三元映射 `lieTriple u v w` $:= \langle\mathbf{u}, \mathbf{w}\rangle\mathbf{v} - \langle\mathbf{v}, \mathbf{w}\rangle\mathbf{u}$。无需任何连续微积分或实数公理，嘉当与雅各布森刻画利雅三元系的全部三条核心代数公理便在裸 CIC 内核中直接闭合。
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。纯虚切方向编码为整三维向量 `Vec3`（$\mathbb{Z}^3$），一阶换位子写为 `commutator u v` $= 2(\mathbf{u} \times \mathbf{v})$，而利雅三元括号定义为纯整系数三元映射 `lieTriple u v w` $:= \langle\mathbf{u}, \mathbf{w}\rangle\mathbf{v} - \langle\mathbf{v}, \mathbf{w}\rangle\mathbf{u}$。无需任何连续微积分或实数公理，嘉当与雅各布森刻画利雅三元系的全部三条核心代数公理便在裸 CIC 内核中直接闭合。
 
 ::: {.theorem #thm-ch04-lie-triple-axioms title="利雅三元系曲率括号的零公理三条代数公理" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_antisymm D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_jacobi D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_derivation"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，记整三维向量空间 `Vec3` 上的利雅三元括号为 $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\} := \operatorname{lieTriple}(\mathbf{u}, \mathbf{v}, \mathbf{w}) = \langle\mathbf{u}, \mathbf{w}\rangle\,\mathbf{v} - \langle\mathbf{v}, \mathbf{w}\rangle\,\mathbf{u}$。则对一切 $\mathbf{x}, \mathbf{y}, \mathbf{u}, \mathbf{v}, \mathbf{w} : \mathrm{Vec3}$，以下三条精确等式无条件成立：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。记整三维向量空间 `Vec3` 上的利雅三元括号为 $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\} := \operatorname{lieTriple}(\mathbf{u}, \mathbf{v}, \mathbf{w}) = \langle\mathbf{u}, \mathbf{w}\rangle\,\mathbf{v} - \langle\mathbf{v}, \mathbf{w}\rangle\,\mathbf{u}$。则对一切 $\mathbf{x}, \mathbf{y}, \mathbf{u}, \mathbf{v}, \mathbf{w} : \mathrm{Vec3}$，以下三条精确等式无条件成立：
 
 1. **前两元反对称律**（[`lieTriple_antisymm`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_antisymm)）：
 
@@ -134,7 +134,7 @@ $$
 若改采微分几何中同样常见的反向曲率约定 $R_{\mathrm{alt}}(X, Y)Z := [\nabla_X, \nabla_Y]Z - \nabla_{[X, Y]}Z = -\{X, Y, Z\}$，则截面曲率分子需对调末两位，写为 $\langle R_{\mathrm{alt}}(X, Y)Y, X\rangle = -\langle\{X, Y, Y\}, X\rangle = \langle\{X, Y, X\}, Y\rangle$。为了把两种符号约定以及任意非退化有理切面上的恒常单位截面曲率 $K \equiv +1$ 一并焊死在无坐标、无克氏符号的零公理层面上，下面这条冻结定理在 `Vec3` 与 `RatVec3` 上同时锁定正向缩并、反序变号与有理截面曲率比。
 
 ::: {.theorem #thm-ch04-lie-triple-sectional-curvature title="利雅三元系恒常单位截面曲率与反序变号律（零公理内核定理）" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_unit_sectional_curvature D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_sectional_curvature_reversed D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_sectional_ratio"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，对整三维向量 $\mathbf{u}, \mathbf{v} : \mathrm{Vec3}$，定义格拉姆面积平方 $\operatorname{gramAreaSq}(\mathbf{u}, \mathbf{v}) := \langle\mathbf{u}, \mathbf{u}\rangle\langle\mathbf{v}, \mathbf{v}\rangle - \langle\mathbf{u}, \mathbf{v}\rangle^2 \in \mathbb{Z}$。对携带整分子 `u.num, v.num : Vec3` 与严格正分母 `u.den, v.den` 的有理三维向量 `u, v : RatVec3`，在 `Omega.IntRatio` 中以公共分母 $(u.\mathrm{den}\cdot v.\mathrm{den})^2$ 定义有理格拉姆面积平方 $\operatorname{rationalGramAreaSq}(\mathbf{u}, \mathbf{v})$ 与有理曲率分子 $\operatorname{rationalCurvatureNumerator}(\mathbf{u}, \mathbf{v}) := \langle\{\mathbf{u}.\mathrm{num}, \mathbf{v}.\mathrm{num}, \mathbf{u}.\mathrm{num}\}, \mathbf{v}.\mathrm{num}\rangle / (u.\mathrm{den}\cdot v.\mathrm{den})^2$。则以下三条精确关系无条件成立：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。对整三维向量 $\mathbf{u}, \mathbf{v} : \mathrm{Vec3}$，定义格拉姆面积平方 $\operatorname{gramAreaSq}(\mathbf{u}, \mathbf{v}) := \langle\mathbf{u}, \mathbf{u}\rangle\langle\mathbf{v}, \mathbf{v}\rangle - \langle\mathbf{u}, \mathbf{v}\rangle^2 \in \mathbb{Z}$。对携带整分子 `u.num, v.num : Vec3` 与严格正分母 `u.den, v.den` 的有理三维向量 `u, v : RatVec3`，在 `Omega.IntRatio` 中以公共分母 $(u.\mathrm{den}\cdot v.\mathrm{den})^2$ 定义有理格拉姆面积平方 $\operatorname{rationalGramAreaSq}(\mathbf{u}, \mathbf{v})$ 与有理曲率分子 $\operatorname{rationalCurvatureNumerator}(\mathbf{u}, \mathbf{v}) := \langle\{\mathbf{u}.\mathrm{num}, \mathbf{v}.\mathrm{num}, \mathbf{u}.\mathrm{num}\}, \mathbf{v}.\mathrm{num}\rangle / (u.\mathrm{den}\cdot v.\mathrm{den})^2$。则以下三条精确关系无条件成立：
 
 1. **正向单位截面曲率缩并**（[`lieTriple_unit_sectional_curvature`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_unit_sectional_curvature)）：对一切 $\mathbf{u}, \mathbf{v} : \mathrm{Vec3}$，
 

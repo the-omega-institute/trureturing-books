@@ -61,7 +61,7 @@ $$
 ::: {.remark #rem-ch15-rh-epistemology title="认识论边界：四元赫克—拉马努金界与经典黎曼猜想及高阶自守谱的严格区分"}
 本节必须以最高学术诚实度划清四类不同数学陈述的归属边界，**绝不宣称经典黎曼猜想（RH）或广义黎曼猜想（GRH）已由本卷的有理赫克正定判据解决，或已在所钉 `trureturing` / `OmegaMath` 内核中获 Lean 形式化证明**：
 
-1. **内核冻结锚点**：经典层 [@thm-ch15-toeplitz-circle] 严格证明了有限反演闭合复族的托普利茨半正定性与单位圆定位等价（抽象判据桥，而非具体 $L$ 函数零点位置的证明）；严格零公理层（`OmegaInit` 与 `OmegaMath`，`axioms: []`）中，[@thm-ch15-hecke-t5-chi1-eigenvalue] 与 [@thm-ch15-hecke-t5-ramanujan-margin] 对**一切**非零整四元数 $\mathbf{q} \in \mathbb{Z}^4 \setminus \{0\}$ 无公理锁死了模方 $5$ 自旋 $1$ 特征标本征值 $-\frac{2}{5}$ 与严格正定裕度 $\frac{496}{25} > 0$，而 [@thm-ch15-lps-hecke-trace-formula]、[@thm-ch15-lps-hecke-traces]、[@thm-ch15-lps-ramanujan-margins] 与 [@thm-ch15-lps-degree-four-eigenbasis] 进一步无公理锁死了各整数自旋的标量特征标递推及其前六项有理值、$d = 1, 2, 3, 4$（自旋 $j = \frac{1}{2}, 1, \frac{3}{2}, 2$）四层低自旋对称幂整数矩阵与正定裕度以及四次对称幂壳层的完整五条整数本征基。
+1. **内核冻结锚点**：经典层 [@thm-ch15-toeplitz-circle] 严格证明了有限反演闭合复族的托普利茨半正定性与单位圆定位等价（抽象判据桥，而非具体 $L$ 函数零点位置的证明）；使用 `OmegaInit` 与 `OmegaMath` 的严格端 D5 结果（`strict_omega.axioms: []`）中，[@thm-ch15-hecke-t5-chi1-eigenvalue] 与 [@thm-ch15-hecke-t5-ramanujan-margin] 对**一切**非零整四元数 $\mathbf{q} \in \mathbb{Z}^4 \setminus \{0\}$ 无公理锁死了模方 $5$ 自旋 $1$ 特征标本征值 $-\frac{2}{5}$ 与严格正定裕度 $\frac{496}{25} > 0$，而 [@thm-ch15-lps-hecke-trace-formula]、[@thm-ch15-lps-hecke-traces]、[@thm-ch15-lps-ramanujan-margins] 与 [@thm-ch15-lps-degree-four-eigenbasis] 进一步无公理锁死了各整数自旋的标量特征标递推及其前六项有理值、$d = 1, 2, 3, 4$（自旋 $j = \frac{1}{2}, 1, \frac{3}{2}, 2$）四层低自旋对称幂整数矩阵与正定裕度以及四次对称幂壳层的完整五条整数本征基。
 2. **规范 LPS 构造的全谱界（文献结果，未在本书形式化）。** 对 $p\equiv1\pmod4$ 的规范集 $S_p$，Lubotzky、Phillips 与 Sarnak 证明了 $\mathrm{SO}(3)$ 的非常值谐波上的界 $|\widehat\lambda|\le2\sqrt p$（*Comm. Pure Appl. Math.* **40**, 401–420, 1987）。他们构造的有限凯莱图 $X^{p,q}$ 的非平凡邻接谱满足同一界，双分情形须去掉 $\pm(p+1)$（*Combinatorica* **8**, 261–277, 1988）。下文 $V_3,\dots,V_6$ 的逐壳计算与 $X^{5,13}$ 的有限移位核验使用精确算术。
 3. **结构内化诠释（`MODEL`）**：将 $4p\,\langle f, f\rangle_{\mathrm{Haar}} - \langle \widehat{T}_p f, \widehat{T}_p f\rangle_{\mathrm{Haar}} \ge 0$（配合 [@thm-ch15-toeplitz-circle] 的 $2 \times 2$ 佐武桥接）读作临界谱最优性在无复数、无对数有理球面 $\mathbb{T}_3(\mathbb{Q})$ 上的纯代数内化形态，属本书的统一框架建构，它**并不逻辑蕴含**经典黎曼 $\zeta(s)$ 或一般狄利克雷 $L$ 函数的零点定理。
 4. **严格保持开放的前沿问题（`OPEN`）**：一般非全纯马斯（Maass）波形与高秩群 $\mathrm{GL}_n$（$n \ge 3$）自守表示的拉马努金—彼得松猜想、一般代数数域戴德金 $\zeta_K$ 函数的扩展黎曼猜想（ERH）、高阶自守 $L$ 函数的全广义黎曼猜想（Grand RH），以及在零公理 `OmegaMath` 内部不依赖经典实复分析而独立重构 $\zeta(s)$ 谱理论的纲领，在本书中全部严格标为 **`OPEN`**。
@@ -81,10 +81,10 @@ $$
 \chi_1(\mathbf{q}) := 4\kappa(\mathbf{q}, \mathbf{o}) - 1 = \frac{3w^2 - x^2 - y^2 - z^2}{w^2 + x^2 + y^2 + z^2}.
 $$
 
-令人惊叹的是，对**任意**非零整四元数 $\mathbf{q} = (w, x, y, z) \in \mathbb{Z}^4 \setminus \{0\}$（在 `OmegaMath` 中记为整四元组 `q : Quad4`，`q ≠ 0`），模方 $5$ 球面赫克算子 $\widehat{T}_5$ 作用在 $\chi_1$ 上根本不需要积分或矩阵对角化——四步纯多项式展开就在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中以有号精确比值等价（`Omega.IntRatio.Equivalent`）锁死了普适本征值：
+令人惊叹的是，对**任意**非零整四元数 $\mathbf{q} = (w, x, y, z) \in \mathbb{Z}^4 \setminus \{0\}$（在 `OmegaMath` 中记为整四元组 `q : Quad4`，`q ≠ 0`），模方 $5$ 球面赫克算子 $\widehat{T}_5$ 作用在 $\chi_1$ 上根本不需要积分或矩阵对角化——四步纯多项式展开就在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中以有号精确比值等价（`Omega.IntRatio.Equivalent`）锁死了普适本征值：
 
 ::: {.theorem #thm-ch15-hecke-t5-chi1-eigenvalue title="零公理模方 5 球面赫克算子自旋 1 特征标普适本征值定理" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_chi1_eigenvalue"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，对任意非零整四元数 $\mathbf{q} : \mathrm{Quad4}$（$\mathbf{q} \neq 0$，即 $\mathbf{q} = (w, x, y, z) \in \mathbb{Z}^4 \setminus \{0\}$），模方 $5$ 球面赫克和算子作用 $\operatorname{heckeT5Chi1}(\mathbf{q}) = (\widehat{T}_5 \chi_1)(\mathbf{q}) = \sum_{r \in S_5}\chi_1(\mathbf{q}\cdot r)$ 与缩放特征标 $-\frac{2}{5}\operatorname{evalChi1}(\mathbf{q}) = -\frac{2}{5}\chi_1(\mathbf{q})$ 在有号精确比值等价 `Equivalent`（`Omega.IntRatio.Equivalent`）下普适成立：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。对任意非零整四元数 $\mathbf{q} : \mathrm{Quad4}$（$\mathbf{q} \neq 0$，即 $\mathbf{q} = (w, x, y, z) \in \mathbb{Z}^4 \setminus \{0\}$），模方 $5$ 球面赫克和算子作用 $\operatorname{heckeT5Chi1}(\mathbf{q}) = (\widehat{T}_5 \chi_1)(\mathbf{q}) = \sum_{r \in S_5}\chi_1(\mathbf{q}\cdot r)$ 与缩放特征标 $-\frac{2}{5}\operatorname{evalChi1}(\mathbf{q}) = -\frac{2}{5}\chi_1(\mathbf{q})$ 在有号精确比值等价 `Equivalent`（`Omega.IntRatio.Equivalent`）下普适成立：
 
 $$
 (\widehat{T}_5 \chi_1)(\mathbf{q}) \;\equiv\; -\frac{2}{5}\,\chi_1(\mathbf{q}).
@@ -134,10 +134,10 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
-由 [@thm-ch15-hecke-t5-chi1-eigenvalue] 锁定普适本征值 $\widehat{\lambda}_1 = -\frac{2}{5}$ 后，将之代入 $p = 5$ 处的无复数有理拉马努金二次型门槛 $4p - \widehat{\lambda}_1^2 = 20 - (-2/5)^2$，其精确正定裕度同样在 `OmegaInit` 与 `OmegaMath` 中零公理冻结（`axioms: []`）：
+由 [@thm-ch15-hecke-t5-chi1-eigenvalue] 锁定普适本征值 $\widehat{\lambda}_1 = -\frac{2}{5}$ 后，将之代入 $p = 5$ 处的无复数有理拉马努金二次型门槛 $4p - \widehat{\lambda}_1^2 = 20 - (-2/5)^2$，其精确正定裕度同样在使用 `OmegaInit` 与 `OmegaMath` 的 D5 声明中冻结（`strict_omega.axioms: []`）：
 
 ::: {.theorem #thm-ch15-hecke-t5-ramanujan-margin title="零公理模方 5 自旋 1 壳层有理拉马努金正定裕度定理" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_ramanujan_margin"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，模方 $5$ 自旋 $1$ 壳层的无复数有理拉马努金裕度在 `Omega.IntRatio` 等价与严格序下同时满足
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。模方 $5$ 自旋 $1$ 壳层的无复数有理拉马努金裕度在 `Omega.IntRatio` 等价与严格序下同时满足
 
 $$
 20 - \left(-\frac{2}{5}\right)^2 \;\equiv\; \frac{496}{25}
@@ -172,7 +172,7 @@ $$
 在整数自旋 $\ell$ 处，记 $V_\ell=\operatorname{Sym}^{2\ell}(\mathbb C^2)$ 为一份维数 $2\ell+1$ 的不可约表示。右平移在球面矩阵系数的一侧作用，因此这份表示的每个本征值在三维球面的整个 $2\ell$ 次谐波空间中重复 $2\ell+1$ 次。六枚归一化提升的标量坐标同为 $1/\sqrt5$（[@thm-ch14-lps-norm-five]）。标量偶次切比雪夫序列从 $E_0(\kappa)=1$、$E_1(\kappa)=4\kappa-1$ 开始，并满足 $E_{n+2}(\kappa)=(4\kappa-2)E_{n+1}(\kappa)-E_n(\kappa)$。在 $\kappa=1/5$ 处，以下冻结等式给出其整数分子递推。
 
 ::: {.theorem #thm-ch15-lps-hecke-trace-formula title="零公理模方 5 标量特征标整数递推" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_hecke_trace_formula"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，记 $\mathrm{S5.averageCharacter}(n) := E_n(\tfrac{1}{5})$ 为偶次切比雪夫特征标在 $\kappa = \frac{1}{5}$ 处的 `FiniteRatio` 递推值，并记纯整数分子递推 $a_0 := 1$、$a_1 := -1$、$a_{n+2} := -6 a_{n+1} - 25 a_n$ 诱导的缩放比值代表元为 $\mathrm{S5.traceRepresentative}(n) := \mathrm{IntRatio.value}(a_n, 5^n)$。则对一切自然数 $n \in \mathbb{N}$，有号精确比值等价 `Omega.IntRatio.Equivalent` 普适成立：
+这条 D5 声明的严格端记录为 `strict_omega.axioms: []`，官方端记录为 `axioms: ["propext"]`。记 $\mathrm{S5.averageCharacter}(n) := E_n(\tfrac{1}{5})$ 为偶次切比雪夫特征标在 $\kappa = \frac{1}{5}$ 处的 `FiniteRatio` 递推值，并记纯整数分子递推 $a_0 := 1$、$a_1 := -1$、$a_{n+2} := -6 a_{n+1} - 25 a_n$ 诱导的缩放比值代表元为 $\mathrm{S5.traceRepresentative}(n) := \mathrm{IntRatio.value}(a_n, 5^n)$。则对一切自然数 $n \in \mathbb{N}$，有号精确比值等价 `Omega.IntRatio.Equivalent` 普适成立：
 
 $$
 \bigl(\mathrm{S5.averageCharacter}(n)\bigr).\mathrm{toRatio}
@@ -189,7 +189,7 @@ $$
 将 [@thm-ch15-lps-hecke-trace-formula] 的无分母膨胀整数递推显式展开至前六个非平凡阶数 $n = 1, \dots, 6$，便得到下列六个标量递推值。
 
 ::: {.theorem #thm-ch15-lps-hecke-traces title="零公理模方 5 前六阶特征标递推值" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_hecke_traces"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，前六阶特征标迹代表元 $\mathrm{S5.traceRepresentative}(n)$ 在 `Omega.IntRatio` 下精确等于下列六枚有号分数（合取记为 `S5.traceTable`）：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。前六阶特征标迹代表元 $\mathrm{S5.traceRepresentative}(n)$ 在 `Omega.IntRatio` 下精确等于下列六枚有号分数（合取记为 `S5.traceTable`）：
 
 $$
 \begin{aligned}
@@ -228,7 +228,7 @@ $$
 进一步地，不仅整数壳 $V_1, V_2$，连包含半整数自旋在内的全部前四层非平凡对称幂壳层 $\mathrm{Sym}^d(\mathbb{C}^2)$（次数 $d = 1, 2, 3, 4$，对应自旋 $j = \frac{d}{2} \in \{\frac{1}{2}, 1, \frac{3}{2}, 2\}$ 与维数 $d + 1 \in \{2, 3, 4, 5\}$）也都在零公理内核中被彻底算清。方法极为巧夺天工：暂不除以 $\sqrt{5}$，让每枚生成元 $g = (w, x, y, z) \in S_5$ 以高斯整矩阵 $M_g = \bigl(\begin{smallmatrix} w + ix & y + iz \\ -y + iz & w - ix \end{smallmatrix}\bigr)$（迹为 $2$、行列式为 $5$）作用在齐次单项式基 $u^{d-r} v^r$ 上；六枚生成元求和后全部虚部精确对消为纯整数矩阵，而归一化因子的平方 $(\sqrt{5})^{2d} = 5^d$ 恰好成为纯整数分母！
 
 ::: {.theorem #thm-ch15-lps-ramanujan-margins title="零公理模方 5 低自旋对称幂整数矩阵与拉马努金正定裕度定理" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_ramanujan_margins"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，设 `shell : S5.Shell` 遍取前四层非平凡对称幂壳层 `degreeOne`、`degreeTwo`、`degreeThree`、`degreeFour`（次数 $d = 1, 2, 3, 4$，对应自旋 $j = \frac{1}{2}, 1, \frac{3}{2}, 2$），`branch : Bool` 标记谱分支（在 $d = 4$ 处区分正负两支）。则对每一组 `(shell, branch)`，以下两项同时成立。
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。设 `shell : S5.Shell` 遍取前四层非平凡对称幂壳层 `degreeOne`、`degreeTwo`、`degreeThree`、`degreeFour`（次数 $d = 1, 2, 3, 4$，对应自旋 $j = \frac{1}{2}, 1, \frac{3}{2}, 2$），`branch : Bool` 标记谱分支（在 $d = 4$ 处区分正负两支）。则对每一组 `(shell, branch)`，以下两项同时成立。
 
 **（一）整数矩阵精确匹配（`S5.MatrixMatches shell`）。** 在单项式基下，六枚未归一化高斯整矩阵 $M_g$（$g \in S_5$）诱导的对称幂之和的每个矩阵元都严格等于虚部为零的纯整数矩阵元 `S5.matrixEntry shell`，四层壳矩阵依次为 $6 I_2$（$d = 1$）、$-2 I_3$（$d = 2$）、$-18 I_4$（$d = 3$）以及四次壳 $5 \times 5$ 对称整矩阵
 
@@ -257,7 +257,7 @@ $$
 观察 [@thm-ch15-lps-ramanujan-margins] 呈现的奇妙分界：前三层壳（$j = \frac{1}{2}, 1, \frac{3}{2}$）的六生成元和矩阵都是纯数量矩阵（$6 I_2, -2 I_3, -18 I_4$），每个向量天然都是本征向量；唯有到了四次对称幂壳层 $d = 4$（对应五维自旋 $j = 2$ 壳层 $V_2$，在八面体对称下裂为 $E \oplus T_2$，$5 = 2 + 3$），首尾单项式 $u^4$ 与 $v^4$ 通过非对角元 $64$ 发生耦合。为在零公理内核中无遗漏地锁死 $+54$（二重）与 $-74$（三重）确已穷尽全部五维方向，库中显式构造了全部五条整数本征线以及无须除以 $2$ 的双倍整数基变换：
 
 ::: {.theorem #thm-ch15-lps-degree-four-eigenbasis title="零公理四次对称幂壳层五条整数本征线与双倍基变换定理" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_degree_four_eigenbasis"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，记 $M^{(4)}$ 在 $\mathbb{Z}^5$（类型 `S5.DegreeFourVector`）上的线性作用为 `S5.degreeFourAction`。则以下两条结论同时成立。
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。记 $M^{(4)}$ 在 $\mathbb{Z}^5$（类型 `S5.DegreeFourVector`）上的线性作用为 `S5.degreeFourAction`。则以下两条结论同时成立。
 
 **（一）五条精确整数本征线。** 对五元归纳类型 `S5.DegreeFourLine` 的全部五个构造子，对应的五条整向量均为 $M^{(4)}$ 的精确本征向量——`outerSum` $= (1, 0, 0, 0, 1)$ 与 `middle` $= (0, 0, 1, 0, 0)$ 属于分支 `false`（缩放本征值 $+54$）；`outerDifference` $= (1, 0, 0, 0, -1)$、`firstInterior` $= (0, 1, 0, 0, 0)$ 与 `lastInterior` $= (0, 0, 0, 1, 0)$ 属于分支 `true`（缩放本征值 $-74$）：
 
