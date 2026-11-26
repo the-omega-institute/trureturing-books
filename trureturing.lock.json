@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "753470c62ab22ae24dd8aa033a5ab26eaa70fe05",
-  "pinned_at": "2026-11-26T16:32:01Z",
+  "pinned_at": "2026-11-26T17:06:03Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -5999,6 +5999,123 @@
       "statement_id": "sha256:48b540216ce0c16cb4164f5c3666695c71cd35301c1eca2c2d24786906cdf8dd",
       "line": 443,
       "signature": "theorem bloch_ball_hyperbolic : (∃ Φ : {r : EuclideanSpace ℝ (Fin 3) // ‖r‖ < 1} ≃ HyperbolicThreeSpace, ∀ r s, Real.cosh (dist (Φ r) (Φ s)) = kleinCosh r s) ∧ (∀ r : EuclideanSpace ℝ (Fin 3), blochFilter 1 r = r) ∧ (∀ (g h : Matrix (Fin 2) (Fin 2) ℂ) (r : EuclideanSpace ℝ (Fin 3)), (Matrix.trace (g * blochMatrix 1 r * gᴴ)).re ≠ 0 → blochFilter h (blochFilter g r) = blochFilter (h * g) r) ∧ (∀ (g : Matrix (Fin 2) (Fin 2) ℂ) (r s : EuclideanSpace ℝ (Fin 3)), (Matrix.trace (g * blochMatrix 1 r * gᴴ)).re ≠ 0 → (Matrix.trace (g * blochMatrix 1 s * gᴴ)).re ≠ 0 → 1 - ⟪blochFilter g r, blochFilter g "
+    },
+    "D5/S3/Geometry/Lorentz/WeylNullScreen.curvature_ricci_split": {
+      "module": "D5/S3/Geometry/Lorentz/WeylNullScreen",
+      "name": "D5.S3.Geometry.Lorentz.WeylNullScreen.curvature_ricci_split",
+      "kind": "def",
+      "statement_id": "sha256:6eab52357fbb567ac428d9bd8fe2f983644ca06367846d55188a0d3a7451115a",
+      "line": 204,
+      "signature": "noncomputable def curvature_ricci_split : AlgebraicCurvature4 ≃ₗ[ℝ] (Weyl4 × TracelessRicci4 × ℝ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/WeylNullScreen.finrank_algebraicCurvature4": {
+      "module": "D5/S3/Geometry/Lorentz/WeylNullScreen",
+      "name": "D5.S3.Geometry.Lorentz.WeylNullScreen.finrank_algebraicCurvature4",
+      "kind": "theorem",
+      "statement_id": "sha256:6eab52357fbb567ac428d9bd8fe2f983644ca06367846d55188a0d3a7451115a",
+      "line": 495,
+      "signature": "theorem finrank_algebraicCurvature4 : Module.finrank ℝ AlgebraicCurvature4 = 20",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/WeylNullScreen.finrank_tracelessRicci4": {
+      "module": "D5/S3/Geometry/Lorentz/WeylNullScreen",
+      "name": "D5.S3.Geometry.Lorentz.WeylNullScreen.finrank_tracelessRicci4",
+      "kind": "theorem",
+      "statement_id": "sha256:6eab52357fbb567ac428d9bd8fe2f983644ca06367846d55188a0d3a7451115a",
+      "line": 262,
+      "signature": "theorem finrank_tracelessRicci4 : finrank ℝ TracelessRicci4 = 9",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/WeylNullScreen.finrank_weyl4": {
+      "module": "D5/S3/Geometry/Lorentz/WeylNullScreen",
+      "name": "D5.S3.Geometry.Lorentz.WeylNullScreen.finrank_weyl4",
+      "kind": "theorem",
+      "statement_id": "sha256:6eab52357fbb567ac428d9bd8fe2f983644ca06367846d55188a0d3a7451115a",
+      "line": 492,
+      "signature": "theorem finrank_weyl4 : Module.finrank ℝ Weyl4 = 10",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/WeylNullScreen.null_tidal_ricci_invariance": {
+      "module": "D5/S3/Geometry/Lorentz/WeylNullScreen",
+      "name": "D5.S3.Geometry.Lorentz.WeylNullScreen.null_tidal_ricci_invariance",
+      "kind": "theorem",
+      "statement_id": "sha256:6eab52357fbb567ac428d9bd8fe2f983644ca06367846d55188a0d3a7451115a",
+      "line": 559,
+      "signature": "theorem null_tidal_ricci_invariance (R : AlgebraicCurvature4) (r : FutureNullRay) : let k",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/WeylNullScreen.weyl_electric_magnetic_equiv": {
+      "module": "D5/S3/Geometry/Lorentz/WeylNullScreen",
+      "name": "D5.S3.Geometry.Lorentz.WeylNullScreen.weyl_electric_magnetic_equiv",
+      "kind": "def",
+      "statement_id": "sha256:6eab52357fbb567ac428d9bd8fe2f983644ca06367846d55188a0d3a7451115a",
+      "line": 149,
+      "signature": "noncomputable def weyl_electric_magnetic_equiv : Weyl4 ≃ₗ[ℝ] (STF3 ℝ × STF3 ℝ) where toFun C",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/WeylNullScreen.weyl_null_screen_sampling": {
+      "module": "D5/S3/Geometry/Lorentz/WeylNullScreen",
+      "name": "D5.S3.Geometry.Lorentz.WeylNullScreen.weyl_null_screen_sampling",
+      "kind": "theorem",
+      "statement_id": "sha256:6eab52357fbb567ac428d9bd8fe2f983644ca06367846d55188a0d3a7451115a",
+      "line": 647,
+      "signature": "theorem weyl_null_screen_sampling {N : ℕ} (ray : Fin N → FutureNullRay) (hr : Function.Injective ray) : finrank ℝ (LinearMap.range (nullTidalSample ray)) = min 10 (2 * N) ∧ finrank ℝ (LinearMap.ker (nullTidalSample ray)) = max 0 (10 - 2 * N)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/WeylNullScreen.weyl_null_screen_vanishing": {
+      "module": "D5/S3/Geometry/Lorentz/WeylNullScreen",
+      "name": "D5.S3.Geometry.Lorentz.WeylNullScreen.weyl_null_screen_vanishing",
+      "kind": "theorem",
+      "statement_id": "sha256:6eab52357fbb567ac428d9bd8fe2f983644ca06367846d55188a0d3a7451115a",
+      "line": 691,
+      "signature": "theorem weyl_null_screen_vanishing {N : ℕ} (ray : Fin N → FutureNullRay) (hN : N ≤ 4) : nullTidalSample ray (vanishingWeyl ray hN) = 0 ∧ vanishingWeyl ray hN ≠ 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/WeylNullScreen.weyl_null_screen_zero": {
+      "module": "D5/S3/Geometry/Lorentz/WeylNullScreen",
+      "name": "D5.S3.Geometry.Lorentz.WeylNullScreen.weyl_null_screen_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:6eab52357fbb567ac428d9bd8fe2f983644ca06367846d55188a0d3a7451115a",
+      "line": 682,
+      "signature": "theorem weyl_null_screen_zero (ray : Fin 5 → FutureNullRay) (hr : Function.Injective ray) (C : Weyl4) : nullTidalSample ray C = 0 ↔ C = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover": {
       "module": "D5/S3/Geometry/Orthogonality/RationalSixAxisCover",
