@@ -522,7 +522,7 @@ $$
 1-|Z_T(t)|\ge\frac1{32\log T},
 \qquad \frac b{\log T}\le |t|\le\log T.
 $$
-Lean 定理以统一估计为显式前提，核验了这一步转移。[对数时间调和得分亏损界](https://github.com/the-omega-institute/trureturing/blob/df11bdd3ff3cbd92999114c5316053aa19fdd244/D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.lean#L240)
+Lean 定理以统一估计为显式前提，核验了这一步转移。[对数时间调和得分亏损界](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.harmonic_landau_window_deficit)
 
 结合先前的时间估计，可在 RH 与上述统一估计下得到一类分辨率趋零时的高斯碰撞极限。设 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$，令 $s_n=\sqrt{nP_2(T_n)/2}$，取满足 $\eta_n/s_n\to0$ 和 $\eta_n\log T_n\to\infty$ 的 $\eta_n>0$。按四阶矩条件选取中心窗参数 $A_n$，必要时将其缩至 $s_n/T_n$。由二阶矩下界仍有 $A_n\to\infty$。从 $A_n/s_n$ 到 $1/T_n$ 使用短时间高斯上界，从 $1/T_n$ 到 $b/\log T_n$ 使用前述估计。新增区间直到 $\log T_n$ 的归一化 Fejér 贡献至多为
 $$

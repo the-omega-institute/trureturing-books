@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "a053e43540994a946daf0075a7c59756b0d652a9",
-  "pinned_at": "2026-11-26T02:12:18Z",
+  "commit": "4bbf634c4f5f8dec66c2cb3c6a2a042b27c2900a",
+  "pinned_at": "2026-11-26T03:10:31Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -12986,7 +12986,7 @@
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment",
       "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHHarmonicPairMoment.harmonic_pair_ratio",
       "kind": "theorem",
-      "statement_id": "sha256:88a57432366fda22e45d863fdb0f33b9d537a13b6e0bb912570b905bf758bf72",
+      "statement_id": "sha256:05017caad3de90116a848948af1fd9467530cfb6c23876f122793f516df5ee80",
       "line": 207,
       "signature": "theorem harmonic_pair_ratio (rh : RiemannHypothesis) : ∀ᶠ T : ℝ in atTop, let logHeight",
       "axioms": [
@@ -12999,9 +12999,22 @@
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment",
       "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHHarmonicPairMoment.harmonic_reciprocal_time_deficit",
       "kind": "theorem",
-      "statement_id": "sha256:88a57432366fda22e45d863fdb0f33b9d537a13b6e0bb912570b905bf758bf72",
+      "statement_id": "sha256:05017caad3de90116a848948af1fd9467530cfb6c23876f122793f516df5ee80",
       "line": 228,
       "signature": "theorem harmonic_reciprocal_time_deficit (rh : RiemannHypothesis) : ∃ L : ℝ, 1 < L ∧ ∀ T t : ℝ, L ≤ T → 1/T ≤ |t| → |t| ≤ 1/L → let g : ↥(positiveCutoff rh T) → ℝ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.harmonic_landau_window_deficit": {
+      "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer",
+      "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHLandauWindowTransfer.harmonic_landau_window_deficit",
+      "kind": "theorem",
+      "statement_id": "sha256:76da5d16184838a9c68008cdc8b0b893ec9a39f67ac177c5f1de1c6f8713e152",
+      "line": 240,
+      "signature": "theorem harmonic_landau_window_deficit (rh : RiemannHypothesis) (b C : ℝ) (hb : 0 < b) (hC : 0 < C) (hLandau : ∀ V t : ℝ, 1 < V → 0 < |t| → ‖∑ j ∈ positiveCutoff rh V, (Zeta23.zeroMult j.val : ℂ)*phase (ordinate j) t‖ ≤ C*(V+Real.exp (|t|/2)*(1+|t|)^2+Real.exp (|t|/2)*(1+Real.log V)+Real.log V/|t|)) : ∃ L : ℝ, 1<L ∧ ∀ T t : ℝ, L≤T → b/Real.log T≤|t| → |t|≤Real.log T → let g : ↥(positiveCutoff rh T) → ℝ",
       "axioms": [
         "Classical.choice",
         "Quot.sound",

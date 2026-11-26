@@ -522,7 +522,7 @@ $$
 1-|Z_T(t)|\ge\frac1{32\log T},
 \qquad \frac b{\log T}\le |t|\le\log T.
 $$
-The Lean theorem verifies this transfer with the uniform estimate as an explicit premise. [Logarithmic-time harmonic deficit](https://github.com/the-omega-institute/trureturing/blob/df11bdd3ff3cbd92999114c5316053aa19fdd244/D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.lean#L240)
+The Lean theorem verifies this transfer with the uniform estimate as an explicit premise. [Logarithmic-time harmonic deficit](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.harmonic_landau_window_deficit)
 
 Together with the preceding time estimates this gives a Gaussian collision limit under RH and the stated uniform estimate for a range of shrinking resolutions. Let $T_n\to\infty$ with $(\log T_n)^2/n\to0$, let $s_n=\sqrt{nP_2(T_n)/2}$, and take $\eta_n>0$ with $\eta_n/s_n\to0$ and $\eta_n\log T_n\to\infty$. Choose the central half-width $A_n$ from the fourth-moment condition, reducing it to at most $s_n/T_n$ if necessary. This still gives $A_n\to\infty$ by the second-moment lower bound. Between $A_n/s_n$ and $1/T_n$ use the short-time Gaussian envelope. Between $1/T_n$ and $b/\log T_n$ use the estimates above. On the additional interval up to $\log T_n$, the normalized Fejér contribution is at most
 $$
