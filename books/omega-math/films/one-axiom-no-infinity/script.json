@@ -1630,8 +1630,8 @@
      "在 q = (3, 1, −2, 4)：χ₁ = 1/5，搅一次得到 −2/25。"
     ],
     [
-     "The margin, four ninety-six over twenty-five, is positive, as Lean checks. Only the constant fails; for every other shell, the literature proves the bound.",
-     "裕度 496/25 > 0，Lean 已检验；常值不及格，其余各层的界由文献证明。"
+     "The margin, four ninety-six over twenty-five, is positive, as Lean checks. The constant fails. The literature proves the bound on every nonconstant rotation-group shell.",
+     "裕度 496/25 > 0，Lean 已检验；常值超出此界；文献证明了旋转群所有非常值壳层的界。"
     ]
    ],
    "cues": [

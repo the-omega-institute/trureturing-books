@@ -3586,7 +3586,7 @@ SCENES.b05_mix = S => {
   B05.rich([['λ̂² ≤ 20', C.now], ['   ⟺   Q(f) = 20⟨f, f⟩ − ⟨T̂f, T̂f⟩ ≥ 0', C.white], ['   (f ⊥ 1)', C.dim]], 620, 335, { size: 30, a: sa });
   const ra = a * at(S, 2, 0.6);
   txt('only whole numbers and fractions · 只用整数和分数', 620, 390, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: ra });
-  B05.tag(620, 450, 'the bound on every shell: literature result (Eichler, Deligne, LPS) · 全部壳层的界：文献结果', C.argued, ra, { size: 15 });
+  B05.tag(620, 450, 'nonconstant SO(3) shells · 非常值 SO(3) 壳层 · Eichler–Deligne–LPS', C.argued, ra, { size: 15 });
 
   /* the spectrum line: the band λ̂² ≤ 20, χ₁ inside, the constant outside */
   const la = a * at(S, 2, 0.6, 0.6);
@@ -3600,7 +3600,7 @@ SCENES.b05_mix = S => {
     const ea = a * Q(S, 3, 'minus two fifths', 0.5);
     dot(X(-0.4), y, 12, 'g', ea);
     txt('χ₁: −2/5', X(-0.4) - 14, y + 74, { size: 22, fam: F.math, w: 700, align: 'right', c: C.now, a: ea });
-    const ka = a * Q(S, 5, 'Only the constant', 0.5);
+    const ka = a * Q(S, 5, 'The constant fails', 0.5);
     dot(X(6), y, 12, 'm', ka);
     txt('constant: 6,  20 − 36 = −16', X(6), y - 34, { size: 22, fam: F.math, w: 700, align: 'center', c: C.mag, a: ka });
   }
@@ -3626,8 +3626,8 @@ SCENES.b05_mix = S => {
     panel(120, 640, 1680, 170, ma, C.lean, 'MARGIN · 正定裕度');
     txt('20 − (−2/5)²  ≡  496/25  >  0', 160, 718, { size: 40, fam: F.math, w: 700, c: C.white, a: ma });
     B05.lean(160, 782, 'margin', a * Q(S, 5, 'as Lean checks', 0.5), { size: 17 });
-    txt('the constant: T̂₅1 = 6,  20 − 6² = −16 < 0', 1100, 718, { size: 28, fam: F.math, w: 700, c: C.mag, a: a * Q(S, 5, 'Only the constant', 0.5) });
-    B05.num(1100, 782, a * Q(S, 5, 'Only the constant', 0.5), { size: 15 });
+    txt('the constant: T̂₅1 = 6,  20 − 6² = −16 < 0', 1100, 718, { size: 28, fam: F.math, w: 700, c: C.mag, a: a * Q(S, 5, 'The constant fails', 0.5) });
+    B05.num(1100, 782, a * Q(S, 5, 'The constant fails', 0.5), { size: 15 });
   }
 };
 
