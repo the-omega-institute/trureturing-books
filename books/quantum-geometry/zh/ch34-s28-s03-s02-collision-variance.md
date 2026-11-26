@@ -485,6 +485,27 @@ $$
 
 [短区间计数下界](lean:D5/S3/Weil/ZeroData/CumulativeRvmError.short_window_count_lower) 这两个估计均无须 RH 前提。在正纵坐标谱的 RH 接口下，后一个估计给出了移动对数宽度区间的实际解析重数计数下界。要用这些计数建立更长时间区域的统一傅里叶相位亏损界，还需估计有利相位区间及其联合加权贡献。
 
+### 倒对数时间区间上的相反相位弧
+
+在 RH 接口下，存在固定的 $L>1$ 与 $b>0$，使得当 $T\ge L$ 且 $16\pi/T\le|t|\le b/\log T$ 时，
+
+$$
+1-|Z_T(t)|\ge\frac{1}{4096\log T}.
+$$
+
+[周期相位亏损界](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHPeriodicPhaseCoverage.harmonic_periodic_phase_deficit) 取 $b=\pi/(8K)$ 与 $H=2\pi/|t|$，则 $8H\le T$ 且 $H/16\ge K\log T$。从 $k_0H$ 开始，其中 $k_0=\lceil T/(2H)\rceil$，在 $[T/2,T]$ 中取 $q=\lfloor T/(4H)\rfloor\ge T/(8H)$ 个完整周期。每个周期中分别取以相位 $0$ 与 $\pi$ 为起点、宽度均为 $H/16$ 的两个半开区间。每族区间两两不交，对应相位分别距 $+1$ 与 $-1$ 至多 $\pi/8<1/2$。
+
+根据短区间计数界及 $T\ge4$ 时的 $\log(T/2)\ge\log T/2$，每个区间的解析重数计数至少为 $H\log T/(256\pi)$。高处每个零点对 $W(T)$ 的贡献至少为 $m_\gamma/(2T)$。因而每族区间的调和质量至少为 $\log T/(4096\pi)$。把原始复数得分投影到自身单位方向上。若该方向的实部非负，选取 $-1$ 附近的区间族，否则选取 $+1$ 附近的区间族。相应投影值至多为 $1/2$，而所有单位相位的投影值至多为 $1$。故原始模长亏损至少为 $\log T/(8192\pi)$。除以 $W(T)\le(\log T)^2/(2\pi)$ 即得所求结论。负时间由复共轭得到相同的界。
+
+所以在此时间区间上，$|Z_T(t)|^{2n}\le\exp(-n/(2048\log T))$。将其与先前在 $1/T\le|t|\le T^{-1/2}$ 上的倒高度估计结合，当 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$ 时，$1/T_n\le|t|\le b/\log T_n$ 上的归一化 Fejér 贡献趋于零。新增周期区域的贡献至多为
+
+$$
+\frac{b\sqrt{n/2}\,T_n}{\pi\log T_n}
+\exp\left(-\frac{n}{2048\log T_n}\right)\longrightarrow0.
+$$
+
+剩余中间区域位于 $b/\log T_n$ 之外，需要更细相位尺度的算术信息。
+
 ### 有限支撑的占用数对角下界
 
 对于有限支撑，非中心贡献还受到一个与频率具体取值无关的约束。设 $w_j\ge0$ 且 $\sum_jw_j=1$，次数为 $p$，占用向量 $m$ 满足 $\sum_jm_j=p$。记实际多项式权重为 $c_m$。任选一个指标 $j_0$，其计数由其余计数和总次数唯一确定。对其余坐标选择正半径 $r_j$，定义
