@@ -485,6 +485,27 @@ $$
 
 [Short-window lower count](lean:D5/S3/Weil/ZeroData/CumulativeRvmError.short_window_count_lower) Both estimates hold without an RH premise. Under the positive-ordinate RH interface, the latter is an actual multiplicity-weighted lower count for moving bands of logarithmic width. Turning these counts into a uniform bound for the Fourier phase deficit at longer times requires additional estimates of the favorable phase intervals and their joint weighted contribution.
 
+### Opposite phase arcs on reciprocal-logarithmic time windows
+
+Under the RH interface, there exist fixed $L>1$ and $b>0$ such that for $T\ge L$ and $16\pi/T\le|t|\le b/\log T$,
+
+$$
+1-|Z_T(t)|\ge\frac{1}{4096\log T}.
+$$
+
+[Periodic phase deficit](https://github.com/the-omega-institute/trureturing/blob/2135f55e75121b7777570583931a435686bb45d8/D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHPeriodicPhaseCoverage.lean#L331) To see the origin of the estimate, take $b=\pi/(8K)$ and $H=2\pi/|t|$. Then $8H\le T$ and $H/16\ge K\log T$. Starting at $k_0H$ with $k_0=\lceil T/(2H)\rceil$, use $q=\lfloor T/(4H)\rfloor\ge T/(8H)$ complete periods in $[T/2,T]$. In each period take the two half-open intervals of width $H/16$ starting at phases $0$ and $\pi$. For each family these intervals are pairwise disjoint. The phases in them are within distance $\pi/8<1/2$ of $+1$ and $-1$, respectively.
+
+The count in each interval is at least $H\log T/(256\pi)$, by the short-window estimate and $\log(T/2)\ge\log T/2$ for $T\ge4$. Each zero in the upper band contributes at least $m_\gamma/(2T)$ to $W(T)$. Thus each of the two families has harmonic mass at least $\log T/(4096\pi)$. Project the raw complex score onto its own unit direction. If its real part is nonnegative, use the family near $-1$, otherwise use the family near $+1$. Those projections are at most $1/2$, while every unit phase has projection at most $1$. The raw norm deficit is therefore at least $\log T/(8192\pi)$. Division by $W(T)\le(\log T)^2/(2\pi)$ proves the claim. The bound also holds at negative times by conjugation.
+
+Consequently throughout this window, $|Z_T(t)|^{2n}\le\exp(-n/(2048\log T))$. Combined with the earlier reciprocal-height bound on $1/T\le|t|\le T^{-1/2}$, it yields a vanishing normalized Fejér contribution on $1/T_n\le|t|\le b/\log T_n$ when $T_n\to\infty$ and $(\log T_n)^2/n\to0$. Indeed the additional periodic region contributes at most
+
+$$
+\frac{b\sqrt{n/2}\,T_n}{\pi\log T_n}
+\exp\left(-\frac{n}{2048\log T_n}\right)\longrightarrow0.
+$$
+
+The remaining intermediate estimate is needed beyond $b/\log T_n$. It requires additional arithmetic information at finer phase scales.
+
 ### Occupation diagonal lower bound for finite support
 
 For finite support, the noncentral contribution also has a constraint independent of the specific frequency values. Suppose $w_j\ge0$ and $\sum_jw_j=1$, and let an occupation vector $m$ of degree $p$ satisfy $\sum_jm_j=p$. Write $c_m$ for its actual multinomial weight. Choose an index $j_0$, whose count is determined by the other counts and the total degree. For positive radii $r_j$ on the remaining coordinates define
