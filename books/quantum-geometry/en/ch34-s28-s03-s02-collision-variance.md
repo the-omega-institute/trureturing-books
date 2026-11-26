@@ -524,12 +524,19 @@ $$
 $$
 The Lean theorem verifies this transfer with the uniform estimate as an explicit premise. [Logarithmic-time harmonic deficit](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.harmonic_landau_window_deficit)
 
-Together with the preceding time estimates this gives a Gaussian collision limit under RH and the stated uniform estimate for a range of shrinking resolutions. Let $T_n\to\infty$ with $(\log T_n)^2/n\to0$, let $s_n=\sqrt{nP_2(T_n)/2}$, and take $\eta_n>0$ with $\eta_n/s_n\to0$ and $\eta_n\log T_n\to\infty$. Choose the central half-width $A_n$ from the fourth-moment condition, reducing it to at most $s_n/T_n$ if necessary. This still gives $A_n\to\infty$ by the second-moment lower bound. Between $A_n/s_n$ and $1/T_n$ use the short-time Gaussian envelope. Between $1/T_n$ and $b/\log T_n$ use the estimates above. On the additional interval up to $\log T_n$, the normalized Fejér contribution is at most
+::: {.theorem #thm-ch34-zeta-harmonic-collision-limit title="Gaussian collision limit for harmonic-weighted zeta zeros" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLogarithmicCollisionLimit.harmonic_zeta_collision_limit"}
+Assume RH and the uniform estimate above for some fixed $C>0$. Let $T_n\to\infty$ with $(\log T_n)^2/n\to0$ and set $s_n=\sqrt{nP_2(T_n)/2}$. If $\eta_n$ is eventually positive, $\eta_n/s_n\to0$ and $\eta_n\log T_n\to\infty$, then
 $$
-\frac{\sqrt{n/2}\,T_n\log T_n}{\pi}
-\exp\left(-\frac{n}{16\log T_n}\right)\longrightarrow0,
+\frac{s_n E_n(\eta_n)}{\eta_n W(T_n)^{2n}}\longrightarrow\frac1{\sqrt\pi}.
 $$
-using $K_{\eta_n}\le\eta_n/(2\pi)$ and $s_n\le T_n\sqrt{n/2}$. Relative truncation at $\log T_n$ then transfers the central Fejér limit to the full line. The argument applies to every fixed positive multiple of $\eta_n$, so the secant result gives $s_n E_n(\eta_n)/(\eta_n W(T_n)^{2n})\to1/\sqrt\pi$ for the original harmonic weights. This integrated consequence uses the literature premise. Resolutions with bounded $\eta_n\log T_n$ still require longer-time control.
+Here $E_n(r)$ sums over ordered pairs of occupation vectors whose absolute frequency difference is at most $r$. Each pair contributes the product of its two multinomial weights induced by the original harmonic weights.
+:::
+
+::: proof
+The fourth-moment bound $P_4(T)\le T^2P_2(T)$ allows the central window to extend to $|t|\le1/T_n$. The lower bound on the second moment makes its rescaled half-width $s_n/T_n$ tend to infinity. The central integral gives $1/(2\sqrt\pi)$. The reciprocal-height, periodic-phase, and Landau estimates cover the entire range $1/T_n\le|t|\le\log T_n$ with a uniform score deficit of at least $c/\log T_n$ for some $c>0$. The score raised to the power $2n$ is therefore bounded by $\exp(-2cn/\log T_n)$, which absorbs the factor $T_n\sqrt n\log T_n$ in the normalized integral. Relative truncation transfers the limit to the full line. The argument works for every fixed positive multiple of $\eta_n$. This gives a quadratic ramp limit, and the two secants recover the hard-band constant with the endpoint included. The full proof is checked by the Lean kernel.
+:::
+
+Gonek's uniform estimate remains an explicit premise of the theorem. When $\eta_n\log T_n$ is bounded, the relative truncation estimate gives no vanishing error bound.
 
 ### Occupation diagonal lower bound for finite support
 

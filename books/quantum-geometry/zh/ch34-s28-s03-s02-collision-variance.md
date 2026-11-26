@@ -524,12 +524,19 @@ $$
 $$
 Lean 定理以统一估计为显式前提，核验了这一步转移。[对数时间调和得分亏损界](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.harmonic_landau_window_deficit)
 
-结合先前的时间估计，可在 RH 与上述统一估计下得到一类分辨率趋零时的高斯碰撞极限。设 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$，令 $s_n=\sqrt{nP_2(T_n)/2}$，取满足 $\eta_n/s_n\to0$ 和 $\eta_n\log T_n\to\infty$ 的 $\eta_n>0$。按四阶矩条件选取中心窗参数 $A_n$，必要时将其缩至 $s_n/T_n$。由二阶矩下界仍有 $A_n\to\infty$。从 $A_n/s_n$ 到 $1/T_n$ 使用短时间高斯上界，从 $1/T_n$ 到 $b/\log T_n$ 使用前述估计。新增区间直到 $\log T_n$ 的归一化 Fejér 贡献至多为
+::: {.theorem #thm-ch34-zeta-harmonic-collision-limit title="调和加权 ζ 零点的高斯碰撞极限" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLogarithmicCollisionLimit.harmonic_zeta_collision_limit"}
+假设 RH，并设上面的统一估计对某个固定 $C>0$ 成立。令 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$，记 $s_n=\sqrt{nP_2(T_n)/2}$。若 $\eta_n$ 最终为正，且 $\eta_n/s_n\to0$、$\eta_n\log T_n\to\infty$，那么
 $$
-\frac{\sqrt{n/2}\,T_n\log T_n}{\pi}
-\exp\left(-\frac{n}{16\log T_n}\right)\longrightarrow0,
+\frac{s_n E_n(\eta_n)}{\eta_n W(T_n)^{2n}}\longrightarrow\frac1{\sqrt\pi}.
 $$
-其中用到 $K_{\eta_n}\le\eta_n/(2\pi)$ 与 $s_n\le T_n\sqrt{n/2}$。在 $\log T_n$ 处作相对截断，即可把中心 Fejér 极限传到全线。此论证适用于 $\eta_n$ 的每个固定正倍数，因此割线结果给出原调和权重的硬碰撞极限 $s_n E_n(\eta_n)/(\eta_n W(T_n)^{2n})\to1/\sqrt\pi$。这个积分推论使用了文献前提。若 $\eta_n\log T_n$ 有界，仍需控制更长时间。
+这里 $E_n(r)$ 对所有频率差绝对值不超过 $r$ 的有序占用向量对求和，每一对取原调和权重所诱导的两个多项式权重之积。
+:::
+
+::: proof
+四阶矩界 $P_4(T)\le T^2P_2(T)$ 允许把中心窗直接取为 $|t|\le1/T_n$。二阶矩下界保证换元后的半宽 $s_n/T_n$ 趋于无穷。中心积分给出 $1/(2\sqrt\pi)$。倒数高度、周期相位和 Landau 估计覆盖 $1/T_n\le|t|\le\log T_n$ 的整个区间，给出统一的得分亏损下界 $c/\log T_n$，其中 $c>0$。得分的 $2n$ 次幂于是至多为 $\exp(-2cn/\log T_n)$，足以抵消归一化积分中的 $T_n\sqrt n\log T_n$ 因子。相对截断把极限传到全线。对 $\eta_n$ 的每个固定正倍数应用同一论证，得到二次斜坡极限，再由两侧割线得到含端点的硬碰撞常数。完整证明由 Lean 内核检查。
+:::
+
+Gonek 的统一估计在这个定理中仍是显式前提。若 $\eta_n\log T_n$ 有界，相对截断给出的误差界无法保证趋零。
 
 ### 有限支撑的占用数对角下界
 
