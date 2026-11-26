@@ -145,6 +145,18 @@ $$
 第 1 款在任意正交规范基上用一致下界把有限子集基数压在 $\operatorname{Re}(\operatorname{Tr} W)/c$ 之下，从而导出基有限与 `Module.finrank` 上界（投影情形限制于 $\operatorname{ran} p$ 的正交规范基）。第 2 款显式构造 $\mathbb{N} \times \mathrm{Fin}\,r \simeq \mathbb{N}$ 的分块循环双射（每组含 $1$ 个奇数指标与 $r - 1$ 个偶数指标），直接计算两种截断的基数与配对核之和。第 3 款在每条有限纤维上直接展开 $\sum_a v_a(\mathbf{1}_I(a) - p) = 0$ 与 $\sum_a |v_a(\mathbf{1}_I(a) - p)| = 2p(1-p)$，再由非负项级数的乘积可和性推出充要等价。第 4 款以 $p$-级数 $\sum (k+1)^{-2} \le 2$ 控制绝对收敛与一致上界，并对有限和逐项三次求导得 $-i H_N$ 后应用调和级数发散定理。完整证明由 Lean 内核检查。
 :::
 
+在通往四维洛伦兹无质量自旋-$2$ 几何运动学的第一步上，四维代数曲率张量的正交分解与零锥横截屏（null screen）潮汐重构的精确阈值亦已由 Lean 内核严格验证：
+
+::: {.theorem #thm-ch34-weyl-null-screen-reconstruction title="四维代数曲率分解与五条零光线 Weyl 潮汐重构定理" lean="D5/S3/Geometry/Lorentz/WeylNullScreen.finrank_algebraicCurvature4, D5/S3/Geometry/Lorentz/WeylNullScreen.finrank_weyl4, D5/S3/Geometry/Lorentz/WeylNullScreen.finrank_tracelessRicci4, D5/S3/Geometry/Lorentz/WeylNullScreen.null_tidal_ricci_invariance, D5/S3/Geometry/Lorentz/WeylNullScreen.weyl_null_screen_sampling, D5/S3/Geometry/Lorentz/WeylNullScreen.weyl_null_screen_zero, D5/S3/Geometry/Lorentz/WeylNullScreen.weyl_null_screen_vanishing"}
+1. **四维代数曲率空间的不可约正交分解**（[`finrank_algebraicCurvature4`](lean:D5/S3/Geometry/Lorentz/WeylNullScreen.finrank_algebraicCurvature4)、[`finrank_weyl4`](lean:D5/S3/Geometry/Lorentz/WeylNullScreen.finrank_weyl4)、[`finrank_tracelessRicci4`](lean:D5/S3/Geometry/Lorentz/WeylNullScreen.finrank_tracelessRicci4)，经由显式线性同构 [`curvature_ricci_split`](lean:D5/S3/Geometry/Lorentz/WeylNullScreen.curvature_ricci_split) 与 [`weyl_electric_magnetic_equiv`](lean:D5/S3/Geometry/Lorentz/WeylNullScreen.weyl_electric_magnetic_equiv)）：四维洛伦兹代数曲率空间满足显式实线性同构 $\mathrm{AlgebraicCurvature}_4 \simeq \mathrm{Weyl}_4 \times \mathrm{TracelessRicci}_4 \times \mathbb{R}$，维数满足精确分解 $20 = 10 + 9 + 1$；其中 $10$ 维外尔（Weyl）子空间通过电—磁潮汐对同构于 $\mathrm{Sym}^2_0(\mathbb{R}^3) \times \mathrm{Sym}^2_0(\mathbb{R}^3)$，并携带等价于 $5$ 维复空间的自对偶复结构（$4$ 次射影多项式 $\mathrm{WeylQuartic}$）。
+2. **零屏潮汐张量的里奇无关性**（[`null_tidal_ricci_invariance`](lean:D5/S3/Geometry/Lorentz/WeylNullScreen.null_tidal_ricci_invariance)）：对任意未来零光线 $r$ 及其正交类空二维屏标架 $(e_0, e_1)$，全曲率张量 $R$ 在该二维屏上诱导的对称无迹潮汐分量与纯外尔部分 $W$ 完全重合，里奇与标量曲率分量严格消去，每条零光线提供恰好 $2$ 个实自旋-$2$（复 $1$ 维）潮汐偏振读数。
+3. **精确的五条零光线重构阈值与四光线盲区**（[`weyl_null_screen_sampling`](lean:D5/S3/Geometry/Lorentz/WeylNullScreen.weyl_null_screen_sampling)、[`weyl_null_screen_zero`](lean:D5/S3/Geometry/Lorentz/WeylNullScreen.weyl_null_screen_zero)、[`weyl_null_screen_vanishing`](lean:D5/S3/Geometry/Lorentz/WeylNullScreen.weyl_null_screen_vanishing)）：对任意 $N$ 条互异的未来零光线，联合零屏潮汐采样算符满足精确实秩公式 $\operatorname{rank}_{\mathbb{R}} = \min(10, 2N)$ 与核维数 $\max(0, 10 - 2N)$。特别地，**任意 $5$ 条互异未来零光线**上的无迹潮汐测量即可唯一忠实重构完整的 $10$ 维四维外尔曲率（全为零当且仅当 $C = 0$）；相反，对**任意 $N \le 4$ 条零光线**，均存在非零外尔张量在其全部横截屏上的潮汐读数为零。
+:::
+
+::: proof
+在 $6$ 维二形式对基上将第一比安基恒等式与洛伦兹里奇迹写成显式线性约束，先由电—磁分解构造 $\mathrm{Weyl}_4 \simeq \mathrm{Sym}^2_0(\mathbb{R}^3)^2$ 与 $20 = 10 + 9 + 1$ 分解，再借助立体投影把未来零光线参数化为天球 $\widehat{\mathbb{C}} = \mathrm{Option}\,\mathbb{C}$，将每条零光线上的复潮汐读数与次数 $\le 4$ 复多项式的射影求值严格等同。由此，对互异的 $N$ 条零光线，拉格朗日插值与范德蒙满射/单射直接给出精确秩 $\min(10, 2N)$ 与 $N = 5$ 时的忠实重构；当 $N \le 4$ 时，以这 $N$ 个射影点为根的非零四次多项式之逆像即构成显式非零盲区外尔张量。该定理严格锁定四维纯引力自旋-$2$ 曲率的零锥代数运动学，而连续统动力学场方程、能动张量耦合及 $G_N$ 标定仍属下列开放问题。完整证明由 Lean 内核检查。
+:::
+
 我们将从离散比较几何通往四维相对论引力动力学的完整未决桥接任务正式立案如下：
 
 ::: {.problem #prob-ch34-gravity-dynamics-and-coupling title="离散比较几何导出四维洛伦兹自旋-2 引力动力学与牛顿常数归一化的开放问题"}
