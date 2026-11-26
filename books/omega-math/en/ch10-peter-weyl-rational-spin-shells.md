@@ -4,7 +4,7 @@
 
 Volume III ([Chapter 7](ch07-second-order-jet-calculus.md)–[Chapter 9](ch09-telescoping-stokes-and-arc-manifold.md)) evicted the ghost of limits from calculus: inside nilpotent jet rings and telescoping heap sums, differentiation and integration became finite rational algebra. With this chapter, Volume IV enters the heartland of harmonic analysis—identifying the spectral shells of the classical real three-sphere and expressing their exact integer-spin readouts as rational polynomials.
 
-Standard textbooks present the flat Fourier transform as a universal master key without asking a genealogical question: why should decomposing a periodic or localized wave force us onto an unbounded straight line, swallowing $\pi$, $e$, continuous ultraviolet frequencies, and truncation ringing? The answer mirrors the diagnosis of Volume I: flat Fourier analysis is merely the tangent-line approximation obtained by violently flattening a closed three-sphere. Once functions live directly on the classical compact group of real unit quaternions $S^3(1)\cong\mathrm{SU}(2)$, the Peter–Weyl decomposition immediately quantizes the spectrum into discrete half-integer spin shells, and every integer-spin spherical character collapses into an integer-coefficient Chebyshev polynomial in the fidelity $\kappa$; the Chebyshev Pell and doubling identities, universal even- and odd-shell square-root elimination, the spin-$2$ character formula, the all-degree integer-spin Clebsch–Gordan character product law, and the rational $5d^{10}/5d^8$ orbital quadrupole balance are all proved with zero axioms inside `OmegaInit` and `OmegaMath` (`axioms: []`).
+Standard textbooks present the flat Fourier transform as a universal master key without asking a genealogical question: why should decomposing a periodic or localized wave force us onto an unbounded straight line, swallowing $\pi$, $e$, continuous ultraviolet frequencies, and truncation ringing? The answer mirrors the diagnosis of Volume I: flat Fourier analysis is merely the tangent-line approximation obtained by violently flattening a closed three-sphere. Once functions live directly on the classical compact group of real unit quaternions $S^3(1)\cong\mathrm{SU}(2)$, the Peter–Weyl decomposition immediately quantizes the spectrum into discrete half-integer spin shells, and every integer-spin spherical character collapses into an integer-coefficient Chebyshev polynomial in the fidelity $\kappa$; the Chebyshev Pell and doubling identities, even-shell square-root elimination and odd-shell signed factorization, the spin-$2$ character formula, the all-degree integer-spin Clebsch–Gordan character product law, and the rational $5d^{10}/5d^8$ orbital quadrupole balance are all proved with zero axioms inside `OmegaInit` and `OmegaMath` (`axioms: []`).
 
 ---
 
@@ -66,10 +66,10 @@ Define the linear map $\Phi : \prod_{i \in \iota} \operatorname{End}_k(W_i) \to 
 :::
 
 ::: {.remark #rem-ch10-peter-weyl-su2-literature title="Peter–Weyl Decomposition and Gibbs Truncation Boundary (Literature Result)"}
-**Literature result, not formalized in this book.** For the compact simply connected Lie group $\mathbb{T}_3 \cong \mathrm{SU}(2)$, all finite-dimensional irreducible representations are uniquely indexed by half-integer spins $j \in \{0, \frac{1}{2}, 1, \frac{3}{2}, 2, \dots\}$, where $\mathcal{V}_j \cong \operatorname{Sym}^{2j}(\mathbb{C}^2)$ has dimension $2j + 1$. The Peter–Weyl theorem (F. Peter and H. Weyl, *Math. Ann.* **97**, 737–755, 1927; E. P. Wigner, 1931) yields the Hilbert-space orthogonal decomposition
+**Literature result, not formalized in this book.** For the compact simply connected Lie group $S^3(\mathbb{R}) \cong \mathrm{SU}(2)$, all finite-dimensional irreducible representations are uniquely indexed by half-integer spins $j \in \{0, \frac{1}{2}, 1, \frac{3}{2}, 2, \dots\}$, where $\mathcal{V}_j \cong \operatorname{Sym}^{2j}(\mathbb{C}^2)$ has dimension $2j + 1$. The Peter–Weyl theorem (F. Peter and H. Weyl, *Math. Ann.* **97**, 737–755, 1927; E. P. Wigner, 1931) yields the Hilbert-space orthogonal decomposition
 
 $$
-L^2(\mathbb{T}_3) \;\cong\; \widehat{\bigoplus_{2j = 0}^{\infty}} \;\mathcal{V}_j \otimes \mathcal{V}_j^*, \qquad \dim_{\mathbb{C}}(\mathcal{V}_j \otimes \mathcal{V}_j^*) \;=\; (2j + 1)^2,
+L^2(S^3(\mathbb{R})) \;\cong\; \widehat{\bigoplus_{2j = 0}^{\infty}} \;\mathcal{V}_j \otimes \mathcal{V}_j^*, \qquad \dim_{\mathbb{C}}(\mathcal{V}_j \otimes \mathcal{V}_j^*) \;=\; (2j + 1)^2,
 $$
 
 matching the shell-by-shell square-dimension count of [@thm-ch10-character-kernel-rank]. The flat Dirichlet limiting overshoot $\frac{\operatorname{Si}(\pi)}{\pi} - \frac{1}{2} \approx 8.9490\%$ is due to Wilbraham (1848) and Gibbs (1898–1899); antipodal refocusing of sharp spherical cutoffs on $S^3$ was established by Pinsky (1994) and Taylor (1997), while zero-overshoot positivity-preserving smoothing via Fejér and Jackson kernels originates with Fejér (1900) and Jackson (1912).
@@ -79,22 +79,22 @@ matching the shell-by-shell square-dimension count of [@thm-ch10-character-kerne
 
 ## 10.2 The First Three Fundamental Shells: Past, Present, Future, and Doubling Fusion {#sec-ch10-causal-triad-shells}
 
-Arranging the Peter–Weyl spectrum of $\mathbb{T}_3$ by ascending dimension reveals that the first three shells—$j = 0$ (dimension $1$), $j = \frac{1}{2}$ (dimension $2$), and $j = 1$ (dimension $3$)—are not an accidental list of special functions. They lock one-to-one onto the Past (zeroth-order anchor), Present (first-order tangent), and Future (second-order curvature) causal mother kernel of [Chapter 7](ch07-second-order-jet-calculus.md).
+Arranging the Peter–Weyl spectrum of $S^3(\mathbb{R})$ by ascending dimension reveals that the first three shells—$j = 0$ (dimension $1$), $j = \frac{1}{2}$ (dimension $2$), and $j = 1$ (dimension $3$)—are not an accidental list of special functions. They lock one-to-one onto the Past (zeroth-order anchor), Present (first-order tangent), and Future (second-order curvature) causal mother kernel of [Chapter 7](ch07-second-order-jet-calculus.md).
 
-For any unit quaternion $q = w + x\mathbf{i} + y\mathbf{j} + z\mathbf{k} \in S^3$—or any nonzero homogeneous integer ternion $p = (w, x, y, z) \in \mathbb{Z}^4 \setminus \{0\}$—recall its projective fidelity relative to the anchor $p_0 = (1, 0, 0, 0)$:
+For a nonzero real quaternion $p=(w,x,y,z)$ choose the signed unit quaternion $q=p/\lVert p\rVert\in S^3(\mathbb{R})$. Its projective fidelity relative to the anchor $p_0=(1,0,0,0)$ is
 
 $$
 \kappa(p_0, p) \;=\; \frac{w^2}{w^2 + x^2 + y^2 + z^2} \;=\; \frac{w^2}{\lVert p\rVert^2} \;\in\; [0, 1].
 $$
 
-Rational homogeneous coordinates give a rational fidelity. A general real unit quaternion can have irrational fidelity. Writing the half-angle cosine $c = w / \lVert p\rVert = \cos\phi$ in the classical real shadow gives $\kappa = c^2$. Under the Weyl character formula $\chi_j(q) = \Tr D^j(q) = U_{2j}(c)$ (where $U_m$ denotes the second-kind Chebyshev polynomial), the three lowest shells expose an extraordinarily clean structure.
+Write $c=\operatorname{Re}(q)=w/\lVert p\rVert$. Then $\kappa=c^2$, and the Weyl character formula gives $\chi_j(q)=\Tr D^j(q)=U_{2j}(c)$ for every $j\in\frac12\mathbb{N}$. Rational homogeneous coordinates give rational $\kappa$. On the real group, $\kappa$ ranges over all of $[0,1]$.
 
 ::: {.definition #def-ch10-causal-spin-shells title="The First Three Spin Shells and Causal Mother-Kernel Correspondence"}
 On the real unit quaternion group, with projective fidelity $\kappa \in [0,1]$ as a conjugacy invariant, define the three fundamental spin-shell character kernels (with the causal triad reading marked as a theoretical model):
 
 1. **Monopole DC shell $j = 0$ ($\dim \mathcal{V}_0 = 1$, bilateral shell dimension $1^2 = 1$)**: constant character $\chi_0(\kappa) \equiv 1$, carrying the rotation-invariant global average and **Past DC memory anchor**;
 2. **Fundamental spinor shell $j = \frac{1}{2}$ ($\dim \mathcal{V}_{1/2} = 2$, bilateral shell dimension $2^2 = 4$)**: one-sided character $\chi_{1/2}(q) = 2c$ tracking the double-cover sign flip $q \mapsto -q$, whose **squared kernel** collapses to the pure linear monomial $\chi_{1/2}^2(\kappa) = 4\kappa$, carrying the first-order **Present Dirac spinor slice**;
-3. **Three-dimensional adjoint curvature shell $j = 1$ ($\dim \mathcal{V}_1 = 3$, bilateral shell dimension $3^2 = 9$)**: descending to the projective quotient $\mathrm{SO}(3) \cong \mathbb{T}_3/\{\pm 1\}$ as the exact integer linear polynomial $\chi_1(\kappa) = 4\kappa - 1$, carrying the second-order **Future 3D adjoint curvature field**.
+3. **Three-dimensional adjoint curvature shell $j = 1$ ($\dim \mathcal{V}_1 = 3$, bilateral shell dimension $3^2 = 9$)**: descending to the projective quotient $\mathrm{SO}(3) \cong S^3(\mathbb{R})/\{\pm 1\}$ as the exact integer linear polynomial $\chi_1(\kappa) = 4\kappa - 1$, carrying the second-order **Future 3D adjoint curvature field**.
 :::
 
 These three shells are welded together by a single elementary polynomial identity:
@@ -115,15 +115,15 @@ $$
 \chi_1\!\left(\frac{1}{4}\right) \;=\; 4 \cdot \frac{1}{4} - 1 \;=\; 0,
 $$
 
-certifying the exact zero-trace orthogonal node of a $120^\circ$ rotation without a single decimal or trigonometric function. The table below summarizes the divide separating flat $\mathbb{R}$, the two-sphere $S^2$, and the ternion three-sphere $\mathbb{T}_3$.
+certifying the exact zero-trace orthogonal node of a $120^\circ$ rotation without a single decimal or trigonometric function. The table below summarizes the divide separating flat $\mathbb{R}$, the two-sphere $S^2$, and the group of signed real unit quaternions $S^3(\mathbb{R})$.
 
-| Structural Dimension | Flat Fourier Transform ($\mathbb{R}$) | Two-Sphere Harmonics ($S^2, Y_\ell^m$) | Ternion Rational Spectrum ($\mathbb{T}_3, \mathcal{F}_\Omega$) |
+| Structural Dimension | Flat Fourier Transform ($\mathbb{R}$) | Two-Sphere Harmonics ($S^2, Y_\ell^m$) | Peter–Weyl spectrum ($\mathrm{SU}(2)$) |
 | :--- | :--- | :--- | :--- |
-| **Underlying space** | Open non-compact line $(-\infty, +\infty)$ | Compact non-group ($\chi(S^2) = 2$) | Compact interior-only heap $\mathbb{T}_3 \cong S^3(1)$ |
+| **Underlying space** | Open non-compact line $(-\infty, +\infty)$ | Compact non-group ($\chi(S^2) = 2$) | Compact group of signed real unit quaternions $S^3(\mathbb{R})$ |
 | **Spectrum topology** | Continuous unbounded $\xi \in \mathbb{R}$ | Integer orbital momenta $\ell \in \mathbb{N}$ only | Complete half-integer shells $j \in \frac{1}{2}\mathbb{N}$, dim $(2j+1)^2$ |
-| **Transform kernel** | Transcendental $e^{-\hat{\mathbf{i}}2\pi\xi x}$ | Associated Legendre with polar singularities | Integer Chebyshev $E_j(\kappa)$ and rational projectors |
+| **Transform kernel** | Transcendental $e^{-\hat{\mathbf{i}}2\pi\xi x}$ | Associated Legendre with polar singularities | Spin $j$ has character $U_{2j}(c)$. For integer $j=n$, this is $E_n(\kappa)$ with $\kappa=c^2$. |
 | **Lowest harmonics** | No discrete fundamental mode | $\ell = 0$ scalar, $\ell = 1$ polar vector | $j = 0$ Past anchor, $j = \frac{1}{2}$ Present spinor, $j = 1$ Future field |
-| **Convolution law** | Origin-dependent abelian product | No intrinsic group convolution | Origin-free ternary convolution $\to \widehat{f}_j \widehat{g}_j^\dagger \widehat{h}_j$ |
+| **Convolution law** | Origin-dependent abelian product | No intrinsic group convolution | $L^1$ ternary convolution with normalized Haar measure on $\mathrm{SU}(2)$ $\to \widehat{f}_j \widehat{g}_j^\dagger \widehat{h}_j$ |
 
 ---
 
@@ -151,7 +151,7 @@ where $T_n$ and $U_n$ denote the integer-coefficient Chebyshev polynomials of th
 On unit quaternions, reflection satisfies the algebraic identity $u \bar{v} u = 2\langle u, v\rangle_{\mathbb{R}}\,u - \operatorname{normSq}(u)\,v$. In the forward direction, induction preserves $\operatorname{normSq}(x_n) = 1$ and constant adjacent inner product $\langle x_n, x_{n+1}\rangle_{\mathbb{R}} = c$, reducing the cubic recurrence to the linear two-step recurrence $x_{n+2} = 2c\,x_{n+1} - x_n$, which matches the defining recurrence of $U_n$; taking the inner product with $x_0$ and applying $T_n(c) = U_n(c) - c U_{n-1}(c)$ gives $\langle x_0, x_n\rangle_{\mathbb{R}} = T_n(c)$. Conversely, the Chebyshev formulas force constant adjacent inner product $c$ and recover the cubic reflection rule. The full proof is checked by the Lean kernel.
 :::
 
-[@thm-ch10-heap-chebyshev-recurrence] shows that $U_m(c)$ is an integer polynomial in the half-angle cosine $c$. Yet on the canonical homogeneous carrier `ProjTernion`, the native square-root-free observable is not $c = \pm\sqrt{\kappa}$ but its square $\kappa = c^2 \in \mathbb{Q} \cap [0, 1]$. Had $U_{2n}(c)$ contained any odd power $c^{2k+1}$, high-spin characters would force irrational square roots $\sqrt{\kappa}$. Fortunately, for **every integer spin** $j = n \in \mathbb{N}$, the even-index polynomial $U_{2n}(c)$ is an even function of $c$, containing only even powers. We may therefore bypass $c$ and $\sqrt{\kappa}$ altogether and define the even-Chebyshev family $E_n(\kappa)$ directly inside the integer polynomial ring $\mathbb{Z}[\kappa]$.
+[@thm-ch10-heap-chebyshev-recurrence] shows that $U_m(c)$ is an integer polynomial in the half-angle cosine $c$. Yet on the canonical representatives `CanonProjTernion`, the native square-root-free observable is not $c = \pm\sqrt{\kappa}$ but its square $\kappa = c^2 \in \mathbb{Q} \cap [0, 1]$. Had $U_{2n}(c)$ contained any odd power $c^{2k+1}$, high-spin characters would force irrational square roots $\sqrt{\kappa}$. Fortunately, for **every integer spin** $j = n \in \mathbb{N}$, the even-index polynomial $U_{2n}(c)$ is an even function of $c$, containing only even powers. We may therefore bypass $c$ and $\sqrt{\kappa}$ altogether and define the even-Chebyshev family $E_n(\kappa)$ directly inside the integer polynomial ring $\mathbb{Z}[\kappa]$.
 
 ::: {.definition #def-ch10-even-chebyshev title="Even-Degree Integer Chebyshev Character Polynomials"}
 Inside the integer polynomial ring $\mathbb{Z}[\kappa]$, define the polynomial sequence $\{E_n(\kappa)\}_{n \in \mathbb{N}}$ by the two-step linear recurrence
@@ -180,7 +180,7 @@ $$
 
 By the inductive hypothesis, the right-hand side equals $(4c^2 - 2)\,E_n(c^2) - E_{n-1}(c^2) = E_{n+1}(c^2)$, completing the induction. Consequently, **every integer-spin spherical character $\chi_j(\kappa) = E_j(\kappa)$ ($j = 0, 1, 2, 3, \dots$) is a pure integer polynomial in $\kappa$, banishing $\sqrt{\kappa}$ universally across all integer shells**.
 
-What about half-integer spin shells $j = n + \frac{1}{2}$? While the signed character $\chi_{n+1/2}(q) = U_{2n+1}(c)$ retains a single factor of $c$ to track the double-cover sign $q \mapsto -q$, its squared kernel $\chi_{n+1/2}^2(\kappa) = U_{2n+1}(\sqrt{\kappa})^2 \in \mathbb{Z}[\kappa]$ is again an integer polynomial in $\kappa$. Better still, on any homogeneous integer ternion $p \in \mathbb{Z}^4 \setminus \{0\}$, the bilateral Peter–Weyl shell projector $\bigl(D^j(p) \otimes D^j(p)^\dagger\bigr) / \lVert p\rVert^{4j}$ carries an even power $\lVert p\rVert^{4j} \in \mathbb{Z}_{\ge 1}$ in its denominator for *all* integer and half-integer spins alike—requiring zero square roots and zero transcendentals.
+For $j=n+\frac12$, the signed character is $U_{2n+1}(c)=c\,\operatorname{oddFactor}_n(\kappa)$. Changing $q$ to $-q$ reverses its sign. The projective reading determines its absolute value $\sqrt{\kappa}\,\lvert\operatorname{oddFactor}_n(\kappa)\rvert$ and its square $\kappa\,\operatorname{oddFactor}_n(\kappa)^2$. Rational homogeneous inputs give rational values for the square and for every integer-spin character. For $p=(1,1,0,0)$ the fundamental character has absolute value $\sqrt{2}$ even though $\kappa=1/2$. In the monomial basis of $\operatorname{Sym}^{2j}(\mathbb C^2)$, each matrix coefficient is homogeneous of degree $2j$ in the unit quaternion coordinates. Pairing a coefficient with a conjugate coefficient gives denominator $\lVert p\rVert^{4j}=(\lVert p\rVert^2)^{2j}$ on integer input, so this bilateral readout also cancels the root and the choice of sign.
 
 All five single-shell algebraic laws of this Chebyshev engine—the signed Pell relation, first-kind index doubling, universal square-root elimination across all integer spin shells, signed factorization across all half-integer spin shells, and the rational spin-$2$ character formula—are proved with zero axioms inside `OmegaInit` and `OmegaMath` (`axioms: []`):
 
@@ -258,7 +258,7 @@ Evaluating at the six canonical rational landmarks $\kappa \in \{1, \frac{3}{4},
 | $\chi_{1/2}^2(\kappa) = 4\kappa$ | $4$ | $3$ | $2$ | $4/3$ | $1$ | $0$ |
 | $\chi_{3/2}^2(\kappa) = 16\kappa(2\kappa - 1)^2$ | $16$ | $3$ | $0$ | $16/27$ | $1$ | $0$ |
 
-Two exact rational zeros stand out immediately: $\chi_1(\frac{1}{4}) = 0$ at the three-beat spinor landmark, and $\chi_{3/2}^2(\frac{1}{2}) = 0$ on the orthogonal equator. At the identity anchor $\kappa = 1$, $\chi_j(1) = 2j + 1$ recovers the shell dimensions $1, 3, 5, 7$.
+Two exact rational zeros stand out immediately: $\chi_1(\frac{1}{4}) = 0$ at the three-beat spinor landmark, and $\chi_{3/2}^2(\frac{1}{2}) = 0$ on the orthogonal equator. At $q=1$, $\chi_j(q)=2j+1$. The table gives $1,3,5,7$ for the integer spins. The two lifts $q=\pm1$ both have $\kappa=1$, with $\chi_{1/2}(q)=\pm2$ and squared value $4$.
 :::
 
 ---
@@ -348,7 +348,7 @@ Two oxidation states now contrast with crystalline precision:
    \mathbf{Q}_{\mathrm{phys}}(5d^8) \;=\; \mathbf{Q}(5d^{10}) - 2\,\mathbf{Q}(d_{x^2-y^2}) \;=\; \diag\!\left(-\frac{4}{7},\; -\frac{4}{7},\; +\frac{8}{7}\right) \;=\; \frac{12}{7}\,\diag\!\left(-\frac{1}{3},\; -\frac{1}{3},\; +\frac{2}{3}\right).
    $$
 
-A single $5d^8$ coordination center is therefore intrinsically strongly anisotropic; only when an unoriented polycrystalline powder is Haar-averaged over the full rotation heap $\mathbb{T}_3$ does the traceless $j = 2$ harmonic average identically to $\langle\mathbf{Q}_{\mathrm{phys}}(5d^8)\rangle_{\mathrm{Haar}} = \mathbf{0}_{3\times 3}$, restoring macroscopic statistical isotropy.
+A single $5d^8$ coordination center is therefore intrinsically strongly anisotropic; only when an unoriented polycrystalline powder is Haar-averaged over $\mathrm{SO}(3)$ (equivalently over its signed double cover $\mathrm{SU}(2)$) does the traceless $j = 2$ harmonic average identically to $\langle\mathbf{Q}_{\mathrm{phys}}(5d^8)\rangle_{\mathrm{Haar}} = \mathbf{0}_{3\times 3}$, restoring macroscopic statistical isotropy.
 :::
 
 In the interactive laboratory card below, sweep $\kappa \in [0, 1]$ or jump directly to the canonical rational landmarks to test square-root elimination $E_n(\kappa) = U_{2n}(\sqrt{\kappa})$ and the all-degree integer Clebsch–Gordan fusion product $E_m(\kappa)E_n(\kappa) = \sum_{r=\lvert m-n\rvert}^{m+n} E_r(\kappa)$ ([@thm-ch10-zero-axiom-chebyshev-shells], [@thm-ch10-even-char-product-sum]), then toggle orbital occupations in the $j = 2$ quadrupole panel to audit closed-$5d^{10}$ vanishing against the exact trace-free $5d^8$ diagonal $\bigl(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7}\bigr)$ ([@thm-ch10-zero-axiom-orbital-quadrupole]).
@@ -357,4 +357,4 @@ In the interactive laboratory card below, sweep $\kappa \in [0, 1]$ or jump dire
 **Peter–Weyl even-Chebyshev spin shells and quadrupole balance card (`peter-weyl-even-chebyshev`).** Sweep the rational fidelity $\kappa$ across the even-Chebyshev character kernels $E_n(\kappa) = U_{2n}(\sqrt{\kappa})$ and their canonical rational landmarks ([@ex-ch10-spin-character-table]), select any spin pair $(m, n)$ to inspect the exact fusion expansion $\sum_{r=\lvert m-n\rvert}^{m+n} E_r(\kappa)$, and compare closed-$5d^{10}$ isotropy against the trace-free $5d^8$ quadrupole diagonal $\bigl(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7}\bigr)$ in the five-orbital $j = 2$ ledger ([@thm-ch10-zero-axiom-orbital-quadrupole], [@ex-ch10-d10-d8-quadrupole-ledger]).
 :::
 
-One decisive challenge now stares us in the face. Whether we check Peter–Weyl character orthonormality $\langle\chi_j, \chi_{j'}\rangle = \delta_{jj'}$, compute ternary heap convolutions $\mathbb{E}_{\mathbf{x},\mathbf{y}}[\cdots]$, or verify that the rotational Haar average of $\mathbf{Q}_{\mathrm{phys}}(5d^8)$ vanishes, we rely on the **global Haar expectation $\mathbb{E}_{\mathbb{T}_3}[\cdot]$ over the three-sphere**. Classical analysis insists that averaging over a curved sphere requires the $\pi$-laden surface integral $\frac{1}{2\pi^2}\int_{S^3}\cdots\,d\sigma$ and infinite Riemann-sum limits. Does it really? The next chapter reveals the arithmetic miracle of dimension $3$: $\pi^2$ cancels out completely between numerator and denominator, reducing Haar integration of polynomial signals on $S^3$ to finite ratios of integer factorials.
+One decisive challenge now stares us in the face. Whether we check Peter–Weyl character orthonormality $\langle\chi_j, \chi_{j'}\rangle = \delta_{jj'}$, compute ternary heap convolutions $\mathbb{E}_{\mathbf{x},\mathbf{y}}[\cdots]$, or verify that the rotational Haar average of $\mathbf{Q}_{\mathrm{phys}}(5d^8)$ vanishes, we rely on the **global Haar expectation $\mathbb{E}_{S^3(\mathbb{R})}[\cdot]$ over the three-sphere**. Classical analysis insists that averaging over a curved sphere requires the $\pi$-laden surface integral $\frac{1}{2\pi^2}\int_{S^3}\cdots\,d\sigma$ and infinite Riemann-sum limits. Does it really? The next chapter reveals the arithmetic miracle of dimension $3$: $\pi^2$ cancels out completely between numerator and denominator, reducing Haar integration of polynomial signals on $S^3$ to finite ratios of integer factorials.
