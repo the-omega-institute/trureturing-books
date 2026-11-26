@@ -6,7 +6,7 @@
 
 ## 15.1 球面赫克算子与无复数有理拉马努金半正定判据
 
-回顾第四卷的[第十章](ch10-peter-weyl-rational-spin-shells.md)与[第十一章](ch11-pi-free-haar-integration.md)：三维有理球面 $\mathbb{T}_3(\mathbb{Q})$ 上的多项式函数按彼得—魏尔定理正交分解为各阶自旋壳层 $\bigoplus_{j \in \frac{1}{2}\mathbb{N}} \mathcal{H}_j(\mathbb{Q})$，且壳层上的哈尔内积 $\langle f, g\rangle_{\mathrm{Haar}}$ 已完全由无 $\pi$ 阶乘公式化归为纯有理双线性型。其中零阶壳层 $\mathcal{H}_0(\mathbb{Q})$ 仅由常值函数张成（对应球面上的“直流分量” DC 壳），高阶谐波空间 $\bigoplus_{j \ge 1/2} \mathcal{H}_j(\mathbb{Q})$ 则恰是零均值子空间 $\mathcal{H}_0^\perp$。
+沿用[第十章](ch10-peter-weyl-rational-spin-shells.md)和[第十一章](ch11-pi-free-haar-integration.md)，在实单位三维球面 $S^3$ 上取归一化哈尔测度。有理系数多项式的限制构成各次谐波壳层 $\mathcal H_j(\mathbb Q)$ 的代数直和，其中次数为 $2j$。阶乘哈尔公式给出有理内积。$j=0$ 的壳层由常值函数组成。正次数壳层的函数均值为零，其实线性张成在 $L^2(S^3)$ 的零均值子空间中稠密。偶次数可沿 $q\sim -q$ 下降到射影空间。奇次数能区分两种提升，例如一次坐标 $w$。
 
 ::: {.definition #def-ch15-spherical-hecke-psd title="一般奇素数球面赫克算子与有理拉马努金半正定二次型"}
 设 $p$ 为奇素数，从 $p+1$ 个赫维茨左单位相伴类中各取一枚模方 $p$ 的代表元，组成集合 $A$。对 $p\equiv1\pmod4$ 的规范构造，取 [@def-ch14-hurwitz-prime-spinors] 的 $A=S_p$。作用在**单位**三维球面上时，用单位四元数 $s_\pi=\pi/\sqrt p$ 定义和算子与平均算子：
