@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "03966ec6991f9ccdb64881dfac78a1999b0f3d31",
-  "pinned_at": "2026-11-26T10:42:39Z",
+  "commit": "8ad0c7f9801f394364c7313057ef05c24e439af4",
+  "pinned_at": "2026-11-26T11:38:18Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -13768,7 +13768,7 @@
       "name": "D5.S3.Weil.ZetaExplicit.LandauLeftVertical.norm_left_vertical_integral",
       "kind": "theorem",
       "statement_id": "sha256:d4dad2a5823c28a0c616a2123871c0c07558f4789a27d3782478c5b101875015",
-      "line": 164,
+      "line": 161,
       "signature": "theorem norm_left_vertical_integral {x V : ℝ} (hx : 1 < x) (hV : 1 ≤ V) : ‖∫ t in 1..V, (x : ℂ) ^ ((-1 / 4 : ℂ) + t * I) * (-logDeriv riemannZeta ((-1 / 4 : ℂ) + t * I))‖ ≤ let logBase",
       "axioms": [
         "Classical.choice",
@@ -13780,9 +13780,22 @@
       "module": "D5/S3/Weil/ZetaExplicit/LandauRightVertical",
       "name": "D5.S3.Weil.ZetaExplicit.LandauRightVertical.norm_right_vertical_integral",
       "kind": "theorem",
-      "statement_id": "sha256:41ec99a99ad739eaba8c2f5ffcb0f081a4b667271fbad53a28d02b7cca07712d",
+      "statement_id": "sha256:7d347f16be4ae70e1b2a2b87fed49256e0dc5dbae73a80b25466d39f239acdeb",
       "line": 279,
       "signature": "theorem norm_right_vertical_integral {x V : ℝ} (hx : 1 < x) (hV : 1 < V) : let c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Weil/ZetaExplicit/LandauUniformCutoff.actual_cutoff_landau_envelope": {
+      "module": "D5/S3/Weil/ZetaExplicit/LandauUniformCutoff",
+      "name": "D5.S3.Weil.ZetaExplicit.LandauUniformCutoff.actual_cutoff_landau_envelope",
+      "kind": "theorem",
+      "statement_id": "sha256:bcc4893cbb11fdc9ea2758a6d7da413724b3958c4878c3636570a184965db05c",
+      "line": 572,
+      "signature": "theorem actual_cutoff_landau_envelope (rh : RiemannHypothesis) : ∃ C : ℝ, 0 < C ∧ ∀ V t : ℝ, 1 < V → 0 < |t| → ‖∑ j ∈ positiveCutoff rh V, (zeroMult j.val : ℂ) * phase (ordinate j) t‖ ≤ let expFrequency",
       "axioms": [
         "Classical.choice",
         "Quot.sound",

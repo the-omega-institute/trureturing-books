@@ -508,7 +508,7 @@ The uniform Landau estimate in the next section extends the phase bound from $b/
 
 ### From a uniform Landau bound to logarithmic times
 
-Under RH, let $F_V(t)=\sum_{0<\gamma\le V}m_\gamma e^{i\gamma t}$. Assume the uniform estimate
+Under RH, let $F_V(t)=\sum_{0<\gamma\le V}m_\gamma e^{i\gamma t}$. Use the following four-term estimate in the transfer below. Its proof under RH follows from the contour calculation.
 $$
 |F_V(t)|\le C\left[V+e^{|t|/2}(1+|t|)^2+e^{|t|/2}(1+\log V)+\frac{\log V}{|t|}\right]
 \qquad(V>1,\ t\ne0).
@@ -545,7 +545,21 @@ $$
 The zeta functional equation gives $-\zeta'(s)/\zeta(s)=\log(3/4+iu)+r(u)$ with $|r(u)|\le80$, by the digamma recurrence, the Binet bound and the absolutely convergent series on the reflected line $\operatorname{Re}(1-s)=5/4$. Factor $x^s$ into $x^{-1/4}e^{iu\log x}$. The integral of the remainder costs at most $80(V-1)$ before scaling. Integrate the logarithm by parts using the primitive $e^{iu\log x}/(i\log x)$. The logarithm derivative has norm at most $1/u$, and the two endpoints together with the integrated derivative give the second term. The Lean proof is unconditional.
 :::
 
-The left edge is oriented downward, so its normalized contribution to the contour integral with $\zeta'/\zeta$ is the integral in the theorem times $1/(2\pi)$. With $x=e^{|t|}$, division by $\sqrt{x}$ yields a term of order $V$ and a term bounded by a constant times $(1+\log V)/|t|$. The zero-sum deduction still requires the horizontal edges, the residue identity and the passage to arbitrary cutoff heights.
+The left edge is oriented downward, so its normalized contribution to the contour integral with $\zeta'/\zeta$ is the integral in the theorem times $1/(2\pi)$. With $x=e^{|t|}$, division by $\sqrt{x}$ yields a term of order $V$ and a term bounded by a constant times $(1+\log V)/|t|$.
+
+::: {.theorem #thm-ch34-landau-inclusive-cutoff title="Uniform bound for the inclusive zeta zero phase sum" lean="D5/S3/Weil/ZetaExplicit/LandauUniformCutoff.actual_cutoff_landau_envelope"}
+Assume RH. There is an absolute constant $C>0$ such that for every real $V>1$ and $t\ne0$,
+
+$$
+|F_V(t)|\le C\left[V+e^{|t|/2}(1+|t|)^2+\frac{\log V}{|t|}\right].
+$$
+:::
+
+::: proof
+Set $x=e^{|t|}$. Choose a zero-free height at most $2$ above $V$. Keep the bottom edge at height $1$ and use the two preceding bounds on the vertical edges. The zeta functional equation extends the square-logarithmic bound from the right of the critical line to the entire top edge. The weighted argument principle counts the zeros inside the rectangle with analytic multiplicity. Under RH, each $x^\rho$ contains a common factor $\sqrt{x}$, which cancels when we recover the phase sum. The top contribution is bounded by a constant times $\sqrt{x}\log^2(V+9)$. If $x\le V$, this is bounded by a constant times $V$. If $x>V$, bound the logarithm in terms of $x$. The transfer back to $V$ crosses a window of bounded length with total analytic multiplicity $O(\log(V+9))$. The cutoff is empty for $1<V\le6$. Complex conjugation handles negative frequencies.
+:::
+
+The four-term bound above follows by adding the nonnegative term. This controls the norm of the whole phase sum. Gonek’s Theorem 1 gives the explicit prime-power main term.
 
 For fixed $b>0$, the four terms in brackets are together at most $(7+1/b)T$ on $b/\log T\le|t|\le\log T$ when $T$ is sufficiently large and $1<V\le T$. Indeed $\log T\le T^{1/4}$ eventually, $e^{|t|/2}\le\sqrt T$, and $\log V/|t|\le(\log T)^2/b$. Apply this to $V=T$ and $V=3T/4$. Their difference has norm at most $2C(7+1/b)T$, which is eventually at most $T\log T/(32\pi)$. The multiplicity count on $(3T/4,T]$ is at least $T\log T/(16\pi)$.
 
@@ -570,7 +584,7 @@ Here $E_n(r)$ sums over ordered pairs of occupation vectors whose absolute frequ
 The fourth-moment bound $P_4(T)\le T^2P_2(T)$ allows the central window to extend to $|t|\le1/T_n$. The lower bound on the second moment makes its rescaled half-width $s_n/T_n$ tend to infinity. The central integral gives $1/(2\sqrt\pi)$. The reciprocal-height, periodic-phase, and Landau estimates cover the entire range $1/T_n\le|t|\le\log T_n$ with a uniform score deficit of at least $c/\log T_n$ for some $c>0$. The score raised to the power $2n$ is therefore bounded by $\exp(-2cn/\log T_n)$, which absorbs the factor $T_n\sqrt n\log T_n$ in the normalized integral. Relative truncation transfers the limit to the full line. The argument works for every fixed positive multiple of $\eta_n$. This gives a quadratic ramp limit, and the two secants recover the hard-band constant with the endpoint included. The full proof is checked by the Lean kernel.
 :::
 
-Alpöge’s external formalization proves Mathlib’s Riemann hypothesis. The frozen declaration above takes that proposition and Gonek’s uniform estimate as explicit premises. [External RH theorem](https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean#L4)
+The uniform bound in [@thm-ch34-landau-inclusive-cutoff] supplies the Landau premise in the frozen collision theorem. The collision limit therefore follows from RH and the stated cutoff and resolution conditions. Alpöge’s external formalization supplies Mathlib’s RH proposition. [External RH theorem](https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean#L4)
 
 When $\eta_n\log T_n$ is bounded, the relative truncation estimate gives no vanishing error bound.
 

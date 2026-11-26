@@ -508,7 +508,7 @@ $$
 
 ### 从统一 Landau 估计推到对数时间
 
-在 RH 下，令 $F_V(t)=\sum_{0<\gamma\le V}m_\gamma e^{i\gamma t}$。假设存在统一估计
+在 RH 下，令 $F_V(t)=\sum_{0<\gamma\le V}m_\gamma e^{i\gamma t}$。下面的转移用到这个四项的一致界。它在 RH 下可由轮廓计算得到。
 $$
 |F_V(t)|\le C\left[V+e^{|t|/2}(1+|t|)^2+e^{|t|/2}(1+\log V)+\frac{\log V}{|t|}\right]
 \qquad(V>1,\ t\ne0).
@@ -545,7 +545,21 @@ $$
 由 ζ 函数的函数方程，$-\zeta'(s)/\zeta(s)=\log(3/4+iu)+r(u)$。利用双伽马函数递推、Binet 估计和反射直线 $\operatorname{Re}(1-s)=5/4$ 上绝对收敛的级数，可得 $|r(u)|\le80$。将 $x^s$ 写成 $x^{-1/4}e^{iu\log x}$。提出 $x^{-1/4}$ 后，余项的积分至多为 $80(V-1)$。取原函数 $e^{iu\log x}/(i\log x)$，对含对数的一项分部积分。对数的导数模长至多为 $1/u$，两端点和导数积分给出第二项。Lean 证明无须假设 RH。
 :::
 
-左竖边向下取向，因此以 $\zeta'/\zeta$ 写出的轮廓积分，经归一化后，这条边的贡献等于上式积分乘以 $1/(2\pi)$。取 $x=e^{|t|}$ 并除以 $\sqrt{x}$ 后，两项分别由 $V$ 和 $(1+\log V)/|t|$ 的常数倍控制。要推出整个零点和公式，还需控制水平边、验证留数恒等式，以及转移到任意截断高度。
+左竖边向下取向，因此以 $\zeta'/\zeta$ 写出的轮廓积分，经归一化后，这条边的贡献等于上式积分乘以 $1/(2\pi)$。取 $x=e^{|t|}$ 并除以 $\sqrt{x}$ 后，两项分别由 $V$ 和 $(1+\log V)/|t|$ 的常数倍控制。
+
+::: {.theorem #thm-ch34-landau-inclusive-cutoff title="含端点的 ζ 零点相位和的一致界" lean="D5/S3/Weil/ZetaExplicit/LandauUniformCutoff.actual_cutoff_landau_envelope"}
+假设 RH。存在绝对常数 $C>0$，对所有实数 $V>1$ 和 $t\ne0$ 有
+
+$$
+|F_V(t)|\le C\left[V+e^{|t|/2}(1+|t|)^2+\frac{\log V}{|t|}\right].
+$$
+:::
+
+::: proof
+设 $x=e^{|t|}$。在 $V$ 上方距离至多 $2$ 的位置选一个避开零点的高度。保留底边的高度 $1$，并用前面两个定理控制竖边。ζ 函数的函数方程把临界线右侧的平方对数界延伸到整条上边。加权辐角原理给出矩形内的零点和，零点按解析重数计入。RH 让每个 $x^\rho$ 都含同一个因子 $\sqrt{x}$，除去该因子后得到相位和。上边贡献由 $\sqrt{x}\log^2(V+9)$ 的常数倍控制。当 $x\le V$ 时，它由 $V$ 的常数倍控制。当 $x>V$ 时，把对数项改以 $x$ 界定。从所选高度转移回 $V$ 只跨越一个有界长度的窗口，该窗口的解析重数总和为 $O(\log(V+9))$。$1<V\le6$ 时没有正纵坐标落在截断以内。对负频率取复共轭。
+:::
+
+这就给出了上面的四项界，因为多出的项非负。这里控制的是相位和的整体模长。素数幂主项的精确公式见 Gonek 的定理 1。
 
 固定 $b>0$。对充分大的 $T$，在 $b/\log T\le|t|\le\log T$ 且 $1<V\le T$ 时，括号内四项合计至多为 $(7+1/b)T$。这是因为最终有 $\log T\le T^{1/4}$，且 $e^{|t|/2}\le\sqrt T$、$\log V/|t|\le(\log T)^2/b$。将界分别用于 $V=T$ 和 $V=3T/4$，两者之差的模长至多为 $2C(7+1/b)T$，最终至多为 $T\log T/(32\pi)$。而 $(3T/4,T]$ 内的解析重数计数至少为 $T\log T/(16\pi)$。
 
@@ -570,7 +584,7 @@ $$
 四阶矩界 $P_4(T)\le T^2P_2(T)$ 允许把中心窗直接取为 $|t|\le1/T_n$。二阶矩下界保证换元后的半宽 $s_n/T_n$ 趋于无穷。中心积分给出 $1/(2\sqrt\pi)$。倒数高度、周期相位和 Landau 估计覆盖 $1/T_n\le|t|\le\log T_n$ 的整个区间，给出统一的得分亏损下界 $c/\log T_n$，其中 $c>0$。得分的 $2n$ 次幂于是至多为 $\exp(-2cn/\log T_n)$，足以抵消归一化积分中的 $T_n\sqrt n\log T_n$ 因子。相对截断把极限传到全线。对 $\eta_n$ 的每个固定正倍数应用同一论证，得到二次斜坡极限，再由两侧割线得到含端点的硬碰撞常数。完整证明由 Lean 内核检查。
 :::
 
-Alpöge 的外部形式化证明给出了 Mathlib 的黎曼假设。上面的冻结声明以该命题和 Gonek 的统一估计为显式前提。 [外部 RH 定理](https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean#L4)
+[@thm-ch34-landau-inclusive-cutoff] 给出了冻结碰撞定理所需的 Landau 前提。所以 RH 加上所列的截断与分辨率条件即可推出这个碰撞极限。Alpöge 的外部形式化证明给出了 Mathlib 的 RH 命题。 [外部 RH 定理](https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean#L4)
 
 若 $\eta_n\log T_n$ 有界，相对截断给出的误差界无法保证趋零。
 
