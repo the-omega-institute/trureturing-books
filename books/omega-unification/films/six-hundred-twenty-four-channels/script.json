@@ -307,7 +307,7 @@
    "id": "close",
    "name": "LEDGER",
    "lead": 0.5,
-   "tail": 3.0,
+   "tail": 2.4,
    "music": [
     1.0,
     0.6,

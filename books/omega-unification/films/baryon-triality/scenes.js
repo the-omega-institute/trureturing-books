@@ -257,7 +257,7 @@ SCENES.hook = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued'], [2, null, 'computed']]);
   /* line 0: a multiplet holding quarks and leptons */
-  const ma = a * at(S, 0, 0.6) * (1 - at(S, 1, 0.5));
+  const ma = a * at(S, 0, 0.6, 0.9) * (1 - at(S, 1, 0.5));
   if (ma > 0.003) {
     panel(560, 260, 800, 230, ma, C.argued, 'SU(5) MULTIPLET · 同一多重态');
     ['d', 'd', 'd', 'e', 'ν'].forEach((s, i) => {
@@ -493,13 +493,13 @@ SCENES.anomaly = S => {
   const a = btFade(S);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued'], [1, null, 'computed'], [3, null, 'argued']]);
-  const p2 = at(S, 2, 0.6);
+  const p2 = at(S, 2, 0.6, 0.4);
   /* top: the charges */
   panel(140, 185, 1640, 150, a, C.cyan, 'GAUGED U(1)X · 规范 U(1)X');
   btRich([['X = 3B − 9L', C.white], ['τ', C.mag, 0.7, 6], ['     quarks (Q, u', C.dim], ['c', C.dim, 0.6, -14], [', d', C.dim], ['c', C.dim, 0.6, -14], [')  ', C.dim], ['+1, −1, −1', C.cyan]], 180, 262, { size: 34, a: a * at(S, 0, 0.6) });
   btRich([['τ family (L, e', C.dim], ['c', C.dim, 0.6, -11], [', ν', C.dim], ['c', C.dim, 0.6, -11], [')  ', C.dim], ['−9, +9, +9', C.mag], ['      e, μ leptons  0', C.dim]], 180, 310, { size: 26, a: a * Q(S, 0, 'plus a conjugate', 0.5) });
   /* the ledger */
-  const ta = a * at(S, 0, 0.5, 2.0) * (1 - p2);
+  const ta = a * at(S, 0, 0.5, 2.0) * (1 - at(S, 2, 0.4));
   if (ta > 0.003) {
     const x0 = 260, y0 = 400, rh = 62;
     txt('trace · 反常迹', x0, y0, { size: 24, fam: F.zh, w: 700, c: C.dim, a: ta });
@@ -514,7 +514,7 @@ SCENES.anomaly = S => {
       txt(btStr(r.t), x0 + 900, y, { size: 32, fam: F.mono, w: 700, align: 'center', c: C.mag, a: ra });
       txt(btStr(r.net), x0 + 1240, y, { size: 36, fam: F.mono, w: 900, align: 'center', c: C.white, a: ra });
     });
-    stamp('ALL ZERO', 1560, 760, Q(S, 1, 'cancel to zero', 0.5) * (1 - p2), C.cyan, 40, -0.07);
+    if (at(S, 2, 0.01) === 0) stamp('ALL ZERO', 1560, 760, Q(S, 1, 'cancel to zero', 0.5), C.cyan, 40, -0.07);
   }
   /* line 2: Z9 and its cube */
   const za = a * p2 * (1 - at(S, 3, 0.5, 1.5) * 0);
@@ -613,6 +613,18 @@ SCENES.fork = S => {
   panel(560, 190, 800, 170, va, C.cyan, 'JOINT WITNESS · 联合见证');
   txt(`zero ${BT_ZERO}`, W / 2, 262, { size: 38, fam: F.mono, w: 700, align: 'center', c: C.white, a: va });
   txt('same 105-winding vacuum · same tree spectrum · 同一座 105 圈真空', W / 2, 322, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a: va * Q(S, 0, 'one hundred five', 0.5) });
+  /* line 0: what the witness already hits (the chapter's replay certificate) */
+  const wa = a * at(S, 0, 0.6, 2.0) * (1 - at(S, 1, 0.4));
+  if (wa > 0.003) {
+    [['three physical windows cleared', '同时穿过三项物理窗'],
+     ['action above the free 105-winding vacuum:  4.857224 × 10⁻⁸', '高出同高度自由真空'],
+     ['|Vub|²  +1.328 ppm      J  +0.811 ppm', '夸克混合百万分之一级']].forEach(([en, zh], i) => {
+      const ra = wa * at(S, 0, 0.5, 2.6 + 0.8 * i), y = 480 + i * 80;
+      txt(en, 300, y, { size: 30, fam: F.mono, w: 700, c: C.white, a: ra });
+      txt(zh, 1620, y, { size: 24, fam: F.zh, w: 700, align: 'right', c: C.dim, a: ra });
+    });
+    txt('replay certificate · 复算证书', W / 2, 760, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: wa * at(S, 0, 0.5, 4.0) });
+  }
   /* two branches */
   const ba = a * at(S, 1, 0.5), pa = a * at(S, 2, 0.5);
   if (ba > 0.003) arrow(820, 370, 520, 450, C.cyan, ba, 3);
@@ -635,7 +647,7 @@ SCENES.fork = S => {
     txt('QQQL switched on · 激活', 1310, 560, { size: 28, fam: F.zh, w: 700, c: C.white, a: pa });
     btRich([['|W| ≥ ', C.white], [BT_WBOUND, C.mag]], 1310, 630, { size: 28, a: pa * Q(S, 2, 'Wilson factor', 0.5), fam: F.mono });
     txt('replay certificate · 复算证书', 1310, 680, { size: 20, fam: F.zh, w: 700, c: C.dim, a: pa * Q(S, 2, 'Wilson factor', 0.5) });
-    txt('directed-triangle-averaged family · 定向三角平均族', 1310, 716, { size: 20, fam: F.zh, w: 700, c: C.dim, a: pa * Q(S, 2, 'Wilson factor', 0.5) });
+    txt('triangle-averaged family · 三角平均族', 1310, 716, { size: 20, fam: F.zh, w: 700, c: C.dim, a: pa * Q(S, 2, 'Wilson factor', 0.5) });
   }
   /* line 3: the open question */
   const oa = a * Q(S, 3, 'Deciding c6', 0.6, 0.4);
