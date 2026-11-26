@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "4bbf634c4f5f8dec66c2cb3c6a2a042b27c2900a",
-  "pinned_at": "2026-11-26T03:10:31Z",
+  "commit": "c04fcf66912183f7f742244b7a60e1b02505782e",
+  "pinned_at": "2026-11-26T04:23:12Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1602,11 +1602,37 @@
       "line": 355,
       "signature": "theorem IsChordal.exists_clique_bounded_banach_gain_potential {V : Type u} [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (k : ℕ) (hk : 2 ≤ k) (hclique : ∀ s : Finset V, G.IsClique (s : Set V) → s.card ≤ k + 1) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ (4 - 4 / (k : ℝ)) * ε"
     },
+    "D5/S3/Combinatorics/Graph/Chordal/CliqueTreeBanachPotential.SimpleGraph.cliqueTree_center_extension_banach_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/CliqueTreeBanachPotential",
+      "name": "SimpleGraph.cliqueTree_center_extension_banach_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:cfc840158bdc207e8d90f49b6674a2c54e9e948bf61fe5a97a2f7392798d700d",
+      "line": 494,
+      "signature": "theorem cliqueTree_center_extension_banach_potential {V : Type u} [Finite V] {I : Type w} [Finite I] {T : SimpleGraph I} {G : SimpleGraph V} {K : I → Set V} (hK : IsCliqueTree T G K) (hs : ∀ a b, T.Adj a b → (K a ∩ K b).Nonempty) (m : ℕ) (_hm : 1 ≤ m) (hsep : ∀ a b, T.Adj a b → (K a ∩ K b).ncard ≤ m) (D : ℕ) (hD : ∀ a b, T.dist a b ≤ D) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/CliqueTreeBanachPotential.SimpleGraph.cliqueTree_twoClique_midpoint_banach_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/CliqueTreeBanachPotential",
+      "name": "SimpleGraph.cliqueTree_twoClique_midpoint_banach_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:cfc840158bdc207e8d90f49b6674a2c54e9e948bf61fe5a97a2f7392798d700d",
+      "line": 616,
+      "signature": "theorem cliqueTree_twoClique_midpoint_banach_potential {V : Type u} [Finite V] {I : Type w} [Finite I] {T : SimpleGraph I} {G : SimpleGraph V} {K : I → Set V} (hK : IsCliqueTree T G K) (hs : ∀ a b, T.Adj a b → (K a ∩ K b).Nonempty) (h₂ : ∀ x : V, {i : I | x ∈ K i}.ncard ≤ 2) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : cliqueTreeMidpointCoeff T K < 3 ∧ ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ cliqueTreeMidpointCoeff ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.completeGraph_banach_lower_bound": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach",
       "name": "SimpleGraph.completeGraph_banach_lower_bound",
       "kind": "theorem",
-      "statement_id": "sha256:0a5fc9bf2658caf142b8a80ec2cde9aff8938be1b6cea4b2d33d5049f40137d9",
+      "statement_id": "sha256:fdacf001b07c11590e25964e1dd4449baa3d8b00dc484c5f0cef8b76ffc140c1",
       "line": 175,
       "signature": "theorem completeGraph_banach_lower_bound (m : ℕ) (hm : 2 ≤ m) : ∃ g : Fin m → Fin m → ZeroDivSkew m, (∀ i j, g j i = -g i j) ∧ (∀ i j l, i ≠ j → j ≠ l → i ≠ l → ‖g i j + g j l - g i l‖ ≤ 1) ∧ ∀ φ : Fin m → ZeroDivSkew m, ∃ u v, u ≠ v ∧ ((m : ℝ) - 2) / m ≤ ‖g u v - (φ v - φ u)‖"
     },
@@ -1614,7 +1640,7 @@
       "module": "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach",
       "name": "SimpleGraph.completeGraph_banach_upper_bound",
       "kind": "theorem",
-      "statement_id": "sha256:0a5fc9bf2658caf142b8a80ec2cde9aff8938be1b6cea4b2d33d5049f40137d9",
+      "statement_id": "sha256:fdacf001b07c11590e25964e1dd4449baa3d8b00dc484c5f0cef8b76ffc140c1",
       "line": 27,
       "signature": "theorem completeGraph_banach_upper_bound {V : Type u} [Finite V] (hm : 2 ≤ Nat.card V) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, i ≠ j → j ≠ l → i ≠ l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, u ≠ v → ‖g u v - (φ v - φ u)‖ ≤ ((Nat.card V : ℝ) - 2) / Nat.card V * ε"
     },
@@ -1622,7 +1648,7 @@
       "module": "D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach",
       "name": "SimpleGraph.separatedCliqueSum_banach_gain_potential",
       "kind": "theorem",
-      "statement_id": "sha256:0a5fc9bf2658caf142b8a80ec2cde9aff8938be1b6cea4b2d33d5049f40137d9",
+      "statement_id": "sha256:fdacf001b07c11590e25964e1dd4449baa3d8b00dc484c5f0cef8b76ffc140c1",
       "line": 318,
       "signature": "theorem separatedCliqueSum_banach_gain_potential [Finite V] (T : SimpleGraph I) (hT : T.IsTree) (G : SimpleGraph V) (P : I → Set V) (hcover : ∀ v, ∃ a, v ∈ P a) (hedge : ∀ u v, G.Adj u v → ∃ a, u ∈ P a ∧ v ∈ P a) (m : ℕ) (hm : 1 ≤ m) (hattach : ∀ a b, T.Adj a b → (P a ∩ P b).Nonempty ∧ G.IsClique (P a ∩ P b) ∧ Nat.card ↥(P a ∩ P b) ≤ m) (hdisjoint : ∀ a b, a ≠ b → ¬ T.Adj a b → Disjoint (P a) (P b)) (hsep : ∀ a b c, T.Adj a b → T.Adj a c → b ≠ c → Disjoint (P a ∩ P b) (P a ∩ P c) ∧ ∀ u ∈ P a ∩ P b, ∀ v ∈ P a ∩ P c, ¬ G.Adj u v) (g : V → V → E) (R : ℝ) (hR : 0 ≤ R) (φ : I → V → E) (hfit : ∀ a u"
     },

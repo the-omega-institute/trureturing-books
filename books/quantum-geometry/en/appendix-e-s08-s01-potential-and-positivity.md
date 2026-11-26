@@ -538,7 +538,7 @@ In each part, let $E$ be a real seminormed vector space, let $\varepsilon\ge0$ b
 
 Set $D=k^2-3k+3$, $\alpha=(k-3)/D$, and $\beta=(k-2)/D$. For positive integers $m\le k-2$, take $f_m=1/m$ and set $f_{k-1}=\beta$, $f_k=\alpha$, and $f_0=1$. For each $b\in P(v)$, start with weight $\max\{f_{|P(v)|},2\beta-f_{|P(b)|}\}$. Since $2\beta-\alpha=(k-1)/D<1/(k-2)\le1/2$, the smallest profile value is $\alpha>0$. When $1\le|P(v)|\le k-2$, all initial weights are $1/|P(v)|$. When $|P(v)|=k-1$, the baseline is $\beta$, with an extra $\beta-\alpha$ for a vertex with $k$ predecessors. There is at most $1$ such vertex. When $|P(v)|=k$, the baseline is $\alpha$, with $\beta-\alpha$ added at each threshold $k-1$ and $k$. At most $2$ vertices meet the first threshold and at most $1$ meets the second. The two largest rows thus have total weights bounded by $(k-1)\beta+(\beta-\alpha)=1$ and $k\alpha+3(\beta-\alpha)=1$, respectively. Distribute any unused weight uniformly to obtain weights $w_v(b)$ summing to $1$ and still meeting both initial lower bounds.
 
-For a nonroot vertex $x$, take its potential to be $Q_C$ plus the weighted average of the path gains $g(a_C,b)+g(b,x)$ with weights $w_x(b)$. Give the root potential $0$. Its incident edges fit exactly because each neighbor has the root as its sole predecessor. For paths from the same anchor $a$ through shadow predecessors $b,d$ to the same vertex $x$, the difference in path gains is the difference of the defects on $(a,b,d)$ and $(b,d,x)$, with seminorm at most $2arepsilon$. A triangle with repeated vertices has zero defect by skew symmetry. For an edge from a nonroot vertex $u$ to a vertex $v$ in the next layer, let $c$ be the shadow anchor of the component containing $v$. Then $c\in P(u)$ and $u\in P(v)$. By the transport recursion, the term through $c$ in the average at $u$, once extended by $g(u,v)$, equals the term through $u$ at $v$. Each average differs from its matching term by at most twice the triangle tolerance times the weight of the other terms. The resulting error is at most $(4-2w_u(c)-2w_v(u))\varepsilon$. The weight bounds give $w_u(c)+w_v(u)\ge f_{|P(u)|}+(2\beta-f_{|P(u)|})=2\beta$, so the cross-layer error is at most $(4-4\beta)\varepsilon$.
+For a nonroot vertex $x$, take its potential to be $Q_C$ plus the weighted average of the path gains $g(a_C,b)+g(b,x)$ with weights $w_x(b)$. Give the root potential $0$. Its incident edges fit exactly because each neighbor has the root as its sole predecessor. For paths from the same anchor $a$ through shadow predecessors $b,d$ to the same vertex $x$, the difference in path gains is the difference of the defects on $(a,b,d)$ and $(b,d,x)$, with seminorm at most $2\varepsilon$. A triangle with repeated vertices has zero defect by skew symmetry. For an edge from a nonroot vertex $u$ to a vertex $v$ in the next layer, let $c$ be the shadow anchor of the component containing $v$. Then $c\in P(u)$ and $u\in P(v)$. By the transport recursion, the term through $c$ in the average at $u$, once extended by $g(u,v)$, equals the term through $u$ at $v$. Each average differs from its matching term by at most twice the triangle tolerance times the weight of the other terms. The resulting error is at most $(4-2w_u(c)-2w_v(u))\varepsilon$. The weight bounds give $w_u(c)+w_v(u)\ge f_{|P(u)|}+(2\beta-f_{|P(u)|})=2\beta$, so the cross-layer error is at most $(4-4\beta)\varepsilon$.
 
 For a within-layer edge, orient it so that $P(u)\subseteq P(v)$. The endpoints share an anchor and transport value. The path through any $b\in P(u)$, extended from $u$ to $v$, differs from the matching term at $v$ by one triangle defect and from every other term by at most three. Averaging over $P(v)$ gives $(3-2w_v(b))\varepsilon\le(3-2\alpha)\varepsilon$, and averaging over $P(u)$ preserves this bound. Since $2\beta-\alpha\le1/2$, the bound is at most $(4-4\beta)\varepsilon$. Reversing an edge negates its residual, and the component potentials combine to give the desired potential.
 
@@ -548,6 +548,53 @@ For a within-layer edge, orient it so that $P(u)\subseteq P(v)$. The endpoints s
 :::
 
 **Manual derivation.** Part 1 strictly improves the bound in [@thm-appe-biased-clique-banach-potential] for every $k\ge4$. Subtracting the common term $4-4/k$ reduces the comparison to $2(k-3)(k-1)^3>(k-2)^2D$, which follows from $D<(k-1)^2$ and $2(k-3)(k-1)=2((k-2)^2-1)>(k-2)^2$. At $k=4$, every $4$-tree has reconstruction coefficient at most $20/7$, with $20/7<79/27<3$. When $N(m-1)>4m$, the real triangle-$1$-flat gain supplied by [@thm-appe-bfs-barycenter-obstructions] for any fixed root-averaged two-step scheme has an edge error of at least $4-4/m-8/N>2-2/m$. For the same gain, part 3 gives a potential with every edge error at most $2-2/m$. With no bound on clique size, the exact universal real Banach coefficient in $[2,4]$ and the universal coefficient for groups with bi-invariant pseudometrics among $\{2,3,4\}$ remain open.
+
+The predecessor bounds use clique size to control the error. With a clique tree, we can track how the error grows with separator size and distance from the center, or combine the two local potentials directly at each shared vertex.
+
+::: {.theorem #thm-appe-cliquetree-banach-potential title="Banach Potential Bounds by Clique-Tree Center Extension and Two-Clique Midpoint Gluing" lean="D5/S3/Combinatorics/Graph/Chordal/CliqueTreeBanachPotential.SimpleGraph.cliqueTree_center_extension_banach_potential, D5/S3/Combinatorics/Graph/Chordal/CliqueTreeBanachPotential.SimpleGraph.cliqueTree_twoClique_midpoint_banach_potential"}
+Let $G$ be a simple graph on a finite vertex set $V$, and let $T$ be a tree on a finite index set $I$. Suppose $(T,K)$ is a clique tree of $G$. Each bag $K(a)\subseteq V$ is a clique in $G$, every vertex and every edge is contained in a bag, and every bag on any simple tree path between two bags containing a vertex also contains that vertex. For each tree edge $ab$, assume that the separator $S(a,b)=K(a)\cap K(b)$ is nonempty.
+
+Let $E$ be any real seminormed vector space, let $\varepsilon\ge0$ be real, and let $g:V\times V\to E$ be a gain. Assume $g(j,i)=-g(i,j)$ for all $i,j\in V$ and $\|g(i,j)+g(j,\ell)-g(i,\ell)\|\le\varepsilon$ whenever $ij$, $j\ell$, and $i\ell$ are all edges of $G$. In both parts, the fitting error on a directed adjacent pair $(u,v)$ is $\|g(u,v)-(\varphi(v)-\varphi(u))\|$.
+
+1. **Clique-tree center extension.** Let $m\ge1$ be a natural number with $|S(a,b)|\le m$ for every tree edge $ab$, and let $D$ be a natural number with $\operatorname{dist}_T(a,b)\le D$ for all $a,b\in I$. Define
+
+   $$
+   \begin{aligned}
+   R_0 &= 1,\\
+   R_{\ell+1} &= \max\left\{R_\ell,1,\left(1-\frac1m\right)(1+R_\ell)\right\}.
+   \end{aligned}
+   $$
+
+   Then there is a potential $\varphi:V\to E$ with fitting error at most $R_{\lfloor D/2\rfloor}\varepsilon$ on every directed edge of $G$.
+
+2. **Two-clique midpoint gluing.** Suppose $|\{i\in I:x\in K(i)\}|\le2$ for every vertex $x\in V$. Give each tree edge $ab$ the weight
+
+   $$
+   \sigma(a,b)=\left(1-\frac1{|S(a,b)|}\right)\left(1-\frac{|S(a,b)|}{\max\{|K(a)|,|K(b)|\}}\right).
+   $$
+
+   Let $\tau(a)$ be the largest sum of weights of two distinct tree edges incident to $a$, padding with $0$ if there is only one incident edge and taking $0$ if there are none. Set
+
+   $$
+   M(T,K)=\max\left(\{0\}\cup\left\{1-\frac2{|K(a)|}+\tau(a):a\in I,\ |K(a)|\ge2\right\}\right).
+   $$
+
+   Then $M(T,K)<3$, and there is a potential $\varphi:V\to E$ with fitting error at most $M(T,K)\varepsilon$ on every directed edge of $G$.
+:::
+
+::: {.proof #pf-appe-cliquetree-banach-potential}
+**Center extension.** Take the middle vertex of a longest simple tree path, or both endpoints of its middle edge, as the center. The distance from any bag to the path is at most the shorter distance from its attachment point to the two ends. Otherwise its path to the farther end would be longer. Thus every bag lies within $\lfloor D/2\rfloor$ of the nearest center. Average the star potentials $g(t,\cdot)$ over the whole center bag in the single-bag case or over the common separator in the two-bag case. This gives the same potential on the center bags. Each edge residual is the mean of triangle defects, with terms at the endpoints vanishing by skew symmetry, so its seminorm is at most $\varepsilon$. An empty bag has no edges to fit.
+
+Extend outward one layer at a time. If the parent bag has potential $p$, keep $p$ on the parent–child separator $S$. At every other vertex $v$ in the child bag, take the mean of $p(t)+g(t,v)$ over $t\in S$. An edge with both endpoints in $S$ retains the bound $R_\ell\varepsilon$. With both endpoints outside $S$, the $p(t)$ terms cancel and the error is at most $\varepsilon$. If just the endpoint $u$ lies in $S$, the $t=u$ term in the residual average vanishes. Each other term is the sum of a triangle defect and a parent-bag residual. The error is therefore at most $(1-1/|S|)(1+R_\ell)\varepsilon\le(1-1/m)(1+R_\ell)\varepsilon$. Reversing an edge negates its residual. These three edge estimates give the recurrence. Neighboring bags agree on their separator, so the path intersection property makes the potential consistent across all bags containing a vertex. Every edge lies in a bag, giving the global bound.
+
+**Midpoint gluing.** For each nonempty bag $K(a)$, let $p_a(x)$ be the mean of $g(t,x)$ over the bag. The two endpoint terms vanish, giving the within-bag bound $(1-2/|K(a)|)\varepsilon$. Sum the means of $p_a-p_b$ on $S(a,b)$ along the tree to obtain translations $\psi_a=p_a+c_a$ for which $\psi_b-\psi_a$ has mean zero on every common separator. This is the tree offset construction `tree_offsets` used in the proof of [@thm-appe-complete-cliquesum-banach]. The translations preserve every within-bag potential difference.
+
+Take $u,v$ in a separator $S=S(a,b)$. The increment of $\psi_b-\psi_a$ from $v$ to $u$ is the difference of the two bag residuals on the same edge, and it vanishes when $u=v$. Each residual is a mean of triangle defects. Put $q=1/\max\{|K(a)|,|K(b)|\}$ and subtract $q$ times the sum of the common star defects from each mean. The remaining weights are nonnegative and sum to $1-|S|q$ in each bag, so the increment has seminorm at most $2(1-|S|q)\varepsilon$. With $u$ fixed, average over $v\in S$. The zero mean recovers the difference at $u$, and the term $v=u$ contributes zero. Dividing by $2$ bounds the shift from $\psi_a(u)$ to the midpoint by $\sigma(a,b)\varepsilon$.
+
+At a vertex in a single bag, use its translated potential. A vertex in two bags must belong to neighboring bags by the path intersection property, so use the midpoint of their translated potentials. On an edge in one bag with neither endpoint shared, the residual stays the same. If both endpoints lie in the same separator, the residual is the average of the two bag residuals, each bounded by $M(T,K)\varepsilon$. In the remaining cases each endpoint contributes at most one shift. Two shifts correspond to distinct incident tree edges, and an unshared endpoint contributes zero. The error is at most $(1-2/|K(a)|+\tau(a))\varepsilon$. Every weight belongs to $[0,1)$ and the tree is finite, so $\tau(a)<2$ and hence $M(T,K)<3$. The full proof is checked by the Lean kernel.
+:::
+
+**Manual derivation.** Both parts allow arbitrarily large bags and edges joining distinct incident separators within a bag. Compare the separation condition in [@thm-appe-complete-cliquesum-banach]. Every finite $m\ge1$ gives $R_\ell<1+\ell$ for $\ell\ge1$, since the last term in the maximum is strictly below $1+R_\ell$. Part 1 thus gives a coefficient strictly below $3$ for $D\le5$ and strictly below $4$ for $D\le7$. For $m\le4$ and $D\le19$, the recurrence at $m=4$ gives the upper bound $R_9=373533/131072<20/7$, strictly below the general $4$-tree bound in [@thm-appe-multitier-universal-banach]. Part 2 gives $M(T,K)<3$ at any diameter whenever each vertex belongs to at most two bags. For chordal graphs of unrestricted clique size, the exact universal real Banach coefficient in $[2,4]$ and the exact universal coefficient for groups with bi-invariant pseudometrics among $\{2,3,4\}$ remain open. It is also open whether any $3$-tree has coefficient greater than $4/3$ and where $C_{\mathrm{SU}(2)}(K_4)$ lies in $[c_*,4/5]$. See [@prob-appe-round-quaternion-k4-optimal-constant] for the latter problem.
 
 For a fixed nonlinear target group, the optimal coefficient is already a question on complete graphs.
 
