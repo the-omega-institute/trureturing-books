@@ -38,6 +38,8 @@ $$
 1. **未破缺轮换锁死置换型 CKM**：若一支希格斯双重态在轮换下只乘单一相位，且上下型汤川顶角均保持 $T$ 对称，则作用于共同左手代空间的厄米质量平方阵 $H_u = Y_u Y_u^*$ 与 $H_d = Y_d Y_d^*$ 均与 $T$ 对易（右手味旋转与希格斯相位在乘积中精确抵消）。两矩阵遂在 $T$ 的三条本征线上同时对角化。只要质量非简并，**不论三条边相位 $z_i$ 取何值，CKM 矩阵都只能是置换与相位的乘积**，绝无真实代际混合。
 2. **连通混合图的共同相位定理**：更一般地，只要上下夸克质量均非简并，任何同时保持 $H_u, H_d$ 的左手幺正变换在各自质量基中必为对角相位阵，记作 $d_i, e_j$，于是 $d_i V_{ij} = V_{ij} e_j$。一旦由非零 $V_{ij}$ 构成的二部图连通，所有相位必须完全相等——**在已混合的轻夸克上，任何精确左手对称都只能退化为世代共同的整体相位**。特别地，一个连续 $SU(2)$ 时钟若同时保持两套固定汤川，因 $SU(2)$ 的连续一维特征标全为平凡，它对轻夸克只能作平凡作用。
 
+在第 $2\,306\,888\,100\,085$ 枚正零点，把四个算术 Gram 源的正交化方向依次放在极点与三条射线的首站，用后三个原始源张成的空间代表三代。把荷 $-4,2$ 的壳算子分别压缩到这个空间，作为上型、下型左手夸克的质量平方矩阵。一步传播保留共同的反酉对称，Jarlskog 不变量 $J=0$。走两步再投影，多出了中途离开三代空间又返回的路径，给出 $J\simeq3.00189\times10^{-4}$。产生 CP 破坏后，还要同时解释夸克质量与顶底混合。在 $1\,\mathrm{TeV}$ 六个夸克汤川耦合各自的 $1\sigma$ 区间内，即使上下两部门各自任取十九个非负谱值，所得 $|V_{tb}|$ 也只能小于 $0.9936401$ 或大于 $0.99915018$，同尺度参考窗落在两者之间。若允许壳上的读数取负而压缩后的质量平方保持正定，两荷共用一个至多十一次的实多项式就能重现任意给定的六个正夸克质量与 CKM 矩阵。这个自由度使多项式的系数也成为统一模型必须解释的量。[两步传播](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-three-gram-source-flavor.py) · [非负谱的混合限制](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-three-source-positive-ckm.py) · [有符号多项式构造](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-signed-three-source-quark-pair.py) · [参考输入表 2](https://arxiv.org/html/2510.01312v2#Sx1.T2)
+
 更珍贵的是，轮换必须破缺到何种程度，只需五行纯手算就能定死一个不可绕过的定量地板：
 
 ::: {.example #ex-ou-ch08-commutator-floor title="用 $1\,\mathrm{TeV}$ 保守输入手算轮换破缺下界 $0.0414$"}
