@@ -658,6 +658,8 @@ $$
 
 uniformly, with the same two terms as the zeta unit-band theorem. [Unit-band formula](https://arxiv.org/abs/2306.04799)
 
+As a check on the distinction between pointwise and averaged bounds, let $P_H=2\pi/h_j$ be the common period at $H\in I_j$. Over any full period, each off-diagonal character integrates to zero, since distinct lattice sites differ by a nonzero integer multiple of $h_j$. The mean of $G_H$ over the period is therefore exactly $N(H)$. Nonnegativity of the Lorentz statistic then bounds its mean over an interval of length comparable to $\log H$ by $O(N(H))$, even in intervals containing the recurrence.
+
 At $Y_j=(j+1)^2$ the pair statistic repeats its value at zero at time $2\pi/h_j=3R_j$, which lies between $3\log Y_j$ and $6\log Y_j$. To see what this does to the hard-band collision mass, use the same positive harmonic weights as for the zeta spectrum, now on the selected sites. Set $j=\max(j_0,\lfloor n^{1/4}\rfloor)$, $T_n=Y_j$, and $\eta_n=h_j/8$. The variance is $V_n=P_2(T_n)/2$, with $s_n=\sqrt{nV_n}$. Two fixed distinct sites give $V_n\gtrsim W(T_n)^{-2}$, and the count bound gives $W(T_n)=O(\log^2 T_n)$ by summation by parts. Thus $s_n/h_j\to\infty$. The lattice variance lower bound integrates $(1-V_nt^2/2)_+^{2n}$ over a period with factor $h_j/(2\pi)$. On $|t|\le1/(2s_n)$ the integrand is at least $3/4$ by Bernoulli's inequality. It follows that the normalized collision mass is eventually at least $3/\pi>1/\sqrt\pi$, although $\eta_n\log T_n\in(\pi/24,\pi/12]$, $(\log T_n)^2/n\to0$, and $\eta_n/s_n\to0$. The infinite comparison is a written proof about the selected sites. The zeta prime-sum identities impose further arithmetic conditions on actual ordinates.
 
 ### Occupation diagonal lower bound for finite support
