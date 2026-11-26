@@ -476,8 +476,8 @@
   const RANKS = [
     [0, 12, 38, 38, 'cert'],
     [12, 56, 29, 38, 'mono'],
-    [56, 68, 29, 32, 'cert'],
-    [68, 216, 26, 32, 'mono'],
+    [56, 68, 29, 31, 'cert'],
+    [68, 216, 26, 31, 'mono'],
     [216, 224, 26, 27, 'cert'],
     [224, 296, 25, 26, 'cert'],
     [296, 392, 24, 26, 'mono'],
@@ -917,7 +917,7 @@
     const parts = split(r, 0.56);
     const g = kit.plot(cv, { x: [0, DMAX], y: [17, 40], pad: padOf(r, parts.a, [26, 6, 22, 18]), minHeight: 40 });
     frame.g = g;
-    g.axes({ yTicks: [19, 24, 29, 32, 38].map((v) => [v, String(v)]), xTicks: [0, 400, 800, 1200, 1600].map((v) => [v, String(v)]) });
+    g.axes({ yTicks: [19, 24, 29, 31, 38].map((v) => [v, String(v)]), xTicks: [0, 400, 800, 1200, 1600].map((v) => [v, String(v)]) });
     const w = THICK();
     for (const [a, b, lo, hi, kind] of RANKS) {
       const x1 = Math.min(b, DMAX);
@@ -1668,8 +1668,8 @@
       'The amber point climbs the violet ladder to K = 105: inside the three-window domain, no critical point up to 18 windings, a saddle at 19 and a strict local minimum at 21; then 27, 31 and height-dependent 36 unlock, and only at 105 do fixed weights give one global three-window, exact-reference-flavour vacuum for all heights; beside it W₁₀₅ ripples near the zero phases.'
     ],
     'memory-rank': [
-      'D 走到 1600：171 条弦全部点亮成青色，紫色的记忆秩从 38 经 [29, 32]、26–27、24、23 降到 19；216 是交替相消门槛，512 处时钟数从 9 跳到 10。',
-      'D runs to 1600: all 171 chords light up in cyan and the violet memory rank falls from 38 through [29, 32], 26–27, 24 and 23 to 19; 216 is the alternating-cancellation threshold, and at 512 the clock count jumps from 9 to 10.'
+      'D 走到 1600：171 条弦全部点亮成青色，紫色的记忆秩从 38 经 [29, 31]、26–27、24、23 降到 19；216 是交替相消门槛，512 处时钟数从 9 跳到 10。',
+      'D runs to 1600: all 171 chords light up in cyan and the violet memory rank falls from 38 through [29, 31], 26–27, 24 and 23 to 19; 216 is the alternating-cancellation threshold, and at 512 the clock count jumps from 9 to 10.'
     ]
   };
   const cards = kit.cards($('presets'), {
