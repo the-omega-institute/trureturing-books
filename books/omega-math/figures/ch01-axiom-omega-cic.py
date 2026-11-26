@@ -3,11 +3,11 @@
 SIZE = (704, 305)
 WRAP = True
 ALT = {
-    "zh": "三条路线均以裸 CIC 为起点。OmegaSpace 将 AXIOM-Ω 的消去与结合律、保真度公理及最小非交换性"
-          "落实为构造性的接口与实例。Mathlib 实数路线依赖三个标准公理。自定义 axiom 引入无归约规则的假设。",
-    "en": "All three routes start from bare CIC. The OmegaSpace route realizes the AXIOM-Ω laws of heap "
-          "cancellation and associativity, fidelity, and minimal noncommutativity through a constructive "
-          "interface and instance. Mathlib reals bring in three standard axioms. A custom axiom introduces "
+    "zh": "三条路线均以裸 CIC 为起点。AXIOM-Ω 的消去与结合律、读数条件及非交换条件"
+          "需要逐条给出证书。Mathlib 实数路线依赖三个标准公理。自定义 axiom 引入无归约规则的假设。",
+    "en": "All three routes start from bare CIC. The AXIOM-Ω model laws require individual certificates "
+          "for cancellation and associativity, the reading, and noncommutativity. "
+          "Mathlib reals bring in three standard axioms. A custom axiom introduces "
           "an assumption with no reduction rule.",
 }
 
@@ -34,8 +34,8 @@ def draw(fig):
     core.line(112, laws.bottom[1], 112, 141, "cyan", 1.2)
     core.arrow(112, 216, 112, 239, "cyan", 1.6, head=6)
     core.rect(15, 243, 194, 56, color="cyan", fill="cyan", fill_opacity=0.10, rx=6)
-    core.text(112, 264, "class OmegaSpace", size=14, anchor="middle", color="cyan")
-    core.text(112, 288, core.t("构造实例 · 公理闭包 ∅", "Instance · axiom closure ∅"),
+    core.text(112, 264, core.t("逐项验证", "Check each law"), size=14, anchor="middle", color="cyan")
+    core.text(112, 288, core.t("运算与证书", "Operations and certificates"),
               size=13, anchor="middle", color="dim")
 
     reals = real.box(112, 103, "Mathlib.Real", "violet", w=194, size=16)
