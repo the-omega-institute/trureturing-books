@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "c05c6a50f9422cd571bee8229b5e822a453b770c",
-  "pinned_at": "2026-11-26T19:32:01Z",
+  "pinned_at": "2026-11-26T20:04:35Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -6039,6 +6039,110 @@
       "line": 443,
       "signature": "theorem bloch_ball_hyperbolic : (∃ Φ : {r : EuclideanSpace ℝ (Fin 3) // ‖r‖ < 1} ≃ HyperbolicThreeSpace, ∀ r s, Real.cosh (dist (Φ r) (Φ s)) = kleinCosh r s) ∧ (∀ r : EuclideanSpace ℝ (Fin 3), blochFilter 1 r = r) ∧ (∀ (g h : Matrix (Fin 2) (Fin 2) ℂ) (r : EuclideanSpace ℝ (Fin 3)), (Matrix.trace (g * blochMatrix 1 r * gᴴ)).re ≠ 0 → blochFilter h (blochFilter g r) = blochFilter (h * g) r) ∧ (∀ (g : Matrix (Fin 2) (Fin 2) ℂ) (r s : EuclideanSpace ℝ (Fin 3)), (Matrix.trace (g * blochMatrix 1 r * gᴴ)).re ≠ 0 → (Matrix.trace (g * blochMatrix 1 s * gᴴ)).re ≠ 0 → 1 - ⟪blochFilter g r, blochFilter g "
     },
+    "D5/S3/Geometry/Lorentz/Urbantke.exteriorSquare_eq_smul_id_imp_scalar": {
+      "module": "D5/S3/Geometry/Lorentz/Urbantke",
+      "name": "D5.S3.Geometry.Lorentz.Urbantke.exteriorSquare_eq_smul_id_imp_scalar",
+      "kind": "theorem",
+      "statement_id": "sha256:9669d4236686da2c0a08f0847f97b3a1f5d9ae97bf930865b80a4b56cf68a645",
+      "line": 120,
+      "signature": "theorem exteriorSquare_eq_smul_id_imp_scalar (A : Matrix4 K) (c : K) (hc : c ≠ 0) (h : exteriorSquare A = c • (1 : PairMatrix K)) : ∃ a : K, a ≠ 0 ∧ A = a • (1 : Matrix4 K)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/Urbantke.simplicity_not_sufficient_for_real_lorentz": {
+      "module": "D5/S3/Geometry/Lorentz/Urbantke",
+      "name": "D5.S3.Geometry.Lorentz.Urbantke.simplicity_not_sufficient_for_real_lorentz",
+      "kind": "theorem",
+      "statement_id": "sha256:9669d4236686da2c0a08f0847f97b3a1f5d9ae97bf930865b80a4b56cf68a645",
+      "line": 728,
+      "signature": "theorem simplicity_not_sufficient_for_real_lorentz : let B",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/Urbantke.urbantke_conformal_uniqueness": {
+      "module": "D5/S3/Geometry/Lorentz/Urbantke",
+      "name": "D5.S3.Geometry.Lorentz.Urbantke.urbantke_conformal_uniqueness",
+      "kind": "theorem",
+      "statement_id": "sha256:9669d4236686da2c0a08f0847f97b3a1f5d9ae97bf930865b80a4b56cf68a645",
+      "line": 152,
+      "signature": "theorem urbantke_conformal_uniqueness (g₁ g₂ : Matrix4 K) (h₁ : g₁.det ≠ 0) (c : K) (hc : c ≠ 0) (h : exteriorSquare g₂ = c • exteriorSquare g₁) : ∃ a : K, a ≠ 0 ∧ g₂ = a • g₁",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/Urbantke.urbantke_conformal_uniqueness_of_chiral_plane": {
+      "module": "D5/S3/Geometry/Lorentz/Urbantke",
+      "name": "D5.S3.Geometry.Lorentz.Urbantke.urbantke_conformal_uniqueness_of_chiral_plane",
+      "kind": "theorem",
+      "statement_id": "sha256:9669d4236686da2c0a08f0847f97b3a1f5d9ae97bf930865b80a4b56cf68a645",
+      "line": 584,
+      "signature": "theorem urbantke_conformal_uniqueness_of_chiral_plane (g₁ g₂ : Matrix4 K) (v₁ v₂ : K) (hs₁ : g₁ᵀ = g₁) (hs₂ : g₂ᵀ = g₂) (hg₁ : g₁.det ≠ 0) (hg₂ : g₂.det ≠ 0) (hv₁ : v₁ ^ 2 = g₁.det) (hv₂ : v₂ ^ 2 = g₂.det) (B : FormTriple K) (hQ : (wedgeGram B).det ≠ 0) (h₁ : hodge g₁ v₁ * B = B) (h₂ : hodge g₂ v₂ * B = B) : ∃ a : K, a ≠ 0 ∧ g₂ = a • g₁",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/Urbantke.urbantke_lorentz_reality": {
+      "module": "D5/S3/Geometry/Lorentz/Urbantke",
+      "name": "D5.S3.Geometry.Lorentz.Urbantke.urbantke_lorentz_reality",
+      "kind": "theorem",
+      "statement_id": "sha256:9669d4236686da2c0a08f0847f97b3a1f5d9ae97bf930865b80a4b56cf68a645",
+      "line": 629,
+      "signature": "theorem urbantke_lorentz_reality (B : FormTriple ℂ) (hQ : (wedgeGram B).det ≠ 0) (h : Bᵀ * W ℂ * B.map star = 0) : ∃ (g : Matrix4 ℝ) (l : ℂ), l ≠ 0 ∧ gᵀ = g ∧ g.det < 0 ∧ urbantke B = l • Complex.ofRealHom.mapMatrix g ∧ hodge g (Real.sqrt |g.det|) ^ 2 = -(1 : PairMatrix ℝ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/Urbantke.urbantke_lorentz_witness": {
+      "module": "D5/S3/Geometry/Lorentz/Urbantke",
+      "name": "D5.S3.Geometry.Lorentz.Urbantke.urbantke_lorentz_witness",
+      "kind": "theorem",
+      "statement_id": "sha256:9669d4236686da2c0a08f0847f97b3a1f5d9ae97bf930865b80a4b56cf68a645",
+      "line": 713,
+      "signature": "theorem urbantke_lorentz_witness : let B",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/Urbantke.urbantke_nondegenerate_iff_and_chiral_star": {
+      "module": "D5/S3/Geometry/Lorentz/Urbantke",
+      "name": "D5.S3.Geometry.Lorentz.Urbantke.urbantke_nondegenerate_iff_and_chiral_star",
+      "kind": "theorem",
+      "statement_id": "sha256:9669d4236686da2c0a08f0847f97b3a1f5d9ae97bf930865b80a4b56cf68a645",
+      "line": 520,
+      "signature": "theorem urbantke_nondegenerate_iff_and_chiral_star (B : FormTriple K) : ((urbantke B).det ≠ 0 ↔ (wedgeGram B).det ≠ 0) ∧ ((wedgeGram B).det ≠ 0 → let H",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/Urbantke.urbantke_polynomial_identities": {
+      "module": "D5/S3/Geometry/Lorentz/Urbantke",
+      "name": "D5.S3.Geometry.Lorentz.Urbantke.urbantke_polynomial_identities",
+      "kind": "theorem",
+      "statement_id": "sha256:9669d4236686da2c0a08f0847f97b3a1f5d9ae97bf930865b80a4b56cf68a645",
+      "line": 414,
+      "signature": "theorem urbantke_polynomial_identities (B : FormTriple K) : (urbantke B)ᵀ = urbantke B ∧ (urbantke B).det = (wedgeGram B).det ^ 2 / 64 ∧ exteriorSquare (urbantke B) * W K * B = density B • B",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Geometry/Lorentz/WeylNullScreen.curvature_ricci_split": {
       "module": "D5/S3/Geometry/Lorentz/WeylNullScreen",
       "name": "D5.S3.Geometry.Lorentz.WeylNullScreen.curvature_ricci_split",
@@ -9788,6 +9892,188 @@
       "statement_id": "sha256:6e2e8600b6a82478507e751fd4a1248077b31d380e41ccf34eb8d9d99aac2f5d",
       "line": 140,
       "signature": "theorem optimal_cycle_union_area_variance_bound (s I : Finset ι) (hIs : I ⊆ s) (hs : s.Nonempty) (w val : ι → ℝ) (c s₀ d D : ℝ) (r : ℕ) (hc : 0 < c) (hd : 0 ≤ d) (hdD : d ≤ D) (hr : 1 ≤ r) (hw_lo : ∀ i ∈ s, c ≤ w i) (hw_hi : ∀ i ∈ s, w i ≤ 1) (hI_dev : ∀ i ∈ I, |val i - s₀| ≤ d) (hout_dev : ∀ i ∈ s \\ I, |val i - s₀| ≤ D) (hfrac : ((s \\ I).card : ℝ) * (r : ℝ) ≤ (s.card : ℝ)) : ((∑ i ∈ s, w i * (val i - s₀) ^ 2) / (∑ i ∈ s, w i) ≤ d ^ 2 + (D ^ 2 - d ^ 2) / (1 + c * ((r : ℝ) - 1))) ∧ ((∑ i ∈ Finset.range r, (if i = 0 then 1 else c) * (if i = 0 then D else d) ^ 2) / (∑ i ∈ Finset.range r, if i = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt.adjointCongr": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuarterPowerSqrtHilbertSchmidt.adjointCongr",
+      "kind": "def",
+      "statement_id": "sha256:73f033cf50a0a9310ec4d52c3d82632dab1c9cf1dd079f348043d33852a08008",
+      "line": 33,
+      "signature": "def adjointCongr (C : K →L[ℂ] H) (A : H →L[ℂ] H) : K →L[ℂ] K",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt.adjointCongr_hsSq_le": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuarterPowerSqrtHilbertSchmidt.adjointCongr_hsSq_le",
+      "kind": "theorem",
+      "statement_id": "sha256:73f033cf50a0a9310ec4d52c3d82632dab1c9cf1dd079f348043d33852a08008",
+      "line": 96,
+      "signature": "theorem adjointCongr_hsSq_le (Z : K →L[ℂ] H) {W : H →L[ℂ] H} (hW : IsHilbertSchmidt W) : ∃ h : IsHilbertSchmidt (adjointCongr Z W), hsSq (adjointCongr Z W) h ≤ ‖Z‖ ^ 4 * hsSq W hW",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt.compact_add_one_coercive": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuarterPowerSqrtHilbertSchmidt.compact_add_one_coercive",
+      "kind": "theorem",
+      "statement_id": "sha256:73f033cf50a0a9310ec4d52c3d82632dab1c9cf1dd079f348043d33852a08008",
+      "line": 665,
+      "signature": "theorem compact_add_one_coercive {T J : H →L[ℂ] H} (hT : IsCompactOperator T) (hTsa : IsSelfAdjoint T) (_hJsa : IsSelfAdjoint J) (hJ : J.ker = ⊥) (hp : 0 ≤ 1 + T + J) (hm : 0 ≤ 1 + T - J) : (1 + T : H →L[ℂ] H).ker = ⊥ ∧ ∃ c : ℝ, 0 < c ∧ c • (1 : H →L[ℂ] H) ≤ 1 + T",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt.exists_bounded_factor": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuarterPowerSqrtHilbertSchmidt.exists_bounded_factor",
+      "kind": "theorem",
+      "statement_id": "sha256:73f033cf50a0a9310ec4d52c3d82632dab1c9cf1dd079f348043d33852a08008",
+      "line": 45,
+      "signature": "theorem exists_bounded_factor (L : K →L[ℂ] H) (D : K →L[ℂ] K) {c : ℝ} (hc : 0 ≤ c) (h : ∀ x, ‖L x‖ ≤ c * ‖D x‖) : ∃ Z : K →L[ℂ] H, ‖Z‖ ≤ c ∧ L = Z ∘L D",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt.finite_quarterPower_sqrt_hsSq_le": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuarterPowerSqrtHilbertSchmidt.finite_quarterPower_sqrt_hsSq_le",
+      "kind": "theorem",
+      "statement_id": "sha256:73f033cf50a0a9310ec4d52c3d82632dab1c9cf1dd079f348043d33852a08008",
+      "line": 468,
+      "signature": "theorem finite_quarterPower_sqrt_hsSq_le [FiniteDimensional ℂ H] {A B W : H →L[ℂ] H} (hA : 0 ≤ A) (hB : 0 ≤ B) (hW : IsHilbertSchmidt W) (hD : B - A = quarterRoot A * W * quarterRoot A) : ∃ hΔ : IsHilbertSchmidt (CFC.sqrt B - CFC.sqrt A), hsSq (CFC.sqrt B - CFC.sqrt A) hΔ ≤ hsSq W hW",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt.hilbertSchmidt_add_one_coercive": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuarterPowerSqrtHilbertSchmidt.hilbertSchmidt_add_one_coercive",
+      "kind": "theorem",
+      "statement_id": "sha256:73f033cf50a0a9310ec4d52c3d82632dab1c9cf1dd079f348043d33852a08008",
+      "line": 741,
+      "signature": "theorem hilbertSchmidt_add_one_coercive {T J : H →L[ℂ] H} (hT : IsHilbertSchmidt T) (hTsa : IsSelfAdjoint T) (hJsa : IsSelfAdjoint J) (hJ : J.ker = ⊥) (hp : 0 ≤ 1 + T + J) (hm : 0 ≤ 1 + T - J) : (1 + T : H →L[ℂ] H).ker = ⊥ ∧ ∃ c : ℝ, 0 < c ∧ c • (1 : H →L[ℂ] H) ≤ 1 + T",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt.hsSq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuarterPowerSqrtHilbertSchmidt.hsSq",
+      "kind": "def",
+      "statement_id": "sha256:73f033cf50a0a9310ec4d52c3d82632dab1c9cf1dd079f348043d33852a08008",
+      "line": 36,
+      "signature": "def hsSq (A : H →L[ℂ] H) (_hA : IsHilbertSchmidt A) : ℝ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt.quarterPower_congruence": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuarterPowerSqrtHilbertSchmidt.quarterPower_congruence",
+      "kind": "theorem",
+      "statement_id": "sha256:73f033cf50a0a9310ec4d52c3d82632dab1c9cf1dd079f348043d33852a08008",
+      "line": 153,
+      "signature": "theorem quarterPower_congruence {A B W : H →L[ℂ] H} (hA : 0 ≤ A) (_hB : 0 ≤ B) (hW : IsHilbertSchmidt W) (hD : B - A = quarterRoot A * W * quarterRoot A) (C : K →L[ℂ] H) : let M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt.quarterPower_congruence_sqrt_hsSq_le": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuarterPowerSqrtHilbertSchmidt.quarterPower_congruence_sqrt_hsSq_le",
+      "kind": "theorem",
+      "statement_id": "sha256:73f033cf50a0a9310ec4d52c3d82632dab1c9cf1dd079f348043d33852a08008",
+      "line": 654,
+      "signature": "theorem quarterPower_congruence_sqrt_hsSq_le {A B W : H →L[ℂ] H} (hA : 0 ≤ A) (hB : 0 ≤ B) (hW : IsHilbertSchmidt W) (hD : B - A = quarterRoot A * W * quarterRoot A) (C : K →L[ℂ] H) : ∃ h : IsHilbertSchmidt (CFC.sqrt (adjointCongr C B) - CFC.sqrt (adjointCongr C A)), hsSq _ h ≤ ‖C‖ ^ 2 * hsSq W hW",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt.quarterPower_sqrt_hsNorm_le": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuarterPowerSqrtHilbertSchmidt.quarterPower_sqrt_hsNorm_le",
+      "kind": "theorem",
+      "statement_id": "sha256:73f033cf50a0a9310ec4d52c3d82632dab1c9cf1dd079f348043d33852a08008",
+      "line": 637,
+      "signature": "theorem quarterPower_sqrt_hsNorm_le {A B W : H →L[ℂ] H} (hA : 0 ≤ A) (hB : 0 ≤ B) (hW : IsHilbertSchmidt W) (hD : B - A = quarterRoot A * W * quarterRoot A) : ∃ hΔ : IsHilbertSchmidt (CFC.sqrt B - CFC.sqrt A), Real.sqrt (hsSq (CFC.sqrt B - CFC.sqrt A) hΔ) ≤ Real.sqrt (hsSq W hW) ∧ Real.sqrt (hsSq (CFC.sqrt B - CFC.sqrt A) hΔ) ≤ Real.sqrt 2 * Real.sqrt (hsSq W hW)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt.quarterPower_sqrt_hsSq_le": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuarterPowerSqrtHilbertSchmidt.quarterPower_sqrt_hsSq_le",
+      "kind": "theorem",
+      "statement_id": "sha256:73f033cf50a0a9310ec4d52c3d82632dab1c9cf1dd079f348043d33852a08008",
+      "line": 581,
+      "signature": "theorem quarterPower_sqrt_hsSq_le {A B W : H →L[ℂ] H} (hA : 0 ≤ A) (hB : 0 ≤ B) (hW : IsHilbertSchmidt W) (hD : B - A = quarterRoot A * W * quarterRoot A) : ∃ hΔ : IsHilbertSchmidt (CFC.sqrt B - CFC.sqrt A), hsSq (CFC.sqrt B - CFC.sqrt A) hΔ ≤ hsSq W hW",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt.quarterPower_sqrt_sharp": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuarterPowerSqrtHilbertSchmidt.quarterPower_sqrt_sharp",
+      "kind": "theorem",
+      "statement_id": "sha256:73f033cf50a0a9310ec4d52c3d82632dab1c9cf1dd079f348043d33852a08008",
+      "line": 514,
+      "signature": "theorem quarterPower_sqrt_sharp : let A : ℂ →L[ℂ] ℂ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt.quarterPower_sqrt_sq_isTraceClass": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuarterPowerSqrtHilbertSchmidt.quarterPower_sqrt_sq_isTraceClass",
+      "kind": "theorem",
+      "statement_id": "sha256:73f033cf50a0a9310ec4d52c3d82632dab1c9cf1dd079f348043d33852a08008",
+      "line": 648,
+      "signature": "theorem quarterPower_sqrt_sq_isTraceClass {A B W : H →L[ℂ] H} (hA : 0 ≤ A) (hB : 0 ≤ B) (hW : IsHilbertSchmidt W) (hD : B - A = quarterRoot A * W * quarterRoot A) : IsTraceClass ((CFC.sqrt B - CFC.sqrt A) * (CFC.sqrt B - CFC.sqrt A))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt.quarterRoot": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/QuarterPowerSqrtHilbertSchmidt",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.QuarterPowerSqrtHilbertSchmidt.quarterRoot",
+      "kind": "def",
+      "statement_id": "sha256:73f033cf50a0a9310ec4d52c3d82632dab1c9cf1dd079f348043d33852a08008",
+      "line": 31,
+      "signature": "abbrev quarterRoot (A : H →L[ℂ] H)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
