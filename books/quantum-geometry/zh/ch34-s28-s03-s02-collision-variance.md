@@ -664,9 +664,22 @@ $$
 
 #### 单位频带排除有界计数误差
 
-如果 $|N(H)-F(H)|$ 一致有界，就会与单位频带轮廓矛盾。记 $a=\log H/(2\pi)$，取实值 Schwartz 测试函数 $g$，使其傅里叶变换支撑在 $(-1,1)$ 内，约定 $\widehat g(\alpha)=\int g(u)e^{-2\pi i\alpha u}\,du$。在 $x$ 处的平滑计数为 $C_H(x)=\sum_{\gamma\le H}g(a(x-\gamma))$。对 $g*\widetilde g$ 作傅里叶反演，其中 $\widetilde g(u)=g(-u)$，相当于用 $|\widehat g|^2$ 检验单位频带轮廓。峰 $\log H\,e^{-2|\alpha|\log H}$ 的质量趋于一，贡献 $|\widehat g(0)|^2$。
+设 $S$ 由互异的正实数纵坐标 $\gamma$ 组成，每个区间 $(0,H]$ 仅含有限多个纵坐标。以 $m_\gamma$ 表示正整数重数，令 $N(H)=\sum_{\gamma\le H}m_\gamma$。沿用上文的有序 Lorentz 配对和 $G_H(t)$，每一对计入因子 $m_\gamma m_{\gamma'}$，并采用归一化 $P_H(\alpha)=2\pi G_H(\alpha\log H)/(H\log H)$。
 
-在计数误差有界时，缩放坐标 $a\gamma$ 上每个单位区间的点数一致有界，因为截断以内 $F'(x)\le a+O(1)$。于是去掉归一化配对和的 Lorentz 权重只产生 $O(a^{-2})$ 误差。使用 $1-4/(4+v^2)\le v^2/4$，对每一行按单位区间求和，并利用 $(1+u^2)|(g*\widetilde g)(u)|$ 的快速衰减即可得到该界。无权配对和等于 $a\int_{\mathbb R} C_H^2$，且 $N(H)/(aH)\to1$。在 $[0,H]$ 之外，$\int(|C_H|+C_H^2)=o(H)$。距两端点不到一个单位的站点有 $O(\log H)$ 个，外部 $L^1$ 贡献有界。其余站点只贡献缩放距离 $a$ 之外的 Schwartz 尾部。每个单位区间的点数界还给出 $|C_H|$ 的一致上界，从而控制外部 $L^2$ 贡献。另有 $H^{-1}\int C_H\to\int g$。合并可得
+::: {.theorem #thm-ch34-montgomery-unit-band-unbounded-discrepancy title="Montgomery 单位频带推出无界计数误差" lean="D5/S3/Analytic/Oscillation/MontgomeryCountDiscrepancy.unit_band_profile_forces_unbounded_count_discrepancy"}
+设 $c(H)\to1$ 且 $e(H)\to0$。若对所有充分大的 $H$ 和所有 $|\alpha|\le1$ 有
+
+$$
+\left|P_H(\alpha)-c(H)\log H\,e^{-2|\alpha|\log H}-|\alpha|\right|\le e(H),
+$$
+
+则对每个实数 $D$ 和 $H_0$，存在实数 $H\ge H_0$ 使 $|N(H)-F(H)|>D$，其中 $F$ 为上文的两项计数主项。
+:::
+
+::: proof
+假设 $|N(H)-F(H)|$ 在充分大的高度上一致有界。记 $a=\log H/(2\pi)$，取实值 Schwartz 测试函数 $g$，使其傅里叶变换支撑在 $(-1,1)$ 内，约定 $\widehat g(\alpha)=\int g(u)e^{-2\pi i\alpha u}\,du$。在 $x$ 处的平滑计数为 $C_H(x)=\sum_{\gamma\le H}m_\gamma g(a(x-\gamma))$。对 $g*\widetilde g$ 作傅里叶反演，其中 $\widetilde g(u)=g(-u)$，相当于用 $|\widehat g|^2$ 检验单位频带轮廓。峰 $\log H\,e^{-2|\alpha|\log H}$ 的质量趋于一，贡献 $|\widehat g(0)|^2$。
+
+在计数误差有界时，缩放坐标 $a\gamma$ 上每个单位区间内按重数计的点数一致有界，因为截断以内 $F'(x)\le a+O(1)$。因此，对配对和施加自相关测试并归一化后，去掉 Lorentz 权重只产生 $O(a^{-2})$ 误差。使用 $1-4/(4+v^2)\le v^2/4$，对每一行按单位区间求和，并利用 $(1+u^2)|(g*\widetilde g)(u)|$ 的快速衰减即可得到该界。保留重数但去掉 Lorentz 权重的未归一化配对和等于 $a\int_{\mathbb R} C_H^2$，且 $N(H)/(aH)\to1$。在 $[0,H]$ 之外，$\int(|C_H|+C_H^2)=o(H)$。距两端点不到一个单位的点按重数计有 $O(\log H)$ 个，外部 $L^1$ 贡献有界。其余站点只贡献缩放距离 $a$ 之外的 Schwartz 尾部。每个单位区间的点数界还给出 $|C_H|$ 的一致上界，从而控制外部 $L^2$ 贡献。另有 $H^{-1}\int C_H\to\int g$。合并可得
 
 $$
 \lim_{H\to\infty}\frac1H\int_0^H\left(C_H(x)-\int g\right)^2\,dx
@@ -675,7 +688,10 @@ $$
 
 另一方面，对累积计数误差分部积分，得到平滑计数与截断密度 $F'$ 的相应卷积之差至多为 $D_*\|g'\|_1$，其中 $D_*$ 与 $g$、$H$ 无关。可以将参考密度在一个固定且大于 $2\pi$ 的高度以下设为零，其累积误差仍有界。参考密度与 $g(a\,\cdot)$ 的卷积在 $[0,H]$ 上按均方趋于 $\int g$。这是因为 $F'/a$ 在任一固定比例的内部区间上一致趋于一，且截断后的归一化密度直到端点都一致有界。因此方差极限至多为 $D_*^2\|g'\|_1^2$。
 
-取 $g_R=\mathbf1_{[-R,R]}*\phi$，其中 $\phi$ 为非负、积分为一且傅里叶支撑在 $(-1,1)$ 内的 Schwartz 函数。可取紧支撑于 $(-1/2,1/2)$ 的非零光滑函数的逆变换模平方，再归一化。于是 $\|g_R'\|_1\le2$。代入 $\widehat g_R(\alpha)=\sin(2\pi R\alpha)\widehat\phi(\alpha)/(\pi\alpha)$，方差积分等于 $\pi^{-2}\log R+O(1)$。在 $1/R$ 以下积分有界，在零点附近用 $|\widehat\phi|^2=1+O(|\alpha|)$ 替代也只产生有界误差。再由 $2\sin^2(2\pi R\alpha)=1-\cos(4\pi R\alpha)$，从 $1/R$ 到固定邻域端点的余弦项积分有界。先固定 $R$ 令 $H\to\infty$，再令 $R\to\infty$，便与方差的一致上界矛盾。[正弦核统计量的傅里叶方差](https://arxiv.org/abs/math/0006037v3)
+令 $g_R=\mathbf1_{[-R,R]}*\phi$，其中 $\phi$ 是一个实偶光滑凸起函数 $b$ 的傅里叶逆变换。取 $b$ 支撑于 $[-1/2,1/2]$，在 $[-1/4,1/4]$ 上等于一。由窗函数两端的平移之差得到 $\|g_R'\|_1\le2\|\phi\|_1$。代入 $\widehat g_R(\alpha)=\sin(2\pi R\alpha)b(\alpha)/(\pi\alpha)$，可在每个满足 $j\in\mathbb N$ 且包含于 $(0,1/4]$ 的倍增区间 $[2^j/(2R),2^{j+1}/(2R)]$ 上估计傅里叶能量。正弦平方在该区间恰取整周期平均值 $1/2$，而 $1/\alpha$ 可用右端点的倒数下界，因此每个区间至少贡献 $1/(4\pi^2)$。先固定 $R$ 取高度极限，再令 $R$ 增大，便与方差的一致上界矛盾。完整证明由 Lean 内核检查。
+:::
+
+共格比较谱表明，计数误差仍可有 $O(\log\log H)$ 上界。对于 ζ 零点，Baluyot、Goldston、Suriajaya 与 Turnage-Butterbaugh 的公式 (1.4) 以复零点之差为变量。由黎曼假设将零点限制在临界线上后，交换有序对的两项可将该统计量化为纵坐标的余弦和。记 $L=\log H$。对每个固定的测试函数 $g$，乘在指数峰上的有界加性系数误差对频带积分贡献至多 $O(\|\widehat g\|_\infty^2/L)$，一致余项贡献至多 $O(\|\widehat g\|_2^2/\sqrt L)$。这两项趋零，足以在书面推导中沿用上述方差反证。碰撞定理还需要独立的长频带估计。 [单位频带公式 (1.1)–(1.4)](https://arxiv.org/html/2306.04799v1#S1.E4)
 
 ### 有限支撑的占用数对角下界
 
