@@ -180,6 +180,25 @@ $$
 在 $6$ 维二形式对基上将第一比安基恒等式与洛伦兹里奇迹写成显式线性约束，先由电—磁分解构造 $\mathrm{Weyl}_4 \simeq \mathrm{Sym}^2_0(\mathbb{R}^3)^2$ 与 $20 = 10 + 9 + 1$ 分解，再借助立体投影把未来零光线参数化为天球 $\widehat{\mathbb{C}} = \mathrm{Option}\,\mathbb{C}$，将每条零光线上的复潮汐读数与次数 $\le 4$ 复多项式的射影求值严格等同。由此，对互异的 $N$ 条零光线，拉格朗日插值与范德蒙满射/单射直接给出精确秩 $\min(10, 2N)$ 与 $N = 5$ 时的忠实重构；当 $N \le 4$ 时，以这 $N$ 个射影点为根的非零四次多项式之逆像即构成显式非零盲区外尔张量。该定理严格锁定四维纯引力自旋-$2$ 曲率的零锥代数运动学，而连续统动力学场方程、能动张量耦合及 $G_N$ 标定仍属下列开放问题。完整证明由 Lean 内核检查。
 :::
 
+进一步，在一阶四维引力的普莱班斯基—乌尔班特克（Plebański–Urbantke）表述中，无需先预设度规张量，即可由三元组二形式 $B$ 经三次交错收缩重构共形度规及其洛伦兹实性条件，相关普适代数恒等式、共形唯一性与复简性反例亦已由内核严格验证：
+
+::: {.theorem #thm-ch34-plebanski-urbantke-metric-reconstruction title="四维 Plebański–Urbantke 普适度规重构、共形唯一性与复洛伦兹实性定理" lean="D5/S3/Geometry/Lorentz/Urbantke.exteriorSquare_eq_smul_id_imp_scalar, D5/S3/Geometry/Lorentz/Urbantke.urbantke_conformal_uniqueness, D5/S3/Geometry/Lorentz/Urbantke.urbantke_polynomial_identities, D5/S3/Geometry/Lorentz/Urbantke.urbantke_nondegenerate_iff_and_chiral_star, D5/S3/Geometry/Lorentz/Urbantke.urbantke_conformal_uniqueness_of_chiral_plane, D5/S3/Geometry/Lorentz/Urbantke.urbantke_lorentz_reality, D5/S3/Geometry/Lorentz/Urbantke.urbantke_lorentz_witness, D5/S3/Geometry/Lorentz/Urbantke.simplicity_not_sufficient_for_real_lorentz"}
+在定向六对二形式基 $(01, 02, 03, 23, 31, 12)$ 与楔积配对矩阵 $W$ 下，对任意特征零域 $K$ 上的 $6 \times 3$ 二形式三元组 $B$，记楔积格拉姆矩阵 $Q(B) = B^\top W B$ 与乌尔班特克三次度规密度矩阵 $U(B)$：
+
+1. **无前提普适多项式恒等式与非退化手征星号**（[`urbantke_polynomial_identities`](lean:D5/S3/Geometry/Lorentz/Urbantke.urbantke_polynomial_identities)、[`urbantke_nondegenerate_iff_and_chiral_star`](lean:D5/S3/Geometry/Lorentz/Urbantke.urbantke_nondegenerate_iff_and_chiral_star)）：对**任意**三元组 $B$（不预设简性或非退化性），恒有对称性 $U(B)^\top = U(B)$、精确行列式恒等式与外平方特征平面恒等式
+   $$
+   \det U(B) \;=\; \frac{(\det Q(B))^2}{64}, \qquad
+   \bigl(\Lambda^2 U(B)\bigr)\,W\,B \;=\; \frac{\det Q(B)}{8}\,B.
+   $$
+   因此 $\det U(B) \neq 0 \iff \det Q(B) \neq 0$；当非退化时，$B$ 的三列线性无关，手征星号 $H = (\det Q/8)\,W\,(\Lambda^2 U)^{-1}$ 满足 $H^2 = I_6$，其 $+1$ 特征空间恰为 $B$ 的列张成三维手征平面，$-1$ 特征空间为其 $W$-正交补。
+2. **外平方与手征平面的共形唯一性**（[`exteriorSquare_eq_smul_id_imp_scalar`](lean:D5/S3/Geometry/Lorentz/Urbantke.exteriorSquare_eq_smul_id_imp_scalar)、[`urbantke_conformal_uniqueness`](lean:D5/S3/Geometry/Lorentz/Urbantke.urbantke_conformal_uniqueness)、[`urbantke_conformal_uniqueness_of_chiral_plane`](lean:D5/S3/Geometry/Lorentz/Urbantke.urbantke_conformal_uniqueness_of_chiral_plane)）：若四阶矩阵 $A$ 满足 $\Lambda^2 A = c I_6$（$c \neq 0$），则 $A$ 必为纯量矩阵；从而任意两个诱导成比例外平方或共享同一非退化手征三维平面的可逆对称四阶度规 $g_1, g_2$ 必满足 $g_2 = \lambda g_1$（$\lambda \neq 0$）。
+3. **复洛伦兹共形实性定理与复简性不足反例**（[`urbantke_lorentz_reality`](lean:D5/S3/Geometry/Lorentz/Urbantke.urbantke_lorentz_reality)、[`urbantke_lorentz_witness`](lean:D5/S3/Geometry/Lorentz/Urbantke.urbantke_lorentz_witness)、[`simplicity_not_sufficient_for_real_lorentz`](lean:D5/S3/Geometry/Lorentz/Urbantke.simplicity_not_sufficient_for_real_lorentz)）：在复域 $\mathbb{C}$ 上，若 $\det Q(B) \neq 0$ 且满足洛伦兹实性正交条件 $B^\top W \bar{B} = 0$，则 $U(B)$ 必为某个实可逆对称四阶度规 $g$ 的非零复标量倍，且 $\det g < 0$、实霍奇星号满足 $H_{\mathrm{real}}(g)^2 = -I_6$（锁定洛伦兹奇数符号差）。标准见证 $B = [I_3;\, i I_3]$ 精确给出 $U = \operatorname{diag}(1, -1, -1, -1)$ 与 $D = -i$；相反，显式三元组 $B = [I_3;\, (1+i)I_3]$ 满足复普莱班斯基非退化简性条件 $Q = 2(1+i)I_3$，却给出 $U = \operatorname{diag}(1, 2i, 2i, 2i)$，不是任何实矩阵的复标量倍。
+:::
+
+::: proof
+第 1 款在电块 $E$ 可逆的稠密图卡上借 $C = E^{-1}$ 化为 $[I_3;\, H]$，拆分 $H = S + [w]_\times$ 后用行列式为 $1$ 的余标架剪切 $L$ 将乌尔班特克矩阵对角化为 $L^\top \operatorname{diag}(1, \operatorname{adj} S) L$，直接验算 $\det(\operatorname{adj} S) = (\det S)^2$ 与 $\Lambda^2(\operatorname{adj} S) = (\det S) S$，再沿一元多项式族 $E + t I_3$ 由无限特征零域多项式根数有限性延拓至一切（含奇异电块或奇异 $Q$ 的）三元组 $B$。第 2 款由外平方对角元与余子式比例锁死 $A = a I_4$，再应用于 $g_1^{-1} g_2$ 得共形唯一性。第 3 款把 $B^\top W \bar{B} = 0$ 转化为共轭星号与原星号反号关系，从而由共形唯一性抽取出满足 $H_{\mathrm{real}}^2 = -I_6$ 与 $\det g < 0$ 的实代表元，并对 $i I_3$ 与 $(1+i)I_3$ 直接分量求值。完整证明由 Lean 内核检查。
+:::
+
 我们将从离散比较几何通往四维相对论引力动力学的完整未决桥接任务正式立案如下：
 
 ::: {.problem #prob-ch34-gravity-dynamics-and-coupling title="离散比较几何导出四维洛伦兹自旋-2 引力动力学与牛顿常数归一化的开放问题"}
