@@ -301,6 +301,11 @@ function tlCols(specs, x, y, w, h, lo, hi, a, o = {}) {
     const cx = x + (ci + 0.5) * cw, tw2 = Math.min(84, cw * 0.62);
     sp.forEach((m, k) => {
       const yy = Y(m.v), light = k < 3;
+      if (light && yy > y + h + 6) {          /* a light mode below the zoomed range: an arrow and its value */
+        arrow(cx - tw2 / 2 + 8, y + h - 34, cx - tw2 / 2 + 8, y + h - 8, C.cyan, a, 2.5);
+        txt(m.v.toFixed(2), cx - tw2 / 2 + 22, y + h - 12, { size: 18, fam: F.mono, w: 700, c: C.cyan, a });
+        return;
+      }
       if (yy < y - 6 || yy > y + h + 6) return;
       fillBox(cx - tw2 / 2, yy - 2.5, tw2, 5, light ? C.cyan : C.white, a * (light ? 1 : 0.5));
     });
@@ -337,19 +342,19 @@ SCENES.hook = S => {
   badgeQ(S, [[0, null, 'computed']]);
   const qa = at(S, 3, 0.6);
   const sa = a * (1 - 0.88 * qa);
-  tlShell({ cx: 560, cy: 500, R: 300, a: sa, rot: 0.04 * S.u, edges: Q(S, 1, 'Join nearby points', 1.2) });
+  tlShell({ cx: 560, cy: 500, R: 300, a: sa, rot: 0.04 * S.u, edges: Q(S, 1, 'Join them', 1.2) });
   txt('view down the pole (17, 17, 17) · 沿极点俯视', 560, 832, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.dim, a: sa });
   const pa = a * (1 - qa);
   panel(1000, 200, 800, 170, pa, C.cyan, 'THE SHELL · 球壳');
   txt('x² + y² + z² = 867', 1030, 285, { size: 46, fam: F.math, w: 700, c: C.white, a: pa });
   txt('19 points = 1 pole + 6 orbits × 3 · 19 个整点', 1030, 340, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: pa });
-  const ea = pa * Q(S, 1, 'Join nearby points', 0.6);
+  const ea = pa * Q(S, 1, 'Join them', 0.6);
   panel(1000, 395, 800, 120, ea, C.cyan, 'EDGES · 边');
   tlRich([['135', C.white], [' edges · d² ≤ 804 · clocks ', C.dim], ['724', C.cyan], [' · ', C.dim], ['804', C.mag]], 1030, 470, { size: 28, fam: F.mono, a: ea });
   const fa = pa * Q(S, 2, 'Five hypercharges', 0.6);
   if (fa > 0.003) {
     panel(1000, 540, 800, 290, fa, C.cyan, 'FIVE SPECTRA · 五套谱 (δ = 0)');
-    tlCols(TL_P0.specs, 1050, 590, 720, 170, 0, 24, fa, { band: Q(S, 2, 'exactly three modes', 0.6) });
+    tlCols(TL_P0.specs, 1050, 590, 720, 170, 0, 24, fa, { band: Q(S, 2, 'three modes sit low', 0.6) });
   }
   if (qa > 0.003) {
     txt('3 low modes', W / 2, 420, { size: 76, fam: F.orb, w: 900, align: 'center', c: C.cyan, a: qa, ab: 2 });
@@ -364,15 +369,15 @@ SCENES.hook = S => {
 SCENES.gap = S => {
   const a = tlFade(S);
   badgeQ(S, [[0, null, 'computed']]);
-  const sw = ease(clamp((S.u - phraseAt(S, 1, 'Now let the two clocks')) / (lineAt(S, 2).e - phraseAt(S, 1, 'Now let the two clocks'))));
+  const sw = ease(clamp((S.u - phraseAt(S, 0, 'Now turn the two clocks')) / (lineAt(S, 1).e - phraseAt(S, 0, 'Now turn the two clocks'))));
   const P = tlPathAt(sw);
-  const z = ease(Q(S, 2, 'Three cyan modes', 1.4));
+  const z = ease(Q(S, 1, 'Three cyan modes', 1.4));
   const lo = lerp(0, 6.6, z), hi = lerp(24, 11.6, z);
   panel(120, 190, 1120, 640, a, C.cyan, 'H_q(φ₁, φ₂) · 19 EIGENVALUES · 全部本征值 (δ = 0)');
   const ticks = z > 0.5 ? [7, TL_LIGHT, 9, TL_HEAVY, 10, 11] : [0, 5, 10, 15, 20];
-  tlCols(P.specs, 230, 250, 980, 500, lo, hi, a * at(S, 0, 0.6), { band: Q(S, 2, 'Three cyan modes', 0.8), cut9: Q(S, 2, 'Three cyan modes', 0.8, 0.8), ticks });
+  tlCols(P.specs, 230, 250, 980, 500, lo, hi, a * at(S, 0, 0.6), { band: Q(S, 1, 'Three cyan modes', 0.8), cut9: Q(S, 1, 'Three cyan modes', 0.8, 0.8), ticks });
   /* the torus of clock phases */
-  const ta = a * Q(S, 1, 'Now let the two clocks', 0.6);
+  const ta = a * Q(S, 0, 'Now turn the two clocks', 0.6);
   if (ta > 0.003) {
     panel(1300, 190, 500, 400, ta, C.now, 'CLOCK TORUS · 双钟环面');
     const x0 = 1380, y0 = 240, s = 300, k = Math.round(sw * TL_NP);
@@ -383,14 +388,14 @@ SCENES.gap = S => {
     txt('φ₂', x0 - 26, y0 + s / 2 + 8, { size: 22, fam: F.math, w: 700, align: 'center', c: C.mag, a: ta });
     txt('2π', x0 + s, y0 + s + 34, { size: 18, fam: F.math, align: 'center', c: C.dim, a: ta });
   }
-  const ra = a * Q(S, 2, 'Three cyan modes', 0.6);
+  const ra = a * Q(S, 1, 'Three cyan modes', 0.6);
   if (ra > 0.003) {
     panel(1300, 615, 500, 215, ra, C.cyan, 'COMPUTED ON THE PATH · 路径上现算');
     tlRich([['max λ₃ = ', C.white], [tlF(P.m3, 4), C.cyan], ['  < 8.685', C.dim]], 1325, 700, { size: 30, fam: F.mono, a: ra });
     tlRich([['min λ₄ = ', C.white], [tlF(P.m4, 4), C.white], ['  > 9.6', C.dim]], 1325, 760, { size: 30, fam: F.mono, a: ra });
     txt(`${TL_CHARGES.length} charges × ${Math.round(sw * TL_NP) + 1} phases`, 1325, 808, { size: 20, fam: F.mono, w: 700, c: C.dim, a: ra });
   }
-  const ca = a * Q(S, 3, 'An interval certificate', 0.6);
+  const ca = a * Q(S, 2, 'An interval certificate', 0.6);
   if (ca > 0.003) {
     ctx.save(); ctx.globalAlpha = ca; ctx.fillStyle = 'rgba(4,10,24,0.9)'; ctx.fillRect(250, 300, 940, 250); ctx.restore();
     panel(250, 300, 940, 250, ca, C.cyan, 'REPLAY CERTIFICATE · 复算证书 · NUM');
@@ -503,14 +508,14 @@ SCENES.zeros = S => {
   const ya = 640;
   line(x0, ya, x1, ya, C.dim, a, 2);
   for (const t of [9, 9.5, 10, 10.5]) { line(X(t), ya - 6, X(t), ya + 6, C.dim, a, 2); txt(String(t), X(t), ya + 36, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.dim, a }); }
-  const c9 = a * Q(S, 0, 'the fixed cut nine', 0.5), cT = a * Q(S, 0, 'the cut T', 0.5);
+  const c9 = a * Q(S, 0, 'the cut nine', 0.5), cT = a * Q(S, 0, 'the cut T', 0.5);
   dashed(X(9), 266, X(9), ya, C.now, c9, 3);
   txt('cut 9', X(9), 256, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.now, a: c9 });
   dashed(X(10), 266, X(10), ya, C.mag, cT, 3);
   txt('T ≈ 10', X(10), 256, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.mag, a: cT });
   const rows = [
-    { z: TL_ZEROS[0], y: 335, on: Q(S, 1, 'At zero number 8236', 0.6), v9: '✗', vT: '✓ first hit' },
-    { z: TL_ZEROS[1], y: 445, on: Q(S, 2, 'T rescues', 0.6), v9: '✗', vT: '✓ rescued' },
+    { z: TL_ZEROS[0], y: 335, on: Q(S, 1, 'At zero 8236', 0.6), v9: '✗', vT: '✓ first hit' },
+    { z: TL_ZEROS[1], y: 445, on: Q(S, 2, 'T also rescues', 0.6), v9: '✗', vT: '✓ rescued' },
     { z: TL_ZEROS[2], y: 555, on: Q(S, 3, 'zero 8359', 0.6), v9: '✓', vT: '✓' }
   ];
   for (const r of rows) {
@@ -527,7 +532,7 @@ SCENES.zeros = S => {
       txt('shared gap ⊇ [9, 10.19]', (X(r.z.lo) + X(r.z.hi)) / 2, r.y - 20, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: ra });
     }
     txt(`9: ${r.v9}`, 150, r.y + 46, { size: 20, fam: F.mono, w: 700, c: r.v9 === '✓' ? C.cyan : C.dim, a: ra });
-    txt(`T: ${r.vT}`, 225, r.y + 46, { size: 20, fam: F.mono, w: 700, c: C.mag, a: ra * (r.z.h3 ? Q(S, 2, 'Under T it becomes', 0.5) : 1) });
+    txt(`T: ${r.vT}`, 225, r.y + 46, { size: 20, fam: F.mono, w: 700, c: C.mag, a: ra * (r.z.h3 ? Q(S, 2, 'Under T it is', 0.5) : 1) });
   }
   const ma = a * Q(S, 3, 'Still, T is a model choice', 0.6);
   if (ma > 0.003) {
@@ -541,14 +546,14 @@ SCENES.zeros = S => {
 /* ======================================================================= */
 SCENES.lattice = S => {
   const a = tlFade(S);
-  badgeQ(S, [[0, null, 'argued'], [1, 'On a four-dimensional lattice', 'computed']]);
+  badgeQ(S, [[0, null, 'argued'], [1, 'A five-step overlap kernel', 'computed']]);
   const la = a * at(S, 0, 0.6);
   panel(120, 190, 560, 640, la, C.argued, 'SCHEMATIC 4D LATTICE · 示意');
   drawHyper(CUBE4, [[0, 3, S.t * 0.21], [1, 2, S.t * 0.13], [2, 3, S.t * 0.17]], { scale: 1.05, a: la * 0.9, cx: 400, cy: 480, camZ: 7, lw: 1.6 });
   txt('internal 3 modes ≠ 4D Weyl fermions', 400, 760, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.white, a: la });
   txt('内部三模 ≠ 四维外尔费米子', 400, 800, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a: la });
   /* the mass window */
-  const ma = a * Q(S, 1, 'On a four-dimensional lattice', 0.6);
+  const ma = a * Q(S, 1, 'A five-step overlap kernel', 0.6);
   if (ma > 0.003) {
     panel(730, 190, 1070, 300, ma, C.cyan, 'FIVE-STEP OVERLAP KERNEL · 五步单纯形重叠核 · g = I − J/5');
     const x0 = 790, x1 = 1740, lo = 3.40, hi = 3.55, X = v => x0 + (v - lo) / (hi - lo) * (x1 - x0), y = 380;
@@ -562,7 +567,7 @@ SCENES.lattice = S => {
     txt('Wilson mass m', 790, 265, { size: 22, fam: F.mono, w: 700, c: C.white, a: ma });
     tlRich([['3', C.cyan], [' species of one chirality · 三个同手征物种', C.white]], 790, 472, { size: 26, fam: F.zh, a: ma * Q(S, 1, 'three species', 0.6) });
   }
-  const ia = a * Q(S, 2, 'With the shell itself', 0.6);
+  const ia = a * Q(S, 2, 'With the shell as mass', 0.6);
   if (ia > 0.003) {
     panel(730, 520, 1070, 310, ia, C.cyan, 'INDEX · 手征指数 · REPLAY CERTIFICATES');
     tlRich([['smooth flux:  I = ', C.white], ['−3 Pf(C)', C.cyan]], 770, 600, { size: 34, fam: F.math, a: ia });
@@ -577,7 +582,7 @@ SCENES.lattice = S => {
 /* ======================================================================= */
 SCENES.rough = S => {
   const a = tlFade(S);
-  badgeQ(S, [[0, null, 'computed'], [2, 'Three orthogonal Higgs frames', 'argued'], [3, 'Still open', 'open']]);
+  badgeQ(S, [[0, null, 'computed'], [2, 'Three Higgs frames', 'argued'], [3, 'Still open', 'open']]);
   const oa = a * Q(S, 3, 'Still open', 0.6);
   const top = 1 - 0.55 * oa;
   /* rough links: jittered plaquettes */
@@ -587,13 +592,13 @@ SCENES.rough = S => {
     const x = 170 + i * 52, y = 250 + j * 52, jit = 0.9 * (rnd(i, j + Math.floor(S.u * 2)) - 0.5);
     ctx.save(); ctx.translate(x + 20, y + 20); ctx.rotate(jit); box(-18, -18, 36, 36, C.mag, ra * 0.7, 1.4); ctx.restore();
   }
-  const ca = ra * Q(S, 1, 'One explicit SU five background', 0.6);
+  const ca = ra * Q(S, 1, 'One SU five background', 0.6);
   txt('(I(5̄), I(10)) = (2, 7)', 690, 300, { size: 34, fam: F.math, w: 700, align: 'center', c: C.white, a: ca });
   txt('−2 + 2 × 7 = 12', 690, 370, { size: 34, fam: F.math, w: 700, align: 'center', c: C.white, a: ca * Q(S, 1, 'centre charge twelve', 0.5) });
   txt('12 ≡ 2 (mod 5) ≠ 0', 690, 440, { size: 36, fam: F.math, w: 700, align: 'center', c: C.now, a: ca * Q(S, 1, 'two mod five', 0.5) });
   txt('centre charge on the left-handed determinant line', 530, 520, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ca });
   /* Higgs frames */
-  const ha = a * Q(S, 2, 'Three orthogonal Higgs frames', 0.6) * top;
+  const ha = a * Q(S, 2, 'Three Higgs frames', 0.6) * top;
   if (ha > 0.003) {
     panel(980, 190, 820, 360, ha, C.argued, 'ORTHOGONAL HIGGS FRAMES · 正交希格斯标架 · ARGUED');
     const left = ['SU(4)', 'SU(3)', 'SU(2)', '{1}'];
