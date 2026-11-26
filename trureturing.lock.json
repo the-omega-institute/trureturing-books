@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "c8fd9e59d10abde285525bcb61b543b9f96e46c9",
-  "pinned_at": "2026-11-26T23:07:31Z",
+  "commit": "1b221a306acf68c117194cb3b4bd26b0076867d7",
+  "pinned_at": "2026-11-26T23:34:47Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -12052,6 +12052,263 @@
       "statement_id": "sha256:29f0424e2386e0d675fc12e12f82d21c487d943d53b7c12598846855bf5023a6",
       "line": 99,
       "signature": "public lemma qftSource_circuit_event_count (n : Nat) : ResourcePool.count event (circuit oracles n).eventCost = n * (if .gate .hadamard = event then 1 else 0) + n.choose 2 * (if .gate .controlledPhase = event then 1 else 0) + (n / 2) * (if .gate .swap = event then 1 else 0)"
+    },
+    "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D.anomaly5_classification": {
+      "module": "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralAnomalyRigidity4D.anomaly5_classification",
+      "kind": "theorem",
+      "statement_id": "sha256:bbe2be4ae421a147443eaa5f2ede54024e13b435a02727476cc9640ae60e2a67",
+      "line": 63,
+      "signature": "theorem anomaly5_classification (y : Fin 5 → K) : anomaly5 y ↔ (∃ t : K, y = t • sm5) ∨ (∃ t : K, y = t • sm5Swap) ∨ (∃ t : K, y = t • trivial5)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D.anomaly5_cubic_factor": {
+      "module": "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralAnomalyRigidity4D.anomaly5_cubic_factor",
+      "kind": "theorem",
+      "statement_id": "sha256:bbe2be4ae421a147443eaa5f2ede54024e13b435a02727476cc9640ae60e2a67",
+      "line": 57,
+      "signature": "theorem anomaly5_cubic_factor (q d : K) : 6 * q ^ 3 + 3 * (-d - 2 * q) ^ 3 + 3 * d ^ 3 + 2 * (-3 * q) ^ 3 + (6 * q) ^ 3 = 18 * q * (-d + 2 * q) * (d + 4 * q)",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D.anomaly5_linear_normal_form": {
+      "module": "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralAnomalyRigidity4D.anomaly5_linear_normal_form",
+      "kind": "theorem",
+      "statement_id": "sha256:bbe2be4ae421a147443eaa5f2ede54024e13b435a02727476cc9640ae60e2a67",
+      "line": 49,
+      "signature": "theorem anomaly5_linear_normal_form (y : Fin 5 → K) (hy : anomaly5 y) : y 3 = -3 * y 0 ∧ y 4 = 6 * y 0 ∧ y 1 = -y 2 - 2 * y 0",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D.anomaly5_orbit_classification": {
+      "module": "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralAnomalyRigidity4D.anomaly5_orbit_classification",
+      "kind": "theorem",
+      "statement_id": "sha256:bbe2be4ae421a147443eaa5f2ede54024e13b435a02727476cc9640ae60e2a67",
+      "line": 128,
+      "signature": "theorem anomaly5_orbit_classification (y : Fin 5 → K) : anomaly5 y ↔ (∃ t : K, y = t • sm5 ∨ swapUD y = t • sm5) ∨ (∃ t : K, y = t • trivial5)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D.anomaly5_projective_unique": {
+      "module": "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralAnomalyRigidity4D.anomaly5_projective_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:bbe2be4ae421a147443eaa5f2ede54024e13b435a02727476cc9640ae60e2a67",
+      "line": 95,
+      "signature": "theorem anomaly5_projective_unique (y : Fin 5 → K) (hy : y ≠ 0) : anomaly5 y ↔ ∃! b : Fin 3, ∃ t : K, y = t • (![sm5, sm5Swap, trivial5] : Fin 3 → (Fin 5 → K)) b",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D.anomaly6_cubic_factor": {
+      "module": "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralAnomalyRigidity4D.anomaly6_cubic_factor",
+      "kind": "theorem",
+      "statement_id": "sha256:bbe2be4ae421a147443eaa5f2ede54024e13b435a02727476cc9640ae60e2a67",
+      "line": 141,
+      "signature": "theorem anomaly6_cubic_factor (q d nu : K) : 6 * q ^ 3 + 3 * (-d - 2 * q) ^ 3 + 3 * d ^ 3 + 2 * (-3 * q) ^ 3 + (6 * q - nu) ^ 3 + nu ^ 3 = 18 * q * (-d - nu + 2 * q) * (d - nu + 4 * q)",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D.anomaly6_factorization": {
+      "module": "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralAnomalyRigidity4D.anomaly6_factorization",
+      "kind": "theorem",
+      "statement_id": "sha256:bbe2be4ae421a147443eaa5f2ede54024e13b435a02727476cc9640ae60e2a67",
+      "line": 147,
+      "signature": "theorem anomaly6_factorization (y : Fin 6 → K) : anomaly6 y ↔ y 1 = -y 2 - 2 * y 0 ∧ y 3 = -3 * y 0 ∧ y 4 = 6 * y 0 - y 5 ∧ (y 0 = 0 ∨ y 2 + y 5 = 2 * y 0 ∨ y 5 = y 2 + 4 * y 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D.anomaly6_yukawa_normal_form": {
+      "module": "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralAnomalyRigidity4D.anomaly6_yukawa_normal_form",
+      "kind": "theorem",
+      "statement_id": "sha256:bbe2be4ae421a147443eaa5f2ede54024e13b435a02727476cc9640ae60e2a67",
+      "line": 175,
+      "signature": "theorem anomaly6_yukawa_normal_form (y : Fin 6 → K) (h : K) : anomaly6 y ∧ yukawa y h ↔ ∃ q : K, y = yukawaCharges q h",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D.sm_witten_even": {
+      "module": "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralAnomalyRigidity4D.sm_witten_even",
+      "kind": "theorem",
+      "statement_id": "sha256:bbe2be4ae421a147443eaa5f2ede54024e13b435a02727476cc9640ae60e2a67",
+      "line": 212,
+      "signature": "theorem sm_witten_even : Even (doubletCount 3)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D.spectral_triple_hypercharge_compatibility": {
+      "module": "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralAnomalyRigidity4D.spectral_triple_hypercharge_compatibility",
+      "kind": "theorem",
+      "statement_id": "sha256:bbe2be4ae421a147443eaa5f2ede54024e13b435a02727476cc9640ae60e2a67",
+      "line": 199,
+      "signature": "theorem spectral_triple_hypercharge_compatibility : ![hypercharge .QL, hypercharge .uc, hypercharge .dc, hypercharge .LL, hypercharge .ec, hypercharge .nuc] = yukawaCharges (1 / 6 : ℚ) (1 / 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D.witten_parity": {
+      "module": "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralAnomalyRigidity4D.witten_parity",
+      "kind": "theorem",
+      "statement_id": "sha256:bbe2be4ae421a147443eaa5f2ede54024e13b435a02727476cc9640ae60e2a67",
+      "line": 209,
+      "signature": "theorem witten_parity (nc : ℕ) : Even (doubletCount nc) ↔ Odd nc",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ComplexLocalTomography.W_symmetric": {
+      "module": "D5/S3/Quantum/Gauge/ComplexLocalTomography",
+      "name": "D5.S3.Quantum.Gauge.ComplexLocalTomography.W_symmetric",
+      "kind": "theorem",
+      "statement_id": "sha256:e120add755347585d680a4425178d4ff8762c28eaa13ac661aaec50ee69bea6b",
+      "line": 388,
+      "signature": "theorem W_symmetric : W.IsSymm",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ComplexLocalTomography.blind_spot_trace": {
+      "module": "D5/S3/Quantum/Gauge/ComplexLocalTomography",
+      "name": "D5.S3.Quantum.Gauge.ComplexLocalTomography.blind_spot_trace",
+      "kind": "theorem",
+      "statement_id": "sha256:e120add755347585d680a4425178d4ff8762c28eaa13ac661aaec50ee69bea6b",
+      "line": 404,
+      "signature": "theorem blind_spot_trace (A B : Matrix (Fin 2) (Fin 2) ℝ) (hA : A.IsSymm) (hB : B.IsSymm) : ((A ⊗ₖ B) * W).trace = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ComplexLocalTomography.division_algebra_local_tomography_selection": {
+      "module": "D5/S3/Quantum/Gauge/ComplexLocalTomography",
+      "name": "D5.S3.Quantum.Gauge.ComplexLocalTomography.division_algebra_local_tomography_selection",
+      "kind": "theorem",
+      "statement_id": "sha256:e120add755347585d680a4425178d4ff8762c28eaa13ac661aaec50ee69bea6b",
+      "line": 236,
+      "signature": "theorem division_algebra_local_tomography_selection (m k : ℕ) (hm : 2 ≤ m) (hk : 2 ≤ k) : Module.finrank ℝ (Hermitian (Fin m) ℝ) * Module.finrank ℝ (Hermitian (Fin k) ℝ) < Module.finrank ℝ (Hermitian (Fin (m * k)) ℝ) ∧ Module.finrank ℝ (Hermitian (Fin (m * k)) ℂ) = Module.finrank ℝ (Hermitian (Fin m) ℂ) * Module.finrank ℝ (Hermitian (Fin k) ℂ) ∧ Module.finrank ℝ (Hermitian (Fin (m * k)) ℍ[ℝ]) < Module.finrank ℝ (Hermitian (Fin m) ℍ[ℝ]) * Module.finrank ℝ (Hermitian (Fin k) ℍ[ℝ])",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ComplexLocalTomography.finrank_complexHermitian": {
+      "module": "D5/S3/Quantum/Gauge/ComplexLocalTomography",
+      "name": "D5.S3.Quantum.Gauge.ComplexLocalTomography.finrank_complexHermitian",
+      "kind": "theorem",
+      "statement_id": "sha256:e120add755347585d680a4425178d4ff8762c28eaa13ac661aaec50ee69bea6b",
+      "line": 175,
+      "signature": "theorem finrank_complexHermitian (n : ℕ) : Module.finrank ℝ (Hermitian (Fin n) ℂ) = n ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ComplexLocalTomography.finrank_quaternionHermitian": {
+      "module": "D5/S3/Quantum/Gauge/ComplexLocalTomography",
+      "name": "D5.S3.Quantum.Gauge.ComplexLocalTomography.finrank_quaternionHermitian",
+      "kind": "theorem",
+      "statement_id": "sha256:e120add755347585d680a4425178d4ff8762c28eaa13ac661aaec50ee69bea6b",
+      "line": 186,
+      "signature": "theorem finrank_quaternionHermitian (n : ℕ) : Module.finrank ℝ (Hermitian (Fin n) ℍ[ℝ]) = n * (2 * n - 1)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ComplexLocalTomography.finrank_realHermitian": {
+      "module": "D5/S3/Quantum/Gauge/ComplexLocalTomography",
+      "name": "D5.S3.Quantum.Gauge.ComplexLocalTomography.finrank_realHermitian",
+      "kind": "theorem",
+      "statement_id": "sha256:e120add755347585d680a4425178d4ff8762c28eaa13ac661aaec50ee69bea6b",
+      "line": 162,
+      "signature": "theorem finrank_realHermitian (n : ℕ) : Module.finrank ℝ (Hermitian (Fin n) ℝ) = n * (n + 1) / 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ComplexLocalTomography.real_density_blind_spot": {
+      "module": "D5/S3/Quantum/Gauge/ComplexLocalTomography",
+      "name": "D5.S3.Quantum.Gauge.ComplexLocalTomography.real_density_blind_spot",
+      "kind": "theorem",
+      "statement_id": "sha256:e120add755347585d680a4425178d4ff8762c28eaa13ac661aaec50ee69bea6b",
+      "line": 461,
+      "signature": "theorem real_density_blind_spot : rhoPlus.PosDef ∧ rhoMinus.PosDef ∧ rhoPlus.trace = 1 ∧ rhoMinus.trace = 1 ∧ rhoPlus ≠ rhoMinus ∧ ∀ A B : Matrix (Fin 2) (Fin 2) ℝ, A.IsSymm → B.IsSymm → ((A ⊗ₖ B) * rhoPlus).trace = ((A ⊗ₖ B) * rhoMinus).trace",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ComplexLocalTomography.span_tensor_hermitian": {
+      "module": "D5/S3/Quantum/Gauge/ComplexLocalTomography",
+      "name": "D5.S3.Quantum.Gauge.ComplexLocalTomography.span_tensor_hermitian",
+      "kind": "theorem",
+      "statement_id": "sha256:e120add755347585d680a4425178d4ff8762c28eaa13ac661aaec50ee69bea6b",
+      "line": 367,
+      "signature": "theorem span_tensor_hermitian (m k : ℕ) : Submodule.span ℝ (Set.range (fun p : Hermitian (Fin m) ℂ × Hermitian (Fin k) ℂ => productObservable p.1 p.2)) = (⊤ : Submodule ℝ (Hermitian (Fin m × Fin k) ℂ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ComplexLocalTomography.tensorHermBasis_apply": {
+      "module": "D5/S3/Quantum/Gauge/ComplexLocalTomography",
+      "name": "D5.S3.Quantum.Gauge.ComplexLocalTomography.tensorHermBasis_apply",
+      "kind": "theorem",
+      "statement_id": "sha256:e120add755347585d680a4425178d4ff8762c28eaa13ac661aaec50ee69bea6b",
+      "line": 362,
+      "signature": "theorem tensorHermBasis_apply (m k : ℕ) (i : HermitianIndex m (Fin 2)) (j : HermitianIndex k (Fin 2)) : tensorHermBasis m k (i, j) = productObservable (complexHermBasis m i) (complexHermBasis k j)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.anomaly_cancel": {
       "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
