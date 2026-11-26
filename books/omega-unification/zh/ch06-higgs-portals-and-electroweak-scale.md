@@ -169,6 +169,19 @@ $$
 | 中性无迹领先门户 $P$ | 自旋配平全尺度等迹交点 | 最小精确秩为 **$5$**（`#78/#288` 升至 $6$） | $d \le 4$ 接触范数 $> 31.975 > 8\pi$；$d = 5$ 舒尔裕度 $> 3.118$ |
 | 热核门户 $P_t = e^{-tK/d}$ | 高惯性 $172$ 层全塔 | $t \le 0.49$ 排除；$8 \le t \le 16$ 可行 | $t = \theta_{804}/\theta_{12} = 8.53511$ 预言 $A_1/A_7 \in (2.750, 3.728)$ |
 
+::: {.example #ex-ou-ch06-neutral-response title="用同一电弱背景检验中性动能矩阵"}
+取电荷 $Q=T_3+Y$ 与弱同位旋 $T_3$ 作两个独立外源。中性动能是一个对称的 $2\times2$ 矩阵。用电磁探针可以读出第一行 $A_{QQ},A_{QT_3}$。要读出另一对角元 $A_{T_3T_3}$，两个顶点都必须耦合到弱源。记色逆耦合为 $A_{\rm c}$。统一归一化在第一行要求 $A_{QQ}=8A_{\rm c}/3$、$A_{QT_3}=A_{\rm c}$，另一个对角元给出独立检验 $A_{T_3T_3}=A_{\rm c}$。
+
+用第 $2\,306\,888\,100\,085$ 枚正黎曼零点给十九站壳定钟。记 $U=V/M_P^4$，取 $H^\dagger H/M_P^2$ 为径向变量。斜率与曲率均在其真空值 $r=v^2/(2M_P^2)$ 处求导。取 $M_P=1.22089\times10^{19}\,\mathrm{GeV}$，五个无量纲固有时截止位置为 $(4\times10^{-15},3.5\times10^{-11},1.23\times10^{-6},0.5,1)$。按壳的坐标三循环给十六层重标量门户分号，六层取 $-u$，十层取 $+u$。在电弱驻点，令五个实权之和为一，牛顿项 $K=1$，真空项 $W=10^{-122}$，径向势满足 $U'=0,\,U''=0.258$，再加上中性动能第一行的两个条件。给定能标 $M$ 与 $u$ 时，五个线性条件确定五权。余下两式用区间算术求解，在下列矩形内恰有一解。模型输入包括为零的裸 Higgs 二次和四次项、背景规范 $\xi=1$、同一 $M_Z$ 减法输入及轻场中心耦合 $(y_t,g_2,g_1)=(0.8616,0.63811,0.467453)$。[存在性证书](https://github.com/the-omega-institute/trureturing-experiments/blob/07f935cd79798a0e66adadd7e7597cdbd676ad82/experiments/ch39-omega-research/replay/ch39-seven-broken-conditions.py) · [盒内唯一性证书](https://github.com/the-omega-institute/trureturing-experiments/blob/07f935cd79798a0e66adadd7e7597cdbd676ad82/experiments/ch39-omega-research/replay/ch39-seven-identification.py)
+
+$$
+1.1763969<\frac{M}{10^{14}\,\mathrm{GeV}}<1.17639745,\qquad
+0.42995401871<u<0.42995401873 .
+$$
+
+在同一个解上，用两次弱源插入计算独立对角元。先从横向二点减去零动量质量项，再从动能系数减去 $M_Z$ 处的读数。顶夸克给 $A_{T_3T_3}-A_{QT_3}$ 贡献约 $-0.01705618$，玻色场合计约 $-0.05720040$。完整差值介于 $-0.07425658$ 与 $-0.07425657$ 之间，故该解在第八项留下非零残差。质量简并的重多重态因 $\operatorname{tr}(T_3Y)=0$ 逐层消去。这个差值检验了指定一圈模型中第一行未曾测到的弱响应。[双轴流复算](https://github.com/the-omega-institute/trureturing-experiments/blob/07f935cd79798a0e66adadd7e7597cdbd676ad82/experiments/ch39-omega-research/replay/ch39-neutral-axial-top.py) · [完整弱响应复算](https://github.com/the-omega-institute/trureturing-experiments/blob/07f935cd79798a0e66adadd7e7597cdbd676ad82/experiments/ch39-omega-research/replay/ch39-neutral-bosonic.py)
+:::
+
 ## 6.4 低能对撞机数据的交叉合围：等深真空、胶子融合、$Z$ 宽度、CLEO 与 OPAL {#sec-ou-ch06-s04}
 
 高能门户的约束已经够紧了，但故事最惊心动魄的一幕发生在低能电弱破缺真空本身。为了在电弱破缺后维持引力与宇宙学常数的逐层热核配平（见[第十一章](ch11-induced-gravity-and-dark-energy.md)），破缺真空必须在顶夸克、五个轻夸克及电弱玻色子质量层引入对应的标量伙伴。这些轻标量与等深势结构直接暴露在当今高能物理最精密的对撞机实验探针之下，形成了四面夹击的**现象学紧箍咒**：
