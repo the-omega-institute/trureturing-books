@@ -103,7 +103,7 @@ $$
 
 ## 5.2 无奇点双卡乘法与分母下界 1/2
 
-上节单卡吉布斯—罗德里格斯合成 $\frac{\mathbf{a} + \mathbf{b} + \mathbf{a}\times\mathbf{b}}{1 - \mathbf{a}\cdot\mathbf{b}}$ 在 $\mathbf{a}\cdot\mathbf{b} \to 1$（合成角逼近 $180^\circ$）时分母仍会趋零发散。为了在整座三维旋转群上实现**绝对无奇点、有界且纯四则运算**的乘法核，我们转用半角球极修正罗德里格斯参数（MRP）的双分母切换方案。
+上节单卡吉布斯—罗德里格斯合成 $\frac{\mathbf{a}+\mathbf{b}+\mathbf{a}\times\mathbf{b}}{1-\mathbf{a}\cdot\mathbf{b}}$ 在 $\mathbf{a}\cdot\mathbf{b}=1$ 时触到半周旋转的坐标奇点。修正罗德里格斯参数（MRP）先把有理参数提升为有理单位旋量，再在两个分母间切换。它在 $\operatorname{Ad}(S^3(\mathbb{Q}))$ 上给出有界、无奇点的有理乘法。
 
 ::: {.definition #def-ch05-dual-chart-star title="双卡无奇点有理乘法算子"}
 对任意两枚三维有理参数 $\boldsymbol{\sigma}_A, \boldsymbol{\sigma}_B \in \mathbb{Q}^3$，定义公共分子矢 $\mathbf{N}$、主卡分母 $D_+$ 与对偶阴影卡分母 $D_-$：
@@ -124,7 +124,9 @@ $$
 
 :::
 
-其中球极旋量提升 $Q(\boldsymbol{\sigma}) = \frac{(1 - \lVert\boldsymbol{\sigma}\rVert^2)\mathbf{1} + 2\boldsymbol{\sigma}}{1 + \lVert\boldsymbol{\sigma}\rVert^2} \in S^3(\mathbb{Q})$ 满足 $Q(-\boldsymbol{\sigma}/\lVert\boldsymbol{\sigma}\rVert^2) = -Q(\boldsymbol{\sigma})$，故两种分支代表同一个三维伴随旋转（若需追踪旋量叶符号，在取 $D_-$ 分支时翻转 $1$ 比特叶号即可）。
+球极旋量提升 $Q(\boldsymbol{\sigma})=\frac{(1-\lVert\boldsymbol{\sigma}\rVert^2)\mathbf{1}+2\boldsymbol{\sigma}}{1+\lVert\boldsymbol{\sigma}\rVert^2}\in S^3(\mathbb{Q})$ 满足 $Q(-\boldsymbol{\sigma}/\lVert\boldsymbol{\sigma}\rVert^2)=-Q(\boldsymbol{\sigma})$（$\boldsymbol{\sigma}\ne0$）。两枚互为反号的旋量给出同一个伴随旋转。若需追踪旋量符号，选取 $D_-$ 时翻转一位符号即可。
+
+反过来，给定有理单位旋量 $(w,\mathbf{v})$，选符号使 $w\ge0$，再取 $\boldsymbol{\sigma}=\mathbf{v}/(1+w)$。代回 $Q$ 即还原该旋量，且 $\lVert\boldsymbol{\sigma}\rVert^2=(1-w)/(1+w)\le1$。于是有理闭单位球内的 MRP 参数恰好覆盖该旋量子群的伴随像。下一节的整数 $90^\circ$ 旋转会给出像外的例子。
 
 在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，整套双卡图册无需任何实数或经典选择公理即可直接用 `PythSpinor` 与 `RatVec3` 锁定。对两枚有理三维向量 `u, v : RatVec3`（分别记作 $\mathbf{u} = \mathbf{x}/d$ 与 $\mathbf{v} = \mathbf{y}/e$，整分子 $\mathbf{x}, \mathbf{y} \in \mathbb{Z}^3$，严格正分母 $d, e \ge 1$），先借球极提升 `lift u` $:= ((d^2 - \lVert\mathbf{x}\rVert^2,\, 2d\mathbf{x});\; d^2 + \lVert\mathbf{x}\rVert^2) : \mathrm{PythSpinor}$ 形成旋量乘积 $p := \operatorname{product}(\mathbf{u}, \mathbf{v}) := (\operatorname{lift}\mathbf{u})\cdot(\operatorname{lift}\mathbf{v})$，其标量部记为 $w_p := p.\mathrm{num}.w$、虚部记为 $\mathbf{v}_p := \operatorname{Vec3.imaginary}(p.\mathrm{num})$、严格正半径记为 $r_p := p.\mathrm{radius} = (d^2 + \lVert\mathbf{x}\rVert^2)(e^2 + \lVert\mathbf{y}\rVert^2) > 0$。定义一对**归一化双卡分母**
 
@@ -236,7 +238,9 @@ $$
 对任意整三维向量 $\mathbf{w} \in \mathbb{Z}^3$（嵌入为纯虚四元数），直接展开整系数多项式可知双侧共轭积 $p\,\mathbf{w}\,\bar{p}$ 的标量部恒为零，因此其纯虚部 `adjointNum p w` 在四元数环中即等于 $p\,\mathbf{w}\,\bar{p}$。由四元数左右乘的模方内积伸缩律，立得整数内积恒等式 $\langle p\,\mathbf{u}_0\,\bar{p},\, p\,\mathbf{v}_0\,\bar{p}\rangle = \langle\mathbf{u}_0, \mathbf{v}_0\rangle \cdot \lVert p\rVert^4$；因 `p.Nonzero` 保证 $\lVert p\rVert^2 > 0$，分子中的 $\lVert p\rVert^4 > 0$ 与分母 $(\lVert p\rVert^2 d_u)(\lVert p\rVert^2 d_v)$ 中的 $\lVert p\rVert^4$ 精确抵消，证毕第 1 款。对第 2 款，将 $p$ 缩放为 $kp$（$k \neq 0$）使双线性分子 `adjointNum` 与分母 $\lVert p\rVert^2$ 同乘严格正因子 $k^2 = \lvert k\rvert^2 > 0$，交叉相乘即得 `RatVec3.Equiv`。对第 3 款，由四元数结合律、共轭反同态 $\overline{pq} = \bar{q}\bar{p}$ 与 $q\,\mathbf{v}_0\,\bar{q}$ 的纯虚性得 $(pq)\mathbf{v}_0\overline{pq} = p(q\mathbf{v}_0\bar{q})\bar{p}$，再由四平方范数乘性 $\lVert pq\rVert^2 = \lVert p\rVert^2\lVert q\rVert^2$ 知两端分子与分母逐项相等，从而在 `RatVec3.Equiv` 下零公理证毕。完整证明由 Lean 内核检查。
 :::
 
-由 [@thm-ch05-rational-adjoint-action] 第 2 款立见：取 $k = -1$ 即知 $\operatorname{Ad}(-p) \equiv \operatorname{Ad}(p)$，双覆叠旋量符号自然降商至射影旋转群；另由初等展开核对（手工推导），还有 $\operatorname{Ad}(\bar{p}) = \operatorname{Ad}(p)^\top$，且当 $w \neq 0$ 时令 $\boldsymbol{\sigma} = \mathbf{u}/w$ 立得 $\operatorname{Ad}(w, \mathbf{u}) = \mathbf{R}(\mathbf{u}/w)$，而当 $w = 0$ 时 $\operatorname{Ad}(0, \mathbf{n}) = \frac{2\mathbf{n}\mathbf{n}^\top}{\lVert\mathbf{n}\rVert^2} - \mathbf{I} = \mathbf{R}_\pi(\mathbf{n})$ 自动无缝囊括全部 $180^\circ$ 半周旋转，全域零奇点。
+由 [@thm-ch05-rational-adjoint-action] 第 2 款立见 $\operatorname{Ad}(-p)\equiv\operatorname{Ad}(p)$。直接展开（手工推导）还有 $\operatorname{Ad}(\bar p)=\operatorname{Ad}(p)^\top$。若写 $p=(w,\mathbf{u})$，则 $w\ne0$ 时 $\operatorname{Ad}(p)=\mathbf{R}(\mathbf{u}/w)$，而 $w=0$ 时 $\operatorname{Ad}(0,\mathbf{u})=2\mathbf{u}\mathbf{u}^\top/\lVert\mathbf{u}\rVert^2-\mathbf{I}$。前一式接住了普通凯莱逆式覆盖的所有有理旋转，后一式接住了半周旋转。后者的轴可取 $\ker(R-\mathbf{I})$ 中一个非零有理向量，因为该零空间可用有理消元求得。两种情况都可清分母得到整四元组。
+
+若两个非零有理四元数给出同一伴随旋转，它们的商与 $\mathbf{i},\mathbf{j},\mathbf{k}$ 都交换，故是非零有理标量。因此每个旋转对应一条有理射线。该射线有有理单位代表元当且仅当任一代表元的平方范数是有理平方数。有单位代表元时恰有互为反号的两个。
 
 ::: {.example #ex-ch05-phalf-integer-rotation title="非平方模方整态 pHalf = (1, 1, 0, 0) 的精确整数 90° 旋转"}
 考察赤道正交锚态 `pHalf` $= (1, 1, 0, 0)$：其模方 $N = 1^2 + 1^2 = 2$ 并非有理平方数，若强行归一化为单位旋量则被迫写出无理数 $\frac{1 + \mathbf{i}}{\sqrt{2}}$。然而代入无根号伴随公式 $\operatorname{Ad}(p_{\mathrm{Half}})$，分母 $2$ 与分子中的公因子 $2$ 全部约尽，竟给出整系数 $90^\circ$ 旋转矩阵：
@@ -246,6 +250,8 @@ $$
 $$
 
 即绕第一轴的精确 $90^\circ$ 映射 $(x, y, z) \mapsto (x, -z, y)$！同理，体对角整态 $g_{120} = (1, 1, 1, 1)$（$N = 4$）给出精确坐标循环置换 $\operatorname{Ad}(1, 1, 1, 1)(x, y, z) = (z, x, y) \in \mathrm{SO}(3, \mathbb{Z})$；模方为 $5$（亦非平方数）的赫维茨素旋子 $(1, 2, 0, 0)$ 给出公分母仅为 $5$ 的有理旋转 $\frac{1}{5}\bigl(\begin{smallmatrix} 5 & 0 & 0 \\ 0 & -3 & -4 \\ 0 & 4 & -3 \end{smallmatrix}\bigr) \in \mathrm{SO}(3, \mathbb{Q})$。
+
+这枚绕第一轴的整数矩阵迹为 $1$。单位四元数 $(w,\mathbf{v})$ 的伴随矩阵对角线之和为 $4w^2-1$，因此这里必须有 $w^2=1/2$。这个方程无有理解，所以 $p_{\mathrm{Half}}$ 的伴随旋转落在普通有理凯莱图内，却没有有理 MRP 表示。双卡分母半界和闭球结论适用于有理 MRP 输入所合成的旋转。
 :::
 
 ## 5.4 流群切比雪夫谐波、连续射线分类与有理六轴球面覆盖
@@ -328,10 +334,10 @@ $$
 第 1 款先在固定非零方向 $X \in L$ 上令 $p(t) := 2\varphi(\exp tX) - 1$，由忠实性、指数局部单射与倍角方程 $p(2t) = 2p(t)^2 - 1$ 导出最小正周期 $T > 0$ 与 $p(t) = \cos(2\pi t/T)$；再由左乘表示复化迹型 $B(X, Y) = -\operatorname{Re}\operatorname{tr}(\rho(X)\rho(Y))$ 在去心连通切空间上锁定共同归一化周期 $T_0$，令 $h := 2(\pi/T_0)^2 B$ 得到共轭不变内积、中心化子一维性与维数锁定 $\{0, 1, 3\}$。第 2 款中，每个 $U_i$ 由严格二次不等式定义故为相对开集；若 $x, y \in S^2$ 正交，贝塞尔不等式给出 $\langle x, \mathrm{axis}_i\rangle^2 + \langle y, \mathrm{axis}_i\rangle^2 \le \lVert\mathrm{axis}_i\rVert^2 = 5$，故两者的 $2\langle\cdot, \mathrm{axis}_i\rangle^2$ 不可能同时严格大于 $5$，从而 $U_i$ 内无正交对；对任意 $x \in S^2$ 在三对轮换轴中各取同号支，总有一支满足 $2\langle x, \mathrm{axis}_i\rangle^2 > 5$，覆盖整个 $S^2$。完整证明由 Lean 内核检查。
 :::
 
-在进入第六章之前，不妨打开下面的交互实验卡，将本章的三套无超越数旋转机制放在同一座三维舞台上实时对照：调节有理生成元 $\boldsymbol{\sigma}$ 与迭代步数，直观比较精确锁球的 $\mathbf{R}(\boldsymbol{\sigma})$ 及无根号整系数伴随旋转 $\operatorname{Ad}(p_{\mathrm{Half}})$ 如何始终严守单位模方 $1/1$，而二阶泰勒截断 $T_2(X)$ 步步向外漂移；同时切换双卡乘法输入，实时检查分母下界 $\max(D_+, D_-) \ge \frac{1}{2}$ 如何永不触零并将结果锁在三维单位闭球之内。
+在进入第六章之前，不妨打开下面的交互实验卡，将本章的三套无超越数旋转机制放在同一座三维舞台上实时对照：调节有理生成元 $\boldsymbol{\sigma}$ 与迭代步数，直观比较精确锁球的 $\mathbf{R}(\boldsymbol{\sigma})$ 及无根号整系数伴随旋转 $\operatorname{Ad}(p_{\mathrm{Half}})$ 如何始终严守单位模方 $1/1$，而二阶泰勒截断 $T_2(X)$ 步步向外漂移；再把相同的有理坐标另作 MRP 输入，实时检查分母下界 $\max(D_+, D_-) \ge \frac{1}{2}$ 如何永不触零并将结果锁在三维单位闭球之内。
 
 ::: {.viz src="ternion-cayley-lab" preset="cayley3d-vs-taylor-drift" height="520"}
-**三维有理凯莱旋转 $\mathbf{R}(\boldsymbol{\sigma})$、无根号伴随旋转 $\operatorname{Ad}(p_{\mathrm{Half}})$ 对比泰勒漂移与双卡分母下界实验。** 实时迭代比较精确有理凯莱变换与二阶泰勒截断 $T_2(X)$ 的模方漂移，核验非平方模方锚点 `pHalf = (1, 1, 0, 0)` 的整系数 $90^\circ$ 伴随作用，并观测双卡乘法中 $\max(D_+, D_-) \ge \frac{1}{2}$ 的全域无奇点切换；零公理内核证明见 [@thm-ch05-rational-cayley-core] 与 [@thm-ch05-rational-adjoint-action]，双卡与数值对照见 [@def-ch05-dual-chart-star]、[@ex-ch05-cayley-vs-taylor] 与 [@ex-ch05-phalf-integer-rotation]。
+**三维有理凯莱旋转 $\mathbf{R}(\boldsymbol{\sigma})$、无根号伴随旋转 $\operatorname{Ad}(p_{\mathrm{Half}})$ 对比泰勒漂移与双卡分母下界实验。** 实时迭代比较精确有理凯莱变换与二阶泰勒截断 $T_2(X)$ 的模方漂移，核验非平方模方锚点 `pHalf = (1, 1, 0, 0)` 的整系数 $90^\circ$ 伴随作用，并观测双卡乘法中 $\max(D_+, D_-) \ge \frac{1}{2}$ 在有理 MRP 输入上的无奇点切换；零公理内核证明见 [@thm-ch05-rational-cayley-core] 与 [@thm-ch05-rational-adjoint-action]，双卡与数值对照见 [@def-ch05-dual-chart-star]、[@ex-ch05-cayley-vs-taylor] 与 [@ex-ch05-phalf-integer-rotation]。
 :::
 
 ::: {.remark #rem-ch05-where-pi-enters title="圆周率从何闯入，以及迈向球面有理三角学"}

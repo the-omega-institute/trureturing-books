@@ -151,7 +151,7 @@ $$
 在单位四元数球面上，四元数反射恒等式给出 $u \bar{v} u = 2\langle u, v\rangle_{\mathbb{R}}\,u - \operatorname{normSq}(u)\,v$。正向由归纳法先证相邻步内积恒等于常数 $c$ 且模方恒为 $1$，从而三次非线性流群递推化为二阶线性递推 $x_{n+2} = 2c\,x_{n+1} - x_n$，与 $U_n$ 的三项递推逐项重合，再取与 $x_0$ 的内积并利用 $T_n(c) = U_n(c) - c U_{n-1}(c)$ 得 $\langle x_0, x_n\rangle_{\mathbb{R}} = T_n(c)$；反向直接由切比雪夫递推还原相邻内积为 $c$ 并代回四元数反射恒等式。完整证明由 Lean 内核检查。
 :::
 
-[@thm-ch10-heap-chebyshev-recurrence] 揭示了一个关键事实：当步长为半角余弦 $c$ 时，$U_m(c)$ 是关于 $c$ 的整系数多项式。可是在规范齐次三元载体 `ProjTernion` 上，不引入开方运算所能直接读出的原生有理量不是 $c = \pm\sqrt{\kappa}$，而是它的平方 $\kappa = c^2 \in \mathbb{Q} \cap [0, 1]$！如果 $U_{2n}(c)$ 里混有任何奇次幂 $c^{2k+1}$，我们就会在计算高阶自旋特征标时被迫退回无理平方根 $\sqrt{\kappa}$。幸运的是，对于**一切整数自旋** $j = n \in \mathbb{N}$，偶指标多项式 $U_{2n}(c)$ 是偶函数，只含 $c$ 的偶次幂。因此我们可以完全绕开 $c$ 与 $\sqrt{\kappa}$，直接在整系数多项式环 $\mathbb{Z}[\kappa]$ 内定义偶次切比雪夫族 $E_n(\kappa)$。
+[@thm-ch10-heap-chebyshev-recurrence] 揭示了一个关键事实：当步长为半角余弦 $c$ 时，$U_m(c)$ 是关于 $c$ 的整系数多项式。可是在规范齐次代表元 `CanonProjTernion` 上，不引入开方运算所能直接读出的原生有理量不是 $c = \pm\sqrt{\kappa}$，而是它的平方 $\kappa = c^2 \in \mathbb{Q} \cap [0, 1]$！如果 $U_{2n}(c)$ 里混有任何奇次幂 $c^{2k+1}$，我们就会在计算高阶自旋特征标时被迫退回无理平方根 $\sqrt{\kappa}$。幸运的是，对于**一切整数自旋** $j = n \in \mathbb{N}$，偶指标多项式 $U_{2n}(c)$ 是偶函数，只含 $c$ 的偶次幂。因此我们可以完全绕开 $c$ 与 $\sqrt{\kappa}$，直接在整系数多项式环 $\mathbb{Z}[\kappa]$ 内定义偶次切比雪夫族 $E_n(\kappa)$。
 
 ::: {.definition #def-ch10-even-chebyshev title="偶次整系数切比雪夫特征多项式族"}
 在整系数多项式环 $\mathbb{Z}[\kappa]$ 上，通过二阶线性递推递归定义多项式序列 $\{E_n(\kappa)\}_{n \in \mathbb{N}}$：

@@ -88,7 +88,7 @@ section: "第二卷"
   <h2 class="t">从无原点流群到<em>三维有理旋转</em></h2>
   <div class="flow mt">
     <div class="step"><b>三元搬运</b><p>以中间点为临时参照，把两点的关系搬到第三点。</p></div>
-    <div class="step"><b>PythSpinor 双覆盖</b><p>有号旋量在 <Tex t="360^\circ" /> 到达反号位置，在 <Tex t="720^\circ" /> 回到起点。</p></div>
+    <div class="step"><b>PythSpinor 双覆盖</b><p>在有理单位旋量覆盖的子群上，有号旋量在 <Tex t="360^\circ" /> 到达反号位置，在 <Tex t="720^\circ" /> 回到起点。</p></div>
     <div class="step"><b>凯莱正逆桥</b><p>斜对称阵 <Tex t="X" /> 给出有理旋转 <Tex t="R" />。当 <Tex t="\det(R+I)\ne0" /> 时可反求 <Tex t="X" />。</p></div>
   </div>
   <TheoremCard class="mt-l" label="定理5.2" title="去分母的凯莱闭合方程" cite="thm-ch05-rational-cayley-core" gid="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_identity">

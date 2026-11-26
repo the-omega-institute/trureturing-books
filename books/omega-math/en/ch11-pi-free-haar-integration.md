@@ -70,7 +70,7 @@ Evaluating polynomial integrals over spheres by equating Cartesian and polar Gau
 
 ## 11.2 Intrinsic Zero-Axiom Factorial Functional, Homogeneity Invariance, and Exact Moment Recurrence {#sec-ch11-intrinsic-functional-and-recurrence}
 
-Now kick away the ladder: forget $\mathbb{R}^4$, $e^{-r^2}$, and $\pi$, and define the $\pi$-free Haar expectation intrinsically on degree-zero homogeneous rational functions over `ProjTernion`.
+Now kick away the ladder: forget $\mathbb{R}^4$, $e^{-r^2}$, and $\pi$, and define the $\pi$-free Haar expectation intrinsically on degree-zero homogeneous rational functions on nonzero integer quaternion representatives.
 
 ::: {.definition #def-ch11-pi-free-haar title="Pi-Free Factorial Haar Expectation Functional on the Three-Sphere"}
 For any tuple of natural numbers $(p, q, r, s) \in \mathbb{N}^4$ with total degree $p + q + r + s = 2m$, define the rational linear functional $\mathbb{E}_{\mathbb{T}_3}$ on degree-zero homogeneous monomials $w^p x^q y^r z^s / \lVert q\rVert^{p+q+r+s}$ as follows:

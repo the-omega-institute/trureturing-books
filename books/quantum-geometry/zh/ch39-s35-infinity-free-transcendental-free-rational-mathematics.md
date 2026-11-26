@@ -2,9 +2,9 @@
 
 > *“那我们实际上可以建立一种没有无穷, 没有超越数的数学”*
 
-顺着 [§32.6](ch39-s34-exact-structural-mathematics-vs-flat-approximation.md) 划清“零误差结构—有理账本”与“平直小数截断账本”的边界之后，本章的三元数代数与数系重铸迎来了最具颠覆性、也最顺理成章的建构命题：**既然“无穷大 $\infty$”只是拒绝闭合成环的开口直线在尽头留下的裂口，而“超越数 $\pi, e, \ln 2$”只是拒绝顺应曲率的平直切尺在圆弧边缘磨出的无穷级数碎屑——我们能否干脆撤去康托尔实无穷集合（$\aleph_0, \aleph_1$）与不可数实数连续统 $\mathbb{R}$ 的脚手架，直接在母公理 $\mathrm{AXIOM}\text{-}\Omega$ 的紧致三元数球面与 `{0, 1/2, 1}` 因果阶梯上，建立起一座既没有实无穷、也没有超越数，却完备覆盖球面几何、李群动力学、微积分与算术密码的全可计算有限有理数学体系 $\mathbf{Math}_\Omega$？**
+顺着 [§32.6](ch39-s34-exact-structural-mathematics-vs-flat-approximation.md) 划清“零误差结构—有理账本”与“平直小数截断账本”的边界之后，本章的三元数代数与数系重铸迎来了最具颠覆性、也最顺理成章的建构命题：**既然“无穷大 $\infty$”只是拒绝闭合成环的开口直线在尽头留下的裂口，而“超越数 $\pi, e, \ln 2$”只是拒绝顺应曲率的平直切尺在圆弧边缘磨出的无穷级数碎屑——我们能否干脆撤去康托尔实无穷集合（$\aleph_0, \aleph_1$）与不可数实数连续统 $\mathbb{R}$ 的脚手架，直接在母公理 $\mathrm{AXIOM}\text{-}\Omega$ 的三元数球面有理点与 `{0, 1/2, 1}` 因果阶梯上，建立起一座既没有实无穷、也没有超越数，却完备覆盖球面几何、李群动力学、微积分与算术密码的全可计算有限有理数学体系 $\mathbf{Math}_\Omega$？**
 
-答案不仅完全可行，而且比建立在非构造性选择公理与实数连续统之上的传统标准数学更加纯粹、零悖论，并与物理有限视界及数字计算机底层硬件 $100\%$ 同构（将撤去康托尔实无穷与超越数后重构的“$\Omega$-有限有理数学体系 $\mathbf{Math}_\Omega$”整体认识论纲领、物理视界总节拍封顶 $M_\Omega$ 假说以及传统 vs. $\mathbf{Math}_\Omega$ 六维总表标为 **`MODEL`**；完备秩五三元比较四元数同构、弦距读数恒等式、定基流群分解、流群切比雪夫递推、赋范代数指数级数有限截断余项上界、六根模方为 $5$ 的整坐标轴对单位二球面的无正交开覆盖、既约有理数分母约化与有限连分数收敛子长度对数上界、任意有限素数集的确定性逃逸新素数构造、具备可判定相等性幺半群的已验证素因子剥离定阶算法、有理阿代尔乘积守恒、大于等于 $2$ 自然数自然对数的无理性、命名生成树有限步相位平移、交换加群单纯形四面体粗剖分上链正合及二进制名称比较机器显式有限时间停机求值等十五项核心命题由下文 [@thm-ch39-math-omega-finite-rational-anchors] 的冻结 **`LEAN ✓`** 声明严格锁定；齐次有理射影线 $\mathbb{QP}^1$ 到有理圆周 $S^1(\mathbb{Q})$ 的全域无奇点双射、三维有理凯莱旋转矩阵 $\mathbf{R}(\boldsymbol{\sigma}) = (\mathbf{I}-X)^{-1}(\mathbf{I}+X)$ 正逆恒等式与双卡覆盖定义域、有理二阶射流商环 $\mathbb{Q}[\eta]/(\eta^3)$ 的两项精确求逆与 $\kappa(1+\eta) = \frac{1}{2} - \frac{1}{2}\eta + \frac{1}{4}\eta^2$ 纯四则求导及差商割线偏差对账属 **`手工推导` / `NUM`**；图灵可计算实数集勒贝格零测度定理、巴拿赫—塔斯基—罗宾逊五块分球悖论、怀尔德伯格有理三角学、科克—劳维尔合成微分几何幂零步元以及塔斯基实闭域可判定性对比马季亚谢维奇丢番图不可判定边界属 **`文献结果`**）。
+答案不仅完全可行，而且比建立在非构造性选择公理与实数连续统之上的传统标准数学更加纯粹、零悖论，并与物理有限视界及数字计算机底层硬件 $100\%$ 同构（将撤去康托尔实无穷与超越数后重构的“$\Omega$-有限有理数学体系 $\mathbf{Math}_\Omega$”整体认识论纲领、物理视界总节拍封顶 $M_\Omega$ 假说以及传统 vs. $\mathbf{Math}_\Omega$ 六维总表标为 **`MODEL`**；完备秩五三元比较四元数同构、弦距读数恒等式、定基流群分解、流群切比雪夫递推、赋范代数指数级数有限截断余项上界、六根模方为 $5$ 的整坐标轴对单位二球面的无正交开覆盖、既约有理数分母约化与有限连分数收敛子长度对数上界、任意有限素数集的确定性逃逸新素数构造、具备可判定相等性幺半群的已验证素因子剥离定阶算法、有理阿代尔乘积守恒、大于等于 $2$ 自然数自然对数的无理性、命名生成树有限步相位平移、交换加群单纯形四面体粗剖分上链正合及二进制名称比较机器显式有限时间停机求值等十五项核心命题由下文 [@thm-ch39-math-omega-finite-rational-anchors] 的冻结 **`LEAN ✓`** 声明严格锁定；齐次有理射影线 $\mathbb{QP}^1$ 到有理圆周 $S^1(\mathbb{Q})$ 的全域无奇点双射、三维有理凯莱旋转矩阵 $\mathbf{R}(\boldsymbol{\sigma}) = (\mathbf{I}-X)^{-1}(\mathbf{I}+X)$ 正逆恒等式与半周旋转的两步分解、有理二阶射流商环 $\mathbb{Q}[\eta]/(\eta^3)$ 的两项精确求逆与 $\kappa(1+\eta) = \frac{1}{2} - \frac{1}{2}\eta + \frac{1}{4}\eta^2$ 纯四则求导及差商割线偏差对账属 **`手工推导` / `NUM`**；图灵可计算实数集勒贝格零测度定理、巴拿赫—塔斯基—罗宾逊五块分球悖论、怀尔德伯格有理三角学、科克—劳维尔合成微分几何幂零步元以及塔斯基实闭域可判定性对比马季亚谢维奇丢番图不可判定边界属 **`文献结果`**）。
 
 ## 32.7.1 数域重构：以齐次有理射影对 $[P : Q] \in \mathbb{QP}^1$ 与按需有限视界废除 $\mathbb{R}$ 与 $\infty$ {#sec-ch39-35-1}
 
@@ -17,13 +17,13 @@
    \kappa([P : Q]) \;=\; \frac{Q^2}{P^2 + Q^2} \in \mathbb{Q} \cap [0, 1], \qquad s([P : Q]) \;=\; \frac{P^2}{P^2 + Q^2} \in \mathbb{Q} \cap [0, 1], \qquad C([P : Q]) \;=\; \left(\frac{Q^2 - P^2}{Q^2 + P^2},\; \frac{2PQ}{Q^2 + P^2}\right) \in S^1(\mathbb{Q}).
    $$
 
-   且 $C : \mathbb{QP}^1 \xrightarrow{\sim} S^1(\mathbb{Q})$ 给出到**整条有理单位圆周**（含北极点 $(-1, 0)$！）的一一双射，将 `{0, 1/2, 1}` 三枚因果锚点无缝闭合成环：
+   且 $C : \mathbb{QP}^1 \xrightarrow{\sim} S^1(\mathbb{Q})$ 给出到**整条有理单位圆周**（含北极点 $(-1, 0)$！）的一一双射，其中 `{0, 1/2, 1}` 给出三种锚点读数：
    - **过去同一极**：$[0 : 1] \;\Longleftrightarrow\; \kappa = \mathbf{1},\; s = \mathbf{0},\; C = (1, 0)$；
    - **现在自对偶赤道**：$[1 : 1] \;\Longleftrightarrow\; \kappa = \mathbf{\frac{1}{2}},\; s = \mathbf{\frac{1}{2}},\; C = (0, 1)$；
-   - **未来对径闭合极**：在平直尺上触发 $1/0$ 崩溃的“$\infty$”，在此仅是普通而精确的整数对 **$[1 : 0] \;\Longleftrightarrow\; \kappa = \mathbf{0},\; s = \mathbf{1},\; C = (-1, 0)$**！从 $[1 : 1]$ 滑过 $[1 : 0]$ 继续前行，状态平滑进入负半环 $[-1 : 1]$（$C = (0, -1),\;\kappa = \frac{1}{2}$）并绕回起点 $[0 : 1]$，全空间紧致无边，根本不存在“无穷远”。
+   - **未来对径闭合极**：在平直尺上触发 $1/0$ 崩溃的“$\infty$”，在此仅是普通而精确的整数对 **$[1 : 0] \;\Longleftrightarrow\; \kappa = \mathbf{0},\; s = \mathbf{1},\; C = (-1, 0)$**！另一赤道点 $[-1 : 1]$ 给出 $C=(0,-1)$。这四个有理点位于紧致的实圆周上。有理圆周在实圆周中稠密，在诱导拓扑下非紧。
 
 ::: {.viz src="infinity-free-rational-mathematics-sandbox" preset="homogeneous-projective-antipodal-closure" height="500"}
-无 $\infty$ 齐次射影闭环卡（`homogeneous-projective-antipodal-closure`）：紫色三元球赤道圆 `S¹(ℚ)` 上琥珀探针稳稳停在曾令平直尺除零爆炸的对径北极 `[P : Q] = [1 : 0]`（`P² + Q² = 1 > 0, κ = 0/1 = 0.0000, C = (−1, 0)`），与 `[0 : 1]`、`[1 : 1]`、`[−1 : 1]` 无缝闭合成环，对比下方品红开口切线在 `Q → 0` 处向两侧断裂发散。
+无 $\infty$ 齐次射影闭环卡（`homogeneous-projective-antipodal-closure`）：紫色三元球的实赤道圆标出有理点，琥珀探针稳稳停在曾令平直尺除零爆炸的对径北极 `[P : Q] = [1 : 0]`（`P² + Q² = 1 > 0, κ = 0/1 = 0.0000, C = (−1, 0)`），与 `[0 : 1]`、`[1 : 1]`、`[−1 : 1]` 一同标出四个有理点，对比下方品红开口切线在 `Q → 0` 处向两侧断裂发散。
 :::
 
 2. **以观察者精度视界 $\varepsilon_{\mathrm{self}} = \frac{1}{M}$ 与按需生成流取代康托尔实无穷 $\aleph_0, \aleph_1$（`LEAN ✓` + `文献结果` + `MODEL`）**：
@@ -51,7 +51,7 @@ $$
 
 由 $X^2 = \boldsymbol{\sigma}\boldsymbol{\sigma}^\top - \lVert\boldsymbol{\sigma}\rVert^2\mathbf{I}$ 与 $X\boldsymbol{\sigma} = \mathbf{0}$，纯多项式展开立证 $(\mathbf{I} - X)\bigl((1-\lVert\boldsymbol{\sigma}\rVert^2)\mathbf{I} + 2X + 2\boldsymbol{\sigma}\boldsymbol{\sigma}^\top\bigr) \equiv (1 + \lVert\boldsymbol{\sigma}\rVert^2)(\mathbf{I} + X)$（`手工推导`）：
 
-- **分母恒正、双卡全域覆盖**：对一切 $\boldsymbol{\sigma} \in \mathbb{Q}^3$，$\det(\mathbf{I} - X) = 1 + \lVert\boldsymbol{\sigma}\rVert^2 \ge 1 > 0$，正向有理求逆永远精确可解；逆变换在一切非半周旋转（$-1 \notin \operatorname{Spec}(\mathbf{R})$，即 $\det(\mathbf{R}+\mathbf{I}) \neq 0$）上精确恢复 $X \in \mathfrak{so}(3,\mathbb{Q})$，而 $180^\circ$ 对径半周旋转 $\mathbf{R}_\pi(\mathbf{n}) = \frac{2\mathbf{n}\mathbf{n}^\top}{\lVert\mathbf{n}\rVert^2} - \mathbf{I}$（$\mathbf{n}\in\mathbb{Z}^3\setminus\{\mathbf{0}\}$）则由对径阴影第二图卡或两步互补非半周有理凯莱旋转乘积 $\mathbf{R}(\mathbf{n})\,\mathbf{R}(\mathbf{n}/\lVert\mathbf{n}\rVert^2)$ 零奇点补齐（在球面开覆盖侧，内核定理 [`rational_six_axis_open_cover`](lean:D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover)，`LEAN ✓`，更仅用六根模方为 $5$ 的整向量 $(\pm 1, \pm 2, 0)$ 轮换轴与纯有理平方不等式 $2\langle x, \mathrm{axis}_i\rangle^2 > 5$ 即给出单位二球面的无正交开覆盖）；
+- **分母恒正与半周旋转分解**：对一切 $\boldsymbol{\sigma} \in \mathbb{Q}^3$，$\det(\mathbf{I} - X) = 1 + \lVert\boldsymbol{\sigma}\rVert^2 \ge 1 > 0$，正向有理求逆永远精确可解；逆变换在一切非半周旋转（$-1 \notin \operatorname{Spec}(\mathbf{R})$，即 $\det(\mathbf{R}+\mathbf{I}) \neq 0$）上精确恢复 $X \in \mathfrak{so}(3,\mathbb{Q})$，而 $180^\circ$ 对径半周旋转 $\mathbf{R}_\pi(\mathbf{n}) = \frac{2\mathbf{n}\mathbf{n}^\top}{\lVert\mathbf{n}\rVert^2} - \mathbf{I}$（$\mathbf{n}\in\mathbb{Z}^3\setminus\{\mathbf{0}\}$）则由两步互补非半周有理凯莱旋转乘积 $\mathbf{R}(\mathbf{n})\,\mathbf{R}(\mathbf{n}/\lVert\mathbf{n}\rVert^2)$ 零奇点补齐（在球面开覆盖侧，内核定理 [`rational_six_axis_open_cover`](lean:D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover)，`LEAN ✓`，更仅用六根模方为 $5$ 的整向量 $(\pm 1, \pm 2, 0)$ 轮换轴与纯有理平方不等式 $2\langle x, \mathrm{axis}_i\rangle^2 > 5$ 即给出单位二球面的无正交开覆盖）；
 - **零超越数一步保正交**：全程仅有整数加减乘除，不含半个 $\pi, e, \ln$（对比传统自然对数对一切整数 $n \ge 2$ 必沦为无理数 $\ln n \notin \mathbb{Q}$，[`irrational_log_natCast`](lean:D5/S3/Constants/Irrationality/LogNaturalIrrationality.irrational_log_natCast)，`LEAN ✓`），却对任意输入与任意连续步数 $N$ 严格满足 $\mathbf{R}(\boldsymbol{\sigma})^\top \mathbf{R}(\boldsymbol{\sigma}) \equiv \mathbf{I}$ 与 $\det\mathbf{R}(\boldsymbol{\sigma}) \equiv \mathbf{1}$！
 
 ::: {.viz src="infinity-free-rational-mathematics-sandbox" preset="rational-cayley-rotor-vs-taylor-series" height="500"}
@@ -114,7 +114,7 @@ $$
 在母公理 $\mathrm{AXIOM}\text{-}\Omega$ 之下，定义去实无穷、去超越数的**$\Omega$-有限有理数学体系**（`MODEL`）$\mathbf{Math}_\Omega = (\mathbb{QP}^1_{\le M}, \mathbf{R}(\boldsymbol{\sigma}), J^2_{\mathbb{Q}}, \mathcal{I}_{\mathrm{heap}})$ 如下：
 
 1. **齐次有理射影数系与按需视界**：以互素整数射影对 $[P : Q] \in \mathbb{QP}^1$（$\kappa = \frac{Q^2}{P^2+Q^2}$，含对径极点 $[1 : 0]$）及按需扩展的有限分辨率格网 $\mathbb{QP}^1_{\le M}$（$\varepsilon_{\mathrm{self}} = \frac{1}{M}$）取代不可数实数轴 $\mathbb{R}$ 与静态实无穷集；
-2. **有理凯莱李群—李代数桥与切比雪夫谐波**：以有理正逆凯莱变换 $\mathbf{R}(\boldsymbol{\sigma}) = (\mathbf{I}-X)^{-1}(\mathbf{I}+X) \in \mathrm{SO}(3,\mathbb{Q})$（配对径双卡覆盖）及流群递推 $x_{t+1} = 2c\,x_t - x_{t-1} \in S^3(\mathbb{Q})$ 取代 $\pi, e, \sin, \cos, \exp, \ln$；
+2. **有理凯莱李群—李代数桥与切比雪夫谐波**：以有理正逆凯莱变换 $\mathbf{R}(\boldsymbol{\sigma}) = (\mathbf{I}-X)^{-1}(\mathbf{I}+X) \in \mathrm{SO}(3,\mathbb{Q})$（半周旋转用两个因子）及流群递推 $x_{t+1} = 2c\,x_t - x_{t-1} \in S^3(\mathbb{Q})$ 取代 $\pi, e, \sin, \cos, \exp, \ln$；
 3. **无极限二阶射流微积分与粗剖分对消积分**：在幂零商环 $J^2_{\mathbb{Q}} = \mathbb{Q}[\eta]/(\eta^3)$ 中以 $(1+u)^{-1} = 1 - u + u^2$ 对正则有理函数做纯四则二阶求导，并以流群中继消去 $[y, x, x] = y$ 与单纯形上边缘 $\delta^2 = 0$ 实现粗剖分零误差积分；
 4. **构造性可计算与可判定执行内核**：在无量词有理算术与有界视界 $\mathbb{Q}_{\le M}$ 量化范围内，相等性、序关系、旋转复合、二阶射流与有限阶剥离均具备确定性停机算法（`Computable` / `Decidable`）。
 :::
@@ -125,7 +125,7 @@ $$
 | **边界与无穷观** | 实无穷集合 $\aleph_0, \aleph_1$ 与开口发散奇点 $\infty$ | 齐次对径闭合点 $[1:0]$、精度契约 $\varepsilon_{\mathrm{self}}$ 与按需素数逃逸 | 根除除零崩溃与非构造性五块分球悖论 |
 | **几何与三角学** | 弧度制 $\theta$、圆周率 $\pi$ 与超越函数 $\sin, \cos$ | 有理保真度 $\kappa \in \mathbb{Q}$、有理旋子与切比雪夫递推 $T_t(c)$ | 无需开方与无穷级数即可实现真球面无损旋转与谐波 |
 | **微积分导数** | 柯西 $\epsilon\text{-}\delta$ 无穷小极限 $\lim_{h \to 0}\frac{f(x+h)-f(x)}{h}$ | 二阶代数射流商环 $\mathbb{Q}[\eta]/(\eta^3)$ 纯四则两项求逆展开 | 消除“已死量幽灵 $0/0$”与有限差商割线偏差 |
-| **指数与对数桥** | 欧拉常数 $e = \lim(1+\frac{1}{n})^n$ 与无理对数 $\ln n$ | 有理凯莱正逆变换 $(\mathbf{I}-X)^{-1}(\mathbf{I}+X)$（双卡无奇点） | 单次有理求逆直通李代数与旋转群，零级数脱轨 |
+| **指数与对数桥** | 欧拉常数 $e = \lim(1+\frac{1}{n})^n$ 与无理对数 $\ln n$ | 有理凯莱正逆变换 $(\mathbf{I}-X)^{-1}(\mathbf{I}+X)$（半周旋转用两个因子） | 对非半周旋转，逆公式精确恢复参数 |
 | **形式化验证属性** | 实数运算依赖 `Classical.choice` 与 `noncomputable` | 有理算子与有界视界命题**全域可计算（`Computable`）与可判定（`Decidable`）** | 定理即直接可求值（`#eval`）的零误差可执行内核 |
 
 ::: {.theorem #thm-ch39-math-omega-finite-rational-anchors title="三元流群与切比雪夫谐波、指数级数截断余项、六轴有理球覆盖、有限连分数与素数逃逸、已验证定阶、对数无理性与有限步可计算停机定理组" lean="D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv,D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.kappa_eq_one_sub_dist_sq,D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul,D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev,D5/S3/Quantum/AURICOmega/ExponentialTail.exp_remainder_le,D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover,D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den,D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log,D5/S3/Axis/PrimeAxisEscape.prime_axis_escape,D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStripping.stripFactors_correct,D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula,D5/S3/Constants/Irrationality/LogNaturalIrrationality.irrational_log_natCast,D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport,D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness,D5/S0/Computability/BinaryNameComparison.name_compare_run"}
@@ -145,7 +145,7 @@ $$
 **文献结果，未在本书形式化。** 为严守 `PROJECT.md` §13 的最强准确标准，须指明以下四条经典文献与逻辑边界：
 
 1. **可计算实数零测度与巴拿赫—塔斯基五块分球悖论**：可计算实数集可数从而在 $\mathbb{R}$ 上勒贝格测度为 $0$ 源于 A. M. Turing（*Proc. London Math. Soc.* **42**, 230–265, 1936）；三维实心球依赖选择公理的奇异分解由 S. Banach 与 A. Tarski（*Fund. Math.* **6**, 244–277, 1924）提出，最少块数 $5$ 由 R. M. Robinson（*Ann. of Math.* **48**, 281–295, 1947）证得；
-2. **有理三角学、凯莱变换与幂零代数微积分**：有理方距与展开度几何见 N. J. Wildberger（2005）；正交矩阵有理参数化 $\mathbf{R} = (\mathbf{I}-X)^{-1}(\mathbf{I}+X)$ 见 A. Cayley（1846），注意单张图卡覆盖 $\det(\mathbf{R}+\mathbf{I}) \neq 0$，半周旋转 $\theta = \pi$ 须配第二张对径阴影图卡；以幂零步元取代极限的合成微分几何见 A. Kock（*Synthetic Differential Geometry*, LMS Lecture Notes **51**, 1981）与 F. W. Lawvere，而交换环 $\mathbb{Q}[\eta]/(\eta^3)$ 上的两项求逆直接覆盖一切在展开点分母非零的有理函数；
+2. **有理三角学、凯莱变换与幂零代数微积分**：有理方距与展开度几何见 N. J. Wildberger（2005）；正交矩阵有理参数化 $\mathbf{R} = (\mathbf{I}-X)^{-1}(\mathbf{I}+X)$ 见 A. Cayley（1846），注意单张图卡覆盖 $\det(\mathbf{R}+\mathbf{I}) \neq 0$，半周旋转 $\theta = \pi$ 可用两个有理凯莱旋转的乘积分解；以幂零步元取代极限的合成微分几何见 A. Kock（*Synthetic Differential Geometry*, LMS Lecture Notes **51**, 1981）与 F. W. Lawvere，而交换环 $\mathbb{Q}[\eta]/(\eta^3)$ 上的两项求逆直接覆盖一切在展开点分母非零的有理函数；
 3. **可计算性与可判定性的精确哥德尔—马季亚谢维奇边界**：在 Lean 4（Mathlib）中，柯西实数 `ℝ` 因相等性不可判定而将除法与超越函数标为 `noncomputable`；在 $\mathbf{Math}_\Omega$ 中，$\mathbb{Q}$、$\mathbb{QP}^1$、$S^3(\mathbb{Q})$ 与 $\mathbb{Q}[\eta]/(\eta^3)$ 的全部四则算子、矩阵求逆与有界视界 $\mathbb{Q}_{\le M}$ 上的量化命题均完全可计算且可判定（实闭域一阶理论亦由 A. Tarski 1948 量词消去定理保证可判定），而无界整数域 $(\mathbb{Z}, +, \times)$ 上的任意存在量词丢番图方程因希尔伯特第十问题否定解（Yu. Matiyasevich 1970）不可判定——这正从数理逻辑底层印证了为何物理与计算系统必须引入有限视界分辨率 $\varepsilon_{\mathrm{self}} = \frac{1}{M}$！
 :::
 

@@ -70,7 +70,7 @@ const SPINE = (() => {
                  the real shadow imports Mathlib (same state record for OmegaShadowBridge); chapter 18 reports its
                  axioms lie within the classical closure {propext, Classical.choice, Quot.sound} (argued, not in the state)
                    ..... OmegaShadowBridge.cayley_circle_unit (LEAN, its statement only)
-                 AXIOM-Ω as a typeclass contract, not an axiom declaration (argued, chapter 1)
+                 a schematic typeclass for selected AXIOM-Ω equations (argued, chapter 1)
      b00_road    the eight rungs of SPINE.PARTS as one road (argued: a way to read the book)
      b00_ask     the next question.
    FILM.init re-derives every number on screen by a second route and checks the three citations. */
@@ -446,7 +446,7 @@ SCENES.b00_ledger = S => {
     const cc = Q(S, 3, 'is a contract', 0.5);
     txt('class OmegaSpace (M : Type) where …', cx, 520, { size: 30, fam: F.mono, w: 700, c: C.cyan, a: ca * cc });
     txt('a contract: a model must be built · 契约：得造出一个模型', cx + 700, 520, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: ca * cc });
-    B00.note('the book builds one: Volume I, chapter 3 · 第一卷第三章亲手造出一个', cx, 620, ca * Q(S, 3, 'must build', 0.6), { size: 22 });
+    B00.note('chapter 3 derives the laws on rays · 第三章在射线上推导定律', cx, 620, ca * Q(S, 3, 'must build', 0.6), { size: 22 });
   }
 };
 
@@ -840,13 +840,13 @@ SCENES.b01_axiom = S => {
   panel(900, 240, 860, 250, a5, C.dim, 'AXIOM · 硬塞的公理');
   txt('axiom kappa_refl : ∀ x, kappa x x = 1', 930, 330, { size: 24, fam: F.mono, w: 700, c: C.white, a: a5 });
   txt('trusted, never built: one bad edge case gives False', 930, 380, { size: 21, fam: F.mono, c: C.dim, a: a5 });
-  B01.strike(925, 336, 560, Q(S, 5, 'not an axiom', 0.4) * a5);
-  txt('a hire nobody interviewed', 930, 440, { size: 22, fam: F.mono, c: C.argued, a: Q(S, 5, 'not a hire', 0.5) * a5 });
-  const a6 = Q(S, 5, 'a job posting', 0.5);
-  panel(900, 520, 860, 280, a6, C.cyan, 'CLASS · 类型类契约');
+  B01.strike(925, 336, 560, Q(S, 5, 'sample class', 0.4) * a5);
+  txt('an assumed equation', 930, 440, { size: 22, fam: F.mono, c: C.argued, a: Q(S, 5, 'six equations', 0.5) * a5 });
+  const a6 = Q(S, 5, 'six equations', 0.5);
+  panel(900, 520, 860, 280, a6, C.cyan, 'SCHEMATIC CLASS · 类型类示意');
   ['class OmegaSpace (M : Type) where', '  triad : M → M → M → M', '  kappa : M → M → QRat', '  idemp_left : ∀ x z, triad x x z = z  …'].forEach((s, i) =>
     txt(s, 930, 600 + i * 40, { size: 24, fam: F.mono, w: 700, c: i ? C.white : C.cyan, a: a6 }));
-  txt('a job posting · filled only by a built instance', 930, 780, { size: 21, fam: F.mono, c: C.argued, a: Q(S, 5, 'Only a built example', 0.5) });
+  txt('the prototype checks examples · 原型核验算例', 930, 780, { size: 21, fam: F.mono, c: C.argued, a: Q(S, 5, 'checks examples', 0.5) });
 };
 
 SCENES.b01_circle = S => {
