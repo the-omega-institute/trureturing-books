@@ -1,6 +1,6 @@
 # Chapter 11 Pi-Free Factorial Haar Integration and Character Orthonormality
 
-> *"Habit insists that spherical averaging demands $\pi$ and infinite Riemann sums; yet on the three-sphere locked by `AXIOM-Ω`, $\pi^2$ cancels completely between the surface area and four half-integer Gamma factors, collapsing global Haar integration into a single finite integer-factorial ratio."*
+> *"On the real unit quaternion group, the surface area and the four half-integer Gamma factors contribute matching powers of $\pi$. Each even monomial has a normalized Haar moment given by a finite factorial ratio."*
 
 [Chapter 10](ch10-peter-weyl-rational-spin-shells.md) purified the Fourier kernel from the transcendental exponential $e^{-\hat{\mathbf{i}}2\pi\xi x}$ into integer-coefficient Chebyshev polynomials $E_n(\kappa)$, while leaving one final gate open: verifying that distinct spin shells are strictly orthonormal ($\langle\chi_j, \chi_{j'}\rangle = \delta_{jj'}$), evaluating origin-free ternary convolutions, or confirming the rotational average of the $5d^8$ quadrupole tensor all require the normalized global Haar expectation $\mathbb{E}_{\mathbb{T}_3}[\cdot]$ on the real three-sphere $SU(2)\cong S^3(\mathbb{R})$. This chapter gives finite factorial formulas for polynomial signals.
 
@@ -70,7 +70,7 @@ Evaluating polynomial integrals over spheres by equating Cartesian and polar Gau
 
 ## 11.2 Intrinsic Zero-Axiom Factorial Functional, Homogeneity Invariance, and Exact Moment Recurrence {#sec-ch11-intrinsic-functional-and-recurrence}
 
-Now kick away the ladder: forget $\mathbb{R}^4$, $e^{-r^2}$, and $\pi$, and define the $\pi$-free Haar expectation intrinsically on degree-zero homogeneous rational functions over `ProjTernion`.
+Apply this polynomial moment formula to the projective reading $P(q)/\lVert q\rVert^{2m}$, with $P$ homogeneous of degree $2m$ and rational coefficients. On the real unit sphere the denominator is one, so linearity reduces the Haar expectation to the moments of the monomials of $P$. The reading is independent of the nonzero homogeneous representative.
 
 ::: {.definition #def-ch11-pi-free-haar title="Pi-Free Factorial Haar Expectation Functional on the Three-Sphere"}
 For any tuple of natural numbers $(p, q, r, s) \in \mathbb{N}^4$ with total degree $p + q + r + s = 2m$, define the rational linear functional $\mathbb{E}_{\mathbb{T}_3}$ on degree-zero homogeneous monomials $w^p x^q y^r z^s / \lVert q\rVert^{p+q+r+s}$ as follows:
