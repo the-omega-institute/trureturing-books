@@ -1,0 +1,198 @@
+# Chapter 10 Four-Dimensional Simplicial Regge Action, Spin-2 Propagators, and Finite Hinge Loads {#sec-ch10-regge-gravity-and-spin2}
+
+The first three volumes pushed the 19-point Behrend shell, dual quaternion clocks, and Riemann zero spectra to the edge of particle physics, uncovering sharp arithmetic thresholds for gauge unification, Higgs portals, three chiral generations, and baryon triality. We now turn the telescope from internal gauge space to spacetime geometry itself and confront Question 4: **how can discrete minimal arcs and simplicial angle deficits produce a massless spin-2 graviton, the Newton constant, and a tiny dark energy?**
+
+If continuum general relativity resembles a taut rubber membrane, discrete Regge gravity is an origami polyhedron assembled from rigid flat four-simplices: every interior is flat, and all curvature sits in the dihedral angle deficits concentrated along two-dimensional triangular faces called **hinges**. That disarmingly concrete picture immediately poses four hard tests:
+
+1. Can bare gravitational couplings be inverted from simplicial partition weights, and can matter fields sense geometric structure finer than the hinge-deficit histogram?
+2. Does the long-wavelength limit genuinely propagate two positive-residue Lorentzian helicities $\pm 2$ with reflection positivity, rather than drowning in Euclidean conformal-mode instabilities or slicing artifacts?
+3. If each hinge weight is built from finite integer counts or finite-dimensional Born measurements, does flat-space stationarity collide with rigid arithmetic barriers?
+4. When moving from free propagators to cubic three-graviton vertices, do discrete hinge loads preserve gauge Ward identities and Lorentz covariance?
+
+This chapter audits all four hurdles along that chain.
+
+## 10.1 Euclidean Regge Action, Pachner Moves, and Full-Spectrum Matter Resolution {#sec-ch10-regge-pachner-matter}
+
+We begin with the cleanest discrete laboratory: a closed four-dimensional equilateral simplicial manifold of uniform edge length $a$, where curvature is governed solely by the number $q_h$ of four-simplices meeting at each triangular hinge $h$.
+
+::: {.definition #def-ou-ch10-regge-action title="Four-Dimensional Equilateral Simplicial Regge Action and Bare Gravitational Weight"}
+Let $T$ be a closed four-dimensional equilateral simplicial manifold of uniform edge length $a$, with $N_4$ four-simplices and $N_2$ triangular faces (hinges). Each triangle has area $A = \sqrt{3}\,a^2/4$, each four-simplex has four-volume $v = \sqrt{5}\,a^4/96$, and the equilateral four-simplex dihedral angle is $\theta = \arccos(1/4)$. Writing $q_h$ for the valence (number of incident four-simplices) around hinge $h$, define the total four-volume $V(T)$ and total integrated deficit $K(T)$ by
+
+$$
+V(T) = v N_4, \qquad K(T) = A \sum_h (2\pi - q_h\theta) = A\bigl(2\pi N_2 - 10\theta N_4\bigr).
+$$
+
+Under the Euclidean Einstein–Regge bare-coupling convention (with $\hbar = c = 1$), each triangulation $T$ carries the partition weight formed from a reference weight $w(T)$ and the gravitational exponential factor
+
+$$
+W(T) = w(T)\exp\bigl[-s\,V(T) - b\,K(T)\bigr], \qquad b = -\frac{1}{8\pi G}, \qquad s = \frac{\Lambda}{8\pi G}.
+$$
+
+Topology-preserving local retriangulations that replace a cluster of four-simplices sharing interior faces by the complementary subdivision (such as $1\to 5$ and $2\to 4$ moves) are called four-dimensional **Pachner moves**; comparing partition probabilities across independent moves identifies the bare couplings $(b, s)$.
+:::
+
+[@def-ou-ch10-regge-action] immediately enforces an identifiability law that is easy to overlook: in any conditional ensemble with fixed $(V, K)$, the factor $\exp[-sV - bK]$ cancels identically in normalization. Even complete knowledge of all normalized matter spectra inside that conditional ensemble leaves $(s, b)$ completely unconstrained, and fixing only the volume still leaves $s$ unidentifiable. Extracting bare $G$ and $\Lambda$ therefore requires comparing partition weights across geometries with different $(N_4, N_2)$.
+
+::: {.example #ex-ou-ch10-pachner-and-dual-walks title="Inverting Bare Couplings via Two Pachner Moves and Full-Spectrum Walk Resolution"}
+Starting from the boundary of a five-simplex $T_0$ (a topological $4$-sphere $S^4$ with $(N_4, N_2) = (6, 20)$), apply a $1\to 5$ Pachner move to $\{0,1,2,3,4\}$ inserting vertex $6$ to obtain $T_1$ with $(10, 30)$, and then a $2\to 4$ move across the shared tetrahedron $\{0,1,2,3\}$ connecting vertices $5$ and $6$ to obtain $T_2$ with $(12, 34)$. The volume and deficit increments form the $2\times 2$ matrix
+
+$$
+\Delta = \begin{pmatrix} 4v & A(20\pi - 40\theta) \\ 2v & A(8\pi - 20\theta) \end{pmatrix}, \qquad \det \Delta = -8\pi vA \neq 0.
+$$
+
+Denoting the three probabilities by $p_0, p_1, p_2$ and the relative log-weight ratios by $d_1 = \log[(p_1/w_1)/(p_0/w_0)]$ and $d_2 = \log[(p_2/w_2)/(p_1/w_1)]$, we have $(d_1, d_2)^{\mathsf T} = -\Delta\,(s, b)^{\mathsf T}$. Subtracting twice the second row from the first eliminates both the volume increment $4v - 2(2v)$ and the dihedral angle term $-40\theta - 2(-20\theta)$, immediately yielding ([4D deficit and shell spectral weights](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-%E5%9B%9B%E7%BB%B4%E8%A7%92%E4%BA%8F%E4%B8%8E%E7%90%83%E5%A3%B3%E8%B0%B1%E6%9D%83%E9%87%8D.md))
+
+$$
+d_1 - 2d_2 = -4\pi A b \quad \Longrightarrow \quad G = \frac{A}{2(d_1 - 2d_2)},
+$$
+
+after which substituting back into $d_2$ gives $s$ and $\Lambda = -s/b$.
+:::
+
+Once matter fields from the Behrend shell are coupled to the triangulation, however, spectral weights resolve geometric distinctions far finer than $(N_4, N_2)$ or even the entire single-hinge deficit histogram. Place one real Gaussian scalar on each four-simplex, coupled across shared tetrahedra on the $5$-regular dual graph with Laplacian $L_T = 5I - \mathrm{Adj}_T$. A dimensionless squared mass $x > 0$ contributes $\det(xI + L_T)^{-1/2}$. Substituting the full dual-clock shell spectrum at the 35th positive Riemann zero (common inertia $d = 460^2/1.04$) and branching from the common 16-simplex $S^4$ parent produced by one further $1\to 5$ move on $T_2$ yields two successively sharper separations (same replay record):
+
+| Compared $4$-Sphere Pair | $(N_4, N_2)$ | Local Hinge-Deficit Comparison | Reduced Polynomial Difference $p - r$ | Full-Tower Log Ratio $\log(Z_2/Z_1)$ | Geometric Source of Separation |
+| --- | :---: | --- | --- | :---: | --- |
+| Subdivide $\{0,1,4,5,7\}$ vs $\{1,2,3,4,5\}$ | $(20, 54)$ | Same $V, K$; $\sum_h q_h^2 = 776$ vs $784$ | Deg-17 diff has deg $14$, lead $8$, all $> 0$ | $(0.1170699,\, 0.1209196)$ (tail $\le 1.139\times 10^{-10}$) | Distinct second hinge moment |
+| Two-step path A vs path B | $(24, 64)$ | Exact valence counts $q=3,4,5,6$: $(33, 21, 3, 7)$ | Deg-22 diff has deg $16$, lead $42$, all $> 0$ | $(0.00194428,\, 0.00210545)$ (tail $< 7.904\times 10^{-22}$) | $252$ extra directed 6-step dual closed walks |
+
+The second pair of 24-simplex $4$-spheres is especially telling: because their valence histograms $(33, 21, 3, 7)$ coincide identically, every local single-hinge functional $\sum_h F(2\pi - q_h\theta)$, volume term, and topological invariant agrees on both geometries. Yet the large-$x$ expansion $\log(p/r) = 42/x^6 + O(x^{-7})$ reveals that the two $5$-regular dual Laplacians match through the fifth trace and differ at the sixth by $-252$—meaning the matter determinant detects **nonlocal six-step closed-walk arrangements** of curvature hinges. Even on equilateral triangulations, coupling shell matter inevitably induces multi-hinge adjacency correlations beyond linear deficit sums.
+
+Beneath all simplicial gauge and curvature variations lies the pure algebraic nilpotency of simplicial coboundaries—the discrete prototype of curl-of-gradient vanishing and the Bianchi identity—verified with an empty axiom closure in `OmegaInit`:
+
+::: {.theorem #thm-ou-ch10-coboundary-zero title="Zero-Axiom Nilpotency of Simplicial Coboundary Operators" lean="D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.d1_d0 D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.d2_d1"}
+Let $V$ be any vertex type and let $(A, G)$ be an additive commutative group satisfying the group laws `G.Laws`. Write $C^0(V, A) = V \to A$, $C^1(V, A) = V \to V \to A$, and $C^2(V, A) = V \to V \to V \to A$, with simplicial coboundary operators
+
+$$
+\begin{aligned}
+(d^0 f)(x, y) &:= f(y) - f(x), \\
+(d^1 e)(x, y, z) &:= \bigl(e(y, z) + e(x, y)\bigr) - e(x, z), \\
+(d^2 F)(x, y, z, w) &:= \bigl(F(y, z, w) + F(x, y, w)\bigr) - \bigl(F(x, z, w) + F(x, y, z)\bigr).
+\end{aligned}
+$$
+
+Then for all $f \in C^0(V, A)$, $e \in C^1(V, A)$, and all vertices $x, y, z, w \in V$, two zero-axiom identities hold:
+
+$$
+d^1(d^0 f)(x, y, z) = 0, \qquad d^2(d^1 e)(x, y, z, w) = 0.
+$$
+
+:::
+
+::: proof
+For the first identity, expanding $(d^1(d^0 f))(x, y, z) = \bigl((f(z) - f(y)) + (f(y) - f(x))\bigr) - (f(z) - f(x))$ cancels the intermediate term $f(y)$ pairwise in the abelian group. For the second, expanding the four face terms in $(d^2(d^1 e))(x, y, z, w)$ and regrouping by associativity and commutativity reduces both the positive and negative halves identically to $\bigl(e(z, w) + e(y, z) + e(x, y)\bigr) - e(x, w)$, whose difference is zero. Both declarations carry an empty axiom closure (`axioms: []`) in the Lean 4 kernel. The full proof is checked by the Lean kernel.
+:::
+
+[@thm-ou-ch10-coboundary-zero] anchors simplicial exactness; to determine whether discrete geometry yields a physical graviton, however, we must confront propagators, reflection positivity, and extrinsic shear.
+
+## 10.2 Long-Wave Spin-2 Propagator, Reflection Positivity, and Shear Constraints {#sec-ch10-spin2-reflection-shear}
+
+Leave fixed equilateral topologies behind and move to the periodic four-dimensional Freudenthal–Kuhn coordinate-chain triangulation with continuously variable squared edge lengths. Around the flat background metric $g = I - J/5$ (15 undirected edge types, 50 triangular hinges, and 24 four-simplices per unit cell, all with $\delta_h = 0$), adopt the bare Euclidean Regge action $S_R = \sum_f A_f\delta_f$ with standard linear source coupling. Within each unit cell, the 15 edge-length modes split into 10 slow metric directions $h$ and 5 non-metric directions that are strictly gapped at zero momentum.
+
+### 10.2.1 Conserved-Source Poles, Two Helicities, and Ten Reflection-Positive Slices {#sec-ch10-propagator-slices}
+
+Expanding the midpoint Fourier symbol and performing Schur elimination shows that integrating out the 5 heavy non-metric modes modifies the metric kinetic block only starting at $O(|k|^4)$. Adding the gauge-fixing term $2\|F(h)\|_g^2/20$ with $F(h) = h k^\sharp - \tfrac{1}{2}k\operatorname{tr}_g(h)$ reduces the leading quadratic form to the Fierz–Pauli tensor $k^2\bigl(h:h - \tfrac{1}{2}(\operatorname{tr}_g h)^2\bigr)/20$. Inverting yields the long-wave conserved-source propagator ([conserved-source propagator certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-regge-conserved-source.py)):
+
+$$
+\frac{20}{k^2}\!\left(T:S - \frac{1}{2}\operatorname{tr}_g T\,\operatorname{tr}_g S\right) + O(1), \qquad k^2 = k^{\mathsf T} g^{-1} k.
+$$
+
+Performing standard Wick continuation to the Lorentzian metric $\eta = \operatorname{diag}(-1, 1, 1, 1)$ and evaluating on a null four-momentum $k \propto (1, 0, 0, 1)$ with source conservation $T^{0\nu} = T^{3\nu}$, the pole-residue numerator simplifies to
+
+$$
+\frac{1}{2}\lvert T^{11} - T^{22}\rvert^2 + 2\lvert T^{12}\rvert^2 \ge 0.
+$$
+
+It is positive semidefinite of exact rank $2$; under a transverse rotation by $\theta$, the pair $(T^{11} - T^{22}, 2T^{12})$ rotates by $2\theta$, identifying two positive-residue **massless spin-2 Lorentzian helicities $\pm 2$**. For a static unit mass-density source, the numerator equals $1/2$, producing the static kernel $10/|p|^2$ (or $10/(4\pi r)$ in position space). Given the Euclidean Regge action, the linearized long-wave spectrum indeed carries the two helicities of a graviton.
+
+Constructing a positive Hilbert space on the Euclidean lattice, however, also demands **reflection positivity**. On the $g = I - J/5$ simplicial lattice, requiring every four-simplex to span only two adjacent time layers admits, up to sign, exactly **$10$** undirected primitive time slices $h(x) = g(v_i - v_j, x)$ ($1 \le i < j \le 5$, where $v_1,\dots,v_4$ are coordinate steps and $v_5 = -\sum_{m=1}^4 v_m$). For any reflection-symmetric nonnegative local bosonic weight, the two-layer normal transfer operator factors exactly as $T = AA^\dagger \ge 0$, covering compactly supported and non-integer zero-clock face weights ([ten reflection slices certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-simplex-reflection-slices.py)). By contrast, for the cross-polarization mode along projected momenta $(t+s, t+s, t-s, t-s)$ with exact kinetic symbol $K = (12 - 2T^2 - TV)/20$ ($T = 2\cos t$, $V = 2\cos s$), the two transfer roots $a = (-V + \sqrt{V^2+96})/4 > 2$ and $b = (-V - \sqrt{V^2+96})/4 < -2$ produce $C_n = c x^{|n|} + d y^{|n|}$ ($x > 0$, $y < 0$): two-step transfer across even slices is positive and recovers massless propagation $\ell C_n \to (\sqrt{5}/|p|)\exp(-|p|\tau/\sqrt{5})$, yet on an 8-slice periodic lattice at $s = \pi/2$ the single-step half-slice reflection quadratic form takes the explicit rational negative value **$-5/3$** ([cross-polarization transfer certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-regge-cross-transfer.py)). Moreover, unamplified single-copy zero-clock gauge weights on these slices suffer an enormous transfer gap $a\Delta E > 20.39$, lacking low-energy propagating states.
+
+### 10.2.2 Conformal Instability, Fixed-Volume Failure, and the Extrinsic Shear Test {#sec-ch10-conformal-shear}
+
+Moving from linearized poles to non-perturbative path integrals triggers two severe Euclidean obstructions. The first is the **conformal-mode instability**: using squared-edge Lebesgue measure $\prod_e dq_e$ on the $4^4$ periodic lattice, fixing any total four-volume $V_0 > 0$ and any nonzero real Regge coupling $\beta$ leaves the truncated integral $Z_R = \int_{\max q_e \le R}\delta(V - V_0)e^{\beta S}\prod dq_e$ unbounded above—even inside arbitrarily narrow uniform local-volume bands and with the six zero-clock gauge weights included ([fixed-volume divergence certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-regge-fixed-volume.py)). Exact integer characteristic polynomials across all $255$ nonzero Bloch momenta on $4^4$ pinpoint the mechanism: every nonzero momentum has exact Hessian inertia **(1 positive, 10 negative, 4 zero)** (and 5 negative, 10 zero at $k = 0$), with conformal variations $u_{xy} = q_{xy}(\phi_x + \phi_y)$ supplying the lone opposite-sign direction—reproducing the continuum Euclidean conformal-mode instability discretely ([conformal-mode inertia certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-regge-conformal-mode.py)).
+
+The second obstruction is the **clash between fixed volume and reflection positivity**: imposing a dimensionless local shape bound $\chi_\sigma = (24 V_\sigma)^2/Q_\sigma^4 \ge 1/16$ (with $Q_\sigma$ the largest squared edge in $\sigma$) together with $\Lambda > 0$ produces a normalizable, reflection-positive finite-lattice measure uniquely tunable to any desired mean four-volume $V_0$. Locking the total volume strictly to $V = V_0$, however, forces $F(\Theta F) = -(V_+ - V_0/2)^2$ on every configuration and breaks reflection positivity: in a four-configuration counting example keeping two reflected variable edges (half-volumes $v_0 < v_1$), the reflection expectation is **$-1$**, and the soft rational weight $w(V) = [1 + (V - v_0 - v_1)^2/(v_1 - v_0)^2]^{-1}$ still yields **$-1/3$** ([volume reflection certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-regge-volume-reflection.py)). By Widder's bilateral Laplace representation theorem, a continuous total-volume weight $w(V)$ preserves reflection positivity if and only if it is a nonnegative mixture $\int_{(0,\infty)} e^{-\lambda v}\,\nu(d\lambda)$ of positive cosmological constants, with minimum variance attained by a single $\Lambda$ (relative variance $\ge 1/1920$ at $\beta = 0$; [volume fluctuation floor](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-volume-fluctuations.py)).
+
+Even when the spatial curvature action is completely fixed, recovering a Lorentzian spin-2 propagator requires an independent test of **extrinsic shear** across time slices. On a spatial three-torus with unit lapse and zero shift, set $h = a(t)^2\bigl[dz^2 + H_{AB}(t, z)\,dx^A dx^B\bigr]$ where $H$ is symmetric positive definite with $\det H = 1$, $J_\mu = H^{-1}\partial_\mu H$, and $h_0 = \dot{a}/a$. The spatial scalar curvature and extrinsic curvature invariant take the exact closed forms ([4D deficit and shell spectral weights](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-%E5%9B%9B%E7%BB%B4%E8%A7%92%E4%BA%8F%E4%B8%8E%E7%90%83%E5%A3%B3%E8%B0%B1%E6%9D%83%E9%87%8D.md)):
+
+$$
+{}^{(3)}R = -\frac{1}{4a^2}\operatorname{tr} J_z^2, \qquad K^2 - K_{ij}K^{ij} = 6h_0^2 - \frac{1}{4}\operatorname{tr} J_t^2.
+$$
+
+With the explicit parametrization $H_{11} = e^p$, $H_{12} = e^p q$, $H_{22} = e^{-p} + e^p q^2$, one line of algebra confirms $\tfrac{1}{2}\operatorname{tr}(J_\mu^2) = (\partial_\mu p)^2 + e^{2p}(\partial_\mu q)^2$: the two traceless transverse polarizations rotate at double angle. Yet keeping the same spatial deficit coefficient $B$ and comparison clock still permits an arbitrary positive time-shear coefficient $A > 0$, yielding squared wave speed $B/A$ and pole residue proportional to $1/A$. **Fixing the discrete time-transfer dynamics itself is therefore indispensable before claiming a Lorentzian graviton.** Under Einstein–Hilbert lapse variation, the Hamiltonian constraint further enforces
+
+$$
+6h_0^2 = 2\Lambda + 16\pi G\rho + \frac{1}{4}\operatorname{tr} J_t^2 + \frac{1}{4a^2}\operatorname{tr} J_z^2.
+$$
+
+Freezing the scale factor $a$ in vacuum with $\Lambda \ge 0$ forces $\Lambda = 0$ and constant $H$; for periodic initial data $H(z) = R(\omega z)^{\mathsf T}\operatorname{diag}(e^p, e^{-p})R(\omega z)$ with $\partial_t H = 0$, $\operatorname{tr} J_z^2 = 8\omega^2\sinh^2 p$ gives $h_0^2 = \Lambda/3 + \omega^2\sinh^2 p/(3a^2)$, leaving $\Lambda$ degenerate with the initial expansion rate unless extrinsic curvature or the quantum state is fixed independently.
+
+## 10.3 Arithmetic Obstructions of Finite Hinge Loads, Integer Ground States, and Cubic Curvature Tests {#sec-ch10-finite-hinge-loads}
+
+The previous two sections treated the Regge action as a given input. What happens if we return to the native arc-partition ambition—replacing continuous hinge areas $A_h$ by finite nonnegative integer **hinge loads** $N_h$ generated by discrete counting or finite quantum measurements in $(8\pi)^{-1}\sum_h N_h\delta_h$? An extraordinarily sharp sequence of arithmetic and geometric obstructions emerges.
+
+### 10.3.1 The $\sqrt{3}$ Rationality Barrier, Degree-4 Minimal Fields, and Four-Copy Sharpness {#sec-ch10-sqrt3-obstruction}
+
+On the flat four-dimensional coordinate-chain cell (30 four-valent hinges, 20 six-valent hinges), shift every short squared edge ($4/5$) uniformly by $\eta$ while holding the long edges fixed. Dihedral differentiation yields $d\delta/d\eta = 3$ on every four-valent hinge and $d\delta/d\eta = -3\sqrt{3}$ on every six-valent hinge, so the first variation along this shape direction (omitting $1/(8\pi)$) is exactly ([hinge-load stationarity certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-regge-hinge-load.py))
+
+$$
+3\left(\sum_{h\ \text{4-val}} N_h - \sqrt{3}\sum_{h\ \text{6-val}} N_h\right).
+$$
+
+This single equation triggers two immediate algebraic barriers:
+
+- **No positive rational solution and second-variation sign flip**: no nonzero nonnegative rational counts can satisfy the $\sqrt{3}$ ratio, even after combining with uniform scaling to hold the total four-volume fixed. Moreover, if differentiable loads satisfy $N_h = C A_h$ and $dN_h = C r\,dA_h$ at the flat point, differentiating the Schläfli identity $\sum A_h d\delta_h = 0$ yields the second variation $C(2r - 1)R''_{q_0}$: frozen flat-area loads ($r = 0$) invert the sign of the gravitational kinetic term to $-R''$, while $r = 1/2$ annihilates the entire quadratic kinetic term!
+- **Minimal Born-amplitude number-field degree is $4$**: if nonnegative integer loads arise from a finite-dimensional Born measurement whose unnormalized amplitudes have real and imaginary parts in any **totally real number field** $F$ (every embedding maps $F$ into $\mathbb{R}$), then $A = \sqrt{3}B$ is impossible—some embedding sends $\sqrt{3} \mapsto -\sqrt{3}$, contradicting the positivity of sums of squares under every real embedding. Conversely, the degree-4 real algebraic amplitude $(1, \beta)$ with $\beta > 0$ and $4\beta^4 = 3$ ($2\beta$ a root of irreducible $x^4 - 12$) achieves exact flat balance with $p_4 = 4 - 2\sqrt{3}$ and $p_6 = 2\sqrt{3} - 3$ ($p_4/p_6 = 2/\sqrt{3}$). Since any real field of degree $< 4$ containing $\sqrt{3}$ is totally real quadratic, **degree $4$ is strictly minimal** ([finite Born hinge certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-finite-born-hinge.py)).
+
+Notice how sharply this degree-4 wall separates flat four-dimensional hinge geometry from quadratic spinor arithmetic. In the constructive quadratic extension `QSqrt2` ($\delta^2 = 2$), no transcendental functions or fourth roots are needed to construct an exact unit right-angle spinor closing in eight beats ($u_{90}^8 = 1$); yet balancing four-dimensional simplicial hinge loads via $4\beta^4 = 3$ forces an irreversible jump from degree $2$ to degree $4$. We record the frozen quadratic spinor anchor explicitly for contrast:
+
+::: {.theorem #thm-ou-ch10-sqrt2-spinor title="Unit Norm Squared and Eight-Beat Closure of the Right-Angle Spinor in QSqrt2" lean="D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.sqrt_two_spinor"}
+In the constructive quadratic extension `QSqrt2` (whose scalar ring is generated by $\delta$ with $\delta^2 = 2$, and whose right-angle spinor is `QSqrt2.u90`), two equivalences hold simultaneously:
+
+1. **Unit norm squared**: under `QSqrt2.scalarRing.eqv`, $\operatorname{normSq}(u_{90}) \equiv 1$;
+2. **Eight-beat spinor closure**: under `QSqrt2.spinorRing.eqv`, $u_{90}^8 \equiv 1$ (with the exponent written as $4 + 4$).
+:::
+
+::: proof
+In `QSqrt2`, the right-angle spinor $u_{90}$ has both real and imaginary components equal to $\delta/2$. Using $\delta^2 = 2$, its scalar norm squared evaluates directly to $(\delta/2)^2 + (\delta/2)^2 = \delta^2/2 \equiv 1$. Squaring three times in succession yields $u_{90}^2 \equiv \mathbf{i}$, $u_{90}^4 \equiv -1$, and hence $u_{90}^{4+4} = (u_{90}^4)^2 \equiv 1$. In the Lean 4 kernel this theorem depends only on `propext`. The full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-ou-ch10-hinge-arithmetic title="Four-Copy Rational Projection and the Thousand-Slot Three-Body Slope Contrast"}
+If one refuses to hard-code fourth roots and instead uses a **purely rational** projective test on $k$ identical two-state inputs $\psi = \alpha\lvert 0\rangle + \beta\lvert 1\rangle$ to select $p_6 = 2\sqrt{3} - 3$, projecting onto the rational state $(3\lvert 0000\rangle - 4\lvert 1111\rangle)/5$ yields rejection probability $|3\alpha^4 - 4\beta^4|^2/25$, vanishing if and only if $(\beta/\alpha)^4 = 3/4$. Conversely, any Gaussian-rational PSD test on $k$ identical copies isolating $|z|^2 = \sqrt{3}/2$ forces the product of the $d \le k$ conjugates of $z$ over $\mathbb{Q}(i)$ to have Gaussian norm $(3/4)^{d/2}$, whose $3$-adic valuation must be even, forcing $4 \mid d$ and ruling out $k \le 3$—so **$4$ copies is strictly minimal** ([four-copy rational projection certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-four-copy-hinge.py)). Extending rational Heron squared-area comparisons across any finite triangulation likewise selects $p_f = A_f/\sum A$ with $4$ copies; similarly, selecting absolute area occupation $p_f = A_f/A_*$ across an area window requires $3$ copies for a unique minimum and sharply **$4$ copies** if the minimal cost itself must be a rational function of $x = A^2/A_*^2$ ([absolute hinge area certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-absolute-hinge-area.py)).
+
+By contrast, when the three-copy readout is turned into an ordinary finite-$N$ three-body Hamiltonian, its ground-state occupation $k/N$ moves in flat steps: differentiating geometry first and sending $N \to \infty$ afterward flips the Hessian to $-R''$! On a uniform short-edge deformation at $N = 1000$ slots (exact Regge second derivative $-45/\sqrt{5} \approx -20.1246$), the ordinary three-body ground state yields $+20.1632$ with the wrong sign, whereas a rational mixture between adjacent squared-occupation plateaus recovers $-20.1085$—precisely **$0.99920\times$** the Regge response ([three-body ground state and rational interpolation certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-hinge-occupation-response.py)).
+:::
+
+If instead the two Riemann-zero clocks drive any finite circuit with coefficients in a totally real number field, joint equidistribution on the clock torus combined with the totally real obstruction proves that **exact flat-stationarity hits $A = \sqrt{3}B$ have natural density $0$** among positive $\zeta$ zeros. For the 724-chord complementary interferometric readout $p = (1 + \operatorname{Re} u)/2$ scanned across all 1,238 window zeros (#10855–#12092), zero **#11366** uniquely minimizes $|p - p_+|$ at $\approx 8.655\times 10^{-5}$ with no exact hit in the window (whereas flavor benchmark **#11431** yields $p \approx 0.16936$; [zero-clock stationarity density certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-hinge-zero-clock.py)).
+
+### 10.3.2 Curved Pell Branch, the 5432-Slot Integer Ground State, and Cubic Curvature Tests {#sec-ch10-curved-5432-cubic}
+
+Since finite integer counts cannot sit at exact flatness, one may let the two-length periodic cell bend slightly so that its areas $A_4, A_6$ match rational fractions $k_4/N, k_6/N$. By the Euclidean Schläfli identity, the pure deficit phase then becomes stationary with respect to every single edge length independently! Yet three rigid obstructions immediately enclose this curved branch:
+
+1. **Strictly negative curvature decaying as $125/N^4$**: throughout the connected non-degenerate shape interval $(3-\sqrt{5})/2 < t < (3+\sqrt{5})/2$, $R/A_4$ attains its unique maximum $0$ at flatness $t_0 = 2/3$, so the mean scalar curvature $2R/V$ of every curved stationary point is **strictly negative**. Along the Pell branch $D = 3k_4^2 - 4k_6^2 = -1$ approaching flatness, curvature decays sharply as $(N^4/D^2)|2R/V| \to 125$ ([curved stationarity certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-hinge-curved-station.py)), carrying the wrong sign for positive dark energy.
+2. **Universal saddle theorem under three-body preparation plus linear volume**: adding three-body counting preparation energy and any linear volume term $\Lambda V$ produces a scale-shape Hessian determinant $-4b^2(H')^2$. Eliminating $t$ from $H = H' = 0$ yields the sextic resultant $99r^6 + 288r^5 - 188r^4 - 564r^3 + 32r^2 + 288r + 44$, which has no root modulo $7$ and therefore no rational root—**every open-plateau positive-integer stationary point is a geometric saddle** ([preparation saddle certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-hinge-preparation-saddles.py)).
+3. **The 5432-slot ground state on #11366 and stability versus masslessness**: switching to four-read counting energy $F_1(k, x) = \tfrac{1}{2} + \tfrac{1}{2}[(k/N)^2 - x]^2$ at unit strength $\beta = 1$ driven by the 724-chord clock across the 1,238 zeros, the maximum slot count simultaneously admitting an integer ground state and a non-degenerate edge-stationary geometry is **exactly $N = 5432$**, uniquely achieved by **#11366** with $(k_4, k_6) = (2911, 2521)$ ($3\cdot 2911^2 - 4\cdot 2521^2 = -1$, critical strength $\approx 0.55684$, mean curvature $\approx -5.8108\times 10^{-14}$), while **#11431** yields no non-degenerate geometry for any $N$ ([clock hinge ground-state certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-clock-hinge-ground.py)). At $\beta = 1$, this 5432-slot configuration still admits an alternating edge descent direction (requiring $\beta \ge 699.87$); raising the coupling to **$\beta = 927$** stabilizes every edge length uniformly (Hessian $\ge I/1000$). Crucially, however, *any* four-read strength large enough to select $(2911, 2521)$ (in fact $\beta \ge 1/2$) already keeps the 15-dimensional zero-momentum edge response strictly bounded, removing the massless pole at fixed lattice spacing ([edge-stability certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-clock-hinge-stability.py)).
+
+Passing to stochastic marker models sharpens the nonlinear interaction tests further. With fixed total marker count, overall dilation $q \mapsto sq$ leaves the effective action homogeneous of degree $0$, causing the three-graviton vertex with one soft dilation leg to miss the Regge value by a factor of $2$ ([soft-dilation vertex test](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-hinge-dilation.py)); adding $2(K+1)$ rational random candidates per cell matches $1, 3, 5$ soft dilation legs in turn, yet always diverges at the next scale derivative by $-1, -9, -225\times$ the initial Hessian ([finite-order soft-vertex certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-hinge-finite-order-response.py)). Likewise, single-hinge even-subslot chains recover an exact flat stationary point and one massless cross polarization at $N = 5432$, yet fail the common null-cone test for the second ($+$) polarization ([even-subslot second-polarization test](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-even-second-polarization.py)).
+
+Restoring nonlinear gauge consistency requires two refinements. First, pairing each hinge with an adjacent opposite-valence partner via the rational map $u = (1 + x - y)/2$, $m(x, y) = 2ux/(u^2 + x)$ recovers the exact Regge real Hessian and both $\pm 2$ helicities at the complementary flat scale $A_4 + A_6 = 1$ ([adjacent-hinge vertex certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-complement-gravity-vertex.py)), yet a single update fails the two on-shell cubic Ward identities (the time-shift leg requires routing probability $u \approx 0.44029$ while the spatial-shift leg requires $u \approx 0.76234$, mutually incompatible; [on-shell cubic Ward test](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-partner-null-cubic.py)). Second, applying **two area updates** ($m \leftarrow 2mx/(m^2 + x)$ twice, driving $m - A = O(\|\Delta q\|^4)$) restores the two-derivative cubic Ward checks to pure Regge; endowing each hinge with **three correlated markers** via $G(z) = (1 - m + mz)^3 + \eta[m(1-m)]^3(z-1)^3$ ($\eta = \cos[\gamma(\theta_{724} - \theta_{244})]$) places the zero-clock signal cleanly into the cubic deficit cumulant $-\tau\theta^3/3$, which vanishes identically on any pure-gauge leg while separating **#11366** from **#11431** by **$+0.00490155$** ($+0.00490154812$) on the uniform shape deformation ([two-update three-marker certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-clock-third-cumulant.py)).
+
+Finally, grouping the 50 hinges of the flat unit cell into opposite-orientation pairs yields **$25$ local deficits** whose rational leading-order matrix against the $20$ independent Riemann curvature components and $5$ non-metricity modes has exact determinant
+
+$$
+\det M_{25\times 25} = -2{,}660{,}511{,}744 \neq 0,
+$$
+
+reconstructing all $20$ curvature components while automatically projecting out all $5$ non-metric distortions ([25-deficit curvature inversion certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-hinge-curvature-inverse.py)). Two collinear gravitational-wave boost tests force independent per-hinge $\delta_h^3$ coefficients to vanish under Lorentz invariance; by contrast, cross-hinge three-marker correlations built from this inverse couple the zero-clock directly to the Lorentz scalar $\operatorname{tr}(\mathcal{R}^3)$, separating #11366 and #11431 by $-3.7816\times 10^{-9}$ on complex on-shell three-wave amplitudes ([covariant cubic curvature certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-clock-covariant-cubic.py)). Spreading the three markers across three lattice cells preserves all 1-cell and 2-cell full marginals identically while still shifting the $\operatorname{tr}(\mathcal{R}^3)$ coupling, and an all-ones three-bit readout separates all 1,238 zeros with minimum probability gap $\approx 4.48\times 10^{-13}$ between #11870 and #11943 ([three-cell marginal certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-gravity-three-cell-marginals.py)).
+
+| Audit Axis | Benchmark (#11366 vs #11431 or Window Extremum) | Established Model-Internal Result or Bound | Remaining First-Principles Gap |
+| --- | --- | --- | --- |
+| Bare couplings & matter determinants | $(20,54)$ and $(24,64)$ $4$-spheres | $d_1 - 2d_2 = -4\pi A b$; shell matter resolves identical-histogram $S^4$ via $252$ 6-step dual walks | Derivation of bare action and continuum renormalization |
+| Free propagation & reflection positivity | All $255$ nonzero momenta on $4^4$ | Conserved-source kernel $10/|p|^2$, helicities $\pm 2$; $10$ slices $AA^\dagger \ge 0$; inertia $(1,10,4)$ | Discrete time-transfer term $A$ and full Lorentzian measure |
+| Finite-load arithmetic barriers | #11366 err $8.655\times 10^{-5}$; #11431 $p \approx 0.16936$ | Flatness ratio $\sqrt{3}$; Born degree $\ge 4$, rational copies $\ge 4$; exact zero-clock density $0$ | Origin of area unit $A_*$ and load preparation from the connection |
+| Integer ground state & cubic vertices | #11366 max $5432$ slots $(2911,2521)$; #11431 none | $\beta=927$ stabilizes all edges; two-update three-marker diff $+0.00490155$; $25$-deficit $\det = -2{,}660{,}511{,}744$ | Reconciling stable integer selection with massless poles |
+| Covariant cubic & three-cell marginals | #11366 vs #11431 diff $-3.7816\times 10^{-9}$; #11870 vs #11943 gap $4.48\times 10^{-13}$ | Cross-hinge coupling to $\operatorname{tr}(\mathcal{R}^3)$; identical 1- and 2-cell marginals still separate all 1,238 zeros | Full non-perturbative quantum diffeomorphism invariance |
+
+::: {.remark #rem-ou-ch10-gravity-ledger title="Evidence Stratification and Bridge to Induced Gravity"}
+Three epistemic tiers are strictly separated here: [@thm-ou-ch10-coboundary-zero] (empty axiom closure) and [@thm-ou-ch10-sqrt2-spinor] (`propext` only) are Lean 4 kernel-checked algebraic and simplicial theorems; Pachner inversion, conserved-source residues, conformal-mode inertia, degree-4 and four-copy sharpness, the 5432-slot ground state, the 25-deficit determinant, and cubic Ward tests are exact rational or interval certificates inside specified discrete gravity models; deriving the Regge action, source normalization, and physical area scale directly from the single minimal-arc connection remains open. Even granting the Einstein–Regge geometric scaffold, neither the physical Newton constant $G_N$ nor the dark-energy ratio $\Lambda G \sim 10^{-122}$ has yet emerged—the next chapter asks whether one-loop induced gravity from the Behrend-shell matter spectrum itself can produce both scales.
+:::

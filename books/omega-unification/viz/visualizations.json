@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "visualizations": [
+    {
+      "id": "behrend-unification-lab",
+      "code": "OMEGA//UNIFY",
+      "title": "OMEGA 统一交互实验室",
+      "title_en": "Omega Unification Laboratory",
+      "summary": "同一个十九点贝伦德球壳 x² + y² + z² = 867 上的五张卡。球壳枚举、弦距、三角形、24 × 24 相位网格上的五荷谱、第七时间的大整数括号与 W_K 和乐由脚本现算（NUM）；三条高度带的份额、绕数门槛、记忆秩阶梯与 ShellProjection.lean 的摘要是随页面打包、取自 trureturing-experiments 的第四层复算证书（NUM），不由脚本现算，也未在 trureturing 冻结。球壳：枚举得到恰好 19 个正整点，极点 (17, 17, 17) 加六条坐标轮换轨道；30 种平方弦距中 d² ≤ 804 的 23 种给出 135 条边与 529 个三角形，两只弦钟的频率是 θ₇₂₄ − θ₂₄₄ 与 θ₈₀₄ − θ₂₄₄，三点组给出 det G₃ = det(a, b, c)²/867³ 与有向立体角。谱隙：五种荷 q = 1, 2, −3, −4, 6 的磁拉普拉斯按循环特征标分块对角化，每荷三个轻模各带 1、ω、ω²，λ₃ < 8.685 < 9.6 < λ₄；站点方差分界 T = 10 在部分相位放进第四个模。算术钟：六个 44 位输入格用大整数分数给出 2³⁵F₇ 的括号，落在同一个整数格 32071996606，43 位时跨两格；三条高度带的算术权按证书标出。绕数阶梯：证书门槛 18、19、21、27、31、36、105 与 529 个三角面第 K 圈威尔逊项。记忆秩：弦距截止 D 从 0 到 1600，证书给出的辅助记忆秩从 38 降到 19，512 处时钟数从 9 变为 10。三点组读数旁的两个绿色框是正文引用的冻结定理：三枚非零整四元数的 detGram3 ≥ 0，以及三向量格拉姆行列式的展开；文献结果与手工推导标 ARGUED，画法标 MODEL，未决问题标 OPEN。",
+      "summary_en": "Five cards on one 19-point Behrend shell x² + y² + z² = 867. The shell enumeration, chords, triangles, five-charge spectra on a 24 × 24 grid of phases, big-integer brackets of the seventh time and W_K holonomies are computed live by the script (NUM); the three-band shares, winding thresholds, memory-rank staircase and the summary of ShellProjection.lean are bundled Tier-4 replay certificates from trureturing-experiments (NUM), not computed by the script and not frozen in trureturing. Shell: the enumeration gives exactly 19 positive integer points, the pole (17, 17, 17) and six orbits of the cyclic shift; of 30 squared chord lengths the 23 with d² ≤ 804 give 135 edges and 529 triangles, the two chord clocks run at θ₇₂₄ − θ₂₄₄ and θ₈₀₄ − θ₂₄₄, and a triad gives det G₃ = det(a, b, c)²/867³ and its signed solid angle. Gap: the magnetic Laplacians of the five charges q = 1, 2, −3, −4, 6 are diagonalised block by block in the cyclic characters; each charge keeps three light modes carrying 1, ω, ω², with λ₃ < 8.685 < 9.6 < λ₄, while the site-variance cut T = 10 admits a fourth mode at some phases. Arithmetic clock: six 44-bit input cells bracket 2³⁵F₇ in big-integer fractions inside the single integer cell 32071996606, two cells at 43 bits; the arithmetic weights of the three height bands are shown as certified. Winding ladder: the certified thresholds 18, 19, 21, 27, 31, 36, 105 beside the K-th winding term of the 529 triangles. Memory rank: as the chord cutoff D runs from 0 to 1600 the certified auxiliary memory rank falls from 38 to 19, and at 512 the clock count changes from 9 to 10. The two green boxes beside the triad readings are frozen theorems the text cites: detGram3 ≥ 0 for three nonzero integer quaternions and the expansion of the Gram determinant of three vectors; literature results and hand derivations are marked ARGUED, drawing conventions MODEL and unsettled questions OPEN.",
+      "path": "behrend-unification-lab/",
+      "thumbnail": "behrend-unification-lab/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-26",
+      "tags": [
+        "贝伦德球壳",
+        "整点",
+        "坐标轮换",
+        "双弦钟",
+        "巴格曼相位",
+        "磁拉普拉斯",
+        "共同谱隙",
+        "手征三代",
+        "高斯—拉道求积",
+        "绕数阶梯",
+        "威尔逊作用",
+        "局部记忆秩"
+      ],
+      "tags_en": [
+        "Behrend shell",
+        "integer points",
+        "cyclic shift",
+        "dual chord clocks",
+        "Bargmann phase",
+        "magnetic Laplacian",
+        "common spectral gap",
+        "three chiral generations",
+        "Gauss–Radau quadrature",
+        "winding ladder",
+        "Wilson action",
+        "local memory rank"
+      ],
+      "theory": [
+        {
+          "label": "第一章 · 十九点贝伦德球壳与二十二独立频率",
+          "label_en": "Chapter 1 · The 19-point Behrend shell and twenty-two independent frequencies",
+          "href": "../zh/ch01-behrend-shell-and-frequencies.html",
+          "href_en": "../en/ch01-behrend-shell-and-frequencies.html"
+        },
+        {
+          "label": "第七章 · 共同谱隙、站点方差分界与四维格点手征三代",
+          "label_en": "Chapter 7 · Universal spectral gaps, site-variance cuts and three chiral generations on a 4D lattice",
+          "href": "../zh/ch07-chiral-three-generations.html",
+          "href_en": "../en/ch07-chiral-three-generations.html"
+        },
+        {
+          "label": "第十二章 · 共同算术钟、三高度带浓缩与第七时间预言",
+          "label_en": "Chapter 12 · The shared arithmetic clock, three-band concentration and the seventh-time prediction",
+          "href": "../zh/ch12-shared-arithmetic-clock.html",
+          "href_en": "../en/ch12-shared-arithmetic-clock.html"
+        },
+        {
+          "label": "第十三章 · 五百二十九面双钟作用、绕数阶梯与联合零点见证",
+          "label_en": "Chapter 13 · The 529-triangle dual-clock action, the winding ladder and the joint zero witness",
+          "href": "../zh/ch13-winding-ladder-and-joint-vacuum.html",
+          "href_en": "../en/ch13-winding-ladder-and-joint-vacuum.html"
+        },
+        {
+          "label": "第十四章 · 六百二十四内部通道、局部记忆秩与反演辨识极限",
+          "label_en": "Chapter 14 · The 624 internal channels, local memory rank and inverse-identifiability limits",
+          "href": "../zh/ch14-624-channels-and-memory-rank.html",
+          "href_en": "../en/ch14-624-channels-and-memory-rank.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula"
+        }
+      ]
+    }
+  ]
+}
