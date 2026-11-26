@@ -515,6 +515,23 @@ $$
 $$
 Gonek's uniform Landau formula supplies this premise at the literature level. With $x=e^{|t|}$, RH permits division of the zero sum by $\sqrt{x}$ to recover $F_V(|t|)$. The main term and nearest-prime-power error are both bounded by a constant times $V|t|e^{-|t|/2}$, using $\Lambda(x)\le\log x$ and the truncation by $V$ in the error. The other three terms follow from the two errors containing $x$ and the error as $x\to1$. Conjugation gives the estimate at negative times. [Gonek, Theorem 1, equation (3), pp. 92–93](https://www.sas.rochester.edu/mth/people/faculty/gonek-steve/assets/pdf/8-landau-form.pdf)
 
+The rectangular contour separates the estimates that enter the uniform formula. With $x=e^{|t|}$, the first term of the right-edge bound after division by $\sqrt{x}$ is $O(V)$ because $\log(2x)/\sqrt{x}$ is bounded for $x>1$.
+
+::: {.theorem #thm-ch34-landau-right-edge title="Right vertical edge of the Landau contour" lean="D5/S3/Weil/ZetaExplicit/LandauRightVertical.norm_right_vertical_integral"}
+For real $x,V>1$, put $c=1+1/\log(3x)$. Write $s=c+iu$ for the integration variable $u$. Then
+
+$$
+\left|\int_1^V x^{s}\frac{-\zeta'(s)}{\zeta(s)}\,du\right|
+\le 400\left(V\log(2x)+x(\log(2x))^2\right).
+$$
+:::
+
+::: proof
+Integrate the von Mangoldt series term by term on $\operatorname{Re}s=c>1$. Bound the nearest integer term by the interval length, which also covers exact resonance. When the nearest integer is $1$, its coefficient $\Lambda(1)$ vanishes. For the other integers in $[x/2,2x]$, the logarithmic gap $|\log x-\log n|$ is at least $|x-n|/(2x)$. Two harmonic sums bound the reciprocal distances on either side of the nearest integer. Beyond this interval the gap is at least $1/2$, and an integral test bounds the absolute series. The moving line gives $x^c\le 3x$. The full proof is checked by the Lean kernel.
+:::
+
+The right edge is oriented upward, so $ds=i\,du$. Its contribution to the contour integral of $\zeta'/\zeta$ with normalization $1/(2\pi i)$ equals the integral in the theorem multiplied by $-1/(2\pi)$. Ford and Zaharescu keep the oscillatory term at the nearest prime power. The theorem bounds the magnitude of the whole edge. After division by $\sqrt{x}$, the second term has order $e^{|t|/2}(1+|t|)^2$. Formalizing the full zero-sum formula still requires the other contour edges, the residues, and a transfer from heights avoiding zeros to arbitrary cutoffs. [Ford–Zaharescu, proof of Lemma 1](https://arxiv.org/abs/math/0405459v2)
+
 For fixed $b>0$, the four terms in brackets are together at most $(7+1/b)T$ on $b/\log T\le|t|\le\log T$ when $T$ is sufficiently large and $1<V\le T$. Indeed $\log T\le T^{1/4}$ eventually, $e^{|t|/2}\le\sqrt T$, and $\log V/|t|\le(\log T)^2/b$. Apply this to $V=T$ and $V=3T/4$. Their difference has norm at most $2C(7+1/b)T$, which is eventually at most $T\log T/(32\pi)$. The multiplicity count on $(3T/4,T]$ is at least $T\log T/(16\pi)$.
 
 On this band the harmonic weights dominate the retained weights $m_\gamma/(2T)$. The remaining weights are nonnegative, so the norm of their score is at most their total mass. The triangle inequality therefore preserves the retained deficit, which is at least half the band count divided by $2T$. The mass bound $W(T)\le(\log T)^2/(2\pi)$ now gives

@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "973e7866b17003e1cc3d1949fac5cd5f3c796baa",
-  "pinned_at": "2026-11-26T06:07:02Z",
+  "commit": "2d6bf32ffe344031b86e183ad05883d5fc40d904",
+  "pinned_at": "2026-11-26T07:23:41Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -13459,7 +13459,7 @@
       "module": "D5/S3/Weil/Mertens/WeightedPrimeLimit",
       "name": "D5.S3.Weil.Mertens.WeightedPrimeLimit.chebyshev_error_kernel_integrable",
       "kind": "theorem",
-      "statement_id": "sha256:c97f09daa3d15ec358d3dbcbb7efc138a02356c8382716dcfa32939c5a2bf41d",
+      "statement_id": "sha256:01676eed1b59d4817b91d673b8822cb977c8195a4c9185fb02aa61f2d3113259",
       "line": 24,
       "signature": "theorem chebyshev_error_kernel_integrable : IntegrableOn (fun u : ℝ => (Chebyshev.psi u - u) / u ^ 2) (Ioi 1)"
     },
@@ -13736,6 +13736,19 @@
       "statement_id": "sha256:0c230a6759a124696a2512db419424da8cec03eefde3f5514acdc29e7f51bce3",
       "line": 143,
       "signature": "theorem golden_right_half_strip_implies_rh (hRight : forall rho : Complex, riemannZeta rho = 0 -> (1 : Real) / 2 < rho.re -> rho.re < 1 -> False) : RiemannHypothesis"
+    },
+    "D5/S3/Weil/ZetaExplicit/LandauRightVertical.norm_right_vertical_integral": {
+      "module": "D5/S3/Weil/ZetaExplicit/LandauRightVertical",
+      "name": "D5.S3.Weil.ZetaExplicit.LandauRightVertical.norm_right_vertical_integral",
+      "kind": "theorem",
+      "statement_id": "sha256:41ec99a99ad739eaba8c2f5ffcb0f081a4b667271fbad53a28d02b7cca07712d",
+      "line": 279,
+      "signature": "theorem norm_right_vertical_integral {x V : ℝ} (hx : 1 < x) (hV : 1 < V) : let c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Weil/ZetaPntBounds/MobiusEnergyPointwise.unweighted_mobius_prefix_power_bound": {
       "module": "D5/S3/Weil/ZetaPntBounds/MobiusEnergyPointwise",

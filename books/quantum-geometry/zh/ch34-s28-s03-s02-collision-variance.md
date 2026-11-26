@@ -515,6 +515,23 @@ $$
 $$
 文献中的 Gonek 统一 Landau 公式给出这一前提。取 $x=e^{|t|}$，在 RH 下将零点和除以 $\sqrt{x}$ 得到 $F_V(|t|)$。由 $\Lambda(x)\le\log x$ 及误差项中以 $V$ 截断的最小值，主项和邻近素数幂的误差都可由常数乘 $V|t|e^{-|t|/2}$ 控制。其余三项来自两个含 $x$ 的误差和 $x\to1$ 时的误差。复共轭给出负时间的估计。[Gonek，定理 1，式 (3)，第 92–93 页](https://www.sas.rochester.edu/mth/people/faculty/gonek-steve/assets/pdf/8-landau-form.pdf)
 
+统一公式可以按矩形轮廓的各条边分别验证。取 $x=e^{|t|}$ 时，右竖边界中随高度增长的项在除以 $\sqrt{x}$ 后由 $O(V)$ 控制，因为 $\log(2x)/\sqrt{x}$ 在 $x>1$ 上有界。
+
+::: {.theorem #thm-ch34-landau-right-edge title="Landau 轮廓的右竖边界" lean="D5/S3/Weil/ZetaExplicit/LandauRightVertical.norm_right_vertical_integral"}
+对实数 $x,V>1$，取 $c=1+1/\log(3x)$。对积分变量 $u$ 记 $s=c+iu$，则
+
+$$
+\left|\int_1^V x^{s}\frac{-\zeta'(s)}{\zeta(s)}\,du\right|
+\le 400\left(V\log(2x)+x(\log(2x))^2\right).
+$$
+:::
+
+::: proof
+在 $\operatorname{Re}s=c>1$ 处逐项积分 von Mangoldt 级数。最接近 $x$ 的整数项由区间长度控制，即使频率恰为零也成立。若最近整数为 $1$，其系数 $\Lambda(1)$ 为零。对 $[x/2,2x]$ 内其余整数，频率差的绝对值 $|\log x-\log n|$ 至少为 $|x-n|/(2x)$。按最近整数左右分别对倒数距离求和，由两段调和和控制。在该区间外频率差的绝对值至少为 $1/2$，用积分判别控制绝对级数。最后利用 $x^c\le 3x$。完整证明由 Lean 内核检查。
+:::
+
+右竖边向上取向，$ds=i\,du$，因此 $\zeta'/\zeta$ 的轮廓积分乘以 $1/(2\pi i)$ 后，这条边的贡献等于上式积分乘以 $-1/(2\pi)$。Ford 与 Zaharescu 保留最近素数幂的振荡项。这里估计的是整条边的模长。除以 $\sqrt{x}$ 后，右边第二项给出统一估计中的 $e^{|t|/2}(1+|t|)^2$ 量级。要在 Lean 中得到整个零点和公式，还需要其余轮廓边、留数以及从避开零点的高度转移到任意截断。 [Ford–Zaharescu，引理 1 的证明](https://arxiv.org/abs/math/0405459v2)
+
 固定 $b>0$。对充分大的 $T$，在 $b/\log T\le|t|\le\log T$ 且 $1<V\le T$ 时，括号内四项合计至多为 $(7+1/b)T$。这是因为最终有 $\log T\le T^{1/4}$，且 $e^{|t|/2}\le\sqrt T$、$\log V/|t|\le(\log T)^2/b$。将界分别用于 $V=T$ 和 $V=3T/4$，两者之差的模长至多为 $2C(7+1/b)T$，最终至多为 $T\log T/(32\pi)$。而 $(3T/4,T]$ 内的解析重数计数至少为 $T\log T/(16\pi)$。
 
 该区间内调和权重逐项大于等于保留权重 $m_\gamma/(2T)$。剩余权重非负，其得分模长至多是其总质量。由三角不等式，原得分的亏损至少是保留部分的亏损，即至少为区间计数的一半再除以 $2T$。结合 $W(T)\le(\log T)^2/(2\pi)$，得到
