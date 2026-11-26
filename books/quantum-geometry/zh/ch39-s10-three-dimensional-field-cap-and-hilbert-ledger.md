@@ -231,6 +231,25 @@
 第 1 款显式构造第一比安基映射与里奇迹映射的线性右逆（`bianchi_right_inverse`、`ricci_right_inverse`），通过秩—零度定理直接算出任意 $D \ge 3$ 的代数曲率与外尔维数闭式，并由 $D - 3 > 0 \iff D \ge 4$ 锁死非退化传播下界；对屏幕潮汐直接消去里奇截面迹贡献即得外尔不变性。第 2 款将实 $p$-级数收敛判据应用于指数 $7 - D > 1 \iff D \le 5$，并用比较判别法推广至任意双边可比非负角迹序列。第 3 款由前两款将维数夹逼至 $\{4, 5\}$，再由 `Even D` 或 $D - 2 = 2$ 排除 $D = 5$ 唯一锁死 $D = 4$，并在 $D = 4$ 上逐分量核对与 `WeylNullScreen` 的维数与里奇一致性。完整证明由 Lean 内核检查。
 :::
 
+同样，在复合量子账本为什么必须基于复数 $\mathbb{C}$ 而非实数 $\mathbb{R}$ 或四元数 $\mathbb{H}$（即局域层析完备性公设）这一基础问题上，内核现已给出严格的可除代数维数三分法、复张量积完备性以及实量子力学显式局部不可区分正定态反例：
+
+::: {.theorem #thm-ch39-complex-local-tomography-selection title="实/复/四元数厄米空间维数三分法、局域层析唯一选复定理与实量子力学双比特盲区见证" lean="D5/S3/Quantum/Gauge/ComplexLocalTomography.finrank_realHermitian, D5/S3/Quantum/Gauge/ComplexLocalTomography.finrank_complexHermitian, D5/S3/Quantum/Gauge/ComplexLocalTomography.finrank_quaternionHermitian, D5/S3/Quantum/Gauge/ComplexLocalTomography.division_algebra_local_tomography_selection, D5/S3/Quantum/Gauge/ComplexLocalTomography.tensorHermBasis_apply, D5/S3/Quantum/Gauge/ComplexLocalTomography.span_tensor_hermitian, D5/S3/Quantum/Gauge/ComplexLocalTomography.W_symmetric, D5/S3/Quantum/Gauge/ComplexLocalTomography.blind_spot_trace, D5/S3/Quantum/Gauge/ComplexLocalTomography.real_density_blind_spot"}
+在有限维实、复与四元数自伴矩阵空间 $\operatorname{Herm}_n(\mathbb{F})$（$\mathbb{F} \in \{\mathbb{R}, \mathbb{C}, \mathbb{H}\}$）上：
+
+1. **三类可除代数厄米空间的精确实维数**（[`finrank_realHermitian`](lean:D5/S3/Quantum/Gauge/ComplexLocalTomography.finrank_realHermitian)、[`finrank_complexHermitian`](lean:D5/S3/Quantum/Gauge/ComplexLocalTomography.finrank_complexHermitian)、[`finrank_quaternionHermitian`](lean:D5/S3/Quantum/Gauge/ComplexLocalTomography.finrank_quaternionHermitian)）：对任意 $n \in \mathbb{N}$，有
+   $$
+   \dim_{\mathbb{R}}\operatorname{Herm}_n(\mathbb{R}) = \frac{n(n+1)}{2}, \qquad
+   \dim_{\mathbb{R}}\operatorname{Herm}_n(\mathbb{C}) = n^2, \qquad
+   \dim_{\mathbb{R}}\operatorname{Herm}_n(\mathbb{H}) = n(2n - 1).
+   $$
+2. **复合维数乘法性唯一选中复数 $\mathbb{C}$ 与复张量基完备性**（[`division_algebra_local_tomography_selection`](lean:D5/S3/Quantum/Gauge/ComplexLocalTomography.division_algebra_local_tomography_selection)、[`tensorHermBasis_apply`](lean:D5/S3/Quantum/Gauge/ComplexLocalTomography.tensorHermBasis_apply)、[`span_tensor_hermitian`](lean:D5/S3/Quantum/Gauge/ComplexLocalTomography.span_tensor_hermitian)）：对所有非平凡子系统维数 $m, k \ge 2$，实数严格维数溢出（$d_{\mathbb{R}}(m)d_{\mathbb{R}}(k) < d_{\mathbb{R}}(mk)$）、复数精确乘法相等（$d_{\mathbb{C}}(mk) = d_{\mathbb{C}}(m)d_{\mathbb{C}}(k)$）、四元数严格维数不足（$d_{\mathbb{H}}(mk) < d_{\mathbb{H}}(m)d_{\mathbb{H}}(k)$）；并且复局域厄米可观测量的克罗内克乘积张满整个复合厄米空间 $\operatorname{Herm}_{mk}(\mathbb{C})$。
+3. **实量子力学的显式正定局部不可区分盲区**（[`W_symmetric`](lean:D5/S3/Quantum/Gauge/ComplexLocalTomography.W_symmetric)、[`blind_spot_trace`](lean:D5/S3/Quantum/Gauge/ComplexLocalTomography.blind_spot_trace)、[`real_density_blind_spot`](lean:D5/S3/Quantum/Gauge/ComplexLocalTomography.real_density_blind_spot)）：反对称辛阵张量积 $W = J_2 \otimes J_2$ 为实对称阵，且与一切实局部对称乘积 $A \otimes B$ 迹正交（$\operatorname{Tr}((A \otimes B)W) = 0$）；由此构造的两个互异正定、迹为 $1$ 的实密度矩阵 $\rho_\pm = \frac{1}{4} I_4 \pm \frac{1}{16}(J_2 \otimes J_2)$ 在一切实局域可观测量乘积下期望值完全相同，从而实量子力学必然违反局域层析完备性。
+:::
+
+::: proof
+第 1 款在矩阵上三角与对角指标上显式构造 $\mathbb{R},\mathbb{C},\mathbb{H}$ 三套实线性基并直接计数其基数。第 2 款在 $m, k \ge 2$ 下作整式不等式比较锁定唯一乘法相等的 $\mathbb{C}$，并借显式 `tensorHermBasis` 证明克罗内克积像集张成全复合复厄米空间。第 3 款利用反对称阵 $J_2$ 对任意实对称阵 $A$ 满足 $\operatorname{Tr}(A J_2) = 0$ 与克罗内克迹乘法性导出 $\operatorname{Tr}((A\otimes B)W) = 0$，并在 $\operatorname{Fin} 4$ 上直接检验 $\rho_\pm$ 的正定性、单位迹与互异性。完整证明由 Lean 内核检查。
+:::
+
 而关于 [@thm-ch39-hilbert-concept-ledger-and-3d-cap] 第 3 款的连续傅里叶时频截断算子 $P_R Q_W P_R$ 迹恒等式，连同视觉三原色、外微分霍奇星算子、可除代数分类、标度共形李代数及量子态球公理重构，则一并归属下方经典文献注记：
 
 ::: {.remark #rem-ch39-von-neumann-grassmann-hodge-hurwitz-literature title="冯·诺依曼算子空间、格拉斯曼三原色与比较视觉生态、霍奇对偶、胡尔维茨可除代数、时频集中度、共形标度代数及三维布洛赫重构文献归属（文献结果，未在本书形式化）"}
