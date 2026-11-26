@@ -43,7 +43,7 @@ $$
 0.963278306636895970 \;\le\; F(5) \;\le\; 0.963278478925447241
 $$
 
-之间。向下读取 $22$ 位二进制小数，任何合法配置永远吐出整数码 `4040282`，而参考目标 $T_5$ 稳居 `4040283`；在精确味驻点处，前五项的最大绝对误差必大于 $2.53705 \times 10^{-10}$。即便放宽四项时间各容忍 $2^{-33}$、味驻点导数容忍 $2^{-38}$，两者依然分离；把全部五项时间放进等宽二进制格中同时核对，统一精度停在 $30$ 位时尚有真实三窗零点解，一旦提高到 **$31$ 位**便全域排除——此时第五项至少偏离 $45.57$ 个格宽，五项最小最大绝对误差的下确界约为 **$2.5597450743 \times 10^{-10}$**（详见复算总表 [`README.md`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/README.md)）。
+之间。向下读取 $22$ 位二进制小数，任何合法配置永远吐出整数码 `4040282`，而参考目标 $T_5$ 稳居 `4040283`；在精确味驻点处，前五项的最大绝对误差必大于 $2.53705 \times 10^{-10}$。即便放宽四项时间各容忍 $2^{-33}$、味驻点导数容忍 $2^{-38}$，两者依然分离；把全部五项时间放进等宽二进制格中同时核对，统一精度停在 $30$ 位时尚有真实三窗零点解，一旦提高到 **$31$ 位**便全域排除——此时第五项至少偏离 $45.57$ 个格宽，五项最小最大绝对误差的下确界约为 **$2.5597450743 \times 10^{-10}$**（详见复算总表 [`README.md`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/README.md)）。
 
 如果我们允许味侧读出效率随零点背景变化——让算术概率 $p$ 与味概率 $\nu$ 之间相差一个正效率因子 $\eta_\gamma$——僵局随即破开一道窄缝，但自然界给出的通行票价高得惊人：同时精确复现前五项时间并守住参考味驻点，所需的最小效率倍率（最大效率与最小效率之比）的下确界恰为 **$18.49684338\ldots$**。恰在此时，十九点中性贝伦德球壳展现出非凡的契合度：中性壳拉普拉斯算子 $L_\gamma$ 拥有一条精确零模与十八条正模，其预解式迹 $\eta_\gamma = x \operatorname{tr}(x I + L_\gamma)^{-1}$ 在 $x \to 0$ 时趋近 $1$、在 $x \to \infty$ 时趋近 $19$，恰好以微弱余量越过 $18.49684\ldots$ 这道门槛（反观三零模带荷扇区，其同类迹的最大倍率永远低于 $19/3$，直接出局）。
 
@@ -59,7 +59,7 @@ $$
 
 检验一座理论框架是否真有筋骨，最好的办法从来不是回看它已经配平的六个数字，而是把这六个数字锁进虎钳，逼它吐出**第七个尚未看过的留出读数**。固定共同二次预解式钟（[@def-ou-ch12-shared-clock]），令前五项精确等于参考值 $T_1, \dots, T_5$、第六项等于预设输入 $T_6 + 1.360900010 \times 10^{-8}$，现在问：**所有兼容的谱权测度 $p$ 在第七项 $F(7)$ 上究竟还能晃动多少？**
 
-答案由经典矩问题与高斯–拉道（Gauss–Radau）求积精确给出（复算脚本见 [`ch39-shared-clock-checks.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-shared-clock-checks.py)，完整书面论证见 [`ch39-共同算术钟的三项检验.md`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-%E5%85%B1%E5%90%8C%E7%AE%97%E6%9C%AF%E9%92%9F%E7%9A%84%E4%B8%89%E9%A1%B9%E6%A3%80%E9%AA%8C.md)）。引入分母多项式
+答案由经典矩问题与高斯–拉道（Gauss–Radau）求积精确给出（复算脚本见 [`ch39-shared-clock-checks.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-shared-clock-checks.py)，完整书面论证见 [`ch39-共同算术钟的三项检验.md`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-%E5%85%B1%E5%90%8C%E7%AE%97%E6%9C%AF%E9%92%9F%E7%9A%84%E4%B8%89%E9%A1%B9%E6%A3%80%E9%AA%8C.md)）。引入分母多项式
 
 $$
 D(y) \;=\; \prod_{j=2}^6 \bigl(1 + (j^2 - 1) y\bigr), \qquad d\sigma(y) \;=\; \frac{dp(y)}{D(y)}.
@@ -100,7 +100,7 @@ $$
 B \;=\; [3.8, 4.5] \times 10^{10} \;\cup\; [7, 10] \times 10^{10} \;\cup\; [10^{12}, \infty).
 $$
 
-利用有理非负多项式 $G(y) = y(y - 0.001212594)^2 (y - 0.004902081)^2 (1 - y + 4 \times 10^{-9} y)$ 与截点 $t = u(10^{12}, A_-)$（其中 $u(h, a) = [1 + (h/a)^2]^{-1}$），设 $N(y) = D(t) G(y) / G(t)$，复算脚本 [`ch39-six-time-height-bands.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-six-time-height-bands.py) 在覆盖补集 $B^c$ 像的三段闭区间上逐一核验六次多项式 $N - D(1 + 18 y)/(1 + 18 t)$ 的全部七个伯恩斯坦（Bernstein）系数非负。由此得到 $p(B^c) \le \mathbb{E}_p[N/D]$ 与 $\nu(B^c) \le (1 + 18 t)\mathbb{E}_p[N/D]$，再把 $N/D$ 精确展开为 $c_0 + \sum_{j=1}^6 c_j k_j(y)$，即可将误差预算 $\varepsilon_j$ 的总增量直接控制为 $\sum_j |c_j|\varepsilon_j$。下表汇总了不同误差容限下的严格质量下界：
+利用有理非负多项式 $G(y) = y(y - 0.001212594)^2 (y - 0.004902081)^2 (1 - y + 4 \times 10^{-9} y)$ 与截点 $t = u(10^{12}, A_-)$（其中 $u(h, a) = [1 + (h/a)^2]^{-1}$），设 $N(y) = D(t) G(y) / G(t)$，复算脚本 [`ch39-six-time-height-bands.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-six-time-height-bands.py) 在覆盖补集 $B^c$ 像的三段闭区间上逐一核验六次多项式 $N - D(1 + 18 y)/(1 + 18 t)$ 的全部七个伯恩斯坦（Bernstein）系数非负。由此得到 $p(B^c) \le \mathbb{E}_p[N/D]$ 与 $\nu(B^c) \le (1 + 18 t)\mathbb{E}_p[N/D]$，再把 $N/D$ 精确展开为 $c_0 + \sum_{j=1}^6 c_j k_j(y)$，即可将误差预算 $\varepsilon_j$ 的总增量直接控制为 $\sum_j |c_j|\varepsilon_j$。下表汇总了不同误差容限下的严格质量下界：
 
 | 误差假设条件（基准共同尺度 $A = 2{,}903{,}600{,}000$） | 算术概率下界 $p(B)$ | 中性味概率下界 $\nu(B)$ |
 | --- | ---: | ---: |

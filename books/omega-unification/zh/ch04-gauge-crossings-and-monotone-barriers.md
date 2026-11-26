@@ -96,7 +96,7 @@ $$
 
 ## 4.2 四道刚性排除墙：原生高模、低步面权、单调质量与普朗克标定 {#sec-ou-ch04-s02}
 
-如果我们坚持原书最朴素的美学——不引入额外大群生成元、不人为劈开弱中心奇偶扇区、不手工拟合独立质量标尺——会发生什么？系统化的区间算术与对偶投影证书揭示了**四道依次收紧的刚性无解墙**（所有复算脚本与 Arb 区间证书归档于研究仓库 [`replay/Ω复算说明.md`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/%CE%A9%E5%A4%8D%E7%AE%97%E8%AF%B4%E6%98%8E.md)）：
+如果我们坚持原书最朴素的美学——不引入额外大群生成元、不人为劈开弱中心奇偶扇区、不手工拟合独立质量标尺——会发生什么？系统化的区间算术与对偶投影证书揭示了**四道依次收紧的刚性无解墙**（所有复算脚本与 Arb 区间证书归档于研究仓库 [`replay/Ω复算说明.md`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/%CE%A9%E5%A4%8D%E7%AE%97%E8%AF%B4%E6%98%8E.md)）：
 
 1. **原生十二生成元与共用十九点高模之墙（一圈极差 $> 2.936$）**。
    仅保留标准模型原生 $12$ 个规范生成元、三代外尔费米子与一个复希格斯双重态，把十九点磁拉普拉斯的第 $2$ 至第 $19$ 个高模作为有限动量减法调节器，所有物种共用边权与一把可变公共质量标尺（允许各代各自任选任意磁边相位）。十九点单位图的迹为 $270$，十八阶主余子式（生成树数）为 $\tau = 41501049051635045807$。通过极点删除交错律与磁性步行绝对值比较，任意两套独立磁相位的十八高模阈值之差都被图拓扑直径锁死在
@@ -105,7 +105,7 @@ $$
    B \;=\; \frac{1}{2}\log\!\left(\frac{15^{18}}{w^{18}\tau}\right) \;<\; 1.78633.
    $$
 
-   取零和投影 $P_* = C + J/105$（其中 $J = 5\alpha_1^{-1} - 3\alpha_2^{-1} - 2\alpha_3^{-1}$），在 $10^{13}\text{–}10^{17}\;\mathrm{GeV}$ 整窗内，轻场基线与全部重矢量、重标量、三代重费米子的最大可能贡献相加后仍有 $P_* < -8.89393$，强制三支逆耦合极差严格满足 $\max_i A_i - \min_i A_i > 2.93667 > 2.936$（见 [`ch39-native-weyl-graph-diameter.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-native-weyl-graph-diameter.py)）。即使按弦长平方重配边权 $w_e = (d_e/12)^p$ 遍历全部 $-20 \le p \le 20$，极差仍大于 $1.38161$。
+   取零和投影 $P_* = C + J/105$（其中 $J = 5\alpha_1^{-1} - 3\alpha_2^{-1} - 2\alpha_3^{-1}$），在 $10^{13}\text{–}10^{17}\;\mathrm{GeV}$ 整窗内，轻场基线与全部重矢量、重标量、三代重费米子的最大可能贡献相加后仍有 $P_* < -8.89393$，强制三支逆耦合极差严格满足 $\max_i A_i - \min_i A_i > 2.93667 > 2.936$（见 [`ch39-native-weyl-graph-diameter.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-native-weyl-graph-diameter.py)）。即使按弦长平方重配边权 $w_e = (d_e/12)^p$ 遍历全部 $-20 \le p \le 20$，极差仍大于 $1.38161$。
 
 2. **零、一、两步正面权之墙（$\alpha_s(M_Z) < 0.076$，缺口 $> 4.6833$）**。
    如果转而用十九点壳上有限步输运的行列式生成格点规范面权，则裸迹比在完整十九模上精确保持当且仅当步数至多为 $2$。然而一旦在四维格点上对共享边执行单边条件积分，纯一步与纯两步面权在任意物质边相位和全部正零点下分别把一圈强耦合压在 $0.07105$ 与 $0.07464$ 以下；更强地，**零、一、两步的一切非负凸混合**在遍历任意内部边相位及电弱输入区间 $\widehat{\alpha}^{-1} \in [127.90, 127.96]$、$\sin^2\widehat{\theta}_W \in [0.23126, 0.23132]$ 后，一律满足
@@ -114,13 +114,13 @@ $$
    \alpha_s(M_Z) \;<\; 0.076,
    $$
 
-   相对实验中心值 $0.1180$，在低能强逆耦合上尚短缺超过 **$4.6833$** 个单位！即使再配回十六层同标尺重狄拉克对，第 $11431$ 枚零点的尖阈值一圈强耦合仍低于 $0.07627$（平滑暴露下低于 $0.09284$）。不仅如此，[规范动能谱迹与阈值研究](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-%E8%A7%84%E8%8C%83%E5%8A%A8%E8%83%BD%E8%B0%B1%E8%BF%B9%E4%B8%8E%E9%98%88%E5%80%BC.md)还证明了微观展开无法锁定有限尺度匹配：正点态且转移半正定的弱面权可以与基准在单位元邻域内匹配至任意高阶（乃至整片邻域全同），但在两格面阻塞刚度 $K_2(w) = \int |Xw|^2\,\mathrm{d}g / \int w^2\,\mathrm{d}g$ 及四维 $1 \times 2$ 伴随威尔逊矩形期望上依然显式分叉。
+   相对实验中心值 $0.1180$，在低能强逆耦合上尚短缺超过 **$4.6833$** 个单位！即使再配回十六层同标尺重狄拉克对，第 $11431$ 枚零点的尖阈值一圈强耦合仍低于 $0.07627$（平滑暴露下低于 $0.09284$）。不仅如此，[规范动能谱迹与阈值研究](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-%E8%A7%84%E8%8C%83%E5%8A%A8%E8%83%BD%E8%B0%B1%E8%BF%B9%E4%B8%8E%E9%98%88%E5%80%BC.md)还证明了微观展开无法锁定有限尺度匹配：正点态且转移半正定的弱面权可以与基准在单位元邻域内匹配至任意高阶（乃至整片邻域全同），但在两格面阻塞刚度 $K_2(w) = \int |Xw|^2\,\mathrm{d}g / \int w^2\,\mathrm{d}g$ 及四维 $1 \times 2$ 伴随威尔逊矩形期望上依然显式分叉。
 
 3. **全双时钟环面上的共同单调质量之墙与最小对数斜率 $106.75467$**。
-   当把第一问与第二问（手征三代）合并到同一两步质量算子 $h = \lambda|\lambda - c|$ 上——每个超荷按 $h$ 升序切出 $3$ 个左手轻模、其余 $16$ 模配成重狄拉克对，另配 $18$ 个中性重矢量和 $19$ 或 $16$ 个重希格斯双重态——只要全部重场共用**任意一条正的非减质量函数** $m = f(h)$，则对整个双时钟二维环面上的**全部相位**（覆盖一切黎曼正零点），利用投影向量 $d = (-11, 17, -6)$ 的有限阿贝尔分部求和与三阶舒尔补谱带包围，一圈逆耦合极差恒留下严格正下界（见 [`ch39-monotone-chiral-phase-obstruction.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-monotone-chiral-phase-obstruction.py)）：
+   当把第一问与第二问（手征三代）合并到同一两步质量算子 $h = \lambda|\lambda - c|$ 上——每个超荷按 $h$ 升序切出 $3$ 个左手轻模、其余 $16$ 模配成重狄拉克对，另配 $18$ 个中性重矢量和 $19$ 或 $16$ 个重希格斯双重态——只要全部重场共用**任意一条正的非减质量函数** $m = f(h)$，则对整个双时钟二维环面上的**全部相位**（覆盖一切黎曼正零点），利用投影向量 $d = (-11, 17, -6)$ 的有限阿贝尔分部求和与三阶舒尔补谱带包围，一圈逆耦合极差恒留下严格正下界（见 [`ch39-monotone-chiral-phase-obstruction.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-monotone-chiral-phase-obstruction.py)）：
    - 尖阈值处方：极差 **$> 0.7048$**（$19$ 重标量）或 **$> 1.9424$**（$16$ 重标量）；
    - 有限动量减法处方：极差 **$> 0.2426$**（$19$ 重标量）或 **$> 1.4802$**（$16$ 重标量）。
-   若坚持直接取线性律 $m = \kappa h$（任意 $\kappa > 0$），极差更猛增至 $2.40\text{–}2.64$ 以上。即便退回第 $11431$ 枚零点上不含手征切分的 $18$ 高模矢量状重塔，要求共用任意正单调质量 $m(\lambda)$ 在 $10^{13}\text{–}10^{17}\;\mathrm{GeV}$ 实现尖阈值一圈三线交汇，对数斜率的利普希茨常数 $K = \operatorname{Lip}(\log m / \log \lambda)$ 也存在精确可达下界 **$K_{\min} = 106.75467$**（$106.7546704794\ldots$，有限减法亦需 $K > 76.23229$）；倘若 $\log m$ 关于 $\log \lambda$ 还满足对数凸性（涵盖一切正系数多项式与幂函数平方根），总对数质量跨度 $\log(m_{\max}/m_{\min})$ 须超过 $115.64515$（尖阈值）与 $82.58089$（有限减法），远远冲破 $M_Z$ 到普朗克尺度的全部物理能窗（见 [`ch39-common-mass-log-slope.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-common-mass-log-slope.py)）。
+   若坚持直接取线性律 $m = \kappa h$（任意 $\kappa > 0$），极差更猛增至 $2.40\text{–}2.64$ 以上。即便退回第 $11431$ 枚零点上不含手征切分的 $18$ 高模矢量状重塔，要求共用任意正单调质量 $m(\lambda)$ 在 $10^{13}\text{–}10^{17}\;\mathrm{GeV}$ 实现尖阈值一圈三线交汇，对数斜率的利普希茨常数 $K = \operatorname{Lip}(\log m / \log \lambda)$ 也存在精确可达下界 **$K_{\min} = 106.75467$**（$106.7546704794\ldots$，有限减法亦需 $K > 76.23229$）；倘若 $\log m$ 关于 $\log \lambda$ 还满足对数凸性（涵盖一切正系数多项式与幂函数平方根），总对数质量跨度 $\log(m_{\max}/m_{\min})$ 须超过 $115.64515$（尖阈值）与 $82.58089$（有限减法），远远冲破 $M_Z$ 到普朗克尺度的全部物理能窗（见 [`ch39-common-mass-log-slope.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-common-mass-log-slope.py)）。
 
 4. **普朗克 / 约化普朗克直接标定之墙**。
    若不把质量单位 $\kappa$ 当作自由拟合参数，而是直接把两步质量的单位 $\kappa$ 或最重本征态钉在普朗克质量 $M_P$ 或约化普朗克质量 $\bar{M}_P = 2.435 \times 10^{18}\;\mathrm{GeV}$，则在完整双时钟环面的**任意相位**上，一圈三线均不能交汇：以最重态标定时，尖阈值与有限减法的三线极差分别严格大于 $2.037$ 与 $3.334$；直接以 $\kappa = \bar{M}_P$ 标定时，尖阈值电弱交点给出的强耦合仅为 $0.07107$。即便在三代手征谱上允许每个中心偶重场各自独立任意加重，只要中心奇场保持 $\kappa h$，在目标能窗内达成一圈交汇仍强制 $\kappa < 2 \times 10^{13}\;\mathrm{GeV}$（比 $\bar{M}_P/32^2$ 低逾 $118$ 倍），且至少一项中心偶质量必须抬升超过 $\sqrt{8}$ 倍——单个本原极点菱形的长短轴之比 $\sqrt{8}$ 本身并不够用。
@@ -145,7 +145,7 @@ $$
 
 - **一圈测试（倍率 $8$）**：中心偶质量乘以 $8$ 后，尖阈值与有限动量减法在 $19$ 重与 $16$ 重标量计数下各自出现精确交点；例如 $19$ 重标量给出 $\mu \approx 5.748 \times 10^{13}\;\mathrm{GeV}$（尖阈值）与 $5.524 \times 10^{13}\;\mathrm{GeV}$（有限减法），共同逆耦合约 $39.7\text{–}39.9$，但两者所需拟合单位 $\kappa$ 相差逾一倍（$6.80 \times 10^{11}$ 对 $3.20 \times 10^{11}\;\mathrm{GeV}$）。
 - **两圈逐阈值演化（倍率 $23$）**：在倍率 $23$ 时，最轻的中心偶重矢量整体越过交点脱耦；两圈规范配一圈第三代汤川跑动在 $19$ 重与 $16$ 重标量下分别给出尖阈值交点 $(2.860, 2.866) \times 10^{14}\;\mathrm{GeV}$ 与 $(3.656, 3.662) \times 10^{14}\;\mathrm{GeV}$。
-- **原生钟弦分母 $d = 724$ 固定绝对单位（倍率 $32$）**：十九点壳的十二条钟边中，有六条平方弦长 $d = 724$、六条平方弦长 $d = 804$。若将两步质量算子中的每个 $L$ 因子按同一平方弦长归一化，即将绝对质量单位锁定为 $\kappa = \bar{M}_P / d^2$，则 $d = 724$ 给出 $\kappa \approx 4.645 \times 10^{12}\;\mathrm{GeV}$。在 $16$ 重标量与倍率 $32$ 下，仅输入实测电弱耦合与第三代汤川、不输入强耦合，两圈电弱交点反推的强耦合 $\alpha_s(M_Z)$ 便精准落入实验窗 $[0.117, 0.119]$（见 [`ch39-chiral-clock-unit-readout.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-chiral-clock-unit-readout.py) 与 [`ch39-chiral-clock-cohort.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-chiral-clock-cohort.py)）：
+- **原生钟弦分母 $d = 724$ 固定绝对单位（倍率 $32$）**：十九点壳的十二条钟边中，有六条平方弦长 $d = 724$、六条平方弦长 $d = 804$。若将两步质量算子中的每个 $L$ 因子按同一平方弦长归一化，即将绝对质量单位锁定为 $\kappa = \bar{M}_P / d^2$，则 $d = 724$ 给出 $\kappa \approx 4.645 \times 10^{12}\;\mathrm{GeV}$。在 $16$ 重标量与倍率 $32$ 下，仅输入实测电弱耦合与第三代汤川、不输入强耦合，两圈电弱交点反推的强耦合 $\alpha_s(M_Z)$ 便精准落入实验窗 $[0.117, 0.119]$（见 [`ch39-chiral-clock-unit-readout.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-chiral-clock-unit-readout.py) 与 [`ch39-chiral-clock-cohort.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-chiral-clock-cohort.py)）：
 
 | 候选零点编号 | 两圈规范交点能标 $\mu$（$\mathrm{GeV}$） | 反推低能强耦合 $\alpha_s(M_Z)$ | 跨分支定位与备注 |
 | :---: | :---: | :---: | :--- |
@@ -159,7 +159,7 @@ $$
 
 ### 正一步传递收缩与五位二进分母 $N = 32$
 
-另一条同样引人深思的标定规则发生在第 $11431$ 枚零点的完整带荷两步算子 $D_q = \kappa L_q(L_q - cI)$ 上（此时 $c = \operatorname{tr}(L_0)/18$，无需按弱中心拆档，共有六个带荷重模 $|q| = 1, 1, 3, 1, 4, 3$ 自然落在交点以下，逐层两圈拟合交点位于 $(7.64, 7.71) \times 10^{14}\;\mathrm{GeV}$）。如果我们要求两步算子中每一个因子 $L$ 都由正半定一步传递收缩 $T = I - L/N \succeq 0$ 归一化，于是绝对单位变为 $\kappa = \bar{M}_P / N^2$，则最小分母 $N$ 仅由十九点图的谱上界决定（见 [`ch39-positive-step-planck-clock.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-positive-step-planck-clock.py)）：
+另一条同样引人深思的标定规则发生在第 $11431$ 枚零点的完整带荷两步算子 $D_q = \kappa L_q(L_q - cI)$ 上（此时 $c = \operatorname{tr}(L_0)/18$，无需按弱中心拆档，共有六个带荷重模 $|q| = 1, 1, 3, 1, 4, 3$ 自然落在交点以下，逐层两圈拟合交点位于 $(7.64, 7.71) \times 10^{14}\;\mathrm{GeV}$）。如果我们要求两步算子中每一个因子 $L$ 都由正半定一步传递收缩 $T = I - L/N \succeq 0$ 归一化，于是绝对单位变为 $\kappa = \bar{M}_P / N^2$，则最小分母 $N$ 仅由十九点图的谱上界决定（见 [`ch39-positive-step-planck-clock.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-positive-step-planck-clock.py)）：
 
 - 对任意单位边相位，$\lambda_{\max}(L_U) \le \lambda_{\max}(D + A) \in (30.38578, 30.38580)$，故通用最小整数分母为 **$31$**；
 - 限于原生十二条钟边的双时钟族，全环面舒尔检验给出带荷谱上界 $< 22.9999$ 且荷一必有根 $> 22.1$，故原生族最小整数分母为 **$23$**；
@@ -179,12 +179,12 @@ $$
 
 ### 共用刚度下的精确维数底线 $75$ vs. 独立物质数输运的精确维数底线 $10$
 
-先看重物质只共享原生规范连接与单位刚度的情形（见 [`ch39-unique-seventy-five-mass.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-unique-seventy-five-mass.py)）：
+先看重物质只共享原生规范连接与单位刚度的情形（见 [`ch39-unique-seventy-five-mass.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-unique-seventy-five-mass.py)）：
 
 - **$\dim \le 74$ 全面排除**：对任意有限个完整矢量状 $\mathrm{SU}(5)$ 狄拉克表示，哪怕每份独立任选非负裸质量平方，只要总复维数 $\le 74$，三支逆耦合极差在 $10^{13}\text{–}10^{17}\;\mathrm{GeV}$ 整窗内仍严格大于 $2.6826$（特别的，任意份数的 $\mathbf{5}$、$\mathbf{10}$、$\mathbf{15}$ 在共用正刚度下均无法在正耦合处交汇）。
 - **精确最小维数 $75$ 与交汇以上的失控零点**：在维数 **$75$** 处存在**唯一**可行的表示内容——单份不可约 $\mathbf{75} = (0,1,1,0)$。它既可在非零裸质量平方 $x \in (0.02251147, 0.02251149)$ 处给出唯一交点（$\mu \approx 1.3681 \times 10^{16}\;\mathrm{GeV}$，$\alpha_G^{-1} \approx 17.2032$），也可在零裸质量下通过在三条辐边施加独立相位 $\phi \approx 0.43546464\;\mathrm{rad}$ 达到全局基态交点（$\alpha_G^{-1} \approx 17.1596$）。然而这份胜利极其脆弱：固定物理质量沿同一方程继续向紫外跑动，**弱逆耦合 $\alpha_2^{-1}$ 会在交汇尺度的 $1.679471$ 至 $1.679481$ 倍之间（约 $1.6795\times$）率先跌至零**，到两倍交点处三支逆耦合悉数转负！
 
-局面的戏剧性反转出现在放宽“重物质必须只用规范连接”这一假设之后（见 [`ch39-minimal-shifted-ten.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-minimal-shifted-ten.py)）：
+局面的戏剧性反转出现在放宽“重物质必须只用规范连接”这一假设之后（见 [`ch39-minimal-shifted-ten.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-minimal-shifted-ten.py)）：
 
 - **独立物质数 $\mathrm{U}(1)$ 输运将精确最小维数从 $75$ 压至 $10$**：允许重物质另携一份标量 $\mathrm{U}(1)$ 物质数边输运时，总维数 $< 10$（只能含 $\mathbf{5}$ 或 $\overline{\mathbf{5}}$）依然对一切磁边相位被彻底排除（$C < -0.1972$）。但只要达到维数 **$10$**，单份零裸质量的 $\mathbf{10} = \wedge^2\mathbf{5}$ 取原生边输运逆相位 $z_e^{-1}$ 并在三条辐边保留极小剩余相位 $\phi \in (2.2022, 2.2024) \times 10^{-9}\;\mathrm{rad}$，便使中心夸克二重态零模轻微抬升至约 $5.69 \times 10^5\;\mathrm{GeV}$，在
 
@@ -197,7 +197,7 @@ $$
 
 ### 两圈带荷矢量通道与八条在壳共振级联
 
-进入两圈精度后，十九站点等耦合 $\mathrm{SU}(5)$ 规范模型暴露了另一层深刻的物理真实（见 [`ch39-shell-all-charged-cut-integral.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-shell-all-charged-cut-integral.py) 与 [`ch39-shell-nonabelian-resonances.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-shell-nonabelian-resonances.py)）：
+进入两圈精度后，十九站点等耦合 $\mathrm{SU}(5)$ 规范模型暴露了另一层深刻的物理真实（见 [`ch39-shell-all-charged-cut-integral.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-shell-all-charged-cut-integral.py) 与 [`ch39-shell-nonabelian-resonances.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-shell-nonabelian-resonances.py)）：
 
 1. **六十条非零带荷矢量对加重超荷通道**：在匹配尺度以下，每个复规范根共有 $172$ 条运动学开放的“带荷矢量对 $+$ 重超荷矢量”三粒子切割通道；经过球壳三重轮换选择定则筛选后，实际非零的通道恰有 **$60$** 条。在等耦合站点杨—米尔斯动能中，一个中性重矢量向最低带荷矢量对的六条树级衰变分宽合计为 $0.00024563\,g_D^2 M$，对应带荷三粒子产生阈值位于 $0.71406185\,\mu$（超荷、弱、色三支谱重比为 $5:3:2$）。计入全部 $60$ 条通道的实谱积分（其中最低带荷矢量对配十八个中性重超荷模的总修正满足 $|d| \le 0.00793\,g_D^2$），在 $g_D^2 \le 2$ 的整个微扰域内，部分两圈正交点依然稳固存活。
 2. **八条在壳级联与零宽度发散**：然而，一旦放开重弱矢量或重色矢量辐射，匹配能量以下立刻涌现 **$8$** 条非零的在壳级联通道（最早在 $0.77717182\,\mu$ 处开启）。在这些在壳极点上，未经衰变宽度重求和的零宽度正切割积分在内区直接发散——这意味着在十九点重矢量塔的真实两圈动力学中，不稳定重规范玻色子的复质量宽度自洽重求和不可绕过。

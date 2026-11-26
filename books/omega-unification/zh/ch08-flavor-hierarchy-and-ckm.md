@@ -33,7 +33,7 @@ $$
 
 :::
 
-由此立刻落下第一道铁律（[三代轮换与混合推导](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-三代轮换与质子选择定则.md)）：
+由此立刻落下第一道铁律（[三代轮换与混合推导](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-三代轮换与质子选择定则.md)）：
 
 1. **未破缺轮换锁死置换型 CKM**：若一支希格斯双重态在轮换下只乘单一相位，且上下型汤川顶角均保持 $T$ 对称，则作用于共同左手代空间的厄米质量平方阵 $H_u = Y_u Y_u^*$ 与 $H_d = Y_d Y_d^*$ 均与 $T$ 对易（右手味旋转与希格斯相位在乘积中精确抵消）。两矩阵遂在 $T$ 的三条本征线上同时对角化。只要质量非简并，**不论三条边相位 $z_i$ 取何值，CKM 矩阵都只能是置换与相位的乘积**，绝无真实代际混合。
 2. **连通混合图的共同相位定理**：更一般地，只要上下夸克质量均非简并，任何同时保持 $H_u, H_d$ 的左手幺正变换在各自质量基中必为对角相位阵，记作 $d_i, e_j$，于是 $d_i V_{ij} = V_{ij} e_j$。一旦由非零 $V_{ij}$ 构成的二部图连通，所有相位必须完全相等——**在已混合的轻夸克上，任何精确左手对称都只能退化为世代共同的整体相位**。特别地，一个连续 $SU(2)$ 时钟若同时保持两套固定汤川，因 $SU(2)$ 的连续一维特征标全为平凡，它对轻夸克只能作平凡作用。
@@ -70,18 +70,18 @@ $$
 
 ### 8.2.1 单希格斯与任意密度势为何集体失灵
 
-每一行数字背后都有硬核的变分几何理由（复算证书见 [`ch39-positive-orbit-yukawa.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-positive-orbit-yukawa.py)、[`ch39-minimum-flavor-support.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-minimum-flavor-support.py) 与 [Ω 复算说明](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/Ω复算说明.md)）：
+每一行数字背后都有硬核的变分几何理由（复算证书见 [`ch39-positive-orbit-yukawa.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-positive-orbit-yukawa.py)、[`ch39-minimum-flavor-support.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-minimum-flavor-support.py) 与 [Ω 复算说明](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/Ω复算说明.md)）：
 
 - **单希格斯与重模脱耦势同水火**：在不外加味拟合系数的十九站点共享局域顶角下，前三轻希格斯模的任意复叠加都压不低粲顶比（$m_c/m_t > 0.0272$）。若硬把全部十九个希格斯分量都拉进来凑足上下型夸克整体范数比，至少要把希格斯真空期望平方范数的 **$99.858\%$** 倾泻到十六个重模上！对应的裸 Rayleigh 能标至少 $1.279 \times 10^{14}\,\mathrm{GeV}$，若要求该真空同时充当 $125.25\,\mathrm{GeV}$ 物理希格斯方向，原壳质量平方的厄米改动必须超过 **$2.015 \times 10^{28}\,\mathrm{GeV}^2$**（至少沿一方向负改动超 $1.63 \times 10^{28}\,\mathrm{GeV}^2$）——轻希格斯瞬间被重壳撕碎。即便只在右手夸克上加入任意共同非增拉普拉斯谱响应，两枚零点上的轻希格斯仍只能给出上下范数比 $< 1.557$。
 - **任意密度势的相位盲区**：任意仅依赖各站密度 $|h_i|^2$ 的势能（哪怕非凸、哪怕跨站耦合）对站点相对相位浑然不觉；在 #11431 上，任何能凑出实测顶底层级的剖面都在保密度相位变分方向上带有严格负曲率（二阶变分小于 $-0.006\|h\|^2$），因此永远无法成为局部极小，所有真正的局部真空都被压在 $m_t / m_b < 2.690$（齐次凸势下甚至 $< 1.796$）。这一障碍绝非 #11431 的孤例：在连续区间 $[10855, 12092]$ 的**全部 $1238$ 枚实际零点**上，经 $1231$ 份单点证书与另 $7$ 枚的 $180$ 个方向分区认证，荷三动能加任意密度势的非零局部真空逐枚严格满足 $m_t / m_b < 30$。即便把 #11431 的 $117$ 条非树边权压到千分之一做对照，也只有单独篡改希格斯动能才能调到 $60.80$；若五荷共用同一两档边权，密度势局部真空仍被压死在 $3$ 以下，且一切回路相位均为 $\pm 1$ 时上下型奇异值直接逐项相等！
 
 ### 8.2.2 输运顶角的反噬与最小站点支撑阶梯
 
-单腿一步平行输运完全不够力（至少一项质量比跌在参考下限的 $2.363\%$ 以下）。放大到三条腿各自在原场与一次邻边输运之间组合的八复系数顶角（[`ch39-minimal-product-transport.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-minimal-product-transport.py)），确实可以在单枚零点（#22027 或 #28325，最少需两项乘积输运项）上把九个带电费米子质量与完整 CKM 一网打尽。但它马上交出一张天价账单：任何满足参考范数比与顶质量窗的解，在重—重上型汤川块上的谱范数都必然超过 **$16.63$**（#28325 上超过 $16.68$），进而沿线性希格斯背景把既有重阈值的每色费米子质量四次迹二次项系数推高至 **$3.45 \times 10^{34}\,\mathrm{GeV}^2$ 以上**，直接掀翻[第六章](ch06-higgs-portals-and-electroweak-scale.md)的希格斯门户与[第十一章](ch11-induced-gravity-and-dark-energy.md)的真空配平！（虽然在每条费米子腿上叠加两次基于手征质量映射 $B$ 的有限有理响应，可把单枚零点上 $M_Z$ 至 $M_P$ 内的一圈真空增量压到暗能量基准密度的 $2.49 \times 10^{-9}$ 以下，但三枚候选 `#11661, #11934, #22027` 共用任意八系数时，六个部门质量比中至少一个仍低于参考下限的 **$98.7\%$**，跨零点障碍依然屹立。）
+单腿一步平行输运完全不够力（至少一项质量比跌在参考下限的 $2.363\%$ 以下）。放大到三条腿各自在原场与一次邻边输运之间组合的八复系数顶角（[`ch39-minimal-product-transport.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-minimal-product-transport.py)），确实可以在单枚零点（#22027 或 #28325，最少需两项乘积输运项）上把九个带电费米子质量与完整 CKM 一网打尽。但它马上交出一张天价账单：任何满足参考范数比与顶质量窗的解，在重—重上型汤川块上的谱范数都必然超过 **$16.63$**（#28325 上超过 $16.68$），进而沿线性希格斯背景把既有重阈值的每色费米子质量四次迹二次项系数推高至 **$3.45 \times 10^{34}\,\mathrm{GeV}^2$ 以上**，直接掀翻[第六章](ch06-higgs-portals-and-electroweak-scale.md)的希格斯门户与[第十一章](ch11-induced-gravity-and-dark-energy.md)的真空配平！（虽然在每条费米子腿上叠加两次基于手征质量映射 $B$ 的有限有理响应，可把单枚零点上 $M_Z$ 至 $M_P$ 内的一圈真空增量压到暗能量基准密度的 $2.49 \times 10^{-9}$ 以下，但三枚候选 `#11661, #11934, #22027` 共用任意八系数时，六个部门质量比中至少一个仍低于参考下限的 **$98.7\%$**，跨零点障碍依然屹立。）
 
 同时，按站点稀疏度逐级扫描 #11431 揭露出清晰的最小支撑阶梯：要凑出 $1\,\mathrm{TeV}$ 的 $m_t / m_b$ 至少要用 **$8$ 个站点**（全壳恰有六组，全部强迫 $m_c / m_t > 0.559$；$9$ 站仍 $> 0.208$，$10$ 站仍 $> 0.01$，另有 $12$ 站精确匹配顶、底、粲）；任取 **$14$ 个站点**即可同时拟定顶底与粲顶、奇底双层级（任取 $18$ 站可拟定两张完整矩阵）；但若要求剖面真正满足任意可微密度势的驻态场方程，至少必须点亮 **$16$ 个非零站点**，否则空站上必然留下严格正残差。
 
-为何不同超荷的轻子空间在站点局域顶角下天然互相错位？在[第九章](ch09-proton-stability-and-baryon-triality.md)与[第十三章](ch13-winding-ladder-and-joint-vacuum.md)的联合零点见证 #2,306,888,100,085 上，把荷 $1$ 的三轻模分别与荷 $2$、荷 $-4$ 的三轻模直接配对比较，给出最直观的几何解释（[`ch39-joint-zero-light-subspaces.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-joint-zero-light-subspaces.py)）：即使给十九个站点各自任选一个对角相位来对齐，均匀输入的荷 $1$ 轻态落入另一荷**重空间**的概率仍分别超过 **$38.321\%$** 与 **$37.290\%$**；即使进一步允许任意重排十九个站点，两者仍分别超过 **$31.060\%$** 与 **$31.097\%$**！不同超荷的轻子空间在站点基中天生大幅错开，这正是单希格斯与朴素站点局域汤川必然受挫的几何根源。
+为何不同超荷的轻子空间在站点局域顶角下天然互相错位？在[第九章](ch09-proton-stability-and-baryon-triality.md)与[第十三章](ch13-winding-ladder-and-joint-vacuum.md)的联合零点见证 #2,306,888,100,085 上，把荷 $1$ 的三轻模分别与荷 $2$、荷 $-4$ 的三轻模直接配对比较，给出最直观的几何解释（[`ch39-joint-zero-light-subspaces.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-joint-zero-light-subspaces.py)）：即使给十九个站点各自任选一个对角相位来对齐，均匀输入的荷 $1$ 轻态落入另一荷**重空间**的概率仍分别超过 **$38.321\%$** 与 **$37.290\%$**；即使进一步允许任意重排十九个站点，两者仍分别超过 **$31.060\%$** 与 **$31.097\%$**！不同超荷的轻子空间在站点基中天生大幅错开，这正是单希格斯与朴素站点局域汤川必然受挫的几何根源。
 
 ## 8.3 有理凯莱折叠、格拉姆幺正扩张与四步牛顿逼近 {#sec-ch08-cayley-folding}
 
@@ -127,7 +127,7 @@ $$
 条件 $B^* B = A^* A$ 表明线性映射 $A x \mapsto B x$ 在像空间 $\operatorname{ran}(A) \subseteq \mathbb{C}^m$ 上良定义且精确保内积（因为 $\|B x\|^2 = \langle x, B^* B x\rangle = \langle x, A^* A x\rangle = \|A x\|^2$，特别地 $\ker(A) = \ker(B)$）。因此它在 $\operatorname{ran}(A)$ 与 $\operatorname{ran}(B)$ 之间诱发等距同构，两者具有相同复维数，其正交补 $\operatorname{ran}(A)^\perp$ 与 $\operatorname{ran}(B)^\perp$ 亦具有相同复维数。在两正交补上各自选取标准正交基并将其一一对应，即得 $\mathbb{C}^m$ 上保内积的全体线性扩张 $U \in \mathrm{U}(m, \mathbb{C})$，满足对一切 $x$ 皆有 $U(A x) = B x$，亦即 $B = U A$。完整证明由 Lean 内核检查。
 :::
 
-[@thm-ou-ch08-cayley-orthogonal] 与 [@thm-ou-ch08-gram-unitary] 把“酉折叠”的边界刻画得纤毫毕现（[`ch39-unitary-fold-dilation.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-unitary-fold-dilation.py)、[`ch39-finite-rational-fold-accuracy.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-finite-rational-fold-accuracy.py)）：
+[@thm-ou-ch08-cayley-orthogonal] 与 [@thm-ou-ch08-gram-unitary] 把“酉折叠”的边界刻画得纤毫毕现（[`ch39-unitary-fold-dilation.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-unitary-fold-dilation.py)、[`ch39-finite-rational-fold-accuracy.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-finite-rational-fold-accuracy.py)）：
 
 - **跨零希格斯的严格酉折叠维数底线**：仅在电弱破缺点处做九十度酉折叠以压缩出三代带电质量，两侧已各至少需要 **$42$ 维**（配齐左手弱双重态则需 **$48$ 维**）。一旦要求严格酉折叠从破缺点平滑延拓到**零希格斯背景**（$H = 0$），每侧最小维数立刻抬升至 **$45$ 维**，且取等必须由对侧辅助空间容纳物理规范表示；同时，有限次数有理酉矩阵的物理子块会受到可在有限有理点直接检出的次数障碍，且若顶质量饱和折叠上限，光滑径向顶角必然归零。
 - **四步有理牛顿折叠的高精度救赎**：放弃一步线性硬折，改在奇异值至多为 $4/5$ 的收缩窗内执行**四步有理牛顿迭代**，可在整个收缩窗内严格保持折叠酉性，同时把线性质量逼近误差压至 **$4^{-16}$** 以内、把任意方向的 Frobenius 导数误差压在扰动范数的 $2.03 \times 10^{-8}$ 倍以下，并在 #22027 与 #28325 两枚实零点上精确保留全部四项夸克混合读数！但代价同样可被对撞机直接证伪：若把严格有理凯莱折叠的质量斜率分支与[第六章](ch06-higgs-portals-and-electroweak-scale.md)的最少顶色六维标量伙伴联立，在全部 $26$ 种分配及五个轻夸克的任意斜率符号下，最低阶胶子融合相对顶夸克伴随产生（$gg \to H$ 比 $t\bar{t}H$）的归一率比严格大于标准模型值的 **$2.91467$ 倍**。
@@ -138,7 +138,7 @@ $$
 
 ### 8.4.1 六面电弱单态、二十八圈镜像三角与跨七零点有理响应
 
-1. **六面电弱单态味标量与跨零点移用**：用含双钟的最短第三边六个三角形的平均和乐实部作为真空参数，引入一支电弱单态味标量并配以六次实势，即可通过 $\mathbb{Z}_3$ 破缺产生相互隔离的共轭 CP 破坏真空（[`ch39-chiral-neutral-flavor-phase.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-chiral-neutral-flavor-phase.py)）。在 **#11661** 的指定基底上用实系数标定夸克矩阵后，**完全冻结这些系数**直接移用到其他三窗零点，留出读数依次给出：
+1. **六面电弱单态味标量与跨零点移用**：用含双钟的最短第三边六个三角形的平均和乐实部作为真空参数，引入一支电弱单态味标量并配以六次实势，即可通过 $\mathbb{Z}_3$ 破缺产生相互隔离的共轭 CP 破坏真空（[`ch39-chiral-neutral-flavor-phase.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-chiral-neutral-flavor-phase.py)）。在 **#11661** 的指定基底上用实系数标定夸克矩阵后，**完全冻结这些系数**直接移用到其他三窗零点，留出读数依次给出：
    - **#11934**：$|V_{ub}| \approx 0.001943$；
    - **#12207**：$|V_{ub}| \approx 0.004011$；
    - **#28325**：$|V_{ub}| \approx 0.003669$（且该零点同步给出两圈 $\alpha_s \approx 0.11838$ 与四层曲率比 $0.999411$）；
@@ -172,7 +172,7 @@ $$
 
 ### 8.4.2 跨零点固定矩阵刚性阶梯
 
-为什么上述跨七枚零点成功的混合门必须写成**依赖零点背景的谱函数** $(I + T^{16})^{-1}$，而绝不能是一张跨零点恒定不变的 $19 \times 19$ 矩阵？下面这份刚性阶梯给出了精确到整数枚数的终极答案（[`ch39-common-local-rigidity.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-common-local-rigidity.py)、[`ch39-covariant-edge-weight-rigidity.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-covariant-edge-weight-rigidity.py)）：
+为什么上述跨七枚零点成功的混合门必须写成**依赖零点背景的谱函数** $(I + T^{16})^{-1}$，而绝不能是一张跨零点恒定不变的 $19 \times 19$ 矩阵？下面这份刚性阶梯给出了精确到整数枚数的终极答案（[`ch39-common-local-rigidity.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-common-local-rigidity.py)、[`ch39-covariant-edge-weight-rigidity.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-covariant-edge-weight-rigidity.py)）：
 
 ::: {.remark #rem-ou-ch08-rigidity-ladder title="跨零点刚性阶梯：从两枚零点到五枚与七枚的代数坍缩"}
 | 共享零点数量与集合 | 允许的矩阵或动力学类 | 强制坍缩的唯一代数结论 | 最小性注记 |

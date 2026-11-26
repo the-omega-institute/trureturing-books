@@ -1,7 +1,7 @@
 # 前言 四问、零圆满与数学边界的制图学 {#sec-ou-prelude}
 
 > “$4/4$ 问有模型内结果。依原书标准，从同一主联络无事后拟合地完整推出的有 $0/4$。”
-> —— [研究总录](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/README.md)
+> —— [研究总录](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/README.md)
 
 物理学史上有两种截然不同的“大统一”写法。一种是胜利者的神话学：先画出一张气势恢宏的统一蓝图，把不合拍的质量阈值藏进“高阶修正”，把手工调节的耦合系数包装成“自然标度”，再宣布宇宙已在一页方程里彻底闭合。另一种是制图者的解剖学：把同一套离散几何结构推到算术精度、区间证明与形式化内核的聚光灯下，看看它究竟能自己走出多远，又在**哪一条精确的数值悬崖上**撞墙停步。
 
@@ -49,7 +49,7 @@
 
 据此，本书在数学推理中将经典 RH 与狄利克雷 GRH 视为**已确立的外部形式化事实**加以调用（而不再称其为“未决猜想”），同时严格守住两道边界：第一，在本书形式化账本中它们不佩戴 `lean=` 绿色徽章；第二，该证明只覆盖 $\mathbb{Q}$ 上的 $\zeta(s)$ 与狄利克雷 $L$ 函数，因此一般数域戴德金 $\zeta_K$ 的扩展黎曼猜想（ERH）、自守 $L$ 函数的全广义黎曼猜想（Grand RH）、零点单重性、蒙哥马利 GUE 对关联、希尔伯特—波利亚自伴算子，以及本专著所考察的全部四力大统一物理假说，仍按其各自真实身份保持 `OPEN` 或 `MODEL`。
 
-**复算仓库永久快照与迁移说明。** 本书引用的全部 Python/Arb 复算脚本、数据与独立检验文件，均固定指向提交快照 [`loning/ch39-omega-research@45cc7cad`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/README.md)（该研究仓库计划整体迁移至组织实验库 [`the-omega-institute/trureturing-experiments`](https://github.com/the-omega-institute/trureturing-experiments)，届时保留相同文件路径与校验历史）。
+**复算仓库永久快照与归档位置。** 本书引用的全部 Python/Arb 复算脚本、数据与独立检验文件，均已归档至组织实验库 [`the-omega-institute/trureturing-experiments`](https://github.com/the-omega-institute/trureturing-experiments) 的 [`experiments/ch39-omega-research/`](https://github.com/the-omega-institute/trureturing-experiments/tree/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research) 目录，并固定指向提交快照 [`ba0ac953`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/README.md)。
 :::
 
 ## 0.3 全书五卷版图：从十九点球壳到四问全景总账 {#sec-ou-0-3}
@@ -83,4 +83,4 @@
 - **偏重粒子物理、规范场论与格点手征费米子的读者**，可在浏览第一章的球壳定义后直入第二卷与第三卷（第四章至第九章），再回头查看第二章的零点哈尔积分器与有限威尔逊扩散判据，看清离散几何构造如何在两圈跑动、希格斯门户与低能强子数据面前经受检验。
 - **偏重离散引力与跨分支动力学约束的读者**，可直接将第四卷（第十章至第十一章）与第十三章的 $529$ 面双钟绕数阶梯对照阅读，观察曲率窗口如何与味坐标 $|c|$ 联手把允许的相位环面压缩到万分之二以下。
 
-无论沿着哪一条路线进入，每一处关键数值都可在固定快照 `45cc7cad` 与[附录 A](appendix-a.md)查到对应的复算脚本与校验命令。现在，让我们卸下一切关于“大统一理应如此”的先验幻想，从一颗只有十九个整数坐标点的小球出发，步入[第一章 十九点贝伦德球壳与二十二独立频率](ch01-behrend-shell-and-frequencies.md)。
+无论沿着哪一条路线进入，每一处关键数值都可在固定快照 `ba0ac953` 与[附录 A](appendix-a.md)查到对应的复算脚本与校验命令。现在，让我们卸下一切关于“大统一理应如此”的先验幻想，从一颗只有十九个整数坐标点的小球出发，步入[第一章 十九点贝伦德球壳与二十二独立频率](ch01-behrend-shell-and-frequencies.md)。

@@ -64,7 +64,7 @@ $$
 
 到了[第二章](ch02-quaternion-clocks-and-haar-zeros.md)，我们要用这颗球壳上的原弧角度乘以黎曼零点纵坐标 $\gamma$，去驱动整个标准模型规范群 $\mathrm{U}(1) \times \mathrm{SU}(2) \times \mathrm{SU}(3)$ 的双元哈尔积分。要让多只相位指针在环面上真正联合等分布而不是锁死在低维共振子环面上，我们必须先回答一个纯粹的代数数论问题：**这 $23$ 个原弧角 $\theta_j$ 在有理数域 $\mathbb{Q}$ 上究竟有多少个线性无关的频率？**
 
-答案出人意料地干净——**恰好 $22$ 个**（`ARGUED`，详见[规范群积分专题](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-%E9%9B%B6%E7%82%B9%E4%B8%8E%E6%A0%87%E5%87%86%E6%A8%A1%E5%9E%8B%E8%A7%84%E8%8C%83%E7%BE%A4%E7%A7%AF%E5%88%86.md)）。我们不跳过一步，直接用手算把证明走通：
+答案出人意料地干净——**恰好 $22$ 个**（`ARGUED`，详见[规范群积分专题](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-%E9%9B%B6%E7%82%B9%E4%B8%8E%E6%A0%87%E5%87%86%E6%A8%A1%E5%9E%8B%E8%A7%84%E8%8C%83%E7%BE%A4%E7%A7%AF%E5%88%86.md)）。我们不跳过一步，直接用手算把证明走通：
 
 第一步，把角度翻译成单位圆上的代数数。对每个 $j \in \mathcal{J}_{23}$，令
 
@@ -143,7 +143,7 @@ $$
 对于第一款，由整四元数乘法结合律直接得出逐分量等式 $\bigl(((x\bar{y})z)\bar{u}\bigr)v = (x\bar{y})\bigl((z\bar{u})v\bigr)$；再由四平方范数乘性知非零整四元数的三元积恒保持非零，按 `RayEquiv` 的自反性即证外结合律。对于第二款，记 $p := \bar{u}v$；因 $u, v$ 非零，$p$ 非零且其平方范数 $n := \|p\|^2 > 0$。右乘 $p$ 使欧氏内积放大 $n$ 倍（$\langle ap, bp\rangle = n\langle a, b\rangle$），同时使分母 $\|ap\|^2 \|bp\|^2 = n^2 \|a\|^2 \|b\|^2$ 放大 $n^2$ 倍；分子平方与分母同含正因子 $n^2$，在有号分数等价关系 `IntRatio.Equivalent` 中精确消去（若 $a$ 或 $b$ 为零则两端同为未定义亦等价）。完整证明由 Lean 内核检查。
 :::
 
-这套整四元数代数并非停留在抽象符号里——早在十九点壳的前身（平方半径 $17$ 的九点壳）上，独立复算文件 [`ShellProjection.lean`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ShellProjection.lean)（`CERT`，仅导入 Lean 标准 `Init` 并全靠定义归约 `rfl` 验证，独立于本书冻结库）就给出了一个令人拍案的纯整数压缩见证。取九点壳上的纯虚四元数列表（$(0, 1, 4)$ 与 $(2, 2, 3)$ 的全部九个排列），固定极轴 $a = (0, 0, 1, 4)$，对每个壳点 $p$ 定义整数平面投影算子
+这套整四元数代数并非停留在抽象符号里——早在十九点壳的前身（平方半径 $17$ 的九点壳）上，独立复算文件 [`ShellProjection.lean`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ShellProjection.lean)（`CERT`，仅导入 Lean 标准 `Init` 并全靠定义归约 `rfl` 验证，独立于本书冻结库）就给出了一个令人拍案的纯整数压缩见证。取九点壳上的纯虚四元数列表（$(0, 1, 4)$ 与 $(2, 2, 3)$ 的全部九个排列），固定极轴 $a = (0, 0, 1, 4)$，对每个壳点 $p$ 定义整数平面投影算子
 
 $$
 P_p(v) := 17\,v + (p v)\,a.
@@ -204,7 +204,7 @@ $$
 
 如果按实数线性代数的直觉回答，似乎显而易见：$G_{19}$ 是连通图，所以 $19 \times 19$ 对称半正定矩阵 $L$ 的实数秩恰好是 **$18$**（唯一零空间是常向量 $\mathbf{1}$）；在 $\mathbb{R}^{18}$ 中，用实数平方根做一次 Cholesky 分解就能把十九个顶点嵌入 $18$ 维欧氏空间。
 
-但一旦要求坐标全部落在有理数域 $\mathbb{Q}$ 内——也就是剥掉一切无理平方根——局势立刻剧变（`CERT / ARGUED`，复算脚本 [`ch39-native-shell-rational-gram.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-native-shell-rational-gram.py)）：
+但一旦要求坐标全部落在有理数域 $\mathbb{Q}$ 内——也就是剥掉一切无理平方根——局势立刻剧变（`CERT / ARGUED`，复算脚本 [`ch39-native-shell-rational-gram.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-native-shell-rational-gram.py)）：
 
 1. **删去末点得十八元正定有理二次型**：由于 $L$ 行和为零，删去第 $19$ 个顶点留下 $18 \times 18$ 严格正定整矩阵 $q$（第 $19$ 个向量由前 $18$ 个向量之和取负唯一恢复）。按矩阵树定理，$\det(q)$ 恰等于 $G_{19}$ 的生成树总数 $\tau$。
 2. **用希尔伯特符号否决 $20$ 维以下一切有理嵌入**：把 $q$ 按相邻顺序主子式之比在 $\mathbb{Q}$ 上正交对角化。若 $q$ 能等距嵌入 $20$ 维标准欧氏有理空间 $\mathbb{Q}^{20}$（配标准平方和二次型 $I_{20}$），则存在一个二维正交补有理二次型 $q_\perp$，其行列式平方类必为 $d = \tau$，且对一切素数 $p$ 满足局部哈塞符号条件 $c_p(q_\perp) = c_p(q)(d, -1)_p$。逐个素因子精确核算表明，这一目标符号在四个素数 **$p \in \{2, 11, 17, 71\}$** 处取值为 $-1$。然而在 $p = 2$ 处，精确整数模 $8$ 检验给出 $-d \equiv 1 \pmod 8$，这意味着 $-d$ 在 $2$-进数域 $\mathbb{Q}_2$ 中是一个平方数！对于任何行列式类为 $d$ 的二元二次型，其 $2$-进哈塞符号 $(x, -d)_2$ 必然恒等于 $+1$，与目标值 $-1$ 迎面相撞！于是 $d = 18, 19, 20$ 全部被彻底封杀。

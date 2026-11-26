@@ -31,7 +31,7 @@ $$
 
 ### 9.1.1 三十六单项非零展开与反推不可辨识性
 
-人们常凭直觉误以为单代费米子的反对称缩并会因泡利不相容原理而归零。但逐项清点格拉斯曼分量马上戳破这个误解（[三代轮换与质子选择定则](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-三代轮换与质子选择定则.md)）：
+人们常凭直觉误以为单代费米子的反对称缩并会因泡利不相容原理而归零。但逐项清点格拉斯曼分量马上戳破这个误解（[三代轮换与质子选择定则](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-三代轮换与质子选择定则.md)）：
 
 ::: {.example #ex-ou-ch09-qqql-grassmann title="单代 QQQL 的精确三十六单项格拉斯曼展开与系数 4 实例"}
 将单代左手夸克 $Q^{ai\alpha}$ 按色、弱、旋量三元指标 $(a, i, \alpha)$ 固定字典序，轻子 $L^{l\delta}$ 按 $(l, \delta)$ 排序。精确展开 $\mathcal{O}_6 = \epsilon_{abc}\epsilon_{ij}\epsilon_{kl}\epsilon_{\alpha\beta}\epsilon_{\gamma\delta} Q^{ai\alpha} Q^{bj\beta} Q^{ck\gamma} L^{l\delta}$ 并不归零，而是精确包含 **$36$ 个互异的非零四次格拉斯曼单项**。例如，取三个夸克指标依次为 $(0, 0, 0)$、$(1, 0, 0)$、$(2, 1, 1)$，轻子弱与旋量指标为 $(1, 1)$，该单项的精确整系数等于 **$4$**。
@@ -74,7 +74,7 @@ $$
 只要取 $h \not\equiv 0 \pmod 3$（两个非零值 $h = 1, 2$ 仅差生成元互换，给出同一选择定则），这条**精确重子三重对称（baryon triality）**立刻展现三重威力：
 
 1. **彻底禁绝 $\Delta B = 1, 2 \pmod 3$**：一切单质子衰变与双核子振荡算符（包括六维 $QQQL$）全部携带非零余荷而被精确禁止；所有标准模型汤川项与温伯格中微子项余荷为零而完整保留；将该离散变换与常数超荷规范变换合成后，电弱希格斯真空精确中性，不带残余破缺相位。
-2. **最低允许算符飙升至维数 $15$（或 $18$）**：在重子三重对称 $\Delta B \in 3\mathbb{Z}$ 下，轻场中首个容许的重子数破坏局域算符不再是六维，而是飙升至**维数 $15$**（九夸克一轻子及以上级联）；若进一步要求同时守恒 $B - L$，最低算符更推高至**维数 $18$**（[`ch39-baryon-triality-operator-floor.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-baryon-triality-operator-floor.py)）！相比之下，仅含守恒双线性的四步威尔逊—汤川调节器反倒拥有过强的连续 $U(1)_B$ 对称，无法直接孕育[第七章](ch07-chiral-three-generations.md)的弱瞬子顶点，而精确 $\mathbb{Z}_3$ 恰好与三代弱瞬子 $\Delta B = 3$ 严丝合缝。
+2. **最低允许算符飙升至维数 $15$（或 $18$）**：在重子三重对称 $\Delta B \in 3\mathbb{Z}$ 下，轻场中首个容许的重子数破坏局域算符不再是六维，而是飙升至**维数 $15$**（九夸克一轻子及以上级联）；若进一步要求同时守恒 $B - L$，最低算符更推高至**维数 $18$**（[`ch39-baryon-triality-operator-floor.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-baryon-triality-operator-floor.py)）！相比之下，仅含守恒双线性的四步威尔逊—汤川调节器反倒拥有过强的连续 $U(1)_B$ 对称，无法直接孕育[第七章](ch07-chiral-three-generations.md)的弱瞬子顶点，而精确 $\mathbb{Z}_3$ 恰好与三代弱瞬子 $\Delta B = 3$ 严丝合缝。
 3. **无反常规范 $U(1)_X$ 紫外完成与一般整除判据 $m \mid N_g$**：重子三重对称绝非无源之水的全局离散公设，它拥有完全无反常的连续规范紫外完成。增添规范群 $U(1)_X$，令 $X = 3B - 9L_\tau$，在 $\tau$ 代加入荷为 $+9$ 的左手共轭中微子 $\nu^c_\tau$（另两代可选加中性单态），并引入一支标准模型中性、$X$ 荷为 $9$ 的标量凝聚场。
 
 ::: {.remark #rem-ou-ch09-anomaly-ledger title="规范 $U(1)_X$（$X = 3B - 9L_\tau$）的六项手征反常逐项清零表"}
@@ -104,8 +104,8 @@ $$
    \mathfrak{g}_{\min} = \mathfrak{su}(5) \oplus \mathfrak{su}(10) \qquad (\dim = 24 + 99 = 123),
    $$
 
-   连同作用于全部十五分量的全局相因子 $\omega I$ 组成完整群 $[SU(5) \times SU(10)] \times \mathbb{Z}_3$（[`ch39-triality-gauge-closure.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-triality-gauge-closure.py)）。
-2. **六次势（$111$ 重矢量、$288$ 标量）对照四次势（$+24$ 维伴随）**：为了把 $[SU(5)\times SU(10)]\times\mathbb{Z}_3$ 精准破缺回标准模型规范群并完好保住壳三重相位，引入两份带不同离散荷的矩阵标量（共 $400$ 个实分量）。对互补投影色三平面真空，所有四次势都会留下一个能量简并的星形构型，必须升至**六次势**才能唯一选出色三平面：破缺后精确给出 **$111$ 个有质量重规范矢量**（在 $\mu_V = \sqrt{2}\, v g_{\mathrm{low}}$ 处三支一圈对数匹配相等）、$111$ 个戈德斯通零模、$1$ 个单态相位与 **$288$ 个有质量物理实标量**（最小正质量平方 $(5 - \sqrt{13}) v^2$），三代配平立方反常后可在一圈匹配下于 $v \in (7.5628, 7.5630) \times 10^{14}\,\mathrm{GeV}$ 重现低能耦合（六个重汤川几何平均比约 $4.61 \times 10^{-5}$）。倘若坚持只用**四次势**锁出色三平面，所需新增的最少标量实维数恰为 **$24$**——恰好对应一份实伴随表示，使等真空尺度下的有质量实标量方向增至 $312$ 个（[`ch39-quartic-adjoint-lock.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-quartic-adjoint-lock.py)）。
+   连同作用于全部十五分量的全局相因子 $\omega I$ 组成完整群 $[SU(5) \times SU(10)] \times \mathbb{Z}_3$（[`ch39-triality-gauge-closure.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-triality-gauge-closure.py)）。
+2. **六次势（$111$ 重矢量、$288$ 标量）对照四次势（$+24$ 维伴随）**：为了把 $[SU(5)\times SU(10)]\times\mathbb{Z}_3$ 精准破缺回标准模型规范群并完好保住壳三重相位，引入两份带不同离散荷的矩阵标量（共 $400$ 个实分量）。对互补投影色三平面真空，所有四次势都会留下一个能量简并的星形构型，必须升至**六次势**才能唯一选出色三平面：破缺后精确给出 **$111$ 个有质量重规范矢量**（在 $\mu_V = \sqrt{2}\, v g_{\mathrm{low}}$ 处三支一圈对数匹配相等）、$111$ 个戈德斯通零模、$1$ 个单态相位与 **$288$ 个有质量物理实标量**（最小正质量平方 $(5 - \sqrt{13}) v^2$），三代配平立方反常后可在一圈匹配下于 $v \in (7.5628, 7.5630) \times 10^{14}\,\mathrm{GeV}$ 重现低能耦合（六个重汤川几何平均比约 $4.61 \times 10^{-5}$）。倘若坚持只用**四次势**锁出色三平面，所需新增的最少标量实维数恰为 **$24$**——恰好对应一份实伴随表示，使等真空尺度下的有质量实标量方向增至 $312$ 个（[`ch39-quartic-adjoint-lock.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-quartic-adjoint-lock.py)）。
 
 ### 9.3.2 $S^2 \times L(3, 1)$ 离散立方反常流入与二十五态提升贝伦德球壳
 
@@ -125,7 +125,7 @@ $$
 
 ### 9.4.1 谱分级与站点超荷的 $1801$ 维冲突
 
-在[第八章](ch08-flavor-hierarchy-and-ckm.md)中，三腿输运的重—重汤川块曾威胁真空配平。一个极为巧妙的方案是（[`ch39-heavy-shift-baryon-triality.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-heavy-shift-baryon-triality.py)）：在十九维内部空间上，对十六个原始重模相对三个轻模统一平移一单位重子三重余荷（轻模荷 $x$，重模荷 $x + 1$，镜像取反荷），生成元写作 $\omega^x [P + \omega(I - P)]$（其中 $P = I - D^\dagger (D D^\dagger)^{-1} D$ 为轻空间投影）。这枚单一生效的模三律一箭三雕：精确保留轻汤川与混合、完全禁绝含重费米子的普通汤川顶角、同时禁止低能 $\Delta B = 1$ 单质子衰变，而且拥有无反常连续提升 $X' = 2Y - B + 3L_\tau$！
+在[第八章](ch08-flavor-hierarchy-and-ckm.md)中，三腿输运的重—重汤川块曾威胁真空配平。一个极为巧妙的方案是（[`ch39-heavy-shift-baryon-triality.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-heavy-shift-baryon-triality.py)）：在十九维内部空间上，对十六个原始重模相对三个轻模统一平移一单位重子三重余荷（轻模荷 $x$，重模荷 $x + 1$，镜像取反荷），生成元写作 $\omega^x [P + \omega(I - P)]$（其中 $P = I - D^\dagger (D D^\dagger)^{-1} D$ 为轻空间投影）。这枚单一生效的模三律一箭三雕：精确保留轻汤川与混合、完全禁绝含重费米子的普通汤川顶角、同时禁止低能 $\Delta B = 1$ 单质子衰变，而且拥有无反常连续提升 $X' = 2Y - B + 3L_\tau$！
 
 然而代价藏在几何基里：在 #22027 与 #28325 的五种荷上，轻投影矩阵 $P$ 在十九站点基中的**每一个非对角元绝对值都严格大于 $4.3 \times 10^{-6}$**——这条三重分级活在**谱空间**，与站点对角基格格不入！若硬要同时固定这套轻重谱分级，又给十九个站点各自赋予独立的超荷生成元，在 $T$ 共轭与对易子闭合下，最小矩阵李代数瞬间膨胀为
 
@@ -133,13 +133,13 @@ $$
 \mathfrak{su}(19)^5 \oplus \mathfrak{u}(1) \qquad (\dim = 1801)
 $$
 
-（[Ω 复算说明](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/Ω复算说明.md#固定轻重三重性与站点规范联络的最小闭包)）；甚至在公共超荷之外只允许**单个站点**独立区分，最小李闭包也已有 $17$ 维，且每个二重态都把轻方向与重方向强行混在一起，彻底破坏所拟三维质量核！
+（[Ω 复算说明](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/Ω复算说明.md#固定轻重三重性与站点规范联络的最小闭包)）；甚至在公共超荷之外只允许**单个站点**独立区分，最小李闭包也已有 $17$ 维，且每个二重态都把轻方向与重方向强行混在一起，彻底破坏所拟三维质量核！
 
-同样地，若把球壳三重作用提升为四维格点上的逐点离散规范场，在 $5^4$ 盒的混合 $U(2) \times \mathbb{Z}_3$ 磁通下立刻冒出 $I(S) = 16, J = 32$ 的测度反常（[`ch39-local-triality-mixed-flux.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-local-triality-mixed-flux.py)），在完整 $SU(5)$ 多重态中最小补全为新增复维数 $15$ 的镜像代 $\mathbf{5} \oplus \overline{\mathbf{10}}$；反倒是当电弱希格斯携带壳荷 $1$ 将残余群约化为 $U(3) \times \mathbb{Z}_3$ 时，每代七个带荷分量与其共轭精确配对，即使在粗糙离散边上也能保住有隙测度并封杀 $\Delta B = 1$ 局域项（[`ch39-higgs-baryon-triality-measure.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-higgs-baryon-triality-measure.py)）。
+同样地，若把球壳三重作用提升为四维格点上的逐点离散规范场，在 $5^4$ 盒的混合 $U(2) \times \mathbb{Z}_3$ 磁通下立刻冒出 $I(S) = 16, J = 32$ 的测度反常（[`ch39-local-triality-mixed-flux.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-local-triality-mixed-flux.py)），在完整 $SU(5)$ 多重态中最小补全为新增复维数 $15$ 的镜像代 $\mathbf{5} \oplus \overline{\mathbf{10}}$；反倒是当电弱希格斯携带壳荷 $1$ 将残余群约化为 $U(3) \times \mathbb{Z}_3$ 时，每代七个带荷分量与其共轭精确配对，即使在粗糙离散边上也能保住有隙测度并封杀 $\Delta B = 1$ 局域项（[`ch39-higgs-baryon-triality-measure.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-higgs-baryon-triality-measure.py)）。
 
 ### 9.4.2 联合见证 #2,306,888,100,085 上的双支分叉
 
-全卷最具戏剧张力的实证分叉，发生在[第十三章](ch13-winding-ladder-and-joint-vacuum.md)的核心联合见证、**第 2,306,888,100,085 枚实际正黎曼零点**上（[`ch39-fixed-vacuum-proton-currents.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-fixed-vacuum-proton-currents.py)）。这枚真实零点用自身两只钟同时穿过三代、强耦合与四层曲率三窗，其 $105$ 圈作用仅高出同高度自由真空 $4.857224 \times 10^{-8}$，且 $|V_{ub}|^2$ 与 $J$ 的相对偏差分别只有 $+1.328\,\mathrm{ppm}$ 与 $+0.811\,\mathrm{ppm}$。现在把完全相同的 $105$ 圈权装到六维轻场重子顶点上：
+全卷最具戏剧张力的实证分叉，发生在[第十三章](ch13-winding-ladder-and-joint-vacuum.md)的核心联合见证、**第 2,306,888,100,085 枚实际正黎曼零点**上（[`ch39-fixed-vacuum-proton-currents.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-fixed-vacuum-proton-currents.py)）。这枚真实零点用自身两只钟同时穿过三代、强耦合与四层曲率三窗，其 $105$ 圈作用仅高出同高度自由真空 $4.857224 \times 10^{-8}$，且 $|V_{ub}|^2$ 与 $J$ 的相对偏差分别只有 $+1.328\,\mathrm{ppm}$ 与 $+0.811\,\mathrm{ppm}$。现在把完全相同的 $105$ 圈权装到六维轻场重子顶点上：
 
 - 在所考察的定向三角平均族内，这枚零点给出的六维威尔逊因子模长严格满足精确下界
 

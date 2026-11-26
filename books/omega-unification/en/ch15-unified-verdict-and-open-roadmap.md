@@ -6,11 +6,11 @@ It is time to close the ledger and speak the verdict without ornament. The entir
 
 > **All four unification questions possess explicit, interval-verified, model-internal witnesses on the Behrend shell (`4/4`); by the monograph's own standard of zero-post-hoc-fit derivation from a single master connection, zero of the four are complete (`0/4`).**
 
-Refusing self-deception is not an admission of failure—quite the opposite. Across $1{,}683$ archived replay files (verification scripts, exact rational and Arb interval certificates, thematic dossiers, and data tables), vague unification slogans have been forged into **five quantifiable structural tensions** and **four razor-sharp open problems**. The moment a field can state exactly what is missing to ten decimal places or a single integer threshold, real breakthroughs finally gain solid ground to stand on.
+Refusing self-deception is not an admission of failure—quite the opposite. Across $1{,}785$ archived replay files (verification scripts, exact rational and Arb interval certificates, thematic dossiers, and data tables), vague unification slogans have been forged into **five quantifiable structural tensions** and **four razor-sharp open problems**. The moment a field can state exactly what is missing to ten decimal places or a single integer threshold, real breakthroughs finally gain solid ground to stand on.
 
 ## 15.1 The Four-Question Balance Sheet: 4/4 Model-Internal Witnesses, 0/4 Zero-Fit Derivations
 
-The balance sheet below condenses Volumes II–V into a single side-by-side audit, cleanly separating verified model-internal witnesses from the exact first-principles gaps that remain open (see the complete replay ledger [`README.md`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/README.md)).
+The balance sheet below condenses Volumes II–V into a single side-by-side audit, cleanly separating verified model-internal witnesses from the exact first-principles gaps that remain open (see the complete replay ledger [`README.md`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/README.md)).
 
 | Unification question | Verified model-internal witnesses (`4/4`) | Remaining zero-fit first-principles gaps (`0/4`) | Chapters |
 | --- | --- | --- | --- |
@@ -27,12 +27,12 @@ To prevent proven mathematics from ever blurring into model-internal physics, th
 | --- | --- | --- |
 | **Zero-axiom Lean 4 kernel (`axioms: []`)** | Bare constructive CIC definitional reduction | Exact quarter Bargmann–Gram excess ([@thm-ou-ch13-noncommutative-witness]), doubled unit norm of the 24-element Hurwitz core ([@thm-ou-ch14-hurwitz-core]), and the monograph's other axiom-free algebraic anchors |
 | **Standard-axiom Lean 4 kernel (`LEAN ✓`)** | Frozen declaration verified by the Lean 4 kernel | Cyclic Fejér positive Fourier bound ([@thm-ou-ch12-cyclic-fejer-band]), finite collision variance floor ([@thm-ou-ch12-collision-variance]), projective ternion noncommutativity ([@thm-ou-ch13-noncommutative-witness]), two-hidden-scalar Schur image ([@thm-ou-ch14-two-hidden-response]), and width-three scalar Gram classification ([@thm-ou-ch14-native-scalar-gram]) |
-| **Exact rational & Arb interval certificates ($1{,}683$-file replay archive)** | Standalone Python / `python-flint` scripts, thematic dossiers, and data tables | Forced 35-bit seventh-time code `32071996606` and 44-bit input floor, $> 99.931\%$ three-band compression, $18 \to 105$ winding ladder, witness `#2,306,888,100,085` and four stress tests, $D = 56 \to 1568$ memory-rank staircase, and $16 \to 21$-step Hurwitz word bounds |
+| **Exact rational & Arb interval certificates ($1{,}785$-file replay archive)** | Standalone Python / `python-flint` scripts, thematic dossiers, and data tables | Forced 35-bit seventh-time code `32071996606` and 44-bit input floor, $> 99.931\%$ three-band compression, $18 \to 105$ winding ladder, witness `#2,306,888,100,085` and four stress tests, $D = 56 \to 1568$ memory-rank staircase, and $16 \to 21$-step Hurwitz word bounds |
 | **Model-internal witnesses & open problems** | Conditional on chosen field tables, thresholds, or calibrations | All `4/4` model-internal witnesses and the `0/4` zero-fit open problems formalized below ([@prob-ou-q1-action-and-ew]–[@prob-ou-q4-lorentzian-gravity-and-dark-energy]) |
 
 ## 15.2 Five Structural Tensions Across the Replay Archive
 
-Distilling all five volumes and all $1{,}683$ archived replay files (scripts, interval certificates, thematic dossiers, and tables) reveals **five interlocking structural tensions**. Any patch that relieves one ridge without addressing the other four simply pushes the strain into a neighboring sector.
+Distilling all five volumes and all $1{,}785$ archived replay files (scripts, interval certificates, thematic dossiers, and tables) reveals **five interlocking structural tensions**. Any patch that relieves one ridge without addressing the other four simply pushes the strain into a neighboring sector.
 
 ### 15.2.1 The Arithmetic-Clock vs Flavor-Weight Tension
 

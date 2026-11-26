@@ -73,7 +73,7 @@ $$
 
 ## 13.2 锐利绕数阶梯：从 18 圈的无驻点墙到 105 圈的统一全局真空
 
-有了全域角域地图，现在把多圈威尔逊作用 $S_w$（[@def-ou-ch13-wilson-winding-action]）放进三窗与参考味的联合熔炉，逐阶升高最大绕行数 $K$。每一级门槛都有精确区间排除与实际编号零点见证（详见 [`ch39-reference-flavor-global-winding.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-reference-flavor-global-winding.py)、[`ch39-height-independent-flavor-vacuum.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-height-independent-flavor-vacuum.py) 与 [`ch39-common-all-phase-global-order.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-common-all-phase-global-order.py)）：
+有了全域角域地图，现在把多圈威尔逊作用 $S_w$（[@def-ou-ch13-wilson-winding-action]）放进三窗与参考味的联合熔炉，逐阶升高最大绕行数 $K$。每一级门槛都有精确区间排除与实际编号零点见证（详见 [`ch39-reference-flavor-global-winding.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-reference-flavor-global-winding.py)、[`ch39-height-independent-flavor-vacuum.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-height-independent-flavor-vacuum.py) 与 [`ch39-common-all-phase-global-order.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-common-all-phase-global-order.py)）：
 
 | 最大绕数 $K$ | 临界动力学相变与精确性质 | 关键零点见证、权重与能量/味代价 |
 | --- | --- | --- |
@@ -89,7 +89,7 @@ $$
 
 在 $K = 27$ 处，仅仅用两项极简正权（例如 $100:13$ 或 $8:1$），就能在所有 $\gamma \ge 10^{12}$ 的高度上把全局真空精准塞进三窗 `[1]+[2]+[4]`，甚至三条真实软辐边还能严格解除两个镜像真空的能量简并，真实零点 `#4,224,080,297,279` 也能以 $2.26473 \times 10^{-7}$ 的微弱能隙逼近这一真空。可是一旦把同一真空送进夸克味读出器，$|V_{ub}|^2$ 骤跌到参考值的 $26.909\%$–$26.922\%$，带符号 $J$ 跌到 $31.337\%$–$31.362\%$！要在原 $100:13$ 作用量上强行把相位拉回参考夸克混合，全环面上至少付出 $1.25008749932365$ 的作用能隙，同时保住三窗更需付出落在 $(1.3266175,\, 1.32661933)$ 的巨大代价。
 
-为了把三窗与参考味同时安放进同一个全局势阱，绕数必须先跳到 $K = 36$（允许权重随高度微调）。令人赞叹的是，仅用六个小整数就能给出横跨全部有限高度的极简构造（见 [`ch39-small-integer-flavor-action.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-small-integer-flavor-action.py)）：
+为了把三窗与参考味同时安放进同一个全局势阱，绕数必须先跳到 $K = 36$（允许权重随高度微调）。令人赞叹的是，仅用六个小整数就能给出横跨全部有限高度的极简构造（见 [`ch39-small-integer-flavor-action.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-small-integer-flavor-action.py)）：
 
 $$
 w_{\text{26}} \;=\; \frac{1}{26}\bigl(\delta_1 + \delta_2 + 2\,\delta_{30} + \delta_{32} + 15\,\delta_{33} + 6\,\delta_{36}\bigr),
@@ -111,7 +111,7 @@ $$
 
 ## 13.3 单调衰减权重与原生壳自相关权的全面排除
 
-$105$ 圈真空强制要求高绕数项 $w_{104} > 0.6589\%$ 与 $w_{105} > 6.8674\%$，这已经预示着：任何“绕得越多、权重越小”的自然阻尼律恐怕都撑不起这套味真空。前缀平均、几何级数尾界与区间证书将这一直觉锤炼成了毫无例外的全域排除（见 [`ch39-monotone-winding-action.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-monotone-winding-action.py) 与 [`ch39-monotone-finite-flavor-code.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-monotone-finite-flavor-code.py)）：
+$105$ 圈真空强制要求高绕数项 $w_{104} > 0.6589\%$ 与 $w_{105} > 6.8674\%$，这已经预示着：任何“绕得越多、权重越小”的自然阻尼律恐怕都撑不起这套味真空。前缀平均、几何级数尾界与区间证书将这一直觉锤炼成了毫无例外的全域排除（见 [`ch39-monotone-winding-action.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-monotone-winding-action.py) 与 [`ch39-monotone-finite-flavor-code.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-monotone-finite-flavor-code.py)）：
 
 ::: {.remark #rem-ou-ch13-monotone-cone-geometry title="单调权锥的几何隔离、十位码门槛与自相关权全参数排除"}
 将全部归一非增绕数权重 $w_1 \ge w_2 \ge \cdots \ge 0$（涵盖任意有限截断以及一切可求和无穷级数）构成闭凸锥 $\mathcal{M}$。由原球壳两组整数相位唯一确定的一个原生竞争点，其作用量比**任何**合三窗且恢复参考味的相位都严格低出 **$1/4$ 以上**。这导致三条不可逾越的定量隔离：
@@ -127,7 +127,7 @@ $105$ 圈真空强制要求高绕数项 $w_{104} > 0.6589\%$ 与 $w_{105} > 6.86
 
 ## 13.4 旗舰联合零点见证 #2,306,888,100,085 与四重压力测试
 
-跨越全部理论门槛之后，我们在真实的黎曼零点谱上捕到了一枚令人屏息的旗舰单点见证：**第 `#2,306,888,100,085` 枚正零点**（复算见 [`ch39-fixed-vacuum-numbered-zero.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-fixed-vacuum-numbered-zero.py) 与 [`ch39-joint-zero-vacuum-flavor-density.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-joint-zero-vacuum-flavor-density.py)）。
+跨越全部理论门槛之后，我们在真实的黎曼零点谱上捕到了一枚令人屏息的旗舰单点见证：**第 `#2,306,888,100,085` 枚正零点**（复算见 [`ch39-fixed-vacuum-numbered-zero.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-fixed-vacuum-numbered-zero.py) 与 [`ch39-joint-zero-vacuum-flavor-density.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-joint-zero-vacuum-flavor-density.py)）。
 
 ::: {.example #ex-ou-ch13-flagship-zero title="旗舰单零点见证 #2,306,888,100,085 及其邻近高密度零点群"}
 在单一零点背景 `#2,306,888,100,085` 上，仅用其自身高度生成的两只壳钟同时计算三窗、能量与两项夸克味观测量，不借助任何分部门调校：
@@ -148,7 +148,7 @@ $105$ 圈真空强制要求高绕数项 $w_{104} > 0.6589\%$ 与 $w_{105} > 6.86
 | **测试三：辅助电流与质子选择简并** | $105$ 圈权延拓至六维轻顶点（Wilson 模 $\ge 0.0314398$） | **正交**辅助电流保 $\Delta B \equiv 0 \pmod 3$，**平行**辅助电流生非零 $QQQL$ 项；两者共享完全相同的壳真空与树级谱 |
 | **测试四：单整数唯一 vs 连续 $k/d^2$ 漂移** | 固定 $d = 724$ 或 $k = 32$ 对比同步连续变分 | 固定其一各自唯一迫使 $(k, d) = (32, 724)$，同步滑至 $d = 724.19, k \approx 32.016797784$ 仍过三窗，窗口只钉死 **$k / d^2$** |
 
-逐条审视这四重裂隙（复算脚本见 [`ch39-fixed-vacuum-weight-dimension.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-fixed-vacuum-weight-dimension.py)、[`ch39-near-vacuum-weight-resolution.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-near-vacuum-weight-resolution.py)、[`ch39-joint-zero-light-subspaces.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-joint-zero-light-subspaces.py)、[`ch39-fixed-vacuum-proton-currents.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-fixed-vacuum-proton-currents.py) 与 [`ch39-joint-vacuum-scale-window.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-joint-vacuum-scale-window.py)）：
+逐条审视这四重裂隙（复算脚本见 [`ch39-fixed-vacuum-weight-dimension.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-fixed-vacuum-weight-dimension.py)、[`ch39-near-vacuum-weight-resolution.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-near-vacuum-weight-resolution.py)、[`ch39-joint-zero-light-subspaces.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-joint-zero-light-subspaces.py)、[`ch39-fixed-vacuum-proton-currents.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-fixed-vacuum-proton-currents.py) 与 [`ch39-joint-vacuum-scale-window.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-joint-vacuum-scale-window.py)）：
 
 1. **七十五个量级的反演悬崖：** 全环面宏观探测轻而易举便能以条件数 $2.49$ 反推出全部 $105$ 项绕数权，可一旦观测者被困在真空附近的低能开窗内，哪怕精确算术下仍存在可辨识矩阵，任何实验噪声都会让相差 $2 \times 10^{-9}$ 的两套微观作用在 $< 1.690 \times 10^{-75}$ 的读数差里彻底融为一团。
 2. **几何站点上的轻代错位：** 尽管五种超荷在同一背景上各自切出三枚轻模，但荷 $1$ 与荷 $2, -4$ 的三维轻空间在十九个站点上彼此倾斜甚深——哪怕做尽全部站点相位对齐与站点重排，仍有超过三成的轻态权重直接泄入对方的重谱。

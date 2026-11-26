@@ -33,7 +33,7 @@ $$
 
 ### 7.1.1 全双钟环面的一致谱隙与特征标正交性
 
-这套分解的第一个惊人之处，是低端谱隙对时钟相位的彻底不敏感性。为何无论两只黎曼零点时钟转到环面上的哪个角落，五种荷的第三与第四本征值都绝不相撞？直觉上只需做一个“剪枝手术”：把两类钟边汇入的三处内站（编号 $6, 7, 8$）暂时删去，剩下的 $16 \times 16$ 主块 $D$ 完全不依赖两只钟的相位！经全域区间舒尔补认证（[`ch39-all-zero-three-mode-gap.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-all-zero-three-mode-gap.py)），在 $\delta = 0$ 时五种荷的主块均满足 $\lambda_3(D) < 8.685 < 9.6001 < \lambda_4(D)$；由柯西特征值交错定理，完整 $19 \times 19$ 矩阵的第三特征值立刻被死死压在 $8.685$ 以下。
+这套分解的第一个惊人之处，是低端谱隙对时钟相位的彻底不敏感性。为何无论两只黎曼零点时钟转到环面上的哪个角落，五种荷的第三与第四本征值都绝不相撞？直觉上只需做一个“剪枝手术”：把两类钟边汇入的三处内站（编号 $6, 7, 8$）暂时删去，剩下的 $16 \times 16$ 主块 $D$ 完全不依赖两只钟的相位！经全域区间舒尔补认证（[`ch39-all-zero-three-mode-gap.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-all-zero-three-mode-gap.py)），在 $\delta = 0$ 时五种荷的主块均满足 $\lambda_3(D) < 8.685 < 9.6001 < \lambda_4(D)$；由柯西特征值交错定理，完整 $19 \times 19$ 矩阵的第三特征值立刻被死死压在 $8.685$ 以下。
 
 接着在能量 $t = 9.6001$ 对 $D - tI$ 做舒尔消元，三站点上的补块 $C - tI - B^*(D - tI)^{-1}B$ 因循环对称而在 $(1, \omega, \omega^2)$ 特征标基中彻底对角化为十五个标量——每个都是一个实常数加上 $u, v, \bar{u}v$ 及其共轭的三角谐波。检验全部十五个标量，常数项减两倍谐波系数绝对值之和均大于 $0.04$；计入三条软化辐边引入的负半定扰动（范数至多 $6\delta$，覆盖全部正零点所满足的 $\delta \in (0, (23/25)2^{-20}/14^2) \subset [0, 10^{-8}]$），便得到覆盖**整张双钟环面与全部正黎曼零点**的统一谱隙：
 
@@ -60,7 +60,7 @@ $$
 
 ### 7.1.2 全零点容许秩分类、六次有理滤波与双分界对决
 
-[@thm-ou-ch07-peter-weyl-orthonormal] 保证了特征标投影的代数正交性绝非数值凑巧。然而，物理诚实立刻要求我们追问下一句：**在全环面与全部正零点上，共同谱隙究竟是不是只有“留三模”这一条？** 答案是否定的。对五种荷与全部正零点统一排查所有可能的单一固定截断，全环面区间舒尔证书连同 $34$ 枚实际零点排尽其他一切可能后，给出完整分类（[`ch39-all-common-shell-ranks.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-all-common-shell-ranks.py)）：
+[@thm-ou-ch07-peter-weyl-orthonormal] 保证了特征标投影的代数正交性绝非数值凑巧。然而，物理诚实立刻要求我们追问下一句：**在全环面与全部正零点上，共同谱隙究竟是不是只有“留三模”这一条？** 答案是否定的。对五种荷与全部正零点统一排查所有可能的单一固定截断，全环面区间舒尔证书连同 $34$ 枚实际零点排尽其他一切可能后，给出完整分类（[`ch39-all-common-shell-ranks.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-all-common-shell-ranks.py)）：
 
 - **全部非平凡共同低模数集合**恰为 $\{1, 3, 7, 15\}$。
 - 若按“最宽共同谱隙”原则自动切分，胜出的不是 $3$，而是 **$1$ 模**。
@@ -75,7 +75,7 @@ $$
 把固定分界 $9$ 与内禀站点方差最小割 $T = 9 + (1 - \delta)^2$ 放到真实黎曼零点序列的**两步质量读数** $h_{q,j} = |\lambda_j(L_q)(\lambda_j(L_q) - c)|$ 上正面交锋，二者的物理差异马上水落石出。在十九点图中，按“(顶点度数, 软辐边数)”统计，顶点分布依次为 $(10, 0):3$、$(10, 1):3$、$(14, 0):3$、$(16, 0):6$、$(18, 0):3$ 与 $(18, 3):1$；度为 $d$ 且带 $k$ 条软边的顶点给出跨界平方权和 $d - k + k(1 - \delta)^2$，故三个受软化的十度外点同时取到最小割 $T = 9 + (1 - \delta)^2$。对全体实际正零点有 $0 < \delta < (23/25)2^{-20}/14^2$，于是 $9.99999999 < T < 10$。
 
 ::: {.example #ex-ou-ch07-cutoff-comparison title="零点 #8236、#8359 与 #148341 在两步质量读数下的固定分界 9、最小割 T 与双态投影逐项对账"}
-在两步无量纲质量读数 $h_{q,j} = |\lambda_j(L_q)(\lambda_j(L_q) - c)|$（$c = 15 - \delta/3$）与原十六重标量两圈强耦合窗 $[0.117, 0.119]$、四层曲率窗 $[0.998, 1.002]$ 下，三枚关键实际正黎曼零点清晰暴露了三套分界口径的边界差异（[`ch39-first-native-cut.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-first-native-cut.py)、[`ch39-neutral-site-variance-gap.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-neutral-site-variance-gap.py)、[`ch39-conjugate-site-projection-gap.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-conjugate-site-projection-gap.py)）：
+在两步无量纲质量读数 $h_{q,j} = |\lambda_j(L_q)(\lambda_j(L_q) - c)|$（$c = 15 - \delta/3$）与原十六重标量两圈强耦合窗 $[0.117, 0.119]$、四层曲率窗 $[0.998, 1.002]$ 下，三枚关键实际正黎曼零点清晰暴露了三套分界口径的边界差异（[`ch39-first-native-cut.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-first-native-cut.py)、[`ch39-neutral-site-variance-gap.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-neutral-site-variance-gap.py)、[`ch39-conjugate-site-projection-gap.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-conjugate-site-projection-gap.py)）：
 
 | 零点编号 | 两步谱在固定分界 $9$ 下表现 | 两步谱在内禀最小割 $T = 9 + (1-\delta)^2$ 下表现 | 物理窗读数与结构注记 |
 | :---: | :--- | :--- | :--- |
@@ -106,7 +106,7 @@ $$
 
 ### 7.2.2 五步单纯形重叠核、十九点壳升维与 $8K - 3$ 步味色散匹配
 
-进入真正的四维欧氏格点时，常数通量共用的有理度量是 $g = I - J/5$（该度量将在[第十章](ch10-regge-gravity-and-spin2.md)同样充当四维单纯形雷吉引力的平直底座）。在这一度量上构造**五步单纯形威尔逊—重叠核**（[`ch39-simplex-overlap.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-simplex-overlap.py)）：
+进入真正的四维欧氏格点时，常数通量共用的有理度量是 $g = I - J/5$（该度量将在[第十章](ch10-regge-gravity-and-spin2.md)同样充当四维单纯形雷吉引力的平直底座）。在这一度量上构造**五步单纯形威尔逊—重叠核**（[`ch39-simplex-overlap.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-simplex-overlap.py)）：
 
 1. **三物种自由质量窗**：当威尔逊调节器质量 $m$ 落在区间
 
@@ -121,10 +121,10 @@ $$
    I = -3\operatorname{Pf}(C),
    $$
 
-   其中 $C$ 为六个整数磁通组成的 $4 \times 4$ 反对称矩阵（[`ch39-smooth-flux-index.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-smooth-flux-index.py)）。例如两面单位磁通精确给出 $I_{\bar{\mathbf{5}}} = -6$、$I_{\mathbf{10}} = -18$，且所有满足同一光滑界的对角规范场中，各 Cartan 行列式荷统统精确抵消。
+   其中 $C$ 为六个整数磁通组成的 $4 \times 4$ 反对称矩阵（[`ch39-smooth-flux-index.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-smooth-flux-index.py)）。例如两面单位磁通精确给出 $I_{\bar{\mathbf{5}}} = -6$、$I_{\mathbf{10}} = -18$，且所有满足同一光滑界的对角规范场中，各 Cartan 行列式荷统统精确抵消。
 3. **十九点壳升维为四维重叠核**：将十九点壳质量矩阵本身作为四维威尔逊质量项、令外部规范输运在十九分量间共用，小曲率规范场下**十九点壳的完整重叠指数恰为单份指数的三倍**，而其余十六个重层的手征指数全部为零。更进一步，零超荷磁通的小曲率弱扇区以及纯超荷的全部容许磁通扇区都拥有规范不变的三代外尔测度——甚至允许四维每个格点在零点 #11431 与 #133931 之间独立切换，仍保有同一测度与三倍指数！让两只钟分别沿不同空间轴各绕相位环面一周时，只要控制相邻格点的质量变化界，四维核在整个构型空间仍维持严格谱隙 **$> 0.008$**。
 
-然而，四维单纯形格上的三个轻锥并不天然享有三阶对称。在裸动能层面，三个物种的平移特征只允许交换共轭一对，而不支持十九点壳上的三阶坐标轮换，并且裸动能从二、三阶余动量展开起就区分三个中心。能否靠有限程改进把三锥色散拉平？答案是一套清晰的有限步分级结构（[`ch39-finite-taste-jets.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-finite-taste-jets.py)）：
+然而，四维单纯形格上的三个轻锥并不天然享有三阶对称。在裸动能层面，三个物种的平移特征只允许交换共轭一对，而不支持十九点壳上的三阶坐标轮换，并且裸动能从二、三阶余动量展开起就区分三个中心。能否靠有限程改进把三锥色散拉平？答案是一套清晰的有限步分级结构（[`ch39-finite-taste-jets.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-finite-taste-jets.py)）：
 
 - 仅用单步虚部的严格递增五次多项式，即可在整个三物种质量窗内配平三个轻锥的全部二、三阶色散并保留自由谱隙（五次最小；固定原威尔逊项时，四阶两个动量不变量留下不可消去的差）。
 - 同时改进动能与威尔逊标量项后，对**任意指定有限阶 $K$**，至多 **$8K - 3$ 步**就足以把三个轻锥的色散展开配平到 $K$ 阶，同时至少保留一半原自由谱隙；反过来，保持邻近重中心的有限程克利福德核必然满足路径长度下界 $32r \ge K + 1$。
@@ -142,7 +142,7 @@ $$
 
 ## 7.3 粗糙规范测度障碍、正交希格斯标架与纯弱十二费米子顶点 {#sec-ch07-rough-measure}
 
-在光滑背景上一切看似风平浪静。可是一旦进入真正的四维格点路径积分，测度由粗糙规范链主导——在六个满足规范与牛顿标定的黎曼零点上，把共同系数放进完整 $SU(5)$ 微观面权，单个坐标方格距单位不超过 $0.15$ 的条件概率仍小于 $0.184$，而满足光滑定理所需 $2^{-26}$ 小球的概率更是跌到 **$2^{-560}$ 以下**（[`ch39-amplified-smoothness.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-amplified-smoothness.py)）！更直白地说，在未放大的黎曼零点三角面权下，即便将费米子的负对角步严格锁定为四条坐标链的逆积，任意固定正谱隙阈值在足够大的有限盒内都以任意高置信度被最小奇异值击穿，且任意固定近零窗口内的期望本征值数都有正比于可容纳不交子盒数的正下界（[`ch39-closed-link-spectrum.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-closed-link-spectrum.py)）。粗糙背景不是罕见边缘，而是路径积分的压倒性主体。
+在光滑背景上一切看似风平浪静。可是一旦进入真正的四维格点路径积分，测度由粗糙规范链主导——在六个满足规范与牛顿标定的黎曼零点上，把共同系数放进完整 $SU(5)$ 微观面权，单个坐标方格距单位不超过 $0.15$ 的条件概率仍小于 $0.184$，而满足光滑定理所需 $2^{-26}$ 小球的概率更是跌到 **$2^{-560}$ 以下**（[`ch39-amplified-smoothness.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-amplified-smoothness.py)）！更直白地说，在未放大的黎曼零点三角面权下，即便将费米子的负对角步严格锁定为四条坐标链的逆积，任意固定正谱隙阈值在足够大的有限盒内都以任意高置信度被最小奇异值击穿，且任意固定近零窗口内的期望本征值数都有正比于可容纳不交子盒数的正下界（[`ch39-closed-link-spectrum.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-closed-link-spectrum.py)）。粗糙背景不是罕见边缘，而是路径积分的压倒性主体。
 
 ### 7.3.1 粗糙中心反常、电磁 Cartan 荷与二次指数律
 
@@ -150,10 +150,10 @@ $$
 
 | 检验维度 | 显式格点构造与输入 | 量化障碍或阈值结论 | 复算证书 |
 | :--- | :--- | :--- | :--- |
-| $SU(5)$ 粗糙中心反常 | $5^4$ 周期盒闭合 $SU(5)$ 链 | $(I_{\bar{\mathbf{5}}}, I_{\mathbf{10}}) = (2, 7)$，左手行列式中心荷 $-2 + 14 \equiv 2 \pmod 5$；三背景覆盖全质量窗 | [`ch39-rough-overlap-index.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-rough-overlap-index.py) |
-| 电磁 Cartan 荷与二次律 | $5^4$ 盒两面电磁方向有限磁通 | 五阶中心荷消去后，弱同位旋 Cartan 荷仍为 **$-100$**（$460/625$ 赋值非平凡）；无障碍等价于 $I(k) = c k^2$ | [`ch39-magnetic-weyl-index.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-magnetic-weyl-index.py) |
-| 平行正交希格斯标架数 | 有序正交基本 $SU(5)$ 希格斯场 | **$3$ 份**仍留 $SU(2)$，大盒必现近零模；**$4$ 份**维持共同谱隙 $1/100$，所需动能刚度 $\kappa$ 仅随盒长对数增长 | [`ch39-higgs-rank-gap.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-higgs-rank-gap.py) |
-| 纯弱三代瞬子顶点 | $2^4$ 盒纯 $SU(2)$ 奇指数链 + 六 RH 面权 | $12$ 份双重态实配对使 $(QQQL)^3$ 积分处处同号，归一 $\Delta B = \Delta L = 3$ 期望 **$> 2^{-9472}$** | [`ch39-rh-weighted-weak-vertex.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-rh-weighted-weak-vertex.py) |
+| $SU(5)$ 粗糙中心反常 | $5^4$ 周期盒闭合 $SU(5)$ 链 | $(I_{\bar{\mathbf{5}}}, I_{\mathbf{10}}) = (2, 7)$，左手行列式中心荷 $-2 + 14 \equiv 2 \pmod 5$；三背景覆盖全质量窗 | [`ch39-rough-overlap-index.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-rough-overlap-index.py) |
+| 电磁 Cartan 荷与二次律 | $5^4$ 盒两面电磁方向有限磁通 | 五阶中心荷消去后，弱同位旋 Cartan 荷仍为 **$-100$**（$460/625$ 赋值非平凡）；无障碍等价于 $I(k) = c k^2$ | [`ch39-magnetic-weyl-index.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-magnetic-weyl-index.py) |
+| 平行正交希格斯标架数 | 有序正交基本 $SU(5)$ 希格斯场 | **$3$ 份**仍留 $SU(2)$，大盒必现近零模；**$4$ 份**维持共同谱隙 $1/100$，所需动能刚度 $\kappa$ 仅随盒长对数增长 | [`ch39-higgs-rank-gap.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-higgs-rank-gap.py) |
+| 纯弱三代瞬子顶点 | $2^4$ 盒纯 $SU(2)$ 奇指数链 + 六 RH 面权 | $12$ 份双重态实配对使 $(QQQL)^3$ 积分处处同号，归一 $\Delta B = \Delta L = 3$ 期望 **$> 2^{-9472}$** | [`ch39-rh-weighted-weak-vertex.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-rh-weighted-weak-vertex.py) |
 
 第一道重击是**全域正测度中心障碍**：在 $5^4$ 周期盒上构造的显式闭合 $SU(5)$ 粗糙背景，直接给出共轭基本表示与外平方表示的重叠指数 $(I_{\bar{\mathbf{5}}}, I_{\mathbf{10}}) = (2, 7)$。在左手外尔行列式线上，$\mathbb{Z}_5$ 中心生成元积累的净荷为
 
@@ -161,7 +161,7 @@ $$
 -I_{\bar{\mathbf{5}}} + 2 I_{\mathbf{10}} = -2 + 14 = 12 \equiv 2 \pmod 5 \neq 0.
 $$
 
-这一反例在零点面权的一个正概率开集上稳定存在；即便放宽让 $\bar{\mathbf{5}}$ 与 $\mathbf{10}$ 独立挑选各自的三物种窗口质量 $(m_{\bar{\mathbf{5}}}, m_{\mathbf{10}})$，只需三个显式背景就能彻底覆盖整片二维质量窗（[`ch39-uniform-center-obstruction.py`](https://github.com/loning/ch39-omega-research/blob/45cc7cad9a6dee0008a58c39abec4d4db3887c1c/replay/ch39-uniform-center-obstruction.py)）。由此一锤定音：不约束粗糙规范域，这套五步重叠核无法在全构型空间定义规范等变的外尔测度。
+这一反例在零点面权的一个正概率开集上稳定存在；即便放宽让 $\bar{\mathbf{5}}$ 与 $\mathbf{10}$ 独立挑选各自的三物种窗口质量 $(m_{\bar{\mathbf{5}}}, m_{\mathbf{10}})$，只需三个显式背景就能彻底覆盖整片二维质量窗（[`ch39-uniform-center-obstruction.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-uniform-center-obstruction.py)）。由此一锤定音：不约束粗糙规范域，这套五步重叠核无法在全构型空间定义规范等变的外尔测度。
 
 第二道重击来自**电磁 Cartan 荷与二次指数律**：哪怕把目光缩回普通电磁方向，在 $5^4$ 盒上施加两面有限磁通使五阶中心荷恰好归零，弱同位旋生成元仍在左手行列式线上留下 **$-100$** 的巨额 Cartan 荷，且全部 $625$ 种有序对角磁通赋值中有 $460$ 种带有非平凡 Cartan 荷！对任意尚未发生模合并的有限阿贝尔链场，这条检验给出充要判据：所有对角赋值上的 Cartan 荷全消，**当且仅当指数函数满足精确的二次定律 $I(k) = c k^2$**（平行四边形恒等式）。光滑普法夫区自动服从二次律，粗糙区公然背叛它。
 
