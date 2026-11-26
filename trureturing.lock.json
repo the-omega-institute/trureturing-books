@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "9d657d57f2db6189974c264474cf4057462403ba",
-  "pinned_at": "2026-11-26T21:38:15Z",
+  "commit": "284e44aeafed2bc25331f4fd0b3ed855fda2050c",
+  "pinned_at": "2026-11-26T22:39:33Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -6042,6 +6042,187 @@
       "line": 443,
       "signature": "theorem bloch_ball_hyperbolic : (∃ Φ : {r : EuclideanSpace ℝ (Fin 3) // ‖r‖ < 1} ≃ HyperbolicThreeSpace, ∀ r s, Real.cosh (dist (Φ r) (Φ s)) = kleinCosh r s) ∧ (∀ r : EuclideanSpace ℝ (Fin 3), blochFilter 1 r = r) ∧ (∀ (g h : Matrix (Fin 2) (Fin 2) ℂ) (r : EuclideanSpace ℝ (Fin 3)), (Matrix.trace (g * blochMatrix 1 r * gᴴ)).re ≠ 0 → blochFilter h (blochFilter g r) = blochFilter (h * g) r) ∧ (∀ (g : Matrix (Fin 2) (Fin 2) ℂ) (r s : EuclideanSpace ℝ (Fin 3)), (Matrix.trace (g * blochMatrix 1 r * gᴴ)).re ≠ 0 → (Matrix.trace (g * blochMatrix 1 s * gᴴ)).re ≠ 0 → 1 - ⟪blochFilter g r, blochFilter g "
     },
+    "D5/S3/Geometry/Lorentz/DimensionSelection4D.angular_trace_summable_iff_of_eventually_comparable": {
+      "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
+      "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.angular_trace_summable_iff_of_eventually_comparable",
+      "kind": "theorem",
+      "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
+      "line": 538,
+      "signature": "theorem angular_trace_summable_iff_of_eventually_comparable (D : ℕ) (t : ℕ → ℝ) (ht : ∀ ℓ, 0 ≤ t ℓ) {a b : ℝ} (ha : 0 < a) (h : ∀ᶠ ℓ in Filter.atTop, a * angularMode D ℓ ≤ t ℓ ∧ t ℓ ≤ b * angularMode D ℓ) : Summable t ↔ D ≤ 5",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DimensionSelection4D.curvature4_ricci": {
+      "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
+      "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.curvature4_ricci",
+      "kind": "theorem",
+      "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
+      "line": 665,
+      "signature": "theorem curvature4_ricci (R : AlgebraicCurvature 4) (i j : Fin 4) : WeylNullScreen.ricci (curvature4 R) i j = entry (ricciMap 4 R) i j",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DimensionSelection4D.finrank_algebraicCurvature": {
+      "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
+      "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.finrank_algebraicCurvature",
+      "kind": "theorem",
+      "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
+      "line": 283,
+      "signature": "theorem finrank_algebraicCurvature (D : ℕ) (hD : 3 ≤ D) : finrank ℝ (AlgebraicCurvature D) = D ^ 2 * (D ^ 2 - 1) / 12",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DimensionSelection4D.finrank_screenSTF": {
+      "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
+      "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.finrank_screenSTF",
+      "kind": "theorem",
+      "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
+      "line": 490,
+      "signature": "theorem finrank_screenSTF (D : ℕ) (hD : 3 ≤ D) : finrank ℝ (ScreenSTF D) = screenDim D",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DimensionSelection4D.finrank_symmetricRicci": {
+      "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
+      "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.finrank_symmetricRicci",
+      "kind": "theorem",
+      "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
+      "line": 451,
+      "signature": "theorem finrank_symmetricRicci (D : ℕ) : finrank ℝ (SymForm (Fin D)) = D * (D + 1) / 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DimensionSelection4D.finrank_weyl": {
+      "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
+      "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.finrank_weyl",
+      "kind": "theorem",
+      "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
+      "line": 467,
+      "signature": "theorem finrank_weyl (D : ℕ) (hD : 3 ≤ D) : finrank ℝ (Weyl D) = D * (D + 1) * (D + 2) * (D - 3) / 12",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DimensionSelection4D.four_dimensional_compatibility": {
+      "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
+      "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.four_dimensional_compatibility",
+      "kind": "theorem",
+      "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
+      "line": 637,
+      "signature": "theorem four_dimensional_compatibility : finrank ℝ (AlgebraicCurvature 4) = finrank ℝ WeylNullScreen.AlgebraicCurvature4 ∧ finrank ℝ (Weyl 4) = finrank ℝ WeylNullScreen.Weyl4 ∧ finrank ℝ (ScreenSTF 4) = 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DimensionSelection4D.hodge_two_form_degree_iff": {
+      "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
+      "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.hodge_two_form_degree_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
+      "line": 527,
+      "signature": "theorem hodge_two_form_degree_iff (D : ℕ) : D - 2 = 2 ↔ D = 4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DimensionSelection4D.screenDim_pos_iff": {
+      "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
+      "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.screenDim_pos_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
+      "line": 514,
+      "signature": "theorem screenDim_pos_iff (D : ℕ) : 0 < screenDim D ↔ 4 ≤ D",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DimensionSelection4D.screen_tide_weyl_invariance": {
+      "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
+      "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.screen_tide_weyl_invariance",
+      "kind": "theorem",
+      "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
+      "line": 610,
+      "signature": "theorem screen_tide_weyl_invariance {n : ℕ} (hn : 0 < n) (R : AlgebraicCurvature (n + 2)) (i j : Fin n) : screenTide R i j - (if i = j then 1 else 0) * (∑ a, screenTide R a a) / n = screenTide (R - ricciSection _ (ricciMap _ R)) i j",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DimensionSelection4D.summable_angularMode_iff": {
+      "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
+      "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.summable_angularMode_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
+      "line": 529,
+      "signature": "theorem summable_angularMode_iff (D : ℕ) : Summable (fun ℓ : ℕ => ((ℓ : ℝ) + 1) ^ ((D : ℤ) - 7)) ↔ D ≤ 5",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DimensionSelection4D.unique_dimension_four_of_weyl_modular_chiral": {
+      "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
+      "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.unique_dimension_four_of_weyl_modular_chiral",
+      "kind": "theorem",
+      "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
+      "line": 556,
+      "signature": "theorem unique_dimension_four_of_weyl_modular_chiral (D : ℕ) : (0 < screenDim D ∧ Summable (fun ℓ : ℕ => ((ℓ : ℝ) + 1) ^ ((D : ℤ) - 7)) ∧ Even D) ↔ D = 4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DimensionSelection4D.unique_dimension_four_of_weyl_modular_hodge": {
+      "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
+      "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.unique_dimension_four_of_weyl_modular_hodge",
+      "kind": "theorem",
+      "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
+      "line": 565,
+      "signature": "theorem unique_dimension_four_of_weyl_modular_hodge (D : ℕ) : (0 < screenDim D ∧ Summable (fun ℓ : ℕ => ((ℓ : ℝ) + 1) ^ ((D : ℤ) - 7)) ∧ D - 2 = 2) ↔ D = 4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DimensionSelection4D.weylDim_pos_iff": {
+      "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
+      "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.weylDim_pos_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
+      "line": 471,
+      "signature": "theorem weylDim_pos_iff (D : ℕ) (hD : 3 ≤ D) : 0 < finrank ℝ (Weyl D) ↔ 4 ≤ D",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D.coulomb_raw_square": {
       "module": "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D",
       "name": "D5.S3.Geometry.Lorentz.KerrSchildWeylDoubleCopy4D.coulomb_raw_square",
@@ -10103,6 +10284,188 @@
       "statement_id": "sha256:88da614eb788c4ec4b01c0f7450ee043d76815673140bb68122371aa742bd6d0",
       "line": 297,
       "signature": "theorem shear_clock_deficit_and_rigidity (s : Finset ι) (hs : s.Nonempty) (w ρ δ : ι → ℝ) (ε : ℝ) (hw : ∀ i ∈ s, 0 < w i) (hρ : ∀ i ∈ s, 0 < ρ i) (hδ : ∀ i ∈ s, 0 ≤ δ i) (hε : ε < 1) : let M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.coreWeight_faithful": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.coreWeight_faithful",
+      "kind": "theorem",
+      "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
+      "line": 239,
+      "signature": "theorem coreWeight_faithful [Nonempty n] {β : ℝ} (hβ : 0 < β) (E : n → ℝ) (A : MatrixField n) (hA : ∀ᵐ y ∂volume, (A y).PosSemidef) : coreWeight β E A = 0 ↔ A = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.coreWeight_semifinite": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.coreWeight_semifinite",
+      "kind": "theorem",
+      "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
+      "line": 246,
+      "signature": "theorem coreWeight_semifinite [Nonempty n] {β : ℝ} (hβ : 0 < β) (E : n → ℝ) (A : CoreField n) (hp : ∀ᵐ x ∂volume, 0 ≤ A.1 x) : ∃ B : ℕ → CoreField n, (∀ k, (∀ᵐ x ∂volume, 0 ≤ (B k).1 x ∧ (B k).1 x ≤ A.1 x) ∧ coreWeight β E (B k).1 ≠ ∞) ∧ coreWeight β E A.1 = ⨆ k, coreWeight β E (B k).1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.cqTraceDensity_field_ae": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.cqTraceDensity_field_ae",
+      "kind": "theorem",
+      "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
+      "line": 427,
+      "signature": "theorem cqTraceDensity_field_ae [Nonempty n] {β : ℝ} (hβ : 0 < β) (E : n → ℝ) {p : ℝ → ℝ} (hp : Measurable p) (hn : ∀ x, 0 ≤ p x) (hp1 : ∫⁻ x in Ici (0 : ℝ), ENNReal.ofReal (p x) = 1) (σ : ℝ → DensityState n) (hσ : Measurable fun x => CStarMatrix.ofMatrix.symm (σ x).1) : (cqTraceDensity hβ E hp hn hp1 σ hσ).field =ᵐ[volume] cqDensity β E p σ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.dressed_clock_cutoff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.dressed_clock_cutoff",
+      "kind": "theorem",
+      "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
+      "line": 118,
+      "signature": "theorem dressed_clock_cutoff (E : n → ℝ) (ξ : n → ℝ → ℂ) (y : ℝ) (i : n) : dress E (fun j x => if 0 ≤ x then ξ j x else 0) i y = (activeProjection E y *ᵥ fun j => dress E ξ j y) i",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.gibbs_clock_moments": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.gibbs_clock_moments",
+      "kind": "theorem",
+      "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
+      "line": 185,
+      "signature": "theorem gibbs_clock_moments [Nonempty n] {β : ℝ} (hβ : 0 < β) (E : n → ℝ) (A : Matrix n n ℂ) (f : ℝ → ℝ) (hf : Measurable f) (hC : ∃ C, ∀ x, ‖f x‖ ≤ C) : observerTrace β E (AEEqFun.mk (clockObservable E A f) (measurable_clockObservable E A hf).aestronglyMeasurable) = (Matrix.trace (CStarMatrix.ofMatrix.symm (gibbsState β E).1 * A)) * ((∫ x in Ici (0 : ℝ), clockWeight β x * f x : ℝ) : ℂ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.observerCorner_mem_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.observerCorner_mem_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
+      "line": 109,
+      "signature": "theorem observerCorner_mem_iff (E : n → ℝ) (A : CoreField n) : A ∈ ObserverCorner E ↔ cutoffField E * A.val * cutoffField E = A.val",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.observer_entropy_coherence_defect": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.observer_entropy_coherence_defect",
+      "kind": "theorem",
+      "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
+      "line": 623,
+      "signature": "theorem observer_entropy_coherence_defect [Nonempty n] {β : ℝ} (hβ : 0 < β) (E : n → ℝ) (p : ℝ → ℝ) (hp : Measurable p) (hn : ∀ x, 0 ≤ p x) (hm : ∫⁻ x in Ici (0 : ℝ), ENNReal.ofReal (p x) = 1) (σ : ℝ → DensityState n) (hσm : Measurable fun x => stateMatrix (σ x)) (hpl : IntegrableOn (fun x => p x * Real.log (p x)) (Ici 0)) (hxp : IntegrableOn (fun x => x * p x) (Ici 0)) : let σ₀",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.observer_generalized_entropy": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.observer_generalized_entropy",
+      "kind": "theorem",
+      "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
+      "line": 596,
+      "signature": "theorem observer_generalized_entropy [Nonempty n] {β : ℝ} (hβ : 0 < β) (E : n → ℝ) (p : ℝ → ℝ) (hp : Measurable p) (hn : ∀ x, 0 ≤ p x) (hm : ∫⁻ x in Ici (0 : ℝ), ENNReal.ofReal (p x) = 1) (σ : ℝ → DensityState n) (hσm : Measurable fun x => stateMatrix (σ x)) (hσ : ∀ x, Commute (stateMatrix (σ x)) (energyDiagonal E)) (hpl : IntegrableOn (fun x => p x * Real.log (p x)) (Ici 0)) (hxp : IntegrableOn (fun x => x * p x) (Ici 0)) : traceEntropy (cqTraceDensity hβ E hp hn hm σ hσm) = ((-(∫ x in Ici (0 : ℝ), p x * (β * x + quantumRelativeEntropy (σ x) (gibbsState β E))) - (∫ x in Ici (0 : ℝ), p x * Rea",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.observer_trace_faithful": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.observer_trace_faithful",
+      "kind": "theorem",
+      "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
+      "line": 281,
+      "signature": "theorem observer_trace_faithful [Nonempty n] {β : ℝ} (hβ : 0 < β) (E : n → ℝ) (A : ObserverCorner E) (hA : ∀ᵐ y ∂volume, (A.1.1 y).PosSemidef) : observerTrace β E A.1.1 = 0 ↔ A.1.1 = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.observer_trace_mul_comm": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.observer_trace_mul_comm",
+      "kind": "theorem",
+      "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
+      "line": 152,
+      "signature": "theorem observer_trace_mul_comm (β : ℝ) (E : n → ℝ) (A B : MatrixField n) : observerTrace β E (A * B) = observerTrace β E (B * A)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.observer_trace_one": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.observer_trace_one",
+      "kind": "theorem",
+      "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
+      "line": 215,
+      "signature": "theorem observer_trace_one [Nonempty n] {β : ℝ} (hβ : 0 < β) (E : n → ℝ) : observerTrace β E (cutoffField E) = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.traceEntropy_eq_neg_integral": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.traceEntropy_eq_neg_integral",
+      "kind": "theorem",
+      "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
+      "line": 322,
+      "signature": "theorem traceEntropy_eq_neg_integral [Nonempty n] {β : ℝ} (hβ : 0 < β) {E : n → ℝ} (ρ : TraceDensity β E) (hℓ : Integrable (fun y => totalWeight β E y * paddedEntropyTrace E ρ.field y)) : traceEntropy ρ = (-(∫ y, totalWeight β E y * paddedEntropyTrace E ρ.field y) : ℝ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.trace_entropy_eq_zero_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.trace_entropy_eq_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
+      "line": 313,
+      "signature": "theorem trace_entropy_eq_zero_iff [Nonempty n] {β : ℝ} (hβ : 0 < β) {E : n → ℝ} (ρ : TraceDensity β E) : traceEntropy ρ = 0 ↔ ρ.field = cutoffField E",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.trace_entropy_le_zero": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.trace_entropy_le_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
+      "line": 308,
+      "signature": "theorem trace_entropy_le_zero {β : ℝ} {E : n → ℝ} (ρ : TraceDensity β E) : traceEntropy ρ ≤ 0",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
