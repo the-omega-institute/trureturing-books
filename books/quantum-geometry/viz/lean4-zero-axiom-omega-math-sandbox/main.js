@@ -775,7 +775,7 @@
   }
 
   /* ---------- words ---------- */
-  const ROUTE_NAME = { omega: 'OmegaMath', real: 'Mathlib.Real', axiom: 'axiom' };
+  const ROUTE_NAME = { omega: 'QRat (Init)', real: 'Mathlib.Real', axiom: 'axiom' };
   const STAGE_NAME = [
     ['载体', 'carrier'],
     ['类型检查', 'typecheck'],
@@ -804,7 +804,7 @@
     tasks: [['四项任务（MODEL）', 'FOUR TASKS (MODEL)'], ['实数栈的账（MODEL）', 'THE REAL STACK (MODEL)']]
   };
   const LENS_NAME = [
-    ['OmegaMath 构造栈', 'OMEGAMATH STACK'],
+    ['有理算例', 'RATIONAL EXAMPLES'],
     ['传统对照 (MODEL)', 'CONTRAST (MODEL)']
   ];
   /** The task whose Lean statement holds a conjunct. */
@@ -841,18 +841,18 @@
   function stageText(route, k, say = L) {
     if (route === 'omega')
       return [
-        say('载体只有四个整数：structure ProjTernion，外加 Int × Nat 的 QRat；没有商类型，也没有极限。', 'The carrier is four integers, structure ProjTernion, with QRat a pair Int × Nat: no quotient type, no limit.'),
-        say('类型检查通过：OmegaSpace 是类型类接口，不是 axiom 声明。', 'It typechecks: OmegaSpace is a typeclass, not an axiom declaration.'),
-        say(`decide 把 ${MASTER_OK} 条断言归约到 true，共 ${MASTER_STEPS} 步整数运算。`, `decide reduces ${MASTER_OK} conjuncts to true in ${MASTER_STEPS} integer steps.`),
-        say('#print axioms 的回答：does not depend on any axioms，公理 = ∅。', '#print axioms answers: does not depend on any axioms, axioms = ∅.'),
+        say('原型隐式导入标准 Init。ProjTernion 存储四个整数，QRat 存储 Int × Nat。', 'The prototype implicitly imports standard Init. ProjTernion stores four integers and QRat stores an Int × Nat pair.'),
+        say('原型声明 OmegaSpace 的字段，构造实例还须证明各字段。', 'The prototype declares the OmegaSpace fields. An instance requires proofs of those fields.'),
+        say(`decide 核验 ${MASTER_OK} 条有限断言。网页重算这些例子用了 ${MASTER_STEPS} 步整数运算。`, `Lean checks ${MASTER_OK} finite assertions by decide. The browser recomputes the examples in ${MASTER_STEPS} integer steps.`),
+        say('在隐式导入标准 Init 的原型中，#print axioms omega_zero_axiom_master_check 给出空清单。', 'With implicit standard Init, #print axioms omega_zero_axiom_master_check reports an empty list.'),
         say(`#eval 原生执行：triad pHalf p0 qHalf 输出 ${tuple(triad(PHALF, P0, QHALF))}。`, `#eval runs natively: triad pHalf p0 qHalf prints ${tuple(triad(PHALF, P0, QHALF))}.`)
       ][k];
     if (route === 'real')
       return [
-        say('Real 是柯西列的商，从定义起就带上三条公理。', 'Real is a quotient of Cauchy sequences and carries three axioms from its definition on.'),
+        say('Real 用柯西列的商构造。这里对照的实数圆周桥接定理在官方端有三条公理。', 'Real is built from a quotient of Cauchy sequences. The official real circle bridge has three recorded axioms.'),
         say('类型检查照常通过。', 'It typechecks as usual.'),
         say('decide 停在 Classical.choice；要改用 norm_num 一类的证明。', 'decide stops at Classical.choice; a proof by norm_num and the like takes its place.'),
-        say(`#print axioms 列出 ${axiomText('real')}；1/2 : ℝ 是 noncomputable，第 5 阶不通。`, `#print axioms lists ${axiomText('real')}; 1/2 : ℝ is noncomputable, so stage 5 is closed.`)
+        say(`官方 OmegaShadowBridge.cayley_circle_unit 的公理为 ${axiomText('real')}；1/2 : ℝ 是 noncomputable，第 5 阶不通。`, `Official OmegaShadowBridge.cayley_circle_unit uses ${axiomText('real')}. 1/2 : ℝ is noncomputable, so stage 5 is closed.`)
       ][k];
     return [
       say('axiom kappa_refl_bad 写在全部四元组上：κ(x, x) = ⟨1, 1⟩，漏掉了零元组。', 'axiom kappa_refl_bad is stated for all quadruples, κ(x, x) = ⟨1, 1⟩: the zero tuple is forgotten.'),
@@ -959,7 +959,7 @@
     const items = [['vi', L('有理三元球面 ℚP³', 'rational ternion sphere ℚP³')]];
     switch (state.scene) {
       case 'kernel':
-        items.push(['cy', L('OmegaMath 归约束', 'OmegaMath beam')], ['mg', L('Mathlib.Real · axiom', 'Mathlib.Real · axiom')], ['am', L('当前这一阶', 'current stage')]);
+        items.push(['cy', L('QRat 原型', 'QRat prototype')], ['mg', L('Mathlib.Real · axiom', 'Mathlib.Real · axiom')], ['am', L('当前这一阶', 'current stage')]);
         break;
       case 'carrier':
         items.push(['cy', L('整数射线 · κ 纬圈', 'integer ray · κ circles')], ...(state.lens ? [['mg', L('四位小数的旋量', 'four-decimal spinor')]] : []), ['am', L('当前四元组', 'current tuple')]);
@@ -989,7 +989,7 @@
       if (s === 'kernel')
         return {
           omega: {
-            long: pair(`紫球上方五枚棱柱是编译与审计的五阶。青色光束沿 OmegaMath 的轨道走到第 ${a.k + 1} 阶（琥珀）；靠前的品红轨道是自定义 axiom，停在第 3 阶，掉到 False 晶体；靠后的品红轨道是 Mathlib.Real，长出支线，停在第 4 阶。拖琥珀点换阶。`, `The five prisms above the violet ball are the stages of compiling and auditing. The cyan beam on the lane of OmegaMath has reached stage ${a.k + 1} (amber); the magenta lane in front is the custom axiom, which stops at stage 3 and drops to the crystal False; the magenta lane behind is Mathlib.Real, which grows side branches and stops at stage 4. Drag the amber point to change the stage.`),
+            long: pair(`紫球上方五枚棱柱是编译与审计的五阶。青色光束沿 QRat 原型的轨道走到第 ${a.k + 1} 阶（琥珀）；靠前的品红轨道是自定义 axiom，停在第 3 阶，掉到 False 晶体；靠后的品红轨道是 Mathlib.Real，长出支线，停在第 4 阶。拖琥珀点换阶。`, `The five prisms above the violet ball are the stages of compiling and auditing. The cyan beam on the QRat prototype lane has reached stage ${a.k + 1} (amber); the magenta lane in front is the custom axiom, which stops at stage 3 and drops to the crystal False; the magenta lane behind is Mathlib.Real, which grows side branches and stops at stage 4. Drag the amber point to change the stage.`),
             fig: pair(`青色光束走到第 ${a.k + 1} 阶；品红的 axiom 停在第 3 阶，Mathlib.Real 停在第 4 阶。`, `The cyan beam is at stage ${a.k + 1}; magenta axiom stops at 3, Mathlib.Real at 4.`)
           },
           real: {
@@ -1081,7 +1081,7 @@
       N('axiom', off(archPoint(0, LANE.axiom), tiny ? 8 : 12, tiny ? -18 : -26), 'axiom', 'c-mg');
       if (!tiny) {
         if (s === 'kernel' || CENSUS.tendsto[a.task]) N('filter', off(archPoint(2.62, LANE.real, ARCH_R + 0.2), 124, 0), s === 'kernel' ? 'Filter.Tendsto · T3' : 'Filter.Tendsto', 'c-mg');
-        if (s === 'kernel') N('empty', off(archPoint(3, 0, ARCH_R - 0.12), -22, -16), 'axioms = ∅', 'c-cy');
+        if (s === 'kernel') N('empty', off(archPoint(3, 0, ARCH_R - 0.12), -22, -16), L('八项算例 · ∅', 'eight checks · ∅'), 'c-cy');
         if (s === 'kernel') N('kap', off(on(PHALF), 8, -22), `κ(p0, pHalf) = ${fstr(fr(kappa(P0, PHALF)))}`, 'c-cy');
       }
       if (s === 'tasks') {
@@ -1135,7 +1135,7 @@
       N('pi', off(scale(BRIDGE_DIR, SHELL - 0.2), 0, tiny ? 22 : 26), 'Π<sub>ℝ</sub>', 'c-am');
       N('bound', off(scale(BRIDGE_DIR, SHELL), tiny ? -10 : 8, tiny ? -26 : -32), b.ok ? (tiny ? `&lt; ${fstr(b.target)}` : `${fstr(b.bound)} &lt; ${fstr(b.target)}`) : L('桥不通', 'no bridge'), 'c-mg');
       if (!tiny) N('shell', seen(0.72, 1.28, 0.2), L('实连续统壳层', 'real continuum shell'), 'c-mg');
-      N('core', seen(0.1, -0.62, 1.05), tiny ? 'ℚ' : L('整数核 · 公理 ∅', 'integer core · axioms ∅'), 'c-cy');
+      N('core', seen(0.1, -0.62, 1.05), tiny ? 'ℚ' : L('有理证书', 'rational certificate'), 'c-cy');
     }
   }
   /** A relation and its digits stay on one line. */
@@ -1402,7 +1402,7 @@
   function tracks(m) {
     const c = m.carrier;
     return {
-      kernel: [`${L('公理', 'axioms')} ${axiomText('omega')}`, `${L('公理', 'axioms')} ${CENSUS.axioms.real.length} · False`],
+      kernel: [`${L('八项算例', 'eight checks')} · ${axiomText('omega')}`, `${L('公理', 'axioms')} ${CENSUS.axioms.real.length} · False`],
       carrier: [`${tuple(c.second.raw)} ↦ ${tuple(c.p)}`, decimalSpinor(c.norm).root ? `‖p‖ = ${decimalSpinor(c.norm).root}` : `${c.norm}·d² ${relQ(decimalSpinor(c.norm).rest, 8)}`],
       master: [`${MASTER_OK}/8 · ${CENSUS.omega[taskOf(m.master.k)]}`, `${CENSUS.real[taskOf(m.master.k)]}`],
       bridge: [`S = ${both(m.bridge.S)}`, `${fstr(m.bridge.bound)} ${relQ(m.bridge.bound, 6)}`],
@@ -1429,7 +1429,9 @@
     // the lens already says MODEL in the contrast: the pill does not repeat it
     const name = L(...SCENE_NAME[state.scene][state.lens]);
     put('scenePill', `${L(...LENS_NAME[state.lens])} <strong>${state.lens ? name.replace(/ ?[（(]MODEL[）)]/, '') : name}</strong>`);
-    put('keyPill', `#print axioms <strong>${state.lens ? CENSUS.axioms.real.length : axiomText(ONARCH(state.scene) ? arch.route : 'omega').replace(/^\{(.*)\}$/, (_, x) => String(x.split(', ').length))}</strong>`);
+    const auditRoute = state.lens ? 'real' : ONARCH(state.scene) ? arch.route : 'omega';
+    const auditLabel = { omega: L('八项算例', 'eight checks'), real: L('实数圆周桥', 'real circle bridge'), axiom: 'kappa_refl_bad' }[auditRoute];
+    put('keyPill', `${auditLabel} · ${L('公理', 'axioms')} <strong>${CENSUS.axioms[auditRoute].length}</strong>`);
     $('hint').textContent = L('拖琥珀手柄改本卡的量 · 拖空白处转视角 · 空格播放', 'drag the amber handle to change the card · drag empty space to orbit · Space plays');
     $('formula').innerHTML = { kernel: 'decide → #print axioms → #eval', carrier: 'κ = ⟨p, q⟩²/(‖p‖²‖q‖²)', master: '[x, y, z] = normalize(x · ȳ · z)', bridge: 'S = A − BC⁻¹B · cq &lt; dp·4<sup>N+1</sup>', tasks: 'T1 … T4 × 3 × 5' }[state.scene];
     for (const id of ['lensToggleBtn', 'lensMirror']) $(id).setAttribute('aria-pressed', String(state.lens === 1));

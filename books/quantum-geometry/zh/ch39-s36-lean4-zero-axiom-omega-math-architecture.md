@@ -1,6 +1,6 @@
 # 32.8 Lean 4 零公理形式化基座（OmegaMath）：纯 CIC 内核、规范整数三元载体与单向阴影函子 {#sec-ch39-lean4-zero-axiom-omega-math-architecture}
 
-> *“不需要修改 Lean 4 的底层内核，更绝对不能用 `axiom` 关键字硬塞自定义公理；真正应当构建的，是直接站在 Lean 4 原生无公理的归纳构造演算（CIC）内核之上，绕开 Mathlib 依赖选择公理与实无穷的经典实数（Real）分支，用可计算的类型类接口（class）配规范整数射影载体（structure）建立一套零公理依赖（Zero-Axiom）的 OmegaMath 基础层。”*
+> *“哪条声明用了哪些公理？同一个 Lean 内核中，有限整数算例与经典实数定理可以给出不同的答案。”*
 
 在 [§32.7](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md) 确立了无无穷、无超越数的有限有理数学体系 $\mathbf{Math}_\Omega$ 之后，一个最锋利的工程与逻辑落地问题迎面而来：**要在现代交互式定理证明器 Lean 4 中把这座大厦真正建起来，我们究竟需要改动 Lean 4 的底层内核吗？还是直接用 `axiom` 关键字把母公理 $\mathrm{AXIOM}\text{-}\Omega$ 写进头文件？抑或在现有内核之上另辟一条零公理构造路径？**
 
@@ -39,20 +39,20 @@
 :::
 
 ::: {.viz src="lean4-zero-axiom-omega-math-sandbox" preset="cic-kernel-vs-axiom-and-real-tax" height="500"}
-**五阶编译验证流水线与三路线公理审计对比**：中央紫色不透明实体三元数球面 $\mathbb{QP}^3$ 与上方三维五阶编译验证棱柱轨（`语法载体 → 类型检查 → ι-归约/decide → #print axioms 审计 → 原生 #eval 机器码`）同台联动；琥珀焦点停在纯 CIC $+$ `OmegaMath` 路线第 4 阶公理审计节点，青色归约束零阻碍贯通全轨并输出 `#print axioms = ∅` 与原生 C 可执行码，对比品红分叉标示的自定义 `axiom` 路线（在 `ι-归约` 处死锁并在零元漏检时塌缩至 `False`）与 `Mathlib.Real` 路线（注入 `{propext, Classical.choice, Quot.sound}`、阻断 `decide` 与 `(1 / 2 : ℝ)` 等 `noncomputable` 运算的 `#eval`，并在求导任务上长出 `Filter.Tendsto` 支线树）。
+**五阶编译与审计。** 青色路线显示隐式导入标准 `Init` 的原型。第四阶执行 `#print axioms omega_zero_axiom_master_check`，这条含八个有限断言的定理返回空公理清单。其他轨道展示自定义公理的零元组反例与经典实数运算。实数圆周桥接定理在官方端依赖 `propext`、`Classical.choice` 和 `Quot.sound`。
 :::
 
 ---
 
-## 32.8.2 在 Lean 4 中构建 `OmegaMath` 的三层“零公理”架构 {#sec-ch39-omega-math-three-layer-zero-axiom-stack}
+## 32.8.2 Lean 4 中的整数载体、模型接口与实数桥接 {#sec-ch39-omega-math-three-layer-zero-axiom-stack}
 
 `OmegaMath` 的同一份库源码在严格后端和常规后端分别编译。严格库的空内核重放覆盖所选库根的导入闭包。D5 声明另作双端编译对照与分端公理测量。书中的定理徽章取官方端冻结记录。常规后端编译的若干 D5 定理使用 Lean 的标准命题外延公理 `propext`。 [OmegaMath 模块与验证](https://github.com/the-omega-institute/trureturing/blob/dev/src/README.md)
 
-正确的形式化架构采用**“第 0 层规范整数结构造实例 $+$ 第 1 层类型类抽接口证相容 $+$ 第 2 层单向阴影函子接 `Mathlib`”**的三层无公理设计（`MODEL` 架构总表结合 `NUM` 编译器核验）：
+第 0 层提供整数载体，第 1 层列出迁移与读数的定律，第 2 层把结果映入经典实分析。下表用具名声明的测量说明这个三层架构模型。
 
-| 架构维度 | 错误路线：硬写 `axiom` 声明 | 传统路线：`Mathlib` 经典 `Real` 栈 | 最优路线：`OmegaMath` 零公理构造栈 |
+| 架构维度 | 错误路线：硬写 `axiom` 声明 | 传统路线：`Mathlib` 经典 `Real` 栈 | 构造路线：整数原型 |
 | :--- | :--- | :--- | :--- |
-| **`#print axioms` 审计** | 暴露自定义 `axiom`（丧失无矛盾保证，外部检查器拒收） | 依赖 `{propext, Classical.choice, Quot.sound}` 三大经典公理 | **`does not depend on any axioms`（真零公理）** |
+| **`#print axioms`** | 列出证明用到的自定义公理 | 官方端 `OmegaShadowBridge.cayley_circle_unit` 依赖 `propext`、`Classical.choice` 和 `Quot.sound` | 隐式导入标准 `Init` 的原型定理 `omega_zero_axiom_master_check` 公理清单为空 |
 | **可执行性（`#eval`）** | 彻底阻断，全部沦为不可归约常量 | 实数除法、流形与超越函数传染 `noncomputable` | **$100\%$ 可编译为原生 C / 机器码高速求值** |
 | **三维三元数与极点** | 抽象无坐标符号，漏边界即推 `False` | 依赖 $\mathbb{R}^4$ 子流形、$\pi$、开方与切空间图册 | **原始整数四元组 `ProjTernion` 和规范非零代表 `CanonProjTernion`（零奇点、零根号）** |
 | **微积分与曲率实现** | 需手工公理化导数算子 | `Filter.Tendsto` 无穷小极限与多卡转移映射 | **二阶射流有理环 $\mathbb{Q}[\eta]/(\eta^3)$ 纯四则代数** |
@@ -399,10 +399,10 @@ $$
 
 ---
 
-**不动底层内核一分一毫，不借半条自定义公理——当数学褪去平直无穷的泡沫，证明本身就是全速运转的计算！**
+**沙盘沿着 Lean 的求值过程展示一项有限整数计算。**
 
-在下面这座完整三维实验室中，先在第一卡拨动三种架构路线，亲眼核对纯 CIC 内核上青色归约束如何零阻碍打出 **`does not depend on any axioms`**，再切入第二卡与第三卡拖动紫色齐次三元球面上的整数射线簇，看 `pHalf = (1, 1, 0, 0)` 与 `qHalf = (1, 0, 1, 0)` 不借半个根号与半个 $\pi$ 一步非对易合成为纯整数体对角旋子 **`(1, 1, 1, 1)`** 并在三拍后归位 **`(1, 0, 0, 0)`**，最后停在第四卡与第五卡检视有理舒尔补 $S = \frac{4}{3}$ 与整数四分深度 $70 < 128$ 如何经单向阴影函子 $\Pi_{\mathbb{R}}$ 无极限接通经典分析；结合 §32.8.4 确立的 `PythSpinor` 特征秩 $5$ 双覆叠提升、`QSqrt2` 与 `QPhi` 零公理二次扩张域、模方 $5$ 的 LPS 自由生成元 $S_5$ 与拉马努金扩展子 $X^{5, 13}$，以及任意阶 D-有限射流环 $J_N(\mathbb{Q})$ 与无 $\pi$ 马青有理包络，从三维概念场封顶、不可表三元数与五种无损流群表示出发，历经无常数有理重构、精确结构数学与无无穷有理数学 $\mathbf{Math}_\Omega$，直到落定为 Lean 4 纯 CIC 内核里一行 `by decide` 即可零公理归约的 `OmegaMath` 基座，整座第三十二章在此圆满收口——现在，手握这门纯粹有理的三元数场语言，让我们翻开第八部压轴之卷 **[第三十三章 万力归弧与极小圆弧场大统一（AF-GUT）](ch33-unified-arc-forces-and-af-gut.md)**！
+第一张卡片展示 `omega_zero_axiom_master_check` 的八个有限断言。原型隐式导入标准 `Init`，这条定理的公理清单为空。严格库的空内核重放另选 `OmegaMath.Projective.Circle` 等库根并核验其导入闭包。其余卡片展示 `pHalf` 与 `qHalf` 随次序变化的乘积、`g120` 的三拍归位、舒尔极小值 $S=4/3$ 和整数证书 $70<128$。下一章继续讨论圆弧模型。[第三十三章](ch33-unified-arc-forces-and-af-gut.md)
 
 ::: {.viz src="lean4-zero-axiom-omega-math-sandbox" height="620"}
-完整实验室：在“OmegaMath 零公理纯 CIC 构造栈 · 证明即计算”与“传统实无穷与自定义公理对照（MODEL）· 计算阻断与滤子膨胀”双透镜间切换（窄屏与章节嵌入视图亦可在巡览条旁一键切换透镜），依次巡览五阶编译流水线与三路线公理审计、免除 `Quot.sound` 的第 0 层规范整数三元载体 `ProjTernion`、第 1 层 `OmegaSpace` 相容性核验与 `Jet2Rat` 一步 `decide` 反射、第 2 层有理舒尔补证书与单向阴影函子 $\Pi_{\mathbb{R}}$，以及四类数学物理任务与 `OmegaCore` 三步路线基准五张实验卡，支持切换三种形式化架构路线、四类典型任务与五阶流水线节点，交互点选整数四元数射线观察 `Nat.gcd` 规范归约、三拍闭合与 `ℚ[η]/(η³)` 射流求逆，并在底部两条对照小图中同步观察第一图四类任务下零公理 `OmegaMath` 对比 `Mathlib.Real` 的证明节点规模与归约步数，以及第二图整数四分深度 $N$ 下精确分数预算 $(\frac{c}{d})/4^{N+1}$ 单向锁入目标阈值 $\frac{p}{q}$。十五条冻结 `LEAN ✓` 声明、`ARGUED` 类型论与多内核审计文献、`MODEL` 三层架构总表及 `NUM` 实机核验在依据栏与理论抽屉中分层列出。
+五张卡片分别展示有限原型的公理审计、整数射线规范化、三元数与射流的八个有限断言、有理舒尔证书与单向实数桥接，以及四项证明基准。两张图给出实测证明依赖、浏览器的整数运算步数和精确四分深度界。
 :::

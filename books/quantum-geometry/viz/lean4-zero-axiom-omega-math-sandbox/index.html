@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>OMEGA//LEAN4 · Lean 4 零公理形式化基座（OmegaMath）沙盘：五阶编译流水线、规范整数三元载体与单向阴影函子</title>
-<meta name="description" content="紫色的有理三元球面 ℚP³ ≅ SO(3, ℚ) 上的五张卡。五阶流水线：OmegaMath 路线走完载体、类型检查、decide、公理审计与原生执行，公理为空；Mathlib.Real 路线的 decide 停在 Classical.choice，审计列出三条公理；自定义 axiom 路线代入零四元组推出 False。规范整数载体：(2, 2, 0, 0) 与 (−3, −3, 0, 0) 经最大公约数与首项正号落到同一个 (1, 1, 0, 0)，κ = 1/2，旋转矩阵是整数。八条断言逐条归约，守卫拦下两个边界反例。有理舒尔补 S = 4/3 与整数证书 70 &lt; 128 经单向桥送到实数侧。四项任务 × 三条路线 × 五阶，并列实测的声明闭包与现算的整数步数。 Five cards on the violet rational ternion sphere ℚP³ ≅ SO(3, ℚ). Five stages: the OmegaMath route clears carrier, typecheck, decide, axiom audit and native evaluation with no axiom; on the Mathlib.Real route decide stops at Classical.choice and the audit lists three axioms; the custom-axiom route yields False at the zero tuple. Canonical integer carrier: (2, 2, 0, 0) and (−3, −3, 0, 0) reach the same (1, 1, 0, 0) by gcd and sign, κ = 1/2, an integer rotation matrix. Eight conjuncts reduce one by one, and a guard stops two boundary counterexamples. The rational Schur minimum S = 4/3 and the integer certificate 70 &lt; 128 cross a one-way bridge to the reals. Four tasks × three routes × five stages, with the measured census of declarations and the integer steps of the page.">
+<meta name="description" content="紫色的有理三元球面 ℚP³ ≅ SO(3, ℚ) 上的五张卡。五阶流水线：标准 Init 原型的有限定理 omega_zero_axiom_master_check 经 decide 核验，公理清单为空；Mathlib.Real 路线的 decide 停在 Classical.choice，审计列出三条公理；自定义 axiom 路线代入零四元组推出 False。规范整数载体：(2, 2, 0, 0) 与 (−3, −3, 0, 0) 经最大公约数与首项正号落到同一个 (1, 1, 0, 0)，κ = 1/2，旋转矩阵是整数。八条断言逐条归约，守卫拦下两个边界反例。有理舒尔补 S = 4/3 与整数证书 70 &lt; 128 经单向桥送到实数侧。四项任务 × 三条路线 × 五阶，并列实测的声明闭包与现算的整数步数。 Five cards on the violet rational ternion sphere ℚP³ ≅ SO(3, ℚ). Five stages: the finite theorem omega_zero_axiom_master_check uses implicit standard Init and has an empty axiom list; on the Mathlib.Real route decide stops at Classical.choice and the audit lists three axioms; the custom-axiom route yields False at the zero tuple. Canonical integer carrier: (2, 2, 0, 0) and (−3, −3, 0, 0) reach the same (1, 1, 0, 0) by gcd and sign, κ = 1/2, an integer rotation matrix. Eight conjuncts reduce one by one, and a guard stops two boundary counterexamples. The rational Schur minimum S = 4/3 and the integer certificate 70 &lt; 128 cross a one-way bridge to the reals. Four tasks × three routes × five stages, with the measured census of declarations and the integer steps of the page.">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,14 +20,14 @@
   <div class="brand">
     <a class="crumb" href="../"><span class="zh">◂ 第 32 章 · §32.8</span><span class="en">◂ Ch. 32 · §32.8</span></a>
     <h1 class="logo" data-text="OMEGA//LEAN4">OMEGA<span>//</span>LEAN4</h1>
-    <div class="tagline"><span class="zh">三层架构（读法 MODEL） · <em>不改内核，不加 axiom：证明就是跑得起来的整数计算。</em></span><span class="en">Three layers (reading MODEL) · <em>no new kernel, no axiom: a proof is integer arithmetic that runs.</em></span></div>
+    <div class="tagline"><span class="zh">三层架构（读法 MODEL） · <em>有限定理在标准 Init 上核验八个算例。</em></span><span class="en">Three layers (reading MODEL) · <em>the finite theorem checks eight examples using standard Init.</em></span></div>
   </div>
   <div class="status"><span class="pill" id="scenePill">ℚP³ <strong>—</strong></span><span class="pill" id="keyPill">#print axioms <strong>—</strong></span><div class="langs" role="group" aria-label="Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div></div>
 </header>
 <aside class="col deck" id="rail" aria-label="实验控制" data-aria-en="Experiment controls">
   <section class="panel sec" id="lensPanel">
     <h2><span class="zh">双透镜</span><span class="en">Two lenses</span><span class="aside">§32.8</span></h2>
-    <button class="lens-toggle" id="lensToggleBtn" type="button" aria-pressed="false"><span class="seg off"><span class="zh">OmegaMath 零公理纯 CIC 构造栈 · 证明即计算</span><span class="en">OmegaMath Zero-Axiom Pure CIC Stack · Proof as Computation</span></span><span class="seg on"><span class="zh">传统实无穷与自定义公理对照（MODEL）· 计算阻断与滤子膨胀</span><span class="en">Classical Continuum &amp; Custom-Axiom Contrast (MODEL) · Blocked Evaluation &amp; Filter Blowup</span></span></button>
+    <button class="lens-toggle" id="lensToggleBtn" type="button" aria-pressed="false"><span class="seg off"><span class="zh">标准 Init · 有理算例</span><span class="en">Rational examples with standard Init</span></span><span class="seg on"><span class="zh">传统实无穷与自定义公理对照（MODEL）· 计算阻断与滤子膨胀</span><span class="en">Classical Continuum &amp; Custom-Axiom Contrast (MODEL) · Blocked Evaluation &amp; Filter Blowup</span></span></button>
   </section>
   <section class="panel sec">
     <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">5</span></h2>
@@ -47,7 +47,7 @@
   </section>
 </aside>
 <main class="center">
-  <div class="stage" id="stage" data-thumb aria-label="紫色有理三元球面 ℚP³：青色的零公理整数栈（流水线、规范点、断言、舒尔椭球），品红的传统对照，琥珀的当前点" data-aria-en="The violet rational ternion sphere ℚP³: the zero-axiom integer stack in cyan (pipeline, canonical points, conjuncts, Schur ellipsoid), the classical contrast in magenta, the current point in amber">
+  <div class="stage" id="stage" data-thumb aria-label="紫色有理三元球面 ℚP³：青色的有理算例（流水线、规范点、断言、舒尔椭球），品红的传统对照，琥珀的当前点" data-aria-en="The violet rational ternion sphere ℚP³: the rational examples in cyan (pipeline, canonical points, conjuncts, Schur ellipsoid), the classical contrast in magenta, the current point in amber">
     <canvas class="fill" id="cv"></canvas><div class="scan"></div><div class="vig"></div>
     <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
     <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
@@ -79,8 +79,8 @@
   <section class="panel sec" id="readouts" aria-live="polite">
     <h2><span class="zh">实时读数</span><span class="en">Live readouts</span><span class="aside">NUM</span></h2>
     <dl class="ro">
-      <div class="key"><dt><span class="zh">零公理栈 ↔ 传统对照</span><span class="en">Zero-axiom stack ↔ contrast</span></dt><dd><b><output id="roKey">—</output></b><span id="roKeySub"></span></dd></div>
-      <div class="c wide"><dt><span class="zh">#print axioms：OmegaMath · Mathlib.Real · axiom</span><span class="en">#print axioms: OmegaMath · Mathlib.Real · axiom</span></dt><dd><output id="roRoute">—</output></dd></div>
+      <div class="key"><dt><span class="zh">有理算例 ↔ 经典对照</span><span class="en">Rational examples ↔ classical comparison</span></dt><dd><b><output id="roKey">—</output></b><span id="roKeySub"></span></dd></div>
+      <div class="c wide"><dt><span class="zh">#print axioms：八项算例 · 实数圆周桥 · 自定义公理</span><span class="en">#print axioms · eight checks · real circle bridge · custom axiom</span></dt><dd><output id="roRoute">—</output></dd></div>
       <div class="c wide"><dt><span class="zh">原始 ↦ 规范 · gcd · 符号 · <span class="nm">‖</span>p<span class="nm">‖</span>² · κ(p0, p)</span><span class="en">raw ↦ canonical · gcd · sign · <span class="nm">‖</span>p<span class="nm">‖</span>² · κ(p0, p)</span></dt><dd><output id="roTuple">—</output></dd></div>
       <div class="v wide"><dt><span class="zh">Ad(p)：(x, y, z) ↦</span><span class="en">Ad(p): (x, y, z) ↦</span></dt><dd><output id="roTurn">—</output></dd></div>
       <div class="c wide"><dt><span class="zh">断言 · 整数步数</span><span class="en">conjunct · integer steps</span></dt><dd><output id="roMaster">—</output></dd></div>
@@ -120,7 +120,7 @@
   <div class="zh">
     <p class="lede">这是数值沙盘，不是证明。绿色框只写冻结的 Lean 定理自己的前提与结论；页面上的数由脚本现算（NUM），整数与分数逐位算清，是这些定理的个别实例，页面不检验定理的前提；标明“Lean 实测”的个数在本机量过一次，页面不重算；三层架构与路线对照是本书的读法（MODEL）。下面附上依据栏的全部依据框。</p>
     <ol>
-      <li><b>五阶流水线。</b>OmegaMath 路线走到第 5 阶：八条断言共 <span data-bench="master">—</span> 步整数运算，#print axioms 列出 <span data-bench="axOmega">—</span> 条。Mathlib.Real 路线的 decide 停在 Classical.choice，审计列出 <span data-bench="axReal">—</span> 条，1/2 : ℝ 是 noncomputable；自定义 axiom 路线把 κ(x, x) = ⟨1, 1⟩ 写在全部四元组上，代入 (0, 0, 0, 0) 得到 ⟨0, 1⟩ = ⟨1, 1⟩，推出 False。</li>
+      <li><b>五阶流水线。</b>原型隐式导入标准 Init。网页重算八条断言共 <span data-bench="master">—</span> 步整数运算。Lean 为有限定理 <code>omega_zero_axiom_master_check</code> 列出 <span data-bench="axOmega">—</span> 条公理。严格库的空内核重放覆盖所选库根（如 <code>OmegaMath.Projective.Circle</code>）的导入闭包。官方实数圆周桥 <code>OmegaShadowBridge.cayley_circle_unit</code> 有 <span data-bench="axReal">—</span> 条，1/2 : ℝ 是 noncomputable；自定义 axiom 路线把 κ(x, x) = ⟨1, 1⟩ 写在全部四元组上，代入 (0, 0, 0, 0) 得到 ⟨0, 1⟩ = ⟨1, 1⟩，推出 False。</li>
       <li><b>规范整数载体。</b>(2, 2, 0, 0) 的 gcd = 2，(−3, −3, 0, 0) 的 gcd = 3、符号 −1，都落到 pHalf = (1, 1, 0, 0)：<span class="nm">‖</span>p<span class="nm">‖</span>² = 2，κ = 1/2 <span data-bench="half">—</span>，Ad(p) 是 (x, y, z) ↦ (x, −z, y)。p0 的 κ = 1 <span data-bench="one">—</span>，pInf = (0, 1, 0, 0) 的 κ = 0 <span data-bench="zero">—</span>，g120 的 κ = 1/4 <span data-bench="quarter">—</span>。</li>
       <li><b>八条断言与守卫。</b>κ 谱、三拍 g120 → (1, −1, −1, −1) → p0、左吸收律、(1, 1, 1, 1) ≠ (1, 1, 1, −1)，与 x₀ = 1 处的射流 (1/2, −1/2, 1/4)。守卫关上：κ(z₀, z₀) = ⟨0, 1⟩，triad p0 p0 z₂ = p0 ≠ z₂。</li>
       <li><b>有理舒尔补与单向桥。</b>A = 2，B = 1，C = 3/2：S = 4/3 <span data-bench="schur">—</span>，在 y = −2/3 处取到。c/d = 7/2，p/q = 1/10：深度 <span data-bench="depth">—</span>，70 &lt; 2 · 4³ = 128，于是 (1/4)³ C ≤ 7/128 &lt; 1/10（7/128 的值 <span data-bench="bound">—</span>）。</li>
@@ -132,7 +132,7 @@
   <div class="en">
     <p class="lede">This is a numerical sandbox, not a proof. A green box states the hypotheses and the conclusion of a frozen Lean theorem and nothing else; the numbers of the page are computed by its script (NUM), integers and fractions digit by digit; they are single instances of the theorems, and the page does not check their hypotheses; counts marked as measured in Lean were taken once and are not recomputed; the three layers and the comparison of routes are readings of this book (MODEL). All evidence boxes of the panel follow below.</p>
     <ol>
-      <li><b>Five stages.</b> The OmegaMath route reaches stage 5: the eight conjuncts take <span data-bench="master">—</span> integer steps, and #print axioms lists <span data-bench="axOmega">—</span> axioms. On the Mathlib.Real route decide stops at Classical.choice, the audit lists <span data-bench="axReal">—</span>, and 1/2 : ℝ is noncomputable; the custom axiom states κ(x, x) = ⟨1, 1⟩ for all quadruples, and (0, 0, 0, 0) turns it into ⟨0, 1⟩ = ⟨1, 1⟩, hence False.</li>
+      <li><b>Five stages.</b> The prototype implicitly imports standard Init. The browser recomputes the eight assertions in <span data-bench="master">—</span> integer steps. Lean lists <span data-bench="axOmega">—</span> axioms for the finite theorem <code>omega_zero_axiom_master_check</code>. Strict empty-kernel replay covers a selected library root such as <code>OmegaMath.Projective.Circle</code> and its imports. The official real circle bridge <code>OmegaShadowBridge.cayley_circle_unit</code> has <span data-bench="axReal">—</span>, and 1/2 : ℝ is noncomputable; the custom axiom states κ(x, x) = ⟨1, 1⟩ for all quadruples, and (0, 0, 0, 0) turns it into ⟨0, 1⟩ = ⟨1, 1⟩, hence False.</li>
       <li><b>Canonical integer carrier.</b> (2, 2, 0, 0) has gcd = 2, (−3, −3, 0, 0) has gcd = 3 and sign −1, and both reach pHalf = (1, 1, 0, 0): <span class="nm">‖</span>p<span class="nm">‖</span>² = 2, κ = 1/2 <span data-bench="half">—</span>, Ad(p) is (x, y, z) ↦ (x, −z, y). p0 has κ = 1 <span data-bench="one">—</span>, pInf = (0, 1, 0, 0) has κ = 0 <span data-bench="zero">—</span>, g120 has κ = 1/4 <span data-bench="quarter">—</span>.</li>
       <li><b>Eight conjuncts and a guard.</b> The spectrum of κ, the three beats g120 → (1, −1, −1, −1) → p0, the left absorption law, (1, 1, 1, 1) ≠ (1, 1, 1, −1), and the jet (1/2, −1/2, 1/4) at x₀ = 1. With the guard off: κ(z₀, z₀) = ⟨0, 1⟩ and triad p0 p0 z₂ = p0 ≠ z₂.</li>
       <li><b>Rational Schur minimum and one-way bridge.</b> A = 2, B = 1, C = 3/2: S = 4/3 <span data-bench="schur">—</span>, attained at y = −2/3. With c/d = 7/2 and p/q = 1/10 the depth is <span data-bench="depth">—</span>, 70 &lt; 2 · 4³ = 128, hence (1/4)³ C ≤ 7/128 &lt; 1/10 (value of 7/128 <span data-bench="bound">—</span>).</li>
