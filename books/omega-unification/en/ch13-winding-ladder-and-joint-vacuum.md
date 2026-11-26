@@ -21,9 +21,9 @@ $$
 A background $(\theta_1, \theta_2; \gamma)$ satisfies **three-window acceptance `[1]+[2]+[4]`** if it simultaneously passes the five-charge three-light-mode cut `[2]`, the two-loop strong-coupling window `[1]`, and the $0.2\%$ four-layer curvature window `[4]`. Its quark flavor readout is governed by the six-face holonomy coordinate $c(\theta_1, \theta_2)$, which yields $|V_{ub}|^2$ and the signed Jarlskog invariant $J$.
 :::
 
-The reason shell triangles can separate orientations, fix the sign of $J$, and build genuine non-abelian barriers lies in the algebraic structure of rational quaternion triads: if consecutive rotations commuted, closed triangular holonomies would degenerate into flat abelian sums and chiral $\mathrm{CP}$ sign discrimination would evaporate. Reversing order breaks projective ray equivalence, while orthogonal half-step rays carry an exact rational Bargmann–Gram spherical excess of $1/4$. Both anchors are frozen directly in Lean 4 (with the second carrying an empty axiom list `axioms: []`):
+The reason shell triangles can separate orientations, fix the sign of $J$, and build genuine non-abelian barriers lies in the algebraic structure of rational quaternion triads: if consecutive rotations commuted, closed triangular holonomies would degenerate into flat abelian sums and chiral $\mathrm{CP}$ sign discrimination would evaporate. Reversing order breaks projective ray equivalence, while the orthogonal-axis half-step triad carries an exact rational Bargmann–Gram spherical excess of $1/4$. Both anchors are frozen directly in Lean 4 (with the second carrying an empty axiom list `axioms: []`):
 
-::: {.theorem #thm-ou-ch13-noncommutative-witness title="Projective Ternion Noncommutativity and Exact Orthogonal Bargmann–Gram Excess" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.orthogonal_triad_excess_quarter"}
+::: {.theorem #thm-ou-ch13-noncommutative-witness title="Projective Ternion Noncommutativity and Exact Quarter Bargmann–Gram Excess on the Orthogonal-Axis Half-Step Triad" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.orthogonal_triad_excess_quarter"}
 Inside the `OmegaMath` library, take the benchmark integer quaternions $p_0 = (1, 0, 0, 0)$, $p_{\mathrm{Half}} = (1, 1, 0, 0)$, and $q_{\mathrm{Half}} = (1, 0, 1, 0)$, with ternary product $\operatorname{triad}(\mathbf{a}, \mathbf{b}, \mathbf{c}) = (\mathbf{a}\bar{\mathbf{b}})\mathbf{c}$, projective ray equivalence $\sim_{\mathrm{ray}}$ (`Ternion.RayEquiv`), and normalized $3 \times 3$ Bargmann–Gram determinant $\det\mathbf{G}_3$. Then both statements hold:
 
 1. **Explicit projective noncommutativity (`phalf_qhalf_noncommutative`):** reversing the outer arguments yields inequivalent projective rays:
@@ -32,7 +32,7 @@ Inside the `OmegaMath` library, take the benchmark integer quaternions $p_0 = (1
    \neg\Bigl(\operatorname{triad}(p_{\mathrm{Half}},\, p_0,\, q_{\mathrm{Half}}) \;\sim_{\mathrm{ray}}\; \operatorname{triad}(q_{\mathrm{Half}},\, p_0,\, p_{\mathrm{Half}})\Bigr).
    $$
 
-2. **Exact quarter excess on the orthogonal triad (`orthogonal_triad_excess_quarter`, zero axioms):** under signed rational equivalence `IntRatio.Equivalent`,
+2. **Exact quarter excess on the orthogonal-axis half-step triad (`orthogonal_triad_excess_quarter`, zero axioms):** under signed rational equivalence `IntRatio.Equivalent`, for the half-step triad $(1, p_{\mathrm{Half}}, q_{\mathrm{Half}})$ generated along orthogonal imaginary axes $\mathbf{i}, \mathbf{j}$,
 
    $$
    \det\mathbf{G}_3(1,\, p_{\mathrm{Half}},\, q_{\mathrm{Half}}) \;\equiv\; \frac{1}{4}.
@@ -106,7 +106,7 @@ $$
 Yet just when $105$ windings seems to pin down the action, dimension counting delivers a sobering twist: fixing the global vacuum, all three windows, and all reference flavor observables still leaves a **$100$-dimensional continuous feasible family** of weight vectors (subject to normalization, nonnegativity, and the stated lower bounds on $w_{104}$ and $w_{105}$).
 
 ::: {.figure src="ch13-winding-threshold-ladder"}
-**The 529-triangle winding-number staircase ($18 \to 19 \to 21 \to 27 \to 31 \to 36 \to 105$).** Each rung marks an exact variational phase transition from the no-stationary-point barrier ($\|\nabla S\| > 3.00565$) through the 27-winding global three-window vacuum (with its flavor chasm $J \le 31.362\%$ and restoration cost $> 1.3266$) up to the height-independent 105-winding global flavor vacuum requiring $w_{104} > 0.6589\%$ and $w_{105} > 6.8674\%$.
+**Winding thresholds for phase selection ($\le 18 \to 19 \to 21 \to 27 \to 31 \to 36 \to 105$).** The logarithmic staircase plots all seven sharp order milestones—no critical point ($\le 18$, dim), saddle ($19$), local minimum ($21$), three-window global minimum ($27$), local flavor minimum ($31$), height-dependent global flavor minimum ($36$, cyan), and height-independent common vacuum ($105$, amber)—above the magenta barrier box (nonincreasing weights leave a global energy gap $> 1/4$) and the amber footer naming joint zero witness `#2,306,888,100,085`.
 :::
 
 ## 13.3 Monotone-Weight and Native Autocorrelation Exclusions

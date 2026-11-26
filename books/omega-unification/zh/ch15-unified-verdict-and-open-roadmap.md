@@ -25,8 +25,9 @@
 
 | 证据层级 | 检验机制 | 本书五卷中的代表成果 |
 | --- | --- | --- |
-| **无公理 Lean 4 内核定理（`axioms: []`）** | 纯构造性类型论内核直接归约 | 正交半步三射线四分之一格拉姆余量（[@thm-ou-ch13-noncommutative-witness]）、二十四元赫维茨晶核加倍模方恒四（[@thm-ou-ch14-hurwitz-core]）及全书其他零公理代数锚点 |
-| **标准公理 Lean 4 内核定理（`LEAN ✓`）** | 冻结提交上的 Lean 4 内核校验 | 循环费耶尔频带上界（[@thm-ou-ch12-cyclic-fejer-band]）、有限权重近碰撞方差下界（[@thm-ou-ch12-collision-variance]）、射影三元非交换性（[@thm-ou-ch13-noncommutative-witness]）、双隐藏标量舒尔响应（[@thm-ou-ch14-two-hidden-response]）与宽度三标量 Gram 分类（[@thm-ou-ch14-native-scalar-gram]） |
+| **无公理 Lean 4 内核定理（`axioms: []`）** | 纯构造性类型论内核直接归约 | 单纯形边缘/上边缘幂零律（[@thm-ou-ch09-simplicial-exactness]、[@thm-ou-ch10-coboundary-zero]）、正交旋转轴半步三元组四分之一格拉姆余量（[@thm-ou-ch13-noncommutative-witness] 第二款 `orthogonal_triad_excess_quarter`）与二十四元赫维茨晶核加倍模方恒四（[@thm-ou-ch14-hurwitz-core]） |
+| **标准公理 Lean 4 内核定理（`LEAN ✓`，已记录 `propext` / 经典闭包）** | 所钉冻结提交上的 Lean 4 内核校验（公理表显式归档） | 射影三元流群结合律与保真度不变性（[@thm-ou-ch01-ternion-heap]）、调和相位亏额与碰撞极限（[@thm-ou-ch03-harmonic-collision-limit]）、彼得—魏尔有理正交性（[@thm-ou-ch07-peter-weyl-orthonormal]）与射影三元非交换性（[@thm-ou-ch13-noncommutative-witness] 第一款 `phalf_qhalf_noncommutative`） |
+| **所钉快照未记录公理闭包的冻结 Lean 4 定理（`LEAN ✓`）** | 所钉冻结提交上的 Lean 4 内核校验（锁文件未附 `axioms` 字段，附录统计归入未记录栏） | 循环费耶尔频带上界（[@thm-ou-ch12-cyclic-fejer-band]）、有限权重近碰撞方差下界（[@thm-ou-ch12-collision-variance]）、双隐藏标量舒尔响应（[@thm-ou-ch14-two-hidden-response]）与宽度三标量 Gram 分类（[@thm-ou-ch14-native-scalar-gram]） |
 | **精确有理与 Arb 区间证书（归档 $1{,}785$ 份复算文件）** | 独立 Python / `python-flint` 脚本、专题档案与数据表可逐行复算 | 第七时间 $35$ 位强迫码 `32071996606` 与 $44$ 位门槛、三带 $> 99.931\%$ 浓缩、$18 \to 105$ 绕数阶梯、零点 `#2,306,888,100,085` 与四重压力测试、$D = 56 \to 1568$ 记忆秩阶梯及 $16 \to 21$ 步赫维茨词深界 |
 | **模型内物理见证与开放问题** | 依赖指定场表、阈值或外部标定 | 四问的 `4/4` 模型内见证与下面将正式立碑的 `0/4` 第一性原理开放问题（[@prob-ou-q1-action-and-ew]–[@prob-ou-q4-lorentzian-gravity-and-dark-energy]） |
 

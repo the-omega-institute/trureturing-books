@@ -55,7 +55,7 @@ def draw(fig):
     wall, clock_jump = exact[0][0], 512
     assert wall < clock_jump < exact[1][0]
     axis.vline(wall, "magenta", 1.4, dash="4 4")
-    axis.vline(clock_jump, "amber", 1.4, dash="4 4")
+    axis.vline(clock_jump, "violet", 1.4, dash="4 4")
     axis.points([(wall, ranks[0])], "magenta", r=4.4, ring="bg")
 
     fig.text(center, 449, t("平方弦距截止量 D", "Squared chord-distance cutoff D"),
@@ -63,6 +63,6 @@ def draw(fig):
     fig.line(17, 476, 34, 476, "magenta", 2)
     fig.text(42, 476, t("392 · 循环对称的 24 态门槛", "392 · 24-state threshold with cyclic symmetry"),
              size=13, middle=True)
-    fig.line(17, 501, 34, 501, "amber", 2)
+    fig.line(17, 501, 34, 501, "violet", 2)
     fig.text(42, 501, t("512 · 全频恢复需 9 → 10 钟", "512 · Full response needs 9 → 10 clocks"),
              size=13, middle=True)

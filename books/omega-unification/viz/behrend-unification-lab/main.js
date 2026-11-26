@@ -1769,18 +1769,24 @@
   function numText(say) {
     const B = BENCH;
     return say(
-      `打开页面时由脚本现算。球壳：枚举 x² + y² + z² = 867 的非负整点得 ${B.sites} 个，全为正，极点 (17, 17, 17) 与 ${B.orbits} 条三点轨道；${B.classes} 种平方弦距，d² ≤ 804 的 ${B.edgeClasses} 种给出 ${B.edges} 条边与 ${B.triangles} 个三角形。谱：每个字符块的厄米矩阵用实嵌入的雅可比迭代对角化（双精度）；在 ${B.grid} × ${B.grid} 相位网格与五种荷上 max λ₃ = ${fix(B.max3, 4)}、min λ₄ = ${fix(B.min4, 4)}，λ₃ < 8.685 < 9.6 < λ₄ 不成立的格点 ${B.bad} 个，三个轻模不是三种特征标的格点 ${B.charBad} 个，最大本征值 ${fix(B.top, 3)}；站点方差 T = ${fix(B.siteT, 0)} 之下出现第四个模的格点数为 ${B.intrude.join('、')}。第七时间：乘子与括号全用大整数分数，两组 Q 为 ${fix(B.qLower, 6)} 与 ${fix(B.qUpper, 9)}（都小于 0）；44 位时两端都落在 32071996606，43 位时括号跨 ${B.codes43} 格，288 位输入的括号宽 ${sci(B.exactW, 4)}（相对 ${sci(B.exactRel, 3)}），参考码 ${B.refCode}。记忆：使弦图连通的最小截止 D = ${B.connect}。网格只覆盖有限多个相位，环面上处处成立的结论见 ARGUED。`,
-      `Computed by the script when the page opens. Shell: enumerating the nonnegative integer points of x² + y² + z² = 867 gives ${B.sites}, all positive: the pole (17, 17, 17) and ${B.orbits} orbits of three; ${B.classes} squared chord lengths, of which the ${B.edgeClasses} with d² ≤ 804 give ${B.edges} edges and ${B.triangles} triangles. Spectra: the Hermitian matrix of each character block is diagonalised by Jacobi iteration on its real embedding (double precision); over a ${B.grid} × ${B.grid} grid of phases and the five charges, max λ₃ = ${fix(B.max3, 4)} and min λ₄ = ${fix(B.min4, 4)}, ${B.bad} grid points fail λ₃ < 8.685 < 9.6 < λ₄, at ${B.charBad} the three light modes do not carry the three characters, and the largest eigenvalue is ${fix(B.top, 3)}; the grid points with a fourth mode below the site variance T = ${fix(B.siteT, 0)} number ${B.intrude.join(', ')}. Seventh time: multipliers and brackets in big-integer fractions, the two Q are ${fix(B.qLower, 6)} and ${fix(B.qUpper, 9)} (both below 0); at 44 bits both ends fall in 32071996606, at 43 bits the bracket spans ${B.codes43} cells, with 288-bit inputs the bracket is ${sci(B.exactW, 4)} wide (relative ${sci(B.exactRel, 3)}), and the reference code is ${B.refCode}. Memory: the least cutoff that connects the chord graph is D = ${B.connect}. The grid covers finitely many phases; for the statement on the whole torus see ARGUED.`
+      `打开页面时由脚本现算。球壳：枚举 x² + y² + z² = 867 的非负整点得 ${B.sites} 个，全为正，极点 (17, 17, 17) 与 ${B.orbits} 条三点轨道；${B.classes} 种平方弦距，d² ≤ 804 的 ${B.edgeClasses} 种给出 ${B.edges} 条边与 ${B.triangles} 个三角形。谱：每个字符块的厄米矩阵用实嵌入的雅可比迭代对角化（双精度）；在 ${B.grid} × ${B.grid} 相位网格与五种荷上 max λ₃ = ${fix(B.max3, 4)}、min λ₄ = ${fix(B.min4, 4)}，λ₃ < 8.685 < 9.6 < λ₄ 不成立的格点 ${B.bad} 个，三个轻模不是三种特征标的格点 ${B.charBad} 个，最大本征值 ${fix(B.top, 3)}；站点方差 T = ${fix(B.siteT, 0)} 之下出现第四个模的格点数为 ${B.intrude.join('、')}。第七时间：乘子与括号全用大整数分数，两组 Q 为 ${fix(B.qLower, 6)} 与 ${fix(B.qUpper, 9)}（都小于 0）；44 位时两端都落在 32071996606，43 位时括号跨 ${B.codes43} 格，288 位输入的括号宽 ${sci(B.exactW, 4)}（相对 ${sci(B.exactRel, 3)}），参考码 ${B.refCode}。记忆：使弦图连通的最小截止 D = ${B.connect}。网格只覆盖有限多个相位；环面上处处成立的结论与其余证书数见下方随页面打包的复算证书 NUM 框，那些数不由本页脚本现算。`,
+      `Computed by the script when the page opens. Shell: enumerating the nonnegative integer points of x² + y² + z² = 867 gives ${B.sites}, all positive: the pole (17, 17, 17) and ${B.orbits} orbits of three; ${B.classes} squared chord lengths, of which the ${B.edgeClasses} with d² ≤ 804 give ${B.edges} edges and ${B.triangles} triangles. Spectra: the Hermitian matrix of each character block is diagonalised by Jacobi iteration on its real embedding (double precision); over a ${B.grid} × ${B.grid} grid of phases and the five charges, max λ₃ = ${fix(B.max3, 4)} and min λ₄ = ${fix(B.min4, 4)}, ${B.bad} grid points fail λ₃ < 8.685 < 9.6 < λ₄, at ${B.charBad} the three light modes do not carry the three characters, and the largest eigenvalue is ${fix(B.top, 3)}; the grid points with a fourth mode below the site variance T = ${fix(B.siteT, 0)} number ${B.intrude.join(', ')}. Seventh time: multipliers and brackets in big-integer fractions, the two Q are ${fix(B.qLower, 6)} and ${fix(B.qUpper, 9)} (both below 0); at 44 bits both ends fall in 32071996606, at 43 bits the bracket spans ${B.codes43} cells, with 288-bit inputs the bracket is ${sci(B.exactW, 4)} wide (relative ${sci(B.exactRel, 3)}), and the reference code is ${B.refCode}. Memory: the least cutoff that connects the chord graph is D = ${B.connect}. The grid covers finitely many phases; for the statement on the whole torus and the other certified numbers see the bundled replay-certificate NUM box below, whose numbers the page script does not compute.`
     );
   }
   for (const [lang, say] of [
     ['zh', ZH],
     ['en', EN]
   ])
-    document.querySelector(`#basis .lean.num .${lang}`).innerHTML = numText(say);
+    document.querySelector(`#basisLive .${lang}`).innerHTML = numText(say);
   for (const el of document.querySelectorAll('[data-bench]')) el.innerHTML = NUMBERS[el.dataset.bench](el.closest('.en') ? EN : ZH);
-  // the drawer repeats every evidence box of the panel, filled
-  $('drawerEvidence').append(...[...document.querySelectorAll('#basis .lean')].map((el) => el.cloneNode(true)));
+  // the drawer repeats every evidence box of the panel, filled (the copies drop the ids of #basisLive and #basisCert)
+  $('drawerEvidence').append(
+    ...[...document.querySelectorAll('#basis .lean')].map((el) => {
+      const copy = el.cloneNode(true);
+      copy.removeAttribute('id');
+      return copy;
+    })
+  );
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
   TRV.startGlitch(document.querySelector('.brand'));
   TRV.onLang(paint);

@@ -25,6 +25,17 @@ const CARDS = {
 };
 const [SHELL, GAP, BANDS, LADDER, MEMORY] = Object.keys(CARDS);
 const GIDS = ['D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg', 'D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula'];
+/** The Chinese chapters this suite reads: the six that cite the page (@citations) and ch02, ch11 that cite the GIDs. */
+const ZH_READS = [
+  'ch01-behrend-shell-and-frequencies.md',
+  'ch02-quaternion-clocks-and-haar-zeros.md',
+  'ch07-chiral-three-generations.md',
+  'ch11-induced-gravity-and-dark-energy.md',
+  'ch12-shared-arithmetic-clock.md',
+  'ch13-winding-ladder-and-joint-vacuum.md',
+  'ch14-624-channels-and-memory-rank.md',
+  'ch15-unified-verdict-and-open-roadmap.md'
+];
 const range = (n) => Array.from({ length: n }, (_, i) => i);
 const CJK = /[　-〿㐀-鿿＀-￯]/;
 
@@ -401,11 +412,32 @@ check('two green boxes, one for each frozen theorem of the registry', JSON.strin
   const registry = JSON.parse(fs.readFileSync(path.join(ROOT, 'books', BOOK, 'viz', 'visualizations.json'), 'utf8')),
     entry = registry.visualizations.find((v) => v.id === ID),
     lock = JSON.parse(fs.readFileSync(path.join(ROOT, 'trureturing.lock.json'), 'utf8')).declarations,
-    zh = fs.readdirSync(path.join(ROOT, 'books', BOOK, 'zh')).map((f) => fs.readFileSync(path.join(ROOT, 'books', BOOK, 'zh', f), 'utf8')).join('\n');
+    // only the chapters declared in dependencies.json (@citations for the card citations, ch02 and ch11 for the GIDs)
+    zh = ZH_READS.map((f) => fs.readFileSync(path.join(ROOT, 'books', BOOK, 'zh', f), 'utf8')).join('\n');
   check('registry: live, the two GIDs, five chapters', !!entry && entry.status === 'live' && JSON.stringify(entry.lean.map((x) => x.gid)) === JSON.stringify(GIDS) && entry.theory.length === 5);
   check('each green GID is a theorem of the lock and is cited by a theorem environment of a Chinese chapter', GIDS.every((g) => lock[g] && lock[g].kind === 'theorem' && new RegExp(`\\{\\.(theorem|lemma|proposition|corollary)[^}]*lean="[^"]*${g.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&')}`).test(zh)));
   const cited = [...zh.matchAll(/\{\.viz src="behrend-unification-lab" preset="([^"]+)"/g)].map((m) => m[1]);
   check('every card a chapter cites exists on the page', cited.length >= 5 && cited.every((c) => c in CARDS), cited.join(' '));
+  check('registry summaries separate the live numbers from the bundled replay certificates', !/页面上的数都由脚本现算/.test(entry.summary) && !/every number of the page is computed/.test(entry.summary_en) && /复算证书（NUM）/.test(entry.summary) && /replay certificates from trureturing-experiments \(NUM\)/.test(entry.summary_en) && !/证书[^。]*ARGUED/.test(entry.summary) && !/certificates[^.]*ARGUED/.test(entry.summary_en));
+}
+/* the six tiers: live script numbers and bundled replay certificates are both NUM, never ARGUED */
+{
+  const boxes = await page.$$eval('#basis .lean', (els) => els.map((b) => ({ id: b.id, kinds: [...b.classList].filter((c) => c !== 'lean').join(' '), label: b.querySelector('.ok').textContent, zh: b.querySelector('.zh').textContent, en: b.querySelector('.en').textContent })));
+  check('evidence order: LEAN ✓, LEAN ✓, live NUM, certificate NUM, ARGUED, MODEL, OPEN', JSON.stringify(boxes.map((b) => [b.id, b.kinds, b.label])) === JSON.stringify([['', '', 'LEAN ✓'], ['', '', 'LEAN ✓'], ['basisLive', 'num', 'NUM'], ['basisCert', 'num', 'NUM'], ['', 'argued', 'ARGUED'], ['', 'model', 'MODEL'], ['', 'open', 'OPEN']]), JSON.stringify(boxes.map((b) => [b.id, b.kinds, b.label])));
+  const live = boxes.find((b) => b.id === 'basisLive'), cert = boxes.find((b) => b.id === 'basisCert'), argued = boxes.find((b) => b.kinds === 'argued');
+  check('the live NUM box is written by the script and points at the certificate box, not at ARGUED', /^打开页面时由脚本现算/.test(live.zh) && /^Computed by the script when the page opens/.test(live.en) && /复算证书 NUM 框/.test(live.zh) && /replay-certificate NUM box/.test(live.en) && !/ARGUED/.test(live.zh + live.en));
+  check('the certificate NUM box says it is bundled from trureturing-experiments, not computed live, not frozen', /随页面打包的第四层复算证书/.test(cert.zh) && /不由本页脚本现算/.test(cert.zh) && /未在 trureturing 冻结/.test(cert.zh) && /^Bundled Tier-4 replay certificates from the trureturing-experiments/.test(cert.en) && /not computed live by the page script/.test(cert.en) && /not frozen in trureturing/.test(cert.en));
+  // markers of the replay certificates: every one sits in the certificate box, in both languages, and none in ARGUED
+  const MARKS = ['8.685', '23.4396%', '99.931%', '0.00208104', '32071996606', '295872666901', '226358', '4.857224', '1152', '6.0833%', '6.1691%', '9.3435%', '11431', 'ShellProjection.lean'];
+  check('every replay certificate is in the NUM box (zh and en), none in ARGUED', MARKS.every((m) => cert.zh.includes(m) && cert.en.includes(m)) && MARKS.every((m) => !argued.zh.includes(m) && !argued.en.includes(m)), MARKS.filter((m) => !cert.zh.includes(m) || !cert.en.includes(m) || argued.zh.includes(m) || argued.en.includes(m)).join(' '));
+  check('ARGUED keeps only literature results and hand derivations', /^文献结果/.test(argued.zh) && /Odlyzko/.test(argued.zh) && /高斯—拉道求积与矩问题的端点界/.test(argued.zh) && /手工推导/.test(argued.zh) && /^Literature results/.test(argued.en) && /Odlyzko/.test(argued.en) && /Gauss–Radau quadrature and the endpoint bounds of the moment problem/.test(argued.en) && /Derived by hand/.test(argued.en) && !/复算|证书/.test(argued.zh) && !/replay|certif/i.test(argued.en));
+  const pct = (t) => (t.match(/\d+\.\d+%/g) || []).join(' ');
+  check('held-out J (zh = en): actual three-window zero supports, 8, 11 and 23 zeros, the same percentages', /在实际三窗零点支撑上，留出的平均 J 亏额为 6\.0833%（八点），指定第六项时间与平均 \|Vcb\|² 后为 6\.1691%–6\.4132%（十一点）与 5\.5700%–9\.3435%（二十三点）/.test(cert.zh) && /On actual three-window zero supports the held-out deficit of the mean J is 6\.0833% \(eight zeros\), and with the sixth time and mean \|Vcb\|² fixed 6\.1691%–6\.4132% \(eleven zeros\) and 5\.5700%–9\.3435% \(twenty-three zeros\)/.test(cert.en) && pct(cert.zh) === pct(cert.en), `${pct(cert.zh)} | ${pct(cert.en)}`);
+  check('ShellProjection.lean: the 9-point shell of squared radius 17', /平方半径 17（r² = 17）的九点壳/.test(cert.zh) && /9-point shell of squared radius 17 \(r² = 17\)/.test(cert.en) && !/R = 17/.test(cert.zh + cert.en));
+  const lede = await page.$$eval('#drawer .lede:not(.refs)', (ps) => ps.map((p) => p.textContent).join('\n'));
+  check('drawer ledes: live numbers by the script, the rest bundled certificates; no claim that every number is computed', !/页面上的数由脚本现算|页面上的数都由脚本现算/.test(lede) && !/numbers of the page are computed by its script/.test(lede) && /由脚本在打开页面时现算（第一个 NUM 框）/.test(lede) && /第四层复算证书（第二个 NUM 框）/.test(lede) && /computed live by the script when the page opens \(the first NUM box\)/.test(lede) && /bundled Tier-4 replay certificates from trureturing-experiments \(the second NUM box\)/.test(lede));
+  const ids = await page.evaluate(() => ['basisLive', 'basisCert'].map((id) => document.querySelectorAll(`[id="${id}"]`).length));
+  check('the drawer copies of the evidence boxes drop their ids (no duplicate ids)', ids.join() === '1,1' && (await page.$$eval('#drawerEvidence .lean', (els) => els.length)) === boxes.length, ids.join());
 }
 
 /* ---------- 1. the shell ---------- */

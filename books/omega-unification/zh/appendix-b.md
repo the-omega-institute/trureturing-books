@@ -23,7 +23,7 @@
 | **共同算术钟** $F(j)$ | Shared Arithmetic Clock | 单一正半定算子 $K$ 与单位源 $s$ 的二次预解式读数 $F(j) = \langle s, (I + j^2 K)^{-1}s\rangle$；六项 44 位输入浓缩 $>99.931\%$ 谱权于三带 $B$ 并锁定第七项 35 位码 `32071996606` | [第十二章](ch12-shared-arithmetic-clock.md) |
 | **529 面双钟作用与绕数阶梯** | 529-Triangle Action & Winding Ladder | 十九点壳 529 个三角面的加权双钟变分作用，其临界阶梯依次经 19、21、27、31、36 圈抵达 105 圈跨高度全局门槛，且单调权全阶受阻 $> 1/4$ | [第十三章](ch13-winding-ladder-and-joint-vacuum.md) |
 | **624 内部通道与三分之一中转格** | 624 Internal Channels & Denominator-Three Shell | 由极点三条最近邻有向弦比较派生的 624 通道及允许九步回程与 17 拍局部反射的 76 点三分之一球面中转格 | [第十四章](ch14-624-channels-and-memory-rank.md) |
-| **局部辅助记忆秩阶梯** | Auxiliary Memory Rank Staircase | 在原十九点上精确复现三时钟完整响应所需的最小辅助维数随平方弦距截止 $D$ 的单调阶梯：$38 \to 29\text{--}33 \to 26 \to 25 \to 24 \to 23 \to 21 \to 20 \to 19$（$C_3$ 对称截止 $D = 392$） | [第十四章](ch14-624-channels-and-memory-rank.md) |
+| **局部辅助记忆秩阶梯** | Auxiliary Memory Rank Staircase | 在原十九点上精确复现三时钟完整响应所需的最小辅助维数随平方弦距截止 $D$ 的单调阶梯：$38 \to 29\text{--}33 \to 26\text{--}27 \to 25\text{--}26 \to 24 \to 23 \to 21 \to 20 \to 19$（$C_3$ 对称截止 $D = 392$） | [第十四章](ch14-624-channels-and-memory-rank.md) |
 
 为便于跨章对照公式，下表另列全书高频出现的数学符号速查：
 
@@ -47,13 +47,13 @@
 | **第 1 层 · Lean 4 冻结内核锚点**（`LEAN ✓`） | `the-omega-institute/trureturing@dev` 所钉提交 [{commit}](trureturing:) 上的冻结声明（同时涵盖零公理 `OmegaInit`/`OmegaMath` 基座与经典 `Mathlib` 对照锚点） | 经 Lean 4 内核完整校验并写入 `Golden/Frozen/state/`；按传递公理闭包区分为零公理（`axioms: []`）与经典三公理侧，实时计数见 [§B.4](#sec-ou-appb-live-stats) | 有理射影重叠与凯莱正交旋转、无 $\pi$ 哈尔矩与彼得—魏尔正交、有理拉格朗日—格拉姆与舒尔补极小、赫维茨 $F_3$ 伴随单射与模方 5 赫克谱界 |
 | **第 2 层 · 外部已形式化 RH/GRH 边界**（外部形式化事实） | 2026 年 11 月 21 日 Lean FRO 与 Mathlib Initiative 联合确认的 [Alpöge 黎曼猜想形式化证明](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/) | 作为外部独立形式化里程碑予以引述，明确区隔于本书采用的有限高度算术包围检验，且绝不自动赋予物理匹配模型或选权假设任何形式化背书 | [第三章](ch03-riemann-zeros-fejer-and-landau.md) 临界线零点谱底座与 [第十二章](ch12-shared-arithmetic-clock.md) 算术钟有限高度区间边界 |
 | **第 3 层 · 书面证明与文献边界**（`ARGUED`） | 作者与评审逐行核验的代数、分析与组合证明（载于 `Ω复算说明.md` 与 9 份专题档案）及注明出处的文献定论 | 不佩戴 `LEAN ✓` 内核徽章；须满足前提透明、反例可核对，部分纯代数核心具备后续下沉 Lean 形式化的条件 | 单正谱迹 $r \le 189$ 凸性排除（[第五章](ch05-kinetic-trace-and-uv-ceilings.md)）、三代轮换 $\|[T,X]\|_{\mathrm{HS}} > 0.0414$ 与 42 圈 CP 下界（[第八章](ch08-flavor-hierarchy-and-ckm.md)）、Gauss–Radau 极值与伯恩斯坦证书框架（[第十二章](ch12-shared-arithmetic-clock.md)）及 PDG 实测输入边界 |
-| **第 4 层 · 精确有理、Arb 与独立 Lean 计算证书**（`NUM`） | 组织实验库 `trureturing-experiments`（`experiments/ch39-omega-research/replay/`）1,785 文件复算归档中的 `Fraction` / `python-flint`（Arb、`fmpq_mat`）断言脚本及 `Init`-重放的 `ShellProjection.lean`（`rfl`） | 零浮点舍入漂移，严格依赖输入区间与显式截断前提；上游独立 `ShellProjection.lean` 归此层，不并入 `trureturing@dev` 冻结统计 | 半径 17 九点壳压缩（[附录 A §A.2](appendix-a.md#sec-ou-appa-shell-projection)）、35 位第七时间码 `32071996606`（[第十二章](ch12-shared-arithmetic-clock.md)）、单调权 $> 1/4$ 排斥与 105 圈联合零点见证（[第十三章](ch13-winding-ladder-and-joint-vacuum.md)）、$38 \to 19$ 最小辅助记忆秩阶梯（[第十四章](ch14-624-channels-and-memory-rank.md)） |
+| **第 4 层 · 精确有理、Arb 与独立 Lean 计算证书**（`NUM`） | 组织实验库 `trureturing-experiments`（`experiments/ch39-omega-research/replay/`）1,785 文件复算归档中的 `Fraction` / `python-flint`（Arb、`fmpq_mat`）断言脚本及 `Init`-重放的 `ShellProjection.lean`（`rfl`） | 零浮点舍入漂移，严格依赖输入区间与显式截断前提；上游独立 `ShellProjection.lean` 归此层，不并入 `trureturing@dev` 冻结统计 | 平方半径 17 九点壳压缩（[附录 A §A.2](appendix-a.md#sec-ou-appa-shell-projection)）、35 位第七时间码 `32071996606`（[第十二章](ch12-shared-arithmetic-clock.md)）、单调权 $> 1/4$ 排斥与 105 圈联合零点见证（[第十三章](ch13-winding-ladder-and-joint-vacuum.md)）、$38 \to 19$ 最小辅助记忆秩阶梯（[第十四章](ch14-624-channels-and-memory-rank.md)） |
 | **第 5 层 · 模型内有效构造**（`MODEL`） | 明确写明全部额外表示、势函数、标尺与权重输入的有效构造（对应四问中 **4/4** 的模型内通过分支） | 严禁冒充无参数第一性原理推导；每条构造必须同页并列其外生自由度与灵敏度账单 | $r = 400$ 两圈规范交汇与秩五中性希格斯门户（[第 5–6 章](ch05-kinetic-trace-and-uv-ceilings.md)）、54 模矩阵希格斯味拟合与 $\mathrm{U}(1)_X$ 重子三重完备（[第 8–9 章](ch08-flavor-hierarchy-and-ckm.md)）、四层热核曲率窗（[第十一章](ch11-induced-gravity-and-dark-energy.md)）与 105 圈 100 维权族（[第十三章](ch13-winding-ladder-and-joint-vacuum.md)） |
 | **第 6 层 · 第一性原理开放前沿**（`OPEN`） | 对应原书四问中 **0/4** 尚未从单一主联络无事后拟合导出的核心硬问题 | 严格保留未证状态，不附验证引用，为后续理论突破与形式化提供明确验收门槛 | 导出重阈值与电弱标度、从主联络选定站点方差分界并构造四维相互作用手征三代、导出共同味作用与动态质子选择定则、导出 $G_N$ 与暗能量以及建立自然非单调选权原理（汇总于 [第十五章](ch15-unified-verdict-and-open-roadmap.md) 与 [终章](coda.md)） |
 
 ## B.3 交互实验室与全书九幅静态图索引 {#sec-ou-appb-media-map}
 
-本书配有一座五卡联动的交互三维与数值实验室 **`OMEGA//UNIFY`**（目录标识 `behrend-unification-lab`），以及 **9 幅双语定制语义静态图**（由 `books/omega-unification/figures/` 下的脚本按主题与印刷版统一配色角色生成：绿色与蓝色保留给 Lean 核验与零公理内核、紫色标记书面证明与精确证书、琥珀色标记当前模型选择、红色标记开放前沿与不可逾越锐障）。下表先列出交互实验室全部五张实验卡的部署位置与操控对象：
+本书配有一座五卡联动的交互三维与数值实验室 **`OMEGA//UNIFY`**（目录标识 `behrend-unification-lab`），以及 **9 幅双语定制语义静态图**（由 `books/omega-unification/figures/` 下的脚本按主题与印刷版统一配色角色生成：绿色与蓝色保留给 Lean 核验与零公理内核、紫色标记书面证明与精确证书及已证锐障、琥珀色标记当前模型选择、红色严格保留给开放前沿）。下表先列出交互实验室全部五张实验卡的部署位置与操控对象：
 
 | 实验室代号与实验卡 ID | 核心实验对象与实时读数 | 正文嵌入章 | 综合工作台入口 |
 | :--- | :--- | :---: | :---: |
@@ -67,15 +67,15 @@
 
 | 序号 | 静态图脚本标识 | 所属章节 | 图景主题与关键数学边界 |
 | :---: | :--- | :---: | :--- |
-| 1 | `ou-five-volumes` | [前言](README.md) | 五卷全景路线图：从十九点贝伦德球壳与黎曼零点窗到四问总账与五重张力 |
-| 2 | `ch01-behrend-shell` | [第一章](ch01-behrend-shell-and-frequencies.md) | 十九点贝伦德球壳三元轨道分解、135 条原边与 22 独立频率谱 |
-| 3 | `ch03-zero-window-landscape` | [第三章](ch03-riemann-zeros-fejer-and-landau.md) | 费耶尔碰撞带、兰道围道与代表性候选零点窗（#8236、#8359、#11431、#148341）地形 |
-| 4 | `ch05-gauge-threshold-boundaries` | [第五章](ch05-kinetic-trace-and-uv-ceilings.md) | 单正谱迹配平的 $r \le 189$ 禁区、$r = 400$ 两圈交汇与 $3.9Q$ 微扰紫外封顶 |
-| 5 | `ch07-three-generation-gap` | [第七章](ch07-chiral-three-generations.md) | 站点方差分界在五种荷上劈出的共同谱隙 $[9, 10.19]$ 与 148341 零点计数对照 |
-| 6 | `ch11-vacuum-balance-sensitivity` | [第十一章](ch11-induced-gravity-and-dark-energy.md) | 四层热核曲率千分之二窗口、诱导牛顿常数标定与暗能量高灵敏度陡壁 |
-| 7 | `ch12-arithmetic-clock-bands` | [第十二章](ch12-shared-arithmetic-clock.md) | 六项时间强迫的三高度带浓缩（$>99.931\%$）与第七项 35 位码 `32071996606` vs. `32071992476` |
-| 8 | `ch13-winding-threshold-ladder` | [第十三章](ch13-winding-ladder-and-joint-vacuum.md) | 529 面双钟绕数临界阶梯（19、21、27、31、36、105 圈）与单调权 $> 1/4$ 排斥鸿沟 |
-| 9 | `ch14-memory-rank-staircase` | [第十四章](ch14-624-channels-and-memory-rank.md) | 平方弦距截止 $D$ 对三时钟最小辅助记忆秩的 $38 \to 19$ 阶梯与 $D = 392$ 循环对称门槛 |
+| 1 | `ou-five-volumes` | [前言](README.md) | 五卷全景路线图：从十九点贝伦德球壳与黎曼零点入口经五卷直抵 `4/4` 模型见证与 `0/4` 零拟合总账 |
+| 2 | `ch01-behrend-shell` | [第一章](ch01-behrend-shell-and-frequencies.md) | 十九点贝伦德球壳单位球投影、极点 $(17, 17, 17)$、六条三点循环轨道与最短弦 $12$ 及双钟弦 $724, 804$ |
+| 3 | `ch03-zero-window-landscape` | [第三章](ch03-riemann-zeros-fejer-and-landau.md) | 第 `#11431` 枚零点相对 `#11628` 的中点隔离、Fejér 四阶矩占比与三条谐波相位亏额对数时间窗 |
+| 4 | `ch05-gauge-threshold-boundaries` | [第五章](ch05-kinetic-trace-and-uv-ceilings.md) | 标量阈值族 $r \le 189$ 排除、$r = 400$ 与自旋配平 $r \approx 8.53$ 交汇及 $3.9Q / 14Q / 20Q / 30Q$ 微扰紫外上界 |
+| 5 | `ch07-three-generation-gap` | [第七章](ch07-chiral-three-generations.md) | 五荷单步磁拉普拉斯全环面三轻模共同谱隙 $(8.685, 9.6)$、公共截断 $9$ 与 $(1, \omega, \omega^2)$ 循环特征标 |
+| 6 | `ch11-vacuum-balance-sensitivity` | [第十一章](ch11-induced-gravity-and-dark-energy.md) | 从普朗克标度至 $10^{-122}$ 暗能量的对数曲率阶梯、紫外截止变号门槛与四层 $(-1, 3, -3, 1)$ 矩抵消模板 |
+| 7 | `ch12-arithmetic-clock-bands` | [第十二章](ch12-shared-arithmetic-clock.md) | 六项时间强迫的三高度带浓缩（$>99.931\%$）与第七拍 $35$ 位预测码 `32071996606` vs. 参考码 `32071992476` |
+| 8 | `ch13-winding-threshold-ladder` | [第十三章](ch13-winding-ladder-and-joint-vacuum.md) | 529 面双钟绕数阶梯（$\le 18, 19, 21, 27, 31, 36, 105$）、非增权 $> 1/4$ 能差与联合零点见证 `#2,306,888,100,085` |
+| 9 | `ch14-memory-rank-staircase` | [第十四章](ch14-624-channels-and-memory-rank.md) | 平方弦距截止 $D$ 下的三时钟最小辅助记忆秩阶梯（$38 \to 19$）、$D = 392$ 循环对称门槛与 $D = 512$ 时钟跳变 |
 
 ## B.4 全书实时形式化统计 {#sec-ou-appb-live-stats}
 

@@ -46,7 +46,7 @@ def draw(fig):
              anchor="middle", size=16, weight=600)
 
     # Outer bounds for the exact six readings from the seventh-time replay certificate.
-    lower = Fraction("0.93341795164287258400990")
+    lower = Fraction("0.93341795164287258400188")
     upper = Fraction("0.93341795164501234976010")
     width = upper - lower
     scale = 2**35

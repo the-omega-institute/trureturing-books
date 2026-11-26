@@ -1,6 +1,6 @@
 # 附录 A 复算仓库结构、核心脚本与证书索引
 
-本附录完整索引本书五卷十五章所依赖的上游研究与复算目录 [`the-omega-institute/trureturing-experiments`](https://github.com/the-omega-institute/trureturing-experiments/tree/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research) 下的 `experiments/ch39-omega-research/`（本书固定快照提交 `ba0ac9539cdb641744054bf3a0398494f4cba1c8`）。
+本附录完整索引本书五卷十五章所依赖的上游研究与复算目录 [`experiments/ch39-omega-research/`](https://github.com/the-omega-institute/trureturing-experiments/tree/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research)（归档于组织实验库 [`the-omega-institute/trureturing-experiments`](https://github.com/the-omega-institute/trureturing-experiments)，本书固定快照提交 `ba0ac9539cdb641744054bf3a0398494f4cba1c8`）。
 
 以下四节依次给出：上游复算目录的顶层架构、数据支撑与十份核心专题档案；独立 Lean 4 整数压缩证书 `replay/ShellProjection.lean` 的代数结构与全部定理导读；按全书十五章归类的 34 支代表性 Python / `python-flint`（Arb）/ SymPy 复算脚本永久链接；以及本地复现依赖、标准运行命令与失败即中止的断言规程。关于本仓库外接的 `trureturing@dev` 冻结声明与编译期实时统计，请参阅 [附录 B §B.4](appendix-b.md#sec-ou-appb-live-stats)。
 
@@ -29,7 +29,7 @@
 | 8 | [`ch39-四维角亏与球壳谱权重.md`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-四维角亏与球壳谱权重.md) | 55 行 | 等边四维单纯流形角亏、条件系综系数消去与高斯球壳行列式权重（[第 10–11 章](ch10-regge-gravity-and-spin2.md)） |
 | 9 | [`ch39-共同算术钟的三项检验.md`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-共同算术钟的三项检验.md) | 109 行 | 二次预解式第七项 35 位留出码 `32071996606`、三高度带浓缩与中性刚度微扰（[第 12 章](ch12-shared-arithmetic-clock.md)） |
 
-## A.2 ShellProjection.lean：半径 17 九点壳的精确整数压缩证书 {#sec-ou-appa-shell-projection}
+## A.2 ShellProjection.lean：平方半径 17 九点壳的精确整数压缩证书 {#sec-ou-appa-shell-projection}
 
 除 Python 与 Arb 脚本外，仓库另含一份仅导入 Lean 4 标准最小内核 `Init` 的独立机械核验文件 [`replay/ShellProjection.lean`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ShellProjection.lean)（59 行，设置 `maxRecDepth 80000` 与 `maxHeartbeats 4000000`）。该文件不依赖 `Mathlib` 与任何实数或经典公理，全部构造皆在四元组整四元数结构体 `H := (w, x, y, z : Int)` 上以纯整数算术展开。
 
@@ -134,7 +134,7 @@ python3 ch39-shared-clock-checks.py
 python3 ch39-fixed-vacuum-weight-dimension.py
 python3 ch39-three-clock-minimal-memory.py
 
-# 5. 独立重放半径 17 九点壳的 Lean 4 纯整数压缩证书
+# 5. 独立重放平方半径 17 九点壳的 Lean 4 纯整数压缩证书
 lean +leanprover/lean4:v4.35.0 ShellProjection.lean
 ```
 

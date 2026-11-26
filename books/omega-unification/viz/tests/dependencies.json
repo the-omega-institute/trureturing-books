@@ -4,6 +4,8 @@
     "behrend-unification-lab.test.mjs": [
       "@citations",
       "books/omega-unification/book.toml",
+      "books/omega-unification/zh/ch02-quaternion-clocks-and-haar-zeros.md",
+      "books/omega-unification/zh/ch11-induced-gravity-and-dark-energy.md",
       "@registry-entry",
       "package-lock.json",
       "package.json",
@@ -26,6 +28,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
+      "trureturing.lock.json",
       "@lean-links"
     ]
   }

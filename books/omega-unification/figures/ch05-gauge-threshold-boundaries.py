@@ -57,6 +57,6 @@ def draw(fig):
         (1.50, 20, t("SU(5) · 20Q", "SU(5) · 20Q")),
         (0.60, 30, t("Spin(10) · 30Q", "Spin(10) · 30Q")),
     ):
-        ceiling.path([(1, row), (ratio, row)], "open", 2, opacity=0.76)
-        ceiling.points([(ratio, row)], "open", r=4, ring="bg")
-        ceiling.text(ratio, row, label, dx=-5, dy=-8, anchor="end", color="open", size=13, halo=True)
+        ceiling.path([(1, row), (ratio, row)], "violet", 2, opacity=0.76)
+        ceiling.points([(ratio, row)], "violet", r=4, ring="bg")
+        ceiling.text(ratio, row, label, dx=-5, dy=-8, anchor="end", color="violet", size=13, halo=True)

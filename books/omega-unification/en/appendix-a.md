@@ -29,7 +29,7 @@ Within `replay/`, sixty Markdown files—the master replay record (18,051 lines,
 | 8 | [Four-Dimensional Deficit Angles & Shell Spectral Weights](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-%E5%9B%9B%E7%BB%B4%E8%A7%92%E4%BA%8F%E4%B8%8E%E7%90%83%E5%A3%B3%E8%B0%B1%E6%9D%83%E9%87%8D.md) | 55 lines | Equilateral 4D simplicial deficit angles, conditional ensemble coupling cancellation, and Gaussian shell determinants ([Ch 10–11](ch10-regge-gravity-and-spin2.md)) |
 | 9 | [Three Tests of the Shared Arithmetic Clock](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-%E5%85%B1%E5%90%8C%E7%AE%97%E6%9C%AF%E9%92%9F%E7%9A%84%E4%B8%89%E9%A1%B9%E6%A3%80%E9%AA%8C.md) | 109 lines | Held-out 35-bit seventh-time code `32071996606`, three-band spectral concentration, and neutral stiffness response ([Ch 12](ch12-shared-arithmetic-clock.md)) |
 
-## A.2 ShellProjection.lean: Exact Integer Compression on the Radius-17 Nine-Point Shell {#sec-ou-appa-shell-projection}
+## A.2 ShellProjection.lean: Exact Integer Compression on the Squared-Radius-17 Nine-Point Shell {#sec-ou-appa-shell-projection}
 
 Alongside the Python and Arb suite, the repository includes a standalone Lean 4 verification file [`replay/ShellProjection.lean`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ShellProjection.lean) (59 lines, importing only Lean `Init`, with `maxRecDepth 80000` and `maxHeartbeats 4000000`). Using neither `Mathlib` nor any real-number or classical axioms, every construction operates in pure integer arithmetic on the quaternion structure `H := (w, x, y, z : Int)`.
 
@@ -134,7 +134,7 @@ python3 ch39-shared-clock-checks.py
 python3 ch39-fixed-vacuum-weight-dimension.py
 python3 ch39-three-clock-minimal-memory.py
 
-# 5. Replay the standalone Lean 4 integer compression certificate
+# 5. Replay the standalone Lean 4 integer compression certificate on the squared-radius-17 nine-point shell
 lean +leanprover/lean4:v4.35.0 ShellProjection.lean
 ```
 

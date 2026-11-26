@@ -21,9 +21,9 @@ $$
 一个双钟背景 $(\theta_1, \theta_2; \gamma)$ 通过**三窗检验 `[1]+[2]+[4]`**，当且仅当它同时满足五荷各三轻模 `[2]`、两圈强耦合窗 `[1]` 以及四层曲率千分之二窗 `[4]`；其夸克味读出由含双钟的六面味和乐坐标 $c(\theta_1, \theta_2)$ 控制，由此给出 $|V_{ub}|^2$ 与带符号雅尔斯科格不变量 $J$。
 :::
 
-在离散球壳上，之所以三角面回路能够区分取向、锁定 $J$ 的符号并撑起非平凡的相位势垒，根源在于四元数旋转的三元合成既不可交换，又在正交基准三元组上给出严格正的有理球面盈余。如果两条相继旋转的合成可交换，那么闭合三角面的和乐便退化为平庸的阿贝尔相加，手征取向与 $\mathrm{CP}$ 符号也将随之蒸发。这两块几何基石在 Lean 4 内核中直接以精确代数恒等式冻结（其中第二条的传递公理表为空集 `axioms: []`）：
+在离散球壳上，之所以三角面回路能够区分取向、锁定 $J$ 的符号并撑起非平凡的相位势垒，根源在于四元数旋转的三元合成既不可交换，又在正交旋转轴基准半步三元组上给出严格正的有理球面盈余。如果两条相继旋转的合成可交换，那么闭合三角面的和乐便退化为平庸的阿贝尔相加，手征取向与 $\mathrm{CP}$ 符号也将随之蒸发。这两块几何基石在 Lean 4 内核中直接以精确代数恒等式冻结（其中第二条的传递公理表为空集 `axioms: []`）：
 
-::: {.theorem #thm-ou-ch13-noncommutative-witness title="射影三元非交换见证与正交三射线四分之一格拉姆余量" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.orthogonal_triad_excess_quarter"}
+::: {.theorem #thm-ou-ch13-noncommutative-witness title="射影三元非交换见证与正交旋转轴半步三元组四分之一格拉姆余量" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.orthogonal_triad_excess_quarter"}
 在形式化库 `OmegaMath` 中，取基准整四元数 $p_0 = (1, 0, 0, 0)$、$p_{\mathrm{Half}} = (1, 1, 0, 0)$ 与 $q_{\mathrm{Half}} = (1, 0, 1, 0)$，记三元积为 $\operatorname{triad}(\mathbf{a}, \mathbf{b}, \mathbf{c}) = (\mathbf{a}\bar{\mathbf{b}})\mathbf{c}$，并记射影射线等价为 $\sim_{\mathrm{ray}}$（`Ternion.RayEquiv`）、归一化三阶巴格曼–格拉姆（Bargmann–Gram）行列式为 $\det\mathbf{G}_3$。则下列两项同时成立：
 
 1. **显式射影非交换性（`phalf_qhalf_noncommutative`）：** 互换首尾两项得到的三元积不处于同一条射影射线：
@@ -32,7 +32,7 @@ $$
    \neg\Bigl(\operatorname{triad}(p_{\mathrm{Half}},\, p_0,\, q_{\mathrm{Half}}) \;\sim_{\mathrm{ray}}\; \operatorname{triad}(q_{\mathrm{Half}},\, p_0,\, p_{\mathrm{Half}})\Bigr).
    $$
 
-2. **正交半步三元组的精确四分之一余量（`orthogonal_triad_excess_quarter`，无公理）：** 在有理等价 `IntRatio.Equivalent` 下，基准正交三元组 $(1, p_{\mathrm{Half}}, q_{\mathrm{Half}})$ 的巴格曼–格拉姆闭环行列式精确等于四分之一：
+2. **正交旋转轴半步三元组的精确四分之一余量（`orthogonal_triad_excess_quarter`，无公理）：** 在有理等价 `IntRatio.Equivalent` 下，由两条正交虚旋转轴 $\mathbf{i}, \mathbf{j}$ 构成的半步三元组 $(1, p_{\mathrm{Half}}, q_{\mathrm{Half}})$ 之巴格曼–格拉姆闭环行列式精确等于四分之一：
 
    $$
    \det\mathbf{G}_3(1,\, p_{\mathrm{Half}},\, q_{\mathrm{Half}}) \;\equiv\; \frac{1}{4}.
@@ -106,7 +106,7 @@ $$
 然而正当你以为 $105$ 圈终于锁死了微观作用量时，维数清点立刻泼下一盆冷水：即便把全局真空位置、三窗和参考味读数全部钉死，在满足归一、非负与前述 $w_{104}, w_{105}$ 下界约束的条件下，这套 $105$ 圈作用量仍留出一个 **$100$ 维的连续可行系数族**！
 
 ::: {.figure src="ch13-winding-threshold-ladder"}
-**五百二十九面双钟作用的绕数阶梯（$18 \to 19 \to 21 \to 27 \to 31 \to 36 \to 105$）。** 纵轴展示各物理目标（无驻点墙、鞍点、局部极小、三窗全局真空、带参考味局部极小、逐高度全局味真空、跨高度统一全局味真空）的锐利门槛，同时标出 $27$ 圈处的味塌缩鸿沟（$J \le 31.362\%$、恢复代价 $> 1.3266$）与 $105$ 圈处强制的高频权重下界（$w_{104} > 0.6589\%$、$w_{105} > 6.8674\%$）。
+**相位选择的最小绕数阶梯（$\le 18 \to 19 \to 21 \to 27 \to 31 \to 36 \to 105$）。** 对数横轴依次标出七道锐利门槛：$\le 18$（无驻点，灰色）、$19$（鞍点）、$21$（局部极小）、$27$（三窗全局极小）、$31$（局部味极小）、$36$（依赖高度的全局味极小，均青色），直至 $105$（与高度无关的共同真空，琥珀色）；下方品红色提示框标出权重随绕数非增时全局能差恒 $> 1/4$，底栏琥珀色列出旗舰联合零点见证 `#2,306,888,100,085`。
 :::
 
 ## 13.3 单调衰减权重与原生壳自相关权的全面排除

@@ -59,7 +59,7 @@ The explicit seven-zero witness attains $1.33072788424 \times 10^{-8}$ (just $0.
 
 The sharpest test of any quantitative model is never what it fits, but how rigidly it binds the **next unseen observable**. Fix the shared quadratic resolvent clock ([@def-ou-ch12-shared-clock]) to the exact reference values $T_1, \dots, T_5$ and the prescribed sixth-time input $T_6 + 1.360900010 \times 10^{-8}$. How much room remains for the held-out **seventh time $F(7)$**?
 
-Classical moment theory and Gauss–Radau quadrature settle the question exactly (verified in [`ch39-shared-clock-checks.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-shared-clock-checks.py)). Define the denominator polynomial and reweighted measure
+Classical moment theory and Gauss–Radau quadrature settle the question exactly (verified in [`ch39-shared-clock-checks.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-shared-clock-checks.py), with full written derivation in the [three shared-clock tests dossier](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-%E5%85%B1%E5%90%8C%E7%AE%97%E6%9C%AF%E9%92%9F%E7%9A%84%E4%B8%89%E9%A1%B9%E6%A3%80%E9%AA%8C.md)). Define the denominator polynomial and reweighted measure
 
 $$
 D(y) \;=\; \prod_{j=2}^6 \bigl(1 + (j^2 - 1) y\bigr), \qquad d\sigma(y) \;=\; \frac{dp(y)}{D(y)}.
@@ -136,7 +136,7 @@ which after subtracting the original baseline width forces $M(p, L) - M(p', L') 
 :::
 
 ::: {.figure src="ch12-arithmetic-clock-bands"}
-**Three-band spectral concentration and stiffness sensitivity under the shared arithmetic clock.** At $A \approx 2.9036 \times 10^9$, six arithmetic times compress more than $99.931\%$ of both $p$ and $\nu$ into $[3.8, 4.5] \times 10^{10}$, $[7, 10] \times 10^{10}$, and $[10^{12}, \infty)$ (roughly $23.44\%$, $37.4\%$, and $39.1\%$), locking the held-out 35-bit seventh-time code to `32071996606` against reference `32071992476` and breaking down the three-band shares of stiffness sensitivity $S \approx 0.00208104$.
+**Three height bands of the shared arithmetic clock and the seventh-reading Gauss–Radau forecast.** Top: log-$\gamma$ layout of the three height bands carrying $> 99.931\%$ combined arithmetic weight—$(3.8\text{–}4.5) \times 10^{10}$ ($\approx 23.44\%$, cyan), $7 \times 10^{10}$ to $10^{11}$ ($\approx 37.4\%$, cyan), and $\ge 10^{12}$ ($\approx 39.1\%$, amber ray). Bottom: the seventh-reading forecast window (width $\approx 2.14 \times 10^{-12}$), the separation between the 35-bit reference code `32071992476` and forced amber forecast code `32071996606`, and a zoom into the single 35-bit forecast bin.
 :::
 
 Turning from arithmetic times to the sharpest cross-sector physical hold-out—the **quark $\mathrm{CP}$-violation invariant $J$**—reveals an equally stubborn wall. On the eight-zero three-window witness at $A = 2{,}903{,}600{,}000$ matching the first five arithmetic times, the reference flavor stationary point, and mean $|V_{ub}|^2$ simultaneously, held-out average $J$ drops **$6.0833\%$** below reference. Expanding the three-window candidate pool tracks how persistent this deficit remains:
