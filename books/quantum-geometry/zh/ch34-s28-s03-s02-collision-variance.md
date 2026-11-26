@@ -39,7 +39,7 @@ $$
 \log L\ge \log N+2p\log\log T-O(p+\log T).
 $$
 
-该式约束矩判据所需的平均长度。实际 ζ 纵坐标在正分辨率下的高阶加权近碰撞上界，以及更短范围内能否找到缺失窗口，仍待解决。
+该式约束矩判据所需的平均长度。[@thm-ch34-zeta-harmonic-collision-limit] 在特定尺度下给出实际调和加权 ζ 纵坐标的匹配上界。更短的采样范围内能否找到缺失窗口仍待解决。
 
 ## 共同移位分箱与抛物线测试函数
 
@@ -225,7 +225,7 @@ E_n(\eta_n)\ge
 \frac{r\eta_n}{T_n\sqrt n}\,W_n^{2n}
 $$
 
-最终成立。这里允许底层频率族的大小增长。若不控制分辨率与方差的相对尺度，例如单个单位权重频率、$V_n=1/n^2$、固定 $\eta_n>0$，归一化碰撞比可能趋于零。实际 ζ 零点的高阶加权碰撞上界仍未解决。
+最终成立。这里允许底层频率族的大小增长。若不控制分辨率与方差的相对尺度，例如单个单位权重频率、$V_n=1/n^2$、固定 $\eta_n>0$，归一化碰撞比可能趋于零。实际调和加权 ζ 零点在更具体的增长和分辨率条件下具有匹配的上界，见 [@thm-ch34-zeta-harmonic-collision-limit]。
 
 ## 从三角加权矩精确恢复闭碰撞带
 
@@ -298,7 +298,7 @@ $$
 \frac{s_n E_n(\eta_n)}{\eta_n W_n^{2n}}\longrightarrow\frac1{\sqrt\pi}.
 $$
 
-这把所需的硬带渐近归约为邻近乘法半径处的 Fejér 加权矩渐近。实际 ζ 尾段的非中心贡献以及匹配的上界仍是待证的算术问题。
+这把所需的硬带渐近归约为邻近乘法半径处的 Fejér 加权矩渐近。对于实际调和加权 ζ 零点谱，[@thm-ch34-zeta-harmonic-collision-limit] 遵循这条归约，并给出相应的分辨率条件。
 
 ## 四阶配对矩控制中心高斯轮廓
 
@@ -350,7 +350,7 @@ $$
 
 在现有 RH 条件接口下，取全部满足 $0<\gamma\le T$ 的 ζ 零点，并按解析重数 $m_\gamma$ 赋权 $a_\gamma=m_\gamma\gamma/(1/4+\gamma^2)$。令 $W(T)=\sum_\gamma a_\gamma$，$w_\gamma=a_\gamma/W(T)$，$P_k(T)=\sum_{\gamma,\gamma'}w_\gamma w_{\gamma'}(\gamma-\gamma')^k$。记 $c=1/(2\pi)$。Riemann–von Mangoldt 计数渐近式给出 $N(T)-N(3T/4)\ge cT\log T/8$（充分大的 $T$）。对上段 $3T/4<\gamma\le T$，$a_\gamma\ge m_\gamma/(2T)$，故该段权重至少为 $c\log T/16$。结合调和质量渐近式，$W(T)\le c(\log T)^2$，且 $W(T/2)\ge c(\log T)^2/16$。
 
-上下两段的归一化权重分别至少为 $1/16$ 和 $1/(16\log T)$，段间频率差绝对值至少为 $T/4$。因此仅保留从下段到上段的有序配对，即得
+下段与上段的归一化权重分别至少为 $1/16$ 和 $1/(16\log T)$，段间频率差绝对值至少为 $T/4$。因此仅保留从下段到上段的有序配对，即得
 
 $$
 P_2(T)\ge\frac{T^2}{4096\log T}>0,\qquad P_4(T)\le T^2P_2(T).
@@ -362,7 +362,7 @@ $$
 \frac{P_4(T)}{P_2(T)^2}\le4096\log T.
 $$
 
-[调和权重矩比值界](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio) 若 $T_n\to\infty$ 且 $\log T_n/n\to0$，则实际归一化零点谱满足前述高斯轮廓的四阶矩比值假设。固定比例的频率缩放 $g_\gamma=\gamma/r$（$r>0$）不改变此矩比值。中心 Fejér 主项还须满足分辨率与实际方差尺度的兼容条件。中间时间区域的非中心峰估计仍须独立建立。
+[调和权重矩比值界](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio) 若 $T_n\to\infty$ 且 $\log T_n/n\to0$，则实际归一化零点谱满足前述高斯轮廓的四阶矩比值假设。固定比例的频率缩放 $g_\gamma=\gamma/r$（$r>0$）不改变此矩比值。中心 Fejér 主项还须满足分辨率与实际方差尺度的兼容条件。中间时间区域的非中心峰由下文的相位估计控制。
 
 ## 移动中心窗口的 Fejér 积分主项
 
@@ -404,7 +404,7 @@ $$
 K_{\eta_n}(t)|S_n(t)|^{2n}\,dt\longrightarrow0,
 $$
 
-并且对邻近的乘法分辨率验证相应极限。对于按调和权重加权的实际 ζ 零点谱，上述截断增长条件保证矩比值条件成立。非中心峰的积分估计仍是开放的算术缺口。
+并且对邻近的乘法分辨率验证相应极限。对于按调和权重加权的实际 ζ 零点谱，上述截断增长条件保证矩比值条件成立。后文用统一 Landau 估计控制非中心峰，在 $\eta_n\log T_n\to\infty$ 的范围内得到 [@thm-ch34-zeta-harmonic-collision-limit]。
 
 ### 全线矩的有限观察窗口
 
@@ -428,7 +428,7 @@ $$
 
 [相对截尾界](lean:D5/S3/Fourier/Concentration/FejerRelativeLocalization.relative_fejer_truncation) 这一估计容许支撑、权重、次数及分辨率同时变化，也容许重复频率。
 
-令 $L_n$ 满足 $\eta_nL_n\to+\infty$，并取 $L_n\ge A_n/s_n$。记 $\varepsilon_n=64/(\eta_nL_n)$。最终 $I_{\eta_n}(L_n)\le M_{\eta_n}\le I_{\eta_n}(L_n)/(1-\varepsilon_n)$。因而归一化有限窗口积分 $(s_n/\eta_n)I_{\eta_n}(L_n)$ 与归一化全线矩具有相同的有限极限（任一极限存在即推出另一极限）。在中心主项已经建立的条件下，待控制的相位峰集中到有限的中间时间区域 $A_n/s_n<|t|\le L_n$。实际增长 ζ 零点族在这一区域的高阶矩上界仍然开放。
+令 $L_n$ 满足 $\eta_nL_n\to+\infty$，并取 $L_n\ge A_n/s_n$。记 $\varepsilon_n=64/(\eta_nL_n)$。最终 $I_{\eta_n}(L_n)\le M_{\eta_n}\le I_{\eta_n}(L_n)/(1-\varepsilon_n)$。因而归一化有限窗口积分 $(s_n/\eta_n)I_{\eta_n}(L_n)$ 与归一化全线矩具有相同的有限极限（任一极限存在即推出另一极限）。在中心主项已经建立的条件下，待控制的相位峰集中到有限的中间时间区域 $A_n/s_n<|t|\le L_n$。在 [@thm-ch34-zeta-harmonic-collision-limit] 的条件下，可取 $L_n=\log T_n$，由后文的相位估计控制这段积分。
 
 ### 实际 ζ 零点的短非中心时间区域
 
@@ -459,7 +459,7 @@ K_{\eta_n}(t)|Z_{T_n}(t)|^{2n}\,dt
 \exp\left(-\frac{\delta n}{262144\log T_n}\right).
 $$
 
-若 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$，此上界趋于零，因为 $\log T_n$ 和 $\log n$ 均为 $o(n/\log T_n)$。在移动中心窗口至 $1/T_n$ 的区域，取 $X=T_n$，同一四阶矩估计保证 $|t|\le1/T_n$ 时 $|Z_{T_n}(t)|^{2n}\le e^{-11(s_nt)^2/12}$。当 $A_n\to\infty$ 时，$|s_nt|>A_n$ 的这一部分归一化积分也趋于零。结合全线相对截尾界，在上述更强的增长条件下，余下待证的算术上界集中于中间时间区域 $T_n^{-\delta}<|t|\le L_n$。若采用固定 $r>0$ 的频率 $\gamma/r$，相应时间端点乘以 $r$，方差尺度乘以 $1/r$。
+若 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$，此上界趋于零，因为 $\log T_n$ 和 $\log n$ 均为 $o(n/\log T_n)$。在移动中心窗口至 $1/T_n$ 的区域，取 $X=T_n$，同一四阶矩估计保证 $|t|\le1/T_n$ 时 $|Z_{T_n}(t)|^{2n}\le e^{-11(s_nt)^2/12}$。当 $A_n\to\infty$ 时，$|s_nt|>A_n$ 的这一部分归一化积分也趋于零。结合全线相对截尾界，在上述更强的增长条件下，余下需要估计的积分集中于中间时间区域 $T_n^{-\delta}<|t|\le L_n$。若采用固定 $r>0$ 的频率 $\gamma/r$，相应时间端点乘以 $r$，方差尺度乘以 $1/r$。
 
 ### 实际零点谱的短区间计数下界
 
@@ -504,7 +504,7 @@ $$
 \exp\left(-\frac{n}{2048\log T_n}\right)\longrightarrow0.
 $$
 
-剩余中间区域位于 $b/\log T_n$ 之外，需要更细相位尺度的算术信息。
+下一节用统一 Landau 估计把控制范围从 $b/\log T_n$ 延伸到 $\log T_n$。
 
 ### 从统一 Landau 估计推到对数时间
 
@@ -524,12 +524,23 @@ $$
 $$
 Lean 定理以统一估计为显式前提，核验了这一步转移。[对数时间调和得分亏损界](lean:D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.harmonic_landau_window_deficit)
 
-结合先前的时间估计，可在 RH 与上述统一估计下得到一类分辨率趋零时的高斯碰撞极限。设 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$，令 $s_n=\sqrt{nP_2(T_n)/2}$，取满足 $\eta_n/s_n\to0$ 和 $\eta_n\log T_n\to\infty$ 的 $\eta_n>0$。按四阶矩条件选取中心窗参数 $A_n$，必要时将其缩至 $s_n/T_n$。由二阶矩下界仍有 $A_n\to\infty$。从 $A_n/s_n$ 到 $1/T_n$ 使用短时间高斯上界，从 $1/T_n$ 到 $b/\log T_n$ 使用前述估计。新增区间直到 $\log T_n$ 的归一化 Fejér 贡献至多为
+::: {.theorem #thm-ch34-zeta-harmonic-collision-limit title="调和加权 ζ 零点的高斯碰撞极限" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLogarithmicCollisionLimit.harmonic_zeta_collision_limit"}
+假设 Mathlib 所表述的黎曼假设（RH）成立。即若 $\zeta(s)=0$、$s\ne1$，且 $s\ne-2(k+1)$ 对所有自然数 $k$ 成立，则 $\operatorname{Re}s=1/2$。设上面的统一估计对某个固定 $C>0$ 成立。令 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$，记 $s_n=\sqrt{nP_2(T_n)/2}$。若 $\eta_n$ 最终为正，且 $\eta_n/s_n\to0$、$\eta_n\log T_n\to\infty$，那么
+
 $$
-\frac{\sqrt{n/2}\,T_n\log T_n}{\pi}
-\exp\left(-\frac{n}{16\log T_n}\right)\longrightarrow0,
+\frac{s_n E_n(\eta_n)}{\eta_n W(T_n)^{2n}}\longrightarrow\frac1{\sqrt\pi}.
 $$
-其中用到 $K_{\eta_n}\le\eta_n/(2\pi)$ 与 $s_n\le T_n\sqrt{n/2}$。在 $\log T_n$ 处作相对截断，即可把中心 Fejér 极限传到全线。此论证适用于 $\eta_n$ 的每个固定正倍数，因此割线结果给出原调和权重的硬碰撞极限 $s_n E_n(\eta_n)/(\eta_n W(T_n)^{2n})\to1/\sqrt\pi$。这个积分推论使用了文献前提。若 $\eta_n\log T_n$ 有界，仍需控制更长时间。
+
+这里 $E_n(r)$ 对所有频率差绝对值不超过 $r$ 的有序占用向量对求和，每一对取原调和权重所诱导的两个多项式权重之积。
+:::
+
+::: proof
+四阶矩界 $P_4(T)\le T^2P_2(T)$ 允许把中心窗直接取为 $|t|\le1/T_n$。二阶矩下界保证换元后的半宽 $s_n/T_n$ 趋于无穷。中心积分给出 $1/(2\sqrt\pi)$。倒数高度、周期相位和 Landau 估计覆盖 $1/T_n\le|t|\le\log T_n$ 的整个区间，给出统一的得分亏损下界 $c/\log T_n$，其中 $c>0$。得分的 $2n$ 次幂于是至多为 $\exp(-2cn/\log T_n)$，足以抵消归一化积分中的 $T_n\sqrt n\log T_n$ 因子。相对截断把极限传到全线。对 $\eta_n$ 的每个固定正倍数应用同一论证，得到二次斜坡极限，再由两侧割线得到含端点的硬碰撞常数。完整证明由 Lean 内核检查。
+:::
+
+Alpöge 的外部形式化证明给出了 Mathlib 的黎曼假设。上面的冻结声明以该命题和 Gonek 的统一估计为显式前提。 [外部 RH 定理](https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean#L4)
+
+若 $\eta_n\log T_n$ 有界，相对截断给出的误差界无法保证趋零。
 
 ### 有限支撑的占用数对角下界
 

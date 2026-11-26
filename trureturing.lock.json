@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "c04fcf66912183f7f742244b7a60e1b02505782e",
-  "pinned_at": "2026-11-26T04:23:12Z",
+  "commit": "973e7866b17003e1cc3d1949fac5cd5f3c796baa",
+  "pinned_at": "2026-11-26T06:07:02Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -13012,27 +13012,17 @@
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment",
       "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHHarmonicPairMoment.harmonic_pair_ratio",
       "kind": "theorem",
-      "statement_id": "sha256:05017caad3de90116a848948af1fd9467530cfb6c23876f122793f516df5ee80",
-      "line": 207,
-      "signature": "theorem harmonic_pair_ratio (rh : RiemannHypothesis) : ∀ᶠ T : ℝ in atTop, let logHeight",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ]
+      "statement_id": "sha256:d16c2e30a4d37d1bb2ccb837cc1c03f78253ac19ab274d5a4ea4f564326f77a5",
+      "line": 208,
+      "signature": "theorem harmonic_pair_ratio (rh : RiemannHypothesis) : ∀ᶠ T : ℝ in atTop, let logHeight"
     },
     "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_reciprocal_time_deficit": {
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment",
       "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHHarmonicPairMoment.harmonic_reciprocal_time_deficit",
       "kind": "theorem",
-      "statement_id": "sha256:05017caad3de90116a848948af1fd9467530cfb6c23876f122793f516df5ee80",
-      "line": 228,
-      "signature": "theorem harmonic_reciprocal_time_deficit (rh : RiemannHypothesis) : ∃ L : ℝ, 1 < L ∧ ∀ T t : ℝ, L ≤ T → 1/T ≤ |t| → |t| ≤ 1/L → let g : ↥(positiveCutoff rh T) → ℝ",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ]
+      "statement_id": "sha256:d16c2e30a4d37d1bb2ccb837cc1c03f78253ac19ab274d5a4ea4f564326f77a5",
+      "line": 229,
+      "signature": "theorem harmonic_reciprocal_time_deficit (rh : RiemannHypothesis) : ∃ L : ℝ, 1 < L ∧ ∀ T t : ℝ, L ≤ T → 1/T ≤ |t| → |t| ≤ 1/L → let g : ↥(positiveCutoff rh T) → ℝ"
     },
     "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.harmonic_landau_window_deficit": {
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer",
@@ -13041,6 +13031,19 @@
       "statement_id": "sha256:76da5d16184838a9c68008cdc8b0b893ec9a39f67ac177c5f1de1c6f8713e152",
       "line": 240,
       "signature": "theorem harmonic_landau_window_deficit (rh : RiemannHypothesis) (b C : ℝ) (hb : 0 < b) (hC : 0 < C) (hLandau : ∀ V t : ℝ, 1 < V → 0 < |t| → ‖∑ j ∈ positiveCutoff rh V, (Zeta23.zeroMult j.val : ℂ)*phase (ordinate j) t‖ ≤ C*(V+Real.exp (|t|/2)*(1+|t|)^2+Real.exp (|t|/2)*(1+Real.log V)+Real.log V/|t|)) : ∃ L : ℝ, 1<L ∧ ∀ T t : ℝ, L≤T → b/Real.log T≤|t| → |t|≤Real.log T → let g : ↥(positiveCutoff rh T) → ℝ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLogarithmicCollisionLimit.harmonic_zeta_collision_limit": {
+      "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLogarithmicCollisionLimit",
+      "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHLogarithmicCollisionLimit.harmonic_zeta_collision_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:77f4b01c7dc64e95884a90dc581be33e087224b3778e9e3df2f3b1e7ff0c289c",
+      "line": 541,
+      "signature": "theorem harmonic_zeta_collision_limit (rh : RiemannHypothesis) (C : ℝ) (hC : 0 < C) (hLandau : ∀ V t : ℝ, 1 < V → 0 < |t| → ‖∑ j ∈ positiveCutoff rh V, (Zeta23.zeroMult j.val : ℂ) * phase (ordinate j) t‖ ≤ C * (V + Real.exp (|t| / 2) * (1 + |t|)^2 + Real.exp (|t| / 2) * (1 + Real.log V) + Real.log V / |t|)) (T η : ℕ → ℝ) (hT : Tendsto T atTop atTop) (hη : ∀ᶠ n : ℕ in atTop, 0 < η n) (hh : Tendsto (fun n : ℕ => (Real.log (T n))^2 / (n : ℝ)) atTop (𝓝 0)) (htrunc : Tendsto (fun n : ℕ => η n * Real.log (T n)) atTop atTop) : let scale (n : ℕ)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
