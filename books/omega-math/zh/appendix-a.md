@@ -1,12 +1,12 @@
 # 附录 A OmegaInit 与 OmegaMath 零公理模块及冻结索引
 
-本附录收录 `the-omega-institute/trureturing`（`dev` 分支）中严格零公理基础库 `OmegaInit` 与六卷完整数学库 `OmegaMath` 的已合入模块清单、14 个零公理 D5 冻结模块（127 条 `axioms: []` 定理）注册表、第 2 层单向阴影函子 `OmegaShadowBridge`（11 条公开桥接定理）、全书六卷引用的经典 `Mathlib` 阴影锚点索引，以及可复现的空内核零公理审计核对清单。按本书库源文件规范，覆盖全书十八章的动态形式化验证总账由构建系统依据 `trureturing.lock.json` 在 [附录 B §B.4](appendix-b.md#sec-om-appb-live-stats) 自动生成，本附录不重复维护全书静态统计副本。
+本附录以所钉的 trureturing 提交 [{commit}](trureturing:) 为准，列出严格库的主要模块、D5 冻结定理、单向桥接与经典对照。文末分别给出严格库的空内核重放入口和 D5 的双后端核对入口。全书形式化验证统计见 [附录 B §B.4](appendix-b.md#sec-om-appb-live-stats)。
 
-## A.1 OmegaInit 严格基础库索引（10 个模块，0 公理） {#sec-om-appa-omegainit}
+## A.1 OmegaInit 严格基础库索引 {#sec-om-appa-omegainit}
 
-`OmegaInit` 位于 `trureturing` 仓库 `src/OmegaInit*`，在 `lakefile.toml` 中作为独立 Lake 库目标构建。其全部 10 个源文件均以 `module` 与 `prelude` 开篇，彻底阻断官方 `Init` 与 `Mathlib` 隐式导入；公开声明遵循“在官方 Lean `v4.35.0` 对应声明完整名称前加 `Omega.`”的镜像命名规则，并经 `OmegaChecks.Audit` 逐条核对上游模块归属，传递公理闭包严格为空：
+严格实现位于 `strict/OmegaInit.lean` 与 `strict/OmegaInit/`，常规构建使用 `src/OmegaInit*` 下的官方接口文件。下表按归纳基础与整数运算选列入口。空内核重放及移植声明的上游归属检查见 [§A.6](#sec-om-appa-audit-checklist)。
 
-| 序号 | 仓库模块路径（`src/` 下） | 对照官方 `Init` 模块 | 核心公开声明与用途 |
+| 序号 | 严格实现路径（`strict/` 下） | 对照官方 `Init` 模块 | 核心公开声明与用途 |
 | :---: | :--- | :--- | :--- |
 | 1 | `OmegaInit/Prelude.lean` | `Init.Prelude` | `Omega.Eq`、`Omega.True`/`False`/`And`/`Or`/`Not`、`Omega.Bool`、`Omega.Nat`（`add`/`mul`/`sub`/`le`/`lt`） |
 | 2 | `OmegaInit/Core.lean` | `Init.Core` | `Omega.Nat.add_zero` 等基础递归归纳恒等式 |
@@ -19,27 +19,27 @@
 | 9 | `OmegaInit/Data/Int.lean` | `Init.Data.Int` | 汇总导出 `OmegaInit.Data.Int.{Basic, Lemmas, Order}` |
 | 10 | `OmegaInit.lean` | `Init` 根入口 | 严格基础库总入口，导出 `OmegaInit.Data.{Nat, Int}` |
 
-## A.2 OmegaMath 六卷零公理源码模块全表（78 个模块，0 公理） {#sec-om-appa-omegamath}
+## A.2 OmegaMath 六卷核心模块索引 {#sec-om-appa-omegamath}
 
-覆盖全书六卷的 `OmegaMath` 零公理数学库已全部合入 `the-omega-institute/trureturing@dev`，共包含 **78 个**严格 `module` $+$ `prelude` 源码模块（`src/OmegaMath.lean` 根入口及 `src/OmegaMath/` 下 77 个子模块），零 `Init`/`Mathlib` 导入、零 `Quot.sound`、零 `Classical.choice`：
+下表按卷列出 `src/OmegaMath.lean` 与 `src/OmegaMath/` 中的主要入口和实现模块。根入口以外的模块与导入闭包以所钉源码及审计输出为准。
 
-| 对应卷章 | 源码模块路径（`src/OmegaMath/` 下） | 模块数 | 已冻结零公理核心构造 |
-| :--- | :--- | :---: | :--- |
-| **卷 I · 地基与射影闭环**（第 1–2 章） | `OmegaMath.lean`、`Data/{Nat, Ratio, Int, IntRatio}.lean`、`Projective.lean`、`Projective/{Basic, Circle, Circle/Identity}.lean` | 9 | 免商比值 `Omega.Ratio`/`IntRatio`、齐次射影重叠 `kappa`、对径闭合 $[p:0]$ 与圆群乘法 |
-| **卷 I–II · 整四元数与三元流群**（第 3–4 章） | `Algebra/{Quaternion, Quaternion/Polynomial}.lean`、`Ternion/{Heap, Heap/Core, Heap/Fidelity, Heap/Spinor}.lean` | 6 | 整四元数四平方乘性、无原点三元流群吸收/结合律、拉格朗日恒等式与有号旋量提升 |
-| **卷 II · 凯莱旋转与球面三角**（第 5–6 章） | `Geometry/{Cayley3D, Cayley3D/Adjoint, Cayley3D/Matrix, Cayley3D/Recurrence}.lean`、`Geometry/{BargmannGram, BargmannGram/Coordinates, BargmannGram/Determinant, BargmannGram/Fractions, BargmannGram/Identities, BargmannGram/Monomial, BargmannGram/Polynomial, BargmannGram/Scaling}.lean` | 12 | 三维有理凯莱正交矩阵 $\mathrm{SO}(3,\mathbb{Q})$、伴随同态、迭代保范与 $3\times 3$ 巴格曼—格拉姆非负行列式 |
-| **卷 III · 射流微积分与单纯形上边缘**（第 7–9 章） | `Calculus/{Jet2, Jet2/Basic, Jet2/Fidelity, Jet2/Operations, Jet2/Scalar, Jet2/Secant}.lean`、`Calculus/{DFiniteJet, DFiniteJet/Basic, DFiniteJet/Cayley, DFiniteJet/Coefficients, DFiniteJet/Identities}.lean`、`Topology/SimplicialCoboundary.lean` | 12 | 二阶幂零射流环 $\mathbb{Q}[\eta]/(\eta^3)$、任意阶 D-有限指数/三角/凯莱射流与单纯形锥同伦精确序列 |
-| **卷 IV · 球面调和、二次扩张与舒尔正定**（第 10–12 章） | `Harmonic/{ChebyshevHecke, ChebyshevHecke/Character, ChebyshevHecke/Orbitals, ChebyshevHecke/Recurrence, ChebyshevHecke/S5, ChebyshevHecke/SpinShells, ChebyshevHecke/Traces}.lean`、`Harmonic/{PiFreeHaar, PiFreeHaar/Hecke, PiFreeHaar/Moments}.lean`、`Algebra/{QuadraticExt, QuadraticExt/Basic, QuadraticExt/Fibonacci, QuadraticExt/Operations, QuadraticExt/Polynomial, QuadraticExt/Polynomial/Monomials, QuadraticExt/Ring, QuadraticExt/SpecialValues, QuadraticExt/Spinor}.lean`、`Matrix/{LagrangeSchur, LagrangeSchur/Diagonal, LagrangeSchur/Gram, LagrangeSchur/Order, LagrangeSchur/Schur, LagrangeSchur/Sequence, LagrangeSchur/Vector}.lean` | 26 | 切比雪夫自旋壳与模方 $5$ 赫克迹、卡塔兰阶乘无 $\pi$ 哈尔矩、零公理 `QSqrt2`/`QPhi` 扩张与有理舒尔补极小值 |
-| **卷 V · 可计算算术视界**（第 13–15 章） | `Arithmetic/{Euclidean, Euclidean/Division, Euclidean/GCD, Euclidean/Prime}.lean`、`Arithmetic/{ContinuedFraction, ContinuedFraction/Convergents, ContinuedFraction/Tangent}.lean`、`Arithmetic/DepthBudget.lean` | 8 | 贝祖等式、欧几里得素数逃逸、有限连分数收敛子互素与行列式、无 $\pi$ 马青有理链及纯整数四分深度预算 |
-| **卷 V–VI · 二维矩阵环与非阿贝尔计算**（第 14–16 章） | `Matrix/{Mat2, Mat2/Hurwitz}.lean`、`Computability/{Fractran, Fractran/Division, QuaternionFractran}.lean` | 5 | 整数 $2\times 2$ 矩阵伴随/凯莱—哈密顿、赫维茨 12 晶核与模 $5$ 秩一分裂、康威 FRACTRAN 与四元数非阿贝尔旋子闸门 |
+| 对应卷章 | 源码模块路径（`src/OmegaMath/` 下） | 已冻结零公理核心构造 |
+| :--- | :--- | :--- |
+| **卷 I · 地基与射影闭环**（第 1–2 章） | `OmegaMath.lean`、`Data/{Nat, Ratio, Int, IntRatio}.lean`、`Projective.lean`、`Projective/{Basic, Circle, Circle/Identity}.lean` | 免商比值 `Omega.Ratio`/`IntRatio`、齐次射影重叠 `kappa`、对径闭合 $[p:0]$ 与圆群乘法 |
+| **卷 I–II · 整四元数与三元流群**（第 3–4 章） | `Algebra/{Quaternion, Quaternion/Polynomial}.lean`、`Ternion/{Heap, Heap/Core, Heap/Fidelity, Heap/Spinor}.lean` | 整四元数四平方乘性、无原点三元流群吸收/结合律、拉格朗日恒等式与有号旋量提升 |
+| **卷 II · 凯莱旋转与球面三角**（第 5–6 章） | `Geometry/{Cayley3D, Cayley3D/Adjoint, Cayley3D/Matrix, Cayley3D/Recurrence}.lean`、`Geometry/{BargmannGram, BargmannGram/Coordinates, BargmannGram/Determinant, BargmannGram/Fractions, BargmannGram/Identities, BargmannGram/Monomial, BargmannGram/Polynomial, BargmannGram/Scaling}.lean` | 三维有理凯莱正交矩阵 $\mathrm{SO}(3,\mathbb{Q})$、伴随同态、迭代保范与 $3\times 3$ 巴格曼—格拉姆非负行列式 |
+| **卷 III · 射流微积分与单纯形上边缘**（第 7–9 章） | `Calculus/{Jet2, Jet2/Basic, Jet2/Fidelity, Jet2/Operations, Jet2/Scalar, Jet2/Secant}.lean`、`Calculus/{DFiniteJet, DFiniteJet/Basic, DFiniteJet/Cayley, DFiniteJet/Coefficients, DFiniteJet/Identities}.lean`、`Topology/SimplicialCoboundary.lean` | 二阶幂零射流环 $\mathbb{Q}[\eta]/(\eta^3)$、任意阶 D-有限指数/三角/凯莱射流与单纯形锥同伦精确序列 |
+| **卷 IV · 球面调和、二次扩张与舒尔正定**（第 10–12 章） | `Harmonic/{ChebyshevHecke, ChebyshevHecke/Character, ChebyshevHecke/Orbitals, ChebyshevHecke/Recurrence, ChebyshevHecke/S5, ChebyshevHecke/SpinShells, ChebyshevHecke/Traces}.lean`、`Harmonic/{PiFreeHaar, PiFreeHaar/Hecke, PiFreeHaar/Moments}.lean`、`Algebra/{QuadraticExt, QuadraticExt/Basic, QuadraticExt/Fibonacci, QuadraticExt/Operations, QuadraticExt/Polynomial, QuadraticExt/Polynomial/Monomials, QuadraticExt/Ring, QuadraticExt/SpecialValues, QuadraticExt/Spinor}.lean`、`Matrix/{LagrangeSchur, LagrangeSchur/Diagonal, LagrangeSchur/Gram, LagrangeSchur/Order, LagrangeSchur/Schur, LagrangeSchur/Sequence, LagrangeSchur/Vector}.lean` | 切比雪夫自旋壳与模方 $5$ 赫克迹、卡塔兰阶乘无 $\pi$ 哈尔矩、零公理 `QSqrt2`/`QPhi` 扩张与有理舒尔补极小值 |
+| **卷 V · 可计算算术视界**（第 13–15 章） | `Arithmetic/{Euclidean, Euclidean/Division, Euclidean/GCD, Euclidean/Prime}.lean`、`Arithmetic/{ContinuedFraction, ContinuedFraction/Convergents, ContinuedFraction/Tangent}.lean`、`Arithmetic/DepthBudget.lean` | 贝祖等式、欧几里得素数逃逸、有限连分数收敛子互素与行列式、无 $\pi$ 马青有理链及纯整数四分深度预算 |
+| **卷 V–VI · 二维矩阵环与非阿贝尔计算**（第 14–16 章） | `Matrix/{Mat2, Mat2/Hurwitz}.lean`、`Computability/{Fractran, Fractran/Division, QuaternionFractran}.lean` | 整数 $2\times 2$ 矩阵伴随/凯莱—哈密顿、赫维茨 12 晶核与模 $5$ 秩一分裂、康威 FRACTRAN 与四元数非阿贝尔旋子闸门 |
 
 配套审计与回归工具位于 `src/OmegaChecks/`，包含 `Audit.lean`（Lake 测试驱动 `omegaAudit`，执行空内核重放与上游命名核对）、`Examples.lean`、`ProjectiveOverlap.lean`、`Mixed.lean`（展示 `open Omega renaming Nat → OmegaNat` 与 `Mathlib` 隔离共存）及 `check.py`（复现与增量重编检测）。
 
-## A.3 完整零公理 D5 冻结声明注册表（14 模块，127 条定理，0 公理） {#sec-om-appa-frozen-registry}
+## A.3 D5 冻结定理与双后端公理记录 {#sec-om-appa-frozen-registry}
 
-下表汇总已合入 `the-omega-institute/trureturing@dev` 的全部 **14 个零公理 D5 冻结模块**（`D5/S3/Quantum/AURICOmega/<Module>`）。全部 14 个模块中总计 **127 条公开定理**的冻结状态均记录为 `libraries: ["OmegaInit", "OmegaMath"]`、**`axioms: []`**，全部通过空内核重放验收：
+下表列出本书的 `D5/S3/Quantum/AURICOmega/` 核心定理。每条定理在冻结状态片的 `declarations` 数组中各占一行。该行的 `axioms` 记录官方端公理，`strict_omega.axioms` 和 `strict_omega.libraries` 记录严格端依赖。就下表所列 14 个模块的 127 条定理而言，所钉提交上的严格端公理记录全部为 `[]`，官方端有 107 条仅依赖 `propext`，其余 20 条为 `[]`。库与公理列采用严格端记录。双端编译对照与分端测量的复核入口见 [§A.6](#sec-om-appa-audit-checklist)。
 
-| 序号 | 冻结 D5 模块（`D5/S3/Quantum/AURICOmega/` 下） | 对应卷章 | 定理数 | 依赖库与公理闭包 | 核心数学内容 |
+| 序号 | 冻结 D5 模块（`D5/S3/Quantum/AURICOmega/` 下） | 对应卷章 | 定理数 | 严格端依赖库与公理闭包 | 核心数学内容 |
 | :---: | :--- | :---: | :---: | :---: | :--- |
 | 1 | `ProjectiveOverlapScaling` | 卷 I 第 2 章、卷 VI 第 18 章 | 1 | `OmegaInit, OmegaMath` / `[]` | 正自然数缩放保持无号射影重叠读数 `Omega.Ratio.Equivalent` |
 | 2 | `OmegaCircleClosure` | 卷 I 第 2 章、卷 III 第 8 章、卷 VI 第 18 章 | 5 | `OmegaInit, OmegaMath` / `[]` | 有号缩放不变性、`kappa + spread ≈ 1`、凯莱单位圆、对径极点闭合与两平方模方乘性 |
@@ -52,12 +52,12 @@
 | 9 | `OmegaArithmeticHorizon` | 卷 III 第 8 章、卷 V 第 13 章 | 6 | `OmegaInit, OmegaMath` / `[]` | 贝祖等式、构造性欧几里得素数逃逸、有限连分数收敛子互素与行列式、马青有理链及纯零公理整数四分深度 |
 | 10 | `OmegaBargmannHaarHecke` | 卷 II 第 6 章、卷 IV 第 11 章、卷 V 第 15 章、卷 VI 第 16 章 | 9 | `OmegaInit, OmegaMath` / `[]` | $3\times 3$ 巴格曼—格拉姆非负与测地倍角退化、卡塔兰哈尔矩与 $\chi_{0,1,2}$ 正交归一、模方 $5$ 赫克特征值/裕度与四元数 FRACTRAN |
 | 11 | `OmegaMatrixAndFractran` | 卷 V–VI 第 14、16 章 | 10 | `OmegaInit, OmegaMath` / `[]` | 整数 `Mat2` 迹轮换/伴随/凯莱—哈密顿、赫维茨 12 晶核与模 $5$ 秩一/零乘积判定、FRACTRAN 步进等价/确定性/正性与停机稳定 |
-| 12 | `OmegaComposeAndWitnesses` | 卷 I–III、VI 第 3–4、6、8、16 章 | 8 | `OmegaInit, OmegaMath` / `[]` | 形式复合链式法则与任意阶凯莱—三角大一统、`Mat2` 行列式乘性、正交半转非交换、`g120_spin` 六拍双覆叠、正交角盈 $\frac{1}{4}$ 与 $P_\Omega$ 15 拍停机于 $22$ |
+| 12 | `OmegaComposeAndWitnesses` | 卷 I–III、VI 第 3–4、6、8、16 章 | 8 | `OmegaInit, OmegaMath` / `[]` | 形式复合链式法则与任意阶凯莱—三角大一统、`Mat2` 行列式乘性、绕正交轴的四分之一转非交换、`g120_spin` 六拍双覆叠、正交角盈 $\frac{1}{4}$ 与 $P_\Omega$ 15 拍停机于 $22$ |
 | 13 | `OmegaSphericalHaarMidpoint` | 卷 II–IV 第 6–7、10–11 章 | 8 | `OmegaInit, OmegaMath` / `[]` | 全阶偶次特征标乘积律、无 $\pi$ 哈尔期望归零与全阶彼得—魏尔正交归一、有理球面正弦／勾股律、$\alpha$-采样漂移、中点凯莱驻球守恒与半拍保真度 |
 | 14 | `OmegaLieTripleAndFreeGroup` | 卷 II、V 第 4–5、14 章 | 15 | `OmegaInit, OmegaMath` / `[]` | 利雅三元系三公理与恒常单位截面曲率 $K \equiv +1$、双卡修正罗德里格斯分母和为 $1$／半界／闭球锁定、$S_5$ 既约词模 $5$ 非零／精确模方／非标量与自由群 $F_3 \hookrightarrow \mathrm{SO}(3,\mathbb{Q})$ 伴随单射 |
-| **合计** | **14 个零公理冻结 D5 模块** | **全书卷 I–VI** | **127** | **`OmegaInit, OmegaMath` / `[]`** | **全六卷严格零公理内核闭环（`axioms: []`）** |
+| **合计** | **14 个表列 D5 模块** | **全书卷 I–VI** | **127** | **`OmegaInit, OmegaMath` / `[]`** | **所列定理的严格端测量** |
 
-以下逐模块列出上述全部 **127 条零公理冻结定理**的精确声明链接（按模块顺序排列）：
+以下按模块列出定理的声明链接。
 
 - `ProjectiveOverlapScaling`（1 条）：[`kappa_scale`](lean:D5/S3/Quantum/AURICOmega/ProjectiveOverlapScaling.kappa_scale)。
 - `OmegaCircleClosure`（5 条）：[`kappa_scale`](lean:D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_scale)、[`kappa_add_spread_eq_one`](lean:D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_add_spread_eq_one)、[`cayley_circle_unit`](lean:D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit)、[`cayley_antipodal_closure`](lean:D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure)、[`projective_circle_mul_normSq`](lean:D5/S3/Quantum/AURICOmega/OmegaCircleClosure.projective_circle_mul_normSq)。
@@ -78,7 +78,7 @@
 
 模块 `D5/S3/Quantum/AURICOmega/OmegaShadowBridge` 严格位于第 2 层（外层 `noncomputable section`，并列导入 `OmegaMath.Projective.Circle` 与 `Mathlib.Basic.Real.Basic`），把零公理核心中的 `Omega.Nat`、`Omega.Int` 与 `Omega.IntRatio` 单向投射进标准 `ℕ`、`ℤ`、`ℚ`、`ℝ`，绝不向第 0–1 层零公理核心回流任何经典公理。该模块在 `trureturing@dev` 上冻结了 **11 条公开桥接定理**（另附 10 条私有辅助引理）：
 
-| 序号 | 公开桥接声明（`OmegaShadowBridge.` 下） | 投射层级与公理侧 | 核心桥接陈述 |
+| 序号 | 公开桥接声明（`OmegaShadowBridge.` 下） | 投射层级与官方端公理 | 核心桥接陈述 |
 | :---: | :--- | :---: | :--- |
 | 1 | [`toStdNat_add`](lean:D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdNat_add) | `Omega.Nat → ℕ`（`[]`） | `toStdNat (a.add b) = toStdNat a + toStdNat b` |
 | 2 | [`toStdNat_mul`](lean:D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdNat_mul) | `Omega.Nat → ℕ`（`propext`） | `toStdNat (a.mul b) = toStdNat a * toStdNat b` |
@@ -94,7 +94,7 @@
 
 ## A.5 六卷引用的经典 Mathlib 阴影锚点索引 {#sec-om-appa-classical-anchors}
 
-除上述 14 个零公理模块与 `OmegaShadowBridge` 之外，全书第一至六卷还在经典连续统对照侧引用了一组冻结的 `Mathlib` 阴影锚点（均经 Lean 4 内核冻结，位于经典三公理闭包侧；全书动态分类统计见 [附录 B §B.4](appendix-b.md#sec-om-appb-live-stats)），用作检验零公理有理骨架在实/复连续统投影下严丝合缝的外部刻度尺：
+卷 I–VI 引用下表 35 条不同的 `Mathlib` 冻结声明，用于与经典实分析、复分析对照。在所钉提交上，这 35 条声明行均缺少官方 `axioms` 字段。官方端公理依赖以许可集合 `{propext, Classical.choice, Quot.sound}` 为上界，各条实际闭包未见记录。全书统计见 [附录 B §B.4](appendix-b.md#sec-om-appb-live-stats)。
 
 | 卷次与引用章 | 经典 `Mathlib` 阴影冻结声明（`trureturing@dev`） | 跨卷对照角色 |
 | :--- | :--- | :--- |
@@ -105,13 +105,21 @@
 | **卷 V**（第 13–15 章） | [`reduced_den`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den)、[`convergents_length_log`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log)、[`stripFactors_correct`](lean:D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStripping.stripFactors_correct)、[`rationalQuarterDepth_integer_sound`](lean:D5/S3/Weil/BurnolGram/BurnolRationalDepthBudget.rationalQuarterDepth_integer_sound)、[`rationalQuarterDepth_real_sound`](lean:D5/S3/Weil/BurnolGram/BurnolRationalDepthBudget.rationalQuarterDepth_real_sound)、[`rational_padic_product_formula`](lean:D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula)、[`prime_log_rational_independence`](lean:D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence)、[`toeplitz_posSemidef_iff_norm_eq_one`](lean:D5/S3/Weil/TestFunctions/FinitePowerSumToeplitzCircleCriterion.toeplitz_posSemidef_iff_norm_eq_one) | 连分数对数步界、素因子剥离定阶、整数—实数四分深度桥、阿代尔 $p$-进乘积公式、素数对数有理无关与托普利茨单位圆判据（并复引 `rational_six_axis_open_cover`） |
 | **卷 VI**（第 16–18 章） | [`signed_prime_ledger_equiv_positive_rationals`](lean:D5/S3/Factorization/PositiveRationalGroup.signed_prime_ledger_equiv_positive_rationals)、[`name_compare_run`](lean:D5/S0/Computability/BinaryNameComparison.name_compare_run)、[`observable_krylov_strict_growth_bound`](lean:D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound)、[`observable_krylov_once_stable_permanently`](lean:D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently)、[`ReversibleQram.correctness`](lean:D5/S3/Quantum/Routing/ReversibleQram.correctness) | 带符号素数账本与正有理群同构、二进制名称比较显式步界、可观测克雷洛夫子空间增长界与永久稳定、可逆静态 QRAM 正确性（第 18 章并复引 `rationalQuarterDepth_*` 双桥） |
 
-## A.6 空内核零公理审计核对清单 {#sec-om-appa-audit-checklist}
+## A.6 严格库重放与 D5 双后端核对 {#sec-om-appa-audit-checklist}
 
-每一份并入严格层 `OmegaInit` 或 `OmegaMath` 的源码模块与冻结 D5 声明在合入前，均逐项通过与 `src/OmegaChecks/Audit.lean` 一致的六项硬门控：
+在 trureturing 仓库检出本书所钉的提交 [{commit}](trureturing:) 后，从仓库根目录运行：
 
-1. **严格模块头（`module` $+$ `prelude`）**：文件首部同时启用 `module` 与 `prelude`，彻底阻断官方 `Init` 隐式导入；
-2. **严格根模块闭包**：编译后 `.olean` 传递导入集合中的每个模块根名均必须为 `OmegaInit` 或 `OmegaMath`，发现任何 `Init` 或 `Mathlib` 立即拒收；
-3. **零禁用声明类型**：传递常量表中不得出现任何 `.axiomInfo`、`.quotInfo` 或 `isUnsafe` 声明（彻底排除 `sorry`、自定义 `axiom`、`Quot`/`Quot.sound`、`propext` 与 `Classical.choice`）；
-4. **传递公理闭包严格为空（`axioms: []`）**：对闭包中每一条声明执行 `collectAxioms` 均返回空表，并在冻结状态文件 `Golden/Frozen/state/<module>.lean.json` 中固化为 `"axioms": []`；
-5. **全新空内核独立重放**：调用 `mkEmptyEnvironment` 构建空白 Lean `v4.35.0` 内核环境，通过 `toKernelEnv.replay` 逐条重放全部常量无拒收（复现命令：`lake test -- OmegaMath.Projective.Circle`）；
-6. **上游命名与原创来源审计**：从钉版 `Init`/`Mathlib` 移植的声明须置于镜像路径下并以 `Omega.<官方名>` 命名且通过官方 `.olean` 归属核对；Omega 原创模块须在模块文档首行注明 `Omega original.`。
+```sh
+lake test -- OmegaMath.Projective.Circle
+```
+
+`src/OmegaChecks/check.py` 选取 `OmegaMath.Projective.Circle` 的严格库导入闭包。`src/OmegaChecks/Audit.lean` 核对实际闭包与选定模块集合、库层之间的导入方向以及移植声明的官方归属。审计对闭包中每条声明运行 `collectAxioms`，拒绝非空公理依赖、`.axiomInfo`、`.quotInfo` 与不安全声明，然后在 `mkEmptyEnvironment` 中用 `toKernelEnv.replay` 重放该闭包。可换用其他严格库根，或用 `lake test -- OmegaInit OmegaMathlib OmegaMath` 选择三个库根的联合闭包。
+
+D5 消费模块由双端编译与导出对照检查。例如，先安装所钉的上游检查器，再核对表中圆周模块。
+
+```sh
+make install-tools
+python3 src/OmegaChecks/portable.py --backend both D5.S3.Quantum.AURICOmega.OmegaCircleClosure
+```
+
+这个命令在两端编译该消费模块，比较导出接口，并将官方端的公理依赖报告写入 `.lake/build/omega-checks/selected-official-axioms.json`。冻结流程另外对两套编译产物作成对测量，比较适用声明的类型及其相关定义，再将测量写入 `Golden/Frozen/state/<模块>.lean.json` 的对应 `declarations` 声明行，官方字段在该行，严格字段在该行的 `strict_omega` 对象中。可在 `src/OmegaChecks/portable.py` 的 `--frozen-request` 路径和 `Audit.lean` 的 `--consumer` 分支核对这个过程。复核上表时，在所钉提交的状态片中按表内 GID 匹配定理，分别读取 `axioms` 和 `strict_omega.axioms`。例如 `OmegaCircleClosure.cayley_antipodal_closure` 的官方记录是 `["propext"]`，严格记录是 `[]`。

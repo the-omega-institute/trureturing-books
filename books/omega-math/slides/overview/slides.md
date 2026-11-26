@@ -33,8 +33,8 @@ section: "前言"
     </div>
     <div class="card">
       <h4>Mathlib.Real</h4>
-      <h3>3 条标准公理</h3>
-      <p><code>propext</code>、<code>Classical.choice</code> 与 <code>Quot.sound</code> 支撑本书所用的经典实数路线。</p>
+      <h3>至多 3 条标准公理</h3>
+      <p>每条冻结定理的官方依赖以 <code>propext</code>、<code>Classical.choice</code> 与 <code>Quot.sound</code> 为许可上界。</p>
     </div>
     <div class="card hot">
       <h4>自定义 axiom</h4>
@@ -235,14 +235,9 @@ layout: cover
 ---
 
 <h2 class="t">空内核<em>审计</em></h2>
-<p class="sm muted"><code>OmegaInit</code> 与 <code>OmegaMath</code> 的 88 个模块、2,211 条声明在全新空内核中重放，传递公理数为 0。</p>
-<div class="g4 mt-s">
-  <Stat value="14" label="D5 零公理模块" />
-  <Stat value="127" label="D5 冻结零公理定理" tone="ok" />
-  <Stat value="138" label="Omega D5 核心与桥接冻结定理" />
-  <Stat value="173" label="引用的不同冻结 Lean 4 声明" />
-</div>
-<p class="sm mt-s">零公理定理的依赖为 <code>axioms: []</code>。第 2 层模块 <code>OmegaShadowBridge</code> 计入 11 条定理。</p>
+<p class="sm muted">审计器在全新空内核中重放选定的严格库导入闭包，并逐条检查传递公理。</p>
+<p class="sm mt-s">附录 A.3 的 127 条 D5 定理经过双端编译对照。各声明行的 <code>strict_omega.axioms</code> 给出严格端公理，<code>axioms</code> 给出官方端公理。</p>
+<p class="sm mt-s"><code>OmegaShadowBridge</code> 将核心构造单向接到经典实数层。</p>
 <p class="sm mt-s"><b>四座 3D 交互实验室</b> · <a :href="readingLink('viz/omega-math-workbench/')">OMEGA//LAB</a> · <a :href="readingLink('viz/ternion-cayley-lab/')">OMEGA//SPIN</a> · <a :href="readingLink('viz/dfinite-algebraic-schur-lab/')">OMEGA//JET</a> · <a :href="readingLink('viz/adelic-arithmetic-observer-lab/')">OMEGA//ARC</a></p>
 <p class="sm mt-s"><b>阅读路线</b> · <a :href="readingLink('zh/ch01-axiom-omega-and-cic.html')">第 1 章 基础</a> · <a :href="readingLink('zh/ch18-zero-axiom-kernel-and-shadow-bridge.html')">第 18 章 审计</a> · <a :href="readingLink('zh/coda.html')">终章 六卷对照</a> · 19 幅双语静态图 · <a :href="readingLink('zh/appendix-a.html')">附录 A 冻结索引</a> · <a :href="readingLink('zh/appendix-b.html')">附录 B 证据总账</a></p>
 

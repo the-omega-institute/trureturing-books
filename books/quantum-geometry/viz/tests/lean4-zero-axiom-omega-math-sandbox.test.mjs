@@ -739,8 +739,8 @@ check(
     const seg = (c, l) => document.querySelector(`#lensToggleBtn .seg.${c} .${l}`).textContent;
     const of = (sel, key) => [...document.querySelectorAll(sel)].map((b) => b.dataset[key]);
     return (
-      seg('off', 'zh') === 'OmegaMath 零公理纯 CIC 构造栈 · 证明即计算' &&
-      seg('off', 'en') === 'OmegaMath Zero-Axiom Pure CIC Stack · Proof as Computation' &&
+      seg('off', 'zh') === '标准 Init · 有理算例' &&
+      seg('off', 'en') === 'Rational examples with standard Init' &&
       seg('on', 'zh') === '传统实无穷与自定义公理对照（MODEL）· 计算阻断与滤子膨胀' &&
       seg('on', 'en') === 'Classical Continuum & Custom-Axiom Contrast (MODEL) · Blocked Evaluation & Filter Blowup' &&
       JSON.stringify(of('#routeChips [data-route]', 'route')) === JSON.stringify(['omega', 'real', 'axiom']) &&
@@ -792,7 +792,7 @@ for (const lang of ['zh', 'en']) {
   );
   check(
     lang + ' drawer states the five cards with the numbers of the script',
-    ['= 0.5000', '= 1.0000', '= 0.0000', '= 0.2500', '≈ 1.3333', '70 < 2 · 4³ = 128', '(1/4)³ C ≤ 7/128 < 1/10', '≈ 0.0547', '(x, y, z) ↦ (x, −z, y)', 'g120 → (1, −1, −1, −1) → p0', '(1, 1, 1, 1) ≠ (1, 1, 1, −1)', '(1/2, −1/2, 1/4)', '⟨0, 1⟩ = ⟨1, 1⟩', 'Classical.choice', CENSUS.real.join(' · '), CENSUS.omega.join(' · '), TASK_STEPS.join(' · '), 'MODEL'].every((x) => drawer.includes(x)) && (lang === 'zh' ? /不是证明/ : /not a proof/).test(drawer),
+    ['= 0.5000', '= 1.0000', '= 0.0000', '= 0.2500', '≈ 1.3333', '70 < 2 · 4³ = 128', '(1/4)³ C ≤ 7/128 < 1/10', '≈ 0.0547', '(x, y, z) ↦ (x, −z, y)', 'g120 → (1, −1, −1, −1) → p0', '(1, 1, 1, 1) ≠ (1, 1, 1, −1)', '(1/2, −1/2, 1/4)', '⟨0, 1⟩ = ⟨1, 1⟩', lang === 'zh' ? 'omega_zero_axiom_master_check 列出 0 条公理' : '0 axioms for the finite theorem omega_zero_axiom_master_check', 'OmegaMath.Projective.Circle', lang === 'zh' ? 'OmegaShadowBridge.cayley_circle_unit 有 3 条' : 'OmegaShadowBridge.cayley_circle_unit has 3', CENSUS.real.join(' · '), CENSUS.omega.join(' · '), TASK_STEPS.join(' · '), 'MODEL'].every((x) => drawer.includes(x)) && (lang === 'zh' ? /不是证明/ : /not a proof/).test(drawer),
     drawer.slice(0, 300)
   );
 }
@@ -889,7 +889,7 @@ function expectedBench(lang, F, census = CENSUS) {
     zh ? 'decide 在 (1 : ℝ) + 1 = 2 上停在 Classical.choice' : 'decide stops at Classical.choice on (1 : ℝ) + 1 = 2',
     zh ? '#eval (1 + 1 : ℝ) 只打印柯西列，1/2 : ℝ 是 noncomputable' : '#eval (1 + 1 : ℝ) prints a Cauchy sequence, 1/2 : ℝ is noncomputable',
     zh ? 'Rat.inv 依赖 propext 与 Quot.sound' : 'Rat.inv on propext and Quot.sound',
-    zh ? 'integer_sound 与 real_sound 由 Mathlib 证成，依赖三条标准公理' : 'integer_sound and real_sound are proved with Mathlib and depend on the three standard axioms',
+    zh ? 'integer_sound 与 real_sound 的所钉声明行缺少官方公理测量' : 'integer_sound and real_sound omit the official axiom measurement',
     zh ? '不检验定理的前提' : 'it does not check their hypotheses',
     zh ? '数值演示，不是证明。' : 'A numerical illustration, not a proof.'
   ];
@@ -1046,9 +1046,9 @@ for (const lang of ['zh', 'en']) {
     await verifyReadouts(page, lang + '/' + id);
     await layout(page, lang + '/' + id);
     const t = await regimeTexts(),
-      big = { kernel: 'OmegaMath 4/5 · #print axioms', carrier: '(−3, −3, 0, 0) ↦ (1, 1, 0, 0)', master: '8/8 · true', bridge: 'S = 4/3', tasks: '396 ↔ 7480' }[m.scene],
+      big = { kernel: 'QRat (Init) 4/5 · #print axioms', carrier: '(−3, −3, 0, 0) ↦ (1, 1, 0, 0)', master: '8/8 · true', bridge: 'S = 4/3', tasks: '396 ↔ 7480' }[m.scene],
       subs = {
-        kernel: ['does not depend on any axioms', zh ? '公理 = ∅' : 'axioms = ∅'],
+        kernel: ['#print axioms omega_zero_axiom_master_check', zh ? '隐式导入标准 Init' : 'implicit standard Init'],
         carrier: ['(2, 2, 0, 0)', '(−3, −3, 0, 0)', 'pHalf = (1, 1, 0, 0)', '‖p‖² = 2', 'κ = 1/2 = 0.5000', '(x, y, z) ↦ (x, −z, y)'],
         master: ['Jet2Rat.kappaJetAt ⟨1, 1⟩ = ⟨1/2, −1/2, 1/4⟩', zh ? '归约到 true，175 步整数运算' : 'reduces to true in 175 integer steps', 'x₀ = 1', '1 + x₀² = 2 ≥ 1', '(1/2, −1/2, 1/4)', '(0, 0, 0, 0)', '(2, 0, 0, 0)'],
         bridge: ['y = −2/3', '2 + 2y + (3/2)y² = 4/3 = S', 'N = 2', 'cq = 70 < dp·4³ = 128', '(1/4)³ C ≤ 7/128 < 1/10'],
@@ -1056,7 +1056,7 @@ for (const lang of ['zh', 'en']) {
       }[m.scene];
     check(lang + '/' + id + ' HUD title and line state the card', t.big.includes(big) && subs.every((x) => t.sub.includes(x)), JSON.stringify([t, subs.filter((x) => !t.sub.includes(x))]));
     const ax = zh ? '公理' : 'axioms',
-      key = { kernel: [`${ax} ∅`, `${ax} 3 · False`], carrier: ['(−3, −3, 0, 0) ↦ (1, 1, 0, 0)', '2·d² = 0.99998082'], master: ['8/8 · 379', '17786'], bridge: ['S = 4/3 ≈ 1.3333', '7/128 ≈ 0.054688'], tasks: ['396', '7480'] }[m.scene];
+      key = { kernel: [zh ? '八项算例 · ∅' : 'eight checks · ∅', `${ax} 3 · False`], carrier: ['(−3, −3, 0, 0) ↦ (1, 1, 0, 0)', '2·d² = 0.99998082'], master: ['8/8 · 379', '17786'], bridge: ['S = 4/3 ≈ 1.3333', '7/128 ≈ 0.054688'], tasks: ['396', '7480'] }[m.scene];
     check(lang + '/' + id + ' the key readout puts the zero-axiom stack beside the contrast', (await textOf('roKey')) === key.join(' ↔ '), await textOf('roKey'));
     check(lang + '/' + id + ' the rail label', (await textOf('tau')) === { kernel: '4/5', carrier: zh ? '规范元' : 'canonical', master: '8/8', bridge: 'y = −2/3', tasks: '5/5' }[m.scene], await textOf('tau'));
     const readings = await page.locator('#readouts output').allTextContents();
@@ -1126,12 +1126,12 @@ for (const id of IDS) {
   await seek(1.5);
   const m = await state(),
     t = await regimeTexts();
-  check('between two stages the HUD says so and no stage chip is pressed', m.regime === 'moving' && m.kernel.k === 1 && near(m.kernel.f, 0.5, 1e-12) && t.big.includes('OmegaMath 2 → 3') && t.sub.includes('from stage 2 to stage 3') && (await textOf('tau')) === '2 → 3' && (await page.locator('#stageChips [aria-pressed="true"]').count()) === 0, JSON.stringify(t));
+  check('between two stages the HUD says so and no stage chip is pressed', m.regime === 'moving' && m.kernel.k === 1 && near(m.kernel.f, 0.5, 1e-12) && t.big.includes('QRat (Init) 2 → 3') && t.sub.includes('from stage 2 to stage 3') && (await textOf('tau')) === '2 → 3' && (await page.locator('#stageChips [aria-pressed="true"]').count()) === 0, JSON.stringify(t));
 }
 // the five stages of the three routes: what each does, and where it ends
 for (const [route, end, texts] of [
-  ['omega', 4, ['four integers', 'typechecks', `8 conjuncts to true in ${CONJ_STEPS.reduce((s, n) => s + n, 0)} integer steps`, 'does not depend on any axioms', '#eval runs natively']],
-  ['real', 3, ['quotient of Cauchy sequences', 'typechecks', 'decide stops at Classical.choice', '{propext, Classical.choice, Quot.sound}; 1/2 : ℝ is noncomputable, so stage 5 is closed']],
+  ['omega', 4, ['four integers', 'declares the OmegaSpace fields', `recomputes the examples in ${CONJ_STEPS.reduce((s, n) => s + n, 0)} integer steps`, '#print axioms omega_zero_axiom_master_check reports an empty list', '#eval runs natively']],
+  ['real', 3, ['quotient of Cauchy sequences', 'typechecks', 'decide stops at Classical.choice', 'Official OmegaShadowBridge.cayley_circle_unit uses {propext, Classical.choice, Quot.sound}']],
   ['axiom', 2, ['axiom kappa_refl_bad is stated for all quadruples', 'The kernel accepts it', '⟨0, 1⟩ = ⟨1, 1⟩, hence False']]
 ]) {
   await pick(KERNEL);
@@ -1930,7 +1930,7 @@ for (const lang of ['zh', 'en']) {
         });
         check(`${lang}/${width}/${id} the figure note fits its two lines`, bar[0] <= bar[1] + 1, JSON.stringify(bar));
         const t = await regimeTexts(p),
-          need = { kernel: ['4/5', 'does not depend on any axioms', '∅'], carrier: ['(−3, −3, 0, 0) ↦ (1, 1, 0, 0)', 'κ = 1/2 = 0.5000'], master: ['8/8', '(1/2, −1/2, 1/4)'], bridge: ['S = 4/3', '70 < ', '128', '7/128 < 1/10'], tasks: ['396', '7480'] }[s.scene];
+          need = { kernel: ['4/5', 'omega_zero_axiom_master_check', 'Init'], carrier: ['(−3, −3, 0, 0) ↦ (1, 1, 0, 0)', 'κ = 1/2 = 0.5000'], master: ['8/8', '(1/2, −1/2, 1/4)'], bridge: ['S = 4/3', '70 < ', '128', '7/128 < 1/10'], tasks: ['396', '7480'] }[s.scene];
         check(`${lang}/${width}/${id} the HUD of the figure states the numbers of the caption`, need.every((x) => (t.big + ' ' + t.sub).includes(x)), JSON.stringify(t));
       }
       await p.locator('.tour [data-tour="next"]').click();
@@ -2080,12 +2080,12 @@ for (const lang of ['zh', 'en']) {
     verifyMath(m, `still ${lang}/${id}`);
     check(`still ${lang}/${id} parks on the declared frame, without handle, stage button and mirror button`, m.preset === id && m.regime === CARDS[id].regime && !m.playing && near(m.clock, CARDS[id].still, 1e-12) && near(Number(await p.getAttribute(`[data-preset="${id}"]`, 'data-still')), CARDS[id].still, 1e-12) && (await p.locator('#stageHandle').isHidden()) && (await p.locator('#stageAct').isHidden()) && (await p.locator('#lensMirror').isHidden()));
     const t = await regimeTexts(p),
-      want = { kernel: ['4/5', 'does not depend on any axioms'], carrier: ['‖p‖² = 2', 'κ = 1/2 = 0.5000'], master: ['8/8 · true', '(1/2, −1/2, 1/4)'], bridge: ['S = 4/3', '70 < dp·4³ = 128', '7/128 < 1/10'], tasks: ['396', '7480'] }[m.scene];
+      want = { kernel: ['4/5', 'omega_zero_axiom_master_check', 'Init'], carrier: ['‖p‖² = 2', 'κ = 1/2 = 0.5000'], master: ['8/8 · true', '(1/2, −1/2, 1/4)'], bridge: ['S = 4/3', '70 < dp·4³ = 128', '7/128 < 1/10'], tasks: ['396', '7480'] }[m.scene];
     check(`still ${lang}/${id} shows the numbers of its caption`, want.every((x) => (t.big + ' ' + t.sub).includes(x)), JSON.stringify(t));
     const px = await solidPixels(p);
     check(`still ${lang}/${id}: the violet ball is opaque over ≥ 12% of the frame`, px.share >= 0.12 && (await violetShare(p)) >= 0.12, JSON.stringify([px.share, await violetShare(p)]));
     const tags = (await tagText(p)).join(' | ');
-    const labels = { kernel: ['z₀ → False', 'axiom', 'Mathlib.Real', 'propext', 'Classical.choice', 'Quot.sound', 'Filter.Tendsto', '4 #print axioms', '5 #eval', 'axioms = ∅', 'κ(p0, pHalf) = 1/2'], carrier: ['(2, 2, 0, 0)', '(−3, −3, 0, 0)', 'pHalf = (1, 1, 0, 0)', 'κ = 1/2 = 0.5000', 'p0 · κ = 1 = 1.0000', 'pInf · κ = 0 = 0.0000', 'g120 · κ = 1/4 = 0.2500', 'Ad(p) = (x, −z, y)'], master: ['8/8 true', 'p0', 'pHalf', 'g120', 'pInf', '(1, 1, 1, −1)', 'z₀ = (0, 0, 0, 0)', 'z₂ = (2, 0, 0, 0)', 'x₀ = 1'], bridge: ['x = 1', 'S = 4/3 ≈ 1.3333', 'y = −2/3', '70 < 128', '7/128 < 1/10', 'Πℝ'], tasks: ['g120³ = p0', '396 ↔ 7480', 'False', 'Mathlib.Real', '5 #eval'] }[m.scene];
+    const labels = { kernel: ['z₀ → False', 'axiom', 'Mathlib.Real', 'propext', 'Classical.choice', 'Quot.sound', 'Filter.Tendsto', '4 #print axioms', '5 #eval', lang === 'zh' ? '八项算例 · ∅' : 'eight checks · ∅', 'κ(p0, pHalf) = 1/2'], carrier: ['(2, 2, 0, 0)', '(−3, −3, 0, 0)', 'pHalf = (1, 1, 0, 0)', 'κ = 1/2 = 0.5000', 'p0 · κ = 1 = 1.0000', 'pInf · κ = 0 = 0.0000', 'g120 · κ = 1/4 = 0.2500', 'Ad(p) = (x, −z, y)'], master: ['8/8 true', 'p0', 'pHalf', 'g120', 'pInf', '(1, 1, 1, −1)', 'z₀ = (0, 0, 0, 0)', 'z₂ = (2, 0, 0, 0)', 'x₀ = 1'], bridge: ['x = 1', 'S = 4/3 ≈ 1.3333', 'y = −2/3', '70 < 128', '7/128 < 1/10', 'Πℝ'], tasks: ['g120³ = p0', '396 ↔ 7480', 'False', 'Mathlib.Real', '5 #eval'] }[m.scene];
     check(`still ${lang}/${id} carries the labels its caption names`, labels.every((x) => tags.replace(/\s/g, '').toLowerCase().includes(x.replace(/\s/g, '').toLowerCase())), tags);
     const crossed = [...(await stageView(p, '#stage')).hud, ...(await labelOverlaps(p, '.stage .tag', 0)), ...(await capitalGreek(p))];
     check(`still ${lang}/${id}: the title, the legend and the labels keep clear of each other`, !crossed.length, JSON.stringify(crossed));
