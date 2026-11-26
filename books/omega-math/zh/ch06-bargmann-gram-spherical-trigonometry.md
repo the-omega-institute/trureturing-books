@@ -75,7 +75,7 @@ $$
 
 在一般维数 $d \ge 2$ 的有理空间 $\mathbb{Q}^d$ 中，只需将 $\mathbf{b}, \mathbf{c}$ 正交化到 $\mathbf{a}$ 的补空间并对所得向量施加 [@thm-ch06-lagrange-gram-identity]，即可纯多项式地推出 $\det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) \ge 0$。在三元球面整数载体 `Quad4`（$\mathbb{Z}^4 \setminus \{\mathbf{0}\}$）上，这一球面有理三角基本闭合不等式彻底摆脱了实数连续统，直接落户于使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）的精确有号分数序 `Omega.IntRatio.Le` 之中：
 
-::: {.theorem #thm-ch06-detgram3-nonneg title="四元巴格曼—格拉姆闭合行列式的零公理普遍非负性" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg"}
+::: {.theorem #thm-ch06-detgram3-nonneg title="四元巴格曼—格拉姆闭合行列式的普遍非负性" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg"}
 设 $\mathbf{a}, \mathbf{b}, \mathbf{c} \in \mathbb{Z}^4$ 为 `Quad4` 中任意三枚非零整四元数（$\mathbf{a} \neq \mathbf{0}$、$\mathbf{b} \neq \mathbf{0}$、$\mathbf{c} \neq \mathbf{0}$）。在零公理有号分数类型 `Omega.IntRatio` 及其序关系 `IntRatio.Le` 下，归一化 $3 \times 3$ 巴格曼—格拉姆闭合行列式普遍非负：
 
 $$

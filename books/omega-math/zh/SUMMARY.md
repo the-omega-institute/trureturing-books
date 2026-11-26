@@ -24,7 +24,7 @@
 
 - [第十章 彼得—魏尔有理自旋壳与整系数切比雪夫核](ch10-peter-weyl-rational-spin-shells.md)
 - [第十一章 三维球面无 π 阶乘哈尔积分与特征核正交性](ch11-pi-free-haar-integration.md)
-- [第十二章 零公理二次扩张域与有理舒尔正定性](ch12-algebraic-extensions-and-schur-positivity.md)
+- [第十二章 二次扩张域与有理舒尔正定性](ch12-algebraic-extensions-and-schur-positivity.md)
 
 # 第五卷 阿代尔算术与纯有理赫克—黎曼谱论
 

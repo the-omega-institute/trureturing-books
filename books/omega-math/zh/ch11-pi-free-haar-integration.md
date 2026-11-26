@@ -62,13 +62,13 @@ $$
 - **对比二维球面 $S^2$（$n = 3$）**：$\Gamma(\frac{1}{2})^3 = \pi\sqrt{\pi}$ 带有无理根号，径向分母 $\Gamma(m + \frac{3}{2})$ 落在半整数阶乘之上；更根本的是，$S^2$ 因 $\chi(S^2) = 2$ 根本不是群，连群不变哈尔测度与彼得—魏尔特征标代数都不存在；
 - **唯有三维球面 $S^3 \cong \mathrm{Sp}(1)$（$n = 4$）**：它是**唯一既非阿贝尔又是紧李群的球面**，同时四维坐标使 $\Gamma(\frac{1}{2})^4 = \pi^2$ 与 $\sigma(S^3) = 2\pi^2$ 无根号精确对消，且径向伽马因子 $\Gamma(m + 2) / \Gamma(2) = (m + 1)!$ 直接化为纯整数阶乘！
 
-::: {.remark #rem-ch11-shadow-vs-intrinsic title="经典高斯推导与零公理内生定义的认识论分工（文献结果与代数重构）"}
+::: {.remark #rem-ch11-shadow-vs-intrinsic title="经典高斯推导与内生阶乘定义（文献结果与代数重构）"}
 借助高斯积分与伽马函数计算球面单项式积分的经典技巧见 G. B. Folland（*Amer. Math. Monthly* **108**(5), 446–448, 2001，文献结果）。在 `OmegaMath` 的零公理体系中，上述推导扮演的是**阴影对齐验证**的角色：它向熟悉经典实分析的读者解释“为何 $\pi$ 必定消失”；而在零公理内核内部，我们根本不需要先构造 $\mathbb{R}$、$\pi$ 或勒贝格测度，而是直接把阶乘公式作为有理线性泛函的内生定义，并仅凭整数四则运算验明其齐次不变性、归一性、对称性与正交性！
 :::
 
 ---
 
-## 11.2 零公理阶乘泛函、齐次不变性与精确有理矩递推 {#sec-ch11-intrinsic-functional-and-recurrence}
+## 11.2 阶乘泛函、齐次不变性与精确有理矩递推 {#sec-ch11-intrinsic-functional-and-recurrence}
 
 把多项式矩公式用于射影读数 $P(q)/\lVert q\rVert^{2m}$，其中 $P$ 是有理系数的 $2m$ 次齐次多项式。在实单位球面上分母等于一，由线性性可将哈尔期望逐项化为 $P$ 的单项式矩。该读数与非零齐次代表元的选取无关。
 
@@ -103,7 +103,7 @@ $$
 
 现在把上述步进比值特化到保真度 $\kappa = w^2 / \lVert q\rVert^2$ 的纯幂次，即令 $a = k$、$b = c = d = 0$（于是 $m = k$），记第 $k$ 阶无 $\pi$ 标量矩为 $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^k] = H(k, 0, 0, 0) = \frac{(2k)!}{4^k\,k!\,(k + 1)!}$（零阶初值由定义立得 $\mathbb{E}_{\mathrm{SU}(2)}[\kappa^0] = 1$）。相邻两阶有理矩之间的精确阶乘比递推律已在 `OmegaInit` 与 `OmegaMath` 的严格后端上对一切自然数 $k \in \mathbb{N}$ 严格证成：
 
-::: {.theorem #thm-ch11-haar-kappa-moment-succ title="三维球面无 π 标量保真度矩的零公理阶乘递推律" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.haarKappaMoment_succ"}
+::: {.theorem #thm-ch11-haar-kappa-moment-succ title="三维球面无 π 标量保真度矩的阶乘递推律" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.haarKappaMoment_succ"}
 对 $k\in\mathbb N$，`haarKappaMoment k` 表示 $(2k)!/(4^k k!(k+1)!)$，`haarKappaStep k` 表示 $(2k+1)/(2(k+2))$。在 `Omega.IntRatio.Equivalent` 下有递推式
 
 $$
@@ -138,7 +138,7 @@ $$
 
 ---
 
-## 11.3 零公理纯有理正交归一性：彼得—魏尔特征核的精确对账 {#sec-ch11-peter-weyl-orthonormality}
+## 11.3 纯有理正交归一性：彼得—魏尔特征核的精确对账 {#sec-ch11-peter-weyl-orthonormality}
 
 拿到由 [@thm-ch11-haar-kappa-moment-succ] 与初值 $\mathbb{E}[\kappa^0] = 1$ 生成的五个精确有理分数 $\mathbb{E}[\kappa^0] = 1$ 到 $\mathbb{E}[\kappa^4] = \frac{7}{128}$ 之后，最痛快的一刻来了：不需要任何三角函数积化和差公式，不需要任何分部积分，甚至不需要知道 $\pi \approx 3.14159$，我们在关于 $\kappa$ 的多项式上定义无 $\pi$ 球面有理内积
 
@@ -148,7 +148,7 @@ $$
 
 在登顶全阶普遍定理之前，先看最透明的低阶具体锚点：在 `OmegaInit` 与 `OmegaMath` 的严格后端上，[第十章](ch10-peter-weyl-rational-spin-shells.md)的前三座核心整数自旋壳特征标 $\chi_0(\kappa) = 1$、$\chi_1(\kappa) = 4\kappa - 1$ 与 $\chi_2(\kappa) = 16\kappa^2 - 12\kappa + 1$ 立刻被证成精确标准正交系：
 
-::: {.theorem #thm-ch11-peter-weyl-chi012-orthonormal title="前三阶偶次彼得—魏尔特征核的零公理哈尔正交归一性" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.peter_weyl_chi012_orthonormal"}
+::: {.theorem #thm-ch11-peter-weyl-chi012-orthonormal title="前三阶偶次彼得—魏尔特征核的哈尔正交归一性" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.peter_weyl_chi012_orthonormal"}
 记 $H_{ij}=\operatorname{haarInner}(\chi_i,\chi_j)$ 为系数表 $\chi_0,\chi_1,\chi_2$ 的有理配对。在 `Omega.IntRatio.Equivalent` 下，六个矩阵元满足
 
 $$
@@ -215,7 +215,7 @@ $$
 
 阶乘矩泛函将常值特征标映至一，将所有正阶偶次特征标映至零。第 11.1 节的高斯推导将这一有理泛函的取值与实球面的归一化哈尔均值对应。
 
-::: {.theorem #thm-ch11-haar-even-char-expectation title="全阶偶次特征标的零公理无 π 哈尔期望归零律" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.haar_evenChar_expectation"}
+::: {.theorem #thm-ch11-haar-even-char-expectation title="全阶偶次特征标的无 π 哈尔期望归零律" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.haar_evenChar_expectation"}
 对每个 $r\in\mathbb N$，`evenCharPoly r` 是 [@thm-ch10-even-char-product-sum] 中 $E_r$ 的系数表。泛函 `haarKappaPoly` 按 `haarKappaMoment k` 加权各个 $k$ 次系数。`zeroDelta r` 在 $r=0$ 时取一，其余取零。声明给出下列 `Omega.IntRatio.Equivalent` 恒等式。
 
 $$
@@ -235,7 +235,7 @@ $$
 
 将[第十章](ch10-peter-weyl-rational-spin-shells.md)的乘积律 [@thm-ch10-even-char-product-sum] 与 [@thm-ch11-haar-even-char-expectation] 结合，可得有理内积公式。根据第 11.1 节，其对应的实哈尔内积为 $\langle E_m,E_n\rangle_{\mathrm{SU}(2)}=\delta_{mn}$。
 
-::: {.theorem #thm-ch11-all-degree-peter-weyl-orthonormal title="全阶偶次彼得—魏尔特征核的零公理哈尔正交归一性" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"}
+::: {.theorem #thm-ch11-all-degree-peter-weyl-orthonormal title="全阶偶次彼得—魏尔特征核的哈尔正交归一性" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"}
 有理配对 `haarInner` 将 `haarKappaPoly` 应用于两个系数表的乘积。对 $m,n\in\mathbb N$，`degreeDelta m n` 在 $m=n$ 时取一，其余取零。声明给出下列 `Omega.IntRatio.Equivalent` 恒等式。
 
 $$

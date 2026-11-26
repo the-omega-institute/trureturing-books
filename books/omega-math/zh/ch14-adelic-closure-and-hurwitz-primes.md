@@ -163,7 +163,7 @@ $$
 
 更令人拍案叫绝的是，这一自由群定理根本不需要高深的李群理论或经典选择公理。在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中，我们将 $S_5$ 的有限字编码为归纳类型 `Word`（空词 `.nil` 与首字母拼接 `.cons g tail`），以 `IsReduced w` 刻画相邻字母互不为共轭逆元的既约词，并分别记其在整四元数环与 $\mathrm{Mat}_2(\mathbb{F}_5)$ 中的左起连乘求值为 `evalQuat w : Quaternion` 与 `evalSplit5 w : Matrix5`。凭藉 [@thm-ch14-hurwitz-mod5-splitting] 确立的秩一外积分裂，任意既约词的四项算术刚性律先在旋量层被零公理锁死。
 
-::: {.theorem #thm-ch14-reduced-word-non-scalar title="既约词的模 5 非零性、精确模方、5-本原性与非标量性（零公理内核定理）" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_split5_nonzero D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_normSq D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_not_div_five D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_non_scalar"}
+::: {.theorem #thm-ch14-reduced-word-non-scalar title="既约词的模 5 非零性、精确模方、5-本原性与非标量性" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_split5_nonzero D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_normSq D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_not_div_five D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_non_scalar"}
 所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。设 `w : Word` 为由六枚模方 $5$ 赫维茨生成元构成的有限词，记词长 $L := w.\mathrm{length}$、幂函数 $\operatorname{powFive}(L) := 5^L$、四坐标全被 $5$ 整除谓词 `AllDivisibleByFive q` 以及整标量四元数谓词 `IsScalar q`（即 $\exists k \in \mathbb{Z},\, q = (k, 0, 0, 0)$）。则以下四条定理无条件成立：
 
 1. **既约词的模 $5$ 分裂像恒非零**（[`reduced_word_split5_nonzero`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_split5_nonzero)）：对任意满足 `IsReduced w` 的既约词 `w`，均有
@@ -197,7 +197,7 @@ $$
 
 [@thm-ch14-reduced-word-non-scalar] 已经在四元数旋量层彻底杜绝了非空既约词坍缩成标量。要将这一刚性最终推升为三维有理正交群 $\mathrm{SO}(3, \mathbb{Q})$ 中的真正自由群嵌入 $F_3 \hookrightarrow \mathrm{SO}(3, \mathbb{Q})$，还需回答一个更尖锐的问题：设两串既约词 $u, v$ 对应的有理伴随旋转（见[第五章](ch05-rational-cayley-rotations.md) [@thm-ch05-rational-adjoint-action]）在三维空间中恰好相等，哪怕仅仅检验它们在第一与第二两条坐标轴上的作用一致，是否就足以迫使两串词逐字母完全相同？下面这条零公理收官定理给出肯定的最终判决。
 
-::: {.theorem #thm-ch14-reduced-words-adjoint-injective title="零公理伴随单射定理：S₅ 自由生成 SO(3, ℚ) 中的自由群 F₃" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_words_adjoint_injective"}
+::: {.theorem #thm-ch14-reduced-words-adjoint-injective title="伴随单射定理：S₅ 自由生成 SO(3, ℚ) 中的自由群 F₃" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_words_adjoint_injective"}
 所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。记两条标准整数坐标轴 $\mathrm{axisX} := (1, 0, 0)$ 与 $\mathrm{axisY} := (0, 1, 0)$ 及其有理嵌入 `RatVec3.ofInt axisX`、`RatVec3.ofInt axisY`，并以 `Ad` 记[第五章](ch05-rational-cayley-rotations.md)定义的无根号有理伴随作用。设 `u, v : Word` 为任意两串满足 `IsReduced u` 与 `IsReduced v` 的既约词；若它们诱导的有理伴随旋转在两条坐标轴上分别等价（在 `RatVec3.Equiv` 下成立）
 
 $$

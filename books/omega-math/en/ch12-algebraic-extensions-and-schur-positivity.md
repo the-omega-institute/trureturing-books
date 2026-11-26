@@ -1,4 +1,4 @@
-# Chapter 12 Zero-Axiom Quadratic Extensions and Rational Schur Positivity
+# Chapter 12 Quadratic Extensions and Rational Schur Positivity {#chapter-12-zero-axiom-quadratic-extensions-and-rational-schur-positivity}
 
 > *"Meeting $\sqrt{2}$ or the golden ratio $\varphi$ never requires retreating to an axiom-of-choice continuum; adjoining one finite relation $\alpha^2 = b\alpha + c$ to ordered pairs of rationals closes algebraic extrema, pentagonal Chebyshev cycles, and Schur positivity certificates in finite arithmetic."*
 
@@ -12,11 +12,11 @@ Classical analysis reacts to any of these three thresholds by dumping the entire
 
 ---
 
-## 12.1 Zero-Axiom Degree-2 Algebraic Extensions QuadPoly(b, c) via Ordered Pairs {#sec-ch12-quadpoly-extensions}
+## 12.1 Degree-2 Algebraic Extensions QuadPoly(b, c) via Ordered Pairs {#sec-ch12-quadpoly-extensions}
 
 Forming the quadratic extension $\mathbb{Q}[\alpha]/(\alpha^2 - b\alpha - c)$ ($b, c \in \mathbb{Q}$) never requires locating an infinite decimal expansion $\alpha$ on a real line. Inside bare Calculus of Inductive Constructions (CIC), it is simply the type of ordered pairs $(p, q) \in \mathbb{Q}^2$ (written intuitively as $p + q\alpha$), endowed with finite arithmetic completely determined by the rewrite rule $\alpha^2 \mapsto b\alpha + c$.
 
-::: {.definition #def-ch12-quadpoly title="Ordered-Pair Construction of Zero-Axiom Quadratic Extensions"}
+::: {.definition #def-ch12-quadpoly title="Ordered-Pair Construction of Quadratic Extensions"}
 Fix rational parameters $b, c \in \mathbb{Q}$. Define the quadratic quotient algebra $\operatorname{QuadPoly}(b, c) := \mathbb{Q}[\alpha]/(\alpha^2 - b\alpha - c)$ on ordered pairs $(p, q) \in \mathbb{Q} \times \mathbb{Q}$ (representing $p + q\alpha$) with the following zero-axiom rational operations:
 
 1. **Addition, subtraction, and multiplication**:
@@ -96,7 +96,7 @@ Setting $b = 0$ and $c = 2$ (relation $\delta^2 = 2$, discriminant $\Delta = 8$,
 
 Norm multiplicativity and exact inversion for general integral-parameter quadratic algebras `RatQuadPoly b c`, together with the `QSqrt2` unit $90^\circ$ spinor closure and squared CHSH bound, are proved in D5 on the strict backend (`strict_omega.axioms: []`):
 
-::: {.theorem #thm-ch12-zero-axiom-quadpoly-qsqrt2 title="Zero-Axiom Quadratic Norm Multiplicativity, Exact Inversion, and QSqrt2 Spinor and Bell Extrema" lean="D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.quadratic_norm_mul D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.quadratic_mul_inv D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.sqrt_two_spinor D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.sqrt_two_bell"}
+::: {.theorem #thm-ch12-zero-axiom-quadpoly-qsqrt2 title="Quadratic Norm Multiplicativity, Exact Inversion, and QSqrt2 Spinor and Bell Extrema" lean="D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.quadratic_norm_mul D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.quadratic_mul_inv D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.sqrt_two_spinor D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.sqrt_two_bell"}
 The cited D5 declarations record `strict_omega.axioms: []`. The following four theorems hold:
 
 1. **Universal quadratic norm multiplicativity** (`quadratic_norm_mul`): for all integers `b c : Omega.Int` and all elements `z w : RatQuadPoly b c`, under `Omega.FiniteRatio.Equivalent`,
@@ -153,7 +153,7 @@ Setting $b = 1$ and $c = 1$ (relation $\varphi^2 = \varphi + 1$, discriminant $\
 
 All three golden laws are proved in D5 on the strict backend (`strict_omega.axioms: []`) across `OmegaQuadraticAndSchur` and `OmegaChebyshevHecke`:
 
-::: {.theorem #thm-ch12-zero-axiom-qphi-fibonacci-pentagon title="Zero-Axiom Golden Field QPhi Fibonacci Powers, Norm Law, and Pentagonal Chebyshev Closure" lean="D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.phi_fibonacci D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.phi_power_norm D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.pentagonal_chebyshev"}
+::: {.theorem #thm-ch12-zero-axiom-qphi-fibonacci-pentagon title="Golden Field QPhi Fibonacci Powers, Norm Law, and Pentagonal Chebyshev Closure" lean="D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.phi_fibonacci D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.phi_power_norm D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.pentagonal_chebyshev"}
 The cited D5 declarations record `strict_omega.axioms: []`. In the golden quadratic extension `QPhi` ($b = 1, c = 1$, relation $\varphi^2 = \varphi + 1$), the following three theorems hold:
 
 1. **Fibonacci power law** (`phi_fibonacci`): for every natural number `n : Omega.Nat`, under `QuadPoly.Equivalent`,
@@ -209,7 +209,7 @@ This single line accomplishes two decisive tasks at once. First, it displays the
 
 This entire rational positivity and minimization engine—spanning the Lagrange–Gram identity and Cauchy–Schwarz inequality for arbitrary finite rational coordinate sequences, nonzero-pivot scalar Schur completion, and positive-pivot global minimization—is proved directly over `Omega.FiniteRatio` in D5 on the strict backend (`strict_omega.axioms: []`):
 
-::: {.theorem #thm-ch12-zero-axiom-lagrange-schur title="Zero-Axiom Rational Lagrange–Gram Identity, Cauchy–Schwarz Inequality, and Scalar Schur Minimum" lean="D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_lagrange_gram D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_cauchy_schwarz D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_complete D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_min"}
+::: {.theorem #thm-ch12-zero-axiom-lagrange-schur title="Rational Lagrange–Gram Identity, Cauchy–Schwarz Inequality, and Scalar Schur Minimum" lean="D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_lagrange_gram D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_cauchy_schwarz D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_complete D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_min"}
 The cited D5 declarations record `strict_omega.axioms: []`. The following four rational positivity and minimization theorems hold:
 
 1. **Rational Lagrange–Gram identity** (`rational_lagrange_gram`): for any finite rational coordinate-pair sequence `xs : Sequence (CoordinatePair FiniteRatio)`, under `Omega.FiniteRatio.Equivalent`,
@@ -300,7 +300,7 @@ Consider the symmetric rational block matrix $K = \begin{pmatrix} A & B \\ B^\to
 The figure below pairs both zero-axiom rational tools on a single plate: the left panel maps the Fibonacci power progression, alternating Galois norm $N(\varphi^n) = (-1)^n$, and pentagonal Chebyshev closure $T_5(\varphi/2) = -1$ inside `QPhi`; the right panel charts the parabolic valley of $2x^2 + 2xy + \frac{3}{2}y^2$ over the internal variable $y$, pinning its exact rational Schur complement minimum $S = \frac{4}{3}$ at $y^* = -\frac{2}{3}x$.
 
 ::: {.figure src="ch12-quadext-schur-valley"}
-**Zero-axiom quadratic extension `QPhi` and the rational Schur complement valley.** The left panel displays the ordered-pair Fibonacci powers $\varphi^{n+1} = F_n + F_{n+1}\varphi$, alternating Cassini norms $N(\varphi^n) = (-1)^n$, and trigonometry-free pentagonal closure $T_5(\varphi/2) = -1$ inside `QPhi` ([@thm-ch12-zero-axiom-qphi-fibonacci-pentagon], [@ex-ch12-quadpoly-ledger]). The right panel plots the parabolic cross-section over $y$ for the worked block matrix $A = 2,\; B = 1,\; C = \frac{3}{2}$, pinpointing the unique elimination point $y^* = -\frac{2}{3}x$ and the exact rational Schur valley floor $S = \frac{4}{3}$ ([@thm-ch12-zero-axiom-lagrange-schur], [@ex-ch12-schur-worked]).
+**Quadratic extension `QPhi` and the rational Schur complement valley.** The left panel displays the ordered-pair Fibonacci powers $\varphi^{n+1} = F_n + F_{n+1}\varphi$, alternating Cassini norms $N(\varphi^n) = (-1)^n$, and trigonometry-free pentagonal closure $T_5(\varphi/2) = -1$ inside `QPhi` ([@thm-ch12-zero-axiom-qphi-fibonacci-pentagon], [@ex-ch12-quadpoly-ledger]). The right panel plots the parabolic cross-section over $y$ for the worked block matrix $A = 2,\; B = 1,\; C = \frac{3}{2}$, pinpointing the unique elimination point $y^* = -\frac{2}{3}x$ and the exact rational Schur valley floor $S = \frac{4}{3}$ ([@thm-ch12-zero-axiom-lagrange-schur], [@ex-ch12-schur-worked]).
 :::
 
 ---
@@ -338,16 +338,16 @@ then there exists a unique linear isometry equivalence $U : E \simeq_{\mathrm{li
 For every finitely supported coefficient tuple $c$, bilinearity gives $\bigl\lVert \sum_a c_a \varphi(\sigma a)\bigr\rVert^2 = \sum_{a,b} c_a c_b \langle \varphi(\sigma a), \varphi(\sigma b)\rangle_{\mathbb{R}} = \sum_{a,b} c_a c_b \langle \varphi a, \varphi b\rangle_{\mathbb{R}} = \bigl\lVert \sum_a c_a \varphi a\bigr\rVert^2$. Thus the assignment $\sum_a c_a \varphi a \mapsto \sum_a c_a \varphi(\sigma a)$ is independent of representation and strictly norm-preserving. Because $\varphi$ spans $E$ and $\sigma$ is bijective, the induced linear isometry is surjective, yielding $U$; uniqueness follows immediately because two linear maps agreeing on the spanning range of $\varphi$ coincide on all of $E$. The full proof is checked by the Lean kernel.
 :::
 
-::: {.remark #rem-ch12-rational-sos-vs-real-shadow title="Division of Labor Between Zero-Axiom Rational Positivity and the Hilbert Shadow"}
+::: {.remark #rem-ch12-rational-sos-vs-real-shadow title="Rational Positivity on the Strict Backend and the Hilbert Shadow"}
 Observe the exact architectural division across all seven frozen theorem groups in this chapter. Among the frozen D5 results using `OmegaInit` and `OmegaMath` (`strict_omega.axioms: []`), [@thm-ch12-zero-axiom-quadpoly-qsqrt2], [@thm-ch12-zero-axiom-qphi-fibonacci-pentagon], and [@thm-ch12-zero-axiom-lagrange-schur] establish quadratic norm multiplicativity, exact inversion, the `QSqrt2` and `QPhi` spinor/Bell/Fibonacci/pentagonal Chebyshev identities, the rational Lagrange–Gram identity, Cauchy–Schwarz, and scalar Schur minimization directly in finite pair and `Omega.FiniteRatio` arithmetic with no real completeness and no eigenvalues. On the classical real and complex shadow layer, [@thm-ch12-lagrange-gram] and [@thm-ch12-schur-minimum] provide the parallel real-sum and arbitrary finite-dimensional complex block-matrix versions. If a rational certificate establishes positivity of a bounded operator $Q$ on a complex Hilbert space, [@thm-ch12-gram-realizability] yields $Q=O^\dagger O$. In a real inner product space, [@thm-ch12-gram-isometry-extension] gives a unique global linear isometry extending a specified permutation of a spanning family that preserves every pairwise Gram inner product.
 :::
 
 A hand calculation shows what each hypothesis does. In $\mathbb{R}^2$, $e_1,2e_2$ span the plane and have positive definite Gram matrix $\operatorname{diag}(1,4)$. Swapping them sends a vector of norm $1$ to a vector of norm $2$, so no isometry extends the swap. For the family consisting of $e_1$ alone, the identity permutation preserves its inner product, but both the identity and reflection across the $e_1$-axis extend it. Uniqueness can fail when the family does not span.
 
-In the interactive laboratory card below, explore all three zero-axiom algebraic engines of this chapter in one place: step the unit $90^\circ$ spinor in `QSqrt2` around its eight-beat cycle $u_{90}^8 = 1$ and verify the floating-point-free CHSH Tsirelson square $S_{\mathrm{CHSH}}^2 = 8$ ([@thm-ch12-zero-axiom-quadpoly-qsqrt2]); advance Fibonacci powers $\varphi^{n+1} = F_n + F_{n+1}\varphi$ and the decagonal Chebyshev orbit in `QPhi` to watch $T_5(\varphi/2) = -1$ close without trigonometry ([@thm-ch12-zero-axiom-qphi-fibonacci-pentagon]); and slide the internal variable $y$ along the rational Schur valley to confirm that the exact floor $S = \frac{4}{3}$ is attained uniquely at $y^* = -\frac{2}{3}x$ ([@thm-ch12-zero-axiom-lagrange-schur], [@thm-ch12-schur-minimum]).
+In the interactive laboratory card below, explore the three algebraic constructions of this chapter in one place: step the unit $90^\circ$ spinor in `QSqrt2` around its eight-beat cycle $u_{90}^8 = 1$ and verify the floating-point-free CHSH Tsirelson square $S_{\mathrm{CHSH}}^2 = 8$ ([@thm-ch12-zero-axiom-quadpoly-qsqrt2]); advance Fibonacci powers $\varphi^{n+1} = F_n + F_{n+1}\varphi$ and the decagonal Chebyshev orbit in `QPhi` to watch $T_5(\varphi/2) = -1$ close without trigonometry ([@thm-ch12-zero-axiom-qphi-fibonacci-pentagon]); and slide the internal variable $y$ along the rational Schur valley to confirm that the exact floor $S = \frac{4}{3}$ is attained uniquely at $y^* = -\frac{2}{3}x$ ([@thm-ch12-zero-axiom-lagrange-schur], [@thm-ch12-schur-minimum]).
 
 ::: {.viz src="dfinite-algebraic-schur-lab" preset="quadratic-ext-and-schur" height="520"}
-**Zero-axiom quadratic extensions and rational Schur valley card (`quadratic-ext-and-schur`).** Switch between the `QSqrt2` and `QPhi` ordered-pair fields to step through the eight-beat right-angle spinor $u_{90}^8 = 1$ and exact CHSH ceiling $S_{\mathrm{CHSH}}^2 = 8$ ([@thm-ch12-zero-axiom-quadpoly-qsqrt2]), trace Fibonacci powers alongside the pentagonal Chebyshev closure $T_5(\varphi/2) = -1$ ([@thm-ch12-zero-axiom-qphi-fibonacci-pentagon]), and drag the internal probe $y$ along $2x^2 + 2xy + \frac{3}{2}y^2$ to lock onto the exact rational Schur valley floor $S = \frac{4}{3}$ at $y^* = -\frac{2}{3}x$ ([@thm-ch12-zero-axiom-lagrange-schur], [@ex-ch12-schur-worked]).
+**Quadratic extensions and rational Schur valley card (`quadratic-ext-and-schur`).** Switch between the `QSqrt2` and `QPhi` ordered-pair fields to step through the eight-beat right-angle spinor $u_{90}^8 = 1$ and exact CHSH ceiling $S_{\mathrm{CHSH}}^2 = 8$ ([@thm-ch12-zero-axiom-quadpoly-qsqrt2]), trace Fibonacci powers alongside the pentagonal Chebyshev closure $T_5(\varphi/2) = -1$ ([@thm-ch12-zero-axiom-qphi-fibonacci-pentagon]), and drag the internal probe $y$ along $2x^2 + 2xy + \frac{3}{2}y^2$ to lock onto the exact rational Schur valley floor $S = \frac{4}{3}$ at $y^* = -\frac{2}{3}x$ ([@thm-ch12-zero-axiom-lagrange-schur], [@ex-ch12-schur-worked]).
 :::
 
 Volume IV—rational harmonic analysis on the three-sphere—now stands complete. From the Peter–Weyl spin shells and even-degree Chebyshev kernels $E_n(\kappa)$ of [Chapter 10](ch10-peter-weyl-rational-spin-shells.md), through the $\pi$-free factorial Haar expectation and zero-error character orthonormality of [Chapter 11](ch11-pi-free-haar-integration.md), to the zero-axiom quadratic extensions `QuadPoly(b, c)` and rational Lagrange–Schur positivity certificates of this chapter, the full toolkit of non-abelian rational spectral theory is forged. Volume V ([Chapter 13](ch13-computable-arithmetic-horizon.md)–[Chapter 15](ch15-rational-hecke-ramanujan-spectrum.md)) now turns this toolkit directly onto prime arithmetic, the Hurwitz quaternion free group $F_3$, and the complex-free Hecke–Ramanujan rational spectral gap.

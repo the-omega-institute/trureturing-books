@@ -6,7 +6,7 @@
 
 第 18.1 节从六条射影圆周定理出发，经整数四分深度预算与 `OmegaShadowBridge` 读到经典实数层。第 18.2 节用 `Init.Rat` 教学原型对照严格库，并分清库重放与 D5 双端证据。第 18.3 节回到四模式三维工作台 `OMEGA//LAB`。
 
-## 18.1 三层零公理架构、零公理核心冻结定理与单向阴影函子 {#sec-om-ch18-three-layer-architecture}
+## 18.1 三层架构、严格后端的核心定理与单向阴影函子 {#sec-om-ch18-three-layer-architecture}
 
 在 Lean 4 中重建无无穷、无超越数的数学，既不需要修改编译器底层归纳构造演算（CIC）内核，也绝不能用 `axiom` 关键字硬塞自定义公理（自定义 `axiom` 不仅阻断内核 $\iota$-归约，一旦漏写零元组等边界前提还会三行推出 `False`，且必遭独立内核审计拒收）。正确的形式化工程划分为彼此隔离的三层（`MODEL` 架构分层配冻结 **`LEAN ✓`** 声明）：
 
@@ -20,7 +20,7 @@
 
 下面六条射影圆周定理在所钉提交 [{commit}](trureturing:) 的 `strict_omega` 记录中只依赖 `OmegaInit` 和 `OmegaMath`，公理均为 `[]`。例如对径闭合 `cayley_antipodal_closure` 的官方记录仅依赖 `propext`。双端记录见 [附录 A §A.3](appendix-a.md#sec-om-appa-frozen-registry)。
 
-::: {.theorem #thm-om-ch18-wave1-zero-axiom-circle title="射影圆周零公理冻结定理组：射影缩放、补和守恒、凯莱单位圆、对径闭合与模方乘性" lean="D5/S3/Quantum/AURICOmega/ProjectiveOverlapScaling.kappa_scale D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_scale D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_add_spread_eq_one D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure D5/S3/Quantum/AURICOmega/OmegaCircleClosure.projective_circle_mul_normSq"}
+::: {.theorem #thm-om-ch18-wave1-zero-axiom-circle title="射影圆周冻结定理组：射影缩放、补和守恒、凯莱单位圆、对径闭合与模方乘性" lean="D5/S3/Quantum/AURICOmega/ProjectiveOverlapScaling.kappa_scale D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_scale D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_add_spread_eq_one D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure D5/S3/Quantum/AURICOmega/OmegaCircleClosure.projective_circle_mul_normSq"}
 以下六条 D5 定理使用 `OmegaInit` 与 `OmegaMath` 接口。
 
 1. **自然数正倍缩放不变性**（`ProjectiveOverlapScaling.kappa_scale`）：对任意 `p q k : Omega.Nat`，缩放后读数与原读数在 `Omega.Ratio.Equivalent` 下等价，包括 $p = q = 0$ 时两端同取未定义值的情形；
@@ -50,7 +50,7 @@
 
 为了把第 0–1 层零公理核心中的 `Omega.Nat`、`Omega.Int`、`Omega.IntRatio` 与射影圆周 `Omega.Projective.Circle` 直接、精确且单向地投射入标准 `Mathlib` 域 $\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}$，第 2 层阴影桥模块 `OmegaShadowBridge` 导出如下十一条冻结定理：
 
-::: {.theorem #thm-ch18-omega-shadow-bridge title="第 2 层单向阴影函子：零公理算术与射影圆周向 Mathlib 实有理域的精确传递" lean="D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdNat_add D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdNat_mul D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdInt_neg D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdInt_add D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdInt_mul D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_equivalent D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_add D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_mul D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_inv D5/S3/Quantum/AURICOmega/OmegaShadowBridge.cayley_circle_unit D5/S3/Quantum/AURICOmega/OmegaShadowBridge.kappa_unit_interval"}
+::: {.theorem #thm-ch18-omega-shadow-bridge title="第 2 层单向阴影函子：算术与射影圆周向 Mathlib 实有理域的精确传递" lean="D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdNat_add D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdNat_mul D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdInt_neg D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdInt_add D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdInt_mul D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_equivalent D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_add D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_mul D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_inv D5/S3/Quantum/AURICOmega/OmegaShadowBridge.cayley_circle_unit D5/S3/Quantum/AURICOmega/OmegaShadowBridge.kappa_unit_interval"}
 在第 2 层单向阴影桥模块 `D5/S3/Quantum/AURICOmega/OmegaShadowBridge` 中，定义结构递归读出映射 `toStdNat : Omega.Nat → ℕ` 与 `toStdInt : Omega.Int → ℤ`，定义有理读出 `toRat : Omega.IntRatio → ℚ`（将有限分数 `IntRatio.fraction a d` 映为 `(toStdInt a : ℚ) / (toStdInt (IntRatio.denominator d) : ℚ)`，将未定义元 `IntRatio.undefined` 映为 `0`），并令实阴影 `toReal (x : IntRatio) : ℝ := (toRat x : ℝ)`。则以下十一条精确传递律同时成立：
 
 1. **自然数与整数环同态**（`toStdNat_add`、`toStdNat_mul`、`toStdInt_neg`、`toStdInt_add`、`toStdInt_mul`）：对任意 `a, b : Omega.Nat`，有 `toStdNat (a.add b) = toStdNat a + toStdNat b` 与 `toStdNat (a.mul b) = toStdNat a * toStdNat b`；对任意 `a, b : Omega.Int`，有 `toStdInt a.neg = -toStdInt a`、`toStdInt (a.add b) = toStdInt a + toStdInt b` 与 `toStdInt (a.mul b) = toStdInt a * toStdInt b`；

@@ -79,7 +79,7 @@ The Leibniz rule splits the degree-$k$ coefficient $(k+1)\sum_{i=0}^{k+1} f_i g_
 
 Conventional pedagogy treats $(\cos\theta, \sin\theta)$ as inhabitants of transcendental analysis while relegating the rational Cayley circle map $t \mapsto \bigl(\frac{1-t^2}{1+t^2}, \frac{2t}{1+t^2}\bigr)$ to an algebraic curiosity. Inside $J_N(\mathbb{Q})$, the two are algebraically identical at every finite order $N$. On the zero-axiom homogeneous projective circle, unit-norm closure of the rational Cayley map is already kernel-verified without any axioms:
 
-::: {.theorem #thm-ch08-cayley-circle-unit title="Zero-axiom unit norm of the homogeneous rational Cayley circle" lean="D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit"}
+::: {.theorem #thm-ch08-cayley-circle-unit title="Unit norm of the homogeneous rational Cayley circle" lean="D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit"}
 Let $p, q \in \mathbb{Z}$ be signed integers satisfying `Nonzero p q` (that is, $p \neq 0 \lor q \neq 0$). Writing $\operatorname{normSq}(p, q) = p^2 + q^2$ and defining the rational Cayley coordinates in `IntRatio` by
 
 $$
@@ -136,7 +136,7 @@ The coupled ODEs are checked directly at each degree by alternating-sign cancell
 
 We now place formal series composition and the universal formal chain rule in D5 on the strict backend (`strict_omega.axioms: []`): for any coefficientwise finite streams $f, g \in \mathrm{JetSeq}$ (every coefficient satisfying `IntRatio.Finite`) with vanishing inner constant term ($g_0 \equiv 0$), defining $(\mathrm{compose}\;f\;g)_n := \bigl(\sum_{k=0}^{n} f_k \cdot g^k\bigr)_n$ locks in both the universal formal chain rule and **Cayley–trigonometry algebraic unification** at every truncation degree $N \in \mathbb{N}$:
 
-::: {.theorem #thm-ch08-cayley-composition-unification title="Zero-axiom formal chain rule and arbitrary-order Cayley–trigonometry unification" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.deriv_compose_equivAt D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.cos_two_atan_eq_cayley D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.sin_two_atan_eq_cayley"}
+::: {.theorem #thm-ch08-cayley-composition-unification title="Formal chain rule and arbitrary-order Cayley–trigonometry unification" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.deriv_compose_equivAt D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.cos_two_atan_eq_cayley D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.sin_two_atan_eq_cayley"}
 On the rational coefficient stream carrier `Omega.JetSeq` used by the cited D5 results (`strict_omega.axioms: []`), write $g^k := \mathrm{power}\;g\;k$ for the $k$-th Cauchy power and $(\mathrm{compose}\;f\;g)_n := \bigl(\sum_{k=0}^{n} f_k \cdot g^k\bigr)_n$ for formal series composition. The following three zero-axiom identities hold for **every truncation degree $N \in \mathbb{N}$**:
 
 1. **Universal formal chain rule at every degree $N$** ([`deriv_compose_equivAt`](lean:D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.deriv_compose_equivAt)): for every $N \in \mathbb{N}$ and all coefficientwise finite streams $f, g \in \mathrm{JetSeq}$ (`Finite f`, `Finite g`) satisfying $g_0 \equiv 0$, coefficients agree through degree $N$ inclusive:

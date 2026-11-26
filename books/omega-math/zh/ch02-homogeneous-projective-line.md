@@ -200,7 +200,7 @@ $$
 不妨在下面的交互实验卡中亲手验证整条射影闭环的零奇点算术：拖动齐次整数对 $[P : Q]$ 的两个整数滑块，让点依次滑过过去锚点 $[0 : 1]$、本原毕达哥拉斯弧 $[1 : 2]$、现在自对偶赤道 $[1 : 1]$ 直至曾经触发除零崩塌的未来对径极点 $[1 : 0]$，实时观察保真度与展开度的互补守恒 $\kappa + s = 1$ 以及有理凯莱坐标满足 $X^2 + Y^2 = 1/1$ 如何在每一组非零整数上严丝合缝地恒等成立。
 
 ::: {.viz src="ternion-cayley-lab" preset="qp1-antipodal-circle" height="520"}
-**齐次射影闭环 $\mathbb{QP}^1$ 与有理凯莱单位圆实时实验。** 拖动 $[P : Q]$ 整数滑块穿越 $[0 : 1]$、$[1 : 1]$ 与对径极点 $[1 : 0]$，页面同步以精确分数实时验算 $\kappa(P, Q) + s(P, Q) = 1$ 与有理凯莱坐标 $X^2 + Y^2 = 1/1$（其中 $X = \operatorname{cayleyX}(P, Q)$、$Y = \operatorname{cayleyY}(P, Q)$），全程无除零、无根号；对应零公理内核证明见 [@thm-ch02-kappa-add-spread]、[@thm-ch02-cayley-unit] 与 [@thm-ch02-antipodal-closure]。
+**齐次射影闭环 $\mathbb{QP}^1$ 与有理凯莱单位圆实时实验。** 拖动 $[P : Q]$ 整数滑块穿越 $[0 : 1]$、$[1 : 1]$ 与对径极点 $[1 : 0]$，页面同步以精确分数实时验算 $\kappa(P, Q) + s(P, Q) = 1$ 与有理凯莱坐标 $X^2 + Y^2 = 1/1$（其中 $X = \operatorname{cayleyX}(P, Q)$、$Y = \operatorname{cayleyY}(P, Q)$），全程无除零、无根号；对应证明见 [@thm-ch02-kappa-add-spread]、[@thm-ch02-cayley-unit] 与 [@thm-ch02-antipodal-closure]。
 :::
 
 一维齐次射影闭环已经如此优雅——无实无穷、无超越数、无除零奇点，并且每一条基本恒等式都在零公理裸内核中通过了检查。那么，我们能不能就此止步，把整个宇宙的代数都建在一维圆周 $\mathbb{QP}^1$ 上呢？
