@@ -685,8 +685,73 @@ $$
 在 $a=\pi/2$ 时，辐棱与外缘的余弦在纬度 $q$ 处相等，故 $q=t(\pi/2)$。于是 $R(\pi/2)=f(0)$、$e(\pi/2)=\pi/2$，比值恰为 $c_*$。完整证明由 Lean 内核检查。
 :::
 
+当三条外缘棱可以独立偏转时，仍可用四分之一转的最优势作为起点。把横向偏移分成两个循环傅里叶模态，就能构造一组顶点势，并定量控制每条棱的拟合误差。
+
+::: {.theorem #thm-appe-round-quaternion-local-sharpness title="循环四分之一转的严格局部锐性与加权方差角域" lean="D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionLocalSharpness.RoundQuaternionLocalSharpness.quarterLocal_strictFit, D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionLocalSharpness.RoundQuaternionLocalSharpness.quarterLocal_angularRegion"}
+令 $c_*=\frac{2}{\pi}\arccos(1/\sqrt3)$。在 $K_4$ 上，将对角增益与顶点 $0$ 的辐棱增益取为 $1$，将有向外缘 $12,23,31$ 的增益依次取为单位四元数 $A_0,A_1,A_2$，反向外缘取逆元。对所得增益分配 $g$，外缘下标为 $j\in\{0,1,2\}$，记 $e=\max\{\max_j d(1,A_j),\,d(A_0A_1A_2,1)\}$.
+
+以下两种情形中，所有有序三角形（顶点两两不同）的缺陷 $d(g_{ij}g_{jk},g_{ik})$ 都至多为 $e$，且至少一个达到 $e$。拟合半径按上文的圆距离定义。
+
+1. **复数对傅里叶坐标中的严格定量拟合。** 在复数对坐标 $(z,h)\mapsto z+hJ$ 中，设 $A_j=(-\eta_j+i\gamma_j,w_j)$，其中 $\eta_j,\gamma_j\in\mathbb R$，$\gamma_j=\sqrt{1-\eta_j^2-|w_j|^2}>0$，$w_j=p\zeta^j+q\zeta^{-j}$，$p,q\in\mathbb C$，$\zeta=(-1+i\sqrt3)/2$。置 $E=\max_j|\eta_j|$，并设 $\max\{|p|,|q|,E\}\le3/50$。下文构造的相位归一化势 $\varphi=P(p,q)$ 在每条有向棱 $i\ne j$ 上满足
+
+   $$
+   \langle g_{ij},\varphi_i^{-1}\varphi_j\rangle_{\mathbb R}\ge\cos(c_*e)+\frac{|q|}{200}+\frac{3}{100}(|p|^2+E).
+   $$
+
+   势 $\varphi$ 在半径 $c_*e$ 内拟合 $g$。若 $(p,q,\eta)\ne(0,0,0)$，则存在实数 $R<c_*e$，使同一个 $\varphi$ 在半径 $R$ 内仍拟合 $g$。若 $(p,q,\eta)=(0,0,0)$，则任意势都无法在任何实数半径 $R<c_*e$ 内拟合 $g$。
+
+2. **加权方差角域。** 在基 $1,I,J,IJ$ 下，设外缘增益为
+
+   $$
+   \begin{aligned}
+   A_0&=(\cos a,\sin a,0,0),\\
+   A_1&=(\cos b,\sin b\cos u,\sin b\sin u,0),\\
+   A_2&=(\cos c,\sin c\cos v,\sin c\sin v\cos w,\sin c\sin v\sin w).
+   \end{aligned}
+   $$
+
+   各角均以弧度计，方位角 $w\in\mathbb R$ 任意。设 $u,v\ge0$、$u+v<\pi/2$，以及 $\max\{|a-\pi/2|,|b-\pi/2|,|c-\pi/2|\}\le17\pi/900$、$u^2+v^2+(u+v)^2\le(4497/500)(3/50)^2$。
+
+   存在势 $\varphi$ 在半径 $c_*e$ 内拟合 $g$，且若 $(a,b,c,u,v)\ne(\pi/2,\pi/2,\pi/2,0,0)$，则存在实数 $R<c_*e$，使这个 $\varphi$ 在半径 $R$ 内仍拟合 $g$。在中心 $(a,b,c,u,v)=(\pi/2,\pi/2,\pi/2,0,0)$，任意势都无法在任何实数半径 $R<c_*e$ 内拟合 $g$。
+:::
+
+::: {.proof #pf-appe-round-quaternion-local-sharpness}
+含顶点 $0$ 的三角形与外缘三角形分别给出 $d(1,A_j)$ 与 $d(A_0A_1A_2,1)$。圆距离在左右乘与取逆下不变，故循环移位和反转不改变缺陷。这四个值覆盖所有有序三角形，且每个都由一个三角形取得。
+
+对第 1 款，令 $\ell=\exp(-i\arg(q(\zeta-1))/2)$，其中 $q=0$ 时取 $\ell=1$。以 $(\ell,0)$ 共轭，绕 $I$ 轴旋转，将 $p,q$ 同乘 $\ell^2$，使旋转后的 $q(\zeta-1)=\sqrt3\,|q|$。以下用 $p,q$ 表示旋转后的模态。置 $t=1/\sqrt3$、$\rho=3/50$、$s=\sqrt{2/3}$、$v_j=\zeta^{-j}$，外缘下标按模 $3$ 循环。令 $x=\operatorname{Re}p$、$y=\operatorname{Im}p$，所取的系数为 $F_0=\sqrt3(x^2-y^2)/96+xy/16$, $F_1=\sqrt3(x^2-y^2)/96-xy/16$, $F_2=-\sqrt3(x^2-y^2)/48$, $b_j=\operatorname{Re}(p v_{j-1})/\sqrt6$, $f_j=s(\sqrt3\,b_j+F_j-F_{j-1})$, $U=t+|q|/\sqrt6-(\sqrt3/12)|p|^2$。
+中心势为 $1$，顶点 $j+1$ 的势取单位四元数 $X_j=(U+ib_j,\,v_j(\sqrt{1-U^2-b_j^2-f_j^2}+if_j))$。在上述参数界内，根号内非负。共轭同时保持增益与相对势的内积，故逐点作逆共轭即得原坐标下的相位归一化势。
+
+把外缘棱内积写成 $\langle X_jA_j,X_{j+1}\rangle_{\mathbb R}$。先令 $q=0$、$\eta=0$，直接展开得共同的零次与二次项 $t-(\sqrt3/12)|p|^2$，一次项消去，各棱的三次项绝对值至多 $(2/5)|p|^3$。对两个势与一个增益的各次项分别取范数上界，再用 $|p|\le\rho$ 对总次数至少为 $4$ 的乘积求和，所得余项界为 $3|p|^4$。恢复 $q$ 与 $\eta$ 后，相位对准给出共同的一次增益 $Q/\sqrt6$（$Q=|q|$），其余扰动的损失至多 $(627/100)\rho Q+2\rho E$。辐棱的内积就是 $U$，反向棱的内积等于正向棱，故每条有向棱的内积均至少为
+
+$$
+t+\frac{Q}{\sqrt6}-\frac{\sqrt3}{12}|p|^2-\frac25|p|^3-3|p|^4-\frac{627}{100}\rho Q-2\rho E.
+$$
+
+为比较拟合内积与三角缺陷，记 $D_{jk}=\gamma_j\gamma_k+\operatorname{Re}(\overline{w_j}w_k)$。循环面积恒等式 $\operatorname{Im}(\overline{w_j}w_{j+1})=(\sqrt3/2)(|p|^2-|q|^2)$ 将四元数乘积的实部 $T=\operatorname{Re}(A_0A_1A_2)$ 化为
+
+$$
+T=-\eta_0\eta_1\eta_2+\sum_j\eta_j D_{j+1,j+2}-\frac{\sqrt3}{2}\Bigl(\sum_j\gamma_j\Bigr)(|p|^2-|q|^2).
+$$
+
+由 $d(1,A_j)=\arccos(-\eta_j)$、$d(A_0A_1A_2,1)=\arccos T$，置 $h=\max\{\max_j\eta_j,-T\}$，便有 $e=\pi/2+\arcsin h$。利用 $\gamma_j=\sqrt{1-\eta_j^2-|w_j|^2}$ 估计上式的乘积与内积，并将 $h\ge\eta_j$ 与 $h\ge-T$ 合用，得到 $|h|<1/5$ 及 $h\ge E/3+(51/120)|p|^2-\tfrac13((13/5)Q^2+25\rho^2 E)$。
+
+令 $\theta_*=\arccos t$、$k=c_*\sqrt{2/3}$。函数 $x\mapsto\cos(\theta_*+c_*\arcsin x)$ 在 $[-1/5,1/5]$ 上凹，故其在零点的切线给出 $\cos(c_*e)\le t-kh$。有理界 $3/5<c_*<61/100$、$496/1000<k<1/2$，连同 $|p|^3\le\rho|p|^2$、$|p|^4\le\rho^2|p|^2$ 和 $Q^2\le\rho Q$，代入上述两项估计，给出余量 $Q/200+(3/100)(|p|^2+E)$。因 $c_*e\in[0,\pi]$ 且圆距离是内积的反余弦，这给出半径 $c_*e$ 的拟合。余量在非零扰动下为正，取同一势在有限条有向棱上的最大误差便得到更小的半径。在零扰动处，外缘三增益均为 $I$，$e=\pi/2$，所需下界由 [@thm-appe-round-quaternion-k4-bounds] 给出。
+
+对第 2 款，记 $\theta=(a,b,c)$，将各增益的虚部写作 $s_j d_j$，其中 $s_j=\sin\theta_j\in[499/500,1]$，$d_j$ 为单位虚四元数。三对方向的弦长分别至多为 $u,v,u+v$。角域条件使 $u+v<1$，所以各方向的两两内积为正，向量 $m=\sum_j s_j d_j$ 与每个 $d_j$ 的内积也为正。以单位四元数共轭，把 $m/\|m\|$ 送到 $I$，则各虚部的 $I$ 分量均为正，标量扰动满足 $|\eta_j|=|\cos\theta_j|\le\rho$。记旋转后的 $d_j$ 在 $J,IJ$ 平面上的投影为复数 $x_j$，则 $w_j=s_jx_j$ 且 $\sum_j s_jx_j=0$。
+
+置 $S=\sum_j s_j$。加权方差恒等式给出 $S\sum_j s_j|x_j|^2=\sum_{j<k}s_js_k|x_j-x_k|^2$。又因 $s_j\le1$，有 $\sum_j|w_j|^2\le\sum_j s_j|x_j|^2$，并且每个 $s_js_k/S\le 1/(2+499/500)$。投影不增加弦长，零和序列 $w_j$ 的三点傅里叶展开只有两个非恒定模态。由帕塞瓦尔恒等式，
+
+$$
+3(|p|^2+|q|^2)=\sum_j |w_j|^2\le\frac{u^2+v^2+(u+v)^2}{2+499/500}\le3(3/50)^2.
+$$
+
+于是第 1 款适用，共轭保距使同一个势的两项拟合结论都能传回原坐标。若 $p=q=0$ 且 $\eta=0$，则三个轴向角均为 $\pi/2$，且旋转后的三个虚方向都等于 $I$。原方向因而重合，而 $u,v\in[0,\pi/2)$，故 $u=v=0$。在中心处，原增益已经是 [@thm-appe-round-quaternion-k4-bounds] 的循环四分之一转。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 角域包含整个闭的 $3.4^\circ\times4.2^\circ$ 角度盒，即 $a,b,c$ 各距 $90^\circ$ 至多 $3.4^\circ$，且 $0\le u,v\le4.2^\circ$，方位角 $w$ 任意。角域不等式的左边在该盒上至多为 $6(7\pi/300)^2<\frac{4497}{500}(3/50)^2$。辐棱规范化和共轭均保持比值，故四分之一转类是严格局部极大点。在紧致的规范化增益空间中，取该邻域内部的补集，即得全局等式尚待在 Lean 中处理的紧集。见 [@prob-appe-round-quaternion-k4-optimal-constant]。
+
 ::: {.problem #prob-appe-round-quaternion-k4-optimal-constant title="$K_4$ 上圆度量单位四元数增益的最优统一系数"}
-记 $C_{\mathrm{SU}(2)}(K_4)$ 为 $K_4$ 上所有正三角缺陷的圆度量单位四元数增益实例中，最小拟合半径与最大三角缺陷之比的上确界。由 [@thm-appe-round-quaternion-k4-bounds] 的统一上界和四分之一转实例得到 $c_*\le C_{\mathrm{SU}(2)}(K_4)\le4/5$。由 [@thm-appe-round-quaternion-equal-rim-minimax]，循环等增益外缘族的最大比值 $c_*$ 仅在四分之一转处取得。任意增益下的精确上确界仍是开放问题。
+记 $C_{\mathrm{SU}(2)}(K_4)$ 为 $K_4$ 上所有正三角缺陷的圆度量单位四元数增益实例中，最小拟合半径与最大三角缺陷之比的上确界。由 [@thm-appe-round-quaternion-k4-bounds] 的统一上界和四分之一转实例得到 $c_*\le C_{\mathrm{SU}(2)}(K_4)\le4/5$。由 [@thm-appe-round-quaternion-equal-rim-minimax]，循环等增益外缘族的最大比值 $c_*$ 仅在四分之一转处取得。[@thm-appe-round-quaternion-local-sharpness] 将这一严格界推广到四分之一转的角度邻域。对任意增益证明 $C_{\mathrm{SU}(2)}(K_4)=c_*$ 仍是开放的形式化问题。
 :::
 
 **小缺陷与上确界取到（手工推导）。** 缺陷 $\varepsilon$ 趋零时，将辐棱规范化为 $1$，再取切空间对数 $z_{ij}=\log g_{ij}$。每条外缘增益都距 $1$ 至多 $\varepsilon$，所以各对数的范数至多为 $\varepsilon$。三角乘积取对数的一阶项为三个对数之和，故加法三角缺陷至多为 $\varepsilon+O(\varepsilon^2)$。平均 $4$ 个加法星形势得到范数为 $O(\varepsilon)$ 的势，棱误差至多为 $\varepsilon/2+O(\varepsilon^2)$。将势取指数时的二阶误差仍为 $O(\varepsilon^2)$，因此重构误差与缺陷之比至多为 $1/2+O(\varepsilon)$。最小拟合半径是紧致势空间上连续误差函数的最小值，因而随增益连续。最大三角缺陷也是连续的。由于 $c_*>1/2$，充分小的正缺陷给出的比值都小于 $c_*$，故上确界在远离零缺陷的紧集上取到。

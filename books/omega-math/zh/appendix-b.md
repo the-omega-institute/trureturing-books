@@ -15,7 +15,7 @@
 | 黄金比无理数 $\varphi = (1+\sqrt{5})/2$ | 零公理黄金二次扩张 `QPhi` $= \mathrm{QuadPoly}(1, 1)$（纯有序对，满足 $\varphi^2 = \varphi + 1$、斐波那契幂律与五角切比雪夫闭合） | [第 12 章](ch12-algebraic-extensions-and-schur-positivity.md) |
 | 二次根号 $\sqrt{2}$（旋量归一与 CHSH 上界） | 零公理二次扩张 `QSqrt2` $= \mathrm{QuadPoly}(0, 2)$（纯有序对，满足 $\delta^2 = 2$、贝尔平方 $(8,0)$ 与精确旋量归一） | [第 12 章](ch12-algebraic-extensions-and-schur-positivity.md) |
 | 超越角度与三角函数 $\theta, \sin, \cos, \arccos$ | 有理保真度 $\kappa$、展度 $s = 1 - \kappa$、巴格曼三点环路不变量 $B$ 与格拉姆闭合行列式 $\det\mathbf{G}_3 = 1 + 2B - \Sigma\kappa \ge 0$ | [第 2 章](ch02-homogeneous-projective-line.md)、[第 6 章](ch06-bargmann-gram-spherical-trigonometry.md) |
-| 李矩阵指数 $e^X$、矩阵对数 $\ln R$ 与欧拉角 | 三维有理凯莱旋转 $\mathbf{R}(\boldsymbol{\sigma}) \in \mathrm{SO}(3, \mathbb{Q})$（双卡分母下界 $1/2$）与无根号伴随作用 $\operatorname{Ad}(p)$ | [第 5 章](ch05-rational-cayley-rotations.md) |
+| 李矩阵指数 $e^X$、矩阵对数 $\ln R$ 与欧拉角 | 三维有理凯莱旋转 $\mathbf{R}(\boldsymbol{\sigma}) \in \mathrm{SO}(3, \mathbb{Q})$、$\operatorname{Ad}(S^3(\mathbb{Q}))$ 上的 MRP 双卡（较大分母下界 $1/2$）与无根号伴随作用 $\operatorname{Ad}(p)$ | [第 5 章](ch05-rational-cayley-rotations.md) |
 | 带特权原点的向量加法与一阶换位子 $[X, Y]$ | 无原点普吕弗—贝尔流群 $[x, y, z]$、利雅三元曲率括号与有号毕达哥拉斯旋量双覆叠 `PythSpinor` | [第 4 章](ch04-heaps-and-lie-triple-curvature.md) |
 | 无穷小极限 $\lim_{h \to 0}$ 与 `Filter.Tendsto` 导数 | 二阶幂零射流商环 $\mathcal{J}_2(\mathbb{Q}) = \mathbb{Q}[\eta]/(\eta^3)$（两项精确闭式求逆与对称中点 $\alpha = 1/2$ 保球步长） | [第 7 章](ch07-second-order-jet-calculus.md) |
 | 切丛 $T_p M$、联络 $\Gamma^k_{ij}$ 与光滑斯托克斯公式 | 流群精确伸缩积分、无选择公理单纯形锥同伦（$dH + Hd = \mathrm{id}$）与二阶吻合三元球流形 $\mathcal{M}_\Omega$ | [第 9 章](ch09-telescoping-stokes-and-arc-manifold.md) |

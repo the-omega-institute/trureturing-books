@@ -8,7 +8,7 @@
      machine  fractran five prime registers as abacus rods; P_Ω moves beads from 2¹⁷ to 22; rail t
               mat2     four 2 × 2 bar matrices A², −tr(A)A, det(A)I and their running sum, which ends flat; rail: terms
      canvas   the static violet ball and the amber focus rolling on a rhumb line with cos²α = κ_time; rail: beats of
-              structural time (Schur innovation + edge weight 1/4, as in the example of §17.3)
+              structural time (Schur innovation + comparison-graph cycle increment, as in the example of §17.3)
    Every number of the ledger is an integer or a reduced fraction [p, q] of big integers, q > 0; the drawing alone uses
    doubles. Read-only probe: window.ARCLAB_DEBUG. */
 (() => {
@@ -339,19 +339,23 @@
     TR_Q = WEYL.reduce((s, [m, , q]) => plus(s, times(frac(m), times(q, q))), ZERO),
     WEINBERG = over(TR_T3, TR_Q);
   const deltaE = (n) => frac(BigInt(n * (n - 1)) / 2n - BigInt(3 * n - 6));
-  /* Structural time, beat by beat as in the example of §17.3: beat 1 re-scans the seed e₀, beats 2 … absorb new states.
-     Each beat adds the Schur innovation ⟨x⊥, x⊥⟩/⟨x, x⟩ of its state against the span so far (exact Gram–Schmidt) and
-     the weight 1/4 of the new comparison edge; an idle loop [x, x, x] = x re-scans the seed and adds nothing. */
+  /* Each new vertex attaches to the seed component. Additional comparisons within it close cycles.
+     The first three beats reproduce §17.3. An idle loop only re-scans the seed. */
   const SEED = [1n, 0n, 0n, 0n];
   const BEAT_STATES = [null, SEED, [1, 1, 0, 0], [1, 0, 1, 0], [1, 1, 1, 1], [2, 1, 1, 0], [1, -1, 0, 1]].map((v) => v && v.map(BigInt));
-  const EDGE = [1n, 4n];
+  // Vertex 0 is the seed. Each entry lists older vertices with edges to the new vertex.
+  const COMPARISONS = [[], [], [0], [0, 2], [0], [0, 2], [0, 3]];
   const CMAX = BEAT_STATES.length - 1;
   const dotF = (a, b) => a.reduce((acc, x, i) => plus(acc, times(x, b[i])), ZERO);
   function beatsOf(idle) {
     const basis = [SEED.map((v) => [v, 1n])],
-      out = [{ t: 0, state: SEED, schur: ZERO, edge: ZERO, d: ZERO, tau: ZERO, moved: 0 }];
+      out = [{ t: 0, state: SEED, schur: ZERO, graph: { vertices: 1, edges: 0, components: 1, betti: 0, deltaBetti: 0 }, d: ZERO, tau: ZERO, moved: 0 }];
     let tau = ZERO,
-      moved = 0;
+      moved = 0,
+      vertices = 1,
+      edges = 0,
+      betti = 0;
+    const components = 1;
     for (let t = 1; t <= CMAX; t++) {
       const raw = idle ? SEED : BEAT_STATES[t],
         x = raw.map((v) => [v, 1n]);
@@ -362,13 +366,17 @@
       }
       const n2 = dotF(perp, perp),
         schur = over(n2, dotF(x, x)),
-        fresh = raw.some((v, i) => v !== SEED[i]),
-        edge = fresh ? EDGE : ZERO,
-        d = plus(schur, edge);
+        comparisons = idle ? [] : COMPARISONS[t];
+      if (comparisons.length) vertices++;
+      edges += comparisons.length;
+      const nextBetti = edges - vertices + components,
+        deltaBetti = nextBetti - betti,
+        d = plus(schur, frac(deltaBetti));
+      betti = nextBetti;
       if (cmp(n2, ZERO) > 0) basis.push(perp);
       tau = plus(tau, d);
       if (cmp(d, ZERO) > 0) moved++;
-      out.push({ t, state: raw, perp, schur, edge, d, tau, moved });
+      out.push({ t, state: raw, perp, schur, graph: { vertices, edges, components, betti, deltaBetti }, d, tau, moved });
     }
     return out;
   }
@@ -1457,18 +1465,19 @@
         };
       default: {
         const b = m.beat,
-          tauTxt = m.t === 0 ? L('t = 0：只有种子，τ = 0', 't = 0: the seed only, τ = 0') : m.idle ? L(`t = ${m.t}：重扫种子，Δτ = 0，τ = 0`, `t = ${m.t}: the seed again, Δτ = 0, τ = 0`) : `t = ${m.t}: Δτ = ${fstr(b.schur)} + ${fstr(b.edge)} · τ = ${m.taus.slice(0, m.t + 1).map(fstr).join(' → ')}`;
+          tauTxt = m.t === 0 ? L('t = 0：只有种子，τ = 0', 't = 0: the seed only, τ = 0') : m.idle ? L(`t = ${m.t}：重扫种子，Δτ = 0，τ = 0`, `t = ${m.t}: the seed again, Δτ = 0, τ = 0`) : `t = ${m.t}: Δτ = ${fstr(b.schur)} + ${b.graph.deltaBetti} · τ = ${m.taus.slice(0, m.t + 1).map(fstr).join(' → ')}`;
         return {
           key: ['κ<sub>time</sub> + κ<sub>space</sub>', `${fstr(m.kt)} + ${fstr(m.ks)} = ${fstr(m.sum)}`, ` ${same(m.sum, ONE) ? yes : '✗'}`],
           r: [
-            [L('Δτ² = Δt² − Δx²（Δt² = Q）', 'Δτ² = Δt² − Δx² (Δt² = Q)'), `${m.dtau2} = ${m.dt2} − ${m.dx2} ${m.dtau2 === m.dt2 - m.dx2 ? yes : '✗'}`],
-            [L('Δτ/Δt · v · u（有理时）', 'Δτ/Δt · v · u (when rational)'), m.root && m.vel ? `${fstr(m.root)} · ${fstr(m.vel)} · u = ${fstr(m.u)}` : L(`κ_time = ${fstr(m.kt)} 不是有理数的平方`, `κ_time = ${fstr(m.kt)} is not a rational square`).replace('κ_time', 'κ<sub>time</sub>')],
+            [L('(Δτ<sub>mem</sub>)² = Δt² − Δx²（Δt² = Q）', '(Δτ<sub>mem</sub>)² = Δt² − Δx² (Δt² = Q)'), `${m.dtau2} = ${m.dt2} − ${m.dx2} ${m.dtau2 === m.dt2 - m.dx2 ? yes : '✗'}`],
+            [L('Δτ<sub>mem</sub>/Δt · v · u（有理时）', 'Δτ<sub>mem</sub>/Δt · v · u (when rational)'), m.root && m.vel ? `${fstr(m.root)} · ${fstr(m.vel)} · u = ${fstr(m.u)}` : L(`κ_time = ${fstr(m.kt)} 不是有理数的平方`, `κ_time = ${fstr(m.kt)} is not a rational square`).replace('κ_time', 'κ<sub>time</sub>')],
             ['γ² − (γv)²', m.gamma2 ? `${fstr(m.gamma2)} − ${fstr(m.gv2)} = ${fstr(minus(m.gamma2, m.gv2))} ${same(minus(m.gamma2, m.gv2), ONE) ? yes : '✗'}` : L('κ_time = 0：无定义', 'κ_time = 0: undefined').replace('κ_time', 'κ<sub>time</sub>')],
-            [L('结构时间 Δτ = ΔI<sub>Schur</sub> + Δb₁（边权 1/4）', 'Structural time Δτ = ΔI<sub>Schur</sub> + Δb₁ (edge 1/4)'), tauTxt],
+            [L('结构时间 Δτ = ΔI<sub>Schur</sub> + Δb₁', 'Structural time Δτ = ΔI<sub>Schur</sub> + Δb₁'),
+              tauTxt + '<br>b₁ = |E| − |V| + c = ' + b.graph.edges + ' − ' + b.graph.vertices + ' + ' + b.graph.components + ' = ' + b.graph.betti],
             [`ΔE(N) = C(N, 2) − (3N − 6)`, `N = ${m.nb}: ${m.pairs} − ${m.dof} = ${fstr(m.dE)}`],
             [L('sin²θ<sub>W</sub> = Tr(T₃²)/Tr(Q²)（MODEL）', 'sin²θ<sub>W</sub> = Tr(T₃²)/Tr(Q²) (MODEL)'), `${fstr(m.trT3)}/(${fstr(m.trQ)}) = ${fstr(m.weinberg)}`]
           ],
-          note: L('时间份额与空间份额是同一步比较预算的两份，和恒为 1；把 Δx² 移到等号右边，闵可夫斯基的负号就出现了。结构时间按第十七章的三拍例子：重扫种子 0，吸收 (1, 1, 0, 0) 与 (1, 0, 1, 0) 各 1/2 + 1/4；四维满秩之后舒尔创新为 0，只剩边的 1/4。', 'The time share and the space share are two parts of one step of comparison budget and always add up to 1; moving Δx² to the right-hand side brings out the minus sign of Minkowski. Structural time follows the three-beat example of Chapter 17: the seed again gives 0, absorbing (1, 1, 0, 0) and (1, 0, 1, 0) gives 1/2 + 1/4 each; once the four dimensions are spanned the Schur innovation is 0 and only the edge weight 1/4 remains.')
+          note: L('时间份额与空间份额是同一步比较预算的两份，和恒为 1；把 Δx² 移到等号右边，闵可夫斯基的负号就出现了。结构时钟从单个种子起步。第二拍把 h₁ 接到种子，第三拍把 h₂ 接到种子和 h₁，闭合一个三角形。第四拍把乘积 h₁h₂ 接到种子。第五、六拍分别把新点接到种子与 h₁、种子与 h₂，各闭合一个环。', 'The time share and the space share are two parts of one step of comparison budget and always add up to 1; moving Δx² to the right-hand side brings out the minus sign of Minkowski. The structural clock starts at the seed. Beat 2 attaches h₁ to the seed. Beat 3 attaches h₂ to both and closes a triangle. Beat 4 attaches the product h₁h₂ to the seed. Beats 5 and 6 attach each new vertex to the seed and to h₁ or h₂ respectively, adding one cycle each.')
         };
       }
     }
@@ -1523,7 +1532,7 @@
       balance: '|r|∞ · ∏ₚ |r|ₚ = 1',
       fractran: 'N → N·a/b for the first b | N',
       mat2: 'A² − tr(A)A + det(A)I = 0',
-      canvas: 'κtime + κspace = 1, Δτ² = Δt² − Δx²'
+      canvas: 'κtime + κspace = 1, (Δτ_mem)² = Δt² − Δx²'
     }[m.mode];
   }
 
@@ -1746,9 +1755,9 @@
           ],
           [-0.3, CMAX + 0.3],
           0,
-          3,
+          Math.ceil(run.at(-1)),
           intTicks(CMAX),
-          [[0, '0'], [0.75, '3/4'], [1.5, '3/2'], [2.25, '9/4']]
+          [[0, '0'], [1, '1'], [2, '2'], [3, '3'], [4, '4']]
         );
         g.line(idle.map((y, i) => [i, y]), P.dim, { width: 1.4, dash: [4, 3] });
         g.line(run.map((y, i) => [i, y]), P.cyan, { width: 1.8, alpha: m.idle ? 0.4 : 1 });
@@ -2079,8 +2088,8 @@
       'Each step the first gate whose denominator divides N opens, one prime exponent drops by 2 and the next rises by 1: 131072 = 2¹⁷ halts at 22 = 2·11 after 15 steps.'
     ],
     'static-canvas-memory-split': [
-      '紫色画布不动，琥珀焦点按 cos²α = 16/25 滚落：青色时间份额 16/25 加品红空间份额 9/25 恒为 1；三拍结构时间 τ = 0 → 3/4 → 3/2。',
-      'The violet canvas stays; the amber focus rolls at cos²α = 16/25: the cyan time share 16/25 plus the magenta space share 9/25 is 1; three beats of structural time τ = 0 → 3/4 → 3/2.'
+      '紫色画布不动，琥珀焦点按 cos²α = 16/25 滚落：青色时间份额 16/25 加品红空间份额 9/25 恒为 1；三拍结构时间 τ = 0 → 1/2 → 2。',
+      'The violet canvas stays; the amber focus rolls at cos²α = 16/25: the cyan time share 16/25 plus the magenta space share 9/25 is 1; three beats of structural time τ = 0 → 1/2 → 2.'
     ]
   };
   const cards = kit.cards($('presets'), {
@@ -2272,7 +2281,7 @@
         R1 = nm(adj, A);
       if (CH.some((x) => x !== 0) || L1.join() !== [d, 0, 0, d].join() || R1.join() !== [d, 0, 0, d].join()) chBad++;
     }
-    // the memory split: κ_time + κ_space = 1 and Δτ² = Δt² − Δx² on every P/Q with 0 ≤ P ≤ Q ≤ BOX.kQ
+    // the memory split: κ_time + κ_space = 1 and (Δτ_mem)² = Δt² − Δx² on every P/Q with 0 ≤ P ≤ Q ≤ BOX.kQ
     let splits = 0,
       splitSumBad = 0;
     for (let Qn = 1; Qn <= BOX.kQ; Qn++)
@@ -2317,8 +2326,8 @@
     const B = BENCH,
       bad = (n) => say(`不符 ${n} 处`, `${n} failures`);
     return say(
-      `打开页面时由脚本用大整数现算，是上面各条定理与推导的个别实例，不检验定理的前提。素数逃逸：空表与元素在 1 … ${BOX.list} 的 ${B.lists - 1} 个长度 1 … 3 的列表，有界最小因子是素数、整除积加一且不在表中，${bad(B.escBad)}。连分数：P ≤ ${BOX.P}、Q ≤ ${BOX.Q} 的 ${B.fracs} 个分数共 ${B.prefixes} 个前缀，行列式 = (−1) 的系数个数次方且渐近分数既约，${bad(B.cfBad)}。四分深度：c、d、p、q ∈ 1 … ${BOX.depth} 的 ${B.depths} 组，在 N₀、N₀ + 1、N₀ + 2 处 cq < dp·4ᴺ⁺¹ 且 N₀ 最小，${bad(B.depthBad)}。阿代尔：|P| ≤ ${BOX.rP}、Q ≤ ${BOX.rQ} 的 ${B.rats} 个 r，|r|∞ ∏ |r|ₚ = 1，${bad(B.adelicBad)}。自由群：暴力枚举的各层词数 ${B.counts.join('、')}，伴随整矩阵 5ᴸR(w) 模 5 为零 ${B.mod5Bad} 次、同层重合 ${B.collisions} 次；六个生成元的模 5 分裂与互逆零积，${bad(B.splitBad)}。FRACTRAN：n = 1 … ${BOX.trace}，第一道打开的门给出唯一后继，${bad(B.fracBad)}。Mat₂：${B.pairsAB} 对 (A, B) 的迹循环与行列式乘性，${bad(B.matBad)}；${B.chTried} 个 A 的凯莱—哈密顿与伴随恒等式，${bad(B.chBad)}。记忆切分：0 ≤ P ≤ Q ≤ ${BOX.kQ} 的 ${B.splits} 个 κ_time，和为 1、Δτ² = Δt² − Δx² 与 γ² − (γv)² = 1，${bad(B.splitSumBad)}；ΔE(N) 的两种写法，${bad(B.dEBad)}。数值演示，不是证明。`,
-      `Computed in big integers by the script when the page opens, single instances of the theorems and derivations above; it does not check their hypotheses. Prime escape: the empty list and the ${B.lists - 1} lists of length 1 … 3 with entries in 1 … ${BOX.list}: the bounded least factor is prime, divides the product plus one and is not in the list, ${bad(B.escBad)}. Continued fractions: the ${B.prefixes} prefixes of the ${B.fracs} fractions with P ≤ ${BOX.P}, Q ≤ ${BOX.Q}: determinant (−1) to the number of coefficients and reduced convergents, ${bad(B.cfBad)}. Quarter depth: ${B.depths} choices of c, d, p, q in 1 … ${BOX.depth}: cq < dp·4ᴺ⁺¹ at N₀, N₀ + 1, N₀ + 2 and N₀ least, ${bad(B.depthBad)}. Adelic: ${B.rats} rationals r with |P| ≤ ${BOX.rP}, Q ≤ ${BOX.rQ}: |r|∞ ∏ |r|ₚ = 1, ${bad(B.adelicBad)}. Free group: words per level by brute force ${B.counts.join(', ')}; the adjoint integer matrices 5ᴸR(w) vanish mod 5 ${B.mod5Bad} times and coincide within a level ${B.collisions} times; the mod-5 splits of the six generators and their zero products with inverses, ${bad(B.splitBad)}. FRACTRAN: n = 1 … ${BOX.trace}, the first open gate gives one successor, ${bad(B.fracBad)}. Mat₂: trace cyclicity and multiplicativity of det on ${B.pairsAB} pairs (A, B), ${bad(B.matBad)}; Cayley–Hamilton and the adjugate identities on ${B.chTried} matrices A, ${bad(B.chBad)}. Memory split: the ${B.splits} values κ_time = P/Q with 0 ≤ P ≤ Q ≤ ${BOX.kQ}: sum 1, Δτ² = Δt² − Δx² and γ² − (γv)² = 1, ${bad(B.splitSumBad)}; the two forms of ΔE(N), ${bad(B.dEBad)}. A numerical illustration, not a proof.`
+      `打开页面时由脚本用大整数现算，是上面各条定理与推导的个别实例，不检验定理的前提。素数逃逸：空表与元素在 1 … ${BOX.list} 的 ${B.lists - 1} 个长度 1 … 3 的列表，有界最小因子是素数、整除积加一且不在表中，${bad(B.escBad)}。连分数：P ≤ ${BOX.P}、Q ≤ ${BOX.Q} 的 ${B.fracs} 个分数共 ${B.prefixes} 个前缀，行列式 = (−1) 的系数个数次方且渐近分数既约，${bad(B.cfBad)}。四分深度：c、d、p、q ∈ 1 … ${BOX.depth} 的 ${B.depths} 组，在 N₀、N₀ + 1、N₀ + 2 处 cq < dp·4ᴺ⁺¹ 且 N₀ 最小，${bad(B.depthBad)}。阿代尔：|P| ≤ ${BOX.rP}、Q ≤ ${BOX.rQ} 的 ${B.rats} 个 r，|r|∞ ∏ |r|ₚ = 1，${bad(B.adelicBad)}。自由群：暴力枚举的各层词数 ${B.counts.join('、')}，伴随整矩阵 5ᴸR(w) 模 5 为零 ${B.mod5Bad} 次、同层重合 ${B.collisions} 次；六个生成元的模 5 分裂与互逆零积，${bad(B.splitBad)}。FRACTRAN：n = 1 … ${BOX.trace}，第一道打开的门给出唯一后继，${bad(B.fracBad)}。Mat₂：${B.pairsAB} 对 (A, B) 的迹循环与行列式乘性，${bad(B.matBad)}；${B.chTried} 个 A 的凯莱—哈密顿与伴随恒等式，${bad(B.chBad)}。记忆切分：0 ≤ P ≤ Q ≤ ${BOX.kQ} 的 ${B.splits} 个 κ_time，和为 1、(Δτ_mem)² = Δt² − Δx² 与 γ² − (γv)² = 1，${bad(B.splitSumBad)}；ΔE(N) 的两种写法，${bad(B.dEBad)}。数值演示，不是证明。`,
+      `Computed in big integers by the script when the page opens, single instances of the theorems and derivations above; it does not check their hypotheses. Prime escape: the empty list and the ${B.lists - 1} lists of length 1 … 3 with entries in 1 … ${BOX.list}: the bounded least factor is prime, divides the product plus one and is not in the list, ${bad(B.escBad)}. Continued fractions: the ${B.prefixes} prefixes of the ${B.fracs} fractions with P ≤ ${BOX.P}, Q ≤ ${BOX.Q}: determinant (−1) to the number of coefficients and reduced convergents, ${bad(B.cfBad)}. Quarter depth: ${B.depths} choices of c, d, p, q in 1 … ${BOX.depth}: cq < dp·4ᴺ⁺¹ at N₀, N₀ + 1, N₀ + 2 and N₀ least, ${bad(B.depthBad)}. Adelic: ${B.rats} rationals r with |P| ≤ ${BOX.rP}, Q ≤ ${BOX.rQ}: |r|∞ ∏ |r|ₚ = 1, ${bad(B.adelicBad)}. Free group: words per level by brute force ${B.counts.join(', ')}; the adjoint integer matrices 5ᴸR(w) vanish mod 5 ${B.mod5Bad} times and coincide within a level ${B.collisions} times; the mod-5 splits of the six generators and their zero products with inverses, ${bad(B.splitBad)}. FRACTRAN: n = 1 … ${BOX.trace}, the first open gate gives one successor, ${bad(B.fracBad)}. Mat₂: trace cyclicity and multiplicativity of det on ${B.pairsAB} pairs (A, B), ${bad(B.matBad)}; Cayley–Hamilton and the adjugate identities on ${B.chTried} matrices A, ${bad(B.chBad)}. Memory split: the ${B.splits} values κ_time = P/Q with 0 ≤ P ≤ Q ≤ ${BOX.kQ}: sum 1, (Δτ_mem)² = Δt² − Δx² and γ² − (γv)² = 1, ${bad(B.splitSumBad)}; the two forms of ΔE(N), ${bad(B.dEBad)}. A numerical illustration, not a proof.`
     );
   }
   for (const [lang, say] of [

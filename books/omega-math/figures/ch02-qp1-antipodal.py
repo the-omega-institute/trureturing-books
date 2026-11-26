@@ -1,13 +1,13 @@
-"""Homogeneous Cayley coordinates carry the projective line around a closed circle."""
+"""Homogeneous Cayley coordinates mark rational points on the ambient real circle."""
 
 from fractions import Fraction
 
 SIZE = (358, 430)
 ALT = {
-    "zh": "凯莱映射把 [0:1] 送到右端的过去锚点 [κ=1, s=0]，把 [1:1] 送到上方自对偶的现在锚点 "
+    "zh": "圆线是实圆。凯莱映射把 [0:1] 送到右端的过去锚点 [κ=1, s=0]，把 [1:1] 送到上方自对偶的现在锚点 "
           "[κ=s=1/2]，把 [1:0] 送到左端的未来对径点 [κ=0, s=1]。从左端出发，经过 (0, 1/2) 的弦"
           "把 [1:2] 送到 (3/5, 4/5)。",
-    "en": "The Cayley map sends [0:1] to the past anchor on the right (κ=1, s=0), [1:1] to the "
+    "en": "The outline is the real circle. The Cayley map sends [0:1] to the past anchor on the right (κ=1, s=0), [1:1] to the "
           "self-dual present at the top (κ=s=1/2), and [1:0] to the future antipode on the left (κ=0, s=1). "
           "The chord from the antipode through (0, 1/2) sends [1:2] to (3/5, 4/5).",
 }

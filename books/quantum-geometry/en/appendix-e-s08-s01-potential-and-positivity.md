@@ -685,8 +685,73 @@ $$
 At $a=\pi/2$ the spoke and rim cosines agree at latitude $q$, so $q=t(\pi/2)$. Hence $R(\pi/2)=f(0)$ and $e(\pi/2)=\pi/2$, giving ratio $c_*$. The full proof is checked by the Lean kernel.
 :::
 
+When the three rim gains vary independently, the optimal potential at the quarter turn still provides a starting point. Splitting the transverse displacement into two cyclic Fourier modes gives a potential with quantitative control on every edge.
+
+::: {.theorem #thm-appe-round-quaternion-local-sharpness title="Strict Local Sharpness at the Cyclic Quarter Turn and Its Weighted-Variance Angular Region" lean="D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionLocalSharpness.RoundQuaternionLocalSharpness.quarterLocal_strictFit, D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionLocalSharpness.RoundQuaternionLocalSharpness.quarterLocal_angularRegion"}
+Let $c_*=\frac{2}{\pi}\arccos(1/\sqrt3)$. On $K_4$, assign gain $1$ to the diagonal and the spokes at vertex $0$. Give the directed rim edges $12,23,31$ unit-quaternion gains $A_0,A_1,A_2$, respectively, and assign their inverses to the reverse edges. For the resulting gain assignment $g$, with rim indices $j\in\{0,1,2\}$, put $e=\max\{\max_j d(1,A_j),\,d(A_0A_1A_2,1)\}$.
+
+In both cases below, the defect $d(g_{ij}g_{jk},g_{ik})$ of every ordered triangle with pairwise distinct vertices is at most $e$, and some triangle attains $e$. Fit radii use the round distance defined above.
+
+1. **Strict quantitative fit in complex-pair Fourier coordinates.** In complex-pair coordinates $(z,h)\mapsto z+hJ$, suppose $A_j=(-\eta_j+i\gamma_j,w_j)$, where $\eta_j,\gamma_j\in\mathbb R$, $\gamma_j=\sqrt{1-\eta_j^2-|w_j|^2}>0$, $w_j=p\zeta^j+q\zeta^{-j}$, $p,q\in\mathbb C$, and $\zeta=(-1+i\sqrt3)/2$. Put $E=\max_j|\eta_j|$ and assume $\max\{|p|,|q|,E\}\le3/50$. The phase-normalized potential $\varphi=P(p,q)$ constructed below satisfies, on every directed edge $i\ne j$,
+
+   $$
+   \langle g_{ij},\varphi_i^{-1}\varphi_j\rangle_{\mathbb R}\ge\cos(c_*e)+\frac{|q|}{200}+\frac{3}{100}(|p|^2+E).
+   $$
+
+   The potential $\varphi$ fits $g$ at radius $c_*e$. If $(p,q,\eta)\ne(0,0,0)$, there is a real $R<c_*e$ at which the same $\varphi$ fits $g$. If $(p,q,\eta)=(0,0,0)$, no potential fits $g$ at any real radius $R<c_*e$.
+
+2. **Weighted-variance angular region.** In the basis $1,I,J,IJ$, suppose the rim gains are
+
+   $$
+   \begin{aligned}
+   A_0&=(\cos a,\sin a,0,0),\\
+   A_1&=(\cos b,\sin b\cos u,\sin b\sin u,0),\\
+   A_2&=(\cos c,\sin c\cos v,\sin c\sin v\cos w,\sin c\sin v\sin w).
+   \end{aligned}
+   $$
+
+   All angles are in radians and the azimuth $w\in\mathbb R$ is arbitrary. Assume $u,v\ge0$ and $u+v<\pi/2$, with $\max\{|a-\pi/2|,|b-\pi/2|,|c-\pi/2|\}\le17\pi/900$ and $u^2+v^2+(u+v)^2\le(4497/500)(3/50)^2$.
+
+   There is a potential $\varphi$ that fits $g$ at radius $c_*e$ and, if $(a,b,c,u,v)\ne(\pi/2,\pi/2,\pi/2,0,0)$, also fits $g$ at some real radius $R<c_*e$. At the center $(a,b,c,u,v)=(\pi/2,\pi/2,\pi/2,0,0)$, no potential fits $g$ at any real radius $R<c_*e$.
+:::
+
+::: {.proof #pf-appe-round-quaternion-local-sharpness}
+The triangles through vertex $0$ give the defects $d(1,A_j)$, and the rim triangle gives $d(A_0A_1A_2,1)$. Left and right multiplication and inversion preserve the round distance, so cyclic permutations and reversal preserve each defect. These four values exhaust the ordered triangles, and each is attained.
+
+For Part 1, set $\ell=\exp(-i\arg(q(\zeta-1))/2)$, with $\ell=1$ when $q=0$. Conjugation by $(\ell,0)$ rotates about $I$ and multiplies both modes by $\ell^2$, so the rotated coefficients satisfy $q(\zeta-1)=\sqrt3\,|q|$. Write $p,q$ for the rotated modes until we conjugate back. Set $t=1/\sqrt3$, $\rho=3/50$, $s=\sqrt{2/3}$, and $v_j=\zeta^{-j}$, with rim subscripts taken modulo $3$. Write $x=\operatorname{Re}p$ and $y=\operatorname{Im}p$. The coefficients are $F_0=\sqrt3(x^2-y^2)/96+xy/16$, $F_1=\sqrt3(x^2-y^2)/96-xy/16$, $F_2=-\sqrt3(x^2-y^2)/48$, $b_j=\operatorname{Re}(p v_{j-1})/\sqrt6$, $f_j=s(\sqrt3\,b_j+F_j-F_{j-1})$, $U=t+|q|/\sqrt6-(\sqrt3/12)|p|^2$.
+Use $1$ at the hub and the unit quaternion $X_j=(U+ib_j,\,v_j(\sqrt{1-U^2-b_j^2-f_j^2}+if_j))$ at vertex $j+1$. The parameter bounds make the radicand nonnegative. Conjugation preserves the inner product of each gain with its relative potential, so conjugating back at each vertex gives the phase-normalized potential in the original coordinates.
+
+Write the rim-edge inner product as $\langle X_jA_j,X_{j+1}\rangle_{\mathbb R}$. At $q=0$ and $\eta=0$, expansion gives common constant and quadratic terms $t-(\sqrt3/12)|p|^2$. The linear term cancels, and each cubic term has absolute value at most $(2/5)|p|^3$. Bound the terms in the two potentials and the gain by their norms and sum the products of total degree at least $4$, using $|p|\le\rho$. The resulting remainder is bounded by $3|p|^4$. Restoring $q$ and $\eta$ gives a common linear increase of $Q/\sqrt6$ from phase alignment, where $Q=|q|$. The other perturbation terms cost at most $(627/100)\rho Q+2\rho E$. Every spoke has inner product $U$, and the reverse edge has the same inner product as the forward edge. Thus every directed edge has inner product at least
+
+$$
+t+\frac{Q}{\sqrt6}-\frac{\sqrt3}{12}|p|^2-\frac25|p|^3-3|p|^4-\frac{627}{100}\rho Q-2\rho E.
+$$
+
+To compare these inner products with the defect, set $D_{jk}=\gamma_j\gamma_k+\operatorname{Re}(\overline{w_j}w_k)$. The cyclic area identity $\operatorname{Im}(\overline{w_j}w_{j+1})=(\sqrt3/2)(|p|^2-|q|^2)$ gives the real part $T=\operatorname{Re}(A_0A_1A_2)$ of the quaternion product as
+
+$$
+T=-\eta_0\eta_1\eta_2+\sum_j\eta_j D_{j+1,j+2}-\frac{\sqrt3}{2}\Bigl(\sum_j\gamma_j\Bigr)(|p|^2-|q|^2).
+$$
+
+Since $d(1,A_j)=\arccos(-\eta_j)$ and $d(A_0A_1A_2,1)=\arccos T$, the parameter $h=\max\{\max_j\eta_j,-T\}$ gives $e=\pi/2+\arcsin h$. Using $\gamma_j=\sqrt{1-\eta_j^2-|w_j|^2}$ to bound the products and inner products in the trace, and combining $h\ge\eta_j$ with $h\ge-T$, gives $|h|<1/5$ and $h\ge E/3+(51/120)|p|^2-\tfrac13((13/5)Q^2+25\rho^2 E)$.
+
+Put $\theta_*=\arccos t$ and $k=c_*\sqrt{2/3}$. Concavity of $x\mapsto\cos(\theta_*+c_*\arcsin x)$ on $[-1/5,1/5]$ gives its tangent bound $\cos(c_*e)\le t-kh$ at zero. The rational bounds $3/5<c_*<61/100$ and $496/1000<k<1/2$, together with $|p|^3\le\rho|p|^2$, $|p|^4\le\rho^2|p|^2$, and $Q^2\le\rho Q$, give a margin of $Q/200+(3/100)(|p|^2+E)$ when substituted into the two estimates. Since $c_*e\in[0,\pi]$ and the round distance is the arccosine of the inner product, this gives a fit at radius $c_*e$. For nonzero perturbations the margin is positive, so the maximum edge error of the same potential gives a smaller radius. At zero perturbation all three rim gains equal $I$ and $e=\pi/2$. The lower bound follows from [@thm-appe-round-quaternion-k4-bounds].
+
+For Part 2, write $\theta=(a,b,c)$ and express each imaginary part as $s_jd_j$, where $s_j=\sin\theta_j\in[499/500,1]$ and $d_j$ is a unit imaginary quaternion. The three pairwise chord lengths are bounded by $u,v,u+v$, respectively. The angular bound gives $u+v<1$, so the pairwise inner products are positive and $m=\sum_j s_jd_j$ has positive inner product with each $d_j$. Conjugate by a unit quaternion taking $m/\|m\|$ to $I$. The imaginary parts then have positive $I$ components, and the scalar perturbations satisfy $|\eta_j|=|\cos\theta_j|\le\rho$. Write $x_j$ for the complex projection of the rotated $d_j$ onto the $J,IJ$ plane. Then $w_j=s_jx_j$ and $\sum_j s_jx_j=0$.
+
+Put $S=\sum_j s_j$. Weighted variance gives $S\sum_j s_j|x_j|^2=\sum_{j<k}s_js_k|x_j-x_k|^2$. Since $s_j\le1$, we have $\sum_j|w_j|^2\le\sum_j s_j|x_j|^2$, and each $s_js_k/S\le 1/(2+499/500)$. Projection cannot increase chord lengths. The three-point Fourier expansion of the zero-sum sequence $w_j$ has only the two nonconstant modes, so Parseval's identity gives
+
+$$
+3(|p|^2+|q|^2)=\sum_j |w_j|^2\le\frac{u^2+v^2+(u+v)^2}{2+499/500}\le3(3/50)^2.
+$$
+
+Part 1 now applies, and inverse conjugation preserves both fit conclusions for the same potential. If $p=q=0$ and $\eta=0$, all three axial angles are $\pi/2$ and all three rotated imaginary directions equal $I$. The original directions therefore coincide, which forces $u=v=0$ since $u,v\in[0,\pi/2)$. At the center the original assignment is the cyclic quarter turn of [@thm-appe-round-quaternion-k4-bounds]. The full proof is checked by the Lean kernel.
+:::
+
+**Manual derivation.** The angular region contains the full closed $3.4^\circ\times4.2^\circ$ box, with each of $a,b,c$ within $3.4^\circ$ of $90^\circ$ and $0\le u,v\le4.2^\circ$ for arbitrary azimuth $w$. The left side of the angular inequality is at most $6(7\pi/300)^2<\frac{4497}{500}(3/50)^2$ on this box. Hub normalization and conjugation preserve the ratio, so the quarter-turn class is a strict local maximizer. In the compact space of hub-normalized gains, the complement of the interior of this neighborhood is the compact set that remains to be treated in Lean. See [@prob-appe-round-quaternion-k4-optimal-constant].
+
 ::: {.problem #prob-appe-round-quaternion-k4-optimal-constant title="The Optimal Universal Coefficient for Round Unit-Quaternion Gains on $K_4$"}
-Let $C_{\mathrm{SU}(2)}(K_4)$ be the supremum, over all round unit-quaternion gain assignments on $K_4$ with positive triangle defect, of the minimum fit radius divided by the maximum triangle defect. The uniform bound and the quarter-turn instance in [@thm-appe-round-quaternion-k4-bounds] give $c_*\le C_{\mathrm{SU}(2)}(K_4)\le4/5$. By [@thm-appe-round-quaternion-equal-rim-minimax], the equal cyclic rim family attains its largest ratio $c_*$ only at the quarter turn. The exact supremum over unrestricted gains remains open.
+Let $C_{\mathrm{SU}(2)}(K_4)$ be the supremum, over all round unit-quaternion gain assignments on $K_4$ with positive triangle defect, of the minimum fit radius divided by the maximum triangle defect. The uniform bound and the quarter-turn instance in [@thm-appe-round-quaternion-k4-bounds] give $c_*\le C_{\mathrm{SU}(2)}(K_4)\le4/5$. By [@thm-appe-round-quaternion-equal-rim-minimax], the equal cyclic rim family attains its largest ratio $c_*$ only at the quarter turn. The strict bound extends to an angular neighborhood of the quarter turn by [@thm-appe-round-quaternion-local-sharpness]. Proving $C_{\mathrm{SU}(2)}(K_4)=c_*$ for unrestricted gains remains an open formalization problem.
 :::
 
 **Attainment away from zero defect (`manual derivation`).** As the defect $\varepsilon$ tends to zero, gauge the spokes to $1$ and take tangent-space logarithms $z_{ij}=\log g_{ij}$. Each rim gain is within $\varepsilon$ of $1$, so its logarithm has norm at most $\varepsilon$. The first-order term in the logarithm of a triangle product is the sum of its three logarithms, giving an additive triangle defect of at most $\varepsilon+O(\varepsilon^2)$. Averaging the $4$ additive star potentials gives potentials of norm $O(\varepsilon)$ and edge errors at most $\varepsilon/2+O(\varepsilon^2)$. Exponentiating the potentials introduces an error of order $O(\varepsilon^2)$, so the ratio of the minimum fit radius to the defect is at most $1/2+O(\varepsilon)$. The minimum fit radius depends continuously on the gains because it minimizes a continuous error function over a compact space of potentials. The maximum triangle defect is continuous as well. Since $c_*>1/2$, all sufficiently small positive defects give ratios below $c_*$. The supremum is therefore attained on a compact set bounded away from zero defect.
