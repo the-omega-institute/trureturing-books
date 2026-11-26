@@ -1126,7 +1126,7 @@ for (const id of IDS) {
   await seek(1.5);
   const m = await state(),
     t = await regimeTexts();
-  check('between two stages the HUD says so and no stage chip is pressed', m.regime === 'moving' && m.kernel.k === 1 && near(m.kernel.f, 0.5, 1e-12) && t.big.includes('OmegaMath 2 → 3') && t.sub.includes('from stage 2 to stage 3') && (await textOf('tau')) === '2 → 3' && (await page.locator('#stageChips [aria-pressed="true"]').count()) === 0, JSON.stringify(t));
+  check('between two stages the HUD says so and no stage chip is pressed', m.regime === 'moving' && m.kernel.k === 1 && near(m.kernel.f, 0.5, 1e-12) && t.big.includes('QRat (Init) 2 → 3') && t.sub.includes('from stage 2 to stage 3') && (await textOf('tau')) === '2 → 3' && (await page.locator('#stageChips [aria-pressed="true"]').count()) === 0, JSON.stringify(t));
 }
 // the five stages of the three routes: what each does, and where it ends
 for (const [route, end, texts] of [
@@ -2085,7 +2085,7 @@ for (const lang of ['zh', 'en']) {
     const px = await solidPixels(p);
     check(`still ${lang}/${id}: the violet ball is opaque over ≥ 12% of the frame`, px.share >= 0.12 && (await violetShare(p)) >= 0.12, JSON.stringify([px.share, await violetShare(p)]));
     const tags = (await tagText(p)).join(' | ');
-    const labels = { kernel: ['z₀ → False', 'axiom', 'Mathlib.Real', 'propext', 'Classical.choice', 'Quot.sound', 'Filter.Tendsto', '4 #print axioms', '5 #eval', 'eight checks · ∅', 'κ(p0, pHalf) = 1/2'], carrier: ['(2, 2, 0, 0)', '(−3, −3, 0, 0)', 'pHalf = (1, 1, 0, 0)', 'κ = 1/2 = 0.5000', 'p0 · κ = 1 = 1.0000', 'pInf · κ = 0 = 0.0000', 'g120 · κ = 1/4 = 0.2500', 'Ad(p) = (x, −z, y)'], master: ['8/8 true', 'p0', 'pHalf', 'g120', 'pInf', '(1, 1, 1, −1)', 'z₀ = (0, 0, 0, 0)', 'z₂ = (2, 0, 0, 0)', 'x₀ = 1'], bridge: ['x = 1', 'S = 4/3 ≈ 1.3333', 'y = −2/3', '70 < 128', '7/128 < 1/10', 'Πℝ'], tasks: ['g120³ = p0', '396 ↔ 7480', 'False', 'Mathlib.Real', '5 #eval'] }[m.scene];
+    const labels = { kernel: ['z₀ → False', 'axiom', 'Mathlib.Real', 'propext', 'Classical.choice', 'Quot.sound', 'Filter.Tendsto', '4 #print axioms', '5 #eval', lang === 'zh' ? '八项算例 · ∅' : 'eight checks · ∅', 'κ(p0, pHalf) = 1/2'], carrier: ['(2, 2, 0, 0)', '(−3, −3, 0, 0)', 'pHalf = (1, 1, 0, 0)', 'κ = 1/2 = 0.5000', 'p0 · κ = 1 = 1.0000', 'pInf · κ = 0 = 0.0000', 'g120 · κ = 1/4 = 0.2500', 'Ad(p) = (x, −z, y)'], master: ['8/8 true', 'p0', 'pHalf', 'g120', 'pInf', '(1, 1, 1, −1)', 'z₀ = (0, 0, 0, 0)', 'z₂ = (2, 0, 0, 0)', 'x₀ = 1'], bridge: ['x = 1', 'S = 4/3 ≈ 1.3333', 'y = −2/3', '70 < 128', '7/128 < 1/10', 'Πℝ'], tasks: ['g120³ = p0', '396 ↔ 7480', 'False', 'Mathlib.Real', '5 #eval'] }[m.scene];
     check(`still ${lang}/${id} carries the labels its caption names`, labels.every((x) => tags.replace(/\s/g, '').toLowerCase().includes(x.replace(/\s/g, '').toLowerCase())), tags);
     const crossed = [...(await stageView(p, '#stage')).hud, ...(await labelOverlaps(p, '.stage .tag', 0)), ...(await capitalGreek(p))];
     check(`still ${lang}/${id}: the title, the legend and the labels keep clear of each other`, !crossed.length, JSON.stringify(crossed));
