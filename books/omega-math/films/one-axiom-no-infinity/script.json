@@ -316,8 +316,8 @@
      "任选一点临时当零，乘法就在它周围长回来；没有哪一点是王室。"
     ],
     [
-     "Lean keeps the laws as a class, not an axiom: a job posting, not a hire. Only a built example fills it.",
-     "Lean 把法则写成类型类，而不是公理：是招聘启事，不是录用通知。只有亲手造出的实例才能上岗。"
+     "The sample class lists six equations. The prototype checks examples of these laws.",
+     "示意类型类列出六条等式。原型通过计算核验这些定律的具体算例。"
     ]
    ],
    "cues": [

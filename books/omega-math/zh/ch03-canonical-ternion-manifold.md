@@ -7,7 +7,7 @@
 1. **为什么配备正定不变型的李代数至少要有三维才能非交换？** 在三维，这一条件又如何锁定叉积？
 2. **如何把这颗三维本原流形零公理、零根号、免商集地建在纯整数之上**——构造规范齐次整三元数载体 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$，并精确划清它与经典实阴影完备化之间的边界？
 
-在认识论分层上，本章清晰区分两条轨道：第一节与第四节的**四条经典阴影锚点定理**位于 `Mathlib` 实/复分析侧（依赖 `{propext, Classical.choice, Quot.sound}`），为三维刚性锁定与完备化边界提供外部对照基准；第二节与第三节的**八条零公理内核定理**（汇总为三个绿色定理盒，仅依赖 `OmegaInit` 与 `OmegaMath`，传递公理闭包为空集）则在纯整数与精确分数上直接锁死了欧拉—拉格朗日四平方乘性、射线流群三元公理、四维拉格朗日恒等式、保真度上界 $\kappa \le 1$、流群平移不变性与正交半转锚点的射影三元非交换见证；规范代表元约分、特征秩对照与第三节的其余整锚手算则按对应层级标明（`ARGUED` / `NUM`）。
+在认识论分层上，本章清晰区分两条轨道：第一节与第四节的**四条经典阴影锚点定理**位于 `Mathlib` 实/复分析侧（依赖 `{propext, Classical.choice, Quot.sound}`），为三维刚性锁定与完备化边界提供外部对照基准；第二节与第三节的**八条零公理内核定理**（汇总为三个绿色定理盒，仅依赖 `OmegaInit` 与 `OmegaMath`，传递公理闭包为空集）则在纯整数与精确分数上直接锁死了欧拉—拉格朗日四平方乘性、射线流群三元公理、四维拉格朗日恒等式、保真度上界 $\kappa \le 1$、流群平移不变性与绕正交轴各转四分之一圈的锚点的射影三元非交换见证；规范代表元约分、特征秩对照与第三节的其余整锚手算则按对应层级标明（`ARGUED` / `NUM`）。
 
 ## 3.1 低维退化与三维非阿贝尔锁定：经典阴影侧的冻结锚点 {#sec-ch03-dimension-lock}
 
@@ -71,7 +71,7 @@ $$
 
 经典阴影侧的刚性基准告诉我们，三维非阿贝尔几何正是四元数/旋转群的舞台。现在回到我们的零公理裸 CIC 建设任务：**怎样在完全不碰实数 $\mathbb{R}$、不碰平方根、不碰商公理 `Quot.sound` 的前提下，造出这颗三维非阿贝尔流形的可执行整数本体？**
 
-先看为什么“强行把四元组归一为单位向量”会在第一步就碰壁：考虑最简单不过的 $90^\circ$ 正交半转态 $p_{\mathrm{Half}} = (1, 1, 0, 0)$。它的平方范数是 $1^2 + 1^2 + 0^2 + 0^2 = 2$，而 $2$ 不是整数平方数！如果执意把它变成单位四元数，立刻被迫引入无理数 $\frac{1 + \mathbf{i}}{\sqrt{2}}$，整座零公理有理建筑当场破功。
+先看为什么“强行把四元组归一为单位向量”会在第一步就碰壁：考虑最简单不过的 $90^\circ$ 绕第一坐标轴旋转的状态 $p_{\mathrm{Half}} = (1, 1, 0, 0)$。它的平方范数是 $1^2 + 1^2 + 0^2 + 0^2 = 2$，而 $2$ 不是整数平方数！如果执意把它变成单位四元数，立刻被迫引入无理数 $\frac{1 + \mathbf{i}}{\sqrt{2}}$，整座零公理有理建筑当场破功。
 
 破局之法与[第二章](ch02-homogeneous-projective-line.md)如出一辙，只是从二维齐次对 $[P : Q] \in \mathbb{QP}^1$ 升维到四维齐次整四元组 $[w : x : y : z] \in \mathbb{QP}^3$——四个整数坐标模去非零缩放，恰好留下**严格 $3$ 个自由度**！更妙的是，只需两条纯整数操作就能把每条射影射线变成全宇宙唯一的规范代表元，彻底甩掉 `Quot.sound`：
 
@@ -247,9 +247,9 @@ $$
    两者在第四分量上显式分裂（$+1 \neq -1$），互保真度为 $\frac{(1 + 1 + 1 - 1)^2}{4 \cdot 4} = \frac{1}{4}$。三行整数乘法便见证了规范模型的非交换性。
 :::
 
-上述第 4 款中两枚正交半转锚点的次序敏感分裂并不止于手工验算：无需约分、无需商集公理 `Quot.sound`，下面这条冻结在零公理基础库 `OmegaInit` 与 `OmegaMath` 中的见证定理直接在射影射线等价关系 `Ternion.RayEquiv` 上锁死了非交换性：
+上述第 4 款中两枚绕正交轴各转四分之一圈的锚点的次序敏感分裂并不止于手工验算：无需约分、无需商集公理 `Quot.sound`，下面这条冻结在零公理基础库 `OmegaInit` 与 `OmegaMath` 中的见证定理直接在射影射线等价关系 `Ternion.RayEquiv` 上锁死了非交换性：
 
-::: {.theorem #thm-ch03-phalf-qhalf-noncommutative title="正交半转锚点的射影三元非交换见证（零公理内核定理）" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative"}
+::: {.theorem #thm-ch03-phalf-qhalf-noncommutative title="绕正交轴各转四分之一圈的锚点的射影三元非交换见证（零公理内核定理）" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative"}
 在零公理库 `OmegaMath`（仅依赖 `OmegaInit` 与 `OmegaMath`，零公理）中，取整四元数锚点 $p_0 := (1, 0, 0, 0)$、$p_{\mathrm{Half}} := (1, 1, 0, 0)$ 与 $q_{\mathrm{Half}} := (1, 0, 1, 0)$，沿用 [@thm-ch03-quaternion-norm-and-heap-laws] 中的整数三元代表元 $\operatorname{triad}(\mathbf{a}, \mathbf{b}, \mathbf{c}) := (\mathbf{a}\bar{\mathbf{b}})\mathbf{c}$ 与射影射线等价关系 $\sim_{\mathrm{ray}}$（`Ternion.RayEquiv`）。则反序三元积不共射线：
 
 $$

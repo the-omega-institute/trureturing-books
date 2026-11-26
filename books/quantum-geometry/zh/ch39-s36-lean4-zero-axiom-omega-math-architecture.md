@@ -4,7 +4,7 @@
 
 在 [§32.7](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md) 确立了无无穷、无超越数的有限有理数学体系 $\mathbf{Math}_\Omega$ 之后，一个最锋利的工程与逻辑落地问题迎面而来：**要在现代交互式定理证明器 Lean 4 中把这座大厦真正建起来，我们究竟需要改动 Lean 4 的底层内核吗？还是直接用 `axiom` 关键字把母公理 $\mathrm{AXIOM}\text{-}\Omega$ 写进头文件？抑或在现有内核之上另辟一条零公理构造路径？**
 
-本节给出终极架构裁决：**分毫不需要改动 Lean 4 坚不可摧的验证内核，更绝对禁止使用 `axiom` 关键字硬塞自定义公理**。真正与 $\mathbf{Math}_\Omega$ 天生同构的，恰恰是尚未导入 `Mathlib.Data.Real.Basic` 之前的 **Lean 4 原生归纳构造演算（Calculus of Inductive Constructions, CIC）裸内核**。只需绕开依赖选择公理与柯西商集的经典实数分支，用**纯整数规范射影结构（`structure`）**消除商公理、用**可计算类型类（`class`）**封装母公理并由实例证成相对无矛盾性、再配一层通往 `Mathlib` 的**单向阴影投影函子 $\Pi_{\mathbb{R}}$**，即可在零外部依赖下跑通 `#print axioms` 输出 **`does not depend on any axioms`** 的可执行 `OmegaMath` 内核；在此基座上，§32.8.4 进一步将该架构延展至特征秩 $5$ 有号旋量载体 `PythSpinor`、零公理二次扩张域 `QSqrt2` 与 `QPhi`、模方 $5$ 的 LPS 自由生成元与球谐赫克算子及有限拉马努金图 $X^{5, 13}$，以及任意阶 D-有限微分射流环 $J_N(\mathbb{Q})$ 与无 $\pi$ 马青有理包络（将三层 `OmegaMath` 工程路线图、证明有向无环图膨胀倍率对照与 `OmegaCore` 演进规划标为 **`MODEL`**；将十五条冻结核心定理——完备三元比较四元数同构、弦距读数恒等式、定基流群分解、射影核与旋量玻恩权重同一、四元数流群切比雪夫递推、拉格朗日—格拉姆恒等式、舒尔补二次型极小值可达定理、保格拉姆线性等距唯一延拓、有理六轴无正交开覆盖、既约分母最大公约数约化与连分数收敛子对数长度界、可判定单群素因子剥离定阶、二进制名称比较显式步数界，以及整数四分深度预算完备性与无极限实数上界传递定理——标为绿色 **`LEAN ✓`**；将 CIC 类型论文献、赫德伯格可判定相等性唯一性定理、独立内核审计记录、§32.8.4 的全称书面证明与 Lean `v4.35.0` 及双工作精度 Arb 实测标为 **`ARGUED` / `NUM`**）。
+本节给出终极架构裁决：**分毫不需要改动 Lean 4 坚不可摧的验证内核，更绝对禁止使用 `axiom` 关键字硬塞自定义公理**。真正与 $\mathbf{Math}_\Omega$ 天生同构的，恰恰是尚未导入 `Mathlib.Data.Real.Basic` 之前的 **Lean 4 原生归纳构造演算（Calculus of Inductive Constructions, CIC）裸内核**。只需绕开依赖选择公理与柯西商集的经典实数分支，用**纯整数规范射影结构（`structure`）**消除商公理、用**类型类（`class`）**示意六条等式并核验具体算例、再配一层通往 `Mathlib` 的**单向阴影投影函子 $\Pi_{\mathbb{R}}$**，即可在零外部依赖下跑通 `#print axioms` 输出 **`does not depend on any axioms`** 的可执行 `OmegaMath` 内核；在此基座上，§32.8.4 进一步将该架构延展至特征秩 $5$ 有号旋量载体 `PythSpinor`、零公理二次扩张域 `QSqrt2` 与 `QPhi`、模方 $5$ 的 LPS 自由生成元与球谐赫克算子及有限拉马努金图 $X^{5, 13}$，以及任意阶 D-有限微分射流环 $J_N(\mathbb{Q})$ 与无 $\pi$ 马青有理包络（将三层 `OmegaMath` 工程路线图、证明有向无环图膨胀倍率对照与 `OmegaCore` 演进规划标为 **`MODEL`**；将十五条冻结核心定理——完备三元比较四元数同构、弦距读数恒等式、定基流群分解、射影核与旋量玻恩权重同一、四元数流群切比雪夫递推、拉格朗日—格拉姆恒等式、舒尔补二次型极小值可达定理、保格拉姆线性等距唯一延拓、有理六轴无正交开覆盖、既约分母最大公约数约化与连分数收敛子对数长度界、可判定单群素因子剥离定阶、二进制名称比较显式步数界，以及整数四分深度预算完备性与无极限实数上界传递定理——标为绿色 **`LEAN ✓`**；将 CIC 类型论文献、赫德伯格可判定相等性唯一性定理、独立内核审计记录、§32.8.4 的全称书面证明与 Lean `v4.35.0` 及双工作精度 Arb 实测标为 **`ARGUED` / `NUM`**）。
 
 ::: {.remark #rem-ch39-sister-monograph-omega-math title="姊妹专著：OMEGA MATH 六卷全本、四座三维实验室与双附录索引"}
 本节浓缩呈现 `OmegaMath` 零公理形式化架构与量子几何主线的衔接；独立六卷姊妹专著 **[《OMEGA MATH》（`OMEGA//MATH`）六卷目录](https://github.com/the-omega-institute/trureturing-books/blob/main/books/omega-math/zh/SUMMARY.md)** 现已完备收录全书 **18 章**、终章及 **[附录 A](https://github.com/the-omega-institute/trureturing-books/blob/main/books/omega-math/zh/appendix-a.md)**／**[附录 B](https://github.com/the-omega-institute/trureturing-books/blob/main/books/omega-math/zh/appendix-b.md)**，集成 **14 个零公理 D5 模块共 127 条 `OmegaInit` $+$ `OmegaMath` 零公理冻结定理**与第 2 层 **11 条 `OmegaShadowBridge` 单向阴影函子定理**、**19 幅双语语义静态图**、四座三维交互实验室（**`OMEGA//SPIN`**、**`OMEGA//LAB`**、**`OMEGA//JET`**、**`OMEGA//ARC`**，合计 16 张实验卡）以及双语概览演示文稿 **`overview`**，系统覆盖纯 CIC 与齐次射影闭环、无原点流群与利雅三元恒常单位曲率、双卡无奇点凯莱旋转、无极限射流与凯莱—三角大一统、全阶无 $\pi$ 球面彼得—魏尔调和分析、赫维茨自由群 $F_3$ 与模方 $5$ 赫克—拉马努金有理谱论、$\Omega$-FRACTRAN 旋子机与空内核审计，并可直达收官 **[第十八章 空内核审计、单向阴影函子与六卷全息工作台](https://github.com/the-omega-institute/trureturing-books/blob/main/books/omega-math/zh/ch18-zero-axiom-kernel-and-shadow-bridge.md)**。
@@ -48,17 +48,17 @@
 
 `OmegaMath` 的同一份库源码在严格后端和常规后端分别编译。严格后端通过空内核重放核验零公理闭包。书中的定理徽章依据所引用的冻结声明。常规后端编译的若干 D5 定理使用 Lean 的标准命题外延公理 `propext`。 [OmegaMath 模块与验证](https://github.com/the-omega-institute/trureturing/blob/dev/src/README.md)
 
-正确的形式化架构采用**“第 0 层规范整数结构造实例 $+$ 第 1 层类型类抽接口证相容 $+$ 第 2 层单向阴影函子接 `Mathlib`”**的三层无公理设计（`MODEL` 架构总表结合 `NUM` 编译器核验）：
+正确的形式化架构采用**“第 0 层规范整数结构造实例 $+$ 第 1 层类型类接口与有限算例 $+$ 第 2 层单向阴影函子接 `Mathlib`”**的三层无公理设计（`MODEL` 架构总表结合 `NUM` 编译器核验）：
 
 | 架构维度 | 错误路线：硬写 `axiom` 声明 | 传统路线：`Mathlib` 经典 `Real` 栈 | 最优路线：`OmegaMath` 零公理构造栈 |
 | :--- | :--- | :--- | :--- |
 | **`#print axioms` 审计** | 暴露自定义 `axiom`（丧失无矛盾保证，外部检查器拒收） | 依赖 `{propext, Classical.choice, Quot.sound}` 三大经典公理 | **`does not depend on any axioms`（真零公理）** |
 | **可执行性（`#eval`）** | 彻底阻断，全部沦为不可归约常量 | 实数除法、流形与超越函数传染 `noncomputable` | **$100\%$ 可编译为原生 C / 机器码高速求值** |
-| **三维三元数与极点** | 抽象无坐标符号，漏边界即推 `False` | 依赖 $\mathbb{R}^4$ 子流形、$\pi$、开方与切空间图册 | **规范齐次整数四元组 `ProjTernion` / `CanonProjTernion`（零奇点、零根号）** |
+| **三维三元数与极点** | 抽象无坐标符号，漏边界即推 `False` | 依赖 $\mathbb{R}^4$ 子流形、$\pi$、开方与切空间图册 | **规范齐次整数四元组 `CanonProjTernion`（零奇点、零根号）** |
 | **微积分与曲率实现** | 需手工公理化导数算子 | `Filter.Tendsto` 无穷小极限与多卡转移映射 | **二阶射流有理环 $\mathbb{Q}[\eta]/(\eta^3)$ 纯四则代数** |
 | **自动形式化证明搜索效率** | 缺乏计算归约，极易掉入假命题陷阱 | 需清偿连续性、可微性与可测性滤子支线子目标 | **核心有理几何、微积分与有限证书由 `decide` 一步归约** |
 
-### 32.8.2.1 第 0 层：免除商集公理（`Quot.sound`）的规范整数三元载体 `ProjTernion` {#sec-ch39-layer0-projternion-zero-quotient}
+### 32.8.2.1 第 0 层：免除商集公理（`Quot.sound`）的规范整数三元载体 `CanonProjTernion` {#sec-ch39-layer0-projternion-zero-quotient}
 
 在 [§31.5](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md) 与 [§32.7](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md) 的罗德里格斯切参数化中，跨越对径赤道仍需切换正逆双卡；而在 Lean 4 第 0 层中，直接采用四元整数模去非零有理缩放的**齐次射影空间 $\mathbb{QP}^3 \cong \mathrm{SO}(3, \mathbb{Q})$**，可以一步构造出连商类型公理 `Quot.sound` 都完全省去的**唯一规范整数代表元**（`手工推导`）：
 
@@ -67,7 +67,7 @@
   - 现在正交赤道（$s = 1/2, \kappa = 1/2$）即 `pHalf = (1, 1, 0, 0)`；
   - 曾经令平直实数轴除零爆炸的未来对径闭合极点 $[1 : 0]$（原 $\infty$，$s = 1, \kappa = 0$）不过是一枚平平无奇的整数四元组 `pInf = (0, 1, 0, 0)`！
 - **连 $\sqrt{2}$ 都彻底消去的纯有理保真度 $\kappa$ 与有理伴随旋转 $\mathrm{Ad}(p) \in \mathrm{SO}(3, \mathbb{Q})$**：
-  注意一个精妙绝伦的代数事实（`PROJECT.md` §13 精确加强）：倘若强行要求四元旋量先归一化为单位向量，那么连最简单的 $90^\circ$ 正交赤道态 `pHalf = (1, 1, 0, 0)`（模方 $\lVert p_{\mathrm{Half}}\rVert^2 = 1^2 + 1^2 = 2$ 不是平方数！）都会被迫引入无理根号 $\frac{1 + \mathbf{i}}{\sqrt{2}}$。但在齐次射影三元载体 `ProjTernion` 中，物理可观测量与三维旋转**全部自动平方消根号**：
+  注意一个精妙绝伦的代数事实（`PROJECT.md` §13 精确加强）：倘若强行要求四元旋量先归一化为单位向量，那么连最简单的 $90^\circ$ 正交赤道态 `pHalf = (1, 1, 0, 0)`（模方 $\lVert p_{\mathrm{Half}}\rVert^2 = 1^2 + 1^2 = 2$ 不是平方数！）都会被迫引入无理根号 $\frac{1 + \mathbf{i}}{\sqrt{2}}$。但对非零齐次代表元，物理可观测量与三维旋转**全部自动平方消根号**：
   1. 玻恩射线保真度是内积的平方除以模方的乘积：
      $$
      \kappa(p, q) \;=\; \frac{\langle p, q\rangle^2}{\lVert p\rVert^2\,\lVert q\rVert^2} \;\in\; \mathbb{Q} \cap [0, 1],
@@ -78,25 +78,25 @@
      $$
      \lVert a \cdot \bar{b} \cdot c\rVert^2 \;=\; \lVert a\rVert^2\,\lVert b\rVert^2\,\lVert c\rVert^2 \;\ge\; 1 \times 1 \times 1 \;=\; 1,
      $$
-     在全空间范围内**永远不会落入零四元组 $(0,0,0,0)$，永远不会触发除零异常**！（同时精确区分两层拓扑覆盖：锁定首非零项正号的 `ProjTernion` 模去了全局符号 $\pm 1$，实现射影旋转群 $\mathbb{QP}^3 \cong \mathrm{SO}(3, \mathbb{Q})$，故 $120^\circ$ 旋子 `g120 = (1,1,1,1)` 三拍即闭合回 `(1,0,0,0)`；若需保留自旋双覆叠 $720^\circ$ 符号记忆，只需只做 $\gcd = 1$ 约分而不锁定首项正负号，此时三拍抵达 `(-1,0,0,0)`、六拍回到 `(+1,0,0,0)`。）
+     因此乘积仍然非零。规范化后，`g120 = (1,1,1,1)` 的射线在三拍后返回 `(1,0,0,0)`。其有理单位提升 $(1,1,1,1)/2$ 在三拍后到达 $-1$，六拍后回到 $+1$。一条本原射线有有理单位提升，当且仅当其代表元的模方是完全平方数。
 
 ::: {.viz src="lean4-zero-axiom-omega-math-sandbox" preset="canonical-proj-ternion-zero-quotient" height="500"}
-**第 0 层规范齐次整数三元载体 `ProjTernion`（免除 `Quot.sound` 与无理根号）**：紫色实体三元球面上，青色整数射线簇 `(2,2,0,0)`、`(-3,-3,0,0)` 经 `Nat.gcd` 约分与首非零正号锁定坍缩至唯一规范锚点 `pHalf = (1,1,0,0)`（模方 `‖p‖² = 2`，无需 `√2` 即给出精确 `κ = 1/2 = 0.5000` 与整系数旋转 `Ad(pHalf) ∈ SO(3, ℤ)`），同屏标出过去锚 `p0 = (1,0,0,0)`、对径闭合极点 `pInf = (0,1,0,0)`（`κ = 0/1 = 0.0000`，零除零奇点）与三拍闭合整旋子 `g120 = (1,1,1,1)`（`κ = 1/4 = 0.2500`）。
+**第 0 层规范齐次整数三元载体 `CanonProjTernion`（免除 `Quot.sound` 与无理根号）**：紫色实体三元球面上，青色整数射线簇 `(2,2,0,0)`、`(-3,-3,0,0)` 经 `Nat.gcd` 约分与首非零正号锁定坍缩至唯一规范锚点 `pHalf = (1,1,0,0)`（模方 `‖p‖² = 2`，无需 `√2` 即给出精确 `κ = 1/2 = 0.5000` 与整系数旋转 `Ad(pHalf) ∈ SO(3, ℤ)`），同屏标出过去锚 `p0 = (1,0,0,0)`、对径闭合极点 `pInf = (0,1,0,0)`（`κ = 0/1 = 0.0000`，零除零奇点）与三拍闭合整旋子 `g120 = (1,1,1,1)`（`κ = 1/4 = 0.2500`）。
 :::
 
-### 32.8.2.2 第 1 层：以 `class OmegaSpace` 封装母公理并由规范子类型实例证成相对无矛盾性 {#sec-ch39-layer1-omegaspace-typeclass-consistency}
+### 32.8.2.2 第 1 层：示意类型类 `OmegaSpace` 的六条等式 {#sec-ch39-layer1-omegaspace-typeclass-consistency}
 
-在第 1 层中，我们将母公理 $\mathrm{AXIOM}\text{-}\Omega$ 的三元比较算子 `triad` 与保真度核 `kappa` 及其六条核心恒等律定义为可计算类型类接口 `class OmegaSpace (M : Type)`，绝不使用 `axiom`。
+下方示意类型类 `class OmegaSpace (M : Type)` 列出三元搬运与保真读数的六条等式。完整的 AXIOM-Ω 另有非交换性、任意有限格拉姆矩阵半正定等条件。
 
-这里同样有一处必须按 `PROJECT.md` §13 写清的精确类型论边界（`手工推导`）：
+以下推导使用每条非零有理射线的规范代表元（`手工推导`）。
 
 - 在未加约束的原始四元整数记录 `ProjTernion`（全体 $\mathbb{Z}^4$）上，`normalize` 虽然将全体输入总化（把 `(0,0,0,0)` 映为 `(1,0,0,0)`，把未约分的 `(2,0,0,0)` 约分为 `(1,0,0,0)`），但全称量化的 `OmegaSpace` 定律在两个退化边界上并不对原始未约分元组逐字成立——对零元组 $z_0 = (0,0,0,0)$ 有 `kappa z0 z0 = ⟨0, 1⟩ ≠ ⟨1, 1⟩` 且 `triad p0 p0 z0 = p0 ≠ z0`；对未约分元组 $z_2 = (2,0,0,0)$ 有 `triad p0 p0 z2 = p0 ≠ z2`；
-- 唯有将可判定规范谓词 `IsCanonical (p : ProjTernion) : p ≠ ⟨0,0,0,0⟩ ∧ normalize p = p` 捆绑为规范非零子类型 **`CanonProjTernion`**（因 `ProjTernion` 具零公理可判定相等性，按赫德伯格定理该子类型同样无需 `Quot.sound` 或 `Classical.choice` 即可具构造性可判定相等），由于四元数共轭满足 $u\bar{u} = \lVert u\rVert^2 \ge 1$（纯正整数标量缩放被 `normalize` 精确消去）且 $\langle x u \bar{v}, y u \bar{v}\rangle^2 = \lVert u\rVert^4\lVert v\rVert^4 \langle x, y\rangle^2$，**`OmegaSpace` 的全部六条公理（左右吸收幂等律、三元结合律、保真度自反律、对称律与双侧流群不变律）在 `CanonProjTernion` 上全称无条件成立**！
+- 每条非零射线有唯一首非零项为正的本原整数代表元。将 $a\bar b c$ 规范化即得代表元上的三元运算。吸收律来自 $b\bar b=\lVert b\rVert^2$，结合律来自射线上的四元数结合律与代表元的唯一性。平方内积读数具有对称性与自反性。同右乘 $\bar u v$ 时，模方与内积都乘以 $\lVert u\rVert^2\lVert v\rVert^2$，故读数保持。
 
-在数理逻辑上，一旦在无公理的裸 CIC 内核中构造出了 `OmegaSpace` 的非平凡具体实例 `CanonProjTernion`（其中 `pHalf` 与 `qHalf` 显式见证非交换性 `triad pHalf p0 qHalf ≠ triad qHalf p0 pHalf`），就等于**在 CIC 内部构造性地严格证明了 $\mathrm{AXIOM}\text{-}\Omega$ 公理体系自身的相对无矛盾性（Relative Consistency）与非退化可满足性**——从根本上杜绝了手工 `axiom` 隐含矛盾的一切风险。与此同时，二阶射流有理环 `Jet2Rat`（$\mathbb{Q}[\eta]/(\eta^3)$）在一切可逆元（即常数项 $j_0 \neq 0$，对保真度核分母 $1 + x_0^2 \ge 1 > 0$ 在全体 $x_0 \in \mathbb{Q}$ 上恒成立！）上仅凭三次有理乘法便给出精确两项求逆 $(a_0 + a_1\eta + a_2\eta^2)^{-1}$，使微积分曲率验证同样由 `by decide` 一步归约。
+原型声明这六个字段，通过计算核验八个具体等式或不等式，其中包括一对不交换的元素。构造形式化实例还需对任意输入证明六个字段。二阶射流有理环 `Jet2Rat`（$\mathbb{Q}[\eta]/(\eta^3)$）在一切可逆元（即常数项 $j_0 \neq 0$，对保真度核分母 $1 + x_0^2 \ge 1 > 0$ 在全体 $x_0 \in \mathbb{Q}$ 上恒成立！）上仅凭三次有理乘法便给出精确两项求逆 $(a_0 + a_1\eta + a_2\eta^2)^{-1}$，使微积分曲率验证同样由 `by decide` 一步归约。
 
 ::: {.viz src="lean4-zero-axiom-omega-math-sandbox" preset="typeclass-consistency-and-jet2-decide" height="500"}
-**第 1 层 `OmegaSpace` 相对相容性核验与 `Jet2Rat` 一步 `decide` 反射**：紫色实体三元球面上实时步进 `omega_zero_axiom_master_check` 的八项合取断言——`{1, 1/2, 0, 1/4}` 有理保真度谱、`g120` 三拍归位 `gStep3 = p0`、左吸收幂等 `triad pHalf pHalf g120 = g120`、两枚整正交半转非对易合成 `(1,1,1,1) ≠ (1,1,1,-1)`，以及 `x₀ = 1` 处 `Jet2Rat.kappaJetAt` 输出精确 `{1/2, -1/2, +1/4}`，并支持切换查看 `CanonProjTernion` 规范子类型如何拦截原始 `(0,0,0,0)` 与 `(2,0,0,0)` 边界反例。
+**第 1 层 `OmegaSpace` 有限算例与 `Jet2Rat` 一步 `decide` 反射**：紫色实体三元球面上实时步进 `omega_zero_axiom_master_check` 的八项合取断言——`{1, 1/2, 0, 1/4}` 有理保真度谱、`g120` 三拍归位 `gStep3 = p0`、左吸收幂等 `triad pHalf pHalf g120 = g120`、两枚整正交四分之一转非对易合成 `(1,1,1,1) ≠ (1,1,1,-1)`，以及 `x₀ = 1` 处 `Jet2Rat.kappaJetAt` 输出精确 `{1/2, -1/2, +1/4}`，并支持切换查看 `CanonProjTernion` 规范子类型如何拦截原始 `(0,0,0,0)` 与 `(2,0,0,0)` 边界反例。
 :::
 
 ### 32.8.2.3 第 2 层：面向 `Mathlib` 的单向阴影投影函子 $\Pi_{\mathbb{R}}$（不造封闭孤岛） {#sec-ch39-layer2-mathlib-shadow-functor}
@@ -117,7 +117,7 @@ $$
 
 ## 32.8.3 零外部依赖 Lean 4 可执行原型（`v4.35.0` 实机核验）与三步演进路线 {#sec-ch39-lean4-zero-axiom-executable-prototype}
 
-下面这段完整代码**不导入 `Mathlib` 的任何一行代码（零 `import` 语句）**，仅凭 Lean 4（`v4.35.0`）原生裸内核，从零实现了零公理既约有理数 `QRat`、规范齐次整数三元数 `ProjTernion`、二阶无极限微积分环 `Jet2Rat`（$\mathbb{Q}[\eta]/(\eta^3)$）以及 `OmegaSpace` 类型类契约，并用**单条内核反射指令 `by decide`** 一步核验 `{0, 1/2, 1}` 因果有理锚点、`(1,1,1,1)` 三拍精确闭合、两枚整正交旋子非对易合成以及 $x_0 = 1$ 处的二阶代数导数。将本段代码原样送入 `lean --stdin`（`v4.35.0`），编译器零警告通过，末尾 `#print axioms` 逐字输出 **`'omega_zero_axiom_master_check' does not depend on any axioms`**：
+下面这段完整代码**不导入 `Mathlib` 的任何一行代码（零 `import` 语句）**，仅凭 Lean 4（`v4.35.0`）原生裸内核，从零实现了零公理既约有理数 `QRat`、原始整数四元组 `ProjTernion` 及其规范化函数、二阶无极限微积分环 `Jet2Rat`（$\mathbb{Q}[\eta]/(\eta^3)$）以及 `OmegaSpace` 类型类契约，并用**单条内核反射指令 `by decide`** 一步核验 `{0, 1/2, 1}` 因果有理锚点、`(1,1,1,1)` 三拍精确闭合、两枚整正交旋子非对易合成以及 $x_0 = 1$ 处的二阶代数导数。将本段代码原样送入 `lean --stdin`（`v4.35.0`），编译器零警告通过，末尾 `#print axioms` 逐字输出 **`'omega_zero_axiom_master_check' does not depend on any axioms`**：
 
 ```lean
 /-- 1. 零公理既约有理数 QRat（纯 Int × Nat 规范代表元，绕开标准库 Rat 内嵌的经典证明项） -/
@@ -144,7 +144,7 @@ def inv (a : QRat) : QRat := mkNorm a.den a.num
 
 end QRat
 
-/-- 2. 规范齐次整数三元数 ProjTernion ≅ ℚP³ ≅ SO(3, ℚ)（严格 3 自由度，全域零除零奇点、零无理数） -/
+/-- 2. 原始整数四元组。规范化为每个非零输入选取射线的唯一规范代表元。 -/
 structure ProjTernion where
   w : Int
   x : Int
@@ -220,7 +220,7 @@ def kappaJetAt (x0 : QRat) : Jet2Rat :=
 
 end Jet2Rat
 
-/-- 4. AXIOM-Ω 类型类契约（在规范非零子类型 CanonProjTernion 上全称成立，绝非危险的 axiom 声明） -/
+/-- 4. 三元搬运与保真度六条等式的示意接口。 -/
 class OmegaSpace (M : Type) where
   triad : M → M → M → M
   kappa : M → M → QRat
@@ -283,7 +283,7 @@ theorem omega_zero_axiom_master_check :
 **文献结果，未在本书形式化。** 为严守 `PROJECT.md` §13 与 §14 的精确证据标准，记录以下形式化与逻辑文献边界：
 
 1. **归纳构造演算（CIC）与 Lean 4 类型论内核**：归纳构造演算源于 T. Coquand 与 C. Paulin-Mohring（*COLOG-88*, LNCS **417**, 50–66, 1990）；Lean 4 的编译与内核架构见 L. de Moura 与 S. Ullrich（*CADE-28*, LNCS **12699**, 625–635, 2021），Lean 元理论与三大标准公理 `{propext, Classical.choice, Quot.sound}` 的形式刻画见 M. Carneiro（*The Type Theory of Lean*, Master's thesis, CMU, 2019）；
-2. **赫德伯格定理与免除商公理的规范子类型**：任何具备构造性可判定相等性（`DecidableEq`）的类型均无需附加公理即自动满足相等证明唯一性（UIP），见 M. Hedberg（*J. Funct. Program.* **8**(4), 413–436, 1998）。这正是第 1 层规范非零子类型 `CanonProjTernion` 能够在不引入 `Quot.sound` 与 `propext` 的前提下直接承载全称 `OmegaSpace` 定律的逻辑根基；
+2. **赫德伯格定理与免除商公理的规范子类型**：任何具备构造性可判定相等性（`DecidableEq`）的类型均无需附加公理即自动满足相等证明唯一性（UIP），见 M. Hedberg（*J. Funct. Program.* **8**(4), 413–436, 1998）。规范代表元的代数性质由 §32.8.2.2 推导。
 3. **独立内核重放与公理闭包审计标准**：如 `PROJECT.md` §14 所登记，现代高可信形式化工程通过静态源码扫描（确认零 `sorry`、零 `opaque`、零自定义 `axiom`）配合 `leanchecker`、`lean4lean`、`nanoda`、`con-leche` 与 `comparator` 等多套独立内核重放审查 `#print axioms` 闭包：在导入了 `Mathlib` 的模块中证明的定理（包括 `Mathlib.Real` 分析定理，以及宿主文件导入了 `Mathlib` 算术策略库的冻结证明 `BurnolRationalDepthBudget.rationalQuarterDepth_integer_sound`），其公理闭包为 `{propext, Classical.choice, Quot.sound}`；而纯自然数可执行函数 `rationalQuarterDepth` 本身及其具体求值 `rationalQuarterDepth 7 2 1 10 = 2`，连同本节第 0–1 层零导入文件内的纯 CIC 构造定理 `omega_zero_axiom_master_check`，则进一步将 `#print axioms` 闭包压缩至空集 $\varnothing$（`does not depend on any axioms`）——这也从编译器层面印证了将第 0–1 层隔离在零导入 `OmegaCore` 模块中的工程必要性。
 :::
 
@@ -404,5 +404,5 @@ $$
 在下面这座完整三维实验室中，先在第一卡拨动三种架构路线，亲眼核对纯 CIC 内核上青色归约束如何零阻碍打出 **`does not depend on any axioms`**，再切入第二卡与第三卡拖动紫色齐次三元球面上的整数射线簇，看 `pHalf = (1, 1, 0, 0)` 与 `qHalf = (1, 0, 1, 0)` 不借半个根号与半个 $\pi$ 一步非对易合成为纯整数体对角旋子 **`(1, 1, 1, 1)`** 并在三拍后归位 **`(1, 0, 0, 0)`**，最后停在第四卡与第五卡检视有理舒尔补 $S = \frac{4}{3}$ 与整数四分深度 $70 < 128$ 如何经单向阴影函子 $\Pi_{\mathbb{R}}$ 无极限接通经典分析；结合 §32.8.4 确立的 `PythSpinor` 特征秩 $5$ 双覆叠提升、`QSqrt2` 与 `QPhi` 零公理二次扩张域、模方 $5$ 的 LPS 自由生成元 $S_5$ 与拉马努金扩展子 $X^{5, 13}$，以及任意阶 D-有限射流环 $J_N(\mathbb{Q})$ 与无 $\pi$ 马青有理包络，从三维概念场封顶、不可表三元数与五种无损流群表示出发，历经无常数有理重构、精确结构数学与无无穷有理数学 $\mathbf{Math}_\Omega$，直到落定为 Lean 4 纯 CIC 内核里一行 `by decide` 即可零公理归约的 `OmegaMath` 基座，整座第三十二章在此圆满收口——现在，手握这门纯粹有理的三元数场语言，让我们翻开第八部压轴之卷 **[第三十三章 万力归弧与极小圆弧场大统一（AF-GUT）](ch33-unified-arc-forces-and-af-gut.md)**！
 
 ::: {.viz src="lean4-zero-axiom-omega-math-sandbox" height="620"}
-完整实验室：在“OmegaMath 零公理纯 CIC 构造栈 · 证明即计算”与“传统实无穷与自定义公理对照（MODEL）· 计算阻断与滤子膨胀”双透镜间切换（窄屏与章节嵌入视图亦可在巡览条旁一键切换透镜），依次巡览五阶编译流水线与三路线公理审计、免除 `Quot.sound` 的第 0 层规范整数三元载体 `ProjTernion`、第 1 层 `OmegaSpace` 相容性核验与 `Jet2Rat` 一步 `decide` 反射、第 2 层有理舒尔补证书与单向阴影函子 $\Pi_{\mathbb{R}}$，以及四类数学物理任务与 `OmegaCore` 三步路线基准五张实验卡，支持切换三种形式化架构路线、四类典型任务与五阶流水线节点，交互点选整数四元数射线观察 `Nat.gcd` 规范归约、三拍闭合与 `ℚ[η]/(η³)` 射流求逆，并在底部两条对照小图中同步观察第一图四类任务下零公理 `OmegaMath` 对比 `Mathlib.Real` 的证明节点规模与归约步数，以及第二图整数四分深度 $N$ 下精确分数预算 $(\frac{c}{d})/4^{N+1}$ 单向锁入目标阈值 $\frac{p}{q}$。十五条冻结 `LEAN ✓` 声明、`ARGUED` 类型论与多内核审计文献、`MODEL` 三层架构总表及 `NUM` 实机核验在依据栏与理论抽屉中分层列出。
+完整实验室：在“OmegaMath 零公理纯 CIC 构造栈 · 证明即计算”与“传统实无穷与自定义公理对照（MODEL）· 计算阻断与滤子膨胀”双透镜间切换（窄屏与章节嵌入视图亦可在巡览条旁一键切换透镜），依次巡览五阶编译流水线与三路线公理审计、免除 `Quot.sound` 的第 0 层规范整数代表元 `CanonProjTernion`、第 1 层 `OmegaSpace` 有限算例与 `Jet2Rat` 一步 `decide` 反射、第 2 层有理舒尔补证书与单向阴影函子 $\Pi_{\mathbb{R}}$，以及四类数学物理任务与 `OmegaCore` 三步路线基准五张实验卡，支持切换三种形式化架构路线、四类典型任务与五阶流水线节点，交互点选整数四元数射线观察 `Nat.gcd` 规范归约、三拍闭合与 `ℚ[η]/(η³)` 射流求逆，并在底部两条对照小图中同步观察第一图四类任务下零公理 `OmegaMath` 对比 `Mathlib.Real` 的证明节点规模与归约步数，以及第二图整数四分深度 $N$ 下精确分数预算 $(\frac{c}{d})/4^{N+1}$ 单向锁入目标阈值 $\frac{p}{q}$。十五条冻结 `LEAN ✓` 声明、`ARGUED` 类型论与多内核审计文献、`MODEL` 三层架构总表及 `NUM` 实机核验在依据栏与理论抽屉中分层列出。
 :::

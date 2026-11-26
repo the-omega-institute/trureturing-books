@@ -70,7 +70,7 @@ $$
 
 ## 11.2 零公理阶乘泛函、齐次不变性与精确有理矩递推 {#sec-ch11-intrinsic-functional-and-recurrence}
 
-现在把梯子抽走：彻底忘掉 $\mathbb{R}^4$、$e^{-r^2}$ 与 $\pi$，直接在规范整数三元数 `ProjTernion` 的零次齐次有理函数空间上给出无 $\pi$ 哈尔期望的纯代数定义。
+现在把梯子抽走：彻底忘掉 $\mathbb{R}^4$、$e^{-r^2}$ 与 $\pi$，直接在非零整四元数代表元 的零次齐次有理函数空间上给出无 $\pi$ 哈尔期望的纯代数定义。
 
 ::: {.definition #def-ch11-pi-free-haar title="三维球面无 π 有理阶乘哈尔期望泛函"}
 对任意非负整数四元组 $(p, q, r, s) \in \mathbb{N}^4$，记总次数 $2m = p + q + r + s$。定义零次齐次单项式 $w^p x^q y^r z^s / \lVert q\rVert^{p+q+r+s}$ 上的有理线性泛函 $\mathbb{E}_{\mathbb{T}_3}$：
