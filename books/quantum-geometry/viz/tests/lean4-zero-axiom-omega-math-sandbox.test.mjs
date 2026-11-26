@@ -792,7 +792,7 @@ for (const lang of ['zh', 'en']) {
   );
   check(
     lang + ' drawer states the five cards with the numbers of the script',
-    ['= 0.5000', '= 1.0000', '= 0.0000', '= 0.2500', '≈ 1.3333', '70 < 2 · 4³ = 128', '(1/4)³ C ≤ 7/128 < 1/10', '≈ 0.0547', '(x, y, z) ↦ (x, −z, y)', 'g120 → (1, −1, −1, −1) → p0', '(1, 1, 1, 1) ≠ (1, 1, 1, −1)', '(1/2, −1/2, 1/4)', '⟨0, 1⟩ = ⟨1, 1⟩', 'Classical.choice', CENSUS.real.join(' · '), CENSUS.omega.join(' · '), TASK_STEPS.join(' · '), 'MODEL'].every((x) => drawer.includes(x)) && (lang === 'zh' ? /不是证明/ : /not a proof/).test(drawer),
+    ['= 0.5000', '= 1.0000', '= 0.0000', '= 0.2500', '≈ 1.3333', '70 < 2 · 4³ = 128', '(1/4)³ C ≤ 7/128 < 1/10', '≈ 0.0547', '(x, y, z) ↦ (x, −z, y)', 'g120 → (1, −1, −1, −1) → p0', '(1, 1, 1, 1) ≠ (1, 1, 1, −1)', '(1/2, −1/2, 1/4)', '⟨0, 1⟩ = ⟨1, 1⟩', lang === 'zh' ? 'omega_zero_axiom_master_check 列出 0 条公理' : '0 axioms for the finite theorem omega_zero_axiom_master_check', 'OmegaMath.Projective.Circle', lang === 'zh' ? 'OmegaShadowBridge.cayley_circle_unit 有 3 条' : 'OmegaShadowBridge.cayley_circle_unit has 3', CENSUS.real.join(' · '), CENSUS.omega.join(' · '), TASK_STEPS.join(' · '), 'MODEL'].every((x) => drawer.includes(x)) && (lang === 'zh' ? /不是证明/ : /not a proof/).test(drawer),
     drawer.slice(0, 300)
   );
 }
