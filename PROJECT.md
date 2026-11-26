@@ -56,6 +56,8 @@
 
 书内条目、原始文献、外部代码和媒体依照[写作手册第 4 节](docs/AUTHORING.md#4-引用与链接)引用。引用本书时注明中英文版和条目或章节。第 14 节的外部证明引用分别指向固定版本的命题定义、终端定理和独立核验记录。
 
+**Lean 公理与重放的忠实性。** 正文、图注、可视化、演示文稿及影片凡声称零公理或内核重放，须写明所钉提交、后端和受检范围。常规官方构建的公理依赖取冻结状态片顶层 `axioms`，书库据此生成徽章与统计。严格端的测量取同一声明的 `strict_omega.axioms`，缺项即无该端测量证据。严格库的空内核重放须标明所选库根及其导入闭包。D5 双后端冻结证据须标明双端编译、接口对照与分端测量。每个复现命令须与文字所述对象一致。两端记录不同的例子及复核方法见 [《OMEGA MATH》附录 A](books/omega-math/zh/appendix-a.md#sec-om-appa-audit-checklist)。
+
 ## 5. 数学排版与零模型标识铁律
 
 - **数学宏规范**：行内公式用 `$...$`，独立公式块用单独成行且前后留空的 `$$...$$`，多行推导用 `\begin{aligned} ... \end{aligned}`。禁用反斜杠圆括号与反斜杠方括号数学定界符；禁用 `physics` 宏包中未在 `tools/tbook/mathrender.py` 注册的左矢、右矢与内积简写命令，一律写为标准命令 `\lvert\psi\rangle`、`\langle\phi\rvert`、`\langle\phi\mid\psi\rangle`（或 `tools/tbook/mathrender.py` 已注册的 `\ketbra`、`\dyad`、`\Tr`、`\vv`、`\norm`）。

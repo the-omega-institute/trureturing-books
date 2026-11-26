@@ -32,7 +32,7 @@
 
 | 证据层级与标识 | 仓库范围与核验机制 | 公理闭包与逻辑边界 | 代表内容与索引入口 |
 | :--- | :--- | :--- | :--- |
-| **第 1 层 · 零公理内核核心**（`LEAN ✓`，`axioms: []`） | `OmegaInit`（10 模块）$+$ `OmegaMath`（78 模块）共 88 模块通过全新 `mkEmptyEnvironment` 空内核重放；14 个零公理 D5 冻结模块导出 127 条公开定理 | 严格 `module` $+$ `prelude`，零 `Init`/`Mathlib` 导入，传递公理闭包严格为空集 $\varnothing$（无 `propext`、`Classical.choice`、`Quot.sound`） | 射影闭环、三元流群与利雅三元系恒常单位曲率 $K \equiv +1$、三维凯莱旋转与双卡无奇点分母半界（$\max(D_+, D_-) \ge 1/2$）及闭球锁定、巴格曼—格拉姆与有理球面正弦／勾股律、二阶射流与 $\alpha$-采样／对称中点凯莱驻球守恒、任意阶 D-有限射流复合链式法则与凯莱—三角大一统、单纯形锥同伦、全阶偶次特征标乘积与全阶无 $\pi$ 彼得—魏尔哈尔正交归一、二次扩张与有理舒尔正定、欧几里得／连分数／深度预算、$S_5$ 模 $5$ 非消去与自由群 $F_3 \hookrightarrow \mathrm{SO}(3,\mathbb{Q})$ 伴随单射、模方 $5$ 赫克迹与裕度、`Mat2`（含行列式乘性与凯莱—哈密顿）、非阿贝尔 FRACTRAN 及四项显式核心见证（正交非交换、`g120_spin` 六拍双覆叠、正交角盈 $\frac{1}{4}$、$P_\Omega$ 停机于 $22$）；清单见 [附录 A §A.1–§A.3](appendix-a.md#sec-om-appa-omegainit) |
+| **第 1 层 · 严格库与 D5 核心定理** | 严格库选定的导入闭包在 `mkEmptyEnvironment` 中重放。D5 定理作双端编译对照和分端测量 | 严格库闭包的传递公理为空。表列 D5 定理的 `strict_omega.axioms` 均为 `[]`，官方端另见顶层 `axioms` | 射影闭环、三元流群与利雅三元系恒常单位曲率 $K \equiv +1$、三维凯莱旋转与双卡无奇点分母半界（$\max(D_+, D_-) \ge 1/2$）及闭球锁定、巴格曼—格拉姆与有理球面正弦／勾股律、二阶射流与 $\alpha$-采样／对称中点凯莱驻球守恒、任意阶 D-有限射流复合链式法则与凯莱—三角大一统、单纯形锥同伦、全阶偶次特征标乘积与全阶无 $\pi$ 彼得—魏尔哈尔正交归一、二次扩张与有理舒尔正定、欧几里得／连分数／深度预算、$S_5$ 模 $5$ 非消去与自由群 $F_3 \hookrightarrow \mathrm{SO}(3,\mathbb{Q})$ 伴随单射、模方 $5$ 赫克迹与裕度、`Mat2`（含行列式乘性与凯莱—哈密顿）、非阿贝尔 FRACTRAN 及四项显式核心见证（正交非交换、`g120_spin` 六拍双覆叠、正交角盈 $\frac{1}{4}$、$P_\Omega$ 停机于 $22$）；清单见 [附录 A §A.1–§A.3](appendix-a.md#sec-om-appa-omegainit) |
 | **第 2 层 · 单向阴影函子**（`OmegaShadowBridge`，`LEAN ✓` 桥接） | `D5/S3/Quantum/AURICOmega/OmegaShadowBridge` 共 11 条公开桥接定理（附 10 条私有引理） | 外层单向投射 $\Pi_{\mathbb{R}}$，公理按层阶梯递进（`[]` $\to$ `propext` $\to$ `{Quot.sound, propext}` $\to$ 经典三公理），绝不向第 0–1 层回流 | `Omega.Nat`/`Omega.Int`/`Omega.IntRatio` 环同态、交叉相乘商坍缩及凯莱单位圆／保真度闭区间实阴影；详见 [第 18 章](ch18-zero-axiom-kernel-and-shadow-bridge.md) 与 [附录 A §A.4](appendix-a.md#sec-om-appa-shadow-bridge) |
 | **第 3 层 · 经典 Mathlib 阴影锚点**（`LEAN ✓` 经典对照） | 全书卷 I–VI 引用的 `trureturing@dev` 经典连续统对照声明（索引见 [附录 A §A.5](appendix-a.md#sec-om-appa-classical-anchors)，动态分类计数见 [§B.4](#sec-om-appb-live-stats)） | 经 Lean 4 内核检查冻结，位于 `{propext, Classical.choice, Quot.sound}` 侧，仅作外部连续统刻度尺 | 三维不变度量叉积锁定、自旋因子分类、彼得—魏尔矩阵元稠密、厄米舒尔极小、阿代尔 $p$-进乘积公式、托普利茨单位圆判据、克雷洛夫界与可逆 QRAM |
 | **第 4 层 · 构造性手工推导与文献边界**（`ARGUED` / `手工推导`） | 作者与评审负责的完整初等代数推导及注明出处的经典文献边界 | 不佩戴 Lean 内核徽章；其中纯构造性高阶命题仍可继续下沉至零公理内核 | $V_3 \dots V_6$ 高阶实际矩阵赫克谱界推导与有理洛伦兹／温伯格 $3/8$ 迹比推导（[第 15 章](ch15-rational-hecke-ramanujan-spectrum.md)、[第 17 章](ch17-observer-universe-and-single-gradient.md)）、马青交错级数向经典 $\pi$ 的单向阴影归结（[第 8 章](ch08-dfinite-jets-and-cayley-unification.md)），以及雅可比 $r_4(n)$、艾希勒—德利涅—LPS 全谱界、辛格—索普曲率分解、赫德伯格定理与图灵／巴拿赫—塔斯基／埃尔米特—林德曼等经典文献结果 |
@@ -77,7 +77,7 @@
 
 ## B.4 全书动态形式化统计 {#sec-om-appb-live-stats}
 
-依照本书库“源文件唯一真理、统计产物编译生成”的契约，本节不手工维护全书定理与环境计数副本，而是直接嵌入构建系统依据 `trureturing.lock.json`（所钉 `trureturing@dev` 提交 [{commit}](trureturing:)）实时编译的全书证据摘要表，其中明确分列零公理（`axioms: []`）与依赖经典公理的 Lean 验证环境次数：
+本节嵌入构建系统依据 `trureturing.lock.json` 生成的全书证据摘要。无公理、依赖公理与公理状态未知的环境次数采用冻结记录的官方端顶层 `axioms`。同一环境引用多条定理时，只有每条都有空公理记录才计作无公理。严格端测量及两种复现入口见 [附录 A](appendix-a.md)。
 
 ::: {.stats src="summary"}
 :::
@@ -91,5 +91,5 @@
 阅读上述编译产物时，请同时留意统计索引与数学证明责任之间的清晰边界：
 
 ::: {.remark #rem-om-appb-epistemic-boundary title="动态统计与证据责任的边界"}
-上方的动态汇总与声明索引精确反映本书在所钉提交上引用的机器检查声明、公理分布与环境频次；但索引登记、可视化动画或统计计数本身从不替代数学证明，也不将 `ARGUED`、`NUM`、`MODEL` 或 `OPEN` 条目升级为 `LEAN ✓`。逐条核验每项结论时，请始终回到对应章节的完整前提、证明骨架与 [附录 A](appendix-a.md) 的空内核审计清单。
+上方的汇总与索引记录出版所用的冻结引用、公理分布和环境频次。数学结论的前提与证明见相应章节，后端公理证据见 [附录 A §A.3](appendix-a.md#sec-om-appa-frozen-registry)。
 :::

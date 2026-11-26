@@ -2,7 +2,7 @@
 
 > *“把外置无穷、超越近似与不可计算公理层层剥去之后，数学并未变窄——它回到了最坚实也最自由的本相：每一条定理皆为精确有理关系，每一次证明皆为可运行的有限计算。”*
 
-行至全书收官，我们已沿着一条完全自洽的零公理演绎链走遍六卷十八章：从纯归纳构造演算（CIC）与母公理 $\mathrm{AXIOM}\text{-}\Omega$ 出发，依次建成齐次射影数系、无原点流群与利雅三元恒常单位曲率、双卡无奇点凯莱旋转与球面有理三角、无极限射流微积分与任意阶凯莱—三角复合统一、三维球面全阶无 $\pi$ 调和分析、阿代尔算术与自由群 $F_3$ 及模方 $5$ 赫克—拉马努金有理谱论，最后归于非阿贝尔 $\Omega$-FRACTRAN 旋子机、观察者静止画布模型以及通过空内核重放的 `OmegaInit` $+$ `OmegaMath` 完整零公理形式化基座（**14 个零公理 D5 模块、127 条 `axioms: []` 冻结定理**，外接 **11 条第 2 层 `OmegaShadowBridge` 单向桥接定理**，并配 **19 幅双语语义静态图**、四座三维交互实验室 `OMEGA//SPIN`/`OMEGA//LAB`/`OMEGA//JET`/`OMEGA//ARC` 与双语全景演示文稿 `overview`；动态实时全书统计见 [附录 B](appendix-b.md)）。本章将六卷成果置于传统分析框架旁边作全景对照，收束全书的数学与哲学立意，并给出与姊妹专著《量子计算的几何直觉》的双向阅读导图。
+行至全书收官，我们已沿着一条完全自洽的零公理演绎链走遍六卷十八章：从纯归纳构造演算（CIC）与母公理 $\mathrm{AXIOM}\text{-}\Omega$ 出发，依次建成齐次射影数系、无原点流群与利雅三元恒常单位曲率、双卡无奇点凯莱旋转与球面有理三角、无极限射流微积分与任意阶凯莱—三角复合统一、三维球面全阶无 $\pi$ 调和分析、阿代尔算术与自由群 $F_3$ 及模方 $5$ 赫克—拉马努金有理谱论，最后归于非阿贝尔 $\Omega$-FRACTRAN 旋子机、观察者静止画布模型以及选定严格库闭包的空内核重放、D5 定理的双端公理记录和 `OmegaShadowBridge` 单向桥接（见 [附录 A](appendix-a.md)）。本章将六卷成果置于传统分析框架旁边作全景对照，收束全书的数学与哲学立意，并给出与姊妹专著《量子计算的几何直觉》的双向阅读导图。
 
 ## 六卷全景对照：传统 ZFC 与实分析对比零公理有理数学 {#sec-om-coda-six-volume-comparison}
 
@@ -15,7 +15,7 @@
 | **第三卷 · 微积分与流形**（第 7–9 章） | $\varepsilon$-$\delta$ 无穷小极限、`Filter.Tendsto` 滤子证明爆炸、`noncomputable` 实导数与多卡光滑图册 | 二阶幂零射流商环 $\mathbb{Q}[\eta]/(\eta^3)$ 纯四则两项求逆与中点凯莱驻球守恒；任意阶 D-有限射流 $J_N(\mathbb{Q})$ 形式复合链式法则、凯莱—三角大一统与无 $\pi$ 马青有理包络；流群精确伸缩与单纯形锥同伦 | 消去 $\lim_{h\to 0}$、极限滤子税与超越常数 $\pi, e$ |
 | **第四卷 · 球面调和分析**（第 10–12 章） | 含 $\pi$ 的连续 $L^2(S^3)$ 勒贝格积分、复球谐函数 $Y_\ell^m$ 与不可计算实特征值 | 彼得—魏尔整系数偶次切比雪夫自旋壳 $E_n(\kappa)$ 乘积律；卡塔兰阶乘无 $\pi$ 哈尔积分与全阶彼得—魏尔正交归一；零公理二次扩张 `QSqrt2`/`QPhi` 与有理舒尔正定性 | 消去勒贝格连续测度、$\pi$ 归一化因子与实特征值黑箱 |
 | **第五卷 · 算术与谱论**（第 13–15 章） | 复平面解析延拓、素数对数 $\ln p$、无理根号 $\sqrt{p}$ 与非构造无穷欧拉乘积 | 构造性欧几里得素数逃逸、有限连分数与整数四分深度预算；阿代尔乘积归元与 $S_5$ 模 $5$ 非消去／自由群 $F_3 \hookrightarrow \mathrm{SO}(3,\mathbb{Q})$ 伴随单射；无复数赫克—拉马努金有理半正定判据 $4p\langle f,f\rangle_{\mathbb{Q}} - \langle \widehat{T}_p f, \widehat{T}_p f\rangle_{\mathbb{Q}} \ge 0$ | 消去复数域 $\mathbb{C}$、$\ln p$、$\sqrt{p}$ 与非构造解析极限 |
-| **第六卷 · 计算、观察者与审计**（第 16–18 章） | 冯·诺依曼可变字节数组、外置实数时间河 $t \in \mathbb{R}$、携带三大公理的 `noncomputable` 证明 | 非阿贝尔 $\Omega$-FRACTRAN 旋子栈、$P_\Omega$ 停机见证与零公理 `Mat2` 行列式乘性／凯莱—哈密顿；无外端口观察者与静止画布记忆切分 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} = 1$；14 模块 127 条 `OmegaInit`/`OmegaMath` 空内核重放与 11 条 `OmegaShadowBridge` 单向阴影函子 $\Pi_{\mathbb{R}}$ | 消去外置时钟/指针、`noncomputable` 传染与隐蔽经典公理 |
+| **第六卷 · 计算、观察者与审计**（第 16–18 章） | 冯·诺依曼可变字节数组、外置实数时间河 $t \in \mathbb{R}$、携带三大公理的 `noncomputable` 证明 | 非阿贝尔 $\Omega$-FRACTRAN 旋子栈、$P_\Omega$ 停机见证与零公理 `Mat2` 行列式乘性／凯莱—哈密顿；无外端口观察者与静止画布记忆切分 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} = 1$；选定严格库闭包的空内核重放、D5 双端公理记录与单向阴影桥 $\Pi_{\mathbb{R}}$ | 消去外置时钟/指针、`noncomputable` 传染与隐蔽经典公理 |
 
 ## 收官沉思：当证明回归计算，几何回归关系 {#sec-om-coda-philosophical-synthesis}
 
@@ -25,7 +25,7 @@
 
 1. **无限归于有限闭包**：昔日令算术崩溃的无穷远点 $\infty$ 成为射影对 $[1 : 0]$ 处一枚平平无奇的对径锚点；
 2. **近似归于零误差恒等**：昔日需要小数截断与极限滤子逼近的导数、哈尔积分与谱界，回归为纯整数与有理多项式的精确恒等式；
-3. **经典实分析归于恰当位置**：$\mathbf{Math}_\Omega$ 并不制造与主流数学隔绝的孤岛；它把可计算的零公理核心留在空内核重放的 `OmegaInit` $+$ `OmegaMath` 内层，而将经典连续统分析稳妥安放在单向阴影函子 $\Pi_{\mathbb{R}}$ 的外层，令“证明即计算”与“经典分析兼容性”兼得而不互染。
+3. **经典实分析归于恰当位置**：$\mathbf{Math}_\Omega$ 并不制造与主流数学隔绝的孤岛；它让可计算的核心留在严格库中，并对选定闭包做空内核重放，而将经典连续统分析稳妥安放在单向阴影函子 $\Pi_{\mathbb{R}}$ 的外层，令“证明即计算”与“经典分析兼容性”兼得而不互染。
 
 ## 姊妹卷阅读导图：与《量子计算的几何直觉》的双向对位 {#sec-om-coda-sister-monograph-map}
 
@@ -36,9 +36,9 @@
 | **第一至二卷**（第 1–6 章：CIC、`AXIOM-Ω`、$\mathbb{QP}^1$、三元流群与有理旋转） | [第三十二章 不可表达的三元数与三维概念场封顶](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/ch32-inexpressible-ternions-and-three-dimensional-field.md) | 哈密顿三元数公案、三维概念场封顶、五种无损非线性表示与无常数有理重构 |
 | **第三至四卷**（第 7–12 章：射流微积分、圆弧流形、无 $\pi$ 球面傅里叶与二次扩张） | [§32.7–§32.8 与 §39.7 三元球面有理傅里叶变换](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/ch39-s37-spherical-fourier-transform-peter-weyl-synthesis.md) | 极小圆弧微积分、`0 · 1/2 · 1` 因果射流、$5d^8$ 四极切片与 `QSqrt2`/`QPhi` 扩张 |
 | **第五卷**（第 13–15 章：素数逃逸、阿代尔闭合与模方 5 赫克—拉马努金谱隙） | [第三十一章 圆弧微积分与黎曼谱磨光](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/ch31-arc-calculus-and-riemann-hypothesis.md) | 阿代尔素数闭合、全息圆弧—螺线管流形、LPS 拉马努金图 $X^{5,13}$ 与素谱对偶 |
-| **第六卷 第 16 章**（$\Omega$-FRACTRAN 与二维矩阵环） | [§38.14 康威 FRACTRAN 与三维非阿贝尔 $\Omega$-FRACTRAN 观察者语言](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/ch38-s14-omega-fractran-observer-rational-isa.md) | 康威乘法器 18 拍、`PRIMEGAME` 素数结晶、宏引理压缩与三代计算范式对比 |
-| **第六卷 第 17 章**（观察者即宇宙、结构时间与静止画布记忆切分） | [§38.12–§38.15 时空记忆切分、观察者即宇宙与静止画布](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/ch38-s12-spacetime-motion-equivalence-and-memory-schur-split.md) | 古尔斯特兰德—潘勒韦倾倒视界锥、AF-GUT 温伯格 $3/8$、TFT 与本体 QRAM |
-| **第六卷 第 18 章**（空内核审计、单向阴影函子与四模式工作台） | [§32.8 Lean 4 零公理基座](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/ch39-s36-lean4-zero-axiom-omega-math-architecture.md) 与 [§39.8 全书去近似重编译](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/ch39-s38-omega-math-recompilation-and-self-referential-atlas-closure.md) | 五阶编译流水线沙盘、十二赫维茨晶核图谱与 [终章 C.3 十部曲阅读导图](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/coda-s06-reading-map.md) |
+| **第六卷 第 16 章**（$\Omega$-FRACTRAN 与二维矩阵环） | [§38.14 康威 FRACTRAN 与三维非阿贝尔 $\Omega$-FRACTRAN 观察者语言](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/ch38-s14-omega-fractran-observer-rational-isa.md) | 康威乘法器 18 拍、`PRIMEGAME` 素数结晶、宏引理压缩与三代计算范式对比 |；选定严格库闭包的空内核重放、D5 双端公理记录与单向阴影桥 $\Pi_{\mathbb{R}}$
+| **第六卷 第 17 章**（观察者即宇宙、结构时间与静止画布记忆切分） | [§38.12–§38.15 时空记忆切分、观察者即宇宙与静止画布](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/ch38-s12-spacetime-motion-equivalence-and-memory-schur-split.md) | 古尔斯特兰德—潘勒韦倾倒视界锥、AF-GUT 温伯格 $3/8$、TFT 与本体 QRAM |；选定严格库闭包的空内核重放、D5 双端公理记录与单向阴影桥 $\Pi_{\mathbb{R}}$
+| **第六卷 第 18 章**（空内核审计、单向阴影函子与四模式工作台） | [§32.8 Lean 4 零公理基座](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/ch39-s36-lean4-zero-axiom-omega-math-architecture.md) 与 [§39.8 全书去近似重编译](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/ch39-s38-omega-math-recompilation-and-self-referential-atlas-closure.md) | 五阶编译流水线沙盘、十二赫维茨晶核图谱与 [终章 C.3 十部曲阅读导图](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/coda-s06-reading-map.md) |；选定严格库闭包的空内核重放、D5 双端公理记录与单向阴影桥 $\Pi_{\mathbb{R}}$
 
 若需在一份精炼演示中纵览全书六卷的零公理骨架、关键冻结定理、交互实验台与开放问题边界，可直接打开下方的双语全景演示文稿：
 
@@ -46,4 +46,4 @@
 全书全景演示文稿：从裸 CIC 与母公理 AXIOM-Ω 出发，串讲六卷零公理有理数学的核心图像、关键冻结声明、单向阴影函子、四座三维交互实验室与开放问题边界。
 :::
 
-如需逐模块检索 `OmegaInit`（10 模块）与 `OmegaMath`（78 模块）的完整冻结源码清单、14 模块 127 条零公理 D5 声明注册表、11 条 `OmegaShadowBridge` 桥接定理及空内核重放审计步骤，请翻阅 [附录 A](appendix-a.md)；如需查阅传统数学到 $\mathbf{Math}_\Omega$ 的符号对照词典、六层认识论证据分层总账、四座交互实验室（16 张实验卡）与全书 19 幅静态图索引以及编译实时生成的全书形式化验证统计，请继续翻阅 [附录 B](appendix-b.md)。
+[附录 A](appendix-a.md) 列出严格库主要模块、D5 双端记录、单向桥接定理与复核命令。[附录 B](appendix-b.md) 收录符号词典、证据总账、媒体索引和构建生成的全书统计。

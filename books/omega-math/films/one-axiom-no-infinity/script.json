@@ -146,8 +146,8 @@
    ],
    "lines": [
     [
-     "Ask Lean's kernel which axioms that proof uses. The list is empty.",
-     "问一问 Lean 内核：这条证明用了哪些公理？答案是一张空表。"
+     "Read the frozen record for the strict backend. The list is empty.",
+     "翻开严格端的冻结记录，这条定理的公理清单为空。"
     ],
     [
      "Its numbers grow from zero and successor, like a kitchen with no pantry: all grown on the spot.",
@@ -874,8 +874,8 @@
      "(2 + η)³ = 8 + 12η + 6η²。6 正是二阶导数的一半。"
     ],
     [
-     "Value, slope and bend in one product. Lean checks the cube rule, with zero axioms.",
-     "函数值、斜率、弯曲，一次乘法同时到手。立方归零由 Lean 检验，零公理。"
+     "Value, slope and bend in one product. Lean checks the cube rule without axioms on the strict backend.",
+     "函数值、斜率、弯曲，一次乘法同时到手。Lean 在严格端无公理地检验了立方归零。"
     ]
    ],
    "cues": [
@@ -950,8 +950,8 @@
      "像编织图样，每一格都由往前两格的那一格织出。想停在哪一阶，就停在哪一阶。"
     ],
     [
-     "And cosine squared plus sine squared is one, in every coefficient. Lean checks it, with zero axioms.",
-     "而余弦平方加正弦平方等于 1，每个系数都成立。Lean 检验了它，零公理。"
+     "Cosine squared plus sine squared is one in every coefficient. The strict Lean proof uses no axioms.",
+     "余弦平方加正弦平方等于 1，每个系数都成立。Lean 的严格端证明不依赖公理。"
     ]
    ],
    "cues": [
@@ -1776,8 +1776,8 @@
      "17 = 16 + 1：十六颗 2 一路爬到顶，剩下一颗留在原地。"
     ],
     [
-     "Lean's kernel checked every step, and that the first halt comes at step fifteen. Zero axioms.",
-     "Lean 内核逐步查过这条轨迹，也查过第一次停机恰在第十五步。零公理。"
+     "Lean's kernel checked every step, and that the first halt comes at step fifteen. Zero axioms on the strict backend.",
+     "Lean 内核逐步查过这条轨迹，证实第十五步首次停机。严格端公理为空。"
     ]
    ],
    "cues": [
@@ -1822,8 +1822,8 @@
      "一道闸门除以 5：前者干净通过，后者留下余数，被挡在门外。"
     ],
     [
-     "Lean checks this split, again with zero axioms. A number remembers how much. A turn remembers when.",
-     "这一分离由 Lean 检查，同样零公理。数记得多少，转动记得先后。"
+     "Lean checks this split without axioms on the strict backend. A number remembers how much. A turn remembers when.",
+     "这一分离经 Lean 检查，严格端公理为空。数记得多少，转动记得先后。"
     ]
    ],
    "cues": [
@@ -1892,12 +1892,12 @@
      "最后登场的是裁判：Lean 内核，一个小程序，逐步检查每个证明的每一步。"
     ],
     [
-     "We add no axioms, and the core library does not even import Init, the library Lean loads by default.",
-     "我们不加一条公理；核心库连 Lean 默认载入的 Init 都不导入。"
+     "The strict library skips official Init. Its selected import closures replay in an empty kernel.",
+     "严格库不导入官方 Init。选定的导入闭包在空内核中重放。"
     ],
     [
-     "Every point this formula builds from two whole numbers lands exactly on the circle. Axiom list: empty.",
-     "这条公式用两个整数造出的每个点，都恰好落在圆上。公理清单：空。"
+     "Every point this formula builds from two integers, not both zero, lands exactly on the circle. Axiom list on the strict backend: empty.",
+     "两个不全为零的整数经公式造出的点恰在圆上。严格端公理清单为空。"
     ],
     [
      "The real numbers live outside, past a one-way bridge. There the same circle reappears, at a price.",
@@ -2095,8 +2095,8 @@
    ],
    "lines": [
     [
-     "Add up the ledger: fourteen modules, one hundred twenty-seven theorems, every axiom list empty.",
-     "合账：十四个模块，一百二十七条定理，每条的公理清单都是空的。"
+     "The D5 ledger has two records. The strict axiom list is empty for each theorem shown here. The ordinary build has its own record.",
+     "D5 有两套记录。画面所列定理在严格端的公理清单为空，常规构建另有记录。"
     ],
     [
      "Outside the wall, eleven bridge theorems cast shadows onto the classical numbers. One way only.",

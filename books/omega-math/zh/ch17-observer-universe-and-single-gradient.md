@@ -145,4 +145,4 @@ $$
 **静止画布记忆切分与单一梯度统一实验卡（`static-canvas-memory-split`）。** 交互调节有理半切参数 $u \in \mathbb{Q} \cap [0, 1)$ 实时核验记忆窗正交切分 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$ 与无根号洛伦兹恒等式 $\gamma^2 - (\gamma v)^2 \equiv 1$，同步检视一代手性费米子迹比 $\sin^2\theta_W = \frac{3}{8}$、三维点集过约束盈余 $\Delta E(N) = \frac{(N-3)(N-4)}{2}$（在 $N = 5$ 处首次跃升为 $1$）以及观察者三拍结构时间 $\tau = 0 \to \frac{3}{4} \to \frac{3}{2}$ 的单调增长（[@def-om-ch17-observer-pentad]、[@ex-om-ch17-quantitative-audit]；其中正交代数与计数为精确 `手工推导`，物理与观察者综合框架标为 `MODEL`，底层克雷洛夫封顶与零改写查询由 [@thm-om-ch17-krylov-growth-and-stability]、[@thm-om-ch17-reversible-qram] 锚定）。
 :::
 
-至此，六卷的数学对象、计算语言与观察者模型已全部合拢。最后一章将把整座六卷大厦交回最冷酷、也最诚实的裁判——Lean 4 空内核公理审计器与四模式三维全息工作台。
+至此，六卷的数学对象、计算语言与观察者模型已全部合拢。最后一章请 Lean 4 逐一核验严格库的导入闭包与 D5 消费模块的双端证据，再回到四模式三维工作台。
