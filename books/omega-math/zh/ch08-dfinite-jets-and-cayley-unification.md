@@ -134,10 +134,10 @@ $$
 耦合微分方程由 `CayleyCos` 与 `CayleySin` 的交错整数系数直接代入 $(1 + \eta^2) D(\cdot)$ 按奇偶次数逐项相消验证。对于唯一性，按次数 $k$ 强归纳：初值锁定 $k = 0$ 处 $f_0 \equiv 1 = \mathrm{CayleyCos}_0$、$g_0 \equiv 0 = \mathrm{CayleySin}_0$；设对一切 $j \le k$（$k < N$）结论已成立，比较方程在第 $k$ 阶的系数 $(k+1) f_{k+1} + (k-1) f_{k-1} \equiv -2 g_k$ 与 $(k+1) g_{k+1} + (k-1) g_{k-1} \equiv 2 f_k$（$k = 0$ 时无 $k-1$ 项），由于右端与低阶项均已分别等同于 `CayleyCos`、`CayleySin` 且乘子 $k + 1 \ge 1$ 在有理数中可逆，立得 $f_{k+1} \equiv \mathrm{CayleyCos}_{k+1}$ 且 $g_{k+1} \equiv \mathrm{CayleySin}_{k+1}$，归纳至 $N$ 证毕。完整证明由 Lean 内核检查。
 :::
 
-现在我们将形式复合算子与普适形式链式法则本身一并纳入零公理 `OmegaInit` 与 `OmegaMath` 内核（`axioms: []`）：对任意系数皆有限的有理流 $f, g \in \mathrm{JetSeq}$（即对一切 $k \in \mathbb{N}$ 满足 `IntRatio.Finite`）且内层常数项为零（$g_0 \equiv 0$），将形式复合 $(\mathrm{compose}\;f\;g)_n := \bigl(\sum_{k=0}^{n} f_k \cdot g^k\bigr)_n$ 定义为有限截断求和，即可对一切截断阶 $N \in \mathbb{N}$ 直接冻结普适链式法则与**凯莱—三角代数大一统**：
+现在我们将形式复合算子与普适形式链式法则本身一并纳入使用 `OmegaInit` 与 `OmegaMath` 的严格端 D5 形式化（`strict_omega.axioms: []`）：对任意系数皆有限的有理流 $f, g \in \mathrm{JetSeq}$（即对一切 $k \in \mathbb{N}$ 满足 `IntRatio.Finite`）且内层常数项为零（$g_0 \equiv 0$），将形式复合 $(\mathrm{compose}\;f\;g)_n := \bigl(\sum_{k=0}^{n} f_k \cdot g^k\bigr)_n$ 定义为有限截断求和，即可对一切截断阶 $N \in \mathbb{N}$ 直接冻结普适链式法则与**凯莱—三角代数大一统**：
 
 ::: {.theorem #thm-ch08-cayley-composition-unification title="零公理形式复合链式法则与任意阶凯莱—三角代数大一统" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.deriv_compose_equivAt D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.cos_two_atan_eq_cayley D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.sin_two_atan_eq_cayley"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）的有理系数流载体 `Omega.JetSeq` 上，记柯西卷积幂为 $g^k := \mathrm{power}\;g\;k$，有限截断复合为 $(\mathrm{compose}\;f\;g)_n := \bigl(\sum_{k=0}^{n} f_k \cdot g^k\bigr)_n$。以下三条零公理恒等式对**一切自然数截断阶 $N \in \mathbb{N}$** 严格成立：
+在所引 D5 声明（`strict_omega.axioms: []`）使用的有理系数流载体 `Omega.JetSeq` 上，记柯西卷积幂为 $g^k := \mathrm{power}\;g\;k$，有限截断复合为 $(\mathrm{compose}\;f\;g)_n := \bigl(\sum_{k=0}^{n} f_k \cdot g^k\bigr)_n$。以下三条零公理恒等式对**一切自然数截断阶 $N \in \mathbb{N}$** 严格成立：
 
 1. **任意截断阶形式复合链式法则**（[`deriv_compose_equivAt`](lean:D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.deriv_compose_equivAt)）：对一切 $N \in \mathbb{N}$ 与一切系数有限的有理流 $f, g \in \mathrm{JetSeq}$（满足 `Finite f`、`Finite g`）且 $g_0 \equiv 0$，截至 $N$ 阶（含）逐项等价
 

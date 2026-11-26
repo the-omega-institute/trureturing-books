@@ -4,7 +4,7 @@
 
 在[第四章](ch04-heaps-and-lie-triple-curvature.md)确立了无原点流群、利雅三元曲率与有号旋量双覆叠之后，我们将目光转向动力学与空间变换的核心操作：**如何把三维切空间里的反对称旋转生成元 $X \in \mathfrak{so}(3, \mathbb{Q})$ 送入三维正交旋转群 $\mathrm{SO}(3, \mathbb{Q})$，再无损反解回来，并让离散旋转与简谐振荡在纯有理数域内永远精准闭合？**
 
-传统教科书在此毫不动摇地祭出矩阵指数 $\exp(X) = \sum_{k=0}^\infty \frac{1}{k!} X^k$、矩阵对数 $\ln\mathbf{R}$ 以及三角函数 $\cos\theta, \sin\theta$。然而任何有限步长的泰勒截断多项式都会当场破坏正交性，迫使数值计算不断注入投影修补与舍入漂移。本章用四套零超越函数的纯有理算子彻底替代这套超越脚手架，并在认识论上清晰对照严格零公理层与经典实阴影层：三维**有理凯莱正逆桥**的闭合方程、恒等正交性、单位行列式与任意有限步迭代保范律，**无奇点双卡 MRP 图册**的归一化分母和为一、构造性 $\frac{1}{2}$ 下界、展开 MRP 等同与闭单位球锁定，**无根号伴随旋转** $\operatorname{Ad}(p)$ 的保内积、缩放不变与乘法同态律，以及有号毕达哥拉斯旋量 `PythSpinor` 的**流群递推单位模方守恒律**，均已在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接证成；并与经典实阴影侧的**流群切比雪夫谐波闭式**、**连续射线分类定理**及**有理六轴球面覆盖**并置，把离散谐波与超越常数 $\pi$ 的真实出处一次讲透。
+传统教科书在此毫不动摇地祭出矩阵指数 $\exp(X) = \sum_{k=0}^\infty \frac{1}{k!} X^k$、矩阵对数 $\ln\mathbf{R}$ 以及三角函数 $\cos\theta, \sin\theta$。然而任何有限步长的泰勒截断多项式都会当场破坏正交性，迫使数值计算不断注入投影修补与舍入漂移。本章用四套零超越函数的纯有理算子彻底替代这套超越脚手架，并在认识论上清晰对照严格零公理层与经典实阴影层：三维**有理凯莱正逆桥**的闭合方程、恒等正交性、单位行列式与任意有限步迭代保范律，**无奇点双卡 MRP 图册**的归一化分母和为一、构造性 $\frac{1}{2}$ 下界、展开 MRP 等同与闭单位球锁定，**无根号伴随旋转** $\operatorname{Ad}(p)$ 的保内积、缩放不变与乘法同态律，以及有号毕达哥拉斯旋量 `PythSpinor` 的**流群递推单位模方守恒律**，均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中由 Lean 内核直接证成；并与经典实阴影侧的**流群切比雪夫谐波闭式**、**连续射线分类定理**及**有理六轴球面覆盖**并置，把离散谐波与超越常数 $\pi$ 的真实出处一次讲透。
 
 ## 5.1 废除超越指数：三维有理凯莱正逆变换
 
@@ -37,10 +37,10 @@ $$
 
 :::
 
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，我们完全不依赖实数连续统或商公理 `Quot.sound`：三维有理向量以带公共严格正自然数分母的整三元组 `RatVec3` 编码，三维有理矩阵以带公共严格正自然数分母的整矩阵 `RatMat3` 编码，有理相等由交叉相乘等价关系 `RatVec3.Equiv`、`RatMat3.Equiv` 与 `Omega.IntRatio.Equivalent` 刻画。记 $\mathbf{I} - X$ 为 `skewMinus s`、$\mathbf{I} + X$ 为 `skewPlus s`、正向凯莱闭式矩阵 $\mathbf{R}(\boldsymbol{\sigma})$ 为 `Cayley s`，并记从 $\mathbf{v}$ 出发连续作用 $n$ 次凯莱矩阵的结果为 `cayleyIterate s v n`（即 $\mathbf{R}(\boldsymbol{\sigma})^n \mathbf{v}$）。以下四条核心性质在零公理内核中全部无条件成立。
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。我们完全不依赖实数连续统或商公理 `Quot.sound`：三维有理向量以带公共严格正自然数分母的整三元组 `RatVec3` 编码，三维有理矩阵以带公共严格正自然数分母的整矩阵 `RatMat3` 编码，有理相等由交叉相乘等价关系 `RatVec3.Equiv`、`RatMat3.Equiv` 与 `Omega.IntRatio.Equivalent` 刻画。记 $\mathbf{I} - X$ 为 `skewMinus s`、$\mathbf{I} + X$ 为 `skewPlus s`、正向凯莱闭式矩阵 $\mathbf{R}(\boldsymbol{\sigma})$ 为 `Cayley s`，并记从 $\mathbf{v}$ 出发连续作用 $n$ 次凯莱矩阵的结果为 `cayleyIterate s v n`（即 $\mathbf{R}(\boldsymbol{\sigma})^n \mathbf{v}$）。以下四条核心性质在零公理内核中全部无条件成立。
 
 ::: {.theorem #thm-ch05-rational-cayley-core title="三维有理凯莱变换的零公理闭合、正交、行列式与迭代保范定理" lean="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_identity D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_orthogonal D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_det D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_iterate_norm"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，对任意有理三维向量 `s, v : RatVec3` 与任意自然数 `n : Nat`，正向有理凯莱矩阵 `Cayley s`（记作 $\mathbf{R}(\boldsymbol{\sigma})$）满足以下四条精确恒等式：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。对任意有理三维向量 `s, v : RatVec3` 与任意自然数 `n : Nat`，正向有理凯莱矩阵 `Cayley s`（记作 $\mathbf{R}(\boldsymbol{\sigma})$）满足以下四条精确恒等式：
 
 1. **去分母凯莱闭合方程**（[`cayley_identity`](lean:D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_identity)）：在 `RatMat3.Equiv` 下成立
 
@@ -128,7 +128,7 @@ $$
 
 反过来，给定有理单位旋量 $(w,\mathbf{v})$，选符号使 $w\ge0$，再取 $\boldsymbol{\sigma}=\mathbf{v}/(1+w)$。代回 $Q$ 即还原该旋量，且 $\lVert\boldsymbol{\sigma}\rVert^2=(1-w)/(1+w)\le1$。于是有理闭单位球内的 MRP 参数恰好覆盖该旋量子群的伴随像。下一节的整数 $90^\circ$ 旋转会给出像外的例子。
 
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，整套双卡图册无需任何实数或经典选择公理即可直接用 `PythSpinor` 与 `RatVec3` 锁定。对两枚有理三维向量 `u, v : RatVec3`（分别记作 $\mathbf{u} = \mathbf{x}/d$ 与 $\mathbf{v} = \mathbf{y}/e$，整分子 $\mathbf{x}, \mathbf{y} \in \mathbb{Z}^3$，严格正分母 $d, e \ge 1$），先借球极提升 `lift u` $:= ((d^2 - \lVert\mathbf{x}\rVert^2,\, 2d\mathbf{x});\; d^2 + \lVert\mathbf{x}\rVert^2) : \mathrm{PythSpinor}$ 形成旋量乘积 $p := \operatorname{product}(\mathbf{u}, \mathbf{v}) := (\operatorname{lift}\mathbf{u})\cdot(\operatorname{lift}\mathbf{v})$，其标量部记为 $w_p := p.\mathrm{num}.w$、虚部记为 $\mathbf{v}_p := \operatorname{Vec3.imaginary}(p.\mathrm{num})$、严格正半径记为 $r_p := p.\mathrm{radius} = (d^2 + \lVert\mathbf{x}\rVert^2)(e^2 + \lVert\mathbf{y}\rVert^2) > 0$。定义一对**归一化双卡分母**
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。整套双卡图册无需任何实数或经典选择公理即可直接用 `PythSpinor` 与 `RatVec3` 锁定。对两枚有理三维向量 `u, v : RatVec3`（分别记作 $\mathbf{u} = \mathbf{x}/d$ 与 $\mathbf{v} = \mathbf{y}/e$，整分子 $\mathbf{x}, \mathbf{y} \in \mathbb{Z}^3$，严格正分母 $d, e \ge 1$），先借球极提升 `lift u` $:= ((d^2 - \lVert\mathbf{x}\rVert^2,\, 2d\mathbf{x});\; d^2 + \lVert\mathbf{x}\rVert^2) : \mathrm{PythSpinor}$ 形成旋量乘积 $p := \operatorname{product}(\mathbf{u}, \mathbf{v}) := (\operatorname{lift}\mathbf{u})\cdot(\operatorname{lift}\mathbf{v})$，其标量部记为 $w_p := p.\mathrm{num}.w$、虚部记为 $\mathbf{v}_p := \operatorname{Vec3.imaginary}(p.\mathrm{num})$、严格正半径记为 $r_p := p.\mathrm{radius} = (d^2 + \lVert\mathbf{x}\rVert^2)(e^2 + \lVert\mathbf{y}\rVert^2) > 0$。定义一对**归一化双卡分母**
 
 $$
 \operatorname{denomPlus}(\mathbf{u}, \mathbf{v}) := \frac{r_p + w_p}{2 r_p}, \qquad \operatorname{denomMinus}(\mathbf{u}, \mathbf{v}) := \frac{r_p - w_p}{2 r_p} \;\in\; \mathrm{IntRatio},
@@ -143,7 +143,7 @@ $$
 并按 $w_p \ge 0$ 取正号、$w_p < 0$ 取负号的构造性符号切换 `orientNumerator`，定义选定卡的球极输出 `output u v` $:= \operatorname{orientNumerator}(w_p, \mathbf{v}_p) / (r_p + \lvert w_p\rvert) : \mathrm{RatVec3}$。下面这条零公理内核定理一举确立归一化分母的 MRP 展开、精确归一和、零选择公理的 $\frac{1}{2}$ 构造下界以及输出闭球锁定。
 
 ::: {.theorem #thm-ch05-dual-chart-singularity-free title="双卡修正罗德里格斯分母归一化、构造性半界与闭单位球锁定（零公理内核定理）" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_mrp_denominators D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_sum_one D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_ge_half D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_ball_containment"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，对任意两枚三维有理向量 `u, v : RatVec3`，记 $r_p := (\operatorname{product}(\mathbf{u}, \mathbf{v})).\mathrm{radius}$ 与分母前驱 $r := (\operatorname{product}(\mathbf{u}, \mathbf{v})).\mathrm{radiusPred}$（故 $r + 1 = r_p$）。则以下四条定理无条件成立：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。对任意两枚三维有理向量 `u, v : RatVec3`，记 $r_p := (\operatorname{product}(\mathbf{u}, \mathbf{v})).\mathrm{radius}$ 与分母前驱 $r := (\operatorname{product}(\mathbf{u}, \mathbf{v})).\mathrm{radiusPred}$（故 $r + 1 = r_p$）。则以下四条定理无条件成立：
 
 1. **归一化分母与展开 MRP 分式精确等同**（[`dual_chart_mrp_denominators`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_mrp_denominators)）：在 `Omega.IntRatio.Equivalent` 下同时成立
 
@@ -209,10 +209,10 @@ $$
 
 :::
 
-为什么根号凭空蒸发了？因为共轭作用同时在两侧乘上 $p$ 与 $\bar{p}$，把本该出现两次的 $\sqrt{N}$ 合并成了单一严格正整数分母 $N = \lVert p\rVert^2 \in \mathbb{Z}_{>0}$！这一无根号伴随作用的三条基本代数法则——三维有理内积守恒、非零整缩放不变（含符号翻转 $p \mapsto -p$）以及四元数乘法同态——已在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中由 Lean 内核直接锁死。
+为什么根号凭空蒸发了？因为共轭作用同时在两侧乘上 $p$ 与 $\bar{p}$，把本该出现两次的 $\sqrt{N}$ 合并成了单一严格正整数分母 $N = \lVert p\rVert^2 \in \mathbb{Z}_{>0}$！这一无根号伴随作用的三条基本代数法则——三维有理内积守恒、非零整缩放不变（含符号翻转 $p \mapsto -p$）以及四元数乘法同态——已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中由 Lean 内核直接锁死。
 
 ::: {.theorem #thm-ch05-rational-adjoint-action title="无根号齐次伴随旋转的零公理保内积、缩放不变与乘法同态定理" lean="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_dot D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_scale D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_hom"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，设 `p, q : Quaternion` 为满足非零条件 `p.Nonzero` 与 `q.Nonzero` 的整四元数，`k : Int` 为任意非零有号整数（$k \neq 0$），`u, v : RatVec3` 为任意有理三维向量。则齐次无根号伴随作用 `Ad` 满足：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。设 `p, q : Quaternion` 为满足非零条件 `p.Nonzero` 与 `q.Nonzero` 的整四元数，`k : Int` 为任意非零有号整数（$k \neq 0$），`u, v : RatVec3` 为任意有理三维向量。则齐次无根号伴随作用 `Ad` 满足：
 
 1. **有理内积守恒**（[`ad_dot`](lean:D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_dot)）：在 `Omega.IntRatio.Equivalent` 下成立
 
@@ -256,10 +256,10 @@ $$
 
 ## 5.4 流群切比雪夫谐波、连续射线分类与有理六轴球面覆盖
 
-确立了无超越数的三维旋转后，我们转向时间演化中的简谐振荡与大范围球面覆盖。在[第四章](ch04-heaps-and-lie-triple-curvature.md)中，[@thm-ch04-anchored-heap-and-reflection] 已经证明迭代流群反射 $x_{n+2} = [x_{n+1}, x_n, x_{n+1}]$ 等同于定基群中的等步幂次 $b^n$，而 [@def-ch04-pyth-spinor-and-bridge] 则构筑了严格区分 $\pm p$ 的有号毕达哥拉斯旋量载体 `PythSpinor`（带整四元组分子与严格正半径 $r > 0$，满足 $\lVert p_{\mathrm{num}}\rVert^2 = r^2$）。在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）内部，这条有号旋量流群递推在每一个节拍 $n \in \mathbb{N}$ 上都严格守住精确有理单位模方，全程无需实数或开方。
+确立了无超越数的三维旋转后，我们转向时间演化中的简谐振荡与大范围球面覆盖。在[第四章](ch04-heaps-and-lie-triple-curvature.md)中，[@thm-ch04-anchored-heap-and-reflection] 已经证明迭代流群反射 $x_{n+2} = [x_{n+1}, x_n, x_{n+1}]$ 等同于定基群中的等步幂次 $b^n$，而 [@def-ch04-pyth-spinor-and-bridge] 则构筑了严格区分 $\pm p$ 的有号毕达哥拉斯旋量载体 `PythSpinor`（带整四元组分子与严格正半径 $r > 0$，满足 $\lVert p_{\mathrm{num}}\rVert^2 = r^2$）。在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）内部，这条有号旋量流群递推在每一个节拍 $n \in \mathbb{N}$ 上都严格守住精确有理单位模方，全程无需实数或开方。
 
 ::: {.theorem #thm-ch05-spinor-heap-norm-preserved title="有号毕达哥拉斯旋量流群递推的零公理单位模方守恒定理" lean="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.heap_norm_preserved"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，设 `a, b : PythSpinor` 为任意两枚有号毕达哥拉斯旋量，记 `heapAt a b n : PythSpinor` 为以 $x_0 = a$、$x_1 = b$ 为初值的迭代流群反射序列 $x_{n+2} = [x_{n+1}, x_n, x_{n+1}]$ 在第 $n$ 拍的状态，并记 `spinorNormSq p` 为旋量 $p$ 的有理平方范数 $\lVert p_{\mathrm{num}}\rVert^2 / r^2 \in \mathrm{IntRatio}$。则对一切自然数 `n : Nat`，在 `Omega.IntRatio.Equivalent` 下恒有
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。设 `a, b : PythSpinor` 为任意两枚有号毕达哥拉斯旋量，记 `heapAt a b n : PythSpinor` 为以 $x_0 = a$、$x_1 = b$ 为初值的迭代流群反射序列 $x_{n+2} = [x_{n+1}, x_n, x_{n+1}]$ 在第 $n$ 拍的状态，并记 `spinorNormSq p` 为旋量 $p$ 的有理平方范数 $\lVert p_{\mathrm{num}}\rVert^2 / r^2 \in \mathrm{IntRatio}$。则对一切自然数 `n : Nat`，在 `Omega.IntRatio.Equivalent` 下恒有
 
 $$
 \operatorname{spinorNormSq}\bigl(\operatorname{heapAt}(a, b, n)\bigr) \;\equiv\; 1.

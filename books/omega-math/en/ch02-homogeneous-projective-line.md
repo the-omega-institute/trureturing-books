@@ -4,7 +4,7 @@
 
 The very first object handed to us in classical analysis is the open real line $\mathbb{R}$. Familiar as it looks, it carries two structural defects. First, as a ray rotates toward $90^\circ$, its affine slope $t = P/Q$ stretches wildly, magnifying tiny directional changes into runaway numerical amplification. Second, the instant $Q = 0$, the single-number slope crashes into division by zero; the line tears apart at both ends, forcing us to glue on an alien symbol $\infty$ that breaks ordinary arithmetic.
 
-In this chapter we abolish the open real line atop our bare CIC floor and replace one-dimensional scales with the **homogeneous projective line $\mathbb{QP}^1$**. Replacing the single denominator $Q$ with the sum of integer squares $P^2 + Q^2$ makes fidelity $\kappa$, spread $s$, and rational Cayley circle coordinates globally finite, singularity-free, and radical-free. Every one of the six theorems proved in this chapter cites a frozen zero-axiom declaration from `OmegaInit` and `OmegaMath` whose transitive axiom closure is empty (`#print axioms = ∅`).
+In this chapter we abolish the open real line atop our bare CIC floor and replace one-dimensional scales with the **homogeneous projective line $\mathbb{QP}^1$**. Replacing the single denominator $Q$ with the sum of integer squares $P^2 + Q^2$ makes fidelity $\kappa$, spread $s$, and rational Cayley circle coordinates globally finite, singularity-free, and radical-free. Every one of the six theorems proved in this chapter cites a frozen D5 declaration whose strict record lists `OmegaInit` and `OmegaMath` and reports `strict_omega.axioms: []`.
 
 ## 2.1 From the Open Real Line to the Homogeneous Projective Line $\mathbb{QP}^1$ {#sec-ch02-qp1-construction}
 

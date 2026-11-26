@@ -198,7 +198,7 @@ $$
 
 既然在微步层面上 $\mathcal{J}_2(\mathbb{Q})$ 已把曲率矢高纳入代数本身，那么回到**有限宏观步长**的离散演化 $\mathbf{x}_0 \to \mathbf{x}_1$ 时，应当在何处对联络切生成元求值，才能彻底杜绝平直切线脱离球面并保持链式法则不变？答案把我们再次带回唯一自对偶中点 **`1/2`**。
 
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，以公有正整数分母表示有理四元数载体 `RationalQuaternion`（整数分子 `num : Quaternion` 除以正分母 `den = denPred.succ`，平方范数 `normSq` 落入 `Omega.IntRatio`，`IsUnit` 定义为 $\lVert x\rVert^2 \equiv 1$）。设 $a \in \mathrm{RationalQuaternion}$ 为纯虚切生成元（$a.\mathrm{num}.w = 0$，从而对一切四元数 $v$ 恒有实内积正交律 $\langle a.\mathrm{num}\cdot v,\, v\rangle = 0$），考虑以任意有限有理权重 $\alpha \in \mathrm{IntRatio}$ 在起点 $x_0$ 与终点 $x$ 之间插值求值的离散切步方程
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。以公有正整数分母表示有理四元数载体 `RationalQuaternion`（整数分子 `num : Quaternion` 除以正分母 `den = denPred.succ`，平方范数 `normSq` 落入 `Omega.IntRatio`，`IsUnit` 定义为 $\lVert x\rVert^2 \equiv 1$）。设 $a \in \mathrm{RationalQuaternion}$ 为纯虚切生成元（$a.\mathrm{num}.w = 0$，从而对一切四元数 $v$ 恒有实内积正交律 $\langle a.\mathrm{num}\cdot v,\, v\rangle = 0$），考虑以任意有限有理权重 $\alpha \in \mathrm{IntRatio}$ 在起点 $x_0$ 与终点 $x$ 之间插值求值的离散切步方程
 
 $$
 (1 + \alpha a)\,x \;=\; \bigl(1 - (1 - \alpha)a\bigr)\,x_0 \quad \Longleftrightarrow \quad x - x_0 \;=\; -a\bigl((1 - \alpha)x_0 + \alpha x\bigr)
