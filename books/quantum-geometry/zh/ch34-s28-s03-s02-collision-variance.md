@@ -586,7 +586,33 @@ $$
 
 [@thm-ch34-landau-inclusive-cutoff] 给出了冻结碰撞定理所需的 Landau 前提。所以 RH 加上所列的截断与分辨率条件即可推出这个碰撞极限。Alpöge 的外部形式化证明给出了 Mathlib 的 RH 命题。 [外部 RH 定理](https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean#L4)
 
-若 $\eta_n\log T_n$ 有界，相对截断给出的误差界无法保证趋零。
+若 $\eta_n\log T_n$ 有界，把积分只截到 $\log T_n$ 时，相对余项界可以停留在常数量级。
+
+### 对相关上界与临界分辨率
+
+若 Montgomery 对相关和有足够小的一致上界，傅里叶积分就能控制到更长的时间窗。沿用含端点的正纵坐标截断，并记
+
+$$
+G_Y(t)=
+\sum_{0<\gamma,\gamma'\le Y}
+m_\gamma m_{\gamma'}\frac{4\cos\bigl(t(\gamma-\gamma')\bigr)}
+{4+(\gamma-\gamma')^2}.
+$$
+
+::: {.theorem #thm-ch34-zeta-harmonic-critical-collision-limit title="临界分辨率下的条件高斯碰撞极限" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalResolutionCollisionLimit.harmonic_zeta_critical_collision_limit"}
+假设 Mathlib 表述的 RH。对每个固定的 $A>1$，假设 $G_Y(t)=o(Y\log^2 Y)$ 在 $\log Y\le |t|\le A\log Y$ 上一致成立。令 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$。沿用上文的谐权重、$W(T_n)$ 和 $s_n=\sqrt{nP_2(T_n)/2}$。若 $\eta_n$ 最终为正、$\eta_n/s_n\to0$，且存在 $a>0$ 使得最终 $\eta_n\log T_n\ge a$，则
+$$
+\frac{s_n E_n(\eta_n)}{\eta_n W(T_n)^{2n}}\longrightarrow\frac1{\sqrt\pi}.
+$$
+:::
+
+::: proof
+对相关和等于 $\int_{\mathbb R} e^{-2|u|}|F_Y(t-u)|^2\,du$。相位和的 Lipschitz 常数至多为 $YN(Y)$，所以模长为 $b>0$ 的峰值在半径 $b/(2YN(Y))$ 内仍至少为 $b/2$。在该区间积分可得 $|F_Y(t)|^3\le 4eYN(Y)G_Y(t)$。据此，在 $Y=T$ 与 $Y=3T/4$ 两个实际截断处均有一致相消。由两者之差得到 $\log T$ 以外的谐权重相位缺损，较短的时间窗则由 Landau 界控制。
+
+对每个固定的 $A>1$，截至 $A\log T_n$ 的归一化积分趋于中央的高斯常数。相对截断把遗漏比例控制在 $64/(aA)$ 以内。先取足够大的 $A$，再令 $n$ 趋于无穷。对分辨率的每个固定正倍数同样成立，故可用两侧割线取回含端点的硬带极限。完整证明由 Lean 内核核验。
+:::
+
+通常的 Montgomery 对相关猜想可推出这里所需的长频段上界。结论覆盖 $\eta_n\log T_n\to a$ 且 $0<a<\infty$ 的情形。进一步缩小分辨率时，对角项相对于带宽的贡献会增大，下一节给出相应下界。 [Ford–Soundararajan–Zaharescu §1](https://arxiv.org/abs/0805.2745v3)
 
 ### 有限支撑的占用数对角下界
 
