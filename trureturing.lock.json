@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "3edc246ad4c9566f2d2c7139ca15664b66359d43",
-  "pinned_at": "2026-11-26T21:03:09Z",
+  "commit": "5ae05ac51c5407c6a7656dbe305b636c02afb9dd",
+  "pinned_at": "2026-11-26T21:37:24Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -6041,6 +6041,240 @@
       "statement_id": "sha256:48b540216ce0c16cb4164f5c3666695c71cd35301c1eca2c2d24786906cdf8dd",
       "line": 443,
       "signature": "theorem bloch_ball_hyperbolic : (∃ Φ : {r : EuclideanSpace ℝ (Fin 3) // ‖r‖ < 1} ≃ HyperbolicThreeSpace, ∀ r s, Real.cosh (dist (Φ r) (Φ s)) = kleinCosh r s) ∧ (∀ r : EuclideanSpace ℝ (Fin 3), blochFilter 1 r = r) ∧ (∀ (g h : Matrix (Fin 2) (Fin 2) ℂ) (r : EuclideanSpace ℝ (Fin 3)), (Matrix.trace (g * blochMatrix 1 r * gᴴ)).re ≠ 0 → blochFilter h (blochFilter g r) = blochFilter (h * g) r) ∧ (∀ (g : Matrix (Fin 2) (Fin 2) ℂ) (r s : EuclideanSpace ℝ (Fin 3)), (Matrix.trace (g * blochMatrix 1 r * gᴴ)).re ≠ 0 → (Matrix.trace (g * blochMatrix 1 s * gᴴ)).re ≠ 0 → 1 - ⟪blochFilter g r, blochFilter g "
+    },
+    "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D.coulomb_raw_square": {
+      "module": "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.KerrSchildWeylDoubleCopy4D.coulomb_raw_square",
+      "kind": "theorem",
+      "statement_id": "sha256:02f9cbddf9689d1494a45ce0106b9fd36590f907dd2100819830d24fad29873c",
+      "line": 121,
+      "signature": "theorem coulomb_raw_square (M Q r : ℝ) (hM : M ≠ 0) (hQ : Q ≠ 0) (hr : r ≠ 0) : electricSquare (coulombElectric Q r) (coulombScale M Q r) = -schwarzschildElectric M r",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D.coulomb_to_schwarzschild_stf": {
+      "module": "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.KerrSchildWeylDoubleCopy4D.coulomb_to_schwarzschild_stf",
+      "kind": "theorem",
+      "statement_id": "sha256:02f9cbddf9689d1494a45ce0106b9fd36590f907dd2100819830d24fad29873c",
+      "line": 135,
+      "signature": "theorem coulomb_to_schwarzschild_stf (M Q r : ℝ) (hM : M ≠ 0) (hQ : Q ≠ 0) (hr : r ≠ 0) : coulombDoubleCopy M Q r = schwarzschildElectric M r",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D.ks_det": {
+      "module": "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.KerrSchildWeylDoubleCopy4D.ks_det",
+      "kind": "theorem",
+      "statement_id": "sha256:02f9cbddf9689d1494a45ce0106b9fd36590f907dd2100819830d24fad29873c",
+      "line": 74,
+      "signature": "theorem ks_det (φ : ℝ) (k : Vector4) (hnull : minkowski k k = 0) : (ksMetric φ k).det = -1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D.ks_inverse": {
+      "module": "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.KerrSchildWeylDoubleCopy4D.ks_inverse",
+      "kind": "theorem",
+      "statement_id": "sha256:02f9cbddf9689d1494a45ce0106b9fd36590f907dd2100819830d24fad29873c",
+      "line": 62,
+      "signature": "theorem ks_inverse (φ : ℝ) (k : Vector4) (hnull : minkowski k k = 0) : ksMetric φ k * ksInverse φ k = 1 ∧ ksInverse φ k * ksMetric φ k = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D.schwarzschild_is_type_D": {
+      "module": "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.KerrSchildWeylDoubleCopy4D.schwarzschild_is_type_D",
+      "kind": "theorem",
+      "statement_id": "sha256:02f9cbddf9689d1494a45ce0106b9fd36590f907dd2100819830d24fad29873c",
+      "line": 182,
+      "signature": "theorem schwarzschild_is_type_D (M r : ℝ) (hM : M ≠ 0) (hr : r ≠ 0) : IsTypeD (weylQuarticEquiv (schwarzschildWeyl M r))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D.schwarzschild_tide_eval": {
+      "module": "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.KerrSchildWeylDoubleCopy4D.schwarzschild_tide_eval",
+      "kind": "theorem",
+      "statement_id": "sha256:02f9cbddf9689d1494a45ce0106b9fd36590f907dd2100819830d24fad29873c",
+      "line": 164,
+      "signature": "theorem schwarzschild_tide_eval (M r : ℝ) (z : ℂ) : complexTide (schwarzschildWeyl M r).val (some z) = 24 * (M / r ^ 3 : ℝ) * z ^ 2 ∧ complexTide (schwarzschildWeyl M r).val none = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D.schwarzschild_weylQuartic": {
+      "module": "D5/S3/Geometry/Lorentz/KerrSchildWeylDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.KerrSchildWeylDoubleCopy4D.schwarzschild_weylQuartic",
+      "kind": "theorem",
+      "statement_id": "sha256:02f9cbddf9689d1494a45ce0106b9fd36590f907dd2100819830d24fad29873c",
+      "line": 139,
+      "signature": "theorem schwarzschild_weylQuartic (M r : ℝ) : (weylQuarticEquiv (schwarzschildWeyl M r)).val = Polynomial.monomial 2 ((24 : ℂ) * (M / r ^ 3 : ℝ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D.det_sigma": {
+      "module": "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.SpinorHelicityDoubleCopy4D.det_sigma",
+      "kind": "theorem",
+      "statement_id": "sha256:01623290aa1d6316b36da3d818e2a1051a7f40f32045dfbbbebd875c9773b86a",
+      "line": 126,
+      "signature": "theorem det_sigma (x : Fin 4 → ℝ) : -(sigma x).det = ((minkowski x x : ℝ) : ℂ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D.higher_spin_single_zero": {
+      "module": "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.SpinorHelicityDoubleCopy4D.higher_spin_single_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:01623290aa1d6316b36da3d818e2a1051a7f40f32045dfbbbebd875c9773b86a",
+      "line": 317,
+      "signature": "theorem higher_spin_single_zero (s : ℕ) (hs : 3 ≤ s) (g : ℂ) (h : Consistent s (fun (_ _ _ : Unit) => g)) : g = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D.klt_four_point": {
+      "module": "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.SpinorHelicityDoubleCopy4D.klt_four_point",
+      "kind": "theorem",
+      "statement_id": "sha256:01623290aa1d6316b36da3d818e2a1051a7f40f32045dfbbbebd875c9773b86a",
+      "line": 539,
+      "signature": "theorem klt_four_point (l r : Fin 4 → Spinor) (h : ∑ i, momentum (l i) (r i) = 0) (hl : ∀ i j, i ≠ j → bracket (l i) (l j) ≠ 0) : gravityMHV4 l r = -mandelstam (momentum (l 0) (r 0)) (momentum (l 1) (r 1)) * parkeTaylor l * parkeTaylor1243 l",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D.nonzero_graviton_matter_universal": {
+      "module": "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.SpinorHelicityDoubleCopy4D.nonzero_graviton_matter_universal",
+      "kind": "theorem",
+      "statement_id": "sha256:01623290aa1d6316b36da3d818e2a1051a7f40f32045dfbbbebd875c9773b86a",
+      "line": 425,
+      "signature": "theorem nonzero_graviton_matter_universal (l r : Fin 4 → Spinor) (h : ∑ i, momentum (l i) (r i) = 0) (hl : ∀ i j, i ≠ j → bracket (l i) (l j) ≠ 0) (hr : ∀ i j, i ≠ j → bracket (r i) (r j) ≠ 0) (n : ℤ) (κ κa : ℂ) (hκa : κa ≠ 0) (heq : let s",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D.null_iff_rankOne": {
+      "module": "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.SpinorHelicityDoubleCopy4D.null_iff_rankOne",
+      "kind": "theorem",
+      "statement_id": "sha256:01623290aa1d6316b36da3d818e2a1051a7f40f32045dfbbbebd875c9773b86a",
+      "line": 80,
+      "signature": "theorem null_iff_rankOne (p : Momentum) : p.det = 0 ↔ ∃ l r, p = momentum l r",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D.schouten": {
+      "module": "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.SpinorHelicityDoubleCopy4D.schouten",
+      "kind": "theorem",
+      "statement_id": "sha256:01623290aa1d6316b36da3d818e2a1051a7f40f32045dfbbbebd875c9773b86a",
+      "line": 111,
+      "signature": "theorem schouten (a b c d : Spinor) : bracket a b * bracket c d + bracket a c * bracket d b + bracket a d * bracket b c = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D.soft_ward_universal": {
+      "module": "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.SpinorHelicityDoubleCopy4D.soft_ward_universal",
+      "kind": "theorem",
+      "statement_id": "sha256:01623290aa1d6316b36da3d818e2a1051a7f40f32045dfbbbebd875c9773b86a",
+      "line": 483,
+      "signature": "theorem soft_ward_universal {E : Type*} [AddCommGroup E] [Module ℂ E] (g₁ g₂ m₁ m₂ : E) (κ κa : ℂ) (h : g₁ + g₂ + (m₁ + m₂) = 0) (hm : m₁ + m₂ ≠ 0) (q : E →ₗ[ℂ] ℂ) (hg₁ : q g₁ ≠ 0) (hg₂ : q g₂ ≠ 0) (hm₁ : q m₁ ≠ 0) (hm₂ : q m₂ ≠ 0) (ward : ∀ ξ : E →ₗ[ℂ] ℂ, κ * softGaugeTerm q ξ g₁ + κ * softGaugeTerm q ξ g₂ + κa * softGaugeTerm q ξ m₁ + κa * softGaugeTerm q ξ m₂ = 0) : κa = κ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D.spin_one_consistency_iff_jacobi": {
+      "module": "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.SpinorHelicityDoubleCopy4D.spin_one_consistency_iff_jacobi",
+      "kind": "theorem",
+      "statement_id": "sha256:01623290aa1d6316b36da3d818e2a1051a7f40f32045dfbbbebd875c9773b86a",
+      "line": 255,
+      "signature": "theorem spin_one_consistency_iff_jacobi {ι : Type*} [Fintype ι] (f : ι → ι → ι → ℂ) (h₁ : ∀ a b c, f a b c = -f b a c) (h₂ : ∀ a b c, f a b c = -f a c b) : Consistent 1 f ↔ ∀ a b c d, (∑ e, (f a b e * f c d e + f b c e * f a d e + f c a e * f b d e)) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D.spin_two_consistency_iff_associative": {
+      "module": "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.SpinorHelicityDoubleCopy4D.spin_two_consistency_iff_associative",
+      "kind": "theorem",
+      "statement_id": "sha256:01623290aa1d6316b36da3d818e2a1051a7f40f32045dfbbbebd875c9773b86a",
+      "line": 281,
+      "signature": "theorem spin_two_consistency_iff_associative {ι : Type*} [Fintype ι] (f : ι → ι → ι → ℂ) (h₁ : ∀ a b c, f a b c = f b a c) (h₂ : ∀ a b c, f a b c = f a c b) : Consistent 2 f ↔ ∀ a b c d, (∑ e, f a b e * f e c d) = ∑ e, f b c e * f a e d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D.spin_two_orthogonal_split": {
+      "module": "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.SpinorHelicityDoubleCopy4D.spin_two_orthogonal_split",
+      "kind": "theorem",
+      "statement_id": "sha256:01623290aa1d6316b36da3d818e2a1051a7f40f32045dfbbbebd875c9773b86a",
+      "line": 340,
+      "signature": "theorem spin_two_orthogonal_split {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E] (product : E →ₗ[ℝ] E →ₗ[ℝ] E) (hcomm : ∀ x y, product x y = product y x) (hassoc : ∀ x y z, product (product x y) z = product x (product y z)) (hsym : ∀ x, (product x).IsSymmetric) : ∃ B : OrthonormalBasis (Fin (finrank ℝ E)) ℝ E, ∃ c : Fin (finrank ℝ E) → ℝ, (∀ i j, i ≠ j → product (B i) (B j) = 0) ∧ ∀ i, product (B i) (B i) = c i • B i",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D.three_point_branches": {
+      "module": "D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D",
+      "name": "D5.S3.Geometry.Lorentz.SpinorHelicityDoubleCopy4D.three_point_branches",
+      "kind": "theorem",
+      "statement_id": "sha256:01623290aa1d6316b36da3d818e2a1051a7f40f32045dfbbbebd875c9773b86a",
+      "line": 167,
+      "signature": "theorem three_point_branches (l r : Fin 3 → Spinor) (h : ∑ i, momentum (l i) (r i) = 0) : (∀ i j, bracket (r i) (r j) = 0) ∨ (∀ i j, bracket (l i) (l j) = 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Geometry/Lorentz/Urbantke.exteriorSquare_eq_smul_id_imp_scalar": {
       "module": "D5/S3/Geometry/Lorentz/Urbantke",
