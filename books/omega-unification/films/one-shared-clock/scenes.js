@@ -271,12 +271,12 @@ SCENES.clock = S => {
   const ga = a * Q(S, 2, 'Higher ticks bend', 0.6);
   txt('higher j → sharper low-pass · 刻度越高，滤得越陡', rx, 520, { size: 22, fam: F.zh, w: 700, c: C.now, a: ga });
   /* the first three-window zero */
-  const wa = a * Q(S, 3, 'the first is', 0.6);
+  const wa = a * at(S, 3, 0.6, 0.3);
   panel(rx - 30, 600, 700, 200, wa, C.now, 'THREE WINDOWS [1]+[2]+[4] · 三窗');
-  txt('#8359', rx, 712, { size: 64, fam: F.orb, w: 900, c: C.now, a: wa, ab: 2 });
-  txt('first zero through all three', rx + 250, 690, { size: 22, fam: F.mono, w: 700, c: C.white, a: wa });
-  txt('首枚三窗齐过的零点', rx + 250, 730, { size: 24, fam: F.zh, w: 700, c: C.white, a: wa });
-  txt('none of the first 8,192 passes', rx + 250, 770, { size: 20, fam: F.mono, c: C.dim, a: wa });
+  txt('#8359', rx, 712, { size: 56, fam: F.orb, w: 900, c: C.now, a: wa, ab: 2 });
+  txt('first zero through all three', rx + 300, 690, { size: 20, fam: F.mono, w: 700, c: C.white, a: wa });
+  txt('首枚三窗齐过的零点', rx + 300, 730, { size: 24, fam: F.zh, w: 700, c: C.white, a: wa });
+  txt('none of the first 8,192 passes', rx + 300, 770, { size: 20, fam: F.mono, c: C.dim, a: wa });
 };
 
 /* ======================================================================= */
@@ -367,7 +367,8 @@ SCENES.seventh = S => {
   const qa = a * Q(S, 0, 'ask about the seventh', 0.6);
   chip(1680, 222, 190, 64, 'F(7) = ?', C.now, qa, 30, F.math);
   /* the Gauss–Radau window */
-  const wa = a * Q(S, 1, 'a window two point one', 0.7);
+  const sa = Q(S, 3, 'falsifies the clock', 0.5);
+  const wa = a * Q(S, 1, 'a window two point one', 0.7) * (1 - clamp(sa * 2));
   if (wa > 0.003) {
     panel(130, 300, 1660, 220, wa, C.now, 'GAUSS–RADAU · 高斯–拉道锐端点');
     const x0 = 400, x1 = 1520;
@@ -396,8 +397,7 @@ SCENES.seventh = S => {
     txt('+ 4130 codes · 高出 4130 格', 960, yb + 18, { size: 26, fam: F.mono, w: 700, c: C.white, a: ga, align: 'center' });
     txt('(not to scale)', 960, yb + 82, { size: 18, fam: F.mono, c: C.dim, a: ga, align: 'center' });
   }
-  const sa = Q(S, 3, 'falsifies the clock', 0.5);
-  stamp('FALSIFIABLE · 可证伪', W / 2, 470, sa * a, C.mag, 54, -0.05);
+  stamp('FALSIFIABLE · 可证伪', W / 2, 425, sa * a, C.mag, 54, -0.05);
 };
 
 /* ======================================================================= */
@@ -422,13 +422,14 @@ SCENES.bits = S => {
   const oa = a * Q(S, 0, 'a rational certificate', 0.6);
   const cx = W / 2, cy = 560;
   panel(360, 430, 1200, 330, oa, nb > 43.5 ? C.now : C.mag, 'SEVENTH-TIME 35-BIT CODE · 第七拍 35 位码');
-  const one = oa * (1 - drop * (1 - back));
+  const out = clamp(back * 2), inn = clamp(back * 2 - 1);
+  const one = oa * (1 - drop * (1 - inn));
   if (one > 0.003) {
     arrow(cx, 470, cx, 520, C.now, one, 3);
     chip(cx, 580, 420, 84, '32071996606', C.now, one, 44);
     txt('forced by an integer rational certificate · 有理数证书锁死', cx, 690, { size: 24, fam: F.zh, w: 700, c: C.white, a: one, align: 'center' });
   }
-  const two = oa * drop * (1 - back);
+  const two = oa * drop * (1 - out);
   if (two > 0.003) {
     arrow(cx, 470, cx - 260, 530, C.mag, two, 3); arrow(cx, 470, cx + 260, 530, C.mag, two, 3);
     chip(cx - 300, 590, 360, 76, 'code A', C.mag, two, 36);
@@ -575,17 +576,17 @@ SCENES.close = S => {
 FILM.poster = () => {
   const sc = TL.scenes[0], t = sc.end - 1.0;
   background(t, sc, 0, 6);
-  scDial(1520, 560, 170, 1.1, C.now, 0.9, { n: 7, lw: 4, hand: C.now });
+  scDial(1650, 590, 130, 1.1, C.now, 0.9, { n: 7, lw: 4, hand: C.now });
   txt(DATA.film.title_zh, W / 2, 290, { size: 92, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('ONE SHARED ARITHMETIC CLOCK', W / 2, 380, { size: 48, fam: F.orb, w: 900, align: 'center', c: C.cyan, ab: 2, ls: 5 });
-  box(260, 520, 420, 80, C.cyan, 1, 2, null);
-  txt('32071992476', 470, 574, { size: 40, fam: F.mono, w: 700, align: 'center', c: C.cyan });
-  txt('reference · 参考码', 470, 640, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.cyan });
-  arrow(700, 560, 1060, 560, C.white, 1, 3);
-  txt('+4130', 880, 540, { size: 30, fam: F.mono, w: 700, align: 'center', c: C.white });
-  box(1080 - 0, 520, 0, 0, C.now, 0);
-  txt('32071996606', 880, 720, { size: 56, fam: F.mono, w: 700, align: 'center', c: C.now, ab: 1 });
-  txt('forced seventh-tick code · 第七拍被迫的码', 880, 780, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.now });
+  box(150, 540, 400, 90, C.cyan, 1, 2, null);
+  txt('32071992476', 350, 600, { size: 42, fam: F.mono, w: 700, align: 'center', c: C.cyan });
+  txt('reference · 参考码', 350, 680, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.cyan });
+  arrow(580, 585, 930, 585, C.white, 1, 3);
+  txt('+4130 codes', 755, 565, { size: 30, fam: F.mono, w: 700, align: 'center', c: C.white });
+  box(960, 540, 440, 90, C.now, 1, 2, rgba(C.now, 0.1));
+  txt('32071996606', 1180, 600, { size: 46, fam: F.mono, w: 700, align: 'center', c: C.now, ab: 1 });
+  txt('forced seventh tick · 第七拍被迫的码', 1180, 680, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.now });
   bloom(0.5);
   txt(`${DATA.book.code} · FILM`, W / 2, 900, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 8 });
   txt(`${DATA.book.title.zh} · ${DATA.book.title.en}`, W / 2, 1010, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: 0.9 });

@@ -7,7 +7,7 @@
   "GRH": "G R H",
   "RH": "R H",
   "111521": "one hundred eleven thousand, five hundred twenty-one",
-  "11431": "eleven thousand, four hundred thirty-one",
+  "11431": "eleven four thirty-one",
   "11427": "eleven thousand, four hundred twenty-seven",
   "11436": "eleven thousand, four hundred thirty-six",
   "8359": "eighty-three fifty-nine",
@@ -23,7 +23,7 @@
   {
    "id": "ground",
    "name": "THE GROUND",
-   "lead": 1.9,
+   "lead": 1.5,
    "tail": 0.5,
    "music": [
     1.0,
@@ -34,7 +34,7 @@
    ],
    "lines": [
     [
-     "Chapter two averaged over infinitely many zeros. What can one finite window really give?",
+     "Chapter two averaged over infinitely many zeros. What can one finite window give?",
      "第二章在无穷多枚零点上取平均。一个有限的窗口，究竟能给出什么？"
     ],
     [
@@ -128,7 +128,7 @@
      "加权和 Z 的长度只有在所有相位重新对齐时才能达到 1。"
     ],
     [
-     "Under RH, Lean bounds the shortfall: near one over T, by a constant over a power of log T.",
+     "Under RH, Lean bounds the shortfall near one over T by a constant over a power of log T.",
      "在 RH 前提下，Lean 给亏损定下界：在 1/T 附近，下界是常数除以 log T 的幂。"
     ],
     [
@@ -162,8 +162,8 @@
      "这个包络需要一个圈住零点的兰道围道。"
     ],
     [
-     "Lean bounds its left and right edges with explicit constants, and those bounds need no RH.",
-     "Lean 用显式常数界住它的左右两条竖边，这两条界不需要 RH。"
+     "Lean bounds its two vertical edges with explicit constants, and needs no RH for that.",
+     "Lean 用显式常数界住它的两条竖边，这一步不需要 RH。"
     ],
     [
      "With the top edge they give the envelope; that step is argued, not cited.",
@@ -200,11 +200,11 @@
      "现在看一个窗口：第 11431 枚零点，左右各九枚邻居。"
     ],
     [
-     "Among three thousand centres, it sits nearest a midpoint of two neighbours: within two millionths.",
-     "在三千个中心里，它最贴近两枚邻居的中点：误差在百万分之二以内。"
+     "Of three thousand centres, it sits nearest a midpoint: within two millionths.",
+     "在三千个中心里，它最贴近一个中点：误差在百万分之二以内。"
     ],
     [
-     "The runner-up is 35.6 times worse, and this extra pair carries under a quarter of the fourth moment.",
+     "The runner-up is 35.6 times worse; the extra pair holds under a quarter of the fourth moment.",
      "次优者差了 35.6 倍；这组额外配对只占四阶矩不到四分之一。"
     ],
     [
@@ -277,8 +277,8 @@
    ],
    "lines": [
     [
-     "Here is the gap. Every Lean bound here averages over all zeros up to T.",
-     "缺口就在这里：这里每一条 Lean 界，都是截至高度 T 的全体零点平均。"
+     "Here is the gap: every Lean bound here is an average up to T.",
+     "缺口就在这里：这里每一条 Lean 界都是截至 T 的平均。"
     ],
     [
      "The shell reads one zero, or a handful. No comparison theorem bridges the two yet.",

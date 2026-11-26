@@ -381,7 +381,7 @@ SCENES.collide = S => {
     ctx.save(); ctx.setLineDash([6, 8]); line(xc, 240, xc, 805, C.dim, ra * 0.8, 1.5); ctx.restore();
     /* schematic zeros on the critical line */
     for (let k = 0; k < 9; k++) dot(xc, ZL.y1 - 30 - k * 56 - 14 * rnd(k, 7), 5, 'w', ra * 0.8);
-    const le = Q(S, 1, 'left and right edges', 0.6), lw = 2 + 3 * le;
+    const le = Q(S, 1, 'two vertical edges', 0.6), lw = 2 + 3 * le;
     line(xl, ZL.y1, xl, ZL.yV, le > 0 ? C.cyan : C.dim, ra, lw);
     line(xr, ZL.y1, xr, ZL.yV, le > 0 ? C.cyan : C.dim, ra, lw);
     line(xl, ZL.y1, xr, ZL.y1, C.dim, ra, 2);
@@ -396,7 +396,7 @@ SCENES.collide = S => {
     txt('zeros: schematic · 示意', xc + 14, 300, { size: 18, fam: F.zh, w: 700, c: C.dim, a: ra });
   }
   /* right: the two edge bounds */
-  const ea = a * Q(S, 1, 'left and right edges', 0.6) * (1 - g3);
+  const ea = a * Q(S, 1, 'two vertical edges', 0.6) * (1 - g3);
   if (ea > 0.003) {
     panel(820, 195, 980, 330, ea, C.lean, 'LANDAU EDGES · 兰道竖边 · NO RH · 无需 RH');
     txt('left  Re s = −1/4,   x > 1,  V ≥ 1', 850, 262, { size: 22, fam: F.math, w: 700, c: C.dim, a: ea });
@@ -456,7 +456,7 @@ SCENES.window = S => {
   /* line 1: the midpoint */
   const ma = a * at(S, 1, 0.6);
   if (ma > 0.003) {
-    const p = Q(S, 1, 'within two millionths', 1.2);
+    const p = Q(S, 1, 'nearest a midpoint', 1.2);
     curve(i => { const s = i * clamp(p * 1.4), x = lerp(ZS(5), ZS(14), s), y = 295 - Math.sin(Math.PI * s) * 60; return [x, y]; }, 60, C.cyan, ma, 2.5);
     arrow(ZS(9), 240, ZS(9), 292, C.now, ma * clamp(p * 2 - 1), 2.5);
     txt('½(γ₁₁₄₂₇ + γ₁₁₄₃₆) ≈ γ₁₁₄₃₁', ZS(9) + 18, 282, { size: 18, fam: F.math, w: 700, c: C.now, a: ma * clamp(p * 2 - 1) });
@@ -474,7 +474,7 @@ SCENES.window = S => {
     fillBox(300, 575, u0 * 35.6 * ease(gro), 26, C.cyan, ba * 0.75);
     txt('#11628', 160, 596, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: ba });
     txt('35.60×', 300 + u0 * 35.6 + 12, 596, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: ba * gro });
-    const fa = a * Q(S, 2, 'this extra pair', 0.6);
+    const fa = a * Q(S, 2, 'the extra pair', 0.6);
     txt('fourth Fejér moment · 四阶费耶尔矩', 160, 660, { size: 22, fam: F.zh, w: 700, c: C.white, a: fa });
     box(300, 678, 640, 26, C.dim, fa, 1.5); fillBox(300, 678, 640 * 0.9462, 26, C.cyan, fa * 0.6);
     txt('diagonal', 160, 699, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: fa });
