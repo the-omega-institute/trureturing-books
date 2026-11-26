@@ -1,0 +1,247 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Regge": "Redge-ay",
+  "CKM": "C K M",
+  "Yukawa": "you-cow-ah",
+  "Yukawas": "you-cow-ahs",
+  "Behrend": "Bear-end",
+  "GeV": "G E V"
+ },
+ "music": {
+  "bpm": 76,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "verdict",
+   "name": "THE VERDICT",
+   "lead": 1.6,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Fourteen chapters on one Behrend shell. Time to close the ledger.",
+     "十四章，都落在同一个贝伦德球壳上。是时候合上账本了。"
+    ],
+    [
+     "Four out of four questions have a witness inside the model.",
+     "四问中的四问，在模型内都有显式见证。"
+    ],
+    [
+     "Zero out of four are derived without fitting.",
+     "四问中的零问，能无拟合地推出。"
+    ],
+    [
+     "Both numbers are true at once.",
+     "两个数字同时为真。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "sheet",
+   "name": "THE BALANCE SHEET",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Gauge crossing: with d 724 and k 32, two-loop running gives alpha strong near 0.1184.",
+     "规范交汇：取 d = 724、k = 32，两圈跑动给出 α_s ≈ 0.1184。"
+    ],
+    [
+     "Generations: at cut nine, 67 of the first 8,192 zeros leave three light modes.",
+     "三代：分界取 9 时，前 8,192 枚零点中有 67 枚在五种超荷上各留三个轻模。"
+    ],
+    [
+     "Flavor: on one flagship zero, two CKM quantities land within 1.33 parts per million.",
+     "味：在一枚旗舰零点上，两项 CKM 量落到 1.33 ppm 以内。"
+    ],
+    [
+     "Gravity: a spin-two pole, and four heat-kernel layers hit the curvature within 0.2 percent.",
+     "引力：自旋二引力子极点；四层热核真空能命中曲率至千分之二以内。"
+    ],
+    [
+     "Each left cell rests on chosen inputs. A witness, not a derivation.",
+     "左栏每一格都依赖指定的输入：是见证，不是推导。"
+    ],
+    [
+     "Each right cell is still open, from the Higgs mass to dark energy.",
+     "右栏每一格仍然开放，从希格斯质量直到暗能量。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 5,
+     "at": 0.5,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "tensions",
+   "name": "FIVE TENSIONS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Tension one: share the arithmetic clock with flavor, and the seventh time is forced 4,130 steps off.",
+     "张力一：算术钟与夸克味共用权重，第七项时间被迫偏离参考值 4,130 格。"
+    ],
+    [
+     "Two: the joint vacuum needs 105 windings, then leaves a hundred-dimensional family.",
+     "其二：共同真空需要 105 圈，随后留下一个 100 维的连续可行族。"
+    ],
+    [
+     "Three: five selection rules crown five different zeros.",
+     "其三：五条选点准则，拥立五枚不同的零点。"
+    ],
+    [
+     "Four: fitting the masses pushes a heavy Yukawa block above 16.63, and the vacuum balance breaks.",
+     "其四：拟合质量把重—重汤川块推过 16.63，真空配平随之撞毁。"
+    ],
+    [
+     "Five: induced gravity gives lambda G above 0.0118, against ten to the minus 122.",
+     "其五：诱导引力给出 ΛG > 0.01180，而目标是 10⁻¹²² 量级。"
+    ],
+    [
+     "Press one end of the log down, and another springs up.",
+     "按下浮木的一端，另一端就弹起来。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 5,
+     "at": 0.8,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "problems",
+   "name": "FOUR OPEN PROBLEMS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "So the four questions become four refined open problems.",
+     "于是四问被磨成四个精炼的开放问题。"
+    ],
+    [
+     "One: derive thresholds, the Higgs mass, and the choice of zero, from one partition function.",
+     "第一问：从单一配分函数推出重阈值、希格斯质量与零点选择。"
+    ],
+    [
+     "Two: let dynamics, not a chosen cut, select exactly three generations.",
+     "第二问：让动力学而非人为分界，选出恰好三代。"
+    ],
+    [
+     "Three: one flavor law across zeros, and a verdict on proton decay.",
+     "第三问：一条跨零点的统一味律，并裁决质子衰变。"
+    ],
+    [
+     "Four: Lorentzian gravity, Newton's constant, and a dark energy small without tuning.",
+     "第四问：洛伦兹引力、牛顿常数，以及无需微调就极小的暗能量。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 1.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "exam",
+   "name": "ONE EXAM",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "None stands alone. The zero chosen in problem one fixes the background of problem three.",
+     "四问无一能单独解决：第一问选定的零点，决定第三问的背景。"
+    ],
+    [
+     "Two feeds one and four; four loops back on one and three.",
+     "第二问进入第一问与第四问；第四问又反过来锁紧第一问与第三问。"
+    ],
+    [
+     "So a future master connection faces one exam: all four bars at once, no dial turned afterwards.",
+     "所以未来的主联络只有一场考试：同时过四道门槛，事后不许拧任何旋钮。"
+    ],
+    [
+     "Four witnesses, zero shortcuts.",
+     "四处见证，零条捷径。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.0,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Unification, chapter fifteen.",
+     "《OMEGA 统一》· 第十五章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

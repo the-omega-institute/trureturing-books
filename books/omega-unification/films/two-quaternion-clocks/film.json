@@ -1,0 +1,30 @@
+{
+  "title": "Two Quaternion Clocks",
+  "title_zh": "两只四元数时钟",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "0:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · deterministic canvas",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg",
+    "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_unit_sectional_curvature",
+    "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_words_adjoint_injective",
+    "D5/S3/Quantum/Analysis/CompactGroups/SchurOrthogonality.integral_dual_mul_dual_inv_eq_zero",
+    "D5/S3/Quantum/Analysis/CompactGroups/SchurOrthogonality.integral_dual_mul_dual_inv_self"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_two-quaternion-clocks_720p_narrated.mp4",
+    "cover": "omega-unification_two-quaternion-clocks_cover.jpg"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "title": "Walls Against the Crossing",
+  "title_zh": "交汇之墙",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "0:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · three running inverse couplings and their triangle, a blind combination, the folded two-step reading, four brick walls, a shared monotone rule, an α_s number line, two Lean-checked tools",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity",
+    "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_ramanujan_margins"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_walls-against-crossing_720p_narrated.mp4",
+    "cover": "omega-unification_walls-against-crossing_cover.jpg"
+  }
+}

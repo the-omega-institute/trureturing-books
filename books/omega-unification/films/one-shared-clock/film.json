@@ -16,7 +16,10 @@
     "zh",
     "en"
   ],
-  "lean": [],
+  "lean": [
+    "D5/S3/Fourier/Concentration/CyclicFejerBand.band_le_positive_fourier",
+    "D5/S3/Fourier/Concentration/FiniteCollisionVariance.tailCollisionMass_lower_variance"
+  ],
   "outputs": {
     "narrated_720p": "omega-unification_one-shared-clock_720p_narrated.mp4",
     "cover": "omega-unification_one-shared-clock_cover.jpg"

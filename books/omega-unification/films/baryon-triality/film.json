@@ -16,7 +16,10 @@
     "zh",
     "en"
   ],
-  "lean": [],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.d2_eq_zero_iff",
+    "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.mod_five_rank_one"
+  ],
   "outputs": {
     "narrated_720p": "omega-unification_baryon-triality_720p_narrated.mp4",
     "cover": "omega-unification_baryon-triality_cover.jpg"

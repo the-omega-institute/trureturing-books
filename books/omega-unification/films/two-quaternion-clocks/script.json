@@ -1,0 +1,264 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Hurwitz": "Hur-vits",
+  "Haar": "Har",
+  "Schur": "Shoor",
+  "R H": "R. H.",
+  "T E V": "T. E. V.",
+  "S U": "S. U.",
+  "Lie": "Lee"
+ },
+ "music": {
+  "bpm": 78,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "clocks",
+   "name": "TWO CLOCKS",
+   "lead": 2.4,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Complex phases always commute: A then B is B then A.",
+     "复数相位总是交换的：先 A 后 B，等于先 B 后 A。"
+    ],
+    [
+     "Promote the two clocks to unit quaternions. Our sample: one plus two i, and one plus two j, over root five.",
+     "把两只时钟提升为单位四元数。取一对样本：1 + 2i 与 1 + 2j，各除以 √5。"
+    ],
+    [
+     "Up to rotation, three half-traces survive: x and y are one over root five, z is one fifth.",
+     "除去整体转动，只剩三个半迹：x 与 y 都是 1/√5，z 是 1/5。"
+    ],
+    [
+     "The defect E, sixteen twenty-fifths, is the squared area between the axes, and U V minus V U has squared size four E.",
+     "交换子亏量 E = 16/25，是两根虚轴所夹面积的平方；UV − VU 的模方恰为 4E。"
+    ]
+   ]
+  },
+  {
+   "id": "body",
+   "name": "THE GRAM BODY",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "E is the Gram determinant of the anchors one, U and V.",
+     "E 正是三个锚点 1、U、V 的格拉姆行列式。"
+    ],
+    [
+     "The allowed triples fill a convex body whose skin is where the clocks commute.",
+     "允许的三元组填满一块凸体，它的表皮正是两只时钟交换的地方。"
+    ],
+    [
+     "Lean checks the integer version: the normalized Gram determinant is never negative.",
+     "Lean 内核检验整数版本：归一化格拉姆行列式永不为负。"
+    ],
+    [
+     "And the curvature identity: the Lie triple bracket returns the Gram area squared.",
+     "还有曲率恒等式：利雅三元括号恰好还原格拉姆面积平方。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "words",
+   "name": "FREE WORDS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Integers refuse to commute too: take the six Hurwitz quaternions of norm five.",
+     "整数同样不肯交换：取六枚模方为 5 的赫维茨四元数。"
+    ],
+    [
+     "One plus two i times one plus two j ends in plus four; reversed, in minus four.",
+     "(1 + 2i)(1 + 2j) 最后一位是 +4；换个次序，变成 −4。"
+    ],
+    [
+     "Up to length three, 186 words turn the x and y axes into 186 different frames.",
+     "长度不超过 3 的 186 个词，把 x 轴与 y 轴转成 186 个互不相同的标架。"
+    ],
+    [
+     "Lean checks: two reduced words that move both axes alike are equal, letter for letter.",
+     "Lean 内核检验：两个既约词若把两根轴转到同一处，就逐字母完全相同。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "hear",
+   "name": "HEARING THE CLOCKS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now hide the axes: put U and V on the shell's clock edges, and keep only the energy levels.",
+     "现在把轴藏起来：球壳的时钟边乘上 U 与 V，只留下能级。"
+    ],
+    [
+     "The shortest closed walks carry x, then z, then y, so the spectrum recovers all three, by a written argument.",
+     "最短的几类闭走依次携带 x、z、y，于是谱把三者全部还原：这是书面论证。"
+    ],
+    [
+     "It is two copies of the scalar spectrum exactly when E is zero. You can hear non-commutativity.",
+     "双分量谱恰好是标量谱的两份拷贝，当且仅当 E = 0：非交换性听得出来。"
+    ],
+    [
+     "Three determinant readings suffice, by an interval certificate. Two readings never could.",
+     "三个行列式读数就够了，由区间证书担保。两个读数永远不够。"
+    ]
+   ]
+  },
+  {
+   "id": "haar",
+   "name": "ZEROS AS DICE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Next: can Riemann zeros roll dice for a group integral?",
+     "下一个问题：黎曼零点能替群积分掷骰子吗？"
+    ],
+    [
+     "At each zero, shell angles set the clocks; a fourth angle, u, is the test.",
+     "在每个零点上，球壳角度给出两只时钟；第四个角 u 是检验。"
+    ],
+    [
+     "Keep the zero when u falls under the bar.",
+     "u 落在柱子下方，就保留这个零点。"
+    ],
+    [
+     "Of the first 128 zeros, 16 pass, starting at numbers 8, 15, 28, 31, 38 and 50.",
+     "前 128 个零点中有 16 个通过，开头几个编号是 8、15、28、31、38、50。"
+    ],
+    [
+     "Assuming classical R H, an external Lean proof, they become exact Haar samples, at the best density, one over two pi.",
+     "以经典 RH（外部 Lean 证明）为前提，它们成为精确的哈尔样本，密度取到最优的 1/(2π)。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 3.6,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "schur",
+   "name": "TWENTY-TWO FREQUENCIES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "The shell's twenty-two frequencies feed the whole Standard Model group: four, two, and sixteen.",
+     "球壳的 22 个频率喂满整个标准模型群：4 个、2 个、16 个。"
+    ],
+    [
+     "Group integrals rest on Schur orthogonality, which Lean checks for every compact group.",
+     "群积分以舒尔正交关系为基石；Lean 内核对任意紧群检验了它。"
+    ],
+    [
+     "Built on it, the commutator's average character is one over n plus one. We recompute the first four.",
+     "以它为基础，交换子的平均特征标是 1/(n + 1)。屏幕上重算前四项。"
+    ],
+    [
+     "Still, the zeros give a sampler, not the dynamics: couplings and actions are inputs.",
+     "但零点给出的是采样器，不是动力学：耦合与作用量仍是外部输入。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.0,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Unification, chapter two.",
+     "《OMEGA 统一》· 第二章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

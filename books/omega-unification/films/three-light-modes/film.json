@@ -1,0 +1,26 @@
+{
+  "title": "Three Light Modes",
+  "title_zh": "每种荷三个轻模",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "0:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · deterministic canvas",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_three-light-modes_720p_narrated.mp4",
+    "cover": "omega-unification_three-light-modes_cover.jpg"
+  }
+}

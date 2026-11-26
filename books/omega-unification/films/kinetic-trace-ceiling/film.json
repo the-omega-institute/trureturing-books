@@ -16,7 +16,10 @@
     "zh",
     "en"
   ],
-  "lean": [],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_complete",
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_min"
+  ],
   "outputs": {
     "narrated_720p": "omega-unification_kinetic-trace-ceiling_720p_narrated.mp4",
     "cover": "omega-unification_kinetic-trace-ceiling_cover.jpg"
