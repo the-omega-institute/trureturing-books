@@ -235,12 +235,12 @@ SCENES.traceless = S => {
       fillBox(AX, AY - 120, (Xw(RF.w35) - AX) * gr, 44, C.cyan, ha * 0.5); box(AX, AY - 120, (Xw(RF.w35) - AX) * gr, 44, C.cyan, ha, 2);
       txt('#35 window  < 3.272', AX + 12, AY - 88, { size: 22, fam: F.mono, w: 700, c: C.white, a: ha * clamp(gr * 2 - 1) });
       fillBox(AX, AY - 64, (Xw(RF.w172) - AX) * gr, 44, C.cyan, ha * 0.3); box(AX, AY - 64, (Xw(RF.w172) - AX) * gr, 44, C.cyan, ha, 2);
-      txt('172 layers  < 1.787583', AX + 12, AY - 32, { size: 22, fam: F.mono, w: 700, c: C.white, a: ha * clamp(gr * 2 - 1) });
-      const ea = a * Q(S, 3, 'is excluded', 0.5);
+      txt('172 layers < 1.787583', AX + 10, AY - 34, { size: 19, fam: F.mono, w: 700, c: C.white, a: ha * clamp(gr * 2 - 1) });
+      const ea = a * Q(S, 3, 'Every traceless', 0.5);
       txt('any arc inertia ρ > 0 · 任意弧内惯性', AX, AY + 100, { size: 22, fam: F.zh, w: 700, c: C.white, a: ha });
       rfRich([['Δ', C.white], ['pole', C.white, 'sub'], [' > 6.8122 × 10²³ GeV²', C.white]], AX, AY + 160, { size: 30, a: ea });
       txt('NUM · interval certificate · 区间证书', AX, AY + 200, { size: 20, fam: F.zh, w: 700, c: C.cyan, a: ea });
-      stamp('EXCLUDED', 1560, 290, Q(S, 3, 'is excluded', 0.5), C.mag, 40, -0.06);
+      stamp('EXCLUDED', 1650, 566, Q(S, 3, 'Every traceless', 0.5), C.mag, 30, -0.06);
     }
   }
 };
@@ -282,28 +282,32 @@ SCENES.rank = S => {
   const cl = a * Q(S, 2, 'eight pi', 0.5);
   if (cl > 0.003) {
     dashed(X0, Y(RF.eightPi), 1780, Y(RF.eightPi), C.white, cl, 3);
-    txt('8π ≈ 25.133  unitarity ceiling · 幺正天花板', 1780, Y(RF.eightPi) - 12, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.white, a: cl });
+    txt('unitarity ceiling · 幺正天花板', 1780, Y(RF.eightPi) - 46, { size: 22, fam: F.zh, w: 700, align: 'right', c: C.white, a: cl });
+    txt('8π ≈ 25.133', 1780, Y(RF.eightPi) - 14, { size: 24, fam: F.mono, w: 700, align: 'right', c: C.white, a: cl });
   }
-  const cols = { 2: 1010, 3: 1200, 4: 1390, 5: 1580 }, bw = 120;
+  const cols = { 2: 990, 3: 1140, 4: 1290, 5: 1450 }, bw = 110;
   for (let d = 2; d <= 5; d++) {
     const da = fa * (d < 5 ? Q(S, 1, 'Up to rank four', 0.5, (d - 2) * 0.25) : ea);
     if (da <= 0.003) continue;
     const fl = rfFloor(d), x = cols[d], yt = Math.max(Y(hi), Y(fl)), live = d === 5 ? C.cyan : C.mag;
     fillBox(x, yt, bw, Y0 - yt, live, da * 0.35); box(x, yt, bw, Y0 - yt, live, da, 2);
     if (fl > hi) { arrow(x + bw / 2, yt + 40, x + bw / 2, yt - 6, live, da, 3); }
-    txt(`≥ ${fl.toFixed(d === 4 ? 3 : 2)}`, x + bw / 2, (fl > hi ? yt + 70 : yt - 14), { size: 22, fam: F.mono, w: 700, align: 'center', c: C.white, a: da });
+    const ly = d === 5 ? Y0 - 16 : fl > hi ? yt + 70 : yt - 14;
+    txt(`≥ ${fl.toFixed(d === 4 ? 3 : 2)}`, x + bw / 2, ly, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.white, a: da });
     txt(`d = ${d}`, x + bw / 2, Y0 + 34, { size: 24, fam: F.mono, w: 700, align: 'center', c: d === 5 ? C.now : C.white, a: da });
   }
   if (ea > 0.003) {
     /* the constructed rank-five diagonal, amber: the current case */
-    const x = cols[5] - 20, y1 = Y(RF.diag5[1]), y0 = Y(RF.diag5[0]);
-    fillBox(x, y1, bw + 40, y0 - y1, C.now, ea * 0.55); box(x, y1, bw + 40, y0 - y1, C.now, ea, 2.5);
-    txt('24.271 – 24.931', x + (bw + 40) / 2, y0 + 30, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.now, a: ea });
+    const x = cols[5] - 15, y1 = Y(RF.diag5[1]), y0 = Y(RF.diag5[0]);
+    fillBox(x, y1, bw + 30, y0 - y1, C.now, ea * 0.55); box(x, y1, bw + 30, y0 - y1, C.now, ea, 2.5);
+    txt('24.271 – 24.931', x + bw + 46, y0 - 6, { size: 20, fam: F.mono, w: 700, c: C.now, a: ea });
+    txt('rank-five fit · 秩五解', x + bw + 46, y0 + 24, { size: 18, fam: F.zh, w: 700, c: C.now, a: ea });
   }
   const ma = a * at(S, 3, 0.6);
   if (ma > 0.003) {
-    chip(1190, 260, 400, 60, 'minimal rank = 5 · 最小秩 5', C.now, ma, 28, F.zh);
-    txt('#78, #288 windows → 6 · 零点窗升为 6', 1190, 320, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: a * Q(S, 3, 'other zero windows', 0.5) });
+    panel(980, 420, 440, 130, ma, C.now, null, { fill: 'rgba(4,10,24,0.94)' });
+    txt('minimal rank = 5 · 最小秩 5', 1200, 478, { size: 30, fam: F.zh, w: 700, align: 'center', c: C.now, a: ma });
+    txt('#78, #288 windows → 6 · 升为 6', 1200, 522, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.white, a: a * Q(S, 3, 'other zero windows', 0.5) });
   }
 };
 
