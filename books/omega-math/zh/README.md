@@ -44,7 +44,7 @@
 
 读者既可按卷顺序通读，也可按关注领域快速定位各卷主线：
 
-- **第一卷：公理地基与齐次有理数系**（[第一章](ch01-axiom-omega-and-cic.md)–[第三章](ch03-canonical-ternion-manifold.md)）。先剥离 `Mathlib` 经典公理，在裸 CIC 上以可计算类型类写下母公理 `AXIOM-Ω` 与观察者精度契约 $\varepsilon_{\mathrm{self}} = 1/M$；再以齐次整数对 $\mathbb{QP}^1$ 驯服 $\infty$ 并用零公理内核证明六条圆周闭合定理；最后锁定三维非阿贝尔流形，构造既免 `Quot.sound` 又免根号的规范整三元数载体 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$ 与正交非交换见证。
+- **第一卷：公理地基与齐次有理数系**（[第一章](ch01-axiom-omega-and-cic.md)–[第三章](ch03-canonical-ternion-manifold.md)）。先剥离 `Mathlib` 经典公理，在裸 CIC 上以类型类示意母公理 `AXIOM-Ω` 的部分定律，并给出观察者精度契约 $\varepsilon_{\mathrm{self}} = 1/M$；再以齐次整数对 $\mathbb{QP}^1$ 驯服 $\infty$ 并用零公理内核证明六条圆周闭合定理；最后锁定三维非阿贝尔流形，构造既免 `Quot.sound` 又免根号的规范整三元数载体 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$ 与正交非交换见证。
 - **第二卷：无原点非线性代数与球面有理几何**（[第四章](ch04-heaps-and-lie-triple-curvature.md)–[第六章](ch06-bargmann-gram-spherical-trigonometry.md)）。把无原点流群、利雅三元恒常单位曲率 $K \equiv +1$ 与本原毕达哥拉斯有号旋量六拍双覆叠展开到底，建立双卡无奇点三维有理凯莱旋转、整系数切比雪夫谐波以及球面巴格曼—格拉姆闭合律与有理正弦／勾股定理。
 - **第三卷：无极限射流微积分与全息圆弧流形**（[第七章](ch07-second-order-jet-calculus.md)–[第九章](ch09-telescoping-stokes-and-arc-manifold.md)）。以二阶幂零射流环 $\mathbb{Q}[\eta]/(\eta^3)$、对称中点凯莱驻球守恒和任意阶 D-有限微分射流复合链式法则及凯莱—三角大一统取代 $\lim_{h \to 0}$，并借流群中继消去与单纯形锥同伦在粗剖分下完成精确积分。
 - **第四卷：三维球面有理调和分析**（[第十章](ch10-peter-weyl-rational-spin-shells.md)–[第十二章](ch12-algebraic-extensions-and-schur-positivity.md)）。在三维球面上用纯整数偶次切比雪夫特征标乘积律与无 $\pi$ 阶乘哈尔积分重铸全阶彼得—魏尔正交归一展开，并以零公理二次扩张域与有理舒尔补正定性承载不可约代数边界。

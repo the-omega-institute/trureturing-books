@@ -58,7 +58,7 @@ Layer 0 supplies integer carriers, Layer 1 specifies transport and reading laws,
 | **Calculus & Curvature** | Requires hand-axiomatized derivative operators | `Filter.Tendsto` infinitesimal limits and chart transitions | **Second-order rational jet ring $\mathbb{Q}[\eta]/(\eta^3)$ by pure field arithmetic** |
 | **Automated Proof-Search Efficiency** | No computational reduction; vulnerable to false subgoals | Side-goals dominated by continuity, differentiability, and measurability filters | **Core rational geometry, jets, and finite certificates closed in one step by `decide`** |
 
-### 32.8.2.1 Layer 0: Canonical Integer Projective Carrier `ProjTernion` Eliminating `Quot.sound` {#sec-ch39-layer0-projternion-zero-quotient}
+### 32.8.2.1 Layer 0: Canonical Integer Projective Carrier `CanonProjTernion` Eliminating `Quot.sound` {#sec-ch39-layer0-projternion-zero-quotient}
 
 Whereas two-chart Rodrigues parameters in [§31.5](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md) and [§32.7](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md) still switch charts across the antipodal equator, Layer 0 models **homogeneous projective ternion space $\mathbb{QP}^3 \cong \mathrm{SO}(3, \mathbb{Q})$** directly by nonzero integer quadruples modulo rational scaling—eliminating even the quotient axiom `Quot.sound` via a **unique canonical integer normal form** (`hand derivation`):
 
@@ -67,7 +67,7 @@ Whereas two-chart Rodrigues parameters in [§31.5](ch39-s32-holographic-arc-mani
   - Present orthogonal equator ($s = 1/2, \kappa = 1/2$): `pHalf = (1, 1, 0, 0)`;
   - Future antipodal closure pole $[1 : 0]$ (classical $\infty$, $s = 1, \kappa = 0$): the ordinary integer tuple `pInf = (0, 1, 0, 0)`!
 - **Eliminating Even $\sqrt{2}$ in Born Fidelity $\kappa$ and Adjoint Rotations $\mathrm{Ad}(p) \in \mathrm{SO}(3, \mathbb{Q})$**:
-  Observe an exact algebraic sharpening (`PROJECT.md` §13): forcing spinors onto the unit sphere before computing observables would force even the $90^\circ$ equatorial state `pHalf = (1, 1, 0, 0)` (whose squared norm $\lVert p_{\mathrm{Half}}\rVert^2 = 1^2 + 1^2 = 2$ is non-square!) to introduce the irrational radical $\frac{1 + \mathbf{i}}{\sqrt{2}}$. On homogeneous `ProjTernion`, both observables and 3D rotations **square away all radicals automatically**:
+  Observe an exact algebraic sharpening (`PROJECT.md` §13): forcing spinors onto the unit sphere before computing observables would force even the $90^\circ$ equatorial state `pHalf = (1, 1, 0, 0)` (whose squared norm $\lVert p_{\mathrm{Half}}\rVert^2 = 1^2 + 1^2 = 2$ is non-square!) to introduce the irrational radical $\frac{1 + \mathbf{i}}{\sqrt{2}}$. On nonzero homogeneous representatives, both observables and 3D rotations **square away all radicals automatically**:
   1. Born ray fidelity divides squared inner product by the product of squared norms:
      $$
      \kappa(p, q) \;=\; \frac{\langle p, q\rangle^2}{\lVert p\rVert^2\,\lVert q\rVert^2} \;\in\; \mathbb{Q} \cap [0, 1],
@@ -78,22 +78,22 @@ Whereas two-chart Rodrigues parameters in [§31.5](ch39-s32-holographic-arc-mani
      $$
      \lVert a \cdot \bar{b} \cdot c\rVert^2 \;=\; \lVert a\rVert^2\,\lVert b\rVert^2\,\lVert c\rVert^2 \;\ge\; 1 \times 1 \times 1 \;=\; 1,
      $$
-     so it **never hits $(0,0,0,0)$ and never divides by zero anywhere**! (We also record the exact cover distinction: sign-locked `ProjTernion` quotients out $\pm 1$ to realize $\mathbb{QP}^3 \cong \mathrm{SO}(3, \mathbb{Q})$ where the $120^\circ$ rotor `g120 = (1,1,1,1)` closes in $3$ beats to `(1,0,0,0)`, whereas keeping primitive integer quadruples with $\gcd = 1$ without sign-locking preserves the spinor double cover where $3$ beats reach `(-1,0,0,0)` and $6$ beats return to `(+1,0,0,0)`.)
+     so the product stays nonzero. After normalization, the `g120 = (1,1,1,1)` ray returns to `(1,0,0,0)` after three beats. Its rational unit lift $(1,1,1,1)/2$ reaches $-1$ after three beats and $+1$ after six. A primitive ray has a rational unit lift exactly when its squared norm is a square.
 
 ::: {.viz src="lean4-zero-axiom-omega-math-sandbox" preset="canonical-proj-ternion-zero-quotient" height="500"}
-**Layer 0 Canonical Homogeneous Integer Carrier `ProjTernion` (Free of `Quot.sound` and Radicals)**: On the purple `kit.solid` ternion sphere, cyan unnormalized integer rays `(2,2,0,0)` and `(-3,-3,0,0)` collapse via `Nat.gcd` and first-positive sign locking onto the unique canonical anchor `pHalf = (1,1,0,0)` (`‖p‖² = 2`, yielding exact `κ = 1/2 = 0.5000` and integer rotation `Ad(pHalf) ∈ SO(3, ℤ)` without `√2`), alongside `p0 = (1,0,0,0)`, antipodal pole `pInf = (0,1,0,0)` (`κ = 0/1 = 0.0000`, zero division-by-zero), and 3-beat integer rotor `g120 = (1,1,1,1)` (`κ = 1/4 = 0.2500`).
+**Layer 0 Canonical Homogeneous Integer Carrier `CanonProjTernion` (Free of `Quot.sound` and Radicals)**: On the purple `kit.solid` ternion sphere, cyan unnormalized integer rays `(2,2,0,0)` and `(-3,-3,0,0)` collapse via `Nat.gcd` and first-positive sign locking onto the unique canonical anchor `pHalf = (1,1,0,0)` (`‖p‖² = 2`, yielding exact `κ = 1/2 = 0.5000` and integer rotation `Ad(pHalf) ∈ SO(3, ℤ)` without `√2`), alongside `p0 = (1,0,0,0)`, antipodal pole `pInf = (0,1,0,0)` (`κ = 0/1 = 0.0000`, zero division-by-zero), and 3-beat integer rotor `g120 = (1,1,1,1)` (`κ = 1/4 = 0.2500`).
 :::
 
 ### 32.8.2.2 Layer 1: The `OmegaSpace` Interface and Canonical Representatives {#sec-ch39-layer1-omegaspace-typeclass-consistency}
 
-The prototype below gives `OmegaSpace` two operations and six fields: two cancellation laws, ternary associativity, reading reflexivity, symmetry and right-transport invariance. Other requirements of AXIOM-Ω need separate proofs.
+The illustrative prototype below gives `OmegaSpace` two operations and six fields: two cancellation laws, ternary associativity, reading reflexivity, symmetry and right-transport invariance. Other requirements of AXIOM-Ω, including noncommutativity and positive semidefiniteness of every finite Gram matrix, need separate proofs.
 
-Following `PROJECT.md` §13, we state the exact domain invariant separating the raw tuple carrier from the universal `OmegaSpace` model (`hand derivation`):
+The derivation uses a canonical representative on each nonzero rational ray (`hand derivation`).
 
 - On the unbundled raw record `ProjTernion` ($\mathbb{Z}^4$), although `normalize` totalizes all operations (sending `(0,0,0,0)` to `(1,0,0,0)` and scaling `(2,0,0,0)` to `(1,0,0,0)`), universally quantified `OmegaSpace` equations fail on two raw boundary classes: the zero tuple $z_0 = (0,0,0,0)$ (`kappa z0 z0 = ⟨0, 1⟩ ≠ ⟨1, 1⟩` and `triad p0 p0 z0 = p0 ≠ z0`) and non-reduced multiples $z_2 = (2,0,0,0)$ (`triad p0 p0 z2 = p0 ≠ z2`);
-- Bundling the decidable canonical predicate `IsCanonical (p : ProjTernion) : p ≠ ⟨0,0,0,0⟩ ∧ normalize p = p` into the canonical nonzero subtype **`CanonProjTernion`** (which inherits zero-axiom `DecidableEq` by Hedberg's theorem without `Quot.sound` or `propext`), quaternion conjugation $u\bar{u} = \lVert u\rVert^2 \ge 1$ (positive scalar factors cancelled by `normalize`) and bilateral norm scaling $\langle x u \bar{v}, y u \bar{v}\rangle^2 = \lVert u\rVert^4\lVert v\rVert^4 \langle x, y\rangle^2$ make **all six universal `OmegaSpace` laws (`idemp_left`, `idemp_right`, `assoc_triad`, `kappa_refl`, `kappa_symm`, `kappa_inv`) hold unconditionally across `CanonProjTernion`**!
+- Each nonzero ray has a unique primitive representative with first nonzero coordinate positive. Define the product on these representatives by normalizing $a\bar b c$. Absorption follows from $b\bar b=\lVert b\rVert^2$, and associativity follows from quaternion associativity on rays and uniqueness of the representative. The squared inner-product reading is symmetric and reflexive. Common right multiplication by $\bar u v$ scales each squared norm and the inner product by the same factor $\lVert u\rVert^2\lVert v\rVert^2$, preserving the reading.
 
-The canonical-subtype calculation above is a hand argument. The Lean theorem below checks a finite conjunction, including the explicit noncommuting pair. A formal `OmegaSpace` instance requires proofs of all six universal fields. Simultaneously, the second-order rational jet ring `Jet2Rat` ($\mathbb{Q}[\eta]/(\eta^3)$) computes exact two-term inverses $(a_0 + a_1\eta + a_2\eta^2)^{-1}$ whenever the unit condition $j_0 \neq 0$ holds—which for $1 + x_0^2 \ge 1 > 0$ holds at every $x_0 \in \mathbb{Q}$—allowing `by decide` to verify second-order curvature in a single kernel step.
+The prototype declares the six fields and checks eight concrete equalities or inequalities by computation, including a noncommuting pair. A formal instance would also require proofs of the six fields for all inputs. The second-order rational jet ring `Jet2Rat` ($\mathbb{Q}[\eta]/(\eta^3)$) computes exact two-term inverses $(a_0 + a_1\eta + a_2\eta^2)^{-1}$ whenever the unit condition $j_0 \neq 0$ holds—which for $1 + x_0^2 \ge 1 > 0$ holds at every $x_0 \in \mathbb{Q}$—allowing `by decide` to verify second-order curvature in a single kernel step.
 
 ::: {.viz src="lean4-zero-axiom-omega-math-sandbox" preset="typeclass-consistency-and-jet2-decide" height="500"}
 **Finite ternion and `Jet2Rat` checks by `decide`**: Step across all eight conjuncts of `omega_zero_axiom_master_check` on the purple `kit.solid` ternion sphere—rational fidelity spectrum `{1, 1/2, 0, 1/4}`, 3-beat return `gStep3 = p0`, left idempotence `triad pHalf pHalf g120 = g120`, non-abelian integer synthesis `(1,1,1,1) ≠ (1,1,1,-1)`, and exact jet output `{1/2, -1/2, +1/4}` at `x₀ = 1`—while toggling the `CanonProjTernion` guard that blocks raw `(0,0,0,0)` and `(2,0,0,0)` counterexamples.
@@ -144,7 +144,7 @@ def inv (a : QRat) : QRat := mkNorm a.den a.num
 
 end QRat
 
-/-- 2. Canonical homogeneous integer ternions ProjTernion ≅ ℚP³ ≅ SO(3, ℚ) (3 DOF, zero singularities, zero radicals) -/
+/-- 2. Raw integer tuples. Normalizing a nonzero tuple selects its canonical ray representative. -/
 structure ProjTernion where
   w : Int
   x : Int
@@ -220,7 +220,7 @@ def kappaJetAt (x0 : QRat) : Jet2Rat :=
 
 end Jet2Rat
 
-/-- 4. AXIOM-Ω typeclass contract (universally satisfied on CanonProjTernion, never a raw axiom) -/
+/-- 4. Illustrative interface for six equations on ternary transport and fidelity. -/
 class OmegaSpace (M : Type) where
   triad : M → M → M → M
   kappa : M → M → QRat

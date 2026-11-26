@@ -10,8 +10,8 @@
 
 | 卷次与主题分支 | 传统路线（ZFC $+$ $\mathbb{R}$ $+$ `Mathlib.Real`） | 零公理有理路线（$\mathbf{Math}_\Omega$ $+$ `OmegaInit`/`OmegaMath`） | 消去的三重枷锁 |
 | :--- | :--- | :--- | :--- |
-| **第一卷 · 公理地基与数系**（第 1–3 章） | 康托尔实无穷 $\aleph_0$、柯西商集构造 $\mathbb{R}$、引入 `Classical.choice` 与 `Quot.sound`；除零在 $\infty$ 处爆炸 | 裸 CIC 归纳内核 $+$ `AXIOM-Ω`；齐次射影闭环 $\mathbb{QP}^1$ 令 $[1:0]$ 有限闭合；规范整数三元载体 `CanonProjTernion`、`Omega.IntRatio` 免商构造与正交非交换见证 | 消去实无穷、选择公理、商公理 `Quot.sound` 与 $\infty$ 奇点 |
-| **第二卷 · 代数与球面几何**（第 4–6 章） | 特权原点向量空间、欧拉角万向锁、依赖超越函数 $\sin, \cos, \arccos$ 与平方根归一化 | 无原点普吕弗—贝尔流群 $[x,y,z]$ 与利雅三元恒常单位曲率 $K \equiv +1$；双覆叠有号旋量 `PythSpinor` 六拍轨道；$\operatorname{Ad}(S^3(\mathbb{Q}))$ 上的有理双卡修正罗德里格斯参数（分母 $\ge 1/2$）；巴格曼—格拉姆及有理球面正弦／勾股律 | 消去特权原点、无理根号与三角超越表 |
+| **第一卷 · 公理地基与数系**（第 1–3 章） | 康托尔实无穷 $\aleph_0$、柯西商集构造 $\mathbb{R}$、引入 `Classical.choice` 与 `Quot.sound`；除零在 $\infty$ 处爆炸 | 裸 CIC 归纳内核 $+$ `AXIOM-Ω`；齐次射影闭环 $\mathbb{QP}^1$ 令 $[1:0]$ 有限闭合；规范整数代表元 `CanonProjTernion`、`Omega.IntRatio` 免商构造与正交非交换见证 | 消去实无穷、选择公理、商公理 `Quot.sound` 与 $\infty$ 奇点 |
+| **第二卷 · 代数与球面几何**（第 4–6 章） | 特权原点向量空间、欧拉角万向锁、依赖超越函数 $\sin, \cos, \arccos$ 与平方根归一化 | 无原点普吕弗—贝尔流群 $[x,y,z]$ 与利雅三元恒常单位曲率 $K \equiv +1$；双覆叠有号旋量 `PythSpinor` 六拍轨道；$\operatorname{Ad}(S^3(\mathbb{Q}))$ 上的有理双卡修正罗德里格斯参数（所选分母 $\ge 1/2$）；巴格曼—格拉姆及有理球面正弦／勾股律 | 消去特权原点、无理根号与三角超越表 |
 | **第三卷 · 微积分与流形**（第 7–9 章） | $\varepsilon$-$\delta$ 无穷小极限、`Filter.Tendsto` 滤子证明爆炸、`noncomputable` 实导数与多卡光滑图册 | 二阶幂零射流商环 $\mathbb{Q}[\eta]/(\eta^3)$ 纯四则两项求逆与中点凯莱驻球守恒；任意阶 D-有限射流 $J_N(\mathbb{Q})$ 形式复合链式法则、凯莱—三角大一统与无 $\pi$ 马青有理包络；流群精确伸缩与单纯形锥同伦 | 消去 $\lim_{h\to 0}$、极限滤子税与超越常数 $\pi, e$ |
 | **第四卷 · 球面调和分析**（第 10–12 章） | 含 $\pi$ 的连续 $L^2(S^3)$ 勒贝格积分、复球谐函数 $Y_\ell^m$ 与不可计算实特征值 | 彼得—魏尔整系数偶次切比雪夫自旋壳 $E_n(\kappa)$ 乘积律；卡塔兰阶乘无 $\pi$ 哈尔积分与全阶彼得—魏尔正交归一；零公理二次扩张 `QSqrt2`/`QPhi` 与有理舒尔正定性 | 消去勒贝格连续测度、$\pi$ 归一化因子与实特征值黑箱 |
 | **第五卷 · 算术与谱论**（第 13–15 章） | 复平面解析延拓、素数对数 $\ln p$、无理根号 $\sqrt{p}$ 与非构造无穷欧拉乘积 | 构造性欧几里得素数逃逸、有限连分数与整数四分深度预算；阿代尔乘积归元与 $S_5$ 模 $5$ 非消去／自由群 $F_3 \hookrightarrow \mathrm{SO}(3,\mathbb{Q})$ 伴随单射；无复数赫克—拉马努金有理半正定判据 $4p\langle f,f\rangle_{\mathbb{Q}} - \langle \widehat{T}_p f, \widehat{T}_p f\rangle_{\mathbb{Q}} \ge 0$ | 消去复数域 $\mathbb{C}$、$\ln p$、$\sqrt{p}$ 与非构造解析极限 |

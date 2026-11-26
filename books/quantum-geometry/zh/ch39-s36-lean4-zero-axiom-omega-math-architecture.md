@@ -58,7 +58,7 @@
 | **微积分与曲率实现** | 需手工公理化导数算子 | `Filter.Tendsto` 无穷小极限与多卡转移映射 | **二阶射流有理环 $\mathbb{Q}[\eta]/(\eta^3)$ 纯四则代数** |
 | **自动形式化证明搜索效率** | 缺乏计算归约，极易掉入假命题陷阱 | 需清偿连续性、可微性与可测性滤子支线子目标 | **核心有理几何、微积分与有限证书由 `decide` 一步归约** |
 
-### 32.8.2.1 第 0 层：免除商集公理（`Quot.sound`）的规范整数三元载体 `ProjTernion` {#sec-ch39-layer0-projternion-zero-quotient}
+### 32.8.2.1 第 0 层：免除商集公理（`Quot.sound`）的规范整数三元载体 `CanonProjTernion` {#sec-ch39-layer0-projternion-zero-quotient}
 
 在 [§31.5](ch39-s32-holographic-arc-manifold-and-solenoid-unity.md) 与 [§32.7](ch39-s35-infinity-free-transcendental-free-rational-mathematics.md) 的罗德里格斯切参数化中，跨越对径赤道仍需切换正逆双卡；而在 Lean 4 第 0 层中，直接采用四元整数模去非零有理缩放的**齐次射影空间 $\mathbb{QP}^3 \cong \mathrm{SO}(3, \mathbb{Q})$**，可以一步构造出连商类型公理 `Quot.sound` 都完全省去的**唯一规范整数代表元**（`手工推导`）：
 
@@ -67,7 +67,7 @@
   - 现在正交赤道（$s = 1/2, \kappa = 1/2$）即 `pHalf = (1, 1, 0, 0)`；
   - 曾经令平直实数轴除零爆炸的未来对径闭合极点 $[1 : 0]$（原 $\infty$，$s = 1, \kappa = 0$）不过是一枚平平无奇的整数四元组 `pInf = (0, 1, 0, 0)`！
 - **连 $\sqrt{2}$ 都彻底消去的纯有理保真度 $\kappa$ 与有理伴随旋转 $\mathrm{Ad}(p) \in \mathrm{SO}(3, \mathbb{Q})$**：
-  注意一个精妙绝伦的代数事实（`PROJECT.md` §13 精确加强）：倘若强行要求四元旋量先归一化为单位向量，那么连最简单的 $90^\circ$ 正交赤道态 `pHalf = (1, 1, 0, 0)`（模方 $\lVert p_{\mathrm{Half}}\rVert^2 = 1^2 + 1^2 = 2$ 不是平方数！）都会被迫引入无理根号 $\frac{1 + \mathbf{i}}{\sqrt{2}}$。但在齐次射影三元载体 `ProjTernion` 中，物理可观测量与三维旋转**全部自动平方消根号**：
+  注意一个精妙绝伦的代数事实（`PROJECT.md` §13 精确加强）：倘若强行要求四元旋量先归一化为单位向量，那么连最简单的 $90^\circ$ 正交赤道态 `pHalf = (1, 1, 0, 0)`（模方 $\lVert p_{\mathrm{Half}}\rVert^2 = 1^2 + 1^2 = 2$ 不是平方数！）都会被迫引入无理根号 $\frac{1 + \mathbf{i}}{\sqrt{2}}$。但对非零齐次代表元，物理可观测量与三维旋转**全部自动平方消根号**：
   1. 玻恩射线保真度是内积的平方除以模方的乘积：
      $$
      \kappa(p, q) \;=\; \frac{\langle p, q\rangle^2}{\lVert p\rVert^2\,\lVert q\rVert^2} \;\in\; \mathbb{Q} \cap [0, 1],
@@ -78,25 +78,25 @@
      $$
      \lVert a \cdot \bar{b} \cdot c\rVert^2 \;=\; \lVert a\rVert^2\,\lVert b\rVert^2\,\lVert c\rVert^2 \;\ge\; 1 \times 1 \times 1 \;=\; 1,
      $$
-     在全空间范围内**永远不会落入零四元组 $(0,0,0,0)$，永远不会触发除零异常**！（同时精确区分两层拓扑覆盖：锁定首非零项正号的 `ProjTernion` 模去了全局符号 $\pm 1$，实现射影旋转群 $\mathbb{QP}^3 \cong \mathrm{SO}(3, \mathbb{Q})$，故 $120^\circ$ 旋子 `g120 = (1,1,1,1)` 三拍即闭合回 `(1,0,0,0)`；若需保留自旋双覆叠 $720^\circ$ 符号记忆，只需只做 $\gcd = 1$ 约分而不锁定首项正负号，此时三拍抵达 `(-1,0,0,0)`、六拍回到 `(+1,0,0,0)`。）
+     因此乘积仍然非零。规范化后，`g120 = (1,1,1,1)` 的射线在三拍后返回 `(1,0,0,0)`。其有理单位提升 $(1,1,1,1)/2$ 在三拍后到达 $-1$，六拍后回到 $+1$。一条本原射线有有理单位提升，当且仅当其代表元的模方是完全平方数。
 
 ::: {.viz src="lean4-zero-axiom-omega-math-sandbox" preset="canonical-proj-ternion-zero-quotient" height="500"}
-**第 0 层规范齐次整数三元载体 `ProjTernion`（免除 `Quot.sound` 与无理根号）**：紫色实体三元球面上，青色整数射线簇 `(2,2,0,0)`、`(-3,-3,0,0)` 经 `Nat.gcd` 约分与首非零正号锁定坍缩至唯一规范锚点 `pHalf = (1,1,0,0)`（模方 `‖p‖² = 2`，无需 `√2` 即给出精确 `κ = 1/2 = 0.5000` 与整系数旋转 `Ad(pHalf) ∈ SO(3, ℤ)`），同屏标出过去锚 `p0 = (1,0,0,0)`、对径闭合极点 `pInf = (0,1,0,0)`（`κ = 0/1 = 0.0000`，零除零奇点）与三拍闭合整旋子 `g120 = (1,1,1,1)`（`κ = 1/4 = 0.2500`）。
+**第 0 层规范齐次整数三元载体 `CanonProjTernion`（免除 `Quot.sound` 与无理根号）**：紫色实体三元球面上，青色整数射线簇 `(2,2,0,0)`、`(-3,-3,0,0)` 经 `Nat.gcd` 约分与首非零正号锁定坍缩至唯一规范锚点 `pHalf = (1,1,0,0)`（模方 `‖p‖² = 2`，无需 `√2` 即给出精确 `κ = 1/2 = 0.5000` 与整系数旋转 `Ad(pHalf) ∈ SO(3, ℤ)`），同屏标出过去锚 `p0 = (1,0,0,0)`、对径闭合极点 `pInf = (0,1,0,0)`（`κ = 0/1 = 0.0000`，零除零奇点）与三拍闭合整旋子 `g120 = (1,1,1,1)`（`κ = 1/4 = 0.2500`）。
 :::
 
 ### 32.8.2.2 第 1 层：`OmegaSpace` 接口与规范代表 {#sec-ch39-layer1-omegaspace-typeclass-consistency}
 
-下文原型的 `OmegaSpace` 有两个运算与六个字段，分别要求两条消去律、三元结合律，以及读数的自反性、对称性与右迁移不变性。AXIOM-Ω 的其他要求须另行证明。
+下文示意原型的 `OmegaSpace` 有两个运算与六个字段，分别要求两条消去律、三元结合律，以及读数的自反性、对称性与右迁移不变性。AXIOM-Ω 的其他要求，包括非交换性与任意有限格拉姆矩阵的半正定性，须另行证明。
 
-这里同样有一处必须按 `PROJECT.md` §13 写清的精确类型论边界（`手工推导`）：
+以下推导使用每条非零有理射线的规范代表元（`手工推导`）。
 
 - 在未加约束的原始四元整数记录 `ProjTernion`（全体 $\mathbb{Z}^4$）上，`normalize` 虽然将全体输入总化（把 `(0,0,0,0)` 映为 `(1,0,0,0)`，把未约分的 `(2,0,0,0)` 约分为 `(1,0,0,0)`），但全称量化的 `OmegaSpace` 定律在两个退化边界上并不对原始未约分元组逐字成立——对零元组 $z_0 = (0,0,0,0)$ 有 `kappa z0 z0 = ⟨0, 1⟩ ≠ ⟨1, 1⟩` 且 `triad p0 p0 z0 = p0 ≠ z0`；对未约分元组 $z_2 = (2,0,0,0)$ 有 `triad p0 p0 z2 = p0 ≠ z2`；
-- 唯有将可判定规范谓词 `IsCanonical (p : ProjTernion) : p ≠ ⟨0,0,0,0⟩ ∧ normalize p = p` 捆绑为规范非零子类型 **`CanonProjTernion`**（因 `ProjTernion` 具零公理可判定相等性，按赫德伯格定理该子类型同样无需 `Quot.sound` 或 `Classical.choice` 即可具构造性可判定相等），由于四元数共轭满足 $u\bar{u} = \lVert u\rVert^2 \ge 1$（纯正整数标量缩放被 `normalize` 精确消去）且 $\langle x u \bar{v}, y u \bar{v}\rangle^2 = \lVert u\rVert^4\lVert v\rVert^4 \langle x, y\rangle^2$，**`OmegaSpace` 的全部六条公理（左右吸收幂等律、三元结合律、保真度自反律、对称律与右迁移不变律）在 `CanonProjTernion` 上全称无条件成立**！
+- 每条非零射线有唯一首非零项为正的本原整数代表元。将 $a\bar b c$ 规范化即得代表元上的三元运算。吸收律来自 $b\bar b=\lVert b\rVert^2$，结合律来自射线上的四元数结合律与代表元的唯一性。平方内积读数具有对称性与自反性。同右乘 $\bar u v$ 时，模方与内积都乘以 $\lVert u\rVert^2\lVert v\rVert^2$，故读数保持。
 
-上面对规范子类型的计算是手工推导。下方 Lean 定理核验有限项合取，其中包括一对明确的非交换见证。形式化的 `OmegaSpace` 实例还须给出六个全称字段的证明。与此同时，二阶射流有理环 `Jet2Rat`（$\mathbb{Q}[\eta]/(\eta^3)$）在一切可逆元（即常数项 $j_0 \neq 0$，对保真度核分母 $1 + x_0^2 \ge 1 > 0$ 在全体 $x_0 \in \mathbb{Q}$ 上恒成立！）上仅凭三次有理乘法便给出精确两项求逆 $(a_0 + a_1\eta + a_2\eta^2)^{-1}$，使微积分曲率验证同样由 `by decide` 一步归约。
+原型声明这六个字段，通过计算核验八个具体等式或不等式，其中包括一对不交换的元素。构造形式化实例还需对任意输入证明六个字段。二阶射流有理环 `Jet2Rat`（$\mathbb{Q}[\eta]/(\eta^3)$）在一切可逆元（即常数项 $j_0 \neq 0$，对保真度核分母 $1 + x_0^2 \ge 1 > 0$ 在全体 $x_0 \in \mathbb{Q}$ 上恒成立！）上仅凭三次有理乘法便给出精确两项求逆 $(a_0 + a_1\eta + a_2\eta^2)^{-1}$，使微积分曲率验证同样由 `by decide` 一步归约。
 
 ::: {.viz src="lean4-zero-axiom-omega-math-sandbox" preset="typeclass-consistency-and-jet2-decide" height="500"}
-**用 `decide` 核验有限个三元数与 `Jet2Rat` 算例**：紫色实体三元球面上实时步进 `omega_zero_axiom_master_check` 的八项合取断言——`{1, 1/2, 0, 1/4}` 有理保真度谱、`g120` 三拍归位 `gStep3 = p0`、左吸收幂等 `triad pHalf pHalf g120 = g120`、两枚整正交半转非对易合成 `(1,1,1,1) ≠ (1,1,1,-1)`，以及 `x₀ = 1` 处 `Jet2Rat.kappaJetAt` 输出精确 `{1/2, -1/2, +1/4}`，并支持切换查看 `CanonProjTernion` 规范子类型如何拦截原始 `(0,0,0,0)` 与 `(2,0,0,0)` 边界反例。
+**用 `decide` 核验有限个三元数与 `Jet2Rat` 算例**：紫色实体三元球面上实时步进 `omega_zero_axiom_master_check` 的八项合取断言——`{1, 1/2, 0, 1/4}` 有理保真度谱、`g120` 三拍归位 `gStep3 = p0`、左吸收幂等 `triad pHalf pHalf g120 = g120`、两枚整正交四分之一转非对易合成 `(1,1,1,1) ≠ (1,1,1,-1)`，以及 `x₀ = 1` 处 `Jet2Rat.kappaJetAt` 输出精确 `{1/2, -1/2, +1/4}`，并支持切换查看 `CanonProjTernion` 规范子类型如何拦截原始 `(0,0,0,0)` 与 `(2,0,0,0)` 边界反例。
 :::
 
 ### 32.8.2.3 第 2 层：面向 `Mathlib` 的单向阴影投影函子 $\Pi_{\mathbb{R}}$（不造封闭孤岛） {#sec-ch39-layer2-mathlib-shadow-functor}
@@ -144,7 +144,7 @@ def inv (a : QRat) : QRat := mkNorm a.den a.num
 
 end QRat
 
-/-- 2. 规范齐次整数三元数 ProjTernion ≅ ℚP³ ≅ SO(3, ℚ)（严格 3 自由度，全域零除零奇点、零无理数） -/
+/-- 2. 原始整数四元组。规范化为每个非零输入选取射线的唯一规范代表元。 -/
 structure ProjTernion where
   w : Int
   x : Int
@@ -220,7 +220,7 @@ def kappaJetAt (x0 : QRat) : Jet2Rat :=
 
 end Jet2Rat
 
-/-- 4. AXIOM-Ω 类型类契约（在规范非零子类型 CanonProjTernion 上全称成立，绝非危险的 axiom 声明） -/
+/-- 4. 三元搬运与保真度六条等式的示意接口。 -/
 class OmegaSpace (M : Type) where
   triad : M → M → M → M
   kappa : M → M → QRat

@@ -88,7 +88,7 @@ section: "Volume II"
   <h2 class="t">From origin-free heaps to <em>3D rational rotations</em></h2>
   <div class="flow mt">
     <div class="step"><b>Ternary transport</b><p>Use the middle point as a temporary reference and carry the relation to the third point.</p></div>
-    <div class="step"><b>PythSpinor double cover</b><p>The signed spinor reaches its negative at <Tex t="360^\circ" /> and returns to its starting point at <Tex t="720^\circ" />.</p></div>
+    <div class="step"><b>PythSpinor double cover</b><p>Over the rational unit-lift subgroup, the signed spinor reaches its negative at <Tex t="360^\circ" /> and returns to its starting point at <Tex t="720^\circ" />.</p></div>
     <div class="step"><b>Two-way Cayley bridge</b><p>A skew matrix <Tex t="X" /> gives a rational rotation <Tex t="R" />. Recover <Tex t="X" /> whenever <Tex t="\det(R+I)\ne0" />.</p></div>
   </div>
   <TheoremCard class="mt-l" label="Theorem 5.2" title="Denominator-free Cayley identity" cite="thm-ch05-rational-cayley-core" gid="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_identity">

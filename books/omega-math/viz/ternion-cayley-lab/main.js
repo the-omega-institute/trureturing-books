@@ -984,10 +984,10 @@
             [L('Rᵀ·R 与 det R', 'Rᵀ·R and det R'), `${m.orth ? L('= I ', '= I ') + yes : no} · det = ${fstr(m.det)}`],
             [L(`R(σ)ⁿv₀，n = ${n}`, `R(σ)ⁿv₀, n = ${n}`), vstr(m.now)],
             [L(`泰勒 ‖T₂ⁿv₀‖²，n = ${n}`, `Taylor ‖T₂ⁿv₀‖², n = ${n}`), `${fstr(m.tnorm)}${m.perp && n > 0 ? ` = (${fstr(m.M2)})${sup1(n)}` : ''}`, 'm'],
-            [L(`双卡 τ${sub1(Math.max(1, n))} = σ ★ τ${sub1(Math.max(1, n) - 1)}：D₊ · D₋ · D₊ + D₋`, `Dual chart τ${sub1(Math.max(1, n))} = σ ★ τ${sub1(Math.max(1, n) - 1)}: D₊ · D₋ · D₊ + D₋`), `${fstr(st.Dp)} · ${fstr(st.Dm)} · ${fstr(st.sum)} = (1 + ${fstr(st.a)})(1 + ${fstr(st.b)}) ${same(st.sum, st.prod) ? yes : no} · max ≥ 1/2 ${cmp(st.big, [1n, 2n]) >= 0 ? yes : no}`],
+            [L(`有理 MRP 双卡 τ${sub1(Math.max(1, n))} = σ ★ τ${sub1(Math.max(1, n) - 1)}：D₊ · D₋ · D₊ + D₋`, `Rational MRP dual chart τ${sub1(Math.max(1, n))} = σ ★ τ${sub1(Math.max(1, n) - 1)}: D₊ · D₋ · D₊ + D₋`), `${fstr(st.Dp)} · ${fstr(st.Dm)} · ${fstr(st.sum)} = (1 + ${fstr(st.a)})(1 + ${fstr(st.b)}) ${same(st.sum, st.prod) ? yes : no} · max ≥ 1/2 ${cmp(st.big, [1n, 2n]) >= 0 ? yes : no}`],
             [L('经典：每步转角 2·arctan‖σ‖ · 泰勒小数', 'Classical: angle per step 2·arctan‖σ‖ · Taylor decimal'), `≈ ${deg(2 * Math.atan(Math.sqrt(fval(m.u))), 2)}° · ${fix(fval(m.tnorm), 6)}`, 'm']
           ],
-          note: L(`凯莱矩阵的分子是整数、分母是 N = ${m.N}：RᵀR = I 与 ‖Rⁿv₀‖² = 1 都是整数恒等式；泰勒截断每步把垂直于 σ 的模方乘以 1 + u²/4 = ${fstr(m.M2)}。双卡乘法的大分母至少是 1/2。`, `The Cayley matrix has integer numerators over N = ${m.N}: RᵀR = I and ‖Rⁿv₀‖² = 1 are integer identities; the Taylor truncation multiplies the squared norm perpendicular to σ by 1 + u²/4 = ${fstr(m.M2)} per step. The larger denominator of the dual chart is at least 1/2.`)
+          note: L(`凯莱矩阵的分子是整数、分母是 N = ${m.N}：RᵀR = I 与 ‖Rⁿv₀‖² = 1 都是整数恒等式；泰勒截断每步把垂直于 σ 的模方乘以 1 + u²/4 = ${fstr(m.M2)}。账本把同一组数 σ 另作有理 MRP 输入。双卡乘法的大分母至少是 1/2。`, `The Cayley matrix has integer numerators over N = ${m.N}: RᵀR = I and ‖Rⁿv₀‖² = 1 are integer identities; the Taylor truncation multiplies the squared norm perpendicular to σ by 1 + u²/4 = ${fstr(m.M2)} per step. The ledger also uses the same coordinates as rational MRP input. The larger denominator of the dual-chart product is at least 1/2.`)
         };
       }
       default: {
