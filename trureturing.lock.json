@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "444999cc0f3f3f5c08b0a2227856976eda90d986",
-  "pinned_at": "2026-11-26T14:13:54Z",
+  "commit": "9f5983b95c9a3304bcd4ab5252868d14c6f20734",
+  "pinned_at": "2026-11-26T15:49:11Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -9221,6 +9221,149 @@
       "statement_id": "sha256:0e2dbbae6d60c85f60929ffef2785684643d030c4d01badc7ab5bad07f046c4a",
       "line": 270,
       "signature": "theorem exists_unitaryRep_ker_subset {G : Type*} [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] {U : Set G} (hU : U ∈ 𝓝 (1 : G)) : ∃ (n : ℕ) (ρ : G →ₜ* Matrix.unitaryGroup (Fin n) ℂ), ∀ g, ρ g = 1 → g ∈ U"
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary.cycle_rearrangement_sign_flip": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ClosedTraceFinitenessBoundary.cycle_rearrangement_sign_flip",
+      "kind": "theorem",
+      "statement_id": "sha256:80b49ddafb9721f2cb75ca3df50f5779c3ac6277331597db4a7116474f088733",
+      "line": 467,
+      "signature": "theorem cycle_rearrangement_sign_flip (r : ℕ) (hr : 5 ≤ r) : let hr2 : 2 ≤ r",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary.disjoint_joint_cut_summable_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ClosedTraceFinitenessBoundary.disjoint_joint_cut_summable_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:80b49ddafb9721f2cb75ca3df50f5779c3ac6277331597db4a7116474f088733",
+      "line": 646,
+      "signature": "theorem disjoint_joint_cut_summable_iff (w : ℕ → ℝ) (v : α → ℝ) (I : Finset α) (hw : ∀ i, 0 ≤ w i) (hv : ∀ a, 0 ≤ v a) (hv_sum : ∑ a : α, v a = 1) (hp_pos : 0 < ∑ a ∈ I, v a) (hp_lt : ∑ a ∈ I, v a < 1) : let p",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary.finiteDimensional_and_finrank_le_of_isTraceClass_lower_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ClosedTraceFinitenessBoundary.finiteDimensional_and_finrank_le_of_isTraceClass_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:80b49ddafb9721f2cb75ca3df50f5779c3ac6277331597db4a7116474f088733",
+      "line": 62,
+      "signature": "theorem finiteDimensional_and_finrank_le_of_isTraceClass_lower_bound {W : H →L[ℂ] H} (hW_nn : 0 ≤ W) (hW_tc : IsTraceClass W) {c : ℝ} (hc : 0 < c) (hlow : ∀ x : H, c * ‖x‖ ^ 2 ≤ (⟪x, W x⟫_ℂ).re) : FiniteDimensional ℂ H ∧ (Module.finrank ℂ H : ℝ) ≤ (trace W hW_tc).re / c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary.finiteDimensional_and_finrank_range_le_of_isTraceClass_lower_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.ClosedTraceFinitenessBoundary.finiteDimensional_and_finrank_range_le_of_isTraceClass_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:80b49ddafb9721f2cb75ca3df50f5779c3ac6277331597db4a7116474f088733",
+      "line": 97,
+      "signature": "theorem finiteDimensional_and_finrank_range_le_of_isTraceClass_lower_bound {p C : H →L[ℂ] H} (hp : IsStarProjection p) (hC_nn : 0 ≤ C) (hC_tc : IsTraceClass C) {c : ℝ} (hc : 0 < c) (hlow : ∀ x : H, x ∈ LinearMap.range p.toLinearMap → c * ‖x‖ ^ 2 ≤ (⟪x, C x⟫_ℂ).re) : FiniteDimensional ℂ (LinearMap.range p.toLinearMap) ∧ (Module.finrank ℂ (LinearMap.range p.toLinearMap) : ℝ) ≤ (trace C hC_tc).re / c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NonperturbativePhaseResummation.iteratedDeriv_three_partialPhaseSum_zero": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NonperturbativePhaseResummation",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NonperturbativePhaseResummation.iteratedDeriv_three_partialPhaseSum_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:1162167ff1094a343e66d471e39c2c8fafffa221938531f7d7bb7c280f0d9a7f",
+      "line": 211,
+      "signature": "theorem iteratedDeriv_three_partialPhaseSum_zero (N : ℕ) : (1 / 6 : ℂ) * iteratedDeriv 3 (partialPhaseSum N) 0 = -Complex.I * ∑ k ∈ Finset.range N, (1 : ℂ) / ((k + 1 : ℕ) : ℂ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NonperturbativePhaseResummation.summable_and_norm_le_modeTerm": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NonperturbativePhaseResummation",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NonperturbativePhaseResummation.summable_and_norm_le_modeTerm",
+      "kind": "theorem",
+      "statement_id": "sha256:1162167ff1094a343e66d471e39c2c8fafffa221938531f7d7bb7c280f0d9a7f",
+      "line": 108,
+      "signature": "theorem summable_and_norm_le_modeTerm (g : ℝ) : Summable (modeTerm g) ∧ ‖∑' k : ℕ, modeTerm g k‖ ≤ g ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NonperturbativePhaseResummation.tendsto_neg_im_cubic_coeff_atTop": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NonperturbativePhaseResummation",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NonperturbativePhaseResummation.tendsto_neg_im_cubic_coeff_atTop",
+      "kind": "theorem",
+      "statement_id": "sha256:1162167ff1094a343e66d471e39c2c8fafffa221938531f7d7bb7c280f0d9a7f",
+      "line": 255,
+      "signature": "theorem tendsto_neg_im_cubic_coeff_atTop : Tendsto (fun N : ℕ => -((1 / 6 : ℂ) * iteratedDeriv 3 (partialPhaseSum N) 0).im) atTop atTop",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullConeClockAreaBound.operator_clock_area_upper_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeClockAreaBound",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeClockAreaBound.operator_clock_area_upper_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:88da614eb788c4ec4b01c0f7450ee043d76815673140bb68122371aa742bd6d0",
+      "line": 251,
+      "signature": "theorem operator_clock_area_upper_bound (s : Finset ι) (w : ι → ℝ) (hw : ∀ i ∈ s, 0 ≤ w i) (hM : 0 < ∑ i ∈ s, w i) (ε area ℓ : ℝ) (hε : ε < 1) (harea : 0 ≤ area) (_hℓ : 0 ≤ ℓ) (A E : ι → H →L[ℂ] H) (B : H →L[ℂ] H) (hB_sa : IsSelfAdjoint B) (hB_sq : B * B = ∑ i ∈ s, (w i : ℂ) • A i) (hE : ∀ i ∈ s, ∀ v : H, ‖v‖ ^ 2 ≤ (⟪v, E i v⟫_ℂ).re) (η : H) (hBη : B η ≠ 0) (hA_area : ∑ i ∈ s, w i * ‖A i η‖ ^ 2 = area * ‖η‖ ^ 2) (hclock : (1 - ε) * ∑ i ∈ s, w i * (⟪A i η, E i (A i η)⟫_ℂ).re ≤ ℓ * ‖B η‖ ^ 2) : area ≤ (∑ i ∈ s, w i) * ℓ ^ 2 / (1 - ε) ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullConeClockAreaBound.operator_shear_clock_lower_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeClockAreaBound",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeClockAreaBound.operator_shear_clock_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:88da614eb788c4ec4b01c0f7450ee043d76815673140bb68122371aa742bd6d0",
+      "line": 171,
+      "signature": "theorem operator_shear_clock_lower_bound (s : Finset ι) (w : ι → ℝ) (hw : ∀ i ∈ s, 0 ≤ w i) (hM : 0 < ∑ i ∈ s, w i) (ε area : ℝ) (hε : ε < 1) (harea : 0 ≤ area) (A E : ι → H →L[ℂ] H) (B : H →L[ℂ] H) (hB_sa : IsSelfAdjoint B) (hB_sq : B * B = ∑ i ∈ s, (w i : ℂ) • A i) (hE : ∀ i ∈ s, ∀ v : H, ‖v‖ ^ 2 ≤ (⟪v, E i v⟫_ℂ).re) (η : H) (hA_area : ∑ i ∈ s, w i * ‖A i η‖ ^ 2 = area * ‖η‖ ^ 2) : (1 - ε) * Real.sqrt (area / (∑ i ∈ s, w i)) * ‖B η‖ ^ 2 ≤ (1 - ε) * ∑ i ∈ s, w i * (⟪A i η, E i (A i η)⟫_ℂ).re",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullConeClockAreaBound.operator_weighted_cauchy_schwarz_identity": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeClockAreaBound",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeClockAreaBound.operator_weighted_cauchy_schwarz_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:88da614eb788c4ec4b01c0f7450ee043d76815673140bb68122371aa742bd6d0",
+      "line": 54,
+      "signature": "theorem operator_weighted_cauchy_schwarz_identity (s : Finset ι) (w : ι → ℝ) (A : ι → H →L[ℂ] H) (η : H) : (∑ i ∈ s, w i) * (∑ i ∈ s, w i * ‖A i η‖ ^ 2) - ‖(∑ i ∈ s, (w i : ℂ) • A i) η‖ ^ 2 = (1 / 2 : ℝ) * ∑ i ∈ s, ∑ j ∈ s, w i * w j * ‖(A i - A j) η‖ ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullConeClockAreaBound.shear_clock_deficit_and_rigidity": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeClockAreaBound",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeClockAreaBound.shear_clock_deficit_and_rigidity",
+      "kind": "theorem",
+      "statement_id": "sha256:88da614eb788c4ec4b01c0f7450ee043d76815673140bb68122371aa742bd6d0",
+      "line": 297,
+      "signature": "theorem shear_clock_deficit_and_rigidity (s : Finset ι) (hs : s.Nonempty) (w ρ δ : ι → ℝ) (ε : ℝ) (hw : ∀ i ∈ s, 0 < w i) (hρ : ∀ i ∈ s, 0 < ρ i) (hδ : ∀ i ∈ s, 0 ≤ δ i) (hε : ε < 1) : let M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/Analysis/PositiveInteriorGridObstruction.positive_interior_grid_algebraic_obstruction": {
       "module": "D5/S3/Quantum/Analysis/PositiveInteriorGridObstruction",
