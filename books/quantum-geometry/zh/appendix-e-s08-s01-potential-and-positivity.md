@@ -677,7 +677,7 @@ $$
 
 记 $\omega(G)$ 为最大团的顶点数。在 $\omega(G)\le4$ 时，第 1 款给出旧的 $R=(\sqrt{17}-1)/2\approx1.5616$ 上界。对所有满足 $\omega(G)\le4$ 的有限弦图，[@thm-appe-three-tree-clique-four-bracket] 给出 $\frac43\le S_4\le\frac{72537}{50000}=1.45074<\frac32$。在 $\omega(G)\le5$ 时可取 $R=2<(3+\sqrt{33})/4$，因而所有 $4$-树都有 $2\varepsilon$ 的统一上界。第 2 款在 $\omega(G)\le6$ 时给出 $2\sqrt3-1\approx2.4641<3$，改进了前述界。第 3 款在 $\omega(G)\le7$ 时给出 $(3+\sqrt7)/2\approx2.8229<3$，因而所有 $6$-树都有严格小于 $3$ 的统一系数。
 
-团大小不受限时，最优实 Banach 统一系数恰为 $4$，双不变伪度量群的最优统一系数亦为 $4$，见 [@thm-appe-chordal-banach-sharp-four]。支配团条件下的可选上界 $3$ 仍需形式化依据。圆度量 $\mathrm{SU}(2)$ 的弦图通用常数与等式 $C_{\mathrm{SU}(2)}(K_4)=c_*$ 的全局 Lean 形式化仍待完成。见 [@prob-appe-round-quaternion-k4-optimal-constant]。
+团大小不受限时，最优实 Banach 统一系数恰为 $4$，双不变伪度量群的最优统一系数亦为 $4$，见 [@thm-appe-chordal-banach-sharp-four]。支配团条件下的可选上界 $3$ 仍需形式化依据。对于取圆度量的非阿贝尔群 $\mathrm{SU}(2)$，Lean 4 给出统一上界系数 $\frac{434}{125}=3.472<\frac72<4$，另有小缺陷和小团数下的重构界，见[附录 E.8.1.7](appendix-e-s08-s01-s07-chordal-su2-sharp-bounds.md#sec-appe-chordal-su2-sharp-bounds)。最优统一系数仍待确定。等式 $C_{\mathrm{SU}(2)}(K_4)=c_*$ 仍是独立的开放问题，见 [@prob-appe-round-quaternion-k4-optimal-constant]。
 
 接下来固定非线性目标群，考察完全图上的最优系数。
 

@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "a6597945095bf0bbf2546c2ac2272c4e783bee11",
-  "pinned_at": "2026-11-27T21:45:15Z",
+  "commit": "38d4a2b57b7a6480818a79261ec1ccf898f0a211",
+  "pinned_at": "2026-11-27T22:11:29Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1837,6 +1837,123 @@
       "statement_id": "sha256:c3543c37c6aa790f2c7b888a0c3f498ce73a440b2004abdeb346259504806d7c",
       "line": 557,
       "signature": "theorem exists_universal_core_simplicial_banach_potential {V : Type u} [Finite V] (G : SimpleGraph V) (H U : Set V) (_hUH : U ⊆ H) (hU : U.Nonempty) (huniv : ∀ u ∈ U, ∀ h ∈ H, u ≠ h → G.Adj u h) (hind : G.IsIndepSet Hᶜ) (m : ℕ) (hm : 1 ≤ m) (hattach : ∀ o ∉ H, {a : V | G.Adj o a} ⊆ H ∧ G.IsClique {a : V | G.Adj o a} ∧ {a : V | G.Adj o a}.ncard ≤ m) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.IsChordal.exists_cliqueFive_su2_gain_potential_half_pi": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.IsChordal.exists_cliqueFive_su2_gain_potential_half_pi",
+      "kind": "theorem",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 214,
+      "signature": "theorem IsChordal.exists_cliqueFive_su2_gain_potential_half_pi [Finite V] (hG : G.IsChordal) {g : V → V → U} (hskew : G.SU2Skew g) (hclique : ∀ S : Finset V, G.IsClique (↑S : Set V) → S.card ≤ 5) : ∃ p : V → U, G.SU2Fits g p (π / 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.IsChordal.exists_cliqueFour_su2_gain_potential_two": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.IsChordal.exists_cliqueFour_su2_gain_potential_two",
+      "kind": "theorem",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 360,
+      "signature": "theorem IsChordal.exists_cliqueFour_su2_gain_potential_two [Finite V] (hG : G.IsChordal) {g : V → V → U} (hskew : G.SU2Skew g) {δ : ℝ} (hδ : 0 ≤ δ) (htri : G.SU2TriangleBound g δ) (hclique : ∀ S : Finset V, G.IsClique (↑S : Set V) → S.card ≤ 4) : ∃ p : V → U, G.SU2Fits g p (2 * δ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.IsChordal.exists_cliqueThree_su2_gain_potential_min": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.IsChordal.exists_cliqueThree_su2_gain_potential_min",
+      "kind": "theorem",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 230,
+      "signature": "theorem IsChordal.exists_cliqueThree_su2_gain_potential_min [Finite V] (hG : G.IsChordal) {g : V → V → U} (hskew : G.SU2Skew g) {δ : ℝ} (hδ : 0 ≤ δ) (htri : G.SU2TriangleBound g δ) (hclique : ∀ S : Finset V, G.IsClique (↑S : Set V) → S.card ≤ 3) : ∃ p : V → U, G.SU2Fits g p (min δ (π / 2))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.IsChordal.exists_su2_gain_potential_global_sharp": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.IsChordal.exists_su2_gain_potential_global_sharp",
+      "kind": "theorem",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 653,
+      "signature": "theorem IsChordal.exists_su2_gain_potential_global_sharp [Finite V] (hG : G.IsChordal) (hconn : G.Connected) {g : V → V → U} (hskew : G.SU2Skew g) {δ : ℝ} (hδ : 0 ≤ δ) (htri : G.SU2TriangleBound g δ) : ∃ p : V → U, G.SU2Fits g p ((434 / 125) * δ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.IsChordal.exists_su2_gain_potential_small_defect_eight_fifths": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.IsChordal.exists_su2_gain_potential_small_defect_eight_fifths",
+      "kind": "theorem",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 168,
+      "signature": "theorem IsChordal.exists_su2_gain_potential_small_defect_eight_fifths [Finite V] (hG : G.IsChordal) {g : V → V → U} (hskew : G.SU2Skew g) {δ : ℝ} (hδ : 0 ≤ δ) (hsmall : δ ≤ 1 / 10) (htri : G.SU2TriangleBound g δ) : ∃ p : V → U, G.SU2Fits g p ((8 / 5) * δ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.IsChordal.exists_su2_gain_potential_small_defect_two": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.IsChordal.exists_su2_gain_potential_small_defect_two",
+      "kind": "theorem",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 148,
+      "signature": "theorem IsChordal.exists_su2_gain_potential_small_defect_two [Finite V] (hG : G.IsChordal) {g : V → V → U} (hskew : G.SU2Skew g) {δ : ℝ} (hδ : 0 ≤ δ) (hδπ : δ ≤ π / 6) (htri : G.SU2TriangleBound g δ) : ∃ p : V → U, G.SU2Fits g p (2 * δ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.SU2Fits": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.SU2Fits",
+      "kind": "def",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 34,
+      "signature": "def SU2Fits (G : SimpleGraph V) (g : V → V → U) (p : V → U) (r : ℝ) : Prop",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.SU2Skew": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.SU2Skew",
+      "kind": "def",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 25,
+      "signature": "def SU2Skew (G : SimpleGraph V) (g : V → V → U) : Prop",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.SU2TriangleBound": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.SU2TriangleBound",
+      "kind": "def",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 29,
+      "signature": "def SU2TriangleBound (G : SimpleGraph V) (g : V → V → U) (δ : ℝ) : Prop",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
