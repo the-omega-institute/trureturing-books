@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "d28965da6abb2f4d7e53befb2598288fb3a500d1",
-  "pinned_at": "2026-11-27T00:29:46Z",
+  "commit": "fb0b3a142e918b6c7cc6001991a0f5fabe8cbdd6",
+  "pinned_at": "2026-11-27T01:08:28Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -921,6 +921,19 @@
       "statement_id": "sha256:0c8b01a121d53c2dc4ba3fbe5f7be2296bd116abb06ce4386e4d1ba1802b7a31",
       "line": 103,
       "signature": "theorem accumulated_sagitta_phases (σ T α : ℝ) (hT : 0 < T) : (1 / 2 < α → Tendsto (accumulatedSagitta σ T α) atTop (𝓝 0)) ∧ (α = 1 / 2 → Tendsto (accumulatedSagitta σ T α) atTop (𝓝 (σ ^ 2 * T / 2))) ∧ (σ ≠ 0 → 0 < α → α < 1 / 2 → Tendsto (accumulatedSagitta σ T α) atTop atTop)"
+    },
+    "D5/S3/Analytic/Asymptotics/NormalizedSignedHeatTrace.normalized_cutoff_heat_strictMono": {
+      "module": "D5/S3/Analytic/Asymptotics/NormalizedSignedHeatTrace",
+      "name": "D5.S3.Analytic.Asymptotics.NormalizedSignedHeatTrace.normalized_cutoff_heat_strictMono",
+      "kind": "theorem",
+      "statement_id": "sha256:c465c3438ed6f7aa83a65737b2fd1c67f71493031f2338c4b5705bebe7a48409",
+      "line": 99,
+      "signature": "theorem normalized_cutoff_heat_strictMono (n : ℕ) (g z : ℕ → ℝ) (B dB : ℝ → ℝ) (b : ℝ) (hprefix : ∀ k ≤ n, (∑ i ∈ range k, g i) ≤ 0) (htotal : (∑ i ∈ range n, g i) < 0) (hz : ∀ i, 0 ≤ z i) (horder : Monotone z) (hB : ∀ x ∈ Ioc 0 b, B x < 0) (hderiv : ∀ x ∈ Ioc 0 b, HasDerivAt B (dB x) x) (hgap : ∀ x ∈ Ioc 0 b, B x < x * dB x) : StrictMonoOn (fun x : ℝ => (x^2 * ∑ i ∈ range n, g i * Real.exp (-(z i / x))) / B x) (Ioc 0 b)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Analytic/Asymptotics/PrimeVersineSums.prime_versine_phases": {
       "module": "D5/S3/Analytic/Asymptotics/PrimeVersineSums",
