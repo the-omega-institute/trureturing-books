@@ -651,7 +651,7 @@ Let $N_\zeta(T)$ count the nontrivial zeros with $0<\operatorname{Im}\rho\le T$,
 There are only finitely many zero ordinates in $(T,T+1]$. In a short open interval immediately to the right of $T$, there are no zero ordinates and the count equals $N_\zeta(T)$. Taking the right limit preserves the bound and includes the full multiplicity at the cutoff. The full proof is checked by the Lean kernel.
 :::
 
-**Manual derivation.** Under RH, equation (1) and Theorem 2 of Carneiro, Chandee and Milinovich give $|N_\zeta(T)-M(T)|\le C\log T/\log\log T$ at sufficiently large heights away from zero ordinates, for some constant $C$. This envelope is continuous at sufficiently large heights, so the right-limit theorem extends it to every inclusive cutoff. The actual ζ ordinates therefore satisfy the sublogarithmic condition, and the uniform pair-sum bound applies. The critical collision theorem still requires a fixed coefficient strictly below $2\pi c^2$ on the long bands. [Equation (1) and Theorem 2](https://arxiv.org/abs/1309.1526)
+**Manual derivation.** Under RH, equation (1) and Theorem 2 of Carneiro, Chandee and Milinovich give $|N_\zeta(T)-M(T)|\le C\log T/\log\log T$ at sufficiently large heights away from zero ordinates, for some constant $C$. This envelope is continuous at sufficiently large heights, so the right-limit theorem extends it to every sufficiently large inclusive cutoff. The actual ζ ordinates therefore satisfy the sublogarithmic condition, and the uniform pair-sum bound applies. The critical collision theorem still requires a fixed coefficient strictly below $2\pi c^2$ on the long bands. [Equation (1) and Theorem 2](https://arxiv.org/abs/1309.1526)
 
 ### Commensurate spectra with the same unit-band profile
 
