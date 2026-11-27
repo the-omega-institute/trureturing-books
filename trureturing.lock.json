@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "1b221a306acf68c117194cb3b4bd26b0076867d7",
-  "pinned_at": "2026-11-26T23:34:47Z",
+  "commit": "eb224e38921b4affaaded7abc78daab78bb3f68f",
+  "pinned_at": "2026-11-26T23:59:16Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -6308,6 +6308,149 @@
       "statement_id": "sha256:02f9cbddf9689d1494a45ce0106b9fd36590f907dd2100819830d24fad29873c",
       "line": 139,
       "signature": "theorem schwarzschild_weylQuartic (M r : ℝ) : (weylQuarticEquiv (schwarzschildWeyl M r)).val = Polynomial.monomial 2 ((24 : ℂ) * (M / r ^ 3 : ℝ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ReggeSchlafli4D.dihedral_cosine": {
+      "module": "D5/S3/Geometry/Lorentz/ReggeSchlafli4D",
+      "name": "D5.S3.Geometry.Lorentz.ReggeSchlafli4D.dihedral_cosine",
+      "kind": "theorem",
+      "statement_id": "sha256:a2056dccea55135e39de2927a264bd358617032b7dd4a588332c714bc53223ab",
+      "line": 261,
+      "signature": "theorem dihedral_cosine {n : ℕ} (s : SimplexData (n + 2)) (h : Hinge (n + 2)) : Real.cos (dihedralAngle s h) = -⟪facetNormal s h.val.1, facetNormal s h.val.2⟫_ℝ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ReggeSchlafli4D.euclidean_schlafli": {
+      "module": "D5/S3/Geometry/Lorentz/ReggeSchlafli4D",
+      "name": "D5.S3.Geometry.Lorentz.ReggeSchlafli4D.euclidean_schlafli",
+      "kind": "theorem",
+      "statement_id": "sha256:a2056dccea55135e39de2927a264bd358617032b7dd4a588332c714bc53223ab",
+      "line": 394,
+      "signature": "theorem euclidean_schlafli {n : ℕ} (p : SimplexPath (n + 2)) (t : ℝ) : ∑ h, hingeVolume (p.simplex t) h * deriv (fun x => dihedralAngle (p.simplex x) h) t = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ReggeSchlafli4D.facet_closure": {
+      "module": "D5/S3/Geometry/Lorentz/ReggeSchlafli4D",
+      "name": "D5.S3.Geometry.Lorentz.ReggeSchlafli4D.facet_closure",
+      "kind": "theorem",
+      "statement_id": "sha256:a2056dccea55135e39de2927a264bd358617032b7dd4a588332c714bc53223ab",
+      "line": 161,
+      "signature": "theorem facet_closure {n : ℕ} [NeZero n] (s : SimplexData n) : (∀ i, 0 < facetArea s i) ∧ ∑ i, facetArea s i • facetNormal s i = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ReggeSchlafli4D.facet_normal": {
+      "module": "D5/S3/Geometry/Lorentz/ReggeSchlafli4D",
+      "name": "D5.S3.Geometry.Lorentz.ReggeSchlafli4D.facet_normal",
+      "kind": "theorem",
+      "statement_id": "sha256:a2056dccea55135e39de2927a264bd358617032b7dd4a588332c714bc53223ab",
+      "line": 101,
+      "signature": "theorem facet_normal {n : ℕ} [NeZero n] (s : SimplexData n) (i : Fin (n + 1)) : ‖facetNormal s i‖ = 1 ∧ ∀ x ∈ affineSpan ℝ (Set.range (s.faceOpposite i).points), ⟪facetNormal s i, s.points i - x⟫_ℝ < 0 ∧ ∀ v ∈ (affineSpan ℝ (Set.range (s.faceOpposite i).points)).direction, ⟪facetNormal s i, v⟫_ℝ = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ReggeSchlafli4D.four_simplex_schlafli": {
+      "module": "D5/S3/Geometry/Lorentz/ReggeSchlafli4D",
+      "name": "D5.S3.Geometry.Lorentz.ReggeSchlafli4D.four_simplex_schlafli",
+      "kind": "theorem",
+      "statement_id": "sha256:a2056dccea55135e39de2927a264bd358617032b7dd4a588332c714bc53223ab",
+      "line": 451,
+      "signature": "theorem four_simplex_schlafli (p : SimplexPath 4) (t : ℝ) : ∑ h, triangleArea (p.simplex t) h * deriv (fun x => dihedralAngle (p.simplex x) h) t = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regge_variation": {
+      "module": "D5/S3/Geometry/Lorentz/ReggeSchlafli4D",
+      "name": "D5.S3.Geometry.Lorentz.ReggeSchlafli4D.regge_variation",
+      "kind": "theorem",
+      "statement_id": "sha256:a2056dccea55135e39de2927a264bd358617032b7dd4a588332c714bc53223ab",
+      "line": 500,
+      "signature": "theorem regge_variation {σ H : Type*} [Fintype σ] [Fintype H] [DecidableEq H] (p : ReggePath σ H) (t : ℝ) : HasDerivAt (reggeAction p) (∑ h, deriv (p.area h) t * deficit p h t) t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regular_dihedral_angle": {
+      "module": "D5/S3/Geometry/Lorentz/ReggeSchlafli4D",
+      "name": "D5.S3.Geometry.Lorentz.ReggeSchlafli4D.regular_dihedral_angle",
+      "kind": "theorem",
+      "statement_id": "sha256:a2056dccea55135e39de2927a264bd358617032b7dd4a588332c714bc53223ab",
+      "line": 629,
+      "signature": "theorem regular_dihedral_angle (ℓ : ℝ) (hℓ : 0 < ℓ) (h : Hinge 4) : dihedralAngle (regularSimplex ℓ hℓ) h = Real.arccos (1 / 4)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regular_edge_length": {
+      "module": "D5/S3/Geometry/Lorentz/ReggeSchlafli4D",
+      "name": "D5.S3.Geometry.Lorentz.ReggeSchlafli4D.regular_edge_length",
+      "kind": "theorem",
+      "statement_id": "sha256:a2056dccea55135e39de2927a264bd358617032b7dd4a588332c714bc53223ab",
+      "line": 619,
+      "signature": "theorem regular_edge_length (ℓ : ℝ) (hℓ : 0 < ℓ) (i j : Fin 5) (hij : i ≠ j) : dist ((regularSimplex ℓ hℓ).points i) ((regularSimplex ℓ hℓ).points j) = ℓ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regular_scaling_cancellation": {
+      "module": "D5/S3/Geometry/Lorentz/ReggeSchlafli4D",
+      "name": "D5.S3.Geometry.Lorentz.ReggeSchlafli4D.regular_scaling_cancellation",
+      "kind": "theorem",
+      "statement_id": "sha256:a2056dccea55135e39de2927a264bd358617032b7dd4a588332c714bc53223ab",
+      "line": 693,
+      "signature": "theorem regular_scaling_cancellation (ℓ : ℝ) (hℓ : 0 < ℓ) (t : ℝ) (h : Hinge 4) : HasDerivAt (fun x => dihedralAngle ((regularScaling ℓ hℓ).simplex x) h) 0 t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regular_triangle_area": {
+      "module": "D5/S3/Geometry/Lorentz/ReggeSchlafli4D",
+      "name": "D5.S3.Geometry.Lorentz.ReggeSchlafli4D.regular_triangle_area",
+      "kind": "theorem",
+      "statement_id": "sha256:a2056dccea55135e39de2927a264bd358617032b7dd4a588332c714bc53223ab",
+      "line": 649,
+      "signature": "theorem regular_triangle_area (ℓ : ℝ) (hℓ : 0 < ℓ) (h : Hinge 4) : triangleArea (regularSimplex ℓ hℓ) h = Real.sqrt 3 / 4 * ℓ ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ReggeSchlafli4D.tetrahedron_schlafli": {
+      "module": "D5/S3/Geometry/Lorentz/ReggeSchlafli4D",
+      "name": "D5.S3.Geometry.Lorentz.ReggeSchlafli4D.tetrahedron_schlafli",
+      "kind": "theorem",
+      "statement_id": "sha256:a2056dccea55135e39de2927a264bd358617032b7dd4a588332c714bc53223ab",
+      "line": 445,
+      "signature": "theorem tetrahedron_schlafli (p : SimplexPath 3) (t : ℝ) : ∑ h, edgeLength (p.simplex t) h * deriv (fun x => dihedralAngle (p.simplex x) h) t = 0",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
