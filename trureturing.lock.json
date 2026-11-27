@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "38910d2c96de5f4ed439d8fdc0d31b7f34f0e066",
-  "pinned_at": "2026-11-27T20:16:19Z",
+  "commit": "548388cde9b27d282a17a3ead04870288e40d197",
+  "pinned_at": "2026-11-27T20:56:56Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -11271,6 +11271,149 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors.coherentShiftChar_eq_weyl_vacuum_of_summable": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRCoherentMemorySectors.coherentShiftChar_eq_weyl_vacuum_of_summable",
+      "kind": "theorem",
+      "statement_id": "sha256:1ee2fdc7fbcf3fb15c869b243073507b4f7b6c23397aa5286b6d1542bb3796cb",
+      "line": 60,
+      "signature": "theorem coherentShiftChar_eq_weyl_vacuum_of_summable (b : HilbertBasis I ℂ H) (h : I → ℂ) (hh : Summable (fun i => ‖h i‖ ^ 2)) : let η",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors.coherentShiftChar_gaussian_avg": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRCoherentMemorySectors.coherentShiftChar_gaussian_avg",
+      "kind": "theorem",
+      "statement_id": "sha256:1ee2fdc7fbcf3fb15c869b243073507b4f7b6c23397aa5286b6d1542bb3796cb",
+      "line": 83,
+      "signature": "theorem coherentShiftChar_gaussian_avg (F : Finset I) (h : I → ℂ) : (Real.pi : ℂ)⁻¹ ^ F.card * (∫ w : F → ℂ, (weight w : ℂ) * coherentShiftChar F h w) = ∏ i : F, (Real.exp (-‖h i‖ ^ 2) : ℂ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors.coherentShift_gns_disjoint_of_diff_not_summable": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRCoherentMemorySectors.coherentShift_gns_disjoint_of_diff_not_summable",
+      "kind": "theorem",
+      "statement_id": "sha256:1ee2fdc7fbcf3fb15c869b243073507b4f7b6c23397aa5286b6d1542bb3796cb",
+      "line": 527,
+      "signature": "theorem coherentShift_gns_disjoint_of_diff_not_summable {A Y₁ Y₂ : Type*} [CStarAlgebra A] [PartialOrder A] [StarOrderedRing A] [NormedAddCommGroup Y₁] [InnerProductSpace ℂ Y₁] [CompleteSpace Y₁] [NormedAddCommGroup Y₂] [InnerProductSpace ℂ Y₂] [CompleteSpace Y₂] {σ : (I →₀ ℂ) →ₗ[ℝ] (I →₀ ℂ) →ₗ[ℝ] ℝ} (W : WeylSystem (A",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors.coherentShift_in_fock_folium_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRCoherentMemorySectors.coherentShift_in_fock_folium_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:1ee2fdc7fbcf3fb15c869b243073507b4f7b6c23397aa5286b6d1542bb3796cb",
+      "line": 208,
+      "signature": "theorem coherentShift_in_fock_folium_iff (b : HilbertBasis I ℂ H) (h : I → ℂ) : CoherentShiftInFockFolium b h ↔ Summable (fun i => ‖h i‖ ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors.coherentShift_not_in_fock_folium_of_not_summable": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRCoherentMemorySectors.coherentShift_not_in_fock_folium_of_not_summable",
+      "kind": "theorem",
+      "statement_id": "sha256:1ee2fdc7fbcf3fb15c869b243073507b4f7b6c23397aa5286b6d1542bb3796cb",
+      "line": 233,
+      "signature": "theorem coherentShift_not_in_fock_folium_of_not_summable (b : HilbertBasis I ℂ H) {h : I → ℂ} (hh : ¬ Summable (fun i => ‖h i‖ ^ 2)) : ¬ CoherentShiftInFockFolium b h",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors.shiftedFockRep_cyclic": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRCoherentMemorySectors.shiftedFockRep_cyclic",
+      "kind": "theorem",
+      "statement_id": "sha256:1ee2fdc7fbcf3fb15c869b243073507b4f7b6c23397aa5286b6d1542bb3796cb",
+      "line": 375,
+      "signature": "theorem shiftedFockRep_cyclic (b : HilbertBasis I ℂ H) (h : I → ℂ) : Dense (Submodule.span ℂ (range fun d => shiftedFockRep b h d (fockVacuum I)) : Set (BosonFock I))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors.shiftedFockRep_disjoint_of_diff_not_summable": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRCoherentMemorySectors.shiftedFockRep_disjoint_of_diff_not_summable",
+      "kind": "theorem",
+      "statement_id": "sha256:1ee2fdc7fbcf3fb15c869b243073507b4f7b6c23397aa5286b6d1542bb3796cb",
+      "line": 418,
+      "signature": "theorem shiftedFockRep_disjoint_of_diff_not_summable (b : HilbertBasis I ℂ H) (h₁ h₂ : I → ℂ) (hr : ¬ Summable (fun i => ‖h₁ i - h₂ i‖ ^ 2)) (T : BosonFock I →L[ℂ] BosonFock I) (hT : ∀ d, T.comp (shiftedFockRep b h₁ d) = (shiftedFockRep b h₂ d).comp T) : T = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors.shiftedFockRep_mul": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRCoherentMemorySectors.shiftedFockRep_mul",
+      "kind": "theorem",
+      "statement_id": "sha256:1ee2fdc7fbcf3fb15c869b243073507b4f7b6c23397aa5286b6d1542bb3796cb",
+      "line": 292,
+      "signature": "theorem shiftedFockRep_mul (b : HilbertBasis I ℂ H) (h : I → ℂ) (d e : I →₀ ℂ) : shiftedFockRep b h d * shiftedFockRep b h e = Complex.exp (-(Complex.I * (⟪finiteModeSynthesis b d, finiteModeSynthesis b e⟫_ℂ).im)) • shiftedFockRep b h (d + e)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors.shiftedFockRep_scalar_commutant": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRCoherentMemorySectors.shiftedFockRep_scalar_commutant",
+      "kind": "theorem",
+      "statement_id": "sha256:1ee2fdc7fbcf3fb15c869b243073507b4f7b6c23397aa5286b6d1542bb3796cb",
+      "line": 360,
+      "signature": "theorem shiftedFockRep_scalar_commutant (b : HilbertBasis I ℂ H) (h : I → ℂ) : ScalarCommutant (shiftedFockRep b h)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors.shiftedFockRep_vacuum_inner": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRCoherentMemorySectors.shiftedFockRep_vacuum_inner",
+      "kind": "theorem",
+      "statement_id": "sha256:1ee2fdc7fbcf3fb15c869b243073507b4f7b6c23397aa5286b6d1542bb3796cb",
+      "line": 337,
+      "signature": "theorem shiftedFockRep_vacuum_inner (b : HilbertBasis I ℂ H) (h : I → ℂ) (F : Finset I) (w : F → ℂ) : ⟪fockVacuum I, shiftedFockRep b h (finiteModeDisplacement F w) (fockVacuum I)⟫_ℂ = coherentShiftChar F h w",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors.uncountable_pairwise_disjoint_memory_sectors": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRCoherentMemorySectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRCoherentMemorySectors.uncountable_pairwise_disjoint_memory_sectors",
+      "kind": "theorem",
+      "statement_id": "sha256:1ee2fdc7fbcf3fb15c869b243073507b4f7b6c23397aa5286b6d1542bb3796cb",
+      "line": 572,
+      "signature": "theorem uncountable_pairwise_disjoint_memory_sectors : Uncountable (Set.range (memorySectorRep)) ∧ ∀ m₁ m₂ : ℝ, m₁ ≠ m₂ → ∀ T : BosonFock ℕ →L[ℂ] BosonFock ℕ, (∀ (F : Finset ℕ) (w : F → ℂ), T.comp (memorySectorRep m₁ F w) = (memorySectorRep m₂ F w).comp T) → T = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Analysis/NullConeGravity/CCRConjugation.real_imag_decomposition": {
       "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRConjugation",
       "name": "NullConeGravity.real_imag_decomposition",
@@ -15002,6 +15145,200 @@
       "statement_id": "sha256:c274330bef460af9b982288d588acbdb483a0b0fdc345f39f0c5ee9772a35067",
       "line": 111,
       "signature": "theorem regulatedShellQuad5D_nonneg (M ε : ℝ) (F : ConeProfile5D) : 0 ≤ regulatedShellQuad5D M ε F",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.bondiFlux_eq_zero_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.bondiFlux_eq_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 45,
+      "signature": "theorem bondiFlux_eq_zero_iff (N : Sphere4D → ℂ) (hN : Continuous N) : bondiFlux N = 0 ↔ N = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.bondiFlux_nonneg": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.bondiFlux_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 36,
+      "signature": "theorem bondiFlux_nonneg (N : Sphere4D → ℂ) : 0 ≤ bondiFlux N",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.bondi_energy_balance": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.bondi_energy_balance",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 82,
+      "signature": "theorem bondi_energy_balance {M : ℝ → ℝ} {N : ℝ → Sphere4D → ℂ} (hM : Continuous (deriv M)) (hlaw : ∀ u, HasDerivAt M (-bondiFlux (N u)) u) (a b : ℝ) : M a - M b = ∫ u in a..b, bondiFlux (N u)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.bondi_energy_radiated_nonneg": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.bondi_energy_radiated_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 77,
+      "signature": "theorem bondi_energy_radiated_nonneg (N : ℝ → Sphere4D → ℂ) {a b : ℝ} (hab : a ≤ b) : 0 ≤ ∫ u in a..b, bondiFlux (N u)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.bondi_mass_loss_nonpos": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.bondi_mass_loss_nonpos",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 71,
+      "signature": "theorem bondi_mass_loss_nonpos {M : ℝ → ℝ} {N : ℝ → Sphere4D → ℂ} (hlaw : ∀ u, HasDerivAt M (-bondiFlux (N u)) u) : Antitone M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.bondi_strict_mass_loss_of_nonzero_news": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.bondi_strict_mass_loss_of_nonzero_news",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 94,
+      "signature": "theorem bondi_strict_mass_loss_of_nonzero_news {M : ℝ → ℝ} {N : ℝ → Sphere4D → ℂ} (hN : Continuous (Function.uncurry N)) (hlaw : ∀ u, HasDerivAt M (-bondiFlux (N u)) u) {a b u₀ : ℝ} (hu₀ : u₀ ∈ Ioo a b) (hnews : N u₀ ≠ 0) : M b < M a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.dyadic_memory_bin_weight": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.dyadic_memory_bin_weight",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 269,
+      "signature": "theorem dyadic_memory_bin_weight (k : ℕ) : (∫ ω in ((2 : ℝ) ^ (k + 1))⁻¹..((2 : ℝ) ^ k)⁻¹, ω⁻¹) = Real.log 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.dyadic_memory_diff_summable_sq_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.dyadic_memory_diff_summable_sq_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 288,
+      "signature": "theorem dyadic_memory_diff_summable_sq_iff (m₁ m₂ : ℝ) : Summable (fun k : ℕ => ‖dyadicMemoryProfile m₁ k - dyadicMemoryProfile m₂ k‖ ^ 2) ↔ m₁ = m₂",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.dyadic_memory_not_summable_sq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.dyadic_memory_not_summable_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 280,
+      "signature": "theorem dyadic_memory_not_summable_sq {m : ℝ} (hm : m ≠ 0) : ¬ Summable (fun k : ℕ => ‖dyadicMemoryProfile m k‖ ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.memoryElliptic_pos_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.memoryElliptic_pos_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 124,
+      "signature": "theorem memoryElliptic_pos_iff (ℓ : ℕ) : 0 < memoryEllipticEigenvalue ℓ ↔ 2 ≤ ℓ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.memoryElliptic_zero_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.memoryElliptic_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 114,
+      "signature": "theorem memoryElliptic_zero_iff (ℓ : ℕ) : memoryEllipticEigenvalue ℓ = 0 ↔ ℓ = 0 ∨ ℓ = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.memoryGreenSq_summable": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.memoryGreenSq_summable",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 141,
+      "signature": "theorem memoryGreenSq_summable : Summable (fun k : ℕ => (harmonicMult 4 (k + 2) : ℝ) / memoryEllipticEigenvalue (k + 2) ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.nonzero_memory_ir_diverges": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.nonzero_memory_ir_diverges",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 187,
+      "signature": "theorem nonzero_memory_ir_diverges {f : ℝ → ℂ} (hf : Continuous f) (hmem : f 0 ≠ 0) {Λ : ℝ} (hΛ : 0 < Λ) : (∃ a > 0, ∃ δ ∈ Ioc (0 : ℝ) Λ, ∀ ε ∈ Ioo (0 : ℝ) δ, a * Real.log (δ / ε) ≤ ∫ ω in ε..Λ, irDensity f ω) ∧ Tendsto (fun ε => ∫ ω in ε..Λ, irDensity f ω) (𝓝[>] 0) atTop ∧ ¬ IntegrableOn (irDensity f) (Ioo (0 : ℝ) Λ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.poincare_translation_dim_eq_four": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.poincare_translation_dim_eq_four",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 137,
+      "signature": "theorem poincare_translation_dim_eq_four : harmonicMult 4 0 + harmonicMult 4 1 = 4",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D.zero_memory_ir_integrable": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullMemoryBMS4D",
+      "name": "NullConeGravity.zero_memory_ir_integrable",
+      "kind": "theorem",
+      "statement_id": "sha256:852a2cb9d1527b0788abe824986a6c859853fe6279e6d3fc8eaac991f61723d2",
+      "line": 246,
+      "signature": "theorem zero_memory_ir_integrable {f : ℝ → ℂ} {Λ C α : ℝ} (hΛ : 0 < Λ) (hα : 0 < α) (hf : ContinuousOn f (Icc 0 Λ)) (hbound : ∀ ω ∈ Ioo (0 : ℝ) Λ, ‖f ω‖ ≤ C * ω ^ α) : IntegrableOn (irDensity f) (Ioo (0 : ℝ) Λ)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
