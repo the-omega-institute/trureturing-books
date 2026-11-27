@@ -252,6 +252,26 @@ $$
 第 1 款在矩阵黎卡提方程与面积半径 $\varrho = \sqrt{A}$ 上求导证得 $\varrho'' + \mathrm{focusing}\cdot\varrho = 0$，由倒数 $\theta^{-1}$ 的导数下界 $\frac{1}{2}$ 导出有限焦散界 $L \le 2/\lvert\theta_0\rvert$，并在 $\sigma(t) = 0$ 处由非零导数 $-\Psi_0$ 证得去心邻域非零剪切与严格聚焦。第 2 款由局域林德勒克劳修斯极限导出所有零矢量上的 $(R - \frac{2\pi}{\hbar\eta}T)(v, v) = 0$，经线性标架变换调用已冻结的 `MinkowskiNullConeRigidity.eq_smul_minkowski_of_null` 锁死 $R - cT = f g$，再以缩并比安基与 $\nabla\cdot T = 0$ 推出 $d(f - \frac{1}{2}R_{\mathrm{scal}}) = 0$ 从而在连通开集 $\Omega$ 上等于常数 $-\Lambda$。第 3 款在助推—旋转坐标上显式构造至 $\mathfrak{sl}(2,\mathbb{C})$ 与双拷贝 $\mathfrak{sl}(2,\mathbb{C})^2$ 的李等价，直接核对 `Urbantke.hodge` 特征方程、乌尔班特克重构 $-\eta$ 与 `WeylNullScreen.screenWedge` 的 $-i$ 本征条件。完整证明由 Lean 内核检查。
 :::
 
+最后，作为超越共形平坦时空、在严格真空里奇平坦（$R_{\mu\nu} = 0$）非线性几何中检验纯外尔潮汐聚焦与因果菱形体积扰动的精确基准解，四维引力平面波（pp-波）的 Petrov N 型外尔四次式、双焦散、$-t^4/90$ 屏幕面积收缩及轴向 Alexandrov 因果菱形四维体积严格超额亦已由 Lean 内核完整证明：
+
+::: {.theorem #thm-ch34-vacuum-ppwave-weyl-focusing-and-diamond-volume title="四维真空 pp-波的 Petrov N 型外尔四次式、纯外尔双焦散（-t⁴/90 面积收缩）与轴向因果菱形 4-体积严格超额" lean="D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.metric_inverse, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.metric_det, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.christoffel_eq, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.riemann_eq, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.ricci_zero, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.frame_isometry, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.waveWeyl_pairMatrix, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.wave_quartic, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.wave_typeN, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.nullGeodesic_spec, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.transverse_geodesic_unique, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.parallel_first_caustic, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.vertex_first_caustic, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.screen_area_contracts, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.vertex_area_asymptotic, D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.axial_diamond_volume"}
+在 Brinkmann 坐标 $(u, v, x, y)$ 上给定常数轮廓四维真空 pp-波度规 $ds^2 = -2\,du\,dv + A(x^2 - y^2)\,du^2 + dx^2 + dy^2$（记 $\omega = \sqrt{A}$）：
+
+1. **精确里奇平坦真空几何与 Petrov N 型外尔四次式**（[`metric_inverse`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.metric_inverse)、[`metric_det`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.metric_det)、[`christoffel_eq`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.christoffel_eq)、[`riemann_eq`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.riemann_eq)、[`ricci_zero`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.ricci_zero)、[`frame_isometry`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.frame_isometry)、[`waveWeyl_pairMatrix`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.waveWeyl_pairMatrix)、[`wave_quartic`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.wave_quartic)、[`wave_typeN`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.wave_typeN)）：该度规恒满足 $\det g = -1$ 与严格真空方程 $R_{\mu\nu} = 0$；在正交规范标架下，其黎曼曲率直接嵌入 [@thm-ch34-weyl-null-screen-reconstruction] 的四维外尔空间 `Weyl4`，射影四次多项式精确等于 $-4 A X^4$，在传播零方向 $z = 0$ 处具有重数 $4$ 的唯一零点（精确 Petrov N 型）。
+2. **闭式零测地线、双焦散与纯外尔 $-t^4/90$ 面积收缩**（[`nullGeodesic_spec`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.nullGeodesic_spec)、[`transverse_geodesic_unique`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.transverse_geodesic_unique)、[`parallel_first_caustic`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.parallel_first_caustic)、[`vertex_first_caustic`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.vertex_first_caustic)、[`screen_area_contracts`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.screen_area_contracts)、[`vertex_area_asymptotic`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.vertex_area_asymptotic)）：横截测地线方程唯一解由 $x$ 方向双曲散焦（$\cosh/\sinh$）与 $y$ 方向三角聚焦（$\cos/\sin$）组成；平行光束与顶点光束分别在 $u = \pi/(2\omega)$ 与 $u = \pi/\omega$ 处产生首个焦散线，且在焦散前屏幕面积严格收缩（$\cos t\cosh t < 1$ 与 $\frac{\sin t\sinh t}{t^2} < 1$），顶点相对面积渐近展开精确给出领头纯外尔修正
+   $$
+   \frac{\sin t\sinh t}{t^2} \;=\; 1 - \frac{t^4}{90} + o(t^4) \qquad (t \to 0).
+   $$
+3. **四维轴向 Alexandrov 因果菱形 4-体积的严格超额**（[`axial_diamond_volume`](lean:D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.axial_diamond_volume)）：对任意 $\omega > 0$、$T, V > 0$ 且 $\omega T < \pi$，位于波轴上的类时因果菱形精确四维测度严格大于具有相同端点的平坦闵可夫斯基因果菱形四维体积：
+   $$
+   \operatorname{Vol}_4\bigl(\mathcal{D}_{\mathrm{pp}}(\omega, T, V)\bigr) \;>\; \operatorname{Vol}_4\bigl(\mathcal{D}_{\mathrm{flat}}(T, V)\bigr) \;=\; \frac{\pi V^2 T^2}{6}.
+   $$
+:::
+
+::: proof
+第 1 款显式展开 Brinkmann 逆度规、行列式、Christoffel 符号与黎曼张量验得 $R_{\mu\nu} = 0$，经正交标架将曲率映入 `WeylNullScreen.weylQuarticEquiv` 直接算得 $-4 A X^4$ 及重数 $4$ 根。第 2 款求解二阶线性常微分方程并证明横截唯一性，通过 $\cos t\cosh t$ 与 $\sin t\sinh t$ 的导数与泰勒展开锁死首个焦散点、严格面积收缩及 $-t^4/90$ 渐近项。第 3 款借助 `src/OmegaMath/Geometry/{PPWaveChronology,PPWaveDiamond,PPWaveDiamondMeasure}` 刻画轴向类时因果关系，精确积分椭圆截面积并与平坦值 $\pi V^2 T^2 / 6$ 严格比较。完整证明由 Lean 内核检查。
+:::
+
 我们将从离散比较几何通往四维相对论引力动力学的完整未决桥接任务正式立案如下：
 
 ::: {.problem #prob-ch34-gravity-dynamics-and-coupling title="离散比较几何导出四维洛伦兹自旋-2 引力动力学与牛顿常数归一化的开放问题"}
