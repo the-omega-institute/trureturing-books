@@ -126,6 +126,8 @@ m_b=k\frac{\mathbb E_0[hg]}{\mathbb E_0[h]}
 $$
 仅当混合集中在一个 $\lambda$ 上时取等。比如 $b=k/m_0$ 时，即使选取响应最小的权重，平均四体积也会减半。反向平移 $b=-s<0$ 时，平均体积存在要求几乎处处 $\lambda>s$，因而 $s<k/m_0$。更精确地，在 $sX<1$ 几乎处处的条件下，平移后的配分函数和均值均有限，当且仅当 $\mathbb E_0[(1-sX)^{-k}]$ 与 $\mathbb E_0[X(1-sX)^{-k-1}]$ 均有限。此时$h,g$ 同增且 $g$ 严格凸，同一计算给出 $m_{-s}\ge m_0/(1-s m_0/k)$。这个有限格上的响应取决于零曲率耦合时的体积标度；非零曲率耦合会改变径向密度。
 
+固定平均四体积还能比较整个体积分布。令 $G$ 服从形状 $k$、速率 $1$ 的 Gamma 分布，独立于尺度 $X=1/\lambda$。混合体积可写成 $V=XG$。记 $m=k\mathbb E X$，则固定为单一速率 $k/m$ 时的体积是 $V_*=(m/k)G$。给定 $G$ 有 $\mathbb E[V\mid G]=V_*$，所以对每个期望存在的凸函数 $\phi$，有 $\mathbb E\phi(V)\ge\mathbb E\phi(V_*)$。对严格凸且期望有限的 $\phi$，取等恰好要求尺度 $X$ 为常数。例如对 $t>0$，得到锐界 $\mathbb E e^{-tV}\ge(1+tm/k)^{-k}$。任意仍可归一化且具有有限均值的平移，只需把 $X$ 换成平移后的随机尺度，把 $m$ 换成平移后的均值，即适用同一比较。
+
 即便欧氏空间曲率项已经完全确定，要确立真正的四维洛伦兹自旋二传播子，还必须独立检验跨时刻的**外曲率剪切**。在单位直减函数（lapse）与零移位矢量的空间三环面上，置空间度规 $h = a(t)^2\bigl[dz^2 + H_{AB}(t, z)\,dx^A dx^B\bigr]$（$H$ 为单位行列式 $2\times 2$ 正定对称矩阵），记 $J_\mu = H^{-1}\partial_\mu H$、$h_0 = \dot{a}/a$，则空间标量曲率与外曲率二次不变量精确满足（[四维角亏与球壳谱权重](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-%E5%9B%9B%E7%BB%B4%E8%A7%92%E4%BA%8F%E4%B8%8E%E7%90%83%E5%A3%B3%E8%B0%B1%E6%9D%83%E9%87%8D.md)）：
 
 $$
