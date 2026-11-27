@@ -1,0 +1,31 @@
+{
+  "title": "A Root as a Pair",
+  "title_zh": "以数对为根",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-27",
+  "duration": "0:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · deterministic canvas",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.quadratic_mul_inv",
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.sqrt_two_spinor",
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.phi_power_norm",
+    "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.pentagonal_chebyshev",
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_lagrange_gram",
+    "D5/S3/Quantum/AURICOmega/GramIsometryExtension.existsUnique_linearIsometryEquiv_of_gram_preserving"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-math_a-root-as-a-pair_720p_narrated.mp4",
+    "cover": "omega-math_a-root-as-a-pair_cover.jpg"
+  }
+}

@@ -1,0 +1,275 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Schur": "Shoor",
+  "Krylov": "Kree-loff",
+  "Minkowski": "Min-koff-ski",
+  "kappa": "kappa"
+ },
+ "music": {
+  "bpm": 76,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "ports",
+   "name": "NO OUTSIDE",
+   "lead": 2.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "A textbook agent is a box with ports: inputs in, outputs out.",
+     "教科书里的主体是一只带端口的盒子：输入流进，输出流出。"
+    ],
+    [
+     "This chapter's model puts everything the observer could receive inside it. No ports remain.",
+     "本章的模型把观察者可能接收的一切都放进它内部，端口不复存在。"
+    ],
+    [
+     "Five parts are left: the totality, a ternary comparison, a fidelity, a crystallized core, and a crystallizing step.",
+     "剩下五项：可接收全集、三元比较、有理保真度、已结晶的结构核与结晶算子。"
+    ],
+    [
+     "What is not yet crystallized is still inside, yet looks like an incoming world.",
+     "尚未结晶的部分仍在内部，看上去却像迎面涌来的外部世界。"
+    ]
+   ]
+  },
+  {
+   "id": "clock",
+   "name": "STRUCTURAL TIME",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Time here is no wall clock: each beat adds the Schur innovation, the share the core cannot explain, plus new cycles.",
+     "这里的时间不是墙上的钟：每一拍加上舒尔创新度，即结构核解释不了的份额，再加新闭合的环路数。"
+    ],
+    [
+     "Beat one repeats the seed: no residual, no cycle, no time.",
+     "第一拍重扫种子：没有残差，没有环路，时间不动。"
+    ],
+    [
+     "Beat two adds a new state; its residual gives one half.",
+     "第二拍加入新状态，残差给出 1/2。"
+    ],
+    [
+     "Beat three gives another half, and a triangle closes. Tau reaches two.",
+     "第三拍又给出 1/2，并闭合一个三角形，τ 到达 2。"
+    ]
+   ]
+  },
+  {
+   "id": "krylov",
+   "name": "THE CEILING",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "How long can growth last? Stack the Krylov spaces of a fixed evolution and observation.",
+     "增长能持续多久？把固定演化与观测的克雷洛夫子空间一层层叠起来。"
+    ],
+    [
+     "Under a cyclic shift in four dimensions, their sizes run one, two, three, four, four.",
+     "在四维循环移位下，维数依次为 1、2、3、4、4。"
+    ],
+    [
+     "Lean checks: strict growth happens at most dimension minus rank times, and one stall is forever.",
+     "Lean 内核检验：严格增长至多发生 dim V − rank C 次，停滞一次便是永远。"
+    ],
+    [
+     "In the model, a full span leaves only new cycles to move the clock.",
+     "在模型中，张满载体之后，只有新环路还能推动时钟。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.8,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "canvas",
+   "name": "STATIC CANVAS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.8,
+    0.4,
+    0.5,
+    0.0,
+    0.2
+   ],
+   "lines": [
+    [
+     "Now invert motion: the totality is a still canvas.",
+     "现在把运动翻过来：全集是一幅静止画布。"
+    ],
+    [
+     "Only the focus rolls: a legless sphere with no floor to push against.",
+     "只有焦点在滚动：一颗没有腿的球，脚下没有可蹬的地板。"
+    ],
+    [
+     "It cannot halt its descent, but can steer sideways with a rational yaw.",
+     "它停不下下坠，却能用有理偏航横向转舵。"
+    ],
+    [
+     "Underneath sits a query that reads a static table without writing to it.",
+     "其下是一次只读不写静态表的查询。"
+    ],
+    [
+     "Lean checks: it adds D of a to the register and changes nothing else.",
+     "Lean 内核检验：查询把 D(a) 加到寄存器上，其余一概不变。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 4,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "split",
+   "name": "MEMORY SPLIT",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Where do time and space come from? The model says: a finite memory window.",
+     "时间与空间从何而来？模型的回答是：有限的记忆窗口。"
+    ],
+    [
+     "Each unit step splits at right angles: inside the window is time, outside is space.",
+     "每一个单位步被正交切开：窗内是时间，窗外是空间。"
+    ],
+    [
+     "Take u equal to one third: v is three fifths, the time leg four fifths.",
+     "取 u = 1/3：v = 3/5，时间分量为 4/5。"
+    ],
+    [
+     "The shares, sixteen and nine twenty-fifths, add to one.",
+     "两份额 16/25 与 9/25，相加恰为 1。"
+    ],
+    [
+     "Move space across the equals sign: the Minkowski minus appears, and gamma squared minus gamma v squared is exactly one.",
+     "把空间份额移到等号另一侧，闵可夫斯基负号便出现了；γ² − (γv)² 恰为 1。"
+    ]
+   ]
+  },
+  {
+   "id": "gradient",
+   "name": "ONE GRADIENT",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "With fidelity alone, the step action is a rational sum.",
+     "只用保真度，步作用量是一个有理和。"
+    ],
+    [
+     "The chapter reads gravity, particles and learning as one gradient. That is a model.",
+     "本章把引力、粒子与学习读作同一条梯度。这是模型。"
+    ],
+    [
+     "Some counts are exact: N points carry N choose two distances, but three N minus six freedoms.",
+     "有些计数是精确的：N 个点有 C(N,2) 个距离，却只有 3N − 6 个自由度。"
+    ],
+    [
+     "The surplus is zero up to a tetrahedron, then one at five points, three at six.",
+     "盈余到四面体为止是 0，五个点时为 1，六个点时为 3。"
+    ],
+    [
+     "One fermion generation gives three eighths, under an equal-weight postulate.",
+     "一代费米子给出 3/8，前提是等权迹刚度公设。"
+    ]
+   ]
+  },
+  {
+   "id": "tiers",
+   "name": "THREE COLOURS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Green is what Lean checks: the Krylov ceiling and the zero-write query.",
+     "绿色是 Lean 检验过的：克雷洛夫上限与零改写查询。"
+    ],
+    [
+     "Violet is the model: observer as universe, the still canvas.",
+     "紫色是模型：观察者即宇宙、静止画布。"
+    ],
+    [
+     "Red is open: deriving Einstein's equations from these comparisons.",
+     "红色是开放问题：由这些比较导出爱因斯坦场方程。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.6,
+   "tail": 2.6,
+   "music": [
+    0.8,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Theorems in green, readings in violet, the open road in red.",
+     "定理用绿色，诠释用紫色，未竟之路用红色。"
+    ]
+   ]
+  }
+ ]
+}

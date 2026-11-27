@@ -1,0 +1,260 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Bargmann": "Barg-mahn",
+  "a-bar": "ay bar",
+  "kappas": "kappas",
+  "Cauchy": "Ko-shee",
+  "Binet": "Bee-nay"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "loop",
+   "name": "ROOTS CANCEL",
+   "lead": 2.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Take three integer rays: a is one, b is one plus i, c is one plus j.",
+     "取三条整数射线：a = 1，b = 1 + i，c = 1 + j。"
+    ],
+    [
+     "One side alone leaks a root: the cosine of a and b is one over root two.",
+     "单看一条边就漏出根号：a 与 b 的夹角余弦是 1/√2。"
+    ],
+    [
+     "Flip a to minus a, the same ray, and that cosine flips sign.",
+     "把 a 换成 −a，射线没变，这个余弦却变了号。"
+    ],
+    [
+     "Walk the loop instead: each corner is met twice, roots and signs cancel, and the Bargmann number B is one quarter.",
+     "沿环路走一圈：每个顶点碰到两次，根号与符号全部成对消去，巴格曼环路数 B = ¼。"
+    ]
+   ]
+  },
+  {
+   "id": "closure",
+   "name": "THE CLOSING LAW",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.4,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Put the inner products in a Gram matrix: determinant one, over squared lengths four.",
+     "把内积排成格拉姆矩阵：行列式为 1，模方之积为 4。"
+    ],
+    [
+     "So the closing number is one quarter: one plus two B, minus the three kappas.",
+     "于是闭合数是 ¼：等于 1 + 2B 减去三条边的 κ。"
+    ],
+    [
+     "Lean checks this exact value: no sine, no cosine, no root.",
+     "Lean 内核检验这个精确值：没有正弦，没有余弦，没有根号。"
+    ]
+   ]
+  },
+  {
+   "id": "nonneg",
+   "name": "NEVER NEGATIVE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.8,
+    0.6,
+    0.5,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Why never negative? Stack the rays as columns of a four by three matrix.",
+     "为什么永不为负？把三条射线排成 4×3 矩阵的三列。"
+    ],
+    [
+     "For one plus i, one plus j, one plus k, the four minors are one, minus one, one, one.",
+     "对 1 + i、1 + j、1 + k，四个三阶子式依次是 1、−1、1、1。"
+    ],
+    [
+     "Their squares add to four; over eight, the closing number is one half.",
+     "它们的平方和是 4；除以 8，闭合数是 ½。"
+    ],
+    [
+     "Lean checks the general fact: for any three nonzero integer quaternions, it is never negative.",
+     "Lean 内核检验一般事实：任取三枚非零整四元数，闭合数都不为负。"
+    ]
+   ]
+  },
+  {
+   "id": "circle",
+   "name": "ONE GREAT CIRCLE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.8,
+    0.6,
+    0.5,
+    0.4,
+    0.4
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.4,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Now one great circle: a is one, b is two plus i, and c, b a-bar b, is three plus four i.",
+     "现在取同一条大圆：a = 1，b = 2 + i，c = b·ā·b = 3 + 4i。"
+    ],
+    [
+     "The kappas are four fifths, four fifths, nine twenty-fifths; B is twelve twenty-fifths; the closing number is zero.",
+     "三个 κ 是 4/5、4/5、9/25；B = 12/25；闭合数恰为 0。"
+    ],
+    [
+     "Lean checks that every such doubling triad closes to exactly zero.",
+     "Lean 内核检验：每一组这样的倍增三元组，闭合数都恰为零。"
+    ],
+    [
+     "With b one plus two i, B turns negative: the loop keeps a sign the sides forget.",
+     "取 b = 1 + 2i，B 变成负数：环路保住了三条边丢掉的符号。"
+    ]
+   ]
+  },
+  {
+   "id": "doubling",
+   "name": "ARC DOUBLING",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.8,
+    0.6,
+    0.6,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Zero on the circle locks an integer law: the doubled overlap is two kappa minus one, squared.",
+     "大圆上的零锁定一条整系数定律：倍增后的重叠等于 (2κ − 1)²。"
+    ],
+    [
+     "Four fifths goes to nine twenty-fifths, nine tenths to sixteen twenty-fifths, one half to zero.",
+     "4/5 变成 9/25，9/10 变成 16/25，½ 变成 0。"
+    ],
+    [
+     "Lean checks this doubling law for every pair of nonzero integer quaternions.",
+     "Lean 内核对每一对非零整四元数检验这条倍增律。"
+    ]
+   ]
+  },
+  {
+   "id": "excess",
+   "name": "SPHERICAL EXCESS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Back to the quarter triad: divide by the two side spreads at a corner.",
+     "回到闭合数为 ¼ 的三元组：除以一个顶点两条邻边的展开度。"
+    ],
+    [
+     "At a it is one, a right angle; at b and c, two thirds, above the flat one half: that is the excess.",
+     "顶点 a 处得 1，是直角；b、c 处得 2/3，高于平面上的 ½：多出的就是球面角盈。"
+    ],
+    [
+     "Lean checks the rational sine law: each vertex spread over its opposite side spread is four thirds here.",
+     "Lean 内核检验有理正弦律：每个顶点展开度除以对边展开度，这里都是 4/3。"
+    ],
+    [
+     "And the right-angle law: one quarter is a half times a half.",
+     "还有直角律：¼ = ½ × ½。"
+    ]
+   ]
+  },
+  {
+   "id": "gallery",
+   "name": "FOUR TRIADS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Four triads: the doubled arc closes at zero, the half steps at one quarter.",
+     "四组三元组：倍增弧闭合于 0，正交半步闭合于 ¼。"
+    ],
+    [
+     "The equal-sided triad gives one half, its vertex spreads eight ninths, not the flat three quarters.",
+     "等边三元组给出 ½，顶点展开度是 8/9，而不是平面上的 ¾。"
+    ],
+    [
+     "Three orthogonal rays reach the largest value, one, with three right angles.",
+     "三条两两正交的射线达到最大值 1，三个角都是直角。"
+    ],
+    [
+     "Cast onto the reals, it becomes a product of sine squares: classical trigonometry is its shadow.",
+     "投到实数上，闭合数化为正弦平方之积：古典三角学只是它的影子。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "CLOSED IN FRACTIONS",
+   "lead": 0.6,
+   "tail": 3.4,
+   "music": [
+    1.0,
+    0.3,
+    0.2,
+    0.0,
+    0.0
+   ],
+   "lines": [
+    [
+     "Spherical trigonometry, closed in integers and fractions, and checked by Lean.",
+     "球面三角学，用整数与分数闭合，并由 Lean 内核检验。"
+    ]
+   ]
+  }
+ ]
+}

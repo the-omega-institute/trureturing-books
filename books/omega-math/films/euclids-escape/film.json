@@ -1,0 +1,34 @@
+{
+  "title": "Euclid's Escape",
+  "title_zh": "欧几里得的逃逸",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-27",
+  "duration": "0:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · Euclid's division bar and its remainder certificate, the prime-escape ledger with a bounded divisor scan, the Euclid ladder of 34/21 and its Euler–Wallis convergents, 2 × 2 step matrices of determinant −1, the quarter-depth power ladder",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.bezout_identity",
+    "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.euclid_prime_escape",
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log",
+    "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_determinant",
+    "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_coprime",
+    "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.quarterDepth_integer_sound",
+    "D5/S3/Weil/BurnolGram/BurnolRationalDepthBudget.rationalQuarterDepth_real_sound"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-math_euclids-escape_720p_narrated.mp4",
+    "cover": "omega-math_euclids-escape_cover.jpg"
+  },
+  "summary": "Euclid's division of 30031 by 13 gives quotient 2310 and remainder 1, and read backwards it becomes the certificate 1 · 30031 − 2310 · 13 = 1 (computed); Lean checks Bézout's identity for every pair of naturals. The escape ledger multiplies prefixes of the primes and adds one: 2, 3, 7, 31, 211, 2311 are prime, then 30031 leaves remainder 1 for every listed prime and a bounded divisor scan stops at 59, with 30031 = 59 × 509 (computed); Lean checks that product plus one always has a prime factor off the list. Euclid's ladder turns 34/21 into [1; 1, 1, 1, 1, 1, 2], the Euler–Wallis recurrence builds the convergents 1/1 … 34/21, and Lean bounds the length by 2⌊log₂ den⌋ + 1, here 7 ≤ 9. The step matrices [a 1; 1 0] have determinant −1, M(1)⁶ M(2) = [34 13; 21 8], and neighbours cross-multiply to ±1 (computed); Lean checks the sign rule (−1)^count and that every convergent is in lowest terms; the alternating gaps 1/(qₙqₙ₊₁) are the chapter's hand derivation (argued). The quarter-depth budget for majorant 7/2 and tolerance 1/10 gives ⌊70/2⌋ = 35 and depth 2 (computed); Lean checks 70 < 128, and the classical Mathlib shadow gives 7/128 < 1/10, while depth 1 fails (computed). The chapter records an empty axiom list on the strict backend for the Bézout, prime-escape, determinant, coprimality and integer quarter-depth theorems.",
+  "summary_zh": "用 13 去除 30031，商 2310、余 1；倒过来读即证书 1 · 30031 − 2310 · 13 = 1（屏幕计算）；Lean 内核对任意一对自然数检验了裴蜀恒等式。逃逸账本把素数前缀相乘再加一：2、3、7、31、211、2311 都是素数，到 30031 时清单上每个素数去除都余 1，有界试除在 59 处停下，30031 = 59 × 509（屏幕计算）；Lean 内核检验了乘积加一必有不在清单上的素因子。辗转相除把 34/21 展开成 [1; 1, 1, 1, 1, 1, 2]，欧拉—沃利斯递推给出渐近分数 1/1 至 34/21，Lean 内核给出长度上界 2⌊log₂ den⌋ + 1，此处 7 ≤ 9。单步矩阵 [a 1; 1 0] 的行列式为 −1，M(1)⁶ M(2) = [34 13; 21 8]，相邻渐近分数交叉相乘为 ±1（屏幕计算）；Lean 内核检验了符号律 (−1)^系数个数 与渐近分数的既约性；交替间距 1/(qₙqₙ₊₁) 属本章的手工推导（论证）。主界 7/2、容差 1/10 的四分深度预算给出 ⌊70/2⌋ = 35 与深度 2（屏幕计算）；Lean 内核检验了 70 < 128，经典 Mathlib 阴影给出 7/128 < 1/10，而深度 1 不够（屏幕计算）。本章记录裴蜀、素数逃逸、行列式、互素与整数四分深度五条定理在严格后端的公理清单为空。"
+}

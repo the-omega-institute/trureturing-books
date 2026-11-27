@@ -1,0 +1,34 @@
+{
+  "title": "A Ruler for Every Prime",
+  "title_zh": "每个素数一把尺",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-27",
+  "duration": "0:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · log-scale ruler bars for the flat and prime readings, the six norm-5 spinors as tiles, 2 × 2 residue matrices and their 6 × 6 product table, a chain of rank-one links, the radial Cayley tree of reduced words, six 45° caps on a sphere",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula",
+    "D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence",
+    "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_norm_five",
+    "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.mod_five_rank_one",
+    "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.mod_five_product_zero",
+    "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_split5_nonzero",
+    "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_normSq",
+    "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_words_adjoint_injective",
+    "D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-math_a-ruler-for-every-prime_720p_narrated.mp4",
+    "cover": "omega-math_a-ruler-for-every-prime_cover.jpg"
+  }
+}

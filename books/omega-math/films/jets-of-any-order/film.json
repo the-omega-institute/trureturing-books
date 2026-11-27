@@ -1,0 +1,32 @@
+{
+  "title": "Jets of Any Order",
+  "title_zh": "任意阶射流与马青括号",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-27",
+  "duration": "0:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · rows of rational jet coefficients, the Cayley chord on the unit circle, truncated points closing in on (3/5, 4/5), Machin's integer rays doubling to [1 : 1], nested π-free brackets and a bar chart of locked digits",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.cos_sq_add_sin_sq",
+    "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit",
+    "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.cos_two_atan_eq_cayley",
+    "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.sin_two_atan_eq_cayley",
+    "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.machin_rational_chain"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-math_jets-of-any-order_720p_narrated.mp4",
+    "cover": "omega-math_jets-of-any-order_cover.jpg"
+  },
+  "summary": "A jet of order N is drawn as a row of N + 1 rational coefficients; differentiating shifts each coefficient left and multiplies it by its old index, and on the row Exp(1) the derivative returns the same row (computed). The four generator rows Exp(1), cosine, sine and arctangent are listed coefficient by coefficient; cosine squared plus sine squared is recomputed as 1, 0, 0, … through degree 12, and Lean checks the Pythagorean identity at every degree. The Cayley map sends t = 1/2 along a chord of the unit circle to (3/5, 4/5) (computed); Lean checks that the Cayley point of any two integers not both zero lies on the unit circle. Composing the cosine row with twice the arctangent row, factorials and odd denominators cancel to 1, 0, −2, 0, 2, …, the expansion of (1 − η²)/(1 + η²) (computed through degree 8); Lean checks this for cosine and sine at every order N, and reading it as the series re-expanding the fraction is the chapter's interpretation (argued). At η = 1/2 the truncated rows approach (3/5, 4/5) with errors multiplied by −1/4 every two orders, still +1/10240 and −1/5120 at order 12 (computed). Machin's chain 1/5 → 5/12 → 120/119 → 28561/28561 = 1 uses only the rational tangent rule, and Lean checks it. The π-free brackets start at [281476/89625, 651864872/204778785] and narrow about 25 times per order to a width of 1.570731 × 10⁻²⁵ at order 17 (computed); calling their nested intersection π happens only in the classical shadow (argued).",
+  "summary_zh": "N 阶射流画成一行 N + 1 个有理系数；求导就是把每个系数左移一格并乘以原来的次数，在 Exp(1) 这一行上导数还原为同一行（屏幕计算）。指数、余弦、正弦、反正切四行系数逐格列出；余弦平方加正弦平方在 0 至 12 阶逐格算得 1, 0, 0, …，Lean 内核检验毕达哥拉斯恒等式在每一阶成立。凯莱映射沿单位圆的弦把 t = 1/2 送到 (3/5, 4/5)（屏幕计算）；Lean 内核检验：任意不全为零的两个整数给出的凯莱点都在单位圆上。把余弦行与两倍反正切行复合，阶乘与奇数分母相消为 1, 0, −2, 0, 2, …，正是 (1 − η²)/(1 + η²) 的展开（屏幕计算至 8 阶）；Lean 内核对余弦与正弦在每个截断阶 N 检验了这一恒等式，“级数只是在重新展开分式”是本章的解读（论证）。在 η = 1/2 处，截断多项式逼近 (3/5, 4/5)，截断阶每加 2 误差乘以 −1/4，到 12 阶仍为 +1/10240 与 −1/5120（屏幕计算）。马青链 1/5 → 5/12 → 120/119 → 28561/28561 = 1 只用有理正切法则，由 Lean 内核检验。无 π 包络从 [281476/89625, 651864872/204778785] 出发，每阶约缩窄 25 倍，17 阶时宽度为 1.570731 × 10⁻²⁵（屏幕计算）；把嵌套区间的交点叫作 π 只发生在经典阴影中（论证）。"
+}

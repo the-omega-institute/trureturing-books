@@ -351,6 +351,12 @@ $j = 0, \frac{1}{2}, 1$ 之后的第一座高阶整数自旋壳就是五维四�
 单个 $5d^8$ 配位中心具有本征强平面各向异性；唯有对无择优取向的多晶粉末在旋转群 $\mathrm{SO}(3)$ 上（等价地在其有号双覆盖 $\mathrm{SU}(2)$ 上）执行全域哈尔平均，无迹 $j = 2$ 壳层才正反相消归零 $\langle\mathbf{Q}_{\mathrm{phys}}(5d^8)\rangle_{\mathrm{Haar}} = \mathbf{0}_{3\times 3}$，在宏观上恢复统计各向同性。
 :::
 
+下面的影片把本章的四条线索——闭合谱、前三座壳、偶次切比雪夫消根号与 $j = 2$ 四极检验台——串成一段连续讲解。
+
+::: {.film src="spin-shells-on-the-three-sphere"}
+**把波放回三维球面，整数自旋壳的特征标就成为不含根号的整系数多项式（2 分 52 秒）。** 画面先把开口实轴上的波与闭合回路上首尾咬合的波并排（示意），再列出自旋壳阶梯 $j$ 与每壳 $(2j+1)^2$ 个函数（[@rem-ch10-peter-weyl-su2-literature]，文献结果），绿色标签指向 [@thm-ch10-matrix-coeff-density]；三张壳卡读出 $1$、$4\kappa$、$4\kappa - 1$，紫色的“过去·现在·未来”是模型诠释，$4\kappa = 1 + (4\kappa - 1)$、$2 \times 2 = 1 + 3$ 与整数旋子 $(1, 1, 1, 1)$ 处的 $\chi_1(\frac{1}{4}) = 0$ 为屏幕计算。$E_0$ 至 $E_3$ 的曲线与六个有理地标上的精确表（屏幕计算，同 [@ex-ch10-spin-character-table]）旁，绿色标签指向 [@thm-ch10-zero-axiom-chebyshev-shells] 中的消根号律、奇壳因子分解与自旋二特征标；$p = (1, 1, 0, 0)$ 处旋量特征标为 $\pm\sqrt{2}$、平方为 $2$（屏幕计算）。$3 \times 5$ 个点重排为 $3 + 5 + 7$，$E_1 E_2 = E_1 + E_2 + E_3 = 64\kappa^3 - 64\kappa^2 + 16\kappa - 1$ 为屏幕计算，绿色标签指向 [@thm-ch10-even-char-product-sum]；流群括号 $y\bar{x}w$ 与逐壳矩阵三连乘 $\widehat{f}_j \widehat{g}_j^\dagger \widehat{h}_j$ 是紫色的书面推导。最后，五条实 $d$ 轨道的四极账本（七分之几，屏幕计算）各列归零，青色与品红柱给出 $d^8$ 的 $\bigl(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7}\bigr)$，绿色标签指向 [@thm-ch10-zero-axiom-orbital-quadrupole]；金的氧化态属配位场背景。
+:::
+
 在下面的交互实验卡中，读者可以在有理保真度区间 $\kappa \in [0, 1]$ 上滑动或点选典范地标，实时检验消根号恒等式 $E_n(\kappa) = U_{2n}(\sqrt{\kappa})$ 与全阶整数自旋克莱布施—高登融合展开 $E_m(\kappa)E_n(\kappa) = \sum_{r=\lvert m-n\rvert}^{m+n} E_r(\kappa)$（[@thm-ch10-zero-axiom-chebyshev-shells]、[@thm-ch10-even-char-product-sum]），并在 $j = 2$ 四极面板中切换轨道占据态，亲手核对 $5d^{10}$ 闭壳归零与 $5d^8$ 无迹对角三元组 $\bigl(-\frac{4}{7}, -\frac{4}{7}, +\frac{8}{7}\bigr)$（[@thm-ch10-zero-axiom-orbital-quadrupole]）。
 
 ::: {.viz src="dfinite-algebraic-schur-lab" preset="peter-weyl-even-chebyshev" height="520"}

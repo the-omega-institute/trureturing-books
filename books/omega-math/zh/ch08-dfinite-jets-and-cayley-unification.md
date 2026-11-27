@@ -279,6 +279,10 @@ $$
 
 走完第七章与第八章，微积分的“微分”一翼已在纯有理域内彻底脱胎换骨：二阶射流环 $\mathcal{J}_2(\mathbb{Q})$ 精确锁住了状态、联络与曲率的 `{0 · 1/2 · 1}` 同步读出，而任意阶 D-有限射流环 $J_N(\mathbb{Q})$ 给出了指数、正弦、余弦与反正切在原点的有理截断；配合有理凯莱切线链，还能逐阶收紧圆周率包络。
 
+::: {.film src="jets-of-any-order"}
+**从一行有理系数到马青切线链：任意阶射流不借 $\pi$ 讲清三角函数与圆周率（DURATION_ZH）。** 片中先把 $N$ 阶射流画成一行 $N + 1$ 个有理系数，求导即把每个系数左移一格并乘以原来的次数；指数、余弦、正弦与反正切四行系数逐格列出，余弦平方加正弦平方在 $0$ 至 $12$ 阶逐格算得 $1, 0, 0, \dots$（青色 NUM，屏幕计算），绿色 LEAN ✓ 只给每一阶都成立的毕达哥拉斯恒等式（[@thm-ch08-dfinite-calculus-laws]）。随后单位圆上的品红色弦把 $t = \frac{1}{2}$ 送到琥珀色点 $\bigl(\frac{3}{5}, \frac{4}{5}\bigr)$（[@thm-ch08-cayley-circle-unit]）；余弦行与两倍反正切行复合后，阶乘与奇数分母相消只剩 $\pm 2$，与 CayleyCos 逐格相等（[@thm-ch08-cayley-composition-unification]），“级数只是在重新展开分式”以紫色框标为本章解读。$\eta = \frac{1}{2}$ 处的截断误差表与公比 $-\frac{1}{4}$（[@ex-ch08-cayley-half-truncation]）、无 $\pi$ 包络的端点与逐阶宽度柱状图（[@ex-ch08-machin-width-table]）均为屏幕上的精确重算；马青切线链 $\frac{1}{5} \mapsto \frac{5}{12} \mapsto \frac{120}{119} \mapsto \frac{28561}{28561} = 1$ 带绿色 LEAN ✓（[@thm-ch08-machin-rational-chain]）；只有在经典阴影中才把嵌套区间的交点称作 $\pi$，标为紫色论证。
+:::
+
 在下面的交互实验卡中，读者可以亲自步进调节截断阶 $N = 2, 4, \dots, 12$ 与马青包络阶数 $M$：在 $\eta = \frac{1}{2}$ 处实时对比一步精确命中的有理凯莱点 $\bigl(\frac{3}{5}, \frac{4}{5}\bigr)$ 与规范多项式 $U_N(\frac{1}{2})$、$V_N(\frac{1}{2})$ 逐档收敛至 $\bigl(+\frac{1}{10240}, -\frac{1}{5120}\bigr)$ 的分数余项，同时沿着纯有理马青切线链 $\frac{1}{5} \mapsto \frac{5}{12} \mapsto \frac{120}{119} \mapsto \frac{28561}{28561} = 1$ 观测无 $\pi$ 包络宽度 $W_M$ 按每步约 $25^{-1}$ 的倍率向零收窄。
 
 ::: {.viz src="dfinite-algebraic-schur-lab" preset="dfinite-cayley-machin" height="520"}

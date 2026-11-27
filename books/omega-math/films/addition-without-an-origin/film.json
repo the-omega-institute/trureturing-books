@@ -1,0 +1,35 @@
+{
+  "title": "Addition Without an Origin",
+  "title_zh": "没有原点的加法",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-27",
+  "duration": "0:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a flat grid with a hopping origin, the i → j → k cycle, integer tangent vectors in 3D, Gram matrices as tiles, the six-beat walk on a great circle, a cube turned about its diagonal, the Hopf sphere",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonGroup.TernaryComparison.tri_eq_mul_inv_mul",
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonReflection.reflectionSeq_eq_pow",
+    "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_jacobi",
+    "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_sectional_ratio",
+    "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.quadratic_kernel",
+    "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.g120_spin_six_beat_orbit",
+    "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_hopf",
+    "D5/S3/Quantum/AURICOmega/QuaternionTwoPointHomogeneity.exists_mul_mul_eq_of_kappa_eq"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-math_addition-without-an-origin_720p_narrated.mp4",
+    "cover": "omega-math_addition-without-an-origin_cover.jpg"
+  },
+  "summary": "On a flat grid with a = (4, 5), b = (6, 3), c = (3, 2), the point a + b measured from a hopping origin O moves with O, while a − b + c stays at (1, 4) (computed). The heap bracket [a, b, c] = a·b̄·c on integer quaternions gives [1 + i, 1 + j, k] = (1, −1, −1, 1) with squared norm 4 = 2·2·1, and [i, 1, j] = k but [j, 1, i] = −k (computed); Lean checks that for any home o the bracket splits as x ⋆ y⁻¹ ⋆ z. For u = (1, 1, 0), v = (1, 0, 2), w = (0, 1, 1) the commutator is (4, −4, −2), the Lie triple bracket (−1, −2, 2), the cyclic sum 0, and ⟨{u, v, u}, v⟩ = 9 = the squared area (computed); Lean checks the Bianchi identity for all integer vectors and curvature exactly 1 on every nondegenerate rational plane. Ten integer rays give a projective Gram determinant 1/64 and an eleventh gives 0; five lifted spinors give a signed Gram determinant 1/32 and a sixth gives 0 (computed); Lean checks the bridge κ_proj ≡ (2κ_spin − 1)². The heap reflection walk from e through g = (1, 1, 1, 1; 2) produces g⁰ … g⁶ on a great circle (computed), and Lean checks that the walk is the power sequence in every heap. A cube turns 120° per beat while κ_spin reads 3/4, 1/4, 0, 1/4, 3/4, 1 and κ_proj reads 1/4, 1/4, 1, 1/4, 1/4, 1 (computed); Lean checks the six-beat orbit. On real unit quaternions the ray kernel of e and g is 1/2 both ways and their Hopf images are i and j (computed); Lean checks the Hopf identity and bilateral two-point homogeneity. That no point is special is the chapter's reading (argued).",
+  "summary_zh": "平面格点上取 a = (4, 5)、b = (6, 3)、c = (3, 2)：从跳动的原点 O 量出的 a + b 随 O 移动，a − b + c 始终停在 (1, 4)（屏幕计算）。整四元数上的流群括号 [a, b, c] = a·b̄·c 给出 [1 + i, 1 + j, k] = (1, −1, −1, 1)，模方 4 = 2·2·1；[i, 1, j] = k 而 [j, 1, i] = −k（屏幕计算）；Lean 检验：任选基点 o，括号都拆成 x ⋆ y⁻¹ ⋆ z。取 u = (1, 1, 0)、v = (1, 0, 2)、w = (0, 1, 1)，换位子为 (4, −4, −2)，利雅三元括号为 (−1, −2, 2)，轮换和为 0，⟨{u, v, u}, v⟩ = 9 等于面积平方（屏幕计算）；Lean 检验比安基恒等式对一切整向量成立、每个非退化有理切面的曲率恰为 1。十条整射线的射影格拉姆行列式为 1/64，第十一条使之为 0；五枚提升旋量的有号格拉姆行列式为 1/32，第六枚使之为 0（屏幕计算）；Lean 检验二次核桥 κ_proj ≡ (2κ_spin − 1)²。从 e 经 g = (1, 1, 1, 1; 2) 出发的流群反射之路在大圆上走出 g⁰ 至 g⁶（屏幕计算），Lean 检验这条路在任意流群中都是幂次序列。立方体每拍转 120°，κ_spin 依次为 3/4、1/4、0、1/4、3/4、1，κ_proj 依次为 1/4、1/4、1、1/4、1/4、1（屏幕计算）；Lean 检验六拍轨道。在实单位四元数上，e 与 g 的射线核两种算法都得 1/2，霍普夫像为 i 与 j（屏幕计算）；Lean 检验霍普夫等式与双侧两点齐性。“没有哪个点是特殊的”是本章的诠释（论证）。"
+}

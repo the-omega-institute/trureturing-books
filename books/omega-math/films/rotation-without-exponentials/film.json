@@ -1,0 +1,34 @@
+{
+  "title": "Rotation Without Exponentials",
+  "title_zh": "不用指数的转动",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-27",
+  "duration": "0:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · rational matrices, a twelve-step orbit against a Taylor spiral, two denominator share bars, an integer quarter turn of the axes, Chebyshev beats on the unit circle, six norm-5 caps on a wireframe sphere",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_iterate_norm",
+    "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.dual_chart_denom_ge_half",
+    "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_dot",
+    "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.heap_norm_preserved",
+    "D5/S3/Quantum/Algebra/Comparison/QuaternionHeapRecurrence.normSq_and_chebyshev",
+    "D5/S3/Quantum/Algebra/Comparison/RoundTripPeriodMetric.comparison_classification_of_continuous_rays",
+    "D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-math_rotation-without-exponentials_720p_narrated.mp4",
+    "cover": "omega-math_rotation-without-exponentials_cover.jpg"
+  },
+  "summary": "The rational Cayley bridge R(σ) = (I − X)⁻¹(I + X) replaces the endless exponential series with one division whose determinant 1 + |σ|² never vanishes; for σ = (½, ½, 0) it gives R = ⅓[[2, 1, 2], [1, 2, −2], [−2, 2, 1]], orthogonal with determinant 1 (computed). Twelve turns of (0, 0, 1) give (302680, −302680, −314959)/3¹² with squared length exactly 1, while the second-order Taylor step multiplies the squared length by 17/16 and passes 2.069 after twelve steps (computed); Lean checks length preservation for every rational generator and step count. The dual chart keeps two denominators D₊ and D₋ whose shares add to 1; for the inputs (1, 0, 0) and (½, ½, 0) the D₊ share is 1/6, the shadow chart takes over and the result (−1/5, 0, −2/5) lies in the closed unit ball (computed); Lean checks that one normalized share is always at least ½. The quaternion (1, 1, 0, 0) has non-square norm 2, yet its adjoint action is the integer quarter turn (x, y, z) ↦ (x, −z, y); (1, 1, 1, 1) cycles the axes and (1, 2, 0, 0) turns in fifths (computed); Lean checks that the square-root-free action keeps rational dot products. Starting from 1 and 3/5 + 4/5 i, the heap recurrence steps as x_{n+1} = (6/5)x_n − x_{n−1}; the overlaps are T_n(3/5) and beat 20 still has squared norm 1 over 5²⁰ (computed); Lean checks the unit norm of the signed spinor recurrence and, on the classical real side, the Chebyshev closed form. Finally, on the classical side Lean checks that a continuous doubling-law reading along t ↦ exp(tX) must be cos², with h(X, X) = 2π²/T², and that six caps 2⟨x, axisᵢ⟩² > 5 around integer axes of squared norm 5 cover the sphere with no perpendicular pair in one cap; the point (2, 2, 1)/3 scores 8 (computed). That π is the price of a real clock is the chapter's reading (argued).",
+  "summary_zh": "有理凯莱桥 R(σ) = (I − X)⁻¹(I + X) 用一次除法取代无穷指数级数，除数的行列式 1 + |σ|² 永不为零；σ = (½, ½, 0) 时 R = ⅓[[2, 1, 2], [1, 2, −2], [−2, 2, 1]]，正交且行列式为 1（屏幕计算）。把 (0, 0, 1) 连转十二次得到 (302680, −302680, −314959)/3¹²，模方恰为 1；二阶泰勒截断每步把模方乘以 17/16，十二步后超过 2.069（屏幕计算）；Lean 检验对任意有理生成元与任意步数都保持模方。双卡保留两个分母 D₊、D₋，份额相加为 1；输入 (1, 0, 0) 与 (½, ½, 0) 时 D₊ 只占 1/6，阴影卡接手，结果 (−1/5, 0, −2/5) 落在单位闭球内（屏幕计算）；Lean 检验两份归一化份额中总有一份不小于 ½。整四元数 (1, 1, 0, 0) 的模方 2 不是平方数，其伴随作用却是整数 90° 转动 (x, y, z) ↦ (x, −z, y)；(1, 1, 1, 1) 轮换三轴，(1, 2, 0, 0) 给出分母为 5 的转动（屏幕计算）；Lean 检验无根号伴随作用保持有理内积。从 1 与 3/5 + 4/5·i 出发，流群递推化为 x_{n+1} = (6/5)x_n − x_{n−1}；内积为 T_n(3/5)，第二十拍分母为 5²⁰、模方仍为 1（屏幕计算）；Lean 检验有号旋量递推的单位模方，并在经典实数一侧检验切比雪夫闭式。最后在经典一侧，Lean 检验沿 t ↦ exp(tX) 连续的倍角律读数只能是 cos²，且 h(X, X) = 2π²/T²；六根模方为 5 的整数轴配上帽子 2⟨x, axisᵢ⟩² > 5 盖满球面，且同一顶帽子里没有互相垂直的一对；点 (2, 2, 1)/3 的得分为 8（屏幕计算）。“π 是实数时钟的代价”是本章的解读（论证）。"
+}

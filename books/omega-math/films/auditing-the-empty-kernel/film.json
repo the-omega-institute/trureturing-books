@@ -1,0 +1,33 @@
+{
+  "title": "Auditing the Empty Kernel",
+  "title_zh": "空内核审计",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-27",
+  "duration": "0:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a three-layer stack over the untouched kernel, the rational Cayley circle with its integer points, a two-column ledger of frozen axiom records, a schematic import closure replayed in an empty environment, a one-way wall to Mathlib, and the eight clauses of the teaching prototype",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit",
+    "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_add_spread_eq_one",
+    "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure",
+    "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.projective_circle_mul_normSq",
+    "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_equivalent",
+    "D5/S3/Quantum/AURICOmega/OmegaShadowBridge.cayley_circle_unit"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-math_auditing-the-empty-kernel_720p_narrated.mp4",
+    "cover": "omega-math_auditing-the-empty-kernel_cover.jpg"
+  },
+  "summary": "Chapter 18 asks two questions of Lean's kernel. Three layers come first: integer carriers that compare fractions by cross multiplication (2/4 ~ 1/2 since 2·2 = 4·1, computed), model laws as fields, and a one-way bridge to Mathlib (a model division, argued). Inside the strict core the pair (1, 2) has squared norm 5 and Cayley image (3/5, 4/5), the pole [1 : 0] lands at (−1, 0), and (1, 2)·(1, 2) = (4, 3) with 25 = 5·5 (computed); Lean checks the general unit-circle, overlap-plus-spread, antipodal-closure and norm-multiplicativity laws. At the pinned commit each of the six projective-circle theorems has a strict record listing OmegaInit and OmegaMath with an empty axiom list and an official record listing propext; the two are read separately. Strict library replay (import closure, declaration checks, replay in mkEmptyEnvironment) is shown as the chapter describes it, with a schematic import graph. Across OmegaShadowBridge, Lean checks that equivalent fractions read alike in ℚ and that the real shadow of every Cayley point lies on the unit circle; the official records of the eleven bridge theorems fall into four groups, from [] to Classical.choice, Quot.sound and propext. Last, the eight clauses of the readable Init.Rat prototype are recomputed exactly, and the honest audit files that prototype as a blueprint whose rational arithmetic depends on the classical axioms (argued).",
+  "summary_zh": "第十八章向 Lean 内核提出两个问题。先看三层：用交叉相乘比较分数的整数载体（2/4 ~ 1/2，因为 2·2 = 4·1，屏幕计算）、写成字段的模型定律，以及通往 Mathlib 的单向桥（模型分层，属论证）。在严格核心中，整数对 (1, 2) 的模方为 5、凯莱像为 (3/5, 4/5)，极点 [1 : 0] 落在 (−1, 0)，(1, 2)·(1, 2) = (4, 3)、25 = 5·5（屏幕计算）；Lean 检验单位圆、相融度加失准度、对径闭合与模方乘性的一般定律。在所钉提交上，六条射影圆周定理各有一份严格端记录（库为 OmegaInit 与 OmegaMath，公理列表为空）和一份官方端记录（propext），两者分开读。严格库重放（导入闭包、逐条声明检查、在 mkEmptyEnvironment 中重放）按本章的说明呈现，导入图为示意。跨过 OmegaShadowBridge，Lean 检验等价分数在 ℚ 中读数相同、每个凯莱点的实阴影都在单位圆上；十一条桥接定理的官方记录分为四组，从 [] 到 Classical.choice、Quot.sound 与 propext。最后，可读的 Init.Rat 教学原型的八项合取被精确重算；诚实审计把它归为蓝图，其有理数运算依赖经典公理（论证）。"
+}

@@ -1,0 +1,32 @@
+{
+  "title": "Four Integers, One Turn",
+  "title_zh": "四个整数，一次转动",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-27",
+  "duration": "0:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a plane where the bracket shrinks to zero beside a third axis, integer quadruples and their canonical names on a ray, a three-node and a six-node orbit, two exact integer rotation frames in both orders, rational points of a circle",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Algebra/InvariantMetric/LowDimensionInvariantMetric.exists_basis_bracket_eq_smul_cross",
+    "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.normSq_mul",
+    "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_left_absorption",
+    "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.lagrange_identity",
+    "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.kappa_le_one",
+    "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative",
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-math_four-integers-one-turn_720p_narrated.mp4",
+    "cover": "omega-math_four-integers-one-turn_cover.jpg"
+  }
+}
