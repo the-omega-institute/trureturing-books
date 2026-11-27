@@ -258,6 +258,12 @@ $$
 | **积分与斯托克斯** | $h \to 0$ 细网格黎曼和与 $O(h^2)$ 离散余项 | 流群伸缩折叠、相容路径与乘序下的面和乐、无选择公理锥同伦 | 精确的有限边界消去 |
 | **流形基底与粘合** | 一阶平直切板 $T_p M \cong \mathbb{R}^n$ 与 $C^\infty$ 隆起补丁 | 二阶吻合三元球 $\mathbb{T}_3^{(p)}(\mathbb{Q})$、莫比乌斯缝合与零荷螺线管 | 消除常曲率联络补丁与非解析死区 |
 
+下面的短片沿本章主线，用几个可以手算的例子把这张表中“积分与斯托克斯”与“流形基底”两行演示一遍。
+
+::: {.film src="exact-on-a-coarse-grid"}
+**粗网格上，积分只剩边界（2 分 49 秒）。** 片中先以流群法则 I $[\mathbf{y},\mathbf{x},\mathbf{x}]=\mathbf{y}$ 沿五点链逐点折叠，积分塌缩为终点（紫色，手工推导）；交换群中的伸缩相消“各步之和等于终点减起点”标绿色 LEAN ✓（[@thm-ch09-chain-telescope-and-nilpotency]），屏幕上的 $-4+7-5+3=1=6-5$ 为计算。随后在四顶点双面元圆盘上放整数边值：两面环流 $9$ 与 $0$，紫色对角线正反各走一次而相消，琥珀色外缘环流仍为 $9$（青色 `NUM`，一般交换情形为手工推导）。换成 [@ex-ch09-coarse-two-plaquette-stokes] 的有理单位四元数后，$\mathbf{W}_1\widetilde{\mathbf{W}}_2=\bigl(\frac{31}{250},-\frac{17}{250},\frac{7}{10},\frac{7}{10}\bigr)=\operatorname{Hol}(\partial\Sigma)$，颠倒乘序或改沿琥珀色虚线 $0\to3\to1$ 锚定则结果改变，$\mathbf{j}$ 变为 $-\mathbf{j}$（精确计算；剥壳恒等式为手工推导）。锥同伦一幕以琥珀色基点 $b$ 为锥顶，绿色标签给出 $\delta_2\circ\delta_1=0$、拆分 $F=\delta_1(H_2 b\,F)+H_3 b\,(\delta_2 F)$ 与闭即恰当的显式见证 $H_2 b\,F$（[@thm-ch09-chain-telescope-and-nilpotency]、[@thm-ch09-cone-homotopy-exactness]），四顶点算例 $10=9+1$ 为屏幕计算。最后，吻合三元球冠与莫比乌斯缝合按模型示意（紫色，[@def-ch09-osculating-manifold]）；螺线管线程的零对数荷判据标绿色（[@thm-ch09-solenoid-zero-charge]），品红色一行 $\lvert z_1\rvert=2$ 的线程漂离单位圆为屏幕计算；全片以第三卷对照表收尾。
+:::
+
 在下面的交互实验卡中，读者可以在粗粒度单纯形网格上亲手检验双面元的加法环流相消，并在读数中对照非交换和乐对锚定路径和乘序的依赖，切换显式锥顶基点 `base` 与任意 $2$-上链赋值 $F$，实时构造无选择公理边势 `e = H2(base, F)` 并逐面核对同伦分解 $\delta_1(H_2 b\, F) + H_3 b\,(\delta_2 F) = F$（[@thm-ch09-chain-telescope-and-nilpotency]、[@thm-ch09-cone-homotopy-exactness]）。
 
 ::: {.viz src="dfinite-algebraic-schur-lab" preset="simplicial-stokes-cone" height="520"}

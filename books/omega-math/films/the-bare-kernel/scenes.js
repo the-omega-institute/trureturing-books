@@ -301,7 +301,7 @@ SCENES.horizon = S => {
     dashed(xa, NL.y + 8, Z.x0, Z.y0, C.now, za * 0.6, 1.5);
     dashed(xb, NL.y + 8, Z.x1, Z.y0, C.now, za * 0.6, 1.5);
     box(Z.x0, Z.y0, Z.x1 - Z.x0, Z.y1 - Z.y0, C.now, za, 1.5, 'rgba(0,0,0,0.55)');
-    const ha = a * Q(S, 2, 'one twelfth', 0.5);
+    const ha = a * Q(S, 2, 'No gap', 0.6, 0.6);
     line(Z.x0 + 110, 670, Z.x0 + 110, 760, C.now, ha, 4);
     line(Z.x1 - 110, 670, Z.x1 - 110, 760, C.now, ha, 4);
     txt('1/12', Z.x0 + 110, 795, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.now, a: ha });
@@ -465,7 +465,7 @@ SCENES.free = S => {
   if (ha > 0.003) {
     const cl = curLine(S);
     panel(980, 330, 800, 500, ha, cl >= 2 ? C.now : C.argued, 'ANY POINT IS HOME · 任一点皆可为家');
-    const R0 = [1380, 470], rr = 90, n = 6;
+    const R0 = [1380, 492], rr = 84, n = 6;
     const hop = at(S, 3, Math.max(0.5, lineAt(S, 3).e - lineAt(S, 3).s - 0.6), 0.4);
     const home = Math.floor(hop * 5.999);
     for (let i = 0; i < n; i++) {
