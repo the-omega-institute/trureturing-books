@@ -15,7 +15,7 @@
              of the chapter's proof sketch; β ≠ 0 and ε ≠ 0 force γ ≠ 0 (read off the second clause of the iff).
      gram    NativeScalarGramClassification.native_scalar_gram_iff (LEAN): ScalarGramAdmissible a b c d, drawn as the
              region c/d ≤ f(b/a) for b, c > 0 with f = 3, 2, 3/2, 1, 2/3, 1/2, 1/3, 0 (computed from the predicate).
-     stair   the memory-rank table of §14.3: fixed block 38; D = 56 in [29, 33]; [216, 224) 26–27; [224, 296) 25–26;
+     stair   the memory-rank table of §14.3: fixed block 38; D = 56 in [29, 31]; [216, 224) 26–27; [224, 296) 25–26;
              [392, 544) 24; [544, 1152) 23; 1152 → 21; 1376 → 20; 1568 → 19 (replay certificates, copied).
      hurwitz OmegaMatrixAndFractran.hurwitz_core_unit (LEAN, zero axioms): the twelve projective representatives of the
              Hurwitz core in doubled coordinates have normSq 4 (computed and checked here); the norm-5 word ladder of
@@ -86,7 +86,7 @@ function chStair(a, b, c, d) {
 /* the memory-rank table of §14.3 */
 const CH_RANK = {
   fixed: 38,
-  d56: [29, 33],
+  d56: [29, 31],
   bands: [[216, 224, 26, 27], [224, 296, 25, 26]],
   flat: [[392, 544, 24], [544, 1152, 23]],
   points: [[1152, 21], [1376, 20], [1568, 19]]
@@ -533,7 +533,7 @@ SCENES.stair = S => {
   if (ia > 0.003) {
     const [l56, h56] = CH_RANK.d56;
     line(X(56), Y(l56), X(56), Y(h56), C.cyan, ia * 0.8, 8);
-    txt('[29, 33]', X(56) + 14, Y(31) + 8, { size: 20, fam: F.mono, w: 700, c: C.cyan, a: ia });
+    txt('[29, 31]', X(56) + 14, Y(30) + 8, { size: 20, fam: F.mono, w: 700, c: C.cyan, a: ia });
     txt('56', X(56), y0 + 32, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ia });
     for (const [d0, d1, r0, r1] of CH_RANK.bands) {
       fillBox(X(d0), Y(r1), X(d1) - X(d0), Y(r0) - Y(r1), C.cyan, ia * 0.35);

@@ -2969,7 +2969,7 @@ SCENES.a4_ask = S => {
                  leakage, orthogonal vs parallel current, only k/d² with (k, d) = (32, 724) → 2/32761 reduced here
                  (ch13.4, certificate: computed; the proton reading is the chapter's argued conclusion).
      a5_channels 12·4² + 12·6² = 192 + 432 = 624 (def-ou-ch14-memory-rank, computed); gain in (623.91, 624.09)
-                 (ch14.1, certificate); local memory rank r(D): 38 fixed, [29, 33] at 56, 26–27 on [216, 224), 25–26 on
+                 (ch14.1, certificate); local memory rank r(D): 38 fixed, [29, 31] at 56, 26–27 on [216, 224), 25–26 on
                  [224, 296), 24 on [392, 544), 23 on [544, 1152), 21, 20, 19 at 1152, 1376, 1568 (ch14.3 table,
                  certificates); TwoHiddenScalarResponse.response_iff (LEAN, as stated); five selection rules, five zeros
                  #10875, #11737, #11488, #11431, #11618 (ch14.4 table, certificates).
@@ -3033,7 +3033,7 @@ const A5 = (() => {
   const NCH = CH.a * CH.ra * CH.ra + CH.b * CH.rb * CH.rb;
   /* r(D) as the chapter's table gives it: exact values on ranges or points, certified brackets [lo, hi] */
   const RANK = [
-    { d0: 56, d1: 56, lo: 29, hi: 33 },
+    { d0: 56, d1: 56, lo: 29, hi: 31 },
     { d0: 216, d1: 224, lo: 26, hi: 27 },
     { d0: 224, d1: 296, lo: 25, hi: 26 },
     { d0: 392, d1: 544, lo: 24, hi: 24 },
@@ -3459,7 +3459,7 @@ SCENES.a5_channels = S => {
       if (r.lo === r.hi) { fillBox(xa, yv(r.lo) - 3, xb - xa, 6, C.cyan, a); dot(xa, yv(r.lo), 7, 'c', a); }
       else box(xa - 4, yv(r.hi) - 4, xb - xa + 8, yv(r.lo) - yv(r.hi) + 8, C.cyan, a, 1.5, rgba(C.cyan, 0.15));
     });
-    txt('[29, 33]', xv(56) + 14, yv(31) + 6, { size: 18, fam: F.mono, w: 700, c: C.cyan, a: aB * clamp((u - phraseAt(S, 2, 'old block fixed')) / 0.4) });
+    txt('[29, 31]', xv(56) + 14, yv(30) + 6, { size: 18, fam: F.mono, w: 700, c: C.cyan, a: aB * clamp((u - phraseAt(S, 2, 'old block fixed')) / 0.4) });
     txt('19', xv(1568), yv(19) - 14, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.now, a: g });
   }
   /* phase C: the Schur theorem */
@@ -3560,8 +3560,8 @@ const A6 = (() => {
   /* per question: model witness present (true), zero-fit derivation done (false) — ch15 verdict */
   const WIT = [true, true, true, true], DER = [false, false, false, false];
   const CODE7 = 32071996606, CODE_T7 = 32071992476;
-  /* coda §sharp-boundaries item 5: the staircase of minimal auxiliary ranks as D opens (29–33 at D = 56 drawn as 33) */
-  const STAIR = [38, 33, 26, 25, 24, 23, 21, 20, 19];
+  /* coda §sharp-boundaries item 5: the staircase of minimal auxiliary ranks as D opens (29–31 at D = 56 drawn as 31) */
+  const STAIR = [38, 31, 26, 25, 24, 23, 21, 20, 19];
   /* the six walls, in the order narrated; key = the phrase of the line that raises it */
   const WALLS = [
     { ch: 'CH05', big: 'r ≤ 189', en: 'one positive trace: no crossing', zh: '单正谱迹：交汇严格无解', det: 'needs 57.08588109… · ceiling 57.034704', line: 1, key: '189' },
@@ -3701,12 +3701,12 @@ SCENES.a6_walls = S => {
     txt(w.zh, tx, y + 186, { size: 21, fam: F.zh, w: 700, c: C.white, a: ai * 0.85 });
     if (w.det) txt(w.det, tx, y + 238, { size: 18, fam: F.mono, w: 700, c: C.dim, a: ai });
     if (i === 4) {
-      /* the staircase of minimal auxiliary ranks, 38 down to 19 (29–33 at D = 56 drawn at its upper end) */
+      /* the staircase of minimal auxiliary ranks, 38 down to 19 (29–31 at D = 56 drawn at its upper end) */
       const bx = tx, by = y + 262, bw = 46;
       A6.STAIR.forEach((v, k) => {
         const h = (v - 15) * 1.5;
         fillBox(bx + k * bw, by - h, bw - 6, h, col, ai * 0.55);
-        txt(k === 1 ? '29–33' : String(v), bx + k * bw + (bw - 6) / 2, by - h - 6, { size: 14, fam: F.mono, w: 700, align: 'center', c: C.white, a: ai * 0.85 });
+        txt(k === 1 ? '29–31' : String(v), bx + k * bw + (bw - 6) / 2, by - h - 6, { size: 14, fam: F.mono, w: 700, align: 'center', c: C.white, a: ai * 0.85 });
       });
     }
     if (i === 5) {
