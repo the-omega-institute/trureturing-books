@@ -163,6 +163,30 @@ $$
 
 and subtracting the three reverse-cyclic triple compositions of $u_p(x) := (p x)a$ from the three forward-cyclic compositions (`oriented_axis_from_shell`) cancels every symmetric term to isolate the pure oriented axis witness $714\,x a$. Without a single floating-point approximation or coordinate chart, the discrete integer shell announces spatial orientation in exact integers ($7$ and $714$).
 
+Neither the compression law nor the oriented-triangle law depends on the squared radius $17$ or on case-by-case enumeration. For an integer $s$ and pure imaginary integer quaternions $p$ and $a$, write the shell map $P_{s,p,a}(v) := s\,v + (p v)\,a$, let $x \cdot y$ denote the four-dimensional Euclidean inner product, and put $N(x) := x \cdot x$ for the squared norm. The frozen theorem below shows that the single condition $s^2 = N(p)\,N(a)$ makes both laws exact for every integer quaternion $v$, with no requirement on the norms of the intermediate vertices $q$ and $r$:
+
+::: {.theorem #thm-ou-ch01-shell-compression-triangle title="Compression and Oriented-Triangle Identities for Integer Quaternion Shell Maps" lean="D5/S3/Quantum/AURICOmega/OmegaShellProjection.shell_compress_of_eq D5/S3/Quantum/AURICOmega/OmegaShellProjection.shell_triangle_of_eq"}
+Let $s$ be an integer and let $p, q, r, a$ be integer quaternions with zero real part such that $s^2 = N(p)\,N(a)$. Then for every integer quaternion $v$ the following two statements hold:
+
+1. **Compression identity**:
+
+$$
+P_{s,p,a}\bigl(P_{s,q,a}(P_{s,p,a}(v))\bigr) = 2\bigl(s^2 + N(a)\,(p \cdot q)\bigr)\,P_{s,p,a}(v).
+$$
+
+2. **Oriented-triangle identity**: with $z := P_{s,p,a}(v)$,
+
+$$
+P_{s,p,a}\bigl(P_{s,q,a}(P_{s,r,a}(z))\bigr) = 2s\bigl(s^2 + N(a)\,(p \cdot q + q \cdot r + r \cdot p)\bigr)\,z + 2\,N(a)\,\bigl(p \cdot (q r)\bigr)\,z\,a.
+$$
+:::
+
+::: proof
+Record a map of the form $u \mapsto c\,u + (d\,u)\,a$ by its coefficient pair $(c, d)$; the shell map $P_{s,p,a}$ is the pair $(s, p)$. A pure imaginary $a$ satisfies $a a = -N(a)$, so the composite of two such maps has the same shape, with coefficients combining as $(c, d) \circ (e, f) = (c e - N(a)\,d f,\ c f + d e)$. The triple and quadruple composites thereby reduce to polynomial identities with integer coefficients among the quaternion coefficients, which are expanded and checked coordinate by coordinate. Without the norm condition each identity carries one extra defect term proportional to $s^2 - N(p)\,N(a)$, and that term vanishes once $s^2 = N(p)\,N(a)$ is substituted. The full proof is checked by the Lean kernel.
+:::
+
+Setting $s = 17$ and $N(p) = N(a) = 17$ turns the first coefficient into $2(289 + 17\,p \cdot q) = 34\,(17 + p \cdot q)$, the compression law of the nine-point shell. On the inner triangle all three inner products equal $16$, and the imaginary part of a product $q r$ of pure quaternions is the cross product $q \times r$, so $p \cdot (q r) = \det(p, q, r) = 7$; the two coefficients of the second identity become $2 \cdot 17\,(289 + 17 \cdot 48) = 34 \cdot 1105$ and $2 \cdot 17 \cdot 7 = 34 \cdot 7$, matching the enumerated certificate term by term. The third item, `oriented_axis_from_shell`, still rests on that finite certificate alone.
+
 The second Lean-verified pillar connects discrete radial shells to continuous isotropic ensembles in $\mathbb{R}^3$. If a rotationally invariant random vector $X \in \mathbb{R}^3$ has radial shell density $h(r)$, then conditional on $|X| = r$ its projection along any fixed unit axis is uniform on $[-r, r]$, producing the one-dimensional marginal $f(t) = \int_{|t|}^\infty \frac{h(r)}{2r}\,dr$ on the full real line (reducing to $\int_t^\infty \frac{h(r)}{2r}\,dr$ on the nonnegative half-line $t \ge 0$). The next theorem establishes exact inversion uniqueness and total mass conservation:
 
 ::: {.theorem #thm-ou-ch01-shell-inversion title="Uniqueness and Mass Identity for Isotropic Shell Inversion" lean="D5/S3/Quantum/StaticExchange/IsotropicShellInversion.shell_density_unique D5/S3/Quantum/StaticExchange/IsotropicShellInversion.shell_projection_mass"}
@@ -220,7 +244,7 @@ The interactive card below lets you explore this nineteen-point geometry directl
 
 ## 1.5 Summary and Bridge to Chapter 2 {#sec-ou-1-5}
 
-We now hold the complete static blueprint of our laboratory: the 19-point Behrend shell at $R = 867$ ($19$ vertices, $135$ edges, $529$ triangles), its $23$ arc lengths collapsing by exactly one $\mathbb{Q}(\sqrt{-2})$ identity $\theta_{136} = \theta_{12} + \theta_{68}$ to $22$ rationally independent frequencies, two Lean-verified bridges for projective ternion heaps ([@thm-ou-ch01-ternion-heap]) and continuous isotropic shell inversion ([@thm-ou-ch01-shell-inversion]), the exact `rfl`-certified 9-point integer compression and orientation witness, and the $2$-adic Hasse obstruction separating real rank $18$ from minimal rational Gram dimension $21$.
+We now hold the complete static blueprint of our laboratory: the 19-point Behrend shell at $R = 867$ ($19$ vertices, $135$ edges, $529$ triangles), its $23$ arc lengths collapsing by exactly one $\mathbb{Q}(\sqrt{-2})$ identity $\theta_{136} = \theta_{12} + \theta_{68}$ to $22$ rationally independent frequencies, three Lean-verified results on projective ternion heaps ([@thm-ou-ch01-ternion-heap]), the compression and oriented-triangle identities of shell maps ([@thm-ou-ch01-shell-compression-triangle]) and continuous isotropic shell inversion ([@thm-ou-ch01-shell-inversion]), the exact `rfl`-certified 9-point integer compression and orientation witness, and the $2$-adic Hasse obstruction separating real rank $18$ from minimal rational Gram dimension $21$.
 
 ::: {.film src="nineteen-points-twenty-two-frequencies"}
 **Nineteen points, 135 edges and 23 chord lengths, held together by a single rational relation that leaves 22 independent frequencies (2 min 45 s).** The camera looks down the pole onto the sphere $x_1^2 + x_2^2 + x_3^2 = 867$: the $19$ nonnegative integer points light up one by one, the amber pole $(17, 17, 17)$ stays put under the coordinate cycle $\sigma$ (a $120^\circ$ turn about the pole), and the other $18$ points form six three-point orbits in cyan, white, blue and magenta for the inner, sub-inner, middle and outer layers ([@def-ou-ch01-behrend-shell]). As the squared-distance threshold sweeps up to $804$, $135$ cyan great-circle edges appear, the $36$ dropped longest chords flash as dashed magenta arcs, an amber triangle picks out one of the $529$ triangles at a time, and the degrees add to $270 = 2 \times 135$. Next, the $23$ chord-length cards turn over to show their $\sqrt{-D_j}$, with $12$, $68$ and $136$ all in $\mathbb{Q}(\sqrt{-2})$; on the great circle $x_1 = x_2$ the three points sit in order, the magenta arc $\theta_{68}$ and the cyan arc $\theta_{12}$ make up the amber arc $\theta_{136}$, and the exact product beside them gives $\alpha_{12}\alpha_{68} = \alpha_{136}$ ([@ex-ou-ch01-shell-arithmetic]). The green labels are the projective ternion heap ([@thm-ou-ch01-ternion-heap]) and isotropic shell inversion ([@thm-ou-ch01-shell-inversion]), the latter shown with the computed example $f = e^{-t^2}$, $h = 4r^2 e^{-r^2}$. In the last scene the heatmap is the Laplacian of the $135$ edges: its real rank $18$ is computed on screen, while the minimal rational Gram dimension $21$ and the $2$-adic Hasse obstruction come from the replay certificate and written argument (violet). Points, edges, triangles, lengths, fields and the product are exact computations on screen; that the remaining $22$ angles are rationally independent is the chapter's Galois argument (violet), and picking this shell as the testbed is a modelling choice.
