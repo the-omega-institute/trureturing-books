@@ -6314,6 +6314,279 @@
       "line": 443,
       "signature": "theorem bloch_ball_hyperbolic : (∃ Φ : {r : EuclideanSpace ℝ (Fin 3) // ‖r‖ < 1} ≃ HyperbolicThreeSpace, ∀ r s, Real.cosh (dist (Φ r) (Φ s)) = kleinCosh r s) ∧ (∀ r : EuclideanSpace ℝ (Fin 3), blochFilter 1 r = r) ∧ (∀ (g h : Matrix (Fin 2) (Fin 2) ℂ) (r : EuclideanSpace ℝ (Fin 3)), (Matrix.trace (g * blochMatrix 1 r * gᴴ)).re ≠ 0 → blochFilter h (blochFilter g r) = blochFilter (h * g) r) ∧ (∀ (g : Matrix (Fin 2) (Fin 2) ℂ) (r s : EuclideanSpace ℝ (Fin 3)), (Matrix.trace (g * blochMatrix 1 r * gᴴ)).re ≠ 0 → (Matrix.trace (g * blochMatrix 1 s * gᴴ)).re ≠ 0 → 1 - ⟪blochFilter g r, blochFilter g "
     },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.christodoulou_ruffini_mass_sq": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.christodoulou_ruffini_mass_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 116,
+      "signature": "theorem christodoulou_ruffini_mass_sq {M J Q : ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) : M ^ 2 = kerrNewmanMassSq (horizonArea M J Q) J Q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.extremal_surface_gravity_tendsto_zero": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.extremal_surface_gravity_tendsto_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 377,
+      "signature": "theorem extremal_surface_gravity_tendsto_zero {ι : Type*} {l : Filter ι} {M : ℝ} {J Q : ι → ℝ} (hM : 0 < M) (h : Tendsto (fun t => Q t ^ 2 + spin M (J t) ^ 2) l (𝓝 (M ^ 2))) : Tendsto (fun t => surfaceGravity M (J t) (Q t)) l (𝓝 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.hawking_entropy_differential": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.hawking_entropy_differential",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 322,
+      "signature": "theorem hawking_entropy_differential {G ℏ κ A dA : ℝ} (hG : 0 < G) (hh : 0 < ℏ) : hawkingTemp ℏ κ * deriv (bekensteinEntropy G ℏ) A * dA = κ / (8 * Real.pi * G) * dA",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.hawking_temp_schwarzschild": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.hawking_temp_schwarzschild",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 333,
+      "signature": "theorem hawking_temp_schwarzschild {G ℏ M : ℝ} (hG : 0 < G) (hM : 0 < M) : hawkingTemp ℏ (surfaceGravity (G * M) 0 0) = schwarzschildTemp G ℏ M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.hawking_temp_schwarzschild_deriv": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.hawking_temp_schwarzschild_deriv",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 342,
+      "signature": "theorem hawking_temp_schwarzschild_deriv {G ℏ M : ℝ} (hG : 0 < G) (hh : 0 < ℏ) (hM : 0 < M) : HasDerivAt (schwarzschildTemp G ℏ) (-ℏ / (8 * Real.pi * G * M ^ 2)) M ∧ -ℏ / (8 * Real.pi * G * M ^ 2) < 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.horizonArea_pos": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.horizonArea_pos",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 61,
+      "signature": "theorem horizonArea_pos {M J Q : ℝ} (hM : 0 < M) : 0 < horizonArea M J Q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerrNewmanMassSq_irreducible": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerrNewmanMassSq_irreducible",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 92,
+      "signature": "theorem kerrNewmanMassSq_irreducible {A J Q : ℝ} (hA : 0 < A) : kerrNewmanMassSq A J Q = (Real.sqrt (A / (16 * Real.pi)) + Q ^ 2 / (4 * Real.sqrt (A / (16 * Real.pi)))) ^ 2 + J ^ 2 / (4 * (A / (16 * Real.pi)))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerrNewmanMass_eq": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerrNewmanMass_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 124,
+      "signature": "theorem kerrNewmanMass_eq {M J Q : ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) : kerrNewmanMass (horizonArea M J Q) J Q = M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerrNewman_first_law": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerrNewman_first_law",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 167,
+      "signature": "theorem kerrNewman_first_law {M J Q t A' J' Q' : ℝ} {Acurve Jcurve Qcurve : ℝ → ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) (hA : Acurve t = horizonArea M J Q) (hJ : Jcurve t = J) (hQ : Qcurve t = Q) (dA : HasDerivAt Acurve A' t) (dJ : HasDerivAt Jcurve J' t) (dQ : HasDerivAt Qcurve Q' t) : HasDerivAt (fun s => kerrNewmanMass (Acurve s) (Jcurve s) (Qcurve s)) (surfaceGravity M J Q / (8 * Real.pi) * A' + angularVelocity M J Q * J' + electricPotential M J Q * Q') t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerrNewman_partial_A": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerrNewman_partial_A",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 201,
+      "signature": "theorem kerrNewman_partial_A {M J Q : ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) : HasDerivAt (fun A => kerrNewmanMass A J Q) (surfaceGravity M J Q / (8 * Real.pi)) (horizonArea M J Q)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerrNewman_partial_J": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerrNewman_partial_J",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 210,
+      "signature": "theorem kerrNewman_partial_J {M J Q : ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) : HasDerivAt (fun j => kerrNewmanMass (horizonArea M J Q) j Q) (angularVelocity M J Q) J",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerrNewman_partial_Q": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerrNewman_partial_Q",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 217,
+      "signature": "theorem kerrNewman_partial_Q {M J Q : ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) : HasDerivAt (fun q => kerrNewmanMass (horizonArea M J Q) J q) (electricPotential M J Q) Q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerrNewman_smarr_formula": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerrNewman_smarr_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 224,
+      "signature": "theorem kerrNewman_smarr_formula {M J Q : ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) : M = surfaceGravity M J Q * horizonArea M J Q / (4 * Real.pi) + 2 * angularVelocity M J Q * J + electricPotential M J Q * Q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerr_irreducible_mass_bounds": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerr_irreducible_mass_bounds",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 258,
+      "signature": "theorem kerr_irreducible_mass_bounds {M J : ℝ} (hM : 0 < M) (hJ : |J| ≤ M ^ 2) : M / Real.sqrt 2 ≤ irreducibleMass M J 0 ∧ irreducibleMass M J 0 ≤ M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerr_irreducible_mass_min_iff": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerr_irreducible_mass_min_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 272,
+      "signature": "theorem kerr_irreducible_mass_min_iff {M J : ℝ} (hM : 0 < M) (hJ : |J| ≤ M ^ 2) : irreducibleMass M J 0 = M / Real.sqrt 2 ↔ |J| = M ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.penrose_efficiency_bound": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.penrose_efficiency_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 294,
+      "signature": "theorem penrose_efficiency_bound {M₁ J₁ M₂ J₂ : ℝ} (hM₁ : 0 < M₁) (hM₂ : 0 < M₂) (hJ₁ : |J₁| ≤ M₁ ^ 2) (hJ₂ : |J₂| ≤ M₂ ^ 2) (hA : horizonArea M₁ J₁ 0 ≤ horizonArea M₂ J₂ 0) : (M₁ - M₂) / M₁ ≤ 1 - 1 / Real.sqrt 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.penrose_efficiency_sharp": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.penrose_efficiency_sharp",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 309,
+      "signature": "theorem penrose_efficiency_sharp {M₁ J₁ M₂ : ℝ} (hM₁ : 0 < M₁) (hM₂ : 0 < M₂) (hJ : |J₁| = M₁ ^ 2) (hA : horizonArea M₂ 0 0 = horizonArea M₁ J₁ 0) : (M₁ - M₂) / M₁ = 1 - 1 / Real.sqrt 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.rPlus_sq_add_a_sq_eq": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.rPlus_sq_add_a_sq_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 81,
+      "signature": "theorem rPlus_sq_add_a_sq_eq {M J Q : ℝ} (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) : rPlus M J Q ^ 2 + spin M J ^ 2 = 2 * M * rPlus M J Q - Q ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.schwarzschild_specific_heat_neg": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.schwarzschild_specific_heat_neg",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 357,
+      "signature": "theorem schwarzschild_specific_heat_neg {G ℏ M : ℝ} (hG : 0 < G) (hh : 0 < ℏ) (hM : 0 < M) : schwarzschildMassAtTemp G ℏ (schwarzschildTemp G ℏ M) = M ∧ HasDerivAt (schwarzschildMassAtTemp G ℏ) (-8 * Real.pi * G * M ^ 2 / ℏ) (schwarzschildTemp G ℏ M) ∧ -8 * Real.pi * G * M ^ 2 / ℏ < 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.surfaceGravity_pos_of_subextremal": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.surfaceGravity_pos_of_subextremal",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 71,
+      "signature": "theorem surfaceGravity_pos_of_subextremal {M J Q : ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 < M ^ 2) : 0 < surfaceGravity M J Q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.surfaceGravity_zero_of_extremal": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.surfaceGravity_zero_of_extremal",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 76,
+      "signature": "theorem surfaceGravity_zero_of_extremal {M J Q : ℝ} (h : Q ^ 2 + spin M J ^ 2 = M ^ 2) : surfaceGravity M J Q = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Geometry/Lorentz/DimensionSelection4D.angular_trace_summable_iff_of_eventually_comparable": {
       "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
       "name": "D5.S3.Geometry.Lorentz.DimensionSelection4D.angular_trace_summable_iff_of_eventually_comparable",
@@ -18230,6 +18503,318 @@
       "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
       "line": 163,
       "signature": "theorem wilson_strong_coupling_geometric_finite_bound (D : GaugeData G d) (β : ℝ) (hβ : 0 ≤ β) (hd : 0 < d) (z : Subgroup.center G) (ζ : ℂ) (hz : D.rep z = ζ • 1) (hζ : ζ ≠ 1) (r : Rectangle n) (hw : 0 < r.width) (hh : 0 < r.height) (hq : 80 * (Real.exp (β * d) - 1) < 1) : let q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.antiSelfDual_ym_stress_zero": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.antiSelfDual_ym_stress_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 278,
+      "signature": "theorem antiSelfDual_ym_stress_zero (F : TwoForm4 r) (h : hodge4 F = -F) (μ ν : Fin 4) : ymStress F μ ν = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.bpst_density": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.bpst_density",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 309,
+      "signature": "theorem bpst_density (ρ : ℝ) (x : E4) : traceActionDensity (bpstField ρ x) = 48 * (ρ ^ 4 / (‖x‖ ^ 2 + ρ ^ 2) ^ 4)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.bpst_instanton_exact_action": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.bpst_instanton_exact_action",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 354,
+      "signature": "theorem bpst_instanton_exact_action {ρ : ℝ} (hρ : 0 < ρ) : bpstAction ρ = 8 * Real.pi ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.bpst_instanton_exact_charge_one": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.bpst_instanton_exact_charge_one",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 361,
+      "signature": "theorem bpst_instanton_exact_charge_one {ρ : ℝ} (hρ : 0 < ρ) : bpstCharge ρ = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.bpst_instanton_finite_action": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.bpst_instanton_finite_action",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 349,
+      "signature": "theorem bpst_instanton_finite_action {ρ : ℝ} (hρ : 0 < ρ) : Integrable (fun x ↦ traceActionDensity (bpstField ρ x))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.bpst_instanton_selfDual": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.bpst_instanton_selfDual",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 297,
+      "signature": "theorem bpst_instanton_selfDual (ρ : ℝ) (x : E4) : hodge4 (bpstField ρ x) = bpstField ρ x",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.bpst_instanton_stress_zero": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.bpst_instanton_stress_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 300,
+      "signature": "theorem bpst_instanton_stress_zero (ρ : ℝ) (x : E4) (μ ν : Fin 4) : ymStress (bpstField ρ x) μ ν = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.hodge4_coordinate_iff": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.hodge4_coordinate_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 57,
+      "signature": "theorem hodge4_coordinate_iff (D : ℕ) : D - 2 = 2 ↔ Nonempty (Fin D ≃ Fin 4)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.hodge4_involutive": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.hodge4_involutive",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 66,
+      "signature": "theorem hodge4_involutive (F : TwoForm4 r) : hodge4 (hodge4 F) = F",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.hodge4_isometry": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.hodge4_isometry",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 70,
+      "signature": "theorem hodge4_isometry (F H : TwoForm4 r) : inner4 (hodge4 F) (hodge4 H) = inner4 F H",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.normSq_tensor": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.normSq_tensor",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 248,
+      "signature": "theorem normSq_tensor (F : TwoForm4 r) : normSq F = (1 / 2) * ∑ a, ∑ μ, ∑ ν, toTwoForm F a μ ν ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.norm_sq_eq_sd_add_asd": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.norm_sq_eq_sd_add_asd",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 99,
+      "signature": "theorem norm_sq_eq_sd_add_asd (F : TwoForm4 r) : normSq F = normSq (selfDualPart F) + normSq (antiSelfDualPart F)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.sd_asd_orthogonal": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.sd_asd_orthogonal",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 79,
+      "signature": "theorem sd_asd_orthogonal (F : TwoForm4 r) : inner4 (selfDualPart F) (antiSelfDualPart F) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.sd_asd_orthogonal_split": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.sd_asd_orthogonal_split",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 89,
+      "signature": "theorem sd_asd_orthogonal_split (F : TwoForm4 r) : selfDualPart F + antiSelfDualPart F = F ∧ hodge4 (selfDualPart F) = selfDualPart F ∧ hodge4 (antiSelfDualPart F) = -antiSelfDualPart F ∧ inner4 (selfDualPart F) (antiSelfDualPart F) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.selfDual_ym_stress_zero": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.selfDual_ym_stress_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 270,
+      "signature": "theorem selfDual_ym_stress_zero (F : TwoForm4 r) (h : hodge4 F = F) (μ ν : Fin 4) : ymStress F μ ν = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.thooftEta_selfDual": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.thooftEta_selfDual",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 291,
+      "signature": "theorem thooftEta_selfDual : hodge4 thooftEta = thooftEta",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.toTwoForm_antisymmetric": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.toTwoForm_antisymmetric",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 244,
+      "signature": "theorem toTwoForm_antisymmetric (F : TwoForm4 r) (a : Fin r) (μ ν : Fin 4) : toTwoForm F a μ ν = -toTwoForm F a ν μ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.topological_density_eq_sd_sub_asd": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.topological_density_eq_sd_sub_asd",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 110,
+      "signature": "theorem topological_density_eq_sd_sub_asd (F : TwoForm4 r) : topDensity F = normSq (selfDualPart F) - normSq (antiSelfDualPart F)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.ym_bps_action_bound": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.ym_bps_action_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 201,
+      "signature": "theorem ym_bps_action_bound (F : E4 → TwoForm4 r) (hF : Measurable F) (hact : Integrable (fun x ↦ normSq (F x))) : |∫ x, topDensity (F x)| ≤ ∫ x, normSq (F x)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.ym_bps_action_equality_iff": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.ym_bps_action_equality_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 212,
+      "signature": "theorem ym_bps_action_equality_iff (F : E4 → TwoForm4 r) (hF : Continuous F) (hact : Integrable (fun x ↦ normSq (F x))) : (∫ x, normSq (F x)) = (∫ x, topDensity (F x)) ↔ ∀ x, hodge4 (F x) = F x",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.ym_bps_equality_iff": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.ym_bps_equality_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 169,
+      "signature": "theorem ym_bps_equality_iff (F : TwoForm4 r) : (normSq F = topDensity F ↔ hodge4 F = F) ∧ (normSq F = -topDensity F ↔ hodge4 F = -F)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.ym_bps_pointwise_bound": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.ym_bps_pointwise_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 164,
+      "signature": "theorem ym_bps_pointwise_bound (F : TwoForm4 r) : |topDensity F| ≤ normSq F",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.ym_bps_pointwise_identity": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.ym_bps_pointwise_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 144,
+      "signature": "theorem ym_bps_pointwise_identity (F : TwoForm4 r) : normSq F = (1 / 2) * normSq (F - hodge4 F) + topDensity F ∧ normSq F = (1 / 2) * normSq (F + hodge4 F) - topDensity F",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.ym_stress_trace_zero": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.ym_stress_trace_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 262,
+      "signature": "theorem ym_stress_trace_zero (F : TwoForm4 r) : ∑ μ, ymStress F μ μ = 0",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
