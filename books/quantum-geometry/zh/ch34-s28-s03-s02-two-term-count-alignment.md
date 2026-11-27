@@ -32,6 +32,6 @@ $$
 相位条件把配对和化为带重数的洛伦兹能量。对原区间两端各延伸 $\sqrt{T}$ 后使用柯西–施瓦茨不等式。扩展区间的长度与 $T$ 之比趋于一，每个纵坐标在扩展区间内保留的核质量比例也趋于一。下界除以 $T(\log T)^2$ 后趋于 $2\pi c^2$。完整证明由 Lean 内核检查。
 :::
 
-前面的共格谱有有界计数误差，因此 [@thm-ch34-montgomery-bounded-count-upper] 给出同一系数的上界。取从 $\log T$ 开始的开区间寻找 $u_m$，其长度为 $(42\pi/\log 2)\log(21T)$。当 $T\ge21$ 时，这个区间落在 $[\log T,(1+84\pi/\log 2)\log T]$。在该谱上，每个充分大的 $T$ 都能选到一个这样的 $u_m$，使 $G_T(u_m)/(T(\log T)^2)$ 趋于 $2\pi c^2$。实际 ζ 纵坐标在长频带上是否具有严格低于该系数的一致上界，仍待判定。
+前面的共格谱有有界计数误差，因此 [@thm-ch34-montgomery-bounded-count-upper] 给出归一化配对和的一致上界。对每个 $\varepsilon>0$，只要 $T$ 充分大，上界便是 $2\pi c^2+\varepsilon$。取从 $\log T$ 开始的开区间寻找 $u_m$，其长度为 $(42\pi/\log 2)\log(21T)$。当 $T\ge21$ 时，这个区间落在 $[\log T,(1+84\pi/\log 2)\log T]$。在该谱上，每个充分大的 $T$ 都能选到一个这样的 $u_m$，使 $G_T(u_m)/(T(\log T)^2)$ 趋于 $2\pi c^2$。实际 ζ 纵坐标在长频带上是否具有严格低于该系数的一致上界，仍待判定。
 
 因此，即使加入误差有界的两项计数、单位重数和指定的调和权重，这些条件仍允许每个对数长度区间出现达到全部权重的点。特征函数平均可以识别零频项。把平均限制在有限窗口时，实际 ζ 纵坐标仍需控制非零但接近零的高阶加权频率差。目前缺少的是随 $T$ 增长的矩阶上的估计。[特征函数平均的 Lean 实现](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L78)
