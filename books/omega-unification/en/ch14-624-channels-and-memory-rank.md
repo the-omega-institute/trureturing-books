@@ -96,6 +96,16 @@ Writing the Schur inverse response at the three cube-root clock frequencies $\om
 | $D = 1376$ | **$20$** | Next chord shell reduces auxiliary rank to $20$ |
 | $D = 1568$ (or unconstrained edits) | **$19$** | Global floor of $19$ states via a rank-19 positive-definite old-block shift |
 
+At $D=56$, three isolated pairs of neighboring sites give three directions in which to test a low-rank realization. Number the shell sites from $0$ in lexicographic coordinate order and write $v_i$ for the Gram vectors of the positive semidefinite residual $W$. Replace each pair $(0,2),(1,3),(17,18)$ by its sum and difference, writing $m_1=v_0-v_2$, $m_2=v_1-v_3$, and $m_3=v_{17}-v_{18}$ for the unnormalized differences. The whole $2\times2$ block within each pair is free and its inner products with other sites are fixed, so this change of basis preserves the allowed edits. Form $C_{aj}=\langle m_a,v_j\rangle$ with columns $j=4,5,6$ in that order. These nine rational numbers come directly from fixed long-distance entries, and their denominators are invertible modulo $101$. [Sum-and-difference basis and rational inputs](https://github.com/the-omega-institute/trureturing-experiments/blob/a6a358f5167c57f3eada67026298cf6327e288cf/experiments/ch39-omega-research/replay/ch39-cutoff56-general-rank-scan.py)
+
+$$
+C\bmod 101 =
+\begin{pmatrix}5&31&0\\31&5&94\\88&13&94\end{pmatrix},
+\qquad \det C\equiv31\pmod{101}.
+$$
+
+Thus $C$ is invertible over the complex numbers as well. A linear dependence among the differences would give a row dependence in $C$ upon taking inner products with $v_4,v_5,v_6$. Their Gram block $M$ is therefore positive definite in every feasible completion. Order the differences first, write $R$ for the Gram block of the remaining sixteen vectors, and let $B$ be the cross block. The Schur complement $S=R-B^*M^{-1}B$ is the Gram matrix of those sixteen vectors projected onto the orthogonal complement of the three differences. With $M\succ0$, one has $W\succeq0$ exactly when $S\succeq0$, and $\operatorname{rank}W=3+\operatorname{rank}S$. For a budget of at most $29$ or $30$ auxiliary states, subtracting the $19$ common directions and these three differences requires $\operatorname{rank}S\le7$ or $\operatorname{rank}S\le8$, respectively. The same choice of admissible entries must also pass the three-clock contraction test. Whether either budget suffices remains open.
+
 ::: {.remark #rem-ou-ch14-cutoffs-and-spectral-lines title="Two Sharp Companion Thresholds: Full-Frequency Clock Jump at D = 512 and Alternating Cutoff at D = 216"}
 Two additional single-integer phase transitions accompany the memory-rank staircase:
 
