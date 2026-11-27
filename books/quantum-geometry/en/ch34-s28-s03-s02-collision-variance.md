@@ -618,7 +618,7 @@ Since $N(Y)/(Y\log Y)\to c$, the strict threshold gives $N(Y)-|F_Y(t)|\ge dN(Y)$
 For each fixed $A>1$, the normalized integral through $A\log T_n$ tends to the central Gaussian constant. Relative truncation bounds the remaining fraction by $64/(aA)$. Choose $A$ arbitrarily large before taking the limit in $n$. The same bound applies at each fixed positive multiple of the resolution, which permits the two secants to recover the inclusive hard-band limit. The full proof is checked by the Lean kernel.
 :::
 
-The positive threshold includes the uniform condition $G_Y(t)=o(Y\log^2 Y)$, which would follow from Montgomery's pair-correlation conjecture. The long-band threshold for actual $\zeta$ zeros remains an arithmetic premise of this theorem. The result includes $\eta_n\log T_n\to a$ for $0<a<\infty$. For fixed finite support, the occupation-diagonal bound below gives a finer-resolution regime in which the normalized Fejér moment diverges. [Ford–Soundararajan–Zaharescu, §1](https://arxiv.org/abs/0805.2745v3)
+The positive threshold includes the uniform condition $G_Y(t)=o(Y\log^2 Y)$, which would follow from Montgomery's pair-correlation conjecture. The long-band threshold for actual $\zeta$ zeros remains an arithmetic premise of this theorem. The result includes $\eta_n\log T_n\to a$ for $0<a<\infty$. For fixed finite support and fixed positive variance, the occupation-diagonal bound below gives a finer-resolution regime in which the normalized Fejér moment diverges. [Ford–Soundararajan–Zaharescu, §1](https://arxiv.org/abs/0805.2745v3)
 
 ### Commensurate spectra with the same unit-band profile
 
