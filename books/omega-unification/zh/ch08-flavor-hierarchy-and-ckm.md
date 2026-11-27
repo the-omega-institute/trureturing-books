@@ -44,6 +44,20 @@ $$
 
 基向量 $e_1$ 在中间本征线上的权重为 $|\langle e_1,Bn\rangle|^2=1/3$。由 $\langle e_1,Be_1\rangle=0$，其余两条线的权重也各为 $1/3$。在按质量递增排列的上型基中，可选相位使 $e_1$ 的三个坐标相等。相应下型基由 $D_t$ 作用得到，故 $V_{ij}=\delta_{ij}+(e^{it}-1)/3$。在 $t=0$ 处，$V=I$。在 $t=\pm2\pi/3$ 处，九个模平方均为 $1/3$，而 $J=\pm\sqrt3/18$。这组四站点算例固定了质量谱、轮换和压缩空间，调节的是两算子的相对相位。轮换会把 $W$ 送到另一个超平面。真实壳层须给出选择轻空间与相对相位的物理规律。
 
+哪些四站点算子也能通过这种压缩产生非零的 $J$？按轮换特征标把空间分成二维不动平面 $F$ 和两条非平凡特征标线。与轮换对易的两个厄米算子可写成 $A=A_0\oplus a_+\oplus a_-$ 与 $B=B_0\oplus b_+\oplus b_-$。将共同轻空间的单位法向量写作 $n=(n_0,n_+,n_-)$。令 $C=[A_0,B_0]$、$\alpha=a_+-a_-$、$\beta=b_+-b_-$，并令 $X_0=\beta(A_0-a_-I)-\alpha(B_0-b_-I)$。把两算子压缩到 $n^\perp$ 得到 $H_A,H_B$，其对易子的有向行列式可分解为
+$$
+\det[H_A,H_B]=-|n_+n_-|^2\det(X_0)\,n_0^*C n_0.
+$$
+若两套谱均非简并并按递增排序，这个行列式等于 $2i\Delta_A\Delta_B J$，其中每个 $\Delta$ 是相应压缩算子的三个正本征值差的乘积。因此有向混合要求法向量在两条特征标线上均有非零权重、$X_0$ 可逆且不动平面分量满足 $n_0^*Cn_0\ne0$。任一压缩谱出现重根，行列式即为零。[Jarlskog 的对易子不变量](https://doi.org/10.1103/PhysRevLett.55.1039)
+
+先取 $(\alpha,\beta)\ne(0,0)$。将 $A,B$ 分别减去 $a_-I,b_-I$ 得到 $A',B'$，再取 $X=\beta A'-\alpha B'$ 与 $Y=(\alpha A'+\beta B')/(\alpha^2+\beta^2)$。这个线性变换的行列式为一，压缩后的对易子保持不变。$X$ 只作用于 $F$，而 $Y$ 在两条特征标线上分别取值 $1,0$。令 $Q=I-nn^*$、$x=X_0n_0$，取 $F$ 的标准正交基 $f_1,f_2$，以 $Qf_1,Qf_2,QYn$ 为 $R$ 的三列。在两算子之间插入 $Q$ 得
+$$
+[H_A,H_B]=R\begin{pmatrix} C&-x\\ x^*&0\end{pmatrix}R^*.
+$$
+把单位法向量作为第四列补上，前三列张成的平行体的体积平方为 $|\det(f_1,f_2,Yn,n)|^2=|n_+n_-|^2$。中间矩阵的行列式为 $-x^* Cx$，因为二维对易子的迹为零。在 $X_0$ 的本征基中，$C=[X_0,Y|_F]$ 的对角元为零，故 $X_0 C X_0=\det(X_0) C$。若 $\alpha=\beta=0$，两条特征标线张成的平面中有一条垂直于 $n$ 的共同本征线，公式两端均为零。
+
+固定 $A,B$ 并遍取共同复超平面，可得 $\max_n |\det[H_A,H_B]|=|\det X_0|\,\|iC\|_{\rm op}/27$。三个权重 $\|n_0\|^2,|n_+|^2,|n_-|^2$ 之和为一，乘积至多为 $1/27$。令三者相等，并让 $n_0$ 沿 $iC$ 取到算子范数的本征方向，即可达界。因而存在产生非零 $J$ 的轻空间，当且仅当 $\det X_0\ne0$ 且 $C\ne0$。若要比较不同法向量所得 $J$ 的大小，还需计入随法向量而变的质量谱隙 $\Delta_A\Delta_B$。
+
 在第 $2\,306\,888\,100\,085$ 枚正零点，把四个算术 Gram 源的正交化方向依次放在极点与三条射线的首站，用后三个原始源张成的空间代表三代。把荷 $-4,2$ 的壳算子分别压缩到这个空间，作为上型、下型左手夸克的质量平方矩阵。一步传播保留共同的反酉对称，Jarlskog 不变量 $J=0$。走两步再投影，多出了中途离开三代空间又返回的路径，给出 $J\simeq3.00189\times10^{-4}$。产生 CP 破坏后，还要同时解释夸克质量与顶底混合。在 $1\,\mathrm{TeV}$ 六个夸克汤川耦合各自的 $1\sigma$ 区间内，即使上下两部门各自任取十九个非负谱值，所得 $|V_{tb}|$ 也只能小于 $0.9936401$ 或大于 $0.99915018$，同尺度参考窗落在两者之间。若允许壳上的读数取负而压缩后的质量平方保持正定，两荷共用一个至多十一次的实多项式就能重现任意给定的六个正夸克质量与 CKM 矩阵。这个自由度使多项式的系数也成为统一模型必须解释的量。[两步传播](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-three-gram-source-flavor.py) · [非负谱的混合限制](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-three-source-positive-ckm.py) · [有符号多项式构造](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-signed-three-source-quark-pair.py) · [参考输入表 2](https://arxiv.org/html/2510.01312v2#Sx1.T2)
 
 夸克数据还约束三代空间本身的取向。取极点与三个首站构成的实四维空间，将其中一个实三维超平面复化，作为上下型共有的味空间。记 $a$ 为其单位法向在三循环固定平面上的投影长度。允许两部门各自在四站上选取任意保持三循环的正半定算子，并把压缩读作质量平方。用同一张 $1\,\mathrm{TeV}$ 表的质量与混合误差窗，区间计算给出必要条件 $0.0096549<a<0.0332714$。四个算术源中任选三个，得到的 $a$ 都在 $0.5198$ 与 $0.5774$ 之间。取 $a=0.02145737$，同表中心值有严格正定的四站扩张。[四站正扩张的范围与构造](https://github.com/the-omega-institute/trureturing-experiments/blob/cd7ec54bd5afd349e0a6734cc600f16e66ce612c/experiments/ch39-omega-research/replay/ch39-free-four-site-positive-extensions.py)
