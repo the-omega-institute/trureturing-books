@@ -282,6 +282,7 @@
   - [E.8 第三点冗余与对合正性：用极小圆弧体微积分归约 H2 与 H3，并改写 H5–H7 的输入](appendix-e-s08-third-point-redundancy.md)
     - [E.8.1 比较势、格拉姆正性与曲率](appendix-e-s08-s01-potential-and-positivity.md)
       - [E.8.1.4 曲率从哪里来](appendix-e-s08-s01-s04-curvature.md)
+      - [E.8.1.5 弦图 Banach 势重构的精确通用常数](appendix-e-s08-s01-s05-sharp-chordal-banach-four.md)
     - [E.8.2 玻恩权重、动力学与系综](appendix-e-s08-s02-born-dynamics-ensembles.md)
     - [E.8.3 轨道、观察者与复结构](appendix-e-s08-s03-orbits-and-structure.md)
 - [附录 F 排除球、面极性与自旋因子定向分类](appendix-f.md)
