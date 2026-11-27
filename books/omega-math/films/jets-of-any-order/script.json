@@ -170,8 +170,8 @@
      "截断阶每加 2，两个误差都恰好乘以 −1/4。"
     ],
     [
-     "At order twelve, the errors are still one over ten thousand two hundred forty, and minus one over five thousand one hundred twenty.",
-     "到 12 阶，误差仍有 +1/10240 与 −1/5120。"
+     "At order twelve they are still there, about one part in ten thousand and one in five thousand.",
+     "到 12 阶，误差依然在：+1/10240 与 −1/5120。"
     ]
    ]
   },
@@ -204,12 +204,12 @@
      "从 1/5 出发。倍增一次：5/12；再倍增：120/119。"
     ],
     [
-     "Subtract one over two hundred thirty-nine: top and bottom both become twenty-eight thousand five hundred sixty-one.",
-     "再减去 1/239：分子与分母同为 28561。"
+     "Subtract one over two hundred thirty-nine: top and bottom are both thirteen to the fourth.",
+     "再减去 1/239：分子与分母同为 28561 = 13⁴。"
     ],
     [
-     "That is thirteen to the fourth: the chain lands exactly on one, and Lean checks it. No pi, no arctangent.",
-     "28561 = 13⁴，整条链精确落到 1，Lean 内核已检验；全程无 π、无反正切。"
+     "So the chain lands exactly on one, and Lean checks it. No pi, no arctangent.",
+     "于是整条链精确落到 1，Lean 内核已检验；全程无 π、无反正切。"
     ]
    ]
   },
@@ -231,12 +231,12 @@
      "把两条交替和截短，配上马青的权重，就得到有理的下端与上端。"
     ],
     [
-     "At order one, the bracket runs from about three point one four zero six to three point one eight three three.",
-     "1 阶时，包络从约 3.1406 延伸到约 3.1833。"
+     "At order one, the bracket runs from about three point one four one to three point one eight three.",
+     "1 阶时，包络从约 3.141 延伸到约 3.183。"
     ],
     [
-     "Each order shrinks it about twenty-five times; by order seventeen the width is about one point five seven times ten to the minus twenty-five.",
-     "每升一阶宽度约缩小 25 倍；到 17 阶，宽度约为 1.57 × 10⁻²⁵。"
+     "Each order shrinks it about twenty-five times; by order seventeen, the width is below two times ten to the minus twenty-five.",
+     "每升一阶宽度约缩小 25 倍；到 17 阶，宽度已小于 2 × 10⁻²⁵。"
     ],
     [
      "Only in the classical shadow is the point these brackets close in on called pi.",
@@ -248,7 +248,7 @@
    "id": "close",
    "name": "LEDGER",
    "lead": 0.5,
-   "tail": 3.0,
+   "tail": 2.5,
    "music": [
     1.0,
     0.6,

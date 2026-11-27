@@ -188,9 +188,9 @@ FILM.init.push(() => {
   }
   for (const [M, s] of Object.entries(CH.widths)) check(sciStr(BR[+M].W) === s, `W_${M} = ${sciStr(BR[+M].W)} vs ${s}`);
   /* spoken roundings: 3.1406, 3.1833, about 25 times, about 1.57e-25 */
-  check(fDec(BR[1].L, 4) === '3.1406' && fDec(BR[1].U, 4) === '3.1833', 'spoken endpoints');
+  check(fDec(BR[1].L, 3) === '3.141' && fDec(BR[1].U, 3) === '3.183', 'spoken endpoints');
   for (let M = 2; M <= MMAX; M++) { const r = fNum(BR[M - 1].W) / fNum(BR[M].W); check(r > 20 && r < 42, `shrink ratio ${r} at ${M}`); }
-  check(fSci(BR[17].W, 3)[0] === '1.57' && fSci(BR[17].W, 3)[1] === -25, 'spoken W_17');
+  check(fSci(BR[17].W, 3)[0] === '1.57' && fSci(BR[17].W, 3)[1] === -25 && fLt(BR[17].W, fr(2n, pow10(25))), 'spoken W_17 below 2e-25');
 });
 Object.assign(FILM.speed, { ring: 0.02, four: 0.016, cayley: 0.016, unify: 0.014, audit: 0.014, machin: 0.016, bracket: 0.012, close: 0.025 });
 
@@ -484,7 +484,7 @@ SCENES.machin = S => {
   line(MC.cx, MC.cy, MC.cx + MC.r + 30, MC.cy, C.dim, a * 0.7, 1.5);
   line(MC.cx, MC.cy, MC.cx, MC.cy - MC.r - 30, C.dim, a * 0.7, 1.5);
   const rays = [[5, 1, '1/5', Q(S, 1, 'Start at one fifth', 0.6)], [12, 5, '5/12', Q(S, 1, 'five twelfths', 0.6)],
-    [119, 120, '120/119', Q(S, 1, 'one hundred twenty over', 0.6)], [1, 1, '1', Q(S, 2, 'both become', 0.6)]];
+    [119, 120, '120/119', Q(S, 1, 'one hundred twenty over', 0.6)], [1, 1, '1', Q(S, 2, 'top and bottom', 0.6)]];
   let cur = -1; rays.forEach((r, i) => { if (r[3] > 0) cur = i; });
   rays.forEach(([q, p, lab, r], i) => {
     if (r <= 0.003) return;
@@ -503,10 +503,10 @@ SCENES.machin = S => {
     [`t₂ = t₁ ⊕ t₁ = (2/5) / (24/25) = ${fStr(T2)}`, 1, 'five twelfths', C.white],
     [`t₄ = t₂ ⊕ t₂ = (5/6) / (119/144) = ${fStr(T4)}`, 1, 'one hundred twenty over', C.white],
     ['t₄ ⊖ 1/239 = (120·239 − 119) / (119·239 + 120)', 2, 'Subtract one over', C.white],
-    [`= ${CH_NUM} / ${CH_DEN} = ${fStr(CHAIN)}`, 2, 'both become', C.now]
+    [`= ${CH_NUM} / ${CH_DEN} = ${fStr(CHAIN)}`, 2, 'top and bottom', C.now]
   ];
   chain.forEach(([s, k, ph, col], i) => txt(s, px, 385 + i * 72, { size: i === 4 ? 40 : 30, fam: F.math, w: 700, c: col, a: a * Q(S, k, ph, 0.6) }));
-  txt('28561 = 13⁴', px + 640, 673, { size: 30, fam: F.math, w: 700, c: C.cyan, a: a * Q(S, 3, 'thirteen to the fourth', 0.6) });
+  txt('28561 = 13⁴', px + 640, 673, { size: 30, fam: F.math, w: 700, c: C.cyan, a: a * Q(S, 2, 'thirteen to the fourth', 0.6) });
   const la = a * Q(S, 3, 'Lean checks', 0.6);
   const lw = leanChip(px, 780, JA_LEAN.machin, la, 22);
   txt('no π, no arctan', px + lw + 30, 780, { size: 26, fam: F.math, w: 700, c: C.lean, a: a * Q(S, 3, 'No pi', 0.6) });
