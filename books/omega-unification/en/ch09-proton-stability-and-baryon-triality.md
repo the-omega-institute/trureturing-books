@@ -79,6 +79,18 @@ Choosing $h \not\equiv 0 \pmod 3$ (the two nonzero values $h = 1, 2$ swap the ge
    Both bounds are attained. Write parentheses for the antisymmetric contraction of two left-handed spinors. Set $N_i=\epsilon^{abc}(u^c_{ia}d^c_{ib})d^c_{ic}$ and replace the last $d^c$ by $u^c$ to obtain $P_i$, with $i$ the generation index. These color-singlet spinors have hypercharges $0$ and $-1$, respectively. The dimension-$15$ operator $(N_1N_2)(P_3 e^c)$ has $(\Delta B,\Delta L)=(-3,-1)$. The dimension-$16$ operator $(N_1N_2)(N_3\,\epsilon_{rs}L^r H^s)$ has $(-3,+1)$, with the Higgs and lepton doublets contracted to a spinor of zero hypercharge. To see that both are nonzero, fix the color order $0,1,2$ and choose spin components $(0,1,0)$ in $N_1$ and $(1,0,1)$ in $N_2$. Choose $(0,1,0)$ in the third generation and component $1$ for the final lepton, taking $L^0 H^1$ in $LH$. After expansion, the coefficients of the two selected monomials have absolute values $2$ and $1$, respectively.
 
    If $B-L$ is conserved as well, then $|\Delta L|=|\Delta B|\ge3$. At least nine quark fields and three lepton fields are needed, so $d\ge18$. Multiply one copy of the $QQQL$ contraction in [@ex-ou-ch09-qqql-grassmann] from each generation to obtain $(\Delta B,\Delta L)=(3,3)$. The generations use disjoint Grassmann generators, so choosing the term of coefficient $4$ in each gives a product coefficient of absolute value $4^3=64$. This charge assignment explains why baryon triality admits the three-generation electroweak instanton vertex of [Chapter 7](ch07-chiral-three-generations.md). Four-step Wilson–Yukawa regulators built solely from baryon-conserving bilinears have a continuous $U(1)_B$ that excludes this vertex. [Nonzero monomial checks at dimensions 15 and 18](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-baryon-triality-operator-floor.py)
+
+   **Direct derivation.** At fixed $\Delta B=-3$, the opposite three-lepton sector $\Delta L=+3$ starts at dimension $19$. Nine antiquark fields and three lepton fields give $d\ge18$, and the dimension parity rule requires odd $d$. A single Higgs field supplies the extra unit of dimension. With the same spinor contraction and $N_i$ as above, take
+
+   $$
+   \begin{aligned}
+   \mathcal O={}&(N_1N_2)\,\epsilon^{abc}\epsilon_{rs}\epsilon_{tu}\\
+   &{}\times(d^c_{3a}L_1^r)(d^c_{3b}L_2^s)(d^c_{3c}L_3^t)H^u .
+   \end{aligned}
+   $$
+
+   The three third-generation $d^c$ fields carry total hypercharge $+1$, and the three lepton doublets and Higgs carry total hypercharge $-1$. In color order $0,1,2$, choose spin components $(1,0,0)$ and $(0,1,1)$ in the two $N_i$, component $0$ in each third-generation $d^c$, and component $1$ in each lepton. Choose weak-isospin components $(r,s,t,u)=(0,1,0,1)$. In each $N_i$, exchanging the two $d^c$ fields reverses both the color tensor and the Grassmann product. The six terms from the outer color contraction also have the same sign, so the chosen monomial has coefficient of magnitude $2\cdot2\cdot6=24$.
+
 3. **Anomaly-free gauged $U(1)_X$ UV completion and the divisibility law $m \mid N_g$**: baryon triality need not be postulated as an ungrounded global symmetry. Introduce a gauged $U(1)_X$ with $X = 3B - 9L_\tau$, adjoin a left-handed conjugate neutrino $\nu^c_\tau$ of charge $+9$ (plus optional neutral singlets for $e, \mu$), and condense a Standard Model neutral scalar of charge $9$.
 
 ::: {.remark #rem-ou-ch09-anomaly-ledger title="Term-by-Term Cancellation of All Six Chiral Anomaly Traces for Gauged $U(1)_X$ ($X = 3B - 9L_\tau$)"}
