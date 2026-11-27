@@ -16,7 +16,7 @@
    "id": "flat",
    "name": "FLAT WORLDS",
    "lead": 2.4,
-   "tail": 0.6,
+   "tail": 0.4,
    "music": [
     1.0,
     0.4,
@@ -50,8 +50,8 @@
      "在平面里，两个输入已张满全空间，括号只好与一切正交：它只能是零。"
     ],
     [
-     "A third axis makes room. Lean checks, on the classical side, that a positive form locks the bracket to the cross product.",
-     "第三根轴立起来才有余地。Lean 在经典侧检验：正定不变型把括号锁定为叉积的正倍数。"
+     "A third axis makes room: there, Lean checks, a positive form locks the bracket to the cross product.",
+     "第三根轴立起来才有余地：Lean 检验，正定不变型把括号锁定为叉积的正倍数。"
     ]
    ]
   },
@@ -59,7 +59,7 @@
    "id": "root",
    "name": "NO ROOT TWO",
    "lead": 0.5,
-   "tail": 0.6,
+   "tail": 0.4,
    "music": [
     0.9,
     0.5,
@@ -76,12 +76,12 @@
    ],
    "lines": [
     [
-     "Now use integers only. A quarter turn about the first axis is one plus i: one, one, zero, zero.",
+     "Now integers only: a quarter turn about the first axis is one plus i, one, one, zero, zero.",
      "现在只用整数。绕第一根轴转四分之一圈，是 1 + i，即 (1, 1, 0, 0)。"
     ],
     [
-     "Its squared length is two. Forcing length one would drag in the square root of two.",
-     "它的模方是 2。硬要归一到长度 1，就得请出 √2。"
+     "Its squared length is two; length one would need the square root of two.",
+     "它的模方是 2；要归一到长度 1，就得请出 √2。"
     ],
     [
      "So keep four integers and forget their scale: that leaves exactly three degrees of freedom.",
@@ -97,7 +97,7 @@
    "id": "canon",
    "name": "ONE NAME PER RAY",
    "lead": 0.5,
-   "tail": 0.6,
+   "tail": 0.4,
    "music": [
     0.9,
     0.6,
@@ -131,7 +131,7 @@
    "id": "laws",
    "name": "FOUR SQUARES",
    "lead": 0.5,
-   "tail": 0.6,
+   "tail": 0.4,
    "music": [
     1.0,
     0.7,
@@ -174,7 +174,7 @@
    "id": "beats",
    "name": "THREE BEATS",
    "lead": 0.5,
-   "tail": 0.6,
+   "tail": 0.4,
    "music": [
     1.0,
     0.7,
@@ -195,7 +195,7 @@
      "现在重复同一个转动 g₁₂₀ = (1, 1, 1, 1)，从 1 出发。"
     ],
     [
-     "Beat two: the raw square is minus two, two, two, two, named one, minus one, minus one, minus one.",
+     "Beat two: raw, minus two, two, two, two; named one, minus one, minus one, minus one.",
      "第二拍：未约分的平方是 (−2, 2, 2, 2)，名字是 (1, −1, −1, −1)。"
     ],
     [
@@ -212,7 +212,7 @@
    "id": "order",
    "name": "ORDER LEAVES A MARK",
    "lead": 0.5,
-   "tail": 0.6,
+   "tail": 0.4,
    "music": [
     1.0,
     0.8,
@@ -234,8 +234,8 @@
    ],
    "lines": [
     [
-     "Two quarter turns, about the first and second axes. Compose them in both orders.",
-     "两个四分之一圈，分别绕第一与第二根轴。按两种次序复合。"
+     "Two quarter turns, about the first and second axes, in both orders.",
+     "两个四分之一圈，分别绕第一与第二根轴，按两种次序复合。"
     ],
     [
      "One plus i times one plus j is one, one, one, one; reversed, it is one, one, one, minus one.",
@@ -255,7 +255,7 @@
    "id": "shadow",
    "name": "THE REAL SHADOW",
    "lead": 0.5,
-   "tail": 0.6,
+   "tail": 0.4,
    "music": [
     0.9,
     0.6,
@@ -272,8 +272,8 @@
    ],
    "lines": [
     [
-     "In the classical shadow, rational unit quaternions meet every hypothesis of the rank-five embedding, yet leave gaps.",
-     "在经典阴影里，有理单位四元数满足秩五嵌入的全部假设，却留着缝隙。"
+     "Classically, rational unit quaternions meet every hypothesis of the rank-five embedding, yet leave gaps.",
+     "在经典侧，有理单位四元数满足秩五嵌入的全部假设，却留着缝隙。"
     ],
     [
      "Add reading completeness, and Lean checks on the classical side: we get all the unit quaternions.",
@@ -289,7 +289,7 @@
    "id": "close",
    "name": "LEDGER",
    "lead": 0.5,
-   "tail": 3.4,
+   "tail": 3.0,
    "music": [
     1.0,
     0.6,

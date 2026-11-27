@@ -255,7 +255,7 @@ SCENES.flat = S => {
     txt('in a Φ-orthonormal basis · 标准正交基坐标', 1390, 732, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.dim, a: fa });
     txt('dim 3 · non-Abelian · Φ(x, x) > 0', 1390, 262, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ra });
     leanChip(1030, 772, FI_LEAN.cross, ra * Q(S, 3, 'Lean checks', 0.6), 19);
-    tag(1770, 772, 'CLASSICAL · Mathlib', C.dim, ra * Q(S, 3, 'classical side', 0.6), 'right');
+    tag(1770, 772, 'CLASSICAL · Mathlib', C.dim, ra * Q(S, 3, 'Lean checks', 0.6), 'right');
   }
   tag(150, 830, 'SCHEMATIC · 示意', C.argued, a * 0.9);
 };
@@ -440,7 +440,7 @@ SCENES.beats = S => {
     txt(nm, i === 0 ? lx + 190 : lx, i === 0 ? ly : ly + 38, { size: 24, fam: F.math, w: 700, align: 'center', c: C.dim, a: na });
   });
   /* raw products at the centre */
-  const rawA1 = a * Q(S, 1, 'raw square', 0.6), rawA2 = a * Q(S, 2, 'raw product', 0.6);
+  const rawA1 = a * Q(S, 1, 'Beat two', 0.6), rawA2 = a * Q(S, 2, 'raw product', 0.6);
   if (cl === 1) { txt('raw', 300, cy - 150, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.dim, a: rawA1 }); quad(FI.beatsRaw[1], 300, cy - 110, { size: 28, align: 'center', a: rawA1, c: C.mag }); txt('÷ 2, flip', 300, cy - 70, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.dim, a: rawA1 }); }
   if (cl >= 2) { txt('raw', 300, cy - 150, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.dim, a: rawA2 }); quad(FI.beatsRaw[2], 300, cy - 110, { size: 28, align: 'center', a: rawA2, c: C.mag }); txt('÷ 4', 300, cy - 70, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.dim, a: rawA2 }); }
   stamp('3 BEATS', 590, 760, a * Q(S, 2, 'we are home', 0.5), C.now, 34, -0.05);
