@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "2ea9ed33f7ec63078222d50495ed1bed6a0c534a",
-  "pinned_at": "2026-11-27T10:24:31Z",
+  "commit": "38fef7f68e3273f4500ee18f57437a5aaf26cc73",
+  "pinned_at": "2026-11-27T13:10:02Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -17863,18 +17863,13 @@
       "line": 89,
       "signature": "theorem prime_window_mobius_of_power_prefix (hRH : RiemannHypothesis) {β P ε : ℝ} (hβ : 0 ≤ β) (hβ₁ : β < 1) (hP : 0 < P) (hε : 0 < ε) (hprefix : ∀ k : ℕ, 1 ≤ k → |∑ n ∈ Finset.Icc 1 k, (μ n : ℝ)| ≤ P*(k : ℝ)^β) : ∃ a₀ K : ℝ, 2 ≤ a₀ ∧ 0 < K ∧ ∀ m : ℕ, 2 ≤ m → ∀ a B : ℝ, a₀ ≤ a → a ≤ B → |windowDiscrepancy a B - spectralPrimitive (phaseOrbit (Real.log B)) + spectralPrimitive (phaseOrbit (Real.log a)) - (∑ n ∈ Finset.Icc 3 m, -(μ n : ℝ) * (2 * (n : ℝ)^2 / (((n : ℝ) - 1) * ((n : ℝ) - 2))) * (a ^ ((n : ℝ)⁻¹ - 1 / 2) - B ^ ((n : ℝ)⁻¹ - 1 / 2))) - (∑ n ∈ (Finset.Icc 2 m).filter (fun n => 2 * n < m +"
     },
-    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalPairSumThreshold.harmonic_zeta_critical_collision_limit_of_threshold": {
-      "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalPairSumThreshold",
-      "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHCriticalPairSumThreshold.harmonic_zeta_critical_collision_limit_of_threshold",
+    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalCauchyThreshold.harmonic_zeta_critical_collision_limit_of_cauchy_cap": {
+      "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalCauchyThreshold",
+      "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHCriticalCauchyThreshold.harmonic_zeta_critical_collision_limit_of_cauchy_cap",
       "kind": "theorem",
-      "statement_id": "sha256:e3f5a1dd7f85b0eeaf8c328c4f608948a2a79a46f22b57b72e8addc9c21e23f1",
-      "line": 560,
-      "signature": "theorem harmonic_zeta_critical_collision_limit_of_threshold (rh : RiemannHypothesis) (hcorr : MontgomeryThresholdOnLogBands (zetaSpectrum rh)) (T η : ℕ → ℝ) (hT : Tendsto T atTop atTop) (hη : ∀ᶠ n : ℕ in atTop, 0 < η n) (hh : Tendsto (fun n : ℕ => (Real.log (T n))^2 / (n : ℝ)) atTop (𝓝 0)) (hresolution : ∃ a > (0 : ℝ), ∀ᶠ n in atTop, a ≤ η n * Real.log (T n)) : let scale (n : ℕ)",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ]
+      "statement_id": "sha256:3a75b77d40ac7c025a2f95b42ffdca9d865cfc5d4cc614aedd3fce357499e43f",
+      "line": 33,
+      "signature": "theorem harmonic_zeta_critical_collision_limit_of_cauchy_cap (rh : RiemannHypothesis) {κ : ℝ} (hκmax : κ < 2 * Real.pi * (1 / (2 * Real.pi)) ^ 2) (hcorr : ∀ A > (1 : ℝ), ∀ᶠ Y : ℝ in atTop, ∀ t : ℝ, Real.log Y ≤ |t| → |t| ≤ A * Real.log Y → Y * Real.log Y / (2 * Real.pi) * montgomery (zetaSpectrum rh) (t / Real.log Y) Y ≤ κ * Y * (Real.log Y) ^ 2) (T η : ℕ → ℝ) (hT : Tendsto T atTop atTop) (hh : Tendsto (fun n : ℕ => (Real.log (T n))^2 / (n : ℝ)) atTop (𝓝 0)) (hresolution : ∃ a > (0 : ℝ), ∀ᶠ n in atTop, a ≤ η n * Real.log (T n)) : let scale (n : ℕ)"
     },
     "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio": {
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment",
