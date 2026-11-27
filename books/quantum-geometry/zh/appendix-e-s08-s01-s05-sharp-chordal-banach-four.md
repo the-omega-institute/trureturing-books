@@ -50,4 +50,4 @@ $$
 
 这个等式的上下界均有 Lean 内核证明。[对应的注册文件](https://github.com/the-omega-institute/trureturing/blob/0ab3edce883d165b87f2d0ace6431d8bc026ea3e/Reg/D5/S3/Combinatorics/Graph/Chordal/ChordalBanachSharpFour.lean) 中的严格障碍实例还分别验证了超过 $3$、$7/2$ 和 $399/100$ 的误差阈值。双不变伪度量群的通用系数也由同一上下界确定为 $4$，因为实 Banach 空间的加法群属于此类。精确上确界无需在单个有限图上取到。
 
-对于额外具有支配团的弦图，系数 $3$ 的可选上界，以及 $3$-树与其他 $k$-树的进一步有界团数改进，仍需各自的形式化依据。固定目标为圆度量 $\mathrm{SU}(2)$ 时，弦图通用系数仍待确定，等式 $C_{\mathrm{SU}(2)}(K_4)=c_*$ 的全局 Lean 形式化亦见 [@prob-appe-round-quaternion-k4-optimal-constant]。
+对于额外具有支配团的弦图，系数 $3$ 的可选上界仍需形式化依据。将团大小限制在 $4$ 时，可用多边形不变量改进重构界，见 [E.8.1.6](appendix-e-s08-s01-s06-three-tree-banach-sharp-bounds.md)。固定目标为圆度量 $\mathrm{SU}(2)$ 时，弦图通用系数仍待确定，等式 $C_{\mathrm{SU}(2)}(K_4)=c_*$ 的全局 Lean 形式化亦见 [@prob-appe-round-quaternion-k4-optimal-constant]。
