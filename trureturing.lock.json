@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "fb0b3a142e918b6c7cc6001991a0f5fabe8cbdd6",
-  "pinned_at": "2026-11-27T01:08:28Z",
+  "commit": "29fe05ce97e1869857dac9c1b1b9d74f50155b7e",
+  "pinned_at": "2026-11-27T01:47:37Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -13032,6 +13032,175 @@
       "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
       "line": 110,
       "signature": "theorem weak_generators_independent : LinearIndependent ℝ (![⟨0, 1, 0, 0⟩, ⟨0, 0, 1, 0⟩, ⟨0, 0, 0, 1⟩] : Fin 3 → ℍ[ℝ])",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D.wilson_action_gauge_invariant": {
+      "module": "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D",
+      "name": "D5.S3.Quantum.Gauge.LatticeReflectionPositivity4D.wilson_action_gauge_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
+      "line": 39,
+      "signature": "theorem wilson_action_gauge_invariant (D : GaugeData G d) (g k : Vertex n → G) (u : Box n G) : wilsonAction D (siteGauge g k u) = wilsonAction D u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D.wilson_action_reflection_invariant": {
+      "module": "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D",
+      "name": "D5.S3.Quantum.Gauge.LatticeReflectionPositivity4D.wilson_action_reflection_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
+      "line": 46,
+      "signature": "theorem wilson_action_reflection_invariant (D : GaugeData G d) (u : Box n G) : wilsonAction D (reflect u) = wilsonAction D u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D.wilson_os_cauchy_schwarz": {
+      "module": "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D",
+      "name": "D5.S3.Quantum.Gauge.LatticeReflectionPositivity4D.wilson_os_cauchy_schwarz",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
+      "line": 114,
+      "signature": "theorem wilson_os_cauchy_schwarz (D : GaugeData G d) (β : ℝ) (hβ : 0 ≤ β) (F H : integrableObservables (configMeasure μ (Link n))) : ‖wilsonOSPair μ D β F.1 H.1‖ ≤ wilsonOSSeminorm μ D β hβ F * wilsonOSSeminorm μ D β hβ H",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D.wilson_os_norm": {
+      "module": "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D",
+      "name": "D5.S3.Quantum.Gauge.LatticeReflectionPositivity4D.wilson_os_norm",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
+      "line": 77,
+      "signature": "theorem wilson_os_norm (D : GaugeData G d) (β : ℝ) (hβ : 0 ≤ β) (F : integrableObservables (configMeasure μ (Link n))) : ‖wilsonHalfClass μ D β hβ F‖ = Real.sqrt ((wilsonOS μ D β F.1 * (partition (n",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D.wilson_os_pairing": {
+      "module": "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D",
+      "name": "D5.S3.Quantum.Gauge.LatticeReflectionPositivity4D.wilson_os_pairing",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
+      "line": 100,
+      "signature": "theorem wilson_os_pairing (D : GaugeData G d) (β : ℝ) (hβ : 0 ≤ β) (F H : integrableObservables (configMeasure μ (Link n))) : inner ℂ (wilsonHalfClass μ D β hβ F) (wilsonHalfClass μ D β hβ H) = wilsonOSPair μ D β F.1 H.1 * (partition (n",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D.wilson_os_seminorm": {
+      "module": "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D",
+      "name": "D5.S3.Quantum.Gauge.LatticeReflectionPositivity4D.wilson_os_seminorm",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
+      "line": 87,
+      "signature": "theorem wilson_os_seminorm (D : GaugeData G d) (β : ℝ) (hβ : 0 ≤ β) (F : integrableObservables (configMeasure μ (Link n))) : wilsonOSSeminorm μ D β hβ F = Real.sqrt (wilsonOS μ D β F.1).re",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D.wilson_physical_transfer_nonneg": {
+      "module": "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D",
+      "name": "D5.S3.Quantum.Gauge.LatticeReflectionPositivity4D.wilson_physical_transfer_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
+      "line": 69,
+      "signature": "theorem wilson_physical_transfer_nonneg (D : GaugeData G d) (β : ℝ) (hβ : 0 ≤ β) (ψ : wilsonPhysicalSpace (n",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D.wilson_plaquette_gauge_invariant": {
+      "module": "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D",
+      "name": "D5.S3.Quantum.Gauge.LatticeReflectionPositivity4D.wilson_plaquette_gauge_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
+      "line": 26,
+      "signature": "theorem wilson_plaquette_gauge_invariant (D : GaugeData G d) (g : Vertex n → G) (u : Link n → G) (p : Plaquette n) : (D.rep (squareHolonomy (gauge g u) p)).trace.re = (D.rep (squareHolonomy u p)).trace.re",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D.wilson_reflection_positivity": {
+      "module": "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D",
+      "name": "D5.S3.Quantum.Gauge.LatticeReflectionPositivity4D.wilson_reflection_positivity",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
+      "line": 61,
+      "signature": "theorem wilson_reflection_positivity (D : GaugeData G d) (β : ℝ) (hβ : 0 ≤ β) (F : (Link n → G) → ℂ) (hF : Integrable F (configMeasure μ (Link n))) : ∃ r : ℝ, 0 ≤ r ∧ wilsonOS μ D β F = (r : ℂ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D.wilson_seam_plaquette_gauge_invariant": {
+      "module": "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D",
+      "name": "D5.S3.Quantum.Gauge.LatticeReflectionPositivity4D.wilson_seam_plaquette_gauge_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
+      "line": 32,
+      "signature": "theorem wilson_seam_plaquette_gauge_invariant (D : GaugeData G d) (g k : Vertex n → G) (u : Box n G) (e : BoundaryLink n) : (D.rep (seamHolonomy (boundary (siteGauge g k u).1.1) (boundary (siteGauge g k u).1.2) (siteGauge g k u).2 e)).trace.re = (D.rep (seamHolonomy (boundary u.1.1) (boundary u.1.2) u.2 e)).trace.re",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D.wilson_strong_coupling_area_bound": {
+      "module": "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D",
+      "name": "D5.S3.Quantum.Gauge.LatticeReflectionPositivity4D.wilson_strong_coupling_area_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
+      "line": 190,
+      "signature": "theorem wilson_strong_coupling_area_bound (D : GaugeData G d) (β : ℝ) (hβ : 0 ≤ β) (hd : 0 < d) (z : Subgroup.center G) (ζ : ℂ) (hz : D.rep z = ζ • 1) (hζ : ζ ≠ 1) (r : Rectangle n) (hw : 0 < r.width) (hh : 0 < r.height) (hq : 80 * (Real.exp (β * d) - 1) < 1) : let q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D.wilson_strong_coupling_finite_bound": {
+      "module": "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D",
+      "name": "D5.S3.Quantum.Gauge.LatticeReflectionPositivity4D.wilson_strong_coupling_finite_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
+      "line": 139,
+      "signature": "theorem wilson_strong_coupling_finite_bound (D : GaugeData G d) (β : ℝ) (hβ : 0 ≤ β) (hd : 0 < d) (z : Subgroup.center G) (ζ : ℂ) (hz : D.rep z = ζ • 1) (hζ : ζ ≠ 1) (r : Rectangle n) (hw : 0 < r.width) (hh : 0 < r.height) : ‖wilsonLoop μ D β r‖ ≤ min 1 (∑ S ∈ rectangleComponents r hw, (Real.exp (β * d) - 1) ^ S.card)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D.wilson_strong_coupling_geometric_finite_bound": {
+      "module": "D5/S3/Quantum/Gauge/LatticeReflectionPositivity4D",
+      "name": "D5.S3.Quantum.Gauge.LatticeReflectionPositivity4D.wilson_strong_coupling_geometric_finite_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
+      "line": 163,
+      "signature": "theorem wilson_strong_coupling_geometric_finite_bound (D : GaugeData G d) (β : ℝ) (hβ : 0 ≤ β) (hd : 0 < d) (z : Subgroup.center G) (ζ : ℂ) (hz : D.rep z = ζ • 1) (hζ : ζ ≠ 1) (r : Rectangle n) (hw : 0 < r.width) (hh : 0 < r.height) (hq : 80 * (Real.exp (β * d) - 1) < 1) : let q",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
