@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "663cba8bdffc3012487624e29514bad89c657882",
-  "pinned_at": "2026-11-27T05:26:05Z",
+  "commit": "4437caa4cb82da228b8ced66e0643ed23dc60ce5",
+  "pinned_at": "2026-11-27T06:12:23Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -11677,6 +11677,253 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D.besselB2_entire": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D",
+      "name": "NullConeGravity.besselB2_entire",
+      "kind": "theorem",
+      "statement_id": "sha256:b3b121c58a44ef9ada4eb8b7a02708006b2c9a5aa9dbea5d25d1d9e14e04b81b",
+      "line": 216,
+      "signature": "theorem besselB2_entire : Differentiable ℂ besselB2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D.besselB_entire": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D",
+      "name": "NullConeGravity.besselB_entire",
+      "kind": "theorem",
+      "statement_id": "sha256:b3b121c58a44ef9ada4eb8b7a02708006b2c9a5aa9dbea5d25d1d9e14e04b81b",
+      "line": 210,
+      "signature": "theorem besselB_entire : Differentiable ℂ besselB",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D.besselP2_entire": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D",
+      "name": "NullConeGravity.besselP2_entire",
+      "kind": "theorem",
+      "statement_id": "sha256:b3b121c58a44ef9ada4eb8b7a02708006b2c9a5aa9dbea5d25d1d9e14e04b81b",
+      "line": 213,
+      "signature": "theorem besselP2_entire : Differentiable ℂ besselP2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D.besselP_entire": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D",
+      "name": "NullConeGravity.besselP_entire",
+      "kind": "theorem",
+      "statement_id": "sha256:b3b121c58a44ef9ada4eb8b7a02708006b2c9a5aa9dbea5d25d1d9e14e04b81b",
+      "line": 207,
+      "signature": "theorem besselP_entire : Differentiable ℂ besselP",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D.correctionLog_eq_series": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D",
+      "name": "NullConeGravity.correctionLog_eq_series",
+      "kind": "theorem",
+      "statement_id": "sha256:b3b121c58a44ef9ada4eb8b7a02708006b2c9a5aa9dbea5d25d1d9e14e04b81b",
+      "line": 418,
+      "signature": "theorem correctionLog_eq_series (t M : ℝ) : correctionLog M t (Real.log t) = ((M : ℂ)^2 / (16 * (Real.pi : ℂ)^2)) * (besselSeriesSlope t + besselSeries t)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D.correction_mixed_deriv": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D",
+      "name": "NullConeGravity.correction_mixed_deriv",
+      "kind": "theorem",
+      "statement_id": "sha256:b3b121c58a44ef9ada4eb8b7a02708006b2c9a5aa9dbea5d25d1d9e14e04b81b",
+      "line": 427,
+      "signature": "theorem correction_mixed_deriv {M u v x : ℝ} (hM : 0 < M) (hu : 0 < u) (hv : 0 < v) (hx : x < 1) : deriv (fun s : ℝ => deriv (fun r : ℝ => ((r*s : ℝ) : ℂ) * bulkDifference M ((2*r*s*(1-x) : ℝ) : ℂ)) u) v = correction M u v x",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D.hasDerivAt_besselSeries": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D",
+      "name": "NullConeGravity.hasDerivAt_besselSeries",
+      "kind": "theorem",
+      "statement_id": "sha256:b3b121c58a44ef9ada4eb8b7a02708006b2c9a5aa9dbea5d25d1d9e14e04b81b",
+      "line": 323,
+      "signature": "theorem hasDerivAt_besselSeries {t : ℝ} (ht : 0 < t) : HasDerivAt besselSeries (besselSeriesSlope t) t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D.hasDerivAt_besselSeriesSlope": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D",
+      "name": "NullConeGravity.hasDerivAt_besselSeriesSlope",
+      "kind": "theorem",
+      "statement_id": "sha256:b3b121c58a44ef9ada4eb8b7a02708006b2c9a5aa9dbea5d25d1d9e14e04b81b",
+      "line": 338,
+      "signature": "theorem hasDerivAt_besselSeriesSlope {t : ℝ} (ht : 0 < t) : HasDerivAt besselSeriesSlope (besselSeries t / (t : ℂ)) t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D.tendsto_besselSeriesSlope_sub_log": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D",
+      "name": "NullConeGravity.tendsto_besselSeriesSlope_sub_log",
+      "kind": "theorem",
+      "statement_id": "sha256:b3b121c58a44ef9ada4eb8b7a02708006b2c9a5aa9dbea5d25d1d9e14e04b81b",
+      "line": 383,
+      "signature": "theorem tendsto_besselSeriesSlope_sub_log : Tendsto (fun t => besselSeriesSlope t - (Real.log t : ℂ)) (𝓝[>] 0) (𝓝 ((2 * Real.eulerMascheroniConstant : ℝ) : ℂ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D.tendsto_besselSeries_zero": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselSeries4D",
+      "name": "NullConeGravity.tendsto_besselSeries_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:b3b121c58a44ef9ada4eb8b7a02708006b2c9a5aa9dbea5d25d1d9e14e04b81b",
+      "line": 362,
+      "signature": "theorem tendsto_besselSeries_zero : Tendsto besselSeries (𝓝[>] 0) (𝓝 1)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselStrip4D.exp_liftedLog": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselStrip4D",
+      "name": "NullConeGravity.exp_liftedLog",
+      "kind": "theorem",
+      "statement_id": "sha256:044175b75cde0f7081291952016387004b29f79baae3caaf39224cdd03c1cf42",
+      "line": 106,
+      "signature": "theorem exp_liftedLog (z : ℂ) (hz : z ∈ openStrip) : Complex.exp (liftedLog z) = modularU z",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselStrip4D.stripG_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselStrip4D",
+      "name": "NullConeGravity.stripG_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:044175b75cde0f7081291952016387004b29f79baae3caaf39224cdd03c1cf42",
+      "line": 293,
+      "signature": "theorem stripG_bound (M : ℝ) (hM : 0 < M) : ∃ C : ℝ, 0 < C ∧ ∀ z w : ℂ, z ∈ closedStrip → w ∈ closedStrip → ∀ x : ℝ, -1 ≤ x → x < 1 → ‖stripG M z w x‖ ≤ C * Real.exp (-2*Real.pi*(|z.re|+|w.re|)) * (1+|z.re|+|w.re|+|Real.log (1-x)|)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselStrip4D.stripG_diff_left": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselStrip4D",
+      "name": "NullConeGravity.stripG_diff_left",
+      "kind": "theorem",
+      "statement_id": "sha256:044175b75cde0f7081291952016387004b29f79baae3caaf39224cdd03c1cf42",
+      "line": 172,
+      "signature": "theorem stripG_diff_left (M : ℝ) (w : ℂ) (x : ℝ) : DifferentiableOn ℂ (fun z => stripG M z w x) openStrip",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselStrip4D.stripG_diff_right": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselStrip4D",
+      "name": "NullConeGravity.stripG_diff_right",
+      "kind": "theorem",
+      "statement_id": "sha256:044175b75cde0f7081291952016387004b29f79baae3caaf39224cdd03c1cf42",
+      "line": 195,
+      "signature": "theorem stripG_diff_right (M : ℝ) (z : ℂ) (x : ℝ) : DifferentiableOn ℂ (fun w => stripG M z w x) openStrip",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselStrip4D.stripG_real": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselStrip4D",
+      "name": "NullConeGravity.stripG_real",
+      "kind": "theorem",
+      "statement_id": "sha256:044175b75cde0f7081291952016387004b29f79baae3caaf39224cdd03c1cf42",
+      "line": 130,
+      "signature": "theorem stripG_real (M r s x : ℝ) (hM : 0 < M) (hx : x < 1) : stripG M r s x = 4 * modularUprime r * modularUprime s * correction M (modularU r).re (modularU s).re x",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselStrip4D.strip_denom_lower": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondBesselStrip4D",
+      "name": "NullConeGravity.strip_denom_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:044175b75cde0f7081291952016387004b29f79baae3caaf39224cdd03c1cf42",
+      "line": 75,
+      "signature": "theorem strip_denom_lower (z : ℂ) (hz : z ∈ closedStrip) : Real.cos (Real.pi * stripB) * (1 + Real.exp (2*Real.pi*z.re)) ≤ ‖(1 : ℂ) + Complex.exp (2*Real.pi*z)‖",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondContour4D.fourierG_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondContour4D",
+      "name": "NullConeGravity.fourierG_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:e0955e6b450411e622c740369e41e7f29bacf658548ef3e8bf5e674985192dd1",
+      "line": 243,
+      "signature": "theorem fourierG_bound (M : ℝ) (hM : 0 < M) : ∃ C : ℝ, 0 < C ∧ ∀ ν lam x : ℝ, -1 ≤ x → x < 1 → ‖fourierG M ν lam x‖ ≤ C * Real.exp (-stripB*(|ν|+|lam|)) * (1+|Real.log (1-x)|)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondContour4D.fourierG_measurable": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondContour4D",
+      "name": "NullConeGravity.fourierG_measurable",
+      "kind": "theorem",
+      "statement_id": "sha256:e0955e6b450411e622c740369e41e7f29bacf658548ef3e8bf5e674985192dd1",
+      "line": 160,
+      "signature": "theorem fourierG_measurable (M : ℝ) : Measurable (fun p : ℝ × ℝ × ℝ => fourierG M p.1 p.2.1 p.2.2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondContour4D.horizontal_shift": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondContour4D",
+      "name": "NullConeGravity.horizontal_shift",
+      "kind": "theorem",
+      "statement_id": "sha256:e0955e6b450411e622c740369e41e7f29bacf658548ef3e8bf5e674985192dd1",
+      "line": 83,
+      "signature": "theorem horizontal_shift {f : ℂ → ℂ} {d B : ℝ} (_hB : 0 ≤ B) (hd : 0 < d) (hf : DifferentiableOn ℂ f openStrip) (hdecay : ∀ z ∈ closedStrip, ‖f z‖ ≤ B * Real.exp (-d * |z.re|) * (1+|z.re|)) (y : ℝ) (hy : |y| ≤ stripB) : (∫ r : ℝ, f (r : ℂ)) = ∫ r : ℝ, f ((r : ℂ) + (y : ℂ)*I)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS.integralKernelOp_adjoint": {
       "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS",
       "name": "NullConeGravity.integralKernelOp_adjoint",
@@ -11788,6 +12035,32 @@
       "statement_id": "sha256:1d7dc9b8853ff352f251bcbaa03b62943a59ee57e8e525520df0f6f846eef068",
       "line": 257,
       "signature": "theorem mulOp_ae (g : X → ℂ) (hg : MemLp g ∞ μ) (f : Lp ℂ 2 μ) : (mulOp μ g hg f : X → ℂ) =ᵐ[μ] fun x => g x * f x",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSchwinger4D.correction_eq_besselK": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSchwinger4D",
+      "name": "NullConeGravity.correction_eq_besselK",
+      "kind": "theorem",
+      "statement_id": "sha256:e8128e2fce6c3b015e0f84ba002574d979fd2c1899dc2c37b0caf1a6235bb11b",
+      "line": 81,
+      "signature": "theorem correction_eq_besselK {M u v x : ℝ} (hM : 0 < M) (hu : 0 < u) (hv : 0 < v) (hx : x < 1) : let z",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSchwinger4D.schwingerH_eq_series": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSchwinger4D",
+      "name": "NullConeGravity.schwingerH_eq_series",
+      "kind": "theorem",
+      "statement_id": "sha256:e8128e2fce6c3b015e0f84ba002574d979fd2c1899dc2c37b0caf1a6235bb11b",
+      "line": 33,
+      "signature": "theorem schwingerH_eq_series {t : ℝ} (ht : 0 < t) : (schwingerH t : ℂ) = 1 + (t : ℂ) * ((Real.log t : ℂ) * besselP t - besselB t)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
