@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "07a0fdf1bb0bb008cd5c9336d414c107c814d2f0",
-  "pinned_at": "2026-11-27T04:38:05Z",
+  "pinned_at": "2026-11-27T04:53:42Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -11450,6 +11450,253 @@
       "statement_id": "sha256:84585765176b75a8eec51395d2d38e59731dfa8f64b434e661b3b23f46380b54",
       "line": 308,
       "signature": "theorem trace_entropy_le_zero {β : ℝ} {E : n → ℝ} (ρ : TraceDensity β E) : traceEntropy ρ ≤ 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm.phase_contDiffAt_two": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PhaseResummationLogGerm.phase_contDiffAt_two",
+      "kind": "theorem",
+      "statement_id": "sha256:6c763c6ae5750f3849de4e20dfbb7e6c8ba320151f6cdae26355fc063691a2a3",
+      "line": 478,
+      "signature": "theorem phase_contDiffAt_two : ContDiffAt ℝ 2 F 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm.phase_contDiffOn_two": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PhaseResummationLogGerm.phase_contDiffOn_two",
+      "kind": "theorem",
+      "statement_id": "sha256:6c763c6ae5750f3849de4e20dfbb7e6c8ba320151f6cdae26355fc063691a2a3",
+      "line": 471,
+      "signature": "theorem phase_contDiffOn_two : ContDiffOn ℝ 2 F (Ioo (-Real.pi) Real.pi)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm.phase_deriv_hasDerivAt_zero": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PhaseResummationLogGerm.phase_deriv_hasDerivAt_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:6c763c6ae5750f3849de4e20dfbb7e6c8ba320151f6cdae26355fc063691a2a3",
+      "line": 551,
+      "signature": "theorem phase_deriv_hasDerivAt_zero : HasDerivAt (deriv F) ((Real.pi ^ 2 / 6 : ℝ) : ℂ) 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm.phase_hasDerivAt_zero": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PhaseResummationLogGerm.phase_hasDerivAt_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:6c763c6ae5750f3849de4e20dfbb7e6c8ba320151f6cdae26355fc063691a2a3",
+      "line": 482,
+      "signature": "theorem phase_hasDerivAt_zero : HasDerivAt F 0 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm.phase_im_cubic_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PhaseResummationLogGerm.phase_im_cubic_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:6c763c6ae5750f3849de4e20dfbb7e6c8ba320151f6cdae26355fc063691a2a3",
+      "line": 391,
+      "signature": "theorem phase_im_cubic_bound (g : ℝ) (hg : |g| ≤ 1) : |(F g).im - cubicGerm g| ≤ |g| ^ 5 / 15",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm.phase_im_eq_integral": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PhaseResummationLogGerm.phase_im_eq_integral",
+      "kind": "theorem",
+      "statement_id": "sha256:6c763c6ae5750f3849de4e20dfbb7e6c8ba320151f6cdae26355fc063691a2a3",
+      "line": 318,
+      "signature": "theorem phase_im_eq_integral (g : ℝ) (hg : g ∈ Icc 0 Real.pi) : (F g).im = g ^ 2 * ∫ t in 0..g, Real.log (2 * Real.sin t)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm.phase_im_eq_neg_clausen": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PhaseResummationLogGerm.phase_im_eq_neg_clausen",
+      "kind": "theorem",
+      "statement_id": "sha256:6c763c6ae5750f3849de4e20dfbb7e6c8ba320151f6cdae26355fc063691a2a3",
+      "line": 89,
+      "signature": "theorem phase_im_eq_neg_clausen (g : ℝ) : (F g).im = -(g ^ 2 / 2) * clausen2 (2 * g)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm.phase_im_right_germ": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PhaseResummationLogGerm.phase_im_right_germ",
+      "kind": "theorem",
+      "statement_id": "sha256:6c763c6ae5750f3849de4e20dfbb7e6c8ba320151f6cdae26355fc063691a2a3",
+      "line": 404,
+      "signature": "theorem phase_im_right_germ : Asymptotics.IsBigO (𝓝[>] (0 : ℝ)) (fun g : ℝ => (F g).im + g ^ 3 * Real.log (1 / g) - (Real.log 2 - 1) * g ^ 3) (fun g : ℝ => g ^ 5)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm.phase_im_second_not_differentiable": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PhaseResummationLogGerm.phase_im_second_not_differentiable",
+      "kind": "theorem",
+      "statement_id": "sha256:6c763c6ae5750f3849de4e20dfbb7e6c8ba320151f6cdae26355fc063691a2a3",
+      "line": 557,
+      "signature": "theorem phase_im_second_not_differentiable : ¬ DifferentiableAt ℝ (iteratedDeriv 2 (fun g : ℝ => (F g).im)) 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm.phase_iteratedDeriv_two_zero": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PhaseResummationLogGerm.phase_iteratedDeriv_two_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:6c763c6ae5750f3849de4e20dfbb7e6c8ba320151f6cdae26355fc063691a2a3",
+      "line": 537,
+      "signature": "theorem phase_iteratedDeriv_two_zero : iteratedDeriv 2 F 0 = ((Real.pi ^ 2 / 6 : ℝ) : ℂ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm.phase_re_eq_bernoulli": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PhaseResummationLogGerm.phase_re_eq_bernoulli",
+      "kind": "theorem",
+      "statement_id": "sha256:6c763c6ae5750f3849de4e20dfbb7e6c8ba320151f6cdae26355fc063691a2a3",
+      "line": 109,
+      "signature": "theorem phase_re_eq_bernoulli (g : ℝ) (hg : |g| ≤ Real.pi) : (F g).re = Real.pi ^ 2 * g ^ 2 / 12 - Real.pi * |g| ^ 3 / 2 + g ^ 4 / 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm.phase_second_no_hasDerivAt": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PhaseResummationLogGerm",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PhaseResummationLogGerm.phase_second_no_hasDerivAt",
+      "kind": "theorem",
+      "statement_id": "sha256:6c763c6ae5750f3849de4e20dfbb7e6c8ba320151f6cdae26355fc063691a2a3",
+      "line": 571,
+      "signature": "theorem phase_second_no_hasDerivAt (d : ℂ) : ¬ HasDerivAt (deriv (deriv F)) d 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PureGNSExtensionSectors.odd_orthogonal_sites_disjoint": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PureGNSExtensionSectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PureGNSExtensionSectors.odd_orthogonal_sites_disjoint",
+      "kind": "theorem",
+      "statement_id": "sha256:2a303a3700a4bfe36c87b07004a37f3e54bb041179e769abecdc13f75effb41e",
+      "line": 567,
+      "signature": "theorem odd_orthogonal_sites_disjoint : ∃ r : Overlaps, (∀ k, overlaps r (2 * k) = 1 ∧ overlaps r (2 * k + 1) = 0) ∧ GNSDisjoint (firstProductState r).toPositiveLinearMap (secondProductState r).toPositiveLinearMap ∧ (firstProductState r).toPositiveLinearMap ≠ (secondProductState r).toPositiveLinearMap ∧ ∀ a ∈ evenDiagonalAlgebra r, (firstProductState r).toPositiveLinearMap a = (secondProductState r).toPositiveLinearMap a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PureGNSExtensionSectors.one_orthogonal_site_equivalent": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PureGNSExtensionSectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PureGNSExtensionSectors.one_orthogonal_site_equivalent",
+      "kind": "theorem",
+      "statement_id": "sha256:2a303a3700a4bfe36c87b07004a37f3e54bb041179e769abecdc13f75effb41e",
+      "line": 543,
+      "signature": "theorem one_orthogonal_site_equivalent : ∃ r : Overlaps, overlaps r 1 = 0 ∧ (∀ k, k ≠ 1 → overlaps r k = 1) ∧ tailProduct (overlaps r) 0 = 0 ∧ GNSEquivalent (firstProductState r).toPositiveLinearMap (secondProductState r).toPositiveLinearMap ∧ (firstProductState r).toPositiveLinearMap ≠ (secondProductState r).toPositiveLinearMap ∧ ∀ a ∈ evenDiagonalAlgebra r, (firstProductState r).toPositiveLinearMap a = (secondProductState r).toPositiveLinearMap a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PureGNSExtensionSectors.pure_matrix_traceNorm": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PureGNSExtensionSectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PureGNSExtensionSectors.pure_matrix_traceNorm",
+      "kind": "theorem",
+      "statement_id": "sha256:2a303a3700a4bfe36c87b07004a37f3e54bb041179e769abecdc13f75effb41e",
+      "line": 66,
+      "signature": "theorem pure_matrix_traceNorm (ψ φ : EuclideanSpace ℂ ι) (hψ : ‖ψ‖ = 1) (hφ : ‖φ‖ = 1) : traceNorm (rankOneDensity ψ.ofLp - rankOneDensity φ.ofLp) = 2 * Real.sqrt (1 - ‖inner ℂ ψ φ‖ ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PureGNSExtensionSectors.pure_matrix_vectorState_norm": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PureGNSExtensionSectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PureGNSExtensionSectors.pure_matrix_vectorState_norm",
+      "kind": "theorem",
+      "statement_id": "sha256:2a303a3700a4bfe36c87b07004a37f3e54bb041179e769abecdc13f75effb41e",
+      "line": 209,
+      "signature": "theorem pure_matrix_vectorState_norm (ψ φ : EuclideanSpace ℂ ι) (hψ : ‖ψ‖ = 1) (hφ : ‖φ‖ = 1) : ‖matrixVectorState ψ - matrixVectorState φ‖ = 2 * Real.sqrt (1 - ‖inner ℂ ψ φ‖ ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PureGNSExtensionSectors.pure_product_gns_dichotomy": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PureGNSExtensionSectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PureGNSExtensionSectors.pure_product_gns_dichotomy",
+      "kind": "theorem",
+      "statement_id": "sha256:2a303a3700a4bfe36c87b07004a37f3e54bb041179e769abecdc13f75effb41e",
+      "line": 448,
+      "signature": "theorem pure_product_gns_dichotomy (r : Overlaps) : (GNSEquivalent (firstProductState r).toPositiveLinearMap (secondProductState r).toPositiveLinearMap ↔ Summable (fun k => 1 - overlaps r k)) ∧ (GNSDisjoint (firstProductState r).toPositiveLinearMap (secondProductState r).toPositiveLinearMap ↔ ∀ s, tailProduct (overlaps r) s = 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PureGNSExtensionSectors.pure_product_state_norm": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PureGNSExtensionSectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PureGNSExtensionSectors.pure_product_state_norm",
+      "kind": "theorem",
+      "statement_id": "sha256:2a303a3700a4bfe36c87b07004a37f3e54bb041179e769abecdc13f75effb41e",
+      "line": 466,
+      "signature": "theorem pure_product_state_norm (r : Overlaps) : ContinuousLinearMap.opNorm (𝕜",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/PureGNSExtensionSectors.pure_product_states": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/PureGNSExtensionSectors",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.PureGNSExtensionSectors.pure_product_states",
+      "kind": "theorem",
+      "statement_id": "sha256:2a303a3700a4bfe36c87b07004a37f3e54bb041179e769abecdc13f75effb41e",
+      "line": 410,
+      "signature": "theorem pure_product_states (r : Overlaps) : IsPure (firstProductState r) ∧ IsPure (secondProductState r)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
