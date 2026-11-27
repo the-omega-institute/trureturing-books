@@ -396,7 +396,7 @@ SCENES.circle = S => {
   /* axes, the unit circle */
   line(ox - 410, oy, ox + 410, oy, C.dim, a * 0.6, 1.4); line(ox, oy + 250, ox, oy - 250, C.dim, a * 0.6, 1.4);
   ring(ox, oy, CI_R, C.cyan, a * 0.8, 2.5);
-  txt('|u| = 1', ox + CI_R * 0.72 + 14, oy - CI_R * 0.72 - 10, { size: 24, fam: F.math, w: 700, c: C.cyan, a: a * 0.9 });
+  txt('|u| = 1', ox - CI_R * 0.72 - 14, oy - CI_R * 0.72 - 10, { size: 24, fam: F.math, w: 700, align: 'right', c: C.cyan, a: a * 0.9 });
   txt('Re', ox + 405, oy + 30, { size: 20, fam: F.math, w: 700, c: C.dim, a, align: 'right' });
   txt('Im', ox + 12, oy - 238, { size: 20, fam: F.math, w: 700, c: C.dim, a });
   const pa = a * at(S, 0, 1.0);
@@ -435,7 +435,7 @@ SCENES.circle = S => {
   if (l1 > 0.003) {
     line(1030, 590, 1770, 590, C.lean, l1 * 0.5, 1.2);
     rich([['u(σ j) = (ūⱼ)⁻¹,  uⱼ ≠ 0,  N + 1 ≥ #{uⱼ}:', C.white]], 1035, 635, { size: 26, a: l1 });
-    rich([['Toeplitz_N(u) ⪰ 0  ⟺  ∀ j, |uⱼ| = 1', C.lean]], 1035, 690, { size: 34, a: l1 });
+    rich([['Toeplitz(u) ⪰ 0  ⟺  ∀ j, |uⱼ| = 1', C.lean]], 1035, 690, { size: 34, a: l1 });
     leanChip(1035, 745, 'toeplitz', l1, { size: 19 });
     tierTag(1035, 800, 'N = 1 CASE · HAND DERIVATION · ARGUED', C.argued, l1 * Q(S, 2, 'unit circle', 0.6));
   }
