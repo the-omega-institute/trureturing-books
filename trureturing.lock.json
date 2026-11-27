@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "29fe05ce97e1869857dac9c1b1b9d74f50155b7e",
-  "pinned_at": "2026-11-27T02:12:04Z",
+  "commit": "b91a0225becdff105d5d595aaa1b266e1b10691e",
+  "pinned_at": "2026-11-27T02:30:20Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1006,6 +1006,19 @@
       "statement_id": "sha256:71132bd1fe992addf603f5bcdd286880f8dd3e2b485bfd9c8662c56077e2f8ff",
       "line": 172,
       "signature": "theorem prony_hankel_rank {m n : ℕ} (hmn : m ≤ n) {nodes weights : Fin m → K} (hNodes : Function.Injective nodes) (hWeights : ∀ mode, weights mode ≠ 0) : Matrix.rank (pronyHankel (n"
+    },
+    "D5/S3/Analytic/Interpolation/ConcaveKernelDividedDifference.three_node_slope_sub_slope_neg_of_lobe_bound": {
+      "module": "D5/S3/Analytic/Interpolation/ConcaveKernelDividedDifference",
+      "name": "D5.S3.Analytic.Interpolation.ConcaveKernelDividedDifference.three_node_slope_sub_slope_neg_of_lobe_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:bd616fea876ba5f5da9aac18386cadb4f7c83dfee909100dad84e6cf3a83f687",
+      "line": 229,
+      "signature": "theorem three_node_slope_sub_slope_neg_of_lobe_bound {left mid right a b c : ℝ} {f fp fpp : ℝ → ℝ} (hlm : left < mid) (hmr : mid < right) (hab : a < b) (hbc : b < c) (hcr : c ≤ right) (hf : ∀ t ∈ Icc left right, HasDerivAt f (fp t) t) (hfp : ∀ t ∈ Icc left right, HasDerivAt fp (fpp t) t) (hfpp : ContinuousOn fpp (Icc (min a left) right)) (hneg : ∀ t ∈ Ioo left right \\ Icc a b, fpp t < 0) (hbound : (∫ t in a..b, max (fpp t) 0) < ∫ t in b..c, -fpp t * ((c - t) / (c - a))) : (f right - f mid) / (right - mid) < (f mid - f left) / (mid - left)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Analytic/Isolation/RiemannZetaPositiveRealSign.riemannZeta_ofReal_sign": {
       "module": "D5/S3/Analytic/Isolation/RiemannZetaPositiveRealSign",
