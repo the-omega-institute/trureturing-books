@@ -334,6 +334,12 @@ $$
 第 1 款先在固定非零方向 $X \in L$ 上令 $p(t) := 2\varphi(\exp tX) - 1$，由忠实性、指数局部单射与倍角方程 $p(2t) = 2p(t)^2 - 1$ 导出最小正周期 $T > 0$ 与 $p(t) = \cos(2\pi t/T)$；再由左乘表示复化迹型 $B(X, Y) = -\operatorname{Re}\operatorname{tr}(\rho(X)\rho(Y))$ 在去心连通切空间上锁定共同归一化周期 $T_0$，令 $h := 2(\pi/T_0)^2 B$ 得到共轭不变内积、中心化子一维性与维数锁定 $\{0, 1, 3\}$。第 2 款中，每个 $U_i$ 由严格二次不等式定义故为相对开集；若 $x, y \in S^2$ 正交，贝塞尔不等式给出 $\langle x, \mathrm{axis}_i\rangle^2 + \langle y, \mathrm{axis}_i\rangle^2 \le \lVert\mathrm{axis}_i\rVert^2 = 5$，故两者的 $2\langle\cdot, \mathrm{axis}_i\rangle^2$ 不可能同时严格大于 $5$，从而 $U_i$ 内无正交对；对任意 $x \in S^2$ 在三对轮换轴中各取同号支，总有一支满足 $2\langle x, \mathrm{axis}_i\rangle^2 > 5$，覆盖整个 $S^2$。完整证明由 Lean 内核检查。
 :::
 
+下面的短片把本章的四套无超越数机制依次串起来：一次除法的凯莱桥、双卡半界、无根号伴随旋转与切比雪夫节拍，最后停在 $\pi$ 真正进来的地方。
+
+::: {.film src="rotation-without-exponentials"}
+**一次除法、两张坐标卡、无根号伴随与切比雪夫节拍：转动全程只用精确分数（2 分 39 秒）。** 青色的凯莱轨道把 $(0, 0, 1)$ 连转十二次，停在 $(302680, -302680, -314959)/3^{12}$，模方恰为 $1$；品红的二阶泰勒螺线每步把模方乘以 $\frac{17}{16}$，十二步后超过 $2.069$（屏幕计算，见 [@ex-ch05-cayley-vs-taylor]），绿色标签对应 [@thm-ch05-rational-cayley-core] 第 4 款。份额条显示双卡分母的归一化份额：输入 $(1, 0, 0)$ 与 $(\frac{1}{2}, \frac{1}{2}, 0)$ 时 $D_+$ 只占 $\frac{1}{6}$，阴影卡接手，结果 $(-\frac{1}{5}, 0, -\frac{2}{5})$ 落在单位闭球内（屏幕计算），绿色半界标签对应 [@thm-ch05-dual-chart-singularity-free] 第 3 款。$p_{\mathrm{Half}} = (1, 1, 0, 0)$ 的伴随矩阵约掉分母 $2$ 成为整数 $90^\circ$ 转动（屏幕计算，见 [@ex-ch05-phalf-integer-rotation]），绿色标签对应 [@thm-ch05-rational-adjoint-action] 第 1 款。单位圆上的节拍按 $x_{n+1} = \frac{6}{5}x_n - x_{n-1}$ 前进，内积为 $T_n(\frac{3}{5})$，第二十拍分母为 $5^{20}$、模方仍为 $1$（屏幕计算，见 [@ex-ch05-rational-harmonic-stepping]），两枚绿色标签对应 [@thm-ch05-spinor-heap-norm-preserved] 与经典实阴影侧的 [@thm-ch05-chebyshev-heap-recurrence]。最后一幕的连续射线公式与线框球面上的六顶帽子对应经典实阴影侧的 [@thm-ch05-continuous-ray-and-six-axis]，琥珀色帽子与点 $(2, 2, 1)/3$ 的得分 $8 > 5$ 为屏幕计算，余弦曲线为示意；紫色框中“$\pi$ 是实数时钟的代价”是 [@rem-ch05-where-pi-enters] 的解读。
+:::
+
 在进入第六章之前，不妨打开下面的交互实验卡，将本章的三套无超越数旋转机制放在同一座三维舞台上实时对照：调节有理生成元 $\boldsymbol{\sigma}$ 与迭代步数，直观比较精确锁球的 $\mathbf{R}(\boldsymbol{\sigma})$ 及无根号整系数伴随旋转 $\operatorname{Ad}(p_{\mathrm{Half}})$ 如何始终严守单位模方 $1/1$，而二阶泰勒截断 $T_2(X)$ 步步向外漂移；再把相同的有理坐标另作 MRP 输入，实时检查分母下界 $\max(D_+, D_-) \ge \frac{1}{2}$ 如何永不触零并将结果锁在三维单位闭球之内。
 
 ::: {.viz src="ternion-cayley-lab" preset="cayley3d-vs-taylor-drift" height="520"}

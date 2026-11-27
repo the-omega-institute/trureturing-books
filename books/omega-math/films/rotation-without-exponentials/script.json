@@ -1,0 +1,237 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Cayley": "Kay-lee",
+  "Chebyshev": "Cheb-ee-shev"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "bridge",
+   "name": "THE CAYLEY BRIDGE",
+   "lead": 2.8,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Textbooks turn space with e to the X, an endless series that computers must cut short.",
+     "教科书用 e^X 转动空间：那是一串无穷级数，计算机只能把它截断。"
+    ],
+    [
+     "Cayley's bridge needs one division, by I minus X, whose determinant is one plus the squared length of sigma, never zero.",
+     "凯莱桥只需一次除法：除以 I − X，它的行列式等于 1 加 σ 的模方，永不为零。"
+    ],
+    [
+     "Feed in one half, one half, zero: a matrix of thirds, orthogonal, with determinant one.",
+     "代入 (½, ½, 0)：得到一个全是三分之几的矩阵，正交，行列式为 1。"
+    ]
+   ]
+  },
+  {
+   "id": "orbit",
+   "name": "TWELVE TURNS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Turn zero, zero, one twelve times: the denominator reaches three to the twelfth, the squared length stays one.",
+     "把 (0, 0, 1) 连转十二次：分母涨到 3¹²，模方始终是 1。"
+    ],
+    [
+     "A Taylor step multiplies it by seventeen sixteenths, and twelve steps carry it past two.",
+     "二阶泰勒截断每一步把模方乘以 17/16，十二步后超过 2。"
+    ],
+    [
+     "Lean checks that Cayley turns keep length for every rational generator and every step count.",
+     "Lean 内核检验：对任意有理生成元、任意步数，凯莱迭代都保持模方。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "charts",
+   "name": "TWO CHARTS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.3,
+    0.4
+   ],
+   "lines": [
+    [
+     "Composing two turns in one chart divides by a number that can reach zero.",
+     "在单张坐标卡里合成两次转动，要除以一个可能变成零的数。"
+    ],
+    [
+     "The dual chart keeps two denominators whose shares add to one, and divides by the larger, never below one half.",
+     "双卡保留两个分母，份额相加为 1；总除以较大者，其份额不低于一半。"
+    ],
+    [
+     "Here D plus has only one sixth, so the shadow chart takes over, and lands inside the unit ball.",
+     "这里 D₊ 只占六分之一，于是阴影卡接手，结果落在单位闭球之内。"
+    ],
+    [
+     "Lean checks the half floor for every rational pair, by a constructive split on a sign.",
+     "Lean 内核对任意一对有理输入检验了这条半界，只靠对一个符号的构造性分情形。"
+    ]
+   ]
+  },
+  {
+   "id": "adjoint",
+   "name": "NO SQUARE ROOT",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "The quaternion one, one, zero, zero has squared norm two, which is not a square.",
+     "整四元数 (1, 1, 0, 0) 的模方是 2，而 2 不是平方数。"
+    ],
+    [
+     "Normalizing needs root two, but p and p bar fuse the two roots into a plain two.",
+     "归一化要用 √2；可伴随作用两边乘 p 与 p̄，两个根号合成一个普通的 2。"
+    ],
+    [
+     "Every entry is now an integer: an exact quarter turn about the first axis.",
+     "约掉之后每个元素都是整数：绕第一轴恰好转 90°。"
+    ],
+    [
+     "Lean checks that this square-root-free action keeps every rational dot product.",
+     "Lean 内核检验：这个无根号伴随作用保持一切有理内积。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.5,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "beats",
+   "name": "CHEBYSHEV BEATS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.7,
+    0.4,
+    0.5
+   ],
+   "lines": [
+    [
+     "Now let time step: start at one, then three fifths plus four fifths i, with overlap three fifths.",
+     "现在让时间走起来：从 1 出发，下一拍是 3/5 + 4/5·i，两者内积为 3/5。"
+    ],
+    [
+     "The heap rule turns linear, six fifths of this beat minus the last, and each overlap is a Chebyshev value.",
+     "递推化为线性：下一拍 = 6/5 × 这一拍 − 上一拍；内积都是切比雪夫值。"
+    ],
+    [
+     "Twenty beats on, the denominator is five to the twentieth, and the norm is still exactly one.",
+     "走到第二十拍，分母是 5²⁰，模方仍然恰好是 1。"
+    ],
+    [
+     "Lean checks the unit norm for signed spinors, and on the classical side, the Chebyshev form.",
+     "Lean 内核检验：有号旋量每拍保持单位模方；经典一侧另验切比雪夫闭式。"
+    ]
+   ]
+  },
+  {
+   "id": "pi",
+   "name": "WHERE PI ENTERS",
+   "lead": 0.5,
+   "tail": 0.8,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Pi enters only when a turn is stretched along a real time line, and a doubling reading is made continuous there.",
+     "只有把转动沿实数时间轴拉直、并要求倍角读数在其上连续，π 才出现。"
+    ],
+    [
+     "Lean checks, on the classical side, that it must be cosine squared, with two pi squared in the period.",
+     "Lean 内核在经典实数一侧检验：这个读数只能是余弦平方，周期里带着 2π²。"
+    ],
+    [
+     "The sphere needs no pi: six integer axes of norm five, each capped where twice the overlap squared beats five.",
+     "球面也不需要 π：六根模方为 5 的整数轴，帽子条件是 2⟨x, 轴⟩² > 5。"
+    ],
+    [
+     "Lean checks that the six caps cover the sphere, with no perpendicular pair in any cap.",
+     "Lean 内核检验：六顶帽子盖满球面，且没有一顶装得下一对垂直方向。"
+    ],
+    [
+     "In the chapter's reading, pi is the price of a real clock.",
+     "按本章的解读，π 是实数时钟的代价。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 4,
+     "at": 0.5,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "END",
+   "lead": 0.4,
+   "tail": 3.2,
+   "music": [
+    0.7,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Turns, charts and rhythms, all from exact fractions.",
+     "转动、双卡与节拍，全都出自精确的分数。"
+    ]
+   ]
+  }
+ ]
+}

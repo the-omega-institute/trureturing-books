@@ -297,6 +297,12 @@ $$
 两条秩五定理都在实值比较结构上起步。完备性补上的是单射之像闭合这一步，在全部共同假设下由此得到满射。对这里的有号有理单位子群，其弦距完备化是实单位球面。规范整三元数用的是秩 $10$ 的平方读数，且会识别对径点。第四章的二次核桥给出二者在有理单位旋量上的读数关系。
 :::
 
+下面的影片把本章从维数锁定一路走到实阴影边界。
+
+::: {.film src="four-integers-one-turn"}
+**二维里括号只能归零，三维才容得下次序；四个整数加上约分与锁正号，就写出无根号、免商集的三维有理转动（2 分 54 秒）。** 左侧平面里，琥珀色的候选括号 $[x, y]$ 同时与青色的 $x$、$y$ 正交，只能缩为零（紫色，书面论证，示意图）；右侧立起的品红第三轴给出叉积，绿色标签对应 [@thm-ch03-dim3-cross-bracket]（经典 `Mathlib` 侧）。$p_{\mathrm{Half}} = (1, 1, 0, 0)$ 的模方为 $2$，用它共轭再除以 $2$ 得到精确的四分之一圈 $(x, y, z) \mapsto (x, -z, y)$；$(-2, 2, 2, 2)$ 经 $\gcd = 2$ 约分并翻号得到规范名 $(1, -1, -1, -1)$（屏幕计算）。四平方乘性、射线左消去、四维拉格朗日恒等式与 $\kappa \le 1$ 的绿色标签对应 [@thm-ch03-quaternion-norm-and-heap-laws] 与 [@thm-ch03-lagrange-and-kappa-invariance]，算例 $\lvert(1 + \mathbf{i})(1 + \mathbf{j})\rvert^2 = 4$、$\kappa(p_0, p_{\mathrm{Half}}) = 1/2$ 与六个子式平方和 $1 + 1 + 0 + 1 + 0 + 0 = 3$ 为屏幕计算。青色三角形上 $g_{120} = (1, 1, 1, 1)$ 三拍回到 $p_0$，保留符号的紫色六边形要走六拍（[@ex-ch03-five-anchors-and-closure]，屏幕计算）。两种次序的精确整数旋转矩阵与四元组 $(1, 1, 1, 1) \neq (1, 1, 1, -1)$ 并排对照，$k = l$ 与 $k = -l$ 迫使 $l = 0$，绿色标签对应 [@thm-ch03-phalf-qhalf-noncommutative]。最后，圆上的有理点示意有理单位四元数留下的缝隙（手工推导），加上读数完备性后补成 $\mathrm{Sp}(1)$，绿色标签对应 [@thm-ch03-rank-five-isomorphism]（经典侧）；秩 $10$ 的平方读数与对径点粘合按 [@rem-ch03-shadow-boundary] 的诠释标注。
+:::
+
 在合上第一卷之前，不妨在下方交互实验卡中亲手检验整三元数的规范化与非交换自锁：切换整四元组输入，观察 `gcd` 最大公约数约分与首非零正号锁定如何将每条射线归约为全宇宙唯一的规范整代表元（彻底免除 `Quot.sound`），并一步对比反序三元迁移 $[p_{\mathrm{Half}}, p_0, q_{\mathrm{Half}}] = (1, 1, 1, 1) \neq (1, 1, 1, -1) = [q_{\mathrm{Half}}, p_0, p_{\mathrm{Half}}]$ 在第四分量上的显式分裂（[@thm-ch03-phalf-qhalf-noncommutative]）与精确分数保真度读数。
 
 ::: {.viz src="ternion-cayley-lab" preset="canonical-ternion-noncomm" height="520"}
