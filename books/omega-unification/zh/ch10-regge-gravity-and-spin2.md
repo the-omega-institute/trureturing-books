@@ -117,6 +117,15 @@ $$
 
 第二道是**体积约束与反射正性的冲突**：加入逐单纯形无量纲形状约束 $\chi_\sigma = (24 V_\sigma)^2/Q_\sigma^4 \ge 1/16$（其中 $Q_\sigma$ 为单形最大平方边长）与正宇宙学系数 $\Lambda > 0$，可构造能归一、具时间反射正性且平均体积唯一可调的有限格测度。但若试图改为**精确锁定总体积** $V = V_0$，由于两半区体积涨落满足逐构型恒等式 $F(\Theta F) = -(V_+ - V_0/2)^2$，反射正性立即失效——在仅保留两条互为反射可变边、半区体积取 $v_0 < v_1$ 的四构型计数例中精确给出反射期望 **$-1$**，在软有理体积权 $w(V) = [1 + (V - v_0 - v_1)^2/(v_1 - v_0)^2]^{-1}$ 下仍给出 **$-1/3$**（[体积与反射证书](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-regge-volume-reflection.py)）。由维德（Widder）双边拉普拉斯表示定理，连续总体积权 $w(V)$ 保持时间反射正性当且仅当它是正宇宙学系数的非负指数混合 $\int_{(0,\infty)} e^{-\lambda v}\,\nu(d\lambda)$，固定平均体积时单一指数给出最小方差（$\beta = 0$ 时相对方差 $\ge 1/1920$，见[体积涨落下界](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-volume-fluctuations.py)）。
 
+固定引力的裸权重，给物质加上常数能量密度 $b$，平均四体积会怎样响应？在上述 $4^4$ 格上取 $\beta=0$，只保留无量纲的形状约束、平方边长的 Lebesgue 测度和正宇宙学系数的混合。把全部 $3840$ 个平方边长同乘 $a>0$，四体积同乘 $a^2$，测度同乘 $a^{3840}$。所以体积小于 $v$ 的形状受限区域的测度正比于 $v^k$，其中 $k=1920$。固定系数 $\lambda>0$ 时，归一化的体积密度正比于 $v^{k-1}e^{-\lambda v}$，均值为 $k/\lambda$。
+
+设未平移的测度可归一、均值 $m_0$ 有限。用 $\mathbb E_0$ 表示按各组分对未平移配分函数的贡献取平均，记 $X=1/\lambda$，则 $m_0=k\mathbb E_0 X$。加上 $b>0$ 后，每个组分的体积权重多出 $e^{-bv}$，其配分函数乘以 $h(X)=(1+bX)^{-k}$，均值变为 $k g(X)$，其中 $g(X)=X/(1+bX)$。$h$ 递减、$g$ 递增，故 $\mathbb E_0[hg]\le\mathbb E_0[h]\mathbb E_0[g]$。再由 $g$ 的严格凹性得到
+$$
+m_b=k\frac{\mathbb E_0[hg]}{\mathbb E_0[h]}
+\le k g(\mathbb E_0 X)=\frac{m_0}{1+b m_0/k}.
+$$
+仅当混合集中在一个 $\lambda$ 上时取等。比如 $b=k/m_0$ 时，即使选取响应最小的权重，平均四体积也会减半。反向平移 $b=-s<0$ 时，平均体积存在要求几乎处处 $\lambda>s$，因而 $s<k/m_0$。更精确地，在 $sX<1$ 几乎处处的条件下，平移后的配分函数和均值均有限，当且仅当 $\mathbb E_0[(1-sX)^{-k}]$ 与 $\mathbb E_0[X(1-sX)^{-k-1}]$ 均有限。此时$h,g$ 同增且 $g$ 严格凸，同一计算给出 $m_{-s}\ge m_0/(1-s m_0/k)$。这个有限格上的响应取决于零曲率耦合时的体积标度；非零曲率耦合会改变径向密度。
+
 即便欧氏空间曲率项已经完全确定，要确立真正的四维洛伦兹自旋二传播子，还必须独立检验跨时刻的**外曲率剪切**。在单位直减函数（lapse）与零移位矢量的空间三环面上，置空间度规 $h = a(t)^2\bigl[dz^2 + H_{AB}(t, z)\,dx^A dx^B\bigr]$（$H$ 为单位行列式 $2\times 2$ 正定对称矩阵），记 $J_\mu = H^{-1}\partial_\mu H$、$h_0 = \dot{a}/a$，则空间标量曲率与外曲率二次不变量精确满足（[四维角亏与球壳谱权重](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-%E5%9B%9B%E7%BB%B4%E8%A7%92%E4%BA%8F%E4%B8%8E%E7%90%83%E5%A3%B3%E8%B0%B1%E6%9D%83%E9%87%8D.md)）：
 
 $$
