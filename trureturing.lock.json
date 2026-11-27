@@ -1073,6 +1073,19 @@
         "propext"
       ]
     },
+    "D5/S3/Analytic/Oscillation/MontgomeryAlignmentLower.eventually_montgomery_gt_of_phase_alignment": {
+      "module": "D5/S3/Analytic/Oscillation/MontgomeryAlignmentLower",
+      "name": "D5.S3.Analytic.Oscillation.MontgomeryAlignmentLower.eventually_montgomery_gt_of_phase_alignment",
+      "kind": "theorem",
+      "statement_id": "sha256:9dac3c74b398c863a140ab412780a4ff993c58d6c36e9790a26ac0b941359251",
+      "line": 59,
+      "signature": "theorem eventually_montgomery_gt_of_phase_alignment (S : Spectrum) (hN : CountAsymptotic S) {κ : ℝ} (hκ : κ < threshold) : ∀ᶠ Y : ℝ in atTop, ∀ t : ℝ, (∀ i ∈ S.cut Y, ∀ j ∈ S.cut Y, Real.cos ((S.gamma i - S.gamma j) * t) = 1) → κ * (Y * Real.log Y ^ 2) < Y * Real.log Y / (2 * Real.pi) * montgomery S (t / Real.log Y) Y",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Analytic/Oscillation/MontgomeryCountDiscrepancy.concentrated_unit_band_profile_forces_unbounded_count_discrepancy": {
       "module": "D5/S3/Analytic/Oscillation/MontgomeryCountDiscrepancy",
       "name": "D5.S3.Analytic.Oscillation.MontgomeryCountDiscrepancy.concentrated_unit_band_profile_forces_unbounded_count_discrepancy",
