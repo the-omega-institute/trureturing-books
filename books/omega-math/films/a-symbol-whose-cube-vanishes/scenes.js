@@ -117,7 +117,7 @@ const ARC2 = fAdd(fMul(TSTEP, TSTEP), fMul(ARCQ, ARCQ));                      //
 
 FILM.init.push(() => {
   const E = window.FILM_ERRORS;
-  const check = (ok, m) => { if (!ok) E.push('a-symbol-whose-square-vanishes film: ' + m); };
+  const check = (ok, m) => { if (!ok) E.push('a-symbol-whose-cube-vanishes film: ' + m); };
   /* 0. the cited theorems */
   check((DATA.lean || []).length === 7, `film.json cites ${(DATA.lean || []).length} declarations, expected 7`);
   for (const gid of Object.values(JT_LEAN)) { const r = leanCite(gid); check(r && r.kind === 'theorem', `${gid} is not a cited theorem`); }
