@@ -655,11 +655,15 @@ There are only finitely many zero ordinates in $(T,T+1]$. In a short open interv
 
 At a finite cutoff, expand multiplicities into distinct copies and choose pairs with disjoint endpoints whose ordinates are at distance at most one. Let $C(u)$ count the retained copies within distance one of the first endpoint $\gamma_u$. The ordered sum above satisfies
 $$
-G_Y(0)-G_Y(t)\ge \frac14\sum_{(u,v)}C(u)\bigl[1-\cos(t(\gamma_u-\gamma_v))\bigr].
+G_Y(0)-G_Y(t)\ge \frac4{13}\sum_{(u,v)}C(u)\bigl[1-\cos(t(\gamma_u-\gamma_v))\bigr].
 $$
-Each copy in the first endpoint's neighborhood lies within distances one and two of the two endpoints, respectively, so both Lorentz weights are at least $1/2$. For three points on the unit circle, the squared chord lengths satisfy $|a-c|^2+|b-c|^2\ge |a-b|^2/2$, and each phase residual equals half the corresponding squared chord length. Apply the bound to each column of the neighborhood and add both endpoint rows. Disjoint endpoints ensure that each row is counted once, and the remaining rows contribute nonnegative terms. The distance bounds include their endpoints, and repeated ordinates retain all their copies.
+Each copy in the first endpoint's neighborhood lies within distances one and two of the two endpoints, respectively, so the Lorentz weights are at least $4/5$ and $1/2$. Let $x,y$ be the chord lengths from the two endpoint phases to the copy's phase. The identity
+$$
+\frac{13}{4}\left(\frac45x^2+\frac12y^2\right)-(x+y)^2=\frac{(8x-5y)^2}{40}\ge0
+$$
+and the triangle inequality give a weighted squared sum at least $4/13$ of the squared endpoint chord. Dividing both sides by two gives the phase residual bound. Apply the bound to each column of the neighborhood and add both endpoint rows. Disjoint endpoints ensure that each row is counted once, and the remaining rows contribute nonnegative terms. The distance bounds include their endpoints, and repeated ordinates retain all their copies.
 
-Suppose $Y>1$, there are at least $c_1Y\log Y$ pairs, and each pair has phase residual at least $c_2$ and at least $c_3\log Y$ copies in its first endpoint's neighborhood, with $c_2,c_3\ge0$. The normalized sum then falls short of its zero-frequency baseline by at least $c_1c_2c_3/4$. If that baseline is at most $\kappa-\eta+c_1c_2c_3/4$, the normalized sum is at most $\kappa-\eta$. A fixed $\eta>0$ gives a strict cap below $\kappa$. Whether actual ζ zeros supply enough such pairs uniformly over the required long frequency bands remains open. [Formalization and proof outline](https://github.com/the-omega-institute/trureturing/pull/35008)
+Suppose $Y>1$, there are at least $c_1Y\log Y$ pairs, and each pair has phase residual at least $c_2$ and at least $c_3\log Y$ copies in its first endpoint's neighborhood, with $c_2,c_3\ge0$. The normalized sum then falls short of its zero-frequency baseline by at least $4c_1c_2c_3/13$. If that baseline is at most $\kappa-\eta+4c_1c_2c_3/13$, the normalized sum is at most $\kappa-\eta$. A fixed $\eta>0$ gives a strict cap below $\kappa$. Whether actual ζ zeros supply enough such pairs uniformly over the required long frequency bands remains open. [Formalization and proof outline](https://github.com/the-omega-institute/trureturing/pull/35008)
 
 ### Commensurate spectra with the same unit-band profile
 
