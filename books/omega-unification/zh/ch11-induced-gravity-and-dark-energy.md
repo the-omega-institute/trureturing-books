@@ -147,6 +147,13 @@ $$
 
 从同一第五壳算子出发，把平方弦长不超过 52 的十二条边排成固定的四轮，每条边只施门一次，同长度的边共用一个门。两组不同的门角都能使第七、八壳各自的原生第三枢轴同时达到牛顿项和真空项的目标。第一组参数封存后，事前登记的外推是第九壳原生第三枢轴也能达标。实际读出的牛顿项为正、真空项为负，两项均失配。揭晓后构造的第二组参数在第九壳给出负的牛顿项和正的真空项。即使初态与门序固定，前两壳的四个等式也不能决定下一壳任一项的符号。[第九壳的事前登记](https://github.com/the-omega-institute/trureturing-experiments/commit/9364ec5e998a86ba03b38fd2323c67917fb4e0b8) · [第一组门角的留出读数](https://github.com/the-omega-institute/trureturing-experiments/commit/5591436b583cc992901157bfe900f1e04952903e) · [同一门序下的反例](https://github.com/the-omega-institute/trureturing-experiments/commit/79d86bab1ce5823dd6808407f631b512c983b4da)
 
+保持同一组十二条有向短弦和四轮门顺序，七个门角独立变化时仍能精确保持六个引力目标中的五个。在两个校准中心附近，七个自由角各可向两侧变化 $10^{-6}$ 弧度。每个七角参数点在指定五角盒内都有唯一的调整，使第七、八壳各自的两项目标都成立。第一族还给出 $K_9=1$，活动五角的半宽为 $6\times10^{-5}$ 弧度。第二族给出 $W_9=10^{-122}$，半宽为 $5\times10^{-5}$ 弧度。在各自的整块十二维盒内，余下读数与目标的差分别满足
+$$
+-0.010113<W_9-10^{-122}<-0.010064,\qquad
+-0.203912<K_9-1<-0.202978 .
+$$
+第一个区间属于第一族，第二个区间属于第二族。细分五个活动角后，区间计算在七个自由角的全部取值上验证了预条件五式映射在活动盒内为压缩映射。两盒之外能否同时实现六个目标仍待判定。 [五式校准族](https://github.com/the-omega-institute/trureturing-experiments/blob/d89fba8472ea34aed3e657fa3238f1a4065bb368/experiments/ch39-omega-research/replay/ch39-three-shell-radius52-five-families.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/d89fba8472ea34aed3e657fa3238f1a4065bb368/experiments/ch39-omega-research/replay/ch39-three-shell-radius52-five-families.py)
+
 若分六轮在平方弦长不超过 56 的全部十八条边上各施门一次，同长度仍共用一个门，则可用第七、八、九壳的六项目标共同校准这四个门，使同一第五壳算子共轭一次后在三壳各自的原生第三枢轴都精确给出 $K=1$ 和 $W=10^{-122}$。第十壳的两个目标事先登记。对封存参数盒内每个满足前三壳六式的解，第十壳原生第三枢轴都给出 $1.07020<K_{10}<1.07540$ 和 $-0.002820<W_{10}<-0.002444$，两项均失配。能否由同一算术联络预先给出跨壳输运，仍是开放问题。 [三壳六式的共同解](https://github.com/the-omega-institute/trureturing-experiments/commit/9e2b8abfe862acb15667d5a0154731a67e491a95) · [第十壳的事前登记](https://github.com/the-omega-institute/trureturing-experiments/commit/062393b79f354aedffa0c211fedb458e5dfa2e35) · [第十壳的区间读数](https://github.com/the-omega-institute/trureturing-experiments/commit/2326ecde013a0e40d6487cb52bd10ae519edf08a)
 
 已知的共轭算子与整个截止 52 的算子族之间有正的距离。固定同一个第五壳源，用原四轮和任意三个同长共门所得的每个算子，与截止 56 的已认证角盒内每个算子的算子范数距离都大于 $0.0325$。有三个站点在第一轮同时受门作用，后三轮都不再触及它们。因此最高本征向量在这三个站点上的分量必是两个固定源向量的线性组合，且两个公共系数的模平方和为一。沿 $(2,2+3i,-1+2i)$ 的投影给出分离界：即使选取最接近的相位，截止 56 的盒内最高本征向量与所有满足这一约束的归一化最高本征向量之间的距离仍大于 $0.10$。再用最高与次高本征值之差，即得算子距离下界。另一个截止 52 的算子能否再现同样的六个标量读数，仍待确定。 [算子距离下界](https://github.com/the-omega-institute/trureturing-experiments/blob/c3b1887b274a227d3827658b9ee337d3447af92d/experiments/ch39-omega-research/replay/ch39-gravity-radius52-leaf-bound.md) · [区间计算](https://github.com/the-omega-institute/trureturing-experiments/blob/c3b1887b274a227d3827658b9ee337d3447af92d/experiments/ch39-omega-research/replay/ch39-gravity-radius52-leaf-bound.py)
