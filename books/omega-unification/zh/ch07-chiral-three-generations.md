@@ -47,6 +47,10 @@ $$
 
 这里用于消元的三条边界射线首站 $\{6,7,8\}$ 所起的作用不同。对每种荷和每个固定的允许软化参数，环面上都有一个相位背景，使某个非零轻态在这三站同时消失。由谱隙给出的连续性、软化量随高度趋于零和两钟相位在黎曼零点上的等分布，对每种荷和任意 $\varepsilon>0$，使这三站最小奇异值低于 $\varepsilon$ 的正零点都占有正的下密度（按重数计）。实际零点处能否精确为零仍待判定。[三站读取的区间界](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-terminal-port-trial-energy.py) · [实际零点上的下密度](https://github.com/the-omega-institute/trureturing-experiments/blob/4c6373343aac016bf533de5bbb2ee3ff3da2bdc6/experiments/ch39-omega-research/replay/%E4%B8%89%E4%B8%AA%E7%AB%99%E4%BD%8D%E8%AF%BB%E5%8F%96%E4%BA%94%E8%8D%B7%E8%BD%BB%E5%B8%A6%E7%9A%84%E4%B8%8B%E7%95%8C%E4%B8%8E%E4%B8%89%E6%9D%A1%E5%8E%9F%E7%94%9F%E5%B0%84%E7%BA%BF%E9%A6%96%E7%AB%99%E7%9A%84%E7%9B%B2%E7%82%B9.md) · [三射线的不可见轻态](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-first-ray-light-zeros.py)
 
+现在让五种荷共用同一对物理钟。固定 $0\leq\delta\leq10^{-8}$ 时，对每种荷 $q$，三条射线首站只在两个**有效**相位对失去一个秩。物理钟角 $(a,b)$ 通过 $(qa,qb)$ 进入算子，每个有效相位对在物理环面上有 $q^2$ 个原像。对于 $q=1,-4,2,-3,6$，盲点数依次为 $2,32,8,18,72$，而这五个集合两两不交。因而在任何共同背景下，至少四种荷的每个轻态都由这三站的振幅唯一确定。
+
+要数尽这些点，可以沿用上面的删点矩阵。每个循环特征子空间在三站上只有一个独立坐标。若最低态在这里消失，变分原理迫使其余坐标组成删点块的最低本征向量。十五个块的这条本征线都由能隙隔离，能量都低于 $8.685$。将向量补零后只须满足剩下的边界行 $A+B e^{-iqa}+C e^{-iqb}=0$。每种荷只有一个特征标允许这三项闭合成三角形，两种朝向给出全部解。对每一对不同的荷，第一只物理钟已经将两组解分开。[全部盲点的区间枚举](https://github.com/the-omega-institute/trureturing-experiments/blob/0552844d61bd96ceae35e463e603d92d0cd01219/experiments/ch39-omega-research/replay/ch39-common-ray-blind-clocks.md)
+
 将内部空间按特征标正交拆块，背后依托的是一条无 $\pi$、纯有理的群论正交骨架。正如[第二章](ch02-quaternion-clocks-and-haar-zeros.md)在双时钟球面哈尔积分中所确立的，偶次切比雪夫特征多项式 $E_m(\kappa)$ 在全阶上的正交归一性已在 Lean 内核中不依赖实数极限而严格冻结：
 
 ::: {.theorem #thm-ou-ch07-peter-weyl-orthonormal title="全阶偶次彼得—魏尔特征核的无 π 有理哈尔正交归一性" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"}
