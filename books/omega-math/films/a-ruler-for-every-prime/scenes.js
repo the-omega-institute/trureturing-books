@@ -252,8 +252,8 @@ function rulerRow(n, y, o) {
       box(x, y - 18, Math.max(len, 1), 36, C.mag, pa, 1.5);
       txt(`|${n}|${sub(p)} = ${fStr(r)}`, x + len / 2, y - 26, { size: 22, fam: F.math, w: 700, align: 'center', c: C.mag, a: pa });
     });
-    if (o.blind) txt(o.blind, RT.x0 - 30, y + 10, { size: 22, fam: F.math, w: 700, align: 'right', c: C.dim, a: pa * clamp(o.blindA == null ? 1 : o.blindA) });
   }
+  if (o.blind) txt(o.blind, 480, y + 52, { size: 21, fam: F.math, w: 700, c: C.dim, a: a * clamp(o.blindA == null ? 1 : o.blindA) });
   if (o.prod > 0.003) {
     chip(1715, y, 120, 54, '= 1', C.cyan, a * o.prod, 28);
   }
@@ -674,8 +674,8 @@ SCENES.close = S => {
 FILM.poster = () => {
   const si = 5, sc = TL.scenes[si], t = sc.start + 9;
   background(t, sc, si, 9);
-  const cx = W / 2, cy = 620, R = [0, 120, 235, 345];
-  const pos = n => [cx + R[n.depth] * Math.cos(n.ang), cy + R[n.depth] * Math.sin(n.ang) * 0.78];
+  const cx = W / 2, cy = 690, R = [0, 115, 225, 330];
+  const pos = n => [cx + R[n.depth] * Math.cos(n.ang), cy + R[n.depth] * Math.sin(n.ang) * 0.7];
   for (const n of TREE) {
     if (!n.depth) continue;
     const g = n.w[n.w.length - 1], col = [C.cyan, C.mag, C.vio][GENS[g].ax];
