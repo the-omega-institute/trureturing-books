@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "548388cde9b27d282a17a3ead04870288e40d197",
-  "pinned_at": "2026-11-27T20:56:56Z",
+  "commit": "38d4a2b57b7a6480818a79261ec1ccf898f0a211",
+  "pinned_at": "2026-11-27T22:11:29Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1837,6 +1837,123 @@
       "statement_id": "sha256:c3543c37c6aa790f2c7b888a0c3f498ce73a440b2004abdeb346259504806d7c",
       "line": 557,
       "signature": "theorem exists_universal_core_simplicial_banach_potential {V : Type u} [Finite V] (G : SimpleGraph V) (H U : Set V) (_hUH : U ⊆ H) (hU : U.Nonempty) (huniv : ∀ u ∈ U, ∀ h ∈ H, u ≠ h → G.Adj u h) (hind : G.IsIndepSet Hᶜ) (m : ℕ) (hm : 1 ≤ m) (hattach : ∀ o ∉ H, {a : V | G.Adj o a} ⊆ H ∧ G.IsClique {a : V | G.Adj o a} ∧ {a : V | G.Adj o a}.ncard ≤ m) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.IsChordal.exists_cliqueFive_su2_gain_potential_half_pi": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.IsChordal.exists_cliqueFive_su2_gain_potential_half_pi",
+      "kind": "theorem",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 214,
+      "signature": "theorem IsChordal.exists_cliqueFive_su2_gain_potential_half_pi [Finite V] (hG : G.IsChordal) {g : V → V → U} (hskew : G.SU2Skew g) (hclique : ∀ S : Finset V, G.IsClique (↑S : Set V) → S.card ≤ 5) : ∃ p : V → U, G.SU2Fits g p (π / 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.IsChordal.exists_cliqueFour_su2_gain_potential_two": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.IsChordal.exists_cliqueFour_su2_gain_potential_two",
+      "kind": "theorem",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 360,
+      "signature": "theorem IsChordal.exists_cliqueFour_su2_gain_potential_two [Finite V] (hG : G.IsChordal) {g : V → V → U} (hskew : G.SU2Skew g) {δ : ℝ} (hδ : 0 ≤ δ) (htri : G.SU2TriangleBound g δ) (hclique : ∀ S : Finset V, G.IsClique (↑S : Set V) → S.card ≤ 4) : ∃ p : V → U, G.SU2Fits g p (2 * δ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.IsChordal.exists_cliqueThree_su2_gain_potential_min": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.IsChordal.exists_cliqueThree_su2_gain_potential_min",
+      "kind": "theorem",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 230,
+      "signature": "theorem IsChordal.exists_cliqueThree_su2_gain_potential_min [Finite V] (hG : G.IsChordal) {g : V → V → U} (hskew : G.SU2Skew g) {δ : ℝ} (hδ : 0 ≤ δ) (htri : G.SU2TriangleBound g δ) (hclique : ∀ S : Finset V, G.IsClique (↑S : Set V) → S.card ≤ 3) : ∃ p : V → U, G.SU2Fits g p (min δ (π / 2))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.IsChordal.exists_su2_gain_potential_global_sharp": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.IsChordal.exists_su2_gain_potential_global_sharp",
+      "kind": "theorem",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 653,
+      "signature": "theorem IsChordal.exists_su2_gain_potential_global_sharp [Finite V] (hG : G.IsChordal) (hconn : G.Connected) {g : V → V → U} (hskew : G.SU2Skew g) {δ : ℝ} (hδ : 0 ≤ δ) (htri : G.SU2TriangleBound g δ) : ∃ p : V → U, G.SU2Fits g p ((434 / 125) * δ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.IsChordal.exists_su2_gain_potential_small_defect_eight_fifths": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.IsChordal.exists_su2_gain_potential_small_defect_eight_fifths",
+      "kind": "theorem",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 168,
+      "signature": "theorem IsChordal.exists_su2_gain_potential_small_defect_eight_fifths [Finite V] (hG : G.IsChordal) {g : V → V → U} (hskew : G.SU2Skew g) {δ : ℝ} (hδ : 0 ≤ δ) (hsmall : δ ≤ 1 / 10) (htri : G.SU2TriangleBound g δ) : ∃ p : V → U, G.SU2Fits g p ((8 / 5) * δ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.IsChordal.exists_su2_gain_potential_small_defect_two": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.IsChordal.exists_su2_gain_potential_small_defect_two",
+      "kind": "theorem",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 148,
+      "signature": "theorem IsChordal.exists_su2_gain_potential_small_defect_two [Finite V] (hG : G.IsChordal) {g : V → V → U} (hskew : G.SU2Skew g) {δ : ℝ} (hδ : 0 ≤ δ) (hδπ : δ ≤ π / 6) (htri : G.SU2TriangleBound g δ) : ∃ p : V → U, G.SU2Fits g p (2 * δ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.SU2Fits": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.SU2Fits",
+      "kind": "def",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 34,
+      "signature": "def SU2Fits (G : SimpleGraph V) (g : V → V → U) (p : V → U) (r : ℝ) : Prop",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.SU2Skew": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.SU2Skew",
+      "kind": "def",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 25,
+      "signature": "def SU2Skew (G : SimpleGraph V) (g : V → V → U) : Prop",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds.SimpleGraph.SU2TriangleBound": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalSU2SharpBounds",
+      "name": "SimpleGraph.SU2TriangleBound",
+      "kind": "def",
+      "statement_id": "sha256:c0806e2ca82d3e258d0c2361e2b877e91d836078a2d43fda39e33841635f5ea2",
+      "line": 29,
+      "signature": "def SU2TriangleBound (G : SimpleGraph V) (g : V → V → U) (δ : ℝ) : Prop",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -6196,6 +6313,279 @@
       "statement_id": "sha256:48b540216ce0c16cb4164f5c3666695c71cd35301c1eca2c2d24786906cdf8dd",
       "line": 443,
       "signature": "theorem bloch_ball_hyperbolic : (∃ Φ : {r : EuclideanSpace ℝ (Fin 3) // ‖r‖ < 1} ≃ HyperbolicThreeSpace, ∀ r s, Real.cosh (dist (Φ r) (Φ s)) = kleinCosh r s) ∧ (∀ r : EuclideanSpace ℝ (Fin 3), blochFilter 1 r = r) ∧ (∀ (g h : Matrix (Fin 2) (Fin 2) ℂ) (r : EuclideanSpace ℝ (Fin 3)), (Matrix.trace (g * blochMatrix 1 r * gᴴ)).re ≠ 0 → blochFilter h (blochFilter g r) = blochFilter (h * g) r) ∧ (∀ (g : Matrix (Fin 2) (Fin 2) ℂ) (r s : EuclideanSpace ℝ (Fin 3)), (Matrix.trace (g * blochMatrix 1 r * gᴴ)).re ≠ 0 → (Matrix.trace (g * blochMatrix 1 s * gᴴ)).re ≠ 0 → 1 - ⟪blochFilter g r, blochFilter g "
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.christodoulou_ruffini_mass_sq": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.christodoulou_ruffini_mass_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 116,
+      "signature": "theorem christodoulou_ruffini_mass_sq {M J Q : ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) : M ^ 2 = kerrNewmanMassSq (horizonArea M J Q) J Q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.extremal_surface_gravity_tendsto_zero": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.extremal_surface_gravity_tendsto_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 377,
+      "signature": "theorem extremal_surface_gravity_tendsto_zero {ι : Type*} {l : Filter ι} {M : ℝ} {J Q : ι → ℝ} (hM : 0 < M) (h : Tendsto (fun t => Q t ^ 2 + spin M (J t) ^ 2) l (𝓝 (M ^ 2))) : Tendsto (fun t => surfaceGravity M (J t) (Q t)) l (𝓝 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.hawking_entropy_differential": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.hawking_entropy_differential",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 322,
+      "signature": "theorem hawking_entropy_differential {G ℏ κ A dA : ℝ} (hG : 0 < G) (hh : 0 < ℏ) : hawkingTemp ℏ κ * deriv (bekensteinEntropy G ℏ) A * dA = κ / (8 * Real.pi * G) * dA",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.hawking_temp_schwarzschild": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.hawking_temp_schwarzschild",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 333,
+      "signature": "theorem hawking_temp_schwarzschild {G ℏ M : ℝ} (hG : 0 < G) (hM : 0 < M) : hawkingTemp ℏ (surfaceGravity (G * M) 0 0) = schwarzschildTemp G ℏ M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.hawking_temp_schwarzschild_deriv": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.hawking_temp_schwarzschild_deriv",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 342,
+      "signature": "theorem hawking_temp_schwarzschild_deriv {G ℏ M : ℝ} (hG : 0 < G) (hh : 0 < ℏ) (hM : 0 < M) : HasDerivAt (schwarzschildTemp G ℏ) (-ℏ / (8 * Real.pi * G * M ^ 2)) M ∧ -ℏ / (8 * Real.pi * G * M ^ 2) < 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.horizonArea_pos": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.horizonArea_pos",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 61,
+      "signature": "theorem horizonArea_pos {M J Q : ℝ} (hM : 0 < M) : 0 < horizonArea M J Q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerrNewmanMassSq_irreducible": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerrNewmanMassSq_irreducible",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 92,
+      "signature": "theorem kerrNewmanMassSq_irreducible {A J Q : ℝ} (hA : 0 < A) : kerrNewmanMassSq A J Q = (Real.sqrt (A / (16 * Real.pi)) + Q ^ 2 / (4 * Real.sqrt (A / (16 * Real.pi)))) ^ 2 + J ^ 2 / (4 * (A / (16 * Real.pi)))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerrNewmanMass_eq": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerrNewmanMass_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 124,
+      "signature": "theorem kerrNewmanMass_eq {M J Q : ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) : kerrNewmanMass (horizonArea M J Q) J Q = M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerrNewman_first_law": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerrNewman_first_law",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 167,
+      "signature": "theorem kerrNewman_first_law {M J Q t A' J' Q' : ℝ} {Acurve Jcurve Qcurve : ℝ → ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) (hA : Acurve t = horizonArea M J Q) (hJ : Jcurve t = J) (hQ : Qcurve t = Q) (dA : HasDerivAt Acurve A' t) (dJ : HasDerivAt Jcurve J' t) (dQ : HasDerivAt Qcurve Q' t) : HasDerivAt (fun s => kerrNewmanMass (Acurve s) (Jcurve s) (Qcurve s)) (surfaceGravity M J Q / (8 * Real.pi) * A' + angularVelocity M J Q * J' + electricPotential M J Q * Q') t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerrNewman_partial_A": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerrNewman_partial_A",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 201,
+      "signature": "theorem kerrNewman_partial_A {M J Q : ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) : HasDerivAt (fun A => kerrNewmanMass A J Q) (surfaceGravity M J Q / (8 * Real.pi)) (horizonArea M J Q)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerrNewman_partial_J": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerrNewman_partial_J",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 210,
+      "signature": "theorem kerrNewman_partial_J {M J Q : ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) : HasDerivAt (fun j => kerrNewmanMass (horizonArea M J Q) j Q) (angularVelocity M J Q) J",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerrNewman_partial_Q": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerrNewman_partial_Q",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 217,
+      "signature": "theorem kerrNewman_partial_Q {M J Q : ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) : HasDerivAt (fun q => kerrNewmanMass (horizonArea M J Q) J q) (electricPotential M J Q) Q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerrNewman_smarr_formula": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerrNewman_smarr_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 224,
+      "signature": "theorem kerrNewman_smarr_formula {M J Q : ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) : M = surfaceGravity M J Q * horizonArea M J Q / (4 * Real.pi) + 2 * angularVelocity M J Q * J + electricPotential M J Q * Q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerr_irreducible_mass_bounds": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerr_irreducible_mass_bounds",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 258,
+      "signature": "theorem kerr_irreducible_mass_bounds {M J : ℝ} (hM : 0 < M) (hJ : |J| ≤ M ^ 2) : M / Real.sqrt 2 ≤ irreducibleMass M J 0 ∧ irreducibleMass M J 0 ≤ M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.kerr_irreducible_mass_min_iff": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.kerr_irreducible_mass_min_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 272,
+      "signature": "theorem kerr_irreducible_mass_min_iff {M J : ℝ} (hM : 0 < M) (hJ : |J| ≤ M ^ 2) : irreducibleMass M J 0 = M / Real.sqrt 2 ↔ |J| = M ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.penrose_efficiency_bound": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.penrose_efficiency_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 294,
+      "signature": "theorem penrose_efficiency_bound {M₁ J₁ M₂ J₂ : ℝ} (hM₁ : 0 < M₁) (hM₂ : 0 < M₂) (hJ₁ : |J₁| ≤ M₁ ^ 2) (hJ₂ : |J₂| ≤ M₂ ^ 2) (hA : horizonArea M₁ J₁ 0 ≤ horizonArea M₂ J₂ 0) : (M₁ - M₂) / M₁ ≤ 1 - 1 / Real.sqrt 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.penrose_efficiency_sharp": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.penrose_efficiency_sharp",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 309,
+      "signature": "theorem penrose_efficiency_sharp {M₁ J₁ M₂ : ℝ} (hM₁ : 0 < M₁) (hM₂ : 0 < M₂) (hJ : |J₁| = M₁ ^ 2) (hA : horizonArea M₂ 0 0 = horizonArea M₁ J₁ 0) : (M₁ - M₂) / M₁ = 1 - 1 / Real.sqrt 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.rPlus_sq_add_a_sq_eq": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.rPlus_sq_add_a_sq_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 81,
+      "signature": "theorem rPlus_sq_add_a_sq_eq {M J Q : ℝ} (h : Q ^ 2 + spin M J ^ 2 ≤ M ^ 2) : rPlus M J Q ^ 2 + spin M J ^ 2 = 2 * M * rPlus M J Q - Q ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.schwarzschild_specific_heat_neg": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.schwarzschild_specific_heat_neg",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 357,
+      "signature": "theorem schwarzschild_specific_heat_neg {G ℏ M : ℝ} (hG : 0 < G) (hh : 0 < ℏ) (hM : 0 < M) : schwarzschildMassAtTemp G ℏ (schwarzschildTemp G ℏ M) = M ∧ HasDerivAt (schwarzschildMassAtTemp G ℏ) (-8 * Real.pi * G * M ^ 2 / ℏ) (schwarzschildTemp G ℏ M) ∧ -8 * Real.pi * G * M ^ 2 / ℏ < 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.surfaceGravity_pos_of_subextremal": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.surfaceGravity_pos_of_subextremal",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 71,
+      "signature": "theorem surfaceGravity_pos_of_subextremal {M J Q : ℝ} (hM : 0 < M) (h : Q ^ 2 + spin M J ^ 2 < M ^ 2) : 0 < surfaceGravity M J Q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D.surfaceGravity_zero_of_extremal": {
+      "module": "D5/S3/Geometry/Lorentz/BlackHoleThermodynamics4D",
+      "name": "D5.S3.Geometry.Lorentz.BlackHoleThermodynamics4D.surfaceGravity_zero_of_extremal",
+      "kind": "theorem",
+      "statement_id": "sha256:c3e78ad2404cd130944234c1a2eee700d45ef1eeb9714a4df8e9fff372fe8571",
+      "line": 76,
+      "signature": "theorem surfaceGravity_zero_of_extremal {M J Q : ℝ} (h : Q ^ 2 + spin M J ^ 2 = M ^ 2) : surfaceGravity M J Q = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Geometry/Lorentz/DimensionSelection4D.angular_trace_summable_iff_of_eventually_comparable": {
       "module": "D5/S3/Geometry/Lorentz/DimensionSelection4D",
@@ -12760,6 +13150,136 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC.anec_global_rigidity": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeANECandQFC.anec_global_rigidity",
+      "kind": "theorem",
+      "statement_id": "sha256:7b02b039bb5ed0b92fbcc65bf3686af05ac2a75d9cc4c39212c044dea430e3c3",
+      "line": 178,
+      "signature": "theorem anec_global_rigidity {θ σ R : ℝ → ℝ} (hd : ∀ u, HasDerivAt θ (-(1/2) * θ u ^ 2 - σ u ^ 2 - R u) u) (hcR : Continuous R) (hiR : Integrable R) (hanec : 0 ≤ ∫ u, R u) : (∀ u, θ u = 0) ∧ (∀ u, σ u = 0) ∧ (∫ u, R u) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC.nec_and_global_forces_zero_ricci": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeANECandQFC.nec_and_global_forces_zero_ricci",
+      "kind": "theorem",
+      "statement_id": "sha256:7b02b039bb5ed0b92fbcc65bf3686af05ac2a75d9cc4c39212c044dea430e3c3",
+      "line": 221,
+      "signature": "theorem nec_and_global_forces_zero_ricci {θ σ R : ℝ → ℝ} (hd : ∀ u, HasDerivAt θ (-(1/2) * θ u ^ 2 - σ u ^ 2 - R u) u) (hcR : Continuous R) (hiR : Integrable R) (hnec : ∀ u, 0 ≤ R u) : (∀ u, θ u = 0) ∧ (∀ u, σ u = 0) ∧ (∀ u, R u = 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC.qfc_iff_qnec_at_stationary_cut": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeANECandQFC.qfc_iff_qnec_at_stationary_cut",
+      "kind": "theorem",
+      "statement_id": "sha256:7b02b039bb5ed0b92fbcc65bf3686af05ac2a75d9cc4c39212c044dea430e3c3",
+      "line": 269,
+      "signature": "theorem qfc_iff_qnec_at_stationary_cut {G ħ : ℝ} {A S θ σ T : ℝ → ℝ} {u : ℝ} (hG : 0 < G) (hħ : 0 < ħ) (hA : ∀ v, 0 < A v) (hdA : ∀ v, HasDerivAt A (θ v * A v) v) (hdS : Differentiable ℝ S) (hddS : DifferentiableAt ℝ (deriv S) u) (hdθ : HasDerivAt θ (-(1/2) * θ u ^ 2 - σ u ^ 2 - 8 * Real.pi * G * T u) u) (hθ : θ u = 0) (hσ : σ u = 0) : deriv (quantumExpansion G ħ A S) u ≤ 0 ↔ ħ / (2 * Real.pi * A u) * deriv (deriv S) u ≤ T u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC.qfc_implies_gsl": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeANECandQFC.qfc_implies_gsl",
+      "kind": "theorem",
+      "statement_id": "sha256:7b02b039bb5ed0b92fbcc65bf3686af05ac2a75d9cc4c39212c044dea430e3c3",
+      "line": 293,
+      "signature": "theorem qfc_implies_gsl {G ħ u₀ : ℝ} {A S : ℝ → ℝ} (hG : 0 < G) (hħ : 0 < ħ) (hA : ∀ u ∈ Ici u₀, 0 < A u) (hdA : ∀ u ∈ Ici u₀, DifferentiableAt ℝ A u) (hdS : ∀ u ∈ Ici u₀, DifferentiableAt ℝ S u) (hdQ : ∀ u ∈ Ici u₀, DifferentiableAt ℝ (quantumExpansion G ħ A S) u) (hqfc : ∀ u ∈ Ici u₀, deriv (quantumExpansion G ħ A S) u ≤ 0) (htail : ∀ ε > 0, ∀ v ≥ u₀, ∃ u ≥ v, -ε ≤ quantumExpansion G ħ A S u) : (∀ u ∈ Ici u₀, 0 ≤ quantumExpansion G ħ A S u) ∧ MonotoneOn (generalizedEntropy G ħ A S) (Ici u₀)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC.qnec_implies_anec": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeANECandQFC.qnec_implies_anec",
+      "kind": "theorem",
+      "statement_id": "sha256:7b02b039bb5ed0b92fbcc65bf3686af05ac2a75d9cc4c39212c044dea430e3c3",
+      "line": 325,
+      "signature": "theorem qnec_implies_anec {ħ A₀ : ℝ} {S T : ℝ → ℝ} (_hħ : 0 < ħ) (_hA : 0 < A₀) (hS : ContDiff ℝ 2 S) (hbot : Tendsto (deriv S) atBot (𝓝 0)) (htop : Tendsto (deriv S) atTop (𝓝 0)) (hT : Integrable T) (hqnec : ∀ u, ħ / (2 * Real.pi * A₀) * deriv (deriv S) u ≤ T u) : 0 ≤ ∫ u, T u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC.quantum_expansion_deriv": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeANECandQFC.quantum_expansion_deriv",
+      "kind": "theorem",
+      "statement_id": "sha256:7b02b039bb5ed0b92fbcc65bf3686af05ac2a75d9cc4c39212c044dea430e3c3",
+      "line": 251,
+      "signature": "theorem quantum_expansion_deriv {G ħ : ℝ} {A S θ σ T : ℝ → ℝ} {u : ℝ} (hG : 0 < G) (hħ : 0 < ħ) (hA : ∀ v, 0 < A v) (hdA : ∀ v, HasDerivAt A (θ v * A v) v) (hdS : Differentiable ℝ S) (hddS : DifferentiableAt ℝ (deriv S) u) (hdθ : HasDerivAt θ (-(1/2) * θ u ^ 2 - σ u ^ 2 - 8 * Real.pi * G * T u) u) : HasDerivAt (quantumExpansion G ħ A S) (-(1/2) * θ u ^ 2 - σ u ^ 2 - 8 * Real.pi * G * T u + 4 * G * ħ / A u * (deriv (deriv S) u - θ u * deriv S u)) u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC.quantum_expansion_eq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeANECandQFC.quantum_expansion_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:7b02b039bb5ed0b92fbcc65bf3686af05ac2a75d9cc4c39212c044dea430e3c3",
+      "line": 240,
+      "signature": "theorem quantum_expansion_eq {G ħ : ℝ} {A S θ : ℝ → ℝ} {u : ℝ} (hG : 0 < G) (hħ : 0 < ħ) (hA : 0 < A u) (hdA : HasDerivAt A (θ u * A u) u) (hdS : DifferentiableAt ℝ S u) : quantumExpansion G ħ A S u = θ u + 4 * G * ħ / A u * deriv S u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC.raychaudhuri_global_anec_identity": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeANECandQFC.raychaudhuri_global_anec_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:7b02b039bb5ed0b92fbcc65bf3686af05ac2a75d9cc4c39212c044dea430e3c3",
+      "line": 158,
+      "signature": "theorem raychaudhuri_global_anec_identity {θ σ R : ℝ → ℝ} (hd : ∀ u, HasDerivAt θ (-(1/2) * θ u ^ 2 - σ u ^ 2 - R u) u) (hcR : Continuous R) (hiR : Integrable R) : Integrable (fun u => (1/2) * θ u ^ 2 + σ u ^ 2) ∧ (∫ u, (1/2) * θ u ^ 2 + σ u ^ 2) = -(∫ u, R u)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC.raychaudhuri_global_tendsto_zero": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeANECandQFC.raychaudhuri_global_tendsto_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:7b02b039bb5ed0b92fbcc65bf3686af05ac2a75d9cc4c39212c044dea430e3c3",
+      "line": 151,
+      "signature": "theorem raychaudhuri_global_tendsto_zero {θ σ R : ℝ → ℝ} (hd : ∀ u, HasDerivAt θ (-(1/2) * θ u ^ 2 - σ u ^ 2 - R u) u) (hcR : Continuous R) (hiR : Integrable R) : Tendsto θ atTop (𝓝 0) ∧ Tendsto θ atBot (𝓝 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC.strict_anec_forces_caustic": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeANECandQFC",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeANECandQFC.strict_anec_forces_caustic",
+      "kind": "theorem",
+      "statement_id": "sha256:7b02b039bb5ed0b92fbcc65bf3686af05ac2a75d9cc4c39212c044dea430e3c3",
+      "line": 214,
+      "signature": "theorem strict_anec_forces_caustic {σ R : ℝ → ℝ} (hcR : Continuous R) (hiR : Integrable R) (hanec : 0 < ∫ u, R u) : ¬ ∃ θ : ℝ → ℝ, ∀ u, HasDerivAt θ (-(1/2) * θ u ^ 2 - σ u ^ 2 - R u) u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Analysis/NullConeGravity/NullConeClockAreaBound.operator_clock_area_upper_bound": {
       "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullConeClockAreaBound",
       "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullConeClockAreaBound.operator_clock_area_upper_bound",
@@ -15345,6 +15865,214 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.hsmi_modular_boost_cut": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.hsmi_modular_boost_cut",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 461,
+      "signature": "theorem hsmi_modular_boost_cut (s a : ℝ) (f : PositionL2) : (∀ᵐ x ∂volume, x < Real.exp (-(2 * Real.pi * s)) * a → (minusSidedAction ⟨s, 0⟩ f) x = 0) ↔ (∀ᵐ x ∂volume, x < a → f x = 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.hsmi_modular_boost_cut_inclusion": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.hsmi_modular_boost_cut_inclusion",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 484,
+      "signature": "theorem hsmi_modular_boost_cut_inclusion {s a : ℝ} (hs : 0 ≤ s) (ha : 0 < a) : Ici a ⊆ boostRay s ⁻¹' (Ici a) ∧ minusSidedAction (dilation (-2 * Real.pi) (-s)) * minusSidedAction (translation (-2 * Real.pi) a) * (minusSidedAction (dilation (-2 * Real.pi) (-s)))⁻¹ = minusSidedAction (translation (-2 * Real.pi) (boostRay s a))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.hsmi_modular_boost_preserves_halfline": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.hsmi_modular_boost_preserves_halfline",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 437,
+      "signature": "theorem hsmi_modular_boost_preserves_halfline (s : ℝ) (f : PositionL2) (hf : ∀ᵐ x ∂volume, x ≤ 0 → f x = 0) : ∀ᵐ x ∂volume, x ≤ 0 → (minusSidedAction ⟨s, 0⟩ f) x = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.hsmi_modular_boost_ray_map": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.hsmi_modular_boost_ray_map",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 415,
+      "signature": "theorem hsmi_modular_boost_ray_map (s t a : ℝ) : boostRay s 0 = 0 ∧ (∀ x, boostRay (s + t) x = boostRay s (boostRay t x)) ∧ boostRay s ⁻¹' (Ici a) = Ici (Real.exp (-(2 * Real.pi * s)) * a) ∧ boostRay s ⁻¹' (Ioi 0) = Ioi 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.kms_beta_two_pi_equals_nullA": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.kms_beta_two_pi_equals_nullA",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 105,
+      "signature": "theorem kms_beta_two_pi_equals_nullA (ν : ℝ) : thermal (2 * Real.pi) ν = NullConeGravity.a (-(2 * Real.pi) * ν) / 2 ∧ thermal 1 ν = NullConeGravity.a (-ν) / 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.kms_detailed_balance_unique": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.kms_detailed_balance_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 37,
+      "signature": "theorem kms_detailed_balance_unique {β ν : ℝ} (hβ : 0 < β) (hν : ν ≠ 0) (a j : ℝ) : DetailedBalance β ν a j ↔ a = (1 + Real.exp (-β * ν)) / (1 - Real.exp (-β * ν)) * j ∧ a = Real.cosh (β * ν / 2) / Real.sinh (β * ν / 2) * j",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.kms_normalized_symbol_properties": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.kms_normalized_symbol_properties",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 71,
+      "signature": "theorem kms_normalized_symbol_properties (β ν : ℝ) : 0 < thermal β ν ∧ thermal β ν < 1 ∧ thermal β (-ν) = 1 - thermal β ν ∧ 2 * thermal β ν - 1 = Real.tanh (β * ν / 2) ∧ 1 + Real.tanh (β * ν / 2) = 2 / (1 + Real.exp (-β * ν)) ∧ 1 - Real.tanh (β * ν / 2) = 2 / (1 + Real.exp (β * ν))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.kms_normalized_symbol_unique": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.kms_normalized_symbol_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 65,
+      "signature": "theorem kms_normalized_symbol_unique (β ν a : ℝ) : 1 - a = Real.exp (-β * ν) * a ↔ a = thermal β ν",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.kms_strip_determines_temperature": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.kms_strip_determines_temperature",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 379,
+      "signature": "theorem kms_strip_determines_temperature {β₁ β₂ : ℝ} (_h₁ : 0 < β₁) (_h₂ : 0 < β₂) {φ : ℝ → ℝ} (hφ : Integrable φ) (hn : ∀ᵐ ν ∂volume, 0 ≤ φ ν) (hs : ∀ᵐ ν ∂volume, ν ≤ 0 → φ ν = 0) (hm : 0 < ∫ ν, φ ν) (he : kmsStrip β₁ (fun ν => (φ ν : ℂ)) (Complex.I * (β₁ : ℂ)) = kmsStrip β₂ (fun ν => (φ ν : ℂ)) (Complex.I * (β₂ : ℂ))) : β₁ = β₂",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.modular_kms_boundary_identities": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.modular_kms_boundary_identities",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 322,
+      "signature": "theorem modular_kms_boundary_identities (β t : ℝ) (f g : PositionL2) : let φ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.modular_kms_lower_boundary": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.modular_kms_lower_boundary",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 280,
+      "signature": "theorem modular_kms_lower_boundary (β : ℝ) (φ : ℝ → ℂ) (t : ℝ) : kmsStrip β φ t = ∫ ν, φ ν * (thermal β (-ν) : ℂ) * phase t ν",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.modular_kms_strip_bounded": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.modular_kms_strip_bounded",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 157,
+      "signature": "theorem modular_kms_strip_bounded (β : ℝ) {φ : ℝ → ℂ} (hφ : Integrable φ) (z : ℂ) (h₀ : 0 ≤ z.im) (hβ : z.im ≤ β) : ‖kmsStrip β φ z‖ ≤ ∫ ν, ‖φ ν‖",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.modular_kms_strip_continuous": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.modular_kms_strip_continuous",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 166,
+      "signature": "theorem modular_kms_strip_continuous (β : ℝ) {φ : ℝ → ℂ} (hφ : Integrable φ) : ContinuousOn (kmsStrip β φ) {z : ℂ | 0 ≤ z.im ∧ z.im ≤ β}",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.modular_kms_strip_holomorphic": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.modular_kms_strip_holomorphic",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 220,
+      "signature": "theorem modular_kms_strip_holomorphic (β : ℝ) {φ : ℝ → ℂ} (hφ : Integrable φ) : DifferentiableOn ℂ (kmsStrip β φ) {z : ℂ | 0 < z.im ∧ z.im < β}",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.modular_kms_strip_integrable": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.modular_kms_strip_integrable",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 149,
+      "signature": "theorem modular_kms_strip_integrable (β : ℝ) {φ : ℝ → ℂ} (hφ : Integrable φ) (z : ℂ) (h₀ : 0 ≤ z.im) (hβ : z.im ≤ β) : Integrable (fun ν => φ ν * stripKernel β z ν)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness.modular_kms_upper_boundary": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullModularKMSUniqueness",
+      "name": "NullConeGravity.NullModularKMSUniqueness.modular_kms_upper_boundary",
+      "kind": "theorem",
+      "statement_id": "sha256:cd729510e0a933a57d9b439d18cd924bb61f3e9239fe7e84bef5e63560b51fe3",
+      "line": 287,
+      "signature": "theorem modular_kms_upper_boundary (β : ℝ) (φ : ℝ → ℂ) (t : ℝ) : kmsStrip β φ ((t : ℂ) + Complex.I * (β : ℂ)) = ∫ ν, φ ν * (thermal β ν : ℂ) * phase t ν",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy.coreWeight_faithful": {
       "module": "D5/S3/Quantum/Analysis/NullConeGravity/ObserverCrossedProductEntropy",
       "name": "D5.S3.Quantum.Analysis.NullConeGravity.ObserverCrossedProductEntropy.coreWeight_faithful",
@@ -17775,6 +18503,318 @@
       "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
       "line": 163,
       "signature": "theorem wilson_strong_coupling_geometric_finite_bound (D : GaugeData G d) (β : ℝ) (hβ : 0 ≤ β) (hd : 0 < d) (z : Subgroup.center G) (ζ : ℂ) (hz : D.rep z = ζ • 1) (hζ : ζ ≠ 1) (r : Rectangle n) (hw : 0 < r.width) (hh : 0 < r.height) (hq : 80 * (Real.exp (β * d) - 1) < 1) : let q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.antiSelfDual_ym_stress_zero": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.antiSelfDual_ym_stress_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 278,
+      "signature": "theorem antiSelfDual_ym_stress_zero (F : TwoForm4 r) (h : hodge4 F = -F) (μ ν : Fin 4) : ymStress F μ ν = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.bpst_density": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.bpst_density",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 309,
+      "signature": "theorem bpst_density (ρ : ℝ) (x : E4) : traceActionDensity (bpstField ρ x) = 48 * (ρ ^ 4 / (‖x‖ ^ 2 + ρ ^ 2) ^ 4)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.bpst_instanton_exact_action": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.bpst_instanton_exact_action",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 354,
+      "signature": "theorem bpst_instanton_exact_action {ρ : ℝ} (hρ : 0 < ρ) : bpstAction ρ = 8 * Real.pi ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.bpst_instanton_exact_charge_one": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.bpst_instanton_exact_charge_one",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 361,
+      "signature": "theorem bpst_instanton_exact_charge_one {ρ : ℝ} (hρ : 0 < ρ) : bpstCharge ρ = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.bpst_instanton_finite_action": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.bpst_instanton_finite_action",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 349,
+      "signature": "theorem bpst_instanton_finite_action {ρ : ℝ} (hρ : 0 < ρ) : Integrable (fun x ↦ traceActionDensity (bpstField ρ x))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.bpst_instanton_selfDual": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.bpst_instanton_selfDual",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 297,
+      "signature": "theorem bpst_instanton_selfDual (ρ : ℝ) (x : E4) : hodge4 (bpstField ρ x) = bpstField ρ x",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.bpst_instanton_stress_zero": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.bpst_instanton_stress_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 300,
+      "signature": "theorem bpst_instanton_stress_zero (ρ : ℝ) (x : E4) (μ ν : Fin 4) : ymStress (bpstField ρ x) μ ν = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.hodge4_coordinate_iff": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.hodge4_coordinate_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 57,
+      "signature": "theorem hodge4_coordinate_iff (D : ℕ) : D - 2 = 2 ↔ Nonempty (Fin D ≃ Fin 4)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.hodge4_involutive": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.hodge4_involutive",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 66,
+      "signature": "theorem hodge4_involutive (F : TwoForm4 r) : hodge4 (hodge4 F) = F",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.hodge4_isometry": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.hodge4_isometry",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 70,
+      "signature": "theorem hodge4_isometry (F H : TwoForm4 r) : inner4 (hodge4 F) (hodge4 H) = inner4 F H",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.normSq_tensor": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.normSq_tensor",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 248,
+      "signature": "theorem normSq_tensor (F : TwoForm4 r) : normSq F = (1 / 2) * ∑ a, ∑ μ, ∑ ν, toTwoForm F a μ ν ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.norm_sq_eq_sd_add_asd": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.norm_sq_eq_sd_add_asd",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 99,
+      "signature": "theorem norm_sq_eq_sd_add_asd (F : TwoForm4 r) : normSq F = normSq (selfDualPart F) + normSq (antiSelfDualPart F)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.sd_asd_orthogonal": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.sd_asd_orthogonal",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 79,
+      "signature": "theorem sd_asd_orthogonal (F : TwoForm4 r) : inner4 (selfDualPart F) (antiSelfDualPart F) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.sd_asd_orthogonal_split": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.sd_asd_orthogonal_split",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 89,
+      "signature": "theorem sd_asd_orthogonal_split (F : TwoForm4 r) : selfDualPart F + antiSelfDualPart F = F ∧ hodge4 (selfDualPart F) = selfDualPart F ∧ hodge4 (antiSelfDualPart F) = -antiSelfDualPart F ∧ inner4 (selfDualPart F) (antiSelfDualPart F) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.selfDual_ym_stress_zero": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.selfDual_ym_stress_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 270,
+      "signature": "theorem selfDual_ym_stress_zero (F : TwoForm4 r) (h : hodge4 F = F) (μ ν : Fin 4) : ymStress F μ ν = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.thooftEta_selfDual": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.thooftEta_selfDual",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 291,
+      "signature": "theorem thooftEta_selfDual : hodge4 thooftEta = thooftEta",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.toTwoForm_antisymmetric": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.toTwoForm_antisymmetric",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 244,
+      "signature": "theorem toTwoForm_antisymmetric (F : TwoForm4 r) (a : Fin r) (μ ν : Fin 4) : toTwoForm F a μ ν = -toTwoForm F a ν μ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.topological_density_eq_sd_sub_asd": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.topological_density_eq_sd_sub_asd",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 110,
+      "signature": "theorem topological_density_eq_sd_sub_asd (F : TwoForm4 r) : topDensity F = normSq (selfDualPart F) - normSq (antiSelfDualPart F)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.ym_bps_action_bound": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.ym_bps_action_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 201,
+      "signature": "theorem ym_bps_action_bound (F : E4 → TwoForm4 r) (hF : Measurable F) (hact : Integrable (fun x ↦ normSq (F x))) : |∫ x, topDensity (F x)| ≤ ∫ x, normSq (F x)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.ym_bps_action_equality_iff": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.ym_bps_action_equality_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 212,
+      "signature": "theorem ym_bps_action_equality_iff (F : E4 → TwoForm4 r) (hF : Continuous F) (hact : Integrable (fun x ↦ normSq (F x))) : (∫ x, normSq (F x)) = (∫ x, topDensity (F x)) ↔ ∀ x, hodge4 (F x) = F x",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.ym_bps_equality_iff": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.ym_bps_equality_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 169,
+      "signature": "theorem ym_bps_equality_iff (F : TwoForm4 r) : (normSq F = topDensity F ↔ hodge4 F = F) ∧ (normSq F = -topDensity F ↔ hodge4 F = -F)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.ym_bps_pointwise_bound": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.ym_bps_pointwise_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 164,
+      "signature": "theorem ym_bps_pointwise_bound (F : TwoForm4 r) : |topDensity F| ≤ normSq F",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.ym_bps_pointwise_identity": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.ym_bps_pointwise_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 144,
+      "signature": "theorem ym_bps_pointwise_identity (F : TwoForm4 r) : normSq F = (1 / 2) * normSq (F - hodge4 F) + topDensity F ∧ normSq F = (1 / 2) * normSq (F + hodge4 F) - topDensity F",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D.ym_stress_trace_zero": {
+      "module": "D5/S3/Quantum/Gauge/YangMillsBPSSelfDual4D",
+      "name": "D5.S3.Quantum.Gauge.YangMillsBPSSelfDual4D.ym_stress_trace_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:8461b8e2ae816ad0f0d8a8d49cd9d99928c45a44c33feec243e49fefec9fd1d7",
+      "line": 262,
+      "signature": "theorem ym_stress_trace_zero (F : TwoForm4 r) : ∑ μ, ymStress F μ μ = 0",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
