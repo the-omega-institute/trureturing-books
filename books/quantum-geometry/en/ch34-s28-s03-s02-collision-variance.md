@@ -653,6 +653,14 @@ There are only finitely many zero ordinates in $(T,T+1]$. In a short open interv
 
 **Manual derivation.** Under RH, equation (1) and Theorem 2 of Carneiro, Chandee and Milinovich give $|N_\zeta(T)-M(T)|\le C\log T/\log\log T$ at sufficiently large heights away from zero ordinates, for some constant $C$. This envelope is continuous at sufficiently large heights, so the right-limit theorem extends it to every sufficiently large inclusive cutoff. The actual ζ ordinates therefore satisfy the sublogarithmic condition, and the uniform pair-sum bound applies. The critical collision theorem still requires a fixed coefficient strictly below $2\pi c^2$ on the long bands. [Equation (1) and Theorem 2](https://arxiv.org/abs/1309.1526)
 
+At a finite cutoff, expand multiplicities into distinct copies and choose pairs with disjoint endpoints whose ordinates are at distance at most one. Let $C(u)$ count the retained copies within distance one of the first endpoint $\gamma_u$. The ordered sum above satisfies
+$$
+G_Y(0)-G_Y(t)\ge \frac14\sum_{(u,v)}C(u)\bigl[1-\cos(t(\gamma_u-\gamma_v))\bigr].
+$$
+Each copy in the first endpoint's neighborhood lies within distances one and two of the two endpoints, respectively, so both Lorentz weights are at least $1/2$. For three points on the unit circle, the squared chord lengths satisfy $|a-c|^2+|b-c|^2\ge |a-b|^2/2$, and each phase residual equals half the corresponding squared chord length. Apply the bound to each column of the neighborhood and add both endpoint rows. Disjoint endpoints ensure that each row is counted once, and the remaining rows contribute nonnegative terms. The distance bounds include their endpoints, and repeated ordinates retain all their copies.
+
+Suppose $Y>1$, there are at least $c_1Y\log Y$ pairs, and each pair has phase residual at least $c_2$ and at least $c_3\log Y$ copies in its first endpoint's neighborhood, with $c_2,c_3\ge0$. The normalized sum then falls short of its zero-frequency baseline by at least $c_1c_2c_3/4$. If that baseline is at most $\kappa-\eta+c_1c_2c_3/4$, the normalized sum is at most $\kappa-\eta$. A fixed $\eta>0$ gives a strict cap below $\kappa$. Whether actual ζ zeros supply enough such pairs uniformly over the required long frequency bands remains open. [Formalization and proof outline](https://github.com/the-omega-institute/trureturing/pull/35008)
+
 ### Commensurate spectra with the same unit-band profile
 
 The upper bound in [@thm-ch34-zeta-harmonic-critical-collision-limit] controls frequencies beyond the unit band. One spectrum can match the two-term zero count with $O(\log\log H)$ error and the full unit-band Lorentz profile, while its normalized critical collision mass eventually exceeds the Gaussian constant by a fixed amount. The comparison uses one spectrum at every real truncation height.
