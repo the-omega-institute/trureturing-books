@@ -137,6 +137,28 @@ The previous two sections treated the Regge action as a given input. What happen
 
 ### 10.3.1 The $\sqrt{3}$ Rationality Barrier, Degree-4 Minimal Fields, and Four-Copy Sharpness {#sec-ch10-sqrt3-obstruction}
 
+A shape variation at fixed hinge incidences changes both triangle areas and deficit angles. In the derivative of the curvature sum, the area-weighted deficit-angle derivative terms cancel within each four-simplex. The hinge-load calculation below uses this cancellation.
+
+::: {.theorem #thm-ou-ch10-euclidean-regge-variation title="First Variation of the Four-Dimensional Euclidean Regge Curvature Sum" lean="D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regge_variation"}
+Let $\Sigma$ and $H$ be finite index sets for four-simplices and global hinges. Each $s\in\Sigma$ follows a path of nondegenerate Euclidean four-simplices with differentiable vertex positions parametrized by $t\in\mathbb R$. For each $s$, a fixed injection $i_s$ sends its local triangles into $H$. Each global hinge has a differentiable area function $A_h(t)$ that agrees with the local area of $k$ whenever $i_s(k)=h$. With dihedral angles $\theta_{s,k}(t)$, define
+
+$$
+\delta_h(t)=2\pi-\sum_{s,k:\,i_s(k)=h}\theta_{s,k}(t),
+\qquad
+K(t)=\sum_{h\in H} A_h(t)\,\delta_h(t).
+$$
+
+Then $K$ is differentiable at every $t\in\mathbb R$, with
+
+$$
+K'(t)=\sum_{h\in H} A_h'(t)\,\delta_h(t).
+$$
+:::
+
+::: proof
+The product rule also contributes $\sum_h A_h(t)\delta_h'(t)$. Reindexing this term by local triangles gives, for each four-simplex, the negative of the sum of its areas times the corresponding dihedral-angle derivatives. Area compatibility supplies the local areas, and the Euclidean Schläfli identity makes the sum vanish for each simplex. The full proof is checked by the Lean kernel.
+:::
+
 On the flat four-dimensional coordinate-chain cell (30 four-valent hinges, 20 six-valent hinges), shift every short squared edge ($4/5$) uniformly by $\eta$ while holding the long edges fixed. Dihedral differentiation yields $d\delta/d\eta = 3$ on every four-valent hinge and $d\delta/d\eta = -3\sqrt{3}$ on every six-valent hinge, so the first variation along this shape direction (omitting $1/(8\pi)$) is exactly ([hinge-load stationarity certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-regge-hinge-load.py))
 
 $$
@@ -145,7 +167,7 @@ $$
 
 This single equation triggers two immediate algebraic barriers:
 
-- **No positive rational solution and second-variation sign flip**: no nonzero nonnegative rational counts can satisfy the $\sqrt{3}$ ratio, even after combining with uniform scaling to hold the total four-volume fixed. Moreover, if differentiable loads satisfy $N_h = C A_h$ and $dN_h = C r\,dA_h$ at the flat point, differentiating the Schläfli identity $\sum A_h d\delta_h = 0$ yields the second variation $C(2r - 1)R''_{q_0}$: frozen flat-area loads ($r = 0$) invert the sign of the gravitational kinetic term to $-R''$, while $r = 1/2$ annihilates the entire quadratic kinetic term!
+- **No positive rational solution and second-variation sign flip**: no nonzero nonnegative rational counts can satisfy the $\sqrt{3}$ ratio, even after combining with uniform scaling to hold the total four-volume fixed. Moreover, if differentiable loads satisfy $N_h = C A_h$ and $dN_h = C r\,dA_h$ at the flat point, differentiating the cancellation $\sum_h A_h\,d\delta_h=0$ in the proof of [@thm-ou-ch10-euclidean-regge-variation] yields the second variation $C(2r - 1)R''_{q_0}$: frozen flat-area loads ($r = 0$) invert the sign of the gravitational kinetic term to $-R''$, while $r = 1/2$ annihilates the entire quadratic kinetic term!
 - **Minimal Born-amplitude number-field degree is $4$**: if nonnegative integer loads arise from a finite-dimensional Born measurement whose unnormalized amplitudes have real and imaginary parts in any **totally real number field** $F$ (every embedding maps $F$ into $\mathbb{R}$), then $A = \sqrt{3}B$ is impossible—some embedding sends $\sqrt{3} \mapsto -\sqrt{3}$, contradicting the positivity of sums of squares under every real embedding. Conversely, the degree-4 real algebraic amplitude $(1, \beta)$ with $\beta > 0$ and $4\beta^4 = 3$ ($2\beta$ a root of irreducible $x^4 - 12$) achieves exact flat balance with $p_4 = 4 - 2\sqrt{3}$ and $p_6 = 2\sqrt{3} - 3$ ($p_4/p_6 = 2/\sqrt{3}$). Since any real field of degree $< 4$ containing $\sqrt{3}$ is totally real quadratic, **degree $4$ is strictly minimal** ([finite Born hinge certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-finite-born-hinge.py)).
 
 Notice how sharply this degree-4 wall separates flat four-dimensional hinge geometry from quadratic spinor arithmetic. In the constructive quadratic extension `QSqrt2` ($\delta^2 = 2$), no transcendental functions or fourth roots are needed to construct an exact unit right-angle spinor closing in eight beats ($u_{90}^8 = 1$); yet balancing four-dimensional simplicial hinge loads via $4\beta^4 = 3$ forces an irreversible jump from degree $2$ to degree $4$. We record the frozen quadratic spinor anchor explicitly for contrast:
@@ -202,5 +224,5 @@ reconstructing all $20$ curvature components while automatically projecting out 
 | Covariant cubic & three-cell marginals | #11366 vs #11431 diff $-3.7816\times 10^{-9}$; #11870 vs #11943 gap $4.48\times 10^{-13}$ | Cross-hinge coupling to $\operatorname{tr}(\mathcal{R}^3)$; identical 1- and 2-cell marginals still separate all 1,238 zeros | Full non-perturbative quantum diffeomorphism invariance |
 
 ::: {.remark #rem-ou-ch10-gravity-ledger title="Evidence Stratification and Bridge to Induced Gravity"}
-Three epistemic tiers are strictly separated here: [@thm-ou-ch10-coboundary-zero] (empty axiom closure) and [@thm-ou-ch10-sqrt2-spinor] (`propext` only) are Lean 4 kernel-checked algebraic and simplicial theorems; Pachner inversion, conserved-source residues, conformal-mode inertia, degree-4 and four-copy sharpness, the 5432-slot ground state, the 25-deficit determinant, and cubic Ward tests are exact rational or interval certificates inside specified discrete gravity models; deriving the Regge action, source normalization, and physical area scale directly from the single minimal-arc connection remains open. Even granting the Einstein–Regge geometric scaffold, neither the physical Newton constant $G_N$ nor the dark-energy ratio $\Lambda G \sim 10^{-122}$ has yet emerged—the next chapter asks whether one-loop induced gravity from the Behrend-shell matter spectrum itself can produce both scales.
+Three epistemic tiers are strictly separated here: [@thm-ou-ch10-coboundary-zero] (empty axiom closure) and [@thm-ou-ch10-sqrt2-spinor] (`propext` only) are Lean 4 kernel-checked algebraic and simplicial theorems. The frozen first-variation theorem [@thm-ou-ch10-euclidean-regge-variation] uses the three standard axioms. Pachner inversion, conserved-source residues, conformal-mode inertia, degree-4 and four-copy sharpness, the 5432-slot ground state, the 25-deficit determinant, and cubic Ward tests are exact rational or interval certificates inside specified discrete gravity models; deriving the Regge action, source normalization, and physical area scale directly from the single minimal-arc connection remains open. Even granting the Einstein–Regge geometric scaffold, neither the physical Newton constant $G_N$ nor the dark-energy ratio $\Lambda G \sim 10^{-122}$ has yet emerged—the next chapter asks whether one-loop induced gravity from the Behrend-shell matter spectrum itself can produce both scales.
 :::
