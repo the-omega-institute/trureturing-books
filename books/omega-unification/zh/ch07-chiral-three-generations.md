@@ -45,7 +45,7 @@ $$
 
 固定荷、两钟相位和软化参数后，要确定轻带中的一个态，最少需要读取三个站位的复振幅。任取两个坐标，三维轻带中总有非零态在这两处同时为零。在中央正零点（编号 $2\,306\,888\,100\,085$）比较第三枢轴末端口所选八站内的三站组合，得到三站组 $S=\{0,3,5\}$。在上述五种荷、整个双钟相位环面和允许的软化范围内，每个归一化轻态在 $S$ 上的振幅向量范数都大于 $0.29747$，即坐标限制的最小奇异值大于 $0.29747$。这三个站位经过候选比较选定，由作用量选出它们仍是开放问题。
 
-这里用于消元的三条边界射线首站 $\{6,7,8\}$ 所起的作用不同。对每种荷和每个固定的允许软化参数，环面上都有一个相位背景，使某个非零轻态在这三站同时消失。由谱隙给出的连续性、软化量随高度趋于零和两钟相位在黎曼零点上的等分布，对每种荷和任意 $\varepsilon>0$，使这三站最小奇异值低于 $\varepsilon$ 的正零点都占有正的下密度（按重数计）。实际零点处能否精确为零仍待判定。[三站读取的区间界](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-terminal-port-trial-energy.py) · [实际零点上的下密度](https://github.com/the-omega-institute/trureturing-experiments/blob/4c6373343aac016bf533de5bbb2ee3ff3da2bdc6/experiments/ch39-omega-research/replay/%E4%B8%89%E4%B8%AA%E7%AB%99%E4%BD%8D%E8%AF%BB%E5%8F%96%E4%BA%94%E8%8D%B7%E8%BD%BB%E5%B8%A6%E7%9A%84%E4%B8%8B%E7%95%8C%E4%B8%8E%E4%B8%89%E6%9D%A1%E5%8E%9F%E7%94%9F%E5%B0%84%E7%BA%BF%E9%A6%96%E7%AB%99%E7%9A%84%E7%9B%B2%E7%82%B9.md) · [三射线的不可见轻态](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-first-ray-light-zeros.py)
+这里用于消元的三条边界射线首站 $\{6,7,8\}$ 所起的作用不同。对每种荷和每个固定的允许软化参数，环面上都有一个相位背景，使某个非零轻态在这三站同时消失。固定 $\varepsilon>0$。在零软化下，轻带的谱隙保证连续性。每个盲点周围都有一个开方格，其中最小奇异值低于 $\varepsilon/2$。将方格取得足够小，软化量充分小时整个方格仍低于 $\varepsilon$。径向软化量随高度趋于零，因而双钟的无条件等分布给出各荷在任意 $\varepsilon>0$ 下的正下密度，正零点按重数计。对 $0<\varepsilon\le1$，所引证书给出下界 $(\varepsilon/(5\pi))^2$。实际零点处能否精确为零仍待判定。[三站读取的区间界](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-terminal-port-trial-energy.py) · [实际零点上的下密度](https://github.com/the-omega-institute/trureturing-experiments/blob/4c6373343aac016bf533de5bbb2ee3ff3da2bdc6/experiments/ch39-omega-research/replay/%E4%B8%89%E4%B8%AA%E7%AB%99%E4%BD%8D%E8%AF%BB%E5%8F%96%E4%BA%94%E8%8D%B7%E8%BD%BB%E5%B8%A6%E7%9A%84%E4%B8%8B%E7%95%8C%E4%B8%8E%E4%B8%89%E6%9D%A1%E5%8E%9F%E7%94%9F%E5%B0%84%E7%BA%BF%E9%A6%96%E7%AB%99%E7%9A%84%E7%9B%B2%E7%82%B9.md) · [三射线的不可见轻态](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-first-ray-light-zeros.py)
 
 将内部空间按特征标正交拆块，背后依托的是一条无 $\pi$、纯有理的群论正交骨架。正如[第二章](ch02-quaternion-clocks-and-haar-zeros.md)在双时钟球面哈尔积分中所确立的，偶次切比雪夫特征多项式 $E_m(\kappa)$ 在全阶上的正交归一性已在 Lean 内核中不依赖实数极限而严格冻结：
 
@@ -70,7 +70,11 @@ $$
 - 若按“最宽共同谱隙”原则自动切分，胜出的不是 $3$，而是 **$1$ 模**。
 - 若施加对称条件“三个循环特征标 $(1, \omega, \omega^2)$ 等重”，则 $1$ 与 $7$ 被排除，但 **$3$ 与 $15$ 同时幸存**。
 
-换言之，三代并非从单纯谱隙宽度中白捡来的，它需要一条额外机制把 $3$ 从 $\{3, 15\}$ 中真正钉死。同时，如何用有理滤波把轻带与重带从谱上干净分开，也藏着一条算术障碍：三条弦长 $d = 244, 724, 804$ 诱发的平方类 $-d(3468 - d)$ 两两线性独立，在黎曼猜想与兰道零点和公式下，实际零点的双钟相位在环面上联合等分布；荷二最低本征值的闭包因此覆盖连续区间 $[0.042, 2.035]$，于是任何固定的单变量有理函数若在全部正零点上精确湮灭轻带，就只能恒等于零。一旦允许有限精度误差，局势立刻逆转：**固定六次有理复合滤波**即可把整张双钟环面上的轻重两带平方质量提升误差压制到 **$1.26 \times 10^{-47}$** 以下。
+换言之，三代并非从单纯谱隙宽度中白捡来的，它需要一条额外机制把 $3$ 从 $\{3, 15\}$ 中真正钉死。
+
+有理滤波的算术障碍来自真实双钟的联合等分布。令 $\theta_d=\arccos(1-d/1734)$，$a=\theta_{724}-\theta_{244}$，$b=\theta_{804}-\theta_{244}$。三个相位 $e^{i\theta_d}$ 所在的平方类 $-d(3468-d)$ 分别含有仅见于各自一项的素因子 $13,181,37$，因此可以分别共轭。若 $ka+lb=0$，将关系指数化并对 $724$ 或 $804$ 的相位单独共轭，就会有 $e^{2ik\theta_{724}}=e^{2il\theta_{804}}=1$。这两个相位的有理迹 $2\cos\theta_d$ 均非整数，所以都不是单位根，故 $k=l=0$。Hlawka 的定理给出任意非零实数 $\alpha$ 下零点纵坐标的 $\{\alpha\gamma\}$ 无条件等分布（按重数计）。对每个非零整数对 $(k,l)$ 取 $\alpha=q(ka+lb)/(2\pi)$，多维 Weyl 判据便给出各非零荷的双钟相位在整个环面上等分布。[Ford 与 Zaharescu，*On the distribution of imaginary parts of zeros of the Riemann zeta function*（2005），§1](https://doi.org/10.1515/crll.2005.2005.579.145)
+
+荷二最低本征值的闭包因此覆盖连续区间 $[0.042, 2.035]$，于是任何固定的单变量有理函数若在全部正零点上精确湮灭轻带，就只能恒等于零。一旦允许有限精度误差，局势立刻逆转：**固定六次有理复合滤波**即可把整张双钟环面上的轻重两带平方质量提升误差压制到 **$1.26 \times 10^{-47}$** 以下。
 
 ::: {.figure src="ch07-three-generation-gap"}
 **十九点贝伦德球壳五荷共用的三模单步谱隙。** 在任意单位双钟相位与辐边减重 $\delta \le 10^{-8}$ 下，五种超荷扇区 $q \in \{1, 2, -3, -4, 6\}$ 的单步磁拉普拉斯前三轻模（青色，按三循环特征标 $1, \omega, \omega^2$ 各占一模）均严格低于 $8.685$，其余十六个重模均严格高于 $9.6$（空心圆圈标示严格界）；琥珀色虚线标出位于共享谱隙 $(8.685, 9.6)$ 内的公共截断 $9$。
