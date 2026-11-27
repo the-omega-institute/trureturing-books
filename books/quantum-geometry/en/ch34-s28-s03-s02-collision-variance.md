@@ -633,7 +633,25 @@ holds for all sufficiently large $Y$ and every real $t$.
 Suppose the count discrepancy is bounded from a fixed height $A\ge1$ onward. Center a closed interval of radius $r$ at an ordinate through $Y$. The sum of multiplicities of ordinates in the interval with $0<\gamma\le Y$ is at most $2cr\log Y+N(A)+2D+c$. The contribution through $A$ is at most $N(A)$. Bound the remaining mass by a difference of inclusive counts, shifting the lower cutoff left by $1/\log Y$ and clamping it at $A$ to include the left endpoint. Integrating over the Lorentz kernel’s superlevel intervals bounds each row by $2\pi c\log Y+N(A)+2D+c$. Bound each cosine by one and sum the rows with their multiplicities. The conclusion follows from $N(Y)/(Y\log Y)\to c$. The full proof is checked by the Lean kernel.
 :::
 
-The counting theorem allows upper coefficients arbitrarily close to $2\pi c^2$ from above. The critical collision theorem requires a fixed coefficient strictly below $2\pi c^2$ on the long bands for the actual $\zeta$ zeros.
+Write $M(Y)=cY(\log(cY)-1)$. Sublogarithmic error in the count suffices for the leading coefficient. The spectral estimate and the convention at zero ordinates enter at different steps.
+
+::: {.theorem #thm-ch34-montgomery-sublog-count title="Sublogarithmic count error controls the pair sum" lean="D5/S3/Analytic/Oscillation/MontgomerySublogCount.pairSum_le_of_sublog_discrepancy"}
+Use the spectrum, inclusive count and ordered pair sum above. If $(N(Y)-M(Y))/\log Y\to0$, then for every $\varepsilon>0$, all sufficiently large $Y$ and every real $t$ satisfy $|G_Y(t)|\le(2\pi c^2+\varepsilon)Y(\log Y)^2$.
+:::
+
+::: proof
+For each $\delta>0$, choose $A$ large enough that the count error at either endpoint $x$ with $A\le x\le Y$ is bounded by $\delta\log Y$. The finite-cutoff Lorentz row estimate then incurs a total endpoint error of at most $2\delta\log Y$. Apply the triangle inequality and sum over the $N(Y)$ rows counted with multiplicity. Since $N(Y)/(Y\log Y)\to c$, a sufficiently small $\delta$ gives the bound. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch34-inclusive-zeta-count-envelope title="The inclusive count bound at zero ordinates" lean="D5/S3/Weil/ZetaRvm/InclusiveCountLimit.abs_ncount_sub_le_of_goodHeight"}
+Let $N_\zeta(T)$ count the nontrivial zeros with $0<\operatorname{Im}\rho\le T$, including their analytic multiplicities. Suppose $M$ and $E$ are right-continuous at every $T\ge T_0$. If $|N_\zeta(t)-M(t)|\le E(t)$ at each $t\ge T_0$ that is not a zero ordinate, the same inequality holds at every $T\ge T_0$.
+:::
+
+::: proof
+There are only finitely many zero ordinates in $(T,T+1]$. In a short open interval immediately to the right of $T$, there are no zero ordinates and the count equals $N_\zeta(T)$. Taking the right limit preserves the bound and includes the full multiplicity at the cutoff. The full proof is checked by the Lean kernel.
+:::
+
+**Manual derivation.** Under RH, equation (1) and Theorem 2 of Carneiro, Chandee and Milinovich give $|N_\zeta(T)-M(T)|\le C\log T/\log\log T$ at sufficiently large heights away from zero ordinates, for some constant $C$. This envelope is continuous at sufficiently large heights, so the right-limit theorem extends it to every sufficiently large inclusive cutoff. The actual ζ ordinates therefore satisfy the sublogarithmic condition, and the uniform pair-sum bound applies. The critical collision theorem still requires a fixed coefficient strictly below $2\pi c^2$ on the long bands. [Equation (1) and Theorem 2](https://arxiv.org/abs/1309.1526)
 
 ### Commensurate spectra with the same unit-band profile
 

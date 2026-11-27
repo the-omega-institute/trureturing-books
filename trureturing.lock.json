@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "27dbcfe75e61c86e48339c7259e71bf4cfd755be",
-  "pinned_at": "2026-11-27T17:22:29Z",
+  "commit": "1a42da73855baf7244c128546dbc0fe6f3cb3b00",
+  "pinned_at": "2026-11-27T18:00:30Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1106,9 +1106,17 @@
       "module": "D5/S3/Analytic/Oscillation/MontgomeryCountUpper",
       "name": "D5.S3.Analytic.Oscillation.MontgomeryCountUpper.pairSum_le_of_bounded_discrepancy",
       "kind": "theorem",
-      "statement_id": "sha256:7574720839e8f4f960a2f2f275be1ada4581bee9d0745703831706f37e19c190",
-      "line": 183,
+      "statement_id": "sha256:aaf6e407a8696d8b3896181ab4a952aa36aef102dc4cd4457da7ed3e617e7ed5",
+      "line": 187,
       "signature": "theorem pairSum_le_of_bounded_discrepancy (S : Spectrum) {D : ℝ} (hcount : ∀ᶠ Y : ℝ in atTop, |(S.N Y : ℝ) - mainTerm Y| ≤ D) {ε : ℝ} (hε : 0 < ε) : ∀ᶠ Y : ℝ in atTop, ∀ t : ℝ, pairSum S Y t ≤ (2 * Real.pi * c ^ 2 + ε) * (Y * Real.log Y ^ 2)"
+    },
+    "D5/S3/Analytic/Oscillation/MontgomerySublogCount.pairSum_le_of_sublog_discrepancy": {
+      "module": "D5/S3/Analytic/Oscillation/MontgomerySublogCount",
+      "name": "D5.S3.Analytic.Oscillation.MontgomerySublogCount.pairSum_le_of_sublog_discrepancy",
+      "kind": "theorem",
+      "statement_id": "sha256:56d9c71357ef6b056e68314d6ab9c650bb47b661d2a4b2fd8763fccb3ec39446",
+      "line": 70,
+      "signature": "theorem pairSum_le_of_sublog_discrepancy (S : Spectrum) (err : Tendsto (fun Y : ℝ => ((S.N Y : ℝ) - countMain C Y) / Real.log Y) atTop (𝓝 0)) {ε : ℝ} (hε : 0 < ε) : ∀ᶠ Y : ℝ in atTop, ∀ t : ℝ, |pairSum S Y t| ≤ (2 * Real.pi * c ^ 2 + ε) * (Y * Real.log Y ^ 2)"
     },
     "D5/S3/Analytic/Oscillation/SpectrumCommensurateAlignment.exists_logarithmic_full_alignment": {
       "module": "D5/S3/Analytic/Oscillation/SpectrumCommensurateAlignment",
@@ -20404,6 +20412,19 @@
       "statement_id": "sha256:6d883d7a50f0cc2526c699672200d7984a183c39653a8e71226e8724a7c8fe04",
       "line": 67,
       "signature": "lemma completedRiemannZeta_ne_zero_of_re_nonpos {s : ℂ} (hs : s.re ≤ 0) : completedRiemannZeta s ≠ 0"
+    },
+    "D5/S3/Weil/ZetaRvm/InclusiveCountLimit.abs_ncount_sub_le_of_goodHeight": {
+      "module": "D5/S3/Weil/ZetaRvm/InclusiveCountLimit",
+      "name": "D5.S3.Weil.ZetaRvm.InclusiveCountLimit.abs_ncount_sub_le_of_goodHeight",
+      "kind": "theorem",
+      "statement_id": "sha256:c5b50f00d5c9d3423de49e4e29cc57bd1d21c5adaa04dabd1c92385f6f2bb757",
+      "line": 55,
+      "signature": "theorem abs_ncount_sub_le_of_goodHeight {T₀ : ℝ} {M E : ℝ → ℝ} (hM : ∀ T ≥ T₀, ContinuousWithinAt M (Ioi T) T) (hE : ∀ T ≥ T₀, ContinuousWithinAt E (Ioi T) T) (hbound : ∀ T ≥ T₀, GoodHeight T → |(Ncount 0 T : ℝ) - M T| ≤ E T) {T : ℝ} (hT : T₀ ≤ T) : |(Ncount 0 T : ℝ) - M T| ≤ E T",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Zeros/ActualZeroGeometry.rh_iff_nontrivial_zeros_on_line": {
       "module": "D5/S3/Zeros/ActualZeroGeometry",
