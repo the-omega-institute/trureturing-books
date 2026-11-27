@@ -458,8 +458,8 @@ SCENES.beats = S => {
       dot(x, y, 12, 'v', sa);
       const p = FI.spin[i], cs = Math.cos(-Math.PI / 2 + i * TAU / 6);
       const al = cs > 0.3 ? 'left' : cs < -0.3 ? 'right' : 'center';
-      const lx = al === 'left' ? x + 24 : al === 'right' ? x - 24 : x, ly = al === 'center' ? (i === 0 ? y - 22 : y + 40) : y + 8;
-      quad(p, lx, ly, { size: 20, align: al, a: sa, c: i === 3 ? C.mag : C.white });
+      const lx = al === 'left' ? x + 18 : al === 'right' ? x - 18 : x, ly = al === 'center' ? (i === 0 ? y - 22 : y + 40) : y + 8;
+      quad(p, lx, ly, { size: 18, align: al, a: sa, c: i === 3 ? C.mag : C.white });
     }
     const b3 = sa * Q(S, 3, 'six beats', 0.6);
     txt('beat 3:', c2[0], c2[1] - 8, { size: 22, fam: F.math, w: 700, align: 'center', c: C.mag, a: b3 });
@@ -559,7 +559,7 @@ SCENES.shadow = S => {
   tag(1760, 450, 'CLASSICAL · Mathlib', C.dim, la, 'right');
   const r2 = a * at(S, 2, 0.6);
   panel(960, 530, 820, 300, r2, cl === 2 ? C.now : C.cyan, 'INTEGER TERNIONS · 整三元数 · RANK 10');
-  txt('κ_proj = ⟨a, b⟩² / (|a|² |b|²)', 1000, 610, { size: 32, fam: F.math, w: 700, c: C.white, a: r2 });
+  txt('κₚᵣₒⱼ = ⟨a, b⟩² / (|a|² |b|²)', 1000, 610, { size: 32, fam: F.math, w: 700, c: C.white, a: r2 });
   txt('feature rank 10 · 特征秩 10', 1000, 662, { size: 24, fam: F.zh, w: 700, c: C.white, a: a * Q(S, 2, 'rank ten', 0.5) });
   txt('+a and −a: one ray · 对径点粘合', 1000, 708, { size: 24, fam: F.zh, w: 700, c: C.white, a: a * Q(S, 2, 'antipode', 0.5) });
   txt('the chapter\'s hand derivation and reading · 本章手工推导与诠释', 1000, 790, { size: 18, fam: F.zh, w: 700, c: C.argued, a: r2 });
@@ -582,10 +582,10 @@ FILM.poster = () => {
   txt(DATA.film.title_zh, W / 2, 250, { size: 92, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('FOUR INTEGERS, ONE TURN', W / 2, 340, { size: 52, fam: F.orb, w: 900, align: 'center', c: C.cyan, ab: 2, ls: 6 });
   txt('(1 + i)(1 + j)  ≠  (1 + j)(1 + i)', W / 2, 430, { size: 40, fam: F.math, w: 700, align: 'center', c: C.mag });
-  frame(adMat(FI.phqh), 640, 640, 150, 1, 1);
-  frame(adMat(FI.qhph), 1280, 640, 150, 1, 1);
-  quad(FI.phqh, 640, 840, { size: 42, align: 'center', hi: { 3: C.now } });
-  quad(FI.qhph, 1280, 840, { size: 42, align: 'center', hi: { 3: C.now } });
+  frame(adMat(FI.phqh), 640, 625, 140, 1, 1);
+  frame(adMat(FI.qhph), 1280, 625, 140, 1, 1);
+  quad(FI.phqh, 640, 870, { size: 42, align: 'center', hi: { 3: C.now } });
+  quad(FI.qhph, 1280, 870, { size: 42, align: 'center', hi: { 3: C.now } });
   bloom(0.5);
   txt(`${DATA.book.code} · FILM`, W / 2, 940, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 8 });
   txt(`${DATA.book.title.zh} · ${DATA.book.title.en}`, W / 2, 1010, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: 0.9 });
