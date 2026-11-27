@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "096c8157da047e40d17d1502e89c2504bd3f27b2",
-  "pinned_at": "2026-11-27T07:23:04Z",
+  "commit": "3bcb87c71284049db343d04529f5d86c0669f2f8",
+  "pinned_at": "2026-11-27T09:46:02Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -11937,6 +11937,58 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondEq71Trace4D.eq71_trace_eq_hsSq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondEq71Trace4D",
+      "name": "NullConeGravity.eq71_trace_eq_hsSq",
+      "kind": "theorem",
+      "statement_id": "sha256:873a72525701c67a6f1e6451cf196405d30f3eecdb08581952d0486b548bd24f",
+      "line": 314,
+      "signature": "theorem eq71_trace_eq_hsSq (M : ℝ) (hM : 0 < M) : ∃ hd : IsHilbertSchmidt (eq71Delta V M hM), ∃ ht : IsTraceClass (eq71Delta V M hM * eq71Delta V M hM), trace _ ht = (hsSq (eq71Delta V M hM) hd : ℂ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondEq71Trace4D.mumSq_le": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondEq71Trace4D",
+      "name": "NullConeGravity.mumSq_le",
+      "kind": "theorem",
+      "statement_id": "sha256:873a72525701c67a6f1e6451cf196405d30f3eecdb08581952d0486b548bd24f",
+      "line": 96,
+      "signature": "theorem mumSq_le (M : ℝ) (hM : 0 < M) (f : V) : mumSq V M hM f ≤ ‖nullN M hM‖ * mu0Sq V f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondEq71Trace4D.nullDiamond_eq71_4D": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondEq71Trace4D",
+      "name": "NullConeGravity.nullDiamond_eq71_4D",
+      "kind": "theorem",
+      "statement_id": "sha256:873a72525701c67a6f1e6451cf196405d30f3eecdb08581952d0486b548bd24f",
+      "line": 286,
+      "signature": "theorem nullDiamond_eq71_4D (m L : ℝ) (hm : 0 < m) (hL : 0 < L) : let M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondEq71Trace4D.nullN_coercive": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondEq71Trace4D",
+      "name": "NullConeGravity.nullN_coercive",
+      "kind": "theorem",
+      "statement_id": "sha256:873a72525701c67a6f1e6451cf196405d30f3eecdb08581952d0486b548bd24f",
+      "line": 36,
+      "signature": "theorem nullN_coercive (M : ℝ) (hM : 0 < M) : ∃ c : ℝ, 0 < c ∧ c • (1 : H4D →L[ℂ] H4D) ≤ nullN M hM",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS.integralKernelOp_adjoint": {
       "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS",
       "name": "NullConeGravity.integralKernelOp_adjoint",
@@ -12288,6 +12340,162 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPositivity4D.nullB_nonneg": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPositivity4D",
+      "name": "NullConeGravity.nullB_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:6f7e82f4148f6fbd35078393c3cfa59cc1ae9392208a6773381db4afa79c8ae3",
+      "line": 25,
+      "signature": "theorem nullB_nonneg {M : ℝ} (hM : 0 < M) : 0 ≤ nullA + nullT M hM",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPositivity4D.nullN_sub_J_nonneg": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPositivity4D",
+      "name": "NullConeGravity.nullN_sub_J_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:6f7e82f4148f6fbd35078393c3cfa59cc1ae9392208a6773381db4afa79c8ae3",
+      "line": 44,
+      "signature": "theorem nullN_sub_J_nonneg {M : ℝ} (hM : 0 < M) : 0 ≤ (1 : H4D →L[ℂ] H4D) + nullT M hM - nullJ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D.modularProfile_apply": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D",
+      "name": "NullConeGravity.modularProfile_apply",
+      "kind": "theorem",
+      "statement_id": "sha256:f7382dd745db04fac30b49e659c4f3d27c5263a9b09542fcb5fc11ef78fcd5f5",
+      "line": 633,
+      "signature": "theorem modularProfile_apply (F : ConeProfile) (n : Sphere4D) (s : ℝ) : modularProfile F n s = profileValue F (affineRadius s) n",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D.modularProfile_compact": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D",
+      "name": "NullConeGravity.modularProfile_compact",
+      "kind": "theorem",
+      "statement_id": "sha256:f7382dd745db04fac30b49e659c4f3d27c5263a9b09542fcb5fc11ef78fcd5f5",
+      "line": 537,
+      "signature": "theorem modularProfile_compact (F : ConeProfile) (n : Sphere4D) : HasCompactSupport (modularProfile F n)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D.profileEmbed_dense": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D",
+      "name": "NullConeGravity.profileEmbed_dense",
+      "kind": "theorem",
+      "statement_id": "sha256:f7382dd745db04fac30b49e659c4f3d27c5263a9b09542fcb5fc11ef78fcd5f5",
+      "line": 466,
+      "signature": "theorem profileEmbed_dense : DenseRange profileEmbed",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D.profileFourier_modular": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D",
+      "name": "NullConeGravity.profileFourier_modular",
+      "kind": "theorem",
+      "statement_id": "sha256:f7382dd745db04fac30b49e659c4f3d27c5263a9b09542fcb5fc11ef78fcd5f5",
+      "line": 546,
+      "signature": "theorem profileFourier_modular (F : ConeProfile) (ν : ℝ) (n : Sphere4D) : profileFourier F (ν, n) = (Real.sqrt frequencyScale : ℂ)⁻¹ * 𝓕 (modularProfile F n) (frequencyScale⁻¹ * ν)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D.profileValue_hasDerivAt": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D",
+      "name": "NullConeGravity.profileValue_hasDerivAt",
+      "kind": "theorem",
+      "statement_id": "sha256:f7382dd745db04fac30b49e659c4f3d27c5263a9b09542fcb5fc11ef78fcd5f5",
+      "line": 642,
+      "signature": "theorem profileValue_hasDerivAt (F : ConeProfile) (u : ℝ) (n : Sphere4D) : HasDerivAt (fun v => profileValue F v n) (profileDeriv F u n) u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D.profile_log_fourier_symbol": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D",
+      "name": "NullConeGravity.profile_log_fourier_symbol",
+      "kind": "theorem",
+      "statement_id": "sha256:f7382dd745db04fac30b49e659c4f3d27c5263a9b09542fcb5fc11ef78fcd5f5",
+      "line": 226,
+      "signature": "theorem profile_log_fourier_symbol (ν : ℝ) : 2 + (ν ^ 2 / Real.pi) * (∫ s : ℝ, Complex.exp (-Complex.I * (ν : ℂ) * s) * Omega.logTail s).re - ν = wgt ν * a ν",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D.profile_log_series_symbol": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D",
+      "name": "NullConeGravity.profile_log_series_symbol",
+      "kind": "theorem",
+      "statement_id": "sha256:f7382dd745db04fac30b49e659c4f3d27c5263a9b09542fcb5fc11ef78fcd5f5",
+      "line": 214,
+      "signature": "theorem profile_log_series_symbol (ν : ℝ) : 2 + 4 * ν ^ 2 * (∑' k : ℕ, 1 / ((2 * Real.pi * ((k : ℝ) + 1)) ^ 2 + ν ^ 2)) - ν = wgt ν * a ν",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D.profile_modular_log_pairing": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D",
+      "name": "NullConeGravity.profile_modular_log_pairing",
+      "kind": "theorem",
+      "statement_id": "sha256:f7382dd745db04fac30b49e659c4f3d27c5263a9b09542fcb5fc11ef78fcd5f5",
+      "line": 577,
+      "signature": "theorem profile_modular_log_pairing (F : ConeProfile) : (∫ n : Sphere4D, Omega.modularLogPairing (modularProfile F n) (modularProfile F n) ∂sphereMeasure) = ⟪profileEmbed F, nullA (profileEmbed F)⟫_ℂ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D.profile_nullA_pairing": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D",
+      "name": "NullConeGravity.profile_nullA_pairing",
+      "kind": "theorem",
+      "statement_id": "sha256:f7382dd745db04fac30b49e659c4f3d27c5263a9b09542fcb5fc11ef78fcd5f5",
+      "line": 527,
+      "signature": "theorem profile_nullA_pairing (F : ConeProfile) : ⟪profileEmbed F, nullA (profileEmbed F)⟫_ℂ = ∫ p, ((wgt p.1 - p.1 : ℝ) : ℂ) * (‖profileFourier F p‖ ^ 2 : ℝ) ∂phaseMeasure",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D.profile_nullT_pairing": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondProfileFourier4D",
+      "name": "NullConeGravity.profile_nullT_pairing",
+      "kind": "theorem",
+      "statement_id": "sha256:f7382dd745db04fac30b49e659c4f3d27c5263a9b09542fcb5fc11ef78fcd5f5",
+      "line": 612,
+      "signature": "theorem profile_nullT_pairing {M : ℝ} (hM : 0 < M) (F : ConeProfile) : ⟪profileEmbed F, nullT M hM (profileEmbed F)⟫_ℂ = ∫ p : Phase4D × Phase4D, star (profileFourier F p.1) * fourierG M p.1.1 p.2.1 (sphereDot p.1.2 p.2.2) * profileFourier F p.2 ∂(phaseMeasure.prod phaseMeasure)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSchwinger4D.correction_eq_besselK": {
       "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSchwinger4D",
       "name": "NullConeGravity.correction_eq_besselK",
@@ -12386,6 +12594,84 @@
       "statement_id": "sha256:4e273ff007b39306f75524dfc718221820e77c7181b9bd60417b7e9b9f8db8f6",
       "line": 64,
       "signature": "theorem sphere_measure_univ : sphereMeasure univ = ENNReal.ofReal (4 * Real.pi)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary4D.bulkU_zero_cap": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary4D",
+      "name": "NullConeGravity.bulkU_zero_cap",
+      "kind": "theorem",
+      "statement_id": "sha256:1857da36f864bf7430bed55ca110dc22bb8b70596c1dad82f0f026270fb59335",
+      "line": 318,
+      "signature": "theorem bulkU_zero_cap {ε : ℝ} (hε : 0 < ε) (p q : Phase4D) (hu : 0 < p.1) (hv : 0 < q.1) : (4 * (p.1 : ℂ) * (q.1 : ℂ)) * bulkU 0 (coneTime ε (p,q)) (coneDisplacement (p,q)) = (1 / (2 * (Real.pi : ℂ) ^ 2)) * ((1 - (sphereDot p.2 q.2 : ℂ)) + Omega.capShift ε p.1 q.1)⁻¹",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary4D.massive_boundary_limit": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary4D",
+      "name": "NullConeGravity.massive_boundary_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:1857da36f864bf7430bed55ca110dc22bb8b70596c1dad82f0f026270fb59335",
+      "line": 632,
+      "signature": "theorem massive_boundary_limit {M : ℝ} (hM : 0 < M) (F : ConeProfile) : Tendsto (fun ε : ℝ => regulatedShellQuad M ε F) (𝓝[>] (0 : ℝ)) (𝓝 (⟪profileEmbed F, (nullA + nullT M hM) (profileEmbed F)⟫_ℂ).re)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary4D.massless_boundary_limit": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary4D",
+      "name": "NullConeGravity.massless_boundary_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:1857da36f864bf7430bed55ca110dc22bb8b70596c1dad82f0f026270fb59335",
+      "line": 409,
+      "signature": "theorem massless_boundary_limit (F : ConeProfile) : Tendsto (fun ε : ℝ => regulatedShellQuad 0 ε F) (𝓝[>] (0 : ℝ)) (𝓝 (⟪profileEmbed F, nullA (profileEmbed F)⟫_ℂ).re)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary4D.regulatedShellQuad_difference_limit": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary4D",
+      "name": "NullConeGravity.regulatedShellQuad_difference_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:1857da36f864bf7430bed55ca110dc22bb8b70596c1dad82f0f026270fb59335",
+      "line": 294,
+      "signature": "theorem regulatedShellQuad_difference_limit {M : ℝ} (hM : 0 < M) (F : ConeProfile) : Tendsto (fun ε : ℝ => regulatedShellQuad M ε F - regulatedShellQuad 0 ε F) (𝓝[>] (0 : ℝ)) (𝓝 (4 * ∫ z, differenceIntegrand M 0 F z ∂(coneMeasure.prod coneMeasure)).re)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary4D.regulatedShellQuad_eq_bulk": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary4D",
+      "name": "NullConeGravity.regulatedShellQuad_eq_bulk",
+      "kind": "theorem",
+      "statement_id": "sha256:1857da36f864bf7430bed55ca110dc22bb8b70596c1dad82f0f026270fb59335",
+      "line": 166,
+      "signature": "theorem regulatedShellQuad_eq_bulk (M : ℝ) {ε : ℝ} (hε : 0 < ε) (F : ConeProfile) : regulatedShellQuad M ε F = (4 * ∫ z : Phase4D × Phase4D, star (derivativeWeight F z.1) * derivativeWeight F z.2 * bulkU M ((ε : ℂ) + Complex.I * ((z.1.1 - z.2.1 : ℝ) : ℂ)) (z.1.1 • (z.1.2 : E3) - z.2.1 • (z.2.2 : E3)) ∂(coneMeasure.prod coneMeasure)).re",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary4D.regulatedShellQuad_nonneg": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary4D",
+      "name": "NullConeGravity.regulatedShellQuad_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:1857da36f864bf7430bed55ca110dc22bb8b70596c1dad82f0f026270fb59335",
+      "line": 48,
+      "signature": "theorem regulatedShellQuad_nonneg (M ε : ℝ) (F : ConeProfile) : 0 ≤ regulatedShellQuad M ε F",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
