@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "38fef7f68e3273f4500ee18f57437a5aaf26cc73",
-  "pinned_at": "2026-11-27T13:10:02Z",
+  "commit": "0113982dde3298c2765203c624eec2c6ff54c2ae",
+  "pinned_at": "2026-11-27T13:47:20Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -11144,6 +11144,383 @@
       "line": 270,
       "signature": "theorem exists_unitaryRep_ker_subset {G : Type*} [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] {U : Set G} (hU : U ∈ 𝓝 (1 : G)) : ∃ (n : ℕ) (ρ : G →ₜ* Matrix.unitaryGroup (Fin n) ℂ), ∀ g, ρ g = 1 → g ∈ U"
     },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRAbsoluteValueHS.opAbs_sub": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRAbsoluteValueHS",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRAbsoluteValueHS.opAbs_sub",
+      "kind": "theorem",
+      "statement_id": "sha256:89c923e002dcc3ee1fcc99af47926e90ff8aa85a94f8b7b4187ff9628b0523f3",
+      "line": 468,
+      "signature": "theorem opAbs_sub {Y₂ Y₁ : H →L[ℂ] H} (h : IsHilbertSchmidt (Y₂ - Y₁)) : ∃ h' : IsHilbertSchmidt (opAbs Y₂ - opAbs Y₁), hsSq _ h' ≤ 2 * hsSq _ h",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRAbsoluteValueHS.opAbs_sub_selfAdjoint": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRAbsoluteValueHS",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRAbsoluteValueHS.opAbs_sub_selfAdjoint",
+      "kind": "theorem",
+      "statement_id": "sha256:89c923e002dcc3ee1fcc99af47926e90ff8aa85a94f8b7b4187ff9628b0523f3",
+      "line": 242,
+      "signature": "theorem opAbs_sub_selfAdjoint {U V : H →L[ℂ] H} (hU : IsSelfAdjoint U) (hV : IsSelfAdjoint V) (h : IsHilbertSchmidt (U - V)) : ∃ h' : IsHilbertSchmidt (opAbs U - opAbs V), hsSq _ h' ≤ hsSq _ h",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRAbsoluteValueHS.opAbs_sub_symmetric": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRAbsoluteValueHS",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRAbsoluteValueHS.opAbs_sub_symmetric",
+      "kind": "theorem",
+      "statement_id": "sha256:89c923e002dcc3ee1fcc99af47926e90ff8aa85a94f8b7b4187ff9628b0523f3",
+      "line": 438,
+      "signature": "theorem opAbs_sub_symmetric {Y₂ Y₁ : H →L[ℂ] H} (h : IsHilbertSchmidt (Y₂ - Y₁)) : ∃ (h₁ : IsHilbertSchmidt (opAbs Y₂ - opAbs Y₁)) (h₂ : IsHilbertSchmidt (opAbs Y₂.adjoint - opAbs Y₁.adjoint)), hsSq _ h₁ + hsSq _ h₂ ≤ 2 * hsSq _ h",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRConjugation.real_imag_decomposition": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRConjugation",
+      "name": "NullConeGravity.real_imag_decomposition",
+      "kind": "theorem",
+      "statement_id": "sha256:548b7b38662964cb7944867a33465500fd688dc6e045b57e3912c9f6c650869f",
+      "line": 80,
+      "signature": "theorem real_imag_decomposition (h : H) : h = realPart Γ h + Complex.I • imagPart Γ h",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRConjugation.restrictReal_hasSum_hsSq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRConjugation",
+      "name": "NullConeGravity.restrictReal_hasSum_hsSq",
+      "kind": "theorem",
+      "statement_id": "sha256:548b7b38662964cb7944867a33465500fd688dc6e045b57e3912c9f6c650869f",
+      "line": 356,
+      "signature": "theorem restrictReal_hasSum_hsSq (T : H →L[ℂ] H) (hT : ∀ h, Γ.toLinearIsometryEquiv (T h) = T (Γ.toLinearIsometryEquiv h)) (hHS : HilbertSchmidt.IsHilbertSchmidt T) (b : HilbertBasis ι ℝ (realSubspace Γ)) : HasSum (fun i => ‖restrictReal Γ T hT (b i)‖ ^ 2) (hsSq T hHS)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRConjugation.restrictReal_isCompact": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRConjugation",
+      "name": "NullConeGravity.restrictReal_isCompact",
+      "kind": "theorem",
+      "statement_id": "sha256:548b7b38662964cb7944867a33465500fd688dc6e045b57e3912c9f6c650869f",
+      "line": 387,
+      "signature": "theorem restrictReal_isCompact (T : H →L[ℂ] H) (hT : ∀ h, Γ.toLinearIsometryEquiv (T h) = T (Γ.toLinearIsometryEquiv h)) (hHS : HilbertSchmidt.IsHilbertSchmidt T) : IsCompactOperator (restrictReal Γ T hT)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockOccupation.fockExponential_dense_span_of_dense_real": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockOccupation",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockOccupation.fockExponential_dense_span_of_dense_real",
+      "kind": "theorem",
+      "statement_id": "sha256:208dbbcc6c82d5a7d89a3fc8209318e88c1d15658fbe135059051fb5f9023b45",
+      "line": 544,
+      "signature": "theorem fockExponential_dense_span_of_dense_real (b : HilbertBasis I ℂ H) (E : Submodule ℝ H) (hE : Dense (Submodule.span ℂ (E : Set H) : Set H)) : Dense (Submodule.span ℂ (fockExponential b '' (E : Set H)) : Set (BosonFock I))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockOccupation.fockExponential_inner": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockOccupation",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockOccupation.fockExponential_inner",
+      "kind": "theorem",
+      "statement_id": "sha256:208dbbcc6c82d5a7d89a3fc8209318e88c1d15658fbe135059051fb5f9023b45",
+      "line": 259,
+      "signature": "theorem fockExponential_inner (b : HilbertBasis I ℂ H) (z w : H) : ⟪fockExponential b z, fockExponential b w⟫_ℂ = Complex.exp ⟪z, w⟫_ℂ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockWeyl.fockBasisChange_weyl": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockWeyl",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockWeyl.fockBasisChange_weyl",
+      "kind": "theorem",
+      "statement_id": "sha256:990bb854aecf974ba705485dafa89c4e2782713468a2005d98ec4cb7a62745ac",
+      "line": 216,
+      "signature": "theorem fockBasisChange_weyl (b₁ : HilbertBasis I₁ ℂ H) (b₂ : HilbertBasis I₂ ℂ H) (z : H) (ψ : BosonFock I₁) : fockBasisChange b₁ b₂ (fockWeyl b₁ z ψ) = fockWeyl b₂ z (fockBasisChange b₁ b₂ ψ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockWeyl.fockSumSplit_weyl": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockWeyl",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockWeyl.fockSumSplit_weyl",
+      "kind": "theorem",
+      "statement_id": "sha256:990bb854aecf974ba705485dafa89c4e2782713468a2005d98ec4cb7a62745ac",
+      "line": 375,
+      "signature": "theorem fockSumSplit_weyl (b : HilbertBasis (I₁ ⊕ I₂) ℂ K) (b₁ : HilbertBasis I₁ ℂ K₁) (z : K) (hz : ∀ j : I₂, b.repr z (Sum.inr j) = 0) (ψ : BosonFock (I₁ ⊕ I₂)) (β : Occupation I₂) : fockSumSplit I₁ I₂ (fockWeyl b z ψ) β = fockWeyl b₁ (fockOneParticleLeft b b₁ z) (fockSumSplit I₁ I₂ ψ β)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockWeyl.fockWeyl_mul": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockWeyl",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockWeyl.fockWeyl_mul",
+      "kind": "theorem",
+      "statement_id": "sha256:990bb854aecf974ba705485dafa89c4e2782713468a2005d98ec4cb7a62745ac",
+      "line": 143,
+      "signature": "theorem fockWeyl_mul (b : HilbertBasis I ℂ H) (z w : H) (ψ : BosonFock I) : fockWeyl b z (fockWeyl b w ψ) = Complex.exp (-(Complex.I * (⟪z, w⟫_ℂ).im)) • fockWeyl b (z + w) ψ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockWeyl.fockWeyl_vacuum_inner": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockWeyl",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockWeyl.fockWeyl_vacuum_inner",
+      "kind": "theorem",
+      "statement_id": "sha256:990bb854aecf974ba705485dafa89c4e2782713468a2005d98ec4cb7a62745ac",
+      "line": 169,
+      "signature": "theorem fockWeyl_vacuum_inner (b : HilbertBasis I ℂ H) (z : H) : ⟪fockVacuum I, fockWeyl b z (fockVacuum I)⟫_ℂ = Complex.exp (-(‖z‖ : ℂ) ^ 2 / 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRGaussianExtension.commonPureExtension": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRGaussianExtension",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRGaussianExtension.commonPureExtension",
+      "kind": "theorem",
+      "statement_id": "sha256:4687de4e1b8c69890cad04b83c873d95a6316b695293862361f97899e9ecc9e8",
+      "line": 569,
+      "signature": "theorem commonPureExtension [TopologicalSpace.SeparableSpace H] (Γ : RealConjugation H) {Q R : Op} (hQ : 0 ≤ Q) (hker : Q.ker = ⊥) (hq : IsReal Γ Q) (hR : R.adjoint = -R) (hr : IsReal Γ R) (h₁ : 0 ≤ 1 - Complex.I • R) (h₂ : 0 ≤ Q - Complex.I • R) (hHS : IsHilbertSchmidt (CFC.sqrt (Q - Complex.I • R) - CFC.sqrt (1 - Complex.I • R))) : let D₁",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRGaussianExtension.covariance_coercive": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRGaussianExtension",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRGaussianExtension.covariance_coercive",
+      "kind": "theorem",
+      "statement_id": "sha256:4687de4e1b8c69890cad04b83c873d95a6316b695293862361f97899e9ecc9e8",
+      "line": 140,
+      "signature": "theorem covariance_coercive {Q R : Op} (hQ : 0 ≤ Q) (hker : Q.ker = ⊥) (h₁ : 0 ≤ 1 - Complex.I • R) (h₂ : 0 ≤ Q - Complex.I • R) (h : IsHilbertSchmidt (CFC.sqrt (Q - Complex.I • R) - CFC.sqrt (1 - Complex.I • R))) : IsHilbertSchmidt (Q - 1) ∧ (∃ d : ℝ, 0 < d ∧ d • (1 : Op) ≤ Q) ∧ IsUnit Q ∧ IsUnit (CFC.sqrt Q) ∧ IsHilbertSchmidt (CFC.sqrt Q - 1) ∧ IsHilbertSchmidt ((CFC.sqrt Q)⁻¹ʳ - 1)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRGaussianExtension.defectRoot_sub_hs": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRGaussianExtension",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRGaussianExtension.defectRoot_sub_hs",
+      "kind": "theorem",
+      "statement_id": "sha256:4687de4e1b8c69890cad04b83c873d95a6316b695293862361f97899e9ecc9e8",
+      "line": 259,
+      "signature": "theorem defectRoot_sub_hs (Γ : RealConjugation H) {Q R : Op} (hQ : 0 ≤ Q) (hU : IsUnit (CFC.sqrt Q)) (hq : IsReal Γ Q) (hR : R.adjoint = -R) (hr : IsReal Γ R) (h₁ : 0 ≤ 1 - Complex.I • R) (h₂ : 0 ≤ Q - Complex.I • R) (hA : IsHilbertSchmidt ((CFC.sqrt Q)⁻¹ʳ - 1)) (h : IsHilbertSchmidt (CFC.sqrt (Q - Complex.I • R) - CFC.sqrt (1 - Complex.I • R))) : IsHilbertSchmidt (defectRoot Q R - defectRoot 1 R)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRGaussianExtension.doubleCovariance_properties": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRGaussianExtension",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRGaussianExtension.doubleCovariance_properties",
+      "kind": "theorem",
+      "statement_id": "sha256:4687de4e1b8c69890cad04b83c873d95a6316b695293862361f97899e9ecc9e8",
+      "line": 309,
+      "signature": "theorem doubleCovariance_properties (Γ : RealConjugation H) {Q R : Op} (hQ : 0 ≤ Q) (hU : IsUnit (CFC.sqrt Q)) (hq : IsReal Γ Q) (hR : R.adjoint = -R) (hr : IsReal Γ R) (h : 0 ≤ Q - Complex.I • R) : IsReal Γ (doubleCovariance Q R) ∧ Q ≤ doubleCovariance Q R ∧ doubleCovariance Q R ≤ (2 : ℝ) • Q ∧ IsUnit (doubleCovariance Q R) ∧ (1 / 2 : ℝ) • (doubleCovariance Q R - R * (doubleCovariance Q R)⁻¹ʳ * R) = Q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRGaussianExtension.pureExtension_inner": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRGaussianExtension",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRGaussianExtension.pureExtension_inner",
+      "kind": "theorem",
+      "statement_id": "sha256:4687de4e1b8c69890cad04b83c873d95a6316b695293862361f97899e9ecc9e8",
+      "line": 410,
+      "signature": "theorem pureExtension_inner (D Q R : H →L[ℂ] H) (hD : 0 ≤ D) (hu : IsUnit D) (hd : ∀ x, J (D x) = D (J x)) (hr : ∀ x, J (R x) = R (J x)) (hs : R.adjoint = -R) (hcov : (1 / 2 : ℝ) • (D - R * D⁻¹ʳ * R) = Q) (f g : Hℝ) : ⟪pureExtension Γ D hD hu hd (phaseEmbedding Γ R hr f), pureExtension Γ D hD hu hd (phaseEmbedding Γ R hr g)⟫_ℂ = ⟪(f : H), Q (g : H)⟫_ℂ - Complex.I * ⟪(f : H), R (g : H)⟫_ℂ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRGaussianFolium.gaussian_excitable_of_sqrt_hs": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRGaussianFolium",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRGaussianFolium.gaussian_excitable_of_sqrt_hs",
+      "kind": "theorem",
+      "statement_id": "sha256:8f73a265fd8609bd7d678df0c3853400cd6379e0cb8ec225e2216409b914537c",
+      "line": 383,
+      "signature": "theorem gaussian_excitable_of_sqrt_hs (W : WeylSystem (A",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRGaussianFolium.gaussian_mutual_excitable_of_sqrt_hs": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRGaussianFolium",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRGaussianFolium.gaussian_mutual_excitable_of_sqrt_hs",
+      "kind": "theorem",
+      "statement_id": "sha256:8f73a265fd8609bd7d678df0c3853400cd6379e0cb8ec225e2216409b914537c",
+      "line": 284,
+      "signature": "theorem gaussian_mutual_excitable_of_sqrt_hs (W : WeylSystem (A",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRSqueezeInfinite.finiteSqueeze_sub_norm_sq_le": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRSqueezeInfinite",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRSqueezeInfinite.finiteSqueeze_sub_norm_sq_le",
+      "kind": "theorem",
+      "statement_id": "sha256:af36b30014798ddcd4c5e6c081477a406d99579a1e2a397767332a3ec5c7d237",
+      "line": 218,
+      "signature": "theorem finiteSqueeze_sub_norm_sq_le (r : ι → ℝ) (F G : Finset ι) (hFG : F ⊆ G) : ‖finiteSqueeze r F - finiteSqueeze r G‖ ^ 2 ≤ (1 / 2) * ∑ i ∈ G \\ F, (r i) ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRSqueezeInfinite.infiniteSqueeze_norm": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRSqueezeInfinite",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRSqueezeInfinite.infiniteSqueeze_norm",
+      "kind": "theorem",
+      "statement_id": "sha256:af36b30014798ddcd4c5e6c081477a406d99579a1e2a397767332a3ec5c7d237",
+      "line": 266,
+      "signature": "theorem infiniteSqueeze_norm (r : ι → ℝ) (hr : Summable (fun i => (r i) ^ 2)) : ‖infiniteSqueeze r hr‖ = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRSqueezeInfinite.infiniteSqueeze_weyl_inner": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRSqueezeInfinite",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRSqueezeInfinite.infiniteSqueeze_weyl_inner",
+      "kind": "theorem",
+      "statement_id": "sha256:af36b30014798ddcd4c5e6c081477a406d99579a1e2a397767332a3ec5c7d237",
+      "line": 385,
+      "signature": "theorem infiniteSqueeze_weyl_inner (b : HilbertBasis ι ℂ H) (r : ι → ℝ) (hr : Summable (fun i => (r i) ^ 2)) (z : H) : ⟪infiniteSqueeze r hr, fockWeyl b z (infiniteSqueeze r hr)⟫_ℂ = exp (-((∑' i, (Real.exp (2 * r i) * (b.repr z i).re ^ 2 + Real.exp (-2 * r i) * (b.repr z i).im ^ 2) : ℝ) : ℂ) / 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRSqueezeSingle.squeezeVacuum_norm": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRSqueezeSingle",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRSqueezeSingle.squeezeVacuum_norm",
+      "kind": "theorem",
+      "statement_id": "sha256:67a0e2dabaa462d64dc2832f8d429a0086ecf85b3bcad41a9627411b1145269a",
+      "line": 244,
+      "signature": "theorem squeezeVacuum_norm (r : ℝ) : ‖squeezeVacuum r‖ = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRSqueezeSingle.squeezeVacuum_vacuum_inner": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRSqueezeSingle",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRSqueezeSingle.squeezeVacuum_vacuum_inner",
+      "kind": "theorem",
+      "statement_id": "sha256:67a0e2dabaa462d64dc2832f8d429a0086ecf85b3bcad41a9627411b1145269a",
+      "line": 259,
+      "signature": "theorem squeezeVacuum_vacuum_inner (r : ℝ) : ⟪fockVacuum Unit, squeezeVacuum r⟫_ℂ = ((1 / Real.sqrt (Real.cosh r) : ℝ) : ℂ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRSqueezeSingle.squeezeVacuum_weyl_inner": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRSqueezeSingle",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRSqueezeSingle.squeezeVacuum_weyl_inner",
+      "kind": "theorem",
+      "statement_id": "sha256:67a0e2dabaa462d64dc2832f8d429a0086ecf85b3bcad41a9627411b1145269a",
+      "line": 350,
+      "signature": "theorem squeezeVacuum_weyl_inner (r : ℝ) (z : ℂ) : ⟪squeezeVacuum r, fockWeyl singleModeBasis z (squeezeVacuum r)⟫_ℂ = exp (-((Real.exp (2 * r) * z.re ^ 2 + Real.exp (-2 * r) * z.im ^ 2 : ℝ) : ℂ) / 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRWeylState.excitability_of_unitary_intertwining": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRWeylState",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRWeylState.excitability_of_unitary_intertwining",
+      "kind": "theorem",
+      "statement_id": "sha256:7568ccc111181a937668175dd5510471a55ef9f7f60fbdcf6d522443d8cb813c",
+      "line": 183,
+      "signature": "theorem excitability_of_unitary_intertwining (W : WeylSystem (A",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRWeylState.excitability_pullback": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRWeylState",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRWeylState.excitability_pullback",
+      "kind": "theorem",
+      "statement_id": "sha256:7568ccc111181a937668175dd5510471a55ef9f7f60fbdcf6d522443d8cb813c",
+      "line": 269,
+      "signature": "theorem excitability_pullback (ωTarget ωRef : B →ₚ[ℂ] ℂ) (Φ : A →⋆ₐ[ℂ] B) (hΦ : Function.Surjective Φ) (h : Excitability ωTarget ωRef) : Excitability (ωTarget.comp (PositiveLinearMap.ofClass Φ)) (ωRef.comp (PositiveLinearMap.ofClass Φ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRWeylState.gaussian_unique": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRWeylState",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRWeylState.gaussian_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:7568ccc111181a937668175dd5510471a55ef9f7f60fbdcf6d522443d8cb813c",
+      "line": 130,
+      "signature": "theorem gaussian_unique (W : WeylSystem (A",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRWeylState.weyl_unitary": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRWeylState",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRWeylState.weyl_unitary",
+      "kind": "theorem",
+      "statement_id": "sha256:7568ccc111181a937668175dd5510471a55ef9f7f60fbdcf6d522443d8cb813c",
+      "line": 59,
+      "signature": "theorem weyl_unitary (W : WeylSystem (A",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary.cycle_rearrangement_sign_flip": {
       "module": "D5/S3/Quantum/Analysis/NullConeGravity/ClosedTraceFinitenessBoundary",
       "name": "D5.S3.Quantum.Analysis.NullConeGravity.ClosedTraceFinitenessBoundary.cycle_rearrangement_sign_flip",
@@ -11983,6 +12360,58 @@
       "statement_id": "sha256:873a72525701c67a6f1e6451cf196405d30f3eecdb08581952d0486b548bd24f",
       "line": 36,
       "signature": "theorem nullN_coercive (M : ℝ) (hM : 0 < M) : ∃ c : ℝ, 0 < c ∧ c • (1 : H4D →L[ℂ] H4D) ≤ nullN M hM",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability4D.nullDiamondRelativeProperties": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability4D",
+      "name": "NullConeGravity.nullDiamondRelativeProperties",
+      "kind": "theorem",
+      "statement_id": "sha256:4430cda5844240c4701a167b019e7beabc1f5a2bd6930fdcfabf31f104003c54",
+      "line": 143,
+      "signature": "theorem nullDiamondRelativeProperties : 0 ≤ relativeQ V M hM ∧ (relativeQ V M hM).ker = ⊥ ∧ (∀ x, (subspaceConjugation V hV).toLinearIsometryEquiv (relativeQ V M hM x) = relativeQ V M hM ((subspaceConjugation V hV).toLinearIsometryEquiv x)) ∧ (relativeR V M hM).adjoint = -relativeR V M hM ∧ (∀ x, (subspaceConjugation V hV).toLinearIsometryEquiv (relativeR V M hM x) = relativeR V M hM ((subspaceConjugation V hV).toLinearIsometryEquiv x)) ∧ 0 ≤ (1 : V →L[ℂ] V) - Complex.I • relativeR V M hM ∧ 0 ≤ relativeQ V M hM - Complex.I • relativeR V M hM ∧ IsHilbertSchmidt (eq71Delta V M hM)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability4D.nullDiamond_concrete_gaussian_excitable_4D": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability4D",
+      "name": "NullConeGravity.nullDiamond_concrete_gaussian_excitable_4D",
+      "kind": "theorem",
+      "statement_id": "sha256:4430cda5844240c4701a167b019e7beabc1f5a2bd6930fdcfabf31f104003c54",
+      "line": 434,
+      "signature": "theorem nullDiamond_concrete_gaussian_excitable_4D (m L : ℝ) (hm : 0 < m) (hL : 0 < L) (V : Submodule ℂ H4D) [CompleteSpace V] (hV : ∀ x ∈ V, nullConj x ∈ V) : NullDiamondConcreteRealization m L hm hL V hV",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability4D.nullDiamond_excitable_4D": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability4D",
+      "name": "NullConeGravity.nullDiamond_excitable_4D",
+      "kind": "theorem",
+      "statement_id": "sha256:4430cda5844240c4701a167b019e7beabc1f5a2bd6930fdcfabf31f104003c54",
+      "line": 170,
+      "signature": "theorem nullDiamond_excitable_4D (m L : ℝ) (hm : 0 < m) (hL : 0 < L) (V : Submodule ℂ H4D) [CompleteSpace V] (hV : ∀ x ∈ V, nullConj x ∈ V) (W : WeylSystem (A",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability4D.nullDiamond_full_space_excitable_4D": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability4D",
+      "name": "NullConeGravity.nullDiamond_full_space_excitable_4D",
+      "kind": "theorem",
+      "statement_id": "sha256:4430cda5844240c4701a167b019e7beabc1f5a2bd6930fdcfabf31f104003c54",
+      "line": 445,
+      "signature": "theorem nullDiamond_full_space_excitable_4D (m L : ℝ) (hm : 0 < m) (hL : 0 < L) : NullDiamondConcreteRealization m L hm hL (⊤ : Submodule ℂ H4D) (fun _ _ => Submodule.mem_top)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
